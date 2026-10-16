@@ -689,3 +689,33 @@ The latest user instruction was to keep investigating and deliver the full HTML 
 - **Delivery:** private GitHub; existing private Trello with all 110 feature/model cards. Source-link update synchronization remains 59/87 verified; 28 are pending after 429/transport failures. Local update payloads preserve the unsent changes.
 - **Claude:** [independent completeness audit handoff](handoffs/codex-to-claude-completeness-audit.md) contains the same original prompt, later authority, exact paths, evidence and a required return format. It has not been launched automatically.
 - **Native gate:** pending Jason's explicit approval of an identified prototype revision. An HTML screenshot, audit completion or Git push does not grant that approval.
+
+
+## 22. Functional closure pass — 16 October 2026
+
+Jason explicitly rejected labels/placeholders as sufficient parity. The active target
+remains every Serato capability, with no native build until his approval. This pass
+implements actual reverse/Slip/cue audition, sampler gating and controls, timed Flip,
+slicer, multi-rule/nested crates, four independent FX processors and local video
+composition/capture. Web MIDI code is connected to real browser actions, but actual
+device access timed out in this environment. No hardware input is claimed.
+
+The browser audio/module harness passed 20/20 checks; selected main UI paths and a
+1,921,409-byte video capture/re-import were executed. Exact actions, numeric results,
+proof boundaries, defects and remaining behavior are in
+[FUNCTIONAL_REVIEW.md](docs/prototype/FUNCTIONAL_REVIEW.md). The feature registry and
+Claude packet now point to this evidence. Historical counts/checkpoints above remain
+dated records. Native acceptance, full visual equivalence and full parity are open.
+
+Next dependencies: finish the 55 FX schemas and exact Video catalogs; implement and
+measure key-preserving DSP, stems and analysis; finish complex library/metadata and
+conditional workflows; resolve actual MIDI input/output and multichannel monitoring;
+then obtain the missing CDJ/DVS/provider environments for physical/service acceptance.
+Do not reclassify those gaps as completed because their labels are visible. Native
+implementation remains prohibited; prototype approval is a separate user decision.
+
+Remote follow-up: GATE-P and LIB-004 functional descriptions were updated and
+verified by exact readback. The connector again returned 429 and then a board-read
+transport failure. The 28 historical source updates remain pending, plus 17 new
+functional feature annotations in `docs/delivery/trello-functional-sync.json`.
+Existing per-feature model recommendations are preserved; no card is marked accepted.

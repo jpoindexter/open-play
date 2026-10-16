@@ -45,3 +45,12 @@ Jason explicitly approved representing unavailable physical/DSP/provider behavio
 All 110 currently known feature groups have a destination in `docs/prototype/coverage-manifest.json`. The browser index includes sources, model routing, implementation boundaries and open gaps. Some routes are gap disclosures, not working equivalents. The strict completeness/behavioral pass above has NOT been awarded. Twenty-four groups still lack detailed interaction rows; 55 of 59 advanced FX schemas remain unobserved.
 
 The [executed review report](../prototype/REVIEW_REPORT.md) separates observed browser workflows from code-path claims, simulations and untested native behavior. Jason can review the candidate now while Claude independently challenges completeness. No reduction of full scope and no native approval is inferred.
+
+## Functional follow-up
+
+The [second functional review](../prototype/FUNCTIONAL_REVIEW.md) records actual
+browser implementations replacing earlier placeholders and 20/20 executed audio/module
+checks. This narrows several implementation gaps without passing the global gate.
+The latest user instruction explicitly requires behavior, not labels/placeholders.
+Four independent processors do not close the 59-effect scope; MIDI access timed out;
+missing native/hardware/provider acceptance remains visible.

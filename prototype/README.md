@@ -33,7 +33,7 @@ source code, artwork, library or extracted audio ships in this prototype.
 
 Library tools exports a JSON metadata backup. It does not contain audio bytes.
 Settings, demo annotations and crates persist under the browser-local key
-`openplay-review-v1`; sampler, Flip and session state are temporary. Reset demo clears
+`openplay-review-v1`; saved per-track Flip slots, Prepare/history and mappings also persist. Sampler voices and imported media bytes are temporary. Reset demo clears
 only that prototype key after the visible confirmation. Closing/reloading the page
 stops browser audio. Control-C in the launcher terminal stops the server.
 
@@ -46,3 +46,15 @@ stops browser audio. Control-C in the launcher terminal stops the server.
 
 Native development remains blocked until Jason approves an identified prototype
 revision. No public publication is authorized.
+
+## Functional closure pass
+
+Reverse/Slip/cue-hold, sampler gating/pitch/gain, timed Flip, slicer, nested and
+multi-rule crates, four independent audio FX, and local video composition/capture
+now execute actual behavior. Web MIDI has a real connection path, but access timed
+out in the tested browser; hardware compatibility remains unverified.
+
+Run [the 20-check audio/module harness](behavior-tests.html). Its audio does not
+reach the speakers. Read [the functional review](../docs/prototype/FUNCTIONAL_REVIEW.md)
+for UI evidence and exact limitations. Four processors are not 59 completed effects;
+no feature route or simulated state counts as parity acceptance.

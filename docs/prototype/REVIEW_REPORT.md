@@ -1,4 +1,6 @@
-# HTML prototype review — 16 October 2026
+# HTML prototype review — 16 October 2026 (baseline)
+
+This report records the first candidate. The newer [functional review](FUNCTIONAL_REVIEW.md) supersedes changed behavior and retains remaining gaps.
 
 **Deliverable: runnable browser review candidate. Full 1:1 parity is NOT verified.**
 No native application has been started, and native approval remains pending.
