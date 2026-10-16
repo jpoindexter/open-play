@@ -4,7 +4,7 @@
 
 Project: `/Users/jasonpoindexter/Documents/GitHub/Open Play`
 Prepared: 2026-10-16
-Current browser candidate: `CHECKPOINT_PENDING`
+Current browser candidate: `1cebb52ef243b5faddc9e7954dd391ebb59b4e0b`
 Content hashes: `docs/prototype/candidate-hashes.json`
 Private repository: https://github.com/jpoindexter/open-play
 Private board: https://trello.com/b/OqMGEjpe/open-play-serato-parity
