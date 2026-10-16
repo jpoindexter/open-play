@@ -8,7 +8,7 @@ also requires MediaRecorder. Core browser playback needs no package install or h
 This is an independently written HTML/CSS/JavaScript review prototype. **It does
 not establish 1:1 Serato parity.** All 110 inventoried feature groups have a
 review destination, explicit simulation, or a documented gap. The evidence browser
-contains 495 source-linked requirements and per-feature Codex/Claude recommendations.
+contains 507 source-linked requirements and per-feature Codex/Claude recommendations.
 Some routes explicitly describe missing workflows; they are not implementation passes.
 
 ## Try it
@@ -94,3 +94,10 @@ requested30fps and720p/1080p canvas size are not sustained/HD capture acceptance
 See [the current review](../docs/prototype/VIDEO_FUNCTIONAL_REVIEW.md) for reference
 unknowns, retained failures, technical limits and exact main UI evidence. Original
 algorithms do not establish visual equivalence or a proven active reference menu.
+
+Opt-in “Link audio Echo / Distortion” now reads actual DJ-FX identity/assignment/
+timing and applies original visual counterparts; other names/routes remain gaps.
+Media treatment provides actual Preserve/Stretch/Center-Cut/Letterbox geometry.
+Run `video-audio-fx-harness.html`(24/24) and `video-treatment-harness.html`(21/21).
+Read [the continuation review](../docs/prototype/VIDEO_LINK_TREATMENT_REVIEW.md)
+for scope, retained failures, settings inventory and the keyboard acceptance gap.

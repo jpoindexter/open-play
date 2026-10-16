@@ -5,18 +5,15 @@ import {readFile} from 'node:fs/promises';
 import {File} from 'node:buffer';
 const base=new URL('../prototype/',import.meta.url),original=await readFile(new URL('video.js',base),'utf8');
 const source=original.replace("import {createVideoPipeline} from './video-pipeline.js';",'const createVideoPipeline=(...a)=>globalThis.__mediaRuntimePipeline(...a);')
-  .replaceAll("from './video-karaoke.js'",`from '${new URL('video-karaoke.js',base)}'`)
-  .replaceAll("from './video-media.js'",`from '${new URL('video-media.js',base)}'`)
-  .replaceAll("from './video-transitions.js'",`from '${new URL('video-transitions.js',base)}'`)
-  .replaceAll("from './video-decode.js'",`from '${new URL('video-decode.js',base)}'`);
+  .replace(/from '(\.\/[^']+)'/g,(_,path)=>`from '${new URL(path,base).href}'`);
 const {createVideoMixer}=await import('data:text/javascript;base64,'+Buffer.from(source).toString('base64'));
 const file=name=>new File(['original undecoded test bytes'],name,{type:'video/mp4'}),flush=async()=>{for(let i=0;i<30;i++)await Promise.resolve();};
 let serial=0;
 function setup(){
-  const env={videos:[],notifications:[],revoked:[],renders:[]},ctx={clearRect(){},fillRect(){},fillText(){},drawImage(){}};
+  const env={videos:[],notifications:[],revoked:[],renders:[]};
   globalThis.performance={now:()=>1000};globalThis.URL.createObjectURL=()=>`blob:controlled-${++serial}`;globalThis.URL.revokeObjectURL=url=>env.revoked.push(url);
-  const canvas=()=>({width:640,height:360,isConnected:true,getContext:()=>ctx});
-  globalThis.document={querySelector:()=>null,createElement(type){if(type==='canvas')return canvas();assert.equal(type,'video');let callbackSerial=0;const callbacks=new Map();const v={paused:true,readyState:0,duration:10,currentTime:0,playbackRate:1,seeking:false,deferFrames:false,frameCallbacks:callbacks,
+  const canvas=()=>{const c={width:640,height:360,isConnected:true},ctx={canvas:c,save(){},restore(){},setTransform(){},clearRect(){},fillRect(){},fillText(){},drawImage(){}};c.getContext=()=>ctx;return c;};
+  globalThis.document={querySelector:()=>null,createElement(type){if(type==='canvas')return canvas();assert.equal(type,'video');let callbackSerial=0;const callbacks=new Map();const v={paused:true,readyState:0,videoWidth:320,videoHeight:180,duration:10,currentTime:0,playbackRate:1,seeking:false,deferFrames:false,frameCallbacks:callbacks,
       load(){},pause(){this.paused=true;},requestVideoFrameCallback(callback){const id=++callbackSerial;callbacks.set(id,callback);return id;},cancelVideoFrameCallback(id){callbacks.delete(id);},
       deliverFrame(){this.currentTime=.033;for(const [id,callback] of [...callbacks]){callbacks.delete(id);callback(1000,{mediaTime:.033,presentedFrames:1,width:320,height:180});}},
       async play(){this.paused=false;if(!this.deferFrames)queueMicrotask(()=>this.deliverFrame());},finish(){this.readyState=2;this.onloadeddata();},fail(){this.onerror();}};env.videos.push(v);return v;}};

@@ -1,5 +1,7 @@
 # Video functional review
 
+Later continuation: [semantic links and Media Treatment review](VIDEO_LINK_TREATMENT_REVIEW.md) records current runtime/regressions and507-row inventory; historical cutoffs below remain scoped.
+
 Checkpoint:2026-10-16. **Full Serato parity is NOT PASSED; native development is NOT approved.** The browser executes original implementations with scoped evidence. The final candidate commit is pinned by `candidate-hashes.json` and the Claude handoff; working snapshots are not native acceptance.
 
 ## Actual implementation

@@ -42,11 +42,15 @@ implementation. Claude has not been automatically launched for this audit. Jason
 separately authorized using the open Cloud Code app, a new conversation and Fable
 **if Codex gets stuck**. Verify the actual app/model option before using it. That
 conditional debugging permission does not remove the native approval gate.
+A bounded local reference-research session was subsequently started with the
+observed Fable5.1/High selector (session local_501fea16-fb28-4e3c-bba7-2e24e6ef696b);
+see docs/research/claude-fable/video-reference-debug-prompt.md and approvals.md.
+It is not the full completeness audit; its source claims need independent checks.
 
 ## Read first
 
 - `AGENTS.md` if present; `PROJECT_PROMPT.md`; `docs/approvals.md`.
-- `FULL_BUILD_PLAN.md` sections23–31, with older sections retained as dated history.
+- `FULL_BUILD_PLAN.md` sections23–32, with older sections retained as dated history.
 - `docs/research/PARITY_GATE.md`, `FULL_SCOPE_CONTRACT.md`, `FEATURE_COVERAGE.md`,
   `INTERACTION_REQUIREMENTS.md`, `REQUIREMENT_GAPS_REVIEW.md`, `SOURCE_CONFLICTS.md`,
   `UI_OBSERVATIONS.md`, `EVIDENCE_LEDGER.md`, `BINARY_FINDINGS.md`,
@@ -63,7 +67,7 @@ conditional debugging permission does not remove the native approval gate.
 
 ## Current implementation and executed evidence
 
-The working inventory has110 groups and495 detailed requirements. AUD-005 clock
+The working inventory has110 groups and507 detailed requirements. AUD-005 clock
 drift and SYS-006 reproducible builds are independent engineering goals without
 invented vendor interaction rows. Counts do not prove exhaustive coverage.
 
@@ -131,8 +135,14 @@ and import generations preserve newer user intent. Read current reviews, exact
 raw results and independent contracts in `video-implementation-contracts.json`.
 A≈25.64fps short pipeline capture is not sustained30fps or nativeHD acceptance.
 
-Next: semantic audio-DJ-FX Echo/Distortion→Video coupling (FFT alone does not
-implement it), generic Video control/quality/media-treatment workflows, output/
+Semantic exact-name Echo/Distortion links now pass24/24 actual GPU/audio checks;
+Media Treatment passes21/21 with decoded aspect fixtures and actual captured
+video/audio. Current pipeline32/32, Media32/32 and karaoke19/19 pass again. Read
+VIDEO_LINK_TREATMENT_REVIEW.md; zero-feedback shader and seek/resize failures
+remain saved. Sixteen Node scripts exit0 with separate scopes. REQ-496–507 add12
+omitted observed settings; labels and menus do not prove behavior.
+
+Next: generic Video control/quality/window/recording/arrangement workflows, output/
 Syphon and codec/long-session matrices. All31 hidden audio-linked definitions and
 reference visual matching remain unknown. CDG selective channels/parity repair
 and physical AV sync remain open. Continue full scope; do not equate these
@@ -142,7 +152,7 @@ independent browser subsets with full1:1.
 
 1. Record exact revision, worktree differences and environment before testing.
 2. Independently enumerate installed4.0.10.213 controls/states/settings/errors,
-   expansions, device/provider guides and applicable release notes. Do not stop at495.
+   expansions, device/provider guides and applicable release notes. Do not stop at507.
 3. Compare that checklist with requirements, registry, source crosswalk, full plan,
    Trello and every prototype destination. Resolve sources against exact versions.
 4. Reproduce binary/UI claims; separate observed, documented, reported, inferred,
@@ -185,7 +195,8 @@ prototype state; never reset Serato's library. Generated demos are original asse
 
 Run the actual `*-test.html` pages for extended/observed/native/adversarial FX,
 keylock, audio integration, Channel/Stems, finite exits, sampler, Pitch Play,
-analysis and Stem Slip, plus `behavior-tests.html`. Also run the Video FX,
+analysis and Stem Slip, plus `behavior-tests.html`. Also run video-audio-fx-harness.html and
+video-treatment-harness.html, and the Video FX,
 transition, overlay, pipeline, CDG, karaoke and Media Crate public harnesses listed
 in `prototype/README.md`. Read each scope/tolerance first.
 

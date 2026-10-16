@@ -5,6 +5,7 @@ import { prepareStemHistory, createStemHistory } from "./stem-history.js";
 import { createStemExitFX } from "./stem-exit-fx.js";
 import { prepareStemSlip, createStemSlipTransport } from "./stem-slip.js";
 import { createVideoAnalysis } from "./video-analysis.js";
+import { describeAudioVideoLinks } from "./video-audio-fx-state.js";
 export class AudioEngine {
   constructor() {
     this.ctx = null;
@@ -631,6 +632,12 @@ export class AudioEngine {
     if (!this.ctx) return {bass: 0, mid: 0, treble: 0, level: 0, audioAvailable: false};
     this.videoAnalyzers ||= createVideoAnalysis(this.ctx, [...this.nodes.map(n => n.input), this.master]);
     return this.videoAnalyzers.read(index);
+  }
+  videoFXLinks() {
+    // Semantic snapshot only: no analyzer inference or audio graph mutation.
+    return describeAudioVideoLinks(this.fxState, {
+      ready: this.ctx?.state === "running" && this.effectsPrepared === true,
+    });
   }
   async recordStart() {
     await this.resume();

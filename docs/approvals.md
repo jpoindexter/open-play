@@ -36,3 +36,14 @@ This permits a bounded debugging conversation with relevant project code/evidenc
 Verify returned suggestions independently. No conversation has been started under
 this permission at the time of this entry. Native implementation remains prohibited
 until explicit prototype approval.
+
+### Conditional assistance used — Fable reference research
+
+A new Claude Code desktop conversation “Serato Video control semantics research”
+was started in This computer / Open Play. Actual selector showed Fable5.1/High.
+Session: `claude.ai/epitaxy/local_501fea16-fb28-4e3c-bba7-2e24e6ef696b`.
+The prompt is saved in `docs/research/claude-fable/video-reference-debug-prompt.md`.
+It asks for primary-source help on unresolved Video control semantics/manual
+access, with only a separate findings file allowed. No native/code/remote write
+authority was delegated. The broader independent completeness audit has not been
+launched. This supersedes the earlier “no conversation started” cutoff only.

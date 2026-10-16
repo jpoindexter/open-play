@@ -1,5 +1,7 @@
 # Karaoke functional review
 
+Later continuation: [semantic links and Media Treatment review](VIDEO_LINK_TREATMENT_REVIEW.md) records current runtime/regressions and507-row inventory; historical cutoffs below remain scoped.
+
 Checkpoint: **2026-10-16**. Bounded independent browser behavior is verified in the paths below; the candidate is pinned in `candidate-hashes.json` and the Claude packet. Native/reference/full-Video acceptance remains open. The separate Media Crate suite now passes32/32; this does not imply vendor equivalence.
 
 ## Executed evidence

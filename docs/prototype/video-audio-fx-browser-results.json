@@ -1,0 +1,1504 @@
+{
+  "startedAt": "2026-10-16T21:13:37.946Z",
+  "policy": {
+    "requirement": "REQ-348",
+    "source": "docs/research/VIDEO_REMAINING_WORKFLOWS.md",
+    "referenceEquivalent": false,
+    "supported": [
+      "Echo",
+      "Distortion"
+    ],
+    "mapping": "Original semantic links for exact DJ-FX bank names Echo/Distortion only. No FFT trigger, no aliases/families/31 hidden definitions inferred. Deck1→left,Deck2→right,Master→master once; other assignments are explicitly unsupported.",
+    "order": "Dedicated channel links before ordinary channel slots/overlays; dedicated master links after transition and before master overlays/slots. Independent order, not recovered vendor routing.",
+    "echo": "Three shifted real upstream-frame taps at1T,2T,3T; T=60/BPM*beat*Beat Modify using actual configured audio timing. Depth is wet opacity; Feedback is finite tap decay, not recursive video feedback.16 timestamped frames at up to320x180. Missing past timestamps contribute nothing.",
+    "distortion": "Original static row warp plus Smooth Drive/Hard Clip/Foldback RGB transform; Drive/Character/Tone/depth have declared independent visual mappings.",
+    "lifecycle": "Opt-in off, disabled/zero effect, removal/reassignment/upstream topology changes, source asset/generation changes, backward render time, transport generation/direction/seek discontinuity, pause/stop clear Echo history immediately: no visual tail after bypass. Silence alone never gates a semantic link. Resume captures new history. Timing/amount edits retain real samples; insufficient older history is not fabricated.",
+    "reducedMotion": "Suppress all Echo trails and geometric Distortion warp; retain static distortion colour and observable semantic metadata. No generated flash or zoom.",
+    "limitations": "No exact Serato transfer/parameters/order/tail claim; channel knob FX, stems, Deck3/4 and Sampler links are not mapped. Audio graph/output is never mutated by this bridge."
+  },
+  "checks": [
+    {
+      "name": "Actual AudioEngine prepares real DJ-FX graph with a playing silent PCM source",
+      "passed": true,
+      "evidence": {
+        "state": "running",
+        "effectsPrepared": true,
+        "playing": true,
+        "level": 0,
+        "links": {
+          "available": true,
+          "left": [
+            {
+              "id": "0:0",
+              "name": "Echo",
+              "kind": "echo",
+              "route": "Deck 1",
+              "target": "left",
+              "amount": 0.8,
+              "bpm": 120,
+              "beats": 0.5,
+              "beatModifier": 1,
+              "delaySeconds": 0.25,
+              "feedback": 0.7,
+              "drive": 0,
+              "character": 0.5,
+              "tone": 0,
+              "type": "Smooth Drive",
+              "parameterStatus": "Original visual mapping from current independent audio controls; vendor response unknown."
+            }
+          ],
+          "right": [],
+          "master": [],
+          "unsupported": [],
+          "policy": {
+            "requirement": "REQ-348",
+            "source": "docs/research/VIDEO_REMAINING_WORKFLOWS.md",
+            "referenceEquivalent": false,
+            "supported": [
+              "Echo",
+              "Distortion"
+            ],
+            "mapping": "Original semantic links for exact DJ-FX bank names Echo/Distortion only. No FFT trigger, no aliases/families/31 hidden definitions inferred. Deck1→left,Deck2→right,Master→master once; other assignments are explicitly unsupported.",
+            "order": "Dedicated channel links before ordinary channel slots/overlays; dedicated master links after transition and before master overlays/slots. Independent order, not recovered vendor routing.",
+            "echo": "Three shifted real upstream-frame taps at1T,2T,3T; T=60/BPM*beat*Beat Modify using actual configured audio timing. Depth is wet opacity; Feedback is finite tap decay, not recursive video feedback.16 timestamped frames at up to320x180. Missing past timestamps contribute nothing.",
+            "distortion": "Original static row warp plus Smooth Drive/Hard Clip/Foldback RGB transform; Drive/Character/Tone/depth have declared independent visual mappings.",
+            "lifecycle": "Opt-in off, disabled/zero effect, removal/reassignment/upstream topology changes, source asset/generation changes, backward render time, transport generation/direction/seek discontinuity, pause/stop clear Echo history immediately: no visual tail after bypass. Silence alone never gates a semantic link. Resume captures new history. Timing/amount edits retain real samples; insufficient older history is not fabricated.",
+            "reducedMotion": "Suppress all Echo trails and geometric Distortion warp; retain static distortion colour and observable semantic metadata. No generated flash or zoom.",
+            "limitations": "No exact Serato transfer/parameters/order/tail claim; channel knob FX, stems, Deck3/4 and Sampler links are not mapped. Audio graph/output is never mutated by this bridge."
+          }
+        }
+      }
+    },
+    {
+      "name": "Link OFF is exact pixel bypass despite assigned enabled audio Echo",
+      "passed": true,
+      "evidence": {
+        "leftDifference": 0,
+        "backend": "unallocated-off"
+      }
+    },
+    {
+      "name": "Static source plus actual silent audio Echo produces a delayed real-frame ghost only on its assigned channel",
+      "passed": true,
+      "evidence": {
+        "before": [
+          0,
+          0,
+          0,
+          255
+        ],
+        "atDelay": [
+          73,
+          10,
+          3,
+          255
+        ],
+        "rightDifference": 0,
+        "links": {
+          "left": {
+            "active": [
+              {
+                "id": "0:0",
+                "name": "Echo",
+                "kind": "echo",
+                "amount": 0.8,
+                "delaySeconds": 0.25,
+                "feedback": 0.7,
+                "suppressed": false,
+                "resetReasons": [],
+                "taps": [
+                  0,
+                  -1,
+                  -1
+                ],
+                "captureCount": 2,
+                "retainedFrames": 2,
+                "lastReset": "initial"
+              }
+            ],
+            "policy": {
+              "requirement": "REQ-348",
+              "source": "docs/research/VIDEO_REMAINING_WORKFLOWS.md",
+              "referenceEquivalent": false,
+              "supported": [
+                "Echo",
+                "Distortion"
+              ],
+              "mapping": "Original semantic links for exact DJ-FX bank names Echo/Distortion only. No FFT trigger, no aliases/families/31 hidden definitions inferred. Deck1→left,Deck2→right,Master→master once; other assignments are explicitly unsupported.",
+              "order": "Dedicated channel links before ordinary channel slots/overlays; dedicated master links after transition and before master overlays/slots. Independent order, not recovered vendor routing.",
+              "echo": "Three shifted real upstream-frame taps at1T,2T,3T; T=60/BPM*beat*Beat Modify using actual configured audio timing. Depth is wet opacity; Feedback is finite tap decay, not recursive video feedback.16 timestamped frames at up to320x180. Missing past timestamps contribute nothing.",
+              "distortion": "Original static row warp plus Smooth Drive/Hard Clip/Foldback RGB transform; Drive/Character/Tone/depth have declared independent visual mappings.",
+              "lifecycle": "Opt-in off, disabled/zero effect, removal/reassignment/upstream topology changes, source asset/generation changes, backward render time, transport generation/direction/seek discontinuity, pause/stop clear Echo history immediately: no visual tail after bypass. Silence alone never gates a semantic link. Resume captures new history. Timing/amount edits retain real samples; insufficient older history is not fabricated.",
+              "reducedMotion": "Suppress all Echo trails and geometric Distortion warp; retain static distortion colour and observable semantic metadata. No generated flash or zoom.",
+              "limitations": "No exact Serato transfer/parameters/order/tail claim; channel knob FX, stems, Deck3/4 and Sampler links are not mapped. Audio graph/output is never mutated by this bridge."
+            },
+            "disposed": false,
+            "backend": "WebGL2"
+          },
+          "right": {
+            "active": [],
+            "policy": {
+              "requirement": "REQ-348",
+              "source": "docs/research/VIDEO_REMAINING_WORKFLOWS.md",
+              "referenceEquivalent": false,
+              "supported": [
+                "Echo",
+                "Distortion"
+              ],
+              "mapping": "Original semantic links for exact DJ-FX bank names Echo/Distortion only. No FFT trigger, no aliases/families/31 hidden definitions inferred. Deck1→left,Deck2→right,Master→master once; other assignments are explicitly unsupported.",
+              "order": "Dedicated channel links before ordinary channel slots/overlays; dedicated master links after transition and before master overlays/slots. Independent order, not recovered vendor routing.",
+              "echo": "Three shifted real upstream-frame taps at1T,2T,3T; T=60/BPM*beat*Beat Modify using actual configured audio timing. Depth is wet opacity; Feedback is finite tap decay, not recursive video feedback.16 timestamped frames at up to320x180. Missing past timestamps contribute nothing.",
+              "distortion": "Original static row warp plus Smooth Drive/Hard Clip/Foldback RGB transform; Drive/Character/Tone/depth have declared independent visual mappings.",
+              "lifecycle": "Opt-in off, disabled/zero effect, removal/reassignment/upstream topology changes, source asset/generation changes, backward render time, transport generation/direction/seek discontinuity, pause/stop clear Echo history immediately: no visual tail after bypass. Silence alone never gates a semantic link. Resume captures new history. Timing/amount edits retain real samples; insufficient older history is not fabricated.",
+              "reducedMotion": "Suppress all Echo trails and geometric Distortion warp; retain static distortion colour and observable semantic metadata. No generated flash or zoom.",
+              "limitations": "No exact Serato transfer/parameters/order/tail claim; channel knob FX, stems, Deck3/4 and Sampler links are not mapped. Audio graph/output is never mutated by this bridge."
+            },
+            "disposed": false,
+            "backend": "unallocated-off"
+          },
+          "master": {
+            "active": [],
+            "policy": {
+              "requirement": "REQ-348",
+              "source": "docs/research/VIDEO_REMAINING_WORKFLOWS.md",
+              "referenceEquivalent": false,
+              "supported": [
+                "Echo",
+                "Distortion"
+              ],
+              "mapping": "Original semantic links for exact DJ-FX bank names Echo/Distortion only. No FFT trigger, no aliases/families/31 hidden definitions inferred. Deck1→left,Deck2→right,Master→master once; other assignments are explicitly unsupported.",
+              "order": "Dedicated channel links before ordinary channel slots/overlays; dedicated master links after transition and before master overlays/slots. Independent order, not recovered vendor routing.",
+              "echo": "Three shifted real upstream-frame taps at1T,2T,3T; T=60/BPM*beat*Beat Modify using actual configured audio timing. Depth is wet opacity; Feedback is finite tap decay, not recursive video feedback.16 timestamped frames at up to320x180. Missing past timestamps contribute nothing.",
+              "distortion": "Original static row warp plus Smooth Drive/Hard Clip/Foldback RGB transform; Drive/Character/Tone/depth have declared independent visual mappings.",
+              "lifecycle": "Opt-in off, disabled/zero effect, removal/reassignment/upstream topology changes, source asset/generation changes, backward render time, transport generation/direction/seek discontinuity, pause/stop clear Echo history immediately: no visual tail after bypass. Silence alone never gates a semantic link. Resume captures new history. Timing/amount edits retain real samples; insufficient older history is not fabricated.",
+              "reducedMotion": "Suppress all Echo trails and geometric Distortion warp; retain static distortion colour and observable semantic metadata. No generated flash or zoom.",
+              "limitations": "No exact Serato transfer/parameters/order/tail claim; channel knob FX, stems, Deck3/4 and Sampler links are not mapped. Audio graph/output is never mutated by this bridge."
+            },
+            "disposed": false,
+            "backend": "unallocated-off"
+          }
+        }
+      }
+    },
+    {
+      "name": "Bass audio with semantic FX disabled does not fabricate an Echo/Distortion link",
+      "passed": true,
+      "evidence": {
+        "audio": {
+          "bass": 0.04117936573316329,
+          "mid": 0.0005241193986993153,
+          "treble": 0.000007664332389964434,
+          "level": 0.09194686484624105,
+          "audioAvailable": true
+        },
+        "difference": 0
+      }
+    },
+    {
+      "name": "Unsupported audio names/assignments remain explicit and never substitute a mapped effect",
+      "passed": true,
+      "evidence": [
+        {
+          "id": "0:0",
+          "name": "Delay",
+          "route": "Deck 1",
+          "reason": "No independent semantic mapping for this audio effect."
+        },
+        {
+          "id": "1:0",
+          "name": "Echo",
+          "route": "Sampler",
+          "reason": "Video target not mapped."
+        }
+      ]
+    },
+    {
+      "name": "Actual audio Distortion identity changes static pixels without FFT or generated motion",
+      "passed": true,
+      "evidence": {
+        "difference": 35.82568359375,
+        "sample": [
+          4,
+          4,
+          4,
+          255
+        ],
+        "link": [
+          {
+            "id": "0:0",
+            "name": "Distortion",
+            "kind": "distortion",
+            "amount": 1,
+            "delaySeconds": 0.25,
+            "feedback": 0.8,
+            "suppressed": false,
+            "resetReasons": [],
+            "taps": [
+              -1,
+              -1,
+              -1
+            ],
+            "captureCount": 0,
+            "retainedFrames": 0,
+            "lastReset": "initial"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Deck2 assignment affects only right pixels and no left/master duplicate",
+      "passed": true,
+      "evidence": {
+        "leftDifference": 0,
+        "rightDifference": 38.0078125,
+        "targets": {
+          "left": {
+            "active": [],
+            "policy": {
+              "requirement": "REQ-348",
+              "source": "docs/research/VIDEO_REMAINING_WORKFLOWS.md",
+              "referenceEquivalent": false,
+              "supported": [
+                "Echo",
+                "Distortion"
+              ],
+              "mapping": "Original semantic links for exact DJ-FX bank names Echo/Distortion only. No FFT trigger, no aliases/families/31 hidden definitions inferred. Deck1→left,Deck2→right,Master→master once; other assignments are explicitly unsupported.",
+              "order": "Dedicated channel links before ordinary channel slots/overlays; dedicated master links after transition and before master overlays/slots. Independent order, not recovered vendor routing.",
+              "echo": "Three shifted real upstream-frame taps at1T,2T,3T; T=60/BPM*beat*Beat Modify using actual configured audio timing. Depth is wet opacity; Feedback is finite tap decay, not recursive video feedback.16 timestamped frames at up to320x180. Missing past timestamps contribute nothing.",
+              "distortion": "Original static row warp plus Smooth Drive/Hard Clip/Foldback RGB transform; Drive/Character/Tone/depth have declared independent visual mappings.",
+              "lifecycle": "Opt-in off, disabled/zero effect, removal/reassignment/upstream topology changes, source asset/generation changes, backward render time, transport generation/direction/seek discontinuity, pause/stop clear Echo history immediately: no visual tail after bypass. Silence alone never gates a semantic link. Resume captures new history. Timing/amount edits retain real samples; insufficient older history is not fabricated.",
+              "reducedMotion": "Suppress all Echo trails and geometric Distortion warp; retain static distortion colour and observable semantic metadata. No generated flash or zoom.",
+              "limitations": "No exact Serato transfer/parameters/order/tail claim; channel knob FX, stems, Deck3/4 and Sampler links are not mapped. Audio graph/output is never mutated by this bridge."
+            },
+            "disposed": false,
+            "backend": "WebGL2"
+          },
+          "right": {
+            "active": [
+              {
+                "id": "0:0",
+                "name": "Distortion",
+                "kind": "distortion",
+                "amount": 1,
+                "delaySeconds": 0.25,
+                "feedback": 0.8,
+                "suppressed": false,
+                "resetReasons": [],
+                "taps": [
+                  -1,
+                  -1,
+                  -1
+                ],
+                "captureCount": 0,
+                "retainedFrames": 0,
+                "lastReset": "initial"
+              }
+            ],
+            "policy": {
+              "requirement": "REQ-348",
+              "source": "docs/research/VIDEO_REMAINING_WORKFLOWS.md",
+              "referenceEquivalent": false,
+              "supported": [
+                "Echo",
+                "Distortion"
+              ],
+              "mapping": "Original semantic links for exact DJ-FX bank names Echo/Distortion only. No FFT trigger, no aliases/families/31 hidden definitions inferred. Deck1→left,Deck2→right,Master→master once; other assignments are explicitly unsupported.",
+              "order": "Dedicated channel links before ordinary channel slots/overlays; dedicated master links after transition and before master overlays/slots. Independent order, not recovered vendor routing.",
+              "echo": "Three shifted real upstream-frame taps at1T,2T,3T; T=60/BPM*beat*Beat Modify using actual configured audio timing. Depth is wet opacity; Feedback is finite tap decay, not recursive video feedback.16 timestamped frames at up to320x180. Missing past timestamps contribute nothing.",
+              "distortion": "Original static row warp plus Smooth Drive/Hard Clip/Foldback RGB transform; Drive/Character/Tone/depth have declared independent visual mappings.",
+              "lifecycle": "Opt-in off, disabled/zero effect, removal/reassignment/upstream topology changes, source asset/generation changes, backward render time, transport generation/direction/seek discontinuity, pause/stop clear Echo history immediately: no visual tail after bypass. Silence alone never gates a semantic link. Resume captures new history. Timing/amount edits retain real samples; insufficient older history is not fabricated.",
+              "reducedMotion": "Suppress all Echo trails and geometric Distortion warp; retain static distortion colour and observable semantic metadata. No generated flash or zoom.",
+              "limitations": "No exact Serato transfer/parameters/order/tail claim; channel knob FX, stems, Deck3/4 and Sampler links are not mapped. Audio graph/output is never mutated by this bridge."
+            },
+            "disposed": false,
+            "backend": "WebGL2"
+          },
+          "master": {
+            "active": [],
+            "policy": {
+              "requirement": "REQ-348",
+              "source": "docs/research/VIDEO_REMAINING_WORKFLOWS.md",
+              "referenceEquivalent": false,
+              "supported": [
+                "Echo",
+                "Distortion"
+              ],
+              "mapping": "Original semantic links for exact DJ-FX bank names Echo/Distortion only. No FFT trigger, no aliases/families/31 hidden definitions inferred. Deck1→left,Deck2→right,Master→master once; other assignments are explicitly unsupported.",
+              "order": "Dedicated channel links before ordinary channel slots/overlays; dedicated master links after transition and before master overlays/slots. Independent order, not recovered vendor routing.",
+              "echo": "Three shifted real upstream-frame taps at1T,2T,3T; T=60/BPM*beat*Beat Modify using actual configured audio timing. Depth is wet opacity; Feedback is finite tap decay, not recursive video feedback.16 timestamped frames at up to320x180. Missing past timestamps contribute nothing.",
+              "distortion": "Original static row warp plus Smooth Drive/Hard Clip/Foldback RGB transform; Drive/Character/Tone/depth have declared independent visual mappings.",
+              "lifecycle": "Opt-in off, disabled/zero effect, removal/reassignment/upstream topology changes, source asset/generation changes, backward render time, transport generation/direction/seek discontinuity, pause/stop clear Echo history immediately: no visual tail after bypass. Silence alone never gates a semantic link. Resume captures new history. Timing/amount edits retain real samples; insufficient older history is not fabricated.",
+              "reducedMotion": "Suppress all Echo trails and geometric Distortion warp; retain static distortion colour and observable semantic metadata. No generated flash or zoom.",
+              "limitations": "No exact Serato transfer/parameters/order/tail claim; channel knob FX, stems, Deck3/4 and Sampler links are not mapped. Audio graph/output is never mutated by this bridge."
+            },
+            "disposed": false,
+            "backend": "unallocated-off"
+          }
+        }
+      }
+    },
+    {
+      "name": "Master assignment changes final pixels while both channel previews stay untouched",
+      "passed": true,
+      "evidence": {
+        "masterDifference": 35.4375,
+        "targets": {
+          "left": {
+            "active": [],
+            "policy": {
+              "requirement": "REQ-348",
+              "source": "docs/research/VIDEO_REMAINING_WORKFLOWS.md",
+              "referenceEquivalent": false,
+              "supported": [
+                "Echo",
+                "Distortion"
+              ],
+              "mapping": "Original semantic links for exact DJ-FX bank names Echo/Distortion only. No FFT trigger, no aliases/families/31 hidden definitions inferred. Deck1→left,Deck2→right,Master→master once; other assignments are explicitly unsupported.",
+              "order": "Dedicated channel links before ordinary channel slots/overlays; dedicated master links after transition and before master overlays/slots. Independent order, not recovered vendor routing.",
+              "echo": "Three shifted real upstream-frame taps at1T,2T,3T; T=60/BPM*beat*Beat Modify using actual configured audio timing. Depth is wet opacity; Feedback is finite tap decay, not recursive video feedback.16 timestamped frames at up to320x180. Missing past timestamps contribute nothing.",
+              "distortion": "Original static row warp plus Smooth Drive/Hard Clip/Foldback RGB transform; Drive/Character/Tone/depth have declared independent visual mappings.",
+              "lifecycle": "Opt-in off, disabled/zero effect, removal/reassignment/upstream topology changes, source asset/generation changes, backward render time, transport generation/direction/seek discontinuity, pause/stop clear Echo history immediately: no visual tail after bypass. Silence alone never gates a semantic link. Resume captures new history. Timing/amount edits retain real samples; insufficient older history is not fabricated.",
+              "reducedMotion": "Suppress all Echo trails and geometric Distortion warp; retain static distortion colour and observable semantic metadata. No generated flash or zoom.",
+              "limitations": "No exact Serato transfer/parameters/order/tail claim; channel knob FX, stems, Deck3/4 and Sampler links are not mapped. Audio graph/output is never mutated by this bridge."
+            },
+            "disposed": false,
+            "backend": "WebGL2"
+          },
+          "right": {
+            "active": [],
+            "policy": {
+              "requirement": "REQ-348",
+              "source": "docs/research/VIDEO_REMAINING_WORKFLOWS.md",
+              "referenceEquivalent": false,
+              "supported": [
+                "Echo",
+                "Distortion"
+              ],
+              "mapping": "Original semantic links for exact DJ-FX bank names Echo/Distortion only. No FFT trigger, no aliases/families/31 hidden definitions inferred. Deck1→left,Deck2→right,Master→master once; other assignments are explicitly unsupported.",
+              "order": "Dedicated channel links before ordinary channel slots/overlays; dedicated master links after transition and before master overlays/slots. Independent order, not recovered vendor routing.",
+              "echo": "Three shifted real upstream-frame taps at1T,2T,3T; T=60/BPM*beat*Beat Modify using actual configured audio timing. Depth is wet opacity; Feedback is finite tap decay, not recursive video feedback.16 timestamped frames at up to320x180. Missing past timestamps contribute nothing.",
+              "distortion": "Original static row warp plus Smooth Drive/Hard Clip/Foldback RGB transform; Drive/Character/Tone/depth have declared independent visual mappings.",
+              "lifecycle": "Opt-in off, disabled/zero effect, removal/reassignment/upstream topology changes, source asset/generation changes, backward render time, transport generation/direction/seek discontinuity, pause/stop clear Echo history immediately: no visual tail after bypass. Silence alone never gates a semantic link. Resume captures new history. Timing/amount edits retain real samples; insufficient older history is not fabricated.",
+              "reducedMotion": "Suppress all Echo trails and geometric Distortion warp; retain static distortion colour and observable semantic metadata. No generated flash or zoom.",
+              "limitations": "No exact Serato transfer/parameters/order/tail claim; channel knob FX, stems, Deck3/4 and Sampler links are not mapped. Audio graph/output is never mutated by this bridge."
+            },
+            "disposed": false,
+            "backend": "WebGL2"
+          },
+          "master": {
+            "active": [
+              {
+                "id": "0:0",
+                "name": "Distortion",
+                "kind": "distortion",
+                "amount": 1,
+                "delaySeconds": 0.25,
+                "feedback": 0.8,
+                "suppressed": false,
+                "resetReasons": [],
+                "taps": [
+                  -1,
+                  -1,
+                  -1
+                ],
+                "captureCount": 0,
+                "retainedFrames": 0,
+                "lastReset": "initial"
+              }
+            ],
+            "policy": {
+              "requirement": "REQ-348",
+              "source": "docs/research/VIDEO_REMAINING_WORKFLOWS.md",
+              "referenceEquivalent": false,
+              "supported": [
+                "Echo",
+                "Distortion"
+              ],
+              "mapping": "Original semantic links for exact DJ-FX bank names Echo/Distortion only. No FFT trigger, no aliases/families/31 hidden definitions inferred. Deck1→left,Deck2→right,Master→master once; other assignments are explicitly unsupported.",
+              "order": "Dedicated channel links before ordinary channel slots/overlays; dedicated master links after transition and before master overlays/slots. Independent order, not recovered vendor routing.",
+              "echo": "Three shifted real upstream-frame taps at1T,2T,3T; T=60/BPM*beat*Beat Modify using actual configured audio timing. Depth is wet opacity; Feedback is finite tap decay, not recursive video feedback.16 timestamped frames at up to320x180. Missing past timestamps contribute nothing.",
+              "distortion": "Original static row warp plus Smooth Drive/Hard Clip/Foldback RGB transform; Drive/Character/Tone/depth have declared independent visual mappings.",
+              "lifecycle": "Opt-in off, disabled/zero effect, removal/reassignment/upstream topology changes, source asset/generation changes, backward render time, transport generation/direction/seek discontinuity, pause/stop clear Echo history immediately: no visual tail after bypass. Silence alone never gates a semantic link. Resume captures new history. Timing/amount edits retain real samples; insufficient older history is not fabricated.",
+              "reducedMotion": "Suppress all Echo trails and geometric Distortion warp; retain static distortion colour and observable semantic metadata. No generated flash or zoom.",
+              "limitations": "No exact Serato transfer/parameters/order/tail claim; channel knob FX, stems, Deck3/4 and Sampler links are not mapped. Audio graph/output is never mutated by this bridge."
+            },
+            "disposed": false,
+            "backend": "WebGL2"
+          }
+        }
+      }
+    },
+    {
+      "name": "Two explicitly master-assigned banks execute in order exactly once each",
+      "passed": true,
+      "evidence": {
+        "master": [
+          {
+            "id": "0:0",
+            "name": "Echo",
+            "kind": "echo",
+            "amount": 0.8,
+            "delaySeconds": 0.25,
+            "feedback": 0.7,
+            "suppressed": false,
+            "resetReasons": [],
+            "taps": [
+              0,
+              -1,
+              -1
+            ],
+            "captureCount": 2,
+            "retainedFrames": 2,
+            "lastReset": "initial"
+          },
+          {
+            "id": "1:0",
+            "name": "Distortion",
+            "kind": "distortion",
+            "amount": 0.6,
+            "delaySeconds": 0.25,
+            "feedback": 0.7,
+            "suppressed": false,
+            "resetReasons": [],
+            "taps": [
+              -1,
+              -1,
+              -1
+            ],
+            "captureCount": 0,
+            "retainedFrames": 0,
+            "lastReset": "initial"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Depth changes real static colour strength with geometry suppressed",
+      "passed": true,
+      "evidence": {
+        "low": 7.4375,
+        "high": 26.796875
+      }
+    },
+    {
+      "name": "Hard Clip and Foldback follow distinct numeric RGB contracts at a known ramp pixel",
+      "passed": true,
+      "evidence": {
+        "input": [
+          64,
+          64,
+          64,
+          255
+        ],
+        "hardClip": [
+          0,
+          0,
+          0,
+          255
+        ],
+        "foldback": [
+          189,
+          189,
+          189,
+          255
+        ]
+      }
+    },
+    {
+      "name": "Echo actual BPM/beat/BeatModify changes the timestamp at which the first marker returns",
+      "passed": true,
+      "evidence": [
+        {
+          "bpm": 120,
+          "beat": "1",
+          "modifier": 1,
+          "T": 0.5,
+          "early": [
+            0,
+            0,
+            0,
+            255
+          ],
+          "due": [
+            149,
+            19,
+            7,
+            255
+          ],
+          "semanticDelay": 0.5,
+          "earlyState": [
+            {
+              "id": "0:0",
+              "name": "Echo",
+              "kind": "echo",
+              "amount": 1,
+              "delaySeconds": 0.5,
+              "feedback": 0,
+              "suppressed": false,
+              "resetReasons": [],
+              "taps": [
+                -1,
+                -1,
+                -1
+              ],
+              "captureCount": 2,
+              "retainedFrames": 2,
+              "lastReset": "initial"
+            }
+          ],
+          "dueState": [
+            {
+              "id": "0:0",
+              "name": "Echo",
+              "kind": "echo",
+              "amount": 1,
+              "delaySeconds": 0.5,
+              "feedback": 0,
+              "suppressed": false,
+              "resetReasons": [],
+              "taps": [
+                0,
+                -1,
+                -1
+              ],
+              "captureCount": 2,
+              "retainedFrames": 2,
+              "lastReset": "initial"
+            }
+          ]
+        },
+        {
+          "bpm": 240,
+          "beat": "1",
+          "modifier": 1,
+          "T": 0.25,
+          "early": [
+            0,
+            0,
+            0,
+            255
+          ],
+          "due": [
+            149,
+            19,
+            7,
+            255
+          ],
+          "semanticDelay": 0.25,
+          "earlyState": [
+            {
+              "id": "0:0",
+              "name": "Echo",
+              "kind": "echo",
+              "amount": 1,
+              "delaySeconds": 0.25,
+              "feedback": 0,
+              "suppressed": false,
+              "resetReasons": [],
+              "taps": [
+                -1,
+                -1,
+                -1
+              ],
+              "captureCount": 2,
+              "retainedFrames": 2,
+              "lastReset": "initial"
+            }
+          ],
+          "dueState": [
+            {
+              "id": "0:0",
+              "name": "Echo",
+              "kind": "echo",
+              "amount": 1,
+              "delaySeconds": 0.25,
+              "feedback": 0,
+              "suppressed": false,
+              "resetReasons": [],
+              "taps": [
+                0,
+                -1,
+                -1
+              ],
+              "captureCount": 2,
+              "retainedFrames": 2,
+              "lastReset": "initial"
+            }
+          ]
+        },
+        {
+          "bpm": 240,
+          "beat": "1",
+          "modifier": "2 dotted",
+          "T": 0.75,
+          "early": [
+            0,
+            0,
+            0,
+            255
+          ],
+          "due": [
+            149,
+            19,
+            7,
+            255
+          ],
+          "semanticDelay": 0.75,
+          "earlyState": [
+            {
+              "id": "0:0",
+              "name": "Echo",
+              "kind": "echo",
+              "amount": 1,
+              "delaySeconds": 0.75,
+              "feedback": 0,
+              "suppressed": false,
+              "resetReasons": [],
+              "taps": [
+                -1,
+                -1,
+                -1
+              ],
+              "captureCount": 2,
+              "retainedFrames": 2,
+              "lastReset": "initial"
+            }
+          ],
+          "dueState": [
+            {
+              "id": "0:0",
+              "name": "Echo",
+              "kind": "echo",
+              "amount": 1,
+              "delaySeconds": 0.75,
+              "feedback": 0,
+              "suppressed": false,
+              "resetReasons": [],
+              "taps": [
+                0,
+                -1,
+                -1
+              ],
+              "captureCount": 2,
+              "retainedFrames": 2,
+              "lastReset": "initial"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Feedback controls finite later-tap weight without recursive unbounded video output",
+      "passed": true,
+      "evidence": [
+        {
+          "feedback": 0,
+          "pixel": [
+            0,
+            0,
+            0,
+            255
+          ],
+          "active": [
+            {
+              "id": "0:0",
+              "name": "Echo",
+              "kind": "echo",
+              "amount": 1,
+              "delaySeconds": 0.125,
+              "feedback": 0,
+              "suppressed": false,
+              "resetReasons": [],
+              "taps": [
+                0,
+                0,
+                -1
+              ],
+              "captureCount": 2,
+              "retainedFrames": 2,
+              "lastReset": "initial"
+            }
+          ]
+        },
+        {
+          "feedback": 80,
+          "pixel": [
+            120,
+            16,
+            5,
+            255
+          ],
+          "active": [
+            {
+              "id": "0:0",
+              "name": "Echo",
+              "kind": "echo",
+              "amount": 1,
+              "delaySeconds": 0.125,
+              "feedback": 0.8,
+              "suppressed": false,
+              "resetReasons": [],
+              "taps": [
+                0,
+                0,
+                -1
+              ],
+              "captureCount": 2,
+              "retainedFrames": 2,
+              "lastReset": "initial"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Disabled link clears its tail immediately and re-enable cannot resurrect old frames",
+      "passed": true,
+      "evidence": {
+        "wet": [
+          73,
+          10,
+          3,
+          255
+        ],
+        "off": [
+          0,
+          0,
+          0,
+          255
+        ],
+        "reenabled": [
+          0,
+          0,
+          0,
+          255
+        ]
+      }
+    },
+    {
+      "name": "Reassignment releases old target history rather than leaking it into the new target",
+      "passed": true,
+      "evidence": {
+        "left": {
+          "active": [],
+          "policy": {
+            "requirement": "REQ-348",
+            "source": "docs/research/VIDEO_REMAINING_WORKFLOWS.md",
+            "referenceEquivalent": false,
+            "supported": [
+              "Echo",
+              "Distortion"
+            ],
+            "mapping": "Original semantic links for exact DJ-FX bank names Echo/Distortion only. No FFT trigger, no aliases/families/31 hidden definitions inferred. Deck1→left,Deck2→right,Master→master once; other assignments are explicitly unsupported.",
+            "order": "Dedicated channel links before ordinary channel slots/overlays; dedicated master links after transition and before master overlays/slots. Independent order, not recovered vendor routing.",
+            "echo": "Three shifted real upstream-frame taps at1T,2T,3T; T=60/BPM*beat*Beat Modify using actual configured audio timing. Depth is wet opacity; Feedback is finite tap decay, not recursive video feedback.16 timestamped frames at up to320x180. Missing past timestamps contribute nothing.",
+            "distortion": "Original static row warp plus Smooth Drive/Hard Clip/Foldback RGB transform; Drive/Character/Tone/depth have declared independent visual mappings.",
+            "lifecycle": "Opt-in off, disabled/zero effect, removal/reassignment/upstream topology changes, source asset/generation changes, backward render time, transport generation/direction/seek discontinuity, pause/stop clear Echo history immediately: no visual tail after bypass. Silence alone never gates a semantic link. Resume captures new history. Timing/amount edits retain real samples; insufficient older history is not fabricated.",
+            "reducedMotion": "Suppress all Echo trails and geometric Distortion warp; retain static distortion colour and observable semantic metadata. No generated flash or zoom.",
+            "limitations": "No exact Serato transfer/parameters/order/tail claim; channel knob FX, stems, Deck3/4 and Sampler links are not mapped. Audio graph/output is never mutated by this bridge."
+          },
+          "disposed": false,
+          "backend": "WebGL2"
+        },
+        "right": {
+          "active": [
+            {
+              "id": "0:0",
+              "name": "Echo",
+              "kind": "echo",
+              "amount": 0.8,
+              "delaySeconds": 0.25,
+              "feedback": 0.7,
+              "suppressed": false,
+              "resetReasons": [],
+              "taps": [
+                -1,
+                -1,
+                -1
+              ],
+              "captureCount": 1,
+              "retainedFrames": 1,
+              "lastReset": "initial"
+            }
+          ],
+          "policy": {
+            "requirement": "REQ-348",
+            "source": "docs/research/VIDEO_REMAINING_WORKFLOWS.md",
+            "referenceEquivalent": false,
+            "supported": [
+              "Echo",
+              "Distortion"
+            ],
+            "mapping": "Original semantic links for exact DJ-FX bank names Echo/Distortion only. No FFT trigger, no aliases/families/31 hidden definitions inferred. Deck1→left,Deck2→right,Master→master once; other assignments are explicitly unsupported.",
+            "order": "Dedicated channel links before ordinary channel slots/overlays; dedicated master links after transition and before master overlays/slots. Independent order, not recovered vendor routing.",
+            "echo": "Three shifted real upstream-frame taps at1T,2T,3T; T=60/BPM*beat*Beat Modify using actual configured audio timing. Depth is wet opacity; Feedback is finite tap decay, not recursive video feedback.16 timestamped frames at up to320x180. Missing past timestamps contribute nothing.",
+            "distortion": "Original static row warp plus Smooth Drive/Hard Clip/Foldback RGB transform; Drive/Character/Tone/depth have declared independent visual mappings.",
+            "lifecycle": "Opt-in off, disabled/zero effect, removal/reassignment/upstream topology changes, source asset/generation changes, backward render time, transport generation/direction/seek discontinuity, pause/stop clear Echo history immediately: no visual tail after bypass. Silence alone never gates a semantic link. Resume captures new history. Timing/amount edits retain real samples; insufficient older history is not fabricated.",
+            "reducedMotion": "Suppress all Echo trails and geometric Distortion warp; retain static distortion colour and observable semantic metadata. No generated flash or zoom.",
+            "limitations": "No exact Serato transfer/parameters/order/tail claim; channel knob FX, stems, Deck3/4 and Sampler links are not mapped. Audio graph/output is never mutated by this bridge."
+          },
+          "disposed": false,
+          "backend": "WebGL2"
+        },
+        "master": {
+          "active": [],
+          "policy": {
+            "requirement": "REQ-348",
+            "source": "docs/research/VIDEO_REMAINING_WORKFLOWS.md",
+            "referenceEquivalent": false,
+            "supported": [
+              "Echo",
+              "Distortion"
+            ],
+            "mapping": "Original semantic links for exact DJ-FX bank names Echo/Distortion only. No FFT trigger, no aliases/families/31 hidden definitions inferred. Deck1→left,Deck2→right,Master→master once; other assignments are explicitly unsupported.",
+            "order": "Dedicated channel links before ordinary channel slots/overlays; dedicated master links after transition and before master overlays/slots. Independent order, not recovered vendor routing.",
+            "echo": "Three shifted real upstream-frame taps at1T,2T,3T; T=60/BPM*beat*Beat Modify using actual configured audio timing. Depth is wet opacity; Feedback is finite tap decay, not recursive video feedback.16 timestamped frames at up to320x180. Missing past timestamps contribute nothing.",
+            "distortion": "Original static row warp plus Smooth Drive/Hard Clip/Foldback RGB transform; Drive/Character/Tone/depth have declared independent visual mappings.",
+            "lifecycle": "Opt-in off, disabled/zero effect, removal/reassignment/upstream topology changes, source asset/generation changes, backward render time, transport generation/direction/seek discontinuity, pause/stop clear Echo history immediately: no visual tail after bypass. Silence alone never gates a semantic link. Resume captures new history. Timing/amount edits retain real samples; insufficient older history is not fabricated.",
+            "reducedMotion": "Suppress all Echo trails and geometric Distortion warp; retain static distortion colour and observable semantic metadata. No generated flash or zoom.",
+            "limitations": "No exact Serato transfer/parameters/order/tail claim; channel knob FX, stems, Deck3/4 and Sampler links are not mapped. Audio graph/output is never mutated by this bridge."
+          },
+          "disposed": false,
+          "backend": "WebGL2"
+        }
+      }
+    },
+    {
+      "name": "Source generation replacement clears previously captured colour even on the same canvas",
+      "passed": true,
+      "evidence": [
+        {
+          "id": "0:0",
+          "name": "Echo",
+          "kind": "echo",
+          "amount": 0.8,
+          "delaySeconds": 0.25,
+          "feedback": 0.7,
+          "suppressed": false,
+          "resetReasons": [
+            "source-asset"
+          ],
+          "taps": [
+            -1,
+            -1,
+            -1
+          ],
+          "captureCount": 2,
+          "retainedFrames": 1,
+          "lastReset": "source-asset"
+        }
+      ]
+    },
+    {
+      "name": "Backward render time and duplicate frame IDs obey declared capture lifecycle",
+      "passed": true,
+      "evidence": {
+        "captured": 2,
+        "duplicate": [
+          {
+            "id": "0:0",
+            "name": "Echo",
+            "kind": "echo",
+            "amount": 0.8,
+            "delaySeconds": 0.25,
+            "feedback": 0.7,
+            "suppressed": false,
+            "resetReasons": [],
+            "taps": [
+              0,
+              -1,
+              -1
+            ],
+            "captureCount": 2,
+            "retainedFrames": 2,
+            "lastReset": "initial"
+          }
+        ],
+        "backward": [
+          {
+            "id": "0:0",
+            "name": "Echo",
+            "kind": "echo",
+            "amount": 0.8,
+            "delaySeconds": 0.25,
+            "feedback": 0.7,
+            "suppressed": false,
+            "resetReasons": [
+              "backward-clock"
+            ],
+            "taps": [
+              -1,
+              -1,
+              -1
+            ],
+            "captureCount": 3,
+            "retainedFrames": 1,
+            "lastReset": "backward-clock"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Removing preceding Distortion clears downstream Echo history containing the old topology",
+      "passed": true,
+      "evidence": [
+        {
+          "id": "0:1",
+          "name": "Echo",
+          "kind": "echo",
+          "amount": 1,
+          "delaySeconds": 0.125,
+          "feedback": 0.7,
+          "suppressed": false,
+          "resetReasons": [
+            "upstream-topology"
+          ],
+          "taps": [
+            -1,
+            -1,
+            -1
+          ],
+          "captureCount": 3,
+          "retainedFrames": 1,
+          "lastReset": "upstream-topology"
+        }
+      ]
+    },
+    {
+      "name": "Actual AudioEngine pause/seek/reverse/reload clocks reset temporal link history",
+      "passed": true,
+      "evidence": {
+        "position": 2.9993333333333334,
+        "playing": true,
+        "final": [
+          {
+            "id": "0:0",
+            "name": "Echo",
+            "kind": "echo",
+            "amount": 1,
+            "delaySeconds": 0.015625,
+            "feedback": 0.7,
+            "suppressed": false,
+            "resetReasons": [
+              "transport-generation"
+            ],
+            "taps": [
+              -1,
+              -1,
+              -1
+            ],
+            "captureCount": 7,
+            "retainedFrames": 1,
+            "lastReset": "transport-generation"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Reduced Motion removes Echo trails and warp while retaining static semantic colour",
+      "passed": true,
+      "evidence": {
+        "echo": [
+          0,
+          0,
+          0,
+          255
+        ],
+        "colourDifference": 37.921875,
+        "stableDifference": 0
+      }
+    },
+    {
+      "name": "Original keyed alpha stays straight red in partially transparent Echo ghosts",
+      "passed": true,
+      "evidence": {
+        "ghost": [
+          255,
+          0,
+          0,
+          166
+        ]
+      }
+    },
+    {
+      "name": "Link OFF restores both ordinary configured Video slots without mutating their parameters",
+      "passed": true,
+      "evidence": {
+        "linkedDifference": 26.337890625,
+        "restoredDifference": 0,
+        "ordinarySlots": [
+          {
+            "name": "Negative",
+            "on": true,
+            "value": 1,
+            "params": {}
+          },
+          {
+            "name": "Gamma",
+            "on": true,
+            "value": 1,
+            "params": {
+              "gamma": 1.7
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "Bridge enable changes video pixels but not measured actual post-master audio amplitude",
+      "passed": true,
+      "evidence": {
+        "stationarityWindows": [
+          {
+            "samples": [
+              {
+                "time": 1.0026666666666666,
+                "level": 0.22785710291720915
+              },
+              {
+                "time": 1.056,
+                "level": 0.21197324704386375
+              },
+              {
+                "time": 1.104,
+                "level": 0.21027413344807086
+              },
+              {
+                "time": 1.1546666666666667,
+                "level": 0.21017204769614847
+              },
+              {
+                "time": 1.2053333333333334,
+                "level": 0.21097187057916092
+              },
+              {
+                "time": 1.2533333333333334,
+                "level": 0.21169640371836218
+              },
+              {
+                "time": 1.304,
+                "level": 0.21163639830248906
+              },
+              {
+                "time": 1.3546666666666667,
+                "level": 0.21125032790395315
+              },
+              {
+                "time": 1.4026666666666667,
+                "level": 0.2102550139373889
+              },
+              {
+                "time": 1.4506666666666668,
+                "level": 0.21048457146607563
+              },
+              {
+                "time": 1.504,
+                "level": 0.21027403284096563
+              },
+              {
+                "time": 1.5573333333333332,
+                "level": 0.21017204769614847
+              },
+              {
+                "time": 1.6,
+                "level": 0.21161949758829982
+              },
+              {
+                "time": 1.6586666666666667,
+                "level": 0.2106527198612763
+              },
+              {
+                "time": 1.712,
+                "level": 0.2103885812579066
+              },
+              {
+                "time": 1.76,
+                "level": 0.2114488011983886
+              }
+            ],
+            "firstHalf": 0.21322894145115723,
+            "secondHalf": 0.21066190823080624,
+            "range": 0.017685055221060675,
+            "stable": false
+          },
+          {
+            "samples": [
+              {
+                "time": 1.7653333333333334,
+                "level": 0.21021936168159253
+              },
+              {
+                "time": 1.824,
+                "level": 0.2111891779675536
+              },
+              {
+                "time": 1.8773333333333333,
+                "level": 0.21146672554602527
+              },
+              {
+                "time": 1.9306666666666668,
+                "level": 0.21164557004605195
+              },
+              {
+                "time": 1.9786666666666666,
+                "level": 0.21067538849138273
+              },
+              {
+                "time": 2.026666666666667,
+                "level": 0.21018310304113338
+              },
+              {
+                "time": 2.08,
+                "level": 0.21017563616241713
+              },
+              {
+                "time": 2.128,
+                "level": 0.2107138193598476
+              },
+              {
+                "time": 2.1813333333333333,
+                "level": 0.2104347651351893
+              },
+              {
+                "time": 2.224,
+                "level": 0.2111891779675536
+              },
+              {
+                "time": 2.2773333333333334,
+                "level": 0.21146672554602527
+              },
+              {
+                "time": 2.3253333333333335,
+                "level": 0.21040545926706122
+              },
+              {
+                "time": 2.3786666666666667,
+                "level": 0.21067538849138273
+              },
+              {
+                "time": 2.432,
+                "level": 0.21099646054997165
+              },
+              {
+                "time": 2.48,
+                "level": 0.21017563616241713
+              },
+              {
+                "time": 2.522666666666667,
+                "level": 0.2116919012987746
+              }
+            ],
+            "firstHalf": 0.21078359778700057,
+            "secondHalf": 0.21087943930229694,
+            "range": 0.0015162651363574697,
+            "stable": true
+          }
+        ],
+        "measurements": [
+          {
+            "enabled": false,
+            "samples": [
+              {
+                "time": 2.528,
+                "level": 0.2107138193598476
+              },
+              {
+                "time": 2.570666666666667,
+                "level": 0.21086544814959937
+              },
+              {
+                "time": 2.624,
+                "level": 0.2111891779675536
+              },
+              {
+                "time": 2.6826666666666665,
+                "level": 0.2112276492066534
+              },
+              {
+                "time": 2.7306666666666666,
+                "level": 0.21164557004605195
+              },
+              {
+                "time": 2.7786666666666666,
+                "level": 0.21067538849138273
+              },
+              {
+                "time": 2.8213333333333335,
+                "level": 0.21134442839552217
+              },
+              {
+                "time": 2.8693333333333335,
+                "level": 0.2115883551383423
+              },
+              {
+                "time": 2.9226666666666667,
+                "level": 0.2116919012987746
+              },
+              {
+                "time": 2.970666666666667,
+                "level": 0.21086544814959937
+              },
+              {
+                "time": 3.024,
+                "level": 0.2111891779675536
+              },
+              {
+                "time": 3.066666666666667,
+                "level": 0.21084107297808477
+              },
+              {
+                "time": 3.12,
+                "level": 0.2105377191175023
+              },
+              {
+                "time": 3.168,
+                "level": 0.21157540961907104
+              },
+              {
+                "time": 3.2213333333333334,
+                "level": 0.21134442839552217
+              },
+              {
+                "time": 3.2693333333333334,
+                "level": 0.2115883551383423
+              }
+            ],
+            "mean": 0.2111802093387127
+          },
+          {
+            "enabled": true,
+            "samples": [
+              {
+                "time": 3.2746666666666666,
+                "level": 0.21103732638049086
+              },
+              {
+                "time": 3.3226666666666667,
+                "level": 0.2116919012987746
+              },
+              {
+                "time": 3.3706666666666667,
+                "level": 0.21086544814959937
+              },
+              {
+                "time": 3.4133333333333336,
+                "level": 0.21116573362698185
+              },
+              {
+                "time": 3.461333333333333,
+                "level": 0.21166640789201557
+              },
+              {
+                "time": 3.504,
+                "level": 0.21027403284096563
+              },
+              {
+                "time": 3.546666666666667,
+                "level": 0.21141771843229795
+              },
+              {
+                "time": 3.5946666666666665,
+                "level": 0.2103616659223179
+              },
+              {
+                "time": 3.6373333333333333,
+                "level": 0.21160840327142333
+              },
+              {
+                "time": 3.6853333333333333,
+                "level": 0.21130910481331422
+              },
+              {
+                "time": 3.728,
+                "level": 0.2107138193598476
+              },
+              {
+                "time": 3.776,
+                "level": 0.2116592158963503
+              },
+              {
+                "time": 3.824,
+                "level": 0.2111891779675536
+              },
+              {
+                "time": 3.8666666666666667,
+                "level": 0.21084107297808477
+              },
+              {
+                "time": 3.9093333333333335,
+                "level": 0.21073723016742346
+              },
+              {
+                "time": 3.957333333333333,
+                "level": 0.21017204769614847
+              }
+            ],
+            "mean": 0.21104439416834933
+          },
+          {
+            "enabled": false,
+            "samples": [
+              {
+                "time": 3.962666666666667,
+                "level": 0.211061730187491
+              },
+              {
+                "time": 4.010666666666666,
+                "level": 0.21018847187368417
+              },
+              {
+                "time": 4.053333333333334,
+                "level": 0.21169640371836218
+              },
+              {
+                "time": 4.101333333333334,
+                "level": 0.21093085876002834
+              },
+              {
+                "time": 4.16,
+                "level": 0.2114488011983886
+              },
+              {
+                "time": 4.213333333333333,
+                "level": 0.21116573362698185
+              },
+              {
+                "time": 4.256,
+                "level": 0.2106527198612763
+              },
+              {
+                "time": 4.304,
+                "level": 0.21027403284096563
+              },
+              {
+                "time": 4.352,
+                "level": 0.2112873714348246
+              },
+              {
+                "time": 4.4,
+                "level": 0.21161949758829982
+              },
+              {
+                "time": 4.448,
+                "level": 0.21061565815891295
+              },
+              {
+                "time": 4.496,
+                "level": 0.2101988923528879
+              },
+              {
+                "time": 4.544,
+                "level": 0.21110212175479529
+              },
+              {
+                "time": 4.586666666666667,
+                "level": 0.21050412674925376
+              },
+              {
+                "time": 4.634666666666667,
+                "level": 0.2102444401150525
+              },
+              {
+                "time": 4.688,
+                "level": 0.2101657609986385
+              }
+            ],
+            "mean": 0.21082228882624018
+          }
+        ],
+        "latestAudioWindow": {
+          "enabled": false,
+          "samples": [
+            {
+              "time": 3.962666666666667,
+              "level": 0.211061730187491
+            },
+            {
+              "time": 4.010666666666666,
+              "level": 0.21018847187368417
+            },
+            {
+              "time": 4.053333333333334,
+              "level": 0.21169640371836218
+            },
+            {
+              "time": 4.101333333333334,
+              "level": 0.21093085876002834
+            },
+            {
+              "time": 4.16,
+              "level": 0.2114488011983886
+            },
+            {
+              "time": 4.213333333333333,
+              "level": 0.21116573362698185
+            },
+            {
+              "time": 4.256,
+              "level": 0.2106527198612763
+            },
+            {
+              "time": 4.304,
+              "level": 0.21027403284096563
+            },
+            {
+              "time": 4.352,
+              "level": 0.2112873714348246
+            },
+            {
+              "time": 4.4,
+              "level": 0.21161949758829982
+            },
+            {
+              "time": 4.448,
+              "level": 0.21061565815891295
+            },
+            {
+              "time": 4.496,
+              "level": 0.2101988923528879
+            },
+            {
+              "time": 4.544,
+              "level": 0.21110212175479529
+            },
+            {
+              "time": 4.586666666666667,
+              "level": 0.21050412674925376
+            },
+            {
+              "time": 4.634666666666667,
+              "level": 0.2102444401150525
+            },
+            {
+              "time": 4.688,
+              "level": 0.2101657609986385
+            }
+          ]
+        },
+        "off": 0.2111802093387127,
+        "on": 0.21104439416834933,
+        "again": 0.21082228882624018,
+        "tolerance": 0.002,
+        "apertureSeconds": 0.042666666666666665,
+        "scope": "Real post-master time-domain RMS under held audio FX/PCM after measured pre-toggle stationarity; equal fixed post-toggle windows, not sample-for-sample or vendor sonic equivalence."
+      }
+    },
+    {
+      "name": "Explicit reset and disposal release all link state and reject subsequent rendering",
+      "passed": true,
+      "evidence": {
+        "rejected": true
+      }
+    }
+  ],
+  "messages": [],
+  "scope": "Actual AudioEngine/worklet configuration and live signals, original synthetic source canvases, actual WebGL2 pipeline pixels. No native/reference/codec/menu/31-definition acceptance.",
+  "seams": [
+    "Deterministic delay/tail cases supply explicit render timestamps and omit transport clocks; active link descriptors always come from actual engine.configureFX/videoFXLinks.",
+    "Actual transport lifecycle cases explicitly use engine.ctx.currentTime and engine.position on a real BufferSource deck.",
+    "No fake engine/pipeline/renderer, no external media or audible speaker route."
+  ],
+  "passed": 24,
+  "failed": 0,
+  "durationMs": 4781.100000143051
+}

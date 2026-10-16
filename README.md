@@ -5,6 +5,7 @@ Independent open-source desktop DJ project, with a browser review candidate and 
 **Native development is blocked until Jason approves the HTML prototype.** The HTML candidate is available, with explicit simulations and gaps. Full 1:1 parity is not verified.
 
 - [Run the HTML prototype](prototype/README.md)
+- [Semantic Video links and treatment evidence](docs/prototype/VIDEO_LINK_TREATMENT_REVIEW.md)
 - [Current Video, karaoke and Media Crate evidence](docs/prototype/VIDEO_FUNCTIONAL_REVIEW.md)
 - [Executed review and known gaps](docs/prototype/REVIEW_REPORT.md)
 - [Claude independent audit handoff](handoffs/codex-to-claude-completeness-audit.md)

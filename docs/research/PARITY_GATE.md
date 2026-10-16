@@ -72,3 +72,14 @@ links, broad codec/quality/output workflows, long sessions and physical/native
 acceptance are unresolved. No inventory count or passing subset closes full1:1.
 The candidate is pinned by the hash manifest and handoff; native approval remains
 absent.
+
+## Semantic links / treatment / inventory continuation
+
+REQ-348 has24/24 actual independent semantic Echo/Distortion GPU/audio checks;
+Media Treatment has21/21 decoded/capture checks; current pipeline32/32, Media32/32
+and karaoke19/19 regressions pass. Scope and retained failures are in
+[VIDEO_LINK_TREATMENT_REVIEW.md](../prototype/VIDEO_LINK_TREATMENT_REVIEW.md).
+REQ-496–507 account for12 previously omitted observed Video settings, bringing the
+working detailed inventory to507 while all110 groups and PG-01–07 remain open.
+Reference mappings/ranges/quality/timing/output, native and physical acceptance
+remain gaps. A separate Fable research conversation does not grant native approval.

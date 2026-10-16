@@ -33,6 +33,18 @@ test('Cross and boolean settings preserve literal zero/false without truthy-stri
   assert.deepEqual([restoreVideoState({linked:false,auto:true}).linked,restoreVideoState({linked:false,auto:true}).auto],[false,true]);
   assert.deepEqual([restoreVideoState({linked:'false',auto:'true'}).linked,restoreVideoState({linked:'false',auto:'true'}).auto],[true,false]);
 });
+test('Semantic-link opt-in and treatment metadata preserve only supported own scalar values',()=>{
+  for(const mediaTreatment of ['preserve','stretch','center-cut','letterbox']){
+    const value={audioFXLink:true,mediaTreatment};
+    const round=restoreVideoState(snapshotVideoState(value));
+    assert.equal(round.audioFXLink,true);assert.equal(round.mediaTreatment,mediaTreatment);
+  }
+  for(const mediaTreatment of ['future',{},null,5])assert.equal(restoreVideoState({audioFXLink:'true',mediaTreatment}).mediaTreatment,'stretch');
+  assert.equal(restoreVideoState({audioFXLink:'true'}).audioFXLink,false);
+  assert.equal(restoreVideoState(Object.create({audioFXLink:true,mediaTreatment:'preserve'})).audioFXLink,false);
+  let invoked=0;const hostile={};Object.defineProperty(hostile,'mediaTreatment',{get(){invoked++;return 'preserve';}});
+  assert.equal(restoreVideoState(hostile).mediaTreatment,'stretch');assert.equal(invoked,0);
+});
 test('All55 defaults survive snapshots, remain detached and occupy only two ordered slots per target',()=>{
   assert.equal(videoEffectCatalog.length,55);
   for(const entry of videoEffectCatalog){

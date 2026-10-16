@@ -20,7 +20,7 @@ function environment() {
   const canvas = () => {
     const c={width:640,height:360,isConnected:true,draws:0,
       captureStream(){const t=track();env.videoTracks.push(t);return {addTrack(){},getVideoTracks:()=>[t]};}};
-    const ctx={clearRect(){},fillRect(){},fillText(){},drawImage(){c.draws++;}};c.getContext=()=>ctx;return c;
+    const ctx={canvas:c,save(){},restore(){},setTransform(){},clearRect(){},fillRect(){},fillText(){},drawImage(){c.draws++;}};c.getContext=()=>ctx;return c;
   };
   globalThis.performance = {now:()=>env.now};
   globalThis.URL.createObjectURL = file => {const url=`blob:mock-${++serial}`;urls.set(url,file);return url;};
@@ -28,7 +28,7 @@ function environment() {
   globalThis.document = {querySelector:()=>null,createElement(type){
     if(type==='canvas')return canvas();
     assert.equal(type,'video');
-    const video = {readyState:2,duration:10,currentTime:0,paused:true,playbackRate:1,
+    const video = {readyState:2,videoWidth:320,videoHeight:180,seeking:false,duration:10,currentTime:0,paused:true,playbackRate:1,
       load(){},play(){this.paused=false;queueMicrotask(()=>{
         const callback=this.frameCallback;this.frameCallback=null;
         callback?.(env.now,{mediaTime:this.currentTime,presentedFrames:1,width:320,height:180});

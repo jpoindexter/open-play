@@ -3,16 +3,18 @@ import {createVideoPipeline} from './video-pipeline.js';
 import {createVideoKaraoke} from './video-karaoke.js';
 import {createVideoMediaLibrary, createVideoTransitionSelector} from './video-media.js';
 import {videoTransitionCatalog} from './video-transitions.js';
+import {drawVideoTreatment, normalizeVideoTreatment} from './video-treatment.js';
 import {primeDecodedVideo} from './video-decode.js';
 export function createVideoMixer({state, engine, notify}) {
   const v = state.video ||= {};
   Object.assign(v, {width: v.width || 640, height: v.height || 360,
     transition: v.transition || 'Crossfade', cross: v.cross || 0,
-    linked: v.linked ?? true, auto: v.auto || false,
+    linked: v.linked ?? true, auto: v.auto || false, audioFXLink:v.audioFXLink === true,
+    mediaTreatment:normalizeVideoTreatment(v.mediaTreatment),
     fx: v.fx || {left: [], right: [], master: []},
     overlays: v.overlays || {left: [], right: [], master: []}});
   const slots = [null, null], loadTokens = [0, 0], assets = new Map(), imageTokens = new Map();
-  const decodedRawIds = [null, null];
+  const decodedRawIds = [null, null], effectivePresentation = [null,null], presentationGenerations = [0,0];
   const karaoke = createVideoKaraoke({state, engine});
   const media = createVideoMediaLibrary(), transitions = createVideoTransitionSelector(videoTransitionCatalog);
   v.media ||= {enabled:false, random:false}; v.transitionSelection ||= {enabled:false, random:false};
@@ -181,7 +183,13 @@ export function createVideoMixer({state, engine, notify}) {
     if (startPromise || stopPromise || recorder?.state === 'recording') throw new Error('Stop video capture before changing output resolution.');
     if (![[640,360],[1280,720],[1920,1080]].some(([w,h]) => w === width && h === height))
       throw new Error('Choose 360p, 720p or 1080p browser output.');
-    pipeline?.dispose(); pipeline = null; raw = null; v.width = width; v.height = height;
+    pipeline?.dispose(); pipeline = null; v.width = width; v.height = height;
+    // Preserve actual decoded pixels through an output resize while the source
+    // is seeking. The pending treatment commits only with its next valid frame.
+    if (raw) raw = raw.map(source => {
+      const resized = document.createElement('canvas'); resized.width = width; resized.height = height;
+      resized.getContext('2d').drawImage(source,0,0,width,height); return resized;
+    });
     if (canvas) {canvas.width = width; canvas.height = height;} error = null; lastTime = -Infinity;
   }
   function drawRaw(index) {
@@ -194,12 +202,19 @@ export function createVideoMixer({state, engine, notify}) {
         source.width*scale, source.height*scale);
       decodedRawIds[index] = graphics.assetId; return;
     }
-    if (item && item.video.readyState < 2 && decodedRawIds[index] === item.assetId) return;
-    ctx.clearRect(0, 0, c.width, c.height);
-    if (item?.video.readyState >= 2) {
-      ctx.drawImage(item.video, 0, 0, c.width, c.height); decodedRawIds[index] = item.assetId;
+    if (item && (item.video.readyState < 2 || item.video.seeking) && decodedRawIds[index] === item.assetId) return;
+    if (item?.video.readyState >= 2 && !item.video.seeking) {
+      const mode = normalizeVideoTreatment(v.mediaTreatment);
+      const presentation = JSON.stringify([item.assetId,mode,item.video.videoWidth,item.video.videoHeight,c.width,c.height]);
+      drawVideoTreatment(ctx,item.video,mode);
+      if (effectivePresentation[index] !== presentation) {
+        if (effectivePresentation[index] !== null) pipeline?.reset(index ? 'right' : 'left');
+        effectivePresentation[index] = presentation; presentationGenerations[index]++;
+      }
+      decodedRawIds[index] = item.assetId;
     }
     else {
+      ctx.clearRect(0, 0, c.width, c.height);
       ctx.fillStyle = index ? '#332127' : '#17323b'; ctx.fillRect(0, 0, c.width, c.height);
       ctx.fillStyle = '#bbb'; ctx.font = `${Math.round(c.width/35)}px sans-serif`;
       ctx.fillText(`Load ${index ? 'right' : 'left'} video`, c.width/40, c.height/10);
@@ -212,6 +227,7 @@ export function createVideoMixer({state, engine, notify}) {
   }
   function diagnostics() {
     return {frames: frameId, error, width: v.width, height: v.height, lastRenderMs,
+      mediaTreatment:normalizeVideoTreatment(v.mediaTreatment), presentationGenerations:[...presentationGenerations],
       inputs: slots.map(item => item ? {name: item.name, position: item.video.currentTime,
         duration: item.video.duration, paused: item.video.paused, firstFrame:item.firstFrame,
         readyState:item.video.readyState, seeking:item.video.seeking} : null),
@@ -266,16 +282,22 @@ export function createVideoMixer({state, engine, notify}) {
       });
       raw.forEach((_, i) => drawRaw(i));
       const time = now / 1000, reducedMotion = !!state.settings?.['Reduced Motion'];
+      const audioSources = state.decks.filter(d => d?.track).map(d => ({
+        id: `${d.index}:${d.track.id}`, playing:!!d.playing, position:engine.position(d),
+        rate:d.rate * (d.reverse ? -1 : 1), generation:d.videoLoadGeneration || 0}));
+      const audioTransport = sources => ({playing:sources.some(source => source.playing),
+        generation:JSON.stringify(sources.map(({id,generation}) => [id,generation])),sources});
       const channels = slots.map((item, i) => ({...(engine.videoAnalysis?.(i) || {audioAvailable:false}),
+        audioTransport:audioTransport(audioSources.filter(source => source.id.startsWith(`${i}:`))),
         bpm: (state.decks[i]?.track?.bpm || 120) * Math.abs(state.decks[i]?.rate || 1), rate: (v.linked || item?.kind === 'fallback' || karaokeFrames[i]) && state.decks[i]?.track ?
           (state.decks[i].playing ? state.decks[i].rate * (state.decks[i].reverse ? -1 : 1) : 0) : item?.video.paused ? 0 : item?.video.playbackRate || 0,
         position: (v.linked || item?.kind === 'fallback' || karaokeFrames[i]) && state.decks[i]?.track ? engine.position(state.decks[i]) : item?.video.currentTime || 0,
-        upfader: engine.nodes?.[i]?.level ?? 1, assetId: karaokeFrames[i]?.assetId || item?.assetId || `empty:${i}`}));
+        upfader: engine.nodes?.[i]?.level ?? 1, assetId: karaokeFrames[i]?.assetId || (item ? `${item.assetId}:presentation:${presentationGenerations[i]}` : `empty:${i}`)}));
       const cross = v.linked ? engine.cross : v.auto && !reducedMotion ? Math.sin(time/2.5) : v.cross;
       const {output, channels: processed} = pipeline.render(raw, {...v, overlays: resolvedOverlays()}, {
-        time, frameId: ++frameId, reducedMotion, channels,
-        master: {...(engine.videoAnalysis?.(4) || {audioAvailable:false}), bpm: channels[0].bpm},
-        masterAssetId: slots.map((s,i) => karaokeFrames[i]?.assetId || s?.assetId || 'empty').join('|'),
+        time, frameId: ++frameId, reducedMotion, channels, audioFXLinks:engine.videoFXLinks?.(),
+        master: {...(engine.videoAnalysis?.(4) || {audioAvailable:false}), bpm: channels[0].bpm, audioTransport:audioTransport(audioSources)},
+        masterAssetId: channels.map(channel => channel.assetId).join('|'),
         amount: (Math.max(-1, Math.min(1, cross)) + 1)/2,
         upfaders: v.linked ? channels.map(c => c.upfader) : [1,1],
       });

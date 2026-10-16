@@ -1,5 +1,7 @@
 # Media Crate and transition-selection functional review
 
+Later continuation: [semantic links and Media Treatment review](VIDEO_LINK_TREATMENT_REVIEW.md) records current runtime/regressions and507-row inventory; historical cutoffs below remain scoped.
+
 Snapshot: 2026-10-16. **The independent browser harness passed 32/32; main-UI acceptance, current Serato behavior equivalence and native/full parity remain separate and open.** This report concerns Media Crate source selection, associations, automatic transition selection and the first-frame decode gate. It does not replace the broader Video, karaoke, audio or reference acceptance records.
 
 ## Executed evidence and boundaries

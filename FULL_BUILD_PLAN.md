@@ -1014,3 +1014,31 @@ Final review also corrected ordinary-load/eject ownership around asynchronous
 Stem Slip disarm.10 extracted real callback checks pass; a separate actual UI
 pair import/play/pause passed afterward. See `video-import-ownership-results.json`
 and `karaoke-import-ownership-main-ui-results.json`.
+
+## 32. Semantic Video links, treatment and inventory correction
+
+The exact-name Echo/Distortion semantic bridge now passes24/24 actual GPU/audio
+checks; Media Treatment passes21/21 with decoded4:3/wide Files, geometry/history
+checks and captured video/audio. Current pipeline32/32, Media32/32 and karaoke19/19
+regressions pass;16 Node scripts exit0 with narrower pure/controlled scopes.
+Read [VIDEO_LINK_TREATMENT_REVIEW.md](docs/prototype/VIDEO_LINK_TREATMENT_REVIEW.md)
+for declared mappings, retained red runs, corrected zero-feedback shader/seek-resize
+failures, actual main UI selection/persistence and the keyboard acceptance gap.
+Exact reference mappings/quality/timing/visuals remain unverified.
+
+The detailed inventory grows from495 to507: REQ-496–507 explicitly cover the12
+observed Video Setup Output/Control settings omitted from prior detailed rows.
+They inherit VID-001 or VID-002 Codex/Claude model/effort recommendations;110
+feature groups stay in scope and complete_inventory remainsfalse. Apart from
+independent Media Treatment, these new settings remain gaps rather than decorative
+selectors. Next work is source reconciliation and the smallest actual independent
+recording-quality/control slice, then the remaining library/conditional/provider/
+hardware/model-quality scope. Native development is still prohibited pending
+Jason's explicit approval of a named HTML revision.
+
+At Jason's request, a new local Claude Code session “Serato Video control semantics
+research” was started with actual Fable5.1/High selected, scoped to missing primary
+reference evidence and a separate findings file. Prompt:
+`docs/research/claude-fable/video-reference-debug-prompt.md`. It is not a full
+completeness-audit takeover and has no native/code/remote-write authority. Verify
+its conclusions against sources before changing reference claims.

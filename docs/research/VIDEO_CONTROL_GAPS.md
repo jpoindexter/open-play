@@ -100,3 +100,13 @@ Only this document was written. The following working hashes identify inspected 
 Re-entry: obtain bounded ownership of the three integration files, freeze the independent geometry/alpha/default policies above, then implement the helper and first actual pixel test. This task ends at the reviewable plan; none of its acceptance cases is marked executed.
 
 Skills applied: use, gap-analysis, dec-quality-testing. The research-only task scope overrides the gap-analysis skill's implementation phase; no fixes or approval request were inferred from that phase.
+
+## Subsequent execution update
+
+Independent Media Treatment is now implemented with21/21 actual browser cases,
+including decoded aspect fixtures and recorded video/audio; source-equivalence
+limits above remain. The omitted controls are now explicit REQ-496–507(507 total).
+Read `../prototype/VIDEO_LINK_TREATMENT_REVIEW.md`; the initial proposal/read cutoff
+above is historical, not the current execution status. Other control families stay
+open. A bounded Fable5.1/High reference session is seeking primary evidence; no
+reference conclusions from it are accepted yet.

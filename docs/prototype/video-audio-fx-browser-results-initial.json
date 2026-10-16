@@ -1,0 +1,1337 @@
+{
+  "startedAt": "2026-10-16T21:10:39.420Z",
+  "policy": {
+    "requirement": "REQ-348",
+    "source": "docs/research/VIDEO_REMAINING_WORKFLOWS.md",
+    "referenceEquivalent": false,
+    "supported": [
+      "Echo",
+      "Distortion"
+    ],
+    "mapping": "Original semantic links for exact DJ-FX bank names Echo/Distortion only. No FFT trigger, no aliases/families/31 hidden definitions inferred. Deck1→left,Deck2→right,Master→master once; other assignments are explicitly unsupported.",
+    "order": "Dedicated channel links before ordinary channel slots/overlays; dedicated master links after transition and before master overlays/slots. Independent order, not recovered vendor routing.",
+    "echo": "Three shifted real upstream-frame taps at1T,2T,3T; T=60/BPM*beat*Beat Modify using actual configured audio timing. Depth is wet opacity; Feedback is finite tap decay, not recursive video feedback.16 timestamped frames at up to320x180. Missing past timestamps contribute nothing.",
+    "distortion": "Original static row warp plus Smooth Drive/Hard Clip/Foldback RGB transform; Drive/Character/Tone/depth have declared independent visual mappings.",
+    "lifecycle": "Opt-in off, disabled/zero effect, removal/reassignment/upstream topology changes, source asset/generation changes, backward render time, transport generation/direction/seek discontinuity, pause/stop clear Echo history immediately: no visual tail after bypass. Silence alone never gates a semantic link. Resume captures new history. Timing/amount edits retain real samples; insufficient older history is not fabricated.",
+    "reducedMotion": "Suppress all Echo trails and geometric Distortion warp; retain static distortion colour and observable semantic metadata. No generated flash or zoom.",
+    "limitations": "No exact Serato transfer/parameters/order/tail claim; channel knob FX, stems, Deck3/4 and Sampler links are not mapped. Audio graph/output is never mutated by this bridge."
+  },
+  "checks": [
+    {
+      "name": "Actual AudioEngine prepares real DJ-FX graph with a playing silent PCM source",
+      "passed": true,
+      "evidence": {
+        "state": "running",
+        "effectsPrepared": true,
+        "playing": true,
+        "level": 0,
+        "links": {
+          "available": true,
+          "left": [
+            {
+              "id": "0:0",
+              "name": "Echo",
+              "kind": "echo",
+              "route": "Deck 1",
+              "target": "left",
+              "amount": 0.8,
+              "bpm": 120,
+              "beats": 0.5,
+              "beatModifier": 1,
+              "delaySeconds": 0.25,
+              "feedback": 0.7,
+              "drive": 0,
+              "character": 0.5,
+              "tone": 0,
+              "type": "Smooth Drive",
+              "parameterStatus": "Original visual mapping from current independent audio controls; vendor response unknown."
+            }
+          ],
+          "right": [],
+          "master": [],
+          "unsupported": [],
+          "policy": {
+            "requirement": "REQ-348",
+            "source": "docs/research/VIDEO_REMAINING_WORKFLOWS.md",
+            "referenceEquivalent": false,
+            "supported": [
+              "Echo",
+              "Distortion"
+            ],
+            "mapping": "Original semantic links for exact DJ-FX bank names Echo/Distortion only. No FFT trigger, no aliases/families/31 hidden definitions inferred. Deck1→left,Deck2→right,Master→master once; other assignments are explicitly unsupported.",
+            "order": "Dedicated channel links before ordinary channel slots/overlays; dedicated master links after transition and before master overlays/slots. Independent order, not recovered vendor routing.",
+            "echo": "Three shifted real upstream-frame taps at1T,2T,3T; T=60/BPM*beat*Beat Modify using actual configured audio timing. Depth is wet opacity; Feedback is finite tap decay, not recursive video feedback.16 timestamped frames at up to320x180. Missing past timestamps contribute nothing.",
+            "distortion": "Original static row warp plus Smooth Drive/Hard Clip/Foldback RGB transform; Drive/Character/Tone/depth have declared independent visual mappings.",
+            "lifecycle": "Opt-in off, disabled/zero effect, removal/reassignment/upstream topology changes, source asset/generation changes, backward render time, transport generation/direction/seek discontinuity, pause/stop clear Echo history immediately: no visual tail after bypass. Silence alone never gates a semantic link. Resume captures new history. Timing/amount edits retain real samples; insufficient older history is not fabricated.",
+            "reducedMotion": "Suppress all Echo trails and geometric Distortion warp; retain static distortion colour and observable semantic metadata. No generated flash or zoom.",
+            "limitations": "No exact Serato transfer/parameters/order/tail claim; channel knob FX, stems, Deck3/4 and Sampler links are not mapped. Audio graph/output is never mutated by this bridge."
+          }
+        }
+      }
+    },
+    {
+      "name": "Link OFF is exact pixel bypass despite assigned enabled audio Echo",
+      "passed": true,
+      "evidence": {
+        "leftDifference": 0,
+        "backend": "unallocated-off"
+      }
+    },
+    {
+      "name": "Static source plus actual silent audio Echo produces a delayed real-frame ghost only on its assigned channel",
+      "passed": true,
+      "evidence": {
+        "before": [
+          0,
+          0,
+          0,
+          255
+        ],
+        "atDelay": [
+          73,
+          10,
+          3,
+          255
+        ],
+        "rightDifference": 0,
+        "links": {
+          "left": {
+            "active": [
+              {
+                "id": "0:0",
+                "name": "Echo",
+                "kind": "echo",
+                "amount": 0.8,
+                "delaySeconds": 0.25,
+                "feedback": 0.7,
+                "suppressed": false,
+                "resetReasons": [],
+                "taps": [
+                  0,
+                  -1,
+                  -1
+                ],
+                "captureCount": 2,
+                "retainedFrames": 2,
+                "lastReset": "initial"
+              }
+            ],
+            "policy": {
+              "requirement": "REQ-348",
+              "source": "docs/research/VIDEO_REMAINING_WORKFLOWS.md",
+              "referenceEquivalent": false,
+              "supported": [
+                "Echo",
+                "Distortion"
+              ],
+              "mapping": "Original semantic links for exact DJ-FX bank names Echo/Distortion only. No FFT trigger, no aliases/families/31 hidden definitions inferred. Deck1→left,Deck2→right,Master→master once; other assignments are explicitly unsupported.",
+              "order": "Dedicated channel links before ordinary channel slots/overlays; dedicated master links after transition and before master overlays/slots. Independent order, not recovered vendor routing.",
+              "echo": "Three shifted real upstream-frame taps at1T,2T,3T; T=60/BPM*beat*Beat Modify using actual configured audio timing. Depth is wet opacity; Feedback is finite tap decay, not recursive video feedback.16 timestamped frames at up to320x180. Missing past timestamps contribute nothing.",
+              "distortion": "Original static row warp plus Smooth Drive/Hard Clip/Foldback RGB transform; Drive/Character/Tone/depth have declared independent visual mappings.",
+              "lifecycle": "Opt-in off, disabled/zero effect, removal/reassignment/upstream topology changes, source asset/generation changes, backward render time, transport generation/direction/seek discontinuity, pause/stop clear Echo history immediately: no visual tail after bypass. Silence alone never gates a semantic link. Resume captures new history. Timing/amount edits retain real samples; insufficient older history is not fabricated.",
+              "reducedMotion": "Suppress all Echo trails and geometric Distortion warp; retain static distortion colour and observable semantic metadata. No generated flash or zoom.",
+              "limitations": "No exact Serato transfer/parameters/order/tail claim; channel knob FX, stems, Deck3/4 and Sampler links are not mapped. Audio graph/output is never mutated by this bridge."
+            },
+            "disposed": false,
+            "backend": "WebGL2"
+          },
+          "right": {
+            "active": [],
+            "policy": {
+              "requirement": "REQ-348",
+              "source": "docs/research/VIDEO_REMAINING_WORKFLOWS.md",
+              "referenceEquivalent": false,
+              "supported": [
+                "Echo",
+                "Distortion"
+              ],
+              "mapping": "Original semantic links for exact DJ-FX bank names Echo/Distortion only. No FFT trigger, no aliases/families/31 hidden definitions inferred. Deck1→left,Deck2→right,Master→master once; other assignments are explicitly unsupported.",
+              "order": "Dedicated channel links before ordinary channel slots/overlays; dedicated master links after transition and before master overlays/slots. Independent order, not recovered vendor routing.",
+              "echo": "Three shifted real upstream-frame taps at1T,2T,3T; T=60/BPM*beat*Beat Modify using actual configured audio timing. Depth is wet opacity; Feedback is finite tap decay, not recursive video feedback.16 timestamped frames at up to320x180. Missing past timestamps contribute nothing.",
+              "distortion": "Original static row warp plus Smooth Drive/Hard Clip/Foldback RGB transform; Drive/Character/Tone/depth have declared independent visual mappings.",
+              "lifecycle": "Opt-in off, disabled/zero effect, removal/reassignment/upstream topology changes, source asset/generation changes, backward render time, transport generation/direction/seek discontinuity, pause/stop clear Echo history immediately: no visual tail after bypass. Silence alone never gates a semantic link. Resume captures new history. Timing/amount edits retain real samples; insufficient older history is not fabricated.",
+              "reducedMotion": "Suppress all Echo trails and geometric Distortion warp; retain static distortion colour and observable semantic metadata. No generated flash or zoom.",
+              "limitations": "No exact Serato transfer/parameters/order/tail claim; channel knob FX, stems, Deck3/4 and Sampler links are not mapped. Audio graph/output is never mutated by this bridge."
+            },
+            "disposed": false,
+            "backend": "unallocated-off"
+          },
+          "master": {
+            "active": [],
+            "policy": {
+              "requirement": "REQ-348",
+              "source": "docs/research/VIDEO_REMAINING_WORKFLOWS.md",
+              "referenceEquivalent": false,
+              "supported": [
+                "Echo",
+                "Distortion"
+              ],
+              "mapping": "Original semantic links for exact DJ-FX bank names Echo/Distortion only. No FFT trigger, no aliases/families/31 hidden definitions inferred. Deck1→left,Deck2→right,Master→master once; other assignments are explicitly unsupported.",
+              "order": "Dedicated channel links before ordinary channel slots/overlays; dedicated master links after transition and before master overlays/slots. Independent order, not recovered vendor routing.",
+              "echo": "Three shifted real upstream-frame taps at1T,2T,3T; T=60/BPM*beat*Beat Modify using actual configured audio timing. Depth is wet opacity; Feedback is finite tap decay, not recursive video feedback.16 timestamped frames at up to320x180. Missing past timestamps contribute nothing.",
+              "distortion": "Original static row warp plus Smooth Drive/Hard Clip/Foldback RGB transform; Drive/Character/Tone/depth have declared independent visual mappings.",
+              "lifecycle": "Opt-in off, disabled/zero effect, removal/reassignment/upstream topology changes, source asset/generation changes, backward render time, transport generation/direction/seek discontinuity, pause/stop clear Echo history immediately: no visual tail after bypass. Silence alone never gates a semantic link. Resume captures new history. Timing/amount edits retain real samples; insufficient older history is not fabricated.",
+              "reducedMotion": "Suppress all Echo trails and geometric Distortion warp; retain static distortion colour and observable semantic metadata. No generated flash or zoom.",
+              "limitations": "No exact Serato transfer/parameters/order/tail claim; channel knob FX, stems, Deck3/4 and Sampler links are not mapped. Audio graph/output is never mutated by this bridge."
+            },
+            "disposed": false,
+            "backend": "unallocated-off"
+          }
+        }
+      }
+    },
+    {
+      "name": "Bass audio with semantic FX disabled does not fabricate an Echo/Distortion link",
+      "passed": true,
+      "evidence": {
+        "audio": {
+          "bass": 0.04117936573316329,
+          "mid": 0.0005241193986993153,
+          "treble": 0.000007664332389964434,
+          "level": 0.09194686484624105,
+          "audioAvailable": true
+        },
+        "difference": 0
+      }
+    },
+    {
+      "name": "Unsupported audio names/assignments remain explicit and never substitute a mapped effect",
+      "passed": true,
+      "evidence": [
+        {
+          "id": "0:0",
+          "name": "Delay",
+          "route": "Deck 1",
+          "reason": "No independent semantic mapping for this audio effect."
+        },
+        {
+          "id": "1:0",
+          "name": "Echo",
+          "route": "Sampler",
+          "reason": "Video target not mapped."
+        }
+      ]
+    },
+    {
+      "name": "Actual audio Distortion identity changes static pixels without FFT or generated motion",
+      "passed": true,
+      "evidence": {
+        "difference": 35.82568359375,
+        "sample": [
+          4,
+          4,
+          4,
+          255
+        ],
+        "link": [
+          {
+            "id": "0:0",
+            "name": "Distortion",
+            "kind": "distortion",
+            "amount": 1,
+            "delaySeconds": 0.25,
+            "feedback": 0.8,
+            "suppressed": false,
+            "resetReasons": [],
+            "taps": [
+              -1,
+              -1,
+              -1
+            ],
+            "captureCount": 0,
+            "retainedFrames": 0,
+            "lastReset": "initial"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Deck2 assignment affects only right pixels and no left/master duplicate",
+      "passed": true,
+      "evidence": {
+        "leftDifference": 0,
+        "rightDifference": 38.0078125,
+        "targets": {
+          "left": {
+            "active": [],
+            "policy": {
+              "requirement": "REQ-348",
+              "source": "docs/research/VIDEO_REMAINING_WORKFLOWS.md",
+              "referenceEquivalent": false,
+              "supported": [
+                "Echo",
+                "Distortion"
+              ],
+              "mapping": "Original semantic links for exact DJ-FX bank names Echo/Distortion only. No FFT trigger, no aliases/families/31 hidden definitions inferred. Deck1→left,Deck2→right,Master→master once; other assignments are explicitly unsupported.",
+              "order": "Dedicated channel links before ordinary channel slots/overlays; dedicated master links after transition and before master overlays/slots. Independent order, not recovered vendor routing.",
+              "echo": "Three shifted real upstream-frame taps at1T,2T,3T; T=60/BPM*beat*Beat Modify using actual configured audio timing. Depth is wet opacity; Feedback is finite tap decay, not recursive video feedback.16 timestamped frames at up to320x180. Missing past timestamps contribute nothing.",
+              "distortion": "Original static row warp plus Smooth Drive/Hard Clip/Foldback RGB transform; Drive/Character/Tone/depth have declared independent visual mappings.",
+              "lifecycle": "Opt-in off, disabled/zero effect, removal/reassignment/upstream topology changes, source asset/generation changes, backward render time, transport generation/direction/seek discontinuity, pause/stop clear Echo history immediately: no visual tail after bypass. Silence alone never gates a semantic link. Resume captures new history. Timing/amount edits retain real samples; insufficient older history is not fabricated.",
+              "reducedMotion": "Suppress all Echo trails and geometric Distortion warp; retain static distortion colour and observable semantic metadata. No generated flash or zoom.",
+              "limitations": "No exact Serato transfer/parameters/order/tail claim; channel knob FX, stems, Deck3/4 and Sampler links are not mapped. Audio graph/output is never mutated by this bridge."
+            },
+            "disposed": false,
+            "backend": "WebGL2"
+          },
+          "right": {
+            "active": [
+              {
+                "id": "0:0",
+                "name": "Distortion",
+                "kind": "distortion",
+                "amount": 1,
+                "delaySeconds": 0.25,
+                "feedback": 0.8,
+                "suppressed": false,
+                "resetReasons": [],
+                "taps": [
+                  -1,
+                  -1,
+                  -1
+                ],
+                "captureCount": 0,
+                "retainedFrames": 0,
+                "lastReset": "initial"
+              }
+            ],
+            "policy": {
+              "requirement": "REQ-348",
+              "source": "docs/research/VIDEO_REMAINING_WORKFLOWS.md",
+              "referenceEquivalent": false,
+              "supported": [
+                "Echo",
+                "Distortion"
+              ],
+              "mapping": "Original semantic links for exact DJ-FX bank names Echo/Distortion only. No FFT trigger, no aliases/families/31 hidden definitions inferred. Deck1→left,Deck2→right,Master→master once; other assignments are explicitly unsupported.",
+              "order": "Dedicated channel links before ordinary channel slots/overlays; dedicated master links after transition and before master overlays/slots. Independent order, not recovered vendor routing.",
+              "echo": "Three shifted real upstream-frame taps at1T,2T,3T; T=60/BPM*beat*Beat Modify using actual configured audio timing. Depth is wet opacity; Feedback is finite tap decay, not recursive video feedback.16 timestamped frames at up to320x180. Missing past timestamps contribute nothing.",
+              "distortion": "Original static row warp plus Smooth Drive/Hard Clip/Foldback RGB transform; Drive/Character/Tone/depth have declared independent visual mappings.",
+              "lifecycle": "Opt-in off, disabled/zero effect, removal/reassignment/upstream topology changes, source asset/generation changes, backward render time, transport generation/direction/seek discontinuity, pause/stop clear Echo history immediately: no visual tail after bypass. Silence alone never gates a semantic link. Resume captures new history. Timing/amount edits retain real samples; insufficient older history is not fabricated.",
+              "reducedMotion": "Suppress all Echo trails and geometric Distortion warp; retain static distortion colour and observable semantic metadata. No generated flash or zoom.",
+              "limitations": "No exact Serato transfer/parameters/order/tail claim; channel knob FX, stems, Deck3/4 and Sampler links are not mapped. Audio graph/output is never mutated by this bridge."
+            },
+            "disposed": false,
+            "backend": "WebGL2"
+          },
+          "master": {
+            "active": [],
+            "policy": {
+              "requirement": "REQ-348",
+              "source": "docs/research/VIDEO_REMAINING_WORKFLOWS.md",
+              "referenceEquivalent": false,
+              "supported": [
+                "Echo",
+                "Distortion"
+              ],
+              "mapping": "Original semantic links for exact DJ-FX bank names Echo/Distortion only. No FFT trigger, no aliases/families/31 hidden definitions inferred. Deck1→left,Deck2→right,Master→master once; other assignments are explicitly unsupported.",
+              "order": "Dedicated channel links before ordinary channel slots/overlays; dedicated master links after transition and before master overlays/slots. Independent order, not recovered vendor routing.",
+              "echo": "Three shifted real upstream-frame taps at1T,2T,3T; T=60/BPM*beat*Beat Modify using actual configured audio timing. Depth is wet opacity; Feedback is finite tap decay, not recursive video feedback.16 timestamped frames at up to320x180. Missing past timestamps contribute nothing.",
+              "distortion": "Original static row warp plus Smooth Drive/Hard Clip/Foldback RGB transform; Drive/Character/Tone/depth have declared independent visual mappings.",
+              "lifecycle": "Opt-in off, disabled/zero effect, removal/reassignment/upstream topology changes, source asset/generation changes, backward render time, transport generation/direction/seek discontinuity, pause/stop clear Echo history immediately: no visual tail after bypass. Silence alone never gates a semantic link. Resume captures new history. Timing/amount edits retain real samples; insufficient older history is not fabricated.",
+              "reducedMotion": "Suppress all Echo trails and geometric Distortion warp; retain static distortion colour and observable semantic metadata. No generated flash or zoom.",
+              "limitations": "No exact Serato transfer/parameters/order/tail claim; channel knob FX, stems, Deck3/4 and Sampler links are not mapped. Audio graph/output is never mutated by this bridge."
+            },
+            "disposed": false,
+            "backend": "unallocated-off"
+          }
+        }
+      }
+    },
+    {
+      "name": "Master assignment changes final pixels while both channel previews stay untouched",
+      "passed": true,
+      "evidence": {
+        "masterDifference": 35.4375,
+        "targets": {
+          "left": {
+            "active": [],
+            "policy": {
+              "requirement": "REQ-348",
+              "source": "docs/research/VIDEO_REMAINING_WORKFLOWS.md",
+              "referenceEquivalent": false,
+              "supported": [
+                "Echo",
+                "Distortion"
+              ],
+              "mapping": "Original semantic links for exact DJ-FX bank names Echo/Distortion only. No FFT trigger, no aliases/families/31 hidden definitions inferred. Deck1→left,Deck2→right,Master→master once; other assignments are explicitly unsupported.",
+              "order": "Dedicated channel links before ordinary channel slots/overlays; dedicated master links after transition and before master overlays/slots. Independent order, not recovered vendor routing.",
+              "echo": "Three shifted real upstream-frame taps at1T,2T,3T; T=60/BPM*beat*Beat Modify using actual configured audio timing. Depth is wet opacity; Feedback is finite tap decay, not recursive video feedback.16 timestamped frames at up to320x180. Missing past timestamps contribute nothing.",
+              "distortion": "Original static row warp plus Smooth Drive/Hard Clip/Foldback RGB transform; Drive/Character/Tone/depth have declared independent visual mappings.",
+              "lifecycle": "Opt-in off, disabled/zero effect, removal/reassignment/upstream topology changes, source asset/generation changes, backward render time, transport generation/direction/seek discontinuity, pause/stop clear Echo history immediately: no visual tail after bypass. Silence alone never gates a semantic link. Resume captures new history. Timing/amount edits retain real samples; insufficient older history is not fabricated.",
+              "reducedMotion": "Suppress all Echo trails and geometric Distortion warp; retain static distortion colour and observable semantic metadata. No generated flash or zoom.",
+              "limitations": "No exact Serato transfer/parameters/order/tail claim; channel knob FX, stems, Deck3/4 and Sampler links are not mapped. Audio graph/output is never mutated by this bridge."
+            },
+            "disposed": false,
+            "backend": "WebGL2"
+          },
+          "right": {
+            "active": [],
+            "policy": {
+              "requirement": "REQ-348",
+              "source": "docs/research/VIDEO_REMAINING_WORKFLOWS.md",
+              "referenceEquivalent": false,
+              "supported": [
+                "Echo",
+                "Distortion"
+              ],
+              "mapping": "Original semantic links for exact DJ-FX bank names Echo/Distortion only. No FFT trigger, no aliases/families/31 hidden definitions inferred. Deck1→left,Deck2→right,Master→master once; other assignments are explicitly unsupported.",
+              "order": "Dedicated channel links before ordinary channel slots/overlays; dedicated master links after transition and before master overlays/slots. Independent order, not recovered vendor routing.",
+              "echo": "Three shifted real upstream-frame taps at1T,2T,3T; T=60/BPM*beat*Beat Modify using actual configured audio timing. Depth is wet opacity; Feedback is finite tap decay, not recursive video feedback.16 timestamped frames at up to320x180. Missing past timestamps contribute nothing.",
+              "distortion": "Original static row warp plus Smooth Drive/Hard Clip/Foldback RGB transform; Drive/Character/Tone/depth have declared independent visual mappings.",
+              "lifecycle": "Opt-in off, disabled/zero effect, removal/reassignment/upstream topology changes, source asset/generation changes, backward render time, transport generation/direction/seek discontinuity, pause/stop clear Echo history immediately: no visual tail after bypass. Silence alone never gates a semantic link. Resume captures new history. Timing/amount edits retain real samples; insufficient older history is not fabricated.",
+              "reducedMotion": "Suppress all Echo trails and geometric Distortion warp; retain static distortion colour and observable semantic metadata. No generated flash or zoom.",
+              "limitations": "No exact Serato transfer/parameters/order/tail claim; channel knob FX, stems, Deck3/4 and Sampler links are not mapped. Audio graph/output is never mutated by this bridge."
+            },
+            "disposed": false,
+            "backend": "WebGL2"
+          },
+          "master": {
+            "active": [
+              {
+                "id": "0:0",
+                "name": "Distortion",
+                "kind": "distortion",
+                "amount": 1,
+                "delaySeconds": 0.25,
+                "feedback": 0.8,
+                "suppressed": false,
+                "resetReasons": [],
+                "taps": [
+                  -1,
+                  -1,
+                  -1
+                ],
+                "captureCount": 0,
+                "retainedFrames": 0,
+                "lastReset": "initial"
+              }
+            ],
+            "policy": {
+              "requirement": "REQ-348",
+              "source": "docs/research/VIDEO_REMAINING_WORKFLOWS.md",
+              "referenceEquivalent": false,
+              "supported": [
+                "Echo",
+                "Distortion"
+              ],
+              "mapping": "Original semantic links for exact DJ-FX bank names Echo/Distortion only. No FFT trigger, no aliases/families/31 hidden definitions inferred. Deck1→left,Deck2→right,Master→master once; other assignments are explicitly unsupported.",
+              "order": "Dedicated channel links before ordinary channel slots/overlays; dedicated master links after transition and before master overlays/slots. Independent order, not recovered vendor routing.",
+              "echo": "Three shifted real upstream-frame taps at1T,2T,3T; T=60/BPM*beat*Beat Modify using actual configured audio timing. Depth is wet opacity; Feedback is finite tap decay, not recursive video feedback.16 timestamped frames at up to320x180. Missing past timestamps contribute nothing.",
+              "distortion": "Original static row warp plus Smooth Drive/Hard Clip/Foldback RGB transform; Drive/Character/Tone/depth have declared independent visual mappings.",
+              "lifecycle": "Opt-in off, disabled/zero effect, removal/reassignment/upstream topology changes, source asset/generation changes, backward render time, transport generation/direction/seek discontinuity, pause/stop clear Echo history immediately: no visual tail after bypass. Silence alone never gates a semantic link. Resume captures new history. Timing/amount edits retain real samples; insufficient older history is not fabricated.",
+              "reducedMotion": "Suppress all Echo trails and geometric Distortion warp; retain static distortion colour and observable semantic metadata. No generated flash or zoom.",
+              "limitations": "No exact Serato transfer/parameters/order/tail claim; channel knob FX, stems, Deck3/4 and Sampler links are not mapped. Audio graph/output is never mutated by this bridge."
+            },
+            "disposed": false,
+            "backend": "WebGL2"
+          }
+        }
+      }
+    },
+    {
+      "name": "Two explicitly master-assigned banks execute in order exactly once each",
+      "passed": true,
+      "evidence": {
+        "master": [
+          {
+            "id": "0:0",
+            "name": "Echo",
+            "kind": "echo",
+            "amount": 0.8,
+            "delaySeconds": 0.25,
+            "feedback": 0.7,
+            "suppressed": false,
+            "resetReasons": [],
+            "taps": [
+              0,
+              -1,
+              -1
+            ],
+            "captureCount": 2,
+            "retainedFrames": 2,
+            "lastReset": "initial"
+          },
+          {
+            "id": "1:0",
+            "name": "Distortion",
+            "kind": "distortion",
+            "amount": 0.6,
+            "delaySeconds": 0.25,
+            "feedback": 0.7,
+            "suppressed": false,
+            "resetReasons": [],
+            "taps": [
+              -1,
+              -1,
+              -1
+            ],
+            "captureCount": 0,
+            "retainedFrames": 0,
+            "lastReset": "initial"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Depth changes real static colour strength with geometry suppressed",
+      "passed": true,
+      "evidence": {
+        "low": 7.4375,
+        "high": 26.796875
+      }
+    },
+    {
+      "name": "Hard Clip and Foldback follow distinct numeric RGB contracts at a known ramp pixel",
+      "passed": true,
+      "evidence": {
+        "input": [
+          64,
+          64,
+          64,
+          255
+        ],
+        "hardClip": [
+          0,
+          0,
+          0,
+          255
+        ],
+        "foldback": [
+          189,
+          189,
+          189,
+          255
+        ]
+      }
+    },
+    {
+      "name": "Echo actual BPM/beat/BeatModify changes the timestamp at which the first marker returns",
+      "passed": false,
+      "error": "Echo timestamp did not follow actual configured beat timing.",
+      "stack": "Error: Echo timestamp did not follow actual configured beat timing.\n    at assert (http://127.0.0.1:8768/prototype/video-audio-fx-harness.js:4:65)\n    at http://127.0.0.1:8768/prototype/video-audio-fx-harness.js:37:407\n    at check (http://127.0.0.1:8768/prototype/video-audio-fx-harness.js:17:83)\n    at runVideoAudioFXChecks (http://127.0.0.1:8768/prototype/video-audio-fx-harness.js:37:11)\n    at async $.onclick (http://127.0.0.1:8768/prototype/video-audio-fx-harness.js:55:133)",
+      "links": {
+        "available": true,
+        "left": [
+          {
+            "id": "0:0",
+            "name": "Echo",
+            "kind": "echo",
+            "route": "Deck 1",
+            "target": "left",
+            "amount": 1,
+            "bpm": 120,
+            "beats": 1,
+            "beatModifier": 1,
+            "delaySeconds": 0.5,
+            "feedback": 0,
+            "drive": 0,
+            "character": 0.5,
+            "tone": 0,
+            "type": "Smooth Drive",
+            "parameterStatus": "Original visual mapping from current independent audio controls; vendor response unknown."
+          }
+        ],
+        "right": [],
+        "master": [],
+        "unsupported": [],
+        "policy": {
+          "requirement": "REQ-348",
+          "source": "docs/research/VIDEO_REMAINING_WORKFLOWS.md",
+          "referenceEquivalent": false,
+          "supported": [
+            "Echo",
+            "Distortion"
+          ],
+          "mapping": "Original semantic links for exact DJ-FX bank names Echo/Distortion only. No FFT trigger, no aliases/families/31 hidden definitions inferred. Deck1→left,Deck2→right,Master→master once; other assignments are explicitly unsupported.",
+          "order": "Dedicated channel links before ordinary channel slots/overlays; dedicated master links after transition and before master overlays/slots. Independent order, not recovered vendor routing.",
+          "echo": "Three shifted real upstream-frame taps at1T,2T,3T; T=60/BPM*beat*Beat Modify using actual configured audio timing. Depth is wet opacity; Feedback is finite tap decay, not recursive video feedback.16 timestamped frames at up to320x180. Missing past timestamps contribute nothing.",
+          "distortion": "Original static row warp plus Smooth Drive/Hard Clip/Foldback RGB transform; Drive/Character/Tone/depth have declared independent visual mappings.",
+          "lifecycle": "Opt-in off, disabled/zero effect, removal/reassignment/upstream topology changes, source asset/generation changes, backward render time, transport generation/direction/seek discontinuity, pause/stop clear Echo history immediately: no visual tail after bypass. Silence alone never gates a semantic link. Resume captures new history. Timing/amount edits retain real samples; insufficient older history is not fabricated.",
+          "reducedMotion": "Suppress all Echo trails and geometric Distortion warp; retain static distortion colour and observable semantic metadata. No generated flash or zoom.",
+          "limitations": "No exact Serato transfer/parameters/order/tail claim; channel knob FX, stems, Deck3/4 and Sampler links are not mapped. Audio graph/output is never mutated by this bridge."
+        }
+      },
+      "diagnostics": {
+        "width": 96,
+        "height": 64,
+        "disposed": false,
+        "policy": {
+          "order": "Raw input → two channel FX → channel overlays → transition → master overlays → two master FX",
+          "referenceOrder": "Unverified; this is an independent Open Play routing contract.",
+          "scheduling": "Caller supplies one monotonic time/frameId per processed frame; no frame-rate guarantee.",
+          "semanticLinks": "Opt-in exact Echo/Distortion links precede ordinary channel slots; master links follow transition and precede master overlays/slots. Independent policy, not recovered reference routing."
+        },
+        "overlays": {
+          "left": {
+            "rendered": 0,
+            "skipped": []
+          },
+          "right": {
+            "rendered": 0,
+            "skipped": []
+          },
+          "master": {
+            "rendered": 0,
+            "skipped": []
+          }
+        },
+        "audioFXLinks": {
+          "enabled": true,
+          "available": true,
+          "unsupported": [],
+          "targets": {
+            "left": {
+              "active": [
+                {
+                  "id": "0:0",
+                  "name": "Echo",
+                  "kind": "echo",
+                  "amount": 1,
+                  "delaySeconds": 0.5,
+                  "feedback": 0,
+                  "suppressed": false,
+                  "resetReasons": [],
+                  "taps": [
+                    0,
+                    -1,
+                    -1
+                  ],
+                  "captureCount": 2,
+                  "retainedFrames": 2,
+                  "lastReset": "initial"
+                }
+              ],
+              "policy": {
+                "requirement": "REQ-348",
+                "source": "docs/research/VIDEO_REMAINING_WORKFLOWS.md",
+                "referenceEquivalent": false,
+                "supported": [
+                  "Echo",
+                  "Distortion"
+                ],
+                "mapping": "Original semantic links for exact DJ-FX bank names Echo/Distortion only. No FFT trigger, no aliases/families/31 hidden definitions inferred. Deck1→left,Deck2→right,Master→master once; other assignments are explicitly unsupported.",
+                "order": "Dedicated channel links before ordinary channel slots/overlays; dedicated master links after transition and before master overlays/slots. Independent order, not recovered vendor routing.",
+                "echo": "Three shifted real upstream-frame taps at1T,2T,3T; T=60/BPM*beat*Beat Modify using actual configured audio timing. Depth is wet opacity; Feedback is finite tap decay, not recursive video feedback.16 timestamped frames at up to320x180. Missing past timestamps contribute nothing.",
+                "distortion": "Original static row warp plus Smooth Drive/Hard Clip/Foldback RGB transform; Drive/Character/Tone/depth have declared independent visual mappings.",
+                "lifecycle": "Opt-in off, disabled/zero effect, removal/reassignment/upstream topology changes, source asset/generation changes, backward render time, transport generation/direction/seek discontinuity, pause/stop clear Echo history immediately: no visual tail after bypass. Silence alone never gates a semantic link. Resume captures new history. Timing/amount edits retain real samples; insufficient older history is not fabricated.",
+                "reducedMotion": "Suppress all Echo trails and geometric Distortion warp; retain static distortion colour and observable semantic metadata. No generated flash or zoom.",
+                "limitations": "No exact Serato transfer/parameters/order/tail claim; channel knob FX, stems, Deck3/4 and Sampler links are not mapped. Audio graph/output is never mutated by this bridge."
+              },
+              "disposed": false,
+              "backend": "WebGL2"
+            },
+            "right": {
+              "active": [],
+              "policy": {
+                "requirement": "REQ-348",
+                "source": "docs/research/VIDEO_REMAINING_WORKFLOWS.md",
+                "referenceEquivalent": false,
+                "supported": [
+                  "Echo",
+                  "Distortion"
+                ],
+                "mapping": "Original semantic links for exact DJ-FX bank names Echo/Distortion only. No FFT trigger, no aliases/families/31 hidden definitions inferred. Deck1→left,Deck2→right,Master→master once; other assignments are explicitly unsupported.",
+                "order": "Dedicated channel links before ordinary channel slots/overlays; dedicated master links after transition and before master overlays/slots. Independent order, not recovered vendor routing.",
+                "echo": "Three shifted real upstream-frame taps at1T,2T,3T; T=60/BPM*beat*Beat Modify using actual configured audio timing. Depth is wet opacity; Feedback is finite tap decay, not recursive video feedback.16 timestamped frames at up to320x180. Missing past timestamps contribute nothing.",
+                "distortion": "Original static row warp plus Smooth Drive/Hard Clip/Foldback RGB transform; Drive/Character/Tone/depth have declared independent visual mappings.",
+                "lifecycle": "Opt-in off, disabled/zero effect, removal/reassignment/upstream topology changes, source asset/generation changes, backward render time, transport generation/direction/seek discontinuity, pause/stop clear Echo history immediately: no visual tail after bypass. Silence alone never gates a semantic link. Resume captures new history. Timing/amount edits retain real samples; insufficient older history is not fabricated.",
+                "reducedMotion": "Suppress all Echo trails and geometric Distortion warp; retain static distortion colour and observable semantic metadata. No generated flash or zoom.",
+                "limitations": "No exact Serato transfer/parameters/order/tail claim; channel knob FX, stems, Deck3/4 and Sampler links are not mapped. Audio graph/output is never mutated by this bridge."
+              },
+              "disposed": false,
+              "backend": "WebGL2"
+            },
+            "master": {
+              "active": [],
+              "policy": {
+                "requirement": "REQ-348",
+                "source": "docs/research/VIDEO_REMAINING_WORKFLOWS.md",
+                "referenceEquivalent": false,
+                "supported": [
+                  "Echo",
+                  "Distortion"
+                ],
+                "mapping": "Original semantic links for exact DJ-FX bank names Echo/Distortion only. No FFT trigger, no aliases/families/31 hidden definitions inferred. Deck1→left,Deck2→right,Master→master once; other assignments are explicitly unsupported.",
+                "order": "Dedicated channel links before ordinary channel slots/overlays; dedicated master links after transition and before master overlays/slots. Independent order, not recovered vendor routing.",
+                "echo": "Three shifted real upstream-frame taps at1T,2T,3T; T=60/BPM*beat*Beat Modify using actual configured audio timing. Depth is wet opacity; Feedback is finite tap decay, not recursive video feedback.16 timestamped frames at up to320x180. Missing past timestamps contribute nothing.",
+                "distortion": "Original static row warp plus Smooth Drive/Hard Clip/Foldback RGB transform; Drive/Character/Tone/depth have declared independent visual mappings.",
+                "lifecycle": "Opt-in off, disabled/zero effect, removal/reassignment/upstream topology changes, source asset/generation changes, backward render time, transport generation/direction/seek discontinuity, pause/stop clear Echo history immediately: no visual tail after bypass. Silence alone never gates a semantic link. Resume captures new history. Timing/amount edits retain real samples; insufficient older history is not fabricated.",
+                "reducedMotion": "Suppress all Echo trails and geometric Distortion warp; retain static distortion colour and observable semantic metadata. No generated flash or zoom.",
+                "limitations": "No exact Serato transfer/parameters/order/tail claim; channel knob FX, stems, Deck3/4 and Sampler links are not mapped. Audio graph/output is never mutated by this bridge."
+              },
+              "disposed": false,
+              "backend": "WebGL2"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "Feedback controls finite later-tap weight without recursive unbounded video output",
+      "passed": true,
+      "evidence": [
+        {
+          "feedback": 0,
+          "pixel": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "active": [
+            {
+              "id": "0:0",
+              "name": "Echo",
+              "kind": "echo",
+              "amount": 1,
+              "delaySeconds": 0.125,
+              "feedback": 0,
+              "suppressed": false,
+              "resetReasons": [],
+              "taps": [
+                0,
+                0,
+                -1
+              ],
+              "captureCount": 2,
+              "retainedFrames": 2,
+              "lastReset": "initial"
+            }
+          ]
+        },
+        {
+          "feedback": 80,
+          "pixel": [
+            120,
+            16,
+            5,
+            255
+          ],
+          "active": [
+            {
+              "id": "0:0",
+              "name": "Echo",
+              "kind": "echo",
+              "amount": 1,
+              "delaySeconds": 0.125,
+              "feedback": 0.8,
+              "suppressed": false,
+              "resetReasons": [],
+              "taps": [
+                0,
+                0,
+                -1
+              ],
+              "captureCount": 2,
+              "retainedFrames": 2,
+              "lastReset": "initial"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Disabled link clears its tail immediately and re-enable cannot resurrect old frames",
+      "passed": true,
+      "evidence": {
+        "wet": [
+          73,
+          10,
+          3,
+          255
+        ],
+        "off": [
+          0,
+          0,
+          0,
+          255
+        ],
+        "reenabled": [
+          0,
+          0,
+          0,
+          255
+        ]
+      }
+    },
+    {
+      "name": "Reassignment releases old target history rather than leaking it into the new target",
+      "passed": true,
+      "evidence": {
+        "left": {
+          "active": [],
+          "policy": {
+            "requirement": "REQ-348",
+            "source": "docs/research/VIDEO_REMAINING_WORKFLOWS.md",
+            "referenceEquivalent": false,
+            "supported": [
+              "Echo",
+              "Distortion"
+            ],
+            "mapping": "Original semantic links for exact DJ-FX bank names Echo/Distortion only. No FFT trigger, no aliases/families/31 hidden definitions inferred. Deck1→left,Deck2→right,Master→master once; other assignments are explicitly unsupported.",
+            "order": "Dedicated channel links before ordinary channel slots/overlays; dedicated master links after transition and before master overlays/slots. Independent order, not recovered vendor routing.",
+            "echo": "Three shifted real upstream-frame taps at1T,2T,3T; T=60/BPM*beat*Beat Modify using actual configured audio timing. Depth is wet opacity; Feedback is finite tap decay, not recursive video feedback.16 timestamped frames at up to320x180. Missing past timestamps contribute nothing.",
+            "distortion": "Original static row warp plus Smooth Drive/Hard Clip/Foldback RGB transform; Drive/Character/Tone/depth have declared independent visual mappings.",
+            "lifecycle": "Opt-in off, disabled/zero effect, removal/reassignment/upstream topology changes, source asset/generation changes, backward render time, transport generation/direction/seek discontinuity, pause/stop clear Echo history immediately: no visual tail after bypass. Silence alone never gates a semantic link. Resume captures new history. Timing/amount edits retain real samples; insufficient older history is not fabricated.",
+            "reducedMotion": "Suppress all Echo trails and geometric Distortion warp; retain static distortion colour and observable semantic metadata. No generated flash or zoom.",
+            "limitations": "No exact Serato transfer/parameters/order/tail claim; channel knob FX, stems, Deck3/4 and Sampler links are not mapped. Audio graph/output is never mutated by this bridge."
+          },
+          "disposed": false,
+          "backend": "WebGL2"
+        },
+        "right": {
+          "active": [
+            {
+              "id": "0:0",
+              "name": "Echo",
+              "kind": "echo",
+              "amount": 0.8,
+              "delaySeconds": 0.25,
+              "feedback": 0.7,
+              "suppressed": false,
+              "resetReasons": [],
+              "taps": [
+                -1,
+                -1,
+                -1
+              ],
+              "captureCount": 1,
+              "retainedFrames": 1,
+              "lastReset": "initial"
+            }
+          ],
+          "policy": {
+            "requirement": "REQ-348",
+            "source": "docs/research/VIDEO_REMAINING_WORKFLOWS.md",
+            "referenceEquivalent": false,
+            "supported": [
+              "Echo",
+              "Distortion"
+            ],
+            "mapping": "Original semantic links for exact DJ-FX bank names Echo/Distortion only. No FFT trigger, no aliases/families/31 hidden definitions inferred. Deck1→left,Deck2→right,Master→master once; other assignments are explicitly unsupported.",
+            "order": "Dedicated channel links before ordinary channel slots/overlays; dedicated master links after transition and before master overlays/slots. Independent order, not recovered vendor routing.",
+            "echo": "Three shifted real upstream-frame taps at1T,2T,3T; T=60/BPM*beat*Beat Modify using actual configured audio timing. Depth is wet opacity; Feedback is finite tap decay, not recursive video feedback.16 timestamped frames at up to320x180. Missing past timestamps contribute nothing.",
+            "distortion": "Original static row warp plus Smooth Drive/Hard Clip/Foldback RGB transform; Drive/Character/Tone/depth have declared independent visual mappings.",
+            "lifecycle": "Opt-in off, disabled/zero effect, removal/reassignment/upstream topology changes, source asset/generation changes, backward render time, transport generation/direction/seek discontinuity, pause/stop clear Echo history immediately: no visual tail after bypass. Silence alone never gates a semantic link. Resume captures new history. Timing/amount edits retain real samples; insufficient older history is not fabricated.",
+            "reducedMotion": "Suppress all Echo trails and geometric Distortion warp; retain static distortion colour and observable semantic metadata. No generated flash or zoom.",
+            "limitations": "No exact Serato transfer/parameters/order/tail claim; channel knob FX, stems, Deck3/4 and Sampler links are not mapped. Audio graph/output is never mutated by this bridge."
+          },
+          "disposed": false,
+          "backend": "WebGL2"
+        },
+        "master": {
+          "active": [],
+          "policy": {
+            "requirement": "REQ-348",
+            "source": "docs/research/VIDEO_REMAINING_WORKFLOWS.md",
+            "referenceEquivalent": false,
+            "supported": [
+              "Echo",
+              "Distortion"
+            ],
+            "mapping": "Original semantic links for exact DJ-FX bank names Echo/Distortion only. No FFT trigger, no aliases/families/31 hidden definitions inferred. Deck1→left,Deck2→right,Master→master once; other assignments are explicitly unsupported.",
+            "order": "Dedicated channel links before ordinary channel slots/overlays; dedicated master links after transition and before master overlays/slots. Independent order, not recovered vendor routing.",
+            "echo": "Three shifted real upstream-frame taps at1T,2T,3T; T=60/BPM*beat*Beat Modify using actual configured audio timing. Depth is wet opacity; Feedback is finite tap decay, not recursive video feedback.16 timestamped frames at up to320x180. Missing past timestamps contribute nothing.",
+            "distortion": "Original static row warp plus Smooth Drive/Hard Clip/Foldback RGB transform; Drive/Character/Tone/depth have declared independent visual mappings.",
+            "lifecycle": "Opt-in off, disabled/zero effect, removal/reassignment/upstream topology changes, source asset/generation changes, backward render time, transport generation/direction/seek discontinuity, pause/stop clear Echo history immediately: no visual tail after bypass. Silence alone never gates a semantic link. Resume captures new history. Timing/amount edits retain real samples; insufficient older history is not fabricated.",
+            "reducedMotion": "Suppress all Echo trails and geometric Distortion warp; retain static distortion colour and observable semantic metadata. No generated flash or zoom.",
+            "limitations": "No exact Serato transfer/parameters/order/tail claim; channel knob FX, stems, Deck3/4 and Sampler links are not mapped. Audio graph/output is never mutated by this bridge."
+          },
+          "disposed": false,
+          "backend": "WebGL2"
+        }
+      }
+    },
+    {
+      "name": "Source generation replacement clears previously captured colour even on the same canvas",
+      "passed": true,
+      "evidence": [
+        {
+          "id": "0:0",
+          "name": "Echo",
+          "kind": "echo",
+          "amount": 0.8,
+          "delaySeconds": 0.25,
+          "feedback": 0.7,
+          "suppressed": false,
+          "resetReasons": [
+            "source-asset"
+          ],
+          "taps": [
+            -1,
+            -1,
+            -1
+          ],
+          "captureCount": 2,
+          "retainedFrames": 1,
+          "lastReset": "source-asset"
+        }
+      ]
+    },
+    {
+      "name": "Backward render time and duplicate frame IDs obey declared capture lifecycle",
+      "passed": true,
+      "evidence": {
+        "captured": 2,
+        "duplicate": [
+          {
+            "id": "0:0",
+            "name": "Echo",
+            "kind": "echo",
+            "amount": 0.8,
+            "delaySeconds": 0.25,
+            "feedback": 0.7,
+            "suppressed": false,
+            "resetReasons": [],
+            "taps": [
+              0,
+              -1,
+              -1
+            ],
+            "captureCount": 2,
+            "retainedFrames": 2,
+            "lastReset": "initial"
+          }
+        ],
+        "backward": [
+          {
+            "id": "0:0",
+            "name": "Echo",
+            "kind": "echo",
+            "amount": 0.8,
+            "delaySeconds": 0.25,
+            "feedback": 0.7,
+            "suppressed": false,
+            "resetReasons": [
+              "backward-clock"
+            ],
+            "taps": [
+              -1,
+              -1,
+              -1
+            ],
+            "captureCount": 3,
+            "retainedFrames": 1,
+            "lastReset": "backward-clock"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Removing preceding Distortion clears downstream Echo history containing the old topology",
+      "passed": true,
+      "evidence": [
+        {
+          "id": "0:1",
+          "name": "Echo",
+          "kind": "echo",
+          "amount": 1,
+          "delaySeconds": 0.125,
+          "feedback": 0.7,
+          "suppressed": false,
+          "resetReasons": [
+            "upstream-topology"
+          ],
+          "taps": [
+            -1,
+            -1,
+            -1
+          ],
+          "captureCount": 3,
+          "retainedFrames": 1,
+          "lastReset": "upstream-topology"
+        }
+      ]
+    },
+    {
+      "name": "Actual AudioEngine pause/seek/reverse/reload clocks reset temporal link history",
+      "passed": true,
+      "evidence": {
+        "position": 2.9993333333333334,
+        "playing": true,
+        "final": [
+          {
+            "id": "0:0",
+            "name": "Echo",
+            "kind": "echo",
+            "amount": 1,
+            "delaySeconds": 0.015625,
+            "feedback": 0.7,
+            "suppressed": false,
+            "resetReasons": [
+              "transport-generation"
+            ],
+            "taps": [
+              -1,
+              -1,
+              -1
+            ],
+            "captureCount": 6,
+            "retainedFrames": 1,
+            "lastReset": "transport-generation"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Reduced Motion removes Echo trails and warp while retaining static semantic colour",
+      "passed": true,
+      "evidence": {
+        "echo": [
+          0,
+          0,
+          0,
+          255
+        ],
+        "colourDifference": 37.921875,
+        "stableDifference": 0
+      }
+    },
+    {
+      "name": "Original keyed alpha stays straight red in partially transparent Echo ghosts",
+      "passed": false,
+      "error": "Echo alpha was opaque, absent or dark-fringed: 0,0,0,0",
+      "stack": "Error: Echo alpha was opaque, absent or dark-fringed: 0,0,0,0\n    at assert (http://127.0.0.1:8768/prototype/video-audio-fx-harness.js:4:65)\n    at http://127.0.0.1:8768/prototype/video-audio-fx-harness.js:46:255\n    at check (http://127.0.0.1:8768/prototype/video-audio-fx-harness.js:17:83)\n    at runVideoAudioFXChecks (http://127.0.0.1:8768/prototype/video-audio-fx-harness.js:46:11)\n    at async $.onclick (http://127.0.0.1:8768/prototype/video-audio-fx-harness.js:55:133)",
+      "links": {
+        "available": true,
+        "left": [
+          {
+            "id": "0:0",
+            "name": "Echo",
+            "kind": "echo",
+            "route": "Deck 1",
+            "target": "left",
+            "amount": 1,
+            "bpm": 120,
+            "beats": 0.5,
+            "beatModifier": 1,
+            "delaySeconds": 0.25,
+            "feedback": 0,
+            "drive": 0,
+            "character": 0.5,
+            "tone": 0,
+            "type": "Smooth Drive",
+            "parameterStatus": "Original visual mapping from current independent audio controls; vendor response unknown."
+          }
+        ],
+        "right": [],
+        "master": [],
+        "unsupported": [],
+        "policy": {
+          "requirement": "REQ-348",
+          "source": "docs/research/VIDEO_REMAINING_WORKFLOWS.md",
+          "referenceEquivalent": false,
+          "supported": [
+            "Echo",
+            "Distortion"
+          ],
+          "mapping": "Original semantic links for exact DJ-FX bank names Echo/Distortion only. No FFT trigger, no aliases/families/31 hidden definitions inferred. Deck1→left,Deck2→right,Master→master once; other assignments are explicitly unsupported.",
+          "order": "Dedicated channel links before ordinary channel slots/overlays; dedicated master links after transition and before master overlays/slots. Independent order, not recovered vendor routing.",
+          "echo": "Three shifted real upstream-frame taps at1T,2T,3T; T=60/BPM*beat*Beat Modify using actual configured audio timing. Depth is wet opacity; Feedback is finite tap decay, not recursive video feedback.16 timestamped frames at up to320x180. Missing past timestamps contribute nothing.",
+          "distortion": "Original static row warp plus Smooth Drive/Hard Clip/Foldback RGB transform; Drive/Character/Tone/depth have declared independent visual mappings.",
+          "lifecycle": "Opt-in off, disabled/zero effect, removal/reassignment/upstream topology changes, source asset/generation changes, backward render time, transport generation/direction/seek discontinuity, pause/stop clear Echo history immediately: no visual tail after bypass. Silence alone never gates a semantic link. Resume captures new history. Timing/amount edits retain real samples; insufficient older history is not fabricated.",
+          "reducedMotion": "Suppress all Echo trails and geometric Distortion warp; retain static distortion colour and observable semantic metadata. No generated flash or zoom.",
+          "limitations": "No exact Serato transfer/parameters/order/tail claim; channel knob FX, stems, Deck3/4 and Sampler links are not mapped. Audio graph/output is never mutated by this bridge."
+        }
+      },
+      "diagnostics": {
+        "width": 96,
+        "height": 64,
+        "disposed": false,
+        "policy": {
+          "order": "Raw input → two channel FX → channel overlays → transition → master overlays → two master FX",
+          "referenceOrder": "Unverified; this is an independent Open Play routing contract.",
+          "scheduling": "Caller supplies one monotonic time/frameId per processed frame; no frame-rate guarantee.",
+          "semanticLinks": "Opt-in exact Echo/Distortion links precede ordinary channel slots; master links follow transition and precede master overlays/slots. Independent policy, not recovered reference routing."
+        },
+        "overlays": {
+          "left": {
+            "rendered": 0,
+            "skipped": []
+          },
+          "right": {
+            "rendered": 0,
+            "skipped": []
+          },
+          "master": {
+            "rendered": 0,
+            "skipped": []
+          }
+        },
+        "audioFXLinks": {
+          "enabled": true,
+          "available": true,
+          "unsupported": [],
+          "targets": {
+            "left": {
+              "active": [
+                {
+                  "id": "0:0",
+                  "name": "Echo",
+                  "kind": "echo",
+                  "amount": 1,
+                  "delaySeconds": 0.25,
+                  "feedback": 0,
+                  "suppressed": false,
+                  "resetReasons": [],
+                  "taps": [
+                    0,
+                    -1,
+                    -1
+                  ],
+                  "captureCount": 2,
+                  "retainedFrames": 2,
+                  "lastReset": "initial"
+                }
+              ],
+              "policy": {
+                "requirement": "REQ-348",
+                "source": "docs/research/VIDEO_REMAINING_WORKFLOWS.md",
+                "referenceEquivalent": false,
+                "supported": [
+                  "Echo",
+                  "Distortion"
+                ],
+                "mapping": "Original semantic links for exact DJ-FX bank names Echo/Distortion only. No FFT trigger, no aliases/families/31 hidden definitions inferred. Deck1→left,Deck2→right,Master→master once; other assignments are explicitly unsupported.",
+                "order": "Dedicated channel links before ordinary channel slots/overlays; dedicated master links after transition and before master overlays/slots. Independent order, not recovered vendor routing.",
+                "echo": "Three shifted real upstream-frame taps at1T,2T,3T; T=60/BPM*beat*Beat Modify using actual configured audio timing. Depth is wet opacity; Feedback is finite tap decay, not recursive video feedback.16 timestamped frames at up to320x180. Missing past timestamps contribute nothing.",
+                "distortion": "Original static row warp plus Smooth Drive/Hard Clip/Foldback RGB transform; Drive/Character/Tone/depth have declared independent visual mappings.",
+                "lifecycle": "Opt-in off, disabled/zero effect, removal/reassignment/upstream topology changes, source asset/generation changes, backward render time, transport generation/direction/seek discontinuity, pause/stop clear Echo history immediately: no visual tail after bypass. Silence alone never gates a semantic link. Resume captures new history. Timing/amount edits retain real samples; insufficient older history is not fabricated.",
+                "reducedMotion": "Suppress all Echo trails and geometric Distortion warp; retain static distortion colour and observable semantic metadata. No generated flash or zoom.",
+                "limitations": "No exact Serato transfer/parameters/order/tail claim; channel knob FX, stems, Deck3/4 and Sampler links are not mapped. Audio graph/output is never mutated by this bridge."
+              },
+              "disposed": false,
+              "backend": "WebGL2"
+            },
+            "right": {
+              "active": [],
+              "policy": {
+                "requirement": "REQ-348",
+                "source": "docs/research/VIDEO_REMAINING_WORKFLOWS.md",
+                "referenceEquivalent": false,
+                "supported": [
+                  "Echo",
+                  "Distortion"
+                ],
+                "mapping": "Original semantic links for exact DJ-FX bank names Echo/Distortion only. No FFT trigger, no aliases/families/31 hidden definitions inferred. Deck1→left,Deck2→right,Master→master once; other assignments are explicitly unsupported.",
+                "order": "Dedicated channel links before ordinary channel slots/overlays; dedicated master links after transition and before master overlays/slots. Independent order, not recovered vendor routing.",
+                "echo": "Three shifted real upstream-frame taps at1T,2T,3T; T=60/BPM*beat*Beat Modify using actual configured audio timing. Depth is wet opacity; Feedback is finite tap decay, not recursive video feedback.16 timestamped frames at up to320x180. Missing past timestamps contribute nothing.",
+                "distortion": "Original static row warp plus Smooth Drive/Hard Clip/Foldback RGB transform; Drive/Character/Tone/depth have declared independent visual mappings.",
+                "lifecycle": "Opt-in off, disabled/zero effect, removal/reassignment/upstream topology changes, source asset/generation changes, backward render time, transport generation/direction/seek discontinuity, pause/stop clear Echo history immediately: no visual tail after bypass. Silence alone never gates a semantic link. Resume captures new history. Timing/amount edits retain real samples; insufficient older history is not fabricated.",
+                "reducedMotion": "Suppress all Echo trails and geometric Distortion warp; retain static distortion colour and observable semantic metadata. No generated flash or zoom.",
+                "limitations": "No exact Serato transfer/parameters/order/tail claim; channel knob FX, stems, Deck3/4 and Sampler links are not mapped. Audio graph/output is never mutated by this bridge."
+              },
+              "disposed": false,
+              "backend": "WebGL2"
+            },
+            "master": {
+              "active": [],
+              "policy": {
+                "requirement": "REQ-348",
+                "source": "docs/research/VIDEO_REMAINING_WORKFLOWS.md",
+                "referenceEquivalent": false,
+                "supported": [
+                  "Echo",
+                  "Distortion"
+                ],
+                "mapping": "Original semantic links for exact DJ-FX bank names Echo/Distortion only. No FFT trigger, no aliases/families/31 hidden definitions inferred. Deck1→left,Deck2→right,Master→master once; other assignments are explicitly unsupported.",
+                "order": "Dedicated channel links before ordinary channel slots/overlays; dedicated master links after transition and before master overlays/slots. Independent order, not recovered vendor routing.",
+                "echo": "Three shifted real upstream-frame taps at1T,2T,3T; T=60/BPM*beat*Beat Modify using actual configured audio timing. Depth is wet opacity; Feedback is finite tap decay, not recursive video feedback.16 timestamped frames at up to320x180. Missing past timestamps contribute nothing.",
+                "distortion": "Original static row warp plus Smooth Drive/Hard Clip/Foldback RGB transform; Drive/Character/Tone/depth have declared independent visual mappings.",
+                "lifecycle": "Opt-in off, disabled/zero effect, removal/reassignment/upstream topology changes, source asset/generation changes, backward render time, transport generation/direction/seek discontinuity, pause/stop clear Echo history immediately: no visual tail after bypass. Silence alone never gates a semantic link. Resume captures new history. Timing/amount edits retain real samples; insufficient older history is not fabricated.",
+                "reducedMotion": "Suppress all Echo trails and geometric Distortion warp; retain static distortion colour and observable semantic metadata. No generated flash or zoom.",
+                "limitations": "No exact Serato transfer/parameters/order/tail claim; channel knob FX, stems, Deck3/4 and Sampler links are not mapped. Audio graph/output is never mutated by this bridge."
+              },
+              "disposed": false,
+              "backend": "WebGL2"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "Link OFF restores both ordinary configured Video slots without mutating their parameters",
+      "passed": true,
+      "evidence": {
+        "linkedDifference": 26.337890625,
+        "restoredDifference": 0,
+        "ordinarySlots": [
+          {
+            "name": "Negative",
+            "on": true,
+            "value": 1,
+            "params": {}
+          },
+          {
+            "name": "Gamma",
+            "on": true,
+            "value": 1,
+            "params": {
+              "gamma": 1.7
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "Bridge enable changes video pixels but not measured actual post-master audio amplitude",
+      "passed": false,
+      "error": "Bridge toggle materially changed held audio graph amplitude: {\"off\":0.18563442058983967,\"on\":0.21124724417467844,\"again\":0.21086106766335008}",
+      "stack": "Error: Bridge toggle materially changed held audio graph amplitude: {\"off\":0.18563442058983967,\"on\":0.21124724417467844,\"again\":0.21086106766335008}\n    at assert (http://127.0.0.1:8768/prototype/video-audio-fx-harness.js:4:65)\n    at http://127.0.0.1:8768/prototype/video-audio-fx-harness.js:49:88\n    at async check (http://127.0.0.1:8768/prototype/video-audio-fx-harness.js:17:77)\n    at async runVideoAudioFXChecks (http://127.0.0.1:8768/prototype/video-audio-fx-harness.js:48:5)\n    at async $.onclick (http://127.0.0.1:8768/prototype/video-audio-fx-harness.js:55:133)",
+      "links": {
+        "available": true,
+        "left": [
+          {
+            "id": "0:0",
+            "name": "Distortion",
+            "kind": "distortion",
+            "route": "Deck 1",
+            "target": "left",
+            "amount": 0.6,
+            "bpm": 120,
+            "beats": 0.5,
+            "beatModifier": 1,
+            "delaySeconds": 0.25,
+            "feedback": 0.8,
+            "drive": 0.6,
+            "character": 0.5,
+            "tone": 0,
+            "type": "Smooth Drive",
+            "parameterStatus": "Original visual mapping from current independent audio controls; vendor response unknown."
+          }
+        ],
+        "right": [],
+        "master": [],
+        "unsupported": [],
+        "policy": {
+          "requirement": "REQ-348",
+          "source": "docs/research/VIDEO_REMAINING_WORKFLOWS.md",
+          "referenceEquivalent": false,
+          "supported": [
+            "Echo",
+            "Distortion"
+          ],
+          "mapping": "Original semantic links for exact DJ-FX bank names Echo/Distortion only. No FFT trigger, no aliases/families/31 hidden definitions inferred. Deck1→left,Deck2→right,Master→master once; other assignments are explicitly unsupported.",
+          "order": "Dedicated channel links before ordinary channel slots/overlays; dedicated master links after transition and before master overlays/slots. Independent order, not recovered vendor routing.",
+          "echo": "Three shifted real upstream-frame taps at1T,2T,3T; T=60/BPM*beat*Beat Modify using actual configured audio timing. Depth is wet opacity; Feedback is finite tap decay, not recursive video feedback.16 timestamped frames at up to320x180. Missing past timestamps contribute nothing.",
+          "distortion": "Original static row warp plus Smooth Drive/Hard Clip/Foldback RGB transform; Drive/Character/Tone/depth have declared independent visual mappings.",
+          "lifecycle": "Opt-in off, disabled/zero effect, removal/reassignment/upstream topology changes, source asset/generation changes, backward render time, transport generation/direction/seek discontinuity, pause/stop clear Echo history immediately: no visual tail after bypass. Silence alone never gates a semantic link. Resume captures new history. Timing/amount edits retain real samples; insufficient older history is not fabricated.",
+          "reducedMotion": "Suppress all Echo trails and geometric Distortion warp; retain static distortion colour and observable semantic metadata. No generated flash or zoom.",
+          "limitations": "No exact Serato transfer/parameters/order/tail claim; channel knob FX, stems, Deck3/4 and Sampler links are not mapped. Audio graph/output is never mutated by this bridge."
+        }
+      },
+      "diagnostics": {
+        "width": 96,
+        "height": 64,
+        "disposed": false,
+        "policy": {
+          "order": "Raw input → two channel FX → channel overlays → transition → master overlays → two master FX",
+          "referenceOrder": "Unverified; this is an independent Open Play routing contract.",
+          "scheduling": "Caller supplies one monotonic time/frameId per processed frame; no frame-rate guarantee.",
+          "semanticLinks": "Opt-in exact Echo/Distortion links precede ordinary channel slots; master links follow transition and precede master overlays/slots. Independent policy, not recovered reference routing."
+        },
+        "overlays": {
+          "left": {
+            "rendered": 0,
+            "skipped": []
+          },
+          "right": {
+            "rendered": 0,
+            "skipped": []
+          },
+          "master": {
+            "rendered": 0,
+            "skipped": []
+          }
+        },
+        "audioFXLinks": {
+          "enabled": false,
+          "available": true,
+          "unsupported": [],
+          "targets": {
+            "left": {
+              "active": [],
+              "policy": {
+                "requirement": "REQ-348",
+                "source": "docs/research/VIDEO_REMAINING_WORKFLOWS.md",
+                "referenceEquivalent": false,
+                "supported": [
+                  "Echo",
+                  "Distortion"
+                ],
+                "mapping": "Original semantic links for exact DJ-FX bank names Echo/Distortion only. No FFT trigger, no aliases/families/31 hidden definitions inferred. Deck1→left,Deck2→right,Master→master once; other assignments are explicitly unsupported.",
+                "order": "Dedicated channel links before ordinary channel slots/overlays; dedicated master links after transition and before master overlays/slots. Independent order, not recovered vendor routing.",
+                "echo": "Three shifted real upstream-frame taps at1T,2T,3T; T=60/BPM*beat*Beat Modify using actual configured audio timing. Depth is wet opacity; Feedback is finite tap decay, not recursive video feedback.16 timestamped frames at up to320x180. Missing past timestamps contribute nothing.",
+                "distortion": "Original static row warp plus Smooth Drive/Hard Clip/Foldback RGB transform; Drive/Character/Tone/depth have declared independent visual mappings.",
+                "lifecycle": "Opt-in off, disabled/zero effect, removal/reassignment/upstream topology changes, source asset/generation changes, backward render time, transport generation/direction/seek discontinuity, pause/stop clear Echo history immediately: no visual tail after bypass. Silence alone never gates a semantic link. Resume captures new history. Timing/amount edits retain real samples; insufficient older history is not fabricated.",
+                "reducedMotion": "Suppress all Echo trails and geometric Distortion warp; retain static distortion colour and observable semantic metadata. No generated flash or zoom.",
+                "limitations": "No exact Serato transfer/parameters/order/tail claim; channel knob FX, stems, Deck3/4 and Sampler links are not mapped. Audio graph/output is never mutated by this bridge."
+              },
+              "disposed": false,
+              "backend": "WebGL2"
+            },
+            "right": {
+              "active": [],
+              "policy": {
+                "requirement": "REQ-348",
+                "source": "docs/research/VIDEO_REMAINING_WORKFLOWS.md",
+                "referenceEquivalent": false,
+                "supported": [
+                  "Echo",
+                  "Distortion"
+                ],
+                "mapping": "Original semantic links for exact DJ-FX bank names Echo/Distortion only. No FFT trigger, no aliases/families/31 hidden definitions inferred. Deck1→left,Deck2→right,Master→master once; other assignments are explicitly unsupported.",
+                "order": "Dedicated channel links before ordinary channel slots/overlays; dedicated master links after transition and before master overlays/slots. Independent order, not recovered vendor routing.",
+                "echo": "Three shifted real upstream-frame taps at1T,2T,3T; T=60/BPM*beat*Beat Modify using actual configured audio timing. Depth is wet opacity; Feedback is finite tap decay, not recursive video feedback.16 timestamped frames at up to320x180. Missing past timestamps contribute nothing.",
+                "distortion": "Original static row warp plus Smooth Drive/Hard Clip/Foldback RGB transform; Drive/Character/Tone/depth have declared independent visual mappings.",
+                "lifecycle": "Opt-in off, disabled/zero effect, removal/reassignment/upstream topology changes, source asset/generation changes, backward render time, transport generation/direction/seek discontinuity, pause/stop clear Echo history immediately: no visual tail after bypass. Silence alone never gates a semantic link. Resume captures new history. Timing/amount edits retain real samples; insufficient older history is not fabricated.",
+                "reducedMotion": "Suppress all Echo trails and geometric Distortion warp; retain static distortion colour and observable semantic metadata. No generated flash or zoom.",
+                "limitations": "No exact Serato transfer/parameters/order/tail claim; channel knob FX, stems, Deck3/4 and Sampler links are not mapped. Audio graph/output is never mutated by this bridge."
+              },
+              "disposed": false,
+              "backend": "WebGL2"
+            },
+            "master": {
+              "active": [],
+              "policy": {
+                "requirement": "REQ-348",
+                "source": "docs/research/VIDEO_REMAINING_WORKFLOWS.md",
+                "referenceEquivalent": false,
+                "supported": [
+                  "Echo",
+                  "Distortion"
+                ],
+                "mapping": "Original semantic links for exact DJ-FX bank names Echo/Distortion only. No FFT trigger, no aliases/families/31 hidden definitions inferred. Deck1→left,Deck2→right,Master→master once; other assignments are explicitly unsupported.",
+                "order": "Dedicated channel links before ordinary channel slots/overlays; dedicated master links after transition and before master overlays/slots. Independent order, not recovered vendor routing.",
+                "echo": "Three shifted real upstream-frame taps at1T,2T,3T; T=60/BPM*beat*Beat Modify using actual configured audio timing. Depth is wet opacity; Feedback is finite tap decay, not recursive video feedback.16 timestamped frames at up to320x180. Missing past timestamps contribute nothing.",
+                "distortion": "Original static row warp plus Smooth Drive/Hard Clip/Foldback RGB transform; Drive/Character/Tone/depth have declared independent visual mappings.",
+                "lifecycle": "Opt-in off, disabled/zero effect, removal/reassignment/upstream topology changes, source asset/generation changes, backward render time, transport generation/direction/seek discontinuity, pause/stop clear Echo history immediately: no visual tail after bypass. Silence alone never gates a semantic link. Resume captures new history. Timing/amount edits retain real samples; insufficient older history is not fabricated.",
+                "reducedMotion": "Suppress all Echo trails and geometric Distortion warp; retain static distortion colour and observable semantic metadata. No generated flash or zoom.",
+                "limitations": "No exact Serato transfer/parameters/order/tail claim; channel knob FX, stems, Deck3/4 and Sampler links are not mapped. Audio graph/output is never mutated by this bridge."
+              },
+              "disposed": false,
+              "backend": "WebGL2"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "Explicit reset and disposal release all link state and reject subsequent rendering",
+      "passed": true,
+      "evidence": {
+        "rejected": true
+      }
+    }
+  ],
+  "messages": [],
+  "scope": "Actual AudioEngine/worklet configuration and live signals, original synthetic source canvases, actual WebGL2 pipeline pixels. No native/reference/codec/menu/31-definition acceptance.",
+  "seams": [
+    "Deterministic delay/tail cases supply explicit render timestamps and omit transport clocks; active link descriptors always come from actual engine.configureFX/videoFXLinks.",
+    "Actual transport lifecycle cases explicitly use engine.ctx.currentTime and engine.position on a real BufferSource deck.",
+    "No fake engine/pipeline/renderer, no external media or audible speaker route."
+  ],
+  "passed": 21,
+  "failed": 3,
+  "durationMs": 1162.7999999523163
+}

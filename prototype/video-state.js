@@ -1,3 +1,4 @@
+import { normalizeVideoTreatment } from './video-treatment.js';
 import { videoEffectCatalog } from './video-effects-catalog.js';
 import { videoTransitionCatalog } from './video-transitions.js';
 import { videoOverlayPresetMetadata } from './video-overlays.js';
@@ -70,6 +71,7 @@ function sanitized(value,restore) {
   return {version:1,width:size[0],height:size[1],transition:transitions.has(name) ? name : 'Crossfade',
     cross:clamp(finite(own(value,'cross'),0),-1,1),auto:own(value,'auto') === true,
     linked:typeof own(value,'linked') === 'boolean' ? own(value,'linked') : true,
+    audioFXLink:own(value,'audioFXLink') === true,mediaTreatment:normalizeVideoTreatment(own(value,'mediaTreatment')),
     media:flags('media'),transitionSelection:flags('transitionSelection'),
     fx:Object.fromEntries(targets.map(target => [target,[0,1].map(index => effectSpec(arrayEntry(own(fx,target),index)))])),
     overlays:Object.fromEntries(targets.map(target => [target,arrayValues(own(overlays,target))

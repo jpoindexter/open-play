@@ -1,0 +1,48 @@
+{
+  "scope": "Actual pure semantic planner/engine snapshot and actual mixer with controlled DOM+pipeline; no GPU/browser/File pixel proof.",
+  "passed": 8,
+  "failed": 0,
+  "checks": [
+    {
+      "name": "Engine semantic snapshot reads frozen metadata without touching audio graph collaborators",
+      "passed": true
+    },
+    {
+      "name": "Duplicate destination banks remain ordered distinct slots and Master is represented only once",
+      "passed": true
+    },
+    {
+      "name": "Unsupported routes/names never silently become an active target",
+      "passed": true
+    },
+    {
+      "name": "Duplicate frame IDs cannot duplicate history capture",
+      "passed": true
+    },
+    {
+      "name": "Real Echo history taps use timestamps while timing edits retain captured input",
+      "passed": true
+    },
+    {
+      "name": "Source and transport discontinuities cannot resurrect any old captured timestamp",
+      "passed": true
+    },
+    {
+      "name": "Recreating raw output during readyState2 seek waits without poisoning the pipeline",
+      "passed": true
+    },
+    {
+      "name": "Resize during seek resamples prior decoded raw and defers presentation commit until valid decode",
+      "passed": true,
+      "evidence": {
+        "resampledFromPreviousRaw": true,
+        "retainedPresentationGeneration": 1,
+        "committedPresentationGeneration": 2,
+        "output": [
+          1920,
+          1080
+        ]
+      }
+    }
+  ]
+}

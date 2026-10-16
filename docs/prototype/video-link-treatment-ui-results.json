@@ -1,0 +1,20 @@
+{
+  "scope": "Actual main UI selection and reload persistence only; pixel/coupling behavior requires separate harness evidence.",
+  "treatment": "preserve",
+  "link": true,
+  "status": "640\u00d7360 \u00b7 9 processed frames \u00b7 3.2 ms CPU submission \u00b7 independent GPU algorithms; reference equivalence unverified",
+  "actualMainFile": {
+    "name": "open-play-treatment-4x3.mp4",
+    "bytes": 22142,
+    "sha256": "c66c02c08856cc58df602a3b035e104d83a7033a827fe168be953fc86449c238",
+    "provenance": "Exact original generated4:3 File downloaded from the actual treatment harness. No commercial/vendor media."
+  },
+  "fitControl": {
+    "import": "Actual main Left local video File chooser; source stayed paused.",
+    "preserveScreenshot": "docs/prototype/video-treatment-main-ui-preserve.png",
+    "centerCutScreenshot": "docs/prototype/video-treatment-main-ui-center-cut.png",
+    "observed": "Preserve shows pillarboxes/corner markers; Center-Cut fills width and crops corner markers, with a larger circle. Parent inspected both saved screenshots. Main Video crossfader selected left.",
+    "keyboard": "Home+two ArrowDown locator presses left select value at preserve. Native keyboard option change NOT verified; direct actual selectOption center-cut changed state and visible pixels.",
+    "scope": "Actual UI control path and visual inspection. Numeric pixel/alpha/capture assertions are separately executed in video-treatment-browser-results.json."
+  }
+}

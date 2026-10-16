@@ -1,0 +1,2064 @@
+{
+  "startedAt": "2026-10-16T21:12:43.019Z",
+  "policy": {
+    "evidence": "docs/research/VIDEO_REMAINING_WORKFLOWS.md",
+    "referenceEquivalent": false,
+    "ownership": "Copied session-only CDG bytes/configuration belong to a track ID; every deck owns a private decoder/canvas. Track/profile versions and load generations prevent stale attachment. No bytes, URLs or graphics are persisted.",
+    "clock": "Original engine.position(deck) seconds, clamped below at zero; pause/seek/reverse/loop are handled by the actual decoder replay. Graphics EOF holds the last decoded frame.",
+    "presentation": "Full300x216 by default; optional288x192 crop. Explicit index or alpha-table transparency. All tile channels; no parity repair. No audio start/play command.",
+    "validation": "Real named Blob/File and at least one complete24-byte packet. Unknown/non-graphics/timing packets remain valid timeline data and are diagnosed, not filtered out."
+  },
+  "format": {
+    "packetBytes": 24,
+    "packetsPerSecond": 300,
+    "width": 300,
+    "height": 216,
+    "cropWidth": 288,
+    "cropHeight": 192,
+    "channelPolicy": "all channels",
+    "parityCorrection": false
+  },
+  "checks": [
+    {
+      "name": "Actual engine resumes and original WAV decodes a real440Hz buffer; public fixture downloads retain exact bytes",
+      "passed": true,
+      "evidence": {
+        "sampleRate": 48000,
+        "duration": 4,
+        "channels": 1,
+        "tone440": 0.14999500487467168,
+        "speakerRoute": "analyser disconnected; actual master capture destination remains connected",
+        "downloads": {
+          "ownership": "Original synthetic packets and 440Hz PCM; generated locally, no vendor assets or external media.",
+          "cdg": {
+            "anchor": "download-cdg",
+            "filename": "open-play-karaoke-original.cdg",
+            "bytes": 28800,
+            "mime": "application/octet-stream"
+          },
+          "wav": {
+            "anchor": "download-wav",
+            "filename": "open-play-karaoke-original.wav",
+            "bytes": 128044,
+            "mime": "audio/wav"
+          }
+        }
+      }
+    },
+    {
+      "name": "Actual named CDG File loads asynchronously onto its current audio-track owner without starting audio",
+      "passed": true,
+      "evidence": {
+        "source": "karaoke",
+        "disposed": false,
+        "available": true,
+        "reason": "ready",
+        "trackId": "karaoke-original-fixture",
+        "name": "open-play-karaoke-original.cdg",
+        "assetId": "karaoke:0:1:1",
+        "version": 1,
+        "loading": false,
+        "transparencyProfile": "index",
+        "crop": false,
+        "width": 300,
+        "height": 216,
+        "position": null,
+        "retainedAssociationBytes": 28800,
+        "graphicsStatus": "no-graphics-packets-in-current-prefix",
+        "decoder": {
+          "disposed": false,
+          "transparencyProfile": "index",
+          "channelPolicy": "all channels",
+          "parityCorrection": false,
+          "totalPackets": 1200,
+          "trailingBytes": 0,
+          "packetCursor": 0,
+          "endOfStream": false,
+          "horizontalOffset": 0,
+          "verticalOffset": 0,
+          "decodedPackets": 0,
+          "graphicsPackets": 0,
+          "timingPackets": 0,
+          "unknownCommands": 0,
+          "unknownInstructions": 0,
+          "invalidTiles": 0,
+          "invalidScrollPackets": 0,
+          "invalidScrollFields": 0,
+          "memoryPresets": 0,
+          "memoryRepeatPackets": 0,
+          "tilePackets": 0,
+          "tilePacketsWithChannelBits": 0,
+          "packetsWithParityData": 0,
+          "renderCallsLifetime": 0,
+          "replaysLifetime": 0,
+          "resetsLifetime": 0,
+          "processedPacketsLifetime": 0,
+          "retainedInputBytes": 28800
+        },
+        "policy": {
+          "evidence": "docs/research/VIDEO_REMAINING_WORKFLOWS.md",
+          "referenceEquivalent": false,
+          "ownership": "Copied session-only CDG bytes/configuration belong to a track ID; every deck owns a private decoder/canvas. Track/profile versions and load generations prevent stale attachment. No bytes, URLs or graphics are persisted.",
+          "clock": "Original engine.position(deck) seconds, clamped below at zero; pause/seek/reverse/loop are handled by the actual decoder replay. Graphics EOF holds the last decoded frame.",
+          "presentation": "Full300x216 by default; optional288x192 crop. Explicit index or alpha-table transparency. All tile channels; no parity repair. No audio start/play command.",
+          "validation": "Real named Blob/File and at least one complete24-byte packet. Unknown/non-graphics/timing packets remain valid timeline data and are diagnosed, not filtered out."
+        }
+      }
+    },
+    {
+      "name": "Paused time0 and initial palette/tile pixels match a fresh decoder through the real GPU mixer",
+      "passed": true,
+      "evidence": {
+        "zero": {
+          "label": "Time0",
+          "enginePosition": 0,
+          "sampledPosition": 0,
+          "assetId": "karaoke:0:1:1",
+          "profile": "index",
+          "crop": false,
+          "source": [
+            300,
+            216
+          ],
+          "packetCursor": 1,
+          "difference": 0,
+          "points": [
+            {
+              "x": 10,
+              "y": 10,
+              "actual": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "expected": [
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "x": 150,
+              "y": 100,
+              "actual": [
+                0,
+                0,
+                0,
+                255
+              ],
+              "expected": [
+                0,
+                0,
+                0,
+                255
+              ]
+            },
+            {
+              "x": 320,
+              "y": 180,
+              "actual": [
+                0,
+                0,
+                0,
+                255
+              ],
+              "expected": [
+                0,
+                0,
+                0,
+                255
+              ]
+            },
+            {
+              "x": 489,
+              "y": 280,
+              "actual": [
+                0,
+                0,
+                0,
+                255
+              ],
+              "expected": [
+                0,
+                0,
+                0,
+                255
+              ]
+            }
+          ],
+          "hash": "b4cef8c5"
+        },
+        "initial": {
+          "label": "Initial marker",
+          "enginePosition": 0.2,
+          "sampledPosition": 0.2,
+          "assetId": "karaoke:0:1:1",
+          "profile": "index",
+          "crop": false,
+          "source": [
+            300,
+            216
+          ],
+          "packetCursor": 61,
+          "difference": 0,
+          "points": [
+            {
+              "x": 10,
+              "y": 10,
+              "actual": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "expected": [
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "x": 150,
+              "y": 100,
+              "actual": [
+                255,
+                0,
+                0,
+                255
+              ],
+              "expected": [
+                255,
+                0,
+                0,
+                255
+              ]
+            },
+            {
+              "x": 320,
+              "y": 180,
+              "actual": [
+                255,
+                255,
+                255,
+                255
+              ],
+              "expected": [
+                255,
+                255,
+                255,
+                255
+              ]
+            },
+            {
+              "x": 489,
+              "y": 280,
+              "actual": [
+                255,
+                0,
+                0,
+                255
+              ],
+              "expected": [
+                255,
+                0,
+                0,
+                255
+              ]
+            }
+          ],
+          "hash": "d034b935"
+        }
+      }
+    },
+    {
+      "name": "Actual audio BufferSource advances karaoke past the0.5s marker while manual video linking is off",
+      "passed": true,
+      "evidence": {
+        "label": "Real playback",
+        "enginePosition": 0.718,
+        "sampledPosition": 0.7126666666666666,
+        "assetId": "karaoke:0:1:1",
+        "profile": "index",
+        "crop": false,
+        "source": [
+          300,
+          216
+        ],
+        "packetCursor": 214,
+        "difference": 0,
+        "points": [
+          {
+            "x": 10,
+            "y": 10,
+            "actual": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "expected": [
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "x": 150,
+            "y": 100,
+            "actual": [
+              0,
+              255,
+              0,
+              255
+            ],
+            "expected": [
+              0,
+              255,
+              0,
+              255
+            ]
+          },
+          {
+            "x": 320,
+            "y": 180,
+            "actual": [
+              255,
+              255,
+              255,
+              255
+            ],
+            "expected": [
+              255,
+              255,
+              255,
+              255
+            ]
+          },
+          {
+            "x": 489,
+            "y": 280,
+            "actual": [
+              0,
+              255,
+              0,
+              255
+            ],
+            "expected": [
+              0,
+              255,
+              0,
+              255
+            ]
+          }
+        ],
+        "hash": "cdebe495"
+      }
+    },
+    {
+      "name": "Actual engine pause holds exact karaoke pixels across additional renders",
+      "passed": true,
+      "evidence": {
+        "a": {
+          "label": "Paused first",
+          "enginePosition": 0.7286666666666666,
+          "sampledPosition": 0.7286666666666666,
+          "assetId": "karaoke:0:1:1",
+          "profile": "index",
+          "crop": false,
+          "source": [
+            300,
+            216
+          ],
+          "packetCursor": 219,
+          "difference": 0,
+          "points": [
+            {
+              "x": 10,
+              "y": 10,
+              "actual": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "expected": [
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "x": 150,
+              "y": 100,
+              "actual": [
+                0,
+                255,
+                0,
+                255
+              ],
+              "expected": [
+                0,
+                255,
+                0,
+                255
+              ]
+            },
+            {
+              "x": 320,
+              "y": 180,
+              "actual": [
+                255,
+                255,
+                255,
+                255
+              ],
+              "expected": [
+                255,
+                255,
+                255,
+                255
+              ]
+            },
+            {
+              "x": 489,
+              "y": 280,
+              "actual": [
+                0,
+                255,
+                0,
+                255
+              ],
+              "expected": [
+                0,
+                255,
+                0,
+                255
+              ]
+            }
+          ],
+          "hash": "cdebe495"
+        },
+        "b": {
+          "label": "Paused again",
+          "enginePosition": 0.7286666666666666,
+          "sampledPosition": 0.7286666666666666,
+          "assetId": "karaoke:0:1:1",
+          "profile": "index",
+          "crop": false,
+          "source": [
+            300,
+            216
+          ],
+          "packetCursor": 219,
+          "difference": 0,
+          "points": [
+            {
+              "x": 10,
+              "y": 10,
+              "actual": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "expected": [
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "x": 150,
+              "y": 100,
+              "actual": [
+                0,
+                255,
+                0,
+                255
+              ],
+              "expected": [
+                0,
+                255,
+                0,
+                255
+              ]
+            },
+            {
+              "x": 320,
+              "y": 180,
+              "actual": [
+                255,
+                255,
+                255,
+                255
+              ],
+              "expected": [
+                255,
+                255,
+                255,
+                255
+              ]
+            },
+            {
+              "x": 489,
+              "y": 280,
+              "actual": [
+                0,
+                255,
+                0,
+                255
+              ],
+              "expected": [
+                0,
+                255,
+                0,
+                255
+              ]
+            }
+          ],
+          "hash": "cdebe495"
+        }
+      }
+    },
+    {
+      "name": "Actual engine forward/backward seeks replay CDG packets and exact letterboxed pixels",
+      "passed": true,
+      "evidence": {
+        "forward": {
+          "label": "Seek forward",
+          "enginePosition": 1.2,
+          "sampledPosition": 1.2,
+          "assetId": "karaoke:0:1:1",
+          "profile": "index",
+          "crop": false,
+          "source": [
+            300,
+            216
+          ],
+          "packetCursor": 361,
+          "difference": 0,
+          "points": [
+            {
+              "x": 10,
+              "y": 10,
+              "actual": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "expected": [
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "x": 150,
+              "y": 100,
+              "actual": [
+                0,
+                0,
+                255,
+                255
+              ],
+              "expected": [
+                0,
+                0,
+                255,
+                255
+              ]
+            },
+            {
+              "x": 320,
+              "y": 180,
+              "actual": [
+                255,
+                255,
+                255,
+                255
+              ],
+              "expected": [
+                255,
+                255,
+                255,
+                255
+              ]
+            },
+            {
+              "x": 489,
+              "y": 280,
+              "actual": [
+                0,
+                0,
+                255,
+                255
+              ],
+              "expected": [
+                0,
+                0,
+                255,
+                255
+              ]
+            }
+          ],
+          "hash": "20e66235"
+        },
+        "backward": {
+          "label": "Seek backward",
+          "enginePosition": 0.2,
+          "sampledPosition": 0.2,
+          "assetId": "karaoke:0:1:1",
+          "profile": "index",
+          "crop": false,
+          "source": [
+            300,
+            216
+          ],
+          "packetCursor": 61,
+          "difference": 0,
+          "points": [
+            {
+              "x": 10,
+              "y": 10,
+              "actual": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "expected": [
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "x": 150,
+              "y": 100,
+              "actual": [
+                255,
+                0,
+                0,
+                255
+              ],
+              "expected": [
+                255,
+                0,
+                0,
+                255
+              ]
+            },
+            {
+              "x": 320,
+              "y": 180,
+              "actual": [
+                255,
+                255,
+                255,
+                255
+              ],
+              "expected": [
+                255,
+                255,
+                255,
+                255
+              ]
+            },
+            {
+              "x": 489,
+              "y": 280,
+              "actual": [
+                255,
+                0,
+                0,
+                255
+              ],
+              "expected": [
+                255,
+                0,
+                0,
+                255
+              ]
+            }
+          ],
+          "hash": "d034b935"
+        }
+      }
+    },
+    {
+      "name": "Actual reverse BufferSource drives decreasing original-track seconds and fresh-decoder pixel replay",
+      "passed": true,
+      "evidence": {
+        "before": {
+          "label": "Reverse before",
+          "enginePosition": 0.85,
+          "sampledPosition": 0.85,
+          "assetId": "karaoke:0:1:1",
+          "profile": "index",
+          "crop": false,
+          "source": [
+            300,
+            216
+          ],
+          "packetCursor": 256,
+          "difference": 0,
+          "points": [
+            {
+              "x": 10,
+              "y": 10,
+              "actual": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "expected": [
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "x": 150,
+              "y": 100,
+              "actual": [
+                0,
+                255,
+                0,
+                255
+              ],
+              "expected": [
+                0,
+                255,
+                0,
+                255
+              ]
+            },
+            {
+              "x": 320,
+              "y": 180,
+              "actual": [
+                255,
+                255,
+                255,
+                255
+              ],
+              "expected": [
+                255,
+                255,
+                255,
+                255
+              ]
+            },
+            {
+              "x": 489,
+              "y": 280,
+              "actual": [
+                0,
+                255,
+                0,
+                255
+              ],
+              "expected": [
+                0,
+                255,
+                0,
+                255
+              ]
+            }
+          ],
+          "hash": "cdebe495"
+        },
+        "after": {
+          "label": "Reverse after",
+          "enginePosition": 0.33466666666666656,
+          "sampledPosition": 0.3453333333333334,
+          "assetId": "karaoke:0:1:1",
+          "profile": "index",
+          "crop": false,
+          "source": [
+            300,
+            216
+          ],
+          "packetCursor": 104,
+          "difference": 0,
+          "points": [
+            {
+              "x": 10,
+              "y": 10,
+              "actual": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "expected": [
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "x": 150,
+              "y": 100,
+              "actual": [
+                255,
+                0,
+                0,
+                255
+              ],
+              "expected": [
+                255,
+                0,
+                0,
+                255
+              ]
+            },
+            {
+              "x": 320,
+              "y": 180,
+              "actual": [
+                255,
+                255,
+                255,
+                255
+              ],
+              "expected": [
+                255,
+                255,
+                255,
+                255
+              ]
+            },
+            {
+              "x": 489,
+              "y": 280,
+              "actual": [
+                255,
+                0,
+                0,
+                255
+              ],
+              "expected": [
+                255,
+                0,
+                0,
+                255
+              ]
+            }
+          ],
+          "hash": "d034b935"
+        }
+      }
+    },
+    {
+      "name": "Actual engine audio loop wrap replays karaoke graphics at the wrapped track position",
+      "passed": true,
+      "evidence": {
+        "before": {
+          "label": "Loop before",
+          "enginePosition": 0.6506666666666666,
+          "sampledPosition": 0.65,
+          "assetId": "karaoke:0:1:1",
+          "profile": "index",
+          "crop": false,
+          "source": [
+            300,
+            216
+          ],
+          "packetCursor": 196,
+          "difference": 0,
+          "points": [
+            {
+              "x": 10,
+              "y": 10,
+              "actual": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "expected": [
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "x": 150,
+              "y": 100,
+              "actual": [
+                0,
+                255,
+                0,
+                255
+              ],
+              "expected": [
+                0,
+                255,
+                0,
+                255
+              ]
+            },
+            {
+              "x": 320,
+              "y": 180,
+              "actual": [
+                255,
+                255,
+                255,
+                255
+              ],
+              "expected": [
+                255,
+                255,
+                255,
+                255
+              ]
+            },
+            {
+              "x": 489,
+              "y": 280,
+              "actual": [
+                0,
+                255,
+                0,
+                255
+              ],
+              "expected": [
+                0,
+                255,
+                0,
+                255
+              ]
+            }
+          ],
+          "hash": "f6f4d235"
+        },
+        "after": {
+          "label": "Loop after",
+          "enginePosition": 0.11066666666666672,
+          "sampledPosition": 0.1053333333333333,
+          "assetId": "karaoke:0:1:1",
+          "profile": "index",
+          "crop": false,
+          "source": [
+            300,
+            216
+          ],
+          "packetCursor": 32,
+          "difference": 0,
+          "points": [
+            {
+              "x": 10,
+              "y": 10,
+              "actual": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "expected": [
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "x": 150,
+              "y": 100,
+              "actual": [
+                255,
+                0,
+                0,
+                255
+              ],
+              "expected": [
+                255,
+                0,
+                0,
+                255
+              ]
+            },
+            {
+              "x": 320,
+              "y": 180,
+              "actual": [
+                255,
+                51,
+                51,
+                255
+              ],
+              "expected": [
+                255,
+                51,
+                51,
+                255
+              ]
+            },
+            {
+              "x": 489,
+              "y": 280,
+              "actual": [
+                255,
+                0,
+                0,
+                255
+              ],
+              "expected": [
+                255,
+                0,
+                0,
+                255
+              ]
+            }
+          ],
+          "hash": "a0fb481"
+        }
+      }
+    },
+    {
+      "name": "Manual left crossfade remains independent of the audio crossfader while karaoke follows engine seconds",
+      "passed": true,
+      "evidence": {
+        "label": "Manual left while audio right",
+        "enginePosition": 0.2,
+        "sampledPosition": 0.2,
+        "assetId": "karaoke:0:1:1",
+        "profile": "index",
+        "crop": false,
+        "source": [
+          300,
+          216
+        ],
+        "packetCursor": 61,
+        "difference": 0,
+        "points": [
+          {
+            "x": 10,
+            "y": 10,
+            "actual": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "expected": [
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "x": 150,
+            "y": 100,
+            "actual": [
+              255,
+              0,
+              0,
+              255
+            ],
+            "expected": [
+              255,
+              0,
+              0,
+              255
+            ]
+          },
+          {
+            "x": 320,
+            "y": 180,
+            "actual": [
+              255,
+              255,
+              255,
+              255
+            ],
+            "expected": [
+              255,
+              255,
+              255,
+              255
+            ]
+          },
+          {
+            "x": 489,
+            "y": 280,
+            "actual": [
+              255,
+              0,
+              0,
+              255
+            ],
+            "expected": [
+              255,
+              0,
+              0,
+              255
+            ]
+          }
+        ],
+        "hash": "d034b935"
+      }
+    },
+    {
+      "name": "Explicit index and alpha-table profiles produce distinct actual alpha and reset source identity",
+      "passed": true,
+      "evidence": {
+        "index": {
+          "label": "Index profile",
+          "enginePosition": 0.9,
+          "sampledPosition": 0.9,
+          "assetId": "karaoke:0:2:1",
+          "profile": "index",
+          "crop": false,
+          "source": [
+            300,
+            216
+          ],
+          "packetCursor": 271,
+          "difference": 0,
+          "points": [
+            {
+              "x": 10,
+              "y": 10,
+              "actual": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "expected": [
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "x": 150,
+              "y": 100,
+              "actual": [
+                0,
+                255,
+                0,
+                255
+              ],
+              "expected": [
+                0,
+                255,
+                0,
+                255
+              ]
+            },
+            {
+              "x": 320,
+              "y": 180,
+              "actual": [
+                255,
+                255,
+                255,
+                255
+              ],
+              "expected": [
+                255,
+                255,
+                255,
+                255
+              ]
+            },
+            {
+              "x": 489,
+              "y": 280,
+              "actual": [
+                0,
+                255,
+                0,
+                255
+              ],
+              "expected": [
+                0,
+                255,
+                0,
+                255
+              ]
+            }
+          ],
+          "hash": "cdebe495"
+        },
+        "alpha": {
+          "label": "Alpha table",
+          "enginePosition": 0.9,
+          "sampledPosition": 0.9,
+          "assetId": "karaoke:0:3:1",
+          "profile": "alpha-table",
+          "crop": false,
+          "source": [
+            300,
+            216
+          ],
+          "packetCursor": 271,
+          "difference": 0,
+          "points": [
+            {
+              "x": 10,
+              "y": 10,
+              "actual": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "expected": [
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "x": 150,
+              "y": 100,
+              "actual": [
+                0,
+                255,
+                0,
+                127
+              ],
+              "expected": [
+                0,
+                255,
+                0,
+                127
+              ]
+            },
+            {
+              "x": 320,
+              "y": 180,
+              "actual": [
+                255,
+                255,
+                255,
+                255
+              ],
+              "expected": [
+                255,
+                255,
+                255,
+                255
+              ]
+            },
+            {
+              "x": 489,
+              "y": 280,
+              "actual": [
+                0,
+                255,
+                0,
+                127
+              ],
+              "expected": [
+                0,
+                255,
+                0,
+                127
+              ]
+            }
+          ],
+          "hash": "6e9bb965"
+        }
+      }
+    },
+    {
+      "name": "Actual optional crop uses288x192 source and creates a new source identity",
+      "passed": true,
+      "evidence": {
+        "label": "Cropped",
+        "enginePosition": 0.9,
+        "sampledPosition": 0.9,
+        "assetId": "karaoke:0:4:1",
+        "profile": "index",
+        "crop": true,
+        "source": [
+          288,
+          192
+        ],
+        "packetCursor": 271,
+        "difference": 0,
+        "points": [
+          {
+            "x": 10,
+            "y": 10,
+            "actual": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "expected": [
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "x": 150,
+            "y": 100,
+            "actual": [
+              0,
+              255,
+              0,
+              255
+            ],
+            "expected": [
+              0,
+              255,
+              0,
+              255
+            ]
+          },
+          {
+            "x": 320,
+            "y": 180,
+            "actual": [
+              255,
+              255,
+              255,
+              255
+            ],
+            "expected": [
+              255,
+              255,
+              255,
+              255
+            ]
+          },
+          {
+            "x": 489,
+            "y": 280,
+            "actual": [
+              0,
+              255,
+              0,
+              255
+            ],
+            "expected": [
+              0,
+              255,
+              0,
+              255
+            ]
+          }
+        ],
+        "hash": "a710dbd5"
+      }
+    },
+    {
+      "name": "Reloading the actual File and changing deck load generation each create a fresh source identity",
+      "passed": true,
+      "evidence": {
+        "before": {
+          "label": "Before reload",
+          "enginePosition": 0.9,
+          "sampledPosition": 0.9,
+          "assetId": "karaoke:0:4:1",
+          "profile": "index",
+          "crop": true,
+          "source": [
+            288,
+            192
+          ],
+          "packetCursor": 271,
+          "difference": 0,
+          "points": [
+            {
+              "x": 10,
+              "y": 10,
+              "actual": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "expected": [
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "x": 150,
+              "y": 100,
+              "actual": [
+                0,
+                255,
+                0,
+                255
+              ],
+              "expected": [
+                0,
+                255,
+                0,
+                255
+              ]
+            },
+            {
+              "x": 320,
+              "y": 180,
+              "actual": [
+                255,
+                255,
+                255,
+                255
+              ],
+              "expected": [
+                255,
+                255,
+                255,
+                255
+              ]
+            },
+            {
+              "x": 489,
+              "y": 280,
+              "actual": [
+                0,
+                255,
+                0,
+                255
+              ],
+              "expected": [
+                0,
+                255,
+                0,
+                255
+              ]
+            }
+          ],
+          "hash": "a710dbd5"
+        },
+        "reload": {
+          "label": "Reloaded",
+          "enginePosition": 0.9,
+          "sampledPosition": 0.9,
+          "assetId": "karaoke:0:5:1",
+          "profile": "index",
+          "crop": false,
+          "source": [
+            300,
+            216
+          ],
+          "packetCursor": 271,
+          "difference": 0,
+          "points": [
+            {
+              "x": 10,
+              "y": 10,
+              "actual": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "expected": [
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "x": 150,
+              "y": 100,
+              "actual": [
+                0,
+                255,
+                0,
+                255
+              ],
+              "expected": [
+                0,
+                255,
+                0,
+                255
+              ]
+            },
+            {
+              "x": 320,
+              "y": 180,
+              "actual": [
+                255,
+                255,
+                255,
+                255
+              ],
+              "expected": [
+                255,
+                255,
+                255,
+                255
+              ]
+            },
+            {
+              "x": 489,
+              "y": 280,
+              "actual": [
+                0,
+                255,
+                0,
+                255
+              ],
+              "expected": [
+                0,
+                255,
+                0,
+                255
+              ]
+            }
+          ],
+          "hash": "cdebe495"
+        },
+        "generation": {
+          "label": "New deck generation",
+          "enginePosition": 0.9,
+          "sampledPosition": 0.9,
+          "assetId": "karaoke:0:5:2",
+          "profile": "index",
+          "crop": false,
+          "source": [
+            300,
+            216
+          ],
+          "packetCursor": 271,
+          "difference": 0,
+          "points": [
+            {
+              "x": 10,
+              "y": 10,
+              "actual": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "expected": [
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "x": 150,
+              "y": 100,
+              "actual": [
+                0,
+                255,
+                0,
+                255
+              ],
+              "expected": [
+                0,
+                255,
+                0,
+                255
+              ]
+            },
+            {
+              "x": 320,
+              "y": 180,
+              "actual": [
+                255,
+                255,
+                255,
+                255
+              ],
+              "expected": [
+                255,
+                255,
+                255,
+                255
+              ]
+            },
+            {
+              "x": 489,
+              "y": 280,
+              "actual": [
+                0,
+                255,
+                0,
+                255
+              ],
+              "expected": [
+                0,
+                255,
+                0,
+                255
+              ]
+            }
+          ],
+          "hash": "cdebe495"
+        }
+      }
+    },
+    {
+      "name": "Real asynchronous CDG File read loses ownership when deck load generation changes before completion",
+      "passed": true,
+      "evidence": {
+        "rejected": true,
+        "before": 5,
+        "diagnostics": {
+          "source": "karaoke",
+          "disposed": false,
+          "available": true,
+          "reason": "ready",
+          "trackId": "karaoke-original-fixture",
+          "name": "open-play-karaoke-original.cdg",
+          "assetId": null,
+          "version": 5,
+          "loading": false,
+          "transparencyProfile": "index",
+          "crop": false,
+          "width": 300,
+          "height": 216,
+          "position": null,
+          "retainedAssociationBytes": 28800,
+          "graphicsStatus": "not-rendered",
+          "decoder": null,
+          "policy": {
+            "evidence": "docs/research/VIDEO_REMAINING_WORKFLOWS.md",
+            "referenceEquivalent": false,
+            "ownership": "Copied session-only CDG bytes/configuration belong to a track ID; every deck owns a private decoder/canvas. Track/profile versions and load generations prevent stale attachment. No bytes, URLs or graphics are persisted.",
+            "clock": "Original engine.position(deck) seconds, clamped below at zero; pause/seek/reverse/loop are handled by the actual decoder replay. Graphics EOF holds the last decoded frame.",
+            "presentation": "Full300x216 by default; optional288x192 crop. Explicit index or alpha-table transparency. All tile channels; no parity repair. No audio start/play command.",
+            "validation": "Real named Blob/File and at least one complete24-byte packet. Unknown/non-graphics/timing packets remain valid timeline data and are diagnosed, not filtered out."
+          }
+        },
+        "frame": {
+          "label": "After canceled generation",
+          "enginePosition": 0.9,
+          "sampledPosition": 0.9,
+          "assetId": "karaoke:0:5:3",
+          "profile": "index",
+          "crop": false,
+          "source": [
+            300,
+            216
+          ],
+          "packetCursor": 271,
+          "difference": 0,
+          "points": [
+            {
+              "x": 10,
+              "y": 10,
+              "actual": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "expected": [
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "x": 150,
+              "y": 100,
+              "actual": [
+                0,
+                255,
+                0,
+                255
+              ],
+              "expected": [
+                0,
+                255,
+                0,
+                255
+              ]
+            },
+            {
+              "x": 320,
+              "y": 180,
+              "actual": [
+                255,
+                255,
+                255,
+                255
+              ],
+              "expected": [
+                255,
+                255,
+                255,
+                255
+              ]
+            },
+            {
+              "x": 489,
+              "y": 280,
+              "actual": [
+                0,
+                255,
+                0,
+                255
+              ],
+              "expected": [
+                0,
+                255,
+                0,
+                255
+              ]
+            }
+          ],
+          "hash": "cdebe495"
+        }
+      }
+    },
+    {
+      "name": "Changing the actual track owner detaches old graphics and clearing cancels an in-flight real File read",
+      "passed": true,
+      "evidence": {
+        "missing": {
+          "source": "karaoke",
+          "disposed": false,
+          "available": false,
+          "reason": "missing-pair",
+          "trackId": "karaoke-other-owner",
+          "name": null,
+          "assetId": null,
+          "version": null,
+          "loading": false,
+          "transparencyProfile": "index",
+          "crop": false,
+          "width": null,
+          "height": null,
+          "position": null,
+          "retainedAssociationBytes": 0,
+          "graphicsStatus": "not-rendered",
+          "decoder": null,
+          "policy": {
+            "evidence": "docs/research/VIDEO_REMAINING_WORKFLOWS.md",
+            "referenceEquivalent": false,
+            "ownership": "Copied session-only CDG bytes/configuration belong to a track ID; every deck owns a private decoder/canvas. Track/profile versions and load generations prevent stale attachment. No bytes, URLs or graphics are persisted.",
+            "clock": "Original engine.position(deck) seconds, clamped below at zero; pause/seek/reverse/loop are handled by the actual decoder replay. Graphics EOF holds the last decoded frame.",
+            "presentation": "Full300x216 by default; optional288x192 crop. Explicit index or alpha-table transparency. All tile channels; no parity repair. No audio start/play command.",
+            "validation": "Real named Blob/File and at least one complete24-byte packet. Unknown/non-graphics/timing packets remain valid timeline data and are diagnosed, not filtered out."
+          }
+        },
+        "canceledByClear": true,
+        "cleared": {
+          "source": "karaoke",
+          "disposed": false,
+          "available": false,
+          "reason": "missing-pair",
+          "trackId": "karaoke-other-owner",
+          "name": null,
+          "assetId": null,
+          "version": null,
+          "loading": false,
+          "transparencyProfile": "index",
+          "crop": false,
+          "width": null,
+          "height": null,
+          "position": null,
+          "retainedAssociationBytes": 0,
+          "graphicsStatus": "not-rendered",
+          "decoder": null,
+          "policy": {
+            "evidence": "docs/research/VIDEO_REMAINING_WORKFLOWS.md",
+            "referenceEquivalent": false,
+            "ownership": "Copied session-only CDG bytes/configuration belong to a track ID; every deck owns a private decoder/canvas. Track/profile versions and load generations prevent stale attachment. No bytes, URLs or graphics are persisted.",
+            "clock": "Original engine.position(deck) seconds, clamped below at zero; pause/seek/reverse/loop are handled by the actual decoder replay. Graphics EOF holds the last decoded frame.",
+            "presentation": "Full300x216 by default; optional288x192 crop. Explicit index or alpha-table transparency. All tile channels; no parity repair. No audio start/play command.",
+            "validation": "Real named Blob/File and at least one complete24-byte packet. Unknown/non-graphics/timing packets remain valid timeline data and are diagnosed, not filtered out."
+          }
+        },
+        "restored": {
+          "label": "Original owner restored",
+          "enginePosition": 0.9,
+          "sampledPosition": 0.9,
+          "assetId": "karaoke:0:6:5",
+          "profile": "index",
+          "crop": false,
+          "source": [
+            300,
+            216
+          ],
+          "packetCursor": 271,
+          "difference": 0,
+          "points": [
+            {
+              "x": 10,
+              "y": 10,
+              "actual": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "expected": [
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "x": 150,
+              "y": 100,
+              "actual": [
+                0,
+                255,
+                0,
+                255
+              ],
+              "expected": [
+                0,
+                255,
+                0,
+                255
+              ]
+            },
+            {
+              "x": 320,
+              "y": 180,
+              "actual": [
+                255,
+                255,
+                255,
+                255
+              ],
+              "expected": [
+                255,
+                255,
+                255,
+                255
+              ]
+            },
+            {
+              "x": 489,
+              "y": 280,
+              "actual": [
+                0,
+                255,
+                0,
+                255
+              ],
+              "expected": [
+                0,
+                255,
+                0,
+                255
+              ]
+            }
+          ],
+          "hash": "cdebe495"
+        }
+      }
+    },
+    {
+      "name": "Actual unnamed Blob and truncated named File are rejected without replacing valid graphics",
+      "passed": true,
+      "evidence": {
+        "errors": [
+          "CDG file needs a name.",
+          "CDG pair needs at least one complete24-byte packet."
+        ],
+        "version": 6
+      }
+    },
+    {
+      "name": "Actual GPU karaoke output and real master440Hz audio record into a video container",
+      "passed": true,
+      "evidence": {
+        "bytes": 36362,
+        "mime": "video/webm;codecs=vp9,opus",
+        "elapsedMs": 1436.7000000476837,
+        "processedFrames": 41,
+        "audioTracks": [
+          {
+            "readyState": "live",
+            "kind": "audio"
+          }
+        ],
+        "claim": "Short real capture; requested30fps is not sustained frame-rate proof."
+      }
+    },
+    {
+      "name": "Recorded karaoke container actually decodes changing graphics and the original white marker",
+      "passed": true,
+      "evidence": {
+        "first": {
+          "mediaTime": 0,
+          "presentedFrames": 1,
+          "width": 640,
+          "height": 360
+        },
+        "later": {
+          "mediaTime": 0.568,
+          "presentedFrames": 16,
+          "width": 640,
+          "height": 360
+        },
+        "width": 640,
+        "height": 360,
+        "readyState": 4,
+        "muted": true,
+        "whiteMarkerPixels": [
+          7452,
+          7499
+        ],
+        "hashes": [
+          "eb14eae",
+          "a31abefb"
+        ]
+      }
+    },
+    {
+      "name": "Recorded container audio actually decodes the real440Hz engine tone with nonzero RMS",
+      "passed": true,
+      "evidence": {
+        "sampleRate": 48000,
+        "channels": 2,
+        "duration": 1.38,
+        "rms": 0.04675437624718196,
+        "tone440": 0.06629768954044013,
+        "tone880": 0.000002736968075167109,
+        "claim": "Actual audio decode from the recorded video container, not input-track presence."
+      }
+    },
+    {
+      "name": "Clear and mixer disposal release current karaoke bytes/identity and reject further real loads",
+      "passed": true,
+      "evidence": {
+        "cleared": {
+          "source": "karaoke",
+          "disposed": false,
+          "available": false,
+          "reason": "missing-pair",
+          "trackId": "karaoke-original-fixture",
+          "name": null,
+          "assetId": null,
+          "version": null,
+          "loading": false,
+          "transparencyProfile": "index",
+          "crop": false,
+          "width": null,
+          "height": null,
+          "position": null,
+          "retainedAssociationBytes": 0,
+          "graphicsStatus": "not-rendered",
+          "decoder": null,
+          "policy": {
+            "evidence": "docs/research/VIDEO_REMAINING_WORKFLOWS.md",
+            "referenceEquivalent": false,
+            "ownership": "Copied session-only CDG bytes/configuration belong to a track ID; every deck owns a private decoder/canvas. Track/profile versions and load generations prevent stale attachment. No bytes, URLs or graphics are persisted.",
+            "clock": "Original engine.position(deck) seconds, clamped below at zero; pause/seek/reverse/loop are handled by the actual decoder replay. Graphics EOF holds the last decoded frame.",
+            "presentation": "Full300x216 by default; optional288x192 crop. Explicit index or alpha-table transparency. All tile channels; no parity repair. No audio start/play command.",
+            "validation": "Real named Blob/File and at least one complete24-byte packet. Unknown/non-graphics/timing packets remain valid timeline data and are diagnosed, not filtered out."
+          }
+        },
+        "disposed": {
+          "source": "karaoke",
+          "disposed": true,
+          "available": false,
+          "reason": "disposed",
+          "retainedAssociationBytes": 0,
+          "policy": {
+            "evidence": "docs/research/VIDEO_REMAINING_WORKFLOWS.md",
+            "referenceEquivalent": false,
+            "ownership": "Copied session-only CDG bytes/configuration belong to a track ID; every deck owns a private decoder/canvas. Track/profile versions and load generations prevent stale attachment. No bytes, URLs or graphics are persisted.",
+            "clock": "Original engine.position(deck) seconds, clamped below at zero; pause/seek/reverse/loop are handled by the actual decoder replay. Graphics EOF holds the last decoded frame.",
+            "presentation": "Full300x216 by default; optional288x192 crop. Explicit index or alpha-table transparency. All tile channels; no parity repair. No audio start/play command.",
+            "validation": "Real named Blob/File and at least one complete24-byte packet. Unknown/non-graphics/timing packets remain valid timeline data and are diagnosed, not filtered out."
+          }
+        },
+        "newLoadRejected": true
+      }
+    }
+  ],
+  "notifications": [],
+  "fixtures": {
+    "ownership": "Original synthetic packets and 440Hz PCM; generated locally, no vendor assets or external media.",
+    "cdg": {
+      "anchor": "download-cdg",
+      "filename": "open-play-karaoke-original.cdg",
+      "bytes": 28800,
+      "mime": "application/octet-stream"
+    },
+    "wav": {
+      "anchor": "download-wav",
+      "filename": "open-play-karaoke-original.wav",
+      "bytes": 128044,
+      "mime": "audio/wav"
+    }
+  },
+  "seams": [
+    "Actual imported AudioEngine, mixer, bridge and decoder; original WAV decoded into the real engine BufferSource buffer map. No fake clock or decoder.",
+    "Expected image is a fresh public CDG decoder rendered independently into Canvas2D and letterboxed; this verifies bridge timing/routing, not decoder specification correctness.",
+    "Actual CDG File cancellation uses ordinary asynchronous File.arrayBuffer and a synchronous ownership change; no mocked read delays.",
+    "Main media-library import and physical audible/video sync are separate parent UI/device checks."
+  ],
+  "capture": {
+    "bytes": 36362,
+    "mime": "video/webm;codecs=vp9,opus",
+    "elapsedMs": 1436.7000000476837,
+    "processedFrames": 41,
+    "audioTracks": [
+      {
+        "readyState": "live",
+        "kind": "audio"
+      }
+    ],
+    "claim": "Short real capture; requested30fps is not sustained frame-rate proof."
+  },
+  "replay": {
+    "first": {
+      "mediaTime": 0,
+      "presentedFrames": 1,
+      "width": 640,
+      "height": 360
+    },
+    "later": {
+      "mediaTime": 0.568,
+      "presentedFrames": 16,
+      "width": 640,
+      "height": 360
+    },
+    "width": 640,
+    "height": 360,
+    "readyState": 4,
+    "muted": true,
+    "whiteMarkerPixels": [
+      7452,
+      7499
+    ],
+    "hashes": [
+      "eb14eae",
+      "a31abefb"
+    ]
+  },
+  "passed": 19,
+  "failed": 0,
+  "durationMs": 3844.899999856949,
+  "scope": "Executed browser result only after Run. No native/reference equivalence, selective channels, parity repair, media-library import, device sync or sustained30fps acceptance."
+}

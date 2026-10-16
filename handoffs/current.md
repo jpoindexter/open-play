@@ -15,7 +15,10 @@ record/replay also ran. Read `docs/prototype/VIDEO_FUNCTIONAL_REVIEW.md` and the
 linked audio/karaoke/Media reviews for exact scope and retained failures.
 
 **Full parity NOT PASSED; no native app until Jason approves a revision.**
-The active goal continues. Next: semantic audio-FX/Video links and remaining Video controls/output, then
+The active goal continues. Semantic links24/24 and treatment21/21 now execute; current regression suites pass.
+Read docs/prototype/VIDEO_LINK_TREATMENT_REVIEW.md. Working inventory110/507.
+Next: remaining Video controls/quality/window/output, then
 remaining reference, library, conditional, hardware and provider gaps. No automatic
 Claude completeness-audit launch. Conditional Cloud Code/Fable debugging assistance
-is authorized if Codex gets stuck; verify the actual app/model before using it.
+was used for a separate reference-research session with actual Fable5.1/High.
+Read approvals.md; this does not launch the full audit or grant native approval.
