@@ -624,7 +624,7 @@ Maintain ADRs and a change log. Any new feature receives an ID, reference/eviden
 - [ ] Clean-machine build/install and license/provenance report recorded.
 - [ ] Public release occurs only after explicit approval; published state independently verified.
 
-**Next exact step:** extend the 60 interaction requirements to the remaining source/control states, complete expansion-specific catalogs and resolve the device input-capture discrepancy. Reconcile the parity gate before HTML implementation. Native coding remains prohibited.
+**Next exact step:** extend the 344 interaction requirements to the remaining source/control states, complete expansion-specific catalogs and resolve the device input-capture discrepancy. Reconcile the parity gate before HTML implementation. Native coding remains prohibited.
 
 ## 19. Methods applied
 
@@ -639,9 +639,9 @@ Skill sweep (`use`); product-prd and product-roadmap via `pm`; Jobs To Be Done a
 | Private resources | GitHub repository and private Trello board exist; 110 feature cards plus prototype/native gates and evidence card read back | Keep remote research updates synchronized; never mark feature acceptance from source indexing |
 | Binary investigation | Ghidra auto-analysis completed; CoreMIDI input callback registration and selected source connection cross-checked with LLVM | Manufacturer dispatch, audio scheduling and hidden algorithms remain unresolved |
 | Reference UI | Eight Setup tabs, all five display layouts, empty sampler, Scratch Banks and Flip strip inspected | Loaded/playing/failed states, full FX parameters, video and hardware-dependent controls |
-| Effects | 59 named effects across eight categories; LPF/Delay/Reverb advanced parameters inspected | Remaining parameter menus/ranges and independent audible tests |
+| Effects | 59 named effects across eight categories; LPF/Delay/Reverb/Wah Filter advanced parameters inspected | Remaining parameter menus/ranges and independent audible tests |
 | Source traceability | All 168 main-manual articles explicitly mapped to feature IDs; 87 feature groups have exact article links | Semantic review, expansion/hardware sources and historical-version conflicts |
-| Interaction contract | 60 explicit trigger/result requirements with evidence boundaries and inherited model routing | Expand to all discovered controls and state transitions before prototype gate pass |
+| Interaction contract | 344 explicit trigger/result requirements with evidence boundaries and inherited model routing | Expand to all discovered controls and state transitions before prototype gate pass |
 | Hercules input | USB/audio/MIDI enumeration; Jason reports browser selection moves in Serato | Physical source capture still zero; both virtual receiver tests pass |
 | Hardware output | Four CoreAudio output channels and connected speakers/headphones reported | Separate physical master/headphone, LED, latency and reconnect acceptance not executed |
 | Prototype/native | Neither implementation has started | Inventory gate, then full HTML prototype, then Jason's explicit native approval |
@@ -650,4 +650,20 @@ Read the [manual crosswalk](docs/research/MANUAL_FEATURE_CROSSWALK.md), [interac
 
 New scope discoveries are retained under existing feature IDs pending decomposition: Twitch song/artist metadata reporting under AUD-007/SYS-009, External Control activation/device lists under HW-001/UI-010, and Remote/Remote Mini retirement under SYS-010. Their existence is recorded, but exact protocol and historical behavior remain open. No discovered feature should disappear merely because it is absent from the main manual.
 
-Trello source-link synchronization has 26 exact descriptions verified by readback and 61 pending updates after repeated HTTP 429 responses and a transport failure. Completed updates and pending jobs are retained in docs/delivery/trello-source-sync.json; do not assume all remote descriptions already contain the newer crosswalk. The canonical local feature registry remains current.
+Trello source-link synchronization has 59 exact descriptions verified by readback and 28 pending updates after repeated HTTP 429 responses and a transport failure. Completed updates and pending jobs are retained in docs/delivery/trello-source-sync.json; do not assume all remote descriptions already contain the newer crosswalk. The canonical local feature registry remains current.
+
+
+### Specification checkpoint: expansion and source reconciliation
+
+The interaction specification now contains 344 unique requirements, each with a source, feature ID, trigger/result contract, evidence class and both developer model/effort recommendations. It includes library and analysis, decks and loops, sync and grids, stems and sampler, recording and MIDI, preferences, Video Output/Control, Flip, Pitch Play, Scratch Banks and T10-specific Stem Slip. Native acceptance remains blocked on prototype approval.
+
+[Source conflicts](docs/research/SOURCE_CONFLICTS.md) records 13 unresolved discrepancies or underspecified behaviors. [Historical gating](docs/research/HISTORICAL_GATING.md) separates the confirmed FX-engine version transition from the unproven claim of lost device entitlement, and states the account-free, no-local-feature-paywall requirement.
+
+Jason approved fully inventoried, labeled documented/simulated states for unavailable hardware, provider accounts and audio algorithms, and reinforced that everything Serato DJ Pro does remains in scope. This changes the evidence boundary, not feature coverage. The inventory gate remains open; this checkpoint does not declare 1:1 behavior or authorize native work.
+
+
+### Full-scope requirement reinforced
+
+Jason explicitly requires everything Serato DJ Pro does. The [full-scope contract](docs/research/FULL_SCOPE_CONTRACT.md) prevents silent omissions and defines per-feature completeness. [Feature coverage accountability](docs/research/FEATURE_COVERAGE.md) retains every current group, its requirement count, acceptance criterion and model routing. There are now 344 requirements, including separate entries for all 59 named DJ effects and provider-specific workflows. This remains incomplete research, not an implemented parity claim.
+
+Spotify crate support is documented from 4.0.4, superseding older blanket restrictions. Current Beatsource/Beatport sources document migration and metadata handling. Keep provider capabilities versioned; their quotas and access requirements do not become local Open Play feature gates. Four FX parameter strips have been observed; the other 55 remain explicitly unobserved.

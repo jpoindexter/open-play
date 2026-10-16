@@ -55,3 +55,12 @@ Updated 2026-10-16. Reference: Serato DJ Pro 4.0.10, build 4.0.10.213. This is a
 4. Observe connected-controller input and master/headphone paths with the user's participation, without altering firmware or mappings.
 5. Compare each screen/state/shortcut to the reference and record unavailable states individually.
 6. Keep every unresolved parity item visible. A screen mockup or a source-code dependency is not device compatibility.
+
+## Additional observations, 16 October 2026
+
+| ID | Class | Claim | Source | Limitation |
+|---|---|---|---|---|
+| E026 | OBSERVED | Video enable/disable, Output menus and Control panel | Installed 4.0.10.213; details in UI_OBSERVATIONS.md | Original disabled setting restored. Video processing, Effects/Info tabs and recording untested |
+| E027 | OBSERVED | Wah Filter parameter labels and displayed values; LPF restored afterward | UI_OBSERVATIONS.md | No DSP, range or default proof; no playback started |
+| E028 | DOCUMENTED | Spotify crate membership from 4.0.4 and Beatsource migration require provider-specific workflows | INTERACTION_REQUIREMENTS.md, provider support URLs | No provider account login or playback executed |
+| E029 | USER-AUTHORIZED | Fully inventoried labeled simulations permitted; all Serato DJ Pro functionality remains in scope | docs/approvals.md | No native approval and no waiver of missing feature inventory |

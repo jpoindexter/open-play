@@ -27,3 +27,6 @@ Reference: installed Serato DJ Pro 4.0.10.213, with Desktop installers 4.0.9 and
 Findings distinguish observed behavior, file evidence, official documentation, inference, proposals and unknowns. Device enumeration and source inspection are not complete hardware compatibility. The original 74 proposed feature groups have expanded to 110; that count is not an assertion that the reference has exactly 110 features or that parity is verified.
 
 Raw binaries, extracted slices, disassembly, private library data, screenshots and vendor article bodies stay outside Git under ignored `local-evidence/`. The repository contains original plans/findings, public-source metadata and read-only diagnostic tooling.
+
+- [Full-scope contract](docs/research/FULL_SCOPE_CONTRACT.md)
+- [Feature coverage accountability](docs/research/FEATURE_COVERAGE.md)

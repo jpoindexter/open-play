@@ -81,3 +81,29 @@ These observations establish labels and current values, not parameter limits, fa
 - The display menu contains Vertical, Horizontal, Extended, Stack and Library. Horizontal, Extended and Stack were selected and visually verified, supplementing the earlier Vertical and Library observations.
 - Horizontal places large decks on either side of central horizontal waveforms. Extended places compact decks across the top with wide waveforms underneath. Stack puts compact deck information at the left of each horizontal waveform row. The Flip strip remains between the decks/waveforms and library in these observed configurations.
 - The connected two-deck controller does not establish the four-deck layout. Four-deck selection and active-deck switching remain separately documented requirements.
+
+## Video settings inspection
+
+2026-10-16, installed 4.0.10.213 and existing trial. Enable Serato Video was initially off. It was temporarily enabled to inspect settings and then restored to off, with the unchecked checkbox and hidden settings verified in a fresh screenshot. No playback, recording, overlay save, media association or parameter change was performed. Setup was subsequently closed.
+
+Enabling exposed Output, Control, Effects and Info subtabs. Output and Control were inspected. Repeated Effects/Info navigation attempts did not change the displayed tab, including a process-targeted mouse-event attempt; those screens remain unobserved. Do not infer their contents from a historical manual.
+
+| Output control | Observed choices/current value | Boundary |
+|---|---|---|
+| Window Aspect Ratio | No Constraints (selected), 16:9, 4:3 | Menu opened; no alternative selected |
+| Output Quality | Poor, Low, Medium (selected), High, Best | Quality/render cost unmeasured |
+| Recording Quality | 360p, 480p (selected), 720p, 1080p | No recording created |
+| Arrangement | Normal (Output) (selected), Left-Right, Left-Output-Right | Compositor behavior untested |
+| Media Treatment | Preserve (selected), Stretch, Center-Cut, Letterbox | Crop/scale behavior untested |
+| V-Sync / Frame Blending | Both unchecked | No frame-rate evaluation |
+| Buffer Size | Slider labeled 200Mb, 1Gb, 2Gb | Exact current bytes and slider step unknown |
+| Delay Compensation | 0 ms with knob and decrement/increment buttons | Range and processing untested |
+
+Control exposes Auto Crossfade Speed slider, Contour Faders (unchecked), and Cursors Crossfade Video (unchecked). Numeric speed mapping and contour behavior remain unknown.
+
+The official support article 'Using Serato Video in Demo Mode' links to a Video 1.1 PDF at `https://serato.com/downloads/files/95193/Serato%2BVideo%2BUser%2BManual%2B1.1.pdf`; this returned HTTP 404. Its Scratch Live/ITCH installation instructions are historical and must not replace current installed behavior. Current codec support guidance also explicitly warns that support varies by OS and software version: https://support.serato.com/hc/en-us/articles/202305724-Serato-Video-supported-formats-and-codecs.
+
+
+## Additional FX selector check
+
+Opened the first left-unit effect selector while both decks remained paused, selected the next entry with Down/Return, and observed Wah Filter parameters: Resonance 8.00, Range 4.00 octaves, LFO Depth 0%, Rate 2. These are observed session values, not bounds or defaults. Restored LPF with Up/Return and verified its name and original parameter values. No effect was enabled and no parameter knob was adjusted. Four of 59 advanced parameter strips now have direct observations; 55 remain unobserved.

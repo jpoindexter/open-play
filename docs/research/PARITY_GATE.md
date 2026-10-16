@@ -7,7 +7,7 @@ Jason requires 1:1 feature coverage before prototype implementation. The invento
 ## Current coverage
 
 - 168 official manual articles across 23 sections, all explicitly mapped to feature IDs; semantic review remains open.
-- 60 selected interaction requirements have explicit triggers, expected outcomes and evidence boundaries.
+- 344 selected interaction requirements have explicit triggers, expected outcomes and evidence boundaries.
 - 74 initial feature groups plus 36 research additions, each with explicit Codex/Claude model and effort recommendations.
 - Installed reference pinned to 4.0.10.213, with executable and installer hashes.
 - All five display layouts and all eight Setup tabs observed; connected Hercules enumerated through USB, audio and MIDI interfaces.
@@ -18,7 +18,7 @@ Jason requires 1:1 feature coverage before prototype implementation. The invento
 | ID | Gap | Why it matters | Evidence needed to close |
 |---|---|---|---|
 | PG-01 | Full control/state crosswalk not yet reviewed | 110 broad groups do not guarantee every secondary action is covered | Article-level and screen-level requirements mapped to feature IDs, with omissions reviewed |
-| PG-02 | Navigation blocker resolved; screen coverage still partial | All eight Setup tabs, three advanced FX parameter strips, empty sampler and Scratch Banks are observed | User-authorized JXA/CoreGraphics navigation works with fresh screenshot verification. Complete remaining screen/state observations in UI_OBSERVATIONS.md |
+| PG-02 | Navigation blocker resolved; screen coverage still partial | All eight Setup tabs, four advanced FX parameter strips, empty sampler and Scratch Banks are observed | User-authorized JXA/CoreGraphics navigation works with fresh screenshot verification. Complete remaining screen/state observations in UI_OBSERVATIONS.md |
 | PG-03 | Device-specific binary trace incomplete | Ghidra pass and CoreMIDI call sites are now established, but manufacturer dispatch and audio paths remain unresolved | Continue from retained call sites into mapping/capability decisions, preserving decompiler limitations |
 | PG-04 | Hercules physical input/output tests pending | Enumeration is not input, feedback or separate headphone/master proof | Browser action is user-confirmed in Serato, but raw capture remains unresolved despite passing virtual-source and destination self-tests; complete correlated controls and separate physical outputs |
 | PG-05 | Exact advanced FX/video/Flip/streaming/Phase behavior incomplete | A generic panel would conceal parity gaps | Version-appropriate expansion sources and observable states; unavailable conditions explicitly marked |
@@ -34,3 +34,8 @@ If a strict 1:1 requirement cannot be established because the reference state is
 ## Approval boundary
 
 The user has authorized investigation, private project resources and an HTML prototype after this inventory gate. No native implementation is authorized until the specific prototype version is approved. Prototype approval, when obtained, must be recorded in docs/approvals.md.
+
+
+### Approved prototype evidence boundary
+
+Jason explicitly approved representing unavailable physical/DSP/provider behaviors as labeled documented simulations after inventory. He reinforced full feature scope. This permits simulation without claiming physical proof; it does not close incomplete control or feature enumeration. See [source conflicts](SOURCE_CONFLICTS.md) and [historical gating evidence](HISTORICAL_GATING.md).
