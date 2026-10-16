@@ -82,3 +82,12 @@ visible control/persistence path; graph audio is covered separately above. Both 
 remained paused.
 
 ![Current prototype with saved Multi Tap controls](dsp-continuation-main-ui.png)
+
+## Selected-stem transport follow-up
+
+The independent Stem Slip implementation passes30/30 actual browser audio checks,
+30/30 kernel/engine-boundary checks and19/19 controller lifecycle checks. Real main
+controls prepared SCNet audio, preserved focus, performed quick/held scratch-release
+and rejoined while armed; playback was explicitly paused. See
+[STEM_SLIP_FUNCTIONAL_REVIEW.md](STEM_SLIP_FUNCTIONAL_REVIEW.md) for full evidence,
+retained failures and T10/reference/combined-workflow/resource limits.

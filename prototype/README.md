@@ -68,3 +68,10 @@ or a drop into Prepared stems. Cancellation preserves the original audio. All pa
 require the documented local service/model setup; a visible control is not proof of
 reference-equivalent behavior. The latest measured paths and failures remain in the
 DSP continuation report.
+
+Stem Slip now uses actual independent selected/backing PCM transport. Open Stems,
+select Vocal or Instrumental, choose a release length, then use the scratch range
+or hold a cue. The mode remains armed after release. Run
+`stem-slip-integration-test.html` for 30 actual audio/controller checks. Read
+`../docs/prototype/STEM_SLIP_FUNCTIONAL_REVIEW.md` for independent policies, retained
+failures, resource bounds and unverified T10/reference/combined workflows.

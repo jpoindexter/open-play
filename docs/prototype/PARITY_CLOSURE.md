@@ -45,3 +45,9 @@ the frozen runtime passed a fresh 220-control run and the current 20/20 integrat
 baseline. See `fx-adversarial-browser-results.json`. The next Stem Slip contract
 must distinguish latched independent stem transport from temporary isolation and
 retain the conflict between official quickstart and hardware-manual descriptions.
+
+Current continuation: Stem Slip now has30/30 actual browser audio checks,19/19
+controller lifecycle checks and main-interface preparation/scratch/release/rejoin
+evidence. See STEM_SLIP_FUNCTIONAL_REVIEW.md. Exact T10/vendor and combined-workflow
+acceptance remain open. Next: actual Video processing and six-slot routing from the
+recovered catalog, then remaining library/conditional/hardware/provider gaps.

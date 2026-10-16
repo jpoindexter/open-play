@@ -7138,24 +7138,26 @@
       "trigger": "Select 0, 1/2, 1, 2 or 4 beats then release action",
       "expected": "Apply selected roll before return to ongoing timeline; T10-specific reference, not proven on Inpulse 300 MK2",
       "evidence": "DOCUMENTED; installed behavior untested",
-      "prototype_behavior": "Implement specified fixture transition; identify simulation and unresolved reference states",
+      "prototype_behavior": "Independent browser selected-stem transport implemented and tested; exact vendor conflict/policies remain open. See STEM_SLIP_FUNCTIONAL_REVIEW.md.",
       "native_status": "blocked_until_prototype_approval",
       "acceptance": "Select 0, 1/2, 1, 2 or 4 beats then release action \u2192 Apply selected roll before return to ongoing timeline; T10-specific reference, not proven on Inpulse 300 MK2",
       "source_url": "https://support.serato.com/hc/en-us/articles/17616872214799-Hercules-DJControl-T10-Quickstart-Guide-for-Serato-DJ-Pro",
       "routing": {
         "codex": {
-          "model": "gpt-6-astra",
+          "model": "gpt-6.1-sol",
           "effort": "high"
         },
         "claude_code": {
           "model": "claude-opus-5",
           "effort": "high"
         },
-        "rationale": "DSP and transport require numerical reasoning backed by measurements.",
+        "rationale": "Routine implementation and lifecycle tests use Sol/high; escalate a bounded unresolved DSP/state dispute to Astra/high with measured evidence.",
         "primary": "Codex",
         "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
         "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
-      }
+      },
+      "implementation_evidence": "docs/prototype/STEM_SLIP_FUNCTIONAL_REVIEW.md",
+      "reference_status": "exact_T10_runtime_unverified; SC-12_open"
     },
     {
       "id": "REQ-266",
@@ -7165,25 +7167,27 @@
       "trigger": "Hold Slip with Vocal or Instrumental and release",
       "expected": "Serato quickstart describes temporary isolation/muting and full-track restoration on release; the Hercules manual instead documents a latched selected-stem transport mode. Retain both documented branches until exact-runtime testing resolves SC-12.",
       "evidence": "CONFLICTING PRIMARY DOCUMENTATION; installed T10 behavior untested",
-      "prototype_behavior": "No mute-only or momentary fixture counts as full Stem Slip. See STEM_SLIP_EVALUATION.md and REQ-493\u2013495.",
+      "prototype_behavior": "Independent browser selected-stem transport implemented and tested; exact vendor conflict/policies remain open. See STEM_SLIP_FUNCTIONAL_REVIEW.md.",
       "native_status": "blocked_until_prototype_approval",
       "acceptance": "Compare button release, scratch release and separate mode-disable events on T10/4.0.10.213; record initial masks and both documented branches.",
       "source_url": "https://support.serato.com/hc/en-us/articles/17616872214799-Hercules-DJControl-T10-Quickstart-Guide-for-Serato-DJ-Pro",
       "routing": {
         "codex": {
-          "model": "gpt-6-astra",
+          "model": "gpt-6.1-sol",
           "effort": "high"
         },
         "claude_code": {
           "model": "claude-opus-5",
           "effort": "high"
         },
-        "rationale": "DSP and transport require numerical reasoning backed by measurements.",
+        "rationale": "Routine implementation and lifecycle tests use Sol/high; escalate a bounded unresolved DSP/state dispute to Astra/high with measured evidence.",
         "primary": "Codex",
         "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
         "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
       },
-      "source_conflict": "SC-12"
+      "source_conflict": "SC-12",
+      "implementation_evidence": "docs/prototype/STEM_SLIP_FUNCTIONAL_REVIEW.md",
+      "reference_status": "exact_T10_runtime_unverified; SC-12_open"
     },
     {
       "id": "REQ-267",
@@ -13541,27 +13545,29 @@
       "trigger": "Hold Slip, press Vocal or Instrumental, then release both buttons; separately press Slip",
       "expected": "Both lights remain on after chord release; separate Slip press disables the mode. Hardware-manual procedure conflicts with quickstart release wording.",
       "evidence": "DOCUMENTED official hardware manual; exact installed behavior untested",
-      "prototype_behavior": "Actual independent stem transport and scoped UI/audio acceptance required; not implemented by a mute-only fixture.",
+      "prototype_behavior": "Independent browser selected-stem transport implemented and tested; exact vendor conflict/policies remain open. See STEM_SLIP_FUNCTIONAL_REVIEW.md.",
       "native_status": "blocked_until_prototype_approval",
       "acceptance": "Execute trigger with distinguishable stem markers; record selected and complementary clocks/audio plus release/cancellation behavior.",
       "source_url": "https://ts.hercules.com/download/sound/manuals/DJC_T10/HERCULES_DJC_T10_USER_MANUAL_-_EN_FR_DE_NL_IT_ES_PT_PL_JP_CNM_KO.pdf",
       "routing": {
         "codex": {
-          "model": "gpt-6-astra",
+          "model": "gpt-6.1-sol",
           "effort": "high"
         },
         "claude_code": {
           "model": "claude-opus-5",
           "effort": "high"
         },
-        "rationale": "DSP and transport require numerical reasoning backed by measurements.",
+        "rationale": "Routine implementation and lifecycle tests use Sol/high; escalate a bounded unresolved DSP/state dispute to Astra/high with measured evidence.",
         "primary": "Codex",
         "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
         "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
       },
       "source_conflict": "SC-12",
       "source_page": "printed38/PDF39",
-      "reviewed": "2026-10-16"
+      "reviewed": "2026-10-16",
+      "implementation_evidence": "docs/prototype/STEM_SLIP_FUNCTIONAL_REVIEW.md",
+      "reference_status": "exact_T10_runtime_unverified; SC-12_open"
     },
     {
       "id": "REQ-494",
@@ -13571,27 +13577,29 @@
       "trigger": "Scratch or trigger hot cues with Stem Slip selected",
       "expected": "Selected stem responds to performance manipulation while complementary stems keep playing on their own timeline; release of scratching realigns the selected stem. Exact cue release and initial-mask policy remain unmeasured.",
       "evidence": "DOCUMENTED official hardware manual; exact installed behavior untested",
-      "prototype_behavior": "Actual independent stem transport and scoped UI/audio acceptance required; not implemented by a mute-only fixture.",
+      "prototype_behavior": "Independent browser selected-stem transport implemented and tested; exact vendor conflict/policies remain open. See STEM_SLIP_FUNCTIONAL_REVIEW.md.",
       "native_status": "blocked_until_prototype_approval",
       "acceptance": "Execute trigger with distinguishable stem markers; record selected and complementary clocks/audio plus release/cancellation behavior.",
       "source_url": "https://ts.hercules.com/download/sound/manuals/DJC_T10/HERCULES_DJC_T10_USER_MANUAL_-_EN_FR_DE_NL_IT_ES_PT_PL_JP_CNM_KO.pdf",
       "routing": {
         "codex": {
-          "model": "gpt-6-astra",
+          "model": "gpt-6.1-sol",
           "effort": "high"
         },
         "claude_code": {
           "model": "claude-opus-5",
           "effort": "high"
         },
-        "rationale": "DSP and transport require numerical reasoning backed by measurements.",
+        "rationale": "Routine implementation and lifecycle tests use Sol/high; escalate a bounded unresolved DSP/state dispute to Astra/high with measured evidence.",
         "primary": "Codex",
         "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
         "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
       },
       "source_conflict": "SC-12",
       "source_page": "printed39/PDF40; Serato4.0.10 release copy",
-      "reviewed": "2026-10-16"
+      "reviewed": "2026-10-16",
+      "implementation_evidence": "docs/prototype/STEM_SLIP_FUNCTIONAL_REVIEW.md",
+      "reference_status": "exact_T10_runtime_unverified; SC-12_open"
     },
     {
       "id": "REQ-495",
@@ -13601,27 +13609,29 @@
       "trigger": "Select Vocal Stem Slip, move crossfader during vocal manipulation",
       "expected": "The vocal follows the deck/crossfader while instrumental continues at normal speed independently of crossfader. Instrumental-mode symmetry and other mixer stages remain unverified.",
       "evidence": "DOCUMENTED official hardware manual; exact installed behavior untested",
-      "prototype_behavior": "Actual independent stem transport and scoped UI/audio acceptance required; not implemented by a mute-only fixture.",
+      "prototype_behavior": "Independent browser selected-stem transport implemented and tested; exact vendor conflict/policies remain open. See STEM_SLIP_FUNCTIONAL_REVIEW.md.",
       "native_status": "blocked_until_prototype_approval",
       "acceptance": "Execute trigger with distinguishable stem markers; record selected and complementary clocks/audio plus release/cancellation behavior.",
       "source_url": "https://ts.hercules.com/download/sound/manuals/DJC_T10/HERCULES_DJC_T10_USER_MANUAL_-_EN_FR_DE_NL_IT_ES_PT_PL_JP_CNM_KO.pdf",
       "routing": {
         "codex": {
-          "model": "gpt-6-astra",
+          "model": "gpt-6.1-sol",
           "effort": "high"
         },
         "claude_code": {
           "model": "claude-opus-5",
           "effort": "high"
         },
-        "rationale": "DSP and transport require numerical reasoning backed by measurements.",
+        "rationale": "Routine implementation and lifecycle tests use Sol/high; escalate a bounded unresolved DSP/state dispute to Astra/high with measured evidence.",
         "primary": "Codex",
         "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
         "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
       },
       "source_conflict": "SC-12",
       "source_page": "printed39/PDF40",
-      "reviewed": "2026-10-16"
+      "reviewed": "2026-10-16",
+      "implementation_evidence": "docs/prototype/STEM_SLIP_FUNCTIONAL_REVIEW.md",
+      "reference_status": "exact_T10_runtime_unverified; SC-12_open"
     }
   ]
 }

@@ -3,6 +3,7 @@ import { prepareExtendedEffects } from "./extended-effects.js";
 import { KeylockRenderer } from "./keylock.js";
 import { prepareStemHistory, createStemHistory } from "./stem-history.js";
 import { createStemExitFX } from "./stem-exit-fx.js";
+import { prepareStemSlip, createStemSlipTransport } from "./stem-slip.js";
 export class AudioEngine {
   constructor() {
     this.ctx = null;
@@ -30,6 +31,10 @@ export class AudioEngine {
     this.fxChains = [];
     this.fxState = null;
     this.channelFXType = "Filter";
+    this.stemSlipTracks = new Map();
+    this.stemSlipOwners = new Map();
+    this.stemSlipPending = new Map();
+    this.stemSlipRateTokens = new Map();
   }
   init() {
     if (this.ctx) return;
@@ -37,6 +42,7 @@ export class AudioEngine {
     this.effectsReady = Promise.all([
       prepareExtendedEffects(this.ctx),
       prepareStemHistory(this.ctx),
+      prepareStemSlip(this.ctx),
     ]).then(() => {
       this.effectsPrepared = true;
     });
@@ -139,6 +145,11 @@ export class AudioEngine {
     return b;
   }
   position(d) {
+    const split = this.voices.get(d.index)?.stemSlipTransport;
+    if (split) return split.state().position;
+    const pending = this.stemSlipPending.get(d.index);
+    if (pending && pending.track === d.track && !pending.controller.signal.aborted)
+      return this.stemSlipClockPosition(pending.clock, d.track.duration, this.ctx?.currentTime || 0);
     if (!d.playing || !this.ctx) return d.position;
     let p =
       d.anchorPosition +
@@ -155,6 +166,7 @@ export class AudioEngine {
   stopSource(i, { preserveStemExit = false } = {}) {
     const source = this.voices.get(i);
     if (source) {
+      source.stemSlipTransport?.dispose();
       for (const item of source.sources || [source]) {
         item.onended = null;
         try {
@@ -191,6 +203,20 @@ export class AudioEngine {
           ? "Provider playback is simulated; choose a local track."
           : "File missing. Relocate or re-import this track.",
       );
+    if (d.stemSlip && d.stemSlip !== "off") {
+      if (this.stemSlipTracks.get(d.index) !== d.track) {
+        d.stemSlip = "off"; d.stemSlipPhase = "idle";
+        this.stemSlipOwners.delete(d.index);
+      } else {
+        const transport = this.voices.get(d.index)?.stemSlipTransport;
+        if (transport) {
+          await transport.command("play", {startAt: this.ctx.currentTime + .01});
+          d.playing = true;
+          return;
+        }
+        return this.startStemSlip(d, true);
+      }
+    }
     this.deckStates.set(d.index, d);
     this.transforms.get(d.index)?.abort();
     const controller = new AbortController();
@@ -252,15 +278,15 @@ export class AudioEngine {
       const voice = sources[0];
       voice.sources = sources;
       voice.timelineScale = scale;
+      const stemState = stems ? this.ensureStemState(d) : null;
       voice.stemGains = stems
-        ? sources.map(() => {
+        ? sources.map((_, index) => {
             const gain = this.ctx.createGain();
             gain.gain.value = 0;
-            gain.connect(this.nodes[d.index].input);
+            gain.connect(index === 0 ? this.nodes[d.index].input : stemState.routes[index - 1]);
             return gain;
           })
         : [];
-      const stemState = stems ? this.ensureStemState(d) : null;
       sources.forEach((source, i) => {
         if (stemState && i > 0) {
           source.connect(stemState.histories[i - 1].node);
@@ -271,6 +297,7 @@ export class AudioEngine {
           );
       });
       this.voices.set(d.index, voice);
+      this.setCross(this.cross);
       if (stems) this.updateStems(d);
       const when = this.ctx.currentTime + 0.01;
       d.anchorPosition = d.position;
@@ -307,15 +334,27 @@ export class AudioEngine {
   }
 
   pause(d, { preserveStemExit = false } = {}) {
+    const position = this.position(d);
+    this.stemSlipRateTokens.set(d.index, (this.stemSlipRateTokens.get(d.index) || 0) + 1);
     this.transforms.get(d.index)?.abort();
     this.transforms.delete(d.index);
     d.processing = false;
     this.startTokens.set(d.index, (this.startTokens.get(d.index) || 0) + 1);
-    d.position = this.position(d);
+    d.position = position;
     d.playing = false;
+    d.stemSlipPhase = "idle";
+    this.stemSlipOwners.delete(d.index);
     this.stopSource(d.index, { preserveStemExit });
   }
   async seek(d, p) {
+    if (d.stemSlip && d.stemSlip !== "off") {
+      const was = d.playing || d.processing;
+      this.pause(d, {preserveStemExit: true});
+      d.position = Math.max(0, Math.min(d.track.duration, p));
+      if (d.position >= d.track.duration) { d.stemSlip = "off"; return; }
+      if (was) await this.start(d);
+      return;
+    }
     const was = d.playing || d.processing;
     this.pause(d, { preserveStemExit: true });
     d.position = Math.max(0, Math.min(d.track?.duration || 48, p));
@@ -323,6 +362,39 @@ export class AudioEngine {
       await this.start(d);
   }
   async setRate(d, rate) {
+    if (d.stemSlip && d.stemSlip !== "off") {
+      const pending = this.stemSlipPending.get(d.index);
+      if (pending?.committing) {
+        const track = d.track, mode = d.stemSlip;
+        await pending.promise;
+        if (d.track === track && d.stemSlip === mode) return this.setRate(d, rate);
+        return;
+      }
+      const token = (this.stemSlipRateTokens.get(d.index) || 0) + 1;
+      this.stemSlipRateTokens.set(d.index, token);
+      const track = d.track, mode = d.stemSlip;
+      d.position = this.position(d); d.rate = rate;
+      const transport = this.voices.get(d.index)?.stemSlipTransport;
+      const current = () => this.stemSlipRateTokens.get(d.index) === token &&
+        d.track === track && d.stemSlip === mode &&
+        (!transport || this.voices.get(d.index)?.stemSlipTransport === transport);
+      if (pending && !transport) {
+        pending.revision++; pending.preparation?.abort();
+        await pending.promise;
+      } else if (transport && (d.keylock || d.keyShift)) await this.refreshStemSlipBuffers(d);
+      else if (transport) await transport.command("rate", {rate, bpm: d.track.bpm || 120});
+      if (!current()) return;
+      if (this.nodes[d.index]) {
+        this.nodes[d.index].channelBpm = (d.track.bpm || 120) * rate;
+        await this.applyChannelFX(d.index);
+      }
+      if (!current()) return;
+      if (this.fxState) {
+        this.fxState[2][d.index] = (d.track.bpm || 120) * rate;
+        this.configureFX(...this.fxState);
+      }
+      return;
+    }
     const p = this.position(d);
     if (d.slipOrigin) {
       d.slipOrigin.position +=
@@ -351,6 +423,14 @@ export class AudioEngine {
     }
   }
   async setLoop(d, on, start, end) {
+    if (d.stemSlip && d.stemSlip !== "off") {
+      d.loop = on; d.loopIn = start; d.loopOut = end;
+      if (on) {
+        await this.beginStemSlipGesture(d, "transport:loop");
+        await this.voices.get(d.index)?.stemSlipTransport.command("loop", {owner: "transport:loop", start, end});
+      } else await this.endStemSlipGesture(d, "transport:loop");
+      return;
+    }
     d.position = this.position(d);
     d.loop = on;
     d.loopIn = start;
@@ -377,10 +457,16 @@ export class AudioEngine {
           i % 2 ? Math.min(1, 1 + this.cross) : Math.min(1, 1 - this.cross),
         n = this.nodes[i];
       n.gain.gain.setTargetAtTime(
-        side * n.level * n.trim,
+        (this.voices.get(i)?.stemSlipTransport ? 1 : side) * n.level * n.trim,
         this.ctx.currentTime,
         0.01,
       );
+      const split = this.voices.get(i)?.stemSlipTransport;
+      const mode = this.deckStates.get(i)?.stemSlip;
+      this.stemStates.get(i)?.routes.forEach((route, stem) => {
+        const selected = mode === "vocal" ? stem === 0 : stem > 0;
+        route.gain.setTargetAtTime(split && selected ? side : 1, this.ctx.currentTime, .003);
+      });
     }
   }
   mix(i, kind, value) {
@@ -583,6 +669,20 @@ export class AudioEngine {
     return out;
   }
   async setPitch(d, { keylock = d.keylock, semitones = d.keyShift || 0 } = {}) {
+    if (d.stemSlip && d.stemSlip !== "off") {
+      const pending = this.stemSlipPending.get(d.index);
+      if (pending?.committing) {
+        const track = d.track, mode = d.stemSlip;
+        await pending.promise;
+        if (d.track === track && d.stemSlip === mode) return this.setPitch(d, {keylock, semitones});
+        return;
+      }
+      d.keylock = keylock; d.keyShift = semitones;
+      if (pending && !this.voices.get(d.index)?.stemSlipTransport) {
+        pending.revision++; pending.preparation?.abort(); await pending.promise;
+      } else if (this.voices.get(d.index)?.stemSlipTransport) await this.refreshStemSlipBuffers(d);
+      return;
+    }
     const was = d.playing || d.processing;
     this.pause(d, { preserveStemExit: true });
     d.keylock = keylock;
@@ -597,6 +697,10 @@ export class AudioEngine {
       throw new Error("Stem duration does not match original audio.");
     this.stemBuffers.set(track.id, buffers);
     for (const d of decks.filter((d) => d.track === track)) {
+      if (this.voices.get(d.index)?.stemSlipTransport) {
+        await this.refreshStemSlipBuffers(d);
+        continue;
+      }
       const was = d.playing || d.processing;
       this.pause(d, { preserveStemExit: true });
       if (was) await this.start(d);
@@ -607,6 +711,7 @@ export class AudioEngine {
     if (state && state.track !== d.track) {
       state.effects.forEach((effect) => effect?.dispose());
       state.histories.forEach((history) => history.dispose());
+      state.routes.forEach((route) => route.disconnect());
       this.stemStates.delete(d.index);
       state = null;
     }
@@ -617,6 +722,9 @@ export class AudioEngine {
         generations: [0, 0, 0, 0],
         effects: [null, null, null, null],
         histories: Array.from({ length: 4 }, () => createStemHistory(this.ctx)),
+        routes: Array.from({length: 4}, () => {
+          const gain = this.ctx.createGain(); gain.connect(this.nodes[d.index].input); return gain;
+        }),
       };
       this.stemStates.set(d.index, state);
     }
@@ -626,7 +734,7 @@ export class AudioEngine {
     const voice = this.voices.get(d.index);
     const state = this.stemStates.get(d.index);
     if (!state || state.track !== d.track) return;
-    const originalMix = d.stems.every(Boolean) && !d.stemFX.some(Boolean);
+    const originalMix = !voice?.stemSlipTransport && d.stems.every(Boolean) && !d.stemFX.some(Boolean);
     const modes = d.stems.map((enabled, i) => {
       if (!enabled) return "";
       if (i > 0 && d.stemFX[2]) return "brake";
@@ -674,7 +782,7 @@ export class AudioEngine {
             bpm,
             kind: mode,
           });
-          effect.output.connect(this.nodes[d.index].input);
+          effect.output.connect(state.routes[i]);
           state.effects[i] = effect;
         })
         .catch((error) => {
@@ -684,10 +792,256 @@ export class AudioEngine {
     if (voice) voice.stemInitialized = true;
   }
   async setReverse(d, reverse) {
+    if (d.stemSlip && d.stemSlip !== "off") {
+      d.reverse = reverse;
+      if (reverse) {
+        await this.beginStemSlipGesture(d, "transport:reverse");
+        await this.voices.get(d.index)?.stemSlipTransport.command("reverse", {owner: "transport:reverse", reverse});
+      } else await this.endStemSlipGesture(d, "transport:reverse");
+      return;
+    }
     const playing = d.playing || d.processing;
     this.pause(d, { preserveStemExit: true });
     d.reverse = reverse;
     if (playing) await this.start(d);
+  }
+  // Stem Slip is an independent browser policy, not a vendor state-table claim.
+  // All positions are original-track seconds; scratch velocity is signed
+  // original-track seconds per AudioContext second (bounded to +/-16).
+  stemSlipClockPosition(clock, duration, time) {
+    let position = clock.position + (clock.playing ? Math.max(0, time - clock.time) * clock.rate * (clock.reverse ? -1 : 1) : 0);
+    if (clock.loop && clock.loopOut > clock.loopIn) {
+      const size = clock.loopOut - clock.loopIn;
+      if (position >= clock.loopOut || (clock.reverse && position < clock.loopIn))
+        position = clock.loopIn + ((position - clock.loopIn) % size + size) % size;
+    }
+    return Math.max(0, Math.min(duration, position));
+  }
+  stemSlipState(d) {
+    const state = this.voices.get(d.index)?.stemSlipTransport?.state();
+    return state || {mode: d.stemSlip || "off", phase: d.stemSlipPhase || "idle",
+      position: d.position, selectedPosition: d.position, playing: false,
+      audition: false, owner: null, release: null, rate: d.rate};
+  }
+  selectedPosition(d) { return this.stemSlipState(d).selectedPosition; }
+  async queryStemSlipState(d) {
+    return this.voices.get(d.index)?.stemSlipTransport?.command("query") || this.stemSlipState(d);
+  }
+  async setStemSlip(d, mode) {
+    if (!["off", "vocal", "instrumental"].includes(mode)) throw new Error("Unknown Stem Slip mode.");
+    this.stemSlipRateTokens.set(d.index, (this.stemSlipRateTokens.get(d.index) || 0) + 1);
+    const active = this.voices.get(d.index)?.stemSlipTransport;
+    if (mode === "off") {
+      const was = d.playing, position = this.position(d);
+      this.pause(d, {preserveStemExit: true});
+      d.stemSlip = "off"; d.stemSlipPhase = "idle";
+      this.stemSlipTracks.delete(d.index);
+      d.position = position;
+      this.setCross(this.cross);
+      if (was && d.track && position < d.track.duration) await this.start(d);
+      return;
+    }
+    if (!d.track || d.track.provider || d.track.missing || !this.stemBuffers.has(d.track.id))
+      throw new Error("Prepare four real local stems before using Stem Slip.");
+    d.slip = false; d.slipOrigin = null;
+    d.stemSlip = mode;
+    this.stemSlipTracks.set(d.index, d.track);
+    this.stemSlipOwners.delete(d.index);
+    if (active) {
+      await active.command("mode", {mode});
+      d.stemSlipPhase = "idle";
+      this.updateStems(d); this.setCross(this.cross);
+      return;
+    }
+    await this.startStemSlip(d, d.playing || d.processing);
+  }
+  async stemSlipBuffers(d, signal) {
+    const buffers = this.stemBuffers.get(d.track.id);
+    if (!buffers) throw new Error("Prepared stem audio is unavailable.");
+    const transformed = d.keylock || (d.keyShift || 0) !== 0;
+    const tempo = d.rate, shift = d.keyShift || 0, keylock = d.keylock;
+    const rendered = [];
+    for (const buffer of buffers) rendered.push(transformed
+      ? await this.keylockRenderer.render(buffer, {tempo,
+        semitones: shift + (keylock ? 0 : 12 * Math.log2(tempo)), signal})
+      : buffer);
+    return {buffers: rendered, scale: transformed ? tempo : 1};
+  }
+  async refreshStemSlipBuffers(d) {
+    const voice = this.voices.get(d.index), track = d.track;
+    if (!voice?.stemSlipTransport) return;
+    this.transforms.get(d.index)?.abort();
+    const controller = new AbortController(); this.transforms.set(d.index, controller);
+    d.processing = true; this.onProcessing(d);
+    try {
+      const prepared = await this.stemSlipBuffers(d, controller.signal);
+      if (controller.signal.aborted || d.track !== track || this.voices.get(d.index) !== voice) return;
+      await voice.stemSlipTransport.replaceBuffers(prepared.buffers, prepared.scale,
+        {rate: d.rate, bpm: d.track.bpm || 120});
+    } catch (error) { if (error.name !== "AbortError") throw error; }
+    finally {
+      if (this.transforms.get(d.index) === controller) {
+        this.transforms.delete(d.index); d.processing = false; this.onProcessing(d);
+      }
+    }
+  }
+  async startStemSlip(d, playing) {
+    const prior = this.stemSlipPending.get(d.index);
+    if (prior && !prior.controller.signal.aborted && prior.track === d.track && prior.mode === d.stemSlip) {
+      prior.playing ||= playing;
+      return prior.promise;
+    }
+    this.deckStates.set(d.index, d);
+    const clock = prior?.track === d.track && !prior.controller.signal.aborted ? prior.clock : {
+      position: this.position(d), time: this.ctx?.currentTime || 0, playing: d.playing,
+      rate: d.rate, reverse: d.reverse, loop: d.loop, loopIn: d.loopIn, loopOut: d.loopOut,
+      keylock: d.keylock, keyShift: d.keyShift,
+    };
+    this.transforms.get(d.index)?.abort();
+    const controller = new AbortController(), track = d.track;
+    const token = (this.startTokens.get(d.index) || 0) + 1;
+    this.startTokens.set(d.index, token); this.transforms.set(d.index, controller);
+    const request = {track, mode: d.stemSlip, playing, clock, controller, revision: 0};
+    this.stemSlipPending.set(d.index, request);
+    const current = () => !controller.signal.aborted && d.track === track &&
+      d.stemSlip === request.mode && this.startTokens.get(d.index) === token;
+    d.processing = true; this.onProcessing(d);
+    request.promise = (async () => {
+      let voice, committed = false;
+      try {
+        await this.resume();
+        const state = this.ensureStemState(d);
+        const transport = createStemSlipTransport(this.ctx, {
+          onState: value => {
+            if (this.voices.get(d.index) !== voice) return;
+            d.stemSlipPhase = value.phase;
+            if (value.ended) {
+              d.position = track.duration; d.playing = false;
+              d.stemSlip = "off"; d.stemSlipPhase = "idle";
+              this.stemSlipOwners.delete(d.index);
+              this.transforms.get(d.index)?.abort();
+              this.stopSource(d.index, {preserveStemExit: true});
+              this.setCross(this.cross); this.onEnd(d);
+            }
+          },
+          onError: error => { if (this.voices.get(d.index) === voice) this.pause(d); this.onError?.(error); },
+        });
+        voice = {sources: [], stemSlipTransport: transport, stemGains: []};
+        for (let i = 0; i < 5; i++) {
+          const gain = this.ctx.createGain(); gain.gain.value = 0;
+          gain.connect(i === 0 ? this.nodes[d.index].input : state.routes[i - 1]);
+          voice.stemGains.push(gain);
+          if (i > 0) {
+            transport.node.connect(state.histories[i - 1].node, i - 1);
+            state.histories[i - 1].node.connect(gain);
+          }
+        }
+        // Revisions cancel only candidate rendering, never the audible normal
+        // voice. Its immutable effective clock survives requested tempo changes.
+        while (current()) {
+          const revision = request.revision, preparation = new AbortController();
+          request.preparation = preparation;
+          const abort = () => preparation.abort();
+          controller.signal.addEventListener("abort", abort, {once: true});
+          let prepared;
+          try { prepared = await this.stemSlipBuffers(d, preparation.signal); }
+          catch (error) {
+            if (error.name === "AbortError" && current() && revision !== request.revision) continue;
+            throw error;
+          } finally { controller.signal.removeEventListener("abort", abort); }
+          if (!current()) return;
+          if (revision !== request.revision) continue;
+          await transport.replaceBuffers(prepared.buffers, prepared.scale);
+          if (!current()) return;
+          if (revision === request.revision) break;
+        }
+        if (!current()) return;
+        request.committing = true;
+        const when = this.ctx.currentTime + .01;
+        let position = this.position(d);
+        if (request.playing && position >= track.duration) {
+          if (clock.playing) { d.stemSlip = "off"; return; }
+          position = 0;
+        }
+        if (clock.playing) position = this.stemSlipClockPosition(clock, track.duration, when);
+        this.stopSource(d.index, {preserveStemExit: true});
+        this.voices.set(d.index, voice); committed = true;
+        d.position = position; d.playing = request.playing;
+        this.nodes[d.index].channelBpm = (track.bpm || 120) * d.rate;
+        await this.applyChannelFX(d.index);
+        if (!current()) return;
+        await transport.command("configure", {mode: d.stemSlip, position, playing: request.playing,
+          duration: track.duration, rate: d.rate, bpm: track.bpm || 120, startAt: when,
+          reverse: d.reverse, loop: d.loop ? {start: d.loopIn, end: d.loopOut} : null});
+        this.updateStems(d); this.setCross(this.cross);
+        return voice;
+      } catch (error) {
+        if (committed && this.voices.get(d.index) === voice) this.pause(d);
+        else if (error.name !== "AbortError" && current()) {
+          d.position = this.stemSlipClockPosition(clock, track.duration, this.ctx.currentTime);
+          d.anchorPosition = d.position; d.anchorTime = this.ctx.currentTime;
+          d.rate = clock.rate; d.keylock = clock.keylock; d.keyShift = clock.keyShift;
+          d.stemSlip = "off"; d.stemSlipPhase = "idle";
+        }
+        if (error.name !== "AbortError") throw error;
+      } finally {
+        if (!committed && voice) {
+          voice.stemSlipTransport.dispose();
+          const state = this.stemStates.get(d.index);
+          voice.stemGains.forEach((gain, i) => {
+            if (i > 0) { try { state?.histories[i - 1].node.disconnect(gain); } catch {} }
+            gain.disconnect();
+          });
+        }
+        if (this.stemSlipPending.get(d.index) === request) this.stemSlipPending.delete(d.index);
+        if (this.transforms.get(d.index) === controller) {
+          this.transforms.delete(d.index); d.processing = false; this.onProcessing(d);
+        }
+      }
+    })();
+    return request.promise;
+  }
+  async beginStemSlipGesture(d, owner) {
+    if (!["vocal", "instrumental"].includes(d.stemSlip)) return false;
+    const intent = {owner, track: d.track};
+    this.stemSlipOwners.set(d.index, intent);
+    let voice = this.voices.get(d.index);
+    if (!voice?.stemSlipTransport) voice = await this.startStemSlip(d, d.playing);
+    if (!voice || this.stemSlipOwners.get(d.index) !== intent || d.track !== intent.track) return false;
+    await voice.stemSlipTransport.command("begin", {owner});
+    return this.stemSlipOwners.get(d.index) === intent;
+  }
+  async stemSlipScratch(d, position, velocity, owner) {
+    const intent = this.stemSlipOwners.get(d.index);
+    if (!intent || intent.owner !== owner || intent.track !== d.track) return false;
+    const transport = this.voices.get(d.index)?.stemSlipTransport;
+    if (!transport || !Number.isFinite(position) || !Number.isFinite(velocity)) return false;
+    await transport.command("scratch", {owner, position, velocity}); return true;
+  }
+  async stemSlipCue(d, position, owner) {
+    const intent = this.stemSlipOwners.get(d.index);
+    if (!intent || intent.owner !== owner || intent.track !== d.track || !Number.isFinite(position)) return false;
+    const transport = this.voices.get(d.index)?.stemSlipTransport;
+    if (!transport) return false;
+    await transport.command("cue", {owner, position}); return true;
+  }
+  async endStemSlipGesture(d, owner, {immediate = false} = {}) {
+    if (owner == null && immediate) {
+      this.stemSlipOwners.delete(d.index);
+      const transport = this.voices.get(d.index)?.stemSlipTransport;
+      if (transport) await transport.command("cancel");
+      return !!transport;
+    }
+    const intent = this.stemSlipOwners.get(d.index);
+    if (!intent || intent.owner !== owner) return false;
+    this.stemSlipOwners.delete(d.index);
+    const pending = this.stemSlipPending.get(d.index);
+    if (pending) await pending.promise;
+    if (this.stemSlipOwners.has(d.index) || d.track !== intent.track) return false;
+    const transport = this.voices.get(d.index)?.stemSlipTransport;
+    if (!transport) return false;
+    await transport.command("end", {owner, beats: immediate ? 0 : Number(d.stemSlipRelease) || 0});
+    return true;
   }
   beginSlip(d, reason) {
     if (!d.slip || d.slipOrigin || !d.playing) return;
@@ -881,7 +1235,9 @@ export class AudioEngine {
       this.stopSample(slot);
   }
   silence() {
-    for (const d of this.deckStates.values()) this.pause(d);
+    for (const d of this.deckStates.values()) {
+      this.pause(d); d.stemSlip = "off"; d.stemSlipPhase = "idle";
+    }
     for (const controller of this.transforms.values()) controller.abort();
     this.transforms.clear();
     for (const i of this.voices.keys()) this.stopSource(i);

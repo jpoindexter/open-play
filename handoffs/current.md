@@ -1,9 +1,20 @@
 # Current handoff: Codex to Claude
 
-Read [the complete independent audit packet](codex-to-claude-completeness-audit.md). It preserves the full original prompt, later user authority, exact paths and executed evidence.
+Read [the full independent audit packet](codex-to-claude-completeness-audit.md).
+It preserves the original prompt verbatim and later authority/constraints.
 
-Start in `/Users/jasonpoindexter/Documents/GitHub/Open Play`. Independently audit Serato feature/design/functionality completeness and report what Codex missed. Review only: no native build, no automatic acceptance, no public publication. Return `handoffs/claude-to-codex-completeness-audit.md`.
+Project: `/Users/jasonpoindexter/Documents/GitHub/Open Play`.
+Candidate: `WORKTREE_STEM_SLIP_CONTINUATION`; hashes: `docs/prototype/candidate-hashes.json`.
+Independently audit the complete Serato scope and return
+`handoffs/claude-to-codex-completeness-audit.md` with reproducible findings.
 
-Current candidate: 6fd1904df3c67d1285fd0a6017c98b3bc0070584. Browser DSP checkpoint includes 59 DJ effects, actual local SCNet stems, Worker keylock, sampler, Pitch Play and analysis. Read `docs/prototype/DSP_FUNCTIONAL_REVIEW.md` for tested paths and limitations. Full parity remains NOT PASSED; native approval remains absent. The active goal continues beyond this checkpoint.
+Current evidence: all236 observed FX controls, nine longer FX regressions, actual
+local SCNet/keylock, sampler/Pitch Play/analysis and30/30 actual Stem Slip browser
+checks. Main UI prepared, scratched, released/rejoined and paused. Read
+`docs/prototype/STEM_SLIP_FUNCTIONAL_REVIEW.md` for scope and limits.
 
-The continuation adds all236 observed FX controls,27/27 Stems lifecycle checks, and actual automatic preparation/cancellation/retry UI. All nine longer adversarial FX browser checks and the current 20/20 integration baseline pass. This source checkpoint is pinned; inspect git status before auditing newer work.
+**Full parity NOT PASSED; no native app until Jason approves a revision.**
+The active goal continues. Next: actual Video catalog/six-slot processing, then
+remaining reference, library, conditional, hardware and provider gaps. No automatic
+Claude completeness-audit launch. Conditional Cloud Code/Fable debugging assistance
+is authorized if Codex gets stuck; verify the actual app/model before using it.

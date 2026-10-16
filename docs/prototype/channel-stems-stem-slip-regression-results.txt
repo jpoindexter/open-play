@@ -1,0 +1,233 @@
+Channel and Stems FX signal integration
+
+Actual engine, master FFT/RMS and synthetic independent stem buffers. Speaker output is disconnected. Stems FX checks follow the official mute plus echo-out/brake behavior; reference sonic equivalence is not asserted.
+
+Run Channel and Stems FX checks
+27/27 passed
+[
+  {
+    "name": "Channel Filter zero preserves bass rather than applying a20Hz high-pass",
+    "passed": true,
+    "evidence": {
+      "dryRms": 0.03759073165652318,
+      "filterZeroRms": 0.037196769154079504,
+      "ratio": 0.9895196904906396
+    }
+  },
+  {
+    "name": "Channel Filter bipolar knob changes actual low/high-band response",
+    "passed": true,
+    "evidence": {
+      "lowpass": {
+        "bass": -40.56768035888672,
+        "high": -75.31231689453125
+      },
+      "highpass": {
+        "bass": -84.753173828125,
+        "high": -40.30561065673828
+      }
+    }
+  },
+  {
+    "name": "Channel Dub Echo survives source pause and depth adjustment",
+    "passed": true,
+    "evidence": {
+      "tailRms": 0.06132610955109037
+    }
+  },
+  {
+    "name": "Channel Dub Echo zero is dry bypass with no orphan tail",
+    "passed": true,
+    "evidence": {
+      "rms": 7.552873025044089e-11
+    }
+  },
+  {
+    "name": "Channel Space produces an audible decay after source pause",
+    "passed": true,
+    "evidence": {
+      "tailRms": 0.01895262499941787
+    }
+  },
+  {
+    "name": "Channel Space zero bypass suppresses wet decay",
+    "passed": true,
+    "evidence": {
+      "rms": 9.614292287058067e-11
+    }
+  },
+  {
+    "name": "Channel Noise generates actual audio without a loaded voice",
+    "passed": true,
+    "evidence": {
+      "noiseRms": 0.01734923368057054
+    }
+  },
+  {
+    "name": "Channel Noise obeys channel fader routing",
+    "passed": true,
+    "evidence": {
+      "mutedRms": 2.863857606596184e-7
+    }
+  },
+  {
+    "name": "Channel Noise zero disables generation at master",
+    "passed": true,
+    "evidence": {
+      "rms": 9.081143192182913e-11
+    }
+  },
+  {
+    "name": "Emergency silence also clears Channel Noise",
+    "passed": true,
+    "evidence": {
+      "rms": 0
+    }
+  },
+  {
+    "name": "Vocal Echo captures a tail and excludes subsequent vocal markers",
+    "passed": true,
+    "evidence": {
+      "early220Db": -45.55580520629883,
+      "late710Db": -192.19363403320312
+    }
+  },
+  {
+    "name": "Unrelated stem mute change preserves existing Vocal Echo capture",
+    "passed": true,
+    "evidence": {
+      "lateVocalDb": -144.6252899169922,
+      "enabledBassDb": -39.25505828857422
+    }
+  },
+  {
+    "name": "Instrumental Echo excludes later melody/bass/drum markers while vocals continue",
+    "passed": true,
+    "evidence": {
+      "laterMelodyDb": -175.04153442382812,
+      "laterBassDb": -192.7200927734375,
+      "laterDrumDb": -192.3565673828125,
+      "vocalDb": -40.004981994628906
+    }
+  },
+  {
+    "name": "Instrumental Braker lowers instrument pitch before stopping",
+    "passed": true,
+    "evidence": {
+      "frequency": 345.703125,
+      "db": -42.75691223144531
+    }
+  },
+  {
+    "name": "Instrumental Braker fully mutes melody/bass/drums after brake",
+    "passed": true,
+    "evidence": {
+      "lateRms": 0
+    }
+  },
+  {
+    "name": "Pitch preparation restart does not retrigger a finished Instrumental Braker",
+    "passed": true,
+    "evidence": {
+      "afterRestartRms": 0
+    }
+  },
+  {
+    "name": "Drums Echo excludes later drum markers while vocals continue",
+    "passed": true,
+    "evidence": {
+      "laterDrumDb": -188.9076385498047,
+      "vocalDb": -40.004981994628906
+    }
+  },
+  {
+    "name": "Vocal Echo captures audible loop history without leaking unplayed pre-loop audio",
+    "passed": true,
+    "evidence": {
+      "unplayedPrefixDb": -197.04588317871094,
+      "loopVocalDb": -42.00560760498047,
+      "position": 2.105999999999999
+    }
+  },
+  {
+    "name": "Active Stems echo continues original captured pitch across Key Lock preparation",
+    "passed": true,
+    "evidence": {
+      "frequency": 1371.09375,
+      "db": -59.00712966918945,
+      "rms": 0.0038760692151657765,
+      "position": 1.9986666666666633
+    }
+  },
+  {
+    "name": "Active Stems echo continues across pitch-preserving tempo replacement",
+    "passed": true,
+    "evidence": {
+      "frequency": 1371.09375,
+      "db": -75.69422912597656,
+      "rms": 0.0005789331398624422,
+      "position": 2.2105999999999937
+    }
+  },
+  {
+    "name": "Active Stems echo continues across seek without recapturing new audio",
+    "passed": true,
+    "evidence": {
+      "frequency": 1371.09375,
+      "db": -78.96499633789062,
+      "rms": 0.00038725171874195167,
+      "position": 4.211933333333331
+    }
+  },
+  {
+    "name": "Active Stems echo continues across reverse transport replacement",
+    "passed": true,
+    "evidence": {
+      "frequency": 1371.09375,
+      "db": -82.70719909667969,
+      "rms": 0.0002495970416313617,
+      "position": 3.9941333333333304
+    }
+  },
+  {
+    "name": "Captured exit survives actual natural reverse-source end",
+    "passed": true,
+    "evidence": {
+      "frequency": 1371.09375,
+      "db": -88.17631530761719,
+      "rms": 0.0001334083890764556,
+      "position": 0
+    }
+  },
+  {
+    "name": "Natural reverse end stops the deck while its finite captured exit remains audible",
+    "passed": true,
+    "evidence": {
+      "playing": false,
+      "position": 0,
+      "rms": 0.0001334083890764556
+    }
+  },
+  {
+    "name": "Explicit pause clears captured exit even when no deck voice remains",
+    "passed": true,
+    "evidence": {
+      "rms": 0,
+      "voices": 0
+    }
+  },
+  {
+    "name": "Emergency-stop fixture has an active audible Stems exit",
+    "passed": true,
+    "evidence": {
+      "rms": 0.020413945124694976
+    }
+  },
+  {
+    "name": "Emergency silence clears active Stems FX and original sources",
+    "passed": true,
+    "evidence": {
+      "rms": 0
+    }
+  }
+]

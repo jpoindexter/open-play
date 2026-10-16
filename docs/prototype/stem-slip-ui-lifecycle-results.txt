@@ -1,0 +1,21 @@
+PASS same cue key reused before shared voice readiness retains the second owner
+PASS same pointer reused before shared readiness retains the second scratch
+PASS a rejected older cue preparation cannot erase the newer physical-key hold
+PASS a rejected older pointer preparation cannot erase a newer scratch
+PASS pointer cancellation rejoins immediately instead of starting a musical release roll
+PASS keyboard scratch keyup ends its gesture after focus moves elsewhere
+PASS progress and final renders restore the requesting mode selector focus
+PASS deferred mode preparation failure clears pending state and retains focus
+PASS focus moved to another deck control is not stolen after that control rerenders
+PASS pointer intent elsewhere cancels restoration even before its default focus change
+PASS track-load cancellation prevents deferred preparation from arming the new track
+PASS a later Off selection supersedes an earlier deferred arm request
+PASS a same-turn pointer cancellation cannot start a deferred stale scratch
+PASS same-turn blur cancels the queued keyboard gesture without starting stale manipulation
+PASS same-turn keyboard tap applies its requested position and configured normal release
+PASS a normal quick tap followed by blur before begin cannot create a stale release roll
+PASS a quick tap on a paused deck never starts a delayed audition
+PASS a quick tap then a new same-key hold keeps only the current physical epoch
+PASS resuming after a paused gesture was released cannot revive its deferred scratch
+19/19 Stem Slip controller lifecycle checks passed.
+Scope: controlled DOM/voice collaborators; actual browser focus, AudioWorklet rendering and routed audio acceptance remain separate.

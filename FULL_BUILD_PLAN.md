@@ -853,3 +853,42 @@ Delivery reconciliation now has zero pending source/functional jobs:87 source-li
 descriptions verified,13 historical functional additions exactly read back and four
 superseded by newer scoped DSP records. Nineteen DSP/sampler descriptions and the
 prototype gate have separate exact-readback evidence. None constitutes acceptance.
+
+## 27. Video catalog evidence recovered
+
+The nested installed Video resources directly declare47 slot effect definitions
+and7 transitions. Localization adds8 effect and26 transition names, yielding55/33
+name candidates; active menu registration remains unverified. These are factual
+resource names/flags, not recovered algorithms or complete runtime catalogs.
+The official SP1 guide documents two slots on each channel; expansion guidance
+documents two master slots. The HTML target therefore needs six slot positions,
+actual effects and transition processing, plus the documented overlay controls.
+See [VIDEO_CATALOG_EVALUATION.md](docs/research/VIDEO_CATALOG_EVALUATION.md) for
+provenance, names, parameter unknowns and proposed observable acceptance. No vendor
+shader/source/assets were copied. Video implementation remains the next scope after
+Stem Slip validation; illustrative controls do not close it.
+
+## 28. Actual browser Stem Slip checkpoint
+
+Section26 records the source discovery; the independent browser implementation
+now exists. Four real PCM sources have selected/backing clocks, signed scratching,
+cue holds, musical release and selected-only crossfader routing. Actual browser
+AudioWorklet/engine checks pass30/30; pure kernel/engine-boundary checks pass30/30,
+and controller lifecycle checks pass19/19. Main UI real SCNet preparation retained
+focus; held and quick keyboard gestures entered release and rejoined, then explicit
+pause stopped playback. Existing18 engine and27 Channel/Stems paths and20 ordinary
+behavior checks also passed after integration. Read
+[STEM_SLIP_FUNCTIONAL_REVIEW.md](docs/prototype/STEM_SLIP_FUNCTIONAL_REVIEW.md)
+for exact coverage, retained failures, independent policies and remaining combinations.
+
+T10 source conflict, vendor envelopes/topology, hardware and full musical workflows
+remain open. Prototype preparation is still limited to10-minute/128MiB inputs and
+a15-minute worker timeout; no-limits product acceptance is not achieved. Sol/high
+is the routine STM-005 execution recommendation, with bounded Astra/high escalation
+for an unresolved measured DSP/state dispute. Claude recommendations remain review
+choices, not automatic launches.
+
+Next: replace illustrative Video controls with independently implemented effects
+and transitions from the proven manifest catalog; verify actual pixel output and
+six-slot routing. Retain additional localized names as availability candidates.
+Continue the full scope afterward; no native app until Jason approves a revision.

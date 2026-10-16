@@ -1,0 +1,636 @@
+{
+  "scope": "Actual AudioContext/AudioWorklet four-source engine, shared mixer and real cue-hold controller. Independent browser behavior; native/controller and vendor parity remain unverified.",
+  "passed": 27,
+  "total": 28,
+  "results": [
+    {
+      "name": "Arming uses four real audible sources and a latched independent transport",
+      "passed": true,
+      "evidence": {
+        "mode": "vocal",
+        "phase": "idle",
+        "owner": null,
+        "position": 4.7293333333312635,
+        "selectedPosition": 4.7293333333312635,
+        "rate": 1,
+        "velocity": 1,
+        "bpm": 120,
+        "playing": true,
+        "audition": false,
+        "startAt": 0.20733333333333334,
+        "audioTime": 0.42666666666666664,
+        "duration": 30,
+        "release": null,
+        "loop": null,
+        "reverse": false,
+        "ended": false
+      }
+    },
+    {
+      "name": "Real cue-hold controller moves vocal marker while backing keeps its later marker",
+      "passed": true,
+      "evidence": {
+        "snapshot": {
+          "mode": "vocal",
+          "phase": "manipulating",
+          "owner": "cue:playing-cue:1",
+          "position": 4.95333333332915,
+          "selectedPosition": 1.2240000000002738,
+          "rate": 1,
+          "velocity": 1,
+          "bpm": 120,
+          "playing": true,
+          "audition": true,
+          "startAt": 0.20733333333333334,
+          "audioTime": 0.6506666666666667,
+          "duration": 30,
+          "release": null,
+          "loop": null,
+          "reverse": false,
+          "ended": false
+        },
+        "vocal220": -40.004981994628906,
+        "vocal1370": -167.71173095703125,
+        "backing660": -39.670413970947266
+      }
+    },
+    {
+      "name": "Cue release0 rejoins current audio marker without restarting backing or disarming",
+      "passed": true,
+      "evidence": {
+        "mode": "vocal",
+        "phase": "idle",
+        "owner": null,
+        "position": 5.177333333327036,
+        "selectedPosition": 5.177333333327036,
+        "rate": 1,
+        "velocity": 1,
+        "bpm": 120,
+        "playing": true,
+        "audition": false,
+        "startAt": 0.20733333333333334,
+        "audioTime": 0.8746666666666667,
+        "duration": 30,
+        "release": null,
+        "loop": null,
+        "reverse": false,
+        "ended": false
+      }
+    },
+    {
+      "name": "Signed negative PCM read-head crosses backward into the earlier vocal marker only",
+      "passed": true,
+      "evidence": {
+        "snapshot": {
+          "mode": "vocal",
+          "phase": "manipulating",
+          "owner": "negative",
+          "position": 5.635999999989375,
+          "selectedPosition": 1.6413333333338387,
+          "rate": 1,
+          "velocity": -1,
+          "bpm": 120,
+          "playing": true,
+          "audition": true,
+          "startAt": 0.20733333333333334,
+          "audioTime": 1.3333333333333333,
+          "duration": 30,
+          "release": null,
+          "loop": null,
+          "reverse": false,
+          "ended": false
+        },
+        "vocal220": -40.004371643066406,
+        "backing660": -39.670223236083984
+      }
+    },
+    {
+      "name": "Positive PCM read-head traverses the later vocal marker with backing unchanged",
+      "passed": true,
+      "evidence": {
+        "vocal330": -39.55093002319336,
+        "vocal220": -130.83956909179688,
+        "backing660": -39.67042541503906
+      }
+    },
+    {
+      "name": "Crossfader cuts selected vocal while backing and other deck retain audible level",
+      "passed": true,
+      "evidence": {
+        "vocal": -164.37643432617188,
+        "backing": -39.670433044433594,
+        "other": -39.58917999267578
+      }
+    },
+    {
+      "name": "Shared channel level still silences selected and backing groups",
+      "passed": false,
+      "evidence": {
+        "rms": 0.00010738858782877838
+      }
+    },
+    {
+      "name": "Custom stem mask survives cue/release and remains audible in the real routing",
+      "passed": true,
+      "evidence": {
+        "mask": [
+          true,
+          false,
+          true,
+          false
+        ],
+        "bass": -39.25519943237305,
+        "melody": -155.08648681640625,
+        "drums": -169.2654571533203
+      }
+    },
+    {
+      "name": "Selected-only 0.5-beat release finishes on the canonical beat clock",
+      "passed": true,
+      "evidence": {
+        "elapsed": 0.2559999999999998,
+        "expectedSeconds": 0.25,
+        "during": {
+          "mode": "vocal",
+          "phase": "releasing",
+          "owner": null,
+          "position": 6.798666666645071,
+          "selectedPosition": 2.25,
+          "rate": 1,
+          "velocity": 1,
+          "bpm": 120,
+          "playing": true,
+          "audition": true,
+          "startAt": 0.20733333333333334,
+          "audioTime": 2.496,
+          "duration": 30,
+          "release": {
+            "start": 2.25,
+            "end": 2.5,
+            "remainingBeats": 0.5
+          },
+          "loop": null,
+          "reverse": false,
+          "ended": false
+        },
+        "after": {
+          "mode": "vocal",
+          "phase": "idle",
+          "owner": null,
+          "position": 7.054666666642655,
+          "selectedPosition": 7.054666666642655,
+          "rate": 1,
+          "velocity": 1,
+          "bpm": 120,
+          "playing": true,
+          "audition": false,
+          "startAt": 0.20733333333333334,
+          "audioTime": 2.7520000000000002,
+          "duration": 30,
+          "release": null,
+          "loop": null,
+          "reverse": false,
+          "ended": false
+        }
+      }
+    },
+    {
+      "name": "Selected-only 1-beat release finishes on the canonical beat clock",
+      "passed": true,
+      "evidence": {
+        "elapsed": 0.5066666666666668,
+        "expectedSeconds": 0.5,
+        "during": {
+          "mode": "vocal",
+          "phase": "releasing",
+          "owner": null,
+          "position": 7.054666666642655,
+          "selectedPosition": 2,
+          "rate": 1,
+          "velocity": 1,
+          "bpm": 120,
+          "playing": true,
+          "audition": true,
+          "startAt": 0.20733333333333334,
+          "audioTime": 2.7520000000000002,
+          "duration": 30,
+          "release": {
+            "start": 2,
+            "end": 2.5,
+            "remainingBeats": 1
+          },
+          "loop": null,
+          "reverse": false,
+          "ended": false
+        },
+        "after": {
+          "mode": "vocal",
+          "phase": "idle",
+          "owner": null,
+          "position": 7.561333333304541,
+          "selectedPosition": 7.561333333304541,
+          "rate": 1,
+          "velocity": 1,
+          "bpm": 120,
+          "playing": true,
+          "audition": false,
+          "startAt": 0.20733333333333334,
+          "audioTime": 3.2586666666666666,
+          "duration": 30,
+          "release": null,
+          "loop": null,
+          "reverse": false,
+          "ended": false
+        }
+      }
+    },
+    {
+      "name": "Selected-only 2-beat release finishes on the canonical beat clock",
+      "passed": true,
+      "evidence": {
+        "elapsed": 1.0080000000000005,
+        "expectedSeconds": 1,
+        "during": {
+          "mode": "vocal",
+          "phase": "releasing",
+          "owner": null,
+          "position": 7.566666666637824,
+          "selectedPosition": 1.5,
+          "rate": 1,
+          "velocity": 1,
+          "bpm": 120,
+          "playing": true,
+          "audition": true,
+          "startAt": 0.20733333333333334,
+          "audioTime": 3.2640000000000002,
+          "duration": 30,
+          "release": {
+            "start": 1.5,
+            "end": 2.5,
+            "remainingBeats": 2
+          },
+          "loop": null,
+          "reverse": false,
+          "ended": false
+        },
+        "after": {
+          "mode": "vocal",
+          "phase": "idle",
+          "owner": null,
+          "position": 8.574666666652812,
+          "selectedPosition": 8.574666666652812,
+          "rate": 1,
+          "velocity": 1,
+          "bpm": 120,
+          "playing": true,
+          "audition": false,
+          "startAt": 0.20733333333333334,
+          "audioTime": 4.271999999999999,
+          "duration": 30,
+          "release": null,
+          "loop": null,
+          "reverse": false,
+          "ended": false
+        }
+      }
+    },
+    {
+      "name": "Selected-only 4-beat release finishes on the canonical beat clock",
+      "passed": true,
+      "evidence": {
+        "elapsed": 2.016,
+        "expectedSeconds": 2,
+        "during": {
+          "mode": "vocal",
+          "phase": "releasing",
+          "owner": null,
+          "position": 8.574666666652812,
+          "selectedPosition": 0.5,
+          "rate": 1,
+          "velocity": 1,
+          "bpm": 120,
+          "playing": true,
+          "audition": true,
+          "startAt": 0.20733333333333334,
+          "audioTime": 4.271999999999999,
+          "duration": 30,
+          "release": {
+            "start": 0.5,
+            "end": 2.5,
+            "remainingBeats": 4
+          },
+          "loop": null,
+          "reverse": false,
+          "ended": false
+        },
+        "after": {
+          "mode": "vocal",
+          "phase": "idle",
+          "owner": null,
+          "position": 10.590666666719736,
+          "selectedPosition": 10.590666666719736,
+          "rate": 1,
+          "velocity": 1,
+          "bpm": 120,
+          "playing": true,
+          "audition": false,
+          "startAt": 0.20733333333333334,
+          "audioTime": 6.287999999999999,
+          "duration": 30,
+          "release": null,
+          "loop": null,
+          "reverse": false,
+          "ended": false
+        }
+      }
+    },
+    {
+      "name": "Tempo change during release advances remaining beats and rejoins",
+      "passed": true,
+      "evidence": {
+        "mode": "vocal",
+        "phase": "idle",
+        "owner": null,
+        "position": 11.09733333338958,
+        "selectedPosition": 11.09733333338958,
+        "rate": 2,
+        "velocity": 2,
+        "bpm": 120,
+        "playing": true,
+        "audition": false,
+        "startAt": 0.20733333333333334,
+        "audioTime": 6.634666666666666,
+        "duration": 30,
+        "release": null,
+        "loop": null,
+        "reverse": false,
+        "ended": false
+      }
+    },
+    {
+      "name": "Explicit pause freezes both clocks, clears audio, and keeps selection armed",
+      "passed": true,
+      "evidence": {
+        "position": 11.102666666722914,
+        "rms": 0
+      }
+    },
+    {
+      "name": "Paused cue-hold auditions selected vocal without starting canonical/backing transport",
+      "passed": true,
+      "evidence": {
+        "mode": "vocal",
+        "phase": "manipulating",
+        "owner": "cue:paused-cue:3",
+        "position": 5,
+        "selectedPosition": 1.2140000000002615,
+        "rate": 1,
+        "velocity": 1,
+        "bpm": 120,
+        "playing": false,
+        "audition": true,
+        "startAt": 6.89,
+        "audioTime": 7.104,
+        "duration": 30,
+        "release": null,
+        "loop": null,
+        "reverse": false,
+        "ended": false
+      }
+    },
+    {
+      "name": "Paused cue release stops audition and restores the frozen canonical cursor",
+      "passed": true,
+      "evidence": {
+        "snapshot": {
+          "mode": "vocal",
+          "phase": "idle",
+          "owner": null,
+          "position": 5,
+          "selectedPosition": 5,
+          "rate": 1,
+          "velocity": 1,
+          "bpm": 120,
+          "playing": false,
+          "audition": false,
+          "startAt": 6.89,
+          "audioTime": 7.327999999999999,
+          "duration": 30,
+          "release": null,
+          "loop": null,
+          "reverse": false,
+          "ended": false
+        },
+        "rms": 0
+      }
+    },
+    {
+      "name": "Play during paused cue audition resumes split playback and release continues aligned",
+      "passed": true,
+      "evidence": {
+        "mode": "vocal",
+        "phase": "idle",
+        "owner": null,
+        "position": 5.368666666663188,
+        "selectedPosition": 5.368666666663188,
+        "rate": 1,
+        "velocity": 1,
+        "bpm": 120,
+        "playing": true,
+        "audition": false,
+        "startAt": 7.343333333333333,
+        "audioTime": 7.712,
+        "duration": 30,
+        "release": null,
+        "loop": null,
+        "reverse": false,
+        "ended": false
+      }
+    },
+    {
+      "name": "Release before selected processor preparation completes cannot resurrect paused audition",
+      "passed": true,
+      "evidence": {
+        "snapshot": {
+          "mode": "vocal",
+          "phase": "idle",
+          "owner": null,
+          "position": 5,
+          "selectedPosition": 5,
+          "rate": 1,
+          "velocity": 1,
+          "bpm": 120,
+          "playing": false,
+          "audition": false,
+          "startAt": 7.727333333333333,
+          "audioTime": 7.946666666666666,
+          "duration": 30,
+          "release": null,
+          "loop": null,
+          "reverse": false,
+          "ended": false
+        },
+        "rms": 0
+      }
+    },
+    {
+      "name": "Global seek moves both clocks and invalidates stale gesture releases",
+      "passed": true,
+      "evidence": {
+        "mode": "vocal",
+        "phase": "idle",
+        "owner": null,
+        "position": 8.214000000007104,
+        "selectedPosition": 8.214000000007104,
+        "rate": 1,
+        "velocity": 1,
+        "bpm": 120,
+        "playing": true,
+        "audition": false,
+        "startAt": 7.967333333333333,
+        "audioTime": 8.181333333333333,
+        "duration": 30,
+        "release": null,
+        "loop": null,
+        "reverse": false,
+        "ended": false
+      }
+    },
+    {
+      "name": "Instrumental selection moves three real sources while vocal stays on canonical timeline",
+      "passed": true,
+      "evidence": {
+        "snapshot": {
+          "mode": "instrumental",
+          "phase": "manipulating",
+          "owner": "inverse",
+          "position": 8.44333333334805,
+          "selectedPosition": 1.2240000000002738,
+          "rate": 1,
+          "velocity": 1,
+          "bpm": 120,
+          "playing": true,
+          "audition": true,
+          "startAt": 7.967333333333333,
+          "audioTime": 8.410666666666666,
+          "duration": 30,
+          "release": null,
+          "loop": null,
+          "reverse": false,
+          "ended": false
+        },
+        "vocal1370": -39.25505065917969,
+        "melody440": -39.140933990478516
+      }
+    },
+    {
+      "name": "Pending Key Lock rendering retains the old effective tempo and audible pitch",
+      "passed": true,
+      "evidence": {
+        "mode": "vocal",
+        "phase": "idle",
+        "owner": null,
+        "position": 8.678000000022507,
+        "selectedPosition": 8.678000000022507,
+        "rate": 1,
+        "velocity": 1,
+        "bpm": 120,
+        "playing": true,
+        "audition": false,
+        "startAt": 7.967333333333333,
+        "audioTime": 8.645333333333333,
+        "duration": 30,
+        "release": null,
+        "loop": null,
+        "reverse": false,
+        "ended": false
+      }
+    },
+    {
+      "name": "Prepared Key Lock rate and buffer scale activate together without pitch transposition",
+      "passed": true,
+      "evidence": {
+        "mode": "vocal",
+        "phase": "idle",
+        "owner": null,
+        "position": 11.164400000105047,
+        "selectedPosition": 11.164400000105047,
+        "rate": 1.1,
+        "velocity": 1.1,
+        "bpm": 120,
+        "playing": true,
+        "audition": false,
+        "startAt": 7.967333333333333,
+        "audioTime": 11.109333333333334,
+        "duration": 30,
+        "release": null,
+        "loop": null,
+        "reverse": false,
+        "ended": false
+      }
+    },
+    {
+      "name": "Only the latest competing Key Lock preparation can activate",
+      "passed": true,
+      "evidence": {
+        "mode": "vocal",
+        "phase": "idle",
+        "owner": null,
+        "position": 14.162266666871233,
+        "selectedPosition": 14.162266666871233,
+        "rate": 0.9,
+        "velocity": 0.9,
+        "bpm": 120,
+        "playing": true,
+        "audition": false,
+        "startAt": 7.967333333333333,
+        "audioTime": 13.834666666666667,
+        "duration": 30,
+        "release": null,
+        "loop": null,
+        "reverse": false,
+        "ended": false
+      }
+    },
+    {
+      "name": "Pause during Key Lock preparation prevents stale buffer or audio activation",
+      "passed": true,
+      "evidence": {
+        "rms": 0,
+        "voices": 0
+      }
+    },
+    {
+      "name": "Captured Stems exit follows selected crossfader routing while backing stays audible",
+      "passed": true,
+      "evidence": {
+        "vocalTail": -170.2613525390625,
+        "backing": -39.670406341552734
+      }
+    },
+    {
+      "name": "Emergency silence clears both source groups, finite exits, and the mode",
+      "passed": true,
+      "evidence": {
+        "mode": "off",
+        "rms": 0
+      }
+    },
+    {
+      "name": "Canonical track end stops and disarms even while selected audio was elsewhere",
+      "passed": true,
+      "evidence": {
+        "mode": "off",
+        "position": 30,
+        "rms": 0
+      }
+    },
+    {
+      "name": "No unhandled engine or cue-controller failures",
+      "passed": true,
+      "evidence": {
+        "errors": []
+      }
+    }
+  ]
+}

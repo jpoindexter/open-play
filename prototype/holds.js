@@ -9,9 +9,11 @@ export function createCueHolds({
   notify,
 }) {
   const held = new Map();
+  let stemGestureSequence = 0;
+  const selectedStem = d => ["vocal", "instrumental"].includes(d.stemSlip);
   async function press(key, d, hot = null, remove = false) {
     if (!d.track || held.has(key)) return;
-    const position = engine.position(d);
+    const position = selectedStem(d) ? engine.selectedPosition(d) : engine.position(d);
     if (hot !== null) {
       if (remove) {
         d.track.cues[hot] = null;
@@ -28,12 +30,12 @@ export function createCueHolds({
         render();
         return;
       }
-    } else if (d.playing) {
+    } else if (d.playing && !selectedStem(d)) {
       engine.pause(d);
       await engine.seek(d, d.cue);
       render();
       return;
-    } else if (Math.abs(position - d.cue) > 0.04) {
+    } else if (!selectedStem(d) && Math.abs(position - d.cue) > 0.04) {
       d.cue = quantized(d, position);
       await engine.seek(d, d.cue);
       render();
@@ -48,8 +50,20 @@ export function createCueHolds({
       wasPlaying: d.playing,
       released: false,
       latched: false,
+      stemSlip: selectedStem(d),
+      stemSlipOwner: `cue:${key}:${++stemGestureSequence}`,
     };
     held.set(key, h);
+    if (h.stemSlip) {
+      try {
+        await engine.beginStemSlipGesture(d, h.stemSlipOwner);
+        if (!h.released) await engine.stemSlipCue(d, target, h.stemSlipOwner);
+        if (h.released) await engine.endStemSlipGesture(d, h.stemSlipOwner);
+        if (hot !== null) record(d, {kind:"cue", cue:hot, position:target});
+      } catch (error) { if (held.get(key) === h) held.delete(key); notify(error.message); }
+      render();
+      return;
+    }
     if (hot !== null) {
       engine.beginSlip(d, "cue");
       record(d, { kind: "cue", cue: hot, position: target });
@@ -63,15 +77,20 @@ export function createCueHolds({
       }
     } catch (e) {
       notify(e.message);
-      held.delete(key);
+      if (held.get(key) === h) held.delete(key);
     }
   }
-  async function release(key) {
+  async function release(key, {immediate = false} = {}) {
     const h = held.get(key);
     if (!h) return;
     held.delete(key);
     h.released = true;
     if (h.d.track !== h.track) return;
+    if (h.stemSlip) {
+      await engine.endStemSlipGesture(h.d, h.stemSlipOwner, {immediate:immediate || !h.d.playing});
+      render();
+      return;
+    }
     if (!h.wasPlaying && !h.latched) {
       engine.pause(h.d);
       await engine.seek(h.d, h.target);
@@ -81,14 +100,14 @@ export function createCueHolds({
   function latch(d) {
     let latched = false;
     for (const h of held.values())
-      if (h.d === d && !h.wasPlaying) {
+      if (h.d === d && !h.wasPlaying && !h.stemSlip) {
         h.latched = true;
         latched = true;
       }
     return latched;
   }
-  function releaseAll() {
-    for (const key of held.keys()) void release(key);
+  function releaseAll(options) {
+    for (const key of held.keys()) void release(key, options);
   }
   return { press, release, releaseAll, latch };
 }

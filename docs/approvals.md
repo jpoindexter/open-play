@@ -26,3 +26,13 @@ Jason asked to close remaining parity gaps with behavior, not labels/placeholder
 and update the prototype and Claude handoff. This authorizes continued browser
 implementation and investigation. It does not grant native approval. The functional
 candidate has executed subset evidence; full 1:1 parity remains open.
+
+## 16 October 2026 — conditional Cloud Code / Fable assistance
+
+Jason explicitly authorized controlling the open Cloud Code app, starting a new
+conversation and selecting Fable when Codex gets stuck or cannot resolve an issue.
+Use the actual app/model option after inspecting its UI; do not assume availability.
+This permits a bounded debugging conversation with relevant project code/evidence.
+Verify returned suggestions independently. No conversation has been started under
+this permission at the time of this entry. Native implementation remains prohibited
+until explicit prototype approval.

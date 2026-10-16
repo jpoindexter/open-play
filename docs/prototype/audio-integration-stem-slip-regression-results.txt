@@ -1,0 +1,164 @@
+Actual engine signal integration
+
+Executes AudioEngine with generated audio and real keylock workers. Measures its master FFT and timeline. Test output is disconnected from speakers.
+
+Run engine integration checks
+18/18 passed
+[
+  {
+    "name": "Keylock engine output stays 440 Hz at 1.5×",
+    "passed": true,
+    "evidence": {
+      "frequency": 439.453125,
+      "db": -39.2069091796875
+    }
+  },
+  {
+    "name": "Reverse actually crosses from second-half 880 Hz into first-half 440 Hz",
+    "passed": true,
+    "evidence": {
+      "frequency": 439.453125,
+      "db": -39.2086067199707,
+      "position": 3.4829999999999997
+    }
+  },
+  {
+    "name": "Keylocked loop wraps original timeline and outputs loop audio",
+    "passed": true,
+    "evidence": {
+      "frequency": 439.453125,
+      "db": -39.209800720214844,
+      "position": 2.48
+    }
+  },
+  {
+    "name": "Latest rate request wins without stale rendered source",
+    "passed": true,
+    "evidence": {
+      "frequency": 439.453125,
+      "db": -39.21451187133789,
+      "rate": 1.3,
+      "timelineAdvance": 0.20106666666666673
+    }
+  },
+  {
+    "name": "All stems enabled routes original master audio",
+    "passed": true,
+    "evidence": {
+      "frequency": 439.453125,
+      "db": -39.140933990478516
+    }
+  },
+  {
+    "name": "Vocal isolation reaches master and removes other stem frequencies",
+    "passed": true,
+    "evidence": {
+      "vocalDb": -40.004981994628906,
+      "otherDb": -149.4082794189453,
+      "bassDb": -178.33961486816406
+    }
+  },
+  {
+    "name": "Muting four stems silences actual master",
+    "passed": true,
+    "evidence": {
+      "rms": 0
+    }
+  },
+  {
+    "name": "Instrumental passes melody/bass/drums and removes vocals",
+    "passed": true,
+    "evidence": {
+      "vocalDb": -160.68414306640625,
+      "melodyDb": -39.140933990478516,
+      "bassDb": -39.25505828857422,
+      "drumsDb": -39.71342468261719
+    }
+  },
+  {
+    "name": "All-on restores original instead of imperfect separated sum",
+    "passed": true,
+    "evidence": {
+      "frequency": 439.453125,
+      "db": -39.140933990478516,
+      "vocalDb": -159.69517517089844,
+      "drumsDb": -202.1581268310547
+    }
+  },
+  {
+    "name": "Explicit full-mix restore plays original source",
+    "passed": true,
+    "evidence": {
+      "frequency": 439.453125,
+      "db": -39.140933990478516
+    }
+  },
+  {
+    "name": "Immediate reverse then seek preserves pending playback intent",
+    "passed": true,
+    "evidence": {
+      "frequency": 439.453125,
+      "db": -39.227577209472656,
+      "position": 1.5738,
+      "playing": true
+    }
+  },
+  {
+    "name": "Immediate unlocked rate change keeps playback and changes actual pitch",
+    "passed": true,
+    "evidence": {
+      "frequency": 527.34375,
+      "db": -39.159969329833984,
+      "playing": true,
+      "rate": 1.2
+    }
+  },
+  {
+    "name": "Pause during asynchronous start leaves no source or processing state",
+    "passed": true,
+    "evidence": {
+      "playing": false,
+      "processing": false,
+      "voices": 0
+    }
+  },
+  {
+    "name": "Emergency silence defeats pending untransformed start",
+    "passed": true,
+    "evidence": {
+      "playing": false,
+      "voices": 0
+    }
+  },
+  {
+    "name": "Changing a live FX slot replaces its algorithm without killing worklet",
+    "passed": true,
+    "evidence": {
+      "fundamentalDb": -20.298097610473633,
+      "thirdHarmonicDb": -43.350521087646484
+    }
+  },
+  {
+    "name": "Changing live depth preserves an existing echo tail",
+    "passed": true,
+    "evidence": {
+      "frequency": 439.453125,
+      "db": -33.92339324951172
+    }
+  },
+  {
+    "name": "Emergency silence clears active feedback tails",
+    "passed": true,
+    "evidence": {
+      "rms": 0
+    }
+  },
+  {
+    "name": "Legacy Delay depth update preserves its existing feedback tail",
+    "passed": true,
+    "evidence": {
+      "frequency": 439.453125,
+      "db": -38.787532806396484
+    }
+  }
+]

@@ -4125,7 +4125,7 @@
       "title": "Stem Slip introduced in 4.0.10",
       "stage": "N3",
       "profile": "A",
-      "acceptance": "Establish exact reference state transitions and audible return behavior before implementation; release notes plus runtime proof required.",
+      "acceptance": "Execute independent selected/backing transport, crossfader and release workflows; reconcile documented initial-state/release conflicts against T10/4.0.10.213 before claiming reference parity.",
       "sources": [
         {
           "title": "Serato4.0.10 release copy",
@@ -4140,26 +4140,30 @@
           "url": "https://ts.hercules.com/download/sound/manuals/DJC_T10/HERCULES_DJC_T10_USER_MANUAL_-_EN_FR_DE_NL_IT_ES_PT_PL_JP_CNM_KO.pdf"
         }
       ],
-      "status": "research_pending",
-      "prototype": "review_surface_with_explicit_simulations_and_gaps",
+      "status": "independent_browser_subset_implemented; exact_reference_conflict_open",
+      "prototype": "actual_independent_selected_stem_transport",
       "native": "blocked_until_prototype_approval",
       "routing": {
         "codex": {
-          "model": "gpt-6-astra",
+          "model": "gpt-6.1-sol",
           "effort": "high"
         },
         "claude_code": {
           "model": "claude-opus-5",
           "effort": "high"
         },
-        "rationale": "DSP and transport require numerical reasoning backed by measurements.",
+        "rationale": "Routine implementation and lifecycle tests use Sol/high; escalate a bounded unresolved DSP/state dispute to Astra/high with measured evidence.",
         "primary": "Codex",
         "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
         "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
       },
       "reference_review": "primary_sources_conflict; exact_runtime_unverified",
-      "test_evidence": [],
-      "prototype_evidence": "docs/research/STEM_SLIP_EVALUATION.md; selected-stem transport implementation/acceptance remains open"
+      "test_evidence": [
+        "docs/prototype/stem-slip-browser-results.json",
+        "docs/prototype/stem-slip-main-ui-results.json",
+        "docs/prototype/stem-slip-ui-lifecycle-results.txt"
+      ],
+      "prototype_evidence": "docs/prototype/STEM_SLIP_FUNCTIONAL_REVIEW.md; 30/30 browser audio checks plus main UI; no hardware/vendor parity"
     },
     {
       "id": "HW-011",

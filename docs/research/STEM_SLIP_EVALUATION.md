@@ -71,3 +71,10 @@ These are recommendations only, not claims that a model is installed, currently 
 | DEK-010/STM-005 transport and cancellation regressions | `gpt-6.1-sol` / high | Existing `claude-opus-5` / high |
 
 Skills applied: use, dec-discovery-validation, dec-quality-testing. Conducting-research was read and discarded as a branding-specific dispatcher; its research-before-decision principle was not needed as a separate workflow.
+
+## Independent implementation follow-up
+
+The browser now implements the declared independent split transport and public
+controls. Actual audio and UI evidence, corrections and remaining limitations are
+in [STEM_SLIP_FUNCTIONAL_REVIEW.md](../prototype/STEM_SLIP_FUNCTIONAL_REVIEW.md).
+This does not resolve the primary-source conflict or verify T10 hardware behavior.

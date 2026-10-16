@@ -1,0 +1,126 @@
+{
+  "scope": "Executed actual PCM kernel and engine rate/first-arm methods with deferred rendering/worklet boundaries. Actual browser scheduling, mixer/UI integration and vendor behavior remain separate gates.",
+  "passed": 30,
+  "checks": [
+    {
+      "name": "Selected cue and signed scratch leave complementary PCM bit-identical to untouched playback",
+      "passed": true
+    },
+    {
+      "name": "Release 0 beats at 60 BPM rejoins on the advancing clock",
+      "passed": true
+    },
+    {
+      "name": "Release 0.5 beats at 60 BPM rejoins on the advancing clock",
+      "passed": true
+    },
+    {
+      "name": "Release 1 beats at 60 BPM rejoins on the advancing clock",
+      "passed": true
+    },
+    {
+      "name": "Release 2 beats at 60 BPM rejoins on the advancing clock",
+      "passed": true
+    },
+    {
+      "name": "Release 4 beats at 60 BPM rejoins on the advancing clock",
+      "passed": true
+    },
+    {
+      "name": "Release 0 beats at 120 BPM rejoins on the advancing clock",
+      "passed": true
+    },
+    {
+      "name": "Release 0.5 beats at 120 BPM rejoins on the advancing clock",
+      "passed": true
+    },
+    {
+      "name": "Release 1 beats at 120 BPM rejoins on the advancing clock",
+      "passed": true
+    },
+    {
+      "name": "Release 2 beats at 120 BPM rejoins on the advancing clock",
+      "passed": true
+    },
+    {
+      "name": "Release 4 beats at 120 BPM rejoins on the advancing clock",
+      "passed": true
+    },
+    {
+      "name": "Release 0 beats at 180 BPM rejoins on the advancing clock",
+      "passed": true
+    },
+    {
+      "name": "Release 0.5 beats at 180 BPM rejoins on the advancing clock",
+      "passed": true
+    },
+    {
+      "name": "Release 1 beats at 180 BPM rejoins on the advancing clock",
+      "passed": true
+    },
+    {
+      "name": "Release 2 beats at 180 BPM rejoins on the advancing clock",
+      "passed": true
+    },
+    {
+      "name": "Release 4 beats at 180 BPM rejoins on the advancing clock",
+      "passed": true
+    },
+    {
+      "name": "Tempo change during release counts elapsed beats rather than a stale wall-clock timer",
+      "passed": true
+    },
+    {
+      "name": "Paused cue/scratch auditions only selected PCM and release restores frozen canonical position",
+      "passed": true
+    },
+    {
+      "name": "Play during paused selected audition resumes canonical playback and release continues",
+      "passed": true
+    },
+    {
+      "name": "Old gesture releases cannot alter a new owner; cancellation terminates an already-running roll",
+      "passed": true
+    },
+    {
+      "name": "Pause and global seek invalidate release state and freeze/reposition both clocks",
+      "passed": true
+    },
+    {
+      "name": "Release fragment excludes audio after the release cursor and pads a negative start with silence",
+      "passed": true
+    },
+    {
+      "name": "Mode switch joins old selection before selecting the complementary group",
+      "passed": true
+    },
+    {
+      "name": "Reverse and loop entry are retained on selected transport while canonical stays forward",
+      "passed": true
+    },
+    {
+      "name": "Canonical track end cancels all playback and disarms without a stale owner",
+      "passed": true
+    },
+    {
+      "name": "Actual setRate cannot publish stale channel/FX tempo after a newer preparation settles",
+      "passed": true
+    },
+    {
+      "name": "Actual setRate uses request ownership even when requested values return to the same rate",
+      "passed": true
+    },
+    {
+      "name": "Actual setRate cannot publish channel/FX tempo for a replaced track or mode",
+      "passed": true
+    },
+    {
+      "name": "Pause invalidates pending rate metadata as well as source activation",
+      "passed": true
+    },
+    {
+      "name": "First-arm tempo changes preserve the audible old clock and activate matching newest PCM scale/rate",
+      "passed": true
+    }
+  ]
+}

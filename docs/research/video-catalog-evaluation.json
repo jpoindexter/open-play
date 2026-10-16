@@ -1,0 +1,3084 @@
+{
+  "updatedAt": "2026-10-16T16:08:38.481128+00:00",
+  "scope": "Read-only installed files and official primary web research. No Serato UI, shared browser, remote write or app/code modification. Only the two new evaluation files written.",
+  "versions": [
+    {
+      "path": "/Applications/Serato DJ Pro.app/Contents/Info.plist",
+      "bundleId": "com.serato.seratodj",
+      "version": "4.0.10",
+      "build": "4.0.10.213"
+    },
+    {
+      "path": "/Applications/Serato DJ Pro.app/Contents/MacOS/Serato Video.app/Contents/Info.plist",
+      "bundleId": "com.serato.seratovideo",
+      "version": "4.0.10",
+      "build": "4.0.10.213"
+    }
+  ],
+  "files": [
+    {
+      "path": "/Applications/Serato DJ Pro.app/Contents/Info.plist",
+      "bytes": 2970,
+      "sha256": "128f13364cecee349b684af17b804d42d2e2ec97be80dc044d6ee151283e895b"
+    },
+    {
+      "path": "/Applications/Serato DJ Pro.app/Contents/MacOS/Serato Video.app/Contents/Info.plist",
+      "bytes": 1599,
+      "sha256": "2abb44a462db7fd4d2a3dd614a873d9a4659ac0665f49ec83a21986abea8a13b"
+    },
+    {
+      "path": "/Applications/Serato DJ Pro.app/Contents/MacOS/Serato Video.app/Contents/Resources/effects/effects.xml",
+      "bytes": 30551,
+      "sha256": "6ca84d793deafdc2bf385bf4947ba7de194c111ee67e8554b5363c0fffd09c44"
+    },
+    {
+      "path": "/Applications/Serato DJ Pro.app/Contents/MacOS/Serato Video.app/Contents/Resources/faders/faders.xml",
+      "bytes": 2951,
+      "sha256": "942969ef0787db7805acaeeadb9e9f26c120aa74911432defe36365812f2ae28"
+    },
+    {
+      "path": "/Applications/Serato DJ Pro.app/Contents/MacOS/Serato Video.app/Contents/Resources/audio_effects/audioeffects.xml",
+      "bytes": 20941,
+      "sha256": "d1881739c5a069b0c106a7ec96dcf64bdbe6ef4eaf24937a78c79d7e40b971af"
+    },
+    {
+      "path": "/Applications/Serato DJ Pro.app/Contents/MacOS/Serato Video.app/Contents/Resources/localization/en.xml",
+      "bytes": 3115,
+      "sha256": "1a5a1e541f0de170bf922914bbb16bc97af993ca82ba985e5d735a4533f74338"
+    },
+    {
+      "path": "/Applications/Serato DJ Pro.app/Contents/MacOS/Serato Video.app/Contents/MacOS/Serato Video",
+      "bytes": 20893664,
+      "sha256": "90eb3532c8bda98058e0262597672b159ed7c2545d34a1b69b6eb63729be475b"
+    }
+  ],
+  "counts": {
+    "xmlDeclaredSlotEffects": 47,
+    "localizedAdditionalEffectNames": 8,
+    "effectCandidateNameUnion": 55,
+    "xmlDeclaredTransitions": 7,
+    "localizedAdditionalTransitionNames": 26,
+    "transitionCandidateNameUnion": 33,
+    "hiddenAudioLinkedDefinitions": 31,
+    "oneParameterFlagEffects": 42,
+    "confirmedRuntimeEffectMenuCount": null,
+    "confirmedRuntimeTransitionMenuCount": null
+  },
+  "effects": [
+    {
+      "id": "3749054",
+      "name": "Filter",
+      "category": "Analyzer",
+      "flags": [
+        "SLOT",
+        "ONE_PARAM"
+      ],
+      "rawDefaultValue": 128,
+      "sourcePath": "/Applications/Serato DJ Pro.app/Contents/MacOS/Serato Video.app/Contents/Resources/effects/effects.xml",
+      "sourceLine": 2,
+      "evidenceClass": "OBSERVED_LOCAL_RESOURCE",
+      "runtimeVerified": false,
+      "controls": {
+        "oneParameterFlag": true,
+        "upfaderFlag": false,
+        "twoSourceFlag": false,
+        "hiddenFlag": false,
+        "audioLinkedFlag": false,
+        "uiRange": null,
+        "uiUnits": null,
+        "uiEnums": null
+      },
+      "independentBehaviorContract": {
+        "evidenceClass": "INFERRED_PROPOSAL",
+        "contract": "Filter mode/response is unknown from this name and Analyzer category; require a separately defined original contract.",
+        "referenceEquivalent": false,
+        "implementedOrTested": false
+      }
+    },
+    {
+      "id": "16945677",
+      "name": "Delay Grid",
+      "category": "Delay",
+      "flags": [
+        "SLOT",
+        "ONE_PARAM",
+        "TWO_PASS"
+      ],
+      "rawDefaultValue": 0,
+      "sourcePath": "/Applications/Serato DJ Pro.app/Contents/MacOS/Serato Video.app/Contents/Resources/effects/effects.xml",
+      "sourceLine": 15,
+      "evidenceClass": "OBSERVED_LOCAL_RESOURCE",
+      "runtimeVerified": false,
+      "controls": {
+        "oneParameterFlag": true,
+        "upfaderFlag": false,
+        "twoSourceFlag": false,
+        "hiddenFlag": false,
+        "audioLinkedFlag": false,
+        "uiRange": null,
+        "uiUnits": null,
+        "uiEnums": null
+      },
+      "independentBehaviorContract": {
+        "evidenceClass": "INFERRED_PROPOSAL",
+        "contract": "Original grid of retained frames; declare history length and tile age.",
+        "referenceEquivalent": false,
+        "implementedOrTested": false
+      }
+    },
+    {
+      "id": "168045677",
+      "name": "Frame Freeze",
+      "category": "Delay",
+      "flags": [
+        "SLOT",
+        "ONE_PARAM",
+        "TWO_PASS"
+      ],
+      "rawDefaultValue": 0,
+      "sourcePath": "/Applications/Serato DJ Pro.app/Contents/MacOS/Serato Video.app/Contents/Resources/effects/effects.xml",
+      "sourceLine": 33,
+      "evidenceClass": "OBSERVED_LOCAL_RESOURCE",
+      "runtimeVerified": false,
+      "controls": {
+        "oneParameterFlag": true,
+        "upfaderFlag": false,
+        "twoSourceFlag": false,
+        "hiddenFlag": false,
+        "audioLinkedFlag": false,
+        "uiRange": null,
+        "uiUnits": null,
+        "uiEnums": null
+      },
+      "independentBehaviorContract": {
+        "evidenceClass": "INFERRED_PROPOSAL",
+        "contract": "Capture and retain a source frame; declare capture/release/retrigger semantics.",
+        "referenceEquivalent": false,
+        "implementedOrTested": false
+      }
+    },
+    {
+      "id": "16555677",
+      "name": "Frame Pulse",
+      "category": "Delay",
+      "flags": [
+        "SLOT",
+        "ONE_PARAM",
+        "TWO_PASS"
+      ],
+      "rawDefaultValue": 0,
+      "sourcePath": "/Applications/Serato DJ Pro.app/Contents/MacOS/Serato Video.app/Contents/Resources/effects/effects.xml",
+      "sourceLine": 51,
+      "evidenceClass": "OBSERVED_LOCAL_RESOURCE",
+      "runtimeVerified": false,
+      "controls": {
+        "oneParameterFlag": true,
+        "upfaderFlag": false,
+        "twoSourceFlag": false,
+        "hiddenFlag": false,
+        "audioLinkedFlag": false,
+        "uiRange": null,
+        "uiUnits": null,
+        "uiEnums": null
+      },
+      "independentBehaviorContract": {
+        "evidenceClass": "INFERRED_PROPOSAL",
+        "contract": "Original recurring frame hold/release; pulse cadence and source-clock binding are independent.",
+        "referenceEquivalent": false,
+        "implementedOrTested": false
+      }
+    },
+    {
+      "id": "16807",
+      "name": "Isolator Bass",
+      "category": "Colour",
+      "flags": [
+        "SLOT",
+        "ONE_PARAM"
+      ],
+      "rawDefaultValue": 0,
+      "sourcePath": "/Applications/Serato DJ Pro.app/Contents/MacOS/Serato Video.app/Contents/Resources/effects/effects.xml",
+      "sourceLine": 69,
+      "evidenceClass": "OBSERVED_LOCAL_RESOURCE",
+      "runtimeVerified": false,
+      "controls": {
+        "oneParameterFlag": true,
+        "upfaderFlag": false,
+        "twoSourceFlag": false,
+        "hiddenFlag": false,
+        "audioLinkedFlag": false,
+        "uiRange": null,
+        "uiUnits": null,
+        "uiEnums": null
+      },
+      "independentBehaviorContract": {
+        "evidenceClass": "INFERRED_PROPOSAL",
+        "contract": "Original audio-reactive visual response; declare bass/treble/channel analysis, scaling, smoothing and silence behavior. Name is evidence of intended family, not reference mapping.",
+        "referenceEquivalent": false,
+        "implementedOrTested": false
+      }
+    },
+    {
+      "id": "14039809",
+      "name": "Flash On BPM",
+      "category": "BPM Sync",
+      "flags": [
+        "SLOT",
+        "ONE_PARAM"
+      ],
+      "rawDefaultValue": 255,
+      "sourcePath": "/Applications/Serato DJ Pro.app/Contents/MacOS/Serato Video.app/Contents/Resources/effects/effects.xml",
+      "sourceLine": 83,
+      "evidenceClass": "OBSERVED_LOCAL_RESOURCE",
+      "runtimeVerified": false,
+      "controls": {
+        "oneParameterFlag": true,
+        "upfaderFlag": false,
+        "twoSourceFlag": false,
+        "hiddenFlag": false,
+        "audioLinkedFlag": false,
+        "uiRange": null,
+        "uiUnits": null,
+        "uiEnums": null
+      },
+      "independentBehaviorContract": {
+        "evidenceClass": "INFERRED_PROPOSAL",
+        "contract": "Original beat-clock flash with declared phase/duty cycle; reference tempo subdivisions and phase behavior unknown.",
+        "referenceEquivalent": false,
+        "implementedOrTested": false
+      }
+    },
+    {
+      "id": "12037433",
+      "name": "Split",
+      "category": "Split",
+      "flags": [
+        "SLOT",
+        "ONE_PARAM"
+      ],
+      "rawDefaultValue": 0,
+      "sourcePath": "/Applications/Serato DJ Pro.app/Contents/MacOS/Serato Video.app/Contents/Resources/effects/effects.xml",
+      "sourceLine": 96,
+      "evidenceClass": "OBSERVED_LOCAL_RESOURCE",
+      "runtimeVerified": false,
+      "controls": {
+        "oneParameterFlag": true,
+        "upfaderFlag": false,
+        "twoSourceFlag": false,
+        "hiddenFlag": false,
+        "audioLinkedFlag": false,
+        "uiRange": null,
+        "uiUnits": null,
+        "uiEnums": null
+      },
+      "independentBehaviorContract": {
+        "evidenceClass": "INFERRED_PROPOSAL",
+        "contract": "Original multi-region image split; layout/amount policy independent.",
+        "referenceEquivalent": false,
+        "implementedOrTested": false
+      }
+    },
+    {
+      "id": "11865188",
+      "name": "Audio Split",
+      "category": "Audio Reactive",
+      "flags": [
+        "SLOT",
+        "ONE_PARAM"
+      ],
+      "rawDefaultValue": 128,
+      "sourcePath": "/Applications/Serato DJ Pro.app/Contents/MacOS/Serato Video.app/Contents/Resources/effects/effects.xml",
+      "sourceLine": 111,
+      "evidenceClass": "OBSERVED_LOCAL_RESOURCE",
+      "runtimeVerified": false,
+      "controls": {
+        "oneParameterFlag": true,
+        "upfaderFlag": false,
+        "twoSourceFlag": false,
+        "hiddenFlag": false,
+        "audioLinkedFlag": false,
+        "uiRange": null,
+        "uiUnits": null,
+        "uiEnums": null
+      },
+      "independentBehaviorContract": {
+        "evidenceClass": "INFERRED_PROPOSAL",
+        "contract": "Original audio-reactive visual response; declare bass/treble/channel analysis, scaling, smoothing and silence behavior. Name is evidence of intended family, not reference mapping.",
+        "referenceEquivalent": false,
+        "implementedOrTested": false
+      }
+    },
+    {
+      "id": "3258310",
+      "name": "Audio Fade",
+      "category": "Audio Reactive",
+      "flags": [
+        "SLOT",
+        "ONE_PARAM"
+      ],
+      "rawDefaultValue": 128,
+      "sourcePath": "/Applications/Serato DJ Pro.app/Contents/MacOS/Serato Video.app/Contents/Resources/effects/effects.xml",
+      "sourceLine": 129,
+      "evidenceClass": "OBSERVED_LOCAL_RESOURCE",
+      "runtimeVerified": false,
+      "controls": {
+        "oneParameterFlag": true,
+        "upfaderFlag": false,
+        "twoSourceFlag": false,
+        "hiddenFlag": false,
+        "audioLinkedFlag": false,
+        "uiRange": null,
+        "uiUnits": null,
+        "uiEnums": null
+      },
+      "independentBehaviorContract": {
+        "evidenceClass": "INFERRED_PROPOSAL",
+        "contract": "Original audio-reactive visual response; declare bass/treble/channel analysis, scaling, smoothing and silence behavior. Name is evidence of intended family, not reference mapping.",
+        "referenceEquivalent": false,
+        "implementedOrTested": false
+      }
+    },
+    {
+      "id": "364254",
+      "name": "Analyzer Blocks",
+      "category": "Analyzer",
+      "flags": [
+        "SLOT",
+        "ONE_PARAM"
+      ],
+      "rawDefaultValue": 128,
+      "sourcePath": "/Applications/Serato DJ Pro.app/Contents/MacOS/Serato Video.app/Contents/Resources/effects/effects.xml",
+      "sourceLine": 147,
+      "evidenceClass": "OBSERVED_LOCAL_RESOURCE",
+      "runtimeVerified": false,
+      "controls": {
+        "oneParameterFlag": true,
+        "upfaderFlag": false,
+        "twoSourceFlag": false,
+        "hiddenFlag": false,
+        "audioLinkedFlag": false,
+        "uiRange": null,
+        "uiUnits": null,
+        "uiEnums": null
+      },
+      "independentBehaviorContract": {
+        "evidenceClass": "INFERRED_PROPOSAL",
+        "contract": "Original audio-spectrum visualization; declare frequency bins, amplitude scaling and display geometry. Reference analysis/mapping unmeasured.",
+        "referenceEquivalent": false,
+        "implementedOrTested": false
+      }
+    },
+    {
+      "id": "15010388",
+      "name": "Analyzer Image",
+      "category": "Analyzer",
+      "flags": [
+        "SLOT",
+        "ONE_PARAM"
+      ],
+      "rawDefaultValue": 128,
+      "sourcePath": "/Applications/Serato DJ Pro.app/Contents/MacOS/Serato Video.app/Contents/Resources/effects/effects.xml",
+      "sourceLine": 166,
+      "evidenceClass": "OBSERVED_LOCAL_RESOURCE",
+      "runtimeVerified": false,
+      "controls": {
+        "oneParameterFlag": true,
+        "upfaderFlag": false,
+        "twoSourceFlag": false,
+        "hiddenFlag": false,
+        "audioLinkedFlag": false,
+        "uiRange": null,
+        "uiUnits": null,
+        "uiEnums": null
+      },
+      "independentBehaviorContract": {
+        "evidenceClass": "INFERRED_PROPOSAL",
+        "contract": "Original audio-spectrum visualization; declare frequency bins, amplitude scaling and display geometry. Reference analysis/mapping unmeasured.",
+        "referenceEquivalent": false,
+        "implementedOrTested": false
+      }
+    },
+    {
+      "id": "10749124",
+      "name": "Record Rotate",
+      "category": "Record",
+      "flags": [
+        "SLOT",
+        "ONE_PARAM"
+      ],
+      "rawDefaultValue": 255,
+      "sourcePath": "/Applications/Serato DJ Pro.app/Contents/MacOS/Serato Video.app/Contents/Resources/effects/effects.xml",
+      "sourceLine": 185,
+      "evidenceClass": "OBSERVED_LOCAL_RESOURCE",
+      "runtimeVerified": false,
+      "controls": {
+        "oneParameterFlag": true,
+        "upfaderFlag": false,
+        "twoSourceFlag": false,
+        "hiddenFlag": false,
+        "audioLinkedFlag": false,
+        "uiRange": null,
+        "uiUnits": null,
+        "uiEnums": null
+      },
+      "independentBehaviorContract": {
+        "evidenceClass": "INFERRED_PROPOSAL",
+        "contract": "Original transport/record-reactive visual response; declare forward/reverse/stopped/rate behavior. Exact reference bindings remain unknown.",
+        "referenceEquivalent": false,
+        "implementedOrTested": false
+      }
+    },
+    {
+      "id": "10749128",
+      "name": "Center Fade",
+      "category": "Record",
+      "flags": [
+        "SLOT",
+        "ONE_PARAM"
+      ],
+      "rawDefaultValue": 255,
+      "sourcePath": "/Applications/Serato DJ Pro.app/Contents/MacOS/Serato Video.app/Contents/Resources/effects/effects.xml",
+      "sourceLine": 198,
+      "evidenceClass": "OBSERVED_LOCAL_RESOURCE",
+      "runtimeVerified": false,
+      "controls": {
+        "oneParameterFlag": true,
+        "upfaderFlag": false,
+        "twoSourceFlag": false,
+        "hiddenFlag": false,
+        "audioLinkedFlag": false,
+        "uiRange": null,
+        "uiUnits": null,
+        "uiEnums": null
+      },
+      "independentBehaviorContract": {
+        "evidenceClass": "INFERRED_PROPOSAL",
+        "contract": "Original transport/record-reactive visual response; declare forward/reverse/stopped/rate behavior. Exact reference bindings remain unknown.",
+        "referenceEquivalent": false,
+        "implementedOrTested": false
+      }
+    },
+    {
+      "id": "8141975",
+      "name": "Record Fade",
+      "category": "Record",
+      "flags": [
+        "SLOT",
+        "ONE_PARAM"
+      ],
+      "rawDefaultValue": 255,
+      "sourcePath": "/Applications/Serato DJ Pro.app/Contents/MacOS/Serato Video.app/Contents/Resources/effects/effects.xml",
+      "sourceLine": 211,
+      "evidenceClass": "OBSERVED_LOCAL_RESOURCE",
+      "runtimeVerified": false,
+      "controls": {
+        "oneParameterFlag": true,
+        "upfaderFlag": false,
+        "twoSourceFlag": false,
+        "hiddenFlag": false,
+        "audioLinkedFlag": false,
+        "uiRange": null,
+        "uiUnits": null,
+        "uiEnums": null
+      },
+      "independentBehaviorContract": {
+        "evidenceClass": "INFERRED_PROPOSAL",
+        "contract": "Original transport/record-reactive visual response; declare forward/reverse/stopped/rate behavior. Exact reference bindings remain unknown.",
+        "referenceEquivalent": false,
+        "implementedOrTested": false
+      }
+    },
+    {
+      "id": "6099702",
+      "name": "Bass Blur",
+      "category": "Audio Reactive",
+      "flags": [
+        "SLOT",
+        "ONE_PARAM"
+      ],
+      "rawDefaultValue": 128,
+      "sourcePath": "/Applications/Serato DJ Pro.app/Contents/MacOS/Serato Video.app/Contents/Resources/effects/effects.xml",
+      "sourceLine": 224,
+      "evidenceClass": "OBSERVED_LOCAL_RESOURCE",
+      "runtimeVerified": false,
+      "controls": {
+        "oneParameterFlag": true,
+        "upfaderFlag": false,
+        "twoSourceFlag": false,
+        "hiddenFlag": false,
+        "audioLinkedFlag": false,
+        "uiRange": null,
+        "uiUnits": null,
+        "uiEnums": null
+      },
+      "independentBehaviorContract": {
+        "evidenceClass": "INFERRED_PROPOSAL",
+        "contract": "Original audio-reactive visual response; declare bass/treble/channel analysis, scaling, smoothing and silence behavior. Name is evidence of intended family, not reference mapping.",
+        "referenceEquivalent": false,
+        "implementedOrTested": false
+      }
+    },
+    {
+      "id": "7134182",
+      "name": "Bass Zoom",
+      "category": "Audio Reactive",
+      "flags": [
+        "SLOT",
+        "ONE_PARAM"
+      ],
+      "rawDefaultValue": 128,
+      "sourcePath": "/Applications/Serato DJ Pro.app/Contents/MacOS/Serato Video.app/Contents/Resources/effects/effects.xml",
+      "sourceLine": 237,
+      "evidenceClass": "OBSERVED_LOCAL_RESOURCE",
+      "runtimeVerified": false,
+      "controls": {
+        "oneParameterFlag": true,
+        "upfaderFlag": false,
+        "twoSourceFlag": false,
+        "hiddenFlag": false,
+        "audioLinkedFlag": false,
+        "uiRange": null,
+        "uiUnits": null,
+        "uiEnums": null
+      },
+      "independentBehaviorContract": {
+        "evidenceClass": "INFERRED_PROPOSAL",
+        "contract": "Original audio-reactive visual response; declare bass/treble/channel analysis, scaling, smoothing and silence behavior. Name is evidence of intended family, not reference mapping.",
+        "referenceEquivalent": false,
+        "implementedOrTested": false
+      }
+    },
+    {
+      "id": "6099708",
+      "name": "Treble Blur",
+      "category": "Audio Reactive",
+      "flags": [
+        "SLOT",
+        "ONE_PARAM"
+      ],
+      "rawDefaultValue": 128,
+      "sourcePath": "/Applications/Serato DJ Pro.app/Contents/MacOS/Serato Video.app/Contents/Resources/effects/effects.xml",
+      "sourceLine": 250,
+      "evidenceClass": "OBSERVED_LOCAL_RESOURCE",
+      "runtimeVerified": false,
+      "controls": {
+        "oneParameterFlag": true,
+        "upfaderFlag": false,
+        "twoSourceFlag": false,
+        "hiddenFlag": false,
+        "audioLinkedFlag": false,
+        "uiRange": null,
+        "uiUnits": null,
+        "uiEnums": null
+      },
+      "independentBehaviorContract": {
+        "evidenceClass": "INFERRED_PROPOSAL",
+        "contract": "Original audio-reactive visual response; declare bass/treble/channel analysis, scaling, smoothing and silence behavior. Name is evidence of intended family, not reference mapping.",
+        "referenceEquivalent": false,
+        "implementedOrTested": false
+      }
+    },
+    {
+      "id": "7134187",
+      "name": "Treble Zoom",
+      "category": "Audio Reactive",
+      "flags": [
+        "SLOT",
+        "ONE_PARAM"
+      ],
+      "rawDefaultValue": 128,
+      "sourcePath": "/Applications/Serato DJ Pro.app/Contents/MacOS/Serato Video.app/Contents/Resources/effects/effects.xml",
+      "sourceLine": 263,
+      "evidenceClass": "OBSERVED_LOCAL_RESOURCE",
+      "runtimeVerified": false,
+      "controls": {
+        "oneParameterFlag": true,
+        "upfaderFlag": false,
+        "twoSourceFlag": false,
+        "hiddenFlag": false,
+        "audioLinkedFlag": false,
+        "uiRange": null,
+        "uiUnits": null,
+        "uiEnums": null
+      },
+      "independentBehaviorContract": {
+        "evidenceClass": "INFERRED_PROPOSAL",
+        "contract": "Original audio-reactive visual response; declare bass/treble/channel analysis, scaling, smoothing and silence behavior. Name is evidence of intended family, not reference mapping.",
+        "referenceEquivalent": false,
+        "implementedOrTested": false
+      }
+    },
+    {
+      "id": "13449098",
+      "name": "RGB Eq",
+      "category": "TTM 57SL Controls",
+      "flags": [
+        "SLOT"
+      ],
+      "rawDefaultValue": 128,
+      "sourcePath": "/Applications/Serato DJ Pro.app/Contents/MacOS/Serato Video.app/Contents/Resources/effects/effects.xml",
+      "sourceLine": 276,
+      "evidenceClass": "OBSERVED_LOCAL_RESOURCE",
+      "runtimeVerified": false,
+      "controls": {
+        "oneParameterFlag": false,
+        "upfaderFlag": false,
+        "twoSourceFlag": false,
+        "hiddenFlag": false,
+        "audioLinkedFlag": false,
+        "uiRange": null,
+        "uiUnits": null,
+        "uiEnums": null
+      },
+      "independentBehaviorContract": {
+        "evidenceClass": "INFERRED_PROPOSAL",
+        "contract": "Current EQ/control bindings unknown; do not infer TTM57SL or audio-band control from packaged name.",
+        "referenceEquivalent": false,
+        "implementedOrTested": false
+      }
+    },
+    {
+      "id": "15219052",
+      "name": "Audio RGB",
+      "category": "Audio Reactive",
+      "flags": [
+        "SLOT",
+        "ONE_PARAM"
+      ],
+      "rawDefaultValue": 128,
+      "sourcePath": "/Applications/Serato DJ Pro.app/Contents/MacOS/Serato Video.app/Contents/Resources/effects/effects.xml",
+      "sourceLine": 290,
+      "evidenceClass": "OBSERVED_LOCAL_RESOURCE",
+      "runtimeVerified": false,
+      "controls": {
+        "oneParameterFlag": true,
+        "upfaderFlag": false,
+        "twoSourceFlag": false,
+        "hiddenFlag": false,
+        "audioLinkedFlag": false,
+        "uiRange": null,
+        "uiUnits": null,
+        "uiEnums": null
+      },
+      "independentBehaviorContract": {
+        "evidenceClass": "INFERRED_PROPOSAL",
+        "contract": "Original audio-reactive visual response; declare bass/treble/channel analysis, scaling, smoothing and silence behavior. Name is evidence of intended family, not reference mapping.",
+        "referenceEquivalent": false,
+        "implementedOrTested": false
+      }
+    },
+    {
+      "id": "16531729",
+      "name": "CSL Eq",
+      "category": "TTM 57SL Controls",
+      "flags": [
+        "SLOT"
+      ],
+      "rawDefaultValue": 128,
+      "sourcePath": "/Applications/Serato DJ Pro.app/Contents/MacOS/Serato Video.app/Contents/Resources/effects/effects.xml",
+      "sourceLine": 304,
+      "evidenceClass": "OBSERVED_LOCAL_RESOURCE",
+      "runtimeVerified": false,
+      "controls": {
+        "oneParameterFlag": false,
+        "upfaderFlag": false,
+        "twoSourceFlag": false,
+        "hiddenFlag": false,
+        "audioLinkedFlag": false,
+        "uiRange": null,
+        "uiUnits": null,
+        "uiEnums": null
+      },
+      "independentBehaviorContract": {
+        "evidenceClass": "INFERRED_PROPOSAL",
+        "contract": "Current color-space/control bindings unknown; do not infer hardware operation.",
+        "referenceEquivalent": false,
+        "implementedOrTested": false
+      }
+    },
+    {
+      "id": "16531721",
+      "name": "Audio CSL",
+      "category": "Audio Reactive",
+      "flags": [
+        "SLOT"
+      ],
+      "rawDefaultValue": 128,
+      "sourcePath": "/Applications/Serato DJ Pro.app/Contents/MacOS/Serato Video.app/Contents/Resources/effects/effects.xml",
+      "sourceLine": 318,
+      "evidenceClass": "OBSERVED_LOCAL_RESOURCE",
+      "runtimeVerified": false,
+      "controls": {
+        "oneParameterFlag": false,
+        "upfaderFlag": false,
+        "twoSourceFlag": false,
+        "hiddenFlag": false,
+        "audioLinkedFlag": false,
+        "uiRange": null,
+        "uiUnits": null,
+        "uiEnums": null
+      },
+      "independentBehaviorContract": {
+        "evidenceClass": "INFERRED_PROPOSAL",
+        "contract": "Original audio-reactive visual response; declare bass/treble/channel analysis, scaling, smoothing and silence behavior. Name is evidence of intended family, not reference mapping.",
+        "referenceEquivalent": false,
+        "implementedOrTested": false
+      }
+    },
+    {
+      "id": "9324892",
+      "name": "Brightness",
+      "category": "Upfader",
+      "flags": [
+        "SLOT",
+        "UPFADER",
+        "ONE_PARAM"
+      ],
+      "rawDefaultValue": 128,
+      "sourcePath": "/Applications/Serato DJ Pro.app/Contents/MacOS/Serato Video.app/Contents/Resources/effects/effects.xml",
+      "sourceLine": 332,
+      "evidenceClass": "OBSERVED_LOCAL_RESOURCE",
+      "runtimeVerified": false,
+      "controls": {
+        "oneParameterFlag": true,
+        "upfaderFlag": true,
+        "twoSourceFlag": false,
+        "hiddenFlag": false,
+        "audioLinkedFlag": false,
+        "uiRange": null,
+        "uiUnits": null,
+        "uiEnums": null
+      },
+      "independentBehaviorContract": {
+        "evidenceClass": "INFERRED_PROPOSAL",
+        "contract": "Change original pixel luminance with a declared clamp; confirm upfader input behavior separately.",
+        "referenceEquivalent": false,
+        "implementedOrTested": false
+      }
+    },
+    {
+      "id": "76789081",
+      "name": "Smudge",
+      "category": "Image",
+      "flags": [
+        "SLOT",
+        "ONE_PARAM"
+      ],
+      "rawDefaultValue": 0,
+      "sourcePath": "/Applications/Serato DJ Pro.app/Contents/MacOS/Serato Video.app/Contents/Resources/effects/effects.xml",
+      "sourceLine": 346,
+      "evidenceClass": "OBSERVED_LOCAL_RESOURCE",
+      "runtimeVerified": false,
+      "controls": {
+        "oneParameterFlag": true,
+        "upfaderFlag": false,
+        "twoSourceFlag": false,
+        "hiddenFlag": false,
+        "audioLinkedFlag": false,
+        "uiRange": null,
+        "uiUnits": null,
+        "uiEnums": null
+      },
+      "independentBehaviorContract": {
+        "evidenceClass": "INFERRED_PROPOSAL",
+        "contract": "Original spatial smear; declared direction/radius and state lifecycle.",
+        "referenceEquivalent": false,
+        "implementedOrTested": false
+      }
+    },
+    {
+      "id": "73519081",
+      "name": "Mirror",
+      "category": "Split",
+      "flags": [
+        "SLOT",
+        "ONE_PARAM"
+      ],
+      "rawDefaultValue": 0,
+      "sourcePath": "/Applications/Serato DJ Pro.app/Contents/MacOS/Serato Video.app/Contents/Resources/effects/effects.xml",
+      "sourceLine": 360,
+      "evidenceClass": "OBSERVED_LOCAL_RESOURCE",
+      "runtimeVerified": false,
+      "controls": {
+        "oneParameterFlag": true,
+        "upfaderFlag": false,
+        "twoSourceFlag": false,
+        "hiddenFlag": false,
+        "audioLinkedFlag": false,
+        "uiRange": null,
+        "uiUnits": null,
+        "uiEnums": null
+      },
+      "independentBehaviorContract": {
+        "evidenceClass": "INFERRED_PROPOSAL",
+        "contract": "Original reflected tiling with explicitly declared axis policy.",
+        "referenceEquivalent": false,
+        "implementedOrTested": false
+      }
+    },
+    {
+      "id": "73519072",
+      "name": "Kaleidoscope",
+      "category": "Split",
+      "flags": [
+        "SLOT",
+        "ONE_PARAM"
+      ],
+      "rawDefaultValue": 255,
+      "sourcePath": "/Applications/Serato DJ Pro.app/Contents/MacOS/Serato Video.app/Contents/Resources/effects/effects.xml",
+      "sourceLine": 374,
+      "evidenceClass": "OBSERVED_LOCAL_RESOURCE",
+      "runtimeVerified": false,
+      "controls": {
+        "oneParameterFlag": true,
+        "upfaderFlag": false,
+        "twoSourceFlag": false,
+        "hiddenFlag": false,
+        "audioLinkedFlag": false,
+        "uiRange": null,
+        "uiUnits": null,
+        "uiEnums": null
+      },
+      "independentBehaviorContract": {
+        "evidenceClass": "INFERRED_PROPOSAL",
+        "contract": "Original repeated reflected sectors; sector geometry is independent.",
+        "referenceEquivalent": false,
+        "implementedOrTested": false
+      }
+    },
+    {
+      "id": "25319072",
+      "name": "Audio Kaleidoscope",
+      "category": "Audio Reactive",
+      "flags": [
+        "SLOT",
+        "ONE_PARAM"
+      ],
+      "rawDefaultValue": 128,
+      "sourcePath": "/Applications/Serato DJ Pro.app/Contents/MacOS/Serato Video.app/Contents/Resources/effects/effects.xml",
+      "sourceLine": 388,
+      "evidenceClass": "OBSERVED_LOCAL_RESOURCE",
+      "runtimeVerified": false,
+      "controls": {
+        "oneParameterFlag": true,
+        "upfaderFlag": false,
+        "twoSourceFlag": false,
+        "hiddenFlag": false,
+        "audioLinkedFlag": false,
+        "uiRange": null,
+        "uiUnits": null,
+        "uiEnums": null
+      },
+      "independentBehaviorContract": {
+        "evidenceClass": "INFERRED_PROPOSAL",
+        "contract": "Original audio-reactive visual response; declare bass/treble/channel analysis, scaling, smoothing and silence behavior. Name is evidence of intended family, not reference mapping.",
+        "referenceEquivalent": false,
+        "implementedOrTested": false
+      }
+    },
+    {
+      "id": "7351908",
+      "name": "Saturation",
+      "category": "Image",
+      "flags": [
+        "SLOT",
+        "ONE_PARAM"
+      ],
+      "rawDefaultValue": 128,
+      "sourcePath": "/Applications/Serato DJ Pro.app/Contents/MacOS/Serato Video.app/Contents/Resources/effects/effects.xml",
+      "sourceLine": 405,
+      "evidenceClass": "OBSERVED_LOCAL_RESOURCE",
+      "runtimeVerified": false,
+      "controls": {
+        "oneParameterFlag": true,
+        "upfaderFlag": false,
+        "twoSourceFlag": false,
+        "hiddenFlag": false,
+        "audioLinkedFlag": false,
+        "uiRange": null,
+        "uiUnits": null,
+        "uiEnums": null
+      },
+      "independentBehaviorContract": {
+        "evidenceClass": "INFERRED_PROPOSAL",
+        "contract": "Change original chroma magnitude while documenting the chosen independent color model.",
+        "referenceEquivalent": false,
+        "implementedOrTested": false
+      }
+    },
+    {
+      "id": "15215464",
+      "name": "Contrast",
+      "category": "Image",
+      "flags": [
+        "SLOT",
+        "ONE_PARAM"
+      ],
+      "rawDefaultValue": 0,
+      "sourcePath": "/Applications/Serato DJ Pro.app/Contents/MacOS/Serato Video.app/Contents/Resources/effects/effects.xml",
+      "sourceLine": 419,
+      "evidenceClass": "OBSERVED_LOCAL_RESOURCE",
+      "runtimeVerified": false,
+      "controls": {
+        "oneParameterFlag": true,
+        "upfaderFlag": false,
+        "twoSourceFlag": false,
+        "hiddenFlag": false,
+        "audioLinkedFlag": false,
+        "uiRange": null,
+        "uiUnits": null,
+        "uiEnums": null
+      },
+      "independentBehaviorContract": {
+        "evidenceClass": "INFERRED_PROPOSAL",
+        "contract": "Change luminance contrast around an explicitly declared independent pivot.",
+        "referenceEquivalent": false,
+        "implementedOrTested": false
+      }
+    },
+    {
+      "id": "6526584",
+      "name": "Gamma",
+      "category": "Image",
+      "flags": [
+        "SLOT",
+        "ONE_PARAM"
+      ],
+      "rawDefaultValue": 128,
+      "sourcePath": "/Applications/Serato DJ Pro.app/Contents/MacOS/Serato Video.app/Contents/Resources/effects/effects.xml",
+      "sourceLine": 433,
+      "evidenceClass": "OBSERVED_LOCAL_RESOURCE",
+      "runtimeVerified": false,
+      "controls": {
+        "oneParameterFlag": true,
+        "upfaderFlag": false,
+        "twoSourceFlag": false,
+        "hiddenFlag": false,
+        "audioLinkedFlag": false,
+        "uiRange": null,
+        "uiUnits": null,
+        "uiEnums": null
+      },
+      "independentBehaviorContract": {
+        "evidenceClass": "INFERRED_PROPOSAL",
+        "contract": "Apply a declared original gamma response; reference scale/curve is unknown.",
+        "referenceEquivalent": false,
+        "implementedOrTested": false
+      }
+    },
+    {
+      "id": "1608572",
+      "name": "Color Isolator",
+      "category": "Colour",
+      "flags": [
+        "SLOT",
+        "ONE_PARAM"
+      ],
+      "rawDefaultValue": 0,
+      "sourcePath": "/Applications/Serato DJ Pro.app/Contents/MacOS/Serato Video.app/Contents/Resources/effects/effects.xml",
+      "sourceLine": 447,
+      "evidenceClass": "OBSERVED_LOCAL_RESOURCE",
+      "runtimeVerified": false,
+      "controls": {
+        "oneParameterFlag": true,
+        "upfaderFlag": false,
+        "twoSourceFlag": false,
+        "hiddenFlag": false,
+        "audioLinkedFlag": false,
+        "uiRange": null,
+        "uiUnits": null,
+        "uiEnums": null
+      },
+      "independentBehaviorContract": {
+        "evidenceClass": "INFERRED_PROPOSAL",
+        "contract": "Independently preserve a chosen color region and attenuate others; hue selection policy is original.",
+        "referenceEquivalent": false,
+        "implementedOrTested": false
+      }
+    },
+    {
+      "id": "5190340",
+      "name": "UV Paint",
+      "category": "Colour",
+      "flags": [
+        "SLOT"
+      ],
+      "rawDefaultValue": 0,
+      "sourcePath": "/Applications/Serato DJ Pro.app/Contents/MacOS/Serato Video.app/Contents/Resources/effects/effects.xml",
+      "sourceLine": 461,
+      "evidenceClass": "OBSERVED_LOCAL_RESOURCE",
+      "runtimeVerified": false,
+      "controls": {
+        "oneParameterFlag": false,
+        "upfaderFlag": false,
+        "twoSourceFlag": false,
+        "hiddenFlag": false,
+        "audioLinkedFlag": false,
+        "uiRange": null,
+        "uiUnits": null,
+        "uiEnums": null
+      },
+      "independentBehaviorContract": {
+        "evidenceClass": "INFERRED_PROPOSAL",
+        "contract": "Reference semantics unknown; name alone is insufficient for an advertised equivalent effect.",
+        "referenceEquivalent": false,
+        "implementedOrTested": false
+      }
+    },
+    {
+      "id": "7497528",
+      "name": "Anaglyph 3D",
+      "category": "Colour",
+      "flags": [
+        "SLOT",
+        "ONE_PARAM"
+      ],
+      "rawDefaultValue": 0,
+      "sourcePath": "/Applications/Serato DJ Pro.app/Contents/MacOS/Serato Video.app/Contents/Resources/effects/effects.xml",
+      "sourceLine": 475,
+      "evidenceClass": "OBSERVED_LOCAL_RESOURCE",
+      "runtimeVerified": false,
+      "controls": {
+        "oneParameterFlag": true,
+        "upfaderFlag": false,
+        "twoSourceFlag": false,
+        "hiddenFlag": false,
+        "audioLinkedFlag": false,
+        "uiRange": null,
+        "uiUnits": null,
+        "uiEnums": null
+      },
+      "independentBehaviorContract": {
+        "evidenceClass": "INFERRED_PROPOSAL",
+        "contract": "Produce original displaced stereo-color channels; displacement/color convention is independent.",
+        "referenceEquivalent": false,
+        "implementedOrTested": false
+      }
+    },
+    {
+      "id": "12943734",
+      "name": "Luma Key Black",
+      "category": "Alpha Based",
+      "flags": [
+        "SLOT",
+        "TWO_SOURCE",
+        "ONE_PARAM"
+      ],
+      "rawDefaultValue": 0,
+      "sourcePath": "/Applications/Serato DJ Pro.app/Contents/MacOS/Serato Video.app/Contents/Resources/effects/effects.xml",
+      "sourceLine": 489,
+      "evidenceClass": "OBSERVED_LOCAL_RESOURCE",
+      "runtimeVerified": false,
+      "controls": {
+        "oneParameterFlag": true,
+        "upfaderFlag": false,
+        "twoSourceFlag": true,
+        "hiddenFlag": false,
+        "audioLinkedFlag": false,
+        "uiRange": null,
+        "uiUnits": null,
+        "uiEnums": null
+      },
+      "independentBehaviorContract": {
+        "evidenceClass": "INFERRED_PROPOSAL",
+        "contract": "Original low-luminance key composites two inputs; declare threshold/softness policy.",
+        "referenceEquivalent": false,
+        "implementedOrTested": false
+      }
+    },
+    {
+      "id": "11771433",
+      "name": "Luma Key White",
+      "category": "Alpha Based",
+      "flags": [
+        "SLOT",
+        "TWO_SOURCE",
+        "ONE_PARAM"
+      ],
+      "rawDefaultValue": 0,
+      "sourcePath": "/Applications/Serato DJ Pro.app/Contents/MacOS/Serato Video.app/Contents/Resources/effects/effects.xml",
+      "sourceLine": 503,
+      "evidenceClass": "OBSERVED_LOCAL_RESOURCE",
+      "runtimeVerified": false,
+      "controls": {
+        "oneParameterFlag": true,
+        "upfaderFlag": false,
+        "twoSourceFlag": true,
+        "hiddenFlag": false,
+        "audioLinkedFlag": false,
+        "uiRange": null,
+        "uiUnits": null,
+        "uiEnums": null
+      },
+      "independentBehaviorContract": {
+        "evidenceClass": "INFERRED_PROPOSAL",
+        "contract": "Original high-luminance key composites two inputs; declare threshold/softness policy.",
+        "referenceEquivalent": false,
+        "implementedOrTested": false
+      }
+    },
+    {
+      "id": "11567744",
+      "name": "Chroma Key Green",
+      "category": "Alpha Based",
+      "flags": [
+        "SLOT",
+        "TWO_SOURCE",
+        "ONE_PARAM"
+      ],
+      "rawDefaultValue": 0,
+      "sourcePath": "/Applications/Serato DJ Pro.app/Contents/MacOS/Serato Video.app/Contents/Resources/effects/effects.xml",
+      "sourceLine": 517,
+      "evidenceClass": "OBSERVED_LOCAL_RESOURCE",
+      "runtimeVerified": false,
+      "controls": {
+        "oneParameterFlag": true,
+        "upfaderFlag": false,
+        "twoSourceFlag": true,
+        "hiddenFlag": false,
+        "audioLinkedFlag": false,
+        "uiRange": null,
+        "uiUnits": null,
+        "uiEnums": null
+      },
+      "independentBehaviorContract": {
+        "evidenceClass": "INFERRED_PROPOSAL",
+        "contract": "Original green-dominance key composites two inputs; spill/threshold policy is independent.",
+        "referenceEquivalent": false,
+        "implementedOrTested": false
+      }
+    },
+    {
+      "id": "4159421",
+      "name": "Color Photocopy",
+      "category": "Multisample",
+      "flags": [
+        "SLOT",
+        "ONE_PARAM"
+      ],
+      "rawDefaultValue": 0,
+      "sourcePath": "/Applications/Serato DJ Pro.app/Contents/MacOS/Serato Video.app/Contents/Resources/effects/effects.xml",
+      "sourceLine": 531,
+      "evidenceClass": "OBSERVED_LOCAL_RESOURCE",
+      "runtimeVerified": false,
+      "controls": {
+        "oneParameterFlag": true,
+        "upfaderFlag": false,
+        "twoSourceFlag": false,
+        "hiddenFlag": false,
+        "audioLinkedFlag": false,
+        "uiRange": null,
+        "uiUnits": null,
+        "uiEnums": null
+      },
+      "independentBehaviorContract": {
+        "evidenceClass": "INFERRED_PROPOSAL",
+        "contract": "Original stylized color poster/edge response; reference transfer is unknown.",
+        "referenceEquivalent": false,
+        "implementedOrTested": false
+      }
+    },
+    {
+      "id": "12623200",
+      "name": "Emboss",
+      "category": "Multisample",
+      "flags": [
+        "SLOT",
+        "ONE_PARAM"
+      ],
+      "rawDefaultValue": 0,
+      "sourcePath": "/Applications/Serato DJ Pro.app/Contents/MacOS/Serato Video.app/Contents/Resources/effects/effects.xml",
+      "sourceLine": 558,
+      "evidenceClass": "OBSERVED_LOCAL_RESOURCE",
+      "runtimeVerified": false,
+      "controls": {
+        "oneParameterFlag": true,
+        "upfaderFlag": false,
+        "twoSourceFlag": false,
+        "hiddenFlag": false,
+        "audioLinkedFlag": false,
+        "uiRange": null,
+        "uiUnits": null,
+        "uiEnums": null
+      },
+      "independentBehaviorContract": {
+        "evidenceClass": "INFERRED_PROPOSAL",
+        "contract": "Original relief edge filter with declared direction.",
+        "referenceEquivalent": false,
+        "implementedOrTested": false
+      }
+    },
+    {
+      "id": "8742157",
+      "name": "Sharpen",
+      "category": "Multisample",
+      "flags": [
+        "SLOT",
+        "ONE_PARAM"
+      ],
+      "rawDefaultValue": 0,
+      "sourcePath": "/Applications/Serato DJ Pro.app/Contents/MacOS/Serato Video.app/Contents/Resources/effects/effects.xml",
+      "sourceLine": 585,
+      "evidenceClass": "OBSERVED_LOCAL_RESOURCE",
+      "runtimeVerified": false,
+      "controls": {
+        "oneParameterFlag": true,
+        "upfaderFlag": false,
+        "twoSourceFlag": false,
+        "hiddenFlag": false,
+        "audioLinkedFlag": false,
+        "uiRange": null,
+        "uiUnits": null,
+        "uiEnums": null
+      },
+      "independentBehaviorContract": {
+        "evidenceClass": "INFERRED_PROPOSAL",
+        "contract": "Original high-frequency enhancement with declared amount/clamp.",
+        "referenceEquivalent": false,
+        "implementedOrTested": false
+      }
+    },
+    {
+      "id": "9417971",
+      "name": "Blur",
+      "category": "Multisample",
+      "flags": [
+        "SLOT",
+        "ONE_PARAM"
+      ],
+      "rawDefaultValue": 0,
+      "sourcePath": "/Applications/Serato DJ Pro.app/Contents/MacOS/Serato Video.app/Contents/Resources/effects/effects.xml",
+      "sourceLine": 612,
+      "evidenceClass": "OBSERVED_LOCAL_RESOURCE",
+      "runtimeVerified": false,
+      "controls": {
+        "oneParameterFlag": true,
+        "upfaderFlag": false,
+        "twoSourceFlag": false,
+        "hiddenFlag": false,
+        "audioLinkedFlag": false,
+        "uiRange": null,
+        "uiUnits": null,
+        "uiEnums": null
+      },
+      "independentBehaviorContract": {
+        "evidenceClass": "INFERRED_PROPOSAL",
+        "contract": "Original spatial blur with declared kernel and cost bound.",
+        "referenceEquivalent": false,
+        "implementedOrTested": false
+      }
+    },
+    {
+      "id": "9965417",
+      "name": "Edge Detect",
+      "category": "Multisample",
+      "flags": [
+        "SLOT",
+        "ONE_PARAM"
+      ],
+      "rawDefaultValue": 128,
+      "sourcePath": "/Applications/Serato DJ Pro.app/Contents/MacOS/Serato Video.app/Contents/Resources/effects/effects.xml",
+      "sourceLine": 639,
+      "evidenceClass": "OBSERVED_LOCAL_RESOURCE",
+      "runtimeVerified": false,
+      "controls": {
+        "oneParameterFlag": true,
+        "upfaderFlag": false,
+        "twoSourceFlag": false,
+        "hiddenFlag": false,
+        "audioLinkedFlag": false,
+        "uiRange": null,
+        "uiUnits": null,
+        "uiEnums": null
+      },
+      "independentBehaviorContract": {
+        "evidenceClass": "INFERRED_PROPOSAL",
+        "contract": "Original edge map with declared kernel/channel composition.",
+        "referenceEquivalent": false,
+        "implementedOrTested": false
+      }
+    },
+    {
+      "id": "1265977",
+      "name": "LED Billboard",
+      "category": "Multisample",
+      "flags": [
+        "SLOT",
+        "ONE_PARAM"
+      ],
+      "rawDefaultValue": 0,
+      "sourcePath": "/Applications/Serato DJ Pro.app/Contents/MacOS/Serato Video.app/Contents/Resources/effects/effects.xml",
+      "sourceLine": 666,
+      "evidenceClass": "OBSERVED_LOCAL_RESOURCE",
+      "runtimeVerified": false,
+      "controls": {
+        "oneParameterFlag": true,
+        "upfaderFlag": false,
+        "twoSourceFlag": false,
+        "hiddenFlag": false,
+        "audioLinkedFlag": false,
+        "uiRange": null,
+        "uiUnits": null,
+        "uiEnums": null
+      },
+      "independentBehaviorContract": {
+        "evidenceClass": "INFERRED_PROPOSAL",
+        "contract": "Original cell/pixel-light rendering with a declared grid and luminance response.",
+        "referenceEquivalent": false,
+        "implementedOrTested": false
+      }
+    },
+    {
+      "id": "3665600",
+      "name": "V-Hold",
+      "category": "Time Based",
+      "flags": [
+        "SLOT",
+        "ONE_PARAM"
+      ],
+      "rawDefaultValue": 0,
+      "sourcePath": "/Applications/Serato DJ Pro.app/Contents/MacOS/Serato Video.app/Contents/Resources/effects/effects.xml",
+      "sourceLine": 693,
+      "evidenceClass": "OBSERVED_LOCAL_RESOURCE",
+      "runtimeVerified": false,
+      "controls": {
+        "oneParameterFlag": true,
+        "upfaderFlag": false,
+        "twoSourceFlag": false,
+        "hiddenFlag": false,
+        "audioLinkedFlag": false,
+        "uiRange": null,
+        "uiUnits": null,
+        "uiEnums": null
+      },
+      "independentBehaviorContract": {
+        "evidenceClass": "INFERRED_PROPOSAL",
+        "contract": "Original vertical image displacement/instability; reference timing remains unknown.",
+        "referenceEquivalent": false,
+        "implementedOrTested": false
+      }
+    },
+    {
+      "id": "234603",
+      "name": "Posterize",
+      "category": "Image",
+      "flags": [
+        "SLOT",
+        "ONE_PARAM"
+      ],
+      "rawDefaultValue": 0,
+      "sourcePath": "/Applications/Serato DJ Pro.app/Contents/MacOS/Serato Video.app/Contents/Resources/effects/effects.xml",
+      "sourceLine": 707,
+      "evidenceClass": "OBSERVED_LOCAL_RESOURCE",
+      "runtimeVerified": false,
+      "controls": {
+        "oneParameterFlag": true,
+        "upfaderFlag": false,
+        "twoSourceFlag": false,
+        "hiddenFlag": false,
+        "audioLinkedFlag": false,
+        "uiRange": null,
+        "uiUnits": null,
+        "uiEnums": null
+      },
+      "independentBehaviorContract": {
+        "evidenceClass": "INFERRED_PROPOSAL",
+        "contract": "Original color-level quantization; level mapping is explicitly independent.",
+        "referenceEquivalent": false,
+        "implementedOrTested": false
+      }
+    },
+    {
+      "id": "16403779",
+      "name": "Negative",
+      "category": "Image",
+      "flags": [
+        "SLOT"
+      ],
+      "rawDefaultValue": 0,
+      "sourcePath": "/Applications/Serato DJ Pro.app/Contents/MacOS/Serato Video.app/Contents/Resources/effects/effects.xml",
+      "sourceLine": 721,
+      "evidenceClass": "OBSERVED_LOCAL_RESOURCE",
+      "runtimeVerified": false,
+      "controls": {
+        "oneParameterFlag": false,
+        "upfaderFlag": false,
+        "twoSourceFlag": false,
+        "hiddenFlag": false,
+        "audioLinkedFlag": false,
+        "uiRange": null,
+        "uiUnits": null,
+        "uiEnums": null
+      },
+      "independentBehaviorContract": {
+        "evidenceClass": "INFERRED_PROPOSAL",
+        "contract": "Invert source color channels using an explicitly declared independent color space.",
+        "referenceEquivalent": false,
+        "implementedOrTested": false
+      }
+    },
+    {
+      "id": "13766509",
+      "name": "Sepia",
+      "category": "Image",
+      "flags": [
+        "SLOT",
+        "ONE_PARAM"
+      ],
+      "rawDefaultValue": 255,
+      "sourcePath": "/Applications/Serato DJ Pro.app/Contents/MacOS/Serato Video.app/Contents/Resources/effects/effects.xml",
+      "sourceLine": 735,
+      "evidenceClass": "OBSERVED_LOCAL_RESOURCE",
+      "runtimeVerified": false,
+      "controls": {
+        "oneParameterFlag": true,
+        "upfaderFlag": false,
+        "twoSourceFlag": false,
+        "hiddenFlag": false,
+        "audioLinkedFlag": false,
+        "uiRange": null,
+        "uiUnits": null,
+        "uiEnums": null
+      },
+      "independentBehaviorContract": {
+        "evidenceClass": "INFERRED_PROPOSAL",
+        "contract": "Apply an original warm monochrome color transform.",
+        "referenceEquivalent": false,
+        "implementedOrTested": false
+      }
+    },
+    {
+      "id": "14307489",
+      "name": "Rotoscope",
+      "category": "Image",
+      "flags": [
+        "SLOT",
+        "ONE_PARAM"
+      ],
+      "rawDefaultValue": 255,
+      "sourcePath": "/Applications/Serato DJ Pro.app/Contents/MacOS/Serato Video.app/Contents/Resources/effects/effects.xml",
+      "sourceLine": 749,
+      "evidenceClass": "OBSERVED_LOCAL_RESOURCE",
+      "runtimeVerified": false,
+      "controls": {
+        "oneParameterFlag": true,
+        "upfaderFlag": false,
+        "twoSourceFlag": false,
+        "hiddenFlag": false,
+        "audioLinkedFlag": false,
+        "uiRange": null,
+        "uiUnits": null,
+        "uiEnums": null
+      },
+      "independentBehaviorContract": {
+        "evidenceClass": "INFERRED_PROPOSAL",
+        "contract": "Original stylized edge/quantization combination; reference response unknown.",
+        "referenceEquivalent": false,
+        "implementedOrTested": false
+      }
+    }
+  ],
+  "transitions": [
+    {
+      "id": "14439532",
+      "name": "Luma Key Fade",
+      "category": "Shader",
+      "flags": [],
+      "rawDefaultValue": null,
+      "sourcePath": "/Applications/Serato DJ Pro.app/Contents/MacOS/Serato Video.app/Contents/Resources/faders/faders.xml",
+      "sourceLine": 2,
+      "evidenceClass": "OBSERVED_LOCAL_RESOURCE",
+      "runtimeVerified": false,
+      "controls": {
+        "oneParameterFlag": false,
+        "upfaderFlag": false,
+        "twoSourceFlag": false,
+        "hiddenFlag": false,
+        "audioLinkedFlag": false,
+        "uiRange": null,
+        "uiUnits": null,
+        "uiEnums": null
+      }
+    },
+    {
+      "id": "3921038",
+      "name": "Upfaders Only",
+      "category": "Blend",
+      "flags": [],
+      "rawDefaultValue": null,
+      "sourcePath": "/Applications/Serato DJ Pro.app/Contents/MacOS/Serato Video.app/Contents/Resources/faders/faders.xml",
+      "sourceLine": 13,
+      "evidenceClass": "OBSERVED_LOCAL_RESOURCE",
+      "runtimeVerified": false,
+      "controls": {
+        "oneParameterFlag": false,
+        "upfaderFlag": false,
+        "twoSourceFlag": false,
+        "hiddenFlag": false,
+        "audioLinkedFlag": false,
+        "uiRange": null,
+        "uiUnits": null,
+        "uiEnums": null
+      }
+    },
+    {
+      "id": "1868931",
+      "name": "Additive Average",
+      "category": "Blend",
+      "flags": [],
+      "rawDefaultValue": null,
+      "sourcePath": "/Applications/Serato DJ Pro.app/Contents/MacOS/Serato Video.app/Contents/Resources/faders/faders.xml",
+      "sourceLine": 24,
+      "evidenceClass": "OBSERVED_LOCAL_RESOURCE",
+      "runtimeVerified": false,
+      "controls": {
+        "oneParameterFlag": false,
+        "upfaderFlag": false,
+        "twoSourceFlag": false,
+        "hiddenFlag": false,
+        "audioLinkedFlag": false,
+        "uiRange": null,
+        "uiUnits": null,
+        "uiEnums": null
+      }
+    },
+    {
+      "id": "1867931",
+      "name": "Additive",
+      "category": "Blend",
+      "flags": [],
+      "rawDefaultValue": null,
+      "sourcePath": "/Applications/Serato DJ Pro.app/Contents/MacOS/Serato Video.app/Contents/Resources/faders/faders.xml",
+      "sourceLine": 35,
+      "evidenceClass": "OBSERVED_LOCAL_RESOURCE",
+      "runtimeVerified": false,
+      "controls": {
+        "oneParameterFlag": false,
+        "upfaderFlag": false,
+        "twoSourceFlag": false,
+        "hiddenFlag": false,
+        "audioLinkedFlag": false,
+        "uiRange": null,
+        "uiUnits": null,
+        "uiEnums": null
+      }
+    },
+    {
+      "id": "1968931",
+      "name": "Difference Fade",
+      "category": "Blend",
+      "flags": [],
+      "rawDefaultValue": null,
+      "sourcePath": "/Applications/Serato DJ Pro.app/Contents/MacOS/Serato Video.app/Contents/Resources/faders/faders.xml",
+      "sourceLine": 46,
+      "evidenceClass": "OBSERVED_LOCAL_RESOURCE",
+      "runtimeVerified": false,
+      "controls": {
+        "oneParameterFlag": false,
+        "upfaderFlag": false,
+        "twoSourceFlag": false,
+        "hiddenFlag": false,
+        "audioLinkedFlag": false,
+        "uiRange": null,
+        "uiUnits": null,
+        "uiEnums": null
+      }
+    },
+    {
+      "id": "11239532",
+      "name": "Smudge Fade",
+      "category": "Shader",
+      "flags": [],
+      "rawDefaultValue": null,
+      "sourcePath": "/Applications/Serato DJ Pro.app/Contents/MacOS/Serato Video.app/Contents/Resources/faders/faders.xml",
+      "sourceLine": 57,
+      "evidenceClass": "OBSERVED_LOCAL_RESOURCE",
+      "runtimeVerified": false,
+      "controls": {
+        "oneParameterFlag": false,
+        "upfaderFlag": false,
+        "twoSourceFlag": false,
+        "hiddenFlag": false,
+        "audioLinkedFlag": false,
+        "uiRange": null,
+        "uiUnits": null,
+        "uiEnums": null
+      }
+    },
+    {
+      "id": "2511038",
+      "name": "Melt",
+      "category": "Shader",
+      "flags": [],
+      "rawDefaultValue": null,
+      "sourcePath": "/Applications/Serato DJ Pro.app/Contents/MacOS/Serato Video.app/Contents/Resources/faders/faders.xml",
+      "sourceLine": 68,
+      "evidenceClass": "OBSERVED_LOCAL_RESOURCE",
+      "runtimeVerified": false,
+      "controls": {
+        "oneParameterFlag": false,
+        "upfaderFlag": false,
+        "twoSourceFlag": false,
+        "hiddenFlag": false,
+        "audioLinkedFlag": false,
+        "uiRange": null,
+        "uiUnits": null,
+        "uiEnums": null
+      }
+    }
+  ],
+  "localizedEffectCandidates": [
+    {
+      "name": "Rotate",
+      "key": "RotateEffectString",
+      "sourcePath": "/Applications/Serato DJ Pro.app/Contents/MacOS/Serato Video.app/Contents/Resources/localization/en.xml",
+      "sourceLine": 65,
+      "evidenceClass": "OBSERVED_LOCALIZATION_LABEL",
+      "runtimeRegistrationVerified": false,
+      "category": "Transform"
+    },
+    {
+      "name": "Zoom",
+      "key": "ZoomEffectString",
+      "sourcePath": "/Applications/Serato DJ Pro.app/Contents/MacOS/Serato Video.app/Contents/Resources/localization/en.xml",
+      "sourceLine": 67,
+      "evidenceClass": "OBSERVED_LOCALIZATION_LABEL",
+      "runtimeRegistrationVerified": false,
+      "category": "Transform"
+    },
+    {
+      "name": "Tile",
+      "key": "TileEffectString",
+      "sourcePath": "/Applications/Serato DJ Pro.app/Contents/MacOS/Serato Video.app/Contents/Resources/localization/en.xml",
+      "sourceLine": 69,
+      "evidenceClass": "OBSERVED_LOCALIZATION_LABEL",
+      "runtimeRegistrationVerified": false,
+      "category": "Transform"
+    },
+    {
+      "name": "Zoom/Tile",
+      "key": "ZoomTileEffectString",
+      "sourcePath": "/Applications/Serato DJ Pro.app/Contents/MacOS/Serato Video.app/Contents/Resources/localization/en.xml",
+      "sourceLine": 71,
+      "evidenceClass": "OBSERVED_LOCALIZATION_LABEL",
+      "runtimeRegistrationVerified": false,
+      "category": "Transform"
+    },
+    {
+      "name": "False Color",
+      "key": "Texture1DEffectString",
+      "sourcePath": "/Applications/Serato DJ Pro.app/Contents/MacOS/Serato Video.app/Contents/Resources/localization/en.xml",
+      "sourceLine": 73,
+      "evidenceClass": "OBSERVED_LOCALIZATION_LABEL",
+      "runtimeRegistrationVerified": false,
+      "category": "Colour"
+    },
+    {
+      "name": "Analyzer",
+      "key": "spectrumEffectString",
+      "sourcePath": "/Applications/Serato DJ Pro.app/Contents/MacOS/Serato Video.app/Contents/Resources/localization/en.xml",
+      "sourceLine": 76,
+      "evidenceClass": "OBSERVED_LOCALIZATION_LABEL",
+      "runtimeRegistrationVerified": false,
+      "category": "Analyzer"
+    },
+    {
+      "name": "Analyzer Line",
+      "key": "spectrumLineEffectString",
+      "sourcePath": "/Applications/Serato DJ Pro.app/Contents/MacOS/Serato Video.app/Contents/Resources/localization/en.xml",
+      "sourceLine": 77,
+      "evidenceClass": "OBSERVED_LOCALIZATION_LABEL",
+      "runtimeRegistrationVerified": false,
+      "category": "Analyzer"
+    },
+    {
+      "name": "Block Columns",
+      "key": "rigidBodyEffectString",
+      "sourcePath": "/Applications/Serato DJ Pro.app/Contents/MacOS/Serato Video.app/Contents/Resources/localization/en.xml",
+      "sourceLine": 79,
+      "evidenceClass": "OBSERVED_LOCALIZATION_LABEL",
+      "runtimeRegistrationVerified": false,
+      "category": "Split"
+    }
+  ],
+  "localizedTransitionCandidates": [
+    {
+      "name": "Default",
+      "key": "defaultFaderString",
+      "sourcePath": "/Applications/Serato DJ Pro.app/Contents/MacOS/Serato Video.app/Contents/Resources/localization/en.xml",
+      "sourceLine": 8,
+      "evidenceClass": "OBSERVED_LOCALIZATION_LABEL",
+      "runtimeRegistrationVerified": false,
+      "category": "Blend"
+    },
+    {
+      "name": "Center",
+      "key": "centerFaderString",
+      "sourcePath": "/Applications/Serato DJ Pro.app/Contents/MacOS/Serato Video.app/Contents/Resources/localization/en.xml",
+      "sourceLine": 11,
+      "evidenceClass": "OBSERVED_LOCALIZATION_LABEL",
+      "runtimeRegistrationVerified": false,
+      "category": "Blend"
+    },
+    {
+      "name": "Scratch",
+      "key": "latchFaderString",
+      "sourcePath": "/Applications/Serato DJ Pro.app/Contents/MacOS/Serato Video.app/Contents/Resources/localization/en.xml",
+      "sourceLine": 14,
+      "evidenceClass": "OBSERVED_LOCALIZATION_LABEL",
+      "runtimeRegistrationVerified": false,
+      "category": "Latch"
+    },
+    {
+      "name": "Latch 50",
+      "key": "latchFader50PercentString",
+      "sourcePath": "/Applications/Serato DJ Pro.app/Contents/MacOS/Serato Video.app/Contents/Resources/localization/en.xml",
+      "sourceLine": 15,
+      "evidenceClass": "OBSERVED_LOCALIZATION_LABEL",
+      "runtimeRegistrationVerified": false,
+      "category": "Latch"
+    },
+    {
+      "name": "Scratch Fade",
+      "key": "latchFaderFadeString",
+      "sourcePath": "/Applications/Serato DJ Pro.app/Contents/MacOS/Serato Video.app/Contents/Resources/localization/en.xml",
+      "sourceLine": 16,
+      "evidenceClass": "OBSERVED_LOCALIZATION_LABEL",
+      "runtimeRegistrationVerified": false,
+      "category": "Latch"
+    },
+    {
+      "name": "Box H",
+      "key": "boxHorizFaderString",
+      "sourcePath": "/Applications/Serato DJ Pro.app/Contents/MacOS/Serato Video.app/Contents/Resources/localization/en.xml",
+      "sourceLine": 19,
+      "evidenceClass": "OBSERVED_LOCALIZATION_LABEL",
+      "runtimeRegistrationVerified": false,
+      "category": "3D"
+    },
+    {
+      "name": "Box V",
+      "key": "boxVertFaderString",
+      "sourcePath": "/Applications/Serato DJ Pro.app/Contents/MacOS/Serato Video.app/Contents/Resources/localization/en.xml",
+      "sourceLine": 20,
+      "evidenceClass": "OBSERVED_LOCALIZATION_LABEL",
+      "runtimeRegistrationVerified": false,
+      "category": "3D"
+    },
+    {
+      "name": "Box Both",
+      "key": "boxBothFaderString",
+      "sourcePath": "/Applications/Serato DJ Pro.app/Contents/MacOS/Serato Video.app/Contents/Resources/localization/en.xml",
+      "sourceLine": 21,
+      "evidenceClass": "OBSERVED_LOCALIZATION_LABEL",
+      "runtimeRegistrationVerified": false,
+      "category": "3D"
+    },
+    {
+      "name": "Spin H",
+      "key": "spinHorizFaderString",
+      "sourcePath": "/Applications/Serato DJ Pro.app/Contents/MacOS/Serato Video.app/Contents/Resources/localization/en.xml",
+      "sourceLine": 24,
+      "evidenceClass": "OBSERVED_LOCALIZATION_LABEL",
+      "runtimeRegistrationVerified": false,
+      "category": "3D"
+    },
+    {
+      "name": "Spin V",
+      "key": "spinVertFaderString",
+      "sourcePath": "/Applications/Serato DJ Pro.app/Contents/MacOS/Serato Video.app/Contents/Resources/localization/en.xml",
+      "sourceLine": 25,
+      "evidenceClass": "OBSERVED_LOCALIZATION_LABEL",
+      "runtimeRegistrationVerified": false,
+      "category": "3D"
+    },
+    {
+      "name": "Spin Both",
+      "key": "spinBothFaderString",
+      "sourcePath": "/Applications/Serato DJ Pro.app/Contents/MacOS/Serato Video.app/Contents/Resources/localization/en.xml",
+      "sourceLine": 26,
+      "evidenceClass": "OBSERVED_LOCALIZATION_LABEL",
+      "runtimeRegistrationVerified": false,
+      "category": "3D"
+    },
+    {
+      "name": "Wipe H",
+      "key": "wipeHorizFaderString",
+      "sourcePath": "/Applications/Serato DJ Pro.app/Contents/MacOS/Serato Video.app/Contents/Resources/localization/en.xml",
+      "sourceLine": 29,
+      "evidenceClass": "OBSERVED_LOCALIZATION_LABEL",
+      "runtimeRegistrationVerified": false,
+      "category": "Wipe"
+    },
+    {
+      "name": "Wipe V",
+      "key": "wipeVertFaderString",
+      "sourcePath": "/Applications/Serato DJ Pro.app/Contents/MacOS/Serato Video.app/Contents/Resources/localization/en.xml",
+      "sourceLine": 30,
+      "evidenceClass": "OBSERVED_LOCALIZATION_LABEL",
+      "runtimeRegistrationVerified": false,
+      "category": "Wipe"
+    },
+    {
+      "name": "Swap",
+      "key": "swapFaderString",
+      "sourcePath": "/Applications/Serato DJ Pro.app/Contents/MacOS/Serato Video.app/Contents/Resources/localization/en.xml",
+      "sourceLine": 33,
+      "evidenceClass": "OBSERVED_LOCALIZATION_LABEL",
+      "runtimeRegistrationVerified": false,
+      "category": "Swap"
+    },
+    {
+      "name": "Push Slide H",
+      "key": "slideHorizFaderString",
+      "sourcePath": "/Applications/Serato DJ Pro.app/Contents/MacOS/Serato Video.app/Contents/Resources/localization/en.xml",
+      "sourceLine": 36,
+      "evidenceClass": "OBSERVED_LOCALIZATION_LABEL",
+      "runtimeRegistrationVerified": false,
+      "category": "Slide"
+    },
+    {
+      "name": "Push Slide V",
+      "key": "slideVertFaderString",
+      "sourcePath": "/Applications/Serato DJ Pro.app/Contents/MacOS/Serato Video.app/Contents/Resources/localization/en.xml",
+      "sourceLine": 37,
+      "evidenceClass": "OBSERVED_LOCALIZATION_LABEL",
+      "runtimeRegistrationVerified": false,
+      "category": "Slide"
+    },
+    {
+      "name": "Tile Wave H",
+      "key": "waveHorizFaderString",
+      "sourcePath": "/Applications/Serato DJ Pro.app/Contents/MacOS/Serato Video.app/Contents/Resources/localization/en.xml",
+      "sourceLine": 40,
+      "evidenceClass": "OBSERVED_LOCALIZATION_LABEL",
+      "runtimeRegistrationVerified": false,
+      "category": "3D"
+    },
+    {
+      "name": "Tile Wave V",
+      "key": "waveVertFaderString",
+      "sourcePath": "/Applications/Serato DJ Pro.app/Contents/MacOS/Serato Video.app/Contents/Resources/localization/en.xml",
+      "sourceLine": 41,
+      "evidenceClass": "OBSERVED_LOCALIZATION_LABEL",
+      "runtimeRegistrationVerified": false,
+      "category": "3D"
+    },
+    {
+      "name": "Water Bar H",
+      "key": "water1HorizFaderString",
+      "sourcePath": "/Applications/Serato DJ Pro.app/Contents/MacOS/Serato Video.app/Contents/Resources/localization/en.xml",
+      "sourceLine": 44,
+      "evidenceClass": "OBSERVED_LOCALIZATION_LABEL",
+      "runtimeRegistrationVerified": false,
+      "category": "3D"
+    },
+    {
+      "name": "Water Bar V",
+      "key": "water1VertFaderString",
+      "sourcePath": "/Applications/Serato DJ Pro.app/Contents/MacOS/Serato Video.app/Contents/Resources/localization/en.xml",
+      "sourceLine": 45,
+      "evidenceClass": "OBSERVED_LOCALIZATION_LABEL",
+      "runtimeRegistrationVerified": false,
+      "category": "3D"
+    },
+    {
+      "name": "Tornado",
+      "key": "tornadoFaderString",
+      "sourcePath": "/Applications/Serato DJ Pro.app/Contents/MacOS/Serato Video.app/Contents/Resources/localization/en.xml",
+      "sourceLine": 48,
+      "evidenceClass": "OBSERVED_LOCALIZATION_LABEL",
+      "runtimeRegistrationVerified": false,
+      "category": "3D"
+    },
+    {
+      "name": "Grid 2x2",
+      "key": "grid2x2String",
+      "sourcePath": "/Applications/Serato DJ Pro.app/Contents/MacOS/Serato Video.app/Contents/Resources/localization/en.xml",
+      "sourceLine": 51,
+      "evidenceClass": "OBSERVED_LOCALIZATION_LABEL",
+      "runtimeRegistrationVerified": false,
+      "category": "Slide"
+    },
+    {
+      "name": "Grid Simple",
+      "key": "gridSimpleString",
+      "sourcePath": "/Applications/Serato DJ Pro.app/Contents/MacOS/Serato Video.app/Contents/Resources/localization/en.xml",
+      "sourceLine": 52,
+      "evidenceClass": "OBSERVED_LOCALIZATION_LABEL",
+      "runtimeRegistrationVerified": false,
+      "category": "Slide"
+    },
+    {
+      "name": "Grid Pop",
+      "key": "gridPopString",
+      "sourcePath": "/Applications/Serato DJ Pro.app/Contents/MacOS/Serato Video.app/Contents/Resources/localization/en.xml",
+      "sourceLine": 53,
+      "evidenceClass": "OBSERVED_LOCALIZATION_LABEL",
+      "runtimeRegistrationVerified": false,
+      "category": "Slide"
+    },
+    {
+      "name": "Grid Fade",
+      "key": "gridFadeString",
+      "sourcePath": "/Applications/Serato DJ Pro.app/Contents/MacOS/Serato Video.app/Contents/Resources/localization/en.xml",
+      "sourceLine": 54,
+      "evidenceClass": "OBSERVED_LOCALIZATION_LABEL",
+      "runtimeRegistrationVerified": false,
+      "category": "Slide"
+    },
+    {
+      "name": "Grid Sequence",
+      "key": "gridSequenceString",
+      "sourcePath": "/Applications/Serato DJ Pro.app/Contents/MacOS/Serato Video.app/Contents/Resources/localization/en.xml",
+      "sourceLine": 55,
+      "evidenceClass": "OBSERVED_LOCALIZATION_LABEL",
+      "runtimeRegistrationVerified": false,
+      "category": "Slide"
+    }
+  ],
+  "excludedLocalizationSentinels": [
+    {
+      "name": "Empty",
+      "key": "EmptyEffectString",
+      "sourcePath": "/Applications/Serato DJ Pro.app/Contents/MacOS/Serato Video.app/Contents/Resources/localization/en.xml",
+      "sourceLine": 60,
+      "evidenceClass": "OBSERVED_LOCALIZATION_LABEL",
+      "runtimeRegistrationVerified": false
+    },
+    {
+      "name": "---TEXT---",
+      "key": "TextEffectString",
+      "sourcePath": "/Applications/Serato DJ Pro.app/Contents/MacOS/Serato Video.app/Contents/Resources/localization/en.xml",
+      "sourceLine": 63,
+      "evidenceClass": "OBSERVED_LOCALIZATION_LABEL",
+      "runtimeRegistrationVerified": false
+    }
+  ],
+  "hiddenAudioLinkedDefinitions": [
+    {
+      "id": "33554433",
+      "name": "delay",
+      "category": "audio effect",
+      "flags": [
+        "HIDDEN",
+        "AUDIO_LINKED",
+        "TWO_PASS"
+      ],
+      "rawDefaultValue": 0,
+      "sourcePath": "/Applications/Serato DJ Pro.app/Contents/MacOS/Serato Video.app/Contents/Resources/audio_effects/audioeffects.xml",
+      "sourceLine": 2,
+      "evidenceClass": "OBSERVED_LOCAL_RESOURCE",
+      "runtimeVerified": false,
+      "controls": {
+        "oneParameterFlag": false,
+        "upfaderFlag": false,
+        "twoSourceFlag": false,
+        "hiddenFlag": true,
+        "audioLinkedFlag": true,
+        "uiRange": null,
+        "uiUnits": null,
+        "uiEnums": null
+      }
+    },
+    {
+      "id": "33554434",
+      "name": "echo",
+      "category": "audio effect",
+      "flags": [
+        "HIDDEN",
+        "AUDIO_LINKED",
+        "TWO_PASS"
+      ],
+      "rawDefaultValue": 0,
+      "sourcePath": "/Applications/Serato DJ Pro.app/Contents/MacOS/Serato Video.app/Contents/Resources/audio_effects/audioeffects.xml",
+      "sourceLine": 20,
+      "evidenceClass": "OBSERVED_LOCAL_RESOURCE",
+      "runtimeVerified": false,
+      "controls": {
+        "oneParameterFlag": false,
+        "upfaderFlag": false,
+        "twoSourceFlag": false,
+        "hiddenFlag": true,
+        "audioLinkedFlag": true,
+        "uiRange": null,
+        "uiUnits": null,
+        "uiEnums": null
+      }
+    },
+    {
+      "id": "33554435",
+      "name": "reverb",
+      "category": "audio effect",
+      "flags": [
+        "HIDDEN",
+        "AUDIO_LINKED",
+        "TWO_PASS"
+      ],
+      "rawDefaultValue": 0,
+      "sourcePath": "/Applications/Serato DJ Pro.app/Contents/MacOS/Serato Video.app/Contents/Resources/audio_effects/audioeffects.xml",
+      "sourceLine": 38,
+      "evidenceClass": "OBSERVED_LOCAL_RESOURCE",
+      "runtimeVerified": false,
+      "controls": {
+        "oneParameterFlag": false,
+        "upfaderFlag": false,
+        "twoSourceFlag": false,
+        "hiddenFlag": true,
+        "audioLinkedFlag": true,
+        "uiRange": null,
+        "uiUnits": null,
+        "uiEnums": null
+      }
+    },
+    {
+      "id": "33554436",
+      "name": "phaser",
+      "category": "audio effect",
+      "flags": [
+        "HIDDEN",
+        "AUDIO_LINKED"
+      ],
+      "rawDefaultValue": 0,
+      "sourcePath": "/Applications/Serato DJ Pro.app/Contents/MacOS/Serato Video.app/Contents/Resources/audio_effects/audioeffects.xml",
+      "sourceLine": 56,
+      "evidenceClass": "OBSERVED_LOCAL_RESOURCE",
+      "runtimeVerified": false,
+      "controls": {
+        "oneParameterFlag": false,
+        "upfaderFlag": false,
+        "twoSourceFlag": false,
+        "hiddenFlag": true,
+        "audioLinkedFlag": true,
+        "uiRange": null,
+        "uiUnits": null,
+        "uiEnums": null
+      }
+    },
+    {
+      "id": "33554437",
+      "name": "flanger",
+      "category": "audio effect",
+      "flags": [
+        "HIDDEN",
+        "AUDIO_LINKED",
+        "TWO_PASS"
+      ],
+      "rawDefaultValue": 0,
+      "sourcePath": "/Applications/Serato DJ Pro.app/Contents/MacOS/Serato Video.app/Contents/Resources/audio_effects/audioeffects.xml",
+      "sourceLine": 70,
+      "evidenceClass": "OBSERVED_LOCAL_RESOURCE",
+      "runtimeVerified": false,
+      "controls": {
+        "oneParameterFlag": false,
+        "upfaderFlag": false,
+        "twoSourceFlag": false,
+        "hiddenFlag": true,
+        "audioLinkedFlag": true,
+        "uiRange": null,
+        "uiUnits": null,
+        "uiEnums": null
+      }
+    },
+    {
+      "id": "33554438",
+      "name": "lp filter",
+      "category": "audio effect",
+      "flags": [
+        "HIDDEN",
+        "AUDIO_LINKED"
+      ],
+      "rawDefaultValue": 0,
+      "sourcePath": "/Applications/Serato DJ Pro.app/Contents/MacOS/Serato Video.app/Contents/Resources/audio_effects/audioeffects.xml",
+      "sourceLine": 88,
+      "evidenceClass": "OBSERVED_LOCAL_RESOURCE",
+      "runtimeVerified": false,
+      "controls": {
+        "oneParameterFlag": false,
+        "upfaderFlag": false,
+        "twoSourceFlag": false,
+        "hiddenFlag": true,
+        "audioLinkedFlag": true,
+        "uiRange": null,
+        "uiUnits": null,
+        "uiEnums": null
+      }
+    },
+    {
+      "id": "33554439",
+      "name": "hp filter",
+      "category": "audio effect",
+      "flags": [
+        "HIDDEN",
+        "AUDIO_LINKED"
+      ],
+      "rawDefaultValue": 0,
+      "sourcePath": "/Applications/Serato DJ Pro.app/Contents/MacOS/Serato Video.app/Contents/Resources/audio_effects/audioeffects.xml",
+      "sourceLine": 102,
+      "evidenceClass": "OBSERVED_LOCAL_RESOURCE",
+      "runtimeVerified": false,
+      "controls": {
+        "oneParameterFlag": false,
+        "upfaderFlag": false,
+        "twoSourceFlag": false,
+        "hiddenFlag": true,
+        "audioLinkedFlag": true,
+        "uiRange": null,
+        "uiUnits": null,
+        "uiEnums": null
+      }
+    },
+    {
+      "id": "33554440",
+      "name": "combo filter",
+      "category": "audio effect",
+      "flags": [
+        "HIDDEN",
+        "AUDIO_LINKED"
+      ],
+      "rawDefaultValue": 0,
+      "sourcePath": "/Applications/Serato DJ Pro.app/Contents/MacOS/Serato Video.app/Contents/Resources/audio_effects/audioeffects.xml",
+      "sourceLine": 116,
+      "evidenceClass": "OBSERVED_LOCAL_RESOURCE",
+      "runtimeVerified": false,
+      "controls": {
+        "oneParameterFlag": false,
+        "upfaderFlag": false,
+        "twoSourceFlag": false,
+        "hiddenFlag": true,
+        "audioLinkedFlag": true,
+        "uiRange": null,
+        "uiUnits": null,
+        "uiEnums": null
+      }
+    },
+    {
+      "id": "33554441",
+      "name": "distortion",
+      "category": "audio effect",
+      "flags": [
+        "HIDDEN",
+        "AUDIO_LINKED"
+      ],
+      "rawDefaultValue": 0,
+      "sourcePath": "/Applications/Serato DJ Pro.app/Contents/MacOS/Serato Video.app/Contents/Resources/audio_effects/audioeffects.xml",
+      "sourceLine": 130,
+      "evidenceClass": "OBSERVED_LOCAL_RESOURCE",
+      "runtimeVerified": false,
+      "controls": {
+        "oneParameterFlag": false,
+        "upfaderFlag": false,
+        "twoSourceFlag": false,
+        "hiddenFlag": true,
+        "audioLinkedFlag": true,
+        "uiRange": null,
+        "uiUnits": null,
+        "uiEnums": null
+      }
+    },
+    {
+      "id": "33554442",
+      "name": "pan delay",
+      "category": "audio effect",
+      "flags": [
+        "HIDDEN",
+        "AUDIO_LINKED",
+        "TWO_PASS"
+      ],
+      "rawDefaultValue": 0,
+      "sourcePath": "/Applications/Serato DJ Pro.app/Contents/MacOS/Serato Video.app/Contents/Resources/audio_effects/audioeffects.xml",
+      "sourceLine": 145,
+      "evidenceClass": "OBSERVED_LOCAL_RESOURCE",
+      "runtimeVerified": false,
+      "controls": {
+        "oneParameterFlag": false,
+        "upfaderFlag": false,
+        "twoSourceFlag": false,
+        "hiddenFlag": true,
+        "audioLinkedFlag": true,
+        "uiRange": null,
+        "uiUnits": null,
+        "uiEnums": null
+      }
+    },
+    {
+      "id": "33554443",
+      "name": "epic reverb",
+      "category": "audio effect",
+      "flags": [
+        "HIDDEN",
+        "AUDIO_LINKED",
+        "TWO_PASS"
+      ],
+      "rawDefaultValue": 0,
+      "sourcePath": "/Applications/Serato DJ Pro.app/Contents/MacOS/Serato Video.app/Contents/Resources/audio_effects/audioeffects.xml",
+      "sourceLine": 163,
+      "evidenceClass": "OBSERVED_LOCAL_RESOURCE",
+      "runtimeVerified": false,
+      "controls": {
+        "oneParameterFlag": false,
+        "upfaderFlag": false,
+        "twoSourceFlag": false,
+        "hiddenFlag": true,
+        "audioLinkedFlag": true,
+        "uiRange": null,
+        "uiUnits": null,
+        "uiEnums": null
+      }
+    },
+    {
+      "id": "33554444",
+      "name": "bit crush",
+      "category": "audio effect",
+      "flags": [
+        "HIDDEN",
+        "AUDIO_LINKED"
+      ],
+      "rawDefaultValue": 0,
+      "sourcePath": "/Applications/Serato DJ Pro.app/Contents/MacOS/Serato Video.app/Contents/Resources/audio_effects/audioeffects.xml",
+      "sourceLine": 181,
+      "evidenceClass": "OBSERVED_LOCAL_RESOURCE",
+      "runtimeVerified": false,
+      "controls": {
+        "oneParameterFlag": false,
+        "upfaderFlag": false,
+        "twoSourceFlag": false,
+        "hiddenFlag": true,
+        "audioLinkedFlag": true,
+        "uiRange": null,
+        "uiUnits": null,
+        "uiEnums": null
+      }
+    },
+    {
+      "id": "33554445",
+      "name": "tremolo",
+      "category": "audio effect",
+      "flags": [
+        "HIDDEN",
+        "AUDIO_LINKED",
+        "TWO_PASS"
+      ],
+      "rawDefaultValue": 0,
+      "sourcePath": "/Applications/Serato DJ Pro.app/Contents/MacOS/Serato Video.app/Contents/Resources/audio_effects/audioeffects.xml",
+      "sourceLine": 195,
+      "evidenceClass": "OBSERVED_LOCAL_RESOURCE",
+      "runtimeVerified": false,
+      "controls": {
+        "oneParameterFlag": false,
+        "upfaderFlag": false,
+        "twoSourceFlag": false,
+        "hiddenFlag": true,
+        "audioLinkedFlag": true,
+        "uiRange": null,
+        "uiUnits": null,
+        "uiEnums": null
+      }
+    },
+    {
+      "id": "33554446",
+      "name": "repeater",
+      "category": "audio effect",
+      "flags": [
+        "HIDDEN",
+        "AUDIO_LINKED",
+        "TWO_PASS"
+      ],
+      "rawDefaultValue": 0,
+      "sourcePath": "/Applications/Serato DJ Pro.app/Contents/MacOS/Serato Video.app/Contents/Resources/audio_effects/audioeffects.xml",
+      "sourceLine": 213,
+      "evidenceClass": "OBSERVED_LOCAL_RESOURCE",
+      "runtimeVerified": false,
+      "controls": {
+        "oneParameterFlag": false,
+        "upfaderFlag": false,
+        "twoSourceFlag": false,
+        "hiddenFlag": true,
+        "audioLinkedFlag": true,
+        "uiRange": null,
+        "uiUnits": null,
+        "uiEnums": null
+      }
+    },
+    {
+      "id": "33554447",
+      "name": "braker",
+      "category": "audio effect",
+      "flags": [
+        "HIDDEN",
+        "AUDIO_LINKED"
+      ],
+      "rawDefaultValue": 0,
+      "sourcePath": "/Applications/Serato DJ Pro.app/Contents/MacOS/Serato Video.app/Contents/Resources/audio_effects/audioeffects.xml",
+      "sourceLine": 231,
+      "evidenceClass": "OBSERVED_LOCAL_RESOURCE",
+      "runtimeVerified": false,
+      "controls": {
+        "oneParameterFlag": false,
+        "upfaderFlag": false,
+        "twoSourceFlag": false,
+        "hiddenFlag": true,
+        "audioLinkedFlag": true,
+        "uiRange": null,
+        "uiUnits": null,
+        "uiEnums": null
+      }
+    },
+    {
+      "id": "33554448",
+      "name": "brake echo",
+      "category": "audio effect",
+      "flags": [
+        "HIDDEN",
+        "AUDIO_LINKED",
+        "TWO_PASS"
+      ],
+      "rawDefaultValue": 0,
+      "sourcePath": "/Applications/Serato DJ Pro.app/Contents/MacOS/Serato Video.app/Contents/Resources/audio_effects/audioeffects.xml",
+      "sourceLine": 245,
+      "evidenceClass": "OBSERVED_LOCAL_RESOURCE",
+      "runtimeVerified": false,
+      "controls": {
+        "oneParameterFlag": false,
+        "upfaderFlag": false,
+        "twoSourceFlag": false,
+        "hiddenFlag": true,
+        "audioLinkedFlag": true,
+        "uiRange": null,
+        "uiUnits": null,
+        "uiEnums": null
+      }
+    },
+    {
+      "id": "33554449",
+      "name": "tape echo",
+      "category": "audio effect",
+      "flags": [
+        "HIDDEN",
+        "AUDIO_LINKED",
+        "TWO_PASS"
+      ],
+      "rawDefaultValue": 0,
+      "sourcePath": "/Applications/Serato DJ Pro.app/Contents/MacOS/Serato Video.app/Contents/Resources/audio_effects/audioeffects.xml",
+      "sourceLine": 263,
+      "evidenceClass": "OBSERVED_LOCAL_RESOURCE",
+      "runtimeVerified": false,
+      "controls": {
+        "oneParameterFlag": false,
+        "upfaderFlag": false,
+        "twoSourceFlag": false,
+        "hiddenFlag": true,
+        "audioLinkedFlag": true,
+        "uiRange": null,
+        "uiUnits": null,
+        "uiEnums": null
+      }
+    },
+    {
+      "id": "33554450",
+      "name": "looper",
+      "category": "audio effect",
+      "flags": [
+        "HIDDEN",
+        "AUDIO_LINKED",
+        "TWO_PASS"
+      ],
+      "rawDefaultValue": 0,
+      "sourcePath": "/Applications/Serato DJ Pro.app/Contents/MacOS/Serato Video.app/Contents/Resources/audio_effects/audioeffects.xml",
+      "sourceLine": 281,
+      "evidenceClass": "OBSERVED_LOCAL_RESOURCE",
+      "runtimeVerified": false,
+      "controls": {
+        "oneParameterFlag": false,
+        "upfaderFlag": false,
+        "twoSourceFlag": false,
+        "hiddenFlag": true,
+        "audioLinkedFlag": true,
+        "uiRange": null,
+        "uiUnits": null,
+        "uiEnums": null
+      }
+    },
+    {
+      "id": "33554451",
+      "name": "time stretch",
+      "category": "audio effect",
+      "flags": [
+        "HIDDEN",
+        "AUDIO_LINKED"
+      ],
+      "rawDefaultValue": 0,
+      "sourcePath": "/Applications/Serato DJ Pro.app/Contents/MacOS/Serato Video.app/Contents/Resources/audio_effects/audioeffects.xml",
+      "sourceLine": 299,
+      "evidenceClass": "OBSERVED_LOCAL_RESOURCE",
+      "runtimeVerified": false,
+      "controls": {
+        "oneParameterFlag": false,
+        "upfaderFlag": false,
+        "twoSourceFlag": false,
+        "hiddenFlag": true,
+        "audioLinkedFlag": true,
+        "uiRange": null,
+        "uiUnits": null,
+        "uiEnums": null
+      }
+    },
+    {
+      "id": "33554452",
+      "name": "spiral echo",
+      "category": "audio effect",
+      "flags": [
+        "HIDDEN",
+        "AUDIO_LINKED",
+        "TWO_PASS"
+      ],
+      "rawDefaultValue": 0,
+      "sourcePath": "/Applications/Serato DJ Pro.app/Contents/MacOS/Serato Video.app/Contents/Resources/audio_effects/audioeffects.xml",
+      "sourceLine": 315,
+      "evidenceClass": "OBSERVED_LOCAL_RESOURCE",
+      "runtimeVerified": false,
+      "controls": {
+        "oneParameterFlag": false,
+        "upfaderFlag": false,
+        "twoSourceFlag": false,
+        "hiddenFlag": true,
+        "audioLinkedFlag": true,
+        "uiRange": null,
+        "uiUnits": null,
+        "uiEnums": null
+      }
+    },
+    {
+      "id": "33554453",
+      "name": "auto filter",
+      "category": "audio effect",
+      "flags": [
+        "HIDDEN",
+        "AUDIO_LINKED"
+      ],
+      "rawDefaultValue": 0,
+      "sourcePath": "/Applications/Serato DJ Pro.app/Contents/MacOS/Serato Video.app/Contents/Resources/audio_effects/audioeffects.xml",
+      "sourceLine": 333,
+      "evidenceClass": "OBSERVED_LOCAL_RESOURCE",
+      "runtimeVerified": false,
+      "controls": {
+        "oneParameterFlag": false,
+        "upfaderFlag": false,
+        "twoSourceFlag": false,
+        "hiddenFlag": true,
+        "audioLinkedFlag": true,
+        "uiRange": null,
+        "uiUnits": null,
+        "uiEnums": null
+      }
+    },
+    {
+      "id": "33554454",
+      "name": "spiral flanger",
+      "category": "audio effect",
+      "flags": [
+        "HIDDEN",
+        "AUDIO_LINKED",
+        "TWO_PASS"
+      ],
+      "rawDefaultValue": 0,
+      "sourcePath": "/Applications/Serato DJ Pro.app/Contents/MacOS/Serato Video.app/Contents/Resources/audio_effects/audioeffects.xml",
+      "sourceLine": 347,
+      "evidenceClass": "OBSERVED_LOCAL_RESOURCE",
+      "runtimeVerified": false,
+      "controls": {
+        "oneParameterFlag": false,
+        "upfaderFlag": false,
+        "twoSourceFlag": false,
+        "hiddenFlag": true,
+        "audioLinkedFlag": true,
+        "uiRange": null,
+        "uiUnits": null,
+        "uiEnums": null
+      }
+    },
+    {
+      "id": "33554455",
+      "name": "pitch delay",
+      "category": "audio effect",
+      "flags": [
+        "HIDDEN",
+        "AUDIO_LINKED",
+        "TWO_PASS"
+      ],
+      "rawDefaultValue": 0,
+      "sourcePath": "/Applications/Serato DJ Pro.app/Contents/MacOS/Serato Video.app/Contents/Resources/audio_effects/audioeffects.xml",
+      "sourceLine": 365,
+      "evidenceClass": "OBSERVED_LOCAL_RESOURCE",
+      "runtimeVerified": false,
+      "controls": {
+        "oneParameterFlag": false,
+        "upfaderFlag": false,
+        "twoSourceFlag": false,
+        "hiddenFlag": true,
+        "audioLinkedFlag": true,
+        "uiRange": null,
+        "uiUnits": null,
+        "uiEnums": null
+      }
+    },
+    {
+      "id": "33554456",
+      "name": "crush echo",
+      "category": "audio effect",
+      "flags": [
+        "HIDDEN",
+        "AUDIO_LINKED",
+        "TWO_PASS"
+      ],
+      "rawDefaultValue": 0,
+      "sourcePath": "/Applications/Serato DJ Pro.app/Contents/MacOS/Serato Video.app/Contents/Resources/audio_effects/audioeffects.xml",
+      "sourceLine": 383,
+      "evidenceClass": "OBSERVED_LOCAL_RESOURCE",
+      "runtimeVerified": false,
+      "controls": {
+        "oneParameterFlag": false,
+        "upfaderFlag": false,
+        "twoSourceFlag": false,
+        "hiddenFlag": true,
+        "audioLinkedFlag": true,
+        "uiRange": null,
+        "uiUnits": null,
+        "uiEnums": null
+      }
+    },
+    {
+      "id": "33554457",
+      "name": "particle delay",
+      "category": "audio effect",
+      "flags": [
+        "HIDDEN",
+        "AUDIO_LINKED",
+        "TWO_PASS"
+      ],
+      "rawDefaultValue": 0,
+      "sourcePath": "/Applications/Serato DJ Pro.app/Contents/MacOS/Serato Video.app/Contents/Resources/audio_effects/audioeffects.xml",
+      "sourceLine": 401,
+      "evidenceClass": "OBSERVED_LOCAL_RESOURCE",
+      "runtimeVerified": false,
+      "controls": {
+        "oneParameterFlag": false,
+        "upfaderFlag": false,
+        "twoSourceFlag": false,
+        "hiddenFlag": true,
+        "audioLinkedFlag": true,
+        "uiRange": null,
+        "uiUnits": null,
+        "uiEnums": null
+      }
+    },
+    {
+      "id": "33554458",
+      "name": "noise sweep",
+      "category": "audio effect",
+      "flags": [
+        "HIDDEN",
+        "AUDIO_LINKED"
+      ],
+      "rawDefaultValue": 128,
+      "sourcePath": "/Applications/Serato DJ Pro.app/Contents/MacOS/Serato Video.app/Contents/Resources/audio_effects/audioeffects.xml",
+      "sourceLine": 419,
+      "evidenceClass": "OBSERVED_LOCAL_RESOURCE",
+      "runtimeVerified": false,
+      "controls": {
+        "oneParameterFlag": false,
+        "upfaderFlag": false,
+        "twoSourceFlag": false,
+        "hiddenFlag": true,
+        "audioLinkedFlag": true,
+        "uiRange": null,
+        "uiUnits": null,
+        "uiEnums": null
+      }
+    },
+    {
+      "id": "33554459",
+      "name": "shepard filter",
+      "category": "shepard effect",
+      "flags": [
+        "HIDDEN",
+        "AUDIO_LINKED"
+      ],
+      "rawDefaultValue": 0,
+      "sourcePath": "/Applications/Serato DJ Pro.app/Contents/MacOS/Serato Video.app/Contents/Resources/audio_effects/audioeffects.xml",
+      "sourceLine": 433,
+      "evidenceClass": "OBSERVED_LOCAL_RESOURCE",
+      "runtimeVerified": false,
+      "controls": {
+        "oneParameterFlag": false,
+        "upfaderFlag": false,
+        "twoSourceFlag": false,
+        "hiddenFlag": true,
+        "audioLinkedFlag": true,
+        "uiRange": null,
+        "uiUnits": null,
+        "uiEnums": null
+      }
+    },
+    {
+      "id": "33554460",
+      "name": "space verb",
+      "category": "audio effect",
+      "flags": [
+        "HIDDEN",
+        "AUDIO_LINKED",
+        "TWO_PASS"
+      ],
+      "rawDefaultValue": 0,
+      "sourcePath": "/Applications/Serato DJ Pro.app/Contents/MacOS/Serato Video.app/Contents/Resources/audio_effects/audioeffects.xml",
+      "sourceLine": 447,
+      "evidenceClass": "OBSERVED_LOCAL_RESOURCE",
+      "runtimeVerified": false,
+      "controls": {
+        "oneParameterFlag": false,
+        "upfaderFlag": false,
+        "twoSourceFlag": false,
+        "hiddenFlag": true,
+        "audioLinkedFlag": true,
+        "uiRange": null,
+        "uiUnits": null,
+        "uiEnums": null
+      }
+    },
+    {
+      "id": "33554461",
+      "name": "filter echo",
+      "category": "audio effect",
+      "flags": [
+        "HIDDEN",
+        "AUDIO_LINKED",
+        "TWO_PASS"
+      ],
+      "rawDefaultValue": 0,
+      "sourcePath": "/Applications/Serato DJ Pro.app/Contents/MacOS/Serato Video.app/Contents/Resources/audio_effects/audioeffects.xml",
+      "sourceLine": 465,
+      "evidenceClass": "OBSERVED_LOCAL_RESOURCE",
+      "runtimeVerified": false,
+      "controls": {
+        "oneParameterFlag": false,
+        "upfaderFlag": false,
+        "twoSourceFlag": false,
+        "hiddenFlag": true,
+        "audioLinkedFlag": true,
+        "uiRange": null,
+        "uiUnits": null,
+        "uiEnums": null
+      }
+    },
+    {
+      "id": "33554462",
+      "name": "filter gate",
+      "category": "audio effect",
+      "flags": [
+        "HIDDEN",
+        "AUDIO_LINKED"
+      ],
+      "rawDefaultValue": 0,
+      "sourcePath": "/Applications/Serato DJ Pro.app/Contents/MacOS/Serato Video.app/Contents/Resources/audio_effects/audioeffects.xml",
+      "sourceLine": 483,
+      "evidenceClass": "OBSERVED_LOCAL_RESOURCE",
+      "runtimeVerified": false,
+      "controls": {
+        "oneParameterFlag": false,
+        "upfaderFlag": false,
+        "twoSourceFlag": false,
+        "hiddenFlag": true,
+        "audioLinkedFlag": true,
+        "uiRange": null,
+        "uiUnits": null,
+        "uiEnums": null
+      }
+    },
+    {
+      "id": "33554463",
+      "name": "noise pulse",
+      "category": "audio effect",
+      "flags": [
+        "HIDDEN",
+        "AUDIO_LINKED"
+      ],
+      "rawDefaultValue": 128,
+      "sourcePath": "/Applications/Serato DJ Pro.app/Contents/MacOS/Serato Video.app/Contents/Resources/audio_effects/audioeffects.xml",
+      "sourceLine": 497,
+      "evidenceClass": "OBSERVED_LOCAL_RESOURCE",
+      "runtimeVerified": false,
+      "controls": {
+        "oneParameterFlag": false,
+        "upfaderFlag": false,
+        "twoSourceFlag": false,
+        "hiddenFlag": true,
+        "audioLinkedFlag": true,
+        "uiRange": null,
+        "uiUnits": null,
+        "uiEnums": null
+      }
+    }
+  ],
+  "binaryStringSupport": {
+    "path": "/Applications/Serato DJ Pro.app/Contents/MacOS/Serato Video.app/Contents/MacOS/Serato Video",
+    "sha256": "90eb3532c8bda98058e0262597672b159ed7c2545d34a1b69b6eb63729be475b",
+    "strings": [
+      {
+        "fileOffsetHex": "0x42ac50",
+        "string": "9SSVEffect"
+      },
+      {
+        "fileOffsetHex": "0x42ad10",
+        "string": "24SSVShaderEffect1DTexture"
+      },
+      {
+        "fileOffsetHex": "0x42ad48",
+        "string": "20SSVShaderEffectAudio"
+      },
+      {
+        "fileOffsetHex": "0x42ad5f",
+        "string": "14SSVEffectAudio"
+      },
+      {
+        "fileOffsetHex": "0x42ad70",
+        "string": "27SSVShaderEffectAudioTwoPass"
+      },
+      {
+        "fileOffsetHex": "0x42ae60",
+        "string": "14SSVEffectImage"
+      },
+      {
+        "fileOffsetHex": "0x42af30",
+        "string": "18SSVRigidBodyEffect"
+      },
+      {
+        "fileOffsetHex": "0x42af90",
+        "string": "12SSVEffectRot"
+      },
+      {
+        "fileOffsetHex": "0x42afd0",
+        "string": "11SSVEffectSA"
+      },
+      {
+        "fileOffsetHex": "0x42b008",
+        "string": "15SSVEffectSALine"
+      },
+      {
+        "fileOffsetHex": "0x42b288",
+        "string": "22SSVEffectSourceFromPBO"
+      },
+      {
+        "fileOffsetHex": "0x42b2a8",
+        "string": "13SSVEffectTile"
+      },
+      {
+        "fileOffsetHex": "0x42b2e0",
+        "string": "13SSVEffectZoom"
+      },
+      {
+        "fileOffsetHex": "0x42b320",
+        "string": "17SSVEffectZoomTile"
+      },
+      {
+        "fileOffsetHex": "0x42b334",
+        "string": "15SSVShaderEffect"
+      },
+      {
+        "fileOffsetHex": "0x42b370",
+        "string": "22SSVShaderEffectTwoPass"
+      },
+      {
+        "fileOffsetHex": "0x42b389",
+        "string": "18SSVEffectTwoSource"
+      },
+      {
+        "fileOffsetHex": "0x42b3c8",
+        "string": "14SSVEffectFader"
+      },
+      {
+        "fileOffsetHex": "0x42b410",
+        "string": "17SSVEffectFaderBox"
+      },
+      {
+        "fileOffsetHex": "0x42b450",
+        "string": "21SSVEffectFaderBoxBoth"
+      },
+      {
+        "fileOffsetHex": "0x42b488",
+        "string": "20SSVEffectFaderCenter"
+      },
+      {
+        "fileOffsetHex": "0x42b4f0",
+        "string": "18SSVEffectFaderGrid"
+      },
+      {
+        "fileOffsetHex": "0x42b580",
+        "string": "22SSVEffectFaderGridFade"
+      },
+      {
+        "fileOffsetHex": "0x42b599",
+        "string": "27SSVEffectFaderGridSequencer"
+      },
+      {
+        "fileOffsetHex": "0x42b5b7",
+        "string": "19SSVEffectFaderLatch"
+      },
+      {
+        "fileOffsetHex": "0x42b5cd",
+        "string": "23SSVEffectFaderLatchFade"
+      },
+      {
+        "fileOffsetHex": "0x42b600",
+        "string": "19SSVEffectFaderSlide"
+      },
+      {
+        "fileOffsetHex": "0x42b620",
+        "string": "18SSVEffectFaderSpin"
+      },
+      {
+        "fileOffsetHex": "0x42b660",
+        "string": "18SSVEffectFaderSwap"
+      },
+      {
+        "fileOffsetHex": "0x42b6e0",
+        "string": "18SSVEffectFaderWave"
+      },
+      {
+        "fileOffsetHex": "0x42b6f5",
+        "string": "18SSVEffectFaderWipe"
+      },
+      {
+        "fileOffsetHex": "0x42b730",
+        "string": "20SSVEffectFaderShader"
+      },
+      {
+        "fileOffsetHex": "0x9ea58a",
+        "string": "4SSVEffectAudio"
+      }
+    ],
+    "boundary": "Encoded RTTI/type strings support family presence, not active registration, menu counts, measured behavior or constructor execution."
+  },
+  "sources": [
+    {
+      "id": "downloads",
+      "url": "https://serato.com/dj/pro/downloads",
+      "status": "HTTP200_HTML_READ",
+      "finding": "Fresh official HTML links Serato Video Manual to file141226; web reader omitted this accordion."
+    },
+    {
+      "id": "replacementManual",
+      "url": "https://serato.com/downloads/files/141226/Serato+Video+Software+Manual+for+Serato+DJ.pdf",
+      "status": "REDIRECT_THEN_HTTP403",
+      "finding": "Fresh official link follows signed dl.sera.to/26/141226/141226 redirect, then CloudFront403. Content, edition and catalog not retrieved; old95193 link is not the only official path."
+    },
+    {
+      "id": "legacyDownloads",
+      "url": "https://serato.com/video-legacy/downloads/1.1.0",
+      "status": "HTTP200_HTML_READ",
+      "finding": "Links141226 for Serato DJ and141227 for Scratch Live/ITCH. Historical1.1 guidance documents automatic sequential/random transition selection on track load."
+    },
+    {
+      "id": "expansions",
+      "url": "https://serato.com/dj/pro/expansions",
+      "status": "HTTP200_WEB_READ",
+      "finding": "Documents channel/master Video effects, two master slots, audio-linked visual echo/distortion, HD recording, MP3+G and Syphon; no exact catalog."
+    },
+    {
+      "id": "video101",
+      "url": "https://support.serato.com/hc/en-us/articles/204211070-Serato-Video-101",
+      "status": "HTTP200_WEB_READ",
+      "finding": "Panel supports selecting transitions and FX; no complete named catalog."
+    },
+    {
+      "id": "overlay101",
+      "url": "https://support.serato.com/hc/en-us/articles/202305514-Serato-Video-Text-and-Image-Effects-101",
+      "status": "HTTP200_WEB_READ",
+      "finding": "Text/image save/edit/reload/ON, font/color/alignment and animations documented; reactive zoom requires L/R deck and audio overview."
+    },
+    {
+      "id": "release4010",
+      "url": "https://serato.com/dj/pro/downloads/4.0.10",
+      "status": "HTTP200_WEB_READ",
+      "finding": "No Video catalog list/change in inspected4.0.10 notes; absence does not prove unchanged behavior."
+    },
+    {
+      "id": "demo",
+      "url": "https://support.serato.com/hc/en-us/articles/202538870-Using-Serato-Video-in-Demo-Mode",
+      "status": "HTTP200_WEB_READ",
+      "finding": "Historical link/unlink fader and preview guidance; older95193 PDF previously404 in UI_OBSERVATIONS. Do not replace current behavior with legacy setup instructions."
+    },
+    {
+      "id": "sp1VideoControls",
+      "url": "https://support.serato.com/hc/en-us/articles/10173705065871-Pioneer-DJ-DDJ-SP1-Quickstart-Guide",
+      "status": "HTTP200_WEB_READ",
+      "finding": "Video section documents independent Effect1/2 on LEFT and RIGHT, selection/on-off/parameter knobs, image/text opacity and animation selection, plus transition cycling/scrolling. Hardware-specific public mapping, not observed4.0.10 UI or hardware execution."
+    }
+  ],
+  "documentedControls": {
+    "sourceId": "overlay101",
+    "animations": [
+      "Scroll",
+      "BPM Zoom",
+      "Bass Zoom"
+    ],
+    "scrollDirections": [
+      "Left-Right",
+      "Right-Left",
+      "Top-Bottom",
+      "Bottom-Top"
+    ],
+    "scrollSpeeds": [
+      "slow",
+      "medium",
+      "fast"
+    ],
+    "zoomIntensities": [
+      "Subtle",
+      "Noticeable",
+      "Over the Top"
+    ],
+    "reactiveTargetRestriction": "L or R; audio overview required",
+    "other": [
+      "font for text",
+      "color",
+      "alignment",
+      "save/edit/reload",
+      "ON"
+    ]
+  },
+  "priorNativeObservations": {
+    "source": "docs/research/UI_OBSERVATIONS.md:85",
+    "controls": [
+      "Auto Crossfade Speed",
+      "Contour Faders",
+      "Cursors Crossfade Video"
+    ],
+    "boundary": "Read prior recorded observation; no native UI re-observed now. Effects/Info settings and catalog menus were not observed there."
+  },
+  "prototypeSourceInspection": {
+    "source": "prototype/panels.js:1241",
+    "transitions": [
+      "Crossfade",
+      "Wipe — illustrative",
+      "Zoom — illustrative"
+    ],
+    "fxDialog": "Off / Illustrative color shift selectors have no connected Video-FX renderer handlers. Native/audio-linked catalogs remain open.",
+    "boundary": "Source inspection only; no browser/runtime test in this task."
+  },
+  "unknowns": [
+    "Actual active menu counts/order/gating, especially localized grid variants and historical TTM57SL categories.",
+    "Raw defaultValue0/128/255 does not establish a UI0..255 range, factory knob position, normalized mapping or meaningful unit.",
+    "Per-effect parameter labels/ranges/enums, threshold curves, audio-reactive inputs, timing response and transfer functions.",
+    "Complete registration of built-in/localized names, unused labels, platform/hardware exclusions and deprecations.",
+    "Current transition endpoints, contour/speed mapping, master-slot processing order and two-source behavior.",
+    "Reference pixels, performance, codecs/HD, physical outputs and Syphon.",
+    "Replacement official PDF content unavailable after CloudFront403."
+  ],
+  "independentImplementationAcceptance": [
+    {
+      "id": "VCAT-01",
+      "name": "Evidence-backed names",
+      "procedure": "Expose47 XML slot names and7 XML transition names with stable independent IDs/provenance. Keep8 additional localized effect and26 transition labels provisional; exclude Empty and ---TEXT--- from effect totals.",
+      "expected": "No invented names;55/33 remains candidate-name union, not confirmed active menus.",
+      "status": "PROPOSED_NOT_EXECUTED"
+    },
+    {
+      "id": "VCAT-02",
+      "name": "Actual independent rendering",
+      "procedure": "Use moving asymmetric color bars/checkerboards/frame numbers through real Canvas/WebGL. For each enabled effect capture bypass and at least3 distinct parameter states, toggle off and switch effects.",
+      "expected": "Intended pixels change, bypass restores input, amount changes matter, old temporal state releases. Metadata-only entries unavailable. This is not Serato visual equivalence.",
+      "status": "PROPOSED_NOT_EXECUTED"
+    },
+    {
+      "id": "VCAT-03",
+      "name": "Slot routing",
+      "procedure": "Implement two distinct effect slots on each left/right channel plus two dedicated master slots (six positions). Apply effects separately; test channel isolation, each slot selection/on-off/parameter, and noncommuting processor order.",
+      "expected": "Six independently controlled positions with documented provenance. Publish original processing order; exact reference order, live routing and simultaneous hardware behavior remain unverified.",
+      "status": "PROPOSED_NOT_EXECUTED"
+    },
+    {
+      "id": "VCAT-04",
+      "name": "Transitions",
+      "procedure": "For each original transition sample minimum, near-minimum, midpoint, near-maximum and maximum crossfader positions in both directions plus channel upfaders.",
+      "expected": "Document a distinct independent contract per family; do not assume conventional A/B endpoints for additive/difference/upfaders-only/latch/grid transitions. Exact reference contour/speed unknown.",
+      "status": "PROPOSED_NOT_EXECUTED"
+    },
+    {
+      "id": "VCAT-05",
+      "name": "Auto selection",
+      "procedure": "Load clips with Auto off/on; exercise explicit Next and seeded Random selection at qualifying track loads.",
+      "expected": "Auto retains versus changes selected transition as declared; do not conflate legacy auto-selection with automatic crossfader motion.4.0.10 confirmation open.",
+      "status": "PROPOSED_NOT_EXECUTED"
+    },
+    {
+      "id": "VCAT-06",
+      "name": "Reactive inputs",
+      "procedure": "Use silence,bass-only,treble-only,known-BPM and forward/reverse fixtures per deck for any advertised audio/BPM/record-reactive processor.",
+      "expected": "Input dependence follows an explicit original contract. Do not fabricate RGB/CSL/TTM57SL control bindings or equate31 hidden audio-linked names with visible slot catalog.",
+      "status": "PROPOSED_NOT_EXECUTED"
+    },
+    {
+      "id": "VCAT-07",
+      "name": "Overlays",
+      "procedure": "Create/save/reload/edit/toggle overlays; four Scroll directions at3 speeds; BPM/Bass Zoom at3 intensities with explicit L/R context. Test opacity separately for text and image using partially overlapping fixtures.",
+      "expected": "Public documented state lifecycle and target restrictions; no claim of master-only reactive zoom.",
+      "status": "PROPOSED_NOT_EXECUTED"
+    },
+    {
+      "id": "VCAT-08",
+      "name": "Reference parity gate",
+      "procedure": "With explicit authorization for later installed-runtime inspection, enumerate current menus and ranges on4.0.10.213 and compare synthetic pixel/timing fixtures.",
+      "expected": "No1:1, full active-catalog, native or physical-output claim before that evidence.",
+      "status": "PROPOSED_NOT_EXECUTED"
+    }
+  ],
+  "evidenceDefinitions": {
+    "OBSERVED_LOCAL_RESOURCE": "Fresh packaged XML/file bytes; not running behavior.",
+    "OBSERVED_LOCALIZATION_LABEL": "Fresh localized display string; registration unknown.",
+    "DOCUMENTED": "Official public source read; historical scope stated.",
+    "INFERRED": "Original implementation contract or hypothesis; not reference measurement.",
+    "UNKNOWN": "Not established."
+  },
+  "fullActiveCatalogVerified": false,
+  "fullVisualParityVerified": false,
+  "nativeApproved": false,
+  "proprietaryCodeOrAssetsCopied": false,
+  "documentedSlotControls": {
+    "evidenceClass": "DOCUMENTED",
+    "sources": [
+      "sp1VideoControls",
+      "expansions"
+    ],
+    "slotsPerChannel": 2,
+    "channels": [
+      "Left",
+      "Right"
+    ],
+    "masterSlots": 2,
+    "combinedSlotPositionTarget": 6,
+    "controls": [
+      "effect selection",
+      "per-slot ON/OFF",
+      "effect parameter knob",
+      "image/text opacity",
+      "image/text animation selection",
+      "transition cycling/scrolling"
+    ],
+    "boundary": "Six slot-position HTML target combines documented two-per-channel controls with two master slots. Exact current processing order, parameter names, numeric ranges, hardware mappings and simultaneous availability remain unobserved."
+  },
+  "categories": {
+    "Analyzer": 3,
+    "Delay": 3,
+    "Colour": 4,
+    "BPM Sync": 1,
+    "Split": 3,
+    "Audio Reactive": 9,
+    "Record": 3,
+    "TTM 57SL Controls": 2,
+    "Upfader": 1,
+    "Image": 8,
+    "Alpha Based": 3,
+    "Multisample": 6,
+    "Time Based": 1
+  }
+}

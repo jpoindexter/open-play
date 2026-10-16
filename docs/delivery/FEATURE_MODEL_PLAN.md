@@ -1,6 +1,7 @@
 # Feature and model execution plan
 
 Generated from FULL_BUILD_PLAN.md and PARITY_ADDITIONS.md. All native work is blocked until prototype approval. No row is an implemented-parity claim.
+Planning-table statuses are a dated baseline. Current scoped implementation evidence is in docs/prototype/DSP_FUNCTIONAL_REVIEW.md and STEM_SLIP_FUNCTIONAL_REVIEW.md; no status implies complete parity. STM-005 routine execution now uses Sol/high, with bounded Astra/high escalation for a measured unresolved dispute.
 
 | ID | Feature | Codex / effort | Claude Code / effort | Status |
 |---|---|---|---|---|
@@ -102,7 +103,7 @@ Generated from FULL_BUILD_PLAN.md and PARITY_ADDITIONS.md. All native work is bl
 | VID-002 | Video transitions, effects, text and image overlays | gpt-6.1-sol / high | claude-sonnet-5 / medium | Research pending |
 | LNK-001 | Ableton Link session, tempo and phase integration | gpt-6-astra / high | claude-opus-5 / high | Research pending |
 | STM-004 | Stem effects, waveform response and hardware pad replacement | gpt-6-astra / high | claude-opus-5 / high | Research pending |
-| STM-005 | Stem Slip introduced in 4.0.10 | gpt-6-astra / high | claude-opus-5 / high | Research pending |
+| STM-005 | Stem Slip introduced in 4.0.10 | gpt-6.1-sol / high | claude-opus-5 / high | Independent browser30/30; exactT10 conflict/hardware acceptance open |
 | HW-011 | Hercules Inpulse 300 MK2 full default mapping | gpt-6-astra / xhigh | claude-opus-5 / xhigh | Research pending |
 | HW-012 | MIDI many-to-one, one-to-many and data encodings | gpt-6-astra / xhigh | claude-opus-5 / xhigh | Research pending |
 | HW-013 | DVS THRU, changeover and emergency internal mode | gpt-6-astra / xhigh | claude-opus-5 / xhigh | Research pending |
