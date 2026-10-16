@@ -6,7 +6,25 @@ Date: 2026-10-16. Connected reference unit reported by Jason; headphones and RCA
 
 USB device: vendor `0x06f8`, product `0xb12f`. CoreAudio lists four output channels at the currently configured 44.1 kHz rate. CoreMIDI exposes a source and a destination with the exact device name. These observations establish enumeration, not reliable control, feedback, channel routing or latency.
 
-A 70-second passive MIDI diagnostic connected successfully and observed **zero incoming packets**. This is inconclusive: the timing of physical knob movement was not confirmed. It is not proof that MIDI is broken. The diagnostic sent zero output commands. Raw capture remains in ignored local evidence; source is scripts/observe_midi.py.
+A 70-second passive MIDI diagnostic connected successfully and observed **zero incoming packets**. Jason subsequently confirmed that he turned the browser knob during the capture. The discrepancy is unresolved: validate the diagnostic receiver, endpoint selection and device transport before attributing it to the controller. It is not proof that MIDI is broken. The diagnostic sent zero output commands. Raw capture remains in ignored local evidence; source is scripts/observe_midi.py.
+
+The installed Serato MIDI settings also list the exact controller. Allow Serato Hardware Remapping is off and Enable Output Lighting is on in the observed session; neither setting was changed.
+
+An isolated receiver self-test (`scripts/check_midi_receiver.py`) created its own temporary CoreMIDI destination, sent two test messages only to that destination, received exact bytes `b01001b0107f`, and disposed of its endpoints. The executed result was PASS. This rules out a completely nonfunctional callback/packet decoder in that test, but does not prove the original source connection, hardware transport, event timing or Serato ownership path.
+
+Jason subsequently confirmed that turning the browser knob moves the highlighted track in Serato. This is **USER-REPORTED runtime behavior**, stronger than enumeration but not a byte-level capture or independent automation observation. The capture discrepancy must not be described as a broken controller.
+
+A second executed self-test (`python3 scripts/check_midi_receiver.py --source`) created an owned temporary virtual source, connected an input port through MIDIPortConnectSource, delivered two messages through MIDIReceived and received exact bytes `b01001b0107f`. PASS. It exercises the same input-port connection and packet-decoding APIs as the passive observer, but does not reproduce the hardware endpoint.
+
+Read-only IORegistry inspection shows MIDIServer as a client of the device's MIDI interface and Serato DJ Pro as a device user client. Coexistence is observed. Exclusive ownership, which interface Serato reads, and whether it uses this CoreMIDI callback remain unknown.
+
+## Additional protocol references
+
+The [Hercules Official forum response](https://community.hercules.com/community/archives/djcontrol-inpulse-300-mk2-traktor-pro-3-mapping/) states that Inpulse 300 and MK2 send the same MIDI commands, while acknowledging mapping revisions for their different control layouts. This improves the protocol hypothesis; it does not establish functional equivalence of an older mapping.
+
+An [MK2-specific community Mixxx mapping](https://github.com/DCinAC/mixxx-inpulse-300-mk2/tree/2acfb3506a6dab38a47c47b93ee653cdb5f393c7) was inspected at commit `2acfb3506a6dab38a47c47b93ee653cdb5f393c7`. Its XML has 212 control entries. Browser rotation is assigned to status B0 / control 01; its alternate layer uses B3 / 01. These are source-defined candidates, not measured bytes from this unit. Two input addresses have multiple bindings; at 96 / 00 the file associates a hot cue, an effect-selection operation and a beat-jump handler. Whether those combinations are intentional and safely dispatched requires runtime review. The repository API declares no license and no license file was listed. Do not adopt its implementation until provenance and permission are resolved. No mapping was installed or executed.
+
+The [manufacturer's macOS test guide](https://support.hercules.com/en/kb/1841-en/) provides master/headphone, MIDI and LED diagnostics for this exact model through HDJSeries2CPL. The documented installation folder is absent on this Mac. No driver was installed. Its guide requires closing DJ software first; an isolated manufacturer test is a distinct follow-up, not a result already obtained.
 
 ## Documented behavior
 
@@ -46,4 +64,4 @@ Serato imports support investigation of this architecture but do not prove the e
 
 ## Next reproducible check
 
-Coordinate a known 60-second movement window and run `python3 scripts/observe_midi.py 60` from the project root. Correlate individual physical actions with captured messages. Then document expected byte meanings before attempting any output-light command. No mapping from another model should be transmitted merely because the controls look similar.
+Investigate endpoint ownership/transport and compare source-delivery behavior against the successful isolated receiver test before repeating an unchanged capture. Then coordinate a known 60-second movement window and run `python3 scripts/observe_midi.py 60` from the project root. Correlate individual physical actions with captured messages. Then document expected byte meanings before attempting any output-light command. No mapping from another model should be transmitted merely because the controls look similar.

@@ -16,6 +16,21 @@ Updated 2026-10-16. Reference: Serato DJ Pro 4.0.10, build 4.0.10.213. This is a
 | E010 | DOCUMENTED | Serato's device page labels this controller as Serato DJ Lite included and a paid upgrade for DJ Pro. | Does not substantiate the claim that this model previously unlocked Pro for free. |
 | E011 | UNKNOWN | Hopper REA deep analysis timed out while Hopper Demo was still creating procedures. | No procedure-search result or decompilation claim is supported by that attempt. |
 | E012 | OBSERVED | User confirmed Hopper is a demo and selected Ghidra. Ghidra 12.1.4 is installed. | REA rejects universal Mach-O with Ghidra; a local arm64 extraction is used for analysis. Original app unchanged. |
+| E013 | FILE-VERIFIED | Ghidra 12.1.4 completed default auto-analysis and procedure search with 8 GiB heap; retained evidence and static call-site findings are in BINARY_FINDINGS.md. | Not a complete device dispatch trace or proof of runtime reachability. |
+| E014 | OBSERVED | Passive CoreMIDI diagnostic connected for 70 seconds and received zero packets. | Jason subsequently confirmed turning the browser knob during the capture. The zero-packet result remains an unresolved capture/device-path diagnostic, not proof of hardware failure. |
+| E015 | FILE-VERIFIED | A port-open path queries source count, registers callback 0x1009e5ccc and connects a selected source; checked against LLVM instructions. | Manufacturer mapping and use of this path for the connected controller remain unproven. |
+| E016 | OBSERVED | All eight Setup tabs opened through user-authorized alternate automation; actual Hercules model appears in MIDI settings. | Visible controls recorded in UI_OBSERVATIONS.md; below-fold DJ Preferences and hardware-dependent execution remain unverified. |
+
+| E017 | OBSERVED | Installed FX list exposes 59 names in eight categories; advanced LPF, Delay and Reverb parameter strips inspected. | Names and session values do not establish algorithms, ranges or audible parity. |
+| E018 | EXECUTED | Isolated CoreMIDI callback self-test received the exact two messages sent to its own temporary destination. | Validates callback and packet decoding, not the Hercules source path. No hardware destination used. |
+| E019 | OBSERVED | Sampler and Scratch Banks panels opened; eight slots and A–D banks observed, scratch start/cue menu inspected. | No sample playback or physical controller behavior tested. |
+| E020 | OBSERVED | Expansion Remotes panel displays a Remote/Remote Mini discontinuation notice. | Does not establish the user's claim of removed entitlements on a particular controller. |
+
+| E021 | USER-REPORTED | Jason confirms Hercules browser rotation moves the highlighted Serato track. | Confirms that specific reference behavior, not raw MIDI encoding or all controls. |
+| E022 | EXECUTED | Virtual-source → input-port self-test received the expected bytes through MIDIPortConnectSource/MIDIReceived. | Does not reproduce the physical endpoint; no hardware destination used. |
+| E023 | OBSERVED | IORegistry shows MIDIServer on the MIDI interface and Serato as a Hercules device user client. | Does not prove exclusive ownership or Serato's chosen input transport. |
+| E024 | OBSERVED | Horizontal, Extended and Stack layouts and the six-control Flip strip opened and visually inspected. | Four-deck hardware state, Flip recording and audible behavior remain untested. |
+| E025 | FILE-VERIFIED | 168 manual articles have explicit feature assignments; 60 selected interaction requirements have triggers and expected results. | Mapping completeness is not full semantic review or feature parity. |
 
 ## Read-only binary analysis provenance
 

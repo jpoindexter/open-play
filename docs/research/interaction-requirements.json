@@ -1,0 +1,1626 @@
+{
+  "updated": "2026-10-16",
+  "complete_inventory": false,
+  "requirements": [
+    {
+      "id": "REQ-001",
+      "feature_id": "UI-007",
+      "source_article": "225122768",
+      "screen": "Display selector",
+      "trigger": "Select Vertical",
+      "expected": "Decks flank central vertical waveforms",
+      "evidence": "OBSERVED layout; playback untested",
+      "prototype_behavior": "Implement a deterministic fixture state transition for this requirement; label audio/hardware simulation",
+      "native_status": "blocked_until_prototype_approval",
+      "acceptance": "Select Vertical \u2192 Decks flank central vertical waveforms",
+      "source_url": "https://support.serato.com/hc/en-us/articles/225122768-Display-Modes",
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-sonnet-5",
+          "effort": "medium"
+        },
+        "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      }
+    },
+    {
+      "id": "REQ-002",
+      "feature_id": "UI-007",
+      "source_article": "225122768",
+      "screen": "Display selector",
+      "trigger": "Select Horizontal",
+      "expected": "Decks flank central horizontal waveforms",
+      "evidence": "OBSERVED layout; playback untested",
+      "prototype_behavior": "Implement a deterministic fixture state transition for this requirement; label audio/hardware simulation",
+      "native_status": "blocked_until_prototype_approval",
+      "acceptance": "Select Horizontal \u2192 Decks flank central horizontal waveforms",
+      "source_url": "https://support.serato.com/hc/en-us/articles/225122768-Display-Modes",
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-sonnet-5",
+          "effort": "medium"
+        },
+        "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      }
+    },
+    {
+      "id": "REQ-003",
+      "feature_id": "UI-007",
+      "source_article": "225122768",
+      "screen": "Display selector",
+      "trigger": "Select Extended",
+      "expected": "Compact upper decks with wide horizontal waveforms below",
+      "evidence": "OBSERVED layout; playback untested",
+      "prototype_behavior": "Implement a deterministic fixture state transition for this requirement; label audio/hardware simulation",
+      "native_status": "blocked_until_prototype_approval",
+      "acceptance": "Select Extended \u2192 Compact upper decks with wide horizontal waveforms below",
+      "source_url": "https://support.serato.com/hc/en-us/articles/225122768-Display-Modes",
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-sonnet-5",
+          "effort": "medium"
+        },
+        "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      }
+    },
+    {
+      "id": "REQ-004",
+      "feature_id": "UI-007",
+      "source_article": "225122768",
+      "screen": "Display selector",
+      "trigger": "Select Stack",
+      "expected": "Compact decks stack at left, corresponding waveforms at right",
+      "evidence": "OBSERVED with Hercules connected",
+      "prototype_behavior": "Implement a deterministic fixture state transition for this requirement; label audio/hardware simulation",
+      "native_status": "blocked_until_prototype_approval",
+      "acceptance": "Select Stack \u2192 Compact decks stack at left, corresponding waveforms at right",
+      "source_url": "https://support.serato.com/hc/en-us/articles/225122768-Display-Modes",
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-sonnet-5",
+          "effort": "medium"
+        },
+        "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      }
+    },
+    {
+      "id": "REQ-005",
+      "feature_id": "UI-007",
+      "source_article": "225122768",
+      "screen": "Display selector",
+      "trigger": "Select Library",
+      "expected": "Deck information contracts to maximize library area",
+      "evidence": "OBSERVED in earlier inspection",
+      "prototype_behavior": "Implement a deterministic fixture state transition for this requirement; label audio/hardware simulation",
+      "native_status": "blocked_until_prototype_approval",
+      "acceptance": "Select Library \u2192 Deck information contracts to maximize library area",
+      "source_url": "https://support.serato.com/hc/en-us/articles/225122768-Display-Modes",
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-sonnet-5",
+          "effort": "medium"
+        },
+        "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      }
+    },
+    {
+      "id": "REQ-006",
+      "feature_id": "UI-007",
+      "source_article": "225122768",
+      "screen": "Display selector",
+      "trigger": "Select a layout with insufficient panel space",
+      "expected": "Close affected panels and expose a status-bar explanation",
+      "evidence": "DOCUMENTED; runtime behavior not tested",
+      "prototype_behavior": "Implement a deterministic fixture state transition for this requirement; label audio/hardware simulation",
+      "native_status": "blocked_until_prototype_approval",
+      "acceptance": "Select a layout with insufficient panel space \u2192 Close affected panels and expose a status-bar explanation",
+      "source_url": "https://support.serato.com/hc/en-us/articles/225122768-Display-Modes",
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-sonnet-5",
+          "effort": "medium"
+        },
+        "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      }
+    },
+    {
+      "id": "REQ-007",
+      "feature_id": "DEK-011",
+      "source_article": "225122768",
+      "screen": "Deck display",
+      "trigger": "Switch 2/4 deck presentation on capable reference hardware",
+      "expected": "Two-deck display follows active decks; activity has a blue border; four-deck state requires separate reference evidence",
+      "evidence": "DOCUMENTED; runtime behavior not tested",
+      "prototype_behavior": "Implement a deterministic fixture state transition for this requirement; label audio/hardware simulation",
+      "native_status": "blocked_until_prototype_approval",
+      "acceptance": "Switch 2/4 deck presentation on capable reference hardware \u2192 Two-deck display follows active decks; activity has a blue border; four-deck state requires separate reference evidence",
+      "source_url": "https://support.serato.com/hc/en-us/articles/225122768-Display-Modes",
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "xhigh"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "Architecture and persistence require reasoning across failure and concurrency boundaries.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      }
+    },
+    {
+      "id": "REQ-008",
+      "feature_id": "UI-002",
+      "source_article": "223363407",
+      "screen": "DJ Preferences / keyboard",
+      "trigger": "Enable Playback Keys Use Shift and press a transport key without modifier",
+      "expected": "Do not execute protected transport action; alphabetical selection applies in the documented sorted-list context",
+      "evidence": "DOCUMENTED; runtime behavior not tested",
+      "prototype_behavior": "Implement a deterministic fixture state transition for this requirement; label audio/hardware simulation",
+      "native_status": "blocked_until_prototype_approval",
+      "acceptance": "Enable Playback Keys Use Shift and press a transport key without modifier \u2192 Do not execute protected transport action; alphabetical selection applies in the documented sorted-list context",
+      "source_url": "https://support.serato.com/hc/en-us/articles/223363407-DJ-Preferences",
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-sonnet-5",
+          "effort": "medium"
+        },
+        "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      }
+    },
+    {
+      "id": "REQ-009",
+      "feature_id": "DEK-001",
+      "source_article": "223363407",
+      "screen": "DJ Preferences / load",
+      "trigger": "Enable Lock Playing Deck and attempt replacement of a playing deck",
+      "expected": "Reject replacement; allow replacement when paused",
+      "evidence": "DOCUMENTED; runtime behavior not tested",
+      "prototype_behavior": "Implement a deterministic fixture state transition for this requirement; label audio/hardware simulation",
+      "native_status": "blocked_until_prototype_approval",
+      "acceptance": "Enable Lock Playing Deck and attempt replacement of a playing deck \u2192 Reject replacement; allow replacement when paused",
+      "source_url": "https://support.serato.com/hc/en-us/articles/223363407-DJ-Preferences",
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-sonnet-5",
+          "effort": "medium"
+        },
+        "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      }
+    },
+    {
+      "id": "REQ-010",
+      "feature_id": "DEK-016",
+      "source_article": "223363407",
+      "screen": "DJ Preferences / cues and loops",
+      "trigger": "Enable chronological ordering",
+      "expected": "Present saved cues and loops by timeline position without breaking their associations",
+      "evidence": "DOCUMENTED; runtime behavior not tested",
+      "prototype_behavior": "Implement a deterministic fixture state transition for this requirement; label audio/hardware simulation",
+      "native_status": "blocked_until_prototype_approval",
+      "acceptance": "Enable chronological ordering \u2192 Present saved cues and loops by timeline position without breaking their associations",
+      "source_url": "https://support.serato.com/hc/en-us/articles/223363407-DJ-Preferences",
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-sonnet-5",
+          "effort": "medium"
+        },
+        "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      }
+    },
+    {
+      "id": "REQ-011",
+      "feature_id": "DEK-003",
+      "source_article": "223363407",
+      "screen": "DJ Preferences / hot cues",
+      "trigger": "Enable Hot Cues and press a key for an empty cue slot",
+      "expected": "Set a cue without the additional control modifier",
+      "evidence": "DOCUMENTED; runtime behavior not tested",
+      "prototype_behavior": "Implement a deterministic fixture state transition for this requirement; label audio/hardware simulation",
+      "native_status": "blocked_until_prototype_approval",
+      "acceptance": "Enable Hot Cues and press a key for an empty cue slot \u2192 Set a cue without the additional control modifier",
+      "source_url": "https://support.serato.com/hc/en-us/articles/223363407-DJ-Preferences",
+      "routing": {
+        "codex": {
+          "model": "gpt-6-astra",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "DSP and transport require numerical reasoning backed by measurements.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      }
+    },
+    {
+      "id": "REQ-012",
+      "feature_id": "DEK-002",
+      "source_article": "223363407",
+      "screen": "Virtual deck warning",
+      "trigger": "Play a track longer than a minute into its final 20 seconds",
+      "expected": "Flash the deck progress warning; do not apply this rule to sub-minute tracks",
+      "evidence": "DOCUMENTED; runtime behavior not tested",
+      "prototype_behavior": "Implement a deterministic fixture state transition for this requirement; label audio/hardware simulation",
+      "native_status": "blocked_until_prototype_approval",
+      "acceptance": "Play a track longer than a minute into its final 20 seconds \u2192 Flash the deck progress warning; do not apply this rule to sub-minute tracks",
+      "source_url": "https://support.serato.com/hc/en-us/articles/223363407-DJ-Preferences",
+      "routing": {
+        "codex": {
+          "model": "gpt-6-astra",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "DSP and transport require numerical reasoning backed by measurements.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      }
+    },
+    {
+      "id": "REQ-013",
+      "feature_id": "DEK-002",
+      "source_article": "223363407",
+      "screen": "Hardware needle search",
+      "trigger": "Enable needle-search protection during playback",
+      "expected": "Ignore ordinary strip search; permit documented hardware Shift override",
+      "evidence": "DOCUMENTED; runtime behavior not tested",
+      "prototype_behavior": "Implement a deterministic fixture state transition for this requirement; label audio/hardware simulation",
+      "native_status": "blocked_until_prototype_approval",
+      "acceptance": "Enable needle-search protection during playback \u2192 Ignore ordinary strip search; permit documented hardware Shift override",
+      "source_url": "https://support.serato.com/hc/en-us/articles/223363407-DJ-Preferences",
+      "routing": {
+        "codex": {
+          "model": "gpt-6-astra",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "DSP and transport require numerical reasoning backed by measurements.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      }
+    },
+    {
+      "id": "REQ-014",
+      "feature_id": "DEK-005",
+      "source_article": "223363407",
+      "screen": "DJ Preferences / Beat Jump",
+      "trigger": "Enable Show Beat Jump Controls",
+      "expected": "Expose deck controls and supported hardware operation",
+      "evidence": "DOCUMENTED; runtime behavior not tested",
+      "prototype_behavior": "Implement a deterministic fixture state transition for this requirement; label audio/hardware simulation",
+      "native_status": "blocked_until_prototype_approval",
+      "acceptance": "Enable Show Beat Jump Controls \u2192 Expose deck controls and supported hardware operation",
+      "source_url": "https://support.serato.com/hc/en-us/articles/223363407-DJ-Preferences",
+      "routing": {
+        "codex": {
+          "model": "gpt-6-astra",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "DSP and transport require numerical reasoning backed by measurements.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      }
+    },
+    {
+      "id": "REQ-015",
+      "feature_id": "DEK-012",
+      "source_article": "223363407",
+      "screen": "DJ Preferences / quantize",
+      "trigger": "Choose quantize interval",
+      "expected": "Apply interval to cue points, manual loops and reloop; exact menu inventory remains open",
+      "evidence": "DOCUMENTED; runtime behavior not tested",
+      "prototype_behavior": "Implement a deterministic fixture state transition for this requirement; label audio/hardware simulation",
+      "native_status": "blocked_until_prototype_approval",
+      "acceptance": "Choose quantize interval \u2192 Apply interval to cue points, manual loops and reloop; exact menu inventory remains open",
+      "source_url": "https://support.serato.com/hc/en-us/articles/223363407-DJ-Preferences",
+      "routing": {
+        "codex": {
+          "model": "gpt-6-astra",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "DSP and transport require numerical reasoning backed by measurements.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      }
+    },
+    {
+      "id": "REQ-016",
+      "feature_id": "DEK-010",
+      "source_article": "223363407",
+      "screen": "DJ Preferences / Slip Release",
+      "trigger": "Enable Slip Release and choose a release period",
+      "expected": "Defer return to the underlying timeline until the selected period",
+      "evidence": "DOCUMENTED; runtime behavior not tested",
+      "prototype_behavior": "Implement a deterministic fixture state transition for this requirement; label audio/hardware simulation",
+      "native_status": "blocked_until_prototype_approval",
+      "acceptance": "Enable Slip Release and choose a release period \u2192 Defer return to the underlying timeline until the selected period",
+      "source_url": "https://support.serato.com/hc/en-us/articles/223363407-DJ-Preferences",
+      "routing": {
+        "codex": {
+          "model": "gpt-6-astra",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "DSP and transport require numerical reasoning backed by measurements.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      }
+    },
+    {
+      "id": "REQ-017",
+      "feature_id": "ANA-005",
+      "source_article": "223363407",
+      "screen": "DJ Preferences / Auto Gain",
+      "trigger": "Load an analyzed track with Auto Gain enabled",
+      "expected": "Apply analyzed gain for selected reference level; available documented reference levels span 89\u201398 dB",
+      "evidence": "DOCUMENTED; runtime behavior not tested",
+      "prototype_behavior": "Implement a deterministic fixture state transition for this requirement; label audio/hardware simulation",
+      "native_status": "blocked_until_prototype_approval",
+      "acceptance": "Load an analyzed track with Auto Gain enabled \u2192 Apply analyzed gain for selected reference level; available documented reference levels span 89\u201398 dB",
+      "source_url": "https://support.serato.com/hc/en-us/articles/223363407-DJ-Preferences",
+      "routing": {
+        "codex": {
+          "model": "gpt-6-astra",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "DSP and transport require numerical reasoning backed by measurements.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      }
+    },
+    {
+      "id": "REQ-018",
+      "feature_id": "DEK-002",
+      "source_article": "223363407",
+      "screen": "DJ Preferences / braking",
+      "trigger": "Adjust start/stop braking then play/pause",
+      "expected": "Produce the corresponding acceleration/deceleration; selected hardware can own this adjustment",
+      "evidence": "DOCUMENTED; runtime behavior not tested",
+      "prototype_behavior": "Implement a deterministic fixture state transition for this requirement; label audio/hardware simulation",
+      "native_status": "blocked_until_prototype_approval",
+      "acceptance": "Adjust start/stop braking then play/pause \u2192 Produce the corresponding acceleration/deceleration; selected hardware can own this adjustment",
+      "source_url": "https://support.serato.com/hc/en-us/articles/223363407-DJ-Preferences",
+      "routing": {
+        "codex": {
+          "model": "gpt-6-astra",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "DSP and transport require numerical reasoning backed by measurements.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      }
+    },
+    {
+      "id": "REQ-019",
+      "feature_id": "STM-004",
+      "source_article": "223363407",
+      "screen": "DJ Preferences / hardware pads",
+      "trigger": "Connect compatible primary/accessory hardware",
+      "expected": "Offer applicable pad-mode replacement with Stems; unavailable hardware must be modeled explicitly",
+      "evidence": "DOCUMENTED; runtime behavior not tested",
+      "prototype_behavior": "Implement a deterministic fixture state transition for this requirement; label audio/hardware simulation",
+      "native_status": "blocked_until_prototype_approval",
+      "acceptance": "Connect compatible primary/accessory hardware \u2192 Offer applicable pad-mode replacement with Stems; unavailable hardware must be modeled explicitly",
+      "source_url": "https://support.serato.com/hc/en-us/articles/223363407-DJ-Preferences",
+      "routing": {
+        "codex": {
+          "model": "gpt-6-astra",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "DSP and transport require numerical reasoning backed by measurements.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      }
+    },
+    {
+      "id": "REQ-020",
+      "feature_id": "DEK-001",
+      "source_article": "223363407",
+      "screen": "On Song Load",
+      "trigger": "Load a track with Play from Start enabled",
+      "expected": "Start from downbeat marker when present; cue and instant-double rules take precedence",
+      "evidence": "DOCUMENTED; runtime behavior not tested",
+      "prototype_behavior": "Implement a deterministic fixture state transition for this requirement; label audio/hardware simulation",
+      "native_status": "blocked_until_prototype_approval",
+      "acceptance": "Load a track with Play from Start enabled \u2192 Start from downbeat marker when present; cue and instant-double rules take precedence",
+      "source_url": "https://support.serato.com/hc/en-us/articles/223363407-DJ-Preferences",
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-sonnet-5",
+          "effort": "medium"
+        },
+        "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      }
+    },
+    {
+      "id": "REQ-021",
+      "feature_id": "DEK-001",
+      "source_article": "223363407",
+      "screen": "On Song Load",
+      "trigger": "Load with First Cue enabled but no stored cue",
+      "expected": "Fall back to start; instant double still overrides this preference",
+      "evidence": "DOCUMENTED; runtime behavior not tested",
+      "prototype_behavior": "Implement a deterministic fixture state transition for this requirement; label audio/hardware simulation",
+      "native_status": "blocked_until_prototype_approval",
+      "acceptance": "Load with First Cue enabled but no stored cue \u2192 Fall back to start; instant double still overrides this preference",
+      "source_url": "https://support.serato.com/hc/en-us/articles/223363407-DJ-Preferences",
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-sonnet-5",
+          "effort": "medium"
+        },
+        "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      }
+    },
+    {
+      "id": "REQ-022",
+      "feature_id": "DEK-013",
+      "source_article": "223363407",
+      "screen": "On Song Load",
+      "trigger": "Load the same file to another deck with Instant Doubles enabled",
+      "expected": "Copy playhead, keylock, sync and loop settings; override start/first-cue rules",
+      "evidence": "DOCUMENTED; runtime behavior not tested",
+      "prototype_behavior": "Implement a deterministic fixture state transition for this requirement; label audio/hardware simulation",
+      "native_status": "blocked_until_prototype_approval",
+      "acceptance": "Load the same file to another deck with Instant Doubles enabled \u2192 Copy playhead, keylock, sync and loop settings; override start/first-cue rules",
+      "source_url": "https://support.serato.com/hc/en-us/articles/223363407-DJ-Preferences",
+      "routing": {
+        "codex": {
+          "model": "gpt-6-astra",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "DSP and transport require numerical reasoning backed by measurements.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      }
+    },
+    {
+      "id": "REQ-023",
+      "feature_id": "STM-001",
+      "source_article": "223363407",
+      "screen": "On Song Load",
+      "trigger": "Enable Analyze Stems",
+      "expected": "Initialize separation on load rather than waiting for the first Stems action",
+      "evidence": "DOCUMENTED; runtime behavior not tested",
+      "prototype_behavior": "Implement a deterministic fixture state transition for this requirement; label audio/hardware simulation",
+      "native_status": "blocked_until_prototype_approval",
+      "acceptance": "Enable Analyze Stems \u2192 Initialize separation on load rather than waiting for the first Stems action",
+      "source_url": "https://support.serato.com/hc/en-us/articles/223363407-DJ-Preferences",
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-sonnet-5",
+          "effort": "high"
+        },
+        "rationale": "Model evaluation needs reproducible benchmarks, license evidence and resource accounting.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      }
+    },
+    {
+      "id": "REQ-024",
+      "feature_id": "FX-001",
+      "source_article": "223363407",
+      "screen": "On Song Load",
+      "trigger": "Load a track with Turn Off FX enabled",
+      "expected": "Disable its corresponding FX bank",
+      "evidence": "DOCUMENTED; runtime behavior not tested",
+      "prototype_behavior": "Implement a deterministic fixture state transition for this requirement; label audio/hardware simulation",
+      "native_status": "blocked_until_prototype_approval",
+      "acceptance": "Load a track with Turn Off FX enabled \u2192 Disable its corresponding FX bank",
+      "source_url": "https://support.serato.com/hc/en-us/articles/223363407-DJ-Preferences",
+      "routing": {
+        "codex": {
+          "model": "gpt-6-astra",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "DSP and transport require numerical reasoning backed by measurements.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      }
+    },
+    {
+      "id": "REQ-025",
+      "feature_id": "DEK-009",
+      "source_article": "223363407",
+      "screen": "Virtual Deck Speed",
+      "trigger": "Choose 33 or 45 RPM",
+      "expected": "Reflect selected virtual platter speed; physical behavior and CPU cost require native validation",
+      "evidence": "DOCUMENTED; runtime behavior not tested",
+      "prototype_behavior": "Implement a deterministic fixture state transition for this requirement; label audio/hardware simulation",
+      "native_status": "blocked_until_prototype_approval",
+      "acceptance": "Choose 33 or 45 RPM \u2192 Reflect selected virtual platter speed; physical behavior and CPU cost require native validation",
+      "source_url": "https://support.serato.com/hc/en-us/articles/223363407-DJ-Preferences",
+      "routing": {
+        "codex": {
+          "model": "gpt-6-astra",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "DSP and transport require numerical reasoning backed by measurements.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      }
+    },
+    {
+      "id": "REQ-026",
+      "feature_id": "REC-003",
+      "source_article": "223363407",
+      "screen": "Recording preferences",
+      "trigger": "Choose bit depth and format",
+      "expected": "Offer 16/24 bit and AIFF/WAV; retain independent selections",
+      "evidence": "DOCUMENTED; runtime behavior not tested",
+      "prototype_behavior": "Implement a deterministic fixture state transition for this requirement; label audio/hardware simulation",
+      "native_status": "blocked_until_prototype_approval",
+      "acceptance": "Choose bit depth and format \u2192 Offer 16/24 bit and AIFF/WAV; retain independent selections",
+      "source_url": "https://support.serato.com/hc/en-us/articles/223363407-DJ-Preferences",
+      "routing": {
+        "codex": {
+          "model": "gpt-6-astra",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "DSP and transport require numerical reasoning backed by measurements.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      }
+    },
+    {
+      "id": "REQ-027",
+      "feature_id": "DEK-008",
+      "source_article": "227785587",
+      "screen": "Sync preferences",
+      "trigger": "Choose Sync Off",
+      "expected": "Remove the main-screen Sync control",
+      "evidence": "DOCUMENTED; runtime behavior not tested",
+      "prototype_behavior": "Implement a deterministic fixture state transition for this requirement; label audio/hardware simulation",
+      "native_status": "blocked_until_prototype_approval",
+      "acceptance": "Choose Sync Off \u2192 Remove the main-screen Sync control",
+      "source_url": "https://support.serato.com/hc/en-us/articles/227785587-Sync-Preferences",
+      "routing": {
+        "codex": {
+          "model": "gpt-6-astra",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "DSP and transport require numerical reasoning backed by measurements.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      }
+    },
+    {
+      "id": "REQ-028",
+      "feature_id": "DEK-008",
+      "source_article": "227785587",
+      "screen": "Sync preferences",
+      "trigger": "Choose Simple Sync",
+      "expected": "Offer transient-based alignment without requiring a beatgrid",
+      "evidence": "DOCUMENTED; runtime behavior not tested",
+      "prototype_behavior": "Implement a deterministic fixture state transition for this requirement; label audio/hardware simulation",
+      "native_status": "blocked_until_prototype_approval",
+      "acceptance": "Choose Simple Sync \u2192 Offer transient-based alignment without requiring a beatgrid",
+      "source_url": "https://support.serato.com/hc/en-us/articles/227785587-Sync-Preferences",
+      "routing": {
+        "codex": {
+          "model": "gpt-6-astra",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "DSP and transport require numerical reasoning backed by measurements.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      }
+    },
+    {
+      "id": "REQ-029",
+      "feature_id": "DEK-008",
+      "source_article": "227785587",
+      "screen": "Sync preferences",
+      "trigger": "Enable Snap to Beatgrid in Simple Sync",
+      "expected": "Show grid and use it for initial alignment instead of transient matching",
+      "evidence": "DOCUMENTED; runtime behavior not tested",
+      "prototype_behavior": "Implement a deterministic fixture state transition for this requirement; label audio/hardware simulation",
+      "native_status": "blocked_until_prototype_approval",
+      "acceptance": "Enable Snap to Beatgrid in Simple Sync \u2192 Show grid and use it for initial alignment instead of transient matching",
+      "source_url": "https://support.serato.com/hc/en-us/articles/227785587-Sync-Preferences",
+      "routing": {
+        "codex": {
+          "model": "gpt-6-astra",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "DSP and transport require numerical reasoning backed by measurements.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      }
+    },
+    {
+      "id": "REQ-030",
+      "feature_id": "DEK-018",
+      "source_article": "227785587",
+      "screen": "Sync preferences",
+      "trigger": "Choose Smart Sync",
+      "expected": "Use accurate grids for beat/tempo state transitions",
+      "evidence": "DOCUMENTED; runtime behavior not tested",
+      "prototype_behavior": "Implement a deterministic fixture state transition for this requirement; label audio/hardware simulation",
+      "native_status": "blocked_until_prototype_approval",
+      "acceptance": "Choose Smart Sync \u2192 Use accurate grids for beat/tempo state transitions",
+      "source_url": "https://support.serato.com/hc/en-us/articles/227785587-Sync-Preferences",
+      "routing": {
+        "codex": {
+          "model": "gpt-6-astra",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "DSP and transport require numerical reasoning backed by measurements.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      }
+    },
+    {
+      "id": "REQ-031",
+      "feature_id": "DEK-018",
+      "source_article": "227785587",
+      "screen": "Sync preferences",
+      "trigger": "Enable Maintain Sync on Track Load",
+      "expected": "Keep sync engaged across track replacement",
+      "evidence": "DOCUMENTED; runtime behavior not tested",
+      "prototype_behavior": "Implement a deterministic fixture state transition for this requirement; label audio/hardware simulation",
+      "native_status": "blocked_until_prototype_approval",
+      "acceptance": "Enable Maintain Sync on Track Load \u2192 Keep sync engaged across track replacement",
+      "source_url": "https://support.serato.com/hc/en-us/articles/227785587-Sync-Preferences",
+      "routing": {
+        "codex": {
+          "model": "gpt-6-astra",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "DSP and transport require numerical reasoning backed by measurements.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      }
+    },
+    {
+      "id": "REQ-032",
+      "feature_id": "DEK-018",
+      "source_article": "227785587",
+      "screen": "DVS/WIR sync preferences",
+      "trigger": "Enable Tempo Slider Affects All Synced Decks",
+      "expected": "Apply tempo changes to all synced decks; only documented DVS/WIR context exposes this setting",
+      "evidence": "DOCUMENTED; runtime behavior not tested",
+      "prototype_behavior": "Implement a deterministic fixture state transition for this requirement; label audio/hardware simulation",
+      "native_status": "blocked_until_prototype_approval",
+      "acceptance": "Enable Tempo Slider Affects All Synced Decks \u2192 Apply tempo changes to all synced decks; only documented DVS/WIR context exposes this setting",
+      "source_url": "https://support.serato.com/hc/en-us/articles/227785587-Sync-Preferences",
+      "routing": {
+        "codex": {
+          "model": "gpt-6-astra",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "DSP and transport require numerical reasoning backed by measurements.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      }
+    },
+    {
+      "id": "REQ-033",
+      "feature_id": "DEK-012",
+      "source_article": "227785587",
+      "screen": "Quantize preferences",
+      "trigger": "Set or trigger a cue with a one-beat interval",
+      "expected": "Allow beat-aligned actions no closer than the configured interval",
+      "evidence": "DOCUMENTED; runtime behavior not tested",
+      "prototype_behavior": "Implement a deterministic fixture state transition for this requirement; label audio/hardware simulation",
+      "native_status": "blocked_until_prototype_approval",
+      "acceptance": "Set or trigger a cue with a one-beat interval \u2192 Allow beat-aligned actions no closer than the configured interval",
+      "source_url": "https://support.serato.com/hc/en-us/articles/227785587-Sync-Preferences",
+      "routing": {
+        "codex": {
+          "model": "gpt-6-astra",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "DSP and transport require numerical reasoning backed by measurements.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      }
+    },
+    {
+      "id": "REQ-034",
+      "feature_id": "FX-003",
+      "source_article": "10326824275087",
+      "screen": "FX panel",
+      "trigger": "Toggle upper-right Advanced FX View",
+      "expected": "Show or hide parameter strip while preserving selected effects",
+      "evidence": "OBSERVED toggle; parameter persistence not tested",
+      "prototype_behavior": "Implement a deterministic fixture state transition for this requirement; label audio/hardware simulation",
+      "native_status": "blocked_until_prototype_approval",
+      "acceptance": "Toggle upper-right Advanced FX View \u2192 Show or hide parameter strip while preserving selected effects",
+      "source_url": "https://support.serato.com/hc/en-us/articles/10326824275087-Advanced-FX-View",
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-sonnet-5",
+          "effort": "medium"
+        },
+        "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      }
+    },
+    {
+      "id": "REQ-035",
+      "feature_id": "FX-003",
+      "source_article": "10326824275087",
+      "screen": "Advanced FX",
+      "trigger": "Click an effect depth knob",
+      "expected": "Select that effect for parameter inspection without using the enable-title action",
+      "evidence": "OBSERVED LPF, Delay, Reverb selection",
+      "prototype_behavior": "Implement a deterministic fixture state transition for this requirement; label audio/hardware simulation",
+      "native_status": "blocked_until_prototype_approval",
+      "acceptance": "Click an effect depth knob \u2192 Select that effect for parameter inspection without using the enable-title action",
+      "source_url": "https://support.serato.com/hc/en-us/articles/10326824275087-Advanced-FX-View",
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-sonnet-5",
+          "effort": "medium"
+        },
+        "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      }
+    },
+    {
+      "id": "REQ-036",
+      "feature_id": "FX-001",
+      "source_article": "10326824275087",
+      "screen": "Advanced FX",
+      "trigger": "Click effect title",
+      "expected": "Toggle effect enabled state; this is distinct from selecting its parameters",
+      "evidence": "DOCUMENTED; runtime behavior not tested",
+      "prototype_behavior": "Implement a deterministic fixture state transition for this requirement; label audio/hardware simulation",
+      "native_status": "blocked_until_prototype_approval",
+      "acceptance": "Click effect title \u2192 Toggle effect enabled state; this is distinct from selecting its parameters",
+      "source_url": "https://support.serato.com/hc/en-us/articles/10326824275087-Advanced-FX-View",
+      "routing": {
+        "codex": {
+          "model": "gpt-6-astra",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "DSP and transport require numerical reasoning backed by measurements.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      }
+    },
+    {
+      "id": "REQ-037",
+      "feature_id": "FX-003",
+      "source_article": "10326824275087",
+      "screen": "Advanced FX",
+      "trigger": "Choose a different effect from slot dropdown",
+      "expected": "Replace the effect in that slot",
+      "evidence": "DOCUMENTED; runtime behavior not tested",
+      "prototype_behavior": "Implement a deterministic fixture state transition for this requirement; label audio/hardware simulation",
+      "native_status": "blocked_until_prototype_approval",
+      "acceptance": "Choose a different effect from slot dropdown \u2192 Replace the effect in that slot",
+      "source_url": "https://support.serato.com/hc/en-us/articles/10326824275087-Advanced-FX-View",
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-sonnet-5",
+          "effort": "medium"
+        },
+        "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      }
+    },
+    {
+      "id": "REQ-038",
+      "feature_id": "FX-003",
+      "source_article": "10326824275087",
+      "screen": "Advanced FX",
+      "trigger": "Drag depth while holding Shift",
+      "expected": "Use fine adjustment",
+      "evidence": "DOCUMENTED; runtime behavior not tested",
+      "prototype_behavior": "Implement a deterministic fixture state transition for this requirement; label audio/hardware simulation",
+      "native_status": "blocked_until_prototype_approval",
+      "acceptance": "Drag depth while holding Shift \u2192 Use fine adjustment",
+      "source_url": "https://support.serato.com/hc/en-us/articles/10326824275087-Advanced-FX-View",
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-sonnet-5",
+          "effort": "medium"
+        },
+        "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      }
+    },
+    {
+      "id": "REQ-039",
+      "feature_id": "FX-003",
+      "source_article": "10326824275087",
+      "screen": "Advanced FX",
+      "trigger": "Command/control-click or double-click depth",
+      "expected": "Set depth to 50 percent",
+      "evidence": "DOCUMENTED; runtime behavior not tested",
+      "prototype_behavior": "Implement a deterministic fixture state transition for this requirement; label audio/hardware simulation",
+      "native_status": "blocked_until_prototype_approval",
+      "acceptance": "Command/control-click or double-click depth \u2192 Set depth to 50 percent",
+      "source_url": "https://support.serato.com/hc/en-us/articles/10326824275087-Advanced-FX-View",
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-sonnet-5",
+          "effort": "medium"
+        },
+        "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      }
+    },
+    {
+      "id": "REQ-040",
+      "feature_id": "FX-003",
+      "source_article": "10326824275087",
+      "screen": "Advanced FX",
+      "trigger": "Command/control-click or double-click an advanced parameter",
+      "expected": "Restore that parameter default; do not apply the depth-specific 50 percent rule",
+      "evidence": "DOCUMENTED; runtime behavior not tested",
+      "prototype_behavior": "Implement a deterministic fixture state transition for this requirement; label audio/hardware simulation",
+      "native_status": "blocked_until_prototype_approval",
+      "acceptance": "Command/control-click or double-click an advanced parameter \u2192 Restore that parameter default; do not apply the depth-specific 50 percent rule",
+      "source_url": "https://support.serato.com/hc/en-us/articles/10326824275087-Advanced-FX-View",
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-sonnet-5",
+          "effort": "medium"
+        },
+        "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      }
+    },
+    {
+      "id": "REQ-041",
+      "feature_id": "FX-003",
+      "source_article": "10326824275087",
+      "screen": "FX preset dialog",
+      "trigger": "Save edited effect, enter name, confirm Save",
+      "expected": "Expose named preset in USER category across effect selectors",
+      "evidence": "DOCUMENTED; runtime behavior not tested",
+      "prototype_behavior": "Implement a deterministic fixture state transition for this requirement; label audio/hardware simulation",
+      "native_status": "blocked_until_prototype_approval",
+      "acceptance": "Save edited effect, enter name, confirm Save \u2192 Expose named preset in USER category across effect selectors",
+      "source_url": "https://support.serato.com/hc/en-us/articles/10326824275087-Advanced-FX-View",
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-sonnet-5",
+          "effort": "medium"
+        },
+        "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      }
+    },
+    {
+      "id": "REQ-042",
+      "feature_id": "FX-003",
+      "source_article": "10326824275087",
+      "screen": "FX preset",
+      "trigger": "Activate Reset after parameter edits",
+      "expected": "Restore the preset default settings",
+      "evidence": "DOCUMENTED; runtime behavior not tested",
+      "prototype_behavior": "Implement a deterministic fixture state transition for this requirement; label audio/hardware simulation",
+      "native_status": "blocked_until_prototype_approval",
+      "acceptance": "Activate Reset after parameter edits \u2192 Restore the preset default settings",
+      "source_url": "https://support.serato.com/hc/en-us/articles/10326824275087-Advanced-FX-View",
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-sonnet-5",
+          "effort": "medium"
+        },
+        "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      }
+    },
+    {
+      "id": "REQ-043",
+      "feature_id": "SMP-002",
+      "source_article": "227629728",
+      "screen": "Sampler advanced slot",
+      "trigger": "Trigger a sample repeatedly in Trigger mode",
+      "expected": "Restart from its configured beginning; allow playback to finish",
+      "evidence": "DOCUMENTED; runtime behavior not tested",
+      "prototype_behavior": "Implement a deterministic fixture state transition for this requirement; label audio/hardware simulation",
+      "native_status": "blocked_until_prototype_approval",
+      "acceptance": "Trigger a sample repeatedly in Trigger mode \u2192 Restart from its configured beginning; allow playback to finish",
+      "source_url": "https://support.serato.com/hc/en-us/articles/227629728-Sampler-Play-Modes",
+      "routing": {
+        "codex": {
+          "model": "gpt-6-astra",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "DSP and transport require numerical reasoning backed by measurements.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      }
+    },
+    {
+      "id": "REQ-044",
+      "feature_id": "SMP-002",
+      "source_article": "227629728",
+      "screen": "Sampler advanced slot",
+      "trigger": "Alt-click play or use Alt plus slot shortcut in Trigger mode",
+      "expected": "Stop the sample",
+      "evidence": "DOCUMENTED; runtime behavior not tested",
+      "prototype_behavior": "Implement a deterministic fixture state transition for this requirement; label audio/hardware simulation",
+      "native_status": "blocked_until_prototype_approval",
+      "acceptance": "Alt-click play or use Alt plus slot shortcut in Trigger mode \u2192 Stop the sample",
+      "source_url": "https://support.serato.com/hc/en-us/articles/227629728-Sampler-Play-Modes",
+      "routing": {
+        "codex": {
+          "model": "gpt-6-astra",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "DSP and transport require numerical reasoning backed by measurements.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      }
+    },
+    {
+      "id": "REQ-045",
+      "feature_id": "SMP-002",
+      "source_article": "227629728",
+      "screen": "Sampler advanced slot",
+      "trigger": "Hold then release play in Hold mode",
+      "expected": "Play while held and stop on release",
+      "evidence": "DOCUMENTED; runtime behavior not tested",
+      "prototype_behavior": "Implement a deterministic fixture state transition for this requirement; label audio/hardware simulation",
+      "native_status": "blocked_until_prototype_approval",
+      "acceptance": "Hold then release play in Hold mode \u2192 Play while held and stop on release",
+      "source_url": "https://support.serato.com/hc/en-us/articles/227629728-Sampler-Play-Modes",
+      "routing": {
+        "codex": {
+          "model": "gpt-6-astra",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "DSP and transport require numerical reasoning backed by measurements.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      }
+    },
+    {
+      "id": "REQ-046",
+      "feature_id": "SMP-002",
+      "source_article": "227629728",
+      "screen": "Sampler advanced slot",
+      "trigger": "Press play twice in On/Off mode",
+      "expected": "Start on first press; stop and return to start on second",
+      "evidence": "DOCUMENTED; runtime behavior not tested",
+      "prototype_behavior": "Implement a deterministic fixture state transition for this requirement; label audio/hardware simulation",
+      "native_status": "blocked_until_prototype_approval",
+      "acceptance": "Press play twice in On/Off mode \u2192 Start on first press; stop and return to start on second",
+      "source_url": "https://support.serato.com/hc/en-us/articles/227629728-Sampler-Play-Modes",
+      "routing": {
+        "codex": {
+          "model": "gpt-6-astra",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "DSP and transport require numerical reasoning backed by measurements.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      }
+    },
+    {
+      "id": "REQ-047",
+      "feature_id": "SMP-003",
+      "source_article": "227629828",
+      "screen": "Sampler Play From menu",
+      "trigger": "Open menu for a track without cues or loops",
+      "expected": "Offer only file start",
+      "evidence": "DOCUMENTED; runtime behavior not tested",
+      "prototype_behavior": "Implement a deterministic fixture state transition for this requirement; label audio/hardware simulation",
+      "native_status": "blocked_until_prototype_approval",
+      "acceptance": "Open menu for a track without cues or loops \u2192 Offer only file start",
+      "source_url": "https://support.serato.com/hc/en-us/articles/227629828-Sampler-Play-From-Selector-Advanced-Mode-Options-only",
+      "routing": {
+        "codex": {
+          "model": "gpt-6-astra",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "DSP and transport require numerical reasoning backed by measurements.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      }
+    },
+    {
+      "id": "REQ-048",
+      "feature_id": "SMP-003",
+      "source_article": "227629828",
+      "screen": "Sampler Play From menu",
+      "trigger": "Open menu for a track with stored cues and loops",
+      "expected": "Offer start plus each stored cue and loop-in point; menu is content dependent",
+      "evidence": "DOCUMENTED; runtime behavior not tested",
+      "prototype_behavior": "Implement a deterministic fixture state transition for this requirement; label audio/hardware simulation",
+      "native_status": "blocked_until_prototype_approval",
+      "acceptance": "Open menu for a track with stored cues and loops \u2192 Offer start plus each stored cue and loop-in point; menu is content dependent",
+      "source_url": "https://support.serato.com/hc/en-us/articles/227629828-Sampler-Play-From-Selector-Advanced-Mode-Options-only",
+      "routing": {
+        "codex": {
+          "model": "gpt-6-astra",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "DSP and transport require numerical reasoning backed by measurements.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      }
+    },
+    {
+      "id": "REQ-049",
+      "feature_id": "SMP-003",
+      "source_article": "227629828",
+      "screen": "Sampler Play From menu",
+      "trigger": "Select loop and enable repeat",
+      "expected": "Start at loop-in and repeat the chosen loop",
+      "evidence": "DOCUMENTED; runtime behavior not tested",
+      "prototype_behavior": "Implement a deterministic fixture state transition for this requirement; label audio/hardware simulation",
+      "native_status": "blocked_until_prototype_approval",
+      "acceptance": "Select loop and enable repeat \u2192 Start at loop-in and repeat the chosen loop",
+      "source_url": "https://support.serato.com/hc/en-us/articles/227629828-Sampler-Play-From-Selector-Advanced-Mode-Options-only",
+      "routing": {
+        "codex": {
+          "model": "gpt-6-astra",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "DSP and transport require numerical reasoning backed by measurements.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      }
+    },
+    {
+      "id": "REQ-050",
+      "feature_id": "SMP-003",
+      "source_article": "227629828",
+      "screen": "Sampler source editing",
+      "trigger": "Edit cues/loops in a deck and reload the sample",
+      "expected": "Reflect changed source cue/loop information",
+      "evidence": "DOCUMENTED; runtime behavior not tested",
+      "prototype_behavior": "Implement a deterministic fixture state transition for this requirement; label audio/hardware simulation",
+      "native_status": "blocked_until_prototype_approval",
+      "acceptance": "Edit cues/loops in a deck and reload the sample \u2192 Reflect changed source cue/loop information",
+      "source_url": "https://support.serato.com/hc/en-us/articles/227629828-Sampler-Play-From-Selector-Advanced-Mode-Options-only",
+      "routing": {
+        "codex": {
+          "model": "gpt-6-astra",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "DSP and transport require numerical reasoning backed by measurements.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      }
+    },
+    {
+      "id": "REQ-051",
+      "feature_id": "DEK-013",
+      "source_article": "227629908",
+      "screen": "Deck/sampler drag and drop",
+      "trigger": "Drag playing source between decks and sample slots with Instant Doubles enabled",
+      "expected": "Carry position, track gain, speed and sync to destination",
+      "evidence": "DOCUMENTED; runtime behavior not tested",
+      "prototype_behavior": "Implement a deterministic fixture state transition for this requirement; label audio/hardware simulation",
+      "native_status": "blocked_until_prototype_approval",
+      "acceptance": "Drag playing source between decks and sample slots with Instant Doubles enabled \u2192 Carry position, track gain, speed and sync to destination",
+      "source_url": "https://support.serato.com/hc/en-us/articles/227629908-Sampler-Instant-Doubles",
+      "routing": {
+        "codex": {
+          "model": "gpt-6-astra",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "DSP and transport require numerical reasoning backed by measurements.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      }
+    },
+    {
+      "id": "REQ-052",
+      "feature_id": "HW-012",
+      "source_article": "225065768",
+      "screen": "MIDI mapping",
+      "trigger": "Assign a supported continuous control and press C",
+      "expected": "Cycle among Absolute, signed-bit relative, binary-offset relative, twos-complement relative and on/off relative",
+      "evidence": "DOCUMENTED; runtime behavior not tested",
+      "prototype_behavior": "Implement a deterministic fixture state transition for this requirement; label audio/hardware simulation",
+      "native_status": "blocked_until_prototype_approval",
+      "acceptance": "Assign a supported continuous control and press C \u2192 Cycle among Absolute, signed-bit relative, binary-offset relative, twos-complement relative and on/off relative",
+      "source_url": "https://support.serato.com/hc/en-us/articles/225065768-MIDI-Data-Types",
+      "routing": {
+        "codex": {
+          "model": "gpt-6-astra",
+          "effort": "xhigh"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "xhigh"
+        },
+        "rationale": "Hardware protocols and binary evidence need careful competing hypotheses.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      }
+    },
+    {
+      "id": "REQ-053",
+      "feature_id": "HW-012",
+      "source_article": "225065768",
+      "screen": "MIDI mapping",
+      "trigger": "Move an absolute control",
+      "expected": "Interpret incoming value as physical position",
+      "evidence": "DOCUMENTED; runtime behavior not tested",
+      "prototype_behavior": "Implement a deterministic fixture state transition for this requirement; label audio/hardware simulation",
+      "native_status": "blocked_until_prototype_approval",
+      "acceptance": "Move an absolute control \u2192 Interpret incoming value as physical position",
+      "source_url": "https://support.serato.com/hc/en-us/articles/225065768-MIDI-Data-Types",
+      "routing": {
+        "codex": {
+          "model": "gpt-6-astra",
+          "effort": "xhigh"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "xhigh"
+        },
+        "rationale": "Hardware protocols and binary evidence need careful competing hypotheses.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      }
+    },
+    {
+      "id": "REQ-054",
+      "feature_id": "HW-012",
+      "source_article": "225065768",
+      "screen": "MIDI mapping",
+      "trigger": "Move a relative encoder",
+      "expected": "Interpret direction/delta using explicitly selected encoding; do not assume one encoding across devices",
+      "evidence": "DOCUMENTED; runtime behavior not tested",
+      "prototype_behavior": "Implement a deterministic fixture state transition for this requirement; label audio/hardware simulation",
+      "native_status": "blocked_until_prototype_approval",
+      "acceptance": "Move a relative encoder \u2192 Interpret direction/delta using explicitly selected encoding; do not assume one encoding across devices",
+      "source_url": "https://support.serato.com/hc/en-us/articles/225065768-MIDI-Data-Types",
+      "routing": {
+        "codex": {
+          "model": "gpt-6-astra",
+          "effort": "xhigh"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "xhigh"
+        },
+        "rationale": "Hardware protocols and binary evidence need careful competing hypotheses.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      }
+    },
+    {
+      "id": "REQ-055",
+      "feature_id": "VID-001",
+      "source_article": "223365767",
+      "screen": "Expansion settings",
+      "trigger": "Enable supported independent video feature",
+      "expected": "Expose linked video playback and transitions; exact controls require the separate Video manual",
+      "evidence": "DOCUMENTED; runtime behavior not tested",
+      "prototype_behavior": "Implement a deterministic fixture state transition for this requirement; label audio/hardware simulation",
+      "native_status": "blocked_until_prototype_approval",
+      "acceptance": "Enable supported independent video feature \u2192 Expose linked video playback and transitions; exact controls require the separate Video manual",
+      "source_url": "https://support.serato.com/hc/en-us/articles/223365767-Serato-Expansions",
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "xhigh"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "Architecture and persistence require reasoning across failure and concurrency boundaries.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      }
+    },
+    {
+      "id": "REQ-056",
+      "feature_id": "SMP-001",
+      "source_article": "223365767",
+      "screen": "Expansion settings",
+      "trigger": "Disable or enable Sampler",
+      "expected": "Hide or show sampler functionality with its state retained according to verified reference behavior",
+      "evidence": "DOCUMENTED; runtime behavior not tested",
+      "prototype_behavior": "Implement a deterministic fixture state transition for this requirement; label audio/hardware simulation",
+      "native_status": "blocked_until_prototype_approval",
+      "acceptance": "Disable or enable Sampler \u2192 Hide or show sampler functionality with its state retained according to verified reference behavior",
+      "source_url": "https://support.serato.com/hc/en-us/articles/223365767-Serato-Expansions",
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-sonnet-5",
+          "effort": "medium"
+        },
+        "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      }
+    },
+    {
+      "id": "REQ-057",
+      "feature_id": "DEK-007",
+      "source_article": "223365767",
+      "screen": "Keylock expansion",
+      "trigger": "Use independent high-quality keylock and key manipulation",
+      "expected": "Retain key shift and key sync without any product entitlement requirement; equivalence requires audio evaluation",
+      "evidence": "DOCUMENTED; runtime behavior not tested",
+      "prototype_behavior": "Implement a deterministic fixture state transition for this requirement; label audio/hardware simulation",
+      "native_status": "blocked_until_prototype_approval",
+      "acceptance": "Use independent high-quality keylock and key manipulation \u2192 Retain key shift and key sync without any product entitlement requirement; equivalence requires audio evaluation",
+      "source_url": "https://support.serato.com/hc/en-us/articles/223365767-Serato-Expansions",
+      "routing": {
+        "codex": {
+          "model": "gpt-6-astra",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "DSP and transport require numerical reasoning backed by measurements.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      }
+    },
+    {
+      "id": "REQ-058",
+      "feature_id": "FLP-001",
+      "source_article": "223365767",
+      "screen": "Flip panel",
+      "trigger": "Record and recall a cue automation sequence",
+      "expected": "Retain the sequence with the track and replay it; exact state machine requires expansion evidence",
+      "evidence": "DOCUMENTED; runtime behavior not tested",
+      "prototype_behavior": "Implement a deterministic fixture state transition for this requirement; label audio/hardware simulation",
+      "native_status": "blocked_until_prototype_approval",
+      "acceptance": "Record and recall a cue automation sequence \u2192 Retain the sequence with the track and replay it; exact state machine requires expansion evidence",
+      "source_url": "https://support.serato.com/hc/en-us/articles/223365767-Serato-Expansions",
+      "routing": {
+        "codex": {
+          "model": "gpt-6-astra",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "DSP and transport require numerical reasoning backed by measurements.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      }
+    },
+    {
+      "id": "REQ-059",
+      "feature_id": "HW-007",
+      "source_article": "223365767",
+      "screen": "DVS setup",
+      "trigger": "Connect supported control-media inputs",
+      "expected": "Expose calibration and transport modes based on actual capability, without a software license gate",
+      "evidence": "DOCUMENTED; runtime behavior not tested",
+      "prototype_behavior": "Implement a deterministic fixture state transition for this requirement; label audio/hardware simulation",
+      "native_status": "blocked_until_prototype_approval",
+      "acceptance": "Connect supported control-media inputs \u2192 Expose calibration and transport modes based on actual capability, without a software license gate",
+      "source_url": "https://support.serato.com/hc/en-us/articles/223365767-Serato-Expansions",
+      "routing": {
+        "codex": {
+          "model": "gpt-6-astra",
+          "effort": "xhigh"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "xhigh"
+        },
+        "rationale": "Hardware protocols and binary evidence need careful competing hypotheses.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      }
+    },
+    {
+      "id": "REQ-060",
+      "feature_id": "SYS-008",
+      "source_article": "10326824275087",
+      "screen": "Open Play product contract",
+      "trigger": "Open advanced FX",
+      "expected": "Do not require the reference products Suite license or subscription; show only real capability/resource constraints",
+      "evidence": "PROPOSED intentional departure: remove artificial entitlement gates",
+      "prototype_behavior": "Implement a deterministic fixture state transition for this requirement; label audio/hardware simulation",
+      "native_status": "blocked_until_prototype_approval",
+      "acceptance": "Open advanced FX \u2192 Do not require the reference products Suite license or subscription; show only real capability/resource constraints",
+      "source_url": "https://support.serato.com/hc/en-us/articles/10326824275087-Advanced-FX-View",
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "xhigh"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "Independent acceptance review must challenge claims against actual workflows.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      }
+    }
+  ]
+}

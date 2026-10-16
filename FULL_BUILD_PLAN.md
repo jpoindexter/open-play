@@ -2,7 +2,7 @@
 
 **Prepared:** 16 October 2026 · **Owner:** Jason · **Status:** investigation authorized and in progress; prototype parity gate pending; native build blocked on prototype approval.
 
-This document expands the supplied Serato investigation brief into a proposed delivery plan. Investigation is in progress. Local inspection identifies Serato DJ Pro 4.0.10.213 and Desktop installers 4.0.9/4.0.10. A private GitHub repository and private Trello board have been created and their visibility verified. The official manual index contains 168 articles across 23 sections. The connected Hercules DJControl Inpulse 300 MK2 is visible through USB, CoreAudio and CoreMIDI; physical control and audio-routing tests remain pending. Ghidra is the selected deep-analysis tool because Hopper is a demo. Prototype/native implementation has not begun. See [evidence ledger](docs/research/EVIDENCE_LEDGER.md) and [project resources](docs/delivery/project-resources.json).
+This document expands the supplied Serato investigation brief into a proposed delivery plan. Investigation is in progress. Local inspection identifies Serato DJ Pro 4.0.10.213 and Desktop installers 4.0.9/4.0.10. A private GitHub repository and private Trello board have been created and their visibility verified. The official manual index contains 168 articles across 23 sections. The connected Hercules DJControl Inpulse 300 MK2 is visible through USB, CoreAudio and CoreMIDI; Jason reports that its browser knob moves the highlighted Serato track; byte-level input and physical audio-routing tests remain pending. Ghidra completed deep auto-analysis; Hopper remains supplementary and its REA bridge is currently blocked. Prototype/native implementation has not begun. See [evidence ledger](docs/research/EVIDENCE_LEDGER.md) and [project resources](docs/delivery/project-resources.json).
 
 “Open Play” is a working project name taken from this workspace, not a confirmed public brand. This plan is the canonical planning artifact; the accompanying [execution prompt](PROJECT_PROMPT.md) preserves the instructions for the future executing agent.
 
@@ -484,7 +484,7 @@ Before public release, produce a software/model bill of materials, exact license
 
 ## 15. GitHub and Trello operating plan
 
-Created and verified private: [GitHub](https://github.com/jpoindexter/open-play) and [Trello](https://trello.com/b/OqMGEjpe/open-play-serato-parity). Exact IDs are recorded in docs/delivery/project-resources.json. Card population and repository synchronization are in progress.
+Created and verified private: [GitHub](https://github.com/jpoindexter/open-play) and [Trello](https://trello.com/b/OqMGEjpe/open-play-serato-parity). Exact IDs are recorded in docs/delivery/project-resources.json. 110 distinct feature cards have been created and read back, with model recommendations present on every card. The first research checkpoint has been pushed to GitHub; subsequent findings are being synchronized.
 
 Suggested repository layout, to create incrementally:
 
@@ -604,13 +604,13 @@ Maintain ADRs and a change log. Any new feature receives an ID, reference/eviden
 - [x] Feature IDs unique and every row has acceptance evidence, a stage, and developer-routing profile.
 - [x] Links and Markdown structure checked; no claimed investigation or implementation results invented.
 
-### First execution phase — future deliverable
+### First execution phase — active deliverable
 
 - [ ] Reference app/version inspected; evidence and feature coverage reconciled.
 - [ ] Stack decision supported by current sources and experiments within authorized scope.
 - [ ] Product models assessed with exact licenses and benchmark plans/results.
 - [ ] Every feature and task has verified Codex/Claude Code model IDs and supported settings, or a plainly unresolved blocker.
-- [ ] Private GitHub repository and Trello board created and visibility verified.
+- [x] Private GitHub repository and Trello board created and visibility verified; 110 feature cards plus three gate/evidence cards read back.
 - [ ] Full HTML prototype launched; J01–J08 executed; real/simulated/gap map published.
 - [ ] Full build plan updated with discoveries, selected versions, measured results and revised estimates.
 - [ ] Review packet presented; stop before native build until G1 approval.
@@ -624,9 +624,30 @@ Maintain ADRs and a change log. Any new feature receives an ID, reference/eviden
 - [ ] Clean-machine build/install and license/provenance report recorded.
 - [ ] Public release occurs only after explicit approval; published state independently verified.
 
-**Next exact step:** finish reference/artifact/manual inventory, establish all parity obligations and unknowns, and populate the private project resources. Native coding remains prohibited.
+**Next exact step:** extend the 60 interaction requirements to the remaining source/control states, complete expansion-specific catalogs and resolve the device input-capture discrepancy. Reconcile the parity gate before HTML implementation. Native coding remains prohibited.
 
 ## 19. Methods applied
 
 Skill sweep (`use`); product-prd and product-roadmap via `pm`; Jobs To Be Done and story mapping via dec-discovery-validation; MoSCoW-style sequencing via dec-prioritization-frameworks; familiar/self-evident flows via dec-krug-laws; behavioral integration and visual tests via dec-quality-testing; task-complexity routing via cost-aware-llm-pipeline; explicit file-based continuation via claude-codex-handoff. Skill sample model names and prices were not accepted as verified facts.
 
+
+
+## 20. Investigation checkpoint — 16 October 2026
+
+| Deliverable | Verified state | Remaining obligation |
+|---|---|---|
+| Private resources | GitHub repository and private Trello board exist; 110 feature cards plus prototype/native gates and evidence card read back | Keep remote research updates synchronized; never mark feature acceptance from source indexing |
+| Binary investigation | Ghidra auto-analysis completed; CoreMIDI input callback registration and selected source connection cross-checked with LLVM | Manufacturer dispatch, audio scheduling and hidden algorithms remain unresolved |
+| Reference UI | Eight Setup tabs, all five display layouts, empty sampler, Scratch Banks and Flip strip inspected | Loaded/playing/failed states, full FX parameters, video and hardware-dependent controls |
+| Effects | 59 named effects across eight categories; LPF/Delay/Reverb advanced parameters inspected | Remaining parameter menus/ranges and independent audible tests |
+| Source traceability | All 168 main-manual articles explicitly mapped to feature IDs; 87 feature groups have exact article links | Semantic review, expansion/hardware sources and historical-version conflicts |
+| Interaction contract | 60 explicit trigger/result requirements with evidence boundaries and inherited model routing | Expand to all discovered controls and state transitions before prototype gate pass |
+| Hercules input | USB/audio/MIDI enumeration; Jason reports browser selection moves in Serato | Physical source capture still zero; both virtual receiver tests pass |
+| Hardware output | Four CoreAudio output channels and connected speakers/headphones reported | Separate physical master/headphone, LED, latency and reconnect acceptance not executed |
+| Prototype/native | Neither implementation has started | Inventory gate, then full HTML prototype, then Jason's explicit native approval |
+
+Read the [manual crosswalk](docs/research/MANUAL_FEATURE_CROSSWALK.md), [interaction requirements](docs/research/INTERACTION_REQUIREMENTS.md), [installed UI observations](docs/research/UI_OBSERVATIONS.md), [FX catalog](docs/research/fx-catalog.json), [Hercules evidence](docs/research/HARDWARE_HERCULES.md) and [binary findings](docs/research/BINARY_FINDINGS.md) together. These are original specifications and findings, not recovered proprietary implementation.
+
+New scope discoveries are retained under existing feature IDs pending decomposition: Twitch song/artist metadata reporting under AUD-007/SYS-009, External Control activation/device lists under HW-001/UI-010, and Remote/Remote Mini retirement under SYS-010. Their existence is recorded, but exact protocol and historical behavior remain open. No discovered feature should disappear merely because it is absent from the main manual.
+
+Trello source-link synchronization has 26 exact descriptions verified by readback and 61 pending updates after repeated HTTP 429 responses and a transport failure. Completed updates and pending jobs are retained in docs/delivery/trello-source-sync.json; do not assume all remote descriptions already contain the newer crosswalk. The canonical local feature registry remains current.
