@@ -1,13 +1,15 @@
 # Codex → Claude: independent Serato completeness audit
 
-**Status: DRAFT — refresh and deliver after Codex finishes the investigation and HTML prototype.**
-This file is prepared now to retain Jason's request. It is not a completion report, a claim that the prototype exists, or an instruction to launch Claude automatically.
+**Status: READY FOR INDEPENDENT AUDIT — browser candidate exists; exact parity and investigation remain open.**
+This is a review handoff, not a claim that every Serato feature is implemented or that exhaustive discovery passed. Do not launch native development. Claude has not been run automatically.
 
 Project: `/Users/jasonpoindexter/Documents/GitHub/Open Play`  
 From: Codex  
 To: Claude Code, launched by Jason  
 Prepared: 2026-10-16  
-Current research checkpoint: `43ca4f5` (not the final candidate)
+Reviewed browser candidate: `d6d94819ae47068b6adafdaccd817677d6c5fbc8` on `main`
+Prototype content hashes: `docs/prototype/candidate-hashes.json`
+Worktree was clean immediately after that candidate commit; subsequent handoff-only changes do not change prototype bytes.
 
 ## Goal and authority
 
@@ -50,32 +52,78 @@ All paths are relative to the project root above:
 - `docs/research/EVIDENCE_LEDGER.md`, `BINARY_FINDINGS.md`, `HARDWARE_HERCULES.md`, `HISTORICAL_GATING.md`
 - `docs/delivery/feature-registry.json`, `FEATURE_MODEL_PLAN.md`, `trello-source-sync.json`
 - `docs/decisions/001-foundation-and-models.md`
-- Final prototype source, route manifest, launcher, comparison screenshots and executed test report: populate before delivery; these do not exist at this draft checkpoint.
+- `prototype/README.md`, `prototype/index.html`, `app.js`, `engine.js`, `panels.js`, `fixtures.js`, `styles.css`, `inventory.js`
+- `docs/prototype/REVIEW_REPORT.md`, `coverage-manifest.json`, `candidate-hashes.json`, `screenshots/`
+- `scripts/serve_prototype.py`, `scripts/update_prototype_inventory.py`, `Start Open Play.command`
+- `docs/delivery/trello-pending-updates.json` (unsent remote changes, not verification)
 
 Private repository: https://github.com/jpoindexter/open-play  
 Private board: https://trello.com/b/OqMGEjpe/open-play-serato-parity
 
-## Current state — refresh before delivery
+## Current state and unresolved questions
 
-Research is unfinished. At the current checkpoint there are 110 feature groups, 344 interaction requirements and 168 indexed main-manual articles. These counts do not establish complete coverage. All five reference display layouts and eight Setup tabs have been inspected, but many conditional/loaded/error states remain open. Only four of 59 FX parameter strips have been inspected. Some Video screens and physical device/audio behavior remain unverified. No HTML prototype or native app has been built.
+Research remains unfinished. The candidate accounts for 110 feature groups, 354 interaction requirements and 168 indexed main-manual articles. These counts do not establish exhaustive coverage. All five reference display layouts and eight Setup tabs were inspected; many conditional/loaded/error states remain open. Only four of 59 FX parameter strips were inspected. Twenty-four feature groups lack detailed interaction rows. Exact Video catalogs, physical device/audio behavior and full workflow equivalence remain unverified.
 
-Ghidra analysis and selected CoreMIDI call sites have evidence; they do not establish a complete vendor mapping or hidden DSP implementation. The passive hardware MIDI capture saw zero messages despite user-confirmed knob activity; virtual receiver self-tests passed. The capture discrepancy remains unresolved.
+The HTML prototype exists and has executed browser evidence. It combines real local audio/library interactions with explicitly simulated controls and gap disclosures. This is not a successful strict 1:1 parity gate. Investigate any missing or inadequate destination rather than accepting a routed title as implementation. No native application exists.
 
-All 110 feature cards have model recommendations. At this checkpoint, 59 of 87 source-link description updates were verified remotely and 28 were pending after rate-limited responses. Read current synchronization records rather than assuming this draft count remains current.
+Ghidra analysis and selected CoreMIDI call sites have evidence; they do not establish complete vendor mapping or hidden DSP behavior. Passive hardware capture saw zero messages despite user-confirmed knob activity. Virtual receiver self-tests passed. Reproduce the discrepancy without modifying the device firmware or Serato activation.
 
-## Mandatory final packet refresh
+All 110 Trello feature cards have model recommendations from the verified earlier checkpoint. Source-link synchronization is 59/87 verified, 28 pending. Latest connector attempts returned 429 and a transport error. The browser fallback account was denied access to the private board; no access request/account switch was attempted. The exact pending descriptions and gate status are preserved locally. Reconcile readback before claiming remote consistency. The GitHub repository was freshly verified private with `gh repo view`.
 
-Before Codex delivers this handoff, replace the draft checkpoint with:
+## Launch, fixtures, stop and reset
 
-- Exact final commit, branch, worktree status and prototype content revision/hash.
-- Actual local launch command, URL, browser/OS versions, stop/reset instructions and fixtures.
-- Full changed-file list and links to investigation, design and model decisions.
-- Tests actually executed, commands, expected/observed results and dated evidence; separately list unexecuted tests and limitations.
-- Final feature/requirement/route counts and every known gap, including unrepresented prototype workflows.
-- Current GitHub/Trello readback status and unresolved synchronization jobs.
-- Exact native approval state. Do not infer approval from a successful review or from the existence of this packet.
+```sh
+cd '/Users/jasonpoindexter/Documents/GitHub/Open Play'
+python3 scripts/serve_prototype.py
+```
 
-Do not overwrite the original prompt embedded below when refreshing state; if Jason changes scope, append the exact clarification and date in the authority section and regenerate the prompt snapshot intentionally.
+URL: http://127.0.0.1:8768/prototype/ . If the existing server is still running, reuse it. It binds loopback only and blocks Git/raw evidence paths. macOS shortcut: `Start Open Play.command`. Control-C in its terminal stops the server. Closing/reloading the browser stops its audio.
+
+Eight original generated 48-second demo tracks are included. Imported local audio bytes are session-only. No vendor music/assets/binaries ship. Settings, crates and selected demo metadata persist at the browser-local key `openplay-review-v1`. Library tools → Export prototype backup preserves metadata; Reset demo → Reset prototype clears only this demo's stored state. Do not reset Jason's Serato library/preferences. The final browser view was reset to clean demo data after testing; test metadata backup remains in Downloads.
+
+Executed fixture files on this host:
+- `/tmp/open-play-review-tone.wav`: generated original 3-second stereo WAV, re-create if missing.
+- `/Users/jasonpoindexter/Downloads/Open Play session.webm`: 235,667-byte original browser mix capture, decoded as 14.5 seconds and replayed.
+- `/Users/jasonpoindexter/Downloads/open-play-library.json`: 8,495-byte prototype metadata backup, restored through the actual file picker.
+These are test outputs, not required product assets. Do not upload user music or unrelated Downloads files.
+
+## Verification already executed
+
+Read `docs/prototype/REVIEW_REPORT.md` for the exact action/result/limitation ledger. Browser tests were visible CUA interactions on macOS 26.7 (25G224), Codex in-app browser, 1512×982 desktop viewport and a narrow ~637×845 view; embedded browser version was not exposed. AudioContext reported 48 kHz.
+
+Observed paths include local import/double-click load/play/end, cue/loop/tempo, two-deck master capture/download/re-import/replay with nonzero signal, crates, numeric smart crate, metadata, backup/restore, all eight Setup tabs, all primary panels, six provider failure fixtures, synthetic MIDI/DVS/Link states, Flip cue-event save and video text preview. Initial syntax, double-click and hidden-focus defects were fixed and retested. The report explicitly identifies code-path-only/unexecuted claims.
+
+Terminal checks:
+- `python3 scripts/update_prototype_inventory.py`: generated 110 routes, 354 requirements, 59 effects.
+- JSON integrity: unique feature/requirement IDs, valid feature references, both model/effort fields, all route/native-block fields and no false parity flag.
+- `python3 -m py_compile scripts/serve_prototype.py scripts/update_prototype_inventory.py`: passed.
+- HTTP GET: prototype, app.js and manifest returned 200; `.git/config`, `local-evidence/` and traversal path returned 404.
+- `git diff --check`: passed before candidate commit.
+- `gh repo view jpoindexter/open-play --json nameWithOwner,isPrivate,url`: private repository confirmed.
+
+None of this proves real controller compatibility, physical cue/master separation, low latency, actual stems/FX, service access, exact visual parity, all keyboard/drag/drop cases or a long-session soak. The browser's independent DSP approximations are not measured equivalents of Serato algorithms.
+
+## Decisions and files changed
+
+- Original HTML/CSS/JavaScript + Web Audio makes the review runnable with no package installation or service. Native C++/Qt/Mixxx remains provisional and separately gated.
+- All known groups remain visible through `prototype/inventory.js` and `coverage-manifest.json`; explicit gaps stay open.
+- No artificial local feature paywall/account requirement was added. External provider limits remain separate dependencies.
+- Product ML: HTDemucs baseline and SCNet/RoFormer challengers remain an evaluation plan; no benchmark winner or weights license is assumed.
+- Development routing: per-feature Codex and Claude Code model/effort fields are recommendations, not evidence those models were executed. Revalidate current availability.
+
+Inspect exact changed files with:
+
+```sh
+git diff --name-status eb57aa3 d6d94819ae47068b6adafdaccd817677d6c5fbc8
+```
+
+Primary changes are `prototype/*`, the local launcher/server, generated coverage, 10 additional research requirements, updated plan/approval/evidence/gate documents, browser screenshots and pending Trello updates. Source screenshots/disassembly remain in ignored local evidence. Handoff delivery is a later documentation-only commit; preserve any newer work.
+
+## Next exact task and finish line
+
+Independently derive the reference inventory first, then compare the candidate. Deliver `handoffs/claude-to-codex-completeness-audit.md` with prioritized, reproducible findings, additions to the inventory and a coverage verdict. Start with the largest omission risks: complete FX parameter/Video catalogs, all conditional settings, correct cue/loop/sync semantics, filesystem and hardware workflows, and any controls that merely display a label.
+
+A useful completed audit enumerates examined sources/screens/states, what actually ran, what remained inaccessible, concrete discrepancies with expected/actual evidence, and proposed next fixes. It must not call parity complete because the UI contains 110 entries. Do not edit implementation, approve the prototype, launch native work, purchase services, change accounts or publish anything as part of this review.
 
 ## Required Claude return
 
