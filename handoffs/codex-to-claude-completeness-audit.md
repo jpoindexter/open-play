@@ -207,6 +207,8 @@ GATE-P and VID-002 research have separate readbacks. Consult `docs/delivery/trel
 VID-001, VID-002 and GATE-P current Video annotations passed3/3 exact readbacks
 (`docs/delivery/trello-video-functional-sync.json`); all remained open/incomplete.
 Fresh-read descriptions before updates; preserve human/source/model sections.
+Latest semantic/treatment/507-row annotations also passed3/3 exact readbacks
+(`docs/delivery/trello-video-link-treatment-sync.json`), with cards open/incomplete.
 Record synchronization is not feature acceptance.
 
 ## Required return
