@@ -7,7 +7,7 @@ Project: `/Users/jasonpoindexter/Documents/GitHub/Open Play`
 From: Codex  
 To: Claude Code, launched by Jason  
 Prepared: 2026-10-16  
-Reviewed browser candidate: `d6d94819ae47068b6adafdaccd817677d6c5fbc8` on `main`
+Reviewed browser candidate: `b8c1afd48630f005d24f56efd30a0d5707c3655a` on `main`
 Prototype content hashes: `docs/prototype/candidate-hashes.json`
 Worktree was clean immediately after that candidate commit; subsequent handoff-only changes do not change prototype bytes.
 
@@ -18,6 +18,7 @@ Run the same project brief below as an independent investigation and completenes
 The original prompt is reproduced verbatim below. The following subsequent instructions supersede its initial “do not execute yet” language:
 
 - Jason approved investigation, private GitHub/Trello resources, maintenance of the full build plan, and a full HTML prototype after feature inventory.
+- Latest instruction: “keep going and close the remaining parity gaps. i want everything serato does, not just labels and placeholders. update the prototype and claude handoff, still no native app until i approve”. This supersedes treating a routed placeholder as sufficient implementation.
 - Everything Serato DJ Pro does remains in scope, including expansions, secondary controls, hardware modes, provider workflows and failures. No simplified replacement dashboard or silent feature cuts.
 - Fully inventoried, explicitly labeled documented/simulated behavior is permitted for unavailable CDJs, DVS hardware, provider accounts and audio algorithms. Simulation is not physical or DSP verification.
 - Native development remains prohibited until Jason approves the specific HTML prototype. Receiving this handoff does not grant that approval.
@@ -52,10 +53,10 @@ All paths are relative to the project root above:
 - `docs/research/EVIDENCE_LEDGER.md`, `BINARY_FINDINGS.md`, `HARDWARE_HERCULES.md`, `HISTORICAL_GATING.md`
 - `docs/delivery/feature-registry.json`, `FEATURE_MODEL_PLAN.md`, `trello-source-sync.json`
 - `docs/decisions/001-foundation-and-models.md`
-- `prototype/README.md`, `prototype/index.html`, `app.js`, `engine.js`, `panels.js`, `fixtures.js`, `styles.css`, `inventory.js`
-- `docs/prototype/REVIEW_REPORT.md`, `coverage-manifest.json`, `candidate-hashes.json`, `screenshots/`
+- `prototype/README.md`, `prototype/index.html`, `app.js`, `engine.js`, `panels.js`, `fixtures.js`, `styles.css`, `inventory.js`, `effects.js`, `flip.js`, `holds.js`, `library.js`, `midi.js`, `slicer.js`, `video.js`, `behavior-tests.html`, `behavior-tests.js`
+- `docs/prototype/FUNCTIONAL_REVIEW.md`, `behavior-results-2026-10-16.txt`, `PARITY_CLOSURE.md`, historical `REVIEW_REPORT.md`, `coverage-manifest.json`, `candidate-hashes.json`, `screenshots/`
 - `scripts/serve_prototype.py`, `scripts/update_prototype_inventory.py`, `Start Open Play.command`
-- `docs/delivery/trello-pending-updates.json` (unsent remote changes, not verification)
+- `docs/delivery/trello-pending-updates.json`, `trello-functional-sync.json` (remaining unsent changes, with separately verified gate/crate status)
 
 Private repository: https://github.com/jpoindexter/open-play  
 Private board: https://trello.com/b/OqMGEjpe/open-play-serato-parity
@@ -68,7 +69,7 @@ The HTML prototype exists and has executed browser evidence. It combines real lo
 
 Ghidra analysis and selected CoreMIDI call sites have evidence; they do not establish complete vendor mapping or hidden DSP behavior. Passive hardware capture saw zero messages despite user-confirmed knob activity. Virtual receiver self-tests passed. Reproduce the discrepancy without modifying the device firmware or Serato activation.
 
-All 110 Trello feature cards have model recommendations from the verified earlier checkpoint. Source-link synchronization is 59/87 verified, 28 pending. Latest connector attempts returned 429 and a transport error. The browser fallback account was denied access to the private board; no access request/account switch was attempted. The exact pending descriptions and gate status are preserved locally. Reconcile readback before claiming remote consistency. The GitHub repository was freshly verified private with `gh repo view`.
+All 110 Trello feature cards have model recommendations from the verified earlier checkpoint. Source-link synchronization is 59/87 verified, 28 pending. This pass updated GATE-P and LIB-004 functional descriptions and verified exact readback. Other feature writes again hit 429 and a board read ended in transport failure. Seventeen new functional annotations are queued in trello-functional-sync.json in addition to the 28 historical source updates. The browser fallback account was denied access to the private board; no access request/account switch was attempted. The exact pending descriptions and gate status are preserved locally; do not replay the older gate draft over the newer verified functional status. Reconcile readback before claiming remote consistency. The GitHub repository was freshly verified private with `gh repo view`.
 
 ## Launch, fixtures, stop and reset
 
@@ -79,7 +80,7 @@ python3 scripts/serve_prototype.py
 
 URL: http://127.0.0.1:8768/prototype/ . If the existing server is still running, reuse it. It binds loopback only and blocks Git/raw evidence paths. macOS shortcut: `Start Open Play.command`. Control-C in its terminal stops the server. Closing/reloading the browser stops its audio.
 
-Eight original generated 48-second demo tracks are included. Imported local audio bytes are session-only. No vendor music/assets/binaries ship. Settings, crates and selected demo metadata persist at the browser-local key `openplay-review-v1`. Library tools → Export prototype backup preserves metadata; Reset demo → Reset prototype clears only this demo's stored state. Do not reset Jason's Serato library/preferences. The final browser view was reset to clean demo data after testing; test metadata backup remains in Downloads.
+Eight original generated 48-second demo tracks are included. Imported local audio bytes are session-only. No vendor music/assets/binaries ship. Settings, crates, selected demo metadata including saved Flip slots, Prepare/history and MIDI mappings persist at the browser-local key `openplay-review-v1`. Library tools → Export prototype backup preserves metadata; Reset demo → Reset prototype clears only this demo's stored state. Do not reset Jason's Serato library/preferences. The final browser view was reset to clean demo data after testing; test metadata backup remains in Downloads. Subsequent playback checks changed play counts; source files remain untouched.
 
 Executed fixture files on this host:
 - `/tmp/open-play-review-tone.wav`: generated original 3-second stereo WAV, re-create if missing.
@@ -89,9 +90,9 @@ These are test outputs, not required product assets. Do not upload user music or
 
 ## Verification already executed
 
-Read `docs/prototype/REVIEW_REPORT.md` for the exact action/result/limitation ledger. Browser tests were visible CUA interactions on macOS 26.7 (25G224), Codex in-app browser, 1512×982 desktop viewport and a narrow ~637×845 view; embedded browser version was not exposed. AudioContext reported 48 kHz.
+Read `docs/prototype/FUNCTIONAL_REVIEW.md` and `behavior-results-2026-10-16.txt` for this revision. `REVIEW_REPORT.md` is the first-candidate baseline. Browser tests were visible CUA interactions on macOS 26.7 (25G224), Codex in-app browser, 1512×982 desktop viewport and a narrow ~637×845 view; embedded browser version was not exposed. AudioContext reported 48 kHz.
 
-Observed paths include local import/double-click load/play/end, cue/loop/tempo, two-deck master capture/download/re-import/replay with nonzero signal, crates, numeric smart crate, metadata, backup/restore, all eight Setup tabs, all primary panels, six provider failure fixtures, synthetic MIDI/DVS/Link states, Flip cue-event save and video text preview. Initial syntax, double-click and hidden-focus defects were fixed and retested. The report explicitly identifies code-path-only/unexecuted claims.
+Observed paths include local import/double-click load/play/end, cue/loop/tempo, two-deck master capture/download/re-import/replay with nonzero signal, crates, multi-rule smart crate and nested parent membership, metadata, backup/restore, all eight Setup tabs, all primary panels, six provider failure fixtures, synthetic MIDI/DVS/Link states, Flip cue-event save and video text preview. Initial syntax, double-click and hidden-focus defects were fixed and retested. The report explicitly identifies code-path-only/unexecuted claims.
 
 Terminal checks:
 - `python3 scripts/update_prototype_inventory.py`: generated 110 routes, 354 requirements, 59 effects.
@@ -101,7 +102,7 @@ Terminal checks:
 - `git diff --check`: passed before candidate commit.
 - `gh repo view jpoindexter/open-play --json nameWithOwner,isPrivate,url`: private repository confirmed.
 
-None of this proves real controller compatibility, physical cue/master separation, low latency, actual stems/FX, service access, exact visual parity, all keyboard/drag/drop cases or a long-session soak. The browser's independent DSP approximations are not measured equivalents of Serato algorithms.
+None of this proves real controller compatibility, physical cue/master separation, low latency, actual stem separation or Serato-equivalent FX, service access, exact visual parity, all keyboard/drag/drop cases or a long-session soak. The browser's independent DSP approximations are not measured equivalents of Serato algorithms.
 
 ## Decisions and files changed
 
@@ -114,10 +115,44 @@ None of this proves real controller compatibility, physical cue/master separatio
 Inspect exact changed files with:
 
 ```sh
-git diff --name-status eb57aa3 d6d94819ae47068b6adafdaccd817677d6c5fbc8
+git diff --name-status 944f69a47678190d28487ff140ba0383b463af62 b8c1afd48630f005d24f56efd30a0d5707c3655a
 ```
 
 Primary changes are `prototype/*`, the local launcher/server, generated coverage, 10 additional research requirements, updated plan/approval/evidence/gate documents, browser screenshots and pending Trello updates. Source screenshots/disassembly remain in ignored local evidence. Handoff delivery is a later documentation-only commit; preserve any newer work.
+
+## New functional candidate: what to challenge first
+
+This pass added independently written browser behavior, not a native app:
+- Reverse PCM/transport; Slip loop/reverse/cue recovery; cue-hold/release/Play latch with cancellation tokens.
+- Sampler Hold/Trigger/OnOff, pitch, volume/gain/mute and cue/loop start controls.
+- Timed cue/reverse Flip playback and six per-track saved slots; eight-pad slicer with domain/quantize and timeline return.
+- Nested/collapsible crates and multi-rule all/any live/cached queries with cycle protection.
+- LPF, Delay, Reverb and Wah browser DSP routed through two units to decks/sampler/master. Remaining 55 effects have DSP enable disabled; none is accepted by name alone.
+- Local video decode, two-source Canvas compositing, overlays, audio-linked controls, and actual video/master recording.
+- Standard Web MIDI input/learn/mapping code with timestamps and encodings; input access timed out in the tested browser. Synthetic input changed actual playback but is not hardware evidence.
+
+Executed: 20/20 actual Web Audio/module tests; selected main UI tests; a recorded
+1,921,409-byte VP9/Opus video downloaded and re-imported for playback; reset followed
+by another reload; clean console at checked points. Screenshot
+`docs/prototype/screenshots/functional-desktop-review.jpg` shows the 1512×982 overview.
+The suite was rerun after the final tempo/routing fixes at 13:50 UTC. Run it yourself
+at http://127.0.0.1:8768/prototype/behavior-tests.html using its button; tests do not
+send audio to speakers. Do not confuse these module paths with complete UI acceptance.
+
+Prioritize adversarial checks of pending asynchronous starts, release after pointer
+cancel/blur/track replacement, overlapping holds, Flip On vs Start and Censor,
+variable-tempo recording, tempo changes during slicing, FX rebuild/tail discontinuities,
+route changes while recording, same-media gain sharing, MIDI CC14/device isolation,
+video decoder errors and unknown-duration captures, persisted state and reset/restore.
+Some are implemented code paths without exhaustive executed proof. Report failures
+rather than inferring acceptance from the 20-check suite.
+
+Keep remaining large gaps explicit: 55 effect schemas/processors, exact Video FX and
+transition catalogs, stems/keylock/Pitch Play/automatic analysis, native library/file
+interoperability, Smart Sync edge semantics, actual MIDI feedback and cue/master output,
+DVS/CDJ/Phase tests, Link networking and provider service access. The present four FX
+and video recorder reduce gaps; they do not close those domains. No “everything done”
+claim or native approval is warranted.
 
 ## Next exact task and finish line
 

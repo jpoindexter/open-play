@@ -19,3 +19,10 @@ This permits honest simulation in the HTML prototype; it does not waive exhausti
 Jason instructed: “ok keep going with the investigation and full html prototype. dont stop at the plan, include everything and give me the claude handoff when its ready. no native app until i approve”.
 
 The HTML candidate now provides routes for every known feature group, including explicitly labeled simulations and gaps, consistent with the earlier permitted evidence boundary. This instruction is not recorded as acceptance of exact 1:1 parity or a waiver of missing details. Investigation and parity reconciliation remain open. G1/native approval has NOT been granted. The Claude packet is for an independent audit launched by Jason; no Claude session was started.
+
+## 16 October 2026 — functional continuation
+
+Jason asked to close remaining parity gaps with behavior, not labels/placeholders,
+and update the prototype and Claude handoff. This authorizes continued browser
+implementation and investigation. It does not grant native approval. The functional
+candidate has executed subset evidence; full 1:1 parity remains open.
