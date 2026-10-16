@@ -4,7 +4,7 @@
 
 Project: `/Users/jasonpoindexter/Documents/GitHub/Open Play`
 Prepared: 2026-10-16
-Current browser candidate: `WORKTREE_STEM_SLIP_CONTINUATION`
+Current browser candidate: `5833632e1355eff22733cddf8de7b9f8c0816f12`
 Content hashes: `docs/prototype/candidate-hashes.json`
 Private repository: https://github.com/jpoindexter/open-play
 Private board: https://trello.com/b/OqMGEjpe/open-play-serato-parity
