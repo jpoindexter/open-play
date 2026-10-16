@@ -1,4 +1,3 @@
-import { createStemPreparation } from "./stems.js";
 import { createVideoMixer } from "./video.js";
 import { createMIDI, mappedValue } from "./midi.js";
 import { getExtendedEffectControls } from "./extended-effects.js";
@@ -28,8 +27,8 @@ export function createPanels(a) {
     renderCrates,
     renderDecks,
     download,
+    stemPreparation,
   } = a;
-  const stemPreparation = createStemPreparation(engine, s.decks);
   let activeSettings = "DJ Preferences",
     activeProvider = "Spotify",
     videoPhase = 0,
@@ -1147,18 +1146,28 @@ export function createPanels(a) {
       `${badge("LOCAL MODEL INFERENCE", true)}<p>Prepare four real sources for ${esc(t?.title || "the selected track")}. Audio stays on this computer. Use the deck's Stems pads to mute sources or apply effects after preparation.</p><label>Separation model <select id="stems-model"><option value="scnet">SCNet large · recommended quality</option><option value="spleeter">Spleeter · faster fallback</option></select></label><div class="panel-controls"><button id="stems-queue" ${!t || stemPreparation.active.has(t.id) ? "disabled" : ""}>Prepare selected</button><button id="stems-cancel">Cancel preparation</button><button id="stems-full">Restore full mix</button></div><p id="stems-state" role="status">${esc(t?.stemState || "Not prepared")}</p><div class="note-box">Real model inference, not studio source tracks. Separation may contain leakage. Prototype limit: 10 minutes / 128 MiB decoded audio. The worker runs on loopback; no account or cloud service is required.</div>`,
       () => {
         const output = $("#stems-state"),
-          button = $("#stems-queue");
+          button = $("#stems-queue"),
+          cancelButton = $("#stems-cancel");
+        const showProgress = (text) => {
+          output.textContent = text;
+          cancelButton.disabled = text.startsWith("Activating");
+        };
+        const settled = () => {
+          button.disabled = false;
+          cancelButton.disabled = false;
+        };
+        const active = t && stemPreparation.active.get(t.id);
+        if (active)
+          void stemPreparation.prepare(t, showProgress, active.backend)
+            .catch(error => notify(error.message))
+            .finally(settled);
         button.onclick = async () => {
           if (!t) return;
           button.disabled = true;
           try {
             await stemPreparation.prepare(
               t,
-              (text) => {
-                output.textContent = text;
-                const cancel = $("#stems-cancel");
-                if (cancel) cancel.disabled = text.startsWith("Activating");
-              },
+              showProgress,
               $("#stems-model").value,
             );
             renderTracks();
@@ -1166,9 +1175,7 @@ export function createPanels(a) {
           } catch (error) {
             notify(error.message);
           } finally {
-            button.disabled = false;
-            const cancel = $("#stems-cancel");
-            if (cancel) cancel.disabled = false;
+            settled();
           }
         };
         $("#stems-cancel").onclick = () =>

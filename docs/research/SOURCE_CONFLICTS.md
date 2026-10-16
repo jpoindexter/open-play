@@ -15,7 +15,7 @@ Updated 2026-10-16. These are specification risks, not confirmed defects in Sera
 | SC-09 | Some legacy controller Flip tables repeat FX labels. | Cross-check the Flip guide and actual controller before accepting those rows as controls. |
 | SC-10 | The official linked Video manual PDF returns 404. Output and Control were observed locally; Effects and Info did not respond to automation. | Keep missing settings and rendering behavior open. No generic replacement panel counts as parity. |
 | SC-11 | A named mixer power curve does not specify its coefficients. | Measure gain across fader positions before claiming an identical response. |
-| SC-12 | T10 Stem Slip describes temporary isolation/muting without fully defining every initial-state transition. | Build a state matrix from T10 observations or authoritative clarification; do not assume this control exists on the Inpulse 300 MK2. |
+| SC-12 | Serato T10 quickstart describes temporary isolation/muting and restoration on release; Hercules T10 manual printed38–39 documents a latched chord, separate Slip disable, independent stem transport and vocal-only crossfader control. | Separate button release, scratch release and mode disable; execute initial-state/transport matrix on T10/4.0.10.213. See [evaluation](STEM_SLIP_EVALUATION.md). Not proven on Inpulse300MK2. |
 | SC-13 | Loop Roll prose contains an apparent left/right active-deck typo. | Verify four-deck focus routing rather than copying the parenthetical text. |
 
 Main-manual article URLs and local source identifiers are indexed in [the article crosswalk](MANUAL_FEATURE_CROSSWALK.md). The interaction specification retains evidence labels and untested acceptance paths. No conflict is closed merely because its source was indexed.

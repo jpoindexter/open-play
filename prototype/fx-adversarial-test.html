@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>FX adversarial audio verification</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body style="padding: 24px; overflow: auto">
+    <h1>FX adversarial audio verification</h1>
+    <p>
+      Nine regressions through OfflineAudioContext and the actual AudioWorklet:
+      long feedback decay, timing updates, continuous directional sweeps, and
+      late Stretch markers. Independent behavior; vendor ranges and sonic
+      equivalence remain unverified. No speaker output.
+    </p>
+    <button id="run">Run FX adversarial graph checks</button>
+    <p id="summary" role="status">Not run · 9 checks</p>
+    <pre id="results"></pre>
+    <script type="module" src="fx-adversarial-browser-tests.js"></script>
+  </body>
+</html>

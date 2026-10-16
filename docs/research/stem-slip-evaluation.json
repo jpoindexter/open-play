@@ -1,0 +1,340 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-16",
+  "target": "Serato DJ Pro4.0.10.213 / Hercules DJControl T10",
+  "status": "documented-primary-source-conflict; reference-runtime-untested",
+  "scope": "New research artifacts only; no existing documentation, code, native app or shared browser modified",
+  "sources": [
+    {
+      "id": "t10-manual",
+      "publisher": "Hercules / Guillemot",
+      "url": "https://ts.hercules.com/download/sound/manuals/DJC_T10/HERCULES_DJC_T10_USER_MANUAL_-_EN_FR_DE_NL_IT_ES_PT_PL_JP_CNM_KO.pdf",
+      "access_date": "2026-10-16",
+      "publication_date": "not independently established",
+      "pdf_metadata_created": "2026-10-12T12:26:21+02:00",
+      "pdf_metadata_modified": "2026-10-12T12:33:55+02:00",
+      "sha256": "3a81264c2b9fe97f2d89f3761664cd3417b325aceefc5075e1c1473512d70012",
+      "pages": {
+        "ordinary_slip": {
+          "printed": 34,
+          "pdf_1_based": 35
+        },
+        "slip_release": {
+          "printed": 35,
+          "pdf_1_based": 36
+        },
+        "stem_toggles": {
+          "printed": 37,
+          "pdf_1_based": 38
+        },
+        "latched_stem_slip": {
+          "printed": 38,
+          "pdf_1_based": 39
+        },
+        "vocal_example_and_crossfader": {
+          "printed": 39,
+          "pdf_1_based": 40
+        }
+      },
+      "verification": "Downloaded official PDF, extracted text; visually inspected PDF pages39–40. Metadata dates are not a claimed publication date."
+    },
+    {
+      "id": "serato-t10-quickstart",
+      "publisher": "Serato",
+      "url": "https://support.serato.com/hc/en-us/articles/17616872214799-Hercules-DJControl-T10-Quickstart-Guide-for-Serato-DJ-Pro",
+      "access_date": "2026-10-16",
+      "publication_date": "not exposed in retrieved article",
+      "sections": [
+        "Slip Release and Stem Slip",
+        "Stem Slip",
+        "Overview control24"
+      ],
+      "verification": "Current official article text; no installed behavior executed."
+    },
+    {
+      "id": "serato-4010-release",
+      "publisher": "Serato",
+      "url": "https://serato.com/dj/pro/downloads",
+      "access_date": "2026-10-16",
+      "publication_date": "not exposed in retrieved text",
+      "section": "What’s New in4.0.10 / Hercules DJControl T10 Support",
+      "verification": "Version-qualified release copy; not an execution of4.0.10.213."
+    },
+    {
+      "id": "ordinary-slip",
+      "publisher": "Serato",
+      "url": "https://support.serato.com/hc/en-us/articles/235191207-Slip-Mode",
+      "access_date": "2026-10-16",
+      "publication_date": "not exposed in retrieved article"
+    },
+    {
+      "id": "slip-preference",
+      "publisher": "Serato",
+      "url": "https://support.serato.com/hc/en-us/articles/223363407-DJ-Preferences",
+      "access_date": "2026-10-16",
+      "publication_date": "not exposed in retrieved article",
+      "section": "Enable Slip Release"
+    }
+  ],
+  "documented_facts": [
+    {
+      "id": "F1",
+      "status": "documented",
+      "source_ids": [
+        "serato-4010-release"
+      ],
+      "claim": "4.0.10 introduces T10 Stem Slip: scratch or trigger cues on a selected stem while the remainder continues playing."
+    },
+    {
+      "id": "F2",
+      "status": "documented-conflict",
+      "source_ids": [
+        "t10-manual"
+      ],
+      "claim": "The hardware manual specifies a latched chord: hold Slip, press Vocal or Instrumental, release both; both mode lights stay on. Press Slip to disable."
+    },
+    {
+      "id": "F3",
+      "status": "documented",
+      "source_ids": [
+        "t10-manual"
+      ],
+      "claim": "The vocal example assigns vocal manipulation to the deck and crossfader, while instrumental playback continues normally independently of crossfader position. Ending the scratch realigns vocal with instrumental."
+    },
+    {
+      "id": "F4",
+      "status": "documented",
+      "source_ids": [
+        "t10-manual",
+        "serato-t10-quickstart"
+      ],
+      "claim": "Slip Release offers0,.5,1,2,4 beats; the hardware manual calls0 its default and says Stem Slip can use that duration. The quickstart describes a quantized roll before return."
+    },
+    {
+      "id": "F5",
+      "status": "documented-conflict",
+      "source_ids": [
+        "serato-t10-quickstart"
+      ],
+      "claim": "Quickstart wording describes temporary vocal isolation or muting and full-track return on release; instrumental chord cuts the backing music for a vocal drop then restores it. No initial-state matrix or release-key order is specified."
+    },
+    {
+      "id": "F6",
+      "status": "documented",
+      "source_ids": [
+        "ordinary-slip"
+      ],
+      "claim": "Ordinary deck Slip returns manipulated playback to its unmanipulated timeline and is disabled on loading another track."
+    }
+  ],
+  "requirement_reconciliation": {
+    "REQ-265": "Retain documented timing but keep quantization implementation details unverified.",
+    "REQ-266": "Current held temporary-isolation description conflicts with official hardware latched workflow and omits independent stem transport/crossfader routing.",
+    "SC-12": "Initial-state polarity remains unresolved; add latch-versus-momentary source conflict when parent reconciles.",
+    "STM-005": "Research evidence improved; not reference-parity complete."
+  },
+  "unknowns": [
+    "Whether quickstart momentary wording is erroneous, incomplete or describes another gesture/state; physical T10/4.0.10.213 observation is still absent.",
+    "Initial vocal/instrumental/mixed mute-mask polarity, behavior when both dedicated Stem buttons are pressed, and whether their previous masks are restored or reset.",
+    "Behavior when entering with ordinary deck Slip already enabled, exact button-down/up precedence and mode switching while a gesture is active.",
+    "Quantized release start boundary, roll source/length versus total hold duration, BPM changes during release and behavior when the Quantize preference is off.",
+    "Stem Slip pause, stop, seek, track-end, unload, disconnect and stale-release behavior; ordinary Slip load reset is documented but its full Stem Slip extension is not.",
+    "Instrumental-mode crossfader symmetry, channel fader/EQ/FX/PFL routing and simultaneous scratches/cues/loops; the PDF provides only the vocal crossfader example.",
+    "Exact separation latency, alignment tolerance, clicks/crossfades, unsupported controller availability and MIDI bytes. No T10 behavior is proven on Inpulse300MK2."
+  ],
+  "independent_contract": [
+    {
+      "id": "P1",
+      "name": "Mode and chord",
+      "status": "proposed-independent",
+      "contract": "Use off/armed-vocal/armed-instrumental with an independent idle/manipulating/releasing gesture. Consume Slip+Stem as a chord so releasing both leaves the mode armed and cannot accidentally toggle ordinary Slip. A separate Slip press disarms. Treat ordinary Slip and Stem Slip as mutually exclusive modes in the prototype."
+    },
+    {
+      "id": "P2",
+      "name": "Initial states",
+      "status": "proposed-independent",
+      "contract": "With all stems enabled, arming selects which group follows deck manipulation; both groups remain audible. Do not interpret arm-vocal as mute-instrumental. Preserve existing base stem gains/mutes without auto-unmuting; this policy for non-full initial masks is not vendor-verified."
+    },
+    {
+      "id": "P3",
+      "name": "Two timelines and mixer",
+      "status": "proposed-independent",
+      "contract": "Maintain a canonical deck clock and a selected-group cursor. Scratch/hot-cue modifies only the selected cursor; the complement stays on the canonical clock. Crossfader position affects only the selected group; all other existing channel processing remains shared unless separately specified. Instrumental-mode symmetry is a prototype policy."
+    },
+    {
+      "id": "P4",
+      "name": "Release",
+      "status": "proposed-independent",
+      "contract": "Ending a scratch/cue gesture with release0 immediately aligns the selected cursor to the current canonical clock, retaining the armed mode. With releaseN, roll only the selected group forN elapsed deck beats then align. Count beats on a monotonic beat clock, including tempo changes. Immediate roll start and its captured-fragment selection are independent choices pending reference measurement."
+    },
+    {
+      "id": "P5",
+      "name": "Pause, seek and termination",
+      "status": "proposed-independent",
+      "contract": "Arming a loaded paused deck creates no advancing clock. Pause cancels the active gesture/roll, aligns cursors and freezes both; mode stays armed. Resume advances both without reviving old gestures. Explicit seek aligns both to the requested position and invalidates pending releases. Stop, unload, load, disconnect or track end cancel/disarm; a later release never resumes playback or seeks backward."
+    },
+    {
+      "id": "P6",
+      "name": "Cancel and lifetime",
+      "status": "proposed-independent",
+      "contract": "Assign every gesture a deck-generation token and owner. Pointer cancel/lost capture/blur ends an active gesture exactly once, aligns to the current canonical position and retains the armed mode; explicit disarm also cancels and clears the selection. Ignore stale callbacks after load/stop/disarm. Do not change base stem masks merely because a gesture ended."
+    }
+  ],
+  "acceptance_cases": [
+    {
+      "id": "SS-01",
+      "criterion": "From a full mix, press Slip+Vocal and release both: Stem Slip stays armed; no permanent mute/solo mutation; a later Slip press disables it.",
+      "basis": [
+        "F2",
+        "P1",
+        "P2"
+      ]
+    },
+    {
+      "id": "SS-02",
+      "criterion": "Use four separately identifiable synthetic stem signals. During vocal scratching, only vocal marker order changes; instrumental marker timing matches an untouched reference through the full gesture.",
+      "basis": [
+        "F1",
+        "F3",
+        "P3"
+      ]
+    },
+    {
+      "id": "SS-03",
+      "criterion": "Move crossfader fully away while vocal scratch is active: selected vocal is cut while the same deck instrumental retains its level/timing; other deck behavior is unchanged.",
+      "basis": [
+        "F3",
+        "P3"
+      ]
+    },
+    {
+      "id": "SS-04",
+      "criterion": "After a scratch or held cue ends at release0, the selected signal rejoins at the current canonical marker; Stem Slip remains armed for a second gesture.",
+      "basis": [
+        "F1",
+        "F3",
+        "P4"
+      ]
+    },
+    {
+      "id": "SS-05",
+      "criterion": "For each release0,.5,1,2,4 at60/120/180BPM, verify selected-only roll and rejoin timing against the declared beat-clock policy. At120BPM the nonzero durations are.25,.5,1,2seconds. Verify a tempo change mid-release does not use a stale millisecond timeout.",
+      "basis": [
+        "F4",
+        "P4"
+      ]
+    },
+    {
+      "id": "SS-06",
+      "criterion": "Repeat arm/gesture/release from full mix, vocal-only, instrumental-only and custom masks. Base mask remains exactly unchanged after release/cancel; assertions explicitly prove the independent preservation policy, not vendor polarity.",
+      "basis": [
+        "P2",
+        "P6"
+      ]
+    },
+    {
+      "id": "SS-07",
+      "criterion": "Exercise pause/resume, seek, stop, new-track load, unload, disconnect and natural end during manipulation and release. Observe no orphan source, unintended restart or stale return to an old position.",
+      "basis": [
+        "P5",
+        "P6"
+      ]
+    },
+    {
+      "id": "SS-08",
+      "criterion": "Release the pointer outside the control, cancel the pointer, lose capture and blur the window. Each gesture terminates once with finite output and a cleared release timer/token.",
+      "basis": [
+        "P6"
+      ]
+    },
+    {
+      "id": "SS-09",
+      "criterion": "Keep ordinary deck Slip and Stem Slip tests separate: ordinary Slip manipulates the complete deck mix, Stem Slip manipulates only the selected group; track load clears both under the chosen prototype policy.",
+      "basis": [
+        "F6",
+        "P1",
+        "P5"
+      ]
+    },
+    {
+      "id": "SS-10",
+      "criterion": "Switch selected group during a gesture using the explicitly declared policy: end/rejoin the old selection once, then arm the new selection without changing base masks. Do not claim the switching policy matches Serato.",
+      "basis": [
+        "P1",
+        "P2",
+        "P6"
+      ]
+    }
+  ],
+  "routing": {
+    "status": "recommendation-only; no model availability assertion",
+    "read_sources": [
+      "docs/delivery/FEATURE_MODEL_PLAN.md",
+      "docs/research/interaction-requirements.json:REQ-265/REQ-266"
+    ],
+    "per_feature": [
+      {
+        "scope": "STM-005 / REQ-266 reference conflict and initial-state audit",
+        "recommended_codex": "gpt-6-astra",
+        "reasoning_effort": "high",
+        "role": "Bounded disputed state/DSP audit only; fresh primary-source or hardware evidence required.",
+        "claude_reviewer_if_selected": "claude-opus-5",
+        "claude_effort": "high"
+      },
+      {
+        "scope": "STM-005 browser chord/latch UI and lifecycle implementation",
+        "recommended_codex": "gpt-6.1-sol",
+        "reasoning_effort": "high",
+        "role": "Routine implementation from the declared independent contract.",
+        "claude_reviewer_if_selected": "claude-sonnet-5",
+        "claude_effort": "medium"
+      },
+      {
+        "scope": "REQ-265 selected-group Slip Release and routine signal tests",
+        "recommended_codex": "gpt-6.1-sol",
+        "reasoning_effort": "high",
+        "role": "Routine deterministic implementation/testing; escalate only a measured unresolved DSP/state dispute to Astra high.",
+        "claude_reviewer_if_selected": "claude-opus-5",
+        "claude_effort": "high"
+      },
+      {
+        "scope": "DEK-010 / STM-005 transport, cancellation and regression checks",
+        "recommended_codex": "gpt-6.1-sol",
+        "reasoning_effort": "high",
+        "role": "Routine lifecycle work; fresh review required for cross-deck state isolation.",
+        "claude_reviewer_if_selected": "claude-opus-5",
+        "claude_effort": "high"
+      }
+    ]
+  },
+  "verification": {
+    "official_pdf_text_extracted": true,
+    "official_pdf_pages_39_40_visually_inspected": true,
+    "t10_hardware_test_executed": false,
+    "serato_runtime_behavior_executed": false,
+    "open_play_implementation_executed": false
+  },
+  "skills_applied": [
+    "use",
+    "dec-discovery-validation",
+    "dec-quality-testing"
+  ],
+  "independent_control_scope": {
+    "selected_groups": {
+      "vocal": [
+        "vocal"
+      ],
+      "instrumental": [
+        "melody",
+        "bass",
+        "drums"
+      ]
+    },
+    "canonical_timeline": "Integrate ordinary baseline deck rate including tempo changes; performance scratch/cue/reverse/loop displacement does not move this clock. Pre-existing reverse/loop entry state requires explicit tests and remains a reference gap.",
+    "selected_gestures": "Scratch, held cue and proposed temporary reverse/performance loop/roll change selected cursor only. Official4.0.10 explicitly documents scratch and cue support; additional gesture scope is independent.",
+    "mixer": "Crossfader cuts selected group only; complementary group bypasses it. Instrumental symmetry is proposed. Both groups retain shared normal channel gain/fader/mute/EQ/filter/FX/PFL policy; vendor topology for those controls is unknown.",
+    "release_fragment": "Proposed: selected source fragment ofN beats ending at release cursor; play oneN-beat roll immediately then align using canonical beat clock. Exact reference quantized boundary/fragment unknown.",
+    "key_order": "Either activation-key release order retains latch. Platter/cue release ends gesture, not mode. Separate Slip press disarms immediately. Cancellation/lost capture/blur align without release roll.",
+    "status": "proposed-independent; not installed-reference evidence"
+  }
+}

@@ -7,7 +7,7 @@ Jason requires 1:1 feature coverage before prototype implementation. The invento
 ## Current coverage
 
 - 168 official manual articles across 23 sections, all explicitly mapped to feature IDs; semantic review remains open.
-- 492 selected interaction requirements have explicit triggers, expected outcomes and evidence boundaries.
+- 495 selected interaction requirements have explicit triggers, expected outcomes and evidence boundaries.
 - 74 initial feature groups plus 36 research additions, each with explicit Codex/Claude model and effort recommendations.
 - Installed reference pinned to 4.0.10.213, with executable and installer hashes.
 - All five display layouts and all eight Setup tabs observed; connected Hercules enumerated through USB, audio and MIDI interfaces.
@@ -42,7 +42,7 @@ Jason explicitly approved representing unavailable physical/DSP/provider behavio
 
 ## HTML review delivery record
 
-All 110 currently known feature groups have a destination in `docs/prototype/coverage-manifest.json`. The browser index includes sources, model routing, implementation boundaries and open gaps. Some routes are gap disclosures, not working equivalents. The strict completeness/behavioral pass above has NOT been awarded. Two groups remain without Serato interaction rows because they are Open Play engineering goals (AUD-005 clock drift and SYS-006 reproducible builds); no vendor behavior was invented for them. All 59 advanced FX strips and 236 labels are observed. Of the 55 extended processors, 24 expose all four observed controls; 31 control schemas remain open, as do exact ranges and sonic matching.
+All 110 currently known feature groups have a destination in `docs/prototype/coverage-manifest.json`. The browser index includes sources, model routing, implementation boundaries and open gaps. Some routes are gap disclosures, not working equivalents. The strict completeness/behavioral pass above has NOT been awarded. Two groups remain without Serato interaction rows because they are Open Play engineering goals (AUD-005 clock drift and SYS-006 reproducible builds); no vendor behavior was invented for them. All 59 advanced FX strips and 236 labels are observed. All55 extended processors expose their220 observed controls, and the original four expose16. Short audio contrasts passed for all236; exact ranges, modes, sonic matching, long-horizon DSP regressions and full acceptance remain open.
 
 The [executed review report](../prototype/REVIEW_REPORT.md) separates observed browser workflows from code-path claims, simulations and untested native behavior. Jason can review the candidate now while Claude independently challenges completeness. No reduction of full scope and no native approval is inferred.
 

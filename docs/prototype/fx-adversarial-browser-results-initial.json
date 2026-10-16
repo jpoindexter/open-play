@@ -1,0 +1,135 @@
+{
+  "scope": "Executed OfflineAudioContext/createExtendedEffect AudioWorklet graphs. Independent behavior; vendor ranges and sonic equivalence remain unverified.",
+  "passed": 8,
+  "total": 9,
+  "results": [
+    {
+      "name": "Multi Tap Delay / Shreds: maximum feedback decays through 45 seconds",
+      "passed": true,
+      "evidence": {
+        "sampleRate": 4000,
+        "renderedSeconds": 45,
+        "channels": [
+          {
+            "earlyRms": 0.004471835781643725,
+            "lateRms": 5.730873551431062e-7,
+            "decayRatio": 0.00012815483016964788,
+            "peak": 0.11239421367645264
+          },
+          {
+            "earlyRms": 0.004471835781643725,
+            "lateRms": 5.730873551431062e-7,
+            "decayRatio": 0.00012815483016964788,
+            "peak": 0.11239421367645264
+          }
+        ]
+      }
+    },
+    {
+      "name": "Multi Tap Delay / Even: maximum feedback decays through 45 seconds",
+      "passed": true,
+      "evidence": {
+        "sampleRate": 4000,
+        "renderedSeconds": 45,
+        "channels": [
+          {
+            "earlyRms": 0.010583068687759252,
+            "lateRms": 0.000006957671398467931,
+            "decayRatio": 0.0006574342096556,
+            "peak": 0.13433511555194855
+          },
+          {
+            "earlyRms": 0.010583068687759252,
+            "lateRms": 0.000006957671398467931,
+            "decayRatio": 0.0006574342096556,
+            "peak": 0.13433511555194855
+          }
+        ]
+      }
+    },
+    {
+      "name": "Multi Tap Delay / Dotted: maximum feedback decays through 45 seconds",
+      "passed": true,
+      "evidence": {
+        "sampleRate": 4000,
+        "renderedSeconds": 45,
+        "channels": [
+          {
+            "earlyRms": 0.007088341283666787,
+            "lateRms": 4.052610299442675e-7,
+            "decayRatio": 0.00005717290036218836,
+            "peak": 0.13433511555194855
+          },
+          {
+            "earlyRms": 0.007088341283666787,
+            "lateRms": 4.052610299442675e-7,
+            "decayRatio": 0.00005717290036218836,
+            "peak": 0.13433511555194855
+          }
+        ]
+      }
+    },
+    {
+      "name": "Multi Tap Delay: public timing/pattern update retains the 24-second third tap",
+      "passed": false,
+      "error": "Updated processor differs from fresh construction: 0.195261150598526",
+      "stack": "Error: Updated processor differs from fresh construction: 0.195261150598526\n    at assert (http://127.0.0.1:8768/prototype/fx-adversarial-browser-tests.js:17:25)\n    at http://127.0.0.1:8768/prototype/fx-adversarial-browser-tests.js:84:7\n    at Array.map (<anonymous>)\n    at Object.run (http://127.0.0.1:8768/prototype/fx-adversarial-browser-tests.js:81:30)\n    at async run.onclick (http://127.0.0.1:8768/prototype/fx-adversarial-browser-tests.js:138:62)"
+    },
+    {
+      "name": "Infinity Filter: equivalent fractional signed sweep velocities remain continuous",
+      "passed": true,
+      "evidence": {
+        "sampleRate": 24000,
+        "renderedSeconds": 2,
+        "maximumDifference": 0
+      }
+    },
+    {
+      "name": "Falling Flanger: equivalent fractional signed sweep velocities remain continuous",
+      "passed": true,
+      "evidence": {
+        "sampleRate": 24000,
+        "renderedSeconds": 2,
+        "maximumDifference": 0
+      }
+    },
+    {
+      "name": "Infinity Flanger: equivalent fractional signed sweep velocities remain continuous",
+      "passed": true,
+      "evidence": {
+        "sampleRate": 24000,
+        "renderedSeconds": 2,
+        "maximumDifference": 0
+      }
+    },
+    {
+      "name": "Space Invader: equivalent fractional signed sweep velocities remain continuous",
+      "passed": true,
+      "evidence": {
+        "sampleRate": 24000,
+        "renderedSeconds": 2,
+        "maximumDifference": 0
+      }
+    },
+    {
+      "name": "Stretch exit plays and rewinds a late marker while rejecting later live input",
+      "passed": true,
+      "evidence": {
+        "sampleRate": 4000,
+        "renderedSeconds": 8,
+        "channels": [
+          {
+            "forwardRms": 0.0601197941262139,
+            "reverseRms": 0.05121477074469603,
+            "laterInputMaximumDifference": 0
+          },
+          {
+            "forwardRms": 0.0601197941262139,
+            "reverseRms": 0.05121477074469603,
+            "laterInputMaximumDifference": 0
+          }
+        ]
+      }
+    }
+  ]
+}

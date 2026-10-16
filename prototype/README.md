@@ -59,3 +59,12 @@ reach the speakers. Read [the functional review](../docs/prototype/FUNCTIONAL_RE
 for earlier UI evidence. Read [the DSP continuation](../docs/prototype/DSP_FUNCTIONAL_REVIEW.md)
 for new checks and active findings. All 59 named processors produce real audio, but
 exact reference parameters and sound remain open; no route or simulation counts as parity.
+
+Current follow-up: all 220 observed extended controls and 16 original-effect controls
+have separate audio contrasts. Run `fx-adversarial-test.html` for the nine longer
+Worklet regressions and `native-fx-controls-test.html` for the original 16 controls.
+Stems preparation starts from its first pad action, the Analyze Stems load preference
+or a drop into Prepared stems. Cancellation preserves the original audio. All paths
+require the documented local service/model setup; a visible control is not proof of
+reference-equivalent behavior. The latest measured paths and failures remain in the
+DSP continuation report.

@@ -2,7 +2,7 @@
 
 **Prepared:** 16 October 2026 · **Owner:** Jason · **Status:** HTML review candidate available; investigation and exact parity reconciliation remain open; native build blocked on prototype approval.
 
-This document expands the supplied Serato investigation brief into a proposed delivery plan. Investigation is in progress. Local inspection identifies Serato DJ Pro 4.0.10.213 and Desktop installers 4.0.9/4.0.10. A private GitHub repository and private Trello board have been created and their visibility verified. The official manual index contains 168 articles across 23 sections. The connected Hercules DJControl Inpulse 300 MK2 is visible through USB, CoreAudio and CoreMIDI; Jason reports that its browser knob moves the highlighted Serato track; byte-level input and physical audio-routing tests remain pending. Ghidra completed deep auto-analysis; Hopper remains supplementary and its REA bridge is currently blocked. A runnable HTML candidate now covers all 110 inventoried feature groups through real interactions, explicit simulations or documented gaps. It contains 354 interaction requirements. Exact 1:1 parity is not verified; native implementation has not begun. See the [executed prototype review](docs/prototype/REVIEW_REPORT.md). See [evidence ledger](docs/research/EVIDENCE_LEDGER.md) and [project resources](docs/delivery/project-resources.json).
+This document expands the supplied Serato investigation brief into a proposed delivery plan. Investigation is in progress. Local inspection identifies Serato DJ Pro 4.0.10.213 and Desktop installers 4.0.9/4.0.10. A private GitHub repository and private Trello board have been created and their visibility verified. The official manual index contains 168 articles across 23 sections. The connected Hercules DJControl Inpulse 300 MK2 is visible through USB, CoreAudio and CoreMIDI; Jason reports that its browser knob moves the highlighted Serato track; byte-level input and physical audio-routing tests remain pending. Ghidra completed deep auto-analysis; Hopper remains supplementary and its REA bridge is currently blocked. A runnable HTML candidate now covers all 110 inventoried feature groups through real interactions, explicit simulations or documented gaps. It contains 495 interaction requirements; historical counts below are retained as dated checkpoints. Exact 1:1 parity is not verified; native implementation has not begun. See the [executed prototype review](docs/prototype/REVIEW_REPORT.md). See [evidence ledger](docs/research/EVIDENCE_LEDGER.md) and [project resources](docs/delivery/project-resources.json).
 
 “Open Play” is a working project name taken from this workspace, not a confirmed public brand. This plan is the canonical planning artifact; the accompanying [execution prompt](PROJECT_PROMPT.md) preserves the instructions for the future executing agent.
 
@@ -785,10 +785,71 @@ real cue-based pitch audition with cancellation and range control. Main UI key
 changes, range selection, Shift-cue selection and observed Echo controls were exercised.
 Signal tests are independent implementation evidence, not a Serato-equivalence claim.
 
-Remaining dependency order: finish 31 observed FX schemas and parameter semantics;
-resolve active Stems-tail continuity and model quality failures; complete library,
+Remaining dependency order: measure exact FX parameter semantics and sound;
+resolve the model quality failure and remaining Stems state contracts; complete library,
 Video, conditional settings and keyboard/visual workflow gaps; then verify physical
 MIDI/LED/jog/master/headphone and unavailable CDJ/DVS/provider behavior. A device or
 service limitation remains an open acceptance item even if browser simulation exists.
 The connected Hercules is unnecessary for browser DSP work and may be unplugged;
 refresh physical state before hardware checks. No native app work is authorized.
+
+## 25. All observed FX controls and automatic Stems workflow
+
+The remaining 31 extended schemas now have independently implemented controls. All
+55 extended effects expose 220 observed labels; 220 actual AudioWorklet contrasts
+passed. The original four effects'16 controls passed separate offline Web Audio
+contrasts. This closes label-to-executable-control mapping, while exact ranges,
+complete modes, DSP equivalence and sustained-load acceptance remain open.
+
+Independent adversarial review exposed four longer-horizon defects that the short
+contrast checks missed: Multi Tap feedback stability, history growth after timing
+updates, fractional sweep continuity, and Stretch exit source extent. All four
+corrections pass 33 targeted kernel checks and nine actual browser Worklet regressions.
+The frozen runtime also passed all 220 contrasts, 59 effect graphs and five original
+processor lifecycle checks. The current integrated baseline passes 20/20. These
+results establish their specific paths, not universal stability or vendor equivalence.
+
+Stems exit lifetime is now independent of source transport replacement. The actual
+27-check Channel/Stems suite includes preserved tails across pitch/rate/seek/reverse,
+natural end, explicit stop with no ordinary voice, and emergency silence from an
+audible active tail. Exact reference policy is a separate comparison.
+
+Stems first action and Analyze Stems-on-load now perform real local preparation;
+matching calls coalesce and share progress. Main UI reached four-source SCNet
+readiness for both entry paths. Main UI cancellation, retry and two pad actions
+joining preparation were exercised. Twelve adapter lifecycle checks are separately
+labeled mocked-network proof. A new public sampler route check held Playing while
+Deck1/fader-zero measured zero and Master measured 0.01887; this proves browser buses
+only. Physical headphone routing remains open.
+Prepared-crate dragging now has real drop-event and subsequent four-source readiness evidence. Fast release is accepted on drag entry; a startup guard prevents controls changing before initialization.
+
+Next after this checkpoint: finish Stems request/error/cancellation workflows and
+state contracts (including Stem Slip), exact Video catalogs and implementation,
+library interoperability and full keyboard/visual state comparison, then physical
+device/provider acceptance. No native application until Jason approves a specific
+prototype. Keep the existing full-scope goal active.
+
+Current delivery reconciliation: all 87 source-link descriptions have exact remote
+readback evidence, with no pending source jobs. Nineteen DSP/sampler descriptions
+also have exact readback. Historical functional annotations are being reconciled
+separately; none of these synchronization counts marks a feature accepted.
+
+## 26. Stem Slip source correction and next actual implementation
+
+The current working inventory is **495 requirements across110 groups**. Three
+new rows (REQ-493–495) capture a latched mode, selected-stem performance clock and
+vocal-only crossfader behavior documented in the Hercules T10 manual. Its release
+wording conflicts with the Serato quickstart; REQ-266 now retains that conflict
+instead of treating temporary muting as the complete feature. See
+[STEM_SLIP_EVALUATION.md](docs/research/STEM_SLIP_EVALUATION.md) for exact pages,
+state transitions, independent design policies, acceptance cases and model routing.
+The current prototype does not yet implement that independent stem transport.
+
+Next: actual selected-group audio manipulation while complementary stems continue,
+realignment/release rolls, transport/cancellation and crossfader tests. Keep unknown
+reference policies explicit; a mute-only substitute cannot close this feature.
+
+Delivery reconciliation now has zero pending source/functional jobs:87 source-link
+descriptions verified,13 historical functional additions exactly read back and four
+superseded by newer scoped DSP records. Nineteen DSP/sampler descriptions and the
+prototype gate have separate exact-readback evidence. None constitutes acceptance.

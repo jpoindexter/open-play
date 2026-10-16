@@ -18,7 +18,10 @@
         "Beat Modify"
       ],
       "labelMatches": [
-        "FEEDBACK"
+        "FEEDBACK",
+        "HPF",
+        "DRIVE",
+        "BEAT MODIFY"
       ],
       "status": "Observed label schema with independently implemented controls; exact vendor semantics/ranges remain unverified",
       "baseline_independent": [
@@ -42,7 +45,10 @@
         "Beat Modify"
       ],
       "labelMatches": [
-        "FEEDBACK"
+        "FEEDBACK",
+        "HPF",
+        "DRIVE",
+        "BEAT MODIFY"
       ],
       "status": "Observed label schema with independently implemented controls; exact vendor semantics/ranges remain unverified",
       "baseline_independent": [
@@ -61,20 +67,24 @@
         "BEAT MODIFY"
       ],
       "independent": [
+        "Pattern",
         "Feedback",
-        "Tone",
-        "Tap Spread"
+        "Filter",
+        "Beat Modify"
       ],
       "labelMatches": [
-        "FEEDBACK"
+        "PATTERN",
+        "FEEDBACK",
+        "FILTER",
+        "BEAT MODIFY"
       ],
-      "status": "Existing proposed controls; observed schema not yet implemented",
+      "status": "Observed label schema with independently implemented controls; exact vendor semantics/ranges remain unverified",
       "baseline_independent": [
         "Feedback",
         "Tone",
         "Tap Spread"
       ],
-      "adapter_implemented": false
+      "adapter_implemented": true
     },
     {
       "name": "Ping Pong Delay",
@@ -92,7 +102,9 @@
       ],
       "labelMatches": [
         "FEEDBACK",
-        "WIDTH"
+        "HPF",
+        "WIDTH",
+        "BEAT MODIFY"
       ],
       "status": "Observed label schema with independently implemented controls; exact vendor semantics/ranges remain unverified",
       "baseline_independent": [
@@ -111,18 +123,24 @@
         "BEAT MODIFY"
       ],
       "independent": [
-        "Feedback",
-        "Tone",
-        "Pitch"
+        "Speed",
+        "Low Bypass",
+        "High Bypass",
+        "Beat Modify"
       ],
-      "labelMatches": [],
-      "status": "Existing proposed controls; observed schema not yet implemented",
+      "labelMatches": [
+        "SPEED",
+        "LOW BYPASS",
+        "HIGH BYPASS",
+        "BEAT MODIFY"
+      ],
+      "status": "Observed label schema with independently implemented controls; exact vendor semantics/ranges remain unverified",
       "baseline_independent": [
         "Feedback",
         "Tone",
         "Pitch"
       ],
-      "adapter_implemented": false
+      "adapter_implemented": true
     },
     {
       "name": "Version Echo",
@@ -140,7 +158,9 @@
       ],
       "labelMatches": [
         "FEEDBACK",
-        "DRIVE"
+        "BPF",
+        "DRIVE",
+        "BEAT MODIFY"
       ],
       "status": "Observed label schema with independently implemented controls; exact vendor semantics/ranges remain unverified",
       "baseline_independent": [
@@ -164,7 +184,12 @@
         "Character",
         "Low Drive"
       ],
-      "labelMatches": [],
+      "labelMatches": [
+        "BIT DEPTH",
+        "DOWNSAMPLING",
+        "CHARACTER",
+        "LOW DRIVE"
+      ],
       "status": "Observed label schema with independently implemented controls; exact vendor semantics/ranges remain unverified",
       "baseline_independent": [
         "Bits",
@@ -181,19 +206,23 @@
         "TONE"
       ],
       "independent": [
+        "Type",
         "Drive",
+        "Character",
         "Tone"
       ],
       "labelMatches": [
+        "TYPE",
         "DRIVE",
+        "CHARACTER",
         "TONE"
       ],
-      "status": "Existing proposed controls; observed schema not yet implemented",
+      "status": "Observed label schema with independently implemented controls; exact vendor semantics/ranges remain unverified",
       "baseline_independent": [
         "Drive",
         "Tone"
       ],
-      "adapter_implemented": false
+      "adapter_implemented": true
     },
     {
       "name": "Lo-Fi Crush",
@@ -209,7 +238,12 @@
         "Character",
         "Low Drive"
       ],
-      "labelMatches": [],
+      "labelMatches": [
+        "BIT DEPTH",
+        "DOWNSAMPLING",
+        "CHARACTER",
+        "LOW DRIVE"
+      ],
       "status": "Observed label schema with independently implemented controls; exact vendor semantics/ranges remain unverified",
       "baseline_independent": [
         "Bits",
@@ -232,7 +266,12 @@
         "Character",
         "Low Drive"
       ],
-      "labelMatches": [],
+      "labelMatches": [
+        "BIT DEPTH",
+        "DOWNSAMPLING",
+        "CHARACTER",
+        "LOW DRIVE"
+      ],
       "status": "Observed label schema with independently implemented controls; exact vendor semantics/ranges remain unverified",
       "baseline_independent": [
         "Drive",
@@ -255,7 +294,12 @@
         "Character",
         "Low Drive"
       ],
-      "labelMatches": [],
+      "labelMatches": [
+        "BIT DEPTH",
+        "DOWNSAMPLING",
+        "CHARACTER",
+        "LOW DRIVE"
+      ],
       "status": "Observed label schema with independently implemented controls; exact vendor semantics/ranges remain unverified",
       "baseline_independent": [
         "Bits",
@@ -279,7 +323,10 @@
         "Max Freq"
       ],
       "labelMatches": [
-        "RESONANCE"
+        "RESONANCE",
+        "SLOPE",
+        "MIN FREQ",
+        "MAX FREQ"
       ],
       "status": "Observed label schema with independently implemented controls; exact vendor semantics/ranges remain unverified",
       "baseline_independent": [
@@ -297,21 +344,24 @@
         "TYPE"
       ],
       "independent": [
-        "Cutoff",
         "Resonance",
-        "Drive"
+        "Drive",
+        "Slope",
+        "Type"
       ],
       "labelMatches": [
         "RESONANCE",
-        "DRIVE"
+        "DRIVE",
+        "SLOPE",
+        "TYPE"
       ],
-      "status": "Existing proposed controls; observed schema not yet implemented",
+      "status": "Observed label schema with independently implemented controls; exact vendor semantics/ranges remain unverified",
       "baseline_independent": [
         "Cutoff",
         "Resonance",
         "Drive"
       ],
-      "adapter_implemented": false
+      "adapter_implemented": true
     },
     {
       "name": "HPF",
@@ -328,7 +378,10 @@
         "Max Freq"
       ],
       "labelMatches": [
-        "RESONANCE"
+        "RESONANCE",
+        "SLOPE",
+        "MIN FREQ",
+        "MAX FREQ"
       ],
       "status": "Observed label schema with independently implemented controls; exact vendor semantics/ranges remain unverified",
       "baseline_independent": [
@@ -346,20 +399,24 @@
         "BEAT MODIFY"
       ],
       "independent": [
-        "Rate",
+        "Centre Freq.",
+        "Type",
         "Direction",
-        "Resonance"
+        "Beat Modify"
       ],
       "labelMatches": [
-        "DIRECTION"
+        "CENTRE FREQ.",
+        "TYPE",
+        "DIRECTION",
+        "BEAT MODIFY"
       ],
-      "status": "Existing proposed controls; observed schema not yet implemented",
+      "status": "Observed label schema with independently implemented controls; exact vendor semantics/ranges remain unverified",
       "baseline_independent": [
         "Rate",
         "Direction",
         "Resonance"
       ],
-      "adapter_implemented": false
+      "adapter_implemented": true
     },
     {
       "name": "LFO Filter",
@@ -376,7 +433,10 @@
         "Beat Modify"
       ],
       "labelMatches": [
-        "RESONANCE"
+        "RESONANCE",
+        "LFO DEPTH",
+        "LFO SHAPE",
+        "BEAT MODIFY"
       ],
       "status": "Observed label schema with independently implemented controls; exact vendor semantics/ranges remain unverified",
       "baseline_independent": [
@@ -396,16 +456,23 @@
         "BEAT MODIFY"
       ],
       "independent": [
-        "Length",
-        "Speed"
+        "Mix",
+        "Shreds",
+        "Range",
+        "Beat Modify"
       ],
-      "labelMatches": [],
-      "status": "Existing proposed controls; observed schema not yet implemented",
+      "labelMatches": [
+        "MIX",
+        "SHREDS",
+        "RANGE",
+        "BEAT MODIFY"
+      ],
+      "status": "Observed label schema with independently implemented controls; exact vendor semantics/ranges remain unverified",
       "baseline_independent": [
         "Length",
         "Speed"
       ],
-      "adapter_implemented": false
+      "adapter_implemented": true
     },
     {
       "name": "Retro Halftime",
@@ -416,18 +483,24 @@
         "GRAINS"
       ],
       "independent": [
-        "Length",
-        "Pitch Lock",
-        "Speed"
+        "Retrigger",
+        "Mix",
+        "Range",
+        "Grains"
       ],
-      "labelMatches": [],
-      "status": "Existing proposed controls; observed schema not yet implemented",
+      "labelMatches": [
+        "RETRIGGER",
+        "MIX",
+        "RANGE",
+        "GRAINS"
+      ],
+      "status": "Observed label schema with independently implemented controls; exact vendor semantics/ranges remain unverified",
       "baseline_independent": [
         "Length",
         "Pitch Lock",
         "Speed"
       ],
-      "adapter_implemented": false
+      "adapter_implemented": true
     },
     {
       "name": "Roll",
@@ -438,16 +511,23 @@
         "BEAT MODIFY"
       ],
       "independent": [
-        "Length",
-        "Speed"
+        "Repeats",
+        "Shreds",
+        "Range",
+        "Beat Modify"
       ],
-      "labelMatches": [],
-      "status": "Existing proposed controls; observed schema not yet implemented",
+      "labelMatches": [
+        "REPEATS",
+        "SHREDS",
+        "RANGE",
+        "BEAT MODIFY"
+      ],
+      "status": "Observed label schema with independently implemented controls; exact vendor semantics/ranges remain unverified",
       "baseline_independent": [
         "Length",
         "Speed"
       ],
-      "adapter_implemented": false
+      "adapter_implemented": true
     },
     {
       "name": "Slip Roll",
@@ -458,16 +538,23 @@
         "BEAT MODIFY"
       ],
       "independent": [
-        "Length",
-        "Speed"
+        "Repeats",
+        "Shreds",
+        "Range",
+        "Beat Modify"
       ],
-      "labelMatches": [],
-      "status": "Existing proposed controls; observed schema not yet implemented",
+      "labelMatches": [
+        "REPEATS",
+        "SHREDS",
+        "RANGE",
+        "BEAT MODIFY"
+      ],
+      "status": "Observed label schema with independently implemented controls; exact vendor semantics/ranges remain unverified",
       "baseline_independent": [
         "Length",
         "Speed"
       ],
-      "adapter_implemented": false
+      "adapter_implemented": true
     },
     {
       "name": "Stretch",
@@ -478,18 +565,24 @@
         "GRAINS"
       ],
       "independent": [
-        "Length",
-        "Stretch",
-        "Grain"
+        "Retrigger",
+        "Mix",
+        "Range",
+        "Grains"
       ],
-      "labelMatches": [],
-      "status": "Existing proposed controls; observed schema not yet implemented",
+      "labelMatches": [
+        "RETRIGGER",
+        "MIX",
+        "RANGE",
+        "GRAINS"
+      ],
+      "status": "Observed label schema with independently implemented controls; exact vendor semantics/ranges remain unverified",
       "baseline_independent": [
         "Length",
         "Stretch",
         "Grain"
       ],
-      "adapter_implemented": false
+      "adapter_implemented": true
     },
     {
       "name": "Stutter Repeater",
@@ -500,18 +593,24 @@
         "BEAT MODIFY"
       ],
       "independent": [
-        "Length",
-        "Gate",
-        "Speed"
+        "Mix",
+        "Shreds",
+        "Range",
+        "Beat Modify"
       ],
-      "labelMatches": [],
-      "status": "Existing proposed controls; observed schema not yet implemented",
+      "labelMatches": [
+        "MIX",
+        "SHREDS",
+        "RANGE",
+        "BEAT MODIFY"
+      ],
+      "status": "Observed label schema with independently implemented controls; exact vendor semantics/ranges remain unverified",
       "baseline_independent": [
         "Length",
         "Gate",
         "Speed"
       ],
-      "adapter_implemented": false
+      "adapter_implemented": true
     },
     {
       "name": "Stutter Roll",
@@ -522,20 +621,25 @@
         "BEAT MODIFY"
       ],
       "independent": [
-        "Length",
-        "Gate",
-        "Speed",
-        "Pulses"
+        "Repeats",
+        "Shreds",
+        "Range",
+        "Beat Modify"
       ],
-      "labelMatches": [],
-      "status": "Existing proposed controls; observed schema not yet implemented",
+      "labelMatches": [
+        "REPEATS",
+        "SHREDS",
+        "RANGE",
+        "BEAT MODIFY"
+      ],
+      "status": "Observed label schema with independently implemented controls; exact vendor semantics/ranges remain unverified",
       "baseline_independent": [
         "Length",
         "Gate",
         "Speed",
         "Pulses"
       ],
-      "adapter_implemented": false
+      "adapter_implemented": true
     },
     {
       "name": "Chorus Basic",
@@ -553,6 +657,8 @@
       ],
       "labelMatches": [
         "FEEDBACK",
+        "DELAY",
+        "LFO DEPTH",
         "RATE"
       ],
       "status": "Observed label schema with independently implemented controls; exact vendor semantics/ranges remain unverified",
@@ -579,6 +685,8 @@
       ],
       "labelMatches": [
         "FEEDBACK",
+        "DELAY",
+        "LFO DEPTH",
         "RATE"
       ],
       "status": "Observed label schema with independently implemented controls; exact vendor semantics/ranges remain unverified",
@@ -598,18 +706,24 @@
         "BEAT MODIFY"
       ],
       "independent": [
-        "Rate",
-        "Mod Depth",
-        "Feedback"
+        "Centre Freq.",
+        "Type",
+        "Direction",
+        "Beat Modify"
       ],
-      "labelMatches": [],
-      "status": "Existing proposed controls; observed schema not yet implemented",
+      "labelMatches": [
+        "CENTRE FREQ.",
+        "TYPE",
+        "DIRECTION",
+        "BEAT MODIFY"
+      ],
+      "status": "Observed label schema with independently implemented controls; exact vendor semantics/ranges remain unverified",
       "baseline_independent": [
         "Rate",
         "Mod Depth",
         "Feedback"
       ],
-      "adapter_implemented": false
+      "adapter_implemented": true
     },
     {
       "name": "Flanger",
@@ -626,7 +740,10 @@
         "Beat Modify"
       ],
       "labelMatches": [
-        "FEEDBACK"
+        "FEEDBACK",
+        "PITCH",
+        "LFO DEPTH",
+        "BEAT MODIFY"
       ],
       "status": "Observed label schema with independently implemented controls; exact vendor semantics/ranges remain unverified",
       "baseline_independent": [
@@ -645,22 +762,25 @@
         "BEAT MODIFY"
       ],
       "independent": [
-        "Rate",
-        "Mod Depth",
-        "Feedback",
-        "Direction"
+        "Centre Freq.",
+        "Type",
+        "Direction",
+        "Beat Modify"
       ],
       "labelMatches": [
-        "DIRECTION"
+        "CENTRE FREQ.",
+        "TYPE",
+        "DIRECTION",
+        "BEAT MODIFY"
       ],
-      "status": "Existing proposed controls; observed schema not yet implemented",
+      "status": "Observed label schema with independently implemented controls; exact vendor semantics/ranges remain unverified",
       "baseline_independent": [
         "Rate",
         "Mod Depth",
         "Feedback",
         "Direction"
       ],
-      "adapter_implemented": false
+      "adapter_implemented": true
     },
     {
       "name": "Pansformer",
@@ -676,7 +796,12 @@
         "Stereo",
         "Beat Modify"
       ],
-      "labelMatches": [],
+      "labelMatches": [
+        "NOISE",
+        "SKEW",
+        "STEREO",
+        "BEAT MODIFY"
+      ],
       "status": "Observed label schema with independently implemented controls; exact vendor semantics/ranges remain unverified",
       "baseline_independent": [
         "Rate",
@@ -700,7 +825,10 @@
         "Beat Modify"
       ],
       "labelMatches": [
-        "FEEDBACK"
+        "FEEDBACK",
+        "PITCH",
+        "LFO DEPTH",
+        "BEAT MODIFY"
       ],
       "status": "Observed label schema with independently implemented controls; exact vendor semantics/ranges remain unverified",
       "baseline_independent": [
@@ -720,18 +848,24 @@
         "BEAT MODIFY"
       ],
       "independent": [
-        "Pitch",
-        "Rate",
-        "Gate"
+        "Feedback",
+        "Filter",
+        "Slide Rate",
+        "Beat Modify"
       ],
-      "labelMatches": [],
-      "status": "Existing proposed controls; observed schema not yet implemented",
+      "labelMatches": [
+        "FEEDBACK",
+        "FILTER",
+        "SLIDE RATE",
+        "BEAT MODIFY"
+      ],
+      "status": "Observed label schema with independently implemented controls; exact vendor semantics/ranges remain unverified",
       "baseline_independent": [
         "Pitch",
         "Rate",
         "Gate"
       ],
-      "adapter_implemented": false
+      "adapter_implemented": true
     },
     {
       "name": "Spiral",
@@ -742,16 +876,23 @@
         "BEAT MODIFY"
       ],
       "independent": [
-        "Pitch",
-        "Rate"
+        "Feedback",
+        "Filter",
+        "Slide Rate",
+        "Beat Modify"
       ],
-      "labelMatches": [],
-      "status": "Existing proposed controls; observed schema not yet implemented",
+      "labelMatches": [
+        "FEEDBACK",
+        "FILTER",
+        "SLIDE RATE",
+        "BEAT MODIFY"
+      ],
+      "status": "Observed label schema with independently implemented controls; exact vendor semantics/ranges remain unverified",
       "baseline_independent": [
         "Pitch",
         "Rate"
       ],
-      "adapter_implemented": false
+      "adapter_implemented": true
     },
     {
       "name": "Transform",
@@ -767,7 +908,12 @@
         "Stereo",
         "Beat Modify"
       ],
-      "labelMatches": [],
+      "labelMatches": [
+        "NOISE",
+        "SKEW",
+        "STEREO",
+        "BEAT MODIFY"
+      ],
       "status": "Observed label schema with independently implemented controls; exact vendor semantics/ranges remain unverified",
       "baseline_independent": [
         "Rate",
@@ -789,7 +935,12 @@
         "Stereo",
         "Beat Modify"
       ],
-      "labelMatches": [],
+      "labelMatches": [
+        "LFO SHAPE",
+        "SKEW",
+        "STEREO",
+        "BEAT MODIFY"
+      ],
       "status": "Observed label schema with independently implemented controls; exact vendor semantics/ranges remain unverified",
       "baseline_independent": [
         "Rate",
@@ -806,20 +957,24 @@
         "BEAT MODIFY"
       ],
       "independent": [
-        "Duration",
         "Feedback",
-        "Curve"
+        "Stop Time",
+        "Stop Curve",
+        "Beat Modify"
       ],
       "labelMatches": [
-        "FEEDBACK"
+        "FEEDBACK",
+        "STOP TIME",
+        "STOP CURVE",
+        "BEAT MODIFY"
       ],
-      "status": "Existing proposed controls; observed schema not yet implemented",
+      "status": "Observed label schema with independently implemented controls; exact vendor semantics/ranges remain unverified",
       "baseline_independent": [
         "Duration",
         "Feedback",
         "Curve"
       ],
-      "adapter_implemented": false
+      "adapter_implemented": true
     },
     {
       "name": "Brake Rewind",
@@ -830,18 +985,23 @@
         "MODE"
       ],
       "independent": [
-        "Duration",
-        "Curve"
+        "Stop Time",
+        "Curve",
+        "Spinback",
+        "Mode"
       ],
       "labelMatches": [
-        "CURVE"
+        "STOP TIME",
+        "CURVE",
+        "SPINBACK",
+        "MODE"
       ],
-      "status": "Existing proposed controls; observed schema not yet implemented",
+      "status": "Observed label schema with independently implemented controls; exact vendor semantics/ranges remain unverified",
       "baseline_independent": [
         "Duration",
         "Curve"
       ],
-      "adapter_implemented": false
+      "adapter_implemented": true
     },
     {
       "name": "Braker",
@@ -852,18 +1012,23 @@
         "BEAT MODIFY"
       ],
       "independent": [
-        "Duration",
-        "Curve"
+        "Mix",
+        "Curve",
+        "Mode",
+        "Beat Modify"
       ],
       "labelMatches": [
-        "CURVE"
+        "MIX",
+        "CURVE",
+        "MODE",
+        "BEAT MODIFY"
       ],
-      "status": "Existing proposed controls; observed schema not yet implemented",
+      "status": "Observed label schema with independently implemented controls; exact vendor semantics/ranges remain unverified",
       "baseline_independent": [
         "Duration",
         "Curve"
       ],
-      "adapter_implemented": false
+      "adapter_implemented": true
     },
     {
       "name": "Clean Echo Out",
@@ -879,7 +1044,12 @@
         "Echo Level",
         "Beat Modify"
       ],
-      "labelMatches": [],
+      "labelMatches": [
+        "MAX FEEDBACK",
+        "FILTER",
+        "ECHO LEVEL",
+        "BEAT MODIFY"
+      ],
       "status": "Observed label schema with independently implemented controls; exact vendor semantics/ranges remain unverified",
       "baseline_independent": [
         "Feedback"
@@ -895,16 +1065,23 @@
         "BEAT MODIFY"
       ],
       "independent": [
-        "Duration",
-        "Curve"
+        "Echo/Feedback",
+        "Filter",
+        "Roll",
+        "Beat Modify"
       ],
-      "labelMatches": [],
-      "status": "Existing proposed controls; observed schema not yet implemented",
+      "labelMatches": [
+        "ECHO/FEEDBACK",
+        "FILTER",
+        "ROLL",
+        "BEAT MODIFY"
+      ],
+      "status": "Observed label schema with independently implemented controls; exact vendor semantics/ranges remain unverified",
       "baseline_independent": [
         "Duration",
         "Curve"
       ],
-      "adapter_implemented": false
+      "adapter_implemented": true
     },
     {
       "name": "Combo Fade Echo",
@@ -915,20 +1092,24 @@
         "BEAT MODIFY"
       ],
       "independent": [
-        "Duration",
         "Feedback",
-        "Curve"
+        "Stop Time",
+        "Drive",
+        "Beat Modify"
       ],
       "labelMatches": [
-        "FEEDBACK"
+        "FEEDBACK",
+        "STOP TIME",
+        "DRIVE",
+        "BEAT MODIFY"
       ],
-      "status": "Existing proposed controls; observed schema not yet implemented",
+      "status": "Observed label schema with independently implemented controls; exact vendor semantics/ranges remain unverified",
       "baseline_independent": [
         "Duration",
         "Feedback",
         "Curve"
       ],
-      "adapter_implemented": false
+      "adapter_implemented": true
     },
     {
       "name": "Echo Out",
@@ -944,7 +1125,12 @@
         "Echo Level",
         "Beat Modify"
       ],
-      "labelMatches": [],
+      "labelMatches": [
+        "MAX FEEDBACK",
+        "FILTER",
+        "ECHO LEVEL",
+        "BEAT MODIFY"
+      ],
       "status": "Observed label schema with independently implemented controls; exact vendor semantics/ranges remain unverified",
       "baseline_independent": [
         "Feedback"
@@ -960,18 +1146,23 @@
         "MODE"
       ],
       "independent": [
-        "Duration",
-        "Curve"
+        "Stop Time",
+        "Curve",
+        "Spinback",
+        "Mode"
       ],
       "labelMatches": [
-        "CURVE"
+        "STOP TIME",
+        "CURVE",
+        "SPINBACK",
+        "MODE"
       ],
-      "status": "Existing proposed controls; observed schema not yet implemented",
+      "status": "Observed label schema with independently implemented controls; exact vendor semantics/ranges remain unverified",
       "baseline_independent": [
         "Duration",
         "Curve"
       ],
-      "adapter_implemented": false
+      "adapter_implemented": true
     },
     {
       "name": "Roll Out",
@@ -982,16 +1173,23 @@
         "BEAT MODIFY"
       ],
       "independent": [
-        "Duration",
-        "Curve"
+        "Echo/Feedback",
+        "Filter",
+        "Roll",
+        "Beat Modify"
       ],
-      "labelMatches": [],
-      "status": "Existing proposed controls; observed schema not yet implemented",
+      "labelMatches": [
+        "ECHO/FEEDBACK",
+        "FILTER",
+        "ROLL",
+        "BEAT MODIFY"
+      ],
+      "status": "Observed label schema with independently implemented controls; exact vendor semantics/ranges remain unverified",
       "baseline_independent": [
         "Duration",
         "Curve"
       ],
-      "adapter_implemented": false
+      "adapter_implemented": true
     },
     {
       "name": "Short Brake Echo",
@@ -1002,20 +1200,24 @@
         "BEAT MODIFY"
       ],
       "independent": [
-        "Duration",
         "Feedback",
-        "Curve"
+        "Stop Time",
+        "Stop Curve",
+        "Beat Modify"
       ],
       "labelMatches": [
-        "FEEDBACK"
+        "FEEDBACK",
+        "STOP TIME",
+        "STOP CURVE",
+        "BEAT MODIFY"
       ],
-      "status": "Existing proposed controls; observed schema not yet implemented",
+      "status": "Observed label schema with independently implemented controls; exact vendor semantics/ranges remain unverified",
       "baseline_independent": [
         "Duration",
         "Feedback",
         "Curve"
       ],
-      "adapter_implemented": false
+      "adapter_implemented": true
     },
     {
       "name": "Slow Roll Out",
@@ -1026,16 +1228,23 @@
         "BEAT MODIFY"
       ],
       "independent": [
-        "Duration",
-        "Curve"
+        "Echo/Feedback",
+        "Filter",
+        "Roll",
+        "Beat Modify"
       ],
-      "labelMatches": [],
-      "status": "Existing proposed controls; observed schema not yet implemented",
+      "labelMatches": [
+        "ECHO/FEEDBACK",
+        "FILTER",
+        "ROLL",
+        "BEAT MODIFY"
+      ],
+      "status": "Observed label schema with independently implemented controls; exact vendor semantics/ranges remain unverified",
       "baseline_independent": [
         "Duration",
         "Curve"
       ],
-      "adapter_implemented": false
+      "adapter_implemented": true
     },
     {
       "name": "Turntable Brake",
@@ -1046,18 +1255,23 @@
         "MODE"
       ],
       "independent": [
-        "Duration",
-        "Curve"
+        "Stop Time",
+        "Curve",
+        "Spinback",
+        "Mode"
       ],
       "labelMatches": [
-        "CURVE"
+        "STOP TIME",
+        "CURVE",
+        "SPINBACK",
+        "MODE"
       ],
-      "status": "Existing proposed controls; observed schema not yet implemented",
+      "status": "Observed label schema with independently implemented controls; exact vendor semantics/ranges remain unverified",
       "baseline_independent": [
         "Duration",
         "Curve"
       ],
-      "adapter_implemented": false
+      "adapter_implemented": true
     },
     {
       "name": "Bright Reverb",
@@ -1075,7 +1289,9 @@
       ],
       "labelMatches": [
         "DECAY",
-        "WIDTH"
+        "CONTOUR",
+        "WIDTH",
+        "MIX MODE"
       ],
       "status": "Observed label schema with independently implemented controls; exact vendor semantics/ranges remain unverified",
       "baseline_independent": [
@@ -1101,7 +1317,9 @@
       ],
       "labelMatches": [
         "DECAY",
-        "WIDTH"
+        "CONTOUR",
+        "WIDTH",
+        "MIX MODE"
       ],
       "status": "Observed label schema with independently implemented controls; exact vendor semantics/ranges remain unverified",
       "baseline_independent": [
@@ -1127,7 +1345,9 @@
       ],
       "labelMatches": [
         "DECAY",
-        "WIDTH"
+        "CONTOUR",
+        "WIDTH",
+        "MIX MODE"
       ],
       "status": "Observed label schema with independently implemented controls; exact vendor semantics/ranges remain unverified",
       "baseline_independent": [
@@ -1147,20 +1367,23 @@
       ],
       "independent": [
         "Decay",
-        "Tone",
-        "Width"
+        "Contour",
+        "Width",
+        "Drop Range"
       ],
       "labelMatches": [
         "DECAY",
-        "WIDTH"
+        "CONTOUR",
+        "WIDTH",
+        "DROP RANGE"
       ],
-      "status": "Existing proposed controls; observed schema not yet implemented",
+      "status": "Observed label schema with independently implemented controls; exact vendor semantics/ranges remain unverified",
       "baseline_independent": [
         "Decay",
         "Tone",
         "Width"
       ],
-      "adapter_implemented": false
+      "adapter_implemented": true
     },
     {
       "name": "Next Door Verb",
@@ -1178,7 +1401,9 @@
       ],
       "labelMatches": [
         "DECAY",
-        "WIDTH"
+        "CONTOUR",
+        "WIDTH",
+        "MIX MODE"
       ],
       "status": "Observed label schema with independently implemented controls; exact vendor semantics/ranges remain unverified",
       "baseline_independent": [
@@ -1198,20 +1423,23 @@
       ],
       "independent": [
         "Decay",
-        "Tone",
-        "Width"
+        "Contour",
+        "Width",
+        "Mix Mode"
       ],
       "labelMatches": [
         "DECAY",
-        "WIDTH"
+        "CONTOUR",
+        "WIDTH",
+        "MIX MODE"
       ],
-      "status": "Existing proposed controls; observed schema not yet implemented",
+      "status": "Observed label schema with independently implemented controls; exact vendor semantics/ranges remain unverified",
       "baseline_independent": [
         "Decay",
         "Tone",
         "Width"
       ],
-      "adapter_implemented": false
+      "adapter_implemented": true
     },
     {
       "name": "Vast Verb Drop",
@@ -1223,20 +1451,23 @@
       ],
       "independent": [
         "Decay",
-        "Tone",
-        "Width"
+        "Contour",
+        "Width",
+        "Mix Mode"
       ],
       "labelMatches": [
         "DECAY",
-        "WIDTH"
+        "CONTOUR",
+        "WIDTH",
+        "MIX MODE"
       ],
-      "status": "Existing proposed controls; observed schema not yet implemented",
+      "status": "Observed label schema with independently implemented controls; exact vendor semantics/ranges remain unverified",
       "baseline_independent": [
         "Decay",
         "Tone",
         "Width"
       ],
-      "adapter_implemented": false
+      "adapter_implemented": true
     },
     {
       "name": "Infinity Tone",
@@ -1247,20 +1478,24 @@
         "BEAT MODIFY"
       ],
       "independent": [
-        "Frequency",
-        "Rate",
-        "Direction"
+        "Timbre",
+        "Ambience",
+        "Direction",
+        "Beat Modify"
       ],
       "labelMatches": [
-        "DIRECTION"
+        "TIMBRE",
+        "AMBIENCE",
+        "DIRECTION",
+        "BEAT MODIFY"
       ],
-      "status": "Existing proposed controls; observed schema not yet implemented",
+      "status": "Observed label schema with independently implemented controls; exact vendor semantics/ranges remain unverified",
       "baseline_independent": [
         "Frequency",
         "Rate",
         "Direction"
       ],
-      "adapter_implemented": false
+      "adapter_implemented": true
     },
     {
       "name": "Space Invader",
@@ -1271,24 +1506,35 @@
         "BEAT MODIFY"
       ],
       "independent": [
-        "Frequency",
-        "Rate",
-        "Steps"
+        "Timbre",
+        "Ambience",
+        "Direction",
+        "Beat Modify"
       ],
-      "labelMatches": [],
-      "status": "Existing proposed controls; observed schema not yet implemented",
+      "labelMatches": [
+        "TIMBRE",
+        "AMBIENCE",
+        "DIRECTION",
+        "BEAT MODIFY"
+      ],
+      "status": "Observed label schema with independently implemented controls; exact vendor semantics/ranges remain unverified",
       "baseline_independent": [
         "Frequency",
         "Rate",
         "Steps"
       ],
-      "adapter_implemented": false
+      "adapter_implemented": true
     }
   ],
   "current_adapter_summary": {
-    "effects": 24,
-    "observed_labels": 96,
-    "remaining_extended_schemas": 31,
-    "semantic_status": "Independent behavior implemented; exact vendor mapping/ranges/defaults/enums and sonic response unverified"
+    "implemented_effects": 55,
+    "observed_controls": 220,
+    "remaining_extended_schemas": 0,
+    "browser_control_contrasts_passed": 220,
+    "native_original_controls_separate": 16,
+    "full_reference_parity": false,
+    "effects": 55,
+    "observed_labels": 220,
+    "long_browser_regressions_passed": 9
   }
 }

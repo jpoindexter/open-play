@@ -132,3 +132,40 @@ The first sampler run exposed a test timing error rather than an accepted engine
 Parent authorized this reviewer/implementer to add `pitchplay.js`, actual App controls and isolated integration tests. The connected Hercules official guide supplies the three8-pad maps; its Middle arrangement conflicts with the generic article, and this discrepancy is preserved in `../research/PITCH_PLAY_EVALUATION.md`. Key Sync uses explicit independent harmonic-policy rules and refuses unknown or incompatible inputs rather than converting major/minor mode or pretending every key can match.
 
 **Executed:**20/20 Node policy checks and parent CUA13/13 actual-engine checks. `pitchplay-browser-results.txt` was read in full: +7 measured662.11Hz,−7 measured292.97Hz, compatible−1 measured416.02Hz, and reset439.45Hz. Paused release produced RMS0 at its cue; release during Worker preparation left no source; newer-pad ownership, Play latch, already-playing continuation and Shift cue selection/creation passed. This implementer authored the module; parent performed separate browser execution. Native reference timing, hardware pad mapping, exact tie-breaking and subjective DSP equivalence remain unverified.
+
+## Follow-up review after observed-control implementation
+
+The parent executed all 220 observed-control contrasts and 16 original-effect
+control contrasts. A fresh reviewer then reproduced four failures in the real
+extended-effects kernel, proving those short tests insufficient for acceptance:
+
+- P1: Multi Tap Delay Feedback90 had return gain greater than one. A 0.1s DC pulse
+  grew during 40s of silence; internal feedback exceeded26million and output clipped.
+- P2: updating Even-pattern timing to T=8s allocated only18.2s of history and lost
+  its24s third tap; a fresh final-state processor rendered it.
+- P2: Direction was applied after a wrapped base phase, resetting fractional
+  sweeps at each base beat. Equivalent sweep-velocity settings diverged.
+- P2: Stretch exit mode wrapped reads through the initial one-beat loop extent,
+  dropping a source marker at0.7s that Vinyl mode reproduced.
+
+All four corrections now pass 33 targeted kernel checks, the full 80-check kernel
+suite, and nine real browser AudioWorklet regressions. Multi Tap feedback decays
+over 45 seconds in all three tested patterns; the updated 24-second tap matches
+fresh construction exactly; four equivalent sweep velocities differ by zero;
+Stretch reproduces the late marker forward and backward while rejecting later input.
+The frozen runtime also passed 220 control contrasts and 59 effect graphs.
+No sonic parity or universal stability pass is inferred.
+
+The initial browser adversarial result was 8/9 and remains saved in
+`fx-adversarial-browser-results-initial.json`. Its update test posted before the
+offline processor had started, retaining the old two-second tap. The revised test
+starts rendering, suspends at 0.256 seconds, posts the public update, then resumes
+before its impulse at 1.024 seconds. Strict assertions remain: difference below
+1e-6, old tap exactly zero, third tap present at 25.024 seconds. Actual browser
+execution passed 9/9; see `fx-adversarial-browser-results.json`.
+
+Separately, the Stems transport-tail fix passed27/27 actual browser checks after
+review required a real natural-end path and a fresh audible emergency-stop fixture.
+Deferred-capture lifecycle checks against real engine methods with mocked audio
+dependencies found no resurrection after explicit pause, silence or track load;
+these are narrower than the parent's acoustic tests.

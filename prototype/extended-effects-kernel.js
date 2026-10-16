@@ -6,6 +6,12 @@ import {
 // Independent DSP designs. Names identify parity targets, not vendor algorithms.
 // Pure JavaScript kernel shared by AudioWorklet and deterministic signal tests.
 const TAU = Math.PI * 2;
+const MULTITAP_PATTERNS = {
+  Shreds: [1, 1.5, 2.25],
+  Even: [1, 2, 3],
+  Dotted: [.75, 1.5, 2.25],
+};
+const MULTITAP_WEIGHT_SUM = 1 + .65 + .4;
 function lfoValue(shape, phase) {
   const p = ((phase % 1) + 1) % 1;
   switch (shape) {
@@ -18,6 +24,13 @@ function lfoValue(shape, phase) {
     default:
       return Math.sin(TAU * p);
   }
+}
+function saturate(x, drive, type = "Smooth Drive", character = 50) {
+  const gain = 1 + drive / 8, shape = clamp(character / 100, 0, 1), z = x * gain;
+  if (type === "Hard Clip") return clamp(z * (0.5 + shape), -1, 1);
+  if (type === "Foldback") return Math.asin(Math.sin(z * (1 + shape * 2))) * 2 / Math.PI;
+  if (type === "Warm") return Math.tanh(z + shape * z * z * .2) / Math.tanh(gain);
+  return Math.tanh(z * (.5 + shape)) / Math.tanh(gain * (.5 + shape));
 }
 function skewPhase(phase, skew) {
   const p = ((phase % 1) + 1) % 1,
@@ -397,6 +410,7 @@ export class ExtendedEffectKernel {
       getExtendedEffectControls(spec.name).map((x) => [x.name, x.value]),
     );
     this.setParams(spec.params || {});
+    this.syncObservedLoopParams();
     this.depth = spec.on === false ? 0 : clamp(num(spec.depth, 50) / 100, 0, 1);
     this.T = clamp(
       (60 / clamp(bpm, 20, 400)) *
@@ -410,8 +424,9 @@ export class ExtendedEffectKernel {
       sampleRate *
         Math.max(
           12,
-          this.T * (this.kind === "multitap" ? 4.5 : 1) + 0.2,
+          this.delayHistorySeconds(),
           (this.param("Length", 1) * 60) / this.bpm + 0.2,
+          this.kind === "out" ? this.outDuration() + this.param("Spinback", 0) + .2 : 0,
         ),
     );
     this.ring = [new Float32Array(this.size), new Float32Array(this.size)];
@@ -441,11 +456,8 @@ export class ExtendedEffectKernel {
         this.captureLength,
         Math.floor(this.T * this.sr),
       );
-      this.recentRing = [
-        new Float32Array(this.size),
-        new Float32Array(this.size),
-      ];
     }
+    if (this.kind === "loop") this.recentRing = [new Float32Array(this.size), new Float32Array(this.size)];
     if (this.kind === "out" && this.variant.roll) {
       this.outCapture = [
         new Float32Array(Math.ceil(this.T * this.sr)),
@@ -480,6 +492,7 @@ export class ExtendedEffectKernel {
       params: { ...this.spec.params, ...spec.params },
     };
     this.setParams(spec.params || {});
+    this.syncObservedLoopParams();
     this.targetDepth =
       this.spec.on === false ? 0 : clamp(num(this.spec.depth, 50) / 100, 0, 1);
     this.T = clamp(
@@ -493,10 +506,9 @@ export class ExtendedEffectKernel {
     this.ensureHistory(
       Math.max(
         12,
-        this.T *
-          (this.kind === "multitap" ? 2.25 * this.param("Tap Spread", 1) : 1) +
-          0.2,
+        this.delayHistorySeconds(),
         (this.param("Length", 1) * 60) / this.bpm + 0.2,
+        this.kind === "out" ? this.outDuration() + this.param("Spinback", 0) + .2 : 0,
       ),
     );
     if (
@@ -571,6 +583,26 @@ export class ExtendedEffectKernel {
     if (explicit.has("HPF")) delete this.p["Low Cut"];
     else if (explicit.has("Low Cut")) this.p.HPF = this.p["Low Cut"];
   }
+  delayHistorySeconds() {
+    if (this.kind !== "multitap") return this.T + .2;
+    const pattern = MULTITAP_PATTERNS[this.p.Pattern] || MULTITAP_PATTERNS.Shreds,
+      spread = this.param("Tap Spread", 1);
+    return this.T * Math.max(pattern[0], pattern[1] * spread, pattern[2] * spread) + .2;
+  }
+  outDuration() {
+    const v = this.variant, p = this.p;
+    if (p.Duration !== undefined) return clamp(this.param("Duration", 2) * (v.short ? .25 : v.slow ? 2 : 1), .03, 30);
+    const factor = p["Stop Time"] !== undefined ? this.param("Stop Time", 1) / (p["Stop Curve"] !== undefined || v.combo ? 100 : 1) : v.roll ? 8 : 1;
+    return clamp(this.T * factor, .03, 30);
+  }
+  syncObservedLoopParams() {
+    if (this.kind !== "loop") return;
+    const legacy = this.spec.params || {};
+    if (legacy.Length === undefined) this.p.Length = this.variant.half || this.variant.stretch ? 1 : this.param("Range", 1);
+    if (legacy.Stretch === undefined && this.variant.stretch) this.p.Stretch = this.param("Range", 4);
+    if (legacy.Speed === undefined && this.variant.half) this.p.Speed = 1 / this.param("Range", 2);
+    if (legacy.Grain === undefined) this.p.Grain = this.param("Grains", 50);
+  }
   param(key, fallback) {
     return num(this.p[key], fallback);
   }
@@ -593,7 +625,7 @@ export class ExtendedEffectKernel {
     return this.read(this.ring, c, idx);
   }
   // Overlapping constant-speed grains decouple captured-source position from pitch.
-  grain(c, sourcePosition, pitch = 1, grainMs = 50) {
+  grain(c, sourcePosition, pitch = 1, grainMs = 50, captureEnd = null) {
     const g = Math.max(128, (this.sr * grainMs) / 1000),
       hop = g / 2;
     let y = 0,
@@ -610,7 +642,15 @@ export class ExtendedEffectKernel {
             ? this.param("Speed", 0.5)
             : 1 / this.param("Stretch", 3));
       if (this.period > 0) base = Math.round(base / this.period) * this.period;
-      y += this.captured(c, base + age * pitch) * env;
+      const index = base + age * pitch;
+      // Loops wrap their fragment. Exit grains read the finite absolute source
+      // extent, so material after the first beat remains reachable on rewind.
+      const sample = captureEnd === null
+        ? this.captured(c, index)
+        : index >= 0 && index < Math.min(this.n + 1, captureEnd)
+          ? this.read(this.ring, c, index)
+          : 0;
+      y += sample * env;
       w += env;
     }
     return w ? y / w : 0;
@@ -626,6 +666,14 @@ export class ExtendedEffectKernel {
       result += this.past(c, delay + ph * window, feedback) * weight;
     }
     return result;
+  }
+  ambience(signal) {
+    const amount = this.param("Ambience", 0) / 100;
+    return signal.map((z, c) => {
+      const tail = this.past(c, this.sr * (.071 + c * .023), true);
+      this.feedbackRing[c][this.n % this.size] = z + tail * amount * .65;
+      return z + tail * amount * .5;
+    });
   }
   estimatePeriod() {
     // Period alignment prevents opposite-phase overlap cancellation on tonal material.
@@ -686,7 +734,8 @@ export class ExtendedEffectKernel {
         d = this.depth;
       for (let c = 0; c < 2; c++) {
         const dryGain =
-          this.kind === "reverb" && this.p["Mix Mode"] === "Send" ? 1 : 1 - d;
+          this.kind === "reverb" && this.p["Mix Mode"] === "Send" ? 1 :
+          this.kind === "reverb" && this.p["Mix Mode"] === "Send+Mix" ? 1 - d * .5 : 1 - d;
         const y = x[c] * dryGain + wet[c] * d;
         (c ? outR : outL)[i] = Number.isFinite(y) ? clamp(y, -4, 4) : 0;
       }
@@ -718,15 +767,13 @@ export class ExtendedEffectKernel {
       for (let c = 0; c < 2; c++) {
         let z =
           this.kind === "spiralecho"
-            ? this.pitchDelay(c, T, 2 ** (this.param("Pitch", 4) / 12), true)
+            ? this.pitchDelay(c, T, 2 ** (this.param("Pitch", this.param("Speed", 33.333) * .12) / 12), true)
             : this.past(c, T, true);
-        if (this.kind === "multitap")
-          z =
-            (z +
-              this.past(c, T * 1.5 * this.param("Tap Spread", 1), true) * 0.65 +
-              this.past(c, T * 2.25 * this.param("Tap Spread", 1), true) *
-                0.4) /
-            1.5;
+        if (this.kind === "multitap") {
+          const pattern = MULTITAP_PATTERNS[p.Pattern] || MULTITAP_PATTERNS.Shreds, spread = this.param("Tap Spread", 1);
+          // A convex tap mix bounds the feedback path below unity at90%.
+          z = (this.past(c, T * pattern[0], true) + this.past(c, T * pattern[1] * spread, true) * .65 + this.past(c, T * pattern[2] * spread, true) * .4) / MULTITAP_WEIGHT_SUM;
+        }
         if (v.highpass || this.p.HPF !== undefined)
           z = this.filters[0][c].process(
             z,
@@ -743,7 +790,7 @@ export class ExtendedEffectKernel {
             sr,
             "bandpass",
           );
-        const cutoff = this.param("Tone", v.damp || 10000);
+        const cutoff = this.param("Tone", this.kind === "multitap" ? 18000 * .012 ** (this.param("Filter", 20) / 100) : v.damp || 10000);
         z = this.filters[1][c].process(z, cutoff, 0.707, sr);
         y[c] = z;
       }
@@ -763,6 +810,15 @@ export class ExtendedEffectKernel {
         const width = this.param("Width", 100) / 100,
           mid = (y[0] + y[1]) * 0.5;
         return y.map((z) => mid + (z - mid) * width);
+      }
+      if (this.kind === "spiralecho") {
+        for (let c = 0; c < 2; c++) {
+          const low = this.filters[4][c].process(x[c], this.param("Low Bypass", 20), .707, sr),
+            high = this.filters[5][c].process(x[c], this.param("High Bypass", 20000), .707, sr, "highpass");
+          // Bypass bands remain live; only the middle band enters the shifted return.
+          y[c] = this.filters[6][c].process(y[c], this.param("Low Bypass", 20), .707, sr, "highpass");
+          y[c] = this.filters[7][c].process(y[c], this.param("High Bypass", 20000), .707, sr) + low + high;
+        }
       }
       return y;
     }
@@ -825,14 +881,12 @@ export class ExtendedEffectKernel {
                   0.006 *
                   Math.sin(TAU * t * 0.7 + c * 0.4)),
           );
-        const drive = 1 + this.param("Drive", 50) / 8;
-        z = Math.tanh(z * drive) / Math.tanh(drive);
-        y[c] = this.filters[0][c].process(
-          z,
-          this.param("Tone", this.kind === "warmth" ? 5000 : 12000),
-          0.707,
-          sr,
-        );
+        z = saturate(z, this.param("Drive", 50), p.Type, this.param("Character", 50));
+        const tone = this.param("Tone", this.kind === "warmth" ? 5000 : 0);
+        if (Math.abs(tone) <= 24) {
+          const low = this.filters[0][c].process(z, 1000, .707, sr), high = z - low;
+          y[c] = low * 10 ** (-tone / 40) + high * 10 ** (tone / 40);
+        } else y[c] = this.filters[0][c].process(z, tone, .707, sr);
       }
       return y;
     }
@@ -867,7 +921,7 @@ export class ExtendedEffectKernel {
         single = slope % 12 >= 6;
       for (let c = 0; c < 2; c++) {
         let z = v.drive
-          ? Math.tanh(x[c] * (1 + this.param("Drive", 50) / 12))
+          ? saturate(x[c], this.param("Drive", 50), p.Type || "Light Sat.", 50)
           : x[c];
         for (let stage = 0; stage < pairs; stage++)
           z = this.filters[stage][c].process(
@@ -889,15 +943,15 @@ export class ExtendedEffectKernel {
     }
     if (this.kind === "infinityfilter") {
       for (let j = 0; j < 4; j++) {
-        const ph = (((phase * this.param("Direction", 1) + j / 4) % 1) + 1) % 1,
+        const ph = (((t * rate * this.param("Direction", 50) / 50 + j / 4) % 1) + 1) % 1,
           weight = Math.sin(Math.PI * ph) ** 2,
-          f = 80 * 160 ** ph;
+          f = this.param("Centre Freq.", 700) * 2 ** ((ph - .5) * 7), q = p.Type === "Wide" ? .5 : p.Type === "Narrow" ? 9 : 4;
         for (let c = 0; c < 2; c++)
           y[c] +=
             this.filters[j][c].process(
               x[c],
               f,
-              this.param("Resonance", 4),
+              this.param("Resonance", q),
               sr,
               "bandpass",
             ) *
@@ -908,11 +962,19 @@ export class ExtendedEffectKernel {
     }
     if (this.kind === "loop") {
       if (this.n < this.captureLength) return x;
+      const stretchRatio = v.half || v.stretch ? this.param("Range", v.half ? 2 : 4) : 1,
+        outputCycle = Math.max(1, Math.round(this.captureLength * stretchRatio));
+      if (p.Retrigger === "On" && this.n > this.captureLength && (this.n - this.captureLength) % outputCycle === 0) {
+        for (let c = 0; c < 2; c++) for (let j = 0; j < this.captureLength; j++) this.ring[c][j] = this.read(this.recentRing, c, this.n - this.captureLength + j);
+        this.capturePhaseStart = this.n;
+        this.period = undefined;
+      }
       if ((v.stretch || v.half) && this.period === undefined)
         this.period = this.estimatePeriod();
       const elapsed = this.n - (this.capturePhaseStart ?? this.captureLength),
         len = this.captureLength,
-        unit = v.roll || v.slip ? Math.min(len, T) : len;
+        unit = Math.max(32, (v.roll || v.slip ? Math.min(len, T) : Math.min(len, T * 2)) / this.param("Repeats", 1)),
+        shreds = clamp(this.param("Shreds", 0) / 100, 0, 1);
       for (let c = 0; c < 2; c++) {
         if (v.stretch || (v.half && this.param("Pitch Lock", 1) > 0)) {
           const speed = v.half
@@ -924,16 +986,19 @@ export class ExtendedEffectKernel {
             ? this.param("Speed", 0.5)
             : this.param("Speed", 1);
           let position = elapsed * speed;
-
-          y[c] = this.captured(c, position % unit, unit);
+          const shredUnit = unit / (1 + Math.floor(shreds * 15));
+          position = position % shredUnit;
+          y[c] = this.captured(c, position, shredUnit);
         }
         if (v.repeat && !v.stutter)
           y[c] *= 0.85 + 0.15 * Math.cos((TAU * (elapsed % unit)) / unit);
-        if (v.stutter) {
-          const gates = v.roll ? this.param("Pulses", 4) : 2,
+        if (v.stutter || shreds > 0) {
+          const gates = v.roll ? this.param("Pulses", 4) : 2 + Math.floor(shreds * 14),
             ph = ((elapsed / unit) * gates) % 1;
-          y[c] *= ph < this.param("Gate", 60) / 100 ? 1 : 0;
+          y[c] *= ph < this.param("Gate", 100 - shreds * 70) / 100 ? 1 : 0;
         }
+        const mix = clamp(this.param("Mix", 100) / 100, 0, 1);
+        y[c] = x[c] * (1 - mix) + y[c] * mix;
       }
       return y;
     }
@@ -958,14 +1023,15 @@ export class ExtendedEffectKernel {
           const count = v.infinity ? 3 : 2;
           for (let j = 0; j < count; j++) {
             let ph =
-              (((phase * (v.falling ? -1 : this.param("Direction", 1)) +
+              (((t * rate * (this.param("Direction", v.falling ? -50 : 50) / 50) +
                 j / count) %
                 1) +
                 1) %
               1;
             const weight = Math.sin(Math.PI * ph) ** 2;
             const delay =
-              sr * (0.0003 + (0.009 * ph * this.param("Mod Depth", 65)) / 100);
+              sr * ((1 / this.param("Centre Freq.", v.falling ? 212 : 800)) *
+                (p.Type === "Wide" ? 4 : p.Type === "Narrow" ? .5 : 2) * (.1 + ph) * this.param("Mod Depth", 65) / 65);
             y[c] += (this.past(c, delay, true) * weight * 2) / count;
           }
         } else {
@@ -1008,12 +1074,14 @@ export class ExtendedEffectKernel {
       return y;
     }
     if (this.kind === "spiral") {
-      const semitones = this.param("Pitch", 12) * (0.25 + 0.75 * phase),
+      const semitones = this.param("Pitch", this.param("Slide Rate", 50) * .24) * (0.25 + 0.75 * phase),
         ratio = 2 ** (semitones / 12);
-      for (let c = 0; c < 2; c++)
-        y[c] =
-          this.pitchDelay(c, sr * 0.01, ratio) *
-          (v.pulse ? (phase < this.param("Gate", 60) / 100 ? 1 : 0) : 1);
+      for (let c = 0; c < 2; c++) {
+        const shifted = this.pitchDelay(c, sr * .01, ratio, true),
+          filtered = this.filters[0][c].process(shifted, 18000 * .012 ** (this.param("Filter", 0) / 100), .707, sr);
+        y[c] = filtered * (v.pulse ? (phase < this.param("Gate", 60) / 100 ? 1 : 0) : 1);
+        this.feedbackRing[c][this.n % this.size] = x[c] + filtered * fb;
+      }
       return y;
     }
     if (["gate", "tremolo", "pan"].includes(this.kind)) {
@@ -1040,78 +1108,60 @@ export class ExtendedEffectKernel {
       return y;
     }
     if (this.kind === "out") {
-      const duration =
-          this.param("Duration", 2) * (v.short ? 0.25 : v.slow ? 2 : 1),
+      const legacy = this.p.Duration !== undefined,
+        duration = this.outDuration(),
         progress = clamp(t / duration, 0, 1),
-        curve = this.param("Curve", 1),
-        envelope = (1 - progress) ** curve;
-      const cap = Math.max(32, Math.floor(T)),
-        cutoff = this.n < cap;
+        exponent = legacy ? Math.max(.1, this.param("Curve", 1)) : 2 ** this.param("Stop Curve", this.param("Curve", 0)),
+        envelope = (1 - progress) ** exponent,
+        cap = Math.max(32, Math.floor(T)), cutoff = this.n < cap,
+        spin = this.param("Spinback", 0),
+        spinProgress = clamp((t - duration) / Math.max(.001, spin), 0, 1),
+        spinEnvelope = t >= duration && spin > 0 ? Math.min(1, (t - duration) / .01) * (1 - spinProgress) ** .5 : 0;
       for (let c = 0; c < 2; c++) {
         let z = x[c];
-        if (v.brake) {
-          let read = sr * (t - (t * t) / (2 * duration));
-          if (v.vinyl) read = ((sr * duration) / 3) * (1 - (1 - progress) ** 3);
-          if (v.rewind && progress > 0.5)
-            read = sr * duration * 0.375 - (t - duration * 0.5) * sr * 0.75;
-          z = this.read(this.ring, c, Math.max(0, read)) * envelope;
-        }
-        if (v.stretch) {
-          const read =
-            t < duration * 0.5
-              ? this.n * 0.5
-              : duration * sr * 0.25 - (this.n - duration * sr * 0.5) * 0.5;
-          z =
-            this.grain(c, Math.max(0, read), t < duration * 0.5 ? 1 : -1, 80) *
-            envelope;
+        if (v.brake || v.stretch) {
+          let read = sr * duration / (exponent + 1) * (1 - (1 - progress) ** (exponent + 1));
+          // Integrating the slowdown curve keeps source position continuous.
+          const stretch = p.Mode ? p.Mode === "Stretch" : v.stretch;
+          if (legacy) {
+            read = sr * (t - t * t / (2 * duration));
+            if (v.vinyl) read = sr * duration / 3 * (1 - (1 - progress) ** 3);
+            if (v.rewind && progress > .5) read = sr * duration * .375 - (t - duration * .5) * sr * .75;
+          }
+          if (!legacy && t >= duration && spin > 0) read *= 1 - spinProgress;
+          const gain = spinEnvelope > 0 ? spinEnvelope : envelope,
+            captureEnd = sr * duration / (legacy ? 1 : exponent + 1);
+          z = (stretch ? this.grain(c, Math.max(0, read), spinEnvelope > 0 ? -1 : 1, 80, captureEnd) : this.read(this.ring, c, Math.max(0, read))) * gain;
+          const mix = clamp(this.param("Mix", 100) / 100, 0, 1);
+          z = x[c] * (1 - mix) + z * mix;
         }
         if (v.roll) {
-          let read = this.n;
-          if (v.accelerate) read = this.n * (1 + progress * 4);
-          if (v.slow) read = duration * sr * Math.log1p(t / duration);
-          const length = this.outCaptureLength;
-          const position = ((read % length) + length) % length,
-            index = Math.floor(position),
-            frac = position - index;
-          z =
-            (this.outCapture[c][index] * (1 - frac) +
-              this.outCapture[c][(index + 1) % length] * frac) *
-            envelope;
+          const roll = this.param("Roll", 1),
+            read = v.accelerate ? this.n * (1 + progress * roll) : v.slow ? duration * sr / roll * Math.log1p(t * roll / duration) : this.n * roll,
+            length = this.outCaptureLength,
+            position = ((read % length) + length) % length, index = Math.floor(position), frac = position - index;
+          z = (this.outCapture[c][index] * (1 - frac) + this.outCapture[c][(index + 1) % length] * frac) * envelope;
+          const echo = this.past(c, T, true), amount = this.param("Echo/Feedback", 0) / 100;
+          this.feedbackRing[c][this.n % this.size] = z + echo * amount;
+          z = this.filters[0][c].process(z + echo * amount, 18000 * .012 ** (this.param("Filter", 0) / 100), .707, sr);
         }
         if (v.echo) {
           const tail = this.past(c, T, true);
           let feed = v.brake ? z : cutoff ? x[c] : 0;
           if (v.combo) {
-            feed = x[c] * envelope;
-            z = this.filters[0][c].process(
-              tail,
-              200 + progress * 6000,
-              0.707,
-              sr,
-              "highpass",
-            );
+            feed = saturate(x[c] * envelope, this.param("Drive", 25));
+            z = this.filters[0][c].process(tail, 200 + progress * 6000, .707, sr, "highpass");
           } else z = tail;
-          if (this.p["Echo Level"] !== undefined)
-            z =
-              (this.filters[3][c].process(
-                z,
-                18000 * 0.012 ** (this.param("Filter", 0) / 100),
-                0.707,
-                sr,
-              ) *
-                this.param("Echo Level", 70)) /
-              100;
-          const saturated = v.clean
-            ? feed + tail * fb
-            : Math.tanh((feed + tail * fb) * 1.2) / 1.2;
-          this.feedbackRing[c][this.n % this.size] = saturated;
+          if (p["Echo Level"] !== undefined) z = this.filters[3][c].process(z, 18000 * .012 ** (this.param("Filter", 0) / 100), .707, sr) * this.param("Echo Level", 70) / 100;
+          this.feedbackRing[c][this.n % this.size] = v.clean ? feed + tail * fb : Math.tanh((feed + tail * fb) * 1.2) / 1.2;
         }
         y[c] = z;
       }
       return y;
     }
     if (this.kind === "reverb") {
-      const decay = this.param("Decay", v.decay || 3),
+      const percentageDecay = ["Vast Reverb", "Vast Verb Drop", "Epic Reverb Drop"].includes(this.name),
+        decay = percentageDecay ? .15 * 2 ** (clamp(this.param("Decay", 85), 0, 100) / 12) : this.param("Decay", v.decay || 3),
         tone = this.param(
           "Tone",
           (v.tone || 6000) * 2 ** (this.param("Contour", 0) / 25),
@@ -1138,7 +1188,12 @@ export class ExtendedEffectKernel {
         right += this.past(1, sr * 0.18) * 0.3 + this.past(1, sr * 0.31) * 0.2;
       }
       const mid = (left + right) * 0.5;
-      return [mid + (left - mid) * width, mid + (right - mid) * width];
+      const result = [mid + (left - mid) * width, mid + (right - mid) * width];
+      if (p["Drop Range"] !== undefined) for (let c = 0; c < 2; c++) {
+        this.feedbackRing[c][this.n % this.size] = result[c];
+        result[c] = this.pitchDelay(c, 1, 2 ** (-this.param("Drop Range", 24) * clamp(t / 2, 0, 1) / 12), true);
+      }
+      return result;
     }
     if (this.kind === "tone") {
       const env = Math.min(1, Math.abs(x[0]) + Math.abs(x[1]));
@@ -1146,19 +1201,21 @@ export class ExtendedEffectKernel {
       let z = 0;
       for (let j = 0; j < 6; j++) {
         const ph =
-            (((t * rate * this.param("Direction", 1) + j / 6) % 1) + 1) % 1,
-          f = this.param("Frequency", 110) * 2 ** (ph * 6);
+            (((t * rate * this.param("Direction", 50) / 50 + j / 6) % 1) + 1) % 1,
+          f = this.param("Frequency", 55 * 2 ** (this.param("Timbre", 50) / 50)) * 2 ** (ph * 6);
         this.phases[j] = (this.phases[j] + (TAU * f) / sr) % TAU;
         z += (Math.sin(this.phases[j]) * Math.sin(Math.PI * ph) ** 2) / 3;
       }
-      return [z * this.low[0], z * this.low[0]];
+      return this.ambience([z * this.low[0], z * this.low[0]]);
     }
     if (this.kind === "invader") {
       const steps = this.param("Steps", 4),
-        step = Math.floor(phase * steps),
-        carrier = this.param("Frequency", 220) * 2 ** (step / steps);
+        motion = this.p.Frequency !== undefined ? phase : (((t * rate * this.param("Direction", -100) / 100) % 1) + 1) % 1,
+        step = Math.floor(motion * steps),
+        carrier = this.param("Frequency", 220 * 2 ** (this.param("Timbre", 0) / 25)) * 2 ** (step / steps);
       this.phases[0] = (this.phases[0] + (TAU * carrier) / sr) % TAU;
-      return x.map((z) => z * Math.sin(this.phases[0]));
+      const result = x.map((z) => z * Math.sin(this.phases[0]));
+      return this.p.Frequency !== undefined ? result : this.ambience(result);
     }
     if (this.kind === "noise") {
       this.seed = (1664525 * this.seed + 1013904223) >>> 0;

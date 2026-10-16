@@ -357,6 +357,63 @@ document.querySelector("#run").onclick = async () => {
         position: engine.position(d),
       },
     );
+    engine.pause(d);
+    Object.assign(d, {
+      position: 1,
+      loop: false,
+      reverse: false,
+      keylock: false,
+      keyShift: 0,
+      rate: 1,
+      stems: [true, false, false, false],
+      stemFX: [false, false, false, false],
+    });
+    await engine.start(d);
+    await wait(600);
+    d.stemFX[0] = true;
+    engine.updateStems(d);
+    await wait(200);
+    const checkTail = (name) => {
+      const measured = dominant(), rms = sampleRms();
+      report(name, Math.abs(measured.frequency - 1370) < 12 && rms > 1e-5,
+        { ...measured, rms, position: engine.position(d) });
+    };
+    // This position plays the1370Hz prefix. Captured exit pitch stays fixed while
+    // the muted live source is re-rendered, sought or reversed underneath it.
+    await engine.setPitch(d, { keylock: true, semitones: 1 });
+    await wait(200);
+    checkTail("Active Stems echo continues original captured pitch across Key Lock preparation");
+    await engine.setRate(d, 1.1);
+    await wait(200);
+    checkTail("Active Stems echo continues across pitch-preserving tempo replacement");
+    await engine.seek(d, 4);
+    await wait(200);
+    checkTail("Active Stems echo continues across seek without recapturing new audio");
+    await engine.setReverse(d, true);
+    await wait(200);
+    checkTail("Active Stems echo continues across reverse transport replacement");
+    await engine.seek(d, 0.12);
+    await wait(300);
+    checkTail("Captured exit survives actual natural reverse-source end");
+    report("Natural reverse end stops the deck while its finite captured exit remains audible",
+      !d.playing && engine.position(d) === 0 && sampleRms() > 1e-5,
+      { playing: d.playing, position: engine.position(d), rms: sampleRms() });
+    engine.pause(d);
+    await wait(200);
+    report("Explicit pause clears captured exit even when no deck voice remains",
+      sampleRms() < 1e-4, { rms: sampleRms(), voices: engine.voices.size });
+    Object.assign(d, {
+      position: 1, rate: 1, keylock: false, keyShift: 0, reverse: false,
+      stemFX: [false, false, false, false],
+    });
+    engine.updateStems(d);
+    await engine.start(d);
+    await wait(400);
+    d.stemFX[0] = true;
+    engine.updateStems(d);
+    await wait(200);
+    report("Emergency-stop fixture has an active audible Stems exit",
+      sampleRms() > 1e-4, { rms: sampleRms() });
     engine.silence();
     await wait(250);
     level = sampleRms();

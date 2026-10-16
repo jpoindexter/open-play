@@ -1,3 +1,4 @@
+import { createStemPreparation } from "./stems.js";
 import { createPitchPlay, pitchRanges, parseMusicalKey, shiftedKey, keyLabel, planKeySync } from "./pitchplay.js";
 import { analyzeBuffer } from "./analysis.js";
 import { createSlicer } from "./slicer.js";
@@ -128,6 +129,8 @@ const state = {
   link: { joined: false, tempo: 124, peers: 0 },
   sessionSaved: false,
 };
+
+const stemPreparation = createStemPreparation(engine, state.decks);
 if (saved.tags)
   for (const t of state.tracks) Object.assign(t, saved.tags[t.id] || {});
 const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
@@ -216,7 +219,7 @@ function filtered() {
   if (state.crate === "prepare")
     a = a.filter((t) => state.prepare.includes(t.id));
   else if (state.crate === "stems")
-    a = a.filter((t) => engine.stemBuffers.has(t.id));
+    a = a.filter((t) => engine.stemBuffers.has(t.id) || stemPreparation.active.has(t.id));
   else if (state.crate === "history")
     a = a.filter((t) => state.history.some((h) => h.id === t.id));
   else {
@@ -343,7 +346,7 @@ function padMarkup(d) {
   return labels
     .map(
       (label, i) =>
-        `<button class="pad ${d.tab === "Cues" && t?.cues[i] ? "set" : ""} ${d.tab === "Stems" && (i < 4 ? d.stems[i] : d.stemFX?.[i - 4]) ? "active" : ""}" data-deck="${d.index}" data-action="pad" data-pad="${i}" style="--pad:${d.tab === "Pitch" && pitchRanges[d.pitchRangeMode || "Middle"][i] === 0 ? "#ffffff" : colors[i]}" title="${d.tab === "Cues" ? "Click set/trigger; Shift-click delete; right-click edit" : "Audio performance control"}">${esc(label)}<small>${d.tab === "Cues" && t?.cues[i] ? time(t.cues[i].position) : d.tab === "Stems" ? (engine.stemBuffers.has(t?.id) ? "AUDIO" : "PREPARE FIRST") : d.tab === "Pitch" ? `CUE ${(d.pitchCue || 0) + 1}` : i + 1}</small></button>`,
+        `<button class="pad ${d.tab === "Cues" && t?.cues[i] ? "set" : ""} ${d.tab === "Stems" && (i < 4 ? d.stems[i] : d.stemFX?.[i - 4]) ? "active" : ""}" data-deck="${d.index}" data-action="pad" data-pad="${i}" style="--pad:${d.tab === "Pitch" && pitchRanges[d.pitchRangeMode || "Middle"][i] === 0 ? "#ffffff" : colors[i]}" title="${d.tab === "Cues" ? "Click set/trigger; Shift-click delete; right-click edit" : "Audio performance control"}">${esc(label)}<small>${d.tab === "Cues" && t?.cues[i] ? time(t.cues[i].position) : d.tab === "Stems" ? (engine.stemBuffers.has(t?.id) ? "AUDIO" : stemPreparation.active.has(t?.id) ? "PREPARING" : "ANALYZE") : d.tab === "Pitch" ? `CUE ${(d.pitchCue || 0) + 1}` : i + 1}</small></button>`,
     )
     .join("");
 }
@@ -355,7 +358,7 @@ function renderDecks() {
       const t = d.track;
       if (d.keySync && d.keySyncTag !== t?.key) d.keySync = false;
       const displayedKey = parseMusicalKey(t?.key) ? keyLabel(shiftedKey(parseMusicalKey(t.key), d.keyShift || 0)) : t?.key || "—";
-      return `<article class="deck ${state.focus === d.index ? "focused" : ""}" style="--accent:${colors[d.index]}" data-drop-deck="${d.index}" data-focus="${d.index}"><div class="deck-head"><span class="deck-number">${d.index + 1}</span><div class="deck-title"><strong>${esc(t?.title || "Drag song here")}</strong><small>${esc(t?.artist || "Select a library track and Load")}${t ? " · " + time(t.duration) : ""}</small></div><span class="deck-key">${esc(displayedKey)}${d.keyShift ? ` (${d.keyShift > 0 ? "+" : ""}${d.keyShift})` : ""}</span><button data-action="load" data-deck="${d.index}">Load</button><button data-action="eject" data-deck="${d.index}" aria-label="Eject deck ${d.index + 1}">⏏</button></div><div class="deck-body"><div><nav class="deck-tabs" aria-label="Deck ${d.index + 1} performance modes">${["Cues", "Loops", "Stems", "Pitch", "Slicer"].map((tab) => `<button data-action="tab" data-deck="${d.index}" data-tab="${tab}" class="${d.tab === tab ? "active" : ""}">${tab}</button>`).join("")}</nav><div class="pads">${padMarkup(d)}</div>${d.tab === "Pitch" ? `<div class="loop-line"><label>Pitch range<select data-pitch-range="${d.index}" aria-label="Deck ${d.index + 1} Pitch Play range">${["Down", "Middle", "Up"].map(range => `<option ${range === (d.pitchRangeMode || "Middle") ? "selected" : ""}>${range}</option>`).join("")}</select></label><small>Shift-pad selects cue · hold to audition</small></div>` : ""}${d.tab === "Slicer" ? `<div class="loop-line"><label>Domain<select data-slice-domain="${d.index}" aria-label="Deck ${d.index + 1} slicer domain">${[2, 4, 8, 16, 32, 64].map((v) => `<option ${v === (d.slicerDomain || 8) ? "selected" : ""}>${v}</option>`).join("")}</select></label><label>Quantize<select data-slice-quant="${d.index}" aria-label="Deck ${d.index + 1} slice quantize">${[0.125, 0.25, 0.5, 1].map((v) => `<option ${v === (d.sliceQuant || 1) ? "selected" : ""}>${v}</option>`).join("")}</select></label><button data-action="slicerLoop" data-deck="${d.index}" class="${d.slicerLoop ? "active" : ""}">Slicer loop</button></div>` : ""}<div class="loop-line"><button data-action="loopHalf" data-deck="${d.index}">½</button><button data-action="loop" data-deck="${d.index}" class="${d.loop ? "active" : ""}">Loop ${d.loopLength}</button><button data-action="loopDouble" data-deck="${d.index}">×2</button><button data-action="loopIn" data-deck="${d.index}">IN</button><button data-action="loopOut" data-deck="${d.index}">OUT</button><button data-action="loopSave" data-deck="${d.index}">Save</button></div><div class="loop-line"><button data-action="jumpBack" data-deck="${d.index}">← ${d.loopLength}</button><button data-action="roll" data-deck="${d.index}">Hold roll</button><button data-action="jumpForward" data-deck="${d.index}">${d.loopLength} →</button><button data-action="grid" data-deck="${d.index}">Edit grid</button></div></div><div class="deck-disc"><div class="transport"><button data-action="sync" data-deck="${d.index}" class="${d.sync ? "active" : ""}">SYNC</button><button data-action="cue" data-deck="${d.index}" title="Temporary cue">▮◀</button><button data-action="play" data-deck="${d.index}" aria-label="Play or pause deck ${d.index + 1}" class="${d.playing ? "active" : ""}">${d.playing ? "❚❚" : "▶"}</button></div><div class="platter" id="platter-${d.index}"><strong>${t?.bpm ? (t.bpm * d.rate).toFixed(1) : "—"}</strong><small>BPM · ${((d.rate - 1) * 100).toFixed(1)}%</small><time id="time-${d.index}">${time(engine.position(d))}</time><small id="remain-${d.index}">−${time((t?.duration || 0) - engine.position(d))}</small></div></div><label class="tempo-control" title="Tempo; enable key lock to preserve pitch">±${d.pitchRange}%<input type="range" min="${-d.pitchRange}" max="${d.pitchRange}" step=".1" value="${(d.rate - 1) * 100}" data-tempo="${d.index}" aria-label="Deck ${d.index + 1} tempo"></label></div><div class="deck-foot"><select data-mode="${d.index}" aria-label="Deck ${d.index + 1} mode">${["INT", "REL", "ABS", "THRU", "WIR"].map((m) => `<option ${d.mode === m ? "selected" : ""}>${m}</option>`).join("")}</select>${[
+      return `<article class="deck ${state.focus === d.index ? "focused" : ""}" style="--accent:${colors[d.index]}" data-drop-deck="${d.index}" data-focus="${d.index}"><div class="deck-head"><span class="deck-number">${d.index + 1}</span><div class="deck-title"><strong>${esc(t?.title || "Drag song here")}</strong><small>${esc(t?.artist || "Select a library track and Load")}${t ? " · " + time(t.duration) : ""}</small></div><span class="deck-key">${esc(displayedKey)}${d.keyShift ? ` (${d.keyShift > 0 ? "+" : ""}${d.keyShift})` : ""}</span><button data-action="load" data-deck="${d.index}">Load</button><button data-action="eject" data-deck="${d.index}" aria-label="Eject deck ${d.index + 1}">⏏</button></div><div class="deck-body"><div><nav class="deck-tabs" aria-label="Deck ${d.index + 1} performance modes">${["Cues", "Loops", "Stems", "Pitch", "Slicer"].map((tab) => `<button data-action="tab" data-deck="${d.index}" data-tab="${tab}" class="${d.tab === tab ? "active" : ""}">${tab}</button>`).join("")}</nav><div class="pads">${padMarkup(d)}</div>${d.tab === "Stems" ? `<div class="loop-line"><button data-action="stemPrepare" data-deck="${d.index}">Preparation</button><small role="status" data-stem-status="${d.index}">${esc(t?.stemState || "Stems will prepare locally on first use.")}</small></div>` : ""}${d.tab === "Pitch" ? `<div class="loop-line"><label>Pitch range<select data-pitch-range="${d.index}" aria-label="Deck ${d.index + 1} Pitch Play range">${["Down", "Middle", "Up"].map(range => `<option ${range === (d.pitchRangeMode || "Middle") ? "selected" : ""}>${range}</option>`).join("")}</select></label><small>Shift-pad selects cue · hold to audition</small></div>` : ""}${d.tab === "Slicer" ? `<div class="loop-line"><label>Domain<select data-slice-domain="${d.index}" aria-label="Deck ${d.index + 1} slicer domain">${[2, 4, 8, 16, 32, 64].map((v) => `<option ${v === (d.slicerDomain || 8) ? "selected" : ""}>${v}</option>`).join("")}</select></label><label>Quantize<select data-slice-quant="${d.index}" aria-label="Deck ${d.index + 1} slice quantize">${[0.125, 0.25, 0.5, 1].map((v) => `<option ${v === (d.sliceQuant || 1) ? "selected" : ""}>${v}</option>`).join("")}</select></label><button data-action="slicerLoop" data-deck="${d.index}" class="${d.slicerLoop ? "active" : ""}">Slicer loop</button></div>` : ""}<div class="loop-line"><button data-action="loopHalf" data-deck="${d.index}">½</button><button data-action="loop" data-deck="${d.index}" class="${d.loop ? "active" : ""}">Loop ${d.loopLength}</button><button data-action="loopDouble" data-deck="${d.index}">×2</button><button data-action="loopIn" data-deck="${d.index}">IN</button><button data-action="loopOut" data-deck="${d.index}">OUT</button><button data-action="loopSave" data-deck="${d.index}">Save</button></div><div class="loop-line"><button data-action="jumpBack" data-deck="${d.index}">← ${d.loopLength}</button><button data-action="roll" data-deck="${d.index}">Hold roll</button><button data-action="jumpForward" data-deck="${d.index}">${d.loopLength} →</button><button data-action="grid" data-deck="${d.index}">Edit grid</button></div></div><div class="deck-disc"><div class="transport"><button data-action="sync" data-deck="${d.index}" class="${d.sync ? "active" : ""}">SYNC</button><button data-action="cue" data-deck="${d.index}" title="Temporary cue">▮◀</button><button data-action="play" data-deck="${d.index}" aria-label="Play or pause deck ${d.index + 1}" class="${d.playing ? "active" : ""}">${d.playing ? "❚❚" : "▶"}</button></div><div class="platter" id="platter-${d.index}"><strong>${t?.bpm ? (t.bpm * d.rate).toFixed(1) : "—"}</strong><small>BPM · ${((d.rate - 1) * 100).toFixed(1)}%</small><time id="time-${d.index}">${time(engine.position(d))}</time><small id="remain-${d.index}">−${time((t?.duration || 0) - engine.position(d))}</small></div></div><label class="tempo-control" title="Tempo; enable key lock to preserve pitch">±${d.pitchRange}%<input type="range" min="${-d.pitchRange}" max="${d.pitchRange}" step=".1" value="${(d.rate - 1) * 100}" data-tempo="${d.index}" aria-label="Deck ${d.index + 1} tempo"></label></div><div class="deck-foot"><select data-mode="${d.index}" aria-label="Deck ${d.index + 1} mode">${["INT", "REL", "ABS", "THRU", "WIR"].map((m) => `<option ${d.mode === m ? "selected" : ""}>${m}</option>`).join("")}</select>${[
         ["keylock", "Key lock"],
         ["slip", "Slip"],
         ["reverse", "Reverse"],
@@ -498,6 +501,18 @@ function renderMixer() {
       .join("") +
     `<label class="crossfader">A — CROSSFADER — B<input id="crossfader" type="range" min="-1" max="1" step=".01" value="${engine.cross}" aria-label="Crossfader"></label>`;
 }
+async function ensurePreparedStems(track) {
+  if (engine.stemBuffers.has(track.id)) return;
+  try {
+    await stemPreparation.prepare(track, () => {
+      renderDecks();
+      renderTracks();
+    }, stemPreparation.active.get(track.id)?.backend || "scnet");
+  } finally {
+    renderDecks();
+    renderTracks();
+  }
+}
 async function load(index, id = state.selected, options = {}) {
   const d = state.decks[index],
     t = trackById(id);
@@ -542,6 +557,8 @@ async function load(index, id = state.selected, options = {}) {
   try {
     await engine.buffer(t);
     if (!t.analyzed && !t.provider && !t.missing) void enqueueAnalysis([t]);
+    if (state.settings["Analyze Stems"] && !t.provider && !t.missing)
+      void ensurePreparedStems(t).catch(error => notify(error.message));
     drawWaves();
   } catch (e) {
     notify(e.message);
@@ -606,6 +623,11 @@ async function deckAction(action, index, el, event = {}) {
   const pos = engine.position(d),
     beat = 60 / (d.track.bpm || 120);
   if (action === "play") return play(d);
+  if (action === "stemPrepare") {
+    state.selected = d.track.id;
+    panels.open("stems");
+    return;
+  }
   if (action === "slicerLoop") return slicer.domainLoop(d, !d.slicerLoop);
   if (action === "pad") {
     const n = Number(el.dataset.pad);
@@ -639,8 +661,12 @@ async function deckAction(action, index, el, event = {}) {
         persist();
       }
     } else if (d.tab === "Stems") {
-      if (!engine.stemBuffers.has(d.track.id))
-        return notify("Prepare this track in Stems preparation first.");
+      const requestedTrack = d.track;
+      if (!engine.stemBuffers.has(requestedTrack.id)) {
+        notify("Preparing Stems locally; the requested control will apply when ready.");
+        await ensurePreparedStems(requestedTrack);
+        if (d.track !== requestedTrack) return;
+      }
       if (n < 4) d.stems[n] = !d.stems[n];
       else d.stemFX[n - 4] = !d.stemFX[n - 4];
       engine.updateStems(d);
@@ -1028,6 +1054,8 @@ const api = {
   analyze,
   enqueueAnalysis,
   cancelAnalysis,
+  stemPreparation,
+  ensurePreparedStems,
   analysisFieldHint,
 };
 const flipAutomation = createFlipAutomation({
@@ -1262,19 +1290,30 @@ document.addEventListener("pointerup", (e) => {
 });
 document.addEventListener("dragstart", (e) => {
   const t = e.target.closest("[data-track]");
-  if (t) e.dataTransfer.setData("text/plain", t.dataset.track);
+  if (t) {
+    e.dataTransfer.setData("text/plain", t.dataset.track);
+    e.dataTransfer.effectAllowed = "copyMove";
+  }
   const c = e.target.closest("[data-crate]");
-  if (c)
+  if (c) {
     e.dataTransfer.setData("application/x-openplay-crate", c.dataset.crate);
+    e.dataTransfer.effectAllowed = "move";
+  }
 });
-document.addEventListener("dragover", (e) => {
+function allowLibraryDrop(e) {
   if (
     e.target.closest(
       "[data-drop-deck],[data-crate],#tracks,[data-sample-drop],[data-scratch-drop]",
     )
-  )
+  ) {
     e.preventDefault();
-});
+    e.dataTransfer.dropEffect = [...e.dataTransfer.types].includes("application/x-openplay-crate") ? "move" : "copy";
+  }
+}
+// Accept as soon as a pointer enters, including a fast release before the next
+// throttled dragover event.
+document.addEventListener("dragenter", allowLibraryDrop);
+document.addEventListener("dragover", allowLibraryDrop);
 document.addEventListener("drop", (e) => {
   const deck = e.target.closest("[data-drop-deck]"),
     crate = e.target.closest("[data-crate]");
@@ -1298,6 +1337,11 @@ document.addEventListener("drop", (e) => {
     const id = e.dataTransfer.getData("text/plain");
     if (deck) load(Number(deck.dataset.dropDeck), id);
     if (crate) {
+      if (crate.dataset.crate === "stems" && trackById(id)) {
+        void ensurePreparedStems(trackById(id)).catch(error => notify(error.message));
+        renderTracks();
+        return;
+      }
       const c = state.crates.find((c) => c.id === crate.dataset.crate);
       if (c && !c.smart && trackById(id)) {
         if (!c.tracks.includes(id)) c.tracks.push(id);
@@ -1557,3 +1601,11 @@ engine.onProcessing = (d) => {
 };
 
 engine.onError = (error) => notify(error.message);
+
+// Static HTML must not accept changes before its event handlers are installed.
+// Otherwise a fast first interaction changes a select without updating app state.
+document.querySelectorAll("[data-startup-inert]").forEach(element => {
+  element.inert = false;
+  element.removeAttribute("data-startup-inert");
+});
+document.body.dataset.ready = "true";

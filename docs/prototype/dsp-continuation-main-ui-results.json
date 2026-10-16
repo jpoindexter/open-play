@@ -1,0 +1,14 @@
+{
+  "date": "2026-10-16",
+  "scope": "Public main-interface interactions after reloading the final DSP runtime; browser UI evidence only.",
+  "observations": [
+    {"action": "Reload prototype", "observed": "body data-ready=true, zero decks playing"},
+    {"action": "Select Library layout", "observed": "body class layout-Library"},
+    {"action": "Return to Vertical and open FX", "observed": "FX panel exposes59 named DJ processors"},
+    {"action": "Select Multi Tap Delay; open advanced parameters; chooseEven and enterFeedback60; Save; reopen", "observed": "Screenshot shows PatternEven,Feedback60,Filter20,BeatModify1"}
+  ],
+  "screenshot": "dsp-continuation-main-ui.png",
+  "screenshotViewport": {"width":1512,"height":982},
+  "playbackAtEnd": "Both decks paused",
+  "limitations": "Does not prove reference visual equivalence, sound matching, full persistence across page reload, physical routing or all advanced controls. Audio behavior is tested separately in the Worklet artifacts. Temporary viewport override was reset."
+}

@@ -1,0 +1,89 @@
+{
+  "date": "2026-10-16T15:20:26.865Z",
+  "path": "Main interface: reload; Deck1 Stems; click Vocal before preparation",
+  "status": "Ready · SCNet-large official · four real audio sources",
+  "pads": [
+    {
+      "active": false,
+      "label": "VocalAUDIO"
+    },
+    {
+      "active": true,
+      "label": "MelodyAUDIO"
+    },
+    {
+      "active": true,
+      "label": "BassAUDIO"
+    },
+    {
+      "active": true,
+      "label": "DrumsAUDIO"
+    },
+    {
+      "active": false,
+      "label": "Vocal echoAUDIO"
+    },
+    {
+      "active": false,
+      "label": "Instrumental echoAUDIO"
+    },
+    {
+      "active": false,
+      "label": "Instrumental brakerAUDIO"
+    },
+    {
+      "active": false,
+      "label": "Drum echoAUDIO"
+    }
+  ],
+  "scope": "Actual SCNet service result reuse and four WAV decode/activation; no physical pad or quality-equivalence claim.",
+  "onLoad": {
+    "path": "Setup > DJ Preferences > Analyze Stems checked; select Glass Transit; Load deck1; open Stems without triggering any pad",
+    "status": "Ready · SCNet-large official · four real audio sources",
+    "scope": "Fresh SCNet local inference queued and reached Ready; four sources decoded and activated through main UI."
+  },
+  "cancelAndRetry": {
+    "path": "Copper Steps first Vocal action; cancel automatic job; retry Vocal plus Bass while preparing; wait for ready",
+    "status": "Ready · SCNet-large official · four real audio sources",
+    "pads": [
+      {
+        "active": false,
+        "label": "VocalAUDIO"
+      },
+      {
+        "active": true,
+        "label": "MelodyAUDIO"
+      },
+      {
+        "active": false,
+        "label": "BassAUDIO"
+      },
+      {
+        "active": true,
+        "label": "DrumsAUDIO"
+      },
+      {
+        "active": false,
+        "label": "Vocal echoAUDIO"
+      },
+      {
+        "active": false,
+        "label": "Instrumental echoAUDIO"
+      },
+      {
+        "active": false,
+        "label": "Instrumental brakerAUDIO"
+      },
+      {
+        "active": false,
+        "label": "Drum echoAUDIO"
+      }
+    ],
+    "scope": "Real service retry and both pending actions applied. Exact one-POST sharing is separately verified by mocked-network adapter tests."
+  },
+  "liveDialogCancellation": {
+    "path": "Fresh prototype view: Last Light Vocal triggers preparation; open Preparation during active job; Cancel preparation",
+    "status": "Cancelled · original audio preserved",
+    "scope": "Actual cancellation request and subscribed dialog feedback, original mix preserved; no physical mapping claim."
+  }
+}

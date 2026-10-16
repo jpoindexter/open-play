@@ -152,7 +152,7 @@ export class AudioEngine {
     }
     return Math.max(0, Math.min(d.track?.duration || 48, p));
   }
-  stopSource(i) {
+  stopSource(i, { preserveStemExit = false } = {}) {
     const source = this.voices.get(i);
     if (source) {
       for (const item of source.sources || [source]) {
@@ -163,12 +163,6 @@ export class AudioEngine {
         item.disconnect();
       }
       const state = this.stemStates.get(i);
-      if (state)
-        state.effects.forEach((effect, index) => {
-          effect?.dispose();
-          state.effects[index] = null;
-          state.generations[index]++;
-        });
       for (const history of state?.histories || []) {
         // Detach only the voice gain; the zero-gain sink keeps recording silence.
         const gain = source.stemGains?.[state.histories.indexOf(history) + 1];
@@ -176,6 +170,17 @@ export class AudioEngine {
       }
       for (const gain of source.stemGains || []) gain.disconnect();
       this.voices.delete(i);
+    }
+    // Captured exits have their own finite source and deck bus. Replacing the
+    // transport must not cut them; explicit stop must also clear orphan tails
+    // when no ordinary voice remains (for example after seeking to track end).
+    if (!preserveStemExit) {
+      const state = this.stemStates.get(i);
+      state?.effects.forEach((effect, index) => {
+        effect?.dispose();
+        state.effects[index] = null;
+        state.generations[index]++;
+      });
     }
   }
   async start(d) {
@@ -231,7 +236,7 @@ export class AudioEngine {
       if (!current()) return;
       if (d.reverse)
         buffers = buffers.map((buffer) => this.reverseBuffer(track.id, buffer));
-      this.stopSource(d.index);
+      this.stopSource(d.index, { preserveStemExit: true });
       if (!d.reverse && d.position >= track.duration) d.position = 0;
       const sources = buffers.map((buffer) => {
         const source = this.ctx.createBufferSource();
@@ -273,7 +278,7 @@ export class AudioEngine {
       d.playing = true;
       voice.onended = () => {
         if (this.voices.get(d.index) !== voice) return;
-        this.stopSource(d.index);
+        this.stopSource(d.index, { preserveStemExit: true });
         d.position = d.reverse ? 0 : track.duration;
         d.playing = false;
         this.onEnd(d);
@@ -301,18 +306,18 @@ export class AudioEngine {
     }
   }
 
-  pause(d) {
+  pause(d, { preserveStemExit = false } = {}) {
     this.transforms.get(d.index)?.abort();
     this.transforms.delete(d.index);
     d.processing = false;
     this.startTokens.set(d.index, (this.startTokens.get(d.index) || 0) + 1);
     d.position = this.position(d);
     d.playing = false;
-    this.stopSource(d.index);
+    this.stopSource(d.index, { preserveStemExit });
   }
   async seek(d, p) {
     const was = d.playing || d.processing;
-    this.pause(d);
+    this.pause(d, { preserveStemExit: true });
     d.position = Math.max(0, Math.min(d.track?.duration || 48, p));
     if (was && (d.reverse ? d.position > 0 : d.position < d.track.duration))
       await this.start(d);
@@ -327,7 +332,7 @@ export class AudioEngine {
     }
     const was = d.playing || d.processing;
     const restart = d.keylock || d.keyShift || d.processing;
-    if (restart) this.pause(d);
+    if (restart) this.pause(d, { preserveStemExit: true });
     d.rate = rate;
     d.position = p;
     d.anchorPosition = p;
@@ -579,7 +584,7 @@ export class AudioEngine {
   }
   async setPitch(d, { keylock = d.keylock, semitones = d.keyShift || 0 } = {}) {
     const was = d.playing || d.processing;
-    this.pause(d);
+    this.pause(d, { preserveStemExit: true });
     d.keylock = keylock;
     d.keyShift = semitones;
     if (was) await this.start(d);
@@ -593,7 +598,7 @@ export class AudioEngine {
     this.stemBuffers.set(track.id, buffers);
     for (const d of decks.filter((d) => d.track === track)) {
       const was = d.playing || d.processing;
-      this.pause(d);
+      this.pause(d, { preserveStemExit: true });
       if (was) await this.start(d);
     }
   }
@@ -680,7 +685,7 @@ export class AudioEngine {
   }
   async setReverse(d, reverse) {
     const playing = d.playing || d.processing;
-    this.pause(d);
+    this.pause(d, { preserveStemExit: true });
     d.reverse = reverse;
     if (playing) await this.start(d);
   }

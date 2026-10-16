@@ -6,7 +6,7 @@ Must: preserve all existing feature requirements, evidence, models and user file
 Must not: start a native app, claim DSP equivalence without measurements, or count a label as functionality.
 Authority: Jason's 16 October continuation; native approval remains absent.
 
-Now: close the remaining 31 observed FX control schemas and exact behavior contracts,
+Now: measure exact FX behavior contracts and implement the remaining Stems states,
 then continue library, Video, device and provider workflows. All 55 extended effects,
 real local four-source preparation and pitch-preserving processing now have executed
 browser evidence. The active goal remains all gaps, not this checkpoint. Next: pin
@@ -29,12 +29,19 @@ Re-entry: read this ledger, git status, the latest review report and approvals.
 This ledger is not a parity pass. The previous report remains a dated baseline.
 
 Current evidence is tracked in [DSP_FUNCTIONAL_REVIEW.md](DSP_FUNCTIONAL_REVIEW.md):
-59/59 new worklet graphs, 5/5 original processor lifecycle, 9/9 observed control contrasts,
-12/12 pitch Worker, 18/18 engine, 19/19 Channel/Stems routes, 2/2 finite exit graph,
+59/59 new worklet graphs, 5/5 original processor lifecycle, 220/220 extended and16/16 original control contrasts,
+12/12 pitch Worker, 18/18 engine, 27/27 Channel/Stems routes, 2/2 finite exit graph,
 17/17 sampler and 13/13 Pitch Play. Analysis Worker results are recorded separately.
-These are scoped checks, not full feature acceptance. Active Stems tails still stop
-across transport replacement; exact reference behavior and continuity remain open.
-The 492 requirements cover 110 groups; two engineering goals have no claimed vendor
+These are scoped checks, not full feature acceptance. Active Stems tails now continue
+across transport replacement and natural end; explicit and emergency stop reach zero.
+Exact reference behavior remains open.
+The 495 requirements cover 110 groups; two engineering goals have no claimed vendor
 interaction rows. All 59 FX strips are observed, but ranges/enums and exact DSP response
 remain unmeasured. Physical tests need equipment and provider integration needs supported
 access. Native approval remains absent.
+
+All four later adversarial DSP corrections passed nine actual Worklet regressions;
+the frozen runtime passed a fresh 220-control run and the current 20/20 integration
+baseline. See `fx-adversarial-browser-results.json`. The next Stem Slip contract
+must distinguish latched independent stem transport from temporary isolation and
+retain the conflict between official quickstart and hardware-manual descriptions.

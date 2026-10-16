@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Open Play — DJ prototype</title><link rel="stylesheet" href="styles.css"></head>
 <body>
-<header class="toolbar">
+<header class="toolbar" data-startup-inert inert>
  <button id="day" title="Switch day / night appearance" aria-label="Switch day mode">☼</button>
  <label class="sr" for="layout">Display layout</label><select id="layout"><option>Vertical</option><option>Horizontal</option><option>Extended</option><option>Stack</option><option>Library</option></select>
  <label class="sr" for="deck-count">Number of decks</label><select id="deck-count"><option value="2">2 decks</option><option value="4">4 decks</option></select>
@@ -10,8 +10,8 @@
  <strong class="brand">open<span>play</span><small>DJ</small></strong><label class="master-label">Master <meter id="master-meter" min="0" max="1" value="0"></meter></label>
  <button data-panel="hardware">Devices</button><button data-panel="help">Help</button><button data-panel="settings" aria-label="Open Setup">⚙</button>
 </header>
-<div class="review-bar"><span><i></i> HTML REVIEW · Original implementation · Reference: DJ Pro 4.0.10</span><button data-panel="coverage">Coverage & evidence</button><span id="audio-status">Audio idle · hardware simulated</span></div>
-<main>
+<div class="review-bar" data-startup-inert inert><span><i></i> HTML REVIEW · Original implementation · Reference: DJ Pro 4.0.10</span><button data-panel="coverage">Coverage & evidence</button><span id="audio-status">Loading controls…</span></div>
+<main data-startup-inert inert>
  <section id="performance" aria-label="Decks and waveforms"><div id="decks"></div></section>
  <section id="mixer" aria-label="Mixer"></section>
  <section id="panel" aria-label="Performance panel" hidden></section>

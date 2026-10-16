@@ -1,17 +1,12 @@
-Channel and Stems FX signal integration
-
-Actual engine, master FFT/RMS and synthetic independent stem buffers. Speaker output is disconnected. Stems FX checks follow the official mute plus echo-out/brake behavior; reference sonic equivalence is not asserted.
-
-Run Channel and Stems FX checks
-19/19 passed
+27/27 passed
 [
   {
     "name": "Channel Filter zero preserves bass rather than applying a20Hz high-pass",
     "passed": true,
     "evidence": {
       "dryRms": 0.03759073165652318,
-      "filterZeroRms": 0.037719558114177876,
-      "ratio": 1.0034270803460763
+      "filterZeroRms": 0.037779791040123925,
+      "ratio": 1.0050294148389618
     }
   },
   {
@@ -32,35 +27,35 @@ Run Channel and Stems FX checks
     "name": "Channel Dub Echo survives source pause and depth adjustment",
     "passed": true,
     "evidence": {
-      "tailRms": 0.06212854701321203
+      "tailRms": 0.06132610955109037
     }
   },
   {
     "name": "Channel Dub Echo zero is dry bypass with no orphan tail",
     "passed": true,
     "evidence": {
-      "rms": 6.146091097615798e-10
+      "rms": 2.0770180720136655e-10
     }
   },
   {
     "name": "Channel Space produces an audible decay after source pause",
     "passed": true,
     "evidence": {
-      "tailRms": 0.0189423673946822
+      "tailRms": 0.01881458313334999
     }
   },
   {
     "name": "Channel Space zero bypass suppresses wet decay",
     "passed": true,
     "evidence": {
-      "rms": 3.9500742343278896e-11
+      "rms": 4.431993017213059e-11
     }
   },
   {
     "name": "Channel Noise generates actual audio without a loaded voice",
     "passed": true,
     "evidence": {
-      "noiseRms": 0.017286628368589792
+      "noiseRms": 0.01734923368057054
     }
   },
   {
@@ -74,7 +69,7 @@ Run Channel and Stems FX checks
     "name": "Channel Noise zero disables generation at master",
     "passed": true,
     "evidence": {
-      "rms": 2.3134416691372683e-10
+      "rms": 2.3135921321731663e-10
     }
   },
   {
@@ -88,15 +83,15 @@ Run Channel and Stems FX checks
     "name": "Vocal Echo captures a tail and excludes subsequent vocal markers",
     "passed": true,
     "evidence": {
-      "early220Db": -45.65176010131836,
-      "late710Db": -192.32217407226562
+      "early220Db": -45.55580520629883,
+      "late710Db": -190.6671142578125
     }
   },
   {
     "name": "Unrelated stem mute change preserves existing Vocal Echo capture",
     "passed": true,
     "evidence": {
-      "lateVocalDb": -144.82830810546875,
+      "lateVocalDb": -143.33982849121094,
       "enabledBassDb": -39.25505828857422
     }
   },
@@ -104,9 +99,9 @@ Run Channel and Stems FX checks
     "name": "Instrumental Echo excludes later melody/bass/drum markers while vocals continue",
     "passed": true,
     "evidence": {
-      "laterMelodyDb": -167.77442932128906,
-      "laterBassDb": -184.7711181640625,
-      "laterDrumDb": -194.35995483398438,
+      "laterMelodyDb": -164.19564819335938,
+      "laterBassDb": -183.198974609375,
+      "laterDrumDb": -194.97067260742188,
       "vocalDb": -40.004981994628906
     }
   },
@@ -115,7 +110,7 @@ Run Channel and Stems FX checks
     "passed": true,
     "evidence": {
       "frequency": 339.84375,
-      "db": -42.911354064941406
+      "db": -42.91132354736328
     }
   },
   {
@@ -136,7 +131,7 @@ Run Channel and Stems FX checks
     "name": "Drums Echo excludes later drum markers while vocals continue",
     "passed": true,
     "evidence": {
-      "laterDrumDb": -188.84280395507812,
+      "laterDrumDb": -188.5820770263672,
       "vocalDb": -40.004981994628906
     }
   },
@@ -144,9 +139,83 @@ Run Channel and Stems FX checks
     "name": "Vocal Echo captures audible loop history without leaking unplayed pre-loop audio",
     "passed": true,
     "evidence": {
-      "unplayedPrefixDb": -192.71470642089844,
-      "loopVocalDb": -42.005611419677734,
-      "position": 2.1006666666666662
+      "unplayedPrefixDb": -192.82041931152344,
+      "loopVocalDb": -41.90966033935547,
+      "position": 2.100666666666668
+    }
+  },
+  {
+    "name": "Active Stems echo continues original captured pitch across Key Lock preparation",
+    "passed": true,
+    "evidence": {
+      "frequency": 1371.09375,
+      "db": -64.38040161132812,
+      "rms": 0.002087050042541771,
+      "position": 1.9933333333333287
+    }
+  },
+  {
+    "name": "Active Stems echo continues across pitch-preserving tempo replacement",
+    "passed": true,
+    "evidence": {
+      "frequency": 1371.09375,
+      "db": -85.58989715576172,
+      "rms": 0.0001788921650294756,
+      "position": 2.205266666666659
+    }
+  },
+  {
+    "name": "Active Stems echo continues across seek without recapturing new audio",
+    "passed": true,
+    "evidence": {
+      "frequency": 1371.09375,
+      "db": -89.2317886352539,
+      "rms": 0.00011939423686696475,
+      "position": 4.211933333333331
+    }
+  },
+  {
+    "name": "Active Stems echo continues across reverse transport replacement",
+    "passed": true,
+    "evidence": {
+      "frequency": 1371.09375,
+      "db": -93.4263687133789,
+      "rms": 0.00007593755880524534,
+      "position": 3.9941333333333304
+    }
+  },
+  {
+    "name": "Captured exit survives actual natural reverse-source end",
+    "passed": true,
+    "evidence": {
+      "frequency": 1371.09375,
+      "db": -98.4910888671875,
+      "rms": 0.00004091207634267635,
+      "position": 0
+    }
+  },
+  {
+    "name": "Natural reverse end stops the deck while its finite captured exit remains audible",
+    "passed": true,
+    "evidence": {
+      "playing": false,
+      "position": 0,
+      "rms": 0.00004091207634267635
+    }
+  },
+  {
+    "name": "Explicit pause clears captured exit even when no deck voice remains",
+    "passed": true,
+    "evidence": {
+      "rms": 0,
+      "voices": 0
+    }
+  },
+  {
+    "name": "Emergency-stop fixture has an active audible Stems exit",
+    "passed": true,
+    "evidence": {
+      "rms": 0.01968990916169062
     }
   },
   {

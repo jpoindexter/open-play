@@ -4,92 +4,1574 @@ Actual AudioWorklet parameter changes. Names match observed strips; ranges, comp
 
 Run observed-control graph checks
 
-9/9 observed-control audio graph checks passed.
+220/220 observed-control audio graph checks passed.
 
 [
   {
     "name": "Echo",
+    "control": "Feedback",
     "status": "pass",
-    "difference": 0.2673169784215746,
+    "difference": 0.11769465759284814,
+    "low": {
+      "Feedback": 0
+    },
+    "high": {
+      "Feedback": 90
+    }
+  },
+  {
+    "name": "Echo",
+    "control": "HPF",
+    "status": "pass",
+    "difference": 0.1266579049348406,
     "low": {
       "HPF": 20
     },
     "high": {
-      "HPF": 4000
+      "HPF": 18000
+    }
+  },
+  {
+    "name": "Echo",
+    "control": "Drive",
+    "status": "pass",
+    "difference": 0.08076029215577109,
+    "low": {
+      "Drive": 0
+    },
+    "high": {
+      "Drive": 100
+    }
+  },
+  {
+    "name": "Echo",
+    "control": "Beat Modify",
+    "status": "pass",
+    "difference": 0.20907413694907245,
+    "low": {
+      "Beat Modify": 0.125
+    },
+    "high": {
+      "Beat Modify": 4
+    }
+  },
+  {
+    "name": "Low Cut Echo",
+    "control": "Feedback",
+    "status": "pass",
+    "difference": 0.39301338601852076,
+    "low": {
+      "Feedback": 0
+    },
+    "high": {
+      "Feedback": 90
+    }
+  },
+  {
+    "name": "Low Cut Echo",
+    "control": "HPF",
+    "status": "pass",
+    "difference": 0.30104345103217095,
+    "low": {
+      "HPF": 20
+    },
+    "high": {
+      "HPF": 18000
+    }
+  },
+  {
+    "name": "Low Cut Echo",
+    "control": "Drive",
+    "status": "pass",
+    "difference": 0.04161164181719169,
+    "low": {
+      "Drive": 0
+    },
+    "high": {
+      "Drive": 100
+    }
+  },
+  {
+    "name": "Low Cut Echo",
+    "control": "Beat Modify",
+    "status": "pass",
+    "difference": 0.2838524079251494,
+    "low": {
+      "Beat Modify": 0.125
+    },
+    "high": {
+      "Beat Modify": 4
+    }
+  },
+  {
+    "name": "Multi Tap Delay",
+    "control": "Pattern",
+    "status": "pass",
+    "difference": 0.08526527453465746,
+    "low": {
+      "Pattern": "Shreds"
+    },
+    "high": {
+      "Pattern": "Dotted"
+    }
+  },
+  {
+    "name": "Multi Tap Delay",
+    "control": "Feedback",
+    "status": "pass",
+    "difference": 0.08841381654209536,
+    "low": {
+      "Feedback": 0
+    },
+    "high": {
+      "Feedback": 90
+    }
+  },
+  {
+    "name": "Multi Tap Delay",
+    "control": "Filter",
+    "status": "pass",
+    "difference": 0.10565210682948832,
+    "low": {
+      "Filter": 0
+    },
+    "high": {
+      "Filter": 100
+    }
+  },
+  {
+    "name": "Multi Tap Delay",
+    "control": "Beat Modify",
+    "status": "pass",
+    "difference": 0.09429620480281074,
+    "low": {
+      "Beat Modify": 0.125
+    },
+    "high": {
+      "Beat Modify": 4
+    }
+  },
+  {
+    "name": "Ping Pong Delay",
+    "control": "Feedback",
+    "status": "pass",
+    "difference": 0.09269068915822883,
+    "low": {
+      "Feedback": 0
+    },
+    "high": {
+      "Feedback": 90
+    }
+  },
+  {
+    "name": "Ping Pong Delay",
+    "control": "HPF",
+    "status": "pass",
+    "difference": 0.0652471399452885,
+    "low": {
+      "HPF": 20
+    },
+    "high": {
+      "HPF": 18000
+    }
+  },
+  {
+    "name": "Ping Pong Delay",
+    "control": "Width",
+    "status": "pass",
+    "difference": 0.044313931893119864,
+    "low": {
+      "Width": 0
+    },
+    "high": {
+      "Width": 100
+    }
+  },
+  {
+    "name": "Ping Pong Delay",
+    "control": "Beat Modify",
+    "status": "pass",
+    "difference": 0.07563097087936696,
+    "low": {
+      "Beat Modify": 0.125
+    },
+    "high": {
+      "Beat Modify": 4
+    }
+  },
+  {
+    "name": "Spiral Echo",
+    "control": "Speed",
+    "status": "pass",
+    "difference": 0.13415277854154353,
+    "low": {
+      "Speed": -100
+    },
+    "high": {
+      "Speed": 100
+    }
+  },
+  {
+    "name": "Spiral Echo",
+    "control": "Low Bypass",
+    "status": "pass",
+    "difference": 0.13622254000816886,
+    "low": {
+      "Low Bypass": 20
+    },
+    "high": {
+      "Low Bypass": 2000
+    }
+  },
+  {
+    "name": "Spiral Echo",
+    "control": "High Bypass",
+    "status": "pass",
+    "difference": 0.11762892070429982,
+    "low": {
+      "High Bypass": 2000
+    },
+    "high": {
+      "High Bypass": 20000
+    }
+  },
+  {
+    "name": "Spiral Echo",
+    "control": "Beat Modify",
+    "status": "pass",
+    "difference": 0.13781065856165992,
+    "low": {
+      "Beat Modify": 0.125
+    },
+    "high": {
+      "Beat Modify": 4
+    }
+  },
+  {
+    "name": "Version Echo",
+    "control": "Feedback",
+    "status": "pass",
+    "difference": 0.09437807592783537,
+    "low": {
+      "Feedback": 0
+    },
+    "high": {
+      "Feedback": 90
+    }
+  },
+  {
+    "name": "Version Echo",
+    "control": "BPF",
+    "status": "pass",
+    "difference": 0.10898592399521663,
+    "low": {
+      "BPF": 0
+    },
+    "high": {
+      "BPF": 100
+    }
+  },
+  {
+    "name": "Version Echo",
+    "control": "Drive",
+    "status": "pass",
+    "difference": 0.03203676417294531,
+    "low": {
+      "Drive": 0
+    },
+    "high": {
+      "Drive": 100
+    }
+  },
+  {
+    "name": "Version Echo",
+    "control": "Beat Modify",
+    "status": "pass",
+    "difference": 0.2942569760545145,
+    "low": {
+      "Beat Modify": 0.125
+    },
+    "high": {
+      "Beat Modify": 4
     }
   },
   {
     "name": "Bit Crush",
+    "control": "Bit Depth",
     "status": "pass",
-    "difference": 0.14672734404148116,
+    "difference": 0.12665909320406804,
     "low": {
-      "Downsampling": 48000
+      "Bit Depth": 2
     },
     "high": {
-      "Downsampling": 1000
+      "Bit Depth": 16
+    }
+  },
+  {
+    "name": "Bit Crush",
+    "control": "Downsampling",
+    "status": "pass",
+    "difference": 0.18235428554349337,
+    "low": {
+      "Downsampling": 200
+    },
+    "high": {
+      "Downsampling": 48000
+    }
+  },
+  {
+    "name": "Bit Crush",
+    "control": "Character",
+    "status": "pass",
+    "difference": 0.04027147108524063,
+    "low": {
+      "Character": 0
+    },
+    "high": {
+      "Character": 100
+    }
+  },
+  {
+    "name": "Bit Crush",
+    "control": "Low Drive",
+    "status": "pass",
+    "difference": 0.0693484344556648,
+    "low": {
+      "Low Drive": 0
+    },
+    "high": {
+      "Low Drive": 100
+    }
+  },
+  {
+    "name": "Distortion",
+    "control": "Type",
+    "status": "pass",
+    "difference": 0.3872142870751522,
+    "low": {
+      "Type": "Smooth Drive"
+    },
+    "high": {
+      "Type": "Foldback"
+    }
+  },
+  {
+    "name": "Distortion",
+    "control": "Drive",
+    "status": "pass",
+    "difference": 0.5690875576189605,
+    "low": {
+      "Drive": 0
+    },
+    "high": {
+      "Drive": 100
+    }
+  },
+  {
+    "name": "Distortion",
+    "control": "Character",
+    "status": "pass",
+    "difference": 0.32393076743638,
+    "low": {
+      "Character": 0
+    },
+    "high": {
+      "Character": 100
+    }
+  },
+  {
+    "name": "Distortion",
+    "control": "Tone",
+    "status": "pass",
+    "difference": 2.1417738351229216,
+    "low": {
+      "Tone": -24
+    },
+    "high": {
+      "Tone": 24
+    }
+  },
+  {
+    "name": "Lo-Fi Crush",
+    "control": "Bit Depth",
+    "status": "pass",
+    "difference": 0.08388866791393983,
+    "low": {
+      "Bit Depth": 2
+    },
+    "high": {
+      "Bit Depth": 16
+    }
+  },
+  {
+    "name": "Lo-Fi Crush",
+    "control": "Downsampling",
+    "status": "pass",
+    "difference": 0.17737962682341973,
+    "low": {
+      "Downsampling": 200
+    },
+    "high": {
+      "Downsampling": 48000
+    }
+  },
+  {
+    "name": "Lo-Fi Crush",
+    "control": "Character",
+    "status": "pass",
+    "difference": 0.015010029156970148,
+    "low": {
+      "Character": 0
+    },
+    "high": {
+      "Character": 100
+    }
+  },
+  {
+    "name": "Lo-Fi Crush",
+    "control": "Low Drive",
+    "status": "pass",
+    "difference": 0.045808063219331605,
+    "low": {
+      "Low Drive": 0
+    },
+    "high": {
+      "Low Drive": 100
+    }
+  },
+  {
+    "name": "Lo-Fi Warmth",
+    "control": "Bit Depth",
+    "status": "pass",
+    "difference": 0.1329149184924307,
+    "low": {
+      "Bit Depth": 2
+    },
+    "high": {
+      "Bit Depth": 16
+    }
+  },
+  {
+    "name": "Lo-Fi Warmth",
+    "control": "Downsampling",
+    "status": "pass",
+    "difference": 0.18972347801062248,
+    "low": {
+      "Downsampling": 200
+    },
+    "high": {
+      "Downsampling": 48000
+    }
+  },
+  {
+    "name": "Lo-Fi Warmth",
+    "control": "Character",
+    "status": "pass",
+    "difference": 0.007857564610935303,
+    "low": {
+      "Character": 0
+    },
+    "high": {
+      "Character": 100
+    }
+  },
+  {
+    "name": "Lo-Fi Warmth",
+    "control": "Low Drive",
+    "status": "pass",
+    "difference": 0.04299257940910197,
+    "low": {
+      "Low Drive": 0
+    },
+    "high": {
+      "Low Drive": 100
+    }
+  },
+  {
+    "name": "Sizzle Crush",
+    "control": "Bit Depth",
+    "status": "pass",
+    "difference": 0.18656384694516223,
+    "low": {
+      "Bit Depth": 2
+    },
+    "high": {
+      "Bit Depth": 16
+    }
+  },
+  {
+    "name": "Sizzle Crush",
+    "control": "Downsampling",
+    "status": "pass",
+    "difference": 0.2727933796861618,
+    "low": {
+      "Downsampling": 200
+    },
+    "high": {
+      "Downsampling": 48000
+    }
+  },
+  {
+    "name": "Sizzle Crush",
+    "control": "Character",
+    "status": "pass",
+    "difference": 0.020581577152779286,
+    "low": {
+      "Character": 0
+    },
+    "high": {
+      "Character": 100
+    }
+  },
+  {
+    "name": "Sizzle Crush",
+    "control": "Low Drive",
+    "status": "pass",
+    "difference": 0.06649260859395469,
+    "low": {
+      "Low Drive": 0
+    },
+    "high": {
+      "Low Drive": 100
+    }
+  },
+  {
+    "name": "Combo Filter",
+    "control": "Resonance",
+    "status": "pass",
+    "difference": 0.0001394439892845311,
+    "low": {
+      "Resonance": 0.1
+    },
+    "high": {
+      "Resonance": 12
+    }
+  },
+  {
+    "name": "Combo Filter",
+    "control": "Slope",
+    "status": "pass",
+    "difference": 0.00586787595291449,
+    "low": {
+      "Slope": 6
+    },
+    "high": {
+      "Slope": 48
+    }
+  },
+  {
+    "name": "Combo Filter",
+    "control": "Min Freq",
+    "status": "pass",
+    "difference": 0.07951151730322122,
+    "low": {
+      "Min Freq": 20
+    },
+    "high": {
+      "Min Freq": 2000
+    }
+  },
+  {
+    "name": "Combo Filter",
+    "control": "Max Freq",
+    "status": "pass",
+    "difference": 0.024877377700257518,
+    "low": {
+      "Max Freq": 2000
+    },
+    "high": {
+      "Max Freq": 20000
+    }
+  },
+  {
+    "name": "Drive Filter",
+    "control": "Resonance",
+    "status": "pass",
+    "difference": 0.29668431048107047,
+    "low": {
+      "Resonance": 0.1
+    },
+    "high": {
+      "Resonance": 12
+    }
+  },
+  {
+    "name": "Drive Filter",
+    "control": "Drive",
+    "status": "pass",
+    "difference": 0.38467614725883076,
+    "low": {
+      "Drive": 0
+    },
+    "high": {
+      "Drive": 100
+    }
+  },
+  {
+    "name": "Drive Filter",
+    "control": "Slope",
+    "status": "pass",
+    "difference": 0.367747316938355,
+    "low": {
+      "Slope": 6
+    },
+    "high": {
+      "Slope": 48
+    }
+  },
+  {
+    "name": "Drive Filter",
+    "control": "Type",
+    "status": "pass",
+    "difference": 0.020940480076494124,
+    "low": {
+      "Type": "Light Sat."
+    },
+    "high": {
+      "Type": "Warm"
     }
   },
   {
     "name": "HPF",
+    "control": "Resonance",
     "status": "pass",
-    "difference": 0.04176435340341048,
+    "difference": 0.0017377307046996804,
     "low": {
-      "Cutoff": 1000,
-      "Slope": 12
+      "Resonance": 0.1
     },
     "high": {
-      "Cutoff": 1000,
-      "Slope": 24
+      "Resonance": 12
     }
   },
   {
-    "name": "Bright Reverb",
+    "name": "HPF",
+    "control": "Slope",
     "status": "pass",
-    "difference": 0.05031227058583721,
+    "difference": 0.00586787595291449,
     "low": {
-      "Width": 100
+      "Slope": 6
     },
     "high": {
-      "Width": 200
+      "Slope": 48
     }
   },
   {
-    "name": "Chorus Quad",
+    "name": "HPF",
+    "control": "Min Freq",
     "status": "pass",
-    "difference": 0.09574328897569144,
+    "difference": 0.08365904460602983,
     "low": {
-      "Delay": 5
+      "Min Freq": 20
     },
     "high": {
-      "Delay": 20
+      "Min Freq": 2000
     }
   },
   {
-    "name": "Phaser",
+    "name": "HPF",
+    "control": "Max Freq",
     "status": "pass",
-    "difference": 0.2438592707920806,
+    "difference": 0.11268757144316859,
     "low": {
-      "Pitch": 500
+      "Max Freq": 2000
     },
     "high": {
-      "Pitch": 4000
+      "Max Freq": 20000
+    }
+  },
+  {
+    "name": "Infinity Filter",
+    "control": "Centre Freq.",
+    "status": "pass",
+    "difference": 0.0733887232760003,
+    "low": {
+      "Centre Freq.": 40
+    },
+    "high": {
+      "Centre Freq.": 8000
+    }
+  },
+  {
+    "name": "Infinity Filter",
+    "control": "Type",
+    "status": "pass",
+    "difference": 0.008550760427502581,
+    "low": {
+      "Type": "Peak II"
+    },
+    "high": {
+      "Type": "Narrow"
+    }
+  },
+  {
+    "name": "Infinity Filter",
+    "control": "Direction",
+    "status": "pass",
+    "difference": 0.020635909218753568,
+    "low": {
+      "Direction": -100
+    },
+    "high": {
+      "Direction": 100
+    }
+  },
+  {
+    "name": "Infinity Filter",
+    "control": "Beat Modify",
+    "status": "pass",
+    "difference": 0.08907077308284196,
+    "low": {
+      "Beat Modify": 0.125
+    },
+    "high": {
+      "Beat Modify": 4
     }
   },
   {
     "name": "LFO Filter",
+    "control": "Resonance",
     "status": "pass",
-    "difference": 0.11393412796240897,
+    "difference": 0.2235895483196671,
+    "low": {
+      "Resonance": 0.1
+    },
+    "high": {
+      "Resonance": 12
+    }
+  },
+  {
+    "name": "LFO Filter",
+    "control": "LFO Depth",
+    "status": "pass",
+    "difference": 0.08147708328342451,
+    "low": {
+      "LFO Depth": 0
+    },
+    "high": {
+      "LFO Depth": 100
+    }
+  },
+  {
+    "name": "LFO Filter",
+    "control": "LFO Shape",
+    "status": "pass",
+    "difference": 0.08375642939813646,
     "low": {
       "LFO Shape": "Sine"
     },
     "high": {
-      "LFO Shape": "Square"
+      "LFO Shape": "Saw"
     }
   },
   {
-    "name": "Tremolo",
+    "name": "LFO Filter",
+    "control": "Beat Modify",
     "status": "pass",
-    "difference": 0.07499999992774276,
+    "difference": 0.069218253258156,
+    "low": {
+      "Beat Modify": 0.125
+    },
+    "high": {
+      "Beat Modify": 4
+    }
+  },
+  {
+    "name": "Repeater",
+    "control": "Mix",
+    "status": "pass",
+    "difference": 0.102000276144634,
+    "low": {
+      "Mix": 0
+    },
+    "high": {
+      "Mix": 100
+    }
+  },
+  {
+    "name": "Repeater",
+    "control": "Shreds",
+    "status": "pass",
+    "difference": 0.07381420442140084,
+    "low": {
+      "Shreds": 0
+    },
+    "high": {
+      "Shreds": 100
+    }
+  },
+  {
+    "name": "Repeater",
+    "control": "Range",
+    "status": "pass",
+    "difference": 0.10189952293173744,
+    "low": {
+      "Range": 0.125
+    },
+    "high": {
+      "Range": 8
+    }
+  },
+  {
+    "name": "Repeater",
+    "control": "Beat Modify",
+    "status": "pass",
+    "difference": 0.08755933437394597,
+    "low": {
+      "Beat Modify": 0.125
+    },
+    "high": {
+      "Beat Modify": 4
+    }
+  },
+  {
+    "name": "Retro Halftime",
+    "control": "Retrigger",
+    "status": "pass",
+    "difference": 0.11620256564246541,
+    "low": {
+      "Retrigger": "On"
+    },
+    "high": {
+      "Retrigger": "Off"
+    }
+  },
+  {
+    "name": "Retro Halftime",
+    "control": "Mix",
+    "status": "pass",
+    "difference": 0.12264985635551735,
+    "low": {
+      "Mix": 0
+    },
+    "high": {
+      "Mix": 100
+    }
+  },
+  {
+    "name": "Retro Halftime",
+    "control": "Range",
+    "status": "pass",
+    "difference": 0.11427839557124261,
+    "low": {
+      "Range": 1
+    },
+    "high": {
+      "Range": 8
+    }
+  },
+  {
+    "name": "Retro Halftime",
+    "control": "Grains",
+    "status": "pass",
+    "difference": 0.10762327922550015,
+    "low": {
+      "Grains": 10
+    },
+    "high": {
+      "Grains": 150
+    }
+  },
+  {
+    "name": "Roll",
+    "control": "Repeats",
+    "status": "pass",
+    "difference": 0.1542340194798646,
+    "low": {
+      "Repeats": 1
+    },
+    "high": {
+      "Repeats": 8
+    }
+  },
+  {
+    "name": "Roll",
+    "control": "Shreds",
+    "status": "pass",
+    "difference": 0.13921971571416114,
+    "low": {
+      "Shreds": 0
+    },
+    "high": {
+      "Shreds": 100
+    }
+  },
+  {
+    "name": "Roll",
+    "control": "Range",
+    "status": "pass",
+    "difference": 0.16115963049473042,
+    "low": {
+      "Range": 0.125
+    },
+    "high": {
+      "Range": 8
+    }
+  },
+  {
+    "name": "Roll",
+    "control": "Beat Modify",
+    "status": "pass",
+    "difference": 0.15031334055485943,
+    "low": {
+      "Beat Modify": 0.125
+    },
+    "high": {
+      "Beat Modify": 4
+    }
+  },
+  {
+    "name": "Slip Roll",
+    "control": "Repeats",
+    "status": "pass",
+    "difference": 0.1611667920467781,
+    "low": {
+      "Repeats": 1
+    },
+    "high": {
+      "Repeats": 8
+    }
+  },
+  {
+    "name": "Slip Roll",
+    "control": "Shreds",
+    "status": "pass",
+    "difference": 0.15356703678702022,
+    "low": {
+      "Shreds": 0
+    },
+    "high": {
+      "Shreds": 100
+    }
+  },
+  {
+    "name": "Slip Roll",
+    "control": "Range",
+    "status": "pass",
+    "difference": 0.16292570440573048,
+    "low": {
+      "Range": 0.125
+    },
+    "high": {
+      "Range": 8
+    }
+  },
+  {
+    "name": "Slip Roll",
+    "control": "Beat Modify",
+    "status": "pass",
+    "difference": 0.16348852575333445,
+    "low": {
+      "Beat Modify": 0.125
+    },
+    "high": {
+      "Beat Modify": 4
+    }
+  },
+  {
+    "name": "Stretch",
+    "control": "Retrigger",
+    "status": "pass",
+    "difference": 0.06121053652201763,
+    "low": {
+      "Retrigger": "Off"
+    },
+    "high": {
+      "Retrigger": "On"
+    }
+  },
+  {
+    "name": "Stretch",
+    "control": "Mix",
+    "status": "pass",
+    "difference": 0.12672354978346628,
+    "low": {
+      "Mix": 0
+    },
+    "high": {
+      "Mix": 100
+    }
+  },
+  {
+    "name": "Stretch",
+    "control": "Range",
+    "status": "pass",
+    "difference": 0.12811850191943755,
+    "low": {
+      "Range": 1
+    },
+    "high": {
+      "Range": 8
+    }
+  },
+  {
+    "name": "Stretch",
+    "control": "Grains",
+    "status": "pass",
+    "difference": 0.11766997849542435,
+    "low": {
+      "Grains": 10
+    },
+    "high": {
+      "Grains": 150
+    }
+  },
+  {
+    "name": "Stutter Repeater",
+    "control": "Mix",
+    "status": "pass",
+    "difference": 0.1157329763830867,
+    "low": {
+      "Mix": 0
+    },
+    "high": {
+      "Mix": 100
+    }
+  },
+  {
+    "name": "Stutter Repeater",
+    "control": "Shreds",
+    "status": "pass",
+    "difference": 0.09953312398589408,
+    "low": {
+      "Shreds": 0
+    },
+    "high": {
+      "Shreds": 100
+    }
+  },
+  {
+    "name": "Stutter Repeater",
+    "control": "Range",
+    "status": "pass",
+    "difference": 0.08796817196614298,
+    "low": {
+      "Range": 0.125
+    },
+    "high": {
+      "Range": 8
+    }
+  },
+  {
+    "name": "Stutter Repeater",
+    "control": "Beat Modify",
+    "status": "pass",
+    "difference": 0.062473271007567506,
+    "low": {
+      "Beat Modify": 0.125
+    },
+    "high": {
+      "Beat Modify": 4
+    }
+  },
+  {
+    "name": "Stutter Roll",
+    "control": "Repeats",
+    "status": "pass",
+    "difference": 0.17063945993583454,
+    "low": {
+      "Repeats": 1
+    },
+    "high": {
+      "Repeats": 8
+    }
+  },
+  {
+    "name": "Stutter Roll",
+    "control": "Shreds",
+    "status": "pass",
+    "difference": 0.14799617328960893,
+    "low": {
+      "Shreds": 0
+    },
+    "high": {
+      "Shreds": 100
+    }
+  },
+  {
+    "name": "Stutter Roll",
+    "control": "Range",
+    "status": "pass",
+    "difference": 0.16115963049473042,
+    "low": {
+      "Range": 0.125
+    },
+    "high": {
+      "Range": 8
+    }
+  },
+  {
+    "name": "Stutter Roll",
+    "control": "Beat Modify",
+    "status": "pass",
+    "difference": 0.15031334055485943,
+    "low": {
+      "Beat Modify": 0.125
+    },
+    "high": {
+      "Beat Modify": 4
+    }
+  },
+  {
+    "name": "Chorus Basic",
+    "control": "Feedback",
+    "status": "pass",
+    "difference": 0.08172586715298327,
+    "low": {
+      "Feedback": 0
+    },
+    "high": {
+      "Feedback": 85
+    }
+  },
+  {
+    "name": "Chorus Basic",
+    "control": "Delay",
+    "status": "pass",
+    "difference": 0.11002894165343692,
+    "low": {
+      "Delay": 1
+    },
+    "high": {
+      "Delay": 40
+    }
+  },
+  {
+    "name": "Chorus Basic",
+    "control": "LFO Depth",
+    "status": "pass",
+    "difference": 0.1317260797565058,
+    "low": {
+      "LFO Depth": 0
+    },
+    "high": {
+      "LFO Depth": 100
+    }
+  },
+  {
+    "name": "Chorus Basic",
+    "control": "Rate",
+    "status": "pass",
+    "difference": 0.08690612633895593,
+    "low": {
+      "Rate": 0.125
+    },
+    "high": {
+      "Rate": 16
+    }
+  },
+  {
+    "name": "Chorus Quad",
+    "control": "Feedback",
+    "status": "pass",
+    "difference": 0.023914977129175972,
+    "low": {
+      "Feedback": 0
+    },
+    "high": {
+      "Feedback": 85
+    }
+  },
+  {
+    "name": "Chorus Quad",
+    "control": "Delay",
+    "status": "pass",
+    "difference": 0.07963451104192064,
+    "low": {
+      "Delay": 1
+    },
+    "high": {
+      "Delay": 40
+    }
+  },
+  {
+    "name": "Chorus Quad",
+    "control": "LFO Depth",
+    "status": "pass",
+    "difference": 0.0971137129963107,
+    "low": {
+      "LFO Depth": 0
+    },
+    "high": {
+      "LFO Depth": 100
+    }
+  },
+  {
+    "name": "Chorus Quad",
+    "control": "Rate",
+    "status": "pass",
+    "difference": 0.06292394900323153,
+    "low": {
+      "Rate": 0.125
+    },
+    "high": {
+      "Rate": 16
+    }
+  },
+  {
+    "name": "Falling Flanger",
+    "control": "Centre Freq.",
+    "status": "pass",
+    "difference": 0.08604444152209878,
+    "low": {
+      "Centre Freq.": 40
+    },
+    "high": {
+      "Centre Freq.": 8000
+    }
+  },
+  {
+    "name": "Falling Flanger",
+    "control": "Type",
+    "status": "pass",
+    "difference": 0.07601868138015973,
+    "low": {
+      "Type": "Octaves I"
+    },
+    "high": {
+      "Type": "Narrow"
+    }
+  },
+  {
+    "name": "Falling Flanger",
+    "control": "Direction",
+    "status": "pass",
+    "difference": 0.06866554031454714,
+    "low": {
+      "Direction": -100
+    },
+    "high": {
+      "Direction": 100
+    }
+  },
+  {
+    "name": "Falling Flanger",
+    "control": "Beat Modify",
+    "status": "pass",
+    "difference": 0.0695753861455255,
+    "low": {
+      "Beat Modify": 0.125
+    },
+    "high": {
+      "Beat Modify": 4
+    }
+  },
+  {
+    "name": "Flanger",
+    "control": "Feedback",
+    "status": "pass",
+    "difference": 0.17538266033234684,
+    "low": {
+      "Feedback": 0
+    },
+    "high": {
+      "Feedback": 90
+    }
+  },
+  {
+    "name": "Flanger",
+    "control": "Pitch",
+    "status": "pass",
+    "difference": 0.2332070263660389,
+    "low": {
+      "Pitch": 0.05
+    },
+    "high": {
+      "Pitch": 20
+    }
+  },
+  {
+    "name": "Flanger",
+    "control": "LFO Depth",
+    "status": "pass",
+    "difference": 0.1012520496085554,
+    "low": {
+      "LFO Depth": 0
+    },
+    "high": {
+      "LFO Depth": 100
+    }
+  },
+  {
+    "name": "Flanger",
+    "control": "Beat Modify",
+    "status": "pass",
+    "difference": 0.05632536543904373,
+    "low": {
+      "Beat Modify": 0.125
+    },
+    "high": {
+      "Beat Modify": 4
+    }
+  },
+  {
+    "name": "Infinity Flanger",
+    "control": "Centre Freq.",
+    "status": "pass",
+    "difference": 0.08234554072073799,
+    "low": {
+      "Centre Freq.": 40
+    },
+    "high": {
+      "Centre Freq.": 8000
+    }
+  },
+  {
+    "name": "Infinity Flanger",
+    "control": "Type",
+    "status": "pass",
+    "difference": 0.06970436979668058,
+    "low": {
+      "Type": "Omega"
+    },
+    "high": {
+      "Type": "Narrow"
+    }
+  },
+  {
+    "name": "Infinity Flanger",
+    "control": "Direction",
+    "status": "pass",
+    "difference": 0.01996497968564927,
+    "low": {
+      "Direction": -100
+    },
+    "high": {
+      "Direction": 100
+    }
+  },
+  {
+    "name": "Infinity Flanger",
+    "control": "Beat Modify",
+    "status": "pass",
+    "difference": 0.020504797501282007,
+    "low": {
+      "Beat Modify": 0.125
+    },
+    "high": {
+      "Beat Modify": 4
+    }
+  },
+  {
+    "name": "Pansformer",
+    "control": "Noise",
+    "status": "pass",
+    "difference": 0.017498976231512996,
+    "low": {
+      "Noise": 0
+    },
+    "high": {
+      "Noise": 100
+    }
+  },
+  {
+    "name": "Pansformer",
+    "control": "Skew",
+    "status": "pass",
+    "difference": 0.10208359112153399,
+    "low": {
+      "Skew": 5
+    },
+    "high": {
+      "Skew": 95
+    }
+  },
+  {
+    "name": "Pansformer",
+    "control": "Stereo",
+    "status": "pass",
+    "difference": 0.07602636725027445,
+    "low": {
+      "Stereo": 0
+    },
+    "high": {
+      "Stereo": 100
+    }
+  },
+  {
+    "name": "Pansformer",
+    "control": "Beat Modify",
+    "status": "pass",
+    "difference": 0.07608920753921061,
+    "low": {
+      "Beat Modify": 0.125
+    },
+    "high": {
+      "Beat Modify": 4
+    }
+  },
+  {
+    "name": "Phaser",
+    "control": "Feedback",
+    "status": "pass",
+    "difference": 0.12377387949458414,
+    "low": {
+      "Feedback": 0
+    },
+    "high": {
+      "Feedback": 90
+    }
+  },
+  {
+    "name": "Phaser",
+    "control": "Pitch",
+    "status": "pass",
+    "difference": 0.18601641738313826,
+    "low": {
+      "Pitch": 40
+    },
+    "high": {
+      "Pitch": 8000
+    }
+  },
+  {
+    "name": "Phaser",
+    "control": "LFO Depth",
+    "status": "pass",
+    "difference": 0.15205621445879008,
+    "low": {
+      "LFO Depth": 0
+    },
+    "high": {
+      "LFO Depth": 100
+    }
+  },
+  {
+    "name": "Phaser",
+    "control": "Beat Modify",
+    "status": "pass",
+    "difference": 0.14577330544049127,
+    "low": {
+      "Beat Modify": 0.125
+    },
+    "high": {
+      "Beat Modify": 4
+    }
+  },
+  {
+    "name": "Pulse Spiral",
+    "control": "Feedback",
+    "status": "pass",
+    "difference": 0.06252641977204072,
+    "low": {
+      "Feedback": 0
+    },
+    "high": {
+      "Feedback": 90
+    }
+  },
+  {
+    "name": "Pulse Spiral",
+    "control": "Filter",
+    "status": "pass",
+    "difference": 0.08354430643002571,
+    "low": {
+      "Filter": 0
+    },
+    "high": {
+      "Filter": 100
+    }
+  },
+  {
+    "name": "Pulse Spiral",
+    "control": "Slide Rate",
+    "status": "pass",
+    "difference": 0.10740925182641149,
+    "low": {
+      "Slide Rate": -100
+    },
+    "high": {
+      "Slide Rate": 100
+    }
+  },
+  {
+    "name": "Pulse Spiral",
+    "control": "Beat Modify",
+    "status": "pass",
+    "difference": 0.11061676599047869,
+    "low": {
+      "Beat Modify": 0.125
+    },
+    "high": {
+      "Beat Modify": 4
+    }
+  },
+  {
+    "name": "Spiral",
+    "control": "Feedback",
+    "status": "pass",
+    "difference": 0.0795127931963762,
+    "low": {
+      "Feedback": 0
+    },
+    "high": {
+      "Feedback": 90
+    }
+  },
+  {
+    "name": "Spiral",
+    "control": "Filter",
+    "status": "pass",
+    "difference": 0.1080881473494539,
+    "low": {
+      "Filter": 0
+    },
+    "high": {
+      "Filter": 100
+    }
+  },
+  {
+    "name": "Spiral",
+    "control": "Slide Rate",
+    "status": "pass",
+    "difference": 0.13719283196020987,
+    "low": {
+      "Slide Rate": -100
+    },
+    "high": {
+      "Slide Rate": 100
+    }
+  },
+  {
+    "name": "Spiral",
+    "control": "Beat Modify",
+    "status": "pass",
+    "difference": 0.13929780617520154,
+    "low": {
+      "Beat Modify": 0.125
+    },
+    "high": {
+      "Beat Modify": 4
+    }
+  },
+  {
+    "name": "Transform",
+    "control": "Noise",
+    "status": "pass",
+    "difference": 0.017517866457848818,
+    "low": {
+      "Noise": 0
+    },
+    "high": {
+      "Noise": 100
+    }
+  },
+  {
+    "name": "Transform",
+    "control": "Skew",
+    "status": "pass",
+    "difference": 0.10207971664344435,
+    "low": {
+      "Skew": 5
+    },
+    "high": {
+      "Skew": 95
+    }
+  },
+  {
+    "name": "Transform",
+    "control": "Stereo",
+    "status": "pass",
+    "difference": 0.07602636725027445,
     "low": {
       "Stereo": 0
     },
@@ -99,13 +1581,1070 @@ Run observed-control graph checks
   },
   {
     "name": "Transform",
+    "control": "Beat Modify",
     "status": "pass",
-    "difference": 0.024313984504474313,
+    "difference": 0.07608920753921061,
     "low": {
-      "Noise": 0
+      "Beat Modify": 0.125
     },
     "high": {
-      "Noise": 100
+      "Beat Modify": 4
+    }
+  },
+  {
+    "name": "Tremolo",
+    "control": "LFO Shape",
+    "status": "pass",
+    "difference": 0.06485526311613947,
+    "low": {
+      "LFO Shape": "Sine"
+    },
+    "high": {
+      "LFO Shape": "Saw"
+    }
+  },
+  {
+    "name": "Tremolo",
+    "control": "Skew",
+    "status": "pass",
+    "difference": 0.07419420300857844,
+    "low": {
+      "Skew": 5
+    },
+    "high": {
+      "Skew": 95
+    }
+  },
+  {
+    "name": "Tremolo",
+    "control": "Stereo",
+    "status": "pass",
+    "difference": 0.05346921076434489,
+    "low": {
+      "Stereo": 0
+    },
+    "high": {
+      "Stereo": 100
+    }
+  },
+  {
+    "name": "Tremolo",
+    "control": "Beat Modify",
+    "status": "pass",
+    "difference": 0.05335763155985334,
+    "low": {
+      "Beat Modify": 0.125
+    },
+    "high": {
+      "Beat Modify": 4
+    }
+  },
+  {
+    "name": "Brake Echo",
+    "control": "Feedback",
+    "status": "pass",
+    "difference": 0.06121357825832441,
+    "low": {
+      "Feedback": 0
+    },
+    "high": {
+      "Feedback": 90
+    }
+  },
+  {
+    "name": "Brake Echo",
+    "control": "Stop Time",
+    "status": "pass",
+    "difference": 0.06557355937313437,
+    "low": {
+      "Stop Time": 25
+    },
+    "high": {
+      "Stop Time": 800
+    }
+  },
+  {
+    "name": "Brake Echo",
+    "control": "Stop Curve",
+    "status": "pass",
+    "difference": 0.0582457426757027,
+    "low": {
+      "Stop Curve": -1
+    },
+    "high": {
+      "Stop Curve": 1
+    }
+  },
+  {
+    "name": "Brake Echo",
+    "control": "Beat Modify",
+    "status": "pass",
+    "difference": 0.059927193874788814,
+    "low": {
+      "Beat Modify": 0.125
+    },
+    "high": {
+      "Beat Modify": 4
+    }
+  },
+  {
+    "name": "Brake Rewind",
+    "control": "Stop Time",
+    "status": "pass",
+    "difference": 0.0977158041511228,
+    "low": {
+      "Stop Time": 0.25
+    },
+    "high": {
+      "Stop Time": 12
+    }
+  },
+  {
+    "name": "Brake Rewind",
+    "control": "Curve",
+    "status": "pass",
+    "difference": 0.1092950361417155,
+    "low": {
+      "Curve": -1
+    },
+    "high": {
+      "Curve": 1
+    }
+  },
+  {
+    "name": "Brake Rewind",
+    "control": "Spinback",
+    "status": "pass",
+    "difference": 0.10885730590759474,
+    "low": {
+      "Spinback": 0
+    },
+    "high": {
+      "Spinback": 12
+    }
+  },
+  {
+    "name": "Brake Rewind",
+    "control": "Mode",
+    "status": "pass",
+    "difference": 0.09985328087699367,
+    "low": {
+      "Mode": "Vinyl"
+    },
+    "high": {
+      "Mode": "Stretch"
+    }
+  },
+  {
+    "name": "Braker",
+    "control": "Mix",
+    "status": "pass",
+    "difference": 0.11104857305950573,
+    "low": {
+      "Mix": 0
+    },
+    "high": {
+      "Mix": 100
+    }
+  },
+  {
+    "name": "Braker",
+    "control": "Curve",
+    "status": "pass",
+    "difference": 0.04249587109426948,
+    "low": {
+      "Curve": -1
+    },
+    "high": {
+      "Curve": 1
+    }
+  },
+  {
+    "name": "Braker",
+    "control": "Mode",
+    "status": "pass",
+    "difference": 0.03546922058052407,
+    "low": {
+      "Mode": "Vinyl"
+    },
+    "high": {
+      "Mode": "Stretch"
+    }
+  },
+  {
+    "name": "Braker",
+    "control": "Beat Modify",
+    "status": "pass",
+    "difference": 0.04074469414451124,
+    "low": {
+      "Beat Modify": 0.125
+    },
+    "high": {
+      "Beat Modify": 4
+    }
+  },
+  {
+    "name": "Clean Echo Out",
+    "control": "Max Feedback",
+    "status": "pass",
+    "difference": 0.06805336772655766,
+    "low": {
+      "Max Feedback": 0
+    },
+    "high": {
+      "Max Feedback": 95
+    }
+  },
+  {
+    "name": "Clean Echo Out",
+    "control": "Filter",
+    "status": "pass",
+    "difference": 0.059820956312835585,
+    "low": {
+      "Filter": 0
+    },
+    "high": {
+      "Filter": 100
+    }
+  },
+  {
+    "name": "Clean Echo Out",
+    "control": "Echo Level",
+    "status": "pass",
+    "difference": 0.08571868101413879,
+    "low": {
+      "Echo Level": 0
+    },
+    "high": {
+      "Echo Level": 100
+    }
+  },
+  {
+    "name": "Clean Echo Out",
+    "control": "Beat Modify",
+    "status": "pass",
+    "difference": 0.05807049699517886,
+    "low": {
+      "Beat Modify": 0.125
+    },
+    "high": {
+      "Beat Modify": 4
+    }
+  },
+  {
+    "name": "Clean Rollout",
+    "control": "Echo/Feedback",
+    "status": "pass",
+    "difference": 0.1715429766916898,
+    "low": {
+      "Echo/Feedback": 0
+    },
+    "high": {
+      "Echo/Feedback": 90
+    }
+  },
+  {
+    "name": "Clean Rollout",
+    "control": "Filter",
+    "status": "pass",
+    "difference": 0.07768303163619332,
+    "low": {
+      "Filter": 0
+    },
+    "high": {
+      "Filter": 100
+    }
+  },
+  {
+    "name": "Clean Rollout",
+    "control": "Roll",
+    "status": "pass",
+    "difference": 0.10779272622759692,
+    "low": {
+      "Roll": 0.25
+    },
+    "high": {
+      "Roll": 16
+    }
+  },
+  {
+    "name": "Clean Rollout",
+    "control": "Beat Modify",
+    "status": "pass",
+    "difference": 0.07463316021397623,
+    "low": {
+      "Beat Modify": 0.125
+    },
+    "high": {
+      "Beat Modify": 8
+    }
+  },
+  {
+    "name": "Combo Fade Echo",
+    "control": "Feedback",
+    "status": "pass",
+    "difference": 0.03908602904588104,
+    "low": {
+      "Feedback": 0
+    },
+    "high": {
+      "Feedback": 90
+    }
+  },
+  {
+    "name": "Combo Fade Echo",
+    "control": "Stop Time",
+    "status": "pass",
+    "difference": 0.13074346672546205,
+    "low": {
+      "Stop Time": 25
+    },
+    "high": {
+      "Stop Time": 800
+    }
+  },
+  {
+    "name": "Combo Fade Echo",
+    "control": "Drive",
+    "status": "pass",
+    "difference": 0.07329361185150286,
+    "low": {
+      "Drive": 0
+    },
+    "high": {
+      "Drive": 100
+    }
+  },
+  {
+    "name": "Combo Fade Echo",
+    "control": "Beat Modify",
+    "status": "pass",
+    "difference": 0.08641028846424031,
+    "low": {
+      "Beat Modify": 0.125
+    },
+    "high": {
+      "Beat Modify": 4
+    }
+  },
+  {
+    "name": "Echo Out",
+    "control": "Max Feedback",
+    "status": "pass",
+    "difference": 0.0626941307359459,
+    "low": {
+      "Max Feedback": 0
+    },
+    "high": {
+      "Max Feedback": 95
+    }
+  },
+  {
+    "name": "Echo Out",
+    "control": "Filter",
+    "status": "pass",
+    "difference": 0.045646121637052485,
+    "low": {
+      "Filter": 0
+    },
+    "high": {
+      "Filter": 100
+    }
+  },
+  {
+    "name": "Echo Out",
+    "control": "Echo Level",
+    "status": "pass",
+    "difference": 0.06541393265168559,
+    "low": {
+      "Echo Level": 0
+    },
+    "high": {
+      "Echo Level": 100
+    }
+  },
+  {
+    "name": "Echo Out",
+    "control": "Beat Modify",
+    "status": "pass",
+    "difference": 0.05204513685378772,
+    "low": {
+      "Beat Modify": 0.125
+    },
+    "high": {
+      "Beat Modify": 4
+    }
+  },
+  {
+    "name": "Epic Stretch Rewind",
+    "control": "Stop Time",
+    "status": "pass",
+    "difference": 0.0564431671642535,
+    "low": {
+      "Stop Time": 0.25
+    },
+    "high": {
+      "Stop Time": 12
+    }
+  },
+  {
+    "name": "Epic Stretch Rewind",
+    "control": "Curve",
+    "status": "pass",
+    "difference": 0.06845941738895901,
+    "low": {
+      "Curve": -1
+    },
+    "high": {
+      "Curve": 1
+    }
+  },
+  {
+    "name": "Epic Stretch Rewind",
+    "control": "Spinback",
+    "status": "pass",
+    "difference": 0.06218008682208468,
+    "low": {
+      "Spinback": 0
+    },
+    "high": {
+      "Spinback": 12
+    }
+  },
+  {
+    "name": "Epic Stretch Rewind",
+    "control": "Mode",
+    "status": "pass",
+    "difference": 0.10761708849593642,
+    "low": {
+      "Mode": "Stretch"
+    },
+    "high": {
+      "Mode": "Vinyl"
+    }
+  },
+  {
+    "name": "Roll Out",
+    "control": "Echo/Feedback",
+    "status": "pass",
+    "difference": 0.043546325717324995,
+    "low": {
+      "Echo/Feedback": 0
+    },
+    "high": {
+      "Echo/Feedback": 90
+    }
+  },
+  {
+    "name": "Roll Out",
+    "control": "Filter",
+    "status": "pass",
+    "difference": 0.06960577455222636,
+    "low": {
+      "Filter": 0
+    },
+    "high": {
+      "Filter": 100
+    }
+  },
+  {
+    "name": "Roll Out",
+    "control": "Roll",
+    "status": "pass",
+    "difference": 0.08137600233210902,
+    "low": {
+      "Roll": 0.25
+    },
+    "high": {
+      "Roll": 16
+    }
+  },
+  {
+    "name": "Roll Out",
+    "control": "Beat Modify",
+    "status": "pass",
+    "difference": 0.05409494670047857,
+    "low": {
+      "Beat Modify": 0.125
+    },
+    "high": {
+      "Beat Modify": 8
+    }
+  },
+  {
+    "name": "Short Brake Echo",
+    "control": "Feedback",
+    "status": "pass",
+    "difference": 0.03858327394262706,
+    "low": {
+      "Feedback": 0
+    },
+    "high": {
+      "Feedback": 90
+    }
+  },
+  {
+    "name": "Short Brake Echo",
+    "control": "Stop Time",
+    "status": "pass",
+    "difference": 0.046353821029809034,
+    "low": {
+      "Stop Time": 25
+    },
+    "high": {
+      "Stop Time": 800
+    }
+  },
+  {
+    "name": "Short Brake Echo",
+    "control": "Stop Curve",
+    "status": "pass",
+    "difference": 0.035366198199289725,
+    "low": {
+      "Stop Curve": -1
+    },
+    "high": {
+      "Stop Curve": 1
+    }
+  },
+  {
+    "name": "Short Brake Echo",
+    "control": "Beat Modify",
+    "status": "pass",
+    "difference": 0.05624067196731235,
+    "low": {
+      "Beat Modify": 0.125
+    },
+    "high": {
+      "Beat Modify": 4
+    }
+  },
+  {
+    "name": "Slow Roll Out",
+    "control": "Echo/Feedback",
+    "status": "pass",
+    "difference": 0.04595051828399113,
+    "low": {
+      "Echo/Feedback": 0
+    },
+    "high": {
+      "Echo/Feedback": 90
+    }
+  },
+  {
+    "name": "Slow Roll Out",
+    "control": "Filter",
+    "status": "pass",
+    "difference": 0.08004204325648667,
+    "low": {
+      "Filter": 0
+    },
+    "high": {
+      "Filter": 100
+    }
+  },
+  {
+    "name": "Slow Roll Out",
+    "control": "Roll",
+    "status": "pass",
+    "difference": 0.1315308132391225,
+    "low": {
+      "Roll": 0.25
+    },
+    "high": {
+      "Roll": 16
+    }
+  },
+  {
+    "name": "Slow Roll Out",
+    "control": "Beat Modify",
+    "status": "pass",
+    "difference": 0.10091092557035335,
+    "low": {
+      "Beat Modify": 0.125
+    },
+    "high": {
+      "Beat Modify": 8
+    }
+  },
+  {
+    "name": "Turntable Brake",
+    "control": "Stop Time",
+    "status": "pass",
+    "difference": 0.05645924723737717,
+    "low": {
+      "Stop Time": 0.25
+    },
+    "high": {
+      "Stop Time": 12
+    }
+  },
+  {
+    "name": "Turntable Brake",
+    "control": "Curve",
+    "status": "pass",
+    "difference": 0.04249587109426948,
+    "low": {
+      "Curve": -1
+    },
+    "high": {
+      "Curve": 1
+    }
+  },
+  {
+    "name": "Turntable Brake",
+    "control": "Spinback",
+    "status": "pass",
+    "difference": 0.1029781289418632,
+    "low": {
+      "Spinback": 0
+    },
+    "high": {
+      "Spinback": 12
+    }
+  },
+  {
+    "name": "Turntable Brake",
+    "control": "Mode",
+    "status": "pass",
+    "difference": 0.03363365120172685,
+    "low": {
+      "Mode": "Vinyl"
+    },
+    "high": {
+      "Mode": "Stretch"
+    }
+  },
+  {
+    "name": "Bright Reverb",
+    "control": "Decay",
+    "status": "pass",
+    "difference": 0.1491902863637737,
+    "low": {
+      "Decay": 0.1
+    },
+    "high": {
+      "Decay": 10
+    }
+  },
+  {
+    "name": "Bright Reverb",
+    "control": "Contour",
+    "status": "pass",
+    "difference": 0.040366091275183126,
+    "low": {
+      "Contour": -100
+    },
+    "high": {
+      "Contour": 100
+    }
+  },
+  {
+    "name": "Bright Reverb",
+    "control": "Width",
+    "status": "pass",
+    "difference": 0.06279830529579718,
+    "low": {
+      "Width": 0
+    },
+    "high": {
+      "Width": 200
+    }
+  },
+  {
+    "name": "Bright Reverb",
+    "control": "Mix Mode",
+    "status": "pass",
+    "difference": 0.10696292141781591,
+    "low": {
+      "Mix Mode": "Wet Mix"
+    },
+    "high": {
+      "Mix Mode": "Send"
+    }
+  },
+  {
+    "name": "Empty Mall Verb",
+    "control": "Decay",
+    "status": "pass",
+    "difference": 0.10690756508439601,
+    "low": {
+      "Decay": 0.1
+    },
+    "high": {
+      "Decay": 10
+    }
+  },
+  {
+    "name": "Empty Mall Verb",
+    "control": "Contour",
+    "status": "pass",
+    "difference": 0.007458621698840456,
+    "low": {
+      "Contour": -100
+    },
+    "high": {
+      "Contour": 100
+    }
+  },
+  {
+    "name": "Empty Mall Verb",
+    "control": "Width",
+    "status": "pass",
+    "difference": 0.04967108701830919,
+    "low": {
+      "Width": 0
+    },
+    "high": {
+      "Width": 200
+    }
+  },
+  {
+    "name": "Empty Mall Verb",
+    "control": "Mix Mode",
+    "status": "pass",
+    "difference": 0.10696292142861148,
+    "low": {
+      "Mix Mode": "Wet Mix"
+    },
+    "high": {
+      "Mix Mode": "Send"
+    }
+  },
+  {
+    "name": "Epic Reverb",
+    "control": "Decay",
+    "status": "pass",
+    "difference": 0.10192674398472874,
+    "low": {
+      "Decay": 0.1
+    },
+    "high": {
+      "Decay": 10
+    }
+  },
+  {
+    "name": "Epic Reverb",
+    "control": "Contour",
+    "status": "pass",
+    "difference": 0.08564423178597365,
+    "low": {
+      "Contour": -100
+    },
+    "high": {
+      "Contour": 100
+    }
+  },
+  {
+    "name": "Epic Reverb",
+    "control": "Width",
+    "status": "pass",
+    "difference": 0.07647777897532462,
+    "low": {
+      "Width": 0
+    },
+    "high": {
+      "Width": 200
+    }
+  },
+  {
+    "name": "Epic Reverb",
+    "control": "Mix Mode",
+    "status": "pass",
+    "difference": 0.10696292141987128,
+    "low": {
+      "Mix Mode": "Wet Mix"
+    },
+    "high": {
+      "Mix Mode": "Send"
+    }
+  },
+  {
+    "name": "Epic Reverb Drop",
+    "control": "Decay",
+    "status": "pass",
+    "difference": 0.050280847524548505,
+    "low": {
+      "Decay": 0
+    },
+    "high": {
+      "Decay": 100
+    }
+  },
+  {
+    "name": "Epic Reverb Drop",
+    "control": "Contour",
+    "status": "pass",
+    "difference": 0.044849505353126456,
+    "low": {
+      "Contour": -100
+    },
+    "high": {
+      "Contour": 100
+    }
+  },
+  {
+    "name": "Epic Reverb Drop",
+    "control": "Width",
+    "status": "pass",
+    "difference": 0.057410270869118186,
+    "low": {
+      "Width": 0
+    },
+    "high": {
+      "Width": 200
+    }
+  },
+  {
+    "name": "Epic Reverb Drop",
+    "control": "Drop Range",
+    "status": "pass",
+    "difference": 0.06843488041257378,
+    "low": {
+      "Drop Range": 0
+    },
+    "high": {
+      "Drop Range": 36
+    }
+  },
+  {
+    "name": "Next Door Verb",
+    "control": "Decay",
+    "status": "pass",
+    "difference": 0.030462155703534565,
+    "low": {
+      "Decay": 0.1
+    },
+    "high": {
+      "Decay": 10
+    }
+  },
+  {
+    "name": "Next Door Verb",
+    "control": "Contour",
+    "status": "pass",
+    "difference": 0.01982855598071473,
+    "low": {
+      "Contour": -100
+    },
+    "high": {
+      "Contour": 100
+    }
+  },
+  {
+    "name": "Next Door Verb",
+    "control": "Width",
+    "status": "pass",
+    "difference": 0.0391240460118992,
+    "low": {
+      "Width": 0
+    },
+    "high": {
+      "Width": 200
+    }
+  },
+  {
+    "name": "Next Door Verb",
+    "control": "Mix Mode",
+    "status": "pass",
+    "difference": 0.10696292141944577,
+    "low": {
+      "Mix Mode": "Wet Mix"
+    },
+    "high": {
+      "Mix Mode": "Send"
+    }
+  },
+  {
+    "name": "Vast Reverb",
+    "control": "Decay",
+    "status": "pass",
+    "difference": 0.09273767266263315,
+    "low": {
+      "Decay": 0
+    },
+    "high": {
+      "Decay": 100
+    }
+  },
+  {
+    "name": "Vast Reverb",
+    "control": "Contour",
+    "status": "pass",
+    "difference": 0.13337397779079457,
+    "low": {
+      "Contour": -100
+    },
+    "high": {
+      "Contour": 100
+    }
+  },
+  {
+    "name": "Vast Reverb",
+    "control": "Width",
+    "status": "pass",
+    "difference": 0.08004865636429978,
+    "low": {
+      "Width": 0
+    },
+    "high": {
+      "Width": 200
+    }
+  },
+  {
+    "name": "Vast Reverb",
+    "control": "Mix Mode",
+    "status": "pass",
+    "difference": 0.053481460718033516,
+    "low": {
+      "Mix Mode": "Wet Mix"
+    },
+    "high": {
+      "Mix Mode": "Send+Mix"
+    }
+  },
+  {
+    "name": "Vast Verb Drop",
+    "control": "Decay",
+    "status": "pass",
+    "difference": 0.08548240116515131,
+    "low": {
+      "Decay": 0
+    },
+    "high": {
+      "Decay": 100
+    }
+  },
+  {
+    "name": "Vast Verb Drop",
+    "control": "Contour",
+    "status": "pass",
+    "difference": 0.07062843231475396,
+    "low": {
+      "Contour": -100
+    },
+    "high": {
+      "Contour": 100
+    }
+  },
+  {
+    "name": "Vast Verb Drop",
+    "control": "Width",
+    "status": "pass",
+    "difference": 0.07851228303126721,
+    "low": {
+      "Width": 0
+    },
+    "high": {
+      "Width": 200
+    }
+  },
+  {
+    "name": "Vast Verb Drop",
+    "control": "Mix Mode",
+    "status": "pass",
+    "difference": 0.05348146071016564,
+    "low": {
+      "Mix Mode": "Wet Mix"
+    },
+    "high": {
+      "Mix Mode": "Send+Mix"
+    }
+  },
+  {
+    "name": "Infinity Tone",
+    "control": "Timbre",
+    "status": "pass",
+    "difference": 0.09572868843183943,
+    "low": {
+      "Timbre": 0
+    },
+    "high": {
+      "Timbre": 100
+    }
+  },
+  {
+    "name": "Infinity Tone",
+    "control": "Ambience",
+    "status": "pass",
+    "difference": 0.039332396350150615,
+    "low": {
+      "Ambience": 0
+    },
+    "high": {
+      "Ambience": 100
+    }
+  },
+  {
+    "name": "Infinity Tone",
+    "control": "Direction",
+    "status": "pass",
+    "difference": 0.09583067430235996,
+    "low": {
+      "Direction": -100
+    },
+    "high": {
+      "Direction": 100
+    }
+  },
+  {
+    "name": "Infinity Tone",
+    "control": "Beat Modify",
+    "status": "pass",
+    "difference": 0.10450311760661729,
+    "low": {
+      "Beat Modify": 0.125
+    },
+    "high": {
+      "Beat Modify": 4
+    }
+  },
+  {
+    "name": "Space Invader",
+    "control": "Timbre",
+    "status": "pass",
+    "difference": 0.12227678546614879,
+    "low": {
+      "Timbre": 0
+    },
+    "high": {
+      "Timbre": 100
+    }
+  },
+  {
+    "name": "Space Invader",
+    "control": "Ambience",
+    "status": "pass",
+    "difference": 0.04577793172831756,
+    "low": {
+      "Ambience": 0
+    },
+    "high": {
+      "Ambience": 100
+    }
+  },
+  {
+    "name": "Space Invader",
+    "control": "Direction",
+    "status": "pass",
+    "difference": 0.12973997753931835,
+    "low": {
+      "Direction": -100
+    },
+    "high": {
+      "Direction": 100
+    }
+  },
+  {
+    "name": "Space Invader",
+    "control": "Beat Modify",
+    "status": "pass",
+    "difference": 0.1250811597741174,
+    "low": {
+      "Beat Modify": 0.125
+    },
+    "high": {
+      "Beat Modify": 4
     }
   }
 ]

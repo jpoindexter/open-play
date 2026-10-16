@@ -4,7 +4,7 @@
 
 Project: `/Users/jasonpoindexter/Documents/GitHub/Open Play`
 Prepared: 2026-10-16
-Current browser candidate: `1cebb52ef243b5faddc9e7954dd391ebb59b4e0b`
+Current browser candidate: `WORKTREE_DSP_CONTINUATION`
 Content hashes: `docs/prototype/candidate-hashes.json`
 Private repository: https://github.com/jpoindexter/open-play
 Private board: https://trello.com/b/OqMGEjpe/open-play-serato-parity
@@ -36,7 +36,7 @@ This packet requests an audit, not automatic implementation edits or acceptance.
 
 ## Current implementation and evidence
 
-Read `docs/prototype/DSP_FUNCTIONAL_REVIEW.md` first for current evidence, and `FUNCTIONAL_REVIEW.md` for the earlier functional baseline. The inventory contains 110 groups and 492 detailed requirements. Two groups (AUD-005 independent-device clock drift, SYS-006 reproducible builds) are Open Play engineering goals without invented vendor manual rows. All 59 FX strips and 236 labels were observed; ranges/enums and sonic matching remain open. Spotify crate behavior uses the applicable 4.0.4+ rule.
+Read `docs/prototype/DSP_FUNCTIONAL_REVIEW.md` first for current evidence, and `FUNCTIONAL_REVIEW.md` for the earlier functional baseline. The inventory contains 110 groups and 495 detailed requirements. Two groups (AUD-005 independent-device clock drift, SYS-006 reproducible builds) are Open Play engineering goals without invented vendor manual rows. All 59 FX strips and 236 labels were observed; ranges/enums and sonic matching remain open. Spotify crate behavior uses the applicable 4.0.4+ rule.
 
 Implemented browser behavior includes local decode/playback, cues/loops/reverse/Slip, library metadata/crates/smart rules, backup/restore, sampler, Flip event playback, slicer, local video compositing/capture and browser master recording. Earlier 20/20 module checks and selected UI recording/download/reimport flows are historical evidence for those paths; rerun against this candidate.
 
@@ -46,10 +46,10 @@ New independently implemented audio paths:
 |---|---|---|
 | 55 extended DJ + four Channel AudioWorklet processors | 59/59 browser graphs | Exact vendor sound and full parameter space |
 | Original four FX live-update/replacement lifecycle | 5/5 | Clickless transitions and sustained load |
-| Observed-control contrast graphs | 9/9 | 24/55 schemas map all four labels; 31 remain open |
+| Observed-control contrast graphs | 220/220 extended +16/16 original | All236 observed labels have executable independent controls; ranges/sonic matching remain open |
 | Signalsmith Stretch 1.3.2 MIT WASM Worker | 12/12 browser; 8/8 signal | Buffered preparation latency and music-corpus quality |
 | Actual AudioEngine transport/rate/pitch/reverse/loops/cancellation/stem isolation | 18/18 | Physical hardware and exact reference semantics |
-| Channel/Stems routes, live history, loop leakage and persistent exit latch | 19/19 | Active tails stop on transport replacement |
+| Channel/Stems routes, live history and tail lifetime | 27/27 | Exact reference envelope and transport policy remain unverified |
 | Finite captured Stems exit sources | 2/2 | Exact reference transfer functions |
 | Sampler keylock/cancellation/repeat/global output bus | 17/17 | Physical cue output, remaining advanced sampler workflows |
 | Pitch Play ranges/cues/release/latch/key sync/reset | 13/13 engine; 20/20 policy | Generic/device range conflict and independent harmonic tie-break |
@@ -58,14 +58,14 @@ New independently implemented audio paths:
 | Local stems preparation from main UI | Four real SCNet buffers ready | Separation quality is not parity |
 | Loopback service boundary/cancellation/timeouts | 10/10 | Production deployment/security/uptime |
 
-Evidence lives in `docs/prototype/*results*`, with exact test names and measured values. Counts are not additive feature coverage. Main UI verified key changes, Pitch range/Shift-cue, saved Echo controls, analysis import/reanalysis/locked metadata/reload/reimport, and SCNet preparation. A later sampler route meter observation occurred after natural track end; treat it as inconclusive audio evidence. The Stems brake/release UI observation also ended naturally and does not independently prove signal isolation.
+Evidence lives in `docs/prototype/*results*`, with exact test names and measured values. Counts are not additive feature coverage. Main UI verified key changes, Pitch range/Shift-cue, saved Echo controls, analysis import/reanalysis/locked metadata/reload/reimport, and SCNet preparation. The historical sampler route observation occurred after natural track end and was inconclusive; the new route artifact supersedes it with Playing-state bus measurements. The Stems brake/release UI observation also ended naturally and does not independently prove signal isolation. New main UI evidence verifies first-action preparation, Analyze Stems on load, cancellation feedback and retry with two queued pad actions. Matching preparation coalesces with12 separately labeled adapter checks.
 
 SCNet-large is the current local model candidate: official MIT code and explicit author MIT checkpoint grant, local ignored weights/environment, measured runtime and two held-out excerpts documented in `STEMS_RUNTIME_EVALUATION.md`. All eight source SI-SDR values improved versus Spleeter, but one reconstruction-error test **failed** its unchanged 3% threshold at 3.025%. Do not claim best model, production readiness or Serato quality parity. HTDemucs is research-only until checkpoint terms justify use. Preparation requires the documented local Python/model setup; ordinary browser playback does not.
 
 ## Remaining work — challenge these and find others
 
-- 31 observed FX control schemas; all exact ranges/enums/defaults and sonic matching; tail continuity, four-deck load and long-session soak.
-- Active Stems tails across transport replacement, model-quality failure, stem-slip/state edges and long-file memory/latency.
+- All exact FX ranges/enums/defaults and sonic matching; four-deck load and long-session soak. All 236 controls have audio contrasts; four later DSP defects were corrected and passed nine longer browser regressions, with the frozen runtime rechecked at 220/220 extended controls and 59/59 graphs. Exact vendor ranges and sound remain unproven.
+- Model-quality failure, Stem Slip independent-clock implementation/state edges and long-file memory/latency. Active captured Stems tails now survive internal transport replacement and natural end; explicit/emergency stop reaches zero in actual browser checks.
 - Exact sampler advanced workflows, harmonic Sync/reference conflicts, variable-tempo/beatgrid/downbeat behavior and metadata accuracy.
 - Complete Video effect/transition catalogs; conditional settings, keyboard/accessibility and visual equivalence.
 - Real library file/tag/interoperability and recovery behavior.
@@ -75,7 +75,7 @@ SCNet-large is the current local model candidate: official MIT code and explicit
 
 ## Files and reproducibility
 
-Start with `PROJECT_PROMPT.md`, `FULL_BUILD_PLAN.md` sections 23–24, `docs/approvals.md`, `docs/research/PARITY_GATE.md`, `FULL_SCOPE_CONTRACT.md`, `FEATURE_COVERAGE.md`, `INTERACTION_REQUIREMENTS.md`, `REQUIREMENT_GAPS_REVIEW.md`, `SOURCE_CONFLICTS.md`, `UI_OBSERVATIONS.md`, `EVIDENCE_LEDGER.md`, `BINARY_FINDINGS.md`, `HARDWARE_HERCULES.md`, `HISTORICAL_GATING.md`.
+Start with `PROJECT_PROMPT.md`, `FULL_BUILD_PLAN.md` sections 23–26, `docs/approvals.md`, `docs/research/PARITY_GATE.md`, `FULL_SCOPE_CONTRACT.md`, `FEATURE_COVERAGE.md`, `INTERACTION_REQUIREMENTS.md`, `REQUIREMENT_GAPS_REVIEW.md`, `SOURCE_CONFLICTS.md`, `UI_OBSERVATIONS.md`, `EVIDENCE_LEDGER.md`, `BINARY_FINDINGS.md`, `HARDWARE_HERCULES.md`, `HISTORICAL_GATING.md`.
 
 DSP research: `KEYLOCK_EVALUATION.md`, `STEMS_RUNTIME_EVALUATION.md`, `AUDIO_ANALYSIS_EVALUATION.md`, `SAMPLER_DSP_EVALUATION.md`, `PITCH_PLAY_EVALUATION.md`, `FX_BEHAVIOR_CONTRACTS.md`, `FX_OBSERVED_PARAMETERS.md`, `FX_CONTROL_GAP_MATRIX.md`. Independent review: `docs/prototype/ADVERSARIAL_AUDIO_REVIEW.md`.
 
@@ -88,13 +88,13 @@ python3 scripts/serve_prototype.py
 
 Reuse an existing server at http://127.0.0.1:8768/prototype/ . It binds loopback only and blocks raw evidence/Git paths. `Start Open Play.command` is the macOS launcher. Closing/reloading the page stops browser audio; Control-C stops the server. Test pages have public Run buttons and disconnect speaker output; main-interface playback uses the browser default device. Stop playback after tests.
 
-Run the matching `*-test.html` pages for keylock, extended-effects, observed-fx-controls, audio-integration, channel-stems-integration, stem-exit, sampler-integration, pitchplay-integration, analysis and the historical `behavior-tests.html`. Read each page's real path and tolerances before interpreting green results.
+Run the matching `*-test.html` pages for keylock, extended-effects, observed-fx-controls, native-fx-controls, audio-integration, channel-stems-integration, fx-adversarial, stem-exit, sampler-integration, pitchplay-integration, analysis and the historical `behavior-tests.html`. Read each page's real path and tolerances before interpreting green results.
 
 Eight original generated demo tracks are included. Imported audio bytes are session-only; SHA-based identity reattaches saved metadata after reimport. Prototype state is browser-local. Export a metadata backup before reset; never reset Serato's library. Local model/fixture files and user Downloads are not repository assets or authorized upload material.
 
 ## Remote records and model routing
 
-All 110 feature cards have existing Codex/Claude recommendation fields. Preserve and revalidate them. Native recommendations remain planning only. Current DSP annotations are being reconciled in `docs/delivery/trello-dsp-sync.json`; historical source and functional writes remain separately pending in `trello-source-sync.json`, `trello-functional-sync.json` and `trello-pending-updates.json`. Read back remote descriptions before asserting consistency or replaying updates. Do not overwrite human changes with stale drafts. No card's existence means acceptance.
+All 110 feature cards have existing Codex/Claude recommendation fields. Preserve and revalidate them. Native recommendations remain planning only. Current DSP annotations are being reconciled in `docs/delivery/trello-dsp-sync.json` (19DSP/sampler descriptions have exact readback, plus GATE-P); all 87 source-link jobs now have exact readback; 13 historical functional annotations passed exact readback and four were superseded by newer DSP evidence; zero pending annotations remain. Details are tracked in `trello-source-sync.json`, `trello-functional-sync.json` and `trello-pending-updates.json`. Read back remote descriptions before asserting consistency or replaying updates. Do not overwrite human changes with stale drafts. No card's existence means acceptance.
 
 ## Required Claude return
 
@@ -108,6 +108,10 @@ Write `handoffs/claude-to-codex-completeness-audit.md` and a machine-readable fi
 6. A coverage verdict that does not equate counts with completeness. State native approval remains absent.
 
 Next action: independently derive the reference checklist, then run the actual candidate and challenge it. Do not launch native work or automatically accept the prototype.
+
+Current follow-up proof: `fx-adversarial-browser-results.json` is 9/9; `behavior-results-dsp-integration.txt` is 20/20. Initial 8/9 ordering failure is retained with explanation. Main UI Stems first-use/on-load/cancel/retry/coalesced actions and Prepared-crate drag reached real four-source readiness. Sampler route proof in `sampler-main-ui-route-results.json` supersedes the earlier inconclusive stopped-playback sample. Physical outputs remain unverified.
+
+Stem Slip research now adds REQ-493–495: latched chord, selected-stem clock and vocal-only crossfader behavior. Serato quickstart conflicts with the Hercules manual on release wording; see `docs/research/STEM_SLIP_EVALUATION.md` and SC-12. These newly documented requirements have not yet been implemented or accepted.
 
 ## Original full project prompt — verbatim snapshot
 

@@ -12,8 +12,8 @@
     "unrecognized_session_values": 0,
     "independent_kernel_checks_passed": 80,
     "independent_kernel_checks_total": 80,
-    "independent_observed_control_schemas": 24,
-    "independent_observed_control_labels": 96
+    "independent_observed_control_schemas": 55,
+    "independent_observed_control_labels": 220
   },
   "interpretation": "No realization below is a claim about how Serato is implemented. Proposed controls are not claimed to match its controls. Unknown branded variants require listening and measured reference captures before sonic parity can close.",
   "sources": [
@@ -125,7 +125,7 @@
       "contract_status": "proposed-independent-not-executed",
       "independent_realization": "Timed feedback delay with a high-pass feedback path and optional soft saturation.",
       "proposed_controls": "Feedback, high-pass cutoff, drive, beat multiplier.",
-      "measurable_acceptance": "Impulse repeats recur at T = 60/BPM × beats; consecutive amplitudes follow the configured feedback ratio within 5%; zero feedback yields one delayed impulse.",
+      "measurable_acceptance": "Impulse repeats recur at T = 60/BPM \u00d7 beats; consecutive amplitudes follow the configured feedback ratio within 5%; zero feedback yields one delayed impulse.",
       "acceptance_scope": "Validates the proposed independent processor, not sonic equivalence or matching vendor defaults.",
       "reference_unknowns": [
         "Actual control ranges and defaults",
@@ -168,7 +168,7 @@
         "Algorithm and sonic equivalence"
       ],
       "observed_parameter_source_image_sha256": "8a2b37c0e6df03bae12c1cffa557465f5efa10698e12ebff3b40d42a3f1d3e59",
-      "control_parity_status": "Observed labels wired to independent behavior. Vendor mappings, limits, defaults and full enum catalog remain unverified.",
+      "control_parity_status": "Observed labels wired to independent behavior. Vendor mappings, limits, defaults and complete enum catalogs remain unverified.",
       "implementation_evidence": {
         "kernel": "prototype/extended-effects-kernel.js",
         "tests": "scripts/test_extended_effects.mjs",
@@ -221,7 +221,13 @@
           "rangeStatus": "independent proposed range",
           "defaultStatus": "independent starting value, not verified vendor default"
         }
-      ]
+      ],
+      "observed_control_semantics_status": "Independent signal behavior executed; sonic reference equivalence not established.",
+      "observed_control_evidence": {
+        "command": "node --experimental-default-type=module scripts/test_observed_fx_controls.mjs",
+        "coverage": "Observed label-set equality; per-control audio contrasts in full extended suite; targeted cohort timing/signal checks.",
+        "browser": "Actual 220-control AudioWorklet execution is parent-owned; see docs/prototype evidence. Node result does not establish browser success."
+      }
     },
     {
       "name": "Low Cut Echo",
@@ -254,7 +260,7 @@
         "Algorithm and sonic equivalence"
       ],
       "observed_parameter_source_image_sha256": "240d0c416cfe470f87f9696b491e7b0b5ab1e48224bf566a95d98f7b718eca8a",
-      "control_parity_status": "Observed labels wired to independent behavior. Vendor mappings, limits, defaults and full enum catalog remain unverified.",
+      "control_parity_status": "Observed labels wired to independent behavior. Vendor mappings, limits, defaults and complete enum catalogs remain unverified.",
       "implementation_evidence": {
         "kernel": "prototype/extended-effects-kernel.js",
         "tests": "scripts/test_extended_effects.mjs",
@@ -307,7 +313,13 @@
           "rangeStatus": "independent proposed range",
           "defaultStatus": "independent starting value, not verified vendor default"
         }
-      ]
+      ],
+      "observed_control_semantics_status": "Independent signal behavior executed; sonic reference equivalence not established.",
+      "observed_control_evidence": {
+        "command": "node --experimental-default-type=module scripts/test_observed_fx_controls.mjs",
+        "coverage": "Observed label-set equality; per-control audio contrasts in full extended suite; targeted cohort timing/signal checks.",
+        "browser": "Actual 220-control AudioWorklet execution is parent-owned; see docs/prototype evidence. Node result does not establish browser success."
+      }
     },
     {
       "name": "Multi Tap Delay",
@@ -340,7 +352,7 @@
         "Algorithm and sonic equivalence"
       ],
       "observed_parameter_source_image_sha256": "4dc9fa79cd8b7923f463745f149db190eaed400eaefb5d33aa548879c5e57b41",
-      "control_parity_status": "Independent proposed controls differ from the observed Serato schema; control semantics parity NOT established.",
+      "control_parity_status": "Observed labels wired to independent behavior. Vendor mappings, limits, defaults and complete enum catalogs remain unverified.",
       "implementation_evidence": {
         "kernel": "prototype/extended-effects-kernel.js",
         "tests": "scripts/test_extended_effects.mjs",
@@ -351,6 +363,56 @@
           "Default output distinct from every other new DJ-FX on a nonperiodic multitone fixture"
         ],
         "does_not_establish": "The full per-effect proposed acceptance contract, native audio, vendor parameter equivalence, vendor sound matching, production real-time robustness."
+      },
+      "executable_observed_controls": [
+        {
+          "name": "Pattern",
+          "value": "Shreds",
+          "options": [
+            "Shreds",
+            "Even",
+            "Dotted"
+          ],
+          "observedLabel": true,
+          "rangeStatus": "Shreds observed; additional options independently designed; vendor catalog unknown",
+          "defaultStatus": "observed session value used as independent starting mode"
+        },
+        {
+          "name": "Feedback",
+          "min": 0,
+          "max": 90,
+          "value": 50,
+          "step": 1,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Filter",
+          "min": 0,
+          "max": 100,
+          "value": 20,
+          "step": 1,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Beat Modify",
+          "min": 0.125,
+          "max": 4,
+          "value": 1,
+          "step": 0.125,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        }
+      ],
+      "observed_control_semantics_status": "Independent signal behavior executed; sonic reference equivalence not established.",
+      "observed_control_evidence": {
+        "command": "node --experimental-default-type=module scripts/test_observed_fx_controls.mjs",
+        "coverage": "Observed label-set equality; per-control audio contrasts in full extended suite; targeted cohort timing/signal checks.",
+        "browser": "Actual 220-control AudioWorklet execution is parent-owned; see docs/prototype evidence. Node result does not establish browser success."
       }
     },
     {
@@ -384,7 +446,7 @@
         "Algorithm and sonic equivalence"
       ],
       "observed_parameter_source_image_sha256": "5a2cfee622d2706018ac1bf05a792890df4852f4b6dcab4dae2f43235008cc3e",
-      "control_parity_status": "Observed labels wired to independent behavior. Vendor mappings, limits, defaults and full enum catalog remain unverified.",
+      "control_parity_status": "Observed labels wired to independent behavior. Vendor mappings, limits, defaults and complete enum catalogs remain unverified.",
       "implementation_evidence": {
         "kernel": "prototype/extended-effects-kernel.js",
         "tests": "scripts/test_extended_effects.mjs",
@@ -437,7 +499,13 @@
           "rangeStatus": "independent proposed range",
           "defaultStatus": "independent starting value, not verified vendor default"
         }
-      ]
+      ],
+      "observed_control_semantics_status": "Independent signal behavior executed; sonic reference equivalence not established.",
+      "observed_control_evidence": {
+        "command": "node --experimental-default-type=module scripts/test_observed_fx_controls.mjs",
+        "coverage": "Observed label-set equality; per-control audio contrasts in full extended suite; targeted cohort timing/signal checks.",
+        "browser": "Actual 220-control AudioWorklet execution is parent-owned; see docs/prototype evidence. Node result does not establish browser success."
+      }
     },
     {
       "name": "Spiral Echo",
@@ -460,7 +528,7 @@
       "contract_status": "proposed-independent-not-executed",
       "independent_realization": "Pitch-shift each trip through a feedback delay using an independent pitch shifter.",
       "proposed_controls": "Pitch per repeat, feedback, beat multiplier.",
-      "measurable_acceptance": "A 440 Hz burst produces successive repeats at 440 × 2^(n × semitones/12) within 3%; repeats must not all have the same frequency.",
+      "measurable_acceptance": "A 440 Hz burst produces successive repeats at 440 \u00d7 2^(n \u00d7 semitones/12) within 3%; repeats must not all have the same frequency.",
       "acceptance_scope": "Validates the proposed independent processor, not sonic equivalence or matching vendor defaults.",
       "reference_unknowns": [
         "Actual control ranges and defaults",
@@ -471,7 +539,7 @@
         "Actual direction, pitch/filter topology and meaning of named variant"
       ],
       "observed_parameter_source_image_sha256": "30d0d96c6436a3c67cc1cedd8601605cca0fef77dd19883c9d246c1a43f2e476",
-      "control_parity_status": "Independent proposed controls differ from the observed Serato schema; control semantics parity NOT established.",
+      "control_parity_status": "Observed labels wired to independent behavior. Vendor mappings, limits, defaults and complete enum catalogs remain unverified.",
       "implementation_evidence": {
         "kernel": "prototype/extended-effects-kernel.js",
         "tests": "scripts/test_extended_effects.mjs",
@@ -482,6 +550,54 @@
           "Default output distinct from every other new DJ-FX on a nonperiodic multitone fixture"
         ],
         "does_not_establish": "The full per-effect proposed acceptance contract, native audio, vendor parameter equivalence, vendor sound matching, production real-time robustness."
+      },
+      "executable_observed_controls": [
+        {
+          "name": "Speed",
+          "min": -100,
+          "max": 100,
+          "value": 0,
+          "step": 1,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Low Bypass",
+          "min": 20,
+          "max": 2000,
+          "value": 20,
+          "step": 10,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "High Bypass",
+          "min": 2000,
+          "max": 20000,
+          "value": 20000,
+          "step": 100,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Beat Modify",
+          "min": 0.125,
+          "max": 4,
+          "value": 1,
+          "step": 0.125,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        }
+      ],
+      "observed_control_semantics_status": "Independent signal behavior executed; sonic reference equivalence not established.",
+      "observed_control_evidence": {
+        "command": "node --experimental-default-type=module scripts/test_observed_fx_controls.mjs",
+        "coverage": "Observed label-set equality; per-control audio contrasts in full extended suite; targeted cohort timing/signal checks.",
+        "browser": "Actual 220-control AudioWorklet execution is parent-owned; see docs/prototype evidence. Node result does not establish browser success."
       }
     },
     {
@@ -515,7 +631,7 @@
         "Algorithm and sonic equivalence"
       ],
       "observed_parameter_source_image_sha256": "6d445a9cb362aeb5d086a892cec5148815253f4e2f1329dd3c570fc2824a3adc",
-      "control_parity_status": "Observed labels wired to independent behavior. Vendor mappings, limits, defaults and full enum catalog remain unverified.",
+      "control_parity_status": "Observed labels wired to independent behavior. Vendor mappings, limits, defaults and complete enum catalogs remain unverified.",
       "implementation_evidence": {
         "kernel": "prototype/extended-effects-kernel.js",
         "tests": "scripts/test_extended_effects.mjs",
@@ -568,7 +684,13 @@
           "rangeStatus": "independent proposed range",
           "defaultStatus": "independent starting value, not verified vendor default"
         }
-      ]
+      ],
+      "observed_control_semantics_status": "Independent signal behavior executed; sonic reference equivalence not established.",
+      "observed_control_evidence": {
+        "command": "node --experimental-default-type=module scripts/test_observed_fx_controls.mjs",
+        "coverage": "Observed label-set equality; per-control audio contrasts in full extended suite; targeted cohort timing/signal checks.",
+        "browser": "Actual 220-control AudioWorklet execution is parent-owned; see docs/prototype evidence. Node result does not establish browser success."
+      }
     },
     {
       "name": "Bit Crush",
@@ -601,7 +723,7 @@
         "Algorithm and sonic equivalence"
       ],
       "observed_parameter_source_image_sha256": "5440b85d7a30a38ebc859c7cf2a3758dc64faa3bab30c5a8cdb78e66cb57aaa0",
-      "control_parity_status": "Observed labels wired to independent behavior. Vendor mappings, limits, defaults and full enum catalog remain unverified.",
+      "control_parity_status": "Observed labels wired to independent behavior. Vendor mappings, limits, defaults and complete enum catalogs remain unverified.",
       "implementation_evidence": {
         "kernel": "prototype/extended-effects-kernel.js",
         "tests": "scripts/test_extended_effects.mjs",
@@ -654,7 +776,13 @@
           "rangeStatus": "independent proposed range",
           "defaultStatus": "independent starting value, not verified vendor default"
         }
-      ]
+      ],
+      "observed_control_semantics_status": "Independent signal behavior executed; sonic reference equivalence not established.",
+      "observed_control_evidence": {
+        "command": "node --experimental-default-type=module scripts/test_observed_fx_controls.mjs",
+        "coverage": "Observed label-set equality; per-control audio contrasts in full extended suite; targeted cohort timing/signal checks.",
+        "browser": "Actual 220-control AudioWorklet execution is parent-owned; see docs/prototype evidence. Node result does not establish browser success."
+      }
     },
     {
       "name": "Distortion",
@@ -687,7 +815,7 @@
         "Algorithm and sonic equivalence"
       ],
       "observed_parameter_source_image_sha256": "76037bb2656a51fa957eb953986dc248006dcce39c20a9831e34e5fb8b3d0a7e",
-      "control_parity_status": "Independent proposed controls differ from the observed Serato schema; control semantics parity NOT established.",
+      "control_parity_status": "Observed labels wired to independent behavior. Vendor mappings, limits, defaults and complete enum catalogs remain unverified.",
       "implementation_evidence": {
         "kernel": "prototype/extended-effects-kernel.js",
         "tests": "scripts/test_extended_effects.mjs",
@@ -698,6 +826,56 @@
           "Default output distinct from every other new DJ-FX on a nonperiodic multitone fixture"
         ],
         "does_not_establish": "The full per-effect proposed acceptance contract, native audio, vendor parameter equivalence, vendor sound matching, production real-time robustness."
+      },
+      "executable_observed_controls": [
+        {
+          "name": "Type",
+          "value": "Smooth Drive",
+          "options": [
+            "Smooth Drive",
+            "Hard Clip",
+            "Foldback"
+          ],
+          "observedLabel": true,
+          "rangeStatus": "Smooth Drive observed; additional options independently designed; vendor catalog unknown",
+          "defaultStatus": "observed session value used as independent starting mode"
+        },
+        {
+          "name": "Drive",
+          "min": 0,
+          "max": 100,
+          "value": 50,
+          "step": 1,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Character",
+          "min": 0,
+          "max": 100,
+          "value": 50,
+          "step": 1,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Tone",
+          "min": -24,
+          "max": 24,
+          "value": 0,
+          "step": 0.5,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        }
+      ],
+      "observed_control_semantics_status": "Independent signal behavior executed; sonic reference equivalence not established.",
+      "observed_control_evidence": {
+        "command": "node --experimental-default-type=module scripts/test_observed_fx_controls.mjs",
+        "coverage": "Observed label-set equality; per-control audio contrasts in full extended suite; targeted cohort timing/signal checks.",
+        "browser": "Actual 220-control AudioWorklet execution is parent-owned; see docs/prototype evidence. Node result does not establish browser success."
       }
     },
     {
@@ -731,7 +909,7 @@
         "Algorithm and sonic equivalence"
       ],
       "observed_parameter_source_image_sha256": "312953cb86a9f431976530bad34d3e013e60f4b9917b646549151e22c10ca27b",
-      "control_parity_status": "Observed labels wired to independent behavior. Vendor mappings, limits, defaults and full enum catalog remain unverified.",
+      "control_parity_status": "Observed labels wired to independent behavior. Vendor mappings, limits, defaults and complete enum catalogs remain unverified.",
       "implementation_evidence": {
         "kernel": "prototype/extended-effects-kernel.js",
         "tests": "scripts/test_extended_effects.mjs",
@@ -784,7 +962,13 @@
           "rangeStatus": "independent proposed range",
           "defaultStatus": "independent starting value, not verified vendor default"
         }
-      ]
+      ],
+      "observed_control_semantics_status": "Independent signal behavior executed; sonic reference equivalence not established.",
+      "observed_control_evidence": {
+        "command": "node --experimental-default-type=module scripts/test_observed_fx_controls.mjs",
+        "coverage": "Observed label-set equality; per-control audio contrasts in full extended suite; targeted cohort timing/signal checks.",
+        "browser": "Actual 220-control AudioWorklet execution is parent-owned; see docs/prototype evidence. Node result does not establish browser success."
+      }
     },
     {
       "name": "Lo-Fi Warmth",
@@ -817,7 +1001,7 @@
         "Algorithm and sonic equivalence"
       ],
       "observed_parameter_source_image_sha256": "0a82983d43faa11374d7110c23e43a4bbfea736c7f6bbbb165ed1b337c04e428",
-      "control_parity_status": "Observed labels wired to independent behavior. Vendor mappings, limits, defaults and full enum catalog remain unverified.",
+      "control_parity_status": "Observed labels wired to independent behavior. Vendor mappings, limits, defaults and complete enum catalogs remain unverified.",
       "implementation_evidence": {
         "kernel": "prototype/extended-effects-kernel.js",
         "tests": "scripts/test_extended_effects.mjs",
@@ -870,7 +1054,13 @@
           "rangeStatus": "independent proposed range",
           "defaultStatus": "independent starting value, not verified vendor default"
         }
-      ]
+      ],
+      "observed_control_semantics_status": "Independent signal behavior executed; sonic reference equivalence not established.",
+      "observed_control_evidence": {
+        "command": "node --experimental-default-type=module scripts/test_observed_fx_controls.mjs",
+        "coverage": "Observed label-set equality; per-control audio contrasts in full extended suite; targeted cohort timing/signal checks.",
+        "browser": "Actual 220-control AudioWorklet execution is parent-owned; see docs/prototype evidence. Node result does not establish browser success."
+      }
     },
     {
       "name": "Sizzle Crush",
@@ -903,7 +1093,7 @@
         "Algorithm and sonic equivalence"
       ],
       "observed_parameter_source_image_sha256": "235927ee4ede1067006141b2c8011979aa872cea88631dc27542cddbe0ede3d8",
-      "control_parity_status": "Observed labels wired to independent behavior. Vendor mappings, limits, defaults and full enum catalog remain unverified.",
+      "control_parity_status": "Observed labels wired to independent behavior. Vendor mappings, limits, defaults and complete enum catalogs remain unverified.",
       "implementation_evidence": {
         "kernel": "prototype/extended-effects-kernel.js",
         "tests": "scripts/test_extended_effects.mjs",
@@ -956,7 +1146,13 @@
           "rangeStatus": "independent proposed range",
           "defaultStatus": "independent starting value, not verified vendor default"
         }
-      ]
+      ],
+      "observed_control_semantics_status": "Independent signal behavior executed; sonic reference equivalence not established.",
+      "observed_control_evidence": {
+        "command": "node --experimental-default-type=module scripts/test_observed_fx_controls.mjs",
+        "coverage": "Observed label-set equality; per-control audio contrasts in full extended suite; targeted cohort timing/signal checks.",
+        "browser": "Actual 220-control AudioWorklet execution is parent-owned; see docs/prototype evidence. Node result does not establish browser success."
+      }
     },
     {
       "name": "Combo Filter",
@@ -989,7 +1185,7 @@
         "Algorithm and sonic equivalence"
       ],
       "observed_parameter_source_image_sha256": "37197357a04d2618307c84ad1be1a565132a400f93c1c2b7e89483c6a9d80965",
-      "control_parity_status": "Observed labels wired to independent behavior. Vendor mappings, limits, defaults and full enum catalog remain unverified.",
+      "control_parity_status": "Observed labels wired to independent behavior. Vendor mappings, limits, defaults and complete enum catalogs remain unverified.",
       "implementation_evidence": {
         "kernel": "prototype/extended-effects-kernel.js",
         "tests": "scripts/test_extended_effects.mjs",
@@ -1042,7 +1238,13 @@
           "rangeStatus": "independent proposed range",
           "defaultStatus": "independent starting value, not verified vendor default"
         }
-      ]
+      ],
+      "observed_control_semantics_status": "Independent signal behavior executed; sonic reference equivalence not established.",
+      "observed_control_evidence": {
+        "command": "node --experimental-default-type=module scripts/test_observed_fx_controls.mjs",
+        "coverage": "Observed label-set equality; per-control audio contrasts in full extended suite; targeted cohort timing/signal checks.",
+        "browser": "Actual 220-control AudioWorklet execution is parent-owned; see docs/prototype evidence. Node result does not establish browser success."
+      }
     },
     {
       "name": "Drive Filter",
@@ -1075,7 +1277,7 @@
         "Algorithm and sonic equivalence"
       ],
       "observed_parameter_source_image_sha256": "1ed4fb76fb5978ff30588661bea89da04208ded4aadca9554c32646763a0a4ce",
-      "control_parity_status": "Independent proposed controls differ from the observed Serato schema; control semantics parity NOT established.",
+      "control_parity_status": "Observed labels wired to independent behavior. Vendor mappings, limits, defaults and complete enum catalogs remain unverified.",
       "implementation_evidence": {
         "kernel": "prototype/extended-effects-kernel.js",
         "tests": "scripts/test_extended_effects.mjs",
@@ -1086,6 +1288,56 @@
           "Default output distinct from every other new DJ-FX on a nonperiodic multitone fixture"
         ],
         "does_not_establish": "The full per-effect proposed acceptance contract, native audio, vendor parameter equivalence, vendor sound matching, production real-time robustness."
+      },
+      "executable_observed_controls": [
+        {
+          "name": "Resonance",
+          "min": 0.1,
+          "max": 12,
+          "value": 1.77,
+          "step": 0.1,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Drive",
+          "min": 0,
+          "max": 100,
+          "value": 50,
+          "step": 1,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Slope",
+          "min": 6,
+          "max": 48,
+          "value": 12,
+          "step": 6,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Type",
+          "value": "Light Sat.",
+          "options": [
+            "Light Sat.",
+            "Hard Clip",
+            "Warm"
+          ],
+          "observedLabel": true,
+          "rangeStatus": "Light Sat. observed; additional options independently designed; vendor catalog unknown",
+          "defaultStatus": "observed session value used as independent starting mode"
+        }
+      ],
+      "observed_control_semantics_status": "Independent signal behavior executed; sonic reference equivalence not established.",
+      "observed_control_evidence": {
+        "command": "node --experimental-default-type=module scripts/test_observed_fx_controls.mjs",
+        "coverage": "Observed label-set equality; per-control audio contrasts in full extended suite; targeted cohort timing/signal checks.",
+        "browser": "Actual 220-control AudioWorklet execution is parent-owned; see docs/prototype evidence. Node result does not establish browser success."
       }
     },
     {
@@ -1119,7 +1371,7 @@
         "Algorithm and sonic equivalence"
       ],
       "observed_parameter_source_image_sha256": "d23f53b2b98db753fa553edbbcfa54d4f6735192d30d8dd3966393ab6d6a12e4",
-      "control_parity_status": "Observed labels wired to independent behavior. Vendor mappings, limits, defaults and full enum catalog remain unverified.",
+      "control_parity_status": "Observed labels wired to independent behavior. Vendor mappings, limits, defaults and complete enum catalogs remain unverified.",
       "implementation_evidence": {
         "kernel": "prototype/extended-effects-kernel.js",
         "tests": "scripts/test_extended_effects.mjs",
@@ -1172,7 +1424,13 @@
           "rangeStatus": "independent proposed range",
           "defaultStatus": "independent starting value, not verified vendor default"
         }
-      ]
+      ],
+      "observed_control_semantics_status": "Independent signal behavior executed; sonic reference equivalence not established.",
+      "observed_control_evidence": {
+        "command": "node --experimental-default-type=module scripts/test_observed_fx_controls.mjs",
+        "coverage": "Observed label-set equality; per-control audio contrasts in full extended suite; targeted cohort timing/signal checks.",
+        "browser": "Actual 220-control AudioWorklet execution is parent-owned; see docs/prototype evidence. Node result does not establish browser success."
+      }
     },
     {
       "name": "Infinity Filter",
@@ -1206,7 +1464,7 @@
         "Actual direction, pitch/filter topology and meaning of named variant"
       ],
       "observed_parameter_source_image_sha256": "b49cb878bdf6136c1b05afbfd41fa4d773d45ffc84edae8ed2936579265152db",
-      "control_parity_status": "Independent proposed controls differ from the observed Serato schema; control semantics parity NOT established.",
+      "control_parity_status": "Observed labels wired to independent behavior. Vendor mappings, limits, defaults and complete enum catalogs remain unverified.",
       "implementation_evidence": {
         "kernel": "prototype/extended-effects-kernel.js",
         "tests": "scripts/test_extended_effects.mjs",
@@ -1217,6 +1475,56 @@
           "Default output distinct from every other new DJ-FX on a nonperiodic multitone fixture"
         ],
         "does_not_establish": "The full per-effect proposed acceptance contract, native audio, vendor parameter equivalence, vendor sound matching, production real-time robustness."
+      },
+      "executable_observed_controls": [
+        {
+          "name": "Centre Freq.",
+          "min": 40,
+          "max": 8000,
+          "value": 700,
+          "step": 10,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Type",
+          "value": "Peak II",
+          "options": [
+            "Peak II",
+            "Wide",
+            "Narrow"
+          ],
+          "observedLabel": true,
+          "rangeStatus": "Peak II observed; additional options independently designed; vendor catalog unknown",
+          "defaultStatus": "observed session value used as independent starting mode"
+        },
+        {
+          "name": "Direction",
+          "min": -100,
+          "max": 100,
+          "value": 50,
+          "step": 1,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Beat Modify",
+          "min": 0.125,
+          "max": 4,
+          "value": 1,
+          "step": 0.125,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        }
+      ],
+      "observed_control_semantics_status": "Independent signal behavior executed; sonic reference equivalence not established.",
+      "observed_control_evidence": {
+        "command": "node --experimental-default-type=module scripts/test_observed_fx_controls.mjs",
+        "coverage": "Observed label-set equality; per-control audio contrasts in full extended suite; targeted cohort timing/signal checks.",
+        "browser": "Actual 220-control AudioWorklet execution is parent-owned; see docs/prototype evidence. Node result does not establish browser success."
       }
     },
     {
@@ -1240,7 +1548,7 @@
       "contract_status": "proposed-independent-not-executed",
       "independent_realization": "Low-pass or band-pass cutoff driven by a tempo-synchronized LFO.",
       "proposed_controls": "Cutoff range, resonance, LFO depth/shape/rate.",
-      "measurable_acceptance": "Noise-band energy oscillates at BPM/(60 × beats) within 2%; LFO depth zero removes periodic cutoff movement.",
+      "measurable_acceptance": "Noise-band energy oscillates at BPM/(60 \u00d7 beats) within 2%; LFO depth zero removes periodic cutoff movement.",
       "acceptance_scope": "Validates the proposed independent processor, not sonic equivalence or matching vendor defaults.",
       "reference_unknowns": [
         "Actual control ranges and defaults",
@@ -1250,7 +1558,7 @@
         "Algorithm and sonic equivalence"
       ],
       "observed_parameter_source_image_sha256": "8926d8d8ddd572230c416b82e9921693e360c846e1df79e0d47b54cbd86b0b56",
-      "control_parity_status": "Observed labels wired to independent behavior. Vendor mappings, limits, defaults and full enum catalog remain unverified.",
+      "control_parity_status": "Observed labels wired to independent behavior. Vendor mappings, limits, defaults and complete enum catalogs remain unverified.",
       "implementation_evidence": {
         "kernel": "prototype/extended-effects-kernel.js",
         "tests": "scripts/test_extended_effects.mjs",
@@ -1305,7 +1613,13 @@
           "rangeStatus": "independent proposed range",
           "defaultStatus": "independent starting value, not verified vendor default"
         }
-      ]
+      ],
+      "observed_control_semantics_status": "Independent signal behavior executed; sonic reference equivalence not established.",
+      "observed_control_evidence": {
+        "command": "node --experimental-default-type=module scripts/test_observed_fx_controls.mjs",
+        "coverage": "Observed label-set equality; per-control audio contrasts in full extended suite; targeted cohort timing/signal checks.",
+        "browser": "Actual 220-control AudioWorklet execution is parent-owned; see docs/prototype evidence. Node result does not establish browser success."
+      }
     },
     {
       "name": "LPF",
@@ -1409,7 +1723,7 @@
         "Source timeline and bypass-resume behavior"
       ],
       "observed_parameter_source_image_sha256": "4776b2a73e6cc3bd59fe1eaa221fd4ef014f4e9bcdb101874f7b3c5521fe7b26",
-      "control_parity_status": "Independent proposed controls differ from the observed Serato schema; control semantics parity NOT established.",
+      "control_parity_status": "Observed labels wired to independent behavior. Vendor mappings, limits, defaults and complete enum catalogs remain unverified.",
       "implementation_evidence": {
         "kernel": "prototype/extended-effects-kernel.js",
         "tests": "scripts/test_extended_effects.mjs",
@@ -1420,6 +1734,54 @@
           "Default output distinct from every other new DJ-FX on a nonperiodic multitone fixture"
         ],
         "does_not_establish": "The full per-effect proposed acceptance contract, native audio, vendor parameter equivalence, vendor sound matching, production real-time robustness."
+      },
+      "executable_observed_controls": [
+        {
+          "name": "Mix",
+          "min": 0,
+          "max": 100,
+          "value": 70,
+          "step": 1,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Shreds",
+          "min": 0,
+          "max": 100,
+          "value": 0,
+          "step": 1,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Range",
+          "min": 0.125,
+          "max": 8,
+          "value": 1,
+          "step": 0.125,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Beat Modify",
+          "min": 0.125,
+          "max": 4,
+          "value": 1,
+          "step": 0.125,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        }
+      ],
+      "observed_control_semantics_status": "Independent signal behavior executed; sonic reference equivalence not established.",
+      "observed_control_evidence": {
+        "command": "node --experimental-default-type=module scripts/test_observed_fx_controls.mjs",
+        "coverage": "Observed label-set equality; per-control audio contrasts in full extended suite; targeted cohort timing/signal checks.",
+        "browser": "Actual 220-control AudioWorklet execution is parent-owned; see docs/prototype evidence. Node result does not establish browser success."
       }
     },
     {
@@ -1456,7 +1818,7 @@
         "Source timeline and bypass-resume behavior"
       ],
       "observed_parameter_source_image_sha256": "d363e986f72646cdf10d9d6642c5cc48c1c32c8035aacfea22c08b015d639f7b",
-      "control_parity_status": "Independent proposed controls differ from the observed Serato schema; control semantics parity NOT established.",
+      "control_parity_status": "Observed labels wired to independent behavior. Vendor mappings, limits, defaults and complete enum catalogs remain unverified.",
       "implementation_evidence": {
         "kernel": "prototype/extended-effects-kernel.js",
         "tests": "scripts/test_extended_effects.mjs",
@@ -1467,6 +1829,55 @@
           "Default output distinct from every other new DJ-FX on a nonperiodic multitone fixture"
         ],
         "does_not_establish": "The full per-effect proposed acceptance contract, native audio, vendor parameter equivalence, vendor sound matching, production real-time robustness."
+      },
+      "executable_observed_controls": [
+        {
+          "name": "Retrigger",
+          "value": "On",
+          "options": [
+            "On",
+            "Off"
+          ],
+          "observedLabel": true,
+          "rangeStatus": "On observed; additional options independently designed; vendor catalog unknown",
+          "defaultStatus": "observed session value used as independent starting mode"
+        },
+        {
+          "name": "Mix",
+          "min": 0,
+          "max": 100,
+          "value": 100,
+          "step": 1,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Range",
+          "min": 1,
+          "max": 8,
+          "value": 2,
+          "step": 0.25,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Grains",
+          "min": 10,
+          "max": 150,
+          "value": 90,
+          "step": 1,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        }
+      ],
+      "observed_control_semantics_status": "Independent signal behavior executed; sonic reference equivalence not established.",
+      "observed_control_evidence": {
+        "command": "node --experimental-default-type=module scripts/test_observed_fx_controls.mjs",
+        "coverage": "Observed label-set equality; per-control audio contrasts in full extended suite; targeted cohort timing/signal checks.",
+        "browser": "Actual 220-control AudioWorklet execution is parent-owned; see docs/prototype evidence. Node result does not establish browser success."
       }
     },
     {
@@ -1503,7 +1914,7 @@
         "Source timeline and bypass-resume behavior"
       ],
       "observed_parameter_source_image_sha256": "9417d88ddb6ee6f14dfb9788b492fe7f61f6d5614cabbbc490a1461f092386e0",
-      "control_parity_status": "Independent proposed controls differ from the observed Serato schema; control semantics parity NOT established.",
+      "control_parity_status": "Observed labels wired to independent behavior. Vendor mappings, limits, defaults and complete enum catalogs remain unverified.",
       "implementation_evidence": {
         "kernel": "prototype/extended-effects-kernel.js",
         "tests": "scripts/test_extended_effects.mjs",
@@ -1514,6 +1925,54 @@
           "Default output distinct from every other new DJ-FX on a nonperiodic multitone fixture"
         ],
         "does_not_establish": "The full per-effect proposed acceptance contract, native audio, vendor parameter equivalence, vendor sound matching, production real-time robustness."
+      },
+      "executable_observed_controls": [
+        {
+          "name": "Repeats",
+          "min": 1,
+          "max": 8,
+          "value": 1,
+          "step": 1,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Shreds",
+          "min": 0,
+          "max": 100,
+          "value": 0,
+          "step": 1,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Range",
+          "min": 0.125,
+          "max": 8,
+          "value": 1,
+          "step": 0.125,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Beat Modify",
+          "min": 0.125,
+          "max": 4,
+          "value": 1,
+          "step": 0.125,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        }
+      ],
+      "observed_control_semantics_status": "Independent signal behavior executed; sonic reference equivalence not established.",
+      "observed_control_evidence": {
+        "command": "node --experimental-default-type=module scripts/test_observed_fx_controls.mjs",
+        "coverage": "Observed label-set equality; per-control audio contrasts in full extended suite; targeted cohort timing/signal checks.",
+        "browser": "Actual 220-control AudioWorklet execution is parent-owned; see docs/prototype evidence. Node result does not establish browser success."
       }
     },
     {
@@ -1550,7 +2009,7 @@
         "Source timeline and bypass-resume behavior"
       ],
       "observed_parameter_source_image_sha256": "1f85a11cc245aa7acf7b81f10be563bbe5406bb6164ff12191180b3a2b60663a",
-      "control_parity_status": "Independent proposed controls differ from the observed Serato schema; control semantics parity NOT established.",
+      "control_parity_status": "Observed labels wired to independent behavior. Vendor mappings, limits, defaults and complete enum catalogs remain unverified.",
       "implementation_evidence": {
         "kernel": "prototype/extended-effects-kernel.js",
         "tests": "scripts/test_extended_effects.mjs",
@@ -1561,6 +2020,54 @@
           "Default output distinct from every other new DJ-FX on a nonperiodic multitone fixture"
         ],
         "does_not_establish": "The full per-effect proposed acceptance contract, native audio, vendor parameter equivalence, vendor sound matching, production real-time robustness."
+      },
+      "executable_observed_controls": [
+        {
+          "name": "Repeats",
+          "min": 1,
+          "max": 8,
+          "value": 1,
+          "step": 1,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Shreds",
+          "min": 0,
+          "max": 100,
+          "value": 0,
+          "step": 1,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Range",
+          "min": 0.125,
+          "max": 8,
+          "value": 1,
+          "step": 0.125,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Beat Modify",
+          "min": 0.125,
+          "max": 4,
+          "value": 1,
+          "step": 0.125,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        }
+      ],
+      "observed_control_semantics_status": "Independent signal behavior executed; sonic reference equivalence not established.",
+      "observed_control_evidence": {
+        "command": "node --experimental-default-type=module scripts/test_observed_fx_controls.mjs",
+        "coverage": "Observed label-set equality; per-control audio contrasts in full extended suite; targeted cohort timing/signal checks.",
+        "browser": "Actual 220-control AudioWorklet execution is parent-owned; see docs/prototype evidence. Node result does not establish browser success."
       }
     },
     {
@@ -1597,7 +2104,7 @@
         "Source timeline and bypass-resume behavior"
       ],
       "observed_parameter_source_image_sha256": "dea1ec0068f7d36d57e149e18739c22962e39686759da6782cfa836f1fe9f3ec",
-      "control_parity_status": "Independent proposed controls differ from the observed Serato schema; control semantics parity NOT established.",
+      "control_parity_status": "Observed labels wired to independent behavior. Vendor mappings, limits, defaults and complete enum catalogs remain unverified.",
       "implementation_evidence": {
         "kernel": "prototype/extended-effects-kernel.js",
         "tests": "scripts/test_extended_effects.mjs",
@@ -1608,6 +2115,55 @@
           "Default output distinct from every other new DJ-FX on a nonperiodic multitone fixture"
         ],
         "does_not_establish": "The full per-effect proposed acceptance contract, native audio, vendor parameter equivalence, vendor sound matching, production real-time robustness."
+      },
+      "executable_observed_controls": [
+        {
+          "name": "Retrigger",
+          "value": "Off",
+          "options": [
+            "Off",
+            "On"
+          ],
+          "observedLabel": true,
+          "rangeStatus": "Off observed; additional options independently designed; vendor catalog unknown",
+          "defaultStatus": "observed session value used as independent starting mode"
+        },
+        {
+          "name": "Mix",
+          "min": 0,
+          "max": 100,
+          "value": 100,
+          "step": 1,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Range",
+          "min": 1,
+          "max": 8,
+          "value": 4,
+          "step": 0.25,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Grains",
+          "min": 10,
+          "max": 150,
+          "value": 90,
+          "step": 1,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        }
+      ],
+      "observed_control_semantics_status": "Independent signal behavior executed; sonic reference equivalence not established.",
+      "observed_control_evidence": {
+        "command": "node --experimental-default-type=module scripts/test_observed_fx_controls.mjs",
+        "coverage": "Observed label-set equality; per-control audio contrasts in full extended suite; targeted cohort timing/signal checks.",
+        "browser": "Actual 220-control AudioWorklet execution is parent-owned; see docs/prototype evidence. Node result does not establish browser success."
       }
     },
     {
@@ -1644,7 +2200,7 @@
         "Source timeline and bypass-resume behavior"
       ],
       "observed_parameter_source_image_sha256": "5d093c50c8de9f0ce621a5173473f189cdf187703ddc2032d08e34b39a1aa096",
-      "control_parity_status": "Independent proposed controls differ from the observed Serato schema; control semantics parity NOT established.",
+      "control_parity_status": "Observed labels wired to independent behavior. Vendor mappings, limits, defaults and complete enum catalogs remain unverified.",
       "implementation_evidence": {
         "kernel": "prototype/extended-effects-kernel.js",
         "tests": "scripts/test_extended_effects.mjs",
@@ -1655,6 +2211,54 @@
           "Default output distinct from every other new DJ-FX on a nonperiodic multitone fixture"
         ],
         "does_not_establish": "The full per-effect proposed acceptance contract, native audio, vendor parameter equivalence, vendor sound matching, production real-time robustness."
+      },
+      "executable_observed_controls": [
+        {
+          "name": "Mix",
+          "min": 0,
+          "max": 100,
+          "value": 70,
+          "step": 1,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Shreds",
+          "min": 0,
+          "max": 100,
+          "value": 100,
+          "step": 1,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Range",
+          "min": 0.125,
+          "max": 8,
+          "value": 2,
+          "step": 0.125,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Beat Modify",
+          "min": 0.125,
+          "max": 4,
+          "value": 0.25,
+          "step": 0.125,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        }
+      ],
+      "observed_control_semantics_status": "Independent signal behavior executed; sonic reference equivalence not established.",
+      "observed_control_evidence": {
+        "command": "node --experimental-default-type=module scripts/test_observed_fx_controls.mjs",
+        "coverage": "Observed label-set equality; per-control audio contrasts in full extended suite; targeted cohort timing/signal checks.",
+        "browser": "Actual 220-control AudioWorklet execution is parent-owned; see docs/prototype evidence. Node result does not establish browser success."
       }
     },
     {
@@ -1691,7 +2295,7 @@
         "Source timeline and bypass-resume behavior"
       ],
       "observed_parameter_source_image_sha256": "608fd56b1c3db55cb5bfb01ae579cc85a49536bd290d6204c691cbbd5743e9dc",
-      "control_parity_status": "Independent proposed controls differ from the observed Serato schema; control semantics parity NOT established.",
+      "control_parity_status": "Observed labels wired to independent behavior. Vendor mappings, limits, defaults and complete enum catalogs remain unverified.",
       "implementation_evidence": {
         "kernel": "prototype/extended-effects-kernel.js",
         "tests": "scripts/test_extended_effects.mjs",
@@ -1702,6 +2306,54 @@
           "Default output distinct from every other new DJ-FX on a nonperiodic multitone fixture"
         ],
         "does_not_establish": "The full per-effect proposed acceptance contract, native audio, vendor parameter equivalence, vendor sound matching, production real-time robustness."
+      },
+      "executable_observed_controls": [
+        {
+          "name": "Repeats",
+          "min": 1,
+          "max": 8,
+          "value": 1,
+          "step": 1,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Shreds",
+          "min": 0,
+          "max": 100,
+          "value": 0,
+          "step": 1,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Range",
+          "min": 0.125,
+          "max": 8,
+          "value": 1,
+          "step": 0.125,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Beat Modify",
+          "min": 0.125,
+          "max": 4,
+          "value": 0.25,
+          "step": 0.125,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        }
+      ],
+      "observed_control_semantics_status": "Independent signal behavior executed; sonic reference equivalence not established.",
+      "observed_control_evidence": {
+        "command": "node --experimental-default-type=module scripts/test_observed_fx_controls.mjs",
+        "coverage": "Observed label-set equality; per-control audio contrasts in full extended suite; targeted cohort timing/signal checks.",
+        "browser": "Actual 220-control AudioWorklet execution is parent-owned; see docs/prototype evidence. Node result does not establish browser success."
       }
     },
     {
@@ -1735,7 +2387,7 @@
         "Algorithm and sonic equivalence"
       ],
       "observed_parameter_source_image_sha256": "b885ebb9fd7f839debd589e0b4074d1687b9380c7a9c4825448886fb6f6492ac",
-      "control_parity_status": "Observed labels wired to independent behavior. Vendor mappings, limits, defaults and full enum catalog remain unverified.",
+      "control_parity_status": "Observed labels wired to independent behavior. Vendor mappings, limits, defaults and complete enum catalogs remain unverified.",
       "implementation_evidence": {
         "kernel": "prototype/extended-effects-kernel.js",
         "tests": "scripts/test_extended_effects.mjs",
@@ -1788,7 +2440,13 @@
           "rangeStatus": "independent proposed range",
           "defaultStatus": "independent starting value, not verified vendor default"
         }
-      ]
+      ],
+      "observed_control_semantics_status": "Independent signal behavior executed; sonic reference equivalence not established.",
+      "observed_control_evidence": {
+        "command": "node --experimental-default-type=module scripts/test_observed_fx_controls.mjs",
+        "coverage": "Observed label-set equality; per-control audio contrasts in full extended suite; targeted cohort timing/signal checks.",
+        "browser": "Actual 220-control AudioWorklet execution is parent-owned; see docs/prototype evidence. Node result does not establish browser success."
+      }
     },
     {
       "name": "Chorus Quad",
@@ -1821,7 +2479,7 @@
         "Algorithm and sonic equivalence"
       ],
       "observed_parameter_source_image_sha256": "571b1f8308a924843735b6574f36642d187944a228946563c02a692f56f75002",
-      "control_parity_status": "Observed labels wired to independent behavior. Vendor mappings, limits, defaults and full enum catalog remain unverified.",
+      "control_parity_status": "Observed labels wired to independent behavior. Vendor mappings, limits, defaults and complete enum catalogs remain unverified.",
       "implementation_evidence": {
         "kernel": "prototype/extended-effects-kernel.js",
         "tests": "scripts/test_extended_effects.mjs",
@@ -1874,7 +2532,13 @@
           "rangeStatus": "independent proposed range",
           "defaultStatus": "independent starting value, not verified vendor default"
         }
-      ]
+      ],
+      "observed_control_semantics_status": "Independent signal behavior executed; sonic reference equivalence not established.",
+      "observed_control_evidence": {
+        "command": "node --experimental-default-type=module scripts/test_observed_fx_controls.mjs",
+        "coverage": "Observed label-set equality; per-control audio contrasts in full extended suite; targeted cohort timing/signal checks.",
+        "browser": "Actual 220-control AudioWorklet execution is parent-owned; see docs/prototype evidence. Node result does not establish browser success."
+      }
     },
     {
       "name": "Falling Flanger",
@@ -1907,7 +2571,7 @@
         "Algorithm and sonic equivalence"
       ],
       "observed_parameter_source_image_sha256": "924ba0267a1044d5a5f0e766adf02bd0b0508792609007323da0b431622632ca",
-      "control_parity_status": "Independent proposed controls differ from the observed Serato schema; control semantics parity NOT established.",
+      "control_parity_status": "Observed labels wired to independent behavior. Vendor mappings, limits, defaults and complete enum catalogs remain unverified.",
       "implementation_evidence": {
         "kernel": "prototype/extended-effects-kernel.js",
         "tests": "scripts/test_extended_effects.mjs",
@@ -1918,6 +2582,56 @@
           "Default output distinct from every other new DJ-FX on a nonperiodic multitone fixture"
         ],
         "does_not_establish": "The full per-effect proposed acceptance contract, native audio, vendor parameter equivalence, vendor sound matching, production real-time robustness."
+      },
+      "executable_observed_controls": [
+        {
+          "name": "Centre Freq.",
+          "min": 40,
+          "max": 8000,
+          "value": 212,
+          "step": 10,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Type",
+          "value": "Octaves I",
+          "options": [
+            "Octaves I",
+            "Wide",
+            "Narrow"
+          ],
+          "observedLabel": true,
+          "rangeStatus": "Octaves I observed; additional options independently designed; vendor catalog unknown",
+          "defaultStatus": "observed session value used as independent starting mode"
+        },
+        {
+          "name": "Direction",
+          "min": -100,
+          "max": 100,
+          "value": -7,
+          "step": 1,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Beat Modify",
+          "min": 0.125,
+          "max": 4,
+          "value": 1,
+          "step": 0.125,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        }
+      ],
+      "observed_control_semantics_status": "Independent signal behavior executed; sonic reference equivalence not established.",
+      "observed_control_evidence": {
+        "command": "node --experimental-default-type=module scripts/test_observed_fx_controls.mjs",
+        "coverage": "Observed label-set equality; per-control audio contrasts in full extended suite; targeted cohort timing/signal checks.",
+        "browser": "Actual 220-control AudioWorklet execution is parent-owned; see docs/prototype evidence. Node result does not establish browser success."
       }
     },
     {
@@ -1951,7 +2665,7 @@
         "Algorithm and sonic equivalence"
       ],
       "observed_parameter_source_image_sha256": "99033a4e430f703b58dcdb8bfa18e459869cb2b14d11b7ec473bf872d000bb22",
-      "control_parity_status": "Observed labels wired to independent behavior. Vendor mappings, limits, defaults and full enum catalog remain unverified.",
+      "control_parity_status": "Observed labels wired to independent behavior. Vendor mappings, limits, defaults and complete enum catalogs remain unverified.",
       "implementation_evidence": {
         "kernel": "prototype/extended-effects-kernel.js",
         "tests": "scripts/test_extended_effects.mjs",
@@ -2004,7 +2718,13 @@
           "rangeStatus": "independent proposed range",
           "defaultStatus": "independent starting value, not verified vendor default"
         }
-      ]
+      ],
+      "observed_control_semantics_status": "Independent signal behavior executed; sonic reference equivalence not established.",
+      "observed_control_evidence": {
+        "command": "node --experimental-default-type=module scripts/test_observed_fx_controls.mjs",
+        "coverage": "Observed label-set equality; per-control audio contrasts in full extended suite; targeted cohort timing/signal checks.",
+        "browser": "Actual 220-control AudioWorklet execution is parent-owned; see docs/prototype evidence. Node result does not establish browser success."
+      }
     },
     {
       "name": "Infinity Flanger",
@@ -2038,7 +2758,7 @@
         "Actual direction, pitch/filter topology and meaning of named variant"
       ],
       "observed_parameter_source_image_sha256": "7265e3981ae7a30c820a2750a1a0b81b33a6da0bdb70e5fb93f7e89dc2c7fbf9",
-      "control_parity_status": "Independent proposed controls differ from the observed Serato schema; control semantics parity NOT established.",
+      "control_parity_status": "Observed labels wired to independent behavior. Vendor mappings, limits, defaults and complete enum catalogs remain unverified.",
       "implementation_evidence": {
         "kernel": "prototype/extended-effects-kernel.js",
         "tests": "scripts/test_extended_effects.mjs",
@@ -2049,6 +2769,56 @@
           "Default output distinct from every other new DJ-FX on a nonperiodic multitone fixture"
         ],
         "does_not_establish": "The full per-effect proposed acceptance contract, native audio, vendor parameter equivalence, vendor sound matching, production real-time robustness."
+      },
+      "executable_observed_controls": [
+        {
+          "name": "Centre Freq.",
+          "min": 40,
+          "max": 8000,
+          "value": 800,
+          "step": 10,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Type",
+          "value": "Omega",
+          "options": [
+            "Omega",
+            "Wide",
+            "Narrow"
+          ],
+          "observedLabel": true,
+          "rangeStatus": "Omega observed; additional options independently designed; vendor catalog unknown",
+          "defaultStatus": "observed session value used as independent starting mode"
+        },
+        {
+          "name": "Direction",
+          "min": -100,
+          "max": 100,
+          "value": 50,
+          "step": 1,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Beat Modify",
+          "min": 0.125,
+          "max": 4,
+          "value": 1,
+          "step": 0.125,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        }
+      ],
+      "observed_control_semantics_status": "Independent signal behavior executed; sonic reference equivalence not established.",
+      "observed_control_evidence": {
+        "command": "node --experimental-default-type=module scripts/test_observed_fx_controls.mjs",
+        "coverage": "Observed label-set equality; per-control audio contrasts in full extended suite; targeted cohort timing/signal checks.",
+        "browser": "Actual 220-control AudioWorklet execution is parent-owned; see docs/prototype evidence. Node result does not establish browser success."
       }
     },
     {
@@ -2082,7 +2852,7 @@
         "Algorithm and sonic equivalence"
       ],
       "observed_parameter_source_image_sha256": "61d49093a539ffcab2619db2bcec2e5c0e76581e0237a2d95a03ead998795a8a",
-      "control_parity_status": "Observed labels wired to independent behavior. Vendor mappings, limits, defaults and full enum catalog remain unverified.",
+      "control_parity_status": "Observed labels wired to independent behavior. Vendor mappings, limits, defaults and complete enum catalogs remain unverified.",
       "implementation_evidence": {
         "kernel": "prototype/extended-effects-kernel.js",
         "tests": "scripts/test_extended_effects.mjs",
@@ -2135,7 +2905,13 @@
           "rangeStatus": "independent proposed range",
           "defaultStatus": "independent starting value, not verified vendor default"
         }
-      ]
+      ],
+      "observed_control_semantics_status": "Independent signal behavior executed; sonic reference equivalence not established.",
+      "observed_control_evidence": {
+        "command": "node --experimental-default-type=module scripts/test_observed_fx_controls.mjs",
+        "coverage": "Observed label-set equality; per-control audio contrasts in full extended suite; targeted cohort timing/signal checks.",
+        "browser": "Actual 220-control AudioWorklet execution is parent-owned; see docs/prototype evidence. Node result does not establish browser success."
+      }
     },
     {
       "name": "Phaser",
@@ -2168,7 +2944,7 @@
         "Algorithm and sonic equivalence"
       ],
       "observed_parameter_source_image_sha256": "bbb2299775e4dc7f5bec5d6ee27fc6f58d8c53499a15b48c3f3e58d997383294",
-      "control_parity_status": "Observed labels wired to independent behavior. Vendor mappings, limits, defaults and full enum catalog remain unverified.",
+      "control_parity_status": "Observed labels wired to independent behavior. Vendor mappings, limits, defaults and complete enum catalogs remain unverified.",
       "implementation_evidence": {
         "kernel": "prototype/extended-effects-kernel.js",
         "tests": "scripts/test_extended_effects.mjs",
@@ -2221,7 +2997,13 @@
           "rangeStatus": "independent proposed range",
           "defaultStatus": "independent starting value, not verified vendor default"
         }
-      ]
+      ],
+      "observed_control_semantics_status": "Independent signal behavior executed; sonic reference equivalence not established.",
+      "observed_control_evidence": {
+        "command": "node --experimental-default-type=module scripts/test_observed_fx_controls.mjs",
+        "coverage": "Observed label-set equality; per-control audio contrasts in full extended suite; targeted cohort timing/signal checks.",
+        "browser": "Actual 220-control AudioWorklet execution is parent-owned; see docs/prototype evidence. Node result does not establish browser success."
+      }
     },
     {
       "name": "Pulse Spiral",
@@ -2255,7 +3037,7 @@
         "Actual direction, pitch/filter topology and meaning of named variant"
       ],
       "observed_parameter_source_image_sha256": "b5b8d6b08b51933c483c6476b0e4b04863ac03fbf72df6679aa3b9be43f5d6fe",
-      "control_parity_status": "Independent proposed controls differ from the observed Serato schema; control semantics parity NOT established.",
+      "control_parity_status": "Observed labels wired to independent behavior. Vendor mappings, limits, defaults and complete enum catalogs remain unverified.",
       "implementation_evidence": {
         "kernel": "prototype/extended-effects-kernel.js",
         "tests": "scripts/test_extended_effects.mjs",
@@ -2266,6 +3048,54 @@
           "Default output distinct from every other new DJ-FX on a nonperiodic multitone fixture"
         ],
         "does_not_establish": "The full per-effect proposed acceptance contract, native audio, vendor parameter equivalence, vendor sound matching, production real-time robustness."
+      },
+      "executable_observed_controls": [
+        {
+          "name": "Feedback",
+          "min": 0,
+          "max": 90,
+          "value": 70,
+          "step": 1,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Filter",
+          "min": 0,
+          "max": 100,
+          "value": 0,
+          "step": 1,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Slide Rate",
+          "min": -100,
+          "max": 100,
+          "value": 50,
+          "step": 1,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Beat Modify",
+          "min": 0.125,
+          "max": 4,
+          "value": 0.5,
+          "step": 0.125,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        }
+      ],
+      "observed_control_semantics_status": "Independent signal behavior executed; sonic reference equivalence not established.",
+      "observed_control_evidence": {
+        "command": "node --experimental-default-type=module scripts/test_observed_fx_controls.mjs",
+        "coverage": "Observed label-set equality; per-control audio contrasts in full extended suite; targeted cohort timing/signal checks.",
+        "browser": "Actual 220-control AudioWorklet execution is parent-owned; see docs/prototype evidence. Node result does not establish browser success."
       }
     },
     {
@@ -2300,7 +3130,7 @@
         "Actual direction, pitch/filter topology and meaning of named variant"
       ],
       "observed_parameter_source_image_sha256": "34d16f5e4b578dfe47091c1691da8b9b0ed0cba31cd89dc65eefbd0aa49ab1df",
-      "control_parity_status": "Independent proposed controls differ from the observed Serato schema; control semantics parity NOT established.",
+      "control_parity_status": "Observed labels wired to independent behavior. Vendor mappings, limits, defaults and complete enum catalogs remain unverified.",
       "implementation_evidence": {
         "kernel": "prototype/extended-effects-kernel.js",
         "tests": "scripts/test_extended_effects.mjs",
@@ -2311,6 +3141,54 @@
           "Default output distinct from every other new DJ-FX on a nonperiodic multitone fixture"
         ],
         "does_not_establish": "The full per-effect proposed acceptance contract, native audio, vendor parameter equivalence, vendor sound matching, production real-time robustness."
+      },
+      "executable_observed_controls": [
+        {
+          "name": "Feedback",
+          "min": 0,
+          "max": 90,
+          "value": 70,
+          "step": 1,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Filter",
+          "min": 0,
+          "max": 100,
+          "value": 0,
+          "step": 1,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Slide Rate",
+          "min": -100,
+          "max": 100,
+          "value": 50,
+          "step": 1,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Beat Modify",
+          "min": 0.125,
+          "max": 4,
+          "value": 1,
+          "step": 0.125,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        }
+      ],
+      "observed_control_semantics_status": "Independent signal behavior executed; sonic reference equivalence not established.",
+      "observed_control_evidence": {
+        "command": "node --experimental-default-type=module scripts/test_observed_fx_controls.mjs",
+        "coverage": "Observed label-set equality; per-control audio contrasts in full extended suite; targeted cohort timing/signal checks.",
+        "browser": "Actual 220-control AudioWorklet execution is parent-owned; see docs/prototype evidence. Node result does not establish browser success."
       }
     },
     {
@@ -2344,7 +3222,7 @@
         "Algorithm and sonic equivalence"
       ],
       "observed_parameter_source_image_sha256": "fc220d5b87cfe3c9b83ec91e8b1a52c9c07d8b69aca4cd371c568fcb1d2ac4c0",
-      "control_parity_status": "Observed labels wired to independent behavior. Vendor mappings, limits, defaults and full enum catalog remain unverified.",
+      "control_parity_status": "Observed labels wired to independent behavior. Vendor mappings, limits, defaults and complete enum catalogs remain unverified.",
       "implementation_evidence": {
         "kernel": "prototype/extended-effects-kernel.js",
         "tests": "scripts/test_extended_effects.mjs",
@@ -2397,7 +3275,13 @@
           "rangeStatus": "independent proposed range",
           "defaultStatus": "independent starting value, not verified vendor default"
         }
-      ]
+      ],
+      "observed_control_semantics_status": "Independent signal behavior executed; sonic reference equivalence not established.",
+      "observed_control_evidence": {
+        "command": "node --experimental-default-type=module scripts/test_observed_fx_controls.mjs",
+        "coverage": "Observed label-set equality; per-control audio contrasts in full extended suite; targeted cohort timing/signal checks.",
+        "browser": "Actual 220-control AudioWorklet execution is parent-owned; see docs/prototype evidence. Node result does not establish browser success."
+      }
     },
     {
       "name": "Tremolo",
@@ -2430,7 +3314,7 @@
         "Algorithm and sonic equivalence"
       ],
       "observed_parameter_source_image_sha256": "224d985e91301aca99eb564ac4e58a146dbcb3ba70b58d3a3e2836ed9561438a",
-      "control_parity_status": "Observed labels wired to independent behavior. Vendor mappings, limits, defaults and full enum catalog remain unverified.",
+      "control_parity_status": "Observed labels wired to independent behavior. Vendor mappings, limits, defaults and complete enum catalogs remain unverified.",
       "implementation_evidence": {
         "kernel": "prototype/extended-effects-kernel.js",
         "tests": "scripts/test_extended_effects.mjs",
@@ -2485,7 +3369,13 @@
           "rangeStatus": "independent proposed range",
           "defaultStatus": "independent starting value, not verified vendor default"
         }
-      ]
+      ],
+      "observed_control_semantics_status": "Independent signal behavior executed; sonic reference equivalence not established.",
+      "observed_control_evidence": {
+        "command": "node --experimental-default-type=module scripts/test_observed_fx_controls.mjs",
+        "coverage": "Observed label-set equality; per-control audio contrasts in full extended suite; targeted cohort timing/signal checks.",
+        "browser": "Actual 220-control AudioWorklet execution is parent-owned; see docs/prototype evidence. Node result does not establish browser success."
+      }
     },
     {
       "name": "Brake Echo",
@@ -2522,7 +3412,7 @@
         "Source transport versus FX-buffer transport"
       ],
       "observed_parameter_source_image_sha256": "c9b5829b35b8c8c71737dec0b2e5cf3074782275135d8b10718665f448ba9f19",
-      "control_parity_status": "Independent proposed controls differ from the observed Serato schema; control semantics parity NOT established.",
+      "control_parity_status": "Observed labels wired to independent behavior. Vendor mappings, limits, defaults and complete enum catalogs remain unverified.",
       "implementation_evidence": {
         "kernel": "prototype/extended-effects-kernel.js",
         "tests": "scripts/test_extended_effects.mjs",
@@ -2533,6 +3423,54 @@
           "Default output distinct from every other new DJ-FX on a nonperiodic multitone fixture"
         ],
         "does_not_establish": "The full per-effect proposed acceptance contract, native audio, vendor parameter equivalence, vendor sound matching, production real-time robustness."
+      },
+      "executable_observed_controls": [
+        {
+          "name": "Feedback",
+          "min": 0,
+          "max": 90,
+          "value": 70,
+          "step": 1,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Stop Time",
+          "min": 25,
+          "max": 800,
+          "value": 200,
+          "step": 25,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Stop Curve",
+          "min": -1,
+          "max": 1,
+          "value": -0.3,
+          "step": 0.05,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Beat Modify",
+          "min": 0.125,
+          "max": 4,
+          "value": 1,
+          "step": 0.125,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        }
+      ],
+      "observed_control_semantics_status": "Independent signal behavior executed; sonic reference equivalence not established.",
+      "observed_control_evidence": {
+        "command": "node --experimental-default-type=module scripts/test_observed_fx_controls.mjs",
+        "coverage": "Observed label-set equality; per-control audio contrasts in full extended suite; targeted cohort timing/signal checks.",
+        "browser": "Actual 220-control AudioWorklet execution is parent-owned; see docs/prototype evidence. Node result does not establish browser success."
       }
     },
     {
@@ -2570,7 +3508,7 @@
         "Source transport versus FX-buffer transport"
       ],
       "observed_parameter_source_image_sha256": "2ff1943abc90b81ef6ee71559d7d5ea71b865dbfdd9a50ceff96d729ae59ea50",
-      "control_parity_status": "Independent proposed controls differ from the observed Serato schema; control semantics parity NOT established.",
+      "control_parity_status": "Observed labels wired to independent behavior. Vendor mappings, limits, defaults and complete enum catalogs remain unverified.",
       "implementation_evidence": {
         "kernel": "prototype/extended-effects-kernel.js",
         "tests": "scripts/test_extended_effects.mjs",
@@ -2581,6 +3519,55 @@
           "Default output distinct from every other new DJ-FX on a nonperiodic multitone fixture"
         ],
         "does_not_establish": "The full per-effect proposed acceptance contract, native audio, vendor parameter equivalence, vendor sound matching, production real-time robustness."
+      },
+      "executable_observed_controls": [
+        {
+          "name": "Stop Time",
+          "min": 0.25,
+          "max": 12,
+          "value": 2,
+          "step": 0.25,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Curve",
+          "min": -1,
+          "max": 1,
+          "value": 0.5,
+          "step": 0.05,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Spinback",
+          "min": 0,
+          "max": 12,
+          "value": 2,
+          "step": 0.1,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Mode",
+          "value": "Vinyl",
+          "options": [
+            "Vinyl",
+            "Stretch"
+          ],
+          "observedLabel": true,
+          "rangeStatus": "Vinyl observed; additional options independently designed; vendor catalog unknown",
+          "defaultStatus": "observed session value used as independent starting mode"
+        }
+      ],
+      "observed_control_semantics_status": "Independent signal behavior executed; sonic reference equivalence not established.",
+      "observed_control_evidence": {
+        "command": "node --experimental-default-type=module scripts/test_observed_fx_controls.mjs",
+        "coverage": "Observed label-set equality; per-control audio contrasts in full extended suite; targeted cohort timing/signal checks.",
+        "browser": "Actual 220-control AudioWorklet execution is parent-owned; see docs/prototype evidence. Node result does not establish browser success."
       }
     },
     {
@@ -2618,7 +3605,7 @@
         "Source transport versus FX-buffer transport"
       ],
       "observed_parameter_source_image_sha256": "6cf3e1bd7f0d5472c48b0b25fa9ef2163902940349f60c2c582fced441eab86a",
-      "control_parity_status": "Independent proposed controls differ from the observed Serato schema; control semantics parity NOT established.",
+      "control_parity_status": "Observed labels wired to independent behavior. Vendor mappings, limits, defaults and complete enum catalogs remain unverified.",
       "implementation_evidence": {
         "kernel": "prototype/extended-effects-kernel.js",
         "tests": "scripts/test_extended_effects.mjs",
@@ -2629,6 +3616,55 @@
           "Default output distinct from every other new DJ-FX on a nonperiodic multitone fixture"
         ],
         "does_not_establish": "The full per-effect proposed acceptance contract, native audio, vendor parameter equivalence, vendor sound matching, production real-time robustness."
+      },
+      "executable_observed_controls": [
+        {
+          "name": "Mix",
+          "min": 0,
+          "max": 100,
+          "value": 100,
+          "step": 1,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Curve",
+          "min": -1,
+          "max": 1,
+          "value": -0.3,
+          "step": 0.05,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Mode",
+          "value": "Vinyl",
+          "options": [
+            "Vinyl",
+            "Stretch"
+          ],
+          "observedLabel": true,
+          "rangeStatus": "Vinyl observed; additional options independently designed; vendor catalog unknown",
+          "defaultStatus": "observed session value used as independent starting mode"
+        },
+        {
+          "name": "Beat Modify",
+          "min": 0.125,
+          "max": 4,
+          "value": 2,
+          "step": 0.125,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        }
+      ],
+      "observed_control_semantics_status": "Independent signal behavior executed; sonic reference equivalence not established.",
+      "observed_control_evidence": {
+        "command": "node --experimental-default-type=module scripts/test_observed_fx_controls.mjs",
+        "coverage": "Observed label-set equality; per-control audio contrasts in full extended suite; targeted cohort timing/signal checks.",
+        "browser": "Actual 220-control AudioWorklet execution is parent-owned; see docs/prototype evidence. Node result does not establish browser success."
       }
     },
     {
@@ -2666,7 +3702,7 @@
         "Source transport versus FX-buffer transport"
       ],
       "observed_parameter_source_image_sha256": "3f782c4c2c743a7ac2475503cbf871c3d9d0c7b450e2425c9208c0a41cbab9f7",
-      "control_parity_status": "Observed labels wired to independent behavior. Vendor mappings, limits, defaults and full enum catalog remain unverified.",
+      "control_parity_status": "Observed labels wired to independent behavior. Vendor mappings, limits, defaults and complete enum catalogs remain unverified.",
       "implementation_evidence": {
         "kernel": "prototype/extended-effects-kernel.js",
         "tests": "scripts/test_extended_effects.mjs",
@@ -2719,7 +3755,13 @@
           "rangeStatus": "independent proposed range",
           "defaultStatus": "independent starting value, not verified vendor default"
         }
-      ]
+      ],
+      "observed_control_semantics_status": "Independent signal behavior executed; sonic reference equivalence not established.",
+      "observed_control_evidence": {
+        "command": "node --experimental-default-type=module scripts/test_observed_fx_controls.mjs",
+        "coverage": "Observed label-set equality; per-control audio contrasts in full extended suite; targeted cohort timing/signal checks.",
+        "browser": "Actual 220-control AudioWorklet execution is parent-owned; see docs/prototype evidence. Node result does not establish browser success."
+      }
     },
     {
       "name": "Clean Rollout",
@@ -2756,7 +3798,7 @@
         "Source transport versus FX-buffer transport"
       ],
       "observed_parameter_source_image_sha256": "c0c83bd5a5b39ef9d20d98d6ff93ef5be89131bb14562cf689c237ada01bde6c",
-      "control_parity_status": "Independent proposed controls differ from the observed Serato schema; control semantics parity NOT established.",
+      "control_parity_status": "Observed labels wired to independent behavior. Vendor mappings, limits, defaults and complete enum catalogs remain unverified.",
       "implementation_evidence": {
         "kernel": "prototype/extended-effects-kernel.js",
         "tests": "scripts/test_extended_effects.mjs",
@@ -2767,6 +3809,54 @@
           "Default output distinct from every other new DJ-FX on a nonperiodic multitone fixture"
         ],
         "does_not_establish": "The full per-effect proposed acceptance contract, native audio, vendor parameter equivalence, vendor sound matching, production real-time robustness."
+      },
+      "executable_observed_controls": [
+        {
+          "name": "Echo/Feedback",
+          "min": 0,
+          "max": 90,
+          "value": 10,
+          "step": 1,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Filter",
+          "min": 0,
+          "max": 100,
+          "value": 19,
+          "step": 1,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Roll",
+          "min": 0.25,
+          "max": 16,
+          "value": 10,
+          "step": 0.25,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Beat Modify",
+          "min": 0.125,
+          "max": 8,
+          "value": 2,
+          "step": 0.125,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        }
+      ],
+      "observed_control_semantics_status": "Independent signal behavior executed; sonic reference equivalence not established.",
+      "observed_control_evidence": {
+        "command": "node --experimental-default-type=module scripts/test_observed_fx_controls.mjs",
+        "coverage": "Observed label-set equality; per-control audio contrasts in full extended suite; targeted cohort timing/signal checks.",
+        "browser": "Actual 220-control AudioWorklet execution is parent-owned; see docs/prototype evidence. Node result does not establish browser success."
       }
     },
     {
@@ -2804,7 +3894,7 @@
         "Source transport versus FX-buffer transport"
       ],
       "observed_parameter_source_image_sha256": "7c91efc300858f175083588e04b4aed2d7c570719ebb7af1d331409be6e5c952",
-      "control_parity_status": "Independent proposed controls differ from the observed Serato schema; control semantics parity NOT established.",
+      "control_parity_status": "Observed labels wired to independent behavior. Vendor mappings, limits, defaults and complete enum catalogs remain unverified.",
       "implementation_evidence": {
         "kernel": "prototype/extended-effects-kernel.js",
         "tests": "scripts/test_extended_effects.mjs",
@@ -2815,6 +3905,54 @@
           "Default output distinct from every other new DJ-FX on a nonperiodic multitone fixture"
         ],
         "does_not_establish": "The full per-effect proposed acceptance contract, native audio, vendor parameter equivalence, vendor sound matching, production real-time robustness."
+      },
+      "executable_observed_controls": [
+        {
+          "name": "Feedback",
+          "min": 0,
+          "max": 90,
+          "value": 65,
+          "step": 1,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Stop Time",
+          "min": 25,
+          "max": 800,
+          "value": 200,
+          "step": 25,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Drive",
+          "min": 0,
+          "max": 100,
+          "value": 25,
+          "step": 1,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Beat Modify",
+          "min": 0.125,
+          "max": 4,
+          "value": 1,
+          "step": 0.125,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        }
+      ],
+      "observed_control_semantics_status": "Independent signal behavior executed; sonic reference equivalence not established.",
+      "observed_control_evidence": {
+        "command": "node --experimental-default-type=module scripts/test_observed_fx_controls.mjs",
+        "coverage": "Observed label-set equality; per-control audio contrasts in full extended suite; targeted cohort timing/signal checks.",
+        "browser": "Actual 220-control AudioWorklet execution is parent-owned; see docs/prototype evidence. Node result does not establish browser success."
       }
     },
     {
@@ -2852,7 +3990,7 @@
         "Source transport versus FX-buffer transport"
       ],
       "observed_parameter_source_image_sha256": "754a30c0e0268c8bf709f1fd5fc3ee594df26b51978b137fca5e3ae23ae01e75",
-      "control_parity_status": "Observed labels wired to independent behavior. Vendor mappings, limits, defaults and full enum catalog remain unverified.",
+      "control_parity_status": "Observed labels wired to independent behavior. Vendor mappings, limits, defaults and complete enum catalogs remain unverified.",
       "implementation_evidence": {
         "kernel": "prototype/extended-effects-kernel.js",
         "tests": "scripts/test_extended_effects.mjs",
@@ -2905,7 +4043,13 @@
           "rangeStatus": "independent proposed range",
           "defaultStatus": "independent starting value, not verified vendor default"
         }
-      ]
+      ],
+      "observed_control_semantics_status": "Independent signal behavior executed; sonic reference equivalence not established.",
+      "observed_control_evidence": {
+        "command": "node --experimental-default-type=module scripts/test_observed_fx_controls.mjs",
+        "coverage": "Observed label-set equality; per-control audio contrasts in full extended suite; targeted cohort timing/signal checks.",
+        "browser": "Actual 220-control AudioWorklet execution is parent-owned; see docs/prototype evidence. Node result does not establish browser success."
+      }
     },
     {
       "name": "Epic Stretch Rewind",
@@ -2942,7 +4086,7 @@
         "Source transport versus FX-buffer transport"
       ],
       "observed_parameter_source_image_sha256": "3e72d6f30ce0497eec142b56b781b69d93695bf023934f9aabe64001154e7842",
-      "control_parity_status": "Independent proposed controls differ from the observed Serato schema; control semantics parity NOT established.",
+      "control_parity_status": "Observed labels wired to independent behavior. Vendor mappings, limits, defaults and complete enum catalogs remain unverified.",
       "implementation_evidence": {
         "kernel": "prototype/extended-effects-kernel.js",
         "tests": "scripts/test_extended_effects.mjs",
@@ -2953,6 +4097,55 @@
           "Default output distinct from every other new DJ-FX on a nonperiodic multitone fixture"
         ],
         "does_not_establish": "The full per-effect proposed acceptance contract, native audio, vendor parameter equivalence, vendor sound matching, production real-time robustness."
+      },
+      "executable_observed_controls": [
+        {
+          "name": "Stop Time",
+          "min": 0.25,
+          "max": 12,
+          "value": 8,
+          "step": 0.25,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Curve",
+          "min": -1,
+          "max": 1,
+          "value": -1,
+          "step": 0.05,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Spinback",
+          "min": 0,
+          "max": 12,
+          "value": 5,
+          "step": 0.1,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Mode",
+          "value": "Stretch",
+          "options": [
+            "Stretch",
+            "Vinyl"
+          ],
+          "observedLabel": true,
+          "rangeStatus": "Stretch observed; additional options independently designed; vendor catalog unknown",
+          "defaultStatus": "observed session value used as independent starting mode"
+        }
+      ],
+      "observed_control_semantics_status": "Independent signal behavior executed; sonic reference equivalence not established.",
+      "observed_control_evidence": {
+        "command": "node --experimental-default-type=module scripts/test_observed_fx_controls.mjs",
+        "coverage": "Observed label-set equality; per-control audio contrasts in full extended suite; targeted cohort timing/signal checks.",
+        "browser": "Actual 220-control AudioWorklet execution is parent-owned; see docs/prototype evidence. Node result does not establish browser success."
       }
     },
     {
@@ -2990,7 +4183,7 @@
         "Source transport versus FX-buffer transport"
       ],
       "observed_parameter_source_image_sha256": "0a579a28fb4a8b461db2543793d6f28aca6762ec1c2543571825db0b60a18fc3",
-      "control_parity_status": "Independent proposed controls differ from the observed Serato schema; control semantics parity NOT established.",
+      "control_parity_status": "Observed labels wired to independent behavior. Vendor mappings, limits, defaults and complete enum catalogs remain unverified.",
       "implementation_evidence": {
         "kernel": "prototype/extended-effects-kernel.js",
         "tests": "scripts/test_extended_effects.mjs",
@@ -3001,6 +4194,54 @@
           "Default output distinct from every other new DJ-FX on a nonperiodic multitone fixture"
         ],
         "does_not_establish": "The full per-effect proposed acceptance contract, native audio, vendor parameter equivalence, vendor sound matching, production real-time robustness."
+      },
+      "executable_observed_controls": [
+        {
+          "name": "Echo/Feedback",
+          "min": 0,
+          "max": 90,
+          "value": 40,
+          "step": 1,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Filter",
+          "min": 0,
+          "max": 100,
+          "value": 30,
+          "step": 1,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Roll",
+          "min": 0.25,
+          "max": 16,
+          "value": 7,
+          "step": 0.25,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Beat Modify",
+          "min": 0.125,
+          "max": 8,
+          "value": 4,
+          "step": 0.125,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        }
+      ],
+      "observed_control_semantics_status": "Independent signal behavior executed; sonic reference equivalence not established.",
+      "observed_control_evidence": {
+        "command": "node --experimental-default-type=module scripts/test_observed_fx_controls.mjs",
+        "coverage": "Observed label-set equality; per-control audio contrasts in full extended suite; targeted cohort timing/signal checks.",
+        "browser": "Actual 220-control AudioWorklet execution is parent-owned; see docs/prototype evidence. Node result does not establish browser success."
       }
     },
     {
@@ -3038,7 +4279,7 @@
         "Source transport versus FX-buffer transport"
       ],
       "observed_parameter_source_image_sha256": "cc74e76a1415e5e326870555568c4424c58c5ee46350b2800a0c1d433c80c42f",
-      "control_parity_status": "Independent proposed controls differ from the observed Serato schema; control semantics parity NOT established.",
+      "control_parity_status": "Observed labels wired to independent behavior. Vendor mappings, limits, defaults and complete enum catalogs remain unverified.",
       "implementation_evidence": {
         "kernel": "prototype/extended-effects-kernel.js",
         "tests": "scripts/test_extended_effects.mjs",
@@ -3049,6 +4290,54 @@
           "Default output distinct from every other new DJ-FX on a nonperiodic multitone fixture"
         ],
         "does_not_establish": "The full per-effect proposed acceptance contract, native audio, vendor parameter equivalence, vendor sound matching, production real-time robustness."
+      },
+      "executable_observed_controls": [
+        {
+          "name": "Feedback",
+          "min": 0,
+          "max": 90,
+          "value": 66,
+          "step": 1,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Stop Time",
+          "min": 25,
+          "max": 800,
+          "value": 200,
+          "step": 25,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Stop Curve",
+          "min": -1,
+          "max": 1,
+          "value": 0,
+          "step": 0.05,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Beat Modify",
+          "min": 0.125,
+          "max": 4,
+          "value": 0.375,
+          "step": 0.125,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        }
+      ],
+      "observed_control_semantics_status": "Independent signal behavior executed; sonic reference equivalence not established.",
+      "observed_control_evidence": {
+        "command": "node --experimental-default-type=module scripts/test_observed_fx_controls.mjs",
+        "coverage": "Observed label-set equality; per-control audio contrasts in full extended suite; targeted cohort timing/signal checks.",
+        "browser": "Actual 220-control AudioWorklet execution is parent-owned; see docs/prototype evidence. Node result does not establish browser success."
       }
     },
     {
@@ -3086,7 +4375,7 @@
         "Source transport versus FX-buffer transport"
       ],
       "observed_parameter_source_image_sha256": "87c2a8e18d8fb3b563b8f427405a746bff5bfc0b12f3112cd4d6401b2e025eff",
-      "control_parity_status": "Independent proposed controls differ from the observed Serato schema; control semantics parity NOT established.",
+      "control_parity_status": "Observed labels wired to independent behavior. Vendor mappings, limits, defaults and complete enum catalogs remain unverified.",
       "implementation_evidence": {
         "kernel": "prototype/extended-effects-kernel.js",
         "tests": "scripts/test_extended_effects.mjs",
@@ -3097,6 +4386,54 @@
           "Default output distinct from every other new DJ-FX on a nonperiodic multitone fixture"
         ],
         "does_not_establish": "The full per-effect proposed acceptance contract, native audio, vendor parameter equivalence, vendor sound matching, production real-time robustness."
+      },
+      "executable_observed_controls": [
+        {
+          "name": "Echo/Feedback",
+          "min": 0,
+          "max": 90,
+          "value": 40,
+          "step": 1,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Filter",
+          "min": 0,
+          "max": 100,
+          "value": 0,
+          "step": 1,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Roll",
+          "min": 0.25,
+          "max": 16,
+          "value": 10,
+          "step": 0.25,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Beat Modify",
+          "min": 0.125,
+          "max": 8,
+          "value": 8,
+          "step": 0.125,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        }
+      ],
+      "observed_control_semantics_status": "Independent signal behavior executed; sonic reference equivalence not established.",
+      "observed_control_evidence": {
+        "command": "node --experimental-default-type=module scripts/test_observed_fx_controls.mjs",
+        "coverage": "Observed label-set equality; per-control audio contrasts in full extended suite; targeted cohort timing/signal checks.",
+        "browser": "Actual 220-control AudioWorklet execution is parent-owned; see docs/prototype evidence. Node result does not establish browser success."
       }
     },
     {
@@ -3134,7 +4471,7 @@
         "Source transport versus FX-buffer transport"
       ],
       "observed_parameter_source_image_sha256": "d4e166d0f2f025a2fe5f184792cea9abaf7f71cee575386b6a7ca7bf948b765c",
-      "control_parity_status": "Independent proposed controls differ from the observed Serato schema; control semantics parity NOT established.",
+      "control_parity_status": "Observed labels wired to independent behavior. Vendor mappings, limits, defaults and complete enum catalogs remain unverified.",
       "implementation_evidence": {
         "kernel": "prototype/extended-effects-kernel.js",
         "tests": "scripts/test_extended_effects.mjs",
@@ -3145,6 +4482,55 @@
           "Default output distinct from every other new DJ-FX on a nonperiodic multitone fixture"
         ],
         "does_not_establish": "The full per-effect proposed acceptance contract, native audio, vendor parameter equivalence, vendor sound matching, production real-time robustness."
+      },
+      "executable_observed_controls": [
+        {
+          "name": "Stop Time",
+          "min": 0.25,
+          "max": 12,
+          "value": 2,
+          "step": 0.25,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Curve",
+          "min": -1,
+          "max": 1,
+          "value": 0,
+          "step": 0.05,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Spinback",
+          "min": 0,
+          "max": 12,
+          "value": 0,
+          "step": 0.1,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Mode",
+          "value": "Vinyl",
+          "options": [
+            "Vinyl",
+            "Stretch"
+          ],
+          "observedLabel": true,
+          "rangeStatus": "Vinyl observed; additional options independently designed; vendor catalog unknown",
+          "defaultStatus": "observed session value used as independent starting mode"
+        }
+      ],
+      "observed_control_semantics_status": "Independent signal behavior executed; sonic reference equivalence not established.",
+      "observed_control_evidence": {
+        "command": "node --experimental-default-type=module scripts/test_observed_fx_controls.mjs",
+        "coverage": "Observed label-set equality; per-control audio contrasts in full extended suite; targeted cohort timing/signal checks.",
+        "browser": "Actual 220-control AudioWorklet execution is parent-owned; see docs/prototype evidence. Node result does not establish browser success."
       }
     },
     {
@@ -3178,7 +4564,7 @@
         "Algorithm and sonic equivalence"
       ],
       "observed_parameter_source_image_sha256": "ac1c881c4c10d20f5430ffcb766ae0e8c9b30b5664ca387b10e2d6370e1ca67a",
-      "control_parity_status": "Observed labels wired to independent behavior. Vendor mappings, limits, defaults and full enum catalog remain unverified.",
+      "control_parity_status": "Observed labels wired to independent behavior. Vendor mappings, limits, defaults and complete enum catalogs remain unverified.",
       "implementation_evidence": {
         "kernel": "prototype/extended-effects-kernel.js",
         "tests": "scripts/test_extended_effects.mjs",
@@ -3232,7 +4618,13 @@
           "rangeStatus": "observed examples; catalog incomplete",
           "defaultStatus": "independent starting mode"
         }
-      ]
+      ],
+      "observed_control_semantics_status": "Independent signal behavior executed; sonic reference equivalence not established.",
+      "observed_control_evidence": {
+        "command": "node --experimental-default-type=module scripts/test_observed_fx_controls.mjs",
+        "coverage": "Observed label-set equality; per-control audio contrasts in full extended suite; targeted cohort timing/signal checks.",
+        "browser": "Actual 220-control AudioWorklet execution is parent-owned; see docs/prototype evidence. Node result does not establish browser success."
+      }
     },
     {
       "name": "Empty Mall Verb",
@@ -3265,7 +4657,7 @@
         "Algorithm and sonic equivalence"
       ],
       "observed_parameter_source_image_sha256": "d8b2a4253a4561e4994561cc5be9dfc3f93e83187a93ffcb6c36877c07e6a028",
-      "control_parity_status": "Observed labels wired to independent behavior. Vendor mappings, limits, defaults and full enum catalog remain unverified.",
+      "control_parity_status": "Observed labels wired to independent behavior. Vendor mappings, limits, defaults and complete enum catalogs remain unverified.",
       "implementation_evidence": {
         "kernel": "prototype/extended-effects-kernel.js",
         "tests": "scripts/test_extended_effects.mjs",
@@ -3319,7 +4711,13 @@
           "rangeStatus": "observed examples; catalog incomplete",
           "defaultStatus": "independent starting mode"
         }
-      ]
+      ],
+      "observed_control_semantics_status": "Independent signal behavior executed; sonic reference equivalence not established.",
+      "observed_control_evidence": {
+        "command": "node --experimental-default-type=module scripts/test_observed_fx_controls.mjs",
+        "coverage": "Observed label-set equality; per-control audio contrasts in full extended suite; targeted cohort timing/signal checks.",
+        "browser": "Actual 220-control AudioWorklet execution is parent-owned; see docs/prototype evidence. Node result does not establish browser success."
+      }
     },
     {
       "name": "Epic Reverb",
@@ -3352,7 +4750,7 @@
         "Algorithm and sonic equivalence"
       ],
       "observed_parameter_source_image_sha256": "8d8ed610ae9db5ecb0ef84be05e0312794b9ab9d0f79c4451e817d779311fc9b",
-      "control_parity_status": "Observed labels wired to independent behavior. Vendor mappings, limits, defaults and full enum catalog remain unverified.",
+      "control_parity_status": "Observed labels wired to independent behavior. Vendor mappings, limits, defaults and complete enum catalogs remain unverified.",
       "implementation_evidence": {
         "kernel": "prototype/extended-effects-kernel.js",
         "tests": "scripts/test_extended_effects.mjs",
@@ -3406,7 +4804,13 @@
           "rangeStatus": "observed examples; catalog incomplete",
           "defaultStatus": "independent starting mode"
         }
-      ]
+      ],
+      "observed_control_semantics_status": "Independent signal behavior executed; sonic reference equivalence not established.",
+      "observed_control_evidence": {
+        "command": "node --experimental-default-type=module scripts/test_observed_fx_controls.mjs",
+        "coverage": "Observed label-set equality; per-control audio contrasts in full extended suite; targeted cohort timing/signal checks.",
+        "browser": "Actual 220-control AudioWorklet execution is parent-owned; see docs/prototype evidence. Node result does not establish browser success."
+      }
     },
     {
       "name": "Epic Reverb Drop",
@@ -3439,7 +4843,7 @@
         "Algorithm and sonic equivalence"
       ],
       "observed_parameter_source_image_sha256": "e32ba0c25c1a7b8aee2e608c0b76ad506026d96fad5fae45c3806e23d50eb959",
-      "control_parity_status": "Independent proposed controls differ from the observed Serato schema; control semantics parity NOT established.",
+      "control_parity_status": "Observed labels wired to independent behavior. Vendor mappings, limits, defaults and complete enum catalogs remain unverified.",
       "implementation_evidence": {
         "kernel": "prototype/extended-effects-kernel.js",
         "tests": "scripts/test_extended_effects.mjs",
@@ -3450,6 +4854,56 @@
           "Default output distinct from every other new DJ-FX on a nonperiodic multitone fixture"
         ],
         "does_not_establish": "The full per-effect proposed acceptance contract, native audio, vendor parameter equivalence, vendor sound matching, production real-time robustness."
+      },
+      "executable_observed_controls": [
+        {
+          "name": "Decay",
+          "min": 0,
+          "max": 100,
+          "value": 85,
+          "step": 1,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default",
+          "unit": "%",
+          "mappingStatus": "independent exponential percentage-to-seconds mapping"
+        },
+        {
+          "name": "Contour",
+          "min": -100,
+          "max": 100,
+          "value": 0,
+          "step": 1,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Width",
+          "min": 0,
+          "max": 200,
+          "value": 100,
+          "step": 1,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Drop Range",
+          "min": 0,
+          "max": 36,
+          "value": 24,
+          "step": 0.5,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        }
+      ],
+      "observed_control_semantics_status": "Independent signal behavior executed; sonic reference equivalence not established.",
+      "observed_control_evidence": {
+        "command": "node --experimental-default-type=module scripts/test_observed_fx_controls.mjs",
+        "coverage": "Observed label-set equality; per-control audio contrasts in full extended suite; targeted cohort timing/signal checks.",
+        "browser": "Actual 220-control AudioWorklet execution is parent-owned; see docs/prototype evidence. Node result does not establish browser success."
       }
     },
     {
@@ -3483,7 +4937,7 @@
         "Algorithm and sonic equivalence"
       ],
       "observed_parameter_source_image_sha256": "f1eefac42c81d308b1d764b0c2725c8663e8e1ce5014f1bd77dc0de7356543e1",
-      "control_parity_status": "Observed labels wired to independent behavior. Vendor mappings, limits, defaults and full enum catalog remain unverified.",
+      "control_parity_status": "Observed labels wired to independent behavior. Vendor mappings, limits, defaults and complete enum catalogs remain unverified.",
       "implementation_evidence": {
         "kernel": "prototype/extended-effects-kernel.js",
         "tests": "scripts/test_extended_effects.mjs",
@@ -3537,7 +4991,13 @@
           "rangeStatus": "observed examples; catalog incomplete",
           "defaultStatus": "independent starting mode"
         }
-      ]
+      ],
+      "observed_control_semantics_status": "Independent signal behavior executed; sonic reference equivalence not established.",
+      "observed_control_evidence": {
+        "command": "node --experimental-default-type=module scripts/test_observed_fx_controls.mjs",
+        "coverage": "Observed label-set equality; per-control audio contrasts in full extended suite; targeted cohort timing/signal checks.",
+        "browser": "Actual 220-control AudioWorklet execution is parent-owned; see docs/prototype evidence. Node result does not establish browser success."
+      }
     },
     {
       "name": "Reverb",
@@ -3604,7 +5064,7 @@
         "Algorithm and sonic equivalence"
       ],
       "observed_parameter_source_image_sha256": "588865da4779a3adcdc84db887f4df26d26a185de4f90a94e98cb893a2a1c29c",
-      "control_parity_status": "Independent proposed controls differ from the observed Serato schema; control semantics parity NOT established.",
+      "control_parity_status": "Observed labels wired to independent behavior. Vendor mappings, limits, defaults and complete enum catalogs remain unverified.",
       "implementation_evidence": {
         "kernel": "prototype/extended-effects-kernel.js",
         "tests": "scripts/test_extended_effects.mjs",
@@ -3615,6 +5075,58 @@
           "Default output distinct from every other new DJ-FX on a nonperiodic multitone fixture"
         ],
         "does_not_establish": "The full per-effect proposed acceptance contract, native audio, vendor parameter equivalence, vendor sound matching, production real-time robustness."
+      },
+      "executable_observed_controls": [
+        {
+          "name": "Decay",
+          "min": 0,
+          "max": 100,
+          "value": 75,
+          "step": 1,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default",
+          "unit": "%",
+          "mappingStatus": "independent exponential percentage-to-seconds mapping"
+        },
+        {
+          "name": "Contour",
+          "min": -100,
+          "max": 100,
+          "value": -20,
+          "step": 1,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Width",
+          "min": 0,
+          "max": 200,
+          "value": 100,
+          "step": 1,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Mix Mode",
+          "value": "Send+Mix",
+          "options": [
+            "Wet Mix",
+            "Send",
+            "Send+Mix"
+          ],
+          "observedLabel": true,
+          "rangeStatus": "three observed examples across reverb strips; vendor catalog incomplete",
+          "defaultStatus": "independent starting mode"
+        }
+      ],
+      "observed_control_semantics_status": "Independent signal behavior executed; sonic reference equivalence not established.",
+      "observed_control_evidence": {
+        "command": "node --experimental-default-type=module scripts/test_observed_fx_controls.mjs",
+        "coverage": "Observed label-set equality; per-control audio contrasts in full extended suite; targeted cohort timing/signal checks.",
+        "browser": "Actual 220-control AudioWorklet execution is parent-owned; see docs/prototype evidence. Node result does not establish browser success."
       }
     },
     {
@@ -3648,7 +5160,7 @@
         "Algorithm and sonic equivalence"
       ],
       "observed_parameter_source_image_sha256": "a578cdc1ec76ffeb3eaa09ba0a896255bcfa383f89994c90309b21430f290db5",
-      "control_parity_status": "Independent proposed controls differ from the observed Serato schema; control semantics parity NOT established.",
+      "control_parity_status": "Observed labels wired to independent behavior. Vendor mappings, limits, defaults and complete enum catalogs remain unverified.",
       "implementation_evidence": {
         "kernel": "prototype/extended-effects-kernel.js",
         "tests": "scripts/test_extended_effects.mjs",
@@ -3659,6 +5171,58 @@
           "Default output distinct from every other new DJ-FX on a nonperiodic multitone fixture"
         ],
         "does_not_establish": "The full per-effect proposed acceptance contract, native audio, vendor parameter equivalence, vendor sound matching, production real-time robustness."
+      },
+      "executable_observed_controls": [
+        {
+          "name": "Decay",
+          "min": 0,
+          "max": 100,
+          "value": 85,
+          "step": 1,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default",
+          "unit": "%",
+          "mappingStatus": "independent exponential percentage-to-seconds mapping"
+        },
+        {
+          "name": "Contour",
+          "min": -100,
+          "max": 100,
+          "value": 63,
+          "step": 1,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Width",
+          "min": 0,
+          "max": 200,
+          "value": 145,
+          "step": 1,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Mix Mode",
+          "value": "Send",
+          "options": [
+            "Wet Mix",
+            "Send",
+            "Send+Mix"
+          ],
+          "observedLabel": true,
+          "rangeStatus": "three observed examples across reverb strips; vendor catalog incomplete",
+          "defaultStatus": "independent starting mode"
+        }
+      ],
+      "observed_control_semantics_status": "Independent signal behavior executed; sonic reference equivalence not established.",
+      "observed_control_evidence": {
+        "command": "node --experimental-default-type=module scripts/test_observed_fx_controls.mjs",
+        "coverage": "Observed label-set equality; per-control audio contrasts in full extended suite; targeted cohort timing/signal checks.",
+        "browser": "Actual 220-control AudioWorklet execution is parent-owned; see docs/prototype evidence. Node result does not establish browser success."
       }
     },
     {
@@ -3693,7 +5257,7 @@
         "Actual direction, pitch/filter topology and meaning of named variant"
       ],
       "observed_parameter_source_image_sha256": "674f9fd993d639122983788072651dbdebd3b8ec5e7005c2726b7c5514919c35",
-      "control_parity_status": "Independent proposed controls differ from the observed Serato schema; control semantics parity NOT established.",
+      "control_parity_status": "Observed labels wired to independent behavior. Vendor mappings, limits, defaults and complete enum catalogs remain unverified.",
       "implementation_evidence": {
         "kernel": "prototype/extended-effects-kernel.js",
         "tests": "scripts/test_extended_effects.mjs",
@@ -3704,6 +5268,54 @@
           "Default output distinct from every other new DJ-FX on a nonperiodic multitone fixture"
         ],
         "does_not_establish": "The full per-effect proposed acceptance contract, native audio, vendor parameter equivalence, vendor sound matching, production real-time robustness."
+      },
+      "executable_observed_controls": [
+        {
+          "name": "Timbre",
+          "min": 0,
+          "max": 100,
+          "value": 50,
+          "step": 1,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Ambience",
+          "min": 0,
+          "max": 100,
+          "value": 90,
+          "step": 1,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Direction",
+          "min": -100,
+          "max": 100,
+          "value": 50,
+          "step": 1,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Beat Modify",
+          "min": 0.125,
+          "max": 4,
+          "value": 1,
+          "step": 0.125,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        }
+      ],
+      "observed_control_semantics_status": "Independent signal behavior executed; sonic reference equivalence not established.",
+      "observed_control_evidence": {
+        "command": "node --experimental-default-type=module scripts/test_observed_fx_controls.mjs",
+        "coverage": "Observed label-set equality; per-control audio contrasts in full extended suite; targeted cohort timing/signal checks.",
+        "browser": "Actual 220-control AudioWorklet execution is parent-owned; see docs/prototype evidence. Node result does not establish browser success."
       }
     },
     {
@@ -3738,7 +5350,7 @@
         "Actual direction, pitch/filter topology and meaning of named variant"
       ],
       "observed_parameter_source_image_sha256": "c55d0640a3121604273fdbb1418e85520c7c8f1296e124427136d041f104f2b6",
-      "control_parity_status": "Independent proposed controls differ from the observed Serato schema; control semantics parity NOT established.",
+      "control_parity_status": "Observed labels wired to independent behavior. Vendor mappings, limits, defaults and complete enum catalogs remain unverified.",
       "implementation_evidence": {
         "kernel": "prototype/extended-effects-kernel.js",
         "tests": "scripts/test_extended_effects.mjs",
@@ -3749,6 +5361,54 @@
           "Default output distinct from every other new DJ-FX on a nonperiodic multitone fixture"
         ],
         "does_not_establish": "The full per-effect proposed acceptance contract, native audio, vendor parameter equivalence, vendor sound matching, production real-time robustness."
+      },
+      "executable_observed_controls": [
+        {
+          "name": "Timbre",
+          "min": 0,
+          "max": 100,
+          "value": 0,
+          "step": 1,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Ambience",
+          "min": 0,
+          "max": 100,
+          "value": 100,
+          "step": 1,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Direction",
+          "min": -100,
+          "max": 100,
+          "value": -100,
+          "step": 1,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Beat Modify",
+          "min": 0.125,
+          "max": 4,
+          "value": 0.125,
+          "step": 0.125,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        }
+      ],
+      "observed_control_semantics_status": "Independent signal behavior executed; sonic reference equivalence not established.",
+      "observed_control_evidence": {
+        "command": "node --experimental-default-type=module scripts/test_observed_fx_controls.mjs",
+        "coverage": "Observed label-set equality; per-control audio contrasts in full extended suite; targeted cohort timing/signal checks.",
+        "browser": "Actual 220-control AudioWorklet execution is parent-owned; see docs/prototype evidence. Node result does not establish browser success."
       }
     }
   ],
@@ -3758,11 +5418,22 @@
     "processor_count": 55,
     "separate_channel_processors": 4,
     "reference_sonic_equivalence": "not verified",
-    "browser_evidence": "Parent-owned actual browser execution is recorded separately in docs/prototype; do not infer browser success from this kernel result.",
+    "browser_evidence": "After four corrections:59/59 actual extended graphs,5/5 original lifecycle,220/220 observed extended control contrasts and9/9 longer Worklet regressions. Evidence: docs/prototype/*results*.",
     "observed_control_tests": {
       "command": "node --experimental-default-type=module scripts/test_observed_fx_controls.mjs",
-      "result": "15/15 passed",
-      "browser_gate": "Parent execution at prototype/observed-fx-controls-test.html required"
+      "result": "33/33 passed",
+      "browser_gate": "Executed final frozen runtime:220/220 AudioWorklet control contrasts;9/9 long regressions;16/16 original Web Audio control contrasts separately.",
+      "control_count": 220,
+      "range_and_enum_status": "Numeric bounds and additional enums are independently designed; observed labels/session examples are reference facts, complete vendor catalogs remain unknown.",
+      "adversarial_regressions": {
+        "result": "4/4 passed",
+        "checks": [
+          "45-second multitap maximum-feedback output and internal-state decay",
+          "Live Even-pattern timing update preserves24-second tap identically to fresh construction",
+          "Fractional signed sweep velocities remain equivalent across base-beat boundaries",
+          "Stretch exit plays source marker beyond first beat forward and in reverse, rejecting later input"
+        ]
+      }
     }
   }
 }

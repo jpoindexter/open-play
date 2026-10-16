@@ -1,0 +1,39 @@
+PASS 55 observed schemas expose exactly their four observed labels 55 observed label schemas; vendor ranges not claimed
+PASS fraction/dotted/triplet beat modifiers alter actual echo timing 
+PASS echo HPF removes bass from delayed audio { low: 0.0014829870027198917, high: 0.1450924023835256 }
+PASS drive adds measurable harmonics independently of echo timing 
+PASS downsampling uses sample-rate units and aliases unit strings 24 held samples at24kHz /1kHz
+PASS Character changes quantization strength instead of a label 
+PASS Low Drive creates bass harmonics before quantization 
+PASS HPF18dB slope falls between12dB and24dB response [
+  0.026113913473507007,
+  0.0029659743930007835,
+  0.0002581773314213869,
+  0.000027680918566909777
+]
+PASS reverb width200 doubles side amplitude relative to100 
+PASS reverb Send retains dry attack while Wet Mix replaces it 
+PASS millisecond reverb decay and kHz phaser pitch parse correctly 
+PASS chorus Delay changes actual first arrival 
+PASS LFO shapes produce different filter and tremolo trajectories 
+PASS Stereo moves transform gate timing independently per channel 
+PASS Echo Out Max Feedback extends decay and Echo Level scales only captured output 
+PASS multitap patterns move impulse tap positions and beat modification scales them 
+PASS Spiral Echo bypass bands preserve live low and high input before delayed middle arrives 
+PASS distortion topology and character change harmonic structure; dB tone tilts spectral balance 
+PASS infinity centers, sweep modes, directions and beat timing each alter rendered trajectories 
+PASS loop Mix zero preserves live input and Shreds create additional closed windows 
+PASS roll Repeats shortens the captured marker period while Range changes capture duration 
+PASS granular Retrigger recaptures later source material and grains/range alter playback 
+PASS spiral feedback creates a tail and filtering removes high-band energy 
+PASS stop time and stop curve alter braking while spinback extends reversed playback 
+PASS roll exits reject later live input, use feedback tails and obey stop envelopes 
+PASS percentage reverb decay extends measured tail; Drop Range transposes its return 
+PASS tone controls change generated spectrum and ambience while silence remains silent 
+PASS spinback replays asymmetric source markers in reverse temporal order for its declared duration 
+PASS long spinback retains its captured history and rejects later live markers 
+PASS multitap maximum feedback decays for45seconds without hidden internal gain growth 
+PASS multitap timing and pattern updates retain the longest24second tap like fresh construction 
+PASS fractional signed sweep direction remains continuous across base beats at equivalent velocities 
+PASS Stretch exit reads and rewinds markers beyond the first beat without admitting later live input 
+33/33 observed-control signal checks passed.
