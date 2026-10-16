@@ -193,6 +193,8 @@ All110 feature cards retain model/effort recommendations. Source sync is87 verif
 zero pending;13 historical functional additions passed exact readback and4 were
 superseded by newer DSP evidence. Nineteen earlier DSP/sampler records, Stem Slip,
 GATE-P and VID-002 research have separate readbacks. Consult `docs/delivery/trello-*.json`.
+VID-001, VID-002 and GATE-P current Video annotations passed3/3 exact readbacks
+(`docs/delivery/trello-video-functional-sync.json`); all remained open/incomplete.
 Fresh-read descriptions before updates; preserve human/source/model sections.
 Record synchronization is not feature acceptance.
 
