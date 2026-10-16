@@ -1,0 +1,3607 @@
+{
+  "updated": "2026-10-16",
+  "count": 110,
+  "parity_claim": false,
+  "features": [
+    {
+      "id": "LIB-001",
+      "title": "Local import and supported formats",
+      "stage": "N1",
+      "profile": "U",
+      "acceptance": "Import supported fixtures, reject corrupted/unsupported files clearly, retain original media.",
+      "sources": [
+        {
+          "title": "Manual index \u2014 exact reference mapping pending",
+          "url": "https://support.serato.com/hc/en-us/categories/202698038-Serato-DJ-Pro-manual"
+        }
+      ],
+      "status": "research_pending",
+      "prototype": "not_started",
+      "native": "blocked_until_prototype_approval",
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-sonnet-5",
+          "effort": "medium"
+        },
+        "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "reference_review": "pending",
+      "test_evidence": []
+    },
+    {
+      "id": "LIB-002",
+      "title": "Metadata and artwork",
+      "stage": "N1",
+      "profile": "U",
+      "acceptance": "Read Unicode tags/artwork; edit safely with explicit write policy and recover malformed tags.",
+      "sources": [
+        {
+          "title": "Manual index \u2014 exact reference mapping pending",
+          "url": "https://support.serato.com/hc/en-us/categories/202698038-Serato-DJ-Pro-manual"
+        }
+      ],
+      "status": "research_pending",
+      "prototype": "not_started",
+      "native": "blocked_until_prototype_approval",
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-sonnet-5",
+          "effort": "medium"
+        },
+        "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "reference_review": "pending",
+      "test_evidence": []
+    },
+    {
+      "id": "LIB-003",
+      "title": "Search, filter, sorting and columns",
+      "stage": "N1",
+      "profile": "U",
+      "acceptance": "Find known fixtures, sort deterministically, preserve selection and column preferences.",
+      "sources": [
+        {
+          "title": "Manual index \u2014 exact reference mapping pending",
+          "url": "https://support.serato.com/hc/en-us/categories/202698038-Serato-DJ-Pro-manual"
+        }
+      ],
+      "status": "research_pending",
+      "prototype": "not_started",
+      "native": "blocked_until_prototype_approval",
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-sonnet-5",
+          "effort": "medium"
+        },
+        "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "reference_review": "pending",
+      "test_evidence": []
+    },
+    {
+      "id": "LIB-004",
+      "title": "Crates and playlists",
+      "stage": "N1",
+      "profile": "U",
+      "acceptance": "Create, rename, reorder and remove a crate without deleting its source tracks.",
+      "sources": [
+        {
+          "title": "Manual index \u2014 exact reference mapping pending",
+          "url": "https://support.serato.com/hc/en-us/categories/202698038-Serato-DJ-Pro-manual"
+        }
+      ],
+      "status": "research_pending",
+      "prototype": "not_started",
+      "native": "blocked_until_prototype_approval",
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-sonnet-5",
+          "effort": "medium"
+        },
+        "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "reference_review": "pending",
+      "test_evidence": []
+    },
+    {
+      "id": "LIB-005",
+      "title": "Smart crates",
+      "stage": "N2",
+      "profile": "U",
+      "acceptance": "Rule combinations produce expected membership after metadata changes and restart.",
+      "sources": [
+        {
+          "title": "Manual index \u2014 exact reference mapping pending",
+          "url": "https://support.serato.com/hc/en-us/categories/202698038-Serato-DJ-Pro-manual"
+        }
+      ],
+      "status": "research_pending",
+      "prototype": "not_started",
+      "native": "blocked_until_prototype_approval",
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-sonnet-5",
+          "effort": "medium"
+        },
+        "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "reference_review": "pending",
+      "test_evidence": []
+    },
+    {
+      "id": "LIB-006",
+      "title": "Missing files and external volumes",
+      "stage": "N1",
+      "profile": "S",
+      "acceptance": "Disconnect a test volume, relink moved files, and preserve cues/analysis identity.",
+      "sources": [
+        {
+          "title": "Manual index \u2014 exact reference mapping pending",
+          "url": "https://support.serato.com/hc/en-us/categories/202698038-Serato-DJ-Pro-manual"
+        }
+      ],
+      "status": "research_pending",
+      "prototype": "not_started",
+      "native": "blocked_until_prototype_approval",
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "xhigh"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "Architecture and persistence require reasoning across failure and concurrency boundaries.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "reference_review": "pending",
+      "test_evidence": []
+    },
+    {
+      "id": "LIB-007",
+      "title": "Duplicates and content identity",
+      "stage": "N2",
+      "profile": "S",
+      "acceptance": "Differentiate duplicate paths from changed content; offer reversible reconciliation.",
+      "sources": [
+        {
+          "title": "Manual index \u2014 exact reference mapping pending",
+          "url": "https://support.serato.com/hc/en-us/categories/202698038-Serato-DJ-Pro-manual"
+        }
+      ],
+      "status": "research_pending",
+      "prototype": "not_started",
+      "native": "blocked_until_prototype_approval",
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "xhigh"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "Architecture and persistence require reasoning across failure and concurrency boundaries.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "reference_review": "pending",
+      "test_evidence": []
+    },
+    {
+      "id": "LIB-008",
+      "title": "History and session preparation",
+      "stage": "N2",
+      "profile": "U",
+      "acceptance": "Persist played-track history and restore prepared selections across restart.",
+      "sources": [
+        {
+          "title": "Manual index \u2014 exact reference mapping pending",
+          "url": "https://support.serato.com/hc/en-us/categories/202698038-Serato-DJ-Pro-manual"
+        }
+      ],
+      "status": "research_pending",
+      "prototype": "not_started",
+      "native": "blocked_until_prototype_approval",
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-sonnet-5",
+          "effort": "medium"
+        },
+        "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "reference_review": "pending",
+      "test_evidence": []
+    },
+    {
+      "id": "LIB-009",
+      "title": "Library import/export interoperability",
+      "stage": "N3",
+      "profile": "S",
+      "acceptance": "Round-trip documented fixtures without changing the source application database.",
+      "sources": [
+        {
+          "title": "Manual index \u2014 exact reference mapping pending",
+          "url": "https://support.serato.com/hc/en-us/categories/202698038-Serato-DJ-Pro-manual"
+        }
+      ],
+      "status": "research_pending",
+      "prototype": "not_started",
+      "native": "blocked_until_prototype_approval",
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "xhigh"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "Architecture and persistence require reasoning across failure and concurrency boundaries.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "reference_review": "pending",
+      "test_evidence": []
+    },
+    {
+      "id": "LIB-010",
+      "title": "Large library virtualization",
+      "stage": "N2",
+      "profile": "U",
+      "acceptance": "Measure search/scroll behavior with defined large fixtures during active playback.",
+      "sources": [
+        {
+          "title": "Manual index \u2014 exact reference mapping pending",
+          "url": "https://support.serato.com/hc/en-us/categories/202698038-Serato-DJ-Pro-manual"
+        }
+      ],
+      "status": "research_pending",
+      "prototype": "not_started",
+      "native": "blocked_until_prototype_approval",
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-sonnet-5",
+          "effort": "medium"
+        },
+        "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "reference_review": "pending",
+      "test_evidence": []
+    },
+    {
+      "id": "LIB-011",
+      "title": "Metadata backup and migrations",
+      "stage": "N1",
+      "profile": "S",
+      "acceptance": "Migrate and restore a fixture library; demonstrate rollback on interrupted migration.",
+      "sources": [
+        {
+          "title": "Manual index \u2014 exact reference mapping pending",
+          "url": "https://support.serato.com/hc/en-us/categories/202698038-Serato-DJ-Pro-manual"
+        }
+      ],
+      "status": "research_pending",
+      "prototype": "not_started",
+      "native": "blocked_until_prototype_approval",
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "xhigh"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "Architecture and persistence require reasoning across failure and concurrency boundaries.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "reference_review": "pending",
+      "test_evidence": []
+    },
+    {
+      "id": "ANA-001",
+      "title": "Waveform generation and caches",
+      "stage": "N1",
+      "profile": "A",
+      "acceptance": "Waveform corresponds to decoded samples and remains aligned after seek/rate changes.",
+      "sources": [
+        {
+          "title": "Manual index \u2014 exact reference mapping pending",
+          "url": "https://support.serato.com/hc/en-us/categories/202698038-Serato-DJ-Pro-manual"
+        }
+      ],
+      "status": "research_pending",
+      "prototype": "not_started",
+      "native": "blocked_until_prototype_approval",
+      "routing": {
+        "codex": {
+          "model": "gpt-6-astra",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "DSP and transport require numerical reasoning backed by measurements.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "reference_review": "pending",
+      "test_evidence": []
+    },
+    {
+      "id": "ANA-002",
+      "title": "BPM estimation",
+      "stage": "N1",
+      "profile": "M",
+      "acceptance": "Evaluate annotated varied-tempo fixtures and preserve manual correction.",
+      "sources": [
+        {
+          "title": "Manual index \u2014 exact reference mapping pending",
+          "url": "https://support.serato.com/hc/en-us/categories/202698038-Serato-DJ-Pro-manual"
+        }
+      ],
+      "status": "research_pending",
+      "prototype": "not_started",
+      "native": "blocked_until_prototype_approval",
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-sonnet-5",
+          "effort": "high"
+        },
+        "rationale": "Model evaluation needs reproducible benchmarks, license evidence and resource accounting.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "reference_review": "pending",
+      "test_evidence": []
+    },
+    {
+      "id": "ANA-003",
+      "title": "Beat grids and editing",
+      "stage": "N2",
+      "profile": "A",
+      "acceptance": "Set anchors/tempo sections, undo edits, persist them and verify transport alignment.",
+      "sources": [
+        {
+          "title": "Manual index \u2014 exact reference mapping pending",
+          "url": "https://support.serato.com/hc/en-us/categories/202698038-Serato-DJ-Pro-manual"
+        }
+      ],
+      "status": "research_pending",
+      "prototype": "not_started",
+      "native": "blocked_until_prototype_approval",
+      "routing": {
+        "codex": {
+          "model": "gpt-6-astra",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "DSP and transport require numerical reasoning backed by measurements.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "reference_review": "pending",
+      "test_evidence": []
+    },
+    {
+      "id": "ANA-004",
+      "title": "Musical key analysis",
+      "stage": "N2",
+      "profile": "M",
+      "acceptance": "Evaluate annotated corpus and show ambiguous cases without silently overriding edits.",
+      "sources": [
+        {
+          "title": "Manual index \u2014 exact reference mapping pending",
+          "url": "https://support.serato.com/hc/en-us/categories/202698038-Serato-DJ-Pro-manual"
+        }
+      ],
+      "status": "research_pending",
+      "prototype": "not_started",
+      "native": "blocked_until_prototype_approval",
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-sonnet-5",
+          "effort": "high"
+        },
+        "rationale": "Model evaluation needs reproducible benchmarks, license evidence and resource accounting.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "reference_review": "pending",
+      "test_evidence": []
+    },
+    {
+      "id": "ANA-005",
+      "title": "Gain/loudness analysis",
+      "stage": "N2",
+      "profile": "A",
+      "acceptance": "Compare known-level fixtures and apply deliberate headroom without unexpected clipping.",
+      "sources": [
+        {
+          "title": "Manual index \u2014 exact reference mapping pending",
+          "url": "https://support.serato.com/hc/en-us/categories/202698038-Serato-DJ-Pro-manual"
+        }
+      ],
+      "status": "research_pending",
+      "prototype": "not_started",
+      "native": "blocked_until_prototype_approval",
+      "routing": {
+        "codex": {
+          "model": "gpt-6-astra",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "DSP and transport require numerical reasoning backed by measurements.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "reference_review": "pending",
+      "test_evidence": []
+    },
+    {
+      "id": "ANA-006",
+      "title": "Analysis queues and cancellation",
+      "stage": "N1",
+      "profile": "S",
+      "acceptance": "Cancel/resume work; recover a worker failure while playing audio without interruption.",
+      "sources": [
+        {
+          "title": "Manual index \u2014 exact reference mapping pending",
+          "url": "https://support.serato.com/hc/en-us/categories/202698038-Serato-DJ-Pro-manual"
+        }
+      ],
+      "status": "research_pending",
+      "prototype": "not_started",
+      "native": "blocked_until_prototype_approval",
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "xhigh"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "Architecture and persistence require reasoning across failure and concurrency boundaries.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "reference_review": "pending",
+      "test_evidence": []
+    },
+    {
+      "id": "DEK-001",
+      "title": "Load, unload and deck focus",
+      "stage": "N1",
+      "profile": "U",
+      "acceptance": "Load correct file to intended deck and protect a playing deck from accidental replacement.",
+      "sources": [
+        {
+          "title": "Manual index \u2014 exact reference mapping pending",
+          "url": "https://support.serato.com/hc/en-us/categories/202698038-Serato-DJ-Pro-manual"
+        }
+      ],
+      "status": "research_pending",
+      "prototype": "not_started",
+      "native": "blocked_until_prototype_approval",
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-sonnet-5",
+          "effort": "medium"
+        },
+        "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "reference_review": "pending",
+      "test_evidence": []
+    },
+    {
+      "id": "DEK-002",
+      "title": "Play, pause, seek and end-of-track",
+      "stage": "N1",
+      "profile": "A",
+      "acceptance": "Verify transport and audible output at start/end, rapid commands and long media.",
+      "sources": [
+        {
+          "title": "Manual index \u2014 exact reference mapping pending",
+          "url": "https://support.serato.com/hc/en-us/categories/202698038-Serato-DJ-Pro-manual"
+        }
+      ],
+      "status": "research_pending",
+      "prototype": "not_started",
+      "native": "blocked_until_prototype_approval",
+      "routing": {
+        "codex": {
+          "model": "gpt-6-astra",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "DSP and transport require numerical reasoning backed by measurements.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "reference_review": "pending",
+      "test_evidence": []
+    },
+    {
+      "id": "DEK-003",
+      "title": "Cue and hot cues",
+      "stage": "N1",
+      "profile": "A",
+      "acceptance": "Set, trigger, label and persist sample-position cues; verify quantized/free behavior.",
+      "sources": [
+        {
+          "title": "Manual index \u2014 exact reference mapping pending",
+          "url": "https://support.serato.com/hc/en-us/categories/202698038-Serato-DJ-Pro-manual"
+        }
+      ],
+      "status": "research_pending",
+      "prototype": "not_started",
+      "native": "blocked_until_prototype_approval",
+      "routing": {
+        "codex": {
+          "model": "gpt-6-astra",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "DSP and transport require numerical reasoning backed by measurements.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "reference_review": "pending",
+      "test_evidence": []
+    },
+    {
+      "id": "DEK-004",
+      "title": "Manual, automatic and saved loops",
+      "stage": "N1",
+      "profile": "A",
+      "acceptance": "Enter/exit/retrigger loops, edit boundaries and verify repeat timing and persistence.",
+      "sources": [
+        {
+          "title": "Manual index \u2014 exact reference mapping pending",
+          "url": "https://support.serato.com/hc/en-us/categories/202698038-Serato-DJ-Pro-manual"
+        }
+      ],
+      "status": "research_pending",
+      "prototype": "not_started",
+      "native": "blocked_until_prototype_approval",
+      "routing": {
+        "codex": {
+          "model": "gpt-6-astra",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "DSP and transport require numerical reasoning backed by measurements.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "reference_review": "pending",
+      "test_evidence": []
+    },
+    {
+      "id": "DEK-005",
+      "title": "Beat jump",
+      "stage": "N2",
+      "profile": "A",
+      "acceptance": "Jump signed beat lengths using current grid without unexpected phase/position errors.",
+      "sources": [
+        {
+          "title": "Manual index \u2014 exact reference mapping pending",
+          "url": "https://support.serato.com/hc/en-us/categories/202698038-Serato-DJ-Pro-manual"
+        }
+      ],
+      "status": "research_pending",
+      "prototype": "not_started",
+      "native": "blocked_until_prototype_approval",
+      "routing": {
+        "codex": {
+          "model": "gpt-6-astra",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "DSP and transport require numerical reasoning backed by measurements.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "reference_review": "pending",
+      "test_evidence": []
+    },
+    {
+      "id": "DEK-006",
+      "title": "Tempo fader and pitch ranges",
+      "stage": "N1",
+      "profile": "A",
+      "acceptance": "Measure rate changes, reset and fine adjustment without audible control discontinuities.",
+      "sources": [
+        {
+          "title": "Manual index \u2014 exact reference mapping pending",
+          "url": "https://support.serato.com/hc/en-us/categories/202698038-Serato-DJ-Pro-manual"
+        }
+      ],
+      "status": "research_pending",
+      "prototype": "not_started",
+      "native": "blocked_until_prototype_approval",
+      "routing": {
+        "codex": {
+          "model": "gpt-6-astra",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "DSP and transport require numerical reasoning backed by measurements.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "reference_review": "pending",
+      "test_evidence": []
+    },
+    {
+      "id": "DEK-007",
+      "title": "Key lock and independent key shift",
+      "stage": "N2",
+      "profile": "A",
+      "acceptance": "Compare pitch/tempo behavior and artifacts across declared musical/rate ranges.",
+      "sources": [
+        {
+          "title": "Manual index \u2014 exact reference mapping pending",
+          "url": "https://support.serato.com/hc/en-us/categories/202698038-Serato-DJ-Pro-manual"
+        }
+      ],
+      "status": "research_pending",
+      "prototype": "not_started",
+      "native": "blocked_until_prototype_approval",
+      "routing": {
+        "codex": {
+          "model": "gpt-6-astra",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "DSP and transport require numerical reasoning backed by measurements.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "reference_review": "pending",
+      "test_evidence": []
+    },
+    {
+      "id": "DEK-008",
+      "title": "Sync, master and phase",
+      "stage": "N2",
+      "profile": "A",
+      "acceptance": "Change leader, disable sync and handle tempo changes with predictable phase behavior.",
+      "sources": [
+        {
+          "title": "Manual index \u2014 exact reference mapping pending",
+          "url": "https://support.serato.com/hc/en-us/categories/202698038-Serato-DJ-Pro-manual"
+        }
+      ],
+      "status": "research_pending",
+      "prototype": "not_started",
+      "native": "blocked_until_prototype_approval",
+      "routing": {
+        "codex": {
+          "model": "gpt-6-astra",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "DSP and transport require numerical reasoning backed by measurements.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "reference_review": "pending",
+      "test_evidence": []
+    },
+    {
+      "id": "DEK-009",
+      "title": "Jog, nudge and scratching",
+      "stage": "N2",
+      "profile": "A",
+      "acceptance": "Verify directional/speed response, touch release and latency with physical controls when claimed.",
+      "sources": [
+        {
+          "title": "Manual index \u2014 exact reference mapping pending",
+          "url": "https://support.serato.com/hc/en-us/categories/202698038-Serato-DJ-Pro-manual"
+        }
+      ],
+      "status": "research_pending",
+      "prototype": "not_started",
+      "native": "blocked_until_prototype_approval",
+      "routing": {
+        "codex": {
+          "model": "gpt-6-astra",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "DSP and transport require numerical reasoning backed by measurements.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "reference_review": "pending",
+      "test_evidence": []
+    },
+    {
+      "id": "DEK-010",
+      "title": "Slip and reverse modes",
+      "stage": "N2",
+      "profile": "A",
+      "acceptance": "Verify underlying timeline and exit position through cue, loop and scratch combinations.",
+      "sources": [
+        {
+          "title": "Manual index \u2014 exact reference mapping pending",
+          "url": "https://support.serato.com/hc/en-us/categories/202698038-Serato-DJ-Pro-manual"
+        }
+      ],
+      "status": "research_pending",
+      "prototype": "not_started",
+      "native": "blocked_until_prototype_approval",
+      "routing": {
+        "codex": {
+          "model": "gpt-6-astra",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "DSP and transport require numerical reasoning backed by measurements.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "reference_review": "pending",
+      "test_evidence": []
+    },
+    {
+      "id": "DEK-011",
+      "title": "Two/four and extensible decks",
+      "stage": "N2",
+      "profile": "S",
+      "acceptance": "Operate two/four decks independently; document measured resource limits and extension path.",
+      "sources": [
+        {
+          "title": "Manual index \u2014 exact reference mapping pending",
+          "url": "https://support.serato.com/hc/en-us/categories/202698038-Serato-DJ-Pro-manual"
+        }
+      ],
+      "status": "research_pending",
+      "prototype": "not_started",
+      "native": "blocked_until_prototype_approval",
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "xhigh"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "Architecture and persistence require reasoning across failure and concurrency boundaries.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "reference_review": "pending",
+      "test_evidence": []
+    },
+    {
+      "id": "DEK-012",
+      "title": "Quantization and musical timing",
+      "stage": "N2",
+      "profile": "A",
+      "acceptance": "Compare quantized/free commands around beat boundaries and grid corrections.",
+      "sources": [
+        {
+          "title": "Manual index \u2014 exact reference mapping pending",
+          "url": "https://support.serato.com/hc/en-us/categories/202698038-Serato-DJ-Pro-manual"
+        }
+      ],
+      "status": "research_pending",
+      "prototype": "not_started",
+      "native": "blocked_until_prototype_approval",
+      "routing": {
+        "codex": {
+          "model": "gpt-6-astra",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "DSP and transport require numerical reasoning backed by measurements.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "reference_review": "pending",
+      "test_evidence": []
+    },
+    {
+      "id": "MIX-001",
+      "title": "Channel gain, faders and mute",
+      "stage": "N1",
+      "profile": "A",
+      "acceptance": "Measure known-signal gain and smooth fast changes without zipper noise.",
+      "sources": [
+        {
+          "title": "Manual index \u2014 exact reference mapping pending",
+          "url": "https://support.serato.com/hc/en-us/categories/202698038-Serato-DJ-Pro-manual"
+        }
+      ],
+      "status": "research_pending",
+      "prototype": "not_started",
+      "native": "blocked_until_prototype_approval",
+      "routing": {
+        "codex": {
+          "model": "gpt-6-astra",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "DSP and transport require numerical reasoning backed by measurements.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "reference_review": "pending",
+      "test_evidence": []
+    },
+    {
+      "id": "MIX-002",
+      "title": "Crossfader curves and assignment",
+      "stage": "N1",
+      "profile": "A",
+      "acceptance": "Verify curves, side assignment and bypass using independent channel fixtures.",
+      "sources": [
+        {
+          "title": "Manual index \u2014 exact reference mapping pending",
+          "url": "https://support.serato.com/hc/en-us/categories/202698038-Serato-DJ-Pro-manual"
+        }
+      ],
+      "status": "research_pending",
+      "prototype": "not_started",
+      "native": "blocked_until_prototype_approval",
+      "routing": {
+        "codex": {
+          "model": "gpt-6-astra",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "DSP and transport require numerical reasoning backed by measurements.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "reference_review": "pending",
+      "test_evidence": []
+    },
+    {
+      "id": "MIX-003",
+      "title": "EQ and filters",
+      "stage": "N1",
+      "profile": "A",
+      "acceptance": "Measure response, neutral settings and transitions; listen for unstable behavior.",
+      "sources": [
+        {
+          "title": "Manual index \u2014 exact reference mapping pending",
+          "url": "https://support.serato.com/hc/en-us/categories/202698038-Serato-DJ-Pro-manual"
+        }
+      ],
+      "status": "research_pending",
+      "prototype": "not_started",
+      "native": "blocked_until_prototype_approval",
+      "routing": {
+        "codex": {
+          "model": "gpt-6-astra",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "DSP and transport require numerical reasoning backed by measurements.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "reference_review": "pending",
+      "test_evidence": []
+    },
+    {
+      "id": "MIX-004",
+      "title": "Headphone cue and cue/master blend",
+      "stage": "N1",
+      "profile": "A",
+      "acceptance": "Physically verify independent monitor output and correct cue routing.",
+      "sources": [
+        {
+          "title": "Manual index \u2014 exact reference mapping pending",
+          "url": "https://support.serato.com/hc/en-us/categories/202698038-Serato-DJ-Pro-manual"
+        }
+      ],
+      "status": "research_pending",
+      "prototype": "not_started",
+      "native": "blocked_until_prototype_approval",
+      "routing": {
+        "codex": {
+          "model": "gpt-6-astra",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "DSP and transport require numerical reasoning backed by measurements.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "reference_review": "pending",
+      "test_evidence": []
+    },
+    {
+      "id": "MIX-005",
+      "title": "Master meters, headroom and clipping",
+      "stage": "N1",
+      "profile": "A",
+      "acceptance": "Known-level signals produce correct meter/clip behavior without hidden attenuation.",
+      "sources": [
+        {
+          "title": "Manual index \u2014 exact reference mapping pending",
+          "url": "https://support.serato.com/hc/en-us/categories/202698038-Serato-DJ-Pro-manual"
+        }
+      ],
+      "status": "research_pending",
+      "prototype": "not_started",
+      "native": "blocked_until_prototype_approval",
+      "routing": {
+        "codex": {
+          "model": "gpt-6-astra",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "DSP and transport require numerical reasoning backed by measurements.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "reference_review": "pending",
+      "test_evidence": []
+    },
+    {
+      "id": "MIX-006",
+      "title": "Internal/external mixing modes",
+      "stage": "N3",
+      "profile": "H",
+      "acceptance": "Verify channel routes and control ownership against a declared physical mixer.",
+      "sources": [
+        {
+          "title": "Manual index \u2014 exact reference mapping pending",
+          "url": "https://support.serato.com/hc/en-us/categories/202698038-Serato-DJ-Pro-manual"
+        }
+      ],
+      "status": "research_pending",
+      "prototype": "not_started",
+      "native": "blocked_until_prototype_approval",
+      "routing": {
+        "codex": {
+          "model": "gpt-6-astra",
+          "effort": "xhigh"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "xhigh"
+        },
+        "rationale": "Hardware protocols and binary evidence need careful competing hypotheses.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "reference_review": "pending",
+      "test_evidence": []
+    },
+    {
+      "id": "FX-001",
+      "title": "Effects chains and assignment",
+      "stage": "N2",
+      "profile": "A",
+      "acceptance": "Assign effects per intended scope; verify ordering, bypass and preserved parameters.",
+      "sources": [
+        {
+          "title": "Manual index \u2014 exact reference mapping pending",
+          "url": "https://support.serato.com/hc/en-us/categories/202698038-Serato-DJ-Pro-manual"
+        }
+      ],
+      "status": "research_pending",
+      "prototype": "not_started",
+      "native": "blocked_until_prototype_approval",
+      "routing": {
+        "codex": {
+          "model": "gpt-6-astra",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "DSP and transport require numerical reasoning backed by measurements.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "reference_review": "pending",
+      "test_evidence": []
+    },
+    {
+      "id": "FX-002",
+      "title": "Tempo-synced effect timing",
+      "stage": "N2",
+      "profile": "A",
+      "acceptance": "Measure delay/modulation timing through tempo changes and sync transitions.",
+      "sources": [
+        {
+          "title": "Manual index \u2014 exact reference mapping pending",
+          "url": "https://support.serato.com/hc/en-us/categories/202698038-Serato-DJ-Pro-manual"
+        }
+      ],
+      "status": "research_pending",
+      "prototype": "not_started",
+      "native": "blocked_until_prototype_approval",
+      "routing": {
+        "codex": {
+          "model": "gpt-6-astra",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "DSP and transport require numerical reasoning backed by measurements.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "reference_review": "pending",
+      "test_evidence": []
+    },
+    {
+      "id": "SMP-001",
+      "title": "Sampler slots and banks",
+      "stage": "N2",
+      "profile": "U",
+      "acceptance": "Load, trigger and switch banks with coherent per-slot state.",
+      "sources": [
+        {
+          "title": "Manual index \u2014 exact reference mapping pending",
+          "url": "https://support.serato.com/hc/en-us/categories/202698038-Serato-DJ-Pro-manual"
+        }
+      ],
+      "status": "research_pending",
+      "prototype": "not_started",
+      "native": "blocked_until_prototype_approval",
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-sonnet-5",
+          "effort": "medium"
+        },
+        "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "reference_review": "pending",
+      "test_evidence": []
+    },
+    {
+      "id": "SMP-002",
+      "title": "Sampler audio modes and routing",
+      "stage": "N2",
+      "profile": "A",
+      "acceptance": "Verify one-shot/loop/gate behavior, gain and routes under simultaneous triggers.",
+      "sources": [
+        {
+          "title": "Manual index \u2014 exact reference mapping pending",
+          "url": "https://support.serato.com/hc/en-us/categories/202698038-Serato-DJ-Pro-manual"
+        }
+      ],
+      "status": "research_pending",
+      "prototype": "not_started",
+      "native": "blocked_until_prototype_approval",
+      "routing": {
+        "codex": {
+          "model": "gpt-6-astra",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "DSP and transport require numerical reasoning backed by measurements.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "reference_review": "pending",
+      "test_evidence": []
+    },
+    {
+      "id": "STM-001",
+      "title": "Local stem separation",
+      "stage": "N3",
+      "profile": "M",
+      "acceptance": "Evaluate licensed model output quality, throughput, alignment and memory on declared devices.",
+      "sources": [
+        {
+          "title": "Manual index \u2014 exact reference mapping pending",
+          "url": "https://support.serato.com/hc/en-us/categories/202698038-Serato-DJ-Pro-manual"
+        }
+      ],
+      "status": "research_pending",
+      "prototype": "not_started",
+      "native": "blocked_until_prototype_approval",
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-sonnet-5",
+          "effort": "high"
+        },
+        "rationale": "Model evaluation needs reproducible benchmarks, license evidence and resource accounting.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "reference_review": "pending",
+      "test_evidence": []
+    },
+    {
+      "id": "STM-002",
+      "title": "Stem mute/solo/mix controls",
+      "stage": "N3",
+      "profile": "A",
+      "acceptance": "Audible controls affect the intended separated component without timing jumps.",
+      "sources": [
+        {
+          "title": "Manual index \u2014 exact reference mapping pending",
+          "url": "https://support.serato.com/hc/en-us/categories/202698038-Serato-DJ-Pro-manual"
+        }
+      ],
+      "status": "research_pending",
+      "prototype": "not_started",
+      "native": "blocked_until_prototype_approval",
+      "routing": {
+        "codex": {
+          "model": "gpt-6-astra",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "DSP and transport require numerical reasoning backed by measurements.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "reference_review": "pending",
+      "test_evidence": []
+    },
+    {
+      "id": "STM-003",
+      "title": "Stem cache/cancel/fallback",
+      "stage": "N3",
+      "profile": "S",
+      "acceptance": "Cancel or fail inference and continue playback; invalidate incompatible model caches.",
+      "sources": [
+        {
+          "title": "Manual index \u2014 exact reference mapping pending",
+          "url": "https://support.serato.com/hc/en-us/categories/202698038-Serato-DJ-Pro-manual"
+        }
+      ],
+      "status": "research_pending",
+      "prototype": "not_started",
+      "native": "blocked_until_prototype_approval",
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "xhigh"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "Architecture and persistence require reasoning across failure and concurrency boundaries.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "reference_review": "pending",
+      "test_evidence": []
+    },
+    {
+      "id": "REC-001",
+      "title": "Record the actual master mix",
+      "stage": "N1",
+      "profile": "A",
+      "acceptance": "Capture known mixed output, reopen file, and verify duration/channels/content.",
+      "sources": [
+        {
+          "title": "Manual index \u2014 exact reference mapping pending",
+          "url": "https://support.serato.com/hc/en-us/categories/202698038-Serato-DJ-Pro-manual"
+        }
+      ],
+      "status": "research_pending",
+      "prototype": "not_started",
+      "native": "blocked_until_prototype_approval",
+      "routing": {
+        "codex": {
+          "model": "gpt-6-astra",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "DSP and transport require numerical reasoning backed by measurements.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "reference_review": "pending",
+      "test_evidence": []
+    },
+    {
+      "id": "REC-002",
+      "title": "Recording limits and recovery",
+      "stage": "N2",
+      "profile": "S",
+      "acceptance": "Handle disk full, permission loss and interrupted sessions with recoverable files where possible.",
+      "sources": [
+        {
+          "title": "Manual index \u2014 exact reference mapping pending",
+          "url": "https://support.serato.com/hc/en-us/categories/202698038-Serato-DJ-Pro-manual"
+        }
+      ],
+      "status": "research_pending",
+      "prototype": "not_started",
+      "native": "blocked_until_prototype_approval",
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "xhigh"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "Architecture and persistence require reasoning across failure and concurrency boundaries.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "reference_review": "pending",
+      "test_evidence": []
+    },
+    {
+      "id": "AUD-001",
+      "title": "Output/input device selection",
+      "stage": "N1",
+      "profile": "H",
+      "acceptance": "Enumerate actual devices/channels and confirm sound travels through selected routes.",
+      "sources": [
+        {
+          "title": "Manual index \u2014 exact reference mapping pending",
+          "url": "https://support.serato.com/hc/en-us/categories/202698038-Serato-DJ-Pro-manual"
+        }
+      ],
+      "status": "research_pending",
+      "prototype": "not_started",
+      "native": "blocked_until_prototype_approval",
+      "routing": {
+        "codex": {
+          "model": "gpt-6-astra",
+          "effort": "xhigh"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "xhigh"
+        },
+        "rationale": "Hardware protocols and binary evidence need careful competing hypotheses.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "reference_review": "pending",
+      "test_evidence": []
+    },
+    {
+      "id": "AUD-002",
+      "title": "Sample rate and buffer controls",
+      "stage": "N1",
+      "profile": "A",
+      "acceptance": "Apply supported settings and measure latency/xruns rather than trusting nominal values.",
+      "sources": [
+        {
+          "title": "Manual index \u2014 exact reference mapping pending",
+          "url": "https://support.serato.com/hc/en-us/categories/202698038-Serato-DJ-Pro-manual"
+        }
+      ],
+      "status": "research_pending",
+      "prototype": "not_started",
+      "native": "blocked_until_prototype_approval",
+      "routing": {
+        "codex": {
+          "model": "gpt-6-astra",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "DSP and transport require numerical reasoning backed by measurements.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "reference_review": "pending",
+      "test_evidence": []
+    },
+    {
+      "id": "AUD-003",
+      "title": "Multichannel routing",
+      "stage": "N2",
+      "profile": "A",
+      "acceptance": "Use channel-identification fixtures to confirm every selected bus/output/input.",
+      "sources": [
+        {
+          "title": "Manual index \u2014 exact reference mapping pending",
+          "url": "https://support.serato.com/hc/en-us/categories/202698038-Serato-DJ-Pro-manual"
+        }
+      ],
+      "status": "research_pending",
+      "prototype": "not_started",
+      "native": "blocked_until_prototype_approval",
+      "routing": {
+        "codex": {
+          "model": "gpt-6-astra",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "DSP and transport require numerical reasoning backed by measurements.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "reference_review": "pending",
+      "test_evidence": []
+    },
+    {
+      "id": "AUD-004",
+      "title": "Hot plug and route recovery",
+      "stage": "N1",
+      "profile": "H",
+      "acceptance": "Disconnect/reconnect real hardware; recover predictably without bursts or wrong outputs.",
+      "sources": [
+        {
+          "title": "Manual index \u2014 exact reference mapping pending",
+          "url": "https://support.serato.com/hc/en-us/categories/202698038-Serato-DJ-Pro-manual"
+        }
+      ],
+      "status": "research_pending",
+      "prototype": "not_started",
+      "native": "blocked_until_prototype_approval",
+      "routing": {
+        "codex": {
+          "model": "gpt-6-astra",
+          "effort": "xhigh"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "xhigh"
+        },
+        "rationale": "Hardware protocols and binary evidence need careful competing hypotheses.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "reference_review": "pending",
+      "test_evidence": []
+    },
+    {
+      "id": "AUD-005",
+      "title": "Clock drift and multiple devices",
+      "stage": "N3",
+      "profile": "A",
+      "acceptance": "Measure synchronization across declared devices/modes; document unsupported combinations.",
+      "sources": [
+        {
+          "title": "Manual index \u2014 exact reference mapping pending",
+          "url": "https://support.serato.com/hc/en-us/categories/202698038-Serato-DJ-Pro-manual"
+        }
+      ],
+      "status": "research_pending",
+      "prototype": "not_started",
+      "native": "blocked_until_prototype_approval",
+      "routing": {
+        "codex": {
+          "model": "gpt-6-astra",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "DSP and transport require numerical reasoning backed by measurements.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "reference_review": "pending",
+      "test_evidence": []
+    },
+    {
+      "id": "AUD-006",
+      "title": "Long-session resource stability",
+      "stage": "R",
+      "profile": "A",
+      "acceptance": "Complete defined soak and stress tests with callback, CPU and memory evidence.",
+      "sources": [
+        {
+          "title": "Manual index \u2014 exact reference mapping pending",
+          "url": "https://support.serato.com/hc/en-us/categories/202698038-Serato-DJ-Pro-manual"
+        }
+      ],
+      "status": "research_pending",
+      "prototype": "not_started",
+      "native": "blocked_until_prototype_approval",
+      "routing": {
+        "codex": {
+          "model": "gpt-6-astra",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "DSP and transport require numerical reasoning backed by measurements.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "reference_review": "pending",
+      "test_evidence": []
+    },
+    {
+      "id": "HW-001",
+      "title": "Device inventory and capabilities",
+      "stage": "N3",
+      "profile": "H",
+      "acceptance": "Show observed audio/control capabilities separately from identity and unsupported status.",
+      "sources": [
+        {
+          "title": "Manual index \u2014 exact reference mapping pending",
+          "url": "https://support.serato.com/hc/en-us/categories/202698038-Serato-DJ-Pro-manual"
+        }
+      ],
+      "status": "research_pending",
+      "prototype": "not_started",
+      "native": "blocked_until_prototype_approval",
+      "routing": {
+        "codex": {
+          "model": "gpt-6-astra",
+          "effort": "xhigh"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "xhigh"
+        },
+        "rationale": "Hardware protocols and binary evidence need careful competing hypotheses.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "reference_review": "pending",
+      "test_evidence": []
+    },
+    {
+      "id": "HW-002",
+      "title": "MIDI learn and mapping editor",
+      "stage": "N3",
+      "profile": "U",
+      "acceptance": "Learn, edit, export, import and reset mappings with validation and undo.",
+      "sources": [
+        {
+          "title": "Manual index \u2014 exact reference mapping pending",
+          "url": "https://support.serato.com/hc/en-us/categories/202698038-Serato-DJ-Pro-manual"
+        }
+      ],
+      "status": "research_pending",
+      "prototype": "not_started",
+      "native": "blocked_until_prototype_approval",
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-sonnet-5",
+          "effort": "medium"
+        },
+        "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "reference_review": "pending",
+      "test_evidence": []
+    },
+    {
+      "id": "HW-003",
+      "title": "MIDI timing and control semantics",
+      "stage": "N3",
+      "profile": "H",
+      "acceptance": "Verify encoders, pitch messages, modifiers, takeover and deck focus with actual device.",
+      "sources": [
+        {
+          "title": "Manual index \u2014 exact reference mapping pending",
+          "url": "https://support.serato.com/hc/en-us/categories/202698038-Serato-DJ-Pro-manual"
+        }
+      ],
+      "status": "research_pending",
+      "prototype": "not_started",
+      "native": "blocked_until_prototype_approval",
+      "routing": {
+        "codex": {
+          "model": "gpt-6-astra",
+          "effort": "xhigh"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "xhigh"
+        },
+        "rationale": "Hardware protocols and binary evidence need careful competing hypotheses.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "reference_review": "pending",
+      "test_evidence": []
+    },
+    {
+      "id": "HW-004",
+      "title": "LED and display feedback",
+      "stage": "N3",
+      "profile": "H",
+      "acceptance": "Physical feedback tracks authoritative app state and recovers on reconnect.",
+      "sources": [
+        {
+          "title": "Manual index \u2014 exact reference mapping pending",
+          "url": "https://support.serato.com/hc/en-us/categories/202698038-Serato-DJ-Pro-manual"
+        }
+      ],
+      "status": "research_pending",
+      "prototype": "not_started",
+      "native": "blocked_until_prototype_approval",
+      "routing": {
+        "codex": {
+          "model": "gpt-6-astra",
+          "effort": "xhigh"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "xhigh"
+        },
+        "rationale": "Hardware protocols and binary evidence need careful competing hypotheses.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "reference_review": "pending",
+      "test_evidence": []
+    },
+    {
+      "id": "HW-005",
+      "title": "HID/controller integration",
+      "stage": "N3",
+      "profile": "H",
+      "acceptance": "Verify actual reports, handshake, control mapping and failure/reconnect behavior.",
+      "sources": [
+        {
+          "title": "Manual index \u2014 exact reference mapping pending",
+          "url": "https://support.serato.com/hc/en-us/categories/202698038-Serato-DJ-Pro-manual"
+        }
+      ],
+      "status": "research_pending",
+      "prototype": "not_started",
+      "native": "blocked_until_prototype_approval",
+      "routing": {
+        "codex": {
+          "model": "gpt-6-astra",
+          "effort": "xhigh"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "xhigh"
+        },
+        "rationale": "Hardware protocols and binary evidence need careful competing hypotheses.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "reference_review": "pending",
+      "test_evidence": []
+    },
+    {
+      "id": "HW-006",
+      "title": "CDJ/media-player integration",
+      "stage": "N3",
+      "profile": "H",
+      "acceptance": "Validate a named model/firmware/mode including jog, transport and feedback.",
+      "sources": [
+        {
+          "title": "Manual index \u2014 exact reference mapping pending",
+          "url": "https://support.serato.com/hc/en-us/categories/202698038-Serato-DJ-Pro-manual"
+        }
+      ],
+      "status": "research_pending",
+      "prototype": "not_started",
+      "native": "blocked_until_prototype_approval",
+      "routing": {
+        "codex": {
+          "model": "gpt-6-astra",
+          "effort": "xhigh"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "xhigh"
+        },
+        "rationale": "Hardware protocols and binary evidence need careful competing hypotheses.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "reference_review": "pending",
+      "test_evidence": []
+    },
+    {
+      "id": "HW-007",
+      "title": "DVS signal and calibration",
+      "stage": "N3",
+      "profile": "H",
+      "acceptance": "Measure input quality/calibration and speed/direction tracking on declared turntable/interface.",
+      "sources": [
+        {
+          "title": "Manual index \u2014 exact reference mapping pending",
+          "url": "https://support.serato.com/hc/en-us/categories/202698038-Serato-DJ-Pro-manual"
+        }
+      ],
+      "status": "research_pending",
+      "prototype": "not_started",
+      "native": "blocked_until_prototype_approval",
+      "routing": {
+        "codex": {
+          "model": "gpt-6-astra",
+          "effort": "xhigh"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "xhigh"
+        },
+        "rationale": "Hardware protocols and binary evidence need careful competing hypotheses.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "reference_review": "pending",
+      "test_evidence": []
+    },
+    {
+      "id": "HW-008",
+      "title": "DVS operating modes and dropout",
+      "stage": "N3",
+      "profile": "A",
+      "acceptance": "Test absolute/relative/internal behavior where applicable and loss/recovery of timecode.",
+      "sources": [
+        {
+          "title": "Manual index \u2014 exact reference mapping pending",
+          "url": "https://support.serato.com/hc/en-us/categories/202698038-Serato-DJ-Pro-manual"
+        }
+      ],
+      "status": "research_pending",
+      "prototype": "not_started",
+      "native": "blocked_until_prototype_approval",
+      "routing": {
+        "codex": {
+          "model": "gpt-6-astra",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "DSP and transport require numerical reasoning backed by measurements.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "reference_review": "pending",
+      "test_evidence": []
+    },
+    {
+      "id": "HW-009",
+      "title": "USB storage behavior",
+      "stage": "N1",
+      "profile": "U",
+      "acceptance": "Import and reload from removable storage and handle disappearance without corrupting library.",
+      "sources": [
+        {
+          "title": "Manual index \u2014 exact reference mapping pending",
+          "url": "https://support.serato.com/hc/en-us/categories/202698038-Serato-DJ-Pro-manual"
+        }
+      ],
+      "status": "research_pending",
+      "prototype": "not_started",
+      "native": "blocked_until_prototype_approval",
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-sonnet-5",
+          "effort": "medium"
+        },
+        "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "reference_review": "pending",
+      "test_evidence": []
+    },
+    {
+      "id": "HW-010",
+      "title": "Conflicts and multiple controllers",
+      "stage": "N3",
+      "profile": "H",
+      "acceptance": "Resolve overlapping mappings/device changes with visible ownership and predictable state.",
+      "sources": [
+        {
+          "title": "Manual index \u2014 exact reference mapping pending",
+          "url": "https://support.serato.com/hc/en-us/categories/202698038-Serato-DJ-Pro-manual"
+        }
+      ],
+      "status": "research_pending",
+      "prototype": "not_started",
+      "native": "blocked_until_prototype_approval",
+      "routing": {
+        "codex": {
+          "model": "gpt-6-astra",
+          "effort": "xhigh"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "xhigh"
+        },
+        "rationale": "Hardware protocols and binary evidence need careful competing hypotheses.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "reference_review": "pending",
+      "test_evidence": []
+    },
+    {
+      "id": "UI-001",
+      "title": "Reference shell and layouts",
+      "stage": "P",
+      "profile": "U",
+      "acceptance": "Compare matching reference viewports and verify resizing/panel transitions without state loss.",
+      "sources": [
+        {
+          "title": "Manual index \u2014 exact reference mapping pending",
+          "url": "https://support.serato.com/hc/en-us/categories/202698038-Serato-DJ-Pro-manual"
+        }
+      ],
+      "status": "research_pending",
+      "prototype": "not_started",
+      "native": "blocked_until_prototype_approval",
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-sonnet-5",
+          "effort": "medium"
+        },
+        "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "reference_review": "pending",
+      "test_evidence": []
+    },
+    {
+      "id": "UI-002",
+      "title": "Menus, shortcuts and drag/drop",
+      "stage": "P",
+      "profile": "U",
+      "acceptance": "Execute mapped workflows, including text-input focus and modal shortcut conflicts.",
+      "sources": [
+        {
+          "title": "Manual index \u2014 exact reference mapping pending",
+          "url": "https://support.serato.com/hc/en-us/categories/202698038-Serato-DJ-Pro-manual"
+        }
+      ],
+      "status": "research_pending",
+      "prototype": "not_started",
+      "native": "blocked_until_prototype_approval",
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-sonnet-5",
+          "effort": "medium"
+        },
+        "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "reference_review": "pending",
+      "test_evidence": []
+    },
+    {
+      "id": "UI-003",
+      "title": "Preferences and reset",
+      "stage": "P",
+      "profile": "U",
+      "acceptance": "Apply, persist, undo where appropriate and reset only the requested preference scope.",
+      "sources": [
+        {
+          "title": "Manual index \u2014 exact reference mapping pending",
+          "url": "https://support.serato.com/hc/en-us/categories/202698038-Serato-DJ-Pro-manual"
+        }
+      ],
+      "status": "research_pending",
+      "prototype": "not_started",
+      "native": "blocked_until_prototype_approval",
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-sonnet-5",
+          "effort": "medium"
+        },
+        "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "reference_review": "pending",
+      "test_evidence": []
+    },
+    {
+      "id": "UI-004",
+      "title": "Accessibility and reduced motion",
+      "stage": "P",
+      "profile": "U",
+      "acceptance": "Verify keyboard/focus/names/contrast and non-color status cues in actual rendered interface.",
+      "sources": [
+        {
+          "title": "Manual index \u2014 exact reference mapping pending",
+          "url": "https://support.serato.com/hc/en-us/categories/202698038-Serato-DJ-Pro-manual"
+        }
+      ],
+      "status": "research_pending",
+      "prototype": "not_started",
+      "native": "blocked_until_prototype_approval",
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-sonnet-5",
+          "effort": "medium"
+        },
+        "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "reference_review": "pending",
+      "test_evidence": []
+    },
+    {
+      "id": "UI-005",
+      "title": "Empty/progress/error/recovery states",
+      "stage": "P",
+      "profile": "U",
+      "acceptance": "Trigger actual or labeled simulated errors and reach a clear recoverable state.",
+      "sources": [
+        {
+          "title": "Manual index \u2014 exact reference mapping pending",
+          "url": "https://support.serato.com/hc/en-us/categories/202698038-Serato-DJ-Pro-manual"
+        }
+      ],
+      "status": "research_pending",
+      "prototype": "not_started",
+      "native": "blocked_until_prototype_approval",
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-sonnet-5",
+          "effort": "medium"
+        },
+        "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "reference_review": "pending",
+      "test_evidence": []
+    },
+    {
+      "id": "UI-006",
+      "title": "Long labels, Unicode and scaling",
+      "stage": "N2",
+      "profile": "U",
+      "acceptance": "Test long metadata, Unicode, high DPI and smaller supported windows without hidden core controls.",
+      "sources": [
+        {
+          "title": "Manual index \u2014 exact reference mapping pending",
+          "url": "https://support.serato.com/hc/en-us/categories/202698038-Serato-DJ-Pro-manual"
+        }
+      ],
+      "status": "research_pending",
+      "prototype": "not_started",
+      "native": "blocked_until_prototype_approval",
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-sonnet-5",
+          "effort": "medium"
+        },
+        "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "reference_review": "pending",
+      "test_evidence": []
+    },
+    {
+      "id": "SYS-001",
+      "title": "Offline account-free operation",
+      "stage": "N1",
+      "profile": "S",
+      "acceptance": "Cold-launch and perform core workflows with network blocked and no account configured.",
+      "sources": [
+        {
+          "title": "Manual index \u2014 exact reference mapping pending",
+          "url": "https://support.serato.com/hc/en-us/categories/202698038-Serato-DJ-Pro-manual"
+        }
+      ],
+      "status": "research_pending",
+      "prototype": "not_started",
+      "native": "blocked_until_prototype_approval",
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "xhigh"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "Architecture and persistence require reasoning across failure and concurrency boundaries.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "reference_review": "pending",
+      "test_evidence": []
+    },
+    {
+      "id": "SYS-002",
+      "title": "Session persistence and recovery",
+      "stage": "N2",
+      "profile": "S",
+      "acceptance": "Recover settings/library after interruption; do not auto-start audio unexpectedly.",
+      "sources": [
+        {
+          "title": "Manual index \u2014 exact reference mapping pending",
+          "url": "https://support.serato.com/hc/en-us/categories/202698038-Serato-DJ-Pro-manual"
+        }
+      ],
+      "status": "research_pending",
+      "prototype": "not_started",
+      "native": "blocked_until_prototype_approval",
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "xhigh"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "Architecture and persistence require reasoning across failure and concurrency boundaries.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "reference_review": "pending",
+      "test_evidence": []
+    },
+    {
+      "id": "SYS-003",
+      "title": "Optional provider integrations",
+      "stage": "N3",
+      "profile": "S",
+      "acceptance": "Provider failure or logout affects only that integration; local playback remains available.",
+      "sources": [
+        {
+          "title": "Manual index \u2014 exact reference mapping pending",
+          "url": "https://support.serato.com/hc/en-us/categories/202698038-Serato-DJ-Pro-manual"
+        }
+      ],
+      "status": "research_pending",
+      "prototype": "not_started",
+      "native": "blocked_until_prototype_approval",
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "xhigh"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "Architecture and persistence require reasoning across failure and concurrency boundaries.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "reference_review": "pending",
+      "test_evidence": []
+    },
+    {
+      "id": "SYS-004",
+      "title": "Installer, permissions and updates",
+      "stage": "R",
+      "profile": "S",
+      "acceptance": "Clean-machine install, launch, update and recovery preserve user data and functionality.",
+      "sources": [
+        {
+          "title": "Manual index \u2014 exact reference mapping pending",
+          "url": "https://support.serato.com/hc/en-us/categories/202698038-Serato-DJ-Pro-manual"
+        }
+      ],
+      "status": "research_pending",
+      "prototype": "not_started",
+      "native": "blocked_until_prototype_approval",
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "xhigh"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "Architecture and persistence require reasoning across failure and concurrency boundaries.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "reference_review": "pending",
+      "test_evidence": []
+    },
+    {
+      "id": "SYS-005",
+      "title": "Diagnostics and opt-in reporting",
+      "stage": "R",
+      "profile": "S",
+      "acceptance": "Export useful redacted local diagnostics and verify reporting consent behavior.",
+      "sources": [
+        {
+          "title": "Manual index \u2014 exact reference mapping pending",
+          "url": "https://support.serato.com/hc/en-us/categories/202698038-Serato-DJ-Pro-manual"
+        }
+      ],
+      "status": "research_pending",
+      "prototype": "not_started",
+      "native": "blocked_until_prototype_approval",
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "xhigh"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "Architecture and persistence require reasoning across failure and concurrency boundaries.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "reference_review": "pending",
+      "test_evidence": []
+    },
+    {
+      "id": "SYS-006",
+      "title": "Open-source build and provenance",
+      "stage": "R",
+      "profile": "S",
+      "acceptance": "Rebuild documented candidate from source and audit dependency/model/asset notices.",
+      "sources": [
+        {
+          "title": "Manual index \u2014 exact reference mapping pending",
+          "url": "https://support.serato.com/hc/en-us/categories/202698038-Serato-DJ-Pro-manual"
+        }
+      ],
+      "status": "research_pending",
+      "prototype": "not_started",
+      "native": "blocked_until_prototype_approval",
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "xhigh"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "Architecture and persistence require reasoning across failure and concurrency boundaries.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "reference_review": "pending",
+      "test_evidence": []
+    },
+    {
+      "id": "SYS-007",
+      "title": "Mappings/extensions compatibility",
+      "stage": "N3",
+      "profile": "S",
+      "acceptance": "Reject invalid/incompatible extension data and recover without affecting playback.",
+      "sources": [
+        {
+          "title": "Manual index \u2014 exact reference mapping pending",
+          "url": "https://support.serato.com/hc/en-us/categories/202698038-Serato-DJ-Pro-manual"
+        }
+      ],
+      "status": "research_pending",
+      "prototype": "not_started",
+      "native": "blocked_until_prototype_approval",
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "xhigh"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "Architecture and persistence require reasoning across failure and concurrency boundaries.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "reference_review": "pending",
+      "test_evidence": []
+    },
+    {
+      "id": "SYS-008",
+      "title": "No artificial feature gates",
+      "stage": "R",
+      "profile": "V",
+      "acceptance": "Audit feature availability and run core functions with no entitlement/account/network state.",
+      "sources": [
+        {
+          "title": "Manual index \u2014 exact reference mapping pending",
+          "url": "https://support.serato.com/hc/en-us/categories/202698038-Serato-DJ-Pro-manual"
+        }
+      ],
+      "status": "research_pending",
+      "prototype": "not_started",
+      "native": "blocked_until_prototype_approval",
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "xhigh"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "Independent acceptance review must challenge claims against actual workflows.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "reference_review": "pending",
+      "test_evidence": []
+    },
+    {
+      "id": "LIB-012",
+      "title": "Favorite crates, crate search, colors and sort modes",
+      "stage": "N2",
+      "profile": "U",
+      "acceptance": "Create a favorite hierarchy, filter crates, reveal containing crates, clear filter and restore order; source 227561407.",
+      "sources": [
+        {
+          "title": "Crates in Serato DJ Pro & Serato DJ Lite 4.0",
+          "url": "https://support.serato.com/hc/en-us/articles/227561407-Crates-in-Serato-DJ-Pro-Serato-DJ-Lite-4-0"
+        }
+      ],
+      "status": "research_pending",
+      "prototype": "not_started",
+      "native": "blocked_until_prototype_approval",
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-sonnet-5",
+          "effort": "medium"
+        },
+        "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "reference_review": "pending",
+      "test_evidence": []
+    },
+    {
+      "id": "LIB-013",
+      "title": "Ratings, emoji ratings and iTunes rating import",
+      "stage": "N2",
+      "profile": "S",
+      "acceptance": "Preview overwrite scope, apply only selected authorized changes and preserve rollback; source 223364427.",
+      "sources": [
+        {
+          "title": "Library + Display",
+          "url": "https://support.serato.com/hc/en-us/articles/223364427-Library-Display"
+        }
+      ],
+      "status": "research_pending",
+      "prototype": "not_started",
+      "native": "blocked_until_prototype_approval",
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "xhigh"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "Architecture and persistence require reasoning across failure and concurrency boundaries.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "reference_review": "pending",
+      "test_evidence": []
+    },
+    {
+      "id": "LIB-014",
+      "title": "Track lock versus beatgrid lock",
+      "stage": "N1",
+      "profile": "S",
+      "acceptance": "Prevent persisted edits to read-only tracks while distinguishing temporary session changes and analysis locks; source 14361544561167.",
+      "sources": [
+        {
+          "title": "Preventing Changes to your Beatgrids and Tracks",
+          "url": "https://support.serato.com/hc/en-us/articles/14361544561167-Preventing-Changes-to-your-Beatgrids-and-Tracks"
+        }
+      ],
+      "status": "research_pending",
+      "prototype": "not_started",
+      "native": "blocked_until_prototype_approval",
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "xhigh"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "Architecture and persistence require reasoning across failure and concurrency boundaries.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "reference_review": "pending",
+      "test_evidence": []
+    },
+    {
+      "id": "LIB-015",
+      "title": "Files panel copy, move, rescan and volume portability",
+      "stage": "N2",
+      "profile": "S",
+      "acceptance": "Test on disposable files; preserve identities and clearly distinguish reference removal from disk deletion; sources 14362305508239, 227561687, 227916927.",
+      "sources": [
+        {
+          "title": "Copying and Managing Content from the Files Tab - Serato DJ Pro & Lite",
+          "url": "https://support.serato.com/hc/en-us/articles/14362305508239-Copying-and-Managing-Content-from-the-Files-Tab-Serato-DJ-Pro-Lite"
+        },
+        {
+          "title": "Re-scanning File Information",
+          "url": "https://support.serato.com/hc/en-us/articles/227561687-Re-scanning-File-Information"
+        },
+        {
+          "title": "External Hard Drives",
+          "url": "https://support.serato.com/hc/en-us/articles/227916927-External-Hard-Drives"
+        }
+      ],
+      "status": "research_pending",
+      "prototype": "not_started",
+      "native": "blocked_until_prototype_approval",
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "xhigh"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "Architecture and persistence require reasoning across failure and concurrency boundaries.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "reference_review": "pending",
+      "test_evidence": []
+    },
+    {
+      "id": "LIB-016",
+      "title": "History session editing, inserted tracks and exports",
+      "stage": "N2",
+      "profile": "U",
+      "acceptance": "Start/end a session, insert a non-file entry, export CSV/TXT/M3U and verify M3U omits non-file entries; source 223455687.",
+      "sources": [
+        {
+          "title": "History",
+          "url": "https://support.serato.com/hc/en-us/articles/223455687-History"
+        }
+      ],
+      "status": "research_pending",
+      "prototype": "not_started",
+      "native": "blocked_until_prototype_approval",
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-sonnet-5",
+          "effort": "medium"
+        },
+        "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "reference_review": "pending",
+      "test_evidence": []
+    },
+    {
+      "id": "LIB-017",
+      "title": "Live playlists and optional sharing",
+      "stage": "N3",
+      "profile": "S",
+      "acceptance": "Preview and explicitly publish an opted-in session; stop sharing immediately while local playback continues; source 223455827.",
+      "sources": [
+        {
+          "title": "Playlists",
+          "url": "https://support.serato.com/hc/en-us/articles/223455827-Playlists"
+        }
+      ],
+      "status": "research_pending",
+      "prototype": "not_started",
+      "native": "blocked_until_prototype_approval",
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "xhigh"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "Architecture and persistence require reasoning across failure and concurrency boundaries.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "reference_review": "pending",
+      "test_evidence": []
+    },
+    {
+      "id": "ANA-007",
+      "title": "Analyze-on-import, ranges and selective reanalysis",
+      "stage": "N1",
+      "profile": "S",
+      "acceptance": "Verify automatic import queue, per-field overwrite rules, locked exclusions and cancel/restart; sources 14361068095759, 14361435885327.",
+      "sources": [
+        {
+          "title": "Analyzing Files",
+          "url": "https://support.serato.com/hc/en-us/articles/14361068095759-Analyzing-Files"
+        },
+        {
+          "title": "Analysis setting",
+          "url": "https://support.serato.com/hc/en-us/articles/14361435885327-Analysis-setting"
+        }
+      ],
+      "status": "research_pending",
+      "prototype": "not_started",
+      "native": "blocked_until_prototype_approval",
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "xhigh"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "Architecture and persistence require reasoning across failure and concurrency boundaries.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "reference_review": "pending",
+      "test_evidence": []
+    },
+    {
+      "id": "DEK-013",
+      "title": "Instant doubles across decks and sampler",
+      "stage": "N2",
+      "profile": "A",
+      "acceptance": "Duplicate track, position, gain, rate and sync into another destination and compare alignment; source 227629908.",
+      "sources": [
+        {
+          "title": "Sampler Instant Doubles",
+          "url": "https://support.serato.com/hc/en-us/articles/227629908-Sampler-Instant-Doubles"
+        }
+      ],
+      "status": "research_pending",
+      "prototype": "not_started",
+      "native": "blocked_until_prototype_approval",
+      "routing": {
+        "codex": {
+          "model": "gpt-6-astra",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "DSP and transport require numerical reasoning backed by measurements.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "reference_review": "pending",
+      "test_evidence": []
+    },
+    {
+      "id": "DEK-014",
+      "title": "Autoplay, repeat, offline player and practice layouts",
+      "stage": "N1",
+      "profile": "U",
+      "acceptance": "End a track, observe correct repeat/next-track choice and library selection; sources 224969667, 235211327.",
+      "sources": [
+        {
+          "title": "Autoplay",
+          "url": "https://support.serato.com/hc/en-us/articles/224969667-Autoplay"
+        },
+        {
+          "title": "Offline Player",
+          "url": "https://support.serato.com/hc/en-us/articles/235211327-Offline-Player"
+        }
+      ],
+      "status": "research_pending",
+      "prototype": "not_started",
+      "native": "blocked_until_prototype_approval",
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-sonnet-5",
+          "effort": "medium"
+        },
+        "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "reference_review": "pending",
+      "test_evidence": []
+    },
+    {
+      "id": "DEK-015",
+      "title": "Temporary cue hold/release and continued playback",
+      "stage": "N1",
+      "profile": "A",
+      "acceptance": "Set temp cue, hold audition, release to return, then latch playback without returning; source 233435527.",
+      "sources": [
+        {
+          "title": "Temporary Cue ",
+          "url": "https://support.serato.com/hc/en-us/articles/233435527-Temporary-Cue"
+        }
+      ],
+      "status": "research_pending",
+      "prototype": "not_started",
+      "native": "blocked_until_prototype_approval",
+      "routing": {
+        "codex": {
+          "model": "gpt-6-astra",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "DSP and transport require numerical reasoning backed by measurements.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "reference_review": "pending",
+      "test_evidence": []
+    },
+    {
+      "id": "DEK-016",
+      "title": "Cue/loop names, colors, order and chronological preference",
+      "stage": "N2",
+      "profile": "U",
+      "acceptance": "Edit labels, reorder, toggle chronological order and verify persisted association; sources 233435487, 226514988, 115003652768.",
+      "sources": [
+        {
+          "title": "Visual Aid: Cue Point Naming, Color & Status.",
+          "url": "https://support.serato.com/hc/en-us/articles/233435487-Visual-Aid-Cue-Point-Naming-Color-Status"
+        },
+        {
+          "title": "Naming Saved Loops",
+          "url": "https://support.serato.com/hc/en-us/articles/226514988-Naming-Saved-Loops"
+        },
+        {
+          "title": "Reordering Saved Loops",
+          "url": "https://support.serato.com/hc/en-us/articles/115003652768-Reordering-Saved-Loops"
+        }
+      ],
+      "status": "research_pending",
+      "prototype": "not_started",
+      "native": "blocked_until_prototype_approval",
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-sonnet-5",
+          "effort": "medium"
+        },
+        "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "reference_review": "pending",
+      "test_evidence": []
+    },
+    {
+      "id": "DEK-017",
+      "title": "Loop roll and underlying timeline",
+      "stage": "N2",
+      "profile": "A",
+      "acceptance": "Hold a roll, change its length, release and measure resumed timeline independently of loop position; source 235208967.",
+      "sources": [
+        {
+          "title": "Loop Roll",
+          "url": "https://support.serato.com/hc/en-us/articles/235208967-Loop-Roll"
+        }
+      ],
+      "status": "research_pending",
+      "prototype": "not_started",
+      "native": "blocked_until_prototype_approval",
+      "routing": {
+        "codex": {
+          "model": "gpt-6-astra",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "DSP and transport require numerical reasoning backed by measurements.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "reference_review": "pending",
+      "test_evidence": []
+    },
+    {
+      "id": "DEK-018",
+      "title": "Smart sync state machine and relative-pitch takeover",
+      "stage": "N2",
+      "profile": "A",
+      "acceptance": "Exercise armed, beat, tempo, disengaged-relative and absolute states, including a missing-grid load; sources 227627128, 227627168, 227561927, 227561947.",
+      "sources": [
+        {
+          "title": "Beat Sync",
+          "url": "https://support.serato.com/hc/en-us/articles/227627128-Beat-Sync"
+        },
+        {
+          "title": "Tempo Sync",
+          "url": "https://support.serato.com/hc/en-us/articles/227627168-Tempo-Sync"
+        },
+        {
+          "title": "Disengage Sync",
+          "url": "https://support.serato.com/hc/en-us/articles/227561927-Disengage-Sync"
+        },
+        {
+          "title": "Relative Pitch & Tempo Control (Smart Sync)",
+          "url": "https://support.serato.com/hc/en-us/articles/227561947-Relative-Pitch-Tempo-Control-Smart-Sync"
+        }
+      ],
+      "status": "research_pending",
+      "prototype": "not_started",
+      "native": "blocked_until_prototype_approval",
+      "routing": {
+        "codex": {
+          "model": "gpt-6-astra",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "DSP and transport require numerical reasoning backed by measurements.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "reference_review": "pending",
+      "test_evidence": []
+    },
+    {
+      "id": "DEK-019",
+      "title": "Pitch Play and key sync",
+      "stage": "N2",
+      "profile": "A",
+      "acceptance": "Select cue and pitch range, trigger transposed notes and restore original playback state; hardware quickstart and Pitch n Time documentation required.",
+      "sources": [
+        {
+          "title": "Manual index \u2014 exact reference mapping pending",
+          "url": "https://support.serato.com/hc/en-us/categories/202698038-Serato-DJ-Pro-manual"
+        }
+      ],
+      "status": "research_pending",
+      "prototype": "not_started",
+      "native": "blocked_until_prototype_approval",
+      "routing": {
+        "codex": {
+          "model": "gpt-6-astra",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "DSP and transport require numerical reasoning backed by measurements.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "reference_review": "pending",
+      "test_evidence": []
+    },
+    {
+      "id": "DEK-020",
+      "title": "Slicer and slicer loop",
+      "stage": "N2",
+      "profile": "A",
+      "acceptance": "Define region, slice selection and release behavior from a supported-device guide; inspect separately from a pad labeled Slicer that maps to Stems.",
+      "sources": [
+        {
+          "title": "Manual index \u2014 exact reference mapping pending",
+          "url": "https://support.serato.com/hc/en-us/categories/202698038-Serato-DJ-Pro-manual"
+        }
+      ],
+      "status": "research_pending",
+      "prototype": "not_started",
+      "native": "blocked_until_prototype_approval",
+      "routing": {
+        "codex": {
+          "model": "gpt-6-astra",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "DSP and transport require numerical reasoning backed by measurements.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "reference_review": "pending",
+      "test_evidence": []
+    },
+    {
+      "id": "FX-003",
+      "title": "Advanced FX parameters, favorites and named presets",
+      "stage": "N2",
+      "profile": "U",
+      "acceptance": "Change parameters, save/recall/rename/delete a preset and verify reset and fine adjustment; sources 10326824275087, 223364287.",
+      "sources": [
+        {
+          "title": "Advanced FX View",
+          "url": "https://support.serato.com/hc/en-us/articles/10326824275087-Advanced-FX-View"
+        },
+        {
+          "title": "FX (Setup)",
+          "url": "https://support.serato.com/hc/en-us/articles/223364287-FX-Setup"
+        }
+      ],
+      "status": "research_pending",
+      "prototype": "not_started",
+      "native": "blocked_until_prototype_approval",
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-sonnet-5",
+          "effort": "medium"
+        },
+        "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "reference_review": "pending",
+      "test_evidence": []
+    },
+    {
+      "id": "FX-004",
+      "title": "Channel FX and hardware filter-knob assignment",
+      "stage": "N2",
+      "profile": "A",
+      "acceptance": "Select channel effect, test both sides of neutral and return to neutral without unintended residual sound; source 224970027.",
+      "sources": [
+        {
+          "title": "Using DJ-FX",
+          "url": "https://support.serato.com/hc/en-us/articles/224970027-Using-DJ-FX"
+        }
+      ],
+      "status": "research_pending",
+      "prototype": "not_started",
+      "native": "blocked_until_prototype_approval",
+      "routing": {
+        "codex": {
+          "model": "gpt-6-astra",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "DSP and transport require numerical reasoning backed by measurements.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "reference_review": "pending",
+      "test_evidence": []
+    },
+    {
+      "id": "SMP-003",
+      "title": "Sampler advanced pitch, sync, cue/loop start and gain",
+      "stage": "N2",
+      "profile": "A",
+      "acceptance": "Exercise each slot mode and output route, distinguish stored track gain from slot volume, and stop voices on bank switch; sampler manual section.",
+      "sources": [
+        {
+          "title": "Manual index \u2014 exact reference mapping pending",
+          "url": "https://support.serato.com/hc/en-us/categories/202698038-Serato-DJ-Pro-manual"
+        }
+      ],
+      "status": "research_pending",
+      "prototype": "not_started",
+      "native": "blocked_until_prototype_approval",
+      "routing": {
+        "codex": {
+          "model": "gpt-6-astra",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "DSP and transport require numerical reasoning backed by measurements.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "reference_review": "pending",
+      "test_evidence": []
+    },
+    {
+      "id": "SCR-001",
+      "title": "Scratch Banks, per-slot load settings and previous-track return",
+      "stage": "N2",
+      "profile": "U",
+      "acceptance": "Assign scratch media, set start/repeat/keylock, load to correct deck and restore previous track with modifier; official Scratch Banks guide.",
+      "sources": [
+        {
+          "title": "Manual index \u2014 exact reference mapping pending",
+          "url": "https://support.serato.com/hc/en-us/categories/202698038-Serato-DJ-Pro-manual"
+        }
+      ],
+      "status": "research_pending",
+      "prototype": "not_started",
+      "native": "blocked_until_prototype_approval",
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-sonnet-5",
+          "effort": "medium"
+        },
+        "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "reference_review": "pending",
+      "test_evidence": []
+    },
+    {
+      "id": "FLP-001",
+      "title": "Flip recording, playback, loop, save and edit",
+      "stage": "N3",
+      "profile": "A",
+      "acceptance": "Capture cue/censor sequence, replay against a declared musical timeline and restore saved sequence; expansion guide needed.",
+      "sources": [
+        {
+          "title": "Manual index \u2014 exact reference mapping pending",
+          "url": "https://support.serato.com/hc/en-us/categories/202698038-Serato-DJ-Pro-manual"
+        }
+      ],
+      "status": "research_pending",
+      "prototype": "not_started",
+      "native": "blocked_until_prototype_approval",
+      "routing": {
+        "codex": {
+          "model": "gpt-6-astra",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "DSP and transport require numerical reasoning backed by measurements.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "reference_review": "pending",
+      "test_evidence": []
+    },
+    {
+      "id": "VID-001",
+      "title": "Video decks, linked AV playback and external display",
+      "stage": "N3",
+      "profile": "S",
+      "acceptance": "Verify decode, frame/audio synchronization, second-display placement and recovery; Serato Video manual needed.",
+      "sources": [
+        {
+          "title": "Manual index \u2014 exact reference mapping pending",
+          "url": "https://support.serato.com/hc/en-us/categories/202698038-Serato-DJ-Pro-manual"
+        }
+      ],
+      "status": "research_pending",
+      "prototype": "not_started",
+      "native": "blocked_until_prototype_approval",
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "xhigh"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "Architecture and persistence require reasoning across failure and concurrency boundaries.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "reference_review": "pending",
+      "test_evidence": []
+    },
+    {
+      "id": "VID-002",
+      "title": "Video transitions, effects, text and image overlays",
+      "stage": "N3",
+      "profile": "U",
+      "acceptance": "Inventory each control and test compositing, persistence and recovery with original test media; expansion guide needed.",
+      "sources": [
+        {
+          "title": "Manual index \u2014 exact reference mapping pending",
+          "url": "https://support.serato.com/hc/en-us/categories/202698038-Serato-DJ-Pro-manual"
+        }
+      ],
+      "status": "research_pending",
+      "prototype": "not_started",
+      "native": "blocked_until_prototype_approval",
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-sonnet-5",
+          "effort": "medium"
+        },
+        "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "reference_review": "pending",
+      "test_evidence": []
+    },
+    {
+      "id": "LNK-001",
+      "title": "Ableton Link session, tempo and phase integration",
+      "stage": "N3",
+      "profile": "A",
+      "acceptance": "Join/leave a local session, change tempo from either peer, verify phase and continue standalone after disconnect; sources 227839727, 228009488, 228009728.",
+      "sources": [
+        {
+          "title": "Link",
+          "url": "https://support.serato.com/hc/en-us/articles/227839727-Link"
+        },
+        {
+          "title": " Prerequisites for Link",
+          "url": "https://support.serato.com/hc/en-us/articles/228009488--Prerequisites-for-Link"
+        },
+        {
+          "title": "Using Link",
+          "url": "https://support.serato.com/hc/en-us/articles/228009728-Using-Link"
+        }
+      ],
+      "status": "research_pending",
+      "prototype": "not_started",
+      "native": "blocked_until_prototype_approval",
+      "routing": {
+        "codex": {
+          "model": "gpt-6-astra",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "DSP and transport require numerical reasoning backed by measurements.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "reference_review": "pending",
+      "test_evidence": []
+    },
+    {
+      "id": "STM-004",
+      "title": "Stem effects, waveform response and hardware pad replacement",
+      "stage": "N3",
+      "profile": "A",
+      "acceptance": "Route mute/echo/brake to intended stem group and preserve timing; sources 5700921209615, 5700970589583.",
+      "sources": [
+        {
+          "title": "Using Stems",
+          "url": "https://support.serato.com/hc/en-us/articles/5700921209615-Using-Stems"
+        },
+        {
+          "title": "Controlling Stems with your DJ hardware",
+          "url": "https://support.serato.com/hc/en-us/articles/5700970589583-Controlling-Stems-with-your-DJ-hardware"
+        }
+      ],
+      "status": "research_pending",
+      "prototype": "not_started",
+      "native": "blocked_until_prototype_approval",
+      "routing": {
+        "codex": {
+          "model": "gpt-6-astra",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "DSP and transport require numerical reasoning backed by measurements.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "reference_review": "pending",
+      "test_evidence": []
+    },
+    {
+      "id": "STM-005",
+      "title": "Stem Slip introduced in 4.0.10",
+      "stage": "N3",
+      "profile": "A",
+      "acceptance": "Establish exact reference state transitions and audible return behavior before implementation; release notes plus runtime proof required.",
+      "sources": [
+        {
+          "title": "Manual index \u2014 exact reference mapping pending",
+          "url": "https://support.serato.com/hc/en-us/categories/202698038-Serato-DJ-Pro-manual"
+        }
+      ],
+      "status": "research_pending",
+      "prototype": "not_started",
+      "native": "blocked_until_prototype_approval",
+      "routing": {
+        "codex": {
+          "model": "gpt-6-astra",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "DSP and transport require numerical reasoning backed by measurements.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "reference_review": "pending",
+      "test_evidence": []
+    },
+    {
+      "id": "HW-011",
+      "title": "Hercules Inpulse 300 MK2 full default mapping",
+      "stage": "N3",
+      "profile": "H",
+      "acceptance": "Verify every physical control, modifier, pad mode, jog touch, guide LED, reconnect and four-output route on this connected unit.",
+      "sources": [
+        {
+          "title": "Manual index \u2014 exact reference mapping pending",
+          "url": "https://support.serato.com/hc/en-us/categories/202698038-Serato-DJ-Pro-manual"
+        }
+      ],
+      "status": "research_pending",
+      "prototype": "not_started",
+      "native": "blocked_until_prototype_approval",
+      "routing": {
+        "codex": {
+          "model": "gpt-6-astra",
+          "effort": "xhigh"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "xhigh"
+        },
+        "rationale": "Hardware protocols and binary evidence need careful competing hypotheses.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "reference_review": "pending",
+      "test_evidence": []
+    },
+    {
+      "id": "HW-012",
+      "title": "MIDI many-to-one, one-to-many and data encodings",
+      "stage": "N3",
+      "profile": "H",
+      "acceptance": "Verify absolute, relative and switch encodings with conflict resolution and explicit replace/add behavior; sources 225065768, 360001990956, 360001990936.",
+      "sources": [
+        {
+          "title": "MIDI Data Types",
+          "url": "https://support.serato.com/hc/en-us/articles/225065768-MIDI-Data-Types"
+        },
+        {
+          "title": "Mapping multiple MIDI controls to a single function",
+          "url": "https://support.serato.com/hc/en-us/articles/360001990956-Mapping-multiple-MIDI-controls-to-a-single-function"
+        },
+        {
+          "title": "Mapping multiple functions to a single MIDI control",
+          "url": "https://support.serato.com/hc/en-us/articles/360001990936-Mapping-multiple-functions-to-a-single-MIDI-control"
+        }
+      ],
+      "status": "research_pending",
+      "prototype": "not_started",
+      "native": "blocked_until_prototype_approval",
+      "routing": {
+        "codex": {
+          "model": "gpt-6-astra",
+          "effort": "xhigh"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "xhigh"
+        },
+        "rationale": "Hardware protocols and binary evidence need careful competing hypotheses.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "reference_review": "pending",
+      "test_evidence": []
+    },
+    {
+      "id": "HW-013",
+      "title": "DVS THRU, changeover and emergency internal mode",
+      "stage": "N3",
+      "profile": "H",
+      "acceptance": "Test passthrough processing, preserved state, muted changeover and end-of-control-media recovery on supported physical DVS equipment; sources 234760848, 234760868, 234760888.",
+      "sources": [
+        {
+          "title": "Through Mode",
+          "url": "https://support.serato.com/hc/en-us/articles/234760848-Through-Mode"
+        },
+        {
+          "title": "Changeover Mode",
+          "url": "https://support.serato.com/hc/en-us/articles/234760868-Changeover-Mode"
+        },
+        {
+          "title": "Internal Mode",
+          "url": "https://support.serato.com/hc/en-us/articles/234760888-Internal-Mode"
+        }
+      ],
+      "status": "research_pending",
+      "prototype": "not_started",
+      "native": "blocked_until_prototype_approval",
+      "routing": {
+        "codex": {
+          "model": "gpt-6-astra",
+          "effort": "xhigh"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "xhigh"
+        },
+        "rationale": "Hardware protocols and binary evidence need careful competing hypotheses.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "reference_review": "pending",
+      "test_evidence": []
+    },
+    {
+      "id": "AUD-007",
+      "title": "Microphone/auxiliary routes and virtual audio output",
+      "stage": "N3",
+      "profile": "H",
+      "acceptance": "Inspect every available route, verify monitor/record destinations and permission failures without installing drivers automatically; sources 223447488, 223446728.",
+      "sources": [
+        {
+          "title": "Audio",
+          "url": "https://support.serato.com/hc/en-us/articles/223447488-Audio"
+        },
+        {
+          "title": "Mixer",
+          "url": "https://support.serato.com/hc/en-us/articles/223446728-Mixer"
+        }
+      ],
+      "status": "research_pending",
+      "prototype": "not_started",
+      "native": "blocked_until_prototype_approval",
+      "routing": {
+        "codex": {
+          "model": "gpt-6-astra",
+          "effort": "xhigh"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "xhigh"
+        },
+        "rationale": "Hardware protocols and binary evidence need careful competing hypotheses.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "reference_review": "pending",
+      "test_evidence": []
+    },
+    {
+      "id": "REC-003",
+      "title": "Pre-master recording tap, input selection and split files",
+      "stage": "N2",
+      "profile": "A",
+      "acceptance": "Compare recorded levels before/after master-gain change, test alternate input and recover unsaved recording; sources 223459407, 115003927267.",
+      "sources": [
+        {
+          "title": "Recording Audio",
+          "url": "https://support.serato.com/hc/en-us/articles/223459407-Recording-Audio"
+        },
+        {
+          "title": "Rec Location",
+          "url": "https://support.serato.com/hc/en-us/articles/115003927267-Rec-Location"
+        }
+      ],
+      "status": "research_pending",
+      "prototype": "not_started",
+      "native": "blocked_until_prototype_approval",
+      "routing": {
+        "codex": {
+          "model": "gpt-6-astra",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "DSP and transport require numerical reasoning backed by measurements.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "reference_review": "pending",
+      "test_evidence": []
+    },
+    {
+      "id": "UI-007",
+      "title": "Vertical, horizontal, extended, stack and library modes",
+      "stage": "P",
+      "profile": "U",
+      "acceptance": "Compare each layout at identical viewport, preserve deck focus, and report panels closed by layout constraints; source 225122768.",
+      "sources": [
+        {
+          "title": "Display Modes",
+          "url": "https://support.serato.com/hc/en-us/articles/225122768-Display-Modes"
+        }
+      ],
+      "status": "research_pending",
+      "prototype": "not_started",
+      "native": "blocked_until_prototype_approval",
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-sonnet-5",
+          "effort": "medium"
+        },
+        "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "reference_review": "pending",
+      "test_evidence": []
+    },
+    {
+      "id": "UI-008",
+      "title": "Day mode, library-only mode and display preferences",
+      "stage": "P",
+      "profile": "U",
+      "acceptance": "Compare both themes and retained settings at supported scaling and text sizes; sources 360001045656, 223364427.",
+      "sources": [
+        {
+          "title": "Day mode",
+          "url": "https://support.serato.com/hc/en-us/articles/360001045656-Day-mode"
+        },
+        {
+          "title": "Library + Display",
+          "url": "https://support.serato.com/hc/en-us/articles/223364427-Library-Display"
+        }
+      ],
+      "status": "research_pending",
+      "prototype": "not_started",
+      "native": "blocked_until_prototype_approval",
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-sonnet-5",
+          "effort": "medium"
+        },
+        "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "reference_review": "pending",
+      "test_evidence": []
+    },
+    {
+      "id": "UI-009",
+      "title": "Help, shortcut overlay, tooltips and diagnostics status",
+      "stage": "P",
+      "profile": "U",
+      "acceptance": "Execute keyboard help and contextual tooltips with accessible focus and no performance interruption; Getting Started manual section.",
+      "sources": [
+        {
+          "title": "Manual index \u2014 exact reference mapping pending",
+          "url": "https://support.serato.com/hc/en-us/categories/202698038-Serato-DJ-Pro-manual"
+        }
+      ],
+      "status": "research_pending",
+      "prototype": "not_started",
+      "native": "blocked_until_prototype_approval",
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-sonnet-5",
+          "effort": "medium"
+        },
+        "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "reference_review": "pending",
+      "test_evidence": []
+    },
+    {
+      "id": "UI-010",
+      "title": "Complete setup tabs and hardware-dependent controls",
+      "stage": "P",
+      "profile": "U",
+      "acceptance": "Map every option and dependency in DJ, Sync, Audio, CD/Vinyl, Library, Mixer, FX, MIDI and Expansions; Setup Screen manual section.",
+      "sources": [
+        {
+          "title": "Manual index \u2014 exact reference mapping pending",
+          "url": "https://support.serato.com/hc/en-us/categories/202698038-Serato-DJ-Pro-manual"
+        }
+      ],
+      "status": "research_pending",
+      "prototype": "not_started",
+      "native": "blocked_until_prototype_approval",
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-sonnet-5",
+          "effort": "medium"
+        },
+        "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "reference_review": "pending",
+      "test_evidence": []
+    },
+    {
+      "id": "SYS-009",
+      "title": "Streaming provider-specific capabilities and failures",
+      "stage": "N3",
+      "profile": "S",
+      "acceptance": "Record provider-by-provider search, load, offline-cache, stems, recording and logout limitations; no provider entitlement bypass.",
+      "sources": [
+        {
+          "title": "Manual index \u2014 exact reference mapping pending",
+          "url": "https://support.serato.com/hc/en-us/categories/202698038-Serato-DJ-Pro-manual"
+        }
+      ],
+      "status": "research_pending",
+      "prototype": "not_started",
+      "native": "blocked_until_prototype_approval",
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "xhigh"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "Architecture and persistence require reasoning across failure and concurrency boundaries.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "reference_review": "pending",
+      "test_evidence": []
+    },
+    {
+      "id": "SYS-010",
+      "title": "Version comparison and historical removed/gated features",
+      "stage": "R",
+      "profile": "H",
+      "acceptance": "Compare 4.0.9 and 4.0.10 evidence plus earlier official sources; distinguish changed licensing from drivers, OS support and hardware limits.",
+      "sources": [
+        {
+          "title": "Manual index \u2014 exact reference mapping pending",
+          "url": "https://support.serato.com/hc/en-us/categories/202698038-Serato-DJ-Pro-manual"
+        }
+      ],
+      "status": "research_pending",
+      "prototype": "not_started",
+      "native": "blocked_until_prototype_approval",
+      "routing": {
+        "codex": {
+          "model": "gpt-6-astra",
+          "effort": "xhigh"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "xhigh"
+        },
+        "rationale": "Hardware protocols and binary evidence need careful competing hypotheses.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "reference_review": "pending",
+      "test_evidence": []
+    }
+  ]
+}

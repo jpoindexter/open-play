@@ -1,0 +1,107 @@
+{
+  "checked": "2026-10-16",
+  "status": "Recommendations; no model benchmark or Claude account invocation performed",
+  "codex_evidence": "Current host session model catalog",
+  "claude_evidence": "Local Claude Code 2.1.222 --version/--help and official model configuration version history",
+  "claude_source": "https://code.claude.com/docs/en/model-config",
+  "profiles": {
+    "D": {
+      "codex": {
+        "model": "gpt-6-luna",
+        "effort": "medium"
+      },
+      "claude_code": {
+        "model": "claude-sonnet-5",
+        "effort": "low"
+      },
+      "rationale": "Bounded evidence formatting; small scope and deterministic checks.",
+      "primary": "Codex",
+      "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+      "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+    },
+    "U": {
+      "codex": {
+        "model": "gpt-6.1-sol",
+        "effort": "high"
+      },
+      "claude_code": {
+        "model": "claude-sonnet-5",
+        "effort": "medium"
+      },
+      "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+      "primary": "Codex",
+      "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+      "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+    },
+    "S": {
+      "codex": {
+        "model": "gpt-6.1-sol",
+        "effort": "xhigh"
+      },
+      "claude_code": {
+        "model": "claude-opus-5",
+        "effort": "high"
+      },
+      "rationale": "Architecture and persistence require reasoning across failure and concurrency boundaries.",
+      "primary": "Codex",
+      "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+      "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+    },
+    "A": {
+      "codex": {
+        "model": "gpt-6-astra",
+        "effort": "high"
+      },
+      "claude_code": {
+        "model": "claude-opus-5",
+        "effort": "high"
+      },
+      "rationale": "DSP and transport require numerical reasoning backed by measurements.",
+      "primary": "Codex",
+      "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+      "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+    },
+    "H": {
+      "codex": {
+        "model": "gpt-6-astra",
+        "effort": "xhigh"
+      },
+      "claude_code": {
+        "model": "claude-opus-5",
+        "effort": "xhigh"
+      },
+      "rationale": "Hardware protocols and binary evidence need careful competing hypotheses.",
+      "primary": "Codex",
+      "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+      "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+    },
+    "M": {
+      "codex": {
+        "model": "gpt-6.1-sol",
+        "effort": "high"
+      },
+      "claude_code": {
+        "model": "claude-sonnet-5",
+        "effort": "high"
+      },
+      "rationale": "Model evaluation needs reproducible benchmarks, license evidence and resource accounting.",
+      "primary": "Codex",
+      "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+      "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+    },
+    "V": {
+      "codex": {
+        "model": "gpt-6.1-sol",
+        "effort": "xhigh"
+      },
+      "claude_code": {
+        "model": "claude-opus-5",
+        "effort": "high"
+      },
+      "rationale": "Independent acceptance review must challenge claims against actual workflows.",
+      "primary": "Codex",
+      "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+      "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+    }
+  }
+}
