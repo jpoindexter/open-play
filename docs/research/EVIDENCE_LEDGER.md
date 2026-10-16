@@ -64,3 +64,7 @@ Updated 2026-10-16. Reference: Serato DJ Pro 4.0.10, build 4.0.10.213. This is a
 | E027 | OBSERVED | Wah Filter parameter labels and displayed values; LPF restored afterward | UI_OBSERVATIONS.md | No DSP, range or default proof; no playback started |
 | E028 | DOCUMENTED | Spotify crate membership from 4.0.4 and Beatsource migration require provider-specific workflows | INTERACTION_REQUIREMENTS.md, provider support URLs | No provider account login or playback executed |
 | E029 | USER-AUTHORIZED | Fully inventoried labeled simulations permitted; all Serato DJ Pro functionality remains in scope | docs/approvals.md | No native approval and no waiver of missing feature inventory |
+
+## Browser review evidence — 16 October 2026
+
+The HTML candidate now exists under `prototype/`. See [the executed review report](../prototype/REVIEW_REPORT.md) for actual browser paths and their limits. A 235,667-byte browser master capture was downloaded, re-imported as 14.5 seconds and replayed with nonzero signal. This proves a browser capture path, not physical Hercules cue/master separation or native DSP fidelity. All 110 current groups have explicit route accounting, but full parity and exhaustive discovery remain unverified. No native work has begun.

@@ -1,13 +1,13 @@
-# Pre-prototype parity gate
+# Parity and prototype review gate
 
-Updated 2026-10-16. **Status: not passed.** No HTML prototype or native application has been started.
+Updated 2026-10-16. **Exact 1:1 parity status: not passed.** An annotated HTML review candidate now exists, following the user’s explicit continuation instruction and permitted simulation/gap boundary. No native application has been started.
 
 Jason requires 1:1 feature coverage before prototype implementation. The inventory must account for controls, modes, state transitions, secondary actions, settings, failures and hardware-specific behaviors. A list of feature titles is insufficient. A screenshot does not establish transport, DSP or hardware behavior.
 
 ## Current coverage
 
 - 168 official manual articles across 23 sections, all explicitly mapped to feature IDs; semantic review remains open.
-- 344 selected interaction requirements have explicit triggers, expected outcomes and evidence boundaries.
+- 354 selected interaction requirements have explicit triggers, expected outcomes and evidence boundaries.
 - 74 initial feature groups plus 36 research additions, each with explicit Codex/Claude model and effort recommendations.
 - Installed reference pinned to 4.0.10.213, with executable and installer hashes.
 - All five display layouts and all eight Setup tabs observed; connected Hercules enumerated through USB, audio and MIDI interfaces.
@@ -39,3 +39,9 @@ The user has authorized investigation, private project resources and an HTML pro
 ### Approved prototype evidence boundary
 
 Jason explicitly approved representing unavailable physical/DSP/provider behaviors as labeled documented simulations after inventory. He reinforced full feature scope. This permits simulation without claiming physical proof; it does not close incomplete control or feature enumeration. See [source conflicts](SOURCE_CONFLICTS.md) and [historical gating evidence](HISTORICAL_GATING.md).
+
+## HTML review delivery record
+
+All 110 currently known feature groups have a destination in `docs/prototype/coverage-manifest.json`. The browser index includes sources, model routing, implementation boundaries and open gaps. Some routes are gap disclosures, not working equivalents. The strict completeness/behavioral pass above has NOT been awarded. Twenty-four groups still lack detailed interaction rows; 55 of 59 advanced FX schemas remain unobserved.
+
+The [executed review report](../prototype/REVIEW_REPORT.md) separates observed browser workflows from code-path claims, simulations and untested native behavior. Jason can review the candidate now while Claude independently challenges completeness. No reduction of full scope and no native approval is inferred.

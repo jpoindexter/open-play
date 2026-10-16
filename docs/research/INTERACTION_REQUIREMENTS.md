@@ -1,8 +1,6 @@
-# Reviewed interaction requirements
+# Interaction requirements
 
-Growing full-scope specification. **Inventory completeness and 1:1 behavior are not yet established.** Simulation of unavailable physical/provider/DSP behavior is user-approved; omissions are not.
-
-Model/effort recommendations for Codex and Claude Code are embedded in every JSON entry. Native work remains blocked on prototype approval.
+Full-scope working inventory. Evidence and runtime acceptance are separate. See the prototype report for what actually executes.
 
 | ID / feature | Screen | Trigger | Expected result | Evidence |
 |---|---|---|---|---|
@@ -350,3 +348,13 @@ Model/effort recommendations for Codex and Claude Code are embedded in every JSO
 | REQ-342 / FX-003 | FX / Reverb | Select Vast Verb Drop | Expose effect-specific controls and preserve assignment, enabled state and beat timing; exact parameter inventory and DSP must be resolved per effect | [OBSERVED effect name; parameters observed only for LPF, Delay, Reverb and Wah Filter; remaining details UNKNOWN](UI_OBSERVATIONS.md#advanced-fx-panel) |
 | REQ-343 / FX-003 | FX / Tone | Select Infinity Tone | Expose effect-specific controls and preserve assignment, enabled state and beat timing; exact parameter inventory and DSP must be resolved per effect | [OBSERVED effect name; parameters observed only for LPF, Delay, Reverb and Wah Filter; remaining details UNKNOWN](UI_OBSERVATIONS.md#advanced-fx-panel) |
 | REQ-344 / FX-003 | FX / Tone | Select Space Invader | Expose effect-specific controls and preserve assignment, enabled state and beat timing; exact parameter inventory and DSP must be resolved per effect | [OBSERVED effect name; parameters observed only for LPF, Delay, Reverb and Wah Filter; remaining details UNKNOWN](UI_OBSERVATIONS.md#advanced-fx-panel) |
+| REQ-345 / VID-001 | Video output | Choose Syphon output | Expose inter-application video route; native transport remains unverified | [DOCUMENTED; installed runtime untested](https://serato.com/dj/pro/expansions) |
+| REQ-346 / VID-001 | Karaoke | Load MP3+G | Account for graphics-plus-audio playback; browser decoder not implemented | [DOCUMENTED; installed runtime untested](https://serato.com/dj/pro/expansions) |
+| REQ-347 / VID-002 | Video FX | Assign master effects | Retain two master effect slots in addition to per-channel effects | [DOCUMENTED; installed runtime untested](https://serato.com/dj/pro/expansions) |
+| REQ-348 / VID-002 | Linked video FX | Enable audio-linked effects | Represent coupled audio/video controls; exact effect transfer functions unverified | [DOCUMENTED; installed runtime untested](https://serato.com/dj/pro/expansions) |
+| REQ-349 / VID-001 | Media Crate | Load audio with no linked video | Select fallback media from designated crate | [DOCUMENTED; installed runtime untested](https://support.serato.com/hc/en-us/articles/204211070-Serato-Video-101) |
+| REQ-350 / UI-009 | Help | Enable tooltips | Expose contextual control descriptions | [DOCUMENTED; installed runtime untested](https://support.serato.com/hc/en-us/articles/224997228-Show-Tool-Tips) |
+| REQ-351 / UI-009 | Help | Search support | Open official help search for entered text | [DOCUMENTED; installed runtime untested](https://support.serato.com/hc/en-us/articles/5990715201167-Search-Help) |
+| REQ-352 / ANA-003 | Beatgrid | Move downbeat | Number bars before first downbeat negatively | [DOCUMENTED; installed runtime untested](https://support.serato.com/hc/en-us/articles/227626948-Bar-Markers) |
+| REQ-353 / DEK-008 | Beat display | Play synced track | Show position within four-beat bar and sync state | [DOCUMENTED; installed runtime untested](https://support.serato.com/hc/en-us/articles/227627108-Beat-Position-Indicator) |
+| REQ-354 / HW-010 | Secondary controller | Connect MIDI device or DIN MIDI interface | Distinguish control-only MIDI source from audio interface | [DOCUMENTED; installed runtime untested](https://support.serato.com/hc/en-us/articles/224913027-Secondary-MIDI-Controller-Setup) |

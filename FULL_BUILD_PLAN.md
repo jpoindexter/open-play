@@ -1,8 +1,8 @@
 # Open Play — full build plan
 
-**Prepared:** 16 October 2026 · **Owner:** Jason · **Status:** investigation authorized and in progress; prototype parity gate pending; native build blocked on prototype approval.
+**Prepared:** 16 October 2026 · **Owner:** Jason · **Status:** HTML review candidate available; investigation and exact parity reconciliation remain open; native build blocked on prototype approval.
 
-This document expands the supplied Serato investigation brief into a proposed delivery plan. Investigation is in progress. Local inspection identifies Serato DJ Pro 4.0.10.213 and Desktop installers 4.0.9/4.0.10. A private GitHub repository and private Trello board have been created and their visibility verified. The official manual index contains 168 articles across 23 sections. The connected Hercules DJControl Inpulse 300 MK2 is visible through USB, CoreAudio and CoreMIDI; Jason reports that its browser knob moves the highlighted Serato track; byte-level input and physical audio-routing tests remain pending. Ghidra completed deep auto-analysis; Hopper remains supplementary and its REA bridge is currently blocked. Prototype/native implementation has not begun. See [evidence ledger](docs/research/EVIDENCE_LEDGER.md) and [project resources](docs/delivery/project-resources.json).
+This document expands the supplied Serato investigation brief into a proposed delivery plan. Investigation is in progress. Local inspection identifies Serato DJ Pro 4.0.10.213 and Desktop installers 4.0.9/4.0.10. A private GitHub repository and private Trello board have been created and their visibility verified. The official manual index contains 168 articles across 23 sections. The connected Hercules DJControl Inpulse 300 MK2 is visible through USB, CoreAudio and CoreMIDI; Jason reports that its browser knob moves the highlighted Serato track; byte-level input and physical audio-routing tests remain pending. Ghidra completed deep auto-analysis; Hopper remains supplementary and its REA bridge is currently blocked. A runnable HTML candidate now covers all 110 inventoried feature groups through real interactions, explicit simulations or documented gaps. It contains 354 interaction requirements. Exact 1:1 parity is not verified; native implementation has not begun. See the [executed prototype review](docs/prototype/REVIEW_REPORT.md). See [evidence ledger](docs/research/EVIDENCE_LEDGER.md) and [project resources](docs/delivery/project-resources.json).
 
 “Open Play” is a working project name taken from this workspace, not a confirmed public brand. This plan is the canonical planning artifact; the accompanying [execution prompt](PROJECT_PROMPT.md) preserves the instructions for the future executing agent.
 
@@ -56,7 +56,7 @@ This document expands the supplied Serato investigation brief into a proposed de
 | Done evidence now | Evidence-linked inventory, private resources, maintained plan, then an executed HTML prototype; all unresolved parity gaps disclosed |
 | Done evidence later | Executed workflows on the exact prototype/native candidate and declared hardware matrix |
 
-**Now:** inspect installed version 4.0.10.213 and reconcile the complete feature/screen parity inventory. **Next:** build the HTML prototype only after that inventory gate is satisfied. **Later:** prototype, review, native slices, hardware acceptance, and release preparation. **Re-entry:** read this section, the latest evidence ledger, decisions, and approval record before doing anything else.
+**Now:** review the runnable HTML candidate and continue exact-version completeness reconciliation. **Next:** run the independent Claude audit, resolve omissions and obtain explicit prototype approval. **Later:** only after approval, native slices, hardware acceptance, and release preparation. **Re-entry:** read this section, the latest evidence ledger, decisions, and approval record before doing anything else.
 
 ### Approval gates
 
@@ -624,7 +624,7 @@ Maintain ADRs and a change log. Any new feature receives an ID, reference/eviden
 - [ ] Clean-machine build/install and license/provenance report recorded.
 - [ ] Public release occurs only after explicit approval; published state independently verified.
 
-**Next exact step:** extend the 344 interaction requirements to the remaining source/control states, complete expansion-specific catalogs and resolve the device input-capture discrepancy. Reconcile the parity gate before HTML implementation. Native coding remains prohibited.
+**Next exact step:** run the HTML candidate and independent Claude completeness audit. Expand the current 354 requirements where source/control gaps remain, complete expansion catalogs and resolve the device input-capture discrepancy. Native coding remains prohibited.
 
 ## 19. Methods applied
 
@@ -676,3 +676,16 @@ Jason requested a Claude handoff when the investigation and full HTML prototype 
 A draft packet is saved at [handoffs/codex-to-claude-completeness-audit.md](handoffs/codex-to-claude-completeness-audit.md). It embeds the complete original prompt, records subsequent approvals and requires an independently derived checklist before comparison against Codex's conclusions. Do not launch Claude automatically now.
 
 Before final delivery, refresh the packet against the exact candidate revision, actual preview/launcher, executed workflow evidence, known gaps and remote synchronization status. Deliver a copy-paste launch prompt with that file path. Claude's report must identify omissions and unsupported claims with sources, reproduction steps and actionable corrections. Record the disposition of each finding and re-test any authorized correction. No review outcome substitutes for Jason's explicit native approval.
+
+## 20. Executed HTML review candidate — 16 October 2026
+
+The latest user instruction was to keep investigating and deliver the full HTML prototype plus Claude handoff, without starting native work. The candidate now includes every current feature group as a review destination; unavailable behavior is labeled simulation or explicit gap. This does not close the strict parity gate or establish exhaustive discovery. Historical checkpoints above retain their then-current counts.
+
+- **Launch:** `python3 scripts/serve_prototype.py`, then http://127.0.0.1:8768/prototype/; macOS launcher `Start Open Play.command`.
+- **Implementation:** original HTML/CSS/JavaScript with Web Audio, generated demo audio, local decode and browser master recording. No hosted backend or account is needed. This browser stack is separate from the proposed native C++/Qt foundation.
+- **Scope:** 110 feature routes; 354 requirements; 59 FX names; eight Setup tabs; five layouts; two/four deck states; six provider fixtures. The 24 feature groups without detailed interaction rows remain explicitly pending.
+- **Observed verification:** local WAV import/load/play, loop/cue/tempo interactions, two-deck recording, download/re-import/replay, crate/smart crate, metadata, backup/restore, settings, all primary panels and provider/hardware failure fixtures. See the exact evidence and limits in [REVIEW_REPORT.md](docs/prototype/REVIEW_REPORT.md).
+- **Open gaps:** 55 advanced FX parameter schemas, exact Video catalogs, real stems/DSP, hardware routing/capture, all provider services, library interoperability, complete keyboard/accessibility/visual equivalence, soak testing and full conditional-state discovery. No arbitrary feature paywalls are present in the independent browser implementation. Third-party rights/technical constraints are still real dependencies.
+- **Delivery:** private GitHub; existing private Trello with all 110 feature/model cards. Source-link update synchronization remains 59/87 verified; 28 are pending after 429/transport failures. Local update payloads preserve the unsent changes.
+- **Claude:** [independent completeness audit handoff](handoffs/codex-to-claude-completeness-audit.md) contains the same original prompt, later authority, exact paths, evidence and a required return format. It has not been launched automatically.
+- **Native gate:** pending Jason's explicit approval of an identified prototype revision. An HTML screenshot, audit completion or Git push does not grant that approval.

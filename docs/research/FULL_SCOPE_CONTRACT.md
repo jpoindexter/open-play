@@ -4,7 +4,7 @@
 
 ## No silent scope cuts
 
-The current 110 groups are organizational containers, not a ceiling. The 344 interaction requirements are a growing inventory, not a completeness score. Add a requirement whenever investigation discovers another behavior. Add a feature group and Trello card if the behavior cannot be meaningfully represented by an existing group.
+The current 110 groups are organizational containers, not a ceiling. The 354 interaction requirements are a growing inventory, not a completeness score. Add a requirement whenever investigation discovers another behavior. Add a feature group and Trello card if the behavior cannot be meaningfully represented by an existing group.
 
 Include primary and secondary actions, modifier keys, contextual menus, labels and units, parameter ranges, stored defaults versus session values, persistence, disabled states and reasons, cancellation, recovery, library/content dependencies, device-specific modes, provider dependencies, and behavior across layouts. Matching only a main screenshot or offering a generic button for a complex feature does not satisfy this contract.
 

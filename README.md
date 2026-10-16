@@ -1,9 +1,12 @@
 # Open Play
 
-Independent open-source desktop DJ project, currently in reference investigation. The goal is familiar Serato DJ Pro design and behavior without artificial feature, account or device gates in the independent implementation.
+Independent open-source desktop DJ project, with a browser review candidate and ongoing reference investigation. The goal is familiar Serato DJ Pro design and behavior without artificial feature, account or device gates in the independent implementation.
 
-**Native development is blocked until Jason approves the HTML prototype.** Prototype implementation is also held until the feature/screen inventory gate is satisfied. No prototype or native application is included in this checkpoint.
+**Native development is blocked until Jason approves the HTML prototype.** The HTML candidate is available, with explicit simulations and gaps. Full 1:1 parity is not verified.
 
+- [Run the HTML prototype](prototype/README.md)
+- [Executed review and known gaps](docs/prototype/REVIEW_REPORT.md)
+- [Claude independent audit handoff](handoffs/codex-to-claude-completeness-audit.md)
 - [Full build plan](FULL_BUILD_PLAN.md)
 - [Original execution brief](PROJECT_PROMPT.md)
 - [Evidence ledger](docs/research/EVIDENCE_LEDGER.md)
@@ -26,7 +29,7 @@ Reference: installed Serato DJ Pro 4.0.10.213, with Desktop installers 4.0.9 and
 
 Findings distinguish observed behavior, file evidence, official documentation, inference, proposals and unknowns. Device enumeration and source inspection are not complete hardware compatibility. The original 74 proposed feature groups have expanded to 110; that count is not an assertion that the reference has exactly 110 features or that parity is verified.
 
-Raw binaries, extracted slices, disassembly, private library data, screenshots and vendor article bodies stay outside Git under ignored `local-evidence/`. The repository contains original plans/findings, public-source metadata and read-only diagnostic tooling.
+Raw binaries, extracted slices, disassembly, private library data, screenshots and vendor article bodies stay outside Git under ignored `local-evidence/`. The repository contains original plans/findings, public-source metadata, diagnostic tooling, original browser prototype code and screenshots of that prototype.
 
 - [Full-scope contract](docs/research/FULL_SCOPE_CONTRACT.md)
 - [Feature coverage accountability](docs/research/FEATURE_COVERAGE.md)
