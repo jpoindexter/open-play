@@ -4,7 +4,7 @@
 
 Project: `/Users/jasonpoindexter/Documents/GitHub/Open Play`
 Prepared: 2026-10-16
-Current browser candidate: `0d4693c1ccf613002a55e9ab907bdc1e06bc1500`
+Current browser candidate: `21c2dc1d389396c77fc7b4d47547e9bebd3b49ea`
 Content hashes: `docs/prototype/candidate-hashes.json`
 Private repository: https://github.com/jpoindexter/open-play
 Private board: https://trello.com/b/OqMGEjpe/open-play-serato-parity
