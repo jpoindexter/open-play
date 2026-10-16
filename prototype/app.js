@@ -1,5 +1,6 @@
 import { createStemPreparation } from "./stems.js";
 import { createStemSlipControls } from "./stem-slip-ui.js";
+import { snapshotVideoState, restoreVideoState } from "./video-state.js";
 import { createPitchPlay, pitchRanges, parseMusicalKey, shiftedKey, keyLabel, planKeySync } from "./pitchplay.js";
 import { analyzeBuffer } from "./analysis.js";
 import { createSlicer } from "./slicer.js";
@@ -116,17 +117,7 @@ const state = {
   mappings: saved.mappings || [],
   midiLog: [],
   providerState: {},
-  video: {
-    text: "OPEN PLAY",
-    color: "#ffffff",
-    animation: "None",
-    transition: "Crossfade",
-    cross: 0,
-    image: null,
-    auto: false,
-    random: false,
-    linked: true,
-  },
+  video: restoreVideoState(saved.video),
   link: { joined: false, tempo: 124, peers: 0 },
   sessionSaved: false,
 };
@@ -186,6 +177,7 @@ function persist() {
       "openplay-review-v1",
       JSON.stringify({
         analysisSettings: state.analysisSettings,
+        video: snapshotVideoState(state.video),
         localTags: state.localTags,
         mappings: state.mappings,
         settings: state.settings,
@@ -516,19 +508,26 @@ async function ensurePreparedStems(track) {
     renderTracks();
   }
 }
+const deckLoadRequests = new WeakMap();
 async function load(index, id = state.selected, options = {}) {
   const d = state.decks[index],
     t = trackById(id);
   if (!t) return notify("Select a track first.");
   if (d.playing && state.settings["Lock Playing Deck"])
     return notify("Playing deck locked. Pause it before replacement.");
+  const request = (deckLoadRequests.get(d) || 0) + 1;
+  deckLoadRequests.set(d, request);
   const old = d.track ? { id: d.track.id, position: engine.position(d) } : null;
   pitchPlay.cancelDeck(d);
   stemSlipControls.cancelDeck(d);
   engine.pause(d);
   if (["vocal","instrumental"].includes(d.stemSlip)) await engine.setStemSlip(d,"off");
+  if (state.decks[index] !== d || deckLoadRequests.get(d) !== request) return;
+  if (d.playing && state.settings["Lock Playing Deck"])
+    return notify("Playing deck locked. Pause it before replacement.");
   d.previous = old;
   d.track = t;
+  d.videoLoadGeneration = (d.videoLoadGeneration || 0) + 1;
   if (state.flip.deck === index) flipAutomation.stop();
   d.slicerLoop = false;
   d.slip = false;
@@ -621,11 +620,14 @@ async function deckAction(action, index, el, event = {}) {
     return renderDecks();
   }
   if (action === "eject") {
+    const request = (deckLoadRequests.get(d) || 0) + 1;
+    deckLoadRequests.set(d, request);
     pitchPlay.cancelDeck(d);
     stemSlipControls.cancelDeck(d);
     d.keySync = false;
     engine.pause(d);
     if (["vocal","instrumental"].includes(d.stemSlip)) await engine.setStemSlip(d,"off");
+    if (state.decks[index] !== d || deckLoadRequests.get(d) !== request) return;
     d.previous = d.track ? { id: d.track.id, position: d.position } : null;
     d.track = null;
     d.position = 0;
@@ -875,6 +877,7 @@ async function importFiles(files) {
   );
   persist();
   if (state.analysisSettings.onImport) void enqueueAnalysis(imported);
+  return imported;
 }
 const analysisQueue = [];
 let analysisController = null;

@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="en">
+  <head><meta charset="utf-8" /><meta name="viewport" content="width=device-width" />
+    <title>Video overlay pixel verification</title><link rel="stylesheet" href="styles.css" />
+  </head>
+  <body style="padding:24px;overflow:auto">
+    <h1>Video overlay pixel verification</h1>
+    <p>Original Canvas text/image composition using generated fixtures. Pixel checks cover controls, alpha, motion, audio-feature inputs, Reduced Motion, presets and lifecycle. Vendor algorithms, exact ranges and current menu/layout equivalence remain unverified.</p>
+    <button id="run">Run video overlay pixel checks</button>
+    <p id="summary" role="status">Not run</p>
+    <div id="preview" aria-label="Last rendered synthetic overlay fixture"></div>
+    <pre id="results"></pre>
+    <script type="module" src="video-overlays-harness.js"></script>
+  </body>
+</html>

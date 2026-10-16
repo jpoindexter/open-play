@@ -8,13 +8,14 @@ Candidate: `5833632e1355eff22733cddf8de7b9f8c0816f12`; hashes: `docs/prototype/c
 Independently audit the complete Serato scope and return
 `handoffs/claude-to-codex-completeness-audit.md` with reproducible findings.
 
-Current evidence: all236 observed FX controls, nine longer FX regressions, actual
-local SCNet/keylock, sampler/Pitch Play/analysis and30/30 actual Stem Slip browser
-checks. Main UI prepared, scratched, released/rejoined and paused. Read
-`docs/prototype/STEM_SLIP_FUNCTIONAL_REVIEW.md` for scope and limits.
+Current evidence:236 observed audio-FX controls, actual local SCNet/keylock and
+Stem Slip; Video72/72 FX,51/51 transitions,32/32 overlays,32/32 full pipeline,
+19/19 karaoke and32/32 Media Crate. Main UI import/play/pause, persistence and
+record/replay also ran. Read `docs/prototype/VIDEO_FUNCTIONAL_REVIEW.md` and the
+linked audio/karaoke/Media reviews for exact scope and retained failures.
 
 **Full parity NOT PASSED; no native app until Jason approves a revision.**
-The active goal continues. Next: actual Video catalog/six-slot processing, then
+The active goal continues. Next: semantic audio-FX/Video links and remaining Video controls/output, then
 remaining reference, library, conditional, hardware and provider gaps. No automatic
 Claude completeness-audit launch. Conditional Cloud Code/Fable debugging assistance
 is authorized if Codex gets stuck; verify the actual app/model before using it.

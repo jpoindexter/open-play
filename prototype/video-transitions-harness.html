@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Video transition pixel contracts</title>
+<style>
+  :root { color-scheme: dark; font: 15px/1.5 system-ui, sans-serif; background:#151515; color:#eee; }
+  body { max-width:1000px; margin:32px auto; padding:0 20px; }
+  button,select { font:inherit; padding:8px 12px; margin-right:8px; }
+  canvas { max-width:100%; image-rendering:pixelated; border:1px solid #777; }
+  pre { white-space:pre-wrap; overflow-wrap:anywhere; background:#222; padding:16px; }
+  .notice { max-width:75ch; color:#ccc; }
+</style>
+<h1>Video transition pixel contracts</h1>
+<p class="notice">Original GPU implementations: seven manifest names, 26 additional localization candidates, and the separate Open Play Crossfade baseline. These tests do not establish Serato menu availability or visual equivalence.</p>
+<p><button id="run">Run actual WebGL pixel checks</button><span id="status" role="status">Not run</span></p>
+<p><label>Preview transition <select id="transition"></select></label><label>Amount <input id="amount" type="range" min="0" max="1" step="0.01" value="0.47"></label></p>
+<div id="preview"></div>
+<pre id="results">Click Run. Results will include actual readPixels checks, failures and a measured render sample.</pre>
+<script type="module" src="./video-transitions-harness.js"></script>
+</html>

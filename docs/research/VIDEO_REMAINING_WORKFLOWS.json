@@ -1,0 +1,626 @@
+{
+  "schemaVersion": 1,
+  "inspectedDate": "2026-10-16",
+  "status": "RESEARCH_CONTRACT_READY_NOT_IMPLEMENTED",
+  "referenceVersion": "Installed4.0.10 is prior local evidence; no native runtime exercised in this task.",
+  "scope": "Fresh official web and primary format/code research; no implementation.",
+  "sources": [
+    {
+      "id": "serato_formats",
+      "url": "https://support.serato.com/hc/en-us/articles/202305724-Serato-Video-supported-formats-and-codecs",
+      "provenance": "official-current-support",
+      "read": "WEB_READ"
+    },
+    {
+      "id": "serato_icons",
+      "url": "https://support.serato.com/hc/en-us/articles/234766088-Library-Status-Icons",
+      "provenance": "official-current-support; 4.0 section present",
+      "read": "WEB_READ"
+    },
+    {
+      "id": "serato_video101",
+      "url": "https://support.serato.com/hc/en-us/articles/204211070-Serato-Video-101",
+      "provenance": "official support; legacy language present",
+      "read": "WEB_READ"
+    },
+    {
+      "id": "serato_media_tip",
+      "url": "https://serato.com/latest/blog/17141/pro-tips-use-the-media-crate",
+      "provenance": "official blog; historical",
+      "read": "HTTP200_DIRECT_READ_AFTER_WEB_READER_TIMEOUT",
+      "dateOnPage": "2014-05-13"
+    },
+    {
+      "id": "serato_itch222",
+      "url": "https://serato.com/itch/downloads/2.2.2/releasenotes",
+      "provenance": "official release notes; 2012-09-25",
+      "read": "WEB_READ"
+    },
+    {
+      "id": "serato_ssl243",
+      "url": "https://serato.com/scratchlive/downloads/2.4.3/releasenotes",
+      "provenance": "official release notes; 2012-09-25",
+      "read": "WEB_READ"
+    },
+    {
+      "id": "serato_video110",
+      "url": "https://serato.com/video-legacy/downloads/1.1.0",
+      "provenance": "official legacy release",
+      "read": "WEB_READ"
+    },
+    {
+      "id": "serato_streaming",
+      "url": "https://the-drop.serato.com/how-to/using-serato-video-for-live-streaming/",
+      "provenance": "official historical blog",
+      "read": "WEB_READ"
+    },
+    {
+      "id": "serato_expansions",
+      "url": "https://serato.com/dj/pro/expansions",
+      "provenance": "official-current-marketing",
+      "read": "WEB_READ"
+    },
+    {
+      "id": "cdg_revealed",
+      "url": "https://jbum.com/cdg_revealed.html",
+      "provenance": "format description by Jim Bumgardner; not retrieved formal Red Book standard",
+      "read": "WEB_READ"
+    },
+    {
+      "id": "ffmpeg_decoder",
+      "url": "https://raw.githubusercontent.com/FFmpeg/FFmpeg/master/libavcodec/cdgraphics.c",
+      "provenance": "primary decoder source; LGPL-2.1-or-later header",
+      "read": "WEB_READ",
+      "commit": "0b19c65afeed73ce7498ae7faa8fe95530b8a6ab",
+      "pinnedUrl": "https://raw.githubusercontent.com/FFmpeg/FFmpeg/0b19c65afeed73ce7498ae7faa8fe95530b8a6ab/libavcodec/cdgraphics.c"
+    },
+    {
+      "id": "ffmpeg_demux",
+      "url": "https://raw.githubusercontent.com/FFmpeg/FFmpeg/master/libavformat/cdg.c",
+      "provenance": "primary demux source; LGPL-2.1-or-later header",
+      "read": "WEB_READ",
+      "commit": "0b19c65afeed73ce7498ae7faa8fe95530b8a6ab",
+      "pinnedUrl": "https://raw.githubusercontent.com/FFmpeg/FFmpeg/0b19c65afeed73ce7498ae7faa8fe95530b8a6ab/libavformat/cdg.c"
+    },
+    {
+      "id": "pykaraoke",
+      "url": "https://github.com/kelvinlawson/pykaraoke/blob/master/pycdg.py",
+      "provenance": "primary player source; LGPL-2.1-or-later header",
+      "read": "WEB_READ"
+    },
+    {
+      "id": "cdgfix",
+      "url": "https://www.cdgfix.com/help/3.x/Technical_information/The_CDG_graphics_format.htm",
+      "provenance": "primary product technical documentation; contains dimensional prose errors",
+      "read": "WEB_READ"
+    },
+    {
+      "id": "mixxx_issue",
+      "url": "https://github.com/mixxxdj/mixxx/issues/6875",
+      "provenance": "primary issue; request not decoder implementation",
+      "read": "WEB_READ"
+    },
+    {
+      "id": "bhj_cdgraphics",
+      "url": "https://github.com/bhj/cdgraphics",
+      "provenance": "primary browser renderer; license discrepancy to resolve",
+      "read": "WEB_READ",
+      "commit": "494ae6be27e14b2351a6bf4a15320c085f888f50",
+      "pinnedUrl": "https://raw.githubusercontent.com/bhj/cdgraphics/494ae6be27e14b2351a6bf4a15320c085f888f50/src/cdgraphics.ts",
+      "licenseStatus": "LICENSE is MIT text; package.json and README say ISC; resolve before reuse"
+    },
+    {
+      "id": "serato_karaoke",
+      "url": "https://serato.com/latest/blog/18236/learn-karaoke-support",
+      "read": "HTTP200_DIRECT_READ_AFTER_WEB_READER_TIMEOUT",
+      "provenance": "official blog; page dated2022-08-04, body refers to Serato DJ1.7.4"
+    },
+    {
+      "id": "vlc_decoder",
+      "url": "https://raw.githubusercontent.com/videolan/vlc/master/modules/codec/cdg.c",
+      "read": "WEB_READ",
+      "provenance": "primary decoder source; LGPL-2.1-or-later header; unpinned corroboration only"
+    },
+    {
+      "id": "pykaraoke_decoder",
+      "url": "https://raw.githubusercontent.com/kelvinlawson/pykaraoke/master/_pycdgAux.c",
+      "read": "WEB_READ",
+      "provenance": "primary decoder source; LGPL-2.1-or-later header; unpinned corroboration only"
+    },
+    {
+      "id": "bhj_license",
+      "url": "https://raw.githubusercontent.com/bhj/cdgraphics/494ae6be27e14b2351a6bf4a15320c085f888f50/LICENSE",
+      "read": "WEB_PINNED_READ",
+      "provenance": "MIT text; package metadata differs"
+    },
+    {
+      "id": "bhj_package",
+      "url": "https://raw.githubusercontent.com/bhj/cdgraphics/main/package.json",
+      "read": "WEB_READ",
+      "provenance": "license field ISC; moving main metadata",
+      "pinnedUrl": "https://raw.githubusercontent.com/bhj/cdgraphics/494ae6be27e14b2351a6bf4a15320c085f888f50/package.json"
+    },
+    {
+      "id": "ffmpeg_legal",
+      "url": "https://ffmpeg.org/legal.html",
+      "read": "WEB_READ",
+      "provenance": "official project license explanation; not legal clearance"
+    }
+  ],
+  "proofBoundary": {
+    "freshPrimarySourceReads": true,
+    "nativeRuntime": false,
+    "browserDecoder": false,
+    "reference4010Runtime": false,
+    "implementationWritten": false
+  },
+  "referenceFindings": [
+    {
+      "id": "KAR-REF-01",
+      "status": "OFFICIAL_DOCUMENTED_VERSION_LIMITED",
+      "sources": [
+        "serato_formats",
+        "serato_karaoke",
+        "serato_icons"
+      ],
+      "facts": [
+        "MP3+G supported",
+        "Separate .cdg visual and .mp3 audio files",
+        "Unzip before importing both; represented as one library karaoke item",
+        "Visual output requires Serato Video"
+      ],
+      "unknown": [
+        "4.0.10 runtime pairing rules",
+        "Case/Unicode/duplicate-stem matching",
+        "ZIP import",
+        "Exact crop/transparency behavior"
+      ]
+    },
+    {
+      "id": "MEDIA-REF-01",
+      "status": "OFFICIAL_DOCUMENTED_LEGACY",
+      "sources": [
+        "serato_media_tip",
+        "serato_itch222",
+        "serato_ssl243",
+        "serato_video110"
+      ],
+      "facts": [
+        "Enabled Media Crate supplies video when loaded audio has no associated video",
+        "Automatic special Media... crate in legacy software",
+        "Media On/Off, Random and Next controls",
+        "Next forces media selection; Random governs selection when enabled"
+      ],
+      "unknown": [
+        "End-of-clip continuation/loop",
+        "Sequential wrap",
+        "Random repeat avoidance",
+        "Empty/decode-failed handling",
+        "4.0.10 persistence and deck routing details"
+      ]
+    },
+    {
+      "id": "TRANS-REF-01",
+      "status": "OFFICIAL_DOCUMENTED_LEGACY",
+      "sources": [
+        "serato_itch222",
+        "serato_ssl243"
+      ],
+      "facts": [
+        "Transition automation independent from Media Crate",
+        "Audio or video track load triggers transition selection when enabled",
+        "Sequential unless Random enabled",
+        "Next forces selection using current random/sequential policy"
+      ],
+      "unknown": [
+        "Whether internally selected fallback video creates second transition event",
+        "Exact current qualifying deck/track changes",
+        "Random repeats"
+      ]
+    },
+    {
+      "id": "FXLINK-REF-01",
+      "status": "OFFICIAL_DOCUMENTED_FAMILY_ONLY",
+      "sources": [
+        "serato_expansions"
+      ],
+      "facts": [
+        "Audio echo can create visual echo",
+        "Audio distortion can distort image"
+      ],
+      "unknown": [
+        "Current effect-name mapping",
+        "Parameter transfer/ranges",
+        "Processing order",
+        "Activation/assignment/tail rules",
+        "Current4.0.10 FX-link controls"
+      ]
+    }
+  ],
+  "cdgFormat": {
+    "status": "PRIMARY_FORMAT_AND_IMPLEMENTATION_FACTS_NOT_SERATO_RUNTIME",
+    "packet": {
+      "bytes": 24,
+      "commandByte": 0,
+      "instructionByte": 1,
+      "parityQ": [
+        2,
+        3
+      ],
+      "data": [
+        4,
+        19
+      ],
+      "parityP": [
+        20,
+        23
+      ],
+      "mask": 63,
+      "cdgCommand": 9,
+      "sources": [
+        "cdg_revealed",
+        "ffmpeg_demux"
+      ]
+    },
+    "time": {
+      "packetsPerSecond": 300,
+      "bytesPerSecond": 7200,
+      "packetPtsSeconds": "packetIndex/300",
+      "timingPacketsConsumeTime": true,
+      "sources": [
+        "ffmpeg_demux",
+        "cdgfix"
+      ]
+    },
+    "storage": {
+      "width": 300,
+      "height": 216,
+      "indices": 16,
+      "paletteEntries": 16,
+      "rgbBits": [
+        4,
+        4,
+        4
+      ],
+      "tileWidth": 6,
+      "tileHeight": 12,
+      "rows": 18,
+      "columns": 50,
+      "crop": [
+        6,
+        12,
+        288,
+        192
+      ],
+      "sources": [
+        "vlc_decoder",
+        "pykaraoke_decoder",
+        "bhj_cdgraphics"
+      ]
+    },
+    "commands": [
+      {
+        "opcode": 1,
+        "name": "Memory Preset",
+        "dataFields": {
+          "color": "d0 &15",
+          "repeat": "d1 &15"
+        },
+        "effect": "Fill index buffer; repeat records redundancy",
+        "source": "cdg_revealed"
+      },
+      {
+        "opcode": 2,
+        "name": "Border Preset",
+        "dataFields": {
+          "color": "d0 &15"
+        },
+        "effect": "Set outer6px horizontal/12px vertical bands; retain interior",
+        "source": "vlc_decoder"
+      },
+      {
+        "opcode": 6,
+        "name": "Tile Block Normal",
+        "dataFields": {
+          "color0": "d0 &15",
+          "color1": "d1 &15",
+          "row": "d2 &31",
+          "column": "d3 &63",
+          "rows": "d4..d15; bit5 leftmost"
+        },
+        "effect": "Write6x12 palette indices",
+        "source": "cdg_revealed"
+      },
+      {
+        "opcode": 38,
+        "name": "Tile Block XOR",
+        "dataFields": "same as6",
+        "effect": "XOR chosen4-bit index into existing index, not RGB",
+        "source": "cdg_revealed"
+      },
+      {
+        "opcode": 20,
+        "name": "Scroll Preset",
+        "dataFields": {
+          "color": "d0 &15",
+          "hCommand": "(d1 &48)>>4",
+          "hOffset": "d1 &7; valid0..5",
+          "vCommand": "(d2 &48)>>4",
+          "vOffset": "d2 &15; valid0..11"
+        },
+        "effect": "0 none;1 right6/down12;2 left6/up12; fill newly exposed area",
+        "source": "vlc_decoder"
+      },
+      {
+        "opcode": 24,
+        "name": "Scroll Copy",
+        "dataFields": "same as20",
+        "effect": "Coarse movement wraps instead of filling",
+        "source": "vlc_decoder"
+      },
+      {
+        "opcode": 28,
+        "name": "Transparency",
+        "profiles": {
+          "index": "d0 &15; one palette index alpha0",
+          "ffmpegAlphaTable": "16 alpha values:255-((d[i]&63)<<2); observed FFmpeg implementation"
+        },
+        "status": "COMPATIBILITY_CONFLICT_REQUIRE_EXPLICIT_PROFILE",
+        "sources": [
+          "bhj_cdgraphics",
+          "ffmpeg_decoder"
+        ]
+      },
+      {
+        "opcode": 30,
+        "name": "Load CLUT Low",
+        "entries": [
+          0,
+          7
+        ],
+        "packing": "q=((d[2i]&63)<<6)|(d[2i+1]&63); RGB nibbles expanded by17",
+        "source": "bhj_cdgraphics"
+      },
+      {
+        "opcode": 31,
+        "name": "Load CLUT High",
+        "entries": [
+          8,
+          15
+        ],
+        "packing": "same as30",
+        "source": "bhj_cdgraphics"
+      }
+    ],
+    "conflicts": [
+      {
+        "issue": "Visible dimensions",
+        "detail": "Informal safe-area prose294x204 differs from explicit border coordinates and288x192 implementations. Preserve full300x216; optional288x192 crop is declared policy."
+      },
+      {
+        "issue": "Transparency28",
+        "detail": "Single-index implementations and current FFmpeg alpha-table interpretation differ. No universal detector or Serato choice established."
+      },
+      {
+        "issue": "Channel selection",
+        "detail": "CDGFix documents16 channels; examined decoders commonly ignore tile channel bits. All-channel playback baseline proposed, selective channel bit mapping deferred."
+      }
+    ],
+    "independentDecoderProposal": {
+      "api": "createCDGDecoder(bytes,{transparency:\"index\"}) -> renderAt(seconds,{crop:false}), reset(), dispose(), diagnostics()",
+      "timingBoundary": "Process packets0..floor(t*300) inclusive, clamped to last complete packet; packet0 PTS0. Reject nonfinite/negative time.",
+      "clock": "Original audio track position from engine, not RAF count or wall time.",
+      "seek": "Reset/replay or restore a complete checkpoint then replay; never jump byte offset alone.",
+      "resetState": [
+        "indexBuffer",
+        "CLUT",
+        "alpha/index transparency",
+        "fineScrollOffsets",
+        "cursor",
+        "diagnostics",
+        "assetGeneration"
+      ],
+      "crop": "Full300x216 canonical; optional288x192 visible crop includes fine offsets.",
+      "validation": "Ignore unsupported/timing packets but retain their clock slots; skip entire invalid tile; diagnose trailing bytes; no implicit resynchronization or parity-correction claim.",
+      "memoryRepeatPolicy": "Apply each valid Memory Preset including repeats; this follows command semantics, not an assertion of identical redundant-repeat optimization across players.",
+      "malformedScrollPolicy": "Reserved direction3 means no coarse shift; clamp invalid fine offsets to5/11 and report.",
+      "initialPixels": "Declared independent opaque black/index0 state; no palette-index transparency unless instruction28 sets it.",
+      "copyPolicy": "Original implementation from format facts; no external decoder code or media copied."
+    }
+  },
+  "implementationModels": {
+    "karaoke": "One immutable paired audio/CDG asset record; one decoder state per deck; graphics follows actual engine.position in original track seconds; worker jobs and commits guarded by deck+asset generation. Parse remains independent from Canvas presentation.",
+    "mediaCrate": "Separate ordered catalog with enabled/random/cursor; loader chooses explicit associated video first, fallback only when eligible. Keep explicit source provenance. Resolve asynchronous loads with per-deck generation and preserve current valid media until replacement commits.",
+    "transitionSelection": "Separate enabled/random/selected state from continuous autoCrossfade. One logical external track-load transaction selects once, including when it also selects fallback video. This deduplication is independent policy until reference observed.",
+    "fxCoupling": "Explicit opt-in semantic bridge from audio FX state (effect identity, enabled, assignments, amount, beat timing, lifecycle) to dedicated visual processors. Spectral reactive effects remain distinct. First supported links Echo/Distortion only, with original mappings and clear unsupported state for others.",
+    "unsupportedReference": "No end-of-clip autoplay or global unverified59-effect mapping fabricated; choose and label independent policies when implementation scope requires them."
+  },
+  "acceptance": [
+    {
+      "id": "CDG-01",
+      "name": "Packet timing",
+      "criterion": "Synthetic command at packet300 changes pixels at1.000s, not just before; non-CDG/timing packets still occupy slots; record chosen inclusive packet0 boundary.",
+      "status": "PROPOSED_NOT_EXECUTED"
+    },
+    {
+      "id": "CDG-02",
+      "name": "CLUT repaint",
+      "criterion": "Load both palette halves, draw indices, then recolor without redrawing tiles; existing pixels change; black0 and white4095 render correct8-bit endpoints.",
+      "status": "PROPOSED_NOT_EXECUTED"
+    },
+    {
+      "id": "CDG-03",
+      "name": "Tile geometry",
+      "criterion": "Asymmetric6x12 pattern at first/last valid cells verifies bit5-left orientation, row/column masks and exact edge pixels.",
+      "status": "PROPOSED_NOT_EXECUTED"
+    },
+    {
+      "id": "CDG-04",
+      "name": "XOR identity",
+      "criterion": "Two equal XOR tiles restore original indices even when two palette entries share the same RGB.",
+      "status": "PROPOSED_NOT_EXECUTED"
+    },
+    {
+      "id": "CDG-05",
+      "name": "Presets",
+      "criterion": "Memory fills whole300x216; border changes exactly6/12 edge bands; interior sentinel unchanged; repeats follow declared policy.",
+      "status": "PROPOSED_NOT_EXECUTED"
+    },
+    {
+      "id": "CDG-06",
+      "name": "Scroll matrix",
+      "criterion": "All four coarse directions, preset fill vs copy wrap, combined H/V, fine offsets0/5/11, offset-only updates and crop sampling verify actual pixels.",
+      "status": "PROPOSED_NOT_EXECUTED"
+    },
+    {
+      "id": "CDG-07",
+      "name": "Transparency",
+      "criterion": "Index profile key0 and key15 become alpha0; other colors remain opaque; changing key updates prior pixels. Optional alpha-table profile tested independently and explicitly labeled.",
+      "status": "PROPOSED_NOT_EXECUTED"
+    },
+    {
+      "id": "CDG-08",
+      "name": "Clock and seeks",
+      "criterion": "Audio marker+graphics marker at normal/.5x/2x/pause/forwardseek/backseek/reverse/loop; fresh decode at each target equals stateful output; no RAF-count drift.",
+      "status": "PROPOSED_NOT_EXECUTED"
+    },
+    {
+      "id": "CDG-09",
+      "name": "Malformed stream",
+      "criterion": "Empty/23byte/trailing1..23bytes, unknown commands, high P/Q bits, row18/31 and col50/63, reserved scroll, nonfinite time; no out-of-bounds writes, hang or stale prior-track frame.",
+      "status": "PROPOSED_NOT_EXECUTED"
+    },
+    {
+      "id": "CDG-10",
+      "name": "Ownership/recovery",
+      "criterion": "Slow pairA then fast pairB; lateA cannot commit; cancel/eject clears pixels and callbacks; invalid pair leaves an explicit diagnostic and audio authority; disposal rejects reuse.",
+      "status": "PROPOSED_NOT_EXECUTED"
+    },
+    {
+      "id": "CDG-11",
+      "name": "Paired import",
+      "criterion": "Both local files required; mismatches/duplicates use explicit chooser; ZIP instructions are honest; reload requires reimport; original generated bytes/audio only.",
+      "status": "PROPOSED_NOT_EXECUTED"
+    },
+    {
+      "id": "CDG-12",
+      "name": "Real pipeline",
+      "criterion": "Actual Canvas RGBA through channelFX/overlays/transition/masterFX and browser capture; pixel alpha/color samples and audible/visual synchronization, not an imported-file label alone.",
+      "status": "PROPOSED_NOT_EXECUTED"
+    },
+    {
+      "id": "MEDIA-01",
+      "name": "Eligibility",
+      "criterion": "Enabled fallback applies to audio-only external loads, associated video wins, disabled mode does not replace; exact committed source provenance visible.",
+      "status": "PROPOSED_NOT_EXECUTED"
+    },
+    {
+      "id": "MEDIA-02",
+      "name": "Selection controls",
+      "criterion": "Sequential Next and injected deterministic Random choose actual distinct marker clips; one-item/empty crates and repeated random outcomes follow declared policy.",
+      "status": "PROPOSED_NOT_EXECUTED"
+    },
+    {
+      "id": "MEDIA-03",
+      "name": "Transport",
+      "criterion": "Selected fallback actually plays while its audio plays; pause/resume and link/unlink behavior declared; source video audio never duplicates master.",
+      "status": "PROPOSED_NOT_EXECUTED"
+    },
+    {
+      "id": "MEDIA-04",
+      "name": "End policy",
+      "criterion": "Short video + longer audio observes declared loop/hold/advance behavior. No claim that proposed behavior is vendor end-of-clip autoplay.",
+      "status": "PROPOSED_NOT_EXECUTED"
+    },
+    {
+      "id": "MEDIA-05",
+      "name": "Race/failure",
+      "criterion": "LoadA slow/loadB fast; pending fallback after explicit video/cancel cannot commit; corrupt candidate reports and recovers; URL resources released after replacement.",
+      "status": "PROPOSED_NOT_EXECUTED"
+    },
+    {
+      "id": "MEDIA-06",
+      "name": "Transition interaction",
+      "criterion": "Automatic transition selected once per external load transaction; explicit Next works; Random affects selection only; fader motion remains separate.",
+      "status": "PROPOSED_NOT_EXECUTED"
+    },
+    {
+      "id": "LINK-01",
+      "name": "Actual semantic trigger",
+      "criterion": "Static source, flat/silent spectrum: enabling assigned audio Echo changes target video. Inject bass-only audio with FX disabled proves spectral-reactive and semantic links are distinct.",
+      "status": "PROPOSED_NOT_EXECUTED"
+    },
+    {
+      "id": "LINK-02",
+      "name": "Assignment and params",
+      "criterion": "Left/right/master isolation; amount/beat length controls actual visual state; unsupported audio effects show unavailable rather than silently substituting.",
+      "status": "PROPOSED_NOT_EXECUTED"
+    },
+    {
+      "id": "LINK-03",
+      "name": "Lifecycle",
+      "criterion": "FX disable/switch/reassign/load/pause/seek/stop/silence/reverse and repeated frame handling obey declared history/tail reset policy; late loads cannot resurrect links.",
+      "status": "PROPOSED_NOT_EXECUTED"
+    },
+    {
+      "id": "LINK-04",
+      "name": "Noninterference",
+      "criterion": "Link off restores independently configured video slots, audio waveform output unchanged by bridge, preset storage contains opt-in metadata only.",
+      "status": "PROPOSED_NOT_EXECUTED"
+    },
+    {
+      "id": "LINK-05",
+      "name": "Reduced Motion",
+      "criterion": "Flash/zoom/trails suppressed under reduced motion; semantic event state remains observable without movement; no arbitrary audio-to-visual mapping inferred.",
+      "status": "PROPOSED_NOT_EXECUTED"
+    }
+  ],
+  "modelRouting": [
+    {
+      "feature": "CDG decoder + audio transport ownership",
+      "registryFeature": "VID-001",
+      "codex": {
+        "model": "gpt-6.1-sol",
+        "effort": "xhigh"
+      },
+      "claudeCode": {
+        "model": "claude-opus-5",
+        "effort": "high"
+      }
+    },
+    {
+      "feature": "Media Crate metadata/UI + selector",
+      "registryFeature": "VID-002",
+      "codex": {
+        "model": "gpt-6.1-sol",
+        "effort": "high"
+      },
+      "claudeCode": {
+        "model": "claude-sonnet-5",
+        "effort": "medium"
+      }
+    },
+    {
+      "feature": "Audio/video FX bridge + visible controls",
+      "registryFeature": "VID-002",
+      "codex": {
+        "model": "gpt-6.1-sol",
+        "effort": "high"
+      },
+      "claudeCode": {
+        "model": "claude-sonnet-5",
+        "effort": "medium"
+      },
+      "complexTransportReview": "VID-001 routing if concurrent transport/tail evidence requires it"
+    }
+  ],
+  "routingBoundary": "Recommendations preserve docs/delivery/feature-registry.json. No new host/CLI model availability check performed; verify exact IDs when invoking. Claude is optional, not automatically invoked. After two materially different failed approaches, obtain missing evidence before escalation.",
+  "licensing": {
+    "implementation": "Independent browser decoder recommended; factual packet semantics only. No vendor source/assets or third-party decoder source copied.",
+    "ffmpeg": "Inspected decoder/demux headers LGPL-2.1-or-later; optional project components can alter whole-build licensing. No package/reuse selected.",
+    "pykaraokeAndVLC": "Inspected decoder source headers LGPL-2.1-or-later; not a source-copy authorization.",
+    "mixxx": "Repository GPLv2; karaoke issue is a feature request, not an implementation/spec authority.",
+    "bhj": "Pinned LICENSE has MIT wording/copyright notices; README/package ISC. Do not resolve inconsistent labels by assumption or import unreviewed code.",
+    "assets": "Create original synthetic CDG and audio fixtures. User-supplied lyrics/music/graphics and third-party test media require their own rights/provenance."
+  }
+}

@@ -8,7 +8,7 @@ also requires MediaRecorder. Core browser playback needs no package install or h
 This is an independently written HTML/CSS/JavaScript review prototype. **It does
 not establish 1:1 Serato parity.** All 110 inventoried feature groups have a
 review destination, explicit simulation, or a documented gap. The evidence browser
-contains 492 source-linked requirements and per-feature Codex/Claude recommendations.
+contains 495 source-linked requirements and per-feature Codex/Claude recommendations.
 Some routes explicitly describe missing workflows; they are not implementation passes.
 
 ## Try it
@@ -50,7 +50,7 @@ revision. No public publication is authorized.
 ## Functional closure pass
 
 Reverse/Slip/cue-hold, sampler gating/pitch/gain, timed Flip, slicer, nested and
-multi-rule crates, 59 independent DJ audio FX, real buffered keylock/pitch, local stem separation, and local video composition/capture
+multi-rule crates, 55 independent DJ audio FX plus four Channel processors, real buffered keylock/pitch, local stem separation, and local video composition/capture
 now execute actual behavior. Web MIDI has a real connection path, but access timed
 out in the tested browser; hardware compatibility remains unverified.
 
@@ -75,3 +75,22 @@ or hold a cue. The mode remains armed after release. Run
 `stem-slip-integration-test.html` for 30 actual audio/controller checks. Read
 `../docs/prototype/STEM_SLIP_FUNCTIONAL_REVIEW.md` for independent policies, retained
 failures, resource bounds and unverified T10/reference/combined workflows.
+
+## Video, karaoke and Media Crate
+
+Open Video for local-video inputs, two real FX slots per input and two master
+slots, transitions, channel/master text and image layers, and recording of the
+processed output plus browser master audio. Media Crate selects session files
+when audio has no explicit video association; Random/Next and automatic transition
+selection are separate controls. MP3+CDG import pairs actual audio with graphics
+on the selected deck without autoplay. File bytes require reimport after reload.
+
+Run `video-effects-test.html`, `video-transitions-harness.html`,
+`video-overlays-harness.html`, `video-pipeline-harness.html`, `cdg-harness.html`,
+`karaoke-integration-harness.html` and `video-media-harness.html` for the scoped
+public browser checks. Current results are72/72,51/51,32/32,32/32,21/21,19/19 and
+32/32 respectively. The pipeline actually records and decodes output video/audio;
+requested30fps and720p/1080p canvas size are not sustained/HD capture acceptance.
+See [the current review](../docs/prototype/VIDEO_FUNCTIONAL_REVIEW.md) for reference
+unknowns, retained failures, technical limits and exact main UI evidence. Original
+algorithms do not establish visual equivalence or a proven active reference menu.

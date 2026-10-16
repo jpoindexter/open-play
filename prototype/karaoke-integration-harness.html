@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Karaoke integration evidence</title>
+<style>
+  :root {color-scheme:dark;font:15px/1.5 system-ui,sans-serif;background:#141414;color:#eee}
+  body {max-width:1100px;margin:28px auto;padding:0 20px} p {max-width:90ch}
+  button {font:inherit;padding:10px 16px} a {color:#9dd8ff}
+  :focus-visible {outline:3px solid white;outline-offset:4px}
+  #downloads {display:flex;flex-wrap:wrap;gap:18px;margin:14px 0}
+  canvas,video {max-width:100%;border:1px solid #666} #replay video {width:320px}
+  pre {white-space:pre-wrap;overflow-wrap:anywhere;background:#222;padding:16px}
+</style>
+<h1>Karaoke integration evidence</h1>
+<p>Runs original generated CDG and WAV Files through the real AudioEngine, track-owned karaoke bridge, GPU mixer and media capture. Speakers are disconnected while the capture route remains connected. Index-key and alpha-table transparency are tested as separate explicit policies. All tile channels play together; no parity repair, selective-channel support, external media, main-library import or Serato equivalence is claimed.</p>
+<button id="run">Run real karaoke integration</button>
+<p id="status" role="status">Not run</p>
+<p>Download the exact original fixtures used by this run for a separate main-UI import. Downloads remain available until rerun or page close.</p>
+<div id="downloads"><a id="download-cdg" download hidden>Download original CDG</a><a id="download-wav" download hidden>Download matching original WAV</a></div>
+<div id="output"></div><div id="replay"></div>
+<canvas id="video-preview-0" width="160" height="90" aria-label="Processed left karaoke preview"></canvas>
+<canvas id="video-preview-1" width="160" height="90" aria-label="Processed right preview"></canvas>
+<p id="video-status-0"></p><p id="video-status-1"></p><p id="video-pipeline-state"></p><p id="video-record-state"></p>
+<pre id="results">Click Run. Completion uses actual audio positions, decoded frames and media events.</pre>
+<script type="module" src="./karaoke-integration-harness.js"></script>
+</html>

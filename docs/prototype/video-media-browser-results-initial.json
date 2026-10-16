@@ -1,0 +1,778 @@
+{
+  "startedAt": "2026-10-16T20:32:03.448Z",
+  "scope": "Actual local File decode, AudioEngine PCM transport, Media Crate/transition workflow and rendered pixels. No native/hardware/reference acceptance; no sustained frame-rate claim.",
+  "seams": [
+    "Transparent document.createElement/URL observation records actual mixer-created HTMLVideoElements, their actual File identity and revoked URLs; no fake video/engine/pipeline.",
+    "Generated fixtures and PCM only. Async completion uses decode events/predicates; source eligibility/selection is independently designed."
+  ],
+  "policies": {
+    "media": {
+      "evidence": "docs/research/VIDEO_REMAINING_WORKFLOWS.md",
+      "referenceRuntimeVerified": false,
+      "documented": "Enabled Media Crate supplies visuals for audio lacking associated video; Random/Next and explicit associations are documented historically.",
+      "independent": "Explicit valid association wins even when fallback is off. Ordered shared cursor wraps; each track caches its fallback until explicit advance, association change or asset removal. Random excludes that track’s current fallback if there is more than one candidate.",
+      "clipEnd": "Selection never auto-advances at clip end. Caller owns loop/hold/transport and decode/error UI; no end-of-clip behavior is inferred from track-load fallback.",
+      "recognizedFamilies": [
+        {
+          "name": "mp4",
+          "extensions": [
+            "mp4",
+            "m4v"
+          ],
+          "mime": [
+            "video/mp4",
+            "video/x-m4v"
+          ]
+        },
+        {
+          "name": "webm",
+          "extensions": [
+            "webm"
+          ],
+          "mime": [
+            "video/webm"
+          ]
+        },
+        {
+          "name": "ogg-video",
+          "extensions": [
+            "ogv",
+            "ogg"
+          ],
+          "mime": [
+            "video/ogg",
+            "application/ogg"
+          ]
+        },
+        {
+          "name": "quicktime",
+          "extensions": [
+            "mov"
+          ],
+          "mime": [
+            "video/quicktime"
+          ]
+        }
+      ],
+      "extensionHints": [
+        "mp4",
+        "m4v",
+        "webm",
+        "ogv",
+        "ogg",
+        "mov",
+        "avi",
+        "mpg",
+        "mpeg",
+        "wmv",
+        "mkv",
+        "3gp",
+        "flv",
+        "divx"
+      ],
+      "validation": "Real named Blob/File with video/* MIME, or a recognized video extension when MIME is absent, generic or conflicting. Contradictions produce asset warnings rather than codec/product gates. Clearly nonvideo files without video evidence are rejected. Metadata eligibility only: actual mixer decoding is authoritative. Whole add batch validates before mutation; duplicate File references remain distinct explicitly added entries.",
+      "ownership": "Assets hold original immutable Blob/File byte references. No URLs are created. Removing one track association never disposes shared bytes; remove/dispose drops library references only. No arbitrary asset/track/transaction count cap."
+    },
+    "transition": {
+      "evidence": "docs/research/VIDEO_REMAINING_WORKFLOWS.md",
+      "referenceRuntimeVerified": false,
+      "documented": "Historical official guidance documents sequential automatic transition selection on track load, optional Random, and manual Next. Selection is distinct from crossfader motion.",
+      "independent": "Initial selection is the catalog Crossfade baseline if present, otherwise its first entry. Sequential Next wraps; Random excludes current when more than one entry exists. Manual Next works while automatic selection is off. A logical transaction is consumed once even if automatic selection was off at observation; enabling later does not replay it.",
+      "clipEnd": "No clip-end event or automatic fader motion exists in this selector.",
+      "candidateStatus": "Counts derive only from caller-supplied catalog provenance/candidate/baseline metadata. Localization candidates are not verified reference menu entries."
+    }
+  },
+  "checks": [
+    {
+      "name": "Real AudioEngine worklets resume and three distinct original video Files encode",
+      "passed": true,
+      "evidence": {
+        "engineState": "running",
+        "effectsPrepared": true,
+        "fixtures": [
+          {
+            "name": "original-red.mp4",
+            "bytes": 43838,
+            "mime": "video/mp4;codecs=avc1.420015,mp4a.40.2",
+            "sourceCanvasFrames": 148,
+            "measuredAudioClockSeconds": 1.3546666666666667,
+            "fixtureAudioHz": 880,
+            "claim": "Original encoded File, not a codec/fps guarantee."
+          },
+          {
+            "name": "original-green.mp4",
+            "bytes": 51055,
+            "mime": "video/mp4;codecs=avc1.420015,mp4a.40.2",
+            "sourceCanvasFrames": 148,
+            "measuredAudioClockSeconds": 1.36,
+            "fixtureAudioHz": 880,
+            "claim": "Original encoded File, not a codec/fps guarantee."
+          },
+          {
+            "name": "original-blue.mp4",
+            "bytes": 42706,
+            "mime": "video/mp4;codecs=avc1.420015,mp4a.40.2",
+            "sourceCanvasFrames": 148,
+            "measuredAudioClockSeconds": 1.36,
+            "fixtureAudioHz": 880,
+            "claim": "Original encoded File, not a codec/fps guarantee."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Two actual PCM audio decks run while disabled fallback leaves video empty",
+      "passed": true,
+      "evidence": {
+        "audio": [
+          {
+            "playing": true,
+            "position": 0.2500000000000001
+          },
+          {
+            "playing": true,
+            "position": 0.2233333333333333
+          }
+        ],
+        "bands": [
+          {
+            "bass": 0.0011574211344367086,
+            "mid": 0.015009413179071852,
+            "treble": 0.001072956332002356,
+            "level": 0.046694762152932515,
+            "audioAvailable": true
+          },
+          {
+            "bass": 0.0007564548144452219,
+            "mid": 0.010470867617465471,
+            "treble": 0.0007883489630393011,
+            "level": 0.043319147614757296,
+            "audioAvailable": true
+          }
+        ],
+        "sources": [
+          {
+            "kind": "none",
+            "assetId": null,
+            "error": null
+          },
+          {
+            "kind": "none",
+            "assetId": null,
+            "error": null
+          }
+        ]
+      }
+    },
+    {
+      "name": "Enabled fallback decodes ordered distinct files into actual left/right preview pixels",
+      "passed": true,
+      "evidence": {
+        "assets": [
+          {
+            "id": "video-media:1",
+            "name": "original-red.mp4",
+            "warnings": []
+          },
+          {
+            "id": "video-media:2",
+            "name": "original-green.mp4",
+            "warnings": []
+          },
+          {
+            "id": "video-media:3",
+            "name": "original-blue.mp4",
+            "warnings": []
+          }
+        ],
+        "left": {
+          "input": {
+            "name": "original-red.mp4",
+            "position": 0.37222,
+            "duration": 1.282233,
+            "paused": false
+          },
+          "selection": {
+            "kind": "fallback",
+            "assetId": "video-media:1",
+            "error": null
+          },
+          "pixel": [
+            219,
+            30,
+            19,
+            255
+          ]
+        },
+        "right": {
+          "input": {
+            "name": "original-green.mp4",
+            "position": 0.352235,
+            "duration": 1.282133,
+            "paused": false
+          },
+          "selection": {
+            "kind": "fallback",
+            "assetId": "video-media:2",
+            "error": null
+          },
+          "pixel": [
+            19,
+            210,
+            49,
+            255
+          ]
+        }
+      }
+    },
+    {
+      "name": "Repeated rendered ticks retain cached media and do not allocate replacement videos",
+      "passed": true,
+      "evidence": {
+        "before": [
+          {
+            "kind": "fallback",
+            "assetId": "video-media:1",
+            "error": null
+          },
+          {
+            "kind": "fallback",
+            "assetId": "video-media:2",
+            "error": null
+          }
+        ],
+        "after": [
+          {
+            "kind": "fallback",
+            "assetId": "video-media:1",
+            "error": null
+          },
+          {
+            "kind": "fallback",
+            "assetId": "video-media:2",
+            "error": null
+          }
+        ],
+        "createdVideos": 2
+      }
+    },
+    {
+      "name": "Fallback follows actual audio seek/play/pause even while fader link is false",
+      "passed": true,
+      "evidence": {
+        "paused": {
+          "engine": 0.35,
+          "video": 0.349999
+        },
+        "decoded": {
+          "mediaTime": 0.365833,
+          "presentedFrames": 27,
+          "width": 320,
+          "height": 180
+        },
+        "linked": false
+      }
+    },
+    {
+      "name": "Video inputs stay muted/looped and media changes preserve actual audio PCM transport",
+      "passed": true,
+      "evidence": {
+        "before": {
+          "position": 0.3933333333333334,
+          "level": 0.07053482057649979
+        },
+        "after": {
+          "position": 0.4573333333333335,
+          "level": 0.07056897238856497
+        },
+        "clip": {
+          "input": {
+            "name": "original-blue.mp4",
+            "position": 0.424,
+            "duration": 1.2822,
+            "paused": false
+          },
+          "selection": {
+            "kind": "fallback",
+            "assetId": "video-media:3",
+            "error": null
+          },
+          "pixel": [
+            24,
+            61,
+            225,
+            255
+          ]
+        },
+        "muted": [
+          true,
+          true,
+          true
+        ]
+      }
+    },
+    {
+      "name": "Sequential Next wraps the actual crate and changes decoded pixels",
+      "passed": true,
+      "evidence": {
+        "input": {
+          "name": "original-red.mp4",
+          "position": 0.493731,
+          "duration": 1.282233,
+          "paused": false
+        },
+        "selection": {
+          "kind": "fallback",
+          "assetId": "video-media:1",
+          "error": null
+        },
+        "pixel": [
+          219,
+          30,
+          19,
+          255
+        ]
+      }
+    },
+    {
+      "name": "Random Next excludes the current media in multiple real decoded selections",
+      "passed": false,
+      "error": "Random selection label lacked matching decoded pixels.",
+      "stack": "Error: Random selection label lacked matching decoded pixels.\n    at assert (http://127.0.0.1:8768/prototype/video-media-harness.js:5:87)\n    at http://127.0.0.1:8768/prototype/video-media-harness.js:60:435\n    at async test (http://127.0.0.1:8768/prototype/video-media-harness.js:40:52)\n    at async runVideoMediaChecks (http://127.0.0.1:8768/prototype/video-media-harness.js:60:5)\n    at async $.onclick (http://127.0.0.1:8768/prototype/video-media-harness.js:83:122)"
+    },
+    {
+      "name": "Explicit associated video survives fallback OFF while unassociated fallback clears",
+      "passed": false,
+      "error": "Associated decoded source was revoked.",
+      "stack": "Error: Associated decoded source was revoked.\n    at assert (http://127.0.0.1:8768/prototype/video-media-harness.js:5:87)\n    at http://127.0.0.1:8768/prototype/video-media-harness.js:61:443\n    at async test (http://127.0.0.1:8768/prototype/video-media-harness.js:40:52)\n    at async runVideoMediaChecks (http://127.0.0.1:8768/prototype/video-media-harness.js:61:5)\n    at async $.onclick (http://127.0.0.1:8768/prototype/video-media-harness.js:83:122)"
+    },
+    {
+      "name": "Removing explicit association with fallback OFF clears the actual decoded source",
+      "passed": true,
+      "evidence": {
+        "selection": {
+          "kind": "none",
+          "assetId": null,
+          "error": null
+        },
+        "input": null
+      }
+    },
+    {
+      "name": "Manual decoded import can be added as an explicit crate association with fallback OFF",
+      "passed": false,
+      "error": "Manual association lost decoded red pixels.",
+      "stack": "Error: Manual association lost decoded red pixels.\n    at assert (http://127.0.0.1:8768/prototype/video-media-harness.js:5:87)\n    at http://127.0.0.1:8768/prototype/video-media-harness.js:63:577\n    at async test (http://127.0.0.1:8768/prototype/video-media-harness.js:40:52)\n    at async runVideoMediaChecks (http://127.0.0.1:8768/prototype/video-media-harness.js:63:5)\n    at async $.onclick (http://127.0.0.1:8768/prototype/video-media-harness.js:83:122)"
+    },
+    {
+      "name": "Associated video survives same-ID audio reload generation while fallback remains OFF",
+      "passed": true,
+      "evidence": {
+        "generation": 2,
+        "source": {
+          "kind": "associated",
+          "assetId": "video-media:4",
+          "error": null
+        }
+      }
+    },
+    {
+      "name": "Removing the active associated asset clears association and source without deleting other assets",
+      "passed": true,
+      "evidence": {
+        "disposed": false,
+        "enabled": false,
+        "random": true,
+        "assetCount": 3,
+        "associationCount": 0,
+        "resolvedTrackCount": 1,
+        "cursor": 1,
+        "lastSelectedAssetId": "video-media:2",
+        "policy": {
+          "evidence": "docs/research/VIDEO_REMAINING_WORKFLOWS.md",
+          "referenceRuntimeVerified": false,
+          "documented": "Enabled Media Crate supplies visuals for audio lacking associated video; Random/Next and explicit associations are documented historically.",
+          "independent": "Explicit valid association wins even when fallback is off. Ordered shared cursor wraps; each track caches its fallback until explicit advance, association change or asset removal. Random excludes that track’s current fallback if there is more than one candidate.",
+          "clipEnd": "Selection never auto-advances at clip end. Caller owns loop/hold/transport and decode/error UI; no end-of-clip behavior is inferred from track-load fallback.",
+          "recognizedFamilies": [
+            {
+              "name": "mp4",
+              "extensions": [
+                "mp4",
+                "m4v"
+              ],
+              "mime": [
+                "video/mp4",
+                "video/x-m4v"
+              ]
+            },
+            {
+              "name": "webm",
+              "extensions": [
+                "webm"
+              ],
+              "mime": [
+                "video/webm"
+              ]
+            },
+            {
+              "name": "ogg-video",
+              "extensions": [
+                "ogv",
+                "ogg"
+              ],
+              "mime": [
+                "video/ogg",
+                "application/ogg"
+              ]
+            },
+            {
+              "name": "quicktime",
+              "extensions": [
+                "mov"
+              ],
+              "mime": [
+                "video/quicktime"
+              ]
+            }
+          ],
+          "extensionHints": [
+            "mp4",
+            "m4v",
+            "webm",
+            "ogv",
+            "ogg",
+            "mov",
+            "avi",
+            "mpg",
+            "mpeg",
+            "wmv",
+            "mkv",
+            "3gp",
+            "flv",
+            "divx"
+          ],
+          "validation": "Real named Blob/File with video/* MIME, or a recognized video extension when MIME is absent, generic or conflicting. Contradictions produce asset warnings rather than codec/product gates. Clearly nonvideo files without video evidence are rejected. Metadata eligibility only: actual mixer decoding is authoritative. Whole add batch validates before mutation; duplicate File references remain distinct explicitly added entries.",
+          "ownership": "Assets hold original immutable Blob/File byte references. No URLs are created. Removing one track association never disposes shared bytes; remove/dispose drops library references only. No arbitrary asset/track/transaction count cap."
+        },
+        "assets": [
+          {
+            "id": "video-media:1",
+            "name": "original-red.mp4",
+            "warnings": []
+          },
+          {
+            "id": "video-media:2",
+            "name": "original-green.mp4",
+            "warnings": []
+          },
+          {
+            "id": "video-media:3",
+            "name": "original-blue.mp4",
+            "warnings": []
+          }
+        ],
+        "associations": [
+          {
+            "deck": 0,
+            "trackId": "media-audio-left",
+            "assetId": null
+          },
+          {
+            "deck": 1,
+            "trackId": "media-audio-right",
+            "assetId": null
+          }
+        ],
+        "sources": [
+          {
+            "kind": "none",
+            "assetId": null,
+            "error": null
+          },
+          {
+            "kind": "none",
+            "assetId": null,
+            "error": null
+          }
+        ],
+        "transitions": {
+          "disposed": false,
+          "enabled": false,
+          "random": false,
+          "current": "Crossfade",
+          "catalogCount": 34,
+          "manifestCount": 7,
+          "candidateCount": 26,
+          "baselineCount": 1,
+          "observedTransactions": 4,
+          "automaticSelections": 0,
+          "policy": {
+            "evidence": "docs/research/VIDEO_REMAINING_WORKFLOWS.md",
+            "referenceRuntimeVerified": false,
+            "documented": "Historical official guidance documents sequential automatic transition selection on track load, optional Random, and manual Next. Selection is distinct from crossfader motion.",
+            "independent": "Initial selection is the catalog Crossfade baseline if present, otherwise its first entry. Sequential Next wraps; Random excludes current when more than one entry exists. Manual Next works while automatic selection is off. A logical transaction is consumed once even if automatic selection was off at observation; enabling later does not replay it.",
+            "clipEnd": "No clip-end event or automatic fader motion exists in this selector.",
+            "candidateStatus": "Counts derive only from caller-supplied catalog provenance/candidate/baseline metadata. Localization candidates are not verified reference menu entries."
+          },
+          "selected": "Crossfade"
+        }
+      }
+    },
+    {
+      "name": "Fallback clip-end policy loops the same real clip and never selects the next asset",
+      "passed": false,
+      "error": "Finite real clip required for end behavior.",
+      "stack": "Error: Finite real clip required for end behavior.\n    at assert (http://127.0.0.1:8768/prototype/video-media-harness.js:5:87)\n    at http://127.0.0.1:8768/prototype/video-media-harness.js:66:367\n    at async test (http://127.0.0.1:8768/prototype/video-media-harness.js:40:52)\n    at async runVideoMediaChecks (http://127.0.0.1:8768/prototype/video-media-harness.js:66:5)\n    at async $.onclick (http://127.0.0.1:8768/prototype/video-media-harness.js:83:122)"
+    },
+    {
+      "name": "Audio eject clears its fallback while the other deck keeps its decoded source",
+      "passed": false,
+      "error": "Cannot read properties of null (reading 'paused')",
+      "stack": "TypeError: Cannot read properties of null (reading 'paused')\n    at http://127.0.0.1:8768/prototype/video-media-harness.js:67:452\n    at test (http://127.0.0.1:8768/prototype/video-media-harness.js:40:58)\n    at runVideoMediaChecks (http://127.0.0.1:8768/prototype/video-media-harness.js:67:11)\n    at async $.onclick (http://127.0.0.1:8768/prototype/video-media-harness.js:83:122)"
+    },
+    {
+      "name": "Corrupt candidate preserves the last decoded clip with visible replacement failure",
+      "passed": false,
+      "error": "Cannot read properties of null (reading 'name')",
+      "stack": "TypeError: Cannot read properties of null (reading 'name')\n    at http://127.0.0.1:8768/prototype/video-media-harness.js:68:699\n    at test (http://127.0.0.1:8768/prototype/video-media-harness.js:40:58)\n    at runVideoMediaChecks (http://127.0.0.1:8768/prototype/video-media-harness.js:68:11)\n    at async $.onclick (http://127.0.0.1:8768/prototype/video-media-harness.js:83:122)"
+    },
+    {
+      "name": "Removing failed candidate permits actual fallback decode recovery",
+      "passed": false,
+      "error": "Actual-state predicate timed out: {\"source\":{\"kind\":\"none\",\"assetId\":null,\"error\":null},\"input\":null}",
+      "stack": "Error: Actual-state predicate timed out: {\"source\":{\"kind\":\"none\",\"assetId\":null,\"error\":null},\"input\":null}\n    at until (http://127.0.0.1:8768/prototype/video-media-harness.js:11:229)\n    at async http://127.0.0.1:8768/prototype/video-media-harness.js:69:178\n    at async test (http://127.0.0.1:8768/prototype/video-media-harness.js:40:52)\n    at async runVideoMediaChecks (http://127.0.0.1:8768/prototype/video-media-harness.js:69:5)\n    at async $.onclick (http://127.0.0.1:8768/prototype/video-media-harness.js:83:122)"
+    },
+    {
+      "name": "Late fallback File decode cannot overwrite an audio generation changed before the next tick",
+      "passed": false,
+      "error": "Cannot read properties of null (reading 'name')",
+      "stack": "TypeError: Cannot read properties of null (reading 'name')\n    at http://127.0.0.1:8768/prototype/video-media-harness.js:70:162\n    at test (http://127.0.0.1:8768/prototype/video-media-harness.js:40:58)\n    at runVideoMediaChecks (http://127.0.0.1:8768/prototype/video-media-harness.js:70:11)\n    at async $.onclick (http://127.0.0.1:8768/prototype/video-media-harness.js:83:122)"
+    },
+    {
+      "name": "Late manual File decode also cannot attach to a newer audio generation",
+      "passed": true,
+      "evidence": {
+        "result": null,
+        "loadedDataEvents": 1,
+        "source": null
+      }
+    },
+    {
+      "name": "Manual video overrides fallback until the next observed audio load generation",
+      "passed": false,
+      "error": "Actual-state predicate timed out: {\"kind\":\"manual\",\"assetId\":null,\"error\":null}",
+      "stack": "Error: Actual-state predicate timed out: {\"kind\":\"manual\",\"assetId\":null,\"error\":null}\n    at until (http://127.0.0.1:8768/prototype/video-media-harness.js:11:229)\n    at async http://127.0.0.1:8768/prototype/video-media-harness.js:72:465\n    at async test (http://127.0.0.1:8768/prototype/video-media-harness.js:40:52)\n    at async runVideoMediaChecks (http://127.0.0.1:8768/prototype/video-media-harness.js:72:5)\n    at async $.onclick (http://127.0.0.1:8768/prototype/video-media-harness.js:83:122)"
+    },
+    {
+      "name": "Transition enabling changes neither selection nor either crossfader value",
+      "passed": true,
+      "evidence": {
+        "before": {
+          "transition": "Crossfade",
+          "cross": -1,
+          "engineCross": 0
+        },
+        "after": {
+          "transition": "Crossfade",
+          "cross": -1,
+          "engineCross": 0
+        }
+      }
+    },
+    {
+      "name": "One audio-load generation selects exactly one automatic transition including async fallback",
+      "passed": true,
+      "evidence": {
+        "before": 0,
+        "after": {
+          "disposed": false,
+          "enabled": true,
+          "random": false,
+          "current": "Luma Key Fade",
+          "catalogCount": 34,
+          "manifestCount": 7,
+          "candidateCount": 26,
+          "baselineCount": 1,
+          "observedTransactions": 6,
+          "automaticSelections": 1,
+          "policy": {
+            "evidence": "docs/research/VIDEO_REMAINING_WORKFLOWS.md",
+            "referenceRuntimeVerified": false,
+            "documented": "Historical official guidance documents sequential automatic transition selection on track load, optional Random, and manual Next. Selection is distinct from crossfader motion.",
+            "independent": "Initial selection is the catalog Crossfade baseline if present, otherwise its first entry. Sequential Next wraps; Random excludes current when more than one entry exists. Manual Next works while automatic selection is off. A logical transaction is consumed once even if automatic selection was off at observation; enabling later does not replay it.",
+            "clipEnd": "No clip-end event or automatic fader motion exists in this selector.",
+            "candidateStatus": "Counts derive only from caller-supplied catalog provenance/candidate/baseline metadata. Localization candidates are not verified reference menu entries."
+          },
+          "selected": "Luma Key Fade"
+        },
+        "generation": 6,
+        "cross": -1,
+        "engineCross": 0
+      }
+    },
+    {
+      "name": "Transition Next works with automatic selection OFF and does not move the fader",
+      "passed": true,
+      "evidence": {
+        "before": "Luma Key Fade",
+        "next": "Upfaders Only",
+        "cross": -1,
+        "engineCross": 0
+      }
+    },
+    {
+      "name": "Random transition Next avoids immediate repetition without replaying audio-load events",
+      "passed": true,
+      "evidence": {
+        "samples": [
+          {
+            "before": "Upfaders Only",
+            "next": "Crossfade"
+          },
+          {
+            "before": "Crossfade",
+            "next": "Scratch Fade"
+          },
+          {
+            "before": "Scratch Fade",
+            "next": "Tile Wave V"
+          },
+          {
+            "before": "Tile Wave V",
+            "next": "Water Bar H"
+          },
+          {
+            "before": "Water Bar H",
+            "next": "Scratch"
+          },
+          {
+            "before": "Scratch",
+            "next": "Box V"
+          }
+        ],
+        "automaticSelections": 1,
+        "cross": -1,
+        "engineCross": 0
+      }
+    },
+    {
+      "name": "Actual CDG association takes source priority over enabled Media Crate fallback",
+      "passed": true,
+      "evidence": {
+        "source": {
+          "kind": "karaoke",
+          "assetId": "video-media:1",
+          "error": null
+        },
+        "karaoke": {
+          "source": "karaoke",
+          "disposed": false,
+          "available": true,
+          "reason": "ready",
+          "trackId": "media-audio-transition-event",
+          "name": "original-source-priority.cdg",
+          "assetId": "karaoke:0:1:6",
+          "version": 1,
+          "loading": false,
+          "transparencyProfile": "index",
+          "crop": false,
+          "width": 300,
+          "height": 216,
+          "position": 0.1,
+          "retainedAssociationBytes": 48,
+          "graphicsStatus": "graphics-packets-in-current-prefix",
+          "decoder": {
+            "disposed": false,
+            "transparencyProfile": "index",
+            "channelPolicy": "all channels",
+            "parityCorrection": false,
+            "totalPackets": 2,
+            "trailingBytes": 0,
+            "packetCursor": 2,
+            "endOfStream": true,
+            "horizontalOffset": 0,
+            "verticalOffset": 0,
+            "decodedPackets": 2,
+            "graphicsPackets": 2,
+            "timingPackets": 0,
+            "unknownCommands": 0,
+            "unknownInstructions": 0,
+            "invalidTiles": 0,
+            "invalidScrollPackets": 0,
+            "invalidScrollFields": 0,
+            "memoryPresets": 1,
+            "memoryRepeatPackets": 0,
+            "tilePackets": 0,
+            "tilePacketsWithChannelBits": 0,
+            "packetsWithParityData": 0,
+            "renderCallsLifetime": 1,
+            "replaysLifetime": 0,
+            "resetsLifetime": 0,
+            "processedPacketsLifetime": 2,
+            "retainedInputBytes": 48
+          },
+          "policy": {
+            "evidence": "docs/research/VIDEO_REMAINING_WORKFLOWS.md",
+            "referenceEquivalent": false,
+            "ownership": "Copied session-only CDG bytes/configuration belong to a track ID; every deck owns a private decoder/canvas. Track/profile versions and load generations prevent stale attachment. No bytes, URLs or graphics are persisted.",
+            "clock": "Original engine.position(deck) seconds, clamped below at zero; pause/seek/reverse/loop are handled by the actual decoder replay. Graphics EOF holds the last decoded frame.",
+            "presentation": "Full300x216 by default; optional288x192 crop. Explicit index or alpha-table transparency. All tile channels; no parity repair. No audio start/play command.",
+            "validation": "Real named Blob/File and at least one complete24-byte packet. Unknown/non-graphics/timing packets remain valid timeline data and are diagnosed, not filtered out."
+          }
+        },
+        "pixel": [
+          255,
+          0,
+          0,
+          255
+        ]
+      }
+    },
+    {
+      "name": "Disposal stops actual video inputs and rejects additional media ownership",
+      "passed": true,
+      "evidence": {
+        "videos": 11,
+        "allPaused": true,
+        "loadRejected": true
+      }
+    }
+  ],
+  "notifications": [
+    "The play() request was interrupted by a call to pause(). https://goo.gl/LdLk22"
+  ],
+  "fixtures": [
+    {
+      "name": "original-red.mp4",
+      "bytes": 43838,
+      "mime": "video/mp4;codecs=avc1.420015,mp4a.40.2",
+      "sourceCanvasFrames": 148,
+      "measuredAudioClockSeconds": 1.3546666666666667,
+      "fixtureAudioHz": 880,
+      "claim": "Original encoded File, not a codec/fps guarantee."
+    },
+    {
+      "name": "original-green.mp4",
+      "bytes": 51055,
+      "mime": "video/mp4;codecs=avc1.420015,mp4a.40.2",
+      "sourceCanvasFrames": 148,
+      "measuredAudioClockSeconds": 1.36,
+      "fixtureAudioHz": 880,
+      "claim": "Original encoded File, not a codec/fps guarantee."
+    },
+    {
+      "name": "original-blue.mp4",
+      "bytes": 42706,
+      "mime": "video/mp4;codecs=avc1.420015,mp4a.40.2",
+      "sourceCanvasFrames": 148,
+      "measuredAudioClockSeconds": 1.36,
+      "fixtureAudioHz": 880,
+      "claim": "Original encoded File, not a codec/fps guarantee."
+    }
+  ],
+  "corruptAssetId": "video-media:5",
+  "passed": 17,
+  "failed": 9,
+  "durationMs": 23428.700000047684
+}

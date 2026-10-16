@@ -1,0 +1,91 @@
+{
+  "scope": "Executed original CD+G decoder→Canvas2D bytes and PNG. No Serato equivalence, MP3 pairing, capture or audible sync acceptance claimed.",
+  "passed": 21,
+  "failed": 0,
+  "checks": [
+    {
+      "name": "Actual Canvas: full dimensions, upper CLUT and asymmetric tile orientation",
+      "passed": true
+    },
+    {
+      "name": "Existing indexed pixels recolor when CLUT changes",
+      "passed": true
+    },
+    {
+      "name": "Two XOR commands restore exact Canvas pixels",
+      "passed": true
+    },
+    {
+      "name": "Scroll Preset right: marker movement and newly exposed color",
+      "passed": true
+    },
+    {
+      "name": "Scroll Preset left: marker movement and newly exposed color",
+      "passed": true
+    },
+    {
+      "name": "Scroll Preset down: marker movement and newly exposed color",
+      "passed": true
+    },
+    {
+      "name": "Scroll Preset up: marker movement and newly exposed color",
+      "passed": true
+    },
+    {
+      "name": "Scroll Copy right: marker wraps into opposite edge",
+      "passed": true
+    },
+    {
+      "name": "Scroll Copy left: marker wraps into opposite edge",
+      "passed": true
+    },
+    {
+      "name": "Scroll Copy down: marker wraps into opposite edge",
+      "passed": true
+    },
+    {
+      "name": "Scroll Copy up: marker wraps into opposite edge",
+      "passed": true
+    },
+    {
+      "name": "Combined diagonal scroll and inverse restore the full frame",
+      "passed": true
+    },
+    {
+      "name": "Fine offsets are absolute; cropped output samples the same visible pixels",
+      "passed": true
+    },
+    {
+      "name": "Index profile transparency clears alpha and a new key restores it",
+      "passed": true
+    },
+    {
+      "name": "Explicit alpha-table profile reaches alpha3 and127 in real Canvas",
+      "passed": true
+    },
+    {
+      "name": "Packet300 changes Canvas at1second; timing packets are retained",
+      "passed": true
+    },
+    {
+      "name": "Malformed bounds/trailing bytes are diagnosed without corrupting visible pixels",
+      "passed": true
+    },
+    {
+      "name": "Backward target samples equal a fresh decoder through actual Canvas",
+      "passed": true
+    },
+    {
+      "name": "Copied input and prefix diagnostics remain stable over duplicate renders/replay",
+      "passed": true
+    },
+    {
+      "name": "Reset clears prior graphics and disposal rejects reuse",
+      "passed": true
+    },
+    {
+      "name": "PNG encoding/decoding preserves actual keyed alpha and opaque markers",
+      "passed": true
+    }
+  ]
+}

@@ -1,0 +1,483 @@
+{
+  "passed": 51,
+  "failed": 0,
+  "checks": [
+    {
+      "name": "33 resource names remain distinct from the Crossfade baseline",
+      "passed": true
+    },
+    {
+      "name": "Luma Key Fade: both live endpoints, marker orientation and alpha",
+      "passed": true
+    },
+    {
+      "name": "Additive Average: both live endpoints, marker orientation and alpha",
+      "passed": true
+    },
+    {
+      "name": "Additive: both live endpoints, marker orientation and alpha",
+      "passed": true
+    },
+    {
+      "name": "Difference Fade: both live endpoints, marker orientation and alpha",
+      "passed": true
+    },
+    {
+      "name": "Smudge Fade: both live endpoints, marker orientation and alpha",
+      "passed": true
+    },
+    {
+      "name": "Melt: both live endpoints, marker orientation and alpha",
+      "passed": true
+    },
+    {
+      "name": "Default: both live endpoints, marker orientation and alpha",
+      "passed": true
+    },
+    {
+      "name": "Center: both live endpoints, marker orientation and alpha",
+      "passed": true
+    },
+    {
+      "name": "Scratch: both live endpoints, marker orientation and alpha",
+      "passed": true
+    },
+    {
+      "name": "Latch 50: both live endpoints, marker orientation and alpha",
+      "passed": true
+    },
+    {
+      "name": "Scratch Fade: both live endpoints, marker orientation and alpha",
+      "passed": true
+    },
+    {
+      "name": "Box H: both live endpoints, marker orientation and alpha",
+      "passed": true
+    },
+    {
+      "name": "Box V: both live endpoints, marker orientation and alpha",
+      "passed": true
+    },
+    {
+      "name": "Box Both: both live endpoints, marker orientation and alpha",
+      "passed": true
+    },
+    {
+      "name": "Spin H: both live endpoints, marker orientation and alpha",
+      "passed": true
+    },
+    {
+      "name": "Spin V: both live endpoints, marker orientation and alpha",
+      "passed": true
+    },
+    {
+      "name": "Spin Both: both live endpoints, marker orientation and alpha",
+      "passed": true
+    },
+    {
+      "name": "Wipe H: both live endpoints, marker orientation and alpha",
+      "passed": true
+    },
+    {
+      "name": "Wipe V: both live endpoints, marker orientation and alpha",
+      "passed": true
+    },
+    {
+      "name": "Swap: both live endpoints, marker orientation and alpha",
+      "passed": true
+    },
+    {
+      "name": "Push Slide H: both live endpoints, marker orientation and alpha",
+      "passed": true
+    },
+    {
+      "name": "Push Slide V: both live endpoints, marker orientation and alpha",
+      "passed": true
+    },
+    {
+      "name": "Tile Wave H: both live endpoints, marker orientation and alpha",
+      "passed": true
+    },
+    {
+      "name": "Tile Wave V: both live endpoints, marker orientation and alpha",
+      "passed": true
+    },
+    {
+      "name": "Water Bar H: both live endpoints, marker orientation and alpha",
+      "passed": true
+    },
+    {
+      "name": "Water Bar V: both live endpoints, marker orientation and alpha",
+      "passed": true
+    },
+    {
+      "name": "Tornado: both live endpoints, marker orientation and alpha",
+      "passed": true
+    },
+    {
+      "name": "Grid 2x2: both live endpoints, marker orientation and alpha",
+      "passed": true
+    },
+    {
+      "name": "Grid Simple: both live endpoints, marker orientation and alpha",
+      "passed": true
+    },
+    {
+      "name": "Grid Pop: both live endpoints, marker orientation and alpha",
+      "passed": true
+    },
+    {
+      "name": "Grid Fade: both live endpoints, marker orientation and alpha",
+      "passed": true
+    },
+    {
+      "name": "Grid Sequence: both live endpoints, marker orientation and alpha",
+      "passed": true
+    },
+    {
+      "name": "Crossfade: both live endpoints, marker orientation and alpha",
+      "passed": true
+    },
+    {
+      "name": "All 33 independent resource-name behaviors have distinct three-position fingerprints",
+      "passed": true
+    },
+    {
+      "name": "Wipe orientation: horizontal is left-to-right, vertical top-to-bottom",
+      "passed": true
+    },
+    {
+      "name": "Crossfade alpha is premultiplied for mixing and straight in output",
+      "passed": true
+    },
+    {
+      "name": "Upfaders Only ignores amount at endpoints and exposes both input gains",
+      "passed": true
+    },
+    {
+      "name": "Scratch holds captured source in interior and releases at opposite endpoint",
+      "passed": true
+    },
+    {
+      "name": "Latch 50 captures each crossing and holds source-frame changes",
+      "passed": true
+    },
+    {
+      "name": "Scratch Fade blends frozen outgoing frame with live incoming frame",
+      "passed": true
+    },
+    {
+      "name": "Smudge history, duplicate-frame stability, reset and mode isolation",
+      "passed": true
+    },
+    {
+      "name": "Same-frame Latch 50 threshold changes update the selected snapshot",
+      "passed": true
+    },
+    {
+      "name": "Same-frame Scratch endpoint then interior retains the new endpoint side",
+      "passed": true
+    },
+    {
+      "name": "Same-frame clock 10 to 12 to 11 clears actual Smudge feedback",
+      "passed": true
+    },
+    {
+      "name": "Same-frame controls replace current history without feeding it back",
+      "passed": true
+    },
+    {
+      "name": "Scaled transparent edge matches Canvas2D and retains straight red at fractional alpha",
+      "passed": true
+    },
+    {
+      "name": "Latch and filtered history paths retain red chroma at transparent edges",
+      "passed": true
+    },
+    {
+      "name": "Reduced motion removes clock-driven ripple while preserving fader control",
+      "passed": true
+    },
+    {
+      "name": "Unknown names fail explicitly and disposal is final/idempotent",
+      "passed": true
+    },
+    {
+      "name": "640x360 render sample completed for all 34 entries",
+      "passed": true
+    }
+  ],
+  "alphaEdgeProbe": {
+    "fixture": "2x1 opaque red / transparent black scaled to 4x1",
+    "expectedCanvas2D": [
+      255,
+      0,
+      0,
+      255,
+      255,
+      0,
+      0,
+      191,
+      255,
+      0,
+      0,
+      64,
+      0,
+      0,
+      0,
+      0
+    ],
+    "actualWebGL": [
+      255,
+      0,
+      0,
+      255,
+      255,
+      0,
+      0,
+      191,
+      255,
+      0,
+      0,
+      64,
+      0,
+      0,
+      0,
+      0
+    ],
+    "fractionalAlphaIndices": [
+      1,
+      2
+    ],
+    "readPaths": [
+      {
+        "name": "Latch 50",
+        "actualWebGL": [
+          255,
+          0,
+          0,
+          255,
+          255,
+          0,
+          0,
+          191,
+          255,
+          0,
+          0,
+          64,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "name": "Scratch",
+        "actualWebGL": [
+          255,
+          0,
+          0,
+          255,
+          255,
+          0,
+          0,
+          220,
+          255,
+          0,
+          0,
+          93,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "name": "Scratch Fade",
+        "actualWebGL": [
+          255,
+          0,
+          0,
+          255,
+          255,
+          0,
+          0,
+          191,
+          255,
+          0,
+          0,
+          64,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "name": "Smudge Fade",
+        "actualWebGL": [
+          255,
+          0,
+          0,
+          255,
+          255,
+          0,
+          0,
+          194,
+          255,
+          0,
+          0,
+          70,
+          255,
+          0,
+          0,
+          3
+        ]
+      }
+    ]
+  },
+  "benchmark": {
+    "scope": "CPU performance.now wall-clock around render() plus a WebGL finish() invocation, 640x360 output with synthetic canvas inputs. Not a GPU timer-query measurement, presentation timing, decode/effects/composite/capture pipeline latency, sustained frame rate, or 30fps proof. Browser timer resolution/rounding can report 0 or 0.1 ms; these values do not establish a zero-cost frame.",
+    "samples": [
+      {
+        "name": "Luma Key Fade",
+        "ms": 0
+      },
+      {
+        "name": "Upfaders Only",
+        "ms": 0
+      },
+      {
+        "name": "Additive Average",
+        "ms": 0
+      },
+      {
+        "name": "Additive",
+        "ms": 0
+      },
+      {
+        "name": "Difference Fade",
+        "ms": 0
+      },
+      {
+        "name": "Smudge Fade",
+        "ms": 0
+      },
+      {
+        "name": "Melt",
+        "ms": 0.1
+      },
+      {
+        "name": "Default",
+        "ms": 0
+      },
+      {
+        "name": "Center",
+        "ms": 0
+      },
+      {
+        "name": "Scratch",
+        "ms": 0
+      },
+      {
+        "name": "Latch 50",
+        "ms": 0
+      },
+      {
+        "name": "Scratch Fade",
+        "ms": 0
+      },
+      {
+        "name": "Box H",
+        "ms": 0
+      },
+      {
+        "name": "Box V",
+        "ms": 0
+      },
+      {
+        "name": "Box Both",
+        "ms": 0
+      },
+      {
+        "name": "Spin H",
+        "ms": 0
+      },
+      {
+        "name": "Spin V",
+        "ms": 0
+      },
+      {
+        "name": "Spin Both",
+        "ms": 0.1
+      },
+      {
+        "name": "Wipe H",
+        "ms": 0
+      },
+      {
+        "name": "Wipe V",
+        "ms": 0
+      },
+      {
+        "name": "Swap",
+        "ms": 0
+      },
+      {
+        "name": "Push Slide H",
+        "ms": 0
+      },
+      {
+        "name": "Push Slide V",
+        "ms": 0
+      },
+      {
+        "name": "Tile Wave H",
+        "ms": 0
+      },
+      {
+        "name": "Tile Wave V",
+        "ms": 0
+      },
+      {
+        "name": "Water Bar H",
+        "ms": 0
+      },
+      {
+        "name": "Water Bar V",
+        "ms": 0
+      },
+      {
+        "name": "Tornado",
+        "ms": 0
+      },
+      {
+        "name": "Grid 2x2",
+        "ms": 0
+      },
+      {
+        "name": "Grid Simple",
+        "ms": 0
+      },
+      {
+        "name": "Grid Pop",
+        "ms": 0
+      },
+      {
+        "name": "Grid Fade",
+        "ms": 0
+      },
+      {
+        "name": "Grid Sequence",
+        "ms": 0
+      },
+      {
+        "name": "Crossfade",
+        "ms": 0.1
+      }
+    ]
+  },
+  "timingScope": "CPU performance.now wall-clock around render() plus a WebGL finish() invocation, 640x360 output with synthetic canvas inputs. Not a GPU timer-query measurement, presentation timing, decode/effects/composite/capture pipeline latency, sustained frame rate, or 30fps proof. Browser timer resolution/rounding can report 0 or 0.1 ms; these values do not establish a zero-cost frame.",
+  "durationMs": 293.6,
+  "evidence": "Executed actual WebGL draw/readPixels on original synthetic canvas fixtures; no Serato/UI integration or visual-parity proof."
+}

@@ -1,0 +1,4828 @@
+{
+  "startedAt": "2026-10-16T20:49:30.280Z",
+  "policy": {
+    "order": "Raw input → two channel FX → channel overlays → transition → master overlays → two master FX",
+    "referenceOrder": "Unverified; this is an independent Open Play routing contract.",
+    "scheduling": "Caller supplies one monotonic time/frameId per processed frame; no frame-rate guarantee."
+  },
+  "engine": "Actual imported AudioEngine; test oscillators drive real input nodes; media transport uses an actual AudioEngine BufferSource deck.",
+  "seams": [
+    "Temporary document.createElement observation captures the actual mixer-created HTMLVideoElements for muted/decoded-frame inspection. No fake video, pipeline or engine.",
+    "Generated original media and PCM are test fixtures; no external media/service/hardware."
+  ],
+  "checks": [
+    {
+      "name": "Actual pipeline bypass and processed-channel previews retain both source identities",
+      "passed": true,
+      "evidence": {
+        "left": [
+          64,
+          128,
+          192,
+          255
+        ],
+        "right": [
+          192,
+          64,
+          96,
+          255
+        ],
+        "output": [
+          64,
+          128,
+          192,
+          255
+        ]
+      }
+    },
+    {
+      "name": "Left two-slot order changes actual channel/output pixels while right preview stays isolated",
+      "passed": true,
+      "evidence": {
+        "forward": [
+          221,
+          180,
+          127,
+          255
+        ],
+        "reverse": [
+          127,
+          74,
+          34,
+          255
+        ],
+        "right": [
+          192,
+          64,
+          96,
+          255
+        ]
+      }
+    },
+    {
+      "name": "Right two-slot order changes only processed right preview and selected right output",
+      "passed": true,
+      "evidence": {
+        "left": [
+          64,
+          128,
+          192,
+          255
+        ],
+        "right": [
+          127,
+          221,
+          201,
+          255
+        ],
+        "output": [
+          127,
+          221,
+          201,
+          255
+        ]
+      }
+    },
+    {
+      "name": "Both master slots run after transition and leave processed channel previews unchanged",
+      "passed": true,
+      "evidence": {
+        "forward": [
+          198,
+          193,
+          153,
+          255
+        ],
+        "reverse": [
+          94,
+          88,
+          51,
+          255
+        ],
+        "channelLeft": [
+          64,
+          128,
+          192,
+          255
+        ]
+      }
+    },
+    {
+      "name": "Each of the six slot positions independently changes its intended real pixels",
+      "passed": true,
+      "evidence": [
+        {
+          "target": "left",
+          "slot": 1,
+          "changed": 64.25
+        },
+        {
+          "target": "left",
+          "slot": 2,
+          "changed": 64.25
+        },
+        {
+          "target": "right",
+          "slot": 1,
+          "changed": 79.75
+        },
+        {
+          "target": "right",
+          "slot": 2,
+          "changed": 79.75
+        },
+        {
+          "target": "master",
+          "slot": 1,
+          "changed": 24.25
+        },
+        {
+          "target": "master",
+          "slot": 2,
+          "changed": 24.25
+        }
+      ]
+    },
+    {
+      "name": "All six simultaneous slots obey channel → transition → master ordering",
+      "passed": true,
+      "evidence": {
+        "actual": [
+          162,
+          156,
+          188,
+          255
+        ],
+        "expected": [
+          162.44476506455067,
+          155.26955253735767,
+          188.05797218239567
+        ]
+      }
+    },
+    {
+      "name": "Channel overlays follow channel FX; master overlays follow transition and precede master FX",
+      "passed": true,
+      "evidence": {
+        "channelOverlay": [
+          255,
+          0,
+          0,
+          255
+        ],
+        "unselectedOutput": [
+          63,
+          191,
+          159,
+          255
+        ],
+        "masterOverlayThenFX": [
+          255,
+          0,
+          255,
+          255
+        ]
+      }
+    },
+    {
+      "name": "Pipeline reset clears an actual upstream Frame Freeze capture",
+      "passed": true,
+      "evidence": {
+        "held": [
+          220,
+          20,
+          10,
+          255
+        ],
+        "afterReset": [
+          10,
+          30,
+          230,
+          255
+        ]
+      }
+    },
+    {
+      "name": "Actual AudioEngine AudioContext/worklets resume and speaker route is disconnected",
+      "passed": true,
+      "evidence": {
+        "state": "running",
+        "sampleRate": 48000,
+        "effectsPrepared": true,
+        "speakerRoute": "engine.analyser.disconnect() only; real capture destination remains connected"
+      }
+    },
+    {
+      "name": "Actual per-channel oscillators produce isolated bass/treble analyzer bands",
+      "passed": true,
+      "evidence": {
+        "frequencies": [
+          100,
+          8000
+        ],
+        "bands": [
+          {
+            "bass": 0.05780678821581167,
+            "mid": 0.003910634797812621,
+            "treble": 0.00005589827453524903,
+            "level": 0.1471503011631177,
+            "audioAvailable": true
+          },
+          {
+            "bass": 0.00040131297573025156,
+            "mid": 0.0017969760649530003,
+            "treble": 0.058506617685912365,
+            "level": 0.14992670076482073,
+            "audioAvailable": true
+          }
+        ]
+      }
+    },
+    {
+      "name": "Measured live per-channel audio bands alter actual pipeline Audio RGB pixels independently",
+      "passed": true,
+      "evidence": {
+        "bands": [
+          {
+            "bass": 0.08214429111147105,
+            "mid": 0.001323477800686729,
+            "treble": 0.00001900516905919253,
+            "level": 0.18230968082118568,
+            "audioAvailable": true,
+            "assetId": "0",
+            "bpm": 120,
+            "rate": 1
+          },
+          {
+            "bass": 0.00013644516588942962,
+            "mid": 0.0006109586672045501,
+            "treble": 0.08209263586114288,
+            "level": 0.1837116831268045,
+            "audioAvailable": true,
+            "assetId": "1",
+            "bpm": 120,
+            "rate": 1
+          }
+        ],
+        "left": [
+          108,
+          100,
+          100,
+          255
+        ],
+        "right": [
+          100,
+          100,
+          108,
+          255
+        ]
+      }
+    },
+    {
+      "name": "Actual analyzer frequency changes move channel energy to different bands",
+      "passed": true,
+      "evidence": {
+        "frequencies": [
+          1000,
+          100
+        ],
+        "bands": [
+          {
+            "bass": 0.010438171042615971,
+            "mid": 0.08226186405946649,
+            "treble": 0.00004028307383387945,
+            "level": 0.21369584326340874,
+            "audioAvailable": true
+          },
+          {
+            "bass": 0.08165402085894273,
+            "mid": 0.004673771051060615,
+            "treble": 0.010659113991376886,
+            "level": 0.20960968899125243,
+            "audioAvailable": true
+          }
+        ]
+      }
+    },
+    {
+      "name": "Actual silence yields near-zero bands/RMS; dispose returns unavailable zeros",
+      "passed": true,
+      "evidence": {
+        "silent": [
+          {
+            "bass": 0,
+            "mid": 0,
+            "treble": 0,
+            "level": 0,
+            "audioAvailable": true
+          },
+          {
+            "bass": 0,
+            "mid": 0,
+            "treble": 0,
+            "level": 0,
+            "audioAvailable": true
+          }
+        ],
+        "disposed": {
+          "bass": 0,
+          "mid": 0,
+          "treble": 0,
+          "level": 0,
+          "audioAvailable": false
+        }
+      }
+    },
+    {
+      "name": "Recreated analysis taps recover measured signal after disposal",
+      "passed": true,
+      "evidence": {
+        "bass": 0.07520571801468204,
+        "mid": 0.00458248824904451,
+        "treble": 0.0007839894754471384,
+        "level": 0.16370991514520614,
+        "audioAvailable": true
+      }
+    },
+    {
+      "name": "Real AudioEngine video-analysis taps survive configureFX deck-to-master route rebuild",
+      "passed": true,
+      "evidence": {
+        "prior": [
+          {
+            "bass": 0.03814045437697224,
+            "mid": 0.0015122181159616247,
+            "treble": 0.000021620187659639093,
+            "level": 0.08273708894140347,
+            "audioAvailable": true
+          },
+          {
+            "bass": 0.00015521824404842154,
+            "mid": 0.0006950255040663872,
+            "treble": 0.03815721367124783,
+            "level": 0.08383615057101285,
+            "audioAvailable": true
+          },
+          {
+            "bass": 0.016785216948353235,
+            "mid": 0.0006247037390565674,
+            "treble": 0.016788991769777613,
+            "level": 0.05182632317738747,
+            "audioAvailable": true
+          }
+        ],
+        "after": [
+          {
+            "bass": 0.03814045437697224,
+            "mid": 0.0015122181159616247,
+            "treble": 0.000021620187659639093,
+            "level": 0.08273708894140347,
+            "audioAvailable": true
+          },
+          {
+            "bass": 0.00015521824404842154,
+            "mid": 0.0006950255040663872,
+            "treble": 0.03815721367124783,
+            "level": 0.08383615057101285,
+            "audioAvailable": true
+          },
+          {
+            "bass": 0.016785216948353235,
+            "mid": 0.0006247037390565674,
+            "treble": 0.016788991769777613,
+            "level": 0.05182632317738747,
+            "audioAvailable": true
+          }
+        ],
+        "realEngine": true,
+        "drive": "Test oscillators enter actual AudioEngine input nodes; this test does not claim file transport."
+      }
+    },
+    {
+      "name": "Pipeline validates source count and rejects rendering after disposal",
+      "passed": true,
+      "evidence": {
+        "sourceCountRejected": true,
+        "disposed": true
+      }
+    },
+    {
+      "name": "Thirty rAF-paced complete640x360 pipeline/readback frames report measured cost without30fps assumption",
+      "passed": true,
+      "evidence": {
+        "frames": 30,
+        "output": [
+          640,
+          360
+        ],
+        "distinctOutputs": 30,
+        "elapsedRafMs": 408.4,
+        "observedFramesPerSecond": 71.00881488736533,
+        "p50FrameReadbackMs": 13,
+        "p95FrameReadbackMs": 18.700000047683716,
+        "maxFrameReadbackMs": 22.600000143051147,
+        "over33ms": 0,
+        "rafIntervalsMs": [
+          16.799999999999955,
+          16.800000000000068,
+          15.299999999999955,
+          9.700000000000045,
+          16.399999999999977,
+          16.699999999999932,
+          16.600000000000023,
+          8.399999999999977,
+          17,
+          14.700000000000045,
+          10.200000000000045,
+          15.099999999999909,
+          9.600000000000023,
+          25,
+          15.200000000000045,
+          16.899999999999977,
+          8.700000000000045,
+          16.09999999999991,
+          10,
+          15.400000000000091,
+          9.199999999999932,
+          17.200000000000045,
+          7.899999999999977,
+          16.700000000000045,
+          16.899999999999977,
+          8.199999999999932,
+          14.900000000000091,
+          18.399999999999864,
+          8.400000000000091
+        ],
+        "scope": "Full six-slot generated-canvas pipeline with synchronous final Canvas2D getImageData readback; includes GPU dependency completion. Excludes video decoding/audio/capture; not sustained30fps or real-device proof."
+      }
+    },
+    {
+      "name": "Real canvas.captureStream/MediaRecorder produces a local video File with generated audio",
+      "passed": true,
+      "evidence": {
+        "bytes": 56163,
+        "mime": "video/mp4;codecs=avc1.420015,mp4a.40.2",
+        "drawnCanvasFrames": 166,
+        "measuredAudioClockSeconds": 1.408,
+        "streamVideoTracks": 1,
+        "streamAudioTracks": 1,
+        "claim": "Canvas frame draws are not a claim of encoded frame count or30fps."
+      }
+    },
+    {
+      "name": "Visible fixture downloads retain the exact local video File and an original transparent overlay PNG",
+      "passed": true,
+      "evidence": {
+        "video": {
+          "filename": "generated-local.mp4",
+          "bytes": 56163,
+          "mime": "video/mp4;codecs=avc1.420015,mp4a.40.2",
+          "publicAnchor": "download-video-fixture",
+          "ownership": "Original harness-generated media only; retained until rerun or page close."
+        },
+        "overlay": {
+          "filename": "open-play-generated-overlay.png",
+          "bytes": 931,
+          "mime": "image/png",
+          "publicAnchor": "download-overlay-fixture",
+          "ownership": "Original harness-generated media only; retained until rerun or page close."
+        },
+        "videoExactByteMatch": true,
+        "overlayPixels": {
+          "transparent": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "magenta": [
+            255,
+            0,
+            255,
+            255
+          ]
+        },
+        "claim": "Public download targets verified; native save dialog and subsequent main-UI upload are parent-executed checks."
+      }
+    },
+    {
+      "name": "Mixer.load decodes actual local Files and preserves muted real video elements",
+      "passed": true,
+      "evidence": {
+        "videos": [
+          {
+            "width": 320,
+            "height": 180,
+            "muted": true,
+            "readyState": 4,
+            "duration": 1.4299
+          },
+          {
+            "width": 320,
+            "height": 180,
+            "muted": true,
+            "readyState": 4,
+            "duration": 1.4299
+          }
+        ],
+        "diagnostics": {
+          "frames": 0,
+          "error": null,
+          "width": 640,
+          "height": 360,
+          "lastRenderMs": 0,
+          "inputs": [
+            {
+              "name": "generated-local.mp4",
+              "position": 0.004598,
+              "duration": 1.4299,
+              "paused": true,
+              "firstFrame": {
+                "mediaTime": 0,
+                "presentedFrames": 1,
+                "width": 320,
+                "height": 180
+              },
+              "readyState": 4,
+              "seeking": false
+            },
+            {
+              "name": "generated-local.mp4",
+              "position": 0.002446,
+              "duration": 1.4299,
+              "paused": true,
+              "firstFrame": {
+                "mediaTime": 0,
+                "presentedFrames": 1,
+                "width": 320,
+                "height": 180
+              },
+              "readyState": 4,
+              "seeking": false
+            }
+          ],
+          "loadedImages": [],
+          "karaoke": [
+            {
+              "source": "karaoke",
+              "disposed": false,
+              "available": false,
+              "reason": "missing-track",
+              "trackId": null,
+              "name": null,
+              "assetId": null,
+              "version": null,
+              "loading": false,
+              "transparencyProfile": "index",
+              "crop": false,
+              "width": null,
+              "height": null,
+              "position": null,
+              "retainedAssociationBytes": 0,
+              "graphicsStatus": "not-rendered",
+              "decoder": null,
+              "policy": {
+                "evidence": "docs/research/VIDEO_REMAINING_WORKFLOWS.md",
+                "referenceEquivalent": false,
+                "ownership": "Copied session-only CDG bytes/configuration belong to a track ID; every deck owns a private decoder/canvas. Track/profile versions and load generations prevent stale attachment. No bytes, URLs or graphics are persisted.",
+                "clock": "Original engine.position(deck) seconds, clamped below at zero; pause/seek/reverse/loop are handled by the actual decoder replay. Graphics EOF holds the last decoded frame.",
+                "presentation": "Full300x216 by default; optional288x192 crop. Explicit index or alpha-table transparency. All tile channels; no parity repair. No audio start/play command.",
+                "validation": "Real named Blob/File and at least one complete24-byte packet. Unknown/non-graphics/timing packets remain valid timeline data and are diagnosed, not filtered out."
+              }
+            },
+            {
+              "source": "karaoke",
+              "disposed": false,
+              "available": false,
+              "reason": "missing-track",
+              "trackId": null,
+              "name": null,
+              "assetId": null,
+              "version": null,
+              "loading": false,
+              "transparencyProfile": "index",
+              "crop": false,
+              "width": null,
+              "height": null,
+              "position": null,
+              "retainedAssociationBytes": 0,
+              "graphicsStatus": "not-rendered",
+              "decoder": null,
+              "policy": {
+                "evidence": "docs/research/VIDEO_REMAINING_WORKFLOWS.md",
+                "referenceEquivalent": false,
+                "ownership": "Copied session-only CDG bytes/configuration belong to a track ID; every deck owns a private decoder/canvas. Track/profile versions and load generations prevent stale attachment. No bytes, URLs or graphics are persisted.",
+                "clock": "Original engine.position(deck) seconds, clamped below at zero; pause/seek/reverse/loop are handled by the actual decoder replay. Graphics EOF holds the last decoded frame.",
+                "presentation": "Full300x216 by default; optional288x192 crop. Explicit index or alpha-table transparency. All tile channels; no parity repair. No audio start/play command.",
+                "validation": "Real named Blob/File and at least one complete24-byte packet. Unknown/non-graphics/timing packets remain valid timeline data and are diagnosed, not filtered out."
+              }
+            }
+          ],
+          "recording": false,
+          "captureBytes": 0
+        }
+      }
+    },
+    {
+      "name": "Mixer play yields real decoded frames and processed channel-preview pixels",
+      "passed": true,
+      "evidence": {
+        "decodedFrame": {
+          "mediaTime": 0.064633,
+          "presentedFrames": 4,
+          "width": 320,
+          "height": 180
+        },
+        "output": [
+          37,
+          226,
+          237,
+          255
+        ],
+        "processedPreview": [
+          36,
+          225,
+          236,
+          255
+        ],
+        "diagnostics": {
+          "frames": 3,
+          "error": null,
+          "width": 640,
+          "height": 360,
+          "lastRenderMs": 4.900000095367432,
+          "inputs": [
+            {
+              "name": "generated-local.mp4",
+              "position": 0.056867,
+              "duration": 1.4299,
+              "paused": false,
+              "firstFrame": {
+                "mediaTime": 0,
+                "presentedFrames": 1,
+                "width": 320,
+                "height": 180
+              },
+              "readyState": 4,
+              "seeking": false
+            },
+            {
+              "name": "generated-local.mp4",
+              "position": 0.002446,
+              "duration": 1.4299,
+              "paused": true,
+              "firstFrame": {
+                "mediaTime": 0,
+                "presentedFrames": 1,
+                "width": 320,
+                "height": 180
+              },
+              "readyState": 4,
+              "seeking": false
+            }
+          ],
+          "loadedImages": [],
+          "karaoke": [
+            {
+              "source": "karaoke",
+              "disposed": false,
+              "available": false,
+              "reason": "missing-track",
+              "trackId": null,
+              "name": null,
+              "assetId": null,
+              "version": null,
+              "loading": false,
+              "transparencyProfile": "index",
+              "crop": false,
+              "width": null,
+              "height": null,
+              "position": null,
+              "retainedAssociationBytes": 0,
+              "graphicsStatus": "not-rendered",
+              "decoder": null,
+              "policy": {
+                "evidence": "docs/research/VIDEO_REMAINING_WORKFLOWS.md",
+                "referenceEquivalent": false,
+                "ownership": "Copied session-only CDG bytes/configuration belong to a track ID; every deck owns a private decoder/canvas. Track/profile versions and load generations prevent stale attachment. No bytes, URLs or graphics are persisted.",
+                "clock": "Original engine.position(deck) seconds, clamped below at zero; pause/seek/reverse/loop are handled by the actual decoder replay. Graphics EOF holds the last decoded frame.",
+                "presentation": "Full300x216 by default; optional288x192 crop. Explicit index or alpha-table transparency. All tile channels; no parity repair. No audio start/play command.",
+                "validation": "Real named Blob/File and at least one complete24-byte packet. Unknown/non-graphics/timing packets remain valid timeline data and are diagnosed, not filtered out."
+              }
+            },
+            {
+              "source": "karaoke",
+              "disposed": false,
+              "available": false,
+              "reason": "missing-track",
+              "trackId": null,
+              "name": null,
+              "assetId": null,
+              "version": null,
+              "loading": false,
+              "transparencyProfile": "index",
+              "crop": false,
+              "width": null,
+              "height": null,
+              "position": null,
+              "retainedAssociationBytes": 0,
+              "graphicsStatus": "not-rendered",
+              "decoder": null,
+              "policy": {
+                "evidence": "docs/research/VIDEO_REMAINING_WORKFLOWS.md",
+                "referenceEquivalent": false,
+                "ownership": "Copied session-only CDG bytes/configuration belong to a track ID; every deck owns a private decoder/canvas. Track/profile versions and load generations prevent stale attachment. No bytes, URLs or graphics are persisted.",
+                "clock": "Original engine.position(deck) seconds, clamped below at zero; pause/seek/reverse/loop are handled by the actual decoder replay. Graphics EOF holds the last decoded frame.",
+                "presentation": "Full300x216 by default; optional288x192 crop. Explicit index or alpha-table transparency. All tile channels; no parity repair. No audio start/play command.",
+                "validation": "Real named Blob/File and at least one complete24-byte packet. Unknown/non-graphics/timing packets remain valid timeline data and are diagnosed, not filtered out."
+              }
+            }
+          ],
+          "pipeline": {
+            "width": 640,
+            "height": 360,
+            "disposed": false,
+            "policy": {
+              "order": "Raw input → two channel FX → channel overlays → transition → master overlays → two master FX",
+              "referenceOrder": "Unverified; this is an independent Open Play routing contract.",
+              "scheduling": "Caller supplies one monotonic time/frameId per processed frame; no frame-rate guarantee."
+            },
+            "overlays": {
+              "left": {
+                "rendered": 0,
+                "skipped": []
+              },
+              "right": {
+                "rendered": 0,
+                "skipped": []
+              },
+              "master": {
+                "rendered": 0,
+                "skipped": []
+              }
+            }
+          },
+          "recording": false,
+          "captureBytes": 0
+        }
+      }
+    },
+    {
+      "name": "Real AudioEngine BufferSource position drives linked video seek/play/pause",
+      "passed": true,
+      "evidence": {
+        "decodedFrame": {
+          "mediaTime": 0.356367,
+          "presentedFrames": 8,
+          "width": 320,
+          "height": 180
+        },
+        "paused": {
+          "position": 0.393333,
+          "enginePosition": 0.39333333333333387
+        },
+        "realBufferSource": true
+      }
+    },
+    {
+      "name": "Actual AudioEngine reverse=true drives paused linked-video seeks to the decreasing engine position",
+      "passed": true,
+      "evidence": {
+        "reverse": true,
+        "rate": 1,
+        "realEngine": true,
+        "samples": [
+          {
+            "enginePosition": 0.9,
+            "expected": 0.8999999999999999,
+            "videoPosition": 0.899999,
+            "paused": true,
+            "readyState": 4,
+            "pixel": [
+              219,
+              30,
+              19,
+              255
+            ]
+          },
+          {
+            "enginePosition": 0.7713333333333329,
+            "expected": 0.7713333333333328,
+            "videoPosition": 0.771333,
+            "paused": true,
+            "readyState": 4,
+            "pixel": [
+              219,
+              30,
+              19,
+              255
+            ]
+          }
+        ],
+        "completion": "Actual seeked events followed by paused decoded readyState>=2 with no further seek; no fixed-delay completion proxy."
+      }
+    },
+    {
+      "name": "A new real engine target reaches decoded pixels after an older active video seek finishes",
+      "passed": true,
+      "evidence": {
+        "phases": [
+          {
+            "phase": "old-seek-started",
+            "wallMs": 3078.9000000953674,
+            "enginePosition": 0.95,
+            "reverse": true,
+            "playing": false,
+            "videoPosition": 0.35,
+            "paused": true,
+            "readyState": 1,
+            "seeking": true
+          },
+          {
+            "phase": "tick-with-old-seek-active",
+            "wallMs": 3081.7000000476837,
+            "enginePosition": 0.95,
+            "reverse": true,
+            "playing": false,
+            "videoPosition": 0.35,
+            "paused": true,
+            "readyState": 1,
+            "seeking": true
+          },
+          {
+            "phase": "old-seek-decoded",
+            "wallMs": 3083.2000000476837,
+            "enginePosition": 0.95,
+            "reverse": true,
+            "playing": false,
+            "videoPosition": 0.35,
+            "paused": true,
+            "readyState": 4,
+            "seeking": false
+          },
+          {
+            "phase": "new-target-pump",
+            "wallMs": 3103,
+            "enginePosition": 0.95,
+            "reverse": true,
+            "playing": false,
+            "videoPosition": 0.95,
+            "paused": true,
+            "readyState": 4,
+            "seeking": false
+          }
+        ],
+        "seekedEvents": [
+          {
+            "phase": "seeked",
+            "wallMs": 3083.0999999046326,
+            "enginePosition": 0.95,
+            "reverse": true,
+            "playing": false,
+            "videoPosition": 0.35,
+            "paused": true,
+            "readyState": 4,
+            "seeking": false
+          },
+          {
+            "phase": "seeked",
+            "wallMs": 3103.9000000953674,
+            "enginePosition": 0.95,
+            "reverse": true,
+            "playing": false,
+            "videoPosition": 0.95,
+            "paused": true,
+            "readyState": 4,
+            "seeking": false
+          }
+        ],
+        "positionToleranceSeconds": 0.1,
+        "completion": "Drain old seek, then pump actual rAF/mixer frames until the distinct new engine target is paused, decoded and within0.1s. No old-frame acceptance.",
+        "before": {
+          "phase": "primed",
+          "wallMs": 3071,
+          "enginePosition": 0.7719999999999999,
+          "reverse": false,
+          "playing": false,
+          "videoPosition": 0.14299,
+          "paused": true,
+          "readyState": 4,
+          "seeking": false,
+          "hash": "64704a67",
+          "pixel": [
+            37,
+            226,
+            237,
+            255
+          ]
+        },
+        "completionBarrier": "Both the new decoded target and its distinct seeked event must complete.",
+        "after": {
+          "phase": "new-target-decoded",
+          "wallMs": 3108.2999999523163,
+          "enginePosition": 0.95,
+          "reverse": true,
+          "playing": false,
+          "videoPosition": 0.95,
+          "paused": true,
+          "readyState": 4,
+          "seeking": false,
+          "hash": "16e9d3b1",
+          "pixel": [
+            36,
+            225,
+            236,
+            204
+          ],
+          "sourcePixel": [
+            219,
+            30,
+            19,
+            255
+          ]
+        }
+      }
+    },
+    {
+      "name": "Actual asynchronous video seek retains the last decoded processed frame until the new frame is decoded",
+      "passed": true,
+      "evidence": {
+        "before": {
+          "hash": "64704a67",
+          "pixel": [
+            37,
+            226,
+            237,
+            255
+          ],
+          "readyState": 4,
+          "currentTime": 0.14299
+        },
+        "seekStarted": {
+          "readyState": 1,
+          "seeking": true,
+          "currentTime": 0.95
+        },
+        "during": {
+          "hash": "64704a67",
+          "pixel": [
+            37,
+            226,
+            237,
+            255
+          ],
+          "readyState": 1,
+          "seeking": true
+        },
+        "after": {
+          "hash": "dc9ff30c",
+          "pixel": [
+            36,
+            225,
+            236,
+            255
+          ],
+          "readyState": 4,
+          "currentTime": 0.95
+        }
+      }
+    },
+    {
+      "name": "Twelve actual linked reverse renders preserve decoded video pixels and allow asynchronous seek completion",
+      "passed": true,
+      "evidence": {
+        "samples": [
+          {
+            "frame": 0,
+            "enginePosition": 1.143253333333333,
+            "videoPosition": 1.14392,
+            "paused": true,
+            "seeking": true,
+            "readyState": 1,
+            "pixel": [
+              37,
+              226,
+              237,
+              204
+            ],
+            "hash": "14c26fad"
+          },
+          {
+            "frame": 1,
+            "enginePosition": 1.1325866666666666,
+            "videoPosition": 1.14392,
+            "paused": true,
+            "seeking": false,
+            "readyState": 4,
+            "pixel": [
+              36,
+              225,
+              236,
+              204
+            ],
+            "hash": "a2a88eb6"
+          },
+          {
+            "frame": 2,
+            "enginePosition": 1.127253333333333,
+            "videoPosition": 1.14392,
+            "paused": true,
+            "seeking": false,
+            "readyState": 4,
+            "pixel": [
+              36,
+              225,
+              236,
+              204
+            ],
+            "hash": "a2a88eb6"
+          },
+          {
+            "frame": 3,
+            "enginePosition": 1.1165866666666666,
+            "videoPosition": 1.127253,
+            "paused": true,
+            "seeking": true,
+            "readyState": 1,
+            "pixel": [
+              36,
+              225,
+              236,
+              204
+            ],
+            "hash": "a2a88eb6"
+          },
+          {
+            "frame": 4,
+            "enginePosition": 1.111253333333333,
+            "videoPosition": 1.127253,
+            "paused": true,
+            "seeking": false,
+            "readyState": 4,
+            "pixel": [
+              36,
+              225,
+              236,
+              204
+            ],
+            "hash": "8633b5b"
+          },
+          {
+            "frame": 5,
+            "enginePosition": 1.1005866666666666,
+            "videoPosition": 1.105919,
+            "paused": true,
+            "seeking": true,
+            "readyState": 1,
+            "pixel": [
+              36,
+              225,
+              236,
+              204
+            ],
+            "hash": "8633b5b"
+          },
+          {
+            "frame": 6,
+            "enginePosition": 1.095253333333333,
+            "videoPosition": 1.105919,
+            "paused": true,
+            "seeking": false,
+            "readyState": 4,
+            "pixel": [
+              36,
+              225,
+              236,
+              204
+            ],
+            "hash": "4145f68d"
+          },
+          {
+            "frame": 7,
+            "enginePosition": 1.0845866666666666,
+            "videoPosition": 1.105919,
+            "paused": true,
+            "seeking": false,
+            "readyState": 4,
+            "pixel": [
+              36,
+              225,
+              236,
+              204
+            ],
+            "hash": "4145f68d"
+          },
+          {
+            "frame": 8,
+            "enginePosition": 1.079253333333333,
+            "videoPosition": 1.084586,
+            "paused": true,
+            "seeking": true,
+            "readyState": 1,
+            "pixel": [
+              36,
+              225,
+              236,
+              204
+            ],
+            "hash": "4145f68d"
+          },
+          {
+            "frame": 9,
+            "enginePosition": 1.0685866666666666,
+            "videoPosition": 1.084586,
+            "paused": true,
+            "seeking": false,
+            "readyState": 4,
+            "pixel": [
+              36,
+              225,
+              236,
+              204
+            ],
+            "hash": "53003d4"
+          },
+          {
+            "frame": 10,
+            "enginePosition": 1.0632533333333334,
+            "videoPosition": 1.084586,
+            "paused": true,
+            "seeking": false,
+            "readyState": 4,
+            "pixel": [
+              36,
+              225,
+              236,
+              204
+            ],
+            "hash": "53003d4"
+          },
+          {
+            "frame": 11,
+            "enginePosition": 0.84992,
+            "videoPosition": 0.855253,
+            "paused": true,
+            "seeking": true,
+            "readyState": 1,
+            "pixel": [
+              36,
+              225,
+              236,
+              204
+            ],
+            "hash": "53003d4"
+          }
+        ],
+        "seekedEvents": [
+          {
+            "wallMs": 3220.4000000953674,
+            "currentTime": 1.14392,
+            "readyState": 4
+          },
+          {
+            "wallMs": 3244.5999999046326,
+            "currentTime": 1.127253,
+            "readyState": 4
+          },
+          {
+            "wallMs": 3260.5999999046326,
+            "currentTime": 1.105919,
+            "readyState": 4
+          },
+          {
+            "wallMs": 3284.9000000953674,
+            "currentTime": 1.084586,
+            "readyState": 4
+          },
+          {
+            "wallMs": 3504,
+            "currentTime": 0.855253,
+            "readyState": 4
+          }
+        ],
+        "inLoopSeekCompletions": 4,
+        "afterDecode": {
+          "currentTime": 0.855253,
+          "readyState": 4
+        },
+        "scope": "Twelve rAF-paced actual engine/mixer renders with synchronous pixel readback; no sustained frame-rate claim."
+      }
+    },
+    {
+      "name": "Mixer records processed GPU canvas plus actual master audio and rejects resolution change during capture",
+      "passed": true,
+      "evidence": {
+        "bytes": 52081,
+        "mime": "video/webm;codecs=vp9,opus",
+        "processedFrames": 36,
+        "wallMs": 1404.1000001430511,
+        "observedProcessedFramesPerSecond": 25.63919948460386,
+        "engineCaptureAudioTracks": [
+          {
+            "kind": "audio",
+            "readyState": "live",
+            "enabled": true
+          }
+        ],
+        "scope": "Actual mixer tick, GPU pipeline and MediaRecorder run; requested30fps is not a measured frame-rate guarantee."
+      }
+    },
+    {
+      "name": "Captured result decodes actual video frames with processed cyan pixels and overlay evidence",
+      "passed": true,
+      "evidence": {
+        "width": 640,
+        "height": 360,
+        "duration": 1.368,
+        "readyState": 4,
+        "firstFrame": {
+          "mediaTime": 0,
+          "presentedFrames": 1,
+          "width": 640,
+          "height": 360
+        },
+        "secondFrame": {
+          "mediaTime": 0.067,
+          "presentedFrames": 2,
+          "width": 640,
+          "height": 360
+        },
+        "muted": true,
+        "audioDecodedBytes": 5754,
+        "corner": [
+          35,
+          227,
+          233,
+          254
+        ],
+        "magentaOverlayPixels": 788
+      }
+    },
+    {
+      "name": "Captured result audio really decodes nonzero440Hz engine audio with stream metadata",
+      "passed": true,
+      "evidence": {
+        "channels": 2,
+        "sampleRate": 48000,
+        "duration": 1.38,
+        "rms": 0.031098107702571876,
+        "tone440": 0.04409019458464784,
+        "tone880": 6.819851431530525e-7,
+        "claim": "Actual audio decode from the captured video container, not just presence of an input stream track."
+      }
+    },
+    {
+      "name": "Stopped mixer changes to720p, renders actual output and rejects unsupported dimensions",
+      "passed": true,
+      "evidence": {
+        "width": 1280,
+        "height": 720,
+        "pixel": [
+          36,
+          225,
+          236,
+          255
+        ],
+        "frames": 78,
+        "unsupportedRejected": true
+      }
+    },
+    {
+      "name": "Stopped mixer changes from720p to1080p and renders/readbacks an actual processed output frame",
+      "passed": true,
+      "evidence": {
+        "width": 1920,
+        "height": 1080,
+        "pixel": [
+          35,
+          224,
+          235,
+          255
+        ],
+        "frames": 79,
+        "renderAndReadbackMs": 83.70000004768372,
+        "scope": "One actual processed 1080p render with synchronous pixel readback after720p; no frame-rate or sustained-load guarantee."
+      }
+    },
+    {
+      "name": "Mixer disposal stops actual input videos and rejects new loads",
+      "passed": true,
+      "evidence": {
+        "frames": 79,
+        "inputsPaused": [
+          true,
+          true
+        ],
+        "newLoadRejected": true
+      }
+    }
+  ],
+  "notifications": [],
+  "audioBands": [
+    {
+      "bass": 0.05780678821581167,
+      "mid": 0.003910634797812621,
+      "treble": 0.00005589827453524903,
+      "level": 0.1471503011631177,
+      "audioAvailable": true
+    },
+    {
+      "bass": 0.00040131297573025156,
+      "mid": 0.0017969760649530003,
+      "treble": 0.058506617685912365,
+      "level": 0.14992670076482073,
+      "audioAvailable": true
+    }
+  ],
+  "fixture": {
+    "bytes": 56163,
+    "mime": "video/mp4;codecs=avc1.420015,mp4a.40.2",
+    "drawnCanvasFrames": 166,
+    "measuredAudioClockSeconds": 1.408,
+    "streamVideoTracks": 1,
+    "streamAudioTracks": 1,
+    "claim": "Canvas frame draws are not a claim of encoded frame count or30fps."
+  },
+  "fixtureDownloads": {
+    "video": {
+      "filename": "generated-local.mp4",
+      "bytes": 56163,
+      "mime": "video/mp4;codecs=avc1.420015,mp4a.40.2",
+      "publicAnchor": "download-video-fixture",
+      "ownership": "Original harness-generated media only; retained until rerun or page close."
+    },
+    "overlay": {
+      "filename": "open-play-generated-overlay.png",
+      "bytes": 931,
+      "mime": "image/png",
+      "publicAnchor": "download-overlay-fixture",
+      "ownership": "Original harness-generated media only; retained until rerun or page close."
+    }
+  },
+  "reverseTransport": {
+    "phases": [
+      {
+        "phase": "before-draining-prior-seek",
+        "wallMs": 2718.5,
+        "audioTime": 2.528,
+        "linked": false,
+        "video": {
+          "paused": true,
+          "currentTime": 0.393333,
+          "seeking": true,
+          "readyState": 1,
+          "duration": 1.4299,
+          "playbackRate": 1,
+          "error": null
+        },
+        "deck": {
+          "reverse": false,
+          "playing": true,
+          "processing": false,
+          "position": 0.39333333333333387,
+          "rate": 1,
+          "enginePosition": 0.39333333333333387
+        },
+        "mixer": {
+          "frames": 10,
+          "error": null,
+          "width": 640,
+          "height": 360,
+          "lastRenderMs": 2.9000000953674316,
+          "inputs": [
+            {
+              "name": "generated-local.mp4",
+              "position": 0.393333,
+              "duration": 1.4299,
+              "paused": true,
+              "firstFrame": {
+                "mediaTime": 0,
+                "presentedFrames": 1,
+                "width": 320,
+                "height": 180
+              },
+              "readyState": 1,
+              "seeking": true
+            },
+            {
+              "name": "generated-local.mp4",
+              "position": 0.002446,
+              "duration": 1.4299,
+              "paused": true,
+              "firstFrame": {
+                "mediaTime": 0,
+                "presentedFrames": 1,
+                "width": 320,
+                "height": 180
+              },
+              "readyState": 4,
+              "seeking": false
+            }
+          ],
+          "loadedImages": [],
+          "karaoke": [
+            {
+              "source": "karaoke",
+              "disposed": false,
+              "available": false,
+              "reason": "missing-pair",
+              "trackId": "pipeline-harness-real-audio",
+              "name": null,
+              "assetId": null,
+              "version": null,
+              "loading": false,
+              "transparencyProfile": "index",
+              "crop": false,
+              "width": null,
+              "height": null,
+              "position": null,
+              "retainedAssociationBytes": 0,
+              "graphicsStatus": "not-rendered",
+              "decoder": null,
+              "policy": {
+                "evidence": "docs/research/VIDEO_REMAINING_WORKFLOWS.md",
+                "referenceEquivalent": false,
+                "ownership": "Copied session-only CDG bytes/configuration belong to a track ID; every deck owns a private decoder/canvas. Track/profile versions and load generations prevent stale attachment. No bytes, URLs or graphics are persisted.",
+                "clock": "Original engine.position(deck) seconds, clamped below at zero; pause/seek/reverse/loop are handled by the actual decoder replay. Graphics EOF holds the last decoded frame.",
+                "presentation": "Full300x216 by default; optional288x192 crop. Explicit index or alpha-table transparency. All tile channels; no parity repair. No audio start/play command.",
+                "validation": "Real named Blob/File and at least one complete24-byte packet. Unknown/non-graphics/timing packets remain valid timeline data and are diagnosed, not filtered out."
+              }
+            },
+            {
+              "source": "karaoke",
+              "disposed": false,
+              "available": false,
+              "reason": "missing-track",
+              "trackId": null,
+              "name": null,
+              "assetId": null,
+              "version": null,
+              "loading": false,
+              "transparencyProfile": "index",
+              "crop": false,
+              "width": null,
+              "height": null,
+              "position": null,
+              "retainedAssociationBytes": 0,
+              "graphicsStatus": "not-rendered",
+              "decoder": null,
+              "policy": {
+                "evidence": "docs/research/VIDEO_REMAINING_WORKFLOWS.md",
+                "referenceEquivalent": false,
+                "ownership": "Copied session-only CDG bytes/configuration belong to a track ID; every deck owns a private decoder/canvas. Track/profile versions and load generations prevent stale attachment. No bytes, URLs or graphics are persisted.",
+                "clock": "Original engine.position(deck) seconds, clamped below at zero; pause/seek/reverse/loop are handled by the actual decoder replay. Graphics EOF holds the last decoded frame.",
+                "presentation": "Full300x216 by default; optional288x192 crop. Explicit index or alpha-table transparency. All tile channels; no parity repair. No audio start/play command.",
+                "validation": "Real named Blob/File and at least one complete24-byte packet. Unknown/non-graphics/timing packets remain valid timeline data and are diagnosed, not filtered out."
+              }
+            }
+          ],
+          "pipeline": {
+            "width": 640,
+            "height": 360,
+            "disposed": false,
+            "policy": {
+              "order": "Raw input → two channel FX → channel overlays → transition → master overlays → two master FX",
+              "referenceOrder": "Unverified; this is an independent Open Play routing contract.",
+              "scheduling": "Caller supplies one monotonic time/frameId per processed frame; no frame-rate guarantee."
+            },
+            "overlays": {
+              "left": {
+                "rendered": 0,
+                "skipped": []
+              },
+              "right": {
+                "rendered": 0,
+                "skipped": []
+              },
+              "master": {
+                "rendered": 0,
+                "skipped": []
+              }
+            }
+          },
+          "recording": false,
+          "captureBytes": 0
+        }
+      },
+      {
+        "phase": "after-draining-prior-seek",
+        "wallMs": 2722.4000000953674,
+        "audioTime": 2.533333333333333,
+        "linked": false,
+        "video": {
+          "paused": true,
+          "currentTime": 0.393333,
+          "seeking": false,
+          "readyState": 4,
+          "duration": 1.4299,
+          "playbackRate": 1,
+          "error": null
+        },
+        "deck": {
+          "reverse": false,
+          "playing": true,
+          "processing": false,
+          "position": 0.39333333333333387,
+          "rate": 1,
+          "enginePosition": 0.39333333333333387
+        },
+        "mixer": {
+          "frames": 10,
+          "error": null,
+          "width": 640,
+          "height": 360,
+          "lastRenderMs": 2.9000000953674316,
+          "inputs": [
+            {
+              "name": "generated-local.mp4",
+              "position": 0.393333,
+              "duration": 1.4299,
+              "paused": true,
+              "firstFrame": {
+                "mediaTime": 0,
+                "presentedFrames": 1,
+                "width": 320,
+                "height": 180
+              },
+              "readyState": 4,
+              "seeking": false
+            },
+            {
+              "name": "generated-local.mp4",
+              "position": 0.002446,
+              "duration": 1.4299,
+              "paused": true,
+              "firstFrame": {
+                "mediaTime": 0,
+                "presentedFrames": 1,
+                "width": 320,
+                "height": 180
+              },
+              "readyState": 4,
+              "seeking": false
+            }
+          ],
+          "loadedImages": [],
+          "karaoke": [
+            {
+              "source": "karaoke",
+              "disposed": false,
+              "available": false,
+              "reason": "missing-pair",
+              "trackId": "pipeline-harness-real-audio",
+              "name": null,
+              "assetId": null,
+              "version": null,
+              "loading": false,
+              "transparencyProfile": "index",
+              "crop": false,
+              "width": null,
+              "height": null,
+              "position": null,
+              "retainedAssociationBytes": 0,
+              "graphicsStatus": "not-rendered",
+              "decoder": null,
+              "policy": {
+                "evidence": "docs/research/VIDEO_REMAINING_WORKFLOWS.md",
+                "referenceEquivalent": false,
+                "ownership": "Copied session-only CDG bytes/configuration belong to a track ID; every deck owns a private decoder/canvas. Track/profile versions and load generations prevent stale attachment. No bytes, URLs or graphics are persisted.",
+                "clock": "Original engine.position(deck) seconds, clamped below at zero; pause/seek/reverse/loop are handled by the actual decoder replay. Graphics EOF holds the last decoded frame.",
+                "presentation": "Full300x216 by default; optional288x192 crop. Explicit index or alpha-table transparency. All tile channels; no parity repair. No audio start/play command.",
+                "validation": "Real named Blob/File and at least one complete24-byte packet. Unknown/non-graphics/timing packets remain valid timeline data and are diagnosed, not filtered out."
+              }
+            },
+            {
+              "source": "karaoke",
+              "disposed": false,
+              "available": false,
+              "reason": "missing-track",
+              "trackId": null,
+              "name": null,
+              "assetId": null,
+              "version": null,
+              "loading": false,
+              "transparencyProfile": "index",
+              "crop": false,
+              "width": null,
+              "height": null,
+              "position": null,
+              "retainedAssociationBytes": 0,
+              "graphicsStatus": "not-rendered",
+              "decoder": null,
+              "policy": {
+                "evidence": "docs/research/VIDEO_REMAINING_WORKFLOWS.md",
+                "referenceEquivalent": false,
+                "ownership": "Copied session-only CDG bytes/configuration belong to a track ID; every deck owns a private decoder/canvas. Track/profile versions and load generations prevent stale attachment. No bytes, URLs or graphics are persisted.",
+                "clock": "Original engine.position(deck) seconds, clamped below at zero; pause/seek/reverse/loop are handled by the actual decoder replay. Graphics EOF holds the last decoded frame.",
+                "presentation": "Full300x216 by default; optional288x192 crop. Explicit index or alpha-table transparency. All tile channels; no parity repair. No audio start/play command.",
+                "validation": "Real named Blob/File and at least one complete24-byte packet. Unknown/non-graphics/timing packets remain valid timeline data and are diagnosed, not filtered out."
+              }
+            }
+          ],
+          "pipeline": {
+            "width": 640,
+            "height": 360,
+            "disposed": false,
+            "policy": {
+              "order": "Raw input → two channel FX → channel overlays → transition → master overlays → two master FX",
+              "referenceOrder": "Unverified; this is an independent Open Play routing contract.",
+              "scheduling": "Caller supplies one monotonic time/frameId per processed frame; no frame-rate guarantee."
+            },
+            "overlays": {
+              "left": {
+                "rendered": 0,
+                "skipped": []
+              },
+              "right": {
+                "rendered": 0,
+                "skipped": []
+              },
+              "master": {
+                "rendered": 0,
+                "skipped": []
+              }
+            }
+          },
+          "recording": false,
+          "captureBytes": 0
+        }
+      },
+      {
+        "phase": "before-engine-reverse",
+        "wallMs": 2722.4000000953674,
+        "audioTime": 2.533333333333333,
+        "linked": true,
+        "video": {
+          "paused": true,
+          "currentTime": 0.393333,
+          "seeking": false,
+          "readyState": 4,
+          "duration": 1.4299,
+          "playbackRate": 1,
+          "error": null
+        },
+        "deck": {
+          "reverse": false,
+          "playing": true,
+          "processing": false,
+          "position": 0.39333333333333387,
+          "rate": 1,
+          "enginePosition": 0.39333333333333387
+        },
+        "mixer": {
+          "frames": 10,
+          "error": null,
+          "width": 640,
+          "height": 360,
+          "lastRenderMs": 2.9000000953674316,
+          "inputs": [
+            {
+              "name": "generated-local.mp4",
+              "position": 0.393333,
+              "duration": 1.4299,
+              "paused": true,
+              "firstFrame": {
+                "mediaTime": 0,
+                "presentedFrames": 1,
+                "width": 320,
+                "height": 180
+              },
+              "readyState": 4,
+              "seeking": false
+            },
+            {
+              "name": "generated-local.mp4",
+              "position": 0.002446,
+              "duration": 1.4299,
+              "paused": true,
+              "firstFrame": {
+                "mediaTime": 0,
+                "presentedFrames": 1,
+                "width": 320,
+                "height": 180
+              },
+              "readyState": 4,
+              "seeking": false
+            }
+          ],
+          "loadedImages": [],
+          "karaoke": [
+            {
+              "source": "karaoke",
+              "disposed": false,
+              "available": false,
+              "reason": "missing-pair",
+              "trackId": "pipeline-harness-real-audio",
+              "name": null,
+              "assetId": null,
+              "version": null,
+              "loading": false,
+              "transparencyProfile": "index",
+              "crop": false,
+              "width": null,
+              "height": null,
+              "position": null,
+              "retainedAssociationBytes": 0,
+              "graphicsStatus": "not-rendered",
+              "decoder": null,
+              "policy": {
+                "evidence": "docs/research/VIDEO_REMAINING_WORKFLOWS.md",
+                "referenceEquivalent": false,
+                "ownership": "Copied session-only CDG bytes/configuration belong to a track ID; every deck owns a private decoder/canvas. Track/profile versions and load generations prevent stale attachment. No bytes, URLs or graphics are persisted.",
+                "clock": "Original engine.position(deck) seconds, clamped below at zero; pause/seek/reverse/loop are handled by the actual decoder replay. Graphics EOF holds the last decoded frame.",
+                "presentation": "Full300x216 by default; optional288x192 crop. Explicit index or alpha-table transparency. All tile channels; no parity repair. No audio start/play command.",
+                "validation": "Real named Blob/File and at least one complete24-byte packet. Unknown/non-graphics/timing packets remain valid timeline data and are diagnosed, not filtered out."
+              }
+            },
+            {
+              "source": "karaoke",
+              "disposed": false,
+              "available": false,
+              "reason": "missing-track",
+              "trackId": null,
+              "name": null,
+              "assetId": null,
+              "version": null,
+              "loading": false,
+              "transparencyProfile": "index",
+              "crop": false,
+              "width": null,
+              "height": null,
+              "position": null,
+              "retainedAssociationBytes": 0,
+              "graphicsStatus": "not-rendered",
+              "decoder": null,
+              "policy": {
+                "evidence": "docs/research/VIDEO_REMAINING_WORKFLOWS.md",
+                "referenceEquivalent": false,
+                "ownership": "Copied session-only CDG bytes/configuration belong to a track ID; every deck owns a private decoder/canvas. Track/profile versions and load generations prevent stale attachment. No bytes, URLs or graphics are persisted.",
+                "clock": "Original engine.position(deck) seconds, clamped below at zero; pause/seek/reverse/loop are handled by the actual decoder replay. Graphics EOF holds the last decoded frame.",
+                "presentation": "Full300x216 by default; optional288x192 crop. Explicit index or alpha-table transparency. All tile channels; no parity repair. No audio start/play command.",
+                "validation": "Real named Blob/File and at least one complete24-byte packet. Unknown/non-graphics/timing packets remain valid timeline data and are diagnosed, not filtered out."
+              }
+            }
+          ],
+          "pipeline": {
+            "width": 640,
+            "height": 360,
+            "disposed": false,
+            "policy": {
+              "order": "Raw input → two channel FX → channel overlays → transition → master overlays → two master FX",
+              "referenceOrder": "Unverified; this is an independent Open Play routing contract.",
+              "scheduling": "Caller supplies one monotonic time/frameId per processed frame; no frame-rate guarantee."
+            },
+            "overlays": {
+              "left": {
+                "rendered": 0,
+                "skipped": []
+              },
+              "right": {
+                "rendered": 0,
+                "skipped": []
+              },
+              "master": {
+                "rendered": 0,
+                "skipped": []
+              }
+            }
+          },
+          "recording": false,
+          "captureBytes": 0
+        }
+      },
+      {
+        "phase": "after-engine-reverse",
+        "wallMs": 2723.0999999046326,
+        "audioTime": 2.533333333333333,
+        "linked": true,
+        "video": {
+          "paused": true,
+          "currentTime": 0.393333,
+          "seeking": false,
+          "readyState": 4,
+          "duration": 1.4299,
+          "playbackRate": 1,
+          "error": null
+        },
+        "deck": {
+          "reverse": true,
+          "playing": true,
+          "processing": false,
+          "position": 0.9,
+          "rate": 1,
+          "enginePosition": 0.9
+        },
+        "mixer": {
+          "frames": 10,
+          "error": null,
+          "width": 640,
+          "height": 360,
+          "lastRenderMs": 2.9000000953674316,
+          "inputs": [
+            {
+              "name": "generated-local.mp4",
+              "position": 0.393333,
+              "duration": 1.4299,
+              "paused": true,
+              "firstFrame": {
+                "mediaTime": 0,
+                "presentedFrames": 1,
+                "width": 320,
+                "height": 180
+              },
+              "readyState": 4,
+              "seeking": false
+            },
+            {
+              "name": "generated-local.mp4",
+              "position": 0.002446,
+              "duration": 1.4299,
+              "paused": true,
+              "firstFrame": {
+                "mediaTime": 0,
+                "presentedFrames": 1,
+                "width": 320,
+                "height": 180
+              },
+              "readyState": 4,
+              "seeking": false
+            }
+          ],
+          "loadedImages": [],
+          "karaoke": [
+            {
+              "source": "karaoke",
+              "disposed": false,
+              "available": false,
+              "reason": "missing-pair",
+              "trackId": "pipeline-harness-real-audio",
+              "name": null,
+              "assetId": null,
+              "version": null,
+              "loading": false,
+              "transparencyProfile": "index",
+              "crop": false,
+              "width": null,
+              "height": null,
+              "position": null,
+              "retainedAssociationBytes": 0,
+              "graphicsStatus": "not-rendered",
+              "decoder": null,
+              "policy": {
+                "evidence": "docs/research/VIDEO_REMAINING_WORKFLOWS.md",
+                "referenceEquivalent": false,
+                "ownership": "Copied session-only CDG bytes/configuration belong to a track ID; every deck owns a private decoder/canvas. Track/profile versions and load generations prevent stale attachment. No bytes, URLs or graphics are persisted.",
+                "clock": "Original engine.position(deck) seconds, clamped below at zero; pause/seek/reverse/loop are handled by the actual decoder replay. Graphics EOF holds the last decoded frame.",
+                "presentation": "Full300x216 by default; optional288x192 crop. Explicit index or alpha-table transparency. All tile channels; no parity repair. No audio start/play command.",
+                "validation": "Real named Blob/File and at least one complete24-byte packet. Unknown/non-graphics/timing packets remain valid timeline data and are diagnosed, not filtered out."
+              }
+            },
+            {
+              "source": "karaoke",
+              "disposed": false,
+              "available": false,
+              "reason": "missing-track",
+              "trackId": null,
+              "name": null,
+              "assetId": null,
+              "version": null,
+              "loading": false,
+              "transparencyProfile": "index",
+              "crop": false,
+              "width": null,
+              "height": null,
+              "position": null,
+              "retainedAssociationBytes": 0,
+              "graphicsStatus": "not-rendered",
+              "decoder": null,
+              "policy": {
+                "evidence": "docs/research/VIDEO_REMAINING_WORKFLOWS.md",
+                "referenceEquivalent": false,
+                "ownership": "Copied session-only CDG bytes/configuration belong to a track ID; every deck owns a private decoder/canvas. Track/profile versions and load generations prevent stale attachment. No bytes, URLs or graphics are persisted.",
+                "clock": "Original engine.position(deck) seconds, clamped below at zero; pause/seek/reverse/loop are handled by the actual decoder replay. Graphics EOF holds the last decoded frame.",
+                "presentation": "Full300x216 by default; optional288x192 crop. Explicit index or alpha-table transparency. All tile channels; no parity repair. No audio start/play command.",
+                "validation": "Real named Blob/File and at least one complete24-byte packet. Unknown/non-graphics/timing packets remain valid timeline data and are diagnosed, not filtered out."
+              }
+            }
+          ],
+          "pipeline": {
+            "width": 640,
+            "height": 360,
+            "disposed": false,
+            "policy": {
+              "order": "Raw input → two channel FX → channel overlays → transition → master overlays → two master FX",
+              "referenceOrder": "Unverified; this is an independent Open Play routing contract.",
+              "scheduling": "Caller supplies one monotonic time/frameId per processed frame; no frame-rate guarantee."
+            },
+            "overlays": {
+              "left": {
+                "rendered": 0,
+                "skipped": []
+              },
+              "right": {
+                "rendered": 0,
+                "skipped": []
+              },
+              "master": {
+                "rendered": 0,
+                "skipped": []
+              }
+            }
+          },
+          "recording": false,
+          "captureBytes": 0
+        }
+      },
+      {
+        "phase": "sample0:before-tick",
+        "wallMs": 2723.2999999523163,
+        "audioTime": 2.533333333333333,
+        "linked": true,
+        "video": {
+          "paused": true,
+          "currentTime": 0.393333,
+          "seeking": false,
+          "readyState": 4,
+          "duration": 1.4299,
+          "playbackRate": 1,
+          "error": null
+        },
+        "deck": {
+          "reverse": true,
+          "playing": true,
+          "processing": false,
+          "position": 0.9,
+          "rate": 1,
+          "enginePosition": 0.9
+        },
+        "mixer": {
+          "frames": 10,
+          "error": null,
+          "width": 640,
+          "height": 360,
+          "lastRenderMs": 2.9000000953674316,
+          "inputs": [
+            {
+              "name": "generated-local.mp4",
+              "position": 0.393333,
+              "duration": 1.4299,
+              "paused": true,
+              "firstFrame": {
+                "mediaTime": 0,
+                "presentedFrames": 1,
+                "width": 320,
+                "height": 180
+              },
+              "readyState": 4,
+              "seeking": false
+            },
+            {
+              "name": "generated-local.mp4",
+              "position": 0.002446,
+              "duration": 1.4299,
+              "paused": true,
+              "firstFrame": {
+                "mediaTime": 0,
+                "presentedFrames": 1,
+                "width": 320,
+                "height": 180
+              },
+              "readyState": 4,
+              "seeking": false
+            }
+          ],
+          "loadedImages": [],
+          "karaoke": [
+            {
+              "source": "karaoke",
+              "disposed": false,
+              "available": false,
+              "reason": "missing-pair",
+              "trackId": "pipeline-harness-real-audio",
+              "name": null,
+              "assetId": null,
+              "version": null,
+              "loading": false,
+              "transparencyProfile": "index",
+              "crop": false,
+              "width": null,
+              "height": null,
+              "position": null,
+              "retainedAssociationBytes": 0,
+              "graphicsStatus": "not-rendered",
+              "decoder": null,
+              "policy": {
+                "evidence": "docs/research/VIDEO_REMAINING_WORKFLOWS.md",
+                "referenceEquivalent": false,
+                "ownership": "Copied session-only CDG bytes/configuration belong to a track ID; every deck owns a private decoder/canvas. Track/profile versions and load generations prevent stale attachment. No bytes, URLs or graphics are persisted.",
+                "clock": "Original engine.position(deck) seconds, clamped below at zero; pause/seek/reverse/loop are handled by the actual decoder replay. Graphics EOF holds the last decoded frame.",
+                "presentation": "Full300x216 by default; optional288x192 crop. Explicit index or alpha-table transparency. All tile channels; no parity repair. No audio start/play command.",
+                "validation": "Real named Blob/File and at least one complete24-byte packet. Unknown/non-graphics/timing packets remain valid timeline data and are diagnosed, not filtered out."
+              }
+            },
+            {
+              "source": "karaoke",
+              "disposed": false,
+              "available": false,
+              "reason": "missing-track",
+              "trackId": null,
+              "name": null,
+              "assetId": null,
+              "version": null,
+              "loading": false,
+              "transparencyProfile": "index",
+              "crop": false,
+              "width": null,
+              "height": null,
+              "position": null,
+              "retainedAssociationBytes": 0,
+              "graphicsStatus": "not-rendered",
+              "decoder": null,
+              "policy": {
+                "evidence": "docs/research/VIDEO_REMAINING_WORKFLOWS.md",
+                "referenceEquivalent": false,
+                "ownership": "Copied session-only CDG bytes/configuration belong to a track ID; every deck owns a private decoder/canvas. Track/profile versions and load generations prevent stale attachment. No bytes, URLs or graphics are persisted.",
+                "clock": "Original engine.position(deck) seconds, clamped below at zero; pause/seek/reverse/loop are handled by the actual decoder replay. Graphics EOF holds the last decoded frame.",
+                "presentation": "Full300x216 by default; optional288x192 crop. Explicit index or alpha-table transparency. All tile channels; no parity repair. No audio start/play command.",
+                "validation": "Real named Blob/File and at least one complete24-byte packet. Unknown/non-graphics/timing packets remain valid timeline data and are diagnosed, not filtered out."
+              }
+            }
+          ],
+          "pipeline": {
+            "width": 640,
+            "height": 360,
+            "disposed": false,
+            "policy": {
+              "order": "Raw input → two channel FX → channel overlays → transition → master overlays → two master FX",
+              "referenceOrder": "Unverified; this is an independent Open Play routing contract.",
+              "scheduling": "Caller supplies one monotonic time/frameId per processed frame; no frame-rate guarantee."
+            },
+            "overlays": {
+              "left": {
+                "rendered": 0,
+                "skipped": []
+              },
+              "right": {
+                "rendered": 0,
+                "skipped": []
+              },
+              "master": {
+                "rendered": 0,
+                "skipped": []
+              }
+            }
+          },
+          "recording": false,
+          "captureBytes": 0
+        }
+      },
+      {
+        "phase": "sample0:after-tick",
+        "wallMs": 2726.5999999046326,
+        "audioTime": 2.538666666666667,
+        "linked": true,
+        "video": {
+          "paused": true,
+          "currentTime": 0.899999,
+          "seeking": true,
+          "readyState": 1,
+          "duration": 1.4299,
+          "playbackRate": 1,
+          "error": null
+        },
+        "deck": {
+          "reverse": true,
+          "playing": true,
+          "processing": false,
+          "position": 0.9,
+          "rate": 1,
+          "enginePosition": 0.9
+        },
+        "mixer": {
+          "frames": 11,
+          "error": null,
+          "width": 640,
+          "height": 360,
+          "lastRenderMs": 3.299999952316284,
+          "inputs": [
+            {
+              "name": "generated-local.mp4",
+              "position": 0.899999,
+              "duration": 1.4299,
+              "paused": true,
+              "firstFrame": {
+                "mediaTime": 0,
+                "presentedFrames": 1,
+                "width": 320,
+                "height": 180
+              },
+              "readyState": 1,
+              "seeking": true
+            },
+            {
+              "name": "generated-local.mp4",
+              "position": 0.002446,
+              "duration": 1.4299,
+              "paused": true,
+              "firstFrame": {
+                "mediaTime": 0,
+                "presentedFrames": 1,
+                "width": 320,
+                "height": 180
+              },
+              "readyState": 4,
+              "seeking": false
+            }
+          ],
+          "loadedImages": [],
+          "karaoke": [
+            {
+              "source": "karaoke",
+              "disposed": false,
+              "available": false,
+              "reason": "missing-pair",
+              "trackId": "pipeline-harness-real-audio",
+              "name": null,
+              "assetId": null,
+              "version": null,
+              "loading": false,
+              "transparencyProfile": "index",
+              "crop": false,
+              "width": null,
+              "height": null,
+              "position": null,
+              "retainedAssociationBytes": 0,
+              "graphicsStatus": "not-rendered",
+              "decoder": null,
+              "policy": {
+                "evidence": "docs/research/VIDEO_REMAINING_WORKFLOWS.md",
+                "referenceEquivalent": false,
+                "ownership": "Copied session-only CDG bytes/configuration belong to a track ID; every deck owns a private decoder/canvas. Track/profile versions and load generations prevent stale attachment. No bytes, URLs or graphics are persisted.",
+                "clock": "Original engine.position(deck) seconds, clamped below at zero; pause/seek/reverse/loop are handled by the actual decoder replay. Graphics EOF holds the last decoded frame.",
+                "presentation": "Full300x216 by default; optional288x192 crop. Explicit index or alpha-table transparency. All tile channels; no parity repair. No audio start/play command.",
+                "validation": "Real named Blob/File and at least one complete24-byte packet. Unknown/non-graphics/timing packets remain valid timeline data and are diagnosed, not filtered out."
+              }
+            },
+            {
+              "source": "karaoke",
+              "disposed": false,
+              "available": false,
+              "reason": "missing-track",
+              "trackId": null,
+              "name": null,
+              "assetId": null,
+              "version": null,
+              "loading": false,
+              "transparencyProfile": "index",
+              "crop": false,
+              "width": null,
+              "height": null,
+              "position": null,
+              "retainedAssociationBytes": 0,
+              "graphicsStatus": "not-rendered",
+              "decoder": null,
+              "policy": {
+                "evidence": "docs/research/VIDEO_REMAINING_WORKFLOWS.md",
+                "referenceEquivalent": false,
+                "ownership": "Copied session-only CDG bytes/configuration belong to a track ID; every deck owns a private decoder/canvas. Track/profile versions and load generations prevent stale attachment. No bytes, URLs or graphics are persisted.",
+                "clock": "Original engine.position(deck) seconds, clamped below at zero; pause/seek/reverse/loop are handled by the actual decoder replay. Graphics EOF holds the last decoded frame.",
+                "presentation": "Full300x216 by default; optional288x192 crop. Explicit index or alpha-table transparency. All tile channels; no parity repair. No audio start/play command.",
+                "validation": "Real named Blob/File and at least one complete24-byte packet. Unknown/non-graphics/timing packets remain valid timeline data and are diagnosed, not filtered out."
+              }
+            }
+          ],
+          "pipeline": {
+            "width": 640,
+            "height": 360,
+            "disposed": false,
+            "policy": {
+              "order": "Raw input → two channel FX → channel overlays → transition → master overlays → two master FX",
+              "referenceOrder": "Unverified; this is an independent Open Play routing contract.",
+              "scheduling": "Caller supplies one monotonic time/frameId per processed frame; no frame-rate guarantee."
+            },
+            "overlays": {
+              "left": {
+                "rendered": 0,
+                "skipped": []
+              },
+              "right": {
+                "rendered": 0,
+                "skipped": []
+              },
+              "master": {
+                "rendered": 0,
+                "skipped": []
+              }
+            }
+          },
+          "recording": false,
+          "captureBytes": 0
+        }
+      },
+      {
+        "phase": "sample0:after-seeked",
+        "wallMs": 2727.5,
+        "audioTime": 2.538666666666667,
+        "linked": true,
+        "video": {
+          "paused": true,
+          "currentTime": 0.899999,
+          "seeking": true,
+          "readyState": 1,
+          "duration": 1.4299,
+          "playbackRate": 1,
+          "error": null
+        },
+        "deck": {
+          "reverse": true,
+          "playing": true,
+          "processing": false,
+          "position": 0.9,
+          "rate": 1,
+          "enginePosition": 0.9
+        },
+        "mixer": {
+          "frames": 11,
+          "error": null,
+          "width": 640,
+          "height": 360,
+          "lastRenderMs": 3.299999952316284,
+          "inputs": [
+            {
+              "name": "generated-local.mp4",
+              "position": 0.899999,
+              "duration": 1.4299,
+              "paused": true,
+              "firstFrame": {
+                "mediaTime": 0,
+                "presentedFrames": 1,
+                "width": 320,
+                "height": 180
+              },
+              "readyState": 1,
+              "seeking": true
+            },
+            {
+              "name": "generated-local.mp4",
+              "position": 0.002446,
+              "duration": 1.4299,
+              "paused": true,
+              "firstFrame": {
+                "mediaTime": 0,
+                "presentedFrames": 1,
+                "width": 320,
+                "height": 180
+              },
+              "readyState": 4,
+              "seeking": false
+            }
+          ],
+          "loadedImages": [],
+          "karaoke": [
+            {
+              "source": "karaoke",
+              "disposed": false,
+              "available": false,
+              "reason": "missing-pair",
+              "trackId": "pipeline-harness-real-audio",
+              "name": null,
+              "assetId": null,
+              "version": null,
+              "loading": false,
+              "transparencyProfile": "index",
+              "crop": false,
+              "width": null,
+              "height": null,
+              "position": null,
+              "retainedAssociationBytes": 0,
+              "graphicsStatus": "not-rendered",
+              "decoder": null,
+              "policy": {
+                "evidence": "docs/research/VIDEO_REMAINING_WORKFLOWS.md",
+                "referenceEquivalent": false,
+                "ownership": "Copied session-only CDG bytes/configuration belong to a track ID; every deck owns a private decoder/canvas. Track/profile versions and load generations prevent stale attachment. No bytes, URLs or graphics are persisted.",
+                "clock": "Original engine.position(deck) seconds, clamped below at zero; pause/seek/reverse/loop are handled by the actual decoder replay. Graphics EOF holds the last decoded frame.",
+                "presentation": "Full300x216 by default; optional288x192 crop. Explicit index or alpha-table transparency. All tile channels; no parity repair. No audio start/play command.",
+                "validation": "Real named Blob/File and at least one complete24-byte packet. Unknown/non-graphics/timing packets remain valid timeline data and are diagnosed, not filtered out."
+              }
+            },
+            {
+              "source": "karaoke",
+              "disposed": false,
+              "available": false,
+              "reason": "missing-track",
+              "trackId": null,
+              "name": null,
+              "assetId": null,
+              "version": null,
+              "loading": false,
+              "transparencyProfile": "index",
+              "crop": false,
+              "width": null,
+              "height": null,
+              "position": null,
+              "retainedAssociationBytes": 0,
+              "graphicsStatus": "not-rendered",
+              "decoder": null,
+              "policy": {
+                "evidence": "docs/research/VIDEO_REMAINING_WORKFLOWS.md",
+                "referenceEquivalent": false,
+                "ownership": "Copied session-only CDG bytes/configuration belong to a track ID; every deck owns a private decoder/canvas. Track/profile versions and load generations prevent stale attachment. No bytes, URLs or graphics are persisted.",
+                "clock": "Original engine.position(deck) seconds, clamped below at zero; pause/seek/reverse/loop are handled by the actual decoder replay. Graphics EOF holds the last decoded frame.",
+                "presentation": "Full300x216 by default; optional288x192 crop. Explicit index or alpha-table transparency. All tile channels; no parity repair. No audio start/play command.",
+                "validation": "Real named Blob/File and at least one complete24-byte packet. Unknown/non-graphics/timing packets remain valid timeline data and are diagnosed, not filtered out."
+              }
+            }
+          ],
+          "pipeline": {
+            "width": 640,
+            "height": 360,
+            "disposed": false,
+            "policy": {
+              "order": "Raw input → two channel FX → channel overlays → transition → master overlays → two master FX",
+              "referenceOrder": "Unverified; this is an independent Open Play routing contract.",
+              "scheduling": "Caller supplies one monotonic time/frameId per processed frame; no frame-rate guarantee."
+            },
+            "overlays": {
+              "left": {
+                "rendered": 0,
+                "skipped": []
+              },
+              "right": {
+                "rendered": 0,
+                "skipped": []
+              },
+              "master": {
+                "rendered": 0,
+                "skipped": []
+              }
+            }
+          },
+          "recording": false,
+          "captureBytes": 0
+        }
+      },
+      {
+        "phase": "sample0:after-decoded-wait",
+        "wallMs": 2727.7999999523163,
+        "audioTime": 2.538666666666667,
+        "linked": true,
+        "video": {
+          "paused": true,
+          "currentTime": 0.899999,
+          "seeking": false,
+          "readyState": 4,
+          "duration": 1.4299,
+          "playbackRate": 1,
+          "error": null
+        },
+        "deck": {
+          "reverse": true,
+          "playing": true,
+          "processing": false,
+          "position": 0.9,
+          "rate": 1,
+          "enginePosition": 0.9
+        },
+        "mixer": {
+          "frames": 11,
+          "error": null,
+          "width": 640,
+          "height": 360,
+          "lastRenderMs": 3.299999952316284,
+          "inputs": [
+            {
+              "name": "generated-local.mp4",
+              "position": 0.899999,
+              "duration": 1.4299,
+              "paused": true,
+              "firstFrame": {
+                "mediaTime": 0,
+                "presentedFrames": 1,
+                "width": 320,
+                "height": 180
+              },
+              "readyState": 4,
+              "seeking": false
+            },
+            {
+              "name": "generated-local.mp4",
+              "position": 0.002446,
+              "duration": 1.4299,
+              "paused": true,
+              "firstFrame": {
+                "mediaTime": 0,
+                "presentedFrames": 1,
+                "width": 320,
+                "height": 180
+              },
+              "readyState": 4,
+              "seeking": false
+            }
+          ],
+          "loadedImages": [],
+          "karaoke": [
+            {
+              "source": "karaoke",
+              "disposed": false,
+              "available": false,
+              "reason": "missing-pair",
+              "trackId": "pipeline-harness-real-audio",
+              "name": null,
+              "assetId": null,
+              "version": null,
+              "loading": false,
+              "transparencyProfile": "index",
+              "crop": false,
+              "width": null,
+              "height": null,
+              "position": null,
+              "retainedAssociationBytes": 0,
+              "graphicsStatus": "not-rendered",
+              "decoder": null,
+              "policy": {
+                "evidence": "docs/research/VIDEO_REMAINING_WORKFLOWS.md",
+                "referenceEquivalent": false,
+                "ownership": "Copied session-only CDG bytes/configuration belong to a track ID; every deck owns a private decoder/canvas. Track/profile versions and load generations prevent stale attachment. No bytes, URLs or graphics are persisted.",
+                "clock": "Original engine.position(deck) seconds, clamped below at zero; pause/seek/reverse/loop are handled by the actual decoder replay. Graphics EOF holds the last decoded frame.",
+                "presentation": "Full300x216 by default; optional288x192 crop. Explicit index or alpha-table transparency. All tile channels; no parity repair. No audio start/play command.",
+                "validation": "Real named Blob/File and at least one complete24-byte packet. Unknown/non-graphics/timing packets remain valid timeline data and are diagnosed, not filtered out."
+              }
+            },
+            {
+              "source": "karaoke",
+              "disposed": false,
+              "available": false,
+              "reason": "missing-track",
+              "trackId": null,
+              "name": null,
+              "assetId": null,
+              "version": null,
+              "loading": false,
+              "transparencyProfile": "index",
+              "crop": false,
+              "width": null,
+              "height": null,
+              "position": null,
+              "retainedAssociationBytes": 0,
+              "graphicsStatus": "not-rendered",
+              "decoder": null,
+              "policy": {
+                "evidence": "docs/research/VIDEO_REMAINING_WORKFLOWS.md",
+                "referenceEquivalent": false,
+                "ownership": "Copied session-only CDG bytes/configuration belong to a track ID; every deck owns a private decoder/canvas. Track/profile versions and load generations prevent stale attachment. No bytes, URLs or graphics are persisted.",
+                "clock": "Original engine.position(deck) seconds, clamped below at zero; pause/seek/reverse/loop are handled by the actual decoder replay. Graphics EOF holds the last decoded frame.",
+                "presentation": "Full300x216 by default; optional288x192 crop. Explicit index or alpha-table transparency. All tile channels; no parity repair. No audio start/play command.",
+                "validation": "Real named Blob/File and at least one complete24-byte packet. Unknown/non-graphics/timing packets remain valid timeline data and are diagnosed, not filtered out."
+              }
+            }
+          ],
+          "pipeline": {
+            "width": 640,
+            "height": 360,
+            "disposed": false,
+            "policy": {
+              "order": "Raw input → two channel FX → channel overlays → transition → master overlays → two master FX",
+              "referenceOrder": "Unverified; this is an independent Open Play routing contract.",
+              "scheduling": "Caller supplies one monotonic time/frameId per processed frame; no frame-rate guarantee."
+            },
+            "overlays": {
+              "left": {
+                "rendered": 0,
+                "skipped": []
+              },
+              "right": {
+                "rendered": 0,
+                "skipped": []
+              },
+              "master": {
+                "rendered": 0,
+                "skipped": []
+              }
+            }
+          },
+          "recording": false,
+          "captureBytes": 0
+        }
+      },
+      {
+        "phase": "sample1:before-tick",
+        "wallMs": 2860,
+        "audioTime": 2.672,
+        "linked": true,
+        "video": {
+          "paused": true,
+          "currentTime": 0.899999,
+          "seeking": false,
+          "readyState": 4,
+          "duration": 1.4299,
+          "playbackRate": 1,
+          "error": null
+        },
+        "deck": {
+          "reverse": true,
+          "playing": true,
+          "processing": false,
+          "position": 0.9,
+          "rate": 1,
+          "enginePosition": 0.7713333333333329
+        },
+        "mixer": {
+          "frames": 11,
+          "error": null,
+          "width": 640,
+          "height": 360,
+          "lastRenderMs": 3.299999952316284,
+          "inputs": [
+            {
+              "name": "generated-local.mp4",
+              "position": 0.899999,
+              "duration": 1.4299,
+              "paused": true,
+              "firstFrame": {
+                "mediaTime": 0,
+                "presentedFrames": 1,
+                "width": 320,
+                "height": 180
+              },
+              "readyState": 4,
+              "seeking": false
+            },
+            {
+              "name": "generated-local.mp4",
+              "position": 0.002446,
+              "duration": 1.4299,
+              "paused": true,
+              "firstFrame": {
+                "mediaTime": 0,
+                "presentedFrames": 1,
+                "width": 320,
+                "height": 180
+              },
+              "readyState": 4,
+              "seeking": false
+            }
+          ],
+          "loadedImages": [],
+          "karaoke": [
+            {
+              "source": "karaoke",
+              "disposed": false,
+              "available": false,
+              "reason": "missing-pair",
+              "trackId": "pipeline-harness-real-audio",
+              "name": null,
+              "assetId": null,
+              "version": null,
+              "loading": false,
+              "transparencyProfile": "index",
+              "crop": false,
+              "width": null,
+              "height": null,
+              "position": null,
+              "retainedAssociationBytes": 0,
+              "graphicsStatus": "not-rendered",
+              "decoder": null,
+              "policy": {
+                "evidence": "docs/research/VIDEO_REMAINING_WORKFLOWS.md",
+                "referenceEquivalent": false,
+                "ownership": "Copied session-only CDG bytes/configuration belong to a track ID; every deck owns a private decoder/canvas. Track/profile versions and load generations prevent stale attachment. No bytes, URLs or graphics are persisted.",
+                "clock": "Original engine.position(deck) seconds, clamped below at zero; pause/seek/reverse/loop are handled by the actual decoder replay. Graphics EOF holds the last decoded frame.",
+                "presentation": "Full300x216 by default; optional288x192 crop. Explicit index or alpha-table transparency. All tile channels; no parity repair. No audio start/play command.",
+                "validation": "Real named Blob/File and at least one complete24-byte packet. Unknown/non-graphics/timing packets remain valid timeline data and are diagnosed, not filtered out."
+              }
+            },
+            {
+              "source": "karaoke",
+              "disposed": false,
+              "available": false,
+              "reason": "missing-track",
+              "trackId": null,
+              "name": null,
+              "assetId": null,
+              "version": null,
+              "loading": false,
+              "transparencyProfile": "index",
+              "crop": false,
+              "width": null,
+              "height": null,
+              "position": null,
+              "retainedAssociationBytes": 0,
+              "graphicsStatus": "not-rendered",
+              "decoder": null,
+              "policy": {
+                "evidence": "docs/research/VIDEO_REMAINING_WORKFLOWS.md",
+                "referenceEquivalent": false,
+                "ownership": "Copied session-only CDG bytes/configuration belong to a track ID; every deck owns a private decoder/canvas. Track/profile versions and load generations prevent stale attachment. No bytes, URLs or graphics are persisted.",
+                "clock": "Original engine.position(deck) seconds, clamped below at zero; pause/seek/reverse/loop are handled by the actual decoder replay. Graphics EOF holds the last decoded frame.",
+                "presentation": "Full300x216 by default; optional288x192 crop. Explicit index or alpha-table transparency. All tile channels; no parity repair. No audio start/play command.",
+                "validation": "Real named Blob/File and at least one complete24-byte packet. Unknown/non-graphics/timing packets remain valid timeline data and are diagnosed, not filtered out."
+              }
+            }
+          ],
+          "pipeline": {
+            "width": 640,
+            "height": 360,
+            "disposed": false,
+            "policy": {
+              "order": "Raw input → two channel FX → channel overlays → transition → master overlays → two master FX",
+              "referenceOrder": "Unverified; this is an independent Open Play routing contract.",
+              "scheduling": "Caller supplies one monotonic time/frameId per processed frame; no frame-rate guarantee."
+            },
+            "overlays": {
+              "left": {
+                "rendered": 0,
+                "skipped": []
+              },
+              "right": {
+                "rendered": 0,
+                "skipped": []
+              },
+              "master": {
+                "rendered": 0,
+                "skipped": []
+              }
+            }
+          },
+          "recording": false,
+          "captureBytes": 0
+        }
+      },
+      {
+        "phase": "sample1:after-tick",
+        "wallMs": 2865.4000000953674,
+        "audioTime": 2.6773333333333333,
+        "linked": true,
+        "video": {
+          "paused": true,
+          "currentTime": 0.771333,
+          "seeking": true,
+          "readyState": 1,
+          "duration": 1.4299,
+          "playbackRate": 1,
+          "error": null
+        },
+        "deck": {
+          "reverse": true,
+          "playing": true,
+          "processing": false,
+          "position": 0.9,
+          "rate": 1,
+          "enginePosition": 0.7659999999999997
+        },
+        "mixer": {
+          "frames": 12,
+          "error": null,
+          "width": 640,
+          "height": 360,
+          "lastRenderMs": 5.400000095367432,
+          "inputs": [
+            {
+              "name": "generated-local.mp4",
+              "position": 0.771333,
+              "duration": 1.4299,
+              "paused": true,
+              "firstFrame": {
+                "mediaTime": 0,
+                "presentedFrames": 1,
+                "width": 320,
+                "height": 180
+              },
+              "readyState": 1,
+              "seeking": true
+            },
+            {
+              "name": "generated-local.mp4",
+              "position": 0.002446,
+              "duration": 1.4299,
+              "paused": true,
+              "firstFrame": {
+                "mediaTime": 0,
+                "presentedFrames": 1,
+                "width": 320,
+                "height": 180
+              },
+              "readyState": 4,
+              "seeking": false
+            }
+          ],
+          "loadedImages": [],
+          "karaoke": [
+            {
+              "source": "karaoke",
+              "disposed": false,
+              "available": false,
+              "reason": "missing-pair",
+              "trackId": "pipeline-harness-real-audio",
+              "name": null,
+              "assetId": null,
+              "version": null,
+              "loading": false,
+              "transparencyProfile": "index",
+              "crop": false,
+              "width": null,
+              "height": null,
+              "position": null,
+              "retainedAssociationBytes": 0,
+              "graphicsStatus": "not-rendered",
+              "decoder": null,
+              "policy": {
+                "evidence": "docs/research/VIDEO_REMAINING_WORKFLOWS.md",
+                "referenceEquivalent": false,
+                "ownership": "Copied session-only CDG bytes/configuration belong to a track ID; every deck owns a private decoder/canvas. Track/profile versions and load generations prevent stale attachment. No bytes, URLs or graphics are persisted.",
+                "clock": "Original engine.position(deck) seconds, clamped below at zero; pause/seek/reverse/loop are handled by the actual decoder replay. Graphics EOF holds the last decoded frame.",
+                "presentation": "Full300x216 by default; optional288x192 crop. Explicit index or alpha-table transparency. All tile channels; no parity repair. No audio start/play command.",
+                "validation": "Real named Blob/File and at least one complete24-byte packet. Unknown/non-graphics/timing packets remain valid timeline data and are diagnosed, not filtered out."
+              }
+            },
+            {
+              "source": "karaoke",
+              "disposed": false,
+              "available": false,
+              "reason": "missing-track",
+              "trackId": null,
+              "name": null,
+              "assetId": null,
+              "version": null,
+              "loading": false,
+              "transparencyProfile": "index",
+              "crop": false,
+              "width": null,
+              "height": null,
+              "position": null,
+              "retainedAssociationBytes": 0,
+              "graphicsStatus": "not-rendered",
+              "decoder": null,
+              "policy": {
+                "evidence": "docs/research/VIDEO_REMAINING_WORKFLOWS.md",
+                "referenceEquivalent": false,
+                "ownership": "Copied session-only CDG bytes/configuration belong to a track ID; every deck owns a private decoder/canvas. Track/profile versions and load generations prevent stale attachment. No bytes, URLs or graphics are persisted.",
+                "clock": "Original engine.position(deck) seconds, clamped below at zero; pause/seek/reverse/loop are handled by the actual decoder replay. Graphics EOF holds the last decoded frame.",
+                "presentation": "Full300x216 by default; optional288x192 crop. Explicit index or alpha-table transparency. All tile channels; no parity repair. No audio start/play command.",
+                "validation": "Real named Blob/File and at least one complete24-byte packet. Unknown/non-graphics/timing packets remain valid timeline data and are diagnosed, not filtered out."
+              }
+            }
+          ],
+          "pipeline": {
+            "width": 640,
+            "height": 360,
+            "disposed": false,
+            "policy": {
+              "order": "Raw input → two channel FX → channel overlays → transition → master overlays → two master FX",
+              "referenceOrder": "Unverified; this is an independent Open Play routing contract.",
+              "scheduling": "Caller supplies one monotonic time/frameId per processed frame; no frame-rate guarantee."
+            },
+            "overlays": {
+              "left": {
+                "rendered": 0,
+                "skipped": []
+              },
+              "right": {
+                "rendered": 0,
+                "skipped": []
+              },
+              "master": {
+                "rendered": 0,
+                "skipped": []
+              }
+            }
+          },
+          "recording": false,
+          "captureBytes": 0
+        }
+      },
+      {
+        "phase": "sample1:after-seeked",
+        "wallMs": 2867,
+        "audioTime": 2.6773333333333333,
+        "linked": true,
+        "video": {
+          "paused": true,
+          "currentTime": 0.771333,
+          "seeking": false,
+          "readyState": 4,
+          "duration": 1.4299,
+          "playbackRate": 1,
+          "error": null
+        },
+        "deck": {
+          "reverse": true,
+          "playing": true,
+          "processing": false,
+          "position": 0.9,
+          "rate": 1,
+          "enginePosition": 0.7659999999999997
+        },
+        "mixer": {
+          "frames": 12,
+          "error": null,
+          "width": 640,
+          "height": 360,
+          "lastRenderMs": 5.400000095367432,
+          "inputs": [
+            {
+              "name": "generated-local.mp4",
+              "position": 0.771333,
+              "duration": 1.4299,
+              "paused": true,
+              "firstFrame": {
+                "mediaTime": 0,
+                "presentedFrames": 1,
+                "width": 320,
+                "height": 180
+              },
+              "readyState": 4,
+              "seeking": false
+            },
+            {
+              "name": "generated-local.mp4",
+              "position": 0.002446,
+              "duration": 1.4299,
+              "paused": true,
+              "firstFrame": {
+                "mediaTime": 0,
+                "presentedFrames": 1,
+                "width": 320,
+                "height": 180
+              },
+              "readyState": 4,
+              "seeking": false
+            }
+          ],
+          "loadedImages": [],
+          "karaoke": [
+            {
+              "source": "karaoke",
+              "disposed": false,
+              "available": false,
+              "reason": "missing-pair",
+              "trackId": "pipeline-harness-real-audio",
+              "name": null,
+              "assetId": null,
+              "version": null,
+              "loading": false,
+              "transparencyProfile": "index",
+              "crop": false,
+              "width": null,
+              "height": null,
+              "position": null,
+              "retainedAssociationBytes": 0,
+              "graphicsStatus": "not-rendered",
+              "decoder": null,
+              "policy": {
+                "evidence": "docs/research/VIDEO_REMAINING_WORKFLOWS.md",
+                "referenceEquivalent": false,
+                "ownership": "Copied session-only CDG bytes/configuration belong to a track ID; every deck owns a private decoder/canvas. Track/profile versions and load generations prevent stale attachment. No bytes, URLs or graphics are persisted.",
+                "clock": "Original engine.position(deck) seconds, clamped below at zero; pause/seek/reverse/loop are handled by the actual decoder replay. Graphics EOF holds the last decoded frame.",
+                "presentation": "Full300x216 by default; optional288x192 crop. Explicit index or alpha-table transparency. All tile channels; no parity repair. No audio start/play command.",
+                "validation": "Real named Blob/File and at least one complete24-byte packet. Unknown/non-graphics/timing packets remain valid timeline data and are diagnosed, not filtered out."
+              }
+            },
+            {
+              "source": "karaoke",
+              "disposed": false,
+              "available": false,
+              "reason": "missing-track",
+              "trackId": null,
+              "name": null,
+              "assetId": null,
+              "version": null,
+              "loading": false,
+              "transparencyProfile": "index",
+              "crop": false,
+              "width": null,
+              "height": null,
+              "position": null,
+              "retainedAssociationBytes": 0,
+              "graphicsStatus": "not-rendered",
+              "decoder": null,
+              "policy": {
+                "evidence": "docs/research/VIDEO_REMAINING_WORKFLOWS.md",
+                "referenceEquivalent": false,
+                "ownership": "Copied session-only CDG bytes/configuration belong to a track ID; every deck owns a private decoder/canvas. Track/profile versions and load generations prevent stale attachment. No bytes, URLs or graphics are persisted.",
+                "clock": "Original engine.position(deck) seconds, clamped below at zero; pause/seek/reverse/loop are handled by the actual decoder replay. Graphics EOF holds the last decoded frame.",
+                "presentation": "Full300x216 by default; optional288x192 crop. Explicit index or alpha-table transparency. All tile channels; no parity repair. No audio start/play command.",
+                "validation": "Real named Blob/File and at least one complete24-byte packet. Unknown/non-graphics/timing packets remain valid timeline data and are diagnosed, not filtered out."
+              }
+            }
+          ],
+          "pipeline": {
+            "width": 640,
+            "height": 360,
+            "disposed": false,
+            "policy": {
+              "order": "Raw input → two channel FX → channel overlays → transition → master overlays → two master FX",
+              "referenceOrder": "Unverified; this is an independent Open Play routing contract.",
+              "scheduling": "Caller supplies one monotonic time/frameId per processed frame; no frame-rate guarantee."
+            },
+            "overlays": {
+              "left": {
+                "rendered": 0,
+                "skipped": []
+              },
+              "right": {
+                "rendered": 0,
+                "skipped": []
+              },
+              "master": {
+                "rendered": 0,
+                "skipped": []
+              }
+            }
+          },
+          "recording": false,
+          "captureBytes": 0
+        }
+      },
+      {
+        "phase": "sample1:after-decoded-wait",
+        "wallMs": 2867.0999999046326,
+        "audioTime": 2.6773333333333333,
+        "linked": true,
+        "video": {
+          "paused": true,
+          "currentTime": 0.771333,
+          "seeking": false,
+          "readyState": 4,
+          "duration": 1.4299,
+          "playbackRate": 1,
+          "error": null
+        },
+        "deck": {
+          "reverse": true,
+          "playing": true,
+          "processing": false,
+          "position": 0.9,
+          "rate": 1,
+          "enginePosition": 0.7659999999999997
+        },
+        "mixer": {
+          "frames": 12,
+          "error": null,
+          "width": 640,
+          "height": 360,
+          "lastRenderMs": 5.400000095367432,
+          "inputs": [
+            {
+              "name": "generated-local.mp4",
+              "position": 0.771333,
+              "duration": 1.4299,
+              "paused": true,
+              "firstFrame": {
+                "mediaTime": 0,
+                "presentedFrames": 1,
+                "width": 320,
+                "height": 180
+              },
+              "readyState": 4,
+              "seeking": false
+            },
+            {
+              "name": "generated-local.mp4",
+              "position": 0.002446,
+              "duration": 1.4299,
+              "paused": true,
+              "firstFrame": {
+                "mediaTime": 0,
+                "presentedFrames": 1,
+                "width": 320,
+                "height": 180
+              },
+              "readyState": 4,
+              "seeking": false
+            }
+          ],
+          "loadedImages": [],
+          "karaoke": [
+            {
+              "source": "karaoke",
+              "disposed": false,
+              "available": false,
+              "reason": "missing-pair",
+              "trackId": "pipeline-harness-real-audio",
+              "name": null,
+              "assetId": null,
+              "version": null,
+              "loading": false,
+              "transparencyProfile": "index",
+              "crop": false,
+              "width": null,
+              "height": null,
+              "position": null,
+              "retainedAssociationBytes": 0,
+              "graphicsStatus": "not-rendered",
+              "decoder": null,
+              "policy": {
+                "evidence": "docs/research/VIDEO_REMAINING_WORKFLOWS.md",
+                "referenceEquivalent": false,
+                "ownership": "Copied session-only CDG bytes/configuration belong to a track ID; every deck owns a private decoder/canvas. Track/profile versions and load generations prevent stale attachment. No bytes, URLs or graphics are persisted.",
+                "clock": "Original engine.position(deck) seconds, clamped below at zero; pause/seek/reverse/loop are handled by the actual decoder replay. Graphics EOF holds the last decoded frame.",
+                "presentation": "Full300x216 by default; optional288x192 crop. Explicit index or alpha-table transparency. All tile channels; no parity repair. No audio start/play command.",
+                "validation": "Real named Blob/File and at least one complete24-byte packet. Unknown/non-graphics/timing packets remain valid timeline data and are diagnosed, not filtered out."
+              }
+            },
+            {
+              "source": "karaoke",
+              "disposed": false,
+              "available": false,
+              "reason": "missing-track",
+              "trackId": null,
+              "name": null,
+              "assetId": null,
+              "version": null,
+              "loading": false,
+              "transparencyProfile": "index",
+              "crop": false,
+              "width": null,
+              "height": null,
+              "position": null,
+              "retainedAssociationBytes": 0,
+              "graphicsStatus": "not-rendered",
+              "decoder": null,
+              "policy": {
+                "evidence": "docs/research/VIDEO_REMAINING_WORKFLOWS.md",
+                "referenceEquivalent": false,
+                "ownership": "Copied session-only CDG bytes/configuration belong to a track ID; every deck owns a private decoder/canvas. Track/profile versions and load generations prevent stale attachment. No bytes, URLs or graphics are persisted.",
+                "clock": "Original engine.position(deck) seconds, clamped below at zero; pause/seek/reverse/loop are handled by the actual decoder replay. Graphics EOF holds the last decoded frame.",
+                "presentation": "Full300x216 by default; optional288x192 crop. Explicit index or alpha-table transparency. All tile channels; no parity repair. No audio start/play command.",
+                "validation": "Real named Blob/File and at least one complete24-byte packet. Unknown/non-graphics/timing packets remain valid timeline data and are diagnosed, not filtered out."
+              }
+            }
+          ],
+          "pipeline": {
+            "width": 640,
+            "height": 360,
+            "disposed": false,
+            "policy": {
+              "order": "Raw input → two channel FX → channel overlays → transition → master overlays → two master FX",
+              "referenceOrder": "Unverified; this is an independent Open Play routing contract.",
+              "scheduling": "Caller supplies one monotonic time/frameId per processed frame; no frame-rate guarantee."
+            },
+            "overlays": {
+              "left": {
+                "rendered": 0,
+                "skipped": []
+              },
+              "right": {
+                "rendered": 0,
+                "skipped": []
+              },
+              "master": {
+                "rendered": 0,
+                "skipped": []
+              }
+            }
+          },
+          "recording": false,
+          "captureBytes": 0
+        }
+      }
+    ],
+    "events": [
+      {
+        "phase": "event:seeking",
+        "wallMs": 2722.2000000476837,
+        "audioTime": 2.533333333333333,
+        "linked": false,
+        "video": {
+          "paused": true,
+          "currentTime": 0.393333,
+          "seeking": true,
+          "readyState": 1,
+          "duration": 1.4299,
+          "playbackRate": 1,
+          "error": null
+        },
+        "deck": {
+          "reverse": false,
+          "playing": true,
+          "processing": false,
+          "position": 0.39333333333333387,
+          "rate": 1,
+          "enginePosition": 0.39333333333333387
+        },
+        "mixer": {
+          "frames": 10,
+          "error": null,
+          "width": 640,
+          "height": 360,
+          "lastRenderMs": 2.9000000953674316,
+          "inputs": [
+            {
+              "name": "generated-local.mp4",
+              "position": 0.393333,
+              "duration": 1.4299,
+              "paused": true,
+              "firstFrame": {
+                "mediaTime": 0,
+                "presentedFrames": 1,
+                "width": 320,
+                "height": 180
+              },
+              "readyState": 1,
+              "seeking": true
+            },
+            {
+              "name": "generated-local.mp4",
+              "position": 0.002446,
+              "duration": 1.4299,
+              "paused": true,
+              "firstFrame": {
+                "mediaTime": 0,
+                "presentedFrames": 1,
+                "width": 320,
+                "height": 180
+              },
+              "readyState": 4,
+              "seeking": false
+            }
+          ],
+          "loadedImages": [],
+          "karaoke": [
+            {
+              "source": "karaoke",
+              "disposed": false,
+              "available": false,
+              "reason": "missing-pair",
+              "trackId": "pipeline-harness-real-audio",
+              "name": null,
+              "assetId": null,
+              "version": null,
+              "loading": false,
+              "transparencyProfile": "index",
+              "crop": false,
+              "width": null,
+              "height": null,
+              "position": null,
+              "retainedAssociationBytes": 0,
+              "graphicsStatus": "not-rendered",
+              "decoder": null,
+              "policy": {
+                "evidence": "docs/research/VIDEO_REMAINING_WORKFLOWS.md",
+                "referenceEquivalent": false,
+                "ownership": "Copied session-only CDG bytes/configuration belong to a track ID; every deck owns a private decoder/canvas. Track/profile versions and load generations prevent stale attachment. No bytes, URLs or graphics are persisted.",
+                "clock": "Original engine.position(deck) seconds, clamped below at zero; pause/seek/reverse/loop are handled by the actual decoder replay. Graphics EOF holds the last decoded frame.",
+                "presentation": "Full300x216 by default; optional288x192 crop. Explicit index or alpha-table transparency. All tile channels; no parity repair. No audio start/play command.",
+                "validation": "Real named Blob/File and at least one complete24-byte packet. Unknown/non-graphics/timing packets remain valid timeline data and are diagnosed, not filtered out."
+              }
+            },
+            {
+              "source": "karaoke",
+              "disposed": false,
+              "available": false,
+              "reason": "missing-track",
+              "trackId": null,
+              "name": null,
+              "assetId": null,
+              "version": null,
+              "loading": false,
+              "transparencyProfile": "index",
+              "crop": false,
+              "width": null,
+              "height": null,
+              "position": null,
+              "retainedAssociationBytes": 0,
+              "graphicsStatus": "not-rendered",
+              "decoder": null,
+              "policy": {
+                "evidence": "docs/research/VIDEO_REMAINING_WORKFLOWS.md",
+                "referenceEquivalent": false,
+                "ownership": "Copied session-only CDG bytes/configuration belong to a track ID; every deck owns a private decoder/canvas. Track/profile versions and load generations prevent stale attachment. No bytes, URLs or graphics are persisted.",
+                "clock": "Original engine.position(deck) seconds, clamped below at zero; pause/seek/reverse/loop are handled by the actual decoder replay. Graphics EOF holds the last decoded frame.",
+                "presentation": "Full300x216 by default; optional288x192 crop. Explicit index or alpha-table transparency. All tile channels; no parity repair. No audio start/play command.",
+                "validation": "Real named Blob/File and at least one complete24-byte packet. Unknown/non-graphics/timing packets remain valid timeline data and are diagnosed, not filtered out."
+              }
+            }
+          ],
+          "pipeline": {
+            "width": 640,
+            "height": 360,
+            "disposed": false,
+            "policy": {
+              "order": "Raw input → two channel FX → channel overlays → transition → master overlays → two master FX",
+              "referenceOrder": "Unverified; this is an independent Open Play routing contract.",
+              "scheduling": "Caller supplies one monotonic time/frameId per processed frame; no frame-rate guarantee."
+            },
+            "overlays": {
+              "left": {
+                "rendered": 0,
+                "skipped": []
+              },
+              "right": {
+                "rendered": 0,
+                "skipped": []
+              },
+              "master": {
+                "rendered": 0,
+                "skipped": []
+              }
+            }
+          },
+          "recording": false,
+          "captureBytes": 0
+        }
+      },
+      {
+        "phase": "event:pause",
+        "wallMs": 2722.2999999523163,
+        "audioTime": 2.533333333333333,
+        "linked": false,
+        "video": {
+          "paused": true,
+          "currentTime": 0.393333,
+          "seeking": true,
+          "readyState": 1,
+          "duration": 1.4299,
+          "playbackRate": 1,
+          "error": null
+        },
+        "deck": {
+          "reverse": false,
+          "playing": true,
+          "processing": false,
+          "position": 0.39333333333333387,
+          "rate": 1,
+          "enginePosition": 0.39333333333333387
+        },
+        "mixer": {
+          "frames": 10,
+          "error": null,
+          "width": 640,
+          "height": 360,
+          "lastRenderMs": 2.9000000953674316,
+          "inputs": [
+            {
+              "name": "generated-local.mp4",
+              "position": 0.393333,
+              "duration": 1.4299,
+              "paused": true,
+              "firstFrame": {
+                "mediaTime": 0,
+                "presentedFrames": 1,
+                "width": 320,
+                "height": 180
+              },
+              "readyState": 1,
+              "seeking": true
+            },
+            {
+              "name": "generated-local.mp4",
+              "position": 0.002446,
+              "duration": 1.4299,
+              "paused": true,
+              "firstFrame": {
+                "mediaTime": 0,
+                "presentedFrames": 1,
+                "width": 320,
+                "height": 180
+              },
+              "readyState": 4,
+              "seeking": false
+            }
+          ],
+          "loadedImages": [],
+          "karaoke": [
+            {
+              "source": "karaoke",
+              "disposed": false,
+              "available": false,
+              "reason": "missing-pair",
+              "trackId": "pipeline-harness-real-audio",
+              "name": null,
+              "assetId": null,
+              "version": null,
+              "loading": false,
+              "transparencyProfile": "index",
+              "crop": false,
+              "width": null,
+              "height": null,
+              "position": null,
+              "retainedAssociationBytes": 0,
+              "graphicsStatus": "not-rendered",
+              "decoder": null,
+              "policy": {
+                "evidence": "docs/research/VIDEO_REMAINING_WORKFLOWS.md",
+                "referenceEquivalent": false,
+                "ownership": "Copied session-only CDG bytes/configuration belong to a track ID; every deck owns a private decoder/canvas. Track/profile versions and load generations prevent stale attachment. No bytes, URLs or graphics are persisted.",
+                "clock": "Original engine.position(deck) seconds, clamped below at zero; pause/seek/reverse/loop are handled by the actual decoder replay. Graphics EOF holds the last decoded frame.",
+                "presentation": "Full300x216 by default; optional288x192 crop. Explicit index or alpha-table transparency. All tile channels; no parity repair. No audio start/play command.",
+                "validation": "Real named Blob/File and at least one complete24-byte packet. Unknown/non-graphics/timing packets remain valid timeline data and are diagnosed, not filtered out."
+              }
+            },
+            {
+              "source": "karaoke",
+              "disposed": false,
+              "available": false,
+              "reason": "missing-track",
+              "trackId": null,
+              "name": null,
+              "assetId": null,
+              "version": null,
+              "loading": false,
+              "transparencyProfile": "index",
+              "crop": false,
+              "width": null,
+              "height": null,
+              "position": null,
+              "retainedAssociationBytes": 0,
+              "graphicsStatus": "not-rendered",
+              "decoder": null,
+              "policy": {
+                "evidence": "docs/research/VIDEO_REMAINING_WORKFLOWS.md",
+                "referenceEquivalent": false,
+                "ownership": "Copied session-only CDG bytes/configuration belong to a track ID; every deck owns a private decoder/canvas. Track/profile versions and load generations prevent stale attachment. No bytes, URLs or graphics are persisted.",
+                "clock": "Original engine.position(deck) seconds, clamped below at zero; pause/seek/reverse/loop are handled by the actual decoder replay. Graphics EOF holds the last decoded frame.",
+                "presentation": "Full300x216 by default; optional288x192 crop. Explicit index or alpha-table transparency. All tile channels; no parity repair. No audio start/play command.",
+                "validation": "Real named Blob/File and at least one complete24-byte packet. Unknown/non-graphics/timing packets remain valid timeline data and are diagnosed, not filtered out."
+              }
+            }
+          ],
+          "pipeline": {
+            "width": 640,
+            "height": 360,
+            "disposed": false,
+            "policy": {
+              "order": "Raw input → two channel FX → channel overlays → transition → master overlays → two master FX",
+              "referenceOrder": "Unverified; this is an independent Open Play routing contract.",
+              "scheduling": "Caller supplies one monotonic time/frameId per processed frame; no frame-rate guarantee."
+            },
+            "overlays": {
+              "left": {
+                "rendered": 0,
+                "skipped": []
+              },
+              "right": {
+                "rendered": 0,
+                "skipped": []
+              },
+              "master": {
+                "rendered": 0,
+                "skipped": []
+              }
+            }
+          },
+          "recording": false,
+          "captureBytes": 0
+        }
+      },
+      {
+        "phase": "event:seeked",
+        "wallMs": 2727.5,
+        "audioTime": 2.538666666666667,
+        "linked": true,
+        "video": {
+          "paused": true,
+          "currentTime": 0.899999,
+          "seeking": true,
+          "readyState": 1,
+          "duration": 1.4299,
+          "playbackRate": 1,
+          "error": null
+        },
+        "deck": {
+          "reverse": true,
+          "playing": true,
+          "processing": false,
+          "position": 0.9,
+          "rate": 1,
+          "enginePosition": 0.9
+        },
+        "mixer": {
+          "frames": 11,
+          "error": null,
+          "width": 640,
+          "height": 360,
+          "lastRenderMs": 3.299999952316284,
+          "inputs": [
+            {
+              "name": "generated-local.mp4",
+              "position": 0.899999,
+              "duration": 1.4299,
+              "paused": true,
+              "firstFrame": {
+                "mediaTime": 0,
+                "presentedFrames": 1,
+                "width": 320,
+                "height": 180
+              },
+              "readyState": 1,
+              "seeking": true
+            },
+            {
+              "name": "generated-local.mp4",
+              "position": 0.002446,
+              "duration": 1.4299,
+              "paused": true,
+              "firstFrame": {
+                "mediaTime": 0,
+                "presentedFrames": 1,
+                "width": 320,
+                "height": 180
+              },
+              "readyState": 4,
+              "seeking": false
+            }
+          ],
+          "loadedImages": [],
+          "karaoke": [
+            {
+              "source": "karaoke",
+              "disposed": false,
+              "available": false,
+              "reason": "missing-pair",
+              "trackId": "pipeline-harness-real-audio",
+              "name": null,
+              "assetId": null,
+              "version": null,
+              "loading": false,
+              "transparencyProfile": "index",
+              "crop": false,
+              "width": null,
+              "height": null,
+              "position": null,
+              "retainedAssociationBytes": 0,
+              "graphicsStatus": "not-rendered",
+              "decoder": null,
+              "policy": {
+                "evidence": "docs/research/VIDEO_REMAINING_WORKFLOWS.md",
+                "referenceEquivalent": false,
+                "ownership": "Copied session-only CDG bytes/configuration belong to a track ID; every deck owns a private decoder/canvas. Track/profile versions and load generations prevent stale attachment. No bytes, URLs or graphics are persisted.",
+                "clock": "Original engine.position(deck) seconds, clamped below at zero; pause/seek/reverse/loop are handled by the actual decoder replay. Graphics EOF holds the last decoded frame.",
+                "presentation": "Full300x216 by default; optional288x192 crop. Explicit index or alpha-table transparency. All tile channels; no parity repair. No audio start/play command.",
+                "validation": "Real named Blob/File and at least one complete24-byte packet. Unknown/non-graphics/timing packets remain valid timeline data and are diagnosed, not filtered out."
+              }
+            },
+            {
+              "source": "karaoke",
+              "disposed": false,
+              "available": false,
+              "reason": "missing-track",
+              "trackId": null,
+              "name": null,
+              "assetId": null,
+              "version": null,
+              "loading": false,
+              "transparencyProfile": "index",
+              "crop": false,
+              "width": null,
+              "height": null,
+              "position": null,
+              "retainedAssociationBytes": 0,
+              "graphicsStatus": "not-rendered",
+              "decoder": null,
+              "policy": {
+                "evidence": "docs/research/VIDEO_REMAINING_WORKFLOWS.md",
+                "referenceEquivalent": false,
+                "ownership": "Copied session-only CDG bytes/configuration belong to a track ID; every deck owns a private decoder/canvas. Track/profile versions and load generations prevent stale attachment. No bytes, URLs or graphics are persisted.",
+                "clock": "Original engine.position(deck) seconds, clamped below at zero; pause/seek/reverse/loop are handled by the actual decoder replay. Graphics EOF holds the last decoded frame.",
+                "presentation": "Full300x216 by default; optional288x192 crop. Explicit index or alpha-table transparency. All tile channels; no parity repair. No audio start/play command.",
+                "validation": "Real named Blob/File and at least one complete24-byte packet. Unknown/non-graphics/timing packets remain valid timeline data and are diagnosed, not filtered out."
+              }
+            }
+          ],
+          "pipeline": {
+            "width": 640,
+            "height": 360,
+            "disposed": false,
+            "policy": {
+              "order": "Raw input → two channel FX → channel overlays → transition → master overlays → two master FX",
+              "referenceOrder": "Unverified; this is an independent Open Play routing contract.",
+              "scheduling": "Caller supplies one monotonic time/frameId per processed frame; no frame-rate guarantee."
+            },
+            "overlays": {
+              "left": {
+                "rendered": 0,
+                "skipped": []
+              },
+              "right": {
+                "rendered": 0,
+                "skipped": []
+              },
+              "master": {
+                "rendered": 0,
+                "skipped": []
+              }
+            }
+          },
+          "recording": false,
+          "captureBytes": 0
+        }
+      },
+      {
+        "phase": "event:canplay",
+        "wallMs": 2727.5,
+        "audioTime": 2.538666666666667,
+        "linked": true,
+        "video": {
+          "paused": true,
+          "currentTime": 0.899999,
+          "seeking": true,
+          "readyState": 1,
+          "duration": 1.4299,
+          "playbackRate": 1,
+          "error": null
+        },
+        "deck": {
+          "reverse": true,
+          "playing": true,
+          "processing": false,
+          "position": 0.9,
+          "rate": 1,
+          "enginePosition": 0.9
+        },
+        "mixer": {
+          "frames": 11,
+          "error": null,
+          "width": 640,
+          "height": 360,
+          "lastRenderMs": 3.299999952316284,
+          "inputs": [
+            {
+              "name": "generated-local.mp4",
+              "position": 0.899999,
+              "duration": 1.4299,
+              "paused": true,
+              "firstFrame": {
+                "mediaTime": 0,
+                "presentedFrames": 1,
+                "width": 320,
+                "height": 180
+              },
+              "readyState": 1,
+              "seeking": true
+            },
+            {
+              "name": "generated-local.mp4",
+              "position": 0.002446,
+              "duration": 1.4299,
+              "paused": true,
+              "firstFrame": {
+                "mediaTime": 0,
+                "presentedFrames": 1,
+                "width": 320,
+                "height": 180
+              },
+              "readyState": 4,
+              "seeking": false
+            }
+          ],
+          "loadedImages": [],
+          "karaoke": [
+            {
+              "source": "karaoke",
+              "disposed": false,
+              "available": false,
+              "reason": "missing-pair",
+              "trackId": "pipeline-harness-real-audio",
+              "name": null,
+              "assetId": null,
+              "version": null,
+              "loading": false,
+              "transparencyProfile": "index",
+              "crop": false,
+              "width": null,
+              "height": null,
+              "position": null,
+              "retainedAssociationBytes": 0,
+              "graphicsStatus": "not-rendered",
+              "decoder": null,
+              "policy": {
+                "evidence": "docs/research/VIDEO_REMAINING_WORKFLOWS.md",
+                "referenceEquivalent": false,
+                "ownership": "Copied session-only CDG bytes/configuration belong to a track ID; every deck owns a private decoder/canvas. Track/profile versions and load generations prevent stale attachment. No bytes, URLs or graphics are persisted.",
+                "clock": "Original engine.position(deck) seconds, clamped below at zero; pause/seek/reverse/loop are handled by the actual decoder replay. Graphics EOF holds the last decoded frame.",
+                "presentation": "Full300x216 by default; optional288x192 crop. Explicit index or alpha-table transparency. All tile channels; no parity repair. No audio start/play command.",
+                "validation": "Real named Blob/File and at least one complete24-byte packet. Unknown/non-graphics/timing packets remain valid timeline data and are diagnosed, not filtered out."
+              }
+            },
+            {
+              "source": "karaoke",
+              "disposed": false,
+              "available": false,
+              "reason": "missing-track",
+              "trackId": null,
+              "name": null,
+              "assetId": null,
+              "version": null,
+              "loading": false,
+              "transparencyProfile": "index",
+              "crop": false,
+              "width": null,
+              "height": null,
+              "position": null,
+              "retainedAssociationBytes": 0,
+              "graphicsStatus": "not-rendered",
+              "decoder": null,
+              "policy": {
+                "evidence": "docs/research/VIDEO_REMAINING_WORKFLOWS.md",
+                "referenceEquivalent": false,
+                "ownership": "Copied session-only CDG bytes/configuration belong to a track ID; every deck owns a private decoder/canvas. Track/profile versions and load generations prevent stale attachment. No bytes, URLs or graphics are persisted.",
+                "clock": "Original engine.position(deck) seconds, clamped below at zero; pause/seek/reverse/loop are handled by the actual decoder replay. Graphics EOF holds the last decoded frame.",
+                "presentation": "Full300x216 by default; optional288x192 crop. Explicit index or alpha-table transparency. All tile channels; no parity repair. No audio start/play command.",
+                "validation": "Real named Blob/File and at least one complete24-byte packet. Unknown/non-graphics/timing packets remain valid timeline data and are diagnosed, not filtered out."
+              }
+            }
+          ],
+          "pipeline": {
+            "width": 640,
+            "height": 360,
+            "disposed": false,
+            "policy": {
+              "order": "Raw input → two channel FX → channel overlays → transition → master overlays → two master FX",
+              "referenceOrder": "Unverified; this is an independent Open Play routing contract.",
+              "scheduling": "Caller supplies one monotonic time/frameId per processed frame; no frame-rate guarantee."
+            },
+            "overlays": {
+              "left": {
+                "rendered": 0,
+                "skipped": []
+              },
+              "right": {
+                "rendered": 0,
+                "skipped": []
+              },
+              "master": {
+                "rendered": 0,
+                "skipped": []
+              }
+            }
+          },
+          "recording": false,
+          "captureBytes": 0
+        }
+      },
+      {
+        "phase": "event:seeking",
+        "wallMs": 2727.5,
+        "audioTime": 2.538666666666667,
+        "linked": true,
+        "video": {
+          "paused": true,
+          "currentTime": 0.899999,
+          "seeking": true,
+          "readyState": 1,
+          "duration": 1.4299,
+          "playbackRate": 1,
+          "error": null
+        },
+        "deck": {
+          "reverse": true,
+          "playing": true,
+          "processing": false,
+          "position": 0.9,
+          "rate": 1,
+          "enginePosition": 0.9
+        },
+        "mixer": {
+          "frames": 11,
+          "error": null,
+          "width": 640,
+          "height": 360,
+          "lastRenderMs": 3.299999952316284,
+          "inputs": [
+            {
+              "name": "generated-local.mp4",
+              "position": 0.899999,
+              "duration": 1.4299,
+              "paused": true,
+              "firstFrame": {
+                "mediaTime": 0,
+                "presentedFrames": 1,
+                "width": 320,
+                "height": 180
+              },
+              "readyState": 1,
+              "seeking": true
+            },
+            {
+              "name": "generated-local.mp4",
+              "position": 0.002446,
+              "duration": 1.4299,
+              "paused": true,
+              "firstFrame": {
+                "mediaTime": 0,
+                "presentedFrames": 1,
+                "width": 320,
+                "height": 180
+              },
+              "readyState": 4,
+              "seeking": false
+            }
+          ],
+          "loadedImages": [],
+          "karaoke": [
+            {
+              "source": "karaoke",
+              "disposed": false,
+              "available": false,
+              "reason": "missing-pair",
+              "trackId": "pipeline-harness-real-audio",
+              "name": null,
+              "assetId": null,
+              "version": null,
+              "loading": false,
+              "transparencyProfile": "index",
+              "crop": false,
+              "width": null,
+              "height": null,
+              "position": null,
+              "retainedAssociationBytes": 0,
+              "graphicsStatus": "not-rendered",
+              "decoder": null,
+              "policy": {
+                "evidence": "docs/research/VIDEO_REMAINING_WORKFLOWS.md",
+                "referenceEquivalent": false,
+                "ownership": "Copied session-only CDG bytes/configuration belong to a track ID; every deck owns a private decoder/canvas. Track/profile versions and load generations prevent stale attachment. No bytes, URLs or graphics are persisted.",
+                "clock": "Original engine.position(deck) seconds, clamped below at zero; pause/seek/reverse/loop are handled by the actual decoder replay. Graphics EOF holds the last decoded frame.",
+                "presentation": "Full300x216 by default; optional288x192 crop. Explicit index or alpha-table transparency. All tile channels; no parity repair. No audio start/play command.",
+                "validation": "Real named Blob/File and at least one complete24-byte packet. Unknown/non-graphics/timing packets remain valid timeline data and are diagnosed, not filtered out."
+              }
+            },
+            {
+              "source": "karaoke",
+              "disposed": false,
+              "available": false,
+              "reason": "missing-track",
+              "trackId": null,
+              "name": null,
+              "assetId": null,
+              "version": null,
+              "loading": false,
+              "transparencyProfile": "index",
+              "crop": false,
+              "width": null,
+              "height": null,
+              "position": null,
+              "retainedAssociationBytes": 0,
+              "graphicsStatus": "not-rendered",
+              "decoder": null,
+              "policy": {
+                "evidence": "docs/research/VIDEO_REMAINING_WORKFLOWS.md",
+                "referenceEquivalent": false,
+                "ownership": "Copied session-only CDG bytes/configuration belong to a track ID; every deck owns a private decoder/canvas. Track/profile versions and load generations prevent stale attachment. No bytes, URLs or graphics are persisted.",
+                "clock": "Original engine.position(deck) seconds, clamped below at zero; pause/seek/reverse/loop are handled by the actual decoder replay. Graphics EOF holds the last decoded frame.",
+                "presentation": "Full300x216 by default; optional288x192 crop. Explicit index or alpha-table transparency. All tile channels; no parity repair. No audio start/play command.",
+                "validation": "Real named Blob/File and at least one complete24-byte packet. Unknown/non-graphics/timing packets remain valid timeline data and are diagnosed, not filtered out."
+              }
+            }
+          ],
+          "pipeline": {
+            "width": 640,
+            "height": 360,
+            "disposed": false,
+            "policy": {
+              "order": "Raw input → two channel FX → channel overlays → transition → master overlays → two master FX",
+              "referenceOrder": "Unverified; this is an independent Open Play routing contract.",
+              "scheduling": "Caller supplies one monotonic time/frameId per processed frame; no frame-rate guarantee."
+            },
+            "overlays": {
+              "left": {
+                "rendered": 0,
+                "skipped": []
+              },
+              "right": {
+                "rendered": 0,
+                "skipped": []
+              },
+              "master": {
+                "rendered": 0,
+                "skipped": []
+              }
+            }
+          },
+          "recording": false,
+          "captureBytes": 0
+        }
+      },
+      {
+        "phase": "event:seeked",
+        "wallMs": 2730.4000000953674,
+        "audioTime": 2.538666666666667,
+        "linked": true,
+        "video": {
+          "paused": true,
+          "currentTime": 0.899999,
+          "seeking": false,
+          "readyState": 4,
+          "duration": 1.4299,
+          "playbackRate": 1,
+          "error": null
+        },
+        "deck": {
+          "reverse": true,
+          "playing": true,
+          "processing": false,
+          "position": 0.9,
+          "rate": 1,
+          "enginePosition": 0.9
+        },
+        "mixer": {
+          "frames": 11,
+          "error": null,
+          "width": 640,
+          "height": 360,
+          "lastRenderMs": 3.299999952316284,
+          "inputs": [
+            {
+              "name": "generated-local.mp4",
+              "position": 0.899999,
+              "duration": 1.4299,
+              "paused": true,
+              "firstFrame": {
+                "mediaTime": 0,
+                "presentedFrames": 1,
+                "width": 320,
+                "height": 180
+              },
+              "readyState": 4,
+              "seeking": false
+            },
+            {
+              "name": "generated-local.mp4",
+              "position": 0.002446,
+              "duration": 1.4299,
+              "paused": true,
+              "firstFrame": {
+                "mediaTime": 0,
+                "presentedFrames": 1,
+                "width": 320,
+                "height": 180
+              },
+              "readyState": 4,
+              "seeking": false
+            }
+          ],
+          "loadedImages": [],
+          "karaoke": [
+            {
+              "source": "karaoke",
+              "disposed": false,
+              "available": false,
+              "reason": "missing-pair",
+              "trackId": "pipeline-harness-real-audio",
+              "name": null,
+              "assetId": null,
+              "version": null,
+              "loading": false,
+              "transparencyProfile": "index",
+              "crop": false,
+              "width": null,
+              "height": null,
+              "position": null,
+              "retainedAssociationBytes": 0,
+              "graphicsStatus": "not-rendered",
+              "decoder": null,
+              "policy": {
+                "evidence": "docs/research/VIDEO_REMAINING_WORKFLOWS.md",
+                "referenceEquivalent": false,
+                "ownership": "Copied session-only CDG bytes/configuration belong to a track ID; every deck owns a private decoder/canvas. Track/profile versions and load generations prevent stale attachment. No bytes, URLs or graphics are persisted.",
+                "clock": "Original engine.position(deck) seconds, clamped below at zero; pause/seek/reverse/loop are handled by the actual decoder replay. Graphics EOF holds the last decoded frame.",
+                "presentation": "Full300x216 by default; optional288x192 crop. Explicit index or alpha-table transparency. All tile channels; no parity repair. No audio start/play command.",
+                "validation": "Real named Blob/File and at least one complete24-byte packet. Unknown/non-graphics/timing packets remain valid timeline data and are diagnosed, not filtered out."
+              }
+            },
+            {
+              "source": "karaoke",
+              "disposed": false,
+              "available": false,
+              "reason": "missing-track",
+              "trackId": null,
+              "name": null,
+              "assetId": null,
+              "version": null,
+              "loading": false,
+              "transparencyProfile": "index",
+              "crop": false,
+              "width": null,
+              "height": null,
+              "position": null,
+              "retainedAssociationBytes": 0,
+              "graphicsStatus": "not-rendered",
+              "decoder": null,
+              "policy": {
+                "evidence": "docs/research/VIDEO_REMAINING_WORKFLOWS.md",
+                "referenceEquivalent": false,
+                "ownership": "Copied session-only CDG bytes/configuration belong to a track ID; every deck owns a private decoder/canvas. Track/profile versions and load generations prevent stale attachment. No bytes, URLs or graphics are persisted.",
+                "clock": "Original engine.position(deck) seconds, clamped below at zero; pause/seek/reverse/loop are handled by the actual decoder replay. Graphics EOF holds the last decoded frame.",
+                "presentation": "Full300x216 by default; optional288x192 crop. Explicit index or alpha-table transparency. All tile channels; no parity repair. No audio start/play command.",
+                "validation": "Real named Blob/File and at least one complete24-byte packet. Unknown/non-graphics/timing packets remain valid timeline data and are diagnosed, not filtered out."
+              }
+            }
+          ],
+          "pipeline": {
+            "width": 640,
+            "height": 360,
+            "disposed": false,
+            "policy": {
+              "order": "Raw input → two channel FX → channel overlays → transition → master overlays → two master FX",
+              "referenceOrder": "Unverified; this is an independent Open Play routing contract.",
+              "scheduling": "Caller supplies one monotonic time/frameId per processed frame; no frame-rate guarantee."
+            },
+            "overlays": {
+              "left": {
+                "rendered": 0,
+                "skipped": []
+              },
+              "right": {
+                "rendered": 0,
+                "skipped": []
+              },
+              "master": {
+                "rendered": 0,
+                "skipped": []
+              }
+            }
+          },
+          "recording": false,
+          "captureBytes": 0
+        }
+      },
+      {
+        "phase": "event:canplay",
+        "wallMs": 2730.4000000953674,
+        "audioTime": 2.538666666666667,
+        "linked": true,
+        "video": {
+          "paused": true,
+          "currentTime": 0.899999,
+          "seeking": false,
+          "readyState": 4,
+          "duration": 1.4299,
+          "playbackRate": 1,
+          "error": null
+        },
+        "deck": {
+          "reverse": true,
+          "playing": true,
+          "processing": false,
+          "position": 0.9,
+          "rate": 1,
+          "enginePosition": 0.9
+        },
+        "mixer": {
+          "frames": 11,
+          "error": null,
+          "width": 640,
+          "height": 360,
+          "lastRenderMs": 3.299999952316284,
+          "inputs": [
+            {
+              "name": "generated-local.mp4",
+              "position": 0.899999,
+              "duration": 1.4299,
+              "paused": true,
+              "firstFrame": {
+                "mediaTime": 0,
+                "presentedFrames": 1,
+                "width": 320,
+                "height": 180
+              },
+              "readyState": 4,
+              "seeking": false
+            },
+            {
+              "name": "generated-local.mp4",
+              "position": 0.002446,
+              "duration": 1.4299,
+              "paused": true,
+              "firstFrame": {
+                "mediaTime": 0,
+                "presentedFrames": 1,
+                "width": 320,
+                "height": 180
+              },
+              "readyState": 4,
+              "seeking": false
+            }
+          ],
+          "loadedImages": [],
+          "karaoke": [
+            {
+              "source": "karaoke",
+              "disposed": false,
+              "available": false,
+              "reason": "missing-pair",
+              "trackId": "pipeline-harness-real-audio",
+              "name": null,
+              "assetId": null,
+              "version": null,
+              "loading": false,
+              "transparencyProfile": "index",
+              "crop": false,
+              "width": null,
+              "height": null,
+              "position": null,
+              "retainedAssociationBytes": 0,
+              "graphicsStatus": "not-rendered",
+              "decoder": null,
+              "policy": {
+                "evidence": "docs/research/VIDEO_REMAINING_WORKFLOWS.md",
+                "referenceEquivalent": false,
+                "ownership": "Copied session-only CDG bytes/configuration belong to a track ID; every deck owns a private decoder/canvas. Track/profile versions and load generations prevent stale attachment. No bytes, URLs or graphics are persisted.",
+                "clock": "Original engine.position(deck) seconds, clamped below at zero; pause/seek/reverse/loop are handled by the actual decoder replay. Graphics EOF holds the last decoded frame.",
+                "presentation": "Full300x216 by default; optional288x192 crop. Explicit index or alpha-table transparency. All tile channels; no parity repair. No audio start/play command.",
+                "validation": "Real named Blob/File and at least one complete24-byte packet. Unknown/non-graphics/timing packets remain valid timeline data and are diagnosed, not filtered out."
+              }
+            },
+            {
+              "source": "karaoke",
+              "disposed": false,
+              "available": false,
+              "reason": "missing-track",
+              "trackId": null,
+              "name": null,
+              "assetId": null,
+              "version": null,
+              "loading": false,
+              "transparencyProfile": "index",
+              "crop": false,
+              "width": null,
+              "height": null,
+              "position": null,
+              "retainedAssociationBytes": 0,
+              "graphicsStatus": "not-rendered",
+              "decoder": null,
+              "policy": {
+                "evidence": "docs/research/VIDEO_REMAINING_WORKFLOWS.md",
+                "referenceEquivalent": false,
+                "ownership": "Copied session-only CDG bytes/configuration belong to a track ID; every deck owns a private decoder/canvas. Track/profile versions and load generations prevent stale attachment. No bytes, URLs or graphics are persisted.",
+                "clock": "Original engine.position(deck) seconds, clamped below at zero; pause/seek/reverse/loop are handled by the actual decoder replay. Graphics EOF holds the last decoded frame.",
+                "presentation": "Full300x216 by default; optional288x192 crop. Explicit index or alpha-table transparency. All tile channels; no parity repair. No audio start/play command.",
+                "validation": "Real named Blob/File and at least one complete24-byte packet. Unknown/non-graphics/timing packets remain valid timeline data and are diagnosed, not filtered out."
+              }
+            }
+          ],
+          "pipeline": {
+            "width": 640,
+            "height": 360,
+            "disposed": false,
+            "policy": {
+              "order": "Raw input → two channel FX → channel overlays → transition → master overlays → two master FX",
+              "referenceOrder": "Unverified; this is an independent Open Play routing contract.",
+              "scheduling": "Caller supplies one monotonic time/frameId per processed frame; no frame-rate guarantee."
+            },
+            "overlays": {
+              "left": {
+                "rendered": 0,
+                "skipped": []
+              },
+              "right": {
+                "rendered": 0,
+                "skipped": []
+              },
+              "master": {
+                "rendered": 0,
+                "skipped": []
+              }
+            }
+          },
+          "recording": false,
+          "captureBytes": 0
+        }
+      },
+      {
+        "phase": "event:seeking",
+        "wallMs": 2866,
+        "audioTime": 2.6773333333333333,
+        "linked": true,
+        "video": {
+          "paused": true,
+          "currentTime": 0.771333,
+          "seeking": true,
+          "readyState": 1,
+          "duration": 1.4299,
+          "playbackRate": 1,
+          "error": null
+        },
+        "deck": {
+          "reverse": true,
+          "playing": true,
+          "processing": false,
+          "position": 0.9,
+          "rate": 1,
+          "enginePosition": 0.7659999999999997
+        },
+        "mixer": {
+          "frames": 12,
+          "error": null,
+          "width": 640,
+          "height": 360,
+          "lastRenderMs": 5.400000095367432,
+          "inputs": [
+            {
+              "name": "generated-local.mp4",
+              "position": 0.771333,
+              "duration": 1.4299,
+              "paused": true,
+              "firstFrame": {
+                "mediaTime": 0,
+                "presentedFrames": 1,
+                "width": 320,
+                "height": 180
+              },
+              "readyState": 1,
+              "seeking": true
+            },
+            {
+              "name": "generated-local.mp4",
+              "position": 0.002446,
+              "duration": 1.4299,
+              "paused": true,
+              "firstFrame": {
+                "mediaTime": 0,
+                "presentedFrames": 1,
+                "width": 320,
+                "height": 180
+              },
+              "readyState": 4,
+              "seeking": false
+            }
+          ],
+          "loadedImages": [],
+          "karaoke": [
+            {
+              "source": "karaoke",
+              "disposed": false,
+              "available": false,
+              "reason": "missing-pair",
+              "trackId": "pipeline-harness-real-audio",
+              "name": null,
+              "assetId": null,
+              "version": null,
+              "loading": false,
+              "transparencyProfile": "index",
+              "crop": false,
+              "width": null,
+              "height": null,
+              "position": null,
+              "retainedAssociationBytes": 0,
+              "graphicsStatus": "not-rendered",
+              "decoder": null,
+              "policy": {
+                "evidence": "docs/research/VIDEO_REMAINING_WORKFLOWS.md",
+                "referenceEquivalent": false,
+                "ownership": "Copied session-only CDG bytes/configuration belong to a track ID; every deck owns a private decoder/canvas. Track/profile versions and load generations prevent stale attachment. No bytes, URLs or graphics are persisted.",
+                "clock": "Original engine.position(deck) seconds, clamped below at zero; pause/seek/reverse/loop are handled by the actual decoder replay. Graphics EOF holds the last decoded frame.",
+                "presentation": "Full300x216 by default; optional288x192 crop. Explicit index or alpha-table transparency. All tile channels; no parity repair. No audio start/play command.",
+                "validation": "Real named Blob/File and at least one complete24-byte packet. Unknown/non-graphics/timing packets remain valid timeline data and are diagnosed, not filtered out."
+              }
+            },
+            {
+              "source": "karaoke",
+              "disposed": false,
+              "available": false,
+              "reason": "missing-track",
+              "trackId": null,
+              "name": null,
+              "assetId": null,
+              "version": null,
+              "loading": false,
+              "transparencyProfile": "index",
+              "crop": false,
+              "width": null,
+              "height": null,
+              "position": null,
+              "retainedAssociationBytes": 0,
+              "graphicsStatus": "not-rendered",
+              "decoder": null,
+              "policy": {
+                "evidence": "docs/research/VIDEO_REMAINING_WORKFLOWS.md",
+                "referenceEquivalent": false,
+                "ownership": "Copied session-only CDG bytes/configuration belong to a track ID; every deck owns a private decoder/canvas. Track/profile versions and load generations prevent stale attachment. No bytes, URLs or graphics are persisted.",
+                "clock": "Original engine.position(deck) seconds, clamped below at zero; pause/seek/reverse/loop are handled by the actual decoder replay. Graphics EOF holds the last decoded frame.",
+                "presentation": "Full300x216 by default; optional288x192 crop. Explicit index or alpha-table transparency. All tile channels; no parity repair. No audio start/play command.",
+                "validation": "Real named Blob/File and at least one complete24-byte packet. Unknown/non-graphics/timing packets remain valid timeline data and are diagnosed, not filtered out."
+              }
+            }
+          ],
+          "pipeline": {
+            "width": 640,
+            "height": 360,
+            "disposed": false,
+            "policy": {
+              "order": "Raw input → two channel FX → channel overlays → transition → master overlays → two master FX",
+              "referenceOrder": "Unverified; this is an independent Open Play routing contract.",
+              "scheduling": "Caller supplies one monotonic time/frameId per processed frame; no frame-rate guarantee."
+            },
+            "overlays": {
+              "left": {
+                "rendered": 0,
+                "skipped": []
+              },
+              "right": {
+                "rendered": 0,
+                "skipped": []
+              },
+              "master": {
+                "rendered": 0,
+                "skipped": []
+              }
+            }
+          },
+          "recording": false,
+          "captureBytes": 0
+        }
+      },
+      {
+        "phase": "event:seeked",
+        "wallMs": 2867,
+        "audioTime": 2.6773333333333333,
+        "linked": true,
+        "video": {
+          "paused": true,
+          "currentTime": 0.771333,
+          "seeking": false,
+          "readyState": 4,
+          "duration": 1.4299,
+          "playbackRate": 1,
+          "error": null
+        },
+        "deck": {
+          "reverse": true,
+          "playing": true,
+          "processing": false,
+          "position": 0.9,
+          "rate": 1,
+          "enginePosition": 0.7659999999999997
+        },
+        "mixer": {
+          "frames": 12,
+          "error": null,
+          "width": 640,
+          "height": 360,
+          "lastRenderMs": 5.400000095367432,
+          "inputs": [
+            {
+              "name": "generated-local.mp4",
+              "position": 0.771333,
+              "duration": 1.4299,
+              "paused": true,
+              "firstFrame": {
+                "mediaTime": 0,
+                "presentedFrames": 1,
+                "width": 320,
+                "height": 180
+              },
+              "readyState": 4,
+              "seeking": false
+            },
+            {
+              "name": "generated-local.mp4",
+              "position": 0.002446,
+              "duration": 1.4299,
+              "paused": true,
+              "firstFrame": {
+                "mediaTime": 0,
+                "presentedFrames": 1,
+                "width": 320,
+                "height": 180
+              },
+              "readyState": 4,
+              "seeking": false
+            }
+          ],
+          "loadedImages": [],
+          "karaoke": [
+            {
+              "source": "karaoke",
+              "disposed": false,
+              "available": false,
+              "reason": "missing-pair",
+              "trackId": "pipeline-harness-real-audio",
+              "name": null,
+              "assetId": null,
+              "version": null,
+              "loading": false,
+              "transparencyProfile": "index",
+              "crop": false,
+              "width": null,
+              "height": null,
+              "position": null,
+              "retainedAssociationBytes": 0,
+              "graphicsStatus": "not-rendered",
+              "decoder": null,
+              "policy": {
+                "evidence": "docs/research/VIDEO_REMAINING_WORKFLOWS.md",
+                "referenceEquivalent": false,
+                "ownership": "Copied session-only CDG bytes/configuration belong to a track ID; every deck owns a private decoder/canvas. Track/profile versions and load generations prevent stale attachment. No bytes, URLs or graphics are persisted.",
+                "clock": "Original engine.position(deck) seconds, clamped below at zero; pause/seek/reverse/loop are handled by the actual decoder replay. Graphics EOF holds the last decoded frame.",
+                "presentation": "Full300x216 by default; optional288x192 crop. Explicit index or alpha-table transparency. All tile channels; no parity repair. No audio start/play command.",
+                "validation": "Real named Blob/File and at least one complete24-byte packet. Unknown/non-graphics/timing packets remain valid timeline data and are diagnosed, not filtered out."
+              }
+            },
+            {
+              "source": "karaoke",
+              "disposed": false,
+              "available": false,
+              "reason": "missing-track",
+              "trackId": null,
+              "name": null,
+              "assetId": null,
+              "version": null,
+              "loading": false,
+              "transparencyProfile": "index",
+              "crop": false,
+              "width": null,
+              "height": null,
+              "position": null,
+              "retainedAssociationBytes": 0,
+              "graphicsStatus": "not-rendered",
+              "decoder": null,
+              "policy": {
+                "evidence": "docs/research/VIDEO_REMAINING_WORKFLOWS.md",
+                "referenceEquivalent": false,
+                "ownership": "Copied session-only CDG bytes/configuration belong to a track ID; every deck owns a private decoder/canvas. Track/profile versions and load generations prevent stale attachment. No bytes, URLs or graphics are persisted.",
+                "clock": "Original engine.position(deck) seconds, clamped below at zero; pause/seek/reverse/loop are handled by the actual decoder replay. Graphics EOF holds the last decoded frame.",
+                "presentation": "Full300x216 by default; optional288x192 crop. Explicit index or alpha-table transparency. All tile channels; no parity repair. No audio start/play command.",
+                "validation": "Real named Blob/File and at least one complete24-byte packet. Unknown/non-graphics/timing packets remain valid timeline data and are diagnosed, not filtered out."
+              }
+            }
+          ],
+          "pipeline": {
+            "width": 640,
+            "height": 360,
+            "disposed": false,
+            "policy": {
+              "order": "Raw input → two channel FX → channel overlays → transition → master overlays → two master FX",
+              "referenceOrder": "Unverified; this is an independent Open Play routing contract.",
+              "scheduling": "Caller supplies one monotonic time/frameId per processed frame; no frame-rate guarantee."
+            },
+            "overlays": {
+              "left": {
+                "rendered": 0,
+                "skipped": []
+              },
+              "right": {
+                "rendered": 0,
+                "skipped": []
+              },
+              "master": {
+                "rendered": 0,
+                "skipped": []
+              }
+            }
+          },
+          "recording": false,
+          "captureBytes": 0
+        }
+      }
+    ],
+    "samples": [
+      {
+        "enginePosition": 0.9,
+        "expected": 0.8999999999999999,
+        "videoPosition": 0.899999,
+        "paused": true,
+        "readyState": 4,
+        "pixel": [
+          219,
+          30,
+          19,
+          255
+        ]
+      },
+      {
+        "enginePosition": 0.7713333333333329,
+        "expected": 0.7713333333333328,
+        "videoPosition": 0.771333,
+        "paused": true,
+        "readyState": 4,
+        "pixel": [
+          219,
+          30,
+          19,
+          255
+        ]
+      }
+    ]
+  },
+  "queuedLinkedSeek": {
+    "phases": [
+      {
+        "phase": "old-seek-started",
+        "wallMs": 3078.9000000953674,
+        "enginePosition": 0.95,
+        "reverse": true,
+        "playing": false,
+        "videoPosition": 0.35,
+        "paused": true,
+        "readyState": 1,
+        "seeking": true
+      },
+      {
+        "phase": "tick-with-old-seek-active",
+        "wallMs": 3081.7000000476837,
+        "enginePosition": 0.95,
+        "reverse": true,
+        "playing": false,
+        "videoPosition": 0.35,
+        "paused": true,
+        "readyState": 1,
+        "seeking": true
+      },
+      {
+        "phase": "old-seek-decoded",
+        "wallMs": 3083.2000000476837,
+        "enginePosition": 0.95,
+        "reverse": true,
+        "playing": false,
+        "videoPosition": 0.35,
+        "paused": true,
+        "readyState": 4,
+        "seeking": false
+      },
+      {
+        "phase": "new-target-pump",
+        "wallMs": 3103,
+        "enginePosition": 0.95,
+        "reverse": true,
+        "playing": false,
+        "videoPosition": 0.95,
+        "paused": true,
+        "readyState": 4,
+        "seeking": false
+      }
+    ],
+    "seekedEvents": [
+      {
+        "phase": "seeked",
+        "wallMs": 3083.0999999046326,
+        "enginePosition": 0.95,
+        "reverse": true,
+        "playing": false,
+        "videoPosition": 0.35,
+        "paused": true,
+        "readyState": 4,
+        "seeking": false
+      },
+      {
+        "phase": "seeked",
+        "wallMs": 3103.9000000953674,
+        "enginePosition": 0.95,
+        "reverse": true,
+        "playing": false,
+        "videoPosition": 0.95,
+        "paused": true,
+        "readyState": 4,
+        "seeking": false
+      }
+    ],
+    "positionToleranceSeconds": 0.1,
+    "completion": "Drain old seek, then pump actual rAF/mixer frames until the distinct new engine target is paused, decoded and within0.1s. No old-frame acceptance.",
+    "before": {
+      "phase": "primed",
+      "wallMs": 3071,
+      "enginePosition": 0.7719999999999999,
+      "reverse": false,
+      "playing": false,
+      "videoPosition": 0.14299,
+      "paused": true,
+      "readyState": 4,
+      "seeking": false,
+      "hash": "64704a67",
+      "pixel": [
+        37,
+        226,
+        237,
+        255
+      ]
+    },
+    "completionBarrier": "Both the new decoded target and its distinct seeked event must complete.",
+    "after": {
+      "phase": "new-target-decoded",
+      "wallMs": 3108.2999999523163,
+      "enginePosition": 0.95,
+      "reverse": true,
+      "playing": false,
+      "videoPosition": 0.95,
+      "paused": true,
+      "readyState": 4,
+      "seeking": false,
+      "hash": "16e9d3b1",
+      "pixel": [
+        36,
+        225,
+        236,
+        204
+      ],
+      "sourcePixel": [
+        219,
+        30,
+        19,
+        255
+      ]
+    }
+  },
+  "seekFrameRetention": {
+    "before": {
+      "hash": "64704a67",
+      "pixel": [
+        37,
+        226,
+        237,
+        255
+      ],
+      "readyState": 4,
+      "currentTime": 0.14299
+    },
+    "seekStarted": {
+      "readyState": 1,
+      "seeking": true,
+      "currentTime": 0.95
+    },
+    "during": {
+      "hash": "64704a67",
+      "pixel": [
+        37,
+        226,
+        237,
+        255
+      ],
+      "readyState": 1,
+      "seeking": true
+    },
+    "after": {
+      "hash": "dc9ff30c",
+      "pixel": [
+        36,
+        225,
+        236,
+        255
+      ],
+      "readyState": 4,
+      "currentTime": 0.95
+    }
+  },
+  "continuousReverse": {
+    "samples": [
+      {
+        "frame": 0,
+        "enginePosition": 1.143253333333333,
+        "videoPosition": 1.14392,
+        "paused": true,
+        "seeking": true,
+        "readyState": 1,
+        "pixel": [
+          37,
+          226,
+          237,
+          204
+        ],
+        "hash": "14c26fad"
+      },
+      {
+        "frame": 1,
+        "enginePosition": 1.1325866666666666,
+        "videoPosition": 1.14392,
+        "paused": true,
+        "seeking": false,
+        "readyState": 4,
+        "pixel": [
+          36,
+          225,
+          236,
+          204
+        ],
+        "hash": "a2a88eb6"
+      },
+      {
+        "frame": 2,
+        "enginePosition": 1.127253333333333,
+        "videoPosition": 1.14392,
+        "paused": true,
+        "seeking": false,
+        "readyState": 4,
+        "pixel": [
+          36,
+          225,
+          236,
+          204
+        ],
+        "hash": "a2a88eb6"
+      },
+      {
+        "frame": 3,
+        "enginePosition": 1.1165866666666666,
+        "videoPosition": 1.127253,
+        "paused": true,
+        "seeking": true,
+        "readyState": 1,
+        "pixel": [
+          36,
+          225,
+          236,
+          204
+        ],
+        "hash": "a2a88eb6"
+      },
+      {
+        "frame": 4,
+        "enginePosition": 1.111253333333333,
+        "videoPosition": 1.127253,
+        "paused": true,
+        "seeking": false,
+        "readyState": 4,
+        "pixel": [
+          36,
+          225,
+          236,
+          204
+        ],
+        "hash": "8633b5b"
+      },
+      {
+        "frame": 5,
+        "enginePosition": 1.1005866666666666,
+        "videoPosition": 1.105919,
+        "paused": true,
+        "seeking": true,
+        "readyState": 1,
+        "pixel": [
+          36,
+          225,
+          236,
+          204
+        ],
+        "hash": "8633b5b"
+      },
+      {
+        "frame": 6,
+        "enginePosition": 1.095253333333333,
+        "videoPosition": 1.105919,
+        "paused": true,
+        "seeking": false,
+        "readyState": 4,
+        "pixel": [
+          36,
+          225,
+          236,
+          204
+        ],
+        "hash": "4145f68d"
+      },
+      {
+        "frame": 7,
+        "enginePosition": 1.0845866666666666,
+        "videoPosition": 1.105919,
+        "paused": true,
+        "seeking": false,
+        "readyState": 4,
+        "pixel": [
+          36,
+          225,
+          236,
+          204
+        ],
+        "hash": "4145f68d"
+      },
+      {
+        "frame": 8,
+        "enginePosition": 1.079253333333333,
+        "videoPosition": 1.084586,
+        "paused": true,
+        "seeking": true,
+        "readyState": 1,
+        "pixel": [
+          36,
+          225,
+          236,
+          204
+        ],
+        "hash": "4145f68d"
+      },
+      {
+        "frame": 9,
+        "enginePosition": 1.0685866666666666,
+        "videoPosition": 1.084586,
+        "paused": true,
+        "seeking": false,
+        "readyState": 4,
+        "pixel": [
+          36,
+          225,
+          236,
+          204
+        ],
+        "hash": "53003d4"
+      },
+      {
+        "frame": 10,
+        "enginePosition": 1.0632533333333334,
+        "videoPosition": 1.084586,
+        "paused": true,
+        "seeking": false,
+        "readyState": 4,
+        "pixel": [
+          36,
+          225,
+          236,
+          204
+        ],
+        "hash": "53003d4"
+      },
+      {
+        "frame": 11,
+        "enginePosition": 0.84992,
+        "videoPosition": 0.855253,
+        "paused": true,
+        "seeking": true,
+        "readyState": 1,
+        "pixel": [
+          36,
+          225,
+          236,
+          204
+        ],
+        "hash": "53003d4"
+      }
+    ],
+    "seekedEvents": [
+      {
+        "wallMs": 3220.4000000953674,
+        "currentTime": 1.14392,
+        "readyState": 4
+      },
+      {
+        "wallMs": 3244.5999999046326,
+        "currentTime": 1.127253,
+        "readyState": 4
+      },
+      {
+        "wallMs": 3260.5999999046326,
+        "currentTime": 1.105919,
+        "readyState": 4
+      },
+      {
+        "wallMs": 3284.9000000953674,
+        "currentTime": 1.084586,
+        "readyState": 4
+      },
+      {
+        "wallMs": 3504,
+        "currentTime": 0.855253,
+        "readyState": 4
+      }
+    ],
+    "inLoopSeekCompletions": 4,
+    "afterDecode": {
+      "currentTime": 0.855253,
+      "readyState": 4
+    }
+  },
+  "capture": {
+    "bytes": 52081,
+    "mime": "video/webm;codecs=vp9,opus",
+    "processedFrames": 36,
+    "wallMs": 1404.1000001430511,
+    "observedProcessedFramesPerSecond": 25.63919948460386,
+    "engineCaptureAudioTracks": [
+      {
+        "kind": "audio",
+        "readyState": "live",
+        "enabled": true
+      }
+    ],
+    "scope": "Actual mixer tick, GPU pipeline and MediaRecorder run; requested30fps is not a measured frame-rate guarantee."
+  },
+  "decodedCapture": {
+    "width": 640,
+    "height": 360,
+    "duration": 1.368,
+    "readyState": 4,
+    "firstFrame": {
+      "mediaTime": 0,
+      "presentedFrames": 1,
+      "width": 640,
+      "height": 360
+    },
+    "secondFrame": {
+      "mediaTime": 0.067,
+      "presentedFrames": 2,
+      "width": 640,
+      "height": 360
+    },
+    "muted": true,
+    "audioDecodedBytes": 5754,
+    "corner": [
+      35,
+      227,
+      233,
+      254
+    ],
+    "magentaOverlayPixels": 788
+  },
+  "captureAudio": {
+    "channels": 2,
+    "sampleRate": 48000,
+    "duration": 1.38,
+    "rms": 0.031098107702571876,
+    "tone440": 0.04409019458464784,
+    "tone880": 6.819851431530525e-7,
+    "claim": "Actual audio decode from the captured video container, not just presence of an input stream track."
+  },
+  "passed": 32,
+  "failed": 0,
+  "durationMs": 5466.799999952316,
+  "messages": [],
+  "scope": "Actual browser integration evidence only. No native/hardware/reference parity; no full30fps assumption. Failures are preserved, including codec/container or environment limitations."
+}

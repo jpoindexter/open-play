@@ -7629,7 +7629,7 @@
       "trigger": "Edit text, font, color, alignment and animation",
       "expected": "Preview and save reusable overlay; allow on/off control",
       "evidence": "DOCUMENTED; installed behavior untested",
-      "prototype_behavior": "Implement specified fixture transition; identify simulation and unresolved reference states",
+      "prototype_behavior": "Real text/font/color/size/alignment/opacity/animation, live edit and local metadata presets; actual Canvas suite32/32 plus main UI save/edit/reload. Exact vendor controls/geometry remain unverified.",
       "native_status": "blocked_until_prototype_approval",
       "acceptance": "Edit text, font, color, alignment and animation \u2192 Preview and save reusable overlay; allow on/off control",
       "source_url": "https://support.serato.com/hc/en-us/articles/202305514-Serato-Video-Text-and-Image-Effects-101",
@@ -7646,7 +7646,13 @@
         "primary": "Codex",
         "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
         "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
-      }
+      },
+      "prototype_reference_parity_verified": false,
+      "prototype_evidence": [
+        "docs/prototype/VIDEO_FUNCTIONAL_REVIEW.md",
+        "docs/prototype/KARAOKE_FUNCTIONAL_REVIEW.md",
+        "docs/prototype/MEDIA_CRATE_FUNCTIONAL_REVIEW.md"
+      ]
     },
     {
       "id": "REQ-284",
@@ -7656,7 +7662,7 @@
       "trigger": "Choose image and edit animation/alignment",
       "expected": "Save reusable image overlay and toggle independently",
       "evidence": "DOCUMENTED; installed behavior untested",
-      "prototype_behavior": "Implement specified fixture transition; identify simulation and unresolved reference states",
+      "prototype_behavior": "Real image decode/alpha/geometry/animation and metadata presets;32/32 overlay suite and main image import. Image bytes are session assets; restoring metadata requires reimport and restores OFF, so native reusable-file behavior remains open.",
       "native_status": "blocked_until_prototype_approval",
       "acceptance": "Choose image and edit animation/alignment \u2192 Save reusable image overlay and toggle independently",
       "source_url": "https://support.serato.com/hc/en-us/articles/202305514-Serato-Video-Text-and-Image-Effects-101",
@@ -7673,7 +7679,13 @@
         "primary": "Codex",
         "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
         "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
-      }
+      },
+      "prototype_reference_parity_verified": false,
+      "prototype_evidence": [
+        "docs/prototype/VIDEO_FUNCTIONAL_REVIEW.md",
+        "docs/prototype/KARAOKE_FUNCTIONAL_REVIEW.md",
+        "docs/prototype/MEDIA_CRATE_FUNCTIONAL_REVIEW.md"
+      ]
     },
     {
       "id": "REQ-285",
@@ -7683,7 +7695,7 @@
       "trigger": "Choose scroll, BPM zoom or bass zoom",
       "expected": "Offer directional scroll and speed/intensity variants; audio-reactive modes require left/right deck context",
       "evidence": "DOCUMENTED; installed behavior untested",
-      "prototype_behavior": "Implement specified fixture transition; identify simulation and unresolved reference states",
+      "prototype_behavior": "Four directional scrolls plus BPM/Bass Zoom, real per-channel measured FFT, speed/intensity labels and Reduced Motion. Numeric transfer functions/ranges are independent; current complete vendor animation menu remains unknown.",
       "native_status": "blocked_until_prototype_approval",
       "acceptance": "Choose scroll, BPM zoom or bass zoom \u2192 Offer directional scroll and speed/intensity variants; audio-reactive modes require left/right deck context",
       "source_url": "https://support.serato.com/hc/en-us/articles/202305514-Serato-Video-Text-and-Image-Effects-101",
@@ -7700,7 +7712,13 @@
         "primary": "Codex",
         "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
         "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
-      }
+      },
+      "prototype_reference_parity_verified": false,
+      "prototype_evidence": [
+        "docs/prototype/VIDEO_FUNCTIONAL_REVIEW.md",
+        "docs/prototype/KARAOKE_FUNCTIONAL_REVIEW.md",
+        "docs/prototype/MEDIA_CRATE_FUNCTIONAL_REVIEW.md"
+      ]
     },
     {
       "id": "REQ-286",
@@ -9330,7 +9348,7 @@
       "trigger": "Load MP3+G",
       "expected": "Account for graphics-plus-audio playback; browser decoder not implemented",
       "evidence": "DOCUMENTED; installed runtime untested",
-      "prototype_behavior": "Explicit simulation or gap with source; no native capability claim",
+      "prototype_behavior": "Actual explicit original MP3+CDG pair import as one audio-library item with graphics.22pure/21Canvas/19bridge/19real engine-GPU-capture checks; main MP3 play/pause verified. All channels only/no parity repair; exact Serato compatibility and physical sync remain open.",
       "native_status": "blocked_until_prototype_approval",
       "acceptance": "Load MP3+G \u2192 Account for graphics-plus-audio playback; browser decoder not implemented",
       "source_url": "https://serato.com/dj/pro/expansions",
@@ -9347,7 +9365,13 @@
         "primary": "Codex",
         "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
         "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
-      }
+      },
+      "prototype_reference_parity_verified": false,
+      "prototype_evidence": [
+        "docs/prototype/VIDEO_FUNCTIONAL_REVIEW.md",
+        "docs/prototype/KARAOKE_FUNCTIONAL_REVIEW.md",
+        "docs/prototype/MEDIA_CRATE_FUNCTIONAL_REVIEW.md"
+      ]
     },
     {
       "id": "REQ-347",
@@ -9357,7 +9381,7 @@
       "trigger": "Assign master effects",
       "expected": "Retain two master effect slots in addition to per-channel effects",
       "evidence": "DOCUMENTED; installed runtime untested",
-      "prototype_behavior": "Explicit simulation or gap with source; no native capability claim",
+      "prototype_behavior": "Six actual ordered GPU slots:2left/2right/2master.32/32 assembled-pipeline checks include each position, concurrent routing and output pixels. Reference order/algorithms remain unverified.",
       "native_status": "blocked_until_prototype_approval",
       "acceptance": "Assign master effects \u2192 Retain two master effect slots in addition to per-channel effects",
       "source_url": "https://serato.com/dj/pro/expansions",
@@ -9374,7 +9398,13 @@
         "primary": "Codex",
         "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
         "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
-      }
+      },
+      "prototype_reference_parity_verified": false,
+      "prototype_evidence": [
+        "docs/prototype/VIDEO_FUNCTIONAL_REVIEW.md",
+        "docs/prototype/KARAOKE_FUNCTIONAL_REVIEW.md",
+        "docs/prototype/MEDIA_CRATE_FUNCTIONAL_REVIEW.md"
+      ]
     },
     {
       "id": "REQ-348",
@@ -9384,7 +9414,7 @@
       "trigger": "Enable audio-linked effects",
       "expected": "Represent coupled audio/video controls; exact effect transfer functions unverified",
       "evidence": "DOCUMENTED; installed runtime untested",
-      "prototype_behavior": "Explicit simulation or gap with source; no native capability claim",
+      "prototype_behavior": "Measured FFT/band-reactive visuals execute. Semantic audio-DJ-FX-to-video echo/distortion coupling remains unimplemented; spectrum reaction is not that coupling.",
       "native_status": "blocked_until_prototype_approval",
       "acceptance": "Enable audio-linked effects \u2192 Represent coupled audio/video controls; exact effect transfer functions unverified",
       "source_url": "https://serato.com/dj/pro/expansions",
@@ -9401,7 +9431,13 @@
         "primary": "Codex",
         "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
         "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
-      }
+      },
+      "prototype_reference_parity_verified": false,
+      "prototype_evidence": [
+        "docs/prototype/VIDEO_FUNCTIONAL_REVIEW.md",
+        "docs/prototype/KARAOKE_FUNCTIONAL_REVIEW.md",
+        "docs/prototype/MEDIA_CRATE_FUNCTIONAL_REVIEW.md"
+      ]
     },
     {
       "id": "REQ-349",
@@ -9411,7 +9447,7 @@
       "trigger": "Load audio with no linked video",
       "expected": "Select fallback media from designated crate",
       "evidence": "DOCUMENTED; installed runtime untested",
-      "prototype_behavior": "Explicit simulation or gap with source; no native capability claim",
+      "prototype_behavior": "Actual Media Crate file decode, selection, associations, fallback eligibility and playback;32real browser checks plus main UI sequence/random/association/fallbackOFF/persistence. Clip looping/repeat exclusion/selection ownership are declared independent policies; legacy docs do not establish current native behavior.",
       "native_status": "blocked_until_prototype_approval",
       "acceptance": "Load audio with no linked video \u2192 Select fallback media from designated crate",
       "source_url": "https://support.serato.com/hc/en-us/articles/204211070-Serato-Video-101",
@@ -9428,7 +9464,13 @@
         "primary": "Codex",
         "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
         "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
-      }
+      },
+      "prototype_reference_parity_verified": false,
+      "prototype_evidence": [
+        "docs/prototype/VIDEO_FUNCTIONAL_REVIEW.md",
+        "docs/prototype/KARAOKE_FUNCTIONAL_REVIEW.md",
+        "docs/prototype/MEDIA_CRATE_FUNCTIONAL_REVIEW.md"
+      ]
     },
     {
       "id": "REQ-350",

@@ -1,4 +1,5 @@
 import { createVideoMixer } from "./video.js";
+import { createVideoControls } from "./video-controls.js";
 import { createMIDI, mappedValue } from "./midi.js";
 import { getExtendedEffectControls } from "./extended-effects.js";
 import { implementedEffects } from "./effects.js";
@@ -1239,97 +1240,44 @@ export function createPanels(a) {
     };
   }
   const videoMixer = createVideoMixer({ state: s, engine, notify });
-  function video() {
-    const v = s.video;
-    $("#panel").innerHTML =
-      head("Video", "LOCAL VIDEO DECODE / COMPOSITE / CAPTURE", true) +
-      `<div class="video-previews">${[0, 1].map((i) => `<div><canvas id="video-preview-${i}" width="320" height="180" style="width:100%"></canvas><label>${i ? "Right" : "Left"} local video<input type="file" accept="video/*" data-video-file="${i}"></label><button data-video-play="${i}">Play / pause ${i ? "right" : "left"}</button><p id="video-status-${i}" class="muted">No media loaded</p></div>`).join("")}<div><canvas id="video-master" width="640" height="360" style="width:100%;background:#111"></canvas><button id="video-fullscreen">Fullscreen output</button></div></div><div class="panel-controls"><label>Transition<select id="video-transition">${options(["Crossfade", "Wipe — illustrative", "Zoom — illustrative"], v.transition)}</select></label><label>Mix<input id="video-cross" type="range" min="-1" max="1" step=".01" value="${v.cross}"></label><label><input id="video-auto" type="checkbox" ${v.auto ? "checked" : ""}> Auto</label><label><input id="video-link" type="checkbox" ${v.linked ? "checked" : ""}> Link audio</label><button id="video-overlay">Text / image</button><button id="video-fx">Channel / master FX</button><button id="video-output">Output settings</button><button id="video-media">Media Crate / karaoke</button></div><div class="panel-controls"><button id="video-record">${videoMixer.recording ? "Stop video capture" : "Record video mix"}</button><button id="video-download" ${videoMixer.result ? "" : "disabled"}>Download video mix</button><span id="video-record-state">Not recording</span></div><p class="muted">Local files stay in this browser. Link follows decks 1/2 and the audio crossfader; disable it for independent video controls. Source-video audio is muted. Canvas output is 640×360 / 30 fps, not native HD, karaoke or Syphon parity.</p>`;
-    videoMixer.bind($("#video-master"));
-    $$("[data-video-file]").forEach(
-      (input) =>
-        (input.onchange = async () => {
-          if (!input.files[0]) return;
-          try {
-            await videoMixer.load(
-              Number(input.dataset.videoFile),
-              input.files[0],
-            );
-          } catch (e) {
-            notify(e.message);
-          }
-        }),
-    );
-    $$("[data-video-play]").forEach(
-      (button) =>
-        (button.onclick = () =>
-          videoMixer
-            .play(Number(button.dataset.videoPlay))
-            .catch((e) => notify(e.message))),
-    );
-    $("#video-transition").onchange = (e) => (v.transition = e.target.value);
-    $("#video-cross").oninput = (e) => (v.cross = Number(e.target.value));
-    $("#video-fullscreen").onclick = () =>
-      $("#video-master")
-        .requestFullscreen?.()
-        .catch((e) => notify(e.message));
-    $("#video-record").onclick = async () => {
-      try {
-        if (videoMixer.recording) await videoMixer.stop();
-        else await videoMixer.record();
-        $("#video-record").textContent = videoMixer.recording
-          ? "Stop video capture"
-          : "Record video mix";
-        $("#video-download").disabled = !videoMixer.result;
-      } catch (e) {
-        notify(e.message);
-      }
-    };
-    $("#video-download").onclick = () => {
-      const blob = videoMixer.result;
-      if (blob)
-        download(
-          "open-play-video-mix." + (blob.type.includes("mp4") ? "mp4" : "webm"),
-          blob,
-        );
-    };
-    for (const k of ["auto", "link"])
-      $("#video-" + k).onchange = (e) =>
-        (v[k === "link" ? "linked" : k] = e.target.checked);
-    $("#video-overlay").onclick = () =>
-      dialog(
-        "Video overlays",
-        `${badge("REAL CANVAS TEXT / IMAGE OVERLAY")}<div class="form-grid"><label>Text<input id="video-text" value="${esc(v.text)}"></label><label>Color<input id="video-color" type="color" value="${v.color}"></label><label>Animation<select id="video-animation">${options(["None", "Scroll", "BPM Zoom", "Bass Zoom"], v.animation)}</select></label><label>Image<input id="video-image" type="file" accept="image/png,image/jpeg,image/webp"></label><label>Alignment<select id="video-align">${options(["Center", "Left", "Right"], v.align || "Center")}</select></label><label>Speed<select id="video-speed">${options(["Slow", "Medium", "Fast"], v.speed || "Medium")}</select></label></div><div class="form-actions"><button id="video-overlay-save">Apply overlay</button></div>`,
-        () => {
-          $("#video-image").onchange = (e) => {
-            if (e.target.files[0]) {
-              if (v.image) URL.revokeObjectURL(v.image);
-              v.image = URL.createObjectURL(e.target.files[0]);
-              videoMixer.setImage(v.image);
-            }
-          };
-          $("#video-overlay-save").onclick = () => {
-            v.text = $("#video-text").value;
-            v.color = $("#video-color").value;
-            v.animation = $("#video-animation").value;
-            v.align = $("#video-align").value;
-            v.speed = $("#video-speed").value;
-            $("#modal").close();
-            refresh();
-          };
-        },
-      );
-    $("#video-output").onclick = () => settings("Expansion Packs");
-    $("#video-fx").onclick = () =>
-      dialog(
-        "Video FX routing",
-        `${badge("PARAMETER / DSP INVENTORY OPEN")}<div class="settings-grid">${["Left channel", "Right channel", "Master slot 1", "Master slot 2"].map((n) => `<label class="setting">${n}<select><option>Off</option><option>Illustrative color shift</option></select></label>`).join("")}</div><p>Two master slots are documented. The exact current Video effect and transition catalogs remain unverified. Illustrative entries are not claimed to be Serato effects. Syphon and audio-linked effect behavior are native requirements.</p>`,
-      );
-    $("#video-media").onclick = () =>
-      dialog(
-        "Video media workflows",
-        `<div class="note-box">Media Crate fallback, linked audio/video, MP3+G karaoke, HD recording and Syphon output remain in scope. This browser decodes supported local video and records its canvas mix; it does not decode karaoke, route Syphon or implement native HD output.</div><div class="form-grid"><label>Fallback source<select><option>Media Crate — simulated</option><option>Linked video — simulated</option></select></label><label>Karaoke fixture<select><option>Not loaded</option><option>MP3+G loaded — simulated</option><option>Graphics missing — simulated</option></select></label></div><p class="muted">Reference source: Serato DJ Pro expansion pages; format/render support requires exact-version verification.</p>`,
-      );
+  const karaokeImportTokens = [0, 0];
+  async function importKaraoke({index, audio, graphics, transparency, crop}) {
+    if (![0, 1].includes(index) || !audio || !graphics)
+      throw new Error("Choose an audio file, CDG graphics and deck 1 or 2.");
+    if (graphics.size < 24) throw new Error("CDG graphics need at least one complete 24-byte packet.");
+    if (s.decks[index].playing && s.settings["Lock Playing Deck"])
+      throw new Error("Pause the locked playing deck before importing a karaoke pair.");
+    const token = ++karaokeImportTokens[index];
+    const owner = s.decks[index], ownerTrack = owner.track, ownerGeneration = owner.videoLoadGeneration || 0;
+    const tracks = await a.importFiles([audio]), track = tracks[0];
+    if (token !== karaokeImportTokens[index] || s.decks[index] !== owner || owner.track !== ownerTrack ||
+      (owner.videoLoadGeneration || 0) !== ownerGeneration)
+      throw new Error("The target deck changed while audio was importing; the newer selection was preserved.");
+    if (!track) throw new Error("The browser could not decode this audio file.");
+    if (owner.playing && s.settings["Lock Playing Deck"])
+      throw new Error("The target deck started playing and is locked; pause it before importing the pair.");
+    await load(index, track.id);
+    if (token !== karaokeImportTokens[index] || s.decks[index] !== owner || owner.track !== track ||
+      owner.videoLoadGeneration !== ownerGeneration + 1)
+      throw new Error("The target audio track changed; import the pair again.");
+    await videoMixer.loadKaraoke(index, graphics, track.id, {transparency, crop});
+    if (token !== karaokeImportTokens[index] || s.decks[index] !== owner || owner.track !== track ||
+      owner.videoLoadGeneration !== ownerGeneration + 1)
+      throw new Error("The target deck changed while graphics were importing; the newer selection was preserved.");
+    track.type = /\.mp3$/i.test(audio.name) ? "MP3+G" : "Audio+CDG";
+    track.karaoke = {graphicsName: graphics.name, transparency, crop};
+    renderTracks(); persist();
+    return track;
   }
+  function video() {
+    const controls = video.controls ||= createVideoControls({
+      state: s, videoMixer, engine, notify, persist, dialog, refresh, download, esc, importKaraoke,
+    });
+    $("#panel").innerHTML =
+      head("Video", "INDEPENDENT VIDEO PIPELINE", true) + controls.markup();
+    controls.bind($("#panel"));
+  }
+
   function link() {
     $("#panel").innerHTML =
       head("Ableton Link", "NETWORK SESSION SIMULATION") +
@@ -2016,7 +1964,7 @@ export function createPanels(a) {
       $("#record-time").textContent = time(
         engine.ctx.currentTime - engine.recordStarted,
       );
-    if (s.panel === "video") videoMixer.tick();
+    if (s.panel === "video" || videoMixer.recording) videoMixer.tick();
   }
 
   return {

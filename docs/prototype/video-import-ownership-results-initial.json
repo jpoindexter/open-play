@@ -1,0 +1,19 @@
+{
+  "scope": "Executed extracted actual app.load + panels.importKaraoke + engine.setStemSlip off with controlled UI/audio adapters; no browser/native acceptance.",
+  "sourceSHA256": "d6a2b548b62dffa6b9c73331fc5c1da0ef77bd6d72a5aca56d1f76f84415ae13",
+  "expectedTrackId": "newer",
+  "actualTrackId": "pair",
+  "generation": 2,
+  "pairOutcome": {
+    "status": "rejected",
+    "message": "The target audio track changed; import the pair again."
+  },
+  "calls": {
+    "graphics": 0,
+    "persist": 0
+  },
+  "passed": false,
+  "status": "initial-red",
+  "command": "node scripts/test_video_import_ownership.mjs",
+  "criterion": "Later ordinary audio selection must remain authoritative while older pair disarms Stem Slip."
+}

@@ -1,0 +1,2574 @@
+{
+  "startedAt": "2026-10-16T18:10:20.859Z",
+  "policy": {
+    "order": "Raw input → two channel FX → channel overlays → transition → master overlays → two master FX",
+    "referenceOrder": "Unverified; this is an independent Open Play routing contract.",
+    "scheduling": "Caller supplies one monotonic time/frameId per processed frame; no frame-rate guarantee."
+  },
+  "engine": "Actual imported AudioEngine; test oscillators drive real input nodes; media transport uses an actual AudioEngine BufferSource deck.",
+  "seams": [
+    "Temporary document.createElement observation captures the actual mixer-created HTMLVideoElements for muted/decoded-frame inspection. No fake video, pipeline or engine.",
+    "Generated original media and PCM are test fixtures; no external media/service/hardware."
+  ],
+  "checks": [
+    {
+      "name": "Actual pipeline bypass and processed-channel previews retain both source identities",
+      "passed": true,
+      "evidence": {
+        "left": [
+          64,
+          128,
+          192,
+          255
+        ],
+        "right": [
+          192,
+          64,
+          96,
+          255
+        ],
+        "output": [
+          64,
+          128,
+          192,
+          255
+        ]
+      }
+    },
+    {
+      "name": "Left two-slot order changes actual channel/output pixels while right preview stays isolated",
+      "passed": true,
+      "evidence": {
+        "forward": [
+          221,
+          180,
+          127,
+          255
+        ],
+        "reverse": [
+          127,
+          74,
+          34,
+          255
+        ],
+        "right": [
+          192,
+          64,
+          96,
+          255
+        ]
+      }
+    },
+    {
+      "name": "Right two-slot order changes only processed right preview and selected right output",
+      "passed": true,
+      "evidence": {
+        "left": [
+          64,
+          128,
+          192,
+          255
+        ],
+        "right": [
+          127,
+          221,
+          201,
+          255
+        ],
+        "output": [
+          127,
+          221,
+          201,
+          255
+        ]
+      }
+    },
+    {
+      "name": "Both master slots run after transition and leave processed channel previews unchanged",
+      "passed": true,
+      "evidence": {
+        "forward": [
+          198,
+          193,
+          153,
+          255
+        ],
+        "reverse": [
+          94,
+          88,
+          51,
+          255
+        ],
+        "channelLeft": [
+          64,
+          128,
+          192,
+          255
+        ]
+      }
+    },
+    {
+      "name": "Each of the six slot positions independently changes its intended real pixels",
+      "passed": true,
+      "evidence": [
+        {
+          "target": "left",
+          "slot": 1,
+          "changed": 64.25
+        },
+        {
+          "target": "left",
+          "slot": 2,
+          "changed": 64.25
+        },
+        {
+          "target": "right",
+          "slot": 1,
+          "changed": 79.75
+        },
+        {
+          "target": "right",
+          "slot": 2,
+          "changed": 79.75
+        },
+        {
+          "target": "master",
+          "slot": 1,
+          "changed": 24.25
+        },
+        {
+          "target": "master",
+          "slot": 2,
+          "changed": 24.25
+        }
+      ]
+    },
+    {
+      "name": "All six simultaneous slots obey channel → transition → master ordering",
+      "passed": true,
+      "evidence": {
+        "actual": [
+          162,
+          156,
+          188,
+          255
+        ],
+        "expected": [
+          162.44476506455067,
+          155.26955253735767,
+          188.05797218239567
+        ]
+      }
+    },
+    {
+      "name": "Channel overlays follow channel FX; master overlays follow transition and precede master FX",
+      "passed": true,
+      "evidence": {
+        "channelOverlay": [
+          255,
+          0,
+          0,
+          255
+        ],
+        "unselectedOutput": [
+          63,
+          191,
+          159,
+          255
+        ],
+        "masterOverlayThenFX": [
+          255,
+          0,
+          255,
+          255
+        ]
+      }
+    },
+    {
+      "name": "Pipeline reset clears an actual upstream Frame Freeze capture",
+      "passed": true,
+      "evidence": {
+        "held": [
+          220,
+          20,
+          10,
+          255
+        ],
+        "afterReset": [
+          10,
+          30,
+          230,
+          255
+        ]
+      }
+    },
+    {
+      "name": "Actual AudioEngine AudioContext/worklets resume and speaker route is disconnected",
+      "passed": true,
+      "evidence": {
+        "state": "running",
+        "sampleRate": 48000,
+        "effectsPrepared": true,
+        "speakerRoute": "engine.analyser.disconnect() only; real capture destination remains connected"
+      }
+    },
+    {
+      "name": "Actual per-channel oscillators produce isolated bass/treble analyzer bands",
+      "passed": true,
+      "evidence": {
+        "frequencies": [
+          100,
+          8000
+        ],
+        "bands": [
+          {
+            "bass": 0.05780678821581167,
+            "mid": 0.003910634797812621,
+            "treble": 0.00005589827453524903,
+            "level": 0.1471503011631177,
+            "audioAvailable": true
+          },
+          {
+            "bass": 0.00040131297573025156,
+            "mid": 0.0017969760649530003,
+            "treble": 0.058506617685912365,
+            "level": 0.14992670076482073,
+            "audioAvailable": true
+          }
+        ]
+      }
+    },
+    {
+      "name": "Measured live per-channel audio bands alter actual pipeline Audio RGB pixels independently",
+      "passed": true,
+      "evidence": {
+        "bands": [
+          {
+            "bass": 0.07628091846416231,
+            "mid": 0.0030244358494405047,
+            "treble": 0.0000432403734478397,
+            "level": 0.16547417788280694,
+            "audioAvailable": true,
+            "assetId": "0",
+            "bpm": 120,
+            "rate": 1
+          },
+          {
+            "bass": 0.0003104364412596225,
+            "mid": 0.0013900510019136702,
+            "treble": 0.07631442950772015,
+            "level": 0.1676723011420257,
+            "audioAvailable": true,
+            "assetId": "1",
+            "bpm": 120,
+            "rate": 1
+          }
+        ],
+        "left": [
+          108,
+          100,
+          100,
+          255
+        ],
+        "right": [
+          100,
+          100,
+          108,
+          255
+        ]
+      }
+    },
+    {
+      "name": "Actual analyzer frequency changes move channel energy to different bands",
+      "passed": true,
+      "evidence": {
+        "frequencies": [
+          1000,
+          100
+        ],
+        "bands": [
+          {
+            "bass": 0.009751721859356806,
+            "mid": 0.08225210591800894,
+            "treble": 0.00004051853890133223,
+            "level": 0.21341755115960165,
+            "audioAvailable": true
+          },
+          {
+            "bass": 0.08214234232682241,
+            "mid": 0.004582963159459818,
+            "treble": 0.010717337356845899,
+            "level": 0.2157655317528104,
+            "audioAvailable": true
+          }
+        ]
+      }
+    },
+    {
+      "name": "Actual silence yields near-zero bands/RMS; dispose returns unavailable zeros",
+      "passed": true,
+      "evidence": {
+        "silent": [
+          {
+            "bass": 0,
+            "mid": 0,
+            "treble": 0,
+            "level": 0,
+            "audioAvailable": true
+          },
+          {
+            "bass": 0,
+            "mid": 0,
+            "treble": 0,
+            "level": 0,
+            "audioAvailable": true
+          }
+        ],
+        "disposed": {
+          "bass": 0,
+          "mid": 0,
+          "treble": 0,
+          "level": 0,
+          "audioAvailable": false
+        }
+      }
+    },
+    {
+      "name": "Recreated analysis taps recover measured signal after disposal",
+      "passed": true,
+      "evidence": {
+        "bass": 0.05728826877401541,
+        "mid": 0.015209293213647983,
+        "treble": 0.0034619161791416037,
+        "level": 0.15335810752553292,
+        "audioAvailable": true
+      }
+    },
+    {
+      "name": "Real AudioEngine video-analysis taps survive configureFX deck-to-master route rebuild",
+      "passed": true,
+      "evidence": {
+        "prior": [
+          {
+            "bass": 0.03814045437697224,
+            "mid": 0.0015122181159616247,
+            "treble": 0.000021620187659639093,
+            "level": 0.08273708894140347,
+            "audioAvailable": true
+          },
+          {
+            "bass": 0.00015521824404842154,
+            "mid": 0.0006950255040663872,
+            "treble": 0.03815721367124783,
+            "level": 0.08383615057101285,
+            "audioAvailable": true
+          },
+          {
+            "bass": 0.016785216948353235,
+            "mid": 0.0006247037390565674,
+            "treble": 0.016788991769777613,
+            "level": 0.05182632317738747,
+            "audioAvailable": true
+          }
+        ],
+        "after": [
+          {
+            "bass": 0.03814045437697224,
+            "mid": 0.0015122181159616247,
+            "treble": 0.000021620187659639093,
+            "level": 0.08273708894140347,
+            "audioAvailable": true
+          },
+          {
+            "bass": 0.00015521824404842154,
+            "mid": 0.0006950255040663872,
+            "treble": 0.03815721367124783,
+            "level": 0.08383615057101285,
+            "audioAvailable": true
+          },
+          {
+            "bass": 0.016785216948353235,
+            "mid": 0.0006247037390565674,
+            "treble": 0.016788991769777613,
+            "level": 0.05182632317738747,
+            "audioAvailable": true
+          }
+        ],
+        "realEngine": true,
+        "drive": "Test oscillators enter actual AudioEngine input nodes; this test does not claim file transport."
+      }
+    },
+    {
+      "name": "Pipeline validates source count and rejects rendering after disposal",
+      "passed": true,
+      "evidence": {
+        "sourceCountRejected": true,
+        "disposed": true
+      }
+    },
+    {
+      "name": "Thirty rAF-paced complete640x360 pipeline/readback frames report measured cost without30fps assumption",
+      "passed": true,
+      "evidence": {
+        "frames": 30,
+        "output": [
+          640,
+          360
+        ],
+        "distinctOutputs": 30,
+        "elapsedRafMs": 270.79999999999995,
+        "observedFramesPerSecond": 107.09010339734122,
+        "p50FrameReadbackMs": 7.700000047683716,
+        "p95FrameReadbackMs": 13.300000190734863,
+        "maxFrameReadbackMs": 13.799999952316284,
+        "over33ms": 0,
+        "rafIntervalsMs": [
+          16.80000000000001,
+          6.800000000000011,
+          10,
+          7.899999999999977,
+          8.5,
+          16.600000000000023,
+          8.299999999999955,
+          7.300000000000068,
+          9.599999999999909,
+          8.100000000000023,
+          8.300000000000068,
+          8.399999999999977,
+          8.299999999999955,
+          16.800000000000068,
+          8.099999999999909,
+          7.2000000000000455,
+          9.200000000000045,
+          11.199999999999932,
+          9.200000000000045,
+          8.799999999999955,
+          8.5,
+          8.5,
+          8.399999999999977,
+          8.400000000000091,
+          7.7999999999999545,
+          8.899999999999977,
+          7,
+          10,
+          7.899999999999977
+        ],
+        "scope": "Full six-slot generated-canvas pipeline with synchronous final Canvas2D getImageData readback; includes GPU dependency completion. Excludes video decoding/audio/capture; not sustained30fps or real-device proof."
+      }
+    },
+    {
+      "name": "Real canvas.captureStream/MediaRecorder produces a local video File with generated audio",
+      "passed": true,
+      "evidence": {
+        "bytes": 57010,
+        "mime": "video/mp4;codecs=avc1.420015,mp4a.40.2",
+        "drawnCanvasFrames": 168,
+        "measuredAudioClockSeconds": 1.408,
+        "streamVideoTracks": 1,
+        "streamAudioTracks": 1,
+        "claim": "Canvas frame draws are not a claim of encoded frame count or30fps."
+      }
+    },
+    {
+      "name": "Visible fixture downloads retain the exact local video File and an original transparent overlay PNG",
+      "passed": true,
+      "evidence": {
+        "video": {
+          "filename": "generated-local.mp4",
+          "bytes": 57010,
+          "mime": "video/mp4;codecs=avc1.420015,mp4a.40.2",
+          "publicAnchor": "download-video-fixture",
+          "ownership": "Original harness-generated media only; retained until rerun or page close."
+        },
+        "overlay": {
+          "filename": "open-play-generated-overlay.png",
+          "bytes": 931,
+          "mime": "image/png",
+          "publicAnchor": "download-overlay-fixture",
+          "ownership": "Original harness-generated media only; retained until rerun or page close."
+        },
+        "videoExactByteMatch": true,
+        "overlayPixels": {
+          "transparent": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "magenta": [
+            255,
+            0,
+            255,
+            255
+          ]
+        },
+        "claim": "Public download targets verified; native save dialog and subsequent main-UI upload are parent-executed checks."
+      }
+    },
+    {
+      "name": "Mixer.load decodes actual local Files and preserves muted real video elements",
+      "passed": true,
+      "evidence": {
+        "videos": [
+          {
+            "width": 320,
+            "height": 180,
+            "muted": true,
+            "readyState": 4,
+            "duration": 1.430533
+          },
+          {
+            "width": 320,
+            "height": 180,
+            "muted": true,
+            "readyState": 4,
+            "duration": 1.430533
+          }
+        ],
+        "diagnostics": {
+          "frames": 0,
+          "error": null,
+          "width": 640,
+          "height": 360,
+          "lastRenderMs": 0,
+          "inputs": [
+            {
+              "name": "generated-local.mp4",
+              "position": 0,
+              "duration": 1.430533,
+              "paused": true
+            },
+            {
+              "name": "generated-local.mp4",
+              "position": 0,
+              "duration": 1.430533,
+              "paused": true
+            }
+          ],
+          "loadedImages": [],
+          "recording": false,
+          "captureBytes": 0
+        }
+      }
+    },
+    {
+      "name": "Mixer play yields real decoded frames and processed channel-preview pixels",
+      "passed": true,
+      "evidence": {
+        "decodedFrame": {
+          "mediaTime": 0,
+          "presentedFrames": 1,
+          "width": 320,
+          "height": 180
+        },
+        "output": [
+          39,
+          226,
+          235,
+          255
+        ],
+        "processedPreview": [
+          38,
+          225,
+          234,
+          255
+        ],
+        "diagnostics": {
+          "frames": 2,
+          "error": null,
+          "width": 640,
+          "height": 360,
+          "lastRenderMs": 2.6999998092651367,
+          "inputs": [
+            {
+              "name": "generated-local.mp4",
+              "position": 0.000917,
+              "duration": 1.430533,
+              "paused": false
+            },
+            {
+              "name": "generated-local.mp4",
+              "position": 0,
+              "duration": 1.430533,
+              "paused": true
+            }
+          ],
+          "loadedImages": [],
+          "pipeline": {
+            "width": 640,
+            "height": 360,
+            "disposed": false,
+            "policy": {
+              "order": "Raw input → two channel FX → channel overlays → transition → master overlays → two master FX",
+              "referenceOrder": "Unverified; this is an independent Open Play routing contract.",
+              "scheduling": "Caller supplies one monotonic time/frameId per processed frame; no frame-rate guarantee."
+            },
+            "overlays": {
+              "left": {
+                "rendered": 0,
+                "skipped": []
+              },
+              "right": {
+                "rendered": 0,
+                "skipped": []
+              },
+              "master": {
+                "rendered": 0,
+                "skipped": []
+              }
+            }
+          },
+          "recording": false,
+          "captureBytes": 0
+        }
+      }
+    },
+    {
+      "name": "Real AudioEngine BufferSource position drives linked video seek/play/pause",
+      "passed": true,
+      "evidence": {
+        "decodedFrame": {
+          "mediaTime": 0.347733,
+          "presentedFrames": 2,
+          "width": 320,
+          "height": 180
+        },
+        "paused": {
+          "position": 0.354493,
+          "enginePosition": 0.35
+        },
+        "realBufferSource": true
+      }
+    },
+    {
+      "name": "Actual AudioEngine reverse=true drives paused linked-video seeks to the decreasing engine position",
+      "passed": true,
+      "evidence": {
+        "reverse": true,
+        "rate": 1,
+        "realEngine": true,
+        "samples": [
+          {
+            "enginePosition": 0.9,
+            "expected": 0.8999999999999999,
+            "videoPosition": 0.899999,
+            "paused": true,
+            "readyState": 4,
+            "pixel": [
+              219,
+              30,
+              19,
+              255
+            ]
+          },
+          {
+            "enginePosition": 0.7766666666666665,
+            "expected": 0.7766666666666664,
+            "videoPosition": 0.776666,
+            "paused": true,
+            "readyState": 4,
+            "pixel": [
+              219,
+              30,
+              19,
+              255
+            ]
+          }
+        ],
+        "completion": "Actual seeked events followed by paused decoded readyState>=2 with no further seek; no fixed-delay completion proxy."
+      }
+    },
+    {
+      "name": "Actual asynchronous video seek retains the last decoded processed frame until the new frame is decoded",
+      "passed": false,
+      "error": "Mixer replaced the last decoded frame during an actual asynchronous seek: {\"before\":{\"hash\":\"7d3dfb19\",\"pixel\":[37,226,237,255],\"readyState\":4,\"currentTime\":0.143053},\"seekStarted\":{\"readyState\":1,\"seeking\":true,\"currentTime\":0.95},\"during\":{\"hash\":\"46b1f308\",\"pixel\":[232,205,196,255],\"readyState\":1,\"seeking\":true},\"after\":{\"hash\":\"27abe7d4\",\"pixel\":[36,225,236,255],\"readyState\":4,\"currentTime\":0.95}}",
+      "stack": "Error: Mixer replaced the last decoded frame during an actual asynchronous seek: {\"before\":{\"hash\":\"7d3dfb19\",\"pixel\":[37,226,237,255],\"readyState\":4,\"currentTime\":0.143053},\"seekStarted\":{\"readyState\":1,\"seeking\":true,\"currentTime\":0.95},\"during\":{\"hash\":\"46b1f308\",\"pixel\":[232,205,196,255],\"readyState\":1,\"seeking\":true},\"after\":{\"hash\":\"27abe7d4\",\"pixel\":[36,225,236,255],\"readyState\":4,\"currentTime\":0.95}}\n    at assert (http://127.0.0.1:8768/prototype/video-pipeline-harness.js:8:40)\n    at http://127.0.0.1:8768/prototype/video-pipeline-harness.js:220:163\n    at async test (http://127.0.0.1:8768/prototype/video-pipeline-harness.js:104:48)\n    at async runVideoPipelineChecks (http://127.0.0.1:8768/prototype/video-pipeline-harness.js:215:5)\n    at async $.onclick (http://127.0.0.1:8768/prototype/video-pipeline-harness.js:259:128)"
+    },
+    {
+      "name": "Twelve actual linked reverse renders preserve decoded video pixels and allow asynchronous seek completion",
+      "passed": false,
+      "error": "Actual continuous reverse emitted an empty/placeholder frame or played its input: {\"samples\":[{\"frame\":0,\"enginePosition\":1.1444264000000002,\"videoPosition\":1.144426,\"paused\":true,\"seeking\":true,\"readyState\":1,\"pixel\":[232,205,196,204],\"hash\":\"afb9f566\"},{\"frame\":1,\"enginePosition\":1.1437597333333331,\"videoPosition\":1.144426,\"paused\":true,\"seeking\":true,\"readyState\":1,\"pixel\":[232,205,196,204],\"hash\":\"afb9f566\"},{\"frame\":2,\"enginePosition\":1.1384264,\"videoPosition\":1.143759,\"paused\":true,\"seeking\":true,\"readyState\":1,\"pixel\":[232,205,196,204],\"hash\":\"afb9f566\"},{\"frame\":3,\"enginePosition\":1.1277597333333331,\"videoPosition\":1.133093,\"paused\":true,\"seeking\":true,\"readyState\":1,\"pixel\":[232,205,196,204],\"hash\":\"afb9f566\"},{\"frame\":4,\"enginePosition\":1.1224264,\"videoPosition\":1.127759,\"paused\":true,\"seeking\":true,\"readyState\":1,\"pixel\":[232,205,196,204],\"hash\":\"afb9f566\"},{\"frame\":5,\"enginePosition\":1.1117597333333336,\"videoPosition\":1.117093,\"paused\":true,\"seeking\":true,\"readyState\":1,\"pixel\":[232,205,196,204],\"hash\":\"afb9f566\"},{\"frame\":6,\"enginePosition\":1.1064264,\"videoPosition\":1.106426,\"paused\":true,\"seeking\":true,\"readyState\":1,\"pixel\":[232,205,196,204],\"hash\":\"afb9f566\"},{\"frame\":7,\"enginePosition\":1.0957597333333335,\"videoPosition\":1.101093,\"paused\":true,\"seeking\":true,\"readyState\":1,\"pixel\":[232,205,196,204],\"hash\":\"afb9f566\"},{\"frame\":8,\"enginePosition\":1.0530930666666667,\"videoPosition\":1.053093,\"paused\":true,\"seeking\":true,\"readyState\":1,\"pixel\":[232,205,196,204],\"hash\":\"afb9f566\"},{\"frame\":9,\"enginePosition\":1.0424263999999999,\"videoPosition\":1.047759,\"paused\":true,\"seeking\":true,\"readyState\":1,\"pixel\":[232,205,196,204],\"hash\":\"afb9f566\"},{\"frame\":10,\"enginePosition\":1.0370930666666667,\"videoPosition\":1.042426,\"paused\":true,\"seeking\":true,\"readyState\":1,\"pixel\":[232,205,196,204],\"hash\":\"afb9f566\"},{\"frame\":11,\"enginePosition\":1.0264263999999999,\"videoPosition\":1.031759,\"paused\":true,\"seeking\":true,\"readyState\":1,\"pixel\":[232,205,196,204],\"hash\":\"afb9f566\"}],\"seekedEvents\":[{\"wallMs\":2482.5,\"currentTime\":1.144426,\"readyState\":4},{\"wallMs\":2489.7000000476837,\"currentTime\":1.144426,\"readyState\":4},{\"wallMs\":2495.7999999523163,\"currentTime\":1.143759,\"readyState\":4},{\"wallMs\":2504,\"currentTime\":1.133093,\"readyState\":4},{\"wallMs\":2512.5,\"currentTime\":1.127759,\"readyState\":4},{\"wallMs\":2522.7000000476837,\"currentTime\":1.117093,\"readyState\":4},{\"wallMs\":2528.7999999523163,\"currentTime\":1.106426,\"readyState\":4},{\"wallMs\":2582.5999999046326,\"currentTime\":1.053093,\"readyState\":1},{\"wallMs\":2590.2000000476837,\"currentTime\":1.047759,\"readyState\":1},{\"wallMs\":2597,\"currentTime\":1.042426,\"readyState\":1},{\"wallMs\":2597.0999999046326,\"currentTime\":1.042426,\"readyState\":4},{\"wallMs\":2605.399999856949,\"currentTime\":1.031759,\"readyState\":4}],\"inLoopSeekCompletions\":11,\"afterDecode\":{\"currentTime\":1.031759,\"readyState\":4}}",
+      "stack": "Error: Actual continuous reverse emitted an empty/placeholder frame or played its input: {\"samples\":[{\"frame\":0,\"enginePosition\":1.1444264000000002,\"videoPosition\":1.144426,\"paused\":true,\"seeking\":true,\"readyState\":1,\"pixel\":[232,205,196,204],\"hash\":\"afb9f566\"},{\"frame\":1,\"enginePosition\":1.1437597333333331,\"videoPosition\":1.144426,\"paused\":true,\"seeking\":true,\"readyState\":1,\"pixel\":[232,205,196,204],\"hash\":\"afb9f566\"},{\"frame\":2,\"enginePosition\":1.1384264,\"videoPosition\":1.143759,\"paused\":true,\"seeking\":true,\"readyState\":1,\"pixel\":[232,205,196,204],\"hash\":\"afb9f566\"},{\"frame\":3,\"enginePosition\":1.1277597333333331,\"videoPosition\":1.133093,\"paused\":true,\"seeking\":true,\"readyState\":1,\"pixel\":[232,205,196,204],\"hash\":\"afb9f566\"},{\"frame\":4,\"enginePosition\":1.1224264,\"videoPosition\":1.127759,\"paused\":true,\"seeking\":true,\"readyState\":1,\"pixel\":[232,205,196,204],\"hash\":\"afb9f566\"},{\"frame\":5,\"enginePosition\":1.1117597333333336,\"videoPosition\":1.117093,\"paused\":true,\"seeking\":true,\"readyState\":1,\"pixel\":[232,205,196,204],\"hash\":\"afb9f566\"},{\"frame\":6,\"enginePosition\":1.1064264,\"videoPosition\":1.106426,\"paused\":true,\"seeking\":true,\"readyState\":1,\"pixel\":[232,205,196,204],\"hash\":\"afb9f566\"},{\"frame\":7,\"enginePosition\":1.0957597333333335,\"videoPosition\":1.101093,\"paused\":true,\"seeking\":true,\"readyState\":1,\"pixel\":[232,205,196,204],\"hash\":\"afb9f566\"},{\"frame\":8,\"enginePosition\":1.0530930666666667,\"videoPosition\":1.053093,\"paused\":true,\"seeking\":true,\"readyState\":1,\"pixel\":[232,205,196,204],\"hash\":\"afb9f566\"},{\"frame\":9,\"enginePosition\":1.0424263999999999,\"videoPosition\":1.047759,\"paused\":true,\"seeking\":true,\"readyState\":1,\"pixel\":[232,205,196,204],\"hash\":\"afb9f566\"},{\"frame\":10,\"enginePosition\":1.0370930666666667,\"videoPosition\":1.042426,\"paused\":true,\"seeking\":true,\"readyState\":1,\"pixel\":[232,205,196,204],\"hash\":\"afb9f566\"},{\"frame\":11,\"enginePosition\":1.0264263999999999,\"videoPosition\":1.031759,\"paused\":true,\"seeking\":true,\"readyState\":1,\"pixel\":[232,205,196,204],\"hash\":\"afb9f566\"}],\"seekedEvents\":[{\"wallMs\":2482.5,\"currentTime\":1.144426,\"readyState\":4},{\"wallMs\":2489.7000000476837,\"currentTime\":1.144426,\"readyState\":4},{\"wallMs\":2495.7999999523163,\"currentTime\":1.143759,\"readyState\":4},{\"wallMs\":2504,\"currentTime\":1.133093,\"readyState\":4},{\"wallMs\":2512.5,\"currentTime\":1.127759,\"readyState\":4},{\"wallMs\":2522.7000000476837,\"currentTime\":1.117093,\"readyState\":4},{\"wallMs\":2528.7999999523163,\"currentTime\":1.106426,\"readyState\":4},{\"wallMs\":2582.5999999046326,\"currentTime\":1.053093,\"readyState\":1},{\"wallMs\":2590.2000000476837,\"currentTime\":1.047759,\"readyState\":1},{\"wallMs\":2597,\"currentTime\":1.042426,\"readyState\":1},{\"wallMs\":2597.0999999046326,\"currentTime\":1.042426,\"readyState\":4},{\"wallMs\":2605.399999856949,\"currentTime\":1.031759,\"readyState\":4}],\"inLoopSeekCompletions\":11,\"afterDecode\":{\"currentTime\":1.031759,\"readyState\":4}}\n    at assert (http://127.0.0.1:8768/prototype/video-pipeline-harness.js:8:40)\n    at http://127.0.0.1:8768/prototype/video-pipeline-harness.js:229:9\n    at async test (http://127.0.0.1:8768/prototype/video-pipeline-harness.js:104:48)\n    at async runVideoPipelineChecks (http://127.0.0.1:8768/prototype/video-pipeline-harness.js:222:5)\n    at async $.onclick (http://127.0.0.1:8768/prototype/video-pipeline-harness.js:259:128)"
+    },
+    {
+      "name": "Mixer records processed GPU canvas plus actual master audio and rejects resolution change during capture",
+      "passed": true,
+      "evidence": {
+        "bytes": 51490,
+        "mime": "video/webm;codecs=vp9,opus",
+        "processedFrames": 42,
+        "wallMs": 1403.7000000476837,
+        "observedProcessedFramesPerSecond": 29.920923273187476,
+        "engineCaptureAudioTracks": [
+          {
+            "kind": "audio",
+            "readyState": "live",
+            "enabled": true
+          }
+        ],
+        "scope": "Actual mixer tick, GPU pipeline and MediaRecorder run; requested30fps is not a measured frame-rate guarantee."
+      }
+    },
+    {
+      "name": "Captured result decodes actual video frames with processed cyan pixels and overlay evidence",
+      "passed": true,
+      "evidence": {
+        "width": 640,
+        "height": 360,
+        "duration": 1.399,
+        "readyState": 4,
+        "firstFrame": {
+          "mediaTime": 0,
+          "presentedFrames": 1,
+          "width": 640,
+          "height": 360
+        },
+        "secondFrame": {
+          "mediaTime": 0.063,
+          "presentedFrames": 2,
+          "width": 640,
+          "height": 360
+        },
+        "muted": true,
+        "audioDecodedBytes": 5754,
+        "corner": [
+          33,
+          225,
+          233,
+          254
+        ],
+        "magentaOverlayPixels": 788
+      }
+    },
+    {
+      "name": "Captured result audio really decodes nonzero440Hz engine audio with stream metadata",
+      "passed": true,
+      "evidence": {
+        "channels": 2,
+        "sampleRate": 48000,
+        "duration": 1.38,
+        "rms": 0.031032185999161608,
+        "tone440": 0.04398385499665741,
+        "tone880": 0.0000032504889486437567,
+        "claim": "Actual audio decode from the captured video container, not just presence of an input stream track."
+      }
+    },
+    {
+      "name": "Stopped mixer changes to720p, renders actual output and rejects unsupported dimensions",
+      "passed": true,
+      "evidence": {
+        "width": 1280,
+        "height": 720,
+        "pixel": [
+          36,
+          225,
+          236,
+          255
+        ],
+        "frames": 73,
+        "unsupportedRejected": true
+      }
+    },
+    {
+      "name": "Stopped mixer changes from720p to1080p and renders/readbacks an actual processed output frame",
+      "passed": true,
+      "evidence": {
+        "width": 1920,
+        "height": 1080,
+        "pixel": [
+          35,
+          224,
+          235,
+          255
+        ],
+        "frames": 74,
+        "renderAndReadbackMs": 59.60000014305115,
+        "scope": "One actual processed 1080p render with synchronous pixel readback after720p; no frame-rate or sustained-load guarantee."
+      }
+    },
+    {
+      "name": "Mixer disposal stops actual input videos and rejects new loads",
+      "passed": true,
+      "evidence": {
+        "frames": 74,
+        "inputsPaused": [
+          true,
+          true
+        ],
+        "newLoadRejected": true
+      }
+    }
+  ],
+  "notifications": [],
+  "audioBands": [
+    {
+      "bass": 0.05780678821581167,
+      "mid": 0.003910634797812621,
+      "treble": 0.00005589827453524903,
+      "level": 0.1471503011631177,
+      "audioAvailable": true
+    },
+    {
+      "bass": 0.00040131297573025156,
+      "mid": 0.0017969760649530003,
+      "treble": 0.058506617685912365,
+      "level": 0.14992670076482073,
+      "audioAvailable": true
+    }
+  ],
+  "fixture": {
+    "bytes": 57010,
+    "mime": "video/mp4;codecs=avc1.420015,mp4a.40.2",
+    "drawnCanvasFrames": 168,
+    "measuredAudioClockSeconds": 1.408,
+    "streamVideoTracks": 1,
+    "streamAudioTracks": 1,
+    "claim": "Canvas frame draws are not a claim of encoded frame count or30fps."
+  },
+  "fixtureDownloads": {
+    "video": {
+      "filename": "generated-local.mp4",
+      "bytes": 57010,
+      "mime": "video/mp4;codecs=avc1.420015,mp4a.40.2",
+      "publicAnchor": "download-video-fixture",
+      "ownership": "Original harness-generated media only; retained until rerun or page close."
+    },
+    "overlay": {
+      "filename": "open-play-generated-overlay.png",
+      "bytes": 931,
+      "mime": "image/png",
+      "publicAnchor": "download-overlay-fixture",
+      "ownership": "Original harness-generated media only; retained until rerun or page close."
+    }
+  },
+  "reverseTransport": {
+    "phases": [
+      {
+        "phase": "before-engine-reverse",
+        "wallMs": 2290.0999999046326,
+        "audioTime": 2.192,
+        "linked": true,
+        "video": {
+          "paused": true,
+          "currentTime": 0.354493,
+          "seeking": false,
+          "readyState": 4,
+          "duration": 1.430533,
+          "playbackRate": 1,
+          "error": null
+        },
+        "deck": {
+          "reverse": false,
+          "playing": true,
+          "processing": false,
+          "position": 0.35,
+          "rate": 1,
+          "enginePosition": 0.35
+        },
+        "mixer": {
+          "frames": 5,
+          "error": null,
+          "width": 640,
+          "height": 360,
+          "lastRenderMs": 2.5,
+          "inputs": [
+            {
+              "name": "generated-local.mp4",
+              "position": 0.354493,
+              "duration": 1.430533,
+              "paused": true
+            },
+            {
+              "name": "generated-local.mp4",
+              "position": 0,
+              "duration": 1.430533,
+              "paused": true
+            }
+          ],
+          "loadedImages": [],
+          "pipeline": {
+            "width": 640,
+            "height": 360,
+            "disposed": false,
+            "policy": {
+              "order": "Raw input → two channel FX → channel overlays → transition → master overlays → two master FX",
+              "referenceOrder": "Unverified; this is an independent Open Play routing contract.",
+              "scheduling": "Caller supplies one monotonic time/frameId per processed frame; no frame-rate guarantee."
+            },
+            "overlays": {
+              "left": {
+                "rendered": 0,
+                "skipped": []
+              },
+              "right": {
+                "rendered": 0,
+                "skipped": []
+              },
+              "master": {
+                "rendered": 0,
+                "skipped": []
+              }
+            }
+          },
+          "recording": false,
+          "captureBytes": 0
+        }
+      },
+      {
+        "phase": "after-engine-reverse",
+        "wallMs": 2290.5999999046326,
+        "audioTime": 2.192,
+        "linked": true,
+        "video": {
+          "paused": true,
+          "currentTime": 0.354493,
+          "seeking": false,
+          "readyState": 4,
+          "duration": 1.430533,
+          "playbackRate": 1,
+          "error": null
+        },
+        "deck": {
+          "reverse": true,
+          "playing": true,
+          "processing": false,
+          "position": 0.9,
+          "rate": 1,
+          "enginePosition": 0.9
+        },
+        "mixer": {
+          "frames": 5,
+          "error": null,
+          "width": 640,
+          "height": 360,
+          "lastRenderMs": 2.5,
+          "inputs": [
+            {
+              "name": "generated-local.mp4",
+              "position": 0.354493,
+              "duration": 1.430533,
+              "paused": true
+            },
+            {
+              "name": "generated-local.mp4",
+              "position": 0,
+              "duration": 1.430533,
+              "paused": true
+            }
+          ],
+          "loadedImages": [],
+          "pipeline": {
+            "width": 640,
+            "height": 360,
+            "disposed": false,
+            "policy": {
+              "order": "Raw input → two channel FX → channel overlays → transition → master overlays → two master FX",
+              "referenceOrder": "Unverified; this is an independent Open Play routing contract.",
+              "scheduling": "Caller supplies one monotonic time/frameId per processed frame; no frame-rate guarantee."
+            },
+            "overlays": {
+              "left": {
+                "rendered": 0,
+                "skipped": []
+              },
+              "right": {
+                "rendered": 0,
+                "skipped": []
+              },
+              "master": {
+                "rendered": 0,
+                "skipped": []
+              }
+            }
+          },
+          "recording": false,
+          "captureBytes": 0
+        }
+      },
+      {
+        "phase": "sample0:before-tick",
+        "wallMs": 2290.5999999046326,
+        "audioTime": 2.192,
+        "linked": true,
+        "video": {
+          "paused": true,
+          "currentTime": 0.354493,
+          "seeking": false,
+          "readyState": 4,
+          "duration": 1.430533,
+          "playbackRate": 1,
+          "error": null
+        },
+        "deck": {
+          "reverse": true,
+          "playing": true,
+          "processing": false,
+          "position": 0.9,
+          "rate": 1,
+          "enginePosition": 0.9
+        },
+        "mixer": {
+          "frames": 5,
+          "error": null,
+          "width": 640,
+          "height": 360,
+          "lastRenderMs": 2.5,
+          "inputs": [
+            {
+              "name": "generated-local.mp4",
+              "position": 0.354493,
+              "duration": 1.430533,
+              "paused": true
+            },
+            {
+              "name": "generated-local.mp4",
+              "position": 0,
+              "duration": 1.430533,
+              "paused": true
+            }
+          ],
+          "loadedImages": [],
+          "pipeline": {
+            "width": 640,
+            "height": 360,
+            "disposed": false,
+            "policy": {
+              "order": "Raw input → two channel FX → channel overlays → transition → master overlays → two master FX",
+              "referenceOrder": "Unverified; this is an independent Open Play routing contract.",
+              "scheduling": "Caller supplies one monotonic time/frameId per processed frame; no frame-rate guarantee."
+            },
+            "overlays": {
+              "left": {
+                "rendered": 0,
+                "skipped": []
+              },
+              "right": {
+                "rendered": 0,
+                "skipped": []
+              },
+              "master": {
+                "rendered": 0,
+                "skipped": []
+              }
+            }
+          },
+          "recording": false,
+          "captureBytes": 0
+        }
+      },
+      {
+        "phase": "sample0:after-tick",
+        "wallMs": 2295,
+        "audioTime": 2.1973333333333334,
+        "linked": true,
+        "video": {
+          "paused": true,
+          "currentTime": 0.899999,
+          "seeking": true,
+          "readyState": 1,
+          "duration": 1.430533,
+          "playbackRate": 1,
+          "error": null
+        },
+        "deck": {
+          "reverse": true,
+          "playing": true,
+          "processing": false,
+          "position": 0.9,
+          "rate": 1,
+          "enginePosition": 0.9
+        },
+        "mixer": {
+          "frames": 6,
+          "error": null,
+          "width": 640,
+          "height": 360,
+          "lastRenderMs": 4.400000095367432,
+          "inputs": [
+            {
+              "name": "generated-local.mp4",
+              "position": 0.899999,
+              "duration": 1.430533,
+              "paused": true
+            },
+            {
+              "name": "generated-local.mp4",
+              "position": 0,
+              "duration": 1.430533,
+              "paused": true
+            }
+          ],
+          "loadedImages": [],
+          "pipeline": {
+            "width": 640,
+            "height": 360,
+            "disposed": false,
+            "policy": {
+              "order": "Raw input → two channel FX → channel overlays → transition → master overlays → two master FX",
+              "referenceOrder": "Unverified; this is an independent Open Play routing contract.",
+              "scheduling": "Caller supplies one monotonic time/frameId per processed frame; no frame-rate guarantee."
+            },
+            "overlays": {
+              "left": {
+                "rendered": 0,
+                "skipped": []
+              },
+              "right": {
+                "rendered": 0,
+                "skipped": []
+              },
+              "master": {
+                "rendered": 0,
+                "skipped": []
+              }
+            }
+          },
+          "recording": false,
+          "captureBytes": 0
+        }
+      },
+      {
+        "phase": "sample0:after-seeked",
+        "wallMs": 2298.2999999523163,
+        "audioTime": 2.1973333333333334,
+        "linked": true,
+        "video": {
+          "paused": true,
+          "currentTime": 0.899999,
+          "seeking": true,
+          "readyState": 1,
+          "duration": 1.430533,
+          "playbackRate": 1,
+          "error": null
+        },
+        "deck": {
+          "reverse": true,
+          "playing": true,
+          "processing": false,
+          "position": 0.9,
+          "rate": 1,
+          "enginePosition": 0.9
+        },
+        "mixer": {
+          "frames": 6,
+          "error": null,
+          "width": 640,
+          "height": 360,
+          "lastRenderMs": 4.400000095367432,
+          "inputs": [
+            {
+              "name": "generated-local.mp4",
+              "position": 0.899999,
+              "duration": 1.430533,
+              "paused": true
+            },
+            {
+              "name": "generated-local.mp4",
+              "position": 0,
+              "duration": 1.430533,
+              "paused": true
+            }
+          ],
+          "loadedImages": [],
+          "pipeline": {
+            "width": 640,
+            "height": 360,
+            "disposed": false,
+            "policy": {
+              "order": "Raw input → two channel FX → channel overlays → transition → master overlays → two master FX",
+              "referenceOrder": "Unverified; this is an independent Open Play routing contract.",
+              "scheduling": "Caller supplies one monotonic time/frameId per processed frame; no frame-rate guarantee."
+            },
+            "overlays": {
+              "left": {
+                "rendered": 0,
+                "skipped": []
+              },
+              "right": {
+                "rendered": 0,
+                "skipped": []
+              },
+              "master": {
+                "rendered": 0,
+                "skipped": []
+              }
+            }
+          },
+          "recording": false,
+          "captureBytes": 0
+        }
+      },
+      {
+        "phase": "sample0:after-decoded-wait",
+        "wallMs": 2298.5999999046326,
+        "audioTime": 2.1973333333333334,
+        "linked": true,
+        "video": {
+          "paused": true,
+          "currentTime": 0.899999,
+          "seeking": false,
+          "readyState": 4,
+          "duration": 1.430533,
+          "playbackRate": 1,
+          "error": null
+        },
+        "deck": {
+          "reverse": true,
+          "playing": true,
+          "processing": false,
+          "position": 0.9,
+          "rate": 1,
+          "enginePosition": 0.9
+        },
+        "mixer": {
+          "frames": 6,
+          "error": null,
+          "width": 640,
+          "height": 360,
+          "lastRenderMs": 4.400000095367432,
+          "inputs": [
+            {
+              "name": "generated-local.mp4",
+              "position": 0.899999,
+              "duration": 1.430533,
+              "paused": true
+            },
+            {
+              "name": "generated-local.mp4",
+              "position": 0,
+              "duration": 1.430533,
+              "paused": true
+            }
+          ],
+          "loadedImages": [],
+          "pipeline": {
+            "width": 640,
+            "height": 360,
+            "disposed": false,
+            "policy": {
+              "order": "Raw input → two channel FX → channel overlays → transition → master overlays → two master FX",
+              "referenceOrder": "Unverified; this is an independent Open Play routing contract.",
+              "scheduling": "Caller supplies one monotonic time/frameId per processed frame; no frame-rate guarantee."
+            },
+            "overlays": {
+              "left": {
+                "rendered": 0,
+                "skipped": []
+              },
+              "right": {
+                "rendered": 0,
+                "skipped": []
+              },
+              "master": {
+                "rendered": 0,
+                "skipped": []
+              }
+            }
+          },
+          "recording": false,
+          "captureBytes": 0
+        }
+      },
+      {
+        "phase": "sample1:before-tick",
+        "wallMs": 2425.7000000476837,
+        "audioTime": 2.3253333333333335,
+        "linked": true,
+        "video": {
+          "paused": true,
+          "currentTime": 0.899999,
+          "seeking": false,
+          "readyState": 4,
+          "duration": 1.430533,
+          "playbackRate": 1,
+          "error": null
+        },
+        "deck": {
+          "reverse": true,
+          "playing": true,
+          "processing": false,
+          "position": 0.9,
+          "rate": 1,
+          "enginePosition": 0.7766666666666665
+        },
+        "mixer": {
+          "frames": 6,
+          "error": null,
+          "width": 640,
+          "height": 360,
+          "lastRenderMs": 4.400000095367432,
+          "inputs": [
+            {
+              "name": "generated-local.mp4",
+              "position": 0.899999,
+              "duration": 1.430533,
+              "paused": true
+            },
+            {
+              "name": "generated-local.mp4",
+              "position": 0,
+              "duration": 1.430533,
+              "paused": true
+            }
+          ],
+          "loadedImages": [],
+          "pipeline": {
+            "width": 640,
+            "height": 360,
+            "disposed": false,
+            "policy": {
+              "order": "Raw input → two channel FX → channel overlays → transition → master overlays → two master FX",
+              "referenceOrder": "Unverified; this is an independent Open Play routing contract.",
+              "scheduling": "Caller supplies one monotonic time/frameId per processed frame; no frame-rate guarantee."
+            },
+            "overlays": {
+              "left": {
+                "rendered": 0,
+                "skipped": []
+              },
+              "right": {
+                "rendered": 0,
+                "skipped": []
+              },
+              "master": {
+                "rendered": 0,
+                "skipped": []
+              }
+            }
+          },
+          "recording": false,
+          "captureBytes": 0
+        }
+      },
+      {
+        "phase": "sample1:after-tick",
+        "wallMs": 2429.899999856949,
+        "audioTime": 2.3306666666666667,
+        "linked": true,
+        "video": {
+          "paused": true,
+          "currentTime": 0.776666,
+          "seeking": true,
+          "readyState": 1,
+          "duration": 1.430533,
+          "playbackRate": 1,
+          "error": null
+        },
+        "deck": {
+          "reverse": true,
+          "playing": true,
+          "processing": false,
+          "position": 0.9,
+          "rate": 1,
+          "enginePosition": 0.7713333333333333
+        },
+        "mixer": {
+          "frames": 7,
+          "error": null,
+          "width": 640,
+          "height": 360,
+          "lastRenderMs": 4.099999904632568,
+          "inputs": [
+            {
+              "name": "generated-local.mp4",
+              "position": 0.776666,
+              "duration": 1.430533,
+              "paused": true
+            },
+            {
+              "name": "generated-local.mp4",
+              "position": 0,
+              "duration": 1.430533,
+              "paused": true
+            }
+          ],
+          "loadedImages": [],
+          "pipeline": {
+            "width": 640,
+            "height": 360,
+            "disposed": false,
+            "policy": {
+              "order": "Raw input → two channel FX → channel overlays → transition → master overlays → two master FX",
+              "referenceOrder": "Unverified; this is an independent Open Play routing contract.",
+              "scheduling": "Caller supplies one monotonic time/frameId per processed frame; no frame-rate guarantee."
+            },
+            "overlays": {
+              "left": {
+                "rendered": 0,
+                "skipped": []
+              },
+              "right": {
+                "rendered": 0,
+                "skipped": []
+              },
+              "master": {
+                "rendered": 0,
+                "skipped": []
+              }
+            }
+          },
+          "recording": false,
+          "captureBytes": 0
+        }
+      },
+      {
+        "phase": "sample1:after-seeked",
+        "wallMs": 2430.399999856949,
+        "audioTime": 2.3306666666666667,
+        "linked": true,
+        "video": {
+          "paused": true,
+          "currentTime": 0.776666,
+          "seeking": false,
+          "readyState": 4,
+          "duration": 1.430533,
+          "playbackRate": 1,
+          "error": null
+        },
+        "deck": {
+          "reverse": true,
+          "playing": true,
+          "processing": false,
+          "position": 0.9,
+          "rate": 1,
+          "enginePosition": 0.7713333333333333
+        },
+        "mixer": {
+          "frames": 7,
+          "error": null,
+          "width": 640,
+          "height": 360,
+          "lastRenderMs": 4.099999904632568,
+          "inputs": [
+            {
+              "name": "generated-local.mp4",
+              "position": 0.776666,
+              "duration": 1.430533,
+              "paused": true
+            },
+            {
+              "name": "generated-local.mp4",
+              "position": 0,
+              "duration": 1.430533,
+              "paused": true
+            }
+          ],
+          "loadedImages": [],
+          "pipeline": {
+            "width": 640,
+            "height": 360,
+            "disposed": false,
+            "policy": {
+              "order": "Raw input → two channel FX → channel overlays → transition → master overlays → two master FX",
+              "referenceOrder": "Unverified; this is an independent Open Play routing contract.",
+              "scheduling": "Caller supplies one monotonic time/frameId per processed frame; no frame-rate guarantee."
+            },
+            "overlays": {
+              "left": {
+                "rendered": 0,
+                "skipped": []
+              },
+              "right": {
+                "rendered": 0,
+                "skipped": []
+              },
+              "master": {
+                "rendered": 0,
+                "skipped": []
+              }
+            }
+          },
+          "recording": false,
+          "captureBytes": 0
+        }
+      },
+      {
+        "phase": "sample1:after-decoded-wait",
+        "wallMs": 2430.399999856949,
+        "audioTime": 2.3306666666666667,
+        "linked": true,
+        "video": {
+          "paused": true,
+          "currentTime": 0.776666,
+          "seeking": false,
+          "readyState": 4,
+          "duration": 1.430533,
+          "playbackRate": 1,
+          "error": null
+        },
+        "deck": {
+          "reverse": true,
+          "playing": true,
+          "processing": false,
+          "position": 0.9,
+          "rate": 1,
+          "enginePosition": 0.7713333333333333
+        },
+        "mixer": {
+          "frames": 7,
+          "error": null,
+          "width": 640,
+          "height": 360,
+          "lastRenderMs": 4.099999904632568,
+          "inputs": [
+            {
+              "name": "generated-local.mp4",
+              "position": 0.776666,
+              "duration": 1.430533,
+              "paused": true
+            },
+            {
+              "name": "generated-local.mp4",
+              "position": 0,
+              "duration": 1.430533,
+              "paused": true
+            }
+          ],
+          "loadedImages": [],
+          "pipeline": {
+            "width": 640,
+            "height": 360,
+            "disposed": false,
+            "policy": {
+              "order": "Raw input → two channel FX → channel overlays → transition → master overlays → two master FX",
+              "referenceOrder": "Unverified; this is an independent Open Play routing contract.",
+              "scheduling": "Caller supplies one monotonic time/frameId per processed frame; no frame-rate guarantee."
+            },
+            "overlays": {
+              "left": {
+                "rendered": 0,
+                "skipped": []
+              },
+              "right": {
+                "rendered": 0,
+                "skipped": []
+              },
+              "master": {
+                "rendered": 0,
+                "skipped": []
+              }
+            }
+          },
+          "recording": false,
+          "captureBytes": 0
+        }
+      }
+    ],
+    "events": [
+      {
+        "phase": "event:seeked",
+        "wallMs": 2298.2000000476837,
+        "audioTime": 2.1973333333333334,
+        "linked": true,
+        "video": {
+          "paused": true,
+          "currentTime": 0.899999,
+          "seeking": true,
+          "readyState": 1,
+          "duration": 1.430533,
+          "playbackRate": 1,
+          "error": null
+        },
+        "deck": {
+          "reverse": true,
+          "playing": true,
+          "processing": false,
+          "position": 0.9,
+          "rate": 1,
+          "enginePosition": 0.9
+        },
+        "mixer": {
+          "frames": 6,
+          "error": null,
+          "width": 640,
+          "height": 360,
+          "lastRenderMs": 4.400000095367432,
+          "inputs": [
+            {
+              "name": "generated-local.mp4",
+              "position": 0.899999,
+              "duration": 1.430533,
+              "paused": true
+            },
+            {
+              "name": "generated-local.mp4",
+              "position": 0,
+              "duration": 1.430533,
+              "paused": true
+            }
+          ],
+          "loadedImages": [],
+          "pipeline": {
+            "width": 640,
+            "height": 360,
+            "disposed": false,
+            "policy": {
+              "order": "Raw input → two channel FX → channel overlays → transition → master overlays → two master FX",
+              "referenceOrder": "Unverified; this is an independent Open Play routing contract.",
+              "scheduling": "Caller supplies one monotonic time/frameId per processed frame; no frame-rate guarantee."
+            },
+            "overlays": {
+              "left": {
+                "rendered": 0,
+                "skipped": []
+              },
+              "right": {
+                "rendered": 0,
+                "skipped": []
+              },
+              "master": {
+                "rendered": 0,
+                "skipped": []
+              }
+            }
+          },
+          "recording": false,
+          "captureBytes": 0
+        }
+      },
+      {
+        "phase": "event:canplay",
+        "wallMs": 2298.2999999523163,
+        "audioTime": 2.1973333333333334,
+        "linked": true,
+        "video": {
+          "paused": true,
+          "currentTime": 0.899999,
+          "seeking": true,
+          "readyState": 1,
+          "duration": 1.430533,
+          "playbackRate": 1,
+          "error": null
+        },
+        "deck": {
+          "reverse": true,
+          "playing": true,
+          "processing": false,
+          "position": 0.9,
+          "rate": 1,
+          "enginePosition": 0.9
+        },
+        "mixer": {
+          "frames": 6,
+          "error": null,
+          "width": 640,
+          "height": 360,
+          "lastRenderMs": 4.400000095367432,
+          "inputs": [
+            {
+              "name": "generated-local.mp4",
+              "position": 0.899999,
+              "duration": 1.430533,
+              "paused": true
+            },
+            {
+              "name": "generated-local.mp4",
+              "position": 0,
+              "duration": 1.430533,
+              "paused": true
+            }
+          ],
+          "loadedImages": [],
+          "pipeline": {
+            "width": 640,
+            "height": 360,
+            "disposed": false,
+            "policy": {
+              "order": "Raw input → two channel FX → channel overlays → transition → master overlays → two master FX",
+              "referenceOrder": "Unverified; this is an independent Open Play routing contract.",
+              "scheduling": "Caller supplies one monotonic time/frameId per processed frame; no frame-rate guarantee."
+            },
+            "overlays": {
+              "left": {
+                "rendered": 0,
+                "skipped": []
+              },
+              "right": {
+                "rendered": 0,
+                "skipped": []
+              },
+              "master": {
+                "rendered": 0,
+                "skipped": []
+              }
+            }
+          },
+          "recording": false,
+          "captureBytes": 0
+        }
+      },
+      {
+        "phase": "event:playing",
+        "wallMs": 2298.2999999523163,
+        "audioTime": 2.1973333333333334,
+        "linked": true,
+        "video": {
+          "paused": true,
+          "currentTime": 0.899999,
+          "seeking": true,
+          "readyState": 1,
+          "duration": 1.430533,
+          "playbackRate": 1,
+          "error": null
+        },
+        "deck": {
+          "reverse": true,
+          "playing": true,
+          "processing": false,
+          "position": 0.9,
+          "rate": 1,
+          "enginePosition": 0.9
+        },
+        "mixer": {
+          "frames": 6,
+          "error": null,
+          "width": 640,
+          "height": 360,
+          "lastRenderMs": 4.400000095367432,
+          "inputs": [
+            {
+              "name": "generated-local.mp4",
+              "position": 0.899999,
+              "duration": 1.430533,
+              "paused": true
+            },
+            {
+              "name": "generated-local.mp4",
+              "position": 0,
+              "duration": 1.430533,
+              "paused": true
+            }
+          ],
+          "loadedImages": [],
+          "pipeline": {
+            "width": 640,
+            "height": 360,
+            "disposed": false,
+            "policy": {
+              "order": "Raw input → two channel FX → channel overlays → transition → master overlays → two master FX",
+              "referenceOrder": "Unverified; this is an independent Open Play routing contract.",
+              "scheduling": "Caller supplies one monotonic time/frameId per processed frame; no frame-rate guarantee."
+            },
+            "overlays": {
+              "left": {
+                "rendered": 0,
+                "skipped": []
+              },
+              "right": {
+                "rendered": 0,
+                "skipped": []
+              },
+              "master": {
+                "rendered": 0,
+                "skipped": []
+              }
+            }
+          },
+          "recording": false,
+          "captureBytes": 0
+        }
+      },
+      {
+        "phase": "event:pause",
+        "wallMs": 2298.399999856949,
+        "audioTime": 2.1973333333333334,
+        "linked": true,
+        "video": {
+          "paused": true,
+          "currentTime": 0.899999,
+          "seeking": true,
+          "readyState": 1,
+          "duration": 1.430533,
+          "playbackRate": 1,
+          "error": null
+        },
+        "deck": {
+          "reverse": true,
+          "playing": true,
+          "processing": false,
+          "position": 0.9,
+          "rate": 1,
+          "enginePosition": 0.9
+        },
+        "mixer": {
+          "frames": 6,
+          "error": null,
+          "width": 640,
+          "height": 360,
+          "lastRenderMs": 4.400000095367432,
+          "inputs": [
+            {
+              "name": "generated-local.mp4",
+              "position": 0.899999,
+              "duration": 1.430533,
+              "paused": true
+            },
+            {
+              "name": "generated-local.mp4",
+              "position": 0,
+              "duration": 1.430533,
+              "paused": true
+            }
+          ],
+          "loadedImages": [],
+          "pipeline": {
+            "width": 640,
+            "height": 360,
+            "disposed": false,
+            "policy": {
+              "order": "Raw input → two channel FX → channel overlays → transition → master overlays → two master FX",
+              "referenceOrder": "Unverified; this is an independent Open Play routing contract.",
+              "scheduling": "Caller supplies one monotonic time/frameId per processed frame; no frame-rate guarantee."
+            },
+            "overlays": {
+              "left": {
+                "rendered": 0,
+                "skipped": []
+              },
+              "right": {
+                "rendered": 0,
+                "skipped": []
+              },
+              "master": {
+                "rendered": 0,
+                "skipped": []
+              }
+            }
+          },
+          "recording": false,
+          "captureBytes": 0
+        }
+      },
+      {
+        "phase": "event:seeking",
+        "wallMs": 2298.399999856949,
+        "audioTime": 2.1973333333333334,
+        "linked": true,
+        "video": {
+          "paused": true,
+          "currentTime": 0.899999,
+          "seeking": true,
+          "readyState": 1,
+          "duration": 1.430533,
+          "playbackRate": 1,
+          "error": null
+        },
+        "deck": {
+          "reverse": true,
+          "playing": true,
+          "processing": false,
+          "position": 0.9,
+          "rate": 1,
+          "enginePosition": 0.9
+        },
+        "mixer": {
+          "frames": 6,
+          "error": null,
+          "width": 640,
+          "height": 360,
+          "lastRenderMs": 4.400000095367432,
+          "inputs": [
+            {
+              "name": "generated-local.mp4",
+              "position": 0.899999,
+              "duration": 1.430533,
+              "paused": true
+            },
+            {
+              "name": "generated-local.mp4",
+              "position": 0,
+              "duration": 1.430533,
+              "paused": true
+            }
+          ],
+          "loadedImages": [],
+          "pipeline": {
+            "width": 640,
+            "height": 360,
+            "disposed": false,
+            "policy": {
+              "order": "Raw input → two channel FX → channel overlays → transition → master overlays → two master FX",
+              "referenceOrder": "Unverified; this is an independent Open Play routing contract.",
+              "scheduling": "Caller supplies one monotonic time/frameId per processed frame; no frame-rate guarantee."
+            },
+            "overlays": {
+              "left": {
+                "rendered": 0,
+                "skipped": []
+              },
+              "right": {
+                "rendered": 0,
+                "skipped": []
+              },
+              "master": {
+                "rendered": 0,
+                "skipped": []
+              }
+            }
+          },
+          "recording": false,
+          "captureBytes": 0
+        }
+      },
+      {
+        "phase": "event:seeked",
+        "wallMs": 2300.5999999046326,
+        "audioTime": 2.2026666666666666,
+        "linked": true,
+        "video": {
+          "paused": true,
+          "currentTime": 0.899999,
+          "seeking": false,
+          "readyState": 4,
+          "duration": 1.430533,
+          "playbackRate": 1,
+          "error": null
+        },
+        "deck": {
+          "reverse": true,
+          "playing": true,
+          "processing": false,
+          "position": 0.9,
+          "rate": 1,
+          "enginePosition": 0.8993333333333334
+        },
+        "mixer": {
+          "frames": 6,
+          "error": null,
+          "width": 640,
+          "height": 360,
+          "lastRenderMs": 4.400000095367432,
+          "inputs": [
+            {
+              "name": "generated-local.mp4",
+              "position": 0.899999,
+              "duration": 1.430533,
+              "paused": true
+            },
+            {
+              "name": "generated-local.mp4",
+              "position": 0,
+              "duration": 1.430533,
+              "paused": true
+            }
+          ],
+          "loadedImages": [],
+          "pipeline": {
+            "width": 640,
+            "height": 360,
+            "disposed": false,
+            "policy": {
+              "order": "Raw input → two channel FX → channel overlays → transition → master overlays → two master FX",
+              "referenceOrder": "Unverified; this is an independent Open Play routing contract.",
+              "scheduling": "Caller supplies one monotonic time/frameId per processed frame; no frame-rate guarantee."
+            },
+            "overlays": {
+              "left": {
+                "rendered": 0,
+                "skipped": []
+              },
+              "right": {
+                "rendered": 0,
+                "skipped": []
+              },
+              "master": {
+                "rendered": 0,
+                "skipped": []
+              }
+            }
+          },
+          "recording": false,
+          "captureBytes": 0
+        }
+      },
+      {
+        "phase": "event:canplay",
+        "wallMs": 2300.5999999046326,
+        "audioTime": 2.2026666666666666,
+        "linked": true,
+        "video": {
+          "paused": true,
+          "currentTime": 0.899999,
+          "seeking": false,
+          "readyState": 4,
+          "duration": 1.430533,
+          "playbackRate": 1,
+          "error": null
+        },
+        "deck": {
+          "reverse": true,
+          "playing": true,
+          "processing": false,
+          "position": 0.9,
+          "rate": 1,
+          "enginePosition": 0.8993333333333334
+        },
+        "mixer": {
+          "frames": 6,
+          "error": null,
+          "width": 640,
+          "height": 360,
+          "lastRenderMs": 4.400000095367432,
+          "inputs": [
+            {
+              "name": "generated-local.mp4",
+              "position": 0.899999,
+              "duration": 1.430533,
+              "paused": true
+            },
+            {
+              "name": "generated-local.mp4",
+              "position": 0,
+              "duration": 1.430533,
+              "paused": true
+            }
+          ],
+          "loadedImages": [],
+          "pipeline": {
+            "width": 640,
+            "height": 360,
+            "disposed": false,
+            "policy": {
+              "order": "Raw input → two channel FX → channel overlays → transition → master overlays → two master FX",
+              "referenceOrder": "Unverified; this is an independent Open Play routing contract.",
+              "scheduling": "Caller supplies one monotonic time/frameId per processed frame; no frame-rate guarantee."
+            },
+            "overlays": {
+              "left": {
+                "rendered": 0,
+                "skipped": []
+              },
+              "right": {
+                "rendered": 0,
+                "skipped": []
+              },
+              "master": {
+                "rendered": 0,
+                "skipped": []
+              }
+            }
+          },
+          "recording": false,
+          "captureBytes": 0
+        }
+      },
+      {
+        "phase": "event:seeking",
+        "wallMs": 2430.399999856949,
+        "audioTime": 2.3306666666666667,
+        "linked": true,
+        "video": {
+          "paused": true,
+          "currentTime": 0.776666,
+          "seeking": true,
+          "readyState": 1,
+          "duration": 1.430533,
+          "playbackRate": 1,
+          "error": null
+        },
+        "deck": {
+          "reverse": true,
+          "playing": true,
+          "processing": false,
+          "position": 0.9,
+          "rate": 1,
+          "enginePosition": 0.7713333333333333
+        },
+        "mixer": {
+          "frames": 7,
+          "error": null,
+          "width": 640,
+          "height": 360,
+          "lastRenderMs": 4.099999904632568,
+          "inputs": [
+            {
+              "name": "generated-local.mp4",
+              "position": 0.776666,
+              "duration": 1.430533,
+              "paused": true
+            },
+            {
+              "name": "generated-local.mp4",
+              "position": 0,
+              "duration": 1.430533,
+              "paused": true
+            }
+          ],
+          "loadedImages": [],
+          "pipeline": {
+            "width": 640,
+            "height": 360,
+            "disposed": false,
+            "policy": {
+              "order": "Raw input → two channel FX → channel overlays → transition → master overlays → two master FX",
+              "referenceOrder": "Unverified; this is an independent Open Play routing contract.",
+              "scheduling": "Caller supplies one monotonic time/frameId per processed frame; no frame-rate guarantee."
+            },
+            "overlays": {
+              "left": {
+                "rendered": 0,
+                "skipped": []
+              },
+              "right": {
+                "rendered": 0,
+                "skipped": []
+              },
+              "master": {
+                "rendered": 0,
+                "skipped": []
+              }
+            }
+          },
+          "recording": false,
+          "captureBytes": 0
+        }
+      },
+      {
+        "phase": "event:seeked",
+        "wallMs": 2430.399999856949,
+        "audioTime": 2.3306666666666667,
+        "linked": true,
+        "video": {
+          "paused": true,
+          "currentTime": 0.776666,
+          "seeking": false,
+          "readyState": 4,
+          "duration": 1.430533,
+          "playbackRate": 1,
+          "error": null
+        },
+        "deck": {
+          "reverse": true,
+          "playing": true,
+          "processing": false,
+          "position": 0.9,
+          "rate": 1,
+          "enginePosition": 0.7713333333333333
+        },
+        "mixer": {
+          "frames": 7,
+          "error": null,
+          "width": 640,
+          "height": 360,
+          "lastRenderMs": 4.099999904632568,
+          "inputs": [
+            {
+              "name": "generated-local.mp4",
+              "position": 0.776666,
+              "duration": 1.430533,
+              "paused": true
+            },
+            {
+              "name": "generated-local.mp4",
+              "position": 0,
+              "duration": 1.430533,
+              "paused": true
+            }
+          ],
+          "loadedImages": [],
+          "pipeline": {
+            "width": 640,
+            "height": 360,
+            "disposed": false,
+            "policy": {
+              "order": "Raw input → two channel FX → channel overlays → transition → master overlays → two master FX",
+              "referenceOrder": "Unverified; this is an independent Open Play routing contract.",
+              "scheduling": "Caller supplies one monotonic time/frameId per processed frame; no frame-rate guarantee."
+            },
+            "overlays": {
+              "left": {
+                "rendered": 0,
+                "skipped": []
+              },
+              "right": {
+                "rendered": 0,
+                "skipped": []
+              },
+              "master": {
+                "rendered": 0,
+                "skipped": []
+              }
+            }
+          },
+          "recording": false,
+          "captureBytes": 0
+        }
+      }
+    ],
+    "samples": [
+      {
+        "enginePosition": 0.9,
+        "expected": 0.8999999999999999,
+        "videoPosition": 0.899999,
+        "paused": true,
+        "readyState": 4,
+        "pixel": [
+          219,
+          30,
+          19,
+          255
+        ]
+      },
+      {
+        "enginePosition": 0.7766666666666665,
+        "expected": 0.7766666666666664,
+        "videoPosition": 0.776666,
+        "paused": true,
+        "readyState": 4,
+        "pixel": [
+          219,
+          30,
+          19,
+          255
+        ]
+      }
+    ]
+  },
+  "seekFrameRetention": {
+    "before": {
+      "hash": "7d3dfb19",
+      "pixel": [
+        37,
+        226,
+        237,
+        255
+      ],
+      "readyState": 4,
+      "currentTime": 0.143053
+    },
+    "seekStarted": {
+      "readyState": 1,
+      "seeking": true,
+      "currentTime": 0.95
+    },
+    "during": {
+      "hash": "46b1f308",
+      "pixel": [
+        232,
+        205,
+        196,
+        255
+      ],
+      "readyState": 1,
+      "seeking": true
+    },
+    "after": {
+      "hash": "27abe7d4",
+      "pixel": [
+        36,
+        225,
+        236,
+        255
+      ],
+      "readyState": 4,
+      "currentTime": 0.95
+    }
+  },
+  "continuousReverse": {
+    "samples": [
+      {
+        "frame": 0,
+        "enginePosition": 1.1444264000000002,
+        "videoPosition": 1.144426,
+        "paused": true,
+        "seeking": true,
+        "readyState": 1,
+        "pixel": [
+          232,
+          205,
+          196,
+          204
+        ],
+        "hash": "afb9f566"
+      },
+      {
+        "frame": 1,
+        "enginePosition": 1.1437597333333331,
+        "videoPosition": 1.144426,
+        "paused": true,
+        "seeking": true,
+        "readyState": 1,
+        "pixel": [
+          232,
+          205,
+          196,
+          204
+        ],
+        "hash": "afb9f566"
+      },
+      {
+        "frame": 2,
+        "enginePosition": 1.1384264,
+        "videoPosition": 1.143759,
+        "paused": true,
+        "seeking": true,
+        "readyState": 1,
+        "pixel": [
+          232,
+          205,
+          196,
+          204
+        ],
+        "hash": "afb9f566"
+      },
+      {
+        "frame": 3,
+        "enginePosition": 1.1277597333333331,
+        "videoPosition": 1.133093,
+        "paused": true,
+        "seeking": true,
+        "readyState": 1,
+        "pixel": [
+          232,
+          205,
+          196,
+          204
+        ],
+        "hash": "afb9f566"
+      },
+      {
+        "frame": 4,
+        "enginePosition": 1.1224264,
+        "videoPosition": 1.127759,
+        "paused": true,
+        "seeking": true,
+        "readyState": 1,
+        "pixel": [
+          232,
+          205,
+          196,
+          204
+        ],
+        "hash": "afb9f566"
+      },
+      {
+        "frame": 5,
+        "enginePosition": 1.1117597333333336,
+        "videoPosition": 1.117093,
+        "paused": true,
+        "seeking": true,
+        "readyState": 1,
+        "pixel": [
+          232,
+          205,
+          196,
+          204
+        ],
+        "hash": "afb9f566"
+      },
+      {
+        "frame": 6,
+        "enginePosition": 1.1064264,
+        "videoPosition": 1.106426,
+        "paused": true,
+        "seeking": true,
+        "readyState": 1,
+        "pixel": [
+          232,
+          205,
+          196,
+          204
+        ],
+        "hash": "afb9f566"
+      },
+      {
+        "frame": 7,
+        "enginePosition": 1.0957597333333335,
+        "videoPosition": 1.101093,
+        "paused": true,
+        "seeking": true,
+        "readyState": 1,
+        "pixel": [
+          232,
+          205,
+          196,
+          204
+        ],
+        "hash": "afb9f566"
+      },
+      {
+        "frame": 8,
+        "enginePosition": 1.0530930666666667,
+        "videoPosition": 1.053093,
+        "paused": true,
+        "seeking": true,
+        "readyState": 1,
+        "pixel": [
+          232,
+          205,
+          196,
+          204
+        ],
+        "hash": "afb9f566"
+      },
+      {
+        "frame": 9,
+        "enginePosition": 1.0424263999999999,
+        "videoPosition": 1.047759,
+        "paused": true,
+        "seeking": true,
+        "readyState": 1,
+        "pixel": [
+          232,
+          205,
+          196,
+          204
+        ],
+        "hash": "afb9f566"
+      },
+      {
+        "frame": 10,
+        "enginePosition": 1.0370930666666667,
+        "videoPosition": 1.042426,
+        "paused": true,
+        "seeking": true,
+        "readyState": 1,
+        "pixel": [
+          232,
+          205,
+          196,
+          204
+        ],
+        "hash": "afb9f566"
+      },
+      {
+        "frame": 11,
+        "enginePosition": 1.0264263999999999,
+        "videoPosition": 1.031759,
+        "paused": true,
+        "seeking": true,
+        "readyState": 1,
+        "pixel": [
+          232,
+          205,
+          196,
+          204
+        ],
+        "hash": "afb9f566"
+      }
+    ],
+    "seekedEvents": [
+      {
+        "wallMs": 2482.5,
+        "currentTime": 1.144426,
+        "readyState": 4
+      },
+      {
+        "wallMs": 2489.7000000476837,
+        "currentTime": 1.144426,
+        "readyState": 4
+      },
+      {
+        "wallMs": 2495.7999999523163,
+        "currentTime": 1.143759,
+        "readyState": 4
+      },
+      {
+        "wallMs": 2504,
+        "currentTime": 1.133093,
+        "readyState": 4
+      },
+      {
+        "wallMs": 2512.5,
+        "currentTime": 1.127759,
+        "readyState": 4
+      },
+      {
+        "wallMs": 2522.7000000476837,
+        "currentTime": 1.117093,
+        "readyState": 4
+      },
+      {
+        "wallMs": 2528.7999999523163,
+        "currentTime": 1.106426,
+        "readyState": 4
+      },
+      {
+        "wallMs": 2582.5999999046326,
+        "currentTime": 1.053093,
+        "readyState": 1
+      },
+      {
+        "wallMs": 2590.2000000476837,
+        "currentTime": 1.047759,
+        "readyState": 1
+      },
+      {
+        "wallMs": 2597,
+        "currentTime": 1.042426,
+        "readyState": 1
+      },
+      {
+        "wallMs": 2597.0999999046326,
+        "currentTime": 1.042426,
+        "readyState": 4
+      },
+      {
+        "wallMs": 2605.399999856949,
+        "currentTime": 1.031759,
+        "readyState": 4
+      }
+    ],
+    "inLoopSeekCompletions": 11,
+    "afterDecode": {
+      "currentTime": 1.031759,
+      "readyState": 4
+    }
+  },
+  "capture": {
+    "bytes": 51490,
+    "mime": "video/webm;codecs=vp9,opus",
+    "processedFrames": 42,
+    "wallMs": 1403.7000000476837,
+    "observedProcessedFramesPerSecond": 29.920923273187476,
+    "engineCaptureAudioTracks": [
+      {
+        "kind": "audio",
+        "readyState": "live",
+        "enabled": true
+      }
+    ],
+    "scope": "Actual mixer tick, GPU pipeline and MediaRecorder run; requested30fps is not a measured frame-rate guarantee."
+  },
+  "decodedCapture": {
+    "width": 640,
+    "height": 360,
+    "duration": 1.399,
+    "readyState": 4,
+    "firstFrame": {
+      "mediaTime": 0,
+      "presentedFrames": 1,
+      "width": 640,
+      "height": 360
+    },
+    "secondFrame": {
+      "mediaTime": 0.063,
+      "presentedFrames": 2,
+      "width": 640,
+      "height": 360
+    },
+    "muted": true,
+    "audioDecodedBytes": 5754,
+    "corner": [
+      33,
+      225,
+      233,
+      254
+    ],
+    "magentaOverlayPixels": 788
+  },
+  "captureAudio": {
+    "channels": 2,
+    "sampleRate": 48000,
+    "duration": 1.38,
+    "rms": 0.031032185999161608,
+    "tone440": 0.04398385499665741,
+    "tone880": 0.0000032504889486437567,
+    "claim": "Actual audio decode from the captured video container, not just presence of an input stream track."
+  },
+  "passed": 29,
+  "failed": 2,
+  "durationMs": 4322,
+  "messages": [],
+  "scope": "Actual browser integration evidence only. No native/hardware/reference parity; no full30fps assumption. Failures are preserved, including codec/container or environment limitations."
+}

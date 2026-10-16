@@ -892,3 +892,125 @@ Next: replace illustrative Video controls with independently implemented effects
 and transitions from the proven manifest catalog; verify actual pixel output and
 six-slot routing. Retain additional localized names as availability candidates.
 Continue the full scope afterward; no native app until Jason approves a revision.
+
+## 29. Video implementation in progress — pixel checks and integration gate
+
+The original Video processors now execute real GPU/Canvas transformations. The
+frozen standalone browser suites passed **72/72 effects**, **51/51 transitions**
+and **32/32 overlay checks**. Catalog boundaries remain47 manifest effects plus8
+localized availability candidates,7 manifest transitions plus26 localized
+candidates, and a separate Open Play Crossfade baseline. These tests establish the
+specified independent pixel contracts, not reference registration, vendor shader
+matching, exact controls, or Serato visual equivalence.
+
+A strict transparent-red resize probe failed before correction (FX71/72;
+transitions48/49). The corrected implementations store/filter premultiplied
+textures and safely return straight-alpha output. The initial failures are retained
+next to final results in `docs/prototype/`. Transition history and snapshot tests
+also cover repeated frame IDs, threshold changes and backward clocks.
+
+The assembled HTML pipeline is being verified now: two ordered slots per input
+channel and two on master, per-target text/image layers, all transition choices,
+real per-channel FFT analysis, linked transport, selectable browser output size,
+metadata persistence and processed-canvas/master recording. Its processing order,
+control ranges and FFT mapping are independently designed and explicitly labeled.
+Standalone GPU success does not close this assembled-pipeline gate. Recording
+restart/disposal races and reverse-video state are receiving separate lifecycle
+checks. A new100-preset application cap introduced during UI work was removed;
+browser storage quota is still an environmental limit.
+
+Routine model routing: Codex GPT-6.1 Sol/high for controls, state, tests and records;
+Astra/high only for a bounded unresolved measured GPU/DSP dispute. Claude Code:
+use its available Sonnet-class model/high effort for implementation/review,
+escalating to its available Opus-class model/high only for a defined unresolved
+rendering/lifecycle dispute. Verify actual supported model IDs/effort before use;
+these recommendations do not assert a current provider catalog. Jason's separate
+Cloud Code/Fable permission applies if debugging becomes stuck.
+
+Next gate: execute the assembled pipeline with real decoded local media, measured
+channel audio, six-slot routing and recording/replay; exercise the main controls
+and save/reload. Then update VID-002, GATE-P and the Claude packet with precise
+scope. Video Media Crate behavior, MP3+G karaoke, Syphon, codec/device coverage and
+all vendor parity remain open. Continue the full495-requirement scope afterward.
+No native app until Jason approves an identified prototype revision.
+
+## 30. Karaoke and Media Crate continuation
+
+The assembled Video pipeline now passes31/31 including actual continuous reverse
+and preservation of decoded frames during asynchronous seeks. Initial seeking
+failures and the separate harness-dimension diagnostic are retained, not erased.
+Karaoke has an original CD+G packet interpreter (22 pure/21 actual Canvas cases),
+a track-owned bridge (19 controlled-Canvas cases), and19/19 real audio/GPU/capture
+checks. Main UI imported an actual original MP3+CDG pair, played its selected deck
+and advanced graphics, then paused. Bytes remain session assets requiring reimport.
+Channel selection, parity repair, commercial-disc compatibility, reference visual
+matching and physical synchronization are still open. Read
+`docs/research/VIDEO_REMAINING_WORKFLOWS.md` for source conflicts and declared
+policies; `docs/prototype/VIDEO_FUNCTIONAL_REVIEW.md` for exact executed scope.
+
+Media Crate and automatic transition selection have real runtime code now, but
+the first real-media run failed9 of26 cases. Preserve that red evidence, isolate
+root causes, correct them and rerun the actual decoder/pixel/clock workflows before
+claiming that feature works.25 pure policy and8 controlled mixer cases do not
+substitute for those real-media failures. No native application has been started.
+The full495-requirement goal, private-record updates and Claude audit remain active.
+
+## 31. Frozen Video, karaoke and Media Crate browser checkpoint
+
+This section supersedes the in-progress gates and red-cutoff statements in§29–30.
+All55 independently written Video effects,34 transitions including the separate
+Crossfade baseline, six ordered channel/master slots, actual FFT input, text/image
+layers, local-file first-frame decoding, linked reverse/seek retention, metadata
+persistence, processed recording/replay, CDG playback and Media Crate selection
+now have bounded executed evidence. No vendor shaders/assets were copied.
+
+| Actual browser path | Result | Acceptance boundary |
+|---|---:|---|
+| Video effects |72/72|Independent pixel contracts, not vendor algorithms or controls|
+| Transitions |51/51|Original algorithms, history/latch/scratch and alpha handling|
+| Overlays |32/32|Canvas/PNG pixels and metadata; session images need reimport|
+| Assembled pipeline |32/32|Real local Files/engine/FFT, six slots, queued seek events/pixels and actual recorded-container video/audio decode|
+| Karaoke integration |19/19|Real audio clock/CDG/GPU/capture; commercial compatibility and physical AV sync open|
+| Media Crate |32/32|Actual files/pixels, association/fallback/random/ownership, six fresh paused imports|
+
+All13 Node scripts in `docs/prototype/video-node-checks.json` exited0; their pure
+and controlled-collaborator limits remain explicit. Main UI paths executed actual
+FX/preset save/reload, image decode, recording across panel switches and replay,
+MP3+CDG import/play/pause, Media association/Next/fallback, and automatic-mode flag
+persistence. Read [VIDEO_FUNCTIONAL_REVIEW.md](docs/prototype/VIDEO_FUNCTIONAL_REVIEW.md),
+[KARAOKE_FUNCTIONAL_REVIEW.md](docs/prototype/KARAOKE_FUNCTIONAL_REVIEW.md) and
+[MEDIA_CRATE_FUNCTIONAL_REVIEW.md](docs/prototype/MEDIA_CRATE_FUNCTIONAL_REVIEW.md).
+
+Initial alpha, seek and Media failures remain saved. The first-frame bug required
+an actual presented muted-video frame before replacement; readyState alone was
+insufficient. Async ownership and recording session boundaries are guarded. The
+latest short capture decoded actual processed pixels plus master440Hz audio;
+its≈25.64 processed fps is not sustained30fps or HD/native acceptance.
+
+Reference provenance remains47 manifest Video effects plus8 localized candidates
+and7 transitions plus26 localized candidates; current active menus, exact ranges,
+defaults, algorithms and visual matching are unknown. Semantic DJ-audio Echo/
+Distortion→Video coupling is the next bounded implementation gap; FFT reaction
+does not close it. Generic aspect/media-treatment/control/quality workflows,
+second-display/Syphon, codec matrix, long sessions, CDG selective channels/parity,
+physical hardware and native acceptance remain open. Continue the full495-row
+working scope, including library/interoperability/recovery, conditional states,
+Flip/sampler combinations, model quality and provider/hardware acceptance. Counts
+are not a completeness claim.
+
+VID-002 retains Codex gpt-6.1-sol/high and Claude Code claude-sonnet-5/medium;
+VID-001 retains Sol/xhigh and claude-opus-5/high for transport/ownership. Routine
+implementation uses Sol/high; Astra/high is reserved for an unresolved measured
+GPU/DSP dispute. Verify supported model IDs/effort before invoking; recommendations
+are not execution. Jason permits a new Cloud Code/Fable debugging conversation if
+stuck; none has been needed for this checkpoint.
+
+The candidate hash manifest and Claude packet pin the frozen code revision.
+**Full parity NOT PASSED. Native approval NOT GRANTED.** Keep the goal active,
+reconcile private records and obtain Jason's explicit approval of a named HTML
+revision before any native development.
+
+Final review also corrected ordinary-load/eject ownership around asynchronous
+Stem Slip disarm.10 extracted real callback checks pass; a separate actual UI
+pair import/play/pause passed afterward. See `video-import-ownership-results.json`
+and `karaoke-import-ownership-main-ui-results.json`.

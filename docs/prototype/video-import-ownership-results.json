@@ -1,0 +1,55 @@
+{
+  "scope": "Executed extracted actual app.load/eject + panels.importKaraoke + engine.setStemSlip off with controlled UI/audio adapters. This does not establish browser import, File decode, Canvas capture or native acceptance.",
+  "sourceSHA256": "dc303b47f84edb9028a1b4673e4e87267f21aa3655226bd4dd86ace77702eb43",
+  "passed": 10,
+  "failed": 0,
+  "checks": [
+    {
+      "name": "Older pair disarm cannot overwrite a later ordinary audio load (initial red regression)",
+      "passed": true,
+      "evidence": {
+        "trackId": "newer",
+        "pairOutcome": {
+          "status": "rejected",
+          "message": "The target audio track changed; import the pair again."
+        }
+      }
+    },
+    {
+      "name": "Older ordinary disarm cannot overwrite a later ordinary audio load",
+      "passed": true
+    },
+    {
+      "name": "Eject invalidates an older pair import suspended in disarm",
+      "passed": true
+    },
+    {
+      "name": "Eject invalidates an older ordinary load suspended in disarm",
+      "passed": true
+    },
+    {
+      "name": "An older eject suspended in disarm cannot erase a later ordinary audio load",
+      "passed": true
+    },
+    {
+      "name": "Normal armed load retains requested position and increments video generation once",
+      "passed": true
+    },
+    {
+      "name": "Normal armed MP3+CDG import still commits graphics and metadata",
+      "passed": true
+    },
+    {
+      "name": "Playing lock enabled during disarm prevents a resumed replacement",
+      "passed": true
+    },
+    {
+      "name": "Deck object replacement during disarm leaves the replacement owner intact",
+      "passed": true
+    },
+    {
+      "name": "Ordinary unarmed load and ordinary eject preserve their synchronous commit behavior",
+      "passed": true
+    }
+  ]
+}

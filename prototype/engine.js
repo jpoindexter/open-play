@@ -4,6 +4,7 @@ import { KeylockRenderer } from "./keylock.js";
 import { prepareStemHistory, createStemHistory } from "./stem-history.js";
 import { createStemExitFX } from "./stem-exit-fx.js";
 import { prepareStemSlip, createStemSlipTransport } from "./stem-slip.js";
+import { createVideoAnalysis } from "./video-analysis.js";
 export class AudioEngine {
   constructor() {
     this.ctx = null;
@@ -625,6 +626,11 @@ export class AudioEngine {
       Math.sqrt(a.reduce((s, v) => s + ((v - 128) / 128) ** 2, 0) / a.length) *
       3
     );
+  }
+  videoAnalysis(index = 4) {
+    if (!this.ctx) return {bass: 0, mid: 0, treble: 0, level: 0, audioAvailable: false};
+    this.videoAnalyzers ||= createVideoAnalysis(this.ctx, [...this.nodes.map(n => n.input), this.master]);
+    return this.videoAnalyzers.read(index);
   }
   async recordStart() {
     await this.resume();

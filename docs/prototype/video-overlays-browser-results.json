@@ -1,0 +1,562 @@
+{
+  "scope": "Actual Canvas 2D pixels from original synthetic PNG/canvas/text fixtures. Documented control families with independent geometry/mappings; vendor equivalence and parent UI routing/persistence remain separate gates.",
+  "passed": 32,
+  "total": 32,
+  "results": [
+    {
+      "name": "OFF text/image overlays preserve every base pixel",
+      "passed": true,
+      "evidence": {
+        "changed": 0
+      }
+    },
+    {
+      "name": "ON decoded PNG changes actual image pixels while transparent hole preserves base",
+      "passed": true,
+      "evidence": {
+        "solid": [
+          255,
+          0,
+          0,
+          255
+        ],
+        "hole": [
+          20,
+          40,
+          80,
+          255
+        ],
+        "bounds": {
+          "count": 368,
+          "minX": 84,
+          "maxX": 107,
+          "minY": 56,
+          "maxY": 71,
+          "width": 24,
+          "height": 16
+        }
+      }
+    },
+    {
+      "name": "Image opacity0.5 produces the expected source-over pixel blend",
+      "passed": true,
+      "evidence": {
+        "actual": [
+          138,
+          20,
+          40,
+          255
+        ]
+      }
+    },
+    {
+      "name": "Opacity zero is exact bypass and toggling OFF leaves no prior overlay",
+      "passed": true,
+      "evidence": {
+        "zeroChanged": 0,
+        "offChanged": 0
+      }
+    },
+    {
+      "name": "Source alpha and overlay opacity multiply without an opaque black matte",
+      "passed": true,
+      "evidence": {
+        "transparent": [
+          255,
+          0,
+          0,
+          64
+        ],
+        "composite": [
+          79,
+          30,
+          60,
+          255
+        ]
+      }
+    },
+    {
+      "name": "Text ON and selected color produce actual red glyph pixels",
+      "passed": true,
+      "evidence": {
+        "solidRedPixels": 227,
+        "bounds": {
+          "count": 497,
+          "minX": 67,
+          "maxX": 124,
+          "minY": 49,
+          "maxY": 68,
+          "width": 58,
+          "height": 20
+        }
+      }
+    },
+    {
+      "name": "Font family changes rendered glyph shapes",
+      "passed": true,
+      "evidence": {
+        "changed": 3521
+      }
+    },
+    {
+      "name": "Font size changes glyph bounds and coverage",
+      "passed": true,
+      "evidence": {
+        "small": {
+          "count": 244,
+          "minX": 77,
+          "maxX": 115,
+          "minY": 54,
+          "maxY": 67,
+          "width": 39,
+          "height": 14
+        },
+        "large": {
+          "count": 777,
+          "minX": 58,
+          "maxX": 133,
+          "minY": 44,
+          "maxY": 69,
+          "width": 76,
+          "height": 26
+        }
+      }
+    },
+    {
+      "name": "Text alignment moves actual glyph bounds around the configured anchor",
+      "passed": true,
+      "evidence": {
+        "positions": [
+          {
+            "count": 372,
+            "minX": 96,
+            "maxX": 130,
+            "minY": 52,
+            "maxY": 66,
+            "width": 35,
+            "height": 15
+          },
+          {
+            "count": 372,
+            "minX": 78,
+            "maxX": 112,
+            "minY": 52,
+            "maxY": 66,
+            "width": 35,
+            "height": 15
+          },
+          {
+            "count": 372,
+            "minX": 60,
+            "maxX": 94,
+            "minY": 52,
+            "maxY": 66,
+            "width": 35,
+            "height": 15
+          }
+        ]
+      }
+    },
+    {
+      "name": "Explicit multiline text renders separate lines and maintains layout",
+      "passed": true,
+      "evidence": {
+        "one": {
+          "count": 303,
+          "minX": 78,
+          "maxX": 113,
+          "minY": 52,
+          "maxY": 66,
+          "width": 36,
+          "height": 15
+        },
+        "two": {
+          "count": 606,
+          "minX": 78,
+          "maxX": 113,
+          "minY": 40,
+          "maxY": 78,
+          "width": 36,
+          "height": 39
+        }
+      }
+    },
+    {
+      "name": "Image left/center/right alignment preserves geometry and uses distinct anchors",
+      "passed": true,
+      "evidence": {
+        "positions": [
+          {
+            "count": 368,
+            "minX": 96,
+            "maxX": 119,
+            "minY": 56,
+            "maxY": 71,
+            "width": 24,
+            "height": 16
+          },
+          {
+            "count": 368,
+            "minX": 84,
+            "maxX": 107,
+            "minY": 56,
+            "maxY": 71,
+            "width": 24,
+            "height": 16
+          },
+          {
+            "count": 368,
+            "minX": 72,
+            "maxX": 95,
+            "minY": 56,
+            "maxY": 71,
+            "width": 24,
+            "height": 16
+          }
+        ]
+      }
+    },
+    {
+      "name": "Image position and scale move and resize the actual source",
+      "passed": true,
+      "evidence": {
+        "original": {
+          "count": 368,
+          "minX": 36,
+          "maxX": 59,
+          "minY": 24,
+          "maxY": 39,
+          "width": 24,
+          "height": 16
+        },
+        "scaled": {
+          "count": 1500,
+          "minX": 24,
+          "maxX": 71,
+          "minY": 16,
+          "maxY": 47,
+          "width": 48,
+          "height": 32
+        }
+      }
+    },
+    {
+      "name": "Scroll Left-Right moves pixels in its documented direction",
+      "passed": true,
+      "evidence": {
+        "a": {
+          "count": 368,
+          "minX": 30,
+          "maxX": 53,
+          "minY": 56,
+          "maxY": 71,
+          "width": 24,
+          "height": 16
+        },
+        "b": {
+          "count": 368,
+          "minX": 84,
+          "maxX": 107,
+          "minY": 56,
+          "maxY": 71,
+          "width": 24,
+          "height": 16
+        },
+        "delta": 54
+      }
+    },
+    {
+      "name": "Scroll Right-Left moves pixels in its documented direction",
+      "passed": true,
+      "evidence": {
+        "a": {
+          "count": 368,
+          "minX": 138,
+          "maxX": 161,
+          "minY": 56,
+          "maxY": 71,
+          "width": 24,
+          "height": 16
+        },
+        "b": {
+          "count": 368,
+          "minX": 84,
+          "maxX": 107,
+          "minY": 56,
+          "maxY": 71,
+          "width": 24,
+          "height": 16
+        },
+        "delta": -54
+      }
+    },
+    {
+      "name": "Scroll Top-Bottom moves pixels in its documented direction",
+      "passed": true,
+      "evidence": {
+        "a": {
+          "count": 368,
+          "minX": 84,
+          "maxX": 107,
+          "minY": 20,
+          "maxY": 35,
+          "width": 24,
+          "height": 16
+        },
+        "b": {
+          "count": 368,
+          "minX": 84,
+          "maxX": 107,
+          "minY": 56,
+          "maxY": 71,
+          "width": 24,
+          "height": 16
+        },
+        "delta": 36
+      }
+    },
+    {
+      "name": "Scroll Bottom-Top moves pixels in its documented direction",
+      "passed": true,
+      "evidence": {
+        "a": {
+          "count": 368,
+          "minX": 84,
+          "maxX": 107,
+          "minY": 92,
+          "maxY": 107,
+          "width": 24,
+          "height": 16
+        },
+        "b": {
+          "count": 368,
+          "minX": 84,
+          "maxX": 107,
+          "minY": 56,
+          "maxY": 71,
+          "width": 24,
+          "height": 16
+        },
+        "delta": -36
+      }
+    },
+    {
+      "name": "Scroll speed selection changes actual travel over the same elapsed time",
+      "passed": true,
+      "evidence": {
+        "slow": {
+          "count": 368,
+          "minX": 3,
+          "maxX": 26,
+          "minY": 56,
+          "maxY": 71,
+          "width": 24,
+          "height": 16
+        },
+        "fast": {
+          "count": 368,
+          "minX": 84,
+          "maxX": 107,
+          "minY": 56,
+          "maxY": 71,
+          "width": 24,
+          "height": 16
+        }
+      }
+    },
+    {
+      "name": "BPM zoom changes coverage at opposite phases of a beat",
+      "passed": true,
+      "evidence": {
+        "high": {
+          "count": 624,
+          "minX": 80,
+          "maxX": 111,
+          "minY": 54,
+          "maxY": 73,
+          "width": 32,
+          "height": 20
+        },
+        "low": {
+          "count": 368,
+          "minX": 84,
+          "maxX": 107,
+          "minY": 56,
+          "maxY": 71,
+          "width": 24,
+          "height": 16
+        }
+      }
+    },
+    {
+      "name": "BPM input changes real zoom cadence",
+      "passed": true,
+      "evidence": {
+        "slow": {
+          "count": 368,
+          "minX": 84,
+          "maxX": 107,
+          "minY": 56,
+          "maxY": 71,
+          "width": 24,
+          "height": 16
+        },
+        "fast": {
+          "count": 624,
+          "minX": 80,
+          "maxX": 111,
+          "minY": 54,
+          "maxY": 73,
+          "width": 32,
+          "height": 20
+        }
+      }
+    },
+    {
+      "name": "Measured bass changes real image zoom independently of general level",
+      "passed": true,
+      "evidence": {
+        "quiet": {
+          "count": 368,
+          "minX": 84,
+          "maxX": 107,
+          "minY": 56,
+          "maxY": 71,
+          "width": 24,
+          "height": 16
+        },
+        "loud": {
+          "count": 848,
+          "minX": 78,
+          "maxX": 113,
+          "minY": 52,
+          "maxY": 75,
+          "width": 36,
+          "height": 24
+        }
+      }
+    },
+    {
+      "name": "Reactive intensity selection changes actual zoom strength",
+      "passed": true,
+      "evidence": {
+        "subtle": {
+          "count": 488,
+          "minX": 82,
+          "maxX": 109,
+          "minY": 55,
+          "maxY": 72,
+          "width": 28,
+          "height": 18
+        },
+        "strong": {
+          "count": 1500,
+          "minX": 72,
+          "maxX": 119,
+          "minY": 48,
+          "maxY": 79,
+          "width": 48,
+          "height": 32
+        }
+      }
+    },
+    {
+      "name": "Mid/treble/general level are not falsely substituted for missing bass",
+      "passed": true,
+      "evidence": {
+        "changed": 0
+      }
+    },
+    {
+      "name": "Master placement or explicitly missing audio freezes reactive zoom with a diagnostic",
+      "passed": true,
+      "evidence": {
+        "contexts": 4
+      }
+    },
+    {
+      "name": "Reduced Motion keeps every animation stationary across time and audio changes",
+      "passed": true,
+      "evidence": {
+        "animations": 7
+      }
+    },
+    {
+      "name": "Text save/reload/edit preserves pixels and updates the same preset metadata",
+      "passed": true,
+      "evidence": {
+        "sameId": "caption-1",
+        "changed": 1884
+      }
+    },
+    {
+      "name": "Image reload requires a decoded asset; restored PNG pixels match the saved overlay",
+      "passed": true,
+      "evidence": {
+        "imageRef": "fixture:logo",
+        "changedAfterReload": 0
+      }
+    },
+    {
+      "name": "Invalid/undecoded image is skipped without poisoning a later valid overlay",
+      "passed": true,
+      "evidence": {
+        "rendered": 1,
+        "skipped": [
+          {
+            "index": 0,
+            "reason": "Overlay could not be drawn from this image or text."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Fully transparent image preserves every base pixel",
+      "passed": true,
+      "evidence": {
+        "changed": 0
+      }
+    },
+    {
+      "name": "Overlay array order controls actual source-over layer order",
+      "passed": true,
+      "evidence": {
+        "blueTop": [
+          0,
+          0,
+          255,
+          255
+        ],
+        "redTop": [
+          255,
+          0,
+          0,
+          255
+        ]
+      }
+    },
+    {
+      "name": "Reset clears output and switching animation/text creates no retained frame state",
+      "passed": true,
+      "evidence": {
+        "changed": 0
+      }
+    },
+    {
+      "name": "Explicit reuse of output as base preserves its pixels before clear",
+      "passed": true,
+      "evidence": {
+        "changed": 0
+      }
+    },
+    {
+      "name": "Dispose releases backing pixels and rejects subsequent rendering",
+      "passed": true,
+      "evidence": {
+        "rejected": true,
+        "width": 0,
+        "height": 0
+      }
+    }
+  ]
+}

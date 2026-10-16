@@ -46,13 +46,15 @@ conditional debugging permission does not remove the native approval gate.
 ## Read first
 
 - `AGENTS.md` if present; `PROJECT_PROMPT.md`; `docs/approvals.md`.
-- `FULL_BUILD_PLAN.md` sections23–28, with older sections retained as dated history.
+- `FULL_BUILD_PLAN.md` sections23–31, with older sections retained as dated history.
 - `docs/research/PARITY_GATE.md`, `FULL_SCOPE_CONTRACT.md`, `FEATURE_COVERAGE.md`,
   `INTERACTION_REQUIREMENTS.md`, `REQUIREMENT_GAPS_REVIEW.md`, `SOURCE_CONFLICTS.md`,
   `UI_OBSERVATIONS.md`, `EVIDENCE_LEDGER.md`, `BINARY_FINDINGS.md`,
   `HARDWARE_HERCULES.md` and `HISTORICAL_GATING.md` (all in `docs/research/`).
 - `docs/prototype/DSP_FUNCTIONAL_REVIEW.md`, `STEM_SLIP_FUNCTIONAL_REVIEW.md`,
-  `ADVERSARIAL_AUDIO_REVIEW.md`, and the historical `FUNCTIONAL_REVIEW.md`.
+  `ADVERSARIAL_AUDIO_REVIEW.md`, `VIDEO_FUNCTIONAL_REVIEW.md`,
+  `KARAOKE_FUNCTIONAL_REVIEW.md`, `MEDIA_CRATE_FUNCTIONAL_REVIEW.md`, and the
+  historical `FUNCTIONAL_REVIEW.md`.
 - `docs/research/KEYLOCK_EVALUATION.md`, `STEMS_RUNTIME_EVALUATION.md`,
   `AUDIO_ANALYSIS_EVALUATION.md`, `SAMPLER_DSP_EVALUATION.md`,
   `PITCH_PLAY_EVALUATION.md`, `FX_BEHAVIOR_CONTRACTS.md`,
@@ -106,12 +108,35 @@ manual documents latched selection and vocal-only crossfader behavior. REQ-266 a
 REQ-493–495 preserve that distinction. Exact initial states, T10 mapping, vendor
 quantization/topology and combined Pitch Play/Flip/Slicer workflows remain open.
 
-Video research now proves47 manifest slot effects and7 transitions in installed
-4.0.10.213. Localization expands names to55/33 candidates, not proven active menus.
-Official guidance supports two slots per channel plus two master slots. Current
-Video composition/capture works, but its illustrative effect/transition controls
-do not implement this catalog. Actual Video processing/six-slot routing is next.
-No vendor shader/source/assets were copied.
+Video now executes55 original effects and34 original transitions (separate
+Crossfade baseline included), six ordered channel/master slots, text/image layers,
+real FFT/linked/reverse transport, actual first-frame File decode, recording/replay,
+CDG karaoke and Media Crate. Reference provenance is47 manifest effects +8
+localized candidates and7 transitions +26 candidates; active menus and vendor
+algorithms/ranges/defaults remain unverified. No vendor code/assets copied.
+
+| Actual browser path | Result | Limit |
+|---|---:|---|
+| Video effects / transitions / overlays |72/72;51/51;32/32|Independent pixel contracts only|
+| Full pipeline |32/32|Real File/AudioEngine/FFT, six slots, reverse/queued-seek pixels and actual container video/audio decode; no sustained/HD/native claim|
+| CDG decoder / karaoke integration |21/21;19/19|Original packets, actual clock/GPU/capture; physical/commercial/reference parity open|
+| Media Crate |32/32|Real files/pixels/association/fallback/Random/Next/ownership and six fresh paused imports|
+
+Thirteen separate Node scripts exited0; each controlled/pure scope is recorded in
+`video-node-checks.json`. Main UI executed FX/presets/image and flag persistence,
+recording across panel changes, actual downloaded replay, MP3+CDG import/play/pause
+and Media association/Next/fallback. Initial alpha/seek/first-frame failures remain
+saved. First-frame replacement waits for an actual muted presented frame; capture
+and import generations preserve newer user intent. Read current reviews, exact
+raw results and independent contracts in `video-implementation-contracts.json`.
+A≈25.64fps short pipeline capture is not sustained30fps or nativeHD acceptance.
+
+Next: semantic audio-DJ-FX Echo/Distortion→Video coupling (FFT alone does not
+implement it), generic Video control/quality/media-treatment workflows, output/
+Syphon and codec/long-session matrices. All31 hidden audio-linked definitions and
+reference visual matching remain unknown. CDG selective channels/parity repair
+and physical AV sync remain open. Continue full scope; do not equate these
+independent browser subsets with full1:1.
 
 ## Independent audit procedure
 
@@ -137,8 +162,8 @@ No vendor shader/source/assets were copied.
 
 Exact FX ranges/modes/defaults and sonic matching; four-deck load/long-session soak;
 model-quality failure; Stem Slip source conflict and combined workflows; sampler
-advanced state paths; variable tempo/downbeat/key/gain accuracy; full Video catalog,
-overlays/karaoke/HD/Syphon; library files/tags/interoperability/recovery; conditional
+advanced state paths; variable tempo/downbeat/key/gain accuracy; exact Video catalog/controls/semantic links,
+CDG channels/parity/HD/Syphon; library files/tags/interoperability/recovery; conditional
 settings, shortcuts, accessibility and exact visual states; real Link/providers;
 Hercules raw input discrepancy/LED/jog/headphone/master/latency/hotplug; unavailable
 CDJ/DVS/Phase acceptance. A browser fixture does not remove external restrictions.
@@ -160,7 +185,9 @@ prototype state; never reset Serato's library. Generated demos are original asse
 
 Run the actual `*-test.html` pages for extended/observed/native/adversarial FX,
 keylock, audio integration, Channel/Stems, finite exits, sampler, Pitch Play,
-analysis and Stem Slip, plus `behavior-tests.html`. Read their tolerances first.
+analysis and Stem Slip, plus `behavior-tests.html`. Also run the Video FX,
+transition, overlay, pipeline, CDG, karaoke and Media Crate public harnesses listed
+in `prototype/README.md`. Read each scope/tolerance first.
 
 All110 feature cards retain model/effort recommendations. Source sync is87 verified,
 zero pending;13 historical functional additions passed exact readback and4 were

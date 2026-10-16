@@ -54,3 +54,21 @@ checks. This narrows several implementation gaps without passing the global gate
 The latest user instruction explicitly requires behavior, not labels/placeholders.
 The current DSP continuation implements all 59 named DJ processors plus Channel FX, actual stems, keylock, analysis and Pitch Play subsets; see DSP_FUNCTIONAL_REVIEW.md. Independent processing does not prove exact reference equivalence. MIDI access timed out;
 missing native/hardware/provider acceptance remains visible.
+
+## 2026-10-16 Video execution continuation
+
+The browser now executes55 original Video algorithms,34 original transitions
+(including the independent Crossfade baseline), six processing slots, overlays,
+real FFT/linked transport, CDG and Media Crate. Actual browser suites passed
+72/72 FX,51/51 transitions,32/32 overlays,32/32 assembled pipeline,19/19 karaoke
+and32/32 Media Crate. The pipeline includes real decoded local Files, queued
+seek events plus changed pixels, and replay/decode of actual captured video/audio.
+Main UI import/persistence/record/replay paths also ran. Read
+[VIDEO_FUNCTIONAL_REVIEW.md](../prototype/VIDEO_FUNCTIONAL_REVIEW.md).
+
+These are bounded independent behavior proofs. PG-01–07 remain open: current
+reference menus, controls/algorithms and visual equivalence, semantic audio-FX
+links, broad codec/quality/output workflows, long sessions and physical/native
+acceptance are unresolved. No inventory count or passing subset closes full1:1.
+The candidate is pinned by the hash manifest and handoff; native approval remains
+absent.
