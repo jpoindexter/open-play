@@ -1,0 +1,38 @@
+Stem exit audio verification
+
+Actual AudioBufferSource output, without speaker output. Independent captured echo and brake; no Serato sonic-equivalence claim.
+
+Run stem exit graph checks
+
+2/2 actual stem exit graph checks passed.
+
+[
+  {
+    "kind": "echo",
+    "status": "pass",
+    "actualAudioGraph": true,
+    "maxError": 0,
+    "tailPeak": 0,
+    "duration": 4.5,
+    "capture": {
+      "startFrame": 12000,
+      "endFrameExclusive": 24000,
+      "paddedFrames": 0,
+      "inputFrames": 12000
+    }
+  },
+  {
+    "kind": "brake",
+    "status": "pass",
+    "actualAudioGraph": true,
+    "maxError": 0,
+    "tailPeak": 0,
+    "duration": 0.5,
+    "capture": {
+      "startFrame": 12000,
+      "endFrameExclusive": 24000,
+      "paddedFrames": 0,
+      "inputFrames": 12000
+    }
+  }
+]

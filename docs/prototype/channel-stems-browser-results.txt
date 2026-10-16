@@ -1,0 +1,159 @@
+Channel and Stems FX signal integration
+
+Actual engine, master FFT/RMS and synthetic independent stem buffers. Speaker output is disconnected. Stems FX checks follow the official mute plus echo-out/brake behavior; reference sonic equivalence is not asserted.
+
+Run Channel and Stems FX checks
+19/19 passed
+[
+  {
+    "name": "Channel Filter zero preserves bass rather than applying a20Hz high-pass",
+    "passed": true,
+    "evidence": {
+      "dryRms": 0.03759073165652318,
+      "filterZeroRms": 0.037719558114177876,
+      "ratio": 1.0034270803460763
+    }
+  },
+  {
+    "name": "Channel Filter bipolar knob changes actual low/high-band response",
+    "passed": true,
+    "evidence": {
+      "lowpass": {
+        "bass": -40.56768035888672,
+        "high": -75.31231689453125
+      },
+      "highpass": {
+        "bass": -84.75334930419922,
+        "high": -40.30560302734375
+      }
+    }
+  },
+  {
+    "name": "Channel Dub Echo survives source pause and depth adjustment",
+    "passed": true,
+    "evidence": {
+      "tailRms": 0.06212854701321203
+    }
+  },
+  {
+    "name": "Channel Dub Echo zero is dry bypass with no orphan tail",
+    "passed": true,
+    "evidence": {
+      "rms": 6.146091097615798e-10
+    }
+  },
+  {
+    "name": "Channel Space produces an audible decay after source pause",
+    "passed": true,
+    "evidence": {
+      "tailRms": 0.0189423673946822
+    }
+  },
+  {
+    "name": "Channel Space zero bypass suppresses wet decay",
+    "passed": true,
+    "evidence": {
+      "rms": 3.9500742343278896e-11
+    }
+  },
+  {
+    "name": "Channel Noise generates actual audio without a loaded voice",
+    "passed": true,
+    "evidence": {
+      "noiseRms": 0.017286628368589792
+    }
+  },
+  {
+    "name": "Channel Noise obeys channel fader routing",
+    "passed": true,
+    "evidence": {
+      "mutedRms": 0.0000011010237465745722
+    }
+  },
+  {
+    "name": "Channel Noise zero disables generation at master",
+    "passed": true,
+    "evidence": {
+      "rms": 2.3134416691372683e-10
+    }
+  },
+  {
+    "name": "Emergency silence also clears Channel Noise",
+    "passed": true,
+    "evidence": {
+      "rms": 0
+    }
+  },
+  {
+    "name": "Vocal Echo captures a tail and excludes subsequent vocal markers",
+    "passed": true,
+    "evidence": {
+      "early220Db": -45.65176010131836,
+      "late710Db": -192.32217407226562
+    }
+  },
+  {
+    "name": "Unrelated stem mute change preserves existing Vocal Echo capture",
+    "passed": true,
+    "evidence": {
+      "lateVocalDb": -144.82830810546875,
+      "enabledBassDb": -39.25505828857422
+    }
+  },
+  {
+    "name": "Instrumental Echo excludes later melody/bass/drum markers while vocals continue",
+    "passed": true,
+    "evidence": {
+      "laterMelodyDb": -167.77442932128906,
+      "laterBassDb": -184.7711181640625,
+      "laterDrumDb": -194.35995483398438,
+      "vocalDb": -40.004981994628906
+    }
+  },
+  {
+    "name": "Instrumental Braker lowers instrument pitch before stopping",
+    "passed": true,
+    "evidence": {
+      "frequency": 339.84375,
+      "db": -42.911354064941406
+    }
+  },
+  {
+    "name": "Instrumental Braker fully mutes melody/bass/drums after brake",
+    "passed": true,
+    "evidence": {
+      "lateRms": 0
+    }
+  },
+  {
+    "name": "Pitch preparation restart does not retrigger a finished Instrumental Braker",
+    "passed": true,
+    "evidence": {
+      "afterRestartRms": 0
+    }
+  },
+  {
+    "name": "Drums Echo excludes later drum markers while vocals continue",
+    "passed": true,
+    "evidence": {
+      "laterDrumDb": -188.84280395507812,
+      "vocalDb": -40.004981994628906
+    }
+  },
+  {
+    "name": "Vocal Echo captures audible loop history without leaking unplayed pre-loop audio",
+    "passed": true,
+    "evidence": {
+      "unplayedPrefixDb": -192.71470642089844,
+      "loopVocalDb": -42.005611419677734,
+      "position": 2.1006666666666662
+    }
+  },
+  {
+    "name": "Emergency silence clears active Stems FX and original sources",
+    "passed": true,
+    "evidence": {
+      "rms": 0
+    }
+  }
+]

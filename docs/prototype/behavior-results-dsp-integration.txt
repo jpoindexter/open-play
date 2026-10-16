@@ -1,0 +1,29 @@
+Browser behavior verification
+
+Real Web Audio rendering and module behavior. This does not establish native, hardware, UI-equivalence or Serato DSP parity. Test audio is disconnected from the speakers.
+
+Run audio and behavior tests
+
+20/20 passed · 2026-10-16T15:08:56.156Z
+
+Test	Result	Observed evidence
+LPF changes rendered high-frequency energy	PASS	6 kHz output/input energy 3.365e-7
+Delay renders the beat-timed echo	PASS	First echo 0.25s; second echo energy 0.16009
+Reverb produces a decaying impulse tail	PASS	Early energy 0.071047; late 0.000023
+Wah produces filtered output	PASS	Output/input energy 0.004368 (transfer-function parity untested)
+Smart crate all/any and numeric rejection	PASS	AND false; OR true; malformed BPM rejected
+Nested crates union, smart exclusion and cycle guard	PASS	Cycle terminates; duplicate-free two-track union excludes smart child
+Reverse PCM and descending transport	PASS	Reversed PCM matches; 3s → 2.855s
+Slip loop restores elapsed forward timeline	PASS	50ms loop released at underlying 1.224s
+Slip beyond track end stays stopped	PASS	Stopped at 20s; no wrap to beginning
+Cue hold plays then releases to its cue	PASS	Played during hold; stopped exactly at cue on release
+Play latches a held cue	PASS	Playback remains active after release
+Rapid cue release cancels pending start	PASS	No deck voice remains after immediate release
+Sampler produces signal and stops on release	PASS	RMS meter 0.1180 → 0.0000
+Sampler early release cancels decoding/start	PASS	No sample voice after immediate cancellation
+Sampler mute changes real output	PASS	Rendered master RMS below 0.01 after mute
+Flip replays timed cue positions and saves six slots	PASS	Timed jump to 10.022s; seventh save preserves six slots
+Slicer auditions a slice then restores the timeline	PASS	Slice 2.050s → timeline 1.123s
+Actual engine FX routing changes deck output	PASS	Master RMS 0.1951 → 0.0170 through Deck 1 LPF
+MIDI channel messages and relative encodings	PASS	Note-on zero releases; channel 3 CC127 = -1; offset65 = +1; SysEx ignored
+MIDI 14-bit CC and pitch bend assembly	PASS	MSB/LSB and pitch bend reach normalized 1.0; hardware still unverified

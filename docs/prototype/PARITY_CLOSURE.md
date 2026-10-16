@@ -6,11 +6,14 @@ Must: preserve all existing feature requirements, evidence, models and user file
 Must not: start a native app, claim DSP equivalence without measurements, or count a label as functionality.
 Authority: Jason's 16 October continuation; native approval remains absent.
 
-Now: reverse/slip transport, hold/sample playback controls, timed Flip audio automation,
-and nested/smart crate workflows. Next: actual browser DSP/video/MIDI where supported,
-then the remaining reference catalogs and conditional states. Later: physical and
-provider acceptance requires the corresponding equipment/accounts; native work still
-requires explicit approval.
+Now: close the remaining 31 observed FX control schemas and exact behavior contracts,
+then continue library, Video, device and provider workflows. All 55 extended effects,
+real local four-source preparation and pitch-preserving processing now have executed
+browser evidence. The active goal remains all gaps, not this checkpoint. Next: pin
+these bytes and evidence, reconcile project records, then continue implementation.
+Later: physical/provider acceptance requires the corresponding equipment/accounts;
+native development still requires explicit approval. The controller may be unplugged
+for browser DSP work; refresh its connection before physical testing.
 
 Done criterion for each item: execute its real UI/audio path, record expected and
 observed outcomes, retain narrower limits, and update coverage and the Claude packet.
@@ -25,12 +28,13 @@ Re-entry: read this ledger, git status, the latest review report and approvals.
 
 This ledger is not a parity pass. The previous report remains a dated baseline.
 
-Current evidence: 20/20 audio/module checks plus selected main-UI workflows. Four
-FX processors and local video decode/composition/capture are now functional. MIDI
-input access timed out; synthetic action execution is separate evidence. Native
-app approval remains absent. Full parity is NOT closed.
-
-Next: remaining effect/catalog extraction, stems/keylock/analysis, comprehensive
-library/control states and real hardware/provider testing. Re-entry: run the browser
-harness, read FUNCTIONAL_REVIEW.md and the handoff's exact candidate, then select the
-first unresolved contract; do not repeat already passed plumbing checks as parity.
+Current evidence is tracked in [DSP_FUNCTIONAL_REVIEW.md](DSP_FUNCTIONAL_REVIEW.md):
+59/59 new worklet graphs, 5/5 original processor lifecycle, 9/9 observed control contrasts,
+12/12 pitch Worker, 18/18 engine, 19/19 Channel/Stems routes, 2/2 finite exit graph,
+17/17 sampler and 13/13 Pitch Play. Analysis Worker results are recorded separately.
+These are scoped checks, not full feature acceptance. Active Stems tails still stop
+across transport replacement; exact reference behavior and continuity remain open.
+The 492 requirements cover 110 groups; two engineering goals have no claimed vendor
+interaction rows. All 59 FX strips are observed, but ranges/enums and exact DSP response
+remain unmeasured. Physical tests need equipment and provider integration needs supported
+access. Native approval remains absent.

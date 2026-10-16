@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+  <meta charset="utf-8" /><title>
+    Open Play Channel and Stems FX integration
+  </title>
+  <style>
+    body {
+      font: 16px system-ui;
+      background: #15171b;
+      color: #eee;
+      max-width: 950px;
+      margin: 32px auto;
+      padding: 16px;
+    }
+    button {
+      font: inherit;
+      padding: 12px;
+    }
+    pre {
+      white-space: pre-wrap;
+    }
+  </style>
+  <h1>Channel and Stems FX signal integration</h1>
+  <p>
+    Actual engine, master FFT/RMS and synthetic independent stem buffers.
+    Speaker output is disconnected. Stems FX checks follow the official mute
+    plus echo-out/brake behavior; reference sonic equivalence is not asserted.
+  </p>
+  <button id="run">Run Channel and Stems FX checks</button>
+  <pre id="results" role="status">Not run</pre>
+  <script type="module" src="channel-stems-integration-test.js"></script>
+</html>

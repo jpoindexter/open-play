@@ -1,0 +1,141 @@
+{
+  "executedAt": "2026-10-16T14:07:49.210Z",
+  "host": "Node serial offline worklet host; actual vendored WASM DSP",
+  "passed": 8,
+  "total": 8,
+  "results": [
+    {
+      "name": "Stereo tempo 1.25×; pitch 0 semitones",
+      "passed": true,
+      "duration": 3.2,
+      "expectedDuration": 3.2,
+      "measured": [
+        {
+          "frequency": 440,
+          "rms": 0.21188962621247986,
+          "finite": true
+        },
+        {
+          "frequency": 659.5,
+          "rms": 0.21175964590874347,
+          "finite": true
+        }
+      ],
+      "expectedFrequencies": [
+        440,
+        659.255
+      ],
+      "elapsedMs": 59
+    },
+    {
+      "name": "Stereo tempo 0.8×; pitch 0 semitones",
+      "passed": true,
+      "duration": 5,
+      "expectedDuration": 5,
+      "measured": [
+        {
+          "frequency": 440.5,
+          "rms": 0.21181846762777526,
+          "finite": true
+        },
+        {
+          "frequency": 660,
+          "rms": 0.2116699619983244,
+          "finite": true
+        }
+      ],
+      "expectedFrequencies": [
+        440,
+        659.255
+      ],
+      "elapsedMs": 73
+    },
+    {
+      "name": "Stereo tempo 1×; pitch 12 semitones",
+      "passed": true,
+      "duration": 4,
+      "expectedDuration": 4,
+      "measured": [
+        {
+          "frequency": 881,
+          "rms": 0.20772745547033644,
+          "finite": true
+        },
+        {
+          "frequency": 1319.5,
+          "rms": 0.21005000863741616,
+          "finite": true
+        }
+      ],
+      "expectedFrequencies": [
+        880,
+        1318.51
+      ],
+      "elapsedMs": 63
+    },
+    {
+      "name": "Stereo tempo 1×; pitch -12 semitones",
+      "passed": true,
+      "duration": 4,
+      "expectedDuration": 4,
+      "measured": [
+        {
+          "frequency": 219.5,
+          "rms": 0.20795270296108087,
+          "finite": true
+        },
+        {
+          "frequency": 329.5,
+          "rms": 0.22063012216285088,
+          "finite": true
+        }
+      ],
+      "expectedFrequencies": [
+        220,
+        329.6275
+      ],
+      "elapsedMs": 59
+    },
+    {
+      "name": "Stereo tempo 1.25×; pitch 7 semitones",
+      "passed": true,
+      "duration": 3.2,
+      "expectedDuration": 3.2,
+      "measured": [
+        {
+          "frequency": 660,
+          "rms": 0.20627927491592646,
+          "finite": true
+        },
+        {
+          "frequency": 989,
+          "rms": 0.20866626399572005,
+          "finite": true
+        }
+      ],
+      "expectedFrequencies": [
+        659.2551138257398,
+        987.7664319663367
+      ],
+      "elapsedMs": 50
+    },
+    {
+      "name": "Silent input stays silent and finite",
+      "passed": true
+    },
+    {
+      "name": "Timeline mapping at 0.8×",
+      "passed": true,
+      "expectedSeconds": 2.5,
+      "measuredSeconds": 2.5007211217747987,
+      "toleranceSeconds": 0.01
+    },
+    {
+      "name": "Timeline mapping at 1.25×",
+      "passed": true,
+      "expectedSeconds": 1.6,
+      "measuredSeconds": 1.6010294121954782,
+      "toleranceSeconds": 0.01
+    }
+  ]
+}

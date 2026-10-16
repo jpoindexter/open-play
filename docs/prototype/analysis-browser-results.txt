@@ -1,0 +1,118 @@
+{
+  "executedAt": "2026-10-16T15:06:31.469Z",
+  "passed": 13,
+  "total": 13,
+  "results": [
+    {
+      "name": "Worker detects generated 128 BPM within 1 BPM",
+      "passed": true,
+      "observed": 128.00699672170956
+    },
+    {
+      "name": "Worker provides constant grid with downbeat unverified",
+      "passed": true,
+      "observed": 0.1741496598639456
+    },
+    {
+      "name": "Input AudioBuffer remains intact after transfer",
+      "passed": true,
+      "observed": 529200
+    },
+    {
+      "name": "Worker progress reaches one monotonically",
+      "passed": true,
+      "observed": [
+        0,
+        0.12379110251450677,
+        0.24758220502901354,
+        0.3713733075435203,
+        0.4951644100580271,
+        0.6189555125725339,
+        0.7427466150870407,
+        0.8665377176015474,
+        0.9903288201160542,
+        1
+      ]
+    },
+    {
+      "name": "Worker key analysis recognizes C major with tempo disabled",
+      "passed": true,
+      "observed": {
+        "key": "C",
+        "tempo": {
+          "value": null,
+          "confidence": 0,
+          "reason": "tempo_analysis_disabled",
+          "grid": null
+        }
+      }
+    },
+    {
+      "name": "Worker disabled key returns no computed estimate or candidates",
+      "passed": true,
+      "observed": {
+        "value": null,
+        "confidence": 0,
+        "reason": "key_analysis_disabled",
+        "candidates": []
+      }
+    },
+    {
+      "name": "Worker disabled tempo suppresses known rhythm and constant grid",
+      "passed": true,
+      "observed": {
+        "value": null,
+        "confidence": 0,
+        "reason": "tempo_analysis_disabled",
+        "grid": null
+      }
+    },
+    {
+      "name": "Worker key suppression preserves measured 128 BPM",
+      "passed": true,
+      "observed": {
+        "bpm": 128.00699672170956,
+        "key": null
+      }
+    },
+    {
+      "name": "Worker both disabled still measures original PCM levels",
+      "passed": true,
+      "observed": {
+        "method": "ungated_pcm_rms",
+        "rms": 0.128336904964816,
+        "rmsDbfs": -17.832968771507403,
+        "samplePeak": 0.1948557198047638,
+        "samplePeakDbfs": -14.205736827634981,
+        "clippedSamples": 0,
+        "targetRmsDbfs": -14,
+        "recommendedDb": 3.832968771507403,
+        "truePeakMeasured": false,
+        "lufsMeasured": false
+      }
+    },
+    {
+      "name": "Worker both disabled retains distinct reasons",
+      "passed": true,
+      "observed": {
+        "key": "key_analysis_disabled",
+        "tempo": "tempo_analysis_disabled"
+      }
+    },
+    {
+      "name": "Cancellation rejects with AbortError",
+      "passed": true
+    },
+    {
+      "name": "Silent stereo remains unknown and unboosted",
+      "passed": true,
+      "observed": [
+        "silent_audio"
+      ]
+    },
+    {
+      "name": "Worker malformed PCM propagates rejection",
+      "passed": true
+    }
+  ]
+}

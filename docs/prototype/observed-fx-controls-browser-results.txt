@@ -1,0 +1,111 @@
+Observed FX control verification
+
+Actual AudioWorklet parameter changes. Names match observed strips; ranges, complete enum catalogs and vendor sonic equivalence remain unverified. No speaker output.
+
+Run observed-control graph checks
+
+9/9 observed-control audio graph checks passed.
+
+[
+  {
+    "name": "Echo",
+    "status": "pass",
+    "difference": 0.2673169784215746,
+    "low": {
+      "HPF": 20
+    },
+    "high": {
+      "HPF": 4000
+    }
+  },
+  {
+    "name": "Bit Crush",
+    "status": "pass",
+    "difference": 0.14672734404148116,
+    "low": {
+      "Downsampling": 48000
+    },
+    "high": {
+      "Downsampling": 1000
+    }
+  },
+  {
+    "name": "HPF",
+    "status": "pass",
+    "difference": 0.04176435340341048,
+    "low": {
+      "Cutoff": 1000,
+      "Slope": 12
+    },
+    "high": {
+      "Cutoff": 1000,
+      "Slope": 24
+    }
+  },
+  {
+    "name": "Bright Reverb",
+    "status": "pass",
+    "difference": 0.05031227058583721,
+    "low": {
+      "Width": 100
+    },
+    "high": {
+      "Width": 200
+    }
+  },
+  {
+    "name": "Chorus Quad",
+    "status": "pass",
+    "difference": 0.09574328897569144,
+    "low": {
+      "Delay": 5
+    },
+    "high": {
+      "Delay": 20
+    }
+  },
+  {
+    "name": "Phaser",
+    "status": "pass",
+    "difference": 0.2438592707920806,
+    "low": {
+      "Pitch": 500
+    },
+    "high": {
+      "Pitch": 4000
+    }
+  },
+  {
+    "name": "LFO Filter",
+    "status": "pass",
+    "difference": 0.11393412796240897,
+    "low": {
+      "LFO Shape": "Sine"
+    },
+    "high": {
+      "LFO Shape": "Square"
+    }
+  },
+  {
+    "name": "Tremolo",
+    "status": "pass",
+    "difference": 0.07499999992774276,
+    "low": {
+      "Stereo": 0
+    },
+    "high": {
+      "Stereo": 100
+    }
+  },
+  {
+    "name": "Transform",
+    "status": "pass",
+    "difference": 0.024313984504474313,
+    "low": {
+      "Noise": 0
+    },
+    "high": {
+      "Noise": 100
+    }
+  }
+]

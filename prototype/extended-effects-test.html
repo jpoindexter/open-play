@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Open Play extended FX verification</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body style="padding: 24px; overflow: auto">
+    <h1>Extended FX audio verification</h1>
+    <p>
+      This renders the actual AudioWorklet graph without speaker output. It
+      verifies independent processors, not Serato sonic equivalence or physical
+      hardware.
+    </p>
+    <button id="run">Run 59 worklet effects</button>
+    <button id="run-native">Run live-update lifecycle checks</button>
+    <p id="native-summary" role="status">Lifecycle checks not run</p>
+    <p id="summary" role="status">Not run</p>
+    <table>
+      <thead>
+        <tr>
+          <th>Effect</th>
+          <th>Result</th>
+          <th>Evidence</th>
+        </tr>
+      </thead>
+      <tbody id="results"></tbody>
+    </table>
+    <script type="module" src="extended-effects-browser-tests.js"></script>
+  </body>
+</html>

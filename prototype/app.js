@@ -1,3 +1,5 @@
+import { createPitchPlay, pitchRanges, parseMusicalKey, shiftedKey, keyLabel, planKeySync } from "./pitchplay.js";
+import { analyzeBuffer } from "./analysis.js";
 import { createSlicer } from "./slicer.js";
 import { createCueHolds } from "./holds.js";
 import { createFlipAutomation } from "./flip.js";
@@ -54,6 +56,17 @@ const state = {
   history: saved.history || [],
   layout: "Vertical",
   analysis: false,
+  analysisStatus: "Ready",
+  analysisSettings: {
+    onImport: true,
+    analyzeKey: true,
+    analyzeTempo: true,
+    minBpm: 50,
+    maxBpm: 220,
+    maxSeconds: 180,
+    ...saved.analysisSettings,
+  },
+  localTags: saved.localTags || {},
   fx: Array.from({ length: 2 }, () =>
     ["LPF", "Delay", "Reverb"].map((name) => ({
       name,
@@ -136,11 +149,39 @@ function notify(message) {
     3500,
   );
 }
+const metadataFields = [
+  "title",
+  "artist",
+  "album",
+  "bpm",
+  "key",
+  "rating",
+  "comment",
+  "color",
+  "cues",
+  "savedLoops",
+  "grid",
+  "gridMarkers",
+  "locked",
+  "flips",
+  "sampleGain",
+  "analysisResult",
+  "metadataSources",
+  "analysisGainDb",
+  "metadataRevision",
+];
+function trackMetadata(t) {
+  return Object.fromEntries(metadataFields.map((k) => [k, t[k]]));
+}
 function persist() {
+  for (const t of state.tracks)
+    if (t.contentHash) state.localTags[t.contentHash] = trackMetadata(t);
   try {
     localStorage.setItem(
       "openplay-review-v1",
       JSON.stringify({
+        analysisSettings: state.analysisSettings,
+        localTags: state.localTags,
         mappings: state.mappings,
         settings: state.settings,
         crates: state.crates,
@@ -149,28 +190,7 @@ function persist() {
         tags: Object.fromEntries(
           state.tracks
             .filter((t) => t.demo)
-            .map((t) => [
-              t.id,
-              Object.fromEntries(
-                [
-                  "title",
-                  "artist",
-                  "album",
-                  "bpm",
-                  "key",
-                  "rating",
-                  "comment",
-                  "color",
-                  "cues",
-                  "savedLoops",
-                  "grid",
-                  "gridMarkers",
-                  "locked",
-                  "flips",
-                  "sampleGain",
-                ].map((k) => [k, t[k]]),
-              ),
-            ]),
+            .map((t) => [t.id, trackMetadata(t)]),
         ),
       }),
     );
@@ -196,7 +216,7 @@ function filtered() {
   if (state.crate === "prepare")
     a = a.filter((t) => state.prepare.includes(t.id));
   else if (state.crate === "stems")
-    a = a.filter((t) => t.stemState === "Ready (simulation)");
+    a = a.filter((t) => engine.stemBuffers.has(t.id));
   else if (state.crate === "history")
     a = a.filter((t) => state.history.some((h) => h.id === t.id));
   else {
@@ -289,7 +309,7 @@ function renderTracks() {
   const a = filtered();
   $("#tracks").innerHTML = state.grid
     ? `<div class="art-grid">${a.map((t) => `<button class="art-card ${state.selected === t.id ? "active" : ""}" data-track="${t.id}" draggable="true"><div class="art-cover" style="--art:${t.color}">◉</div><strong>${esc(t.title)}</strong><small>${esc(t.artist)} · ${t.bpm || "—"} BPM</small></button>`).join("")}</div>`
-    : `<table><thead><tr><th style="width:28px"><button title="File status">◉</button></th>${state.columns.map((c) => `<th><button data-sort="${c}">${{ duration: "LENGTH", title: "SONG" }[c] || c.toUpperCase()} ${state.sort === c ? (state.sortDir === 1 ? "▴" : "▾") : ""}</button></th>`).join("")}</tr></thead><tbody>${a.map((t) => `<tr tabindex="0" draggable="true" data-track="${t.id}" class="${t.id === state.selected ? "selected" : ""}" aria-selected="${t.id === state.selected}"><td class="${t.missing ? "problem" : ""}" title="${t.missing ? "Missing file" : t.locked ? "Beatgrid locked" : "Local audio"}">${t.missing ? "⚠" : t.locked ? "▣" : "♫"}</td>${state.columns.map((c) => `<td class="${c === "key" ? "key" : ""}">${esc(c === "duration" ? time(t.duration) : c === "rating" ? "★".repeat(t.rating) : (t[c] ?? "—"))}</td>`).join("")}</tr>`).join("")}</tbody></table>`;
+    : `<table><thead><tr><th style="width:28px"><button title="File status">◉</button></th>${state.columns.map((c) => `<th><button data-sort="${c}">${{ duration: "LENGTH", title: "SONG" }[c] || c.toUpperCase()} ${state.sort === c ? (state.sortDir === 1 ? "▴" : "▾") : ""}</button></th>`).join("")}</tr></thead><tbody>${a.map((t) => `<tr tabindex="0" draggable="true" data-track="${t.id}" class="${t.id === state.selected ? "selected" : ""}" aria-selected="${t.id === state.selected}"><td class="${t.missing ? "problem" : ""}" title="${t.missing ? "Missing file" : t.locked ? "Beatgrid locked" : "Local audio"}">${t.missing ? "⚠" : t.locked ? "▣" : "♫"}</td>${state.columns.map((c) => `<td title="${esc(analysisFieldHint(t, c))}" class="${c === "key" ? "key" : ""}">${esc(c === "duration" ? time(t.duration) : c === "rating" ? "★".repeat(t.rating) : c === "bpm" ? t.bpm || "—" : (t[c] ?? "—"))}</td>`).join("")}</tr>`).join("")}</tbody></table>`;
   if (!a.length)
     $("#tracks").innerHTML =
       '<div class="empty">No tracks here.<br><br>Import local audio, add tracks to this crate, or clear the search.</div>';
@@ -306,8 +326,8 @@ function padMarkup(d) {
             "Bass",
             "Drums",
             "Vocal echo",
-            "Music echo",
-            "Music brake",
+            "Instrumental echo",
+            "Instrumental braker",
             "Drum echo",
           ]
         : d.tab === "Loops"
@@ -316,14 +336,14 @@ function padMarkup(d) {
               (_, i) => t?.savedLoops[i]?.name || `Loop ${i + 1}`,
             )
           : d.tab === "Pitch"
-            ? ["0", "+1", "+2", "+3", "−4", "−3", "−2", "−1"]
+            ? pitchRanges[d.pitchRangeMode || "Middle"].map(n => n > 0 ? `+${n}` : String(n))
             : d.tab === "Slicer"
               ? Array.from({ length: 8 }, (_, i) => `Slice ${i + 1}`)
               : Array.from({ length: 8 }, (_, i) => t?.cues[i]?.name || "+");
   return labels
     .map(
       (label, i) =>
-        `<button class="pad ${d.tab === "Cues" && t?.cues[i] ? "set" : ""} ${d.tab === "Stems" && i < 4 && d.stems[i] ? "active" : ""}" data-deck="${d.index}" data-action="pad" data-pad="${i}" style="--pad:${colors[i]}" title="${d.tab === "Cues" ? "Click set/trigger; Shift-click delete; right-click edit" : "Simulation where marked"}">${esc(label)}<small>${d.tab === "Cues" && t?.cues[i] ? time(t.cues[i].position) : d.tab === "Stems" || d.tab === "Pitch" ? "SIMULATED" : i + 1}</small></button>`,
+        `<button class="pad ${d.tab === "Cues" && t?.cues[i] ? "set" : ""} ${d.tab === "Stems" && (i < 4 ? d.stems[i] : d.stemFX?.[i - 4]) ? "active" : ""}" data-deck="${d.index}" data-action="pad" data-pad="${i}" style="--pad:${d.tab === "Pitch" && pitchRanges[d.pitchRangeMode || "Middle"][i] === 0 ? "#ffffff" : colors[i]}" title="${d.tab === "Cues" ? "Click set/trigger; Shift-click delete; right-click edit" : "Audio performance control"}">${esc(label)}<small>${d.tab === "Cues" && t?.cues[i] ? time(t.cues[i].position) : d.tab === "Stems" ? (engine.stemBuffers.has(t?.id) ? "AUDIO" : "PREPARE FIRST") : d.tab === "Pitch" ? `CUE ${(d.pitchCue || 0) + 1}` : i + 1}</small></button>`,
     )
     .join("");
 }
@@ -333,7 +353,9 @@ function renderDecks() {
     .slice(0, state.deckCount)
     .map((d) => {
       const t = d.track;
-      return `<article class="deck ${state.focus === d.index ? "focused" : ""}" style="--accent:${colors[d.index]}" data-drop-deck="${d.index}" data-focus="${d.index}"><div class="deck-head"><span class="deck-number">${d.index + 1}</span><div class="deck-title"><strong>${esc(t?.title || "Drag song here")}</strong><small>${esc(t?.artist || "Select a library track and Load")}${t ? " · " + time(t.duration) : ""}</small></div><span class="deck-key">${esc(t?.key || "—")}</span><button data-action="load" data-deck="${d.index}">Load</button><button data-action="eject" data-deck="${d.index}" aria-label="Eject deck ${d.index + 1}">⏏</button></div><div class="deck-body"><div><nav class="deck-tabs" aria-label="Deck ${d.index + 1} performance modes">${["Cues", "Loops", "Stems", "Pitch", "Slicer"].map((tab) => `<button data-action="tab" data-deck="${d.index}" data-tab="${tab}" class="${d.tab === tab ? "active" : ""}">${tab}</button>`).join("")}</nav><div class="pads">${padMarkup(d)}</div>${d.tab === "Slicer" ? `<div class="loop-line"><label>Domain<select data-slice-domain="${d.index}" aria-label="Deck ${d.index + 1} slicer domain">${[2, 4, 8, 16, 32, 64].map((v) => `<option ${v === (d.slicerDomain || 8) ? "selected" : ""}>${v}</option>`).join("")}</select></label><label>Quantize<select data-slice-quant="${d.index}" aria-label="Deck ${d.index + 1} slice quantize">${[0.125, 0.25, 0.5, 1].map((v) => `<option ${v === (d.sliceQuant || 1) ? "selected" : ""}>${v}</option>`).join("")}</select></label><button data-action="slicerLoop" data-deck="${d.index}" class="${d.slicerLoop ? "active" : ""}">Slicer loop</button></div>` : ""}<div class="loop-line"><button data-action="loopHalf" data-deck="${d.index}">½</button><button data-action="loop" data-deck="${d.index}" class="${d.loop ? "active" : ""}">Loop ${d.loopLength}</button><button data-action="loopDouble" data-deck="${d.index}">×2</button><button data-action="loopIn" data-deck="${d.index}">IN</button><button data-action="loopOut" data-deck="${d.index}">OUT</button><button data-action="loopSave" data-deck="${d.index}">Save</button></div><div class="loop-line"><button data-action="jumpBack" data-deck="${d.index}">← ${d.loopLength}</button><button data-action="roll" data-deck="${d.index}">Hold roll</button><button data-action="jumpForward" data-deck="${d.index}">${d.loopLength} →</button><button data-action="grid" data-deck="${d.index}">Edit grid</button></div></div><div class="deck-disc"><div class="transport"><button data-action="sync" data-deck="${d.index}" class="${d.sync ? "active" : ""}">SYNC</button><button data-action="cue" data-deck="${d.index}" title="Temporary cue">▮◀</button><button data-action="play" data-deck="${d.index}" aria-label="Play or pause deck ${d.index + 1}" class="${d.playing ? "active" : ""}">${d.playing ? "❚❚" : "▶"}</button></div><div class="platter" id="platter-${d.index}"><strong>${t ? (t.bpm * d.rate).toFixed(1) : "—"}</strong><small>BPM · ${((d.rate - 1) * 100).toFixed(1)}%</small><time id="time-${d.index}">${time(engine.position(d))}</time><small id="remain-${d.index}">−${time((t?.duration || 0) - engine.position(d))}</small></div></div><label class="tempo-control" title="Tempo; key lock is simulated">±${d.pitchRange}%<input type="range" min="${-d.pitchRange}" max="${d.pitchRange}" step=".1" value="${(d.rate - 1) * 100}" data-tempo="${d.index}" aria-label="Deck ${d.index + 1} tempo"></label></div><div class="deck-foot"><select data-mode="${d.index}" aria-label="Deck ${d.index + 1} mode">${["INT", "REL", "ABS", "THRU", "WIR"].map((m) => `<option ${d.mode === m ? "selected" : ""}>${m}</option>`).join("")}</select>${[
+      if (d.keySync && d.keySyncTag !== t?.key) d.keySync = false;
+      const displayedKey = parseMusicalKey(t?.key) ? keyLabel(shiftedKey(parseMusicalKey(t.key), d.keyShift || 0)) : t?.key || "—";
+      return `<article class="deck ${state.focus === d.index ? "focused" : ""}" style="--accent:${colors[d.index]}" data-drop-deck="${d.index}" data-focus="${d.index}"><div class="deck-head"><span class="deck-number">${d.index + 1}</span><div class="deck-title"><strong>${esc(t?.title || "Drag song here")}</strong><small>${esc(t?.artist || "Select a library track and Load")}${t ? " · " + time(t.duration) : ""}</small></div><span class="deck-key">${esc(displayedKey)}${d.keyShift ? ` (${d.keyShift > 0 ? "+" : ""}${d.keyShift})` : ""}</span><button data-action="load" data-deck="${d.index}">Load</button><button data-action="eject" data-deck="${d.index}" aria-label="Eject deck ${d.index + 1}">⏏</button></div><div class="deck-body"><div><nav class="deck-tabs" aria-label="Deck ${d.index + 1} performance modes">${["Cues", "Loops", "Stems", "Pitch", "Slicer"].map((tab) => `<button data-action="tab" data-deck="${d.index}" data-tab="${tab}" class="${d.tab === tab ? "active" : ""}">${tab}</button>`).join("")}</nav><div class="pads">${padMarkup(d)}</div>${d.tab === "Pitch" ? `<div class="loop-line"><label>Pitch range<select data-pitch-range="${d.index}" aria-label="Deck ${d.index + 1} Pitch Play range">${["Down", "Middle", "Up"].map(range => `<option ${range === (d.pitchRangeMode || "Middle") ? "selected" : ""}>${range}</option>`).join("")}</select></label><small>Shift-pad selects cue · hold to audition</small></div>` : ""}${d.tab === "Slicer" ? `<div class="loop-line"><label>Domain<select data-slice-domain="${d.index}" aria-label="Deck ${d.index + 1} slicer domain">${[2, 4, 8, 16, 32, 64].map((v) => `<option ${v === (d.slicerDomain || 8) ? "selected" : ""}>${v}</option>`).join("")}</select></label><label>Quantize<select data-slice-quant="${d.index}" aria-label="Deck ${d.index + 1} slice quantize">${[0.125, 0.25, 0.5, 1].map((v) => `<option ${v === (d.sliceQuant || 1) ? "selected" : ""}>${v}</option>`).join("")}</select></label><button data-action="slicerLoop" data-deck="${d.index}" class="${d.slicerLoop ? "active" : ""}">Slicer loop</button></div>` : ""}<div class="loop-line"><button data-action="loopHalf" data-deck="${d.index}">½</button><button data-action="loop" data-deck="${d.index}" class="${d.loop ? "active" : ""}">Loop ${d.loopLength}</button><button data-action="loopDouble" data-deck="${d.index}">×2</button><button data-action="loopIn" data-deck="${d.index}">IN</button><button data-action="loopOut" data-deck="${d.index}">OUT</button><button data-action="loopSave" data-deck="${d.index}">Save</button></div><div class="loop-line"><button data-action="jumpBack" data-deck="${d.index}">← ${d.loopLength}</button><button data-action="roll" data-deck="${d.index}">Hold roll</button><button data-action="jumpForward" data-deck="${d.index}">${d.loopLength} →</button><button data-action="grid" data-deck="${d.index}">Edit grid</button></div></div><div class="deck-disc"><div class="transport"><button data-action="sync" data-deck="${d.index}" class="${d.sync ? "active" : ""}">SYNC</button><button data-action="cue" data-deck="${d.index}" title="Temporary cue">▮◀</button><button data-action="play" data-deck="${d.index}" aria-label="Play or pause deck ${d.index + 1}" class="${d.playing ? "active" : ""}">${d.playing ? "❚❚" : "▶"}</button></div><div class="platter" id="platter-${d.index}"><strong>${t?.bpm ? (t.bpm * d.rate).toFixed(1) : "—"}</strong><small>BPM · ${((d.rate - 1) * 100).toFixed(1)}%</small><time id="time-${d.index}">${time(engine.position(d))}</time><small id="remain-${d.index}">−${time((t?.duration || 0) - engine.position(d))}</small></div></div><label class="tempo-control" title="Tempo; enable key lock to preserve pitch">±${d.pitchRange}%<input type="range" min="${-d.pitchRange}" max="${d.pitchRange}" step=".1" value="${(d.rate - 1) * 100}" data-tempo="${d.index}" aria-label="Deck ${d.index + 1} tempo"></label></div><div class="deck-foot"><select data-mode="${d.index}" aria-label="Deck ${d.index + 1} mode">${["INT", "REL", "ABS", "THRU", "WIR"].map((m) => `<option ${d.mode === m ? "selected" : ""}>${m}</option>`).join("")}</select>${[
         ["keylock", "Key lock"],
         ["slip", "Slip"],
         ["reverse", "Reverse"],
@@ -341,11 +363,11 @@ function renderDecks() {
       ]
         .map(
           ([key, label]) =>
-            `<button data-action="${key}" data-deck="${d.index}" class="${d[key] ? "active" : ""}">${label}${["keylock"].includes(key) ? " ◇" : ""}</button>`,
+            `<button data-action="${key}" data-deck="${d.index}" class="${d[key] ? "active" : ""}">${label}</button>`,
         )
         .join(
           "",
-        )}<button data-action="range" data-deck="${d.index}">±${d.pitchRange}</button><button data-action="double" data-deck="${d.index}">Double</button><span class="spacer"></span><small class="muted">${d.mode === "INT" ? "LOCAL AUDIO" : "DEVICE SIMULATION"}</small></div><div class="wave-wrap" data-seek="${d.index}" tabindex="0" role="slider" aria-label="Deck ${d.index + 1} play position" aria-valuemin="0" aria-valuemax="${t?.duration || 48}" aria-valuenow="${engine.position(d)}"><canvas id="wave-${d.index}" width="900" height="100"></canvas><span class="playhead" id="head-${d.index}"></span><span class="wave-label">${t?.analyzed ? "Decoded waveform" : "Generated overview fixture"} · ${t?.bpm || "—"} BPM</span></div></article>`;
+        )}<button data-action="keyDown" data-deck="${d.index}" title="Shift key down one semitone; prototype limit±24">Key −</button><button data-action="keyUp" data-deck="${d.index}" title="Shift key up one semitone; prototype limit±24">Key +</button><button data-action="keySync" data-deck="${d.index}" class="${d.keySync ? "active" : ""}">Key Sync</button><button data-action="keyReset" data-deck="${d.index}">Reset key</button><button data-action="range" data-deck="${d.index}">±${d.pitchRange}</button><button data-action="double" data-deck="${d.index}">Double</button><span class="spacer"></span><small class="muted">${d.processing ? "PROCESSING PITCH…" : d.mode === "INT" ? "LOCAL AUDIO" : "DEVICE SIMULATION"}</small></div><div class="wave-wrap" data-seek="${d.index}" tabindex="0" role="slider" aria-label="Deck ${d.index + 1} play position" aria-valuemin="0" aria-valuemax="${t?.duration || 48}" aria-valuenow="${engine.position(d)}"><canvas id="wave-${d.index}" width="900" height="100"></canvas><span class="playhead" id="head-${d.index}"></span><span class="wave-label">${t?.analyzed ? "Decoded waveform" : "Generated overview fixture"} · ${t?.bpm || "—"} BPM</span></div></article>`;
     })
     .join("");
   if (state.layout === "Vertical")
@@ -483,6 +505,7 @@ async function load(index, id = state.selected, options = {}) {
   if (d.playing && state.settings["Lock Playing Deck"])
     return notify("Playing deck locked. Pause it before replacement.");
   const old = d.track ? { id: d.track.id, position: engine.position(d) } : null;
+  pitchPlay.cancelDeck(d);
   engine.pause(d);
   d.previous = old;
   d.track = t;
@@ -501,6 +524,11 @@ async function load(index, id = state.selected, options = {}) {
   d.tab = "Cues";
   d.pitchRangeMode = "Middle";
   d.pitchCue = 0;
+  d.keyShift = 0;
+  d.keySync = false;
+  d.keySyncTag = null;
+  d.stems = [true, true, true, true];
+  d.stemFX = [false, false, false, false];
   if (!state.settings["Maintain Sync on Track Load"]) d.sync = false;
   if (state.settings["Turn off FX"])
     state.fx[index % 2].forEach((f) => (f.on = false));
@@ -513,6 +541,7 @@ async function load(index, id = state.selected, options = {}) {
   renderDecks();
   try {
     await engine.buffer(t);
+    if (!t.analyzed && !t.provider && !t.missing) void enqueueAnalysis([t]);
     drawWaves();
   } catch (e) {
     notify(e.message);
@@ -520,11 +549,11 @@ async function load(index, id = state.selected, options = {}) {
   renderTracks();
 }
 async function play(d) {
-  if (cueHolds.latch(d)) {
+  if (pitchPlay.latch(d) || cueHolds.latch(d)) {
     renderDecks();
     return;
   }
-  if (d.playing) engine.pause(d);
+  if (d.playing || d.processing) engine.pause(d);
   else {
     try {
       await engine.start(d);
@@ -565,6 +594,8 @@ async function deckAction(action, index, el, event = {}) {
     return renderDecks();
   }
   if (action === "eject") {
+    pitchPlay.cancelDeck(d);
+    d.keySync = false;
     engine.pause(d);
     d.previous = d.track ? { id: d.track.id, position: d.position } : null;
     d.track = null;
@@ -608,17 +639,14 @@ async function deckAction(action, index, el, event = {}) {
         persist();
       }
     } else if (d.tab === "Stems") {
+      if (!engine.stemBuffers.has(d.track.id))
+        return notify("Prepare this track in Stems preparation first.");
       if (n < 4) d.stems[n] = !d.stems[n];
       else d.stemFX[n - 4] = !d.stemFX[n - 4];
-      notify(
-        "Stem controls simulated. The full mix continues; no separation model is running.",
-      );
+      engine.updateStems(d);
     } else if (d.tab === "Pitch") {
-      d.keyShift = [0, 1, 2, 3, -4, -3, -2, -1][n];
-      if (event.shiftKey) d.pitchCue = n;
-      notify(
-        `Pitch Play ${d.keyShift} semitones · cue ${d.pitchCue + 1} · simulation; audio is unchanged.`,
-      );
+      // Pointer and keyboard hold handlers own Pitch Play; click cannot retrigger.
+      return;
     } else {
       d.slice = n;
       notify(
@@ -706,12 +734,32 @@ async function deckAction(action, index, el, event = {}) {
     d.slip = !d.slip;
     if (!d.slip) await engine.endSlip(d);
   }
-  if (["keylock", "repeat", "pfl"].includes(action)) {
-    d[action] = !d[action];
-    if (action !== "repeat")
-      notify(
-        `${action === "pfl" ? "Headphone routing" : action} is simulated; browser audio behavior is unchanged.`,
-      );
+  if (["keyDown", "keyUp", "keyReset"].includes(action)) {
+    if (action !== "keyReset" && !parseMusicalKey(d.track.key)) return notify("Analyze or enter a recognized key first.");
+    pitchPlay.cancelDeck(d);
+    d.keySync = false;
+    const semitones = action === "keyReset" ? 0 : (d.keyShift || 0) + (action === "keyUp" ? 1 : -1);
+    if (Math.abs(semitones) > 24) return notify("The browser pitch renderer supports±24 semitones.");
+    await engine.setPitch(d,{keylock:true,semitones});
+  }
+  if (action === "keySync") {
+    if (d.keySync) d.keySync = false;
+    else {
+      const match = planKeySync(d,state.decks.slice(0,state.deckCount));
+      if (!match.ok) return notify(match.reason);
+      pitchPlay.cancelDeck(d);
+      await engine.setPitch(d,{keylock:true,semitones:match.semitones});
+      d.keySync = true; d.keySyncTag = d.track.key;
+      notify(`Key Sync: ${match.key} · ${match.semitones >= 0 ? "+" : ""}${match.semitones} semitones · compatible with deck${match.targets.length > 1 ? "s" : ""} ${match.targets.map(i=>i+1).join(", ")}.`);
+    }
+  }
+  if (action === "keylock") { d.keySync = false; await engine.setPitch(d, { keylock: !d.keylock }); }
+  if (action === "repeat") d.repeat = !d.repeat;
+  if (action === "pfl") {
+    d.pfl = !d.pfl;
+    notify(
+      "Headphone routing is simulated; browser audio behavior is unchanged.",
+    );
   }
   if (action === "range") d.pitchRange = { 8: 16, 16: 50, 50: 8 }[d.pitchRange];
   if (action === "double") {
@@ -730,6 +778,7 @@ async function deckAction(action, index, el, event = {}) {
 }
 async function importFiles(files) {
   let n = 0;
+  const imported = [];
   for (const file of files) {
     if (!file.size) continue;
     const track = {
@@ -747,14 +796,33 @@ async function importFiles(files) {
       file,
       cues: [],
       savedLoops: [],
-      comment: "BPM/key unmeasured. Enter values in Track details.",
+      comment: "Local audio. Analysis estimates remain editable.",
       grid: 0,
       gridMarkers: [],
     };
     try {
+      const bytes = await file.arrayBuffer();
+      track.contentHash = Array.from(
+        new Uint8Array(await crypto.subtle.digest("SHA-256", bytes)),
+        (x) => x.toString(16).padStart(2, "0"),
+      ).join("");
+      track.id = "local-" + track.contentHash;
+      const existing = trackById(track.id);
+      if (existing) {
+        existing.file = file;
+        existing.missing = false;
+        state.selected = existing.id;
+        await engine.buffer(existing);
+        imported.push(existing);
+        n++;
+        continue;
+      }
+      Object.assign(track, state.localTags[track.contentHash] || {});
       await engine.buffer(track);
       track.analyzed = true;
       state.tracks.push(track);
+      imported.push(track);
+      state.selected = track.id;
       n++;
     } catch {
       notify(
@@ -764,17 +832,144 @@ async function importFiles(files) {
   }
   renderTracks();
   notify(
-    `${n} local audio file${n === 1 ? "" : "s"} imported; files stay in this browser. BPM/key require annotation.`,
+    `${n} local audio file${n === 1 ? "" : "s"} imported. Audio stays local; saved metadata reconnects when the same file is imported again.`,
+  );
+  persist();
+  if (state.analysisSettings.onImport) void enqueueAnalysis(imported);
+}
+const analysisQueue = [];
+let analysisController = null;
+function analysisFieldHint(t, field) {
+  const r = t.analysisResult;
+  if (!["bpm", "key"].includes(field)) return "";
+  const estimate = field === "bpm" ? r?.tempo : r?.keyEstimate;
+  const source =
+    t.metadataSources?.[field] ||
+    (t.demo ? "generation annotation" : "existing / manual");
+  return `${source}${estimate ? ` · measured ${estimate.value ?? "unknown"} · heuristic confidence ${Math.round(100 * estimate.confidence)}%${estimate.reason ? ` · ${estimate.reason}` : ""}` : " · not measured"}`;
+}
+function updateAnalysisStatus(message) {
+  state.analysisStatus = message;
+  const node = $("#analysis-status");
+  if (node) node.textContent = message;
+  $("#analyze").textContent = state.analysis ? "Cancel analysis" : "Analyze";
+  $("#analyze").title = message;
+  document.dispatchEvent(new CustomEvent("openplay-analysis-update"));
+}
+function cancelAnalysis() {
+  analysisQueue.length = 0;
+  analysisController?.abort();
+  updateAnalysisStatus(
+    "Cancellation requested; completed results are preserved.",
   );
 }
-async function analyze() {
-  if (state.analysis) {
-    state.analysis = false;
-    notify("Analysis queue cancelled.");
-    return;
-  }
+async function enqueueAnalysis(tracks, replacements = {}) {
+  const settings = { ...state.analysisSettings };
+  for (const track of tracks)
+    if (!analysisQueue.some((job) => job.track === track))
+      analysisQueue.push({
+        track,
+        settings,
+        replaceKey: !!replacements.replaceKey,
+        replaceTempo: !!replacements.replaceTempo,
+      });
+  if (state.analysis || !analysisQueue.length) return;
   state.analysis = true;
-  $("#analyze").textContent = "Cancel analysis";
+  let completed = 0,
+    failed = 0,
+    cancelled = false;
+  while (analysisQueue.length) {
+    const {
+      track: t,
+      settings: opts,
+      replaceKey,
+      replaceTempo,
+    } = analysisQueue.shift();
+    const controller = new AbortController();
+    analysisController = controller;
+    const snapshot = {
+      bpm: t.bpm,
+      key: t.key,
+      grid: t.grid,
+      revision: t.metadataRevision || 0,
+    };
+    try {
+      updateAnalysisStatus(
+        `Decoding ${t.title} · ${analysisQueue.length} queued`,
+      );
+      const buffer = await engine.buffer(t);
+      if (controller.signal.aborted)
+        throw new DOMException("Cancelled", "AbortError");
+      const result = await analyzeBuffer(buffer, {
+        ...opts,
+        analyzeKey: !t.locked && opts.analyzeKey !== false,
+        analyzeTempo: !t.locked && opts.analyzeTempo !== false,
+        signal: controller.signal,
+        onProgress: (value) =>
+          updateAnalysisStatus(
+            `Analyzing ${t.title} · ${Math.round(value * 100)}% · ${analysisQueue.length} queued`,
+          ),
+      });
+      t.analyzed = true;
+      delete t.analysisError;
+      t.analysisResult = { ...result, measuredAt: new Date().toISOString() };
+      t.metadataSources ??= {};
+      // Re-check live values after asynchronous work so edits made during a job win.
+      if (
+        (t.metadataRevision || 0) === snapshot.revision &&
+        !t.locked &&
+        t.bpm === snapshot.bpm &&
+        t.grid === snapshot.grid &&
+        ((!t.bpm && t.metadataSources.bpm !== "manual") || replaceTempo)
+      ) {
+        if (result.bpm !== null) {
+          t.bpm = Math.round(result.bpm * 100) / 100;
+          t.grid = result.grid?.firstBeat || 0;
+          t.gridMarkers = [];
+          t.metadataSources.bpm = "measured estimate";
+          t.metadataSources.grid = "measured pulse phase; downbeat unverified";
+        }
+      }
+      if (
+        (t.metadataRevision || 0) === snapshot.revision &&
+        !t.locked &&
+        t.key === snapshot.key &&
+        (((!t.key || t.key === "—") && t.metadataSources.key !== "manual") ||
+          replaceKey) &&
+        result.key !== null
+      ) {
+        t.key = result.key;
+        t.metadataSources.key = "measured estimate";
+      }
+      completed++;
+      persist();
+      renderTracks();
+      renderDecks();
+      updateAnalysisStatus(
+        `${t.title}: BPM ${result.bpm ? result.bpm.toFixed(2) : "unknown"}, key ${result.key || "unknown"}`,
+      );
+    } catch (error) {
+      if (error.name === "AbortError") {
+        cancelled = true;
+        // cancelAnalysis cleared the old pending jobs. Anything now queued was
+        // requested after cancellation and must be drained by this same runner.
+        continue;
+      }
+      failed++;
+      t.analysisError = error.message;
+      updateAnalysisStatus(`Analysis failed for ${t.title}: ${error.message}`);
+    }
+  }
+  analysisController = null;
+  state.analysis = false;
+  updateAnalysisStatus(
+    `${cancelled ? "Cancelled" : "Finished"}: ${completed} measured, ${failed} failed. Existing/manual metadata and locked grids preserved unless replacement was requested.`,
+  );
+  drawWaves();
+  notify(state.analysisStatus);
+}
+function analyze(replacements = {}) {
+  if (state.analysis) return cancelAnalysis();
   const scope = $("#analysis-scope").value;
   const list =
     scope === "All tracks"
@@ -782,25 +977,9 @@ async function analyze() {
       : scope === "Current crate"
         ? filtered()
         : [trackById(state.selected)].filter(Boolean);
-  for (const t of list) {
-    if (!state.analysis) break;
-    if (t.locked) continue;
-    try {
-      await engine.buffer(t);
-      t.analyzed = true;
-    } catch {
-      t.missing = true;
-    }
-    await new Promise((r) => setTimeout(r, 80));
-    renderTracks();
-  }
-  state.analysis = false;
-  $("#analyze").textContent = "Analyze";
-  drawWaves();
-  notify(
-    "Waveform decoding finished. BPM/key/gain analysis is not implemented; fixture annotations preserved.",
-  );
+  return enqueueAnalysis(list, replacements);
 }
+
 function download(name, content, type = "application/json") {
   const blob =
       content instanceof Blob ? content : new Blob([content], { type }),
@@ -846,6 +1025,10 @@ const api = {
   download,
   reset,
   importFiles,
+  analyze,
+  enqueueAnalysis,
+  cancelAnalysis,
+  analysisFieldHint,
 };
 const flipAutomation = createFlipAutomation({
   state,
@@ -865,6 +1048,7 @@ const cueHolds = createCueHolds({
   notify,
 });
 const slicer = createSlicer({ engine, render: renderDecks, notify });
+const pitchPlay = createPitchPlay({engine,render:renderDecks,persist,notify,quantized});
 const panels = createPanels(api);
 document.addEventListener("click", async (e) => {
   const el = e.target.closest("button,[data-track],[data-focus]");
@@ -878,7 +1062,7 @@ document.addEventListener("click", async (e) => {
       const d = state.decks[Number(el.dataset.deck)];
       if (
         el.dataset.action === "cue" ||
-        (el.dataset.action === "pad" && ["Cues", "Slicer"].includes(d.tab))
+        (el.dataset.action === "pad" && ["Cues", "Slicer", "Pitch"].includes(d.tab))
       )
         return;
       await deckAction(el.dataset.action, Number(el.dataset.deck), el, e);
@@ -932,14 +1116,20 @@ document.addEventListener("contextmenu", (e) => {
   if (r || c || p) e.preventDefault();
   if (r) panels.trackDetails(trackById(r.dataset.track));
   else if (c) panels.crateDetails(c.dataset.crate);
-  else if (p)
-    panels.editPad(state.decks[Number(p.dataset.deck)], Number(p.dataset.pad));
+  else if (p) {
+    const deck = state.decks[Number(p.dataset.deck)];
+    if (deck.tab === "Pitch") notify("Pitch Play selects cues with Shift-pad. Edit or delete cues in Cues mode.");
+    else panels.editPad(deck, Number(p.dataset.pad));
+  }
 });
 document.addEventListener("input", (e) => {
   if (e.target.dataset.tempo !== undefined) {
     const d = state.decks[Number(e.target.dataset.tempo)];
-    engine.setRate(d, 1 + Number(e.target.value) / 100);
-    $(`#platter-${d.index} strong`).textContent = d.track
+    engine
+      .setRate(d, 1 + Number(e.target.value) / 100)
+      .catch((error) => notify(error.message));
+    $(`#platter-${d.index} small`).textContent = `BPM · ${((d.rate - 1) * 100).toFixed(1)}%`;
+    $(`#platter-${d.index} strong`).textContent = d.track?.bpm
       ? (d.track.bpm * d.rate).toFixed(1)
       : "—";
   }
@@ -951,6 +1141,11 @@ document.addEventListener("input", (e) => {
   if (e.target.id === "crossfader") engine.setCross(Number(e.target.value));
 });
 document.addEventListener("change", (e) => {
+  if (e.target.dataset.pitchRange !== undefined) {
+    const d = state.decks[Number(e.target.dataset.pitchRange)];
+    if (pitchRanges[e.target.value]) d.pitchRangeMode = e.target.value;
+    renderDecks();
+  }
   if (e.target.dataset.sliceDomain !== undefined) {
     const d = state.decks[Number(e.target.dataset.sliceDomain)];
     d.slicerDomain = Number(e.target.value);
@@ -990,6 +1185,11 @@ document.addEventListener("pointerdown", (e) => {
   const el = e.target.closest('[data-action="cue"],[data-action="pad"]');
   if (!el || e.button !== 0) return;
   const d = state.decks[Number(el.dataset.deck)];
+  if (el.dataset.action === "pad" && d.tab === "Pitch") {
+    e.preventDefault();
+    void pitchPlay.press("pointer:" + e.pointerId,d,Number(el.dataset.pad),e.shiftKey);
+    return;
+  }
   if (el.dataset.action === "pad" && d.tab === "Slicer") {
     e.preventDefault();
     void slicer.press("pointer:" + e.pointerId, d, Number(el.dataset.pad));
@@ -1014,6 +1214,9 @@ document.addEventListener(
 );
 window.addEventListener("blur", cueHolds.releaseAll);
 window.addEventListener("blur", slicer.releaseAll);
+window.addEventListener("blur", pitchPlay.releaseAll);
+document.addEventListener("pointerup", e => void pitchPlay.release("pointer:" + e.pointerId));
+document.addEventListener("pointercancel", e => void pitchPlay.release("pointer:" + e.pointerId));
 document.addEventListener(
   "pointerup",
   (e) => void slicer.release("pointer:" + e.pointerId),
@@ -1139,11 +1342,16 @@ $("#new-crate").onclick = () => panels.newCrate(false);
 $("#new-smart").onclick = () => panels.newCrate(true);
 $("#import").onclick = () => $("#audio-files").click();
 $("#audio-files").onchange = (e) => importFiles(e.target.files);
-$("#analyze").onclick = analyze;
+$("#analyze").onclick = () => analyze();
 $("#columns").onclick = () => panels.columns();
 $("#library-tools").onclick = () => panels.libraryTools();
 document.addEventListener("keydown", async (e) => {
   const tag = e.target.tagName;
+  if ([" ", "Enter"].includes(e.key) && e.target.dataset.action === "pad" && state.decks[Number(e.target.dataset.deck)].tab === "Pitch") {
+    e.preventDefault();
+    if (!e.repeat) void pitchPlay.press("button:" + e.key,state.decks[Number(e.target.dataset.deck)],Number(e.target.dataset.pad),e.shiftKey);
+    return;
+  }
   if (
     [" ", "Enter"].includes(e.key) &&
     e.target.dataset.action === "pad" &&
@@ -1261,6 +1469,7 @@ document.addEventListener("keydown", async (e) => {
   }
 });
 document.addEventListener("keyup", (e) => {
+  void pitchPlay.release("button:" + e.key);
   void cueHolds.release("key:" + e.key.toLowerCase());
   void cueHolds.release("button:" + e.key);
   void slicer.release("button:" + e.key);
@@ -1288,6 +1497,10 @@ engine.onEnd = async (d) => {
 };
 function tick() {
   for (const d of state.decks.slice(0, state.deckCount)) {
+    if (d.keySync && d.keySyncTag !== d.track?.key) {
+      d.keySync = false;
+      document.querySelector(`[data-action="keySync"][data-deck="${d.index}"]`)?.classList.remove("active");
+    }
     const p = engine.position(d),
       t = $(`#time-${d.index}`);
     if (t) t.textContent = time(p);
@@ -1334,3 +1547,13 @@ window.openPlay = {
     native: false,
   }),
 };
+
+engine.onProcessing = (d) => {
+  const status = document.querySelector(
+    `[data-drop-deck="${d.index}"] .deck-foot small`,
+  );
+  if (status)
+    status.textContent = d.processing ? "PROCESSING PITCH…" : "LOCAL AUDIO";
+};
+
+engine.onError = (error) => notify(error.message);

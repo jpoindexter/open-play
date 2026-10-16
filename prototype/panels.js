@@ -1,5 +1,7 @@
+import { createStemPreparation } from "./stems.js";
 import { createVideoMixer } from "./video.js";
 import { createMIDI, mappedValue } from "./midi.js";
+import { getExtendedEffectControls } from "./extended-effects.js";
 import { implementedEffects } from "./effects.js";
 import {
   ruleFields,
@@ -27,6 +29,7 @@ export function createPanels(a) {
     renderDecks,
     download,
   } = a;
+  const stemPreparation = createStemPreparation(engine, s.decks);
   let activeSettings = "DJ Preferences",
     activeProvider = "Spotify",
     videoPhase = 0,
@@ -305,7 +308,7 @@ export function createPanels(a) {
       ]
         .map(
           ([k, l]) =>
-            `<label>${l}<input name="${k}" value="${esc(t[k])}" ${k === "bpm" ? 'type="number" min="1" max="999" step=".01"' : ""}></label>`,
+            `<label>${l}<input name="${k}" value="${k === "bpm" && !t[k] ? "" : esc(t[k])}" ${k === "bpm" ? 'type="number" min="1" max="999" step=".01"' : ""}></label>`,
         )
         .join(
           "",
@@ -314,6 +317,10 @@ export function createPanels(a) {
         body.querySelector("form").onsubmit = (e) => {
           e.preventDefault();
           const f = new FormData(e.target);
+          t.metadataSources ??= {};
+          if (Number(f.get("bpm")) !== t.bpm) t.metadataSources.bpm = "manual";
+          if (String(f.get("key")) !== t.key) t.metadataSources.key = "manual";
+          t.metadataRevision = (t.metadataRevision || 0) + 1;
           for (const k of [
             "title",
             "artist",
@@ -501,7 +508,7 @@ export function createPanels(a) {
     const t = d.track;
     dialog(
       `Beatgrid · ${t.title}`,
-      `<div class="note-box">BPM, offset and markers update the displayed grid. Variable-grid warping and automatic beat detection remain native work.</div><div class="form-grid"><label>BPM<input id="grid-bpm" type="number" min="1" max="999" step=".01" value="${t.bpm || 120}" ${t.locked ? "disabled" : ""}></label><label>Downbeat offset (seconds)<input id="grid-offset" type="number" step=".01" value="${t.grid || 0}" ${t.locked ? "disabled" : ""}></label></div><div class="panel-controls" style="margin-top:12px"><button id="grid-half">½ BPM</button><button id="grid-double">×2 BPM</button><button id="grid-marker">Set marker at playhead</button><button id="grid-clear">Clear markers</button><button id="grid-save">Save grid</button></div><p id="grid-markers" class="muted">Markers: ${(t.gridMarkers || []).map(time).join(", ") || "None"} ${t.locked ? "· LOCKED" : ""}</p>`,
+      `<div class="note-box">BPM, offset and markers update the displayed grid. Automatic analysis proposes a constant pulse grid. Review the downbeat here; variable-tempo warping remains open.</div><div class="form-grid"><label>BPM<input id="grid-bpm" type="number" min="1" max="999" step=".01" value="${t.bpm || 120}" ${t.locked ? "disabled" : ""}></label><label>Downbeat offset (seconds)<input id="grid-offset" type="number" step=".01" value="${t.grid || 0}" ${t.locked ? "disabled" : ""}></label></div><div class="panel-controls" style="margin-top:12px"><button id="grid-half">½ BPM</button><button id="grid-double">×2 BPM</button><button id="grid-marker">Set marker at playhead</button><button id="grid-clear">Clear markers</button><button id="grid-save">Save grid</button></div><p id="grid-markers" class="muted">Markers: ${(t.gridMarkers || []).map(time).join(", ") || "None"} ${t.locked ? "· LOCKED" : ""}</p>`,
       () => {
         $("#grid-half").onclick = () => {
           if (!t.locked)
@@ -515,12 +522,14 @@ export function createPanels(a) {
           if (t.locked) return notify("Beatgrid locked.");
           t.gridMarkers ??= [];
           t.gridMarkers.push(engine.position(d));
+          t.metadataRevision = (t.metadataRevision || 0) + 1;
           $("#grid-markers").textContent =
             "Markers: " + t.gridMarkers.map(time).join(", ");
         };
         $("#grid-clear").onclick = () => {
           if (!t.locked) {
             t.gridMarkers = [];
+            t.metadataRevision = (t.metadataRevision || 0) + 1;
             $("#grid-markers").textContent = "Markers: None";
           }
         };
@@ -528,6 +537,12 @@ export function createPanels(a) {
           if (t.locked) return notify("Beatgrid locked.");
           t.bpm = Math.max(1, Number($("#grid-bpm").value) || 120);
           t.grid = Number($("#grid-offset").value);
+          t.metadataSources = {
+            ...t.metadataSources,
+            bpm: "manual",
+            grid: "manual",
+          };
+          t.metadataRevision = (t.metadataRevision || 0) + 1;
           persist();
           renderDecks();
           renderTracks();
@@ -646,13 +661,14 @@ export function createPanels(a) {
     applyFX();
     const catalog = Object.entries(a.fxCatalog.categories);
     $("#panel").innerHTML =
-      head("DJ FX", "4 INDEPENDENT BROWSER PROCESSORS · 55 DSP GAPS", true) +
-      `<div class="panel-grid">${s.fx.map((bank, b) => `<div><div class="panel-controls"><strong>FX unit ${b + 1}</strong><label>Assign <select data-fx-route="${b}">${options(["Deck 1", "Deck 2", "Deck 3", "Deck 4", "Sampler", "Master"], s.fxRoutes?.[b] || `Deck ${b + 1}`)}</select></label></div><div class="fx-bank">${bank.map((f, i) => `<div class="fx-slot"><select aria-label="FX unit ${b + 1} slot ${i + 1}" data-fx-select="${b}:${i}">${catalog.map(([category, names]) => `<optgroup label="${category}">${options(names, f.name)}</optgroup>`).join("")}</select><div class="panel-controls"><button data-fx-on="${b}:${i}" ${implementedEffects.includes(f.name) ? "" : 'disabled title="DSP not implemented"'} class="${f.on ? "active" : ""}">ON</button><input type="range" aria-label="Effect depth ${b}:${i}" min="0" max="100" value="${f.depth}" data-fx-depth="${b}:${i}"><button data-fx-params="${b}:${i}">⚙</button><button data-fx-favorite="${b}:${i}" title="Favorite effect">${s.fxFavorites.includes(f.name) ? "★" : "☆"}</button></div><select aria-label="Effect beat timing" data-fx-beat="${b}:${i}">${options(["1/32", "1/16", "1/8", "1/4", "1/2", "1", "2", "4", "8"], f.beat)}</select></div>`).join("")}</div></div>`).join("")}</div><div class="panel-controls" style="margin-top:8px"><button id="save-fx-preset">Save preset</button><select id="fx-presets" aria-label="Effect preset"><option value="">Load preset…</option>${s.fxPresets.map((p, i) => `<option value="${i}">${esc(p.name)}</option>`).join("")}</select><button id="reset-fx">Reset units</button><span class="muted">Channel FX: </span><select id="channel-fx">${options(["Filter", "Dub Echo", "Space", "Noise"], s.channelFX || "Filter")}</select><span class="muted">59 effect names inventoried; 55 parameter schemas still unobserved.</span></div>`;
+      head("DJ FX", "59 INDEPENDENT AUDIO PROCESSORS", true) +
+      `<div class="panel-grid">${s.fx.map((bank, b) => `<div><div class="panel-controls"><strong>FX unit ${b + 1}</strong><label>Assign <select data-fx-route="${b}">${options(["Deck 1", "Deck 2", "Deck 3", "Deck 4", "Sampler", "Master"], s.fxRoutes?.[b] || `Deck ${b + 1}`)}</select></label></div><div class="fx-bank">${bank.map((f, i) => `<div class="fx-slot"><select aria-label="FX unit ${b + 1} slot ${i + 1}" data-fx-select="${b}:${i}">${catalog.map(([category, names]) => `<optgroup label="${category}">${options(names, f.name)}</optgroup>`).join("")}</select><div class="panel-controls"><button data-fx-on="${b}:${i}" ${implementedEffects.includes(f.name) ? "" : 'disabled title="DSP not implemented"'} class="${f.on ? "active" : ""}">ON</button><input type="range" aria-label="Effect depth ${b}:${i}" min="0" max="100" value="${f.depth}" data-fx-depth="${b}:${i}"><button data-fx-params="${b}:${i}">⚙</button><button data-fx-favorite="${b}:${i}" title="Favorite effect">${s.fxFavorites.includes(f.name) ? "★" : "☆"}</button></div><select aria-label="Effect beat timing" data-fx-beat="${b}:${i}">${options(["1/32", "1/16", "1/8", "1/4", "1/2", "1", "2", "4", "8"], f.beat)}</select></div>`).join("")}</div></div>`).join("")}</div><div class="panel-controls" style="margin-top:8px"><button id="save-fx-preset">Save preset</button><select id="fx-presets" aria-label="Effect preset"><option value="">Load preset…</option>${s.fxPresets.map((p, i) => `<option value="${i}">${esc(p.name)}</option>`).join("")}</select><button id="reset-fx">Reset units</button><span class="muted">Channel FX: </span><select id="channel-fx">${options(["Filter", "Dub Echo", "Space", "Noise"], s.channelFX || "Filter")}</select><span class="muted">Independent DSP · exact reference ranges and sonic response remain unverified.</span></div>`;
     $$("[data-fx-select]").forEach(
       (el) =>
         (el.onchange = () => {
           const [b, i] = el.dataset.fxSelect.split(":");
           s.fx[b][i].name = el.value;
+          s.fx[b][i].params = {};
           s.fx[b][i].on = false;
           refresh();
         }),
@@ -705,11 +721,13 @@ export function createPanels(a) {
         (el.onclick = () => {
           const [b, i] = el.dataset.fxParams.split(":"),
             f = s.fx[b][i],
-            params = effectParams[f.name];
+            params =
+              effectParams[f.name]?.map(([name,value]) => ({name,value,observedLabel:true})) ||
+              getExtendedEffectControls(f.name);
           dialog(
             `${f.name} · advanced parameters`,
             params
-              ? `<p class="muted">Labels and initial values were observed in Serato. These now control independent browser DSP with conservative bounds; sonic equivalence is unverified. Editing rebuilds the route and clears effect tails.</p><div class="settings-grid">${params.map(([name, value]) => `<label class="setting">${name}<input data-param="${name}" value="${esc(f.params[name] || value)}"></label>`).join("")}</div><div class="form-actions"><button id="save-effect">Save values</button></div>`
+              ? `<p class="muted">${params.every(c => c.observedLabel) ? "Parameter labels were observed in Serato. The mappings below are independent implementations." : "These are functional independent controls. Some observed reference controls remain unmapped; see the gap matrix."} Values affect real audio. Exact Serato response is unverified. Live depth and parameter changes preserve processor state. Topology or impulse-response changes reset that slot.</p><div class="settings-grid">${params.map(c => `<label class="setting">${esc(c.name)}${c.options ? `<select data-param="${esc(c.name)}">${options(c.options, f.params[c.name] ?? c.value)}</select>` : `<input data-param="${esc(c.name)}" value="${esc(f.params[c.name] ?? c.value)}">`}</label>`).join("")}</div><div class="form-actions"><button id="save-effect">Save values</button></div>`
               : `<div class="note-box">${esc(f.name)} exists in the installed catalog. Its specific parameter labels, ranges and transfer function have not been observed. No invented substitute controls are presented as parity.</div><p>Inventory: FX-003. This is an explicit prototype gap for Claude's independent investigation.</p>`,
             (body) => {
               if ($("#save-effect"))
@@ -749,10 +767,19 @@ export function createPanels(a) {
       );
       refresh();
     };
-    $("#channel-fx").onchange = (e) => (s.channelFX = e.target.value);
+    $("#channel-fx").onchange = (e) => {
+      s.channelFX = e.target.value;
+      engine.setChannelFX(s.channelFX).catch((error) => notify(error.message));
+      notify(`${s.channelFX} assigned to the mixer Filter knobs.`);
+    };
   }
   const pointerSamples = new Map(),
     keyboardSamples = new Map();
+  engine.onSampleState = (key, state) => {
+    const slot = s.samples[Math.floor(key / 8)]?.[key % 8];
+    if (slot) Object.assign(slot,state);
+    if (s.panel === "sampler") sampleVisuals();
+  };
   function sampleOptions(slot) {
     const track = trackById(slot.track),
       from = slot.from || "start";
@@ -775,6 +802,7 @@ export function createPanels(a) {
       loopEnd,
       repeat: slot.repeat || slot.mode === "Repeat",
       rate: 1 + (Number(slot.pitch) || 0) / 100,
+      keylock: !!slot.keylock,
       gain: slot.muted
         ? 0
         : ((slot.volume ?? 80) / 100) *
@@ -785,7 +813,9 @@ export function createPanels(a) {
     const slots = s.samples[s.bank];
     $("#panel").innerHTML =
       head("Sampler", "REAL PLAY / HOLD / REPEAT / PITCH / GAIN", true) +
-      `<div class="panel-controls" style="margin-bottom:7px">${["A", "B", "C", "D"].map((b, i) => `<button data-sample-bank="${i}" class="${s.bank === i ? "active" : ""}">${b}</button>`).join("")}<span class="muted">Browser master output · Alt-click stops · advanced keylock/output routing still unavailable.</span></div><div class="sampler-slots">${slots.map((slot, i) => `<div class="sample-slot" data-sample-drop="${i}"><h3>${i + 1} · ${esc(trackById(slot.track)?.title || "Empty slot")}</h3><div class="panel-controls"><button data-sample="${i}:load">Load</button><button data-sample="${i}:play" aria-label="Play sample ${i + 1}" aria-pressed="${!!slot.playing}" class="${slot.playing ? "active" : ""}">▶</button><button data-sample="${i}:stop" aria-label="Stop sample ${i + 1}">■</button><button data-sample="${i}:eject" aria-label="Eject sample ${i + 1}">×</button></div><select data-sample-mode="${i}" aria-label="Slot ${i + 1} play mode">${options(["Trigger", "Hold", "On/Off"], slot.mode === "Repeat" ? "Trigger" : slot.mode)}</select><label class="muted"><input type="checkbox" data-sample-repeat="${i}" ${slot.repeat || slot.mode === "Repeat" ? "checked" : ""}> Repeat</label><button data-sample="${i}:advanced" style="width:100%;margin-top:5px">Advanced</button><small class="sample-status" data-sample-status="${i}">${slot.playing ? "Playing" : "Stopped"}</small></div>`).join("")}</div>`;
+      `<div class="panel-controls" style="margin-bottom:7px">${["A", "B", "C", "D"].map((b, i) => `<button data-sample-bank="${i}" class="${s.bank === i ? "active" : ""}">${b}</button>`).join("")}<span class="muted">Browser audio buses · Alt-click stops · Key Lock preserves pitch during speed changes.</span><label>Output <select id="sampler-output" aria-label="Sampler browser output bus">${options(["Master", "Deck 1", "Deck 2", "Deck 3", "Deck 4"], engine.samplerRoute)}</select></label><button id="sampler-stop-all">Stop all samples</button></div><div class="sampler-slots">${slots.map((slot, i) => `<div class="sample-slot" data-sample-drop="${i}"><h3>${i + 1} · ${esc(trackById(slot.track)?.title || "Empty slot")}</h3><div class="panel-controls"><button data-sample="${i}:load">Load</button><button data-sample="${i}:play" aria-label="Play sample ${i + 1}" aria-pressed="${!!slot.playing}" class="${slot.playing ? "active" : ""}">▶</button><button data-sample="${i}:stop" aria-label="Stop sample ${i + 1}">■</button><button data-sample="${i}:eject" aria-label="Eject sample ${i + 1}">×</button></div><select data-sample-mode="${i}" aria-label="Slot ${i + 1} play mode">${options(["Trigger", "Hold", "On/Off"], slot.mode === "Repeat" ? "Trigger" : slot.mode)}</select><label class="muted"><input type="checkbox" data-sample-repeat="${i}" ${slot.repeat || slot.mode === "Repeat" ? "checked" : ""}> Repeat</label><button data-sample="${i}:advanced" style="width:100%;margin-top:5px">Advanced</button><small class="sample-status" data-sample-status="${i}">${slot.processing ? (slot.keylock ? "Preparing Key Lock…" : "Preparing audio…") : slot.playing ? "Playing" : "Stopped"}</small></div>`).join("")}</div>`;
+    $("#sampler-output").onchange = e => engine.setSamplerOutput(e.target.value);
+    $("#sampler-stop-all").onclick = () => engine.stopAllSamples();
     $$("[data-sample-bank]").forEach(
       (b) =>
         (b.onclick = () => {
@@ -836,10 +866,7 @@ export function createPanels(a) {
         (el.onchange = () => {
           const slot = slots[el.dataset.sampleRepeat];
           slot.repeat = el.checked;
-          const voice = engine.samples?.get(
-            s.bank * 8 + Number(el.dataset.sampleRepeat),
-          );
-          if (voice) voice.source.loop = slot.repeat;
+          void engine.updateSample(s.bank * 8 + Number(el.dataset.sampleRepeat), {repeat:slot.repeat}).catch(error => notify(error.message));
         }),
     );
     $$("[data-sample-drop]").forEach(
@@ -866,7 +893,7 @@ export function createPanels(a) {
         button.classList.toggle("active", slot.playing);
         button.setAttribute("aria-pressed", String(!!slot.playing));
       }
-      if (status) status.textContent = slot.playing ? "Playing" : "Stopped";
+      if (status) status.textContent = slot.processing ? (slot.keylock ? "Preparing Key Lock…" : "Preparing audio…") : slot.playing ? "Playing" : "Stopped";
     }
   }
   function releaseSampleHolds(index = null, source = "pointer") {
@@ -899,14 +926,14 @@ export function createPanels(a) {
     if (action === "eject") slot.track = null;
     if (action === "play") {
       if (!slot.track) return notify("Load a sample first.");
-      if (slot.mode === "On/Off" && slot.playing) {
+      if (slot.mode === "On/Off" && (slot.playing || slot.processing)) {
         engine.stopSample(key);
         slot.playing = false;
       } else {
         if (slot.mode === "Hold" && source === "keyboard")
           keyboardSamples.set(i, key);
         try {
-          slot.playing = await engine.sample(
+          await engine.sample(
             trackById(slot.track),
             key,
             sampleOptions(slot),
@@ -933,7 +960,7 @@ export function createPanels(a) {
       ];
       dialog(
         `Sampler ${i + 1} · advanced`,
-        `<div class="form-grid"><label>Volume<input id="sample-volume" type="range" min="0" max="100" value="${slot.volume ?? 80}"></label><label>Track gain (dB)<input id="sample-gain" type="number" min="-24" max="12" step=".5" value="${track.sampleGain || 0}"></label><label>Pitch (%)<input id="sample-pitch" type="number" min="-50" max="100" step=".1" value="${slot.pitch || 0}"></label><label>Play from<select id="sample-from">${starts.map(([value, name]) => `<option value="${value}" ${value === (slot.from || "start") ? "selected" : ""}>${esc(name)}</option>`).join("")}</select></label><label><span>Mute</span><input id="sample-mute" type="checkbox" ${slot.muted ? "checked" : ""}></label></div><div class="panel-controls"><button id="sample-sync">Match focused deck tempo</button><button id="sample-reset-pitch">Reset pitch</button><button id="sample-apply">Apply</button></div><p class="muted">Gain/volume/pitch/mute affect real audio; Play from applies on the next trigger. Tempo matching changes pitch. Key-preserving stretch, native output buses and file-tag writing remain open.</p>`,
+        `<div class="form-grid"><label>Volume<input id="sample-volume" type="range" min="0" max="100" value="${slot.volume ?? 80}"></label><label>Track gain (dB)<input id="sample-gain" type="number" min="-24" max="12" step=".5" value="${track.sampleGain || 0}"></label><label>Pitch (%)<input id="sample-pitch" type="number" min="-50" max="100" step=".1" value="${slot.pitch || 0}"></label><label><span>Key Lock</span><input id="sample-keylock" type="checkbox" ${slot.keylock ? "checked" : ""}></label><label>Play from<select id="sample-from">${starts.map(([value, name]) => `<option value="${value}" ${value === (slot.from || "start") ? "selected" : ""}>${esc(name)}</option>`).join("")}</select></label><label><span>Mute</span><input id="sample-mute" type="checkbox" ${slot.muted ? "checked" : ""}></label></div><div class="panel-controls"><button id="sample-sync">Match focused deck tempo</button><button id="sample-reset-pitch">Reset pitch</button><button id="sample-apply">Apply</button></div><p class="muted">Gain/volume/mute affect real audio. Pitch (%) changes speed; Key Lock preserves the original pitch using local buffered processing. Speed changes with Key Lock may pause briefly while processing. Play from applies on the next trigger. Output selection routes browser mixer buses, not separate hardware/headphone outputs. File tags remain untouched.</p>`,
         () => {
           const update = () => {
             slot.volume = Number($("#sample-volume").value);
@@ -941,16 +968,23 @@ export function createPanels(a) {
               -50,
               Math.min(100, Number($("#sample-pitch").value) || 0),
             );
+            slot.keylock = $("#sample-keylock").checked;
             slot.from = $("#sample-from").value;
             slot.muted = $("#sample-mute").checked;
             track.sampleGain = Math.max(
               -24,
               Math.min(12, Number($("#sample-gain").value) || 0),
             );
-            engine.updateSample(key, sampleOptions(slot));
+            // File gain belongs to the track, so every active slot sharing it updates.
+            s.samples.forEach((bank,b) => bank.forEach((other,j) => {
+              if (other.track === slot.track) {
+                const {rate,keylock,gain} = sampleOptions(other);
+                void engine.updateSample(b * 8 + j,{rate,keylock,gain}).catch(error => notify(error.message));
+              }
+            }));
             persist();
           };
-          for (const id of ["volume", "gain", "pitch", "from", "mute"])
+          for (const id of ["volume", "gain", "pitch", "from", "mute", "keylock"])
             $("#sample-" + id).oninput = update;
           $("#sample-reset-pitch").onclick = () => {
             $("#sample-pitch").value = 0;
@@ -978,7 +1012,7 @@ export function createPanels(a) {
     const slots = s.scratch[s.scratchBank];
     $("#panel").innerHTML =
       head("Scratch Banks", "REAL DECK LOAD · CUE SETTINGS") +
-      `<div class="panel-controls" style="margin-bottom:7px">${["A", "B", "C", "D"].map((b, i) => `<button data-scratch-bank="${i}" class="${s.scratchBank === i ? "active" : ""}">${b}</button>`).join("")}<span class="muted">Load selected track into a slot. Trigger loads focused deck; Shift-trigger restores previous track.</span></div><div class="sampler-slots">${slots.map((slot, i) => `<div class="sample-slot" data-scratch-drop="${i}"><h3>${i + 1} · ${esc(trackById(slot.track)?.title || "Empty")}</h3><div class="panel-controls"><button data-scratch="${i}:assign">Assign</button><button data-scratch="${i}:trigger">Load deck</button><button data-scratch="${i}:clear">×</button></div><select data-scratch-start="${i}" aria-label="Scratch slot ${i + 1} start">${options(["Start", ...Array.from({ length: 8 }, (_, j) => `Cue ${j + 1}`)], slot.start)}</select><label class="muted"><input type="checkbox" data-scratch-repeat="${i}" ${slot.repeat ? "checked" : ""}> Repeat</label><label class="muted"><input type="checkbox" data-scratch-key="${i}" ${slot.keylock ? "checked" : ""}> Key lock ◇</label></div>`).join("")}</div>`;
+      `<div class="panel-controls" style="margin-bottom:7px">${["A", "B", "C", "D"].map((b, i) => `<button data-scratch-bank="${i}" class="${s.scratchBank === i ? "active" : ""}">${b}</button>`).join("")}<span class="muted">Load selected track into a slot. Trigger loads focused deck; Shift-trigger restores previous track.</span></div><div class="sampler-slots">${slots.map((slot, i) => `<div class="sample-slot" data-scratch-drop="${i}"><h3>${i + 1} · ${esc(trackById(slot.track)?.title || "Empty")}</h3><div class="panel-controls"><button data-scratch="${i}:assign">Assign</button><button data-scratch="${i}:trigger">Load deck</button><button data-scratch="${i}:clear">×</button></div><select data-scratch-start="${i}" aria-label="Scratch slot ${i + 1} start">${options(["Start", ...Array.from({ length: 8 }, (_, j) => `Cue ${j + 1}`)], slot.start)}</select><label class="muted"><input type="checkbox" data-scratch-repeat="${i}" ${slot.repeat ? "checked" : ""}> Repeat</label><label class="muted"><input type="checkbox" data-scratch-key="${i}" ${slot.keylock ? "checked" : ""}> Key lock</label></div>`).join("")}</div>`;
     $$("[data-scratch-bank]").forEach(
       (b) =>
         (b.onclick = () => {
@@ -1110,34 +1144,50 @@ export function createPanels(a) {
     const t = trackById(s.selected);
     dialog(
       "Stems preparation",
-      `${badge("NO SEPARATION MODEL RUNNING")}<p>Exercise queue, cancellation and failure states. No isolated audio is produced; playing tracks retain their full mix.</p><div class="panel-controls"><button id="stems-queue">Prepare selected</button><button id="stems-cancel">Cancel</button><button id="stems-fail">Simulate model failure</button><button id="stems-clear">Clear cache fixture</button></div><p id="stems-state">${esc(t?.stemState || "Not prepared")}</p><div class="note-box">Provisional evaluation baseline: HTDemucs, compared with licensed SCNet / RoFormer checkpoints. No weights have been run or selected as a measured winner.</div>`,
+      `${badge("LOCAL MODEL INFERENCE", true)}<p>Prepare four real sources for ${esc(t?.title || "the selected track")}. Audio stays on this computer. Use the deck's Stems pads to mute sources or apply effects after preparation.</p><label>Separation model <select id="stems-model"><option value="scnet">SCNet large · recommended quality</option><option value="spleeter">Spleeter · faster fallback</option></select></label><div class="panel-controls"><button id="stems-queue" ${!t || stemPreparation.active.has(t.id) ? "disabled" : ""}>Prepare selected</button><button id="stems-cancel">Cancel preparation</button><button id="stems-full">Restore full mix</button></div><p id="stems-state" role="status">${esc(t?.stemState || "Not prepared")}</p><div class="note-box">Real model inference, not studio source tracks. Separation may contain leakage. Prototype limit: 10 minutes / 128 MiB decoded audio. The worker runs on loopback; no account or cloud service is required.</div>`,
       () => {
-        $("#stems-queue").onclick = () => {
+        const output = $("#stems-state"),
+          button = $("#stems-queue");
+        button.onclick = async () => {
           if (!t) return;
-          t.stemState = "Queued (simulation)";
-          $("#stems-state").textContent = t.stemState;
-          setTimeout(() => {
-            if (t.stemState === "Queued (simulation)") {
-              t.stemState = "Ready (simulation)";
-              if ($("#stems-state"))
-                $("#stems-state").textContent = t.stemState;
-              renderTracks();
-            }
-          }, 900);
+          button.disabled = true;
+          try {
+            await stemPreparation.prepare(
+              t,
+              (text) => {
+                output.textContent = text;
+                const cancel = $("#stems-cancel");
+                if (cancel) cancel.disabled = text.startsWith("Activating");
+              },
+              $("#stems-model").value,
+            );
+            renderTracks();
+            renderDecks();
+          } catch (error) {
+            notify(error.message);
+          } finally {
+            button.disabled = false;
+            const cancel = $("#stems-cancel");
+            if (cancel) cancel.disabled = false;
+          }
         };
-        $("#stems-cancel").onclick = () => {
-          if (t) t.stemState = "Cancelled";
-          $("#stems-state").textContent =
-            "Cancelled; full mix remains available.";
-        };
-        $("#stems-fail").onclick = () => {
-          if (t) t.stemState = "Failed (simulation)";
-          $("#stems-state").textContent =
-            "Worker failure fixture; original audio unaffected. Retry preparation or use full mix.";
-        };
-        $("#stems-clear").onclick = () => {
-          if (t) delete t.stemState;
-          $("#stems-state").textContent = "No prepared cache";
+        $("#stems-cancel").onclick = () =>
+          t &&
+          stemPreparation.cancel(t).catch((error) => notify(error.message));
+        $("#stems-full").onclick = async () => {
+          if (!t || stemPreparation.active.has(t.id))
+            return notify("Cancel preparation before restoring the full mix.");
+          engine.stemBuffers.delete(t.id);
+          for (const d of s.decks.filter((d) => d.track === t)) {
+            const was = d.playing || d.processing;
+            engine.pause(d);
+            d.stems = [true, true, true, true];
+            d.stemFX = [false, false, false, false];
+            if (was) await engine.start(d);
+          }
+          t.stemState = "Original mix · local prepared files retained";
+          output.textContent = t.stemState;
+          renderDecks();
           renderTracks();
         };
       },
@@ -1691,25 +1741,114 @@ export function createPanels(a) {
       },
     );
   }
+  let analysisRefresh = null;
   function analysis() {
+    const t = trackById(s.selected),
+      prefs = s.analysisSettings;
+    const percent = (value) => `${Math.round(100 * (value || 0))}%`;
+    const db = (value) =>
+      value === null || value === undefined
+        ? "unknown"
+        : `${value.toFixed(2)} dBFS`;
+    const resultMarkup = () => {
+      const r = t?.analysisResult;
+      if (!r)
+        return `<p>${t ? esc(t.title) : "No track selected"}: no measured result yet.${t?.analysisError ? ` ${esc(t.analysisError)}` : ""}</p>`;
+      return `<strong>${esc(t.title)}</strong><dl><dt>Measured BPM</dt><dd>${r.bpm?.toFixed(2) || "Unknown"} · confidence ${percent(r.tempo?.confidence)} · library ${esc(t.bpm || "unknown")}</dd><dt>Measured key</dt><dd>${esc(r.key || "Unknown")} · confidence ${percent(r.keyEstimate?.confidence)} · library ${esc(t.key || "unknown")}</dd><dt>Level</dt><dd>RMS ${db(r.gain.rmsDbfs)} · sample peak ${db(r.gain.samplePeakDbfs)} · ${r.gain.clippedSamples} clipped samples</dd><dt>Suggested gain</dt><dd>${r.gain.recommendedDb === null ? "Unknown" : `${r.gain.recommendedDb.toFixed(2)} dB`} · ungated RMS target; not LUFS or true peak</dd><dt>Pulse grid</dt><dd>${r.grid ? `${r.grid.beats.length} beats, first pulse ${r.grid.firstBeat.toFixed(3)} s; downbeat unverified` : "Unknown"}</dd><dt>Coverage</dt><dd>${r.analyzedDuration.toFixed(1)} / ${r.duration.toFixed(1)} seconds for tempo/key${r.partial ? " · partial" : ""}; whole input for level</dd></dl><p>${esc(a.analysisFieldHint(t, "bpm"))}<br>${esc(a.analysisFieldHint(t, "key"))}${t.locked ? "<br>Beatgrid is protected." : ""}</p><p class="muted">${r.warnings.map(esc).join(" · ")}</p>`;
+    };
     dialog(
       "Analysis and caches",
-      `<div class="note-box">Browser audio decoding and waveform drawing run locally. BPM/key values on demo tracks are known generation annotations, not model outputs. Imported-track tempo/key must be entered manually. Gain estimation and automatic/variable beatgrids are not implemented.</div><div class="panel-controls"><button id="analysis-run">Analyze selected waveform</button><button id="analysis-stems">Stems queue fixture</button><button id="analysis-clear">Clear waveform cache</button></div><div class="settings-grid"><label class="setting">Analyze on import<input type="checkbox" checked></label><label class="setting">BPM range<select>${options(["70–140", "98–195", "140–280"], "70–140")}</select></label><label class="setting">Reanalyze key<input type="checkbox"></label><label class="setting">Reanalyze BPM / grid<input type="checkbox"></label></div><p class="muted">Analysis options above are reference-state fixtures. Protected beatgrids are skipped by the browser waveform queue.</p>`,
+      `<div class="note-box">BPM, major/minor key, level and initial constant beatgrid are measured from local decoded audio. Confidence is heuristic. Ambiguous results remain unknown. Existing values are preserved by default; locked files preserve key and beatgrid. No file tags or audio are rewritten.</div><div class="panel-controls"><button id="analysis-run">${s.analysis ? "Cancel analysis" : "Analyze selected track"}</button><button id="analysis-stems">Prepare actual stems</button><button id="analysis-clear">Clear waveform cache</button></div><p id="analysis-status" role="status" aria-live="polite">${esc(s.analysisStatus)}</p><div class="settings-grid"><label class="setting">Analyze on import<input id="analysis-auto" type="checkbox" ${prefs.onImport ? "checked" : ""}></label><label class="setting">Set key<input id="analysis-set-key" type="checkbox" ${prefs.analyzeKey !== false ? "checked" : ""}></label><label class="setting">Analyze BPM / beatgrid<input id="analysis-set-tempo" type="checkbox" ${prefs.analyzeTempo !== false ? "checked" : ""}></label><label class="setting">Minimum BPM<input id="analysis-min" type="number" min="30" max="299" value="${prefs.minBpm}"></label><label class="setting">Maximum BPM<input id="analysis-max" type="number" min="31" max="300" value="${prefs.maxBpm}"></label><label class="setting">Tempo/key window (seconds)<input id="analysis-seconds" type="number" min="6" max="1800" value="${prefs.maxSeconds}"></label><label class="setting">Replace existing key for this run<input id="analysis-replace-key" type="checkbox"></label><label class="setting">Replace existing BPM / unlocked grid for this run<input id="analysis-replace-tempo" type="checkbox"></label></div><div class="panel-controls"><button id="analysis-save">Save analysis settings</button><button id="analysis-gain">Apply suggested gain to focused deck</button></div><div id="analysis-result" class="note-box">${resultMarkup()}</div><p class="muted">Metadata and settings persist in this browser. Re-importing identical audio reconnects saved metadata by SHA-256. Audio bytes remain session-scoped. Real-music accuracy, variable grids and Serato equivalence remain unverified.</p>`,
       () => {
+        const saveSettings = () => {
+          const minBpm = Number($("#analysis-min").value),
+            maxBpm = Number($("#analysis-max").value),
+            maxSeconds = Number($("#analysis-seconds").value);
+          if (
+            ![minBpm, maxBpm, maxSeconds].every(Number.isFinite) ||
+            minBpm < 30 ||
+            maxBpm > 300 ||
+            minBpm >= maxBpm ||
+            maxSeconds < 6 ||
+            maxSeconds > 1800
+          ) {
+            notify(
+              "Use an increasing BPM range within 30–300 and a window of 6–1800 seconds.",
+            );
+            return false;
+          }
+          Object.assign(prefs, {
+            onImport: $("#analysis-auto").checked,
+            analyzeKey: $("#analysis-set-key").checked,
+            analyzeTempo: $("#analysis-set-tempo").checked,
+            minBpm,
+            maxBpm,
+            maxSeconds,
+          });
+          persist();
+          return true;
+        };
+        $("#analysis-save").onclick = () => {
+          if (saveSettings()) notify("Analysis settings saved.");
+        };
+        $("#analysis-auto").onchange = () => {
+          prefs.onImport = $("#analysis-auto").checked;
+          persist();
+        };
         $("#analysis-run").onclick = () => {
-          $("#modal").close();
-          $("#analyze").click();
+          if (s.analysis) return a.cancelAnalysis();
+          if (!t) return notify("Select a track first.");
+          if (saveSettings())
+            void a.enqueueAnalysis([t], {
+              replaceKey: $("#analysis-replace-key").checked,
+              replaceTempo: $("#analysis-replace-tempo").checked,
+            });
+          $("#analysis-replace-key").checked = false;
+          $("#analysis-replace-tempo").checked = false;
+        };
+        $("#analysis-gain").onclick = () => {
+          const d = s.decks[s.focus],
+            value = t?.analysisResult?.gain?.recommendedDb;
+          if (!d?.track || d.track !== t)
+            return notify(
+              "Load the selected track into the focused deck first.",
+            );
+          if (!Number.isFinite(value))
+            return notify("No measured gain recommendation is available.");
+          const linear = Math.min(2, Math.pow(10, value / 20));
+          d.trim = linear;
+          engine.mix(d.index, "trim", linear);
+          t.analysisGainDb = 20 * Math.log10(linear);
+          persist();
+          renderDecks();
+          notify(
+            `Deck ${d.index + 1} gain set to ${t.analysisGainDb.toFixed(2)} dB${value > 20 * Math.log10(2) ? " (limited by the deck's +6.02 dB range)" : ""}.`,
+          );
         };
         $("#analysis-stems").onclick = stems;
         $("#analysis-clear").onclick = () => {
           engine.buffers.clear();
           notify(
-            "Browser waveform cache cleared; playing sources retain their loaded audio.",
+            "Decoded waveform cache cleared; measurements and playing sources are preserved.",
           );
         };
+        if (analysisRefresh)
+          document.removeEventListener(
+            "openplay-analysis-update",
+            analysisRefresh,
+          );
+        analysisRefresh = () => {
+          if (!$("#analysis-result")) return;
+          $("#analysis-result").innerHTML = resultMarkup();
+          $("#analysis-run").textContent = s.analysis
+            ? "Cancel analysis"
+            : "Analyze selected track";
+        };
+        document.addEventListener("openplay-analysis-update", analysisRefresh);
       },
     );
   }
+
   function help() {
     dialog(
       "Help & keyboard controls",
@@ -1734,18 +1873,18 @@ export function createPanels(a) {
     history:
       "Real in-session play history, Prepare and CSV export. Live publication, persistent session editing and exact reference rules remain gaps.",
     analysis:
-      "Real browser decoding/overview. Automatic BPM/key/gain, variable grids and model analysis remain gaps.",
+      "Real local PCM BPM/key/level and initial constant-grid analysis with confidence, cancellation and protected metadata. Real-music accuracy, variable grids and reference equivalence remain gaps.",
     decks:
-      "Real local play/pause/seek, rate, cues, loops, beat jump and instant-double positioning. Reverse, Slip restoration, cue-hold and slicer now drive actual browser audio. DVS, keylock/Pitch Play, full Smart Sync and exact reference edge states remain gaps.",
+      "Real local play/pause/seek, rate, cues, loops, beat jump and instant-double positioning. Reverse, Slip restoration, cue-hold and slicer now drive actual browser audio. Keylock and independent pitch now use real buffered DSP; Pitch Play range/hold semantics, DVS and full Smart Sync remain under review.",
     mixer:
       "Real gain, EQ/filter, channel level and linear crossfade. Headphone routing, external mixing, exact power curves and native meters remain unverified.",
-    fx: "Four independent browser DSP processors with measured output and deck/sampler/master assignment. Other 55 names remain inventoried with DSP enable disabled; their schemas and all sonic-equivalence claims remain unresolved.",
+    fx: "All 59 named DJ processors now execute independent DSP, with real deck/sampler/master assignment. All 59 reference parameter strips are inventoried; observed control mappings, exact ranges/modes and sonic equivalence remain separately tracked.",
     sampler:
-      "Real Trigger/Hold/OnOff, repeat, pitch/gain/mute and cue/loop start on browser master. Key-preserving stretch, shared file gain semantics and native output routing remain gaps; see functional report for executed subsets.",
+      "Real Trigger/Hold/OnOff, repeat, pitch/gain/mute, cue/loop start, keylock and global browser mixer-bus routing. Actual-engine suite passed 17/17. Physical outputs, exact bend/nudge behavior and shared file gain semantics remain open.",
     stems:
-      "Interactive mute/effect and prepare/cancel/failure fixtures. No separation model or isolated audio.",
+      "Actual local SCNet/Spleeter preparation, four-source playback and finite stem exit effects. Live-history and restart regressions passed within the 19-check engine suite; separation quality, uninterrupted transport tails and hardware parity remain open.",
     scratch:
-      "Real slot assignment, deck load, cue start and previous-track return. Hardware pads/LED and keylock remain simulated.",
+      "Real slot assignment, deck load, cue start and previous-track return. Loaded decks use real keylock; hardware pads/LED and exact bank workflow parity remain unverified.",
     flip: "Timed cue/reverse automation drives real browser playback; six per-track saves and load/rename/delete controls. Native metadata, Censor, exact On behavior and timing parity remain open.",
     recording:
       "Real browser master stream capture/download. Native AIFF/WAV, pre-master/external inputs, auto-split and recovery are simulated or gaps.",
@@ -1827,7 +1966,7 @@ export function createPanels(a) {
   function system() {
     dialog(
       "System, services & evidence",
-      `<div class="device-card"><h3>Open Play · browser review candidate</h3><p>Independent HTML/CSS/JavaScript implementation. No native application has been built. No hosted backend, account, telemetry, model download or artificial local feature paywall is required.</p><div class="panel-controls"><button id="diagnostics-export">Export diagnostics</button><button id="diagnostics-offline">Check local state</button><button id="system-backup">Library backup</button></div><pre id="diagnostic-result" class="log">Audio context: ${engine.ctx?.state || "not created"}\nBrowser sample rate: ${engine.ctx?.sampleRate || "unknown"}\nDecoded buffers: ${engine.buffers.size}\nPrototype persistence: ${s.sessionSaved ? "saved this session" : "not yet saved this session"}\nNative build: NOT STARTED\nHardware proof: NOT ESTABLISHED</pre></div><div class="note-box">Installer/update/rollback, full crash recovery, long-session stability, multi-device drift, extension isolation and reproducible native builds remain acceptance work. Browser file access is session-scoped; imported audio bytes are not persisted. No source Serato binaries, artwork, models or code are shipped here.</div><p><a href="../FULL_BUILD_PLAN.md" target="_blank">Build plan</a> · <a href="../docs/research/SOURCE_CONFLICTS.md" target="_blank">Source conflicts</a> · <a href="../docs/research/HISTORICAL_GATING.md" target="_blank">Historical gating</a> · <a href="../docs/decisions/001-foundation-and-models.md" target="_blank">Foundation / model decision</a></p>`,
+      `<div class="device-card"><h3>Open Play · browser review candidate</h3><p>Independent HTML/CSS/JavaScript implementation. No native application has been built. Core playback needs no hosted backend, account, telemetry or artificial local feature paywall. Optional local stems require the documented model/environment setup.</p><div class="panel-controls"><button id="diagnostics-export">Export diagnostics</button><button id="diagnostics-offline">Check local state</button><button id="system-backup">Library backup</button></div><pre id="diagnostic-result" class="log">Audio context: ${engine.ctx?.state || "not created"}\nBrowser sample rate: ${engine.ctx?.sampleRate || "unknown"}\nDecoded buffers: ${engine.buffers.size}\nPrototype persistence: ${s.sessionSaved ? "saved this session" : "not yet saved this session"}\nNative build: NOT STARTED\nHardware proof: NOT ESTABLISHED</pre></div><div class="note-box">Installer/update/rollback, full crash recovery, long-session stability, multi-device drift, extension isolation and reproducible native builds remain acceptance work. Browser file access is session-scoped; imported audio bytes are not persisted. No source Serato binaries, artwork, models or code are shipped here.</div><p><a href="../FULL_BUILD_PLAN.md" target="_blank">Build plan</a> · <a href="../docs/research/SOURCE_CONFLICTS.md" target="_blank">Source conflicts</a> · <a href="../docs/research/HISTORICAL_GATING.md" target="_blank">Historical gating</a> · <a href="../docs/decisions/001-foundation-and-models.md" target="_blank">Foundation / model decision</a></p>`,
       () => {
         $("#diagnostics-export").onclick = () =>
           download(

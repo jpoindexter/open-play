@@ -1,0 +1,147 @@
+Sampler signal integration
+
+Real AudioEngine, Key Lock workers, mixer bus routing, and master FFT/RMS. Speaker output is disconnected. Synthetic audio verifies defined behavior, not reference sonic equivalence.
+
+Run sampler integration checks
+17/17 passed
+[
+  {
+    "name": "Sampler Key Lock preserves440Hz at1.5x speed",
+    "passed": true,
+    "evidence": {
+      "frequency": 439.453125,
+      "db": -43.290809631347656,
+      "renderedDuration": 5.333333333333333
+    }
+  },
+  {
+    "name": "Sampler timeline advances at requested speed",
+    "passed": true,
+    "evidence": {
+      "advance": 0.30399999999999994
+    }
+  },
+  {
+    "name": "Live keylocked speed update preserves440Hz and playback",
+    "passed": true,
+    "evidence": {
+      "frequency": 439.453125,
+      "db": -43.3133659362793
+    }
+  },
+  {
+    "name": "Disabling Key Lock restores coupled speed/pitch",
+    "passed": true,
+    "evidence": {
+      "frequency": 662.109375,
+      "db": -43.75519561767578
+    }
+  },
+  {
+    "name": "Live sampler gain reaches actual master silence",
+    "passed": true,
+    "evidence": {
+      "rms": 6.900918416870206e-7
+    }
+  },
+  {
+    "name": "Keylocked saved-loop coordinates wrap within original timeline",
+    "passed": true,
+    "evidence": {
+      "frequency": 439.453125,
+      "db": -43.28960037231445,
+      "position": 2.36,
+      "loopStart": 1.3333333333333333,
+      "loopEnd": 2
+    }
+  },
+  {
+    "name": "Cue offset and time stretch produce expected actual end event",
+    "passed": true,
+    "evidence": {
+      "elapsed": 0.5013333333333336,
+      "expected": 0.5
+    }
+  },
+  {
+    "name": "Hold release during preparation cancels without zombie audio",
+    "passed": true,
+    "evidence": {
+      "returned": false,
+      "voices": 0,
+      "requests": 0
+    }
+  },
+  {
+    "name": "Hold release aborts actual in-flight Key Lock rendering",
+    "passed": true,
+    "evidence": {
+      "returned": false,
+      "voices": 0,
+      "requests": 0
+    }
+  },
+  {
+    "name": "Gain change during preparation is applied before first sampler audio",
+    "passed": true,
+    "evidence": {
+      "rms": 0
+    }
+  },
+  {
+    "name": "Latest speed request wins during sampler preparation",
+    "passed": true,
+    "evidence": {
+      "frequency": 439.453125,
+      "db": -43.28917694091797,
+      "rate": 1.7
+    }
+  },
+  {
+    "name": "Emergency all-stop cancels every pending sampler slot",
+    "passed": true,
+    "evidence": {
+      "voices": 0,
+      "requests": 0,
+      "rms": 0,
+      "analyserWindowMs": 170.66666666666666,
+      "waitedMs": 176
+    }
+  },
+  {
+    "name": "Sampler Deck1 bus obeys Deck1 fader",
+    "passed": true,
+    "evidence": {
+      "rms": 6.135098984925244e-7
+    }
+  },
+  {
+    "name": "Sampler Master bus bypasses Deck1 fader",
+    "passed": true,
+    "evidence": {
+      "rms": 0.0233333074833288
+    }
+  },
+  {
+    "name": "Sampler routing survives FX graph reconstruction",
+    "passed": true,
+    "evidence": {
+      "rms": 0
+    }
+  },
+  {
+    "name": "Sampler Deck1 bus reaches master when fader opens",
+    "passed": true,
+    "evidence": {
+      "rms": 0.018672364888539125
+    }
+  },
+  {
+    "name": "Stop all leaves no active sampler sources or preparation",
+    "passed": true,
+    "evidence": {
+      "voices": 0,
+      "requests": 0
+    }
+  }
+]

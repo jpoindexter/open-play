@@ -1,0 +1,125 @@
+13/13 passed
+[
+  {
+    "name": "Middle+1 pad plays selected cue at466Hz rather than file start",
+    "passed": true,
+    "evidence": {
+      "frequency": 468.75,
+      "db": -37.880767822265625,
+      "position": 2.294,
+      "shift": 1
+    }
+  },
+  {
+    "name": "Paused Pitch Play release returns cue and stops actual audio",
+    "passed": true,
+    "evidence": {
+      "playing": false,
+      "processing": false,
+      "position": 2,
+      "rms": 0
+    }
+  },
+  {
+    "name": "Release during actual pitch rendering cancels without zombie playback",
+    "passed": true,
+    "evidence": {
+      "playing": false,
+      "processing": false,
+      "voices": 0
+    }
+  },
+  {
+    "name": "Earlier pad release cannot stop newer pitched note",
+    "passed": true,
+    "evidence": {
+      "frequency": 492.1875,
+      "db": -38.099761962890625
+    }
+  },
+  {
+    "name": "Up range pad4 performs actual+7 semitones",
+    "passed": true,
+    "evidence": {
+      "frequency": 662.109375,
+      "db": -37.99738311767578,
+      "shift": 7
+    }
+  },
+  {
+    "name": "Down range pad5 performs actual−7 semitones",
+    "passed": true,
+    "evidence": {
+      "frequency": 292.96875,
+      "db": -37.40025329589844,
+      "shift": -7
+    }
+  },
+  {
+    "name": "Play latch keeps a paused Pitch Play audition running after release",
+    "passed": true,
+    "evidence": {
+      "latched": true,
+      "playing": true
+    }
+  },
+  {
+    "name": "Already-playing deck continues pitched transport after pad release",
+    "passed": true,
+    "evidence": {
+      "playing": true,
+      "advance": 0.18733333333333357
+    }
+  },
+  {
+    "name": "Shift-empty-pad creates and selects cue without starting audio",
+    "passed": true,
+    "evidence": {
+      "cue": 5,
+      "position": 3.25,
+      "playing": false
+    }
+  },
+  {
+    "name": "Shift-existing-pad selects without deleting cue",
+    "passed": true,
+    "evidence": {
+      "cue": 0,
+      "position": 2
+    }
+  },
+  {
+    "name": "Harmonic Key Sync applies nearest compatible actual pitch",
+    "passed": true,
+    "evidence": {
+      "frequency": 416.015625,
+      "db": -37.307342529296875,
+      "plan": {
+        "ok": true,
+        "semitones": -1,
+        "key": "Abm",
+        "targets": [
+          1
+        ],
+        "policy": "Same Camelot cell, adjacent same-mode cells, or relative major/minor; nearest semitone shift, upward tie."
+      }
+    }
+  },
+  {
+    "name": "Key reset restores original pitch without stopping transport",
+    "passed": true,
+    "evidence": {
+      "frequency": 439.453125,
+      "db": -37.202735900878906
+    }
+  },
+  {
+    "name": "Track-load cancellation invalidates pending Pitch Play ownership",
+    "passed": true,
+    "evidence": {
+      "playing": false,
+      "processing": false,
+      "voices": 0
+    }
+  }
+]

@@ -1,7 +1,7 @@
 # Current handoff: Codex to Claude
 
-Read [the complete independent audit packet](codex-to-claude-completeness-audit.md). It contains the original full prompt, later user authority, pinned candidate, exact paths and executed evidence.
+Read [the complete independent audit packet](codex-to-claude-completeness-audit.md). It preserves the full original prompt, later user authority, exact paths and executed evidence.
 
 Start in `/Users/jasonpoindexter/Documents/GitHub/Open Play`. Independently audit Serato feature/design/functionality completeness and report what Codex missed. Review only: no native build, no automatic acceptance, no public publication. Return `handoffs/claude-to-codex-completeness-audit.md`.
 
-Current functional candidate: `b8c1afd48630f005d24f56efd30a0d5707c3655a`. Start with the independent reference checklist, then run the 20-check browser harness and challenge the newly implemented behavior. Full parity and native approval remain open.
+Current candidate: CHECKPOINT_PENDING. Browser DSP checkpoint includes 59 DJ effects, actual local SCNet stems, Worker keylock, sampler, Pitch Play and analysis. Read `docs/prototype/DSP_FUNCTIONAL_REVIEW.md` for tested paths and limitations. Full parity remains NOT PASSED; native approval remains absent. The active goal continues beyond this checkpoint.

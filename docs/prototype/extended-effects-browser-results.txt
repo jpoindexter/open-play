@@ -1,0 +1,584 @@
+Extended FX audio verification
+
+This renders the actual AudioWorklet graph without speaker output. It verifies independent processors, not Serato sonic equivalence or physical hardware.
+
+Run 59 worklet effects Run live-update lifecycle checks
+
+5/5 live-update lifecycle checks passed. LPF: pass; Delay: pass; Reverb: pass; Wah Filter: pass; Echo to HPF same-slot replacement: pass
+
+[
+  {
+    "name": "LPF",
+    "status": "pass",
+    "tailRms": 0.21276640654364914,
+    "ordinaryUpdatePreserved": true
+  },
+  {
+    "name": "Delay",
+    "status": "pass",
+    "tailRms": 0.005031424189597743,
+    "ordinaryUpdatePreserved": true
+  },
+  {
+    "name": "Reverb",
+    "status": "pass",
+    "tailRms": 0.002399769401353835,
+    "ordinaryUpdatePreserved": true
+  },
+  {
+    "name": "Wah Filter",
+    "status": "pass",
+    "tailRms": 0.19821217900548666,
+    "ordinaryUpdatePreserved": true
+  },
+  {
+    "name": "Echo to HPF same-slot replacement",
+    "status": "pass",
+    "low": 0.0019773162347573254,
+    "high": 0.19972704757759796,
+    "processorErrors": 0
+  }
+]
+
+59/59 passed; 0 failed. Actual AudioWorklet rendering; independent DSP only.
+
+Effect	Result	Evidence
+Echo	PASS	AudioWorklet rendered 72000 frames; RMS 0.41464; dry difference 0.32106
+Low Cut Echo	PASS	AudioWorklet rendered 72000 frames; RMS 0.31650; dry difference 0.31503
+Multi Tap Delay	PASS	AudioWorklet rendered 72000 frames; RMS 0.06241; dry difference 0.11538
+Ping Pong Delay	PASS	AudioWorklet rendered 72000 frames; RMS 0.12596; dry difference 0.11147
+Spiral Echo	PASS	AudioWorklet rendered 72000 frames; RMS 0.10768; dry difference 0.17091
+Version Echo	PASS	AudioWorklet rendered 72000 frames; RMS 0.27181; dry difference 0.25255
+Bit Crush	PASS	AudioWorklet rendered 72000 frames; RMS 0.16912; dry difference 0.13135
+Distortion	PASS	AudioWorklet rendered 72000 frames; RMS 0.64822; dry difference 0.51851
+Lo-Fi Crush	PASS	AudioWorklet rendered 72000 frames; RMS 0.16446; dry difference 0.08126
+Lo-Fi Warmth	PASS	AudioWorklet rendered 72000 frames; RMS 0.16215; dry difference 0.04681
+Sizzle Crush	PASS	AudioWorklet rendered 72000 frames; RMS 0.26796; dry difference 0.15064
+Combo Filter	PASS	AudioWorklet rendered 72000 frames; RMS 0.00012; dry difference 0.13288
+Drive Filter	PASS	AudioWorklet rendered 72000 frames; RMS 0.52124; dry difference 0.42552
+HPF	PASS	AudioWorklet rendered 72000 frames; RMS 0.00097; dry difference 0.13300
+Infinity Filter	PASS	AudioWorklet rendered 72000 frames; RMS 0.02311; dry difference 0.12413
+LFO Filter	PASS	AudioWorklet rendered 72000 frames; RMS 0.14244; dry difference 0.08158
+Repeater	PASS	AudioWorklet rendered 72000 frames; RMS 0.11670; dry difference 0.04794
+Retro Halftime	PASS	AudioWorklet rendered 72000 frames; RMS 0.11032; dry difference 0.13393
+Roll	PASS	AudioWorklet rendered 72000 frames; RMS 0.13248; dry difference 0.04460
+Slip Roll	PASS	AudioWorklet rendered 72000 frames; RMS 0.13251; dry difference 0.04658
+Stretch	PASS	AudioWorklet rendered 72000 frames; RMS 0.10989; dry difference 0.13370
+Stutter Repeater	PASS	AudioWorklet rendered 72000 frames; RMS 0.10872; dry difference 0.08420
+Stutter Roll	PASS	AudioWorklet rendered 72000 frames; RMS 0.10826; dry difference 0.08355
+Chorus Basic	PASS	AudioWorklet rendered 72000 frames; RMS 0.09329; dry difference 0.16577
+Chorus Quad	PASS	AudioWorklet rendered 72000 frames; RMS 0.06364; dry difference 0.14677
+Falling Flanger	PASS	AudioWorklet rendered 72000 frames; RMS 0.07879; dry difference 0.08794
+Flanger	PASS	AudioWorklet rendered 72000 frames; RMS 0.24331; dry difference 0.19234
+Infinity Flanger	PASS	AudioWorklet rendered 72000 frames; RMS 0.06659; dry difference 0.07679
+Pansformer	PASS	AudioWorklet rendered 72000 frames; RMS 0.09529; dry difference 0.09369
+Phaser	PASS	AudioWorklet rendered 72000 frames; RMS 0.14128; dry difference 0.13936
+Pulse Spiral	PASS	AudioWorklet rendered 72000 frames; RMS 0.08177; dry difference 0.15655
+Spiral	PASS	AudioWorklet rendered 72000 frames; RMS 0.10555; dry difference 0.16996
+Transform	PASS	AudioWorklet rendered 72000 frames; RMS 0.09529; dry difference 0.09369
+Tremolo	PASS	AudioWorklet rendered 72000 frames; RMS 0.08111; dry difference 0.08107
+Brake Echo	PASS	AudioWorklet rendered 72000 frames; RMS 0.07351; dry difference 0.14883
+Brake Rewind	PASS	AudioWorklet rendered 72000 frames; RMS 0.06213; dry difference 0.14503
+Braker	PASS	AudioWorklet rendered 72000 frames; RMS 0.06251; dry difference 0.14487
+Clean Echo Out	PASS	AudioWorklet rendered 72000 frames; RMS 0.05833; dry difference 0.08885
+Clean Rollout	PASS	AudioWorklet rendered 72000 frames; RMS 0.06262; dry difference 0.10195
+Combo Fade Echo	PASS	AudioWorklet rendered 72000 frames; RMS 0.02208; dry difference 0.13614
+Echo Out	PASS	AudioWorklet rendered 72000 frames; RMS 0.04505; dry difference 0.10277
+Epic Stretch Rewind	PASS	AudioWorklet rendered 72000 frames; RMS 0.05743; dry difference 0.14449
+Roll Out	PASS	AudioWorklet rendered 72000 frames; RMS 0.05445; dry difference 0.14297
+Short Brake Echo	PASS	AudioWorklet rendered 72000 frames; RMS 0.03671; dry difference 0.13610
+Slow Roll Out	PASS	AudioWorklet rendered 72000 frames; RMS 0.08740; dry difference 0.15750
+Turntable Brake	PASS	AudioWorklet rendered 72000 frames; RMS 0.06231; dry difference 0.14622
+Bright Reverb	PASS	AudioWorklet rendered 72000 frames; RMS 0.08776; dry difference 0.16620
+Empty Mall Verb	PASS	AudioWorklet rendered 72000 frames; RMS 0.13500; dry difference 0.19580
+Epic Reverb	PASS	AudioWorklet rendered 72000 frames; RMS 0.14407; dry difference 0.09657
+Epic Reverb Drop	PASS	AudioWorklet rendered 72000 frames; RMS 0.03593; dry difference 0.13947
+Next Door Verb	PASS	AudioWorklet rendered 72000 frames; RMS 0.08679; dry difference 0.18395
+Vast Reverb	PASS	AudioWorklet rendered 72000 frames; RMS 0.11092; dry difference 0.19039
+Vast Verb Drop	PASS	AudioWorklet rendered 72000 frames; RMS 0.04088; dry difference 0.14048
+Infinity Tone	PASS	AudioWorklet rendered 72000 frames; RMS 0.07861; dry difference 0.15442
+Space Invader	PASS	AudioWorklet rendered 72000 frames; RMS 0.09413; dry difference 0.16278
+Channel Filter	PASS	AudioWorklet rendered 72000 frames; RMS 0.12697; dry difference 0.07775
+Channel Dub Echo	PASS	AudioWorklet rendered 72000 frames; RMS 0.39531; dry difference 0.29177
+Channel Space	PASS	AudioWorklet rendered 72000 frames; RMS 0.09664; dry difference 0.18218
+Channel Noise	PASS	AudioWorklet rendered 72000 frames; RMS 0.06765; dry difference 0.14956
+
+{
+  "date": "2026-10-16T14:58:36.215Z",
+  "passed": 59,
+  "failed": 0,
+  "records": [
+    {
+      "name": "Echo",
+      "status": "pass",
+      "sampleRate": 24000,
+      "frames": 72000,
+      "rms": 0.41463703282556297,
+      "difference": 0.3210615012169304
+    },
+    {
+      "name": "Low Cut Echo",
+      "status": "pass",
+      "sampleRate": 24000,
+      "frames": 72000,
+      "rms": 0.3165038439037016,
+      "difference": 0.3150321639921371
+    },
+    {
+      "name": "Multi Tap Delay",
+      "status": "pass",
+      "sampleRate": 24000,
+      "frames": 72000,
+      "rms": 0.06241498837508744,
+      "difference": 0.11538158493565485
+    },
+    {
+      "name": "Ping Pong Delay",
+      "status": "pass",
+      "sampleRate": 24000,
+      "frames": 72000,
+      "rms": 0.12595839028463265,
+      "difference": 0.1114685077051876
+    },
+    {
+      "name": "Spiral Echo",
+      "status": "pass",
+      "sampleRate": 24000,
+      "frames": 72000,
+      "rms": 0.10768111507646687,
+      "difference": 0.1709076755461762
+    },
+    {
+      "name": "Version Echo",
+      "status": "pass",
+      "sampleRate": 24000,
+      "frames": 72000,
+      "rms": 0.2718128162222366,
+      "difference": 0.2525534422643174
+    },
+    {
+      "name": "Bit Crush",
+      "status": "pass",
+      "sampleRate": 24000,
+      "frames": 72000,
+      "rms": 0.16911635838668063,
+      "difference": 0.13135390249584009
+    },
+    {
+      "name": "Distortion",
+      "status": "pass",
+      "sampleRate": 24000,
+      "frames": 72000,
+      "rms": 0.6482215165856398,
+      "difference": 0.5185095473236245
+    },
+    {
+      "name": "Lo-Fi Crush",
+      "status": "pass",
+      "sampleRate": 24000,
+      "frames": 72000,
+      "rms": 0.164460330892314,
+      "difference": 0.08125895358765024
+    },
+    {
+      "name": "Lo-Fi Warmth",
+      "status": "pass",
+      "sampleRate": 24000,
+      "frames": 72000,
+      "rms": 0.1621506621076285,
+      "difference": 0.0468078778033606
+    },
+    {
+      "name": "Sizzle Crush",
+      "status": "pass",
+      "sampleRate": 24000,
+      "frames": 72000,
+      "rms": 0.26795851005311994,
+      "difference": 0.15063717142292635
+    },
+    {
+      "name": "Combo Filter",
+      "status": "pass",
+      "sampleRate": 24000,
+      "frames": 72000,
+      "rms": 0.00012477573844939892,
+      "difference": 0.13288445005409816
+    },
+    {
+      "name": "Drive Filter",
+      "status": "pass",
+      "sampleRate": 24000,
+      "frames": 72000,
+      "rms": 0.5212385917489859,
+      "difference": 0.42552318114179327
+    },
+    {
+      "name": "HPF",
+      "status": "pass",
+      "sampleRate": 24000,
+      "frames": 72000,
+      "rms": 0.0009723648255675688,
+      "difference": 0.13300462909245947
+    },
+    {
+      "name": "Infinity Filter",
+      "status": "pass",
+      "sampleRate": 24000,
+      "frames": 72000,
+      "rms": 0.023113623722218275,
+      "difference": 0.12413332909100154
+    },
+    {
+      "name": "LFO Filter",
+      "status": "pass",
+      "sampleRate": 24000,
+      "frames": 72000,
+      "rms": 0.14243835353595966,
+      "difference": 0.0815774638720989
+    },
+    {
+      "name": "Repeater",
+      "status": "pass",
+      "sampleRate": 24000,
+      "frames": 72000,
+      "rms": 0.1166982119748839,
+      "difference": 0.04794403764644773
+    },
+    {
+      "name": "Retro Halftime",
+      "status": "pass",
+      "sampleRate": 24000,
+      "frames": 72000,
+      "rms": 0.11031793474467415,
+      "difference": 0.13393083708722622
+    },
+    {
+      "name": "Roll",
+      "status": "pass",
+      "sampleRate": 24000,
+      "frames": 72000,
+      "rms": 0.13247956249516274,
+      "difference": 0.04460174950256141
+    },
+    {
+      "name": "Slip Roll",
+      "status": "pass",
+      "sampleRate": 24000,
+      "frames": 72000,
+      "rms": 0.13251124548219792,
+      "difference": 0.046578472861082916
+    },
+    {
+      "name": "Stretch",
+      "status": "pass",
+      "sampleRate": 24000,
+      "frames": 72000,
+      "rms": 0.10988828341855923,
+      "difference": 0.1336991625187133
+    },
+    {
+      "name": "Stutter Repeater",
+      "status": "pass",
+      "sampleRate": 24000,
+      "frames": 72000,
+      "rms": 0.10872451909185728,
+      "difference": 0.08419689569939207
+    },
+    {
+      "name": "Stutter Roll",
+      "status": "pass",
+      "sampleRate": 24000,
+      "frames": 72000,
+      "rms": 0.10826081956818208,
+      "difference": 0.08354764521536748
+    },
+    {
+      "name": "Chorus Basic",
+      "status": "pass",
+      "sampleRate": 24000,
+      "frames": 72000,
+      "rms": 0.09328849746362107,
+      "difference": 0.1657688678581554
+    },
+    {
+      "name": "Chorus Quad",
+      "status": "pass",
+      "sampleRate": 24000,
+      "frames": 72000,
+      "rms": 0.06364166160127058,
+      "difference": 0.14676899594990334
+    },
+    {
+      "name": "Falling Flanger",
+      "status": "pass",
+      "sampleRate": 24000,
+      "frames": 72000,
+      "rms": 0.07879379199403327,
+      "difference": 0.08793671707391662
+    },
+    {
+      "name": "Flanger",
+      "status": "pass",
+      "sampleRate": 24000,
+      "frames": 72000,
+      "rms": 0.24330974807783814,
+      "difference": 0.19234308561440522
+    },
+    {
+      "name": "Infinity Flanger",
+      "status": "pass",
+      "sampleRate": 24000,
+      "frames": 72000,
+      "rms": 0.06658990325574268,
+      "difference": 0.07678552717272012
+    },
+    {
+      "name": "Pansformer",
+      "status": "pass",
+      "sampleRate": 24000,
+      "frames": 72000,
+      "rms": 0.0952870820171149,
+      "difference": 0.09369335976851993
+    },
+    {
+      "name": "Phaser",
+      "status": "pass",
+      "sampleRate": 24000,
+      "frames": 72000,
+      "rms": 0.14128263537599445,
+      "difference": 0.1393591899649504
+    },
+    {
+      "name": "Pulse Spiral",
+      "status": "pass",
+      "sampleRate": 24000,
+      "frames": 72000,
+      "rms": 0.08176695045561554,
+      "difference": 0.15654805040179032
+    },
+    {
+      "name": "Spiral",
+      "status": "pass",
+      "sampleRate": 24000,
+      "frames": 72000,
+      "rms": 0.1055463133573968,
+      "difference": 0.16996198110145377
+    },
+    {
+      "name": "Transform",
+      "status": "pass",
+      "sampleRate": 24000,
+      "frames": 72000,
+      "rms": 0.0952870820171149,
+      "difference": 0.09369335976851993
+    },
+    {
+      "name": "Tremolo",
+      "status": "pass",
+      "sampleRate": 24000,
+      "frames": 72000,
+      "rms": 0.08111222092864398,
+      "difference": 0.08107001959891198
+    },
+    {
+      "name": "Brake Echo",
+      "status": "pass",
+      "sampleRate": 24000,
+      "frames": 72000,
+      "rms": 0.07350695150465877,
+      "difference": 0.1488303806513302
+    },
+    {
+      "name": "Brake Rewind",
+      "status": "pass",
+      "sampleRate": 24000,
+      "frames": 72000,
+      "rms": 0.06213183122565899,
+      "difference": 0.1450317995395315
+    },
+    {
+      "name": "Braker",
+      "status": "pass",
+      "sampleRate": 24000,
+      "frames": 72000,
+      "rms": 0.06250776292762295,
+      "difference": 0.1448677551349326
+    },
+    {
+      "name": "Clean Echo Out",
+      "status": "pass",
+      "sampleRate": 24000,
+      "frames": 72000,
+      "rms": 0.05832695355040321,
+      "difference": 0.08885462389199858
+    },
+    {
+      "name": "Clean Rollout",
+      "status": "pass",
+      "sampleRate": 24000,
+      "frames": 72000,
+      "rms": 0.06261632650031004,
+      "difference": 0.10194926268974683
+    },
+    {
+      "name": "Combo Fade Echo",
+      "status": "pass",
+      "sampleRate": 24000,
+      "frames": 72000,
+      "rms": 0.022077361675703965,
+      "difference": 0.13614096970110962
+    },
+    {
+      "name": "Echo Out",
+      "status": "pass",
+      "sampleRate": 24000,
+      "frames": 72000,
+      "rms": 0.04504815609409967,
+      "difference": 0.10277117135995636
+    },
+    {
+      "name": "Epic Stretch Rewind",
+      "status": "pass",
+      "sampleRate": 24000,
+      "frames": 72000,
+      "rms": 0.05743396721612463,
+      "difference": 0.1444928957279121
+    },
+    {
+      "name": "Roll Out",
+      "status": "pass",
+      "sampleRate": 24000,
+      "frames": 72000,
+      "rms": 0.05444870250716235,
+      "difference": 0.14296508603351465
+    },
+    {
+      "name": "Short Brake Echo",
+      "status": "pass",
+      "sampleRate": 24000,
+      "frames": 72000,
+      "rms": 0.0367057165821613,
+      "difference": 0.13610312093581753
+    },
+    {
+      "name": "Slow Roll Out",
+      "status": "pass",
+      "sampleRate": 24000,
+      "frames": 72000,
+      "rms": 0.0873967680082963,
+      "difference": 0.15749584349416113
+    },
+    {
+      "name": "Turntable Brake",
+      "status": "pass",
+      "sampleRate": 24000,
+      "frames": 72000,
+      "rms": 0.062314727817231526,
+      "difference": 0.1462180735014745
+    },
+    {
+      "name": "Bright Reverb",
+      "status": "pass",
+      "sampleRate": 24000,
+      "frames": 72000,
+      "rms": 0.08775639011067869,
+      "difference": 0.16619667475555147
+    },
+    {
+      "name": "Empty Mall Verb",
+      "status": "pass",
+      "sampleRate": 24000,
+      "frames": 72000,
+      "rms": 0.1350041682122102,
+      "difference": 0.1957953123057317
+    },
+    {
+      "name": "Epic Reverb",
+      "status": "pass",
+      "sampleRate": 24000,
+      "frames": 72000,
+      "rms": 0.14407086957279078,
+      "difference": 0.09657098648495566
+    },
+    {
+      "name": "Epic Reverb Drop",
+      "status": "pass",
+      "sampleRate": 24000,
+      "frames": 72000,
+      "rms": 0.035925395935783026,
+      "difference": 0.13946809646260153
+    },
+    {
+      "name": "Next Door Verb",
+      "status": "pass",
+      "sampleRate": 24000,
+      "frames": 72000,
+      "rms": 0.08679315616575772,
+      "difference": 0.1839468779431075
+    },
+    {
+      "name": "Vast Reverb",
+      "status": "pass",
+      "sampleRate": 24000,
+      "frames": 72000,
+      "rms": 0.11091520610744052,
+      "difference": 0.1903862530605205
+    },
+    {
+      "name": "Vast Verb Drop",
+      "status": "pass",
+      "sampleRate": 24000,
+      "frames": 72000,
+      "rms": 0.04088403977824904,
+      "difference": 0.14048131051571558
+    },
+    {
+      "name": "Infinity Tone",
+      "status": "pass",
+      "sampleRate": 24000,
+      "frames": 72000,
+      "rms": 0.07861417178747285,
+      "difference": 0.15442440002921423
+    },
+    {
+      "name": "Space Invader",
+      "status": "pass",
+      "sampleRate": 24000,
+      "frames": 72000,
+      "rms": 0.09413093874547143,
+      "difference": 0.16277819818579703
+    },
+    {
+      "name": "Channel Filter",
+      "status": "pass",
+      "sampleRate": 24000,
+      "frames": 72000,
+      "rms": 0.12697381640017114,
+      "difference": 0.07775194829958924
+    },
+    {
+      "name": "Channel Dub Echo",
+      "status": "pass",
+      "sampleRate": 24000,
+      "frames": 72000,
+      "rms": 0.3953059033984436,
+      "difference": 0.29177434575395006
+    },
+    {
+      "name": "Channel Space",
+      "status": "pass",
+      "sampleRate": 24000,
+      "frames": 72000,
+      "rms": 0.0966375200453133,
+      "difference": 0.18218479026518122
+    },
+    {
+      "name": "Channel Noise",
+      "status": "pass",
+      "sampleRate": 24000,
+      "frames": 72000,
+      "rms": 0.06764944086306429,
+      "difference": 0.14955699595527477
+    }
+  ]
+}

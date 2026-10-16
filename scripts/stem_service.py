@@ -1,0 +1,150 @@
+"""Loopback-only job adapter for the browser prototype's local separation worker."""
+from concurrent.futures import ThreadPoolExecutor
+from pathlib import Path
+import hashlib
+import json
+import os
+import signal
+import subprocess
+import threading
+import uuid
+
+ROOT = Path(__file__).resolve().parents[1]
+JOBS_ROOT = ROOT / 'local-evidence/stem-jobs'
+MAX_BYTES = 128 * 1024 * 1024
+
+
+class StemJobs:
+    def __init__(self):
+        self.jobs = {}
+        self.lock = threading.RLock()
+        self.pool = ThreadPoolExecutor(max_workers=1, thread_name_prefix='stem-worker')
+
+    def runtime(self, backend="scnet"):
+        # Backend/interpreter selection is explicit and never installs anything.
+        if backend not in {'scnet', 'spleeter'}:
+            raise ValueError('Unknown local separation model.')
+        environment = 'spleeter-venv' if backend == 'spleeter' else 'venv'
+        return (ROOT / f'local-evidence/stems-runtime/{environment}/bin/python', ['--backend', backend])
+
+    def create(self, data, backend="scnet"):
+        if len(data) < 44 or data[:4] != b'RIFF' or data[8:12] != b'WAVE':
+            raise ValueError('Upload must be a decoded WAV file.')
+        key = hashlib.sha256(backend.encode() + data).hexdigest()
+        with self.lock:
+            for job in self.jobs.values():
+                if job['hash'] == key and job['state'] == 'complete':
+                    return self.public(job)
+            if sum(j['state'] in {'queued', 'running'} for j in self.jobs.values()) >= 4:
+                raise ValueError('Preparation queue is full. Wait or cancel a job.')
+            interpreter, _ = self.runtime(backend)
+            if not interpreter.is_file():
+                raise ValueError('Local separation runtime is not installed. See STEMS_RUNTIME_EVALUATION.md.')
+            ident = uuid.uuid4().hex
+            directory = JOBS_ROOT / ident
+            directory.mkdir(parents=True)
+            (directory / 'input.wav').write_bytes(data)
+            job = {'id': ident, 'hash': key, 'state': 'queued', 'directory': directory,
+                   'process': None, 'error': None, 'backend': backend}
+            self.jobs[ident] = job
+            self.pool.submit(self.run, job)
+            return self.public(job)
+
+    def run(self, job):
+        directory = job['directory']
+        interpreter, options = self.runtime(job['backend'])
+        with self.lock:
+            if job['state'] == 'cancelled':
+                return
+            job['state'] = 'running'
+            with (directory / 'worker.log').open('wb') as log:
+                try:
+                    process = subprocess.Popen([str(interpreter), str(ROOT / 'scripts/stem_worker.py'),
+                        str(directory / 'input.wav'), str(directory / 'output'),
+                        '--status', str(directory / 'status.json'), '--max-seconds', '600', *options],
+                        stdout=log, stderr=log, start_new_session=True)
+                    job['process'] = process
+                except OSError as error:
+                    job.update(state='failed', error=str(error))
+                    return
+        try:
+            result = process.wait(timeout=900)
+            with self.lock:
+                if job['state'] == 'cancelled':
+                    return
+                if result == 0 and (directory / 'output/manifest.json').is_file():
+                    job['state'] = 'complete'
+                else:
+                    status = self.read_json(directory / 'status.json')
+                    job.update(state='failed', error=status.get('error', 'Local separation failed.'))
+        except subprocess.TimeoutExpired:
+            self.cancel(job['id'])
+            with self.lock:
+                job.update(state='failed', error='Preparation exceeded 15 minutes.')
+        finally:
+            with self.lock:
+                job['process'] = None
+
+    @staticmethod
+    def read_json(path):
+        try:
+            return json.loads(path.read_text())
+        except (OSError, ValueError):
+            return {}
+
+    def public(self, job):
+        status = self.read_json(job['directory'] / 'status.json') if job['state'] == 'running' else {}
+        value = {'id': job['id'], 'state': job['state'], 'stage': status.get('state', job['state']),
+                 'progress': status.get('progress', 1 if job['state'] == 'complete' else 0),
+                 'error': job['error']}
+        if job['state'] == 'complete':
+            manifest = self.read_json(job['directory'] / 'output/manifest.json')
+            value.update(model=manifest.get('model'), duration=manifest.get('duration'),
+                         timing=manifest.get('timing'), license=manifest.get('weight_redistribution'))
+            value['stems'] = [{'name': s['name'], 'url': f"/api/stems/{job['id']}/{s['name']}.wav"}
+                              for s in manifest.get('stems', [])]
+        return value
+
+    def get(self, ident):
+        with self.lock:
+            return self.public(self.jobs[ident]) if ident in self.jobs else None
+
+    def cancel(self, ident):
+        process = None
+        with self.lock:
+            job = self.jobs.get(ident)
+            if not job:
+                return None
+            if job['state'] in {'queued', 'running'}:
+                job['state'] = 'cancelled'
+                process = job['process']
+                if process and process.poll() is None:
+                    try:
+                        os.killpg(process.pid, signal.SIGTERM)
+                    except ProcessLookupError:
+                        pass
+        # Reap outside the lock; the worker completion path acquires the same lock.
+        if process:
+            try:
+                process.wait(timeout=2)
+            except subprocess.TimeoutExpired:
+                try:
+                    os.killpg(process.pid, signal.SIGKILL)
+                except ProcessLookupError:
+                    pass
+                process.wait(timeout=2)
+        with self.lock:
+            return self.public(job)
+
+    def file(self, ident, name):
+        with self.lock:
+            job = self.jobs.get(ident)
+            if not job or job['state'] != 'complete' or name not in {'vocals.wav', 'other.wav', 'bass.wav', 'drums.wav'}:
+                return None
+            path = job['directory'] / 'output' / name
+            return path if path.is_file() else None
+
+    def close(self):
+        for ident in list(self.jobs):
+            self.cancel(ident)
+        self.pool.shutdown(wait=False, cancel_futures=True)

@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Stem exit audio verification</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body style="padding: 24px; overflow: auto">
+    <h1>Stem exit audio verification</h1>
+    <p>
+      Actual AudioBufferSource output, without speaker output. Independent
+      captured echo and brake; no Serato sonic-equivalence claim.
+    </p>
+    <button id="run">Run stem exit graph checks</button>
+    <p id="summary" role="status">Not run</p>
+    <pre id="results"></pre>
+    <script type="module" src="stem-exit-browser-tests.js"></script>
+  </body>
+</html>

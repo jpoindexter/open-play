@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Open Play PCM analysis verification</title>
+    <style>
+      body {
+        font: 15px system-ui;
+        background: #111;
+        color: #ddd;
+        margin: 24px;
+        max-width: 1000px;
+      }
+      button {
+        padding: 10px 18px;
+        font: inherit;
+      }
+      pre {
+        white-space: pre-wrap;
+        border: 1px solid #444;
+        padding: 16px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Local PCM analysis verification</h1>
+    <p>
+      Runs generated signals through the actual browser worker. No audio
+      playback or uploads.
+    </p>
+    <button id="run">Run analysis checks</button>
+    <pre id="report" aria-live="polite">Not run</pre>
+    <script type="module" src="./analysis-browser-tests.js"></script>
+  </body>
+</html>

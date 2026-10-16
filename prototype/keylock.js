@@ -1,0 +1,111 @@
+// Independent tempo/pitch rendering. All time coordinates returned by this API
+// are rendered-buffer seconds: divide original timeline seconds by tempo.
+import { validateTransform } from "./keylock-dsp.js";
+
+const aborted = () =>
+  new DOMException("Pitch processing cancelled.", "AbortError");
+
+export class KeylockRenderer {
+  constructor({ maxCacheBytes = 128 * 1024 * 1024 } = {}) {
+    this.cache = new Map();
+    this.ids = new WeakMap();
+    this.nextId = 1;
+    this.maxCacheBytes = maxCacheBytes;
+    this.cacheBytes = 0;
+  }
+  clear() {
+    this.cache.clear();
+    this.cacheBytes = 0;
+  }
+  async render(
+    buffer,
+    { tempo = 1, semitones = 0, signal, onProgress = () => {} } = {},
+  ) {
+    if (signal?.aborted) throw aborted();
+    const channels = Array.from({ length: buffer.numberOfChannels }, (_, c) =>
+      buffer.getChannelData(c),
+    );
+    validateTransform(channels, buffer.sampleRate, tempo, semitones);
+    if (tempo === 1 && semitones === 0) {
+      onProgress(1);
+      return buffer;
+    }
+    if (!this.ids.has(buffer)) this.ids.set(buffer, this.nextId++);
+    const key = `${this.ids.get(buffer)}:${tempo}:${semitones}`;
+    const cached = this.cache.get(key);
+    if (cached) {
+      this.cache.delete(key);
+      this.cache.set(key, cached);
+      onProgress(1);
+      return cached;
+    }
+    // Reject requests whose input+output alone exceeds 512 MiB. The worker
+    // additionally owns a WASM heap; this is a prototype memory boundary.
+    const bytes = buffer.length * buffer.numberOfChannels * 4;
+    if (bytes * (1 + 1 / tempo) > 512 * 1024 * 1024)
+      throw new Error(
+        "This track exceeds the browser pitch-render memory limit. Use a shorter file.",
+      );
+    const copies = channels.map((c) => c.slice());
+    const rendered = await new Promise((resolve, reject) => {
+      const worker = new Worker(
+        new URL("./keylock-worker.js", import.meta.url),
+        { type: "module" },
+      );
+      let settled = false;
+      const finish = (error, value) => {
+        if (settled) return;
+        settled = true;
+        worker.terminate();
+        signal?.removeEventListener("abort", cancel);
+        error ? reject(error) : resolve(value);
+      };
+      const cancel = () => finish(aborted());
+      signal?.addEventListener("abort", cancel, { once: true });
+      worker.onerror = (event) =>
+        finish(new Error(event.message || "Pitch worker failed."));
+      worker.onmessage = ({ data }) => {
+        if (data.error) finish(new Error(data.error));
+        else if (data.channels) finish(null, data.channels);
+        else if (data.progress !== undefined) onProgress(data.progress);
+      };
+      if (signal?.aborted) return cancel();
+      worker.postMessage(
+        { channels: copies, sampleRate: buffer.sampleRate, tempo, semitones },
+        copies.map((c) => c.buffer),
+      );
+    });
+    if (signal?.aborted) throw aborted();
+    const result = new AudioBuffer({
+      numberOfChannels: rendered.length,
+      length: rendered[0].length,
+      sampleRate: buffer.sampleRate,
+    });
+    rendered.forEach((channel, i) => result.copyToChannel(channel, i));
+    const cost = result.length * result.numberOfChannels * 4;
+    if (cost <= this.maxCacheBytes) {
+      // Two decks may finish the same transform concurrently. Replacing the
+      // existing entry must not count its bytes twice.
+      const previous = this.cache.get(key);
+      if (previous) {
+        this.cacheBytes -= previous.length * previous.numberOfChannels * 4;
+        this.cache.delete(key);
+      }
+      while (this.cacheBytes + cost > this.maxCacheBytes && this.cache.size) {
+        const [oldKey, old] = this.cache.entries().next().value;
+        this.cache.delete(oldKey);
+        this.cacheBytes -= old.length * old.numberOfChannels * 4;
+      }
+      this.cache.set(key, result);
+      this.cacheBytes += cost;
+    }
+    return result;
+  }
+}
+
+export function toRenderedTime(originalSeconds, tempo) {
+  return originalSeconds / tempo;
+}
+export function toOriginalTime(renderedSeconds, tempo) {
+  return renderedSeconds * tempo;
+}

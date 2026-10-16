@@ -1,0 +1,3768 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-16",
+  "reference": "Serato DJ Pro 4.0.10.213 arm64",
+  "scope": "59 named DJ-FX; Channel FX, Stems FX and Video FX are additional scopes",
+  "purpose": "Behavioral contracts for independently implemented audio, explicitly separated from reference evidence",
+  "summary": {
+    "catalog_names": 59,
+    "reference_algorithms_proven": 0,
+    "parameter_strips_observed": 59,
+    "observed_parameter_labels": 236,
+    "unrecognized_session_values": 0,
+    "independent_kernel_checks_passed": 80,
+    "independent_kernel_checks_total": 80,
+    "independent_observed_control_schemas": 24,
+    "independent_observed_control_labels": 96
+  },
+  "interpretation": "No realization below is a claim about how Serato is implemented. Proposed controls are not claimed to match its controls. Unknown branded variants require listening and measured reference captures before sonic parity can close.",
+  "sources": [
+    {
+      "id": "catalog",
+      "kind": "local-observed",
+      "path": "docs/research/fx-catalog.json",
+      "supports": "Installed 4.0.10.213 catalog names and categories only."
+    },
+    {
+      "id": "strips",
+      "kind": "local-observed",
+      "path": "docs/research/UI_OBSERVATIONS.md",
+      "supports": "Four selected parameter strips and their session values; not defaults or ranges."
+    },
+    {
+      "id": "list",
+      "kind": "official-DJ-documentation",
+      "url": "https://support.serato.com/hc/en-us/articles/10271055029263-DJ-FX-Channel-FX-list",
+      "supports": "Current DJ effect membership; a few names have spelling/spacing differences from the app."
+    },
+    {
+      "id": "controls",
+      "kind": "official-DJ-documentation",
+      "url": "https://support.serato.com/hc/en-us/articles/224970027-Using-DJ-FX",
+      "supports": "Shared FX controls, channel assignment, beat scaling, tempo and banks."
+    },
+    {
+      "id": "advanced",
+      "kind": "official-DJ-documentation",
+      "url": "https://support.serato.com/hc/en-us/articles/10326824275087-Advanced-FX-View",
+      "supports": "Selection versus enable, parameter reset, save and USER presets."
+    },
+    {
+      "id": "redesign",
+      "kind": "official-DJ-announcement",
+      "url": "https://the-drop.serato.com/announcements/new-serato-dj-fx/",
+      "supports": "Serato states all FX were redesigned for 3.2.0. Historical iZotope FX cannot establish current algorithms."
+    },
+    {
+      "id": "hex",
+      "kind": "excluded-other-product",
+      "url": "https://support.serato.com/hc/en-us/articles/11349213839247-Effect-List",
+      "supports": "HEX FX is a separate product. Its detailed parameter inventory is not evidence for DJ Pro parameter parity."
+    },
+    {
+      "id": "hex-overview",
+      "kind": "other-product-analogy-only",
+      "url": "https://serato.com/hex-fx",
+      "supports": "Describes endless Infinity Filter sweeps and one-direction Infinity Flanger in HEX; provides design inspiration only, not DJ Pro proof."
+    },
+    {
+      "id": "worklet",
+      "kind": "web-platform",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/API/AudioWorkletProcessor",
+      "supports": "Custom audio processing on the audio rendering thread; implementation mechanism, not vendor fidelity."
+    },
+    {
+      "id": "filter-api",
+      "kind": "web-platform",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/API/BiquadFilterNode",
+      "supports": "Available standard filter types and controls; implementation mechanism only."
+    },
+    {
+      "id": "all-strips",
+      "kind": "local-observed",
+      "path": "docs/research/fx-observed-parameters.json",
+      "supports": "All59 visible advanced strips;236 labels, session values and source-image hashes. Ranges, enum alternatives and sonic behavior remain unmeasured."
+    }
+  ],
+  "shared_reference_contracts": [
+    "Two units with individual channel assignments; master assignment excludes individual channels.",
+    "Beat duration is 60/BPM times the selected beat value.",
+    "Depth usually spans dry to wet; the manual qualifies this, so Out FX require separate measurement.",
+    "A-D banks recall effects and unit beat values. Advanced selection is distinct from effect enable.",
+    "Advanced presets can be saved under USER and reset to defaults."
+  ],
+  "shared_independent_acceptance": [
+    "All values remain finite at minimum/default/maximum controls, including zero input.",
+    "Depth zero nulls against a latency-aligned dry reference below -90 dBFS unless an explicitly documented generator mode is selected.",
+    "Changing an assigned unit audibly affects only its assigned channels; master assignment affects the complete mix exactly once.",
+    "Processor state survives UI redraws; bypass/re-enable behavior is specified and tested.",
+    "Test at both 44.1 and 48 kHz, mono/stereo, and BPM 60/120/180; sample-rate changes preserve seconds/beat timing.",
+    "Use 5 ms or longer parameter ramps where appropriate to prevent switching clicks; capture/retrigger crossfades are explicit.",
+    "Delay/reverb tails keep processing after source silence until decay completes; stop-all clears feedback buffers and prevents orphan voices.",
+    "A slider test must demonstrate measured audio change, not only a label or state update.",
+    "Record real UI paths as well as offline signal tests; a processor test alone does not establish the routed browser behavior."
+  ],
+  "effects": [
+    {
+      "name": "Delay",
+      "category": "Delay & Echo",
+      "reference_evidence": "catalog-and-parameter-labels",
+      "reference_behavior_status": "individual DSP and trigger/tail behavior not verified",
+      "observed_session_parameters": {
+        "FEEDBACK": "40%",
+        "HPF": "20.0 Hz",
+        "DRIVE": "0%",
+        "BEAT MODIFY": "1"
+      },
+      "source_ids": [
+        "catalog",
+        "list",
+        "controls",
+        "advanced",
+        "strips",
+        "all-strips"
+      ],
+      "contract_status": "proposed-independent-not-executed",
+      "independent_realization": "Timed feedback delay with a high-pass feedback path and optional soft saturation.",
+      "proposed_controls": "Feedback, high-pass cutoff, drive, beat multiplier.",
+      "measurable_acceptance": "Impulse repeats recur at T = 60/BPM × beats; consecutive amplitudes follow the configured feedback ratio within 5%; zero feedback yields one delayed impulse.",
+      "acceptance_scope": "Validates the proposed independent processor, not sonic equivalence or matching vendor defaults.",
+      "reference_unknowns": [
+        "Actual control ranges and defaults",
+        "Depth mapping and nonlinear transitions",
+        "BPM/beat response and phase reset",
+        "Enable/disable and pause/seek tail policy",
+        "Algorithm and sonic equivalence"
+      ],
+      "observed_parameter_source_image_sha256": "f02a4b3e4eb4677149e860bf32ea351847d7d3edee7893be0b01f47dd68f0736",
+      "control_parity_status": "Independent proposed controls differ from the observed Serato schema; control semantics parity NOT established."
+    },
+    {
+      "name": "Echo",
+      "category": "Delay & Echo",
+      "reference_evidence": "catalog-and-parameter-labels",
+      "reference_behavior_status": "individual DSP and trigger/tail behavior not verified",
+      "observed_session_parameters": {
+        "FEEDBACK": "80%",
+        "HPF": "20.0 Hz",
+        "DRIVE": "0%",
+        "BEAT MODIFY": "1"
+      },
+      "source_ids": [
+        "catalog",
+        "list",
+        "controls",
+        "advanced",
+        "all-strips"
+      ],
+      "contract_status": "proposed-independent-not-executed",
+      "independent_realization": "Feedback delay with progressively darkened repeats.",
+      "proposed_controls": "Feedback, damping, beat multiplier.",
+      "measurable_acceptance": "A broadband burst produces at least three decaying repeats; later repeats have less high-frequency energy than the first.",
+      "acceptance_scope": "Validates the proposed independent processor, not sonic equivalence or matching vendor defaults.",
+      "reference_unknowns": [
+        "Actual control ranges and defaults",
+        "Depth mapping and nonlinear transitions",
+        "BPM/beat response and phase reset",
+        "Enable/disable and pause/seek tail policy",
+        "Algorithm and sonic equivalence"
+      ],
+      "observed_parameter_source_image_sha256": "8a2b37c0e6df03bae12c1cffa557465f5efa10698e12ebff3b40d42a3f1d3e59",
+      "control_parity_status": "Observed labels wired to independent behavior. Vendor mappings, limits, defaults and full enum catalog remain unverified.",
+      "implementation_evidence": {
+        "kernel": "prototype/extended-effects-kernel.js",
+        "tests": "scripts/test_extended_effects.mjs",
+        "executed_checks": [
+          "Finite nonzero processed output different from dry",
+          "Zero-depth exact dry",
+          "Each exposed independent control changes audio between its minimum and maximum",
+          "Default output distinct from every other new DJ-FX on a nonperiodic multitone fixture"
+        ],
+        "does_not_establish": "The full per-effect proposed acceptance contract, native audio, vendor parameter equivalence, vendor sound matching, production real-time robustness."
+      },
+      "executable_observed_controls": [
+        {
+          "name": "Feedback",
+          "min": 0,
+          "max": 90,
+          "value": 80,
+          "step": 1,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "HPF",
+          "min": 20,
+          "max": 18000,
+          "value": 20,
+          "step": 10,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Drive",
+          "min": 0,
+          "max": 100,
+          "value": 0,
+          "step": 1,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Beat Modify",
+          "min": 0.125,
+          "max": 4,
+          "value": 1,
+          "step": 0.125,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        }
+      ]
+    },
+    {
+      "name": "Low Cut Echo",
+      "category": "Delay & Echo",
+      "reference_evidence": "catalog-and-parameter-labels",
+      "reference_behavior_status": "individual DSP and trigger/tail behavior not verified",
+      "observed_session_parameters": {
+        "FEEDBACK": "60%",
+        "HPF": "300 Hz",
+        "DRIVE": "25%",
+        "BEAT MODIFY": "1"
+      },
+      "source_ids": [
+        "catalog",
+        "list",
+        "controls",
+        "advanced",
+        "all-strips"
+      ],
+      "contract_status": "proposed-independent-not-executed",
+      "independent_realization": "Feedback echo whose repeats pass a high-pass filter.",
+      "proposed_controls": "Low-cut frequency, feedback, beat multiplier.",
+      "measurable_acceptance": "A 100 Hz + 4 kHz burst shows at least 12 dB less 100 Hz energy in the repeats after raising low-cut to 1 kHz.",
+      "acceptance_scope": "Validates the proposed independent processor, not sonic equivalence or matching vendor defaults.",
+      "reference_unknowns": [
+        "Actual control ranges and defaults",
+        "Depth mapping and nonlinear transitions",
+        "BPM/beat response and phase reset",
+        "Enable/disable and pause/seek tail policy",
+        "Algorithm and sonic equivalence"
+      ],
+      "observed_parameter_source_image_sha256": "240d0c416cfe470f87f9696b491e7b0b5ab1e48224bf566a95d98f7b718eca8a",
+      "control_parity_status": "Observed labels wired to independent behavior. Vendor mappings, limits, defaults and full enum catalog remain unverified.",
+      "implementation_evidence": {
+        "kernel": "prototype/extended-effects-kernel.js",
+        "tests": "scripts/test_extended_effects.mjs",
+        "executed_checks": [
+          "Finite nonzero processed output different from dry",
+          "Zero-depth exact dry",
+          "Each exposed independent control changes audio between its minimum and maximum",
+          "Default output distinct from every other new DJ-FX on a nonperiodic multitone fixture"
+        ],
+        "does_not_establish": "The full per-effect proposed acceptance contract, native audio, vendor parameter equivalence, vendor sound matching, production real-time robustness."
+      },
+      "executable_observed_controls": [
+        {
+          "name": "Feedback",
+          "min": 0,
+          "max": 90,
+          "value": 60,
+          "step": 1,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "HPF",
+          "min": 20,
+          "max": 18000,
+          "value": 300,
+          "step": 10,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Drive",
+          "min": 0,
+          "max": 100,
+          "value": 25,
+          "step": 1,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Beat Modify",
+          "min": 0.125,
+          "max": 4,
+          "value": 1,
+          "step": 0.125,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        }
+      ]
+    },
+    {
+      "name": "Multi Tap Delay",
+      "category": "Delay & Echo",
+      "reference_evidence": "catalog-and-parameter-labels",
+      "reference_behavior_status": "individual DSP and trigger/tail behavior not verified",
+      "observed_session_parameters": {
+        "PATTERN": "Shreds",
+        "FEEDBACK": "50%",
+        "FILTER": "20%",
+        "BEAT MODIFY": "1"
+      },
+      "source_ids": [
+        "catalog",
+        "list",
+        "controls",
+        "advanced",
+        "all-strips"
+      ],
+      "contract_status": "proposed-independent-not-executed",
+      "independent_realization": "Three independently weighted delayed taps with a shared tempo.",
+      "proposed_controls": "Tap offsets, tap levels, feedback.",
+      "measurable_acceptance": "An isolated impulse produces the configured three time offsets; moving one offset moves only the corresponding first-cycle peak.",
+      "acceptance_scope": "Validates the proposed independent processor, not sonic equivalence or matching vendor defaults.",
+      "reference_unknowns": [
+        "Actual control ranges and defaults",
+        "Depth mapping and nonlinear transitions",
+        "BPM/beat response and phase reset",
+        "Enable/disable and pause/seek tail policy",
+        "Algorithm and sonic equivalence"
+      ],
+      "observed_parameter_source_image_sha256": "4dc9fa79cd8b7923f463745f149db190eaed400eaefb5d33aa548879c5e57b41",
+      "control_parity_status": "Independent proposed controls differ from the observed Serato schema; control semantics parity NOT established.",
+      "implementation_evidence": {
+        "kernel": "prototype/extended-effects-kernel.js",
+        "tests": "scripts/test_extended_effects.mjs",
+        "executed_checks": [
+          "Finite nonzero processed output different from dry",
+          "Zero-depth exact dry",
+          "Each exposed independent control changes audio between its minimum and maximum",
+          "Default output distinct from every other new DJ-FX on a nonperiodic multitone fixture"
+        ],
+        "does_not_establish": "The full per-effect proposed acceptance contract, native audio, vendor parameter equivalence, vendor sound matching, production real-time robustness."
+      }
+    },
+    {
+      "name": "Ping Pong Delay",
+      "category": "Delay & Echo",
+      "reference_evidence": "catalog-and-parameter-labels",
+      "reference_behavior_status": "individual DSP and trigger/tail behavior not verified",
+      "observed_session_parameters": {
+        "FEEDBACK": "60.0",
+        "HPF": "20.0 Hz",
+        "WIDTH": "100%",
+        "BEAT MODIFY": "1"
+      },
+      "source_ids": [
+        "catalog",
+        "list",
+        "controls",
+        "advanced",
+        "all-strips"
+      ],
+      "contract_status": "proposed-independent-not-executed",
+      "independent_realization": "Cross-feedback stereo delay alternating sides.",
+      "proposed_controls": "Feedback, stereo width, beat multiplier.",
+      "measurable_acceptance": "A centered impulse produces alternating L/R repeat energy; each alternating peak exceeds the opposite channel by at least 12 dB at full width.",
+      "acceptance_scope": "Validates the proposed independent processor, not sonic equivalence or matching vendor defaults.",
+      "reference_unknowns": [
+        "Actual control ranges and defaults",
+        "Depth mapping and nonlinear transitions",
+        "BPM/beat response and phase reset",
+        "Enable/disable and pause/seek tail policy",
+        "Algorithm and sonic equivalence"
+      ],
+      "observed_parameter_source_image_sha256": "5a2cfee622d2706018ac1bf05a792890df4852f4b6dcab4dae2f43235008cc3e",
+      "control_parity_status": "Observed labels wired to independent behavior. Vendor mappings, limits, defaults and full enum catalog remain unverified.",
+      "implementation_evidence": {
+        "kernel": "prototype/extended-effects-kernel.js",
+        "tests": "scripts/test_extended_effects.mjs",
+        "executed_checks": [
+          "Finite nonzero processed output different from dry",
+          "Zero-depth exact dry",
+          "Each exposed independent control changes audio between its minimum and maximum",
+          "Default output distinct from every other new DJ-FX on a nonperiodic multitone fixture"
+        ],
+        "does_not_establish": "The full per-effect proposed acceptance contract, native audio, vendor parameter equivalence, vendor sound matching, production real-time robustness."
+      },
+      "executable_observed_controls": [
+        {
+          "name": "Feedback",
+          "min": 0,
+          "max": 90,
+          "value": 60,
+          "step": 1,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "HPF",
+          "min": 20,
+          "max": 18000,
+          "value": 20,
+          "step": 10,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Width",
+          "min": 0,
+          "max": 100,
+          "value": 100,
+          "step": 1,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Beat Modify",
+          "min": 0.125,
+          "max": 4,
+          "value": 1,
+          "step": 0.125,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        }
+      ]
+    },
+    {
+      "name": "Spiral Echo",
+      "category": "Delay & Echo",
+      "reference_evidence": "catalog-and-parameter-labels",
+      "reference_behavior_status": "individual DSP and trigger/tail behavior not verified",
+      "observed_session_parameters": {
+        "SPEED": "0%",
+        "LOW BYPASS": "20.0 Hz",
+        "HIGH BYPASS": "20.0 kHz",
+        "BEAT MODIFY": "1"
+      },
+      "source_ids": [
+        "catalog",
+        "list",
+        "controls",
+        "advanced",
+        "all-strips"
+      ],
+      "contract_status": "proposed-independent-not-executed",
+      "independent_realization": "Pitch-shift each trip through a feedback delay using an independent pitch shifter.",
+      "proposed_controls": "Pitch per repeat, feedback, beat multiplier.",
+      "measurable_acceptance": "A 440 Hz burst produces successive repeats at 440 × 2^(n × semitones/12) within 3%; repeats must not all have the same frequency.",
+      "acceptance_scope": "Validates the proposed independent processor, not sonic equivalence or matching vendor defaults.",
+      "reference_unknowns": [
+        "Actual control ranges and defaults",
+        "Depth mapping and nonlinear transitions",
+        "BPM/beat response and phase reset",
+        "Enable/disable and pause/seek tail policy",
+        "Algorithm and sonic equivalence",
+        "Actual direction, pitch/filter topology and meaning of named variant"
+      ],
+      "observed_parameter_source_image_sha256": "30d0d96c6436a3c67cc1cedd8601605cca0fef77dd19883c9d246c1a43f2e476",
+      "control_parity_status": "Independent proposed controls differ from the observed Serato schema; control semantics parity NOT established.",
+      "implementation_evidence": {
+        "kernel": "prototype/extended-effects-kernel.js",
+        "tests": "scripts/test_extended_effects.mjs",
+        "executed_checks": [
+          "Finite nonzero processed output different from dry",
+          "Zero-depth exact dry",
+          "Each exposed independent control changes audio between its minimum and maximum",
+          "Default output distinct from every other new DJ-FX on a nonperiodic multitone fixture"
+        ],
+        "does_not_establish": "The full per-effect proposed acceptance contract, native audio, vendor parameter equivalence, vendor sound matching, production real-time robustness."
+      }
+    },
+    {
+      "name": "Version Echo",
+      "category": "Delay & Echo",
+      "reference_evidence": "catalog-and-parameter-labels",
+      "reference_behavior_status": "individual DSP and trigger/tail behavior not verified",
+      "observed_session_parameters": {
+        "FEEDBACK": "90%",
+        "BPF": "0%",
+        "DRIVE": "50%",
+        "BEAT MODIFY": "1/2 Dotted"
+      },
+      "source_ids": [
+        "catalog",
+        "list",
+        "controls",
+        "advanced",
+        "all-strips"
+      ],
+      "contract_status": "proposed-independent-not-executed",
+      "independent_realization": "A proposed saturated, band-limited feedback echo variant; distinction from Echo must be measured before claiming fidelity.",
+      "proposed_controls": "Drive, feedback, high-pass cutoff, beat multiplier.",
+      "measurable_acceptance": "At nonzero drive, sine input produces harmonics above the clean Echo control; compare matched feedback and delay to isolate the change.",
+      "acceptance_scope": "Validates the proposed independent processor, not sonic equivalence or matching vendor defaults.",
+      "reference_unknowns": [
+        "Actual control ranges and defaults",
+        "Depth mapping and nonlinear transitions",
+        "BPM/beat response and phase reset",
+        "Enable/disable and pause/seek tail policy",
+        "Algorithm and sonic equivalence"
+      ],
+      "observed_parameter_source_image_sha256": "6d445a9cb362aeb5d086a892cec5148815253f4e2f1329dd3c570fc2824a3adc",
+      "control_parity_status": "Observed labels wired to independent behavior. Vendor mappings, limits, defaults and full enum catalog remain unverified.",
+      "implementation_evidence": {
+        "kernel": "prototype/extended-effects-kernel.js",
+        "tests": "scripts/test_extended_effects.mjs",
+        "executed_checks": [
+          "Finite nonzero processed output different from dry",
+          "Zero-depth exact dry",
+          "Each exposed independent control changes audio between its minimum and maximum",
+          "Default output distinct from every other new DJ-FX on a nonperiodic multitone fixture"
+        ],
+        "does_not_establish": "The full per-effect proposed acceptance contract, native audio, vendor parameter equivalence, vendor sound matching, production real-time robustness."
+      },
+      "executable_observed_controls": [
+        {
+          "name": "Feedback",
+          "min": 0,
+          "max": 90,
+          "value": 90,
+          "step": 1,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "BPF",
+          "min": 0,
+          "max": 100,
+          "value": 0,
+          "step": 1,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Drive",
+          "min": 0,
+          "max": 100,
+          "value": 50,
+          "step": 1,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Beat Modify",
+          "min": 0.125,
+          "max": 4,
+          "value": 0.75,
+          "step": 0.125,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        }
+      ]
+    },
+    {
+      "name": "Bit Crush",
+      "category": "Distortion",
+      "reference_evidence": "catalog-and-parameter-labels",
+      "reference_behavior_status": "individual DSP and trigger/tail behavior not verified",
+      "observed_session_parameters": {
+        "BIT DEPTH": "4.00",
+        "DOWNSAMPLING": "1.32 kHz",
+        "CHARACTER": "100%",
+        "LOW DRIVE": "50%"
+      },
+      "source_ids": [
+        "catalog",
+        "list",
+        "controls",
+        "advanced",
+        "all-strips"
+      ],
+      "contract_status": "proposed-independent-not-executed",
+      "independent_realization": "Uniform amplitude quantization and sample-and-hold rate reduction.",
+      "proposed_controls": "Bit depth, reduction factor, wet mix.",
+      "measurable_acceptance": "At full wet with dither disabled, a ramp uses no more than 2^bits quantization levels; held samples remain identical for the configured reduction factor.",
+      "acceptance_scope": "Validates the proposed independent processor, not sonic equivalence or matching vendor defaults.",
+      "reference_unknowns": [
+        "Actual control ranges and defaults",
+        "Depth mapping and nonlinear transitions",
+        "BPM/beat response and phase reset",
+        "Enable/disable and pause/seek tail policy",
+        "Algorithm and sonic equivalence"
+      ],
+      "observed_parameter_source_image_sha256": "5440b85d7a30a38ebc859c7cf2a3758dc64faa3bab30c5a8cdb78e66cb57aaa0",
+      "control_parity_status": "Observed labels wired to independent behavior. Vendor mappings, limits, defaults and full enum catalog remain unverified.",
+      "implementation_evidence": {
+        "kernel": "prototype/extended-effects-kernel.js",
+        "tests": "scripts/test_extended_effects.mjs",
+        "executed_checks": [
+          "Finite nonzero processed output different from dry",
+          "Zero-depth exact dry",
+          "Each exposed independent control changes audio between its minimum and maximum",
+          "Default output distinct from every other new DJ-FX on a nonperiodic multitone fixture"
+        ],
+        "does_not_establish": "The full per-effect proposed acceptance contract, native audio, vendor parameter equivalence, vendor sound matching, production real-time robustness."
+      },
+      "executable_observed_controls": [
+        {
+          "name": "Bit Depth",
+          "min": 2,
+          "max": 16,
+          "value": 4,
+          "step": 0.1,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Downsampling",
+          "min": 200,
+          "max": 48000,
+          "value": 1320,
+          "step": 10,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Character",
+          "min": 0,
+          "max": 100,
+          "value": 100,
+          "step": 1,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Low Drive",
+          "min": 0,
+          "max": 100,
+          "value": 50,
+          "step": 1,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        }
+      ]
+    },
+    {
+      "name": "Distortion",
+      "category": "Distortion",
+      "reference_evidence": "catalog-and-parameter-labels",
+      "reference_behavior_status": "individual DSP and trigger/tail behavior not verified",
+      "observed_session_parameters": {
+        "TYPE": "Smooth Drive",
+        "DRIVE": "50%",
+        "CHARACTER": "50%",
+        "TONE": "0.00 dB"
+      },
+      "source_ids": [
+        "catalog",
+        "list",
+        "controls",
+        "advanced",
+        "all-strips"
+      ],
+      "contract_status": "proposed-independent-not-executed",
+      "independent_realization": "Memoryless saturating nonlinear transfer with gain compensation.",
+      "proposed_controls": "Drive, tone, output gain.",
+      "measurable_acceptance": "A sine develops harmonic energy that increases with drive; output remains finite and bounded at maximum drive.",
+      "acceptance_scope": "Validates the proposed independent processor, not sonic equivalence or matching vendor defaults.",
+      "reference_unknowns": [
+        "Actual control ranges and defaults",
+        "Depth mapping and nonlinear transitions",
+        "BPM/beat response and phase reset",
+        "Enable/disable and pause/seek tail policy",
+        "Algorithm and sonic equivalence"
+      ],
+      "observed_parameter_source_image_sha256": "76037bb2656a51fa957eb953986dc248006dcce39c20a9831e34e5fb8b3d0a7e",
+      "control_parity_status": "Independent proposed controls differ from the observed Serato schema; control semantics parity NOT established.",
+      "implementation_evidence": {
+        "kernel": "prototype/extended-effects-kernel.js",
+        "tests": "scripts/test_extended_effects.mjs",
+        "executed_checks": [
+          "Finite nonzero processed output different from dry",
+          "Zero-depth exact dry",
+          "Each exposed independent control changes audio between its minimum and maximum",
+          "Default output distinct from every other new DJ-FX on a nonperiodic multitone fixture"
+        ],
+        "does_not_establish": "The full per-effect proposed acceptance contract, native audio, vendor parameter equivalence, vendor sound matching, production real-time robustness."
+      }
+    },
+    {
+      "name": "Lo-Fi Crush",
+      "category": "Distortion",
+      "reference_evidence": "catalog-and-parameter-labels",
+      "reference_behavior_status": "individual DSP and trigger/tail behavior not verified",
+      "observed_session_parameters": {
+        "BIT DEPTH": "5.08",
+        "DOWNSAMPLING": "10.1 kHz",
+        "CHARACTER": "72%",
+        "LOW DRIVE": "66%"
+      },
+      "source_ids": [
+        "catalog",
+        "list",
+        "controls",
+        "advanced",
+        "all-strips"
+      ],
+      "contract_status": "proposed-independent-not-executed",
+      "independent_realization": "Quantization/rate reduction plus a low-pass coloration stage.",
+      "proposed_controls": "Bit depth, sample-hold rate, low-pass cutoff, drive.",
+      "measurable_acceptance": "Increasing reduction lowers the number of amplitude steps; decreasing cutoff attenuates high-band energy relative to Bit Crush at identical bit settings.",
+      "acceptance_scope": "Validates the proposed independent processor, not sonic equivalence or matching vendor defaults.",
+      "reference_unknowns": [
+        "Actual control ranges and defaults",
+        "Depth mapping and nonlinear transitions",
+        "BPM/beat response and phase reset",
+        "Enable/disable and pause/seek tail policy",
+        "Algorithm and sonic equivalence"
+      ],
+      "observed_parameter_source_image_sha256": "312953cb86a9f431976530bad34d3e013e60f4b9917b646549151e22c10ca27b",
+      "control_parity_status": "Observed labels wired to independent behavior. Vendor mappings, limits, defaults and full enum catalog remain unverified.",
+      "implementation_evidence": {
+        "kernel": "prototype/extended-effects-kernel.js",
+        "tests": "scripts/test_extended_effects.mjs",
+        "executed_checks": [
+          "Finite nonzero processed output different from dry",
+          "Zero-depth exact dry",
+          "Each exposed independent control changes audio between its minimum and maximum",
+          "Default output distinct from every other new DJ-FX on a nonperiodic multitone fixture"
+        ],
+        "does_not_establish": "The full per-effect proposed acceptance contract, native audio, vendor parameter equivalence, vendor sound matching, production real-time robustness."
+      },
+      "executable_observed_controls": [
+        {
+          "name": "Bit Depth",
+          "min": 2,
+          "max": 16,
+          "value": 5.08,
+          "step": 0.1,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Downsampling",
+          "min": 200,
+          "max": 48000,
+          "value": 10100,
+          "step": 10,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Character",
+          "min": 0,
+          "max": 100,
+          "value": 72,
+          "step": 1,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Low Drive",
+          "min": 0,
+          "max": 100,
+          "value": 66,
+          "step": 1,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        }
+      ]
+    },
+    {
+      "name": "Lo-Fi Warmth",
+      "category": "Distortion",
+      "reference_evidence": "catalog-and-parameter-labels",
+      "reference_behavior_status": "individual DSP and trigger/tail behavior not verified",
+      "observed_session_parameters": {
+        "BIT DEPTH": "6.00",
+        "DOWNSAMPLING": "44.1 kHz",
+        "CHARACTER": "100%",
+        "LOW DRIVE": "100%"
+      },
+      "source_ids": [
+        "catalog",
+        "list",
+        "controls",
+        "advanced",
+        "all-strips"
+      ],
+      "contract_status": "proposed-independent-not-executed",
+      "independent_realization": "Soft saturation with low-pass coloration and small deterministic wow modulation.",
+      "proposed_controls": "Drive, cutoff, wow depth/rate.",
+      "measurable_acceptance": "A sine shows harmonics and pitch sidebands with wow enabled; wow at zero removes those sidebands while preserving the nonlinear harmonics.",
+      "acceptance_scope": "Validates the proposed independent processor, not sonic equivalence or matching vendor defaults.",
+      "reference_unknowns": [
+        "Actual control ranges and defaults",
+        "Depth mapping and nonlinear transitions",
+        "BPM/beat response and phase reset",
+        "Enable/disable and pause/seek tail policy",
+        "Algorithm and sonic equivalence"
+      ],
+      "observed_parameter_source_image_sha256": "0a82983d43faa11374d7110c23e43a4bbfea736c7f6bbbb165ed1b337c04e428",
+      "control_parity_status": "Observed labels wired to independent behavior. Vendor mappings, limits, defaults and full enum catalog remain unverified.",
+      "implementation_evidence": {
+        "kernel": "prototype/extended-effects-kernel.js",
+        "tests": "scripts/test_extended_effects.mjs",
+        "executed_checks": [
+          "Finite nonzero processed output different from dry",
+          "Zero-depth exact dry",
+          "Each exposed independent control changes audio between its minimum and maximum",
+          "Default output distinct from every other new DJ-FX on a nonperiodic multitone fixture"
+        ],
+        "does_not_establish": "The full per-effect proposed acceptance contract, native audio, vendor parameter equivalence, vendor sound matching, production real-time robustness."
+      },
+      "executable_observed_controls": [
+        {
+          "name": "Bit Depth",
+          "min": 2,
+          "max": 16,
+          "value": 6,
+          "step": 0.1,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Downsampling",
+          "min": 200,
+          "max": 48000,
+          "value": 44100,
+          "step": 10,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Character",
+          "min": 0,
+          "max": 100,
+          "value": 100,
+          "step": 1,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Low Drive",
+          "min": 0,
+          "max": 100,
+          "value": 100,
+          "step": 1,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        }
+      ]
+    },
+    {
+      "name": "Sizzle Crush",
+      "category": "Distortion",
+      "reference_evidence": "catalog-and-parameter-labels",
+      "reference_behavior_status": "individual DSP and trigger/tail behavior not verified",
+      "observed_session_parameters": {
+        "BIT DEPTH": "6.00",
+        "DOWNSAMPLING": "8.00 kHz",
+        "CHARACTER": "100%",
+        "LOW DRIVE": "50%"
+      },
+      "source_ids": [
+        "catalog",
+        "list",
+        "controls",
+        "advanced",
+        "all-strips"
+      ],
+      "contract_status": "proposed-independent-not-executed",
+      "independent_realization": "Quantization/rate reduction with emphasized upper-band distortion.",
+      "proposed_controls": "Bit depth, reduction factor, high-band emphasis.",
+      "measurable_acceptance": "At matched bit depth, output high-band energy exceeds the neutral Bit Crush control; emphasis at zero removes that difference.",
+      "acceptance_scope": "Validates the proposed independent processor, not sonic equivalence or matching vendor defaults.",
+      "reference_unknowns": [
+        "Actual control ranges and defaults",
+        "Depth mapping and nonlinear transitions",
+        "BPM/beat response and phase reset",
+        "Enable/disable and pause/seek tail policy",
+        "Algorithm and sonic equivalence"
+      ],
+      "observed_parameter_source_image_sha256": "235927ee4ede1067006141b2c8011979aa872cea88631dc27542cddbe0ede3d8",
+      "control_parity_status": "Observed labels wired to independent behavior. Vendor mappings, limits, defaults and full enum catalog remain unverified.",
+      "implementation_evidence": {
+        "kernel": "prototype/extended-effects-kernel.js",
+        "tests": "scripts/test_extended_effects.mjs",
+        "executed_checks": [
+          "Finite nonzero processed output different from dry",
+          "Zero-depth exact dry",
+          "Each exposed independent control changes audio between its minimum and maximum",
+          "Default output distinct from every other new DJ-FX on a nonperiodic multitone fixture"
+        ],
+        "does_not_establish": "The full per-effect proposed acceptance contract, native audio, vendor parameter equivalence, vendor sound matching, production real-time robustness."
+      },
+      "executable_observed_controls": [
+        {
+          "name": "Bit Depth",
+          "min": 2,
+          "max": 16,
+          "value": 6,
+          "step": 0.1,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Downsampling",
+          "min": 200,
+          "max": 48000,
+          "value": 8000,
+          "step": 10,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Character",
+          "min": 0,
+          "max": 100,
+          "value": 100,
+          "step": 1,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Low Drive",
+          "min": 0,
+          "max": 100,
+          "value": 50,
+          "step": 1,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        }
+      ]
+    },
+    {
+      "name": "Combo Filter",
+      "category": "Filter",
+      "reference_evidence": "catalog-and-parameter-labels",
+      "reference_behavior_status": "individual DSP and trigger/tail behavior not verified",
+      "observed_session_parameters": {
+        "RESONANCE": "1.77",
+        "SLOPE": "18dB",
+        "MIN FREQ": "200 Hz",
+        "MAX FREQ": "10.0kHz"
+      },
+      "source_ids": [
+        "catalog",
+        "list",
+        "controls",
+        "advanced",
+        "all-strips"
+      ],
+      "contract_status": "proposed-independent-not-executed",
+      "independent_realization": "A bipolar low-pass/neutral/high-pass sweep with a neutral center.",
+      "proposed_controls": "Cutoff position, resonance, slope.",
+      "measurable_acceptance": "Centered position approximately nulls against dry; opposite extremes respectively suppress 8 kHz and 100 Hz by at least 12 dB on a two-tone input.",
+      "acceptance_scope": "Validates the proposed independent processor, not sonic equivalence or matching vendor defaults.",
+      "reference_unknowns": [
+        "Actual control ranges and defaults",
+        "Depth mapping and nonlinear transitions",
+        "BPM/beat response and phase reset",
+        "Enable/disable and pause/seek tail policy",
+        "Algorithm and sonic equivalence"
+      ],
+      "observed_parameter_source_image_sha256": "37197357a04d2618307c84ad1be1a565132a400f93c1c2b7e89483c6a9d80965",
+      "control_parity_status": "Observed labels wired to independent behavior. Vendor mappings, limits, defaults and full enum catalog remain unverified.",
+      "implementation_evidence": {
+        "kernel": "prototype/extended-effects-kernel.js",
+        "tests": "scripts/test_extended_effects.mjs",
+        "executed_checks": [
+          "Finite nonzero processed output different from dry",
+          "Zero-depth exact dry",
+          "Each exposed independent control changes audio between its minimum and maximum",
+          "Default output distinct from every other new DJ-FX on a nonperiodic multitone fixture"
+        ],
+        "does_not_establish": "The full per-effect proposed acceptance contract, native audio, vendor parameter equivalence, vendor sound matching, production real-time robustness."
+      },
+      "executable_observed_controls": [
+        {
+          "name": "Resonance",
+          "min": 0.1,
+          "max": 12,
+          "value": 1.77,
+          "step": 0.1,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Slope",
+          "min": 6,
+          "max": 48,
+          "value": 18,
+          "step": 6,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Min Freq",
+          "min": 20,
+          "max": 2000,
+          "value": 200,
+          "step": 10,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Max Freq",
+          "min": 2000,
+          "max": 20000,
+          "value": 10000,
+          "step": 100,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        }
+      ]
+    },
+    {
+      "name": "Drive Filter",
+      "category": "Filter",
+      "reference_evidence": "catalog-and-parameter-labels",
+      "reference_behavior_status": "individual DSP and trigger/tail behavior not verified",
+      "observed_session_parameters": {
+        "RESONANCE": "1.77",
+        "DRIVE": "50%",
+        "SLOPE": "12dB",
+        "TYPE": "Light Sat."
+      },
+      "source_ids": [
+        "catalog",
+        "list",
+        "controls",
+        "advanced",
+        "all-strips"
+      ],
+      "contract_status": "proposed-independent-not-executed",
+      "independent_realization": "A resonant filter preceded by controllable saturation.",
+      "proposed_controls": "Filter type, cutoff, resonance, drive.",
+      "measurable_acceptance": "Changing cutoff moves the measured pass-band edge; increasing drive adds harmonics at unchanged cutoff.",
+      "acceptance_scope": "Validates the proposed independent processor, not sonic equivalence or matching vendor defaults.",
+      "reference_unknowns": [
+        "Actual control ranges and defaults",
+        "Depth mapping and nonlinear transitions",
+        "BPM/beat response and phase reset",
+        "Enable/disable and pause/seek tail policy",
+        "Algorithm and sonic equivalence"
+      ],
+      "observed_parameter_source_image_sha256": "1ed4fb76fb5978ff30588661bea89da04208ded4aadca9554c32646763a0a4ce",
+      "control_parity_status": "Independent proposed controls differ from the observed Serato schema; control semantics parity NOT established.",
+      "implementation_evidence": {
+        "kernel": "prototype/extended-effects-kernel.js",
+        "tests": "scripts/test_extended_effects.mjs",
+        "executed_checks": [
+          "Finite nonzero processed output different from dry",
+          "Zero-depth exact dry",
+          "Each exposed independent control changes audio between its minimum and maximum",
+          "Default output distinct from every other new DJ-FX on a nonperiodic multitone fixture"
+        ],
+        "does_not_establish": "The full per-effect proposed acceptance contract, native audio, vendor parameter equivalence, vendor sound matching, production real-time robustness."
+      }
+    },
+    {
+      "name": "HPF",
+      "category": "Filter",
+      "reference_evidence": "catalog-and-parameter-labels",
+      "reference_behavior_status": "individual DSP and trigger/tail behavior not verified",
+      "observed_session_parameters": {
+        "RESONANCE": "1.77",
+        "SLOPE": "12dB",
+        "MIN FREQ": "40.0 Hz",
+        "MAX FREQ": "10.0 kHz"
+      },
+      "source_ids": [
+        "catalog",
+        "list",
+        "controls",
+        "advanced",
+        "all-strips"
+      ],
+      "contract_status": "proposed-independent-not-executed",
+      "independent_realization": "High-pass biquad or cascaded biquads.",
+      "proposed_controls": "Cutoff, resonance, slope.",
+      "measurable_acceptance": "At cutoff 1 kHz, 100 Hz output is at least 12 dB below 4 kHz output; the response changes when cutoff changes.",
+      "acceptance_scope": "Validates the proposed independent processor, not sonic equivalence or matching vendor defaults.",
+      "reference_unknowns": [
+        "Actual control ranges and defaults",
+        "Depth mapping and nonlinear transitions",
+        "BPM/beat response and phase reset",
+        "Enable/disable and pause/seek tail policy",
+        "Algorithm and sonic equivalence"
+      ],
+      "observed_parameter_source_image_sha256": "d23f53b2b98db753fa553edbbcfa54d4f6735192d30d8dd3966393ab6d6a12e4",
+      "control_parity_status": "Observed labels wired to independent behavior. Vendor mappings, limits, defaults and full enum catalog remain unverified.",
+      "implementation_evidence": {
+        "kernel": "prototype/extended-effects-kernel.js",
+        "tests": "scripts/test_extended_effects.mjs",
+        "executed_checks": [
+          "Finite nonzero processed output different from dry",
+          "Zero-depth exact dry",
+          "Each exposed independent control changes audio between its minimum and maximum",
+          "Default output distinct from every other new DJ-FX on a nonperiodic multitone fixture"
+        ],
+        "does_not_establish": "The full per-effect proposed acceptance contract, native audio, vendor parameter equivalence, vendor sound matching, production real-time robustness."
+      },
+      "executable_observed_controls": [
+        {
+          "name": "Resonance",
+          "min": 0.1,
+          "max": 12,
+          "value": 1.77,
+          "step": 0.1,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Slope",
+          "min": 6,
+          "max": 48,
+          "value": 12,
+          "step": 6,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Min Freq",
+          "min": 20,
+          "max": 2000,
+          "value": 40,
+          "step": 10,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Max Freq",
+          "min": 2000,
+          "max": 20000,
+          "value": 10000,
+          "step": 100,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        }
+      ]
+    },
+    {
+      "name": "Infinity Filter",
+      "category": "Filter",
+      "reference_evidence": "catalog-and-parameter-labels",
+      "reference_behavior_status": "individual DSP and trigger/tail behavior not verified",
+      "observed_session_parameters": {
+        "CENTRE FREQ.": "700 Hz",
+        "TYPE": "Peak II",
+        "DIRECTION": "50%",
+        "BEAT MODIFY": "1"
+      },
+      "source_ids": [
+        "catalog",
+        "list",
+        "controls",
+        "advanced",
+        "all-strips"
+      ],
+      "contract_status": "proposed-independent-not-executed",
+      "independent_realization": "Proposed continuously cycling bank of overlapping resonant sweeps with fade-in/out at wrap boundaries.",
+      "proposed_controls": "Sweep direction, rate, center frequency, band spacing.",
+      "measurable_acceptance": "A spectrogram shows multiple continuously moving peaks across repeated cycles; no global reversal occurs at wrap and sample discontinuities stay below the chosen click threshold.",
+      "acceptance_scope": "Validates the proposed independent processor, not sonic equivalence or matching vendor defaults.",
+      "reference_unknowns": [
+        "Actual control ranges and defaults",
+        "Depth mapping and nonlinear transitions",
+        "BPM/beat response and phase reset",
+        "Enable/disable and pause/seek tail policy",
+        "Algorithm and sonic equivalence",
+        "Actual direction, pitch/filter topology and meaning of named variant"
+      ],
+      "observed_parameter_source_image_sha256": "b49cb878bdf6136c1b05afbfd41fa4d773d45ffc84edae8ed2936579265152db",
+      "control_parity_status": "Independent proposed controls differ from the observed Serato schema; control semantics parity NOT established.",
+      "implementation_evidence": {
+        "kernel": "prototype/extended-effects-kernel.js",
+        "tests": "scripts/test_extended_effects.mjs",
+        "executed_checks": [
+          "Finite nonzero processed output different from dry",
+          "Zero-depth exact dry",
+          "Each exposed independent control changes audio between its minimum and maximum",
+          "Default output distinct from every other new DJ-FX on a nonperiodic multitone fixture"
+        ],
+        "does_not_establish": "The full per-effect proposed acceptance contract, native audio, vendor parameter equivalence, vendor sound matching, production real-time robustness."
+      }
+    },
+    {
+      "name": "LFO Filter",
+      "category": "Filter",
+      "reference_evidence": "catalog-and-parameter-labels",
+      "reference_behavior_status": "individual DSP and trigger/tail behavior not verified",
+      "observed_session_parameters": {
+        "RESONANCE": "1.41",
+        "LFO DEPTH": "50%",
+        "LFO SHAPE": "Sine",
+        "BEAT MODIFY": "1"
+      },
+      "source_ids": [
+        "catalog",
+        "list",
+        "controls",
+        "advanced",
+        "all-strips"
+      ],
+      "contract_status": "proposed-independent-not-executed",
+      "independent_realization": "Low-pass or band-pass cutoff driven by a tempo-synchronized LFO.",
+      "proposed_controls": "Cutoff range, resonance, LFO depth/shape/rate.",
+      "measurable_acceptance": "Noise-band energy oscillates at BPM/(60 × beats) within 2%; LFO depth zero removes periodic cutoff movement.",
+      "acceptance_scope": "Validates the proposed independent processor, not sonic equivalence or matching vendor defaults.",
+      "reference_unknowns": [
+        "Actual control ranges and defaults",
+        "Depth mapping and nonlinear transitions",
+        "BPM/beat response and phase reset",
+        "Enable/disable and pause/seek tail policy",
+        "Algorithm and sonic equivalence"
+      ],
+      "observed_parameter_source_image_sha256": "8926d8d8ddd572230c416b82e9921693e360c846e1df79e0d47b54cbd86b0b56",
+      "control_parity_status": "Observed labels wired to independent behavior. Vendor mappings, limits, defaults and full enum catalog remain unverified.",
+      "implementation_evidence": {
+        "kernel": "prototype/extended-effects-kernel.js",
+        "tests": "scripts/test_extended_effects.mjs",
+        "executed_checks": [
+          "Finite nonzero processed output different from dry",
+          "Zero-depth exact dry",
+          "Each exposed independent control changes audio between its minimum and maximum",
+          "Default output distinct from every other new DJ-FX on a nonperiodic multitone fixture"
+        ],
+        "does_not_establish": "The full per-effect proposed acceptance contract, native audio, vendor parameter equivalence, vendor sound matching, production real-time robustness."
+      },
+      "executable_observed_controls": [
+        {
+          "name": "Resonance",
+          "min": 0.1,
+          "max": 12,
+          "value": 1.41,
+          "step": 0.1,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "LFO Depth",
+          "min": 0,
+          "max": 100,
+          "value": 50,
+          "step": 1,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "LFO Shape",
+          "value": "Sine",
+          "options": [
+            "Sine",
+            "Triangle",
+            "Square",
+            "Saw"
+          ],
+          "observedLabel": true,
+          "rangeStatus": "Sine observed; other supported shapes are independent proposals, vendor catalog unknown"
+        },
+        {
+          "name": "Beat Modify",
+          "min": 0.125,
+          "max": 4,
+          "value": 1,
+          "step": 0.125,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        }
+      ]
+    },
+    {
+      "name": "LPF",
+      "category": "Filter",
+      "reference_evidence": "catalog-and-parameter-labels",
+      "reference_behavior_status": "individual DSP and trigger/tail behavior not verified",
+      "observed_session_parameters": {
+        "RESONANCE": "1.77",
+        "SLOPE": "24dB",
+        "MIN FREQ": "200 Hz",
+        "MAX FREQ": "20.0 kHz"
+      },
+      "source_ids": [
+        "catalog",
+        "list",
+        "controls",
+        "advanced",
+        "strips",
+        "all-strips"
+      ],
+      "contract_status": "proposed-independent-not-executed",
+      "independent_realization": "Low-pass stages with resonance and selectable slope, swept between explicit bounds.",
+      "proposed_controls": "Resonance, slope, minimum/maximum frequency.",
+      "measurable_acceptance": "At cutoff 1 kHz, 8 kHz output is at least 12 dB below 100 Hz output; 24 dB/octave mode attenuates the high band more strongly than 12 dB/octave.",
+      "acceptance_scope": "Validates the proposed independent processor, not sonic equivalence or matching vendor defaults.",
+      "reference_unknowns": [
+        "Actual control ranges and defaults",
+        "Depth mapping and nonlinear transitions",
+        "BPM/beat response and phase reset",
+        "Enable/disable and pause/seek tail policy",
+        "Algorithm and sonic equivalence"
+      ],
+      "observed_parameter_source_image_sha256": "a7c532db1cd4b8ef9de0e02077545a33c99f94efae169319ead6ba8b77b1d71e",
+      "control_parity_status": "Independent proposed controls differ from the observed Serato schema; control semantics parity NOT established."
+    },
+    {
+      "name": "Wah Filter",
+      "category": "Filter",
+      "reference_evidence": "catalog-and-parameter-labels",
+      "reference_behavior_status": "individual DSP and trigger/tail behavior not verified",
+      "observed_session_parameters": {
+        "RESONANCE": "8.00",
+        "RANGE": "4.00 octaves",
+        "LFO DEPTH": "0%",
+        "RATE": "2"
+      },
+      "source_ids": [
+        "catalog",
+        "list",
+        "controls",
+        "advanced",
+        "strips",
+        "all-strips"
+      ],
+      "contract_status": "proposed-independent-not-executed",
+      "independent_realization": "A resonant band-pass sweep with manual center and optional LFO modulation.",
+      "proposed_controls": "Resonance, octave range, LFO depth/rate.",
+      "measurable_acceptance": "Noise exhibits a moving narrow spectral peak; range changes its frequency span, while depth zero removes automatic movement.",
+      "acceptance_scope": "Validates the proposed independent processor, not sonic equivalence or matching vendor defaults.",
+      "reference_unknowns": [
+        "Actual control ranges and defaults",
+        "Depth mapping and nonlinear transitions",
+        "BPM/beat response and phase reset",
+        "Enable/disable and pause/seek tail policy",
+        "Algorithm and sonic equivalence"
+      ],
+      "observed_parameter_source_image_sha256": "4a08852df3e371a68c06cb1b67d831c242021f04c956dcb8203e1844f332fe30",
+      "control_parity_status": "Independent proposed controls differ from the observed Serato schema; control semantics parity NOT established."
+    },
+    {
+      "name": "Repeater",
+      "category": "Looper",
+      "reference_evidence": "catalog-and-parameter-labels",
+      "reference_behavior_status": "individual DSP and trigger/tail behavior not verified",
+      "observed_session_parameters": {
+        "MIX": "70%",
+        "SHREDS": "0%",
+        "RANGE": "1 Beat",
+        "BEAT MODIFY": "1"
+      },
+      "source_ids": [
+        "catalog",
+        "list",
+        "controls",
+        "advanced",
+        "all-strips"
+      ],
+      "contract_status": "proposed-independent-not-executed",
+      "independent_realization": "Capture a tempo-length section in an FX ring buffer and repeat it while the source continues.",
+      "proposed_controls": "Capture length, repeats, retrigger, mix.",
+      "measurable_acceptance": "A unique numbered click sequence repeats the captured section; dry transport after bypass is at the current source time, not the capture point.",
+      "acceptance_scope": "Validates the proposed independent processor, not sonic equivalence or matching vendor defaults.",
+      "reference_unknowns": [
+        "Actual control ranges and defaults",
+        "Depth mapping and nonlinear transitions",
+        "BPM/beat response and phase reset",
+        "Enable/disable and pause/seek tail policy",
+        "Algorithm and sonic equivalence",
+        "Capture window relative to trigger/beatgrid",
+        "Recapture policy during division changes",
+        "Source timeline and bypass-resume behavior"
+      ],
+      "observed_parameter_source_image_sha256": "4776b2a73e6cc3bd59fe1eaa221fd4ef014f4e9bcdb101874f7b3c5521fe7b26",
+      "control_parity_status": "Independent proposed controls differ from the observed Serato schema; control semantics parity NOT established.",
+      "implementation_evidence": {
+        "kernel": "prototype/extended-effects-kernel.js",
+        "tests": "scripts/test_extended_effects.mjs",
+        "executed_checks": [
+          "Finite nonzero processed output different from dry",
+          "Zero-depth exact dry",
+          "Each exposed independent control changes audio between its minimum and maximum",
+          "Default output distinct from every other new DJ-FX on a nonperiodic multitone fixture"
+        ],
+        "does_not_establish": "The full per-effect proposed acceptance contract, native audio, vendor parameter equivalence, vendor sound matching, production real-time robustness."
+      }
+    },
+    {
+      "name": "Retro Halftime",
+      "category": "Looper",
+      "reference_evidence": "catalog-and-parameter-labels",
+      "reference_behavior_status": "individual DSP and trigger/tail behavior not verified",
+      "observed_session_parameters": {
+        "RETRIGGER": "On",
+        "MIX": "100%",
+        "RANGE": "2x",
+        "GRAINS": "90.0"
+      },
+      "source_ids": [
+        "catalog",
+        "list",
+        "controls",
+        "advanced",
+        "all-strips"
+      ],
+      "contract_status": "proposed-independent-not-executed",
+      "independent_realization": "Capture a phrase and read it at half speed, with explicitly selectable pitch-preserving or resampling treatment.",
+      "proposed_controls": "Phrase length, speed, pitch preservation.",
+      "measurable_acceptance": "The captured transient spacing doubles; resampling lowers 440 Hz to 220 Hz, while pitch-preserving mode retains 440 Hz within 3%.",
+      "acceptance_scope": "Validates the proposed independent processor, not sonic equivalence or matching vendor defaults.",
+      "reference_unknowns": [
+        "Actual control ranges and defaults",
+        "Depth mapping and nonlinear transitions",
+        "BPM/beat response and phase reset",
+        "Enable/disable and pause/seek tail policy",
+        "Algorithm and sonic equivalence",
+        "Capture window relative to trigger/beatgrid",
+        "Recapture policy during division changes",
+        "Source timeline and bypass-resume behavior"
+      ],
+      "observed_parameter_source_image_sha256": "d363e986f72646cdf10d9d6642c5cc48c1c32c8035aacfea22c08b015d639f7b",
+      "control_parity_status": "Independent proposed controls differ from the observed Serato schema; control semantics parity NOT established.",
+      "implementation_evidence": {
+        "kernel": "prototype/extended-effects-kernel.js",
+        "tests": "scripts/test_extended_effects.mjs",
+        "executed_checks": [
+          "Finite nonzero processed output different from dry",
+          "Zero-depth exact dry",
+          "Each exposed independent control changes audio between its minimum and maximum",
+          "Default output distinct from every other new DJ-FX on a nonperiodic multitone fixture"
+        ],
+        "does_not_establish": "The full per-effect proposed acceptance contract, native audio, vendor parameter equivalence, vendor sound matching, production real-time robustness."
+      }
+    },
+    {
+      "name": "Roll",
+      "category": "Looper",
+      "reference_evidence": "catalog-and-parameter-labels",
+      "reference_behavior_status": "individual DSP and trigger/tail behavior not verified",
+      "observed_session_parameters": {
+        "REPEATS": "1",
+        "SHREDS": "0%",
+        "RANGE": "1 Beat",
+        "BEAT MODIFY": "1"
+      },
+      "source_ids": [
+        "catalog",
+        "list",
+        "controls",
+        "advanced",
+        "all-strips"
+      ],
+      "contract_status": "proposed-independent-not-executed",
+      "independent_realization": "Capture a beat-sized fragment and repeat it while enabled.",
+      "proposed_controls": "Roll length, quantize, mix.",
+      "measurable_acceptance": "Impulse spacing equals the selected roll division within one render quantum; bypass restores the continuing source.",
+      "acceptance_scope": "Validates the proposed independent processor, not sonic equivalence or matching vendor defaults.",
+      "reference_unknowns": [
+        "Actual control ranges and defaults",
+        "Depth mapping and nonlinear transitions",
+        "BPM/beat response and phase reset",
+        "Enable/disable and pause/seek tail policy",
+        "Algorithm and sonic equivalence",
+        "Capture window relative to trigger/beatgrid",
+        "Recapture policy during division changes",
+        "Source timeline and bypass-resume behavior"
+      ],
+      "observed_parameter_source_image_sha256": "9417d88ddb6ee6f14dfb9788b492fe7f61f6d5614cabbbc490a1461f092386e0",
+      "control_parity_status": "Independent proposed controls differ from the observed Serato schema; control semantics parity NOT established.",
+      "implementation_evidence": {
+        "kernel": "prototype/extended-effects-kernel.js",
+        "tests": "scripts/test_extended_effects.mjs",
+        "executed_checks": [
+          "Finite nonzero processed output different from dry",
+          "Zero-depth exact dry",
+          "Each exposed independent control changes audio between its minimum and maximum",
+          "Default output distinct from every other new DJ-FX on a nonperiodic multitone fixture"
+        ],
+        "does_not_establish": "The full per-effect proposed acceptance contract, native audio, vendor parameter equivalence, vendor sound matching, production real-time robustness."
+      }
+    },
+    {
+      "name": "Slip Roll",
+      "category": "Looper",
+      "reference_evidence": "catalog-and-parameter-labels",
+      "reference_behavior_status": "individual DSP and trigger/tail behavior not verified",
+      "observed_session_parameters": {
+        "REPEATS": "1",
+        "SHREDS": "0%",
+        "RANGE": "1 Beat",
+        "BEAT MODIFY": "1"
+      },
+      "source_ids": [
+        "catalog",
+        "list",
+        "controls",
+        "advanced",
+        "all-strips"
+      ],
+      "contract_status": "proposed-independent-not-executed",
+      "independent_realization": "Recapture the rolling fragment when the subdivision changes, with an uninterrupted dry timeline.",
+      "proposed_controls": "Roll length, recapture, quantize.",
+      "measurable_acceptance": "Changing subdivision during a click sequence replaces the repeated fragment; bypass aligns to the uninterrupted reference timeline within one render quantum.",
+      "acceptance_scope": "Validates the proposed independent processor, not sonic equivalence or matching vendor defaults.",
+      "reference_unknowns": [
+        "Actual control ranges and defaults",
+        "Depth mapping and nonlinear transitions",
+        "BPM/beat response and phase reset",
+        "Enable/disable and pause/seek tail policy",
+        "Algorithm and sonic equivalence",
+        "Capture window relative to trigger/beatgrid",
+        "Recapture policy during division changes",
+        "Source timeline and bypass-resume behavior"
+      ],
+      "observed_parameter_source_image_sha256": "1f85a11cc245aa7acf7b81f10be563bbe5406bb6164ff12191180b3a2b60663a",
+      "control_parity_status": "Independent proposed controls differ from the observed Serato schema; control semantics parity NOT established.",
+      "implementation_evidence": {
+        "kernel": "prototype/extended-effects-kernel.js",
+        "tests": "scripts/test_extended_effects.mjs",
+        "executed_checks": [
+          "Finite nonzero processed output different from dry",
+          "Zero-depth exact dry",
+          "Each exposed independent control changes audio between its minimum and maximum",
+          "Default output distinct from every other new DJ-FX on a nonperiodic multitone fixture"
+        ],
+        "does_not_establish": "The full per-effect proposed acceptance contract, native audio, vendor parameter equivalence, vendor sound matching, production real-time robustness."
+      }
+    },
+    {
+      "name": "Stretch",
+      "category": "Looper",
+      "reference_evidence": "catalog-and-parameter-labels",
+      "reference_behavior_status": "individual DSP and trigger/tail behavior not verified",
+      "observed_session_parameters": {
+        "RETRIGGER": "Off",
+        "MIX": "100%",
+        "RANGE": "4x",
+        "GRAINS": "90.0"
+      },
+      "source_ids": [
+        "catalog",
+        "list",
+        "controls",
+        "advanced",
+        "all-strips"
+      ],
+      "contract_status": "proposed-independent-not-executed",
+      "independent_realization": "Granular or phase-vocoder processing of a captured section with independently controlled duration and pitch.",
+      "proposed_controls": "Stretch ratio, grain size, pitch.",
+      "measurable_acceptance": "A transient pair doubles its separation at stretch 2 while a stable 440 Hz tone stays within 3%; disabling reveals current dry source time.",
+      "acceptance_scope": "Validates the proposed independent processor, not sonic equivalence or matching vendor defaults.",
+      "reference_unknowns": [
+        "Actual control ranges and defaults",
+        "Depth mapping and nonlinear transitions",
+        "BPM/beat response and phase reset",
+        "Enable/disable and pause/seek tail policy",
+        "Algorithm and sonic equivalence",
+        "Capture window relative to trigger/beatgrid",
+        "Recapture policy during division changes",
+        "Source timeline and bypass-resume behavior"
+      ],
+      "observed_parameter_source_image_sha256": "dea1ec0068f7d36d57e149e18739c22962e39686759da6782cfa836f1fe9f3ec",
+      "control_parity_status": "Independent proposed controls differ from the observed Serato schema; control semantics parity NOT established.",
+      "implementation_evidence": {
+        "kernel": "prototype/extended-effects-kernel.js",
+        "tests": "scripts/test_extended_effects.mjs",
+        "executed_checks": [
+          "Finite nonzero processed output different from dry",
+          "Zero-depth exact dry",
+          "Each exposed independent control changes audio between its minimum and maximum",
+          "Default output distinct from every other new DJ-FX on a nonperiodic multitone fixture"
+        ],
+        "does_not_establish": "The full per-effect proposed acceptance contract, native audio, vendor parameter equivalence, vendor sound matching, production real-time robustness."
+      }
+    },
+    {
+      "name": "Stutter Repeater",
+      "category": "Looper",
+      "reference_evidence": "catalog-and-parameter-labels",
+      "reference_behavior_status": "individual DSP and trigger/tail behavior not verified",
+      "observed_session_parameters": {
+        "MIX": "70%",
+        "SHREDS": "100%",
+        "RANGE": "2 Beats",
+        "BEAT MODIFY": "1/4"
+      },
+      "source_ids": [
+        "catalog",
+        "list",
+        "controls",
+        "advanced",
+        "all-strips"
+      ],
+      "contract_status": "proposed-independent-not-executed",
+      "independent_realization": "Gated repetitions of a captured tempo fragment with a configurable duty cycle.",
+      "proposed_controls": "Fragment length, gate duty, count.",
+      "measurable_acceptance": "Measured envelope contains repeated fragments separated by near-silent windows matching the configured duty cycle.",
+      "acceptance_scope": "Validates the proposed independent processor, not sonic equivalence or matching vendor defaults.",
+      "reference_unknowns": [
+        "Actual control ranges and defaults",
+        "Depth mapping and nonlinear transitions",
+        "BPM/beat response and phase reset",
+        "Enable/disable and pause/seek tail policy",
+        "Algorithm and sonic equivalence",
+        "Capture window relative to trigger/beatgrid",
+        "Recapture policy during division changes",
+        "Source timeline and bypass-resume behavior"
+      ],
+      "observed_parameter_source_image_sha256": "5d093c50c8de9f0ce621a5173473f189cdf187703ddc2032d08e34b39a1aa096",
+      "control_parity_status": "Independent proposed controls differ from the observed Serato schema; control semantics parity NOT established.",
+      "implementation_evidence": {
+        "kernel": "prototype/extended-effects-kernel.js",
+        "tests": "scripts/test_extended_effects.mjs",
+        "executed_checks": [
+          "Finite nonzero processed output different from dry",
+          "Zero-depth exact dry",
+          "Each exposed independent control changes audio between its minimum and maximum",
+          "Default output distinct from every other new DJ-FX on a nonperiodic multitone fixture"
+        ],
+        "does_not_establish": "The full per-effect proposed acceptance contract, native audio, vendor parameter equivalence, vendor sound matching, production real-time robustness."
+      }
+    },
+    {
+      "name": "Stutter Roll",
+      "category": "Looper",
+      "reference_evidence": "catalog-and-parameter-labels",
+      "reference_behavior_status": "individual DSP and trigger/tail behavior not verified",
+      "observed_session_parameters": {
+        "REPEATS": "1",
+        "SHREDS": "0%",
+        "RANGE": "1 Beat",
+        "BEAT MODIFY": "1/4"
+      },
+      "source_ids": [
+        "catalog",
+        "list",
+        "controls",
+        "advanced",
+        "all-strips"
+      ],
+      "contract_status": "proposed-independent-not-executed",
+      "independent_realization": "Beat roll with rhythmic sub-gates inside each repeated fragment.",
+      "proposed_controls": "Roll length, sub-gate count/duty.",
+      "measurable_acceptance": "A sustained captured tone has the requested number of gate pulses per roll; changing roll length changes cycle time without changing pulse count.",
+      "acceptance_scope": "Validates the proposed independent processor, not sonic equivalence or matching vendor defaults.",
+      "reference_unknowns": [
+        "Actual control ranges and defaults",
+        "Depth mapping and nonlinear transitions",
+        "BPM/beat response and phase reset",
+        "Enable/disable and pause/seek tail policy",
+        "Algorithm and sonic equivalence",
+        "Capture window relative to trigger/beatgrid",
+        "Recapture policy during division changes",
+        "Source timeline and bypass-resume behavior"
+      ],
+      "observed_parameter_source_image_sha256": "608fd56b1c3db55cb5bfb01ae579cc85a49536bd290d6204c691cbbd5743e9dc",
+      "control_parity_status": "Independent proposed controls differ from the observed Serato schema; control semantics parity NOT established.",
+      "implementation_evidence": {
+        "kernel": "prototype/extended-effects-kernel.js",
+        "tests": "scripts/test_extended_effects.mjs",
+        "executed_checks": [
+          "Finite nonzero processed output different from dry",
+          "Zero-depth exact dry",
+          "Each exposed independent control changes audio between its minimum and maximum",
+          "Default output distinct from every other new DJ-FX on a nonperiodic multitone fixture"
+        ],
+        "does_not_establish": "The full per-effect proposed acceptance contract, native audio, vendor parameter equivalence, vendor sound matching, production real-time robustness."
+      }
+    },
+    {
+      "name": "Chorus Basic",
+      "category": "Modulation",
+      "reference_evidence": "catalog-and-parameter-labels",
+      "reference_behavior_status": "individual DSP and trigger/tail behavior not verified",
+      "observed_session_parameters": {
+        "FEEDBACK": "0.00",
+        "DELAY": "5.00 ms",
+        "LFO DEPTH": "50%",
+        "RATE": "4"
+      },
+      "source_ids": [
+        "catalog",
+        "list",
+        "controls",
+        "advanced",
+        "all-strips"
+      ],
+      "contract_status": "proposed-independent-not-executed",
+      "independent_realization": "Two short modulated-delay voices mixed with dry signal.",
+      "proposed_controls": "Delay, modulation depth/rate, width.",
+      "measurable_acceptance": "A steady sine gains symmetric sidebands; modulation depth zero removes the moving sidebands; dry timing remains unchanged.",
+      "acceptance_scope": "Validates the proposed independent processor, not sonic equivalence or matching vendor defaults.",
+      "reference_unknowns": [
+        "Actual control ranges and defaults",
+        "Depth mapping and nonlinear transitions",
+        "BPM/beat response and phase reset",
+        "Enable/disable and pause/seek tail policy",
+        "Algorithm and sonic equivalence"
+      ],
+      "observed_parameter_source_image_sha256": "b885ebb9fd7f839debd589e0b4074d1687b9380c7a9c4825448886fb6f6492ac",
+      "control_parity_status": "Observed labels wired to independent behavior. Vendor mappings, limits, defaults and full enum catalog remain unverified.",
+      "implementation_evidence": {
+        "kernel": "prototype/extended-effects-kernel.js",
+        "tests": "scripts/test_extended_effects.mjs",
+        "executed_checks": [
+          "Finite nonzero processed output different from dry",
+          "Zero-depth exact dry",
+          "Each exposed independent control changes audio between its minimum and maximum",
+          "Default output distinct from every other new DJ-FX on a nonperiodic multitone fixture"
+        ],
+        "does_not_establish": "The full per-effect proposed acceptance contract, native audio, vendor parameter equivalence, vendor sound matching, production real-time robustness."
+      },
+      "executable_observed_controls": [
+        {
+          "name": "Feedback",
+          "min": 0,
+          "max": 85,
+          "value": 0,
+          "step": 1,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Delay",
+          "min": 1,
+          "max": 40,
+          "value": 5,
+          "step": 0.1,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "LFO Depth",
+          "min": 0,
+          "max": 100,
+          "value": 50,
+          "step": 1,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Rate",
+          "min": 0.125,
+          "max": 16,
+          "value": 4,
+          "step": 0.125,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        }
+      ]
+    },
+    {
+      "name": "Chorus Quad",
+      "category": "Modulation",
+      "reference_evidence": "catalog-and-parameter-labels",
+      "reference_behavior_status": "individual DSP and trigger/tail behavior not verified",
+      "observed_session_parameters": {
+        "FEEDBACK": "0.00",
+        "DELAY": "5.00 ms",
+        "LFO DEPTH": "50%",
+        "RATE": "4"
+      },
+      "source_ids": [
+        "catalog",
+        "list",
+        "controls",
+        "advanced",
+        "all-strips"
+      ],
+      "contract_status": "proposed-independent-not-executed",
+      "independent_realization": "Four independently phased modulated-delay voices.",
+      "proposed_controls": "Voice delay, depth/rate, phase offsets, width.",
+      "measurable_acceptance": "Impulse/sideband analysis demonstrates four distinct delay trajectories at maximum separation; it must not alias a two-voice chorus preset.",
+      "acceptance_scope": "Validates the proposed independent processor, not sonic equivalence or matching vendor defaults.",
+      "reference_unknowns": [
+        "Actual control ranges and defaults",
+        "Depth mapping and nonlinear transitions",
+        "BPM/beat response and phase reset",
+        "Enable/disable and pause/seek tail policy",
+        "Algorithm and sonic equivalence"
+      ],
+      "observed_parameter_source_image_sha256": "571b1f8308a924843735b6574f36642d187944a228946563c02a692f56f75002",
+      "control_parity_status": "Observed labels wired to independent behavior. Vendor mappings, limits, defaults and full enum catalog remain unverified.",
+      "implementation_evidence": {
+        "kernel": "prototype/extended-effects-kernel.js",
+        "tests": "scripts/test_extended_effects.mjs",
+        "executed_checks": [
+          "Finite nonzero processed output different from dry",
+          "Zero-depth exact dry",
+          "Each exposed independent control changes audio between its minimum and maximum",
+          "Default output distinct from every other new DJ-FX on a nonperiodic multitone fixture"
+        ],
+        "does_not_establish": "The full per-effect proposed acceptance contract, native audio, vendor parameter equivalence, vendor sound matching, production real-time robustness."
+      },
+      "executable_observed_controls": [
+        {
+          "name": "Feedback",
+          "min": 0,
+          "max": 85,
+          "value": 0,
+          "step": 1,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Delay",
+          "min": 1,
+          "max": 40,
+          "value": 5,
+          "step": 0.1,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "LFO Depth",
+          "min": 0,
+          "max": 100,
+          "value": 50,
+          "step": 1,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Rate",
+          "min": 0.125,
+          "max": 16,
+          "value": 4,
+          "step": 0.125,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        }
+      ]
+    },
+    {
+      "name": "Falling Flanger",
+      "category": "Modulation",
+      "reference_evidence": "catalog-and-parameter-labels",
+      "reference_behavior_status": "individual DSP and trigger/tail behavior not verified",
+      "observed_session_parameters": {
+        "CENTRE FREQ.": "212 Hz",
+        "TYPE": "Octaves I",
+        "DIRECTION": "-7%",
+        "BEAT MODIFY": "1 Triplet"
+      },
+      "source_ids": [
+        "catalog",
+        "list",
+        "controls",
+        "advanced",
+        "all-strips"
+      ],
+      "contract_status": "proposed-independent-not-executed",
+      "independent_realization": "Short-delay comb filtering with a downward-only repeating sweep and crossfaded resets.",
+      "proposed_controls": "Sweep range/rate, feedback.",
+      "measurable_acceptance": "A noise spectrogram shows consistently descending comb trajectories; resets are crossfaded rather than a sudden full-band jump.",
+      "acceptance_scope": "Validates the proposed independent processor, not sonic equivalence or matching vendor defaults.",
+      "reference_unknowns": [
+        "Actual control ranges and defaults",
+        "Depth mapping and nonlinear transitions",
+        "BPM/beat response and phase reset",
+        "Enable/disable and pause/seek tail policy",
+        "Algorithm and sonic equivalence"
+      ],
+      "observed_parameter_source_image_sha256": "924ba0267a1044d5a5f0e766adf02bd0b0508792609007323da0b431622632ca",
+      "control_parity_status": "Independent proposed controls differ from the observed Serato schema; control semantics parity NOT established.",
+      "implementation_evidence": {
+        "kernel": "prototype/extended-effects-kernel.js",
+        "tests": "scripts/test_extended_effects.mjs",
+        "executed_checks": [
+          "Finite nonzero processed output different from dry",
+          "Zero-depth exact dry",
+          "Each exposed independent control changes audio between its minimum and maximum",
+          "Default output distinct from every other new DJ-FX on a nonperiodic multitone fixture"
+        ],
+        "does_not_establish": "The full per-effect proposed acceptance contract, native audio, vendor parameter equivalence, vendor sound matching, production real-time robustness."
+      }
+    },
+    {
+      "name": "Flanger",
+      "category": "Modulation",
+      "reference_evidence": "catalog-and-parameter-labels",
+      "reference_behavior_status": "individual DSP and trigger/tail behavior not verified",
+      "observed_session_parameters": {
+        "FEEDBACK": "83%",
+        "PITCH": "0.20 ms",
+        "LFO DEPTH": "17%",
+        "BEAT MODIFY": "4"
+      },
+      "source_ids": [
+        "catalog",
+        "list",
+        "controls",
+        "advanced",
+        "all-strips"
+      ],
+      "contract_status": "proposed-independent-not-executed",
+      "independent_realization": "Short variable delay plus feedback producing moving comb notches.",
+      "proposed_controls": "Delay, modulation depth/rate, feedback.",
+      "measurable_acceptance": "Noise reveals multiple comb notches whose spacing changes periodically; feedback increases resonance without instability.",
+      "acceptance_scope": "Validates the proposed independent processor, not sonic equivalence or matching vendor defaults.",
+      "reference_unknowns": [
+        "Actual control ranges and defaults",
+        "Depth mapping and nonlinear transitions",
+        "BPM/beat response and phase reset",
+        "Enable/disable and pause/seek tail policy",
+        "Algorithm and sonic equivalence"
+      ],
+      "observed_parameter_source_image_sha256": "99033a4e430f703b58dcdb8bfa18e459869cb2b14d11b7ec473bf872d000bb22",
+      "control_parity_status": "Observed labels wired to independent behavior. Vendor mappings, limits, defaults and full enum catalog remain unverified.",
+      "implementation_evidence": {
+        "kernel": "prototype/extended-effects-kernel.js",
+        "tests": "scripts/test_extended_effects.mjs",
+        "executed_checks": [
+          "Finite nonzero processed output different from dry",
+          "Zero-depth exact dry",
+          "Each exposed independent control changes audio between its minimum and maximum",
+          "Default output distinct from every other new DJ-FX on a nonperiodic multitone fixture"
+        ],
+        "does_not_establish": "The full per-effect proposed acceptance contract, native audio, vendor parameter equivalence, vendor sound matching, production real-time robustness."
+      },
+      "executable_observed_controls": [
+        {
+          "name": "Feedback",
+          "min": 0,
+          "max": 90,
+          "value": 83,
+          "step": 1,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Pitch",
+          "min": 0.05,
+          "max": 20,
+          "value": 0.2,
+          "step": 0.05,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "LFO Depth",
+          "min": 0,
+          "max": 100,
+          "value": 17,
+          "step": 1,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Beat Modify",
+          "min": 0.125,
+          "max": 4,
+          "value": 4,
+          "step": 0.125,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        }
+      ]
+    },
+    {
+      "name": "Infinity Flanger",
+      "category": "Modulation",
+      "reference_evidence": "catalog-and-parameter-labels",
+      "reference_behavior_status": "individual DSP and trigger/tail behavior not verified",
+      "observed_session_parameters": {
+        "CENTRE FREQ.": "800 Hz",
+        "TYPE": "Omega",
+        "DIRECTION": "50%",
+        "BEAT MODIFY": "1"
+      },
+      "source_ids": [
+        "catalog",
+        "list",
+        "controls",
+        "advanced",
+        "all-strips"
+      ],
+      "contract_status": "proposed-independent-not-executed",
+      "independent_realization": "Proposed staggered one-direction comb sweeps with complementary envelopes.",
+      "proposed_controls": "Direction, rate, feedback, spacing.",
+      "measurable_acceptance": "Comb trajectories continue in one direction over at least three cycles without a common turnaround; output remains bounded at maximum feedback.",
+      "acceptance_scope": "Validates the proposed independent processor, not sonic equivalence or matching vendor defaults.",
+      "reference_unknowns": [
+        "Actual control ranges and defaults",
+        "Depth mapping and nonlinear transitions",
+        "BPM/beat response and phase reset",
+        "Enable/disable and pause/seek tail policy",
+        "Algorithm and sonic equivalence",
+        "Actual direction, pitch/filter topology and meaning of named variant"
+      ],
+      "observed_parameter_source_image_sha256": "7265e3981ae7a30c820a2750a1a0b81b33a6da0bdb70e5fb93f7e89dc2c7fbf9",
+      "control_parity_status": "Independent proposed controls differ from the observed Serato schema; control semantics parity NOT established.",
+      "implementation_evidence": {
+        "kernel": "prototype/extended-effects-kernel.js",
+        "tests": "scripts/test_extended_effects.mjs",
+        "executed_checks": [
+          "Finite nonzero processed output different from dry",
+          "Zero-depth exact dry",
+          "Each exposed independent control changes audio between its minimum and maximum",
+          "Default output distinct from every other new DJ-FX on a nonperiodic multitone fixture"
+        ],
+        "does_not_establish": "The full per-effect proposed acceptance contract, native audio, vendor parameter equivalence, vendor sound matching, production real-time robustness."
+      }
+    },
+    {
+      "name": "Pansformer",
+      "category": "Modulation",
+      "reference_evidence": "catalog-and-parameter-labels",
+      "reference_behavior_status": "individual DSP and trigger/tail behavior not verified",
+      "observed_session_parameters": {
+        "NOISE": "50%",
+        "SKEW": "50%",
+        "STEREO": "-100%",
+        "BEAT MODIFY": "1/4"
+      },
+      "source_ids": [
+        "catalog",
+        "list",
+        "controls",
+        "advanced",
+        "all-strips"
+      ],
+      "contract_status": "proposed-independent-not-executed",
+      "independent_realization": "Proposed stereo-alternating rhythmic gate.",
+      "proposed_controls": "Rate, duty, stereo width.",
+      "measurable_acceptance": "L/R energy alternates at the configured division, with silent gate windows; width zero centers the processed signal.",
+      "acceptance_scope": "Validates the proposed independent processor, not sonic equivalence or matching vendor defaults.",
+      "reference_unknowns": [
+        "Actual control ranges and defaults",
+        "Depth mapping and nonlinear transitions",
+        "BPM/beat response and phase reset",
+        "Enable/disable and pause/seek tail policy",
+        "Algorithm and sonic equivalence"
+      ],
+      "observed_parameter_source_image_sha256": "61d49093a539ffcab2619db2bcec2e5c0e76581e0237a2d95a03ead998795a8a",
+      "control_parity_status": "Observed labels wired to independent behavior. Vendor mappings, limits, defaults and full enum catalog remain unverified.",
+      "implementation_evidence": {
+        "kernel": "prototype/extended-effects-kernel.js",
+        "tests": "scripts/test_extended_effects.mjs",
+        "executed_checks": [
+          "Finite nonzero processed output different from dry",
+          "Zero-depth exact dry",
+          "Each exposed independent control changes audio between its minimum and maximum",
+          "Default output distinct from every other new DJ-FX on a nonperiodic multitone fixture"
+        ],
+        "does_not_establish": "The full per-effect proposed acceptance contract, native audio, vendor parameter equivalence, vendor sound matching, production real-time robustness."
+      },
+      "executable_observed_controls": [
+        {
+          "name": "Noise",
+          "min": 0,
+          "max": 100,
+          "value": 50,
+          "step": 1,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Skew",
+          "min": 5,
+          "max": 95,
+          "value": 50,
+          "step": 1,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Stereo",
+          "min": -100,
+          "max": 100,
+          "value": -100,
+          "step": 1,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Beat Modify",
+          "min": 0.125,
+          "max": 4,
+          "value": 0.25,
+          "step": 0.125,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        }
+      ]
+    },
+    {
+      "name": "Phaser",
+      "category": "Modulation",
+      "reference_evidence": "catalog-and-parameter-labels",
+      "reference_behavior_status": "individual DSP and trigger/tail behavior not verified",
+      "observed_session_parameters": {
+        "FEEDBACK": "85%",
+        "PITCH": "2.00 kHz",
+        "LFO DEPTH": "60%",
+        "BEAT MODIFY": "4"
+      },
+      "source_ids": [
+        "catalog",
+        "list",
+        "controls",
+        "advanced",
+        "all-strips"
+      ],
+      "contract_status": "proposed-independent-not-executed",
+      "independent_realization": "Modulated all-pass cascade mixed with the source.",
+      "proposed_controls": "Stages, center/range, rate, feedback.",
+      "measurable_acceptance": "Noise exhibits moving non-equidistant cancellation notches; disabling modulation fixes those notch positions.",
+      "acceptance_scope": "Validates the proposed independent processor, not sonic equivalence or matching vendor defaults.",
+      "reference_unknowns": [
+        "Actual control ranges and defaults",
+        "Depth mapping and nonlinear transitions",
+        "BPM/beat response and phase reset",
+        "Enable/disable and pause/seek tail policy",
+        "Algorithm and sonic equivalence"
+      ],
+      "observed_parameter_source_image_sha256": "bbb2299775e4dc7f5bec5d6ee27fc6f58d8c53499a15b48c3f3e58d997383294",
+      "control_parity_status": "Observed labels wired to independent behavior. Vendor mappings, limits, defaults and full enum catalog remain unverified.",
+      "implementation_evidence": {
+        "kernel": "prototype/extended-effects-kernel.js",
+        "tests": "scripts/test_extended_effects.mjs",
+        "executed_checks": [
+          "Finite nonzero processed output different from dry",
+          "Zero-depth exact dry",
+          "Each exposed independent control changes audio between its minimum and maximum",
+          "Default output distinct from every other new DJ-FX on a nonperiodic multitone fixture"
+        ],
+        "does_not_establish": "The full per-effect proposed acceptance contract, native audio, vendor parameter equivalence, vendor sound matching, production real-time robustness."
+      },
+      "executable_observed_controls": [
+        {
+          "name": "Feedback",
+          "min": 0,
+          "max": 90,
+          "value": 85,
+          "step": 1,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Pitch",
+          "min": 40,
+          "max": 8000,
+          "value": 2000,
+          "step": 20,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "LFO Depth",
+          "min": 0,
+          "max": 100,
+          "value": 60,
+          "step": 1,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Beat Modify",
+          "min": 0.125,
+          "max": 4,
+          "value": 4,
+          "step": 0.125,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        }
+      ]
+    },
+    {
+      "name": "Pulse Spiral",
+      "category": "Modulation",
+      "reference_evidence": "catalog-and-parameter-labels",
+      "reference_behavior_status": "individual DSP and trigger/tail behavior not verified",
+      "observed_session_parameters": {
+        "FEEDBACK": "70%",
+        "FILTER": "0%",
+        "SLIDE RATE": "50%",
+        "BEAT MODIFY": "1/2"
+      },
+      "source_ids": [
+        "catalog",
+        "list",
+        "controls",
+        "advanced",
+        "all-strips"
+      ],
+      "contract_status": "proposed-independent-not-executed",
+      "independent_realization": "Proposed pitch-motion processor combined with a rhythmic amplitude envelope.",
+      "proposed_controls": "Pitch direction/rate, pulse rate/duty.",
+      "measurable_acceptance": "A sustained tone exhibits both monotonic pitch motion within each crossfaded cycle and envelope pulses; zero pulse depth leaves the pitch motion.",
+      "acceptance_scope": "Validates the proposed independent processor, not sonic equivalence or matching vendor defaults.",
+      "reference_unknowns": [
+        "Actual control ranges and defaults",
+        "Depth mapping and nonlinear transitions",
+        "BPM/beat response and phase reset",
+        "Enable/disable and pause/seek tail policy",
+        "Algorithm and sonic equivalence",
+        "Actual direction, pitch/filter topology and meaning of named variant"
+      ],
+      "observed_parameter_source_image_sha256": "b5b8d6b08b51933c483c6476b0e4b04863ac03fbf72df6679aa3b9be43f5d6fe",
+      "control_parity_status": "Independent proposed controls differ from the observed Serato schema; control semantics parity NOT established.",
+      "implementation_evidence": {
+        "kernel": "prototype/extended-effects-kernel.js",
+        "tests": "scripts/test_extended_effects.mjs",
+        "executed_checks": [
+          "Finite nonzero processed output different from dry",
+          "Zero-depth exact dry",
+          "Each exposed independent control changes audio between its minimum and maximum",
+          "Default output distinct from every other new DJ-FX on a nonperiodic multitone fixture"
+        ],
+        "does_not_establish": "The full per-effect proposed acceptance contract, native audio, vendor parameter equivalence, vendor sound matching, production real-time robustness."
+      }
+    },
+    {
+      "name": "Spiral",
+      "category": "Modulation",
+      "reference_evidence": "catalog-and-parameter-labels",
+      "reference_behavior_status": "individual DSP and trigger/tail behavior not verified",
+      "observed_session_parameters": {
+        "FEEDBACK": "70%",
+        "FILTER": "0%",
+        "SLIDE RATE": "50%",
+        "BEAT MODIFY": "1"
+      },
+      "source_ids": [
+        "catalog",
+        "list",
+        "controls",
+        "advanced",
+        "all-strips"
+      ],
+      "contract_status": "proposed-independent-not-executed",
+      "independent_realization": "Proposed continuous pitch-motion processor with crossfaded overlapping grains.",
+      "proposed_controls": "Pitch direction, sweep range/rate, feedback.",
+      "measurable_acceptance": "A sine spectrogram demonstrates directed pitch motion over repeated cycles; stereo and envelope remain bounded at grain wraps.",
+      "acceptance_scope": "Validates the proposed independent processor, not sonic equivalence or matching vendor defaults.",
+      "reference_unknowns": [
+        "Actual control ranges and defaults",
+        "Depth mapping and nonlinear transitions",
+        "BPM/beat response and phase reset",
+        "Enable/disable and pause/seek tail policy",
+        "Algorithm and sonic equivalence",
+        "Actual direction, pitch/filter topology and meaning of named variant"
+      ],
+      "observed_parameter_source_image_sha256": "34d16f5e4b578dfe47091c1691da8b9b0ed0cba31cd89dc65eefbd0aa49ab1df",
+      "control_parity_status": "Independent proposed controls differ from the observed Serato schema; control semantics parity NOT established.",
+      "implementation_evidence": {
+        "kernel": "prototype/extended-effects-kernel.js",
+        "tests": "scripts/test_extended_effects.mjs",
+        "executed_checks": [
+          "Finite nonzero processed output different from dry",
+          "Zero-depth exact dry",
+          "Each exposed independent control changes audio between its minimum and maximum",
+          "Default output distinct from every other new DJ-FX on a nonperiodic multitone fixture"
+        ],
+        "does_not_establish": "The full per-effect proposed acceptance contract, native audio, vendor parameter equivalence, vendor sound matching, production real-time robustness."
+      }
+    },
+    {
+      "name": "Transform",
+      "category": "Modulation",
+      "reference_evidence": "catalog-and-parameter-labels",
+      "reference_behavior_status": "individual DSP and trigger/tail behavior not verified",
+      "observed_session_parameters": {
+        "NOISE": "50%",
+        "SKEW": "50%",
+        "STEREO": "0%",
+        "BEAT MODIFY": "1/4"
+      },
+      "source_ids": [
+        "catalog",
+        "list",
+        "controls",
+        "advanced",
+        "all-strips"
+      ],
+      "contract_status": "proposed-independent-not-executed",
+      "independent_realization": "Tempo gate approximating rhythmic crossfader cuts.",
+      "proposed_controls": "Rate, duty, smoothing.",
+      "measurable_acceptance": "The output envelope has the expected on/off ratio and period; closed windows are at least 60 dB below open windows at full depth.",
+      "acceptance_scope": "Validates the proposed independent processor, not sonic equivalence or matching vendor defaults.",
+      "reference_unknowns": [
+        "Actual control ranges and defaults",
+        "Depth mapping and nonlinear transitions",
+        "BPM/beat response and phase reset",
+        "Enable/disable and pause/seek tail policy",
+        "Algorithm and sonic equivalence"
+      ],
+      "observed_parameter_source_image_sha256": "fc220d5b87cfe3c9b83ec91e8b1a52c9c07d8b69aca4cd371c568fcb1d2ac4c0",
+      "control_parity_status": "Observed labels wired to independent behavior. Vendor mappings, limits, defaults and full enum catalog remain unverified.",
+      "implementation_evidence": {
+        "kernel": "prototype/extended-effects-kernel.js",
+        "tests": "scripts/test_extended_effects.mjs",
+        "executed_checks": [
+          "Finite nonzero processed output different from dry",
+          "Zero-depth exact dry",
+          "Each exposed independent control changes audio between its minimum and maximum",
+          "Default output distinct from every other new DJ-FX on a nonperiodic multitone fixture"
+        ],
+        "does_not_establish": "The full per-effect proposed acceptance contract, native audio, vendor parameter equivalence, vendor sound matching, production real-time robustness."
+      },
+      "executable_observed_controls": [
+        {
+          "name": "Noise",
+          "min": 0,
+          "max": 100,
+          "value": 50,
+          "step": 1,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Skew",
+          "min": 5,
+          "max": 95,
+          "value": 50,
+          "step": 1,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Stereo",
+          "min": -100,
+          "max": 100,
+          "value": 0,
+          "step": 1,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Beat Modify",
+          "min": 0.125,
+          "max": 4,
+          "value": 0.25,
+          "step": 0.125,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        }
+      ]
+    },
+    {
+      "name": "Tremolo",
+      "category": "Modulation",
+      "reference_evidence": "catalog-and-parameter-labels",
+      "reference_behavior_status": "individual DSP and trigger/tail behavior not verified",
+      "observed_session_parameters": {
+        "LFO SHAPE": "Sine",
+        "SKEW": "50%",
+        "STEREO": "0%",
+        "BEAT MODIFY": "1/4"
+      },
+      "source_ids": [
+        "catalog",
+        "list",
+        "controls",
+        "advanced",
+        "all-strips"
+      ],
+      "contract_status": "proposed-independent-not-executed",
+      "independent_realization": "Smooth amplitude modulation.",
+      "proposed_controls": "Depth, rate, waveform.",
+      "measurable_acceptance": "A sine amplitude envelope oscillates at the configured LFO rate; depth zero nulls against the dry signal after latency alignment.",
+      "acceptance_scope": "Validates the proposed independent processor, not sonic equivalence or matching vendor defaults.",
+      "reference_unknowns": [
+        "Actual control ranges and defaults",
+        "Depth mapping and nonlinear transitions",
+        "BPM/beat response and phase reset",
+        "Enable/disable and pause/seek tail policy",
+        "Algorithm and sonic equivalence"
+      ],
+      "observed_parameter_source_image_sha256": "224d985e91301aca99eb564ac4e58a146dbcb3ba70b58d3a3e2836ed9561438a",
+      "control_parity_status": "Observed labels wired to independent behavior. Vendor mappings, limits, defaults and full enum catalog remain unverified.",
+      "implementation_evidence": {
+        "kernel": "prototype/extended-effects-kernel.js",
+        "tests": "scripts/test_extended_effects.mjs",
+        "executed_checks": [
+          "Finite nonzero processed output different from dry",
+          "Zero-depth exact dry",
+          "Each exposed independent control changes audio between its minimum and maximum",
+          "Default output distinct from every other new DJ-FX on a nonperiodic multitone fixture"
+        ],
+        "does_not_establish": "The full per-effect proposed acceptance contract, native audio, vendor parameter equivalence, vendor sound matching, production real-time robustness."
+      },
+      "executable_observed_controls": [
+        {
+          "name": "LFO Shape",
+          "value": "Sine",
+          "options": [
+            "Sine",
+            "Triangle",
+            "Square",
+            "Saw"
+          ],
+          "observedLabel": true,
+          "rangeStatus": "Sine observed; other supported shapes are independent proposals, vendor catalog unknown"
+        },
+        {
+          "name": "Skew",
+          "min": 5,
+          "max": 95,
+          "value": 50,
+          "step": 1,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Stereo",
+          "min": -100,
+          "max": 100,
+          "value": 0,
+          "step": 1,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Beat Modify",
+          "min": 0.125,
+          "max": 4,
+          "value": 0.25,
+          "step": 0.125,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        }
+      ]
+    },
+    {
+      "name": "Brake Echo",
+      "category": "Out FX",
+      "reference_evidence": "catalog-and-parameter-labels",
+      "reference_behavior_status": "individual DSP and trigger/tail behavior not verified",
+      "observed_session_parameters": {
+        "FEEDBACK": "70%",
+        "STOP TIME": "200%",
+        "STOP CURVE": "-0.30",
+        "BEAT MODIFY": "1"
+      },
+      "source_ids": [
+        "catalog",
+        "list",
+        "controls",
+        "advanced",
+        "all-strips"
+      ],
+      "contract_status": "proposed-independent-not-executed",
+      "independent_realization": "A resampling brake feeding an echo return.",
+      "proposed_controls": "Brake duration/curve, echo time/feedback.",
+      "measurable_acceptance": "A sine frequency decreases toward zero over the specified duration; delayed copies persist after the brake reaches silence.",
+      "acceptance_scope": "Validates the proposed independent processor, not sonic equivalence or matching vendor defaults.",
+      "reference_unknowns": [
+        "Actual control ranges and defaults",
+        "Depth mapping and nonlinear transitions",
+        "BPM/beat response and phase reset",
+        "Enable/disable and pause/seek tail policy",
+        "Algorithm and sonic equivalence",
+        "Whether depth crossing or enable captures input",
+        "Whether 50% is a special threshold",
+        "Behavior at maximum depth and re-trigger",
+        "Source transport versus FX-buffer transport"
+      ],
+      "observed_parameter_source_image_sha256": "c9b5829b35b8c8c71737dec0b2e5cf3074782275135d8b10718665f448ba9f19",
+      "control_parity_status": "Independent proposed controls differ from the observed Serato schema; control semantics parity NOT established.",
+      "implementation_evidence": {
+        "kernel": "prototype/extended-effects-kernel.js",
+        "tests": "scripts/test_extended_effects.mjs",
+        "executed_checks": [
+          "Finite nonzero processed output different from dry",
+          "Zero-depth exact dry",
+          "Each exposed independent control changes audio between its minimum and maximum",
+          "Default output distinct from every other new DJ-FX on a nonperiodic multitone fixture"
+        ],
+        "does_not_establish": "The full per-effect proposed acceptance contract, native audio, vendor parameter equivalence, vendor sound matching, production real-time robustness."
+      }
+    },
+    {
+      "name": "Brake Rewind",
+      "category": "Out FX",
+      "reference_evidence": "catalog-and-parameter-labels",
+      "reference_behavior_status": "individual DSP and trigger/tail behavior not verified",
+      "observed_session_parameters": {
+        "STOP TIME": "2.0x",
+        "CURVE": "0.50",
+        "SPINBACK": "2.00 s",
+        "MODE": "Vinyl"
+      },
+      "source_ids": [
+        "catalog",
+        "list",
+        "controls",
+        "advanced",
+        "all-strips"
+      ],
+      "contract_status": "proposed-independent-not-executed",
+      "independent_realization": "A buffered slowdown followed by negative-rate rewind playback.",
+      "proposed_controls": "Brake duration, rewind speed/duration.",
+      "measurable_acceptance": "A non-symmetric chirp slows then reverses its temporal order; endpoint discontinuities are faded, and transport remains unchanged.",
+      "acceptance_scope": "Validates the proposed independent processor, not sonic equivalence or matching vendor defaults.",
+      "reference_unknowns": [
+        "Actual control ranges and defaults",
+        "Depth mapping and nonlinear transitions",
+        "BPM/beat response and phase reset",
+        "Enable/disable and pause/seek tail policy",
+        "Algorithm and sonic equivalence",
+        "Whether depth crossing or enable captures input",
+        "Whether 50% is a special threshold",
+        "Behavior at maximum depth and re-trigger",
+        "Source transport versus FX-buffer transport"
+      ],
+      "observed_parameter_source_image_sha256": "2ff1943abc90b81ef6ee71559d7d5ea71b865dbfdd9a50ceff96d729ae59ea50",
+      "control_parity_status": "Independent proposed controls differ from the observed Serato schema; control semantics parity NOT established.",
+      "implementation_evidence": {
+        "kernel": "prototype/extended-effects-kernel.js",
+        "tests": "scripts/test_extended_effects.mjs",
+        "executed_checks": [
+          "Finite nonzero processed output different from dry",
+          "Zero-depth exact dry",
+          "Each exposed independent control changes audio between its minimum and maximum",
+          "Default output distinct from every other new DJ-FX on a nonperiodic multitone fixture"
+        ],
+        "does_not_establish": "The full per-effect proposed acceptance contract, native audio, vendor parameter equivalence, vendor sound matching, production real-time robustness."
+      }
+    },
+    {
+      "name": "Braker",
+      "category": "Out FX",
+      "reference_evidence": "catalog-and-parameter-labels",
+      "reference_behavior_status": "individual DSP and trigger/tail behavior not verified",
+      "observed_session_parameters": {
+        "MIX": "100%",
+        "CURVE": "-0.30",
+        "MODE": "Vinyl",
+        "BEAT MODIFY": "2"
+      },
+      "source_ids": [
+        "catalog",
+        "list",
+        "controls",
+        "advanced",
+        "all-strips"
+      ],
+      "contract_status": "proposed-independent-not-executed",
+      "independent_realization": "A triggered resampling slowdown ending in silence.",
+      "proposed_controls": "Brake duration, curve, retrigger.",
+      "measurable_acceptance": "Instantaneous frequency of a 440 Hz tone falls over the defined interval and output RMS reaches the specified silence floor afterward.",
+      "acceptance_scope": "Validates the proposed independent processor, not sonic equivalence or matching vendor defaults.",
+      "reference_unknowns": [
+        "Actual control ranges and defaults",
+        "Depth mapping and nonlinear transitions",
+        "BPM/beat response and phase reset",
+        "Enable/disable and pause/seek tail policy",
+        "Algorithm and sonic equivalence",
+        "Whether depth crossing or enable captures input",
+        "Whether 50% is a special threshold",
+        "Behavior at maximum depth and re-trigger",
+        "Source transport versus FX-buffer transport"
+      ],
+      "observed_parameter_source_image_sha256": "6cf3e1bd7f0d5472c48b0b25fa9ef2163902940349f60c2c582fced441eab86a",
+      "control_parity_status": "Independent proposed controls differ from the observed Serato schema; control semantics parity NOT established.",
+      "implementation_evidence": {
+        "kernel": "prototype/extended-effects-kernel.js",
+        "tests": "scripts/test_extended_effects.mjs",
+        "executed_checks": [
+          "Finite nonzero processed output different from dry",
+          "Zero-depth exact dry",
+          "Each exposed independent control changes audio between its minimum and maximum",
+          "Default output distinct from every other new DJ-FX on a nonperiodic multitone fixture"
+        ],
+        "does_not_establish": "The full per-effect proposed acceptance contract, native audio, vendor parameter equivalence, vendor sound matching, production real-time robustness."
+      }
+    },
+    {
+      "name": "Clean Echo Out",
+      "category": "Out FX",
+      "reference_evidence": "catalog-and-parameter-labels",
+      "reference_behavior_status": "individual DSP and trigger/tail behavior not verified",
+      "observed_session_parameters": {
+        "MAX FEEDBACK": "90%",
+        "FILTER": "0%",
+        "ECHO LEVEL": "70%",
+        "BEAT MODIFY": "1"
+      },
+      "source_ids": [
+        "catalog",
+        "list",
+        "controls",
+        "advanced",
+        "all-strips"
+      ],
+      "contract_status": "proposed-independent-not-executed",
+      "independent_realization": "Capture a clean echo tail while closing the live input path.",
+      "proposed_controls": "Echo time, feedback, capture trigger, dry fade.",
+      "measurable_acceptance": "After capture, a later unique input marker is absent from output while earlier echoes decay; new input must not keep feeding the tail.",
+      "acceptance_scope": "Validates the proposed independent processor, not sonic equivalence or matching vendor defaults.",
+      "reference_unknowns": [
+        "Actual control ranges and defaults",
+        "Depth mapping and nonlinear transitions",
+        "BPM/beat response and phase reset",
+        "Enable/disable and pause/seek tail policy",
+        "Algorithm and sonic equivalence",
+        "Whether depth crossing or enable captures input",
+        "Whether 50% is a special threshold",
+        "Behavior at maximum depth and re-trigger",
+        "Source transport versus FX-buffer transport"
+      ],
+      "observed_parameter_source_image_sha256": "3f782c4c2c743a7ac2475503cbf871c3d9d0c7b450e2425c9208c0a41cbab9f7",
+      "control_parity_status": "Observed labels wired to independent behavior. Vendor mappings, limits, defaults and full enum catalog remain unverified.",
+      "implementation_evidence": {
+        "kernel": "prototype/extended-effects-kernel.js",
+        "tests": "scripts/test_extended_effects.mjs",
+        "executed_checks": [
+          "Finite nonzero processed output different from dry",
+          "Zero-depth exact dry",
+          "Each exposed independent control changes audio between its minimum and maximum",
+          "Default output distinct from every other new DJ-FX on a nonperiodic multitone fixture"
+        ],
+        "does_not_establish": "The full per-effect proposed acceptance contract, native audio, vendor parameter equivalence, vendor sound matching, production real-time robustness."
+      },
+      "executable_observed_controls": [
+        {
+          "name": "Max Feedback",
+          "min": 0,
+          "max": 95,
+          "value": 90,
+          "step": 1,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Filter",
+          "min": 0,
+          "max": 100,
+          "value": 0,
+          "step": 1,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Echo Level",
+          "min": 0,
+          "max": 100,
+          "value": 70,
+          "step": 1,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Beat Modify",
+          "min": 0.125,
+          "max": 4,
+          "value": 1,
+          "step": 0.125,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        }
+      ]
+    },
+    {
+      "name": "Clean Rollout",
+      "category": "Out FX",
+      "reference_evidence": "catalog-and-parameter-labels",
+      "reference_behavior_status": "individual DSP and trigger/tail behavior not verified",
+      "observed_session_parameters": {
+        "ECHO/FEEDBACK": "10%",
+        "FILTER": "19%",
+        "ROLL": "10.0",
+        "BEAT MODIFY": "2"
+      },
+      "source_ids": [
+        "catalog",
+        "list",
+        "controls",
+        "advanced",
+        "all-strips"
+      ],
+      "contract_status": "proposed-independent-not-executed",
+      "independent_realization": "Capture a fragment and repeat/fade it without added distortion or filtering.",
+      "proposed_controls": "Roll division, exit duration, fade curve.",
+      "measurable_acceptance": "Only the captured marker repeats; amplitude decays monotonically to the silence floor without extra harmonic content.",
+      "acceptance_scope": "Validates the proposed independent processor, not sonic equivalence or matching vendor defaults.",
+      "reference_unknowns": [
+        "Actual control ranges and defaults",
+        "Depth mapping and nonlinear transitions",
+        "BPM/beat response and phase reset",
+        "Enable/disable and pause/seek tail policy",
+        "Algorithm and sonic equivalence",
+        "Whether depth crossing or enable captures input",
+        "Whether 50% is a special threshold",
+        "Behavior at maximum depth and re-trigger",
+        "Source transport versus FX-buffer transport"
+      ],
+      "observed_parameter_source_image_sha256": "c0c83bd5a5b39ef9d20d98d6ff93ef5be89131bb14562cf689c237ada01bde6c",
+      "control_parity_status": "Independent proposed controls differ from the observed Serato schema; control semantics parity NOT established.",
+      "implementation_evidence": {
+        "kernel": "prototype/extended-effects-kernel.js",
+        "tests": "scripts/test_extended_effects.mjs",
+        "executed_checks": [
+          "Finite nonzero processed output different from dry",
+          "Zero-depth exact dry",
+          "Each exposed independent control changes audio between its minimum and maximum",
+          "Default output distinct from every other new DJ-FX on a nonperiodic multitone fixture"
+        ],
+        "does_not_establish": "The full per-effect proposed acceptance contract, native audio, vendor parameter equivalence, vendor sound matching, production real-time robustness."
+      }
+    },
+    {
+      "name": "Combo Fade Echo",
+      "category": "Out FX",
+      "reference_evidence": "catalog-and-parameter-labels",
+      "reference_behavior_status": "individual DSP and trigger/tail behavior not verified",
+      "observed_session_parameters": {
+        "FEEDBACK": "65%",
+        "STOP TIME": "200%",
+        "DRIVE": "25%",
+        "BEAT MODIFY": "1"
+      },
+      "source_ids": [
+        "catalog",
+        "list",
+        "controls",
+        "advanced",
+        "all-strips"
+      ],
+      "contract_status": "proposed-independent-not-executed",
+      "independent_realization": "Fade the dry source while introducing a filtered echo return.",
+      "proposed_controls": "Fade duration, filter sweep, feedback.",
+      "measurable_acceptance": "Dry marker amplitude falls while delayed marker peaks remain; filter movement measurably changes their spectral centroid.",
+      "acceptance_scope": "Validates the proposed independent processor, not sonic equivalence or matching vendor defaults.",
+      "reference_unknowns": [
+        "Actual control ranges and defaults",
+        "Depth mapping and nonlinear transitions",
+        "BPM/beat response and phase reset",
+        "Enable/disable and pause/seek tail policy",
+        "Algorithm and sonic equivalence",
+        "Whether depth crossing or enable captures input",
+        "Whether 50% is a special threshold",
+        "Behavior at maximum depth and re-trigger",
+        "Source transport versus FX-buffer transport"
+      ],
+      "observed_parameter_source_image_sha256": "7c91efc300858f175083588e04b4aed2d7c570719ebb7af1d331409be6e5c952",
+      "control_parity_status": "Independent proposed controls differ from the observed Serato schema; control semantics parity NOT established.",
+      "implementation_evidence": {
+        "kernel": "prototype/extended-effects-kernel.js",
+        "tests": "scripts/test_extended_effects.mjs",
+        "executed_checks": [
+          "Finite nonzero processed output different from dry",
+          "Zero-depth exact dry",
+          "Each exposed independent control changes audio between its minimum and maximum",
+          "Default output distinct from every other new DJ-FX on a nonperiodic multitone fixture"
+        ],
+        "does_not_establish": "The full per-effect proposed acceptance contract, native audio, vendor parameter equivalence, vendor sound matching, production real-time robustness."
+      }
+    },
+    {
+      "name": "Echo Out",
+      "category": "Out FX",
+      "reference_evidence": "catalog-and-parameter-labels",
+      "reference_behavior_status": "individual DSP and trigger/tail behavior not verified",
+      "observed_session_parameters": {
+        "MAX FEEDBACK": "82%",
+        "FILTER": "0%",
+        "ECHO LEVEL": "70%",
+        "BEAT MODIFY": "1"
+      },
+      "source_ids": [
+        "catalog",
+        "list",
+        "controls",
+        "advanced",
+        "all-strips"
+      ],
+      "contract_status": "proposed-independent-not-executed",
+      "independent_realization": "Capture/freeze a feedback echo while suppressing subsequent dry/live input.",
+      "proposed_controls": "Capture threshold, feedback, echo time.",
+      "measurable_acceptance": "A post-trigger marker is absent while pre-trigger repeats remain; feedback below unity decays, and the deliberate hold setting remains bounded.",
+      "acceptance_scope": "Validates the proposed independent processor, not sonic equivalence or matching vendor defaults.",
+      "reference_unknowns": [
+        "Actual control ranges and defaults",
+        "Depth mapping and nonlinear transitions",
+        "BPM/beat response and phase reset",
+        "Enable/disable and pause/seek tail policy",
+        "Algorithm and sonic equivalence",
+        "Whether depth crossing or enable captures input",
+        "Whether 50% is a special threshold",
+        "Behavior at maximum depth and re-trigger",
+        "Source transport versus FX-buffer transport"
+      ],
+      "observed_parameter_source_image_sha256": "754a30c0e0268c8bf709f1fd5fc3ee594df26b51978b137fca5e3ae23ae01e75",
+      "control_parity_status": "Observed labels wired to independent behavior. Vendor mappings, limits, defaults and full enum catalog remain unverified.",
+      "implementation_evidence": {
+        "kernel": "prototype/extended-effects-kernel.js",
+        "tests": "scripts/test_extended_effects.mjs",
+        "executed_checks": [
+          "Finite nonzero processed output different from dry",
+          "Zero-depth exact dry",
+          "Each exposed independent control changes audio between its minimum and maximum",
+          "Default output distinct from every other new DJ-FX on a nonperiodic multitone fixture"
+        ],
+        "does_not_establish": "The full per-effect proposed acceptance contract, native audio, vendor parameter equivalence, vendor sound matching, production real-time robustness."
+      },
+      "executable_observed_controls": [
+        {
+          "name": "Max Feedback",
+          "min": 0,
+          "max": 95,
+          "value": 82,
+          "step": 1,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Filter",
+          "min": 0,
+          "max": 100,
+          "value": 0,
+          "step": 1,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Echo Level",
+          "min": 0,
+          "max": 100,
+          "value": 70,
+          "step": 1,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Beat Modify",
+          "min": 0.125,
+          "max": 4,
+          "value": 1,
+          "step": 0.125,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        }
+      ]
+    },
+    {
+      "name": "Epic Stretch Rewind",
+      "category": "Out FX",
+      "reference_evidence": "catalog-and-parameter-labels",
+      "reference_behavior_status": "individual DSP and trigger/tail behavior not verified",
+      "observed_session_parameters": {
+        "STOP TIME": "8.0x",
+        "CURVE": "-1.00",
+        "SPINBACK": "5.00 s",
+        "MODE": "Stretch"
+      },
+      "source_ids": [
+        "catalog",
+        "list",
+        "controls",
+        "advanced",
+        "all-strips"
+      ],
+      "contract_status": "proposed-independent-not-executed",
+      "independent_realization": "Pitch-preserving granular stretching followed by a reversed captured phrase.",
+      "proposed_controls": "Stretch duration, reversal timing, pitch/size.",
+      "measurable_acceptance": "A phrase becomes longer with its sustained pitch retained, then replays in reverse marker order; one uninterrupted forward reader does not pass.",
+      "acceptance_scope": "Validates the proposed independent processor, not sonic equivalence or matching vendor defaults.",
+      "reference_unknowns": [
+        "Actual control ranges and defaults",
+        "Depth mapping and nonlinear transitions",
+        "BPM/beat response and phase reset",
+        "Enable/disable and pause/seek tail policy",
+        "Algorithm and sonic equivalence",
+        "Whether depth crossing or enable captures input",
+        "Whether 50% is a special threshold",
+        "Behavior at maximum depth and re-trigger",
+        "Source transport versus FX-buffer transport"
+      ],
+      "observed_parameter_source_image_sha256": "3e72d6f30ce0497eec142b56b781b69d93695bf023934f9aabe64001154e7842",
+      "control_parity_status": "Independent proposed controls differ from the observed Serato schema; control semantics parity NOT established.",
+      "implementation_evidence": {
+        "kernel": "prototype/extended-effects-kernel.js",
+        "tests": "scripts/test_extended_effects.mjs",
+        "executed_checks": [
+          "Finite nonzero processed output different from dry",
+          "Zero-depth exact dry",
+          "Each exposed independent control changes audio between its minimum and maximum",
+          "Default output distinct from every other new DJ-FX on a nonperiodic multitone fixture"
+        ],
+        "does_not_establish": "The full per-effect proposed acceptance contract, native audio, vendor parameter equivalence, vendor sound matching, production real-time robustness."
+      }
+    },
+    {
+      "name": "Roll Out",
+      "category": "Out FX",
+      "reference_evidence": "catalog-and-parameter-labels",
+      "reference_behavior_status": "individual DSP and trigger/tail behavior not verified",
+      "observed_session_parameters": {
+        "ECHO/FEEDBACK": "40%",
+        "FILTER": "30%",
+        "ROLL": "7.00",
+        "BEAT MODIFY": "4"
+      },
+      "source_ids": [
+        "catalog",
+        "list",
+        "controls",
+        "advanced",
+        "all-strips"
+      ],
+      "contract_status": "proposed-independent-not-executed",
+      "independent_realization": "Capture a tempo fragment, progressively alter roll length, and fade its output.",
+      "proposed_controls": "Initial/final division, exit duration, curve.",
+      "measurable_acceptance": "Inter-repeat intervals follow the programmed progression and output reaches silence; a fixed-length unchanged roll does not pass.",
+      "acceptance_scope": "Validates the proposed independent processor, not sonic equivalence or matching vendor defaults.",
+      "reference_unknowns": [
+        "Actual control ranges and defaults",
+        "Depth mapping and nonlinear transitions",
+        "BPM/beat response and phase reset",
+        "Enable/disable and pause/seek tail policy",
+        "Algorithm and sonic equivalence",
+        "Whether depth crossing or enable captures input",
+        "Whether 50% is a special threshold",
+        "Behavior at maximum depth and re-trigger",
+        "Source transport versus FX-buffer transport"
+      ],
+      "observed_parameter_source_image_sha256": "0a579a28fb4a8b461db2543793d6f28aca6762ec1c2543571825db0b60a18fc3",
+      "control_parity_status": "Independent proposed controls differ from the observed Serato schema; control semantics parity NOT established.",
+      "implementation_evidence": {
+        "kernel": "prototype/extended-effects-kernel.js",
+        "tests": "scripts/test_extended_effects.mjs",
+        "executed_checks": [
+          "Finite nonzero processed output different from dry",
+          "Zero-depth exact dry",
+          "Each exposed independent control changes audio between its minimum and maximum",
+          "Default output distinct from every other new DJ-FX on a nonperiodic multitone fixture"
+        ],
+        "does_not_establish": "The full per-effect proposed acceptance contract, native audio, vendor parameter equivalence, vendor sound matching, production real-time robustness."
+      }
+    },
+    {
+      "name": "Short Brake Echo",
+      "category": "Out FX",
+      "reference_evidence": "catalog-and-parameter-labels",
+      "reference_behavior_status": "individual DSP and trigger/tail behavior not verified",
+      "observed_session_parameters": {
+        "FEEDBACK": "66%",
+        "STOP TIME": "200%",
+        "STOP CURVE": "0.00",
+        "BEAT MODIFY": "1/4 Dotted"
+      },
+      "source_ids": [
+        "catalog",
+        "list",
+        "controls",
+        "advanced",
+        "all-strips"
+      ],
+      "contract_status": "proposed-independent-not-executed",
+      "independent_realization": "A shorter brake envelope feeding an echo return.",
+      "proposed_controls": "Short brake duration, echo time/feedback.",
+      "measurable_acceptance": "Measured brake duration is shorter than Brake Echo at the designated comparison presets, while echo tail remains audible after the brake ends.",
+      "acceptance_scope": "Validates the proposed independent processor, not sonic equivalence or matching vendor defaults.",
+      "reference_unknowns": [
+        "Actual control ranges and defaults",
+        "Depth mapping and nonlinear transitions",
+        "BPM/beat response and phase reset",
+        "Enable/disable and pause/seek tail policy",
+        "Algorithm and sonic equivalence",
+        "Whether depth crossing or enable captures input",
+        "Whether 50% is a special threshold",
+        "Behavior at maximum depth and re-trigger",
+        "Source transport versus FX-buffer transport"
+      ],
+      "observed_parameter_source_image_sha256": "cc74e76a1415e5e326870555568c4424c58c5ee46350b2800a0c1d433c80c42f",
+      "control_parity_status": "Independent proposed controls differ from the observed Serato schema; control semantics parity NOT established.",
+      "implementation_evidence": {
+        "kernel": "prototype/extended-effects-kernel.js",
+        "tests": "scripts/test_extended_effects.mjs",
+        "executed_checks": [
+          "Finite nonzero processed output different from dry",
+          "Zero-depth exact dry",
+          "Each exposed independent control changes audio between its minimum and maximum",
+          "Default output distinct from every other new DJ-FX on a nonperiodic multitone fixture"
+        ],
+        "does_not_establish": "The full per-effect proposed acceptance contract, native audio, vendor parameter equivalence, vendor sound matching, production real-time robustness."
+      }
+    },
+    {
+      "name": "Slow Roll Out",
+      "category": "Out FX",
+      "reference_evidence": "catalog-and-parameter-labels",
+      "reference_behavior_status": "individual DSP and trigger/tail behavior not verified",
+      "observed_session_parameters": {
+        "ECHO/FEEDBACK": "40%",
+        "FILTER": "0%",
+        "ROLL": "10.0",
+        "BEAT MODIFY": "8"
+      },
+      "source_ids": [
+        "catalog",
+        "list",
+        "controls",
+        "advanced",
+        "all-strips"
+      ],
+      "contract_status": "proposed-independent-not-executed",
+      "independent_realization": "Capture a fragment with progressively lengthening repeats and an exit fade.",
+      "proposed_controls": "Initial division, expansion rate, fade duration.",
+      "measurable_acceptance": "Measured inter-repeat intervals increase over time; dry source markers after capture remain absent.",
+      "acceptance_scope": "Validates the proposed independent processor, not sonic equivalence or matching vendor defaults.",
+      "reference_unknowns": [
+        "Actual control ranges and defaults",
+        "Depth mapping and nonlinear transitions",
+        "BPM/beat response and phase reset",
+        "Enable/disable and pause/seek tail policy",
+        "Algorithm and sonic equivalence",
+        "Whether depth crossing or enable captures input",
+        "Whether 50% is a special threshold",
+        "Behavior at maximum depth and re-trigger",
+        "Source transport versus FX-buffer transport"
+      ],
+      "observed_parameter_source_image_sha256": "87c2a8e18d8fb3b563b8f427405a746bff5bfc0b12f3112cd4d6401b2e025eff",
+      "control_parity_status": "Independent proposed controls differ from the observed Serato schema; control semantics parity NOT established.",
+      "implementation_evidence": {
+        "kernel": "prototype/extended-effects-kernel.js",
+        "tests": "scripts/test_extended_effects.mjs",
+        "executed_checks": [
+          "Finite nonzero processed output different from dry",
+          "Zero-depth exact dry",
+          "Each exposed independent control changes audio between its minimum and maximum",
+          "Default output distinct from every other new DJ-FX on a nonperiodic multitone fixture"
+        ],
+        "does_not_establish": "The full per-effect proposed acceptance contract, native audio, vendor parameter equivalence, vendor sound matching, production real-time robustness."
+      }
+    },
+    {
+      "name": "Turntable Brake",
+      "category": "Out FX",
+      "reference_evidence": "catalog-and-parameter-labels",
+      "reference_behavior_status": "individual DSP and trigger/tail behavior not verified",
+      "observed_session_parameters": {
+        "STOP TIME": "2.0x",
+        "CURVE": "0.00",
+        "SPINBACK": "0.00 ms",
+        "MODE": "Vinyl"
+      },
+      "source_ids": [
+        "catalog",
+        "list",
+        "controls",
+        "advanced",
+        "all-strips"
+      ],
+      "contract_status": "proposed-independent-not-executed",
+      "independent_realization": "A triggered resampling slowdown with a curved inertia profile and end fade.",
+      "proposed_controls": "Stop duration, curvature, restart behavior.",
+      "measurable_acceptance": "A sine descends in pitch with the configured nonlinear curve; changing stop duration changes time-to-silence without changing initial pitch.",
+      "acceptance_scope": "Validates the proposed independent processor, not sonic equivalence or matching vendor defaults.",
+      "reference_unknowns": [
+        "Actual control ranges and defaults",
+        "Depth mapping and nonlinear transitions",
+        "BPM/beat response and phase reset",
+        "Enable/disable and pause/seek tail policy",
+        "Algorithm and sonic equivalence",
+        "Whether depth crossing or enable captures input",
+        "Whether 50% is a special threshold",
+        "Behavior at maximum depth and re-trigger",
+        "Source transport versus FX-buffer transport"
+      ],
+      "observed_parameter_source_image_sha256": "d4e166d0f2f025a2fe5f184792cea9abaf7f71cee575386b6a7ca7bf948b765c",
+      "control_parity_status": "Independent proposed controls differ from the observed Serato schema; control semantics parity NOT established.",
+      "implementation_evidence": {
+        "kernel": "prototype/extended-effects-kernel.js",
+        "tests": "scripts/test_extended_effects.mjs",
+        "executed_checks": [
+          "Finite nonzero processed output different from dry",
+          "Zero-depth exact dry",
+          "Each exposed independent control changes audio between its minimum and maximum",
+          "Default output distinct from every other new DJ-FX on a nonperiodic multitone fixture"
+        ],
+        "does_not_establish": "The full per-effect proposed acceptance contract, native audio, vendor parameter equivalence, vendor sound matching, production real-time robustness."
+      }
+    },
+    {
+      "name": "Bright Reverb",
+      "category": "Reverb",
+      "reference_evidence": "catalog-and-parameter-labels",
+      "reference_behavior_status": "individual DSP and trigger/tail behavior not verified",
+      "observed_session_parameters": {
+        "DECAY": "1.50 s",
+        "CONTOUR": "25%",
+        "WIDTH": "155%",
+        "MIX MODE": "Wet Mix"
+      },
+      "source_ids": [
+        "catalog",
+        "list",
+        "controls",
+        "advanced",
+        "all-strips"
+      ],
+      "contract_status": "proposed-independent-not-executed",
+      "independent_realization": "A dense reverberator with lightly damped high frequencies.",
+      "proposed_controls": "Decay, brightness, pre-delay, width.",
+      "measurable_acceptance": "An impulse produces a decaying diffuse tail; high-band tail decay exceeds the corresponding dark setting at matched broadband decay.",
+      "acceptance_scope": "Validates the proposed independent processor, not sonic equivalence or matching vendor defaults.",
+      "reference_unknowns": [
+        "Actual control ranges and defaults",
+        "Depth mapping and nonlinear transitions",
+        "BPM/beat response and phase reset",
+        "Enable/disable and pause/seek tail policy",
+        "Algorithm and sonic equivalence"
+      ],
+      "observed_parameter_source_image_sha256": "ac1c881c4c10d20f5430ffcb766ae0e8c9b30b5664ca387b10e2d6370e1ca67a",
+      "control_parity_status": "Observed labels wired to independent behavior. Vendor mappings, limits, defaults and full enum catalog remain unverified.",
+      "implementation_evidence": {
+        "kernel": "prototype/extended-effects-kernel.js",
+        "tests": "scripts/test_extended_effects.mjs",
+        "executed_checks": [
+          "Finite nonzero processed output different from dry",
+          "Zero-depth exact dry",
+          "Each exposed independent control changes audio between its minimum and maximum",
+          "Default output distinct from every other new DJ-FX on a nonperiodic multitone fixture"
+        ],
+        "does_not_establish": "The full per-effect proposed acceptance contract, native audio, vendor parameter equivalence, vendor sound matching, production real-time robustness."
+      },
+      "executable_observed_controls": [
+        {
+          "name": "Decay",
+          "min": 0.1,
+          "max": 10,
+          "value": 1.5,
+          "step": 0.1,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Contour",
+          "min": -100,
+          "max": 100,
+          "value": 25,
+          "step": 1,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Width",
+          "min": 0,
+          "max": 200,
+          "value": 155,
+          "step": 1,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Mix Mode",
+          "value": "Wet Mix",
+          "options": [
+            "Wet Mix",
+            "Send"
+          ],
+          "observedLabel": true,
+          "rangeStatus": "observed examples; catalog incomplete",
+          "defaultStatus": "independent starting mode"
+        }
+      ]
+    },
+    {
+      "name": "Empty Mall Verb",
+      "category": "Reverb",
+      "reference_evidence": "catalog-and-parameter-labels",
+      "reference_behavior_status": "individual DSP and trigger/tail behavior not verified",
+      "observed_session_parameters": {
+        "DECAY": "299 ms",
+        "CONTOUR": "0%",
+        "WIDTH": "200%",
+        "MIX MODE": "Wet Mix"
+      },
+      "source_ids": [
+        "catalog",
+        "list",
+        "controls",
+        "advanced",
+        "all-strips"
+      ],
+      "contract_status": "proposed-independent-not-executed",
+      "independent_realization": "Proposed long, sparse early reflections feeding a diffuse tail.",
+      "proposed_controls": "Reflection spacing, decay, damping, width.",
+      "measurable_acceptance": "Impulse response shows separately measurable early echoes before the dense tail; this profile differs from generic Reverb at matched decay.",
+      "acceptance_scope": "Validates the proposed independent processor, not sonic equivalence or matching vendor defaults.",
+      "reference_unknowns": [
+        "Actual control ranges and defaults",
+        "Depth mapping and nonlinear transitions",
+        "BPM/beat response and phase reset",
+        "Enable/disable and pause/seek tail policy",
+        "Algorithm and sonic equivalence"
+      ],
+      "observed_parameter_source_image_sha256": "d8b2a4253a4561e4994561cc5be9dfc3f93e83187a93ffcb6c36877c07e6a028",
+      "control_parity_status": "Observed labels wired to independent behavior. Vendor mappings, limits, defaults and full enum catalog remain unverified.",
+      "implementation_evidence": {
+        "kernel": "prototype/extended-effects-kernel.js",
+        "tests": "scripts/test_extended_effects.mjs",
+        "executed_checks": [
+          "Finite nonzero processed output different from dry",
+          "Zero-depth exact dry",
+          "Each exposed independent control changes audio between its minimum and maximum",
+          "Default output distinct from every other new DJ-FX on a nonperiodic multitone fixture"
+        ],
+        "does_not_establish": "The full per-effect proposed acceptance contract, native audio, vendor parameter equivalence, vendor sound matching, production real-time robustness."
+      },
+      "executable_observed_controls": [
+        {
+          "name": "Decay",
+          "min": 0.1,
+          "max": 10,
+          "value": 0.299,
+          "step": 0.1,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Contour",
+          "min": -100,
+          "max": 100,
+          "value": 0,
+          "step": 1,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Width",
+          "min": 0,
+          "max": 200,
+          "value": 200,
+          "step": 1,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Mix Mode",
+          "value": "Wet Mix",
+          "options": [
+            "Wet Mix",
+            "Send"
+          ],
+          "observedLabel": true,
+          "rangeStatus": "observed examples; catalog incomplete",
+          "defaultStatus": "independent starting mode"
+        }
+      ]
+    },
+    {
+      "name": "Epic Reverb",
+      "category": "Reverb",
+      "reference_evidence": "catalog-and-parameter-labels",
+      "reference_behavior_status": "individual DSP and trigger/tail behavior not verified",
+      "observed_session_parameters": {
+        "DECAY": "5.00 s",
+        "CONTOUR": "-20%",
+        "WIDTH": "100%",
+        "MIX MODE": "Send"
+      },
+      "source_ids": [
+        "catalog",
+        "list",
+        "controls",
+        "advanced",
+        "all-strips"
+      ],
+      "contract_status": "proposed-independent-not-executed",
+      "independent_realization": "Proposed long, dense, wide reverberation.",
+      "proposed_controls": "Decay, density, width, pre-delay.",
+      "measurable_acceptance": "An impulse yields a longer decay and lower late L/R correlation than baseline Reverb at declared preset settings.",
+      "acceptance_scope": "Validates the proposed independent processor, not sonic equivalence or matching vendor defaults.",
+      "reference_unknowns": [
+        "Actual control ranges and defaults",
+        "Depth mapping and nonlinear transitions",
+        "BPM/beat response and phase reset",
+        "Enable/disable and pause/seek tail policy",
+        "Algorithm and sonic equivalence"
+      ],
+      "observed_parameter_source_image_sha256": "8d8ed610ae9db5ecb0ef84be05e0312794b9ab9d0f79c4451e817d779311fc9b",
+      "control_parity_status": "Observed labels wired to independent behavior. Vendor mappings, limits, defaults and full enum catalog remain unverified.",
+      "implementation_evidence": {
+        "kernel": "prototype/extended-effects-kernel.js",
+        "tests": "scripts/test_extended_effects.mjs",
+        "executed_checks": [
+          "Finite nonzero processed output different from dry",
+          "Zero-depth exact dry",
+          "Each exposed independent control changes audio between its minimum and maximum",
+          "Default output distinct from every other new DJ-FX on a nonperiodic multitone fixture"
+        ],
+        "does_not_establish": "The full per-effect proposed acceptance contract, native audio, vendor parameter equivalence, vendor sound matching, production real-time robustness."
+      },
+      "executable_observed_controls": [
+        {
+          "name": "Decay",
+          "min": 0.1,
+          "max": 10,
+          "value": 5,
+          "step": 0.1,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Contour",
+          "min": -100,
+          "max": 100,
+          "value": -20,
+          "step": 1,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Width",
+          "min": 0,
+          "max": 200,
+          "value": 100,
+          "step": 1,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Mix Mode",
+          "value": "Send",
+          "options": [
+            "Wet Mix",
+            "Send"
+          ],
+          "observedLabel": true,
+          "rangeStatus": "observed examples; catalog incomplete",
+          "defaultStatus": "independent starting mode"
+        }
+      ]
+    },
+    {
+      "name": "Epic Reverb Drop",
+      "category": "Reverb",
+      "reference_evidence": "catalog-and-parameter-labels",
+      "reference_behavior_status": "individual DSP and trigger/tail behavior not verified",
+      "observed_session_parameters": {
+        "DECAY": "85%",
+        "CONTOUR": "0%",
+        "WIDTH": "100%",
+        "DROP RANGE": "24.0 s.t."
+      },
+      "source_ids": [
+        "catalog",
+        "list",
+        "controls",
+        "advanced",
+        "all-strips"
+      ],
+      "contract_status": "proposed-independent-not-executed",
+      "independent_realization": "A reverb-exit processor that closes dry/live input while retaining a dense decay.",
+      "proposed_controls": "Trigger, fade, decay, width.",
+      "measurable_acceptance": "A post-trigger input marker is absent; the pre-trigger reverb tail persists and decays; bypass/reset behavior is repeatable.",
+      "acceptance_scope": "Validates the proposed independent processor, not sonic equivalence or matching vendor defaults.",
+      "reference_unknowns": [
+        "Actual control ranges and defaults",
+        "Depth mapping and nonlinear transitions",
+        "BPM/beat response and phase reset",
+        "Enable/disable and pause/seek tail policy",
+        "Algorithm and sonic equivalence"
+      ],
+      "observed_parameter_source_image_sha256": "e32ba0c25c1a7b8aee2e608c0b76ad506026d96fad5fae45c3806e23d50eb959",
+      "control_parity_status": "Independent proposed controls differ from the observed Serato schema; control semantics parity NOT established.",
+      "implementation_evidence": {
+        "kernel": "prototype/extended-effects-kernel.js",
+        "tests": "scripts/test_extended_effects.mjs",
+        "executed_checks": [
+          "Finite nonzero processed output different from dry",
+          "Zero-depth exact dry",
+          "Each exposed independent control changes audio between its minimum and maximum",
+          "Default output distinct from every other new DJ-FX on a nonperiodic multitone fixture"
+        ],
+        "does_not_establish": "The full per-effect proposed acceptance contract, native audio, vendor parameter equivalence, vendor sound matching, production real-time robustness."
+      }
+    },
+    {
+      "name": "Next Door Verb",
+      "category": "Reverb",
+      "reference_evidence": "catalog-and-parameter-labels",
+      "reference_behavior_status": "individual DSP and trigger/tail behavior not verified",
+      "observed_session_parameters": {
+        "DECAY": "310 ms",
+        "CONTOUR": "-100%",
+        "WIDTH": "166%",
+        "MIX MODE": "Wet Mix"
+      },
+      "source_ids": [
+        "catalog",
+        "list",
+        "controls",
+        "advanced",
+        "all-strips"
+      ],
+      "contract_status": "proposed-independent-not-executed",
+      "independent_realization": "Proposed low-pass colored reverberation suggesting sound through a barrier.",
+      "proposed_controls": "Cutoff, damping, decay, wet mix.",
+      "measurable_acceptance": "An impulse tail has at least 12 dB less high-band energy than Bright Reverb at matched decay; cutoff moves the measured roll-off.",
+      "acceptance_scope": "Validates the proposed independent processor, not sonic equivalence or matching vendor defaults.",
+      "reference_unknowns": [
+        "Actual control ranges and defaults",
+        "Depth mapping and nonlinear transitions",
+        "BPM/beat response and phase reset",
+        "Enable/disable and pause/seek tail policy",
+        "Algorithm and sonic equivalence"
+      ],
+      "observed_parameter_source_image_sha256": "f1eefac42c81d308b1d764b0c2725c8663e8e1ce5014f1bd77dc0de7356543e1",
+      "control_parity_status": "Observed labels wired to independent behavior. Vendor mappings, limits, defaults and full enum catalog remain unverified.",
+      "implementation_evidence": {
+        "kernel": "prototype/extended-effects-kernel.js",
+        "tests": "scripts/test_extended_effects.mjs",
+        "executed_checks": [
+          "Finite nonzero processed output different from dry",
+          "Zero-depth exact dry",
+          "Each exposed independent control changes audio between its minimum and maximum",
+          "Default output distinct from every other new DJ-FX on a nonperiodic multitone fixture"
+        ],
+        "does_not_establish": "The full per-effect proposed acceptance contract, native audio, vendor parameter equivalence, vendor sound matching, production real-time robustness."
+      },
+      "executable_observed_controls": [
+        {
+          "name": "Decay",
+          "min": 0.1,
+          "max": 10,
+          "value": 0.31,
+          "step": 0.1,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Contour",
+          "min": -100,
+          "max": 100,
+          "value": -100,
+          "step": 1,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Width",
+          "min": 0,
+          "max": 200,
+          "value": 166,
+          "step": 1,
+          "observedLabel": true,
+          "rangeStatus": "independent proposed range",
+          "defaultStatus": "independent starting value, not verified vendor default"
+        },
+        {
+          "name": "Mix Mode",
+          "value": "Wet Mix",
+          "options": [
+            "Wet Mix",
+            "Send"
+          ],
+          "observedLabel": true,
+          "rangeStatus": "observed examples; catalog incomplete",
+          "defaultStatus": "independent starting mode"
+        }
+      ]
+    },
+    {
+      "name": "Reverb",
+      "category": "Reverb",
+      "reference_evidence": "catalog-and-parameter-labels",
+      "reference_behavior_status": "individual DSP and trigger/tail behavior not verified",
+      "observed_session_parameters": {
+        "DECAY": "1.50 s",
+        "CONTOUR": "0%",
+        "WIDTH": "100%",
+        "MIX MODE": "Wet Mix"
+      },
+      "source_ids": [
+        "catalog",
+        "list",
+        "controls",
+        "advanced",
+        "strips",
+        "all-strips"
+      ],
+      "contract_status": "proposed-independent-not-executed",
+      "independent_realization": "An independent diffuse reverberator with decay, tonal contour and stereo width.",
+      "proposed_controls": "Decay, contour, width, wet-mix mode.",
+      "measurable_acceptance": "Impulse decay time follows configured duration within a declared tolerance; width zero produces equal L/R output and nonzero width decorrelates the tail.",
+      "acceptance_scope": "Validates the proposed independent processor, not sonic equivalence or matching vendor defaults.",
+      "reference_unknowns": [
+        "Actual control ranges and defaults",
+        "Depth mapping and nonlinear transitions",
+        "BPM/beat response and phase reset",
+        "Enable/disable and pause/seek tail policy",
+        "Algorithm and sonic equivalence"
+      ],
+      "observed_parameter_source_image_sha256": "8313d52cdb8e72b57e88135124a9f8af0ef24ddac43cad5112cc482c8d00efbd",
+      "control_parity_status": "Independent proposed controls differ from the observed Serato schema; control semantics parity NOT established."
+    },
+    {
+      "name": "Vast Reverb",
+      "category": "Reverb",
+      "reference_evidence": "catalog-and-parameter-labels",
+      "reference_behavior_status": "individual DSP and trigger/tail behavior not verified",
+      "observed_session_parameters": {
+        "DECAY": "75%",
+        "CONTOUR": "-20%",
+        "WIDTH": "100%",
+        "MIX MODE": "Send+Mix"
+      },
+      "source_ids": [
+        "catalog",
+        "list",
+        "controls",
+        "advanced",
+        "all-strips"
+      ],
+      "contract_status": "proposed-independent-not-executed",
+      "independent_realization": "Proposed very long late reverberation with broad stereo spread.",
+      "proposed_controls": "Decay, size, density, width.",
+      "measurable_acceptance": "Measured tail duration exceeds baseline Reverb at the declared preset; long tails remain finite and decay without CPU or energy growth.",
+      "acceptance_scope": "Validates the proposed independent processor, not sonic equivalence or matching vendor defaults.",
+      "reference_unknowns": [
+        "Actual control ranges and defaults",
+        "Depth mapping and nonlinear transitions",
+        "BPM/beat response and phase reset",
+        "Enable/disable and pause/seek tail policy",
+        "Algorithm and sonic equivalence"
+      ],
+      "observed_parameter_source_image_sha256": "588865da4779a3adcdc84db887f4df26d26a185de4f90a94e98cb893a2a1c29c",
+      "control_parity_status": "Independent proposed controls differ from the observed Serato schema; control semantics parity NOT established.",
+      "implementation_evidence": {
+        "kernel": "prototype/extended-effects-kernel.js",
+        "tests": "scripts/test_extended_effects.mjs",
+        "executed_checks": [
+          "Finite nonzero processed output different from dry",
+          "Zero-depth exact dry",
+          "Each exposed independent control changes audio between its minimum and maximum",
+          "Default output distinct from every other new DJ-FX on a nonperiodic multitone fixture"
+        ],
+        "does_not_establish": "The full per-effect proposed acceptance contract, native audio, vendor parameter equivalence, vendor sound matching, production real-time robustness."
+      }
+    },
+    {
+      "name": "Vast Verb Drop",
+      "category": "Reverb",
+      "reference_evidence": "catalog-and-parameter-labels",
+      "reference_behavior_status": "individual DSP and trigger/tail behavior not verified",
+      "observed_session_parameters": {
+        "DECAY": "85%",
+        "CONTOUR": "63%",
+        "WIDTH": "145%",
+        "MIX MODE": "Send"
+      },
+      "source_ids": [
+        "catalog",
+        "list",
+        "controls",
+        "advanced",
+        "all-strips"
+      ],
+      "contract_status": "proposed-independent-not-executed",
+      "independent_realization": "A long reverb-exit effect with captured tail and live-input cutoff.",
+      "proposed_controls": "Trigger, decay, input fade, width.",
+      "measurable_acceptance": "A late test marker is rejected after capture while the long tail continues; explicit stop clears the tail safely.",
+      "acceptance_scope": "Validates the proposed independent processor, not sonic equivalence or matching vendor defaults.",
+      "reference_unknowns": [
+        "Actual control ranges and defaults",
+        "Depth mapping and nonlinear transitions",
+        "BPM/beat response and phase reset",
+        "Enable/disable and pause/seek tail policy",
+        "Algorithm and sonic equivalence"
+      ],
+      "observed_parameter_source_image_sha256": "a578cdc1ec76ffeb3eaa09ba0a896255bcfa383f89994c90309b21430f290db5",
+      "control_parity_status": "Independent proposed controls differ from the observed Serato schema; control semantics parity NOT established.",
+      "implementation_evidence": {
+        "kernel": "prototype/extended-effects-kernel.js",
+        "tests": "scripts/test_extended_effects.mjs",
+        "executed_checks": [
+          "Finite nonzero processed output different from dry",
+          "Zero-depth exact dry",
+          "Each exposed independent control changes audio between its minimum and maximum",
+          "Default output distinct from every other new DJ-FX on a nonperiodic multitone fixture"
+        ],
+        "does_not_establish": "The full per-effect proposed acceptance contract, native audio, vendor parameter equivalence, vendor sound matching, production real-time robustness."
+      }
+    },
+    {
+      "name": "Infinity Tone",
+      "category": "Tone",
+      "reference_evidence": "catalog-and-parameter-labels",
+      "reference_behavior_status": "individual DSP and trigger/tail behavior not verified",
+      "observed_session_parameters": {
+        "TIMBRE": "50%",
+        "AMBIENCE": "90%",
+        "DIRECTION": "50%",
+        "BEAT MODIFY": "1"
+      },
+      "source_ids": [
+        "catalog",
+        "list",
+        "controls",
+        "advanced",
+        "all-strips"
+      ],
+      "contract_status": "proposed-independent-not-executed",
+      "independent_realization": "Proposed windowed octave-spaced oscillator bank producing a Shepard-style pitch illusion.",
+      "proposed_controls": "Base frequency, direction/rate, octave span, input tracking.",
+      "measurable_acceptance": "Spectral peaks form an octave-spaced set with rising/falling motion and crossfaded wraps; zero input does not unexpectedly emit tone unless generator mode is explicit.",
+      "acceptance_scope": "Validates the proposed independent processor, not sonic equivalence or matching vendor defaults.",
+      "reference_unknowns": [
+        "Actual control ranges and defaults",
+        "Depth mapping and nonlinear transitions",
+        "BPM/beat response and phase reset",
+        "Enable/disable and pause/seek tail policy",
+        "Algorithm and sonic equivalence",
+        "Actual direction, pitch/filter topology and meaning of named variant"
+      ],
+      "observed_parameter_source_image_sha256": "674f9fd993d639122983788072651dbdebd3b8ec5e7005c2726b7c5514919c35",
+      "control_parity_status": "Independent proposed controls differ from the observed Serato schema; control semantics parity NOT established.",
+      "implementation_evidence": {
+        "kernel": "prototype/extended-effects-kernel.js",
+        "tests": "scripts/test_extended_effects.mjs",
+        "executed_checks": [
+          "Finite nonzero processed output different from dry",
+          "Zero-depth exact dry",
+          "Each exposed independent control changes audio between its minimum and maximum",
+          "Default output distinct from every other new DJ-FX on a nonperiodic multitone fixture"
+        ],
+        "does_not_establish": "The full per-effect proposed acceptance contract, native audio, vendor parameter equivalence, vendor sound matching, production real-time robustness."
+      }
+    },
+    {
+      "name": "Space Invader",
+      "category": "Tone",
+      "reference_evidence": "catalog-and-parameter-labels",
+      "reference_behavior_status": "individual DSP and trigger/tail behavior not verified",
+      "observed_session_parameters": {
+        "TIMBRE": "0%",
+        "AMBIENCE": "100%",
+        "DIRECTION": "-100%",
+        "BEAT MODIFY": "1/8"
+      },
+      "source_ids": [
+        "catalog",
+        "list",
+        "controls",
+        "advanced",
+        "all-strips"
+      ],
+      "contract_status": "proposed-independent-not-executed",
+      "independent_realization": "Proposed stepped ring-modulation/oscillator effect with a deliberate new design; vendor behavior unresolved.",
+      "proposed_controls": "Carrier frequency, step sequence/rate, mix.",
+      "measurable_acceptance": "A 440 Hz sine produces sidebands at carrier plus/minus 440 Hz whose positions follow the programmed steps; dry depth zero removes them.",
+      "acceptance_scope": "Validates the proposed independent processor, not sonic equivalence or matching vendor defaults.",
+      "reference_unknowns": [
+        "Actual control ranges and defaults",
+        "Depth mapping and nonlinear transitions",
+        "BPM/beat response and phase reset",
+        "Enable/disable and pause/seek tail policy",
+        "Algorithm and sonic equivalence",
+        "Actual direction, pitch/filter topology and meaning of named variant"
+      ],
+      "observed_parameter_source_image_sha256": "c55d0640a3121604273fdbb1418e85520c7c8f1296e124427136d041f104f2b6",
+      "control_parity_status": "Independent proposed controls differ from the observed Serato schema; control semantics parity NOT established.",
+      "implementation_evidence": {
+        "kernel": "prototype/extended-effects-kernel.js",
+        "tests": "scripts/test_extended_effects.mjs",
+        "executed_checks": [
+          "Finite nonzero processed output different from dry",
+          "Zero-depth exact dry",
+          "Each exposed independent control changes audio between its minimum and maximum",
+          "Default output distinct from every other new DJ-FX on a nonperiodic multitone fixture"
+        ],
+        "does_not_establish": "The full per-effect proposed acceptance contract, native audio, vendor parameter equivalence, vendor sound matching, production real-time robustness."
+      }
+    }
+  ],
+  "implementation_verification": {
+    "command": "node --experimental-default-type=module scripts/test_extended_effects.mjs",
+    "result": "80/80 passed",
+    "processor_count": 55,
+    "separate_channel_processors": 4,
+    "reference_sonic_equivalence": "not verified",
+    "browser_evidence": "Parent-owned actual browser execution is recorded separately in docs/prototype; do not infer browser success from this kernel result.",
+    "observed_control_tests": {
+      "command": "node --experimental-default-type=module scripts/test_observed_fx_controls.mjs",
+      "result": "15/15 passed",
+      "browser_gate": "Parent execution at prototype/observed-fx-controls-test.html required"
+    }
+  }
+}

@@ -719,3 +719,76 @@ verified by exact readback. The connector again returned 429 and then a board-re
 transport failure. The 28 historical source updates remain pending, plus 17 new
 functional feature annotations in `docs/delivery/trello-functional-sync.json`.
 Existing per-feature model recommendations are preserved; no card is marked accepted.
+
+## 23. Active goal: effects, stems and keylock closure
+
+Jason explicitly requested a persistent goal to close every gap, starting with the
+55 remaining DJ effects and stems/keylock. This work is in progress; section 22 and
+its committed candidate are the prior baseline. No native implementation is authorized.
+
+Implemented since that baseline, with current evidence:
+
+- Signalsmith Stretch 1.3.2 (MIT) performs real pitch-preserving tempo changes and
+  independent pitch shifts in a cancellable browser Worker. The real browser passed
+  12/12 processor checks. The actual AudioEngine passed 18/18 integration checks,
+  measuring master-output frequency, reverse, original-time loop mapping, rapid
+  tempo replacement, pending-start cancellation and four-stem isolation. See
+  `docs/prototype/keylock-browser-results.txt` and `audio-integration-browser-results.txt`.
+- A loopback-only preparation service runs a local four-source model and returns
+  actual WAV audio to the browser. Main-UI preparation ran successfully with Spleeter and the selected SCNet-large model.
+  Original audio is used when every stem is enabled and no stem effect is active;
+  isolated sources are mixed independently when controls change. Research compares
+  Spleeter, HTDemucs and SCNet; checkpoint license and measured separation quality are
+  separate selection gates. See `docs/research/STEMS_RUNTIME_EVALUATION.md`.
+- All 55 remaining named DJ processors and four separate Channel processors now have
+  independent DSP implementations. Final real AudioWorklet rendering passed 59/59
+  (55 DJ + four Channel), plus 5/5 native-processor update/lifecycle checks. The initial
+  58/59 fixture failure was investigated and corrected; 80 pure signal/behavior tests
+  pass. These establish independent processing, not exact Serato sound equivalence.
+- Independent review found and reproduced a static-file traversal and cancellation
+  defects. Fixes and retests are tracked in `docs/prototype/ADVERSARIAL_AUDIO_REVIEW.md`.
+  Retain failures in the evidence history; do not call nearby tests a closure proof.
+
+Next: finish all-effects signal and routed UI tests, finish reference parameter
+extraction, compare licensed models on real held-out audio, refresh the coverage
+registry/Trello and pin a new Claude candidate. Then continue the remaining analysis,
+library, Video, hardware and provider gaps. The terminal condition remains executed
+feature behavior plus explicit external verification; an inventory count is not it.
+
+Current follow-up evidence (16 October, 14:41 UTC): all 59 reference advanced strips
+and 236 labels are recorded in `FX_OBSERVED_PARAMETERS.md`; ranges/enums and exact
+response remain open. Local SCNet code/checkpoint have explicit MIT authorization;
+two held-out music excerpts improved all eight source SI-SDR values over Spleeter,
+while one reconstruction-error gate remains failed (3.025% versus 3%). See the model
+evaluation rather than interpreting functional preparation as quality parity.
+
+Automatic analysis now has 65/65 pure signal checks and 13/13 executed browser-worker
+checks. Its import/reanalysis/manual-protection/reload/reimport UI path has now been exercised. The independent review also found
+Stems FX dry-audio leakage and Channel Filter zero/BPM defects: actual live-history
+exit capture, persistent mute latch and neutral routing fixes now pass 19/19 routed
+engine checks, including loop history and pitch-restart regressions. Sampler keylock now passes 17/17 actual-engine checks; Pitch Play passes
+13/13. Observed FX controls pass 9/9 real-worklet contrasts, with 24/55 extended
+schemas mapped and 31 still open.
+
+## 24. Current DSP checkpoint and remaining acceptance
+
+This section supersedes the implementation status in historical sections 20–22.
+The inventory is now 492 requirements across 110 feature groups; 138 new rows fill
+22 previously empty groups. AUD-005 and SYS-006 remain explicitly independent
+engineering goals without invented vendor interactions. Spotify crate behavior
+uses the 4.0.4+ rule applicable to installed 4.0.10.
+
+Read [DSP_FUNCTIONAL_REVIEW.md](docs/prototype/DSP_FUNCTIONAL_REVIEW.md) for the
+actual executed paths, measured limits and evidence files. Sampler uses actual
+pitch-preserving Worker processing and a global output bus; Pitch Play performs
+real cue-based pitch audition with cancellation and range control. Main UI key
+changes, range selection, Shift-cue selection and observed Echo controls were exercised.
+Signal tests are independent implementation evidence, not a Serato-equivalence claim.
+
+Remaining dependency order: finish 31 observed FX schemas and parameter semantics;
+resolve active Stems-tail continuity and model quality failures; complete library,
+Video, conditional settings and keyboard/visual workflow gaps; then verify physical
+MIDI/LED/jog/master/headphone and unavailable CDJ/DVS/provider behavior. A device or
+service limitation remains an open acceptance item even if browser simulation exists.
+The connected Hercules is unnecessary for browser DSP work and may be unplugged;
+refresh physical state before hardware checks. No native app work is authorized.

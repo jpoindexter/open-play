@@ -1,0 +1,27 @@
+{
+  "executedAt": "2026-10-16T14:27:16.182Z",
+  "passed": 3,
+  "total": 3,
+  "results": [
+    {
+      "name": "Slip Roll subdivision change changes and recaptures output",
+      "passed": true,
+      "differenceRms": 0.20009997583564362,
+      "criterion": "Changing subdivision cannot leave exactly the same captured playback."
+    },
+    {
+      "name": "Slow Roll Out preserves capture beyond general ring-buffer wrap",
+      "passed": true,
+      "tailDifferenceRms": 0,
+      "criterion": "Adding a new input marker12s after capture must not change the captured tail."
+    },
+    {
+      "name": "Roll honors exposed eight-beat capture at60BPM",
+      "passed": true,
+      "output220Hz": 7.785565811273336e-16,
+      "output880Hz": 0.19999999940686042,
+      "requestedSeconds": 8,
+      "criterion": "At5s the8s capture is still collecting live input, not replaying a silently truncated4s capture."
+    }
+  ]
+}

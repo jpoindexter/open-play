@@ -1,0 +1,64 @@
+{
+  "executedAt": "2026-10-16T14:51:41.824Z",
+  "boundary": "Actual app controller functions, stub DOM and decode; real analyzePCM. Does not prove browser decoding, Worker or visible controls.",
+  "passed": 14,
+  "total": 14,
+  "results": [
+    {
+      "name": "Actual controller writes measured numeric tempo and initial grid",
+      "passed": true
+    },
+    {
+      "name": "Measured level and unknown key remain honest",
+      "passed": true
+    },
+    {
+      "name": "Ordinary reanalysis preserves manual BPM/key/grid",
+      "passed": true
+    },
+    {
+      "name": "Explicit replace still preserves protected grid and unknown-result key",
+      "passed": true
+    },
+    {
+      "name": "Locked file key survives explicit replacement with a known measured key",
+      "passed": true
+    },
+    {
+      "name": "Explicit unlocked replacement updates tempo and phase",
+      "passed": true
+    },
+    {
+      "name": "Edit during asynchronous decode wins over queued replacement",
+      "passed": true
+    },
+    {
+      "name": "Cancel during decode prevents publishing a replacement result",
+      "passed": true
+    },
+    {
+      "name": "Post-cancel enqueue drains without another user action",
+      "passed": true
+    },
+    {
+      "name": "Post-cancel enqueue does not revive cancelled pending jobs",
+      "passed": true
+    },
+    {
+      "name": "File import generates content-derived stable identity and obeys analysis disabled",
+      "passed": true
+    },
+    {
+      "name": "Repeated identical file import does not duplicate library row",
+      "passed": true
+    },
+    {
+      "name": "Same bytes restore persisted manual metadata on re-import",
+      "passed": true
+    },
+    {
+      "name": "Actual persistence saves analysis settings and imported metadata without file bytes",
+      "passed": true
+    }
+  ]
+}

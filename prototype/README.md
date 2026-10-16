@@ -3,12 +3,12 @@
 Run `python3 scripts/serve_prototype.py` from the repository root, then open
 http://127.0.0.1:8768/prototype/. On macOS, double-click `Start Open Play.command`.
 Requires Python 3.9+ for the launcher and a modern browser with Web Audio; recording
-also requires MediaRecorder. There is no package install or hosted service.
+also requires MediaRecorder. Core browser playback needs no package install or hosted service. Optional local stem preparation requires the documented Python environment and licensed model checkpoint; no audio is uploaded.
 
 This is an independently written HTML/CSS/JavaScript review prototype. **It does
 not establish 1:1 Serato parity.** All 110 inventoried feature groups have a
 review destination, explicit simulation, or a documented gap. The evidence browser
-contains 354 source-linked requirements and per-feature Codex/Claude recommendations.
+contains 492 source-linked requirements and per-feature Codex/Claude recommendations.
 Some routes explicitly describe missing workflows; they are not implementation passes.
 
 ## Try it
@@ -26,7 +26,7 @@ Some routes explicitly describe missing workflows; they are not implementation p
    acceptance, recommended development models, source links and its current boundary.
 
 Demo sounds are original generated fixtures, not copied music. BPM/key are known
-annotations; there is no automatic BPM/key analysis or stem model. No Serato binary,
+annotations. Actual PCM analysis and local SCNet stem preparation are now available; estimates and quality limits are reported separately. No Serato binary,
 source code, artwork, library or extracted audio ships in this prototype.
 
 ## Preserve / reset
@@ -50,11 +50,12 @@ revision. No public publication is authorized.
 ## Functional closure pass
 
 Reverse/Slip/cue-hold, sampler gating/pitch/gain, timed Flip, slicer, nested and
-multi-rule crates, four independent audio FX, and local video composition/capture
+multi-rule crates, 59 independent DJ audio FX, real buffered keylock/pitch, local stem separation, and local video composition/capture
 now execute actual behavior. Web MIDI has a real connection path, but access timed
 out in the tested browser; hardware compatibility remains unverified.
 
 Run [the 20-check audio/module harness](behavior-tests.html). Its audio does not
 reach the speakers. Read [the functional review](../docs/prototype/FUNCTIONAL_REVIEW.md)
-for UI evidence and exact limitations. Four processors are not 59 completed effects;
-no feature route or simulated state counts as parity acceptance.
+for earlier UI evidence. Read [the DSP continuation](../docs/prototype/DSP_FUNCTIONAL_REVIEW.md)
+for new checks and active findings. All 59 named processors produce real audio, but
+exact reference parameters and sound remain open; no route or simulation counts as parity.

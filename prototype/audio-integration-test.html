@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+  <meta charset="utf-8" /><title>Open Play engine integration checks</title>
+  <style>
+    body {
+      font: 16px system-ui;
+      background: #15171b;
+      color: #eee;
+      max-width: 900px;
+      margin: 32px auto;
+      padding: 16px;
+    }
+    button {
+      font: inherit;
+      padding: 12px;
+    }
+    pre {
+      white-space: pre-wrap;
+    }
+  </style>
+  <h1>Actual engine signal integration</h1>
+  <p>
+    Executes AudioEngine with generated audio and real keylock workers. Measures
+    its master FFT and timeline. Test output is disconnected from speakers.
+  </p>
+  <button id="run">Run engine integration checks</button>
+  <pre id="results" role="status">Not run</pre>
+  <script type="module" src="audio-integration-test.js"></script>
+</html>
