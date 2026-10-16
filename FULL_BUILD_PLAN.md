@@ -667,3 +667,12 @@ Jason approved fully inventoried, labeled documented/simulated states for unavai
 Jason explicitly requires everything Serato DJ Pro does. The [full-scope contract](docs/research/FULL_SCOPE_CONTRACT.md) prevents silent omissions and defines per-feature completeness. [Feature coverage accountability](docs/research/FEATURE_COVERAGE.md) retains every current group, its requirement count, acceptance criterion and model routing. There are now 344 requirements, including separate entries for all 59 named DJ effects and provider-specific workflows. This remains incomplete research, not an implemented parity claim.
 
 Spotify crate support is documented from 4.0.4, superseding older blanket restrictions. Current Beatsource/Beatport sources document migration and metadata handling. Keep provider capabilities versioned; their quotas and access requirements do not become local Open Play feature gates. Four FX parameter strips have been observed; the other 55 remain explicitly unobserved.
+
+
+## 21. Final independent Claude handoff — user requested
+
+Jason requested a Claude handoff when the investigation and full HTML prototype are ready, so Claude can run the same prompt and check for omissions. This is an additional final deliverable; it does not replace the active investigation/prototype objective or authorize native work.
+
+A draft packet is saved at [handoffs/codex-to-claude-completeness-audit.md](handoffs/codex-to-claude-completeness-audit.md). It embeds the complete original prompt, records subsequent approvals and requires an independently derived checklist before comparison against Codex's conclusions. Do not launch Claude automatically now.
+
+Before final delivery, refresh the packet against the exact candidate revision, actual preview/launcher, executed workflow evidence, known gaps and remote synchronization status. Deliver a copy-paste launch prompt with that file path. Claude's report must identify omissions and unsupported claims with sources, reproduction steps and actionable corrections. Record the disposition of each finding and re-test any authorized correction. No review outcome substitutes for Jason's explicit native approval.
