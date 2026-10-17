@@ -564,6 +564,21 @@ async function ensurePreparedStems(track) {
   }
 }
 const deckLoadRequests = new WeakMap();
+async function stemPad(d, pad) {
+  if (!Number.isInteger(pad) || pad < 0 || pad > 7) throw new RangeError("Unknown Stem pad.");
+  if (!d.track) return notify("Load a track first.");
+  const requestedTrack=d.track, loadRequest=deckLoadRequests.get(d);
+  if (!engine.stemBuffers.has(requestedTrack.id)) {
+    notify("Preparing Stems locally; the requested control will apply when ready.");
+    await ensurePreparedStems(requestedTrack);
+    if (d.track !== requestedTrack || deckLoadRequests.get(d) !== loadRequest) return;
+  }
+  if (pad < 4) d.stems[pad] = !d.stems[pad];
+  else d.stemFX[pad-4] = !d.stemFX[pad-4];
+  engine.updateStems(d);
+  renderDecks();
+}
+
 async function load(index, id = state.selected, options = {}) {
   const d = state.decks[index],
     t = trackById(id);
@@ -780,15 +795,7 @@ async function deckAction(action, index, el, event = {}) {
         persist();
       }
     } else if (d.tab === "Stems") {
-      const requestedTrack = d.track;
-      if (!engine.stemBuffers.has(requestedTrack.id)) {
-        notify("Preparing Stems locally; the requested control will apply when ready.");
-        await ensurePreparedStems(requestedTrack);
-        if (d.track !== requestedTrack) return;
-      }
-      if (n < 4) d.stems[n] = !d.stems[n];
-      else d.stemFX[n - 4] = !d.stemFX[n - 4];
-      engine.updateStems(d);
+      return stemPad(d, n);
     } else if (d.tab === "Pitch") {
       // Pointer and keyboard hold handlers own Pitch Play; click cannot retrigger.
       return;
@@ -1203,6 +1210,7 @@ const api = {
   cancelAnalysis,
   stemPreparation,
   ensurePreparedStems,
+  stemPad,
   analysisFieldHint,
 };
 const flipAutomation = createFlipAutomation({
@@ -1227,6 +1235,7 @@ const loopPads=createLoopPads({state,engine,render:renderDecks,notify});
 api.loopPads=loopPads;
 const slicer = createSlicer({ engine, render: renderDecks, notify });
 const pitchPlay = createPitchPlay({engine,render:renderDecks,persist,notify,quantized});
+api.pitchPlay=pitchPlay;
 const panels = createPanels(api);
 document.addEventListener("click", async (e) => {
   const el = e.target.closest("button,[data-track],[data-focus]");

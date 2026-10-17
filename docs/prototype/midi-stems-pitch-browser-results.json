@@ -1,0 +1,196 @@
+{
+  "startedAt": "2026-10-17T22:02:28.365Z",
+  "completed": true,
+  "scope": "Actual app MIDI editor with synthetic messages, prepared known stem fixtures and original master recording. No fresh model-separation, full FX/pitch-quality, native or physical controller acceptance.",
+  "criteria": {
+    "frequencyErrorHz": 1.5,
+    "playingMinimumRMS": 0.005,
+    "silentMaximumRMS": 0.0001,
+    "selectedCuePositionToleranceSeconds": 0.01
+  },
+  "events": [
+    {
+      "name": "record-start",
+      "time": 0
+    },
+    {
+      "name": "all-stems-muted",
+      "time": 0.2089795918367347
+    },
+    {
+      "name": "vocal-only",
+      "time": 0.5108390022675736
+    },
+    {
+      "name": "pitch-held-plus-one",
+      "time": 1.544126984126984
+    },
+    {
+      "name": "pitch-released",
+      "time": 1.8053514739229024
+    }
+  ],
+  "checks": [
+    "All four actual Stem mutes and restore reach real master audio",
+    "All four Stem FX flags reach updateStems and actual vocal Echo owner",
+    "Shift cue selection creates/selects cue without playback or pitch change",
+    "Held Pitch Play shifts real audio and original release survives mapping deletion"
+  ],
+  "errors": [],
+  "sourceBefore": {
+    "app.js": "9443e2eb94127f5aa38ca2ca4b1280134a5f7197a4f2d580dedf25f064b1e5f1",
+    "engine.js": "c0f7fa915938ab416137807a4345878d290110dcdfce23283e46c1e665eec6b1",
+    "panels.js": "494cb0ae47298a336aa2ccf2532686e1038b551fd22a05b908301bf98407143b",
+    "deck-midi.js": "c44ccfff74dc92220c3018929c76fed8475e1f2f3bb22974d9167fd384fad516",
+    "midi.js": "0cabb6dbe98e9eb3f7bc7f7eb44615fa315a0738260e5f3568a34d0aa75ec1ad",
+    "stems.js": "6f6a0dd14caee633b966167e1f089a42cbfb7ea423a99ec7dcfeee0ede4bf866",
+    "pitchplay.js": "125bf56483c9e98478fa7cd0286c1badec3403af49bd7e628f16964b43faa7f2",
+    "midi-stems-pitch-harness.js": "992165f7226396041713167fb5cac235463ca1bf01bdbcfa3bacd961b5ca06ff"
+  },
+  "stems": {
+    "enabled": [
+      true,
+      false,
+      false,
+      false
+    ],
+    "effectsEnabled": [
+      true,
+      true,
+      true,
+      true
+    ],
+    "actualModes": [
+      "echo",
+      "",
+      "",
+      ""
+    ],
+    "actualVocalEffect": true
+  },
+  "selection": {
+    "cue": 1,
+    "position": 1,
+    "playing": false,
+    "keyShift": 0
+  },
+  "pitch": {
+    "shift": 1,
+    "keylock": true,
+    "position": 1,
+    "cue": 1
+  },
+  "release": {
+    "playing": false,
+    "position": 1
+  },
+  "recording": {
+    "bytes": 34067,
+    "format": "audio/webm;codecs=opus",
+    "sha256": "1d8ad2c6ba44df218c755d392d1b47bcbfe0e41be7f43c83f5187663a3103f6c"
+  },
+  "decoded": {
+    "duration": 2.0999773242630386,
+    "sampleRate": 44100,
+    "frames": 92609,
+    "channels": 2
+  },
+  "audio": [
+    {
+      "name": "muted",
+      "expected": [
+        null,
+        550
+      ],
+      "channels": [
+        {
+          "from": 0.2889795918367347,
+          "to": 0.42897959183673473,
+          "rms": 4.183546050119094e-06,
+          "hz": null
+        },
+        {
+          "from": 0.2889795918367347,
+          "to": 0.42897959183673473,
+          "rms": 0.03735353058133985,
+          "hz": 550.0022630941694
+        }
+      ]
+    },
+    {
+      "name": "vocal",
+      "expected": [
+        220,
+        550
+      ],
+      "channels": [
+        {
+          "from": 0.5908390022675736,
+          "to": 0.7308390022675736,
+          "rms": 0.009319921566368447,
+          "hz": 220.0052724520926
+        },
+        {
+          "from": 0.5908390022675736,
+          "to": 0.7308390022675736,
+          "rms": 0.03738632687761387,
+          "hz": 550.003352855218
+        }
+      ]
+    },
+    {
+      "name": "pitch-held",
+      "expected": [
+        220,
+        582.7047018976124
+      ],
+      "channels": [
+        {
+          "from": 1.624126984126984,
+          "to": 1.764126984126984,
+          "rms": 0.009359479190437246,
+          "hz": 219.9988607943587
+        },
+        {
+          "from": 1.624126984126984,
+          "to": 1.764126984126984,
+          "rms": 0.036434625484201476,
+          "hz": 583.6397813560701
+        }
+      ]
+    },
+    {
+      "name": "pitch-release",
+      "expected": [
+        220,
+        null
+      ],
+      "channels": [
+        {
+          "from": 1.8853514739229025,
+          "to": 2.0253514739229024,
+          "rms": 0.009356230093384313,
+          "hz": 219.9971816060827
+        },
+        {
+          "from": 1.8853514739229025,
+          "to": 2.0253514739229024,
+          "rms": 2.7581684832193465e-05,
+          "hz": null
+        }
+      ]
+    }
+  ],
+  "sourceAfter": {
+    "app.js": "9443e2eb94127f5aa38ca2ca4b1280134a5f7197a4f2d580dedf25f064b1e5f1",
+    "engine.js": "c0f7fa915938ab416137807a4345878d290110dcdfce23283e46c1e665eec6b1",
+    "panels.js": "494cb0ae47298a336aa2ccf2532686e1038b551fd22a05b908301bf98407143b",
+    "deck-midi.js": "c44ccfff74dc92220c3018929c76fed8475e1f2f3bb22974d9167fd384fad516",
+    "midi.js": "0cabb6dbe98e9eb3f7bc7f7eb44615fa315a0738260e5f3568a34d0aa75ec1ad",
+    "stems.js": "6f6a0dd14caee633b966167e1f089a42cbfb7ea423a99ec7dcfeee0ede4bf866",
+    "pitchplay.js": "125bf56483c9e98478fa7cd0286c1badec3403af49bd7e628f16964b43faa7f2",
+    "midi-stems-pitch-harness.js": "992165f7226396041713167fb5cac235463ca1bf01bdbcfa3bacd961b5ca06ff"
+  },
+  "sourceStable": true,
+  "finishedAt": "2026-10-17T22:02:30.610Z"
+}
