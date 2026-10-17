@@ -1,0 +1,1872 @@
+{
+  "generated_at": "2026-10-17T12:54:59.117Z",
+  "source_checked_at": "2026-10-17T12:50:43.755803+00:00",
+  "kind": "CURRENT_FEATURE_EVIDENCE_RECONCILIATION_NOT_ALL_FEATURE_RUNTIME_TEST",
+  "git_head": "2678d1670ddbeec712ed219a0b819938b9ffb721",
+  "outcome": "FULL_PARITY_NOT_ESTABLISHED",
+  "full_parity_verified": false,
+  "complete_latest_inventory": false,
+  "reference": {
+    "version": "4.0.10.213",
+    "executable_sha256": "1df36a8907bf3034b174aeab7c6ceb46a87493f78704c14934eb7210e3fdd2f5",
+    "REA_plist_evidence": "ev_fb7043efffb87a67955c1c9a53cb4ff595fecba0cf6ce4d2bff726524bd49ecf",
+    "current_production_page": "https://serato.com/dj/pro/downloads",
+    "production_page_heading": "What’s New in 4.0.10",
+    "beta_separate": true
+  },
+  "desktop": {
+    "version": "0.1.5",
+    "source_commit": "48a6d4dad2f217a8ba166b9ca890a287aabc4feb",
+    "ASAR_sha256": "251bcc16caf9cfb42a3967db058717373a8c6fcb9ff97d56c330058ec8301b03",
+    "frozen_prototype_files_checked": 200,
+    "frozen_prototype_mismatches": []
+  },
+  "scope": {
+    "canonical_features": 110,
+    "canonical_requirements": 522,
+    "beta_deltas_separate": 9,
+    "provisional_current_release_checks": 26,
+    "macos_release_checks": 24,
+    "windows_only_reference_checks": 2,
+    "release_regression_checks": 17,
+    "release_checks_passed": 0,
+    "not_exhaustive": true
+  },
+  "actual_this_check": [
+    "REA version/declaration inspection",
+    "Native main-window screenshots of both applications",
+    "Open Play native MIDI target menu inspection; selection and mappings unchanged",
+    "Current source/candidate/evidence accounting"
+  ],
+  "not_rerun": [
+    "Full audio/DSP suites",
+    "Earlier native persistence/keylock recordings",
+    "Any physical controller operation",
+    "Provider, DVS, CDJ or other-device acceptance"
+  ],
+  "new_defended_gap": {
+    "severity": "high",
+    "feature_groups": [
+      "HW-002",
+      "DEK-007"
+    ],
+    "observation": "The running 0.1.5 target menu has eight targets and no Key Shift or Video target. The matching source list and dispatcher have no corresponding handler.",
+    "boundary": "Direct UI/source absence in this candidate. Does not measure Serato MIDI Key Shift at runtime or prove all MIDI workflows are missing.",
+    "next": "Implement a real target/dispatch lifecycle and measured semitone test in a new candidate; preserve current package and existing knob mapping."
+  },
+  "current_visual_result": "The inspected Vertical states still differ in mode/loop controls and the always-visible Open Play mixer; different dimensions/tracks prohibit pixel-identity or waveform-quality conclusions.",
+  "class_counts": {
+    "subset": 68,
+    "simulation/backend-gap": 21,
+    "subset+wip": 2,
+    "engineering-unverified": 9,
+    "physical-subset": 7,
+    "observed-mismatch": 2,
+    "reference-unresolved": 1
+  },
+  "release_checks": [
+    {
+      "id": "REL-01",
+      "section": "4.0.10 feature",
+      "subject": "Hercules T10",
+      "source": "https://serato.com/dj/pro/downloads",
+      "existing_feature_groups": [
+        "HW-001",
+        "HW-005",
+        "HW-004",
+        "STM-005"
+      ],
+      "proposed_independent_acceptance": "With the named device, exercise motorized platters, stem controls, Slip Release and display/LED feedback; preserve unavailable-device status.",
+      "status": "NOT_EXECUTED_FOR_THIS_RELEASE_CASE",
+      "macos_parity_obligation": true,
+      "reference_runtime_verified": false,
+      "open_play_full_parity_verified": false,
+      "requirement_namespace": "PROVISIONAL_RELEASE_CHECK_NOT_MERGED_INTO_522",
+      "model_routing": [
+        {
+          "feature_id": "HW-001",
+          "routing": {
+            "codex": {
+              "model": "gpt-6-astra",
+              "effort": "xhigh"
+            },
+            "claude_code": {
+              "model": "claude-opus-5",
+              "effort": "xhigh"
+            },
+            "rationale": "Hardware protocols and binary evidence need careful competing hypotheses.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        },
+        {
+          "feature_id": "HW-005",
+          "routing": {
+            "codex": {
+              "model": "gpt-6-astra",
+              "effort": "xhigh"
+            },
+            "claude_code": {
+              "model": "claude-opus-5",
+              "effort": "xhigh"
+            },
+            "rationale": "Hardware protocols and binary evidence need careful competing hypotheses.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        },
+        {
+          "feature_id": "HW-004",
+          "routing": {
+            "codex": {
+              "model": "gpt-6-astra",
+              "effort": "xhigh"
+            },
+            "claude_code": {
+              "model": "claude-opus-5",
+              "effort": "xhigh"
+            },
+            "rationale": "Hardware protocols and binary evidence need careful competing hypotheses.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        },
+        {
+          "feature_id": "STM-005",
+          "routing": {
+            "codex": {
+              "model": "gpt-6.1-sol",
+              "effort": "high"
+            },
+            "claude_code": {
+              "model": "claude-opus-5",
+              "effort": "high"
+            },
+            "rationale": "Routine implementation and lifecycle tests use Sol/high; escalate a bounded unresolved DSP/state dispute to Astra/high with measured evidence.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        }
+      ]
+    },
+    {
+      "id": "REL-02",
+      "section": "4.0.10 drivers",
+      "subject": "Tahoe driver compatibility",
+      "source": "https://serato.com/dj/pro/downloads",
+      "existing_feature_groups": [
+        "SYS-004",
+        "AUD-001",
+        "AUD-004"
+      ],
+      "proposed_independent_acceptance": "For each listed device on macOS Tahoe, test driver availability, connection, audio routes and reconnect; do not bundle proprietary drivers as open-source code.",
+      "status": "NOT_EXECUTED_FOR_THIS_RELEASE_CASE",
+      "macos_parity_obligation": true,
+      "reference_runtime_verified": false,
+      "open_play_full_parity_verified": false,
+      "requirement_namespace": "PROVISIONAL_RELEASE_CHECK_NOT_MERGED_INTO_522",
+      "model_routing": [
+        {
+          "feature_id": "SYS-004",
+          "routing": {
+            "codex": {
+              "model": "gpt-6.1-sol",
+              "effort": "xhigh"
+            },
+            "claude_code": {
+              "model": "claude-opus-5",
+              "effort": "high"
+            },
+            "rationale": "Architecture and persistence require reasoning across failure and concurrency boundaries.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        },
+        {
+          "feature_id": "AUD-001",
+          "routing": {
+            "codex": {
+              "model": "gpt-6-astra",
+              "effort": "xhigh"
+            },
+            "claude_code": {
+              "model": "claude-opus-5",
+              "effort": "xhigh"
+            },
+            "rationale": "Hardware protocols and binary evidence need careful competing hypotheses.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        },
+        {
+          "feature_id": "AUD-004",
+          "routing": {
+            "codex": {
+              "model": "gpt-6-astra",
+              "effort": "xhigh"
+            },
+            "claude_code": {
+              "model": "claude-opus-5",
+              "effort": "xhigh"
+            },
+            "rationale": "Hardware protocols and binary evidence need careful competing hypotheses.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        }
+      ],
+      "named_driver_devices": [
+        "DDJ-1000SRT",
+        "DDJ-SR2",
+        "DDJ-SX3",
+        "DJM-250MK2",
+        "DJM-450",
+        "DJM-750MK2",
+        "DJM-900NXS2",
+        "DJM-S3",
+        "DJM-S5",
+        "DJM-S7",
+        "DJM-S11",
+        "XDJ-XZ"
+      ]
+    },
+    {
+      "id": "REL-03",
+      "section": "4.0.10 regression",
+      "subject": "Spotify playlist completeness",
+      "source": "https://serato.com/dj/pro/downloads",
+      "existing_feature_groups": [
+        "SYS-009",
+        "LIB-003"
+      ],
+      "proposed_independent_acceptance": "With authorized provider access, traverse a playlist exceeding one API page; check IDs, ordering, duplicates, expiry and complete enumeration.",
+      "status": "NOT_EXECUTED_FOR_THIS_RELEASE_CASE",
+      "macos_parity_obligation": true,
+      "reference_runtime_verified": false,
+      "open_play_full_parity_verified": false,
+      "requirement_namespace": "PROVISIONAL_RELEASE_CHECK_NOT_MERGED_INTO_522",
+      "model_routing": [
+        {
+          "feature_id": "SYS-009",
+          "routing": {
+            "codex": {
+              "model": "gpt-6.1-sol",
+              "effort": "xhigh"
+            },
+            "claude_code": {
+              "model": "claude-opus-5",
+              "effort": "high"
+            },
+            "rationale": "Architecture and persistence require reasoning across failure and concurrency boundaries.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        },
+        {
+          "feature_id": "LIB-003",
+          "routing": {
+            "codex": {
+              "model": "gpt-6.1-sol",
+              "effort": "high"
+            },
+            "claude_code": {
+              "model": "claude-sonnet-5",
+              "effort": "medium"
+            },
+            "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        }
+      ]
+    },
+    {
+      "id": "REL-04",
+      "section": "4.0.10 regression",
+      "subject": "History with crossfader disabled",
+      "source": "https://serato.com/dj/pro/downloads",
+      "existing_feature_groups": [
+        "LIB-008",
+        "LIB-016",
+        "MIX-002"
+      ],
+      "proposed_independent_acceptance": "Disable the crossfader, audition a channel, expose it to the mix, then restart; compare played/unplayed history with the reference.",
+      "status": "NOT_EXECUTED_FOR_THIS_RELEASE_CASE",
+      "macos_parity_obligation": true,
+      "reference_runtime_verified": false,
+      "open_play_full_parity_verified": false,
+      "requirement_namespace": "PROVISIONAL_RELEASE_CHECK_NOT_MERGED_INTO_522",
+      "model_routing": [
+        {
+          "feature_id": "LIB-008",
+          "routing": {
+            "codex": {
+              "model": "gpt-6.1-sol",
+              "effort": "high"
+            },
+            "claude_code": {
+              "model": "claude-sonnet-5",
+              "effort": "medium"
+            },
+            "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        },
+        {
+          "feature_id": "LIB-016",
+          "routing": {
+            "codex": {
+              "model": "gpt-6.1-sol",
+              "effort": "high"
+            },
+            "claude_code": {
+              "model": "claude-sonnet-5",
+              "effort": "medium"
+            },
+            "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        },
+        {
+          "feature_id": "MIX-002",
+          "routing": {
+            "codex": {
+              "model": "gpt-6-astra",
+              "effort": "high"
+            },
+            "claude_code": {
+              "model": "claude-opus-5",
+              "effort": "high"
+            },
+            "rationale": "DSP and transport require numerical reasoning backed by measurements.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        }
+      ]
+    },
+    {
+      "id": "REL-05",
+      "section": "4.0.10 regression",
+      "subject": "MIDI Key Shift",
+      "source": "https://serato.com/dj/pro/downloads",
+      "existing_feature_groups": [
+        "HW-002",
+        "DEK-007"
+      ],
+      "proposed_independent_acceptance": "Learn a controller for each deck Key Shift, move it in both directions, measure semitones and independence from tempo, then save/reload the mapping.",
+      "status": "OBSERVED_MISSING_TARGET_IN_DESKTOP_0.1.5",
+      "macos_parity_obligation": true,
+      "reference_runtime_verified": false,
+      "open_play_full_parity_verified": false,
+      "requirement_namespace": "PROVISIONAL_RELEASE_CHECK_NOT_MERGED_INTO_522",
+      "model_routing": [
+        {
+          "feature_id": "HW-002",
+          "routing": {
+            "codex": {
+              "model": "gpt-6.1-sol",
+              "effort": "high"
+            },
+            "claude_code": {
+              "model": "claude-sonnet-5",
+              "effort": "medium"
+            },
+            "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        },
+        {
+          "feature_id": "DEK-007",
+          "routing": {
+            "codex": {
+              "model": "gpt-6-astra",
+              "effort": "high"
+            },
+            "claude_code": {
+              "model": "claude-opus-5",
+              "effort": "high"
+            },
+            "rationale": "DSP and transport require numerical reasoning backed by measurements.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        }
+      ],
+      "current_evidence": [
+        "docs/prototype/current-feature-check-native-observation.json",
+        "docs/prototype/screenshots/parity-current-midi-targets-0.1.5.png"
+      ],
+      "source_evidence": [
+        {
+          "path": "prototype/panels.js",
+          "line": 1621
+        },
+        {
+          "path": "prototype/panels.js",
+          "line": 1568
+        }
+      ]
+    },
+    {
+      "id": "REL-06",
+      "section": "4.0.10 regression",
+      "subject": "XDJ-AZ sync-load BPM display",
+      "source": "https://serato.com/dj/pro/downloads",
+      "existing_feature_groups": [
+        "DEK-018",
+        "HW-004"
+      ],
+      "proposed_independent_acceptance": "With Maintain Sync on Track Load enabled, replace a track and compare deck BPM, device BPM and audio rate before and after takeover.",
+      "status": "NOT_EXECUTED_FOR_THIS_RELEASE_CASE",
+      "macos_parity_obligation": true,
+      "reference_runtime_verified": false,
+      "open_play_full_parity_verified": false,
+      "requirement_namespace": "PROVISIONAL_RELEASE_CHECK_NOT_MERGED_INTO_522",
+      "model_routing": [
+        {
+          "feature_id": "DEK-018",
+          "routing": {
+            "codex": {
+              "model": "gpt-6-astra",
+              "effort": "high"
+            },
+            "claude_code": {
+              "model": "claude-opus-5",
+              "effort": "high"
+            },
+            "rationale": "DSP and transport require numerical reasoning backed by measurements.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        },
+        {
+          "feature_id": "HW-004",
+          "routing": {
+            "codex": {
+              "model": "gpt-6-astra",
+              "effort": "xhigh"
+            },
+            "claude_code": {
+              "model": "claude-opus-5",
+              "effort": "xhigh"
+            },
+            "rationale": "Hardware protocols and binary evidence need careful competing hypotheses.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        }
+      ]
+    },
+    {
+      "id": "REL-07",
+      "section": "4.0.10 regression",
+      "subject": "XDJ-AZ connection completeness",
+      "source": "https://serato.com/dj/pro/downloads",
+      "existing_feature_groups": [
+        "AUD-004",
+        "HW-004",
+        "HW-005"
+      ],
+      "proposed_independent_acceptance": "On the documented Windows 11 configuration, connect/reconnect and verify all interfaces, display and button feedback; a macOS result cannot pass this case.",
+      "status": "WINDOWS_ONLY_REFERENCE_NOT_MACOS_PARITY_BLOCKER",
+      "macos_parity_obligation": false,
+      "reference_runtime_verified": false,
+      "open_play_full_parity_verified": false,
+      "requirement_namespace": "PROVISIONAL_RELEASE_CHECK_NOT_MERGED_INTO_522",
+      "model_routing": [
+        {
+          "feature_id": "AUD-004",
+          "routing": {
+            "codex": {
+              "model": "gpt-6-astra",
+              "effort": "xhigh"
+            },
+            "claude_code": {
+              "model": "claude-opus-5",
+              "effort": "xhigh"
+            },
+            "rationale": "Hardware protocols and binary evidence need careful competing hypotheses.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        },
+        {
+          "feature_id": "HW-004",
+          "routing": {
+            "codex": {
+              "model": "gpt-6-astra",
+              "effort": "xhigh"
+            },
+            "claude_code": {
+              "model": "claude-opus-5",
+              "effort": "xhigh"
+            },
+            "rationale": "Hardware protocols and binary evidence need careful competing hypotheses.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        },
+        {
+          "feature_id": "HW-005",
+          "routing": {
+            "codex": {
+              "model": "gpt-6-astra",
+              "effort": "xhigh"
+            },
+            "claude_code": {
+              "model": "claude-opus-5",
+              "effort": "xhigh"
+            },
+            "rationale": "Hardware protocols and binary evidence need careful competing hypotheses.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        }
+      ]
+    },
+    {
+      "id": "REL-08",
+      "section": "4.0.10 regression",
+      "subject": "SYSTEM ONE computer changeover artwork",
+      "source": "https://serato.com/dj/pro/downloads",
+      "existing_feature_groups": [
+        "LIB-002",
+        "HW-004",
+        "HW-010"
+      ],
+      "proposed_independent_acceptance": "Switch the device between two authorized computers with loaded media; confirm stale artwork is cleared and the new owner alone updates the display.",
+      "status": "NOT_EXECUTED_FOR_THIS_RELEASE_CASE",
+      "macos_parity_obligation": true,
+      "reference_runtime_verified": false,
+      "open_play_full_parity_verified": false,
+      "requirement_namespace": "PROVISIONAL_RELEASE_CHECK_NOT_MERGED_INTO_522",
+      "model_routing": [
+        {
+          "feature_id": "LIB-002",
+          "routing": {
+            "codex": {
+              "model": "gpt-6.1-sol",
+              "effort": "high"
+            },
+            "claude_code": {
+              "model": "claude-sonnet-5",
+              "effort": "medium"
+            },
+            "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        },
+        {
+          "feature_id": "HW-004",
+          "routing": {
+            "codex": {
+              "model": "gpt-6-astra",
+              "effort": "xhigh"
+            },
+            "claude_code": {
+              "model": "claude-opus-5",
+              "effort": "xhigh"
+            },
+            "rationale": "Hardware protocols and binary evidence need careful competing hypotheses.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        },
+        {
+          "feature_id": "HW-010",
+          "routing": {
+            "codex": {
+              "model": "gpt-6-astra",
+              "effort": "xhigh"
+            },
+            "claude_code": {
+              "model": "claude-opus-5",
+              "effort": "xhigh"
+            },
+            "rationale": "Hardware protocols and binary evidence need careful competing hypotheses.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        }
+      ]
+    },
+    {
+      "id": "REL-09",
+      "section": "4.0.10 regression",
+      "subject": "SYSTEM ONE waveform continuity",
+      "source": "https://serato.com/dj/pro/downloads",
+      "existing_feature_groups": [
+        "ANA-001",
+        "HW-004"
+      ],
+      "proposed_independent_acceptance": "With the named device and owned long fixtures, compare complete overview/detail waveforms during scrolling and transport changes.",
+      "status": "NOT_EXECUTED_FOR_THIS_RELEASE_CASE",
+      "macos_parity_obligation": true,
+      "reference_runtime_verified": false,
+      "open_play_full_parity_verified": false,
+      "requirement_namespace": "PROVISIONAL_RELEASE_CHECK_NOT_MERGED_INTO_522",
+      "model_routing": [
+        {
+          "feature_id": "ANA-001",
+          "routing": {
+            "codex": {
+              "model": "gpt-6-astra",
+              "effort": "high"
+            },
+            "claude_code": {
+              "model": "claude-opus-5",
+              "effort": "high"
+            },
+            "rationale": "DSP and transport require numerical reasoning backed by measurements.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        },
+        {
+          "feature_id": "HW-004",
+          "routing": {
+            "codex": {
+              "model": "gpt-6-astra",
+              "effort": "xhigh"
+            },
+            "claude_code": {
+              "model": "claude-opus-5",
+              "effort": "xhigh"
+            },
+            "rationale": "Hardware protocols and binary evidence need careful competing hypotheses.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        }
+      ]
+    },
+    {
+      "id": "REL-10",
+      "section": "4.0.10 regression",
+      "subject": "SYSTEM ONE selection centering",
+      "source": "https://serato.com/dj/pro/downloads",
+      "existing_feature_groups": [
+        "LIB-003",
+        "HW-004"
+      ],
+      "proposed_independent_acceptance": "Toggle Center on Library Selection and navigate enough rows to scroll; confirm device and software keep the intended row centered.",
+      "status": "NOT_EXECUTED_FOR_THIS_RELEASE_CASE",
+      "macos_parity_obligation": true,
+      "reference_runtime_verified": false,
+      "open_play_full_parity_verified": false,
+      "requirement_namespace": "PROVISIONAL_RELEASE_CHECK_NOT_MERGED_INTO_522",
+      "model_routing": [
+        {
+          "feature_id": "LIB-003",
+          "routing": {
+            "codex": {
+              "model": "gpt-6.1-sol",
+              "effort": "high"
+            },
+            "claude_code": {
+              "model": "claude-sonnet-5",
+              "effort": "medium"
+            },
+            "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        },
+        {
+          "feature_id": "HW-004",
+          "routing": {
+            "codex": {
+              "model": "gpt-6-astra",
+              "effort": "xhigh"
+            },
+            "claude_code": {
+              "model": "claude-opus-5",
+              "effort": "xhigh"
+            },
+            "rationale": "Hardware protocols and binary evidence need careful competing hypotheses.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        }
+      ]
+    },
+    {
+      "id": "REL-11",
+      "section": "4.0.10 regression",
+      "subject": "SYSTEM ONE streaming selection stability",
+      "source": "https://serato.com/dj/pro/downloads",
+      "existing_feature_groups": [
+        "SYS-009",
+        "LIB-003",
+        "HW-004"
+      ],
+      "proposed_independent_acceptance": "Populate a provider catalog in multiple pages while selecting a track; confirm asynchronous insertions preserve the selected identity.",
+      "status": "NOT_EXECUTED_FOR_THIS_RELEASE_CASE",
+      "macos_parity_obligation": true,
+      "reference_runtime_verified": false,
+      "open_play_full_parity_verified": false,
+      "requirement_namespace": "PROVISIONAL_RELEASE_CHECK_NOT_MERGED_INTO_522",
+      "model_routing": [
+        {
+          "feature_id": "SYS-009",
+          "routing": {
+            "codex": {
+              "model": "gpt-6.1-sol",
+              "effort": "xhigh"
+            },
+            "claude_code": {
+              "model": "claude-opus-5",
+              "effort": "high"
+            },
+            "rationale": "Architecture and persistence require reasoning across failure and concurrency boundaries.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        },
+        {
+          "feature_id": "LIB-003",
+          "routing": {
+            "codex": {
+              "model": "gpt-6.1-sol",
+              "effort": "high"
+            },
+            "claude_code": {
+              "model": "claude-sonnet-5",
+              "effort": "medium"
+            },
+            "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        },
+        {
+          "feature_id": "HW-004",
+          "routing": {
+            "codex": {
+              "model": "gpt-6-astra",
+              "effort": "xhigh"
+            },
+            "claude_code": {
+              "model": "claude-opus-5",
+              "effort": "xhigh"
+            },
+            "rationale": "Hardware protocols and binary evidence need careful competing hypotheses.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        }
+      ]
+    },
+    {
+      "id": "REL-12",
+      "section": "4.0.10 regression",
+      "subject": "SEVENTY-TWO MKII auto-loop feedback",
+      "source": "https://serato.com/dj/pro/downloads",
+      "existing_feature_groups": [
+        "DEK-004",
+        "HW-004"
+      ],
+      "proposed_independent_acceptance": "Enter Auto Loop, trigger each supported size, and compare pad colors/state with the reference during loop changes.",
+      "status": "NOT_EXECUTED_FOR_THIS_RELEASE_CASE",
+      "macos_parity_obligation": true,
+      "reference_runtime_verified": false,
+      "open_play_full_parity_verified": false,
+      "requirement_namespace": "PROVISIONAL_RELEASE_CHECK_NOT_MERGED_INTO_522",
+      "model_routing": [
+        {
+          "feature_id": "DEK-004",
+          "routing": {
+            "codex": {
+              "model": "gpt-6-astra",
+              "effort": "high"
+            },
+            "claude_code": {
+              "model": "claude-opus-5",
+              "effort": "high"
+            },
+            "rationale": "DSP and transport require numerical reasoning backed by measurements.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        },
+        {
+          "feature_id": "HW-004",
+          "routing": {
+            "codex": {
+              "model": "gpt-6-astra",
+              "effort": "xhigh"
+            },
+            "claude_code": {
+              "model": "claude-opus-5",
+              "effort": "xhigh"
+            },
+            "rationale": "Hardware protocols and binary evidence need careful competing hypotheses.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        }
+      ]
+    },
+    {
+      "id": "REL-13",
+      "section": "4.0.10 regression",
+      "subject": "DJM-S11 hot-cue reconnect feedback",
+      "source": "https://serato.com/dj/pro/downloads",
+      "existing_feature_groups": [
+        "DEK-003",
+        "HW-004",
+        "AUD-004"
+      ],
+      "proposed_independent_acceptance": "Set owned-fixture cues, reconnect the mixer, then verify every pad displays the current cue state without stale lights.",
+      "status": "NOT_EXECUTED_FOR_THIS_RELEASE_CASE",
+      "macos_parity_obligation": true,
+      "reference_runtime_verified": false,
+      "open_play_full_parity_verified": false,
+      "requirement_namespace": "PROVISIONAL_RELEASE_CHECK_NOT_MERGED_INTO_522",
+      "model_routing": [
+        {
+          "feature_id": "DEK-003",
+          "routing": {
+            "codex": {
+              "model": "gpt-6-astra",
+              "effort": "high"
+            },
+            "claude_code": {
+              "model": "claude-opus-5",
+              "effort": "high"
+            },
+            "rationale": "DSP and transport require numerical reasoning backed by measurements.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        },
+        {
+          "feature_id": "HW-004",
+          "routing": {
+            "codex": {
+              "model": "gpt-6-astra",
+              "effort": "xhigh"
+            },
+            "claude_code": {
+              "model": "claude-opus-5",
+              "effort": "xhigh"
+            },
+            "rationale": "Hardware protocols and binary evidence need careful competing hypotheses.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        },
+        {
+          "feature_id": "AUD-004",
+          "routing": {
+            "codex": {
+              "model": "gpt-6-astra",
+              "effort": "xhigh"
+            },
+            "claude_code": {
+              "model": "claude-opus-5",
+              "effort": "xhigh"
+            },
+            "rationale": "Hardware protocols and binary evidence need careful competing hypotheses.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        }
+      ]
+    },
+    {
+      "id": "REL-14",
+      "section": "4.0.10 regression",
+      "subject": "DDJ-FLX6 and DDJ-400 long-press loop",
+      "source": "https://serato.com/dj/pro/downloads",
+      "existing_feature_groups": [
+        "DEK-004",
+        "HW-003"
+      ],
+      "proposed_independent_acceptance": "For both named devices, hold the four-beat loop action across a beat boundary; measure unchanged loop start, length, release and retrigger.",
+      "status": "NOT_EXECUTED_FOR_THIS_RELEASE_CASE",
+      "macos_parity_obligation": true,
+      "reference_runtime_verified": false,
+      "open_play_full_parity_verified": false,
+      "requirement_namespace": "PROVISIONAL_RELEASE_CHECK_NOT_MERGED_INTO_522",
+      "model_routing": [
+        {
+          "feature_id": "DEK-004",
+          "routing": {
+            "codex": {
+              "model": "gpt-6-astra",
+              "effort": "high"
+            },
+            "claude_code": {
+              "model": "claude-opus-5",
+              "effort": "high"
+            },
+            "rationale": "DSP and transport require numerical reasoning backed by measurements.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        },
+        {
+          "feature_id": "HW-003",
+          "routing": {
+            "codex": {
+              "model": "gpt-6-astra",
+              "effort": "xhigh"
+            },
+            "claude_code": {
+              "model": "claude-opus-5",
+              "effort": "xhigh"
+            },
+            "rationale": "Hardware protocols and binary evidence need careful competing hypotheses.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        }
+      ]
+    },
+    {
+      "id": "REL-15",
+      "section": "4.0.10 regression",
+      "subject": "CDJ-3000 cue overview",
+      "source": "https://serato.com/dj/pro/downloads",
+      "existing_feature_groups": [
+        "DEK-003",
+        "ANA-001",
+        "HW-004",
+        "HW-006"
+      ],
+      "proposed_independent_acceptance": "Create cues at known fixture samples; compare hardware overview markers with software and audible recall at zoom/track changes.",
+      "status": "NOT_EXECUTED_FOR_THIS_RELEASE_CASE",
+      "macos_parity_obligation": true,
+      "reference_runtime_verified": false,
+      "open_play_full_parity_verified": false,
+      "requirement_namespace": "PROVISIONAL_RELEASE_CHECK_NOT_MERGED_INTO_522",
+      "model_routing": [
+        {
+          "feature_id": "DEK-003",
+          "routing": {
+            "codex": {
+              "model": "gpt-6-astra",
+              "effort": "high"
+            },
+            "claude_code": {
+              "model": "claude-opus-5",
+              "effort": "high"
+            },
+            "rationale": "DSP and transport require numerical reasoning backed by measurements.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        },
+        {
+          "feature_id": "ANA-001",
+          "routing": {
+            "codex": {
+              "model": "gpt-6-astra",
+              "effort": "high"
+            },
+            "claude_code": {
+              "model": "claude-opus-5",
+              "effort": "high"
+            },
+            "rationale": "DSP and transport require numerical reasoning backed by measurements.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        },
+        {
+          "feature_id": "HW-004",
+          "routing": {
+            "codex": {
+              "model": "gpt-6-astra",
+              "effort": "xhigh"
+            },
+            "claude_code": {
+              "model": "claude-opus-5",
+              "effort": "xhigh"
+            },
+            "rationale": "Hardware protocols and binary evidence need careful competing hypotheses.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        },
+        {
+          "feature_id": "HW-006",
+          "routing": {
+            "codex": {
+              "model": "gpt-6-astra",
+              "effort": "xhigh"
+            },
+            "claude_code": {
+              "model": "claude-opus-5",
+              "effort": "xhigh"
+            },
+            "rationale": "Hardware protocols and binary evidence need careful competing hypotheses.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        }
+      ]
+    },
+    {
+      "id": "REL-16",
+      "section": "4.0.10 regression",
+      "subject": "PRIME 4 deck color",
+      "source": "https://serato.com/dj/pro/downloads",
+      "existing_feature_groups": [
+        "HW-004",
+        "HW-005"
+      ],
+      "proposed_independent_acceptance": "Change deck color/state and verify the named hardware LEDs update for the correct deck after reconnect.",
+      "status": "NOT_EXECUTED_FOR_THIS_RELEASE_CASE",
+      "macos_parity_obligation": true,
+      "reference_runtime_verified": false,
+      "open_play_full_parity_verified": false,
+      "requirement_namespace": "PROVISIONAL_RELEASE_CHECK_NOT_MERGED_INTO_522",
+      "model_routing": [
+        {
+          "feature_id": "HW-004",
+          "routing": {
+            "codex": {
+              "model": "gpt-6-astra",
+              "effort": "xhigh"
+            },
+            "claude_code": {
+              "model": "claude-opus-5",
+              "effort": "xhigh"
+            },
+            "rationale": "Hardware protocols and binary evidence need careful competing hypotheses.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        },
+        {
+          "feature_id": "HW-005",
+          "routing": {
+            "codex": {
+              "model": "gpt-6-astra",
+              "effort": "xhigh"
+            },
+            "claude_code": {
+              "model": "claude-opus-5",
+              "effort": "xhigh"
+            },
+            "rationale": "Hardware protocols and binary evidence need careful competing hypotheses.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        }
+      ]
+    },
+    {
+      "id": "REL-17",
+      "section": "4.0.10 regression",
+      "subject": "Reloop ELITE driver prompt",
+      "source": "https://serato.com/dj/pro/downloads",
+      "existing_feature_groups": [
+        "SYS-004",
+        "AUD-001"
+      ],
+      "proposed_independent_acceptance": "On a disposable supported driver-missing setup, connect the device; distinguish install guidance from a generic connection failure and retry safely.",
+      "status": "NOT_EXECUTED_FOR_THIS_RELEASE_CASE",
+      "macos_parity_obligation": true,
+      "reference_runtime_verified": false,
+      "open_play_full_parity_verified": false,
+      "requirement_namespace": "PROVISIONAL_RELEASE_CHECK_NOT_MERGED_INTO_522",
+      "model_routing": [
+        {
+          "feature_id": "SYS-004",
+          "routing": {
+            "codex": {
+              "model": "gpt-6.1-sol",
+              "effort": "xhigh"
+            },
+            "claude_code": {
+              "model": "claude-opus-5",
+              "effort": "high"
+            },
+            "rationale": "Architecture and persistence require reasoning across failure and concurrency boundaries.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        },
+        {
+          "feature_id": "AUD-001",
+          "routing": {
+            "codex": {
+              "model": "gpt-6-astra",
+              "effort": "xhigh"
+            },
+            "claude_code": {
+              "model": "claude-opus-5",
+              "effort": "xhigh"
+            },
+            "rationale": "Hardware protocols and binary evidence need careful competing hypotheses.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        }
+      ]
+    },
+    {
+      "id": "REL-18",
+      "section": "4.0.10 regression",
+      "subject": "Beatmix 2 and Beatmix 4 Windows prompt",
+      "source": "https://serato.com/dj/pro/downloads",
+      "existing_feature_groups": [
+        "SYS-004",
+        "AUD-001"
+      ],
+      "proposed_independent_acceptance": "On Windows with each supported device, distinguish actual driver requirements from an unnecessary install prompt; verify connection remains usable.",
+      "status": "WINDOWS_ONLY_REFERENCE_NOT_MACOS_PARITY_BLOCKER",
+      "macos_parity_obligation": false,
+      "reference_runtime_verified": false,
+      "open_play_full_parity_verified": false,
+      "requirement_namespace": "PROVISIONAL_RELEASE_CHECK_NOT_MERGED_INTO_522",
+      "model_routing": [
+        {
+          "feature_id": "SYS-004",
+          "routing": {
+            "codex": {
+              "model": "gpt-6.1-sol",
+              "effort": "xhigh"
+            },
+            "claude_code": {
+              "model": "claude-opus-5",
+              "effort": "high"
+            },
+            "rationale": "Architecture and persistence require reasoning across failure and concurrency boundaries.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        },
+        {
+          "feature_id": "AUD-001",
+          "routing": {
+            "codex": {
+              "model": "gpt-6-astra",
+              "effort": "xhigh"
+            },
+            "claude_code": {
+              "model": "claude-opus-5",
+              "effort": "xhigh"
+            },
+            "rationale": "Hardware protocols and binary evidence need careful competing hypotheses.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        }
+      ]
+    },
+    {
+      "id": "REL-19",
+      "section": "4.0.10 regression",
+      "subject": "AlphaTheta/Pioneer waveform fader interaction",
+      "source": "https://serato.com/dj/pro/downloads",
+      "existing_feature_groups": [
+        "MIX-001",
+        "ANA-001",
+        "HW-004"
+      ],
+      "proposed_independent_acceptance": "During playback on named display devices, raise the channel fader; check waveform position/continuity and audible output independently.",
+      "status": "NOT_EXECUTED_FOR_THIS_RELEASE_CASE",
+      "macos_parity_obligation": true,
+      "reference_runtime_verified": false,
+      "open_play_full_parity_verified": false,
+      "requirement_namespace": "PROVISIONAL_RELEASE_CHECK_NOT_MERGED_INTO_522",
+      "model_routing": [
+        {
+          "feature_id": "MIX-001",
+          "routing": {
+            "codex": {
+              "model": "gpt-6-astra",
+              "effort": "high"
+            },
+            "claude_code": {
+              "model": "claude-opus-5",
+              "effort": "high"
+            },
+            "rationale": "DSP and transport require numerical reasoning backed by measurements.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        },
+        {
+          "feature_id": "ANA-001",
+          "routing": {
+            "codex": {
+              "model": "gpt-6-astra",
+              "effort": "high"
+            },
+            "claude_code": {
+              "model": "claude-opus-5",
+              "effort": "high"
+            },
+            "rationale": "DSP and transport require numerical reasoning backed by measurements.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        },
+        {
+          "feature_id": "HW-004",
+          "routing": {
+            "codex": {
+              "model": "gpt-6-astra",
+              "effort": "xhigh"
+            },
+            "claude_code": {
+              "model": "claude-opus-5",
+              "effort": "xhigh"
+            },
+            "rationale": "Hardware protocols and binary evidence need careful competing hypotheses.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        }
+      ]
+    },
+    {
+      "id": "REL-20",
+      "section": "recent update on current page",
+      "subject": "XDJ-AN",
+      "source": "https://serato.com/dj/pro/downloads",
+      "existing_feature_groups": [
+        "HW-001",
+        "HW-004",
+        "HW-005",
+        "DEK-005"
+      ],
+      "proposed_independent_acceptance": "With the device, exercise touch library navigation, pad modes, Beat Jump and available independent functionality; document each missing protocol.",
+      "status": "NOT_EXECUTED_FOR_THIS_RELEASE_CASE",
+      "macos_parity_obligation": true,
+      "reference_runtime_verified": false,
+      "open_play_full_parity_verified": false,
+      "requirement_namespace": "PROVISIONAL_RELEASE_CHECK_NOT_MERGED_INTO_522",
+      "model_routing": [
+        {
+          "feature_id": "HW-001",
+          "routing": {
+            "codex": {
+              "model": "gpt-6-astra",
+              "effort": "xhigh"
+            },
+            "claude_code": {
+              "model": "claude-opus-5",
+              "effort": "xhigh"
+            },
+            "rationale": "Hardware protocols and binary evidence need careful competing hypotheses.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        },
+        {
+          "feature_id": "HW-004",
+          "routing": {
+            "codex": {
+              "model": "gpt-6-astra",
+              "effort": "xhigh"
+            },
+            "claude_code": {
+              "model": "claude-opus-5",
+              "effort": "xhigh"
+            },
+            "rationale": "Hardware protocols and binary evidence need careful competing hypotheses.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        },
+        {
+          "feature_id": "HW-005",
+          "routing": {
+            "codex": {
+              "model": "gpt-6-astra",
+              "effort": "xhigh"
+            },
+            "claude_code": {
+              "model": "claude-opus-5",
+              "effort": "xhigh"
+            },
+            "rationale": "Hardware protocols and binary evidence need careful competing hypotheses.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        },
+        {
+          "feature_id": "DEK-005",
+          "routing": {
+            "codex": {
+              "model": "gpt-6-astra",
+              "effort": "high"
+            },
+            "claude_code": {
+              "model": "claude-opus-5",
+              "effort": "high"
+            },
+            "rationale": "DSP and transport require numerical reasoning backed by measurements.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        }
+      ]
+    },
+    {
+      "id": "REL-21",
+      "section": "recent update on current page",
+      "subject": "Party Mix III",
+      "source": "https://serato.com/dj/pro/downloads",
+      "existing_feature_groups": [
+        "HW-001",
+        "HW-004",
+        "HW-005",
+        "FX-004"
+      ],
+      "proposed_independent_acceptance": "Test both decks, eight-pad modes, stems, Fade FX and beat-synchronized lights with owned fixtures.",
+      "status": "NOT_EXECUTED_FOR_THIS_RELEASE_CASE",
+      "macos_parity_obligation": true,
+      "reference_runtime_verified": false,
+      "open_play_full_parity_verified": false,
+      "requirement_namespace": "PROVISIONAL_RELEASE_CHECK_NOT_MERGED_INTO_522",
+      "model_routing": [
+        {
+          "feature_id": "HW-001",
+          "routing": {
+            "codex": {
+              "model": "gpt-6-astra",
+              "effort": "xhigh"
+            },
+            "claude_code": {
+              "model": "claude-opus-5",
+              "effort": "xhigh"
+            },
+            "rationale": "Hardware protocols and binary evidence need careful competing hypotheses.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        },
+        {
+          "feature_id": "HW-004",
+          "routing": {
+            "codex": {
+              "model": "gpt-6-astra",
+              "effort": "xhigh"
+            },
+            "claude_code": {
+              "model": "claude-opus-5",
+              "effort": "xhigh"
+            },
+            "rationale": "Hardware protocols and binary evidence need careful competing hypotheses.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        },
+        {
+          "feature_id": "HW-005",
+          "routing": {
+            "codex": {
+              "model": "gpt-6-astra",
+              "effort": "xhigh"
+            },
+            "claude_code": {
+              "model": "claude-opus-5",
+              "effort": "xhigh"
+            },
+            "rationale": "Hardware protocols and binary evidence need careful competing hypotheses.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        },
+        {
+          "feature_id": "FX-004",
+          "routing": {
+            "codex": {
+              "model": "gpt-6-astra",
+              "effort": "high"
+            },
+            "claude_code": {
+              "model": "claude-opus-5",
+              "effort": "high"
+            },
+            "rationale": "DSP and transport require numerical reasoning backed by measurements.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        }
+      ]
+    },
+    {
+      "id": "REL-22",
+      "section": "recent update on current page",
+      "subject": "MixTrack Go",
+      "source": "https://serato.com/dj/pro/downloads",
+      "existing_feature_groups": [
+        "HW-001",
+        "HW-003",
+        "HW-005",
+        "FX-004"
+      ],
+      "proposed_independent_acceptance": "Test both channels, all five pad modes, stem actions and Fade FX through the physical controls and audio routes.",
+      "status": "NOT_EXECUTED_FOR_THIS_RELEASE_CASE",
+      "macos_parity_obligation": true,
+      "reference_runtime_verified": false,
+      "open_play_full_parity_verified": false,
+      "requirement_namespace": "PROVISIONAL_RELEASE_CHECK_NOT_MERGED_INTO_522",
+      "model_routing": [
+        {
+          "feature_id": "HW-001",
+          "routing": {
+            "codex": {
+              "model": "gpt-6-astra",
+              "effort": "xhigh"
+            },
+            "claude_code": {
+              "model": "claude-opus-5",
+              "effort": "xhigh"
+            },
+            "rationale": "Hardware protocols and binary evidence need careful competing hypotheses.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        },
+        {
+          "feature_id": "HW-003",
+          "routing": {
+            "codex": {
+              "model": "gpt-6-astra",
+              "effort": "xhigh"
+            },
+            "claude_code": {
+              "model": "claude-opus-5",
+              "effort": "xhigh"
+            },
+            "rationale": "Hardware protocols and binary evidence need careful competing hypotheses.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        },
+        {
+          "feature_id": "HW-005",
+          "routing": {
+            "codex": {
+              "model": "gpt-6-astra",
+              "effort": "xhigh"
+            },
+            "claude_code": {
+              "model": "claude-opus-5",
+              "effort": "xhigh"
+            },
+            "rationale": "Hardware protocols and binary evidence need careful competing hypotheses.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        },
+        {
+          "feature_id": "FX-004",
+          "routing": {
+            "codex": {
+              "model": "gpt-6-astra",
+              "effort": "high"
+            },
+            "claude_code": {
+              "model": "claude-opus-5",
+              "effort": "high"
+            },
+            "rationale": "DSP and transport require numerical reasoning backed by measurements.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        }
+      ]
+    },
+    {
+      "id": "REL-23",
+      "section": "recent update on current page",
+      "subject": "CDJ-1500X",
+      "source": "https://serato.com/dj/pro/downloads",
+      "existing_feature_groups": [
+        "HW-006",
+        "HW-004"
+      ],
+      "proposed_independent_acceptance": "Identify the actual interfaces, then exercise connection, decks, browse/load, jog, feedback and reconnect with the named media player.",
+      "status": "NOT_EXECUTED_FOR_THIS_RELEASE_CASE",
+      "macos_parity_obligation": true,
+      "reference_runtime_verified": false,
+      "open_play_full_parity_verified": false,
+      "requirement_namespace": "PROVISIONAL_RELEASE_CHECK_NOT_MERGED_INTO_522",
+      "model_routing": [
+        {
+          "feature_id": "HW-006",
+          "routing": {
+            "codex": {
+              "model": "gpt-6-astra",
+              "effort": "xhigh"
+            },
+            "claude_code": {
+              "model": "claude-opus-5",
+              "effort": "xhigh"
+            },
+            "rationale": "Hardware protocols and binary evidence need careful competing hypotheses.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        },
+        {
+          "feature_id": "HW-004",
+          "routing": {
+            "codex": {
+              "model": "gpt-6-astra",
+              "effort": "xhigh"
+            },
+            "claude_code": {
+              "model": "claude-opus-5",
+              "effort": "xhigh"
+            },
+            "rationale": "Hardware protocols and binary evidence need careful competing hypotheses.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        }
+      ]
+    },
+    {
+      "id": "REL-24",
+      "section": "recent update on current page",
+      "subject": "Inpulse 200 MK3",
+      "source": "https://serato.com/dj/pro/downloads",
+      "existing_feature_groups": [
+        "HW-001",
+        "HW-003",
+        "HW-005"
+      ],
+      "proposed_independent_acceptance": "Use the named device rather than extrapolating the Inpulse 300 MK2 test; capture controls, audio routing, feedback and reconnect.",
+      "status": "NOT_EXECUTED_FOR_THIS_RELEASE_CASE",
+      "macos_parity_obligation": true,
+      "reference_runtime_verified": false,
+      "open_play_full_parity_verified": false,
+      "requirement_namespace": "PROVISIONAL_RELEASE_CHECK_NOT_MERGED_INTO_522",
+      "model_routing": [
+        {
+          "feature_id": "HW-001",
+          "routing": {
+            "codex": {
+              "model": "gpt-6-astra",
+              "effort": "xhigh"
+            },
+            "claude_code": {
+              "model": "claude-opus-5",
+              "effort": "xhigh"
+            },
+            "rationale": "Hardware protocols and binary evidence need careful competing hypotheses.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        },
+        {
+          "feature_id": "HW-003",
+          "routing": {
+            "codex": {
+              "model": "gpt-6-astra",
+              "effort": "xhigh"
+            },
+            "claude_code": {
+              "model": "claude-opus-5",
+              "effort": "xhigh"
+            },
+            "rationale": "Hardware protocols and binary evidence need careful competing hypotheses.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        },
+        {
+          "feature_id": "HW-005",
+          "routing": {
+            "codex": {
+              "model": "gpt-6-astra",
+              "effort": "xhigh"
+            },
+            "claude_code": {
+              "model": "claude-opus-5",
+              "effort": "xhigh"
+            },
+            "rationale": "Hardware protocols and binary evidence need careful competing hypotheses.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        }
+      ]
+    },
+    {
+      "id": "REL-25",
+      "section": "recent update on current page",
+      "subject": "DJM-250MK2 / DJM-750MK2 / DJM-450",
+      "source": "https://serato.com/dj/pro/downloads",
+      "existing_feature_groups": [
+        "HW-001",
+        "HW-007",
+        "HW-008",
+        "AUD-003"
+      ],
+      "proposed_independent_acceptance": "For each mixer, verify routing, inputs, calibration, internal/relative/absolute/THRU transitions and changeover using the required physical equipment.",
+      "status": "NOT_EXECUTED_FOR_THIS_RELEASE_CASE",
+      "macos_parity_obligation": true,
+      "reference_runtime_verified": false,
+      "open_play_full_parity_verified": false,
+      "requirement_namespace": "PROVISIONAL_RELEASE_CHECK_NOT_MERGED_INTO_522",
+      "model_routing": [
+        {
+          "feature_id": "HW-001",
+          "routing": {
+            "codex": {
+              "model": "gpt-6-astra",
+              "effort": "xhigh"
+            },
+            "claude_code": {
+              "model": "claude-opus-5",
+              "effort": "xhigh"
+            },
+            "rationale": "Hardware protocols and binary evidence need careful competing hypotheses.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        },
+        {
+          "feature_id": "HW-007",
+          "routing": {
+            "codex": {
+              "model": "gpt-6-astra",
+              "effort": "xhigh"
+            },
+            "claude_code": {
+              "model": "claude-opus-5",
+              "effort": "xhigh"
+            },
+            "rationale": "Hardware protocols and binary evidence need careful competing hypotheses.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        },
+        {
+          "feature_id": "HW-008",
+          "routing": {
+            "codex": {
+              "model": "gpt-6-astra",
+              "effort": "high"
+            },
+            "claude_code": {
+              "model": "claude-opus-5",
+              "effort": "high"
+            },
+            "rationale": "DSP and transport require numerical reasoning backed by measurements.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        },
+        {
+          "feature_id": "AUD-003",
+          "routing": {
+            "codex": {
+              "model": "gpt-6-astra",
+              "effort": "high"
+            },
+            "claude_code": {
+              "model": "claude-opus-5",
+              "effort": "high"
+            },
+            "rationale": "DSP and transport require numerical reasoning backed by measurements.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        }
+      ]
+    },
+    {
+      "id": "REL-26",
+      "section": "recent update on current page",
+      "subject": "Beatsource migration",
+      "source": "https://serato.com/dj/pro/downloads",
+      "existing_feature_groups": [
+        "SYS-009",
+        "LIB-009",
+        "LIB-011"
+      ],
+      "proposed_independent_acceptance": "With authorized disposable provider/library data, migrate to Beatport and verify retained metadata, identity, missing-media handling and rollback.",
+      "status": "NOT_EXECUTED_FOR_THIS_RELEASE_CASE",
+      "macos_parity_obligation": true,
+      "reference_runtime_verified": false,
+      "open_play_full_parity_verified": false,
+      "requirement_namespace": "PROVISIONAL_RELEASE_CHECK_NOT_MERGED_INTO_522",
+      "model_routing": [
+        {
+          "feature_id": "SYS-009",
+          "routing": {
+            "codex": {
+              "model": "gpt-6.1-sol",
+              "effort": "xhigh"
+            },
+            "claude_code": {
+              "model": "claude-opus-5",
+              "effort": "high"
+            },
+            "rationale": "Architecture and persistence require reasoning across failure and concurrency boundaries.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        },
+        {
+          "feature_id": "LIB-009",
+          "routing": {
+            "codex": {
+              "model": "gpt-6.1-sol",
+              "effort": "xhigh"
+            },
+            "claude_code": {
+              "model": "claude-opus-5",
+              "effort": "high"
+            },
+            "rationale": "Architecture and persistence require reasoning across failure and concurrency boundaries.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        },
+        {
+          "feature_id": "LIB-011",
+          "routing": {
+            "codex": {
+              "model": "gpt-6.1-sol",
+              "effort": "xhigh"
+            },
+            "claude_code": {
+              "model": "claude-opus-5",
+              "effort": "high"
+            },
+            "rationale": "Architecture and persistence require reasoning across failure and concurrency boundaries.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        }
+      ]
+    }
+  ],
+  "input_hashes": [
+    {
+      "path": "docs/research/CURRENT_PARITY_AUDIT_20261017.json",
+      "sha256": "364bac6e8f736c2559af097bba2cbc469424e4526ccd96793bfa190440550c2d"
+    },
+    {
+      "path": "docs/research/CURRENT_VERSION_DELTAS_20261017.json",
+      "sha256": "2e9cf93f53f7da0815a8a92fda137c399d58ef02e9ee549ac4133492aff0f649"
+    },
+    {
+      "path": "docs/research/REA_CURRENT_REFERENCE_PLIST_20261017.json",
+      "sha256": "9b0b89a5c89435913b0d9497244e498b98405b6f29f48534575352acc2dd1e53"
+    },
+    {
+      "path": "docs/prototype/current-feature-check-native-observation.json",
+      "sha256": "00d01c61b9b9101dc41dc752a946c84c83432a28483d99392419e70b1aca7101"
+    },
+    {
+      "path": "docs/delivery/feature-registry.json",
+      "sha256": "7e79b541d78a5db8ad0bb66d4e34910de01a58ff07ae6f6a3551a6626d5eb78c"
+    },
+    {
+      "path": "prototype/panels.js",
+      "sha256": "2063234fa4d209424ec94df373fca9d66eec23cc917302a8ee8dc27ee4b92d89"
+    },
+    {
+      "path": "prototype/midi.js",
+      "sha256": "b0b5ef7b71ef551c98ccb56dba0161d3e532a93713bb6b0e2b14e6f4c96b8c5e"
+    },
+    {
+      "path": "prototype/engine.js",
+      "sha256": "b4683c245c6314432c06f891e85106cf0a1a5c0a615435516930ab5b38f64adf"
+    },
+    {
+      "path": "prototype/app.js",
+      "sha256": "221131cff9da50c199180f951466ded89750c79f98d095494572625e831fc5a5"
+    }
+  ],
+  "constraints": {
+    "native_rewrite": false,
+    "public_release": false,
+    "reference_modified": false,
+    "original_prototype_files_modified": false,
+    "claim_of_all_features_tested": false
+  }
+}

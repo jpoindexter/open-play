@@ -1,0 +1,120 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import crypto from 'node:crypto';
+import assert from 'node:assert/strict';
+import {execFileSync} from 'node:child_process';
+
+// Reconciles evidence and release obligations. It never runs or grades audio/hardware.
+const root=path.resolve(import.meta.dirname,'..');
+const read=p=>fs.readFileSync(path.join(root,p),'utf8');
+const json=p=>JSON.parse(read(p));
+const hash=p=>crypto.createHash('sha256').update(fs.readFileSync(path.join(root,p))).digest('hex');
+const registry=json('docs/delivery/feature-registry.json');
+const byId=new Map(registry.features.map(f=>[f.id,f]));
+const audit=json('docs/research/CURRENT_PARITY_AUDIT_20261017.json');
+const beta=json('docs/research/CURRENT_VERSION_DELTAS_20261017.json');
+const reference=json('docs/research/REA_CURRENT_REFERENCE_PLIST_20261017.json');
+const observation=json('docs/prototype/current-feature-check-native-observation.json');
+const candidate=json('docs/prototype/candidate-hashes.json');
+const source='https://serato.com/dj/pro/downloads';
+
+// Each entry is an independently proposed regression test derived from the current
+// public release page. Recent-update entries do not claim introduction in 4.0.10.
+// These provisional checks supplement, and do not inflate, the canonical 522.
+const specification=[
+ ['REL-01','4.0.10 feature','HW-001,HW-005,HW-004,STM-005','Hercules T10','With the named device, exercise motorized platters, stem controls, Slip Release and display/LED feedback; preserve unavailable-device status.'],
+ ['REL-02','4.0.10 drivers','SYS-004,AUD-001,AUD-004','Tahoe driver compatibility','For each listed device on macOS Tahoe, test driver availability, connection, audio routes and reconnect; do not bundle proprietary drivers as open-source code.'],
+ ['REL-03','4.0.10 regression','SYS-009,LIB-003','Spotify playlist completeness','With authorized provider access, traverse a playlist exceeding one API page; check IDs, ordering, duplicates, expiry and complete enumeration.'],
+ ['REL-04','4.0.10 regression','LIB-008,LIB-016,MIX-002','History with crossfader disabled','Disable the crossfader, audition a channel, expose it to the mix, then restart; compare played/unplayed history with the reference.'],
+ ['REL-05','4.0.10 regression','HW-002,DEK-007','MIDI Key Shift','Learn a controller for each deck Key Shift, move it in both directions, measure semitones and independence from tempo, then save/reload the mapping.'],
+ ['REL-06','4.0.10 regression','DEK-018,HW-004','XDJ-AZ sync-load BPM display','With Maintain Sync on Track Load enabled, replace a track and compare deck BPM, device BPM and audio rate before and after takeover.'],
+ ['REL-07','4.0.10 regression','AUD-004,HW-004,HW-005','XDJ-AZ connection completeness','On the documented Windows 11 configuration, connect/reconnect and verify all interfaces, display and button feedback; a macOS result cannot pass this case.'],
+ ['REL-08','4.0.10 regression','LIB-002,HW-004,HW-010','SYSTEM ONE computer changeover artwork','Switch the device between two authorized computers with loaded media; confirm stale artwork is cleared and the new owner alone updates the display.'],
+ ['REL-09','4.0.10 regression','ANA-001,HW-004','SYSTEM ONE waveform continuity','With the named device and owned long fixtures, compare complete overview/detail waveforms during scrolling and transport changes.'],
+ ['REL-10','4.0.10 regression','LIB-003,HW-004','SYSTEM ONE selection centering','Toggle Center on Library Selection and navigate enough rows to scroll; confirm device and software keep the intended row centered.'],
+ ['REL-11','4.0.10 regression','SYS-009,LIB-003,HW-004','SYSTEM ONE streaming selection stability','Populate a provider catalog in multiple pages while selecting a track; confirm asynchronous insertions preserve the selected identity.'],
+ ['REL-12','4.0.10 regression','DEK-004,HW-004','SEVENTY-TWO MKII auto-loop feedback','Enter Auto Loop, trigger each supported size, and compare pad colors/state with the reference during loop changes.'],
+ ['REL-13','4.0.10 regression','DEK-003,HW-004,AUD-004','DJM-S11 hot-cue reconnect feedback','Set owned-fixture cues, reconnect the mixer, then verify every pad displays the current cue state without stale lights.'],
+ ['REL-14','4.0.10 regression','DEK-004,HW-003','DDJ-FLX6 and DDJ-400 long-press loop','For both named devices, hold the four-beat loop action across a beat boundary; measure unchanged loop start, length, release and retrigger.'],
+ ['REL-15','4.0.10 regression','DEK-003,ANA-001,HW-004,HW-006','CDJ-3000 cue overview','Create cues at known fixture samples; compare hardware overview markers with software and audible recall at zoom/track changes.'],
+ ['REL-16','4.0.10 regression','HW-004,HW-005','PRIME 4 deck color','Change deck color/state and verify the named hardware LEDs update for the correct deck after reconnect.'],
+ ['REL-17','4.0.10 regression','SYS-004,AUD-001','Reloop ELITE driver prompt','On a disposable supported driver-missing setup, connect the device; distinguish install guidance from a generic connection failure and retry safely.'],
+ ['REL-18','4.0.10 regression','SYS-004,AUD-001','Beatmix 2 and Beatmix 4 Windows prompt','On Windows with each supported device, distinguish actual driver requirements from an unnecessary install prompt; verify connection remains usable.'],
+ ['REL-19','4.0.10 regression','MIX-001,ANA-001,HW-004','AlphaTheta/Pioneer waveform fader interaction','During playback on named display devices, raise the channel fader; check waveform position/continuity and audible output independently.'],
+ ['REL-20','recent update on current page','HW-001,HW-004,HW-005,DEK-005','XDJ-AN','With the device, exercise touch library navigation, pad modes, Beat Jump and available independent functionality; document each missing protocol.'],
+ ['REL-21','recent update on current page','HW-001,HW-004,HW-005,FX-004','Party Mix III','Test both decks, eight-pad modes, stems, Fade FX and beat-synchronized lights with owned fixtures.'],
+ ['REL-22','recent update on current page','HW-001,HW-003,HW-005,FX-004','MixTrack Go','Test both channels, all five pad modes, stem actions and Fade FX through the physical controls and audio routes.'],
+ ['REL-23','recent update on current page','HW-006,HW-004','CDJ-1500X','Identify the actual interfaces, then exercise connection, decks, browse/load, jog, feedback and reconnect with the named media player.'],
+ ['REL-24','recent update on current page','HW-001,HW-003,HW-005','Inpulse 200 MK3','Use the named device rather than extrapolating the Inpulse 300 MK2 test; capture controls, audio routing, feedback and reconnect.'],
+ ['REL-25','recent update on current page','HW-001,HW-007,HW-008,AUD-003','DJM-250MK2 / DJM-750MK2 / DJM-450','For each mixer, verify routing, inputs, calibration, internal/relative/absolute/THRU transitions and changeover using the required physical equipment.'],
+ ['REL-26','recent update on current page','SYS-009,LIB-009,LIB-011','Beatsource migration','With authorized disposable provider/library data, migrate to Beatport and verify retained metadata, identity, missing-media handling and rollback.'],
+];
+const drivers=['DDJ-1000SRT','DDJ-SR2','DDJ-SX3','DJM-250MK2','DJM-450','DJM-750MK2','DJM-900NXS2','DJM-S3','DJM-S5','DJM-S7','DJM-S11','XDJ-XZ'];
+const checks=specification.map(([id,section,groups,subject,acceptance])=>{
+ const ids=groups.split(',');ids.forEach(id=>assert(byId.has(id),`Unknown group ${id}`));
+ return {id,section,subject,source,existing_feature_groups:ids,proposed_independent_acceptance:acceptance,
+  status:['REL-07','REL-18'].includes(id)?'WINDOWS_ONLY_REFERENCE_NOT_MACOS_PARITY_BLOCKER':id==='REL-05'?'OBSERVED_MISSING_TARGET_IN_DESKTOP_0.1.5':'NOT_EXECUTED_FOR_THIS_RELEASE_CASE',
+  macos_parity_obligation:!['REL-07','REL-18'].includes(id),
+  reference_runtime_verified:false,open_play_full_parity_verified:false,
+  requirement_namespace:'PROVISIONAL_RELEASE_CHECK_NOT_MERGED_INTO_522',
+  model_routing:ids.map(id=>({feature_id:id,routing:byId.get(id).routing})),
+  ...(id==='REL-02'?{named_driver_devices:drivers}:{}),
+  ...(id==='REL-05'?{current_evidence:['docs/prototype/current-feature-check-native-observation.json','docs/prototype/screenshots/parity-current-midi-targets-0.1.5.png'],source_evidence:[{path:'prototype/panels.js',line:1621},{path:'prototype/panels.js',line:1568}]}:{})};
+});
+assert.equal(checks.length,26); assert.equal(new Set(checks.map(c=>c.id)).size,26);
+assert.equal(checks.filter(c=>c.section==='4.0.10 regression').length,17);
+assert.equal(drivers.length,12); assert.equal(beta.delta_count,9); assert.equal(beta.deltas.length,9);
+assert.equal(audit.features.length,110);assert.equal(registry.features.length,110);
+assert.equal(audit.features.reduce((n,f)=>n+f.requirement_count,0),522);
+assert(audit.features.every(f=>f.full_feature_parity_verified===false));
+const protoFiles=Object.keys(candidate.files).filter(p=>p.startsWith('prototype/'));
+assert.equal(protoFiles.length,200);
+const changed=protoFiles.filter(p=>hash(p)!==candidate.files[p]);
+assert.deepEqual(changed,[],'Frozen production prototype changed; review candidate identity');
+for(const item of observation.evidence_files)assert.equal(hash(item.path),item.sha256,`Observation bytes changed: ${item.path}`);
+const asar='local-evidence/desktop-builds/0.1.5/Open Play Test-darwin-arm64/Open Play Test.app/Contents/Resources/app.asar';
+assert.equal(hash(asar),audit.desktop_ASAR_sha256,'Current desktop bundle differs from audited candidate');
+const inputPaths=['docs/research/CURRENT_PARITY_AUDIT_20261017.json','docs/research/CURRENT_VERSION_DELTAS_20261017.json','docs/research/REA_CURRENT_REFERENCE_PLIST_20261017.json','docs/prototype/current-feature-check-native-observation.json','docs/delivery/feature-registry.json','prototype/panels.js','prototype/midi.js','prototype/engine.js','prototype/app.js'];
+const report={generated_at:new Date().toISOString(),source_checked_at:observation.source_checked_at,
+ kind:'CURRENT_FEATURE_EVIDENCE_RECONCILIATION_NOT_ALL_FEATURE_RUNTIME_TEST',
+ git_head:execFileSync('git',['rev-parse','HEAD'],{cwd:root,encoding:'utf8'}).trim(),
+ outcome:'FULL_PARITY_NOT_ESTABLISHED',full_parity_verified:false,complete_latest_inventory:false,
+ reference:{version:reference.bundle.version,executable_sha256:reference.executable_sha256,REA_plist_evidence:reference.evidence_id,current_production_page:source,production_page_heading:'What’s New in 4.0.10',beta_separate:true},
+ desktop:{version:'0.1.5',source_commit:candidate.candidateCommit,ASAR_sha256:hash(asar),frozen_prototype_files_checked:protoFiles.length,frozen_prototype_mismatches:changed},
+ scope:{canonical_features:110,canonical_requirements:522,beta_deltas_separate:9,provisional_current_release_checks:26,macos_release_checks:24,windows_only_reference_checks:2,release_regression_checks:17,release_checks_passed:0,not_exhaustive:true},
+ actual_this_check:['REA version/declaration inspection','Native main-window screenshots of both applications','Open Play native MIDI target menu inspection; selection and mappings unchanged','Current source/candidate/evidence accounting'],
+ not_rerun:['Full audio/DSP suites','Earlier native persistence/keylock recordings','Any physical controller operation','Provider, DVS, CDJ or other-device acceptance'],
+ new_defended_gap:{severity:'high',feature_groups:['HW-002','DEK-007'],observation:'The running 0.1.5 target menu has eight targets and no Key Shift or Video target. The matching source list and dispatcher have no corresponding handler.',boundary:'Direct UI/source absence in this candidate. Does not measure Serato MIDI Key Shift at runtime or prove all MIDI workflows are missing.',next:'Implement a real target/dispatch lifecycle and measured semitone test in a new candidate; preserve current package and existing knob mapping.'},
+ current_visual_result:'The inspected Vertical states still differ in mode/loop controls and the always-visible Open Play mixer; different dimensions/tracks prohibit pixel-identity or waveform-quality conclusions.',
+ class_counts:Object.fromEntries([...new Set(audit.features.map(f=>f.classification))].map(k=>[k,audit.features.filter(f=>f.classification===k).length])),
+ release_checks:checks,input_hashes:inputPaths.map(path=>({path,sha256:hash(path)})),
+ constraints:{native_rewrite:false,public_release:false,reference_modified:false,original_prototype_files_modified:false,claim_of_all_features_tested:false},
+};
+const out='docs/research/CURRENT_FEATURE_MATCH_20261017';
+fs.writeFileSync(path.join(root,out+'.json'),JSON.stringify(report,null,2)+'\n');
+const link=p=>`[${path.basename(p)}](../../${p})`;
+const lines=[
+ '# Current-feature match check — 17 October 2026','',
+ '**Open Play 0.1.5 does not have established 1:1 parity with Serato DJ Pro.** This check preserves the 110-group / 522-requirement baseline, nine separate beta deltas, and adds 26 explicit release-page checks: 24 relevant to macOS and two Windows-only reference cases. These are not 26 new canonical requirements or passed implementations. The full current inventory remains unfinished.','',
+ `REA freshly read installed version **${reference.bundle.version}**, evidence \`${reference.evidence_id}\`. Its plist permissions, custom URL scheme and stem extension are declarations, not runtime compatibility. The [official current download page](${source}) still identifies 4.0.10. The [5.0 beta](https://the-drop.serato.com/announcements/lucid-beatgrids-just-dropped-in-the-serato-dj-5-0-beta/) remains separately scoped and uninstalled.`, '',
+ '## New directly observed gap','',
+ '**Key Shift cannot be selected in the running desktop MIDI mapper.** Native MIDI → Target exposed eight options: Library browse, two play targets, two cue targets, Crossfader, Sampler 1 and FX depth. Video targets are also absent. The matching source list and dispatcher confirm the bounded absence. A real browser-knob mapping does not establish these other targets.', '',
+ `Evidence: ${link('docs/prototype/current-feature-check-native-observation.json')}, ${link('docs/prototype/screenshots/parity-current-midi-targets-0.1.5.png')}, [target list](../../prototype/panels.js:1621), [dispatch](../../prototype/panels.js:1568). The official release-page Key Shift fix makes this a specific current-version obligation. Serato’s own MIDI behavior was not exercised in this check.`, '',
+ '## What this check actually executed','',
+ '- REA Info.plist inspection and exact executable identity; no repeated deep Ghidra import.',
+ '- Fresh screenshots of the installed reference and running Open Play 0.1.5; actual MIDI menu inspection, with no mapping or connection change. App restored to paused main view.',
+ '- All 200 frozen production prototype files still match the packaged source candidate. Current ASAR hash matches the recorded 0.1.5 bundle. This does not rerun any feature test.',
+ '- Evidence accounting for every canonical group and requirement; no full-feature pass awarded. Earlier physical, storage, FX, stem and keylock evidence retains its original scope.', '',
+ '## Current release obligations','',
+ 'Each row inherits the existing per-feature Codex and Claude Code model/effort recommendations in the JSON companion. Recommendations are not a live model-catalog verification. No check is passed; REL-05 has a directly observed missing target. REL-07 and REL-18 are Windows-only facts, outside the current macOS parity gate. Recent-update rows are not claimed to have debuted in 4.0.10.', '',
+ '| Check | Feature groups | Subject | Proposed test |','|---|---|---|---|',
+ ...checks.map(c=>`| ${c.id} | ${c.existing_feature_groups.join(', ')} | ${c.subject} | ${c.proposed_independent_acceptance} |`),'',
+ `REL-02 includes these 12 named driver devices individually: ${drivers.join(', ')}. REL-07 and REL-18 remain separate Windows references, not missing macOS features. They become acceptance obligations only if Windows is explicitly added to the build scope.`, '',
+ '## Remaining match gates','',
+ `See the existing complete ${link('docs/research/CURRENT_PARITY_AUDIT_20261017.md')} for all 110 groups and all 522 requirement IDs in its JSON. Explicit backend gaps include providers, Link, Smart Sync phase/takeover, files/tags/interoperability, DVS/HID/CDJs, mic/aux and recording input/split/recovery. Exact FX response, stem quality, keylock return/composition, video outputs, controller feedback and long-session acceptance remain open.`, '',
+ 'The fresh main-view comparison still shows different mode/loop-control presentation and an always-visible mixer in Open Play absent from the inspected Serato state. Different viewport sizes, loaded tracks and play positions prevent pixel or waveform-quality comparison. Other layouts/settings remain untested.', '',
+ 'Done means exact-candidate, end-to-end comparison against reconciled current-reference behavior, including failures, compound actions, quality and required devices/services. Feature names, matching file hashes, a packaged wrapper and passing subsets cannot satisfy that criterion.', '',
+ 'Reproduce **accounting only**: `node scripts/audit_current_parity.mjs` followed by `node scripts/check_current_release_parity.mjs`. The second command requires the preserved local screenshot/AX evidence and 0.1.5 bundle. It does not control applications or rerun tests.','',
+ 'Skills applied: use, gap-analysis, dec-quality-testing, reverse-engineer-anything, adversarial-verify, claude-codex-handoff, verified-done family.',''];
+fs.writeFileSync(path.join(root,out+'.md'),lines.join('\n'));
+console.log(JSON.stringify({full_parity_verified:false,features:110,requirements:522,beta:9,release_checks:26,release_checks_passed:0,frozen_prototype_files_checked:protoFiles.length,outputs:[out+'.md',out+'.json']},null,2));

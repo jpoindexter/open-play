@@ -1,8 +1,8 @@
 {
   "date": "2026-10-17",
-  "generated_at": "2026-10-17T12:41:14.538Z",
+  "generated_at": "2026-10-17T12:54:58.993Z",
   "kind": "CURRENT_SAVED_SOURCE_AND_EVIDENCE_AUDIT_NOT_REFERENCE_RUNTIME_ACCEPTANCE",
-  "git_head": "f7a2db63b726be9952e5c1d32f633e90afef376a",
+  "git_head": "2678d1670ddbeec712ed219a0b819938b9ffb721",
   "dirty_at_snapshot": [
     "M FULL_BUILD_PLAN.md",
     " M docs/delivery/ACTIVE_EXECUTION.md",
@@ -11,26 +11,15 @@
     " M handoffs/codex-to-claude-completeness-audit.md",
     " M handoffs/current.md",
     " M scripts/audit_current_parity.mjs",
-    "?? docs/delivery/trello-cursor-initial-sync.json",
-    "?? docs/prototype/ENGINE_CURSOR_NATIVE_RESULT.md",
-    "?? docs/prototype/engine-cursor-clock-independent-results.json",
-    "?? docs/prototype/engine-cursor-controlled-initial-results.json",
-    "?? docs/prototype/engine-cursor-controlled-results.json",
-    "?? docs/prototype/engine-cursor-diagnostic-review-results.json",
-    "?? docs/prototype/engine-cursor-native-initial-results.json",
-    "?? docs/prototype/engine-cursor-native-initial-subinterval-diagnostic.json",
-    "?? docs/prototype/engine-cursor-native-observation.json",
-    "?? docs/prototype/screenshots/engine-cursor-native-initial-failure.png",
-    "?? docs/research/ENGINE_CURSOR_CLOCK_EVIDENCE_REVIEW.md",
-    "?? docs/research/ENGINE_CURSOR_DIAGNOSTIC_PLAN.md",
-    "?? docs/research/ENGINE_CURSOR_DIAGNOSTIC_REVIEW.md",
-    "?? prototype/keylock-cursor-analysis.js",
-    "?? prototype/keylock-cursor-capture-worklet.js",
-    "?? prototype/keylock-engine-cursor-harness.html",
-    "?? prototype/keylock-engine-cursor-harness.js",
-    "?? scripts/inspect_engine_cursor_initial.mjs",
-    "?? scripts/run_native_cursor_harness.cjs",
-    "?? scripts/test_engine_cursor_diagnostic.mjs"
+    "?? docs/delivery/FEATURE_MATCH_REENTRY_20261017.md",
+    "?? docs/delivery/trello-current-feature-match-sync.json",
+    "?? docs/prototype/current-feature-check-native-observation.json",
+    "?? docs/prototype/screenshots/parity-current-midi-targets-0.1.5.png",
+    "?? docs/research/CURRENT_FEATURE_MATCH_20261017.json",
+    "?? docs/research/CURRENT_FEATURE_MATCH_20261017.md",
+    "?? docs/research/CURRENT_FEATURE_MATCH_REVIEW_20261017.md",
+    "?? docs/research/REA_CURRENT_REFERENCE_PLIST_20261017.json",
+    "?? scripts/check_current_release_parity.mjs"
   ],
   "reference": {
     "version": "Serato DJ Pro4.0.10.213 arm64",
@@ -300,7 +289,7 @@
     {
       "path": "scripts/audit_current_parity.mjs",
       "candidate_sha256": "7e1be3838a4611bd6bfd51a2fe2859b0ea6c6bcc373ae3b3938b23fe34dffd15",
-      "current_sha256": "887665e12ed1f67b6cf1164fa882986f3dc14fba2ea5fa9ec14b42e6b1b37cf0"
+      "current_sha256": "736495efe0a990f0ed16daa2d4b35fa2ce6e3d5a81c47d998c8465ffcd2bcb0c"
     }
   ],
   "current_prototype_files_absent_from_browser_manifest": [
@@ -586,6 +575,33 @@
           "path": "docs/prototype/ENGINE_CURSOR_NATIVE_RESULT.md",
           "line": 21,
           "sha256": "905f969828d364ffdc9bd90c98fa47cd68c5a8dbf1d236304b1657e532283c45"
+        }
+      ]
+    },
+    {
+      "id": "CA-11",
+      "severity": "high",
+      "finding": "Current desktop0.1.5 native MIDI Target menu exposes only eight options, without Key Shift or Video targets; source target list/dispatcher corroborate the missing actions. The current release Key Shift mapping obligation and canonical Video target requirement are not satisfied by the confirmed browser knob.",
+      "evidence": [
+        {
+          "path": "docs/prototype/current-feature-check-native-observation.json",
+          "line": 27,
+          "sha256": "00d01c61b9b9101dc41dc752a946c84c83432a28483d99392419e70b1aca7101"
+        },
+        {
+          "path": "docs/prototype/current-feature-check-native-observation.json",
+          "line": 28,
+          "sha256": "00d01c61b9b9101dc41dc752a946c84c83432a28483d99392419e70b1aca7101"
+        },
+        {
+          "path": "prototype/panels.js",
+          "line": 1621,
+          "sha256": "2063234fa4d209424ec94df373fca9d66eec23cc917302a8ee8dc27ee4b92d89"
+        },
+        {
+          "path": "prototype/panels.js",
+          "line": 1541,
+          "sha256": "2063234fa4d209424ec94df373fca9d66eec23cc917302a8ee8dc27ee4b92d89"
         }
       ]
     }
@@ -1090,7 +1106,7 @@
     {
       "path": "scripts/audit_current_parity.mjs",
       "line": 1,
-      "sha256": "887665e12ed1f67b6cf1164fa882986f3dc14fba2ea5fa9ec14b42e6b1b37cf0"
+      "sha256": "736495efe0a990f0ed16daa2d4b35fa2ce6e3d5a81c47d998c8465ffcd2bcb0c"
     },
     {
       "path": "docs/approvals.md",
@@ -1156,6 +1172,21 @@
       "path": "docs/prototype/local-audio-library-browser-initial-results.json",
       "line": 1,
       "sha256": "d7b96a914f5f24df1daf0c1f607333d1306fc3d132a7ecd72040afc5f1fb0e95"
+    },
+    {
+      "path": "docs/prototype/current-feature-check-native-observation.json",
+      "line": 1,
+      "sha256": "00d01c61b9b9101dc41dc752a946c84c83432a28483d99392419e70b1aca7101"
+    },
+    {
+      "path": "docs/research/REA_CURRENT_REFERENCE_PLIST_20261017.json",
+      "line": 1,
+      "sha256": "9b0b89a5c89435913b0d9497244e498b98405b6f29f48534575352acc2dd1e53"
+    },
+    {
+      "path": "scripts/check_current_release_parity.mjs",
+      "line": 1,
+      "sha256": "14cc3b7a5f5597378f9ae26dad3f96f9c38e6e37fa69fee11fdbddbc74cafe4b"
     }
   ],
   "features": [
@@ -8397,8 +8428,8 @@
           "sha256": "48869e3e0e071cd03dbe2b61e87e9662202526ea88172eb268f7079d3cbb9f09"
         }
       ],
-      "positive_evidence_boundary": "MIDI learn/export/persist parser subset; saved relative browser-knob mapping user-confirmed Electron0.1.1.",
-      "remaining_gap": "Full edit/import/reset/undo validation and all actual map fields/controls across reconnect.",
+      "positive_evidence_boundary": "MIDI learn/export/persist subset and confirmed0.1.1 browser knob; fresh0.1.5 native Target menu has only8options, without Key Shift or Video targets; matching dispatcher has no handlers.",
+      "remaining_gap": "Implement actual Key Shift/Video and other required target dispatch; full learn/edit/import/reset/undo, preset, modifier, feedback and reconnect acceptance.",
       "actual_done_criterion": "Learn, edit, export, import and reset mappings with validation and undo.",
       "proof_scope": "Saved evidence inspected as scoped documentary artifact; this audit does not rerun it, establish transfer to current WIP, or compare new reference runtime.",
       "requirement_evidence": [

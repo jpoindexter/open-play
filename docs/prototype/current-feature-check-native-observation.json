@@ -1,0 +1,72 @@
+{
+  "observed_at": "2026-10-17T12:50:43.755689+00:00",
+  "source_checked_at": "2026-10-17T12:50:43.755803+00:00",
+  "method": "Actual CUA native app binding, screenshots, MIDI button click, target dropdown click, Escape, Close dialog, fresh paused-state AX. No synthetic injection, Connect, mapping edit or audio action.",
+  "reference": {
+    "version": "4.0.10.213",
+    "pid": 5159,
+    "path": "/Applications/Serato DJ Pro.app"
+  },
+  "desktop": {
+    "version": "0.1.5",
+    "pid": 47465,
+    "title": "Open Play Test 0.1.5 — local audio persistence test",
+    "origin": "http://127.0.0.1:18768/prototype/",
+    "source_commit": "48a6d4dad2f217a8ba166b9ca890a287aabc4feb"
+  },
+  "native_target_menu": [
+    "Library browse",
+    "Deck 1 play",
+    "Deck 2 play",
+    "Deck 1 cue",
+    "Deck 2 cue",
+    "Crossfader",
+    "Sampler 1",
+    "FX depth"
+  ],
+  "key_shift_target_present": false,
+  "video_target_present": false,
+  "mappings_before_and_after": "CC ch1 / 1 → Library browse · Relative two’s complement; no editing action executed",
+  "restored_state": "MIDI menu dismissed; dialog closed; main view 0 decks playing, deck tempo values 0.",
+  "visual_observations": [
+    "Serato Vertical has side mode icons, pad-adjacent lanes and a loop-size grid. Open Play Vertical has text mode tabs and compact loop controls.",
+    "Open Play has a full-width mixer below decks absent from this inspected Serato state."
+  ],
+  "limits": [
+    "Different window sizes, tracks and play positions; no pixel or waveform/audio comparison.",
+    "No full layout inventory, hardware action, provider session or runtime Serato MIDI test.",
+    "Source/deep native semantics cannot be inferred from plist declarations."
+  ],
+  "evidence_files": [
+    {
+      "path": "local-evidence/parity-recheck-20261017/serato-main.png",
+      "sha256": "da42a0e3931fd91c48363509620d6c4b117ca3f221658715e5af3ec6bc9883a4",
+      "bytes": 810935,
+      "private_local_only": true
+    },
+    {
+      "path": "local-evidence/parity-recheck-20261017/open-play-0.1.5-main.png",
+      "sha256": "9381a3d47b48e4119b8594ef80ceacf6c11d0d479b8ba6a014c683a4ed7919d0",
+      "bytes": 766254,
+      "private_local_only": true
+    },
+    {
+      "path": "local-evidence/parity-recheck-20261017/open-play-0.1.5-main-ax.txt",
+      "sha256": "3fffc845e2a87b74b14bfc74ef7ccc5d3266ddf0cca06dd1eec5f0bc4013d732",
+      "bytes": 17935,
+      "private_local_only": true
+    },
+    {
+      "path": "local-evidence/parity-recheck-20261017/open-play-0.1.5-midi-targets-ax.txt",
+      "sha256": "1cc28b3d1a2c7bc25e1456ab4fc310f7b291cea953b730846ee392705b91fc93",
+      "bytes": 968,
+      "private_local_only": true
+    },
+    {
+      "path": "docs/prototype/screenshots/parity-current-midi-targets-0.1.5.png",
+      "sha256": "541c33148c57f50d6ed368896508a18850ad592857b01731f2ea68be50b7a02a",
+      "bytes": 535306,
+      "private_local_only": false
+    }
+  ]
+}
