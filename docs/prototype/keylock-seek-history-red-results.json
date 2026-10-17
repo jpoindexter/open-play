@@ -1,0 +1,191 @@
+{
+  "created_at": "2026-10-17T16:24:11.209Z",
+  "modulePath": "prototype/vendor/signalsmith-stretch/SignalsmithStretch-open-play-disposable.mjs",
+  "moduleSHA256": "b2811c519f067cc5a1abd6cdccab46578d1eeef8aba42f666fab2830a9d6f46e",
+  "phase": "RED-original",
+  "passed": 4,
+  "failed": 6,
+  "checks": [
+    {
+      "name": "Queried fullseek history sr44100 {\"preset\":\"default\"}",
+      "passed": false,
+      "evidence": {
+        "sampleRate": 44100,
+        "config": {
+          "preset": "default"
+        },
+        "block": 5292,
+        "interval": 1323,
+        "inputLatency": 2646,
+        "outputLatency": 2646,
+        "actualBufferLength": 5292
+      },
+      "error": "AssertionError [ERR_ASSERTION]: Seek history must include full block plus interval"
+    },
+    {
+      "name": "Queried fullseek history sr44100 {\"preset\":\"cheaper\"}",
+      "passed": true,
+      "evidence": {
+        "sampleRate": 44100,
+        "config": {
+          "preset": "cheaper"
+        },
+        "block": 4410,
+        "interval": 1764,
+        "inputLatency": 2205,
+        "outputLatency": 3969,
+        "actualBufferLength": 6174
+      }
+    },
+    {
+      "name": "Queried fullseek history sr44100 {\"blockMs\":120,\"intervalMs\":10,\"splitComputation\":false}",
+      "passed": false,
+      "evidence": {
+        "sampleRate": 44100,
+        "config": {
+          "blockMs": 120,
+          "intervalMs": 10,
+          "splitComputation": false
+        },
+        "block": 5292,
+        "interval": 441,
+        "inputLatency": 2646,
+        "outputLatency": 2646,
+        "actualBufferLength": 5292
+      },
+      "error": "AssertionError [ERR_ASSERTION]: Seek history must include full block plus interval"
+    },
+    {
+      "name": "Queried fullseek history sr44100 {\"blockMs\":100,\"intervalMs\":20,\"splitComputation\":true}",
+      "passed": true,
+      "evidence": {
+        "sampleRate": 44100,
+        "config": {
+          "blockMs": 100,
+          "intervalMs": 20,
+          "splitComputation": true
+        },
+        "block": 4410,
+        "interval": 882,
+        "inputLatency": 2205,
+        "outputLatency": 3087,
+        "actualBufferLength": 5292
+      }
+    },
+    {
+      "name": "Queried fullseek history sr48000 {\"preset\":\"default\"}",
+      "passed": false,
+      "evidence": {
+        "sampleRate": 48000,
+        "config": {
+          "preset": "default"
+        },
+        "block": 5760,
+        "interval": 1440,
+        "inputLatency": 2880,
+        "outputLatency": 2880,
+        "actualBufferLength": 5760
+      },
+      "error": "AssertionError [ERR_ASSERTION]: Seek history must include full block plus interval"
+    },
+    {
+      "name": "Queried fullseek history sr48000 {\"preset\":\"cheaper\"}",
+      "passed": true,
+      "evidence": {
+        "sampleRate": 48000,
+        "config": {
+          "preset": "cheaper"
+        },
+        "block": 4800,
+        "interval": 1920,
+        "inputLatency": 2400,
+        "outputLatency": 4320,
+        "actualBufferLength": 6720
+      }
+    },
+    {
+      "name": "Queried fullseek history sr48000 {\"blockMs\":120,\"intervalMs\":10,\"splitComputation\":false}",
+      "passed": false,
+      "evidence": {
+        "sampleRate": 48000,
+        "config": {
+          "blockMs": 120,
+          "intervalMs": 10,
+          "splitComputation": false
+        },
+        "block": 5760,
+        "interval": 480,
+        "inputLatency": 2880,
+        "outputLatency": 2880,
+        "actualBufferLength": 5760
+      },
+      "error": "AssertionError [ERR_ASSERTION]: Seek history must include full block plus interval"
+    },
+    {
+      "name": "Queried fullseek history sr48000 {\"blockMs\":100,\"intervalMs\":20,\"splitComputation\":true}",
+      "passed": true,
+      "evidence": {
+        "sampleRate": 48000,
+        "config": {
+          "blockMs": 100,
+          "intervalMs": 20,
+          "splitComputation": true
+        },
+        "block": 4800,
+        "interval": 960,
+        "inputLatency": 2400,
+        "outputLatency": 3360,
+        "actualBufferLength": 5760
+      }
+    },
+    {
+      "name": "Actualneutral keylock at1.08 retains330/550Hz within0.01Hz sr44100",
+      "passed": false,
+      "evidence": {
+        "sampleRate": 44100,
+        "rate": 1.08,
+        "semitones": 0,
+        "measurementSeconds": [
+          5,
+          7
+        ],
+        "nonfinite": 0,
+        "measuredHz": [
+          330.43098372873317,
+          550.4267418617064
+        ],
+        "errorHz": [
+          0.4309837287331675,
+          0.42674186170643225
+        ],
+        "declaredMaximumErrorHz": 0.01
+      },
+      "error": "AssertionError [ERR_ASSERTION]: Neutralkeylock pitch drift exceeds0.01Hz"
+    },
+    {
+      "name": "Actualneutral keylock at1.08 retains330/550Hz within0.01Hz sr48000",
+      "passed": false,
+      "evidence": {
+        "sampleRate": 48000,
+        "rate": 1.08,
+        "semitones": 0,
+        "measurementSeconds": [
+          5,
+          7
+        ],
+        "nonfinite": 0,
+        "measuredHz": [
+          330.38437192882543,
+          550.3860051334754
+        ],
+        "errorHz": [
+          0.3843719288254306,
+          0.3860051334753507
+        ],
+        "declaredMaximumErrorHz": 0.01
+      },
+      "error": "AssertionError [ERR_ASSERTION]: Neutralkeylock pitch drift exceeds0.01Hz"
+    }
+  ],
+  "scope": "ActualWASM serialprocessor geometry+neutralpitch contract only. Does not accept native shifted1Hzgate, fullkeylock/compound/musical/reference/physical behavior."
+}

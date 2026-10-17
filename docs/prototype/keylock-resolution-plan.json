@@ -1,0 +1,7 @@
+{
+  "declared_before_execution": "2026-10-17",
+  "question": "Is the remaining shifted-tone bias sensitive to temporal/spectral configuration after supplying complete queried seek history?",
+  "conditions": "Actual productionWASM, fullhistory=_blockSamples()+_intervalSamples(); compare120msblock/30msinterval baseline,120/10 denseranalysis,240/60 longerwindow.44100Hz330/550source, rate1.08,semitones0/+2. No source/musical classification or pitch compensation; fixed<=1Hz5–7s metric.",
+  "controls": "Whole10second output raw; fullfinite; source/rate/semitones/constants unchanged. Report latencies and actualconfiguration; a largerwindow may carry latency/CPU tradeoffs. No productionparameter selected solely to make this fixture pass.",
+  "full_native_reference_or_musical_acceptance": false
+}

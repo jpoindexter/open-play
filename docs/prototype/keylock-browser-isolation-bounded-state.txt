@@ -1,0 +1,495 @@
+Browser tab: 47, Title: "Keylock pitch isolation — unpromoted experiment", URL: "http://127.0.0.1:18812/".
+0 AXWebArea Keylock pitch isolation — unpromoted experiment, URL: 127.0.0.1:18812/
+	1 heading Keylock pitch isolation, Value: 1
+		2 text Keylock pitch isolation
+	3 text Separate experiment using real browser AudioWorklets and unchanged WASM. Six complete stereo/control recordings. Physical output muted. Both candidates retain a known low-bass failure and are not promoted to Open Play.
+	4 button (disabled) Run six muted audio comparisons, ID: run
+	5 text Recorded 6 cases; 2 meet individual criteria. Known failures retained; no promotion.
+	6 text {
+  "completed": true,
+  "fatalErrors": [],
+  "cases": [
+    {
+      "id": "baseline-neutral",
+      "capture": {
+        "frames": 364032,
+        "channels": 4,
+        "sampleRate": 44100,
+        "contiguous": true,
+        "nonfinite": 0,
+        "sha256": "e1e114271078008318bce626e45660ab3ff301d407597f25f2fbb8825cdd1a42",
+        "retained": {
+          "path": "local-evidence/keylock-browser-isolation-bounded/baseline-neutral.f32",
+          "bytes": 5824512,
+          "sha256": "e1e114271078008318bce626e45660ab3ff301d407597f25f2fbb8825cdd1a42"
+        }
+      },
+      "errors": [],
+      "measurements": [
+        {
+          "channel": 0,
+          "windowSeconds": [
+            5,
+            7
+          ],
+          "frames": 88200,
+          "nonfinite": 0,
+          "rms": 0.09883279803309687,
+          "hz": 330.4308188544223,
+          "expectedHz": 330,
+          "maximumErrorHz": 0.01,
+          "errorHz": 0.4308188544222844,
+          "passed": false
+        },
+        {
+          "channel": 1,
+          "windowSeconds": [
+            5,
+            7
+          ],
+          "frames": 88200,
+          "nonfinite": 0,
+          "rms": 0.09882325730232334,
+          "hz": 550.4266754154922,
+          "expectedHz": 550,
+          "maximumErrorHz": 0.01,
+          "errorHz": 0.426675415492241,
+          "passed": false
+        },
+        {
+          "channel": 2,
+          "windowSeconds": [
+            5,
+            7
+          ],
+          "frames": 88200,
+          "nonfinite": 0,
+          "rms": 0.02828426569097078,
+          "hz": 306.9999851832482,
+          "expectedHz": 307,
+          "maximumErrorHz": 0.01,
+          "errorHz": 0.000014816751786383975,
+          "passed": true
+        },
+        {
+          "channel": 3,
+          "windowSeconds": [
+            5,
+            7
+          ],
+          "frames": 88200,
+          "nonfinite": 0,
+          "rms": 0.02828426569097078,
+          "hz": 306.9999851832482,
+          "expectedHz": 307,
+          "maximumErrorHz": 0.01,
+          "errorHz": 0.000014816751786383975,
+          "passed": true
+        }
+      ],
+      "criteriaPassed": false
+    },
+    {
+      "id": "history-neutral",
+      "capture": {
+        "frames": 364288,
+        "channels": 4,
+        "sampleRate": 44100,
+        "contiguous": true,
+        "nonfinite": 0,
+        "sha256": "af747beeeed2a9f2fe22389c71c86b268ad52f2b8a2d35cba76354a9595d6a00",
+        "retained": {
+          "path": "local-evidence/keylock-browser-isolation-bounded/history-neutral.f32",
+          "bytes": 5828608,
+          "sha256": "af747beeeed2a9f2fe22389c71c86b268ad52f2b8a2d35cba76354a9595d6a00"
+        }
+      },
+      "errors": [],
+      "measurements": [
+        {
+          "channel": 0,
+          "windowSeconds": [
+            5,
+            7
+          ],
+          "frames": 88200,
+          "nonfinite": 0,
+          "rms": 0.09899298416320026,
+          "hz": 330.0000333936651,
+          "expectedHz": 330,
+          "maximumErrorHz": 0.01,
+          "errorHz": 0.000033393665091807634,
+          "passed": true
+        },
+        {
+          "channel": 1,
+          "windowSeconds": [
+            5,
+            7
+          ],
+          "frames": 88200,
+          "nonfinite": 0,
+          "rms": 0.09899437485433034,
+          "hz": 549.9999702216984,
+          "expectedHz": 550,
+          "maximumErrorHz": 0.01,
+          "errorHz": 0.00002977830160943995,
+          "passed": true
+        },
+        {
+          "channel": 2,
+          "windowSeconds": [
+            5,
+            7
+          ],
+          "frames": 88200,
+          "nonfinite": 0,
+          "rms": 0.028284265739612062,
+          "hz": 306.9999851832482,
+          "expectedHz": 307,
+          "maximumErrorHz": 0.01,
+          "errorHz": 0.000014816751786383975,
+          "passed": true
+        },
+        {
+          "channel": 3,
+          "windowSeconds": [
+            5,
+            7
+          ],
+          "frames": 88200,
+          "nonfinite": 0,
+          "rms": 0.028284265739612062,
+          "hz": 306.9999851832482,
+          "expectedHz": 307,
+          "maximumErrorHz": 0.01,
+          "errorHz": 0.000014816751786383975,
+          "passed": true
+        }
+      ],
+      "criteriaPassed": true
+    },
+    {
+      "id": "baseline-plus2",
+      "capture": {
+        "frames": 364800,
+        "channels": 4,
+        "sampleRate": 44100,
+        "contiguous": true,
+        "nonfinite": 0,
+        "sha256": "92e6d8dd7f2c98fee88e8fe80aa2211d36032b7ff6462cb37ccba6c2854bfd49",
+        "retained": {
+          "path": "local-evidence/keylock-browser-isolation-bounded/baseline-plus2.f32",
+          "bytes": 5836800,
+          "sha256": "92e6d8dd7f2c98fee88e8fe80aa2211d36032b7ff6462cb37ccba6c2854bfd49"
+        }
+      },
+      "errors": [],
+      "measurements": [
+        {
+          "channel": 0,
+          "windowSeconds": [
+            5,
+            7
+          ],
+          "frames": 88200,
+          "nonfinite": 0,
+          "rms": 0.09667223052724795,
+          "hz": 371.45851641884866,
+          "expectedHz": 370.4124759420931,
+          "maximumErrorHz": 1,
+          "errorHz": 1.046040476755536,
+          "passed": false
+        },
+        {
+          "channel": 1,
+          "windowSeconds": [
+            5,
+            7
+          ],
+          "frames": 88200,
+          "nonfinite": 0,
+          "rms": 0.09677029121238646,
+          "hz": 617.9345161323495,
+          "expectedHz": 617.3541265701551,
+          "maximumErrorHz": 1,
+          "errorHz": 0.5803895621943411,
+          "passed": true
+        },
+        {
+          "channel": 2,
+          "windowSeconds": [
+            5,
+            7
+          ],
+          "frames": 88200,
+          "nonfinite": 0,
+          "rms": 0.028284265739612062,
+          "hz": 306.9999851832482,
+          "expectedHz": 307,
+          "maximumErrorHz": 0.01,
+          "errorHz": 0.000014816751786383975,
+          "passed": true
+        },
+        {
+          "channel": 3,
+          "windowSeconds": [
+            5,
+            7
+          ],
+          "frames": 88200,
+          "nonfinite": 0,
+          "rms": 0.028284265739612062,
+          "hz": 306.9999851832482,
+          "expectedHz": 307,
+          "maximumErrorHz": 0.01,
+          "errorHz": 0.000014816751786383975,
+          "passed": true
+        }
+      ],
+      "criteriaPassed": false
+    },
+    {
+      "id": "history-plus2",
+      "capture": {
+        "frames": 364800,
+        "channels": 4,
+        "sampleRate": 44100,
+        "contiguous": true,
+        "nonfinite": 0,
+        "sha256": "bc83deab5ea24e88e2982a51abf74170c0bc1bd9be130161dafdf01fd7e848de",
+        "retained": {
+          "path": "local-evidence/keylock-browser-isolation-bounded/history-plus2.f32",
+          "bytes": 5836800,
+          "sha256": "bc83deab5ea24e88e2982a51abf74170c0bc1bd9be130161dafdf01fd7e848de"
+        }
+      },
+      "errors": [],
+      "measurements": [
+        {
+          "channel": 0,
+          "windowSeconds": [
+            5,
+            7
+          ],
+          "frames": 88200,
+          "nonfinite": 0,
+          "rms": 0.09677109403038536,
+          "hz": 371.45038027586276,
+          "expectedHz": 370.4124759420931,
+          "maximumErrorHz": 1,
+          "errorHz": 1.0379043337696316,
+          "passed": false
+        },
+        {
+          "channel": 1,
+          "windowSeconds": [
+            5,
+            7
+          ],
+          "frames": 88200,
+          "nonfinite": 0,
+          "rms": 0.09684797067240646,
+          "hz": 617.8240570030599,
+          "expectedHz": 617.3541265701551,
+          "maximumErrorHz": 1,
+          "errorHz": 0.4699304329047891,
+          "passed": true
+        },
+        {
+          "channel": 2,
+          "windowSeconds": [
+            5,
+            7
+          ],
+          "frames": 88200,
+          "nonfinite": 0,
+          "rms": 0.028284265165830918,
+          "hz": 306.99998510035005,
+          "expectedHz": 307,
+          "maximumErrorHz": 0.01,
+          "errorHz": 0.000014899649954713823,
+          "passed": true
+        },
+        {
+          "channel": 3,
+          "windowSeconds": [
+            5,
+            7
+          ],
+          "frames": 88200,
+          "nonfinite": 0,
+          "rms": 0.028284265165830918,
+          "hz": 306.99998510035005,
+          "expectedHz": 307,
+          "maximumErrorHz": 0.01,
+          "errorHz": 0.000014899649954713823,
+          "passed": true
+        }
+      ],
+      "criteriaPassed": false
+    },
+    {
+      "id": "dense-plus2",
+      "capture": {
+        "frames": 364800,
+        "channels": 4,
+        "sampleRate": 44100,
+        "contiguous": true,
+        "nonfinite": 0,
+        "sha256": "a6c2ccac03fa7b20bdc7a94a64589bde68c5358e1c271b34bd513d91e69f432b",
+        "retained": {
+          "path": "local-evidence/keylock-browser-isolation-bounded/dense-plus2.f32",
+          "bytes": 5836800,
+          "sha256": "a6c2ccac03fa7b20bdc7a94a64589bde68c5358e1c271b34bd513d91e69f432b"
+        }
+      },
+      "errors": [],
+      "measurements": [
+        {
+          "channel": 0,
+          "windowSeconds": [
+            5,
+            7
+          ],
+          "frames": 88200,
+          "nonfinite": 0,
+          "rms": 0.09860495190810879,
+          "hz": 370.8134996080677,
+          "expectedHz": 370.4124759420931,
+          "maximumErrorHz": 1,
+          "errorHz": 0.40102366597454875,
+          "passed": true
+        },
+        {
+          "channel": 1,
+          "windowSeconds": [
+            5,
+            7
+          ],
+          "frames": 88200,
+          "nonfinite": 0,
+          "rms": 0.0985952958086433,
+          "hz": 617.5395442866791,
+          "expectedHz": 617.3541265701551,
+          "maximumErrorHz": 1,
+          "errorHz": 0.18541771652394345,
+          "passed": true
+        },
+        {
+          "channel": 2,
+          "windowSeconds": [
+            5,
+            7
+          ],
+          "frames": 88200,
+          "nonfinite": 0,
+          "rms": 0.028284265739612062,
+          "hz": 306.9999851832482,
+          "expectedHz": 307,
+          "maximumErrorHz": 0.01,
+          "errorHz": 0.000014816751786383975,
+          "passed": true
+        },
+        {
+          "channel": 3,
+          "windowSeconds": [
+            5,
+            7
+          ],
+          "frames": 88200,
+          "nonfinite": 0,
+          "rms": 0.028284265739612062,
+          "hz": 306.9999851832482,
+          "expectedHz": 307,
+          "maximumErrorHz": 0.01,
+          "errorHz": 0.000014816751786383975,
+          "passed": true
+        }
+      ],
+      "criteriaPassed": true
+    },
+    {
+      "id": "dense-low-bass",
+      "capture": {
+        "frames": 364288,
+        "channels": 4,
+        "sampleRate": 44100,
+        "contiguous": true,
+        "nonfinite": 0,
+        "sha256": "00c4e228058daa435c99b56df50b0ebb6113bb8c601cfcdbf24373afeb02a79d",
+        "retained": {
+          "path": "local-evidence/keylock-browser-isolation-bounded/dense-low-bass.f32",
+          "bytes": 5828608,
+          "sha256": "00c4e228058daa435c99b56df50b0ebb6113bb8c601cfcdbf24373afeb02a79d"
+        }
+      },
+      "errors": [],
+      "measurements": [
+        {
+          "channel": 0,
+          "windowSeconds": [
+            5,
+            7
+          ],
+          "frames": 88200,
+          "nonfinite": 0,
+          "rms": 0.09686375453396151,
+          "hz": 47.370410479595485,
+          "expectedHz": 48.5,
+          "maximumErrorHz": 1,
+          "errorHz": 1.1295895204045152,
+          "passed": false
+        },
+        {
+          "channel": 1,
+          "windowSeconds": [
+            5,
+            7
+          ],
+          "frames": 88200,
+          "nonfinite": 0,
+          "rms": 0.09750446147519731,
+          "hz": 86.7449803718952,
+          "expectedHz": 86.5,
+          "maximumErrorHz": 1,
+          "errorHz": 0.2449803718951955,
+          "passed": true
+        },
+        {
+          "channel": 2,
+          "windowSeconds": [
+            5,
+            7
+          ],
+          "frames": 88200,
+          "nonfinite": 0,
+          "rms": 0.028284265739612062,
+          "hz": 306.9999851832482,
+          "expectedHz": 307,
+          "maximumErrorHz": 0.01,
+          "errorHz": 0.000014816751786383975,
+          "passed": true
+        },
+        {
+          "channel": 3,
+          "windowSeconds": [
+            5,
+            7
+          ],
+          "frames": 88200,
+          "nonfinite": 0,
+          "rms": 0.028284265739612062,
+          "hz": 306.9999851832482,
+          "expectedHz": 307,
+          "maximumErrorHz": 0.01,
+          "errorHz": 0.000014816751786383975,
+          "passed": true
+        }
+      ],
+      "criteriaPassed": false
+    }
+  ]
+}
+
+The focused UI element is 0 AXWebArea Keylock pitch isolation — unpromoted experiment, URL: 127.0.0.1:18812/

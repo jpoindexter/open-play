@@ -1,0 +1,35 @@
+# Independent review of current feature checkpoint
+
+17 October 2026, 16:49:56 UTC source observation. **The current-product accounting and remaining-obligation claims survive this bounded review. Full Serato parity remains unestablished.** No production or frozen evidence was changed; the only file written by this reviewer is this report.
+
+Scope: `KEYLOCK_PITCH_DIAGNOSIS_20261017.md` current-product/remaining-obligations sections, `PARITY_CURRENT_FEATURE_RECHECK_20261017.json`, plan section 65 and both handoff prefixes. SoundTouch/Signalsmith numerical experiment findings are assigned to a separate independent reviewer and were not regraded here.
+
+## Confirmed claims
+
+| Claim challenged | Independent execution / source evidence | Verdict and limit |
+|---|---|---|
+| All named identities correspond to current files | Independently recomputed SHA-256 for **169/169 unique audit paths, 37/37 feature inputs, 7/7 native source paths and 43/43 native evidence paths**. No mismatch. Receipt path/hash pairs exactly equal the source manifests after omitting the audit's additional location metadata. Definitions: `CURRENT_PARITY_AUDIT_20261017.json:996`, `CURRENT_FEATURE_MATCH_20261017.json:2977`, `desktop-0.1.6-candidate.json:10` and `:40`; current receipt `:40`. | **Confirmed.** New identity checks, not new behavioral tests. |
+| Actual desktop package contains current prototype bytes | Used the installed `@electron/asar` library's `listPackage`, `statFile` and `extractFile`, independently of the frozen Python checker's manual-header reader. Extracted **222/222 prototype payloads in memory**; every payload hash matches current source and the receipt. Packaged and current prototype file sets are identical. Whole ASAR SHA is `f9e85d9ef3150fd37c15f5b3d72a4e3f6a06a42a59bf29617a43bdf566cdba6e`, matching `desktop-0.1.6-candidate.json:7–9` and receipt `:13–17`. | **Confirmed.** Package/source identity does not rerun native playback or establish full native quality. |
+| Scope and flags were preserved | Independently parsed actual `prototype/inventory.js` exports and the audit: **110 unique groups, 522 unique requirement IDs**, identical canonical/audit requirement sets; **46 false / 476 unset / zero true** full-reference flags. Checked all 110 feature full-parity flags false. Receipt `:19–38`; canonical exports `inventory.js:2–3`. | **Confirmed.** Counts and classification labels are not completeness or percentage-implementation proof. |
+| Beta/release namespaces remain separate | Current match has **26 unique release-check IDs**, **24 macOS obligations** and two explicitly Windows-only entries, `REL-07` and `REL-18`. All release full-parity flags are false. Existing delta file retains **9 beta deltas**. Definitions: `CURRENT_FEATURE_MATCH_20261017.json:1211`, `CURRENT_VERSION_DELTAS_20261017.json:21`; receipt `:35–38`. | **Confirmed as accounting.** No new beta execution, Windows acceptance or exhaustive latest-catalog review. |
+| Current product retains concrete functional gaps | Read current Sync rate change and explicit phase/takeover simulation at `app.js:816–826`; Link's simulated local joined/tempo/peer mutations at `panels.js:1371–1386`; fabricated provider catalog/login states at `panels.js:1768–1795` and provider playback refusal at `engine.js:346–351`. Recording connects `masterInput → master → destination` after master gain at `engine.js:75–81`; `MediaRecorder` uses that destination at `engine.js:862–865`. Diagnosis `:37–48` qualifies these remaining contracts. | **Confirmed code-path findings.** No new Link/provider/network/audio runtime test or broad absence claim. Postmaster topology is real source evidence; the reference pre-master criterion is documented, not a newly measured installed-reference tap. |
+| Reference identity is narrow and current | Saved fresh REA receipt declares identity-only scope at `PARITY_CURRENT_FEATURE_RECHECK_REA_20261017.json:3–11`. Independently hashed and parsed the actual installed plist: receipt SHA matches and `CFBundleVersion` is **4.0.10.213**. Main-manual semantic review remains explicitly false (`manual-feature-crosswalk.json:5`). | **Confirmed identity and retained limitation.** This reviewer did not reopen websites, run REA, execute reference behavior or re-review all 168 articles. Parent source-refresh observations remain documentary witnesses. |
+| No product/pass promotion and original prompt preserved | `git diff HEAD -- prototype desktop` is empty; current bytes match the frozen ASAR and seven native source hashes. Candidate `full_parity_verified` and `declared_audio_accuracy_passed` remain false; current receipt `:5–6` remains false/zero. Independently compared both handoff leading section-65 blocks with plan section 65: identical. Exact original prompt is **20,996 bytes**, SHA `699d5f1556d148800fda22362be86b6f4acdcaac06dca0f5801b025af1291c8e`; the full audit handoff ends in those exact bytes. `current.md` references that packet/prompt instead of duplicating its suffix. Anchors: `FULL_BUILD_PLAN.md:1745`, both handoffs `:1–19`, receipt `:7`. | **Confirmed.** New experiments and documentation are separate from the unchanged product. No new full feature or requirement pass was awarded. |
+
+## Refutation outcome and proof boundaries
+
+**Seven challenged current-checkpoint claims confirmed; no defended defect found within this scope.** No interpretation survives that the successful identity checks establish parity, that source inspection is new runtime acceptance, or that the experimental processor is already installed in the product. The diagnosis and section-65 handoffs explicitly retain those boundaries (`KEYLOCK_PITCH_DIAGNOSIS_20261017.md:3–13`, `:37–54`; handoffs `:3–19`).
+
+This reviewer freshly executed hashing, exact set/count/flag checks, independent ASAR extraction/comparison, plist identity parsing, current code-path reads, Git read-only preservation checks and prompt/prefix byte comparisons. It did **not** repeat earlier native import/restart/MIDI/Video-opacity or user-confirmed Hercules browse/cue/master tests. Their records remain hashed, dated historical witnesses with their original candidates and limits. Nor did this review rerun the 522 runtime requirements, hardware, providers, all manual semantics or the independent Claude completeness audit.
+
+The frozen report/checker remain unchanged relative to HEAD: `CURRENT_PARITY_AUDIT_20261017.md/json`, `CURRENT_FEATURE_MATCH_20261017.json`, `scripts/revalidate_current_parity.py`. Nothing was regenerated to make a check pass.
+
+Reviewed document SHA-256 values at this observation:
+
+- Diagnosis: `9c376c0af7bdcedf71576790bce4be4783eb5b4ef5289865f5f65782e858c983`.
+- Current recheck receipt: `c71c23bf0de07a1f50f2c35f642e0c736bb7a9d1b093d0872438e49a0aa2b1e7`.
+- Full build plan: `ce53340637a03113f46672056733b6acbb7ab3a24ac706ae73c123b213eb5f52`.
+- Rolling handoff: `31a621f342f49f66e700fe5685443f4997b37c936bf1c94de9b82b358da44ba2`.
+- Full audit handoff: `135f3d6249a9a4e3113abcd305f2ad9b6946fd4f8421865bb9eae87cef5d5b39`.
+
+Skills applied: use, dec-quality-testing, adversarial-verify.

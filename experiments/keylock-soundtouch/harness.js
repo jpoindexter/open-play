@@ -1,0 +1,38 @@
+import {SoundTouchNode} from '/SoundTouchNode.js';
+const $=s=>document.querySelector(s),assert=(x,m)=>{if(!x)throw Error(m);},wait=ms=>new Promise(r=>setTimeout(r,ms));
+const sha=async b=>Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',b)),x=>x.toString(16).padStart(2,'0')).join('');
+const bounded=(p,name,ms=5000)=>{let timer;return Promise.race([p,new Promise((_,reject)=>timer=setTimeout(()=>reject(Error(name+'timeout')),ms))]).finally(()=>clearTimeout(timer));};
+async function post(url,body,type){const r=await fetch(url,{method:'POST',headers:{'Content-Type':type,'X-Open-Play-Test':'pitch-isolation'},body});assert(r.ok,'Evidencewritefailed '+r.status+' '+url);return r.json();}
+function stats(data,sr){let mean=0,power=0,nonfinite=0;for(const v of data){if(!Number.isFinite(v))nonfinite++;mean+=v;power+=v*v;}mean/=data.length;const at=[];for(let i=1;i<data.length;i++)if(data[i-1]-mean<0&&data[i]-mean>=0)at.push(i-1-(data[i-1]-mean)/(data[i]-data[i-1]));return{frames:data.length,nonfinite,rms:Math.sqrt(power/data.length),hz:at.length>1?(at.length-1)*sr/(at.at(-1)-at[0]):null};}
+function publish(report){$('#results').textContent=JSON.stringify({completed:report.completed,fatalErrors:report.fatalErrors,cases:report.cases.map(c=>({id:c.id,errors:c.errors,frames:c.capture?.frames,contiguous:c.capture?.contiguous,measurements:c.measurements,criteriaPassed:c.criteriaPassed}))},null,2);}
+$('#run').onclick=async()=>{
+ $('#run').disabled=true;const report={startedAt:new Date().toISOString(),scope:'Published SoundTouch2.1.1 realWebAudio; separate from Open Play mainapp/native. Physicaloutputgain0; synthetic steadytones only.',sourceHashes:{},cases:[],fatalErrors:[],completed:false,full_parity_verified:false};
+ try{
+  const plan=await(await fetch('/plan.json')).json();report.plan=plan;
+  for(const file of ['/harness.js','/capture.js','/SoundTouchNode.js','/constants.js','/soundtouch-processor.js','/plan.json'])report.sourceHashes[file]=await sha(await(await fetch(file)).arrayBuffer());
+  for(const spec of plan.cases){
+   $('#status').textContent='Capturing '+spec.id+'; physicaloutput muted.';const row={...spec,blocks:[],metrics:[],errors:[],criteriaPassed:false};report.cases.push(row);let ctx,capture,source,processor,osc,gain,merger,safe,request;const blocks=[];
+   try{
+    ctx=new AudioContext({sampleRate:spec.sampleRate});await bounded(ctx.resume(),'AudioContextresume');assert(ctx.sampleRate===spec.sampleRate,'Requested/actualsampleratemismatch');row.runtime={sampleRate:ctx.sampleRate,baseLatency:ctx.baseLatency,outputLatency:ctx.outputLatency,userAgent:navigator.userAgent};
+    await bounded(SoundTouchNode.register(ctx,'/soundtouch-processor.js'),'Publishedworkletregister');await bounded(ctx.audioWorklet.addModule('/capture.js'),'Captureregister');
+    processor=new SoundTouchNode({context:ctx,interpolationStrategy:'lanczos',outputChannelCount:2});processor.addEventListener('metrics',({detail})=>row.metrics.push({at:ctx.currentTime,...detail}));processor.playbackRate.value=spec.rate;processor.pitchSemitones.value=spec.semitones;
+    row.parameters={pitch:processor.pitch.value,pitchSemitones:processor.pitchSemitones.value,playbackRate:processor.playbackRate.value};
+    const buffer=ctx.createBuffer(2,ctx.sampleRate*14,ctx.sampleRate);for(let c=0;c<2;c++){const data=buffer.getChannelData(c);for(let i=0;i<data.length;i++)data[i]=.14*Math.sin(2*Math.PI*spec.tones[c]*i/ctx.sampleRate+[.17,.53][c]);}source=ctx.createBufferSource();source.buffer=buffer;source.playbackRate.value=spec.rate;source.connect(processor);
+    capture=new AudioWorkletNode(ctx,'open-play-pitch-isolation-capture',{numberOfInputs:2,numberOfOutputs:1,outputChannelCount:[2],channelCount:2,channelCountMode:'explicit',channelInterpretation:'discrete'});safe=ctx.createGain();safe.gain.value=0;safe.connect(ctx.destination);processor.connect(capture,0,0);capture.connect(safe);
+    osc=ctx.createOscillator();gain=ctx.createGain();merger=ctx.createChannelMerger(2);osc.frequency.value=307;gain.gain.value=.04;osc.connect(gain);gain.connect(merger,0,0);gain.connect(merger,0,1);merger.connect(capture,0,1);osc.start();let readyResolve,id=0;const ready=new Promise(resolve=>readyResolve=resolve),waiters=new Map();
+    capture.port.onmessage=({data})=>{if(data.type==='ready')readyResolve();else if(data.type==='pcm'){if(blocks.length<6000)blocks.push(data);else row.errors.push({message:'Capture6000blockbound'});}else{const fn=waiters.get(data.id);if(fn){waiters.delete(data.id);fn(data);}}};request=type=>{const key=++id;return bounded(new Promise(resolve=>{waiters.set(key,resolve);capture.port.postMessage({type,id:key});}),type+'ack',4000).finally(()=>waiters.delete(key));};
+    await bounded(ready,'Captureready');row.arm=await request('arm');row.command={sourceOutputTime:ctx.currentTime+.25,sourceRate:source.playbackRate.value,semitones:spec.semitones};row.captureStartedAt={audioContext:ctx.currentTime,wall:performance.now()};source.start(row.command.sourceOutputTime);const deadline=performance.now()+20000;
+    while(blocks.reduce((n,b)=>n+b.frames,0)<ctx.sampleRate*8.25){await wait(20);if(blocks.reduce((n,b)=>n+b.frames,0)<ctx.sampleRate*8.25)assert(performance.now()<deadline,'Capturetimeout');}
+   }catch(error){row.errors.push({message:error.message,stack:error.stack});}
+   finally{
+    if(request)try{row.stop=await request('stop');}catch(error){row.errors.push({message:error.message});}
+    if(ctx&&blocks.length){const sr=ctx.sampleRate,frames=blocks.reduce((n,b)=>n+b.frames,0),audio=new Float32Array(frames*4);let at=0,nonfinite=0,contiguous=true;for(let n=0;n<blocks.length;n++){const b=blocks[n];if(b.sequence!==n||n&&b.frame!==blocks[n-1].frame+blocks[n-1].frames)contiguous=false;assert(b.channels.length===4&&b.channels.every(c=>c.length===b.frames),'Capturegeometry');row.blocks.push({sequence:b.sequence,frame:b.frame,frames:b.frames});for(let i=0;i<b.frames;i++)for(let c=0;c<4;c++){const v=b.channels[c][i];if(!Number.isFinite(v))nonfinite++;audio[(at+i)*4+c]=v;}at+=b.frames;}
+     row.capture={sampleRate:sr,frames,channels:4,contiguous,nonfinite,sha256:await sha(audio.buffer)};row.capture.retained=await post('/raw/'+spec.id,audio.buffer,'application/octet-stream');row.measurements=[];if(frames>=7*sr)for(let c=0;c<4;c++){const data=Float32Array.from({length:2*sr},(_,i)=>audio[(5*sr+i)*4+c]),value=stats(data,sr),expected=c<2?spec.tones[c]*2**(spec.semitones/12):307,budget=c<2?1:.01,error=value.hz===null?null:Math.abs(value.hz-expected);row.measurements.push({channel:c,windowSeconds:[5,7],...value,expectedHz:expected,errorHz:error,maximumErrorHz:budget,neutralDiagnosticWithin001Hz:spec.semitones===0&&c<2?error!==null&&error<=.01:null,passed:error!==null&&error<=budget&&value.nonfinite===0&&value.rms>.001});}row.criteriaPassed=row.errors.length===0&&frames>=8.25*sr&&contiguous&&nonfinite===0&&row.measurements.length===4&&row.measurements.every(x=>x.passed);
+    }
+    try{source?.stop();}catch{}try{osc?.stop();}catch{}capture?.disconnect();processor?.disconnect();gain?.disconnect();merger?.disconnect();safe?.disconnect();if(ctx)await ctx.close();publish(report);
+   }
+  }
+  report.completed=true;
+ }catch(error){report.fatalErrors.push({message:error.message,stack:error.stack});}
+ report.finishedAt=new Date().toISOString();publish(report);try{report.retained=await post('/report',JSON.stringify(report,null,2),'application/json');$('#status').textContent=`Recorded ${report.cases.length} cases; ${report.cases.filter(c=>c.criteriaPassed).length} meet individual criteria. No production promotion.`;}catch(error){$('#status').textContent='Evidencewritefailed: '+error.message;}
+};

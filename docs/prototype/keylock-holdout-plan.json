@@ -1,0 +1,13 @@
+{
+  "declared_before_execution": "2026-10-17",
+  "purpose": "Test the independently selected120ms/10ms configuration beyond the original330/550tone pair before any production change. Compare baseline, fullhistoryonly, and fullhistory+10msinterval at same120msblock/latency.",
+  "sample_rates": [44100,48000],
+  "tone_pairs_hz": [[97,173],[220,440],[697,1209],[1760,2349]],
+  "states": [{"rate":0.75,"semitones":-12},{"rate":1.08,"semitones":2},{"rate":1.5,"semitones":12}],
+  "source": "New analyticfloat32stereosines, amplitude.14,14seconds, phases.17/.53. No tone detection or source compensation. Complete10second128alignedoutput retained for all72conditions.",
+  "additional_measurement_seconds": [5,7],
+  "frequency_error_hz_max": 1,
+  "criteria": "Allcompleteoutput finite, steadyRMS>.001, frequencyerror<=1Hz eachchannel. Results, including failures, all retained. These newholdout criteria do not replace frozen006gate or establish musical/native/reference acceptance.",
+  "configuration_tradeoff": "120/10 has unchanged120msqueried latency but more spectra and potentialCPUcost; no nativeCPU or longsession inference from serialNode timings.",
+  "full_parity_verified": false
+}

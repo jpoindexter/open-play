@@ -1,0 +1,146 @@
+{
+  "checked_at": "2026-10-17T16:43:58.101Z",
+  "scope": "Fresh installed plist identity only; not reference runtime behavior or compatibility.",
+  "evidence": {
+    "evidence_id": "ev_70d315bdd494a9efdba20445607af197cdbc8bbbfa56e6eb1e5ab6392b744f3a",
+    "subject": {
+      "name": "Info.plist",
+      "digest": {
+        "sha256": "128f13364cecee349b684af17b804d42d2e2ec97be80dc044d6ee151283e895b"
+      },
+      "local_path": "/Applications/Serato DJ Pro.app/Contents/Info.plist",
+      "format": "plist",
+      "architecture": null
+    },
+    "provider": {
+      "id": "native-macos",
+      "name": "macOS native inspection utilities",
+      "version": null
+    },
+    "analysis_profile": null,
+    "predicate_type": "rea.analysis",
+    "operation": "inspect_plist",
+    "parameters": {
+      "path": "/Applications/Serato DJ Pro.app/Contents/Info.plist"
+    },
+    "raw_result": null,
+    "normalized_result": {
+      "format": "xml",
+      "value": {
+        "CFBundleName": "Serato DJ Pro",
+        "DTSDKName": "macosx15.2",
+        "DTXcode": "1620",
+        "NSHumanReadableCopyright": "Copyright © 2017 Serato Audio Research Ltd. All rights reserved.",
+        "NSAppleMusicUsageDescription": "Serato DJ requires access to your Music app (iTunes) Library. Allow access to show iTunes tracks and playlists in your Serato DJ library",
+        "DTSDKBuild": "24C94",
+        "CFBundleDevelopmentRegion": "en",
+        "CFBundleVersion": "4.0.10.213",
+        "BuildMachineOSBuild": "25G83",
+        "DTPlatformName": "macosx",
+        "CFBundlePackageType": "APPL",
+        "CFBundleIconFile": "icon",
+        "CFBundleSupportedPlatforms": [
+          "MacOSX"
+        ],
+        "CFBundleShortVersionString": "4.0.10",
+        "NSMicrophoneUsageDescription": "Serato DJ requires access to all audio inputs and outputs on your DJ hardware. Denying access will result in severe audio issues and loss of functionality (e.g. DVS, Microphone)",
+        "NSSupportsAutomaticGraphicsSwitching": true,
+        "NSPrefersDisplaySafeAreaCompatibilityMode": false,
+        "CFBundleInfoDictionaryVersion": "6.0",
+        "CFBundleExecutable": "Serato DJ Pro",
+        "DTCompiler": "com.apple.compilers.llvm.clang.1_0",
+        "CFBundleURLTypes": [
+          {
+            "CFBundleTypeRole": "Viewer",
+            "CFBundleURLName": "com.serato.seratodj",
+            "CFBundleURLSchemes": [
+              "seratodjpro"
+            ]
+          }
+        ],
+        "CFBundleIdentifier": "com.serato.seratodj",
+        "DTPlatformVersion": "15.2",
+        "CFBundleSignature": "Srto",
+        "CFBundleDisplayName": "Serato DJ Pro",
+        "CSResourcesFileMapped": true,
+        "DTXcodeBuild": "16C5032a",
+        "LSMinimumSystemVersion": "10.14",
+        "UTExportedTypeDeclarations": [
+          {
+            "UTTypeIdentifier": "com.serato.serato-stems",
+            "UTTypeIconFile": "stems.icns",
+            "UTTypeDescription": "Serato Stems",
+            "UTTypeConformsTo": [
+              "public.data"
+            ],
+            "UTTypeTagSpecification": {
+              "public.filename-extension": "serato-stems"
+            }
+          }
+        ],
+        "DTPlatformBuild": "24C94"
+      },
+      "bundle": {
+        "identifier": "com.serato.seratodj",
+        "executable": "Serato DJ Pro",
+        "name": "Serato DJ Pro",
+        "version": "4.0.10.213",
+        "short_version": "4.0.10"
+      },
+      "source_path": "/Applications/Serato DJ Pro.app/Contents/Info.plist",
+      "provenance": [
+        {
+          "tool": "file",
+          "command": [
+            "/usr/bin/file",
+            "-b",
+            "$PLIST"
+          ],
+          "tool_version": null,
+          "version_reason": "Tool exposes no uniform stable version flag; executable SHA-256 is a prelaunch file sample and does not prove atomic OS image binding.",
+          "executable_sha256": "cfa8d09f57154ac457d10135aea04351bea0d79d9531441ca91d9e2a9d408393",
+          "exit": {
+            "code": 0,
+            "signal": null
+          },
+          "stdout_bytes": 48,
+          "stderr_bytes": 0
+        },
+        {
+          "tool": "plutil",
+          "command": [
+            "/usr/bin/plutil",
+            "-convert",
+            "json",
+            "-o",
+            "-",
+            "--",
+            "$PLIST"
+          ],
+          "tool_version": null,
+          "version_reason": "Tool exposes no uniform stable version flag; executable SHA-256 is a prelaunch file sample and does not prove atomic OS image binding.",
+          "executable_sha256": "038e7cb623439d983d7ac5fd2d670618d95960c7284ead0680e6700dd1af1d7a",
+          "exit": {
+            "code": 0,
+            "signal": null
+          },
+          "stdout_bytes": 1668,
+          "stderr_bytes": 0
+        }
+      ],
+      "limitations": []
+    },
+    "confidence": "observed",
+    "authority": "shipped-artifact",
+    "environment": null,
+    "limitations": [],
+    "relationship_coverage": null,
+    "locations": [
+      {
+        "kind": "artifact-path",
+        "path": "/Applications/Serato DJ Pro.app/Contents/Info.plist"
+      }
+    ],
+    "evidence_links": []
+  }
+}

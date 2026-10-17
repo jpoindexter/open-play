@@ -1,0 +1,16 @@
+{
+  "declared_before_execution": "2026-10-17",
+  "purpose": "RealWebAudio confirmation for the28/28serialSoundTouchcandidate; no productionbackend switch. Officialunmodified SoundTouchNode2.1.1/processor, realAudioBufferSource playbackRate and matching processorplaybackRate; pitchSemitones requested directly per publisherAPI.",
+  "cases": [
+    {"id":"sr44100-neutral","sampleRate":44100,"tones":[330,550],"rate":1.08,"semitones":0},
+    {"id":"sr44100-plus2","sampleRate":44100,"tones":[330,550],"rate":1.08,"semitones":2},
+    {"id":"sr44100-low-bass","sampleRate":44100,"tones":[97,173],"rate":0.75,"semitones":-12},
+    {"id":"sr48000-neutral","sampleRate":48000,"tones":[330,550],"rate":1.08,"semitones":0},
+    {"id":"sr48000-plus2","sampleRate":48000,"tones":[330,550],"rate":1.08,"semitones":2},
+    {"id":"sr48000-low-bass","sampleRate":48000,"tones":[97,173],"rate":0.75,"semitones":-12}
+  ],
+  "method": "Same14second analyticfloat32stereofixtureformula; requestedSRmustmatchactual. Recordatleast8.25seconds fullfourchannelPCM(audioL/R+307HzcontrolL/R); strictproducersequence/framecontinuity, allfinite; fixed5–7secondadditionalmeasurement. Toneerror<=1Hz,control<=.01Hz,RMS>.001. Originalneutral.01Hzdiagnostic is also reported separately, not inherited asSoundTouchacceptance. This1Hzcriterion matches retainednative006gate; no priorgate regrading.",
+  "physical_output_muted": true,
+  "limits": "ProcessorFIFO startupdelay/metrics retained; no mainapp/native/controller/latency/position/cursor/CPU/seek/loop/compound/music/reference/fullparity acceptance. Completecapturerun is not productionpromotion. All priorfailures preserved.",
+  "full_parity_verified": false
+}

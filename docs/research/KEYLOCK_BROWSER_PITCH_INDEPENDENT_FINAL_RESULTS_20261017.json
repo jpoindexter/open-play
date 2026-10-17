@@ -1,0 +1,544 @@
+{
+  "scope": "Independent offline whole4channel browserPCM/rowclock/armstop/control/frequency comparison. Parent performed browserRun; inspector did not runUI/browser/audio/native/hardware. No output repair,trimming,thresholdchange or productionpromotion.",
+  "report": {
+    "path": "docs/prototype/keylock-browser-isolation-bounded-results.json",
+    "SHA256": "70730b4b13aa59acffede2985f4af892755ce9ced629cf9bfa61af10e1f993b7"
+  },
+  "planSHA256": "6ac4fca95d89e1c42e1a48d35d42807ee61163e16f60d19c0932c7b5b582d78b",
+  "sourceMapping": {
+    "/harness.js": "experiments/keylock-history/harness-bounded.js",
+    "/capture.js": "experiments/keylock-history/capture.js",
+    "/SignalsmithStretch-open-play-disposable.mjs": "prototype/vendor/signalsmith-stretch/SignalsmithStretch-open-play-disposable.mjs",
+    "/SignalsmithStretch-open-play-history.mjs": "experiments/keylock-history/SignalsmithStretch-open-play-history.mjs",
+    "/plan.json": "docs/prototype/keylock-browser-isolation-plan.json"
+  },
+  "sourceHashes": {
+    "/harness.js": "593fa08ef17f402ac6cc4c5190cc42fd8f96e0e2b554bdbdb5add3bc0346dc61",
+    "/capture.js": "1915c70d02771a4561c6ed167bc21ebbd80f21eeef68b1a956fdbf09f970d9f1",
+    "/SignalsmithStretch-open-play-disposable.mjs": "b2811c519f067cc5a1abd6cdccab46578d1eeef8aba42f666fab2830a9d6f46e",
+    "/SignalsmithStretch-open-play-history.mjs": "1f470f846a993cc750ee2e111817adb08879493025c7322eadc8cf98323e4ef8",
+    "/plan.json": "6ac4fca95d89e1c42e1a48d35d42807ee61163e16f60d19c0932c7b5b582d78b"
+  },
+  "relocationMapSHA256": "caba6d9db37808c2752f8542115cf0595e4a9c94e5aa48606f261056e410352e",
+  "runtime": {
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36",
+    "sampleRate": 44100
+  },
+  "cases": [
+    {
+      "id": "baseline-neutral",
+      "variant": "baseline",
+      "originalRaw": {
+        "path": "local-evidence/keylock-browser-isolation-bounded/baseline-neutral.f32",
+        "SHA256": "e1e114271078008318bce626e45660ab3ff301d407597f25f2fbb8825cdd1a42",
+        "bytes": 5824512
+      },
+      "frames": 364032,
+      "channels": 4,
+      "durationSeconds": 8.25469387755102,
+      "allSamplesFinite": true,
+      "rows": 2844,
+      "firstRow": {
+        "sequence": 0,
+        "frame": 3328,
+        "frames": 128
+      },
+      "lastRow": {
+        "sequence": 2843,
+        "frame": 367232,
+        "frames": 128
+      },
+      "everySequenceAndFrameContiguous": true,
+      "armAndStopCounterAgreement": true,
+      "completeControlChannelsBitIdentical": true,
+      "controlFirst2048FitThenWholeSpanResidual": {
+        "RMS": 1.3840870746046872e-05,
+        "maximumAbsolute": 0.0017466163401214719,
+        "descriptiveOnly": true
+      },
+      "measurements": [
+        {
+          "channel": 0,
+          "expectedHz": 330.0,
+          "budgetHz": 0.01,
+          "positiveCrossingHz": 330.4308188544223,
+          "independentGlobalHannHz": 330.43093045121975,
+          "HannErrorHz": 0.4309304512197514,
+          "RMS": 0.0988327980330944,
+          "crossingCriterionPassed": false,
+          "HannCriterionPassed": false
+        },
+        {
+          "channel": 1,
+          "expectedHz": 550.0,
+          "budgetHz": 0.01,
+          "positiveCrossingHz": 550.4266754154922,
+          "independentGlobalHannHz": 550.4266539881531,
+          "HannErrorHz": 0.4266539881531344,
+          "RMS": 0.09882325730232056,
+          "crossingCriterionPassed": false,
+          "HannCriterionPassed": false
+        },
+        {
+          "channel": 2,
+          "expectedHz": 307,
+          "budgetHz": 0.01,
+          "positiveCrossingHz": 306.9999851832482,
+          "independentGlobalHannHz": 306.9999856439699,
+          "HannErrorHz": -1.4356030078488402e-05,
+          "RMS": 0.028284265690969975,
+          "crossingCriterionPassed": true,
+          "HannCriterionPassed": true
+        },
+        {
+          "channel": 3,
+          "expectedHz": 307,
+          "budgetHz": 0.01,
+          "positiveCrossingHz": 306.9999851832482,
+          "independentGlobalHannHz": 306.9999856439699,
+          "HannErrorHz": -1.4356030078488402e-05,
+          "RMS": 0.028284265690969975,
+          "crossingCriterionPassed": true,
+          "HannCriterionPassed": true
+        }
+      ],
+      "individualCaseCriterionPassed": false
+    },
+    {
+      "id": "history-neutral",
+      "variant": "history",
+      "originalRaw": {
+        "path": "local-evidence/keylock-browser-isolation-bounded/history-neutral.f32",
+        "SHA256": "af747beeeed2a9f2fe22389c71c86b268ad52f2b8a2d35cba76354a9595d6a00",
+        "bytes": 5828608
+      },
+      "frames": 364288,
+      "channels": 4,
+      "durationSeconds": 8.260498866213151,
+      "allSamplesFinite": true,
+      "rows": 2846,
+      "firstRow": {
+        "sequence": 0,
+        "frame": 372224,
+        "frames": 128
+      },
+      "lastRow": {
+        "sequence": 2845,
+        "frame": 736384,
+        "frames": 128
+      },
+      "everySequenceAndFrameContiguous": true,
+      "armAndStopCounterAgreement": true,
+      "completeControlChannelsBitIdentical": true,
+      "controlFirst2048FitThenWholeSpanResidual": {
+        "RMS": 1.247268766638655e-05,
+        "maximumAbsolute": 3.0602821318743555e-05,
+        "descriptiveOnly": true
+      },
+      "measurements": [
+        {
+          "channel": 0,
+          "expectedHz": 330.0,
+          "budgetHz": 0.01,
+          "positiveCrossingHz": 330.0000333936651,
+          "independentGlobalHannHz": 329.99999990559013,
+          "HannErrorHz": -9.440987014386337e-08,
+          "RMS": 0.09899298416319648,
+          "crossingCriterionPassed": true,
+          "HannCriterionPassed": true
+        },
+        {
+          "channel": 1,
+          "expectedHz": 550.0,
+          "budgetHz": 0.01,
+          "positiveCrossingHz": 549.9999702216984,
+          "independentGlobalHannHz": 549.9999996292873,
+          "HannErrorHz": -3.7071265523991315e-07,
+          "RMS": 0.09899437485432766,
+          "crossingCriterionPassed": true,
+          "HannCriterionPassed": true
+        },
+        {
+          "channel": 2,
+          "expectedHz": 307,
+          "budgetHz": 0.01,
+          "positiveCrossingHz": 306.9999851832482,
+          "independentGlobalHannHz": 306.9999856440164,
+          "HannErrorHz": -1.4355983580571774e-05,
+          "RMS": 0.028284265739611146,
+          "crossingCriterionPassed": true,
+          "HannCriterionPassed": true
+        },
+        {
+          "channel": 3,
+          "expectedHz": 307,
+          "budgetHz": 0.01,
+          "positiveCrossingHz": 306.9999851832482,
+          "independentGlobalHannHz": 306.9999856440164,
+          "HannErrorHz": -1.4355983580571774e-05,
+          "RMS": 0.028284265739611146,
+          "crossingCriterionPassed": true,
+          "HannCriterionPassed": true
+        }
+      ],
+      "individualCaseCriterionPassed": true
+    },
+    {
+      "id": "baseline-plus2",
+      "variant": "baseline",
+      "originalRaw": {
+        "path": "local-evidence/keylock-browser-isolation-bounded/baseline-plus2.f32",
+        "SHA256": "92e6d8dd7f2c98fee88e8fe80aa2211d36032b7ff6462cb37ccba6c2854bfd49",
+        "bytes": 5836800
+      },
+      "frames": 364800,
+      "channels": 4,
+      "durationSeconds": 8.272108843537415,
+      "allSamplesFinite": true,
+      "rows": 2850,
+      "firstRow": {
+        "sequence": 0,
+        "frame": 740352,
+        "frames": 128
+      },
+      "lastRow": {
+        "sequence": 2849,
+        "frame": 1105024,
+        "frames": 128
+      },
+      "everySequenceAndFrameContiguous": true,
+      "armAndStopCounterAgreement": true,
+      "completeControlChannelsBitIdentical": true,
+      "controlFirst2048FitThenWholeSpanResidual": {
+        "RMS": 1.2490740830265122e-05,
+        "maximumAbsolute": 3.063560262687919e-05,
+        "descriptiveOnly": true
+      },
+      "measurements": [
+        {
+          "channel": 0,
+          "expectedHz": 370.4124759420931,
+          "budgetHz": 1,
+          "positiveCrossingHz": 371.45851641884866,
+          "independentGlobalHannHz": 371.45864234426057,
+          "HannErrorHz": 1.0461664021674437,
+          "RMS": 0.09667223052724563,
+          "crossingCriterionPassed": false,
+          "HannCriterionPassed": false
+        },
+        {
+          "channel": 1,
+          "expectedHz": 617.3541265701551,
+          "budgetHz": 1,
+          "positiveCrossingHz": 617.9345161323495,
+          "independentGlobalHannHz": 617.9343241390324,
+          "HannErrorHz": 0.5801975688772245,
+          "RMS": 0.09677029121238302,
+          "crossingCriterionPassed": true,
+          "HannCriterionPassed": true
+        },
+        {
+          "channel": 2,
+          "expectedHz": 307,
+          "budgetHz": 0.01,
+          "positiveCrossingHz": 306.9999851832482,
+          "independentGlobalHannHz": 306.9999856440164,
+          "HannErrorHz": -1.4355983580571774e-05,
+          "RMS": 0.028284265739611146,
+          "crossingCriterionPassed": true,
+          "HannCriterionPassed": true
+        },
+        {
+          "channel": 3,
+          "expectedHz": 307,
+          "budgetHz": 0.01,
+          "positiveCrossingHz": 306.9999851832482,
+          "independentGlobalHannHz": 306.9999856440164,
+          "HannErrorHz": -1.4355983580571774e-05,
+          "RMS": 0.028284265739611146,
+          "crossingCriterionPassed": true,
+          "HannCriterionPassed": true
+        }
+      ],
+      "individualCaseCriterionPassed": false
+    },
+    {
+      "id": "history-plus2",
+      "variant": "history",
+      "originalRaw": {
+        "path": "local-evidence/keylock-browser-isolation-bounded/history-plus2.f32",
+        "SHA256": "bc83deab5ea24e88e2982a51abf74170c0bc1bd9be130161dafdf01fd7e848de",
+        "bytes": 5836800
+      },
+      "frames": 364800,
+      "channels": 4,
+      "durationSeconds": 8.272108843537415,
+      "allSamplesFinite": true,
+      "rows": 2850,
+      "firstRow": {
+        "sequence": 0,
+        "frame": 1110016,
+        "frames": 128
+      },
+      "lastRow": {
+        "sequence": 2849,
+        "frame": 1474688,
+        "frames": 128
+      },
+      "everySequenceAndFrameContiguous": true,
+      "armAndStopCounterAgreement": true,
+      "completeControlChannelsBitIdentical": true,
+      "controlFirst2048FitThenWholeSpanResidual": {
+        "RMS": 1.248967653489317e-05,
+        "maximumAbsolute": 3.062891404702686e-05,
+        "descriptiveOnly": true
+      },
+      "measurements": [
+        {
+          "channel": 0,
+          "expectedHz": 370.4124759420931,
+          "budgetHz": 1,
+          "positiveCrossingHz": 371.45038027586276,
+          "independentGlobalHannHz": 371.45022464632586,
+          "HannErrorHz": 1.0377487042327402,
+          "RMS": 0.09677109403038196,
+          "crossingCriterionPassed": false,
+          "HannCriterionPassed": false
+        },
+        {
+          "channel": 1,
+          "expectedHz": 617.3541265701551,
+          "budgetHz": 1,
+          "positiveCrossingHz": 617.8240570030599,
+          "independentGlobalHannHz": 617.8241455738294,
+          "HannErrorHz": 0.4700190036742242,
+          "RMS": 0.09684797067240294,
+          "crossingCriterionPassed": true,
+          "HannCriterionPassed": true
+        },
+        {
+          "channel": 2,
+          "expectedHz": 307,
+          "budgetHz": 0.01,
+          "positiveCrossingHz": 306.99998510035005,
+          "independentGlobalHannHz": 306.9999856438388,
+          "HannErrorHz": -1.4356161216255714e-05,
+          "RMS": 0.028284265165830012,
+          "crossingCriterionPassed": true,
+          "HannCriterionPassed": true
+        },
+        {
+          "channel": 3,
+          "expectedHz": 307,
+          "budgetHz": 0.01,
+          "positiveCrossingHz": 306.99998510035005,
+          "independentGlobalHannHz": 306.9999856438388,
+          "HannErrorHz": -1.4356161216255714e-05,
+          "RMS": 0.028284265165830012,
+          "crossingCriterionPassed": true,
+          "HannCriterionPassed": true
+        }
+      ],
+      "individualCaseCriterionPassed": false
+    },
+    {
+      "id": "dense-plus2",
+      "variant": "dense",
+      "originalRaw": {
+        "path": "local-evidence/keylock-browser-isolation-bounded/dense-plus2.f32",
+        "SHA256": "a6c2ccac03fa7b20bdc7a94a64589bde68c5358e1c271b34bd513d91e69f432b",
+        "bytes": 5836800
+      },
+      "frames": 364800,
+      "channels": 4,
+      "durationSeconds": 8.272108843537415,
+      "allSamplesFinite": true,
+      "rows": 2850,
+      "firstRow": {
+        "sequence": 0,
+        "frame": 1479680,
+        "frames": 128
+      },
+      "lastRow": {
+        "sequence": 2849,
+        "frame": 1844352,
+        "frames": 128
+      },
+      "everySequenceAndFrameContiguous": true,
+      "armAndStopCounterAgreement": true,
+      "completeControlChannelsBitIdentical": true,
+      "controlFirst2048FitThenWholeSpanResidual": {
+        "RMS": 1.2490740830265122e-05,
+        "maximumAbsolute": 3.063560262687919e-05,
+        "descriptiveOnly": true
+      },
+      "measurements": [
+        {
+          "channel": 0,
+          "expectedHz": 370.4124759420931,
+          "budgetHz": 1,
+          "positiveCrossingHz": 370.8134996080677,
+          "independentGlobalHannHz": 370.8135017586858,
+          "HannErrorHz": 0.40102581659266434,
+          "RMS": 0.09860495190810632,
+          "crossingCriterionPassed": true,
+          "HannCriterionPassed": true
+        },
+        {
+          "channel": 1,
+          "expectedHz": 617.3541265701551,
+          "budgetHz": 1,
+          "positiveCrossingHz": 617.5395442866791,
+          "independentGlobalHannHz": 617.5395344529858,
+          "HannErrorHz": 0.18540788283064558,
+          "RMS": 0.09859529580863982,
+          "crossingCriterionPassed": true,
+          "HannCriterionPassed": true
+        },
+        {
+          "channel": 2,
+          "expectedHz": 307,
+          "budgetHz": 0.01,
+          "positiveCrossingHz": 306.9999851832482,
+          "independentGlobalHannHz": 306.9999856440164,
+          "HannErrorHz": -1.4355983580571774e-05,
+          "RMS": 0.028284265739611146,
+          "crossingCriterionPassed": true,
+          "HannCriterionPassed": true
+        },
+        {
+          "channel": 3,
+          "expectedHz": 307,
+          "budgetHz": 0.01,
+          "positiveCrossingHz": 306.9999851832482,
+          "independentGlobalHannHz": 306.9999856440164,
+          "HannErrorHz": -1.4355983580571774e-05,
+          "RMS": 0.028284265739611146,
+          "crossingCriterionPassed": true,
+          "HannCriterionPassed": true
+        }
+      ],
+      "individualCaseCriterionPassed": true
+    },
+    {
+      "id": "dense-low-bass",
+      "variant": "dense",
+      "originalRaw": {
+        "path": "local-evidence/keylock-browser-isolation-bounded/dense-low-bass.f32",
+        "SHA256": "00c4e228058daa435c99b56df50b0ebb6113bb8c601cfcdbf24373afeb02a79d",
+        "bytes": 5828608
+      },
+      "frames": 364288,
+      "channels": 4,
+      "durationSeconds": 8.260498866213151,
+      "allSamplesFinite": true,
+      "rows": 2846,
+      "firstRow": {
+        "sequence": 0,
+        "frame": 1848576,
+        "frames": 128
+      },
+      "lastRow": {
+        "sequence": 2845,
+        "frame": 2212736,
+        "frames": 128
+      },
+      "everySequenceAndFrameContiguous": true,
+      "armAndStopCounterAgreement": true,
+      "completeControlChannelsBitIdentical": true,
+      "controlFirst2048FitThenWholeSpanResidual": {
+        "RMS": 1.247268766638655e-05,
+        "maximumAbsolute": 3.0602821318743555e-05,
+        "descriptiveOnly": true
+      },
+      "measurements": [
+        {
+          "channel": 0,
+          "expectedHz": 48.5,
+          "budgetHz": 1,
+          "positiveCrossingHz": 47.370410479595485,
+          "independentGlobalHannHz": 47.370391528837395,
+          "HannErrorHz": -1.129608471162605,
+          "RMS": 0.09686375453395828,
+          "crossingCriterionPassed": false,
+          "HannCriterionPassed": false
+        },
+        {
+          "channel": 1,
+          "expectedHz": 86.5,
+          "budgetHz": 1,
+          "positiveCrossingHz": 86.7449803718952,
+          "independentGlobalHannHz": 86.74495965574741,
+          "HannErrorHz": 0.24495965574740808,
+          "RMS": 0.09750446147519427,
+          "crossingCriterionPassed": true,
+          "HannCriterionPassed": true
+        },
+        {
+          "channel": 2,
+          "expectedHz": 307,
+          "budgetHz": 0.01,
+          "positiveCrossingHz": 306.9999851832482,
+          "independentGlobalHannHz": 306.9999856440164,
+          "HannErrorHz": -1.4355983580571774e-05,
+          "RMS": 0.028284265739611146,
+          "crossingCriterionPassed": true,
+          "HannCriterionPassed": true
+        },
+        {
+          "channel": 3,
+          "expectedHz": 307,
+          "budgetHz": 0.01,
+          "positiveCrossingHz": 306.9999851832482,
+          "independentGlobalHannHz": 306.9999856440164,
+          "HannErrorHz": -1.4355983580571774e-05,
+          "RMS": 0.028284265739611146,
+          "crossingCriterionPassed": true,
+          "HannCriterionPassed": true
+        }
+      ],
+      "individualCaseCriterionPassed": false
+    }
+  ],
+  "summary": {
+    "allSixCapturesCompleted": true,
+    "capturedCases": 6,
+    "individualCasePasses": 2,
+    "totalFrames": 2187008,
+    "totalProducerRows": 17086,
+    "fullParityVerified": false,
+    "physicalSoundOrInputVerified": false
+  },
+  "preservedInitialFailure": {
+    "path": "docs/prototype/keylock-browser-isolation-initial-results.json",
+    "SHA256": "00bf45bdc996c6419de50ca2ff3502fc37a2b4b1e085ed8f485abceae24d2441",
+    "completed": false,
+    "cases": [
+      {
+        "id": "baseline-neutral",
+        "completeRawRetained": true,
+        "SHA256": "20fe39b09837b4e8297fee5ca53d4d799ee1a38cbb44ff2c3c6e67a0d7f4b06b"
+      },
+      {
+        "id": "history-neutral",
+        "completeRawRetained": true,
+        "SHA256": "bc304c27931ebea91ce3ae9054c04a8c9d1a4a2304cd6d4efc66b643f3493037"
+      },
+      {
+        "id": "baseline-plus2",
+        "completeRawRetained": true,
+        "SHA256": "8aa519bbaa489b2711671633ef7ad87c5326adea21c099aa8141b4e861054590"
+      },
+      {
+        "id": "history-plus2",
+        "completeRawRetained": false
+      }
+    ],
+    "fourthPartialPCMUnavailableNotReconstructed": true
+  },
+  "limits": [
+    "CurrentFrame row continuity and controlphase do not provide independenthardwareclock or repair earliernativeclockfailures.",
+    "NativeCPU/music/mainapp/MIDI/compound/reference acceptance unexecuted.",
+    "Cleanupawaitsdisposebeforeupload; partialflushisnotguaranteedifcleanupthrowsorhangs, although allsixcurrentrawfilesareavailable."
+  ]
+}

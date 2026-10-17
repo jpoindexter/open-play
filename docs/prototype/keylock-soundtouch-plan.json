@@ -1,0 +1,12 @@
+{
+  "declared_before_execution": "2026-10-17",
+  "question": "Can the separately sourced SoundTouchJS2.1.1 WSOLA/Lanczos pipeline meet the same pitch cases without the rejected Signalsmith parameter regressions?",
+  "dependency": "Exact @soundtouchjs/core2.1.1 and @soundtouchjs/interpolation-strategy-lanczos2.1.1 officialregistry tarballs; SHA512integrity verified; declaredMPL2.0; allfiles/notices preserved outsideproduct. No package scripts or productioninstall.",
+  "pipeline": "Real published SoundTouch engine; public pitchSemitones=P, public stretch.tempo=rate/(2^(P/12)); internalpublictransposer remains set by pitch. Feed exact interleaved source in1024framechunks, call actual process and consume128frameoutputblocks. No _privatefields or tone-specificcompensation. Separate serialFIFO host, not realtime/scheduling/latency acceptance.",
+  "conditions": "Same8analytic14second sources and24holdout states from keylock-holdout-plan. Additional330/550at44100/48000,rate1.08,shift0/+2 using same sourceformula. Complete10seconds128aligned output; source-exhaustion zeros/underflows retained. Any underflowin5–7window invalidatescase.",
+  "measurement_seconds": [5,7],
+  "frequency_error_hz_max": 1,
+  "minimum_rms": 0.001,
+  "limits": "Steady syntheticpitch only; no mainapp/MIDI/worker/AudioWorklet/position/phase/seek/loop/stem/musicalquality/CPU/native/device/reference/parity acceptance. Comparison not a productionbackend switch.",
+  "full_parity_verified": false
+}

@@ -1,0 +1,12 @@
+{
+  "declared_before_execution": "2026-10-17",
+  "question": "Does the retained pitch miss already occur in raw actual WASM output, before main-app routing and MediaRecorder/Opus?",
+  "source": "First14seconds of the unchanged owned120second PCM16 stereo44100Hz fixture, full source SHA99833309d13090de63a9fcdb7ca8f6bcf601975bfb8cb2e3ef691bb369a0a119; independently measure330/550Hz input.",
+  "conditions": "Actual unchanged upstream and production disposable processor; each rate1/1.08 and semitones0/+2; original whole-buffer input. Additional production half-second chunks at rate1.08, semitones0/+2. Serial128frame host only; no browser, codec or UI.",
+  "recording": "Every output block for10seconds rounded up to complete128frame quantum, stereo rawf32le; no discarded startup or end. Source prefix also retained as rawf32le; originals never overwritten.",
+  "additional_measurement_seconds": [5,7],
+  "frequency_method": "Global20–20000Hz maximum of mean-removed Hann FFT with >=4x power-of-two padding/log interpolation; crossings corroborate. All samples finite; steadyRMS>.001.",
+  "frequency_error_hz_max": 1,
+  "interpretation": "Reproduction before recording excludes codec as sole cause; shared unchanged-upstream failure excludes local wrapper changes as sole cause. No full-native/reference/music/cursor acceptance and no production change inferred.",
+  "original_native_failure_unchanged": true
+}

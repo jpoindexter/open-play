@@ -1,0 +1,16 @@
+{
+  "declared_before_execution": "2026-10-17",
+  "scope": "Separate unpromoted realWebAudio/AudioWorklet experiment; current product/native006/recordings remain unchanged. Physical destinations are muted. No mainapp UI/MIDI or fullparity claim.",
+  "cases": [
+    {"id":"baseline-neutral","variant":"baseline","tones":[330,550],"rate":1.08,"semitones":0,"maximum_error_hz":0.01},
+    {"id":"history-neutral","variant":"history","tones":[330,550],"rate":1.08,"semitones":0,"maximum_error_hz":0.01},
+    {"id":"baseline-plus2","variant":"baseline","tones":[330,550],"rate":1.08,"semitones":2,"maximum_error_hz":1},
+    {"id":"history-plus2","variant":"history","tones":[330,550],"rate":1.08,"semitones":2,"maximum_error_hz":1},
+    {"id":"dense-plus2","variant":"dense","tones":[330,550],"rate":1.08,"semitones":2,"maximum_error_hz":1},
+    {"id":"dense-low-bass","variant":"dense","tones":[97,173],"rate":0.75,"semitones":-12,"maximum_error_hz":1}
+  ],
+  "method": "Requested44100HzAudioContext; actual queriedSRretained. Eachcase capturesatleast8.25seconds complete4channelPCM with control307Hz stereo. Rawproducer sequence/frame labels must be contiguous; no repair/trimming. Additional5–7second sample-count interval measured independently. RetainallPCM/rows, finite/samplegeometry/hashes,controlidentity and failures.",
+  "purpose": "Browser confirmation/refutation of serialdiagnosis including knownlow-bassregression. Passingneutral or originalpair cannot promotecandidate/fullnativeparity; failurepreserved. No CPU/resource/musicquality claim.",
+  "source": "New14second analyticfloat32stereo sine fixtures amplitude.14 phases.17/.53. Same frequencies/sourceformula as holdout; no externalmedia/userlibrary.",
+  "full_parity_verified": false
+}

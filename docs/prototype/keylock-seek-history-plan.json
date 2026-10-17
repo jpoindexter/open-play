@@ -1,0 +1,11 @@
+{
+  "declared_before_execution": "2026-10-17",
+  "hypothesis": "The web processor supplies120ms=inputLatency+outputLatency to seek, but the actual underlying default seek history is one120ms block plus one30ms interval; missing30ms is zero padded before previous-spectrum analysis and biases pitch.",
+  "intervention": "Diagnostic-only allocation in a real production processor instance: increase input/output staging buffer length by one30ms interval and rebind exact setBuffers pointers. Keep module/WASM, latency, schedules, source, rate, shift and recording constant. Compare baseline and intervention within one serial process.",
+  "conditions": "44100Hz stereo source; rate1 and1.08; semitones0 and2; history baseline5292frames versus6615frames. Whole input. Complete10second output, steady5–7s frequency metric unchanged<=1Hz.",
+  "authority": "Actual pinned MIT upstream source seekLength=block+interval and seek() zero-padding; default block120ms/interval30ms. Native004/005/006 and original120second source untouched.",
+  "source_header_sha256": "1188667959ac19dd40c0a6abbce694e44705615ec4f0e8db8af0f1cfb4c5dea7",
+  "source_url": "https://raw.githubusercontent.com/Signalsmith-Audio/signalsmith-stretch/a670068d9aeb64913331d5cc29337b19a457a7df/signalsmith-stretch.h",
+  "frequency_error_hz_max": 1,
+  "full_native_or_reference_acceptance": false
+}

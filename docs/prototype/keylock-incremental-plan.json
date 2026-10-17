@@ -1,0 +1,7 @@
+{
+  "declared_before_execution": "2026-10-17",
+  "question": "Does residual shifted pitch error occur when consuming the real WASM input incrementally rather than calling seek every128outputframes?",
+  "mode": "Production disposable processor initializes actual WASM; diagnostic invokes _process(integerInputFrames,128), consuming input using cumulative round(outputFrame*rate), separate128frameoutputbuffers. Same exact14second source prefix; no resampling/codec/mainapp.",
+  "conditions": "44100Hz; rate1/1.08; semitones0/+2; full10second128aligned raw output. Record5–7s and retain1Hz frequencycriterion. This is not a proposed production path or nativeacceptance.",
+  "full_parity_verified": false
+}
