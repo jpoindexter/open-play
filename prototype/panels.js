@@ -4,6 +4,7 @@ import { createMIDI, mappedValue } from "./midi.js";
 import { getExtendedEffectControls } from "./extended-effects.js";
 import { implementedEffects } from "./effects.js";
 import {createFXTempo,normalizeFXTempoSettings,effectiveFXBPM,fxTempoPolicy} from './fx-tempo.js';
+import {videoSetupField,videoSetupValue,applyVideoSetupSetting,resetVideoSetupSettings} from './video-settings.js';
 import {
   ruleFields,
   ruleOperators,
@@ -556,6 +557,7 @@ export function createPanels(a) {
   }
   function settings(tab = activeSettings) {
     activeSettings = tab;
+    const sharedVideo=settingsSchema[tab].some(([name])=>videoSetupField(name));
     dialog(
       "Setup",
       `<nav class="settings-tabs">${Object.keys(settingsSchema)
@@ -569,19 +571,22 @@ export function createPanels(a) {
         tab
       ]
         .map(([name, type, value]) => {
-          const v = s.settings[name];
+          const field=videoSetupField(name);
+          const v = field?videoSetupValue(s.video,name):s.settings[name];
           if (type === "section")
             return `<h3 class="setting-section">${name}</h3>`;
-          const input = Array.isArray(type)
+          const input = field?.options
+            ? `<select data-setting="${esc(name)}" ${field.key==='recordingQuality'&&videoMixer.recording?'disabled':''}>${field.options.map(option=>`<option value="${esc(option.value)}" ${option.value===v?'selected':''}>${esc(option.label)}</option>`).join('')}</select>`
+            : Array.isArray(type)
             ? `<select data-setting="${esc(name)}">${options(type, v)}</select>`
             : type === "check"
               ? `<input type="checkbox" data-setting="${esc(name)}" ${v ? "checked" : ""}>`
-              : `<input type="${type}" data-setting="${esc(name)}" value="${esc(v)}" ${type === "range" ? 'min="0" max="100"' : ""}>`;
+              : `<input type="${type}" data-setting="${esc(name)}" value="${esc(v)}" ${type === "range" ? 'min="0" max="100"'+(field?' step="any"':'') : ""}>`;
           return `<label class="setting"><span>${name}</span>${input}</label>`;
         })
         .join(
           "",
-        )}</div><div class="form-actions">${tab === "MIDI" ? '<button id="open-mapping">Mapping editor</button>' : ""}${tab === "CD/Vinyl" ? '<button id="open-calibration">Calibration simulation</button>' : ""}${tab === "Library + Display" ? '<button id="open-providers">Provider settings</button>' : ""}${tab === "Audio" ? '<button id="open-devices">Audio routing simulation</button><button id="song-info">Livestream song info</button>' : ""}${tab === "FX" ? '<button id="open-fx">FX catalog & presets</button>' : ""}<button id="reset-settings">Reset this tab</button><button id="save-settings">Close</button></div>`,
+        )}</div>${sharedVideo?'<p class="muted">Recording resolution, media treatment and fade speed share the live Video controls. Fade speed runs from Slow (10s) to Fast (0.25s), using the existing independent linear duration. Match live output preserves the existing capture default. Other Video output preferences on this tab remain stored simulations.</p><p id="video-setup-status" role="status" aria-live="polite"></p>':''}<div class="form-actions">${tab === "MIDI" ? '<button id="open-mapping">Mapping editor</button>' : ""}${tab === "CD/Vinyl" ? '<button id="open-calibration">Calibration simulation</button>' : ""}${tab === "Library + Display" ? '<button id="open-providers">Provider settings</button>' : ""}${tab === "Audio" ? '<button id="open-devices">Audio routing simulation</button><button id="song-info">Livestream song info</button>' : ""}${tab === "FX" ? '<button id="open-fx">FX catalog & presets</button>' : ""}<button id="reset-settings">Reset this tab</button><button id="save-settings">Close</button></div>`,
       (body) => {
         body
           .querySelectorAll("[data-settings-tab]")
@@ -589,6 +594,21 @@ export function createPanels(a) {
         body.querySelectorAll("[data-setting]").forEach(
           (input) =>
             (input.onchange = () => {
+              if(videoSetupField(input.dataset.setting)) {
+                try {
+                  applyVideoSetupSetting(s.video,input.dataset.setting,
+                    input.type==='range'?input.valueAsNumber:input.value,
+                    {setRecordingQuality:value=>videoMixer.setRecordingQuality(value)});
+                  persist();
+                  const status=$('#video-setup-status');if(status)status.textContent='Live Video preference saved.';
+                  if(s.panel==='video')refresh();
+                } catch(error) {
+                  input.value=videoSetupValue(s.video,input.dataset.setting);
+                  const status=$('#video-setup-status');if(status)status.textContent=error.message;
+                  notify(error.message);
+                }
+                return;
+              }
               s.settings[input.dataset.setting] =
                 input.type === "checkbox" ? input.checked : input.value;
               persist();
@@ -603,10 +623,17 @@ export function createPanels(a) {
         );
         $("#save-settings").onclick = () => $("#modal").close();
         $("#reset-settings").onclick = () => {
+          try {
+            if(sharedVideo)resetVideoSetupSettings(s.video,{setRecordingQuality:value=>videoMixer.setRecordingQuality(value)});
+          }catch(error){
+            const status=$('#video-setup-status');if(status)status.textContent=error.message;
+            notify(error.message);return;
+          }
           for (const [name, type, v] of settingsSchema[tab])
-            if (type !== "section") s.settings[name] = v;
+            if (type !== "section"&&!videoSetupField(name)) s.settings[name] = v;
           persist();
           settings(tab);
+          if(sharedVideo&&s.panel==='video')refresh();
         };
         if ($("#open-mapping")) $("#open-mapping").onclick = midi;
         if ($("#open-calibration")) $("#open-calibration").onclick = hardware;

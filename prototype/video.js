@@ -1,3 +1,4 @@
+import {setVideoSetting} from './video-settings.js';
 // Independent browser video transport, six-slot GPU pipeline and capture.
 import {createVideoPipeline} from './video-pipeline.js';
 import {createVideoKaraoke} from './video-karaoke.js';
@@ -272,7 +273,7 @@ export function createVideoMixer({state, engine, notify, identifyFile=videoFileI
       throw new Error('Stop video capture before changing recording quality.');
     if (!recordingQualityOptions.some(option => option.value === value))
       throw new RangeError('Choose a supported recording resolution.');
-    v.recordingQuality = normalizeRecordingQuality(value);
+    setVideoSetting(v,'recordingQuality',value);
     return recordingDimensions(v.recordingQuality,{width:v.width,height:v.height});
   }
   function crossPosition(time) {

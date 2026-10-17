@@ -41,3 +41,11 @@ nonempty in docs/prototype/keylock-live-patched-browser-results.json. Two preced
 capture failures remain retained. No frames were fabricated and no tolerance changed.
 Fable is providing a separately scoped diagnosis under Jason's conditional permission.
 Do not represent this variant as production-integrated or fully browser accepted.
+
+## Separate terminal lifecycle variant —17 October2026
+
+`SignalsmithStretch-open-play-disposable.mjs` is a third, distinctly registered experimental copy. It preserves the unchanged upstream module and the two-fix variant above, including byte-identical embedded WASM and MIT notice. Current SHA256 `b2811c519f067cc5a1abd6cdccab46578d1eeef8aba42f666fab2830a9d6f46e`.
+
+This copy adds static module loading, bounded factory readiness/owner abort, pending-request settlement, idempotent acknowledged terminal disposal, cleared processor-owned source/time-map/views/module references and terminal process(false), with delayed-initialization guards. Independent review reproduced a ready-resolution/abort microtask race in initial SHA `a71073ef4d07278e3eda6b09f63132ce2b075c081b1d23bea2dfd6cb9aa4bd38`; the current copy rechecks cancellation immediately after awaiting readiness before returning the node. Initial source is retained in ignored local evidence, with the exact regression and initial/amended raw results documented.
+
+Actual browser lifecycle5/5 and controlled/actual-WASM13/13 are qualified in `docs/research/KEYLOCK_DISPOSAL_REVIEW.md` and its independent review. No production AudioEngine integration, immediate physical heap-free, GC, native/hardware or reference-quality acceptance is claimed. Ordinary RPC observation timeouts remain adapter-owned; disposal acknowledgement is bounded. The initial/two-fix histories and original capture failures remain unchanged.

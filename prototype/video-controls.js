@@ -1,3 +1,4 @@
+import {setVideoSetting} from './video-settings.js';
 import {normalizeAutoCrossfadeSeconds} from './video-crossfade.js';
 import {normalizeVideoOpacityState} from './video-opacity.js';
 import { recordingQualityOptions, normalizeRecordingQuality } from './video-recording.js';
@@ -83,11 +84,11 @@ export function createVideoControls({state, videoMixer, notify = () => {}, persi
     $('#video-auto').onchange=event=>{videoMixer.stopCrossfade();v.auto=event.target.checked;syncMix();changed();};
     $('#video-link').onchange=event=>{v.linked=event.target.checked;changed();};
     $('#video-audio-fx-link').onchange = event => { v.audioFXLink = event.target.checked; changed(); };
-    $('#video-treatment').onchange = event => { v.mediaTreatment = normalizeVideoTreatment(event.target.value); changed(); };
+    $('#video-treatment').onchange = event => { setVideoSetting(v,'mediaTreatment',event.target.value); changed(); };
     $('#video-cross-link').onchange=event=>{videoMixer.stopCrossfade();v.crossLinked=event.target.checked;syncMix();changed();};
     for(const direction of ['left','right'])$('#video-fade-'+direction).onclick=run(()=>{videoMixer.startCrossfade(direction,changed);const auto=$('#video-auto');if(auto)auto.checked=false;syncMix();changed();});
     $('#video-fade-stop').onclick=run(()=>{videoMixer.stopCrossfade();changed();});
-    $('#video-fade-speed').oninput=event=>{v.autoCrossfadeSeconds=normalizeAutoCrossfadeSeconds(10-Number(event.target.value)*9.75);$('#video-fade-speed-note').textContent=`Slow ← → Fast · ${v.autoCrossfadeSeconds.toFixed(2)}s independent duration`;changed();};
+    $('#video-fade-speed').oninput=event=>{setVideoSetting(v,'autoCrossfadeSeconds',10-Number(event.target.value)*9.75);$('#video-fade-speed-note').textContent=`Slow ← → Fast · ${v.autoCrossfadeSeconds.toFixed(2)}s independent duration`;changed();};
     function syncMix() { $('#video-cross').disabled = !!(v.crossLinked || v.auto); $('#video-auto').disabled = !!v.crossLinked; for(const id of ['left','right','stop'])$('#video-fade-'+id).disabled=!!v.crossLinked; }
     syncMix();
     function syncOpacity(){[0,1].forEach(i=>{$('#video-opacity-'+i).disabled=v.channelOpacityLinked[i];});}

@@ -1,32 +1,15 @@
 # Current handoff: Codex to Claude
 
-Read [the full independent audit packet](codex-to-claude-completeness-audit.md).
-The original prompt remains verbatim; preserve all later user authority.
-Project: `/Users/jasonpoindexter/Documents/GitHub/Open Play`.
-Candidate: `1da00d574efc5da4532d40be965e4a1e3d294cff`; 159 hashes in `docs/prototype/candidate-hashes.json`.
-Return independent findings to `handoffs/claude-to-codex-completeness-audit.md`.
+Read [the full independent audit packet](codex-to-claude-completeness-audit.md). The original prompt remains verbatim; preserve all subsequent user authority.
 
-**Full parity NOT PASSED; native approval NOT GRANTED. Active goal continues.**
-Working inventory110 groups/521 requirements; counts are not exhaustive coverage.
-Read docs/prototype/VIDEO_SPECTRUM_OPACITY_REVIEW.md and plan36 first.
-ActualFX102/102,realFFT17/17,opacity13/13,pipeline33/33; mainUI6 opacity,
-3 Analyzer and5 compatibility/recapture observations execute and persist.
-Isolator Bass,finite Freeze,real8bandAnalyzer and separate channel-opacity links
-now implement their independently specified contracts. Vendor curves stay open.
-Independent accessor/pipeline defect reproduced/fixed; controlled8/8 and real
-pixel bypass pass. Opacity9/9 controls/mixer review has no defended bug. Earlier
-raw failures and original algorithms are preserved with honest scope.
+Project: `/Users/jasonpoindexter/Documents/GitHub/Open Play`. Last pinned candidate: `d05c2d114f3cb59f469d6b4c6600f5319dbb87dc`; checkpoint8 source/metadata pin is being prepared. Use `docs/prototype/candidate-hashes.json` and inspect worktree differences.
 
-Prior transition65/65,finitefade11/11,recording23/23,Media32/32,karaoke19/19,
-treatment21/21 and semanticlinks24/24 remain dated scoped results. Existing
-audio236controls/keylock/SCNet/StemSlip proof remains separate. SCNet quality
-failure/resource bounds are unresolved, and no-limits objective is not achieved.
+**Full1:1 NOT PASSED; native approval NOT GRANTED; active goal continues.** Inventory110groups/521requirements is incomplete. Read FULL_BUILD_PLAN.md40 and ACTIVE_EXECUTION.md before older dated checkpoints.
 
-Mac unlocked; native menu observation confirms55FX/29transitions;4resource-only
-transitions stay labeled. Video restoredOFF/Setupclosed; prior fullscreen
-restoration unverified. Menu visibility proves no vendor shader.
-Next: per-file VideoFXsave/recall, other manual meanings, output/window/quality/
-arrangement/MIDI/shortcut workflows and full library/device/provider acceptance.
-Full independent Claude audit remains unlaunched. Bounded Fable5.1/High reference
-debugging was separate and qualified in claude-fable/PARENT_VALIDATION.md.
-No native implementation until Jason explicitly approves a named HTML revision.
+Latest parent executed: isolated live keylock11/11 with full armed capture; instrumented terminal lifecycle5/5; raw ordinary scratch7/7 over13 contiguous captures; shared Video Setup UI/reload/geometry/encoded720p/atomic capture-reset/fade paths. Keylock and scratch components are **not integrated into AudioEngine/platter** yet. Buffered renderer, SCNet quality failure and resource/range bounds remain gaps.
+
+Fresh passive45s Hercules observation: stable online exact-name source across84 scans, successful connection, zero callbacks/no parse errors/output. Movement/Serato confirmation for that exact window remains pending. Do not infer a broken/unsupported controller or private receive path.
+
+Next executable unit: bounded forward live keylock adapter, then actual app/platter scratch/bypass/handoff with source ownership and preserved stem routes. Continue remaining Video output/quality/arrangement/MIDI/shortcuts, library/device/provider and quality acceptance.
+
+Return full independent findings to `handoffs/claude-to-codex-completeness-audit.md`. Full audit remains unlaunched; two bounded Fable5.1/High debug sessions are separate and source claims need independent checks. No native app until Jason explicitly approves a named HTML revision.

@@ -50,7 +50,7 @@ It is not the full completeness audit; its source claims need independent checks
 ## Read first
 
 - `AGENTS.md` if present; `PROJECT_PROMPT.md`; `docs/approvals.md`.
-- `FULL_BUILD_PLAN.md` sections23–39, with older sections retained as dated history.
+- `FULL_BUILD_PLAN.md` sections23–40, with older sections retained as dated history.
 - `docs/research/PARITY_GATE.md`, `FULL_SCOPE_CONTRACT.md`, `FEATURE_COVERAGE.md`,
   `INTERACTION_REQUIREMENTS.md`, `REQUIREMENT_GAPS_REVIEW.md`, `SOURCE_CONFLICTS.md`,
   `UI_OBSERVATIONS.md`, `EVIDENCE_LEDGER.md`, `BINARY_FINDINGS.md`,
@@ -364,7 +364,7 @@ Retain all output/window/quality/shortcut/MIDI/library/device/provider/model-qua
 gaps and per-feature model/effort routing. Native development still requires Jason's
 explicit approval of a named HTML candidate. Earlier dated evidence is historical.
 
-## Capture blocker and fresh Fable session — 17 October
+## Historical capture blocker and fresh Fable session — 17 October
 
 The separately namespaced live-wrapper correction passes agent+parent Node14/14.
 It meets11 browser functional assertions but NOT full capture acceptance: retained
@@ -383,6 +383,22 @@ A new passive all-source MIDI observer has executed SDK ABI assertions and owned
 virtual delivery/counter/disposal tests. Physical Hercules reception is unexecuted;
 a fresh movement window is pending. Do not treat previous reported knob motion,
 CoreMIDI enumeration or virtual delivery as physical compatibility.
+
+## Latest live prerequisites / shared Video Setup checkpoint —17 October
+
+Read plan40 and ACTIVE_EXECUTION.md first. New source pin is being prepared; the header and candidate manifest identify the last pinned source until the metadata checkpoint updates them.
+
+- Live two-fix API now11/11, completed:true, fatalErrors:[], full armed coverage1. No-vendor processor-retained rows reproduce the startup clock discontinuity.64 observed consecutive blocks precede explicit arm; old failures remain unchanged. See AUDIO_CAPTURE_STARTUP_DIAGNOSIS.md and keylock-live-patched-browser-preflight-results.json.
+- Separate disposable module b2811c519f067cc5a1abd6cdccab46578d1eeef8aba42f666fab2830a9d6f46e has actual instrumented lifecycle5/5, both full capture spans coverage1, terminal/no-later-DSP evidence on ten retired identities, eleven ports closed. Post-ACK candidate PCM is0 while control440.39Hz continues. Initial ready/abort race was independently reproduced and corrected; thirteen lifecycle Node checks plus exact-factory regression remain scoped. No immediate heap-free claim.
+- Raw ordinary scratch prerequisite now7/7 over13 strict captures, with actual signed markers, paused/watchdog silence, Slip reverse/loop phase, five-source gain routing and strengthened audible→silent disposal. Initial giant-report stall and silent-before-disposal oracle gap remain documented.21 controlled audio/ownership plus5 reporting checks execute. **No production engine/platter/keylock-bypass integration yet.**
+- Shared Video Setup records actual main UI edits both directions/reload, Preserve/Stretch screenshot pixels, Setup720p encoded/decoded1280×720 with live640×360, atomic refused Reset during recording, successful compatibility reset and selected5.125s real fade. Only recording/treatment/fade settings gained this consistency; other Video preferences remain simulations.
+- Fresh45s passive Hercules observation followed Jason's Ready now. One online/stable exact-name source connected successfully across84 scans; zero callbacks, no parsing/setup/omission errors, no output. Contemporaneous knob/Serato-response confirmation remains pending; source delivery is unverified, not unsupported/broken hardware.
+
+Read docs/research/KEYLOCK_DISPOSAL_REVIEW.md, KEYLOCK_DISPOSAL_INDEPENDENT_REVIEW.md, DECK_SCRATCH_RUNTIME_EVALUATION.md, HERCULES_CAPTURE_20261017.json and docs/prototype/VIDEO_SETUP_CONSISTENCY_REVIEW.md. Full output files contain exact case/measurement boundaries; do not substitute Node counts or isolated processors for main application/hardware acceptance.
+
+Next: bounded forward live adapter, then AudioEngine/platter integration retaining actual stem mute/FX routes, application-owned clock, cancellation and measured scratch restoration. Whole-file decode memory/range/resource bounds, reverse/loop/StemSlip integration and SCNet quality failure remain open. Full Video/library/device/provider scope remains. Do not stop at a new plan or label.
+
+Fable capture debugging local_4d4c6b17-ae76-40be-a92f-36b9acfe61b9 returned findings and an unexecuted extra diagnostic; parent reconciliation qualifies backend-mechanism/stale-label claims and updates its initially stale capture status. This remains separate from the unlaunched full independent Claude audit. Per-feature Codex/Claude routing remains recommendations; Fable5.1/High is the actual bounded debug selection. Native approval remains absent.
 
 ## Original full project prompt — verbatim snapshot
 

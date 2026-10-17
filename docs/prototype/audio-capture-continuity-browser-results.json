@@ -1,0 +1,517 @@
+{
+  "scope": "Actual browser retained per-process frame/sequence rows, independent of per-quantum IPC. Silent finite diagnostic only; no keylock acceptance.",
+  "cases": [
+    {
+      "name": "early-resume-immediate-arm",
+      "preflight": false,
+      "oscillator": false,
+      "resumeLate": false,
+      "sampleRate": 48000,
+      "firstObserved": {
+        "type": "first",
+        "row": {
+          "seq": 0,
+          "frame": 256,
+          "time": 0.005333333333333333,
+          "size": 128,
+          "inputFrames": 0
+        }
+      },
+      "arm": {
+        "id": "early-resume-immediate-arm",
+        "seq": 0,
+        "frame": 256
+      },
+      "lastFrame": 262400,
+      "all": {
+        "calls": 2048,
+        "first": {
+          "seq": 0,
+          "frame": 256,
+          "time": 0.005333333333333333,
+          "size": 128,
+          "inputFrames": 0
+        },
+        "last": {
+          "seq": 2047,
+          "frame": 262272,
+          "time": 5.464,
+          "size": 128,
+          "inputFrames": 0
+        },
+        "gaps": [],
+        "contiguous": true
+      },
+      "armed": {
+        "calls": 2048,
+        "first": {
+          "seq": 0,
+          "frame": 256,
+          "time": 0.005333333333333333,
+          "size": 128,
+          "inputFrames": 0
+        },
+        "last": {
+          "seq": 2047,
+          "frame": 262272,
+          "time": 5.464,
+          "size": 128,
+          "inputFrames": 0
+        },
+        "gaps": [],
+        "contiguous": true
+      },
+      "firstRows": [
+        {
+          "seq": 0,
+          "frame": 256,
+          "time": 0.005333333333333333,
+          "size": 128,
+          "inputFrames": 0
+        },
+        {
+          "seq": 1,
+          "frame": 384,
+          "time": 0.008,
+          "size": 128,
+          "inputFrames": 0
+        },
+        {
+          "seq": 2,
+          "frame": 512,
+          "time": 0.010666666666666666,
+          "size": 128,
+          "inputFrames": 0
+        },
+        {
+          "seq": 3,
+          "frame": 640,
+          "time": 0.013333333333333334,
+          "size": 128,
+          "inputFrames": 0
+        },
+        {
+          "seq": 4,
+          "frame": 768,
+          "time": 0.016,
+          "size": 128,
+          "inputFrames": 0
+        },
+        {
+          "seq": 5,
+          "frame": 896,
+          "time": 0.018666666666666668,
+          "size": 128,
+          "inputFrames": 0
+        },
+        {
+          "seq": 6,
+          "frame": 1024,
+          "time": 0.021333333333333333,
+          "size": 128,
+          "inputFrames": 0
+        },
+        {
+          "seq": 7,
+          "frame": 1152,
+          "time": 0.024,
+          "size": 128,
+          "inputFrames": 0
+        }
+      ],
+      "wallMs": 5486.600000143051,
+      "completed": true
+    },
+    {
+      "name": "late-resume-immediate-arm",
+      "preflight": false,
+      "oscillator": false,
+      "resumeLate": true,
+      "sampleRate": 48000,
+      "firstObserved": {
+        "type": "first",
+        "row": {
+          "seq": 0,
+          "frame": 256,
+          "time": 0.005333333333333333,
+          "size": 128,
+          "inputFrames": 0
+        }
+      },
+      "arm": {
+        "id": "late-resume-immediate-arm",
+        "seq": 0,
+        "frame": 256
+      },
+      "lastFrame": 262400,
+      "all": {
+        "calls": 2048,
+        "first": {
+          "seq": 0,
+          "frame": 256,
+          "time": 0.005333333333333333,
+          "size": 128,
+          "inputFrames": 0
+        },
+        "last": {
+          "seq": 2047,
+          "frame": 262272,
+          "time": 5.464,
+          "size": 128,
+          "inputFrames": 0
+        },
+        "gaps": [],
+        "contiguous": true
+      },
+      "armed": {
+        "calls": 2048,
+        "first": {
+          "seq": 0,
+          "frame": 256,
+          "time": 0.005333333333333333,
+          "size": 128,
+          "inputFrames": 0
+        },
+        "last": {
+          "seq": 2047,
+          "frame": 262272,
+          "time": 5.464,
+          "size": 128,
+          "inputFrames": 0
+        },
+        "gaps": [],
+        "contiguous": true
+      },
+      "firstRows": [
+        {
+          "seq": 0,
+          "frame": 256,
+          "time": 0.005333333333333333,
+          "size": 128,
+          "inputFrames": 0
+        },
+        {
+          "seq": 1,
+          "frame": 384,
+          "time": 0.008,
+          "size": 128,
+          "inputFrames": 0
+        },
+        {
+          "seq": 2,
+          "frame": 512,
+          "time": 0.010666666666666666,
+          "size": 128,
+          "inputFrames": 0
+        },
+        {
+          "seq": 3,
+          "frame": 640,
+          "time": 0.013333333333333334,
+          "size": 128,
+          "inputFrames": 0
+        },
+        {
+          "seq": 4,
+          "frame": 768,
+          "time": 0.016,
+          "size": 128,
+          "inputFrames": 0
+        },
+        {
+          "seq": 5,
+          "frame": 896,
+          "time": 0.018666666666666668,
+          "size": 128,
+          "inputFrames": 0
+        },
+        {
+          "seq": 6,
+          "frame": 1024,
+          "time": 0.021333333333333333,
+          "size": 128,
+          "inputFrames": 0
+        },
+        {
+          "seq": 7,
+          "frame": 1152,
+          "time": 0.024,
+          "size": 128,
+          "inputFrames": 0
+        }
+      ],
+      "wallMs": 5486.599999904633,
+      "completed": true
+    },
+    {
+      "name": "early-resume-preflight-arm",
+      "preflight": {
+        "type": "preflight",
+        "seq": 64,
+        "frame": 8704
+      },
+      "oscillator": false,
+      "resumeLate": false,
+      "sampleRate": 48000,
+      "firstObserved": {
+        "type": "first",
+        "row": {
+          "seq": 0,
+          "frame": 256,
+          "time": 0.005333333333333333,
+          "size": 128,
+          "inputFrames": 0
+        }
+      },
+      "arm": {
+        "id": "early-resume-preflight-arm",
+        "seq": 64,
+        "frame": 8704
+      },
+      "lastFrame": 262656,
+      "all": {
+        "calls": 2048,
+        "first": {
+          "seq": 0,
+          "frame": 256,
+          "time": 0.005333333333333333,
+          "size": 128,
+          "inputFrames": 0
+        },
+        "last": {
+          "seq": 2047,
+          "frame": 262528,
+          "time": 5.469333333333333,
+          "size": 128,
+          "inputFrames": 0
+        },
+        "gaps": [
+          {
+            "previous": {
+              "seq": 0,
+              "frame": 256,
+              "time": 0.005333333333333333,
+              "size": 128,
+              "inputFrames": 0
+            },
+            "next": {
+              "seq": 1,
+              "frame": 640,
+              "time": 0.013333333333333334,
+              "size": 128,
+              "inputFrames": 0
+            },
+            "missingFrames": 256
+          }
+        ],
+        "contiguous": false
+      },
+      "armed": {
+        "calls": 1984,
+        "first": {
+          "seq": 64,
+          "frame": 8704,
+          "time": 0.18133333333333335,
+          "size": 128,
+          "inputFrames": 0
+        },
+        "last": {
+          "seq": 2047,
+          "frame": 262528,
+          "time": 5.469333333333333,
+          "size": 128,
+          "inputFrames": 0
+        },
+        "gaps": [],
+        "contiguous": true
+      },
+      "firstRows": [
+        {
+          "seq": 0,
+          "frame": 256,
+          "time": 0.005333333333333333,
+          "size": 128,
+          "inputFrames": 0
+        },
+        {
+          "seq": 1,
+          "frame": 640,
+          "time": 0.013333333333333334,
+          "size": 128,
+          "inputFrames": 0
+        },
+        {
+          "seq": 2,
+          "frame": 768,
+          "time": 0.016,
+          "size": 128,
+          "inputFrames": 0
+        },
+        {
+          "seq": 3,
+          "frame": 896,
+          "time": 0.018666666666666668,
+          "size": 128,
+          "inputFrames": 0
+        },
+        {
+          "seq": 4,
+          "frame": 1024,
+          "time": 0.021333333333333333,
+          "size": 128,
+          "inputFrames": 0
+        },
+        {
+          "seq": 5,
+          "frame": 1152,
+          "time": 0.024,
+          "size": 128,
+          "inputFrames": 0
+        },
+        {
+          "seq": 6,
+          "frame": 1280,
+          "time": 0.02666666666666667,
+          "size": 128,
+          "inputFrames": 0
+        },
+        {
+          "seq": 7,
+          "frame": 1408,
+          "time": 0.029333333333333333,
+          "size": 128,
+          "inputFrames": 0
+        }
+      ],
+      "wallMs": 5493.400000095367,
+      "completed": true
+    },
+    {
+      "name": "early-resume-oscillator-preflight",
+      "preflight": {
+        "type": "preflight",
+        "seq": 64,
+        "frame": 8448
+      },
+      "oscillator": true,
+      "resumeLate": false,
+      "sampleRate": 48000,
+      "firstObserved": {
+        "type": "first",
+        "row": {
+          "seq": 0,
+          "frame": 256,
+          "time": 0.005333333333333333,
+          "size": 128,
+          "inputFrames": 128
+        }
+      },
+      "arm": {
+        "id": "early-resume-oscillator-preflight",
+        "seq": 64,
+        "frame": 8448
+      },
+      "lastFrame": 262400,
+      "all": {
+        "calls": 2048,
+        "first": {
+          "seq": 0,
+          "frame": 256,
+          "time": 0.005333333333333333,
+          "size": 128,
+          "inputFrames": 128
+        },
+        "last": {
+          "seq": 2047,
+          "frame": 262272,
+          "time": 5.464,
+          "size": 128,
+          "inputFrames": 128
+        },
+        "gaps": [],
+        "contiguous": true
+      },
+      "armed": {
+        "calls": 1984,
+        "first": {
+          "seq": 64,
+          "frame": 8448,
+          "time": 0.176,
+          "size": 128,
+          "inputFrames": 128
+        },
+        "last": {
+          "seq": 2047,
+          "frame": 262272,
+          "time": 5.464,
+          "size": 128,
+          "inputFrames": 128
+        },
+        "gaps": [],
+        "contiguous": true
+      },
+      "firstRows": [
+        {
+          "seq": 0,
+          "frame": 256,
+          "time": 0.005333333333333333,
+          "size": 128,
+          "inputFrames": 128
+        },
+        {
+          "seq": 1,
+          "frame": 384,
+          "time": 0.008,
+          "size": 128,
+          "inputFrames": 128
+        },
+        {
+          "seq": 2,
+          "frame": 512,
+          "time": 0.010666666666666666,
+          "size": 128,
+          "inputFrames": 128
+        },
+        {
+          "seq": 3,
+          "frame": 640,
+          "time": 0.013333333333333334,
+          "size": 128,
+          "inputFrames": 128
+        },
+        {
+          "seq": 4,
+          "frame": 768,
+          "time": 0.016,
+          "size": 128,
+          "inputFrames": 128
+        },
+        {
+          "seq": 5,
+          "frame": 896,
+          "time": 0.018666666666666668,
+          "size": 128,
+          "inputFrames": 128
+        },
+        {
+          "seq": 6,
+          "frame": 1024,
+          "time": 0.021333333333333333,
+          "size": 128,
+          "inputFrames": 128
+        },
+        {
+          "seq": 7,
+          "frame": 1152,
+          "time": 0.024,
+          "size": 128,
+          "inputFrames": 128
+        }
+      ],
+      "wallMs": 5511.800000190735,
+      "completed": true
+    }
+  ],
+  "completed": true,
+  "armedContiguous": true
+}

@@ -1,0 +1,134 @@
+{
+  "executedAt": "2026-10-17T08:16:29.847Z",
+  "scope": "Actual main UI, reload, guarded recording and screenshot pixels; Serato reference equality/native acceptance remain unverified.",
+  "priorExecutedObservations": [
+    {
+      "name": "Setup to Video",
+      "quality": "360p",
+      "treatment": "preserve",
+      "speed": "0.5",
+      "durationSeconds": 5.125
+    },
+    {
+      "name": "Video to Setup and full reload",
+      "quality": "720p",
+      "treatment": "letterbox",
+      "speed": "80"
+    }
+  ],
+  "checks": [],
+  "beforeReset": [
+    {
+      "disabled": false,
+      "name": "Output Quality",
+      "value": "Best"
+    },
+    {
+      "disabled": true,
+      "name": "Video Recording Quality",
+      "value": "720p"
+    },
+    {
+      "disabled": false,
+      "name": "Media Treatment",
+      "value": "stretch"
+    },
+    {
+      "disabled": false,
+      "name": "Auto Crossfade Speed",
+      "value": "50"
+    }
+  ],
+  "afterRefusedReset": [
+    {
+      "disabled": false,
+      "name": "Output Quality",
+      "value": "Best"
+    },
+    {
+      "disabled": true,
+      "name": "Video Recording Quality",
+      "value": "720p"
+    },
+    {
+      "disabled": false,
+      "name": "Media Treatment",
+      "value": "stretch"
+    },
+    {
+      "disabled": false,
+      "name": "Auto Crossfade Speed",
+      "value": "50"
+    }
+  ],
+  "refusal": "Stop video capture before changing recording quality.",
+  "capturePath": "/Users/jasonpoindexter/Downloads/open-play-video-mix (4).webm",
+  "fade": {
+    "selectedSeconds": 5.125,
+    "observations": [
+      {
+        "elapsedMs": 268,
+        "state": "Directional fade in progress",
+        "position": -0.9
+      },
+      {
+        "elapsedMs": 1512,
+        "state": "Directional fade in progress",
+        "position": -0.42
+      },
+      {
+        "elapsedMs": 2756,
+        "state": "Directional fade in progress",
+        "position": 0.07
+      },
+      {
+        "elapsedMs": 4005,
+        "state": "Directional fade in progress",
+        "position": 0.55
+      },
+      {
+        "elapsedMs": 5247,
+        "state": "Directional fade stopped",
+        "position": 1
+      }
+    ],
+    "scope": "Actual UI clock and fader through Setup-selected5.125-second fade; host elapsed includes automation overhead. No vendor curve/cadence claim."
+  },
+  "afterSuccessfulReset": [
+    {
+      "disabled": false,
+      "name": "Output Quality",
+      "value": "Medium"
+    },
+    {
+      "disabled": false,
+      "name": "Video Recording Quality",
+      "value": "output"
+    },
+    {
+      "disabled": false,
+      "name": "Media Treatment",
+      "value": "stretch"
+    },
+    {
+      "disabled": false,
+      "name": "Auto Crossfade Speed",
+      "value": "76.9230769230769"
+    }
+  ],
+  "liveAfterReset": [
+    {
+      "id": "video-treatment",
+      "value": "stretch"
+    },
+    {
+      "id": "video-fade-speed",
+      "value": "0.77"
+    },
+    {
+      "id": "video-record-quality",
+      "value": "output"
+    }
+  ],
+  "resetDurationLabel": "Slow ← → Fast · 2.50s independent duration"
+}

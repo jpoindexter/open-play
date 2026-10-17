@@ -1,0 +1,136 @@
+{
+  "passed": 13,
+  "failed": 0,
+  "checks": [
+    {
+      "name": "Preserved upstream and two-fix bytes; disposable module retains byte-identical embedded WASM",
+      "passed": true,
+      "evidence": {
+        "original": "97530b11d5bc01015af4cde40d6aa55ff10c40aa1294ca4c8c5762027d517a46",
+        "twoFix": "4c02e593d01dcdf014841382880b11dd7fcbaa485821e8b36b02e0fcabd2a00a",
+        "disposable": "b2811c519f067cc5a1abd6cdccab46578d1eeef8aba42f666fab2830a9d6f46e"
+      }
+    },
+    {
+      "name": "Dispose before actual WASM initialization completes clears queued buffers and prevents late main/configure/ready",
+      "passed": true,
+      "evidence": {
+        "actualWASMResolved": true,
+        "mainCalls": 0,
+        "readyMessages": 0,
+        "terminalProcess": false
+      }
+    },
+    {
+      "name": "After real audio disposal clears owned references and returns terminal false without more DSP/telemetry",
+      "passed": true,
+      "evidence": {
+        "actualMaximumBeforeDispose": 0.12103331089019775,
+        "postDisposeDSPCalls": 0,
+        "postDisposeBlocks": 50,
+        "retainedSourceBuffers": 0,
+        "retainedModule": false,
+        "postDisposeSchedule": {
+          "name": "InvalidStateError",
+          "message": "Processor is terminally disposed"
+        }
+      }
+    },
+    {
+      "name": "Factory uses a static local module URL with no generated Blob URL",
+      "passed": true,
+      "evidence": {
+        "moduleURL": "file:///Users/jasonpoindexter/Documents/GitHub/Open%20Play/prototype/vendor/signalsmith-stretch/SignalsmithStretch-open-play-disposable.mjs",
+        "acknowledgedTerminal": true
+      }
+    },
+    {
+      "name": "Pre-aborted owner creates no processor",
+      "passed": true,
+      "evidence": {
+        "createdProcessors": 0
+      }
+    },
+    {
+      "name": "Abort and timeout during module load cannot create a late processor",
+      "passed": true,
+      "evidence": {
+        "lateProcessors": 0
+      }
+    },
+    {
+      "name": "Abort while actual WASM readiness is held acknowledges terminal dispose and cannot revive on late initialization",
+      "passed": true,
+      "evidence": {
+        "mainCalls": 0,
+        "terminalAck": true
+      }
+    },
+    {
+      "name": "Pending real RPC rejects exactly once; dispose is idempotent and rejects future schedules",
+      "passed": true,
+      "evidence": {
+        "pendingRejections": 1,
+        "idempotentPromise": true,
+        "terminalAck": {
+          "disposed": true,
+          "retainedSourceBuffers": 0,
+          "retainedModule": false
+        },
+        "timeCallbacks": 0
+      }
+    },
+    {
+      "name": "Owner abort after readiness disposes current node and prevents scheduled resurrection",
+      "passed": true,
+      "evidence": {
+        "terminal": true
+      }
+    },
+    {
+      "name": "Actual readiness timeout sends terminal disposal before rejecting factory",
+      "passed": true,
+      "evidence": {
+        "terminalAckBeforeFactoryRejection": true
+      }
+    },
+    {
+      "name": "Owner abort queued after ready resolution but before factory continuation rejects instead of returning disposed node",
+      "passed": true,
+      "evidence": {
+        "resolved": false,
+        "aborted": true,
+        "processorDisposed": true,
+        "closed": true,
+        "error": "AbortError"
+      }
+    },
+    {
+      "name": "Missing disposal acknowledgement has a finite2000ms failure and abort cannot revive the terminal processor",
+      "passed": true,
+      "evidence": {
+        "elapsedMs": 1999.8526249999998,
+        "configuredAckTimeoutMs": 2000,
+        "terminalProcessor": true,
+        "scope": "Host confirms command received despite missing ACK; real browser timeout cannot by itself attest terminal receipt"
+      }
+    },
+    {
+      "name": "Repeated independent ownership releases all source references and terminally stops every processor",
+      "passed": true,
+      "evidence": {
+        "createdIdentities": 20,
+        "terminalIdentities": 20,
+        "retainedSourceBuffers": 0,
+        "retainedModuleReferences": 0,
+        "scope": "Explicit processor-field ownership only; excludes test-held records and does not measure GC or physical memory"
+      }
+    }
+  ],
+  "hashes": {
+    "original": "97530b11d5bc01015af4cde40d6aa55ff10c40aa1294ca4c8c5762027d517a46",
+    "twoFix": "4c02e593d01dcdf014841382880b11dd7fcbaa485821e8b36b02e0fcabd2a00a",
+    "disposable": "b2811c519f067cc5a1abd6cdccab46578d1eeef8aba42f666fab2830a9d6f46e"
+  },
+  "scope": "Actual unchanged embedded WASM in serial Node processor host plus exact factory with a Node message bridge. Initialization delay is explicit test-only instrumentation around actual WASM resolution. No real browser AudioWorklet scheduling/CPU/GC/physical heap-free or production integration proof."
+}

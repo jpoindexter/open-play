@@ -65,3 +65,9 @@ Serato imports support investigation of this architecture but do not prove the e
 ## Next reproducible check
 
 Investigate endpoint ownership/transport and compare source-delivery behavior against the successful isolated receiver test before repeating an unchanged capture. Then coordinate a known 60-second movement window and run `python3 scripts/observe_midi.py 60` from the project root. Correlate individual physical actions with captured messages. Then document expected byte meanings before attempting any output-light command. No mapping from another model should be transmitted merely because the controls look similar.
+
+## Fresh all-source observation — 17 October 2026
+
+After Jason replied **Ready now**, parent executed the new passive45-second observer at08:02:42–08:03:27UTC. [Sanitized evidence](HERCULES_CAPTURE_20261017.json) records one exact-name Hercules source across84 scans, successful input connection/disconnection, offline0, endpoint protocol1 and unchanged initial/final identity properties. It received **zero callbacks before parsing**, zero packets, no parser errors, no identity/property/setup changes or omitted data. Port/client cleanup returned0. Apple SDK ABI assertions passed. No output commands were sent.
+
+This improves endpoint continuity and callback/parser-boundary evidence over the older70-second result. Jason's fresh contemporaneous movement/Serato-response confirmation is pending; a previous report cannot fill that field. Zero callbacks do not prove broken hardware, unsupported MIDI, exclusive Serato access or a particular USB/HID receive path. The original raw report remains ignored and unmodified; its hash is in the sanitized summary. The real connected receive path remains an acceptance gap.

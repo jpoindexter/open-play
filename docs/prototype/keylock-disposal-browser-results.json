@@ -1,0 +1,982 @@
+{
+  "startedAt": "2026-10-17T08:15:36.980Z",
+  "variantSHA256": "b2811c519f067cc5a1abd6cdccab46578d1eeef8aba42f666fab2830a9d6f46e",
+  "checks": [
+    {
+      "name": "Instrumented exact factory produces real control and candidate audio in one shared context",
+      "passed": true,
+      "evidence": {
+        "captureReadiness": [
+          {
+            "label": "control",
+            "preflight": {
+              "type": "preflight",
+              "id": "control-preflight-1",
+              "firstFrame": 1024,
+              "lastFrame": 9216,
+              "consecutive": 64,
+              "startupGaps": [
+                {
+                  "expected": 128,
+                  "actual": 640,
+                  "sequence": 1
+                }
+              ]
+            },
+            "arm": {
+              "type": "armed",
+              "id": "control-arm-2",
+              "firstFrame": 9216,
+              "firstSequence": 68,
+              "startupGaps": [
+                {
+                  "expected": 128,
+                  "actual": 640,
+                  "sequence": 1
+                }
+              ]
+            }
+          },
+          {
+            "label": "candidate",
+            "preflight": {
+              "type": "preflight",
+              "id": "candidate-preflight-1",
+              "firstFrame": 1024,
+              "lastFrame": 9216,
+              "consecutive": 64,
+              "startupGaps": [
+                {
+                  "expected": 128,
+                  "actual": 640,
+                  "sequence": 1
+                }
+              ]
+            },
+            "arm": {
+              "type": "armed",
+              "id": "candidate-arm-2",
+              "firstFrame": 9216,
+              "firstSequence": 68,
+              "startupGaps": [
+                {
+                  "expected": 128,
+                  "actual": 640,
+                  "sequence": 1
+                }
+              ]
+            }
+          }
+        ],
+        "controlPCM": {
+          "start": 0.8200000000000001,
+          "duration": 0.3,
+          "coverage": 1,
+          "rms": 0.08476034850476032,
+          "peak": 0.12010609358549118,
+          "frequencyHz": 440.39057467465597
+        },
+        "candidatePCM": {
+          "start": 0.8200000000000001,
+          "duration": 0.3,
+          "coverage": 1,
+          "rms": 0.08472370133320628,
+          "peak": 0.12006831169128418,
+          "frequencyHz": 660.4335631994244
+        },
+        "actual": {
+          "id": "snapshot-1",
+          "identity": 2,
+          "frame": 54016,
+          "processCalls": 416,
+          "dspCalls": 414,
+          "terminalReturns": 0,
+          "disposedProcessCalls": 0,
+          "initialReady": false,
+          "disposed": false,
+          "wasmReady": true,
+          "retainedSourceBuffers": 1,
+          "retainedModule": true,
+          "pendingProcessorCommands": 0
+        }
+      }
+    },
+    {
+      "name": "Disposal acknowledges release, actual terminal false/no later DSP, and control keeps playing",
+      "passed": true,
+      "evidence": {
+        "ack": {
+          "disposed": true,
+          "retainedSourceBuffers": 0,
+          "retainedModule": false
+        },
+        "observed": {
+          "first": {
+            "id": "snapshot-2",
+            "identity": 2,
+            "frame": 64512,
+            "processCalls": 495,
+            "dspCalls": 492,
+            "terminalReturns": 1,
+            "disposedProcessCalls": 1,
+            "initialReady": false,
+            "disposed": true,
+            "wasmReady": false,
+            "retainedSourceBuffers": 0,
+            "retainedModule": false,
+            "pendingProcessorCommands": 0
+          },
+          "second": {
+            "id": "snapshot-3",
+            "identity": 2,
+            "frame": 69376,
+            "processCalls": 495,
+            "dspCalls": 492,
+            "terminalReturns": 1,
+            "disposedProcessCalls": 1,
+            "initialReady": false,
+            "disposed": true,
+            "wasmReady": false,
+            "retainedSourceBuffers": 0,
+            "retainedModule": false,
+            "pendingProcessorCommands": 0
+          }
+        },
+        "callbacksBeforeDispose": 11,
+        "callbacksAtAck": 11,
+        "callbacksAfter": 11,
+        "candidateAfterAckPCM": {
+          "start": 1.4953333333333334,
+          "duration": 0.3,
+          "coverage": 1,
+          "rms": 0,
+          "peak": 0,
+          "frequencyHz": null
+        },
+        "controlPCM": {
+          "start": 1.4953333333333334,
+          "duration": 0.3,
+          "coverage": 1,
+          "rms": 0.08472896729758439,
+          "peak": 0.12007787078619003,
+          "frequencyHz": 440.38973372939137
+        }
+      }
+    },
+    {
+      "name": "Pending real RPC is rejected once while its delayed reply cannot revive the retired owner",
+      "passed": true,
+      "evidence": {
+        "heldActualReplies": 1,
+        "pendingRejections": 1,
+        "ack": {
+          "disposed": true,
+          "retainedSourceBuffers": 0,
+          "retainedModule": false
+        },
+        "observed": {
+          "first": {
+            "id": "snapshot-1",
+            "identity": 3,
+            "frame": 87808,
+            "processCalls": 5,
+            "dspCalls": 4,
+            "terminalReturns": 1,
+            "disposedProcessCalls": 1,
+            "initialReady": false,
+            "disposed": true,
+            "wasmReady": false,
+            "retainedSourceBuffers": 0,
+            "retainedModule": false,
+            "pendingProcessorCommands": 0
+          },
+          "second": {
+            "id": "snapshot-2",
+            "identity": 3,
+            "frame": 92672,
+            "processCalls": 5,
+            "dspCalls": 4,
+            "terminalReturns": 1,
+            "disposedProcessCalls": 1,
+            "initialReady": false,
+            "disposed": true,
+            "wasmReady": false,
+            "retainedSourceBuffers": 0,
+            "retainedModule": false,
+            "pendingProcessorCommands": 0
+          }
+        }
+      }
+    },
+    {
+      "name": "Four ready-owner aborts each retire a distinct actual processor with no control interruption",
+      "passed": true,
+      "evidence": {
+        "cycles": [
+          {
+            "identity": 4,
+            "ready": {
+              "id": "snapshot-1",
+              "identity": 4,
+              "frame": 92928,
+              "processCalls": 2,
+              "dspCalls": 0,
+              "terminalReturns": 0,
+              "disposedProcessCalls": 0,
+              "initialReady": false,
+              "disposed": false,
+              "wasmReady": true,
+              "retainedSourceBuffers": 0,
+              "retainedModule": true,
+              "pendingProcessorCommands": 0
+            },
+            "ack": {
+              "disposed": true,
+              "retainedSourceBuffers": 0,
+              "retainedModule": false
+            },
+            "observed": {
+              "first": {
+                "id": "snapshot-2",
+                "identity": 4,
+                "frame": 93440,
+                "processCalls": 3,
+                "dspCalls": 0,
+                "terminalReturns": 1,
+                "disposedProcessCalls": 1,
+                "initialReady": false,
+                "disposed": true,
+                "wasmReady": false,
+                "retainedSourceBuffers": 0,
+                "retainedModule": false,
+                "pendingProcessorCommands": 0
+              },
+              "second": {
+                "id": "snapshot-3",
+                "identity": 4,
+                "frame": 98304,
+                "processCalls": 3,
+                "dspCalls": 0,
+                "terminalReturns": 1,
+                "disposedProcessCalls": 1,
+                "initialReady": false,
+                "disposed": true,
+                "wasmReady": false,
+                "retainedSourceBuffers": 0,
+                "retainedModule": false,
+                "pendingProcessorCommands": 0
+              }
+            }
+          },
+          {
+            "identity": 5,
+            "ready": {
+              "id": "snapshot-1",
+              "identity": 5,
+              "frame": 98560,
+              "processCalls": 2,
+              "dspCalls": 0,
+              "terminalReturns": 0,
+              "disposedProcessCalls": 0,
+              "initialReady": false,
+              "disposed": false,
+              "wasmReady": true,
+              "retainedSourceBuffers": 0,
+              "retainedModule": true,
+              "pendingProcessorCommands": 0
+            },
+            "ack": {
+              "disposed": true,
+              "retainedSourceBuffers": 0,
+              "retainedModule": false
+            },
+            "observed": {
+              "first": {
+                "id": "snapshot-2",
+                "identity": 5,
+                "frame": 99072,
+                "processCalls": 3,
+                "dspCalls": 0,
+                "terminalReturns": 1,
+                "disposedProcessCalls": 1,
+                "initialReady": false,
+                "disposed": true,
+                "wasmReady": false,
+                "retainedSourceBuffers": 0,
+                "retainedModule": false,
+                "pendingProcessorCommands": 0
+              },
+              "second": {
+                "id": "snapshot-3",
+                "identity": 5,
+                "frame": 103936,
+                "processCalls": 3,
+                "dspCalls": 0,
+                "terminalReturns": 1,
+                "disposedProcessCalls": 1,
+                "initialReady": false,
+                "disposed": true,
+                "wasmReady": false,
+                "retainedSourceBuffers": 0,
+                "retainedModule": false,
+                "pendingProcessorCommands": 0
+              }
+            }
+          },
+          {
+            "identity": 6,
+            "ready": {
+              "id": "snapshot-1",
+              "identity": 6,
+              "frame": 104192,
+              "processCalls": 2,
+              "dspCalls": 0,
+              "terminalReturns": 0,
+              "disposedProcessCalls": 0,
+              "initialReady": false,
+              "disposed": false,
+              "wasmReady": true,
+              "retainedSourceBuffers": 0,
+              "retainedModule": true,
+              "pendingProcessorCommands": 0
+            },
+            "ack": {
+              "disposed": true,
+              "retainedSourceBuffers": 0,
+              "retainedModule": false
+            },
+            "observed": {
+              "first": {
+                "id": "snapshot-2",
+                "identity": 6,
+                "frame": 104704,
+                "processCalls": 3,
+                "dspCalls": 0,
+                "terminalReturns": 1,
+                "disposedProcessCalls": 1,
+                "initialReady": false,
+                "disposed": true,
+                "wasmReady": false,
+                "retainedSourceBuffers": 0,
+                "retainedModule": false,
+                "pendingProcessorCommands": 0
+              },
+              "second": {
+                "id": "snapshot-3",
+                "identity": 6,
+                "frame": 109568,
+                "processCalls": 3,
+                "dspCalls": 0,
+                "terminalReturns": 1,
+                "disposedProcessCalls": 1,
+                "initialReady": false,
+                "disposed": true,
+                "wasmReady": false,
+                "retainedSourceBuffers": 0,
+                "retainedModule": false,
+                "pendingProcessorCommands": 0
+              }
+            }
+          },
+          {
+            "identity": 7,
+            "ready": {
+              "id": "snapshot-1",
+              "identity": 7,
+              "frame": 109824,
+              "processCalls": 2,
+              "dspCalls": 0,
+              "terminalReturns": 0,
+              "disposedProcessCalls": 0,
+              "initialReady": false,
+              "disposed": false,
+              "wasmReady": true,
+              "retainedSourceBuffers": 0,
+              "retainedModule": true,
+              "pendingProcessorCommands": 0
+            },
+            "ack": {
+              "disposed": true,
+              "retainedSourceBuffers": 0,
+              "retainedModule": false
+            },
+            "observed": {
+              "first": {
+                "id": "snapshot-2",
+                "identity": 7,
+                "frame": 110336,
+                "processCalls": 3,
+                "dspCalls": 0,
+                "terminalReturns": 1,
+                "disposedProcessCalls": 1,
+                "initialReady": false,
+                "disposed": true,
+                "wasmReady": false,
+                "retainedSourceBuffers": 0,
+                "retainedModule": false,
+                "pendingProcessorCommands": 0
+              },
+              "second": {
+                "id": "snapshot-3",
+                "identity": 7,
+                "frame": 115200,
+                "processCalls": 3,
+                "dspCalls": 0,
+                "terminalReturns": 1,
+                "disposedProcessCalls": 1,
+                "initialReady": false,
+                "disposed": true,
+                "wasmReady": false,
+                "retainedSourceBuffers": 0,
+                "retainedModule": false,
+                "pendingProcessorCommands": 0
+              }
+            }
+          }
+        ],
+        "distinctIdentities": 4,
+        "controlPCM": {
+          "start": 2.4499999999999997,
+          "duration": 0.3,
+          "coverage": 1,
+          "rms": 0.08472805448755236,
+          "peak": 0.12008526921272278,
+          "frequencyHz": 440.38970255016875
+        }
+      }
+    },
+    {
+      "name": "Four immediate factory aborts cannot resolve late or revive their actual processor identities",
+      "passed": true,
+      "evidence": {
+        "cycles": [
+          {
+            "identity": 8,
+            "error": "AbortError",
+            "observed": {
+              "first": {
+                "id": "snapshot-1",
+                "identity": 8,
+                "frame": 133376,
+                "processCalls": 1,
+                "dspCalls": 0,
+                "terminalReturns": 1,
+                "disposedProcessCalls": 1,
+                "initialReady": false,
+                "disposed": true,
+                "wasmReady": false,
+                "retainedSourceBuffers": 0,
+                "retainedModule": false,
+                "pendingProcessorCommands": 0
+              },
+              "second": {
+                "id": "snapshot-2",
+                "identity": 8,
+                "frame": 138240,
+                "processCalls": 1,
+                "dspCalls": 0,
+                "terminalReturns": 1,
+                "disposedProcessCalls": 1,
+                "initialReady": false,
+                "disposed": true,
+                "wasmReady": false,
+                "retainedSourceBuffers": 0,
+                "retainedModule": false,
+                "pendingProcessorCommands": 0
+              }
+            }
+          },
+          {
+            "identity": 9,
+            "error": "AbortError",
+            "observed": {
+              "first": {
+                "id": "snapshot-1",
+                "identity": 9,
+                "frame": 138752,
+                "processCalls": 1,
+                "dspCalls": 0,
+                "terminalReturns": 1,
+                "disposedProcessCalls": 1,
+                "initialReady": false,
+                "disposed": true,
+                "wasmReady": false,
+                "retainedSourceBuffers": 0,
+                "retainedModule": false,
+                "pendingProcessorCommands": 0
+              },
+              "second": {
+                "id": "snapshot-2",
+                "identity": 9,
+                "frame": 143616,
+                "processCalls": 1,
+                "dspCalls": 0,
+                "terminalReturns": 1,
+                "disposedProcessCalls": 1,
+                "initialReady": false,
+                "disposed": true,
+                "wasmReady": false,
+                "retainedSourceBuffers": 0,
+                "retainedModule": false,
+                "pendingProcessorCommands": 0
+              }
+            }
+          },
+          {
+            "identity": 10,
+            "error": "AbortError",
+            "observed": {
+              "first": {
+                "id": "snapshot-1",
+                "identity": 10,
+                "frame": 144128,
+                "processCalls": 1,
+                "dspCalls": 0,
+                "terminalReturns": 1,
+                "disposedProcessCalls": 1,
+                "initialReady": false,
+                "disposed": true,
+                "wasmReady": false,
+                "retainedSourceBuffers": 0,
+                "retainedModule": false,
+                "pendingProcessorCommands": 0
+              },
+              "second": {
+                "id": "snapshot-2",
+                "identity": 10,
+                "frame": 148992,
+                "processCalls": 1,
+                "dspCalls": 0,
+                "terminalReturns": 1,
+                "disposedProcessCalls": 1,
+                "initialReady": false,
+                "disposed": true,
+                "wasmReady": false,
+                "retainedSourceBuffers": 0,
+                "retainedModule": false,
+                "pendingProcessorCommands": 0
+              }
+            }
+          },
+          {
+            "identity": 11,
+            "error": "AbortError",
+            "observed": {
+              "first": {
+                "id": "snapshot-1",
+                "identity": 11,
+                "frame": 149760,
+                "processCalls": 1,
+                "dspCalls": 0,
+                "terminalReturns": 1,
+                "disposedProcessCalls": 1,
+                "initialReady": false,
+                "disposed": true,
+                "wasmReady": false,
+                "retainedSourceBuffers": 0,
+                "retainedModule": false,
+                "pendingProcessorCommands": 0
+              },
+              "second": {
+                "id": "snapshot-2",
+                "identity": 11,
+                "frame": 154368,
+                "processCalls": 1,
+                "dspCalls": 0,
+                "terminalReturns": 1,
+                "disposedProcessCalls": 1,
+                "initialReady": false,
+                "disposed": true,
+                "wasmReady": false,
+                "retainedSourceBuffers": 0,
+                "retainedModule": false,
+                "pendingProcessorCommands": 0
+              }
+            }
+          }
+        ],
+        "distinctIdentities": 4,
+        "controlPCM": {
+          "start": 3.266,
+          "duration": 0.3,
+          "coverage": 1,
+          "rms": 0.08477860421118508,
+          "peak": 0.120061956346035,
+          "frequencyHz": 440.39021810058443
+        }
+      }
+    }
+  ],
+  "fatalErrors": [],
+  "sampleRate": 48000,
+  "scope": "Real unchanged embedded WASM and frozen factory in one browser AudioContext, instrumented processor subclass and isolated constructor hook. Dedicated diagnostic counters are actual observations, not inferred from silence. Instrumentation may change timing. Does not prove GC, immediate physical heap free, production integration, native behavior or uninstrumented11-case functional acceptance.",
+  "safety": "Every destination route has gain0; capture processors force all outputs to zero. Synthetic held tones only.",
+  "instrumentation": "Static prelude intercepts one registration and restores it; subclass preserves process this/arguments/output/return and instruments real _process entry. Separate MessagePort survives vendor RPC closure. Retired nodes are adversarially reconnected only to a zero-gain graph.",
+  "captureBus": {
+    "channelCount": 2,
+    "channelCountMode": "explicit",
+    "channelInterpretation": "discrete",
+    "zeroSourceOffset": 0,
+    "semantics": "Both buses retain real fixed-stereo graph input throughout the armed span; post-disposal zero PCM is read from that input, not synthesized for missing channels."
+  },
+  "captureReadiness": [
+    {
+      "label": "control",
+      "preflight": {
+        "type": "preflight",
+        "id": "control-preflight-1",
+        "firstFrame": 1024,
+        "lastFrame": 9216,
+        "consecutive": 64,
+        "startupGaps": [
+          {
+            "expected": 128,
+            "actual": 640,
+            "sequence": 1
+          }
+        ]
+      },
+      "arm": {
+        "type": "armed",
+        "id": "control-arm-2",
+        "firstFrame": 9216,
+        "firstSequence": 68,
+        "startupGaps": [
+          {
+            "expected": 128,
+            "actual": 640,
+            "sequence": 1
+          }
+        ]
+      }
+    },
+    {
+      "label": "candidate",
+      "preflight": {
+        "type": "preflight",
+        "id": "candidate-preflight-1",
+        "firstFrame": 1024,
+        "lastFrame": 9216,
+        "consecutive": 64,
+        "startupGaps": [
+          {
+            "expected": 128,
+            "actual": 640,
+            "sequence": 1
+          }
+        ]
+      },
+      "arm": {
+        "type": "armed",
+        "id": "candidate-arm-2",
+        "firstFrame": 9216,
+        "firstSequence": 68,
+        "startupGaps": [
+          {
+            "expected": 128,
+            "actual": 640,
+            "sequence": 1
+          }
+        ]
+      }
+    }
+  ],
+  "captureIntegrity": [
+    {
+      "label": "control",
+      "preflight": {
+        "type": "preflight",
+        "id": "control-preflight-1",
+        "firstFrame": 1024,
+        "lastFrame": 9216,
+        "consecutive": 64,
+        "startupGaps": [
+          {
+            "expected": 128,
+            "actual": 640,
+            "sequence": 1
+          }
+        ]
+      },
+      "arm": {
+        "type": "armed",
+        "id": "control-arm-2",
+        "firstFrame": 9216,
+        "firstSequence": 68,
+        "startupGaps": [
+          {
+            "expected": 128,
+            "actual": 640,
+            "sequence": 1
+          }
+        ]
+      },
+      "fence": {
+        "type": "finished",
+        "id": "control-finish-3",
+        "lastFrame": 171648,
+        "lastSequence": 1336
+      },
+      "blocks": 1269,
+      "coverage": 1,
+      "errors": []
+    },
+    {
+      "label": "candidate",
+      "preflight": {
+        "type": "preflight",
+        "id": "candidate-preflight-1",
+        "firstFrame": 1024,
+        "lastFrame": 9216,
+        "consecutive": 64,
+        "startupGaps": [
+          {
+            "expected": 128,
+            "actual": 640,
+            "sequence": 1
+          }
+        ]
+      },
+      "arm": {
+        "type": "armed",
+        "id": "candidate-arm-2",
+        "firstFrame": 9216,
+        "firstSequence": 68,
+        "startupGaps": [
+          {
+            "expected": 128,
+            "actual": 640,
+            "sequence": 1
+          }
+        ]
+      },
+      "fence": {
+        "type": "finished",
+        "id": "candidate-finish-3",
+        "lastFrame": 172160,
+        "lastSequence": 1340
+      },
+      "blocks": 1273,
+      "coverage": 1,
+      "errors": []
+    }
+  ],
+  "constructorRestored": true,
+  "identityCount": 11,
+  "diagnosticPortsClosed": 11,
+  "identities": [
+    {
+      "identity": 1,
+      "last": {
+        "id": "attached",
+        "identity": 1,
+        "frame": 0,
+        "processCalls": 0,
+        "dspCalls": 0,
+        "terminalReturns": 0,
+        "disposedProcessCalls": 0,
+        "initialReady": false,
+        "disposed": false,
+        "wasmReady": false,
+        "retainedSourceBuffers": 0,
+        "retainedModule": false,
+        "pendingProcessorCommands": 0
+      },
+      "observations": 1
+    },
+    {
+      "identity": 2,
+      "last": {
+        "id": "snapshot-3",
+        "identity": 2,
+        "frame": 69376,
+        "processCalls": 495,
+        "dspCalls": 492,
+        "terminalReturns": 1,
+        "disposedProcessCalls": 1,
+        "initialReady": false,
+        "disposed": true,
+        "wasmReady": false,
+        "retainedSourceBuffers": 0,
+        "retainedModule": false,
+        "pendingProcessorCommands": 0
+      },
+      "observations": 5
+    },
+    {
+      "identity": 3,
+      "last": {
+        "id": "snapshot-2",
+        "identity": 3,
+        "frame": 92672,
+        "processCalls": 5,
+        "dspCalls": 4,
+        "terminalReturns": 1,
+        "disposedProcessCalls": 1,
+        "initialReady": false,
+        "disposed": true,
+        "wasmReady": false,
+        "retainedSourceBuffers": 0,
+        "retainedModule": false,
+        "pendingProcessorCommands": 0
+      },
+      "observations": 4
+    },
+    {
+      "identity": 4,
+      "last": {
+        "id": "snapshot-3",
+        "identity": 4,
+        "frame": 98304,
+        "processCalls": 3,
+        "dspCalls": 0,
+        "terminalReturns": 1,
+        "disposedProcessCalls": 1,
+        "initialReady": false,
+        "disposed": true,
+        "wasmReady": false,
+        "retainedSourceBuffers": 0,
+        "retainedModule": false,
+        "pendingProcessorCommands": 0
+      },
+      "observations": 5
+    },
+    {
+      "identity": 5,
+      "last": {
+        "id": "snapshot-3",
+        "identity": 5,
+        "frame": 103936,
+        "processCalls": 3,
+        "dspCalls": 0,
+        "terminalReturns": 1,
+        "disposedProcessCalls": 1,
+        "initialReady": false,
+        "disposed": true,
+        "wasmReady": false,
+        "retainedSourceBuffers": 0,
+        "retainedModule": false,
+        "pendingProcessorCommands": 0
+      },
+      "observations": 5
+    },
+    {
+      "identity": 6,
+      "last": {
+        "id": "snapshot-3",
+        "identity": 6,
+        "frame": 109568,
+        "processCalls": 3,
+        "dspCalls": 0,
+        "terminalReturns": 1,
+        "disposedProcessCalls": 1,
+        "initialReady": false,
+        "disposed": true,
+        "wasmReady": false,
+        "retainedSourceBuffers": 0,
+        "retainedModule": false,
+        "pendingProcessorCommands": 0
+      },
+      "observations": 5
+    },
+    {
+      "identity": 7,
+      "last": {
+        "id": "snapshot-3",
+        "identity": 7,
+        "frame": 115200,
+        "processCalls": 3,
+        "dspCalls": 0,
+        "terminalReturns": 1,
+        "disposedProcessCalls": 1,
+        "initialReady": false,
+        "disposed": true,
+        "wasmReady": false,
+        "retainedSourceBuffers": 0,
+        "retainedModule": false,
+        "pendingProcessorCommands": 0
+      },
+      "observations": 5
+    },
+    {
+      "identity": 8,
+      "last": {
+        "id": "snapshot-2",
+        "identity": 8,
+        "frame": 138240,
+        "processCalls": 1,
+        "dspCalls": 0,
+        "terminalReturns": 1,
+        "disposedProcessCalls": 1,
+        "initialReady": false,
+        "disposed": true,
+        "wasmReady": false,
+        "retainedSourceBuffers": 0,
+        "retainedModule": false,
+        "pendingProcessorCommands": 0
+      },
+      "observations": 4
+    },
+    {
+      "identity": 9,
+      "last": {
+        "id": "snapshot-2",
+        "identity": 9,
+        "frame": 143616,
+        "processCalls": 1,
+        "dspCalls": 0,
+        "terminalReturns": 1,
+        "disposedProcessCalls": 1,
+        "initialReady": false,
+        "disposed": true,
+        "wasmReady": false,
+        "retainedSourceBuffers": 0,
+        "retainedModule": false,
+        "pendingProcessorCommands": 0
+      },
+      "observations": 4
+    },
+    {
+      "identity": 10,
+      "last": {
+        "id": "snapshot-2",
+        "identity": 10,
+        "frame": 148992,
+        "processCalls": 1,
+        "dspCalls": 0,
+        "terminalReturns": 1,
+        "disposedProcessCalls": 1,
+        "initialReady": false,
+        "disposed": true,
+        "wasmReady": false,
+        "retainedSourceBuffers": 0,
+        "retainedModule": false,
+        "pendingProcessorCommands": 0
+      },
+      "observations": 4
+    },
+    {
+      "identity": 11,
+      "last": {
+        "id": "snapshot-2",
+        "identity": 11,
+        "frame": 154368,
+        "processCalls": 1,
+        "dspCalls": 0,
+        "terminalReturns": 1,
+        "disposedProcessCalls": 1,
+        "initialReady": false,
+        "disposed": true,
+        "wasmReady": false,
+        "retainedSourceBuffers": 0,
+        "retainedModule": false,
+        "pendingProcessorCommands": 0
+      },
+      "observations": 4
+    }
+  ],
+  "passed": 5,
+  "failed": 0,
+  "completed": true,
+  "durationMs": 3583.9000000953674
+}
