@@ -1,0 +1,280 @@
+{
+  "startedAt": "2026-10-17T22:59:41.815Z",
+  "completed": true,
+  "checks": [
+    "Actual grid editor stages and saves both tempo markers with metadata persistence",
+    "Whole recorded audio stays aligned across repeating source-tempo boundaries and two loop wraps",
+    "Real audio-thread PCM transport and analytical clock report alternating1and0.8 local source rates",
+    "Both eight-beat source loops retain original bounds"
+  ],
+  "errors": [],
+  "probes": [
+    {
+      "label": "First150BPMsection",
+      "audioTime": 3.030204081632653,
+      "position": 2.8300634920634917,
+      "audioThreadLoop": true,
+      "clockRate": 0.8,
+      "shownBPM": "120.0"
+    },
+    {
+      "label": "After first loop wrap",
+      "audioTime": 5.032925170068027,
+      "position": 1.0078004535147391,
+      "audioThreadLoop": true,
+      "clockRate": 1,
+      "shownBPM": "120.0"
+    },
+    {
+      "label": "Second150BPMsection",
+      "audioTime": 7.02984126984127,
+      "position": 2.8297732426303854,
+      "audioThreadLoop": true,
+      "clockRate": 0.8,
+      "shownBPM": "120.0"
+    },
+    {
+      "label": "After second loop wrap",
+      "audioTime": 9.038367346938776,
+      "position": 1.013242630385487,
+      "audioThreadLoop": true,
+      "clockRate": 1,
+      "shownBPM": "120.0"
+    }
+  ],
+  "criteria": {
+    "maximumPulsePhaseErrorSeconds": 0.01,
+    "minimumPairsPerSection": 3,
+    "sourceRateTolerance": 1e-06
+  },
+  "fixture": {
+    "sampleRate": 48000,
+    "duration": 30,
+    "primary": {
+      "bpm": 120,
+      "offset": 0.05
+    },
+    "secondary": {
+      "bpm": 120,
+      "offset": 0.13,
+      "markers": [
+        {
+          "time": 2.13,
+          "bpm": 150
+        },
+        {
+          "time": 3.73,
+          "bpm": 90
+        }
+      ]
+    },
+    "pulseSeconds": 0.012,
+    "carrierHz": 900,
+    "amplitude": 0.15
+  },
+  "scope": "Actual browser app grid editor/Setup/Play/Sync and one continuous master recording, forward active loops/no-keylock/no-stems controlled fixtures. No reference/native/hardware/music-quality acceptance.",
+  "sourceBefore": {
+    "app.js": "5e34091e03c81d88cdc14476f6014aae8b51bf5a7d5bbe089fb752d3d37e8a9f",
+    "engine.js": "95f9352c4cbc8adc2c5e17e1682e8a3cc03fd843179b343c16b16c25cedc96a3",
+    "panels.js": "4a4b4c544f07140758cfd8f45b00f774dea588f881d6ed0f24c0e19bc1ff02fb",
+    "beatgrid.js": "af239aef231c9d089bf2352b8f548a5f71f734d6cf753986f17f57b3999477b9",
+    "smart-sync.js": "2aba161092b18b23016d3d3233542424b714c8f8216e60c6fe51b30224bcb5e0",
+    "warp-loop.js": "8d794041a014821319c93d03edc2efcaafdb99a5db5ba43654c1c3cceec6a5f8",
+    "warp-loop-kernel.js": "bb911c57ea9058017c2deac6545442e0f274959e8aada0a4012b72d259fa1afd",
+    "warp-loop-worklet.js": "bc977262180f910c6be55ea07a46f6b560a090939271bd4beec5e8fd31ed23fa",
+    "warp-loop-harness.js": "433f62669eac304f53908ed90b3fc54b9f3482890d4de8dea62b3df90821a55e"
+  },
+  "physicalOutputMuted": true,
+  "persistedMarkers": [
+    {
+      "time": 2.13,
+      "bpm": 150
+    },
+    {
+      "time": 3.73,
+      "bpm": 90
+    }
+  ],
+  "recordStart": 0.23219954648526078,
+  "recording": {
+    "bytes": 103556,
+    "format": "audio/webm;codecs=opus",
+    "sha256": "02d13a7af144a1f1187bdb7dabb10296af88d105210737bb2939cd51544efa28"
+  },
+  "decoded": {
+    "frames": 465695,
+    "sampleRate": 44100,
+    "channels": 2,
+    "duration": 10.559977324263038
+  },
+  "audio": {
+    "pulseTimes": [
+      [
+        0.43308390022675736,
+        0.9330839002267574,
+        1.4330839002267575,
+        1.9330839002267575,
+        2.4330839002267575,
+        2.9330839002267575,
+        3.4330839002267575,
+        3.9330839002267575,
+        4.433083900226757,
+        4.933083900226757,
+        5.433083900226757,
+        5.933083900226757,
+        6.433083900226757,
+        6.933083900226757,
+        7.433083900226757,
+        7.933083900226757,
+        8.433083900226757,
+        8.933083900226757,
+        9.433083900226757,
+        9.933083900226757,
+        10.433083900226757
+      ],
+      [
+        0.43308390022675736,
+        0.9330839002267574,
+        1.4330839002267575,
+        1.933265306122449,
+        2.433265306122449,
+        2.933265306122449,
+        3.433265306122449,
+        3.9330839002267575,
+        4.433083900226757,
+        4.933083900226757,
+        5.433083900226757,
+        5.933265306122449,
+        6.433265306122449,
+        6.933265306122449,
+        7.433265306122449,
+        7.933083900226757,
+        8.433083900226757,
+        8.933083900226757,
+        9.433083900226757,
+        9.933265306122449,
+        10.433265306122449
+      ]
+    ],
+    "sections": [
+      {
+        "name": "firstBase120",
+        "from": 0.2,
+        "to": 1.8,
+        "pairs": [
+          {
+            "time": 0.43308390022675736,
+            "errorSeconds": 0
+          },
+          {
+            "time": 0.9330839002267574,
+            "errorSeconds": 0
+          },
+          {
+            "time": 1.4330839002267575,
+            "errorSeconds": 0
+          }
+        ]
+      },
+      {
+        "name": "first150",
+        "from": 2.2,
+        "to": 3.8,
+        "pairs": [
+          {
+            "time": 2.4330839002267575,
+            "errorSeconds": 0.00018140589569171084
+          },
+          {
+            "time": 2.9330839002267575,
+            "errorSeconds": 0.00018140589569171084
+          },
+          {
+            "time": 3.4330839002267575,
+            "errorSeconds": 0.00018140589569171084
+          }
+        ]
+      },
+      {
+        "name": "secondBase120",
+        "from": 4.2,
+        "to": 5.8,
+        "pairs": [
+          {
+            "time": 4.433083900226757,
+            "errorSeconds": 0
+          },
+          {
+            "time": 4.933083900226757,
+            "errorSeconds": 0
+          },
+          {
+            "time": 5.433083900226757,
+            "errorSeconds": 0
+          }
+        ]
+      },
+      {
+        "name": "second150",
+        "from": 6.2,
+        "to": 7.8,
+        "pairs": [
+          {
+            "time": 6.433083900226757,
+            "errorSeconds": 0.00018140589569171084
+          },
+          {
+            "time": 6.933083900226757,
+            "errorSeconds": 0.00018140589569171084
+          },
+          {
+            "time": 7.433083900226757,
+            "errorSeconds": 0.00018140589569171084
+          }
+        ]
+      },
+      {
+        "name": "thirdBase120",
+        "from": 8.2,
+        "to": 9.8,
+        "pairs": [
+          {
+            "time": 8.433083900226757,
+            "errorSeconds": 0
+          },
+          {
+            "time": 8.933083900226757,
+            "errorSeconds": 0
+          },
+          {
+            "time": 9.433083900226757,
+            "errorSeconds": 0
+          }
+        ]
+      }
+    ]
+  },
+  "loopBounds": [
+    {
+      "start": 0.05,
+      "end": 4.05
+    },
+    {
+      "start": 0.13,
+      "end": 3.73
+    }
+  ],
+  "sourceAfter": {
+    "app.js": "5e34091e03c81d88cdc14476f6014aae8b51bf5a7d5bbe089fb752d3d37e8a9f",
+    "engine.js": "95f9352c4cbc8adc2c5e17e1682e8a3cc03fd843179b343c16b16c25cedc96a3",
+    "panels.js": "4a4b4c544f07140758cfd8f45b00f774dea588f881d6ed0f24c0e19bc1ff02fb",
+    "beatgrid.js": "af239aef231c9d089bf2352b8f548a5f71f734d6cf753986f17f57b3999477b9",
+    "smart-sync.js": "2aba161092b18b23016d3d3233542424b714c8f8216e60c6fe51b30224bcb5e0",
+    "warp-loop.js": "8d794041a014821319c93d03edc2efcaafdb99a5db5ba43654c1c3cceec6a5f8",
+    "warp-loop-kernel.js": "bb911c57ea9058017c2deac6545442e0f274959e8aada0a4012b72d259fa1afd",
+    "warp-loop-worklet.js": "bc977262180f910c6be55ea07a46f6b560a090939271bd4beec5e8fd31ed23fa",
+    "warp-loop-harness.js": "433f62669eac304f53908ed90b3fc54b9f3482890d4de8dea62b3df90821a55e"
+  },
+  "sourceStable": true,
+  "finishedAt": "2026-10-17T22:59:52.692Z"
+}

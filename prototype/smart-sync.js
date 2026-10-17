@@ -68,7 +68,8 @@ export function createSmartSync({engine, state}) {
       if (d.reverse || (d.stemSlip || 'off') !== 'off')
         throw new Error('This Smart Sync path currently requires forward decks without Stem Slip.');
       loopBounds(d);
-      if(d.loop&&d.track.gridWarpMarkers?.length)throw new Error('Warped Smart Sync with loops is not available yet.');
+      if(d.loop&&d.track.gridWarpMarkers?.length&&(d.keylock||d.keyShift))throw new Error('Warped loops with keylock or pitch shift are not available yet.');
+
     }
   }
   async function align(deck, primary) {
@@ -144,7 +145,7 @@ export function createSmartSync({engine, state}) {
   function timeline(deck,options){
     if(!enabled()||!engaged(deck)||!deck.track?.gridWarpMarkers?.length)return;
     validateTransport(deck,deck);
-    return createBeatgrid(deck.track).timeline({...options,bpm:syncBPM});
+    return createBeatgrid(deck.track).timeline({...options,bpm:syncBPM,loop:loopBounds(deck)});
   }
   function tempo(deck,rate){
     const bpm=deck.track.bpm*rate;

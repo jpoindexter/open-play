@@ -13,6 +13,7 @@ import { createVideoAnalysis } from "./video-analysis.js";
 import { describeAudioVideoLinks } from "./video-audio-fx-state.js";
 import { effectiveFXBPM, normalizeFXTempoSettings } from "./fx-tempo.js";
 import {createAudioMonitor,monitorSettings as normalizeMonitorSettings} from './audio-monitor.js';
+import {createWarpLoopTransport} from './warp-loop.js';
 export class AudioEngine {
   constructor() {
     this.ctx = null;
@@ -222,6 +223,7 @@ export class AudioEngine {
     }
   }
   disposeVoice(i, source) {
+    source.warpLoopTransport?.dispose();
     source.stemSlipTransport?.dispose();
     if (source.deckScratchTransport) {
       const transport = source.deckScratchTransport;
@@ -306,6 +308,21 @@ export class AudioEngine {
     if(this.deckScratchShadows.get(d.index)!==lease)return;
     if(d.track!==lease.track){lease.dispose();return;}
     const position=this.position(d);this.pause(d);d.position=position;this.onProcessing(d);this.onError?.(error);
+  }
+  async startWarpLoop(d,buffers,controller,current,{positionAt,priorClock}={}){
+    const old=this.voices.get(d.index),playing=d.playing,oldClock=priorClock||this.voiceClock(d,old);let transport,committed=false;
+    try{
+      transport=await createWarpLoopTransport(this.ctx,buffers,{signal:controller.signal,onError:error=>{if(this.voices.get(d.index)?.warpLoopTransport===transport){this.pause(d);this.onError?.(error);}}});
+      if(!current())return;
+      const when=this.ctx.currentTime+.05;
+      const position=positionAt?positionAt(when):playing?oldClock(when):d.position;
+      const timeline=this.onGridTimeline(d,{position,when});
+      const ack=await transport.start({track:{bpm:d.track.bpm,grid:d.track.grid,duration:d.track.duration,gridWarpMarkers:d.track.gridWarpMarkers},loop:timeline.loop,bpm:timeline.bpm,position,when});
+      if(!current())return;
+      const voice={sources:[],warpLoopTransport:transport,liveOwnerController:controller,gridTimeline:timeline,stemGains:[],handoffBefore:old&&playing?{until:when,clock:oldClock,rate:at=>this.voiceRateAt(d,old,at)}:null};
+      this.routeOrdinaryVoice(d,voice,transport.outputs,buffers.length===5,{when,reuseVoice:old});committed=true;this.retireVoiceAt(d.index,old,when);
+      d.position=ack.position;d.anchorPosition=ack.position;d.anchorTime=when;d.playing=true;
+    }finally{if(!committed)transport?.dispose();}
   }
   async startForwardKeylock(d, buffers, controller, current, {positionAt, priorClock} = {}) {
     const track = d.track, old = this.voices.get(d.index), initiallyPlaying = d.playing, oldClock = priorClock || this.voiceClock(d, this.voices.get(d.index));
@@ -398,6 +415,10 @@ export class AudioEngine {
       const transformed = keylock || shift !== 0;
       const scale = transformed ? tempo : 1;
       if (!current()) return;
+      if(d.loop&&track.gridWarpMarkers?.length&&this.onGridTimeline?.(d,{position:d.position,when:this.ctx.currentTime})){
+        if(transformed||d.reverse)throw Error('Warped loops with keylock, pitch shift or reverse are not available yet.');
+        await this.startWarpLoop(d,buffers,controller,current,{positionAt,priorClock});return;
+      }
       if (transformed && !d.reverse && !d.loop) {
         await this.startForwardKeylock(d, buffers, controller, current, {positionAt, priorClock});
         return;
@@ -674,7 +695,12 @@ export class AudioEngine {
     }
   }
   async setLoop(d, on, start, end) {
-    this.onValidateTransport?.(d,{loop:on});
+    this.onValidateTransport?.(d,{loop:on,loopIn:start,loopOut:end});
+    if(this.voices.get(d.index)?.gridTimeline){
+      const prior=this.voiceClock(d,this.voices.get(d.index)),was=d.playing;d.position=this.position(d);d.loop=on;d.loopIn=start;d.loopOut=end;
+      if(was)await this.start(d,{priorClock:prior,positionAt:at=>{const p=prior(at);return on&&p>=end?start+((p-start)%(end-start)+(end-start))%(end-start):p;}});
+      return;
+    }
     if (this.voices.get(d.index)?.deckScratchTransport || this.voices.get(d.index)?.liveKeylock || this.deckScratchRequests.has(d.index)) {
       const was = d.playing; this.pause(d, {preserveStemExit: true});
       d.loop = on; d.loopIn = start; d.loopOut = end;
