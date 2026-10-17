@@ -1,5 +1,9 @@
 
 
+Current named hands-on HTML review source: `f8b0abf33c8e8468c7bec27eabc5be2930ed0086`, 264 tracked prototype/scripts hashes in candidate-hashes.json. Checkpoint12 preserves all failures; full1:1 false/nativeapproval false. Jason has been asked to approve this exact revision for local desktop packaging or test it in browser first. Do not treat question delivery, elapsed time, or architectural discussion as approval. Continue same interface/code; no rewrite. Read docs/prototype/REAL_TEST.md.
+
+
+
 Reviewed-source rerun result: standalone repeat preserved in `keylock-engine-shadow-reviewed-standalone-failure.json` reports2pass/5fail/4capture-integrity errors. Both reviewed-source attempts record the same kind of duplicate frame followed by a skipped quantum on all four buses, including independent control. This disqualifies continuous release measurement; it does not establish its cause. No further identical rerun is a completion gate. Current controlled live orchestration9/9, shadow ownership9/9 and silentpull15/15 pass. Main-interface two-demo13.2s recording is a separate observed path. The candidate is presented for hands-on testing with these limits, not release-quality or full-parity acceptance.
 
 

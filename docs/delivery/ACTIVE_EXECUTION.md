@@ -1,3 +1,7 @@
+
+
+Current named hands-on HTML review source: `f8b0abf33c8e8468c7bec27eabc5be2930ed0086`, 264 tracked prototype/scripts hashes in candidate-hashes.json. Checkpoint12 preserves all failures; full1:1 false/nativeapproval false. Jason has been asked to approve this exact revision for local desktop packaging or test it in browser first. Do not treat question delivery, elapsed time, or architectural discussion as approval. Continue same interface/code; no rewrite. Read docs/prototype/REAL_TEST.md.
+
 # Active execution — 17 October2026
 
 **Outcome:** fully functional independent open-source DJ HTML prototype across Serato DJ Pro scope; independent Claude audit; explicit Jason approval of a named HTML revision before native work.
