@@ -1,0 +1,50 @@
+{
+  "scope": "One actual two-deck concurrent HTTP→native R3 workflow. Not native GUI/physical audio, queue-abort, memory/load or full-parity acceptance.",
+  "at": "2026-10-17T19:21:54.184Z",
+  "serverSHA256": "ae695ee4914645c6e1c83f748fef52584840adacd4368b82b97d75260cf6b3a1",
+  "workerSHA256": "6abdbe2b3787cea14a39eadb4da8a75f7677bdf43e41c0dd76591195c07630a2",
+  "requestSHA256": "cd1109e774ee67fbc15495f789a0d3f86b120f27f9b297aa222855e043a45864",
+  "events": [
+    {
+      "label": "deck1",
+      "event": "requested",
+      "at": 1792264911986,
+      "activePID": null
+    },
+    {
+      "event": "first-worker-observed",
+      "pid": 39585,
+      "at": 1792264911993
+    },
+    {
+      "label": "deck2",
+      "event": "requested",
+      "at": 1792264911993,
+      "activePID": 39585
+    }
+  ],
+  "results": [
+    {
+      "label": "deck1",
+      "httpStatus": 200,
+      "bytes": 14581792,
+      "sha256": "66a5c8f83302313af2b8798213bcf4cb841b445b0e7ad2e5a31480758bd2149c",
+      "matchesKnownWholeNativeResponse": true,
+      "elapsedMs": 2197
+    },
+    {
+      "label": "deck2",
+      "httpStatus": 503,
+      "bytes": 66,
+      "sha256": "d976301452dbea7de5a401c19baaef2e051005c2af6eee30189f6b90a7169bd1",
+      "matchesKnownWholeNativeResponse": false,
+      "elapsedMs": 5
+    }
+  ],
+  "passed": false,
+  "error": {
+    "name": "AssertionError",
+    "message": "Both concurrent deck requests must complete with the whole known audio response"
+  },
+  "fullParityVerified": false
+}

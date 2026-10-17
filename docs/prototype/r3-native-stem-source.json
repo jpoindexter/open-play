@@ -1,0 +1,78 @@
+{
+  "savedAt": "2026-10-17T19:24:43.081581+00:00",
+  "scope": "Real locally generated AfterHours audio and actual SCNet prepared outputs. Cache reuse intended for native stem routing; not a new model-quality acceptance.",
+  "jobId": "396b160ce23c46e58779f62f792011ad",
+  "input": {
+    "path": "local-evidence/stem-jobs/396b160ce23c46e58779f62f792011ad/input.wav",
+    "sha256": "4267e0daf59103a5bf58472f93a7789dd67306cc1dbdfdb21f4fa2626f5af77c"
+  },
+  "nativeImportCopy": "local-evidence/r3-native-stem-fixtures/after-hours-prepared-source.wav",
+  "manifest": {
+    "schema_version": 1,
+    "state": "complete",
+    "cached": false,
+    "cache_key": "7f462d3340b95a700e5f8d3d691ec46c5562a5edab059e0de60fcd782ad0e744",
+    "source_sha256": "4267e0daf59103a5bf58472f93a7789dd67306cc1dbdfdb21f4fa2626f5af77c",
+    "model": "SCNet-large official",
+    "backend": "scnet",
+    "model_sha256": "719e5abb8ed920305dad546ac3cd6fb0b1e9c3092d14ce21827bfc0423af3070",
+    "model_revision": "5d95bf96b19c3eede63248d171efeca8e3abb948",
+    "model_url": "https://drive.google.com/file/d/1s7QvQwn8ag9oVstGDBQ6KZvacJkvyK7t/view",
+    "weight_redistribution": "MIT_explicit_owner_confirmation_SCNet_issue_35",
+    "runtime": {
+      "torch": "2.5.1",
+      "scnet_commit": "5d95bf96b19c3eede63248d171efeca8e3abb948"
+    },
+    "sample_rate": 44100,
+    "channels": 2,
+    "frames": 2116800,
+    "duration": 48.0,
+    "parameters": {
+      "segment": 30,
+      "overlap_seconds": 1,
+      "device": "cpu"
+    },
+    "stems": [
+      {
+        "name": "drums",
+        "ui_name": "drums",
+        "file": "drums.wav",
+        "sha256": "e17c3fd95e473d4c0c675fa8ee228900dbdb07b50239a510c29a8df2a349b731",
+        "rms": 0.035976743238609526,
+        "peak": 0.270853728055954
+      },
+      {
+        "name": "bass",
+        "ui_name": "bass",
+        "file": "bass.wav",
+        "sha256": "57d6028ad5e570a6ad9fbac64d290ceb3382ad713a7be9439a34c84840b51475",
+        "rms": 0.05403748264301572,
+        "peak": 0.09706113487482071
+      },
+      {
+        "name": "other",
+        "ui_name": "melody",
+        "file": "other.wav",
+        "sha256": "d11ba159b7888c54293d6a04c3d48a086790dd87ef1dafc3b440598a3fab5931",
+        "rms": 0.0008688717643930239,
+        "peak": 0.0029740254394710064
+      },
+      {
+        "name": "vocals",
+        "ui_name": "vocals",
+        "file": "vocals.wav",
+        "sha256": "252666e7cf5534285309a6fdd20e3be18429a1bd0f6c8e04b2564eb8ea26ab9c",
+        "rms": 0.0008437957622944424,
+        "peak": 0.0017521518748253584
+      }
+    ],
+    "timing": {
+      "model_load_seconds": 1.2234438329469413,
+      "inference_seconds": 37.347732125082985,
+      "total_seconds": 38.80838429182768,
+      "realtime_factor": 0.7780777526058955
+    },
+    "reconstruction_rms_error": 0.0030184974893927574
+  },
+  "fullParityVerified": false
+}

@@ -1,0 +1,46 @@
+{
+  "scope": "One actual two-deck concurrent HTTP→native R3 workflow. Not native GUI/physical audio, queue-abort, memory/load or full-parity acceptance.",
+  "at": "2026-10-17T19:23:06.251Z",
+  "serverSHA256": "435df0ffe93b595cd1453d2c233423219dee8b5dba113270dee758504f53ef41",
+  "workerSHA256": "6abdbe2b3787cea14a39eadb4da8a75f7677bdf43e41c0dd76591195c07630a2",
+  "requestSHA256": "cd1109e774ee67fbc15495f789a0d3f86b120f27f9b297aa222855e043a45864",
+  "events": [
+    {
+      "label": "deck1",
+      "event": "requested",
+      "at": 1792264982076,
+      "activePID": null
+    },
+    {
+      "event": "first-worker-observed",
+      "pid": 39717,
+      "at": 1792264982083
+    },
+    {
+      "label": "deck2",
+      "event": "requested",
+      "at": 1792264982083,
+      "activePID": 39717
+    }
+  ],
+  "results": [
+    {
+      "label": "deck1",
+      "httpStatus": 200,
+      "bytes": 14581792,
+      "sha256": "66a5c8f83302313af2b8798213bcf4cb841b445b0e7ad2e5a31480758bd2149c",
+      "matchesKnownWholeNativeResponse": true,
+      "elapsedMs": 2112
+    },
+    {
+      "label": "deck2",
+      "httpStatus": 200,
+      "bytes": 14581792,
+      "sha256": "66a5c8f83302313af2b8798213bcf4cb841b445b0e7ad2e5a31480758bd2149c",
+      "matchesKnownWholeNativeResponse": true,
+      "elapsedMs": 4168
+    }
+  ],
+  "passed": true,
+  "fullParityVerified": false
+}

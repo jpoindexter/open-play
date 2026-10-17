@@ -1,0 +1,127 @@
+{
+  "checkedAt": "2026-10-17T19:36:09.769904+00:00",
+  "plan": {
+    "declaredAt": "2026-10-17T19:26:37.300928+00:00",
+    "scope": "One integrated native 0.1.9 two-deck preparation and real five-source mute\u2192drums-only workflow. No repeated pitch matrix or new model-quality acceptance.",
+    "app": "local-evidence/desktop-builds/0.1.9/Open Play R3 Queue Test-darwin-arm64/Open Play R3 Queue Test.app",
+    "ASARSHA256": "9082f01c4a160bf6e25bc8f9ea54eb30dd44bf121c7208232ea5da4c163199ce",
+    "workerSHA256": "6abdbe2b3787cea14a39eadb4da8a75f7677bdf43e41c0dd76591195c07630a2",
+    "source": {
+      "path": "local-evidence/r3-native-stem-fixtures/after-hours-prepared-source.wav",
+      "sha256": "4267e0daf59103a5bf58472f93a7789dd67306cc1dbdfdb21f4fa2626f5af77c"
+    },
+    "actualModelJob": "f9232a85eca94687bda2b11d2bec4235",
+    "preparationNote": "Attempted prior job cache reuse; imported22050Hz fixture is decoded44100Hz by the native context, changing upload hash and causing a legitimate new preparation. No repeated quality benchmark.",
+    "steps": [
+      "Normal native chooser/import/load on deck1 and first Stems pad prepares four real sources",
+      "Before playback: all four stem pads muted, keylock on and tempo+8; deck2 keylock on/tempo+8",
+      "Start deck1 and deck2 while first R3 preparation is pending; observe eventual playback rather than busy503 failure",
+      "Pause deck2, record deck1 all-muted for at least3seconds, enable onlyDrums, record at least3seconds more",
+      "Stop/Save one entire native recording then pause deck1"
+    ],
+    "captureCriteria": {
+      "wholeFinite": true,
+      "quietWindowSeconds": [
+        1,
+        2
+      ],
+      "quietPeakExact": 0,
+      "drumsWindow": "final2seconds",
+      "drumsRMSMin": 0.001
+    },
+    "fullParityVerified": false,
+    "notEstablished": [
+      "Exact separated component identity/quality",
+      "Pitch accuracy/attacks/tails/cursor/transition latency",
+      "All stem/rate/loop/StemSlip/reverse/compound configurations",
+      "Queued cancellation/shutdown or long-session memory",
+      "Physical hardware or vendor reference parity"
+    ]
+  },
+  "records": [
+    {
+      "name": "open-play-native-019-stems-attempt1-ended.webm",
+      "scope": "Track ended before drums action; timing-limited predecessor",
+      "originalSHA256": "68ab4bfd2f7191f87760321a974bae8cf7ec0fc360efb90ee1aa8eea8db31b2d",
+      "bytes": 16313,
+      "copyMatchesOriginal": true,
+      "wholeDecode": {
+        "path": "local-evidence/desktop-0.1.9-stem-audio/open-play-native-019-stems-attempt1-ended.webm.whole-f32le",
+        "sha256": "f2881a628b2fc9c590e7f956a8e82a0ae3c1d392777990891c3dde0e3a2772ab",
+        "frames": 2707200,
+        "sampleRate": 48000,
+        "channels": 2,
+        "seconds": 56.4,
+        "finite": true
+      },
+      "quietWindowSeconds": [
+        1,
+        2
+      ],
+      "quietPeak": 0.0,
+      "drumsWindow": "final2seconds",
+      "drumsRMS": [
+        0.0,
+        0.0
+      ],
+      "declaredCriteriaPassed": false
+    },
+    {
+      "name": "open-play-native-019-stems-attempt2-ended.webm",
+      "scope": "Midpoint seek/Home did not reset to zero; source ended before drums action; EOF state bug separately observed",
+      "originalSHA256": "2a82fcf438a1cf7bd02f635c616caa5d12d8abbdecee5d83deef031a6a980d29",
+      "bytes": 8029,
+      "copyMatchesOriginal": true,
+      "wholeDecode": {
+        "path": "local-evidence/desktop-0.1.9-stem-audio/open-play-native-019-stems-attempt2-ended.webm.whole-f32le",
+        "sha256": "2631cfff9a24f224956ed244c8ec89d99fa709d3a935213ac3d508a88bb23da1",
+        "frames": 1319040,
+        "sampleRate": 48000,
+        "channels": 2,
+        "seconds": 27.48,
+        "finite": true
+      },
+      "quietWindowSeconds": [
+        1,
+        2
+      ],
+      "quietPeak": 0.0,
+      "drumsWindow": "final2seconds",
+      "drumsRMS": [
+        0.0,
+        0.0
+      ],
+      "declaredCriteriaPassed": false
+    },
+    {
+      "name": "open-play-native-019-stems-attempt3-bounded.webm",
+      "scope": "Cue reset to zero, single timed native control sequence",
+      "originalSHA256": "8b7fb0f9a87b9b8df05fd9a72437347e89ff34e59c29ffedceef72dba610187e",
+      "bytes": 74259,
+      "copyMatchesOriginal": true,
+      "wholeDecode": {
+        "path": "local-evidence/desktop-0.1.9-stem-audio/open-play-native-019-stems-attempt3-bounded.webm.whole-f32le",
+        "sha256": "257e3a63ca229f7c92e19c2d634e71dc8cb52be2fa442c9498829e1766372e42",
+        "frames": 400320,
+        "sampleRate": 48000,
+        "channels": 2,
+        "seconds": 8.34,
+        "finite": true
+      },
+      "quietWindowSeconds": [
+        1,
+        2
+      ],
+      "quietPeak": 0.0,
+      "drumsWindow": "final2seconds",
+      "drumsRMS": [
+        0.015549138133142458,
+        0.015375260881194399
+      ],
+      "declaredCriteriaPassed": true
+    }
+  ],
+  "boundedAttemptPassed": true,
+  "scope": "One real native five-source mute\u2192drums path. Whole originals retained. No separated-component identity/quality, transient/pitch/cursor/latency/hardware/vendor/fullparity acceptance.",
+  "fullParityVerified": false
+}

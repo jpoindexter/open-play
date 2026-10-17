@@ -1,0 +1,38 @@
+{
+  "declaredAt": "2026-10-17T19:26:37.300928+00:00",
+  "scope": "One integrated native 0.1.9 two-deck preparation and real five-source mute\u2192drums-only workflow. No repeated pitch matrix or new model-quality acceptance.",
+  "app": "local-evidence/desktop-builds/0.1.9/Open Play R3 Queue Test-darwin-arm64/Open Play R3 Queue Test.app",
+  "ASARSHA256": "9082f01c4a160bf6e25bc8f9ea54eb30dd44bf121c7208232ea5da4c163199ce",
+  "workerSHA256": "6abdbe2b3787cea14a39eadb4da8a75f7677bdf43e41c0dd76591195c07630a2",
+  "source": {
+    "path": "local-evidence/r3-native-stem-fixtures/after-hours-prepared-source.wav",
+    "sha256": "4267e0daf59103a5bf58472f93a7789dd67306cc1dbdfdb21f4fa2626f5af77c"
+  },
+  "actualModelJob": "f9232a85eca94687bda2b11d2bec4235",
+  "preparationNote": "Attempted prior job cache reuse; imported22050Hz fixture is decoded44100Hz by the native context, changing upload hash and causing a legitimate new preparation. No repeated quality benchmark.",
+  "steps": [
+    "Normal native chooser/import/load on deck1 and first Stems pad prepares four real sources",
+    "Before playback: all four stem pads muted, keylock on and tempo+8; deck2 keylock on/tempo+8",
+    "Start deck1 and deck2 while first R3 preparation is pending; observe eventual playback rather than busy503 failure",
+    "Pause deck2, record deck1 all-muted for at least3seconds, enable onlyDrums, record at least3seconds more",
+    "Stop/Save one entire native recording then pause deck1"
+  ],
+  "captureCriteria": {
+    "wholeFinite": true,
+    "quietWindowSeconds": [
+      1,
+      2
+    ],
+    "quietPeakExact": 0,
+    "drumsWindow": "final2seconds",
+    "drumsRMSMin": 0.001
+  },
+  "fullParityVerified": false,
+  "notEstablished": [
+    "Exact separated component identity/quality",
+    "Pitch accuracy/attacks/tails/cursor/transition latency",
+    "All stem/rate/loop/StemSlip/reverse/compound configurations",
+    "Queued cancellation/shutdown or long-session memory",
+    "Physical hardware or vendor reference parity"
+  ]
+}

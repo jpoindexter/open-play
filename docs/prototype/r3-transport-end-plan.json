@@ -1,0 +1,23 @@
+{
+  "declaredAt": "2026-10-17T19:36:51.257464+00:00",
+  "scope": "Single actual native 0.1.10 natural-end behavior after completion-callback change. No new audio-quality matrix.",
+  "fixture": "local-evidence/r3-native-stem-fixtures/transport-end-6s.wav",
+  "sha256": "9c1dc6fc7455f7e1dd50c2579e0f5cf1687bbeead94c110c330f890734f60be4",
+  "steps": [
+    "Native import/load6second owned WAV",
+    "Enable keylock and tempo+8",
+    "Observe playing state after Play, then wait for real natural completion without clicking Pause",
+    "Expected terminal UI0decksplaying/Master0/position6s and inactivePlay control"
+  ],
+  "criteria": {
+    "observedPlaying": true,
+    "naturalTerminalWithoutPause": true,
+    "terminalPlayingDecks": 0,
+    "terminalMaster": 0
+  },
+  "notEstablished": [
+    "Other transport/multi-source/compound/music/hardware/reference paths",
+    "Other races/cancellation beyond actual executed case"
+  ],
+  "fullParityVerified": false
+}
