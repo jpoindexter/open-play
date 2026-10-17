@@ -131,14 +131,38 @@ export function createSmartSync({engine, state}) {
     for(const d of state.decks.filter(engaged))createBeatgrid(d.track).timeline({position:engine.position(d),when:engine.ctx?.currentTime||0,bpm});
     syncBPM=bpm;return bpm;
   }
-  async function edited(track){
+  function captureGrid(track){
+    if(!enabled())return [];
+    return state.decks.filter(d=>d.track===track&&engaged(d)).map(deck=>({
+      deck,track,grid:createBeatgrid(track),clock:engine.voiceClock(deck,engine.voices.get(deck.index)),
+      status:deck.syncState,role:deck.syncRole,playing:deck.playing
+    }));
+  }
+  async function edited(track,before=[]){
     if(!enabled())return;
-    for(const d of state.decks.filter(d=>d.track===track&&engaged(d))){
+    const next=createBeatgrid(track);
+    for(const saved of before){
+      const d=saved.deck;
+      if(d.track!==track||!engaged(d))continue;
       if(!hasBeatgrid(track)){clear(d);continue;}
-      const position=engine.position(d);d.syncState=d.playing?'tempo':'armed';
-      if(d.playing){d.position=position;await engine.start(d);}
+      const revision=revise(d),rate=(syncBPM||track.bpm*d.rate)/track.bpm;
+      const valid=()=>enabled()&&d.track===track&&engaged(d)&&revisions.get(d)===revision&&d.syncState===saved.status;
+      const positionAt=when=>{
+        if(!valid())throw cancelled();
+        // Preserve the previous musical beat, including a Tempo Sync offset,
+        // at the actual future handoff rather than at the Save click.
+        return next.timeAt(saved.grid.beatAt(saved.clock(when)));
+      };
+      try{
+        if(saved.playing&&d.playing)await engine.synchronize(d,{rate,priorClock:saved.clock,positionAt});
+        else {const position=positionAt(engine.ctx?.currentTime||0);if(position<0||position>=track.duration)throw new RangeError('Edited grid places the saved beat outside this track.');d.position=position;d.rate=rate;}
+        if(valid()){d.syncState=saved.status;d.syncRole=saved.role;}
+      }catch(error){
+        if(valid()){engine.pause(d);clear(d);}
+        throw error;
+      }
     }
   }
-  return {press,start,played,paused,manipulated,disengage,loaded,reconcile,engaged,timeline,tempo,edited,validate,
+  return {press,start,played,paused,manipulated,disengage,loaded,reconcile,engaged,timeline,tempo,captureGrid,edited,validate,
     reset:() => {state.decks.forEach(clear);syncBPM=null;}};
 }

@@ -1,0 +1,365 @@
+{
+  "events": [
+    {
+      "name": "beat-edit-request",
+      "audioTime": 1.7647165532879818,
+      "utc": "2026-10-17T20:29:12.786Z"
+    },
+    {
+      "name": "beat-edit-ready",
+      "audioTime": 2.0375510204081633,
+      "utc": "2026-10-17T20:29:13.059Z"
+    },
+    {
+      "name": "tempo-seek-request",
+      "audioTime": 6.025578231292517,
+      "utc": "2026-10-17T20:29:17.043Z"
+    },
+    {
+      "name": "tempo-ready",
+      "audioTime": 6.292607709750567,
+      "utc": "2026-10-17T20:29:17.307Z"
+    },
+    {
+      "name": "tempo-edit-request",
+      "audioTime": 8.486893424036282,
+      "utc": "2026-10-17T20:29:19.507Z"
+    },
+    {
+      "name": "tempo-edit-ready",
+      "audioTime": 8.759727891156462,
+      "utc": "2026-10-17T20:29:19.779Z"
+    }
+  ],
+  "states": [
+    {
+      "name": "beat-edit-before",
+      "status": "beat",
+      "role": "secondary",
+      "playing": true,
+      "position": 1.0768027210884354,
+      "rate": 1,
+      "handoffWhen": 0.9188435374149659
+    },
+    {
+      "name": "beat-edit-after",
+      "status": "beat",
+      "role": "secondary",
+      "playing": true,
+      "position": 1.3496371882086176,
+      "rate": 1,
+      "handoffWhen": 2.0275963718820864
+    },
+    {
+      "name": "tempo-ready",
+      "status": "tempo",
+      "role": "secondary",
+      "playing": true,
+      "position": 5.861622255406228,
+      "rate": 0.8,
+      "handoffWhen": 6.282653061224489
+    },
+    {
+      "name": "tempo-edit-before",
+      "status": "tempo",
+      "role": "secondary",
+      "playing": true,
+      "position": 7.6170508268348005,
+      "rate": 0.8,
+      "handoffWhen": 6.282653061224489
+    },
+    {
+      "name": "tempo-edit-after",
+      "status": "tempo",
+      "role": "secondary",
+      "playing": true,
+      "position": 7.835318400530944,
+      "rate": 0.8,
+      "handoffWhen": 8.755578231292517
+    }
+  ],
+  "startedAt": "2026-10-17T20:29:11.028Z",
+  "completed": true,
+  "checks": [
+    "Live future marker edit preserves Beat Sync state/role and actual keylocked beat alignment",
+    "Second live edit preserves Tempo Sync state and the measured pre-edit offset across the new tempo boundary",
+    "Actual grid editor persists both live marker saves"
+  ],
+  "errors": [],
+  "probes": [],
+  "criteria": {
+    "maximumBeatPhaseErrorSeconds": 0.01,
+    "maximumTempoPhaseChangeSeconds": 0.01,
+    "maximumTempoPhaseSpreadSeconds": 0.01,
+    "minimumTempoOffsetSeconds": 0.02,
+    "minimumPairs": 3
+  },
+  "fixture": {
+    "sampleRate": 48000,
+    "duration": 30,
+    "primary": {
+      "bpm": 120,
+      "offset": 0.05
+    },
+    "secondary": {
+      "bpm": 120,
+      "offset": 0.13,
+      "markers": [
+        {
+          "time": 4.13,
+          "bpm": 150
+        },
+        {
+          "time": 10.53,
+          "bpm": 90
+        }
+      ]
+    },
+    "pulseSeconds": 0.012,
+    "pulseCarrierHz": 3000,
+    "continuousCarrierHz": [
+      330,
+      550
+    ],
+    "continuousAmplitude": 0.08,
+    "amplitude": 0.15
+  },
+  "scope": "Actual browser live grid saves in Beat Sync and Tempo Sync with keylocked two-deck audio and one complete master recording. No reference/native/hardware/music-quality acceptance.",
+  "sourceBefore": {
+    "app.js": "f0e49987b4c10f820bff4a172ec2a08dacefd8c85f6f25ffe0586336dee6fd4d",
+    "engine.js": "341ea2045977befa9bd423ccffec241d1a216d83ab1711fd7a1c4df57d6709d2",
+    "panels.js": "318629bcd27b229d793b8ff3a9220e6391867ca149e0126ff540386d8a9f45fe",
+    "beatgrid.js": "9d74accf0a8278fefe1f43dd06534c442b76b44300746c9e791d583fa1e6b71e",
+    "smart-sync.js": "e5bc4c94674900ad6242b198d13b3f4b7bac9f7b21e745f3a23850d019d4383d",
+    "live-grid-edit-harness.js": "1ee5215d6b38620ff0c40696c0f88c5da6e99ae60afb74ca144108eb5cf5e7bb",
+    "keylock-shadow-live.js": "ec30bafcc974f809cc71df33533883e961bfa56eba20117e14b03c5a27d9f2a0"
+  },
+  "physicalOutputMuted": true,
+  "recordStart": 0.7662585034013606,
+  "firstMap": [
+    {
+      "when": 2.0275963718820864,
+      "rate": 1
+    },
+    {
+      "when": 4.817913832199546,
+      "rate": 0.8
+    }
+  ],
+  "finalMap": [
+    {
+      "when": 8.755578231292517,
+      "rate": 0.8
+    },
+    {
+      "when": 12.128079890492781,
+      "rate": 1.3333333333333333
+    }
+  ],
+  "recording": {
+    "bytes": 224043,
+    "format": "audio/webm;codecs=opus",
+    "sha256": "95ebc4c86925ae1a6383e3f3655eef859849ca04b93836b73d71f22961adf318",
+    "localOriginal": "local-evidence/live-grid-edit/attempt2-original.webm"
+  },
+  "decoded": {
+    "frames": 611226,
+    "sampleRate": 44100,
+    "channels": 2,
+    "duration": 13.86
+  },
+  "audio": {
+    "pulseMeasurement": "Fixed identical two-stage2000Hz/Q.707 highpass, absolute.01 threshold/100ms refractory. Circular phase comparison measures an existing offset; it does not shift any audio.",
+    "pulseTimes": [
+      [
+        0.0673015873015873,
+        0.5663945578231292,
+        1.0672108843537416,
+        1.566893424036281,
+        2.0664625850340137,
+        2.5676190476190475,
+        3.0664172335600908,
+        3.5680498866213153,
+        4.066984126984127,
+        4.5659637188208615,
+        5.06734693877551,
+        5.5665986394557825,
+        6.067664399092971,
+        6.566666666666666,
+        7.067301587301587,
+        7.567074829931973,
+        8.066349206349207,
+        8.56718820861678,
+        9.066916099773243,
+        9.56655328798186,
+        10.067573696145125,
+        10.56687074829932,
+        11.068049886621315,
+        11.566916099773243,
+        12.066190476190476,
+        12.567369614512472,
+        13.066394557823129,
+        13.56764172335601
+      ],
+      [
+        0.5672108843537415,
+        1.066326530612245,
+        1.566825396825397,
+        2.0661224489795917,
+        2.5672562358276645,
+        3.066485260770975,
+        3.5677097505668933,
+        4.066848072562358,
+        4.568707482993197,
+        5.0679365079365075,
+        5.877732426303855,
+        6.377052154195011,
+        6.8775963718820865,
+        7.378548752834467,
+        7.8763718820861675,
+        8.375873015873015,
+        8.878163265306123,
+        9.376349206349206,
+        9.878117913832199,
+        10.377324263038549,
+        10.878027210884353,
+        11.378049886621316,
+        11.876485260770975,
+        12.375374149659864,
+        12.876235827664399,
+        13.376167800453516
+      ]
+    ],
+    "sections": [
+      {
+        "name": "beat-after-live-edit",
+        "from": 1.5712925170068026,
+        "to": 5.059319727891157,
+        "pairs": [
+          {
+            "left": 2.0664625850340137,
+            "right": 2.0661224489795917,
+            "offsetSeconds": -0.0003401360544219578
+          },
+          {
+            "left": 2.5676190476190475,
+            "right": 2.5672562358276645,
+            "offsetSeconds": -0.0003628117913829776
+          },
+          {
+            "left": 3.0664172335600908,
+            "right": 3.066485260770975,
+            "offsetSeconds": 6.802721088439156e-05
+          },
+          {
+            "left": 3.5680498866213153,
+            "right": 3.5677097505668933,
+            "offsetSeconds": -0.0003401360544219578
+          },
+          {
+            "left": 4.066984126984127,
+            "right": 4.066848072562358,
+            "offsetSeconds": -0.00013605442176878313
+          },
+          {
+            "left": 4.5659637188208615,
+            "right": 4.568707482993197,
+            "offsetSeconds": 0.002743764172335794
+          }
+        ],
+        "phase": {
+          "meanSeconds": 0.0002720460782150204,
+          "maximumSpreadSeconds": 0.002471718094120723
+        }
+      },
+      {
+        "name": "tempo-before-live-edit",
+        "from": 5.826349206349207,
+        "to": 7.620634920634922,
+        "pairs": [
+          {
+            "left": 6.067664399092971,
+            "right": 5.877732426303855,
+            "offsetSeconds": -0.18993197278911556
+          },
+          {
+            "left": 6.566666666666666,
+            "right": 6.377052154195011,
+            "offsetSeconds": -0.18961451247165506
+          },
+          {
+            "left": 7.067301587301587,
+            "right": 6.8775963718820865,
+            "offsetSeconds": -0.18970521541950092
+          },
+          {
+            "left": 7.567074829931973,
+            "right": 7.378548752834467,
+            "offsetSeconds": -0.18852607709750568
+          }
+        ],
+        "phase": {
+          "meanSeconds": -0.18944444862935547,
+          "maximumSpreadSeconds": 0.0009183715318498153
+        }
+      },
+      {
+        "name": "tempo-after-boundary",
+        "from": 11.661821387091422,
+        "to": 13.66,
+        "pairs": [
+          {
+            "left": 12.066190476190476,
+            "right": 11.876485260770975,
+            "offsetSeconds": -0.18970521541950092
+          },
+          {
+            "left": 12.567369614512472,
+            "right": 12.375374149659864,
+            "offsetSeconds": -0.19199546485260832
+          },
+          {
+            "left": 13.066394557823129,
+            "right": 12.876235827664399,
+            "offsetSeconds": -0.1901587301587302
+          },
+          {
+            "left": 13.56764172335601,
+            "right": 13.376167800453516,
+            "offsetSeconds": -0.1914739229024942
+          }
+        ],
+        "phase": {
+          "meanSeconds": -0.1908333327432264,
+          "maximumSpreadSeconds": 0.0011621321093819859
+        }
+      }
+    ],
+    "tempoPhaseChangeSeconds": 0.0013888841138709473
+  },
+  "persistedMarkers": [
+    {
+      "time": 4.13,
+      "bpm": 150
+    },
+    {
+      "time": 10.53,
+      "bpm": 90
+    }
+  ],
+  "sourceAfter": {
+    "app.js": "f0e49987b4c10f820bff4a172ec2a08dacefd8c85f6f25ffe0586336dee6fd4d",
+    "engine.js": "341ea2045977befa9bd423ccffec241d1a216d83ab1711fd7a1c4df57d6709d2",
+    "panels.js": "318629bcd27b229d793b8ff3a9220e6391867ca149e0126ff540386d8a9f45fe",
+    "beatgrid.js": "9d74accf0a8278fefe1f43dd06534c442b76b44300746c9e791d583fa1e6b71e",
+    "smart-sync.js": "e5bc4c94674900ad6242b198d13b3f4b7bac9f7b21e745f3a23850d019d4383d",
+    "live-grid-edit-harness.js": "1ee5215d6b38620ff0c40696c0f88c5da6e99ae60afb74ca144108eb5cf5e7bb",
+    "keylock-shadow-live.js": "ec30bafcc974f809cc71df33533883e961bfa56eba20117e14b03c5a27d9f2a0"
+  },
+  "sourceStable": true,
+  "finishedAt": "2026-10-17T20:29:25.770Z",
+  "priorAttempt": {
+    "path": "local-evidence/live-grid-edit/attempt1.json",
+    "failure": "One-source-second seek nearly canceled preparation delay, leaving only6.69ms initial phase offset; below declared20ms nontrivial-offset floor. Beat-edit phase and small Tempo retention observed but run not accepted. Fixture changed to0.8source-second waveform seek, all criteria unchanged."
+  }
+}

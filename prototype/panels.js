@@ -554,9 +554,11 @@ export function createPanels(a) {
         $('#grid-save').onclick=async()=>{
           if(t.locked)return notify('Beatgrid locked.');
           try{
-            validate();const next=candidate();t.bpm=next.bpm;t.grid=next.grid;t.gridWarpMarkers=draft.map(m=>({...m}));if(clearLegacy)t.gridMarkers=[];
+            validate();const next=candidate(),before=engine.onGridWillChange?.(t);t.bpm=next.bpm;t.grid=next.grid;t.gridWarpMarkers=draft.map(m=>({...m}));if(clearLegacy)t.gridMarkers=[];
             t.metadataSources={...t.metadataSources,bpm:'manual',grid:'manual'};t.metadataRevision=(t.metadataRevision||0)+1;
-            await engine.onGridChanged?.(t);persist();renderDecks();renderTracks();$('#modal').close();
+            persist();
+            try{await engine.onGridChanged?.(t,before);}catch(e){renderDecks();renderTracks();throw new Error('Grid saved; playback realignment failed: '+e.message);}
+            renderDecks();renderTracks();$('#modal').close();
           }catch(e){error(e);}
         };
         render();

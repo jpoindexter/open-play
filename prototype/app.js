@@ -1781,7 +1781,8 @@ engine.onRateRequest = async (deck, rate) => {
 engine.onManualPosition = d => smartSync.manipulated(d);
 engine.onGridTimeline = (d,options) => smartSync.timeline(d,options);
 engine.onValidateTransport = (d,changes) => smartSync.validate(d,changes);
-engine.onGridChanged = track => smartSync.edited(track);
+engine.onGridWillChange = track => smartSync.captureGrid(track);
+engine.onGridChanged = (track,before) => smartSync.edited(track,before);
 engine.onError = (error) => notify(error.message);
 
 // Static HTML must not accept changes before its event handlers are installed.
