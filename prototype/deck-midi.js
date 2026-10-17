@@ -6,8 +6,9 @@ import {createMIDIJogTouch} from './midi-jog-touch.js';
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 const key=m=>JSON.stringify([m.deviceId||'',m.type,m.channel,m.number]);
 const continuous=['tempo','trim','high','mid','low','filter','level','jog nudge','jog bend','jog surface'];
-const commands=['load','play','cue','sync','sync off','headphone cue','loop','loop in','loop out','loop half','loop double','keylock','jog touch','jog touch fast','vinyl'];
-export const deckMIDITargets=Array.from({length:4},(_,i)=>[...continuous,...commands,...Array.from({length:8},(_,n)=>`hot cue ${n+1}`)].map(x=>`Deck ${i+1} ${x}`)).flat();
+const commands=['load','play','cue','sync','sync off','headphone cue','loop','loop in','loop out','loop half','loop double','keylock','jog touch','jog touch fast','vinyl','slip','quantize','tempo range','previous','stutter'];
+export const deckMIDITargets=Array.from({length:4},(_,i)=>[...continuous,...commands,...Array.from({length:8},(_,n)=>`hot cue ${n+1}`),...Array.from({length:8},(_,n)=>`clear cue ${n+1}`)].map(x=>`Deck ${i+1} ${x}`)).flat();
+export const samplerMIDITargets=Array.from({length:8},(_,n)=>[`Sampler ${n+1}`,`Sampler ${n+1} alt`]).flat();
 export const fxMIDITargets=[1,2].flatMap(n=>['depth','beat','enable'].map(x=>`FX unit ${n} ${x}`));
 export function createDeckMIDIRouter({state,engine,actions,applyFX=()=>{},onChange=()=>{},onStatus=()=>{}}){
  const pairs=new Map(),buttons=new Map(),pickup=new Map(),rates=new Map(),nudges=new Map();
@@ -24,9 +25,19 @@ export function createDeckMIDIRouter({state,engine,actions,applyFX=()=>{},onChan
   if(message.pressed)return false;
   if(jogTouch.releaseMessage(message))return true;
   const hold=buttons.get(key(message));if(!hold)return false;
-  buttons.delete(key(message));if(hold.cue)void actions.cueHolds.release(hold.owner,{immediate:true}).catch(error=>onStatus(error.message));return true;
+  buttons.delete(key(message));if(hold.release)void Promise.resolve(hold.release()).catch(error=>onStatus(error.message));if(hold.cue)void actions.cueHolds.release(hold.owner,{immediate:true}).catch(error=>onStatus(error.message));return true;
  }
  async function dispatch(message,mapping){
+  const sample=/^Sampler ([1-8])( alt)?$/.exec(mapping.target);
+  if(sample){
+   if(mapping.encoding!=='7-bit absolute'||message.type==='Pitch bend')throw Error('Sampler pads need a7-bit Note/CC button with release.');
+   if(!message.pressed){release(message);return true;}
+   if(buttons.has(key(message)))return true;
+   const held={deviceId:message.deviceId||'',release:null};buttons.set(key(message),held);
+   try{const started=actions.midiSample(Number(sample[1])-1,!!sample[2]);held.release=started.release;await started.pending;}
+   catch(error){if(buttons.get(key(message))===held)buttons.delete(key(message));throw error;}
+   return true;
+  }
   const fx=/^FX unit ([12]) (depth|beat|enable)$/.exec(mapping.target);
   if(fx){
    const bank=Number(fx[1])-1,slots=state.fx[bank];if(!slots)return true;
@@ -48,7 +59,7 @@ export function createDeckMIDIRouter({state,engine,actions,applyFX=()=>{},onChan
   }
   const match=deckFor(mapping.target);if(!match)return false;
   const d=state.decks[Number(match[1])-1],action=match[2];
-  if(!d||![...continuous,...commands,...Array.from({length:8},(_,n)=>`hot cue ${n+1}`)].includes(action))return false;
+  if(!d||![...continuous,...commands,...Array.from({length:8},(_,n)=>`hot cue ${n+1}`),...Array.from({length:8},(_,n)=>`clear cue ${n+1}`)].includes(action))return false;
   const owner=`midi:${key(message)}`;
   if(action==='jog touch'||action==='jog touch fast'){
    if(mapping.encoding!=='7-bit absolute'||message.type==='Pitch bend')throw Error('Jog touch needs a7-bit Note/CC button with release.');
@@ -58,11 +69,12 @@ export function createDeckMIDIRouter({state,engine,actions,applyFX=()=>{},onChan
   if(!continuous.includes(action)){
    if(!message.pressed){release(message);return true;}
    if(buttons.has(key(message)))return true;
-   const hot=/^hot cue ([1-8])$/.exec(action),cue=action==='cue'||!!hot;
+   const hot=/^hot cue ([1-8])$/.exec(action),clear=/^clear cue ([1-8])$/.exec(action),cue=action==='cue'||!!hot;
    buttons.set(key(message),{owner,cue,deviceId:message.deviceId||''});
+   if(clear){await actions.cueHolds.press(owner,d,Number(clear[1])-1,true);return true;}
    if(cue){await actions.cueHolds.press(owner,d,hot?Number(hot[1])-1:null);return true;}
    if(action==='vinyl'){await jogTouch.resetDeck(d.index);await jogBend.resetDeck(d.index);d.vinyl=d.vinyl===false;onStatus(`Deck ${d.index+1} Vinyl ${d.vinyl?'on':'off'}.`);onChange({deck:d.index,action});return true;}
-   const names={load:'load',play:'play',sync:'sync','sync off':'syncOff','headphone cue':'pfl',loop:'loop','loop in':'loopIn','loop out':'loopOut','loop half':'loopHalf','loop double':'loopDouble',keylock:'keylock'};
+   const names={slip:'slip',quantize:'quantize','tempo range':'range',previous:'previous',stutter:'stutter',load:'load',play:'play',sync:'sync','sync off':'syncOff','headphone cue':'pfl',loop:'loop','loop in':'loopIn','loop out':'loopOut','loop half':'loopHalf','loop double':'loopDouble',keylock:'keylock'};
    await actions.deckAction(names[action],d.index,{});onChange({deck:d.index,action});return true;
   }
   if(message.type==='Note'&&!message.pressed)return true;
@@ -114,7 +126,7 @@ export function createDeckMIDIRouter({state,engine,actions,applyFX=()=>{},onChan
  function resetInput(deviceId){
   void jogTouch.resetInput(deviceId).catch(error=>onStatus(error.message));
   void jogBend.resetInput(deviceId).catch(error=>onStatus(error.message));
-  for(const [k,b]of buttons)if(deviceId===undefined||b.deviceId===deviceId){buttons.delete(k);if(b.cue)void actions.cueHolds.release(b.owner,{immediate:true}).catch(error=>onStatus(error.message));}
+  for(const [k,b]of buttons)if(deviceId===undefined||b.deviceId===deviceId){buttons.delete(k);if(b.release)void Promise.resolve(b.release()).catch(error=>onStatus(error.message));if(b.cue)void actions.cueHolds.release(b.owner,{immediate:true}).catch(error=>onStatus(error.message));}
   pickup.clear();pairs.clear();
  }
  return{dispatch,release,resetInput};
@@ -122,7 +134,7 @@ export function createDeckMIDIRouter({state,engine,actions,applyFX=()=>{},onChan
 
 export function herculesPlaybackMappings(deviceId){
  if(!deviceId)throw Error('Connect the named Hercules input before installing its controls.');
- const maps=[],add=(target,type,channel,number,encoding='7-bit absolute',extra={})=>maps.push({target,type,channel,number,encoding,deviceId,preset:'hercules-inpulse-300-mk2-playback-v3',...extra});
+ const maps=[],add=(target,type,channel,number,encoding='7-bit absolute',extra={})=>maps.push({target,type,channel,number,encoding,deviceId,preset:'hercules-inpulse-300-mk2-playback-v4',...extra});
  add('Library browse','CC',1,1,'Relative two’s complement');add('Crossfader','CC',1,0);
  for(let deck=1;deck<=2;deck++){
   const ch=deck+1,t=s=>`Deck ${deck} ${s}`;
@@ -137,7 +149,12 @@ export function herculesPlaybackMappings(deviceId){
   add(t('vinyl'),'Note',ch+3,1);
   for(const [name,n]of [['loop',3],['sync',5],['cue',6],['play',7],['loop in',9],['loop out',10],['headphone cue',12],['load',13]])add(t(name),'Note',ch,n);
   for(const [name,n]of [['sync off',5],['loop half',9],['loop double',10]])add(t(name),'Note',ch+3,n);
-  for(let n=0;n<8;n++)add(t(`hot cue ${n+1}`),'Note',deck+6,n);
+  for(const [name,n]of [['slip',1],['quantize',2]])add(t(name),'Note',ch,n);
+  for(const [name,n]of [['tempo range',2],['previous',6],['stutter',7]])add(t(name),'Note',ch+3,n);
+  for(let n=0;n<8;n++){
+   add(t(`hot cue ${n+1}`),'Note',deck+6,n);add(t(`clear cue ${n+1}`),'Note',deck+6,n+8);
+   add(`Sampler ${n+1}`,'Note',deck+6,n+0x30);add(`Sampler ${n+1} alt`,'Note',deck+6,n+0x38);
+  }
  }
  return maps;
 }

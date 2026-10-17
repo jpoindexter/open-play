@@ -208,3 +208,8 @@ Actual synthetic MIDI/normal engine positive bend + idle return has a full finit
 ### Plan83 dated subset: MIDI touch/surface release routing
 
 Actual browser MIDI editor + synthetic packets drive the existing scratch worklet: held-left attenuation, signed actual cursor movement, movement audio, normal Note Off playback, Vinyl-off subsequent bend and nominal return with right deck continuous. Whole finite3s stereo recording: docs/prototype/midi-jog-touch-browser-results.json. Prepared fixtures only; no fresh hardware, calibration, musical-quality or composed/keylocked acceptance. Native0.1.12 remains unchanged. Full audit rows/flags unpromoted; full Claude audit unlaunched. See plan83/current handoff.
+
+
+### Plan84 dated subset: transport/Quantize/Sampler MIDI
+
+Actual editor/synthetic input changes cue placement per deck, visible Quantize mixed/all states, range/Slip state and previous/stutter transport. Whole finite1.5s sampler recording covers original bank release after mapping removal, newer slot ownership and alt stop/load. docs/prototype/midi-sampler-buttons-browser-results.json. No physical/native/full acceptance. Refreshed Pro guide semantics supersede community Mixxx action choices; Sampler-alt byte range remains inferred. Native0.1.12 unchanged; full flags and audit rows unpromoted.

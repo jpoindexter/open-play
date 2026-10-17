@@ -1,0 +1,212 @@
+{
+  "startedAt": "2026-10-17T21:45:10.478Z",
+  "completed": true,
+  "scope": "Actual browser MIDI editor and app actions; complete controlled sampler master recording. No native, hardware, full pad-bank/reference, model/pitch quality or persistence acceptance.",
+  "criteria": {
+    "frequencyErrorHz": 0.5,
+    "silentMaximumRMS": 0.0001,
+    "playingMinimumRMS": 0.005,
+    "quantizeSetting": "1 Beat"
+  },
+  "events": [
+    {
+      "name": "record-start",
+      "time": 0
+    },
+    {
+      "name": "bank-a-only",
+      "time": 0.1393197278911565
+    },
+    {
+      "name": "both-banks",
+      "time": 0.41795918367346935
+    },
+    {
+      "name": "bank-b-only",
+      "time": 0.6675736961451246
+    },
+    {
+      "name": "newer-slot-owner",
+      "time": 0.9984580498866212
+    },
+    {
+      "name": "shift-stop-silence",
+      "time": 1.2364625850340136
+    }
+  ],
+  "checks": [
+    "Actual per-deck Quantize changes cue placement and visible mixed/all states",
+    "Range/Slip/previous/stutter reach actual app controls and transport",
+    "Original Hold release survives bank/mapping changes without stopping another bank",
+    "Older same-slot owner cannot stop newer trigger; alternate pads load empty/stop loaded slots; recorded master matches all windows"
+  ],
+  "errors": [],
+  "sourceBefore": {
+    "app.js": "fec73158052330bffb885bcfa3ff869cbb6384391537af9961c2a8ec722ffbb1",
+    "engine.js": "c0f7fa915938ab416137807a4345878d290110dcdfce23283e46c1e665eec6b1",
+    "panels.js": "9d7b9432af8b3950681676a5537f8216570543052737765af8d709cc580ed9ec",
+    "deck-midi.js": "c29f9f9957bb8a51d010adb9a5b34398ad5124b8dd30ad1cfe37a801a71eac76",
+    "midi.js": "0cabb6dbe98e9eb3f7bc7f7eb44615fa315a0738260e5f3568a34d0aa75ec1ad",
+    "midi-sampler-buttons-harness.js": "1070eaa3632b195715051bafc892c69cd07a38240b78536a78a30973415b7f5b"
+  },
+  "physicalOutputMuted": true,
+  "quantize": {
+    "cuePositions": [
+      0.23,
+      0
+    ],
+    "header": "mixed",
+    "buttons": [
+      "false",
+      "true"
+    ]
+  },
+  "controls": {
+    "range": 16,
+    "tempoSliderMaximum": 16,
+    "slip": true
+  },
+  "previous": {
+    "id": "demo-0",
+    "position": 0.23
+  },
+  "stutter": {
+    "playing": true,
+    "position": 0.013219954648526086
+  },
+  "sampleState": {
+    "selectedBank": 1,
+    "emptySlotLoaded": "demo-1",
+    "remainingVoices": []
+  },
+  "recording": {
+    "bytes": 22471,
+    "format": "audio/webm;codecs=opus",
+    "sha256": "cd7ce2dca6cef74a6c282ce840e476fd0b276c2421b285e95e5904e02fc75471",
+    "originalRetained": "local-evidence/midi-sampler-buttons/original.webm"
+  },
+  "decoded": {
+    "duration": 1.5,
+    "sampleRate": 44100,
+    "frames": 66150,
+    "channels": 2
+  },
+  "audio": [
+    {
+      "name": "bank-a",
+      "expected": [
+        330,
+        null
+      ],
+      "channels": [
+        {
+          "from": 0.2193197278911565,
+          "to": 0.3593197278911565,
+          "rms": 0.018667645333606053,
+          "hz": 329.9971902681934
+        },
+        {
+          "from": 0.2193197278911565,
+          "to": 0.3593197278911565,
+          "rms": 1.2765570604102612e-15,
+          "hz": 66.6692722169466
+        }
+      ]
+    },
+    {
+      "name": "both",
+      "expected": [
+        330,
+        550
+      ],
+      "channels": [
+        {
+          "from": 0.47795918367346935,
+          "to": 0.5979591836734693,
+          "rms": 0.018701514349481942,
+          "hz": 329.9907603805283
+        },
+        {
+          "from": 0.47795918367346935,
+          "to": 0.5979591836734693,
+          "rms": 0.018636509242818972,
+          "hz": 549.9997466526071
+        }
+      ]
+    },
+    {
+      "name": "bank-b",
+      "expected": [
+        null,
+        550
+      ],
+      "channels": [
+        {
+          "from": 0.7475736961451246,
+          "to": 0.8875736961451246,
+          "rms": 1.697080223663212e-05,
+          "hz": null
+        },
+        {
+          "from": 0.7475736961451246,
+          "to": 0.8875736961451246,
+          "rms": 0.018707021335023732,
+          "hz": 549.9948509350305
+        }
+      ]
+    },
+    {
+      "name": "new-owner",
+      "expected": [
+        null,
+        550
+      ],
+      "channels": [
+        {
+          "from": 1.0584580498866212,
+          "to": 1.1984580498866213,
+          "rms": 4.7224001464105456e-08,
+          "hz": null
+        },
+        {
+          "from": 1.0584580498866212,
+          "to": 1.1984580498866213,
+          "rms": 0.018678926372674876,
+          "hz": 550.0005215154919
+        }
+      ]
+    },
+    {
+      "name": "stopped",
+      "expected": [
+        null,
+        null
+      ],
+      "channels": [
+        {
+          "from": 1.3164625850340137,
+          "to": 1.4664625850340136,
+          "rms": 3.406223683856616e-10,
+          "hz": null
+        },
+        {
+          "from": 1.3164625850340137,
+          "to": 1.4664625850340136,
+          "rms": 1.7395941820053453e-05,
+          "hz": null
+        }
+      ]
+    }
+  ],
+  "sourceAfter": {
+    "app.js": "fec73158052330bffb885bcfa3ff869cbb6384391537af9961c2a8ec722ffbb1",
+    "engine.js": "c0f7fa915938ab416137807a4345878d290110dcdfce23283e46c1e665eec6b1",
+    "panels.js": "9d7b9432af8b3950681676a5537f8216570543052737765af8d709cc580ed9ec",
+    "deck-midi.js": "c29f9f9957bb8a51d010adb9a5b34398ad5124b8dd30ad1cfe37a801a71eac76",
+    "midi.js": "0cabb6dbe98e9eb3f7bc7f7eb44615fa315a0738260e5f3568a34d0aa75ec1ad",
+    "midi-sampler-buttons-harness.js": "1070eaa3632b195715051bafc892c69cd07a38240b78536a78a30973415b7f5b"
+  },
+  "sourceStable": true,
+  "finishedAt": "2026-10-17T21:45:12.144Z",
+  "originalReport": "local-evidence/midi-sampler-buttons/first-results.json"
+}
