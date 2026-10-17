@@ -1,0 +1,59 @@
+{
+  "date": "2026-10-17T15:00:13.094Z",
+  "scope": "Controlled analytic clock/geometry corruptions and actual exported capture processor; not real AudioParam automation, native clock, WASM or cursor acceptance.",
+  "passed": 12,
+  "failed": 0,
+  "checks": [
+    {
+      "name": "Complete scheduled ramp and both global getter forms agree with strict capture",
+      "passed": true
+    },
+    {
+      "name": "Duplicate and skip global labels never repaired by continuous parameter values",
+      "passed": true
+    },
+    {
+      "name": "Discontinuous ramp is rejected even with valid global rows",
+      "passed": true
+    },
+    {
+      "name": "Constant one-value parameter array cannot masquerade as an active a-rate ramp",
+      "passed": true
+    },
+    {
+      "name": "NaN and absent parameter data fail instead of zero-filling or interpolating",
+      "passed": true
+    },
+    {
+      "name": "A coherent ramp with a wrong declared schedule is rejected",
+      "passed": true
+    },
+    {
+      "name": "currentTime or globalThis disagreement is retained and rejected",
+      "passed": true
+    },
+    {
+      "name": "Getter changes within the same process call cannot earn a valid clock",
+      "passed": true
+    },
+    {
+      "name": "Missing preflight, empty arm, bad fence and nonfinite PCM retain capture failure",
+      "passed": true
+    },
+    {
+      "name": "An armed span reaching the predeclared ramp endpoint is rejected",
+      "passed": true
+    },
+    {
+      "name": "Actual automation time and value fields must agree with the declared integer ramp",
+      "passed": true
+    },
+    {
+      "name": "Actual processor retains every raw parameter value and all four original audio channels",
+      "passed": true
+    }
+  ],
+  "sourceHashes": {
+    "prototype/render-clock-capture-worklet.js": "00ca498588fae8f2e19728139f1d38cf40d7480cb48e35645436bddbca372627"
+  }
+}

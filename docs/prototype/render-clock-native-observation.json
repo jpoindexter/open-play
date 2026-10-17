@@ -1,0 +1,72 @@
+{
+  "observed_at": "2026-10-17T15:07:01.037426+00:00",
+  "kind": "PARENT_NATIVE_DIAGNOSTIC_UI_EXECUTION_AND_ORIGINAL_DOWNLOADS",
+  "host": {
+    "pid": 80431,
+    "origin": "http://127.0.0.1:18786",
+    "electron": "44.9.0",
+    "separate_from_main_product": true
+  },
+  "actions": [
+    "Started isolated official Electron diagnostic host; exact app path selected after ambiguous bundle identifier failed before control.",
+    "Clicked actual Run button once; observed disabled state and capture progress.",
+    "Observed final UI: calibration passed; capture integrity passed; five of ten cases.",
+    "Used native Save sheets to save uniquely named original JSON and whole four-channel raw PCM to Downloads.",
+    "Copied both originals byte-identically; preserved complete metadata/parameter Base64 and raw4 audio without repair.",
+    "Closed owned diagnostic window after export; host exited0. Post-close AX inspection auto-opened default Electron page; quit that owned default window through UI. Exact executable and port18786 absent afterward."
+  ],
+  "observed_result": {
+    "clock_integrity": true,
+    "calibration": true,
+    "case_passes": 5,
+    "cases": 10,
+    "ambiguous_case_probes": 7,
+    "confident_wrong_probes": 0,
+    "allCriteriaPassed": false,
+    "completed": true,
+    "physical_or_main_UI_acceptance": false
+  },
+  "evidence": [
+    {
+      "path": "docs/prototype/render-clock-native-initial-results.json",
+      "sha256": "adaf92cb1a75de8faee5dd6f12c28e8826566421fb9d2ad138aaf3e7f9a3f075"
+    },
+    {
+      "path": "local-evidence/render-clock-native-initial/complete.f32",
+      "sha256": "6a6d77ce74d9b37e8f5fcd4ac2d4a92aa6498bbfc25527a97a51741923b05572"
+    },
+    {
+      "path": "docs/prototype/screenshots/render-clock-native-initial-20261017.png",
+      "sha256": "74e9462bab8dcc16a5d336d08bb68adf89ff3bd4c62560653c448e38a1bd4a18"
+    }
+  ],
+  "original_downloads": [
+    {
+      "path": "/Users/jasonpoindexter/Downloads/open-play-render-clock-native-initial-results.json",
+      "sha256": "adaf92cb1a75de8faee5dd6f12c28e8826566421fb9d2ad138aaf3e7f9a3f075"
+    },
+    {
+      "path": "/Users/jasonpoindexter/Downloads/open-play-render-clock-native-initial-complete.f32",
+      "sha256": "6a6d77ce74d9b37e8f5fcd4ac2d4a92aa6498bbfc25527a97a51741923b05572"
+    }
+  ],
+  "product_ASAR": {
+    "path": "local-evidence/desktop-builds/0.1.5/Open Play Test-darwin-arm64/Open Play Test.app/Contents/Resources/app.asar",
+    "sha256": "251bcc16caf9cfb42a3967db058717373a8c6fcb9ff97d56c330058ec8301b03",
+    "unchanged": true
+  },
+  "production_changed": false,
+  "old_capture_repaired": false,
+  "cleanup": {
+    "host_exit": 0,
+    "no_listener_18786": true,
+    "exact_owned_Electron_executable_absent": true
+  },
+  "limits": [
+    "Actual engine/WASM fixture in separate Electron diagnostic, not a rebuilt main product or physical controller.",
+    "New valid clock capture does not explain earlier anomaly or validate old timestamps.",
+    "Separately scheduled automation/global aliases may share a backend.",
+    "Five unaccepted cases have ambiguous markers, not five established audio bugs.",
+    "No musical/reverse/loop/Stem Slip/long-session/reference/full-parity acceptance."
+  ]
+}

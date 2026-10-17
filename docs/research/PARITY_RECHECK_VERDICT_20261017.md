@@ -35,11 +35,17 @@ Three further reproduced defects were corrected: named options displaying Custom
 
 These results close the listed defaultCC happy-path evidence gaps; they do not establish every encoding/compound/error/resource/Reduced Motion case, all 72 Video/full REQ-516/26 manual groups, native, physical or current-reference equivalence. The older9+3overlay and14+4coreVideo runs retain original candidate identities. The desktop0.1.5 package is unchanged.
 
+## New keylock/cursor clock evidence
+
+The [new native evidence review](ENGINE_RENDER_CLOCK_NATIVE_EVIDENCE_REVIEW.md) independently checks an actual separate Electron production-engine/WASM run. The strict capture and calibration pass; **five of ten cases** satisfy all criteria. Five remain unaccepted because seven position-marker probes lack uniqueness. Every pitch/gap/control interval passes, and all 26 confident probes including calibration fall within 10 ms. This is not a complete keylock pass or evidence of five audio defects.
+
+All 7,701 rows, 985,728 actual parameter values and complete four-channel PCM were inspected; maximum scheduled-value/global/step residual is 0.0625 sample within the declared Float32 budget. This is one good observation, not an explanation or repair of the old globally failed run. Its original zero-accepted result remains unchanged. Production engine, marker/oracle, old harness and desktop 0.1.5 package remain unchanged. Common-mode, first-sample, musical/compound, main-product, physical and reference behavior remain open.
+
 ## Done and re-entry
 
 The real Done criterion is that every reconciled requirement executes on the identified deliverable with the expected visible/audio/storage/device outcome, including failures and compound states. That criterion has not been met. No full-feature, requirement or release-case parity pass is awarded; nine beta deltas remain separately scoped. Counts describe evidence accounting, not a completion percentage.
 
-Now: preserve the corrected matrix and synchronize the plan/private records/Claude handoff. Next: remaining core Video commands and complete encoding/assignment/hold/conflict/error/resource/Reduced Motion workflows, full REQ-516/26 manual groups; then preserve 0.1.5 and package an approved local desktop candidate for actual native MIDI/reload/audio. Later: the broader backend, DSP-quality, visual and hardware gaps above. Full Claude completeness audit remains unlaunched; the updated handoff retains the original prompt byte-exact.
+Now: preserve the valid new clock evidence and unchanged failed predecessors. Next: improve marker information/calibration with fixed confidence/position/pitch/gap gates and a separate declared cohort; then preserve 0.1.5 and package the already-approved desktop test candidate for actual main-app MIDI/reload/audio. Remaining core Video, encoding/compound/error/resource and full REQ-516/manual-group acceptance stays open. Later: the broader backend, DSP-quality, visual and hardware gaps above. Full Claude completeness audit remains unlaunched; the updated handoff retains the original prompt byte-exact.
 
 Skills applied: use, gap-analysis, dec-quality-testing, adversarial-verify, claude-codex-handoff, verified-done.
 

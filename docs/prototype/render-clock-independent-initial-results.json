@@ -1,0 +1,278 @@
+{
+  "scope": "Controlled actual validator/processor tests; no actual AudioParam/native/browser/engine audio/cursor acceptance. Schedule-corruption RED is a declaration-validator gap, not proof current generated schedule is wrong.",
+  "passed": 6,
+  "failed": 7,
+  "checks": [
+    {
+      "name": "Complete explicit requested schedule passes without mutating retained evidence",
+      "passed": true,
+      "evidence": {
+        "parameterSamples": 384,
+        "globalMismatch": 0
+      }
+    },
+    {
+      "name": "Reject inconsistent declared schedule: start time one sample later",
+      "passed": false,
+      "evidence": {
+        "plan": {
+          "startFrame": 1024,
+          "endFrame": 2647024,
+          "startTime": 0.023242630385487528,
+          "endTime": 60.023219954648525,
+          "fromValue": 0,
+          "endValue": 2646000,
+          "sampleRate": 44100,
+          "toleranceFrames": 0.25
+        },
+        "actual": {
+          "passed": true,
+          "capturePassed": true,
+          "parameterContinuous": true,
+          "errors": []
+        }
+      },
+      "error": "A malformed actual automation declaration cannot earn a passing diagnostic\n\ntrue !== false\n"
+    },
+    {
+      "name": "Reject inconsistent declared schedule: end time one sample later",
+      "passed": false,
+      "evidence": {
+        "plan": {
+          "startFrame": 1024,
+          "endFrame": 2647024,
+          "startTime": 0.023219954648526078,
+          "endTime": 60.02324263038549,
+          "fromValue": 0,
+          "endValue": 2646000,
+          "sampleRate": 44100,
+          "toleranceFrames": 0.25
+        },
+        "actual": {
+          "passed": true,
+          "capturePassed": true,
+          "parameterContinuous": true,
+          "errors": []
+        }
+      },
+      "error": "A malformed actual automation declaration cannot earn a passing diagnostic\n\ntrue !== false\n"
+    },
+    {
+      "name": "Reject inconsistent declared schedule: nonzero automation starting value",
+      "passed": false,
+      "evidence": {
+        "plan": {
+          "startFrame": 1024,
+          "endFrame": 2647024,
+          "startTime": 0.023219954648526078,
+          "endTime": 60.023219954648525,
+          "fromValue": 1,
+          "endValue": 2646000,
+          "sampleRate": 44100,
+          "toleranceFrames": 0.25
+        },
+        "actual": {
+          "passed": true,
+          "capturePassed": true,
+          "parameterContinuous": true,
+          "errors": []
+        }
+      },
+      "error": "A malformed actual automation declaration cannot earn a passing diagnostic\n\ntrue !== false\n"
+    },
+    {
+      "name": "Reject inconsistent declared schedule: wrong automation endpoint value",
+      "passed": false,
+      "evidence": {
+        "plan": {
+          "startFrame": 1024,
+          "endFrame": 2647024,
+          "startTime": 0.023219954648526078,
+          "endTime": 60.023219954648525,
+          "fromValue": 0,
+          "endValue": 2645999,
+          "sampleRate": 44100,
+          "toleranceFrames": 0.25
+        },
+        "actual": {
+          "passed": true,
+          "capturePassed": true,
+          "parameterContinuous": true,
+          "errors": []
+        }
+      },
+      "error": "A malformed actual automation declaration cannot earn a passing diagnostic\n\ntrue !== false\n"
+    },
+    {
+      "name": "Reject inconsistent declared schedule: missing requested time",
+      "passed": false,
+      "evidence": {
+        "plan": {
+          "startFrame": 1024,
+          "endFrame": 2647024,
+          "endTime": 60.023219954648525,
+          "fromValue": 0,
+          "endValue": 2646000,
+          "sampleRate": 44100,
+          "toleranceFrames": 0.25
+        },
+        "actual": {
+          "passed": true,
+          "capturePassed": true,
+          "parameterContinuous": true,
+          "errors": []
+        }
+      },
+      "error": "A malformed actual automation declaration cannot earn a passing diagnostic\n\ntrue !== false\n"
+    },
+    {
+      "name": "Reject inconsistent declared schedule: nonfinite requested time",
+      "passed": false,
+      "evidence": {
+        "plan": {
+          "startFrame": 1024,
+          "endFrame": 2647024,
+          "startTime": 0.023219954648526078,
+          "endTime": "NaN",
+          "fromValue": 0,
+          "endValue": 2646000,
+          "sampleRate": 44100,
+          "toleranceFrames": 0.25
+        },
+        "actual": {
+          "passed": true,
+          "capturePassed": true,
+          "parameterContinuous": true,
+          "errors": []
+        }
+      },
+      "error": "A malformed actual automation declaration cannot earn a passing diagnostic\n\ntrue !== false\n"
+    },
+    {
+      "name": "Reject inconsistent declared schedule: inherited requested schedule",
+      "passed": false,
+      "evidence": {
+        "plan": {
+          "startFrame": 1024,
+          "endFrame": 2647024,
+          "sampleRate": 44100,
+          "toleranceFrames": 0.25
+        },
+        "actual": {
+          "passed": true,
+          "capturePassed": true,
+          "parameterContinuous": true,
+          "errors": []
+        }
+      },
+      "error": "A malformed actual automation declaration cannot earn a passing diagnostic\n\ntrue !== false\n"
+    },
+    {
+      "name": "The predeclared quarter-frame measured-value boundary is preserved",
+      "passed": true,
+      "evidence": {
+        "0.25": {
+          "passed": true,
+          "maxGlobalError": 0.25,
+          "parameterContinuous": true
+        },
+        "0.5": {
+          "passed": false,
+          "maxGlobalError": 0.5,
+          "parameterContinuous": true
+        }
+      }
+    },
+    {
+      "name": "A whole-row parameter jump cannot cancel against a following recovery row",
+      "passed": true,
+      "evidence": {
+        "discontinuities": [
+          {
+            "sequence": 65,
+            "index": 0,
+            "previous": 7295,
+            "value": 7297,
+            "error": 1
+          },
+          {
+            "sequence": 66,
+            "index": 0,
+            "previous": 7424,
+            "value": 7424,
+            "error": 1
+          }
+        ],
+        "mismatchedSamples": 128
+      }
+    },
+    {
+      "name": "Coherent alias changes cannot repair the unchanged original duplicate-frame gate",
+      "passed": true,
+      "evidence": {
+        "captureErrors": [
+          {
+            "expectedFrame": 8320,
+            "actualFrame": 8192,
+            "expectedSequence": 65,
+            "actualSequence": 65,
+            "inputChannels": [
+              2,
+              2
+            ]
+          },
+          {
+            "expectedFrame": 8320,
+            "actualFrame": 8448,
+            "expectedSequence": 66,
+            "actualSequence": 66,
+            "inputChannels": [
+              2,
+              2
+            ]
+          }
+        ],
+        "parameterContinuous": true
+      }
+    },
+    {
+      "name": "Missing after snapshots and within-callback aliases fail closed",
+      "passed": true,
+      "evidence": {
+        "noSnapshotSubstitution": true
+      }
+    },
+    {
+      "name": "Actual producer retains constant-one-value arrays, all four PCM buses and terminal fence",
+      "passed": true,
+      "evidence": {
+        "actualClockLengths": [
+          1,
+          128
+        ],
+        "originalPCMPreserved": true,
+        "fence": {
+          "type": "finished",
+          "id": "f",
+          "lastFrame": 8448,
+          "lastSequence": 65,
+          "clockAfter": {
+            "frame": 8320,
+            "time": 0.18866213151927438,
+            "frameGlobal": 8320,
+            "timeGlobal": 0.18866213151927438
+          }
+        }
+      }
+    }
+  ],
+  "sourceHashes": {
+    "prototype/render-clock-capture-worklet.js": "3cf2d7c6e4db2d3f287edb5f2fb242aad2c4e460f3a065306282da1bc4709094",
+    "prototype/keylock-engine-render-clock-harness.js": "5db1b8d3340628f1d0a007ca13990713e58b586f2d070974cc5302cb798764b1",
+    "prototype/keylock-engine-render-clock-harness.html": "80015c224688f158719e721b1d5a4c3bdd63aff039fa1be027e23002a189f978",
+    "scripts/test_render_clock_capture.mjs": "00b49c6c8cd83cbe29d3d9b04cbea0e542cca0c79cd14c32ec495be4c5ba08e4",
+    "scripts/run_native_render_clock_harness.cjs": "d7bfeec89b34bdfa9faeb2974ad034d9d9de8bd3735466e162546b664ebd7767",
+    "prototype/keylock-cursor-capture-worklet.js": "3b605149cb5b6adec647115c25c18818aa5bcb0fe38d2c11214ea81047594a92",
+    "prototype/keylock-engine-cursor-harness.js": "b8e45417bce1fc9411d58ad02416c751c73750339d8792eca5384f73def622a9"
+  }
+}

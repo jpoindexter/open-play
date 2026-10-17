@@ -14,6 +14,10 @@ The newer browser source has actual four-deck Key Shift and saved-mapping audio 
 
 Core Video MIDI now has [functional review](../../docs/prototype/VIDEO_MIDI_FUNCTIONAL_REVIEW.md):14initial/4actual-reload browser checks,37saved mappings and20wholeGPU PNGs. Independent review corrected compound dispatch and held edges. The overlay source registers 28 additional targets and visible-control assignment. Prior scoped9/3 browser evidence retains its original checkpoint. The newer [overlay matrix](../../docs/prototype/VIDEO_OVERLAY_MIDI_MATRIX_REVIEW.md) executes21initial/5actualreload checks with29savedmaps and115wholePNGs, including all28defaultCC target witnesses and a non-first owner reopen regression. Three further editor/MIDI name/feedback/ownership defects were corrected. Other encodings/compound/error paths and full72target workflows remain open. Some core commands, physical/native transfer and full REQ-516 remain open.
 
+## New scheduled-clock engine diagnostic
+
+A separate official Electron host executes the unchanged production engine/WASM and a new test-only clock observer. [Whole original review](../../docs/research/ENGINE_RENDER_CLOCK_NATIVE_EVIDENCE_REVIEW.md): valid full capture/calibration, 5/10 bounded cursor cases, all eleven pitch/control intervals pass. Five cases remain unaccepted solely due to seven nonunique marker probes. All 985,728 parameter values and four-channel PCM/7,701 rows were independently inspected. This does not explain or repair the older globally failed run, prove common-mode freedom or accept the main packaged app, physical/musical/compound/reference behavior. No production engine or native bundle changes.
+
 ## Executed observations and accounting: separate phases
 
 - This recheck: official production download/manual/product/beta pages were opened and REA re-read installed Info.plist identity as4.0.10.213; no reference runtime comparison or repeated deep Ghidra import. See REA_PARITY_RECHECK_IDENTITY_20261017.json.

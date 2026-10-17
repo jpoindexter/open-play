@@ -1,0 +1,90 @@
+{
+  "frozen_at": "2026-10-17T15:01:22.902778+00:00",
+  "git_checkpoint": "9410f0ab61a79deac8408b659c09a46f8fc4ff04",
+  "kind": "PRE_RUN_TEST_ONLY_RENDER_CLOCK_COHORT",
+  "source_hashes": [
+    {
+      "path": "prototype/render-clock-capture-worklet.js",
+      "sha256": "00ca498588fae8f2e19728139f1d38cf40d7480cb48e35645436bddbca372627"
+    },
+    {
+      "path": "prototype/keylock-engine-render-clock-harness.js",
+      "sha256": "5db1b8d3340628f1d0a007ca13990713e58b586f2d070974cc5302cb798764b1"
+    },
+    {
+      "path": "prototype/keylock-engine-render-clock-harness.html",
+      "sha256": "80015c224688f158719e721b1d5a4c3bdd63aff039fa1be027e23002a189f978"
+    },
+    {
+      "path": "scripts/run_native_render_clock_harness.cjs",
+      "sha256": "d7bfeec89b34bdfa9faeb2974ad034d9d9de8bd3735466e162546b664ebd7767"
+    },
+    {
+      "path": "scripts/test_render_clock_capture.mjs",
+      "sha256": "00b49c6c8cd83cbe29d3d9b04cbea0e542cca0c79cd14c32ec495be4c5ba08e4"
+    },
+    {
+      "path": "prototype/engine.js",
+      "sha256": "b4683c245c6314432c06f891e85106cf0a1a5c0a615435516930ab5b38f64adf"
+    },
+    {
+      "path": "prototype/keylock-cursor-capture-worklet.js",
+      "sha256": "3b605149cb5b6adec647115c25c18818aa5bcb0fe38d2c11214ea81047594a92"
+    },
+    {
+      "path": "prototype/keylock-engine-cursor-harness.js",
+      "sha256": "b8e45417bce1fc9411d58ad02416c751c73750339d8792eca5384f73def622a9"
+    },
+    {
+      "path": "prototype/keylock-cursor-analysis.js",
+      "sha256": "aadf86b0f524af1fa4a4b30e69214f00fe3c096ecedfc11716d56da982c7b577"
+    },
+    {
+      "path": "prototype/keylock-release-analysis.js",
+      "sha256": "2957a90303441cade061107affaee8b3ae4b68d3724fff72a5a9ca1ac30b6e5f"
+    },
+    {
+      "path": "docs/research/RENDER_CLOCK_DIAGNOSTIC_PLAN_20261017.md",
+      "sha256": "500a8511e136f0cbcf417fc348520cdd2046c9767f983eb3c667fc257448a7c9"
+    }
+  ],
+  "preserved_original_failures": [
+    {
+      "path": "docs/prototype/engine-cursor-native-initial-results.json",
+      "sha256": "98f0147512f10a86c302f47dccd766bdf0689d3ab66cab5506747758c28235a8"
+    },
+    {
+      "path": "local-evidence/engine-cursor-native-initial/complete.f32",
+      "sha256": "189c5708ef1e35719563f5a0e2011ec737f6c9e5107326d1be7ebb1b5985dc52"
+    }
+  ],
+  "controlled_evidence": [
+    {
+      "path": "docs/prototype/render-clock-schedule-parent-corrected-results.json",
+      "sha256": "40436361f468d8638b6eea3d13a5ae682071c9f1da02fa7277e27ed97520625d"
+    },
+    {
+      "path": "docs/prototype/render-clock-independent-final-results.json",
+      "sha256": "6d4cbdf729efd5ac9906edff2a44b21d1cbdd13bc425726e811591a0ec5b9f82"
+    },
+    {
+      "path": "docs/prototype/render-clock-export-independent-final-results.json",
+      "sha256": "5a5ec2dffbd185a362b7fb32dce005baa1eef700c591df036a39813484c3eb34"
+    }
+  ],
+  "full_parity_verified": false,
+  "new_native_acceptance": false,
+  "production_modified": false,
+  "product_bundle_modified": false,
+  "run_pending": true,
+  "clock_budget_samples": 0.25,
+  "clock_budget_boundary": "Float32 measured-value agreement; not hardware timing precision or common-mode exclusion",
+  "gates_unchanged": [
+    "original strict fullarmed capture",
+    "barcode correlation>=.8",
+    "uniqueness>=.04",
+    "cursor<=10ms",
+    "first pitch<=30ms",
+    "gaps<=20ms"
+  ]
+}
