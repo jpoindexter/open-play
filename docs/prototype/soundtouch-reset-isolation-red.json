@@ -1,0 +1,42 @@
+{
+  "scope": "Actual pinned SoundTouch core; incomplete prior input then reset to silence. This is an upstream reset/isolation contract, not a defect claim about unchanged Open Play.",
+  "fresh": false,
+  "checks": [
+    {
+      "sampleRate": 44100,
+      "reset": "publisher-default-clear",
+      "before": {
+        "input": 0,
+        "output": 0
+      },
+      "after": {
+        "input": 0,
+        "output": 0
+      },
+      "frames": 13497,
+      "nonzero": 704,
+      "peak": 0.25,
+      "outputSHA256": "fb061aae3e19324cc98a96b10f62d6ed17f1e4be298af03a61587520e507177a",
+      "passed": false
+    },
+    {
+      "sampleRate": 48000,
+      "reset": "publisher-default-clear",
+      "before": {
+        "input": 0,
+        "output": 0
+      },
+      "after": {
+        "input": 0,
+        "output": 0
+      },
+      "frames": 14688,
+      "nonzero": 768,
+      "peak": 0.25,
+      "outputSHA256": "6fc4a1716e933dbfe8670d7bc062898813f092c580485e36662162c7af75d653",
+      "passed": false
+    }
+  ],
+  "passed": 0,
+  "failed": 2
+}

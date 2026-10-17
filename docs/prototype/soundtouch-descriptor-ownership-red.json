@@ -1,0 +1,20 @@
+{
+  "scope": "Caller replacing a borrowed channel descriptor must not silently replace future epochs; underlying PCM remains borrowed immutable data.",
+  "checks": [
+    {
+      "sampleRate": 44100,
+      "originalImmutablePCMUnchanged": true,
+      "mean": -0.25,
+      "passed": false
+    },
+    {
+      "sampleRate": 48000,
+      "originalImmutablePCMUnchanged": true,
+      "mean": -0.25,
+      "passed": false
+    }
+  ],
+  "moduleSHA256": "f05d24db0567cac539c4a8fc0565b54730e70cd4ffda0b7e0dbd0eb2be460f44",
+  "passed": 0,
+  "failed": 2
+}

@@ -1,0 +1,124 @@
+{
+  "scope": "Actual published core through experimental serial transport; independent command ownership and DC/source descriptor boundaries. No actual browser/deadline/pitch/cursor/EOS tail/native/music acceptance.",
+  "inputs": [
+    {
+      "path": "experiments/keylock-soundtouch/pull-transport-boundaries.mjs",
+      "sha256": "f05d24db0567cac539c4a8fc0565b54730e70cd4ffda0b7e0dbd0eb2be460f44"
+    },
+    {
+      "path": "scripts/test_soundtouch_transport_independent_review.mjs",
+      "sha256": "428625e28c2c0b97d50026edcb72f0647aca292cbf98066d6ada51661707b3e4"
+    }
+  ],
+  "checks": [
+    {
+      "name": "Earlier replacement inherits the surviving start, never discarded future seek",
+      "passed": true,
+      "evidence": {
+        "current": {
+          "frame": 1000,
+          "position": 0.012653061224489795,
+          "playing": true,
+          "generation": 3,
+          "rate": 1.08,
+          "semitones": 2,
+          "keylock": true,
+          "effectiveSemitones": 2,
+          "ready": true,
+          "superseded": [
+            2
+          ],
+          "preparationMilliseconds": 1.153334000000001,
+          "positionKind": "nominal-not-measured-audible",
+          "counters": [
+            {
+              "originFrame": 0,
+              "sourceCursorFrame": 7168,
+              "realFramesFed": 7168,
+              "paddingFramesFed": 0,
+              "paddingLimit": 88200,
+              "generatedFrames": 4048,
+              "extractedFrames": 517,
+              "discardedPrerollFrames": 517,
+              "outputFramesReady": 3531
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Rejected replacement leaves pending state and prepared ownership untouched",
+      "passed": true,
+      "evidence": {
+        "same": true
+      }
+    },
+    {
+      "name": "Replacing an uncommitted start at the same frame with pause never emits it",
+      "passed": true,
+      "evidence": {
+        "output": {
+          "sum": 0,
+          "n": 20000,
+          "mean": 0,
+          "peak": 0
+        }
+      }
+    },
+    {
+      "name": "Rapid epoch crossfades of identical DC preserve gain without overshoot",
+      "passed": true,
+      "evidence": {
+        "range": [
+          0.2499999850988388,
+          0.25
+        ]
+      }
+    },
+    {
+      "name": "Caller channel-list reassignment cannot silently replace the loaded source",
+      "passed": false,
+      "evidence": {
+        "before": {
+          "sum": 1102.5,
+          "n": 4410,
+          "mean": 0.25,
+          "peak": 0.25
+        },
+        "after": {
+          "sum": -1102.5,
+          "n": 4410,
+          "mean": -0.25,
+          "peak": 0.25
+        }
+      },
+      "error": {
+        "name": "AssertionError",
+        "message": "A source descriptor replacement escaped the original loaded-source ownership"
+      }
+    },
+    {
+      "name": "Caller channel-list growth cannot change future epoch geometry",
+      "passed": false,
+      "evidence": {
+        "reportedChannels": 1,
+        "preparedMappings": [
+          {
+            "source": 0,
+            "channel": 0
+          },
+          {
+            "source": 0,
+            "channel": 2
+          }
+        ]
+      },
+      "error": {
+        "name": "AssertionError",
+        "message": "Future epoch geometry changed after constructor validation\n\n2 !== 1\n"
+      }
+    }
+  ],
+  "passed": 4,
+  "failed": 2
+}

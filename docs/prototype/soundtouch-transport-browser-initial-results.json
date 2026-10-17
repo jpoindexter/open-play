@@ -1,0 +1,920 @@
+{
+  "startedAt": "2026-10-17T17:05:34.820Z",
+  "cases": [
+    {
+      "id": "single-44100",
+      "sampleRate": 44100,
+      "sources": 1,
+      "events": [],
+      "errors": [
+        {
+          "name": "ReferenceError",
+          "message": "performance is not defined",
+          "stack": "ReferenceError: performance is not defined\n    at node.port.onmessage (http://127.0.0.1:18814/transport-harness.mjs:17:93)"
+        }
+      ],
+      "criteriaPassed": false,
+      "environment": {
+        "sampleRate": 44100,
+        "baseLatency": 0.005804988662131519,
+        "outputLatency": 0,
+        "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36"
+      },
+      "inputHashes": [
+        [
+          "1a322a5ef14991844eb546ad2d16897112d577fb8cf13093849fc6d8212f1552",
+          "8f2ae915b3ca1a89bfac214f51b9147e13ba19c0247e148b46bb6e82a017678d"
+        ]
+      ],
+      "load": {
+        "loaded": true,
+        "frame": 6656,
+        "sourceBytes": 11289600
+      },
+      "arm": {
+        "frame": 6912,
+        "sequence": 0,
+        "frames": 0,
+        "armed": true
+      },
+      "startFrame": 51072,
+      "commands": [
+        {
+          "type": "start",
+          "position": 0,
+          "rate": 1.08,
+          "semitones": 0,
+          "keylock": true,
+          "frame": 51072
+        },
+        {
+          "type": "update",
+          "semitones": 2,
+          "frame": 183372
+        },
+        {
+          "type": "seek",
+          "position": 20,
+          "frame": 315672
+        },
+        {
+          "type": "pause",
+          "frame": 447972
+        },
+        {
+          "type": "start",
+          "rate": 0.75,
+          "semitones": -12,
+          "frame": 470022
+        },
+        {
+          "type": "update",
+          "rate": 1.25,
+          "semitones": 0,
+          "keylock": false,
+          "frame": 602322
+        },
+        {
+          "type": "pause",
+          "frame": 734622
+        }
+      ],
+      "stop": {
+        "frame": 7424,
+        "sequence": 4,
+        "frames": 512,
+        "armed": false
+      },
+      "blocks": [
+        {
+          "sequence": 0,
+          "frame": 6912,
+          "frames": 128
+        },
+        {
+          "sequence": 1,
+          "frame": 7040,
+          "frames": 128
+        },
+        {
+          "sequence": 2,
+          "frame": 7168,
+          "frames": 128
+        },
+        {
+          "sequence": 3,
+          "frame": 7296,
+          "frames": 128
+        }
+      ],
+      "capture": {
+        "frames": 512,
+        "channels": 4,
+        "sampleRate": 44100,
+        "firstFrame": 6912,
+        "nonfinite": 0,
+        "contiguous": true,
+        "maxFrameTagError": 510.76171875,
+        "valid": false,
+        "sha256": "c61192486fa2ff8bd7fbd1a83fd831676a9becb8d5f702b8007bdc5b721e4cc5",
+        "retained": {
+          "path": "local-evidence/soundtouch-transport-browser-initial/single-44100.f32",
+          "bytes": 8192,
+          "sha256": "c61192486fa2ff8bd7fbd1a83fd831676a9becb8d5f702b8007bdc5b721e4cc5"
+        }
+      },
+      "measurements": [],
+      "silence": [],
+      "disposed": {
+        "sampleRate": 44100,
+        "nextFrame": 7680,
+        "generation": 0,
+        "disposed": true,
+        "state": {
+          "frame": 7680,
+          "position": 0,
+          "playing": false,
+          "rate": 1,
+          "semitones": 0,
+          "keylock": true,
+          "effectiveSemitones": 0,
+          "anchorPosition": 0,
+          "positionKind": "nominal-not-measured-audible"
+        },
+        "sourceBytes": 0,
+        "retainedWholeSources": false,
+        "memoryLimit": "Whole caller-provided PCM plus bounded16epochs; opaque DSP heaps not counted.",
+        "pcmOwnership": "Descriptors are snapshotted; PCM arrays are borrowed immutable data for the transport lifetime. The worklet owns transferred storage.",
+        "renderedFrames": 1024,
+        "retiredEpochs": 0,
+        "retiredSummaries": [],
+        "retiredSummaryLimit": 64,
+        "clockRetention": "Last two applied anchors; older queries reject explicitly.",
+        "epochs": [],
+        "scope": "Forward pull-based experiment; nominal output endpoint, not measured audible source position or proved EOS tail preservation."
+      }
+    },
+    {
+      "id": "five-44100",
+      "sampleRate": 44100,
+      "sources": 5,
+      "events": [],
+      "errors": [
+        {
+          "name": "ReferenceError",
+          "message": "performance is not defined",
+          "stack": "ReferenceError: performance is not defined\n    at node.port.onmessage (http://127.0.0.1:18814/transport-harness.mjs:17:93)"
+        }
+      ],
+      "criteriaPassed": false,
+      "environment": {
+        "sampleRate": 44100,
+        "baseLatency": 0.005804988662131519,
+        "outputLatency": 0,
+        "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36"
+      },
+      "inputHashes": [
+        [
+          "1a322a5ef14991844eb546ad2d16897112d577fb8cf13093849fc6d8212f1552",
+          "8f2ae915b3ca1a89bfac214f51b9147e13ba19c0247e148b46bb6e82a017678d"
+        ],
+        [
+          "1a322a5ef14991844eb546ad2d16897112d577fb8cf13093849fc6d8212f1552",
+          "8f2ae915b3ca1a89bfac214f51b9147e13ba19c0247e148b46bb6e82a017678d"
+        ],
+        [
+          "1a322a5ef14991844eb546ad2d16897112d577fb8cf13093849fc6d8212f1552",
+          "8f2ae915b3ca1a89bfac214f51b9147e13ba19c0247e148b46bb6e82a017678d"
+        ],
+        [
+          "1a322a5ef14991844eb546ad2d16897112d577fb8cf13093849fc6d8212f1552",
+          "8f2ae915b3ca1a89bfac214f51b9147e13ba19c0247e148b46bb6e82a017678d"
+        ],
+        [
+          "1a322a5ef14991844eb546ad2d16897112d577fb8cf13093849fc6d8212f1552",
+          "8f2ae915b3ca1a89bfac214f51b9147e13ba19c0247e148b46bb6e82a017678d"
+        ]
+      ],
+      "load": {
+        "loaded": true,
+        "frame": 32256,
+        "sourceBytes": 56448000
+      },
+      "arm": {
+        "frame": 32512,
+        "sequence": 0,
+        "frames": 0,
+        "armed": true
+      },
+      "startFrame": 76672,
+      "commands": [
+        {
+          "type": "start",
+          "position": 0,
+          "rate": 1.08,
+          "semitones": 0,
+          "keylock": true,
+          "frame": 76672
+        },
+        {
+          "type": "update",
+          "semitones": 2,
+          "frame": 208972
+        },
+        {
+          "type": "seek",
+          "position": 20,
+          "frame": 341272
+        },
+        {
+          "type": "pause",
+          "frame": 473572
+        },
+        {
+          "type": "start",
+          "rate": 0.75,
+          "semitones": -12,
+          "frame": 495622
+        },
+        {
+          "type": "update",
+          "rate": 1.25,
+          "semitones": 0,
+          "keylock": false,
+          "frame": 627922
+        },
+        {
+          "type": "pause",
+          "frame": 760222
+        }
+      ],
+      "stop": {
+        "frame": 33024,
+        "sequence": 4,
+        "frames": 512,
+        "armed": false
+      },
+      "blocks": [
+        {
+          "sequence": 0,
+          "frame": 32512,
+          "frames": 128
+        },
+        {
+          "sequence": 1,
+          "frame": 32640,
+          "frames": 128
+        },
+        {
+          "sequence": 2,
+          "frame": 32768,
+          "frames": 128
+        },
+        {
+          "sequence": 3,
+          "frame": 32896,
+          "frames": 128
+        }
+      ],
+      "capture": {
+        "frames": 512,
+        "channels": 12,
+        "sampleRate": 44100,
+        "firstFrame": 32512,
+        "nonfinite": 0,
+        "contiguous": true,
+        "maxFrameTagError": 1011.80859375,
+        "valid": false,
+        "sha256": "458c19893dedd11fe083b2003f868628acf0a0c95891254e52cd24c1262a7c46",
+        "retained": {
+          "path": "local-evidence/soundtouch-transport-browser-initial/five-44100.f32",
+          "bytes": 24576,
+          "sha256": "458c19893dedd11fe083b2003f868628acf0a0c95891254e52cd24c1262a7c46"
+        }
+      },
+      "measurements": [],
+      "silence": [],
+      "disposed": {
+        "sampleRate": 44100,
+        "nextFrame": 35328,
+        "generation": 0,
+        "disposed": true,
+        "state": {
+          "frame": 35328,
+          "position": 0,
+          "playing": false,
+          "rate": 1,
+          "semitones": 0,
+          "keylock": true,
+          "effectiveSemitones": 0,
+          "anchorPosition": 0,
+          "positionKind": "nominal-not-measured-audible"
+        },
+        "sourceBytes": 0,
+        "retainedWholeSources": false,
+        "memoryLimit": "Whole caller-provided PCM plus bounded16epochs; opaque DSP heaps not counted.",
+        "pcmOwnership": "Descriptors are snapshotted; PCM arrays are borrowed immutable data for the transport lifetime. The worklet owns transferred storage.",
+        "renderedFrames": 3072,
+        "retiredEpochs": 0,
+        "retiredSummaries": [],
+        "retiredSummaryLimit": 64,
+        "clockRetention": "Last two applied anchors; older queries reject explicitly.",
+        "epochs": [],
+        "scope": "Forward pull-based experiment; nominal output endpoint, not measured audible source position or proved EOS tail preservation."
+      }
+    },
+    {
+      "id": "single-48000",
+      "sampleRate": 48000,
+      "sources": 1,
+      "events": [],
+      "errors": [
+        {
+          "name": "ReferenceError",
+          "message": "performance is not defined",
+          "stack": "ReferenceError: performance is not defined\n    at node.port.onmessage (http://127.0.0.1:18814/transport-harness.mjs:17:93)"
+        }
+      ],
+      "criteriaPassed": false,
+      "environment": {
+        "sampleRate": 48000,
+        "baseLatency": 0.0058125,
+        "outputLatency": 0,
+        "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36"
+      },
+      "inputHashes": [
+        [
+          "08cf5c3160140b2c833e8f69094fec3e9c3656f6eb909d26ff80e895b6a787f8",
+          "21ed2d915e27476baf87b66b745955b360ce3d803bd5083b11c1889d0b86a6a5"
+        ]
+      ],
+      "load": {
+        "loaded": true,
+        "frame": 7936,
+        "sourceBytes": 12288000
+      },
+      "arm": {
+        "frame": 8192,
+        "sequence": 0,
+        "frames": 0,
+        "armed": true
+      },
+      "startFrame": 56320,
+      "commands": [
+        {
+          "type": "start",
+          "position": 0,
+          "rate": 1.08,
+          "semitones": 0,
+          "keylock": true,
+          "frame": 56320
+        },
+        {
+          "type": "update",
+          "semitones": 2,
+          "frame": 200320
+        },
+        {
+          "type": "seek",
+          "position": 20,
+          "frame": 344320
+        },
+        {
+          "type": "pause",
+          "frame": 488320
+        },
+        {
+          "type": "start",
+          "rate": 0.75,
+          "semitones": -12,
+          "frame": 512320
+        },
+        {
+          "type": "update",
+          "rate": 1.25,
+          "semitones": 0,
+          "keylock": false,
+          "frame": 656320
+        },
+        {
+          "type": "pause",
+          "frame": 800320
+        }
+      ],
+      "stop": {
+        "frame": 8704,
+        "sequence": 4,
+        "frames": 512,
+        "armed": false
+      },
+      "blocks": [
+        {
+          "sequence": 0,
+          "frame": 8192,
+          "frames": 128
+        },
+        {
+          "sequence": 1,
+          "frame": 8320,
+          "frames": 128
+        },
+        {
+          "sequence": 2,
+          "frame": 8448,
+          "frames": 128
+        },
+        {
+          "sequence": 3,
+          "frame": 8576,
+          "frames": 128
+        }
+      ],
+      "capture": {
+        "frames": 512,
+        "channels": 4,
+        "sampleRate": 48000,
+        "firstFrame": 8192,
+        "nonfinite": 0,
+        "contiguous": true,
+        "maxFrameTagError": 382.95849609375,
+        "valid": false,
+        "sha256": "43b82770e94de99caca49a9d4db5db6f0be1262d6e271ef39747317fbd0b5804",
+        "retained": {
+          "path": "local-evidence/soundtouch-transport-browser-initial/single-48000.f32",
+          "bytes": 8192,
+          "sha256": "43b82770e94de99caca49a9d4db5db6f0be1262d6e271ef39747317fbd0b5804"
+        }
+      },
+      "measurements": [],
+      "silence": [],
+      "disposed": {
+        "sampleRate": 48000,
+        "nextFrame": 8960,
+        "generation": 0,
+        "disposed": true,
+        "state": {
+          "frame": 8960,
+          "position": 0,
+          "playing": false,
+          "rate": 1,
+          "semitones": 0,
+          "keylock": true,
+          "effectiveSemitones": 0,
+          "anchorPosition": 0,
+          "positionKind": "nominal-not-measured-audible"
+        },
+        "sourceBytes": 0,
+        "retainedWholeSources": false,
+        "memoryLimit": "Whole caller-provided PCM plus bounded16epochs; opaque DSP heaps not counted.",
+        "pcmOwnership": "Descriptors are snapshotted; PCM arrays are borrowed immutable data for the transport lifetime. The worklet owns transferred storage.",
+        "renderedFrames": 1024,
+        "retiredEpochs": 0,
+        "retiredSummaries": [],
+        "retiredSummaryLimit": 64,
+        "clockRetention": "Last two applied anchors; older queries reject explicitly.",
+        "epochs": [],
+        "scope": "Forward pull-based experiment; nominal output endpoint, not measured audible source position or proved EOS tail preservation."
+      }
+    },
+    {
+      "id": "five-48000",
+      "sampleRate": 48000,
+      "sources": 5,
+      "events": [],
+      "errors": [
+        {
+          "name": "ReferenceError",
+          "message": "performance is not defined",
+          "stack": "ReferenceError: performance is not defined\n    at node.port.onmessage (http://127.0.0.1:18814/transport-harness.mjs:17:93)"
+        }
+      ],
+      "criteriaPassed": false,
+      "environment": {
+        "sampleRate": 48000,
+        "baseLatency": 0.0058125,
+        "outputLatency": 0,
+        "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36"
+      },
+      "inputHashes": [
+        [
+          "08cf5c3160140b2c833e8f69094fec3e9c3656f6eb909d26ff80e895b6a787f8",
+          "21ed2d915e27476baf87b66b745955b360ce3d803bd5083b11c1889d0b86a6a5"
+        ],
+        [
+          "08cf5c3160140b2c833e8f69094fec3e9c3656f6eb909d26ff80e895b6a787f8",
+          "21ed2d915e27476baf87b66b745955b360ce3d803bd5083b11c1889d0b86a6a5"
+        ],
+        [
+          "08cf5c3160140b2c833e8f69094fec3e9c3656f6eb909d26ff80e895b6a787f8",
+          "21ed2d915e27476baf87b66b745955b360ce3d803bd5083b11c1889d0b86a6a5"
+        ],
+        [
+          "08cf5c3160140b2c833e8f69094fec3e9c3656f6eb909d26ff80e895b6a787f8",
+          "21ed2d915e27476baf87b66b745955b360ce3d803bd5083b11c1889d0b86a6a5"
+        ],
+        [
+          "08cf5c3160140b2c833e8f69094fec3e9c3656f6eb909d26ff80e895b6a787f8",
+          "21ed2d915e27476baf87b66b745955b360ce3d803bd5083b11c1889d0b86a6a5"
+        ]
+      ],
+      "load": {
+        "loaded": true,
+        "frame": 38016,
+        "sourceBytes": 61440000
+      },
+      "arm": {
+        "frame": 38272,
+        "sequence": 0,
+        "frames": 0,
+        "armed": true
+      },
+      "startFrame": 86272,
+      "commands": [
+        {
+          "type": "start",
+          "position": 0,
+          "rate": 1.08,
+          "semitones": 0,
+          "keylock": true,
+          "frame": 86272
+        },
+        {
+          "type": "update",
+          "semitones": 2,
+          "frame": 230272
+        },
+        {
+          "type": "seek",
+          "position": 20,
+          "frame": 374272
+        },
+        {
+          "type": "pause",
+          "frame": 518272
+        },
+        {
+          "type": "start",
+          "rate": 0.75,
+          "semitones": -12,
+          "frame": 542272
+        },
+        {
+          "type": "update",
+          "rate": 1.25,
+          "semitones": 0,
+          "keylock": false,
+          "frame": 686272
+        },
+        {
+          "type": "pause",
+          "frame": 830272
+        }
+      ],
+      "stop": {
+        "frame": 38784,
+        "sequence": 4,
+        "frames": 512,
+        "armed": false
+      },
+      "blocks": [
+        {
+          "sequence": 0,
+          "frame": 38272,
+          "frames": 128
+        },
+        {
+          "sequence": 1,
+          "frame": 38400,
+          "frames": 128
+        },
+        {
+          "sequence": 2,
+          "frame": 38528,
+          "frames": 128
+        },
+        {
+          "sequence": 3,
+          "frame": 38656,
+          "frames": 128
+        }
+      ],
+      "capture": {
+        "frames": 512,
+        "channels": 12,
+        "sampleRate": 48000,
+        "firstFrame": 38272,
+        "nonfinite": 0,
+        "contiguous": true,
+        "maxFrameTagError": 1137.14453125,
+        "valid": false,
+        "sha256": "96e2b41c7400ef3d82580d7f97224a9296e92fd687b3b0fa45a11d437a2573e3",
+        "retained": {
+          "path": "local-evidence/soundtouch-transport-browser-initial/five-48000.f32",
+          "bytes": 24576,
+          "sha256": "96e2b41c7400ef3d82580d7f97224a9296e92fd687b3b0fa45a11d437a2573e3"
+        }
+      },
+      "measurements": [],
+      "silence": [],
+      "disposed": {
+        "sampleRate": 48000,
+        "nextFrame": 41600,
+        "generation": 0,
+        "disposed": true,
+        "state": {
+          "frame": 41600,
+          "position": 0,
+          "playing": false,
+          "rate": 1,
+          "semitones": 0,
+          "keylock": true,
+          "effectiveSemitones": 0,
+          "anchorPosition": 0,
+          "positionKind": "nominal-not-measured-audible"
+        },
+        "sourceBytes": 0,
+        "retainedWholeSources": false,
+        "memoryLimit": "Whole caller-provided PCM plus bounded16epochs; opaque DSP heaps not counted.",
+        "pcmOwnership": "Descriptors are snapshotted; PCM arrays are borrowed immutable data for the transport lifetime. The worklet owns transferred storage.",
+        "renderedFrames": 3584,
+        "retiredEpochs": 0,
+        "retiredSummaries": [],
+        "retiredSummaryLimit": 64,
+        "clockRetention": "Last two applied anchors; older queries reject explicitly.",
+        "epochs": [],
+        "scope": "Forward pull-based experiment; nominal output endpoint, not measured audible source position or proved EOS tail preservation."
+      }
+    }
+  ],
+  "fatalErrors": [],
+  "completed": true,
+  "full_parity_verified": false,
+  "plan": {
+    "declared_before_execution": "2026-10-17",
+    "scope": "Isolated actual-core AudioWorklet transport, not current app/native/reference acceptance. Four whole captures with actual PCM, producer clocks and scheduled AudioParam frame tags; no repaired labels or trimmed originals.",
+    "cases": [
+      {
+        "id": "single-44100",
+        "sampleRate": 44100,
+        "sources": 1
+      },
+      {
+        "id": "five-44100",
+        "sampleRate": 44100,
+        "sources": 5
+      },
+      {
+        "id": "single-48000",
+        "sampleRate": 48000,
+        "sources": 1
+      },
+      {
+        "id": "five-48000",
+        "sampleRate": 48000,
+        "sources": 5
+      }
+    ],
+    "fixture": "32seconds stereo Float32 .14sin(2*pi*f*i/sr+phase); first16s330/550Hz, remainder660/880Hz; phases.17/.53. Each of the five sources is an independent identical clone, not a real stem reconstruction test.",
+    "start_lead_seconds": 1,
+    "timeline": [
+      {
+        "type": "start",
+        "offset": 0,
+        "position": 0,
+        "rate": 1.08,
+        "semitones": 0,
+        "keylock": true
+      },
+      {
+        "type": "update",
+        "offset": 3,
+        "semitones": 2
+      },
+      {
+        "type": "seek",
+        "offset": 6,
+        "position": 20
+      },
+      {
+        "type": "pause",
+        "offset": 9
+      },
+      {
+        "type": "start",
+        "offset": 9.5,
+        "rate": 0.75,
+        "semitones": -12
+      },
+      {
+        "type": "update",
+        "offset": 12.5,
+        "rate": 1.25,
+        "semitones": 0,
+        "keylock": false
+      },
+      {
+        "type": "pause",
+        "offset": 15.5
+      }
+    ],
+    "measurements": [
+      {
+        "label": "neutral",
+        "window": [
+          0.5,
+          2.5
+        ],
+        "expectedHz": [
+          330,
+          550
+        ]
+      },
+      {
+        "label": "plus2",
+        "window": [
+          3.5,
+          5.5
+        ],
+        "expectedHz": [
+          370.4124759420931,
+          617.3541265701551
+        ]
+      },
+      {
+        "label": "seek-plus2",
+        "window": [
+          6.5,
+          8.5
+        ],
+        "expectedHz": [
+          740.8249518841862,
+          987.7666025122483
+        ]
+      },
+      {
+        "label": "resume-half",
+        "window": [
+          10,
+          12
+        ],
+        "expectedHz": [
+          330,
+          440
+        ]
+      },
+      {
+        "label": "keylock-off",
+        "window": [
+          13,
+          15
+        ],
+        "expectedHz": [
+          825,
+          1100
+        ]
+      }
+    ],
+    "silence_windows": [
+      [
+        9.05,
+        9.45
+      ],
+      [
+        15.55,
+        16
+      ]
+    ],
+    "capture_until_offset_seconds": 16.5,
+    "criteria": "All whole PCM finite; strict128frame sequence/frame continuity; per-sample scheduled frameTag vs producer frame residual<=.25sample (Float32);307Hz control error<=.01Hz; declared additional tone windows each<=1Hz and RMS>.001 on every source channel; pause windows exactlyzero; identical five-source fixtures produce byte-identical channels; seven command acks prepared before initial output frame. Preserve failures; complete capture is distinct from accepted case.",
+    "limits": "Not measured audible sample cursor, firstsample/latency, EOS tail preservation, music, nonidentical stem phase/reconstruction, long sessions, CPU budget, production engine/native/device or full reference parity. Whole PCM/source copies and16epoch bound are explicit experimental memory policy, not existing bounded-window app parity.",
+    "physical_output_muted": true,
+    "full_parity_verified": false
+  },
+  "servedSources": {
+    "cohort": "initial",
+    "scope": "Source bytes frozen once at server startup. One bare dependency import rewritten to a fixed local URL; no DSP algorithm changes.",
+    "routes": {
+      "/": {
+        "path": "experiments/keylock-soundtouch/transport.html",
+        "sourceSHA256": "4bd81c09ce2b77b2aaed5a662bcb7f9045e225d723018ab2e585a81a1d16c112",
+        "servedSHA256": "4bd81c09ce2b77b2aaed5a662bcb7f9045e225d723018ab2e585a81a1d16c112",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/transport-harness.mjs": {
+        "path": "experiments/keylock-soundtouch/transport-harness.mjs",
+        "sourceSHA256": "ceb55ec3f47f4510dfb734bcac5c730d8de37259f0fe79151472610337d49641",
+        "servedSHA256": "ceb55ec3f47f4510dfb734bcac5c730d8de37259f0fe79151472610337d49641",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/plan.json": {
+        "path": "docs/prototype/soundtouch-transport-browser-plan.json",
+        "sourceSHA256": "c9ff3e051dfe6b249cba3f30da728e3536367bde602e3c691c50d800b9feb7aa",
+        "servedSHA256": "c9ff3e051dfe6b249cba3f30da728e3536367bde602e3c691c50d800b9feb7aa",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/experiments/keylock-soundtouch/pull-transport.mjs": {
+        "path": "experiments/keylock-soundtouch/pull-transport.mjs",
+        "sourceSHA256": "8a91095c7cfc8e8c7171f09475a7863437ffadcb1345464c212a16490e840fd3",
+        "servedSHA256": "8a91095c7cfc8e8c7171f09475a7863437ffadcb1345464c212a16490e840fd3",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/experiments/keylock-soundtouch/pull-worklet.mjs": {
+        "path": "experiments/keylock-soundtouch/pull-worklet.mjs",
+        "sourceSHA256": "81c7ce9b120fdef3a47da33a784c8b2306c38698981a8828b2af21a951607969",
+        "servedSHA256": "81c7ce9b120fdef3a47da33a784c8b2306c38698981a8828b2af21a951607969",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/experiments/keylock-soundtouch/transport-capture.mjs": {
+        "path": "experiments/keylock-soundtouch/transport-capture.mjs",
+        "sourceSHA256": "355aac09a776361d2d10a1b9a18d8e771b33a307a850a43ac8b97ae115b0a980",
+        "servedSHA256": "355aac09a776361d2d10a1b9a18d8e771b33a307a850a43ac8b97ae115b0a980",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/AbstractSamplePipe.js": {
+        "path": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/AbstractSamplePipe.js",
+        "sourceSHA256": "d19086efe702bde780a282d71d5fd964a1003d01d07c77763fbc3ded2620a7f0",
+        "servedSHA256": "d19086efe702bde780a282d71d5fd964a1003d01d07c77763fbc3ded2620a7f0",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/CircularSampleBuffer.js": {
+        "path": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/CircularSampleBuffer.js",
+        "sourceSHA256": "889ff0fbba1dc94a18bb3c6615ed2b94d3a5d2a2a618b9857fca6b34183dd98f",
+        "servedSHA256": "889ff0fbba1dc94a18bb3c6615ed2b94d3a5d2a2a618b9857fca6b34183dd98f",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/FifoSampleBuffer.js": {
+        "path": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/FifoSampleBuffer.js",
+        "sourceSHA256": "907cad41629068acf14ba425f85324800d55693895eca03885d62b77ec59efba",
+        "servedSHA256": "907cad41629068acf14ba425f85324800d55693895eca03885d62b77ec59efba",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/RateTransposer.js": {
+        "path": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/RateTransposer.js",
+        "sourceSHA256": "90b15877dbba6689472139584dfff2c7d3863e72458fd9028ec80137941bf101",
+        "servedSHA256": "90b15877dbba6689472139584dfff2c7d3863e72458fd9028ec80137941bf101",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/SampleBuffer.js": {
+        "path": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/SampleBuffer.js",
+        "sourceSHA256": "4bf9cabb7141f22be55357adf1f669d671de3d7a69b5b8a90dffbf4348bad808",
+        "servedSHA256": "4bf9cabb7141f22be55357adf1f669d671de3d7a69b5b8a90dffbf4348bad808",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/SampleBufferAdapter.js": {
+        "path": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/SampleBufferAdapter.js",
+        "sourceSHA256": "cd5874e70ce27933aaf8846600f346a4fa89d709afafb0cb23ecf652505d02b4",
+        "servedSHA256": "cd5874e70ce27933aaf8846600f346a4fa89d709afafb0cb23ecf652505d02b4",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/SoundTouch.js": {
+        "path": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/SoundTouch.js",
+        "sourceSHA256": "c01a124ba0b0e20e19a0fa39f03ff558e367902bfd61f4505560ad2aeebc84f4",
+        "servedSHA256": "c01a124ba0b0e20e19a0fa39f03ff558e367902bfd61f4505560ad2aeebc84f4",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/Stretch.js": {
+        "path": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/Stretch.js",
+        "sourceSHA256": "5b0618f91b53387a03885aea361185ea6a4ab41b54f8f1b1fbce80c2153f0632",
+        "servedSHA256": "5b0618f91b53387a03885aea361185ea6a4ab41b54f8f1b1fbce80c2153f0632",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/StretchPipe.js": {
+        "path": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/StretchPipe.js",
+        "sourceSHA256": "1d769081e521e39b86bd9a36a6a955f7a786f836a79e38e6c2e42bc39d9e1f99",
+        "servedSHA256": "1d769081e521e39b86bd9a36a6a955f7a786f836a79e38e6c2e42bc39d9e1f99",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/index.js": {
+        "path": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/index.js",
+        "sourceSHA256": "9e6bcd84c753545d4aa08f851e9a3dff65c776ec3f34f832b8b78b5f80d435b1",
+        "servedSHA256": "9e6bcd84c753545d4aa08f851e9a3dff65c776ec3f34f832b8b78b5f80d435b1",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/interpolationStrategyRegistry.js": {
+        "path": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/interpolationStrategyRegistry.js",
+        "sourceSHA256": "3214eefba2f50990006ee9c4b5ea98aed72437ea1d2a9c1c70d0ce5c50288f57",
+        "servedSHA256": "3f85caef910546adc8e7a970b7053144ced03407b23e420ebd7c658d74b81434",
+        "importSpecifierOnlyRewrite": true
+      },
+      "/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/testFloatEqual.js": {
+        "path": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/testFloatEqual.js",
+        "sourceSHA256": "d48a30dbb8103c7aeb26a37c9b572845c38f59d4ebf0c88456a055e607659f95",
+        "servedSHA256": "d48a30dbb8103c7aeb26a37c9b572845c38f59d4ebf0c88456a055e607659f95",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/official/lanczos/index.js": {
+        "path": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/interpolation-strategy-lanczos/.dist/index.js",
+        "sourceSHA256": "d40f6928efaed6ba2ac1ef5ab002865d03853231f11ae86882dfb6810015504e",
+        "servedSHA256": "d40f6928efaed6ba2ac1ef5ab002865d03853231f11ae86882dfb6810015504e",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/official/lanczos/index.spec.js": {
+        "path": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/interpolation-strategy-lanczos/.dist/index.spec.js",
+        "sourceSHA256": "fda855e1fe5edc81ab9deaf82976618aae0f924cdbe6b243657c9b739db72456",
+        "servedSHA256": "fda855e1fe5edc81ab9deaf82976618aae0f924cdbe6b243657c9b739db72456",
+        "importSpecifierOnlyRewrite": false
+      }
+    }
+  },
+  "finishedAt": "2026-10-17T17:05:36.833Z"
+}

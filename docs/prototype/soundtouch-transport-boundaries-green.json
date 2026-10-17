@@ -1,0 +1,152 @@
+{
+  "created_at": "2026-10-17T16:59:59.047Z",
+  "passed": 6,
+  "failed": 0,
+  "inputs": [
+    {
+      "path": "scripts/test_soundtouch_transport_boundaries.mjs",
+      "sha256": "b24a353e14d05d40174e8bd8313b516b9fc0ce4dc2e801cf1db722f514a6dfe7"
+    },
+    {
+      "path": "experiments/keylock-soundtouch/pull-transport.mjs",
+      "sha256": "f05d24db0567cac539c4a8fc0565b54730e70cd4ffda0b7e0dbd0eb2be460f44"
+    }
+  ],
+  "checks": [
+    {
+      "name": "Historical nominal clock retains the original anchor after an update (44100)",
+      "passed": true,
+      "evidence": {
+        "expected": 2.15370612244898,
+        "actual": 2.15370612244898
+      }
+    },
+    {
+      "name": "Stem data beyond the original endpoint cannot leak into the nominal mix (44100)",
+      "passed": true,
+      "evidence": {
+        "nonzero": 0,
+        "peak": 0
+      }
+    },
+    {
+      "name": "Nominal EOS preserves diagnostic padding and pull counters (44100)",
+      "passed": true,
+      "evidence": {
+        "snapshot": {
+          "sampleRate": 44100,
+          "nextFrame": 88320,
+          "generation": 1,
+          "disposed": false,
+          "state": {
+            "frame": 256,
+            "position": 1,
+            "playing": false,
+            "generation": 1,
+            "rate": 1,
+            "semitones": 0,
+            "keylock": true,
+            "effectiveSemitones": 0,
+            "anchorPosition": 0,
+            "positionKind": "nominal-not-measured-audible"
+          },
+          "sourceBytes": 176400,
+          "retainedWholeSources": true,
+          "memoryLimit": "Whole caller-provided PCM plus bounded16epochs; opaque DSP heaps not counted.",
+          "renderedFrames": 88320,
+          "retiredEpochs": 1,
+          "retiredSummaries": [
+            {
+              "generation": 1,
+              "counters": [
+                {
+                  "originFrame": 0,
+                  "sourceCursorFrame": 47104,
+                  "realFramesFed": 44100,
+                  "paddingFramesFed": 3004,
+                  "paddingLimit": 88200,
+                  "generatedFrames": 44990,
+                  "extractedFrames": 44100,
+                  "discardedPrerollFrames": 0,
+                  "outputFramesReady": 890
+                }
+              ]
+            }
+          ],
+          "retiredSummaryLimit": 64,
+          "clockRetention": "Last two applied anchors; older queries reject explicitly.",
+          "epochs": [],
+          "scope": "Forward pull-based experiment; nominal output endpoint, not measured audible source position or proved EOS tail preservation."
+        }
+      }
+    },
+    {
+      "name": "Historical nominal clock retains the original anchor after an update (48000)",
+      "passed": true,
+      "evidence": {
+        "expected": 2.1542175,
+        "actual": 2.1542175
+      }
+    },
+    {
+      "name": "Stem data beyond the original endpoint cannot leak into the nominal mix (48000)",
+      "passed": true,
+      "evidence": {
+        "nonzero": 0,
+        "peak": 0
+      }
+    },
+    {
+      "name": "Nominal EOS preserves diagnostic padding and pull counters (48000)",
+      "passed": true,
+      "evidence": {
+        "snapshot": {
+          "sampleRate": 48000,
+          "nextFrame": 96000,
+          "generation": 1,
+          "disposed": false,
+          "state": {
+            "frame": 256,
+            "position": 1,
+            "playing": false,
+            "generation": 1,
+            "rate": 1,
+            "semitones": 0,
+            "keylock": true,
+            "effectiveSemitones": 0,
+            "anchorPosition": 0,
+            "positionKind": "nominal-not-measured-audible"
+          },
+          "sourceBytes": 192000,
+          "retainedWholeSources": true,
+          "memoryLimit": "Whole caller-provided PCM plus bounded16epochs; opaque DSP heaps not counted.",
+          "renderedFrames": 96000,
+          "retiredEpochs": 1,
+          "retiredSummaries": [
+            {
+              "generation": 1,
+              "counters": [
+                {
+                  "originFrame": 0,
+                  "sourceCursorFrame": 51200,
+                  "realFramesFed": 48000,
+                  "paddingFramesFed": 3200,
+                  "paddingLimit": 96000,
+                  "generatedFrames": 48960,
+                  "extractedFrames": 48000,
+                  "discardedPrerollFrames": 0,
+                  "outputFramesReady": 960
+                }
+              ]
+            }
+          ],
+          "retiredSummaryLimit": 64,
+          "clockRetention": "Last two applied anchors; older queries reject explicitly.",
+          "epochs": [],
+          "scope": "Forward pull-based experiment; nominal output endpoint, not measured audible source position or proved EOS tail preservation."
+        }
+      }
+    }
+  ],
+  "scope": "Actual pinned DSP through serial candidate transport; anchor history, original duration authority and retained EOS diagnostics. Not audible sample-position/EOS tail or native acceptance."
+}
