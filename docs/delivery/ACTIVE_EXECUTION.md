@@ -12,7 +12,7 @@
 
 ## Now
 
-Committed checkpoint10 source `e5a9a6e481aadc6171f5f652041777c08ab0cf53`,240 tracked prototype/scripts hashes. Cache/observer/diagnostic evidence is pinned. New shadow/short-block experiment files remain separate and unaccepted; inspect current diff/owners.
+Committed checkpoint11 source `9041b236fd52fb746a5e2f8ebac339e66ad13bf4`,255 tracked prototype/scripts hashes. Cache and bounded shadow/short-block/boundary experiments plus actual production7-case failure are pinned. NEW guarded shadow adapter work remains separate and unaccepted; inspect current diff/owners.
 
 Current cache engine SHA `0b61a4f9411c78254f6ec02e972cec835c4c10ddb4ce4a5d936ef57bfc6e8057`: actual browser7/7,12 finite stereo PCM captures with all raw hashes/source hashes/armed frames independently inspected. Three preparations=three load/ACKs, one natural-end callback, zero cleanup errors. Explicit terminal clear differs from intended nonaudible paused retention. Actual routed live-keylock regression6/6 remains narrow and does NOT pass seamless return. Independent controlled cache12/12, old races7/7, root engine10/10, live orchestration9/9 and UI23/23. First ready-preloaded trusted pointer quarter-turn0→1/3s remains paused; no prior scratch gesture, normal browser activation required. Pointer trace is actual UI/control proof, not recorded pointer PCM or referencequality. Read plan43 and current raw artifacts/reviews.
 
@@ -38,7 +38,7 @@ Fresh45s Hercules observation after Jason's Ready now ran08:02:42–08:03:27UTC:
 
 Corrected retained observability actual:48measured/6blocked/0combinedpass,27contiguous capture spans,3strict mute failures each one nonzero left first sample followed47999zero. Saved raw result and inspection, original46-condition failure preserved. Shadow follower and supported short-block candidates are isolated new-file units; no production timing/vendor changes.
 
-## Current uncommitted acceptance override — plan44
+## Current stronger acceptance override — plan44
 
 Production engine unchanged at0b61a4f; updated harness now7cases, actual6passed/1failed/0fatal. Shifted1s stationary release captures23raw475.2Hz windows before target880Hz; first qualifying40ms target window starts230ms after release, handoff scheduled239.33ms afterrelease, low-RMS gap only1ms. Prior6/6 remains historical/narrow. New pure analyzer+test and raw actual failure+inspection are parentowned WIP outside checkpoint10; inspect source hashes. Short-block36case actual browser run active; shadow experiment still agentowned/unaccepted. No native work.
 
@@ -47,3 +47,5 @@ Short-block actual run finished:33measured/3blocked/17pass16fail,18contiguous sp
 Latest actual shadow initialrun: completed10,aggregate3/10; all10audio/cursorcriteria true,21strictfinitecontinuous captures, calibration1.25ms. Overallfailures are redundantgroups2–4 and actualquick61.33/50.67ms. Agent owns new2sretention/1scoverage shadowclone plus harness/testreview only, preserving baseline48f154source. Parent owns realbrowserandnextengineintegrationonlyafteracceptedactualcandidate. Nativegainboundary actual18offline/6realtime/everyrawsample independentlyverified productceil onset reproduces3one-samplefailureswithoutWASM; originalfailuresremain. Plan46 is newest. No fullparity/nativeapproval.
 
 Newest plan47: revised bounded shadow actual10/10,calibrationpass,21completefinitecontinuousstereo captures and4runtimeSHAsverified,onegroupall,quick32msboth,releasegap0–2ms,latercursor≤1.5ms. Productionreturnstillfails. AgentownsNEWkeylock-shadow-live.js/test/harness/review prerequisite preserving normalqueriedlatency guard withdedicatedfollowSeek40ms; outwindowfollowexpliciterror, standardfarrebaseretained. Parentownsengineintegrationonlyafteradapterproof; read frozenintegrationproposal. First40mscursor/otherkeysrates/stems/outwindowquality remainopen.
+
+Checkpoint11source pins passing isolatedshadow and failingproductionrelease; newguardedadapterstilloutsidepin. Readplan47beforeolderNowparagraphs; productionstrongercheck6/7iscurrent, historical6/6cannotestablishseamlessrelease.

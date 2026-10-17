@@ -4,7 +4,7 @@
 
 Project: `/Users/jasonpoindexter/Documents/GitHub/Open Play`
 Prepared: 2026-10-17
-Current browser candidate: `e5a9a6e481aadc6171f5f652041777c08ab0cf53`
+Current browser candidate: `9041b236fd52fb746a5e2f8ebac339e66ad13bf4`
 Content hashes: `docs/prototype/candidate-hashes.json`
 Private repository: https://github.com/jpoindexter/open-play
 Private board: https://trello.com/b/OqMGEjpe/open-play-serato-parity
@@ -48,7 +48,7 @@ see docs/research/claude-fable/video-reference-debug-prompt.md and approvals.md.
 It is not the full completeness audit; its source claims need independent checks.
 
 
-## Active uncommitted acceptance work after checkpoint10
+## Current checkpoint11 acceptance override
 
 Read FULL_BUILD_PLAN.md44–47 and ACTIVE_EXECUTION.md before the pinned snapshot below. Production engine remains0b61a4f; the stronger seven-case harness now executes6pass/1fail/0fatal and captures23raw475.2Hz windows before880Hz after release. Corrected short-block browser33measured/3blocked/17pass has unresolved bass/waveform differences; no production selection. Initial active-muted shadow completed10/3overallpass: alltenfinite audio/cursorcriteria pass,21rawcontinuous captures, but extra group creation and actualquick durations fail. Revised bounded-retention shadow actual10/10,21completecaptures,onegroupall,quick32msboth,latercursor≤1.5ms; finite isolated experiment only. New guarded adapter prerequisite and engine integration remain unaccepted; main shifted release stillfails. Its cursor oracle currently assesses a later probe, not every first-release-frame source position. Native gain-only18offline/6realtime reproduction and every raw sample support round-versus-product-ceil capture-boundary cause for the one-sample pause shapes; old failures stay unchanged. Native app and full1:1 remain forbidden/unpassed.
 
@@ -61,7 +61,7 @@ Fable5.1 High read-only return diagnosis is saved and independently qualified in
 ## Read first
 
 - `AGENTS.md` if present; `PROJECT_PROMPT.md`; `docs/approvals.md`.
-- `FULL_BUILD_PLAN.md` sections23–43, with older sections retained as dated history.
+- `FULL_BUILD_PLAN.md` sections23–47, with older sections retained as dated history.
 - `docs/research/PARITY_GATE.md`, `FULL_SCOPE_CONTRACT.md`, `FEATURE_COVERAGE.md`,
   `INTERACTION_REQUIREMENTS.md`, `REQUIREMENT_GAPS_REVIEW.md`, `SOURCE_CONFLICTS.md`,
   `UI_OBSERVATIONS.md`, `EVIDENCE_LEDGER.md`, `BINARY_FINDINGS.md`,
