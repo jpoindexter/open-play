@@ -1,0 +1,2585 @@
+{
+  "kind": "Independent whole-original native keylock recorded-audio review",
+  "date": "2026-10-17",
+  "nativeCandidateParentObserved": "Electron0.1.5; immutable prototype48a6d4dad2f217a8ba166b9ca890a287aabc4feb",
+  "method": {
+    "decoder": "FFmpeg complete original to little-endian interleaved Float32; no seek/trim/resample/channel reduction",
+    "spectral": "Nonoverlapping1s windows including finalpartial. Float64 demean,Hann,rFFT,global nonDCmaximum,3bin parabolic logmagnitude interpolation. Expectedfrequencies used only afterward to classify. Silence=max(channelRMS)<.005. Everywindow retained.",
+    "spectralCalibration": [
+      {
+        "inputHz": 330,
+        "measuredHz": 329.9999999999997,
+        "absoluteErrorHz": 2.8421709430404007e-13
+      },
+      {
+        "inputHz": 550,
+        "measuredHz": 550.0,
+        "absoluteErrorHz": 0.0
+      },
+      {
+        "inputHz": 356.4,
+        "measuredHz": 356.4121396411415,
+        "absoluteErrorHz": 0.012139641141516222
+      },
+      {
+        "inputHz": 594,
+        "measuredHz": 594.0,
+        "absoluteErrorHz": 0.0
+      },
+      {
+        "inputHz": 370.4124759420931,
+        "measuredHz": 370.42360514338685,
+        "absoluteErrorHz": 0.011129201293726965
+      },
+      {
+        "inputHz": 617.3541265701551,
+        "measuredHz": 617.3689122145604,
+        "absoluteErrorHz": 0.014785644405264975
+      }
+    ],
+    "calibrationMaxAbsoluteErrorHz": 0.014785644405264975,
+    "quiet": "Every48-frame1ms stereobin across whole recording, joint RMS threshold.005; both-channel threshold independently crosschecked. These are bin RMS observations, not instantaneous continuity or release latency.",
+    "numpyVersion": "2.2.6",
+    "ffmpegVersion": "ffmpeg version 9.0.1 Copyright (c) 2000-2026 the FFmpeg developers"
+  },
+  "fixture": {
+    "file": "local-evidence/keylock-native-fixtures/native-keylock-stereo-120s.wav",
+    "bytes": 21168044,
+    "SHA256": "99833309d13090de63a9fcdb7ca8f6bcf601975bfb8cb2e3ef691bb369a0a119",
+    "matchesDeclaredSHA256": true,
+    "frames": 5292000,
+    "sampleRate": 44100,
+    "channels": 2,
+    "sampleWidthBytes": 2
+  },
+  "recordings": [
+    {
+      "id": "keylock-on-off-moving-scratch",
+      "original": "/Users/jasonpoindexter/Downloads/Open Play 0.1.5 native keylock scratch test.webm",
+      "retainedCopy": "local-evidence/desktop-0.1.5-keylock/native-keylock-scratch-test.webm",
+      "originalBytes": 928316,
+      "originalSHA256": "10cb98d584e1b61ecb859d3b22fb443fdbf77723dc3ae6c4b125ae976b3d02e0",
+      "retainedCopySHA256": "10cb98d584e1b61ecb859d3b22fb443fdbf77723dc3ae6c4b125ae976b3d02e0",
+      "decoderArgv": [
+        "/opt/homebrew/bin/ffmpeg",
+        "-v",
+        "error",
+        "-i",
+        "/Users/jasonpoindexter/Downloads/Open Play 0.1.5 native keylock scratch test.webm",
+        "-map",
+        "0:a:0",
+        "-c:a",
+        "pcm_f32le",
+        "-f",
+        "f32le",
+        "pipe:1"
+      ],
+      "probe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "opus",
+            "sample_rate": "48000",
+            "channels": 2,
+            "channel_layout": "stereo"
+          }
+        ]
+      },
+      "wholePCM_SHA256": "eaa5e9e28335eb6242c0bda5d2c0b6949535c1d3b08c0832a9f268d441b8d985",
+      "decodedFrames": 2862720,
+      "sampleRate": 48000,
+      "channels": 2,
+      "durationSeconds": 59.64,
+      "finite": true,
+      "wholeRMS": [
+        0.04211761793339884,
+        0.04234030377906045
+      ],
+      "wholePeak": [
+        0.06964251399040222,
+        0.07329259812831879
+      ],
+      "expectedHz": {
+        "locked": [
+          330.0,
+          550.0
+        ],
+        "unlocked": [
+          356.4,
+          594.0
+        ]
+      },
+      "pitchToleranceHz": 1.5,
+      "allOneSecondWindows": [
+        {
+          "startFrame": 0,
+          "frameCount": 48000,
+          "startSeconds": 0.0,
+          "durationSeconds": 1.0,
+          "rms": [
+            0.0,
+            0.0
+          ],
+          "dominantHz": [
+            null,
+            null
+          ],
+          "absoluteErrorsHz": {
+            "locked": [
+              null,
+              null
+            ],
+            "unlocked": [
+              null,
+              null
+            ]
+          },
+          "classification": "silence"
+        },
+        {
+          "startFrame": 48000,
+          "frameCount": 48000,
+          "startSeconds": 1.0,
+          "durationSeconds": 1.0,
+          "rms": [
+            0.03134024108459126,
+            0.031375535273299796
+          ],
+          "dominantHz": [
+            330.4000716149076,
+            550.3935860820445
+          ],
+          "absoluteErrorsHz": {
+            "locked": [
+              0.40007161490757426,
+              0.3935860820445214
+            ],
+            "unlocked": [
+              25.999928385092403,
+              43.60641391795548
+            ]
+          },
+          "classification": "locked"
+        },
+        {
+          "startFrame": 96000,
+          "frameCount": 48000,
+          "startSeconds": 2.0,
+          "durationSeconds": 1.0,
+          "rms": [
+            0.0434940846329354,
+            0.043484017581174615
+          ],
+          "dominantHz": [
+            330.44026765678086,
+            550.4358257784784
+          ],
+          "absoluteErrorsHz": {
+            "locked": [
+              0.4402676567808612,
+              0.43582577847837456
+            ],
+            "unlocked": [
+              25.959732343219116,
+              43.564174221521625
+            ]
+          },
+          "classification": "locked"
+        },
+        {
+          "startFrame": 144000,
+          "frameCount": 48000,
+          "startSeconds": 3.0,
+          "durationSeconds": 1.0,
+          "rms": [
+            0.04351340586750581,
+            0.043516502253295467
+          ],
+          "dominantHz": [
+            330.4400212411263,
+            550.4373434765841
+          ],
+          "absoluteErrorsHz": {
+            "locked": [
+              0.4400212411263169,
+              0.43734347658414663
+            ],
+            "unlocked": [
+              25.95997875887366,
+              43.56265652341585
+            ]
+          },
+          "classification": "locked"
+        },
+        {
+          "startFrame": 192000,
+          "frameCount": 48000,
+          "startSeconds": 4.0,
+          "durationSeconds": 1.0,
+          "rms": [
+            0.043499547421103485,
+            0.04351533431060065
+          ],
+          "dominantHz": [
+            330.44035728820705,
+            550.4378140313318
+          ],
+          "absoluteErrorsHz": {
+            "locked": [
+              0.44035728820705344,
+              0.43781403133175445
+            ],
+            "unlocked": [
+              25.959642711792924,
+              43.562185968668246
+            ]
+          },
+          "classification": "locked"
+        },
+        {
+          "startFrame": 240000,
+          "frameCount": 48000,
+          "startSeconds": 5.0,
+          "durationSeconds": 1.0,
+          "rms": [
+            0.04346280917204902,
+            0.043498906645815454
+          ],
+          "dominantHz": [
+            330.44093520679854,
+            550.4366101896558
+          ],
+          "absoluteErrorsHz": {
+            "locked": [
+              0.44093520679854237,
+              0.4366101896557666
+            ],
+            "unlocked": [
+              25.959064793201435,
+              43.56338981034423
+            ]
+          },
+          "classification": "locked"
+        },
+        {
+          "startFrame": 288000,
+          "frameCount": 48000,
+          "startSeconds": 6.0,
+          "durationSeconds": 1.0,
+          "rms": [
+            0.04347987159378934,
+            0.043499451078625115
+          ],
+          "dominantHz": [
+            330.4395961707882,
+            550.4374328837029
+          ],
+          "absoluteErrorsHz": {
+            "locked": [
+              0.43959617078820656,
+              0.43743288370285427
+            ],
+            "unlocked": [
+              25.96040382921177,
+              43.562567116297146
+            ]
+          },
+          "classification": "locked"
+        },
+        {
+          "startFrame": 336000,
+          "frameCount": 48000,
+          "startSeconds": 7.0,
+          "durationSeconds": 1.0,
+          "rms": [
+            0.04347334842966466,
+            0.04351950124762087
+          ],
+          "dominantHz": [
+            330.4402501794549,
+            550.4373360850246
+          ],
+          "absoluteErrorsHz": {
+            "locked": [
+              0.44025017945489253,
+              0.43733608502463994
+            ],
+            "unlocked": [
+              25.959749820545085,
+              43.56266391497536
+            ]
+          },
+          "classification": "locked"
+        },
+        {
+          "startFrame": 384000,
+          "frameCount": 48000,
+          "startSeconds": 8.0,
+          "durationSeconds": 1.0,
+          "rms": [
+            0.04349017969408554,
+            0.04348677772101413
+          ],
+          "dominantHz": [
+            330.4404411324664,
+            550.4360105100756
+          ],
+          "absoluteErrorsHz": {
+            "locked": [
+              0.4404411324663897,
+              0.4360105100755618
+            ],
+            "unlocked": [
+              25.959558867533588,
+              43.56398948992444
+            ]
+          },
+          "classification": "locked"
+        },
+        {
+          "startFrame": 432000,
+          "frameCount": 48000,
+          "startSeconds": 9.0,
+          "durationSeconds": 1.0,
+          "rms": [
+            0.043496269703164614,
+            0.043496389153526445
+          ],
+          "dominantHz": [
+            330.4405974525254,
+            550.4369183720287
+          ],
+          "absoluteErrorsHz": {
+            "locked": [
+              0.4405974525254237,
+              0.43691837202868555
+            ],
+            "unlocked": [
+              25.959402547474554,
+              43.563081627971314
+            ]
+          },
+          "classification": "locked"
+        },
+        {
+          "startFrame": 480000,
+          "frameCount": 48000,
+          "startSeconds": 10.0,
+          "durationSeconds": 1.0,
+          "rms": [
+            0.04348677858516965,
+            0.04350924176906544
+          ],
+          "dominantHz": [
+            330.4400052791845,
+            550.4367358457255
+          ],
+          "absoluteErrorsHz": {
+            "locked": [
+              0.44000527918450416,
+              0.4367358457254795
+            ],
+            "unlocked": [
+              25.959994720815473,
+              43.56326415427452
+            ]
+          },
+          "classification": "locked"
+        },
+        {
+          "startFrame": 528000,
+          "frameCount": 48000,
+          "startSeconds": 11.0,
+          "durationSeconds": 1.0,
+          "rms": [
+            0.043476187700713195,
+            0.04349575790336865
+          ],
+          "dominantHz": [
+            330.4402530616941,
+            550.4359788692358
+          ],
+          "absoluteErrorsHz": {
+            "locked": [
+              0.4402530616940794,
+              0.43597886923578244
+            ],
+            "unlocked": [
+              25.959746938305898,
+              43.56402113076422
+            ]
+          },
+          "classification": "locked"
+        },
+        {
+          "startFrame": 576000,
+          "frameCount": 48000,
+          "startSeconds": 12.0,
+          "durationSeconds": 1.0,
+          "rms": [
+            0.04348458717311615,
+            0.04350103225471049
+          ],
+          "dominantHz": [
+            330.4404235044082,
+            550.4357564717109
+          ],
+          "absoluteErrorsHz": {
+            "locked": [
+              0.44042350440821565,
+              0.4357564717108744
+            ],
+            "unlocked": [
+              25.95957649559176,
+              43.564243528289126
+            ]
+          },
+          "classification": "locked"
+        },
+        {
+          "startFrame": 624000,
+          "frameCount": 48000,
+          "startSeconds": 13.0,
+          "durationSeconds": 1.0,
+          "rms": [
+            0.0434760155048588,
+            0.04351051624943823
+          ],
+          "dominantHz": [
+            330.44088758288854,
+            550.436013104679
+          ],
+          "absoluteErrorsHz": {
+            "locked": [
+              0.4408875828885357,
+              0.43601310467897747
+            ],
+            "unlocked": [
+              25.95911241711144,
+              43.56398689532102
+            ]
+          },
+          "classification": "locked"
+        },
+        {
+          "startFrame": 672000,
+          "frameCount": 48000,
+          "startSeconds": 14.0,
+          "durationSeconds": 1.0,
+          "rms": [
+            0.043483728565442956,
+            0.04350102592163314
+          ],
+          "dominantHz": [
+            330.4405316521284,
+            550.4358331876989
+          ],
+          "absoluteErrorsHz": {
+            "locked": [
+              0.4405316521284135,
+              0.4358331876989041
+            ],
+            "unlocked": [
+              25.959468347871564,
+              43.564166812301096
+            ]
+          },
+          "classification": "locked"
+        },
+        {
+          "startFrame": 720000,
+          "frameCount": 48000,
+          "startSeconds": 15.0,
+          "durationSeconds": 1.0,
+          "rms": [
+            0.04348120150045286,
+            0.04349096552783832
+          ],
+          "dominantHz": [
+            330.44040206376525,
+            550.4360646457218
+          ],
+          "absoluteErrorsHz": {
+            "locked": [
+              0.44040206376524793,
+              0.4360646457217854
+            ],
+            "unlocked": [
+              25.95959793623473,
+              43.563935354278215
+            ]
+          },
+          "classification": "locked"
+        },
+        {
+          "startFrame": 768000,
+          "frameCount": 48000,
+          "startSeconds": 16.0,
+          "durationSeconds": 1.0,
+          "rms": [
+            0.043487450833319424,
+            0.04350792060591509
+          ],
+          "dominantHz": [
+            330.44011527655726,
+            550.4366422322842
+          ],
+          "absoluteErrorsHz": {
+            "locked": [
+              0.4401152765572647,
+              0.4366422322841572
+            ],
+            "unlocked": [
+              25.959884723442713,
+              43.56335776771584
+            ]
+          },
+          "classification": "locked"
+        },
+        {
+          "startFrame": 816000,
+          "frameCount": 48000,
+          "startSeconds": 17.0,
+          "durationSeconds": 1.0,
+          "rms": [
+            0.04346635284221372,
+            0.04348729436508343
+          ],
+          "dominantHz": [
+            330.4410516593264,
+            550.4358098699769
+          ],
+          "absoluteErrorsHz": {
+            "locked": [
+              0.44105165932637647,
+              0.43580986997687887
+            ],
+            "unlocked": [
+              25.9589483406736,
+              43.56419013002312
+            ]
+          },
+          "classification": "locked"
+        },
+        {
+          "startFrame": 864000,
+          "frameCount": 48000,
+          "startSeconds": 18.0,
+          "durationSeconds": 1.0,
+          "rms": [
+            0.04279257378530197,
+            0.043025730546111286
+          ],
+          "dominantHz": [
+            330.42875683276844,
+            594.3291571725453
+          ],
+          "absoluteErrorsHz": {
+            "locked": [
+              0.42875683276844256,
+              44.32915717254525
+            ],
+            "unlocked": [
+              25.971243167231535,
+              0.32915717254525134
+            ]
+          },
+          "classification": "transition-or-other"
+        },
+        {
+          "startFrame": 912000,
+          "frameCount": 48000,
+          "startSeconds": 19.0,
+          "durationSeconds": 1.0,
+          "rms": [
+            0.04261653924791013,
+            0.043162178940362346
+          ],
+          "dominantHz": [
+            357.47435710201216,
+            594.3553551805634
+          ],
+          "absoluteErrorsHz": {
+            "locked": [
+              27.474357102012164,
+              44.35535518056338
+            ],
+            "unlocked": [
+              1.0743571020121863,
+              0.3553551805633788
+            ]
+          },
+          "classification": "unlocked"
+        },
+        {
+          "startFrame": 960000,
+          "frameCount": 48000,
+          "startSeconds": 20.0,
+          "durationSeconds": 1.0,
+          "rms": [
+            0.04261654525982132,
+            0.043194693663187934
+          ],
+          "dominantHz": [
+            357.47359119159745,
+            594.354873383107
+          ],
+          "absoluteErrorsHz": {
+            "locked": [
+              27.47359119159745,
+              44.35487338310702
+            ],
+            "unlocked": [
+              1.0735911915974725,
+              0.35487338310701944
+            ]
+          },
+          "classification": "unlocked"
+        },
+        {
+          "startFrame": 1008000,
+          "frameCount": 48000,
+          "startSeconds": 21.0,
+          "durationSeconds": 1.0,
+          "rms": [
+            0.04261006204002337,
+            0.043182194996750634
+          ],
+          "dominantHz": [
+            357.474104837458,
+            594.3545731761903
+          ],
+          "absoluteErrorsHz": {
+            "locked": [
+              27.474104837458015,
+              44.35457317619034
+            ],
+            "unlocked": [
+              1.0741048374580373,
+              0.35457317619034256
+            ]
+          },
+          "classification": "unlocked"
+        },
+        {
+          "startFrame": 1056000,
+          "frameCount": 48000,
+          "startSeconds": 22.0,
+          "durationSeconds": 1.0,
+          "rms": [
+            0.04263219748130885,
+            0.043216702481762445
+          ],
+          "dominantHz": [
+            357.4744413432144,
+            594.3546917167052
+          ],
+          "absoluteErrorsHz": {
+            "locked": [
+              27.47444134321438,
+              44.35469171670525
+            ],
+            "unlocked": [
+              1.0744413432144029,
+              0.354691716705247
+            ]
+          },
+          "classification": "unlocked"
+        },
+        {
+          "startFrame": 1104000,
+          "frameCount": 48000,
+          "startSeconds": 23.0,
+          "durationSeconds": 1.0,
+          "rms": [
+            0.04260723866644026,
+            0.043190376779671795
+          ],
+          "dominantHz": [
+            357.47428455963365,
+            594.3539371054875
+          ],
+          "absoluteErrorsHz": {
+            "locked": [
+              27.474284559633645,
+              44.35393710548749
+            ],
+            "unlocked": [
+              1.0742845596336679,
+              0.35393710548748913
+            ]
+          },
+          "classification": "unlocked"
+        },
+        {
+          "startFrame": 1152000,
+          "frameCount": 48000,
+          "startSeconds": 24.0,
+          "durationSeconds": 1.0,
+          "rms": [
+            0.04261707112493823,
+            0.04318398444290936
+          ],
+          "dominantHz": [
+            357.4742748670155,
+            594.3549896179168
+          ],
+          "absoluteErrorsHz": {
+            "locked": [
+              27.47427486701548,
+              44.35498961791677
+            ],
+            "unlocked": [
+              1.0742748670155038,
+              0.35498961791677175
+            ]
+          },
+          "classification": "unlocked"
+        },
+        {
+          "startFrame": 1200000,
+          "frameCount": 48000,
+          "startSeconds": 25.0,
+          "durationSeconds": 1.0,
+          "rms": [
+            0.042640702376809586,
+            0.04319267658934402
+          ],
+          "dominantHz": [
+            357.4734791156471,
+            594.3547737367147
+          ],
+          "absoluteErrorsHz": {
+            "locked": [
+              27.47347911564708,
+              44.35477373671472
+            ],
+            "unlocked": [
+              1.0734791156471033,
+              0.35477373671471923
+            ]
+          },
+          "classification": "unlocked"
+        },
+        {
+          "startFrame": 1248000,
+          "frameCount": 48000,
+          "startSeconds": 26.0,
+          "durationSeconds": 1.0,
+          "rms": [
+            0.042594073999427974,
+            0.04318904450057119
+          ],
+          "dominantHz": [
+            357.4742115764858,
+            594.3533482437589
+          ],
+          "absoluteErrorsHz": {
+            "locked": [
+              27.4742115764858,
+              44.35334824375889
+            ],
+            "unlocked": [
+              1.0742115764858227,
+              0.3533482437588873
+            ]
+          },
+          "classification": "unlocked"
+        },
+        {
+          "startFrame": 1296000,
+          "frameCount": 48000,
+          "startSeconds": 27.0,
+          "durationSeconds": 1.0,
+          "rms": [
+            0.042622534658738866,
+            0.043173737032658185
+          ],
+          "dominantHz": [
+            357.4741092875562,
+            594.3527805552628
+          ],
+          "absoluteErrorsHz": {
+            "locked": [
+              27.47410928755619,
+              44.352780555262825
+            ],
+            "unlocked": [
+              1.0741092875562117,
+              0.35278055526282515
+            ]
+          },
+          "classification": "unlocked"
+        },
+        {
+          "startFrame": 1344000,
+          "frameCount": 48000,
+          "startSeconds": 28.0,
+          "durationSeconds": 1.0,
+          "rms": [
+            0.042609214118112915,
+            0.04319755819810878
+          ],
+          "dominantHz": [
+            357.4743507327307,
+            594.3545591439648
+          ],
+          "absoluteErrorsHz": {
+            "locked": [
+              27.474350732730727,
+              44.35455914396482
+            ],
+            "unlocked": [
+              1.0743507327307498,
+              0.3545591439648206
+            ]
+          },
+          "classification": "unlocked"
+        },
+        {
+          "startFrame": 1392000,
+          "frameCount": 48000,
+          "startSeconds": 29.0,
+          "durationSeconds": 1.0,
+          "rms": [
+            0.04262209225108496,
+            0.04319863338918944
+          ],
+          "dominantHz": [
+            357.47411808707994,
+            594.3528522215108
+          ],
+          "absoluteErrorsHz": {
+            "locked": [
+              27.474118087079944,
+              44.35285222151083
+            ],
+            "unlocked": [
+              1.0741180870799667,
+              0.3528522215108296
+            ]
+          },
+          "classification": "unlocked"
+        },
+        {
+          "startFrame": 1440000,
+          "frameCount": 48000,
+          "startSeconds": 30.0,
+          "durationSeconds": 1.0,
+          "rms": [
+            0.042611265154780024,
+            0.04318607830388108
+          ],
+          "dominantHz": [
+            357.47439983468513,
+            594.3527276204796
+          ],
+          "absoluteErrorsHz": {
+            "locked": [
+              27.47439983468513,
+              44.35272762047964
+            ],
+            "unlocked": [
+              1.0743998346851527,
+              0.3527276204796408
+            ]
+          },
+          "classification": "unlocked"
+        },
+        {
+          "startFrame": 1488000,
+          "frameCount": 48000,
+          "startSeconds": 31.0,
+          "durationSeconds": 1.0,
+          "rms": [
+            0.042602078021360776,
+            0.04320249137658363
+          ],
+          "dominantHz": [
+            357.4734928011655,
+            594.3543296223131
+          ],
+          "absoluteErrorsHz": {
+            "locked": [
+              27.47349280116549,
+              44.35432962231312
+            ],
+            "unlocked": [
+              1.0734928011655143,
+              0.3543296223131165
+            ]
+          },
+          "classification": "unlocked"
+        },
+        {
+          "startFrame": 1536000,
+          "frameCount": 48000,
+          "startSeconds": 32.0,
+          "durationSeconds": 1.0,
+          "rms": [
+            0.04260685287985719,
+            0.04317756777631197
+          ],
+          "dominantHz": [
+            357.4742788721962,
+            594.3530000360295
+          ],
+          "absoluteErrorsHz": {
+            "locked": [
+              27.47427887219618,
+              44.35300003602947
+            ],
+            "unlocked": [
+              1.0742788721962029,
+              0.3530000360294707
+            ]
+          },
+          "classification": "unlocked"
+        },
+        {
+          "startFrame": 1584000,
+          "frameCount": 48000,
+          "startSeconds": 33.0,
+          "durationSeconds": 1.0,
+          "rms": [
+            0.04260299669948976,
+            0.04319958825534516
+          ],
+          "dominantHz": [
+            357.4741194249123,
+            594.3533478920932
+          ],
+          "absoluteErrorsHz": {
+            "locked": [
+              27.474119424912317,
+              44.35334789209321
+            ],
+            "unlocked": [
+              1.0741194249123396,
+              0.35334789209321116
+            ]
+          },
+          "classification": "unlocked"
+        },
+        {
+          "startFrame": 1632000,
+          "frameCount": 48000,
+          "startSeconds": 34.0,
+          "durationSeconds": 1.0,
+          "rms": [
+            0.04264322968719668,
+            0.04318759151171716
+          ],
+          "dominantHz": [
+            357.4741426879707,
+            594.3543256046955
+          ],
+          "absoluteErrorsHz": {
+            "locked": [
+              27.474142687970698,
+              44.35432560469553
+            ],
+            "unlocked": [
+              1.0741426879707205,
+              0.3543256046955321
+            ]
+          },
+          "classification": "unlocked"
+        },
+        {
+          "startFrame": 1680000,
+          "frameCount": 48000,
+          "startSeconds": 35.0,
+          "durationSeconds": 1.0,
+          "rms": [
+            0.04263050369014214,
+            0.04320066012953202
+          ],
+          "dominantHz": [
+            357.47406699180345,
+            594.3544936701326
+          ],
+          "absoluteErrorsHz": {
+            "locked": [
+              27.474066991803454,
+              44.35449367013257
+            ],
+            "unlocked": [
+              1.0740669918034769,
+              0.3544936701325696
+            ]
+          },
+          "classification": "unlocked"
+        },
+        {
+          "startFrame": 1728000,
+          "frameCount": 48000,
+          "startSeconds": 36.0,
+          "durationSeconds": 1.0,
+          "rms": [
+            0.04261573602597655,
+            0.043186416586339114
+          ],
+          "dominantHz": [
+            357.47400699275346,
+            594.3533002058724
+          ],
+          "absoluteErrorsHz": {
+            "locked": [
+              27.47400699275346,
+              44.353300205872415
+            ],
+            "unlocked": [
+              1.0740069927534819,
+              0.35330020587241506
+            ]
+          },
+          "classification": "unlocked"
+        },
+        {
+          "startFrame": 1776000,
+          "frameCount": 48000,
+          "startSeconds": 37.0,
+          "durationSeconds": 1.0,
+          "rms": [
+            0.042622265649596223,
+            0.04319872639267994
+          ],
+          "dominantHz": [
+            357.47407058247853,
+            594.3548055795759
+          ],
+          "absoluteErrorsHz": {
+            "locked": [
+              27.474070582478532,
+              44.354805579575896
+            ],
+            "unlocked": [
+              1.074070582478555,
+              0.35480557957589554
+            ]
+          },
+          "classification": "unlocked"
+        },
+        {
+          "startFrame": 1824000,
+          "frameCount": 48000,
+          "startSeconds": 38.0,
+          "durationSeconds": 1.0,
+          "rms": [
+            0.042615896263612715,
+            0.043206695955993225
+          ],
+          "dominantHz": [
+            357.47423895898874,
+            594.3544441063505
+          ],
+          "absoluteErrorsHz": {
+            "locked": [
+              27.474238958988735,
+              44.354444106350456
+            ],
+            "unlocked": [
+              1.074238958988758,
+              0.3544441063504564
+            ]
+          },
+          "classification": "unlocked"
+        },
+        {
+          "startFrame": 1872000,
+          "frameCount": 48000,
+          "startSeconds": 39.0,
+          "durationSeconds": 1.0,
+          "rms": [
+            0.04262770814932601,
+            0.04317299330768643
+          ],
+          "dominantHz": [
+            357.47386042960727,
+            594.3532023121422
+          ],
+          "absoluteErrorsHz": {
+            "locked": [
+              27.47386042960727,
+              44.35320231214223
+            ],
+            "unlocked": [
+              1.0738604296072936,
+              0.35320231214222986
+            ]
+          },
+          "classification": "unlocked"
+        },
+        {
+          "startFrame": 1920000,
+          "frameCount": 48000,
+          "startSeconds": 40.0,
+          "durationSeconds": 1.0,
+          "rms": [
+            0.04280184139040021,
+            0.04303470346748461
+          ],
+          "dominantHz": [
+            330.42635008589684,
+            550.4259828219398
+          ],
+          "absoluteErrorsHz": {
+            "locked": [
+              0.42635008589684276,
+              0.4259828219397832
+            ],
+            "unlocked": [
+              25.973649914103135,
+              43.57401717806022
+            ]
+          },
+          "classification": "locked"
+        },
+        {
+          "startFrame": 1968000,
+          "frameCount": 48000,
+          "startSeconds": 41.0,
+          "durationSeconds": 1.0,
+          "rms": [
+            0.04347222036606693,
+            0.043494394955292046
+          ],
+          "dominantHz": [
+            330.4400121186194,
+            550.4369641397418
+          ],
+          "absoluteErrorsHz": {
+            "locked": [
+              0.4400121186193928,
+              0.4369641397418036
+            ],
+            "unlocked": [
+              25.959987881380584,
+              43.563035860258196
+            ]
+          },
+          "classification": "locked"
+        },
+        {
+          "startFrame": 2016000,
+          "frameCount": 48000,
+          "startSeconds": 42.0,
+          "durationSeconds": 1.0,
+          "rms": [
+            0.043496250148077044,
+            0.043521207580494076
+          ],
+          "dominantHz": [
+            330.44040304406934,
+            550.4357365221242
+          ],
+          "absoluteErrorsHz": {
+            "locked": [
+              0.44040304406934183,
+              0.4357365221242162
+            ],
+            "unlocked": [
+              25.959596955930635,
+              43.564263477875784
+            ]
+          },
+          "classification": "locked"
+        },
+        {
+          "startFrame": 2064000,
+          "frameCount": 48000,
+          "startSeconds": 43.0,
+          "durationSeconds": 1.0,
+          "rms": [
+            0.043504258597842134,
+            0.04351362236291664
+          ],
+          "dominantHz": [
+            330.44089793600614,
+            550.4355829189291
+          ],
+          "absoluteErrorsHz": {
+            "locked": [
+              0.440897936006138,
+              0.43558291892907164
+            ],
+            "unlocked": [
+              25.95910206399384,
+              43.56441708107093
+            ]
+          },
+          "classification": "locked"
+        },
+        {
+          "startFrame": 2112000,
+          "frameCount": 48000,
+          "startSeconds": 44.0,
+          "durationSeconds": 1.0,
+          "rms": [
+            0.04350937312739457,
+            0.04349994457198135
+          ],
+          "dominantHz": [
+            330.4402932544722,
+            550.4363388172029
+          ],
+          "absoluteErrorsHz": {
+            "locked": [
+              0.4402932544721807,
+              0.436338817202909
+            ],
+            "unlocked": [
+              25.959706745527797,
+              43.56366118279709
+            ]
+          },
+          "classification": "locked"
+        },
+        {
+          "startFrame": 2160000,
+          "frameCount": 48000,
+          "startSeconds": 45.0,
+          "durationSeconds": 1.0,
+          "rms": [
+            0.043488083288845646,
+            0.04350689120743438
+          ],
+          "dominantHz": [
+            330.4413618577023,
+            550.4358550730446
+          ],
+          "absoluteErrorsHz": {
+            "locked": [
+              0.4413618577023044,
+              0.43585507304464954
+            ],
+            "unlocked": [
+              25.958638142297673,
+              43.56414492695535
+            ]
+          },
+          "classification": "locked"
+        },
+        {
+          "startFrame": 2208000,
+          "frameCount": 48000,
+          "startSeconds": 46.0,
+          "durationSeconds": 1.0,
+          "rms": [
+            0.04347251422679431,
+            0.04349831086779451
+          ],
+          "dominantHz": [
+            330.440431519023,
+            550.4361320702315
+          ],
+          "absoluteErrorsHz": {
+            "locked": [
+              0.4404315190229795,
+              0.4361320702314515
+            ],
+            "unlocked": [
+              25.959568480976998,
+              43.56386792976855
+            ]
+          },
+          "classification": "locked"
+        },
+        {
+          "startFrame": 2256000,
+          "frameCount": 48000,
+          "startSeconds": 47.0,
+          "durationSeconds": 1.0,
+          "rms": [
+            0.04347530807577056,
+            0.04348079138131832
+          ],
+          "dominantHz": [
+            330.44028800910473,
+            550.4350361938325
+          ],
+          "absoluteErrorsHz": {
+            "locked": [
+              0.44028800910473365,
+              0.43503619383250225
+            ],
+            "unlocked": [
+              25.959711990895244,
+              43.5649638061675
+            ]
+          },
+          "classification": "locked"
+        },
+        {
+          "startFrame": 2304000,
+          "frameCount": 48000,
+          "startSeconds": 48.0,
+          "durationSeconds": 1.0,
+          "rms": [
+            0.04349339374225998,
+            0.043491085234071775
+          ],
+          "dominantHz": [
+            330.4406739202058,
+            550.4352797337426
+          ],
+          "absoluteErrorsHz": {
+            "locked": [
+              0.44067392020582474,
+              0.4352797337426182
+            ],
+            "unlocked": [
+              25.959326079794153,
+              43.56472026625738
+            ]
+          },
+          "classification": "locked"
+        },
+        {
+          "startFrame": 2352000,
+          "frameCount": 48000,
+          "startSeconds": 49.0,
+          "durationSeconds": 1.0,
+          "rms": [
+            0.04147022946833234,
+            0.041448989333551844
+          ],
+          "dominantHz": [
+            330.0246240511678,
+            556.2177266873789
+          ],
+          "absoluteErrorsHz": {
+            "locked": [
+              0.024624051167791094,
+              6.217726687378899
+            ],
+            "unlocked": [
+              26.375375948832186,
+              37.7822733126211
+            ]
+          },
+          "classification": "transition-or-other"
+        },
+        {
+          "startFrame": 2400000,
+          "frameCount": 48000,
+          "startSeconds": 50.0,
+          "durationSeconds": 1.0,
+          "rms": [
+            0.04349731836165171,
+            0.0435025161844126
+          ],
+          "dominantHz": [
+            330.4399453356962,
+            550.4377221752602
+          ],
+          "absoluteErrorsHz": {
+            "locked": [
+              0.43994533569622263,
+              0.4377221752602054
+            ],
+            "unlocked": [
+              25.960054664303755,
+              43.562277824739795
+            ]
+          },
+          "classification": "locked"
+        },
+        {
+          "startFrame": 2448000,
+          "frameCount": 48000,
+          "startSeconds": 51.0,
+          "durationSeconds": 1.0,
+          "rms": [
+            0.04347836778017904,
+            0.043520065712725896
+          ],
+          "dominantHz": [
+            330.44037153736355,
+            550.4358493076642
+          ],
+          "absoluteErrorsHz": {
+            "locked": [
+              0.4403715373635464,
+              0.43584930766417074
+            ],
+            "unlocked": [
+              25.95962846263643,
+              43.56415069233583
+            ]
+          },
+          "classification": "locked"
+        },
+        {
+          "startFrame": 2496000,
+          "frameCount": 48000,
+          "startSeconds": 52.0,
+          "durationSeconds": 1.0,
+          "rms": [
+            0.04348493270306102,
+            0.043515860982622036
+          ],
+          "dominantHz": [
+            330.43996936122244,
+            550.437506238098
+          ],
+          "absoluteErrorsHz": {
+            "locked": [
+              0.43996936122243824,
+              0.43750623809796707
+            ],
+            "unlocked": [
+              25.96003063877754,
+              43.56249376190203
+            ]
+          },
+          "classification": "locked"
+        },
+        {
+          "startFrame": 2544000,
+          "frameCount": 48000,
+          "startSeconds": 53.0,
+          "durationSeconds": 1.0,
+          "rms": [
+            0.04350232182016239,
+            0.043492716697257953
+          ],
+          "dominantHz": [
+            330.43990527779124,
+            550.4371772794937
+          ],
+          "absoluteErrorsHz": {
+            "locked": [
+              0.4399052777912402,
+              0.43717727949365326
+            ],
+            "unlocked": [
+              25.960094722208737,
+              43.56282272050635
+            ]
+          },
+          "classification": "locked"
+        },
+        {
+          "startFrame": 2592000,
+          "frameCount": 48000,
+          "startSeconds": 54.0,
+          "durationSeconds": 1.0,
+          "rms": [
+            0.04347848973932998,
+            0.04351415635749164
+          ],
+          "dominantHz": [
+            330.44028088438927,
+            550.4362838756647
+          ],
+          "absoluteErrorsHz": {
+            "locked": [
+              0.44028088438926716,
+              0.4362838756646852
+            ],
+            "unlocked": [
+              25.95971911561071,
+              43.563716124335315
+            ]
+          },
+          "classification": "locked"
+        },
+        {
+          "startFrame": 2640000,
+          "frameCount": 48000,
+          "startSeconds": 55.0,
+          "durationSeconds": 1.0,
+          "rms": [
+            0.04347872332826325,
+            0.043507672694382674
+          ],
+          "dominantHz": [
+            330.4404600955254,
+            550.4374194800182
+          ],
+          "absoluteErrorsHz": {
+            "locked": [
+              0.44046009552539545,
+              0.43741948001820674
+            ],
+            "unlocked": [
+              25.959539904474582,
+              43.56258051998179
+            ]
+          },
+          "classification": "locked"
+        },
+        {
+          "startFrame": 2688000,
+          "frameCount": 48000,
+          "startSeconds": 56.0,
+          "durationSeconds": 1.0,
+          "rms": [
+            0.0434926943715615,
+            0.04350398477295651
+          ],
+          "dominantHz": [
+            330.44022365869193,
+            550.4373601633188
+          ],
+          "absoluteErrorsHz": {
+            "locked": [
+              0.44022365869193436,
+              0.4373601633187718
+            ],
+            "unlocked": [
+              25.959776341308043,
+              43.56263983668123
+            ]
+          },
+          "classification": "locked"
+        },
+        {
+          "startFrame": 2736000,
+          "frameCount": 48000,
+          "startSeconds": 57.0,
+          "durationSeconds": 1.0,
+          "rms": [
+            0.043473102774984354,
+            0.04350815311350045
+          ],
+          "dominantHz": [
+            330.4403581703422,
+            550.4359591449278
+          ],
+          "absoluteErrorsHz": {
+            "locked": [
+              0.4403581703422219,
+              0.43595914492777865
+            ],
+            "unlocked": [
+              25.959641829657755,
+              43.56404085507222
+            ]
+          },
+          "classification": "locked"
+        },
+        {
+          "startFrame": 2784000,
+          "frameCount": 48000,
+          "startSeconds": 58.0,
+          "durationSeconds": 1.0,
+          "rms": [
+            0.027853541353379523,
+            0.02787902158175293
+          ],
+          "dominantHz": [
+            330.434171919551,
+            550.4244171736655
+          ],
+          "absoluteErrorsHz": {
+            "locked": [
+              0.4341719195509768,
+              0.4244171736654607
+            ],
+            "unlocked": [
+              25.965828080449,
+              43.57558282633454
+            ]
+          },
+          "classification": "locked"
+        },
+        {
+          "startFrame": 2832000,
+          "frameCount": 30720,
+          "startSeconds": 59.0,
+          "durationSeconds": 0.64,
+          "rms": [
+            0.0,
+            0.0
+          ],
+          "dominantHz": [
+            null,
+            null
+          ],
+          "absoluteErrorsHz": {
+            "locked": [
+              null,
+              null
+            ],
+            "unlocked": [
+              null,
+              null
+            ]
+          },
+          "classification": "silence"
+        }
+      ],
+      "counts": {
+        "silence": 2,
+        "locked": 35,
+        "transition-or-other": 2,
+        "unlocked": 21
+      },
+      "classifiedToneWindowMetrics": {
+        "locked": {
+          "windowCount": 35,
+          "windowStartSeconds": [
+            1.0,
+            2.0,
+            3.0,
+            4.0,
+            5.0,
+            6.0,
+            7.0,
+            8.0,
+            9.0,
+            10.0,
+            11.0,
+            12.0,
+            13.0,
+            14.0,
+            15.0,
+            16.0,
+            17.0,
+            40.0,
+            41.0,
+            42.0,
+            43.0,
+            44.0,
+            45.0,
+            46.0,
+            47.0,
+            48.0,
+            50.0,
+            51.0,
+            52.0,
+            53.0,
+            54.0,
+            55.0,
+            56.0,
+            57.0,
+            58.0
+          ],
+          "minHz": [
+            330.4000716149076,
+            550.3935860820445
+          ],
+          "maxHz": [
+            330.4413618577023,
+            550.4378140313318
+          ],
+          "maxAbsoluteErrorHz": [
+            0.4413618577023044,
+            0.43781403133175445
+          ]
+        },
+        "unlocked": {
+          "windowCount": 21,
+          "windowStartSeconds": [
+            19.0,
+            20.0,
+            21.0,
+            22.0,
+            23.0,
+            24.0,
+            25.0,
+            26.0,
+            27.0,
+            28.0,
+            29.0,
+            30.0,
+            31.0,
+            32.0,
+            33.0,
+            34.0,
+            35.0,
+            36.0,
+            37.0,
+            38.0,
+            39.0
+          ],
+          "minHz": [
+            357.4734791156471,
+            594.3527276204796
+          ],
+          "maxHz": [
+            357.4744413432144,
+            594.3553551805634
+          ],
+          "maxAbsoluteErrorHz": [
+            1.0744413432144029,
+            0.3553551805633788
+          ]
+        }
+      },
+      "oneMillisecondQuietAnalysis": {
+        "binFrames": 48,
+        "bins": 59640,
+        "threshold": 0.005,
+        "definition": "Joint RMS of48frames x2channels; alternate both-channel RMS test also evaluated",
+        "allRuns": [
+          {
+            "startSeconds": 0.0,
+            "endSeconds": 1.47,
+            "milliseconds": 1470
+          },
+          {
+            "startSeconds": 58.411,
+            "endSeconds": 59.64,
+            "milliseconds": 1229
+          }
+        ],
+        "sameRunsRequiringBothChannelsQuiet": true,
+        "isInstantaneousContinuityProof": false,
+        "isReleaseLatencyMeasurement": false
+      },
+      "sourceHashes": {
+        "docs/prototype/desktop-0.1.5-keylock-audio-inspection.json": "d3ace30a8844974f6d01d6a6f32daf23e02e9a5102a5f3ee5fb671c10edc29a9",
+        "docs/prototype/desktop-0.1.5-keylock-fixture.json": "77689f2e5971dde37d6436ebfe56f51dc54cb3cc0f6d20af0b19280c2415ecea",
+        "local-evidence/desktop-0.1.5-keylock-actions.json": "c1258d9f90b599061bc68f7e9177c6e6526a474f49bde9975e232bb910ea9f62"
+      },
+      "parentObservedActionLog": "local-evidence/desktop-0.1.5-keylock-actions.json",
+      "reviewerOperatedUI": false,
+      "checks": {
+        "originalByteCountMatchesParent": true,
+        "originalHashMatchesParent": true,
+        "retainedCopyByteIdentical": true,
+        "decodedPCMHashMatchesParent": true,
+        "decodedGeometryMatchesParent": true,
+        "allSamplesFinite": true,
+        "wholeRMSMatchesParent": true,
+        "wholePeakMatchesParent": true,
+        "allWindowClassificationsMatchParent": true,
+        "allFramesAccountedFor": true,
+        "all1msBinsAccountedFor": true,
+        "quietRunsMatchParent": true,
+        "jointAndBothChannelQuietClassificationsIdentical": true
+      }
+    },
+    {
+      "id": "keylock-plus2-stationary-scratch",
+      "original": "/Users/jasonpoindexter/Downloads/Open Play 0.1.5 native shifted stationary scratch.webm",
+      "retainedCopy": "local-evidence/desktop-0.1.5-keylock/native-shifted-stationary-scratch.webm",
+      "originalBytes": 452918,
+      "originalSHA256": "8f7900ff1e7367aea6d246b160f751e1446197046219a16926d70f92c4cff88c",
+      "retainedCopySHA256": "8f7900ff1e7367aea6d246b160f751e1446197046219a16926d70f92c4cff88c",
+      "decoderArgv": [
+        "/opt/homebrew/bin/ffmpeg",
+        "-v",
+        "error",
+        "-i",
+        "/Users/jasonpoindexter/Downloads/Open Play 0.1.5 native shifted stationary scratch.webm",
+        "-map",
+        "0:a:0",
+        "-c:a",
+        "pcm_f32le",
+        "-f",
+        "f32le",
+        "pipe:1"
+      ],
+      "probe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "opus",
+            "sample_rate": "48000",
+            "channels": 2,
+            "channel_layout": "stereo"
+          }
+        ]
+      },
+      "wholePCM_SHA256": "26c0be66ba0394cc9b2c39f0e9f2239345a6df1a2ab0446ed28a1b78836a0e72",
+      "decodedFrames": 1474560,
+      "sampleRate": 48000,
+      "channels": 2,
+      "durationSeconds": 30.72,
+      "finite": true,
+      "wholeRMS": [
+        0.0398709940763642,
+        0.03991528393593332
+      ],
+      "wholePeak": [
+        0.06271253526210785,
+        0.06323853135108948
+      ],
+      "expectedHz": {
+        "shifted": [
+          370.4124759420931,
+          617.3541265701551
+        ]
+      },
+      "pitchToleranceHz": 1.5,
+      "allOneSecondWindows": [
+        {
+          "startFrame": 0,
+          "frameCount": 48000,
+          "startSeconds": 0.0,
+          "durationSeconds": 1.0,
+          "rms": [
+            0.0,
+            0.0
+          ],
+          "dominantHz": [
+            null,
+            null
+          ],
+          "absoluteErrorsHz": {
+            "shifted": [
+              null,
+              null
+            ]
+          },
+          "classification": "silence"
+        },
+        {
+          "startFrame": 48000,
+          "frameCount": 48000,
+          "startSeconds": 1.0,
+          "durationSeconds": 1.0,
+          "rms": [
+            0.04127974554767683,
+            0.04133412787871441
+          ],
+          "dominantHz": [
+            371.465136536508,
+            617.9299426750987
+          ],
+          "absoluteErrorsHz": {
+            "shifted": [
+              1.0526605944148741,
+              0.5758161049435557
+            ]
+          },
+          "classification": "shifted"
+        },
+        {
+          "startFrame": 96000,
+          "frameCount": 48000,
+          "startSeconds": 2.0,
+          "durationSeconds": 1.0,
+          "rms": [
+            0.04254589491105963,
+            0.04257687879342381
+          ],
+          "dominantHz": [
+            371.46486316330555,
+            617.929368126483
+          ],
+          "absoluteErrorsHz": {
+            "shifted": [
+              1.0523872212124274,
+              0.5752415563279101
+            ]
+          },
+          "classification": "shifted"
+        },
+        {
+          "startFrame": 144000,
+          "frameCount": 48000,
+          "startSeconds": 3.0,
+          "durationSeconds": 1.0,
+          "rms": [
+            0.04253036563680538,
+            0.0425911811637664
+          ],
+          "dominantHz": [
+            371.4652165637575,
+            617.9295511940594
+          ],
+          "absoluteErrorsHz": {
+            "shifted": [
+              1.052740621664384,
+              0.5754246239042686
+            ]
+          },
+          "classification": "shifted"
+        },
+        {
+          "startFrame": 192000,
+          "frameCount": 48000,
+          "startSeconds": 4.0,
+          "durationSeconds": 1.0,
+          "rms": [
+            0.04255164187301539,
+            0.04259422091591291
+          ],
+          "dominantHz": [
+            371.4641922716193,
+            617.9291445615547
+          ],
+          "absoluteErrorsHz": {
+            "shifted": [
+              1.0517163295261867,
+              0.5750179913995908
+            ]
+          },
+          "classification": "shifted"
+        },
+        {
+          "startFrame": 240000,
+          "frameCount": 48000,
+          "startSeconds": 5.0,
+          "durationSeconds": 1.0,
+          "rms": [
+            0.04253710408934535,
+            0.042599798594447506
+          ],
+          "dominantHz": [
+            371.46427692834624,
+            617.9294384767165
+          ],
+          "absoluteErrorsHz": {
+            "shifted": [
+              1.051800986253113,
+              0.5753119065614101
+            ]
+          },
+          "classification": "shifted"
+        },
+        {
+          "startFrame": 288000,
+          "frameCount": 48000,
+          "startSeconds": 6.0,
+          "durationSeconds": 1.0,
+          "rms": [
+            0.04254817178162823,
+            0.042594986874242464
+          ],
+          "dominantHz": [
+            371.46459386665117,
+            617.9272426328155
+          ],
+          "absoluteErrorsHz": {
+            "shifted": [
+              1.052117924558047,
+              0.5731160626603469
+            ]
+          },
+          "classification": "shifted"
+        },
+        {
+          "startFrame": 336000,
+          "frameCount": 48000,
+          "startSeconds": 7.0,
+          "durationSeconds": 1.0,
+          "rms": [
+            0.0425334954794899,
+            0.04258949408719353
+          ],
+          "dominantHz": [
+            371.4643203790631,
+            617.9283869092059
+          ],
+          "absoluteErrorsHz": {
+            "shifted": [
+              1.0518444369699864,
+              0.5742603390507384
+            ]
+          },
+          "classification": "shifted"
+        },
+        {
+          "startFrame": 384000,
+          "frameCount": 48000,
+          "startSeconds": 8.0,
+          "durationSeconds": 1.0,
+          "rms": [
+            0.04254302435353683,
+            0.04260661169848292
+          ],
+          "dominantHz": [
+            371.4647845924048,
+            617.9289114205159
+          ],
+          "absoluteErrorsHz": {
+            "shifted": [
+              1.0523086503116588,
+              0.5747848503607429
+            ]
+          },
+          "classification": "shifted"
+        },
+        {
+          "startFrame": 432000,
+          "frameCount": 48000,
+          "startSeconds": 9.0,
+          "durationSeconds": 1.0,
+          "rms": [
+            0.03326859604365541,
+            0.03332442115187747
+          ],
+          "dominantHz": [
+            371.4604538824781,
+            617.9280804103275
+          ],
+          "absoluteErrorsHz": {
+            "shifted": [
+              1.0479779403849534,
+              0.5739538401724076
+            ]
+          },
+          "classification": "shifted"
+        },
+        {
+          "startFrame": 480000,
+          "frameCount": 48000,
+          "startSeconds": 10.0,
+          "durationSeconds": 1.0,
+          "rms": [
+            0.017959303780860494,
+            0.017974058571732704
+          ],
+          "dominantHz": [
+            371.45937965286,
+            617.9285113147081
+          ],
+          "absoluteErrorsHz": {
+            "shifted": [
+              1.0469037107668555,
+              0.5743847445529582
+            ]
+          },
+          "classification": "shifted"
+        },
+        {
+          "startFrame": 528000,
+          "frameCount": 48000,
+          "startSeconds": 11.0,
+          "durationSeconds": 1.0,
+          "rms": [
+            0.042549243081717925,
+            0.042585036580673016
+          ],
+          "dominantHz": [
+            371.464992707884,
+            617.9298535358879
+          ],
+          "absoluteErrorsHz": {
+            "shifted": [
+              1.0525167657908696,
+              0.5757269657327697
+            ]
+          },
+          "classification": "shifted"
+        },
+        {
+          "startFrame": 576000,
+          "frameCount": 48000,
+          "startSeconds": 12.0,
+          "durationSeconds": 1.0,
+          "rms": [
+            0.04254315201966286,
+            0.04261173009489593
+          ],
+          "dominantHz": [
+            371.4647783170414,
+            617.929493993815
+          ],
+          "absoluteErrorsHz": {
+            "shifted": [
+              1.0523023749482832,
+              0.5753674236598272
+            ]
+          },
+          "classification": "shifted"
+        },
+        {
+          "startFrame": 624000,
+          "frameCount": 48000,
+          "startSeconds": 13.0,
+          "durationSeconds": 1.0,
+          "rms": [
+            0.04254288883973867,
+            0.04260887064469291
+          ],
+          "dominantHz": [
+            371.46529615348913,
+            617.9301412223574
+          ],
+          "absoluteErrorsHz": {
+            "shifted": [
+              1.0528202113960106,
+              0.5760146522022751
+            ]
+          },
+          "classification": "shifted"
+        },
+        {
+          "startFrame": 672000,
+          "frameCount": 48000,
+          "startSeconds": 14.0,
+          "durationSeconds": 1.0,
+          "rms": [
+            0.04254572284994188,
+            0.04256435734248133
+          ],
+          "dominantHz": [
+            371.4654386686403,
+            617.9294511545795
+          ],
+          "absoluteErrorsHz": {
+            "shifted": [
+              1.0529627265471504,
+              0.5753245844243793
+            ]
+          },
+          "classification": "shifted"
+        },
+        {
+          "startFrame": 720000,
+          "frameCount": 48000,
+          "startSeconds": 15.0,
+          "durationSeconds": 1.0,
+          "rms": [
+            0.04254066969190961,
+            0.04258649457018589
+          ],
+          "dominantHz": [
+            371.46482671499774,
+            617.92928003865
+          ],
+          "absoluteErrorsHz": {
+            "shifted": [
+              1.0523507729046173,
+              0.5751534684948183
+            ]
+          },
+          "classification": "shifted"
+        },
+        {
+          "startFrame": 768000,
+          "frameCount": 48000,
+          "startSeconds": 16.0,
+          "durationSeconds": 1.0,
+          "rms": [
+            0.04254720693847985,
+            0.042591674584291285
+          ],
+          "dominantHz": [
+            371.46492514638686,
+            617.930322291627
+          ],
+          "absoluteErrorsHz": {
+            "shifted": [
+              1.0524492042937368,
+              0.5761957214718905
+            ]
+          },
+          "classification": "shifted"
+        },
+        {
+          "startFrame": 816000,
+          "frameCount": 48000,
+          "startSeconds": 17.0,
+          "durationSeconds": 1.0,
+          "rms": [
+            0.04253933609551497,
+            0.04258788504009645
+          ],
+          "dominantHz": [
+            371.46485246253275,
+            617.9290216179979
+          ],
+          "absoluteErrorsHz": {
+            "shifted": [
+              1.0523765204396227,
+              0.5748950478428014
+            ]
+          },
+          "classification": "shifted"
+        },
+        {
+          "startFrame": 864000,
+          "frameCount": 48000,
+          "startSeconds": 18.0,
+          "durationSeconds": 1.0,
+          "rms": [
+            0.042542100403986254,
+            0.04258251589452356
+          ],
+          "dominantHz": [
+            371.4646086836322,
+            617.9285618635946
+          ],
+          "absoluteErrorsHz": {
+            "shifted": [
+              1.0521327415390829,
+              0.5744352934394783
+            ]
+          },
+          "classification": "shifted"
+        },
+        {
+          "startFrame": 912000,
+          "frameCount": 48000,
+          "startSeconds": 19.0,
+          "durationSeconds": 1.0,
+          "rms": [
+            0.042531542746895544,
+            0.04256639826488603
+          ],
+          "dominantHz": [
+            371.464629624969,
+            617.9287575427738
+          ],
+          "absoluteErrorsHz": {
+            "shifted": [
+              1.0521536828758826,
+              0.5746309726187064
+            ]
+          },
+          "classification": "shifted"
+        },
+        {
+          "startFrame": 960000,
+          "frameCount": 48000,
+          "startSeconds": 20.0,
+          "durationSeconds": 1.0,
+          "rms": [
+            0.04254110264489481,
+            0.042591769050799914
+          ],
+          "dominantHz": [
+            371.4647833506751,
+            617.9285907111345
+          ],
+          "absoluteErrorsHz": {
+            "shifted": [
+              1.052307408581953,
+              0.5744641409793303
+            ]
+          },
+          "classification": "shifted"
+        },
+        {
+          "startFrame": 1008000,
+          "frameCount": 48000,
+          "startSeconds": 21.0,
+          "durationSeconds": 1.0,
+          "rms": [
+            0.04254771246906223,
+            0.04259706335622437
+          ],
+          "dominantHz": [
+            371.46537648862096,
+            617.9276721428619
+          ],
+          "absoluteErrorsHz": {
+            "shifted": [
+              1.0529005465278374,
+              0.5735455727067347
+            ]
+          },
+          "classification": "shifted"
+        },
+        {
+          "startFrame": 1056000,
+          "frameCount": 48000,
+          "startSeconds": 22.0,
+          "durationSeconds": 1.0,
+          "rms": [
+            0.0425418778578398,
+            0.042581747085384106
+          ],
+          "dominantHz": [
+            371.4648960390044,
+            617.9285404722132
+          ],
+          "absoluteErrorsHz": {
+            "shifted": [
+              1.0524200969112485,
+              0.5744139020580405
+            ]
+          },
+          "classification": "shifted"
+        },
+        {
+          "startFrame": 1104000,
+          "frameCount": 48000,
+          "startSeconds": 23.0,
+          "durationSeconds": 1.0,
+          "rms": [
+            0.042550118691541426,
+            0.04257104105305695
+          ],
+          "dominantHz": [
+            371.4648640158301,
+            617.9288309640601
+          ],
+          "absoluteErrorsHz": {
+            "shifted": [
+              1.0523880737369495,
+              0.5747043939049945
+            ]
+          },
+          "classification": "shifted"
+        },
+        {
+          "startFrame": 1152000,
+          "frameCount": 48000,
+          "startSeconds": 24.0,
+          "durationSeconds": 1.0,
+          "rms": [
+            0.042536949496936226,
+            0.042591755624799464
+          ],
+          "dominantHz": [
+            371.46483444026336,
+            617.9281896188368
+          ],
+          "absoluteErrorsHz": {
+            "shifted": [
+              1.0523584981702356,
+              0.5740630486816372
+            ]
+          },
+          "classification": "shifted"
+        },
+        {
+          "startFrame": 1200000,
+          "frameCount": 48000,
+          "startSeconds": 25.0,
+          "durationSeconds": 1.0,
+          "rms": [
+            0.04254698088411881,
+            0.04259409474535064
+          ],
+          "dominantHz": [
+            371.464248352201,
+            617.9294948307834
+          ],
+          "absoluteErrorsHz": {
+            "shifted": [
+              1.0517724101079011,
+              0.5753682606282382
+            ]
+          },
+          "classification": "shifted"
+        },
+        {
+          "startFrame": 1248000,
+          "frameCount": 48000,
+          "startSeconds": 26.0,
+          "durationSeconds": 1.0,
+          "rms": [
+            0.042555262135276,
+            0.04258272798417233
+          ],
+          "dominantHz": [
+            371.46472914960924,
+            617.9292963026975
+          ],
+          "absoluteErrorsHz": {
+            "shifted": [
+              1.0522532075161166,
+              0.5751697325423493
+            ]
+          },
+          "classification": "shifted"
+        },
+        {
+          "startFrame": 1296000,
+          "frameCount": 48000,
+          "startSeconds": 27.0,
+          "durationSeconds": 1.0,
+          "rms": [
+            0.04254898968927078,
+            0.04258636102941276
+          ],
+          "dominantHz": [
+            371.4648494609744,
+            617.9295394711905
+          ],
+          "absoluteErrorsHz": {
+            "shifted": [
+              1.052373518881268,
+              0.5754129010354063
+            ]
+          },
+          "classification": "shifted"
+        },
+        {
+          "startFrame": 1344000,
+          "frameCount": 48000,
+          "startSeconds": 28.0,
+          "durationSeconds": 1.0,
+          "rms": [
+            0.042550856081040984,
+            0.04261714766966167
+          ],
+          "dominantHz": [
+            371.46518139849644,
+            617.9303003681163
+          ],
+          "absoluteErrorsHz": {
+            "shifted": [
+              1.0527054564033165,
+              0.5761737979611325
+            ]
+          },
+          "classification": "shifted"
+        },
+        {
+          "startFrame": 1392000,
+          "frameCount": 48000,
+          "startSeconds": 29.0,
+          "durationSeconds": 1.0,
+          "rms": [
+            0.021284837228605222,
+            0.021308796739736496
+          ],
+          "dominantHz": [
+            371.44774340233266,
+            617.9445910763137
+          ],
+          "absoluteErrorsHz": {
+            "shifted": [
+              1.0352674602395382,
+              0.5904645061585825
+            ]
+          },
+          "classification": "shifted"
+        },
+        {
+          "startFrame": 1440000,
+          "frameCount": 34560,
+          "startSeconds": 30.0,
+          "durationSeconds": 0.72,
+          "rms": [
+            0.0,
+            0.0
+          ],
+          "dominantHz": [
+            null,
+            null
+          ],
+          "absoluteErrorsHz": {
+            "shifted": [
+              null,
+              null
+            ]
+          },
+          "classification": "silence"
+        }
+      ],
+      "counts": {
+        "silence": 2,
+        "shifted": 29
+      },
+      "classifiedToneWindowMetrics": {
+        "shifted": {
+          "windowCount": 29,
+          "windowStartSeconds": [
+            1.0,
+            2.0,
+            3.0,
+            4.0,
+            5.0,
+            6.0,
+            7.0,
+            8.0,
+            9.0,
+            10.0,
+            11.0,
+            12.0,
+            13.0,
+            14.0,
+            15.0,
+            16.0,
+            17.0,
+            18.0,
+            19.0,
+            20.0,
+            21.0,
+            22.0,
+            23.0,
+            24.0,
+            25.0,
+            26.0,
+            27.0,
+            28.0,
+            29.0
+          ],
+          "minHz": [
+            371.44774340233266,
+            617.9272426328155
+          ],
+          "maxHz": [
+            371.4654386686403,
+            617.9445910763137
+          ],
+          "maxAbsoluteErrorHz": [
+            1.0529627265471504,
+            0.5904645061585825
+          ]
+        }
+      },
+      "oneMillisecondQuietAnalysis": {
+        "binFrames": 48,
+        "bins": 30720,
+        "threshold": 0.005,
+        "definition": "Joint RMS of48frames x2channels; alternate both-channel RMS test also evaluated",
+        "allRuns": [
+          {
+            "startSeconds": 0.0,
+            "endSeconds": 1.053,
+            "milliseconds": 1053
+          },
+          {
+            "startSeconds": 9.613,
+            "endSeconds": 10.82,
+            "milliseconds": 1207
+          },
+          {
+            "startSeconds": 29.251,
+            "endSeconds": 30.72,
+            "milliseconds": 1469
+          }
+        ],
+        "sameRunsRequiringBothChannelsQuiet": true,
+        "isInstantaneousContinuityProof": false,
+        "isReleaseLatencyMeasurement": false
+      },
+      "sourceHashes": {
+        "docs/prototype/desktop-0.1.5-shifted-keylock-audio-inspection.json": "cbae9b6eb309e09cd6dfc0a1880aa75c7730231426a981487e9c09ef87ba8c9b",
+        "docs/prototype/desktop-0.1.5-keylock-shifted-criterion.json": "ce74e2532604c99ed8ed89bd919ab2b0a38bdd33af5a16324c0273ecee24d21d",
+        "local-evidence/desktop-0.1.5-shifted-keylock-actions.json": "cea5e0384d8fa23083dafb284a32d98771bb9a3473531aa226d4786b15e958fc"
+      },
+      "parentObservedActionLog": "local-evidence/desktop-0.1.5-shifted-keylock-actions.json",
+      "reviewerOperatedUI": false,
+      "checks": {
+        "originalByteCountMatchesParent": true,
+        "originalHashMatchesParent": true,
+        "retainedCopyByteIdentical": true,
+        "decodedPCMHashMatchesParent": true,
+        "decodedGeometryMatchesParent": true,
+        "allSamplesFinite": true,
+        "wholeRMSMatchesParent": true,
+        "wholePeakMatchesParent": true,
+        "allWindowClassificationsMatchParent": true,
+        "allFramesAccountedFor": true,
+        "all1msBinsAccountedFor": true,
+        "quietRunsMatchParent": true,
+        "jointAndBothChannelQuietClassificationsIdentical": true
+      }
+    }
+  ],
+  "boundedVerdict": {
+    "sustainedLockedUnlockedPitchSupported": true,
+    "sustainedPlus2PitchBeforeAfterStationaryHoldSupported": true,
+    "allComparisonChecksExecuted": true,
+    "firstRecordingTransitionsRetainedAtSeconds": [
+      18,
+      49
+    ],
+    "oneSecondToneClassificationDoesNotMeanContinuousSound": true,
+    "secondRecordingQuietRunMilliseconds": 1207,
+    "exactCursorProven": false,
+    "exactReleaseLatencyProven": false,
+    "sampleContinuityProven": false,
+    "musicalQualityProven": false,
+    "physicalOutputOrControllerProof": false,
+    "referenceOrFullParityProven": false,
+    "UIActionsIndependentlyExecuted": false
+  }
+}

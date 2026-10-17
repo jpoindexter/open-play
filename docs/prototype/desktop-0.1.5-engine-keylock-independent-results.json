@@ -1,0 +1,4908 @@
+{
+  "kind": "Independent offline review of parent-executed native Electron keylock engine harness",
+  "date": "2026-10-17",
+  "input": "docs/prototype/keylock-engine-native-0.1.5-results.json",
+  "inputSHA256": "489f514c2ebc4e5ef664324364705bfcc9a625bfb31eb68fb89f3b64f7c78dd7",
+  "parentRuntimeResult": {
+    "passed": 7,
+    "failed": 0,
+    "fatalErrors": [],
+    "completed": true,
+    "durationMs": 12735.299999952316,
+    "sampleRate": 44100
+  },
+  "packagedSource": {
+    "archive": "local-evidence/desktop-builds/0.1.5/Open Play Test-darwin-arm64/Open Play Test.app/Contents/Resources/app.asar",
+    "ASARSHA256": "251bcc16caf9cfb42a3967db058717373a8c6fcb9ff97d56c330058ec8301b03",
+    "matchesPriorPackageManifest": true,
+    "sourceCommit": "48a6d4dad2f217a8ba166b9ca890a287aabc4feb",
+    "files": [
+      {
+        "file": "engine.js",
+        "runtimeSHA256": "b4683c245c6314432c06f891e85106cf0a1a5c0a615435516930ab5b38f64adf",
+        "packagedSHA256": "b4683c245c6314432c06f891e85106cf0a1a5c0a615435516930ab5b38f64adf",
+        "localSHA256": "b4683c245c6314432c06f891e85106cf0a1a5c0a615435516930ab5b38f64adf",
+        "immutableManifestSHA256": "b4683c245c6314432c06f891e85106cf0a1a5c0a615435516930ab5b38f64adf",
+        "matchesPackaged": true,
+        "matchesLocal": true,
+        "matchesManifest": true
+      },
+      {
+        "file": "keylock-shadow-live.js",
+        "runtimeSHA256": "4860d18ec3ccf39474824cbf9d46df259b110631b4c2cfde60c9a1d03e21504b",
+        "packagedSHA256": "4860d18ec3ccf39474824cbf9d46df259b110631b4c2cfde60c9a1d03e21504b",
+        "localSHA256": "4860d18ec3ccf39474824cbf9d46df259b110631b4c2cfde60c9a1d03e21504b",
+        "immutableManifestSHA256": "4860d18ec3ccf39474824cbf9d46df259b110631b4c2cfde60c9a1d03e21504b",
+        "matchesPackaged": true,
+        "matchesLocal": true,
+        "matchesManifest": true
+      },
+      {
+        "file": "keylock-scratch-shadow.js",
+        "runtimeSHA256": "6e4f0d8e108705676944722ea625959b4477fb40c91c8024a3d7d48b24c6ed31",
+        "packagedSHA256": "6e4f0d8e108705676944722ea625959b4477fb40c91c8024a3d7d48b24c6ed31",
+        "localSHA256": "6e4f0d8e108705676944722ea625959b4477fb40c91c8024a3d7d48b24c6ed31",
+        "immutableManifestSHA256": "6e4f0d8e108705676944722ea625959b4477fb40c91c8024a3d7d48b24c6ed31",
+        "matchesPackaged": true,
+        "matchesLocal": true,
+        "matchesManifest": true
+      },
+      {
+        "file": "silent-audio-pull.js",
+        "runtimeSHA256": "44e0999cde51efa66708adf8ffd7a4c466d35f819b163b4730ce04f4d9be1c00",
+        "packagedSHA256": "44e0999cde51efa66708adf8ffd7a4c466d35f819b163b4730ce04f4d9be1c00",
+        "localSHA256": "44e0999cde51efa66708adf8ffd7a4c466d35f819b163b4730ce04f4d9be1c00",
+        "immutableManifestSHA256": "44e0999cde51efa66708adf8ffd7a4c466d35f819b163b4730ce04f4d9be1c00",
+        "matchesPackaged": true,
+        "matchesLocal": true,
+        "matchesManifest": true
+      },
+      {
+        "file": "silent-audio-pull-worklet.js",
+        "runtimeSHA256": "00f8d094b63f3eab16874fedf576edf1eec316706e2d7e88c4371d7c9f26f73b",
+        "packagedSHA256": "00f8d094b63f3eab16874fedf576edf1eec316706e2d7e88c4371d7c9f26f73b",
+        "localSHA256": "00f8d094b63f3eab16874fedf576edf1eec316706e2d7e88c4371d7c9f26f73b",
+        "immutableManifestSHA256": "00f8d094b63f3eab16874fedf576edf1eec316706e2d7e88c4371d7c9f26f73b",
+        "matchesPackaged": true,
+        "matchesLocal": true,
+        "matchesManifest": true
+      },
+      {
+        "file": "deck-scratch-cache.js",
+        "runtimeSHA256": "04ea486f7010df479184d629c14ea3f8cdd81ef595c5d8233c8e407890e2fa99",
+        "packagedSHA256": "04ea486f7010df479184d629c14ea3f8cdd81ef595c5d8233c8e407890e2fa99",
+        "localSHA256": "04ea486f7010df479184d629c14ea3f8cdd81ef595c5d8233c8e407890e2fa99",
+        "immutableManifestSHA256": "04ea486f7010df479184d629c14ea3f8cdd81ef595c5d8233c8e407890e2fa99",
+        "matchesPackaged": true,
+        "matchesLocal": true,
+        "matchesManifest": true
+      },
+      {
+        "file": "keylock-release-analysis.js",
+        "runtimeSHA256": "2957a90303441cade061107affaee8b3ae4b68d3724fff72a5a9ca1ac30b6e5f",
+        "packagedSHA256": "2957a90303441cade061107affaee8b3ae4b68d3724fff72a5a9ca1ac30b6e5f",
+        "localSHA256": "2957a90303441cade061107affaee8b3ae4b68d3724fff72a5a9ca1ac30b6e5f",
+        "immutableManifestSHA256": "2957a90303441cade061107affaee8b3ae4b68d3724fff72a5a9ca1ac30b6e5f",
+        "matchesPackaged": true,
+        "matchesLocal": true,
+        "matchesManifest": true
+      },
+      {
+        "file": "keylock-engine-harness.js",
+        "runtimeSHA256": "f5aae828a61cbe27b8c3c255fe5da2dac4db683642e0ce561a9d3302c19f28f9",
+        "packagedSHA256": "f5aae828a61cbe27b8c3c255fe5da2dac4db683642e0ce561a9d3302c19f28f9",
+        "localSHA256": "f5aae828a61cbe27b8c3c255fe5da2dac4db683642e0ce561a9d3302c19f28f9",
+        "immutableManifestSHA256": "f5aae828a61cbe27b8c3c255fe5da2dac4db683642e0ce561a9d3302c19f28f9",
+        "matchesPackaged": true,
+        "matchesLocal": true,
+        "matchesManifest": true
+      }
+    ]
+  },
+  "reviewerOperatedNativeUI": false,
+  "releasePCM": {
+    "format": "Little-endian mono Float32 actual left deck-input channel; full release interval, no trimmed samples",
+    "sampleRate": 44100,
+    "frames": 26460,
+    "durationSeconds": 0.6,
+    "rawSHA256": "2a37d1bc624c2e25288ab59862dab6f147b9441db75bc2a0a423ad0c5f5824e4",
+    "bytes": 105840,
+    "finite": true,
+    "firstTime": 8.20469387755102,
+    "releaseTime": 8.25469387755102,
+    "outputTime": 8.30469387755102,
+    "outputMinusReleaseSeconds": 0.05000000000000071,
+    "intervalStartFrameProduct": 361826.99999999994,
+    "intervalStartRoundedFrame": 361827,
+    "reportedReleaseSampleOffset": 2205.0000000000314,
+    "firstExactNonzeroSample": 2206,
+    "firstExactNonzeroRelativeToReleaseSeconds": 2.2675736961019766e-05,
+    "wholeRMS": 0.08836504765962319,
+    "wholePeak": 0.17143051326274872,
+    "allSpectralWindows": [
+      {
+        "frames": 1764,
+        "rms": 0.0,
+        "peak": 0.0,
+        "dominantHz": null,
+        "start": 8.20469387755102,
+        "releaseRelativeStart": -0.05000000000000071,
+        "outputRelativeStart": -0.10000000000000142,
+        "correct": false,
+        "nearRawExpected": false
+      },
+      {
+        "frames": 1764,
+        "rms": 0.0,
+        "peak": 0.0,
+        "dominantHz": null,
+        "start": 8.214693877551019,
+        "releaseRelativeStart": -0.040000000000000924,
+        "outputRelativeStart": -0.09000000000000163,
+        "correct": false,
+        "nearRawExpected": false
+      },
+      {
+        "frames": 1764,
+        "rms": 0.05137657392628585,
+        "peak": 0.16178186237812042,
+        "dominantHz": 880.8640714952572,
+        "start": 8.224693877551019,
+        "releaseRelativeStart": -0.030000000000001137,
+        "outputRelativeStart": -0.08000000000000185,
+        "correct": true,
+        "nearRawExpected": false
+      },
+      {
+        "frames": 1764,
+        "rms": 0.07659046321822577,
+        "peak": 0.16244666278362274,
+        "dominantHz": 880.7842598848943,
+        "start": 8.234693877551019,
+        "releaseRelativeStart": -0.02000000000000135,
+        "outputRelativeStart": -0.07000000000000206,
+        "correct": true,
+        "nearRawExpected": false
+      },
+      {
+        "frames": 1764,
+        "rms": 0.09595111570945797,
+        "peak": 0.16373960673809052,
+        "dominantHz": 880.7523648574443,
+        "start": 8.244693877551018,
+        "releaseRelativeStart": -0.010000000000001563,
+        "outputRelativeStart": -0.060000000000002274,
+        "correct": true,
+        "nearRawExpected": false
+      },
+      {
+        "frames": 1764,
+        "rms": 0.11243181983737287,
+        "peak": 0.16681866347789764,
+        "dominantHz": 880.7131664124773,
+        "start": 8.25469387755102,
+        "releaseRelativeStart": 0.0,
+        "outputRelativeStart": -0.05000000000000071,
+        "correct": true,
+        "nearRawExpected": false
+      },
+      {
+        "frames": 1764,
+        "rms": 0.11610492013520363,
+        "peak": 0.168813094496727,
+        "dominantHz": 880.6941604190149,
+        "start": 8.26469387755102,
+        "releaseRelativeStart": 0.009999999999999787,
+        "outputRelativeStart": -0.040000000000000924,
+        "correct": true,
+        "nearRawExpected": false
+      },
+      {
+        "frames": 1764,
+        "rms": 0.11780215682995707,
+        "peak": 0.16910406947135925,
+        "dominantHz": 880.7085539830987,
+        "start": 8.27469387755102,
+        "releaseRelativeStart": 0.019999999999999574,
+        "outputRelativeStart": -0.030000000000001137,
+        "correct": true,
+        "nearRawExpected": false
+      },
+      {
+        "frames": 1764,
+        "rms": 0.1183437839547998,
+        "peak": 0.16910406947135925,
+        "dominantHz": 880.7082124562908,
+        "start": 8.28469387755102,
+        "releaseRelativeStart": 0.02999999999999936,
+        "outputRelativeStart": -0.02000000000000135,
+        "correct": true,
+        "nearRawExpected": false
+      },
+      {
+        "frames": 1764,
+        "rms": 0.11786694259208934,
+        "peak": 0.16910406947135925,
+        "dominantHz": 880.6842036104175,
+        "start": 8.294693877551019,
+        "releaseRelativeStart": 0.03999999999999915,
+        "outputRelativeStart": -0.010000000000001563,
+        "correct": true,
+        "nearRawExpected": false
+      },
+      {
+        "frames": 1764,
+        "rms": 0.11594516717781582,
+        "peak": 0.16910406947135925,
+        "dominantHz": 880.6704711647646,
+        "start": 8.304693877551019,
+        "releaseRelativeStart": 0.049999999999998934,
+        "outputRelativeStart": -1.7763568394002505e-15,
+        "correct": true,
+        "nearRawExpected": false
+      },
+      {
+        "frames": 1764,
+        "rms": 0.11131852266120229,
+        "peak": 0.16849780082702637,
+        "dominantHz": 880.6609746612859,
+        "start": 8.314693877551019,
+        "releaseRelativeStart": 0.05999999999999872,
+        "outputRelativeStart": 0.00999999999999801,
+        "correct": true,
+        "nearRawExpected": false
+      },
+      {
+        "frames": 1764,
+        "rms": 0.10552987755880737,
+        "peak": 0.16550366580486298,
+        "dominantHz": 880.6458908828562,
+        "start": 8.324693877551018,
+        "releaseRelativeStart": 0.06999999999999851,
+        "outputRelativeStart": 0.019999999999997797,
+        "correct": true,
+        "nearRawExpected": false
+      },
+      {
+        "frames": 1764,
+        "rms": 0.09772515338892321,
+        "peak": 0.15894187986850739,
+        "dominantHz": 880.6353447866574,
+        "start": 8.33469387755102,
+        "releaseRelativeStart": 0.08000000000000007,
+        "outputRelativeStart": 0.02999999999999936,
+        "correct": true,
+        "nearRawExpected": false
+      },
+      {
+        "frames": 1764,
+        "rms": 0.08874219901915467,
+        "peak": 0.14942143857479095,
+        "dominantHz": 880.6172397278958,
+        "start": 8.34469387755102,
+        "releaseRelativeStart": 0.08999999999999986,
+        "outputRelativeStart": 0.03999999999999915,
+        "correct": true,
+        "nearRawExpected": false
+      },
+      {
+        "frames": 1764,
+        "rms": 0.0796877659071068,
+        "peak": 0.13811419904232025,
+        "dominantHz": 880.5993397936096,
+        "start": 8.35469387755102,
+        "releaseRelativeStart": 0.09999999999999964,
+        "outputRelativeStart": 0.049999999999998934,
+        "correct": true,
+        "nearRawExpected": false
+      },
+      {
+        "frames": 1764,
+        "rms": 0.0700782406970523,
+        "peak": 0.12490677088499069,
+        "dominantHz": 880.595047215413,
+        "start": 8.36469387755102,
+        "releaseRelativeStart": 0.10999999999999943,
+        "outputRelativeStart": 0.05999999999999872,
+        "correct": true,
+        "nearRawExpected": false
+      },
+      {
+        "frames": 1764,
+        "rms": 0.061740368085366544,
+        "peak": 0.11098337173461914,
+        "dominantHz": 880.5689053225572,
+        "start": 8.37469387755102,
+        "releaseRelativeStart": 0.11999999999999922,
+        "outputRelativeStart": 0.06999999999999851,
+        "correct": true,
+        "nearRawExpected": false
+      },
+      {
+        "frames": 1764,
+        "rms": 0.05480743604853431,
+        "peak": 0.09679137170314789,
+        "dominantHz": 880.5343798896797,
+        "start": 8.384693877551019,
+        "releaseRelativeStart": 0.129999999999999,
+        "outputRelativeStart": 0.0799999999999983,
+        "correct": true,
+        "nearRawExpected": false
+      },
+      {
+        "frames": 1764,
+        "rms": 0.04984830345380341,
+        "peak": 0.08435041457414627,
+        "dominantHz": 880.4836335681009,
+        "start": 8.394693877551019,
+        "releaseRelativeStart": 0.1399999999999988,
+        "outputRelativeStart": 0.08999999999999808,
+        "correct": true,
+        "nearRawExpected": false
+      },
+      {
+        "frames": 1764,
+        "rms": 0.04800021028841026,
+        "peak": 0.07438302785158157,
+        "dominantHz": 880.3582822565678,
+        "start": 8.404693877551018,
+        "releaseRelativeStart": 0.14999999999999858,
+        "outputRelativeStart": 0.09999999999999787,
+        "correct": true,
+        "nearRawExpected": false
+      },
+      {
+        "frames": 1764,
+        "rms": 0.048397436965051145,
+        "peak": 0.07761402428150177,
+        "dominantHz": 880.3293819943472,
+        "start": 8.41469387755102,
+        "releaseRelativeStart": 0.16000000000000014,
+        "outputRelativeStart": 0.10999999999999943,
+        "correct": true,
+        "nearRawExpected": false
+      },
+      {
+        "frames": 1764,
+        "rms": 0.05160836195785121,
+        "peak": 0.08784905821084976,
+        "dominantHz": 880.398629707232,
+        "start": 8.42469387755102,
+        "releaseRelativeStart": 0.16999999999999993,
+        "outputRelativeStart": 0.11999999999999922,
+        "correct": true,
+        "nearRawExpected": false
+      },
+      {
+        "frames": 1764,
+        "rms": 0.05713227446826153,
+        "peak": 0.10110298544168472,
+        "dominantHz": 880.3542035687599,
+        "start": 8.43469387755102,
+        "releaseRelativeStart": 0.17999999999999972,
+        "outputRelativeStart": 0.129999999999999,
+        "correct": true,
+        "nearRawExpected": false
+      },
+      {
+        "frames": 1764,
+        "rms": 0.06419472387019381,
+        "peak": 0.11545363068580627,
+        "dominantHz": 880.2910588201493,
+        "start": 8.44469387755102,
+        "releaseRelativeStart": 0.1899999999999995,
+        "outputRelativeStart": 0.1399999999999988,
+        "correct": true,
+        "nearRawExpected": false
+      },
+      {
+        "frames": 1764,
+        "rms": 0.07339213152544977,
+        "peak": 0.1305438131093979,
+        "dominantHz": 880.3225845663322,
+        "start": 8.45469387755102,
+        "releaseRelativeStart": 0.1999999999999993,
+        "outputRelativeStart": 0.14999999999999858,
+        "correct": true,
+        "nearRawExpected": false
+      },
+      {
+        "frames": 1764,
+        "rms": 0.08295056713196611,
+        "peak": 0.1443374902009964,
+        "dominantHz": 880.3605568467564,
+        "start": 8.464693877551019,
+        "releaseRelativeStart": 0.20999999999999908,
+        "outputRelativeStart": 0.15999999999999837,
+        "correct": true,
+        "nearRawExpected": false
+      },
+      {
+        "frames": 1764,
+        "rms": 0.09275101822369271,
+        "peak": 0.15590542554855347,
+        "dominantHz": 880.3881629621836,
+        "start": 8.474693877551019,
+        "releaseRelativeStart": 0.21999999999999886,
+        "outputRelativeStart": 0.16999999999999815,
+        "correct": true,
+        "nearRawExpected": false
+      },
+      {
+        "frames": 1764,
+        "rms": 0.10199937615218385,
+        "peak": 0.16454416513442993,
+        "dominantHz": 880.4097143008055,
+        "start": 8.484693877551019,
+        "releaseRelativeStart": 0.22999999999999865,
+        "outputRelativeStart": 0.17999999999999794,
+        "correct": true,
+        "nearRawExpected": false
+      },
+      {
+        "frames": 1764,
+        "rms": 0.10919852164603217,
+        "peak": 0.1698894500732422,
+        "dominantHz": 880.4415217737231,
+        "start": 8.494693877551018,
+        "releaseRelativeStart": 0.23999999999999844,
+        "outputRelativeStart": 0.18999999999999773,
+        "correct": true,
+        "nearRawExpected": false
+      },
+      {
+        "frames": 1764,
+        "rms": 0.11523592265616421,
+        "peak": 0.17138607800006866,
+        "dominantHz": 880.5002928537784,
+        "start": 8.50469387755102,
+        "releaseRelativeStart": 0.25,
+        "outputRelativeStart": 0.1999999999999993,
+        "correct": true,
+        "nearRawExpected": false
+      },
+      {
+        "frames": 1764,
+        "rms": 0.11842781393796262,
+        "peak": 0.17138607800006866,
+        "dominantHz": 880.5495817997194,
+        "start": 8.51469387755102,
+        "releaseRelativeStart": 0.2599999999999998,
+        "outputRelativeStart": 0.20999999999999908,
+        "correct": true,
+        "nearRawExpected": false
+      },
+      {
+        "frames": 1764,
+        "rms": 0.11920092677009761,
+        "peak": 0.17138607800006866,
+        "dominantHz": 880.5789520673013,
+        "start": 8.52469387755102,
+        "releaseRelativeStart": 0.2699999999999996,
+        "outputRelativeStart": 0.21999999999999886,
+        "correct": true,
+        "nearRawExpected": false
+      },
+      {
+        "frames": 1764,
+        "rms": 0.11786502539056182,
+        "peak": 0.17138607800006866,
+        "dominantHz": 880.610250192089,
+        "start": 8.53469387755102,
+        "releaseRelativeStart": 0.27999999999999936,
+        "outputRelativeStart": 0.22999999999999865,
+        "correct": true,
+        "nearRawExpected": false
+      },
+      {
+        "frames": 1764,
+        "rms": 0.11312748027987744,
+        "peak": 0.17127318680286407,
+        "dominantHz": 880.6388021030039,
+        "start": 8.544693877551019,
+        "releaseRelativeStart": 0.28999999999999915,
+        "outputRelativeStart": 0.23999999999999844,
+        "correct": true,
+        "nearRawExpected": false
+      },
+      {
+        "frames": 1764,
+        "rms": 0.10698673511538935,
+        "peak": 0.16893400251865387,
+        "dominantHz": 880.6390863575975,
+        "start": 8.554693877551019,
+        "releaseRelativeStart": 0.29999999999999893,
+        "outputRelativeStart": 0.24999999999999822,
+        "correct": true,
+        "nearRawExpected": false
+      },
+      {
+        "frames": 1764,
+        "rms": 0.09889221856907211,
+        "peak": 0.1618734896183014,
+        "dominantHz": 880.6321088070634,
+        "start": 8.564693877551019,
+        "releaseRelativeStart": 0.3099999999999987,
+        "outputRelativeStart": 0.259999999999998,
+        "correct": true,
+        "nearRawExpected": false
+      },
+      {
+        "frames": 1764,
+        "rms": 0.08949480667450399,
+        "peak": 0.15151363611221313,
+        "dominantHz": 880.6304293487232,
+        "start": 8.574693877551018,
+        "releaseRelativeStart": 0.3199999999999985,
+        "outputRelativeStart": 0.2699999999999978,
+        "correct": true,
+        "nearRawExpected": false
+      },
+      {
+        "frames": 1764,
+        "rms": 0.08045829117074939,
+        "peak": 0.13929633796215057,
+        "dominantHz": 880.6079547606608,
+        "start": 8.58469387755102,
+        "releaseRelativeStart": 0.33000000000000007,
+        "outputRelativeStart": 0.27999999999999936,
+        "correct": true,
+        "nearRawExpected": false
+      },
+      {
+        "frames": 1764,
+        "rms": 0.07102717750634818,
+        "peak": 0.12548145651817322,
+        "dominantHz": 880.5823780175937,
+        "start": 8.59469387755102,
+        "releaseRelativeStart": 0.33999999999999986,
+        "outputRelativeStart": 0.28999999999999915,
+        "correct": true,
+        "nearRawExpected": false
+      },
+      {
+        "frames": 1764,
+        "rms": 0.06281700715530404,
+        "peak": 0.11113955825567245,
+        "dominantHz": 880.571492217996,
+        "start": 8.60469387755102,
+        "releaseRelativeStart": 0.34999999999999964,
+        "outputRelativeStart": 0.29999999999999893,
+        "correct": true,
+        "nearRawExpected": false
+      },
+      {
+        "frames": 1764,
+        "rms": 0.056049771519709884,
+        "peak": 0.09793651849031448,
+        "dominantHz": 880.5423911319666,
+        "start": 8.61469387755102,
+        "releaseRelativeStart": 0.35999999999999943,
+        "outputRelativeStart": 0.3099999999999987,
+        "correct": true,
+        "nearRawExpected": false
+      },
+      {
+        "frames": 1764,
+        "rms": 0.05077696657827034,
+        "peak": 0.0859525129199028,
+        "dominantHz": 880.5379304636858,
+        "start": 8.62469387755102,
+        "releaseRelativeStart": 0.3699999999999992,
+        "outputRelativeStart": 0.3199999999999985,
+        "correct": true,
+        "nearRawExpected": false
+      },
+      {
+        "frames": 1764,
+        "rms": 0.04840257065715291,
+        "peak": 0.07683207839727402,
+        "dominantHz": 880.5099720292633,
+        "start": 8.634693877551019,
+        "releaseRelativeStart": 0.379999999999999,
+        "outputRelativeStart": 0.3299999999999983,
+        "correct": true,
+        "nearRawExpected": false
+      },
+      {
+        "frames": 1764,
+        "rms": 0.04843270193213548,
+        "peak": 0.07713580876588821,
+        "dominantHz": 880.3353084828498,
+        "start": 8.644693877551019,
+        "releaseRelativeStart": 0.3899999999999988,
+        "outputRelativeStart": 0.3399999999999981,
+        "correct": true,
+        "nearRawExpected": false
+      },
+      {
+        "frames": 1764,
+        "rms": 0.051271552542641104,
+        "peak": 0.08734067529439926,
+        "dominantHz": 880.265185800872,
+        "start": 8.654693877551018,
+        "releaseRelativeStart": 0.3999999999999986,
+        "outputRelativeStart": 0.34999999999999787,
+        "correct": true,
+        "nearRawExpected": false
+      },
+      {
+        "frames": 1764,
+        "rms": 0.0566942008114967,
+        "peak": 0.09962869435548782,
+        "dominantHz": 880.3704836687868,
+        "start": 8.66469387755102,
+        "releaseRelativeStart": 0.41000000000000014,
+        "outputRelativeStart": 0.35999999999999943,
+        "correct": true,
+        "nearRawExpected": false
+      },
+      {
+        "frames": 1764,
+        "rms": 0.06355505672571389,
+        "peak": 0.11307553201913834,
+        "dominantHz": 880.3911740738084,
+        "start": 8.67469387755102,
+        "releaseRelativeStart": 0.41999999999999993,
+        "outputRelativeStart": 0.3699999999999992,
+        "correct": true,
+        "nearRawExpected": false
+      },
+      {
+        "frames": 1764,
+        "rms": 0.07220594757686755,
+        "peak": 0.12733227014541626,
+        "dominantHz": 880.3465805366238,
+        "start": 8.68469387755102,
+        "releaseRelativeStart": 0.4299999999999997,
+        "outputRelativeStart": 0.379999999999999,
+        "correct": true,
+        "nearRawExpected": false
+      },
+      {
+        "frames": 1764,
+        "rms": 0.08123162539416894,
+        "peak": 0.1401626169681549,
+        "dominantHz": 880.3550941896079,
+        "start": 8.69469387755102,
+        "releaseRelativeStart": 0.4399999999999995,
+        "outputRelativeStart": 0.3899999999999988,
+        "correct": true,
+        "nearRawExpected": false
+      },
+      {
+        "frames": 1764,
+        "rms": 0.09061370941170681,
+        "peak": 0.15297463536262512,
+        "dominantHz": 880.3804538214059,
+        "start": 8.70469387755102,
+        "releaseRelativeStart": 0.4499999999999993,
+        "outputRelativeStart": 0.3999999999999986,
+        "correct": true,
+        "nearRawExpected": false
+      },
+      {
+        "frames": 1764,
+        "rms": 0.09995649780185407,
+        "peak": 0.16324447095394135,
+        "dominantHz": 880.4060640852686,
+        "start": 8.714693877551019,
+        "releaseRelativeStart": 0.4599999999999991,
+        "outputRelativeStart": 0.40999999999999837,
+        "correct": true,
+        "nearRawExpected": false
+      },
+      {
+        "frames": 1764,
+        "rms": 0.10750478264459815,
+        "peak": 0.16937194764614105,
+        "dominantHz": 880.4285230076961,
+        "start": 8.724693877551019,
+        "releaseRelativeStart": 0.46999999999999886,
+        "outputRelativeStart": 0.41999999999999815,
+        "correct": true,
+        "nearRawExpected": false
+      },
+      {
+        "frames": 1764,
+        "rms": 0.11410116603342695,
+        "peak": 0.17121003568172455,
+        "dominantHz": 880.4643190147257,
+        "start": 8.734693877551019,
+        "releaseRelativeStart": 0.47999999999999865,
+        "outputRelativeStart": 0.42999999999999794,
+        "correct": true,
+        "nearRawExpected": false
+      },
+      {
+        "frames": 1764,
+        "rms": 0.11798539430199882,
+        "peak": 0.17143051326274872,
+        "dominantHz": 880.5217907661895,
+        "start": 8.744693877551018,
+        "releaseRelativeStart": 0.48999999999999844,
+        "outputRelativeStart": 0.4399999999999977,
+        "correct": true,
+        "nearRawExpected": false
+      },
+      {
+        "frames": 1764,
+        "rms": 0.11908876206728158,
+        "peak": 0.17143051326274872,
+        "dominantHz": 880.5670906786225,
+        "start": 8.75469387755102,
+        "releaseRelativeStart": 0.5,
+        "outputRelativeStart": 0.4499999999999993,
+        "correct": true,
+        "nearRawExpected": false
+      },
+      {
+        "frames": 1764,
+        "rms": 0.11826358079002557,
+        "peak": 0.17143051326274872,
+        "dominantHz": 880.594047098619,
+        "start": 8.76469387755102,
+        "releaseRelativeStart": 0.5099999999999998,
+        "outputRelativeStart": 0.4599999999999991,
+        "correct": true,
+        "nearRawExpected": false
+      }
+    ],
+    "windowFrames": 1764,
+    "hopFrames": 441,
+    "allGapBins": [
+      {
+        "firstSample": 2206,
+        "releaseRelativeStart": 2.2675736961019766e-05,
+        "frames": 44,
+        "rms": 0.022975335407817918,
+        "quiet": false
+      },
+      {
+        "firstSample": 2250,
+        "releaseRelativeStart": 0.0010204081632654294,
+        "frames": 44,
+        "rms": 0.062210122434687674,
+        "quiet": false
+      },
+      {
+        "firstSample": 2294,
+        "releaseRelativeStart": 0.0020181405895680626,
+        "frames": 44,
+        "rms": 0.09140464830217171,
+        "quiet": false
+      },
+      {
+        "firstSample": 2338,
+        "releaseRelativeStart": 0.0030158730158724723,
+        "frames": 44,
+        "rms": 0.11102630785255797,
+        "quiet": false
+      },
+      {
+        "firstSample": 2382,
+        "releaseRelativeStart": 0.004013605442176882,
+        "frames": 44,
+        "rms": 0.12043839834728337,
+        "quiet": false
+      },
+      {
+        "firstSample": 2426,
+        "releaseRelativeStart": 0.005011337868479515,
+        "frames": 44,
+        "rms": 0.11789860409624567,
+        "quiet": false
+      },
+      {
+        "firstSample": 2470,
+        "releaseRelativeStart": 0.006009070294783925,
+        "frames": 44,
+        "rms": 0.10814847143305938,
+        "quiet": false
+      },
+      {
+        "firstSample": 2514,
+        "releaseRelativeStart": 0.007006802721088334,
+        "frames": 44,
+        "rms": 0.11000382717232221,
+        "quiet": false
+      },
+      {
+        "firstSample": 2558,
+        "releaseRelativeStart": 0.008004535147390968,
+        "frames": 44,
+        "rms": 0.11983187565067739,
+        "quiet": false
+      },
+      {
+        "firstSample": 2602,
+        "releaseRelativeStart": 0.009002267573695377,
+        "frames": 44,
+        "rms": 0.1190812167024785,
+        "quiet": false
+      },
+      {
+        "firstSample": 2646,
+        "releaseRelativeStart": 0.009999999999999787,
+        "frames": 44,
+        "rms": 0.10910724012334469,
+        "quiet": false
+      },
+      {
+        "firstSample": 2690,
+        "releaseRelativeStart": 0.01099773242630242,
+        "frames": 44,
+        "rms": 0.1089894146258612,
+        "quiet": false
+      },
+      {
+        "firstSample": 2734,
+        "releaseRelativeStart": 0.01199546485260683,
+        "frames": 44,
+        "rms": 0.11878574051920206,
+        "quiet": false
+      },
+      {
+        "firstSample": 2778,
+        "releaseRelativeStart": 0.01299319727891124,
+        "frames": 44,
+        "rms": 0.119857594940772,
+        "quiet": false
+      },
+      {
+        "firstSample": 2822,
+        "releaseRelativeStart": 0.013990929705213873,
+        "frames": 44,
+        "rms": 0.1103470757044504,
+        "quiet": false
+      },
+      {
+        "firstSample": 2866,
+        "releaseRelativeStart": 0.014988662131518282,
+        "frames": 44,
+        "rms": 0.10826622864335791,
+        "quiet": false
+      },
+      {
+        "firstSample": 2910,
+        "releaseRelativeStart": 0.015986394557822692,
+        "frames": 44,
+        "rms": 0.11811375559939255,
+        "quiet": false
+      },
+      {
+        "firstSample": 2954,
+        "releaseRelativeStart": 0.0169841269841271,
+        "frames": 44,
+        "rms": 0.12101119241944427,
+        "quiet": false
+      },
+      {
+        "firstSample": 2998,
+        "releaseRelativeStart": 0.017981859410429735,
+        "frames": 44,
+        "rms": 0.11183806317873073,
+        "quiet": false
+      },
+      {
+        "firstSample": 3042,
+        "releaseRelativeStart": 0.018979591836734144,
+        "frames": 44,
+        "rms": 0.1078683200736266,
+        "quiet": false
+      },
+      {
+        "firstSample": 3086,
+        "releaseRelativeStart": 0.019977324263038554,
+        "frames": 44,
+        "rms": 0.11699516517505323,
+        "quiet": false
+      },
+      {
+        "firstSample": 3130,
+        "releaseRelativeStart": 0.020975056689341187,
+        "frames": 44,
+        "rms": 0.12141177366176452,
+        "quiet": false
+      },
+      {
+        "firstSample": 3174,
+        "releaseRelativeStart": 0.021972789115645597,
+        "frames": 44,
+        "rms": 0.11316263502463497,
+        "quiet": false
+      },
+      {
+        "firstSample": 3218,
+        "releaseRelativeStart": 0.022970521541950006,
+        "frames": 44,
+        "rms": 0.10761785923898781,
+        "quiet": false
+      },
+      {
+        "firstSample": 3262,
+        "releaseRelativeStart": 0.02396825396825264,
+        "frames": 44,
+        "rms": 0.11588380178650035,
+        "quiet": false
+      },
+      {
+        "firstSample": 3306,
+        "releaseRelativeStart": 0.02496598639455705,
+        "frames": 44,
+        "rms": 0.12199188953892603,
+        "quiet": false
+      },
+      {
+        "firstSample": 3350,
+        "releaseRelativeStart": 0.02596371882086146,
+        "frames": 44,
+        "rms": 0.11496288063855543,
+        "quiet": false
+      },
+      {
+        "firstSample": 3394,
+        "releaseRelativeStart": 0.026961451247164092,
+        "frames": 44,
+        "rms": 0.1079311819121307,
+        "quiet": false
+      },
+      {
+        "firstSample": 3438,
+        "releaseRelativeStart": 0.027959183673468502,
+        "frames": 44,
+        "rms": 0.1151431877011641,
+        "quiet": false
+      },
+      {
+        "firstSample": 3482,
+        "releaseRelativeStart": 0.02895691609977291,
+        "frames": 44,
+        "rms": 0.12280232711054838,
+        "quiet": false
+      },
+      {
+        "firstSample": 3526,
+        "releaseRelativeStart": 0.029954648526075545,
+        "frames": 44,
+        "rms": 0.11731582983268776,
+        "quiet": false
+      },
+      {
+        "firstSample": 3570,
+        "releaseRelativeStart": 0.030952380952379954,
+        "frames": 44,
+        "rms": 0.10899012133512345,
+        "quiet": false
+      },
+      {
+        "firstSample": 3614,
+        "releaseRelativeStart": 0.031950113378684364,
+        "frames": 44,
+        "rms": 0.1147377477565757,
+        "quiet": false
+      },
+      {
+        "firstSample": 3658,
+        "releaseRelativeStart": 0.03294784580498877,
+        "frames": 44,
+        "rms": 0.123532981804129,
+        "quiet": false
+      },
+      {
+        "firstSample": 3702,
+        "releaseRelativeStart": 0.03394557823129141,
+        "frames": 44,
+        "rms": 0.11906619663302082,
+        "quiet": false
+      },
+      {
+        "firstSample": 3746,
+        "releaseRelativeStart": 0.034943310657595816,
+        "frames": 44,
+        "rms": 0.10997516061566152,
+        "quiet": false
+      },
+      {
+        "firstSample": 3790,
+        "releaseRelativeStart": 0.035941043083900226,
+        "frames": 44,
+        "rms": 0.11413762728584138,
+        "quiet": false
+      },
+      {
+        "firstSample": 3834,
+        "releaseRelativeStart": 0.03693877551020286,
+        "frames": 44,
+        "rms": 0.12381838240351245,
+        "quiet": false
+      },
+      {
+        "firstSample": 3878,
+        "releaseRelativeStart": 0.03793650793650727,
+        "frames": 44,
+        "rms": 0.12139176856504831,
+        "quiet": false
+      },
+      {
+        "firstSample": 3922,
+        "releaseRelativeStart": 0.03893424036281168,
+        "frames": 44,
+        "rms": 0.1115405504964365,
+        "quiet": false
+      },
+      {
+        "firstSample": 3966,
+        "releaseRelativeStart": 0.03993197278911431,
+        "frames": 44,
+        "rms": 0.11377387449726348,
+        "quiet": false
+      },
+      {
+        "firstSample": 4010,
+        "releaseRelativeStart": 0.04092970521541872,
+        "frames": 44,
+        "rms": 0.12394211034829299,
+        "quiet": false
+      },
+      {
+        "firstSample": 4054,
+        "releaseRelativeStart": 0.04192743764172313,
+        "frames": 44,
+        "rms": 0.12306261372071443,
+        "quiet": false
+      },
+      {
+        "firstSample": 4098,
+        "releaseRelativeStart": 0.042925170068025764,
+        "frames": 44,
+        "rms": 0.11307125131689016,
+        "quiet": false
+      },
+      {
+        "firstSample": 4142,
+        "releaseRelativeStart": 0.043922902494330174,
+        "frames": 44,
+        "rms": 0.1131767660826669,
+        "quiet": false
+      },
+      {
+        "firstSample": 4186,
+        "releaseRelativeStart": 0.04492063492063458,
+        "frames": 44,
+        "rms": 0.12371890736901105,
+        "quiet": false
+      },
+      {
+        "firstSample": 4230,
+        "releaseRelativeStart": 0.04591836734693722,
+        "frames": 44,
+        "rms": 0.12479092837962244,
+        "quiet": false
+      },
+      {
+        "firstSample": 4274,
+        "releaseRelativeStart": 0.046916099773241626,
+        "frames": 44,
+        "rms": 0.11467619247637106,
+        "quiet": false
+      },
+      {
+        "firstSample": 4318,
+        "releaseRelativeStart": 0.047913832199546036,
+        "frames": 44,
+        "rms": 0.11275516149461601,
+        "quiet": false
+      },
+      {
+        "firstSample": 4362,
+        "releaseRelativeStart": 0.048911564625850446,
+        "frames": 44,
+        "rms": 0.12303923890070817,
+        "quiet": false
+      },
+      {
+        "firstSample": 4406,
+        "releaseRelativeStart": 0.04990929705215308,
+        "frames": 44,
+        "rms": 0.12575935256789014,
+        "quiet": false
+      },
+      {
+        "firstSample": 4450,
+        "releaseRelativeStart": 0.05090702947845749,
+        "frames": 44,
+        "rms": 0.11620481521640309,
+        "quiet": false
+      },
+      {
+        "firstSample": 4494,
+        "releaseRelativeStart": 0.0519047619047619,
+        "frames": 44,
+        "rms": 0.11226444323222398,
+        "quiet": false
+      },
+      {
+        "firstSample": 4538,
+        "releaseRelativeStart": 0.05290249433106453,
+        "frames": 44,
+        "rms": 0.1220155350413261,
+        "quiet": false
+      },
+      {
+        "firstSample": 4582,
+        "releaseRelativeStart": 0.05390022675736894,
+        "frames": 44,
+        "rms": 0.1265363095015296,
+        "quiet": false
+      },
+      {
+        "firstSample": 4626,
+        "releaseRelativeStart": 0.05489795918367335,
+        "frames": 44,
+        "rms": 0.11757248002723984,
+        "quiet": false
+      },
+      {
+        "firstSample": 4670,
+        "releaseRelativeStart": 0.055895691609975984,
+        "frames": 44,
+        "rms": 0.11185697928252428,
+        "quiet": false
+      },
+      {
+        "firstSample": 4714,
+        "releaseRelativeStart": 0.05689342403628039,
+        "frames": 44,
+        "rms": 0.12045871321285342,
+        "quiet": false
+      },
+      {
+        "firstSample": 4758,
+        "releaseRelativeStart": 0.0578911564625848,
+        "frames": 44,
+        "rms": 0.126448065276075,
+        "quiet": false
+      },
+      {
+        "firstSample": 4802,
+        "releaseRelativeStart": 0.058888888888887436,
+        "frames": 44,
+        "rms": 0.11883650678416566,
+        "quiet": false
+      },
+      {
+        "firstSample": 4846,
+        "releaseRelativeStart": 0.059886621315191846,
+        "frames": 44,
+        "rms": 0.11149398677972874,
+        "quiet": false
+      },
+      {
+        "firstSample": 4890,
+        "releaseRelativeStart": 0.060884353741496255,
+        "frames": 44,
+        "rms": 0.11901494638855421,
+        "quiet": false
+      },
+      {
+        "firstSample": 4934,
+        "releaseRelativeStart": 0.06188208616779889,
+        "frames": 44,
+        "rms": 0.12622062436027526,
+        "quiet": false
+      },
+      {
+        "firstSample": 4978,
+        "releaseRelativeStart": 0.0628798185941033,
+        "frames": 44,
+        "rms": 0.11979648420969258,
+        "quiet": false
+      },
+      {
+        "firstSample": 5022,
+        "releaseRelativeStart": 0.06387755102040771,
+        "frames": 44,
+        "rms": 0.11117838954068585,
+        "quiet": false
+      },
+      {
+        "firstSample": 5066,
+        "releaseRelativeStart": 0.06487528344671212,
+        "frames": 44,
+        "rms": 0.11696781719076138,
+        "quiet": false
+      },
+      {
+        "firstSample": 5110,
+        "releaseRelativeStart": 0.06587301587301475,
+        "frames": 44,
+        "rms": 0.12529835565507738,
+        "quiet": false
+      },
+      {
+        "firstSample": 5154,
+        "releaseRelativeStart": 0.06687074829931916,
+        "frames": 44,
+        "rms": 0.12027522286392772,
+        "quiet": false
+      },
+      {
+        "firstSample": 5198,
+        "releaseRelativeStart": 0.06786848072562357,
+        "frames": 44,
+        "rms": 0.11063294275222704,
+        "quiet": false
+      },
+      {
+        "firstSample": 5242,
+        "releaseRelativeStart": 0.0688662131519262,
+        "frames": 44,
+        "rms": 0.11450016226918147,
+        "quiet": false
+      },
+      {
+        "firstSample": 5286,
+        "releaseRelativeStart": 0.06986394557823061,
+        "frames": 44,
+        "rms": 0.12338514830848334,
+        "quiet": false
+      },
+      {
+        "firstSample": 5330,
+        "releaseRelativeStart": 0.07086167800453502,
+        "frames": 44,
+        "rms": 0.12008765864711532,
+        "quiet": false
+      },
+      {
+        "firstSample": 5374,
+        "releaseRelativeStart": 0.07185941043083766,
+        "frames": 44,
+        "rms": 0.10979925754773819,
+        "quiet": false
+      },
+      {
+        "firstSample": 5418,
+        "releaseRelativeStart": 0.07285714285714207,
+        "frames": 44,
+        "rms": 0.11188415671200355,
+        "quiet": false
+      },
+      {
+        "firstSample": 5462,
+        "releaseRelativeStart": 0.07385487528344648,
+        "frames": 44,
+        "rms": 0.12138658798996062,
+        "quiet": false
+      },
+      {
+        "firstSample": 5506,
+        "releaseRelativeStart": 0.07485260770974911,
+        "frames": 44,
+        "rms": 0.11962816970138146,
+        "quiet": false
+      },
+      {
+        "firstSample": 5550,
+        "releaseRelativeStart": 0.07585034013605352,
+        "frames": 44,
+        "rms": 0.10918673678623501,
+        "quiet": false
+      },
+      {
+        "firstSample": 5594,
+        "releaseRelativeStart": 0.07684807256235793,
+        "frames": 44,
+        "rms": 0.10911481517476902,
+        "quiet": false
+      },
+      {
+        "firstSample": 5638,
+        "releaseRelativeStart": 0.07784580498866056,
+        "frames": 44,
+        "rms": 0.11851367387307842,
+        "quiet": false
+      },
+      {
+        "firstSample": 5682,
+        "releaseRelativeStart": 0.07884353741496497,
+        "frames": 44,
+        "rms": 0.11836037743762799,
+        "quiet": false
+      },
+      {
+        "firstSample": 5726,
+        "releaseRelativeStart": 0.07984126984126938,
+        "frames": 44,
+        "rms": 0.10795824620498537,
+        "quiet": false
+      },
+      {
+        "firstSample": 5770,
+        "releaseRelativeStart": 0.08083900226757379,
+        "frames": 44,
+        "rms": 0.10619840863648357,
+        "quiet": false
+      },
+      {
+        "firstSample": 5814,
+        "releaseRelativeStart": 0.08183673469387642,
+        "frames": 44,
+        "rms": 0.11502152719076524,
+        "quiet": false
+      },
+      {
+        "firstSample": 5858,
+        "releaseRelativeStart": 0.08283446712018083,
+        "frames": 44,
+        "rms": 0.11653060248772876,
+        "quiet": false
+      },
+      {
+        "firstSample": 5902,
+        "releaseRelativeStart": 0.08383219954648524,
+        "frames": 44,
+        "rms": 0.1068130694578368,
+        "quiet": false
+      },
+      {
+        "firstSample": 5946,
+        "releaseRelativeStart": 0.08482993197278788,
+        "frames": 44,
+        "rms": 0.10291134708082252,
+        "quiet": false
+      },
+      {
+        "firstSample": 5990,
+        "releaseRelativeStart": 0.08582766439909228,
+        "frames": 44,
+        "rms": 0.11122646330436366,
+        "quiet": false
+      },
+      {
+        "firstSample": 6034,
+        "releaseRelativeStart": 0.0868253968253967,
+        "frames": 44,
+        "rms": 0.1142045400984621,
+        "quiet": false
+      },
+      {
+        "firstSample": 6078,
+        "releaseRelativeStart": 0.08782312925169933,
+        "frames": 44,
+        "rms": 0.1053669168067661,
+        "quiet": false
+      },
+      {
+        "firstSample": 6122,
+        "releaseRelativeStart": 0.08882086167800374,
+        "frames": 44,
+        "rms": 0.09987203188189082,
+        "quiet": false
+      },
+      {
+        "firstSample": 6166,
+        "releaseRelativeStart": 0.08981859410430815,
+        "frames": 44,
+        "rms": 0.10719519043899235,
+        "quiet": false
+      },
+      {
+        "firstSample": 6210,
+        "releaseRelativeStart": 0.09081632653061078,
+        "frames": 44,
+        "rms": 0.11150816980420877,
+        "quiet": false
+      },
+      {
+        "firstSample": 6254,
+        "releaseRelativeStart": 0.09181405895691519,
+        "frames": 44,
+        "rms": 0.10370725844621347,
+        "quiet": false
+      },
+      {
+        "firstSample": 6298,
+        "releaseRelativeStart": 0.0928117913832196,
+        "frames": 44,
+        "rms": 0.09698108156108219,
+        "quiet": false
+      },
+      {
+        "firstSample": 6342,
+        "releaseRelativeStart": 0.09380952380952223,
+        "frames": 44,
+        "rms": 0.103156763281287,
+        "quiet": false
+      },
+      {
+        "firstSample": 6386,
+        "releaseRelativeStart": 0.09480725623582664,
+        "frames": 44,
+        "rms": 0.1083820854427972,
+        "quiet": false
+      },
+      {
+        "firstSample": 6430,
+        "releaseRelativeStart": 0.09580498866213105,
+        "frames": 44,
+        "rms": 0.10174210224809901,
+        "quiet": false
+      },
+      {
+        "firstSample": 6474,
+        "releaseRelativeStart": 0.09680272108843546,
+        "frames": 44,
+        "rms": 0.0939326172154193,
+        "quiet": false
+      },
+      {
+        "firstSample": 6518,
+        "releaseRelativeStart": 0.0978004535147381,
+        "frames": 44,
+        "rms": 0.0985186606844256,
+        "quiet": false
+      },
+      {
+        "firstSample": 6562,
+        "releaseRelativeStart": 0.0987981859410425,
+        "frames": 44,
+        "rms": 0.10434513851763091,
+        "quiet": false
+      },
+      {
+        "firstSample": 6606,
+        "releaseRelativeStart": 0.09979591836734691,
+        "frames": 44,
+        "rms": 0.09905614601828858,
+        "quiet": false
+      },
+      {
+        "firstSample": 6650,
+        "releaseRelativeStart": 0.10079365079364955,
+        "frames": 44,
+        "rms": 0.09068233092463847,
+        "quiet": false
+      },
+      {
+        "firstSample": 6694,
+        "releaseRelativeStart": 0.10179138321995396,
+        "frames": 44,
+        "rms": 0.09375812577326585,
+        "quiet": false
+      },
+      {
+        "firstSample": 6738,
+        "releaseRelativeStart": 0.10278911564625837,
+        "frames": 44,
+        "rms": 0.10034691077315562,
+        "quiet": false
+      },
+      {
+        "firstSample": 6782,
+        "releaseRelativeStart": 0.103786848072561,
+        "frames": 44,
+        "rms": 0.096527073611829,
+        "quiet": false
+      },
+      {
+        "firstSample": 6826,
+        "releaseRelativeStart": 0.10478458049886541,
+        "frames": 44,
+        "rms": 0.08791806272518754,
+        "quiet": false
+      },
+      {
+        "firstSample": 6870,
+        "releaseRelativeStart": 0.10578231292516982,
+        "frames": 44,
+        "rms": 0.08919738324564416,
+        "quiet": false
+      },
+      {
+        "firstSample": 6914,
+        "releaseRelativeStart": 0.10678004535147245,
+        "frames": 44,
+        "rms": 0.09590511515302161,
+        "quiet": false
+      },
+      {
+        "firstSample": 6958,
+        "releaseRelativeStart": 0.10777777777777686,
+        "frames": 44,
+        "rms": 0.09358471481713951,
+        "quiet": false
+      },
+      {
+        "firstSample": 7002,
+        "releaseRelativeStart": 0.10877551020408127,
+        "frames": 44,
+        "rms": 0.08480386499486742,
+        "quiet": false
+      },
+      {
+        "firstSample": 7046,
+        "releaseRelativeStart": 0.1097732426303839,
+        "frames": 44,
+        "rms": 0.084733751684047,
+        "quiet": false
+      },
+      {
+        "firstSample": 7090,
+        "releaseRelativeStart": 0.11077097505668831,
+        "frames": 44,
+        "rms": 0.09124180624116625,
+        "quiet": false
+      },
+      {
+        "firstSample": 7134,
+        "releaseRelativeStart": 0.11176870748299272,
+        "frames": 44,
+        "rms": 0.09010385673004671,
+        "quiet": false
+      },
+      {
+        "firstSample": 7178,
+        "releaseRelativeStart": 0.11276643990929713,
+        "frames": 44,
+        "rms": 0.0817894379806292,
+        "quiet": false
+      },
+      {
+        "firstSample": 7222,
+        "releaseRelativeStart": 0.11376417233559977,
+        "frames": 44,
+        "rms": 0.08009077826078172,
+        "quiet": false
+      },
+      {
+        "firstSample": 7266,
+        "releaseRelativeStart": 0.11476190476190418,
+        "frames": 44,
+        "rms": 0.08629632272175247,
+        "quiet": false
+      },
+      {
+        "firstSample": 7310,
+        "releaseRelativeStart": 0.11575963718820859,
+        "frames": 44,
+        "rms": 0.08639525350928863,
+        "quiet": false
+      },
+      {
+        "firstSample": 7354,
+        "releaseRelativeStart": 0.11675736961451122,
+        "frames": 44,
+        "rms": 0.0785308849017721,
+        "quiet": false
+      },
+      {
+        "firstSample": 7398,
+        "releaseRelativeStart": 0.11775510204081563,
+        "frames": 44,
+        "rms": 0.07567577989259176,
+        "quiet": false
+      },
+      {
+        "firstSample": 7442,
+        "releaseRelativeStart": 0.11875283446712004,
+        "frames": 44,
+        "rms": 0.08139062631925134,
+        "quiet": false
+      },
+      {
+        "firstSample": 7486,
+        "releaseRelativeStart": 0.11975056689342267,
+        "frames": 44,
+        "rms": 0.08268493642244196,
+        "quiet": false
+      },
+      {
+        "firstSample": 7530,
+        "releaseRelativeStart": 0.12074829931972708,
+        "frames": 44,
+        "rms": 0.07562394366065947,
+        "quiet": false
+      },
+      {
+        "firstSample": 7574,
+        "releaseRelativeStart": 0.12174603174603149,
+        "frames": 44,
+        "rms": 0.07179165519410464,
+        "quiet": false
+      },
+      {
+        "firstSample": 7618,
+        "releaseRelativeStart": 0.12274376417233412,
+        "frames": 44,
+        "rms": 0.07674172961574072,
+        "quiet": false
+      },
+      {
+        "firstSample": 7662,
+        "releaseRelativeStart": 0.12374149659863853,
+        "frames": 44,
+        "rms": 0.07893594918384078,
+        "quiet": false
+      },
+      {
+        "firstSample": 7706,
+        "releaseRelativeStart": 0.12473922902494294,
+        "frames": 44,
+        "rms": 0.07274792359081471,
+        "quiet": false
+      },
+      {
+        "firstSample": 7750,
+        "releaseRelativeStart": 0.12573696145124558,
+        "frames": 44,
+        "rms": 0.06794261328101352,
+        "quiet": false
+      },
+      {
+        "firstSample": 7794,
+        "releaseRelativeStart": 0.12673469387755,
+        "frames": 44,
+        "rms": 0.07209870675998496,
+        "quiet": false
+      },
+      {
+        "firstSample": 7838,
+        "releaseRelativeStart": 0.1277324263038544,
+        "frames": 44,
+        "rms": 0.07476532858769336,
+        "quiet": false
+      },
+      {
+        "firstSample": 7882,
+        "releaseRelativeStart": 0.1287301587301588,
+        "frames": 44,
+        "rms": 0.06942242772199829,
+        "quiet": false
+      },
+      {
+        "firstSample": 7926,
+        "releaseRelativeStart": 0.12972789115646144,
+        "frames": 44,
+        "rms": 0.06403315967648368,
+        "quiet": false
+      },
+      {
+        "firstSample": 7970,
+        "releaseRelativeStart": 0.13072562358276585,
+        "frames": 44,
+        "rms": 0.06714160653451756,
+        "quiet": false
+      },
+      {
+        "firstSample": 8014,
+        "releaseRelativeStart": 0.13172335600907026,
+        "frames": 44,
+        "rms": 0.07052172160772412,
+        "quiet": false
+      },
+      {
+        "firstSample": 8058,
+        "releaseRelativeStart": 0.1327210884353729,
+        "frames": 44,
+        "rms": 0.06643887464553005,
+        "quiet": false
+      },
+      {
+        "firstSample": 8102,
+        "releaseRelativeStart": 0.1337188208616773,
+        "frames": 44,
+        "rms": 0.06076756076668837,
+        "quiet": false
+      },
+      {
+        "firstSample": 8146,
+        "releaseRelativeStart": 0.1347165532879817,
+        "frames": 44,
+        "rms": 0.06289066366325753,
+        "quiet": false
+      },
+      {
+        "firstSample": 8190,
+        "releaseRelativeStart": 0.13571428571428434,
+        "frames": 44,
+        "rms": 0.06676072439128933,
+        "quiet": false
+      },
+      {
+        "firstSample": 8234,
+        "releaseRelativeStart": 0.13671201814058875,
+        "frames": 44,
+        "rms": 0.06371843719734485,
+        "quiet": false
+      },
+      {
+        "firstSample": 8278,
+        "releaseRelativeStart": 0.13770975056689316,
+        "frames": 44,
+        "rms": 0.05777924225931064,
+        "quiet": false
+      },
+      {
+        "firstSample": 8322,
+        "releaseRelativeStart": 0.1387074829931958,
+        "frames": 44,
+        "rms": 0.05892736621772789,
+        "quiet": false
+      },
+      {
+        "firstSample": 8366,
+        "releaseRelativeStart": 0.1397052154195002,
+        "frames": 44,
+        "rms": 0.06305992158803163,
+        "quiet": false
+      },
+      {
+        "firstSample": 8410,
+        "releaseRelativeStart": 0.14070294784580462,
+        "frames": 44,
+        "rms": 0.061033246673586755,
+        "quiet": false
+      },
+      {
+        "firstSample": 8454,
+        "releaseRelativeStart": 0.14170068027210903,
+        "frames": 44,
+        "rms": 0.0551298836725095,
+        "quiet": false
+      },
+      {
+        "firstSample": 8498,
+        "releaseRelativeStart": 0.14269841269841166,
+        "frames": 44,
+        "rms": 0.055078067044598895,
+        "quiet": false
+      },
+      {
+        "firstSample": 8542,
+        "releaseRelativeStart": 0.14369614512471607,
+        "frames": 44,
+        "rms": 0.059075101406382724,
+        "quiet": false
+      },
+      {
+        "firstSample": 8586,
+        "releaseRelativeStart": 0.14469387755102048,
+        "frames": 44,
+        "rms": 0.058020721479808,
+        "quiet": false
+      },
+      {
+        "firstSample": 8630,
+        "releaseRelativeStart": 0.1456916099773231,
+        "frames": 44,
+        "rms": 0.05248607774591716,
+        "quiet": false
+      },
+      {
+        "firstSample": 8674,
+        "releaseRelativeStart": 0.14668934240362752,
+        "frames": 44,
+        "rms": 0.05179226769658248,
+        "quiet": false
+      },
+      {
+        "firstSample": 8718,
+        "releaseRelativeStart": 0.14768707482993193,
+        "frames": 44,
+        "rms": 0.05605010439652118,
+        "quiet": false
+      },
+      {
+        "firstSample": 8762,
+        "releaseRelativeStart": 0.14868480725623456,
+        "frames": 44,
+        "rms": 0.05577370581619856,
+        "quiet": false
+      },
+      {
+        "firstSample": 8806,
+        "releaseRelativeStart": 0.14968253968253897,
+        "frames": 44,
+        "rms": 0.050665576074899694,
+        "quiet": false
+      },
+      {
+        "firstSample": 8850,
+        "releaseRelativeStart": 0.15068027210884338,
+        "frames": 44,
+        "rms": 0.04922068665097431,
+        "quiet": false
+      },
+      {
+        "firstSample": 8894,
+        "releaseRelativeStart": 0.15167800453514602,
+        "frames": 44,
+        "rms": 0.05303789946943395,
+        "quiet": false
+      },
+      {
+        "firstSample": 8938,
+        "releaseRelativeStart": 0.15267573696145043,
+        "frames": 44,
+        "rms": 0.05363927914019799,
+        "quiet": false
+      },
+      {
+        "firstSample": 8982,
+        "releaseRelativeStart": 0.15367346938775484,
+        "frames": 44,
+        "rms": 0.04913789123292091,
+        "quiet": false
+      },
+      {
+        "firstSample": 9026,
+        "releaseRelativeStart": 0.15467120181405747,
+        "frames": 44,
+        "rms": 0.047040830824668214,
+        "quiet": false
+      },
+      {
+        "firstSample": 9070,
+        "releaseRelativeStart": 0.15566893424036188,
+        "frames": 44,
+        "rms": 0.05065028935155991,
+        "quiet": false
+      },
+      {
+        "firstSample": 9114,
+        "releaseRelativeStart": 0.1566666666666663,
+        "frames": 44,
+        "rms": 0.05189548737033066,
+        "quiet": false
+      },
+      {
+        "firstSample": 9158,
+        "releaseRelativeStart": 0.15766439909296892,
+        "frames": 44,
+        "rms": 0.047894962243942595,
+        "quiet": false
+      },
+      {
+        "firstSample": 9202,
+        "releaseRelativeStart": 0.15866213151927333,
+        "frames": 44,
+        "rms": 0.04515676213036441,
+        "quiet": false
+      },
+      {
+        "firstSample": 9246,
+        "releaseRelativeStart": 0.15965986394557774,
+        "frames": 44,
+        "rms": 0.048236869472256146,
+        "quiet": false
+      },
+      {
+        "firstSample": 9290,
+        "releaseRelativeStart": 0.16065759637188215,
+        "frames": 44,
+        "rms": 0.05038642948246711,
+        "quiet": false
+      },
+      {
+        "firstSample": 9334,
+        "releaseRelativeStart": 0.16165532879818478,
+        "frames": 44,
+        "rms": 0.04701429260249213,
+        "quiet": false
+      },
+      {
+        "firstSample": 9378,
+        "releaseRelativeStart": 0.1626530612244892,
+        "frames": 44,
+        "rms": 0.04386410198958142,
+        "quiet": false
+      },
+      {
+        "firstSample": 9422,
+        "releaseRelativeStart": 0.1636507936507936,
+        "frames": 44,
+        "rms": 0.046666535346948756,
+        "quiet": false
+      },
+      {
+        "firstSample": 9466,
+        "releaseRelativeStart": 0.16464852607709624,
+        "frames": 44,
+        "rms": 0.049476702635526726,
+        "quiet": false
+      },
+      {
+        "firstSample": 9510,
+        "releaseRelativeStart": 0.16564625850340065,
+        "frames": 44,
+        "rms": 0.04676380022476449,
+        "quiet": false
+      },
+      {
+        "firstSample": 9554,
+        "releaseRelativeStart": 0.16664399092970505,
+        "frames": 44,
+        "rms": 0.043419794591688606,
+        "quiet": false
+      },
+      {
+        "firstSample": 9598,
+        "releaseRelativeStart": 0.1676417233560077,
+        "frames": 44,
+        "rms": 0.045769436237299295,
+        "quiet": false
+      },
+      {
+        "firstSample": 9642,
+        "releaseRelativeStart": 0.1686394557823121,
+        "frames": 44,
+        "rms": 0.048998797206939546,
+        "quiet": false
+      },
+      {
+        "firstSample": 9686,
+        "releaseRelativeStart": 0.1696371882086165,
+        "frames": 44,
+        "rms": 0.04700771217376326,
+        "quiet": false
+      },
+      {
+        "firstSample": 9730,
+        "releaseRelativeStart": 0.17063492063491914,
+        "frames": 44,
+        "rms": 0.04323837551991181,
+        "quiet": false
+      },
+      {
+        "firstSample": 9774,
+        "releaseRelativeStart": 0.17163265306122355,
+        "frames": 44,
+        "rms": 0.04488091342666406,
+        "quiet": false
+      },
+      {
+        "firstSample": 9818,
+        "releaseRelativeStart": 0.17263038548752796,
+        "frames": 44,
+        "rms": 0.04847885703227191,
+        "quiet": false
+      },
+      {
+        "firstSample": 9862,
+        "releaseRelativeStart": 0.17362811791383237,
+        "frames": 44,
+        "rms": 0.047213236444715256,
+        "quiet": false
+      },
+      {
+        "firstSample": 9906,
+        "releaseRelativeStart": 0.174625850340135,
+        "frames": 44,
+        "rms": 0.043534321143134914,
+        "quiet": false
+      },
+      {
+        "firstSample": 9950,
+        "releaseRelativeStart": 0.1756235827664394,
+        "frames": 44,
+        "rms": 0.04469821974649124,
+        "quiet": false
+      },
+      {
+        "firstSample": 9994,
+        "releaseRelativeStart": 0.17662131519274382,
+        "frames": 44,
+        "rms": 0.0487907886885615,
+        "quiet": false
+      },
+      {
+        "firstSample": 10038,
+        "releaseRelativeStart": 0.17761904761904646,
+        "frames": 44,
+        "rms": 0.048160203428328406,
+        "quiet": false
+      },
+      {
+        "firstSample": 10082,
+        "releaseRelativeStart": 0.17861678004535086,
+        "frames": 44,
+        "rms": 0.044207865448464966,
+        "quiet": false
+      },
+      {
+        "firstSample": 10126,
+        "releaseRelativeStart": 0.17961451247165527,
+        "frames": 44,
+        "rms": 0.04491660326941587,
+        "quiet": false
+      },
+      {
+        "firstSample": 10170,
+        "releaseRelativeStart": 0.1806122448979579,
+        "frames": 44,
+        "rms": 0.049210865430441036,
+        "quiet": false
+      },
+      {
+        "firstSample": 10214,
+        "releaseRelativeStart": 0.18160997732426232,
+        "frames": 44,
+        "rms": 0.04943363484306629,
+        "quiet": false
+      },
+      {
+        "firstSample": 10258,
+        "releaseRelativeStart": 0.18260770975056673,
+        "frames": 44,
+        "rms": 0.04555341901979005,
+        "quiet": false
+      },
+      {
+        "firstSample": 10302,
+        "releaseRelativeStart": 0.18360544217686936,
+        "frames": 44,
+        "rms": 0.04555395933572359,
+        "quiet": false
+      },
+      {
+        "firstSample": 10346,
+        "releaseRelativeStart": 0.18460317460317377,
+        "frames": 44,
+        "rms": 0.050107700786635116,
+        "quiet": false
+      },
+      {
+        "firstSample": 10390,
+        "releaseRelativeStart": 0.18560090702947818,
+        "frames": 44,
+        "rms": 0.05101035772730271,
+        "quiet": false
+      },
+      {
+        "firstSample": 10434,
+        "releaseRelativeStart": 0.1865986394557808,
+        "frames": 44,
+        "rms": 0.04729692070494884,
+        "quiet": false
+      },
+      {
+        "firstSample": 10478,
+        "releaseRelativeStart": 0.18759637188208522,
+        "frames": 44,
+        "rms": 0.046638127798742594,
+        "quiet": false
+      },
+      {
+        "firstSample": 10522,
+        "releaseRelativeStart": 0.18859410430838963,
+        "frames": 44,
+        "rms": 0.05103123251850688,
+        "quiet": false
+      },
+      {
+        "firstSample": 10566,
+        "releaseRelativeStart": 0.18959183673469227,
+        "frames": 44,
+        "rms": 0.05278753585557768,
+        "quiet": false
+      },
+      {
+        "firstSample": 10610,
+        "releaseRelativeStart": 0.19058956916099667,
+        "frames": 44,
+        "rms": 0.04910949265036508,
+        "quiet": false
+      },
+      {
+        "firstSample": 10654,
+        "releaseRelativeStart": 0.19158730158730108,
+        "frames": 44,
+        "rms": 0.04756094274423981,
+        "quiet": false
+      },
+      {
+        "firstSample": 10698,
+        "releaseRelativeStart": 0.1925850340136055,
+        "frames": 44,
+        "rms": 0.05212532343463317,
+        "quiet": false
+      },
+      {
+        "firstSample": 10742,
+        "releaseRelativeStart": 0.19358276643990813,
+        "frames": 44,
+        "rms": 0.05478588499117344,
+        "quiet": false
+      },
+      {
+        "firstSample": 10786,
+        "releaseRelativeStart": 0.19458049886621254,
+        "frames": 44,
+        "rms": 0.05147820731443909,
+        "quiet": false
+      },
+      {
+        "firstSample": 10830,
+        "releaseRelativeStart": 0.19557823129251695,
+        "frames": 44,
+        "rms": 0.04932814821598728,
+        "quiet": false
+      },
+      {
+        "firstSample": 10874,
+        "releaseRelativeStart": 0.19657596371881958,
+        "frames": 44,
+        "rms": 0.053902504080783786,
+        "quiet": false
+      },
+      {
+        "firstSample": 10918,
+        "releaseRelativeStart": 0.197573696145124,
+        "frames": 44,
+        "rms": 0.05732314597603164,
+        "quiet": false
+      },
+      {
+        "firstSample": 10962,
+        "releaseRelativeStart": 0.1985714285714284,
+        "frames": 44,
+        "rms": 0.05451318749367523,
+        "quiet": false
+      },
+      {
+        "firstSample": 11006,
+        "releaseRelativeStart": 0.19956916099773103,
+        "frames": 44,
+        "rms": 0.05166832863054001,
+        "quiet": false
+      },
+      {
+        "firstSample": 11050,
+        "releaseRelativeStart": 0.20056689342403544,
+        "frames": 44,
+        "rms": 0.055906220140541425,
+        "quiet": false
+      },
+      {
+        "firstSample": 11094,
+        "releaseRelativeStart": 0.20156462585033985,
+        "frames": 44,
+        "rms": 0.06010478689100528,
+        "quiet": false
+      },
+      {
+        "firstSample": 11138,
+        "releaseRelativeStart": 0.20256235827664248,
+        "frames": 44,
+        "rms": 0.05770400282159332,
+        "quiet": false
+      },
+      {
+        "firstSample": 11182,
+        "releaseRelativeStart": 0.2035600907029469,
+        "frames": 44,
+        "rms": 0.05425118976825614,
+        "quiet": false
+      },
+      {
+        "firstSample": 11226,
+        "releaseRelativeStart": 0.2045578231292513,
+        "frames": 44,
+        "rms": 0.05783972259493484,
+        "quiet": false
+      },
+      {
+        "firstSample": 11270,
+        "releaseRelativeStart": 0.2055555555555557,
+        "frames": 44,
+        "rms": 0.06281944572520003,
+        "quiet": false
+      },
+      {
+        "firstSample": 11314,
+        "releaseRelativeStart": 0.20655328798185835,
+        "frames": 44,
+        "rms": 0.06116488647449634,
+        "quiet": false
+      },
+      {
+        "firstSample": 11358,
+        "releaseRelativeStart": 0.20755102040816276,
+        "frames": 44,
+        "rms": 0.05710364366238557,
+        "quiet": false
+      },
+      {
+        "firstSample": 11402,
+        "releaseRelativeStart": 0.20854875283446717,
+        "frames": 44,
+        "rms": 0.060224408889687706,
+        "quiet": false
+      },
+      {
+        "firstSample": 11446,
+        "releaseRelativeStart": 0.2095464852607698,
+        "frames": 44,
+        "rms": 0.06598965066737576,
+        "quiet": false
+      },
+      {
+        "firstSample": 11490,
+        "releaseRelativeStart": 0.2105442176870742,
+        "frames": 44,
+        "rms": 0.06507859144009868,
+        "quiet": false
+      },
+      {
+        "firstSample": 11534,
+        "releaseRelativeStart": 0.21154195011337862,
+        "frames": 44,
+        "rms": 0.06063598351979239,
+        "quiet": false
+      },
+      {
+        "firstSample": 11578,
+        "releaseRelativeStart": 0.21253968253968125,
+        "frames": 44,
+        "rms": 0.06295241059318779,
+        "quiet": false
+      },
+      {
+        "firstSample": 11622,
+        "releaseRelativeStart": 0.21353741496598566,
+        "frames": 44,
+        "rms": 0.06957936423647136,
+        "quiet": false
+      },
+      {
+        "firstSample": 11666,
+        "releaseRelativeStart": 0.21453514739229007,
+        "frames": 44,
+        "rms": 0.06939009405831681,
+        "quiet": false
+      },
+      {
+        "firstSample": 11710,
+        "releaseRelativeStart": 0.2155328798185927,
+        "frames": 44,
+        "rms": 0.06453217784145668,
+        "quiet": false
+      },
+      {
+        "firstSample": 11754,
+        "releaseRelativeStart": 0.2165306122448971,
+        "frames": 44,
+        "rms": 0.0659299604496155,
+        "quiet": false
+      },
+      {
+        "firstSample": 11798,
+        "releaseRelativeStart": 0.21752834467120152,
+        "frames": 44,
+        "rms": 0.07288677480642228,
+        "quiet": false
+      },
+      {
+        "firstSample": 11842,
+        "releaseRelativeStart": 0.21852607709750416,
+        "frames": 44,
+        "rms": 0.07373958728089539,
+        "quiet": false
+      },
+      {
+        "firstSample": 11886,
+        "releaseRelativeStart": 0.21952380952380857,
+        "frames": 44,
+        "rms": 0.06850319002460181,
+        "quiet": false
+      },
+      {
+        "firstSample": 11930,
+        "releaseRelativeStart": 0.22052154195011298,
+        "frames": 44,
+        "rms": 0.06893034062966095,
+        "quiet": false
+      },
+      {
+        "firstSample": 11974,
+        "releaseRelativeStart": 0.2215192743764156,
+        "frames": 44,
+        "rms": 0.07629832881978386,
+        "quiet": false
+      },
+      {
+        "firstSample": 12018,
+        "releaseRelativeStart": 0.22251700680272002,
+        "frames": 44,
+        "rms": 0.0783028111470535,
+        "quiet": false
+      },
+      {
+        "firstSample": 12062,
+        "releaseRelativeStart": 0.22351473922902443,
+        "frames": 44,
+        "rms": 0.07301008341825616,
+        "quiet": false
+      },
+      {
+        "firstSample": 12106,
+        "releaseRelativeStart": 0.22451247165532884,
+        "frames": 44,
+        "rms": 0.07232175717145495,
+        "quiet": false
+      },
+      {
+        "firstSample": 12150,
+        "releaseRelativeStart": 0.22551020408163147,
+        "frames": 44,
+        "rms": 0.07982341785451508,
+        "quiet": false
+      },
+      {
+        "firstSample": 12194,
+        "releaseRelativeStart": 0.22650793650793588,
+        "frames": 44,
+        "rms": 0.08294279819775524,
+        "quiet": false
+      },
+      {
+        "firstSample": 12238,
+        "releaseRelativeStart": 0.2275056689342403,
+        "frames": 44,
+        "rms": 0.07781661008508713,
+        "quiet": false
+      },
+      {
+        "firstSample": 12282,
+        "releaseRelativeStart": 0.22850340136054292,
+        "frames": 44,
+        "rms": 0.07598704956163735,
+        "quiet": false
+      },
+      {
+        "firstSample": 12326,
+        "releaseRelativeStart": 0.22950113378684733,
+        "frames": 44,
+        "rms": 0.08359967251267345,
+        "quiet": false
+      },
+      {
+        "firstSample": 12370,
+        "releaseRelativeStart": 0.23049886621315174,
+        "frames": 44,
+        "rms": 0.08797562398984618,
+        "quiet": false
+      },
+      {
+        "firstSample": 12414,
+        "releaseRelativeStart": 0.23149659863945438,
+        "frames": 44,
+        "rms": 0.08291002755408987,
+        "quiet": false
+      },
+      {
+        "firstSample": 12458,
+        "releaseRelativeStart": 0.23249433106575879,
+        "frames": 44,
+        "rms": 0.07984324592949961,
+        "quiet": false
+      },
+      {
+        "firstSample": 12502,
+        "releaseRelativeStart": 0.2334920634920632,
+        "frames": 44,
+        "rms": 0.08713426406857945,
+        "quiet": false
+      },
+      {
+        "firstSample": 12546,
+        "releaseRelativeStart": 0.23448979591836583,
+        "frames": 44,
+        "rms": 0.09265206966823698,
+        "quiet": false
+      },
+      {
+        "firstSample": 12590,
+        "releaseRelativeStart": 0.23548752834467024,
+        "frames": 44,
+        "rms": 0.08797917554573553,
+        "quiet": false
+      },
+      {
+        "firstSample": 12634,
+        "releaseRelativeStart": 0.23648526077097465,
+        "frames": 44,
+        "rms": 0.08353093912107278,
+        "quiet": false
+      },
+      {
+        "firstSample": 12678,
+        "releaseRelativeStart": 0.23748299319727906,
+        "frames": 44,
+        "rms": 0.09025689328558996,
+        "quiet": false
+      },
+      {
+        "firstSample": 12722,
+        "releaseRelativeStart": 0.2384807256235817,
+        "frames": 44,
+        "rms": 0.09690492255674193,
+        "quiet": false
+      },
+      {
+        "firstSample": 12766,
+        "releaseRelativeStart": 0.2394784580498861,
+        "frames": 44,
+        "rms": 0.09318801360158968,
+        "quiet": false
+      },
+      {
+        "firstSample": 12810,
+        "releaseRelativeStart": 0.2404761904761905,
+        "frames": 44,
+        "rms": 0.08767264253183739,
+        "quiet": false
+      },
+      {
+        "firstSample": 12854,
+        "releaseRelativeStart": 0.24147392290249314,
+        "frames": 44,
+        "rms": 0.09359837717374844,
+        "quiet": false
+      },
+      {
+        "firstSample": 12898,
+        "releaseRelativeStart": 0.24247165532879755,
+        "frames": 44,
+        "rms": 0.1015216081350898,
+        "quiet": false
+      },
+      {
+        "firstSample": 12942,
+        "releaseRelativeStart": 0.24346938775510196,
+        "frames": 44,
+        "rms": 0.09851081427923511,
+        "quiet": false
+      },
+      {
+        "firstSample": 12986,
+        "releaseRelativeStart": 0.2444671201814046,
+        "frames": 44,
+        "rms": 0.09195611394484468,
+        "quiet": false
+      },
+      {
+        "firstSample": 13030,
+        "releaseRelativeStart": 0.245464852607709,
+        "frames": 44,
+        "rms": 0.0966430140264613,
+        "quiet": false
+      },
+      {
+        "firstSample": 13074,
+        "releaseRelativeStart": 0.24646258503401341,
+        "frames": 44,
+        "rms": 0.10530070447445326,
+        "quiet": false
+      },
+      {
+        "firstSample": 13118,
+        "releaseRelativeStart": 0.24746031746031605,
+        "frames": 44,
+        "rms": 0.10335608794242065,
+        "quiet": false
+      },
+      {
+        "firstSample": 13162,
+        "releaseRelativeStart": 0.24845804988662046,
+        "frames": 44,
+        "rms": 0.09583390058963391,
+        "quiet": false
+      },
+      {
+        "firstSample": 13206,
+        "releaseRelativeStart": 0.24945578231292487,
+        "frames": 44,
+        "rms": 0.09922922213553201,
+        "quiet": false
+      },
+      {
+        "firstSample": 13250,
+        "releaseRelativeStart": 0.2504535147392275,
+        "frames": 44,
+        "rms": 0.10859057688525849,
+        "quiet": false
+      },
+      {
+        "firstSample": 13294,
+        "releaseRelativeStart": 0.2514512471655319,
+        "frames": 44,
+        "rms": 0.10788881895427443,
+        "quiet": false
+      },
+      {
+        "firstSample": 13338,
+        "releaseRelativeStart": 0.2524489795918363,
+        "frames": 44,
+        "rms": 0.09962393891052176,
+        "quiet": false
+      },
+      {
+        "firstSample": 13382,
+        "releaseRelativeStart": 0.25344671201814073,
+        "frames": 44,
+        "rms": 0.10124427463421941,
+        "quiet": false
+      },
+      {
+        "firstSample": 13426,
+        "releaseRelativeStart": 0.25444444444444336,
+        "frames": 44,
+        "rms": 0.11131825561024308,
+        "quiet": false
+      },
+      {
+        "firstSample": 13470,
+        "releaseRelativeStart": 0.2554421768707478,
+        "frames": 44,
+        "rms": 0.11208660928371708,
+        "quiet": false
+      },
+      {
+        "firstSample": 13514,
+        "releaseRelativeStart": 0.2564399092970522,
+        "frames": 44,
+        "rms": 0.10354872797827636,
+        "quiet": false
+      },
+      {
+        "firstSample": 13558,
+        "releaseRelativeStart": 0.2574376417233548,
+        "frames": 44,
+        "rms": 0.10357174399309829,
+        "quiet": false
+      },
+      {
+        "firstSample": 13602,
+        "releaseRelativeStart": 0.2584353741496592,
+        "frames": 44,
+        "rms": 0.11389867022938509,
+        "quiet": false
+      },
+      {
+        "firstSample": 13646,
+        "releaseRelativeStart": 0.25943310657596363,
+        "frames": 44,
+        "rms": 0.11613209410028359,
+        "quiet": false
+      },
+      {
+        "firstSample": 13690,
+        "releaseRelativeStart": 0.26043083900226627,
+        "frames": 44,
+        "rms": 0.10731522422407985,
+        "quiet": false
+      },
+      {
+        "firstSample": 13734,
+        "releaseRelativeStart": 0.2614285714285707,
+        "frames": 44,
+        "rms": 0.10553802638681349,
+        "quiet": false
+      },
+      {
+        "firstSample": 13778,
+        "releaseRelativeStart": 0.2624263038548751,
+        "frames": 44,
+        "rms": 0.11550436509021503,
+        "quiet": false
+      },
+      {
+        "firstSample": 13822,
+        "releaseRelativeStart": 0.2634240362811777,
+        "frames": 44,
+        "rms": 0.11924670715173201,
+        "quiet": false
+      },
+      {
+        "firstSample": 13866,
+        "releaseRelativeStart": 0.26442176870748213,
+        "frames": 44,
+        "rms": 0.11097273888189843,
+        "quiet": false
+      },
+      {
+        "firstSample": 13910,
+        "releaseRelativeStart": 0.26541950113378654,
+        "frames": 44,
+        "rms": 0.10711560633458699,
+        "quiet": false
+      },
+      {
+        "firstSample": 13954,
+        "releaseRelativeStart": 0.2664172335600892,
+        "frames": 44,
+        "rms": 0.11669213948709731,
+        "quiet": false
+      },
+      {
+        "firstSample": 13998,
+        "releaseRelativeStart": 0.2674149659863936,
+        "frames": 44,
+        "rms": 0.12201051089682657,
+        "quiet": false
+      },
+      {
+        "firstSample": 14042,
+        "releaseRelativeStart": 0.268412698412698,
+        "frames": 44,
+        "rms": 0.11433032316247314,
+        "quiet": false
+      },
+      {
+        "firstSample": 14086,
+        "releaseRelativeStart": 0.2694104308390024,
+        "frames": 44,
+        "rms": 0.10894599305282611,
+        "quiet": false
+      },
+      {
+        "firstSample": 14130,
+        "releaseRelativeStart": 0.27040816326530503,
+        "frames": 44,
+        "rms": 0.11785251884932046,
+        "quiet": false
+      },
+      {
+        "firstSample": 14174,
+        "releaseRelativeStart": 0.27140589569160944,
+        "frames": 44,
+        "rms": 0.12465305471492981,
+        "quiet": false
+      },
+      {
+        "firstSample": 14218,
+        "releaseRelativeStart": 0.27240362811791385,
+        "frames": 44,
+        "rms": 0.11776544911413571,
+        "quiet": false
+      },
+      {
+        "firstSample": 14262,
+        "releaseRelativeStart": 0.2734013605442165,
+        "frames": 44,
+        "rms": 0.11060837904644899,
+        "quiet": false
+      },
+      {
+        "firstSample": 14306,
+        "releaseRelativeStart": 0.2743990929705209,
+        "frames": 44,
+        "rms": 0.11823236749218644,
+        "quiet": false
+      },
+      {
+        "firstSample": 14350,
+        "releaseRelativeStart": 0.2753968253968253,
+        "frames": 44,
+        "rms": 0.12615781574195248,
+        "quiet": false
+      },
+      {
+        "firstSample": 14394,
+        "releaseRelativeStart": 0.27639455782312794,
+        "frames": 44,
+        "rms": 0.12036920256695927,
+        "quiet": false
+      },
+      {
+        "firstSample": 14438,
+        "releaseRelativeStart": 0.27739229024943235,
+        "frames": 44,
+        "rms": 0.11191419930274447,
+        "quiet": false
+      },
+      {
+        "firstSample": 14482,
+        "releaseRelativeStart": 0.27839002267573676,
+        "frames": 44,
+        "rms": 0.11815943623424902,
+        "quiet": false
+      },
+      {
+        "firstSample": 14526,
+        "releaseRelativeStart": 0.2793877551020394,
+        "frames": 44,
+        "rms": 0.12719248577549278,
+        "quiet": false
+      },
+      {
+        "firstSample": 14570,
+        "releaseRelativeStart": 0.2803854875283438,
+        "frames": 44,
+        "rms": 0.12270729125745768,
+        "quiet": false
+      },
+      {
+        "firstSample": 14614,
+        "releaseRelativeStart": 0.2813832199546482,
+        "frames": 44,
+        "rms": 0.11331651409578264,
+        "quiet": false
+      },
+      {
+        "firstSample": 14658,
+        "releaseRelativeStart": 0.28238095238095084,
+        "frames": 44,
+        "rms": 0.11763240248728615,
+        "quiet": false
+      },
+      {
+        "firstSample": 14702,
+        "releaseRelativeStart": 0.28337868480725525,
+        "frames": 44,
+        "rms": 0.1275322813429247,
+        "quiet": false
+      },
+      {
+        "firstSample": 14746,
+        "releaseRelativeStart": 0.28437641723355966,
+        "frames": 44,
+        "rms": 0.12476393373727143,
+        "quiet": false
+      },
+      {
+        "firstSample": 14790,
+        "releaseRelativeStart": 0.2853741496598641,
+        "frames": 44,
+        "rms": 0.11453122084105648,
+        "quiet": false
+      },
+      {
+        "firstSample": 14834,
+        "releaseRelativeStart": 0.2863718820861667,
+        "frames": 44,
+        "rms": 0.11697995615794736,
+        "quiet": false
+      },
+      {
+        "firstSample": 14878,
+        "releaseRelativeStart": 0.2873696145124711,
+        "frames": 44,
+        "rms": 0.12726343068680623,
+        "quiet": false
+      },
+      {
+        "firstSample": 14922,
+        "releaseRelativeStart": 0.2883673469387755,
+        "frames": 44,
+        "rms": 0.12605510878160514,
+        "quiet": false
+      },
+      {
+        "firstSample": 14966,
+        "releaseRelativeStart": 0.28936507936507816,
+        "frames": 44,
+        "rms": 0.11536908588038841,
+        "quiet": false
+      },
+      {
+        "firstSample": 15010,
+        "releaseRelativeStart": 0.29036281179138257,
+        "frames": 44,
+        "rms": 0.11565813640021735,
+        "quiet": false
+      },
+      {
+        "firstSample": 15054,
+        "releaseRelativeStart": 0.291360544217687,
+        "frames": 44,
+        "rms": 0.12613407545611593,
+        "quiet": false
+      },
+      {
+        "firstSample": 15098,
+        "releaseRelativeStart": 0.2923582766439896,
+        "frames": 44,
+        "rms": 0.1264896845376566,
+        "quiet": false
+      },
+      {
+        "firstSample": 15142,
+        "releaseRelativeStart": 0.293356009070294,
+        "frames": 44,
+        "rms": 0.11597826054289817,
+        "quiet": false
+      },
+      {
+        "firstSample": 15186,
+        "releaseRelativeStart": 0.29435374149659843,
+        "frames": 44,
+        "rms": 0.11431705069441905,
+        "quiet": false
+      },
+      {
+        "firstSample": 15230,
+        "releaseRelativeStart": 0.29535147392290106,
+        "frames": 44,
+        "rms": 0.12443987512388292,
+        "quiet": false
+      },
+      {
+        "firstSample": 15274,
+        "releaseRelativeStart": 0.2963492063492055,
+        "frames": 44,
+        "rms": 0.12653436347029548,
+        "quiet": false
+      },
+      {
+        "firstSample": 15318,
+        "releaseRelativeStart": 0.2973469387755099,
+        "frames": 44,
+        "rms": 0.1163560612172048,
+        "quiet": false
+      },
+      {
+        "firstSample": 15362,
+        "releaseRelativeStart": 0.2983446712018125,
+        "frames": 44,
+        "rms": 0.11278284175899685,
+        "quiet": false
+      },
+      {
+        "firstSample": 15406,
+        "releaseRelativeStart": 0.2993424036281169,
+        "frames": 44,
+        "rms": 0.12236368448789739,
+        "quiet": false
+      },
+      {
+        "firstSample": 15450,
+        "releaseRelativeStart": 0.30034013605442134,
+        "frames": 44,
+        "rms": 0.12591374339849074,
+        "quiet": false
+      },
+      {
+        "firstSample": 15494,
+        "releaseRelativeStart": 0.30133786848072575,
+        "frames": 44,
+        "rms": 0.11661064559026292,
+        "quiet": false
+      },
+      {
+        "firstSample": 15538,
+        "releaseRelativeStart": 0.3023356009070284,
+        "frames": 44,
+        "rms": 0.11091508171391257,
+        "quiet": false
+      },
+      {
+        "firstSample": 15582,
+        "releaseRelativeStart": 0.3033333333333328,
+        "frames": 44,
+        "rms": 0.11960018462918165,
+        "quiet": false
+      },
+      {
+        "firstSample": 15626,
+        "releaseRelativeStart": 0.3043310657596372,
+        "frames": 44,
+        "rms": 0.12456917994154013,
+        "quiet": false
+      },
+      {
+        "firstSample": 15670,
+        "releaseRelativeStart": 0.30532879818593983,
+        "frames": 44,
+        "rms": 0.11626540502429378,
+        "quiet": false
+      },
+      {
+        "firstSample": 15714,
+        "releaseRelativeStart": 0.30632653061224424,
+        "frames": 44,
+        "rms": 0.10906825093791313,
+        "quiet": false
+      },
+      {
+        "firstSample": 15758,
+        "releaseRelativeStart": 0.30732426303854865,
+        "frames": 44,
+        "rms": 0.11623753205925512,
+        "quiet": false
+      },
+      {
+        "firstSample": 15802,
+        "releaseRelativeStart": 0.3083219954648513,
+        "frames": 44,
+        "rms": 0.12248977158014938,
+        "quiet": false
+      },
+      {
+        "firstSample": 15846,
+        "releaseRelativeStart": 0.3093197278911557,
+        "frames": 44,
+        "rms": 0.11526240542398998,
+        "quiet": false
+      },
+      {
+        "firstSample": 15890,
+        "releaseRelativeStart": 0.3103174603174601,
+        "frames": 44,
+        "rms": 0.10675459363225549,
+        "quiet": false
+      },
+      {
+        "firstSample": 15934,
+        "releaseRelativeStart": 0.31131519274376274,
+        "frames": 44,
+        "rms": 0.11244944450513497,
+        "quiet": false
+      },
+      {
+        "firstSample": 15978,
+        "releaseRelativeStart": 0.31231292517006715,
+        "frames": 44,
+        "rms": 0.11970099812696161,
+        "quiet": false
+      },
+      {
+        "firstSample": 16022,
+        "releaseRelativeStart": 0.31331065759637156,
+        "frames": 44,
+        "rms": 0.11404646504444937,
+        "quiet": false
+      },
+      {
+        "firstSample": 16066,
+        "releaseRelativeStart": 0.3143083900226742,
+        "frames": 44,
+        "rms": 0.10482355211106155,
+        "quiet": false
+      },
+      {
+        "firstSample": 16110,
+        "releaseRelativeStart": 0.3153061224489786,
+        "frames": 44,
+        "rms": 0.10875593865429241,
+        "quiet": false
+      },
+      {
+        "firstSample": 16154,
+        "releaseRelativeStart": 0.316303854875283,
+        "frames": 44,
+        "rms": 0.1164536728294093,
+        "quiet": false
+      },
+      {
+        "firstSample": 16198,
+        "releaseRelativeStart": 0.3173015873015874,
+        "frames": 44,
+        "rms": 0.11233683876298432,
+        "quiet": false
+      },
+      {
+        "firstSample": 16242,
+        "releaseRelativeStart": 0.31829931972789005,
+        "frames": 44,
+        "rms": 0.10242807107432898,
+        "quiet": false
+      },
+      {
+        "firstSample": 16286,
+        "releaseRelativeStart": 0.31929705215419446,
+        "frames": 44,
+        "rms": 0.1044455180450232,
+        "quiet": false
+      },
+      {
+        "firstSample": 16330,
+        "releaseRelativeStart": 0.32029478458049887,
+        "frames": 44,
+        "rms": 0.11246476357450788,
+        "quiet": false
+      },
+      {
+        "firstSample": 16374,
+        "releaseRelativeStart": 0.3212925170068015,
+        "frames": 44,
+        "rms": 0.10979279200178867,
+        "quiet": false
+      },
+      {
+        "firstSample": 16418,
+        "releaseRelativeStart": 0.3222902494331059,
+        "frames": 44,
+        "rms": 0.0999064321823624,
+        "quiet": false
+      },
+      {
+        "firstSample": 16462,
+        "releaseRelativeStart": 0.3232879818594103,
+        "frames": 44,
+        "rms": 0.1000812367940732,
+        "quiet": false
+      },
+      {
+        "firstSample": 16506,
+        "releaseRelativeStart": 0.32428571428571296,
+        "frames": 44,
+        "rms": 0.10813158935723567,
+        "quiet": false
+      },
+      {
+        "firstSample": 16550,
+        "releaseRelativeStart": 0.32528344671201737,
+        "frames": 44,
+        "rms": 0.10717266397391541,
+        "quiet": false
+      },
+      {
+        "firstSample": 16594,
+        "releaseRelativeStart": 0.3262811791383218,
+        "frames": 44,
+        "rms": 0.0974654718877098,
+        "quiet": false
+      },
+      {
+        "firstSample": 16638,
+        "releaseRelativeStart": 0.3272789115646244,
+        "frames": 44,
+        "rms": 0.09579726426924715,
+        "quiet": false
+      },
+      {
+        "firstSample": 16682,
+        "releaseRelativeStart": 0.3282766439909288,
+        "frames": 44,
+        "rms": 0.10352991005155612,
+        "quiet": false
+      },
+      {
+        "firstSample": 16726,
+        "releaseRelativeStart": 0.3292743764172332,
+        "frames": 44,
+        "rms": 0.10389876876352745,
+        "quiet": false
+      },
+      {
+        "firstSample": 16770,
+        "releaseRelativeStart": 0.33027210884353586,
+        "frames": 44,
+        "rms": 0.09469617007485218,
+        "quiet": false
+      },
+      {
+        "firstSample": 16814,
+        "releaseRelativeStart": 0.33126984126984027,
+        "frames": 44,
+        "rms": 0.09170150516569281,
+        "quiet": false
+      },
+      {
+        "firstSample": 16858,
+        "releaseRelativeStart": 0.3322675736961447,
+        "frames": 44,
+        "rms": 0.09899572423845815,
+        "quiet": false
+      },
+      {
+        "firstSample": 16902,
+        "releaseRelativeStart": 0.3332653061224491,
+        "frames": 44,
+        "rms": 0.10079593150728518,
+        "quiet": false
+      },
+      {
+        "firstSample": 16946,
+        "releaseRelativeStart": 0.3342630385487517,
+        "frames": 44,
+        "rms": 0.09231368637845024,
+        "quiet": false
+      },
+      {
+        "firstSample": 16990,
+        "releaseRelativeStart": 0.33526077097505613,
+        "frames": 44,
+        "rms": 0.0877194802383782,
+        "quiet": false
+      },
+      {
+        "firstSample": 17034,
+        "releaseRelativeStart": 0.33625850340136054,
+        "frames": 44,
+        "rms": 0.09393023490041164,
+        "quiet": false
+      },
+      {
+        "firstSample": 17078,
+        "releaseRelativeStart": 0.3372562358276632,
+        "frames": 44,
+        "rms": 0.09677174292902367,
+        "quiet": false
+      },
+      {
+        "firstSample": 17122,
+        "releaseRelativeStart": 0.3382539682539676,
+        "frames": 44,
+        "rms": 0.08948125375989553,
+        "quiet": false
+      },
+      {
+        "firstSample": 17166,
+        "releaseRelativeStart": 0.339251700680272,
+        "frames": 44,
+        "rms": 0.08363458046424016,
+        "quiet": false
+      },
+      {
+        "firstSample": 17210,
+        "releaseRelativeStart": 0.34024943310657463,
+        "frames": 44,
+        "rms": 0.08865951822243631,
+        "quiet": false
+      },
+      {
+        "firstSample": 17254,
+        "releaseRelativeStart": 0.34124716553287904,
+        "frames": 44,
+        "rms": 0.09254237262528213,
+        "quiet": false
+      },
+      {
+        "firstSample": 17298,
+        "releaseRelativeStart": 0.34224489795918345,
+        "frames": 44,
+        "rms": 0.08634720403460601,
+        "quiet": false
+      },
+      {
+        "firstSample": 17342,
+        "releaseRelativeStart": 0.3432426303854861,
+        "frames": 44,
+        "rms": 0.07983370432337203,
+        "quiet": false
+      },
+      {
+        "firstSample": 17386,
+        "releaseRelativeStart": 0.3442403628117905,
+        "frames": 44,
+        "rms": 0.08398516374963376,
+        "quiet": false
+      },
+      {
+        "firstSample": 17430,
+        "releaseRelativeStart": 0.3452380952380949,
+        "frames": 44,
+        "rms": 0.08865117620016848,
+        "quiet": false
+      },
+      {
+        "firstSample": 17474,
+        "releaseRelativeStart": 0.34623582766439753,
+        "frames": 44,
+        "rms": 0.08363824070694682,
+        "quiet": false
+      },
+      {
+        "firstSample": 17518,
+        "releaseRelativeStart": 0.34723356009070194,
+        "frames": 44,
+        "rms": 0.07637502365009395,
+        "quiet": false
+      },
+      {
+        "firstSample": 17562,
+        "releaseRelativeStart": 0.34823129251700635,
+        "frames": 44,
+        "rms": 0.07916290095538994,
+        "quiet": false
+      },
+      {
+        "firstSample": 17606,
+        "releaseRelativeStart": 0.34922902494331076,
+        "frames": 44,
+        "rms": 0.08422518461907628,
+        "quiet": false
+      },
+      {
+        "firstSample": 17650,
+        "releaseRelativeStart": 0.3502267573696134,
+        "frames": 44,
+        "rms": 0.08028255110494538,
+        "quiet": false
+      },
+      {
+        "firstSample": 17694,
+        "releaseRelativeStart": 0.3512244897959178,
+        "frames": 44,
+        "rms": 0.07308849552537801,
+        "quiet": false
+      },
+      {
+        "firstSample": 17738,
+        "releaseRelativeStart": 0.3522222222222222,
+        "frames": 44,
+        "rms": 0.07451386645461536,
+        "quiet": false
+      },
+      {
+        "firstSample": 17782,
+        "releaseRelativeStart": 0.35321995464852485,
+        "frames": 44,
+        "rms": 0.07957092148719427,
+        "quiet": false
+      },
+      {
+        "firstSample": 17826,
+        "releaseRelativeStart": 0.35421768707482926,
+        "frames": 44,
+        "rms": 0.07702515575586194,
+        "quiet": false
+      },
+      {
+        "firstSample": 17870,
+        "releaseRelativeStart": 0.35521541950113367,
+        "frames": 44,
+        "rms": 0.06971136469454704,
+        "quiet": false
+      },
+      {
+        "firstSample": 17914,
+        "releaseRelativeStart": 0.3562131519274363,
+        "frames": 44,
+        "rms": 0.06989499868320996,
+        "quiet": false
+      },
+      {
+        "firstSample": 17958,
+        "releaseRelativeStart": 0.3572108843537407,
+        "frames": 44,
+        "rms": 0.07512482393364038,
+        "quiet": false
+      },
+      {
+        "firstSample": 18002,
+        "releaseRelativeStart": 0.3582086167800451,
+        "frames": 44,
+        "rms": 0.0737105412750044,
+        "quiet": false
+      },
+      {
+        "firstSample": 18046,
+        "releaseRelativeStart": 0.35920634920634775,
+        "frames": 44,
+        "rms": 0.0666593554791181,
+        "quiet": false
+      },
+      {
+        "firstSample": 18090,
+        "releaseRelativeStart": 0.36020408163265216,
+        "frames": 44,
+        "rms": 0.0656840438437045,
+        "quiet": false
+      },
+      {
+        "firstSample": 18134,
+        "releaseRelativeStart": 0.36120181405895657,
+        "frames": 44,
+        "rms": 0.07089117633776566,
+        "quiet": false
+      },
+      {
+        "firstSample": 18178,
+        "releaseRelativeStart": 0.3621995464852592,
+        "frames": 44,
+        "rms": 0.07065396287209588,
+        "quiet": false
+      },
+      {
+        "firstSample": 18222,
+        "releaseRelativeStart": 0.3631972789115636,
+        "frames": 44,
+        "rms": 0.06410858794566412,
+        "quiet": false
+      },
+      {
+        "firstSample": 18266,
+        "releaseRelativeStart": 0.364195011337868,
+        "frames": 44,
+        "rms": 0.062121651188558835,
+        "quiet": false
+      },
+      {
+        "firstSample": 18310,
+        "releaseRelativeStart": 0.36519274376417243,
+        "frames": 44,
+        "rms": 0.06683724754352209,
+        "quiet": false
+      },
+      {
+        "firstSample": 18354,
+        "releaseRelativeStart": 0.36619047619047507,
+        "frames": 44,
+        "rms": 0.06745917637654461,
+        "quiet": false
+      },
+      {
+        "firstSample": 18398,
+        "releaseRelativeStart": 0.3671882086167795,
+        "frames": 44,
+        "rms": 0.06136532103013773,
+        "quiet": false
+      },
+      {
+        "firstSample": 18442,
+        "releaseRelativeStart": 0.3681859410430839,
+        "frames": 44,
+        "rms": 0.058422489467110164,
+        "quiet": false
+      },
+      {
+        "firstSample": 18486,
+        "releaseRelativeStart": 0.3691836734693865,
+        "frames": 44,
+        "rms": 0.06257844860888967,
+        "quiet": false
+      },
+      {
+        "firstSample": 18530,
+        "releaseRelativeStart": 0.37018140589569093,
+        "frames": 44,
+        "rms": 0.06421882377538475,
+        "quiet": false
+      },
+      {
+        "firstSample": 18574,
+        "releaseRelativeStart": 0.37117913832199534,
+        "frames": 44,
+        "rms": 0.058914145229554286,
+        "quiet": false
+      },
+      {
+        "firstSample": 18618,
+        "releaseRelativeStart": 0.37217687074829797,
+        "frames": 44,
+        "rms": 0.055129566134572164,
+        "quiet": false
+      },
+      {
+        "firstSample": 18662,
+        "releaseRelativeStart": 0.3731746031746024,
+        "frames": 44,
+        "rms": 0.058818788597590384,
+        "quiet": false
+      },
+      {
+        "firstSample": 18706,
+        "releaseRelativeStart": 0.3741723356009068,
+        "frames": 44,
+        "rms": 0.06108048049160884,
+        "quiet": false
+      },
+      {
+        "firstSample": 18750,
+        "releaseRelativeStart": 0.3751700680272094,
+        "frames": 44,
+        "rms": 0.05669799923640615,
+        "quiet": false
+      },
+      {
+        "firstSample": 18794,
+        "releaseRelativeStart": 0.37616780045351383,
+        "frames": 44,
+        "rms": 0.05273321881291022,
+        "quiet": false
+      },
+      {
+        "firstSample": 18838,
+        "releaseRelativeStart": 0.37716553287981824,
+        "frames": 44,
+        "rms": 0.055767080971014515,
+        "quiet": false
+      },
+      {
+        "firstSample": 18882,
+        "releaseRelativeStart": 0.3781632653061209,
+        "frames": 44,
+        "rms": 0.05879234764244909,
+        "quiet": false
+      },
+      {
+        "firstSample": 18926,
+        "releaseRelativeStart": 0.3791609977324253,
+        "frames": 44,
+        "rms": 0.05507580264618562,
+        "quiet": false
+      },
+      {
+        "firstSample": 18970,
+        "releaseRelativeStart": 0.3801587301587297,
+        "frames": 44,
+        "rms": 0.05041948124414026,
+        "quiet": false
+      },
+      {
+        "firstSample": 19014,
+        "releaseRelativeStart": 0.3811564625850341,
+        "frames": 44,
+        "rms": 0.052740959468413895,
+        "quiet": false
+      },
+      {
+        "firstSample": 19058,
+        "releaseRelativeStart": 0.38215419501133674,
+        "frames": 44,
+        "rms": 0.05593573590944007,
+        "quiet": false
+      },
+      {
+        "firstSample": 19102,
+        "releaseRelativeStart": 0.38315192743764115,
+        "frames": 44,
+        "rms": 0.053090013346316876,
+        "quiet": false
+      },
+      {
+        "firstSample": 19146,
+        "releaseRelativeStart": 0.38414965986394556,
+        "frames": 44,
+        "rms": 0.04838926727763047,
+        "quiet": false
+      },
+      {
+        "firstSample": 19190,
+        "releaseRelativeStart": 0.3851473922902482,
+        "frames": 44,
+        "rms": 0.04971853392464687,
+        "quiet": false
+      },
+      {
+        "firstSample": 19234,
+        "releaseRelativeStart": 0.3861451247165526,
+        "frames": 44,
+        "rms": 0.05324093364011146,
+        "quiet": false
+      },
+      {
+        "firstSample": 19278,
+        "releaseRelativeStart": 0.387142857142857,
+        "frames": 44,
+        "rms": 0.051436138603023006,
+        "quiet": false
+      },
+      {
+        "firstSample": 19322,
+        "releaseRelativeStart": 0.38814058956915964,
+        "frames": 44,
+        "rms": 0.04694901969660631,
+        "quiet": false
+      },
+      {
+        "firstSample": 19366,
+        "releaseRelativeStart": 0.38913832199546405,
+        "frames": 44,
+        "rms": 0.04771168349055514,
+        "quiet": false
+      },
+      {
+        "firstSample": 19410,
+        "releaseRelativeStart": 0.39013605442176846,
+        "frames": 44,
+        "rms": 0.051563854829190445,
+        "quiet": false
+      },
+      {
+        "firstSample": 19454,
+        "releaseRelativeStart": 0.3911337868480711,
+        "frames": 44,
+        "rms": 0.050570268782111655,
+        "quiet": false
+      },
+      {
+        "firstSample": 19498,
+        "releaseRelativeStart": 0.3921315192743755,
+        "frames": 44,
+        "rms": 0.045903668391262545,
+        "quiet": false
+      },
+      {
+        "firstSample": 19542,
+        "releaseRelativeStart": 0.3931292517006799,
+        "frames": 44,
+        "rms": 0.04578922696208539,
+        "quiet": false
+      },
+      {
+        "firstSample": 19586,
+        "releaseRelativeStart": 0.3941269841269843,
+        "frames": 44,
+        "rms": 0.049612612253656596,
+        "quiet": false
+      },
+      {
+        "firstSample": 19630,
+        "releaseRelativeStart": 0.39512471655328696,
+        "frames": 44,
+        "rms": 0.04953528747807018,
+        "quiet": false
+      },
+      {
+        "firstSample": 19674,
+        "releaseRelativeStart": 0.39612244897959137,
+        "frames": 44,
+        "rms": 0.045076288618345325,
+        "quiet": false
+      },
+      {
+        "firstSample": 19718,
+        "releaseRelativeStart": 0.3971201814058958,
+        "frames": 44,
+        "rms": 0.04440728110590006,
+        "quiet": false
+      },
+      {
+        "firstSample": 19762,
+        "releaseRelativeStart": 0.3981179138321984,
+        "frames": 44,
+        "rms": 0.04825559896143517,
+        "quiet": false
+      },
+      {
+        "firstSample": 19806,
+        "releaseRelativeStart": 0.3991156462585028,
+        "frames": 44,
+        "rms": 0.04881716404468786,
+        "quiet": false
+      },
+      {
+        "firstSample": 19850,
+        "releaseRelativeStart": 0.40011337868480723,
+        "frames": 44,
+        "rms": 0.044800034551934376,
+        "quiet": false
+      },
+      {
+        "firstSample": 19894,
+        "releaseRelativeStart": 0.40111111111110986,
+        "frames": 44,
+        "rms": 0.04331221074415749,
+        "quiet": false
+      },
+      {
+        "firstSample": 19938,
+        "releaseRelativeStart": 0.4021088435374143,
+        "frames": 44,
+        "rms": 0.04696173811316375,
+        "quiet": false
+      },
+      {
+        "firstSample": 19982,
+        "releaseRelativeStart": 0.4031065759637187,
+        "frames": 44,
+        "rms": 0.048624651699929015,
+        "quiet": false
+      },
+      {
+        "firstSample": 20026,
+        "releaseRelativeStart": 0.4041043083900213,
+        "frames": 44,
+        "rms": 0.04504855881060724,
+        "quiet": false
+      },
+      {
+        "firstSample": 20070,
+        "releaseRelativeStart": 0.4051020408163257,
+        "frames": 44,
+        "rms": 0.043093507391369704,
+        "quiet": false
+      },
+      {
+        "firstSample": 20114,
+        "releaseRelativeStart": 0.40609977324263014,
+        "frames": 44,
+        "rms": 0.046682253598457187,
+        "quiet": false
+      },
+      {
+        "firstSample": 20158,
+        "releaseRelativeStart": 0.40709750566893277,
+        "frames": 44,
+        "rms": 0.04888717003782967,
+        "quiet": false
+      },
+      {
+        "firstSample": 20202,
+        "releaseRelativeStart": 0.4080952380952372,
+        "frames": 44,
+        "rms": 0.045920336794661,
+        "quiet": false
+      },
+      {
+        "firstSample": 20246,
+        "releaseRelativeStart": 0.4090929705215416,
+        "frames": 44,
+        "rms": 0.04341992159462248,
+        "quiet": false
+      },
+      {
+        "firstSample": 20290,
+        "releaseRelativeStart": 0.4100907029478442,
+        "frames": 44,
+        "rms": 0.04685505923716516,
+        "quiet": false
+      },
+      {
+        "firstSample": 20334,
+        "releaseRelativeStart": 0.41108843537414863,
+        "frames": 44,
+        "rms": 0.04979032391374662,
+        "quiet": false
+      },
+      {
+        "firstSample": 20378,
+        "releaseRelativeStart": 0.41208616780045304,
+        "frames": 44,
+        "rms": 0.04699644849928775,
+        "quiet": false
+      },
+      {
+        "firstSample": 20422,
+        "releaseRelativeStart": 0.41308390022675745,
+        "frames": 44,
+        "rms": 0.04417834086165248,
+        "quiet": false
+      },
+      {
+        "firstSample": 20466,
+        "releaseRelativeStart": 0.4140816326530601,
+        "frames": 44,
+        "rms": 0.04721576028945191,
+        "quiet": false
+      },
+      {
+        "firstSample": 20510,
+        "releaseRelativeStart": 0.4150793650793645,
+        "frames": 44,
+        "rms": 0.050679942214002655,
+        "quiet": false
+      },
+      {
+        "firstSample": 20554,
+        "releaseRelativeStart": 0.4160770975056689,
+        "frames": 44,
+        "rms": 0.048783346826755974,
+        "quiet": false
+      },
+      {
+        "firstSample": 20598,
+        "releaseRelativeStart": 0.41707482993197154,
+        "frames": 44,
+        "rms": 0.04542747874867122,
+        "quiet": false
+      },
+      {
+        "firstSample": 20642,
+        "releaseRelativeStart": 0.41807256235827595,
+        "frames": 44,
+        "rms": 0.048064155920843406,
+        "quiet": false
+      },
+      {
+        "firstSample": 20686,
+        "releaseRelativeStart": 0.41907029478458035,
+        "frames": 44,
+        "rms": 0.05210607269974474,
+        "quiet": false
+      },
+      {
+        "firstSample": 20730,
+        "releaseRelativeStart": 0.420068027210883,
+        "frames": 44,
+        "rms": 0.05071637816740582,
+        "quiet": false
+      },
+      {
+        "firstSample": 20774,
+        "releaseRelativeStart": 0.4210657596371874,
+        "frames": 44,
+        "rms": 0.047274985614417016,
+        "quiet": false
+      },
+      {
+        "firstSample": 20818,
+        "releaseRelativeStart": 0.4220634920634918,
+        "frames": 44,
+        "rms": 0.049415354484963175,
+        "quiet": false
+      },
+      {
+        "firstSample": 20862,
+        "releaseRelativeStart": 0.42306122448979444,
+        "frames": 44,
+        "rms": 0.05432359338376407,
+        "quiet": false
+      },
+      {
+        "firstSample": 20906,
+        "releaseRelativeStart": 0.42405895691609885,
+        "frames": 44,
+        "rms": 0.0535721780559514,
+        "quiet": false
+      },
+      {
+        "firstSample": 20950,
+        "releaseRelativeStart": 0.42505668934240326,
+        "frames": 44,
+        "rms": 0.049640277592004,
+        "quiet": false
+      },
+      {
+        "firstSample": 20994,
+        "releaseRelativeStart": 0.42605442176870767,
+        "frames": 44,
+        "rms": 0.051238566431958225,
+        "quiet": false
+      },
+      {
+        "firstSample": 21038,
+        "releaseRelativeStart": 0.4270521541950103,
+        "frames": 44,
+        "rms": 0.05612783781551173,
+        "quiet": false
+      },
+      {
+        "firstSample": 21082,
+        "releaseRelativeStart": 0.4280498866213147,
+        "frames": 44,
+        "rms": 0.05614603512774935,
+        "quiet": false
+      },
+      {
+        "firstSample": 21126,
+        "releaseRelativeStart": 0.4290476190476191,
+        "frames": 44,
+        "rms": 0.052009112784754605,
+        "quiet": false
+      },
+      {
+        "firstSample": 21170,
+        "releaseRelativeStart": 0.43004535147392176,
+        "frames": 44,
+        "rms": 0.05264299467911809,
+        "quiet": false
+      },
+      {
+        "firstSample": 21214,
+        "releaseRelativeStart": 0.43104308390022616,
+        "frames": 44,
+        "rms": 0.05807487099940198,
+        "quiet": false
+      },
+      {
+        "firstSample": 21258,
+        "releaseRelativeStart": 0.4320408163265306,
+        "frames": 44,
+        "rms": 0.059126967775750126,
+        "quiet": false
+      },
+      {
+        "firstSample": 21302,
+        "releaseRelativeStart": 0.4330385487528332,
+        "frames": 44,
+        "rms": 0.05490944740663585,
+        "quiet": false
+      },
+      {
+        "firstSample": 21346,
+        "releaseRelativeStart": 0.4340362811791376,
+        "frames": 44,
+        "rms": 0.05476491916529119,
+        "quiet": false
+      },
+      {
+        "firstSample": 21390,
+        "releaseRelativeStart": 0.435034013605442,
+        "frames": 44,
+        "rms": 0.06058966580330413,
+        "quiet": false
+      },
+      {
+        "firstSample": 21434,
+        "releaseRelativeStart": 0.43603174603174466,
+        "frames": 44,
+        "rms": 0.06249370709213984,
+        "quiet": false
+      },
+      {
+        "firstSample": 21478,
+        "releaseRelativeStart": 0.43702947845804907,
+        "frames": 44,
+        "rms": 0.058230460799308444,
+        "quiet": false
+      },
+      {
+        "firstSample": 21522,
+        "releaseRelativeStart": 0.4380272108843535,
+        "frames": 44,
+        "rms": 0.057260266041399756,
+        "quiet": false
+      },
+      {
+        "firstSample": 21566,
+        "releaseRelativeStart": 0.4390249433106561,
+        "frames": 44,
+        "rms": 0.06319341811046712,
+        "quiet": false
+      },
+      {
+        "firstSample": 21610,
+        "releaseRelativeStart": 0.4400226757369605,
+        "frames": 44,
+        "rms": 0.06611098938612094,
+        "quiet": false
+      },
+      {
+        "firstSample": 21654,
+        "releaseRelativeStart": 0.44102040816326493,
+        "frames": 44,
+        "rms": 0.06204638140779264,
+        "quiet": false
+      },
+      {
+        "firstSample": 21698,
+        "releaseRelativeStart": 0.44201814058956757,
+        "frames": 44,
+        "rms": 0.060137854320163525,
+        "quiet": false
+      },
+      {
+        "firstSample": 21742,
+        "releaseRelativeStart": 0.443015873015872,
+        "frames": 44,
+        "rms": 0.06597620130180307,
+        "quiet": false
+      },
+      {
+        "firstSample": 21786,
+        "releaseRelativeStart": 0.4440136054421764,
+        "frames": 44,
+        "rms": 0.06974906904412173,
+        "quiet": false
+      },
+      {
+        "firstSample": 21830,
+        "releaseRelativeStart": 0.4450113378684808,
+        "frames": 44,
+        "rms": 0.06611439554216575,
+        "quiet": false
+      },
+      {
+        "firstSample": 21874,
+        "releaseRelativeStart": 0.4460090702947834,
+        "frames": 44,
+        "rms": 0.06315396080085511,
+        "quiet": false
+      },
+      {
+        "firstSample": 21918,
+        "releaseRelativeStart": 0.44700680272108784,
+        "frames": 44,
+        "rms": 0.06869606307097177,
+        "quiet": false
+      },
+      {
+        "firstSample": 21962,
+        "releaseRelativeStart": 0.44800453514739225,
+        "frames": 44,
+        "rms": 0.07347279901141932,
+        "quiet": false
+      },
+      {
+        "firstSample": 22006,
+        "releaseRelativeStart": 0.4490022675736949,
+        "frames": 44,
+        "rms": 0.07023617344981095,
+        "quiet": false
+      },
+      {
+        "firstSample": 22050,
+        "releaseRelativeStart": 0.4499999999999993,
+        "frames": 44,
+        "rms": 0.06643944854420741,
+        "quiet": false
+      },
+      {
+        "firstSample": 22094,
+        "releaseRelativeStart": 0.4509977324263037,
+        "frames": 44,
+        "rms": 0.0714902210252824,
+        "quiet": false
+      },
+      {
+        "firstSample": 22138,
+        "releaseRelativeStart": 0.45199546485260633,
+        "frames": 44,
+        "rms": 0.0775231038315608,
+        "quiet": false
+      },
+      {
+        "firstSample": 22182,
+        "releaseRelativeStart": 0.45299319727891074,
+        "frames": 44,
+        "rms": 0.07508070395914998,
+        "quiet": false
+      },
+      {
+        "firstSample": 22226,
+        "releaseRelativeStart": 0.45399092970521515,
+        "frames": 44,
+        "rms": 0.07032230827723224,
+        "quiet": false
+      },
+      {
+        "firstSample": 22270,
+        "releaseRelativeStart": 0.4549886621315178,
+        "frames": 44,
+        "rms": 0.07478947876478387,
+        "quiet": false
+      },
+      {
+        "firstSample": 22314,
+        "releaseRelativeStart": 0.4559863945578222,
+        "frames": 44,
+        "rms": 0.0815092354479452,
+        "quiet": false
+      },
+      {
+        "firstSample": 22358,
+        "releaseRelativeStart": 0.4569841269841266,
+        "frames": 44,
+        "rms": 0.07964929798725744,
+        "quiet": false
+      },
+      {
+        "firstSample": 22402,
+        "releaseRelativeStart": 0.457981859410431,
+        "frames": 44,
+        "rms": 0.07419473544332171,
+        "quiet": false
+      },
+      {
+        "firstSample": 22446,
+        "releaseRelativeStart": 0.45897959183673365,
+        "frames": 44,
+        "rms": 0.07768529330371632,
+        "quiet": false
+      },
+      {
+        "firstSample": 22490,
+        "releaseRelativeStart": 0.45997732426303806,
+        "frames": 44,
+        "rms": 0.0852191953524583,
+        "quiet": false
+      },
+      {
+        "firstSample": 22534,
+        "releaseRelativeStart": 0.46097505668934247,
+        "frames": 44,
+        "rms": 0.08435538550597055,
+        "quiet": false
+      },
+      {
+        "firstSample": 22578,
+        "releaseRelativeStart": 0.4619727891156451,
+        "frames": 44,
+        "rms": 0.07827353846258972,
+        "quiet": false
+      },
+      {
+        "firstSample": 22622,
+        "releaseRelativeStart": 0.4629705215419495,
+        "frames": 44,
+        "rms": 0.08054909652941408,
+        "quiet": false
+      },
+      {
+        "firstSample": 22666,
+        "releaseRelativeStart": 0.4639682539682539,
+        "frames": 44,
+        "rms": 0.08869912181662454,
+        "quiet": false
+      },
+      {
+        "firstSample": 22710,
+        "releaseRelativeStart": 0.46496598639455655,
+        "frames": 44,
+        "rms": 0.08906749063183218,
+        "quiet": false
+      },
+      {
+        "firstSample": 22754,
+        "releaseRelativeStart": 0.46596371882086096,
+        "frames": 44,
+        "rms": 0.08248987146009842,
+        "quiet": false
+      },
+      {
+        "firstSample": 22798,
+        "releaseRelativeStart": 0.46696145124716537,
+        "frames": 44,
+        "rms": 0.08355051629840121,
+        "quiet": false
+      },
+      {
+        "firstSample": 22842,
+        "releaseRelativeStart": 0.467959183673468,
+        "frames": 44,
+        "rms": 0.09227221757093598,
+        "quiet": false
+      },
+      {
+        "firstSample": 22886,
+        "releaseRelativeStart": 0.4689569160997724,
+        "frames": 44,
+        "rms": 0.0939161016754241,
+        "quiet": false
+      },
+      {
+        "firstSample": 22930,
+        "releaseRelativeStart": 0.4699546485260768,
+        "frames": 44,
+        "rms": 0.08714648546077781,
+        "quiet": false
+      },
+      {
+        "firstSample": 22974,
+        "releaseRelativeStart": 0.47095238095237946,
+        "frames": 44,
+        "rms": 0.08677673127267191,
+        "quiet": false
+      },
+      {
+        "firstSample": 23018,
+        "releaseRelativeStart": 0.47195011337868387,
+        "frames": 44,
+        "rms": 0.09580535682466965,
+        "quiet": false
+      },
+      {
+        "firstSample": 23062,
+        "releaseRelativeStart": 0.4729478458049883,
+        "frames": 44,
+        "rms": 0.09855810287060107,
+        "quiet": false
+      },
+      {
+        "firstSample": 23106,
+        "releaseRelativeStart": 0.4739455782312909,
+        "frames": 44,
+        "rms": 0.09162418812927867,
+        "quiet": false
+      },
+      {
+        "firstSample": 23150,
+        "releaseRelativeStart": 0.4749433106575953,
+        "frames": 44,
+        "rms": 0.08990094554392955,
+        "quiet": false
+      },
+      {
+        "firstSample": 23194,
+        "releaseRelativeStart": 0.47594104308389973,
+        "frames": 44,
+        "rms": 0.09865280198874365,
+        "quiet": false
+      },
+      {
+        "firstSample": 23238,
+        "releaseRelativeStart": 0.47693877551020414,
+        "frames": 44,
+        "rms": 0.10279595289636471,
+        "quiet": false
+      },
+      {
+        "firstSample": 23282,
+        "releaseRelativeStart": 0.47793650793650677,
+        "frames": 44,
+        "rms": 0.09635501675453392,
+        "quiet": false
+      },
+      {
+        "firstSample": 23326,
+        "releaseRelativeStart": 0.4789342403628112,
+        "frames": 44,
+        "rms": 0.09298543448585171,
+        "quiet": false
+      },
+      {
+        "firstSample": 23370,
+        "releaseRelativeStart": 0.4799319727891156,
+        "frames": 44,
+        "rms": 0.10160514629166133,
+        "quiet": false
+      },
+      {
+        "firstSample": 23414,
+        "releaseRelativeStart": 0.4809297052154182,
+        "frames": 44,
+        "rms": 0.10721871971853769,
+        "quiet": false
+      },
+      {
+        "firstSample": 23458,
+        "releaseRelativeStart": 0.48192743764172263,
+        "frames": 44,
+        "rms": 0.1012316632951929,
+        "quiet": false
+      },
+      {
+        "firstSample": 23502,
+        "releaseRelativeStart": 0.48292517006802704,
+        "frames": 44,
+        "rms": 0.09634894355415206,
+        "quiet": false
+      },
+      {
+        "firstSample": 23546,
+        "releaseRelativeStart": 0.4839229024943297,
+        "frames": 44,
+        "rms": 0.10431427407780883,
+        "quiet": false
+      },
+      {
+        "firstSample": 23590,
+        "releaseRelativeStart": 0.4849206349206341,
+        "frames": 44,
+        "rms": 0.1113031722551864,
+        "quiet": false
+      },
+      {
+        "firstSample": 23634,
+        "releaseRelativeStart": 0.4859183673469385,
+        "frames": 44,
+        "rms": 0.10578775020027939,
+        "quiet": false
+      },
+      {
+        "firstSample": 23678,
+        "releaseRelativeStart": 0.48691609977324113,
+        "frames": 44,
+        "rms": 0.09961230236733874,
+        "quiet": false
+      },
+      {
+        "firstSample": 23722,
+        "releaseRelativeStart": 0.48791383219954554,
+        "frames": 44,
+        "rms": 0.10662748232338982,
+        "quiet": false
+      },
+      {
+        "firstSample": 23766,
+        "releaseRelativeStart": 0.48891156462584995,
+        "frames": 44,
+        "rms": 0.11468442982094257,
+        "quiet": false
+      },
+      {
+        "firstSample": 23810,
+        "releaseRelativeStart": 0.48990929705215436,
+        "frames": 44,
+        "rms": 0.11031901702789126,
+        "quiet": false
+      },
+      {
+        "firstSample": 23854,
+        "releaseRelativeStart": 0.490907029478457,
+        "frames": 44,
+        "rms": 0.10283605057287985,
+        "quiet": false
+      },
+      {
+        "firstSample": 23898,
+        "releaseRelativeStart": 0.4919047619047614,
+        "frames": 44,
+        "rms": 0.10844765183234228,
+        "quiet": false
+      },
+      {
+        "firstSample": 23942,
+        "releaseRelativeStart": 0.4929024943310658,
+        "frames": 44,
+        "rms": 0.11746112975352141,
+        "quiet": false
+      },
+      {
+        "firstSample": 23986,
+        "releaseRelativeStart": 0.49390022675736844,
+        "frames": 44,
+        "rms": 0.11435408556019995,
+        "quiet": false
+      },
+      {
+        "firstSample": 24030,
+        "releaseRelativeStart": 0.49489795918367285,
+        "frames": 44,
+        "rms": 0.10587115811183621,
+        "quiet": false
+      },
+      {
+        "firstSample": 24074,
+        "releaseRelativeStart": 0.49589569160997726,
+        "frames": 44,
+        "rms": 0.11004813385869412,
+        "quiet": false
+      },
+      {
+        "firstSample": 24118,
+        "releaseRelativeStart": 0.4968934240362799,
+        "frames": 44,
+        "rms": 0.12002639379744844,
+        "quiet": false
+      },
+      {
+        "firstSample": 24162,
+        "releaseRelativeStart": 0.4978911564625843,
+        "frames": 44,
+        "rms": 0.11830861986866002,
+        "quiet": false
+      },
+      {
+        "firstSample": 24206,
+        "releaseRelativeStart": 0.4988888888888887,
+        "frames": 44,
+        "rms": 0.10901357710139925,
+        "quiet": false
+      },
+      {
+        "firstSample": 24250,
+        "releaseRelativeStart": 0.49988662131519135,
+        "frames": 44,
+        "rms": 0.11127748690310582,
+        "quiet": false
+      },
+      {
+        "firstSample": 24294,
+        "releaseRelativeStart": 0.5008843537414958,
+        "frames": 44,
+        "rms": 0.12175151729364651,
+        "quiet": false
+      },
+      {
+        "firstSample": 24338,
+        "releaseRelativeStart": 0.5018820861678002,
+        "frames": 44,
+        "rms": 0.1214472559320482,
+        "quiet": false
+      },
+      {
+        "firstSample": 24382,
+        "releaseRelativeStart": 0.5028798185941028,
+        "frames": 44,
+        "rms": 0.1116524269285625,
+        "quiet": false
+      },
+      {
+        "firstSample": 24426,
+        "releaseRelativeStart": 0.5038775510204072,
+        "frames": 44,
+        "rms": 0.11209733910387738,
+        "quiet": false
+      },
+      {
+        "firstSample": 24470,
+        "releaseRelativeStart": 0.5048752834467116,
+        "frames": 44,
+        "rms": 0.12283979801652338,
+        "quiet": false
+      },
+      {
+        "firstSample": 24514,
+        "releaseRelativeStart": 0.5058730158730143,
+        "frames": 44,
+        "rms": 0.12415729348599806,
+        "quiet": false
+      },
+      {
+        "firstSample": 24558,
+        "releaseRelativeStart": 0.5068707482993187,
+        "frames": 44,
+        "rms": 0.11441733537606877,
+        "quiet": false
+      },
+      {
+        "firstSample": 24602,
+        "releaseRelativeStart": 0.5078684807256231,
+        "frames": 44,
+        "rms": 0.11293882846416417,
+        "quiet": false
+      },
+      {
+        "firstSample": 24646,
+        "releaseRelativeStart": 0.5088662131519275,
+        "frames": 44,
+        "rms": 0.12352097021451784,
+        "quiet": false
+      },
+      {
+        "firstSample": 24690,
+        "releaseRelativeStart": 0.5098639455782301,
+        "frames": 44,
+        "rms": 0.1264029103538071,
+        "quiet": false
+      },
+      {
+        "firstSample": 24734,
+        "releaseRelativeStart": 0.5108616780045345,
+        "frames": 44,
+        "rms": 0.11673388676293646,
+        "quiet": false
+      },
+      {
+        "firstSample": 24778,
+        "releaseRelativeStart": 0.5118594104308389,
+        "frames": 44,
+        "rms": 0.11317748186173378,
+        "quiet": false
+      },
+      {
+        "firstSample": 24822,
+        "releaseRelativeStart": 0.5128571428571416,
+        "frames": 44,
+        "rms": 0.12332244717235004,
+        "quiet": false
+      },
+      {
+        "firstSample": 24866,
+        "releaseRelativeStart": 0.513854875283446,
+        "frames": 44,
+        "rms": 0.12776216225116677,
+        "quiet": false
+      },
+      {
+        "firstSample": 24910,
+        "releaseRelativeStart": 0.5148526077097504,
+        "frames": 44,
+        "rms": 0.11891492840363248,
+        "quiet": false
+      },
+      {
+        "firstSample": 24954,
+        "releaseRelativeStart": 0.515850340136053,
+        "frames": 44,
+        "rms": 0.11354286781437675,
+        "quiet": false
+      },
+      {
+        "firstSample": 24998,
+        "releaseRelativeStart": 0.5168480725623574,
+        "frames": 44,
+        "rms": 0.12255224215443962,
+        "quiet": false
+      },
+      {
+        "firstSample": 25042,
+        "releaseRelativeStart": 0.5178458049886618,
+        "frames": 44,
+        "rms": 0.12856385304566595,
+        "quiet": false
+      },
+      {
+        "firstSample": 25086,
+        "releaseRelativeStart": 0.5188435374149645,
+        "frames": 44,
+        "rms": 0.12037053278678722,
+        "quiet": false
+      },
+      {
+        "firstSample": 25130,
+        "releaseRelativeStart": 0.5198412698412689,
+        "frames": 44,
+        "rms": 0.11333599219371195,
+        "quiet": false
+      },
+      {
+        "firstSample": 25174,
+        "releaseRelativeStart": 0.5208390022675733,
+        "frames": 44,
+        "rms": 0.12112064757264397,
+        "quiet": false
+      },
+      {
+        "firstSample": 25218,
+        "releaseRelativeStart": 0.5218367346938777,
+        "frames": 44,
+        "rms": 0.12852753067403888,
+        "quiet": false
+      },
+      {
+        "firstSample": 25262,
+        "releaseRelativeStart": 0.5228344671201803,
+        "frames": 44,
+        "rms": 0.12178116784290559,
+        "quiet": false
+      },
+      {
+        "firstSample": 25306,
+        "releaseRelativeStart": 0.5238321995464847,
+        "frames": 44,
+        "rms": 0.11307976727866477,
+        "quiet": false
+      },
+      {
+        "firstSample": 25350,
+        "releaseRelativeStart": 0.5248299319727892,
+        "frames": 44,
+        "rms": 0.11947994404503343,
+        "quiet": false
+      },
+      {
+        "firstSample": 25394,
+        "releaseRelativeStart": 0.5258276643990918,
+        "frames": 44,
+        "rms": 0.12789800048642228,
+        "quiet": false
+      },
+      {
+        "firstSample": 25438,
+        "releaseRelativeStart": 0.5268253968253962,
+        "frames": 44,
+        "rms": 0.12235792223473622,
+        "quiet": false
+      },
+      {
+        "firstSample": 25482,
+        "releaseRelativeStart": 0.5278231292517006,
+        "frames": 44,
+        "rms": 0.11278039452353276,
+        "quiet": false
+      },
+      {
+        "firstSample": 25526,
+        "releaseRelativeStart": 0.5288208616780032,
+        "frames": 44,
+        "rms": 0.11712449705294625,
+        "quiet": false
+      },
+      {
+        "firstSample": 25570,
+        "releaseRelativeStart": 0.5298185941043076,
+        "frames": 44,
+        "rms": 0.12638625730466532,
+        "quiet": false
+      },
+      {
+        "firstSample": 25614,
+        "releaseRelativeStart": 0.5308163265306121,
+        "frames": 44,
+        "rms": 0.12248722407896293,
+        "quiet": false
+      },
+      {
+        "firstSample": 25658,
+        "releaseRelativeStart": 0.5318140589569147,
+        "frames": 44,
+        "rms": 0.11203486273068837,
+        "quiet": false
+      },
+      {
+        "firstSample": 25702,
+        "releaseRelativeStart": 0.5328117913832191,
+        "frames": 44,
+        "rms": 0.11477987793339796,
+        "quiet": false
+      },
+      {
+        "firstSample": 25746,
+        "releaseRelativeStart": 0.5338095238095235,
+        "frames": 44,
+        "rms": 0.12420539267661229,
+        "quiet": false
+      },
+      {
+        "firstSample": 25790,
+        "releaseRelativeStart": 0.5348072562358261,
+        "frames": 44,
+        "rms": 0.12193855660584793,
+        "quiet": false
+      },
+      {
+        "firstSample": 25834,
+        "releaseRelativeStart": 0.5358049886621306,
+        "frames": 44,
+        "rms": 0.11148407335770387,
+        "quiet": false
+      },
+      {
+        "firstSample": 25878,
+        "releaseRelativeStart": 0.536802721088435,
+        "frames": 44,
+        "rms": 0.11193337086387009,
+        "quiet": false
+      },
+      {
+        "firstSample": 25922,
+        "releaseRelativeStart": 0.5378004535147376,
+        "frames": 44,
+        "rms": 0.12157336978445579,
+        "quiet": false
+      },
+      {
+        "firstSample": 25966,
+        "releaseRelativeStart": 0.538798185941042,
+        "frames": 44,
+        "rms": 0.12093595293823486,
+        "quiet": false
+      },
+      {
+        "firstSample": 26010,
+        "releaseRelativeStart": 0.5397959183673464,
+        "frames": 44,
+        "rms": 0.11050589042541446,
+        "quiet": false
+      },
+      {
+        "firstSample": 26054,
+        "releaseRelativeStart": 0.5407936507936508,
+        "frames": 44,
+        "rms": 0.10898087215069543,
+        "quiet": false
+      },
+      {
+        "firstSample": 26098,
+        "releaseRelativeStart": 0.5417913832199535,
+        "frames": 44,
+        "rms": 0.11836164573145273,
+        "quiet": false
+      },
+      {
+        "firstSample": 26142,
+        "releaseRelativeStart": 0.5427891156462579,
+        "frames": 44,
+        "rms": 0.11961019380371826,
+        "quiet": false
+      },
+      {
+        "firstSample": 26186,
+        "releaseRelativeStart": 0.5437868480725623,
+        "frames": 44,
+        "rms": 0.1096220560457231,
+        "quiet": false
+      },
+      {
+        "firstSample": 26230,
+        "releaseRelativeStart": 0.5447845804988649,
+        "frames": 44,
+        "rms": 0.1062742062545839,
+        "quiet": false
+      },
+      {
+        "firstSample": 26274,
+        "releaseRelativeStart": 0.5457823129251693,
+        "frames": 44,
+        "rms": 0.11491244975538718,
+        "quiet": false
+      },
+      {
+        "firstSample": 26318,
+        "releaseRelativeStart": 0.5467800453514737,
+        "frames": 44,
+        "rms": 0.11740524103984933,
+        "quiet": false
+      },
+      {
+        "firstSample": 26362,
+        "releaseRelativeStart": 0.5477777777777764,
+        "frames": 44,
+        "rms": 0.1080080831207127,
+        "quiet": false
+      },
+      {
+        "firstSample": 26406,
+        "releaseRelativeStart": 0.5487755102040808,
+        "frames": 44,
+        "rms": 0.10283941133003377,
+        "quiet": false
+      }
+    ],
+    "gapBinFrames": 44,
+    "gapBinMilliseconds": 0.9977324263038548,
+    "ignoredFinalIncompleteGapBinFrames": 10,
+    "releaseAnalysisStartIndex": 2206,
+    "firstCorrectWindowRelativeToReleaseSeconds": 0.0,
+    "initialLowRMSGapSeconds": 0.0,
+    "maximumLowRMSGapSeconds": 0.0,
+    "wrongPitchAfterRelease30ms": 0,
+    "raw475_2HzWindowCount": 0,
+    "settledWindowCount": 15,
+    "criteriaPassed": {
+      "firstCorrectWithin30msOfRelease": true,
+      "releaseGapWithin20ms": true,
+      "anyLowRMSGapWithin20ms": true,
+      "settledPitch": true,
+      "noWrongPitchAfterRelease30ms": true
+    },
+    "maxFrequencyDifferenceFromReportedHz": 1.1368683772161603e-13,
+    "maxRMSDifferenceFromReported": 2.3592239273284576e-16,
+    "checks": {
+      "rawBase64ExactByteGeometry": true,
+      "rawHashMatchesReport": true,
+      "everyExportedSampleFinite": true,
+      "allExportedSamplesAccountedFor": true,
+      "classificationsMatchReported": true,
+      "fiveCriteriaMatchReported": true,
+      "rawWindowCountMatchesReported": true,
+      "initialGapMatchesReported": true,
+      "maximumGapMatchesReported": true
+    },
+    "estimator": "Independent NumPy Hann/rFFT with powerof2padding>=2xwindow, globalnonDCpeak, logpower threebin interpolation. Expectedtones usedonlyafterestimation. Fixed40ms/10mswindowgrid and five declared budgets are retained."
+  },
+  "captureManifestReview": {
+    "captures": [
+      {
+        "label": "engine-deck-bus",
+        "preflight": {
+          "type": "preflight",
+          "id": "engine-deck-bus-preflight-1",
+          "firstFrame": 768,
+          "lastFrame": 8960,
+          "consecutive": 64,
+          "startupGaps": [
+            {
+              "expected": 128,
+              "actual": 384,
+              "sequence": 1
+            }
+          ]
+        },
+        "arm": {
+          "type": "armed",
+          "id": "engine-deck-bus-arm-2",
+          "firstFrame": 8960,
+          "firstSequence": 68,
+          "startupGaps": [
+            {
+              "expected": 128,
+              "actual": 384,
+              "sequence": 1
+            }
+          ]
+        },
+        "fence": {
+          "type": "finished",
+          "id": "engine-deck-bus-finish-3",
+          "lastFrame": 558976,
+          "lastSequence": 4364
+        },
+        "blocks": 4297,
+        "frames": 550016,
+        "checks": {
+          "preflight64ContiguousQuanta": true,
+          "armAtPreflightEnd": true,
+          "blockFrameAlgebra": true,
+          "blockSequenceAlgebra": true,
+          "reportedFullCoverage": true,
+          "retainedStartupGapsBeforePreflightAndArm": true
+        },
+        "allArmedStereoSamplesIndependentlyReconstructed": false
+      },
+      {
+        "label": "independent-control",
+        "preflight": {
+          "type": "preflight",
+          "id": "independent-control-preflight-1",
+          "firstFrame": 768,
+          "lastFrame": 8960,
+          "consecutive": 64,
+          "startupGaps": [
+            {
+              "expected": 128,
+              "actual": 384,
+              "sequence": 1
+            }
+          ]
+        },
+        "arm": {
+          "type": "armed",
+          "id": "independent-control-arm-2",
+          "firstFrame": 8960,
+          "firstSequence": 68,
+          "startupGaps": [
+            {
+              "expected": 128,
+              "actual": 384,
+              "sequence": 1
+            }
+          ]
+        },
+        "fence": {
+          "type": "finished",
+          "id": "independent-control-finish-3",
+          "lastFrame": 560256,
+          "lastSequence": 4374
+        },
+        "blocks": 4307,
+        "frames": 551296,
+        "checks": {
+          "preflight64ContiguousQuanta": true,
+          "armAtPreflightEnd": true,
+          "blockFrameAlgebra": true,
+          "blockSequenceAlgebra": true,
+          "reportedFullCoverage": true,
+          "retainedStartupGapsBeforePreflightAndArm": true
+        },
+        "allArmedStereoSamplesIndependentlyReconstructed": false
+      },
+      {
+        "label": "silent-pull-output",
+        "preflight": {
+          "type": "preflight",
+          "id": "silent-pull-output-preflight-1",
+          "firstFrame": 768,
+          "lastFrame": 8960,
+          "consecutive": 64,
+          "startupGaps": [
+            {
+              "expected": 128,
+              "actual": 384,
+              "sequence": 1
+            }
+          ]
+        },
+        "arm": {
+          "type": "armed",
+          "id": "silent-pull-output-arm-2",
+          "firstFrame": 8960,
+          "firstSequence": 68,
+          "startupGaps": [
+            {
+              "expected": 128,
+              "actual": 384,
+              "sequence": 1
+            }
+          ]
+        },
+        "fence": {
+          "type": "finished",
+          "id": "silent-pull-output-finish-3",
+          "lastFrame": 560512,
+          "lastSequence": 4376
+        },
+        "blocks": 4309,
+        "frames": 551552,
+        "checks": {
+          "preflight64ContiguousQuanta": true,
+          "armAtPreflightEnd": true,
+          "blockFrameAlgebra": true,
+          "blockSequenceAlgebra": true,
+          "reportedFullCoverage": true,
+          "retainedStartupGapsBeforePreflightAndArm": true
+        },
+        "allArmedStereoSamplesIndependentlyReconstructed": false
+      },
+      {
+        "label": "shadow-pre-gate",
+        "preflight": {
+          "type": "preflight",
+          "id": "shadow-pre-gate-preflight-1",
+          "firstFrame": 768,
+          "lastFrame": 8960,
+          "consecutive": 64,
+          "startupGaps": [
+            {
+              "expected": 128,
+              "actual": 384,
+              "sequence": 1
+            }
+          ]
+        },
+        "arm": {
+          "type": "armed",
+          "id": "shadow-pre-gate-arm-2",
+          "firstFrame": 8960,
+          "firstSequence": 68,
+          "startupGaps": [
+            {
+              "expected": 128,
+              "actual": 384,
+              "sequence": 1
+            }
+          ]
+        },
+        "fence": {
+          "type": "finished",
+          "id": "shadow-pre-gate-finish-3",
+          "lastFrame": 560768,
+          "lastSequence": 4378
+        },
+        "blocks": 4311,
+        "frames": 551808,
+        "checks": {
+          "preflight64ContiguousQuanta": true,
+          "armAtPreflightEnd": true,
+          "blockFrameAlgebra": true,
+          "blockSequenceAlgebra": true,
+          "reportedFullCoverage": true,
+          "retainedStartupGapsBeforePreflightAndArm": true
+        },
+        "allArmedStereoSamplesIndependentlyReconstructed": false
+      }
+    ],
+    "allManifestChecksExecuted": true,
+    "completeArmedPCMExported": false,
+    "independentOfflineScope": "Frame/sequence/fence algebra and packaged finish() assertions inspected; full4stereo armedbuffers are not exported, so their every-sample continuity cannot be independently reconstructed from this artifact."
+  },
+  "fiveSourceBoundary": {
+    "parentResult": {
+      "name": "Actual five-source engine handoff transfers sole history output and keeps selected vocal level",
+      "passed": true,
+      "evidence": {
+        "before": {
+          "start": 9.460272108843538,
+          "duration": 0.3,
+          "coverage": 1,
+          "frames": 13230,
+          "rms": 0.09619023265518585,
+          "peak": 0.1733759045600891,
+          "frequencyHz": 173.37397171574992,
+          "maxBelow005RunMs": 0,
+          "envelopeFit": {
+            "frequency": 4.34,
+            "error": 0.0003080729449259304,
+            "relativeAmplitude": 0.4449679357891267
+          }
+        },
+        "transition": {
+          "start": 11.5184126984127,
+          "duration": 0.35,
+          "coverage": 1,
+          "frames": 15435,
+          "rms": 0.08131683157431578,
+          "peak": 0.1732751429080963,
+          "frequencyHz": 173.39998346449457,
+          "maxBelow005RunMs": 80,
+          "envelopeFit": {
+            "frequency": 5.52,
+            "error": 0.02401425287888132,
+            "relativeAmplitude": 0.7242799289301426
+          }
+        },
+        "after": {
+          "start": 11.8484126984127,
+          "duration": 0.3,
+          "coverage": 1,
+          "frames": 13230,
+          "rms": 0.08934440412273323,
+          "peak": 0.17365986108779907,
+          "frequencyHz": 173.41548821614663,
+          "maxBelow005RunMs": 0,
+          "envelopeFit": {
+            "frequency": 4.32,
+            "error": 0.000277348259310084,
+            "relativeAmplitude": 0.44214875432657913
+          }
+        },
+        "sourceCount": 5
+      }
+    },
+    "checkedCriterion": "Selectedvocal173Hzbefore/after, RMS<.12 and transitionpeak<.25, fiveoutputs; transition interval beginsanchor-.08.",
+    "continuousFiveSourceReleaseAccepted": false,
+    "reportedTransitionQuietMilliseconds": 80,
+    "fullFiveSourcePCMExported": false
+  },
+  "verdict": {
+    "exportedMonoShiftedReleaseFiveCriteriaIndependentlySupported": true,
+    "reportedNativeHarnessSevenOfSevenCorroboratedAsScopedRuntimeEvidence": true,
+    "nativeUIExecutionIndependentlyPerformed": false,
+    "exactEarliestCursorProven": false,
+    "rawPCMRightChannelExported": false,
+    "zeroRawWindowsDoesNotProveZeroWrongPitchSamples": true,
+    "firstCorrect40msWindowIsNotInstantaneousOnset": true,
+    "fullMusicalOrHardwareOrReferenceParityProven": false,
+    "priorBrowserCaptureIntegrityFailuresRepairedByThisRun": false
+  }
+}

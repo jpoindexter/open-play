@@ -1,0 +1,124 @@
+{
+  "date": "2026-10-17",
+  "candidate": "0.1.5",
+  "prototypeSource": "48a6d4dad2f217a8ba166b9ca890a287aabc4feb",
+  "ASARSHA256": "251bcc16caf9cfb42a3967db058717373a8c6fcb9ff97d56c330058ec8301b03",
+  "mainUIExecuted": [
+    "Generated owned120s stereo330/550 WAV imported through actual macOS chooser, loaded on deck2; deck1 remained paused.",
+    "Actual native range control End set tempo+8%; enabled keylock; nativeREC/play then keylockOFF/ON, focused platter Left held750ms/released, pause/stop/nativeSave.",
+    "Two actual deck2 Key+ buttons set+2semitones; nativeREC/play, focused platter Space held1200ms/released, resumed, pause/stop/nativeSave.",
+    "Native UI showed Scratch released, correct+2 state and zero playing decks/Master0 after tests."
+  ],
+  "mainUIActions": {
+    "keylock": [
+      {
+        "label": "button \u25cf Start recording",
+        "startedAt": "2026-10-17T12:09:41.115Z",
+        "observedAt": "2026-10-17T12:09:42.248Z"
+      },
+      {
+        "label": "button Play or pause deck 2",
+        "startedAt": "2026-10-17T12:09:42.386Z",
+        "observedAt": "2026-10-17T12:09:43.516Z"
+      },
+      {
+        "label": "Deck 2 keylock OFF",
+        "observedAt": "2026-10-17T12:09:59.573Z"
+      },
+      {
+        "label": "Deck 2 keylock ON again",
+        "observedAt": "2026-10-17T12:10:21.441Z"
+      },
+      {
+        "label": "button Scratch deck 2",
+        "startedAt": "2026-10-17T12:10:28.937Z",
+        "observedAt": "2026-10-17T12:10:30.366Z"
+      },
+      {
+        "label": "Deck 2 focused keyboard scratch Left 750ms",
+        "startedAt": "2026-10-17T12:10:30.366Z",
+        "observedAt": "2026-10-17T12:10:31.644Z"
+      },
+      {
+        "label": "button Play or pause deck 2",
+        "startedAt": "2026-10-17T12:10:39.526Z",
+        "observedAt": "2026-10-17T12:10:40.628Z"
+      },
+      {
+        "label": "button \u25a0 Stop recording",
+        "startedAt": "2026-10-17T12:10:40.767Z",
+        "observedAt": "2026-10-17T12:10:41.891Z"
+      }
+    ],
+    "shifted-keylock": [
+      {
+        "label": "button \u25cf Start recording",
+        "startedAt": "2026-10-17T12:12:37.640Z",
+        "observedAt": "2026-10-17T12:12:38.383Z"
+      },
+      {
+        "label": "button Play or pause deck 2",
+        "startedAt": "2026-10-17T12:12:38.524Z",
+        "observedAt": "2026-10-17T12:12:39.625Z"
+      },
+      {
+        "label": "button Scratch deck 2",
+        "startedAt": "2026-10-17T12:12:46.605Z",
+        "observedAt": "2026-10-17T12:12:47.334Z"
+      },
+      {
+        "label": "Deck 2 shifted stationary scratch Space1200ms",
+        "startedAt": "2026-10-17T12:12:47.334Z",
+        "observedAt": "2026-10-17T12:12:49.076Z"
+      },
+      {
+        "label": "button Play or pause deck 2",
+        "startedAt": "2026-10-17T12:13:06.883Z",
+        "observedAt": "2026-10-17T12:13:08.262Z"
+      },
+      {
+        "label": "button \u25a0 Stop recording",
+        "startedAt": "2026-10-17T12:13:08.386Z",
+        "observedAt": "2026-10-17T12:13:09.491Z"
+      },
+      {
+        "label": "button Download capture",
+        "startedAt": "2026-10-17T12:13:09.624Z",
+        "observedAt": "2026-10-17T12:13:11.064Z"
+      }
+    ]
+  },
+  "captureEvidence": [
+    "desktop-0.1.5-keylock-audio-inspection.json",
+    "desktop-0.1.5-keylock-quiet-inspection.json",
+    "desktop-0.1.5-shifted-keylock-audio-inspection.json"
+  ],
+  "screenshots": [
+    "screenshots/desktop-0.1.5-keylock-scratch-capture.png",
+    "screenshots/desktop-0.1.5-shifted-stationary-capture.png",
+    "screenshots/desktop-0.1.5-engine-keylock-results.png",
+    "screenshots/desktop-0.1.5-after-keylock-tests.png"
+  ],
+  "mainUIProofScope": "Actual native control/play/capture with sustained expected pitch. Wall UI timestamps and Opus sample timeline lack a shared release sample. No exact cursor,20ms handoff,all modes,music/reference quality or fresh physical output proof.",
+  "separateSilentEngineDiagnostic": {
+    "status": "terminal_7_of_7_no_fatal",
+    "runtime": "Actual Electron0.1.5 same packaged source; native DevToolsConsole navigated owned URL, closed before actual Run click; separate keylock-engine-harness.html, physical destination routes muted.",
+    "mainUI": false,
+    "mockEngine": false,
+    "report": "keylock-engine-native-0.1.5-results.json",
+    "reportSHA256": "489f514c2ebc4e5ef664324364705bfcc9a625bfb31eb68fb89f3b64f7c78dd7",
+    "sampleRate": 44100,
+    "durationMs": 12735.299999952316,
+    "armedCaptures": 4,
+    "armedCaptureCoverage": 1,
+    "preflightGapPreserved": "Expected128 actual384 at sequence1 before64contiguous preflight/arm; no armed discontinuity reported.",
+    "scope": "Bounded real production engine/WASM native fixture; strict stationary+12 return pitch/gap passed, no exact audible source cursor, all modes/musicquality/physical/reference proof. Prior IAB invalid results retained."
+  },
+  "fullParityVerified": false,
+  "restoredMainInterface": "After terminal diagnostic/save, actual native Console navigated back to /prototype/, closed DevTools; actual AX shows normal main interface,0decks playing,Master0,Deck2tempo0 and saved owned fixture row.",
+  "independentReviews": {
+    "mainUICaptureAudio": "../research/DESKTOP_KEYLOCK_NATIVE_REVIEW.md",
+    "separateNativeEngine": "../research/ENGINE_KEYLOCK_NATIVE_REVIEW.md",
+    "scope": "Independent complete audio decode and exported release analysis/source/fence accounting. UI/runtime navigation remain root observations; full armed stereo arrays unavailable offline."
+  }
+}
