@@ -4,7 +4,7 @@
 
 Project: `/Users/jasonpoindexter/Documents/GitHub/Open Play`
 Prepared: 2026-10-16
-Current browser candidate: `a688f1a620c84ded9f639de44dfb8f22fc78f11f`
+Current browser candidate: `e36596379377bfb4778db97aa7a3bc9cd2aa8a8a`
 Content hashes: `docs/prototype/candidate-hashes.json`
 Private repository: https://github.com/jpoindexter/open-play
 Private board: https://trello.com/b/OqMGEjpe/open-play-serato-parity
@@ -50,7 +50,7 @@ It is not the full completeness audit; its source claims need independent checks
 ## Read first
 
 - `AGENTS.md` if present; `PROJECT_PROMPT.md`; `docs/approvals.md`.
-- `FULL_BUILD_PLAN.md` sections23–34, with older sections retained as dated history.
+- `FULL_BUILD_PLAN.md` sections23–35, with older sections retained as dated history.
 - `docs/research/PARITY_GATE.md`, `FULL_SCOPE_CONTRACT.md`, `FEATURE_COVERAGE.md`,
   `INTERACTION_REQUIREMENTS.md`, `REQUIREMENT_GAPS_REVIEW.md`, `SOURCE_CONFLICTS.md`,
   `UI_OBSERVATIONS.md`, `EVIDENCE_LEDGER.md`, `BINARY_FINDINGS.md`,
@@ -244,6 +244,30 @@ The public141226manual was independently recovered/hashed and has2015metadata.
 Installed Effects/Info controls were observed; Video restoredOFF and Setup closed.
 Do not treat historical manual prose, a55-effect cache or NoRestrictions readout
 as proof of current GPU algorithms. Native approval remains absent.
+
+## Current menu/color/traversal/finite-fade checkpoint — 17 October
+
+Read docs/prototype/VIDEO_COLOR_CROSSFADE_REVIEW.md first, then the two
+independent reviews. Actual FX81/81,transitions65/65,finite fades11/11 and current
+assembled pipeline32/32 pass. Main UI7 observations execute real speed/buttons,
+link states, stop/persistence and completion after panel replacement. Hidden-panel
+scheduling defect was independently reproduced, fixed and regression tested.
+Initial fade-oracle and stale Gamma-oracle failures are retained with explanations.
+18 current Node Video scripts exit0 with their declared controlled/pure limits.
+
+Mac is unlocked. Installed4.0.10 menus now directly observed55 FX/29 transitions;
+four extra localized transitions are resource-only in this session, alongside
+Open Play's Crossfade baseline. Menu names are not reference shader acceptance.
+Video restoredOFF,Setupclosed; prior window-mode restoration remains unverified.
+Source observation: docs/research/VIDEO_CURRENT_MENUS_20261017.json.
+
+Finite fade is independent linear.25..10s, duration snapshot, exact target/stop,
+reversal and Reduced Motion. Speed measured416ms versus10065ms including UI
+overhead. Separate crossLinked no longer couples crossfade to transport/upfaders.
+REQ505/513 record executed independent paths; REQ512 still lacks per-channel
+opacity controls/links. Isolator Bass, finite Frame Freeze, actual eight-band
+Analyzer and further manual meanings remain open. Preserve all broader gaps and
+model/effort routing. Full parity and native approval remain false.
 
 ## Original full project prompt — verbatim snapshot
 

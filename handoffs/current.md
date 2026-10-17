@@ -1,34 +1,31 @@
 # Current handoff: Codex to Claude
 
 Read [the full independent audit packet](codex-to-claude-completeness-audit.md).
-It preserves the original prompt verbatim and later authority/constraints.
+The original prompt is preserved verbatim; later user authority remains binding.
 
 Project: `/Users/jasonpoindexter/Documents/GitHub/Open Play`.
-Candidate: `a688f1a620c84ded9f639de44dfb8f22fc78f11f`; hashes: `docs/prototype/candidate-hashes.json`.
-Independently audit the complete Serato scope and return
-`handoffs/claude-to-codex-completeness-audit.md` with reproducible findings.
+Candidate: `e36596379377bfb4778db97aa7a3bc9cd2aa8a8a`; hashes: `docs/prototype/candidate-hashes.json` (151 files).
+Return independent findings in `handoffs/claude-to-codex-completeness-audit.md`.
 
-Current evidence:236 observed audio-FX controls, actual local SCNet/keylock and
-Stem Slip; Video72/72 FX,51/51 transitions,32/32 overlays,32/32 full pipeline,
-19/19 karaoke and32/32 Media Crate. Main UI import/play/pause, persistence and
-record/replay also ran. Read `docs/prototype/VIDEO_FUNCTIONAL_REVIEW.md` and the
-linked audio/karaoke/Media reviews for exact scope and retained failures.
+**Full parity NOT PASSED; no native app until Jason approves a named revision.**
+Active goal continues across110 groups/521 requirements; counts are not exhaustive
+coverage. Existing actual SCNet/keylock,236audioFXcontrols and Stem Slip proof
+remain separately scoped in the packet.
 
-**Full parity NOT PASSED; no native app until Jason approves a revision.**
-The active goal continues. Semantic links24/24 and treatment21/21 now execute; current regression suites pass.
-Read docs/prototype/VIDEO_LINK_TREATMENT_REVIEW.md. Working inventory110/521.
-Next: remaining Video controls/quality/window/output, then
-remaining reference, library, conditional, hardware and provider gaps. No automatic
-Claude completeness-audit launch. Conditional Cloud Code/Fable debugging assistance
-was used for a separate reference-research session with actual Fable5.1/High.
-Read approvals.md; this does not launch the full audit or grant native approval.
+Latest review: docs/prototype/VIDEO_COLOR_CROSSFADE_REVIEW.md.
+Actual browserFX81/81,transitions65/65,finitefades11/11,pipeline32/32. Main UI
+executes speed ordering, directional/stop/link controls, reload and completion
+during panel replacement. Independent review found/fixed hidden-fade scheduling.
+Prior manual/recording23/23,Media32/32,karaoke19/19,treatment21/21 and semantic
+links24/24 remain dated scoped results, not new executions of every path.
 
-Latest manual/recording review: docs/prototype/VIDEO_MANUAL_RECORDING_REVIEW.md.
-Corrected browserFX74/74,transitions55/55,Media32/32,recording23/23,
-pipeline32/32,karaoke19/19,treatment21/21. Fable research completed and was
-independently qualified; Effects/Info now observed with Video restoredOFF.
-The89-entry manual crosswalk exposes further semantic gaps; acceptance staysopen.
+Mac unlocked; current native menus observed55 FX/29 transitions. Four additional
+transition resource names remain unobserved/labeled. Video restoredOFF; exact
+prior fullscreen mode not verified restored. No shader equivalence inferred.
 
-Recovered manual reconciliation addsREQ-508–521 with inherited model/effort routing.
-Mac locked at latest native observation attempt; resume native screen checks after unlock.
-Browser work remains available; no physical/reference proof inferred.
+Next: Isolator Bass, finite Frame Freeze, true eight-band Analyzer and separate
+channel-opacity links; then other Video/output/quality and full library/device/
+provider/conditional/model-quality gates. Read current plan35 and manual crosswalk.
+Full independent Claude audit is not automatically launched. Conditional Fable
+reference debugging was used in a separate Fable5.1/High session; claims qualified
+in docs/research/claude-fable/PARENT_VALIDATION.md. Native approval remains absent.
