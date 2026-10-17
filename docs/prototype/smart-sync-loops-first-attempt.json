@@ -1,0 +1,176 @@
+{
+  "startedAt": "2026-10-17T22:53:10.385Z",
+  "completed": false,
+  "checks": [],
+  "errors": [
+    {
+      "message": "Re-Sync whole bar timed out",
+      "stack": "Error: Re-Sync whole bar timed out\n    at assert (http://127.0.0.1:18834/prototype/smart-sync-loops-harness.js:2:48)\n    at until (http://127.0.0.1:18834/prototype/smart-sync-loops-harness.js:6:99)\n    at async HTMLButtonElement.run (http://127.0.0.1:18834/prototype/smart-sync-loops-harness.js:43:151)"
+    }
+  ],
+  "events": [
+    {
+      "name": "record-start",
+      "audioTime": 0.07546485260770976,
+      "utc": "2026-10-17T22:53:10.460Z"
+    },
+    {
+      "name": "short-loop-request",
+      "audioTime": 4.382766439909297,
+      "utc": "2026-10-17T22:53:14.764Z"
+    },
+    {
+      "name": "short-loop-ready",
+      "audioTime": 4.400181405895691,
+      "utc": "2026-10-17T22:53:14.778Z"
+    },
+    {
+      "name": "restore-request",
+      "audioTime": 6.698956916099773,
+      "utc": "2026-10-17T22:53:17.079Z"
+    }
+  ],
+  "states": [
+    {
+      "name": "primary-armed",
+      "decks": [
+        {
+          "sync": true,
+          "status": "armed",
+          "role": "primary",
+          "playing": false,
+          "rate": 1,
+          "position": 0.05
+        },
+        {
+          "sync": false,
+          "status": "off",
+          "role": null,
+          "playing": false,
+          "rate": 1,
+          "position": 0.13
+        }
+      ]
+    },
+    {
+      "name": "secondary-armed",
+      "decks": [
+        {
+          "sync": true,
+          "status": "beat",
+          "role": "primary",
+          "playing": true,
+          "rate": 1,
+          "position": 0.06902494331065759
+        },
+        {
+          "sync": true,
+          "status": "armed",
+          "role": "secondary",
+          "playing": false,
+          "rate": 0.9375,
+          "position": 0.13
+        }
+      ]
+    },
+    {
+      "name": "beat-aligned",
+      "decks": [
+        {
+          "sync": true,
+          "status": "beat",
+          "role": "primary",
+          "playing": true,
+          "rate": 1,
+          "position": 0.07482993197278912
+        },
+        {
+          "sync": true,
+          "status": "beat",
+          "role": "secondary",
+          "playing": true,
+          "rate": 0.9375,
+          "position": 0.17596088435374166
+        }
+      ]
+    },
+    {
+      "name": "two-beat-tempo",
+      "decks": [
+        {
+          "sync": true,
+          "status": "tempo",
+          "role": "primary",
+          "playing": true,
+          "rate": 1,
+          "position": 0.3995464852607706
+        },
+        {
+          "sync": true,
+          "status": "tempo",
+          "role": "secondary",
+          "playing": true,
+          "rate": 0.9375,
+          "position": 0.1315093537414962
+        }
+      ]
+    }
+  ],
+  "scope": "Actual browser app and one whole postmaster recording; controlled constant-grid, two-deck, forward active loops/no-keylock/no-stems. No native/hardware/warp/music-quality acceptance.",
+  "criteria": {
+    "maximumAlignedPulseSeconds": 0.01,
+    "maximumAlignedDownbeatSeconds": 0.01,
+    "minimumPulsePairsPerWholeBarSegment": 6,
+    "minimumDownbeatPairsPerWholeBarSegment": 2,
+    "maximumTempoIntervalErrorSeconds": 0.01,
+    "shortLoopCycleSeconds": 1,
+    "wholeRecordingFinite": true
+  },
+  "fixture": {
+    "sampleRate": 48000,
+    "duration": 30,
+    "bpm": [
+      120,
+      128
+    ],
+    "grid": [
+      0.05,
+      0.13
+    ],
+    "carrierHz": 900,
+    "pulseFrames": 576,
+    "amplitude": {
+      "downbeat": 0.25,
+      "other": 0.1
+    }
+  },
+  "sourceBefore": {
+    "app.js": "5e34091e03c81d88cdc14476f6014aae8b51bf5a7d5bbe089fb752d3d37e8a9f",
+    "engine.js": "c0f7fa915938ab416137807a4345878d290110dcdfce23283e46c1e665eec6b1",
+    "panels.js": "4a4b4c544f07140758cfd8f45b00f774dea588f881d6ed0f24c0e19bc1ff02fb",
+    "styles.css": "af937f3bd163a19ebb72b4e7fe7671e1bbd7dce369a7fe431e6122cd79ade217",
+    "smart-sync.js": "dbabb80ff072dd54d668e204f1417a254ff050b1458e7fc00b4665f466c11cdb",
+    "smart-sync-loops-harness.js": "7d6ebf91017d887304afa4829d5d920e34650b38c884a4d400facd26c07ab4f8"
+  },
+  "physicalOutputMuted": true,
+  "bounds": [
+    {
+      "start": 0.05,
+      "end": 2.05
+    },
+    {
+      "start": 0.13,
+      "end": 2.005
+    }
+  ],
+  "sourceAfter": {
+    "app.js": "5e34091e03c81d88cdc14476f6014aae8b51bf5a7d5bbe089fb752d3d37e8a9f",
+    "engine.js": "c0f7fa915938ab416137807a4345878d290110dcdfce23283e46c1e665eec6b1",
+    "panels.js": "4a4b4c544f07140758cfd8f45b00f774dea588f881d6ed0f24c0e19bc1ff02fb",
+    "styles.css": "af937f3bd163a19ebb72b4e7fe7671e1bbd7dce369a7fe431e6122cd79ade217",
+    "smart-sync.js": "dbabb80ff072dd54d668e204f1417a254ff050b1458e7fc00b4665f466c11cdb",
+    "smart-sync-loops-harness.js": "7d6ebf91017d887304afa4829d5d920e34650b38c884a4d400facd26c07ab4f8"
+  },
+  "sourceStable": true,
+  "finishedAt": "2026-10-17T22:53:29.096Z"
+}

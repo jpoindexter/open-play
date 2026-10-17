@@ -12,13 +12,27 @@ function requireGrid(track) {
   if (track.gridMarkers?.length && !track.gridWarpMarkers?.length) throw new Error('Legacy marker annotations need tempo values before warped Smart Sync.');
   createBeatgrid(track);
 }
-export function alignedBarPosition(track, position, primaryTrack, primaryPosition) {
-  const phase = beatPosition(primaryTrack, primaryPosition), grid=createBeatgrid(track);
-  const ownBeat = grid.beatAt(position);
-  const bar = Math.round((ownBeat - phase) / 4);
-  const candidates = [bar,bar-1,bar+1].map(n => grid.timeAt(n*4+phase))
-    .filter(p => p >= 0 && p < track.duration).sort((a,b) => Math.abs(a-position)-Math.abs(b-position));
-  if (!candidates.length) throw new Error('No complete bar position can be aligned within this track.');
+function loopBounds(deck){
+  if(!deck.loop)return null;
+  const start=deck.loopIn,end=deck.loopOut;
+  if(!Number.isFinite(start)||!Number.isFinite(end)||start<0||end>deck.track.duration||end<=start)throw new RangeError('Invalid Smart Sync loop bounds.');
+  return{start,end};
+}
+function barCompatible(deck){
+  if(!deck.loop)return true;
+  const grid=createBeatgrid(deck.track),span=grid.beatAt(deck.loopOut)-grid.beatAt(deck.loopIn);
+  return span>0&&Math.round(span/4)>=1&&Math.abs(span/4-Math.round(span/4))<1e-6;
+}
+const transportSignature=deck=>JSON.stringify([!!deck.loop,deck.loopIn,deck.loopOut,!!deck.reverse,deck.stemSlip||'off']);
+export function alignedBarPosition(track,position,primaryTrack,primaryPosition,loop=null){
+  const phase=beatPosition(primaryTrack,primaryPosition),grid=createBeatgrid(track),ownBeat=grid.beatAt(position);
+  const from=loop?.start??0,to=loop?.end??track.duration;
+  if(from<0||to>track.duration||to<=from)throw new RangeError('Invalid Smart Sync alignment bounds.');
+  const first=Math.ceil((grid.beatAt(from)-phase)/4),last=Math.ceil((grid.beatAt(to)-phase)/4)-1;
+  const bar=Math.min(last,Math.max(first,Math.round((ownBeat-phase)/4)));
+  const candidates=[bar,bar-1,bar+1].filter(n=>n>=first&&n<=last).map(n=>grid.timeAt(n*4+phase))
+    .filter(p=>p>=from&&p<to).sort((a,b)=>Math.abs(a-position)-Math.abs(b-position));
+  if(!candidates.length)throw new Error('No bar position can be aligned within this track or active loop.');
   return candidates[0];
 }
 export function createSmartSync({engine, state}) {
@@ -32,6 +46,9 @@ export function createSmartSync({engine, state}) {
     if (!enabled()) return;
     for (const deck of state.decks) if (!hasBeatgrid(deck.track)) clear(deck);
     const members = state.decks.filter(engaged);
+    // A non-whole-bar cycle cannot preserve a four-beat bar position on each
+    // wrap. Keep common tempo without reporting a bar lock that does not exist.
+    if(members.some(d=>!barCompatible(d)))for(const d of members)if(d.syncState==='beat')d.syncState='tempo';
     if (members.length && !members.some(d => d.syncRole === 'primary'))
       (members.find(d => d.playing) || members[0]).syncRole = 'primary';
   }
@@ -48,22 +65,25 @@ export function createSmartSync({engine, state}) {
   function validateTransport(deck, primary) {
     for (const d of [deck,primary]) {
       requireGrid(d.track);
-      if (d.reverse || d.loop || (d.stemSlip || 'off') !== 'off')
-        throw new Error('This Smart Sync path currently requires forward decks without a loop or Stem Slip.');
+      if (d.reverse || (d.stemSlip || 'off') !== 'off')
+        throw new Error('This Smart Sync path currently requires forward decks without Stem Slip.');
+      loopBounds(d);
+      if(d.loop&&d.track.gridWarpMarkers?.length)throw new Error('Warped Smart Sync with loops is not available yet.');
     }
   }
   async function align(deck, primary) {
     validateTransport(deck,primary);
-    const ownTrack=deck.track, primaryTrack=primary.track, revision=revise(deck);
+    const ownTrack=deck.track, primaryTrack=primary.track, revision=revise(deck),ownLoop=loopBounds(deck),ownTransport=transportSignature(deck),primaryTransport=transportSignature(primary),barLock=barCompatible(deck)&&barCompatible(primary);
     const primaryRate=engine.audibleRate(primary), rate=rateFor(deck,primary);
     const priorClock=engine.voiceClock(deck,engine.voices.get(deck.index));
-    const valid=() => enabled() && revisions.get(deck)===revision && deck.track===ownTrack && primary.track===primaryTrack && engaged(primary) && primary.playing;
+    const valid=() => enabled() && revisions.get(deck)===revision && deck.track===ownTrack && primary.track===primaryTrack && engaged(primary) && primary.playing && transportSignature(deck)===ownTransport && transportSignature(primary)===primaryTransport;
     const result=await engine.synchronize(deck,{rate,priorClock,positionAt:when => {
       if (!valid() || Math.abs(engine.voiceRateAt(primary,engine.voices.get(primary.index),when)-primaryRate)>1e-7) throw cancelled();
-      return alignedBarPosition(ownTrack,priorClock(when),primaryTrack,engine.voiceClock(primary,engine.voices.get(primary.index))(when));
+      return barLock?alignedBarPosition(ownTrack,priorClock(when),primaryTrack,engine.voiceClock(primary,engine.voices.get(primary.index))(when),ownLoop):priorClock(when);
     }});
     if (!valid()) throw cancelled();
-    deck.sync=true;deck.syncState='beat';deck.syncRole ||= 'secondary';
+    deck.sync=true;deck.syncState=barLock?'beat':'tempo';deck.syncRole ||= 'secondary';
+    if(!barLock)reconcile();
     return result;
   }
   async function press(deck) {
@@ -72,7 +92,7 @@ export function createSmartSync({engine, state}) {
     if (!primary) {
       validateTransport(deck,deck);
       syncBPM=gridBPM(deck.track,engine.position(deck))*engine.audibleRate(deck);
-      revise(deck);deck.sync=true;deck.syncRole='primary';deck.syncState=deck.playing?'beat':'armed';
+      revise(deck);deck.sync=true;deck.syncRole='primary';deck.syncState=deck.playing?(barCompatible(deck)?'beat':'tempo'):'armed';
       if(deck.playing && deck.track.gridWarpMarkers?.length){deck.position=engine.position(deck);await engine.start(deck);}
       return;
     }
@@ -96,7 +116,7 @@ export function createSmartSync({engine, state}) {
   }
   function played(deck) {
     if (enabled() && engaged(deck) && deck.syncState==='armed')
-      deck.syncState=leader(deck)?.playing?'tempo':'beat';
+      deck.syncState=leader(deck)?.playing||!barCompatible(deck)?'tempo':'beat';
   }
   function paused(deck) {
     if (enabled() && engaged(deck) && deck.syncState==='beat') {revise(deck);deck.syncState='armed';}

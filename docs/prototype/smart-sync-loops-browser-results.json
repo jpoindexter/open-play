@@ -1,0 +1,439 @@
+{
+  "startedAt": "2026-10-17T22:54:13.762Z",
+  "completed": true,
+  "checks": [
+    "Armed looped decks start without autoplay and retain actual beat/downbeat alignment through repeated whole-bar wraps",
+    "Visible saved two-beat loop keeps matched acoustic tempo, repeats every one second and reports Tempo Sync",
+    "Visible whole-bar restore and explicit Sync restore measured bar alignment without altering bounds"
+  ],
+  "errors": [],
+  "events": [
+    {
+      "name": "record-start",
+      "audioTime": 0.09287981859410431,
+      "utc": "2026-10-17T22:54:13.849Z"
+    },
+    {
+      "name": "short-loop-request",
+      "audioTime": 4.39437641723356,
+      "utc": "2026-10-17T22:54:18.152Z"
+    },
+    {
+      "name": "short-loop-ready",
+      "audioTime": 4.4117913832199545,
+      "utc": "2026-10-17T22:54:18.166Z"
+    },
+    {
+      "name": "restore-request",
+      "audioTime": 6.710566893424036,
+      "utc": "2026-10-17T22:54:20.469Z"
+    },
+    {
+      "name": "restore-ready",
+      "audioTime": 6.7628117913832195,
+      "utc": "2026-10-17T22:54:20.515Z"
+    },
+    {
+      "name": "record-stop",
+      "audioTime": 11.064308390022676,
+      "utc": "2026-10-17T22:54:24.819Z"
+    }
+  ],
+  "states": [
+    {
+      "name": "primary-armed",
+      "decks": [
+        {
+          "sync": true,
+          "status": "armed",
+          "role": "primary",
+          "playing": false,
+          "rate": 1,
+          "position": 0.05
+        },
+        {
+          "sync": false,
+          "status": "off",
+          "role": null,
+          "playing": false,
+          "rate": 1,
+          "position": 0.13
+        }
+      ]
+    },
+    {
+      "name": "secondary-armed",
+      "decks": [
+        {
+          "sync": true,
+          "status": "beat",
+          "role": "primary",
+          "playing": true,
+          "rate": 1,
+          "position": 0.07482993197278912
+        },
+        {
+          "sync": true,
+          "status": "armed",
+          "role": "secondary",
+          "playing": false,
+          "rate": 0.9375,
+          "position": 0.13
+        }
+      ]
+    },
+    {
+      "name": "beat-aligned",
+      "decks": [
+        {
+          "sync": true,
+          "status": "beat",
+          "role": "primary",
+          "playing": true,
+          "rate": 1,
+          "position": 0.09224489795918367
+        },
+        {
+          "sync": true,
+          "status": "beat",
+          "role": "secondary",
+          "playing": true,
+          "rate": 0.9375,
+          "position": 0.18140306122448965
+        }
+      ]
+    },
+    {
+      "name": "two-beat-tempo",
+      "decks": [
+        {
+          "sync": true,
+          "status": "tempo",
+          "role": "primary",
+          "playing": true,
+          "rate": 1,
+          "position": 0.41115646258503386
+        },
+        {
+          "sync": true,
+          "status": "tempo",
+          "role": "secondary",
+          "playing": true,
+          "rate": 0.9375,
+          "position": 0.13150935374149703
+        }
+      ]
+    },
+    {
+      "name": "whole-bar-restored",
+      "decks": [
+        {
+          "sync": true,
+          "status": "tempo",
+          "role": "primary",
+          "playing": true,
+          "rate": 1,
+          "position": 0.7621768707482994
+        },
+        {
+          "sync": true,
+          "status": "beat",
+          "role": "secondary",
+          "playing": true,
+          "rate": 0.9375,
+          "position": 0.8094642857142863
+        }
+      ]
+    }
+  ],
+  "scope": "Actual browser app and one whole postmaster recording; controlled constant-grid, two-deck, forward active loops/no-keylock/no-stems. No native/hardware/warp/music-quality acceptance.",
+  "criteria": {
+    "maximumAlignedPulseSeconds": 0.01,
+    "maximumAlignedDownbeatSeconds": 0.01,
+    "minimumPulsePairsPerWholeBarSegment": 6,
+    "minimumDownbeatPairsPerWholeBarSegment": 2,
+    "maximumTempoIntervalErrorSeconds": 0.01,
+    "shortLoopCycleSeconds": 1,
+    "wholeRecordingFinite": true
+  },
+  "fixture": {
+    "sampleRate": 48000,
+    "duration": 30,
+    "bpm": [
+      120,
+      128
+    ],
+    "grid": [
+      0.05,
+      0.13
+    ],
+    "carrierHz": 900,
+    "pulseFrames": 576,
+    "amplitude": {
+      "downbeat": 0.25,
+      "other": 0.1
+    }
+  },
+  "sourceBefore": {
+    "app.js": "5e34091e03c81d88cdc14476f6014aae8b51bf5a7d5bbe089fb752d3d37e8a9f",
+    "engine.js": "c0f7fa915938ab416137807a4345878d290110dcdfce23283e46c1e665eec6b1",
+    "panels.js": "4a4b4c544f07140758cfd8f45b00f774dea588f881d6ed0f24c0e19bc1ff02fb",
+    "styles.css": "af937f3bd163a19ebb72b4e7fe7671e1bbd7dce369a7fe431e6122cd79ade217",
+    "smart-sync.js": "dbabb80ff072dd54d668e204f1417a254ff050b1458e7fc00b4665f466c11cdb",
+    "smart-sync-loops-harness.js": "1b232a56e1a53f504190a9da30d01f71d005142d5b5c423536ec83c4e0f6b526"
+  },
+  "physicalOutputMuted": true,
+  "bounds": [
+    {
+      "start": 0.05,
+      "end": 2.05
+    },
+    {
+      "start": 0.13,
+      "end": 2.005
+    }
+  ],
+  "recording": {
+    "bytes": 114439,
+    "format": "audio/webm;codecs=opus",
+    "sha256": "731920c250eff01bdb2a8a31414d6d6985b12c6eb37ca6fbbc1a53cf8016a6d8"
+  },
+  "decoded": {
+    "frames": 481571,
+    "sampleRate": 44100,
+    "channels": 2,
+    "duration": 10.919977324263039
+  },
+  "audio": {
+    "pulses": [
+      [
+        0.4691156462585034,
+        0.9691156462585034,
+        1.4691156462585033,
+        1.9685260770975057,
+        2.4691156462585035,
+        2.9691156462585035,
+        3.4691156462585035,
+        3.9685260770975055,
+        4.469115646258503,
+        4.969115646258503,
+        5.469115646258503,
+        5.968526077097506,
+        6.469115646258503,
+        6.969115646258503,
+        7.469115646258503,
+        7.968526077097506,
+        8.469115646258503,
+        8.969115646258503,
+        9.469115646258503,
+        9.968526077097506,
+        10.469115646258503
+      ],
+      [
+        0.4692063492063492,
+        0.9692063492063492,
+        1.4692063492063492,
+        1.9685714285714286,
+        2.4692063492063494,
+        2.9692063492063494,
+        3.4692063492063494,
+        3.9685714285714284,
+        4.3281179138322,
+        4.82875283446712,
+        5.3281179138322,
+        5.82875283446712,
+        6.3281179138322,
+        6.638503401360544,
+        6.969206349206349,
+        7.469206349206349,
+        7.968571428571429,
+        8.469206349206349,
+        8.969206349206349,
+        9.469206349206349,
+        9.968571428571428,
+        10.469206349206349
+      ]
+    ],
+    "bars": [
+      [
+        1.9708616780045352,
+        3.970861678004535,
+        5.9708390022675735,
+        7.970861678004535,
+        9.970861678004535
+      ],
+      [
+        1.9710430839002269,
+        3.9710430839002266,
+        4.330589569160998,
+        5.330589569160998,
+        6.330589569160998,
+        6.640975056689342,
+        7.971043083900227,
+        9.971043083900227
+      ]
+    ],
+    "segments": [
+      {
+        "name": "whole-bar",
+        "from": 0.15,
+        "to": 4.151496598639455,
+        "pulseErrors": [
+          {
+            "time": 0.4691156462585034,
+            "errorSeconds": 9.070294784579991e-05
+          },
+          {
+            "time": 0.9691156462585034,
+            "errorSeconds": 9.07029478457444e-05
+          },
+          {
+            "time": 1.4691156462585033,
+            "errorSeconds": 9.070294784585542e-05
+          },
+          {
+            "time": 1.9685260770975057,
+            "errorSeconds": 4.535147392292771e-05
+          },
+          {
+            "time": 2.4691156462585035,
+            "errorSeconds": 9.070294784585542e-05
+          },
+          {
+            "time": 2.9691156462585035,
+            "errorSeconds": 9.070294784585542e-05
+          },
+          {
+            "time": 3.4691156462585035,
+            "errorSeconds": 9.070294784585542e-05
+          },
+          {
+            "time": 3.9685260770975055,
+            "errorSeconds": 4.535147392292771e-05
+          }
+        ],
+        "downbeatErrors": [
+          {
+            "time": 1.9708616780045352,
+            "errorSeconds": 0.00018140589569171084
+          },
+          {
+            "time": 3.970861678004535,
+            "errorSeconds": 0.00018140589569171084
+          }
+        ]
+      },
+      {
+        "name": "two-beat-tempo",
+        "from": 4.51891156462585,
+        "to": 6.467687074829931,
+        "pulseErrors": [
+          {
+            "time": 4.969115646258503,
+            "errorSeconds": 0.1403628117913831
+          },
+          {
+            "time": 5.469115646258503,
+            "errorSeconds": 0.1409977324263032
+          },
+          {
+            "time": 5.968526077097506,
+            "errorSeconds": 0.13977324263038593
+          }
+        ],
+        "downbeatErrors": [
+          {
+            "time": 5.9708390022675735,
+            "errorSeconds": 0.35975056689342466
+          }
+        ],
+        "intervals": [
+          [
+            0.5,
+            0.49941043083900283
+          ],
+          [
+            0.4993650793650799,
+            0.5006349206349201,
+            0.4993650793650799
+          ]
+        ],
+        "downbeatIntervals": [
+          [],
+          [
+            1
+          ]
+        ]
+      },
+      {
+        "name": "restored",
+        "from": 6.869931972789115,
+        "to": 10.81997732426304,
+        "pulseErrors": [
+          {
+            "time": 6.969115646258503,
+            "errorSeconds": 9.070294784585542e-05
+          },
+          {
+            "time": 7.469115646258503,
+            "errorSeconds": 9.070294784585542e-05
+          },
+          {
+            "time": 7.968526077097506,
+            "errorSeconds": 4.535147392292771e-05
+          },
+          {
+            "time": 8.469115646258503,
+            "errorSeconds": 9.070294784585542e-05
+          },
+          {
+            "time": 8.969115646258503,
+            "errorSeconds": 9.070294784585542e-05
+          },
+          {
+            "time": 9.469115646258503,
+            "errorSeconds": 9.070294784585542e-05
+          },
+          {
+            "time": 9.968526077097506,
+            "errorSeconds": 4.535147392203953e-05
+          },
+          {
+            "time": 10.469115646258503,
+            "errorSeconds": 9.070294784585542e-05
+          }
+        ],
+        "downbeatErrors": [
+          {
+            "time": 7.970861678004535,
+            "errorSeconds": 0.00018140589569171084
+          },
+          {
+            "time": 9.970861678004535,
+            "errorSeconds": 0.00018140589569171084
+          }
+        ]
+      }
+    ]
+  },
+  "finalBounds": [
+    {
+      "start": 0.05,
+      "end": 2.05
+    },
+    {
+      "start": 0.13,
+      "end": 2.005
+    }
+  ],
+  "sourceAfter": {
+    "app.js": "5e34091e03c81d88cdc14476f6014aae8b51bf5a7d5bbe089fb752d3d37e8a9f",
+    "engine.js": "c0f7fa915938ab416137807a4345878d290110dcdfce23283e46c1e665eec6b1",
+    "panels.js": "4a4b4c544f07140758cfd8f45b00f774dea588f881d6ed0f24c0e19bc1ff02fb",
+    "styles.css": "af937f3bd163a19ebb72b4e7fe7671e1bbd7dce369a7fe431e6122cd79ade217",
+    "smart-sync.js": "dbabb80ff072dd54d668e204f1417a254ff050b1458e7fc00b4665f466c11cdb",
+    "smart-sync-loops-harness.js": "1b232a56e1a53f504190a9da30d01f71d005142d5b5c423536ec83c4e0f6b526"
+  },
+  "sourceStable": true,
+  "finishedAt": "2026-10-17T22:54:24.857Z"
+}

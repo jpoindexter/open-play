@@ -1,0 +1,11 @@
+import assert from 'node:assert/strict';
+import {alignedBarPosition,createSmartSync} from '../prototype/smart-sync.js';
+const track={bpm:120,grid:0,duration:30},primaryTrack={bpm:128,grid:0,duration:30};
+const p=alignedBarPosition(track,10.99,primaryTrack,1.8,{start:10,end:12});assert(p>=10&&p<12,'Bar alignment escaped active loop');
+const decks=[{index:0,track,playing:true,position:10.99,loop:true,loopIn:10,loopOut:12,rate:1},{index:1,track:primaryTrack,playing:true,position:1.8,loop:true,loopIn:0,loopOut:1.875,rate:1}];
+const engine={position:d=>d.position,audibleRate:d=>d.rate,voices:new Map(),voiceClock:d=>()=>d.position,voiceRateAt:d=>d.rate,setRate:async(d,r)=>{d.rate=r;},synchronize:async(d,{rate,positionAt})=>{d.position=positionAt(1);d.rate=rate;d.playing=true;return{};}};
+const state={decks,settings:{'Sync Mode':'Smart Sync'}},sync=createSmartSync({engine,state});await sync.press(decks[0]);await sync.press(decks[1]);assert.equal(decks[0].syncState,'beat');assert.equal(decks[1].syncState,'beat');assert.equal(decks[1].rate,120/128);assert(decks[1].position<1.875);
+decks[1].loopOut=.9375;sync.reconcile();assert.equal(decks[0].syncState,'tempo');assert.equal(decks[1].syncState,'tempo');const before=decks[1].position;await sync.press(decks[1]);assert.equal(decks[1].syncState,'tempo');assert.equal(decks[1].position,before);
+decks[1].loopOut=1.875;await sync.press(decks[1]);assert.equal(decks[1].syncState,'beat');assert.equal(decks[1].loopOut,1.875);
+decks[1].track={...primaryTrack,gridWarpMarkers:[{time:1,bpm:130}]};await assert.rejects(sync.press(decks[1]),/Warped.*loop|loop.*Warped/i);
+console.log(JSON.stringify({passed:true,scope:'Smart Sync loop geometry/state with engine collaborators; no acoustic/native/hardware proof',checks:['bar alignment inside active loop','different-BPM whole-bar loops engage Beat Sync','short loop degrades bar lock to Tempo Sync without seek','restore whole bar allows explicit re-Sync','unsupported warp-loop refuses before engine scheduling']}));
