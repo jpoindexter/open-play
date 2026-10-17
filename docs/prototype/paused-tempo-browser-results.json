@@ -1,0 +1,102 @@
+{
+  "startedAt": "2026-10-17T23:42:26.781Z",
+  "completed": true,
+  "scope": "Actual grid/Setup/Sync/tempo/redraw controls and paused UI/FX BPM state only. No playback, audio recording, effect-tail or native/hardware/reference acceptance.",
+  "checks": [
+    "First paused primary after a warp selects150BPM; both armed UI and FX targets use that group target",
+    "Tempo input keeps both warped paused headers and FX targets124.8 instead of156",
+    "Full deck redraw retains target; no playback voice or recording started"
+  ],
+  "errors": [],
+  "states": [
+    {
+      "name": "source-selected150BPM",
+      "decks": [
+        {
+          "position": 2,
+          "rate": 1,
+          "status": "armed",
+          "playing": false,
+          "shownBPM": "150.0",
+          "fxBPM": 150
+        },
+        {
+          "position": 2,
+          "rate": 1.25,
+          "status": "armed",
+          "playing": false,
+          "shownBPM": "150.0",
+          "fxBPM": 150
+        }
+      ],
+      "voices": 0,
+      "recording": false
+    },
+    {
+      "name": "paused124.8BPM",
+      "decks": [
+        {
+          "position": 2,
+          "rate": 1.04,
+          "status": "armed",
+          "playing": false,
+          "shownBPM": "124.8",
+          "fxBPM": 124.80000000000001
+        },
+        {
+          "position": 2,
+          "rate": 1.04,
+          "status": "armed",
+          "playing": false,
+          "shownBPM": "124.8",
+          "fxBPM": 124.80000000000001
+        }
+      ],
+      "voices": 0,
+      "recording": false
+    },
+    {
+      "name": "after-redraw",
+      "decks": [
+        {
+          "position": 2,
+          "rate": 1.04,
+          "status": "armed",
+          "playing": false,
+          "shownBPM": "124.8",
+          "fxBPM": 124.80000000000001
+        },
+        {
+          "position": 2,
+          "rate": 1.04,
+          "status": "armed",
+          "playing": false,
+          "shownBPM": "124.8",
+          "fxBPM": 124.80000000000001
+        }
+      ],
+      "voices": 0,
+      "recording": false
+    }
+  ],
+  "sourceBefore": {
+    "app.js": "266c98f7be3fc6c543b0ae86f2f070b2015afa73a108206bb498db8dd003f588",
+    "deck-tempo.js": "8834de1db544204d1baab0b282b3b2063941629d6bf255a83de5cf5177ac744e",
+    "beatgrid.js": "af239aef231c9d089bf2352b8f548a5f71f734d6cf753986f17f57b3999477b9",
+    "smart-sync.js": "a8998b8727ae144413272163a2c438f3d8bcd92f634d5bd1872e5ac49a509f61",
+    "engine.js": "f34657b68dfb591cb135af76231677ef218576a56719da522839ff63f2f5fc12",
+    "panels.js": "4a4b4c544f07140758cfd8f45b00f774dea588f881d6ed0f24c0e19bc1ff02fb",
+    "paused-tempo-harness.js": "f0c5a373e3040f8d514d276f771355a657dcb86aba8a0b4766c396cd26320056"
+  },
+  "sourceAfter": {
+    "app.js": "266c98f7be3fc6c543b0ae86f2f070b2015afa73a108206bb498db8dd003f588",
+    "deck-tempo.js": "8834de1db544204d1baab0b282b3b2063941629d6bf255a83de5cf5177ac744e",
+    "beatgrid.js": "af239aef231c9d089bf2352b8f548a5f71f734d6cf753986f17f57b3999477b9",
+    "smart-sync.js": "a8998b8727ae144413272163a2c438f3d8bcd92f634d5bd1872e5ac49a509f61",
+    "engine.js": "f34657b68dfb591cb135af76231677ef218576a56719da522839ff63f2f5fc12",
+    "panels.js": "4a4b4c544f07140758cfd8f45b00f774dea588f881d6ed0f24c0e19bc1ff02fb",
+    "paused-tempo-harness.js": "f0c5a373e3040f8d514d276f771355a657dcb86aba8a0b4766c396cd26320056"
+  },
+  "sourceStable": true,
+  "finishedAt": "2026-10-17T23:42:26.876Z"
+}
