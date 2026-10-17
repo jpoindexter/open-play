@@ -1,0 +1,511 @@
+{
+  "observed_at": "2026-10-17T16:07:16.984Z",
+  "reference_plist": {
+    "evidence_id": "ev_70d315bdd494a9efdba20445607af197cdbc8bbbfa56e6eb1e5ab6392b744f3a",
+    "subject": {
+      "name": "Info.plist",
+      "digest": {
+        "sha256": "128f13364cecee349b684af17b804d42d2e2ec97be80dc044d6ee151283e895b"
+      },
+      "local_path": "/Applications/Serato DJ Pro.app/Contents/Info.plist",
+      "format": "plist",
+      "architecture": null
+    },
+    "provider": {
+      "id": "native-macos",
+      "name": "macOS native inspection utilities",
+      "version": null
+    },
+    "analysis_profile": null,
+    "predicate_type": "rea.analysis",
+    "operation": "inspect_plist",
+    "parameters": {
+      "path": "/Applications/Serato DJ Pro.app/Contents/Info.plist"
+    },
+    "raw_result": null,
+    "normalized_result": {
+      "format": "xml",
+      "value": {
+        "CFBundleName": "Serato DJ Pro",
+        "DTSDKName": "macosx15.2",
+        "DTXcode": "1620",
+        "NSHumanReadableCopyright": "Copyright © 2017 Serato Audio Research Ltd. All rights reserved.",
+        "NSAppleMusicUsageDescription": "Serato DJ requires access to your Music app (iTunes) Library. Allow access to show iTunes tracks and playlists in your Serato DJ library",
+        "DTSDKBuild": "24C94",
+        "CFBundleDevelopmentRegion": "en",
+        "CFBundleVersion": "4.0.10.213",
+        "BuildMachineOSBuild": "25G83",
+        "DTPlatformName": "macosx",
+        "CFBundlePackageType": "APPL",
+        "CFBundleIconFile": "icon",
+        "CFBundleSupportedPlatforms": [
+          "MacOSX"
+        ],
+        "CFBundleShortVersionString": "4.0.10",
+        "NSMicrophoneUsageDescription": "Serato DJ requires access to all audio inputs and outputs on your DJ hardware. Denying access will result in severe audio issues and loss of functionality (e.g. DVS, Microphone)",
+        "NSSupportsAutomaticGraphicsSwitching": true,
+        "NSPrefersDisplaySafeAreaCompatibilityMode": false,
+        "CFBundleInfoDictionaryVersion": "6.0",
+        "CFBundleExecutable": "Serato DJ Pro",
+        "DTCompiler": "com.apple.compilers.llvm.clang.1_0",
+        "CFBundleURLTypes": [
+          {
+            "CFBundleTypeRole": "Viewer",
+            "CFBundleURLName": "com.serato.seratodj",
+            "CFBundleURLSchemes": [
+              "seratodjpro"
+            ]
+          }
+        ],
+        "CFBundleIdentifier": "com.serato.seratodj",
+        "DTPlatformVersion": "15.2",
+        "CFBundleSignature": "Srto",
+        "CFBundleDisplayName": "Serato DJ Pro",
+        "CSResourcesFileMapped": true,
+        "DTXcodeBuild": "16C5032a",
+        "LSMinimumSystemVersion": "10.14",
+        "UTExportedTypeDeclarations": [
+          {
+            "UTTypeIdentifier": "com.serato.serato-stems",
+            "UTTypeIconFile": "stems.icns",
+            "UTTypeDescription": "Serato Stems",
+            "UTTypeConformsTo": [
+              "public.data"
+            ],
+            "UTTypeTagSpecification": {
+              "public.filename-extension": "serato-stems"
+            }
+          }
+        ],
+        "DTPlatformBuild": "24C94"
+      },
+      "bundle": {
+        "identifier": "com.serato.seratodj",
+        "executable": "Serato DJ Pro",
+        "name": "Serato DJ Pro",
+        "version": "4.0.10.213",
+        "short_version": "4.0.10"
+      },
+      "source_path": "/Applications/Serato DJ Pro.app/Contents/Info.plist",
+      "provenance": [
+        {
+          "tool": "file",
+          "command": [
+            "/usr/bin/file",
+            "-b",
+            "$PLIST"
+          ],
+          "tool_version": null,
+          "version_reason": "Tool exposes no uniform stable version flag; executable SHA-256 is a prelaunch file sample and does not prove atomic OS image binding.",
+          "executable_sha256": "cfa8d09f57154ac457d10135aea04351bea0d79d9531441ca91d9e2a9d408393",
+          "exit": {
+            "code": 0,
+            "signal": null
+          },
+          "stdout_bytes": 48,
+          "stderr_bytes": 0
+        },
+        {
+          "tool": "plutil",
+          "command": [
+            "/usr/bin/plutil",
+            "-convert",
+            "json",
+            "-o",
+            "-",
+            "--",
+            "$PLIST"
+          ],
+          "tool_version": null,
+          "version_reason": "Tool exposes no uniform stable version flag; executable SHA-256 is a prelaunch file sample and does not prove atomic OS image binding.",
+          "executable_sha256": "038e7cb623439d983d7ac5fd2d670618d95960c7284ead0680e6700dd1af1d7a",
+          "exit": {
+            "code": 0,
+            "signal": null
+          },
+          "stdout_bytes": 1668,
+          "stderr_bytes": 0
+        }
+      ],
+      "limitations": []
+    },
+    "confidence": "observed",
+    "authority": "shipped-artifact",
+    "environment": null,
+    "limitations": [],
+    "relationship_coverage": null,
+    "locations": [
+      {
+        "kind": "artifact-path",
+        "path": "/Applications/Serato DJ Pro.app/Contents/Info.plist"
+      }
+    ],
+    "evidence_links": []
+  },
+  "open_play_selected_static_analysis": {
+    "evidence_id": "ev_0151a27e60ceebcaa2b73fdd209f60f2789133e547e0c13987cdea3844fa142a",
+    "subject": {
+      "name": "app.asar",
+      "digest": {
+        "sha256": "f9e85d9ef3150fd37c15f5b3d72a4e3f6a06a42a59bf29617a43bdf566cdba6e"
+      },
+      "local_path": "/Users/jasonpoindexter/Documents/GitHub/Open Play/local-evidence/desktop-builds/0.1.6/Open Play Test-darwin-arm64/Open Play Test.app/Contents/Resources/app.asar",
+      "format": "asar",
+      "architecture": null
+    },
+    "provider": {
+      "id": "rea-analysis-view",
+      "name": "REA analysis view projection",
+      "version": "1"
+    },
+    "analysis_profile": null,
+    "predicate_type": "rea.analysis-view",
+    "operation": "inspect_analysis_view",
+    "parameters": {
+      "parent_evidence_id": "ev_9d24b5b59de2fde65e4ac4ce46258359bf773e157efbb63860d8e92c83789a08",
+      "view": {
+        "kind": "summary"
+      }
+    },
+    "raw_result": null,
+    "normalized_result": {
+      "kind": "summary",
+      "view": {
+        "kind": "summary"
+      },
+      "parent_evidence_id": "ev_9d24b5b59de2fde65e4ac4ce46258359bf773e157efbb63860d8e92c83789a08",
+      "parent_operation": "analyze_javascript_application",
+      "parent_digest": "9d24b5b59de2fde65e4ac4ce46258359bf773e157efbb63860d8e92c83789a08",
+      "view_digest": "ec247ca2bfa43a80fa78e6bcde77efd8a804fdd5c00827a6296a77b814087a43",
+      "artifact": {
+        "path": "/Users/jasonpoindexter/Documents/GitHub/Open Play/local-evidence/desktop-builds/0.1.6/Open Play Test-darwin-arm64/Open Play Test.app/Contents/Resources/app.asar",
+        "sha256": "f9e85d9ef3150fd37c15f5b3d72a4e3f6a06a42a59bf29617a43bdf566cdba6e"
+      },
+      "coverage": {
+        "status": "complete-within-view",
+        "examined": 163,
+        "total": 2224,
+        "next_offset": null,
+        "exhausted": true
+      },
+      "limitations": [
+        "Boundary extraction covers unshadowed JSON/global coercions plus parse and validation method candidates.",
+        "Caller-selected source analysis leaves 740 inventoried files outside analysis scope. Inventory identity covers the complete artifact; relationships through unselected sources remain unknown.",
+        "Child-process extraction covers asynchronous node:child_process creation, literal argv/env/stdio options, exit/error listeners, and kill signals.",
+        "CommonJS and ESM binding relationships were recovered from inert syntax and resolved only within the inventoried artifact container.",
+        "Configuration extraction covers process.env, process.argv, node:fs reads, and direct logical defaults.",
+        "Event extraction covers EventEmitter-style literal registrations, removals, and dispatch candidates; dynamic names remain unknown.",
+        "Function fingerprints are static candidates; equal digests can remain ambiguous and do not prove behavioral equivalence.",
+        "Graph coverage is incomplete; unavailable facts remain explicit and must not be read as absence.",
+        "JavaScript and HTML were parsed as inert text; bundle bootstrap code was never executed.",
+        "Local data flow does not claim control-flow-sensitive reaching definitions or arbitrary dynamic property resolution.",
+        "Promise ownership covers explicit unshadowed Promise construction, static factories, aggregation, chaining, and await syntax only.",
+        "Request extraction covers fetch, WebSocket, node:http/node:https construction, direct option fields, and exact local response consumers.",
+        "Resource extraction covers built-in filesystem/network acquisition and exact local close/destroy/end handles.",
+        "Static imports, entrypoints, workers, endpoints, and storage relationships do not prove runtime execution.",
+        "Static paths and relationships may remain unresolved when expressions are dynamic or obfuscated.",
+        "The semantic graph contains static syntax observations and conservative relationship candidates; it does not claim runtime execution.",
+        "Timer extraction covers global or node:timers scheduling and exact local-handle cancellation.",
+        "Webpack/Rspack factories were recovered from AST literals; REA did not invoke push handlers or bundle bootstrap code."
+      ],
+      "unknowns": [
+        "12042 semantic graph unknowns remain in the parent Evidence.",
+        "740 application graph unknowns remain in the parent Evidence.",
+        "Boundary extraction covers unshadowed JSON/global coercions plus parse and validation method candidates.",
+        "Caller-selected source analysis leaves 740 inventoried files outside analysis scope. Inventory identity covers the complete artifact; relationships through unselected sources remain unknown.",
+        "Child-process extraction covers asynchronous node:child_process creation, literal argv/env/stdio options, exit/error listeners, and kill signals.",
+        "CommonJS and ESM binding relationships were recovered from inert syntax and resolved only within the inventoried artifact container.",
+        "Configuration extraction covers process.env, process.argv, node:fs reads, and direct logical defaults.",
+        "Event extraction covers EventEmitter-style literal registrations, removals, and dispatch candidates; dynamic names remain unknown.",
+        "Function fingerprints are static candidates; equal digests can remain ambiguous and do not prove behavioral equivalence.",
+        "Graph coverage is incomplete; unavailable facts remain explicit and must not be read as absence.",
+        "JavaScript and HTML were parsed as inert text; bundle bootstrap code was never executed.",
+        "Local data flow does not claim control-flow-sensitive reaching definitions or arbitrary dynamic property resolution.",
+        "Promise ownership covers explicit unshadowed Promise construction, static factories, aggregation, chaining, and await syntax only.",
+        "Request extraction covers fetch, WebSocket, node:http/node:https construction, direct option fields, and exact local response consumers.",
+        "Resource extraction covers built-in filesystem/network acquisition and exact local close/destroy/end handles.",
+        "Static imports, entrypoints, workers, endpoints, and storage relationships do not prove runtime execution.",
+        "Static paths and relationships may remain unresolved when expressions are dynamic or obfuscated.",
+        "The semantic graph contains static syntax observations and conservative relationship candidates; it does not claim runtime execution.",
+        "Timer extraction covers global or node:timers scheduling and exact local-handle cancellation.",
+        "Webpack/Rspack factories were recovered from AST literals; REA did not invoke push handlers or bundle bootstrap code.",
+        "graph.coverage.status is partial",
+        "semantic_graph.coverage.status is partial"
+      ],
+      "summary": {
+        "input_path": "/Users/jasonpoindexter/Documents/GitHub/Open Play/local-evidence/desktop-builds/0.1.6/Open Play Test-darwin-arm64/Open Play Test.app/Contents/Resources/app.asar",
+        "format": "asar",
+        "root_artifact_sha256": "f9e85d9ef3150fd37c15f5b3d72a4e3f6a06a42a59bf29617a43bdf566cdba6e",
+        "source_selection": {
+          "requested_paths": [
+            "assets/prototype/engine.js",
+            "assets/prototype/panels.js",
+            "assets/prototype/app.js"
+          ],
+          "unselected_files": 740
+        },
+        "statistics": {
+          "relevant_files": 743,
+          "nested_asar_containers": 0,
+          "text_bytes_read": 264842,
+          "invalid_utf8_files": 0,
+          "parsed_javascript_files": 3,
+          "visited_ast_nodes": 43116,
+          "findings": 151,
+          "modules": 0,
+          "parse_failures": 0
+        },
+        "electron": {
+          "browser_windows": 0,
+          "explicit_web_preferences": 0,
+          "preload_entrypoints": 0,
+          "context_bridge_apis": 0,
+          "exposed_api_members": 0,
+          "ipc": {
+            "operations": 0,
+            "literal_channels": 0,
+            "dynamic_channel_operations": 0,
+            "renderer_transmissions": 0,
+            "renderer_listeners": 0,
+            "main_handlers": 0,
+            "paired_renderer_transmissions": 0,
+            "ambiguous_renderer_transmissions": 0,
+            "unpaired_literal_renderer_transmissions": 0
+          },
+          "sender_validation_observations": 0,
+          "utility_processes": 0,
+          "resolved_utility_entrypoints": 0,
+          "native_addon_bindings": 0,
+          "resolved_native_addon_bindings": 0
+        },
+        "coverage": {
+          "application": {
+            "status": "partial",
+            "truncated": false,
+            "omitted_count": null,
+            "limits": []
+          },
+          "semantic": {
+            "status": "partial",
+            "truncated": false,
+            "omitted_nodes": null,
+            "omitted_relations": null,
+            "limits": [],
+            "families": [
+              {
+                "family": "boundary",
+                "status": "partial",
+                "retained_relations": 122,
+                "omitted_relations": null,
+                "unknown_count": 154
+              },
+              {
+                "family": "call-flow",
+                "status": "partial",
+                "retained_relations": 1200,
+                "omitted_relations": null,
+                "unknown_count": 2798
+              },
+              {
+                "family": "child-process",
+                "status": "partial",
+                "retained_relations": 0,
+                "omitted_relations": null,
+                "unknown_count": 154
+              },
+              {
+                "family": "closure",
+                "status": "partial",
+                "retained_relations": 2584,
+                "omitted_relations": null,
+                "unknown_count": 154
+              },
+              {
+                "family": "configuration",
+                "status": "partial",
+                "retained_relations": 0,
+                "omitted_relations": null,
+                "unknown_count": 154
+              },
+              {
+                "family": "data-flow",
+                "status": "partial",
+                "retained_relations": 17920,
+                "omitted_relations": null,
+                "unknown_count": 1751
+              },
+              {
+                "family": "event",
+                "status": "partial",
+                "retained_relations": 0,
+                "omitted_relations": null,
+                "unknown_count": 154
+              },
+              {
+                "family": "object-flow",
+                "status": "partial",
+                "retained_relations": 3705,
+                "omitted_relations": null,
+                "unknown_count": 5933
+              },
+              {
+                "family": "promise-ownership",
+                "status": "partial",
+                "retained_relations": 205,
+                "omitted_relations": null,
+                "unknown_count": 327
+              },
+              {
+                "family": "request",
+                "status": "partial",
+                "retained_relations": 0,
+                "omitted_relations": null,
+                "unknown_count": 154
+              },
+              {
+                "family": "resource-lifecycle",
+                "status": "partial",
+                "retained_relations": 0,
+                "omitted_relations": null,
+                "unknown_count": 154
+              },
+              {
+                "family": "timer",
+                "status": "partial",
+                "retained_relations": 8,
+                "omitted_relations": null,
+                "unknown_count": 155
+              }
+            ]
+          },
+          "application_unknowns": 740,
+          "semantic_unknowns": 12042
+        },
+        "limitation_count": 7
+      }
+    },
+    "confidence": "derived",
+    "authority": "shipped-artifact",
+    "environment": null,
+    "limitations": [
+      "Boundary extraction covers unshadowed JSON/global coercions plus parse and validation method candidates.",
+      "Caller-selected source analysis leaves 740 inventoried files outside analysis scope. Inventory identity covers the complete artifact; relationships through unselected sources remain unknown.",
+      "Child-process extraction covers asynchronous node:child_process creation, literal argv/env/stdio options, exit/error listeners, and kill signals.",
+      "CommonJS and ESM binding relationships were recovered from inert syntax and resolved only within the inventoried artifact container.",
+      "Configuration extraction covers process.env, process.argv, node:fs reads, and direct logical defaults.",
+      "Event extraction covers EventEmitter-style literal registrations, removals, and dispatch candidates; dynamic names remain unknown.",
+      "Function fingerprints are static candidates; equal digests can remain ambiguous and do not prove behavioral equivalence.",
+      "Graph coverage is incomplete; unavailable facts remain explicit and must not be read as absence.",
+      "JavaScript and HTML were parsed as inert text; bundle bootstrap code was never executed.",
+      "Local data flow does not claim control-flow-sensitive reaching definitions or arbitrary dynamic property resolution.",
+      "Promise ownership covers explicit unshadowed Promise construction, static factories, aggregation, chaining, and await syntax only.",
+      "Request extraction covers fetch, WebSocket, node:http/node:https construction, direct option fields, and exact local response consumers.",
+      "Resource extraction covers built-in filesystem/network acquisition and exact local close/destroy/end handles.",
+      "Static imports, entrypoints, workers, endpoints, and storage relationships do not prove runtime execution.",
+      "Static paths and relationships may remain unresolved when expressions are dynamic or obfuscated.",
+      "The semantic graph contains static syntax observations and conservative relationship candidates; it does not claim runtime execution.",
+      "Timer extraction covers global or node:timers scheduling and exact local-handle cancellation.",
+      "Webpack/Rspack factories were recovered from AST literals; REA did not invoke push handlers or bundle bootstrap code."
+    ],
+    "relationship_coverage": null,
+    "locations": [
+      {
+        "kind": "artifact-path",
+        "path": "/Users/jasonpoindexter/Documents/GitHub/Open Play/local-evidence/desktop-builds/0.1.6/Open Play Test-darwin-arm64/Open Play Test.app/Contents/Resources/app.asar"
+      }
+    ],
+    "evidence_links": [
+      "ev_9d24b5b59de2fde65e4ac4ce46258359bf773e157efbb63860d8e92c83789a08"
+    ]
+  },
+  "link_trace_no_match": {
+    "evidence_id": "ev_6907bfcda2477e9c5dd8f7624be268d952a3845b9f1caaa1bfd05e56f00cc405",
+    "subject": null,
+    "provider": {
+      "id": "rea-javascript-application-workflows",
+      "name": "REA JavaScript application workflows",
+      "version": "1"
+    },
+    "analysis_profile": null,
+    "predicate_type": "rea.application-feature-trace",
+    "operation": "trace_application_feature",
+    "parameters": {
+      "application_evidence_id": "ev_9d24b5b59de2fde65e4ac4ce46258359bf773e157efbb63860d8e92c83789a08",
+      "native_evidence_ids": [],
+      "seed": {
+        "kind": "string",
+        "value": "NETWORK SESSION SIMULATION",
+        "match": "exact",
+        "case_sensitive": false
+      },
+      "direction": "both"
+    },
+    "raw_result": null,
+    "normalized_result": {
+      "trace_id": "jatr_803eb47bdea80111cf2a022cdc3b8c2ceee08357260f0a0f9469959239f08e50",
+      "source_evidence_id": "ev_9d24b5b59de2fde65e4ac4ce46258359bf773e157efbb63860d8e92c83789a08",
+      "source_graph_id": "jag_ab7ccbc74c96dcef426cd606247124aab56d609888258f85e6833fdb038a1ff7",
+      "seed": {
+        "kind": "string",
+        "value": "NETWORK SESSION SIMULATION",
+        "match": "exact",
+        "case_sensitive": false
+      },
+      "direction": "both",
+      "seed_matches": [],
+      "graph": null,
+      "paths": [],
+      "native_handoffs": [],
+      "summary": {
+        "matched_seeds": 0,
+        "traced_nodes": 0,
+        "traced_edges": 0,
+        "terminal_paths": 0,
+        "native_handoffs": 0,
+        "observed_facts": 0,
+        "inferred_facts": 0,
+        "unknown_facts": 0,
+        "unavailable_facts": 0
+      },
+      "coverage": {
+        "status": "no-match",
+        "source_graph_status": "partial",
+        "total_seed_matches": 0
+      },
+      "evidence_links": [
+        "ev_9d24b5b59de2fde65e4ac4ce46258359bf773e157efbb63860d8e92c83789a08"
+      ],
+      "limitations": [
+        "No graph entity matched the literal seed; this is not evidence that the feature is absent.",
+        "The source application graph is incomplete; unmatched seeds and frontiers remain unknown."
+      ]
+    },
+    "confidence": "inferred",
+    "authority": "analyst-inference",
+    "environment": null,
+    "limitations": [
+      "Artifact identity is unavailable for this observation.",
+      "No graph entity matched the literal seed; this is not evidence that the feature is absent.",
+      "The source application graph is incomplete; unmatched seeds and frontiers remain unknown."
+    ],
+    "relationship_coverage": null,
+    "locations": [],
+    "evidence_links": [
+      "ev_9d24b5b59de2fde65e4ac4ce46258359bf773e157efbb63860d8e92c83789a08"
+    ]
+  },
+  "failed_initial_analysis": {
+    "source_paths": [
+      "prototype/engine.js",
+      "prototype/panels.js",
+      "prototype/app.js"
+    ],
+    "result": "invalid_request paths not in inventory; corrected exact paths assets/prototype/...",
+    "source_or_app_mutation": false
+  },
+  "limitations": [
+    "Fresh static reference identity and selected Open Play artifact syntax, not Serato behavior or whole-application equivalence.",
+    "Link literal trace found no graph seed in partial source graph. It does not prove Link is absent. Actual selected source branch was inspected separately.",
+    "No audio, controller, provider, network or other runtime behavior rerun by REA."
+  ]
+}
