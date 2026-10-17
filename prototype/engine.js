@@ -2,6 +2,8 @@ import { createEffect } from "./effects.js";
 import { prepareExtendedEffects } from "./extended-effects.js";
 import { KeylockRenderer } from "./keylock.js";
 import { DeckScratchCache } from "./deck-scratch-cache.js";
+import { KeylockScratchShadow, canRetainScratchShadow } from './keylock-scratch-shadow.js';
+import { createSilentAudioPull, prepareSilentAudioPull } from './silent-audio-pull.js';
 import { advanceDeckScratchPosition } from "./deck-scratch-kernel.js";
 import { prepareDeckScratch, createDeckScratchTransport } from "./deck-scratch.js";
 import { prepareStemHistory, createStemHistory } from "./stem-history.js";
@@ -42,6 +44,7 @@ export class AudioEngine {
     this.stemSlipPending = new Map();
     this.stemSlipRateTokens = new Map();
     this.deckScratchRequests = new Map();
+    this.deckScratchShadows = new Map();
     this.deckScratchGeneration = 0;
     this.scratchCache = new DeckScratchCache({buffer: track => this.buffer(track), stems: track => this.stemBuffers.get(track.id),
       prepare: deck => this.prepareOrdinaryScratch(deck), nextGeneration: () => ++this.deckScratchGeneration,
@@ -191,6 +194,7 @@ export class AudioEngine {
     return Math.max(0, Math.min(d.track?.duration || 48, p));
   }
   stopSource(i, { preserveStemExit = false } = {}) {
+    this.deckScratchShadows.get(i)?.dispose();
     const source = this.voices.get(i);
     if (source) {this.disposeVoice(i, source); this.voices.delete(i);}
     for (const job of this.retiringVoices.get(i) || []) {clearTimeout(job.timer); this.disposeVoice(i, job.voice);}
@@ -281,8 +285,15 @@ export class AudioEngine {
     }
   }
   async createForwardKeylock(options) {
-    const {createLiveKeylock} = await import('./keylock-live.js');
+    const {createLiveKeylock} = await import('./keylock-shadow-live.js');
+    void prepareSilentAudioPull(this.ctx).catch(()=>{});
     return createLiveKeylock(this.ctx, options);
+  }
+  createScratchShadowPull(options) {return createSilentAudioPull(this.ctx,options);}
+  failKeylockScratchShadow(d,lease,error) {
+    if(this.deckScratchShadows.get(d.index)!==lease)return;
+    if(d.track!==lease.track){lease.dispose();return;}
+    const position=this.position(d);this.pause(d);d.position=position;this.onProcessing(d);this.onError?.(error);
   }
   async startForwardKeylock(d, buffers, controller, current) {
     const track = d.track, old = this.voices.get(d.index), initiallyPlaying = d.playing, oldClock = this.voiceClock(d, this.voices.get(d.index));
@@ -293,8 +304,14 @@ export class AudioEngine {
       adapter = await this.createForwardKeylock({buffers, position: this.position(d), rate: d.rate,
         keylock: !!d.keylock, semitones: d.keyShift || 0, signal: controller.signal,
         onEvent: event => {
+          const shadow=this.deckScratchShadows.get(d.index);
+          if(shadow?.adapter===adapter){
+            if(event.type==='error')shadow.fail(Object.assign(Error(event.error.message),{name:event.error.name}));
+            if(event.type==='ended'){this.pause(d);d.position=track.duration;this.onEnd(d);}
+            return;
+          }
           if (this.voices.get(d.index)?.liveKeylock !== adapter) return;
-          if (event.type === 'ended') {d.position = track.duration; d.playing = false; this.stopSource(d.index, {preserveStemExit: true}); this.onEnd(d);}
+          if (event.type === 'ended') {this.pause(d,{preserveStemExit:true});d.position=track.duration;this.onEnd(d);}
           if (event.type === 'error') {const position = adapter.position(); this.pause(d); d.position = position; this.onProcessing(d); this.onError?.(Object.assign(new Error(event.error.message), {name: event.error.name}));}
         }});
       if (!current()) return;
@@ -847,6 +864,7 @@ export class AudioEngine {
     return out;
   }
   async setPitch(d, { keylock = d.keylock, semitones = d.keyShift || 0 } = {}) {
+    this.cancelDeckScratchRequest(d);
     if (d.stemSlip && d.stemSlip !== "off") {
       const pending = this.stemSlipPending.get(d.index);
       if (pending?.committing) {
@@ -994,7 +1012,8 @@ export class AudioEngine {
   }
   // Whole-deck scratch uses original PCM, independently of the pitch renderer.
   // Ownership is invalidated synchronously before asynchronous preparation can commit.
-  cancelDeckScratchRequest(d) {
+  cancelDeckScratchRequest(d, {preserveShadow=false} = {}) {
+    if(!preserveShadow)this.deckScratchShadows.get(d.index)?.dispose();
     const request = this.deckScratchRequests.get(d.index);
     if (!request) return;
     this.deckScratchRequests.delete(d.index);
@@ -1070,23 +1089,33 @@ export class AudioEngine {
     if (!d.track || d.track.missing || d.track.provider) return false;
     if (typeof owner !== 'string' || !owner.length) throw new TypeError('Scratch owner required.');
     if (d.stemSlip && d.stemSlip !== 'off') throw new Error('Turn selected-stem Slip off before whole-deck scratching.');
-    this.cancelDeckScratchRequest(d);
+    let retained=this.deckScratchShadows.get(d.index);
+    if(retained&&!retained.sourcesMatch()){retained.dispose();retained=null;}
+    this.cancelDeckScratchRequest(d,{preserveShadow:!!retained});
     this.deckStates.set(d.index, d);
     const request = {owner, track: d.track, controller: new AbortController(), transport: null, ready: false, closing: false, wasPlaying: !!(d.playing || d.processing)};
     this.deckScratchRequests.set(d.index, request);
-    const current = () => this.deckScratchRequests.get(d.index) === request && d.track === request.track && !request.controller.signal.aborted;
+    if(retained){retained.reserve(request);request.shadowLease=retained;}
+    const current = () => this.deckScratchRequests.get(d.index) === request && d.track === request.track && !request.controller.signal.aborted && !request.closing;
     let transport = this.voices.get(d.index)?.deckScratchTransport, committed = !!transport;
+    let preparedShadow=null;
     d.scratchPreparing = !transport;
     try {
       if (!transport) {
         // Keep an existing ordinary voice audible while preparing, but prevent a
         // pre-existing asynchronous buffered start from committing over this owner.
-        this.transforms.get(d.index)?.abort(); this.transforms.delete(d.index);
+        const pending=this.transforms.get(d.index),selected=this.voices.get(d.index)?.liveOwnerController;
+        if(pending!==selected)pending?.abort();this.transforms.delete(d.index);
         this.startTokens.set(d.index, (this.startTokens.get(d.index) || 0) + 1);
         d.processing = false;
         transport = await this.preloadDeckScratch(d);
         if (!current()) return false;
         request.transport = transport;
+        const live=this.voices.get(d.index);
+        if(canRetainScratchShadow(this,d,live)){
+          preparedShadow=await new KeylockScratchShadow(this,d,live).prepare(request);
+          if(!current())return false;
+        }
         const stems = this.stemBuffers.get(request.track.id) || null;
         const generation = transport.state().generation;
         if (!current()) return false;
@@ -1098,9 +1127,15 @@ export class AudioEngine {
         request.beginPosted = true;
         await transport.command('begin', {generation, owner});
         if (!current()) return false;
-        this.stopSource(d.index, {preserveStemExit: true});
         const voice = {sources: [], deckScratchTransport: transport, scratchOwner:owner, stemGains: []};
-        this.routeOrdinaryVoice(d, voice, Array(stems ? 5 : 1).fill(transport.node), stems);
+        if(preparedShadow){
+          preparedShadow.claim(request,voice);request.shadowLease=preparedShadow;
+          this.routeOrdinaryVoice(d,voice,Array(stems?5:1).fill(transport.node),stems,{reuseVoice:preparedShadow.liveVoice});
+          preparedShadow.sample();
+        }else{
+          this.stopSource(d.index, {preserveStemExit: true});
+          this.routeOrdinaryVoice(d, voice, Array(stems ? 5 : 1).fill(transport.node), stems);
+        }
         committed = true;
       } else {
         request.transport = transport;
@@ -1109,15 +1144,18 @@ export class AudioEngine {
         request.beginPosted = true;
         await transport.command('begin', {generation, owner});
         if (!current()) return false;
+        if(retained)retained.claim(request,this.voices.get(d.index));
       }
       if (this.voices.get(d.index)?.deckScratchTransport === transport) this.voices.get(d.index).scratchOwner = owner;
       request.ready = true; d.scratchPreparing = false; d.playing = request.wasPlaying;
       return {owner, generation: transport.state().generation};
     } catch (error) {
+      if(preparedShadow?.ownsLive)this.pause(d);
       if (current()) {this.deckScratchRequests.delete(d.index); d.scratchPreparing = false;}
       if (error.name !== 'AbortError') throw error;
       return false;
     } finally {
+      if(!committed)preparedShadow?.dispose();
       if (!committed && !this.scratchCache.owns(transport)) transport?.dispose();
       if (this.deckScratchRequests.get(d.index) === request) d.scratchPreparing = false;
     }
@@ -1132,11 +1170,26 @@ export class AudioEngine {
   async endDeckScratch(d, owner, {cancel = false} = {}) {
     const request = this.deckScratchRequests.get(d.index);
     if (!request || request.owner !== owner || request.track !== d.track || request.closing) return false;
-    if (!request.ready) {this.cancelDeckScratchRequest(d); return false;}
+    const shadow=this.deckScratchShadows.get(d.index);
+    if (!request.ready&&!shadow) {this.cancelDeckScratchRequest(d); return false;}
     request.closing = true;
     const transport = request.transport;
+    const shadowRevision=shadow?.beginRelease(owner);
     const result = await transport.command('end', {generation: transport.state().generation, owner});
     if (this.deckScratchRequests.get(d.index) !== request || d.track !== request.track) return false;
+    if(shadow&&shadowRevision!==false){
+      try{
+        if(!result.playing){this.pause(d);d.position=result.position;return{owner,canceled:!!cancel,position:result.position,playing:false};}
+        const ack=await shadow.align(owner,shadowRevision,result);
+        if(!shadow.adopt(owner,shadowRevision,result,ack))return false;
+        request.controller.abort();return{owner,canceled:!!cancel,position:result.position,playing:ack.playing};
+      }catch(error){
+        if(this.deckScratchShadows.get(d.index)===shadow&&shadow.owner===owner&&shadow.revision===shadowRevision){
+          this.failKeylockScratchShadow(d,shadow,error);if(error.name!=='AbortError')throw error;
+        }
+        return false;
+      }
+    }
     this.deckScratchRequests.delete(d.index); request.controller.abort();
     d.position = result.position; d.playing = result.playing;
     d.loop = !!result.loop; if (result.loop) {d.loopIn = result.loop.start; d.loopOut = result.loop.end;}
@@ -1577,6 +1630,7 @@ export class AudioEngine {
       this.stopSample(slot);
   }
   silence() {
+    for(const lease of this.deckScratchShadows.values())lease.dispose();
     this.scratchCache.clearAll();
     for (const d of this.deckStates.values()) {
       this.pause(d); d.stemSlip = "off"; d.stemSlipPhase = "idle";

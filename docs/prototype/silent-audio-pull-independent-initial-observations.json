@@ -1,0 +1,186 @@
+{
+  "provenance": "Structured transcription of the initial executed tool result (7/11 pass,4 desired-state failures), not a byte-for-byte stdout artifact or a fresh rerun. Initial assertions/evidence were preserved in session output before production correction. The strengthened successful-retry field added afterward is omitted.",
+  "passed": 7,
+  "failed": 4,
+  "wrapperSHA256": "e58e549b7a7c93cd6e1ed467392aff1cc6eb0a0f3ddacf265022b954ca56c414",
+  "workletSHA256": "00f8d094b63f3eab16874fedf576edf1eec316706e2d7e88c4371d7c9f26f73b",
+  "scope": "Actual wrapper and actual processor under a controlled serial port/graph host. Every channel zero/read metrics and lifecycle only; no actual browser graph pulling, engine continuity, acoustic silence or native/vendor parity.",
+  "checks": [
+    {
+      "name": "Actual 1-input processor reads every channel while every output remains zero and disposal preserves source routes",
+      "passed": true,
+      "evidence": {
+        "inputChannels": [
+          1
+        ],
+        "readQuanta": 64,
+        "zeroOutputChannels": 3,
+        "exactDisconnects": [
+          [
+            [
+              0,
+              0
+            ]
+          ]
+        ],
+        "sourceNodesPreserved": true,
+        "unhandledRejections": []
+      }
+    },
+    {
+      "name": "Actual 5-input processor reads every channel while every output remains zero and disposal preserves source routes",
+      "passed": true,
+      "evidence": {
+        "inputChannels": [
+          1,
+          2,
+          8,
+          3,
+          4
+        ],
+        "readQuanta": 64,
+        "zeroOutputChannels": 3,
+        "exactDisconnects": [
+          [
+            [
+              0,
+              0
+            ]
+          ],
+          [
+            [
+              0,
+              1
+            ]
+          ],
+          [
+            [
+              0,
+              2
+            ]
+          ],
+          [
+            [
+              0,
+              3
+            ]
+          ],
+          [
+            [
+              0,
+              4
+            ]
+          ]
+        ],
+        "sourceNodesPreserved": true,
+        "unhandledRejections": []
+      }
+    },
+    {
+      "name": "Abort after readiness retires the owner exactly once without clearing source routes",
+      "passed": true,
+      "evidence": {
+        "disposals": 1,
+        "unhandledRejections": []
+      }
+    },
+    {
+      "name": "Abort before ready cannot activate late readiness and cleans exact routes",
+      "passed": true,
+      "evidence": {
+        "error": "AbortError",
+        "closedPosts": [],
+        "unhandledRejections": []
+      }
+    },
+    {
+      "name": "Owner abort while shared module loading settles promptly without waiting for that module",
+      "passed": false,
+      "evidence": {
+        "settledBeforeModule": false,
+        "nodesBeforeModule": 0,
+        "finalError": "AbortError",
+        "unhandledRejections": []
+      },
+      "assertion": "Canceled owner remains pending behind unresolved shared addModule"
+    },
+    {
+      "name": "Processor failure before readiness never posts to its closed port or starts a second disposal deadline",
+      "passed": false,
+      "evidence": {
+        "settledBeforeDisposalDeadline": false,
+        "closedPosts": [
+          {
+            "type": "dispose",
+            "id": 1
+          }
+        ],
+        "error": "Silent audio pull processor failed.",
+        "errors": [
+          "Silent audio pull processor failed."
+        ],
+        "unhandledRejections": []
+      },
+      "assertion": "Terminal processor error sends another command to closed port"
+    },
+    {
+      "name": "Processor failure after readiness makes later dispose idempotent without timeout/closed-port command",
+      "passed": false,
+      "evidence": {
+        "settledBeforeDeadline": false,
+        "disposalError": "TimeoutError",
+        "closedPosts": [
+          {
+            "type": "dispose",
+            "id": 1
+          }
+        ],
+        "errors": [
+          "Silent audio pull processor failed."
+        ],
+        "unhandledRejections": []
+      },
+      "assertion": "Already failed transport posts dispose after closing port"
+    },
+    {
+      "name": "Readiness stall and disposal ACK stall are bounded and still detach exact graph routes",
+      "passed": true,
+      "evidence": {
+        "readinessError": "Silent pull readiness timed out.",
+        "disposalError": "Silent pull disposal timed out.",
+        "unhandledRejections": []
+      }
+    },
+    {
+      "name": "Partial connection failure cleans prior routes and leaves every source external route intact",
+      "passed": false,
+      "evidence": {
+        "error": "Controlled connection failed",
+        "unhandledRejections": [
+          {
+            "name": "AbortError",
+            "message": "Silent pull owner was canceled."
+          }
+        ]
+      },
+      "assertion": "Lifecycle produced an unhandled Promise rejection"
+    },
+    {
+      "name": "Shared preparation deduplicates and failed module preparation can retry",
+      "passed": true,
+      "evidence": {
+        "moduleCalls": 2,
+        "initialPromiseShared": true,
+        "unhandledRejections": []
+      }
+    },
+    {
+      "name": "Throwing event/error callbacks do not prevent zero output or terminal cleanup",
+      "passed": true,
+      "evidence": {
+        "callbacksContained": true,
+        "unhandledRejections": []
+      }
+    }
+  ]
+}

@@ -1,0 +1,375 @@
+{
+  "checks": [
+    {
+      "name": "Production start uses live forward WASM and actual22050Hz source through deck input",
+      "passed": true,
+      "evidence": {
+        "anchorTime": 0.4686666666666667,
+        "observed": {
+          "start": 0.7186666666666667,
+          "duration": 0.4,
+          "coverage": 1,
+          "frames": 19200,
+          "rms": 0.0951957087129992,
+          "peak": 0.17442916333675385,
+          "frequencyHz": 440.36740851917807,
+          "maxBelow005RunMs": 0,
+          "envelopeFit": {
+            "frequency": 4,
+            "error": 0.000020661006772495112,
+            "relativeAmplitude": 0.4533567267623743
+          }
+        },
+        "snapshot": {
+          "followMinimumLeadSeconds": 0.04,
+          "byteAccounting": "Acknowledged retained PCM and in-flight chunk copies only; excludes decoded inputs, SRC tables and opaque WASM heaps.",
+          "disposed": false,
+          "state": {
+            "when": 0.4686666666666667,
+            "position": 0.6566666666666666,
+            "playing": true,
+            "rate": 1,
+            "keylock": true,
+            "semitones": 0,
+            "effectiveSemitones": 0
+          },
+          "sourceGeometry": [
+            {
+              "index": 0,
+              "sampleRate": 22050,
+              "frames": 1058400,
+              "channels": 2,
+              "duration": 48,
+              "paddedTailSeconds": 0,
+              "trimmedTailSeconds": 0,
+              "decodedBytes": 8467200
+            }
+          ],
+          "groups": [
+            {
+              "id": 1,
+              "origin": 0,
+              "start": 0,
+              "end": 9,
+              "nodeCount": 1,
+              "retainedPCMBytes": 3456000,
+              "retainedChunks": 18,
+              "latency": 0.12,
+              "role": "selected"
+            }
+          ],
+          "retainedPCMBytes": 3456000,
+          "inFlightPCMBytes": 0,
+          "decodedBytes": 8467200,
+          "policy": {
+            "direction": "forward",
+            "normalMinimumLead": "queried group latency plus2 render quanta",
+            "followMinimumLeadSeconds": 0.04,
+            "followOwner": "currently active forward owner only",
+            "followCoverage": "required history must already be prepared; reject without replacement",
+            "rate": [
+              0.25,
+              4
+            ],
+            "effectiveSemitones": [
+              -24,
+              24
+            ],
+            "chunkSeconds": 0.5,
+            "requiredPrerollSeconds": 1,
+            "retentionPrerollSeconds": 2,
+            "retentionHysteresisSeconds": 1,
+            "lookaheadSeconds": 8,
+            "driverMs": 50,
+            "crossfadeSeconds": 0.01,
+            "srcTaps": 32,
+            "srcPhases": 1024,
+            "decodedSources": "Whole decoded AudioBuffers remain caller-owned; only processor PCM copies are windowed.",
+            "unsupported": [
+              "reverse",
+              "loop",
+              "Stem Slip",
+              "incremental compressed-file decoding"
+            ],
+            "quality": "Independent32-tap windowed-sinc normalization and10ms group crossfade; vendor sonic equivalence and artifact-free transitions are unverified."
+          },
+          "lastError": null
+        }
+      }
+    },
+    {
+      "name": "Production tempo and pitch controls retain live node and change actual routed PCM",
+      "passed": true,
+      "evidence": {
+        "fxClock": {
+          "beforeRate": {
+            "at": 1.1306666666666667,
+            "scheduledWhen": 1.2506666666666666,
+            "requestedRate": 1.25,
+            "audibleRate": 1
+          },
+          "afterBPM": 150,
+          "limitation": "Main animation-frame synchronization; no sample-accurate FX automation claim"
+        },
+        "rate": {
+          "start": 1.5006666666666666,
+          "duration": 1.3,
+          "coverage": 1,
+          "frames": 62400,
+          "rms": 0.08765031833793496,
+          "peak": 0.17176948487758636,
+          "frequencyHz": 440.332546471674,
+          "maxBelow005RunMs": 0,
+          "envelopeFit": {
+            "frequency": 5,
+            "error": 0.00007648622772088443,
+            "relativeAmplitude": 0.42535211193023736
+          }
+        },
+        "higher": {
+          "start": 3.1213333333333333,
+          "duration": 0.3,
+          "coverage": 1,
+          "frames": 14400,
+          "rms": 0.07945597901778441,
+          "peak": 0.1698167473077774,
+          "frequencyHz": 880.0734685721217,
+          "maxBelow005RunMs": 0,
+          "envelopeFit": {
+            "frequency": 5,
+            "error": 0.000011294597884833673,
+            "relativeAmplitude": 0.4420832967480432
+          }
+        },
+        "restored": {
+          "start": 3.7399999999999998,
+          "duration": 0.3,
+          "coverage": 1,
+          "frames": 14400,
+          "rms": 0.08200882321943748,
+          "peak": 0.17157238721847534,
+          "frequencyHz": 440.32699815100017,
+          "maxBelow005RunMs": 0,
+          "envelopeFit": {
+            "frequency": 5,
+            "error": 0.00001531075714852415,
+            "relativeAmplitude": 0.4288984098566443
+          }
+        },
+        "nodeReused": true
+      }
+    },
+    {
+      "name": "Production near/far seeks use original-time clock and bounded live windows",
+      "passed": false,
+      "evidence": {},
+      "error": "Earlier armed clock gap",
+      "stack": "Error: Earlier armed clock gap\n    at assert (http://127.0.0.1:8768/prototype/keylock-engine-harness.js:4:65)\n    at pcm (http://127.0.0.1:8768/prototype/keylock-engine-harness.js:14:420)\n    at async measured (http://127.0.0.1:8768/prototype/keylock-engine-harness.js:15:63)\n    at async http://127.0.0.1:8768/prototype/keylock-engine-harness.js:28:227\n    at async check (http://127.0.0.1:8768/prototype/keylock-engine-harness.js:11:54)\n    at async run (http://127.0.0.1:8768/prototype/keylock-engine-harness.js:28:3)\n    at async $.onclick (http://127.0.0.1:8768/prototype/keylock-engine-harness.js:66:57)"
+    },
+    {
+      "name": "Whole-deck raw scratch release restores live keylock through scheduled engine handoff",
+      "passed": false,
+      "evidence": {},
+      "error": "Earlier armed clock gap",
+      "stack": "Error: Earlier armed clock gap\n    at assert (http://127.0.0.1:8768/prototype/keylock-engine-harness.js:4:65)\n    at pcm (http://127.0.0.1:8768/prototype/keylock-engine-harness.js:14:420)\n    at async measured (http://127.0.0.1:8768/prototype/keylock-engine-harness.js:15:63)\n    at async http://127.0.0.1:8768/prototype/keylock-engine-harness.js:29:260\n    at async check (http://127.0.0.1:8768/prototype/keylock-engine-harness.js:11:54)\n    at async run (http://127.0.0.1:8768/prototype/keylock-engine-harness.js:29:3)\n    at async $.onclick (http://127.0.0.1:8768/prototype/keylock-engine-harness.js:66:57)"
+    },
+    {
+      "name": "Shifted stationary release preserves requested pitch from release request without raw bridge",
+      "passed": false,
+      "evidence": {},
+      "error": "Earlier armed clock gap",
+      "stack": "Error: Earlier armed clock gap\n    at assert (http://127.0.0.1:8768/prototype/keylock-engine-harness.js:4:65)\n    at pcm (http://127.0.0.1:8768/prototype/keylock-engine-harness.js:14:420)\n    at async measured (http://127.0.0.1:8768/prototype/keylock-engine-harness.js:15:63)\n    at async http://127.0.0.1:8768/prototype/keylock-engine-harness.js:32:17\n    at async check (http://127.0.0.1:8768/prototype/keylock-engine-harness.js:11:54)\n    at async run (http://127.0.0.1:8768/prototype/keylock-engine-harness.js:30:3)\n    at async $.onclick (http://127.0.0.1:8768/prototype/keylock-engine-harness.js:66:57)"
+    },
+    {
+      "name": "Actual five-source engine handoff transfers sole history output and keeps selected vocal level",
+      "passed": false,
+      "evidence": {},
+      "error": "Earlier armed clock gap",
+      "stack": "Error: Earlier armed clock gap\n    at assert (http://127.0.0.1:8768/prototype/keylock-engine-harness.js:4:65)\n    at pcm (http://127.0.0.1:8768/prototype/keylock-engine-harness.js:14:420)\n    at async measured (http://127.0.0.1:8768/prototype/keylock-engine-harness.js:15:63)\n    at async http://127.0.0.1:8768/prototype/keylock-engine-harness.js:52:17\n    at async check (http://127.0.0.1:8768/prototype/keylock-engine-harness.js:11:54)\n    at async run (http://127.0.0.1:8768/prototype/keylock-engine-harness.js:49:3)\n    at async $.onclick (http://127.0.0.1:8768/prototype/keylock-engine-harness.js:66:57)"
+    },
+    {
+      "name": "Pause cancels current/future engine voice, pending ownership and retiring groups while control survives",
+      "passed": false,
+      "evidence": {},
+      "error": "Earlier armed clock gap",
+      "stack": "Error: Earlier armed clock gap\n    at assert (http://127.0.0.1:8768/prototype/keylock-engine-harness.js:4:65)\n    at pcm (http://127.0.0.1:8768/prototype/keylock-engine-harness.js:14:420)\n    at async measured (http://127.0.0.1:8768/prototype/keylock-engine-harness.js:15:63)\n    at async http://127.0.0.1:8768/prototype/keylock-engine-harness.js:57:187\n    at async check (http://127.0.0.1:8768/prototype/keylock-engine-harness.js:11:54)\n    at async run (http://127.0.0.1:8768/prototype/keylock-engine-harness.js:57:3)\n    at async $.onclick (http://127.0.0.1:8768/prototype/keylock-engine-harness.js:66:57)"
+    }
+  ],
+  "fatalErrors": [
+    {
+      "phase": "capture integrity",
+      "label": "engine-deck-bus",
+      "error": "Unarmed or discontinuous capture",
+      "errors": [
+        {
+          "previousFrame": 239616,
+          "actualFrame": 239616,
+          "sequence": 1865
+        },
+        {
+          "previousFrame": 239616,
+          "actualFrame": 239872,
+          "sequence": 1866
+        }
+      ],
+      "preflight": {
+        "type": "preflight",
+        "id": "engine-deck-bus-preflight-1",
+        "firstFrame": 2304,
+        "lastFrame": 10496,
+        "consecutive": 64,
+        "startupGaps": []
+      },
+      "arm": {
+        "type": "armed",
+        "id": "engine-deck-bus-arm-2",
+        "firstFrame": 10496,
+        "firstSequence": 74,
+        "startupGaps": []
+      },
+      "fence": {
+        "type": "finished",
+        "id": "engine-deck-bus-finish-3",
+        "lastFrame": 387456,
+        "lastSequence": 3018
+      }
+    },
+    {
+      "phase": "capture integrity",
+      "label": "independent-control",
+      "error": "Unarmed or discontinuous capture",
+      "errors": [
+        {
+          "previousFrame": 239616,
+          "actualFrame": 239616,
+          "sequence": 1865
+        },
+        {
+          "previousFrame": 239616,
+          "actualFrame": 239872,
+          "sequence": 1866
+        }
+      ],
+      "preflight": {
+        "type": "preflight",
+        "id": "independent-control-preflight-1",
+        "firstFrame": 2304,
+        "lastFrame": 10496,
+        "consecutive": 64,
+        "startupGaps": []
+      },
+      "arm": {
+        "type": "armed",
+        "id": "independent-control-arm-2",
+        "firstFrame": 10496,
+        "firstSequence": 74,
+        "startupGaps": []
+      },
+      "fence": {
+        "type": "finished",
+        "id": "independent-control-finish-3",
+        "lastFrame": 387712,
+        "lastSequence": 3020
+      }
+    },
+    {
+      "phase": "capture integrity",
+      "label": "silent-pull-output",
+      "error": "Unarmed or discontinuous capture",
+      "errors": [
+        {
+          "previousFrame": 239616,
+          "actualFrame": 239616,
+          "sequence": 1865
+        },
+        {
+          "previousFrame": 239616,
+          "actualFrame": 239872,
+          "sequence": 1866
+        }
+      ],
+      "preflight": {
+        "type": "preflight",
+        "id": "silent-pull-output-preflight-1",
+        "firstFrame": 2304,
+        "lastFrame": 10496,
+        "consecutive": 64,
+        "startupGaps": []
+      },
+      "arm": {
+        "type": "armed",
+        "id": "silent-pull-output-arm-2",
+        "firstFrame": 10496,
+        "firstSequence": 74,
+        "startupGaps": []
+      },
+      "fence": {
+        "type": "finished",
+        "id": "silent-pull-output-finish-3",
+        "lastFrame": 387968,
+        "lastSequence": 3022
+      }
+    },
+    {
+      "phase": "capture integrity",
+      "label": "shadow-pre-gate",
+      "error": "Unarmed or discontinuous capture",
+      "errors": [
+        {
+          "previousFrame": 239616,
+          "actualFrame": 239616,
+          "sequence": 1865
+        },
+        {
+          "previousFrame": 239616,
+          "actualFrame": 239872,
+          "sequence": 1866
+        }
+      ],
+      "preflight": {
+        "type": "preflight",
+        "id": "shadow-pre-gate-preflight-1",
+        "firstFrame": 2304,
+        "lastFrame": 10496,
+        "consecutive": 64,
+        "startupGaps": []
+      },
+      "arm": {
+        "type": "armed",
+        "id": "shadow-pre-gate-arm-2",
+        "firstFrame": 10496,
+        "firstSequence": 74,
+        "startupGaps": []
+      },
+      "fence": {
+        "type": "finished",
+        "id": "shadow-pre-gate-finish-3",
+        "lastFrame": 388224,
+        "lastSequence": 3024
+      }
+    }
+  ],
+  "sampleRate": 48000,
+  "startedAt": "2026-10-17T10:09:12.561Z",
+  "scope": "Actual production AudioEngine start/rate/pitch/seek/scratch-release methods with actual WASM and routed captured PCM. No native/hardware, reverse/loop/StemSlip live integration, decoded-memory or vendor sonic-quality acceptance.",
+  "sourceHashes": {
+    "engine.js": "f08598c9af95048fe0c6d66239d6b6da5283be4f13e0bf1cf12f8f33d23f93b2",
+    "keylock-shadow-live.js": "4860d18ec3ccf39474824cbf9d46df259b110631b4c2cfde60c9a1d03e21504b",
+    "keylock-scratch-shadow.js": "6e4f0d8e108705676944722ea625959b4477fb40c91c8024a3d7d48b24c6ed31",
+    "silent-audio-pull.js": "44e0999cde51efa66708adf8ffd7a4c466d35f819b163b4730ce04f4d9be1c00",
+    "silent-audio-pull-worklet.js": "00f8d094b63f3eab16874fedf576edf1eec316706e2d7e88c4371d7c9f26f73b",
+    "deck-scratch-cache.js": "04ea486f7010df479184d629c14ea3f8cdd81ef595c5d8233c8e407890e2fa99",
+    "keylock-release-analysis.js": "2957a90303441cade061107affaee8b3ae4b68d3724fff72a5a9ca1ac30b6e5f",
+    "keylock-engine-harness.js": "f5aae828a61cbe27b8c3c255fe5da2dac4db683642e0ce561a9d3302c19f28f9"
+  },
+  "budgets": {
+    "pitchRelative": 0.01,
+    "rateEnvelopeHz": 0.15,
+    "releaseMaximumBelow005Ms": 20
+  },
+  "captureIntegrity": [],
+  "passed": 2,
+  "failed": 5,
+  "completed": false,
+  "durationMs": 8084.400000095367
+}

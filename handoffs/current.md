@@ -1,3 +1,15 @@
+
+
+Reviewed-source rerun result: standalone repeat preserved in `keylock-engine-shadow-reviewed-standalone-failure.json` reports2pass/5fail/4capture-integrity errors. Both reviewed-source attempts record the same kind of duplicate frame followed by a skipped quantum on all four buses, including independent control. This disqualifies continuous release measurement; it does not establish its cause. No further identical rerun is a completion gate. Current controlled live orchestration9/9, shadow ownership9/9 and silentpull15/15 pass. Main-interface two-demo13.2s recording is a separate observed path. The candidate is presented for hands-on testing with these limits, not release-quality or full-parity acceptance.
+
+
+
+## Current priority override — plan48: hands-on test before further broad parity work
+
+Jason requests a working thing to test, retaining existing code. Proposed next milestone: package approved HTML as a desktop test build; NO explicit native approval yet. Do not rewrite the frontend or wait for full1:1 before showing a useful browser test. Full parity remains incomplete.
+
+New guarded adapter actual10/10+7API, independent raw21capture inspection and29controlled pass; silentpull15controlled. Initial integrated engine5/7 preserved; pre-review fixes actual7/7. Ownership review then reproduced/fixed3races and passes9/9 on enginef08598c9/lease6e4f0d8e. First reviewed-source browser run3pass/4fail/4capturefatal with shared clock discontinuity, preserved `keylock-engine-shadow-reviewed-browser-results.json`; standalone rerun pending. Earlier7/7 is not current-source acceptance. Current manifest still pins9041b23/255; new files are WIP until checkpoint. Main UI actual demo two-deck/mastercapture13.2s decoded nonzero; no physical or every-deck contribution claim. Read REAL_TEST.md and plan48. Parent owns sources, browser, records/remotes; reviews frozen. Next: standalone current-source result→named HTML revision→user test/desktop approval. All hardware, headphone, earlycursor, music quality, reverse/loop/StemSlip, provider/Video gaps remain.
+
 # Current handoff: Codex to Claude
 
 Project: `/Users/jasonpoindexter/Documents/GitHub/Open Play`. Current committed browser source: `9041b236fd52fb746a5e2f8ebac339e66ad13bf4`; 255 tracked prototype/scripts hashes in `docs/prototype/candidate-hashes.json`. New shadow/short-block experiments are separate unaccepted work; inspect current diff and active file owners before editing.

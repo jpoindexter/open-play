@@ -1,0 +1,113 @@
+{
+  "passed": 6,
+  "failed": 2,
+  "sourceHashes": {
+    "engine": "74434df2b0f0bca5ff66cdd1e08db54e3a3ba0cdb24a6a0cde35d3e9515b7a2a",
+    "lease": "55fb7ba9e1932fdedaa6fd192c5d3f1c43c34437c15326cf62e7045c73d0e90b",
+    "rawWrapper": "0f875b8ed8a2f0b0373455e8758fe150be937fa3311a6b35142a7d15622f189a",
+    "rawKernel": "428c677a90114d6a23479ad0789825c7cd45bcaed3806fbafec32aba6a68d08c"
+  },
+  "scope": "Actual AudioEngine, shadow lease, raw scratch wrapper and PCM kernel; controlled serial raw ports, live adapter promises and graph/history nodes. No actual WASM/native graph audio, browser scheduling, captured cursor/pitch or vendor quality acceptance.",
+  "checks": [
+    {
+      "name": "Actual engine transfers five-source history gain ownership raw\u2192live exactly once",
+      "passed": true,
+      "evidence": {
+        "historyRoutes": 4,
+        "sameGainsPreserved": true,
+        "liveAdapterDisposed": false
+      }
+    },
+    {
+      "name": "Late alignment from old End cannot adopt over a newer Begin on the same shadow",
+      "passed": true,
+      "evidence": {
+        "currentOwner": "fresh",
+        "oldEndAdopted": false
+      }
+    },
+    {
+      "name": "Pending reused Begin plus End then newer Begin cannot revive an older closing owner",
+      "passed": true,
+      "evidence": {
+        "owner": "next",
+        "rawProtocol": [
+          {
+            "type": "begin",
+            "owner": "first"
+          },
+          {
+            "type": "begin",
+            "owner": "slow"
+          },
+          {
+            "type": "end",
+            "owner": "slow"
+          },
+          {
+            "type": "end",
+            "owner": "slow"
+          },
+          {
+            "type": "begin",
+            "owner": "next"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Pause during a far rebase retires both owners and stale completion cannot adopt",
+      "passed": true,
+      "evidence": {
+        "staleRebaseAdopted": false,
+        "paused": true
+      }
+    },
+    {
+      "name": "Prepared silent-pull failure before raw Begin commit cannot become an owned healthy shadow",
+      "passed": false,
+      "evidence": {
+        "beginResult": {
+          "owner": "preparing",
+          "generation": 1
+        },
+        "shadowOwnsFailedPull": true,
+        "errors": []
+      },
+      "assertion": "Prepared pull error is ignored and dead pull is claimed"
+    },
+    {
+      "name": "Natural live source end while raw Begin is pending cannot revive expired live playback",
+      "passed": false,
+      "evidence": {
+        "beginResult": {
+          "owner": "at-end",
+          "generation": 1
+        },
+        "playingAfterEnd": true,
+        "shadowOwnsDisposedAdapter": true,
+        "endEvents": 1
+      },
+      "assertion": "Expired/disposed live owner is re-claimed after source ended"
+    },
+    {
+      "name": "Track/config replacement blocks stale alignment and does not overwrite replacement cursor",
+      "passed": true,
+      "evidence": {
+        "checked": [
+          "track",
+          "configuration"
+        ]
+      }
+    },
+    {
+      "name": "Current processor error retires only its deck while late old error cannot touch replacement",
+      "passed": true,
+      "evidence": {
+        "otherDeckPreserved": true,
+        "replacementPreserved": true
+      }
+    }
+  ],
+  "provenance": "Structured transcription of executed initial8-check tool output after fixture effects-array correction, not byte-for-byte stdout or a fresh rerun. Initial tool output preserved in session."
+}

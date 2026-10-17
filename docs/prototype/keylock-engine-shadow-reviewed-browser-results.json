@@ -1,0 +1,500 @@
+{
+  "checks": [
+    {
+      "name": "Production start uses live forward WASM and actual22050Hz source through deck input",
+      "passed": true,
+      "evidence": {
+        "anchorTime": 0.47933333333333333,
+        "observed": {
+          "start": 0.7293333333333334,
+          "duration": 0.4,
+          "coverage": 1,
+          "frames": 19200,
+          "rms": 0.0951957087129992,
+          "peak": 0.17442916333675385,
+          "frequencyHz": 440.36740851917807,
+          "maxBelow005RunMs": 0,
+          "envelopeFit": {
+            "frequency": 4,
+            "error": 0.000020661006772495112,
+            "relativeAmplitude": 0.4533567267623743
+          }
+        },
+        "snapshot": {
+          "followMinimumLeadSeconds": 0.04,
+          "byteAccounting": "Acknowledged retained PCM and in-flight chunk copies only; excludes decoded inputs, SRC tables and opaque WASM heaps.",
+          "disposed": false,
+          "state": {
+            "when": 0.47933333333333333,
+            "position": 0.6566666666666665,
+            "playing": true,
+            "rate": 1,
+            "keylock": true,
+            "semitones": 0,
+            "effectiveSemitones": 0
+          },
+          "sourceGeometry": [
+            {
+              "index": 0,
+              "sampleRate": 22050,
+              "frames": 1058400,
+              "channels": 2,
+              "duration": 48,
+              "paddedTailSeconds": 0,
+              "trimmedTailSeconds": 0,
+              "decodedBytes": 8467200
+            }
+          ],
+          "groups": [
+            {
+              "id": 1,
+              "origin": 0,
+              "start": 0,
+              "end": 9,
+              "nodeCount": 1,
+              "retainedPCMBytes": 3456000,
+              "retainedChunks": 18,
+              "latency": 0.12,
+              "role": "selected"
+            }
+          ],
+          "retainedPCMBytes": 3456000,
+          "inFlightPCMBytes": 0,
+          "decodedBytes": 8467200,
+          "policy": {
+            "direction": "forward",
+            "normalMinimumLead": "queried group latency plus2 render quanta",
+            "followMinimumLeadSeconds": 0.04,
+            "followOwner": "currently active forward owner only",
+            "followCoverage": "required history must already be prepared; reject without replacement",
+            "rate": [
+              0.25,
+              4
+            ],
+            "effectiveSemitones": [
+              -24,
+              24
+            ],
+            "chunkSeconds": 0.5,
+            "requiredPrerollSeconds": 1,
+            "retentionPrerollSeconds": 2,
+            "retentionHysteresisSeconds": 1,
+            "lookaheadSeconds": 8,
+            "driverMs": 50,
+            "crossfadeSeconds": 0.01,
+            "srcTaps": 32,
+            "srcPhases": 1024,
+            "decodedSources": "Whole decoded AudioBuffers remain caller-owned; only processor PCM copies are windowed.",
+            "unsupported": [
+              "reverse",
+              "loop",
+              "Stem Slip",
+              "incremental compressed-file decoding"
+            ],
+            "quality": "Independent32-tap windowed-sinc normalization and10ms group crossfade; vendor sonic equivalence and artifact-free transitions are unverified."
+          },
+          "lastError": null
+        }
+      }
+    },
+    {
+      "name": "Production tempo and pitch controls retain live node and change actual routed PCM",
+      "passed": true,
+      "evidence": {
+        "fxClock": {
+          "beforeRate": {
+            "at": 1.1413333333333333,
+            "scheduledWhen": 1.2613333333333332,
+            "requestedRate": 1.25,
+            "audibleRate": 1
+          },
+          "afterBPM": 150,
+          "limitation": "Main animation-frame synchronization; no sample-accurate FX automation claim"
+        },
+        "rate": {
+          "start": 1.5113333333333332,
+          "duration": 1.3,
+          "coverage": 1,
+          "frames": 62400,
+          "rms": 0.08765031833793496,
+          "peak": 0.17176948487758636,
+          "frequencyHz": 440.332546471674,
+          "maxBelow005RunMs": 0,
+          "envelopeFit": {
+            "frequency": 5,
+            "error": 0.00007648622772088443,
+            "relativeAmplitude": 0.42535211193023736
+          }
+        },
+        "higher": {
+          "start": 3.1266666666666665,
+          "duration": 0.3,
+          "coverage": 1,
+          "frames": 14400,
+          "rms": 0.07967507815025039,
+          "peak": 0.1698167473077774,
+          "frequencyHz": 880.0775338206354,
+          "maxBelow005RunMs": 0,
+          "envelopeFit": {
+            "frequency": 5,
+            "error": 0.000012594467590407252,
+            "relativeAmplitude": 0.4418135068709523
+          }
+        },
+        "restored": {
+          "start": 3.7346666666666666,
+          "duration": 0.3,
+          "coverage": 1,
+          "frames": 14400,
+          "rms": 0.08125447648817893,
+          "peak": 0.17157238721847534,
+          "frequencyHz": 440.33876063383775,
+          "maxBelow005RunMs": 0,
+          "envelopeFit": {
+            "frequency": 5,
+            "error": 0.000014289878287226989,
+            "relativeAmplitude": 0.42902248196448906
+          }
+        },
+        "nodeReused": true
+      }
+    },
+    {
+      "name": "Production near/far seeks use original-time clock and bounded live windows",
+      "passed": true,
+      "evidence": {
+        "near": {
+          "start": 4.455333333333334,
+          "duration": 0.3,
+          "coverage": 1,
+          "frames": 14400,
+          "rms": 0.0889883568466112,
+          "peak": 0.17162148654460907,
+          "frequencyHz": 550.3539643229898,
+          "maxBelow005RunMs": 0,
+          "envelopeFit": {
+            "frequency": 5.02,
+            "error": 0.000002131752164853673,
+            "relativeAmplitude": 0.4220479333861252
+          }
+        },
+        "far": {
+          "start": 5.223333333333334,
+          "duration": 0.3,
+          "coverage": 1,
+          "frames": 14400,
+          "rms": 0.0889659419203264,
+          "peak": 0.17158478498458862,
+          "frequencyHz": 880.4244112593805,
+          "maxBelow005RunMs": 0,
+          "envelopeFit": {
+            "frequency": 5,
+            "error": 0.000011203957252826913,
+            "relativeAmplitude": 0.4262485611450212
+          }
+        },
+        "position": 24.703333333333333,
+        "snapshot": {
+          "followMinimumLeadSeconds": 0.04,
+          "byteAccounting": "Acknowledged retained PCM and in-flight chunk copies only; excludes decoded inputs, SRC tables and opaque WASM heaps.",
+          "disposed": false,
+          "state": {
+            "when": 4.973333333333334,
+            "position": 24.703333333333333,
+            "playing": true,
+            "rate": 1.25,
+            "keylock": true,
+            "semitones": 0,
+            "effectiveSemitones": 0
+          },
+          "sourceGeometry": [
+            {
+              "index": 0,
+              "sampleRate": 22050,
+              "frames": 1058400,
+              "channels": 2,
+              "duration": 48,
+              "paddedTailSeconds": 0,
+              "trimmedTailSeconds": 0,
+              "decodedBytes": 8467200
+            }
+          ],
+          "groups": [
+            {
+              "id": 2,
+              "origin": 22,
+              "start": 22.5,
+              "end": 33,
+              "nodeCount": 1,
+              "retainedPCMBytes": 4032000,
+              "retainedChunks": 21,
+              "latency": 0.12,
+              "role": "selected"
+            }
+          ],
+          "retainedPCMBytes": 4032000,
+          "inFlightPCMBytes": 0,
+          "decodedBytes": 8467200,
+          "policy": {
+            "direction": "forward",
+            "normalMinimumLead": "queried group latency plus2 render quanta",
+            "followMinimumLeadSeconds": 0.04,
+            "followOwner": "currently active forward owner only",
+            "followCoverage": "required history must already be prepared; reject without replacement",
+            "rate": [
+              0.25,
+              4
+            ],
+            "effectiveSemitones": [
+              -24,
+              24
+            ],
+            "chunkSeconds": 0.5,
+            "requiredPrerollSeconds": 1,
+            "retentionPrerollSeconds": 2,
+            "retentionHysteresisSeconds": 1,
+            "lookaheadSeconds": 8,
+            "driverMs": 50,
+            "crossfadeSeconds": 0.01,
+            "srcTaps": 32,
+            "srcPhases": 1024,
+            "decodedSources": "Whole decoded AudioBuffers remain caller-owned; only processor PCM copies are windowed.",
+            "unsupported": [
+              "reverse",
+              "loop",
+              "Stem Slip",
+              "incremental compressed-file decoding"
+            ],
+            "quality": "Independent32-tap windowed-sinc normalization and10ms group crossfade; vendor sonic equivalence and artifact-free transitions are unverified."
+          },
+          "lastError": null
+        }
+      }
+    },
+    {
+      "name": "Whole-deck raw scratch release restores live keylock through scheduled engine handoff",
+      "passed": false,
+      "evidence": {},
+      "error": "Earlier armed clock gap",
+      "stack": "Error: Earlier armed clock gap\n    at assert (http://127.0.0.1:8768/prototype/keylock-engine-harness.js:4:65)\n    at pcm (http://127.0.0.1:8768/prototype/keylock-engine-harness.js:14:420)\n    at async measured (http://127.0.0.1:8768/prototype/keylock-engine-harness.js:15:63)\n    at async http://127.0.0.1:8768/prototype/keylock-engine-harness.js:29:260\n    at async check (http://127.0.0.1:8768/prototype/keylock-engine-harness.js:11:54)\n    at async run (http://127.0.0.1:8768/prototype/keylock-engine-harness.js:29:3)\n    at async $.onclick (http://127.0.0.1:8768/prototype/keylock-engine-harness.js:66:57)"
+    },
+    {
+      "name": "Shifted stationary release preserves requested pitch from release request without raw bridge",
+      "passed": false,
+      "evidence": {},
+      "error": "Earlier armed clock gap",
+      "stack": "Error: Earlier armed clock gap\n    at assert (http://127.0.0.1:8768/prototype/keylock-engine-harness.js:4:65)\n    at pcm (http://127.0.0.1:8768/prototype/keylock-engine-harness.js:14:420)\n    at async measured (http://127.0.0.1:8768/prototype/keylock-engine-harness.js:15:63)\n    at async http://127.0.0.1:8768/prototype/keylock-engine-harness.js:32:17\n    at async check (http://127.0.0.1:8768/prototype/keylock-engine-harness.js:11:54)\n    at async run (http://127.0.0.1:8768/prototype/keylock-engine-harness.js:30:3)\n    at async $.onclick (http://127.0.0.1:8768/prototype/keylock-engine-harness.js:66:57)"
+    },
+    {
+      "name": "Actual five-source engine handoff transfers sole history output and keeps selected vocal level",
+      "passed": false,
+      "evidence": {},
+      "error": "Earlier armed clock gap",
+      "stack": "Error: Earlier armed clock gap\n    at assert (http://127.0.0.1:8768/prototype/keylock-engine-harness.js:4:65)\n    at pcm (http://127.0.0.1:8768/prototype/keylock-engine-harness.js:14:420)\n    at async measured (http://127.0.0.1:8768/prototype/keylock-engine-harness.js:15:63)\n    at async http://127.0.0.1:8768/prototype/keylock-engine-harness.js:52:17\n    at async check (http://127.0.0.1:8768/prototype/keylock-engine-harness.js:11:54)\n    at async run (http://127.0.0.1:8768/prototype/keylock-engine-harness.js:49:3)\n    at async $.onclick (http://127.0.0.1:8768/prototype/keylock-engine-harness.js:66:57)"
+    },
+    {
+      "name": "Pause cancels current/future engine voice, pending ownership and retiring groups while control survives",
+      "passed": false,
+      "evidence": {},
+      "error": "Earlier armed clock gap",
+      "stack": "Error: Earlier armed clock gap\n    at assert (http://127.0.0.1:8768/prototype/keylock-engine-harness.js:4:65)\n    at pcm (http://127.0.0.1:8768/prototype/keylock-engine-harness.js:14:420)\n    at async measured (http://127.0.0.1:8768/prototype/keylock-engine-harness.js:15:63)\n    at async http://127.0.0.1:8768/prototype/keylock-engine-harness.js:57:187\n    at async check (http://127.0.0.1:8768/prototype/keylock-engine-harness.js:11:54)\n    at async run (http://127.0.0.1:8768/prototype/keylock-engine-harness.js:57:3)\n    at async $.onclick (http://127.0.0.1:8768/prototype/keylock-engine-harness.js:66:57)"
+    }
+  ],
+  "fatalErrors": [
+    {
+      "phase": "capture integrity",
+      "label": "engine-deck-bus",
+      "error": "Unarmed or discontinuous capture",
+      "errors": [
+        {
+          "previousFrame": 267136,
+          "actualFrame": 267136,
+          "sequence": 2078
+        },
+        {
+          "previousFrame": 267136,
+          "actualFrame": 267392,
+          "sequence": 2079
+        }
+      ],
+      "preflight": {
+        "type": "preflight",
+        "id": "engine-deck-bus-preflight-1",
+        "firstFrame": 2560,
+        "lastFrame": 10752,
+        "consecutive": 64,
+        "startupGaps": []
+      },
+      "arm": {
+        "type": "armed",
+        "id": "engine-deck-bus-arm-2",
+        "firstFrame": 10752,
+        "firstSequence": 74,
+        "startupGaps": []
+      },
+      "fence": {
+        "type": "finished",
+        "id": "engine-deck-bus-finish-3",
+        "lastFrame": 387968,
+        "lastSequence": 3020
+      }
+    },
+    {
+      "phase": "capture integrity",
+      "label": "independent-control",
+      "error": "Unarmed or discontinuous capture",
+      "errors": [
+        {
+          "previousFrame": 267136,
+          "actualFrame": 267136,
+          "sequence": 2078
+        },
+        {
+          "previousFrame": 267136,
+          "actualFrame": 267392,
+          "sequence": 2079
+        }
+      ],
+      "preflight": {
+        "type": "preflight",
+        "id": "independent-control-preflight-1",
+        "firstFrame": 2560,
+        "lastFrame": 10752,
+        "consecutive": 64,
+        "startupGaps": []
+      },
+      "arm": {
+        "type": "armed",
+        "id": "independent-control-arm-2",
+        "firstFrame": 10752,
+        "firstSequence": 74,
+        "startupGaps": []
+      },
+      "fence": {
+        "type": "finished",
+        "id": "independent-control-finish-3",
+        "lastFrame": 388224,
+        "lastSequence": 3022
+      }
+    },
+    {
+      "phase": "capture integrity",
+      "label": "silent-pull-output",
+      "error": "Unarmed or discontinuous capture",
+      "errors": [
+        {
+          "previousFrame": 267136,
+          "actualFrame": 267136,
+          "sequence": 2078
+        },
+        {
+          "previousFrame": 267136,
+          "actualFrame": 267392,
+          "sequence": 2079
+        },
+        {
+          "previousFrame": 388096,
+          "actualFrame": 388096,
+          "sequence": 3023
+        },
+        {
+          "previousFrame": 388096,
+          "actualFrame": 388352,
+          "sequence": 3024
+        }
+      ],
+      "preflight": {
+        "type": "preflight",
+        "id": "silent-pull-output-preflight-1",
+        "firstFrame": 2560,
+        "lastFrame": 10752,
+        "consecutive": 64,
+        "startupGaps": []
+      },
+      "arm": {
+        "type": "armed",
+        "id": "silent-pull-output-arm-2",
+        "firstFrame": 10752,
+        "firstSequence": 74,
+        "startupGaps": []
+      },
+      "fence": {
+        "type": "finished",
+        "id": "silent-pull-output-finish-3",
+        "lastFrame": 388480,
+        "lastSequence": 3024
+      }
+    },
+    {
+      "phase": "capture integrity",
+      "label": "shadow-pre-gate",
+      "error": "Unarmed or discontinuous capture",
+      "errors": [
+        {
+          "previousFrame": 267136,
+          "actualFrame": 267136,
+          "sequence": 2078
+        },
+        {
+          "previousFrame": 267136,
+          "actualFrame": 267392,
+          "sequence": 2079
+        },
+        {
+          "previousFrame": 388096,
+          "actualFrame": 388096,
+          "sequence": 3023
+        },
+        {
+          "previousFrame": 388096,
+          "actualFrame": 388352,
+          "sequence": 3024
+        }
+      ],
+      "preflight": {
+        "type": "preflight",
+        "id": "shadow-pre-gate-preflight-1",
+        "firstFrame": 2560,
+        "lastFrame": 10752,
+        "consecutive": 64,
+        "startupGaps": []
+      },
+      "arm": {
+        "type": "armed",
+        "id": "shadow-pre-gate-arm-2",
+        "firstFrame": 10752,
+        "firstSequence": 74,
+        "startupGaps": []
+      },
+      "fence": {
+        "type": "finished",
+        "id": "shadow-pre-gate-finish-3",
+        "lastFrame": 388736,
+        "lastSequence": 3026
+      }
+    }
+  ],
+  "sampleRate": 48000,
+  "startedAt": "2026-10-17T10:08:48.416Z",
+  "scope": "Actual production AudioEngine start/rate/pitch/seek/scratch-release methods with actual WASM and routed captured PCM. No native/hardware, reverse/loop/StemSlip live integration, decoded-memory or vendor sonic-quality acceptance.",
+  "sourceHashes": {
+    "engine.js": "f08598c9af95048fe0c6d66239d6b6da5283be4f13e0bf1cf12f8f33d23f93b2",
+    "keylock-shadow-live.js": "4860d18ec3ccf39474824cbf9d46df259b110631b4c2cfde60c9a1d03e21504b",
+    "keylock-scratch-shadow.js": "6e4f0d8e108705676944722ea625959b4477fb40c91c8024a3d7d48b24c6ed31",
+    "silent-audio-pull.js": "44e0999cde51efa66708adf8ffd7a4c466d35f819b163b4730ce04f4d9be1c00",
+    "silent-audio-pull-worklet.js": "00f8d094b63f3eab16874fedf576edf1eec316706e2d7e88c4371d7c9f26f73b",
+    "deck-scratch-cache.js": "04ea486f7010df479184d629c14ea3f8cdd81ef595c5d8233c8e407890e2fa99",
+    "keylock-release-analysis.js": "2957a90303441cade061107affaee8b3ae4b68d3724fff72a5a9ca1ac30b6e5f",
+    "keylock-engine-harness.js": "f5aae828a61cbe27b8c3c255fe5da2dac4db683642e0ce561a9d3302c19f28f9"
+  },
+  "budgets": {
+    "pitchRelative": 0.01,
+    "rateEnvelopeHz": 0.15,
+    "releaseMaximumBelow005Ms": 20
+  },
+  "captureIntegrity": [],
+  "passed": 3,
+  "failed": 4,
+  "completed": false,
+  "durationMs": 8095.599999904633
+}

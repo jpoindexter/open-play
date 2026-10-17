@@ -1,0 +1,116 @@
+{
+  "passed": 9,
+  "failed": 0,
+  "sourceHashes": {
+    "engine": "f08598c9af95048fe0c6d66239d6b6da5283be4f13e0bf1cf12f8f33d23f93b2",
+    "lease": "6e4f0d8e108705676944722ea625959b4477fb40c91c8024a3d7d48b24c6ed31",
+    "rawWrapper": "0f875b8ed8a2f0b0373455e8758fe150be937fa3311a6b35142a7d15622f189a",
+    "rawKernel": "428c677a90114d6a23479ad0789825c7cd45bcaed3806fbafec32aba6a68d08c"
+  },
+  "scope": "Actual AudioEngine, shadow lease, raw scratch wrapper and PCM kernel; controlled serial raw ports, live adapter promises and graph/history nodes. No actual WASM/native graph audio, browser scheduling, captured cursor/pitch or vendor quality acceptance.",
+  "checks": [
+    {
+      "name": "Actual engine transfers five-source history gain ownership raw→live exactly once",
+      "passed": true,
+      "evidence": {
+        "historyRoutes": 4,
+        "sameGainsPreserved": true,
+        "liveAdapterDisposed": false
+      }
+    },
+    {
+      "name": "Late alignment from old End cannot adopt over a newer Begin on the same shadow",
+      "passed": true,
+      "evidence": {
+        "currentOwner": "fresh",
+        "oldEndAdopted": false
+      }
+    },
+    {
+      "name": "Pending reused Begin plus End then newer Begin cannot revive an older closing owner",
+      "passed": true,
+      "evidence": {
+        "owner": "next",
+        "rawProtocol": [
+          {
+            "type": "begin",
+            "owner": "first"
+          },
+          {
+            "type": "begin",
+            "owner": "slow"
+          },
+          {
+            "type": "end",
+            "owner": "slow"
+          },
+          {
+            "type": "end",
+            "owner": "slow"
+          },
+          {
+            "type": "begin",
+            "owner": "next"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Pause during a far rebase retires both owners and stale completion cannot adopt",
+      "passed": true,
+      "evidence": {
+        "staleRebaseAdopted": false,
+        "paused": true
+      }
+    },
+    {
+      "name": "Prepared silent-pull failure before raw Begin commit cannot become an owned healthy shadow",
+      "passed": true,
+      "evidence": {
+        "beginResult": null,
+        "beginError": {
+          "name": "Error",
+          "message": "Prepared pull processor failed"
+        },
+        "shadowOwnsFailedPull": false,
+        "errors": []
+      }
+    },
+    {
+      "name": "Natural live source end while raw Begin is pending cannot revive expired live playback",
+      "passed": true,
+      "evidence": {
+        "beginResult": false,
+        "playingAfterEnd": false,
+        "shadowOwnsDisposedAdapter": false,
+        "endEvents": 1
+      }
+    },
+    {
+      "name": "Track/config replacement blocks stale alignment and does not overwrite replacement cursor",
+      "passed": true,
+      "evidence": {
+        "checked": [
+          "track",
+          "configuration"
+        ]
+      }
+    },
+    {
+      "name": "Superseded far-return preparation cannot issue another alignment command under a newer pending Begin",
+      "passed": true,
+      "evidence": {
+        "newOwner": "fresh",
+        "extraOldAlignmentCommands": []
+      }
+    },
+    {
+      "name": "Current processor error retires only its deck while late old error cannot touch replacement",
+      "passed": true,
+      "evidence": {
+        "otherDeckPreserved": true,
+        "replacementPreserved": true
+      }
+    }
+  ]
+}

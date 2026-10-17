@@ -1,0 +1,1358 @@
+{
+  "originalChecks": 19,
+  "followContractChecks": 10,
+  "inheritedClassifierCaptureSHA256": "2d6d993026d6d6d1b9914477d6611e713c9813d15b957794ae845b7e18ff36eb",
+  "passed": 29,
+  "failed": 0,
+  "moduleSHA256": "4860d18ec3ccf39474824cbf9d46df259b110631b4c2cfde60c9a1d03e21504b",
+  "checks": [
+    {
+      "name": "SRC normalizes22050→48000 with exact adjacent-chunk phase, original pitch and bounded boundary padding",
+      "passed": true,
+      "evidence": {
+        "maximumAdjacentDifference": 0,
+        "signal": {
+          "rms": 0.08485640285677508,
+          "peak": 0.12000812590122223,
+          "hz": 439.9999821757836
+        },
+        "sourceFrames": 44100,
+        "outputFrames": 48000,
+        "tailAfterHaloZero": true
+      }
+    },
+    {
+      "name": "Downsampling96kHz applies actual antialias filtering instead of aliasing35kHz into13kHz",
+      "passed": true,
+      "evidence": {
+        "pass": {
+          "rms": 0.08484502249927145,
+          "peak": 0.11999756097793579,
+          "hz": 1000
+        },
+        "stop": {
+          "rms": 0.00005846639574493697,
+          "peak": 0.00008268475357908756,
+          "hz": 13000.004323975114
+        },
+        "attenuationDB": -63.23440094579268
+      }
+    },
+    {
+      "name": "Same-rate8-channel copying preserves channel order and explicit out-of-range zero geometry",
+      "passed": true,
+      "evidence": {
+        "channels": 8
+      }
+    },
+    {
+      "name": "Chunk SRC yields and checks cancellation before producing a completed chunk",
+      "passed": true,
+      "evidence": {
+        "yields": 1
+      }
+    },
+    {
+      "name": "Five positional sources preserve actual engine geometry/order and report permitted boundary silence",
+      "passed": true,
+      "evidence": {
+        "geometry": [
+          {
+            "index": 0,
+            "sampleRate": 22050,
+            "frames": 264600,
+            "channels": 2,
+            "duration": 12,
+            "paddedTailSeconds": 0,
+            "trimmedTailSeconds": 0,
+            "decodedBytes": 2116800
+          },
+          {
+            "index": 1,
+            "sampleRate": 48000,
+            "frames": 573600,
+            "channels": 2,
+            "duration": 11.95,
+            "paddedTailSeconds": 0.05000000000000071,
+            "trimmedTailSeconds": 0,
+            "decodedBytes": 4588800
+          },
+          {
+            "index": 2,
+            "sampleRate": 48000,
+            "frames": 573600,
+            "channels": 2,
+            "duration": 11.95,
+            "paddedTailSeconds": 0.05000000000000071,
+            "trimmedTailSeconds": 0,
+            "decodedBytes": 4588800
+          },
+          {
+            "index": 3,
+            "sampleRate": 48000,
+            "frames": 573600,
+            "channels": 2,
+            "duration": 11.95,
+            "paddedTailSeconds": 0.05000000000000071,
+            "trimmedTailSeconds": 0,
+            "decodedBytes": 4588800
+          },
+          {
+            "index": 4,
+            "sampleRate": 48000,
+            "frames": 573600,
+            "channels": 2,
+            "duration": 11.95,
+            "paddedTailSeconds": 0.05000000000000071,
+            "trimmedTailSeconds": 0,
+            "decodedBytes": 4588800
+          }
+        ],
+        "tones": [
+          {
+            "rms": 0.08471768210146517,
+            "peak": 0.12020575255155563,
+            "hz": 330.3944921834008
+          },
+          {
+            "rms": 0.0847931987616352,
+            "peak": 0.12011638283729553,
+            "hz": 440.39200744433197
+          },
+          {
+            "rms": 0.08471682650509607,
+            "peak": 0.12010776251554489,
+            "hz": 550.4023280557045
+          },
+          {
+            "rms": 0.0847355710718656,
+            "peak": 0.12007871270179749,
+            "hz": 660.4332184807824
+          },
+          {
+            "rms": 0.08468512813026755,
+            "peak": 0.12005108594894409,
+            "hz": 770.4698227202614
+          }
+        ],
+        "retainedPCMBytes": 15360000
+      }
+    },
+    {
+      "name": "Live realWASM rates1→1.25→.8 and keyshift retain pitch without whole-track output render",
+      "passed": true,
+      "evidence": {
+        "observed": [
+          {
+            "rms": 0.0847851945479155,
+            "peak": 0.12006521970033646,
+            "hz": 440.3911717406467
+          },
+          {
+            "rms": 0.08474914001565406,
+            "peak": 0.12027449160814285,
+            "hz": 440.35513117951524
+          },
+          {
+            "rms": 0.08477939707289296,
+            "peak": 0.12022041529417038,
+            "hz": 440.41275076045736
+          },
+          {
+            "rms": 0.08206037622836437,
+            "peak": 0.11693993955850601,
+            "hz": 881.1366345852159
+          }
+        ],
+        "acks": [
+          {
+            "when": 0.12533333333333332,
+            "position": 0,
+            "playing": true,
+            "rate": 1,
+            "keylock": true,
+            "semitones": 0,
+            "effectiveSemitones": 0,
+            "group": 1,
+            "origin": 0,
+            "latencyLead": 0.12,
+            "operationKind": "normal",
+            "minimumLeadSeconds": 0.12533333333333332,
+            "scheduleIssuedAt": 0,
+            "scheduleAcknowledgedAt": 0,
+            "transitionSeconds": 0,
+            "superseded": false
+          },
+          {
+            "when": 0.9013333333333333,
+            "position": 0.776,
+            "playing": true,
+            "rate": 1.25,
+            "keylock": true,
+            "semitones": 0,
+            "effectiveSemitones": 0,
+            "group": 1,
+            "origin": 0,
+            "latencyLead": 0.12,
+            "operationKind": "normal",
+            "minimumLeadSeconds": 0.12533333333333332,
+            "scheduleIssuedAt": 0.776,
+            "scheduleAcknowledgedAt": 0.776,
+            "transitionSeconds": 0,
+            "superseded": false
+          },
+          {
+            "when": 1.6773333333333333,
+            "position": 1.746,
+            "playing": true,
+            "rate": 0.8,
+            "keylock": true,
+            "semitones": 0,
+            "effectiveSemitones": 0,
+            "group": 1,
+            "origin": 0,
+            "latencyLead": 0.12,
+            "operationKind": "normal",
+            "minimumLeadSeconds": 0.12533333333333332,
+            "scheduleIssuedAt": 1.552,
+            "scheduleAcknowledgedAt": 1.552,
+            "transitionSeconds": 0,
+            "superseded": false
+          },
+          {
+            "when": 2.453333333333333,
+            "position": 2.3668,
+            "playing": true,
+            "rate": 0.8,
+            "keylock": true,
+            "semitones": 12,
+            "effectiveSemitones": 12,
+            "group": 1,
+            "origin": 0,
+            "latencyLead": 0.12,
+            "operationKind": "normal",
+            "minimumLeadSeconds": 0.12533333333333332,
+            "scheduleIssuedAt": 2.328,
+            "scheduleAcknowledgedAt": 2.328,
+            "transitionSeconds": 0,
+            "superseded": false
+          }
+        ],
+        "snapshot": {
+          "followMinimumLeadSeconds": 0.04,
+          "byteAccounting": "Acknowledged retained PCM and in-flight chunk copies only; excludes decoded inputs, SRC tables and opaque WASM heaps.",
+          "disposed": false,
+          "state": {
+            "when": 2.453333333333333,
+            "position": 2.8873333333333338,
+            "playing": true,
+            "rate": 0.8,
+            "keylock": true,
+            "semitones": 12,
+            "effectiveSemitones": 12
+          },
+          "sourceGeometry": [
+            {
+              "index": 0,
+              "sampleRate": 22050,
+              "frames": 705600,
+              "channels": 2,
+              "duration": 32,
+              "paddedTailSeconds": 0,
+              "trimmedTailSeconds": 0,
+              "decodedBytes": 5644800
+            }
+          ],
+          "groups": [
+            {
+              "id": 1,
+              "origin": 0,
+              "start": 0,
+              "end": 10.5,
+              "nodeCount": 1,
+              "retainedPCMBytes": 4032000,
+              "retainedChunks": 21,
+              "latency": 0.12,
+              "role": "selected"
+            }
+          ],
+          "retainedPCMBytes": 4032000,
+          "inFlightPCMBytes": 0,
+          "decodedBytes": 5644800,
+          "policy": {
+            "direction": "forward",
+            "normalMinimumLead": "queried group latency plus2 render quanta",
+            "followMinimumLeadSeconds": 0.04,
+            "followOwner": "currently active forward owner only",
+            "followCoverage": "required history must already be prepared; reject without replacement",
+            "rate": [
+              0.25,
+              4
+            ],
+            "effectiveSemitones": [
+              -24,
+              24
+            ],
+            "chunkSeconds": 0.5,
+            "requiredPrerollSeconds": 1,
+            "retentionPrerollSeconds": 2,
+            "retentionHysteresisSeconds": 1,
+            "lookaheadSeconds": 8,
+            "driverMs": 50,
+            "crossfadeSeconds": 0.01,
+            "srcTaps": 32,
+            "srcPhases": 1024,
+            "decodedSources": "Whole decoded AudioBuffers remain caller-owned; only processor PCM copies are windowed.",
+            "unsupported": [
+              "reverse",
+              "loop",
+              "Stem Slip",
+              "incremental compressed-file decoding"
+            ],
+            "quality": "Independent32-tap windowed-sinc normalization and10ms group crossfade; vendor sonic equivalence and artifact-free transitions are unverified."
+          },
+          "lastError": null
+        }
+      }
+    },
+    {
+      "name": "Near seek reuses current nodes; far seek rebases bounded window behind stable output identity",
+      "passed": true,
+      "evidence": {
+        "near": {
+          "when": 0.752,
+          "position": 1.5,
+          "playing": true,
+          "rate": 1,
+          "keylock": true,
+          "semitones": 0,
+          "effectiveSemitones": 0,
+          "group": 1,
+          "origin": 0,
+          "latencyLead": 0.12,
+          "operationKind": "normal",
+          "minimumLeadSeconds": 0.12533333333333332,
+          "scheduleIssuedAt": 0.6266666666666667,
+          "scheduleAcknowledgedAt": 0.6266666666666667,
+          "transitionSeconds": 0,
+          "superseded": false
+        },
+        "far": {
+          "when": 1.3786666666666667,
+          "position": 20,
+          "playing": true,
+          "rate": 1,
+          "keylock": true,
+          "semitones": 0,
+          "effectiveSemitones": 0,
+          "group": 2,
+          "origin": 18,
+          "latencyLead": 0.12,
+          "operationKind": "normal",
+          "minimumLeadSeconds": 0.12533333333333332,
+          "scheduleIssuedAt": 1.2533333333333334,
+          "scheduleAcknowledgedAt": 1.2533333333333334,
+          "transitionSeconds": 0.01,
+          "superseded": false
+        },
+        "tone": {
+          "rms": 0.08465089535431612,
+          "peak": 0.12011315673589706,
+          "hz": 880.5046489043477
+        },
+        "retired": true,
+        "snapshot": {
+          "followMinimumLeadSeconds": 0.04,
+          "byteAccounting": "Acknowledged retained PCM and in-flight chunk copies only; excludes decoded inputs, SRC tables and opaque WASM heaps.",
+          "disposed": false,
+          "state": {
+            "when": 1.3786666666666667,
+            "position": 20.650666666666666,
+            "playing": true,
+            "rate": 1,
+            "keylock": true,
+            "semitones": 0,
+            "effectiveSemitones": 0
+          },
+          "sourceGeometry": [
+            {
+              "index": 0,
+              "sampleRate": 48000,
+              "frames": 1536000,
+              "channels": 2,
+              "duration": 32,
+              "paddedTailSeconds": 0,
+              "trimmedTailSeconds": 0,
+              "decodedBytes": 12288000
+            }
+          ],
+          "groups": [
+            {
+              "id": 2,
+              "origin": 18,
+              "start": 18.5,
+              "end": 29,
+              "nodeCount": 1,
+              "retainedPCMBytes": 4032000,
+              "retainedChunks": 21,
+              "latency": 0.12,
+              "role": "selected"
+            }
+          ],
+          "retainedPCMBytes": 4032000,
+          "inFlightPCMBytes": 0,
+          "decodedBytes": 12288000,
+          "policy": {
+            "direction": "forward",
+            "normalMinimumLead": "queried group latency plus2 render quanta",
+            "followMinimumLeadSeconds": 0.04,
+            "followOwner": "currently active forward owner only",
+            "followCoverage": "required history must already be prepared; reject without replacement",
+            "rate": [
+              0.25,
+              4
+            ],
+            "effectiveSemitones": [
+              -24,
+              24
+            ],
+            "chunkSeconds": 0.5,
+            "requiredPrerollSeconds": 1,
+            "retentionPrerollSeconds": 2,
+            "retentionHysteresisSeconds": 1,
+            "lookaheadSeconds": 8,
+            "driverMs": 50,
+            "crossfadeSeconds": 0.01,
+            "srcTaps": 32,
+            "srcPhases": 1024,
+            "decodedSources": "Whole decoded AudioBuffers remain caller-owned; only processor PCM copies are windowed.",
+            "unsupported": [
+              "reverse",
+              "loop",
+              "Stem Slip",
+              "incremental compressed-file decoding"
+            ],
+            "quality": "Independent32-tap windowed-sinc normalization and10ms group crossfade; vendor sonic equivalence and artifact-free transitions are unverified."
+          },
+          "lastError": null
+        }
+      }
+    },
+    {
+      "name": "Forward refill drops whole old chunks and bounds retained copies while source clock advances",
+      "passed": true,
+      "evidence": {
+        "maximumPCMBytes": 4032000,
+        "snapshot": {
+          "followMinimumLeadSeconds": 0.04,
+          "byteAccounting": "Acknowledged retained PCM and in-flight chunk copies only; excludes decoded inputs, SRC tables and opaque WASM heaps.",
+          "disposed": false,
+          "state": {
+            "when": 0.12533333333333332,
+            "position": 15.541333333333332,
+            "playing": true,
+            "rate": 4,
+            "keylock": true,
+            "semitones": 0,
+            "effectiveSemitones": 0
+          },
+          "sourceGeometry": [
+            {
+              "index": 0,
+              "sampleRate": 48000,
+              "frames": 2304000,
+              "channels": 2,
+              "duration": 48,
+              "paddedTailSeconds": 0,
+              "trimmedTailSeconds": 0,
+              "decodedBytes": 18432000
+            }
+          ],
+          "groups": [
+            {
+              "id": 1,
+              "origin": 0,
+              "start": 13.5,
+              "end": 24,
+              "nodeCount": 1,
+              "retainedPCMBytes": 4032000,
+              "retainedChunks": 21,
+              "latency": 0.12,
+              "role": "selected"
+            }
+          ],
+          "retainedPCMBytes": 4032000,
+          "inFlightPCMBytes": 0,
+          "decodedBytes": 18432000,
+          "policy": {
+            "direction": "forward",
+            "normalMinimumLead": "queried group latency plus2 render quanta",
+            "followMinimumLeadSeconds": 0.04,
+            "followOwner": "currently active forward owner only",
+            "followCoverage": "required history must already be prepared; reject without replacement",
+            "rate": [
+              0.25,
+              4
+            ],
+            "effectiveSemitones": [
+              -24,
+              24
+            ],
+            "chunkSeconds": 0.5,
+            "requiredPrerollSeconds": 1,
+            "retentionPrerollSeconds": 2,
+            "retentionHysteresisSeconds": 1,
+            "lookaheadSeconds": 8,
+            "driverMs": 50,
+            "crossfadeSeconds": 0.01,
+            "srcTaps": 32,
+            "srcPhases": 1024,
+            "decodedSources": "Whole decoded AudioBuffers remain caller-owned; only processor PCM copies are windowed.",
+            "unsupported": [
+              "reverse",
+              "loop",
+              "Stem Slip",
+              "incremental compressed-file decoding"
+            ],
+            "quality": "Independent32-tap windowed-sinc normalization and10ms group crossfade; vendor sonic equivalence and artifact-free transitions are unverified."
+          },
+          "lastError": null
+        }
+      }
+    },
+    {
+      "name": "Pause before a future start removes its pending audible start and freezes application clock",
+      "passed": true,
+      "evidence": {
+        "signal": {
+          "rms": 0,
+          "peak": 0,
+          "hz": null
+        }
+      }
+    },
+    {
+      "name": "Owner abort before future playback disposes actual nodes and cannot resurrect clock/audio",
+      "passed": true,
+      "evidence": {
+        "nodeCount": 1,
+        "snapshot": {
+          "followMinimumLeadSeconds": 0.04,
+          "byteAccounting": "Acknowledged retained PCM and in-flight chunk copies only; excludes decoded inputs, SRC tables and opaque WASM heaps.",
+          "disposed": true,
+          "state": {
+            "when": 0,
+            "position": 0,
+            "playing": false,
+            "rate": 1,
+            "keylock": true,
+            "semitones": 0,
+            "effectiveSemitones": 0
+          },
+          "sourceGeometry": [
+            {
+              "index": 0,
+              "sampleRate": 48000,
+              "frames": 1536000,
+              "channels": 2,
+              "duration": 32,
+              "paddedTailSeconds": 0,
+              "trimmedTailSeconds": 0,
+              "decodedBytes": 12288000
+            }
+          ],
+          "groups": [],
+          "retainedPCMBytes": 0,
+          "inFlightPCMBytes": 0,
+          "decodedBytes": 12288000,
+          "policy": {
+            "direction": "forward",
+            "normalMinimumLead": "queried group latency plus2 render quanta",
+            "followMinimumLeadSeconds": 0.04,
+            "followOwner": "currently active forward owner only",
+            "followCoverage": "required history must already be prepared; reject without replacement",
+            "rate": [
+              0.25,
+              4
+            ],
+            "effectiveSemitones": [
+              -24,
+              24
+            ],
+            "chunkSeconds": 0.5,
+            "requiredPrerollSeconds": 1,
+            "retentionPrerollSeconds": 2,
+            "retentionHysteresisSeconds": 1,
+            "lookaheadSeconds": 8,
+            "driverMs": 50,
+            "crossfadeSeconds": 0.01,
+            "srcTaps": 32,
+            "srcPhases": 1024,
+            "decodedSources": "Whole decoded AudioBuffers remain caller-owned; only processor PCM copies are windowed.",
+            "unsupported": [
+              "reverse",
+              "loop",
+              "Stem Slip",
+              "incremental compressed-file decoding"
+            ],
+            "quality": "Independent32-tap windowed-sinc normalization and10ms group crossfade; vendor sonic equivalence and artifact-free transitions are unverified."
+          },
+          "lastError": null
+        }
+      }
+    },
+    {
+      "name": "Superseded pending far seek leaves latest owner current and disposes stale preparation",
+      "passed": true,
+      "evidence": {
+        "staleError": "AbortError",
+        "latest": {
+          "when": 0.752,
+          "position": 2,
+          "playing": true,
+          "rate": 1,
+          "keylock": true,
+          "semitones": 0,
+          "effectiveSemitones": 0,
+          "group": 1,
+          "origin": 0,
+          "latencyLead": 0.12,
+          "operationKind": "normal",
+          "minimumLeadSeconds": 0.12533333333333332,
+          "scheduleIssuedAt": 0.6266666666666667,
+          "scheduleAcknowledgedAt": 0.6266666666666667,
+          "transitionSeconds": 0,
+          "superseded": false
+        },
+        "groups": [
+          {
+            "id": 1,
+            "origin": 0,
+            "start": 0,
+            "end": 10,
+            "nodeCount": 1,
+            "retainedPCMBytes": 3840000,
+            "retainedChunks": 20,
+            "latency": 0.12,
+            "role": "selected"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Immediate owner abort during preparation cannot return a late live adapter",
+      "passed": true,
+      "evidence": {
+        "createdNodes": 0,
+        "allDisposed": true
+      }
+    },
+    {
+      "name": "RealWASM8-channel source preserves independent output channels and stable gain geometry",
+      "passed": true,
+      "evidence": {
+        "measured": [
+          {
+            "rms": 0.0847354270802135,
+            "peak": 0.1201067864894867,
+            "hz": 330.3946950643611
+          },
+          {
+            "rms": 0.08474892398867481,
+            "peak": 0.12014803290367126,
+            "hz": 440.3898788621585
+          },
+          {
+            "rms": 0.08474714562682745,
+            "peak": 0.12015832215547562,
+            "hz": 550.4034818172827
+          },
+          {
+            "rms": 0.08473226493919964,
+            "peak": 0.12001976370811462,
+            "hz": 660.4318921112989
+          },
+          {
+            "rms": 0.0847051570325175,
+            "peak": 0.12016075104475021,
+            "hz": 770.470118273678
+          },
+          {
+            "rms": 0.08466921043826157,
+            "peak": 0.12010565400123596,
+            "hz": 880.5047275217187
+          },
+          {
+            "rms": 0.08464252838945424,
+            "peak": 0.12000703811645508,
+            "hz": 990.5292758548436
+          },
+          {
+            "rms": 0.08463782295621089,
+            "peak": 0.12011837214231491,
+            "hz": 1100.5357852476232
+          }
+        ],
+        "outputChannels": 8
+      }
+    },
+    {
+      "name": "Partial active group RPC failure mutes/disposes rather than leaving positional stems out of sync",
+      "passed": true,
+      "evidence": {
+        "allFiveDisposed": true,
+        "errorEvents": [
+          {
+            "name": "OperationError",
+            "message": "Injected actual RPC rejection"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Replacement preparation cancellation after real factory creation retains prior owner and discards candidate",
+      "passed": true,
+      "evidence": {
+        "staleError": "AbortError",
+        "candidateDisposed": true,
+        "priorOwnerRetained": true,
+        "latest": {
+          "when": 0.6506666666666666,
+          "position": 2,
+          "playing": true,
+          "rate": 1,
+          "keylock": true,
+          "semitones": 0,
+          "effectiveSemitones": 0,
+          "group": 1,
+          "origin": 0,
+          "latencyLead": 0.12,
+          "operationKind": "normal",
+          "minimumLeadSeconds": 0.12533333333333332,
+          "scheduleIssuedAt": 0.5253333333333333,
+          "scheduleAcknowledgedAt": 0.5253333333333333,
+          "transitionSeconds": 0,
+          "superseded": false
+        }
+      }
+    },
+    {
+      "name": "Too-late explicit far-seek output rejects and disposes candidate without retiring the prior audible owner",
+      "passed": true,
+      "evidence": {
+        "candidateDisposed": true,
+        "priorOwnerStillAudible": {
+          "rms": 0.08475001578417098,
+          "peak": 0.12013626843690872,
+          "hz": 440.39056016034397
+        }
+      }
+    },
+    {
+      "name": "Missed refill deadline fails explicitly without unbounded gap copying or hidden whole-file fallback",
+      "passed": true,
+      "evidence": {
+        "snapshot": {
+          "followMinimumLeadSeconds": 0.04,
+          "byteAccounting": "Acknowledged retained PCM and in-flight chunk copies only; excludes decoded inputs, SRC tables and opaque WASM heaps.",
+          "disposed": true,
+          "state": {
+            "when": 12,
+            "position": 11.874666666666666,
+            "playing": false,
+            "rate": 1,
+            "keylock": true,
+            "semitones": 0,
+            "effectiveSemitones": 0
+          },
+          "sourceGeometry": [
+            {
+              "index": 0,
+              "sampleRate": 48000,
+              "frames": 2304000,
+              "channels": 2,
+              "duration": 48,
+              "paddedTailSeconds": 0,
+              "trimmedTailSeconds": 0,
+              "decodedBytes": 18432000
+            }
+          ],
+          "groups": [],
+          "retainedPCMBytes": 0,
+          "inFlightPCMBytes": 0,
+          "decodedBytes": 18432000,
+          "policy": {
+            "direction": "forward",
+            "normalMinimumLead": "queried group latency plus2 render quanta",
+            "followMinimumLeadSeconds": 0.04,
+            "followOwner": "currently active forward owner only",
+            "followCoverage": "required history must already be prepared; reject without replacement",
+            "rate": [
+              0.25,
+              4
+            ],
+            "effectiveSemitones": [
+              -24,
+              24
+            ],
+            "chunkSeconds": 0.5,
+            "requiredPrerollSeconds": 1,
+            "retentionPrerollSeconds": 2,
+            "retentionHysteresisSeconds": 1,
+            "lookaheadSeconds": 8,
+            "driverMs": 50,
+            "crossfadeSeconds": 0.01,
+            "srcTaps": 32,
+            "srcPhases": 1024,
+            "decodedSources": "Whole decoded AudioBuffers remain caller-owned; only processor PCM copies are windowed.",
+            "unsupported": [
+              "reverse",
+              "loop",
+              "Stem Slip",
+              "incremental compressed-file decoding"
+            ],
+            "quality": "Independent32-tap windowed-sinc normalization and10ms group crossfade; vendor sonic equivalence and artifact-free transitions are unverified."
+          },
+          "lastError": {
+            "name": "UnderrunError",
+            "message": "Forward clock overtook the bounded processor window"
+          }
+        }
+      }
+    },
+    {
+      "name": "Partial active window append failure terminates the aligned group before a later refill can duplicate it",
+      "passed": true,
+      "evidence": {
+        "allFiveDisposed": true
+      }
+    },
+    {
+      "name": "Owner abort at prepared notification cannot return a disposed adapter through its await boundary",
+      "passed": true,
+      "evidence": {
+        "preparedNotifications": 1,
+        "allNodesDisposed": true
+      }
+    },
+    {
+      "name": "Normal queried-latency guards remain unchanged before and after explicit40ms follow",
+      "passed": true,
+      "evidence": {
+        "normalLead": 0.12533333333333332,
+        "follow": {
+          "when": 0.4666666666666667,
+          "position": 2.4,
+          "playing": true,
+          "rate": 1,
+          "keylock": true,
+          "semitones": 0,
+          "effectiveSemitones": 0,
+          "group": 1,
+          "origin": 0,
+          "latencyLead": 0.12,
+          "operationKind": "follow-seek",
+          "minimumLeadSeconds": 0.04,
+          "scheduleIssuedAt": 0.4266666666666667,
+          "scheduleAcknowledgedAt": 0.4266666666666667,
+          "transitionSeconds": 0,
+          "superseded": false
+        },
+        "normalACKs": [
+          {
+            "when": 0.12533333333333332,
+            "position": 2.4,
+            "playing": true,
+            "rate": 1,
+            "keylock": true,
+            "semitones": 0,
+            "effectiveSemitones": 0,
+            "group": 1,
+            "origin": 0,
+            "latencyLead": 0.12,
+            "operationKind": "normal",
+            "minimumLeadSeconds": 0.12533333333333332,
+            "scheduleIssuedAt": 0,
+            "scheduleAcknowledgedAt": 0,
+            "transitionSeconds": 0,
+            "superseded": false
+          },
+          {
+            "when": 0.552,
+            "position": 2.485333333333333,
+            "playing": true,
+            "rate": 1.08,
+            "keylock": true,
+            "semitones": 0,
+            "effectiveSemitones": 0,
+            "group": 1,
+            "origin": 0,
+            "latencyLead": 0.12,
+            "operationKind": "normal",
+            "minimumLeadSeconds": 0.12533333333333332,
+            "scheduleIssuedAt": 0.4266666666666667,
+            "scheduleAcknowledgedAt": 0.4266666666666667,
+            "transitionSeconds": 0,
+            "superseded": false
+          },
+          {
+            "when": 0.552,
+            "position": 2.5,
+            "playing": true,
+            "rate": 1.08,
+            "keylock": true,
+            "semitones": 0,
+            "effectiveSemitones": 0,
+            "group": 1,
+            "origin": 0,
+            "latencyLead": 0.12,
+            "operationKind": "normal",
+            "minimumLeadSeconds": 0.12533333333333332,
+            "scheduleIssuedAt": 0.4266666666666667,
+            "scheduleAcknowledgedAt": 0.4266666666666667,
+            "transitionSeconds": 0,
+            "superseded": false
+          },
+          {
+            "when": 0.552,
+            "position": 2.5,
+            "playing": true,
+            "rate": 1,
+            "keylock": true,
+            "semitones": 0,
+            "effectiveSemitones": 0,
+            "group": 1,
+            "origin": 0,
+            "latencyLead": 0.12,
+            "operationKind": "normal",
+            "minimumLeadSeconds": 0.12533333333333332,
+            "scheduleIssuedAt": 0.4266666666666667,
+            "scheduleAcknowledgedAt": 0.4266666666666667,
+            "transitionSeconds": 0,
+            "superseded": false
+          }
+        ],
+        "ignoredLegacyLeadOverride": true
+      }
+    },
+    {
+      "name": "Paused and future-start owners refuse follow without activation or clock mutation",
+      "passed": true,
+      "evidence": {
+        "nodesCreated": 1
+      }
+    },
+    {
+      "name": "Actual WASM near follow uses40ms and retains target pitch/stable output owner",
+      "passed": true,
+      "evidence": {
+        "ack": {
+          "when": 0.5653333333333334,
+          "position": 2.4,
+          "playing": true,
+          "rate": 1.08,
+          "keylock": true,
+          "semitones": 12,
+          "effectiveSemitones": 12,
+          "group": 1,
+          "origin": 0,
+          "latencyLead": 0.12,
+          "operationKind": "follow-seek",
+          "minimumLeadSeconds": 0.04,
+          "scheduleIssuedAt": 0.5253333333333333,
+          "scheduleAcknowledgedAt": 0.5253333333333333,
+          "transitionSeconds": 0,
+          "superseded": false
+        },
+        "tone": {
+          "rms": 0.08241465067327775,
+          "peak": 0.11729716509580612,
+          "hz": 880.8324763071656
+        }
+      }
+    },
+    {
+      "name": "Far follow refuses without new group/clock mutation; standard far seek then follow recovers",
+      "passed": true,
+      "evidence": {
+        "refusal": {
+          "name": "FollowCoverageError",
+          "position": 20,
+          "requiredStart": 19,
+          "retainedStart": 0,
+          "retainedEnd": 10.5
+        },
+        "prior": {
+          "rms": 0.08480408248812547,
+          "peak": 0.12009375542402267,
+          "hz": 440.3892279636137
+        },
+        "far": {
+          "when": 0.952,
+          "position": 20,
+          "playing": true,
+          "rate": 1,
+          "keylock": true,
+          "semitones": 0,
+          "effectiveSemitones": 0,
+          "group": 2,
+          "origin": 18,
+          "latencyLead": 0.12,
+          "operationKind": "normal",
+          "minimumLeadSeconds": 0.12533333333333332,
+          "scheduleIssuedAt": 0.8266666666666667,
+          "scheduleAcknowledgedAt": 0.8266666666666667,
+          "transitionSeconds": 0.01,
+          "superseded": false
+        },
+        "follow": {
+          "when": 1.3920000000000001,
+          "position": 20.1,
+          "playing": true,
+          "rate": 1,
+          "keylock": true,
+          "semitones": 0,
+          "effectiveSemitones": 0,
+          "group": 2,
+          "origin": 18,
+          "latencyLead": 0.12,
+          "operationKind": "follow-seek",
+          "minimumLeadSeconds": 0.04,
+          "scheduleIssuedAt": 1.352,
+          "scheduleAcknowledgedAt": 1.352,
+          "transitionSeconds": 0,
+          "superseded": false
+        },
+        "tone": {
+          "rms": 0.08467089776074255,
+          "peak": 0.12013015151023865,
+          "hz": 880.5052490068396
+        }
+      }
+    },
+    {
+      "name": "Follow retention survives normal driver backward sequence but still requires full1s history",
+      "passed": true,
+      "evidence": {
+        "warm": {
+          "followMinimumLeadSeconds": 0.04,
+          "byteAccounting": "Acknowledged retained PCM and in-flight chunk copies only; excludes decoded inputs, SRC tables and opaque WASM heaps.",
+          "disposed": false,
+          "state": {
+            "when": 0.12533333333333332,
+            "position": 2.7013333333333334,
+            "playing": true,
+            "rate": 1,
+            "keylock": true,
+            "semitones": 0,
+            "effectiveSemitones": 0
+          },
+          "sourceGeometry": [
+            {
+              "index": 0,
+              "sampleRate": 48000,
+              "frames": 1536000,
+              "channels": 2,
+              "duration": 32,
+              "paddedTailSeconds": 0,
+              "trimmedTailSeconds": 0,
+              "decodedBytes": 12288000
+            }
+          ],
+          "groups": [
+            {
+              "id": 1,
+              "origin": 0,
+              "start": 0.5,
+              "end": 11,
+              "nodeCount": 1,
+              "retainedPCMBytes": 4032000,
+              "retainedChunks": 21,
+              "latency": 0.12,
+              "role": "selected"
+            }
+          ],
+          "retainedPCMBytes": 4032000,
+          "inFlightPCMBytes": 0,
+          "decodedBytes": 12288000,
+          "policy": {
+            "direction": "forward",
+            "normalMinimumLead": "queried group latency plus2 render quanta",
+            "followMinimumLeadSeconds": 0.04,
+            "followOwner": "currently active forward owner only",
+            "followCoverage": "required history must already be prepared; reject without replacement",
+            "rate": [
+              0.25,
+              4
+            ],
+            "effectiveSemitones": [
+              -24,
+              24
+            ],
+            "chunkSeconds": 0.5,
+            "requiredPrerollSeconds": 1,
+            "retentionPrerollSeconds": 2,
+            "retentionHysteresisSeconds": 1,
+            "lookaheadSeconds": 8,
+            "driverMs": 50,
+            "crossfadeSeconds": 0.01,
+            "srcTaps": 32,
+            "srcPhases": 1024,
+            "decodedSources": "Whole decoded AudioBuffers remain caller-owned; only processor PCM copies are windowed.",
+            "unsupported": [
+              "reverse",
+              "loop",
+              "Stem Slip",
+              "incremental compressed-file decoding"
+            ],
+            "quality": "Independent32-tap windowed-sinc normalization and10ms group crossfade; vendor sonic equivalence and artifact-free transitions are unverified."
+          },
+          "lastError": null
+        },
+        "snapshot": {
+          "followMinimumLeadSeconds": 0.04,
+          "byteAccounting": "Acknowledged retained PCM and in-flight chunk copies only; excludes decoded inputs, SRC tables and opaque WASM heaps.",
+          "disposed": false,
+          "state": {
+            "when": 0.7200000000000001,
+            "position": 1.9106666666666665,
+            "playing": true,
+            "rate": 1,
+            "keylock": true,
+            "semitones": 0,
+            "effectiveSemitones": 0
+          },
+          "sourceGeometry": [
+            {
+              "index": 0,
+              "sampleRate": 48000,
+              "frames": 1536000,
+              "channels": 2,
+              "duration": 32,
+              "paddedTailSeconds": 0,
+              "trimmedTailSeconds": 0,
+              "decodedBytes": 12288000
+            }
+          ],
+          "groups": [
+            {
+              "id": 1,
+              "origin": 0,
+              "start": 0.5,
+              "end": 11,
+              "nodeCount": 1,
+              "retainedPCMBytes": 4032000,
+              "retainedChunks": 21,
+              "latency": 0.12,
+              "role": "selected"
+            }
+          ],
+          "retainedPCMBytes": 4032000,
+          "inFlightPCMBytes": 0,
+          "decodedBytes": 12288000,
+          "policy": {
+            "direction": "forward",
+            "normalMinimumLead": "queried group latency plus2 render quanta",
+            "followMinimumLeadSeconds": 0.04,
+            "followOwner": "currently active forward owner only",
+            "followCoverage": "required history must already be prepared; reject without replacement",
+            "rate": [
+              0.25,
+              4
+            ],
+            "effectiveSemitones": [
+              -24,
+              24
+            ],
+            "chunkSeconds": 0.5,
+            "requiredPrerollSeconds": 1,
+            "retentionPrerollSeconds": 2,
+            "retentionHysteresisSeconds": 1,
+            "lookaheadSeconds": 8,
+            "driverMs": 50,
+            "crossfadeSeconds": 0.01,
+            "srcTaps": 32,
+            "srcPhases": 1024,
+            "decodedSources": "Whole decoded AudioBuffers remain caller-owned; only processor PCM copies are windowed.",
+            "unsupported": [
+              "reverse",
+              "loop",
+              "Stem Slip",
+              "incremental compressed-file decoding"
+            ],
+            "quality": "Independent32-tap windowed-sinc normalization and10ms group crossfade; vendor sonic equivalence and artifact-free transitions are unverified."
+          },
+          "lastError": null
+        },
+        "nodesCreated": 1
+      }
+    },
+    {
+      "name": "Same-turn follow supersession rejects stale queued command and keeps latest target",
+      "passed": true,
+      "evidence": {
+        "staleError": "AbortError",
+        "latest": {
+          "when": 0.4666666666666667,
+          "position": 2.7,
+          "playing": true,
+          "rate": 1,
+          "keylock": true,
+          "semitones": 0,
+          "effectiveSemitones": 0,
+          "group": 1,
+          "origin": 0,
+          "latencyLead": 0.12,
+          "operationKind": "follow-seek",
+          "minimumLeadSeconds": 0.04,
+          "scheduleIssuedAt": 0.4266666666666667,
+          "scheduleAcknowledgedAt": 0.4266666666666667,
+          "transitionSeconds": 0,
+          "superseded": false
+        }
+      }
+    },
+    {
+      "name": "Already-issued follow ACK stays explicit when a newer serialized follow supersedes it",
+      "passed": true,
+      "evidence": {
+        "acceptedSuperseded": {
+          "when": 0.4666666666666667,
+          "position": 2.5,
+          "playing": true,
+          "rate": 1,
+          "keylock": true,
+          "semitones": 0,
+          "effectiveSemitones": 0,
+          "group": 1,
+          "origin": 0,
+          "latencyLead": 0.12,
+          "operationKind": "follow-seek",
+          "minimumLeadSeconds": 0.04,
+          "scheduleIssuedAt": 0.4266666666666667,
+          "scheduleAcknowledgedAt": 0.4266666666666667,
+          "transitionSeconds": 0,
+          "superseded": true
+        },
+        "latest": {
+          "when": 0.4666666666666667,
+          "position": 2.7,
+          "playing": true,
+          "rate": 1,
+          "keylock": true,
+          "semitones": 0,
+          "effectiveSemitones": 0,
+          "group": 1,
+          "origin": 0,
+          "latencyLead": 0.12,
+          "operationKind": "follow-seek",
+          "minimumLeadSeconds": 0.04,
+          "scheduleIssuedAt": 0.4266666666666667,
+          "scheduleAcknowledgedAt": 0.4266666666666667,
+          "transitionSeconds": 0,
+          "superseded": false
+        }
+      }
+    },
+    {
+      "name": "Follow rechecks paused ownership at serialized execution after pending pause ACK",
+      "passed": true,
+      "evidence": {
+        "error": "InvalidStateError",
+        "paused": true,
+        "nodesCreated": 1
+      }
+    },
+    {
+      "name": "Follow rechecks ownership after asynchronous fill crosses an already-scheduled pause",
+      "passed": true,
+      "evidence": {
+        "error": "InvalidStateError",
+        "snapshot": {
+          "followMinimumLeadSeconds": 0.04,
+          "byteAccounting": "Acknowledged retained PCM and in-flight chunk copies only; excludes decoded inputs, SRC tables and opaque WASM heaps.",
+          "disposed": false,
+          "state": {
+            "when": 0.5066666666666667,
+            "position": 2.7813333333333334,
+            "playing": false,
+            "rate": 1,
+            "keylock": true,
+            "semitones": 0,
+            "effectiveSemitones": 0
+          },
+          "sourceGeometry": [
+            {
+              "index": 0,
+              "sampleRate": 48000,
+              "frames": 1536000,
+              "channels": 2,
+              "duration": 32,
+              "paddedTailSeconds": 0,
+              "trimmedTailSeconds": 0,
+              "decodedBytes": 12288000
+            }
+          ],
+          "groups": [
+            {
+              "id": 1,
+              "origin": 0,
+              "start": 4,
+              "end": 14.5,
+              "nodeCount": 1,
+              "retainedPCMBytes": 4032000,
+              "retainedChunks": 21,
+              "latency": 0.12,
+              "role": "selected"
+            }
+          ],
+          "retainedPCMBytes": 4032000,
+          "inFlightPCMBytes": 0,
+          "decodedBytes": 12288000,
+          "policy": {
+            "direction": "forward",
+            "normalMinimumLead": "queried group latency plus2 render quanta",
+            "followMinimumLeadSeconds": 0.04,
+            "followOwner": "currently active forward owner only",
+            "followCoverage": "required history must already be prepared; reject without replacement",
+            "rate": [
+              0.25,
+              4
+            ],
+            "effectiveSemitones": [
+              -24,
+              24
+            ],
+            "chunkSeconds": 0.5,
+            "requiredPrerollSeconds": 1,
+            "retentionPrerollSeconds": 2,
+            "retentionHysteresisSeconds": 1,
+            "lookaheadSeconds": 8,
+            "driverMs": 50,
+            "crossfadeSeconds": 0.01,
+            "srcTaps": 32,
+            "srcPhases": 1024,
+            "decodedSources": "Whole decoded AudioBuffers remain caller-owned; only processor PCM copies are windowed.",
+            "unsupported": [
+              "reverse",
+              "loop",
+              "Stem Slip",
+              "incremental compressed-file decoding"
+            ],
+            "quality": "Independent32-tap windowed-sinc normalization and10ms group crossfade; vendor sonic equivalence and artifact-free transitions are unverified."
+          },
+          "lastError": null
+        }
+      }
+    },
+    {
+      "name": "Owner abort during held follow RPC disposes and cannot return a late live ACK",
+      "passed": true,
+      "evidence": {
+        "error": "AbortError",
+        "allDisposed": true
+      }
+    }
+  ],
+  "scope": "Pure chunk SRC plus real unchanged Signalsmith WASM/processor and exact adapter over serial Node AudioWorklet/message bridge, AudioBuffer-shaped fixture collaborator and simplified gain graph. Does not establish native AudioBuffer/WebAudio scheduling, actual browser onset/transition quality, CPU, heap/GC or production engine integration."
+}

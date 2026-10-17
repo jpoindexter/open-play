@@ -1,0 +1,131 @@
+{
+  "scope": "Parent raw release bytes and source/fence inspection; not independent spectral reclassification, earliest source cursor, musical/reference/native acceptance.",
+  "runtimeSourceHashes": [
+    {
+      "file": "engine.js",
+      "runtimeSHA256": "74434df2b0f0bca5ff66cdd1e08db54e3a3ba0cdb24a6a0cde35d3e9515b7a2a",
+      "diskSHA256": "74434df2b0f0bca5ff66cdd1e08db54e3a3ba0cdb24a6a0cde35d3e9515b7a2a",
+      "matches": true
+    },
+    {
+      "file": "keylock-shadow-live.js",
+      "runtimeSHA256": "4860d18ec3ccf39474824cbf9d46df259b110631b4c2cfde60c9a1d03e21504b",
+      "diskSHA256": "4860d18ec3ccf39474824cbf9d46df259b110631b4c2cfde60c9a1d03e21504b",
+      "matches": true
+    },
+    {
+      "file": "keylock-scratch-shadow.js",
+      "runtimeSHA256": "55fb7ba9e1932fdedaa6fd192c5d3f1c43c34437c15326cf62e7045c73d0e90b",
+      "diskSHA256": "55fb7ba9e1932fdedaa6fd192c5d3f1c43c34437c15326cf62e7045c73d0e90b",
+      "matches": true
+    },
+    {
+      "file": "silent-audio-pull.js",
+      "runtimeSHA256": "44e0999cde51efa66708adf8ffd7a4c466d35f819b163b4730ce04f4d9be1c00",
+      "diskSHA256": "44e0999cde51efa66708adf8ffd7a4c466d35f819b163b4730ce04f4d9be1c00",
+      "matches": true
+    },
+    {
+      "file": "silent-audio-pull-worklet.js",
+      "runtimeSHA256": "00f8d094b63f3eab16874fedf576edf1eec316706e2d7e88c4371d7c9f26f73b",
+      "diskSHA256": "00f8d094b63f3eab16874fedf576edf1eec316706e2d7e88c4371d7c9f26f73b",
+      "matches": true
+    },
+    {
+      "file": "deck-scratch-cache.js",
+      "runtimeSHA256": "04ea486f7010df479184d629c14ea3f8cdd81ef595c5d8233c8e407890e2fa99",
+      "diskSHA256": "04ea486f7010df479184d629c14ea3f8cdd81ef595c5d8233c8e407890e2fa99",
+      "matches": true
+    },
+    {
+      "file": "keylock-release-analysis.js",
+      "runtimeSHA256": "2957a90303441cade061107affaee8b3ae4b68d3724fff72a5a9ca1ac30b6e5f",
+      "diskSHA256": "2957a90303441cade061107affaee8b3ae4b68d3724fff72a5a9ca1ac30b6e5f",
+      "matches": true
+    },
+    {
+      "file": "keylock-engine-harness.js",
+      "runtimeSHA256": "f5aae828a61cbe27b8c3c255fe5da2dac4db683642e0ce561a9d3302c19f28f9",
+      "diskSHA256": "f5aae828a61cbe27b8c3c255fe5da2dac4db683642e0ce561a9d3302c19f28f9",
+      "matches": true
+    }
+  ],
+  "allSourcesMatch": true,
+  "rawRelease": {
+    "frames": 28800,
+    "expectedFrames": 28800,
+    "sha256": "a822df51d9154b429b6e7705c4f8bd0ed55f1f15d737d1b708daf7f8c22c3adc",
+    "hashMatches": true,
+    "allFinite": true,
+    "peak": 0.17072567343711853
+  },
+  "captureFences": [
+    {
+      "label": "engine-deck-bus",
+      "coverage": 1,
+      "frames": 600960,
+      "sequenceBlocks": 4695,
+      "reportedBlocks": 4695,
+      "matches": true
+    },
+    {
+      "label": "independent-control",
+      "coverage": 1,
+      "frames": 602496,
+      "sequenceBlocks": 4707,
+      "reportedBlocks": 4707,
+      "matches": true
+    },
+    {
+      "label": "silent-pull-output",
+      "coverage": 1,
+      "frames": 602752,
+      "sequenceBlocks": 4709,
+      "reportedBlocks": 4709,
+      "matches": true
+    },
+    {
+      "label": "shadow-pre-gate",
+      "coverage": 1,
+      "frames": 603008,
+      "sequenceBlocks": 4711,
+      "reportedBlocks": 4711,
+      "matches": true
+    }
+  ],
+  "reportedChecks": {
+    "passed": 7,
+    "failed": 0,
+    "fatal": 0
+  },
+  "shiftedRelease": {
+    "firstCorrectAfterReleaseSeconds": 0,
+    "initialGapSeconds": 0,
+    "maxLowRMSGapSeconds": 0,
+    "wrongPitchAfterRelease30ms": 0,
+    "rawPitchWindows": 0
+  },
+  "silentPullInput": {
+    "retired": false,
+    "lastPulled": {
+      "type": "pulled",
+      "blocks": 384,
+      "frames": 49152,
+      "inputs": [
+        {
+          "channels": 2,
+          "frames": 128,
+          "rms": 0.10616387419301188,
+          "peak": 0.15173058211803436
+        }
+      ]
+    },
+    "sourceCount": 1,
+    "outputPolicy": "Always zero; independent inputs are consumed only for silent DSP continuity."
+  },
+  "limitations": [
+    "Full four-bus PCM is not exported; fences and selected measurements only.",
+    "Five-source check establishes level/isolation after far return, not seamless far-return latency.",
+    "No every-frame original-source cursor proof."
+  ]
+}
