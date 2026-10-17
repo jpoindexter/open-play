@@ -1,0 +1,285 @@
+{
+  "scope": "Independent controlled fixture/oracle information tests only, including non-prior and off-grid checks. No production/native/realstretcher/oldcase acceptance.",
+  "passed": 4,
+  "failed": 0,
+  "checks": [
+    {
+      "name": "New oracle body changes only the declared source-cell period, with identical global search and budgets",
+      "passed": true,
+      "evidence": {
+        "cellPeriods": [
+          0.073,
+          0.032
+        ],
+        "noOtherBodyChange": true
+      }
+    },
+    {
+      "name": "Changing claimed desired position cannot influence any global score, selected peak or competitor",
+      "passed": true,
+      "evidence": {
+        "correct": [
+          {
+            "position": 2.3999999999999573,
+            "margin": 0.13100775105018747,
+            "passed": true
+          },
+          {
+            "position": 2.4539999999999513,
+            "margin": 0.28300293068622784,
+            "passed": true
+          },
+          {
+            "position": 2.6159999999999326,
+            "margin": 0.2119767462268608,
+            "passed": true
+          }
+        ],
+        "wrongClaims": [
+          {
+            "errorSeconds": -0.1800000000000428,
+            "confident": true,
+            "passed": false
+          },
+          {
+            "errorSeconds": -0.18000000000004857,
+            "confident": true,
+            "passed": false
+          },
+          {
+            "errorSeconds": -0.18000000000006766,
+            "confident": true,
+            "passed": false
+          }
+        ]
+      }
+    },
+    {
+      "name": "Predeclared off-grid coordinates and additional carrier phases retain all independent outcomes",
+      "passed": true,
+      "evidence": {
+        "positions": [
+          0.01175,
+          0.50313,
+          2.41379,
+          5.47591,
+          9.21117,
+          15.55601
+        ],
+        "phases": [
+          0.4487989505128276,
+          2.827433388230814,
+          4.084070449666731
+        ],
+        "rows": [
+          {
+            "position": 0.01175,
+            "phase": 0.4487989505128276,
+            "selected": 0.011750000000000002,
+            "error": 1.734723475976807e-18,
+            "score": 0.9998548361951958,
+            "margin": 0.24130247234860858,
+            "confident": true,
+            "passed": true
+          },
+          {
+            "position": 0.01175,
+            "phase": 2.827433388230814,
+            "selected": 0.011750000000000002,
+            "error": 1.734723475976807e-18,
+            "score": 0.9998503162432879,
+            "margin": 0.24113234144217754,
+            "confident": true,
+            "passed": true
+          },
+          {
+            "position": 0.01175,
+            "phase": 4.084070449666731,
+            "selected": 0.011750000000000002,
+            "error": 1.734723475976807e-18,
+            "score": 0.999851340329058,
+            "margin": 0.241437101731393,
+            "confident": true,
+            "passed": true
+          },
+          {
+            "position": 0.50313,
+            "phase": 0.4487989505128276,
+            "selected": 0.5032500000000002,
+            "error": 0.00012000000000023103,
+            "score": 0.9998876667276312,
+            "margin": 0.11949721563622728,
+            "confident": true,
+            "passed": true
+          },
+          {
+            "position": 0.50313,
+            "phase": 2.827433388230814,
+            "selected": 0.5032500000000002,
+            "error": 0.00012000000000023103,
+            "score": 0.9998827574749874,
+            "margin": 0.11947245927846173,
+            "confident": true,
+            "passed": true
+          },
+          {
+            "position": 0.50313,
+            "phase": 4.084070449666731,
+            "selected": 0.5032500000000002,
+            "error": 0.00012000000000023103,
+            "score": 0.9998918490952687,
+            "margin": 0.11952152344646672,
+            "confident": true,
+            "passed": true
+          },
+          {
+            "position": 2.41379,
+            "phase": 0.4487989505128276,
+            "selected": 2.413749999999955,
+            "error": -0.00004000000004511506,
+            "score": 0.9999032087340147,
+            "margin": 0.15141208932567662,
+            "confident": true,
+            "passed": true
+          },
+          {
+            "position": 2.41379,
+            "phase": 2.827433388230814,
+            "selected": 2.413749999999955,
+            "error": -0.00004000000004511506,
+            "score": 0.9999008278646974,
+            "margin": 0.151278133514283,
+            "confident": true,
+            "passed": true
+          },
+          {
+            "position": 2.41379,
+            "phase": 4.084070449666731,
+            "selected": 2.413749999999955,
+            "error": -0.00004000000004511506,
+            "score": 0.9999031788520288,
+            "margin": 0.15151170737304764,
+            "confident": true,
+            "passed": true
+          },
+          {
+            "position": 5.47591,
+            "phase": 0.4487989505128276,
+            "selected": 5.475999999999619,
+            "error": 0.00008999999961911698,
+            "score": 0.9998378476697424,
+            "margin": 0.2521829631430481,
+            "confident": true,
+            "passed": true
+          },
+          {
+            "position": 5.47591,
+            "phase": 2.827433388230814,
+            "selected": 5.475999999999622,
+            "error": 0.00008999999962178151,
+            "score": 0.9998240168540671,
+            "margin": 0.252145995201114,
+            "confident": true,
+            "passed": true
+          },
+          {
+            "position": 5.47591,
+            "phase": 4.084070449666731,
+            "selected": 5.475999999999622,
+            "error": 0.00008999999962178151,
+            "score": 0.9998312620077418,
+            "margin": 0.25213696465700164,
+            "confident": true,
+            "passed": true
+          },
+          {
+            "position": 9.21117,
+            "phase": 0.4487989505128276,
+            "selected": 9.210999999999743,
+            "error": -0.000170000000256465,
+            "score": 0.999839862241416,
+            "margin": 0.23540414797961828,
+            "confident": true,
+            "passed": true
+          },
+          {
+            "position": 9.21117,
+            "phase": 2.827433388230814,
+            "selected": 9.210999999999743,
+            "error": -0.000170000000256465,
+            "score": 0.9998401651422792,
+            "margin": 0.23536108498148023,
+            "confident": true,
+            "passed": true
+          },
+          {
+            "position": 9.21117,
+            "phase": 4.084070449666731,
+            "selected": 9.210999999999743,
+            "error": -0.000170000000256465,
+            "score": 0.9998450898954917,
+            "margin": 0.2354861168837724,
+            "confident": true,
+            "passed": true
+          },
+          {
+            "position": 15.55601,
+            "phase": 0.4487989505128276,
+            "selected": 15.556000000001864,
+            "error": -0.000009999998136223098,
+            "score": 0.9998723222945661,
+            "margin": 0.1312409375862813,
+            "confident": true,
+            "passed": true
+          },
+          {
+            "position": 15.55601,
+            "phase": 2.827433388230814,
+            "selected": 15.556000000001859,
+            "error": -0.000009999998141552169,
+            "score": 0.9998669407283018,
+            "margin": 0.13124742165237413,
+            "confident": true,
+            "passed": true
+          },
+          {
+            "position": 15.55601,
+            "phase": 4.084070449666731,
+            "selected": 15.556000000001859,
+            "error": -0.000009999998141552169,
+            "score": 0.9998692000942866,
+            "margin": 0.13131013117824586,
+            "confident": true,
+            "passed": true
+          }
+        ],
+        "limit": "18 ideal held-out coordinate/phase points only; not all continuous positions/phases or realstretcher behavior."
+      }
+    },
+    {
+      "name": "A passing400ms marker fit does not establish the actual source position in its first15ms",
+      "passed": true,
+      "evidence": {
+        "stimulus": {
+          "position": 2.4,
+          "wrongSeconds": 0.18,
+          "wrongInitialSeconds": 0.015
+        },
+        "fit": {
+          "position": 2.3997499999999565,
+          "error": -0.0002500000000433822,
+          "score": 0.9950750257493276,
+          "margin": 0.11514513520707481,
+          "confident": true
+        },
+        "interpretation": "Executed measurement-limit illustration, not a production defect or a claim that this stimulus occurred in any native run. Original400ms criterion remains unchanged."
+      }
+    }
+  ],
+  "sourceHashes": {
+    "prototype/keylock-cursor-analysis.js": "aadf86b0f524af1fa4a4b30e69214f00fe3c096ecedfc11716d56da982c7b577",
+    "prototype/keylock-cursor32-analysis.js": "f71c04236897eff8025a36992000681feb4d81ccf957d09a898a243b695a1ae1",
+    "scripts/test_cursor_marker_grid.mjs": "f699acf4e7b1f7a2dd4615d8a0d5571183d41c21f9190c21f465a81210a99d17",
+    "scripts/inspect_cursor_marker_ambiguity.mjs": "f32f03469e06292a8005327d2e796ff010eb3553e5e0aad21fe489a266d2243b"
+  }
+}

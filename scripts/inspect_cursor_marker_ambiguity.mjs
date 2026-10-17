@@ -1,0 +1,17 @@
+import fs from 'node:fs';import crypto from 'node:crypto';import assert from 'node:assert/strict';
+import {cursorEnvelope,cursorCriteria,inspectCursorProbes} from '../prototype/keylock-cursor-analysis.js';
+const output=process.argv[2];assert(output&&!fs.existsSync(output),'Choose a new immutable output');
+const reportPath='docs/prototype/render-clock-native-initial-results.json',bytes=fs.readFileSync(reportPath),digest=x=>crypto.createHash('sha256').update(x).digest('hex');
+assert.equal(digest(bytes),'adaf92cb1a75de8faee5dd6f12c28e8826566421fb9d2ad138aaf3e7f9a3f075');
+const r=JSON.parse(bytes),sr=r.runtime.sampleRate;assert(r.captureIntegrity.passed&&r.calibration.passed&&!r.allCriteriaPassed);assert.deepEqual(r.criteria,cursorCriteria);
+const phases=[0,Math.PI/3,2*Math.PI/3],rows=[];
+function correlation(a,b){let sa=0,sb=0,saa=0,sbb=0,sab=0;for(let i=0;i<a.length;i++){sa+=a[i];sb+=b[i];saa+=a[i]*a[i];sbb+=b[i]*b[i];sab+=a[i]*b[i];}const n=a.length,den=Math.sqrt((n*saa-sa*sa)*(n*sbb-sb*sb));return den>1e-16?(n*sab-sa*sb)/den:null;}
+function summary(probe){return{offset:probe.offset,position:probe.position,errorSeconds:probe.errorSeconds,score:probe.score,margin:probe.margin,confident:probe.confident,passed:probe.passed,competitor:probe.competitor};}
+for(const [index,row] of [r.calibration,...r.checks].entries()){
+ const firstTime=row.interval.firstTime,ideal=[];
+ for(const phase of phases){const samples=Float32Array.from({length:row.interval.frames},(_,i)=>{const at=firstTime+i/sr,source=row.expectedEndPosition+cursorCriteria.rate*(at-row.releaseTime);return cursorEnvelope(source)*Math.sin(2*Math.PI*1320*at+phase);});ideal.push({phase,probes:inspectCursorProbes(samples,sr,firstTime,row.releaseTime,row.expectedEndPosition).map(summary)});}
+ rows.push({name:index?'case '+row.region+'/'+row.gesture:'calibration',expectedEndPosition:row.expectedEndPosition,observed:row.positionProbes.map(probe=>({...summary(probe),correlationAtDeclaredIdeal:correlation(probe.observed,probe.offsets.map(dt=>cursorEnvelope(probe.idealPosition+cursorCriteria.rate*dt)))})),ideal});
+}
+const idealAll=rows.flatMap(row=>row.ideal.flatMap(x=>x.probes));
+const result={date:new Date().toISOString(),scope:'Diagnostic ideal-fixture discrimination at all33 recorded planned probe coordinates and3 fixed carrier phases. No production/marker/gate change, no new WASM/native run, no old-case acceptance. Original observed RMS arrays come from the immutable independently checked native report; perfect synthetic output is a conditional contrast, not evidence native output has that source position.',input:{path:reportPath,sha256:digest(bytes)},criteria:cursorCriteria,phases,rows,summary:{observedProbes:rows.length*3,observedUnconfident:rows.flatMap(x=>x.observed).filter(x=>!x.confident).length,idealProbes:idealAll.length,idealPassed:idealAll.filter(x=>x.passed).length,idealUnconfident:idealAll.filter(x=>!x.confident).length,idealConfidentWrong:idealAll.filter(x=>x.confident&&!x.passed).length,minIdealMargin:Math.min(...idealAll.map(x=>x.margin)),maxIdealError:Math.max(...idealAll.map(x=>Math.abs(x.errorSeconds)))},sourceHashes:Object.fromEntries(['prototype/keylock-cursor-analysis.js','scripts/inspect_cursor_marker_ambiguity.mjs'].map(p=>[p,digest(fs.readFileSync(p))]))};
+fs.writeFileSync(output,JSON.stringify(result,null,2)+'\n',{flag:'wx'});console.log(JSON.stringify(result.summary));

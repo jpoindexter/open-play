@@ -16,6 +16,8 @@ Core Video MIDI now has [functional review](../../docs/prototype/VIDEO_MIDI_FUNC
 
 ## New scheduled-clock engine diagnostic
 
+Latest separate32ms marker cohort: finite ideal grid1872/1872 and42/42 rejection checks, but actual native full armed capture fails. One repeated global frame label/skip pair disagrees with128 scheduled parameter values; scheduled values remain continuous. Calibration not analysed,0/10 accepted, completed=false. Original whole recording/rows/failures retained. Even a confident400ms marker fit cannot establish first15ms or firstsample. Prior valid73ms5/10 evidence remains separate. See [new native evidence review](../../docs/research/CURSOR32_NATIVE_EVIDENCE_REVIEW_20261017.md).
+
 A separate official Electron host executes the unchanged production engine/WASM and a new test-only clock observer. [Whole original review](../../docs/research/ENGINE_RENDER_CLOCK_NATIVE_EVIDENCE_REVIEW.md): valid full capture/calibration, 5/10 bounded cursor cases, all eleven pitch/control intervals pass. Five cases remain unaccepted solely due to seven nonunique marker probes. All 985,728 parameter values and four-channel PCM/7,701 rows were independently inspected. This does not explain or repair the older globally failed run, prove common-mode freedom or accept the main packaged app, physical/musical/compound/reference behavior. No production engine or native bundle changes.
 
 ## Executed observations and accounting: separate phases

@@ -1,0 +1,11 @@
+# Re-entry —32ms marker and rejected native capture
+
+Outcome: full independent Serato parity, not met. Prior75e8d86 verified progress; this unit yields stronger finite marker information and an actual rejected native capture. No production/bundle modification.
+
+Read plan62, current verdict, `docs/prototype/cursor32-pre-run-candidate.json`, `cursor32-native-candidate.json`, native original report and independent review. Preserve all three distinct native cohorts: original73ms invalid0accepted; later73ms valid5/10; new32ms invalid0accepted. Never repair rows or transfer acceptance. New original Downloads copies are byte-identical to tracked report/local raw. Raw remains local under `local-evidence/cursor32-native-initial/complete.f32`; Git alone does not provide it.
+
+Now: recover exact current state and inspect all evidence/hashes before edits. Next: retain0.1.5 and package a separate version from the already tested browser implementation. `desktop/package.mjs` still pins48a6d4d/0.1.5; change candidate/version deliberately only after committing the intended source. Preserve approvedHTMLf8b0abf, origin/sandbox/permissions, existing storage and packages. Independently inspect actual ASAR bytes, then launch actual main app and test new Key Shift/Video menu/assignment/reload/audio. Packaging or inspector success is not runtime/hardware acceptance. Existing main app may be open; preserve user state and avoid simultaneous same-partition instances.
+
+Clock follow-up: unchanged strict gate rejected one repeated global frame label; parameter sequence continuous. Any new experiment needs a different declared observation hypothesis and controlled negative tests. No identical rerun. A400ms interval fit cannot prove first15ms/firstsample; music/compound/physical/reference remain open. Conditional prefix exploration never upgrades failed full capture.
+
+Keep110groups/522requirements;9beta and26releasechecks separate. Fullflags remain false/unset as recorded; no completion percentage. Broader gaps remain in plan62/current crosswalk. FullClaude completeness audit unlaunched; original prompt suffix unchanged. DEK007/009 recommend Codexgpt-6-astra/high and Claudeclaude-opus-5/high, not livecatalog verification. Existing private GitHub/Trello authority continues; preserve unowned prefixes/models and exactreadback.

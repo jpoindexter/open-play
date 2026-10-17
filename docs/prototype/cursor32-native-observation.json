@@ -1,0 +1,66 @@
+{
+  "observed_at": "2026-10-17T15:27:40.188652+00:00",
+  "kind": "PARENT_NATIVE_UI_AND_ORIGINAL_DOWNLOAD_OBSERVATION",
+  "host": {
+    "pid": 83899,
+    "session": 37083,
+    "origin": "http://127.0.0.1:18787",
+    "electron": "44.9.0",
+    "separate_from_main_product": true
+  },
+  "actions": [
+    "Recovered the already-clicked one-shot diagnostic; did not restart or repeat Run.",
+    "Observed finished UI:0/10 cases; calibration not established; capture integrity false;128 global mismatch samples and continuous scheduled parameter.",
+    "Used native Save sheets to retain original unique JSON and whole four-channel PCM in Downloads.",
+    "Copied both originals byte-identically without repairing rows or trimming PCM.",
+    "Saved actual outcome screenshot and closed owned diagnostic window; session exited0. Process/listener absence checked through OS, no post-quit AX relaunch."
+  ],
+  "observed_result": {
+    "captured_cases": 10,
+    "accepted_cases": 0,
+    "capture_integrity": false,
+    "calibration": null,
+    "completed": false,
+    "allCriteriaPassed": false
+  },
+  "evidence": [
+    {
+      "path": "docs/prototype/cursor32-native-initial-results.json",
+      "sha256": "6430e6213827199a795dcdaeb50163d732f01346d558944475a43b611f126e19"
+    },
+    {
+      "path": "local-evidence/cursor32-native-initial/complete.f32",
+      "sha256": "79bb0d99f8aa9ea1057dbe039519d74d9966b5afbf13142a8f13eca64e27c245"
+    },
+    {
+      "path": "docs/prototype/screenshots/cursor32-native-initial-20261017.png",
+      "sha256": "10393d95c81f0683ecd32bcc7d8a70a1e1c72402a3d2265c9301e134113fde8e"
+    }
+  ],
+  "original_downloads": [
+    {
+      "path": "/Users/jasonpoindexter/Downloads/open-play-cursor32-native-initial-results.json",
+      "sha256": "6430e6213827199a795dcdaeb50163d732f01346d558944475a43b611f126e19"
+    },
+    {
+      "path": "/Users/jasonpoindexter/Downloads/open-play-cursor32-native-initial-complete.f32",
+      "sha256": "79bb0d99f8aa9ea1057dbe039519d74d9966b5afbf13142a8f13eca64e27c245"
+    }
+  ],
+  "product_ASAR": {
+    "path": "local-evidence/desktop-builds/0.1.5/Open Play Test-darwin-arm64/Open Play Test.app/Contents/Resources/app.asar",
+    "sha256": "251bcc16caf9cfb42a3967db058717373a8c6fcb9ff97d56c330058ec8301b03"
+  },
+  "production_changed": false,
+  "old_capture_repaired": false,
+  "cleanup": {
+    "host_exit": 0,
+    "no_listener_18787": true,
+    "exact_owned_Electron_executable_absent": true
+  },
+  "limits": [
+    "Diagnostic failed its full armed gate; no calibration/case accepted.",
+    "Separately scheduled parameter/global snapshots may share a backend; disagreement alone does not identify root cause.",
+    "No physical/main-product/musical/compound/reference/full-parity acceptance."
+  ]
+}
