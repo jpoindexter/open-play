@@ -37,6 +37,18 @@ export function createVideoControls({state, videoMixer, notify = () => {}, persi
   const mediaControls = createVideoMediaControls({state, videoMixer, notify, dialog, persist});
   const loadedImages = new Set();
   const imageRequests = new Map();
+  let syncFX=()=>{};
+  function syncMIDI() {
+    const set=(id,value,property='value')=>{const el=document.getElementById(id);if(el)el[property]=value;};
+    set('video-transition',v.transition);set('video-cross',v.cross);
+    for(const [id,key]of [['video-link','linked'],['video-cross-link','crossLinked'],['video-audio-fx-link','audioFXLink'],['video-auto','auto']])set(id,!!v[key],'checked');
+    set('video-cross',!!(v.crossLinked||v.auto),'disabled');set('video-auto',!!v.crossLinked,'disabled');
+    for(const dir of ['left','right','stop'])set('video-fade-'+dir,!!v.crossLinked,'disabled');
+    set('video-fade-speed',(10-v.autoCrossfadeSeconds)/9.75);
+    set('video-fade-speed-note',`Slow ← → Fast · ${v.autoCrossfadeSeconds.toFixed(2)}s independent duration`,'textContent');
+    for(const i of [0,1]){set('video-opacity-'+i,v.channelOpacity[i]);set('video-opacity-'+i,v.channelOpacityLinked[i],'disabled');set('video-opacity-link-'+i,v.channelOpacityLinked[i],'checked');}
+    syncFX();
+  }
   function ensure() {
     v.fx ||= {}; v.overlays ||= {};
     for (const target of targets) {
@@ -185,6 +197,7 @@ export function createVideoControls({state, videoMixer, notify = () => {}, persi
         }).join('');
       }
       targetSelect.onchange = render;
+      syncFX=()=>{if(host.isConnected)render();};
       host.onchange = event => {
         const input = event.target, field = input.closest('[data-fx-slot]'); if (!field) return;
         const target = targetSelect.value, slot = Number(field.dataset.fxSlot), spec = v.fx[target][slot];
@@ -290,5 +303,5 @@ export function createVideoControls({state, videoMixer, notify = () => {}, persi
       render();
     });
   }
-  return {markup, bind};
+  return {markup, bind, syncMIDI, effectsDialog, overlaysDialog, mediaDialog:()=>mediaControls.open()};
 }

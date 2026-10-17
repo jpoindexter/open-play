@@ -10,14 +10,16 @@ REA freshly read installed version **4.0.10.213**, evidence `ev_fb7043efffb87a67
 
 Evidence: [current-feature-check-native-observation.json](../../docs/prototype/current-feature-check-native-observation.json), [parity-current-midi-targets-0.1.5.png](../../docs/prototype/screenshots/parity-current-midi-targets-0.1.5.png), [preserved original comparison](../../docs/research/CURRENT_FEATURE_MATCH_20261017_NATIVE015.md). The official release-page Key Shift fix makes this a specific current-version obligation. Serato’s own MIDI behavior was not exercised in this check.
 
-The newer browser source has actual four-deck Key Shift and saved-mapping audio evidence: [functional review](../../docs/prototype/MIDI_KEYSHIFT_FUNCTIONAL_REVIEW.md), eight initial plus three reload checks and eight complete recordings. Three production files differ from the0.1.5 source; the audio engine is unchanged. These browser results are not a new native or physical test and do not establish complete REL-05 equivalence.
+The newer browser source has actual four-deck Key Shift and saved-mapping audio evidence: [functional review](../../docs/prototype/MIDI_KEYSHIFT_FUNCTIONAL_REVIEW.md), eight initial plus three reload checks and eight complete recordings. The later Video MIDI candidate changes four existing production files relative to0.1.5 and adds one production routing module; the audio engine is unchanged. Key Shift recordings retain the preceding candidate identity. These browser results are not a new native or physical test and do not establish complete REL-05 equivalence.
 
-## What this check actually executed
+Core Video MIDI now has [functional review](../../docs/prototype/VIDEO_MIDI_FUNCTIONAL_REVIEW.md):14initial/4actual-reload browser checks,37saved mappings and20wholeGPU PNGs. Independent review corrected compound dispatch and held edges. Overlay-specific targets, some core commands, physical/native transfer and full REQ-516 remain open.
 
-- REA Info.plist inspection and exact executable identity; no repeated deep Ghidra import.
-- Fresh screenshots of the installed reference and running Open Play 0.1.5; actual MIDI menu inspection, with no mapping or connection change. App restored to paused main view.
-- Of the200baseline production files, 3 current browser files differ as recorded by the MIDI candidate. Current ASAR still matches the unchanged0.1.5 bundle. Source correspondence alone is not a feature test.
-- Evidence accounting for every canonical group and requirement; no full-feature pass awarded. Earlier physical, storage, FX, stem and keylock evidence retains its original scope.
+## Executed observations and accounting: separate phases
+
+- Earlier this date: REA Info.plist inspection and exact executable identity; no repeated deep Ghidra import.
+- Earlier this date: screenshots of the installed reference and running Open Play 0.1.5; actual MIDI menu inspection, with no mapping or connection change. App restored to paused main view.
+- Of the200baseline production files, 4 current browser files differ and one production routing module is added, as recorded by the Video MIDI candidate. Current ASAR still matches the unchanged0.1.5 bundle. Source correspondence alone is not a feature test.
+- This generator reconciles evidence for every canonical group and requirement; no runtime test or full-feature pass is awarded. Earlier physical, storage, FX, stem and keylock evidence retains its original scope.
 
 ## Current release obligations
 

@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-10-17T13:21:43.623Z",
+  "generated_at": "2026-10-17T13:41:52.064Z",
   "source_checked_at": "2026-10-17T12:50:43.755803+00:00",
   "kind": "CURRENT_FEATURE_EVIDENCE_RECONCILIATION_NOT_ALL_FEATURE_RUNTIME_TEST",
-  "git_head": "fab19dd391507c39f63eb66c9cb08a72711df3f8",
+  "git_head": "7ce4ffe51696f9e68e7ef2f3afea8684e739a82b",
   "outcome": "FULL_PARITY_NOT_ESTABLISHED",
   "full_parity_verified": false,
   "complete_latest_inventory": false,
@@ -22,7 +22,8 @@
     "frozen_prototype_mismatches": [
       "prototype/app.js",
       "prototype/midi.js",
-      "prototype/panels.js"
+      "prototype/panels.js",
+      "prototype/video-controls.js"
     ]
   },
   "browser_keyshift_candidate": {
@@ -77,6 +78,84 @@
     ],
     "scope": "Actual main app mapper callbacks/renderer/recording in isolated browser with known tone buffers, plus mainUI synthetic message inspection. No native build/hardware/vendor parity."
   },
+  "browser_video_midi_candidate": {
+    "frozen_at": "2026-10-17T13:37:31.111564+00:00",
+    "kind": "BROWSER_VIDEO_MIDI_SOURCE_CANDIDATE_NOT_NATIVE_PACKAGE",
+    "previous_browser_commit": "7ce4ffe51696f9e68e7ef2f3afea8684e739a82b",
+    "baseline_native": "0.1.5",
+    "baseline_source_commit": "48a6d4dad2f217a8ba166b9ca890a287aabc4feb",
+    "existing_baseline_production_files_changed": [
+      "prototype/app.js",
+      "prototype/midi.js",
+      "prototype/panels.js",
+      "prototype/video-controls.js"
+    ],
+    "new_production_files": [
+      "prototype/video-midi.js"
+    ],
+    "production_files_changed_this_unit": [
+      "prototype/midi.js",
+      "prototype/panels.js",
+      "prototype/video-controls.js",
+      "prototype/video-midi.js"
+    ],
+    "source_hashes": [
+      {
+        "path": "prototype/app.js",
+        "sha256": "abc0e15d47fb1546cde931c21072d9dbd6f4d78ba1c65cab0fc5841b12cf02bf"
+      },
+      {
+        "path": "prototype/midi.js",
+        "sha256": "a93852152e272a4da19c7062585e53cca20dc073f784324bfb1b542f5c739b9c"
+      },
+      {
+        "path": "prototype/panels.js",
+        "sha256": "c690f08528ac3380c2995be86e378555b5eb9c3cd1d7afe5a32dea6e0efeecfe"
+      },
+      {
+        "path": "prototype/video-controls.js",
+        "sha256": "33d94445ef1581371f4a6badab8112048ee38ba5ce55828bc097475cd5945255"
+      },
+      {
+        "path": "prototype/video-midi.js",
+        "sha256": "ed536567cc52e0275ea3712d65c463c661920b5f3e851a9c8402e988cda45115"
+      },
+      {
+        "path": "prototype/engine.js",
+        "sha256": "b4683c245c6314432c06f891e85106cf0a1a5c0a615435516930ab5b38f64adf"
+      },
+      {
+        "path": "prototype/video.js",
+        "sha256": "7d4ecba07be0714dae905fc250fc1277ef59d8a8a03c9ef160d1709064a6330a"
+      },
+      {
+        "path": "prototype/video-midi-harness.js",
+        "sha256": "5b105a3b4b502dac9ed26958a17e5befc666c619d6cfd6cfb701b2ea47baa959"
+      },
+      {
+        "path": "prototype/video-midi-harness.html",
+        "sha256": "e0f574074ce9221e304088e6e1dc17c987e8d0305b4c695d0ee22797e0684d41"
+      }
+    ],
+    "browser_evidence": [
+      {
+        "path": "docs/prototype/video-midi-browser-final-results.json",
+        "sha256": "4654fc96a1f6bb935a4a2678fc0e1dee1e3c9a84ee236529c68fe544fe9d8e67"
+      },
+      {
+        "path": "docs/prototype/video-midi-browser-final-restored-results.json",
+        "sha256": "a321fc9826ba20ffcb7d5ab33d0ec641387b4605a93c5b01aa4518b74cece76f"
+      }
+    ],
+    "target_count": 44,
+    "saved_mapping_count": 37,
+    "full_parity_verified": false,
+    "complete_REQ_516_verified": false,
+    "native_video_midi_acceptance": false,
+    "physical_video_midi_acceptance": false,
+    "audio_engine_unchanged": true,
+    "scope": "Actual browser main app callbacks/GPU/persistence and generated local video decode/save/recall/association; synthetic MIDI, independent mapping policy, no native/hardware/reference equivalence."
+  },
   "scope": {
     "canonical_features": 110,
     "canonical_requirements": 522,
@@ -89,11 +168,22 @@
     "not_exhaustive": true
   },
   "actual_this_check": [
+    "Current source/candidate/evidence reconciliation only; no behavior rerun by this generator"
+  ],
+  "prior_reference_native_observations_this_date": [
     "REA version/declaration inspection",
     "Native main-window screenshots of both applications",
-    "Open Play native MIDI target menu inspection; selection and mappings unchanged",
-    "Current source/candidate/evidence accounting"
+    "Open Play0.1.5 MIDI target menu inspection"
   ],
+  "new_browser_unit": {
+    "initial_checks": 14,
+    "actual_reload_checks": 4,
+    "saved_mappings": 37,
+    "whole_PNGs": 20,
+    "physical_or_native": false,
+    "full_REQ_516_verified": false,
+    "evidence": "docs/prototype/VIDEO_MIDI_FUNCTIONAL_REVIEW.md"
+  },
   "not_rerun": [
     "Full audio/DSP suites",
     "Earlier native persistence/keylock recordings",
@@ -108,7 +198,7 @@
     ],
     "observation": "The running 0.1.5 target menu has eight targets and no Key Shift or Video target. The packaged source list and dispatcher have no corresponding handler; newer browser source is separately implemented and tested.",
     "boundary": "Direct UI/source absence in this candidate. Does not measure Serato MIDI Key Shift at runtime or prove all MIDI workflows are missing.",
-    "next": "Preserve the newer browser candidate/evidence; package and execute native mapping later while retaining0.1.5. Video targets and full mapping/reference acceptance remain open."
+    "next": "Preserve the newer browser candidate/evidence; package and execute native mapping later while retaining0.1.5. Core Video targets now have bounded browser evidence; overlay-specific targets, remaining commands, physical/native and full mapping/reference acceptance remain open."
   },
   "current_visual_result": "The inspected Vertical states still differ in mode/loop controls and the always-visible Open Play mixer; different dimensions/tracks prohibit pixel-identity or waveform-quality conclusions.",
   "class_counts": {
@@ -1887,7 +1977,7 @@
   "input_hashes": [
     {
       "path": "docs/research/CURRENT_PARITY_AUDIT_20261017.json",
-      "sha256": "6ab66b2c284f88220939c4604760b295a92e520418bf29091c3f033aacd2112c"
+      "sha256": "1cfa115de4ca43cfbe29252a9f20c73cd9086efe91cc6cdabee657f411e02522"
     },
     {
       "path": "docs/research/CURRENT_VERSION_DELTAS_20261017.json",
@@ -1907,11 +1997,11 @@
     },
     {
       "path": "prototype/panels.js",
-      "sha256": "565277e7620f5633e2c1a782fca8552f4a354630804648316a0919c270ae55ef"
+      "sha256": "c690f08528ac3380c2995be86e378555b5eb9c3cd1d7afe5a32dea6e0efeecfe"
     },
     {
       "path": "prototype/midi.js",
-      "sha256": "bd1b0ffd6ade3f118b06f4131307ea55e420317c0f3334a1053f710aa7583dc1"
+      "sha256": "a93852152e272a4da19c7062585e53cca20dc073f784324bfb1b542f5c739b9c"
     },
     {
       "path": "prototype/engine.js",
@@ -1940,6 +2030,38 @@
     {
       "path": "docs/prototype/midi-keyshift-audio-independent-results.json",
       "sha256": "0eff7d25ed2a0b98a5902a4fb61b18a9e495c7f196e47ebd18ce9341fb5078fa"
+    },
+    {
+      "path": "prototype/video-midi.js",
+      "sha256": "ed536567cc52e0275ea3712d65c463c661920b5f3e851a9c8402e988cda45115"
+    },
+    {
+      "path": "prototype/video-controls.js",
+      "sha256": "33d94445ef1581371f4a6badab8112048ee38ba5ce55828bc097475cd5945255"
+    },
+    {
+      "path": "docs/prototype/video-midi-candidate.json",
+      "sha256": "e16e534fab0fcdcdf7e094c82e734f5bed1d7454c54ab48c4cd4f2f3cd4d264e"
+    },
+    {
+      "path": "docs/prototype/VIDEO_MIDI_FUNCTIONAL_REVIEW.md",
+      "sha256": "3857e646a7900627d9e212fff54b7b37dadc74347e963d3ff9ad2cb82d198e6f"
+    },
+    {
+      "path": "docs/prototype/video-midi-browser-final-results.json",
+      "sha256": "4654fc96a1f6bb935a4a2678fc0e1dee1e3c9a84ee236529c68fe544fe9d8e67"
+    },
+    {
+      "path": "docs/prototype/video-midi-browser-final-restored-results.json",
+      "sha256": "a321fc9826ba20ffcb7d5ab33d0ec641387b4605a93c5b01aa4518b74cece76f"
+    },
+    {
+      "path": "docs/research/VIDEO_MIDI_SOURCE_REVIEW_20261017.md",
+      "sha256": "82023cda76c5a51492a7bda7ae4014403f14af75ef249a0cb3ff22b955eee7d9"
+    },
+    {
+      "path": "docs/research/VIDEO_MIDI_FINAL_ARTIFACT_REVIEW_20261017.md",
+      "sha256": "9437e72099f680c3b54ec130995cae2fbc58e8c234c8642711f6a3e88a3e6fe9"
     }
   ],
   "constraints": {

@@ -1,0 +1,99 @@
+{
+  "phase": "initial",
+  "startedAt": "2026-10-17T13:27:47.166Z",
+  "scope": "Actual app DOM callbacks/mapper/persistence/GPU canvas, synthetic standard messages. Placeholder source pixel tests; generated video save/association separate. No hardware/native/vendor acceptance.",
+  "checks": [
+    {
+      "name": "Actual mapper lists Video controls without losing four-deck Key Shift",
+      "passed": false,
+      "evidence": {
+        "targets": [
+          "Library browse",
+          "Deck 1 play",
+          "Deck 2 play",
+          "Deck 1 cue",
+          "Deck 2 cue",
+          "Crossfader",
+          "Sampler 1",
+          "FX depth",
+          "Deck 1 key shift",
+          "Deck 2 key shift",
+          "Deck 3 key shift",
+          "Deck 4 key shift"
+        ]
+      },
+      "error": "Video MIDI targets missing",
+      "stack": "Error: Video MIDI targets missing\n    at assert (http://127.0.0.1:18772/prototype/video-midi-harness.js:3:65)\n    at http://127.0.0.1:18772/prototype/video-midi-harness.js:28:163\n    at check (http://127.0.0.1:18772/prototype/video-midi-harness.js:17:53)\n    at run (http://127.0.0.1:18772/prototype/video-midi-harness.js:28:9)\n    at async $.onclick (http://127.0.0.1:18772/prototype/video-midi-harness.js:50:89)"
+    }
+  ],
+  "frames": [],
+  "fatalErrors": [
+    {
+      "message": "Stop before state mutation: actual Video target integration is missing.",
+      "stack": "Error: Stop before state mutation: actual Video target integration is missing.\n    at run (http://127.0.0.1:18772/prototype/video-midi-harness.js:29:32)\n    at async $.onclick (http://127.0.0.1:18772/prototype/video-midi-harness.js:50:89)"
+    }
+  ],
+  "sourceBefore": {
+    "app.js": "abc0e15d47fb1546cde931c21072d9dbd6f4d78ba1c65cab0fc5841b12cf02bf",
+    "panels.js": "565277e7620f5633e2c1a782fca8552f4a354630804648316a0919c270ae55ef",
+    "midi.js": "bd1b0ffd6ade3f118b06f4131307ea55e420317c0f3334a1053f710aa7583dc1",
+    "video-midi.js": "0d375b503ffebe699f461755aa6bb43f4d4552f3274146e0d944c7e336d1ba91",
+    "video-controls.js": "dc49188fec819d98e6ea5b07fde25180e07f87e18ccdcaca7899422cc3443eea",
+    "video.js": "7d4ecba07be0714dae905fc250fc1277ef59d8a8a03c9ef160d1709064a6330a",
+    "video-pipeline.js": "75507c6ca5c84b45ac485be55e6fb0060e5f809be9caa7f416dc32d920796725",
+    "video-effects-catalog.js": "d0baa2808028c7ad2130a3ca2ba27a533a88c45baf4092648f3070334e188c5d",
+    "video-transitions.js": "b09b7baa4e87346c634a707f4ee3fce7aa3a2b45286d6c3dfdb5d812316df2c2",
+    "video-midi-harness.js": "31471683fd047a0db4f4a1507396f77b89dc709633738822dcfa33420991d3fe",
+    "index.html": "a920816b73f68e28feab40f36ae429677cd3005a4f10a5e8b0366faf7907259c"
+  },
+  "completed": false,
+  "physicalOutputMuted": true,
+  "audioBefore": {
+    "cross": 0,
+    "levels": [
+      0.8,
+      0.8,
+      0.8,
+      0.8
+    ],
+    "decks": [
+      {
+        "track": "demo-0",
+        "playing": false,
+        "rate": 1,
+        "keyShift": 0
+      },
+      {
+        "track": "demo-1",
+        "playing": false,
+        "rate": 1,
+        "keyShift": 0
+      },
+      {
+        "playing": false,
+        "rate": 1,
+        "keyShift": 0
+      },
+      {
+        "playing": false,
+        "rate": 1,
+        "keyShift": 0
+      }
+    ]
+  },
+  "sourceAfter": {
+    "app.js": "abc0e15d47fb1546cde931c21072d9dbd6f4d78ba1c65cab0fc5841b12cf02bf",
+    "panels.js": "565277e7620f5633e2c1a782fca8552f4a354630804648316a0919c270ae55ef",
+    "midi.js": "bd1b0ffd6ade3f118b06f4131307ea55e420317c0f3334a1053f710aa7583dc1",
+    "video-midi.js": "0d375b503ffebe699f461755aa6bb43f4d4552f3274146e0d944c7e336d1ba91",
+    "video-controls.js": "dc49188fec819d98e6ea5b07fde25180e07f87e18ccdcaca7899422cc3443eea",
+    "video.js": "7d4ecba07be0714dae905fc250fc1277ef59d8a8a03c9ef160d1709064a6330a",
+    "video-pipeline.js": "75507c6ca5c84b45ac485be55e6fb0060e5f809be9caa7f416dc32d920796725",
+    "video-effects-catalog.js": "d0baa2808028c7ad2130a3ca2ba27a533a88c45baf4092648f3070334e188c5d",
+    "video-transitions.js": "b09b7baa4e87346c634a707f4ee3fce7aa3a2b45286d6c3dfdb5d812316df2c2",
+    "video-midi-harness.js": "31471683fd047a0db4f4a1507396f77b89dc709633738822dcfa33420991d3fe",
+    "index.html": "a920816b73f68e28feab40f36ae429677cd3005a4f10a5e8b0366faf7907259c"
+  },
+  "sourceStable": true,
+  "finishedAt": "2026-10-17T13:27:47.204Z"
+}

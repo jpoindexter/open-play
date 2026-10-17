@@ -68,6 +68,7 @@ export function createMIDI({ onMessage, onState }) {
       };
     onState(
       [...access.inputs.values()].map((x) => ({
+        id: x.id,
         name: x.name || x.id,
         state: x.state,
       })),

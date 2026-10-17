@@ -1,3 +1,34 @@
+## 58. Video MIDI core routing, rendered output and corrected compound dispatch
+
+17 October 2026. Previous goal turn made concrete progress at `7ce4ffe`: four-deck browser MIDI Key Shift with real audio evidence and a full parity audit. This continuation implements the next missing Video mapper workflows. **Full 110-group / 522-requirement parity remains unproven; nine beta deltas and 26 provisional release checks remain separate.**
+
+Read `docs/prototype/VIDEO_MIDI_FUNCTIONAL_REVIEW.md`, `video-midi-candidate.json`, the final initial/restored raw browser reports, and the independent source/artifact reviews. Exactly three existing production files change this unit (midi.js, panels.js, video-controls.js), plus the new video-midi.js module. app.js, the audio engine and Video mixer are unchanged from the preceding checkpoint. Relative to native 0.1.5, four existing production files differ and one new production module is added; that package still contains none of this later MIDI work.
+
+The router defines 44 core Video targets and calls existing mixer operations. Actual browser integration passed 14/14 and actual reload 4/4 with 37 saved mappings and 20 retained whole PNGs. Generated local video actually decodes, saves channel FX, changes red to cyan under Negative, recalls red, and gains/loses its media association. Independent inspection validates every original image and the whole 18-frame VP8 fixture; the app transports were paused, so moving-output/AV synchronization and acoustic preservation are not accepted. Some registered commands remain controlled/code-path only; the functional review lists each.
+
+Independent review found real defects before acceptance: two-byte commands toggled twice; 14-bit data crossed input sources; a pending Video save could defer a Hold sampler press until after Note Off; adding an unrelated map or unrelated device event rearmed held Video toggles. Red results are retained. Corrected results: 14 router checks, five independent actual-dispatch/editor/device/error checks, plus unchanged Key Shift policy 10/10 and dispatcher 11/11. Browser source hashes before/after match current source. Original failed cursor and stem-quality evidence is preserved.
+
+The mapper now has individual Remove/Reassign, preserving unrelated mappings and held input state. Matching actions begin without waiting on other async actions, with explicit error propagation. Link guards and existing stale-content save/recall ownership remain. Command mapping is explicitly 7-bit CC/Note press/release; relative/pitch-bend/14-bit commands are refused. Continuous pairs are per input source.
+
+**Constraint ledger:** Outcome: independent full macOS visual/functional parity. Target: frozen new browser source, unchanged native 0.1.5 and installed Serato 4.0.10.213. Must: actual candidate-specific behavior, complete requirement accounting, source/runtime/physical distinctions and per-feature model/effort routing. Must not: copy proprietary implementation/assets, change reference licensing, erase failures, infer packaged/physical acceptance from browser tests or publish. Authority: existing investigation, private project updates and approved local desktop tests. Done: every reconciled requirement executed end-to-end; this unit does not satisfy that gate.
+
+**Now:** preserve this tested core and its explicit acceptance limits; synchronize private records. **Next:** close Video overlay-specific load/selection/size/animation/placement/on-off targets and actual click-to-learn/unassign, including normal-action suppression and close/focus cancellation. Execute the remaining core commands (both sides, hidden panels, fullscreen permissions/failure paths), then package an approved local desktop test candidate and test actual MIDI/reload/audio while preserving 0.1.5. **Later:** full FX/reference sound and controls, SCNet quality, keylock/cursor compound-clock diagnosis, Smart Sync, Link, providers, files/recording, DVS/HID/CDJ/Phase, external Video and full physical controller/device acceptance.
+
+Re-entry: start with REQ-516 and the historical manual's 26 control groups in `local-evidence/claude-fable/official-video-manual-141226.txt` pages 17–18. Current historical-source evidence does not establish installed-version behavior. Read the functional review's unexecuted-target list before awarding any pass. The old ten-case keylock cursor matrix remains zero accepted, with independent clock observation still required.
+
+Owned test tab 43 closed and four hosts terminated; no listeners remain on 18772–18775. Existing user tabs/native bundles were preserved. Full Claude completeness audit remains unlaunched; handoff prefix updated while the original PROJECT_PROMPT suffix stays byte-exact.
+
+Five existing private Trello descriptions (HW-002, HW-012, VID-001, VID-002 and GATE-P) were updated and read back exactly, with prior unowned text and model recommendations preserved. No completion/move/archive/privacy action. See `docs/delivery/trello-video-midi-sync.json`.
+
+Model/effort recommendations retained from the canonical registry, not a live catalog check:
+- HW-002: Codex `gpt-6.1-sol` / high; Claude Code `claude-sonnet-5` / medium.
+- HW-012: Codex `gpt-6-astra` / xhigh; Claude Code `claude-opus-5` / xhigh.
+- VID-001: Codex `gpt-6.1-sol` / xhigh; Claude Code `claude-opus-5` / high.
+- VID-002: Codex `gpt-6.1-sol` / high; Claude Code `claude-sonnet-5` / medium.
+
+
+## Prior checkpoint — historical
+
 ## 57. Real four-deck MIDI Key Shift, saved-map audio and pending-control corrections
 
 17 October 2026. Previous goal turn produced a current-feature audit and a directly observed missing mapper workflow, saved at `fab19dd`. This unit changes exactly three production browser files (app.js, panels.js, midi.js), adds a test-only actual-app harness and preserves the old native0.1.5 bundle. **Full110groups/522requirements, nine separate beta deltas and26provisional release checks remain open.** No native DSP rewrite/public release/new native package.

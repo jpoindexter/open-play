@@ -1,0 +1,39 @@
+{
+  "scope": "Actual extracted receiveMIDI and Add handler with real router; controlled deferred save and sampler collaborator. No actual audio/GUI/hardware.",
+  "passed": 0,
+  "failed": 2,
+  "checks": [
+    {
+      "name": "Pending Video save must not defer same-input Hold sampler onset until after Note off",
+      "passed": false,
+      "evidence": {
+        "beforeSave": [
+          "sampler-stop"
+        ],
+        "afterSave": [
+          "sampler-stop",
+          "sampler-play"
+        ],
+        "playing": true
+      },
+      "error": "Hold sampler must remain stopped after its release\n\ntrue !== false\n"
+    },
+    {
+      "name": "Adding an unrelated mapping must not rearm a still-held existing Video toggle",
+      "passed": false,
+      "evidence": {
+        "beforeEdit": true,
+        "afterRepeatedHeld": false,
+        "mappingCount": 2
+      },
+      "error": "Unrelated editor Add must preserve held edge\n\nfalse !== true\n"
+    }
+  ],
+  "sourceHashes": {
+    "prototype/video-midi.js": "10850e6090471d6f72068fe319c5e1dc78367f6f2edc2faf3ced0a7136a7dd4c",
+    "prototype/panels.js": "b7deea43b18b2219b235cd0d0b53e3548d9f98ced1133af8345d3cecc68ffd64",
+    "prototype/video-controls.js": "33d94445ef1581371f4a6badab8112048ee38ba5ce55828bc097475cd5945255",
+    "prototype/midi.js": "bd1b0ffd6ade3f118b06f4131307ea55e420317c0f3334a1053f710aa7583dc1",
+    "prototype/video-midi-harness.js": "ac25796ae42db1fd9b7aa43d71bcafb960d51985da61dfcdec4a9f2366a1edb1"
+  }
+}

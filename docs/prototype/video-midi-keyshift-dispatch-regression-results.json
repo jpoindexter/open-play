@@ -1,0 +1,164 @@
+{
+  "date": "2026-10-17",
+  "scope": "Actual extracted MIDI dispatch and app helper region plus actual AudioEngine.setPitch method. Controlled pending commits, track changes and no-audio collaborators. No real WebAudio/WASM, GUI, persistence store, hardware or reference acceptance.",
+  "passed": 11,
+  "failed": 0,
+  "checks": [
+    {
+      "name": "Two relative increments survive actual engine pending Stem Slip commit",
+      "passed": true,
+      "evidence": {
+        "beforeCommit": {
+          "actual": 0,
+          "intent": 2
+        },
+        "final": {
+          "actual": 2,
+          "intent": 2
+        }
+      }
+    },
+    {
+      "name": "Relative direction reversal during pending commit preserves net zero",
+      "passed": true,
+      "evidence": {
+        "actual": 0
+      }
+    },
+    {
+      "name": "Unrelated CC80 andCC112 cannot alter a paired14bit CC16/48 mapping",
+      "passed": true,
+      "evidence": {
+        "afterMSB": -24,
+        "beforeCounts": {
+          "starts": 0,
+          "persists": 1,
+          "renders": 1,
+          "trackRenders": 0
+        },
+        "afterCC80": -24,
+        "afterCC112": -24,
+        "afterCounts": {
+          "starts": 0,
+          "persists": 1,
+          "renders": 1,
+          "trackRenders": 0
+        }
+      }
+    },
+    {
+      "name": "Legitimate14bit MSB16 andLSB48 both update the paired absolute target",
+      "passed": true,
+      "evidence": {
+        "values": [
+          -24,
+          -23
+        ]
+      }
+    },
+    {
+      "name": "Note-off and zero-velocity note do not dispatch pitch or cancel transport",
+      "passed": true,
+      "evidence": {
+        "actual": 7,
+        "counts": {
+          "starts": 0,
+          "persists": 0,
+          "renders": 0,
+          "trackRenders": 0
+        }
+      }
+    },
+    {
+      "name": "Older request completion cannot discard newer same-track desired owner",
+      "passed": true,
+      "evidence": {
+        "afterOlderCompletion": {
+          "actual": 0,
+          "intent": 2
+        },
+        "final": {
+          "actual": 3,
+          "intent": 3
+        }
+      }
+    },
+    {
+      "name": "Track replacement and newer GUI pitch survive stale MIDI completion",
+      "passed": true,
+      "evidence": {
+        "track": "replacement",
+        "actual": 5,
+        "intent": 5,
+        "counts": {
+          "starts": 0,
+          "persists": 1,
+          "renders": 1,
+          "trackRenders": 0
+        }
+      }
+    },
+    {
+      "name": "Rejected pending operations discard desired intent without inventing engine rollback",
+      "passed": true,
+      "evidence": {
+        "results": [
+          "rejected",
+          "rejected"
+        ],
+        "reasons": [
+          "controlled failed commit",
+          "controlled failed commit"
+        ],
+        "actual": 0,
+        "intent": 0
+      }
+    },
+    {
+      "name": "Unloaded deck receives a bounded pitch setting without starting playback",
+      "passed": true,
+      "evidence": {
+        "actual": 12,
+        "track": null,
+        "counts": {
+          "starts": 0,
+          "persists": 1,
+          "renders": 1,
+          "trackRenders": 0
+        }
+      }
+    },
+    {
+      "name": "Existing relative browse mapping remains independent and unchanged",
+      "passed": true,
+      "evidence": {
+        "selected": "b",
+        "pitch": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "name": "Four-deck app routes requested Deck3 andDeck4 Key Shift to those decks only",
+      "passed": true,
+      "evidence": {
+        "pitch": [
+          0,
+          0,
+          12,
+          -12
+        ]
+      }
+    }
+  ],
+  "sourceHashes": {
+    "prototype/midi.js": "bd1b0ffd6ade3f118b06f4131307ea55e420317c0f3334a1053f710aa7583dc1",
+    "prototype/app.js": "abc0e15d47fb1546cde931c21072d9dbd6f4d78ba1c65cab0fc5841b12cf02bf",
+    "prototype/panels.js": "b7deea43b18b2219b235cd0d0b53e3548d9f98ced1133af8345d3cecc68ffd64",
+    "prototype/engine.js": "b4683c245c6314432c06f891e85106cf0a1a5c0a615435516930ab5b38f64adf",
+    "prototype/midi-keyshift-harness.js": "a2795af5840b2ff1ab234a6e9c1d988c4e81e943a81a26e40dd1ac15fb07bdd6"
+  }
+}

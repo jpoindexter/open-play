@@ -17,6 +17,7 @@ const reference=json('docs/research/REA_CURRENT_REFERENCE_PLIST_20261017.json');
 const observation=json('docs/prototype/current-feature-check-native-observation.json');
 const candidate=json('docs/prototype/candidate-hashes.json');
 const keyShiftCandidate=json('docs/prototype/midi-keyshift-candidate.json');
+const videoMIDICandidate=json('docs/prototype/video-midi-candidate.json');
 const source='https://serato.com/dj/pro/downloads';
 
 // Each entry is an independently proposed regression test derived from the current
@@ -71,12 +72,20 @@ assert(audit.features.every(f=>f.full_feature_parity_verified===false));
 const protoFiles=Object.keys(candidate.files).filter(p=>p.startsWith('prototype/'));
 assert.equal(protoFiles.length,200);
 const changed=protoFiles.filter(p=>hash(p)!==candidate.files[p]);
-assert.deepEqual([...changed].sort(),[...keyShiftCandidate.production_files_changed].sort(),'Unreviewed source drift from the recorded MIDI candidate');
-for(const item of keyShiftCandidate.source_hashes)assert.equal(hash(item.path),item.sha256,'Frozen new candidate drift '+item.path);
+assert.deepEqual([...changed].sort(),[...videoMIDICandidate.existing_baseline_production_files_changed].sort(),'Unreviewed source drift from the recorded Video MIDI candidate');
+for(const item of videoMIDICandidate.source_hashes)assert.equal(hash(item.path),item.sha256,'Frozen current candidate drift '+item.path);
+for(const p of videoMIDICandidate.new_production_files)assert(!(p in candidate.files),'New production module was already in native baseline');
+// Prior audio evidence belongs to its historical candidate. Do not silently
+// demand current identity or transfer that acceptance to newer dispatcher bytes.
+for(const item of keyShiftCandidate.source_hashes) {
+ const original=execFileSync('git',['show',videoMIDICandidate.previous_browser_commit+':'+item.path],{cwd:root});
+ assert.equal(crypto.createHash('sha256').update(original).digest('hex'),item.sha256,'Prior Key Shift candidate history drift '+item.path);
+}
+for(const item of [...keyShiftCandidate.browser_evidence,...videoMIDICandidate.browser_evidence])assert.equal(hash(item.path),item.sha256,'Retained browser evidence drift '+item.path);
 for(const item of observation.evidence_files)assert.equal(hash(item.path),item.sha256,`Observation bytes changed: ${item.path}`);
 const asar='local-evidence/desktop-builds/0.1.5/Open Play Test-darwin-arm64/Open Play Test.app/Contents/Resources/app.asar';
 assert.equal(hash(asar),audit.desktop_ASAR_sha256,'Current desktop bundle differs from audited candidate');
-const inputPaths=['docs/research/CURRENT_PARITY_AUDIT_20261017.json','docs/research/CURRENT_VERSION_DELTAS_20261017.json','docs/research/REA_CURRENT_REFERENCE_PLIST_20261017.json','docs/prototype/current-feature-check-native-observation.json','docs/delivery/feature-registry.json','prototype/panels.js','prototype/midi.js','prototype/engine.js','prototype/app.js','docs/prototype/midi-keyshift-candidate.json','docs/prototype/MIDI_KEYSHIFT_FUNCTIONAL_REVIEW.md','docs/prototype/midi-keyshift-browser-final-initial-results.json','docs/prototype/midi-keyshift-browser-restored-results.json','docs/prototype/midi-keyshift-audio-independent-results.json'];
+const inputPaths=['docs/research/CURRENT_PARITY_AUDIT_20261017.json','docs/research/CURRENT_VERSION_DELTAS_20261017.json','docs/research/REA_CURRENT_REFERENCE_PLIST_20261017.json','docs/prototype/current-feature-check-native-observation.json','docs/delivery/feature-registry.json','prototype/panels.js','prototype/midi.js','prototype/engine.js','prototype/app.js','docs/prototype/midi-keyshift-candidate.json','docs/prototype/MIDI_KEYSHIFT_FUNCTIONAL_REVIEW.md','docs/prototype/midi-keyshift-browser-final-initial-results.json','docs/prototype/midi-keyshift-browser-restored-results.json','docs/prototype/midi-keyshift-audio-independent-results.json','prototype/video-midi.js','prototype/video-controls.js','docs/prototype/video-midi-candidate.json','docs/prototype/VIDEO_MIDI_FUNCTIONAL_REVIEW.md','docs/prototype/video-midi-browser-final-results.json','docs/prototype/video-midi-browser-final-restored-results.json','docs/research/VIDEO_MIDI_SOURCE_REVIEW_20261017.md','docs/research/VIDEO_MIDI_FINAL_ARTIFACT_REVIEW_20261017.md'];
 const report={generated_at:new Date().toISOString(),source_checked_at:observation.source_checked_at,
  kind:'CURRENT_FEATURE_EVIDENCE_RECONCILIATION_NOT_ALL_FEATURE_RUNTIME_TEST',
  git_head:execFileSync('git',['rev-parse','HEAD'],{cwd:root,encoding:'utf8'}).trim(),
@@ -84,10 +93,13 @@ const report={generated_at:new Date().toISOString(),source_checked_at:observatio
  reference:{version:reference.bundle.version,executable_sha256:reference.executable_sha256,REA_plist_evidence:reference.evidence_id,current_production_page:source,production_page_heading:'What’s New in 4.0.10',beta_separate:true},
  desktop:{version:'0.1.5',source_commit:candidate.candidateCommit,ASAR_sha256:hash(asar),frozen_prototype_files_checked:protoFiles.length,frozen_prototype_mismatches:changed},
  browser_keyshift_candidate:keyShiftCandidate,
+ browser_video_midi_candidate:videoMIDICandidate,
  scope:{canonical_features:110,canonical_requirements:522,beta_deltas_separate:9,provisional_current_release_checks:26,macos_release_checks:24,windows_only_reference_checks:2,release_regression_checks:17,release_checks_passed:0,not_exhaustive:true},
- actual_this_check:['REA version/declaration inspection','Native main-window screenshots of both applications','Open Play native MIDI target menu inspection; selection and mappings unchanged','Current source/candidate/evidence accounting'],
+ actual_this_check:['Current source/candidate/evidence reconciliation only; no behavior rerun by this generator'],
+ prior_reference_native_observations_this_date:['REA version/declaration inspection','Native main-window screenshots of both applications','Open Play0.1.5 MIDI target menu inspection'],
+ new_browser_unit:{initial_checks:14,actual_reload_checks:4,saved_mappings:37,whole_PNGs:20,physical_or_native:false,full_REQ_516_verified:false,evidence:'docs/prototype/VIDEO_MIDI_FUNCTIONAL_REVIEW.md'},
  not_rerun:['Full audio/DSP suites','Earlier native persistence/keylock recordings','Any physical controller operation','Provider, DVS, CDJ or other-device acceptance'],
- new_defended_gap:{severity:'high',feature_groups:['HW-002','DEK-007'],observation:'The running 0.1.5 target menu has eight targets and no Key Shift or Video target. The packaged source list and dispatcher have no corresponding handler; newer browser source is separately implemented and tested.',boundary:'Direct UI/source absence in this candidate. Does not measure Serato MIDI Key Shift at runtime or prove all MIDI workflows are missing.',next:'Preserve the newer browser candidate/evidence; package and execute native mapping later while retaining0.1.5. Video targets and full mapping/reference acceptance remain open.'},
+ new_defended_gap:{severity:'high',feature_groups:['HW-002','DEK-007'],observation:'The running 0.1.5 target menu has eight targets and no Key Shift or Video target. The packaged source list and dispatcher have no corresponding handler; newer browser source is separately implemented and tested.',boundary:'Direct UI/source absence in this candidate. Does not measure Serato MIDI Key Shift at runtime or prove all MIDI workflows are missing.',next:'Preserve the newer browser candidate/evidence; package and execute native mapping later while retaining0.1.5. Core Video targets now have bounded browser evidence; overlay-specific targets, remaining commands, physical/native and full mapping/reference acceptance remain open.'},
  current_visual_result:'The inspected Vertical states still differ in mode/loop controls and the always-visible Open Play mixer; different dimensions/tracks prohibit pixel-identity or waveform-quality conclusions.',
  class_counts:Object.fromEntries([...new Set(audit.features.map(f=>f.classification))].map(k=>[k,audit.features.filter(f=>f.classification===k).length])),
  release_checks:checks,input_hashes:inputPaths.map(path=>({path,sha256:hash(path)})),
@@ -103,12 +115,13 @@ const lines=[
  '## Native gap and newer browser implementation','',
  '**Key Shift cannot be selected in the unchanged0.1.5 desktop MIDI mapper.** Native MIDI → Target exposed eight options: Library browse, two play targets, two cue targets, Crossfader, Sampler 1 and FX depth. Video targets are also absent. The original packaged source confirms that bounded absence; the newer browser source now has four Key Shift targets. A real browser-knob mapping does not establish these other targets.', '',
  `Evidence: ${link('docs/prototype/current-feature-check-native-observation.json')}, ${link('docs/prototype/screenshots/parity-current-midi-targets-0.1.5.png')}, [preserved original comparison](../../docs/research/CURRENT_FEATURE_MATCH_20261017_NATIVE015.md). The official release-page Key Shift fix makes this a specific current-version obligation. Serato’s own MIDI behavior was not exercised in this check.`, '',
- 'The newer browser source has actual four-deck Key Shift and saved-mapping audio evidence: [functional review](../../docs/prototype/MIDI_KEYSHIFT_FUNCTIONAL_REVIEW.md), eight initial plus three reload checks and eight complete recordings. Three production files differ from the0.1.5 source; the audio engine is unchanged. These browser results are not a new native or physical test and do not establish complete REL-05 equivalence.', '',
- '## What this check actually executed','',
- '- REA Info.plist inspection and exact executable identity; no repeated deep Ghidra import.',
- '- Fresh screenshots of the installed reference and running Open Play 0.1.5; actual MIDI menu inspection, with no mapping or connection change. App restored to paused main view.',
- `- Of the200baseline production files, ${changed.length} current browser files differ as recorded by the MIDI candidate. Current ASAR still matches the unchanged0.1.5 bundle. Source correspondence alone is not a feature test.`,
- '- Evidence accounting for every canonical group and requirement; no full-feature pass awarded. Earlier physical, storage, FX, stem and keylock evidence retains its original scope.', '',
+ 'The newer browser source has actual four-deck Key Shift and saved-mapping audio evidence: [functional review](../../docs/prototype/MIDI_KEYSHIFT_FUNCTIONAL_REVIEW.md), eight initial plus three reload checks and eight complete recordings. The later Video MIDI candidate changes four existing production files relative to0.1.5 and adds one production routing module; the audio engine is unchanged. Key Shift recordings retain the preceding candidate identity. These browser results are not a new native or physical test and do not establish complete REL-05 equivalence.', '',
+ 'Core Video MIDI now has [functional review](../../docs/prototype/VIDEO_MIDI_FUNCTIONAL_REVIEW.md):14initial/4actual-reload browser checks,37saved mappings and20wholeGPU PNGs. Independent review corrected compound dispatch and held edges. Overlay-specific targets, some core commands, physical/native transfer and full REQ-516 remain open.', '',
+ '## Executed observations and accounting: separate phases','',
+ '- Earlier this date: REA Info.plist inspection and exact executable identity; no repeated deep Ghidra import.',
+ '- Earlier this date: screenshots of the installed reference and running Open Play 0.1.5; actual MIDI menu inspection, with no mapping or connection change. App restored to paused main view.',
+ `- Of the200baseline production files, ${changed.length} current browser files differ and one production routing module is added, as recorded by the Video MIDI candidate. Current ASAR still matches the unchanged0.1.5 bundle. Source correspondence alone is not a feature test.`,
+ '- This generator reconciles evidence for every canonical group and requirement; no runtime test or full-feature pass is awarded. Earlier physical, storage, FX, stem and keylock evidence retains its original scope.', '',
  '## Current release obligations','',
  'Each row inherits the existing per-feature Codex and Claude Code model/effort recommendations in the JSON companion. Recommendations are not a live model-catalog verification. No full release-case parity pass is awarded. REL-05 has newer browser subset evidence while its0.1.5 native target remains absent. REL-07 and REL-18 are Windows-only facts, outside the current macOS parity gate. Recent-update rows are not claimed to have debuted in 4.0.10.', '',
  '| Check | Feature groups | Subject | Proposed test |','|---|---|---|---|',

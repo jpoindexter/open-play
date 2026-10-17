@@ -1,0 +1,145 @@
+{
+  "executed_at": "2026-10-17T13:31:16.563Z",
+  "scope": "Actual MIDI decoder/conversion policy only. No UI, audio, physical device or vendor equivalence acceptance.",
+  "passed": 10,
+  "failed": 0,
+  "checks": [
+    {
+      "name": "A full seven-bit controller sweep reaches both limits and neutral",
+      "passed": true,
+      "evidence": {
+        "values": [
+          -24,
+          -12,
+          0,
+          0,
+          12,
+          24
+        ]
+      }
+    },
+    {
+      "name": "Relative encoders accumulate semitones in both supported encodings",
+      "passed": true,
+      "evidence": {
+        "steps": [
+          1,
+          2,
+          1,
+          0
+        ],
+        "offset": [
+          1,
+          2,
+          1,
+          1
+        ]
+      }
+    },
+    {
+      "name": "Absolute pitch-bend uses its fourteen-bit range rather than seven-bit scaling",
+      "passed": true,
+      "evidence": {
+        "values": [
+          -24,
+          0,
+          24
+        ]
+      }
+    },
+    {
+      "name": "Paired fourteen-bit CC messages keep the parser pair and reach center",
+      "passed": true,
+      "evidence": {
+        "pair": [
+          64,
+          0
+        ]
+      }
+    },
+    {
+      "name": "Relative motion saturates declared pitch-renderer limits and leaves zero-delta neutral",
+      "passed": true,
+      "evidence": {
+        "range": [
+          -24,
+          24
+        ]
+      }
+    },
+    {
+      "name": "Note-off does not turn a learned velocity control into minimum pitch",
+      "passed": true,
+      "evidence": {
+        "noteOffIgnored": true
+      }
+    },
+    {
+      "name": "Non-finite input cannot dispatch a non-finite audio parameter",
+      "passed": true,
+      "evidence": {
+        "invalidRejected": true
+      }
+    },
+    {
+      "name": "Synthetic review messages use the same MIDI decoder for CC, note-off and pitch bend",
+      "passed": true,
+      "evidence": {
+        "cc": {
+          "type": "CC",
+          "channel": 2,
+          "number": 16,
+          "value": 96,
+          "pressed": true
+        },
+        "bend": {
+          "type": "Pitch bend",
+          "channel": 1,
+          "number": 0,
+          "value": 8192,
+          "pressed": true
+        },
+        "off": {
+          "type": "Note",
+          "channel": 1,
+          "number": 60,
+          "value": 0,
+          "pressed": false
+        }
+      }
+    },
+    {
+      "name": "Synthetic input rejects invalid fields rather than dispatching corrupt MIDI",
+      "passed": true,
+      "evidence": {
+        "invalidFieldSets": 6
+      }
+    },
+    {
+      "name": "Fourteen-bit CC mapping accepts only its actual MSB/LSB pair",
+      "passed": true,
+      "evidence": {
+        "accepted": [
+          true,
+          true,
+          false,
+          false
+        ]
+      }
+    }
+  ],
+  "source_hashes": [
+    {
+      "path": "prototype/midi.js",
+      "sha256": "bd1b0ffd6ade3f118b06f4131307ea55e420317c0f3334a1053f710aa7583dc1"
+    },
+    {
+      "path": "prototype/app.js",
+      "sha256": "abc0e15d47fb1546cde931c21072d9dbd6f4d78ba1c65cab0fc5841b12cf02bf"
+    },
+    {
+      "path": "prototype/panels.js",
+      "sha256": "b7deea43b18b2219b235cd0d0b53e3548d9f98ced1133af8345d3cecc68ffd64"
+    }
+  ]
+}
