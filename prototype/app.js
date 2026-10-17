@@ -1202,6 +1202,7 @@ const cueHolds = createCueHolds({
   render: renderDecks,
   notify,
 });
+api.cueHolds = cueHolds;
 const slicer = createSlicer({ engine, render: renderDecks, notify });
 const pitchPlay = createPitchPlay({engine,render:renderDecks,persist,notify,quantized});
 const panels = createPanels(api);

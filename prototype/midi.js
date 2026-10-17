@@ -18,7 +18,7 @@ export function mappedValue(message, encoding, pairs = new Map()) {
   if (encoding === "Relative offset") return message.value - 64;
   if (encoding === "14-bit absolute" && message.type === "CC") {
     const base = message.number % 32,
-      key = `${message.channel}:${base}`,
+      key = `${message.deviceId||''}:${message.channel}:${base}`,
       pair = pairs.get(key) || [0, 0];
     pair[message.number < 32 ? 0 : 1] = message.value;
     pairs.set(key, pair);
