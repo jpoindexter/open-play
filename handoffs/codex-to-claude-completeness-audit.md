@@ -1,3 +1,5 @@
+Source/evidence checkpoint f07a389981f8cb43d4ac393094aebb879e9a21a7 is pushed to private origin/main and remote SHA verified. All113 existing Trello descriptions were read back exactly. Working desktop0.1.3 ASAR rehashed unchanged cd9577b63de60caadcf2b4df70caea8c20daaaac22066ea7690b36ad99f98966. Current browser remains paused with2savedimports. The audit unit is saved; full-parity goal stays active. Exact re-entry: read plan52/current audit/LOCAL_AUDIO_PERSISTENCE_REVIEW, freeze and package a new test version from reviewed source, preserve0.1.3, then execute native import→quit→reopen→load→play/capture and actual MP3 playback; do not repeat the unbounded Ghidra import.
+
 Current private-record sync:113 existing Trello descriptions exact-readback verified; see docs/delivery/trello-current-parity-20261017-sync.json. All remain open; model/effort recommendations retained.
 
 ## Current checkpoint — current-reference audit and browser persistence

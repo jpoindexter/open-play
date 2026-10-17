@@ -1421,3 +1421,9 @@ Claude handoff: run the exact original prompt independently, use current audit p
 
 
 17October2026 private-record verification: all110featurecards plus3gate/evidencecards updated and read back exactly, open/incomplete; scoped evidence/model+effort recommendations retained. See docs/delivery/trello-current-parity-20261017-sync.json. Rate-limited initial batch was recovered through a fresh board read and paced updates. No privacy/list/completion/public-release changes.
+
+
+### 52.1 Saved checkpoint and exact re-entry
+
+Source/evidence checkpoint f07a389981f8cb43d4ac393094aebb879e9a21a7 is pushed to private origin/main and remote SHA verified. All113 existing Trello descriptions were read back exactly. Working desktop0.1.3 ASAR rehashed unchanged cd9577b63de60caadcf2b4df70caea8c20daaaac22066ea7690b36ad99f98966. Current browser remains paused with2savedimports. The audit unit is saved; full-parity goal stays active. Exact re-entry: read plan52/current audit/LOCAL_AUDIO_PERSISTENCE_REVIEW, freeze and package a new test version from reviewed source, preserve0.1.3, then execute native import→quit→reopen→load→play/capture and actual MP3 playback; do not repeat the unbounded Ghidra import.
+
