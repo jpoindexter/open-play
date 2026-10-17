@@ -1,31 +1,32 @@
 # Current handoff: Codex to Claude
 
 Read [the full independent audit packet](codex-to-claude-completeness-audit.md).
-The original prompt is preserved verbatim; later user authority remains binding.
-
+The original prompt remains verbatim; preserve all later user authority.
 Project: `/Users/jasonpoindexter/Documents/GitHub/Open Play`.
-Candidate: `e36596379377bfb4778db97aa7a3bc9cd2aa8a8a`; hashes: `docs/prototype/candidate-hashes.json` (151 files).
-Return independent findings in `handoffs/claude-to-codex-completeness-audit.md`.
+Candidate: `1da00d574efc5da4532d40be965e4a1e3d294cff`; 159 hashes in `docs/prototype/candidate-hashes.json`.
+Return independent findings to `handoffs/claude-to-codex-completeness-audit.md`.
 
-**Full parity NOT PASSED; no native app until Jason approves a named revision.**
-Active goal continues across110 groups/521 requirements; counts are not exhaustive
-coverage. Existing actual SCNet/keylock,236audioFXcontrols and Stem Slip proof
-remain separately scoped in the packet.
+**Full parity NOT PASSED; native approval NOT GRANTED. Active goal continues.**
+Working inventory110 groups/521 requirements; counts are not exhaustive coverage.
+Read docs/prototype/VIDEO_SPECTRUM_OPACITY_REVIEW.md and plan36 first.
+ActualFX102/102,realFFT17/17,opacity13/13,pipeline33/33; mainUI6 opacity,
+3 Analyzer and5 compatibility/recapture observations execute and persist.
+Isolator Bass,finite Freeze,real8bandAnalyzer and separate channel-opacity links
+now implement their independently specified contracts. Vendor curves stay open.
+Independent accessor/pipeline defect reproduced/fixed; controlled8/8 and real
+pixel bypass pass. Opacity9/9 controls/mixer review has no defended bug. Earlier
+raw failures and original algorithms are preserved with honest scope.
 
-Latest review: docs/prototype/VIDEO_COLOR_CROSSFADE_REVIEW.md.
-Actual browserFX81/81,transitions65/65,finitefades11/11,pipeline32/32. Main UI
-executes speed ordering, directional/stop/link controls, reload and completion
-during panel replacement. Independent review found/fixed hidden-fade scheduling.
-Prior manual/recording23/23,Media32/32,karaoke19/19,treatment21/21 and semantic
-links24/24 remain dated scoped results, not new executions of every path.
+Prior transition65/65,finitefade11/11,recording23/23,Media32/32,karaoke19/19,
+treatment21/21 and semanticlinks24/24 remain dated scoped results. Existing
+audio236controls/keylock/SCNet/StemSlip proof remains separate. SCNet quality
+failure/resource bounds are unresolved, and no-limits objective is not achieved.
 
-Mac unlocked; current native menus observed55 FX/29 transitions. Four additional
-transition resource names remain unobserved/labeled. Video restoredOFF; exact
-prior fullscreen mode not verified restored. No shader equivalence inferred.
-
-Next: Isolator Bass, finite Frame Freeze, true eight-band Analyzer and separate
-channel-opacity links; then other Video/output/quality and full library/device/
-provider/conditional/model-quality gates. Read current plan35 and manual crosswalk.
-Full independent Claude audit is not automatically launched. Conditional Fable
-reference debugging was used in a separate Fable5.1/High session; claims qualified
-in docs/research/claude-fable/PARENT_VALIDATION.md. Native approval remains absent.
+Mac unlocked; native menu observation confirms55FX/29transitions;4resource-only
+transitions stay labeled. Video restoredOFF/Setupclosed; prior fullscreen
+restoration unverified. Menu visibility proves no vendor shader.
+Next: per-file VideoFXsave/recall, other manual meanings, output/window/quality/
+arrangement/MIDI/shortcut workflows and full library/device/provider acceptance.
+Full independent Claude audit remains unlaunched. Bounded Fable5.1/High reference
+debugging was separate and qualified in claude-fable/PARENT_VALIDATION.md.
+No native implementation until Jason explicitly approves a named HTML revision.

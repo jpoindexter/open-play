@@ -4,7 +4,7 @@
 
 Project: `/Users/jasonpoindexter/Documents/GitHub/Open Play`
 Prepared: 2026-10-16
-Current browser candidate: `e36596379377bfb4778db97aa7a3bc9cd2aa8a8a`
+Current browser candidate: `1da00d574efc5da4532d40be965e4a1e3d294cff`
 Content hashes: `docs/prototype/candidate-hashes.json`
 Private repository: https://github.com/jpoindexter/open-play
 Private board: https://trello.com/b/OqMGEjpe/open-play-serato-parity
@@ -50,7 +50,7 @@ It is not the full completeness audit; its source claims need independent checks
 ## Read first
 
 - `AGENTS.md` if present; `PROJECT_PROMPT.md`; `docs/approvals.md`.
-- `FULL_BUILD_PLAN.md` sections23–35, with older sections retained as dated history.
+- `FULL_BUILD_PLAN.md` sections23–36, with older sections retained as dated history.
 - `docs/research/PARITY_GATE.md`, `FULL_SCOPE_CONTRACT.md`, `FEATURE_COVERAGE.md`,
   `INTERACTION_REQUIREMENTS.md`, `REQUIREMENT_GAPS_REVIEW.md`, `SOURCE_CONFLICTS.md`,
   `UI_OBSERVATIONS.md`, `EVIDENCE_LEDGER.md`, `BINARY_FINDINGS.md`,
@@ -115,19 +115,24 @@ quantization/topology and combined Pitch Play/Flip/Slicer workflows remain open.
 Video now executes55 original effects and34 original transitions (separate
 Crossfade baseline included), six ordered channel/master slots, text/image layers,
 real FFT/linked/reverse transport, actual first-frame File decode, recording/replay,
-CDG karaoke and Media Crate. Reference provenance is47 manifest effects +8
-localized candidates and7 transitions +26 candidates; active menus and vendor
+CDG karaoke and Media Crate. Original file provenance remains47 manifest effects +8
+localized candidates and7 transitions +26 candidates. Current native menus separately
+confirm55 FX/29 transitions; four resource-only transitions stay labeled. Vendor
 algorithms/ranges/defaults remain unverified. No vendor code/assets copied.
 
 | Actual browser path | Result | Limit |
 |---|---:|---|
-| Video effects / transitions / overlays |72/72;51/51;32/32|Independent pixel contracts only|
-| Full pipeline |32/32|Real File/AudioEngine/FFT, six slots, reverse/queued-seek pixels and actual container video/audio decode; no sustained/HD/native claim|
+| Video effects / transitions / overlays |102/102;65/65;32/32|Independent pixel contracts only|
+| Full pipeline |33/33|Real File/AudioEngine/FFT, six slots, reverse/queued-seek pixels and actual container video/audio decode; no sustained/HD/native claim|
 | CDG decoder / karaoke integration |21/21;19/19|Original packets, actual clock/GPU/capture; physical/commercial/reference parity open|
 | Media Crate |32/32|Real files/pixels/association/fallback/Random/Next/ownership and six fresh paused imports|
+| Real eight-band FFT / opacity |17/17;13/13|Independent AudioEngine spectrum/pixels; not vendor bands or physical faders|
+| Finite Video directional fade |11/11 +actual UI|Independent duration/curve; hidden completion and saved state|
+| Independent recording resolution |23/23 +actual UI|Real containers/audio, four historical heights; not vendor encoder/cadence|
 
-Thirteen separate Node scripts exited0; each controlled/pure scope is recorded in
-`video-node-checks.json`. Main UI executed FX/presets/image and flag persistence,
+The original thirteen separate Node scripts exited0 in
+`video-node-checks.json`; current21 Video scripts exit0 in
+`video-spectrum-opacity-node-regressions.json`, with narrower pure/controlled scope. Main UI executed FX/presets/image and flag persistence,
 recording across panel changes, actual downloaded replay, MP3+CDG import/play/pause
 and Media association/Next/fallback. Initial alpha/seek/first-frame failures remain
 saved. First-frame replacement waits for an actual muted presented frame; capture
@@ -152,7 +157,7 @@ independent browser subsets with full1:1.
 
 1. Record exact revision, worktree differences and environment before testing.
 2. Independently enumerate installed4.0.10.213 controls/states/settings/errors,
-   expansions, device/provider guides and applicable release notes. Do not stop at507.
+   expansions, device/provider guides and applicable release notes. Do not stop at521.
 3. Compare that checklist with requirements, registry, source crosswalk, full plan,
    Trello and every prototype destination. Resolve sources against exact versions.
 4. Reproduce binary/UI claims; separate observed, documented, reported, inferred,
@@ -268,6 +273,31 @@ REQ505/513 record executed independent paths; REQ512 still lacks per-channel
 opacity controls/links. Isolator Bass, finite Frame Freeze, actual eight-band
 Analyzer and further manual meanings remain open. Preserve all broader gaps and
 model/effort routing. Full parity and native approval remain false.
+
+## Latest spectrum/opacity checkpoint — 17 October
+
+Read docs/prototype/VIDEO_SPECTRUM_OPACITY_REVIEW.md first. Actual finalFX102/102,
+realFFT17/17,opacity13/13 and pipeline33/33 passed on the current frozen source.
+MainUI6 opacity observations,3 Analyzer observations and5 compatibility/recapture
+observations execute real controls and reload. Isolator Bass/finiteFreeze/Analyzer8
+now implement all seven corrections from VIDEO_NEXT_FX_CORRECTIONS.md, using
+independent frequency bands/curves/timers. Earlier saved presets retain their old
+branches; mode-inapplicable controls disable visibly. No reference equivalence.
+
+An independent reviewer reproduced a pipeline spread reading a spectrum getter
+before validation; own-data propagation now preserves missing-source bypass.
+Controlled8/8 plus realGPU pixel case confirm the repair. Opacity review9/9 found
+no defended production bug. Two earlier opacity fixture failures remain saved
+and explained; final real partial-alpha/audio behavior passes without tolerance
+relaxation. Current21 Node Video scripts exit0, with declared narrower scopes.
+
+REQ512 independently executes per-channel level/link authority separate from
+transport/crossfade; physical faders and exact reference transfer remain open.
+Next: per-file VideoFX save/recall, other manual meanings and output/window/quality/
+arrangement/Syphon/MIDI/shortcut workflows, then remaining broad-scope acceptance.
+SCNet quality failure, resource limits, hardware/provider/combined workflows and
+full1:1 remain open. No native app until named-candidate approval. Models/effort
+remain per feature/requirement/card; recommendations are not executions.
 
 ## Original full project prompt — verbatim snapshot
 
