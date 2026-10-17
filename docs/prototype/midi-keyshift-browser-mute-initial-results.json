@@ -1,0 +1,59 @@
+{
+  "phase": "initial",
+  "startedAt": "2026-10-17T13:03:23.785Z",
+  "checks": [],
+  "fatalErrors": [
+    {
+      "message": "Physical route not muted",
+      "stack": "Error: Physical route not muted\n    at assert (http://127.0.0.1:18770/prototype/midi-keyshift-harness.js:1:65)\n    at run (http://127.0.0.1:18770/prototype/midi-keyshift-harness.js:25:136)\n    at async $.onclick (http://127.0.0.1:18770/prototype/midi-keyshift-harness.js:42:89)"
+    }
+  ],
+  "recordings": [],
+  "sourceBefore": {
+    "app.js": "e60194dcdf779eb770acc6222aab59ec60a1fe03cf42bee20ee7f1ba048aca72",
+    "panels.js": "73643bc2a7e21e4e4c14c0f3c950fb312a82b6b75517e453e1e0acd5684991f0",
+    "midi.js": "aeac2b847c26eb859d3ef9e6a98ea119a10c50f4caa218f0534cfbbde38776e5",
+    "engine.js": "b4683c245c6314432c06f891e85106cf0a1a5c0a615435516930ab5b38f64adf",
+    "keylock.js": "f823395f4f6a268c4e5813fd93bae9604435d8f07d3d18f80563e8ec37a6834c",
+    "keylock-shadow-live.js": "4860d18ec3ccf39474824cbf9d46df259b110631b4c2cfde60c9a1d03e21504b",
+    "midi-keyshift-harness.js": "29699357faf55abb9fb866d47b0a2dce19548bf9a2488f8246eb4d3f440aa486",
+    "index.html": "a920816b73f68e28feab40f36ae429677cd3005a4f10a5e8b0366faf7907259c"
+  },
+  "fixture": {
+    "origin": "http://127.0.0.1:18770",
+    "framesPerSource": 2880000,
+    "sampleRate": 48000,
+    "deck1Hz": [
+      330,
+      550
+    ],
+    "deck2Hz": [
+      440,
+      660
+    ],
+    "amplitude": 0.12
+  },
+  "criteria": {
+    "frequencyAbsoluteHz": 1,
+    "frequencyRelative": 0.005,
+    "minimumRMS": 0.01,
+    "measurementStartSeconds": 0.2,
+    "measurementEndSeconds": 1.1,
+    "minimumRecordingSeconds": 1.2
+  },
+  "scope": "Controlled original tone buffers in actual app; DOM mapper/learn/Add/injection callbacks, actual engine/WASM and complete postmaster recordings. Programmatic DOM interactions, no physical/native/vendor/continuity acceptance.",
+  "physicalOutputMuted": false,
+  "completed": false,
+  "sourceAfter": {
+    "app.js": "e60194dcdf779eb770acc6222aab59ec60a1fe03cf42bee20ee7f1ba048aca72",
+    "panels.js": "73643bc2a7e21e4e4c14c0f3c950fb312a82b6b75517e453e1e0acd5684991f0",
+    "midi.js": "aeac2b847c26eb859d3ef9e6a98ea119a10c50f4caa218f0534cfbbde38776e5",
+    "engine.js": "b4683c245c6314432c06f891e85106cf0a1a5c0a615435516930ab5b38f64adf",
+    "keylock.js": "f823395f4f6a268c4e5813fd93bae9604435d8f07d3d18f80563e8ec37a6834c",
+    "keylock-shadow-live.js": "4860d18ec3ccf39474824cbf9d46df259b110631b4c2cfde60c9a1d03e21504b",
+    "midi-keyshift-harness.js": "29699357faf55abb9fb866d47b0a2dce19548bf9a2488f8246eb4d3f440aa486",
+    "index.html": "a920816b73f68e28feab40f36ae429677cd3005a4f10a5e8b0366faf7907259c"
+  },
+  "sourceStable": true,
+  "finishedAt": "2026-10-17T13:03:23.799Z"
+}

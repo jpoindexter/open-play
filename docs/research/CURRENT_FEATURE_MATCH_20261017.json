@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-10-17T12:54:59.117Z",
+  "generated_at": "2026-10-17T13:21:43.623Z",
   "source_checked_at": "2026-10-17T12:50:43.755803+00:00",
   "kind": "CURRENT_FEATURE_EVIDENCE_RECONCILIATION_NOT_ALL_FEATURE_RUNTIME_TEST",
-  "git_head": "2678d1670ddbeec712ed219a0b819938b9ffb721",
+  "git_head": "fab19dd391507c39f63eb66c9cb08a72711df3f8",
   "outcome": "FULL_PARITY_NOT_ESTABLISHED",
   "full_parity_verified": false,
   "complete_latest_inventory": false,
@@ -19,7 +19,63 @@
     "source_commit": "48a6d4dad2f217a8ba166b9ca890a287aabc4feb",
     "ASAR_sha256": "251bcc16caf9cfb42a3967db058717373a8c6fcb9ff97d56c330058ec8301b03",
     "frozen_prototype_files_checked": 200,
-    "frozen_prototype_mismatches": []
+    "frozen_prototype_mismatches": [
+      "prototype/app.js",
+      "prototype/midi.js",
+      "prototype/panels.js"
+    ]
+  },
+  "browser_keyshift_candidate": {
+    "frozen_at": "2026-10-17T13:14:05.816637+00:00",
+    "kind": "BROWSER_KEYSHIFT_SOURCE_CANDIDATE_NOT_NEW_NATIVE_PACKAGE",
+    "baseline_native": "0.1.5",
+    "baseline_native_source": "48a6d4dad2f217a8ba166b9ca890a287aabc4feb",
+    "full_parity_verified": false,
+    "native_keyshift_acceptance": false,
+    "physical_keyshift_acceptance": false,
+    "production_files_changed": [
+      "prototype/app.js",
+      "prototype/midi.js",
+      "prototype/panels.js"
+    ],
+    "audio_engine_unchanged": true,
+    "source_hashes": [
+      {
+        "path": "prototype/app.js",
+        "sha256": "abc0e15d47fb1546cde931c21072d9dbd6f4d78ba1c65cab0fc5841b12cf02bf"
+      },
+      {
+        "path": "prototype/midi.js",
+        "sha256": "bd1b0ffd6ade3f118b06f4131307ea55e420317c0f3334a1053f710aa7583dc1"
+      },
+      {
+        "path": "prototype/panels.js",
+        "sha256": "565277e7620f5633e2c1a782fca8552f4a354630804648316a0919c270ae55ef"
+      },
+      {
+        "path": "prototype/engine.js",
+        "sha256": "b4683c245c6314432c06f891e85106cf0a1a5c0a615435516930ab5b38f64adf"
+      },
+      {
+        "path": "prototype/midi-keyshift-harness.js",
+        "sha256": "a2795af5840b2ff1ab234a6e9c1d988c4e81e943a81a26e40dd1ac15fb07bdd6"
+      },
+      {
+        "path": "prototype/midi-keyshift-harness.html",
+        "sha256": "4c382c5bbeb5c33f7be998feaac31edce8bd88b41c1b972b70cadd9ca66669bc"
+      }
+    ],
+    "browser_evidence": [
+      {
+        "path": "docs/prototype/midi-keyshift-browser-final-initial-results.json",
+        "sha256": "4e3ca607079cc8f8cad5bd6fae743f3462dfb497a8fda51b1a24c9fc6d1a893d"
+      },
+      {
+        "path": "docs/prototype/midi-keyshift-browser-restored-results.json",
+        "sha256": "577e9ed673721bdb4d778dea67bf0a905507b16924d6f896ae82e5c606614d68"
+      }
+    ],
+    "scope": "Actual main app mapper callbacks/renderer/recording in isolated browser with known tone buffers, plus mainUI synthetic message inspection. No native build/hardware/vendor parity."
   },
   "scope": {
     "canonical_features": 110,
@@ -50,9 +106,9 @@
       "HW-002",
       "DEK-007"
     ],
-    "observation": "The running 0.1.5 target menu has eight targets and no Key Shift or Video target. The matching source list and dispatcher have no corresponding handler.",
+    "observation": "The running 0.1.5 target menu has eight targets and no Key Shift or Video target. The packaged source list and dispatcher have no corresponding handler; newer browser source is separately implemented and tested.",
     "boundary": "Direct UI/source absence in this candidate. Does not measure Serato MIDI Key Shift at runtime or prove all MIDI workflows are missing.",
-    "next": "Implement a real target/dispatch lifecycle and measured semitone test in a new candidate; preserve current package and existing knob mapping."
+    "next": "Preserve the newer browser candidate/evidence; package and execute native mapping later while retaining0.1.5. Video targets and full mapping/reference acceptance remain open."
   },
   "current_visual_result": "The inspected Vertical states still differ in mode/loop controls and the always-visible Open Play mixer; different dimensions/tracks prohibit pixel-identity or waveform-quality conclusions.",
   "class_counts": {
@@ -369,7 +425,7 @@
         "DEK-007"
       ],
       "proposed_independent_acceptance": "Learn a controller for each deck Key Shift, move it in both directions, measure semitones and independence from tempo, then save/reload the mapping.",
-      "status": "OBSERVED_MISSING_TARGET_IN_DESKTOP_0.1.5",
+      "status": "BROWSER_SUBSET_EXECUTED_NATIVE015_TARGET_STILL_MISSING",
       "macos_parity_obligation": true,
       "reference_runtime_verified": false,
       "open_play_full_parity_verified": false,
@@ -416,13 +472,17 @@
       ],
       "source_evidence": [
         {
-          "path": "prototype/panels.js",
-          "line": 1621
+          "path": "docs/prototype/midi-keyshift-candidate.json",
+          "line": 1
         },
         {
-          "path": "prototype/panels.js",
-          "line": 1568
+          "path": "docs/prototype/MIDI_KEYSHIFT_FUNCTIONAL_REVIEW.md",
+          "line": 1
         }
+      ],
+      "browser_subset_evidence": [
+        "docs/prototype/midi-keyshift-browser-final-initial-results.json",
+        "docs/prototype/midi-keyshift-browser-restored-results.json"
       ]
     },
     {
@@ -1827,7 +1887,7 @@
   "input_hashes": [
     {
       "path": "docs/research/CURRENT_PARITY_AUDIT_20261017.json",
-      "sha256": "364bac6e8f736c2559af097bba2cbc469424e4526ccd96793bfa190440550c2d"
+      "sha256": "6ab66b2c284f88220939c4604760b295a92e520418bf29091c3f033aacd2112c"
     },
     {
       "path": "docs/research/CURRENT_VERSION_DELTAS_20261017.json",
@@ -1847,11 +1907,11 @@
     },
     {
       "path": "prototype/panels.js",
-      "sha256": "2063234fa4d209424ec94df373fca9d66eec23cc917302a8ee8dc27ee4b92d89"
+      "sha256": "565277e7620f5633e2c1a782fca8552f4a354630804648316a0919c270ae55ef"
     },
     {
       "path": "prototype/midi.js",
-      "sha256": "b0b5ef7b71ef551c98ccb56dba0161d3e532a93713bb6b0e2b14e6f4c96b8c5e"
+      "sha256": "bd1b0ffd6ade3f118b06f4131307ea55e420317c0f3334a1053f710aa7583dc1"
     },
     {
       "path": "prototype/engine.js",
@@ -1859,14 +1919,34 @@
     },
     {
       "path": "prototype/app.js",
-      "sha256": "221131cff9da50c199180f951466ded89750c79f98d095494572625e831fc5a5"
+      "sha256": "abc0e15d47fb1546cde931c21072d9dbd6f4d78ba1c65cab0fc5841b12cf02bf"
+    },
+    {
+      "path": "docs/prototype/midi-keyshift-candidate.json",
+      "sha256": "9b5c5be169df4698c43b0ae0a439cf385d18962e239987acb66f0b983a29a812"
+    },
+    {
+      "path": "docs/prototype/MIDI_KEYSHIFT_FUNCTIONAL_REVIEW.md",
+      "sha256": "8bfab64f90abce6cd6beb84a1ce566b04582e47a18bff25f3c3ef754c134cd74"
+    },
+    {
+      "path": "docs/prototype/midi-keyshift-browser-final-initial-results.json",
+      "sha256": "4e3ca607079cc8f8cad5bd6fae743f3462dfb497a8fda51b1a24c9fc6d1a893d"
+    },
+    {
+      "path": "docs/prototype/midi-keyshift-browser-restored-results.json",
+      "sha256": "577e9ed673721bdb4d778dea67bf0a905507b16924d6f896ae82e5c606614d68"
+    },
+    {
+      "path": "docs/prototype/midi-keyshift-audio-independent-results.json",
+      "sha256": "0eff7d25ed2a0b98a5902a4fb61b18a9e495c7f196e47ebd18ce9341fb5078fa"
     }
   ],
   "constraints": {
     "native_rewrite": false,
     "public_release": false,
     "reference_modified": false,
-    "original_prototype_files_modified": false,
+    "original_prototype_files_modified": true,
     "claim_of_all_features_tested": false
   }
 }

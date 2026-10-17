@@ -1,0 +1,68 @@
+Browser tab: 42, Title: "Open Play — DJ prototype", URL: "http://127.0.0.1:18771/prototype/".
+1 AXWebArea Open Play — DJ prototype, URL: 127.0.0.1:18771/prototype/
+	2 container modal
+		3 container
+			4 heading MIDI mapping editor, Value: 2, ID: modal-title
+				5 text MIDI mapping editor
+			6 button Description: Close dialog, ID: modal-close
+		7 container modal-body
+			8 text REAL INPUT WHEN SUPPORTED · EXPLICIT TEST INJECTION
+			9 text Disconnected
+			10 button Connect MIDI inputs, ID: midi-connect
+			11 button Disconnect input, ID: midi-disconnect
+			12 text Connect requests standard MIDI input only. No SysEx or hardware output is sent. Device names are enumeration evidence; received messages are separate evidence.
+			13 container
+				14 text Target
+				15 pop up button (expanded, settable) Target, Value: Library browse, ID: midi-target, Secondary Actions: Collapse
+					16 menu
+						17 (selected) Library browse
+						18 Deck 1 play
+						19 Deck 2 play
+						20 Deck 1 cue
+						21 Deck 2 cue
+						22 Crossfader
+						23 Sampler 1
+						24 FX depth
+						25 Deck 1 key shift
+						26 Deck 2 key shift
+						27 Deck 3 key shift
+						28 Deck 4 key shift
+			29 container
+				30 text Encoding
+				31 pop up button (collapsed, settable) Encoding, Value: 7-bit absolute, ID: midi-encoding, Secondary Actions: Expand
+					32 menu
+						33 (selected) 7-bit absolute
+						34 14-bit absolute
+						35 Relative two’s complement
+						36 Relative offset
+			37 container
+				38 text Message
+				39 pop up button (collapsed, settable) Message, Value: CC, ID: midi-type, Secondary Actions: Expand
+					40 menu
+						41 (selected) CC
+						42 Note
+						43 Pitch bend
+			44 container
+				45 text Channel
+				46 stepper (settable, integer) Channel, Value: 1, ID: midi-channel
+			47 container
+				48 text Controller / note
+				49 stepper (settable, integer) Controller / note, Value: 1, ID: midi-number
+			50 container
+				51 text Synthetic test value
+				52 stepper (settable, integer) Synthetic test value, Value: 64, ID: midi-test-value
+			53 button Learn next message, ID: midi-learn
+			54 button Inject synthetic message, ID: midi-send
+			55 button Add mapping, ID: midi-add
+			56 button Export mapping, ID: midi-export
+			57 button Clear prototype mappings, ID: midi-reset
+			58 container midi-mappings
+				59 text 1. CC ch1 / 1 → Library browse · Relative two’s complement
+				60 text 2. CC ch1 / 16 → Deck 1 key shift · 7-bit absolute
+				61 text 3. CC ch1 / 17 → Deck 2 key shift · Relative two’s complement
+				62 text 4. CC ch1 / 18 → Deck 3 key shift · 7-bit absolute
+				63 text 5. CC ch1 / 19 → Deck 4 key shift · 7-bit absolute
+			64 text No messages received
+			65 text Mappings control real browser actions. Key Shift uses an independent -24 to +24 semitone mapping; relative steps change semitones and enable key lock. Synthetic input is a test, not physical-device proof. LED feedback, soft takeover, device-specific encodings and hardware round-trip latency remain unverified. This is Open Play JSON, not Serato MIDI XML.
+
+The focused UI element is 15 pop up button (expanded, settable) Target, Value: Library browse, ID: midi-target, Secondary Actions: Collapse

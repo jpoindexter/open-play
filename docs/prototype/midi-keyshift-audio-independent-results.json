@@ -1,0 +1,1162 @@
+{
+  "kind": "Independent complete encoded-recording decode and declared stereo-tone review of actual-app browser MIDI Key Shift harness",
+  "date": "2026-10-17",
+  "inputReports": [
+    {
+      "file": "docs/prototype/midi-keyshift-browser-final-initial-results.json",
+      "bytes": 244109,
+      "SHA256": "4e3ca607079cc8f8cad5bd6fae743f3462dfb497a8fda51b1a24c9fc6d1a893d",
+      "phase": "initial",
+      "checks": 8,
+      "reportedPassed": 8,
+      "reportedCompleted": true,
+      "sourceStable": true,
+      "fatalErrors": [],
+      "physicalMutedReported": true,
+      "recordings": 7,
+      "criteria": {
+        "frequencyAbsoluteHz": 1,
+        "frequencyRelative": 0.005,
+        "minimumRMS": 0.01,
+        "measurementStartSeconds": 0.2,
+        "measurementEndSeconds": 1.1,
+        "minimumRecordingSeconds": 1.2
+      }
+    },
+    {
+      "file": "docs/prototype/midi-keyshift-browser-restored-results.json",
+      "bytes": 38227,
+      "SHA256": "577e9ed673721bdb4d778dea67bf0a905507b16924d6f896ae82e5c606614d68",
+      "phase": "restored",
+      "checks": 3,
+      "reportedPassed": 3,
+      "reportedCompleted": true,
+      "sourceStable": true,
+      "fatalErrors": [],
+      "physicalMutedReported": true,
+      "recordings": 1,
+      "criteria": {
+        "frequencyAbsoluteHz": 1,
+        "frequencyRelative": 0.005,
+        "minimumRMS": 0.01,
+        "measurementStartSeconds": 0.2,
+        "measurementEndSeconds": 1.1,
+        "minimumRecordingSeconds": 1.2
+      }
+    }
+  ],
+  "sourceIdentities": [
+    {
+      "file": "prototype/app.js",
+      "recordedSHA256": "abc0e15d47fb1546cde931c21072d9dbd6f4d78ba1c65cab0fc5841b12cf02bf",
+      "currentSHA256": "abc0e15d47fb1546cde931c21072d9dbd6f4d78ba1c65cab0fc5841b12cf02bf",
+      "matchesCurrent": true
+    },
+    {
+      "file": "prototype/panels.js",
+      "recordedSHA256": "565277e7620f5633e2c1a782fca8552f4a354630804648316a0919c270ae55ef",
+      "currentSHA256": "565277e7620f5633e2c1a782fca8552f4a354630804648316a0919c270ae55ef",
+      "matchesCurrent": true
+    },
+    {
+      "file": "prototype/midi.js",
+      "recordedSHA256": "bd1b0ffd6ade3f118b06f4131307ea55e420317c0f3334a1053f710aa7583dc1",
+      "currentSHA256": "bd1b0ffd6ade3f118b06f4131307ea55e420317c0f3334a1053f710aa7583dc1",
+      "matchesCurrent": true
+    },
+    {
+      "file": "prototype/engine.js",
+      "recordedSHA256": "b4683c245c6314432c06f891e85106cf0a1a5c0a615435516930ab5b38f64adf",
+      "currentSHA256": "b4683c245c6314432c06f891e85106cf0a1a5c0a615435516930ab5b38f64adf",
+      "matchesCurrent": true
+    },
+    {
+      "file": "prototype/keylock.js",
+      "recordedSHA256": "f823395f4f6a268c4e5813fd93bae9604435d8f07d3d18f80563e8ec37a6834c",
+      "currentSHA256": "f823395f4f6a268c4e5813fd93bae9604435d8f07d3d18f80563e8ec37a6834c",
+      "matchesCurrent": true
+    },
+    {
+      "file": "prototype/keylock-shadow-live.js",
+      "recordedSHA256": "4860d18ec3ccf39474824cbf9d46df259b110631b4c2cfde60c9a1d03e21504b",
+      "currentSHA256": "4860d18ec3ccf39474824cbf9d46df259b110631b4c2cfde60c9a1d03e21504b",
+      "matchesCurrent": true
+    },
+    {
+      "file": "prototype/midi-keyshift-harness.js",
+      "recordedSHA256": "a2795af5840b2ff1ab234a6e9c1d988c4e81e943a81a26e40dd1ac15fb07bdd6",
+      "currentSHA256": "a2795af5840b2ff1ab234a6e9c1d988c4e81e943a81a26e40dd1ac15fb07bdd6",
+      "matchesCurrent": true
+    },
+    {
+      "file": "prototype/index.html",
+      "recordedSHA256": "a920816b73f68e28feab40f36ae429677cd3005a4f10a5e8b0366faf7907259c",
+      "currentSHA256": "a920816b73f68e28feab40f36ae429677cd3005a4f10a5e8b0366faf7907259c",
+      "matchesCurrent": true
+    }
+  ],
+  "sourceHashesSameAcrossBothPhases": true,
+  "method": {
+    "encoded": "Strict Base64 decode of each complete original report payload; exact encoded length/SHA checks before decoding.",
+    "decode": "FFprobe and FFmpeg read complete original bytes through stdin; no seek, trim, resample or channel reduction. Every decoded stereo sample checked finite.",
+    "spectrum": "Declared0.2to1.1s only for sustainedpitch: Float64 de-mean,Hann,FFTzero-pad>=4xwindow,globalnonDCmaximum,3binlog-magnitudeparabolic interpolation. Expectedpitchusedonlyafterpeakestimation. Originaldeclared max(1Hz,.5%)tolerance andRMS>.01 retained.",
+    "calibration": [
+      {
+        "expectedHz": 165.0,
+        "measuredHz": 165.00003613455434,
+        "absoluteErrorHz": 3.613455433537638e-05
+      },
+      {
+        "expectedHz": 220.0,
+        "measuredHz": 220.00000418657217,
+        "absoluteErrorHz": 4.186572169828651e-06
+      },
+      {
+        "expectedHz": 275.0,
+        "measuredHz": 274.9999604678734,
+        "absoluteErrorHz": 3.953212660690042e-05
+      },
+      {
+        "expectedHz": 330.0,
+        "measuredHz": 330.0000589723143,
+        "absoluteErrorHz": 5.897231432072658e-05
+      },
+      {
+        "expectedHz": 440.0,
+        "measuredHz": 439.9999957481936,
+        "absoluteErrorHz": 4.25180638785605e-06
+      },
+      {
+        "expectedHz": 466.1637615180899,
+        "measuredHz": 466.1637242871454,
+        "absoluteErrorHz": 3.723094454244347e-05
+      },
+      {
+        "expectedHz": 550.0,
+        "measuredHz": 549.9999390807196,
+        "absoluteErrorHz": 6.0919280372218054e-05
+      },
+      {
+        "expectedHz": 660.0,
+        "measuredHz": 660.0000120171093,
+        "absoluteErrorHz": 1.2017109270345827e-05
+      },
+      {
+        "expectedHz": 699.245642277135,
+        "measuredHz": 699.245591027135,
+        "absoluteErrorHz": 5.124999995587132e-05
+      },
+      {
+        "expectedHz": 1100.0,
+        "measuredHz": 1100.0000192062776,
+        "absoluteErrorHz": 1.9206277556804707e-05
+      }
+    ],
+    "maxAnalyticEstimatorErrorHz": 6.0919280372218054e-05,
+    "ffmpegVersion": "ffmpeg version 9.0.1 Copyright (c) 2000-2026 the FFmpeg developers"
+  },
+  "recordings": [
+    {
+      "report": "docs/prototype/midi-keyshift-browser-final-initial-results.json",
+      "phase": "initial",
+      "label": "deck1-neutral-tempo108",
+      "encodedBytes": 24375,
+      "encodedSHA256": "453de984989a9a468c4fd3b5442109f3dfe5cda17d0c3bc6ffa56fcb7a5b926a",
+      "encodedIdentityMatches": true,
+      "probe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "opus",
+            "sample_rate": "48000",
+            "channels": 2,
+            "channel_layout": "stereo"
+          }
+        ]
+      },
+      "decoderArgv": [
+        "/opt/homebrew/bin/ffmpeg",
+        "-v",
+        "error",
+        "-i",
+        "pipe:0",
+        "-map",
+        "0:a:0",
+        "-c:a",
+        "pcm_f32le",
+        "-f",
+        "f32le",
+        "pipe:1"
+      ],
+      "decodedPCM_SHA256": "f81ce019c39bdf6704a4ba72025b3ee11e4733e883d63bbc057f88873166311d",
+      "decodedFrames": 72000,
+      "decodedSampleRate": 48000,
+      "channels": 2,
+      "durationSeconds": 1.5,
+      "allSamplesFinite": true,
+      "wholeRMS": [
+        0.0371941950838787,
+        0.0371971596165017
+      ],
+      "wholePeak": [
+        0.05366775020956993,
+        0.05510236695408821
+      ],
+      "wholeMean": [
+        1.1982706138694714e-05,
+        4.987904886766207e-06
+      ],
+      "measurementWindow": {
+        "declaredStartSeconds": 0.2,
+        "declaredEndSeconds": 1.1,
+        "firstFrame": 9600,
+        "endFrameExclusive": 52800,
+        "frames": 43200
+      },
+      "expectedHz": [
+        330,
+        550
+      ],
+      "measured": [
+        {
+          "fftSize": 262144,
+          "dominantHz": 330.4308881766406,
+          "rms": 0.037284360351441746,
+          "mean": 5.119399516320089e-05,
+          "peak": 0.05301618576049805,
+          "channel": 0,
+          "expectedHz": 330,
+          "absoluteErrorHz": 0.4308881766406216,
+          "toleranceHz": 1.6500000000000001,
+          "passed": true
+        },
+        {
+          "fftSize": 262144,
+          "dominantHz": 550.4272587699381,
+          "rms": 0.03729664301237266,
+          "mean": 3.832222683815774e-05,
+          "peak": 0.05510236695408821,
+          "channel": 1,
+          "expectedHz": 550,
+          "absoluteErrorHz": 0.4272587699381347,
+          "toleranceHz": 2.75,
+          "passed": true
+        }
+      ],
+      "originalBrowserDecoded": {
+        "frames": 66150,
+        "sampleRate": 44100,
+        "channels": 2,
+        "duration": 1.5
+      },
+      "originalBrowserZeroCrossingMeasurements": [
+        {
+          "frames": 39690,
+          "rms": 0.03728313888287953,
+          "peak": 0.053056107480650455,
+          "hz": 330.4299290340519
+        },
+        {
+          "frames": 39690,
+          "rms": 0.037295952336839897,
+          "peak": 0.055102427988979054,
+          "hz": 550.4219604969975
+        }
+      ],
+      "browserAndIndependentDecodeDomainsDiffer": true,
+      "durationDifferenceFromBrowserSeconds": 0.0,
+      "minimumDurationPassed": true,
+      "allDeclaredToneChecksPassed": true
+    },
+    {
+      "report": "docs/prototype/midi-keyshift-browser-final-initial-results.json",
+      "phase": "initial",
+      "label": "deck1-plus12",
+      "encodedBytes": 24375,
+      "encodedSHA256": "068e5643488c8168470c3386b795d8e6557edc1130afade3afcb94832906df27",
+      "encodedIdentityMatches": true,
+      "probe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "opus",
+            "sample_rate": "48000",
+            "channels": 2,
+            "channel_layout": "stereo"
+          }
+        ]
+      },
+      "decoderArgv": [
+        "/opt/homebrew/bin/ffmpeg",
+        "-v",
+        "error",
+        "-i",
+        "pipe:0",
+        "-map",
+        "0:a:0",
+        "-c:a",
+        "pcm_f32le",
+        "-f",
+        "f32le",
+        "pipe:1"
+      ],
+      "decodedPCM_SHA256": "cdc5eaf2643704978324a6bf2c1e4f9943ffb8ca82d0a9642373fc2cb2e73972",
+      "decodedFrames": 72000,
+      "decodedSampleRate": 48000,
+      "channels": 2,
+      "durationSeconds": 1.5,
+      "allSamplesFinite": true,
+      "wholeRMS": [
+        0.03722163214385561,
+        0.036279492908959786
+      ],
+      "wholePeak": [
+        0.05391082912683487,
+        0.05331483110785484
+      ],
+      "wholeMean": [
+        -9.086059219015973e-06,
+        1.4855994018022097e-07
+      ],
+      "measurementWindow": {
+        "declaredStartSeconds": 0.2,
+        "declaredEndSeconds": 1.1,
+        "firstFrame": 9600,
+        "endFrameExclusive": 52800,
+        "frames": 43200
+      },
+      "expectedHz": [
+        660,
+        1100
+      ],
+      "measured": [
+        {
+          "fftSize": 262144,
+          "dominantHz": 660.6293592992581,
+          "rms": 0.03731817266971346,
+          "mean": 8.009532343767437e-06,
+          "peak": 0.05346591770648956,
+          "channel": 0,
+          "expectedHz": 660,
+          "absoluteErrorHz": 0.6293592992581125,
+          "toleranceHz": 3.3000000000000003,
+          "passed": true
+        },
+        {
+          "fftSize": 262144,
+          "dominantHz": 1100.9362372708206,
+          "rms": 0.036360522210097425,
+          "mean": -3.2662485427219993e-06,
+          "peak": 0.05298943072557449,
+          "channel": 1,
+          "expectedHz": 1100,
+          "absoluteErrorHz": 0.9362372708205839,
+          "toleranceHz": 5.5,
+          "passed": true
+        }
+      ],
+      "originalBrowserDecoded": {
+        "frames": 66150,
+        "sampleRate": 44100,
+        "channels": 2,
+        "duration": 1.5
+      },
+      "originalBrowserZeroCrossingMeasurements": [
+        {
+          "frames": 39690,
+          "rms": 0.0373177879055026,
+          "peak": 0.05347508568251371,
+          "hz": 660.629512433342
+        },
+        {
+          "frames": 39690,
+          "rms": 0.03636135451976293,
+          "peak": 0.05284715157976575,
+          "hz": 1100.9363616035207
+        }
+      ],
+      "browserAndIndependentDecodeDomainsDiffer": true,
+      "durationDifferenceFromBrowserSeconds": 0.0,
+      "minimumDurationPassed": true,
+      "allDeclaredToneChecksPassed": true
+    },
+    {
+      "report": "docs/prototype/midi-keyshift-browser-final-initial-results.json",
+      "phase": "initial",
+      "label": "deck1-minus12",
+      "encodedBytes": 24375,
+      "encodedSHA256": "366c4fa41db9d3e0fdf7b7c5abbd10a545503b1b3a982b3bd4ca395845cdc6da",
+      "encodedIdentityMatches": true,
+      "probe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "opus",
+            "sample_rate": "48000",
+            "channels": 2,
+            "channel_layout": "stereo"
+          }
+        ]
+      },
+      "decoderArgv": [
+        "/opt/homebrew/bin/ffmpeg",
+        "-v",
+        "error",
+        "-i",
+        "pipe:0",
+        "-map",
+        "0:a:0",
+        "-c:a",
+        "pcm_f32le",
+        "-f",
+        "f32le",
+        "pipe:1"
+      ],
+      "decodedPCM_SHA256": "303f31419a14704f82e6c1882af193d8af4e4a8c022c230a949cba7f1f10df24",
+      "decodedFrames": 72000,
+      "decodedSampleRate": 48000,
+      "channels": 2,
+      "durationSeconds": 1.5,
+      "allSamplesFinite": true,
+      "wholeRMS": [
+        0.038268511215895334,
+        0.03674587524616704
+      ],
+      "wholePeak": [
+        0.05661213397979736,
+        0.053195081651210785
+      ],
+      "wholeMean": [
+        1.0154391585811921e-05,
+        2.7763508078493555e-05
+      ],
+      "measurementWindow": {
+        "declaredStartSeconds": 0.2,
+        "declaredEndSeconds": 1.1,
+        "firstFrame": 9600,
+        "endFrameExclusive": 52800,
+        "frames": 43200
+      },
+      "expectedHz": [
+        165,
+        275
+      ],
+      "measured": [
+        {
+          "fftSize": 262144,
+          "dominantHz": 165.22806748688228,
+          "rms": 0.0383505179792771,
+          "mean": -8.50518963783347e-05,
+          "peak": 0.05446053668856621,
+          "channel": 0,
+          "expectedHz": 165,
+          "absoluteErrorHz": 0.2280674868822814,
+          "toleranceHz": 1,
+          "passed": true
+        },
+        {
+          "fftSize": 262144,
+          "dominantHz": 275.8768829526261,
+          "rms": 0.0368501229742561,
+          "mean": 5.7604813075992445e-05,
+          "peak": 0.05308271571993828,
+          "channel": 1,
+          "expectedHz": 275,
+          "absoluteErrorHz": 0.8768829526260902,
+          "toleranceHz": 1.375,
+          "passed": true
+        }
+      ],
+      "originalBrowserDecoded": {
+        "frames": 66150,
+        "sampleRate": 44100,
+        "channels": 2,
+        "duration": 1.5
+      },
+      "originalBrowserZeroCrossingMeasurements": [
+        {
+          "frames": 39690,
+          "rms": 0.038348904449912534,
+          "peak": 0.054542362865773936,
+          "hz": 165.22796895336225
+        },
+        {
+          "frames": 39690,
+          "rms": 0.036848763856505595,
+          "peak": 0.05313637493489555,
+          "hz": 275.8737360078798
+        }
+      ],
+      "browserAndIndependentDecodeDomainsDiffer": true,
+      "durationDifferenceFromBrowserSeconds": 0.0,
+      "minimumDurationPassed": true,
+      "allDeclaredToneChecksPassed": true
+    },
+    {
+      "report": "docs/prototype/midi-keyshift-browser-final-initial-results.json",
+      "phase": "initial",
+      "label": "deck2-relative-plus1-tempo92",
+      "encodedBytes": 24375,
+      "encodedSHA256": "d489e28b8eee2a2e50f3a6ea30c278f3850cdc01f275e62d2ace6e5ae1a5e495",
+      "encodedIdentityMatches": true,
+      "probe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "opus",
+            "sample_rate": "48000",
+            "channels": 2,
+            "channel_layout": "stereo"
+          }
+        ]
+      },
+      "decoderArgv": [
+        "/opt/homebrew/bin/ffmpeg",
+        "-v",
+        "error",
+        "-i",
+        "pipe:0",
+        "-map",
+        "0:a:0",
+        "-c:a",
+        "pcm_f32le",
+        "-f",
+        "f32le",
+        "pipe:1"
+      ],
+      "decodedPCM_SHA256": "0637035fc8dc3f965e06a6c9fd714260663222ed7ae0e5b83d7bb02f7dbe587b",
+      "decodedFrames": 72000,
+      "decodedSampleRate": 48000,
+      "channels": 2,
+      "durationSeconds": 1.5,
+      "allSamplesFinite": true,
+      "wholeRMS": [
+        0.0363436832077358,
+        0.036288658914347585
+      ],
+      "wholePeak": [
+        0.053516797721385956,
+        0.052760057151317596
+      ],
+      "wholeMean": [
+        -8.475214550221193e-06,
+        5.917381643312649e-06
+      ],
+      "measurementWindow": {
+        "declaredStartSeconds": 0.2,
+        "declaredEndSeconds": 1.1,
+        "firstFrame": 9600,
+        "endFrameExclusive": 52800,
+        "frames": 43200
+      },
+      "expectedHz": [
+        466.1637615180899,
+        699.245642277135
+      ],
+      "measured": [
+        {
+          "fftSize": 262144,
+          "dominantHz": 467.324462860535,
+          "rms": 0.036426278338191946,
+          "mean": -2.2163235938424252e-05,
+          "peak": 0.05199241638183594,
+          "channel": 0,
+          "expectedHz": 466.1637615180899,
+          "absoluteErrorHz": 1.1607013424450656,
+          "toleranceHz": 2.33081880759045,
+          "passed": true
+        },
+        {
+          "fftSize": 262144,
+          "dominantHz": 700.0704806940464,
+          "rms": 0.03637567242858887,
+          "mean": 2.4152791697226213e-06,
+          "peak": 0.05221473053097725,
+          "channel": 1,
+          "expectedHz": 699.245642277135,
+          "absoluteErrorHz": 0.8248384169114615,
+          "toleranceHz": 3.4962282113856746,
+          "passed": true
+        }
+      ],
+      "originalBrowserDecoded": {
+        "frames": 66150,
+        "sampleRate": 44100,
+        "channels": 2,
+        "duration": 1.5
+      },
+      "originalBrowserZeroCrossingMeasurements": [
+        {
+          "frames": 39690,
+          "rms": 0.03642536735241788,
+          "peak": 0.05200932539777292,
+          "hz": 467.3230483185811
+        },
+        {
+          "frames": 39690,
+          "rms": 0.03637543086625892,
+          "peak": 0.05220930519319353,
+          "hz": 700.0703819787481
+        }
+      ],
+      "browserAndIndependentDecodeDomainsDiffer": true,
+      "durationDifferenceFromBrowserSeconds": 0.0,
+      "minimumDurationPassed": true,
+      "allDeclaredToneChecksPassed": true
+    },
+    {
+      "report": "docs/prototype/midi-keyshift-browser-final-initial-results.json",
+      "phase": "initial",
+      "label": "deck2-relative-neutral-tempo92",
+      "encodedBytes": 24375,
+      "encodedSHA256": "0c31890ec7d347230c6437b72a85823cb5f13e79050d8b7182546a906c3635ea",
+      "encodedIdentityMatches": true,
+      "probe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "opus",
+            "sample_rate": "48000",
+            "channels": 2,
+            "channel_layout": "stereo"
+          }
+        ]
+      },
+      "decoderArgv": [
+        "/opt/homebrew/bin/ffmpeg",
+        "-v",
+        "error",
+        "-i",
+        "pipe:0",
+        "-map",
+        "0:a:0",
+        "-c:a",
+        "pcm_f32le",
+        "-f",
+        "f32le",
+        "pipe:1"
+      ],
+      "decodedPCM_SHA256": "28da64da9961b22097cb5bb6b1f840c70e62326c51da6c66139701ab2cf9bc03",
+      "decodedFrames": 72000,
+      "decodedSampleRate": 48000,
+      "channels": 2,
+      "durationSeconds": 1.5,
+      "allSamplesFinite": true,
+      "wholeRMS": [
+        0.03720923194480589,
+        0.037170175006104984
+      ],
+      "wholePeak": [
+        0.0538579523563385,
+        0.057138592004776
+      ],
+      "wholeMean": [
+        4.040959778482465e-06,
+        1.2562958489194507e-05
+      ],
+      "measurementWindow": {
+        "declaredStartSeconds": 0.2,
+        "declaredEndSeconds": 1.1,
+        "firstFrame": 9600,
+        "endFrameExclusive": 52800,
+        "frames": 43200
+      },
+      "expectedHz": [
+        440,
+        660
+      ],
+      "measured": [
+        {
+          "fftSize": 262144,
+          "dominantHz": 440.40151793840386,
+          "rms": 0.037292245951777325,
+          "mean": -6.259927892669842e-06,
+          "peak": 0.0530083104968071,
+          "channel": 0,
+          "expectedHz": 440,
+          "absoluteErrorHz": 0.4015179384038561,
+          "toleranceHz": 2.2,
+          "passed": true
+        },
+        {
+          "fftSize": 262144,
+          "dominantHz": 660.4538807399293,
+          "rms": 0.037267489429165634,
+          "mean": 2.7665901709798524e-05,
+          "peak": 0.05429176241159439,
+          "channel": 1,
+          "expectedHz": 660,
+          "absoluteErrorHz": 0.45388073992933187,
+          "toleranceHz": 3.3000000000000003,
+          "passed": true
+        }
+      ],
+      "originalBrowserDecoded": {
+        "frames": 66150,
+        "sampleRate": 44100,
+        "channels": 2,
+        "duration": 1.5
+      },
+      "originalBrowserZeroCrossingMeasurements": [
+        {
+          "frames": 39690,
+          "rms": 0.03729128184583906,
+          "peak": 0.05301374041688179,
+          "hz": 440.40092169058704
+        },
+        {
+          "frames": 39690,
+          "rms": 0.037267085683196664,
+          "peak": 0.054260964724987294,
+          "hz": 660.4550147067216
+        }
+      ],
+      "browserAndIndependentDecodeDomainsDiffer": true,
+      "durationDifferenceFromBrowserSeconds": 0.0,
+      "minimumDurationPassed": true,
+      "allDeclaredToneChecksPassed": true
+    },
+    {
+      "report": "docs/prototype/midi-keyshift-browser-final-initial-results.json",
+      "phase": "initial",
+      "label": "deck3-plus12",
+      "encodedBytes": 24375,
+      "encodedSHA256": "84dfed0162040e2ae919b6e96a6b04d8ae9ebb7e44a35a234b012896a553d8e0",
+      "encodedIdentityMatches": true,
+      "probe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "opus",
+            "sample_rate": "48000",
+            "channels": 2,
+            "channel_layout": "stereo"
+          }
+        ]
+      },
+      "decoderArgv": [
+        "/opt/homebrew/bin/ffmpeg",
+        "-v",
+        "error",
+        "-i",
+        "pipe:0",
+        "-map",
+        "0:a:0",
+        "-c:a",
+        "pcm_f32le",
+        "-f",
+        "f32le",
+        "pipe:1"
+      ],
+      "decodedPCM_SHA256": "d0b3c36908dc18bf793c77e294cc4f77625626b04ecfc16fa66b56637678c12d",
+      "decodedFrames": 72000,
+      "decodedSampleRate": 48000,
+      "channels": 2,
+      "durationSeconds": 1.5,
+      "allSamplesFinite": true,
+      "wholeRMS": [
+        0.037233848300829146,
+        0.03627629082790793
+      ],
+      "wholePeak": [
+        0.05431651696562767,
+        0.053822338581085205
+      ],
+      "wholeMean": [
+        -7.756708629450937e-06,
+        3.7393509454119748e-06
+      ],
+      "measurementWindow": {
+        "declaredStartSeconds": 0.2,
+        "declaredEndSeconds": 1.1,
+        "firstFrame": 9600,
+        "endFrameExclusive": 52800,
+        "frames": 43200
+      },
+      "expectedHz": [
+        660,
+        1100
+      ],
+      "measured": [
+        {
+          "fftSize": 262144,
+          "dominantHz": 660.6466379372547,
+          "rms": 0.037322119108609456,
+          "mean": 1.0521746989274594e-05,
+          "peak": 0.053422801196575165,
+          "channel": 0,
+          "expectedHz": 660,
+          "absoluteErrorHz": 0.6466379372546953,
+          "toleranceHz": 3.3000000000000003,
+          "passed": true
+        },
+        {
+          "fftSize": 262144,
+          "dominantHz": 1100.9928631236753,
+          "rms": 0.03635510339873366,
+          "mean": -1.4853436011779623e-06,
+          "peak": 0.05321057140827179,
+          "channel": 1,
+          "expectedHz": 1100,
+          "absoluteErrorHz": 0.9928631236753063,
+          "toleranceHz": 5.5,
+          "passed": true
+        }
+      ],
+      "originalBrowserDecoded": {
+        "frames": 66150,
+        "sampleRate": 44100,
+        "channels": 2,
+        "duration": 1.5
+      },
+      "originalBrowserZeroCrossingMeasurements": [
+        {
+          "frames": 39690,
+          "rms": 0.03732172893064523,
+          "peak": 0.0534027651868338,
+          "hz": 660.6464382253167
+        },
+        {
+          "frames": 39690,
+          "rms": 0.03635596929428674,
+          "peak": 0.053250887735462764,
+          "hz": 1100.9917677861702
+        }
+      ],
+      "browserAndIndependentDecodeDomainsDiffer": true,
+      "durationDifferenceFromBrowserSeconds": 0.0,
+      "minimumDurationPassed": true,
+      "allDeclaredToneChecksPassed": true
+    },
+    {
+      "report": "docs/prototype/midi-keyshift-browser-final-initial-results.json",
+      "phase": "initial",
+      "label": "deck4-minus12",
+      "encodedBytes": 23409,
+      "encodedSHA256": "5855e1fe4ff868c8549933a65c9919d28df6d1d3f5ca39d1bcaee33a6cc6841d",
+      "encodedIdentityMatches": true,
+      "probe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "opus",
+            "sample_rate": "48000",
+            "channels": 2,
+            "channel_layout": "stereo"
+          }
+        ]
+      },
+      "decoderArgv": [
+        "/opt/homebrew/bin/ffmpeg",
+        "-v",
+        "error",
+        "-i",
+        "pipe:0",
+        "-map",
+        "0:a:0",
+        "-c:a",
+        "pcm_f32le",
+        "-f",
+        "f32le",
+        "pipe:1"
+      ],
+      "decodedPCM_SHA256": "11c48fb9f4bd799cb38275277eacbc6e74d3674db201d7ccc2e290454acd3a5a",
+      "decodedFrames": 69120,
+      "decodedSampleRate": 48000,
+      "channels": 2,
+      "durationSeconds": 1.44,
+      "allSamplesFinite": true,
+      "wholeRMS": [
+        0.03651929463025399,
+        0.03890163791372462
+      ],
+      "wholePeak": [
+        0.054581571370363235,
+        0.05872358754277229
+      ],
+      "wholeMean": [
+        3.4846547265363883e-05,
+        6.363243322571662e-06
+      ],
+      "measurementWindow": {
+        "declaredStartSeconds": 0.2,
+        "declaredEndSeconds": 1.1,
+        "firstFrame": 9600,
+        "endFrameExclusive": 52800,
+        "frames": 43200
+      },
+      "expectedHz": [
+        220,
+        330
+      ],
+      "measured": [
+        {
+          "fftSize": 262144,
+          "dominantHz": 219.77453029764465,
+          "rms": 0.036609958194524575,
+          "mean": 3.9574714046624296e-05,
+          "peak": 0.0522337332367897,
+          "channel": 0,
+          "expectedHz": 220,
+          "absoluteErrorHz": 0.22546970235535468,
+          "toleranceHz": 1.1,
+          "passed": true
+        },
+        {
+          "fftSize": 262144,
+          "dominantHz": 330.25670827629517,
+          "rms": 0.038991380617543425,
+          "mean": 1.8215202382689482e-05,
+          "peak": 0.057227231562137604,
+          "channel": 1,
+          "expectedHz": 330,
+          "absoluteErrorHz": 0.25670827629517134,
+          "toleranceHz": 1.6500000000000001,
+          "passed": true
+        }
+      ],
+      "originalBrowserDecoded": {
+        "frames": 63503,
+        "sampleRate": 44100,
+        "channels": 2,
+        "duration": 1.4399773242630385
+      },
+      "originalBrowserZeroCrossingMeasurements": [
+        {
+          "frames": 39690,
+          "rms": 0.03660854265330857,
+          "peak": 0.052268925826784156,
+          "hz": 219.77323676237418
+        },
+        {
+          "frames": 39690,
+          "rms": 0.03899009224172051,
+          "peak": 0.05720998837463537,
+          "hz": 330.25632065472524
+        }
+      ],
+      "browserAndIndependentDecodeDomainsDiffer": true,
+      "durationDifferenceFromBrowserSeconds": 2.2675736961463855e-05,
+      "minimumDurationPassed": true,
+      "allDeclaredToneChecksPassed": true
+    },
+    {
+      "report": "docs/prototype/midi-keyshift-browser-restored-results.json",
+      "phase": "restored",
+      "label": "restored-deck2-plus1",
+      "encodedBytes": 24375,
+      "encodedSHA256": "89889ac1558023592ea7ba1f237d58ca782dc63404781bb22a4aa4c28b0595f0",
+      "encodedIdentityMatches": true,
+      "probe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "opus",
+            "sample_rate": "48000",
+            "channels": 2,
+            "channel_layout": "stereo"
+          }
+        ]
+      },
+      "decoderArgv": [
+        "/opt/homebrew/bin/ffmpeg",
+        "-v",
+        "error",
+        "-i",
+        "pipe:0",
+        "-map",
+        "0:a:0",
+        "-c:a",
+        "pcm_f32le",
+        "-f",
+        "f32le",
+        "pipe:1"
+      ],
+      "decodedPCM_SHA256": "5ae33848476bdcc60683c9f366ef45e6f33e87a279ea78999e970b29be771ade",
+      "decodedFrames": 72000,
+      "decodedSampleRate": 48000,
+      "channels": 2,
+      "durationSeconds": 1.5,
+      "allSamplesFinite": true,
+      "wholeRMS": [
+        0.03636371485226006,
+        0.03640961621381516
+      ],
+      "wholePeak": [
+        0.05296185985207558,
+        0.053177107125520706
+      ],
+      "wholeMean": [
+        -4.342736628822853e-06,
+        4.996284726216567e-07
+      ],
+      "measurementWindow": {
+        "declaredStartSeconds": 0.2,
+        "declaredEndSeconds": 1.1,
+        "firstFrame": 9600,
+        "endFrameExclusive": 52800,
+        "frames": 43200
+      },
+      "expectedHz": [
+        466.1637615180899,
+        699.245642277135
+      ],
+      "measured": [
+        {
+          "fftSize": 262144,
+          "dominantHz": 467.2616354759916,
+          "rms": 0.03646292354675668,
+          "mean": -3.0039999305447255e-06,
+          "peak": 0.05203108862042427,
+          "channel": 0,
+          "expectedHz": 466.1637615180899,
+          "absoluteErrorHz": 1.0978739579016974,
+          "toleranceHz": 2.33081880759045,
+          "passed": true
+        },
+        {
+          "fftSize": 262144,
+          "dominantHz": 700.0110695984282,
+          "rms": 0.03652185449658755,
+          "mean": -1.459964786747563e-06,
+          "peak": 0.053177107125520706,
+          "channel": 1,
+          "expectedHz": 699.245642277135,
+          "absoluteErrorHz": 0.7654273212932594,
+          "toleranceHz": 3.4962282113856746,
+          "passed": true
+        }
+      ],
+      "originalBrowserDecoded": {
+        "frames": 66150,
+        "sampleRate": 44100,
+        "channels": 2,
+        "duration": 1.5
+      },
+      "originalBrowserZeroCrossingMeasurements": [
+        {
+          "frames": 39690,
+          "rms": 0.036462035968047646,
+          "peak": 0.05201935569673271,
+          "hz": 467.2616060407021
+        },
+        {
+          "frames": 39690,
+          "rms": 0.036521601088441547,
+          "peak": 0.05314911966557786,
+          "hz": 700.0115426869304
+        }
+      ],
+      "browserAndIndependentDecodeDomainsDiffer": true,
+      "durationDifferenceFromBrowserSeconds": 0.0,
+      "minimumDurationPassed": true,
+      "allDeclaredToneChecksPassed": true
+    }
+  ],
+  "totals": {
+    "recordings": 8,
+    "decodedStereoFrames": 573120,
+    "decodedFloatSamples": 1146240,
+    "allEncodedIdentitiesMatch": true,
+    "allWholePCMFinite": true,
+    "allDeclaredToneChecksPassed": true,
+    "allMinimumDurationsPassed": true
+  },
+  "verdict": {
+    "sustainedStereoPitchCriterionIndependentlySupported": true,
+    "reviewerExecutedDOMOrReload": false,
+    "sourceUIAndReloadAreParentObserved": true,
+    "physicalMIDIOrOutputProven": false,
+    "currentNative015BundleUpdated": false,
+    "firstSampleOrTransitionContinuityProven": false,
+    "musicalOrVendorQualityProven": false,
+    "fullFeatureOrReferenceParityProven": false
+  },
+  "mappingMetadataComparison": {
+    "initialSavedMappings": [
+      {
+        "target": "Library browse",
+        "encoding": "Relative two\u2019s complement",
+        "type": "CC",
+        "channel": 1,
+        "number": 1
+      },
+      {
+        "target": "Deck 1 key shift",
+        "encoding": "7-bit absolute",
+        "type": "CC",
+        "channel": 1,
+        "number": 16
+      },
+      {
+        "target": "Deck 2 key shift",
+        "encoding": "Relative two\u2019s complement",
+        "type": "CC",
+        "channel": 1,
+        "number": 17
+      },
+      {
+        "target": "Deck 3 key shift",
+        "encoding": "7-bit absolute",
+        "type": "CC",
+        "channel": 1,
+        "number": 18
+      },
+      {
+        "target": "Deck 4 key shift",
+        "encoding": "7-bit absolute",
+        "type": "CC",
+        "channel": 1,
+        "number": 19
+      }
+    ],
+    "restoredReportedMappings": [
+      {
+        "target": "Library browse",
+        "encoding": "Relative two\u2019s complement",
+        "type": "CC",
+        "channel": 1,
+        "number": 1
+      },
+      {
+        "target": "Deck 1 key shift",
+        "encoding": "7-bit absolute",
+        "type": "CC",
+        "channel": 1,
+        "number": 16
+      },
+      {
+        "target": "Deck 2 key shift",
+        "encoding": "Relative two\u2019s complement",
+        "type": "CC",
+        "channel": 1,
+        "number": 17
+      },
+      {
+        "target": "Deck 3 key shift",
+        "encoding": "7-bit absolute",
+        "type": "CC",
+        "channel": 1,
+        "number": 18
+      },
+      {
+        "target": "Deck 4 key shift",
+        "encoding": "7-bit absolute",
+        "type": "CC",
+        "channel": 1,
+        "number": 19
+      }
+    ],
+    "exactMatch": true,
+    "reviewerExecutedReload": false,
+    "scope": "Report payload comparison; DOM/reload path was parent-executed."
+  }
+}

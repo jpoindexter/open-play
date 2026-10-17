@@ -26,6 +26,30 @@ export function mappedValue(message, encoding, pairs = new Map()) {
   }
   return message.value / (message.type === "Pitch bend" ? 16383 : 127);
 }
+// Independent mapping policy: full travel is -24..+24 semitones, rounded to
+// semitones; relative units are semitones. This does not claim Serato's taper.
+export function keyShiftSemitones(message, encoding, current = 0, pairs = new Map()) {
+  if (!Number.isFinite(message.value) || !Number.isFinite(current))
+    throw new RangeError("Key Shift needs finite MIDI and pitch values.");
+  if (message.type === "Note" && !message.pressed) return null;
+  const value = mappedValue(message, encoding, pairs);
+  const semitones = encoding.startsWith("Relative") ? current + value : value * 48 - 24;
+  return Math.max(-24, Math.min(24, Math.round(semitones))) || 0;
+}
+export function syntheticMIDIMessage({type,channel,number,value}) {
+  if (!['CC','Note','Pitch bend'].includes(type) || !Number.isInteger(channel) || channel<1 || channel>16 ||
+      !Number.isInteger(number) || number<0 || number>127 || !Number.isInteger(value) || value<0 || value>(type==='Pitch bend'?16383:127))
+    throw new RangeError('Use a channel1–16, controller/note0–127 and integer value0–127 (pitch bend0–16383).');
+  const status=({CC:0xb0,Note:0x90,'Pitch bend':0xe0})[type]+channel-1;
+  return decodeMIDI(type==='Pitch bend'?[status,value&127,value>>7]:[status,number,value]);
+}
+export function matchesMIDIMap(message,mapping) {
+  if (mapping.channel!==message.channel || (mapping.type||'CC')!==message.type) return false;
+  if (mapping.encoding==='14-bit absolute' && message.type==='CC')
+    return mapping.number>=0 && mapping.number<64 && message.number>=0 && message.number<64 &&
+      mapping.number%32===message.number%32;
+  return mapping.number===message.number;
+}
 export function createMIDI({ onMessage, onState }) {
   let access = null,
     generation = 0;

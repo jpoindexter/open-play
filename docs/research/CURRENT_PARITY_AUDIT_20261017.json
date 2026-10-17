@@ -1,25 +1,60 @@
 {
   "date": "2026-10-17",
-  "generated_at": "2026-10-17T12:54:58.993Z",
+  "generated_at": "2026-10-17T13:21:43.493Z",
   "kind": "CURRENT_SAVED_SOURCE_AND_EVIDENCE_AUDIT_NOT_REFERENCE_RUNTIME_ACCEPTANCE",
-  "git_head": "2678d1670ddbeec712ed219a0b819938b9ffb721",
+  "git_head": "fab19dd391507c39f63eb66c9cb08a72711df3f8",
   "dirty_at_snapshot": [
     "M FULL_BUILD_PLAN.md",
     " M docs/delivery/ACTIVE_EXECUTION.md",
+    " M docs/research/CURRENT_FEATURE_MATCH_20261017.json",
+    " M docs/research/CURRENT_FEATURE_MATCH_20261017.md",
     " M docs/research/CURRENT_PARITY_AUDIT_20261017.json",
     " M docs/research/CURRENT_PARITY_AUDIT_20261017.md",
     " M handoffs/codex-to-claude-completeness-audit.md",
     " M handoffs/current.md",
+    " M prototype/app.js",
+    " M prototype/midi.js",
+    " M prototype/panels.js",
     " M scripts/audit_current_parity.mjs",
-    "?? docs/delivery/FEATURE_MATCH_REENTRY_20261017.md",
-    "?? docs/delivery/trello-current-feature-match-sync.json",
-    "?? docs/prototype/current-feature-check-native-observation.json",
-    "?? docs/prototype/screenshots/parity-current-midi-targets-0.1.5.png",
-    "?? docs/research/CURRENT_FEATURE_MATCH_20261017.json",
-    "?? docs/research/CURRENT_FEATURE_MATCH_20261017.md",
-    "?? docs/research/CURRENT_FEATURE_MATCH_REVIEW_20261017.md",
-    "?? docs/research/REA_CURRENT_REFERENCE_PLIST_20261017.json",
-    "?? scripts/check_current_release_parity.mjs"
+    " M scripts/check_current_release_parity.mjs",
+    "?? docs/delivery/MIDI_KEYSHIFT_REENTRY_20261017.md",
+    "?? docs/delivery/trello-midi-keyshift-sync.json",
+    "?? docs/prototype/MIDI_KEYSHIFT_FUNCTIONAL_REVIEW.md",
+    "?? docs/prototype/midi-keyshift-audio-independent-results.json",
+    "?? docs/prototype/midi-keyshift-browser-final-initial-results.json",
+    "?? docs/prototype/midi-keyshift-browser-mute-initial-results.json",
+    "?? docs/prototype/midi-keyshift-browser-observation.json",
+    "?? docs/prototype/midi-keyshift-browser-pre-review-results.json",
+    "?? docs/prototype/midi-keyshift-browser-restored-results.json",
+    "?? docs/prototype/midi-keyshift-candidate.json",
+    "?? docs/prototype/midi-keyshift-controlled-initial-results.json",
+    "?? docs/prototype/midi-keyshift-controlled-red-results.json",
+    "?? docs/prototype/midi-keyshift-controlled-results.json",
+    "?? docs/prototype/midi-keyshift-controlled-signed-zero-initial-results.json",
+    "?? docs/prototype/midi-keyshift-current-main-after-message-ax.txt",
+    "?? docs/prototype/midi-keyshift-current-main-targets-ax.txt",
+    "?? docs/prototype/midi-keyshift-dispatch-final-freeze-results.json",
+    "?? docs/prototype/midi-keyshift-dispatch-parent-red-results.json",
+    "?? docs/prototype/midi-keyshift-dispatch-review-after-fix-results.json",
+    "?? docs/prototype/midi-keyshift-dispatch-review-final-results.json",
+    "?? docs/prototype/midi-keyshift-dispatch-review-initial-results.json",
+    "?? docs/prototype/midi-keyshift-dispatch-review-red-results.json",
+    "?? docs/prototype/midi-keyshift-pair-red-results.json",
+    "?? docs/prototype/midi-keyshift-synthetic-red-results.json",
+    "?? docs/prototype/screenshots/midi-keyshift-current-main-message.png",
+    "?? docs/prototype/screenshots/midi-keyshift-current-main-plus12.png",
+    "?? docs/prototype/screenshots/midi-keyshift-current-main-targets.png",
+    "?? docs/prototype/screenshots/midi-keyshift-restored-browser-check.png",
+    "?? docs/research/CURRENT_FEATURE_MATCH_20261017_NATIVE015.json",
+    "?? docs/research/CURRENT_FEATURE_MATCH_20261017_NATIVE015.md",
+    "?? docs/research/CURRENT_PARITY_AUDIT_20261017_PRE_MIDI_KEYSHIFT.json",
+    "?? docs/research/CURRENT_PARITY_AUDIT_20261017_PRE_MIDI_KEYSHIFT.md",
+    "?? docs/research/MIDI_KEYSHIFT_AUDIO_REVIEW_20261017.md",
+    "?? docs/research/MIDI_KEYSHIFT_SOURCE_REVIEW_20261017.md",
+    "?? prototype/midi-keyshift-harness.html",
+    "?? prototype/midi-keyshift-harness.js",
+    "?? scripts/test_midi_keyshift.mjs",
+    "?? scripts/test_midi_keyshift_dispatch_review.mjs"
   ],
   "reference": {
     "version": "Serato DJ Pro4.0.10.213 arm64",
@@ -287,9 +322,24 @@
   "desktop_ASAR_sha256": "251bcc16caf9cfb42a3967db058717373a8c6fcb9ff97d56c330058ec8301b03",
   "current_source_changed_from_browser_candidate": [
     {
+      "path": "prototype/app.js",
+      "candidate_sha256": "221131cff9da50c199180f951466ded89750c79f98d095494572625e831fc5a5",
+      "current_sha256": "abc0e15d47fb1546cde931c21072d9dbd6f4d78ba1c65cab0fc5841b12cf02bf"
+    },
+    {
+      "path": "prototype/midi.js",
+      "candidate_sha256": "b0b5ef7b71ef551c98ccb56dba0161d3e532a93713bb6b0e2b14e6f4c96b8c5e",
+      "current_sha256": "bd1b0ffd6ade3f118b06f4131307ea55e420317c0f3334a1053f710aa7583dc1"
+    },
+    {
+      "path": "prototype/panels.js",
+      "candidate_sha256": "2063234fa4d209424ec94df373fca9d66eec23cc917302a8ee8dc27ee4b92d89",
+      "current_sha256": "565277e7620f5633e2c1a782fca8552f4a354630804648316a0919c270ae55ef"
+    },
+    {
       "path": "scripts/audit_current_parity.mjs",
       "candidate_sha256": "7e1be3838a4611bd6bfd51a2fe2859b0ea6c6bcc373ae3b3938b23fe34dffd15",
-      "current_sha256": "736495efe0a990f0ed16daa2d4b35fa2ce6e3d5a81c47d998c8465ffcd2bcb0c"
+      "current_sha256": "fb9d8dbdbd4c180d1c13efaf57a1771b24f095a0a4bba128133d4401d625b1ae"
     }
   ],
   "current_prototype_files_absent_from_browser_manifest": [
@@ -308,6 +358,14 @@
     {
       "path": "prototype/keylock-engine-cursor-harness.js",
       "sha256": "b8e45417bce1fc9411d58ad02416c751c73750339d8792eca5384f73def622a9"
+    },
+    {
+      "path": "prototype/midi-keyshift-harness.html",
+      "sha256": "4c382c5bbeb5c33f7be998feaac31edce8bd88b41c1b972b70cadd9ca66669bc"
+    },
+    {
+      "path": "prototype/midi-keyshift-harness.js",
+      "sha256": "a2795af5840b2ff1ab234a6e9c1d988c4e81e943a81a26e40dd1ac15fb07bdd6"
     }
   ],
   "scope": {
@@ -400,7 +458,7 @@
     {
       "id": "CA-03",
       "severity": "high",
-      "finding": "The original200 prototype files still match frozen48a6d4d used by desktop0.1.5; its clean-restart WAV/MP3 subset executed. Four added cursor-diagnostic assets run in a separate source host and are absent from that product bundle. Historical0.1.3 physical outputs and0.1.1 knob remain separate; no new full hardware/DSP/reference acceptance follows from matching assets.",
+      "finding": "Desktop0.1.5 remains the frozen48a6d4d package with scoped native WAV/MP3 evidence. Current browser source changes 3 production files for MIDI Key Shift and has 6 added test assets; these are absent from that native package. Historical physical and newer browser evidence remain separate; no full hardware/DSP/reference acceptance follows.",
       "evidence": [
         {
           "path": "docs/prototype/candidate-hashes.json",
@@ -432,17 +490,17 @@
         {
           "path": "prototype/panels.js",
           "line": 491,
-          "sha256": "2063234fa4d209424ec94df373fca9d66eec23cc917302a8ee8dc27ee4b92d89"
+          "sha256": "565277e7620f5633e2c1a782fca8552f4a354630804648316a0919c270ae55ef"
         },
         {
           "path": "prototype/app.js",
-          "line": 1268,
-          "sha256": "221131cff9da50c199180f951466ded89750c79f98d095494572625e831fc5a5"
+          "line": 1291,
+          "sha256": "abc0e15d47fb1546cde931c21072d9dbd6f4d78ba1c65cab0fc5841b12cf02bf"
         },
         {
           "path": "prototype/panels.js",
           "line": 1350,
-          "sha256": "2063234fa4d209424ec94df373fca9d66eec23cc917302a8ee8dc27ee4b92d89"
+          "sha256": "565277e7620f5633e2c1a782fca8552f4a354630804648316a0919c270ae55ef"
         }
       ]
     },
@@ -525,12 +583,12 @@
         {
           "path": "prototype/app.js",
           "line": 375,
-          "sha256": "221131cff9da50c199180f951466ded89750c79f98d095494572625e831fc5a5"
+          "sha256": "abc0e15d47fb1546cde931c21072d9dbd6f4d78ba1c65cab0fc5841b12cf02bf"
         },
         {
           "path": "prototype/app.js",
           "line": 527,
-          "sha256": "221131cff9da50c199180f951466ded89750c79f98d095494572625e831fc5a5"
+          "sha256": "abc0e15d47fb1546cde931c21072d9dbd6f4d78ba1c65cab0fc5841b12cf02bf"
         }
       ]
     },
@@ -581,7 +639,8 @@
     {
       "id": "CA-11",
       "severity": "high",
-      "finding": "Current desktop0.1.5 native MIDI Target menu exposes only eight options, without Key Shift or Video targets; source target list/dispatcher corroborate the missing actions. The current release Key Shift mapping obligation and canonical Video target requirement are not satisfied by the confirmed browser knob.",
+      "status": "partially_addressed_browser_only",
+      "finding": "Unchanged desktop0.1.5 still lacks Key Shift/Video MIDI targets. New current browser source has actual four-deck Key Shift/learn/save/reload/audio subset evidence and controlled pending-commit/pair regressions; it is not a new native or physical acceptance. Video targets remain absent; complete mapping/reference parity stays open.",
       "evidence": [
         {
           "path": "docs/prototype/current-feature-check-native-observation.json",
@@ -595,13 +654,13 @@
         },
         {
           "path": "prototype/panels.js",
-          "line": 1621,
-          "sha256": "2063234fa4d209424ec94df373fca9d66eec23cc917302a8ee8dc27ee4b92d89"
+          "line": 1619,
+          "sha256": "565277e7620f5633e2c1a782fca8552f4a354630804648316a0919c270ae55ef"
         },
         {
           "path": "prototype/panels.js",
           "line": 1541,
-          "sha256": "2063234fa4d209424ec94df373fca9d66eec23cc917302a8ee8dc27ee4b92d89"
+          "sha256": "565277e7620f5633e2c1a782fca8552f4a354630804648316a0919c270ae55ef"
         }
       ]
     }
@@ -626,7 +685,7 @@
     {
       "path": "prototype/app.js",
       "line": 1,
-      "sha256": "221131cff9da50c199180f951466ded89750c79f98d095494572625e831fc5a5"
+      "sha256": "abc0e15d47fb1546cde931c21072d9dbd6f4d78ba1c65cab0fc5841b12cf02bf"
     },
     {
       "path": "prototype/engine.js",
@@ -701,7 +760,7 @@
     {
       "path": "prototype/panels.js",
       "line": 1,
-      "sha256": "2063234fa4d209424ec94df373fca9d66eec23cc917302a8ee8dc27ee4b92d89"
+      "sha256": "565277e7620f5633e2c1a782fca8552f4a354630804648316a0919c270ae55ef"
     },
     {
       "path": "prototype/library.js",
@@ -814,6 +873,26 @@
       "sha256": "905f969828d364ffdc9bd90c98fa47cd68c5a8dbf1d236304b1657e532283c45"
     },
     {
+      "path": "docs/prototype/MIDI_KEYSHIFT_FUNCTIONAL_REVIEW.md",
+      "line": 1,
+      "sha256": "8bfab64f90abce6cd6beb84a1ce566b04582e47a18bff25f3c3ef754c134cd74"
+    },
+    {
+      "path": "docs/prototype/midi-keyshift-browser-final-initial-results.json",
+      "line": 1,
+      "sha256": "4e3ca607079cc8f8cad5bd6fae743f3462dfb497a8fda51b1a24c9fc6d1a893d"
+    },
+    {
+      "path": "docs/prototype/midi-keyshift-browser-restored-results.json",
+      "line": 1,
+      "sha256": "577e9ed673721bdb4d778dea67bf0a905507b16924d6f896ae82e5c606614d68"
+    },
+    {
+      "path": "docs/prototype/midi-keyshift-audio-independent-results.json",
+      "line": 1,
+      "sha256": "0eff7d25ed2a0b98a5902a4fb61b18a9e495c7f196e47ebd18ce9341fb5078fa"
+    },
+    {
       "path": "prototype/deck-scratch.js",
       "line": 1,
       "sha256": "0f875b8ed8a2f0b0373455e8758fe150be937fa3311a6b35142a7d15622f189a"
@@ -906,7 +985,7 @@
     {
       "path": "prototype/midi.js",
       "line": 1,
-      "sha256": "b0b5ef7b71ef551c98ccb56dba0161d3e532a93713bb6b0e2b14e6f4c96b8c5e"
+      "sha256": "bd1b0ffd6ade3f118b06f4131307ea55e420317c0f3334a1053f710aa7583dc1"
     },
     {
       "path": "docs/research/HARDWARE_HERCULES.md",
@@ -1106,7 +1185,7 @@
     {
       "path": "scripts/audit_current_parity.mjs",
       "line": 1,
-      "sha256": "736495efe0a990f0ed16daa2d4b35fa2ce6e3d5a81c47d998c8465ffcd2bcb0c"
+      "sha256": "fb9d8dbdbd4c180d1c13efaf57a1771b24f095a0a4bba128133d4401d625b1ae"
     },
     {
       "path": "docs/approvals.md",
@@ -1186,7 +1265,47 @@
     {
       "path": "scripts/check_current_release_parity.mjs",
       "line": 1,
-      "sha256": "14cc3b7a5f5597378f9ae26dad3f96f9c38e6e37fa69fee11fdbddbc74cafe4b"
+      "sha256": "6800cf66ad88e921389c60de9a88670355c119f81983d58b455d06af7300bced"
+    },
+    {
+      "path": "docs/prototype/midi-keyshift-candidate.json",
+      "line": 1,
+      "sha256": "9b5c5be169df4698c43b0ae0a439cf385d18962e239987acb66f0b983a29a812"
+    },
+    {
+      "path": "prototype/midi-keyshift-harness.js",
+      "line": 1,
+      "sha256": "a2795af5840b2ff1ab234a6e9c1d988c4e81e943a81a26e40dd1ac15fb07bdd6"
+    },
+    {
+      "path": "prototype/midi-keyshift-harness.html",
+      "line": 1,
+      "sha256": "4c382c5bbeb5c33f7be998feaac31edce8bd88b41c1b972b70cadd9ca66669bc"
+    },
+    {
+      "path": "scripts/test_midi_keyshift.mjs",
+      "line": 1,
+      "sha256": "4cf28adbfec9e1e409e6e91c782bb06c8867010d5d2c4e8535db05e940f70d4a"
+    },
+    {
+      "path": "scripts/test_midi_keyshift_dispatch_review.mjs",
+      "line": 1,
+      "sha256": "df1cfff6b33a5b4b22e540a4e9cad1dbb6abf1b01b6fdd4edba435ffae0b59bc"
+    },
+    {
+      "path": "docs/prototype/midi-keyshift-dispatch-final-freeze-results.json",
+      "line": 1,
+      "sha256": "b40a6c02c0bf6cf9d3f13656e458d10300e7c6ef234844aaaafd1e259b5c94f6"
+    },
+    {
+      "path": "docs/prototype/midi-keyshift-controlled-results.json",
+      "line": 1,
+      "sha256": "8f97bfc74672b96a7256a75c991d85bfe4ff803f4e75acbda8764accc3183a48"
+    },
+    {
+      "path": "docs/research/MIDI_KEYSHIFT_SOURCE_REVIEW_20261017.md",
+      "line": 1,
+      "sha256": "aca98f3486dce122cc6c88460a99186e49eb41b5defdc2dc8271f21c54abedc0"
     }
   ],
   "features": [
@@ -1234,7 +1353,7 @@
         {
           "path": "prototype/app.js",
           "line": 1,
-          "sha256": "221131cff9da50c199180f951466ded89750c79f98d095494572625e831fc5a5"
+          "sha256": "abc0e15d47fb1546cde931c21072d9dbd6f4d78ba1c65cab0fc5841b12cf02bf"
         },
         {
           "path": "prototype/engine.js",
@@ -1434,12 +1553,12 @@
         {
           "path": "prototype/app.js",
           "line": 1,
-          "sha256": "221131cff9da50c199180f951466ded89750c79f98d095494572625e831fc5a5"
+          "sha256": "abc0e15d47fb1546cde931c21072d9dbd6f4d78ba1c65cab0fc5841b12cf02bf"
         },
         {
           "path": "prototype/panels.js",
           "line": 1,
-          "sha256": "2063234fa4d209424ec94df373fca9d66eec23cc917302a8ee8dc27ee4b92d89"
+          "sha256": "565277e7620f5633e2c1a782fca8552f4a354630804648316a0919c270ae55ef"
         }
       ],
       "reviewed_saved_evidence": [
@@ -1575,12 +1694,12 @@
         {
           "path": "prototype/app.js",
           "line": 1,
-          "sha256": "221131cff9da50c199180f951466ded89750c79f98d095494572625e831fc5a5"
+          "sha256": "abc0e15d47fb1546cde931c21072d9dbd6f4d78ba1c65cab0fc5841b12cf02bf"
         },
         {
           "path": "prototype/panels.js",
           "line": 1,
-          "sha256": "2063234fa4d209424ec94df373fca9d66eec23cc917302a8ee8dc27ee4b92d89"
+          "sha256": "565277e7620f5633e2c1a782fca8552f4a354630804648316a0919c270ae55ef"
         },
         {
           "path": "prototype/library.js",
@@ -1792,12 +1911,12 @@
         {
           "path": "prototype/app.js",
           "line": 1,
-          "sha256": "221131cff9da50c199180f951466ded89750c79f98d095494572625e831fc5a5"
+          "sha256": "abc0e15d47fb1546cde931c21072d9dbd6f4d78ba1c65cab0fc5841b12cf02bf"
         },
         {
           "path": "prototype/panels.js",
           "line": 1,
-          "sha256": "2063234fa4d209424ec94df373fca9d66eec23cc917302a8ee8dc27ee4b92d89"
+          "sha256": "565277e7620f5633e2c1a782fca8552f4a354630804648316a0919c270ae55ef"
         }
       ],
       "reviewed_saved_evidence": [
@@ -1918,7 +2037,7 @@
         {
           "path": "prototype/panels.js",
           "line": 1,
-          "sha256": "2063234fa4d209424ec94df373fca9d66eec23cc917302a8ee8dc27ee4b92d89"
+          "sha256": "565277e7620f5633e2c1a782fca8552f4a354630804648316a0919c270ae55ef"
         }
       ],
       "reviewed_saved_evidence": [
@@ -2023,12 +2142,12 @@
         {
           "path": "prototype/panels.js",
           "line": 1,
-          "sha256": "2063234fa4d209424ec94df373fca9d66eec23cc917302a8ee8dc27ee4b92d89"
+          "sha256": "565277e7620f5633e2c1a782fca8552f4a354630804648316a0919c270ae55ef"
         },
         {
           "path": "prototype/app.js",
           "line": 1,
-          "sha256": "221131cff9da50c199180f951466ded89750c79f98d095494572625e831fc5a5"
+          "sha256": "abc0e15d47fb1546cde931c21072d9dbd6f4d78ba1c65cab0fc5841b12cf02bf"
         }
       ],
       "reviewed_saved_evidence": [
@@ -2146,12 +2265,12 @@
         {
           "path": "prototype/panels.js",
           "line": 1,
-          "sha256": "2063234fa4d209424ec94df373fca9d66eec23cc917302a8ee8dc27ee4b92d89"
+          "sha256": "565277e7620f5633e2c1a782fca8552f4a354630804648316a0919c270ae55ef"
         },
         {
           "path": "prototype/app.js",
           "line": 1,
-          "sha256": "221131cff9da50c199180f951466ded89750c79f98d095494572625e831fc5a5"
+          "sha256": "abc0e15d47fb1546cde931c21072d9dbd6f4d78ba1c65cab0fc5841b12cf02bf"
         },
         {
           "path": "prototype/local-audio-library.js",
@@ -2266,12 +2385,12 @@
         {
           "path": "prototype/app.js",
           "line": 1,
-          "sha256": "221131cff9da50c199180f951466ded89750c79f98d095494572625e831fc5a5"
+          "sha256": "abc0e15d47fb1546cde931c21072d9dbd6f4d78ba1c65cab0fc5841b12cf02bf"
         },
         {
           "path": "prototype/panels.js",
           "line": 1,
-          "sha256": "2063234fa4d209424ec94df373fca9d66eec23cc917302a8ee8dc27ee4b92d89"
+          "sha256": "565277e7620f5633e2c1a782fca8552f4a354630804648316a0919c270ae55ef"
         }
       ],
       "reviewed_saved_evidence": [
@@ -2388,7 +2507,7 @@
         {
           "path": "prototype/panels.js",
           "line": 1,
-          "sha256": "2063234fa4d209424ec94df373fca9d66eec23cc917302a8ee8dc27ee4b92d89"
+          "sha256": "565277e7620f5633e2c1a782fca8552f4a354630804648316a0919c270ae55ef"
         }
       ],
       "reviewed_saved_evidence": [
@@ -2465,7 +2584,7 @@
         {
           "path": "prototype/app.js",
           "line": 1,
-          "sha256": "221131cff9da50c199180f951466ded89750c79f98d095494572625e831fc5a5"
+          "sha256": "abc0e15d47fb1546cde931c21072d9dbd6f4d78ba1c65cab0fc5841b12cf02bf"
         }
       ],
       "reviewed_saved_evidence": [
@@ -2562,12 +2681,12 @@
         {
           "path": "prototype/app.js",
           "line": 1,
-          "sha256": "221131cff9da50c199180f951466ded89750c79f98d095494572625e831fc5a5"
+          "sha256": "abc0e15d47fb1546cde931c21072d9dbd6f4d78ba1c65cab0fc5841b12cf02bf"
         },
         {
           "path": "prototype/panels.js",
           "line": 1,
-          "sha256": "2063234fa4d209424ec94df373fca9d66eec23cc917302a8ee8dc27ee4b92d89"
+          "sha256": "565277e7620f5633e2c1a782fca8552f4a354630804648316a0919c270ae55ef"
         },
         {
           "path": "prototype/local-audio-library.js",
@@ -2676,7 +2795,7 @@
         {
           "path": "prototype/app.js",
           "line": 1,
-          "sha256": "221131cff9da50c199180f951466ded89750c79f98d095494572625e831fc5a5"
+          "sha256": "abc0e15d47fb1546cde931c21072d9dbd6f4d78ba1c65cab0fc5841b12cf02bf"
         }
       ],
       "reviewed_saved_evidence": [
@@ -2976,12 +3095,12 @@
         {
           "path": "prototype/app.js",
           "line": 1,
-          "sha256": "221131cff9da50c199180f951466ded89750c79f98d095494572625e831fc5a5"
+          "sha256": "abc0e15d47fb1546cde931c21072d9dbd6f4d78ba1c65cab0fc5841b12cf02bf"
         },
         {
           "path": "prototype/panels.js",
           "line": 1,
-          "sha256": "2063234fa4d209424ec94df373fca9d66eec23cc917302a8ee8dc27ee4b92d89"
+          "sha256": "565277e7620f5633e2c1a782fca8552f4a354630804648316a0919c270ae55ef"
         },
         {
           "path": "prototype/analysis.js",
@@ -3441,7 +3560,7 @@
         {
           "path": "prototype/app.js",
           "line": 1,
-          "sha256": "221131cff9da50c199180f951466ded89750c79f98d095494572625e831fc5a5"
+          "sha256": "abc0e15d47fb1546cde931c21072d9dbd6f4d78ba1c65cab0fc5841b12cf02bf"
         }
       ],
       "reviewed_saved_evidence": [
@@ -3547,7 +3666,7 @@
         {
           "path": "prototype/app.js",
           "line": 1,
-          "sha256": "221131cff9da50c199180f951466ded89750c79f98d095494572625e831fc5a5"
+          "sha256": "abc0e15d47fb1546cde931c21072d9dbd6f4d78ba1c65cab0fc5841b12cf02bf"
         },
         {
           "path": "prototype/engine.js",
@@ -3746,7 +3865,7 @@
         {
           "path": "prototype/app.js",
           "line": 1,
-          "sha256": "221131cff9da50c199180f951466ded89750c79f98d095494572625e831fc5a5"
+          "sha256": "abc0e15d47fb1546cde931c21072d9dbd6f4d78ba1c65cab0fc5841b12cf02bf"
         }
       ],
       "reviewed_saved_evidence": [
@@ -3937,7 +4056,7 @@
         {
           "path": "prototype/app.js",
           "line": 1,
-          "sha256": "221131cff9da50c199180f951466ded89750c79f98d095494572625e831fc5a5"
+          "sha256": "abc0e15d47fb1546cde931c21072d9dbd6f4d78ba1c65cab0fc5841b12cf02bf"
         },
         {
           "path": "prototype/holds.js",
@@ -4142,7 +4261,7 @@
         {
           "path": "prototype/app.js",
           "line": 1,
-          "sha256": "221131cff9da50c199180f951466ded89750c79f98d095494572625e831fc5a5"
+          "sha256": "abc0e15d47fb1546cde931c21072d9dbd6f4d78ba1c65cab0fc5841b12cf02bf"
         }
       ],
       "reviewed_saved_evidence": [
@@ -4331,7 +4450,7 @@
         {
           "path": "prototype/app.js",
           "line": 1,
-          "sha256": "221131cff9da50c199180f951466ded89750c79f98d095494572625e831fc5a5"
+          "sha256": "abc0e15d47fb1546cde931c21072d9dbd6f4d78ba1c65cab0fc5841b12cf02bf"
         },
         {
           "path": "prototype/engine.js",
@@ -4422,7 +4541,7 @@
         {
           "path": "prototype/app.js",
           "line": 1,
-          "sha256": "221131cff9da50c199180f951466ded89750c79f98d095494572625e831fc5a5"
+          "sha256": "abc0e15d47fb1546cde931c21072d9dbd6f4d78ba1c65cab0fc5841b12cf02bf"
         },
         {
           "path": "prototype/engine.js",
@@ -4629,9 +4748,29 @@
           "path": "docs/prototype/ENGINE_CURSOR_NATIVE_RESULT.md",
           "line": 1,
           "sha256": "905f969828d364ffdc9bd90c98fa47cd68c5a8dbf1d236304b1657e532283c45"
+        },
+        {
+          "path": "docs/prototype/MIDI_KEYSHIFT_FUNCTIONAL_REVIEW.md",
+          "line": 1,
+          "sha256": "8bfab64f90abce6cd6beb84a1ce566b04582e47a18bff25f3c3ef754c134cd74"
+        },
+        {
+          "path": "docs/prototype/midi-keyshift-browser-final-initial-results.json",
+          "line": 1,
+          "sha256": "4e3ca607079cc8f8cad5bd6fae743f3462dfb497a8fda51b1a24c9fc6d1a893d"
+        },
+        {
+          "path": "docs/prototype/midi-keyshift-browser-restored-results.json",
+          "line": 1,
+          "sha256": "577e9ed673721bdb4d778dea67bf0a905507b16924d6f896ae82e5c606614d68"
+        },
+        {
+          "path": "docs/prototype/midi-keyshift-audio-independent-results.json",
+          "line": 1,
+          "sha256": "0eff7d25ed2a0b98a5902a4fb61b18a9e495c7f196e47ebd18ce9341fb5078fa"
         }
       ],
-      "positive_evidence_boundary": "Real Signalsmith; actual native sustained-pitch UI paths and one strict stationary+12 engine return pitch/gap case passed; prior IAB capture failures retained.",
+      "positive_evidence_boundary": "Real Signalsmith; actual native sustained-pitch UI paths and one strict stationary+12 engine return pitch/gap case passed; prior IAB capture failures retained. New browser MIDI Key Shift has actual4deck stereo and mapping-reload subset evidence; not packaged native.",
       "remaining_gap": "Latest full cursor matrix has0accepted cases:6armed frame errors and marker ambiguity remain unresolved. Earlier bounded44100Hz engine pitch/gap pass stays separate; full audible cursor, compound/music/resource/reference acceptance open.",
       "actual_done_criterion": "Compare pitch/tempo behavior and artifacts across declared musical/rate ranges.",
       "proof_scope": "Saved evidence inspected as scoped documentary artifact; this audit does not rerun it, establish transfer to current WIP, or compare new reference runtime.",
@@ -4782,7 +4921,7 @@
         {
           "path": "prototype/app.js",
           "line": 1,
-          "sha256": "221131cff9da50c199180f951466ded89750c79f98d095494572625e831fc5a5"
+          "sha256": "abc0e15d47fb1546cde931c21072d9dbd6f4d78ba1c65cab0fc5841b12cf02bf"
         },
         {
           "path": "prototype/engine.js",
@@ -5201,7 +5340,7 @@
         {
           "path": "prototype/app.js",
           "line": 1,
-          "sha256": "221131cff9da50c199180f951466ded89750c79f98d095494572625e831fc5a5"
+          "sha256": "abc0e15d47fb1546cde931c21072d9dbd6f4d78ba1c65cab0fc5841b12cf02bf"
         },
         {
           "path": "prototype/holds.js",
@@ -5333,7 +5472,7 @@
         {
           "path": "prototype/app.js",
           "line": 1,
-          "sha256": "221131cff9da50c199180f951466ded89750c79f98d095494572625e831fc5a5"
+          "sha256": "abc0e15d47fb1546cde931c21072d9dbd6f4d78ba1c65cab0fc5841b12cf02bf"
         },
         {
           "path": "prototype/engine.js",
@@ -5443,7 +5582,7 @@
         {
           "path": "prototype/app.js",
           "line": 1,
-          "sha256": "221131cff9da50c199180f951466ded89750c79f98d095494572625e831fc5a5"
+          "sha256": "abc0e15d47fb1546cde931c21072d9dbd6f4d78ba1c65cab0fc5841b12cf02bf"
         },
         {
           "path": "prototype/engine.js",
@@ -5586,7 +5725,7 @@
         {
           "path": "prototype/app.js",
           "line": 1,
-          "sha256": "221131cff9da50c199180f951466ded89750c79f98d095494572625e831fc5a5"
+          "sha256": "abc0e15d47fb1546cde931c21072d9dbd6f4d78ba1c65cab0fc5841b12cf02bf"
         }
       ],
       "reviewed_saved_evidence": [
@@ -5681,7 +5820,7 @@
         {
           "path": "prototype/panels.js",
           "line": 1,
-          "sha256": "2063234fa4d209424ec94df373fca9d66eec23cc917302a8ee8dc27ee4b92d89"
+          "sha256": "565277e7620f5633e2c1a782fca8552f4a354630804648316a0919c270ae55ef"
         }
       ],
       "reviewed_saved_evidence": [
@@ -6032,7 +6171,7 @@
         {
           "path": "prototype/app.js",
           "line": 1,
-          "sha256": "221131cff9da50c199180f951466ded89750c79f98d095494572625e831fc5a5"
+          "sha256": "abc0e15d47fb1546cde931c21072d9dbd6f4d78ba1c65cab0fc5841b12cf02bf"
         }
       ],
       "reviewed_saved_evidence": [
@@ -6143,12 +6282,12 @@
         {
           "path": "prototype/panels.js",
           "line": 1,
-          "sha256": "2063234fa4d209424ec94df373fca9d66eec23cc917302a8ee8dc27ee4b92d89"
+          "sha256": "565277e7620f5633e2c1a782fca8552f4a354630804648316a0919c270ae55ef"
         },
         {
           "path": "prototype/app.js",
           "line": 1,
-          "sha256": "221131cff9da50c199180f951466ded89750c79f98d095494572625e831fc5a5"
+          "sha256": "abc0e15d47fb1546cde931c21072d9dbd6f4d78ba1c65cab0fc5841b12cf02bf"
         },
         {
           "path": "prototype/engine.js",
@@ -6588,12 +6727,12 @@
         {
           "path": "prototype/app.js",
           "line": 1,
-          "sha256": "221131cff9da50c199180f951466ded89750c79f98d095494572625e831fc5a5"
+          "sha256": "abc0e15d47fb1546cde931c21072d9dbd6f4d78ba1c65cab0fc5841b12cf02bf"
         },
         {
           "path": "prototype/panels.js",
           "line": 1,
-          "sha256": "2063234fa4d209424ec94df373fca9d66eec23cc917302a8ee8dc27ee4b92d89"
+          "sha256": "565277e7620f5633e2c1a782fca8552f4a354630804648316a0919c270ae55ef"
         },
         {
           "path": "prototype/engine.js",
@@ -6805,7 +6944,7 @@
         {
           "path": "prototype/panels.js",
           "line": 1,
-          "sha256": "2063234fa4d209424ec94df373fca9d66eec23cc917302a8ee8dc27ee4b92d89"
+          "sha256": "565277e7620f5633e2c1a782fca8552f4a354630804648316a0919c270ae55ef"
         }
       ],
       "reviewed_saved_evidence": [
@@ -7117,7 +7256,7 @@
         {
           "path": "prototype/app.js",
           "line": 1,
-          "sha256": "221131cff9da50c199180f951466ded89750c79f98d095494572625e831fc5a5"
+          "sha256": "abc0e15d47fb1546cde931c21072d9dbd6f4d78ba1c65cab0fc5841b12cf02bf"
         }
       ],
       "reviewed_saved_evidence": [
@@ -7317,7 +7456,7 @@
         {
           "path": "prototype/app.js",
           "line": 1,
-          "sha256": "221131cff9da50c199180f951466ded89750c79f98d095494572625e831fc5a5"
+          "sha256": "abc0e15d47fb1546cde931c21072d9dbd6f4d78ba1c65cab0fc5841b12cf02bf"
         }
       ],
       "reviewed_saved_evidence": [
@@ -7445,7 +7584,7 @@
         {
           "path": "prototype/panels.js",
           "line": 1,
-          "sha256": "2063234fa4d209424ec94df373fca9d66eec23cc917302a8ee8dc27ee4b92d89"
+          "sha256": "565277e7620f5633e2c1a782fca8552f4a354630804648316a0919c270ae55ef"
         }
       ],
       "reviewed_saved_evidence": [
@@ -7586,7 +7725,7 @@
         {
           "path": "prototype/panels.js",
           "line": 1,
-          "sha256": "2063234fa4d209424ec94df373fca9d66eec23cc917302a8ee8dc27ee4b92d89"
+          "sha256": "565277e7620f5633e2c1a782fca8552f4a354630804648316a0919c270ae55ef"
         }
       ],
       "reviewed_saved_evidence": [
@@ -7689,7 +7828,7 @@
         {
           "path": "prototype/panels.js",
           "line": 1,
-          "sha256": "2063234fa4d209424ec94df373fca9d66eec23cc917302a8ee8dc27ee4b92d89"
+          "sha256": "565277e7620f5633e2c1a782fca8552f4a354630804648316a0919c270ae55ef"
         },
         {
           "path": "prototype/engine.js",
@@ -8171,7 +8310,7 @@
         {
           "path": "prototype/midi.js",
           "line": 1,
-          "sha256": "b0b5ef7b71ef551c98ccb56dba0161d3e532a93713bb6b0e2b14e6f4c96b8c5e"
+          "sha256": "bd1b0ffd6ade3f118b06f4131307ea55e420317c0f3334a1053f710aa7583dc1"
         },
         {
           "path": "prototype/audio-output.js",
@@ -8181,7 +8320,7 @@
         {
           "path": "prototype/panels.js",
           "line": 1,
-          "sha256": "2063234fa4d209424ec94df373fca9d66eec23cc917302a8ee8dc27ee4b92d89"
+          "sha256": "565277e7620f5633e2c1a782fca8552f4a354630804648316a0919c270ae55ef"
         }
       ],
       "reviewed_saved_evidence": [
@@ -8403,12 +8542,17 @@
         {
           "path": "prototype/midi.js",
           "line": 1,
-          "sha256": "b0b5ef7b71ef551c98ccb56dba0161d3e532a93713bb6b0e2b14e6f4c96b8c5e"
+          "sha256": "bd1b0ffd6ade3f118b06f4131307ea55e420317c0f3334a1053f710aa7583dc1"
         },
         {
           "path": "prototype/panels.js",
           "line": 1,
-          "sha256": "2063234fa4d209424ec94df373fca9d66eec23cc917302a8ee8dc27ee4b92d89"
+          "sha256": "565277e7620f5633e2c1a782fca8552f4a354630804648316a0919c270ae55ef"
+        },
+        {
+          "path": "prototype/app.js",
+          "line": 1,
+          "sha256": "abc0e15d47fb1546cde931c21072d9dbd6f4d78ba1c65cab0fc5841b12cf02bf"
         }
       ],
       "reviewed_saved_evidence": [
@@ -8426,10 +8570,30 @@
           "path": "docs/prototype/desktop-0.1.3-runtime-observation.json",
           "line": 1,
           "sha256": "48869e3e0e071cd03dbe2b61e87e9662202526ea88172eb268f7079d3cbb9f09"
+        },
+        {
+          "path": "docs/prototype/MIDI_KEYSHIFT_FUNCTIONAL_REVIEW.md",
+          "line": 1,
+          "sha256": "8bfab64f90abce6cd6beb84a1ce566b04582e47a18bff25f3c3ef754c134cd74"
+        },
+        {
+          "path": "docs/prototype/midi-keyshift-browser-final-initial-results.json",
+          "line": 1,
+          "sha256": "4e3ca607079cc8f8cad5bd6fae743f3462dfb497a8fda51b1a24c9fc6d1a893d"
+        },
+        {
+          "path": "docs/prototype/midi-keyshift-browser-restored-results.json",
+          "line": 1,
+          "sha256": "577e9ed673721bdb4d778dea67bf0a905507b16924d6f896ae82e5c606614d68"
+        },
+        {
+          "path": "docs/prototype/midi-keyshift-audio-independent-results.json",
+          "line": 1,
+          "sha256": "0eff7d25ed2a0b98a5902a4fb61b18a9e495c7f196e47ebd18ce9341fb5078fa"
         }
       ],
-      "positive_evidence_boundary": "MIDI learn/export/persist subset and confirmed0.1.1 browser knob; fresh0.1.5 native Target menu has only8options, without Key Shift or Video targets; matching dispatcher has no handlers.",
-      "remaining_gap": "Implement actual Key Shift/Video and other required target dispatch; full learn/edit/import/reset/undo, preset, modifier, feedback and reconnect acceptance.",
+      "positive_evidence_boundary": "Confirmed0.1.1 browser knob remains historical. New browser candidate maps Key Shift on all4decks with8initial/3reload checks and8complete audio records; unchanged native0.1.5 still lacks Key Shift/Video targets.",
+      "remaining_gap": "New native/physical Key Shift and full ranges/encodings/modifiers/learn/edit/import/reset/undo/presets/feedback/reconnect acceptance; Video targets remain absent.",
       "actual_done_criterion": "Learn, edit, export, import and reset mappings with validation and undo.",
       "proof_scope": "Saved evidence inspected as scoped documentary artifact; this audit does not rerun it, establish transfer to current WIP, or compare new reference runtime.",
       "requirement_evidence": [
@@ -8625,7 +8789,7 @@
         {
           "path": "prototype/midi.js",
           "line": 1,
-          "sha256": "b0b5ef7b71ef551c98ccb56dba0161d3e532a93713bb6b0e2b14e6f4c96b8c5e"
+          "sha256": "bd1b0ffd6ade3f118b06f4131307ea55e420317c0f3334a1053f710aa7583dc1"
         }
       ],
       "reviewed_saved_evidence": [
@@ -8804,12 +8968,12 @@
         {
           "path": "prototype/midi.js",
           "line": 1,
-          "sha256": "b0b5ef7b71ef551c98ccb56dba0161d3e532a93713bb6b0e2b14e6f4c96b8c5e"
+          "sha256": "bd1b0ffd6ade3f118b06f4131307ea55e420317c0f3334a1053f710aa7583dc1"
         },
         {
           "path": "prototype/panels.js",
           "line": 1,
-          "sha256": "2063234fa4d209424ec94df373fca9d66eec23cc917302a8ee8dc27ee4b92d89"
+          "sha256": "565277e7620f5633e2c1a782fca8552f4a354630804648316a0919c270ae55ef"
         }
       ],
       "reviewed_saved_evidence": [
@@ -8890,12 +9054,12 @@
         {
           "path": "prototype/panels.js",
           "line": 1,
-          "sha256": "2063234fa4d209424ec94df373fca9d66eec23cc917302a8ee8dc27ee4b92d89"
+          "sha256": "565277e7620f5633e2c1a782fca8552f4a354630804648316a0919c270ae55ef"
         },
         {
           "path": "prototype/app.js",
           "line": 1,
-          "sha256": "221131cff9da50c199180f951466ded89750c79f98d095494572625e831fc5a5"
+          "sha256": "abc0e15d47fb1546cde931c21072d9dbd6f4d78ba1c65cab0fc5841b12cf02bf"
         }
       ],
       "reviewed_saved_evidence": [
@@ -8991,12 +9155,12 @@
         {
           "path": "prototype/panels.js",
           "line": 1,
-          "sha256": "2063234fa4d209424ec94df373fca9d66eec23cc917302a8ee8dc27ee4b92d89"
+          "sha256": "565277e7620f5633e2c1a782fca8552f4a354630804648316a0919c270ae55ef"
         },
         {
           "path": "prototype/app.js",
           "line": 1,
-          "sha256": "221131cff9da50c199180f951466ded89750c79f98d095494572625e831fc5a5"
+          "sha256": "abc0e15d47fb1546cde931c21072d9dbd6f4d78ba1c65cab0fc5841b12cf02bf"
         }
       ],
       "reviewed_saved_evidence": [
@@ -9241,12 +9405,12 @@
         {
           "path": "prototype/panels.js",
           "line": 1,
-          "sha256": "2063234fa4d209424ec94df373fca9d66eec23cc917302a8ee8dc27ee4b92d89"
+          "sha256": "565277e7620f5633e2c1a782fca8552f4a354630804648316a0919c270ae55ef"
         },
         {
           "path": "prototype/app.js",
           "line": 1,
-          "sha256": "221131cff9da50c199180f951466ded89750c79f98d095494572625e831fc5a5"
+          "sha256": "abc0e15d47fb1546cde931c21072d9dbd6f4d78ba1c65cab0fc5841b12cf02bf"
         }
       ],
       "reviewed_saved_evidence": [
@@ -9448,12 +9612,12 @@
         {
           "path": "prototype/panels.js",
           "line": 1,
-          "sha256": "2063234fa4d209424ec94df373fca9d66eec23cc917302a8ee8dc27ee4b92d89"
+          "sha256": "565277e7620f5633e2c1a782fca8552f4a354630804648316a0919c270ae55ef"
         },
         {
           "path": "prototype/app.js",
           "line": 1,
-          "sha256": "221131cff9da50c199180f951466ded89750c79f98d095494572625e831fc5a5"
+          "sha256": "abc0e15d47fb1546cde931c21072d9dbd6f4d78ba1c65cab0fc5841b12cf02bf"
         }
       ],
       "reviewed_saved_evidence": [
@@ -9610,12 +9774,12 @@
         {
           "path": "prototype/app.js",
           "line": 1,
-          "sha256": "221131cff9da50c199180f951466ded89750c79f98d095494572625e831fc5a5"
+          "sha256": "abc0e15d47fb1546cde931c21072d9dbd6f4d78ba1c65cab0fc5841b12cf02bf"
         },
         {
           "path": "prototype/panels.js",
           "line": 1,
-          "sha256": "2063234fa4d209424ec94df373fca9d66eec23cc917302a8ee8dc27ee4b92d89"
+          "sha256": "565277e7620f5633e2c1a782fca8552f4a354630804648316a0919c270ae55ef"
         }
       ],
       "reviewed_saved_evidence": [
@@ -9765,12 +9929,12 @@
         {
           "path": "prototype/midi.js",
           "line": 1,
-          "sha256": "b0b5ef7b71ef551c98ccb56dba0161d3e532a93713bb6b0e2b14e6f4c96b8c5e"
+          "sha256": "bd1b0ffd6ade3f118b06f4131307ea55e420317c0f3334a1053f710aa7583dc1"
         },
         {
           "path": "prototype/panels.js",
           "line": 1,
-          "sha256": "2063234fa4d209424ec94df373fca9d66eec23cc917302a8ee8dc27ee4b92d89"
+          "sha256": "565277e7620f5633e2c1a782fca8552f4a354630804648316a0919c270ae55ef"
         }
       ],
       "reviewed_saved_evidence": [
@@ -9913,7 +10077,7 @@
         {
           "path": "prototype/app.js",
           "line": 1,
-          "sha256": "221131cff9da50c199180f951466ded89750c79f98d095494572625e831fc5a5"
+          "sha256": "abc0e15d47fb1546cde931c21072d9dbd6f4d78ba1c65cab0fc5841b12cf02bf"
         },
         {
           "path": "prototype/styles.css",
@@ -9923,7 +10087,7 @@
         {
           "path": "prototype/panels.js",
           "line": 1,
-          "sha256": "2063234fa4d209424ec94df373fca9d66eec23cc917302a8ee8dc27ee4b92d89"
+          "sha256": "565277e7620f5633e2c1a782fca8552f4a354630804648316a0919c270ae55ef"
         }
       ],
       "reviewed_saved_evidence": [
@@ -10104,12 +10268,12 @@
         {
           "path": "prototype/app.js",
           "line": 1,
-          "sha256": "221131cff9da50c199180f951466ded89750c79f98d095494572625e831fc5a5"
+          "sha256": "abc0e15d47fb1546cde931c21072d9dbd6f4d78ba1c65cab0fc5841b12cf02bf"
         },
         {
           "path": "prototype/panels.js",
           "line": 1,
-          "sha256": "2063234fa4d209424ec94df373fca9d66eec23cc917302a8ee8dc27ee4b92d89"
+          "sha256": "565277e7620f5633e2c1a782fca8552f4a354630804648316a0919c270ae55ef"
         }
       ],
       "reviewed_saved_evidence": [
@@ -10246,12 +10410,12 @@
         {
           "path": "prototype/app.js",
           "line": 1,
-          "sha256": "221131cff9da50c199180f951466ded89750c79f98d095494572625e831fc5a5"
+          "sha256": "abc0e15d47fb1546cde931c21072d9dbd6f4d78ba1c65cab0fc5841b12cf02bf"
         },
         {
           "path": "prototype/panels.js",
           "line": 1,
-          "sha256": "2063234fa4d209424ec94df373fca9d66eec23cc917302a8ee8dc27ee4b92d89"
+          "sha256": "565277e7620f5633e2c1a782fca8552f4a354630804648316a0919c270ae55ef"
         }
       ],
       "reviewed_saved_evidence": [
@@ -10463,12 +10627,12 @@
         {
           "path": "prototype/app.js",
           "line": 1,
-          "sha256": "221131cff9da50c199180f951466ded89750c79f98d095494572625e831fc5a5"
+          "sha256": "abc0e15d47fb1546cde931c21072d9dbd6f4d78ba1c65cab0fc5841b12cf02bf"
         },
         {
           "path": "prototype/panels.js",
           "line": 1,
-          "sha256": "2063234fa4d209424ec94df373fca9d66eec23cc917302a8ee8dc27ee4b92d89"
+          "sha256": "565277e7620f5633e2c1a782fca8552f4a354630804648316a0919c270ae55ef"
         },
         {
           "path": "prototype/styles.css",
@@ -10558,12 +10722,12 @@
         {
           "path": "prototype/app.js",
           "line": 1,
-          "sha256": "221131cff9da50c199180f951466ded89750c79f98d095494572625e831fc5a5"
+          "sha256": "abc0e15d47fb1546cde931c21072d9dbd6f4d78ba1c65cab0fc5841b12cf02bf"
         },
         {
           "path": "prototype/panels.js",
           "line": 1,
-          "sha256": "2063234fa4d209424ec94df373fca9d66eec23cc917302a8ee8dc27ee4b92d89"
+          "sha256": "565277e7620f5633e2c1a782fca8552f4a354630804648316a0919c270ae55ef"
         },
         {
           "path": "prototype/stems.js",
@@ -10654,7 +10818,7 @@
         {
           "path": "prototype/app.js",
           "line": 1,
-          "sha256": "221131cff9da50c199180f951466ded89750c79f98d095494572625e831fc5a5"
+          "sha256": "abc0e15d47fb1546cde931c21072d9dbd6f4d78ba1c65cab0fc5841b12cf02bf"
         },
         {
           "path": "prototype/styles.css",
@@ -10776,7 +10940,7 @@
         {
           "path": "prototype/app.js",
           "line": 1,
-          "sha256": "221131cff9da50c199180f951466ded89750c79f98d095494572625e831fc5a5"
+          "sha256": "abc0e15d47fb1546cde931c21072d9dbd6f4d78ba1c65cab0fc5841b12cf02bf"
         },
         {
           "path": "prototype/engine.js",
@@ -10900,7 +11064,7 @@
         {
           "path": "prototype/app.js",
           "line": 1,
-          "sha256": "221131cff9da50c199180f951466ded89750c79f98d095494572625e831fc5a5"
+          "sha256": "abc0e15d47fb1546cde931c21072d9dbd6f4d78ba1c65cab0fc5841b12cf02bf"
         },
         {
           "path": "prototype/local-audio-library.js",
@@ -11075,7 +11239,7 @@
         {
           "path": "prototype/panels.js",
           "line": 1,
-          "sha256": "2063234fa4d209424ec94df373fca9d66eec23cc917302a8ee8dc27ee4b92d89"
+          "sha256": "565277e7620f5633e2c1a782fca8552f4a354630804648316a0919c270ae55ef"
         },
         {
           "path": "prototype/engine.js",
@@ -11581,12 +11745,12 @@
         {
           "path": "prototype/app.js",
           "line": 1,
-          "sha256": "221131cff9da50c199180f951466ded89750c79f98d095494572625e831fc5a5"
+          "sha256": "abc0e15d47fb1546cde931c21072d9dbd6f4d78ba1c65cab0fc5841b12cf02bf"
         },
         {
           "path": "prototype/panels.js",
           "line": 1,
-          "sha256": "2063234fa4d209424ec94df373fca9d66eec23cc917302a8ee8dc27ee4b92d89"
+          "sha256": "565277e7620f5633e2c1a782fca8552f4a354630804648316a0919c270ae55ef"
         }
       ],
       "reviewed_saved_evidence": [
@@ -11737,12 +11901,12 @@
         {
           "path": "prototype/midi.js",
           "line": 1,
-          "sha256": "b0b5ef7b71ef551c98ccb56dba0161d3e532a93713bb6b0e2b14e6f4c96b8c5e"
+          "sha256": "bd1b0ffd6ade3f118b06f4131307ea55e420317c0f3334a1053f710aa7583dc1"
         },
         {
           "path": "prototype/panels.js",
           "line": 1,
-          "sha256": "2063234fa4d209424ec94df373fca9d66eec23cc917302a8ee8dc27ee4b92d89"
+          "sha256": "565277e7620f5633e2c1a782fca8552f4a354630804648316a0919c270ae55ef"
         }
       ],
       "reviewed_saved_evidence": [
@@ -11988,7 +12152,7 @@
         {
           "path": "prototype/app.js",
           "line": 1,
-          "sha256": "221131cff9da50c199180f951466ded89750c79f98d095494572625e831fc5a5"
+          "sha256": "abc0e15d47fb1546cde931c21072d9dbd6f4d78ba1c65cab0fc5841b12cf02bf"
         },
         {
           "path": "prototype/engine.js",
@@ -12092,12 +12256,12 @@
         {
           "path": "prototype/app.js",
           "line": 1,
-          "sha256": "221131cff9da50c199180f951466ded89750c79f98d095494572625e831fc5a5"
+          "sha256": "abc0e15d47fb1546cde931c21072d9dbd6f4d78ba1c65cab0fc5841b12cf02bf"
         },
         {
           "path": "prototype/panels.js",
           "line": 1,
-          "sha256": "2063234fa4d209424ec94df373fca9d66eec23cc917302a8ee8dc27ee4b92d89"
+          "sha256": "565277e7620f5633e2c1a782fca8552f4a354630804648316a0919c270ae55ef"
         }
       ],
       "reviewed_saved_evidence": [
@@ -12254,7 +12418,7 @@
         {
           "path": "prototype/panels.js",
           "line": 1,
-          "sha256": "2063234fa4d209424ec94df373fca9d66eec23cc917302a8ee8dc27ee4b92d89"
+          "sha256": "565277e7620f5633e2c1a782fca8552f4a354630804648316a0919c270ae55ef"
         },
         {
           "path": "prototype/library.js",
@@ -12347,12 +12511,12 @@
         {
           "path": "prototype/panels.js",
           "line": 1,
-          "sha256": "2063234fa4d209424ec94df373fca9d66eec23cc917302a8ee8dc27ee4b92d89"
+          "sha256": "565277e7620f5633e2c1a782fca8552f4a354630804648316a0919c270ae55ef"
         },
         {
           "path": "prototype/app.js",
           "line": 1,
-          "sha256": "221131cff9da50c199180f951466ded89750c79f98d095494572625e831fc5a5"
+          "sha256": "abc0e15d47fb1546cde931c21072d9dbd6f4d78ba1c65cab0fc5841b12cf02bf"
         }
       ],
       "reviewed_saved_evidence": [
@@ -12476,12 +12640,12 @@
         {
           "path": "prototype/panels.js",
           "line": 1,
-          "sha256": "2063234fa4d209424ec94df373fca9d66eec23cc917302a8ee8dc27ee4b92d89"
+          "sha256": "565277e7620f5633e2c1a782fca8552f4a354630804648316a0919c270ae55ef"
         },
         {
           "path": "prototype/app.js",
           "line": 1,
-          "sha256": "221131cff9da50c199180f951466ded89750c79f98d095494572625e831fc5a5"
+          "sha256": "abc0e15d47fb1546cde931c21072d9dbd6f4d78ba1c65cab0fc5841b12cf02bf"
         }
       ],
       "reviewed_saved_evidence": [
@@ -12603,12 +12767,12 @@
         {
           "path": "prototype/panels.js",
           "line": 1,
-          "sha256": "2063234fa4d209424ec94df373fca9d66eec23cc917302a8ee8dc27ee4b92d89"
+          "sha256": "565277e7620f5633e2c1a782fca8552f4a354630804648316a0919c270ae55ef"
         },
         {
           "path": "prototype/app.js",
           "line": 1,
-          "sha256": "221131cff9da50c199180f951466ded89750c79f98d095494572625e831fc5a5"
+          "sha256": "abc0e15d47fb1546cde931c21072d9dbd6f4d78ba1c65cab0fc5841b12cf02bf"
         }
       ],
       "reviewed_saved_evidence": [
@@ -12728,7 +12892,7 @@
         {
           "path": "prototype/panels.js",
           "line": 1,
-          "sha256": "2063234fa4d209424ec94df373fca9d66eec23cc917302a8ee8dc27ee4b92d89"
+          "sha256": "565277e7620f5633e2c1a782fca8552f4a354630804648316a0919c270ae55ef"
         }
       ],
       "reviewed_saved_evidence": [
@@ -12822,7 +12986,7 @@
         {
           "path": "prototype/app.js",
           "line": 1,
-          "sha256": "221131cff9da50c199180f951466ded89750c79f98d095494572625e831fc5a5"
+          "sha256": "abc0e15d47fb1546cde931c21072d9dbd6f4d78ba1c65cab0fc5841b12cf02bf"
         },
         {
           "path": "prototype/analysis-worker.js",
@@ -12954,7 +13118,7 @@
         {
           "path": "prototype/app.js",
           "line": 1,
-          "sha256": "221131cff9da50c199180f951466ded89750c79f98d095494572625e831fc5a5"
+          "sha256": "abc0e15d47fb1546cde931c21072d9dbd6f4d78ba1c65cab0fc5841b12cf02bf"
         },
         {
           "path": "prototype/engine.js",
@@ -13083,7 +13247,7 @@
         {
           "path": "prototype/app.js",
           "line": 1,
-          "sha256": "221131cff9da50c199180f951466ded89750c79f98d095494572625e831fc5a5"
+          "sha256": "abc0e15d47fb1546cde931c21072d9dbd6f4d78ba1c65cab0fc5841b12cf02bf"
         },
         {
           "path": "prototype/engine.js",
@@ -13237,7 +13401,7 @@
         {
           "path": "prototype/app.js",
           "line": 1,
-          "sha256": "221131cff9da50c199180f951466ded89750c79f98d095494572625e831fc5a5"
+          "sha256": "abc0e15d47fb1546cde931c21072d9dbd6f4d78ba1c65cab0fc5841b12cf02bf"
         }
       ],
       "reviewed_saved_evidence": [
@@ -13352,12 +13516,12 @@
         {
           "path": "prototype/app.js",
           "line": 1,
-          "sha256": "221131cff9da50c199180f951466ded89750c79f98d095494572625e831fc5a5"
+          "sha256": "abc0e15d47fb1546cde931c21072d9dbd6f4d78ba1c65cab0fc5841b12cf02bf"
         },
         {
           "path": "prototype/panels.js",
           "line": 1,
-          "sha256": "2063234fa4d209424ec94df373fca9d66eec23cc917302a8ee8dc27ee4b92d89"
+          "sha256": "565277e7620f5633e2c1a782fca8552f4a354630804648316a0919c270ae55ef"
         }
       ],
       "reviewed_saved_evidence": [
@@ -13516,7 +13680,7 @@
         {
           "path": "prototype/app.js",
           "line": 1,
-          "sha256": "221131cff9da50c199180f951466ded89750c79f98d095494572625e831fc5a5"
+          "sha256": "abc0e15d47fb1546cde931c21072d9dbd6f4d78ba1c65cab0fc5841b12cf02bf"
         }
       ],
       "reviewed_saved_evidence": [
@@ -13705,7 +13869,7 @@
         {
           "path": "prototype/app.js",
           "line": 1,
-          "sha256": "221131cff9da50c199180f951466ded89750c79f98d095494572625e831fc5a5"
+          "sha256": "abc0e15d47fb1546cde931c21072d9dbd6f4d78ba1c65cab0fc5841b12cf02bf"
         },
         {
           "path": "prototype/engine.js",
@@ -13944,7 +14108,7 @@
         {
           "path": "prototype/panels.js",
           "line": 1,
-          "sha256": "2063234fa4d209424ec94df373fca9d66eec23cc917302a8ee8dc27ee4b92d89"
+          "sha256": "565277e7620f5633e2c1a782fca8552f4a354630804648316a0919c270ae55ef"
         }
       ],
       "reviewed_saved_evidence": [
@@ -14098,12 +14262,12 @@
         {
           "path": "prototype/app.js",
           "line": 1,
-          "sha256": "221131cff9da50c199180f951466ded89750c79f98d095494572625e831fc5a5"
+          "sha256": "abc0e15d47fb1546cde931c21072d9dbd6f4d78ba1c65cab0fc5841b12cf02bf"
         },
         {
           "path": "prototype/panels.js",
           "line": 1,
-          "sha256": "2063234fa4d209424ec94df373fca9d66eec23cc917302a8ee8dc27ee4b92d89"
+          "sha256": "565277e7620f5633e2c1a782fca8552f4a354630804648316a0919c270ae55ef"
         }
       ],
       "reviewed_saved_evidence": [
@@ -14284,7 +14448,7 @@
         {
           "path": "prototype/panels.js",
           "line": 1,
-          "sha256": "2063234fa4d209424ec94df373fca9d66eec23cc917302a8ee8dc27ee4b92d89"
+          "sha256": "565277e7620f5633e2c1a782fca8552f4a354630804648316a0919c270ae55ef"
         }
       ],
       "reviewed_saved_evidence": [
@@ -15602,7 +15766,7 @@
         {
           "path": "prototype/panels.js",
           "line": 1,
-          "sha256": "2063234fa4d209424ec94df373fca9d66eec23cc917302a8ee8dc27ee4b92d89"
+          "sha256": "565277e7620f5633e2c1a782fca8552f4a354630804648316a0919c270ae55ef"
         }
       ],
       "reviewed_saved_evidence": [
@@ -15737,7 +15901,7 @@
         {
           "path": "prototype/panels.js",
           "line": 1,
-          "sha256": "2063234fa4d209424ec94df373fca9d66eec23cc917302a8ee8dc27ee4b92d89"
+          "sha256": "565277e7620f5633e2c1a782fca8552f4a354630804648316a0919c270ae55ef"
         }
       ],
       "reviewed_saved_evidence": [
@@ -16001,12 +16165,12 @@
         {
           "path": "prototype/panels.js",
           "line": 1,
-          "sha256": "2063234fa4d209424ec94df373fca9d66eec23cc917302a8ee8dc27ee4b92d89"
+          "sha256": "565277e7620f5633e2c1a782fca8552f4a354630804648316a0919c270ae55ef"
         },
         {
           "path": "prototype/app.js",
           "line": 1,
-          "sha256": "221131cff9da50c199180f951466ded89750c79f98d095494572625e831fc5a5"
+          "sha256": "abc0e15d47fb1546cde931c21072d9dbd6f4d78ba1c65cab0fc5841b12cf02bf"
         }
       ],
       "reviewed_saved_evidence": [
@@ -16149,12 +16313,12 @@
         {
           "path": "prototype/app.js",
           "line": 1,
-          "sha256": "221131cff9da50c199180f951466ded89750c79f98d095494572625e831fc5a5"
+          "sha256": "abc0e15d47fb1546cde931c21072d9dbd6f4d78ba1c65cab0fc5841b12cf02bf"
         },
         {
           "path": "prototype/panels.js",
           "line": 1,
-          "sha256": "2063234fa4d209424ec94df373fca9d66eec23cc917302a8ee8dc27ee4b92d89"
+          "sha256": "565277e7620f5633e2c1a782fca8552f4a354630804648316a0919c270ae55ef"
         }
       ],
       "reviewed_saved_evidence": [
@@ -17451,7 +17615,7 @@
         {
           "path": "prototype/panels.js",
           "line": 1,
-          "sha256": "2063234fa4d209424ec94df373fca9d66eec23cc917302a8ee8dc27ee4b92d89"
+          "sha256": "565277e7620f5633e2c1a782fca8552f4a354630804648316a0919c270ae55ef"
         }
       ],
       "reviewed_saved_evidence": [
@@ -17548,7 +17712,7 @@
         {
           "path": "prototype/app.js",
           "line": 1,
-          "sha256": "221131cff9da50c199180f951466ded89750c79f98d095494572625e831fc5a5"
+          "sha256": "abc0e15d47fb1546cde931c21072d9dbd6f4d78ba1c65cab0fc5841b12cf02bf"
         }
       ],
       "reviewed_saved_evidence": [
@@ -17687,7 +17851,7 @@
         {
           "path": "prototype/panels.js",
           "line": 1,
-          "sha256": "2063234fa4d209424ec94df373fca9d66eec23cc917302a8ee8dc27ee4b92d89"
+          "sha256": "565277e7620f5633e2c1a782fca8552f4a354630804648316a0919c270ae55ef"
         }
       ],
       "reviewed_saved_evidence": [
@@ -17877,12 +18041,12 @@
         {
           "path": "prototype/midi.js",
           "line": 1,
-          "sha256": "b0b5ef7b71ef551c98ccb56dba0161d3e532a93713bb6b0e2b14e6f4c96b8c5e"
+          "sha256": "bd1b0ffd6ade3f118b06f4131307ea55e420317c0f3334a1053f710aa7583dc1"
         },
         {
           "path": "prototype/panels.js",
           "line": 1,
-          "sha256": "2063234fa4d209424ec94df373fca9d66eec23cc917302a8ee8dc27ee4b92d89"
+          "sha256": "565277e7620f5633e2c1a782fca8552f4a354630804648316a0919c270ae55ef"
         },
         {
           "path": "prototype/audio-monitor.js",
@@ -18658,12 +18822,12 @@
         {
           "path": "prototype/midi.js",
           "line": 1,
-          "sha256": "b0b5ef7b71ef551c98ccb56dba0161d3e532a93713bb6b0e2b14e6f4c96b8c5e"
+          "sha256": "bd1b0ffd6ade3f118b06f4131307ea55e420317c0f3334a1053f710aa7583dc1"
         },
         {
           "path": "prototype/panels.js",
           "line": 1,
-          "sha256": "2063234fa4d209424ec94df373fca9d66eec23cc917302a8ee8dc27ee4b92d89"
+          "sha256": "565277e7620f5633e2c1a782fca8552f4a354630804648316a0919c270ae55ef"
         }
       ],
       "reviewed_saved_evidence": [
@@ -18676,9 +18840,14 @@
           "path": "docs/research/HERCULES_CAPTURE_20261017_CONFIRMED.json",
           "line": 1,
           "sha256": "b0f823edbf67f1ada51e297d5fd3ed4d0d9f25e145f7a344b468c79bf76246e4"
+        },
+        {
+          "path": "docs/prototype/MIDI_KEYSHIFT_FUNCTIONAL_REVIEW.md",
+          "line": 1,
+          "sha256": "8bfab64f90abce6cd6beb84a1ce566b04582e47a18bff25f3c3ef754c134cd74"
         }
       ],
-      "positive_evidence_boundary": "Parser supports7/14-bit and relative encodings; physical channel1CC1 subset.",
+      "positive_evidence_boundary": "Parser/physical CC1 subset retained; current actual dispatcher controlled tests accept CC16/48 and ignore unrelated CC80/112, with Note-off/relative regression coverage.",
       "remaining_gap": "Actual many-to-one/one-to-many ownership, replace/add semantics, all encodings/conflicts and physical controls.",
       "actual_done_criterion": "Verify absolute, relative and switch encodings with conflict resolution and explicit replace/add behavior; sources 225065768, 360001990956, 360001990936.",
       "proof_scope": "Saved evidence inspected as scoped documentary artifact; this audit does not rerun it, establish transfer to current WIP, or compare new reference runtime.",
@@ -18840,12 +19009,12 @@
         {
           "path": "prototype/panels.js",
           "line": 1,
-          "sha256": "2063234fa4d209424ec94df373fca9d66eec23cc917302a8ee8dc27ee4b92d89"
+          "sha256": "565277e7620f5633e2c1a782fca8552f4a354630804648316a0919c270ae55ef"
         },
         {
           "path": "prototype/app.js",
           "line": 1,
-          "sha256": "221131cff9da50c199180f951466ded89750c79f98d095494572625e831fc5a5"
+          "sha256": "abc0e15d47fb1546cde931c21072d9dbd6f4d78ba1c65cab0fc5841b12cf02bf"
         }
       ],
       "reviewed_saved_evidence": [
@@ -18988,7 +19157,7 @@
         {
           "path": "prototype/panels.js",
           "line": 1,
-          "sha256": "2063234fa4d209424ec94df373fca9d66eec23cc917302a8ee8dc27ee4b92d89"
+          "sha256": "565277e7620f5633e2c1a782fca8552f4a354630804648316a0919c270ae55ef"
         },
         {
           "path": "prototype/engine.js",
@@ -19104,7 +19273,7 @@
         {
           "path": "prototype/panels.js",
           "line": 1,
-          "sha256": "2063234fa4d209424ec94df373fca9d66eec23cc917302a8ee8dc27ee4b92d89"
+          "sha256": "565277e7620f5633e2c1a782fca8552f4a354630804648316a0919c270ae55ef"
         }
       ],
       "reviewed_saved_evidence": [
@@ -19260,7 +19429,7 @@
         {
           "path": "prototype/app.js",
           "line": 1,
-          "sha256": "221131cff9da50c199180f951466ded89750c79f98d095494572625e831fc5a5"
+          "sha256": "abc0e15d47fb1546cde931c21072d9dbd6f4d78ba1c65cab0fc5841b12cf02bf"
         },
         {
           "path": "prototype/styles.css",
@@ -19465,7 +19634,7 @@
         {
           "path": "prototype/app.js",
           "line": 1,
-          "sha256": "221131cff9da50c199180f951466ded89750c79f98d095494572625e831fc5a5"
+          "sha256": "abc0e15d47fb1546cde931c21072d9dbd6f4d78ba1c65cab0fc5841b12cf02bf"
         },
         {
           "path": "prototype/styles.css",
@@ -19475,7 +19644,7 @@
         {
           "path": "prototype/panels.js",
           "line": 1,
-          "sha256": "2063234fa4d209424ec94df373fca9d66eec23cc917302a8ee8dc27ee4b92d89"
+          "sha256": "565277e7620f5633e2c1a782fca8552f4a354630804648316a0919c270ae55ef"
         }
       ],
       "reviewed_saved_evidence": [
@@ -19609,12 +19778,12 @@
         {
           "path": "prototype/panels.js",
           "line": 1,
-          "sha256": "2063234fa4d209424ec94df373fca9d66eec23cc917302a8ee8dc27ee4b92d89"
+          "sha256": "565277e7620f5633e2c1a782fca8552f4a354630804648316a0919c270ae55ef"
         },
         {
           "path": "prototype/app.js",
           "line": 1,
-          "sha256": "221131cff9da50c199180f951466ded89750c79f98d095494572625e831fc5a5"
+          "sha256": "abc0e15d47fb1546cde931c21072d9dbd6f4d78ba1c65cab0fc5841b12cf02bf"
         }
       ],
       "reviewed_saved_evidence": [
@@ -19759,7 +19928,7 @@
         {
           "path": "prototype/panels.js",
           "line": 1,
-          "sha256": "2063234fa4d209424ec94df373fca9d66eec23cc917302a8ee8dc27ee4b92d89"
+          "sha256": "565277e7620f5633e2c1a782fca8552f4a354630804648316a0919c270ae55ef"
         },
         {
           "path": "prototype/fixtures.js",
@@ -19872,7 +20041,7 @@
         {
           "path": "prototype/panels.js",
           "line": 1,
-          "sha256": "2063234fa4d209424ec94df373fca9d66eec23cc917302a8ee8dc27ee4b92d89"
+          "sha256": "565277e7620f5633e2c1a782fca8552f4a354630804648316a0919c270ae55ef"
         },
         {
           "path": "prototype/engine.js",

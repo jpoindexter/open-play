@@ -609,6 +609,30 @@ async function load(index, id = state.selected, options = {}) {
   }
   renderTracks();
 }
+const deckKeyShiftRequests = new WeakMap();
+function keyShiftIntent(index) {
+  const d=state.decks[index],request=deckKeyShiftRequests.get(d);
+  return request && request.track===d.track?request.semitones:d.keyShift||0;
+}
+async function setDeckKeyShift(index, semitones) {
+  if (!Number.isInteger(semitones) || Math.abs(semitones) > 24)
+    throw new RangeError("The browser pitch renderer supports±24 semitones.");
+  const d = state.decks[index];
+  if (!d) throw new RangeError("Unknown deck.");
+  deckScratchControls.cancelDeck(d);
+  pitchPlay.cancelDeck(d);
+  d.keySync = false;
+  const request={track:d.track,semitones};
+  deckKeyShiftRequests.set(d,request);
+  try {
+    await engine.setPitch(d, { keylock: true, semitones });
+    if (deckKeyShiftRequests.get(d)===request && d.track===request.track) {
+      persist();renderDecks();
+    }
+  } finally {
+    if (deckKeyShiftRequests.get(d)===request) deckKeyShiftRequests.delete(d);
+  }
+}
 async function play(d) {
   if (pitchPlay.latch(d) || cueHolds.latch(d)) {
     renderDecks();
@@ -816,12 +840,9 @@ async function deckAction(action, index, el, event = {}) {
     if (!d.slip) await engine.endSlip(d);
   }
   if (["keyDown", "keyUp", "keyReset"].includes(action)) {
-    deckScratchControls.cancelDeck(d);
-    pitchPlay.cancelDeck(d);
-    d.keySync = false;
-    const semitones = action === "keyReset" ? 0 : (d.keyShift || 0) + (action === "keyUp" ? 1 : -1);
+    const semitones = action === "keyReset" ? 0 : keyShiftIntent(index) + (action === "keyUp" ? 1 : -1);
     if (Math.abs(semitones) > 24) return notify("The browser pitch renderer supports±24 semitones.");
-    await engine.setPitch(d,{keylock:true,semitones});
+    await setDeckKeyShift(index,semitones);
   }
   if (action === "keySync") {
     if (d.keySync) d.keySync = false;
@@ -1123,6 +1144,8 @@ const api = {
   load,
   play,
   deckAction,
+  setDeckKeyShift,
+  keyShiftIntent,
   trackById,
   filtered,
   download,

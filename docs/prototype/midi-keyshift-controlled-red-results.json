@@ -1,0 +1,57 @@
+{
+  "executed_at": "2026-10-17T12:58:37.283Z",
+  "scope": "Actual MIDI decoder/conversion policy only. No UI, audio, physical device or vendor equivalence acceptance.",
+  "passed": 0,
+  "failed": 7,
+  "checks": [
+    {
+      "name": "A full seven-bit controller sweep reaches both limits and neutral",
+      "passed": false,
+      "error": "MIDI Key Shift action is missing\n+ actual - expected\n\n+ 'undefined'\n- 'function'\n"
+    },
+    {
+      "name": "Relative encoders accumulate semitones in both supported encodings",
+      "passed": false,
+      "error": "midi.keyShiftSemitones is not a function"
+    },
+    {
+      "name": "Absolute pitch-bend uses its fourteen-bit range rather than seven-bit scaling",
+      "passed": false,
+      "error": "midi.keyShiftSemitones is not a function"
+    },
+    {
+      "name": "Paired fourteen-bit CC messages keep the parser pair and reach center",
+      "passed": false,
+      "error": "midi.keyShiftSemitones is not a function"
+    },
+    {
+      "name": "Relative motion saturates declared pitch-renderer limits and leaves zero-delta neutral",
+      "passed": false,
+      "error": "midi.keyShiftSemitones is not a function"
+    },
+    {
+      "name": "Note-off does not turn a learned velocity control into minimum pitch",
+      "passed": false,
+      "error": "midi.keyShiftSemitones is not a function"
+    },
+    {
+      "name": "Non-finite input cannot dispatch a non-finite audio parameter",
+      "passed": false,
+      "error": "The error is expected to be an instance of \"RangeError\". Received \"TypeError\"\n\nError message:\n\nmidi.keyShiftSemitones is not a function"
+    }
+  ],
+  "source_hashes": [
+    {
+      "path": "prototype/midi.js",
+      "sha256": "b0b5ef7b71ef551c98ccb56dba0161d3e532a93713bb6b0e2b14e6f4c96b8c5e"
+    },
+    {
+      "path": "prototype/app.js",
+      "sha256": "221131cff9da50c199180f951466ded89750c79f98d095494572625e831fc5a5"
+    },
+    {
+      "path": "prototype/panels.js",
+      "sha256": "2063234fa4d209424ec94df373fca9d66eec23cc917302a8ee8dc27ee4b92d89"
+    }
+  ]
+}

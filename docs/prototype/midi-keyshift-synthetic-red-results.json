@@ -1,0 +1,100 @@
+{
+  "executed_at": "2026-10-17T12:59:49.545Z",
+  "scope": "Actual MIDI decoder/conversion policy only. No UI, audio, physical device or vendor equivalence acceptance.",
+  "passed": 6,
+  "failed": 3,
+  "checks": [
+    {
+      "name": "A full seven-bit controller sweep reaches both limits and neutral",
+      "passed": false,
+      "error": "Expected values to be strictly deep-equal:\n+ actual - expected\n\n  [\n    -24,\n    -12,\n+   -0,\n    0,\n-   0,\n    12,\n    24\n  ]\n"
+    },
+    {
+      "name": "Relative encoders accumulate semitones in both supported encodings",
+      "passed": true,
+      "evidence": {
+        "steps": [
+          1,
+          2,
+          1,
+          0
+        ],
+        "offset": [
+          1,
+          2,
+          1,
+          1
+        ]
+      }
+    },
+    {
+      "name": "Absolute pitch-bend uses its fourteen-bit range rather than seven-bit scaling",
+      "passed": true,
+      "evidence": {
+        "values": [
+          -24,
+          0,
+          24
+        ]
+      }
+    },
+    {
+      "name": "Paired fourteen-bit CC messages keep the parser pair and reach center",
+      "passed": true,
+      "evidence": {
+        "pair": [
+          64,
+          0
+        ]
+      }
+    },
+    {
+      "name": "Relative motion saturates declared pitch-renderer limits and leaves zero-delta neutral",
+      "passed": true,
+      "evidence": {
+        "range": [
+          -24,
+          24
+        ]
+      }
+    },
+    {
+      "name": "Note-off does not turn a learned velocity control into minimum pitch",
+      "passed": true,
+      "evidence": {
+        "noteOffIgnored": true
+      }
+    },
+    {
+      "name": "Non-finite input cannot dispatch a non-finite audio parameter",
+      "passed": true,
+      "evidence": {
+        "invalidRejected": true
+      }
+    },
+    {
+      "name": "Synthetic review messages use the same MIDI decoder for CC, note-off and pitch bend",
+      "passed": false,
+      "error": "Configurable synthetic MIDI review input is missing\n+ actual - expected\n\n+ 'undefined'\n- 'function'\n"
+    },
+    {
+      "name": "Synthetic input rejects invalid fields rather than dispatching corrupt MIDI",
+      "passed": false,
+      "error": "The error is expected to be an instance of \"RangeError\". Received \"TypeError\"\n\nError message:\n\nmidi.syntheticMIDIMessage is not a function"
+    }
+  ],
+  "source_hashes": [
+    {
+      "path": "prototype/midi.js",
+      "sha256": "92b4b213c83fa211968092f31a74c9fa7663f67ac2b584c24b0a76e7bc82beba"
+    },
+    {
+      "path": "prototype/app.js",
+      "sha256": "e60194dcdf779eb770acc6222aab59ec60a1fe03cf42bee20ee7f1ba048aca72"
+    },
+    {
+      "path": "prototype/panels.js",
+      "sha256": "71be8785f5a19c396ce2775ae9dcc1915399fbcc3384753f20bbaafc5f29da6d"
+    }
+  ]
+}

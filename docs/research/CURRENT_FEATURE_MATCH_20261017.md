@@ -4,22 +4,24 @@
 
 REA freshly read installed version **4.0.10.213**, evidence `ev_fb7043efffb87a67955c1c9a53cb4ff595fecba0cf6ce4d2bff726524bd49ecf`. Its plist permissions, custom URL scheme and stem extension are declarations, not runtime compatibility. The [official current download page](https://serato.com/dj/pro/downloads) still identifies 4.0.10. The [5.0 beta](https://the-drop.serato.com/announcements/lucid-beatgrids-just-dropped-in-the-serato-dj-5-0-beta/) remains separately scoped and uninstalled.
 
-## New directly observed gap
+## Native gap and newer browser implementation
 
-**Key Shift cannot be selected in the running desktop MIDI mapper.** Native MIDI → Target exposed eight options: Library browse, two play targets, two cue targets, Crossfader, Sampler 1 and FX depth. Video targets are also absent. The matching source list and dispatcher confirm the bounded absence. A real browser-knob mapping does not establish these other targets.
+**Key Shift cannot be selected in the unchanged0.1.5 desktop MIDI mapper.** Native MIDI → Target exposed eight options: Library browse, two play targets, two cue targets, Crossfader, Sampler 1 and FX depth. Video targets are also absent. The original packaged source confirms that bounded absence; the newer browser source now has four Key Shift targets. A real browser-knob mapping does not establish these other targets.
 
-Evidence: [current-feature-check-native-observation.json](../../docs/prototype/current-feature-check-native-observation.json), [parity-current-midi-targets-0.1.5.png](../../docs/prototype/screenshots/parity-current-midi-targets-0.1.5.png), [target list](../../prototype/panels.js:1621), [dispatch](../../prototype/panels.js:1568). The official release-page Key Shift fix makes this a specific current-version obligation. Serato’s own MIDI behavior was not exercised in this check.
+Evidence: [current-feature-check-native-observation.json](../../docs/prototype/current-feature-check-native-observation.json), [parity-current-midi-targets-0.1.5.png](../../docs/prototype/screenshots/parity-current-midi-targets-0.1.5.png), [preserved original comparison](../../docs/research/CURRENT_FEATURE_MATCH_20261017_NATIVE015.md). The official release-page Key Shift fix makes this a specific current-version obligation. Serato’s own MIDI behavior was not exercised in this check.
+
+The newer browser source has actual four-deck Key Shift and saved-mapping audio evidence: [functional review](../../docs/prototype/MIDI_KEYSHIFT_FUNCTIONAL_REVIEW.md), eight initial plus three reload checks and eight complete recordings. Three production files differ from the0.1.5 source; the audio engine is unchanged. These browser results are not a new native or physical test and do not establish complete REL-05 equivalence.
 
 ## What this check actually executed
 
 - REA Info.plist inspection and exact executable identity; no repeated deep Ghidra import.
 - Fresh screenshots of the installed reference and running Open Play 0.1.5; actual MIDI menu inspection, with no mapping or connection change. App restored to paused main view.
-- All 200 frozen production prototype files still match the packaged source candidate. Current ASAR hash matches the recorded 0.1.5 bundle. This does not rerun any feature test.
+- Of the200baseline production files, 3 current browser files differ as recorded by the MIDI candidate. Current ASAR still matches the unchanged0.1.5 bundle. Source correspondence alone is not a feature test.
 - Evidence accounting for every canonical group and requirement; no full-feature pass awarded. Earlier physical, storage, FX, stem and keylock evidence retains its original scope.
 
 ## Current release obligations
 
-Each row inherits the existing per-feature Codex and Claude Code model/effort recommendations in the JSON companion. Recommendations are not a live model-catalog verification. No check is passed; REL-05 has a directly observed missing target. REL-07 and REL-18 are Windows-only facts, outside the current macOS parity gate. Recent-update rows are not claimed to have debuted in 4.0.10.
+Each row inherits the existing per-feature Codex and Claude Code model/effort recommendations in the JSON companion. Recommendations are not a live model-catalog verification. No full release-case parity pass is awarded. REL-05 has newer browser subset evidence while its0.1.5 native target remains absent. REL-07 and REL-18 are Windows-only facts, outside the current macOS parity gate. Recent-update rows are not claimed to have debuted in 4.0.10.
 
 | Check | Feature groups | Subject | Proposed test |
 |---|---|---|---|

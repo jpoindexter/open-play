@@ -1,0 +1,87 @@
+{
+  "observed_at": "2026-10-17T13:16:44.877867+00:00",
+  "kind": "BROWSER_KEYSHIFT_EXECUTION_AND_MAIN_UI_NOT_NATIVE_AUDIO",
+  "browser_origins": {
+    "pre_review": "http://127.0.0.1:18770",
+    "final_initial_and_reload": "http://127.0.0.1:18771"
+  },
+  "browser_runs": {
+    "pre_review": "7/7, five clips; not final candidate acceptance",
+    "final_initial": "8/8, seven clips, no fatal, stable sources",
+    "after_actual_page_reload": "3/3, one clip, no fatal, stable same sources"
+  },
+  "actual_main_UI_actions": [
+    "Navigated final isolated tab to actual /prototype/ entrypoint after saving both test reports.",
+    "Opened MIDI; Target menu AX exposed twelve choices including Deck1/2/3/4 Key Shift.",
+    "Selected Deck1 Key Shift, controller16, synthetic value96 and clicked Inject synthetic message.",
+    "Closed dialog; main AX showed Am(+12), both tempo controls0 and0decks playing."
+  ],
+  "mapping_persistence": "Five actual-app saved mappings equal the restored array; reload triggered by CUA, not simulated.",
+  "test_scope": "Known tone buffers replace demo sources only inside test harness; actual app DOM/module, mapper callbacks, renderer/WASM and postmaster encoder are real. Programmatic DOM test actions are distinct from subsequent CUA main UI inspection.",
+  "physical_hardware_tested": false,
+  "new_native_package_built": false,
+  "old_native_0_1_5_preserved": true,
+  "cleanup": {
+    "owned_test_tabs_closed": [
+      41,
+      42
+    ],
+    "owned_hosts": [
+      {
+        "pid": 61838,
+        "port": 18770,
+        "session_exit_code": 130
+      },
+      {
+        "pid": 62780,
+        "port": 18771,
+        "session_exit_code": 130
+      }
+    ],
+    "both_ports_absent_verified": true,
+    "native_0_1_5_pid_still_running": 47465
+  },
+  "artifacts": [
+    {
+      "path": "docs/prototype/screenshots/midi-keyshift-current-main-targets.png",
+      "sha256": "94d3d8db14d9a880838d0a49ee7491360eaab7c794b13be9d5d6de4fe22a14ef",
+      "bytes": 101378
+    },
+    {
+      "path": "docs/prototype/screenshots/midi-keyshift-current-main-message.png",
+      "sha256": "8246de43845bc0f2718fbed2e939a0dbf735485d11ee21f906e7d78a39064e7e",
+      "bytes": 101322
+    },
+    {
+      "path": "docs/prototype/screenshots/midi-keyshift-current-main-plus12.png",
+      "sha256": "0f5d6a991dad873db91a1e49dac93776d59591a725472f80df6d3b16de7d03fa",
+      "bytes": 140065
+    },
+    {
+      "path": "docs/prototype/screenshots/midi-keyshift-restored-browser-check.png",
+      "sha256": "9848282ba9bd3a142c7eb87b482a0c122b195cc16131b3720ab1c4810e8edd9b",
+      "bytes": 101163
+    },
+    {
+      "path": "docs/prototype/midi-keyshift-current-main-targets-ax.txt",
+      "sha256": "d3604e33581fc89388329272963fcefbf4f33f060a8a5c142c1a6dc3401b0243",
+      "bytes": 3209
+    },
+    {
+      "path": "docs/prototype/midi-keyshift-current-main-after-message-ax.txt",
+      "sha256": "f3ab83cbf256ab28b59d5ced3cef6aab764d27dc3af180e02793cc26aba95ced",
+      "bytes": 14991
+    },
+    {
+      "path": "docs/prototype/midi-keyshift-browser-final-initial-results.json",
+      "sha256": "4e3ca607079cc8f8cad5bd6fae743f3462dfb497a8fda51b1a24c9fc6d1a893d",
+      "bytes": 244109
+    },
+    {
+      "path": "docs/prototype/midi-keyshift-browser-restored-results.json",
+      "sha256": "577e9ed673721bdb4d778dea67bf0a905507b16924d6f896ae82e5c606614d68",
+      "bytes": 38227
+    }
+  ],
+  "full_parity_verified": false
+}

@@ -1,0 +1,102 @@
+{
+  "date": "2026-10-17",
+  "scope": "Actual extracted MIDI dispatch and app helper region plus actual AudioEngine.setPitch method. Controlled pending commits, track changes and no-audio collaborators. No real WebAudio/WASM, GUI, persistence store, hardware or reference acceptance.",
+  "passed": 1,
+  "failed": 10,
+  "checks": [
+    {
+      "name": "Two relative increments survive actual engine pending Stem Slip commit",
+      "passed": false,
+      "evidence": {
+        "beforeCommit": {
+          "actual": 0,
+          "intent": 0
+        }
+      },
+      "error": "matchesMIDIMap is not defined",
+      "stack": "ReferenceError: matchesMIDIMap is not defined\n    at Object.receiveMIDI [as receive] (eval at host (file:///Users/jasonpoindexter/Documents/GitHub/Open%20Play/scripts/test_midi_keyshift_dispatch_review.mjs:38:17), <anonymous>:20:7)\n    at file:///Users/jasonpoindexter/Documents/GitHub/Open%20Play/scripts/test_midi_keyshift_dispatch_review.mjs:48:13\n    at check (file:///Users/jasonpoindexter/Documents/GitHub/Open%20Play/scripts/test_midi_keyshift_dispatch_review.mjs:44:60)\n    at file:///Users/jasonpoindexter/Documents/GitHub/Open%20Play/scripts/test_midi_keyshift_dispatch_review.mjs:46:7\n    at ModuleJob.run (node:internal/modules/esm/module_job:343:25)\n    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:681:26)\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5)"
+    },
+    {
+      "name": "Relative direction reversal during pending commit preserves net zero",
+      "passed": false,
+      "evidence": {},
+      "error": "matchesMIDIMap is not defined",
+      "stack": "ReferenceError: matchesMIDIMap is not defined\n    at Object.receiveMIDI [as receive] (eval at host (file:///Users/jasonpoindexter/Documents/GitHub/Open%20Play/scripts/test_midi_keyshift_dispatch_review.mjs:38:17), <anonymous>:20:7)\n    at file:///Users/jasonpoindexter/Documents/GitHub/Open%20Play/scripts/test_midi_keyshift_dispatch_review.mjs:56:13\n    at check (file:///Users/jasonpoindexter/Documents/GitHub/Open%20Play/scripts/test_midi_keyshift_dispatch_review.mjs:44:60)\n    at file:///Users/jasonpoindexter/Documents/GitHub/Open%20Play/scripts/test_midi_keyshift_dispatch_review.mjs:54:7"
+    },
+    {
+      "name": "Unrelated CC80 andCC112 cannot alter a paired14bit CC16/48 mapping",
+      "passed": false,
+      "evidence": {},
+      "error": "matchesMIDIMap is not defined",
+      "stack": "ReferenceError: matchesMIDIMap is not defined\n    at Object.receiveMIDI [as receive] (eval at host (file:///Users/jasonpoindexter/Documents/GitHub/Open%20Play/scripts/test_midi_keyshift_dispatch_review.mjs:38:17), <anonymous>:20:7)\n    at file:///Users/jasonpoindexter/Documents/GitHub/Open%20Play/scripts/test_midi_keyshift_dispatch_review.mjs:62:11\n    at check (file:///Users/jasonpoindexter/Documents/GitHub/Open%20Play/scripts/test_midi_keyshift_dispatch_review.mjs:44:60)\n    at file:///Users/jasonpoindexter/Documents/GitHub/Open%20Play/scripts/test_midi_keyshift_dispatch_review.mjs:60:7"
+    },
+    {
+      "name": "Legitimate14bit MSB16 andLSB48 both update the paired absolute target",
+      "passed": false,
+      "evidence": {},
+      "error": "matchesMIDIMap is not defined",
+      "stack": "ReferenceError: matchesMIDIMap is not defined\n    at Object.receiveMIDI [as receive] (eval at host (file:///Users/jasonpoindexter/Documents/GitHub/Open%20Play/scripts/test_midi_keyshift_dispatch_review.mjs:38:17), <anonymous>:20:7)\n    at file:///Users/jasonpoindexter/Documents/GitHub/Open%20Play/scripts/test_midi_keyshift_dispatch_review.mjs:71:11\n    at check (file:///Users/jasonpoindexter/Documents/GitHub/Open%20Play/scripts/test_midi_keyshift_dispatch_review.mjs:44:60)\n    at file:///Users/jasonpoindexter/Documents/GitHub/Open%20Play/scripts/test_midi_keyshift_dispatch_review.mjs:69:7"
+    },
+    {
+      "name": "Note-off and zero-velocity note do not dispatch pitch or cancel transport",
+      "passed": false,
+      "evidence": {},
+      "error": "matchesMIDIMap is not defined",
+      "stack": "ReferenceError: matchesMIDIMap is not defined\n    at Object.receiveMIDI [as receive] (eval at host (file:///Users/jasonpoindexter/Documents/GitHub/Open%20Play/scripts/test_midi_keyshift_dispatch_review.mjs:38:17), <anonymous>:20:7)\n    at file:///Users/jasonpoindexter/Documents/GitHub/Open%20Play/scripts/test_midi_keyshift_dispatch_review.mjs:78:57\n    at check (file:///Users/jasonpoindexter/Documents/GitHub/Open%20Play/scripts/test_midi_keyshift_dispatch_review.mjs:44:60)\n    at file:///Users/jasonpoindexter/Documents/GitHub/Open%20Play/scripts/test_midi_keyshift_dispatch_review.mjs:75:7"
+    },
+    {
+      "name": "Older request completion cannot discard newer same-track desired owner",
+      "passed": false,
+      "evidence": {},
+      "error": "matchesMIDIMap is not defined",
+      "stack": "ReferenceError: matchesMIDIMap is not defined\n    at Object.receiveMIDI [as receive] (eval at host (file:///Users/jasonpoindexter/Documents/GitHub/Open%20Play/scripts/test_midi_keyshift_dispatch_review.mjs:38:17), <anonymous>:20:7)\n    at file:///Users/jasonpoindexter/Documents/GitHub/Open%20Play/scripts/test_midi_keyshift_dispatch_review.mjs:83:17\n    at check (file:///Users/jasonpoindexter/Documents/GitHub/Open%20Play/scripts/test_midi_keyshift_dispatch_review.mjs:44:60)\n    at file:///Users/jasonpoindexter/Documents/GitHub/Open%20Play/scripts/test_midi_keyshift_dispatch_review.mjs:81:7"
+    },
+    {
+      "name": "Track replacement and newer GUI pitch survive stale MIDI completion",
+      "passed": false,
+      "evidence": {},
+      "error": "matchesMIDIMap is not defined",
+      "stack": "ReferenceError: matchesMIDIMap is not defined\n    at Object.receiveMIDI [as receive] (eval at host (file:///Users/jasonpoindexter/Documents/GitHub/Open%20Play/scripts/test_midi_keyshift_dispatch_review.mjs:38:17), <anonymous>:20:7)\n    at file:///Users/jasonpoindexter/Documents/GitHub/Open%20Play/scripts/test_midi_keyshift_dispatch_review.mjs:94:15\n    at check (file:///Users/jasonpoindexter/Documents/GitHub/Open%20Play/scripts/test_midi_keyshift_dispatch_review.mjs:44:60)\n    at file:///Users/jasonpoindexter/Documents/GitHub/Open%20Play/scripts/test_midi_keyshift_dispatch_review.mjs:92:7"
+    },
+    {
+      "name": "Rejected pending operations discard desired intent without inventing engine rollback",
+      "passed": true,
+      "evidence": {
+        "results": [
+          "rejected",
+          "rejected"
+        ],
+        "actual": 0,
+        "intent": 0
+      }
+    },
+    {
+      "name": "Unloaded deck receives a bounded pitch setting without starting playback",
+      "passed": false,
+      "evidence": {},
+      "error": "matchesMIDIMap is not defined",
+      "stack": "ReferenceError: matchesMIDIMap is not defined\n    at Object.receiveMIDI [as receive] (eval at host (file:///Users/jasonpoindexter/Documents/GitHub/Open%20Play/scripts/test_midi_keyshift_dispatch_review.mjs:38:17), <anonymous>:20:7)\n    at file:///Users/jasonpoindexter/Documents/GitHub/Open%20Play/scripts/test_midi_keyshift_dispatch_review.mjs:108:11\n    at check (file:///Users/jasonpoindexter/Documents/GitHub/Open%20Play/scripts/test_midi_keyshift_dispatch_review.mjs:44:60)\n    at file:///Users/jasonpoindexter/Documents/GitHub/Open%20Play/scripts/test_midi_keyshift_dispatch_review.mjs:106:7"
+    },
+    {
+      "name": "Existing relative browse mapping remains independent and unchanged",
+      "passed": false,
+      "evidence": {},
+      "error": "matchesMIDIMap is not defined",
+      "stack": "ReferenceError: matchesMIDIMap is not defined\n    at Object.receiveMIDI [as receive] (eval at host (file:///Users/jasonpoindexter/Documents/GitHub/Open%20Play/scripts/test_midi_keyshift_dispatch_review.mjs:38:17), <anonymous>:20:7)\n    at file:///Users/jasonpoindexter/Documents/GitHub/Open%20Play/scripts/test_midi_keyshift_dispatch_review.mjs:113:11\n    at check (file:///Users/jasonpoindexter/Documents/GitHub/Open%20Play/scripts/test_midi_keyshift_dispatch_review.mjs:44:60)\n    at file:///Users/jasonpoindexter/Documents/GitHub/Open%20Play/scripts/test_midi_keyshift_dispatch_review.mjs:111:7"
+    },
+    {
+      "name": "Four-deck app routes requested Deck3 andDeck4 Key Shift to those decks only",
+      "passed": false,
+      "evidence": {},
+      "error": "matchesMIDIMap is not defined",
+      "stack": "ReferenceError: matchesMIDIMap is not defined\n    at Object.receiveMIDI [as receive] (eval at host (file:///Users/jasonpoindexter/Documents/GitHub/Open%20Play/scripts/test_midi_keyshift_dispatch_review.mjs:38:17), <anonymous>:20:7)\n    at file:///Users/jasonpoindexter/Documents/GitHub/Open%20Play/scripts/test_midi_keyshift_dispatch_review.mjs:118:11\n    at check (file:///Users/jasonpoindexter/Documents/GitHub/Open%20Play/scripts/test_midi_keyshift_dispatch_review.mjs:44:60)\n    at file:///Users/jasonpoindexter/Documents/GitHub/Open%20Play/scripts/test_midi_keyshift_dispatch_review.mjs:116:7"
+    }
+  ],
+  "sourceHashes": {
+    "prototype/midi.js": "bd1b0ffd6ade3f118b06f4131307ea55e420317c0f3334a1053f710aa7583dc1",
+    "prototype/app.js": "e60194dcdf779eb770acc6222aab59ec60a1fe03cf42bee20ee7f1ba048aca72",
+    "prototype/panels.js": "c7030bc89ad65c8da1a0cb894a7b3f5048e0c42ef63111947136595cf566efa2",
+    "prototype/engine.js": "b4683c245c6314432c06f891e85106cf0a1a5c0a615435516930ab5b38f64adf",
+    "prototype/midi-keyshift-harness.js": "2adb059edb8843156598e74515b432a8f7a4acec3f71b68d0b5e880413a431e7"
+  }
+}
