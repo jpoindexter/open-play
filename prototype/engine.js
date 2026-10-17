@@ -194,7 +194,7 @@ export class AudioEngine {
     let p =
       d.anchorPosition +
       Math.max(0, this.ctx.currentTime - d.anchorTime) *
-        d.rate *
+        this.voiceRateAt(d,gridVoice,this.ctx.currentTime) *
         (d.reverse ? -1 : 1);
     if (d.loop && d.loopOut > d.loopIn) {
       const n = d.loopOut - d.loopIn;
@@ -272,7 +272,7 @@ export class AudioEngine {
       return value.phase === 'idle' && value.playing ? advanceDeckScratchPosition(value.audiblePosition,
         Math.max(0, at - value.audioTime) * value.rate * (value.reverse ? -1 : 1), value.duration, value.loop) : value.audiblePosition;
     };
-    const start = d.anchorPosition, time = d.anchorTime, rate = d.rate * (d.reverse ? -1 : 1), playing = d.playing,
+    const start = d.anchorPosition, time = d.anchorTime, rate = this.voiceRateAt(d,voice,this.ctx?.currentTime||0) * (d.reverse ? -1 : 1), playing = d.playing,
       position = d.position, duration = d.track.duration, loop = d.loop ? {start:d.loopIn,end:d.loopOut} : null;
     return at => playing ? advanceDeckScratchPosition(start, Math.max(0,at-time)*rate, duration,loop) : position;
   }
@@ -561,6 +561,30 @@ export class AudioEngine {
     d.position = Math.max(0, Math.min(d.track?.duration || 48, p));
     if (was && (d.reverse ? d.position > 0 : d.position < d.track.duration))
       await this.start(d);
+  }
+  async setJogBend(d, factor, {voice=this.voices.get(d.index)}={}) {
+    if(!Number.isFinite(factor)||factor<.75||factor>1.25)throw new RangeError('Jog bend multiplier is outside .75–1.25.');
+    const current=()=>d.playing&&this.voices.get(d.index)===voice;
+    if(!voice||!d.track||!current())return false;
+    // Piecewise maps and gesture transports need their own future-clock map;
+    // never silently replace them with a raw seek or alter a synced group.
+    if(voice.gridTimeline||voice.deckScratchTransport||voice.stemSlipTransport||
+      (factor!==1&&(d.processing||this.deckScratchRequests.has(d.index))))
+      throw Error('Jog bend is not available during preparation, warped Sync, scratch or Stem Slip.');
+    if(factor!==1&&!voice.liveKeylock&&(d.keylock||d.keyShift))
+      throw Error('This rendered loop/reverse pitch path cannot bend while preserving key.');
+    const rate=Math.max(.25,Math.min(4,d.rate*factor));
+    if(factor!==1)this.onManualPosition?.(d);
+    if(voice.liveKeylock){
+      const ack=await voice.liveKeylock.update({rate});
+      if(!current()||ack.superseded)return false;
+      d.position=ack.position;d.anchorPosition=ack.position;d.anchorTime=ack.when;
+    }else{
+      const position=this.position(d),when=this.ctx.currentTime;
+      for(const source of voice.sources)source.playbackRate.value=rate/(voice.timelineScale||1);
+      d.position=position;d.anchorPosition=position;d.anchorTime=when;
+    }
+    return {rate,nominalRate:d.rate};
   }
   async setRate(d, rate, {syncInternal = false} = {}) {
     if (!syncInternal && this.onRateRequest) return this.onRateRequest(d, rate);

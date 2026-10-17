@@ -198,3 +198,8 @@ A separate reviewer independently confirmed initial CA-01–07 with source/repor
 Reproduce accounting only: `node scripts/audit_current_parity.mjs`. This rewrites only this dated audit pair; it does not run app tests, change project status, or operate any application. Current-source WIP may change during the parent investigation; rerun after final source freeze before citing it as current.
 
 Skills applied: use, dec-quality-testing, adversarial-verify (CA-01–07 independently checked; REC-001 wording corrected; CA-08 has direct parent observation evidence; CA-09 has parent official-source review).
+
+
+### Plan82 dated subset: MIDI jog bend browser source
+
+Actual synthetic MIDI/normal engine positive bend + idle return has a full finite1.74s stereo master recording; frequency330→356.4→330Hz, opposite synced550Hz stable, nominal rates unchanged. docs/prototype/jog-bend-browser-results.json. Controlled lifecycle policy checks cover rejected-update restoration and replacement voice ownership; they are not acoustic/hardware acceptance. Native0.1.12 retains its prior phase-step jog. Negative/keylocked/hardware/warp/gesture/quality cases remain open. No frozen audit row/full requirement/feature flag promoted. Jason away; physical mixing test awaits his return. See full plan82 and current Claude handoff.

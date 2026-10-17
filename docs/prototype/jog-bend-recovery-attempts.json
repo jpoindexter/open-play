@@ -1,0 +1,45 @@
+{
+  "firstAttempt": {
+    "command": "node scripts/test_jog_bend_policy.mjs",
+    "scope": "Controlled actor failure after an already-applied bend; no audio or hardware",
+    "result": "failed",
+    "criterion": "Rejected update must restore its still-owned voice before retiring",
+    "expectedLastFactor": 1,
+    "actualLastFactor": 1.08,
+    "sourceHashes": {
+      "prototype/jog-bend.js": "2cd96330ad0d83ce0cb6827f58cc0c9271aca8b4ddae5bcc994b8ba9bc9c0a4a",
+      "prototype/engine.js": "2f79b258ba7f78931cbbf95c6958198fdb3568d1a3eab2d7fec0279ee7a7b183",
+      "scripts/test_jog_bend_policy.mjs": "e476d0c489c7a9b476d6ab4bb214e09902b5dc99ff833c34a840d14b0147255c"
+    }
+  },
+  "fixtureAttempt": {
+    "result": "failed before final policy assertion",
+    "error": "Minimal engine fixture omitted stemSlipPending; actual position() needs that map. Fixture expanded; no product change for this error."
+  },
+  "finalAttempt": {
+    "result": "passed",
+    "command": "node scripts/test_jog_bend_policy.mjs",
+    "evidence": "docs/prototype/jog-bend-policy-results.json",
+    "sourceHashes": {
+      "prototype/jog-bend.js": "f88200c60f8abc83ac7fa355d5f2466dada63be4c1b192704855601c47f4c546",
+      "prototype/engine.js": "4c163c90b883f84f84b4451fa4384a111f665a2f8f58c3002c89efd1f50deb33",
+      "scripts/test_jog_bend_policy.mjs": "f813871e28f3ce23e00f913235552ea8bfce04810996fdf3e3bd727513beb728"
+    }
+  },
+  "browserAttempts": [
+    {
+      "result": "failed before playback",
+      "evidence": "local-evidence/jog-bend/initial-setup-ui-results.json",
+      "reason": "Mute AudioParam was read before rendering applied it; setup now awaits the same mute criterion."
+    },
+    {
+      "result": "passed before recovery change",
+      "original": "local-evidence/jog-bend/first-audio-pass-results.json"
+    },
+    {
+      "result": "passed on final source after owned-error cleanup fix",
+      "original": "local-evidence/jog-bend/final-audio-results.json",
+      "filtered": "docs/prototype/jog-bend-browser-results.json"
+    }
+  ]
+}

@@ -1,0 +1,150 @@
+{
+  "startedAt": "2026-10-17T21:17:01.797Z",
+  "completed": true,
+  "scope": "Actual browser app MIDI editor + real engine + complete master recording with controlled tones. No native/current hardware, keylocked audio, warped/gesture composition, scratch or musical-quality acceptance.",
+  "criteria": {
+    "frequencyErrorHz": 0.5,
+    "minimumPhaseAdvanceSeconds": 0.035,
+    "maximumPhaseAdvanceSeconds": 0.1,
+    "maximumPostReturnPhaseDriftSeconds": 0.003,
+    "maximumIdleReturnSeconds": 0.5
+  },
+  "events": [
+    {
+      "name": "record-start",
+      "time": 0
+    },
+    {
+      "name": "bend-input-start",
+      "time": 0.49922902494331073
+    },
+    {
+      "name": "last-wheel-message",
+      "time": 1.1377777777777778
+    },
+    {
+      "name": "idle-return",
+      "time": 1.3003174603174603
+    }
+  ],
+  "checks": [
+    "Actual MIDI editor mapping and repeated explicitly synthetic wheel messages",
+    "Only addressed synced deck changes audible speed; both nominal rates remain1",
+    "Idle return retains phase advance and restores equal clock speed",
+    "Same source owners throughout; finite stereo recording has predicted frequencies before/during/after"
+  ],
+  "errors": [],
+  "sourceBefore": {
+    "app.js": "83d0d4a8533effa6c48521caaebb0a1bc6c095087e391500c5e292fa2f8a6118",
+    "engine.js": "4c163c90b883f84f84b4451fa4384a111f665a2f8f58c3002c89efd1f50deb33",
+    "deck-midi.js": "652e7a5b02dec07a16ca4d2c77712e76377eaee17a27f7e235509de224f0ad02",
+    "jog-bend.js": "f88200c60f8abc83ac7fa355d5f2466dada63be4c1b192704855601c47f4c546",
+    "midi.js": "0cabb6dbe98e9eb3f7bc7f7eb44615fa315a0738260e5f3568a34d0aa75ec1ad",
+    "panels.js": "c709866b36a91e8275897f24a7e8db27cb746edcd3b22f7509142db4aab4adb8",
+    "jog-bend-harness.js": "a071071259d50912c66b805f5a3d855c705a529cd2a2be5a2502ca3891ff001e"
+  },
+  "physicalOutputMuted": true,
+  "during": {
+    "nominal": [
+      1,
+      1
+    ],
+    "audible": [
+      1.0800000429153442,
+      1
+    ],
+    "bothSynced": true
+  },
+  "idleReturnSeconds": 0.16253968253968254,
+  "phaseAdvanceSeconds": 0.06315831052473042,
+  "postReturnPhaseDriftSeconds": 0,
+  "recording": {
+    "bytes": 28255,
+    "format": "audio/webm;codecs=opus",
+    "sha256": "ec4bd85482cf7b3838e5794e576e5b67175081081e320f58af39fa8e1324eccd",
+    "originalRetained": "local-evidence/jog-bend/final-audio-results.webm"
+  },
+  "decoded": {
+    "duration": 1.74,
+    "sampleRate": 44100,
+    "frames": 76734,
+    "channels": 2
+  },
+  "audio": [
+    {
+      "name": "baseline",
+      "expectedHz": [
+        330,
+        550
+      ],
+      "channels": [
+        {
+          "from": 0.15,
+          "to": 0.4,
+          "hz": 330.0023018081588,
+          "rms": 0.03728570869827118
+        },
+        {
+          "from": 0.15,
+          "to": 0.4,
+          "hz": 550.0062655493132,
+          "rms": 0.03721963187225931
+        }
+      ]
+    },
+    {
+      "name": "bend",
+      "expectedHz": [
+        356.4,
+        550
+      ],
+      "channels": [
+        {
+          "from": 0.6192290249433108,
+          "to": 0.9192290249433107,
+          "hz": 356.4000857090856,
+          "rms": 0.037349073568405854
+        },
+        {
+          "from": 0.6192290249433108,
+          "to": 0.9192290249433107,
+          "hz": 550.0015369859196,
+          "rms": 0.03736520495929888
+        }
+      ]
+    },
+    {
+      "name": "returned",
+      "expectedHz": [
+        330,
+        550
+      ],
+      "channels": [
+        {
+          "from": 1.3803174603174604,
+          "to": 1.6803174603174602,
+          "hz": 329.9998683488973,
+          "rms": 0.03736320898929474
+        },
+        {
+          "from": 1.3803174603174604,
+          "to": 1.6803174603174602,
+          "hz": 550.0007394738807,
+          "rms": 0.037237323247640855
+        }
+      ]
+    }
+  ],
+  "sourceAfter": {
+    "app.js": "83d0d4a8533effa6c48521caaebb0a1bc6c095087e391500c5e292fa2f8a6118",
+    "engine.js": "4c163c90b883f84f84b4451fa4384a111f665a2f8f58c3002c89efd1f50deb33",
+    "deck-midi.js": "652e7a5b02dec07a16ca4d2c77712e76377eaee17a27f7e235509de224f0ad02",
+    "jog-bend.js": "f88200c60f8abc83ac7fa355d5f2466dada63be4c1b192704855601c47f4c546",
+    "midi.js": "0cabb6dbe98e9eb3f7bc7f7eb44615fa315a0738260e5f3568a34d0aa75ec1ad",
+    "panels.js": "c709866b36a91e8275897f24a7e8db27cb746edcd3b22f7509142db4aab4adb8",
+    "jog-bend-harness.js": "a071071259d50912c66b805f5a3d855c705a529cd2a2be5a2502ca3891ff001e"
+  },
+  "sourceStable": true,
+  "finishedAt": "2026-10-17T21:17:03.678Z",
+  "originalReport": "local-evidence/jog-bend/final-audio-results.json"
+}
