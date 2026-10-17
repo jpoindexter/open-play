@@ -1,3 +1,17 @@
+## 98. Reachable mouse Play controls and intrinsic transport layout
+
+18October2026, after7ce9abe. Full110groups/522requirements plus9beta deltas/26release checks unchanged;46false/476unset/0true full-requirement flags/all full-feature flags false. Human away; no timed MIDI capture or physical listening. Approved desktop0.1.13 remains unchanged at this checkpoint.
+
+**Proven defect:** a fresh ordinary app at1280×720/Vertical/two decks reproduces mouse Play leaving0decks playing. Existing opt-in scratch-input-debug records trusted mouse pointer events landing on a LABEL, not a transport button. Read-only elementFromPoint at both Play centers identifies `.tempo-control`: the115px transport grid track is narrower than its four buttons and gaps. Both Play controls overflow beneath that label. Scratch ownership correctly refuses these events as not-platter; it was not the cause. Original failed geometry/AX/trace retained under local-evidence/transport-hit-targets/. This resolves the specific earlier plan94/95 mouse-Play discrepancy without regrading their audio evidence.
+
+**Changed:** transport buttons retain their intrinsic content basis with flex1 0 auto/min-width24px; compact and two-deck Vertical grid tracks use minmax140px/max-content in place of115px. No z-index workaround, label removal or transport/DSP logic change. Interim min-width-only variant reached all buttons but clipped SYNC text; the final content-based sizing removes that clipping.
+
+**Executed:** one trusted normal mouse workflow, with both channel LEVEL sliders first set0, uses leftPlay/rightPlay/leftPause/rightPause and observes playing counts0→1→2→1→0 with independently advancing displayed positions. Post-change all8 transport button centers hit their buttons, every label fits, smallest button24×29px; both tempo slider centers still hit INPUT. Original trace tail shows trusted mouse events targeting BUTTON. Four declared served source hashes match disk. Screenshot and original AX/state/geometry retained. Receipt: docs/prototype/transport-hit-targets-browser-results.json. No test harness or new product diagnostics added; existing opt-in trace only.
+
+This is executed browser input/layout evidence for the specified viewport and mode. It does not establish speaker/headphone sound, physical MIDI, native behavior, every responsive/four-deck layout, full accessibility compliance or Serato visual/functional parity. No audio/DSP matrices repeated for this CSS-only change. Per-feature model/effort routing retained; no Claude consultation this unit. Full original Claude prompt remains byte-exact; full completeness audit remains unlaunched.
+
+Outcome: full independent Serato parity remains active. Now: preserve this fix/evidence and prepare a new approved desktop test candidate incorporating recent core mixing changes; preserve0.1.13 and older versions. Next human re-entry remains left physical Play → confirm RCA sound → same button stop, then one controller action at a time. Do not start a timed capture while human away. Native/package acceptance must be recorded against its actual version, never inferred from this browser check.
+
 ## 97. Consistent paused Smart Sync BPM display and FX target
 
 18October2026, after318c562. Full110groups/522requirements plus9beta deltas/26release checks unchanged;46false/476unset/0true full-requirement flags/all full-feature flags false. Core mixing/controller usability remains first. Human away; native0.1.13 untouched and no physical capture.

@@ -344,7 +344,8 @@ main {
 .transport [data-sync-state="tempo"] {background:#634b13;color:#ffe5a3;border-color:#d5b14f}
 .transport [data-sync-state="relative"],.transport [data-sync-state="armed"] {background:transparent;color:#8bd9fc;border-color:#73cff4}
 .transport button {
-  flex: 1;
+  flex: 1 0 auto;
+  min-width: 24px;
   padding: 2px 5px;
   font-size: 11px;
 }
@@ -1102,7 +1103,7 @@ kbd {
     display: none;
   }
   .deck-body {
-    grid-template-columns: minmax(155px, 1fr) 115px 25px;
+    grid-template-columns: minmax(155px, 1fr) minmax(140px, max-content) 25px;
     gap: 5px;
   }
   .platter {
@@ -1246,7 +1247,7 @@ kbd {
   grid-row: 1;
 }
 .layout-Vertical:not(.four-decks) .deck-body {
-  grid-template-columns: minmax(155px, 1fr) 115px 25px;
+  grid-template-columns: minmax(155px, 1fr) minmax(140px, max-content) 25px;
   gap: 5px;
 }
 .layout-Vertical:not(.four-decks) .platter {
