@@ -122,3 +122,14 @@ Model routing remains [VID-002](../delivery/feature-registry.json): routine `gpt
 Executed for this specification: primary-source clause reading, current shader/state/catalog/analysis/persistence inspection and prior-result artifact inspection. Not executed: any proposed correction, migration, eight-band analysis or new GPU test. Source/tests remain frozen.
 
 Skills applied: use, dec-quality-testing, dec-software-principles, dec-discovery-validation.
+
+
+## Subsequent execution — 17 October 2026
+
+The seven proposed independent corrections above now have actual GPU evidence.
+Gamma/Saturation/Smudge/UV checkpoint81/81; Isolator Bass/finite Freeze88/88;
+current eight-band Analyzer102/102 including actual AudioEngine PCM. Real
+eight-band analysis17/17 and assembled pipeline33/33 also execute. Read
+../prototype/VIDEO_SPECTRUM_OPACITY_REVIEW.md for exact scope, compatibility,
+retained failures and source limitations. This does not turn the independent
+frequency bands/curves or the historical manual into current Serato equivalence.

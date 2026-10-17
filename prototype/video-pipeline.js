@@ -3,6 +3,15 @@ import { createVideoTransitions } from './video-transitions.js';
 import { createVideoOverlays } from './video-overlays.js';
 import { createVideoAudioFX } from './video-audio-fx.js';
 
+// Carry only own data into normalizers. Object spread would execute a supplied
+// spectrum accessor before the Analyzer could reject it as unavailable.
+function contextData(value) {
+  if(!value||typeof value!=='object')return {};
+  try{return Object.fromEntries(Object.entries(Object.getOwnPropertyDescriptors(value))
+    .filter(([,descriptor])=>Object.hasOwn(descriptor,'value')).map(([key,descriptor])=>[key,descriptor.value]));}
+  catch{return {};}
+}
+
 export const videoPipelinePolicy = Object.freeze({
   order: 'Raw input → two channel FX → channel overlays → transition → master overlays → two master FX',
   referenceOrder: 'Unverified; this is an independent Open Play routing contract.',
@@ -28,10 +37,12 @@ export function createVideoPipeline({width = 640, height = 360} = {}) {
     render(sources, settings = {}, context = {}) {
       if (disposed) throw new Error('Video pipeline was disposed.');
       if (sources.length !== 2) throw new Error('Video pipeline needs two decoded source frames.');
+      context=contextData(context);
+      const inputContexts=contextData(context.channels);
       const shared = {time: context.time, frameId: context.frameId, reducedMotion: context.reducedMotion};
       const linkEnabled = settings.audioFXLink === true && context.audioFXLinks?.available === true;
       const channels = ['left', 'right'].map((target, i) => {
-        const c = {...shared, ...context.channels?.[i], target};
+        const c = {...shared, ...contextData(inputContexts[i]), target};
         const linked = links[target].render(sources[i], linkEnabled ? context.audioFXLinks[target] || [] : [], c);
         const fx = effects[target].render(linked, settings.fx?.[target] || [],
           {...c, secondarySource: sources[1-i]});
@@ -39,11 +50,11 @@ export function createVideoPipeline({width = 640, height = 360} = {}) {
       });
       const mixed = transition.render(channels[0], channels[1], {
         ...shared, name: settings.transition || 'Crossfade', amount: context.amount ?? .5,
-        bpm: context.master?.bpm || 120,
-        leftLevel: context.channels?.[0]?.level || 0, rightLevel: context.channels?.[1]?.level || 0,
+        bpm: contextData(context.master).bpm || 120,
+        leftLevel: contextData(inputContexts[0]).level || 0, rightLevel: contextData(inputContexts[1]).level || 0,
         upfaders: context.upfaders || [1, 1],
       });
-      const masterContext = {...shared, ...context.master, target: 'master', assetId: context.masterAssetId};
+      const masterContext = {...shared, ...contextData(context.master), target: 'master', assetId: context.masterAssetId};
       const linkedMaster = links.master.render(mixed, linkEnabled ? context.audioFXLinks.master || [] : [], masterContext);
       const overlaid = overlays.master.render(linkedMaster, settings.overlays?.master || [], masterContext);
       const output = effects.master.render(overlaid, settings.fx?.master || [], masterContext);
@@ -69,6 +80,7 @@ export function createVideoPipeline({width = 640, height = 360} = {}) {
       transition.dispose(); last = null;
     },
     diagnostics() {return {width, height, disposed, policy: videoPipelinePolicy,
+      effects:Object.fromEntries(Object.entries(effects).map(([key,r])=>[key,r.diagnostics()])),
       overlays: last?.overlayDiagnostics || {}, audioFXLinks: last?.audioFXLinks || {enabled:false}};},
   };
 }

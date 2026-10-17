@@ -1,0 +1,7 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Eight-band real FFT evidence</title>
+<style>:root{color-scheme:dark;font:15px/1.5 system-ui;background:#161616;color:#eee}body{max-width:1050px;margin:28px auto;padding:0 20px}button{font:inherit;padding:10px 16px}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#222;padding:16px}</style>
+<h1>Eight-band real FFT evidence</h1>
+<p>Actual AudioEngine PCM sources and existing pre-EQ/post-master taps. Eight independent FFT power ranges; original three-band and RMS queries retained. The speaker route is disconnected before playback. These checks establish analysis/query behavior only; Analyzer pixels, Serato response and native hardware remain unverified.</p>
+<button id="run">Run actual eight-band audio checks</button><p id="status" role="status">Not run</p><pre id="results">Click Run. Complete vectors, frequencies, sample rate, leakage and failures will be retained here.</pre>
+<script type="module" src="./video-spectrum8-harness.js"></script></html>

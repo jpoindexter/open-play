@@ -115,6 +115,14 @@ export async function runVideoPipelineChecks(){
     await test('Actual pipeline bypass and processed-channel previews retain both source identities',()=>{
       const r=render();assert(near(pixel(r.output),[64,128,192,255])&&near(pixel(r.channels[0]),[64,128,192,255])&&near(pixel(r.channels[1]),[192,64,96,255]),'Bypass or preview identity failed.');return{left:pixel(r.channels[0]),right:pixel(r.channels[1]),output:pixel(r.output)};
     });
+    await test('Actual channel/master Analyzer rejects spectrum getters before pipeline spread and bypasses exact pixels',()=>{
+      let getterCalls=0;const hostile={assetId:'own-data-fixture',bass:1,mid:1,treble:1,bpm:120};
+      Object.defineProperty(hostile,'spectrum8',{enumerable:true,get(){getterCalls++;throw Error('Spectrum getter must not execute');}});
+      const baseline=render(),result=render({fx:{left:[fx('Analyzer',{behavior:'Manual Meaning'})],master:[fx('Analyzer',{behavior:'Manual Meaning'})]}},{channels:[hostile,{assetId:'right'}],master:hostile});
+      assert(getterCalls===0&&diff(baseline.output,result.output)===0&&diff(baseline.channels[0],result.channels[0])===0,'Accessor executed or unavailable Analyzer changed source pixels');
+      const effects=pipeline.diagnostics().effects;for(const target of ['left','master'])assert(effects[target].slots.some(slot=>slot.reason==='spectrum8-unavailable'&&slot.sourceBypass),'Missing-spectrum bypass reason absent for '+target);
+      return{getterCalls,outputDifference:diff(baseline.output,result.output),effects};
+    });
     const forward=[fx('Negative'),fx('Gamma',{shadowPower:2})],reverse=[fx('Gamma',{shadowPower:2}),fx('Negative')];
     await test('Left two-slot order changes actual channel/output pixels while right preview stays isolated',()=>{
       const a=render({fx:{left:forward}}),b=render({fx:{left:reverse}});assert(near(pixel(a.channels[0]),[...apply([64,128,192],forward),255])&&near(pixel(b.channels[0]),[...apply([64,128,192],reverse),255]),'Left slot order differs from declared independent color contract.');assert(diff(a.channels[0],b.channels[0])>20&&near(pixel(a.channels[1]),[192,64,96,255]),'Left routing leaked or order is inert.');return{forward:pixel(a.channels[0]),reverse:pixel(b.channels[0]),right:pixel(a.channels[1])};

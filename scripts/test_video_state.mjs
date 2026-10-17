@@ -81,7 +81,8 @@ test('Corrupted FX values obey real individual ranges, enum fallbacks and integr
 });
 test('Declared capture identity survives while object identity/generation state cannot persist',()=>{
   assert.equal(snapshotVideoState(stateWith(effect('Frame Freeze',{captureToken:123,generation:456}))).fx.left[0].params.captureToken,123);
-  assert.deepEqual(snapshotVideoState(stateWith(effect('Frame Freeze',{captureToken:{canvas:true},generation:456}))).fx.left[0].params,{captureToken:0});
+  const params=snapshotVideoState(stateWith(effect('Frame Freeze',{captureToken:{canvas:true},generation:456}))).fx.left[0].params;
+  assert.equal(params.captureToken,0);assert(!('generation' in params));
 });
 test('Scalar overlay metadata round-trips and runtime cyclic images, File-like objects and URL fields are absent',()=>{
   const bytes={};bytes.self=bytes;
@@ -191,5 +192,23 @@ test('Separate video crossfader link persists literal booleans and falls back to
   }
   assert.equal(restoreVideoState(Object.create({crossLinked:false,linked:false})).crossLinked,true);
   let calls=0;const hostile={linked:false};Object.defineProperty(hostile,'crossLinked',{get(){calls++;throw Error('getter');}});assert.equal(restoreVideoState(hostile).crossLinked,false);assert.equal(calls,0);
+});
+test('Channel opacity/link scalar pairs persist independently with legacy fallback and no accessor execution',()=>{
+ const input={linked:false,crossLinked:true,channelOpacity:[0,.73],channelOpacityLinked:[true,false]};const round=restoreVideoState(snapshotVideoState(input));
+ assert.deepEqual(round.channelOpacity,[0,.73]);assert.deepEqual(round.channelOpacityLinked,[true,false]);assert.equal(round.linked,false);assert.equal(round.crossLinked,true);
+ assert.deepEqual(restoreVideoState({linked:false}).channelOpacityLinked,[false,false]);assert.deepEqual(restoreVideoState({}).channelOpacityLinked,[true,true]);
+ let calls=0;const levels=[0];Object.defineProperty(levels,'1',{get(){calls++;throw Error('getter');}});const hostile={linked:false,channelOpacity:levels};Object.defineProperty(hostile,'channelOpacityLinked',{get(){calls++;throw Error('getter');}});
+ const safe=restoreVideoState(hostile);assert.deepEqual(safe.channelOpacity,[0,1]);assert.deepEqual(safe.channelOpacityLinked,[false,false]);assert.equal(calls,0);
+});
+test('Old Isolator/Freeze/Analyzer presets retain earlier rendering and fresh finite controls persist without runtime captures',()=>{
+ for(const name of ['Isolator Bass','Frame Freeze','Analyzer']){
+  const old=restoreVideoState(stateWith(effect(name,{captureToken:0}))).fx.left[0];assert.equal(old.params.behavior,'Earlier Open Play');
+  assert.deepEqual(restoreVideoState(snapshotVideoState(stateWith(old))).fx.left[0],old);
+ }
+ for(const [input,expected] of [[0,.05],[1,1],[99,16]]){
+  const fresh=snapshotVideoState(stateWith(effect('Frame Freeze',{behavior:'Manual Meaning',captureToken:0,durationSeconds:input,captureTime:9,holdActive:true,holdExpired:false}))).fx.left[0];
+  assert.equal(fresh.params.durationSeconds,expected);assert.equal(fresh.params.behavior,'Manual Meaning');
+  for(const key of ['captureTime','holdActive','holdExpired'])assert(!(key in fresh.params));
+ }
 });
 console.log(JSON.stringify({scope:'Executed pure metadata snapshots/restoration and corruption cases; browser persistence integration remains a separate parent check.',passed:checks.length,checks},null,2));

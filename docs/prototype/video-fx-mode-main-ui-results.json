@@ -1,0 +1,55 @@
+{
+  "observedAt": "2026-10-17T06:49:16.777Z",
+  "checks": [
+    {
+      "name": "Earlier Analyzer disables hue/gain that belong to corrected eight-band mode",
+      "executed": true,
+      "evidence": {
+        "gainDisabled": true,
+        "hueDisabled": true,
+        "mode": "Earlier Open Play"
+      }
+    },
+    {
+      "name": "Corrected Analyzer restores editable retained hue0/gain2",
+      "executed": true,
+      "evidence": {
+        "gain": "2",
+        "gainDisabled": false,
+        "hue": "0",
+        "hueDisabled": false,
+        "mode": "Manual Meaning"
+      }
+    },
+    {
+      "name": "Actual Capture new frame button increments finite Freeze capture identity",
+      "executed": true,
+      "evidence": {
+        "captureStatus": "Capture identity 1",
+        "duration": "0.25",
+        "effect": "Frame Freeze",
+        "mode": "Manual Meaning"
+      }
+    },
+    {
+      "name": "Earlier indefinite Freeze disables finite duration while retaining recapture action",
+      "executed": true,
+      "evidence": {
+        "captureEnabled": true,
+        "durationDisabled": true,
+        "mode": "Earlier Open Play"
+      }
+    },
+    {
+      "name": "Finite Freeze duration, enabled state and capture identity survive reload as metadata",
+      "executed": true,
+      "evidence": {
+        "captureStatus": "Capture identity 1",
+        "duration": "0.25",
+        "effect": "Frame Freeze",
+        "mode": "Manual Meaning",
+        "on": true
+      }
+    }
+  ]
+}

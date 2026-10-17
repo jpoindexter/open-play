@@ -1,0 +1,291 @@
+{
+  "observedAt": "2026-10-17T06:42:23.403Z",
+  "scope": "Actual mixer/GPU/PNG decode/AudioEngine. Independent channel-opacity policies; no source-video AV, physical hardware or reference-curve acceptance.",
+  "checks": [
+    {
+      "name": "Actual decoded channel overlays, legacy links and real engine initialize",
+      "passed": true,
+      "evidence": {
+        "pixel": [
+          255,
+          0,
+          0,
+          204
+        ],
+        "opacity": {
+          "levels": [
+            0.8,
+            0.8
+          ],
+          "linked": [
+            true,
+            true
+          ],
+          "manual": [
+            1,
+            1
+          ]
+        },
+        "transport": true,
+        "crossLinked": false,
+        "audioCross": 0,
+        "audioLevels": [
+          0.8,
+          0.8,
+          0.8,
+          0.8
+        ]
+      }
+    },
+    {
+      "name": "Unlink left snapshots displayed level; subsequent real audio fader does not move it",
+      "passed": true,
+      "evidence": {
+        "pixel": [
+          255,
+          0,
+          0,
+          204
+        ],
+        "opacity": {
+          "levels": [
+            0.8,
+            0.8
+          ],
+          "linked": [
+            false,
+            true
+          ],
+          "manual": [
+            0.8,
+            1
+          ]
+        },
+        "transport": true,
+        "crossLinked": false,
+        "audioCross": 0,
+        "audioLevels": [
+          0.2,
+          0.8,
+          0.8,
+          0.8
+        ]
+      }
+    },
+    {
+      "name": "Left manual0/.5/1 produce actual endpoint alpha and retain right audio link",
+      "passed": true,
+      "evidence": [
+        {
+          "value": 0,
+          "pixel": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "value": 0.5,
+          "pixel": [
+            255,
+            0,
+            0,
+            128
+          ]
+        },
+        {
+          "value": 1,
+          "pixel": [
+            255,
+            0,
+            0,
+            255
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Right manual0/.5/1 is independent from left and transport",
+      "passed": true,
+      "evidence": [
+        {
+          "value": 0,
+          "pixel": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "value": 0.5,
+          "pixel": [
+            0,
+            0,
+            255,
+            128
+          ]
+        },
+        {
+          "value": 1,
+          "pixel": [
+            0,
+            0,
+            255,
+            255
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Independent channel opacity composes correct premultiplied mixed RGB/alpha",
+      "passed": true,
+      "evidence": {
+        "expected": [
+          64,
+          0,
+          191,
+          128
+        ],
+        "actual": [
+          64,
+          0,
+          191,
+          128
+        ],
+        "pixel": [
+          64,
+          0,
+          191,
+          128
+        ],
+        "opacity": {
+          "levels": [
+            0.25,
+            0.75
+          ],
+          "linked": [
+            false,
+            false
+          ],
+          "manual": [
+            0.25,
+            0.75
+          ]
+        },
+        "transport": true,
+        "crossLinked": false,
+        "audioCross": 0,
+        "audioLevels": [
+          0.2,
+          0.8,
+          0.8,
+          0.8
+        ]
+      }
+    },
+    {
+      "name": "Partial-alpha source multiplied by manual opacity retains straight red",
+      "passed": false,
+      "error": "Error: Actual opacity pixels: {\"actual\":[153,16,20,128],\"expected\":[255,0,0,64]}\n    at assert (http://127.0.0.1:8768/prototype/video-opacity-harness.js:4:65)\n    at expect (http://127.0.0.1:8768/prototype/video-opacity-harness.js:13:45)\n    at http://127.0.0.1:8768/prototype/video-opacity-harness.js:36:155\n    at async test (http://127.0.0.1:8768/prototype/video-opacity-harness.js:15:81)\n    at async run (http://127.0.0.1:8768/prototype/video-opacity-harness.js:32:3)\n    at async $.onclick (http://127.0.0.1:8768/prototype/video-opacity-harness.js:64:57)"
+    },
+    {
+      "name": "Relink follows real audio gain0/.5/1 without changing manual or other side",
+      "passed": false,
+      "error": "Error: Actual opacity pixels: {\"actual\":[153,16,20,128],\"expected\":[255,0,0,64]}\n    at assert (http://127.0.0.1:8768/prototype/video-opacity-harness.js:4:65)\n    at expect (http://127.0.0.1:8768/prototype/video-opacity-harness.js:13:45)\n    at http://127.0.0.1:8768/prototype/video-opacity-harness.js:39:218\n    at test (http://127.0.0.1:8768/prototype/video-opacity-harness.js:15:87)\n    at run (http://127.0.0.1:8768/prototype/video-opacity-harness.js:38:9)\n    at async $.onclick (http://127.0.0.1:8768/prototype/video-opacity-harness.js:64:57)"
+    },
+    {
+      "name": "Playback and crossfader link changes leave independent opacity ownership intact",
+      "passed": false,
+      "error": "Error: Actual opacity pixels: {\"actual\":[153,16,20,128],\"expected\":[255,0,0,128]}\n    at assert (http://127.0.0.1:8768/prototype/video-opacity-harness.js:4:65)\n    at expect (http://127.0.0.1:8768/prototype/video-opacity-harness.js:13:45)\n    at http://127.0.0.1:8768/prototype/video-opacity-harness.js:42:259\n    at test (http://127.0.0.1:8768/prototype/video-opacity-harness.js:15:87)\n    at run (http://127.0.0.1:8768/prototype/video-opacity-harness.js:41:9)\n    at async $.onclick (http://127.0.0.1:8768/prototype/video-opacity-harness.js:64:57)"
+    },
+    {
+      "name": "Manual API refuses linked/nonfinite/invalid writes without mutating state",
+      "passed": true,
+      "evidence": {
+        "rejected": 4
+      }
+    },
+    {
+      "name": "Directional fade continues while each channel and playback authority change",
+      "passed": true,
+      "evidence": {
+        "activeAfterOpacityChanges": true,
+        "end": {
+          "pixel": [
+            0,
+            0,
+            255,
+            204
+          ],
+          "opacity": {
+            "levels": [
+              0.7,
+              0.8
+            ],
+            "linked": [
+              false,
+              true
+            ],
+            "manual": [
+              0.7,
+              0.75
+            ]
+          },
+          "transport": true,
+          "crossLinked": false,
+          "audioCross": -1,
+          "audioLevels": [
+            0.5,
+            0.8,
+            0.8,
+            0.8
+          ]
+        }
+      }
+    },
+    {
+      "name": "Metadata roundtrip preserves manual/link pairs without images or authority changes",
+      "passed": true,
+      "evidence": {
+        "channelOpacity": [
+          0.7,
+          0.75
+        ],
+        "channelOpacityLinked": [
+          false,
+          true
+        ],
+        "linked": true,
+        "crossLinked": false
+      }
+    },
+    {
+      "name": "Video-only opacity commands preserve actual master tone and all audio fader settings",
+      "passed": true,
+      "evidence": {
+        "before": 0.07782093067781044,
+        "after": 0.07746018289080095,
+        "tolerance": 0.015,
+        "cross": -1,
+        "levels": [
+          0.5,
+          0.8,
+          0.8,
+          0.8
+        ]
+      }
+    },
+    {
+      "name": "Disposed mixer rejects opacity actions and never changes persisted values",
+      "passed": true,
+      "evidence": {
+        "rejected": 2
+      }
+    }
+  ],
+  "notifications": [],
+  "passed": 10,
+  "failed": 3
+}

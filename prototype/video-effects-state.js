@@ -1,9 +1,13 @@
 import { videoEffectByName } from "./video-effects-catalog.js";
+import { normalizeSpectrum8 } from "./video-analysis.js";
 export const clampVideo = (value, low = 0, high = 1) => Math.max(low, Math.min(high, value));
 const finite = (value, fallback) => Number.isFinite(Number(value)) ? Number(value) : fallback;
 export function normalizeVideoContext(context = {}) {
   const bands = [context.bass, context.mid, context.treble].map(v => clampVideo(finite(v, 0)));
+  let input;try{input=Object.getOwnPropertyDescriptor(context,'spectrum8')?.value;}catch{}
+  const spectrum8=normalizeSpectrum8(input);
   return { time: finite(context.time, 0), bpm: clampVideo(finite(context.bpm, 120), 20, 400),
+    spectrum8,spectrum8Available:spectrum8!==null,
     bands, level: clampVideo(finite(context.level, bands.reduce((a,b)=>a+b,0)/3)),
     upfader: clampVideo(finite(context.upfader, 1)), rate: clampVideo(finite(context.rate, 1), -4, 4),
     position: context.position === undefined ? undefined : finite(context.position, 0),
@@ -22,7 +26,8 @@ export function normalizeVideoSpec(spec) {
     value: clampVideo(finite(spec.value, definition.default.value)),params };
 }
 export function createVideoEffectState(name) {
-  return { name, holdCaptured: false, captureToken: undefined,
+  return { name, holdCaptured: false, captureToken: undefined,holdActive:false,
+    captureTime:undefined,holdExpired:false,freezeBehavior:undefined,
     historyTimes: Array(16).fill(null), nextLayer: 0, lastCaptureTime: -Infinity,
     lastTime: undefined, lastFrameId: undefined, recordPosition: 0,
     columns: [0,0,0], velocity: [0,0,0] };
@@ -44,9 +49,20 @@ export function planVideoEffectFrame(state, spec, context) {
   const duplicate = context.frameId !== undefined && context.frameId === state.lastFrameId;
   const dt = state.lastTime === undefined ? 1/60 : clampVideo(time-state.lastTime,0,.1);
   const plan = { captureHold: false, captureHistoryLayer: null, historyLayers: Array(16).fill(0) };
-  if (state.name === "Frame Freeze" && spec.value > 0 &&
-      (!state.holdCaptured || !Object.is(state.captureToken,params.captureToken))) {
-    plan.captureHold = true; state.holdCaptured = true; state.captureToken = params.captureToken;
+  if (state.name === "Frame Freeze") {
+    const behavior=params.behavior === "Earlier Open Play" ? "Earlier Open Play" : "Manual Meaning";
+    if(state.freezeBehavior !== behavior || spec.value <= 0){
+      state.holdCaptured=false;state.captureToken=undefined;state.captureTime=undefined;state.holdExpired=false;state.holdActive=false;
+    }
+    state.freezeBehavior=behavior;
+    if(spec.value > 0){
+      if(!state.holdCaptured || !Object.is(state.captureToken,params.captureToken)){
+        plan.captureHold=true;state.holdCaptured=true;state.captureToken=params.captureToken;state.captureTime=time;state.holdExpired=false;
+      }
+      const duration=clampVideo(finite(params.durationSeconds,1),.05,16);
+      if(behavior === "Manual Meaning" && !state.holdExpired && time >= state.captureTime+duration)state.holdExpired=true;
+      state.holdActive=behavior === "Earlier Open Play" || !state.holdExpired;
+    }
   }
   if (state.name === "Delay Grid") {
     const seconds = clampVideo(finite(params.historySeconds,2),.25,4);
@@ -73,10 +89,13 @@ export function planVideoEffectFrame(state, spec, context) {
   state.lastTime = time; state.lastFrameId = context.frameId;
   return plan;
 }
-export function videoEffectUniforms(spec) {
+export function videoEffectUniforms(spec,state,context) {
   const x=spec.params, n=(key,fallback,lo,hi)=>clampVideo(finite(x[key],fallback),lo,hi);
   switch(spec.name) {
     case "Filter": return [["Low Pass","High Pass","Band Pass"].indexOf(x.mode),n("radius",3,.1,24),0,0];
+    case "Frame Freeze":return [state?.holdActive?1:0,n("durationSeconds",1,.05,16),0,x.behavior==="Earlier Open Play"?1:0];
+    case "Isolator Bass":return [n("hue",0,0,360),n("width",.08,.001,.5),n("softness",.08,.001,.5),x.behavior==="Earlier Open Play"?1:0];
+    case "Analyzer":return [n("hue",120,0,360),n("gain",1,0,4),context?.spectrum8Available===true?1:0,x.behavior==="Earlier Open Play"?1:0];
     case "Delay Grid":return [Math.round(n("columns",4,2,8)),0,0,0];
     case "Frame Pulse":return [x.periodSeconds===undefined?0:n("periodSeconds",1,.1,16),n("edgeWidth",.12,.005,.45),n("periodBeats",1,.125,16),0];
     case "Flash On BPM":return [n("periodBeats",1,.125,16),n("duty",.15,.02,.95),0,0];

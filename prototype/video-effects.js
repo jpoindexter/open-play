@@ -16,6 +16,10 @@ export const videoEffectCapabilities = Object.freeze({ backend: "WebGL2", slots:
  * assetId explicitly identifies media replaced inside the same canvas/video element.
  * Source identity/currentSrc, effect/off changes, reset and backward time clear state.
  * Keep time monotonic and frameId stable for duplicate renders of the same input frame.
+ * Manual Meaning Freeze expires by supplied presentation time, including duplicate
+ * frame IDs/paused source; legacy mode retains one frame indefinitely until retrigger.
+ * Manual Meaning Analyzer consumes an exact validated eight-value spectrum8
+ * vector; unavailable data bypasses pixels and is reported in diagnostics().
  * History uses16 real captured frames at up to320x180; unavailable ages use oldest.
  * Internal textures are premultiplied for correct transparent-edge filtering;
  * colour algorithms use decoded straight RGB, then re-encode per pass. Output is straight.
@@ -32,6 +36,7 @@ export function createVideoEffects({width = 640, height = 360} = {}) {
     preserveDrawingBuffer:true,antialias:false,depth:false,stencil:false});
   if (!gl) throw new Error("Independent Video FX requires WebGL2. Effects are unavailable; no cosmetic fallback is substituted.");
   let disposed=false, lost=false, lastSource=null, lastAsset, lastURL="";
+  let lastDiagnostics={spectrum8Available:false,slots:[]};
   const slots=[null,null], textures=new Set(), framebuffers=new Set();
   const shader=(type,source)=>{
     const result=gl.createShader(type);gl.shaderSource(result,source);gl.compileShader(result);
@@ -47,7 +52,7 @@ export function createVideoEffects({width = 640, height = 360} = {}) {
   const buffer=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,buffer);
   gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,-1,1,1,-1,1,1]),gl.STATIC_DRAW);
   const position=gl.getAttribLocation(program,"position");gl.enableVertexAttribArray(position);gl.vertexAttribPointer(position,2,gl.FLOAT,false,0,0);
-  const uniforms=Object.fromEntries(["inputFrame","holdFrame","backgroundFrame","historyFrames","effect","amount","time","bpm","level","upfader","rate","recordPosition","reducedMotion","hasBackground","outputPremultiplied","resolution","bands","columns","p","historyLayers[0]"].map(name=>[name,gl.getUniformLocation(program,name)]));
+  const uniforms=Object.fromEntries(["inputFrame","holdFrame","backgroundFrame","historyFrames","effect","amount","time","bpm","level","upfader","rate","recordPosition","reducedMotion","hasBackground","outputPremultiplied","resolution","bands","spectrum8[0]","columns","p","historyLayers[0]"].map(name=>[name,gl.getUniformLocation(program,name)]));
   gl.uniform1i(uniforms.inputFrame,0);gl.uniform1i(uniforms.holdFrame,1);
   gl.uniform1i(uniforms.backgroundFrame,2);gl.uniform1i(uniforms.historyFrames,3);
   gl.disable(gl.BLEND);gl.disable(gl.DEPTH_TEST);gl.pixelStorei(gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL,false);
@@ -85,7 +90,8 @@ export function createVideoEffects({width = 640, height = 360} = {}) {
       gl.uniform1f(uniforms.reducedMotion,context.reducedMotion?1:0);
       gl.uniform1f(uniforms.hasBackground,hasBackground?1:0);
       gl.uniform3fv(uniforms.bands,context.bands);gl.uniform3fv(uniforms.columns,state.columns);
-      gl.uniform4fv(uniforms.p,videoEffectUniforms(spec));
+      gl.uniform1fv(uniforms["spectrum8[0]"],context.spectrum8??[0,0,0,0,0,0,0,0]);
+      gl.uniform4fv(uniforms.p,videoEffectUniforms(spec,state,context));
       gl.uniform1iv(uniforms["historyLayers[0]"],new Int32Array(plan.historyLayers));
     }
     gl.drawArrays(gl.TRIANGLES,0,6);
@@ -130,6 +136,7 @@ export function createVideoEffects({width = 640, height = 360} = {}) {
   function reset() {
     for(let i=0;i<2;i++)clearSlot(i);
     lastSource=null;lastAsset=undefined;lastURL="";
+    lastDiagnostics={spectrum8Available:false,slots:[]};
     if(!disposed&&!lost){gl.bindFramebuffer(gl.FRAMEBUFFER,null);gl.clearColor(0,0,0,0);gl.clear(gl.COLOR_BUFFER_BIT);}
   }
   const contextLost=event=>{event.preventDefault();lost=true;};
@@ -144,12 +151,15 @@ export function createVideoEffects({width = 640, height = 360} = {}) {
       reset();lastSource=source;lastAsset=rawContext.assetId;lastURL=url;
     }
     const context=normalizeVideoContext(rawContext);
+    lastDiagnostics={spectrum8Available:context.spectrum8Available,slots:[]};
     upload(input,source);
     const hasBackground=!!rawContext.secondarySource;
     if(hasBackground)upload(background,rawContext.secondarySource);
     let current=input;
     for(let i=0;i<2;i++) {
       const spec=normalizeVideoSpec(specs[i]);
+      const missing=spec?.name==='Analyzer' && spec.params.behavior!=='Earlier Open Play' && spec.value>0 && !context.spectrum8Available;
+      lastDiagnostics.slots.push({slot:i,name:spec?.name??null,behavior:spec?.params.behavior??null,sourceBypass:!spec||spec.value===0||missing,reason:missing?'spectrum8-unavailable':null});
       if(!spec){clearSlot(i);continue;}
       const state=stateFor(i,spec.name), plan=planVideoEffectFrame(state,spec,context);
       if(plan.captureHold)draw(current,state.holdFramebuffer);
@@ -176,5 +186,6 @@ export function createVideoEffects({width = 640, height = 360} = {}) {
     // This renderer owns its private context; release its GPU allocation eagerly.
     gl.getExtension("WEBGL_lose_context")?.loseContext();
   }
-  return {canvas,render,readPixels,reset,dispose,capabilities:videoEffectCapabilities};
+  return {canvas,render,readPixels,reset,dispose,capabilities:videoEffectCapabilities,
+    diagnostics:()=>({spectrum8Available:lastDiagnostics.spectrum8Available,slots:lastDiagnostics.slots.map(slot=>({...slot})),disposed,lost})};
 }

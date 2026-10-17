@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-17T06:34:23.962065+00:00",
+  "updated": "2026-10-17T06:51:21.316311+00:00",
   "complete_inventory": false,
   "requirements": [
     {
@@ -9650,7 +9650,7 @@
       "trigger": "Assign master effects",
       "expected": "Retain two master effect slots in addition to per-channel effects Historical per-channel slots run in series. Link detailed effect/transition contracts for frame-history and boundary semantics rather than equating55/34 independent names with reference algorithms. Capability cost labels are historical metadata, not measured performance.",
       "evidence": "DOCUMENTED; installed runtime untested Historical official Video manual enrichment is source-qualified; no new reference behavior acceptance.",
-      "prototype_behavior": "Six actual ordered GPU slots:2left/2right/2master.32/32 assembled-pipeline checks include each position, concurrent routing and output pixels. Reference order/algorithms remain unverified. Current native slot menus now observed55 FX and29 transitions; independent FX81/81 and transitions65/65 actual GPU checks include corrected color/traversal meanings. Four resource-only transitions remain labeled unobserved. Menu visibility is separate from reference rendering proof.",
+      "prototype_behavior": "Six ordered GPU slots2left/2right/2master. Current102/102 actual FX checks include corrected Isolator Bass, finite one-shot Frame Freeze, eight-band Analyzer with actual eight-tone PCM and legacy saved modes. Spectrum availability is explicit; absent/malformed/accessor vectors bypass with visible reason. Current33/33 assembled-pipeline checks include real capture/decode and getter bypass. Current native menus observed55 FX/29 transitions; no vendor shader/curve agreement inferred.",
       "native_status": "blocked_until_prototype_approval",
       "acceptance": "Assign master effects → Retain two master effect slots in addition to per-channel effects Historical per-channel slots run in series. Link detailed effect/transition contracts for frame-history and boundary semantics rather than equating55/34 independent names with reference algorithms. Capability cost labels are historical metadata, not measured performance.",
       "source_url": "https://serato.com/dj/pro/expansions",
@@ -9673,7 +9673,8 @@
         "docs/prototype/VIDEO_FUNCTIONAL_REVIEW.md",
         "docs/prototype/KARAOKE_FUNCTIONAL_REVIEW.md",
         "docs/prototype/MEDIA_CRATE_FUNCTIONAL_REVIEW.md",
-        "docs/prototype/VIDEO_COLOR_CROSSFADE_REVIEW.md"
+        "docs/prototype/VIDEO_COLOR_CROSSFADE_REVIEW.md",
+        "docs/prototype/VIDEO_SPECTRUM_OPACITY_REVIEW.md"
       ],
       "video_manual_enrichment": {
         "proposal_ids": [
@@ -14936,7 +14937,7 @@
       "trigger": "Unlink each Video channel opacity control and the Video crossfader independently; move audio and Video controls",
       "expected": "Each Video channel opacity and crossfade obeys its own link state without forcing unrelated transport/upfader/crossfader policy changes.",
       "evidence": "DOCUMENTED official historical Video manual, PDF metadata2015-04-09; current4.0.10 algorithm/loaded-runtime behavior remains unverified.",
-      "prototype_behavior": "Partial: separate crossLinked flag now controls Video crossfader without changing linked transport/upfaders. Actual AudioEngine cross .6 drives Video pixels when linked; directional actions rejected while linked; unlinked actions preserve audio gains/cross and transport flag. Main UI link controls/persistence executed. Independent per-channel opacity controls/links remain open.",
+      "prototype_behavior": "Independent channelOpacity[2]/channelOpacityLinked[2] plus crossLinked, separated from playback-linked transport. Actual13/13 mixer/GPU/AudioEngine cases prove each manual0/.5/1, linked audio levels, unlink snapshot, mixed/partial alpha, audio noninterference and fade independence. MainUI6 observations exercise keyboard/manual/audio-links and reload. Reference curves and physical hardware remain unverified.",
       "prototype_reference_parity_verified": false,
       "reference_runtime_verified": false,
       "native_status": "blocked_until_prototype_approval",
@@ -14945,7 +14946,7 @@
         "Actual left/right pixel alpha/brightness at0/.5/1, unlink each side while changing audio fader, and ensure other side/crossfader policy remains independent.",
         "Move real audio crossfader with video cross-link off and upfader links on; assert independent mix pixels plus unchanged transport authority."
       ],
-      "acceptance_status": "partial_independent_crossfader_link_executed_channel_links_open",
+      "acceptance_status": "independent_channel_and_crossfader_links_executed_reference_hardware_unverified",
       "routing": {
         "codex": {
           "model": "gpt-6.1-sol",
@@ -14974,7 +14975,8 @@
         ]
       },
       "prototype_evidence": [
-        "docs/prototype/VIDEO_COLOR_CROSSFADE_REVIEW.md"
+        "docs/prototype/VIDEO_COLOR_CROSSFADE_REVIEW.md",
+        "docs/prototype/VIDEO_SPECTRUM_OPACITY_REVIEW.md"
       ]
     },
     {

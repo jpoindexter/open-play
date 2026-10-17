@@ -1,4 +1,5 @@
 import {normalizeAutoCrossfadeSeconds} from './video-crossfade.js';
+import {normalizeVideoOpacityState} from './video-opacity.js';
 import { recordingQualityOptions, normalizeRecordingQuality } from './video-recording.js';
 import { videoTreatmentModes, normalizeVideoTreatment } from './video-treatment.js';
 import { createVideoMediaControls } from './video-media-controls.js';
@@ -50,6 +51,7 @@ export function createVideoControls({state, videoMixer, notify = () => {}, persi
     if (!videoTransitionCatalog.some(entry => entry.name === v.transition)) v.transition = 'Crossfade';
     v.width ||= 640; v.height ||= 360; v.mediaTreatment = normalizeVideoTreatment(v.mediaTreatment);
     v.crossLinked ??= v.linked ?? true; v.autoCrossfadeSeconds=normalizeAutoCrossfadeSeconds(v.autoCrossfadeSeconds);
+    Object.assign(v,normalizeVideoOpacityState(v));
   }
   const changed = () => persist();
   const option = (value, label, selected) => `<option value="${esc(value)}" ${value === selected ? 'selected' : ''}>${esc(label)}</option>`;
@@ -60,8 +62,9 @@ export function createVideoControls({state, videoMixer, notify = () => {}, persi
   function markup() {
     ensure();
     return `<div class="video-previews">${[0,1].map(index => `<div><canvas id="video-preview-${index}" width="320" height="180" style="width:100%" aria-label="${index ? 'Right' : 'Left'} video preview"></canvas><label>${index ? 'Right' : 'Left'} local video<input type="file" accept="video/*" data-video-file="${index}"></label><button data-video-play="${index}">Play / pause ${index ? 'right' : 'left'}</button><p id="video-status-${index}" class="muted">No media loaded</p></div>`).join('')}<div><canvas id="video-master" width="${v.width}" height="${v.height}" style="width:100%;background:#111" aria-label="Video mix output"></canvas><button id="video-fullscreen">Fullscreen output</button></div></div>
-      <div class="panel-controls"><label>Transition<select id="video-transition">${videoTransitionCatalog.map(entry => option(entry.name, entry.referenceMenuLabel + (entry.referenceMenuVisible ? '' : entry.baseline ? ' · Open Play baseline' : ' · resource only; not in observed menu'), v.transition)).join('')}</select></label><label>Video mix<input id="video-cross" type="range" min="-1" max="1" step=".01" value="${Number(v.cross) || 0}"></label><label><input id="video-auto" type="checkbox" ${checked(v.auto)}> Continuous mix · Open Play</label><label><input id="video-link" type="checkbox" ${checked(v.linked)}> Link audio decks 1/2</label><label><input id="video-cross-link" type="checkbox" ${checked(v.crossLinked)}> Link video crossfader to audio</label><label><input id="video-audio-fx-link" type="checkbox" ${checked(v.audioFXLink)}> Link audio Echo / Distortion</label><label>Media treatment<select id="video-treatment">${videoTreatmentModes.map(mode => option(mode.value,mode.label,v.mediaTreatment)).join('')}</select></label><button id="video-fx">Channel / master FX</button><button id="video-overlay">Text / image overlays</button><label>Output resolution<select id="video-resolution">${[[640,360],[1280,720],[1920,1080]].map(([w,h]) => option(`${w}x${h}`, `${w} × ${h}`, `${v.width}x${v.height}`)).join('')}</select></label><button id="video-reset">Reset frame history</button><button id="video-karaoke">Karaoke pair</button><button id="video-media">Media Crate / transitions</button></div>
+      <div class="panel-controls"><label>Transition<select id="video-transition">${videoTransitionCatalog.map(entry => option(entry.name, entry.referenceMenuLabel + (entry.referenceMenuVisible ? '' : entry.baseline ? ' · Open Play baseline' : ' · resource only; not in observed menu'), v.transition)).join('')}</select></label><label>Video mix<input id="video-cross" type="range" min="-1" max="1" step=".01" value="${Number(v.cross) || 0}"></label><label><input id="video-auto" type="checkbox" ${checked(v.auto)}> Continuous mix · Open Play</label><label><input id="video-link" type="checkbox" ${checked(v.linked)}> Link video playback to audio decks 1/2</label><label><input id="video-cross-link" type="checkbox" ${checked(v.crossLinked)}> Link video crossfader to audio</label><label><input id="video-audio-fx-link" type="checkbox" ${checked(v.audioFXLink)}> Link audio Echo / Distortion</label><label>Media treatment<select id="video-treatment">${videoTreatmentModes.map(mode => option(mode.value,mode.label,v.mediaTreatment)).join('')}</select></label><button id="video-fx">Channel / master FX</button><button id="video-overlay">Text / image overlays</button><label>Output resolution<select id="video-resolution">${[[640,360],[1280,720],[1920,1080]].map(([w,h]) => option(`${w}x${h}`, `${w} × ${h}`, `${v.width}x${v.height}`)).join('')}</select></label><button id="video-reset">Reset frame history</button><button id="video-karaoke">Karaoke pair</button><button id="video-media">Media Crate / transitions</button></div>
       <div class="panel-controls"><button id="video-fade-left">Fade left</button><button id="video-fade-right">Fade right</button><button id="video-fade-stop">Stop fade</button><label>Auto crossfade speed<input id="video-fade-speed" type="range" min="0" max="1" step=".01" value="${(10-v.autoCrossfadeSeconds)/9.75}" aria-describedby="video-fade-speed-note"></label><span id="video-fade-speed-note">Slow ← → Fast · ${v.autoCrossfadeSeconds.toFixed(2)}s independent duration</span><span id="video-fade-state" role="status">Directional fade stopped</span></div>
+      <div class="panel-controls">${[0,1].map(i=>`<label>${i?'Right':'Left'} Video opacity<input id="video-opacity-${i}" type="range" min="0" max="1" step=".01" value="${v.channelOpacity[i]}"><output id="video-opacity-value-${i}">${Math.round(v.channelOpacity[i]*100)}%</output></label><label><input id="video-opacity-link-${i}" type="checkbox" ${checked(v.channelOpacityLinked[i])}> Link ${i?'right':'left'} Video opacity to audio</label>`).join('')}</div>
       <div class="panel-controls"><label>Recording resolution<select id="video-record-quality">${recordingQualityOptions.map(optionSpec => option(optionSpec.value,optionSpec.label,normalizeRecordingQuality(v.recordingQuality))).join('')}</select></label><button id="video-record">${videoMixer.recording ? 'Stop video capture' : 'Record video mix'}</button><button id="video-download" ${videoMixer.result ? '' : 'disabled'}>Download video mix</button><span id="video-record-state" role="status">${videoMixer.recording ? 'Recording' : 'Not recording'}</span></div><p id="video-pipeline-state" class="muted" role="status">Waiting for the next rendered frame.</p><p class="muted">Independent pipeline: source → two channel FX → channel overlays → transition → master overlays → two master FX. Optional Echo/Distortion audio links run before channel FX and after the transition on master. Media treatment changes ordinary-video geometry; CDG keeps its separate crop policy. Current menu labels are observed; algorithms, ranges and routing order are Open Play designs, and reference visual parity remains unverified. Local media stays in this browser. Video-source audio is muted; capture uses the browser audio master. Resolution is selectable; capture cadence and native output parity are not established by the size selector.</p>`;
   }
   function bind(root = document) {
@@ -77,7 +80,8 @@ export function createVideoControls({state, videoMixer, notify = () => {}, persi
     root.querySelectorAll('[data-video-play]').forEach(button => { button.onclick = run(() => videoMixer.play(Number(button.dataset.videoPlay))); });
     $('#video-transition').onchange = event => { v.transition = event.target.value; changed(); };
     $('#video-cross').oninput = event => { videoMixer.stopCrossfade(); v.cross = Number(event.target.value); changed(); };
-    for (const [id,key] of [['auto','auto'],['link','linked']]) $('#video-'+id).onchange = event => { videoMixer.stopCrossfade(); v[key] = event.target.checked; syncMix(); changed(); };
+    $('#video-auto').onchange=event=>{videoMixer.stopCrossfade();v.auto=event.target.checked;syncMix();changed();};
+    $('#video-link').onchange=event=>{v.linked=event.target.checked;changed();};
     $('#video-audio-fx-link').onchange = event => { v.audioFXLink = event.target.checked; changed(); };
     $('#video-treatment').onchange = event => { v.mediaTreatment = normalizeVideoTreatment(event.target.value); changed(); };
     $('#video-cross-link').onchange=event=>{videoMixer.stopCrossfade();v.crossLinked=event.target.checked;syncMix();changed();};
@@ -86,6 +90,12 @@ export function createVideoControls({state, videoMixer, notify = () => {}, persi
     $('#video-fade-speed').oninput=event=>{v.autoCrossfadeSeconds=normalizeAutoCrossfadeSeconds(10-Number(event.target.value)*9.75);$('#video-fade-speed-note').textContent=`Slow ← → Fast · ${v.autoCrossfadeSeconds.toFixed(2)}s independent duration`;changed();};
     function syncMix() { $('#video-cross').disabled = !!(v.crossLinked || v.auto); $('#video-auto').disabled = !!v.crossLinked; for(const id of ['left','right','stop'])$('#video-fade-'+id).disabled=!!v.crossLinked; }
     syncMix();
+    function syncOpacity(){[0,1].forEach(i=>{$('#video-opacity-'+i).disabled=v.channelOpacityLinked[i];});}
+    for(const i of [0,1]){
+      $('#video-opacity-'+i).oninput=event=>{videoMixer.setOpacity(i,Number(event.target.value));changed();};
+      $('#video-opacity-link-'+i).onchange=event=>{videoMixer.setOpacityLinked(i,event.target.checked);syncOpacity();changed();};
+    }
+    syncOpacity();
     $('#video-resolution').disabled = !!videoMixer.recording;
     $('#video-resolution').onchange = run(async event => {
       const select = event.target, old = `${v.width}x${v.height}`;
@@ -141,8 +151,12 @@ export function createVideoControls({state, videoMixer, notify = () => {}, persi
           return `<fieldset data-fx-slot="${slot}"><legend>${title(target)} slot ${slot+1}${slot ? ' · after slot 1' : ''}</legend><div class="form-grid"><label><input type="checkbox" data-fx-key="on" ${checked(spec.on)}> Enabled</label><label>Effect<select data-fx-key="name">${videoEffectCatalog.map(entry => option(entry.name, entry.referenceMenuLabel + (entry.referenceMenuVisible ? '' : ' · resource only'), spec.name)).join('')}</select></label>${effect.independentParameters.map(parameter => {
             const value = parameter.name === 'value' ? spec.value : spec.params[parameter.name] ?? parameter.default;
             const label = parameter.name === 'value' ? 'Amount (0 = bypass)' : parameter.name.replace(/([A-Z])/g,' $1');
+            const earlier=spec.params.behavior==='Earlier Open Play';
+            const manualOnly={Analyzer:['hue','gain'],'Frame Freeze':['durationSeconds'],'Isolator Bass':['hue','width','softness'],Gamma:['shadowPower'],Smudge:['radiusPixels','edgeWidth'],'UV Paint':['colorThreshold','softness']};
+            const earlierOnly={Gamma:['gamma'],Smudge:['angle']};
+            const inactive=earlier?manualOnly[spec.name]?.includes(parameter.name):earlierOnly[spec.name]?.includes(parameter.name);
             if (parameter.name === 'captureToken') return `<button type="button" data-fx-capture>Capture a new frame</button><span role="status">Capture identity ${esc(value)}</span>`;
-            return `<label>${esc(label)}${parameter.options ? `<select data-fx-param="${esc(parameter.name)}">${parameter.options.map(item => option(item,item,value)).join('')}</select>` : `<input type="number" data-fx-param="${esc(parameter.name)}" min="${parameter.min}" max="${parameter.max}" step="${parameter.step || 'any'}" value="${esc(value)}">`}${parameter.unit ? `<small>${esc(parameter.unit)}</small>` : ''}</label>`;
+            return `<label>${esc(label)}${parameter.options ? `<select data-fx-param="${esc(parameter.name)}" ${inactive?'disabled':''}>${parameter.options.map(item => option(item,item,value)).join('')}</select>` : `<input type="number" data-fx-param="${esc(parameter.name)}" min="${parameter.min}" max="${parameter.max}" step="${parameter.step || 'any'}" value="${esc(value)}" ${inactive?'disabled':''}>`}${parameter.unit ? `<small>${esc(parameter.unit)}</small>` : ''}</label>`;
           }).join('')}</div><p class="muted">${esc(effect.contract)}</p></fieldset>`;
         }).join('');
       }
@@ -158,6 +172,7 @@ export function createVideoControls({state, videoMixer, notify = () => {}, persi
           const value = parameter.options ? input.value : Number(input.value);
           if (!parameter.options && (!input.value.trim() || !Number.isFinite(value))) return;
           if (parameter.name === 'value') spec.value = value; else spec.params[parameter.name] = value;
+          if(parameter.name==='behavior'){render();host.querySelector(`[data-fx-slot="${slot}"] [data-fx-param="behavior"]`)?.focus();}
         }
         changed();
       };

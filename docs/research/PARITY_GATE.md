@@ -108,3 +108,10 @@ These close scoped independent behavior/menu observations only. Per-channel
 opacity links, eight-band Analyzer/finiteFreeze/Isolator meanings and remaining
 manual/output/library/hardware/provider/model-quality gates remain open. See
 ../prototype/VIDEO_COLOR_CROSSFADE_REVIEW.md. Native approval remains absent.
+
+
+Next continuation closes independent Isolator Bass/finite Frame Freeze/eight-band
+Analyzer meanings and channel-opacity links: actualFX102/102,realFFT17/17,
+opacity13/13,pipeline33/33. Reference transfer functions, physical control/output,
+remaining manual meanings, output/services/model quality and exhaustive coverage
+remain open. See ../prototype/VIDEO_SPECTRUM_OPACITY_REVIEW.md; native gate unchanged.

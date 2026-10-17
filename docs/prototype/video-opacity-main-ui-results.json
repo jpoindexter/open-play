@@ -1,0 +1,92 @@
+{
+  "observedAt": "2026-10-17T06:42:41.904Z",
+  "scope": "Actual main UI keyboard sliders/link checkboxes and reload; source images/alpha/audio measured separately in opacity harness.",
+  "checks": [
+    {
+      "name": "Initial inherited audio-opacity links show actual engine gains and disable manual sliders",
+      "executed": true,
+      "evidence": {
+        "crossLinked": false,
+        "left": "0.8",
+        "leftDisabled": true,
+        "leftLinked": true,
+        "right": "0.8",
+        "rightDisabled": true,
+        "rightLinked": true,
+        "transportLinked": true
+      }
+    },
+    {
+      "name": "Unlinked left keyboard opacity at50% retains right audio ownership",
+      "executed": true,
+      "evidence": {
+        "crossLinked": false,
+        "left": "0.5",
+        "leftDisabled": false,
+        "leftLinked": false,
+        "right": "0.8",
+        "rightDisabled": true,
+        "rightLinked": true,
+        "transportLinked": true
+      }
+    },
+    {
+      "name": "Moving actual audio faders changes linked right to0 but leaves manual left at50%",
+      "executed": true,
+      "evidence": {
+        "crossLinked": false,
+        "left": "0.5",
+        "leftDisabled": false,
+        "leftLinked": false,
+        "right": "0",
+        "rightDisabled": true,
+        "rightLinked": true,
+        "transportLinked": true
+      }
+    },
+    {
+      "name": "Both manual levels and separate link flags can be edited independently",
+      "executed": true,
+      "evidence": {
+        "crossLinked": false,
+        "left": "0.5",
+        "leftDisabled": false,
+        "leftLinked": false,
+        "right": "1",
+        "rightDisabled": false,
+        "rightLinked": false,
+        "transportLinked": true
+      }
+    },
+    {
+      "name": "Changing playback link preserves active directional fade and channel authority",
+      "executed": true,
+      "statusAfterPlaybackChange": "Directional fade in progress",
+      "evidence": {
+        "crossLinked": false,
+        "left": "0.5",
+        "leftDisabled": false,
+        "leftLinked": false,
+        "right": "1",
+        "rightDisabled": false,
+        "rightLinked": false,
+        "transportLinked": false
+      }
+    },
+    {
+      "name": "Opacity/link/playback states survive actual reload after fade endpoint",
+      "executed": true,
+      "evidence": {
+        "crossLinked": false,
+        "left": "0.5",
+        "leftDisabled": false,
+        "leftLinked": false,
+        "right": "1",
+        "rightDisabled": false,
+        "rightLinked": false,
+        "transportLinked": false
+      },
+      "fadeStatus": "Directional fade stopped"
+    }
+  ]
+}

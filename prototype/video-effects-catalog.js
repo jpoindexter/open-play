@@ -57,12 +57,15 @@ export const videoEffectCatalog = [
     "referenceRuntimeVerified": false,
     "referenceAvailability": "manifest declaration; active menu unverified",
     "implementationStatus": "original-independent-WebGL2",
-    "contract": "Capture the first enabled nonzero-amount input frame; keep it across amount changes until captureToken changes, bypass/re-enable, asset change or reset.",
+    "contract": "Manual Meaning: one-shot upstream frame hold for independently chosen durationSeconds, then live until explicit recapture. Earlier Open Play: indefinite hold. Token, mode, zero/OFF, source, reset or backward time retriggers; duration edits retain original capture time and cannot resurrect an expired hold. At most one retained frame per slot.",
+    "manualMeaningEvidence": {"source":"local-evidence/claude-fable/official-video-manual-141226.pdf","page":20,"meaning":"Hold a video frame for a specified finite period.","edition":"2015-04-09 PDF metadata; installed4.0.10 behavior unverified","exactResponseRecovered":false},
     "parameterStatus": "independent ranges/defaults; vendor parameter labels, mappings and ranges unknown",
     "default": {
       "on": false,
       "value": 1,
       "params": {
+        "behavior": "Manual Meaning",
+        "durationSeconds": 1,
         "captureToken": 0
       }
     }
@@ -101,12 +104,13 @@ export const videoEffectCatalog = [
     "referenceRuntimeVerified": false,
     "referenceAvailability": "manifest declaration; active menu unverified",
     "implementationStatus": "original-independent-WebGL2",
-    "contract": "Bass amplitude attenuates green/blue to isolate a warm colour response; silence leaves input unchanged.",
+    "contract": "Manual Meaning: selected hue retains saturation proportional to bass while other hues become grayscale. Hue mask, display-RGB luma and response are independent. Earlier Open Play retains original bass-dependent warm attenuation and silence identity.",
+    "manualMeaningEvidence": {"source":"local-evidence/claude-fable/official-video-manual-141226.pdf","page":19,"meaning":"Desaturate except for a color whose saturation follows bass.","edition":"2015-04-09 PDF metadata; installed4.0.10 behavior unverified","exactResponseRecovered":false},
     "parameterStatus": "independent ranges/defaults; vendor parameter labels, mappings and ranges unknown",
     "default": {
       "on": false,
       "value": 0.65,
-      "params": {}
+      "params": {"behavior":"Manual Meaning","hue":0,"width":0.08,"softness":0.08}
     }
   },
   {
@@ -1076,12 +1080,13 @@ export const videoEffectCatalog = [
     "referenceRuntimeVerified": false,
     "referenceAvailability": "localization candidate; registration unverified",
     "implementationStatus": "original-independent-WebGL2",
-    "contract": "Three solid supplied-band amplitude bars on black, blended with the source.",
+    "contract": "Manual Meaning: eight equal-width bars from eight independently measured FFT ranges, independently chosen hue/gain, black background and preserved source alpha. Missing/malformed spectrum8 is diagnosed as source bypass; valid silent zeros are not unavailable. Earlier Open Play retains the original three supplied-band/fixed-color bars. Exact reference bands, palette and response remain unknown.",
+    "manualMeaningEvidence": {"source":"local-evidence/claude-fable/official-video-manual-141226.pdf","page":19,"meaning":"Eight spectrum bands with a selectable color.","edition":"2015-04-09 PDF metadata; installed4.0.10 behavior unverified","exactResponseRecovered":false},
     "parameterStatus": "independent ranges/defaults; vendor parameter labels, mappings and ranges unknown",
     "default": {
       "on": false,
       "value": 0.65,
-      "params": {}
+      "params": {"behavior":"Manual Meaning","hue":120,"gain":1}
     }
   },
   {
@@ -1126,6 +1131,8 @@ export const videoEffectCatalog = [
 export const videoEffectByName = new Map(videoEffectCatalog.map(effect => [effect.name, effect]));
 // Every bound here is independently chosen, not a recovered reference knob range.
 const parameterBounds = {
+  gain:{min:0,max:4,unit:"Manual Meaning Analyzer only; independent scale of eight measured bar heights"},
+  durationSeconds:{min:.05,max:16,unit:"Manual Meaning only; finite hold seconds from the original capture; token retriggers"},
   behavior:{options:["Manual Meaning","Earlier Open Play"],unit:"Historical meaning with independent response, or preserve earlier Open Play rendering"},
   shadowPower:{min:1,max:4,unit:"Manual Meaning only; display-RGB shadow exponent"},radiusPixels:{min:0,max:96,unit:"Manual Meaning only; inward smear distance in output pixels"},colorThreshold:{min:0,max:1,unit:"Manual Meaning only; HSV colorfulness threshold"},
   mode:{options:["Low Pass","High Pass","Band Pass"]},radius:{min:.1,max:24,unit:"output pixels"},
@@ -1139,12 +1146,14 @@ const parameterBounds = {
 for (const effect of videoEffectCatalog) {
   effect.independentParameters = [{name:"value",default:effect.default.value,min:0,max:1,
     status:"independent amount;0 is exact bypass"}, ...Object.entries(effect.default.params).map(([name,value])=>({name,default:value,...parameterBounds[name],status:"independently designed"}))];
-  if(effect.name === "Color Isolator")for(const parameter of effect.independentParameters){if(parameter.name === "hue")parameter.min=0;if(parameter.name === "softness")parameter.max=.5;}
+  if(["Color Isolator","Isolator Bass"].includes(effect.name))for(const parameter of effect.independentParameters){if(parameter.name === "hue")parameter.min=0;if(parameter.name === "softness")parameter.max=.5;}
+  if(effect.name === "Analyzer")for(const parameter of effect.independentParameters)if(parameter.name === "hue"){parameter.min=0;parameter.unit="Manual Meaning only; saturated display hue in degrees";}
   if(effect.name === "Smudge")for(const parameter of effect.independentParameters){if(parameter.name === "angle")parameter.unit="Earlier Open Play only; original direction in degrees";if(parameter.name === "edgeWidth")parameter.min=.01;}
   if(effect.name === "Frame Pulse")effect.legacyParameters=[{name:"periodBeats",min:.125,max:16,unit:"beats",status:"Independent compatibility timing only when periodSeconds is absent; no frame-hold semantics."}];
   effect.historyPolicy = ["Frame Freeze","Delay Grid"].includes(effect.name)
     ? "Per-slot upstream-frame state survives parameter changes; asset/effect/off/reset or backward time clears it. Temporal storage is bounded."
     : "Per-slot record/spring state survives parameter changes; no retained video frames allocated.";
+  if(effect.name === "Frame Freeze")effect.historyPolicy="One retained upstream frame allocation per slot. Manual Meaning expires once using presentation time even while source paused; duration edits do not restart or resurrect. Earlier Open Play remains indefinite. Token/mode/zero/OFF/source/effect/reset/backward time invalidate the lifecycle; retained allocation is reused until slot clear/disposal.";
   effect.colorPolicy = "Normalized display RGB; premultiplied internal filtering, straight-alpha colour operations/output; transparent outside image bounds. Not a vendor colour-space claim.";
 }
 

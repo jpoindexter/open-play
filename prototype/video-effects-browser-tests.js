@@ -1,5 +1,8 @@
 import { createVideoEffects, videoEffectCatalog } from "./video-effects.js";
 import { restoreVideoState, snapshotVideoState } from "./video-state.js";
+import { AudioEngine } from "./engine.js";
+import { createVideoPipeline } from "./video-pipeline.js";
+import { videoAnalysisPolicy } from "./video-analysis.js";
 const width=96,height=64;
 function canvas(){const c=document.createElement("canvas");c.width=width;c.height=height;return c;}
 const fixture=canvas(), solid=canvas(), background=canvas();
@@ -10,7 +13,7 @@ function difference(a,b){let sum=0;for(let i=0;i<a.length;i++)sum+=Math.abs(a[i]
 const pixel=(a,x,y)=>Array.from(a.subarray((y*width+x)*4,(y*width+x)*4+4));
 const mean=(a,channel)=>{let s=0;for(let i=channel;i<a.length;i+=4)s+=a[i];return s/(a.length/4);};
 const check=(condition,message)=>{if(!condition)throw new Error(message);};
-const base={time:1.25,bpm:120,bass:.8,mid:.35,treble:.15,level:.65,rate:.6,upfader:.8,position:.37};
+const base={time:1.25,bpm:120,bass:.8,mid:.35,treble:.15,level:.65,rate:.6,upfader:.8,position:.37,spectrum8:[.8,.6,.4,.2,.1,.35,.65,.9]};
 let renderer;
 function draw(name,value=1,params={},context={},source=fixture){renderer.render(source,name?[{name,on:true,value,params}]:[],{...base,...context});return renderer.readPixels();}
 const run=document.querySelector("#run"),summary=document.querySelector("#summary"),output=document.querySelector("#results");
@@ -18,6 +21,11 @@ run.onclick=async()=>{
  run.disabled=true;const results=[];
  try{renderer=createVideoEffects({width,height});document.querySelector("#preview").replaceChildren(renderer.canvas);}
  catch(error){summary.textContent="WebGL2 unavailable or shader compilation failed";output.textContent=error.stack;run.disabled=false;return;}
+ // Capture the Run gesture for the actual PCM/analysis check. The speaker
+ // analyser is disconnected before a BufferSource exists; only a zero-gain
+ // analysis sink and the private MediaStream destination remain connected.
+ let engine,audioReady,audioSetupError;const audioMessages=[];
+ try{engine=new AudioEngine();engine.onError=e=>audioMessages.push(e.message);engine.init();engine.analyser.disconnect();audioReady=engine.resume();audioReady.catch(e=>{audioSetupError=e;});}catch(error){audioSetupError=error;}
  async function test(name,fn){summary.textContent=`Checking ${name}…`;try{renderer.reset();const detail=await fn();results.push({name,status:"pass",detail});}catch(error){results.push({name,status:"fail",error:error.message});}await new Promise(requestAnimationFrame);}
  for(const entry of videoEffectCatalog)await test(`Pixels and bypass: ${entry.name}`,()=>{
   pattern(0);draw(entry.name,1,{}, {time:1.25});pattern(1);
@@ -29,13 +37,13 @@ run.onclick=async()=>{
   check(difference(renderer.readPixels(),bypass)<.01,"Off must restore source pixels");
   return {testedAmounts:[0,.5,1],difference:difference(processed,bypass),midpointDifference:difference(midpoint,bypass),sourceStatus:entry.sourceStatus,candidateOnly:entry.candidateOnly};
  });
- await test("Freeze captures real upstream pixels and survives parameter changes",()=>{
-  fill(solid,[255,0,0,255]);const first=draw("Frame Freeze",1,{}, {time:0},solid);
-  fill(solid,[0,0,255,255]);const held=draw("Frame Freeze",1,{}, {time:1},solid);
+ await test("Earlier Open Play Freeze captures upstream pixels indefinitely across amount changes",()=>{
+  const params={behavior:"Earlier Open Play"};fill(solid,[255,0,0,255]);const first=draw("Frame Freeze",1,params, {time:0},solid);
+  fill(solid,[0,0,255,255]);const held=draw("Frame Freeze",1,params, {time:1},solid);
   check(difference(first,held)===0,"Freeze must retain red after live input turns blue");
-  const half=draw("Frame Freeze",.5,{}, {time:2},solid);const p=pixel(half,48,32);
+  const half=draw("Frame Freeze",.5,params, {time:2},solid);const p=pixel(half,48,32);
   check(Math.abs(p[0]-128)<=1&&Math.abs(p[2]-128)<=1,"Amount change must blend retained frame, not recapture");
-  const capture=draw("Frame Freeze",1,{captureToken:1},{time:3},solid);check(pixel(capture,48,32)[2]===255,"Capture token must capture blue");
+  const capture=draw("Frame Freeze",1,{...params,captureToken:1},{time:3},solid);check(pixel(capture,48,32)[2]===255,"Capture token must capture blue");
  });
  await test("Freeze resets on effect change, off/re-enable, assetId and explicit reset",()=>{
   fill(solid,[255,0,0,255]);draw("Frame Freeze",1,{}, {assetId:"A"},solid);
@@ -98,8 +106,8 @@ run.onclick=async()=>{
   check(pixel(red,48,32)[0]===100&&pixel(red,48,32)[2]===70,"Bass must boost red only");
   check(pixel(blue,48,32)[0]===50&&pixel(blue,48,32)[2]===140,"Treble must boost blue only");
  });
- await test("Analyzers use supplied bands and preserve channel distinction",()=>{
-  fill(solid,[0,0,0,255]);const a=draw("Analyzer",1,{}, {bass:1,mid:0,treble:0},solid),b=draw("Analyzer",1,{}, {bass:0,mid:0,treble:1},solid);
+ await test("Earlier Open Play Analyzer uses supplied three bands and preserves channel distinction",()=>{
+  fill(solid,[0,0,0,255]);const a=draw("Analyzer",1,{behavior:"Earlier Open Play"}, {bass:1,mid:0,treble:0},solid),b=draw("Analyzer",1,{behavior:"Earlier Open Play"}, {bass:0,mid:0,treble:1},solid);
   check(pixel(a,10,32)[0]>200&&pixel(a,80,32)[2]===0,"Bass analyzer column incorrect");
   check(pixel(b,80,32)[2]>200&&pixel(b,10,32)[0]===0,"Treble analyzer column incorrect");
  });
@@ -209,10 +217,112 @@ run.onclick=async()=>{
   renderer.render(solid,[{name:"Gamma",on:true,value:1},{name:"Negative",on:true,value:1}],base);check(difference(a,renderer.readPixels())>10,"Two effect slots must execute in declared order");
  });
  await test("Temporal history is independent between slots and source identities",()=>{
-  fill(solid,[255,0,0,255]);renderer.render(solid,[{name:"Negative",on:true,value:1},{name:"Frame Freeze",on:true,value:1}],{time:0});
-  fill(solid,[0,0,255,255]);renderer.render(solid,[{name:"Negative",on:true,value:0},{name:"Frame Freeze",on:true,value:1}],{time:1});
+  fill(solid,[255,0,0,255]);renderer.render(solid,[{name:"Negative",on:true,value:1},{name:"Frame Freeze",on:true,value:1,params:{behavior:"Earlier Open Play"}}],{time:0});
+  fill(solid,[0,0,255,255]);renderer.render(solid,[{name:"Negative",on:true,value:0},{name:"Frame Freeze",on:true,value:1,params:{behavior:"Earlier Open Play"}}],{time:1});
   check(pixel(renderer.readPixels(),48,32)[1]===255,"Slot2 must retain its actual processed cyan input");
   const replacement=canvas();fill(replacement,[0,255,0,255]);renderer.render(replacement,[null,{name:"Frame Freeze",on:true,value:1}],{time:2});check(pixel(renderer.readPixels(),48,32)[1]===255&&pixel(renderer.readPixels(),48,32)[2]===0,"New source identity must reset temporal state");
+ });
+ await test("Manual Isolator Bass retains selected hue by bass only and grays its complement",()=>{
+  const observed=[];
+  for(const alpha of [255,128]){
+   paint(solid,x=>[...[x<24?[255,0,0]:x<48?[0,255,0]:x<72?[0,0,255]:[100,100,100]][0],alpha]);
+   const samples=[];
+   for(const bass of [0,.5,1]){const out=draw("Isolator Bass",1,{}, {bass,mid:0,treble:0,level:0},solid),pixels=[12,36,60,84].map(x=>pixel(out,x,32));samples.push({bass,pixels});
+    for(const [i,luma] of [[1,182],[2,18],[3,100]])check(pixels[i].slice(0,3).every(v=>Math.abs(v-luma)<=2)&&Math.abs(pixels[i][3]-alpha)<=1,"Complement must be gray independent of bass: "+JSON.stringify({alpha,bass,pixels}));
+    const expected=[54+(255-54)*bass,54*(1-bass),54*(1-bass)];check(pixels[0].slice(0,3).every((v,i)=>Math.abs(v-expected[i])<=2)&&Math.abs(pixels[0][3]-alpha)<=1,"Selected red bass response incorrect: "+JSON.stringify({alpha,bass,pixels}));
+   }
+   const fixed=draw("Isolator Bass",1,{}, {bass:.5,mid:0,treble:0,level:0},solid),other=draw("Isolator Bass",1,{}, {bass:.5,mid:1,treble:1,level:1},solid);check(difference(fixed,other)<.01,"Other supplied bands/level changed fixed-bass output");
+   const green=draw("Isolator Bass",1,{hue:120},{bass:1},solid),gp=pixel(green,36,32),rp=pixel(green,12,32);check(gp[1]>=253&&gp[0]<=2&&gp[2]<=2&&rp.slice(0,3).every(v=>Math.abs(v-54)<=2),"Selected hue ownership failed to move red→green");observed.push({alpha,samples,otherBandDifference:difference(fixed,other),greenSelected:gp,redComplement:rp});
+  }
+  return {observed,response:"Independent hue-distance mask and Rec709 display-RGB luma; vectors prove shader ownership, actual PCM checked separately"};
+ });
+ await test("Actual AudioEngine PCM bass measurement drives isolated hue while high tone and pause stay gray",async()=>{
+  if(audioSetupError)throw audioSetupError;await audioReady;
+  const sr=engine.ctx.sampleRate,bin=sr/2048,frequencies=[bin*4,bin*256],observed=[];let deck;
+  const wait=async(predicate)=>{const deadline=performance.now()+8000;let value;do{value=engine.videoAnalysis(0);if(predicate(value))return value;await new Promise(requestAnimationFrame);}while(performance.now()<deadline);throw Error("Actual PCM analysis timed out: "+JSON.stringify(value));};
+  try{for(const frequency of frequencies){if(deck)engine.pause(deck);const duration=4,buffer=engine.ctx.createBuffer(1,sr*duration,sr),pcm=buffer.getChannelData(0);for(let i=0;i<pcm.length;i++)pcm[i]=.6*Math.sin(2*Math.PI*frequency*i/sr);
+    deck={index:0,track:{id:"isolator-pcm-"+frequency,duration,bpm:120},position:0,rate:1,playing:false,processing:false,keylock:false,keyShift:0,reverse:false,loop:true,loopIn:0,loopOut:duration,stems:[true,true,true,true],stemFX:[false,false,false,false]};engine.buffers.set(deck.track.id,buffer);await engine.start(deck);
+    await wait(v=>v.audioAvailable&&v.level>.3&&(frequency<250?v.bass>.15:v.treble>.15&&v.bass<.001));const measured=engine.videoAnalysis(0);fill(solid,[255,0,0,255]);const out=draw("Isolator Bass",1,{},measured,solid),p=pixel(out,48,32),spread=p[0]-p[1],expected=[54.213+(255-54.213)*measured.bass,54.213*(1-measured.bass),54.213*(1-measured.bass)];check(p.slice(0,3).every((v,i)=>Math.abs(v-expected[i])<=2)&&p[3]===255,"Measured bass did not reach actual shader pixels: "+JSON.stringify({measured,p,expected}));observed.push({frequency,sampleRate:sr,fftSize:2048,measured,pixel:p,spread,expected});
+   }
+   check(observed[0].spread>observed[1].spread+30&&observed[1].spread<=2,"Low PCM must retain measurable red chroma while high-frequency negative control stays gray");
+   engine.pause(deck);const paused=await wait(v=>v.level<1e-6&&v.bass<1e-6),p=pixel(draw("Isolator Bass",1,{},paused,solid),48,32);check(p.slice(0,3).every(v=>Math.abs(v-54)<=2),"Paused input must become gray in Manual Meaning");
+   return {observed,paused:{measured:paused,pixel:p},speakerRoute:"Disconnected before PCM start; independent zero-gain analyser sink remains",audioMessages,scope:"Actual existing pre-EQ deck FFT tap→measured bass→FX pixels. No reference detector equivalence, hardware or full-pipeline/audio-noninterference acceptance."};
+  }finally{if(deck)engine.pause(deck);}
+ });
+ await test("Finite Freeze holds one actual frame, expires to live, and token retriggers with premultiplied alpha",()=>{
+  fill(solid,[255,0,0,128]);draw("Frame Freeze",1,{}, {time:0},solid);fill(solid,[0,0,255,64]);
+  const held=pixel(draw("Frame Freeze",1,{}, {time:.4,frameId:1,rate:0},solid),48,32),half=pixel(draw("Frame Freeze",.5,{}, {time:.5,frameId:1,rate:0},solid),48,32),expired=pixel(draw("Frame Freeze",1,{}, {time:1.001,frameId:1,rate:0},solid),48,32);
+  check(held[0]>=253&&held[2]<=2&&Math.abs(held[3]-128)<=1,"Before deadline must retain actual red capture");check(half.every((v,i)=>Math.abs(v-[170,0,85,96][i])<=2),"Unequal alpha hold/live blend must be premultiplied: "+half);check(expired[2]>=253&&expired[0]<=2&&Math.abs(expired[3]-64)<=1,"Expiry must return live blue even for repeated frameId and paused rate");
+  fill(solid,[0,255,0,255]);const live=pixel(draw("Frame Freeze",1,{}, {time:1.1},solid),48,32);check(live[1]===255,"Expiry must stay live instead of auto-recapturing blue");draw("Frame Freeze",1,{captureToken:1},{time:1.2},solid);fill(solid,[0,0,255,255]);const retriggered=pixel(draw("Frame Freeze",1,{captureToken:1},{time:1.4},solid),48,32),againExpired=pixel(draw("Frame Freeze",1,{captureToken:1},{time:2.201},solid),48,32);check(retriggered[1]===255&&retriggered[2]===0&&againExpired[2]===255&&againExpired[1]===0,"Token must capture green then expire once");return {held,half,expired,live,retriggered,againExpired};
+ });
+ await test("Finite Freeze duration edits retain original deadline and cannot resurrect expired pixels",()=>{
+  fill(solid,[255,0,0,255]);draw("Frame Freeze",1,{durationSeconds:1},{time:0},solid);fill(solid,[0,0,255,255]);
+  const extended=pixel(draw("Frame Freeze",1,{durationSeconds:2},{time:.4},solid),48,32),before=pixel(draw("Frame Freeze",1,{durationSeconds:2},{time:1.5},solid),48,32),shortened=pixel(draw("Frame Freeze",1,{durationSeconds:1},{time:1.6},solid),48,32),notResurrected=pixel(draw("Frame Freeze",1,{durationSeconds:16},{time:1.7},solid),48,32);
+  check(extended[0]===255&&before[0]===255&&shortened[2]===255&&notResurrected[2]===255,"Duration edit must retain original deadline, shorten it, then latch expiry");return {extended,before,shortened,notResurrected};
+ });
+ await test("Freeze mode switches, zero/re-enable and backward presentation time capture fresh live pixels",()=>{
+  fill(solid,[255,0,0,255]);draw("Frame Freeze",1,{behavior:"Earlier Open Play"},{time:0},solid);fill(solid,[0,0,255,255]);const legacy=pixel(draw("Frame Freeze",1,{behavior:"Earlier Open Play"},{time:20},solid),48,32),manual=pixel(draw("Frame Freeze",1,{behavior:"Manual Meaning"},{time:20.1},solid),48,32);check(legacy[0]===255&&manual[2]===255,"Mode change must discard prior capture lifecycle");
+  fill(solid,[0,255,0,255]);draw("Frame Freeze",0,{}, {time:20.2},solid);const zeroReset=pixel(draw("Frame Freeze",1,{}, {time:20.3},solid),48,32);check(zeroReset[1]===255&&zeroReset[2]===0,"Zero/re-enable must capture green");
+  fill(solid,[255,255,0,255]);const back=pixel(draw("Frame Freeze",1,{}, {time:1},solid),48,32);check(back[0]===255&&back[1]===255&&back[2]===0,"Backward time must capture current yellow, not prior green");return {legacy,manual,zeroReset,back};
+ });
+ await test("Two finite Freeze slots retain independent upstream captures and expiry times",()=>{
+  const fx=(value=1,token=0)=>({name:"Frame Freeze",on:true,value,params:{captureToken:token}}),render=(time,a,b)=>{renderer.render(solid,[a,b],{time});return pixel(renderer.readPixels(),48,32);};
+  fill(solid,[255,0,0,255]);render(0,fx(),fx());fill(solid,[0,0,255,255]);render(.4,fx(0),fx(1,1));fill(solid,[0,255,0,255]);render(.5,fx(),fx(1,1));fill(solid,[255,255,0,255]);const secondHeld=render(1.1,fx(),fx(1,1)),firstHeld=render(1.401,fx(),fx(1,1)),allLive=render(1.501,fx(),fx(1,1));
+  check(secondHeld[2]===255&&secondHeld[1]===0,"Second slot must retain blue despite first retaining green");check(firstHeld[1]===255&&firstHeld[0]===0&&firstHeld[2]===0,"Second expiry must reveal first slot's held green");check(allLive[0]===255&&allLive[1]===255&&allLive[2]===0,"First expiry must finally reveal live yellow");return {secondHeld,firstHeld,allLive,captureTimes:[.5,.4],deadlines:[1.5,1.4]};
+ });
+ await test("Earlier saved Isolator and Freeze presets round-trip without silently adopting new algorithms",()=>{
+  const saved=restoreVideoState(JSON.parse(JSON.stringify(snapshotVideoState(restoreVideoState({version:1,fx:{left:[{name:"Isolator Bass",on:true,value:1,params:{}},{name:"Frame Freeze",on:true,value:1,params:{captureToken:0}}]}}))))),[isolator,freeze]=saved.fx.left;
+  check(isolator.params.behavior==="Earlier Open Play"&&freeze.params.behavior==="Earlier Open Play"&&freeze.params.captureToken===0,"Legacy migration marker/token lost");fill(solid,[100,120,140,128]);const silent=pixel(draw(isolator.name,isolator.value,isolator.params,{bass:0},solid),48,32),bass=pixel(draw(isolator.name,isolator.value,isolator.params,{bass:1},solid),48,32);check(silent.every((v,i)=>Math.abs(v-[100,120,140,128][i])<=1)&&bass.every((v,i)=>Math.abs(v-[100,18,21,128][i])<=2),"Legacy warm attenuation/silence identity changed");
+  fill(solid,[255,0,0,255]);draw(freeze.name,freeze.value,freeze.params,{time:0},solid);fill(solid,[0,0,255,255]);const held=pixel(draw(freeze.name,freeze.value,freeze.params,{time:100},solid),48,32);check(held[0]===255&&held[2]===0,"Earlier saved Freeze must remain indefinite");return {modes:[isolator.params.behavior,freeze.params.behavior],silent,bass,held,time:100,meaning:"Earlier Open Play compatibility only"};
+ });
+ for(let band=0;band<8;band++)await test("Manual Analyzer unit vector independently owns column "+band,()=>{
+  const spectrum8=Array(8).fill(0);spectrum8[band]=.75;const observed=[];
+  for(const alpha of [255,128]){fill(solid,[40,90,160,alpha]);const out=draw("Analyzer",1,{}, {spectrum8},solid),row=[];
+   for(let column=0;column<8;column++){const p=pixel(out,column*12+6,32);row.push(p);check(p.slice(0,3).every((v,i)=>Math.abs(v-(column===band&&i===1?255:0))<=2)&&Math.abs(p[3]-alpha)<=1,"Eight independent column ownership mismatch: "+JSON.stringify({band,column,alpha,p}));}
+   const above=pixel(out,band*12+6,4);check(above.slice(0,3).every(v=>v<=2)&&Math.abs(above[3]-alpha)<=1,"Selected bar must be black above its75% height");observed.push({alpha,row,above});
+  }
+  return {input:spectrum8,observed,geometry:"Eight equal12pixel columns on96x64 output; supplied unit vectors prove geometry, not measured audio"};
+ });
+ await test("Manual Analyzer hue, gain and amount have numeric controls while retaining source alpha",()=>{
+  fill(solid,[40,90,160,128]);const spectrum8=[.25,0,0,0,0,0,0,0],green=draw("Analyzer",1,{}, {spectrum8},solid),red=draw("Analyzer",1,{hue:0},{spectrum8},solid),tall=draw("Analyzer",1,{hue:0,gain:4},{spectrum8},solid),gainZero=draw("Analyzer",1,{gain:0},{spectrum8},solid),half=draw("Analyzer",.5,{hue:0,gain:4},{spectrum8},solid);
+  const g=pixel(green,6,56),r=pixel(red,6,56),above=pixel(red,6,32),high=pixel(tall,6,4),zero=pixel(gainZero,6,56),mixed=pixel(half,6,32);
+  check(g[1]>=253&&g[0]<=2&&g[2]<=2&&r[0]>=253&&r[1]<=2&&r[2]<=2,"Hue must change green→red without moving the bar");check(above.slice(0,3).every(v=>v<=2)&&high[0]>=253&&high[1]<=2&&high[2]<=2,"Gain4 must lift actual.25height to fullheight");check(zero.slice(0,3).every(v=>v<=2),"Explicit gain0 must draw black instead of default gain1");check([g,r,above,high,zero,mixed].every(p=>Math.abs(p[3]-128)<=1),"Analyzer must preserve partial source alpha");check(mixed.slice(0,3).every((v,i)=>Math.abs(v-[148,45,80][i])<=2),"Amount.5 source/red blend numeric mismatch: "+mixed);
+  const bypass=draw(null,1,{}, {},solid),off=draw("Analyzer",0,{hue:0},{spectrum8},solid);check(difference(bypass,off)<.01,"Analyzer amount0 must be exact source bypass");return {green:g,red:r,above,gain4:high,gain0:zero,halfAmount:mixed,zeroAmountDifference:difference(bypass,off)};
+ });
+ await test("Manual Analyzer missing or malformed eight-band input bypasses actual source with explicit diagnostics",()=>{
+  pattern();const bypass=draw(null),observed=[];
+  for(const spectrum8 of [undefined,null,Array(7).fill(0),Array(9).fill(0),Array(8),[NaN,0,0,0,0,0,0,0],[-.1,0,0,0,0,0,0,0],[1.1,0,0,0,0,0,0,0],new Float32Array(8)]){const out=draw("Analyzer",1,{}, {spectrum8}),diagnostics=renderer.diagnostics(),delta=difference(out,bypass);check(delta<.01&&!diagnostics.spectrum8Available&&diagnostics.slots[0].sourceBypass&&diagnostics.slots[0].reason==="spectrum8-unavailable","Malformed data was fabricated or not diagnosed: "+JSON.stringify({delta,diagnostics}));observed.push({input:spectrum8===undefined?"undefined":JSON.stringify(spectrum8),difference:delta,diagnostics});}
+  let calls=0;const hostile={...base};Object.defineProperty(hostile,"spectrum8",{get(){calls++;throw Error("Unexpected spectrum getter");}});renderer.render(fixture,[{name:"Analyzer",on:true,value:1}],hostile);check(calls===0&&difference(renderer.readPixels(),bypass)<.01&&renderer.diagnostics().slots[0].reason==="spectrum8-unavailable","Top-level spectrum accessor executed or bypass changed");
+  const vector=Array(8).fill(0);Object.defineProperty(vector,"4",{get(){calls++;throw Error("Unexpected element getter");}});const out=draw("Analyzer",1,{}, {spectrum8:vector});check(calls===0&&difference(out,bypass)<.01,"Spectrum element accessor executed or bypass changed");return {observed,accessorsCalled:calls,scope:"No fallback from bass/mid/treble; no scalar coercion or fabricated independent spectrum"};
+ });
+ await test("Manual Analyzer valid silence stays available black while earlier three-band saved presets remain separate",()=>{
+  fill(solid,[40,90,160,128]);const zero=draw("Analyzer",1,{}, {spectrum8:Array(8).fill(0),bass:1,mid:1,treble:1},solid),p=pixel(zero,48,32),diagnostics=renderer.diagnostics();check(p.slice(0,3).every(v=>v<=1)&&Math.abs(p[3]-128)<=1&&diagnostics.spectrum8Available&&!diagnostics.slots[0].sourceBypass&&diagnostics.slots[0].reason===null,"Valid silence must be black, available, and independent of coarse bands");
+  const old=restoreVideoState(JSON.parse(JSON.stringify(snapshotVideoState(restoreVideoState({version:1,fx:{left:[{name:"Analyzer",on:true,value:1,params:{}}]}}))))).fx.left[0];check(old.params.behavior==="Earlier Open Play","Earlier saved Analyzer silently adopted eight-band behavior");fill(solid,[0,0,0,255]);const earlier=draw(old.name,old.value,old.params,{spectrum8:undefined,bass:1,mid:0,treble:0},solid),left=pixel(earlier,10,32),right=pixel(earlier,80,32),legacyDiagnostics=renderer.diagnostics();check(left[0]>=253&&Math.abs(left[1]-51)<=2&&Math.abs(left[2]-26)<=2&&right.slice(0,3).every(v=>v<=1)&&legacyDiagnostics.slots[0].reason===null,"Earlier three-bar/fixed-color rendering or compatibility diagnostic changed");return {validSilent:p,diagnostics,earlierMode:old.params.behavior,legacyLeft:left,legacyRight:right,legacyDiagnostics};
+ });
+ await test("Actual pipeline keeps independent left, right and master Analyzer vectors in their own targets",()=>{
+  const pipeline=createVideoPipeline({width,height}),left=canvas(),right=canvas(),read=c=>{const ctx=canvas().getContext("2d");ctx.drawImage(c,0,0);return ctx.getImageData(0,0,width,height).data;},unit=band=>Array.from({length:8},(_,i)=>i===band?.75:0),fx=hue=>({name:"Analyzer",on:true,value:1,params:{hue}}),settings={fx:{left:[fx(120)],right:[fx(240)],master:[]}},context={time:0,amount:0,channels:[{spectrum8:unit(1)},{spectrum8:unit(6)}],master:{spectrum8:unit(3)}};
+  fill(left,[50,60,70,255]);fill(right,[80,90,100,255]);
+  try{let result=pipeline.render([left,right],settings,context);const l=read(result.channels[0]),r=read(result.channels[1]);check(pixel(l,18,32)[1]>=253&&pixel(l,78,32).slice(0,3).every(v=>v<=2),"Left vector leaked or was stripped");check(pixel(r,78,32)[2]>=253&&pixel(r,18,32).slice(0,3).every(v=>v<=2),"Right vector leaked or was stripped");settings.fx.master=[fx(0)];result=pipeline.render([left,right],settings,{...context,time:.1});const master=read(result.output),lp=read(result.channels[0]),rp=read(result.channels[1]);check(pixel(master,42,32)[0]>=253&&pixel(master,18,32).slice(0,3).every(v=>v<=2)&&pixel(master,78,32).slice(0,3).every(v=>v<=2),"Master did not consume its independent vector exactly once");check(difference(l,lp)<.01&&difference(r,rp)<.01,"Master Analyzer changed channel previews");return {left:pixel(l,18,32),right:pixel(r,78,32),master:pixel(master,42,32),otherMasterColumns:[pixel(master,18,32),pixel(master,78,32)],source:"Supplied independent target vectors through actual pipeline; actual PCM tested separately"};}finally{pipeline.dispose();}
+ });
+ async function waitAudio(seconds){const target=engine.ctx.currentTime+seconds,deadline=performance.now()+10000;while(engine.ctx.currentTime<target){if(performance.now()>deadline)throw Error("Audio clock did not reach fixed aperture");await new Promise(requestAnimationFrame);}}
+ const settleAudio=()=>waitAudio(4*2048/engine.ctx.sampleRate);
+ function spectrumTone(band){const sr=engine.ctx.sampleRate,edges=videoAnalysisPolicy.spectrum8Hz,first=Math.max(1,Math.ceil(edges[band]*2048/sr)),last=Math.min(1023,Math.ceil(Math.min(edges[band+1],sr/2)*2048/sr)-1);check(last>=first,"Actual sample rate has no FFT bin for band"+band);const bin=Math.max(first,Math.min(last,Math.round(Math.sqrt(edges[band]*Math.min(edges[band+1],sr/2))*2048/sr)));return{band,bin,frequency:bin*sr/2048};}
+ let spectrumVoice=0;
+ async function playSpectrumTone(tone){const sr=engine.ctx.sampleRate,length=2048*128,duration=length/sr,buffer=engine.ctx.createBuffer(1,length,sr),pcm=buffer.getChannelData(0);for(let i=0;i<pcm.length;i++)pcm[i]=.6*Math.sin(2*Math.PI*tone.bin*i/2048);const deck={index:0,track:{id:"analyzer-original-pcm-"+(++spectrumVoice),duration,bpm:120},position:0,rate:1,playing:false,processing:false,keylock:false,keyShift:0,reverse:false,loop:true,loopIn:0,loopOut:duration,stems:[true,true,true,true],stemFX:[false,false,false,false]};engine.buffers.set(deck.track.id,buffer);await engine.start(deck);return deck;}
+ await test("Actual eight independent PCM tones reach their measured Analyzer columns with bounded FFT leakage",async()=>{
+  if(audioSetupError)throw audioSetupError;await audioReady;const observed=[];let deck;
+  try{for(let band=0;band<8;band++){if(deck)engine.pause(deck);const tone=spectrumTone(band);deck=await playSpectrumTone(tone);engine.videoAnalysis(0);await settleAudio();const measured=engine.videoAnalysis(0),v=measured.spectrum8;check(measured.spectrum8Available&&Array.isArray(v)&&v.length===8,"Actual engine spectrum unavailable");const other=v.filter((_,i)=>i!==band),dominance=v[band]/Math.max(...other,1e-12),share=v[band]**2/v.reduce((sum,n)=>sum+n*n,0);check(v.indexOf(Math.max(...v))===band&&dominance>=1.5&&share>=.65,"Measured intended band failed predeclared Blackman leakage limits: "+JSON.stringify({band,v,dominance,share}));
+    fill(solid,[40,90,160,255]);const out=draw("Analyzer",1,{gain:2},measured,solid),heights=[],expected=[];for(let column=0;column<8;column++){let heightPixels=0;for(let y=0;y<height;y++){const p=pixel(out,column*12+6,y);if(p[1]>=253&&p[0]<=2&&p[2]<=2)heightPixels++;else check(p.slice(0,3).every(n=>n<=2),"Unexpected color outside measured bars");}const anticipated=Math.round(Math.min(1,v[column]*2)*height);heights.push(heightPixels);expected.push(anticipated);check(Math.abs(heightPixels-anticipated)<=1,"Actual measured vector→pixel height mismatch: "+JSON.stringify({band,column,v,heightPixels,anticipated}));}
+    check(heights[band]>=Math.max(...heights.filter((_,i)=>i!==band))+4,"Intended measured band must visibly dominate its bar");observed.push({tone,sampleRate:engine.ctx.sampleRate,fftSize:2048,time:engine.ctx.currentTime,measured,dominance,powerShare:share,pixelHeights:heights,expectedHeights:expected});
+   }
+   engine.pause(deck);await settleAudio();const paused=engine.videoAnalysis(0),out=draw("Analyzer",1,{},paused,solid),p=pixel(out,48,32);check(paused.spectrum8Available&&paused.spectrum8.every(n=>n===0)&&p.slice(0,3).every(n=>n<=1)&&renderer.diagnostics().slots[0].reason===null,"Actual pause must yield available silent black bars");return {observed,paused:{measured:paused,pixel:p},leakagePolicy:"Intended band≥1.5x every other band and≥65% total measured power; actual bar heights match each raw measured value±1pixel, rather than pretending leakage is zero",scope:"Actual AudioEngine PCM→real pre-EQ FFT8→normalized FX context→GPU columns; independently chosen bands/height/color, no vendor equivalence"};
+  }finally{if(deck)engine.pause(deck);}
+ });
+ await test("Changing Analyzer source, hue and enable state leaves held actual post-master PCM amplitude unchanged",async()=>{
+  if(audioSetupError)throw audioSetupError;await audioReady;const tone=spectrumTone(4),deck=await playSpectrumTone(tone),observed=[];
+  try{engine.videoAnalysis(4);await settleAudio();for(const enabled of [false,true,false]){const rows=[];for(let i=0;i<6;i++){await waitAudio(2048/engine.ctx.sampleRate);const signal=engine.videoAnalysis(4);pattern(i);draw(enabled?"Analyzer":null,1,{hue:i*60,gain:2},signal);rows.push({time:engine.ctx.currentTime,level:signal.level,spectrum8:signal.spectrum8});}observed.push({enabled,rows,mean:rows.reduce((sum,row)=>sum+row.level,0)/rows.length});}
+   const levels=observed.map(row=>row.mean);check(levels[0]>.001&&Math.max(...levels)-Math.min(...levels)<.0005,"Read-only Analyzer rendering changed fixed-window actual master RMS: "+levels);return {tone,observed,tolerance:.0005,apertureSeconds:2048/engine.ctx.sampleRate,scope:"Held periodic original PCM; equal fixed post-toggle RMS windows. Not sample-for-sample audio equality or device acceptance."};
+  }finally{engine.pause(deck);}
  });
  await test("Transparent resize and active mirror retain straight red at partial alpha",()=>{
   const source=document.createElement("canvas");source.width=2;source.height=1;
@@ -231,5 +341,5 @@ run.onclick=async()=>{
  });
  const failures=results.filter(result=>result.status==="fail");summary.textContent=`${results.length-failures.length}/${results.length} independent Video FX pixel checks passed.`;
  output.textContent=JSON.stringify({scope:"Actual WebGL2 render/readPixels; original algorithms only; no vendor/native equivalence",catalog:videoEffectCatalog.length,results},null,2);
- renderer.dispose();run.disabled=false;
+ renderer.dispose();try{engine?.videoAnalyzers?.dispose();engine?.silence();await engine?.ctx?.close();}catch(error){audioMessages.push("Cleanup: "+error.message);}run.disabled=false;
 };

@@ -26,6 +26,7 @@ uniform float hasBackground;
 uniform float outputPremultiplied;
 uniform vec2 resolution;
 uniform vec3 bands;
+uniform float spectrum8[8];
 uniform vec3 columns;
 uniform vec4 p;
 uniform vec4 q;
@@ -90,14 +91,16 @@ void main(){
  }else if(effect==1){
   vec2 grid=vec2(p.x);vec2 cell=floor(uv*grid);int tile=int(mod(cell.x+cell.y*grid.x,16.));
   z=blend(c,straight(texture(historyFrames,vec3(fract(uv*grid),float(historyLayers[tile])))),amount);
- }else if(effect==2){z=blend(c,straight(texture(holdFrame,uv)),amount);
+ }else if(effect==2){if(p.x>.5)z=blend(c,straight(texture(holdFrame,uv)),amount);
  }else if(effect==3){
   float period=p.x>0.?p.x:60./bpm*p.z;
   float wave=.5-.5*cos(TAU*time/max(.001,period));
   float distance=min(min(uv.x,1.-uv.x),min(uv.y,1.-uv.y));
   float border=1.-smoothstep(0.,p.y,distance);
   z.a=c.a*(1.-amount*wave*border*(1.-reducedMotion));
- }else if(effect==4){z.rgb=mix(c.rgb,c.rgb*vec3(1.,.15,.15),amount*bands.x);
+ }else if(effect==4){
+  if(p.w>.5)z.rgb=mix(c.rgb,c.rgb*vec3(1.,.15,.15),amount*bands.x);
+  else{float distance=abs(hueOf(c.rgb)-p.x/360.);distance=min(distance,1.-distance);float keep=1.-smoothstep(p.y,p.y+p.z,distance);z.rgb=mix(c.rgb,mix(vec3(luma(c.rgb)),c.rgb,keep*bands.x),amount);}
  }else if(effect==5){
   float pulse=fract(time*bpm/60./max(.125,p.x))<p.y?1.:0.;
   z.rgb=mix(c.rgb,vec3(1.),amount*pulse*(1.-reducedMotion));
@@ -182,7 +185,9 @@ void main(){
  }else if(effect==49){float count=1.+floor(amount*(p.x-1.));z=source(fract(uv*count));
  }else if(effect==50){z=source(fract((uv-.5)*(.25+amount*5.)+.5));
  }else if(effect==51){float l=luma(c.rgb);vec3 heat=vec3(smoothstep(0.,.5,l),1.-abs(2.*l-1.),1.-smoothstep(.5,1.,l));z.rgb=mix(c.rgb,heat,amount);
- }else if(effect==52){int b=min(2,int(floor(uv.x*3.)));z.rgb=mix(c.rgb,bandColor(float(b))*step(uv.y,bandAt(b)),amount);
+ }else if(effect==52){
+  if(p.w>.5){int b=min(2,int(floor(uv.x*3.)));z.rgb=mix(c.rgb,bandColor(float(b))*step(uv.y,bandAt(b)),amount);}
+  else if(p.z>.5){int b=min(7,int(floor(uv.x*8.)));float height=clamp(spectrum8[b]*p.y,0.,1.);vec3 color=clamp(abs(fract(vec3(p.x/360.)+vec3(0.,2./3.,1./3.))*6.-3.)-1.,0.,1.);z.rgb=mix(c.rgb,color*step(uv.y,height),amount);}
  }else if(effect==53){float x=clamp((uv.x-.166667)*3.,0.,2.);float height=x<1.?mix(bands.x,bands.y,x):mix(bands.y,bands.z,x-1.);float line=1.-smoothstep(.008,.025,abs(uv.y-height));z.rgb=mix(c.rgb,c.rgb*.2+vec3(line),amount);
  }else if(effect==54){int b=min(2,int(floor(uv.x*3.)));float height=.1+.9*(b==0?columns.x:b==1?columns.y:columns.z);vec4 block=source(vec2(fract(uv.x*3.),uv.y/max(.1,height)));block.a*=step(uv.y,height);z=reducedMotion>.5?c:blend(c,block,amount);
  }

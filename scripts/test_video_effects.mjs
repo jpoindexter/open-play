@@ -28,21 +28,73 @@ test("spec and context sanitize numbers and reject unsupported names",()=>{
  const c=context(1,{bpm:0,bass:2,mid:-1,treble:NaN,rate:-9,upfader:NaN});
  assert.deepEqual(c.bands,[1,0,0]);assert.equal(c.bpm,20);assert.equal(c.rate,-4);assert.equal(c.upfader,1);
 });
-test("freeze captures once and preserves its capture identity across amount changes",()=>{
+test("Analyzer context keeps eight exact independent values detached from legacy bands",()=>{
+ const input=[0,.125,.25,.375,.5,.625,.75,1],c=context(1,{bass:.2,mid:.3,treble:.4,spectrum8:input});
+ assert.deepEqual(c.spectrum8,input);assert.notEqual(c.spectrum8,input);assert(c.spectrum8Available);assert.deepEqual(c.bands,[.2,.3,.4]);
+ input[0]=1;assert.equal(c.spectrum8[0],0);
+ assert.deepEqual(context(0,{spectrum8:Array(8).fill(0)}).spectrum8,Array(8).fill(0));assert(context(0,{spectrum8:Array(8).fill(0)}).spectrum8Available);
+ assert.equal(context(0,{bass:1,mid:1,treble:1}).spectrum8,null,'Coarse bands must never fabricate eight independent values');
+});
+test("Analyzer context rejects malformed, inherited and accessor spectra without coercion",()=>{
+ for(const value of [undefined,null,[],Array(7).fill(0),Array(9).fill(0),Array(8),[NaN,0,0,0,0,0,0,0],[Infinity,0,0,0,0,0,0,0],[-.1,0,0,0,0,0,0,0],[1.1,0,0,0,0,0,0,0],['1',0,0,0,0,0,0,0],new Float32Array(8)])assert.equal(context(0,{spectrum8:value}).spectrum8,null);
+ let calls=0;const hostile={};Object.defineProperty(hostile,'spectrum8',{get(){calls++;throw Error('getter');}});assert.equal(normalizeVideoContext(hostile).spectrum8,null);assert.equal(calls,0);
+ const inherited=Object.create({spectrum8:Array(8).fill(1)});assert.equal(normalizeVideoContext(inherited).spectrum8,null);
+ const vector=Array(8).fill(0);Object.defineProperty(vector,'3',{get(){calls++;throw Error('element getter');}});assert.equal(context(0,{spectrum8:vector}).spectrum8,null);assert.equal(calls,0);
+});
+test("Analyzer color/gain uniforms distinguish real silence, unavailable data and earlier three-band mode",()=>{
+ const valid=context(0,{spectrum8:Array(8).fill(0)}),missing=context(0);
+ assert.deepEqual(videoEffectUniforms(spec('Analyzer'),undefined,valid),[120,1,1,0]);
+ assert.deepEqual(videoEffectUniforms(spec('Analyzer'),undefined,missing),[120,1,0,0]);
+ assert.deepEqual(videoEffectUniforms(spec('Analyzer',1,{hue:900,gain:10,behavior:'Earlier Open Play'}),undefined,missing),[360,4,0,1]);
+ assert.deepEqual(videoEffectUniforms(spec('Analyzer',1,{hue:0,gain:0}),undefined,valid),[0,0,1,0]);
+ const e=videoEffectCatalog.find(e=>e.name==='Analyzer');assert.equal(e.default.params.behavior,'Manual Meaning');assert.equal(e.manualMeaningEvidence.exactResponseRecovered,false);
+});
+test("Earlier Open Play freeze captures once and preserves indefinite capture identity across amount changes",()=>{
  const state=createVideoEffectState("Frame Freeze");
- assert.equal(planVideoEffectFrame(state,spec("Frame Freeze",0),context(0)).captureHold,false);
- assert.equal(planVideoEffectFrame(state,spec("Frame Freeze",.5),context(1)).captureHold,true);
- assert.equal(planVideoEffectFrame(state,spec("Frame Freeze",1),context(2)).captureHold,false);
- assert.equal(planVideoEffectFrame(state,spec("Frame Freeze",.25),context(3)).captureHold,false);
- assert.equal(planVideoEffectFrame(state,spec("Frame Freeze",1,{captureToken:1}),context(4)).captureHold,true);
+ const earlier=(amount,extra={})=>spec("Frame Freeze",amount,{behavior:"Earlier Open Play",...extra});
+ assert.equal(planVideoEffectFrame(state,earlier(0),context(0)).captureHold,false);
+ assert.equal(planVideoEffectFrame(state,earlier(.5),context(1)).captureHold,true);
+ assert.equal(planVideoEffectFrame(state,earlier(1),context(2)).captureHold,false);
+ assert.equal(planVideoEffectFrame(state,earlier(.25),context(30)).captureHold,false);assert(state.holdActive);
+ assert.equal(planVideoEffectFrame(state,earlier(1,{captureToken:1}),context(31)).captureHold,true);
 });
 test("freeze planner drives an actual retained-frame capture collaborator",()=>{
  const state=createVideoEffectState("Frame Freeze");let capture=null;
- const run=(frame,value,token=0)=>{const p=planVideoEffectFrame(state,spec("Frame Freeze",value,{captureToken:token}),context(frame.time));if(p.captureHold)capture=frame.pixels.slice();return capture;};
+ const run=(frame,value,token=0)=>{const p=planVideoEffectFrame(state,spec("Frame Freeze",value,{behavior:"Earlier Open Play",captureToken:token}),context(frame.time));if(p.captureHold)capture=frame.pixels.slice();return capture;};
  assert.deepEqual(run({time:0,pixels:[255,0,0,255]},1),[255,0,0,255]);
  assert.deepEqual(run({time:1,pixels:[0,0,255,255]},.5),[255,0,0,255]);
  assert.deepEqual(run({time:2,pixels:[0,0,255,255]},1,1),[0,0,255,255]);
  return "Executed capture lifecycle with an in-memory frame collaborator, not GPU pixels";
+});
+test("Finite freeze expires once and token retriggers without automatic recapture",()=>{
+ const s=createVideoEffectState("Frame Freeze"),run=(time,params={})=>planVideoEffectFrame(s,spec("Frame Freeze",1,params),context(time));
+ assert(run(0).captureHold);assert(s.holdActive);assert(!run(.4).captureHold);assert(s.holdActive);
+ assert(!run(1).captureHold);assert(!s.holdActive);assert(s.holdExpired);assert(!run(1.1).captureHold);assert(!s.holdActive);
+ assert(run(1.2,{captureToken:1}).captureHold);assert(s.holdActive);assert.equal(s.captureTime,1.2);assert(!run(2.2,{captureToken:1}).captureHold);assert(!s.holdActive);
+});
+test("Finite freeze duration edits use original deadline and cannot resurrect expiry",()=>{
+ const s=createVideoEffectState("Frame Freeze"),run=(time,duration)=>planVideoEffectFrame(s,spec("Frame Freeze",1,{durationSeconds:duration}),context(time));
+ run(0,1);run(.4,2);assert.equal(s.captureTime,0);assert(s.holdActive);run(1.5,2);assert(s.holdActive);
+ run(1.6,1);assert(s.holdExpired);run(1.7,16);assert(!s.holdActive);assert(s.holdExpired);
+ const short=createVideoEffectState("Frame Freeze");planVideoEffectFrame(short,spec("Frame Freeze",1,{durationSeconds:0}),context(0));planVideoEffectFrame(short,spec("Frame Freeze",1,{durationSeconds:0}),context(.05));assert(short.holdExpired);
+});
+test("Finite freeze zero, mode changes and backward clocks create fresh lifecycles",()=>{
+ const s=createVideoEffectState("Frame Freeze"),run=(time,value=1,behavior="Manual Meaning")=>planVideoEffectFrame(s,spec("Frame Freeze",value,{behavior}),context(time));
+ run(0);run(.2,0);assert(!s.holdCaptured&&!s.holdActive);assert(run(.3).captureHold);assert.equal(s.captureTime,.3);
+ assert(run(.4,1,"Earlier Open Play").captureHold);assert.equal(s.captureTime,.4);run(20,1,"Earlier Open Play");assert(s.holdActive);
+ assert(run(21).captureHold);assert.equal(s.captureTime,21);assert(run(1).captureHold);assert.equal(s.captureTime,1);assert(s.holdActive);
+});
+test("Finite freeze presentation timer advances for repeated source frames and independent slots",()=>{
+ const a=createVideoEffectState("Frame Freeze"),b=createVideoEffectState("Frame Freeze"),p=spec("Frame Freeze");
+ planVideoEffectFrame(a,p,context(0,{frameId:1,rate:0}));planVideoEffectFrame(b,p,context(.5,{frameId:1,rate:0}));
+ assert(!planVideoEffectFrame(a,p,context(1.1,{frameId:1,rate:0})).captureHold);assert(!a.holdActive);
+ planVideoEffectFrame(b,p,context(1.1,{frameId:1,rate:0}));assert(b.holdActive);assert.equal(videoEffectUniforms(p,a)[0],0);assert.equal(videoEffectUniforms(p,b)[0],1);
+});
+test("Isolator Bass hue ownership and finite hold controls have separate explicit legacy modes",()=>{
+ assert.deepEqual(videoEffectUniforms(spec("Isolator Bass")),[0,.08,.08,0]);
+ assert.deepEqual(videoEffectUniforms(spec("Isolator Bass",1,{behavior:"Earlier Open Play",hue:500})),[360,.08,.08,1]);
+ assert.deepEqual(videoEffectUniforms(spec("Frame Freeze",1,{durationSeconds:100,behavior:"Earlier Open Play"}),{holdActive:true}),[1,16,0,1]);
+ for(const name of ["Isolator Bass","Frame Freeze"]){const e=videoEffectCatalog.find(e=>e.name===name);assert.equal(e.default.params.behavior,"Manual Meaning");assert.equal(e.manualMeaningEvidence.exactResponseRecovered,false);}
 });
 test("edge pulse never captures whole frames, including beat boundaries and reduced motion",()=>{
  const s=createVideoEffectState("Frame Pulse"),p=spec("Frame Pulse");

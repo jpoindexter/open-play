@@ -1113,3 +1113,36 @@ eight-band Analyzer, other manual crosswalk meanings, output/window/quality and
 the full library/device/provider scope remain active. Inventory110/521,
 complete_inventory=false. Native development remains prohibited until named HTML
 revision approval. Per-feature Codex/Claude model and effort routing is preserved.
+
+
+## 36. Real eight-band Analyzer, finite Freeze and channel-opacity authority
+
+2026-10-17. Read [the executed spectrum/opacity review](docs/prototype/VIDEO_SPECTRUM_OPACITY_REVIEW.md).
+Isolator Bass now grays the complement of a selected hue and reacts to real bass;
+Frame Freeze is a finite one-shot with explicit recapture and legacy indefinite
+mode. Eight-band Analyzer receives eight independent FFT power values through
+the actual AudioEngine, with hue/gain controls, valid-zero silence and an explicit
+source bypass when data is unavailable. These are independent frequency bands,
+curves and timing, not recovered Serato transfer functions.
+
+Current actual FX102/102, real-spectrum17/17, opacity13/13 and assembled
+pipeline33/33 pass. Main UI6 opacity observations,3 Analyzer observations and
+5 compatibility/recapture observations execute and persist. Independent review
+found a pipeline spread invoking a spectrum getter before validation; own-data
+copy now preserves the guard through the assembled pipeline, with actual pixels
+and controlled8/8 regression. Opacity review9/9 found no defended production bug.
+21 current Video Node scripts exit0 with their narrower declared scopes.
+
+Separate channel levels/links no longer depend on playback or crossfade links.
+Unlink snapshots the displayed audio-controlled level; manual edits leave audio
+unchanged. Old combined flags initialize missing channel flags once; saved own
+zero/false and earlier FX appearances survive metadata restore. Capture bytes,
+images, FFT/runtime clocks and GPU state are not persisted.
+
+REQ512 now records independent executed channel/crossfader ownership, with
+physical/reference curves still unverified. Remaining work includes other Video
+manual meanings, output/window/quality/Syphon, saved per-file FX/associations,
+shortcuts/MIDI authority and the full library/hardware/provider/model-quality
+scope. Counts remain110/521 and complete_inventory=false. Native development
+remains blocked until Jason approves a named HTML candidate. Model/effort
+recommendations remain attached to each feature/requirement and Trello card.

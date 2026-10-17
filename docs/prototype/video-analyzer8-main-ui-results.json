@@ -1,0 +1,33 @@
+{
+  "observedAt": "2026-10-17T06:47:37.354Z",
+  "scope": "Actual main UI Analyzer controls/reload/visible unavailable message; real PCM and pixels separately verified in public GPU harness.",
+  "checks": [
+    {
+      "name": "Fresh Analyzer exposes and accepts independent Manual Meaning/hue/gain controls",
+      "executed": true,
+      "evidence": {
+        "behavior": "Manual Meaning",
+        "effect": "Analyzer",
+        "gain": "2",
+        "hue": "0",
+        "on": true
+      }
+    },
+    {
+      "name": "Suspended/unavailable actual audio shows Analyzer source-bypass reason in main panel",
+      "executed": true,
+      "status": "640×360 · 3531 processed frames · 4.1 ms CPU submission · independent GPU algorithms; reference equivalence unverified · left slot 1: eight-band audio unavailable; Analyzer bypassed"
+    },
+    {
+      "name": "Enabled Analyzer behavior, hue0 and gain2 survive actual page reload",
+      "executed": true,
+      "evidence": {
+        "behavior": "Manual Meaning",
+        "effect": "Analyzer",
+        "gain": "2",
+        "hue": "0",
+        "on": true
+      }
+    }
+  ]
+}

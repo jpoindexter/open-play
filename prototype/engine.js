@@ -629,7 +629,7 @@ export class AudioEngine {
     );
   }
   videoAnalysis(index = 4) {
-    if (!this.ctx) return {bass: 0, mid: 0, treble: 0, level: 0, audioAvailable: false};
+    if (!this.ctx) return {bass: 0, mid: 0, treble: 0, level: 0, audioAvailable: false, spectrum8: null, spectrum8Available: false};
     this.videoAnalyzers ||= createVideoAnalysis(this.ctx, [...this.nodes.map(n => n.input), this.master]);
     return this.videoAnalyzers.read(index);
   }

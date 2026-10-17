@@ -5,10 +5,12 @@ import {createVideoMediaLibrary, createVideoTransitionSelector} from './video-me
 import {videoTransitionCatalog} from './video-transitions.js';
 import {createVideoRecordingSurface, normalizeRecordingQuality, recordingQualityOptions, recordingDimensions} from './video-recording.js';
 import {createVideoCrossfade,normalizeAutoCrossfadeSeconds} from './video-crossfade.js';
+import {normalizeVideoOpacityState,effectiveVideoOpacity,videoOpacityIndex} from './video-opacity.js';
 import {drawVideoTreatment, normalizeVideoTreatment} from './video-treatment.js';
 import {primeDecodedVideo} from './video-decode.js';
 export function createVideoMixer({state, engine, notify}) {
   const v = state.video ||= {};
+  Object.assign(v,normalizeVideoOpacityState(v));
   Object.assign(v, {width: v.width || 640, height: v.height || 360,
     transition: v.transition || 'Crossfade', cross: v.cross || 0,
     linked: v.linked ?? true, crossLinked:v.crossLinked ?? (v.linked ?? true), auto: v.auto || false, audioFXLink:v.audioFXLink === true,
@@ -236,6 +238,19 @@ export function createVideoMixer({state, engine, notify}) {
     }
     return crossPosition(time);
   }
+  const opacityLevels=()=>effectiveVideoOpacity(v,[0,1].map(i=>engine.nodes?.[i]?.level??1));
+  function setOpacity(index,value) {
+    if(disposed)throw new Error('Video mixer was disposed.');videoOpacityIndex(index);
+    if(v.channelOpacityLinked[index])throw new Error('Unlink this Video opacity control before changing it.');
+    if(typeof value!=='number'||!Number.isFinite(value))throw new TypeError('Video opacity must be finite.');
+    v.channelOpacity[index]=Math.max(0,Math.min(1,value));return v.channelOpacity[index];
+  }
+  function setOpacityLinked(index,linked) {
+    if(disposed)throw new Error('Video mixer was disposed.');videoOpacityIndex(index);
+    if(typeof linked!=='boolean')throw new TypeError('Video opacity link must be a boolean.');
+    if(v.channelOpacityLinked[index]&&!linked)v.channelOpacity[index]=opacityLevels()[index];
+    v.channelOpacityLinked[index]=linked;return opacityLevels()[index];
+  }
   function drawRaw(index) {
     const c = raw[index], ctx = c.getContext('2d'), item = slots[index];
     const graphics = karaokeFrames[index];
@@ -277,6 +292,7 @@ export function createVideoMixer({state, engine, notify}) {
         readyState:item.video.readyState, seeking:item.video.seeking} : null),
       loadedImages: [...assets.keys()], karaoke: [0, 1].map(i => karaoke.diagnostics(i)), pipeline: pipeline?.diagnostics(),
       crossfade:directionalFade.diagnostics(), crossLinked:v.crossLinked, videoCross:v.cross,
+      opacity:{levels:opacityLevels(),linked:[...v.channelOpacityLinked],manual:[...v.channelOpacity]},
       recording: recorder?.state === 'recording', recordingQuality:normalizeRecordingQuality(v.recordingQuality),
       captureDimensions:captureSession ? {width:captureSession.lease.width,height:captureSession.lease.height,quality:captureSession.lease.quality} : null,
       captureBytes: result?.size || 0};
@@ -290,6 +306,11 @@ export function createVideoMixer({state, engine, notify}) {
     const status = document.querySelector('#video-pipeline-state');
     if (status) status.textContent = error ? `Video unavailable: ${error}. Reset to retry.` :
       `${v.width}×${v.height} · ${frameId} processed frames · ${lastRenderMs.toFixed(1)} ms CPU submission · independent GPU algorithms; reference equivalence unverified`;
+    if(status&&!error){
+      const unavailable=Object.entries(pipeline?.diagnostics().effects||{}).flatMap(([target,fx])=>
+        (fx.slots||[]).filter(slot=>slot?.reason==='spectrum8-unavailable').map(slot=>`${target} slot ${slot.slot+1}: eight-band audio unavailable; Analyzer bypassed`));
+      if(unavailable.length)status.textContent+=' · '+unavailable.join('; ');
+    }
     const rec = document.querySelector('#video-record-state');
     if (rec) rec.textContent = recorder?.state === 'recording' ? 'Recording processed canvas + browser master' :
       result ? `Capture ready: ${result.size} bytes` : 'Not recording';
@@ -297,6 +318,10 @@ export function createVideoMixer({state, engine, notify}) {
     if(fadeStatus)fadeStatus.textContent=directionalFade.diagnostics().active?'Directional fade in progress':'Directional fade stopped';
     const crossSlider=document.querySelector('#video-cross');
     if(crossSlider&&directionalFade.diagnostics().position!==null&&!v.crossLinked&&!v.auto)crossSlider.value=String(v.cross);
+    opacityLevels().forEach((level,i)=>{
+      const input=document.querySelector('#video-opacity-'+i),output=document.querySelector('#video-opacity-value-'+i);
+      if(input)input.value=String(level);if(output)output.textContent=Math.round(level*100)+'%';
+    });
   }
   function tick(force = false, {render = true} = {}) {
     if (disposed) return;
@@ -342,18 +367,19 @@ export function createVideoMixer({state, engine, notify}) {
         rate:d.rate * (d.reverse ? -1 : 1), generation:d.videoLoadGeneration || 0}));
       const audioTransport = sources => ({playing:sources.some(source => source.playing),
         generation:JSON.stringify(sources.map(({id,generation}) => [id,generation])),sources});
+      const videoLevels=opacityLevels();
       const channels = slots.map((item, i) => ({...(engine.videoAnalysis?.(i) || {audioAvailable:false}),
         audioTransport:audioTransport(audioSources.filter(source => source.id.startsWith(`${i}:`))),
         bpm: (state.decks[i]?.track?.bpm || 120) * Math.abs(state.decks[i]?.rate || 1), rate: (v.linked || item?.kind === 'fallback' || karaokeFrames[i]) && state.decks[i]?.track ?
           (state.decks[i].playing ? state.decks[i].rate * (state.decks[i].reverse ? -1 : 1) : 0) : item?.video.paused ? 0 : item?.video.playbackRate || 0,
         position: (v.linked || item?.kind === 'fallback' || karaokeFrames[i]) && state.decks[i]?.track ? engine.position(state.decks[i]) : item?.video.currentTime || 0,
-        upfader: engine.nodes?.[i]?.level ?? 1, assetId: karaokeFrames[i]?.assetId || (item ? `${item.assetId}:presentation:${presentationGenerations[i]}` : `empty:${i}`)}));
+        upfader: videoLevels[i], assetId: karaokeFrames[i]?.assetId || (item ? `${item.assetId}:presentation:${presentationGenerations[i]}` : `empty:${i}`)}));
       const {output, channels: processed} = pipeline.render(raw, {...v, overlays: resolvedOverlays()}, {
         time, frameId: ++frameId, reducedMotion, channels, audioFXLinks:engine.videoFXLinks?.(),
         master: {...(engine.videoAnalysis?.(4) || {audioAvailable:false}), bpm: channels[0].bpm, audioTransport:audioTransport(audioSources)},
         masterAssetId: channels.map(channel => channel.assetId).join('|'),
         amount: (Math.max(-1, Math.min(1, cross)) + 1)/2,
-        upfaders: v.linked ? channels.map(c => c.upfader) : [1,1],
+        upfaders: videoLevels,
       });
       if (canvas) {
         const ctx = canvas.getContext('2d'); ctx.clearRect(0,0,canvas.width,canvas.height);
@@ -442,7 +468,7 @@ export function createVideoMixer({state, engine, notify}) {
   }
   function configureKaraoke(index, options) {karaoke.configure(index, options); reset(index ? 'right' : 'left');}
   function clearKaraoke(index) {karaoke.clear(index); reset(index ? 'right' : 'left');}
-  return {load, bind, play, setOverlayImage, clearOverlayImage, setResolution, setRecordingQuality, startCrossfade,stopCrossfade, reset, tick,
+  return {load, bind, play, setOverlayImage, clearOverlayImage, setResolution, setRecordingQuality, setOpacity,setOpacityLinked,startCrossfade,stopCrossfade, reset, tick,
     loadKaraoke, configureKaraoke, clearKaraoke, karaokeDiagnostics: index => karaoke.diagnostics(index),
     addMedia, removeMedia, configureMedia, nextMedia, associateVideo, removeVideoAssociation,
     mediaDiagnostics, configureTransitions, nextTransition,

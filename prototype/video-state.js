@@ -1,4 +1,5 @@
 import { normalizeRecordingQuality } from './video-recording.js';
+import { normalizeVideoOpacityState } from './video-opacity.js';
 import { normalizeVideoTreatment } from './video-treatment.js';
 import { videoEffectCatalog } from './video-effects-catalog.js';
 import { videoTransitionCatalog } from './video-transitions.js';
@@ -82,7 +83,7 @@ function sanitized(value,restore) {
   const size = sizes.find(([w,h]) => width === w && height === h) || sizes[0];
   const name = own(value,'transition'), fx = own(value,'fx'), overlays = own(value,'overlays');
   const flags = key => ({enabled:own(own(value,key),'enabled') === true, random:own(own(value,key),'random') === true});
-  return {version:1,width:size[0],height:size[1],transition:transitions.has(name) ? name : 'Crossfade',
+  return {version:1,...normalizeVideoOpacityState(value),width:size[0],height:size[1],transition:transitions.has(name) ? name : 'Crossfade',
     cross:clamp(finite(own(value,'cross'),0),-1,1),auto:own(value,'auto') === true,
     linked:typeof own(value,'linked') === 'boolean' ? own(value,'linked') : true,
     crossLinked:typeof own(value,'crossLinked') === 'boolean' ? own(value,'crossLinked') : typeof own(value,'linked') === 'boolean' ? own(value,'linked') : true,

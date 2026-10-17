@@ -88,8 +88,8 @@ on the selected deck without autoplay. File bytes require reimport after reload.
 Run `video-effects-test.html`, `video-transitions-harness.html`,
 `video-overlays-harness.html`, `video-pipeline-harness.html`, `cdg-harness.html`,
 `karaoke-integration-harness.html` and `video-media-harness.html` for the scoped
-public browser checks. Current results are81/81,65/65,32/32,32/32,21/21,19/19 and
-32/32 respectively. The pipeline actually records and decodes output video/audio;
+public browser checks. Current results are102/102,65/65,32/32,32/32,21/21,19/19 and
+32/32 respectively (the current expanded pipeline suite is33/33). The pipeline actually records and decodes output video/audio;
 requested30fps and720p/1080p canvas size are not sustained/HD capture acceptance.
 See [the current review](../docs/prototype/VIDEO_FUNCTIONAL_REVIEW.md) for reference
 unknowns, retained failures, technical limits and exact main UI evidence. Original
@@ -107,5 +107,13 @@ crossfader link. Use Stop fade to hold the current position; saved endpoint/spee
 link state survives reload. Continuous mix is a separate Open Play extension.
 Run `video-crossfade-harness.html` (11/11) for actual pixels/audio/hidden-panel
 checks. Read [current color/traversal/fade review](../docs/prototype/VIDEO_COLOR_CROSSFADE_REVIEW.md).
-Remaining per-channel opacity links and manual semantics stay explicit gaps;
+Remaining output/workflow controls and other manual semantics stay explicit gaps;
 full parity and native approval remain false.
+
+Real eight-band Analyzer, finite Frame Freeze and bass hue isolation now execute
+with saved Earlier Open Play compatibility. Independent per-channel Video
+opacity/audio links are separate from playback and crossfade links. Run
+`video-spectrum8-harness.html` (17/17) and `video-opacity-harness.html` (13/13).
+Current FX102/102 and assembled pipeline33/33; see
+[executed spectrum/opacity review](../docs/prototype/VIDEO_SPECTRUM_OPACITY_REVIEW.md).
+Reference algorithms, physical compatibility and full parity remain unverified.
