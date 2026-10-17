@@ -303,8 +303,8 @@ export class AudioEngine {
     if(d.track!==lease.track){lease.dispose();return;}
     const position=this.position(d);this.pause(d);d.position=position;this.onProcessing(d);this.onError?.(error);
   }
-  async startForwardKeylock(d, buffers, controller, current) {
-    const track = d.track, old = this.voices.get(d.index), initiallyPlaying = d.playing, oldClock = this.voiceClock(d, this.voices.get(d.index));
+  async startForwardKeylock(d, buffers, controller, current, {positionAt, priorClock} = {}) {
+    const track = d.track, old = this.voices.get(d.index), initiallyPlaying = d.playing, oldClock = priorClock || this.voiceClock(d, this.voices.get(d.index));
     let adapter, committed = false;
     try {
       await this.waitForVoiceRetirement(d.index, controller.signal);
@@ -329,6 +329,8 @@ export class AudioEngine {
       const when = this.ctx.currentTime + lead;
       let position = this.position(d);
       if (initiallyPlaying && old === this.voices.get(d.index)) position = oldClock(when);
+      if (positionAt) position = positionAt(when);
+      if (!Number.isFinite(position) || position < 0 || position > track.duration) throw new RangeError("Invalid synchronized source position.");
       if (position >= track.duration) position = initiallyPlaying ? track.duration : 0;
       const ack = await adapter.start({position, when});
       if (!current()) return;
@@ -340,7 +342,7 @@ export class AudioEngine {
       d.position = ack.position; d.anchorPosition = ack.position; d.anchorTime = ack.when; d.playing = ack.playing;
     } finally {if (!committed) await adapter?.dispose();}
   }
-  async start(d) {
+  async start(d, {positionAt, priorClock} = {}) {
     this.cancelDeckScratchRequest(d);
     if (!d.track) throw new Error("Load a track first.");
     if (d.track.missing || d.track.provider)
@@ -390,7 +392,7 @@ export class AudioEngine {
       const scale = transformed ? tempo : 1;
       if (!current()) return;
       if (transformed && !d.reverse && !d.loop) {
-        await this.startForwardKeylock(d, buffers, controller, current);
+        await this.startForwardKeylock(d, buffers, controller, current, {positionAt, priorClock});
         return;
       }
       if (transformed) {
@@ -412,6 +414,13 @@ export class AudioEngine {
       if (!current()) return;
       if (d.reverse)
         buffers = buffers.map((buffer) => this.reverseBuffer(track.id, buffer));
+      let syncWhen = null;
+      if (positionAt) {
+        syncWhen = this.ctx.currentTime + .03;
+        const aligned = positionAt(syncWhen);
+        if (!Number.isFinite(aligned) || aligned < 0 || aligned >= track.duration) throw new RangeError("Invalid synchronized source position.");
+        d.position = aligned;
+      }
       this.stopSource(d.index, { preserveStemExit: true });
       if (!d.reverse && d.position >= track.duration) d.position = 0;
       const sources = buffers.map((buffer) => {
@@ -450,7 +459,7 @@ export class AudioEngine {
       this.voices.set(d.index, voice);
       this.setCross(this.cross);
       if (stems) this.updateStems(d);
-      const when = this.ctx.currentTime + 0.01;
+      const when = syncWhen ?? this.ctx.currentTime + 0.01;
       d.anchorPosition = d.position;
       d.anchorTime = when;
       d.playing = true;
@@ -481,6 +490,21 @@ export class AudioEngine {
         this.transforms.delete(d.index);
         this.onProcessing(d);
       }
+    }
+  }
+
+  async synchronize(d, {rate, positionAt, priorClock}) {
+    const track = d.track, previousRate = d.rate;
+    let scheduled = false;
+    d.rate = rate;
+    try {
+      await this.start(d, {priorClock, positionAt: when => {const position = positionAt(when); scheduled = true; return position;}});
+      if (!scheduled || d.track !== track || d.rate !== rate || !d.playing)
+        throw new DOMException("Sync preparation superseded.", "AbortError");
+      return {when: d.anchorTime, position: d.anchorPosition, rate};
+    } catch (error) {
+      if (d.track === track && d.rate === rate) d.rate = previousRate;
+      throw error;
     }
   }
 
@@ -520,7 +544,8 @@ export class AudioEngine {
     if (was && (d.reverse ? d.position > 0 : d.position < d.track.duration))
       await this.start(d);
   }
-  async setRate(d, rate) {
+  async setRate(d, rate, {syncInternal = false} = {}) {
+    if (!syncInternal && this.onRateRequest) return this.onRateRequest(d, rate);
     this.cancelDeckScratchRequest(d);
     if (d.stemSlip && d.stemSlip !== "off") {
       const pending = this.stemSlipPending.get(d.index);

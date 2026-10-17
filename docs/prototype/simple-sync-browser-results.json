@@ -1,0 +1,163 @@
+{
+  "startedAt": "2026-10-17T19:57:11.957Z",
+  "completed": true,
+  "scope": "Actual browser app DOM controls and routed stereo audio; controlled fixtures only. No native/hardware/Smart Sync/music quality acceptance.",
+  "criteria": {
+    "maximumPostSyncPhaseErrorSeconds": 0.01,
+    "minimumPreSyncErrorSeconds": 0.03,
+    "minimumPostSyncPairs": 3,
+    "postWindowSeconds": 2
+  },
+  "fixture": {
+    "sampleRate": 48000,
+    "durationSeconds": 30,
+    "bpm": [
+      120,
+      128
+    ],
+    "offsetSeconds": [
+      0.05,
+      0.13
+    ],
+    "pulseSeconds": 0.012,
+    "carrierHz": 900,
+    "amplitude": 0.15
+  },
+  "checks": [
+    "Actual postmaster audio aligned within 10ms after initially mismatched playback",
+    "Pressing Sync again reschedules and remains engaged",
+    "Virtual tempo changes both Simple Sync source rates",
+    "OFF retains current tempo and detaches the secondary from software tempo changes"
+  ],
+  "errors": [],
+  "events": [
+    {
+      "name": "record-start",
+      "audioTime": 0.5050340136054422,
+      "utc": "2026-10-17T19:57:12.454Z"
+    },
+    {
+      "name": "sync-request",
+      "audioTime": 1.8053514739229024,
+      "utc": "2026-10-17T19:57:13.755Z"
+    },
+    {
+      "name": "sync-complete",
+      "audioTime": 2.0317460317460316,
+      "utc": "2026-10-17T19:57:13.985Z"
+    },
+    {
+      "name": "record-stop",
+      "audioTime": 4.6381859410430835,
+      "utc": "2026-10-17T19:57:16.586Z"
+    }
+  ],
+  "sourceBefore": {
+    "app.js": "51e81e4a965c81d7afbbaa9e502cf4960e8005fb613c79bd4dddc2b8c0192860",
+    "engine.js": "073c1eced9b20eefd463099fe92d4d17d961d6f25da79819fdf6b62277d20156",
+    "sync.js": "594d41f6d5470580548894b4b45d25a8f0ec0b48f0806004b5fa6120a058abd6",
+    "simple-sync-harness.js": "cac36adbab72e80526b478d5c3cf0776caa7af9798b5085fd05ad1a86b89f967"
+  },
+  "physicalOutputMuted": true,
+  "synced": [
+    {
+      "rate": 1,
+      "role": "primary",
+      "playing": true
+    },
+    {
+      "rate": 0.9375,
+      "role": "secondary",
+      "playing": true
+    }
+  ],
+  "recording": {
+    "bytes": 42609,
+    "format": "audio/webm;codecs=opus",
+    "sha256": "354cbe320b9a937cc4665482398cfdc95e1e4227d0c7282b28c2a4f427db0f72",
+    "localOriginal": "local-evidence/simple-sync/attempt3-original.webm"
+  },
+  "decoded": {
+    "frames": 179927,
+    "sampleRate": 44100,
+    "channels": 2,
+    "duration": 4.079977324263038
+  },
+  "phase": {
+    "pulseTimes": [
+      [
+        0.04396825396825397,
+        0.543968253968254,
+        1.043968253968254,
+        1.543968253968254,
+        2.043968253968254,
+        2.543968253968254,
+        3.043968253968254,
+        3.543968253968254,
+        4.043968253968254
+      ],
+      [
+        0.135578231292517,
+        0.6043310657596372,
+        1.0730839002267574,
+        2.0434467120181408,
+        2.5434467120181408,
+        3.0434467120181408,
+        3.5434467120181408,
+        4.043446712018141
+      ]
+    ],
+    "pre": [
+      {
+        "left": 0.543968253968254,
+        "errorSeconds": 0.06036281179138325
+      },
+      {
+        "left": 1.043968253968254,
+        "errorSeconds": 0.02911564625850338
+      }
+    ],
+    "post": [
+      {
+        "left": 2.543968253968254,
+        "errorSeconds": 0.0005215419501132246
+      },
+      {
+        "left": 3.043968253968254,
+        "errorSeconds": 0.0005215419501132246
+      },
+      {
+        "left": 3.543968253968254,
+        "errorSeconds": 0.0005215419501132246
+      }
+    ]
+  },
+  "sharedTempo": [
+    {
+      "requested": 1.04,
+      "sourceRate": 1.0399999618530273
+    },
+    {
+      "requested": 0.9750000000000001,
+      "sourceRate": 0.9750000238418579
+    }
+  ],
+  "sourceAfter": {
+    "app.js": "51e81e4a965c81d7afbbaa9e502cf4960e8005fb613c79bd4dddc2b8c0192860",
+    "engine.js": "073c1eced9b20eefd463099fe92d4d17d961d6f25da79819fdf6b62277d20156",
+    "sync.js": "594d41f6d5470580548894b4b45d25a8f0ec0b48f0806004b5fa6120a058abd6",
+    "simple-sync-harness.js": "cac36adbab72e80526b478d5c3cf0776caa7af9798b5085fd05ad1a86b89f967"
+  },
+  "sourceStable": true,
+  "finishedAt": "2026-10-17T19:57:16.614Z",
+  "priorAttempts": [
+    {
+      "path": "local-evidence/simple-sync/attempt1-setup.json",
+      "failure": "Harness asserted async mute too early; no playback or capture"
+    },
+    {
+      "path": "local-evidence/simple-sync/attempt2-rate.json",
+      "failure": "Audio and re-Sync passed; Float32 source property rejected by 1e-9 assertion; source precision assertion corrected to 1e-6. Audio criterion unchanged."
+    }
+  ]
+}
