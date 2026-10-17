@@ -5,6 +5,7 @@ import { getExtendedEffectControls } from "./extended-effects.js";
 import { implementedEffects } from "./effects.js";
 import {createFXTempo,normalizeFXTempoSettings,effectiveFXBPM,fxTempoPolicy} from './fx-tempo.js';
 import {videoSetupField,videoSetupValue,applyVideoSetupSetting,resetVideoSetupSettings} from './video-settings.js';
+import {createAudioOutputSelection} from './audio-output.js';
 import {
   ruleFields,
   ruleOperators,
@@ -38,6 +39,16 @@ export function createPanels(a) {
     learn = false;
   s.fxTempo=normalizeFXTempoSettings(s.fxTempo,s.fx.length);
   const fxTempoClock=createFXTempo({initial:s.fxTempo,count:s.fx.length});
+  const monitorFields=new Set(['Cue Mix','Cue Volume','Master Cue','Split Cue','Output Mode']);
+  const percent=(name,fallback)=>{const n=Number(s.settings[name]);return Number.isFinite(n)?Math.max(0,Math.min(100,n))/100:fallback;};
+  const monitorState=()=>({mix:percent('Cue Mix',.5),volume:percent('Cue Volume',.1),masterCue:s.settings['Master Cue']===true,splitCue:s.settings['Split Cue']===true,mono:s.settings['Output Mode']==='Mono'});
+  engine.setMonitorSettings(monitorState());
+  const audioOutputs=createAudioOutputSelection(engine,{onChange:updateOutputStatus});
+  function updateOutputStatus(value=audioOutputs.snapshot()){
+    const target=$('#audio-output-status');if(!target)return;
+    const route=value.routing;
+    target.textContent=value.lastError||`${value.label} · ${route?.layout||'stereo'} · master ${route?.masterChannels.join('/')||'1/2'} · cue ${route?.cueChannels.length?route.cueChannels.join('/'):'not sent to output'} · cue mix ${Math.round((route?.settings.mix??.5)*100)}% · cue volume ${Math.round((route?.settings.volume??.1)*100)}%${route?.settings.masterCue?' · Master Cue':''}${route?.settings.splitCue?' · Split Cue':''}${route?.physicalMuted?' · MUTED':''}. Physical sockets remain unverified.`;
+  }
   const badge = (text = "SIMULATION", real = false) =>
     `<span class="badge ${real ? "real" : ""}">${text}</span>`;
   const head = (name, label, real = false) =>
@@ -571,6 +582,7 @@ export function createPanels(a) {
         tab
       ]
         .map(([name, type, value]) => {
+          if(name==='Output Device')return `<label class="setting"><span>Output Device</span><button id="choose-real-output">Output selection & channels</button></label>`;
           const field=videoSetupField(name);
           const v = field?videoSetupValue(s.video,name):s.settings[name];
           if (type === "section")
@@ -586,7 +598,7 @@ export function createPanels(a) {
         })
         .join(
           "",
-        )}</div>${sharedVideo?'<p class="muted">Recording resolution, media treatment and fade speed share the live Video controls. Fade speed runs from Slow (10s) to Fast (0.25s), using the existing independent linear duration. Match live output preserves the existing capture default. Other Video output preferences on this tab remain stored simulations.</p><p id="video-setup-status" role="status" aria-live="polite"></p>':''}<div class="form-actions">${tab === "MIDI" ? '<button id="open-mapping">Mapping editor</button>' : ""}${tab === "CD/Vinyl" ? '<button id="open-calibration">Calibration simulation</button>' : ""}${tab === "Library + Display" ? '<button id="open-providers">Provider settings</button>' : ""}${tab === "Audio" ? '<button id="open-devices">Audio routing simulation</button><button id="song-info">Livestream song info</button>' : ""}${tab === "FX" ? '<button id="open-fx">FX catalog & presets</button>' : ""}<button id="reset-settings">Reset this tab</button><button id="save-settings">Close</button></div>`,
+        )}</div>${tab==='Mixer'?'<p class="muted">Cue Mix, Cue Volume, Master Cue, Split Cue and Mono output now control real audio buses. Cue volume10% is unity; higher values add up to12dB. Four-channel routing is applied separately in Devices. Physical headphone/master sockets and exact reference curves remain unverified.</p>':''}${sharedVideo?'<p class="muted">Recording resolution, media treatment and fade speed share the live Video controls. Fade speed runs from Slow (10s) to Fast (0.25s), using the existing independent linear duration. Match live output preserves the existing capture default. Other Video output preferences on this tab remain stored simulations.</p><p id="video-setup-status" role="status" aria-live="polite"></p>':''}<div class="form-actions">${tab === "MIDI" ? '<button id="open-mapping">Mapping editor</button>' : ""}${tab === "CD/Vinyl" ? '<button id="open-calibration">Calibration simulation</button>' : ""}${tab === "Library + Display" ? '<button id="open-providers">Provider settings</button>' : ""}${tab === "Audio" ? '<button id="open-devices">Audio output routing</button><button id="song-info">Livestream song info</button>' : ""}${tab === "FX" ? '<button id="open-fx">FX catalog & presets</button>' : ""}<button id="reset-settings">Reset this tab</button><button id="save-settings">Close</button></div>`,
       (body) => {
         body
           .querySelectorAll("[data-settings-tab]")
@@ -611,6 +623,7 @@ export function createPanels(a) {
               }
               s.settings[input.dataset.setting] =
                 input.type === "checkbox" ? input.checked : input.value;
+              if(monitorFields.has(input.dataset.setting))engine.setMonitorSettings(monitorState());
               persist();
               if (input.dataset.setting === "Library Text Size")
                 $("#tracks").style.fontSize =
@@ -631,6 +644,7 @@ export function createPanels(a) {
           }
           for (const [name, type, v] of settingsSchema[tab])
             if (type !== "section"&&!videoSetupField(name)) s.settings[name] = v;
+          if(tab==='Mixer')engine.setMonitorSettings(monitorState());
           persist();
           settings(tab);
           if(sharedVideo&&s.panel==='video')refresh();
@@ -640,6 +654,7 @@ export function createPanels(a) {
         if ($("#open-providers"))
           $("#open-providers").onclick = () => provider(activeProvider);
         if ($("#open-devices")) $("#open-devices").onclick = hardware;
+        if ($("#choose-real-output")) $("#choose-real-output").onclick = hardware;
         if ($("#song-info"))
           $("#song-info").onclick = () =>
             dialog(
@@ -1415,11 +1430,22 @@ export function createPanels(a) {
         `${badge("SHARING SIMULATION")}<p>Publishing requires an optional service and an explicit user action. This prototype has no backend and publishes nothing.</p><label>Session title <input value="Open Play session"></label><p class="muted">Native/service acceptance: explicit opt-in, connection recovery, correct currently playing metadata, privacy and export.</p>`,
       );
   }
+  function outputRoutingMarkup(){
+    engine.init();const value=audioOutputs.snapshot(),layout=value.routing?.layout||'stereo';
+    return `<div class="device-card"><h3>Audio output · live routing</h3>${badge('REAL AUDIO BUSES · PHYSICAL SOCKETS UNVERIFIED',true)}<div class="form-grid"><label>Output device<select id="audio-output-device" aria-label="Audio output device"><option value="">System default</option>${value.outputs.filter(x=>x.deviceId!=='default').map(x=>`<option value="${esc(x.deviceId)}" ${x.deviceId===value.deviceId?'selected':''}>${esc(x.label)}</option>`).join('')}</select></label><label>Output layout<select id="audio-output-layout"><option value="stereo" ${layout==='stereo'?'selected':''}>Stereo master only</option><option value="four-channel" ${layout==='four-channel'?'selected':''}>Four channels · master + cue</option></select></label><label>Master channels<select id="audio-master-pair">${options(['1–2','3–4'],s.settings['Master Channels']||'1–2')}</select></label><label>Headphone channels<select id="audio-cue-pair">${options(['3–4','1–2'],s.settings['Headphone Channels']||'3–4')}</select></label></div><div class="panel-controls"><button id="audio-output-refresh">Refresh audio outputs</button><button id="audio-output-select" ${value.canSelect?'':'disabled'}>Use selected output</button><button id="audio-output-apply">Apply channels</button><button id="audio-monitor-settings">Cue mix & volume</button></div><p id="audio-output-status" class="muted" role="status" aria-live="polite"></p><p class="muted">Cue buttons feed the headphone bus before the channel level and crossfader. Stereo master mode never folds cue into speakers. Four-channel mode requires an explicitly selected output exposing at least4channels. Output selection returns to stereo master; apply channel pairs afterward. This does not verify a device’s physical sockets or hot-unplug safety.</p></div>`;
+  }
+  function bindOutputRouting(){
+    const showError=error=>{const status=$('#audio-output-status');if(status)status.textContent=error.message;notify(error.message);};
+    $('#audio-output-refresh').onclick=async()=>{try{const selected=$('#audio-output-device').value,outputs=await audioOutputs.list(),element=$('#audio-output-device');if(!element)return;element.innerHTML='<option value="">System default</option>'+outputs.filter(x=>x.deviceId!=='default').map(x=>`<option value="${esc(x.deviceId)}">${esc(x.label)}</option>`).join('');if([...element.options].some(x=>x.value===selected))element.value=selected;updateOutputStatus();}catch(error){showError(error);}};
+    $('#audio-output-select').onclick=async()=>{const button=$('#audio-output-select');button.disabled=true;try{await audioOutputs.select($('#audio-output-device').value);updateOutputStatus();}catch(error){showError(error);}finally{if(button.isConnected)button.disabled=false;}};
+    $('#audio-output-apply').onclick=async()=>{try{const master=$('#audio-master-pair').value,cue=$('#audio-cue-pair').value;await audioOutputs.route($('#audio-output-layout').value,{masterStart:master==='3–4'?2:0,cueStart:cue==='3–4'?2:0});s.settings['Master Channels']=master;s.settings['Headphone Channels']=cue;persist();updateOutputStatus();}catch(error){showError(error);}};
+    $('#audio-monitor-settings').onclick=()=>settings('Mixer');updateOutputStatus();
+  }
   function hardware() {
     const d = s.device;
     dialog(
       "Devices & external control",
-      `${badge("ALL DEVICE STATE BELOW IS SIMULATED")}<div class="device-card"><h3>Hercules DJControl Inpulse 300 MK2</h3><p class="muted">Previously observed USB 06f8:b12f · 4 CoreAudio outputs · 44.1 kHz. Browser-knob response was user-confirmed. This page is not a live hardware monitor.</p><div class="panel-controls"><button id="device-connect">${d.connected ? "Simulate disconnect" : "Simulate reconnect"}</button><button id="device-browser">Simulate browser +1</button><button id="device-led">Toggle LED fixture</button><button id="device-midi">Mapping editor</button><span id="device-status">${d.connected ? "Connected fixture" : "Disconnected fixture"}</span></div></div><div class="device-channels"><div class="device-card"><h3>Audio routes</h3><label class="setting">Master<select>${options(["1–2 → RCA", "3–4 → headphones"], "1–2 → RCA")}</select></label><label class="setting">Cue<select>${options(["3–4 → headphones", "1–2 → RCA"], "3–4 → headphones")}</select></label><button id="route-test">Run route fixture</button><p id="route-result" class="muted">Physical headphones/master separation is unverified. No diagnostic tones are sent.</p></div><div class="device-card"><h3>CDJ / turntable / Phase</h3><label class="setting">Transport<select id="external-type">${options(["DVS turntable", "CDJ HID", "CD timecode", "Phase wireless", "USB storage"], d.type || "DVS turntable")}</select></label><label class="setting">Mode<select id="dvs-mode">${options(["INT", "REL", "ABS", "THRU", "WIR"], d.mode)}</select></label><button id="dvs-drop">Signal dropout</button><button id="dvs-changeover">Changeover</button><button id="dvs-internal">Emergency INT</button></div></div><div class="device-card"><h3>Calibration scope · synthetic</h3><canvas class="scope" id="dvs-scope" width="700" height="125"></canvas><div class="panel-controls"><label>Signal <input id="dvs-signal" type="range" min="0" max="100" value="${d.signal}"></label><label>Noise threshold <input id="dvs-noise" type="range" min="0" max="100" value="${d.noise}"></label><button id="dvs-estimate">Estimate fixture</button><span id="dvs-result" class="muted">No timecode input is captured.</span></div></div><p class="muted">HID display feedback, guide LEDs, full jog/touch data, firmware-dependent mappings, hot plug, clock drift and multi-controller arbitration require native/device tests. Existing mapping and firmware remain untouched.</p>`,
+      `${outputRoutingMarkup()}${badge("EXTERNAL CONTROL FIXTURES BELOW ARE SIMULATED")}<div class="device-card"><h3>Hercules DJControl Inpulse 300 MK2</h3><p class="muted">Previously observed USB 06f8:b12f · 4 CoreAudio outputs · 44.1 kHz. Browser-knob response was user-confirmed. This page is not a live hardware monitor.</p><div class="panel-controls"><button id="device-connect">${d.connected ? "Simulate disconnect" : "Simulate reconnect"}</button><button id="device-browser">Simulate browser +1</button><button id="device-led">Toggle LED fixture</button><button id="device-midi">Mapping editor</button><span id="device-status">${d.connected ? "Connected fixture" : "Disconnected fixture"}</span></div></div><div class="device-channels"><div class="device-card"><h3>CDJ / turntable / Phase</h3><label class="setting">Transport<select id="external-type">${options(["DVS turntable", "CDJ HID", "CD timecode", "Phase wireless", "USB storage"], d.type || "DVS turntable")}</select></label><label class="setting">Mode<select id="dvs-mode">${options(["INT", "REL", "ABS", "THRU", "WIR"], d.mode)}</select></label><button id="dvs-drop">Signal dropout</button><button id="dvs-changeover">Changeover</button><button id="dvs-internal">Emergency INT</button></div></div><div class="device-card"><h3>Calibration scope · synthetic</h3><canvas class="scope" id="dvs-scope" width="700" height="125"></canvas><div class="panel-controls"><label>Signal <input id="dvs-signal" type="range" min="0" max="100" value="${d.signal}"></label><label>Noise threshold <input id="dvs-noise" type="range" min="0" max="100" value="${d.noise}"></label><button id="dvs-estimate">Estimate fixture</button><span id="dvs-result" class="muted">No timecode input is captured.</span></div></div><p class="muted">HID display feedback, guide LEDs, full jog/touch data, firmware-dependent mappings, hot plug, clock drift and multi-controller arbitration require native/device tests. Existing mapping and firmware remain untouched.</p>`,
       () => {
         $("#device-connect").onclick = () => {
           d.connected = !d.connected;
@@ -1439,9 +1465,7 @@ export function createPanels(a) {
             `LED fixture ${d.feedback ? "on" : "off"}; no hardware output sent`;
         };
         $("#device-midi").onclick = midi;
-        $("#route-test").onclick = () =>
-          ($("#route-result").textContent =
-            "Fixture: master → 1/2, cue → 3/4. Physical playback remains UNVERIFIED. Browser sound uses default output.");
+        bindOutputRouting();
         $("#external-type").onchange = (e) => {
           d.type = e.target.value;
           $("#dvs-result").textContent =

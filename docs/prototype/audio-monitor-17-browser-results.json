@@ -1,0 +1,1078 @@
+{
+  "startedAt": "2026-10-17T10:31:36.038Z",
+  "sourceHashes": {
+    "audio-monitor.js": "c41f5566ef36ca6413d2075fef199ccd596e41053d980cadcbb5bee486da8232",
+    "audio-monitor-harness.js": "79906bf32b833af26581620e82fe06c7405b45a6ad7fef2b637e1785120f8984"
+  },
+  "checks": [
+    {
+      "name": "Stereo output contains only master; selected cue never folds into physical stereo",
+      "passed": true,
+      "evidence": {
+        "snapshot": {
+          "settings": {
+            "mix": 0,
+            "volume": 0.1,
+            "masterCue": false,
+            "splitCue": false,
+            "mono": false
+          },
+          "layout": "stereo",
+          "masterChannels": [
+            1,
+            2
+          ],
+          "cueChannels": [],
+          "destinationChannels": 4,
+          "destinationMaximum": 4,
+          "physicalMuted": false,
+          "disposed": false,
+          "cueGain": 1,
+          "scope": "Rendered channel matrix; physical socket mapping and unplug behavior need device tests."
+        },
+        "summary": [
+          {
+            "channel": 1,
+            "frames": 4096,
+            "min": 0.20000000298023224,
+            "max": 0.20000000298023224,
+            "rms": 0.2000000029802316,
+            "nonfinite": 0
+          },
+          {
+            "channel": 2,
+            "frames": 4096,
+            "min": 0.4000000059604645,
+            "max": 0.4000000059604645,
+            "rms": 0.4000000059604632,
+            "nonfinite": 0
+          },
+          {
+            "channel": 3,
+            "frames": 4096,
+            "min": 0,
+            "max": 0,
+            "rms": 0,
+            "nonfinite": 0
+          },
+          {
+            "channel": 4,
+            "frames": 4096,
+            "min": 0,
+            "max": 0,
+            "rms": 0,
+            "nonfinite": 0
+          }
+        ]
+      }
+    },
+    {
+      "name": "Four channels separate stereo master1/2 and selectedcue3/4",
+      "passed": true,
+      "evidence": {
+        "snapshot": {
+          "settings": {
+            "mix": 0,
+            "volume": 0.1,
+            "masterCue": false,
+            "splitCue": false,
+            "mono": false
+          },
+          "layout": "four-channel",
+          "masterChannels": [
+            1,
+            2
+          ],
+          "cueChannels": [
+            3,
+            4
+          ],
+          "destinationChannels": 4,
+          "destinationMaximum": 4,
+          "physicalMuted": false,
+          "disposed": false,
+          "cueGain": 1,
+          "scope": "Rendered channel matrix; physical socket mapping and unplug behavior need device tests."
+        },
+        "summary": [
+          {
+            "channel": 1,
+            "frames": 4096,
+            "min": 0.20000000298023224,
+            "max": 0.20000000298023224,
+            "rms": 0.2000000029802316,
+            "nonfinite": 0
+          },
+          {
+            "channel": 2,
+            "frames": 4096,
+            "min": 0.4000000059604645,
+            "max": 0.4000000059604645,
+            "rms": 0.4000000059604632,
+            "nonfinite": 0
+          },
+          {
+            "channel": 3,
+            "frames": 4096,
+            "min": 0.10000000149011612,
+            "max": 0.10000000149011612,
+            "rms": 0.1000000014901158,
+            "nonfinite": 0
+          },
+          {
+            "channel": 4,
+            "frames": 4096,
+            "min": 0.30000001192092896,
+            "max": 0.30000001192092896,
+            "rms": 0.300000011920938,
+            "nonfinite": 0
+          }
+        ]
+      }
+    },
+    {
+      "name": "Unselected second deck never appears in cue",
+      "passed": true,
+      "evidence": {
+        "snapshot": {
+          "settings": {
+            "mix": 0,
+            "volume": 0.1,
+            "masterCue": false,
+            "splitCue": false,
+            "mono": false
+          },
+          "layout": "four-channel",
+          "masterChannels": [
+            1,
+            2
+          ],
+          "cueChannels": [
+            3,
+            4
+          ],
+          "destinationChannels": 4,
+          "destinationMaximum": 4,
+          "physicalMuted": false,
+          "disposed": false,
+          "cueGain": 1,
+          "scope": "Rendered channel matrix; physical socket mapping and unplug behavior need device tests."
+        },
+        "summary": [
+          {
+            "channel": 1,
+            "frames": 4096,
+            "min": 0.20000000298023224,
+            "max": 0.20000000298023224,
+            "rms": 0.2000000029802316,
+            "nonfinite": 0
+          },
+          {
+            "channel": 2,
+            "frames": 4096,
+            "min": 0.4000000059604645,
+            "max": 0.4000000059604645,
+            "rms": 0.4000000059604632,
+            "nonfinite": 0
+          },
+          {
+            "channel": 3,
+            "frames": 4096,
+            "min": 0.5,
+            "max": 0.5,
+            "rms": 0.5,
+            "nonfinite": 0
+          },
+          {
+            "channel": 4,
+            "frames": 4096,
+            "min": 0.699999988079071,
+            "max": 0.699999988079071,
+            "rms": 0.6999999880790958,
+            "nonfinite": 0
+          }
+        ]
+      }
+    },
+    {
+      "name": "Multiple selected cue decks sum without changing master",
+      "passed": true,
+      "evidence": {
+        "snapshot": {
+          "settings": {
+            "mix": 0,
+            "volume": 0.1,
+            "masterCue": false,
+            "splitCue": false,
+            "mono": false
+          },
+          "layout": "four-channel",
+          "masterChannels": [
+            1,
+            2
+          ],
+          "cueChannels": [
+            3,
+            4
+          ],
+          "destinationChannels": 4,
+          "destinationMaximum": 4,
+          "physicalMuted": false,
+          "disposed": false,
+          "cueGain": 1,
+          "scope": "Rendered channel matrix; physical socket mapping and unplug behavior need device tests."
+        },
+        "summary": [
+          {
+            "channel": 1,
+            "frames": 4096,
+            "min": 0.20000000298023224,
+            "max": 0.20000000298023224,
+            "rms": 0.2000000029802316,
+            "nonfinite": 0
+          },
+          {
+            "channel": 2,
+            "frames": 4096,
+            "min": 0.4000000059604645,
+            "max": 0.4000000059604645,
+            "rms": 0.4000000059604632,
+            "nonfinite": 0
+          },
+          {
+            "channel": 3,
+            "frames": 4096,
+            "min": 0.6000000238418579,
+            "max": 0.6000000238418579,
+            "rms": 0.600000023841876,
+            "nonfinite": 0
+          },
+          {
+            "channel": 4,
+            "frames": 4096,
+            "min": 1,
+            "max": 1,
+            "rms": 1,
+            "nonfinite": 0
+          }
+        ]
+      }
+    },
+    {
+      "name": "Cue trim changes only selected cue bus",
+      "passed": true,
+      "evidence": {
+        "snapshot": {
+          "settings": {
+            "mix": 0,
+            "volume": 0.1,
+            "masterCue": false,
+            "splitCue": false,
+            "mono": false
+          },
+          "layout": "four-channel",
+          "masterChannels": [
+            1,
+            2
+          ],
+          "cueChannels": [
+            3,
+            4
+          ],
+          "destinationChannels": 4,
+          "destinationMaximum": 4,
+          "physicalMuted": false,
+          "disposed": false,
+          "cueGain": 1,
+          "scope": "Rendered channel matrix; physical socket mapping and unplug behavior need device tests."
+        },
+        "summary": [
+          {
+            "channel": 1,
+            "frames": 4096,
+            "min": 0.20000000298023224,
+            "max": 0.20000000298023224,
+            "rms": 0.2000000029802316,
+            "nonfinite": 0
+          },
+          {
+            "channel": 2,
+            "frames": 4096,
+            "min": 0.4000000059604645,
+            "max": 0.4000000059604645,
+            "rms": 0.4000000059604632,
+            "nonfinite": 0
+          },
+          {
+            "channel": 3,
+            "frames": 4096,
+            "min": 0.05000000074505806,
+            "max": 0.05000000074505806,
+            "rms": 0.0500000007450579,
+            "nonfinite": 0
+          },
+          {
+            "channel": 4,
+            "frames": 4096,
+            "min": 0.15000000596046448,
+            "max": 0.15000000596046448,
+            "rms": 0.150000005960469,
+            "nonfinite": 0
+          }
+        ]
+      }
+    },
+    {
+      "name": "Cue/master mix uses actual stereo bus signals",
+      "passed": true,
+      "evidence": {
+        "snapshot": {
+          "settings": {
+            "mix": 0.25,
+            "volume": 0.1,
+            "masterCue": false,
+            "splitCue": false,
+            "mono": false
+          },
+          "layout": "four-channel",
+          "masterChannels": [
+            1,
+            2
+          ],
+          "cueChannels": [
+            3,
+            4
+          ],
+          "destinationChannels": 4,
+          "destinationMaximum": 4,
+          "physicalMuted": false,
+          "disposed": false,
+          "cueGain": 1,
+          "scope": "Rendered channel matrix; physical socket mapping and unplug behavior need device tests."
+        },
+        "summary": [
+          {
+            "channel": 1,
+            "frames": 4096,
+            "min": 0.20000000298023224,
+            "max": 0.20000000298023224,
+            "rms": 0.2000000029802316,
+            "nonfinite": 0
+          },
+          {
+            "channel": 2,
+            "frames": 4096,
+            "min": 0.4000000059604645,
+            "max": 0.4000000059604645,
+            "rms": 0.4000000059604632,
+            "nonfinite": 0
+          },
+          {
+            "channel": 3,
+            "frames": 4096,
+            "min": 0.125,
+            "max": 0.125,
+            "rms": 0.125,
+            "nonfinite": 0
+          },
+          {
+            "channel": 4,
+            "frames": 4096,
+            "min": 0.32500001788139343,
+            "max": 0.32500001788139343,
+            "rms": 0.3250000178814075,
+            "nonfinite": 0
+          }
+        ]
+      }
+    },
+    {
+      "name": "Full master monitoring excludes cue bus",
+      "passed": true,
+      "evidence": {
+        "snapshot": {
+          "settings": {
+            "mix": 1,
+            "volume": 0.1,
+            "masterCue": false,
+            "splitCue": false,
+            "mono": false
+          },
+          "layout": "four-channel",
+          "masterChannels": [
+            1,
+            2
+          ],
+          "cueChannels": [
+            3,
+            4
+          ],
+          "destinationChannels": 4,
+          "destinationMaximum": 4,
+          "physicalMuted": false,
+          "disposed": false,
+          "cueGain": 1,
+          "scope": "Rendered channel matrix; physical socket mapping and unplug behavior need device tests."
+        },
+        "summary": [
+          {
+            "channel": 1,
+            "frames": 4096,
+            "min": 0.20000000298023224,
+            "max": 0.20000000298023224,
+            "rms": 0.2000000029802316,
+            "nonfinite": 0
+          },
+          {
+            "channel": 2,
+            "frames": 4096,
+            "min": 0.4000000059604645,
+            "max": 0.4000000059604645,
+            "rms": 0.4000000059604632,
+            "nonfinite": 0
+          },
+          {
+            "channel": 3,
+            "frames": 4096,
+            "min": 0.20000000298023224,
+            "max": 0.20000000298023224,
+            "rms": 0.2000000029802316,
+            "nonfinite": 0
+          },
+          {
+            "channel": 4,
+            "frames": 4096,
+            "min": 0.4000000059604645,
+            "max": 0.4000000059604645,
+            "rms": 0.4000000059604632,
+            "nonfinite": 0
+          }
+        ]
+      }
+    },
+    {
+      "name": "Master Cue overrides mix and Split Cue to master-only stereo",
+      "passed": true,
+      "evidence": {
+        "snapshot": {
+          "settings": {
+            "mix": 0,
+            "volume": 0.1,
+            "masterCue": true,
+            "splitCue": true,
+            "mono": false
+          },
+          "layout": "four-channel",
+          "masterChannels": [
+            1,
+            2
+          ],
+          "cueChannels": [
+            3,
+            4
+          ],
+          "destinationChannels": 4,
+          "destinationMaximum": 4,
+          "physicalMuted": false,
+          "disposed": false,
+          "cueGain": 1,
+          "scope": "Rendered channel matrix; physical socket mapping and unplug behavior need device tests."
+        },
+        "summary": [
+          {
+            "channel": 1,
+            "frames": 4096,
+            "min": 0.20000000298023224,
+            "max": 0.20000000298023224,
+            "rms": 0.2000000029802316,
+            "nonfinite": 0
+          },
+          {
+            "channel": 2,
+            "frames": 4096,
+            "min": 0.4000000059604645,
+            "max": 0.4000000059604645,
+            "rms": 0.4000000059604632,
+            "nonfinite": 0
+          },
+          {
+            "channel": 3,
+            "frames": 4096,
+            "min": 0.20000000298023224,
+            "max": 0.20000000298023224,
+            "rms": 0.2000000029802316,
+            "nonfinite": 0
+          },
+          {
+            "channel": 4,
+            "frames": 4096,
+            "min": 0.4000000059604645,
+            "max": 0.4000000059604645,
+            "rms": 0.4000000059604632,
+            "nonfinite": 0
+          }
+        ]
+      }
+    },
+    {
+      "name": "Split Cue puts averagedcue left and averagedmaster right",
+      "passed": true,
+      "evidence": {
+        "snapshot": {
+          "settings": {
+            "mix": 0.5,
+            "volume": 0.1,
+            "masterCue": false,
+            "splitCue": true,
+            "mono": false
+          },
+          "layout": "four-channel",
+          "masterChannels": [
+            1,
+            2
+          ],
+          "cueChannels": [
+            3,
+            4
+          ],
+          "destinationChannels": 4,
+          "destinationMaximum": 4,
+          "physicalMuted": false,
+          "disposed": false,
+          "cueGain": 1,
+          "scope": "Rendered channel matrix; physical socket mapping and unplug behavior need device tests."
+        },
+        "summary": [
+          {
+            "channel": 1,
+            "frames": 4096,
+            "min": 0.20000000298023224,
+            "max": 0.20000000298023224,
+            "rms": 0.2000000029802316,
+            "nonfinite": 0
+          },
+          {
+            "channel": 2,
+            "frames": 4096,
+            "min": 0.4000000059604645,
+            "max": 0.4000000059604645,
+            "rms": 0.4000000059604632,
+            "nonfinite": 0
+          },
+          {
+            "channel": 3,
+            "frames": 4096,
+            "min": 0.10000000149011612,
+            "max": 0.10000000149011612,
+            "rms": 0.1000000014901158,
+            "nonfinite": 0
+          },
+          {
+            "channel": 4,
+            "frames": 4096,
+            "min": 0.15000000596046448,
+            "max": 0.15000000596046448,
+            "rms": 0.150000005960469,
+            "nonfinite": 0
+          }
+        ]
+      }
+    },
+    {
+      "name": "Mono master uses both source channels without changing cue",
+      "passed": true,
+      "evidence": {
+        "snapshot": {
+          "settings": {
+            "mix": 0,
+            "volume": 0.1,
+            "masterCue": false,
+            "splitCue": false,
+            "mono": true
+          },
+          "layout": "four-channel",
+          "masterChannels": [
+            1,
+            2
+          ],
+          "cueChannels": [
+            3,
+            4
+          ],
+          "destinationChannels": 4,
+          "destinationMaximum": 4,
+          "physicalMuted": false,
+          "disposed": false,
+          "cueGain": 1,
+          "scope": "Rendered channel matrix; physical socket mapping and unplug behavior need device tests."
+        },
+        "summary": [
+          {
+            "channel": 1,
+            "frames": 4096,
+            "min": 0.30000001192092896,
+            "max": 0.30000001192092896,
+            "rms": 0.300000011920938,
+            "nonfinite": 0
+          },
+          {
+            "channel": 2,
+            "frames": 4096,
+            "min": 0.30000001192092896,
+            "max": 0.30000001192092896,
+            "rms": 0.300000011920938,
+            "nonfinite": 0
+          },
+          {
+            "channel": 3,
+            "frames": 4096,
+            "min": 0.10000000149011612,
+            "max": 0.10000000149011612,
+            "rms": 0.1000000014901158,
+            "nonfinite": 0
+          },
+          {
+            "channel": 4,
+            "frames": 4096,
+            "min": 0.30000001192092896,
+            "max": 0.30000001192092896,
+            "rms": 0.300000011920938,
+            "nonfinite": 0
+          }
+        ]
+      }
+    },
+    {
+      "name": "Cue volume0 silences only headphone bus",
+      "passed": true,
+      "evidence": {
+        "snapshot": {
+          "settings": {
+            "mix": 0,
+            "volume": 0,
+            "masterCue": false,
+            "splitCue": false,
+            "mono": false
+          },
+          "layout": "four-channel",
+          "masterChannels": [
+            1,
+            2
+          ],
+          "cueChannels": [
+            3,
+            4
+          ],
+          "destinationChannels": 4,
+          "destinationMaximum": 4,
+          "physicalMuted": false,
+          "disposed": false,
+          "cueGain": 0,
+          "scope": "Rendered channel matrix; physical socket mapping and unplug behavior need device tests."
+        },
+        "summary": [
+          {
+            "channel": 1,
+            "frames": 4096,
+            "min": 0.20000000298023224,
+            "max": 0.20000000298023224,
+            "rms": 0.2000000029802316,
+            "nonfinite": 0
+          },
+          {
+            "channel": 2,
+            "frames": 4096,
+            "min": 0.4000000059604645,
+            "max": 0.4000000059604645,
+            "rms": 0.4000000059604632,
+            "nonfinite": 0
+          },
+          {
+            "channel": 3,
+            "frames": 4096,
+            "min": 0,
+            "max": 0,
+            "rms": 0,
+            "nonfinite": 0
+          },
+          {
+            "channel": 4,
+            "frames": 4096,
+            "min": 0,
+            "max": 0,
+            "rms": 0,
+            "nonfinite": 0
+          }
+        ]
+      }
+    },
+    {
+      "name": "Cue volume100 applies12dB relative to unity10percent",
+      "passed": true,
+      "evidence": {
+        "snapshot": {
+          "settings": {
+            "mix": 0,
+            "volume": 1,
+            "masterCue": false,
+            "splitCue": false,
+            "mono": false
+          },
+          "layout": "four-channel",
+          "masterChannels": [
+            1,
+            2
+          ],
+          "cueChannels": [
+            3,
+            4
+          ],
+          "destinationChannels": 4,
+          "destinationMaximum": 4,
+          "physicalMuted": false,
+          "disposed": false,
+          "cueGain": 3.9810717055349722,
+          "scope": "Rendered channel matrix; physical socket mapping and unplug behavior need device tests."
+        },
+        "summary": [
+          {
+            "channel": 1,
+            "frames": 4096,
+            "min": 0.20000000298023224,
+            "max": 0.20000000298023224,
+            "rms": 0.2000000029802316,
+            "nonfinite": 0
+          },
+          {
+            "channel": 2,
+            "frames": 4096,
+            "min": 0.4000000059604645,
+            "max": 0.4000000059604645,
+            "rms": 0.4000000059604632,
+            "nonfinite": 0
+          },
+          {
+            "channel": 3,
+            "frames": 4096,
+            "min": 0.3981071710586548,
+            "max": 0.3981071710586548,
+            "rms": 0.39810717105864046,
+            "nonfinite": 0
+          },
+          {
+            "channel": 4,
+            "frames": 4096,
+            "min": 1.1943215131759644,
+            "max": 1.1943215131759644,
+            "rms": 1.1943215131760203,
+            "nonfinite": 0
+          }
+        ]
+      }
+    },
+    {
+      "name": "Swapped stereo channel pairs keep buses isolated",
+      "passed": true,
+      "evidence": {
+        "snapshot": {
+          "settings": {
+            "mix": 0,
+            "volume": 0.1,
+            "masterCue": false,
+            "splitCue": false,
+            "mono": false
+          },
+          "layout": "four-channel",
+          "masterChannels": [
+            3,
+            4
+          ],
+          "cueChannels": [
+            1,
+            2
+          ],
+          "destinationChannels": 4,
+          "destinationMaximum": 4,
+          "physicalMuted": false,
+          "disposed": false,
+          "cueGain": 1,
+          "scope": "Rendered channel matrix; physical socket mapping and unplug behavior need device tests."
+        },
+        "summary": [
+          {
+            "channel": 1,
+            "frames": 4096,
+            "min": 0.10000000149011612,
+            "max": 0.10000000149011612,
+            "rms": 0.1000000014901158,
+            "nonfinite": 0
+          },
+          {
+            "channel": 2,
+            "frames": 4096,
+            "min": 0.30000001192092896,
+            "max": 0.30000001192092896,
+            "rms": 0.300000011920938,
+            "nonfinite": 0
+          },
+          {
+            "channel": 3,
+            "frames": 4096,
+            "min": 0.20000000298023224,
+            "max": 0.20000000298023224,
+            "rms": 0.2000000029802316,
+            "nonfinite": 0
+          },
+          {
+            "channel": 4,
+            "frames": 4096,
+            "min": 0.4000000059604645,
+            "max": 0.4000000059604645,
+            "rms": 0.4000000059604632,
+            "nonfinite": 0
+          }
+        ]
+      }
+    },
+    {
+      "name": "Repeated layout changes leave exactly one master and cue route",
+      "passed": true,
+      "evidence": {
+        "snapshot": {
+          "settings": {
+            "mix": 0,
+            "volume": 0.1,
+            "masterCue": false,
+            "splitCue": false,
+            "mono": false
+          },
+          "layout": "four-channel",
+          "masterChannels": [
+            1,
+            2
+          ],
+          "cueChannels": [
+            3,
+            4
+          ],
+          "destinationChannels": 4,
+          "destinationMaximum": 4,
+          "physicalMuted": false,
+          "disposed": false,
+          "cueGain": 1,
+          "scope": "Rendered channel matrix; physical socket mapping and unplug behavior need device tests."
+        },
+        "summary": [
+          {
+            "channel": 1,
+            "frames": 4096,
+            "min": 0.20000000298023224,
+            "max": 0.20000000298023224,
+            "rms": 0.2000000029802316,
+            "nonfinite": 0
+          },
+          {
+            "channel": 2,
+            "frames": 4096,
+            "min": 0.4000000059604645,
+            "max": 0.4000000059604645,
+            "rms": 0.4000000059604632,
+            "nonfinite": 0
+          },
+          {
+            "channel": 3,
+            "frames": 4096,
+            "min": 0.10000000149011612,
+            "max": 0.10000000149011612,
+            "rms": 0.1000000014901158,
+            "nonfinite": 0
+          },
+          {
+            "channel": 4,
+            "frames": 4096,
+            "min": 0.30000001192092896,
+            "max": 0.30000001192092896,
+            "rms": 0.300000011920938,
+            "nonfinite": 0
+          }
+        ]
+      }
+    },
+    {
+      "name": "Physical mute silences all output without deleting cue settings",
+      "passed": true,
+      "evidence": {
+        "snapshot": {
+          "settings": {
+            "mix": 0,
+            "volume": 0.1,
+            "masterCue": false,
+            "splitCue": false,
+            "mono": false
+          },
+          "layout": "four-channel",
+          "masterChannels": [
+            1,
+            2
+          ],
+          "cueChannels": [
+            3,
+            4
+          ],
+          "destinationChannels": 4,
+          "destinationMaximum": 4,
+          "physicalMuted": false,
+          "disposed": false,
+          "cueGain": 1,
+          "scope": "Rendered channel matrix; physical socket mapping and unplug behavior need device tests."
+        },
+        "summary": [
+          {
+            "channel": 1,
+            "frames": 4096,
+            "min": 0,
+            "max": 0,
+            "rms": 0,
+            "nonfinite": 0
+          },
+          {
+            "channel": 2,
+            "frames": 4096,
+            "min": 0,
+            "max": 0,
+            "rms": 0,
+            "nonfinite": 0
+          },
+          {
+            "channel": 3,
+            "frames": 4096,
+            "min": 0,
+            "max": 0,
+            "rms": 0,
+            "nonfinite": 0
+          },
+          {
+            "channel": 4,
+            "frames": 4096,
+            "min": 0,
+            "max": 0,
+            "rms": 0,
+            "nonfinite": 0
+          }
+        ]
+      }
+    },
+    {
+      "name": "Terminal cleanup preserves an independent existing master connection",
+      "passed": true,
+      "evidence": {
+        "snapshot": {
+          "settings": {
+            "mix": 0,
+            "volume": 0.1,
+            "masterCue": false,
+            "splitCue": false,
+            "mono": false
+          },
+          "layout": "four-channel",
+          "masterChannels": [
+            1,
+            2
+          ],
+          "cueChannels": [
+            3,
+            4
+          ],
+          "destinationChannels": 4,
+          "destinationMaximum": 4,
+          "physicalMuted": false,
+          "disposed": true,
+          "cueGain": 1,
+          "scope": "Rendered channel matrix; physical socket mapping and unplug behavior need device tests."
+        },
+        "summary": [
+          {
+            "channel": 1,
+            "frames": 4096,
+            "min": 0.20000000298023224,
+            "max": 0.20000000298023224,
+            "rms": 0.2000000029802316,
+            "nonfinite": 0
+          },
+          {
+            "channel": 2,
+            "frames": 4096,
+            "min": 0.4000000059604645,
+            "max": 0.4000000059604645,
+            "rms": 0.4000000059604632,
+            "nonfinite": 0
+          },
+          {
+            "channel": 3,
+            "frames": 4096,
+            "min": 0,
+            "max": 0,
+            "rms": 0,
+            "nonfinite": 0
+          },
+          {
+            "channel": 4,
+            "frames": 4096,
+            "min": 0,
+            "max": 0,
+            "rms": 0,
+            "nonfinite": 0
+          }
+        ]
+      }
+    },
+    {
+      "name": "Actual two-channel destination rejects quad and keeps prior stereo route",
+      "passed": true,
+      "evidence": {
+        "snapshot": {
+          "settings": {
+            "mix": 0,
+            "volume": 0.1,
+            "masterCue": false,
+            "splitCue": false,
+            "mono": false
+          },
+          "layout": "stereo",
+          "masterChannels": [
+            1,
+            2
+          ],
+          "cueChannels": [],
+          "destinationChannels": 2,
+          "destinationMaximum": 2,
+          "physicalMuted": false,
+          "disposed": false,
+          "cueGain": 1,
+          "scope": "Rendered channel matrix; physical socket mapping and unplug behavior need device tests."
+        },
+        "summary": [
+          {
+            "channel": 1,
+            "frames": 4096,
+            "min": 0.20000000298023224,
+            "max": 0.20000000298023224,
+            "rms": 0.2000000029802316,
+            "nonfinite": 0
+          },
+          {
+            "channel": 2,
+            "frames": 4096,
+            "min": 0.4000000059604645,
+            "max": 0.4000000059604645,
+            "rms": 0.4000000059604632,
+            "nonfinite": 0
+          }
+        ]
+      }
+    }
+  ],
+  "scope": "Actual OfflineAudioContext PCM,4096frames perchannel percase. Physical output untouched. No real device selection/unplug/Serato sonic equivalence.",
+  "passed": 17,
+  "failed": 0
+}

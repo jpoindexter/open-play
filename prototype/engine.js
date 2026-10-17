@@ -12,6 +12,7 @@ import { prepareStemSlip, createStemSlipTransport } from "./stem-slip.js";
 import { createVideoAnalysis } from "./video-analysis.js";
 import { describeAudioVideoLinks } from "./video-audio-fx-state.js";
 import { effectiveFXBPM, normalizeFXTempoSettings } from "./fx-tempo.js";
+import {createAudioMonitor,monitorSettings as normalizeMonitorSettings} from './audio-monitor.js';
 export class AudioEngine {
   constructor() {
     this.ctx = null;
@@ -22,6 +23,7 @@ export class AudioEngine {
     this.chunks = [];
     this.cross = 0;
     this.masterLevel = 0.55;
+    this.monitorSettings=normalizeMonitorSettings();
     this.onEnd = () => {};
     this.onSampleEnd = () => {};
     this.reversed = new WeakMap();
@@ -76,7 +78,6 @@ export class AudioEngine {
     this.analyser.fftSize = 256;
     this.destination = this.ctx.createMediaStreamDestination();
     this.master.connect(this.analyser);
-    this.analyser.connect(this.ctx.destination);
     this.master.connect(this.destination);
     for (let i = 0; i < 4; i++) {
       const input = this.ctx.createGain(),
@@ -84,7 +85,8 @@ export class AudioEngine {
         mid = this.ctx.createBiquadFilter(),
         high = this.ctx.createBiquadFilter(),
         filter = this.ctx.createBiquadFilter(),
-        gain = this.ctx.createGain();
+        gain = this.ctx.createGain(),monitorTap=this.ctx.createGain(),
+        cueTap=this.ctx.createGain(),ordinaryCue=this.ctx.createGain();
       low.type = "lowshelf";
       low.frequency.value = 250;
       mid.type = "peaking";
@@ -97,7 +99,8 @@ export class AudioEngine {
       input.connect(low);
       low.connect(mid);
       mid.connect(high);
-      high.connect(gain);
+      high.connect(monitorTap);monitorTap.connect(gain);
+      monitorTap.connect(ordinaryCue);ordinaryCue.connect(cueTap);
       gain.connect(this.masterInput);
       this.nodes.push({
         input,
@@ -106,10 +109,13 @@ export class AudioEngine {
         high,
         filter,
         gain,
+        monitorTap,cueTap,ordinaryCue,
+        pfl:false,eqTargets:{low:0,mid:0,high:0},
         level: 0.8,
         trim: 1,
       });
     }
+    this.audioMonitor=createAudioMonitor(this.ctx,{master:this.analyser,deckTaps:this.nodes.map(n=>n.cueTap),settings:this.monitorSettings});
     this.setCross(0);
     if (this.fxState) this.configureFX(...this.fxState);
   }
@@ -426,7 +432,7 @@ export class AudioEngine {
         ? sources.map((_, index) => {
             const gain = this.ctx.createGain();
             gain.gain.value = 0;
-            gain.connect(index === 0 ? this.nodes[d.index].input : stemState.routes[index - 1]);
+            gain.connect(index === 0 ? this.nodes[d.index].input : (stemState.inputs||stemState.routes)[index - 1]);
             return gain;
           })
         : [];
@@ -626,6 +632,7 @@ export class AudioEngine {
       const side =
           i % 2 ? Math.min(1, 1 + this.cross) : Math.min(1, 1 - this.cross),
         n = this.nodes[i];
+      this.audioMonitor?.setPFL(i,!!n.pfl,n.trim);
       n.gain.gain.setTargetAtTime(
         (this.voices.get(i)?.stemSlipTransport ? 1 : side) * n.level * n.trim,
         this.ctx.currentTime,
@@ -633,11 +640,23 @@ export class AudioEngine {
       );
       const split = this.voices.get(i)?.stemSlipTransport;
       const mode = this.deckStates.get(i)?.stemSlip;
+      // Stem Slip applies the crossfader to selected stems before the main EQ.
+      // Its cue strip receives the same stem/exit mix before those route gains.
+      n.ordinaryCue?.gain.setTargetAtTime(split?0:1,this.ctx.currentTime,.003);
+      n.stemMonitor?.gate.gain.setTargetAtTime(split?1:0,this.ctx.currentTime,.003);
       this.stemStates.get(i)?.routes.forEach((route, stem) => {
         const selected = mode === "vocal" ? stem === 0 : stem > 0;
         route.gain.setTargetAtTime(split && selected ? side : 1, this.ctx.currentTime, .003);
       });
     }
+  }
+  setPFL(index,on){
+    if(!Number.isInteger(index)||index<0||index>3||typeof on!=='boolean')throw new TypeError('Cue needs a deck and boolean state.');
+    this.init();this.nodes[index].pfl=on;this.audioMonitor.setPFL(index,on,this.nodes[index].trim);
+  }
+  setMonitorSettings(next){
+    const value=normalizeMonitorSettings({...this.monitorSettings,...next});
+    this.audioMonitor?.update(value);this.monitorSettings=value;return {...value};
   }
   mix(i, kind, value) {
     this.init();
@@ -646,8 +665,11 @@ export class AudioEngine {
     if (kind === "level" || kind === "trim") {
       n[kind] = value;
       this.setCross(this.cross);
-    } else if (["low", "mid", "high"].includes(kind))
+    } else if (["low", "mid", "high"].includes(kind)) {
+      (n.eqTargets||=( {} ))[kind]=value;
       n[kind].gain.setTargetAtTime(value, this.ctx.currentTime, 0.015);
+      n.stemMonitor?.[kind].gain.setTargetAtTime(value,this.ctx.currentTime,.015);
+    }
     else if (kind === "filter") {
       n.channelValue = value;
       this.applyChannelFX(i).catch((error) => this.onError?.(error));
@@ -662,8 +684,14 @@ export class AudioEngine {
   }
   async applyChannelFX(i) {
     await this.effectsReady;
-    const n = this.nodes[i],
-      value = n.channelValue || 0,
+    const n=this.nodes[i];
+    for(const strip of [n,n.stemMonitor].filter(Boolean)){
+      if(strip!==n){strip.channelValue=n.channelValue;strip.channelBpm=n.channelBpm;}
+      this.applyChannelFXStrip(strip);
+    }
+  }
+  applyChannelFXStrip(n) {
+    const value = n.channelValue || 0,
       name = this.channelFXType;
     if (name === "Filter") {
       n.channelEffect?.dispose();
@@ -671,11 +699,11 @@ export class AudioEngine {
       n.high.disconnect();
       n.filter.disconnect();
       if (value === 0) {
-        n.high.connect(n.gain);
+        n.high.connect(n.monitorTap||n.gain);
         return;
       }
       n.high.connect(n.filter);
-      n.filter.connect(n.gain);
+      n.filter.connect(n.monitorTap||n.gain);
       n.filter.type = value < 0 ? "lowpass" : "highpass";
       n.filter.frequency.setTargetAtTime(
         value < 0
@@ -699,7 +727,7 @@ export class AudioEngine {
     n.filter.disconnect();
     n.channelEffect = createEffect(this.ctx, spec, n.channelBpm || 120);
     n.high.connect(n.channelEffect.input);
-    n.channelEffect.output.connect(n.gain);
+    n.channelEffect.output.connect(n.monitorTap||n.gain);
   }
 
   updateFXBPMs(bpms) {
@@ -911,12 +939,27 @@ export class AudioEngine {
       if (was) await this.start(d);
     }
   }
+  ensureStemMonitor(index) {
+    const n=this.nodes[index];
+    if(!this.audioMonitor||!n.cueTap||n.stemMonitor)return;
+    const input=this.ctx.createGain(),low=this.ctx.createBiquadFilter(),mid=this.ctx.createBiquadFilter(),high=this.ctx.createBiquadFilter(),filter=this.ctx.createBiquadFilter(),gate=this.ctx.createGain();
+    for(const [key,node]of Object.entries({low,mid,high,filter})){
+      const original=n[key];node.type=original.type;
+      for(const parameter of ['frequency','Q','gain'])node[parameter].value=original[parameter].value;
+      if(key!=='filter'&&Number.isFinite(n.eqTargets?.[key]))node.gain.setTargetAtTime(n.eqTargets[key],this.ctx.currentTime,.015);
+    }
+    gate.gain.value=0;input.connect(low);low.connect(mid);mid.connect(high);high.connect(gate);gate.connect(n.cueTap);
+    n.stemMonitor={input,low,mid,high,filter,gate,monitorTap:gate,channelValue:n.channelValue,channelBpm:n.channelBpm};
+    this.applyChannelFXStrip(n.stemMonitor);
+  }
   ensureStemState(d) {
+    this.ensureStemMonitor(d.index);
     let state = this.stemStates.get(d.index);
     if (state && state.track !== d.track) {
       state.effects.forEach((effect) => effect?.dispose());
       state.histories.forEach((history) => history.dispose());
       state.routes.forEach((route) => route.disconnect());
+      state.inputs?.forEach((input)=>input.disconnect());
       this.stemStates.delete(d.index);
       state = null;
     }
@@ -931,6 +974,11 @@ export class AudioEngine {
           const gain = this.ctx.createGain(); gain.connect(this.nodes[d.index].input); return gain;
         }),
       };
+      state.inputs=state.routes.map(route=>{
+        const input=this.ctx.createGain();input.connect(route);
+        if(this.nodes[d.index].stemMonitor)input.connect(this.nodes[d.index].stemMonitor.input);
+        return input;
+      });
       this.stemStates.set(d.index, state);
     }
     return state;
@@ -987,7 +1035,7 @@ export class AudioEngine {
             bpm,
             kind: mode,
           });
-          effect.output.connect(state.routes[i]);
+          effect.output.connect((state.inputs||state.routes)[i]);
           state.effects[i] = effect;
         })
         .catch((error) => {
@@ -1066,7 +1114,7 @@ export class AudioEngine {
     voice.stemInitialized = reuse && reuseVoice.stemInitialized;
     voice.stemGains = reuse ? reuseVoice.stemGains : stems ? outputs.map((_, index) => {
       const gain = this.ctx.createGain(); gain.gain.value = 0;
-      gain.connect(index === 0 ? this.nodes[d.index].input : state.routes[index - 1]);
+      gain.connect(index === 0 ? this.nodes[d.index].input : (state.inputs||state.routes)[index - 1]);
       return gain;
     }) : [];
     if (reuse) reuseVoice.stemGains = []; // Transfer sole shared history output ownership.
@@ -1324,7 +1372,7 @@ export class AudioEngine {
         voice = {sources: [], stemSlipTransport: transport, stemGains: []};
         for (let i = 0; i < 5; i++) {
           const gain = this.ctx.createGain(); gain.gain.value = 0;
-          gain.connect(i === 0 ? this.nodes[d.index].input : state.routes[i - 1]);
+          gain.connect(i === 0 ? this.nodes[d.index].input : (state.inputs||state.routes)[i - 1]);
           voice.stemGains.push(gain);
           if (i > 0) {
             transport.node.connect(state.histories[i - 1].node, i - 1);
@@ -1641,14 +1689,17 @@ export class AudioEngine {
     for (const state of this.stemStates.values())
       state.histories.forEach((history) => history.clear());
     this.stopAllSamples();
-    for (const n of this.nodes) {
+    for (const channel of this.nodes) {
+      for (const n of [channel,channel.stemMonitor].filter(Boolean)) {
       n.channelEffect?.dispose();
       n.channelEffect = null;
       n.channelValue = 0;
       n.high.disconnect();
       n.filter.disconnect();
-      n.high.connect(n.gain);
+      n.high.connect(n.monitorTap||n.gain);
+      }
     }
+    this.setCross(this.cross);
     for (const chain of this.fxChains) chain.dispose();
     this.fxChains = [];
     this.fxSlots = null;

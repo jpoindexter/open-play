@@ -1,0 +1,208 @@
+{
+  "startedAt": "2026-10-17T10:30:29.931Z",
+  "sourceHashes": {
+    "audio-monitor.js": "80dd14cddd4bd9a466eb98c4267372f777b751c5fbad2a09928b5aa539d3f721",
+    "audio-monitor-harness.js": "42f19254951f451e09638a83b9bb04bd2556456584a35137ab92efce27f9991c"
+  },
+  "checks": [
+    {
+      "name": "Stereo output contains only master; selected cue never folds into physical stereo",
+      "passed": true,
+      "evidence": {
+        "snapshot": {
+          "settings": {
+            "mix": 0,
+            "volume": 0.1,
+            "masterCue": false,
+            "splitCue": false,
+            "mono": false
+          },
+          "layout": "stereo",
+          "masterChannels": [
+            1,
+            2
+          ],
+          "cueChannels": [],
+          "destinationChannels": 2,
+          "destinationMaximum": 2,
+          "physicalMuted": false,
+          "disposed": false,
+          "cueGain": 1,
+          "scope": "Rendered channel matrix; physical socket mapping and unplug behavior need device tests."
+        },
+        "summary": [
+          {
+            "channel": 1,
+            "frames": 4096,
+            "min": 0.20000000298023224,
+            "max": 0.20000000298023224,
+            "rms": 0.2000000029802316,
+            "nonfinite": 0
+          },
+          {
+            "channel": 2,
+            "frames": 4096,
+            "min": 0.4000000059604645,
+            "max": 0.4000000059604645,
+            "rms": 0.4000000059604632,
+            "nonfinite": 0
+          },
+          {
+            "channel": 3,
+            "frames": 4096,
+            "min": 0,
+            "max": 0,
+            "rms": 0,
+            "nonfinite": 0
+          },
+          {
+            "channel": 4,
+            "frames": 4096,
+            "min": 0,
+            "max": 0,
+            "rms": 0,
+            "nonfinite": 0
+          }
+        ]
+      }
+    },
+    {
+      "name": "Four channels separate stereo master1/2 and selectedcue3/4",
+      "passed": false,
+      "error": "This destination exposes 2 channels; 4 are required.",
+      "stack": "NotSupportedError: This destination exposes 2 channels; 4 are required.\n    at Object.connectPhysical (http://127.0.0.1:8768/prototype/audio-monitor.js:43:43)\n    at render (http://127.0.0.1:8768/prototype/audio-monitor-harness.js:7:37)\n    at check (http://127.0.0.1:8768/prototype/audio-monitor-harness.js:15:77)\n    at $.onclick (http://127.0.0.1:8768/prototype/audio-monitor-harness.js:17:8)"
+    },
+    {
+      "name": "Unselected second deck never appears in cue",
+      "passed": false,
+      "error": "This destination exposes 2 channels; 4 are required.",
+      "stack": "NotSupportedError: This destination exposes 2 channels; 4 are required.\n    at Object.connectPhysical (http://127.0.0.1:8768/prototype/audio-monitor.js:43:43)\n    at render (http://127.0.0.1:8768/prototype/audio-monitor-harness.js:7:37)\n    at check (http://127.0.0.1:8768/prototype/audio-monitor-harness.js:15:77)\n    at $.onclick (http://127.0.0.1:8768/prototype/audio-monitor-harness.js:18:8)"
+    },
+    {
+      "name": "Multiple selected cue decks sum without changing master",
+      "passed": false,
+      "error": "This destination exposes 2 channels; 4 are required.",
+      "stack": "NotSupportedError: This destination exposes 2 channels; 4 are required.\n    at Object.connectPhysical (http://127.0.0.1:8768/prototype/audio-monitor.js:43:43)\n    at render (http://127.0.0.1:8768/prototype/audio-monitor-harness.js:7:37)\n    at check (http://127.0.0.1:8768/prototype/audio-monitor-harness.js:15:77)\n    at $.onclick (http://127.0.0.1:8768/prototype/audio-monitor-harness.js:19:8)"
+    },
+    {
+      "name": "Cue trim changes only selected cue bus",
+      "passed": false,
+      "error": "This destination exposes 2 channels; 4 are required.",
+      "stack": "NotSupportedError: This destination exposes 2 channels; 4 are required.\n    at Object.connectPhysical (http://127.0.0.1:8768/prototype/audio-monitor.js:43:43)\n    at render (http://127.0.0.1:8768/prototype/audio-monitor-harness.js:7:37)\n    at check (http://127.0.0.1:8768/prototype/audio-monitor-harness.js:15:77)\n    at $.onclick (http://127.0.0.1:8768/prototype/audio-monitor-harness.js:20:8)"
+    },
+    {
+      "name": "Cue/master mix uses actual stereo bus signals",
+      "passed": false,
+      "error": "This destination exposes 2 channels; 4 are required.",
+      "stack": "NotSupportedError: This destination exposes 2 channels; 4 are required.\n    at Object.connectPhysical (http://127.0.0.1:8768/prototype/audio-monitor.js:43:43)\n    at render (http://127.0.0.1:8768/prototype/audio-monitor-harness.js:7:37)\n    at check (http://127.0.0.1:8768/prototype/audio-monitor-harness.js:15:77)\n    at $.onclick (http://127.0.0.1:8768/prototype/audio-monitor-harness.js:21:8)"
+    },
+    {
+      "name": "Full master monitoring excludes cue bus",
+      "passed": false,
+      "error": "This destination exposes 2 channels; 4 are required.",
+      "stack": "NotSupportedError: This destination exposes 2 channels; 4 are required.\n    at Object.connectPhysical (http://127.0.0.1:8768/prototype/audio-monitor.js:43:43)\n    at render (http://127.0.0.1:8768/prototype/audio-monitor-harness.js:7:37)\n    at check (http://127.0.0.1:8768/prototype/audio-monitor-harness.js:15:77)\n    at $.onclick (http://127.0.0.1:8768/prototype/audio-monitor-harness.js:22:8)"
+    },
+    {
+      "name": "Master Cue overrides mix and Split Cue to master-only stereo",
+      "passed": false,
+      "error": "This destination exposes 2 channels; 4 are required.",
+      "stack": "NotSupportedError: This destination exposes 2 channels; 4 are required.\n    at Object.connectPhysical (http://127.0.0.1:8768/prototype/audio-monitor.js:43:43)\n    at render (http://127.0.0.1:8768/prototype/audio-monitor-harness.js:7:37)\n    at check (http://127.0.0.1:8768/prototype/audio-monitor-harness.js:15:77)\n    at $.onclick (http://127.0.0.1:8768/prototype/audio-monitor-harness.js:23:8)"
+    },
+    {
+      "name": "Split Cue puts averagedcue left and averagedmaster right",
+      "passed": false,
+      "error": "This destination exposes 2 channels; 4 are required.",
+      "stack": "NotSupportedError: This destination exposes 2 channels; 4 are required.\n    at Object.connectPhysical (http://127.0.0.1:8768/prototype/audio-monitor.js:43:43)\n    at render (http://127.0.0.1:8768/prototype/audio-monitor-harness.js:7:37)\n    at check (http://127.0.0.1:8768/prototype/audio-monitor-harness.js:15:77)\n    at $.onclick (http://127.0.0.1:8768/prototype/audio-monitor-harness.js:24:8)"
+    },
+    {
+      "name": "Mono master uses both source channels without changing cue",
+      "passed": false,
+      "error": "This destination exposes 2 channels; 4 are required.",
+      "stack": "NotSupportedError: This destination exposes 2 channels; 4 are required.\n    at Object.connectPhysical (http://127.0.0.1:8768/prototype/audio-monitor.js:43:43)\n    at render (http://127.0.0.1:8768/prototype/audio-monitor-harness.js:7:37)\n    at check (http://127.0.0.1:8768/prototype/audio-monitor-harness.js:15:77)\n    at $.onclick (http://127.0.0.1:8768/prototype/audio-monitor-harness.js:25:8)"
+    },
+    {
+      "name": "Cue volume0 silences only headphone bus",
+      "passed": false,
+      "error": "This destination exposes 2 channels; 4 are required.",
+      "stack": "NotSupportedError: This destination exposes 2 channels; 4 are required.\n    at Object.connectPhysical (http://127.0.0.1:8768/prototype/audio-monitor.js:43:43)\n    at render (http://127.0.0.1:8768/prototype/audio-monitor-harness.js:7:37)\n    at check (http://127.0.0.1:8768/prototype/audio-monitor-harness.js:15:77)\n    at $.onclick (http://127.0.0.1:8768/prototype/audio-monitor-harness.js:26:8)"
+    },
+    {
+      "name": "Cue volume100 applies12dB relative to unity10percent",
+      "passed": false,
+      "error": "This destination exposes 2 channels; 4 are required.",
+      "stack": "NotSupportedError: This destination exposes 2 channels; 4 are required.\n    at Object.connectPhysical (http://127.0.0.1:8768/prototype/audio-monitor.js:43:43)\n    at render (http://127.0.0.1:8768/prototype/audio-monitor-harness.js:7:37)\n    at check (http://127.0.0.1:8768/prototype/audio-monitor-harness.js:15:77)\n    at $.onclick (http://127.0.0.1:8768/prototype/audio-monitor-harness.js:27:8)"
+    },
+    {
+      "name": "Swapped stereo channel pairs keep buses isolated",
+      "passed": false,
+      "error": "This destination exposes 2 channels; 4 are required.",
+      "stack": "NotSupportedError: This destination exposes 2 channels; 4 are required.\n    at Object.connectPhysical (http://127.0.0.1:8768/prototype/audio-monitor.js:43:43)\n    at render (http://127.0.0.1:8768/prototype/audio-monitor-harness.js:7:37)\n    at check (http://127.0.0.1:8768/prototype/audio-monitor-harness.js:15:77)\n    at $.onclick (http://127.0.0.1:8768/prototype/audio-monitor-harness.js:28:8)"
+    },
+    {
+      "name": "Repeated layout changes leave exactly one master and cue route",
+      "passed": false,
+      "error": "This destination exposes 2 channels; 4 are required.",
+      "stack": "NotSupportedError: This destination exposes 2 channels; 4 are required.\n    at Object.connectPhysical (http://127.0.0.1:8768/prototype/audio-monitor.js:43:43)\n    at render (http://127.0.0.1:8768/prototype/audio-monitor-harness.js:7:37)\n    at check (http://127.0.0.1:8768/prototype/audio-monitor-harness.js:15:77)\n    at $.onclick (http://127.0.0.1:8768/prototype/audio-monitor-harness.js:29:8)"
+    },
+    {
+      "name": "Physical mute silences all output without deleting cue settings",
+      "passed": false,
+      "error": "This destination exposes 2 channels; 4 are required.",
+      "stack": "NotSupportedError: This destination exposes 2 channels; 4 are required.\n    at Object.connectPhysical (http://127.0.0.1:8768/prototype/audio-monitor.js:43:43)\n    at render (http://127.0.0.1:8768/prototype/audio-monitor-harness.js:7:37)\n    at check (http://127.0.0.1:8768/prototype/audio-monitor-harness.js:15:77)\n    at $.onclick (http://127.0.0.1:8768/prototype/audio-monitor-harness.js:30:8)"
+    },
+    {
+      "name": "Terminal cleanup preserves an independent existing master connection",
+      "passed": false,
+      "error": "This destination exposes 2 channels; 4 are required.",
+      "stack": "NotSupportedError: This destination exposes 2 channels; 4 are required.\n    at Object.connectPhysical (http://127.0.0.1:8768/prototype/audio-monitor.js:43:43)\n    at render (http://127.0.0.1:8768/prototype/audio-monitor-harness.js:7:37)\n    at check (http://127.0.0.1:8768/prototype/audio-monitor-harness.js:15:77)\n    at $.onclick (http://127.0.0.1:8768/prototype/audio-monitor-harness.js:31:8)"
+    },
+    {
+      "name": "Actual two-channel destination rejects quad and keeps prior stereo route",
+      "passed": true,
+      "evidence": {
+        "snapshot": {
+          "settings": {
+            "mix": 0,
+            "volume": 0.1,
+            "masterCue": false,
+            "splitCue": false,
+            "mono": false
+          },
+          "layout": "stereo",
+          "masterChannels": [
+            1,
+            2
+          ],
+          "cueChannels": [],
+          "destinationChannels": 2,
+          "destinationMaximum": 2,
+          "physicalMuted": false,
+          "disposed": false,
+          "cueGain": 1,
+          "scope": "Rendered channel matrix; physical socket mapping and unplug behavior need device tests."
+        },
+        "summary": [
+          {
+            "channel": 1,
+            "frames": 4096,
+            "min": 0.20000000298023224,
+            "max": 0.20000000298023224,
+            "rms": 0.2000000029802316,
+            "nonfinite": 0
+          },
+          {
+            "channel": 2,
+            "frames": 4096,
+            "min": 0.4000000059604645,
+            "max": 0.4000000059604645,
+            "rms": 0.4000000059604632,
+            "nonfinite": 0
+          }
+        ]
+      }
+    }
+  ],
+  "scope": "Actual OfflineAudioContext PCM,4096frames perchannel percase. Physical output untouched. No real device selection/unplug/Serato sonic equivalence.",
+  "passed": 2,
+  "failed": 15
+}

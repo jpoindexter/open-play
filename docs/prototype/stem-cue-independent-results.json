@@ -1,0 +1,64 @@
+{
+  "startedEngineSHA256": "a05bd18fe63d6ad0aee041870699a9c6d7ec9a424370798babf6d69f902b5f57",
+  "finishedEngineSHA256": "a05bd18fe63d6ad0aee041870699a9c6d7ec9a424370798babf6d69f902b5f57",
+  "passed": 6,
+  "failed": 0,
+  "scope": "Actual AudioEngine methods with controlled graph nodes and AudioParam exponential-target semantics. No browser PCM, scheduling, physical sockets, native build or Serato parity acceptance. EQ-ramp regression is a controlled construction boundary, requiring actual PCM confirmation.",
+  "checks": [
+    {
+      "name": "Stem inputs tee once to cue before selected cross routes",
+      "passed": true,
+      "evidence": {
+        "routes": [
+          1.718591656056264e-145,
+          1,
+          1,
+          1
+        ],
+        "cueGate": 1
+      }
+    },
+    {
+      "name": "EQ changes after strip creation mirror targets to cue",
+      "passed": true,
+      "evidence": {
+        "low": -12
+      }
+    },
+    {
+      "name": "Channel Filter switches rewire both strips without duplicate high edges",
+      "passed": true,
+      "evidence": {
+        "strips": 2
+      }
+    },
+    {
+      "name": "Track replacement disconnects old tees and preserves a single cue strip",
+      "passed": true,
+      "evidence": {
+        "oldTeeConnections": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "name": "Global silence clears exit effects and restores both channel strips",
+      "passed": true,
+      "evidence": {
+        "disposed": 1
+      }
+    },
+    {
+      "name": "Creating cue strip during an active EQ ramp must retain the EQ target",
+      "passed": true,
+      "evidence": {
+        "copiedAt1ms": -0.7739161796205867,
+        "mainAt1s": -12,
+        "cueAt1s": -12
+      }
+    }
+  ]
+}

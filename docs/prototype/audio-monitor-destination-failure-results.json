@@ -1,0 +1,613 @@
+{
+  "startedAt": "2026-10-17T10:31:08.945Z",
+  "sourceHashes": {
+    "audio-monitor.js": "80dd14cddd4bd9a466eb98c4267372f777b751c5fbad2a09928b5aa539d3f721",
+    "audio-monitor-harness.js": "79906bf32b833af26581620e82fe06c7405b45a6ad7fef2b637e1785120f8984"
+  },
+  "checks": [
+    {
+      "name": "Stereo output contains only master; selected cue never folds into physical stereo",
+      "passed": true,
+      "evidence": {
+        "snapshot": {
+          "settings": {
+            "mix": 0,
+            "volume": 0.1,
+            "masterCue": false,
+            "splitCue": false,
+            "mono": false
+          },
+          "layout": "stereo",
+          "masterChannels": [
+            1,
+            2
+          ],
+          "cueChannels": [],
+          "destinationChannels": 2,
+          "destinationMaximum": 2,
+          "physicalMuted": false,
+          "disposed": false,
+          "cueGain": 1,
+          "scope": "Rendered channel matrix; physical socket mapping and unplug behavior need device tests."
+        },
+        "summary": [
+          {
+            "channel": 1,
+            "frames": 4096,
+            "min": 0.20000000298023224,
+            "max": 0.20000000298023224,
+            "rms": 0.2000000029802316,
+            "nonfinite": 0
+          },
+          {
+            "channel": 2,
+            "frames": 4096,
+            "min": 0.4000000059604645,
+            "max": 0.4000000059604645,
+            "rms": 0.4000000059604632,
+            "nonfinite": 0
+          },
+          {
+            "channel": 3,
+            "frames": 4096,
+            "min": 0,
+            "max": 0,
+            "rms": 0,
+            "nonfinite": 0
+          },
+          {
+            "channel": 4,
+            "frames": 4096,
+            "min": 0,
+            "max": 0,
+            "rms": 0,
+            "nonfinite": 0
+          }
+        ]
+      }
+    },
+    {
+      "name": "Four channels separate stereo master1/2 and selectedcue3/4",
+      "passed": false,
+      "evidence": {
+        "initial": {
+          "channelCount": 4,
+          "maxChannelCount": 4
+        },
+        "afterStereoSetup": {
+          "settings": {
+            "mix": 0,
+            "volume": 0.1,
+            "masterCue": false,
+            "splitCue": false,
+            "mono": false
+          },
+          "layout": "stereo",
+          "masterChannels": [
+            1,
+            2
+          ],
+          "cueChannels": [],
+          "destinationChannels": 2,
+          "destinationMaximum": 2,
+          "physicalMuted": false,
+          "disposed": false,
+          "cueGain": 1,
+          "scope": "Rendered channel matrix; physical socket mapping and unplug behavior need device tests."
+        }
+      },
+      "error": "This destination exposes 2 channels; 4 are required.",
+      "stack": "NotSupportedError: This destination exposes 2 channels; 4 are required.\n    at Object.connectPhysical (http://127.0.0.1:8768/prototype/audio-monitor.js:43:43)\n    at render (http://127.0.0.1:8768/prototype/audio-monitor-harness.js:8:41)\n    at check (http://127.0.0.1:8768/prototype/audio-monitor-harness.js:16:77)\n    at $.onclick (http://127.0.0.1:8768/prototype/audio-monitor-harness.js:18:8)"
+    },
+    {
+      "name": "Unselected second deck never appears in cue",
+      "passed": false,
+      "evidence": {
+        "initial": {
+          "channelCount": 4,
+          "maxChannelCount": 4
+        },
+        "afterStereoSetup": {
+          "settings": {
+            "mix": 0,
+            "volume": 0.1,
+            "masterCue": false,
+            "splitCue": false,
+            "mono": false
+          },
+          "layout": "stereo",
+          "masterChannels": [
+            1,
+            2
+          ],
+          "cueChannels": [],
+          "destinationChannels": 2,
+          "destinationMaximum": 2,
+          "physicalMuted": false,
+          "disposed": false,
+          "cueGain": 1,
+          "scope": "Rendered channel matrix; physical socket mapping and unplug behavior need device tests."
+        }
+      },
+      "error": "This destination exposes 2 channels; 4 are required.",
+      "stack": "NotSupportedError: This destination exposes 2 channels; 4 are required.\n    at Object.connectPhysical (http://127.0.0.1:8768/prototype/audio-monitor.js:43:43)\n    at render (http://127.0.0.1:8768/prototype/audio-monitor-harness.js:8:41)\n    at check (http://127.0.0.1:8768/prototype/audio-monitor-harness.js:16:77)\n    at $.onclick (http://127.0.0.1:8768/prototype/audio-monitor-harness.js:19:8)"
+    },
+    {
+      "name": "Multiple selected cue decks sum without changing master",
+      "passed": false,
+      "evidence": {
+        "initial": {
+          "channelCount": 4,
+          "maxChannelCount": 4
+        },
+        "afterStereoSetup": {
+          "settings": {
+            "mix": 0,
+            "volume": 0.1,
+            "masterCue": false,
+            "splitCue": false,
+            "mono": false
+          },
+          "layout": "stereo",
+          "masterChannels": [
+            1,
+            2
+          ],
+          "cueChannels": [],
+          "destinationChannels": 2,
+          "destinationMaximum": 2,
+          "physicalMuted": false,
+          "disposed": false,
+          "cueGain": 1,
+          "scope": "Rendered channel matrix; physical socket mapping and unplug behavior need device tests."
+        }
+      },
+      "error": "This destination exposes 2 channels; 4 are required.",
+      "stack": "NotSupportedError: This destination exposes 2 channels; 4 are required.\n    at Object.connectPhysical (http://127.0.0.1:8768/prototype/audio-monitor.js:43:43)\n    at render (http://127.0.0.1:8768/prototype/audio-monitor-harness.js:8:41)\n    at check (http://127.0.0.1:8768/prototype/audio-monitor-harness.js:16:77)\n    at $.onclick (http://127.0.0.1:8768/prototype/audio-monitor-harness.js:20:8)"
+    },
+    {
+      "name": "Cue trim changes only selected cue bus",
+      "passed": false,
+      "evidence": {
+        "initial": {
+          "channelCount": 4,
+          "maxChannelCount": 4
+        },
+        "afterStereoSetup": {
+          "settings": {
+            "mix": 0,
+            "volume": 0.1,
+            "masterCue": false,
+            "splitCue": false,
+            "mono": false
+          },
+          "layout": "stereo",
+          "masterChannels": [
+            1,
+            2
+          ],
+          "cueChannels": [],
+          "destinationChannels": 2,
+          "destinationMaximum": 2,
+          "physicalMuted": false,
+          "disposed": false,
+          "cueGain": 1,
+          "scope": "Rendered channel matrix; physical socket mapping and unplug behavior need device tests."
+        }
+      },
+      "error": "This destination exposes 2 channels; 4 are required.",
+      "stack": "NotSupportedError: This destination exposes 2 channels; 4 are required.\n    at Object.connectPhysical (http://127.0.0.1:8768/prototype/audio-monitor.js:43:43)\n    at render (http://127.0.0.1:8768/prototype/audio-monitor-harness.js:8:41)\n    at check (http://127.0.0.1:8768/prototype/audio-monitor-harness.js:16:77)\n    at $.onclick (http://127.0.0.1:8768/prototype/audio-monitor-harness.js:21:8)"
+    },
+    {
+      "name": "Cue/master mix uses actual stereo bus signals",
+      "passed": false,
+      "evidence": {
+        "initial": {
+          "channelCount": 4,
+          "maxChannelCount": 4
+        },
+        "afterStereoSetup": {
+          "settings": {
+            "mix": 0.25,
+            "volume": 0.1,
+            "masterCue": false,
+            "splitCue": false,
+            "mono": false
+          },
+          "layout": "stereo",
+          "masterChannels": [
+            1,
+            2
+          ],
+          "cueChannels": [],
+          "destinationChannels": 2,
+          "destinationMaximum": 2,
+          "physicalMuted": false,
+          "disposed": false,
+          "cueGain": 1,
+          "scope": "Rendered channel matrix; physical socket mapping and unplug behavior need device tests."
+        }
+      },
+      "error": "This destination exposes 2 channels; 4 are required.",
+      "stack": "NotSupportedError: This destination exposes 2 channels; 4 are required.\n    at Object.connectPhysical (http://127.0.0.1:8768/prototype/audio-monitor.js:43:43)\n    at render (http://127.0.0.1:8768/prototype/audio-monitor-harness.js:8:41)\n    at check (http://127.0.0.1:8768/prototype/audio-monitor-harness.js:16:77)\n    at $.onclick (http://127.0.0.1:8768/prototype/audio-monitor-harness.js:22:8)"
+    },
+    {
+      "name": "Full master monitoring excludes cue bus",
+      "passed": false,
+      "evidence": {
+        "initial": {
+          "channelCount": 4,
+          "maxChannelCount": 4
+        },
+        "afterStereoSetup": {
+          "settings": {
+            "mix": 1,
+            "volume": 0.1,
+            "masterCue": false,
+            "splitCue": false,
+            "mono": false
+          },
+          "layout": "stereo",
+          "masterChannels": [
+            1,
+            2
+          ],
+          "cueChannels": [],
+          "destinationChannels": 2,
+          "destinationMaximum": 2,
+          "physicalMuted": false,
+          "disposed": false,
+          "cueGain": 1,
+          "scope": "Rendered channel matrix; physical socket mapping and unplug behavior need device tests."
+        }
+      },
+      "error": "This destination exposes 2 channels; 4 are required.",
+      "stack": "NotSupportedError: This destination exposes 2 channels; 4 are required.\n    at Object.connectPhysical (http://127.0.0.1:8768/prototype/audio-monitor.js:43:43)\n    at render (http://127.0.0.1:8768/prototype/audio-monitor-harness.js:8:41)\n    at check (http://127.0.0.1:8768/prototype/audio-monitor-harness.js:16:77)\n    at $.onclick (http://127.0.0.1:8768/prototype/audio-monitor-harness.js:23:8)"
+    },
+    {
+      "name": "Master Cue overrides mix and Split Cue to master-only stereo",
+      "passed": false,
+      "evidence": {
+        "initial": {
+          "channelCount": 4,
+          "maxChannelCount": 4
+        },
+        "afterStereoSetup": {
+          "settings": {
+            "mix": 0,
+            "volume": 0.1,
+            "masterCue": true,
+            "splitCue": true,
+            "mono": false
+          },
+          "layout": "stereo",
+          "masterChannels": [
+            1,
+            2
+          ],
+          "cueChannels": [],
+          "destinationChannels": 2,
+          "destinationMaximum": 2,
+          "physicalMuted": false,
+          "disposed": false,
+          "cueGain": 1,
+          "scope": "Rendered channel matrix; physical socket mapping and unplug behavior need device tests."
+        }
+      },
+      "error": "This destination exposes 2 channels; 4 are required.",
+      "stack": "NotSupportedError: This destination exposes 2 channels; 4 are required.\n    at Object.connectPhysical (http://127.0.0.1:8768/prototype/audio-monitor.js:43:43)\n    at render (http://127.0.0.1:8768/prototype/audio-monitor-harness.js:8:41)\n    at check (http://127.0.0.1:8768/prototype/audio-monitor-harness.js:16:77)\n    at $.onclick (http://127.0.0.1:8768/prototype/audio-monitor-harness.js:24:8)"
+    },
+    {
+      "name": "Split Cue puts averagedcue left and averagedmaster right",
+      "passed": false,
+      "evidence": {
+        "initial": {
+          "channelCount": 4,
+          "maxChannelCount": 4
+        },
+        "afterStereoSetup": {
+          "settings": {
+            "mix": 0.5,
+            "volume": 0.1,
+            "masterCue": false,
+            "splitCue": true,
+            "mono": false
+          },
+          "layout": "stereo",
+          "masterChannels": [
+            1,
+            2
+          ],
+          "cueChannels": [],
+          "destinationChannels": 2,
+          "destinationMaximum": 2,
+          "physicalMuted": false,
+          "disposed": false,
+          "cueGain": 1,
+          "scope": "Rendered channel matrix; physical socket mapping and unplug behavior need device tests."
+        }
+      },
+      "error": "This destination exposes 2 channels; 4 are required.",
+      "stack": "NotSupportedError: This destination exposes 2 channels; 4 are required.\n    at Object.connectPhysical (http://127.0.0.1:8768/prototype/audio-monitor.js:43:43)\n    at render (http://127.0.0.1:8768/prototype/audio-monitor-harness.js:8:41)\n    at check (http://127.0.0.1:8768/prototype/audio-monitor-harness.js:16:77)\n    at $.onclick (http://127.0.0.1:8768/prototype/audio-monitor-harness.js:25:8)"
+    },
+    {
+      "name": "Mono master uses both source channels without changing cue",
+      "passed": false,
+      "evidence": {
+        "initial": {
+          "channelCount": 4,
+          "maxChannelCount": 4
+        },
+        "afterStereoSetup": {
+          "settings": {
+            "mix": 0,
+            "volume": 0.1,
+            "masterCue": false,
+            "splitCue": false,
+            "mono": true
+          },
+          "layout": "stereo",
+          "masterChannels": [
+            1,
+            2
+          ],
+          "cueChannels": [],
+          "destinationChannels": 2,
+          "destinationMaximum": 2,
+          "physicalMuted": false,
+          "disposed": false,
+          "cueGain": 1,
+          "scope": "Rendered channel matrix; physical socket mapping and unplug behavior need device tests."
+        }
+      },
+      "error": "This destination exposes 2 channels; 4 are required.",
+      "stack": "NotSupportedError: This destination exposes 2 channels; 4 are required.\n    at Object.connectPhysical (http://127.0.0.1:8768/prototype/audio-monitor.js:43:43)\n    at render (http://127.0.0.1:8768/prototype/audio-monitor-harness.js:8:41)\n    at check (http://127.0.0.1:8768/prototype/audio-monitor-harness.js:16:77)\n    at $.onclick (http://127.0.0.1:8768/prototype/audio-monitor-harness.js:26:8)"
+    },
+    {
+      "name": "Cue volume0 silences only headphone bus",
+      "passed": false,
+      "evidence": {
+        "initial": {
+          "channelCount": 4,
+          "maxChannelCount": 4
+        },
+        "afterStereoSetup": {
+          "settings": {
+            "mix": 0,
+            "volume": 0,
+            "masterCue": false,
+            "splitCue": false,
+            "mono": false
+          },
+          "layout": "stereo",
+          "masterChannels": [
+            1,
+            2
+          ],
+          "cueChannels": [],
+          "destinationChannels": 2,
+          "destinationMaximum": 2,
+          "physicalMuted": false,
+          "disposed": false,
+          "cueGain": 0,
+          "scope": "Rendered channel matrix; physical socket mapping and unplug behavior need device tests."
+        }
+      },
+      "error": "This destination exposes 2 channels; 4 are required.",
+      "stack": "NotSupportedError: This destination exposes 2 channels; 4 are required.\n    at Object.connectPhysical (http://127.0.0.1:8768/prototype/audio-monitor.js:43:43)\n    at render (http://127.0.0.1:8768/prototype/audio-monitor-harness.js:8:41)\n    at check (http://127.0.0.1:8768/prototype/audio-monitor-harness.js:16:77)\n    at $.onclick (http://127.0.0.1:8768/prototype/audio-monitor-harness.js:27:8)"
+    },
+    {
+      "name": "Cue volume100 applies12dB relative to unity10percent",
+      "passed": false,
+      "evidence": {
+        "initial": {
+          "channelCount": 4,
+          "maxChannelCount": 4
+        },
+        "afterStereoSetup": {
+          "settings": {
+            "mix": 0,
+            "volume": 1,
+            "masterCue": false,
+            "splitCue": false,
+            "mono": false
+          },
+          "layout": "stereo",
+          "masterChannels": [
+            1,
+            2
+          ],
+          "cueChannels": [],
+          "destinationChannels": 2,
+          "destinationMaximum": 2,
+          "physicalMuted": false,
+          "disposed": false,
+          "cueGain": 3.9810717055349722,
+          "scope": "Rendered channel matrix; physical socket mapping and unplug behavior need device tests."
+        }
+      },
+      "error": "This destination exposes 2 channels; 4 are required.",
+      "stack": "NotSupportedError: This destination exposes 2 channels; 4 are required.\n    at Object.connectPhysical (http://127.0.0.1:8768/prototype/audio-monitor.js:43:43)\n    at render (http://127.0.0.1:8768/prototype/audio-monitor-harness.js:8:41)\n    at check (http://127.0.0.1:8768/prototype/audio-monitor-harness.js:16:77)\n    at $.onclick (http://127.0.0.1:8768/prototype/audio-monitor-harness.js:28:8)"
+    },
+    {
+      "name": "Swapped stereo channel pairs keep buses isolated",
+      "passed": false,
+      "evidence": {
+        "initial": {
+          "channelCount": 4,
+          "maxChannelCount": 4
+        },
+        "afterStereoSetup": {
+          "settings": {
+            "mix": 0,
+            "volume": 0.1,
+            "masterCue": false,
+            "splitCue": false,
+            "mono": false
+          },
+          "layout": "stereo",
+          "masterChannels": [
+            1,
+            2
+          ],
+          "cueChannels": [],
+          "destinationChannels": 2,
+          "destinationMaximum": 2,
+          "physicalMuted": false,
+          "disposed": false,
+          "cueGain": 1,
+          "scope": "Rendered channel matrix; physical socket mapping and unplug behavior need device tests."
+        }
+      },
+      "error": "This destination exposes 2 channels; 4 are required.",
+      "stack": "NotSupportedError: This destination exposes 2 channels; 4 are required.\n    at Object.connectPhysical (http://127.0.0.1:8768/prototype/audio-monitor.js:43:43)\n    at render (http://127.0.0.1:8768/prototype/audio-monitor-harness.js:8:41)\n    at check (http://127.0.0.1:8768/prototype/audio-monitor-harness.js:16:77)\n    at $.onclick (http://127.0.0.1:8768/prototype/audio-monitor-harness.js:29:8)"
+    },
+    {
+      "name": "Repeated layout changes leave exactly one master and cue route",
+      "passed": false,
+      "evidence": {
+        "initial": {
+          "channelCount": 4,
+          "maxChannelCount": 4
+        },
+        "afterStereoSetup": {
+          "settings": {
+            "mix": 0,
+            "volume": 0.1,
+            "masterCue": false,
+            "splitCue": false,
+            "mono": false
+          },
+          "layout": "stereo",
+          "masterChannels": [
+            1,
+            2
+          ],
+          "cueChannels": [],
+          "destinationChannels": 2,
+          "destinationMaximum": 2,
+          "physicalMuted": false,
+          "disposed": false,
+          "cueGain": 1,
+          "scope": "Rendered channel matrix; physical socket mapping and unplug behavior need device tests."
+        }
+      },
+      "error": "This destination exposes 2 channels; 4 are required.",
+      "stack": "NotSupportedError: This destination exposes 2 channels; 4 are required.\n    at Object.connectPhysical (http://127.0.0.1:8768/prototype/audio-monitor.js:43:43)\n    at render (http://127.0.0.1:8768/prototype/audio-monitor-harness.js:8:41)\n    at check (http://127.0.0.1:8768/prototype/audio-monitor-harness.js:16:77)\n    at $.onclick (http://127.0.0.1:8768/prototype/audio-monitor-harness.js:30:8)"
+    },
+    {
+      "name": "Physical mute silences all output without deleting cue settings",
+      "passed": false,
+      "evidence": {
+        "initial": {
+          "channelCount": 4,
+          "maxChannelCount": 4
+        },
+        "afterStereoSetup": {
+          "settings": {
+            "mix": 0,
+            "volume": 0.1,
+            "masterCue": false,
+            "splitCue": false,
+            "mono": false
+          },
+          "layout": "stereo",
+          "masterChannels": [
+            1,
+            2
+          ],
+          "cueChannels": [],
+          "destinationChannels": 2,
+          "destinationMaximum": 2,
+          "physicalMuted": false,
+          "disposed": false,
+          "cueGain": 1,
+          "scope": "Rendered channel matrix; physical socket mapping and unplug behavior need device tests."
+        }
+      },
+      "error": "This destination exposes 2 channels; 4 are required.",
+      "stack": "NotSupportedError: This destination exposes 2 channels; 4 are required.\n    at Object.connectPhysical (http://127.0.0.1:8768/prototype/audio-monitor.js:43:43)\n    at render (http://127.0.0.1:8768/prototype/audio-monitor-harness.js:8:41)\n    at check (http://127.0.0.1:8768/prototype/audio-monitor-harness.js:16:77)\n    at $.onclick (http://127.0.0.1:8768/prototype/audio-monitor-harness.js:31:8)"
+    },
+    {
+      "name": "Terminal cleanup preserves an independent existing master connection",
+      "passed": false,
+      "evidence": {
+        "initial": {
+          "channelCount": 4,
+          "maxChannelCount": 4
+        },
+        "afterStereoSetup": {
+          "settings": {
+            "mix": 0,
+            "volume": 0.1,
+            "masterCue": false,
+            "splitCue": false,
+            "mono": false
+          },
+          "layout": "stereo",
+          "masterChannels": [
+            1,
+            2
+          ],
+          "cueChannels": [],
+          "destinationChannels": 2,
+          "destinationMaximum": 2,
+          "physicalMuted": false,
+          "disposed": false,
+          "cueGain": 1,
+          "scope": "Rendered channel matrix; physical socket mapping and unplug behavior need device tests."
+        }
+      },
+      "error": "This destination exposes 2 channels; 4 are required.",
+      "stack": "NotSupportedError: This destination exposes 2 channels; 4 are required.\n    at Object.connectPhysical (http://127.0.0.1:8768/prototype/audio-monitor.js:43:43)\n    at render (http://127.0.0.1:8768/prototype/audio-monitor-harness.js:8:41)\n    at check (http://127.0.0.1:8768/prototype/audio-monitor-harness.js:16:77)\n    at $.onclick (http://127.0.0.1:8768/prototype/audio-monitor-harness.js:32:8)"
+    },
+    {
+      "name": "Actual two-channel destination rejects quad and keeps prior stereo route",
+      "passed": true,
+      "evidence": {
+        "snapshot": {
+          "settings": {
+            "mix": 0,
+            "volume": 0.1,
+            "masterCue": false,
+            "splitCue": false,
+            "mono": false
+          },
+          "layout": "stereo",
+          "masterChannels": [
+            1,
+            2
+          ],
+          "cueChannels": [],
+          "destinationChannels": 2,
+          "destinationMaximum": 2,
+          "physicalMuted": false,
+          "disposed": false,
+          "cueGain": 1,
+          "scope": "Rendered channel matrix; physical socket mapping and unplug behavior need device tests."
+        },
+        "summary": [
+          {
+            "channel": 1,
+            "frames": 4096,
+            "min": 0.20000000298023224,
+            "max": 0.20000000298023224,
+            "rms": 0.2000000029802316,
+            "nonfinite": 0
+          },
+          {
+            "channel": 2,
+            "frames": 4096,
+            "min": 0.4000000059604645,
+            "max": 0.4000000059604645,
+            "rms": 0.4000000059604632,
+            "nonfinite": 0
+          }
+        ]
+      }
+    }
+  ],
+  "scope": "Actual OfflineAudioContext PCM,4096frames perchannel percase. Physical output untouched. No real device selection/unplug/Serato sonic equivalence.",
+  "passed": 2,
+  "failed": 15
+}

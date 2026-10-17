@@ -9,7 +9,7 @@ To reproduce on this Mac: `npm ci --prefix desktop`, then `npm run package --pre
 ## Test now
 
 - Import local audio, load a track on each deck, start both, move the crossfader, and try cues/loops/FX. Open REC, record, stop and download. Imported bytes currently require reimport after quitting or reloading; settings/mappings use this app's persistent browser profile.
-- MIDI → Connect MIDI inputs. The connected Hercules is enumerated. Its observed browser knob is CC1/channel1, with1/127 values; the saved Library browse mapping uses Relative two's complement. Direction and actual desktop selection movement must be observed. No full controller map, LED feedback or physical audio routing is claimed.
+- MIDI → Connect MIDI inputs. The connected Hercules is enumerated. Its observed browser knob is CC1/channel1, with1/127 values; the saved Library browse mapping uses Relative two's complement. Jason confirmed actual desktop library selection movement; the earlier negative report referred to the wrong application. Direction conventions beyond this test remain open. No full controller map, LED feedback or physical audio routing is claimed.
 - Audio still uses the browser engine/default system output. Headphone cue is labeled simulated. Separate Hercules master/headphone channel routing remains the next functional gap.
 
 ## Boundaries

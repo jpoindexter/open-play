@@ -1,0 +1,935 @@
+{
+  "startedAt": "2026-10-17T10:45:19.145Z",
+  "sourceHashes": {
+    "engine.js": "04dcdc8bcff86570b73c6b7fd54cc4d31d283046c89fb827b4914d1b551547f8",
+    "audio-monitor.js": "31a07bd6277bf19ec05495d207f7228505c8c948a9314531702706596bf4eada",
+    "audio-monitor-engine-harness.js": "61dfa9df9b15927bb9b38f0e3e006c0c10a88341f5350f7f030df77c58cf610a"
+  },
+  "checks": [
+    {
+      "name": "Selected cue survives zero channel level and opposite crossfader",
+      "passed": true,
+      "evidence": {
+        "master": [
+          {
+            "frames": 28800,
+            "measuredStartFrame": 4800,
+            "measuredFrames": 24000,
+            "finite": true,
+            "rms": 2.0345869483769388e-34,
+            "peak": 2.0345869483764863e-34,
+            "frequencyHz": null
+          },
+          {
+            "frames": 28800,
+            "measuredStartFrame": 4800,
+            "measuredFrames": 24000,
+            "finite": true,
+            "rms": 2.0345869483769388e-34,
+            "peak": 2.0345869483764863e-34,
+            "frequencyHz": null
+          }
+        ],
+        "cue": [
+          {
+            "frames": 28800,
+            "measuredStartFrame": 4800,
+            "measuredFrames": 24000,
+            "finite": true,
+            "rms": 0.08493833389981036,
+            "peak": 0.12101288139820099,
+            "frequencyHz": 440.00127109546156
+          },
+          {
+            "frames": 28800,
+            "measuredStartFrame": 4800,
+            "measuredFrames": 24000,
+            "finite": true,
+            "rms": 0.08501472420253656,
+            "peak": 0.12221123278141022,
+            "frequencyHz": 659.9993414443494
+          }
+        ]
+      }
+    },
+    {
+      "name": "Turning PFL off silences its independent headphone bus",
+      "passed": true,
+      "evidence": {
+        "master": [
+          {
+            "frames": 28800,
+            "measuredStartFrame": 4800,
+            "measuredFrames": 24000,
+            "finite": true,
+            "rms": 2.0345869483769388e-34,
+            "peak": 2.0345869483764863e-34,
+            "frequencyHz": null
+          },
+          {
+            "frames": 28800,
+            "measuredStartFrame": 4800,
+            "measuredFrames": 24000,
+            "finite": true,
+            "rms": 2.0345869483769388e-34,
+            "peak": 2.0345869483764863e-34,
+            "frequencyHz": null
+          }
+        ],
+        "cue": [
+          {
+            "frames": 28800,
+            "measuredStartFrame": 4800,
+            "measuredFrames": 24000,
+            "finite": true,
+            "rms": 2.0345869483769388e-34,
+            "peak": 2.0345869483764863e-34,
+            "frequencyHz": null
+          },
+          {
+            "frames": 28800,
+            "measuredStartFrame": 4800,
+            "measuredFrames": 24000,
+            "finite": true,
+            "rms": 2.0345869483769388e-34,
+            "peak": 2.0345869483764863e-34,
+            "frequencyHz": null
+          }
+        ]
+      }
+    },
+    {
+      "name": "Raising master deck does not silently select it for cue",
+      "passed": true,
+      "evidence": {
+        "master": [
+          {
+            "frames": 28800,
+            "measuredStartFrame": 4800,
+            "measuredFrames": 24000,
+            "finite": true,
+            "rms": 0.04676967151483886,
+            "peak": 0.06642609089612961,
+            "frequencyHz": 439.9998921100843
+          },
+          {
+            "frames": 28800,
+            "measuredStartFrame": 4800,
+            "measuredFrames": 24000,
+            "finite": true,
+            "rms": 0.04673198586405545,
+            "peak": 0.06708935648202896,
+            "frequencyHz": 659.996495875491
+          }
+        ],
+        "cue": [
+          {
+            "frames": 28800,
+            "measuredStartFrame": 4800,
+            "measuredFrames": 24000,
+            "finite": true,
+            "rms": 2.0345869483769388e-34,
+            "peak": 2.0345869483764863e-34,
+            "frequencyHz": null
+          },
+          {
+            "frames": 28800,
+            "measuredStartFrame": 4800,
+            "measuredFrames": 24000,
+            "finite": true,
+            "rms": 2.0345869483769388e-34,
+            "peak": 2.0345869483764863e-34,
+            "frequencyHz": null
+          }
+        ]
+      }
+    },
+    {
+      "name": "Master Cue overrides cue mixture with actual postmaster audio",
+      "passed": true,
+      "evidence": {
+        "master": [
+          {
+            "frames": 28800,
+            "measuredStartFrame": 4800,
+            "measuredFrames": 24000,
+            "finite": true,
+            "rms": 0.046779750736937,
+            "peak": 0.0664844885468483,
+            "frequencyHz": 439.99990525025527
+          },
+          {
+            "frames": 28800,
+            "measuredStartFrame": 4800,
+            "measuredFrames": 24000,
+            "finite": true,
+            "rms": 0.04671967793314127,
+            "peak": 0.06715762615203857,
+            "frequencyHz": 659.9981029658338
+          }
+        ],
+        "cue": [
+          {
+            "frames": 28800,
+            "measuredStartFrame": 4800,
+            "measuredFrames": 24000,
+            "finite": true,
+            "rms": 0.04668482785425412,
+            "peak": 0.06647782027721405,
+            "frequencyHz": 440.0015837380327
+          },
+          {
+            "frames": 28800,
+            "measuredStartFrame": 4800,
+            "measuredFrames": 24000,
+            "finite": true,
+            "rms": 0.04663171913203824,
+            "peak": 0.067035973072052,
+            "frequencyHz": 659.9980233128393
+          }
+        ]
+      }
+    },
+    {
+      "name": "Unit-FX route rebuild preserves pre-fader cue and master buses",
+      "passed": true,
+      "evidence": {
+        "master": [
+          {
+            "frames": 28800,
+            "measuredStartFrame": 4800,
+            "measuredFrames": 24000,
+            "finite": true,
+            "rms": 0.04676487325409567,
+            "peak": 0.06642486155033112,
+            "frequencyHz": 440.0005031106904
+          },
+          {
+            "frames": 28800,
+            "measuredStartFrame": 4800,
+            "measuredFrames": 24000,
+            "finite": true,
+            "rms": 0.04673719233108725,
+            "peak": 0.06750047951936722,
+            "frequencyHz": 660.0022785492288
+          }
+        ],
+        "cue": [
+          {
+            "frames": 28800,
+            "measuredStartFrame": 4800,
+            "measuredFrames": 24000,
+            "finite": true,
+            "rms": 0.08493809816679947,
+            "peak": 0.12093541026115417,
+            "frequencyHz": 440.00032332300907
+          },
+          {
+            "frames": 28800,
+            "measuredStartFrame": 4800,
+            "measuredFrames": 24000,
+            "finite": true,
+            "rms": 0.08503219074205677,
+            "peak": 0.12280476093292236,
+            "frequencyHz": 659.9964350883769
+          }
+        ]
+      }
+    },
+    {
+      "name": "Changing Channel FX retains actual cue audio connection",
+      "passed": true,
+      "evidence": {
+        "master": [
+          {
+            "frames": 25920,
+            "measuredStartFrame": 4800,
+            "measuredFrames": 21120,
+            "finite": true,
+            "rms": 0.05759487142058563,
+            "peak": 0.08901645243167877,
+            "frequencyHz": 439.98952590922204
+          },
+          {
+            "frames": 25920,
+            "measuredStartFrame": 4800,
+            "measuredFrames": 21120,
+            "finite": true,
+            "rms": 0.057449608321322294,
+            "peak": 0.09216994047164917,
+            "frequencyHz": 659.9931922348334
+          }
+        ],
+        "cue": [
+          {
+            "frames": 28800,
+            "measuredStartFrame": 4800,
+            "measuredFrames": 24000,
+            "finite": true,
+            "rms": 0.10555749958389196,
+            "peak": 0.16276729106903076,
+            "frequencyHz": 439.99169494010727
+          },
+          {
+            "frames": 28800,
+            "measuredStartFrame": 4800,
+            "measuredFrames": 24000,
+            "finite": true,
+            "rms": 0.10533095621612705,
+            "peak": 0.16493849456310272,
+            "frequencyHz": 659.9670188058349
+          }
+        ]
+      }
+    },
+    {
+      "name": "Actual selected vocal stem reaches cue without original or other stems",
+      "passed": true,
+      "evidence": {
+        "master": [
+          {
+            "frames": 28800,
+            "measuredStartFrame": 4800,
+            "measuredFrames": 24000,
+            "finite": true,
+            "rms": 0.046688290193301174,
+            "peak": 0.06627775728702545,
+            "frequencyHz": 173.00106138145685
+          },
+          {
+            "frames": 28800,
+            "measuredStartFrame": 4800,
+            "measuredFrames": 24000,
+            "finite": true,
+            "rms": 0.046682400920542474,
+            "peak": 0.0671175941824913,
+            "frequencyHz": 211.0040584481825
+          }
+        ],
+        "cue": [
+          {
+            "frames": 28800,
+            "measuredStartFrame": 4800,
+            "measuredFrames": 24000,
+            "finite": true,
+            "rms": 0.0848936060089481,
+            "peak": 0.1206643283367157,
+            "frequencyHz": 173.00195032191715
+          },
+          {
+            "frames": 28800,
+            "measuredStartFrame": 4800,
+            "measuredFrames": 24000,
+            "finite": true,
+            "rms": 0.08491588226820884,
+            "peak": 0.12246871739625931,
+            "frequencyHz": 211.0033820090567
+          }
+        ]
+      }
+    },
+    {
+      "name": "Selected Stem Slip vocal cue survives the opposite crossfader",
+      "passed": true,
+      "evidence": {
+        "master": [
+          {
+            "frames": 28800,
+            "measuredStartFrame": 4800,
+            "measuredFrames": 24000,
+            "finite": true,
+            "rms": 2.0345869483769388e-34,
+            "peak": 2.0345869483764863e-34,
+            "frequencyHz": null
+          },
+          {
+            "frames": 28800,
+            "measuredStartFrame": 4800,
+            "measuredFrames": 24000,
+            "finite": true,
+            "rms": 2.0345869483769388e-34,
+            "peak": 2.0345869483764863e-34,
+            "frequencyHz": null
+          }
+        ],
+        "cue": [
+          {
+            "frames": 28800,
+            "measuredStartFrame": 4800,
+            "measuredFrames": 24000,
+            "finite": true,
+            "rms": 0.08490713244168537,
+            "peak": 0.1206771731376648,
+            "frequencyHz": 173.00088313918172
+          },
+          {
+            "frames": 28800,
+            "measuredStartFrame": 4800,
+            "measuredFrames": 24000,
+            "finite": true,
+            "rms": 0.08490483906891118,
+            "peak": 0.12256667762994766,
+            "frequencyHz": 210.99370815276103
+          }
+        ]
+      }
+    },
+    {
+      "name": "Global silence clears voices and reconnects safe channel graph without cue leaks",
+      "passed": true,
+      "evidence": {
+        "master": [
+          {
+            "frames": 28800,
+            "measuredStartFrame": 4800,
+            "measuredFrames": 24000,
+            "finite": true,
+            "rms": 2.0345869483769388e-34,
+            "peak": 2.0345869483764863e-34,
+            "frequencyHz": null
+          },
+          {
+            "frames": 28800,
+            "measuredStartFrame": 4800,
+            "measuredFrames": 24000,
+            "finite": true,
+            "rms": 2.0345869483769388e-34,
+            "peak": 2.0345869483764863e-34,
+            "frequencyHz": null
+          }
+        ],
+        "cue": [
+          {
+            "frames": 28800,
+            "measuredStartFrame": 4800,
+            "measuredFrames": 24000,
+            "finite": true,
+            "rms": 2.0345869483769388e-34,
+            "peak": 2.0345869483764863e-34,
+            "frequencyHz": null
+          },
+          {
+            "frames": 28800,
+            "measuredStartFrame": 4800,
+            "measuredFrames": 24000,
+            "finite": true,
+            "rms": 2.0345869483769388e-34,
+            "peak": 2.0345869483764863e-34,
+            "frequencyHz": null
+          }
+        ]
+      }
+    }
+  ],
+  "captures": [
+    {
+      "name": "monitor-engine-prefader-master.webm",
+      "bus": "master",
+      "bytes": 436,
+      "sha256": "edf35b286ebfea87171e1885249e07c10e501ab901791c5a31b640c2ef5fdb60",
+      "mime": "audio/webm;codecs=opus",
+      "sampleRate": 48000,
+      "channels": [
+        {
+          "frames": 28800,
+          "measuredStartFrame": 4800,
+          "measuredFrames": 24000,
+          "finite": true,
+          "rms": 2.0345869483769388e-34,
+          "peak": 2.0345869483764863e-34,
+          "frequencyHz": null
+        },
+        {
+          "frames": 28800,
+          "measuredStartFrame": 4800,
+          "measuredFrames": 24000,
+          "finite": true,
+          "rms": 2.0345869483769388e-34,
+          "peak": 2.0345869483764863e-34,
+          "frequencyHz": null
+        }
+      ]
+    },
+    {
+      "name": "monitor-engine-prefader-cue.webm",
+      "bus": "cue",
+      "bytes": 9956,
+      "sha256": "5c24444dac8ca11fd833afdfccdbcfe75cd2a4d2ece7d74e6500cd445442b303",
+      "mime": "audio/webm;codecs=opus",
+      "sampleRate": 48000,
+      "channels": [
+        {
+          "frames": 28800,
+          "measuredStartFrame": 4800,
+          "measuredFrames": 24000,
+          "finite": true,
+          "rms": 0.08493833389981036,
+          "peak": 0.12101288139820099,
+          "frequencyHz": 440.00127109546156
+        },
+        {
+          "frames": 28800,
+          "measuredStartFrame": 4800,
+          "measuredFrames": 24000,
+          "finite": true,
+          "rms": 0.08501472420253656,
+          "peak": 0.12221123278141022,
+          "frequencyHz": 659.9993414443494
+        }
+      ]
+    },
+    {
+      "name": "monitor-engine-pfl-off-master.webm",
+      "bus": "master",
+      "bytes": 436,
+      "sha256": "00da3e20d12d51c3d7b27e3e04822645a0a3f4e544bcf3752d334e329fe9333d",
+      "mime": "audio/webm;codecs=opus",
+      "sampleRate": 48000,
+      "channels": [
+        {
+          "frames": 28800,
+          "measuredStartFrame": 4800,
+          "measuredFrames": 24000,
+          "finite": true,
+          "rms": 2.0345869483769388e-34,
+          "peak": 2.0345869483764863e-34,
+          "frequencyHz": null
+        },
+        {
+          "frames": 28800,
+          "measuredStartFrame": 4800,
+          "measuredFrames": 24000,
+          "finite": true,
+          "rms": 2.0345869483769388e-34,
+          "peak": 2.0345869483764863e-34,
+          "frequencyHz": null
+        }
+      ]
+    },
+    {
+      "name": "monitor-engine-pfl-off-cue.webm",
+      "bus": "cue",
+      "bytes": 436,
+      "sha256": "c466452e7c7e5431cfe74eaec1f54dd3e916e9fa84f9c2ed04ed744b80e6bf08",
+      "mime": "audio/webm;codecs=opus",
+      "sampleRate": 48000,
+      "channels": [
+        {
+          "frames": 28800,
+          "measuredStartFrame": 4800,
+          "measuredFrames": 24000,
+          "finite": true,
+          "rms": 2.0345869483769388e-34,
+          "peak": 2.0345869483764863e-34,
+          "frequencyHz": null
+        },
+        {
+          "frames": 28800,
+          "measuredStartFrame": 4800,
+          "measuredFrames": 24000,
+          "finite": true,
+          "rms": 2.0345869483769388e-34,
+          "peak": 2.0345869483764863e-34,
+          "frequencyHz": null
+        }
+      ]
+    },
+    {
+      "name": "monitor-engine-master-only-master.webm",
+      "bus": "master",
+      "bytes": 9956,
+      "sha256": "db446b525a1575168351244f22c926f7eefbcee3fa9389fae7f32e0a4a427848",
+      "mime": "audio/webm;codecs=opus",
+      "sampleRate": 48000,
+      "channels": [
+        {
+          "frames": 28800,
+          "measuredStartFrame": 4800,
+          "measuredFrames": 24000,
+          "finite": true,
+          "rms": 0.04676967151483886,
+          "peak": 0.06642609089612961,
+          "frequencyHz": 439.9998921100843
+        },
+        {
+          "frames": 28800,
+          "measuredStartFrame": 4800,
+          "measuredFrames": 24000,
+          "finite": true,
+          "rms": 0.04673198586405545,
+          "peak": 0.06708935648202896,
+          "frequencyHz": 659.996495875491
+        }
+      ]
+    },
+    {
+      "name": "monitor-engine-master-only-cue.webm",
+      "bus": "cue",
+      "bytes": 436,
+      "sha256": "211b3270be9584a7fc4ef3a65172bca36337c00e8c0b4a073552ae3d2856bc9a",
+      "mime": "audio/webm;codecs=opus",
+      "sampleRate": 48000,
+      "channels": [
+        {
+          "frames": 28800,
+          "measuredStartFrame": 4800,
+          "measuredFrames": 24000,
+          "finite": true,
+          "rms": 2.0345869483769388e-34,
+          "peak": 2.0345869483764863e-34,
+          "frequencyHz": null
+        },
+        {
+          "frames": 28800,
+          "measuredStartFrame": 4800,
+          "measuredFrames": 24000,
+          "finite": true,
+          "rms": 2.0345869483769388e-34,
+          "peak": 2.0345869483764863e-34,
+          "frequencyHz": null
+        }
+      ]
+    },
+    {
+      "name": "monitor-engine-master-cue-master.webm",
+      "bus": "master",
+      "bytes": 9956,
+      "sha256": "f94fc5f64e2bdda9338589b9ee86733c65f43210b3d769e8ef894c3dc5796c42",
+      "mime": "audio/webm;codecs=opus",
+      "sampleRate": 48000,
+      "channels": [
+        {
+          "frames": 28800,
+          "measuredStartFrame": 4800,
+          "measuredFrames": 24000,
+          "finite": true,
+          "rms": 0.046779750736937,
+          "peak": 0.0664844885468483,
+          "frequencyHz": 439.99990525025527
+        },
+        {
+          "frames": 28800,
+          "measuredStartFrame": 4800,
+          "measuredFrames": 24000,
+          "finite": true,
+          "rms": 0.04671967793314127,
+          "peak": 0.06715762615203857,
+          "frequencyHz": 659.9981029658338
+        }
+      ]
+    },
+    {
+      "name": "monitor-engine-master-cue-cue.webm",
+      "bus": "cue",
+      "bytes": 9956,
+      "sha256": "818cfb65b37086036c977622859c8e467dfa710f20b631868a537c55e16aa7f0",
+      "mime": "audio/webm;codecs=opus",
+      "sampleRate": 48000,
+      "channels": [
+        {
+          "frames": 28800,
+          "measuredStartFrame": 4800,
+          "measuredFrames": 24000,
+          "finite": true,
+          "rms": 0.04668482785425412,
+          "peak": 0.06647782027721405,
+          "frequencyHz": 440.0015837380327
+        },
+        {
+          "frames": 28800,
+          "measuredStartFrame": 4800,
+          "measuredFrames": 24000,
+          "finite": true,
+          "rms": 0.04663171913203824,
+          "peak": 0.067035973072052,
+          "frequencyHz": 659.9980233128393
+        }
+      ]
+    },
+    {
+      "name": "monitor-engine-fx-layout-master.webm",
+      "bus": "master",
+      "bytes": 9956,
+      "sha256": "ff481c7f5ca1809782e88daeda4d09a3b648aab6957cfc3f269278c52dba73b2",
+      "mime": "audio/webm;codecs=opus",
+      "sampleRate": 48000,
+      "channels": [
+        {
+          "frames": 28800,
+          "measuredStartFrame": 4800,
+          "measuredFrames": 24000,
+          "finite": true,
+          "rms": 0.04676487325409567,
+          "peak": 0.06642486155033112,
+          "frequencyHz": 440.0005031106904
+        },
+        {
+          "frames": 28800,
+          "measuredStartFrame": 4800,
+          "measuredFrames": 24000,
+          "finite": true,
+          "rms": 0.04673719233108725,
+          "peak": 0.06750047951936722,
+          "frequencyHz": 660.0022785492288
+        }
+      ]
+    },
+    {
+      "name": "monitor-engine-fx-layout-cue.webm",
+      "bus": "cue",
+      "bytes": 9956,
+      "sha256": "d81c9e1e51205bd0c499caeb26253331c67704b96d67fcd689b7298a417654aa",
+      "mime": "audio/webm;codecs=opus",
+      "sampleRate": 48000,
+      "channels": [
+        {
+          "frames": 28800,
+          "measuredStartFrame": 4800,
+          "measuredFrames": 24000,
+          "finite": true,
+          "rms": 0.08493809816679947,
+          "peak": 0.12093541026115417,
+          "frequencyHz": 440.00032332300907
+        },
+        {
+          "frames": 28800,
+          "measuredStartFrame": 4800,
+          "measuredFrames": 24000,
+          "finite": true,
+          "rms": 0.08503219074205677,
+          "peak": 0.12280476093292236,
+          "frequencyHz": 659.9964350883769
+        }
+      ]
+    },
+    {
+      "name": "monitor-engine-channel-fx-master.webm",
+      "bus": "master",
+      "bytes": 8990,
+      "sha256": "40ddfdcd6bb620d12c9bb79ed884dd0ab647fc282d8d17dc92a18700463b1beb",
+      "mime": "audio/webm;codecs=opus",
+      "sampleRate": 48000,
+      "channels": [
+        {
+          "frames": 25920,
+          "measuredStartFrame": 4800,
+          "measuredFrames": 21120,
+          "finite": true,
+          "rms": 0.05759487142058563,
+          "peak": 0.08901645243167877,
+          "frequencyHz": 439.98952590922204
+        },
+        {
+          "frames": 25920,
+          "measuredStartFrame": 4800,
+          "measuredFrames": 21120,
+          "finite": true,
+          "rms": 0.057449608321322294,
+          "peak": 0.09216994047164917,
+          "frequencyHz": 659.9931922348334
+        }
+      ]
+    },
+    {
+      "name": "monitor-engine-channel-fx-cue.webm",
+      "bus": "cue",
+      "bytes": 9956,
+      "sha256": "f0cd143f594276ad625567623e57666eccc9f2739e939198b8f4e09dc237e85c",
+      "mime": "audio/webm;codecs=opus",
+      "sampleRate": 48000,
+      "channels": [
+        {
+          "frames": 28800,
+          "measuredStartFrame": 4800,
+          "measuredFrames": 24000,
+          "finite": true,
+          "rms": 0.10555749958389196,
+          "peak": 0.16276729106903076,
+          "frequencyHz": 439.99169494010727
+        },
+        {
+          "frames": 28800,
+          "measuredStartFrame": 4800,
+          "measuredFrames": 24000,
+          "finite": true,
+          "rms": 0.10533095621612705,
+          "peak": 0.16493849456310272,
+          "frequencyHz": 659.9670188058349
+        }
+      ]
+    },
+    {
+      "name": "monitor-engine-vocal-stem-master.webm",
+      "bus": "master",
+      "bytes": 9956,
+      "sha256": "cbf5f2b6e9bfbdb54d22cb33e0d587c1a0578d28169339e46d3273c93aaea85b",
+      "mime": "audio/webm;codecs=opus",
+      "sampleRate": 48000,
+      "channels": [
+        {
+          "frames": 28800,
+          "measuredStartFrame": 4800,
+          "measuredFrames": 24000,
+          "finite": true,
+          "rms": 0.046688290193301174,
+          "peak": 0.06627775728702545,
+          "frequencyHz": 173.00106138145685
+        },
+        {
+          "frames": 28800,
+          "measuredStartFrame": 4800,
+          "measuredFrames": 24000,
+          "finite": true,
+          "rms": 0.046682400920542474,
+          "peak": 0.0671175941824913,
+          "frequencyHz": 211.0040584481825
+        }
+      ]
+    },
+    {
+      "name": "monitor-engine-vocal-stem-cue.webm",
+      "bus": "cue",
+      "bytes": 9956,
+      "sha256": "af1f429485043baf17e2258d056b7b1a0f50b4397271ebe25081b3f591e9a00c",
+      "mime": "audio/webm;codecs=opus",
+      "sampleRate": 48000,
+      "channels": [
+        {
+          "frames": 28800,
+          "measuredStartFrame": 4800,
+          "measuredFrames": 24000,
+          "finite": true,
+          "rms": 0.0848936060089481,
+          "peak": 0.1206643283367157,
+          "frequencyHz": 173.00195032191715
+        },
+        {
+          "frames": 28800,
+          "measuredStartFrame": 4800,
+          "measuredFrames": 24000,
+          "finite": true,
+          "rms": 0.08491588226820884,
+          "peak": 0.12246871739625931,
+          "frequencyHz": 211.0033820090567
+        }
+      ]
+    },
+    {
+      "name": "monitor-engine-stem-slip-prefader-master.webm",
+      "bus": "master",
+      "bytes": 436,
+      "sha256": "2ff63a61fd0dba4be47e8804cd1106028ec150ea25e817e92e839a613053fdaa",
+      "mime": "audio/webm;codecs=opus",
+      "sampleRate": 48000,
+      "channels": [
+        {
+          "frames": 28800,
+          "measuredStartFrame": 4800,
+          "measuredFrames": 24000,
+          "finite": true,
+          "rms": 2.0345869483769388e-34,
+          "peak": 2.0345869483764863e-34,
+          "frequencyHz": null
+        },
+        {
+          "frames": 28800,
+          "measuredStartFrame": 4800,
+          "measuredFrames": 24000,
+          "finite": true,
+          "rms": 2.0345869483769388e-34,
+          "peak": 2.0345869483764863e-34,
+          "frequencyHz": null
+        }
+      ]
+    },
+    {
+      "name": "monitor-engine-stem-slip-prefader-cue.webm",
+      "bus": "cue",
+      "bytes": 9956,
+      "sha256": "80f1ba57f08d332d06f2cebe84bfb6162e41b35d8556113299b5cc1b88b56613",
+      "mime": "audio/webm;codecs=opus",
+      "sampleRate": 48000,
+      "channels": [
+        {
+          "frames": 28800,
+          "measuredStartFrame": 4800,
+          "measuredFrames": 24000,
+          "finite": true,
+          "rms": 0.08490713244168537,
+          "peak": 0.1206771731376648,
+          "frequencyHz": 173.00088313918172
+        },
+        {
+          "frames": 28800,
+          "measuredStartFrame": 4800,
+          "measuredFrames": 24000,
+          "finite": true,
+          "rms": 0.08490483906891118,
+          "peak": 0.12256667762994766,
+          "frequencyHz": 210.99370815276103
+        }
+      ]
+    },
+    {
+      "name": "monitor-engine-silence-master.webm",
+      "bus": "master",
+      "bytes": 436,
+      "sha256": "da3642e331227ecc8f387c042a532726ab5e862d64c42ef1af60158ac1b95efb",
+      "mime": "audio/webm;codecs=opus",
+      "sampleRate": 48000,
+      "channels": [
+        {
+          "frames": 28800,
+          "measuredStartFrame": 4800,
+          "measuredFrames": 24000,
+          "finite": true,
+          "rms": 2.0345869483769388e-34,
+          "peak": 2.0345869483764863e-34,
+          "frequencyHz": null
+        },
+        {
+          "frames": 28800,
+          "measuredStartFrame": 4800,
+          "measuredFrames": 24000,
+          "finite": true,
+          "rms": 2.0345869483769388e-34,
+          "peak": 2.0345869483764863e-34,
+          "frequencyHz": null
+        }
+      ]
+    },
+    {
+      "name": "monitor-engine-silence-cue.webm",
+      "bus": "cue",
+      "bytes": 436,
+      "sha256": "4237b1ff9f30d453847909f5f1bf2d1d94cebcd6fe2aa76aac1665a819bd37d8",
+      "mime": "audio/webm;codecs=opus",
+      "sampleRate": 48000,
+      "channels": [
+        {
+          "frames": 28800,
+          "measuredStartFrame": 4800,
+          "measuredFrames": 24000,
+          "finite": true,
+          "rms": 2.0345869483769388e-34,
+          "peak": 2.0345869483764863e-34,
+          "frequencyHz": null
+        },
+        {
+          "frames": 28800,
+          "measuredStartFrame": 4800,
+          "measuredFrames": 24000,
+          "finite": true,
+          "rms": 2.0345869483769388e-34,
+          "peak": 2.0345869483764863e-34,
+          "frequencyHz": null
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "scope": "Actual AudioEngine and browser MediaRecorder/decode. Synthetic source tones; settled metrics skip first100ms of decoded codec stream; original encoded files remain complete. No physical/native/latency/first-frame/Seratoquality acceptance.",
+  "passed": 9,
+  "failed": 0,
+  "completed": true
+}

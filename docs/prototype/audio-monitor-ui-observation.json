@@ -1,0 +1,23 @@
+{
+  "date": "2026-10-17",
+  "runtime": "In-app Chromium, http://127.0.0.1:8768/prototype/",
+  "observed": [
+    "Devices Refresh audio outputs returned System default in this runtime. No specific physical output was exposed.",
+    "Use selected output exercised actual default setSinkId path; physical status muted during selection, later master-only and unmuted after returning/applying stereo. Native completion latency was not measured.",
+    "Mixer Cue Mix moved50\u219225; Devices status reflected25. Restored50 and confirmed50 after reload.",
+    "After final source reload, CUE button toggled class active then empty; both decks remained paused.",
+    "Final Devices status: System default, stereo, master1/2, cue not sent to output, cue mix50%, cue volume50%, unmuted."
+  ],
+  "sourceHashes": {
+    "engine.js": "a05bd18fe63d6ad0aee041870699a9c6d7ec9a424370798babf6d69f902b5f57",
+    "audio-monitor.js": "31a07bd6277bf19ec05495d207f7228505c8c948a9314531702706596bf4eada",
+    "audio-output.js": "8c71a48f800393951f66cf481b2f83b195616d5b8d6174f335b5071007f96150",
+    "panels.js": "aa9ad663f657030a64bedda5b14ba3fcb670ca093f3b63da712cc3406343a86e",
+    "app.js": "75729a0d34e24932c07eca598c6c7996bc5fa0dbc842f06db0096f60a24ddcf3"
+  },
+  "screenshots": [
+    "audio-monitor-ui-browser.png",
+    "audio-monitor-ui-current-browser.png"
+  ],
+  "scope": "Actual visible UI/control/default selection observations. Does not establish physical outputs, arbitrary device enumeration, audio under output switching, hot-unplug, or native runtime."
+}

@@ -1,0 +1,305 @@
+{
+  "passed": 11,
+  "failed": 1,
+  "sourceHashes": {
+    "controller": "d727f9d964806dd5d9850b39210e590b807bebac89d379563ecd1de85eacb8be",
+    "monitor": "c41f5566ef36ca6413d2075fef199ccd596e41053d980cadcbb5bee486da8232",
+    "engine": "8d110197bdafd97b11eb01e2199ff5542f5372e5da27f4b5562c14bedfc1a295",
+    "panels": "4975f2f068e163899c5e87f412663357b5710a3c2872f6e1257c6e852aea0740"
+  },
+  "scope": "Actual selection controller with controlled context setSinkId, devices, monitor API and async gates. No actual audio graph PCM, browser/OS device selection, physical hot-unplug, headphone sockets, engine recording or musical acceptance.",
+  "checks": [
+    {
+      "name": "Explicit selection resets quad to master-only stereo before opening selected output",
+      "passed": true,
+      "evidence": {
+        "sink": "B",
+        "layout": "stereo",
+        "cueChannels": []
+      }
+    },
+    {
+      "name": "Overlapping selections finish with the latest requested sink and keep physical mute until it commits",
+      "passed": true,
+      "evidence": {
+        "calls": [
+          "A",
+          "B"
+        ],
+        "finalSink": "B"
+      }
+    },
+    {
+      "name": "A queued routing action cannot strand a successful pending selection muted with stale identity",
+      "passed": true,
+      "evidence": {
+        "selectionResult": false,
+        "routeResult": {
+          "layout": "stereo",
+          "physicalMuted": true,
+          "masterChannels": [
+            1,
+            2
+          ],
+          "cueChannels": []
+        },
+        "actualSink": "A",
+        "snapshot": {
+          "deviceId": "A",
+          "label": "Selected audio output",
+          "outputs": [
+            {
+              "deviceId": "A",
+              "label": "Output A"
+            },
+            {
+              "deviceId": "B",
+              "label": "Output B"
+            },
+            {
+              "deviceId": "X",
+              "label": "Output X"
+            }
+          ],
+          "canSelect": true,
+          "routing": {
+            "layout": "stereo",
+            "physicalMuted": false,
+            "masterChannels": [
+              1,
+              2
+            ],
+            "cueChannels": []
+          },
+          "lastError": null,
+          "disposed": false
+        }
+      }
+    },
+    {
+      "name": "Rejecting latest selection after superseded success must not reopen a sink under the wrong identity",
+      "passed": true,
+      "evidence": {
+        "latest": {
+          "error": {
+            "name": "NotAllowedError",
+            "message": "Selection denied"
+          }
+        },
+        "actualSink": "A",
+        "snapshot": {
+          "deviceId": "A",
+          "label": "Output A",
+          "outputs": [
+            {
+              "deviceId": "A",
+              "label": "Output A"
+            },
+            {
+              "deviceId": "B",
+              "label": "Output B"
+            },
+            {
+              "deviceId": "X",
+              "label": "Output X"
+            }
+          ],
+          "canSelect": true,
+          "routing": {
+            "layout": "stereo",
+            "physicalMuted": false,
+            "masterChannels": [
+              1,
+              2
+            ],
+            "cueChannels": []
+          },
+          "lastError": "Selection denied",
+          "disposed": false
+        }
+      }
+    },
+    {
+      "name": "Rejected selection confirms retained sink availability and reopens only stereo master",
+      "passed": true,
+      "evidence": {
+        "retained": "A",
+        "reopenedLayout": "stereo",
+        "cueChannels": []
+      }
+    },
+    {
+      "name": "Rejected selection cannot unmute an unavailable retained device or a changed default sink",
+      "passed": true,
+      "evidence": {
+        "checked": [
+          "retained missing",
+          "sink became default"
+        ]
+      }
+    },
+    {
+      "name": "Device change during pending selection never reopens quad on changed/default identity",
+      "passed": true,
+      "evidence": {
+        "cases": [
+          {
+            "missing": false,
+            "actualSink": "B",
+            "physicalMuted": false,
+            "layout": "stereo",
+            "snapshot": {
+              "deviceId": "B",
+              "label": "Output B",
+              "outputs": [
+                {
+                  "deviceId": "A",
+                  "label": "Output A"
+                },
+                {
+                  "deviceId": "B",
+                  "label": "Output B"
+                },
+                {
+                  "deviceId": "X",
+                  "label": "Output X"
+                }
+              ],
+              "canSelect": true,
+              "routing": {
+                "layout": "stereo",
+                "physicalMuted": false,
+                "masterChannels": [
+                  1,
+                  2
+                ],
+                "cueChannels": []
+              },
+              "lastError": null,
+              "disposed": false
+            }
+          },
+          {
+            "missing": true,
+            "actualSink": "B",
+            "physicalMuted": true,
+            "layout": "stereo",
+            "snapshot": {
+              "deviceId": "B",
+              "label": "Output B",
+              "outputs": [
+                {
+                  "deviceId": "A",
+                  "label": "Output A"
+                },
+                {
+                  "deviceId": "X",
+                  "label": "Output X"
+                }
+              ],
+              "canSelect": true,
+              "routing": {
+                "layout": "stereo",
+                "physicalMuted": true,
+                "masterChannels": [
+                  1,
+                  2
+                ],
+                "cueChannels": []
+              },
+              "lastError": "Selected output disconnected or changed. Audio is muted; choose an output to resume.",
+              "disposed": false
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "Hot disappearance/default fallback mutes quad and leaves cue absent from any reopened default output",
+      "passed": true,
+      "evidence": {
+        "defaultResumedOnlyStereo": true
+      }
+    },
+    {
+      "name": "Failed quad capacity change preserves prior live route and does not change sink",
+      "passed": true,
+      "evidence": {
+        "routePreserved": {
+          "layout": "stereo",
+          "physicalMuted": false,
+          "masterChannels": [
+            1,
+            2
+          ],
+          "cueChannels": []
+        }
+      }
+    },
+    {
+      "name": "Sink identity drift plus enumeration rejection cannot leave cue matrix unmuted on default",
+      "passed": false,
+      "evidence": {
+        "result": {
+          "error": {
+            "name": "Error",
+            "message": "Enumeration unavailable"
+          }
+        },
+        "actualSink": "",
+        "snapshot": {
+          "deviceId": "A",
+          "label": "Selected audio output",
+          "outputs": [
+            {
+              "deviceId": "A",
+              "label": "Output A"
+            },
+            {
+              "deviceId": "B",
+              "label": "Output B"
+            },
+            {
+              "deviceId": "X",
+              "label": "Output X"
+            }
+          ],
+          "canSelect": true,
+          "routing": {
+            "layout": "four-channel",
+            "physicalMuted": false,
+            "masterChannels": [
+              1,
+              2
+            ],
+            "cueChannels": [
+              3,
+              4
+            ]
+          },
+          "lastError": null,
+          "disposed": false
+        }
+      },
+      "error": "AssertionError [ERR_ASSERTION]: Failed validation leaves quad cue matrix live after sink identity changed to default\n    at file:///Users/jasonpoindexter/Documents/GitHub/Open%20Play/scripts/test_audio_output_review.mjs:26:557\n    at async check (file:///Users/jasonpoindexter/Documents/GitHub/Open%20Play/scripts/test_audio_output_review.mjs:16:54)\n    at async file:///Users/jasonpoindexter/Documents/GitHub/Open%20Play/scripts/test_audio_output_review.mjs:26:1"
+    },
+    {
+      "name": "No explicit selected device means no four-channel cue routing",
+      "passed": true,
+      "evidence": {
+        "forbiddenIdentities": [
+          "",
+          "default"
+        ]
+      }
+    },
+    {
+      "name": "Dispose before selection/enumeration settlement prevents callbacks and keeps pending output muted",
+      "passed": true,
+      "evidence": {
+        "callbacksAfterDispose": 0,
+        "physicalMuted": true
+      }
+    }
+  ]
+}

@@ -507,7 +507,7 @@ function renderMixer() {
       .slice(0, state.deckCount)
       .map(
         (d) =>
-          `<div class="channel-strip" style="--accent:${colors[d.index]}"><strong>${d.index + 1}</strong>${["trim", "high", "mid", "low", "filter"].map((k) => `<label class="knob-group">${k === "trim" ? "GAIN" : k.toUpperCase()}<input aria-label="Deck ${d.index + 1} ${k}" type="range" data-mix="${d.index}:${k}" min="${k === "trim" ? 0 : k === "filter" ? -1 : -24}" max="${k === "trim" ? 2 : k === "filter" ? 1 : 6}" step="${["trim", "filter"].includes(k) ? ".01" : ".5"}" value="${d[k] ?? (k === "trim" ? 1 : 0)}"></label>`).join("")}<label class="fader-group">LEVEL<input type="range" min="0" max="1" step=".01" value="${d.level ?? 0.8}" data-mix="${d.index}:level" aria-label="Deck ${d.index + 1} level"></label><button data-action="pfl" data-deck="${d.index}" class="${d.pfl ? "active" : ""}" title="Headphone cue simulation">CUE ◇</button></div>`,
+          `<div class="channel-strip" style="--accent:${colors[d.index]}"><strong>${d.index + 1}</strong>${["trim", "high", "mid", "low", "filter"].map((k) => `<label class="knob-group">${k === "trim" ? "GAIN" : k.toUpperCase()}<input aria-label="Deck ${d.index + 1} ${k}" type="range" data-mix="${d.index}:${k}" min="${k === "trim" ? 0 : k === "filter" ? -1 : -24}" max="${k === "trim" ? 2 : k === "filter" ? 1 : 6}" step="${["trim", "filter"].includes(k) ? ".01" : ".5"}" value="${d[k] ?? (k === "trim" ? 1 : 0)}"></label>`).join("")}<label class="fader-group">LEVEL<input type="range" min="0" max="1" step=".01" value="${d.level ?? 0.8}" data-mix="${d.index}:level" aria-label="Deck ${d.index + 1} level"></label><button data-action="pfl" data-deck="${d.index}" class="${d.pfl ? "active" : ""}" title="Select deck for headphone cue">CUE ◇</button></div>`,
       )
       .join("") +
     `<label class="crossfader">A — CROSSFADER — B<input id="crossfader" type="range" min="-1" max="1" step=".01" value="${engine.cross}" aria-label="Crossfader"></label>`;
@@ -821,10 +821,8 @@ async function deckAction(action, index, el, event = {}) {
   if (action === "keylock") { d.keySync = false; await engine.setPitch(d, { keylock: !d.keylock }); }
   if (action === "repeat") d.repeat = !d.repeat;
   if (action === "pfl") {
-    d.pfl = !d.pfl;
-    notify(
-      "Headphone routing is simulated; browser audio behavior is unchanged.",
-    );
+    engine.setPFL(d.index,!d.pfl);d.pfl=!d.pfl;
+    notify(d.pfl?'Deck selected for cue. Use Devices to route the headphone bus.':'Deck removed from cue.');
   }
   if (action === "range") d.pitchRange = { 8: 16, 16: 50, 50: 8 }[d.pitchRange];
   if (action === "double") {

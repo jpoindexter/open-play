@@ -1,3 +1,23 @@
+## Current checkpoint 13 — cue routing and confirmed controller input
+
+17 October 2026. Jason corrected the earlier negative test: the physical Hercules browser knob **worked in Electron 0.1.1**; he had been watching the wrong app. This is user-confirmed library navigation, corroborated by actual CC channel1/controller1 input. It does not verify jogs, LEDs, the whole controller map or physical audio sockets.
+
+Local desktop testing was explicitly approved for HTML `f8b0abf`. Existing packaged 0.1.1 remains unchanged. New browser cue routing is separately tested and has not yet been packaged: actual monitor graph18/18, actual AudioEngine/MediaRecorder15/15 with30 complete encoded recordings, controlled output lifecycle13/13 and independent Stem Slip graph/control6/6. The first actual Stem Slip cue run failed8/9; the fixed source passes both Slip modes, channel EQ/filter/FX and ordinary-path restoration. Full1:1 remains false across110groups/522requirements.
+
+Read plan50, `docs/prototype/AUDIO_MONITOR_REVIEW.md`, `audio-monitor-engine-browser-results.json`, `audio-monitor-evidence-inspection.json`, `audio-monitor-ui-observation.json`, `docs/research/AUDIO_OUTPUT_REVIEW.md` and `STEM_CUE_REVIEW.md`. Engine SHA `a05bd18fe63d6ad0aee041870699a9c6d7ec9a424370798babf6d69f902b5f57`. Earlier claims below are dated history; this block governs current authority and evidence.
+
+Next: package the reviewed cue source as a new local desktop test version, preserve0.1.1 and its launch option, verify actual native output enumeration/selection, then arrange a physical Hercules master/headphone test. Do not claim sockets, hot-unplug safety, exact Serato sound/curves, quality/latency, import persistence, native DSP or full parity from the browser tests. No public release.
+
+## Dated prior audit checkpoints (historical; current block above governs)
+
+
+
+## Confirmed desktop controller correction — 17 October2026
+
+Jason corrected his earlier negative knob report: “oh it worked in the eletron app i was looking at wrong thing”. Physical Hercules browser-knob control of Electron0.1.1 library selection is USER-CONFIRMED. Codex inspected the actual desktopMIDIlog: many non-synthetic exact-device CCch1#1 messages with values1/127, with the saved Relative two’s complement Librarybrowse mapping. The earlier “No selection movement” is superseded for that test; no hardware delivery defect follows from it. Fullcontroller mapping/LEDfeedback/physical headphone-master separation remain incomplete.
+
+Current new cue-routing WIP is separate: prototype/audio-monitor.js and engine.js edits have NOT yet run actualbrowser graph tests; do not promote them to acceptance or package over working0.1.1. Existingapproveddesktopbundle remains unchanged. Next: measuredprefadercue/master matrix and real UIcontrols/outputselection, then separately physicalsockettest.
+
 
 
 CURRENT desktop milestone — plan49 overrides historical gates: user APPROVEDf8b0abf for localdesktoptest. Packaged0.1.1 launched/importedWAV/played/recorded22.2sactualnonzerostereo/pauseobserved.191approvedprototypefilesbyteexact; desktop-candidate.json pinsASARandhost. FreshconfirmedHercules101packets/0parseerrors; desktopenumeratesconnectedendpoint+savedrelativeCC1ch1browsermapping; actualdesktopknobactionawaitsuser. Start Open Play Desktop.command. Headphoneseparation/nativeDSP/full1:1/notarization/publicrelease remainunproved. No code/stackrewrite. MainUIlegacyHelp native-not-started text is inheritedapprovedHTML and historical; desktopAbout/approvalledger/currentplan governactualstate. Do not turn that stalecopyintoanativeworkban. Next: hands-onmusic+controller→realheadphone/masterroute.
