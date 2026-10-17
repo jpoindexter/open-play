@@ -4,7 +4,7 @@ Read [the full independent audit packet](codex-to-claude-completeness-audit.md).
 It preserves the original prompt verbatim and later authority/constraints.
 
 Project: `/Users/jasonpoindexter/Documents/GitHub/Open Play`.
-Candidate: `21c2dc1d389396c77fc7b4d47547e9bebd3b49ea`; hashes: `docs/prototype/candidate-hashes.json`.
+Candidate: `a688f1a620c84ded9f639de44dfb8f22fc78f11f`; hashes: `docs/prototype/candidate-hashes.json`.
 Independently audit the complete Serato scope and return
 `handoffs/claude-to-codex-completeness-audit.md` with reproducible findings.
 
