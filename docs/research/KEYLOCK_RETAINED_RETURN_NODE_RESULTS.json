@@ -1,0 +1,1271 @@
+{
+  "passed": 3,
+  "failed": 0,
+  "criteria": {
+    "totalCases": 54,
+    "wholeRunBudgetSeconds": 180,
+    "cleanupBudgetSeconds": 10,
+    "windowSeconds": 0.04,
+    "hopSeconds": 0.01,
+    "firstCorrectPitchWithinReleaseSeconds": 0.03,
+    "maximumLowRMSGapSeconds": 0.02,
+    "minimumRMS": 0.005,
+    "pitchRelative": 0.01,
+    "allAudibleWindowsCorrectAfterOutputSeconds": 0.03,
+    "settledFromOutputSeconds": 0.25,
+    "settledThroughOutputSeconds": 0.4,
+    "sourceCursorACKToleranceFrames": 1,
+    "fullArmedCoverage": 1
+  },
+  "harnessSHA256": "60359600949fab53bb3270df9fcc6a5b8cc080def782e09478944b9321633b53",
+  "experimentSHA256": "669f76e8482b8c215e41ab791c833a207c025412f33efe2ecefd08e145d21535",
+  "scope": "Exact unchanged WASM in controlled Node port/clock/gain host and harness actual PCM classifier. Simulated processing spans include1s retained pause; no browser scheduling or hardware proof.54conditions require exactACK, retained owner/PCM and settled pitch only; release gap/latency failures retained as observations, not accepted functionality.",
+  "checks": [
+    {
+      "name": "Classifier rejects retained silence until40ms instead of labelling scheduled40ms return instant",
+      "passed": true,
+      "evidence": {
+        "result": {
+          "expectedHz": 880,
+          "rawExpectedHz": 475.2,
+          "rawPitchIndistinguishableAtThisConfiguration": false,
+          "firstCorrectAfterReleaseSeconds": 0.01,
+          "onset": 0.04,
+          "onsetAfterReleaseSeconds": 0.04,
+          "initialGapSeconds": 0.04,
+          "maxLowRMSGapSeconds": 0.04,
+          "wrongPitchAfterOutput30ms": 0,
+          "rawPitchWindows": 0,
+          "criteriaPassed": {
+            "firstCorrectWithin30msOfRelease": true,
+            "releaseGapWithin20ms": false,
+            "anyLowRMSGapWithin20ms": false,
+            "settledPitch": true,
+            "noWrongPitchAfterOutput30ms": true
+          }
+        }
+      }
+    },
+    {
+      "name": "Classifier rejects wrong old region and raw pitch while retaining actual negative evidence",
+      "passed": true,
+      "evidence": {
+        "result": {
+          "expectedHz": 1100,
+          "rawExpectedHz": 594,
+          "rawPitchIndistinguishableAtThisConfiguration": false,
+          "firstCorrectAfterReleaseSeconds": 0.09,
+          "onset": 0,
+          "onsetAfterReleaseSeconds": 0,
+          "initialGapSeconds": 0,
+          "maxLowRMSGapSeconds": 0,
+          "wrongPitchAfterOutput30ms": 2,
+          "rawPitchWindows": 0,
+          "criteriaPassed": {
+            "firstCorrectWithin30msOfRelease": false,
+            "releaseGapWithin20ms": true,
+            "anyLowRMSGapWithin20ms": true,
+            "settledPitch": true,
+            "noWrongPitchAfterOutput30ms": false
+          }
+        }
+      }
+    },
+    {
+      "name": "Actual retained WASM54conditions preserve owner and held copiedPCM, exactACK cursor and settled regionpitch",
+      "passed": true,
+      "evidence": {
+        "rows": [
+          {
+            "rate": 0.5,
+            "shift": -12,
+            "leadSeconds": 0.04,
+            "region": "same",
+            "cursorReceipt": {
+              "requested": 1,
+              "acknowledged": 1,
+              "errorFrames": 0
+            },
+            "retainedOwner": true,
+            "onsetAfterReleaseSeconds": 0.040000000000000036,
+            "firstCorrectAfterReleaseSeconds": 0.020000000000000018,
+            "initialGapSeconds": 0.04,
+            "criteriaPassed": {
+              "firstCorrectWithin30msOfRelease": true,
+              "releaseGapWithin20ms": false,
+              "anyLowRMSGapWithin20ms": false,
+              "settledPitch": true,
+              "noWrongPitchAfterOutput30ms": true
+            }
+          },
+          {
+            "rate": 0.5,
+            "shift": -12,
+            "leadSeconds": 0.04,
+            "region": "different",
+            "cursorReceipt": {
+              "requested": 6,
+              "acknowledged": 6,
+              "errorFrames": 0
+            },
+            "retainedOwner": true,
+            "onsetAfterReleaseSeconds": 0.040000000000000036,
+            "firstCorrectAfterReleaseSeconds": 0.040000000000000036,
+            "initialGapSeconds": 0.04,
+            "criteriaPassed": {
+              "firstCorrectWithin30msOfRelease": false,
+              "releaseGapWithin20ms": false,
+              "anyLowRMSGapWithin20ms": false,
+              "settledPitch": true,
+              "noWrongPitchAfterOutput30ms": true
+            }
+          },
+          {
+            "rate": 0.5,
+            "shift": -12,
+            "leadSeconds": 0.06,
+            "region": "same",
+            "cursorReceipt": {
+              "requested": 1,
+              "acknowledged": 1,
+              "errorFrames": 0
+            },
+            "retainedOwner": true,
+            "onsetAfterReleaseSeconds": 0.06000000000000005,
+            "firstCorrectAfterReleaseSeconds": 0.040000000000000036,
+            "initialGapSeconds": 0.06,
+            "criteriaPassed": {
+              "firstCorrectWithin30msOfRelease": false,
+              "releaseGapWithin20ms": false,
+              "anyLowRMSGapWithin20ms": false,
+              "settledPitch": true,
+              "noWrongPitchAfterOutput30ms": true
+            }
+          },
+          {
+            "rate": 0.5,
+            "shift": -12,
+            "leadSeconds": 0.06,
+            "region": "different",
+            "cursorReceipt": {
+              "requested": 6,
+              "acknowledged": 6,
+              "errorFrames": 0
+            },
+            "retainedOwner": true,
+            "onsetAfterReleaseSeconds": 0.06000000000000005,
+            "firstCorrectAfterReleaseSeconds": 0.06000000000000005,
+            "initialGapSeconds": 0.06,
+            "criteriaPassed": {
+              "firstCorrectWithin30msOfRelease": false,
+              "releaseGapWithin20ms": false,
+              "anyLowRMSGapWithin20ms": false,
+              "settledPitch": true,
+              "noWrongPitchAfterOutput30ms": true
+            }
+          },
+          {
+            "rate": 0.5,
+            "shift": -12,
+            "leadSeconds": 0.17,
+            "region": "same",
+            "cursorReceipt": {
+              "requested": 1,
+              "acknowledged": 1,
+              "errorFrames": 0
+            },
+            "retainedOwner": true,
+            "onsetAfterReleaseSeconds": 0.16999999999999993,
+            "firstCorrectAfterReleaseSeconds": 0.1499999999999999,
+            "initialGapSeconds": 0.17,
+            "criteriaPassed": {
+              "firstCorrectWithin30msOfRelease": false,
+              "releaseGapWithin20ms": false,
+              "anyLowRMSGapWithin20ms": false,
+              "settledPitch": true,
+              "noWrongPitchAfterOutput30ms": true
+            }
+          },
+          {
+            "rate": 0.5,
+            "shift": -12,
+            "leadSeconds": 0.17,
+            "region": "different",
+            "cursorReceipt": {
+              "requested": 6,
+              "acknowledged": 6,
+              "errorFrames": 0
+            },
+            "retainedOwner": true,
+            "onsetAfterReleaseSeconds": 0.16999999999999993,
+            "firstCorrectAfterReleaseSeconds": 0.14000000000000012,
+            "initialGapSeconds": 0.17,
+            "criteriaPassed": {
+              "firstCorrectWithin30msOfRelease": false,
+              "releaseGapWithin20ms": false,
+              "anyLowRMSGapWithin20ms": false,
+              "settledPitch": true,
+              "noWrongPitchAfterOutput30ms": true
+            }
+          },
+          {
+            "rate": 0.5,
+            "shift": 0,
+            "leadSeconds": 0.04,
+            "region": "same",
+            "cursorReceipt": {
+              "requested": 1,
+              "acknowledged": 1,
+              "errorFrames": 0
+            },
+            "retainedOwner": true,
+            "onsetAfterReleaseSeconds": 0.040000000000000036,
+            "firstCorrectAfterReleaseSeconds": 0.010000000000000009,
+            "initialGapSeconds": 0.04,
+            "criteriaPassed": {
+              "firstCorrectWithin30msOfRelease": true,
+              "releaseGapWithin20ms": false,
+              "anyLowRMSGapWithin20ms": false,
+              "settledPitch": true,
+              "noWrongPitchAfterOutput30ms": true
+            }
+          },
+          {
+            "rate": 0.5,
+            "shift": 0,
+            "leadSeconds": 0.04,
+            "region": "different",
+            "cursorReceipt": {
+              "requested": 6,
+              "acknowledged": 6,
+              "errorFrames": 0
+            },
+            "retainedOwner": true,
+            "onsetAfterReleaseSeconds": 0.040000000000000036,
+            "firstCorrectAfterReleaseSeconds": 0.040000000000000036,
+            "initialGapSeconds": 0.04,
+            "criteriaPassed": {
+              "firstCorrectWithin30msOfRelease": false,
+              "releaseGapWithin20ms": false,
+              "anyLowRMSGapWithin20ms": false,
+              "settledPitch": true,
+              "noWrongPitchAfterOutput30ms": true
+            }
+          },
+          {
+            "rate": 0.5,
+            "shift": 0,
+            "leadSeconds": 0.06,
+            "region": "same",
+            "cursorReceipt": {
+              "requested": 1,
+              "acknowledged": 1,
+              "errorFrames": 0
+            },
+            "retainedOwner": true,
+            "onsetAfterReleaseSeconds": 0.06000000000000005,
+            "firstCorrectAfterReleaseSeconds": 0.030000000000000027,
+            "initialGapSeconds": 0.06,
+            "criteriaPassed": {
+              "firstCorrectWithin30msOfRelease": false,
+              "releaseGapWithin20ms": false,
+              "anyLowRMSGapWithin20ms": false,
+              "settledPitch": true,
+              "noWrongPitchAfterOutput30ms": true
+            }
+          },
+          {
+            "rate": 0.5,
+            "shift": 0,
+            "leadSeconds": 0.06,
+            "region": "different",
+            "cursorReceipt": {
+              "requested": 6,
+              "acknowledged": 6,
+              "errorFrames": 0
+            },
+            "retainedOwner": true,
+            "onsetAfterReleaseSeconds": 0.06000000000000005,
+            "firstCorrectAfterReleaseSeconds": 0.040000000000000036,
+            "initialGapSeconds": 0.06,
+            "criteriaPassed": {
+              "firstCorrectWithin30msOfRelease": false,
+              "releaseGapWithin20ms": false,
+              "anyLowRMSGapWithin20ms": false,
+              "settledPitch": true,
+              "noWrongPitchAfterOutput30ms": true
+            }
+          },
+          {
+            "rate": 0.5,
+            "shift": 0,
+            "leadSeconds": 0.17,
+            "region": "same",
+            "cursorReceipt": {
+              "requested": 1,
+              "acknowledged": 1,
+              "errorFrames": 0
+            },
+            "retainedOwner": true,
+            "onsetAfterReleaseSeconds": 0.16999999999999993,
+            "firstCorrectAfterReleaseSeconds": 0.1499999999999999,
+            "initialGapSeconds": 0.17,
+            "criteriaPassed": {
+              "firstCorrectWithin30msOfRelease": false,
+              "releaseGapWithin20ms": false,
+              "anyLowRMSGapWithin20ms": false,
+              "settledPitch": true,
+              "noWrongPitchAfterOutput30ms": true
+            }
+          },
+          {
+            "rate": 0.5,
+            "shift": 0,
+            "leadSeconds": 0.17,
+            "region": "different",
+            "cursorReceipt": {
+              "requested": 6,
+              "acknowledged": 6,
+              "errorFrames": 0
+            },
+            "retainedOwner": true,
+            "onsetAfterReleaseSeconds": 0.16999999999999993,
+            "firstCorrectAfterReleaseSeconds": 0.14000000000000012,
+            "initialGapSeconds": 0.17,
+            "criteriaPassed": {
+              "firstCorrectWithin30msOfRelease": false,
+              "releaseGapWithin20ms": false,
+              "anyLowRMSGapWithin20ms": false,
+              "settledPitch": true,
+              "noWrongPitchAfterOutput30ms": true
+            }
+          },
+          {
+            "rate": 0.5,
+            "shift": 12,
+            "leadSeconds": 0.04,
+            "region": "same",
+            "cursorReceipt": {
+              "requested": 1,
+              "acknowledged": 1,
+              "errorFrames": 0
+            },
+            "retainedOwner": true,
+            "onsetAfterReleaseSeconds": 0.040000000000000036,
+            "firstCorrectAfterReleaseSeconds": 0.010000000000000009,
+            "initialGapSeconds": 0.04,
+            "criteriaPassed": {
+              "firstCorrectWithin30msOfRelease": true,
+              "releaseGapWithin20ms": false,
+              "anyLowRMSGapWithin20ms": false,
+              "settledPitch": true,
+              "noWrongPitchAfterOutput30ms": true
+            }
+          },
+          {
+            "rate": 0.5,
+            "shift": 12,
+            "leadSeconds": 0.04,
+            "region": "different",
+            "cursorReceipt": {
+              "requested": 6,
+              "acknowledged": 6,
+              "errorFrames": 0
+            },
+            "retainedOwner": true,
+            "onsetAfterReleaseSeconds": 0.040000000000000036,
+            "firstCorrectAfterReleaseSeconds": 0.040000000000000036,
+            "initialGapSeconds": 0.04,
+            "criteriaPassed": {
+              "firstCorrectWithin30msOfRelease": false,
+              "releaseGapWithin20ms": false,
+              "anyLowRMSGapWithin20ms": false,
+              "settledPitch": true,
+              "noWrongPitchAfterOutput30ms": true
+            }
+          },
+          {
+            "rate": 0.5,
+            "shift": 12,
+            "leadSeconds": 0.06,
+            "region": "same",
+            "cursorReceipt": {
+              "requested": 1,
+              "acknowledged": 1,
+              "errorFrames": 0
+            },
+            "retainedOwner": true,
+            "onsetAfterReleaseSeconds": 0.06000000000000005,
+            "firstCorrectAfterReleaseSeconds": 0.030000000000000027,
+            "initialGapSeconds": 0.06,
+            "criteriaPassed": {
+              "firstCorrectWithin30msOfRelease": false,
+              "releaseGapWithin20ms": false,
+              "anyLowRMSGapWithin20ms": false,
+              "settledPitch": true,
+              "noWrongPitchAfterOutput30ms": true
+            }
+          },
+          {
+            "rate": 0.5,
+            "shift": 12,
+            "leadSeconds": 0.06,
+            "region": "different",
+            "cursorReceipt": {
+              "requested": 6,
+              "acknowledged": 6,
+              "errorFrames": 0
+            },
+            "retainedOwner": true,
+            "onsetAfterReleaseSeconds": 0.06000000000000005,
+            "firstCorrectAfterReleaseSeconds": 0.040000000000000036,
+            "initialGapSeconds": 0.06,
+            "criteriaPassed": {
+              "firstCorrectWithin30msOfRelease": false,
+              "releaseGapWithin20ms": false,
+              "anyLowRMSGapWithin20ms": false,
+              "settledPitch": true,
+              "noWrongPitchAfterOutput30ms": true
+            }
+          },
+          {
+            "rate": 0.5,
+            "shift": 12,
+            "leadSeconds": 0.17,
+            "region": "same",
+            "cursorReceipt": {
+              "requested": 1,
+              "acknowledged": 1,
+              "errorFrames": 0
+            },
+            "retainedOwner": true,
+            "onsetAfterReleaseSeconds": 0.16999999999999993,
+            "firstCorrectAfterReleaseSeconds": 0.1399999999999999,
+            "initialGapSeconds": 0.17,
+            "criteriaPassed": {
+              "firstCorrectWithin30msOfRelease": false,
+              "releaseGapWithin20ms": false,
+              "anyLowRMSGapWithin20ms": false,
+              "settledPitch": true,
+              "noWrongPitchAfterOutput30ms": true
+            }
+          },
+          {
+            "rate": 0.5,
+            "shift": 12,
+            "leadSeconds": 0.17,
+            "region": "different",
+            "cursorReceipt": {
+              "requested": 6,
+              "acknowledged": 6,
+              "errorFrames": 0
+            },
+            "retainedOwner": true,
+            "onsetAfterReleaseSeconds": 0.16999999999999993,
+            "firstCorrectAfterReleaseSeconds": 0.14000000000000012,
+            "initialGapSeconds": 0.17,
+            "criteriaPassed": {
+              "firstCorrectWithin30msOfRelease": false,
+              "releaseGapWithin20ms": false,
+              "anyLowRMSGapWithin20ms": false,
+              "settledPitch": true,
+              "noWrongPitchAfterOutput30ms": true
+            }
+          },
+          {
+            "rate": 1.08,
+            "shift": -12,
+            "leadSeconds": 0.04,
+            "region": "same",
+            "cursorReceipt": {
+              "requested": 1,
+              "acknowledged": 1,
+              "errorFrames": 0
+            },
+            "retainedOwner": true,
+            "onsetAfterReleaseSeconds": 0.040000000000000036,
+            "firstCorrectAfterReleaseSeconds": 0.020000000000000018,
+            "initialGapSeconds": 0.04,
+            "criteriaPassed": {
+              "firstCorrectWithin30msOfRelease": true,
+              "releaseGapWithin20ms": false,
+              "anyLowRMSGapWithin20ms": false,
+              "settledPitch": true,
+              "noWrongPitchAfterOutput30ms": true
+            }
+          },
+          {
+            "rate": 1.08,
+            "shift": -12,
+            "leadSeconds": 0.04,
+            "region": "different",
+            "cursorReceipt": {
+              "requested": 6,
+              "acknowledged": 6,
+              "errorFrames": 0
+            },
+            "retainedOwner": true,
+            "onsetAfterReleaseSeconds": 0.040000000000000036,
+            "firstCorrectAfterReleaseSeconds": 0.040000000000000036,
+            "initialGapSeconds": 0.04,
+            "criteriaPassed": {
+              "firstCorrectWithin30msOfRelease": false,
+              "releaseGapWithin20ms": false,
+              "anyLowRMSGapWithin20ms": false,
+              "settledPitch": true,
+              "noWrongPitchAfterOutput30ms": true
+            }
+          },
+          {
+            "rate": 1.08,
+            "shift": -12,
+            "leadSeconds": 0.06,
+            "region": "same",
+            "cursorReceipt": {
+              "requested": 1,
+              "acknowledged": 1,
+              "errorFrames": 0
+            },
+            "retainedOwner": true,
+            "onsetAfterReleaseSeconds": 0.06000000000000005,
+            "firstCorrectAfterReleaseSeconds": 0.040000000000000036,
+            "initialGapSeconds": 0.06,
+            "criteriaPassed": {
+              "firstCorrectWithin30msOfRelease": false,
+              "releaseGapWithin20ms": false,
+              "anyLowRMSGapWithin20ms": false,
+              "settledPitch": true,
+              "noWrongPitchAfterOutput30ms": true
+            }
+          },
+          {
+            "rate": 1.08,
+            "shift": -12,
+            "leadSeconds": 0.06,
+            "region": "different",
+            "cursorReceipt": {
+              "requested": 6,
+              "acknowledged": 6,
+              "errorFrames": 0
+            },
+            "retainedOwner": true,
+            "onsetAfterReleaseSeconds": 0.06000000000000005,
+            "firstCorrectAfterReleaseSeconds": 0.04999999999999982,
+            "initialGapSeconds": 0.06,
+            "criteriaPassed": {
+              "firstCorrectWithin30msOfRelease": false,
+              "releaseGapWithin20ms": false,
+              "anyLowRMSGapWithin20ms": false,
+              "settledPitch": true,
+              "noWrongPitchAfterOutput30ms": true
+            }
+          },
+          {
+            "rate": 1.08,
+            "shift": -12,
+            "leadSeconds": 0.17,
+            "region": "same",
+            "cursorReceipt": {
+              "requested": 1,
+              "acknowledged": 1,
+              "errorFrames": 0
+            },
+            "retainedOwner": true,
+            "onsetAfterReleaseSeconds": 0.16999999999999993,
+            "firstCorrectAfterReleaseSeconds": 0.1499999999999999,
+            "initialGapSeconds": 0.17,
+            "criteriaPassed": {
+              "firstCorrectWithin30msOfRelease": false,
+              "releaseGapWithin20ms": false,
+              "anyLowRMSGapWithin20ms": false,
+              "settledPitch": true,
+              "noWrongPitchAfterOutput30ms": true
+            }
+          },
+          {
+            "rate": 1.08,
+            "shift": -12,
+            "leadSeconds": 0.17,
+            "region": "different",
+            "cursorReceipt": {
+              "requested": 6,
+              "acknowledged": 6,
+              "errorFrames": 0
+            },
+            "retainedOwner": true,
+            "onsetAfterReleaseSeconds": 0.16999999999999993,
+            "firstCorrectAfterReleaseSeconds": 0.1499999999999999,
+            "initialGapSeconds": 0.17,
+            "criteriaPassed": {
+              "firstCorrectWithin30msOfRelease": false,
+              "releaseGapWithin20ms": false,
+              "anyLowRMSGapWithin20ms": false,
+              "settledPitch": true,
+              "noWrongPitchAfterOutput30ms": true
+            }
+          },
+          {
+            "rate": 1.08,
+            "shift": 0,
+            "leadSeconds": 0.04,
+            "region": "same",
+            "cursorReceipt": {
+              "requested": 1,
+              "acknowledged": 1,
+              "errorFrames": 0
+            },
+            "retainedOwner": true,
+            "onsetAfterReleaseSeconds": 0.040000000000000036,
+            "firstCorrectAfterReleaseSeconds": 0.010000000000000009,
+            "initialGapSeconds": 0.04,
+            "criteriaPassed": {
+              "firstCorrectWithin30msOfRelease": true,
+              "releaseGapWithin20ms": false,
+              "anyLowRMSGapWithin20ms": false,
+              "settledPitch": true,
+              "noWrongPitchAfterOutput30ms": true
+            }
+          },
+          {
+            "rate": 1.08,
+            "shift": 0,
+            "leadSeconds": 0.04,
+            "region": "different",
+            "cursorReceipt": {
+              "requested": 6,
+              "acknowledged": 6,
+              "errorFrames": 0
+            },
+            "retainedOwner": true,
+            "onsetAfterReleaseSeconds": 0.040000000000000036,
+            "firstCorrectAfterReleaseSeconds": 0.040000000000000036,
+            "initialGapSeconds": 0.04,
+            "criteriaPassed": {
+              "firstCorrectWithin30msOfRelease": false,
+              "releaseGapWithin20ms": false,
+              "anyLowRMSGapWithin20ms": false,
+              "settledPitch": true,
+              "noWrongPitchAfterOutput30ms": true
+            }
+          },
+          {
+            "rate": 1.08,
+            "shift": 0,
+            "leadSeconds": 0.06,
+            "region": "same",
+            "cursorReceipt": {
+              "requested": 1,
+              "acknowledged": 1,
+              "errorFrames": 0
+            },
+            "retainedOwner": true,
+            "onsetAfterReleaseSeconds": 0.06000000000000005,
+            "firstCorrectAfterReleaseSeconds": 0.040000000000000036,
+            "initialGapSeconds": 0.06,
+            "criteriaPassed": {
+              "firstCorrectWithin30msOfRelease": false,
+              "releaseGapWithin20ms": false,
+              "anyLowRMSGapWithin20ms": false,
+              "settledPitch": true,
+              "noWrongPitchAfterOutput30ms": true
+            }
+          },
+          {
+            "rate": 1.08,
+            "shift": 0,
+            "leadSeconds": 0.06,
+            "region": "different",
+            "cursorReceipt": {
+              "requested": 6,
+              "acknowledged": 6,
+              "errorFrames": 0
+            },
+            "retainedOwner": true,
+            "onsetAfterReleaseSeconds": 0.06000000000000005,
+            "firstCorrectAfterReleaseSeconds": 0.04999999999999982,
+            "initialGapSeconds": 0.06,
+            "criteriaPassed": {
+              "firstCorrectWithin30msOfRelease": false,
+              "releaseGapWithin20ms": false,
+              "anyLowRMSGapWithin20ms": false,
+              "settledPitch": true,
+              "noWrongPitchAfterOutput30ms": true
+            }
+          },
+          {
+            "rate": 1.08,
+            "shift": 0,
+            "leadSeconds": 0.17,
+            "region": "same",
+            "cursorReceipt": {
+              "requested": 1,
+              "acknowledged": 1,
+              "errorFrames": 0
+            },
+            "retainedOwner": true,
+            "onsetAfterReleaseSeconds": 0.16999999999999993,
+            "firstCorrectAfterReleaseSeconds": 0.1399999999999999,
+            "initialGapSeconds": 0.17,
+            "criteriaPassed": {
+              "firstCorrectWithin30msOfRelease": false,
+              "releaseGapWithin20ms": false,
+              "anyLowRMSGapWithin20ms": false,
+              "settledPitch": true,
+              "noWrongPitchAfterOutput30ms": true
+            }
+          },
+          {
+            "rate": 1.08,
+            "shift": 0,
+            "leadSeconds": 0.17,
+            "region": "different",
+            "cursorReceipt": {
+              "requested": 6,
+              "acknowledged": 6,
+              "errorFrames": 0
+            },
+            "retainedOwner": true,
+            "onsetAfterReleaseSeconds": 0.16999999999999993,
+            "firstCorrectAfterReleaseSeconds": 0.14000000000000012,
+            "initialGapSeconds": 0.17,
+            "criteriaPassed": {
+              "firstCorrectWithin30msOfRelease": false,
+              "releaseGapWithin20ms": false,
+              "anyLowRMSGapWithin20ms": false,
+              "settledPitch": true,
+              "noWrongPitchAfterOutput30ms": true
+            }
+          },
+          {
+            "rate": 1.08,
+            "shift": 12,
+            "leadSeconds": 0.04,
+            "region": "same",
+            "cursorReceipt": {
+              "requested": 1,
+              "acknowledged": 1,
+              "errorFrames": 0
+            },
+            "retainedOwner": true,
+            "onsetAfterReleaseSeconds": 0.040000000000000036,
+            "firstCorrectAfterReleaseSeconds": 0.010000000000000009,
+            "initialGapSeconds": 0.04,
+            "criteriaPassed": {
+              "firstCorrectWithin30msOfRelease": true,
+              "releaseGapWithin20ms": false,
+              "anyLowRMSGapWithin20ms": false,
+              "settledPitch": true,
+              "noWrongPitchAfterOutput30ms": true
+            }
+          },
+          {
+            "rate": 1.08,
+            "shift": 12,
+            "leadSeconds": 0.04,
+            "region": "different",
+            "cursorReceipt": {
+              "requested": 6,
+              "acknowledged": 6,
+              "errorFrames": 0
+            },
+            "retainedOwner": true,
+            "onsetAfterReleaseSeconds": 0.040000000000000036,
+            "firstCorrectAfterReleaseSeconds": 0.040000000000000036,
+            "initialGapSeconds": 0.04,
+            "criteriaPassed": {
+              "firstCorrectWithin30msOfRelease": false,
+              "releaseGapWithin20ms": false,
+              "anyLowRMSGapWithin20ms": false,
+              "settledPitch": true,
+              "noWrongPitchAfterOutput30ms": true
+            }
+          },
+          {
+            "rate": 1.08,
+            "shift": 12,
+            "leadSeconds": 0.06,
+            "region": "same",
+            "cursorReceipt": {
+              "requested": 1,
+              "acknowledged": 1,
+              "errorFrames": 0
+            },
+            "retainedOwner": true,
+            "onsetAfterReleaseSeconds": 0.06000000000000005,
+            "firstCorrectAfterReleaseSeconds": 0.030000000000000027,
+            "initialGapSeconds": 0.06,
+            "criteriaPassed": {
+              "firstCorrectWithin30msOfRelease": false,
+              "releaseGapWithin20ms": false,
+              "anyLowRMSGapWithin20ms": false,
+              "settledPitch": true,
+              "noWrongPitchAfterOutput30ms": true
+            }
+          },
+          {
+            "rate": 1.08,
+            "shift": 12,
+            "leadSeconds": 0.06,
+            "region": "different",
+            "cursorReceipt": {
+              "requested": 6,
+              "acknowledged": 6,
+              "errorFrames": 0
+            },
+            "retainedOwner": true,
+            "onsetAfterReleaseSeconds": 0.06000000000000005,
+            "firstCorrectAfterReleaseSeconds": 0.029999999999999805,
+            "initialGapSeconds": 0.06,
+            "criteriaPassed": {
+              "firstCorrectWithin30msOfRelease": true,
+              "releaseGapWithin20ms": false,
+              "anyLowRMSGapWithin20ms": false,
+              "settledPitch": true,
+              "noWrongPitchAfterOutput30ms": true
+            }
+          },
+          {
+            "rate": 1.08,
+            "shift": 12,
+            "leadSeconds": 0.17,
+            "region": "same",
+            "cursorReceipt": {
+              "requested": 1,
+              "acknowledged": 1,
+              "errorFrames": 0
+            },
+            "retainedOwner": true,
+            "onsetAfterReleaseSeconds": 0.16999999999999993,
+            "firstCorrectAfterReleaseSeconds": 0.1399999999999999,
+            "initialGapSeconds": 0.17,
+            "criteriaPassed": {
+              "firstCorrectWithin30msOfRelease": false,
+              "releaseGapWithin20ms": false,
+              "anyLowRMSGapWithin20ms": false,
+              "settledPitch": true,
+              "noWrongPitchAfterOutput30ms": true
+            }
+          },
+          {
+            "rate": 1.08,
+            "shift": 12,
+            "leadSeconds": 0.17,
+            "region": "different",
+            "cursorReceipt": {
+              "requested": 6,
+              "acknowledged": 6,
+              "errorFrames": 0
+            },
+            "retainedOwner": true,
+            "onsetAfterReleaseSeconds": 0.16999999999999993,
+            "firstCorrectAfterReleaseSeconds": 0.14000000000000012,
+            "initialGapSeconds": 0.17,
+            "criteriaPassed": {
+              "firstCorrectWithin30msOfRelease": false,
+              "releaseGapWithin20ms": false,
+              "anyLowRMSGapWithin20ms": false,
+              "settledPitch": true,
+              "noWrongPitchAfterOutput30ms": true
+            }
+          },
+          {
+            "rate": 2,
+            "shift": -12,
+            "leadSeconds": 0.04,
+            "region": "same",
+            "cursorReceipt": {
+              "requested": 1,
+              "acknowledged": 1,
+              "errorFrames": 0
+            },
+            "retainedOwner": true,
+            "onsetAfterReleaseSeconds": 0.040000000000000036,
+            "firstCorrectAfterReleaseSeconds": 0.020000000000000018,
+            "initialGapSeconds": 0.04,
+            "criteriaPassed": {
+              "firstCorrectWithin30msOfRelease": true,
+              "releaseGapWithin20ms": false,
+              "anyLowRMSGapWithin20ms": false,
+              "settledPitch": true,
+              "noWrongPitchAfterOutput30ms": true
+            }
+          },
+          {
+            "rate": 2,
+            "shift": -12,
+            "leadSeconds": 0.04,
+            "region": "different",
+            "cursorReceipt": {
+              "requested": 6,
+              "acknowledged": 6,
+              "errorFrames": 0
+            },
+            "retainedOwner": true,
+            "onsetAfterReleaseSeconds": 0.040000000000000036,
+            "firstCorrectAfterReleaseSeconds": 0.040000000000000036,
+            "initialGapSeconds": 0.04,
+            "criteriaPassed": {
+              "firstCorrectWithin30msOfRelease": false,
+              "releaseGapWithin20ms": false,
+              "anyLowRMSGapWithin20ms": false,
+              "settledPitch": true,
+              "noWrongPitchAfterOutput30ms": true
+            }
+          },
+          {
+            "rate": 2,
+            "shift": -12,
+            "leadSeconds": 0.06,
+            "region": "same",
+            "cursorReceipt": {
+              "requested": 1,
+              "acknowledged": 1,
+              "errorFrames": 0
+            },
+            "retainedOwner": true,
+            "onsetAfterReleaseSeconds": 0.06000000000000005,
+            "firstCorrectAfterReleaseSeconds": 0.040000000000000036,
+            "initialGapSeconds": 0.06,
+            "criteriaPassed": {
+              "firstCorrectWithin30msOfRelease": false,
+              "releaseGapWithin20ms": false,
+              "anyLowRMSGapWithin20ms": false,
+              "settledPitch": true,
+              "noWrongPitchAfterOutput30ms": true
+            }
+          },
+          {
+            "rate": 2,
+            "shift": -12,
+            "leadSeconds": 0.06,
+            "region": "different",
+            "cursorReceipt": {
+              "requested": 6,
+              "acknowledged": 6,
+              "errorFrames": 0
+            },
+            "retainedOwner": true,
+            "onsetAfterReleaseSeconds": 0.06000000000000005,
+            "firstCorrectAfterReleaseSeconds": 0.040000000000000036,
+            "initialGapSeconds": 0.06,
+            "criteriaPassed": {
+              "firstCorrectWithin30msOfRelease": false,
+              "releaseGapWithin20ms": false,
+              "anyLowRMSGapWithin20ms": false,
+              "settledPitch": true,
+              "noWrongPitchAfterOutput30ms": true
+            }
+          },
+          {
+            "rate": 2,
+            "shift": -12,
+            "leadSeconds": 0.17,
+            "region": "same",
+            "cursorReceipt": {
+              "requested": 1,
+              "acknowledged": 1,
+              "errorFrames": 0
+            },
+            "retainedOwner": true,
+            "onsetAfterReleaseSeconds": 0.16999999999999993,
+            "firstCorrectAfterReleaseSeconds": 0.1399999999999999,
+            "initialGapSeconds": 0.17,
+            "criteriaPassed": {
+              "firstCorrectWithin30msOfRelease": false,
+              "releaseGapWithin20ms": false,
+              "anyLowRMSGapWithin20ms": false,
+              "settledPitch": true,
+              "noWrongPitchAfterOutput30ms": true
+            }
+          },
+          {
+            "rate": 2,
+            "shift": -12,
+            "leadSeconds": 0.17,
+            "region": "different",
+            "cursorReceipt": {
+              "requested": 6,
+              "acknowledged": 6,
+              "errorFrames": 0
+            },
+            "retainedOwner": true,
+            "onsetAfterReleaseSeconds": 0.16999999999999993,
+            "firstCorrectAfterReleaseSeconds": 0.1499999999999999,
+            "initialGapSeconds": 0.17,
+            "criteriaPassed": {
+              "firstCorrectWithin30msOfRelease": false,
+              "releaseGapWithin20ms": false,
+              "anyLowRMSGapWithin20ms": false,
+              "settledPitch": true,
+              "noWrongPitchAfterOutput30ms": true
+            }
+          },
+          {
+            "rate": 2,
+            "shift": 0,
+            "leadSeconds": 0.04,
+            "region": "same",
+            "cursorReceipt": {
+              "requested": 1,
+              "acknowledged": 1,
+              "errorFrames": 0
+            },
+            "retainedOwner": true,
+            "onsetAfterReleaseSeconds": 0.040000000000000036,
+            "firstCorrectAfterReleaseSeconds": 0.010000000000000009,
+            "initialGapSeconds": 0.04,
+            "criteriaPassed": {
+              "firstCorrectWithin30msOfRelease": true,
+              "releaseGapWithin20ms": false,
+              "anyLowRMSGapWithin20ms": false,
+              "settledPitch": true,
+              "noWrongPitchAfterOutput30ms": true
+            }
+          },
+          {
+            "rate": 2,
+            "shift": 0,
+            "leadSeconds": 0.04,
+            "region": "different",
+            "cursorReceipt": {
+              "requested": 6,
+              "acknowledged": 6,
+              "errorFrames": 0
+            },
+            "retainedOwner": true,
+            "onsetAfterReleaseSeconds": 0.040000000000000036,
+            "firstCorrectAfterReleaseSeconds": 0.040000000000000036,
+            "initialGapSeconds": 0.04,
+            "criteriaPassed": {
+              "firstCorrectWithin30msOfRelease": false,
+              "releaseGapWithin20ms": false,
+              "anyLowRMSGapWithin20ms": false,
+              "settledPitch": true,
+              "noWrongPitchAfterOutput30ms": true
+            }
+          },
+          {
+            "rate": 2,
+            "shift": 0,
+            "leadSeconds": 0.06,
+            "region": "same",
+            "cursorReceipt": {
+              "requested": 1,
+              "acknowledged": 1,
+              "errorFrames": 0
+            },
+            "retainedOwner": true,
+            "onsetAfterReleaseSeconds": 0.06000000000000005,
+            "firstCorrectAfterReleaseSeconds": 0.040000000000000036,
+            "initialGapSeconds": 0.06,
+            "criteriaPassed": {
+              "firstCorrectWithin30msOfRelease": false,
+              "releaseGapWithin20ms": false,
+              "anyLowRMSGapWithin20ms": false,
+              "settledPitch": true,
+              "noWrongPitchAfterOutput30ms": true
+            }
+          },
+          {
+            "rate": 2,
+            "shift": 0,
+            "leadSeconds": 0.06,
+            "region": "different",
+            "cursorReceipt": {
+              "requested": 6,
+              "acknowledged": 6,
+              "errorFrames": 0
+            },
+            "retainedOwner": true,
+            "onsetAfterReleaseSeconds": 0.06000000000000005,
+            "firstCorrectAfterReleaseSeconds": 0.04999999999999982,
+            "initialGapSeconds": 0.06,
+            "criteriaPassed": {
+              "firstCorrectWithin30msOfRelease": false,
+              "releaseGapWithin20ms": false,
+              "anyLowRMSGapWithin20ms": false,
+              "settledPitch": true,
+              "noWrongPitchAfterOutput30ms": true
+            }
+          },
+          {
+            "rate": 2,
+            "shift": 0,
+            "leadSeconds": 0.17,
+            "region": "same",
+            "cursorReceipt": {
+              "requested": 1,
+              "acknowledged": 1,
+              "errorFrames": 0
+            },
+            "retainedOwner": true,
+            "onsetAfterReleaseSeconds": 0.16999999999999993,
+            "firstCorrectAfterReleaseSeconds": 0.1499999999999999,
+            "initialGapSeconds": 0.17,
+            "criteriaPassed": {
+              "firstCorrectWithin30msOfRelease": false,
+              "releaseGapWithin20ms": false,
+              "anyLowRMSGapWithin20ms": false,
+              "settledPitch": true,
+              "noWrongPitchAfterOutput30ms": true
+            }
+          },
+          {
+            "rate": 2,
+            "shift": 0,
+            "leadSeconds": 0.17,
+            "region": "different",
+            "cursorReceipt": {
+              "requested": 6,
+              "acknowledged": 6,
+              "errorFrames": 0
+            },
+            "retainedOwner": true,
+            "onsetAfterReleaseSeconds": 0.16999999999999993,
+            "firstCorrectAfterReleaseSeconds": 0.14000000000000012,
+            "initialGapSeconds": 0.17,
+            "criteriaPassed": {
+              "firstCorrectWithin30msOfRelease": false,
+              "releaseGapWithin20ms": false,
+              "anyLowRMSGapWithin20ms": false,
+              "settledPitch": true,
+              "noWrongPitchAfterOutput30ms": true
+            }
+          },
+          {
+            "rate": 2,
+            "shift": 12,
+            "leadSeconds": 0.04,
+            "region": "same",
+            "cursorReceipt": {
+              "requested": 1,
+              "acknowledged": 1,
+              "errorFrames": 0
+            },
+            "retainedOwner": true,
+            "onsetAfterReleaseSeconds": 0.040000000000000036,
+            "firstCorrectAfterReleaseSeconds": 0.010000000000000009,
+            "initialGapSeconds": 0.04,
+            "criteriaPassed": {
+              "firstCorrectWithin30msOfRelease": true,
+              "releaseGapWithin20ms": false,
+              "anyLowRMSGapWithin20ms": false,
+              "settledPitch": true,
+              "noWrongPitchAfterOutput30ms": true
+            }
+          },
+          {
+            "rate": 2,
+            "shift": 12,
+            "leadSeconds": 0.04,
+            "region": "different",
+            "cursorReceipt": {
+              "requested": 6,
+              "acknowledged": 6,
+              "errorFrames": 0
+            },
+            "retainedOwner": true,
+            "onsetAfterReleaseSeconds": 0.040000000000000036,
+            "firstCorrectAfterReleaseSeconds": 0.040000000000000036,
+            "initialGapSeconds": 0.04,
+            "criteriaPassed": {
+              "firstCorrectWithin30msOfRelease": false,
+              "releaseGapWithin20ms": false,
+              "anyLowRMSGapWithin20ms": false,
+              "settledPitch": true,
+              "noWrongPitchAfterOutput30ms": true
+            }
+          },
+          {
+            "rate": 2,
+            "shift": 12,
+            "leadSeconds": 0.06,
+            "region": "same",
+            "cursorReceipt": {
+              "requested": 1,
+              "acknowledged": 1,
+              "errorFrames": 0
+            },
+            "retainedOwner": true,
+            "onsetAfterReleaseSeconds": 0.06000000000000005,
+            "firstCorrectAfterReleaseSeconds": 0.030000000000000027,
+            "initialGapSeconds": 0.06,
+            "criteriaPassed": {
+              "firstCorrectWithin30msOfRelease": false,
+              "releaseGapWithin20ms": false,
+              "anyLowRMSGapWithin20ms": false,
+              "settledPitch": true,
+              "noWrongPitchAfterOutput30ms": true
+            }
+          },
+          {
+            "rate": 2,
+            "shift": 12,
+            "leadSeconds": 0.06,
+            "region": "different",
+            "cursorReceipt": {
+              "requested": 6,
+              "acknowledged": 6,
+              "errorFrames": 0
+            },
+            "retainedOwner": true,
+            "onsetAfterReleaseSeconds": 0.06000000000000005,
+            "firstCorrectAfterReleaseSeconds": 0.029999999999999805,
+            "initialGapSeconds": 0.06,
+            "criteriaPassed": {
+              "firstCorrectWithin30msOfRelease": true,
+              "releaseGapWithin20ms": false,
+              "anyLowRMSGapWithin20ms": false,
+              "settledPitch": true,
+              "noWrongPitchAfterOutput30ms": true
+            }
+          },
+          {
+            "rate": 2,
+            "shift": 12,
+            "leadSeconds": 0.17,
+            "region": "same",
+            "cursorReceipt": {
+              "requested": 1,
+              "acknowledged": 1,
+              "errorFrames": 0
+            },
+            "retainedOwner": true,
+            "onsetAfterReleaseSeconds": 0.16999999999999993,
+            "firstCorrectAfterReleaseSeconds": 0.1399999999999999,
+            "initialGapSeconds": 0.17,
+            "criteriaPassed": {
+              "firstCorrectWithin30msOfRelease": false,
+              "releaseGapWithin20ms": false,
+              "anyLowRMSGapWithin20ms": false,
+              "settledPitch": true,
+              "noWrongPitchAfterOutput30ms": true
+            }
+          },
+          {
+            "rate": 2,
+            "shift": 12,
+            "leadSeconds": 0.17,
+            "region": "different",
+            "cursorReceipt": {
+              "requested": 6,
+              "acknowledged": 6,
+              "errorFrames": 0
+            },
+            "retainedOwner": true,
+            "onsetAfterReleaseSeconds": 0.16999999999999993,
+            "firstCorrectAfterReleaseSeconds": 0.14000000000000012,
+            "initialGapSeconds": 0.17,
+            "criteriaPassed": {
+              "firstCorrectWithin30msOfRelease": false,
+              "releaseGapWithin20ms": false,
+              "anyLowRMSGapWithin20ms": false,
+              "settledPitch": true,
+              "noWrongPitchAfterOutput30ms": true
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

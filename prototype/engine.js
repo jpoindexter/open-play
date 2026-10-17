@@ -1,6 +1,7 @@
 import { createEffect } from "./effects.js";
 import { prepareExtendedEffects } from "./extended-effects.js";
 import { KeylockRenderer } from "./keylock.js";
+import { DeckScratchCache } from "./deck-scratch-cache.js";
 import { advanceDeckScratchPosition } from "./deck-scratch-kernel.js";
 import { prepareDeckScratch, createDeckScratchTransport } from "./deck-scratch.js";
 import { prepareStemHistory, createStemHistory } from "./stem-history.js";
@@ -42,6 +43,11 @@ export class AudioEngine {
     this.stemSlipRateTokens = new Map();
     this.deckScratchRequests = new Map();
     this.deckScratchGeneration = 0;
+    this.scratchCache = new DeckScratchCache({buffer: track => this.buffer(track), stems: track => this.stemBuffers.get(track.id),
+      prepare: deck => this.prepareOrdinaryScratch(deck), nextGeneration: () => ++this.deckScratchGeneration,
+      beforeClear: (index,entry) => {if (this.voices.get(index)?.deckScratchTransport === entry.transport) this.pause(entry.deck,{preserveStemExit:true});},
+      onPhase: (entry,phase,error) => {if (entry.deck.track === entry.track) {entry.deck.scratchWarmState = phase; entry.deck.scratchWarmError = error?.name === 'AbortError' ? '' : error?.message || '';}}
+    });
     this.retiringVoices = new Map();
   }
   init() {
@@ -203,7 +209,18 @@ export class AudioEngine {
   }
   disposeVoice(i, source) {
     source.stemSlipTransport?.dispose();
-    source.deckScratchTransport?.dispose();
+    if (source.deckScratchTransport) {
+      const transport = source.deckScratchTransport;
+      if (this.scratchCache.owns(transport)) {
+        const current = this.voices.get(i), request = this.deckScratchRequests.get(i);
+        const adopted = current !== source && current?.deckScratchTransport === transport ||
+          request?.transport === transport && request.beginPosted && !request.controller.signal.aborted && request.owner !== source.scratchOwner;
+        if (!adopted) transport.command('pause',{generation:transport.state().generation}).catch(error=>{if(error.name!=='AbortError')this.onError?.(error);});
+        // Disconnect this retiring owner's gates only. A newer gesture can be
+        // using the same prepared node through different output connections.
+        for (const [output,gate] of (source.sourceGates || []).entries()) {try{transport.node.disconnect(gate,output,0);}catch{}}
+      } else transport.dispose();
+    }
     source.liveOwnerController?.abort();
     source.liveKeylock?.dispose().catch(error => this.onError?.(error));
     for (const item of source.sources || [source]) {
@@ -872,6 +889,7 @@ export class AudioEngine {
       }
       const was = d.playing || d.processing;
       this.pause(d, { preserveStemExit: true });
+      this.clearDeckScratchCache(d.index);
       if (was) await this.start(d);
     }
   }
@@ -983,23 +1001,33 @@ export class AudioEngine {
     request.controller.abort();
     // A reused transport may already have accepted Begin while its ACK is in
     // flight. Queue its matching End before any newer owner's Begin.
-    if (!request.ready && request.transport && this.voices.get(d.index)?.deckScratchTransport === request.transport)
+    if (!request.ready && request.transport && request.beginPosted)
       request.transport.command('end', {generation: request.transport.state().generation, owner: request.owner}).catch(error => {if (error.name !== 'AbortError') this.onError?.(error);});
     d.scratchPreparing = false;
   }
+  preloadDeckScratch(d) {
+    if (!d.track || d.track.missing || d.track.provider) return Promise.resolve(false);
+    this.deckStates.set(d.index,d);return this.scratchCache.get(d);
+  }
+  clearDeckScratchCache(index) {const deck=this.deckStates.get(index);if(deck)this.cancelDeckScratchRequest(deck);this.scratchCache.clear(index);}
   async prepareOrdinaryScratch(d) {
+    const loadedTrack = d.track;
     await this.resume();
     await prepareDeckScratch(this.ctx);
     let lastPosition = this.position(d);
     const transport = createDeckScratchTransport(this.ctx, {
       onState: value => {
         lastPosition = value.audiblePosition;
-        if (!value.ended || this.voices.get(d.index)?.deckScratchTransport !== transport) return;
+        if (!value.ended || !d.playing || this.voices.get(d.index)?.deckScratchTransport !== transport) return;
         d.position = value.position; d.playing = false; this.cancelDeckScratchRequest(d);
         this.stopSource(d.index, {preserveStemExit: true}); this.onEnd(d);
       }, onError: error => {
-        if (this.voices.get(d.index)?.deckScratchTransport === transport) {
-          this.pause(d); d.position = lastPosition; this.onProcessing(d);
+        const wasActive = this.voices.get(d.index)?.deckScratchTransport === transport;
+        if (this.scratchCache.peek(d.index)?.transport === transport) this.scratchCache.clear(d.index);
+        if (wasActive) {
+          if (this.voices.get(d.index)?.deckScratchTransport === transport) this.pause(d);
+          if (d.track === loadedTrack) d.position = lastPosition;
+          this.onProcessing(d);
         }
         this.onError?.(error);
       }
@@ -1056,30 +1084,33 @@ export class AudioEngine {
         this.transforms.get(d.index)?.abort(); this.transforms.delete(d.index);
         this.startTokens.set(d.index, (this.startTokens.get(d.index) || 0) + 1);
         d.processing = false;
-        transport = await this.prepareOrdinaryScratch(d);
+        transport = await this.preloadDeckScratch(d);
         if (!current()) return false;
         request.transport = transport;
-        const original = await this.buffer(request.track);
         const stems = this.stemBuffers.get(request.track.id) || null;
-        const generation = ++this.deckScratchGeneration;
-        await transport.replaceBuffers({generation, original, stems, signal: request.controller.signal});
+        const generation = transport.state().generation;
         if (!current()) return false;
         // The backing clock begins at commit, after the old voice's preparation span.
         await transport.command('configure', {generation, position: this.position(d), rate: d.rate,
           reverse: !!d.reverse, loop: d.loop ? {start: d.loopIn, end: d.loopOut} : null,
           slip: !!d.slip, playing: request.wasPlaying, startAt: this.ctx.currentTime});
+        if (!current()) return false;
+        request.beginPosted = true;
         await transport.command('begin', {generation, owner});
         if (!current()) return false;
         this.stopSource(d.index, {preserveStemExit: true});
-        const voice = {sources: [], deckScratchTransport: transport, stemGains: []};
+        const voice = {sources: [], deckScratchTransport: transport, scratchOwner:owner, stemGains: []};
         this.routeOrdinaryVoice(d, voice, Array(stems ? 5 : 1).fill(transport.node), stems);
         committed = true;
       } else {
         request.transport = transport;
         const generation = transport.state().generation;
+        if (!current()) return false;
+        request.beginPosted = true;
         await transport.command('begin', {generation, owner});
         if (!current()) return false;
       }
+      if (this.voices.get(d.index)?.deckScratchTransport === transport) this.voices.get(d.index).scratchOwner = owner;
       request.ready = true; d.scratchPreparing = false; d.playing = request.wasPlaying;
       return {owner, generation: transport.state().generation};
     } catch (error) {
@@ -1087,7 +1118,7 @@ export class AudioEngine {
       if (error.name !== 'AbortError') throw error;
       return false;
     } finally {
-      if (!committed) transport?.dispose();
+      if (!committed && !this.scratchCache.owns(transport)) transport?.dispose();
       if (this.deckScratchRequests.get(d.index) === request) d.scratchPreparing = false;
     }
   }
@@ -1546,6 +1577,7 @@ export class AudioEngine {
       this.stopSample(slot);
   }
   silence() {
+    this.scratchCache.clearAll();
     for (const d of this.deckStates.values()) {
       this.pause(d); d.stemSlip = "off"; d.stemSlipPhase = "idle";
     }

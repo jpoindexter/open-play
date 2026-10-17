@@ -7,7 +7,7 @@ const deferred=()=>{let resolve,reject;const promise=new Promise((a,b)=>{resolve
 const near=(a,b)=>assert(Math.abs(a-b)<1e-9,`${a} differs from ${b}`);
 let passed=0;
 async function test(name,fn){await fn();passed++;console.log('PASS '+name);}
-function fixture(){
+function fixture({onEvent}={}){
   const f={time:1000,calls:[],begins:[],updates:[],notes:[],frames:new Map(),frameId:0};
   function target(){
     const handlers=new Map();return{handlers,addEventListener(type,fn,capture=false){const list=handlers.get(type)||[];list.push({fn,capture});handlers.set(type,list);},
@@ -16,7 +16,7 @@ function fixture(){
   }
   f.root=target();f.window=target();f.root.body={};f.root.activeElement=f.root.body;f.outputs=[{textContent:''},{textContent:''}];
   f.root.querySelector=selector=>f.outputs[Number(selector.match(/"(\d+)"/)?.[1])];
-  f.elements=[0,1].map(index=>({dataset:{deckScratch:String(index)},isConnected:true,captures:new Set(),attrs:{},
+  f.elements=[0,1].map(index=>({dataset:{deckScratch:String(index)},tagName:'DIV',id:'platter-'+index,isConnected:true,captures:new Set(),attrs:{},
     closest(query){return query==='.platter[data-deck-scratch]'?this:null;},
     getBoundingClientRect(){return{left:0,top:0,width:200,height:200};},
     setAttribute(name,value){this.attrs[name]=value;},getAttribute(name){return this.attrs[name];},
@@ -29,7 +29,7 @@ function fixture(){
     updateDeckScratch(deck,value,owner){const entry={deck:deck.index,owner,...value};f.updates.push(entry);f.calls.push({kind:'update',...entry});return f.updateGate?.promise??Promise.resolve({accepted:true});},
     endDeckScratch(deck,owner,options){f.calls.push({kind:'end',deck:deck.index,owner,...options});return Promise.resolve({accepted:true});}};
   f.controls=createDeckScratchControls({engine:f.engine,state:f.state,root:f.root,windowTarget:f.window,now:()=>f.time,
-    requestFrame:fn=>{const id=++f.frameId;f.frames.set(id,fn);return id;},cancelFrame:id=>f.frames.delete(id),notify:message=>f.notes.push(message)});
+    requestFrame:fn=>{const id=++f.frameId;f.frames.set(id,fn);return id;},cancelFrame:id=>f.frames.delete(id),notify:message=>f.notes.push(message),onEvent});
   f.point=angle=>({clientX:100+80*Math.cos(angle),clientY:100+80*Math.sin(angle)});
   f.down=(index=0,angle=0,extra={})=>f.root.emit('pointerdown',{target:f.elements[index],pointerId:index+1,button:0,...f.point(angle),...extra});
   f.move=(angle,extra={})=>f.root.emit('pointermove',{target:f.elements[0],pointerId:1,...f.point(angle),...extra});
@@ -113,5 +113,32 @@ await test('Left keyboard audition traverses backwards and invalid geometry/capt
 });
 await test('Enter is the stationary-hold button-key alias and releases only its own owner',async()=>{
   const f=fixture();f.elements[0].focus();const event=f.key('Enter');assert.equal(event.prevented,1);await f.ready();assert.equal(f.updates.at(-1).velocity,0);near(f.updates.at(-1).position,20);f.root.emit('keyup',{key:'Enter'});assert.equal(f.calls.at(-1).kind,'end');assert.equal(f.calls.at(-1).cancel,false);assert.equal(f.controls.diagnostics().active.length,0);await f.controls.dispose();
+});
+await test('Optional observer reports actual pointer receipt, capture, movement and engine ACK scalars',async()=>{
+  const events=[],f=fixture({onEvent:event=>events.push(event)});f.down(0,0,{buttons:1,isTrusted:true,pointerType:'mouse',timeStamp:12});
+  f.begins[0].gate.resolve({owner:f.begins[0].owner,generation:17});await flush();f.time+=100;f.move(Math.PI/2);await flush();f.up(Math.PI/2);await flush();
+  for(const type of ['pointerdown.received','capture.acquired','pointerdown.accepted','owner.phase','engine.begin.result','pointermove.received','pointermove.applied','pointerup.received','capture.lost','capture.released','engine.end.result'])assert(events.some(e=>e.type===type),type+' missing');
+  assert.equal(events.find(e=>e.type==='engine.begin.result').generation,17);const receipt=events.find(e=>e.type==='pointerdown.received');assert.equal(receipt.targetId,'platter-0');assert.equal(receipt.targetTag,'DIV');assert.equal(receipt.clientX,180);assert.equal(receipt.isTrusted,true);assert.equal(receipt.eventTimeMs,12);
+  assert(events.every((e,i)=>e.sequence===i+1&&Object.isFrozen(e)));await f.controls.dispose();
+});
+await test('Observer early refusal reasons distinguish modifiers, missing owner/deck, center and interactive children',async()=>{
+  const events=[],f=fixture({onEvent:event=>events.push(event)});f.down(0,0,{shiftKey:true});f.down(0,0,{defaultPrevented:true});f.down(0,0,{button:2});f.down(0,0,{pointerId:-1});f.down(0,0,{target:f.root.body});f.down(0,0,{clientX:100,clientY:100});
+  const child={closest:query=>query==='.platter[data-deck-scratch]'?f.elements[0]:child};f.down(0,0,{target:child});f.state.decks[0].track=null;f.down();
+  const reasons=events.filter(e=>e.type==='pointerdown.refused').map(e=>e.reason);
+  for(const reason of ['modifier-or-composition','already-prevented','nonprimary-button','invalid-pointer-id','not-platter','center-or-invalid-geometry','interactive-child','missing-deck-or-track'])assert(reasons.includes(reason),reason+' missing');
+  assert.equal(f.begins.length,0);await f.controls.dispose();
+});
+await test('Observer payload is detached bounded JSON scalar metadata with no track/input/PCM/result objects',async()=>{
+  const events=[],f=fixture({onEvent:event=>events.push(event)});f.state.decks[0].track.title='PRIVATE_TRACK_DO_NOT_REPORT';f.elements[0].id='z'.repeat(5000);f.down(0,0,{secret:'PRIVATE_EVENT',channels:[new Float32Array(4)]});
+  f.begins[0].gate.resolve({generation:3,source:'PRIVATE_RESULT',buffer:new Float32Array(8),track:f.state.decks[0].track});await flush();f.move(0,{clientX:NaN});f.up();await flush();
+  for(const event of events)for(const value of Object.values(event))assert(value===null||typeof value==='boolean'||typeof value==='number'&&Number.isFinite(value)||typeof value==='string'&&value.length<=120);
+  assert(events.some(e=>e.clientX===null));const json=JSON.stringify(events);assert(!json.includes('PRIVATE_'));assert(!json.includes('Float32Array'));await f.controls.dispose();
+});
+await test('Throwing/rejecting observers cannot veto motion, pending cancellation or cleanup',async()=>{
+  const failures=[];const listener=error=>failures.push(error);process.on('unhandledRejection',listener);
+  try{for(const onEvent of [()=>{throw new Error('observer failure');},()=>Promise.reject(new Error('async observer failure'))]){
+    const f=fixture({onEvent});f.down();await f.ready();f.time+=100;f.move(Math.PI/2);await flush();near(f.updates.at(-1).position,20+1/3);f.up(Math.PI/2);await flush();assert.equal(f.controls.diagnostics().active.length,0);assert.equal(f.elements[0].captures.size,0);await f.controls.dispose();assert.equal([...f.root.handlers.values()].flat().length,0);
+    const pending=fixture({onEvent});pending.down();await pending.controls.dispose();await pending.ready();assert.equal(pending.updates.length,0);
+  }await new Promise(resolve=>setImmediate(resolve));assert.equal(failures.length,0);}finally{process.removeListener('unhandledRejection',listener);}
 });
 console.log(`${passed}/${passed} controlled platter UI checks passed; actual browser/AudioEngine/PCM acceptance remains separate.`);

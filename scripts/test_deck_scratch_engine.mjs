@@ -12,13 +12,13 @@ function setup({playing=true,slip=false,stems=false}={}){
  e.applyChannelFX=async()=>{};e.buffer=async()=>pcm;e.ensureStemState=()=>({routes:Array.from({length:4},gain),histories:Array.from({length:4},()=>({node:{disconnect(){},connect(){}}}))});
  const d={index:0,track:{id:'one',duration:30},position:5,anchorPosition:5,anchorTime:0,rate:1,reverse:false,playing,slip,loop:false,stems:[true,true,true,true],stemFX:[false,false,false,false]};
  if(stems)e.stemBuffers.set('one',Array(4).fill(pcm));
- e.prepareOrdinaryScratch=async()=>{created++;let gesture=0;const k=new DeckScratchKernel(1000),node={connect:(...a)=>connections.push(a)};return{node,state:()=>k.state(),replaceBuffers:async v=>k.load(v),command:async(type,data)=>{k.audioTime=e.ctx.currentTime;if(type==='begin')gesture++;return k.command(type,{...data,gesture});},dispose(){disposed.push(k);k.dispose();}};};
+ e.prepareOrdinaryScratch=async()=>{created++;let gesture=0;const k=new DeckScratchKernel(1000),node={connect:(...a)=>connections.push(a),disconnect(){}};return{node,state:()=>k.state(),replaceBuffers:async v=>k.load(v),command:async(type,data)=>{k.audioTime=e.ctx.currentTime;if(type==='begin')gesture++;return k.command(type,{...data,gesture});},dispose(){disposed.push(k);k.dispose();}};};
  return{e,d,connections,disposed,created:()=>created};
 }
-record('Pending pointer release aborts ownership and disposes late prepared transport without replacing old voice',async()=>{
+record('Pending pointer release cancels activation while preparation warms silently; explicit clear retires PCM',async()=>{
  const{e,d,disposed}=setup(),gate=deferred(),prepare=e.prepareOrdinaryScratch;
  const prior={sources:[],marker:'old'};e.voices.set(0,prior);e.prepareOrdinaryScratch=async()=>{const t=await prepare();await gate.promise;return t;};
- const begin=e.beginDeckScratch(d,'old');assert.equal(await e.endDeckScratch(d,'old'),false);gate.resolve();assert.equal(await begin,false);assert.equal(e.voices.get(0),prior);assert.equal(disposed.length,1);
+ const begin=e.beginDeckScratch(d,'old');assert.equal(await e.endDeckScratch(d,'old'),false);gate.resolve();assert.equal(await begin,false);assert.equal(e.voices.get(0),prior);assert.equal(disposed.length,0);const warmed=e.scratchCache.peek(0);assert(warmed&&warmed.transport.state().sourceCount===1);assert(!warmed.transport.state().audition&&!warmed.transport.state().owner);e.clearDeckScratchCache(0);assert.equal(disposed.length,1);
 });
 record('Paused audition commits audible release and remains paused',async()=>{
  const{e,d}=setup({playing:false});assert(await e.beginDeckScratch(d,'a'));await e.updateDeckScratch(d,{position:7,velocity:-1},'a');assert.equal(e.position(d),7);const r=await e.endDeckScratch(d,'a');assert.equal(r.position,7);assert.equal(d.playing,false);assert.equal(e.voices.get(0).deckScratchTransport.state().audition,false);
@@ -31,10 +31,10 @@ record('Stale owner cannot move or release a replacement gesture',async()=>{
  const{e,d,created}=setup();await e.beginDeckScratch(d,'a');await e.beginDeckScratch(d,'b');assert.equal(await e.updateDeckScratch(d,{position:1,velocity:1},'a'),false);assert.equal(await e.endDeckScratch(d,'a'),false);assert.equal(e.voices.get(0).deckScratchTransport.state().owner,'b');assert.equal(created(),1);
 });
 record('Track replacement during PCM loading cannot commit old voice',async()=>{
- const{e,d,disposed}=setup(),gate=deferred();e.buffer=async()=>{await gate.promise;return pcm;};const begin=e.beginDeckScratch(d,'a');await Promise.resolve();d.track={id:'two',duration:30};gate.resolve();assert.equal(await begin,false);assert.equal(e.voices.size,0);assert.equal(disposed.length,1);
+ const{e,d,disposed}=setup(),gate=deferred();e.buffer=async()=>{await gate.promise;return pcm;};const begin=e.beginDeckScratch(d,'a');await Promise.resolve();d.track={id:'two',duration:30};gate.resolve();assert.equal(await begin,false);assert.equal(e.voices.size,0);assert.equal(e.scratchCache.peek(0),undefined);assert.equal(disposed.length,0);
 });
-record('Pause retires active transport and late moves cannot resurrect it',async()=>{
- const{e,d,disposed}=setup();await e.beginDeckScratch(d,'a');await e.updateDeckScratch(d,{position:8,velocity:1},'a');e.pause(d);assert.equal(d.position,8);assert(!d.playing);assert.equal(e.voices.size,0);assert.equal(disposed.length,1);assert.equal(await e.updateDeckScratch(d,{position:9,velocity:1},'a'),false);
+record('Pause removes audible ownership and retains paused PCM; late moves cannot resurrect it',async()=>{
+ const{e,d,disposed}=setup();await e.beginDeckScratch(d,'a');await e.updateDeckScratch(d,{position:8,velocity:1},'a');e.pause(d);assert.equal(d.position,8);assert(!d.playing);assert.equal(e.voices.size,0);assert.equal(disposed.length,0);assert(e.scratchCache.peek(0));assert(!e.scratchCache.peek(0).transport.state().playing&&!e.scratchCache.peek(0).transport.state().audition);assert.equal(await e.updateDeckScratch(d,{position:9,velocity:1},'a'),false);
 });
 record('Five raw buses route distinct indices through original or stem history without duplicating original',async()=>{
  const{e,d,connections}=setup({stems:true});await e.beginDeckScratch(d,'a');assert.deepEqual(connections.map(a=>a[1]),[0,1,2,3,4]);assert.equal(e.voices.get(0).stemGains.length,5);

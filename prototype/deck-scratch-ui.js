@@ -14,15 +14,45 @@ const selector='.platter[data-deck-scratch]';
 const clamp=(value,lo,hi)=>Math.max(lo,Math.min(hi,value));
 const modified=event=>event.altKey||event.ctrlKey||event.metaKey||event.shiftKey||event.isComposing;
 const finite=value=>typeof value==='number'&&Number.isFinite(value);
+const noObservation=()=>{};
 
 export function createDeckScratchControls({engine,state,root=globalThis.document,
   windowTarget=globalThis.window,now=()=>performance.now(),
   requestFrame=callback=>requestAnimationFrame(callback),cancelFrame=id=>cancelAnimationFrame(id),
-  notify=()=>{}}={}) {
+  notify=()=>{},onEvent=noObservation}={}) {
   if(!engine||!state||!root?.addEventListener||!windowTarget?.addEventListener)
     throw new TypeError('Scratch controls need engine, state and event targets.');
   const instance=++instances,active=new Map(),pointers=new Map(),listeners=[];
-  let serial=0,frame=null,disposed=false;
+  let serial=0,frame=null,disposed=false,observationSequence=0;
+  function observe(type,fields={},event=null,g=null) {
+    if(onEvent===noObservation||typeof onEvent!=='function')return;
+    try{
+      const source={sequence:++observationSequence,type,
+        ...(g?{deck:g.deck.index,owner:g.owner,mode:g.mode,phase:g.element.dataset.scratchPhase,
+          ready:g.ready,position:g.position,rpm:g.rpm,revision:g.revision}:{}),
+        ...(event?{pointerId:event.pointerId,button:event.button,buttons:event.buttons,
+          clientX:event.clientX,clientY:event.clientY,defaultPrevented:!!event.defaultPrevented,
+          isTrusted:event.isTrusted,pointerType:event.pointerType,targetTag:event.target?.tagName,
+          targetId:event.target?.id,eventTimeMs:event.timeStamp,altKey:!!event.altKey,
+          ctrlKey:!!event.ctrlKey,metaKey:!!event.metaKey,shiftKey:!!event.shiftKey}:{}),...fields};
+      const record={};
+      for(const [key,value]of Object.entries(source)){
+        if(typeof value==='string')record[key]=value.slice(0,120);
+        else if(typeof value==='boolean'||value===null)record[key]=value;
+        else if(typeof value==='number')record[key]=finite(value)?value:null;
+      }
+      const returned=onEvent(Object.freeze(record));
+      if(returned&&typeof returned.then==='function')Promise.resolve(returned).catch(()=>{});
+    }catch{} // Observers cannot veto input or break teardown, including async rejection.
+  }
+  function resultFields(result){
+    if(onEvent===noObservation||typeof onEvent!=='function')return{};
+    const own=key=>{try{return result&&typeof result==='object'?Object.getOwnPropertyDescriptor(result,key)?.value:undefined;}catch{return undefined;}};
+    const generation=own('generation'),resultPosition=own('position'),resultPlaying=own('playing');
+    return{accepted:result!==false&&result!==null,resultKind:result===null?'null':typeof result,
+      generation:finite(generation)?generation:undefined,resultPosition:finite(resultPosition)?resultPosition:undefined,
+      resultPlaying:typeof resultPlaying==='boolean'?resultPlaying:undefined};
+  }
   const consume=event=>{event.preventDefault();event.stopPropagation();};
   const closest=target=>target?.closest?.(selector)||null;
   const deckFor=element=>{
@@ -34,12 +64,13 @@ export function createDeckScratchControls({engine,state,root=globalThis.document
   const current=g=>!disposed&&active.get(g.deck.index)===g&&state.decks[g.deck.index]===g.deck&&
     g.deck.track===g.track&&g.element.isConnected!==false;
   const position=(g,value)=>clamp(value,0,finite(g.track.duration)&&g.track.duration>0?g.track.duration:Infinity);
-  function status(element,index,phase,text) {
+  function status(element,index,phase,text,g=active.get(index)) {
     const busy=phase==='preparing'?'true':'false';
     if(element.getAttribute?.('aria-busy')!==busy)element.setAttribute('aria-busy',busy);
     if(element.dataset.scratchPhase!==phase)element.dataset.scratchPhase=phase;
     const output=root.querySelector?.(`[data-deck-scratch-status="${index}"]`);
     if(output&&output.textContent!==text)output.textContent=text;
+    observe('owner.phase',{deck:index,phase},null,g);
   }
   function listen(target,type,handler,capture=false){target.addEventListener(type,handler,capture);listeners.push(()=>target.removeEventListener(type,handler,capture));}
   function end(g,cancel=false,message='Scratch released.') {
@@ -49,22 +80,31 @@ export function createDeckScratchControls({engine,state,root=globalThis.document
     // Cancel/pending preparation never waits or emits additional motion.
     if(!cancel&&g.ready&&g.desired&&g.sent<g.revision){
       g.sent=g.revision;
+      observe('engine.update.sent',{reason:'final-release',position:g.desired.position,velocity:g.desired.velocity},null,g);
       try{Promise.resolve(engine.updateDeckScratch(g.deck,
-        {position:g.desired.position,velocity:g.desired.velocity},g.owner)).catch(error=>{
+        {position:g.desired.position,velocity:g.desired.velocity},g.owner)).then(result=>{
+          observe('engine.update.result',resultFields(result),null,g);
+        }).catch(error=>{
+          observe('engine.update.error',{errorName:error?.name},null,g);
           if(!active.has(g.deck.index)&&g.deck.track===g.track)notify(error.message);
-        });}catch(error){notify(error.message);}
+        });}catch(error){observe('engine.update.error',{errorName:error?.name},null,g);notify(error.message);}
     }
     active.delete(g.deck.index);if(g.pointerId!==undefined)pointers.delete(g.pointerId);
     if(frame!==null&&![...active.values()].some(item=>item.mode==='keyboard')){cancelFrame(frame);frame=null;}
-    status(g.element,g.deck.index,'idle',message);
-    if(g.pointerId!==undefined){try{if(g.element.hasPointerCapture?.(g.pointerId))g.element.releasePointerCapture(g.pointerId);}catch{}}
+    status(g.element,g.deck.index,'idle',message,g);
+    if(g.pointerId!==undefined){try{if(g.element.hasPointerCapture?.(g.pointerId)){g.element.releasePointerCapture(g.pointerId);observe('capture.released',{pointerId:g.pointerId},null,g);}}catch{observe('capture.release-failed',{pointerId:g.pointerId},null,g);}}
     // Deliberately do NOT wait for async begin: this retires pending ownership
     // now, and the late begin completion is checked again below.
-    try{return Promise.resolve(engine.endDeckScratch(g.deck,g.owner,{cancel})).catch(error=>{
+    observe('engine.end.sent',{cancel},null,g);
+    try{return Promise.resolve(engine.endDeckScratch(g.deck,g.owner,{cancel})).then(result=>{
+      observe('engine.end.result',resultFields(result),null,g);return result;
+    }).catch(error=>{
+      observe('engine.end.error',{errorName:error?.name},null,g);
       if(!active.has(g.deck.index)&&g.deck.track===g.track)notify(error.message);
-    });}catch(error){if(!active.has(g.deck.index))notify(error.message);return Promise.resolve();}
+    });}catch(error){observe('engine.end.error',{errorName:error?.name},null,g);if(!active.has(g.deck.index))notify(error.message);return Promise.resolve();}
   }
   function fail(g,error) {
+    observe('owner.error',{errorName:error?.name,current:current(g)},null,g);
     if(!current(g))return;
     const canceled=error?.name==='AbortError';
     void end(g,true,canceled?'Scratch canceled.':`Scratch unavailable: ${error?.message||error}`);
@@ -76,7 +116,9 @@ export function createDeckScratchControls({engine,state,root=globalThis.document
     try{
       while(current(g)&&g.ready&&g.sent<g.revision){
         const desired=g.desired;g.sent=desired.revision;
+        observe('engine.update.sent',{position:desired.position,velocity:desired.velocity},null,g);
         const result=await engine.updateDeckScratch(g.deck,{position:desired.position,velocity:desired.velocity},g.owner);
+        observe('engine.update.result',resultFields(result),null,g);
         if(result===false||result===null){if(current(g))void end(g,true,'Scratch canceled.');break;}
       }
     }catch(error){fail(g,error);}finally{g.pumping=false;}
@@ -98,12 +140,17 @@ export function createDeckScratchControls({engine,state,root=globalThis.document
     status(element,deck.index,'preparing','Preparing whole-deck scratch…');
     desired(g,g.position,mode==='keyboard'?(g.key==='ArrowLeft'?-1:g.key==='ArrowRight'?1:0):0);
     let preparation;
+    observe('engine.begin.sent',{},null,g);
     try{preparation=engine.beginDeckScratch(deck,g.owner);}catch(error){fail(g,error);return g;}
     Promise.resolve(preparation).then(result=>{
+      observe('engine.begin.result',{...resultFields(result),current:current(g)},null,g);
       if(!current(g)){
         // Idempotent retirement closes the seam even if preparation resolves
         // after release, replacement, detached markup or controller disposal.
-        return Promise.resolve(engine.endDeckScratch(deck,g.owner,{cancel:true})).catch(()=>{});
+        observe('engine.end.sent',{cancel:true,reason:'late-begin-retirement'},null,g);
+        return Promise.resolve(engine.endDeckScratch(deck,g.owner,{cancel:true})).then(result=>{
+          observe('engine.end.result',resultFields(result),null,g);
+        }).catch(error=>observe('engine.end.error',{errorName:error?.name},null,g));
       }
       if(result===false||result===null){void end(g,true,'Scratch canceled.');return;}
       g.ready=true;status(element,deck.index,'active',mode==='keyboard'?'Keyboard scratch active.':'Platter scratch active.');
@@ -121,29 +168,37 @@ export function createDeckScratchControls({engine,state,root=globalThis.document
     return Math.atan2(dy,dx);
   }
   function pointerMove(event,g) {
-    if(!current(g)){void end(g,true,'Scratch canceled.');return;}
-    const time=now();if(!finite(time)||time<g.time){void end(g,true,'Scratch canceled after clock interruption.');return;}
+    if(!current(g)){observe('pointermove.ignored',{reason:'stale-owner'},event,g);void end(g,true,'Scratch canceled.');return;}
+    const time=now();if(!finite(time)||time<g.time){observe('pointermove.ignored',{reason:'clock-interruption'},event,g);void end(g,true,'Scratch canceled after clock interruption.');return;}
     const next=angle(g.element,event.clientX,event.clientY);
-    if(next===null){g.angle=null;g.time=time;desired(g,g.position,0);return;}
-    if(g.angle===null){g.angle=next;g.time=time;desired(g,g.position,0);return;}
+    if(next===null){g.angle=null;g.time=time;desired(g,g.position,0);observe('pointermove.held',{reason:'center-or-invalid-geometry'},event,g);return;}
+    if(g.angle===null){g.angle=next;g.time=time;desired(g,g.position,0);observe('pointermove.held',{reason:'reanchored'},event,g);return;}
     let delta=next-g.angle;while(delta>Math.PI)delta-=2*Math.PI;while(delta< -Math.PI)delta+=2*Math.PI;
     const seconds=delta/(2*Math.PI)*60/g.rpm,nextPosition=position(g,g.position+seconds);
     const interval=Math.max(deckScratchUIPolicy.minimumVelocityIntervalSeconds,(time-g.time)/1000);
     desired(g,nextPosition,(nextPosition-g.position)/interval);g.angle=next;g.time=time;
+    observe('pointermove.applied',{deltaRadians:delta,velocity:g.desired.velocity},event,g);
   }
   listen(root,'pointerdown',event=>{
-    if(disposed||event.defaultPrevented||event.button!==0||modified(event)||!Number.isInteger(event.pointerId)||event.pointerId<0)return;
-    const element=closest(event.target),deck=deckFor(element);if(!deck||active.has(deck.index))return;
-    if(event.target?.closest?.('input,select,textarea,button,a,[contenteditable="true"]'))return;
-    const first=angle(element,event.clientX,event.clientY);if(first===null)return;
+    observe('pointerdown.received',{},event);
+    const refused=reason=>observe('pointerdown.refused',{reason},event);
+    if(disposed)return refused('disposed');if(event.defaultPrevented)return refused('already-prevented');
+    if(event.button!==0)return refused('nonprimary-button');if(modified(event))return refused('modifier-or-composition');
+    if(!Number.isInteger(event.pointerId)||event.pointerId<0)return refused('invalid-pointer-id');
+    const element=closest(event.target);if(!element)return refused('not-platter');
+    const deck=deckFor(element);if(!deck)return refused('missing-deck-or-track');
+    if(active.has(deck.index))return observe('pointerdown.refused',{reason:'deck-owned'},event,active.get(deck.index));
+    if(event.target?.closest?.('input,select,textarea,button,a,[contenteditable="true"]'))return refused('interactive-child');
+    const first=angle(element,event.clientX,event.clientY);if(first===null)return refused('center-or-invalid-geometry');
     consume(event);
-    try{element.setPointerCapture(event.pointerId);}catch{notify('Pointer capture is unavailable; scratch did not start.');return;}
+    try{element.setPointerCapture(event.pointerId);observe('capture.acquired',{deck:deck.index},event);}catch{observe('capture.failed',{deck:deck.index},event);notify('Pointer capture is unavailable; scratch did not start.');return;}
     element.focus?.({preventScroll:true});
-    try{start(element,deck,'pointer',{pointerId:event.pointerId,angle:first});}catch(error){try{element.releasePointerCapture(event.pointerId);}catch{}notify(error.message);}
+    try{const g=start(element,deck,'pointer',{pointerId:event.pointerId,angle:first});observe('pointerdown.accepted',{accepted:!!g&&current(g)},event,g);}catch(error){observe('pointerdown.refused',{reason:'start-error',errorName:error?.name},event);try{element.releasePointerCapture(event.pointerId);}catch{}notify(error.message);}
   });
-  listen(root,'pointermove',event=>{const g=pointers.get(event.pointerId);if(!g)return;consume(event);pointerMove(event,g);});
-  listen(root,'pointerup',event=>{const g=pointers.get(event.pointerId);if(!g)return;consume(event);pointerMove(event,g);void end(g,false);});
-  for(const type of ['pointercancel','lostpointercapture'])listen(root,type,event=>{const g=pointers.get(event.pointerId);if(g)void end(g,true,'Scratch canceled.');});
+  listen(root,'pointermove',event=>{const g=pointers.get(event.pointerId);observe('pointermove.received',{},event,g);if(!g){observe('pointermove.ignored',{reason:'no-pointer-owner'},event);return;}consume(event);pointerMove(event,g);});
+  listen(root,'pointerup',event=>{const g=pointers.get(event.pointerId);observe('pointerup.received',{},event,g);if(!g){observe('pointerup.ignored',{reason:'no-pointer-owner'},event);return;}consume(event);pointerMove(event,g);void end(g,false);});
+  listen(root,'gotpointercapture',event=>observe('capture.gained',{},event,pointers.get(event.pointerId)));
+  for(const type of ['pointercancel','lostpointercapture'])listen(root,type,event=>{const g=pointers.get(event.pointerId);observe(type==='pointercancel'?'pointercancel.received':'capture.lost',{},event,g);if(g)void end(g,true,'Scratch canceled.');});
   function frameStep(){
     frame=null;const time=now();
     for(const g of [...active.values()])if(g.mode==='keyboard'){

@@ -1,0 +1,975 @@
+{
+  "passed": 3,
+  "failed": 0,
+  "experimentSHA256": "669f76e8482b8c215e41ab791c833a207c025412f33efe2ecefd08e145d21535",
+  "baselineSHA256": "a96cd1d244e402957b4daedb823cb2015f759d4a46df9672954b9bba1f944e78",
+  "vendorSHA256": "b2811c519f067cc5a1abd6cdccab46578d1eeef8aba42f666fab2830a9d6f46e",
+  "scope": "Actual unchanged WASM via controlled Node message/clock/gain host plus actual harness FFT analytic-tone checks. Does not establish browser scheduling, callback lead, native AudioBuffer branding, startup continuity or mainUI defect closure. Lowlead success is observed, not asserted.",
+  "checks": [
+    {
+      "name": "Experimental lead is explicit finite bounded0..1, not a new default or production policy",
+      "passed": true,
+      "evidence": {
+        "invalidValuesRejected": 5
+      }
+    },
+    {
+      "name": "Actual FFT distinguishes raw475.2 from shifted880 and sought1100 without expected-frequency input",
+      "passed": true,
+      "evidence": {
+        "measured": [
+          {
+            "actualFixtureHz": 475.2,
+            "frames": 1920,
+            "rms": 0.08483495289074963,
+            "peak": 0.11999914795160294,
+            "dominantHz": 475.18543669110466
+          },
+          {
+            "actualFixtureHz": 880,
+            "frames": 1920,
+            "rms": 0.08477666518808993,
+            "peak": 0.11999999731779099,
+            "dominantHz": 880.0155407026516
+          },
+          {
+            "actualFixtureHz": 1100,
+            "frames": 1920,
+            "rms": 0.08485281360839161,
+            "peak": 0.11999999731779099,
+            "dominantHz": 1099.978662600067
+          }
+        ],
+        "rejectedRawPitch": {
+          "raw475HzWindows": 47,
+          "criteriaPassed": {
+            "onset": true,
+            "settledPitch": false,
+            "earlyPitch": false,
+            "allAudibleWindowsAfter30msCorrect": false
+          }
+        }
+      }
+    },
+    {
+      "name": "Eight actualWASM lead points record fresh/restart/seek spectrum and onset, without asserting lowlead succeeds",
+      "passed": true,
+      "evidence": {
+        "rows": [
+          {
+            "leadSeconds": 0,
+            "queriedLatencySeconds": 0.12,
+            "measurements": [
+              {
+                "kind": "fresh-start",
+                "ack": {
+                  "when": 0,
+                  "position": 1,
+                  "playing": true,
+                  "rate": 1.08,
+                  "keylock": true,
+                  "semitones": 12,
+                  "effectiveSemitones": 12,
+                  "group": 1,
+                  "origin": 0,
+                  "latencyLead": 0.12,
+                  "experimentalLeadSeconds": 0,
+                  "scheduleIssuedAt": 0,
+                  "scheduleAcknowledgedAt": 0,
+                  "transitionSeconds": 0,
+                  "superseded": false
+                },
+                "firstCapturedTime": 0,
+                "onsetMinusRequested": 0.013,
+                "firstCorrectPitchMinusRequested": 0,
+                "wrongPitchAfter30ms": 0,
+                "criteriaPassed": {
+                  "onset": true,
+                  "settledPitch": true,
+                  "earlyPitch": true,
+                  "allAudibleWindowsAfter30msCorrect": true
+                },
+                "settled": {
+                  "frames": 7200,
+                  "rms": 0.08240659906634464,
+                  "peak": 0.11736107617616653,
+                  "dominantHz": 880.8259879230908
+                }
+              },
+              {
+                "kind": "prewarmed-restart",
+                "ack": {
+                  "when": 1.2533333333333334,
+                  "position": 1,
+                  "playing": true,
+                  "rate": 1.08,
+                  "keylock": true,
+                  "semitones": 12,
+                  "effectiveSemitones": 12,
+                  "group": 1,
+                  "origin": 0,
+                  "latencyLead": 0.12,
+                  "experimentalLeadSeconds": 0,
+                  "scheduleIssuedAt": 1.2533333333333334,
+                  "scheduleAcknowledgedAt": 1.2533333333333334,
+                  "transitionSeconds": 0,
+                  "superseded": false
+                },
+                "firstCapturedTime": 1.2533333333333334,
+                "onsetMinusRequested": 0,
+                "firstCorrectPitchMinusRequested": 0,
+                "wrongPitchAfter30ms": 0,
+                "criteriaPassed": {
+                  "onset": true,
+                  "settledPitch": true,
+                  "earlyPitch": true,
+                  "allAudibleWindowsAfter30msCorrect": true
+                },
+                "settled": {
+                  "frames": 7200,
+                  "rms": 0.08240414379406655,
+                  "peak": 0.11731904745101929,
+                  "dominantHz": 880.8269503146507
+                }
+              },
+              {
+                "kind": "live-seek",
+                "ack": {
+                  "when": 1.7546666666666666,
+                  "position": 3.5,
+                  "playing": true,
+                  "rate": 1.08,
+                  "keylock": true,
+                  "semitones": 12,
+                  "effectiveSemitones": 12,
+                  "group": 1,
+                  "origin": 0,
+                  "latencyLead": 0.12,
+                  "experimentalLeadSeconds": 0,
+                  "scheduleIssuedAt": 1.7546666666666666,
+                  "scheduleAcknowledgedAt": 1.7546666666666666,
+                  "transitionSeconds": 0,
+                  "superseded": false
+                },
+                "firstCapturedTime": 1.7546666666666666,
+                "onsetMinusRequested": 0,
+                "firstCorrectPitchMinusRequested": 0.040000000000000036,
+                "wrongPitchAfter30ms": 1,
+                "criteriaPassed": {
+                  "onset": null,
+                  "settledPitch": true,
+                  "earlyPitch": false,
+                  "allAudibleWindowsAfter30msCorrect": false
+                },
+                "settled": {
+                  "frames": 7200,
+                  "rms": 0.0816791093976256,
+                  "peak": 0.11596433073282242,
+                  "dominantHz": 1101.0424773619595
+                }
+              }
+            ]
+          },
+          {
+            "leadSeconds": 0.005,
+            "queriedLatencySeconds": 0.12,
+            "measurements": [
+              {
+                "kind": "fresh-start",
+                "ack": {
+                  "when": 0.005,
+                  "position": 1,
+                  "playing": true,
+                  "rate": 1.08,
+                  "keylock": true,
+                  "semitones": 12,
+                  "effectiveSemitones": 12,
+                  "group": 1,
+                  "origin": 0,
+                  "latencyLead": 0.12,
+                  "experimentalLeadSeconds": 0.005,
+                  "scheduleIssuedAt": 0,
+                  "scheduleAcknowledgedAt": 0,
+                  "transitionSeconds": 0,
+                  "superseded": false
+                },
+                "firstCapturedTime": 0,
+                "onsetMinusRequested": 0.008,
+                "firstCorrectPitchMinusRequested": -0.005,
+                "wrongPitchAfter30ms": 0,
+                "criteriaPassed": {
+                  "onset": true,
+                  "settledPitch": true,
+                  "earlyPitch": true,
+                  "allAudibleWindowsAfter30msCorrect": true
+                },
+                "settled": {
+                  "frames": 7200,
+                  "rms": 0.08242599943578945,
+                  "peak": 0.11725494265556335,
+                  "dominantHz": 880.8261289520368
+                }
+              },
+              {
+                "kind": "prewarmed-restart",
+                "ack": {
+                  "when": 1.2636666666666665,
+                  "position": 1,
+                  "playing": true,
+                  "rate": 1.08,
+                  "keylock": true,
+                  "semitones": 12,
+                  "effectiveSemitones": 12,
+                  "group": 1,
+                  "origin": 0,
+                  "latencyLead": 0.12,
+                  "experimentalLeadSeconds": 0.005,
+                  "scheduleIssuedAt": 1.2586666666666666,
+                  "scheduleAcknowledgedAt": 1.2586666666666666,
+                  "transitionSeconds": 0,
+                  "superseded": false
+                },
+                "firstCapturedTime": 1.2586666666666666,
+                "onsetMinusRequested": -0.0009999999999998899,
+                "firstCorrectPitchMinusRequested": -0.004999999999999893,
+                "wrongPitchAfter30ms": 0,
+                "criteriaPassed": {
+                  "onset": true,
+                  "settledPitch": true,
+                  "earlyPitch": true,
+                  "allAudibleWindowsAfter30msCorrect": true
+                },
+                "settled": {
+                  "frames": 7200,
+                  "rms": 0.08243947072062666,
+                  "peak": 0.11752820014953613,
+                  "dominantHz": 880.8290138640607
+                }
+              },
+              {
+                "kind": "live-seek",
+                "ack": {
+                  "when": 1.7703333333333333,
+                  "position": 3.5,
+                  "playing": true,
+                  "rate": 1.08,
+                  "keylock": true,
+                  "semitones": 12,
+                  "effectiveSemitones": 12,
+                  "group": 1,
+                  "origin": 0,
+                  "latencyLead": 0.12,
+                  "experimentalLeadSeconds": 0.005,
+                  "scheduleIssuedAt": 1.7653333333333334,
+                  "scheduleAcknowledgedAt": 1.7653333333333334,
+                  "transitionSeconds": 0,
+                  "superseded": false
+                },
+                "firstCapturedTime": 1.7653333333333334,
+                "onsetMinusRequested": -0.004999999999999893,
+                "firstCorrectPitchMinusRequested": 0.025000000000000133,
+                "wrongPitchAfter30ms": 0,
+                "criteriaPassed": {
+                  "onset": null,
+                  "settledPitch": true,
+                  "earlyPitch": true,
+                  "allAudibleWindowsAfter30msCorrect": true
+                },
+                "settled": {
+                  "frames": 7200,
+                  "rms": 0.08165639541410932,
+                  "peak": 0.11601990461349487,
+                  "dominantHz": 1101.0451140574107
+                }
+              }
+            ]
+          },
+          {
+            "leadSeconds": 0.01,
+            "queriedLatencySeconds": 0.12,
+            "measurements": [
+              {
+                "kind": "fresh-start",
+                "ack": {
+                  "when": 0.01,
+                  "position": 1,
+                  "playing": true,
+                  "rate": 1.08,
+                  "keylock": true,
+                  "semitones": 12,
+                  "effectiveSemitones": 12,
+                  "group": 1,
+                  "origin": 0,
+                  "latencyLead": 0.12,
+                  "experimentalLeadSeconds": 0.01,
+                  "scheduleIssuedAt": 0,
+                  "scheduleAcknowledgedAt": 0,
+                  "transitionSeconds": 0,
+                  "superseded": false
+                },
+                "firstCapturedTime": 0,
+                "onsetMinusRequested": 0.002999999999999999,
+                "firstCorrectPitchMinusRequested": -0.01,
+                "wrongPitchAfter30ms": 0,
+                "criteriaPassed": {
+                  "onset": true,
+                  "settledPitch": true,
+                  "earlyPitch": true,
+                  "allAudibleWindowsAfter30msCorrect": true
+                },
+                "settled": {
+                  "frames": 7200,
+                  "rms": 0.08236014363211581,
+                  "peak": 0.11728775501251221,
+                  "dominantHz": 880.8299043541585
+                }
+              },
+              {
+                "kind": "prewarmed-restart",
+                "ack": {
+                  "when": 1.274,
+                  "position": 1,
+                  "playing": true,
+                  "rate": 1.08,
+                  "keylock": true,
+                  "semitones": 12,
+                  "effectiveSemitones": 12,
+                  "group": 1,
+                  "origin": 0,
+                  "latencyLead": 0.12,
+                  "experimentalLeadSeconds": 0.01,
+                  "scheduleIssuedAt": 1.264,
+                  "scheduleAcknowledgedAt": 1.264,
+                  "transitionSeconds": 0,
+                  "superseded": false
+                },
+                "firstCapturedTime": 1.264,
+                "onsetMinusRequested": -0.001000000000000112,
+                "firstCorrectPitchMinusRequested": 0,
+                "wrongPitchAfter30ms": 0,
+                "criteriaPassed": {
+                  "onset": true,
+                  "settledPitch": true,
+                  "earlyPitch": true,
+                  "allAudibleWindowsAfter30msCorrect": true
+                },
+                "settled": {
+                  "frames": 7200,
+                  "rms": 0.08241358745972308,
+                  "peak": 0.11741337180137634,
+                  "dominantHz": 880.8289164706189
+                }
+              },
+              {
+                "kind": "live-seek",
+                "ack": {
+                  "when": 1.786,
+                  "position": 3.5,
+                  "playing": true,
+                  "rate": 1.08,
+                  "keylock": true,
+                  "semitones": 12,
+                  "effectiveSemitones": 12,
+                  "group": 1,
+                  "origin": 0,
+                  "latencyLead": 0.12,
+                  "experimentalLeadSeconds": 0.01,
+                  "scheduleIssuedAt": 1.776,
+                  "scheduleAcknowledgedAt": 1.776,
+                  "transitionSeconds": 0,
+                  "superseded": false
+                },
+                "firstCapturedTime": 1.776,
+                "onsetMinusRequested": -0.010000000000000009,
+                "firstCorrectPitchMinusRequested": 0.040000000000000036,
+                "wrongPitchAfter30ms": 1,
+                "criteriaPassed": {
+                  "onset": null,
+                  "settledPitch": true,
+                  "earlyPitch": false,
+                  "allAudibleWindowsAfter30msCorrect": false
+                },
+                "settled": {
+                  "frames": 7200,
+                  "rms": 0.08167972234571351,
+                  "peak": 0.11597827076911926,
+                  "dominantHz": 1101.0446194738306
+                }
+              }
+            ]
+          },
+          {
+            "leadSeconds": 0.02,
+            "queriedLatencySeconds": 0.12,
+            "measurements": [
+              {
+                "kind": "fresh-start",
+                "ack": {
+                  "when": 0.02,
+                  "position": 1,
+                  "playing": true,
+                  "rate": 1.08,
+                  "keylock": true,
+                  "semitones": 12,
+                  "effectiveSemitones": 12,
+                  "group": 1,
+                  "origin": 0,
+                  "latencyLead": 0.12,
+                  "experimentalLeadSeconds": 0.02,
+                  "scheduleIssuedAt": 0,
+                  "scheduleAcknowledgedAt": 0,
+                  "transitionSeconds": 0,
+                  "superseded": false
+                },
+                "firstCapturedTime": 0,
+                "onsetMinusRequested": -0.0010000000000000009,
+                "firstCorrectPitchMinusRequested": -0.01,
+                "wrongPitchAfter30ms": 0,
+                "criteriaPassed": {
+                  "onset": true,
+                  "settledPitch": true,
+                  "earlyPitch": true,
+                  "allAudibleWindowsAfter30msCorrect": true
+                },
+                "settled": {
+                  "frames": 7200,
+                  "rms": 0.08237561476308651,
+                  "peak": 0.1171988844871521,
+                  "dominantHz": 880.8266979983691
+                }
+              },
+              {
+                "kind": "prewarmed-restart",
+                "ack": {
+                  "when": 1.292,
+                  "position": 1,
+                  "playing": true,
+                  "rate": 1.08,
+                  "keylock": true,
+                  "semitones": 12,
+                  "effectiveSemitones": 12,
+                  "group": 1,
+                  "origin": 0,
+                  "latencyLead": 0.12,
+                  "experimentalLeadSeconds": 0.02,
+                  "scheduleIssuedAt": 1.272,
+                  "scheduleAcknowledgedAt": 1.272,
+                  "transitionSeconds": 0,
+                  "superseded": false
+                },
+                "firstCapturedTime": 1.272,
+                "onsetMinusRequested": -0.001000000000000112,
+                "firstCorrectPitchMinusRequested": 0,
+                "wrongPitchAfter30ms": 0,
+                "criteriaPassed": {
+                  "onset": true,
+                  "settledPitch": true,
+                  "earlyPitch": true,
+                  "allAudibleWindowsAfter30msCorrect": true
+                },
+                "settled": {
+                  "frames": 7200,
+                  "rms": 0.08240196035694052,
+                  "peak": 0.11738783866167068,
+                  "dominantHz": 880.828836606015
+                }
+              },
+              {
+                "kind": "live-seek",
+                "ack": {
+                  "when": 1.812,
+                  "position": 3.5,
+                  "playing": true,
+                  "rate": 1.08,
+                  "keylock": true,
+                  "semitones": 12,
+                  "effectiveSemitones": 12,
+                  "group": 1,
+                  "origin": 0,
+                  "latencyLead": 0.12,
+                  "experimentalLeadSeconds": 0.02,
+                  "scheduleIssuedAt": 1.792,
+                  "scheduleAcknowledgedAt": 1.792,
+                  "transitionSeconds": 0,
+                  "superseded": false
+                },
+                "firstCapturedTime": 1.792,
+                "onsetMinusRequested": -0.020000000000000018,
+                "firstCorrectPitchMinusRequested": 0.020000000000000018,
+                "wrongPitchAfter30ms": 0,
+                "criteriaPassed": {
+                  "onset": null,
+                  "settledPitch": true,
+                  "earlyPitch": true,
+                  "allAudibleWindowsAfter30msCorrect": true
+                },
+                "settled": {
+                  "frames": 7200,
+                  "rms": 0.0816790669645993,
+                  "peak": 0.1159643605351448,
+                  "dominantHz": 1101.0445410444238
+                }
+              }
+            ]
+          },
+          {
+            "leadSeconds": 0.04,
+            "queriedLatencySeconds": 0.12,
+            "measurements": [
+              {
+                "kind": "fresh-start",
+                "ack": {
+                  "when": 0.04,
+                  "position": 1,
+                  "playing": true,
+                  "rate": 1.08,
+                  "keylock": true,
+                  "semitones": 12,
+                  "effectiveSemitones": 12,
+                  "group": 1,
+                  "origin": 0,
+                  "latencyLead": 0.12,
+                  "experimentalLeadSeconds": 0.04,
+                  "scheduleIssuedAt": 0,
+                  "scheduleAcknowledgedAt": 0,
+                  "transitionSeconds": 0,
+                  "superseded": false
+                },
+                "firstCapturedTime": 0,
+                "onsetMinusRequested": -0.0010000000000000009,
+                "firstCorrectPitchMinusRequested": 0,
+                "wrongPitchAfter30ms": 0,
+                "criteriaPassed": {
+                  "onset": true,
+                  "settledPitch": true,
+                  "earlyPitch": true,
+                  "allAudibleWindowsAfter30msCorrect": true
+                },
+                "settled": {
+                  "frames": 7200,
+                  "rms": 0.0824048097602735,
+                  "peak": 0.11731638759374619,
+                  "dominantHz": 880.8264410883224
+                }
+              },
+              {
+                "kind": "prewarmed-restart",
+                "ack": {
+                  "when": 1.3333333333333333,
+                  "position": 1,
+                  "playing": true,
+                  "rate": 1.08,
+                  "keylock": true,
+                  "semitones": 12,
+                  "effectiveSemitones": 12,
+                  "group": 1,
+                  "origin": 0,
+                  "latencyLead": 0.12,
+                  "experimentalLeadSeconds": 0.04,
+                  "scheduleIssuedAt": 1.2933333333333332,
+                  "scheduleAcknowledgedAt": 1.2933333333333332,
+                  "transitionSeconds": 0,
+                  "superseded": false
+                },
+                "firstCapturedTime": 1.2933333333333332,
+                "onsetMinusRequested": -0.001000000000000112,
+                "firstCorrectPitchMinusRequested": 0,
+                "wrongPitchAfter30ms": 0,
+                "criteriaPassed": {
+                  "onset": true,
+                  "settledPitch": true,
+                  "earlyPitch": true,
+                  "allAudibleWindowsAfter30msCorrect": true
+                },
+                "settled": {
+                  "frames": 7200,
+                  "rms": 0.08245009040918498,
+                  "peak": 0.11733464151620865,
+                  "dominantHz": 880.8254637932847
+                }
+              },
+              {
+                "kind": "live-seek",
+                "ack": {
+                  "when": 1.8746666666666667,
+                  "position": 3.5,
+                  "playing": true,
+                  "rate": 1.08,
+                  "keylock": true,
+                  "semitones": 12,
+                  "effectiveSemitones": 12,
+                  "group": 1,
+                  "origin": 0,
+                  "latencyLead": 0.12,
+                  "experimentalLeadSeconds": 0.04,
+                  "scheduleIssuedAt": 1.8346666666666667,
+                  "scheduleAcknowledgedAt": 1.8346666666666667,
+                  "transitionSeconds": 0,
+                  "superseded": false
+                },
+                "firstCapturedTime": 1.8346666666666667,
+                "onsetMinusRequested": -0.040000000000000036,
+                "firstCorrectPitchMinusRequested": 0.010000000000000009,
+                "wrongPitchAfter30ms": 0,
+                "criteriaPassed": {
+                  "onset": null,
+                  "settledPitch": true,
+                  "earlyPitch": true,
+                  "allAudibleWindowsAfter30msCorrect": true
+                },
+                "settled": {
+                  "frames": 7200,
+                  "rms": 0.08165414761784746,
+                  "peak": 0.1158093735575676,
+                  "dominantHz": 1101.042455953057
+                }
+              }
+            ]
+          },
+          {
+            "leadSeconds": 0.06,
+            "queriedLatencySeconds": 0.12,
+            "measurements": [
+              {
+                "kind": "fresh-start",
+                "ack": {
+                  "when": 0.06,
+                  "position": 1,
+                  "playing": true,
+                  "rate": 1.08,
+                  "keylock": true,
+                  "semitones": 12,
+                  "effectiveSemitones": 12,
+                  "group": 1,
+                  "origin": 0,
+                  "latencyLead": 0.12,
+                  "experimentalLeadSeconds": 0.06,
+                  "scheduleIssuedAt": 0,
+                  "scheduleAcknowledgedAt": 0,
+                  "transitionSeconds": 0,
+                  "superseded": false
+                },
+                "firstCapturedTime": 0,
+                "onsetMinusRequested": -0.0010000000000000009,
+                "firstCorrectPitchMinusRequested": -0.009999999999999995,
+                "wrongPitchAfter30ms": 0,
+                "criteriaPassed": {
+                  "onset": true,
+                  "settledPitch": true,
+                  "earlyPitch": true,
+                  "allAudibleWindowsAfter30msCorrect": true
+                },
+                "settled": {
+                  "frames": 7200,
+                  "rms": 0.08243243798726167,
+                  "peak": 0.11715840548276901,
+                  "dominantHz": 880.8268842076517
+                }
+              },
+              {
+                "kind": "prewarmed-restart",
+                "ack": {
+                  "when": 1.3746666666666667,
+                  "position": 1,
+                  "playing": true,
+                  "rate": 1.08,
+                  "keylock": true,
+                  "semitones": 12,
+                  "effectiveSemitones": 12,
+                  "group": 1,
+                  "origin": 0,
+                  "latencyLead": 0.12,
+                  "experimentalLeadSeconds": 0.06,
+                  "scheduleIssuedAt": 1.3146666666666667,
+                  "scheduleAcknowledgedAt": 1.3146666666666667,
+                  "transitionSeconds": 0,
+                  "superseded": false
+                },
+                "firstCapturedTime": 1.3146666666666667,
+                "onsetMinusRequested": -0.001000000000000112,
+                "firstCorrectPitchMinusRequested": 0,
+                "wrongPitchAfter30ms": 0,
+                "criteriaPassed": {
+                  "onset": true,
+                  "settledPitch": true,
+                  "earlyPitch": true,
+                  "allAudibleWindowsAfter30msCorrect": true
+                },
+                "settled": {
+                  "frames": 7200,
+                  "rms": 0.08243219622091175,
+                  "peak": 0.11731752008199692,
+                  "dominantHz": 880.8268473764313
+                }
+              },
+              {
+                "kind": "live-seek",
+                "ack": {
+                  "when": 1.9346666666666668,
+                  "position": 3.5,
+                  "playing": true,
+                  "rate": 1.08,
+                  "keylock": true,
+                  "semitones": 12,
+                  "effectiveSemitones": 12,
+                  "group": 1,
+                  "origin": 0,
+                  "latencyLead": 0.12,
+                  "experimentalLeadSeconds": 0.06,
+                  "scheduleIssuedAt": 1.8746666666666667,
+                  "scheduleAcknowledgedAt": 1.8746666666666667,
+                  "transitionSeconds": 0,
+                  "superseded": false
+                },
+                "firstCapturedTime": 1.8746666666666667,
+                "onsetMinusRequested": -0.06000000000000005,
+                "firstCorrectPitchMinusRequested": 0,
+                "wrongPitchAfter30ms": 0,
+                "criteriaPassed": {
+                  "onset": null,
+                  "settledPitch": true,
+                  "earlyPitch": true,
+                  "allAudibleWindowsAfter30msCorrect": true
+                },
+                "settled": {
+                  "frames": 7200,
+                  "rms": 0.08168257536767577,
+                  "peak": 0.11580618470907211,
+                  "dominantHz": 1101.0455070995072
+                }
+              }
+            ]
+          },
+          {
+            "leadSeconds": 0.12,
+            "queriedLatencySeconds": 0.12,
+            "measurements": [
+              {
+                "kind": "fresh-start",
+                "ack": {
+                  "when": 0.12,
+                  "position": 1,
+                  "playing": true,
+                  "rate": 1.08,
+                  "keylock": true,
+                  "semitones": 12,
+                  "effectiveSemitones": 12,
+                  "group": 1,
+                  "origin": 0,
+                  "latencyLead": 0.12,
+                  "experimentalLeadSeconds": 0.12,
+                  "scheduleIssuedAt": 0,
+                  "scheduleAcknowledgedAt": 0,
+                  "transitionSeconds": 0,
+                  "superseded": false
+                },
+                "firstCapturedTime": 0,
+                "onsetMinusRequested": -0.0010000000000000009,
+                "firstCorrectPitchMinusRequested": -0.009999999999999995,
+                "wrongPitchAfter30ms": 0,
+                "criteriaPassed": {
+                  "onset": true,
+                  "settledPitch": true,
+                  "earlyPitch": true,
+                  "allAudibleWindowsAfter30msCorrect": true
+                },
+                "settled": {
+                  "frames": 7200,
+                  "rms": 0.0824444612824205,
+                  "peak": 0.11737116426229477,
+                  "dominantHz": 880.8259735611456
+                }
+              },
+              {
+                "kind": "prewarmed-restart",
+                "ack": {
+                  "when": 1.4933333333333332,
+                  "position": 1,
+                  "playing": true,
+                  "rate": 1.08,
+                  "keylock": true,
+                  "semitones": 12,
+                  "effectiveSemitones": 12,
+                  "group": 1,
+                  "origin": 0,
+                  "latencyLead": 0.12,
+                  "experimentalLeadSeconds": 0.12,
+                  "scheduleIssuedAt": 1.3733333333333333,
+                  "scheduleAcknowledgedAt": 1.3733333333333333,
+                  "transitionSeconds": 0,
+                  "superseded": false
+                },
+                "firstCapturedTime": 1.3733333333333333,
+                "onsetMinusRequested": -0.0009999999999998899,
+                "firstCorrectPitchMinusRequested": -0.009999999999999787,
+                "wrongPitchAfter30ms": 0,
+                "criteriaPassed": {
+                  "onset": true,
+                  "settledPitch": true,
+                  "earlyPitch": true,
+                  "allAudibleWindowsAfter30msCorrect": true
+                },
+                "settled": {
+                  "frames": 7200,
+                  "rms": 0.0823587892878017,
+                  "peak": 0.11734363436698914,
+                  "dominantHz": 880.8269535916382
+                }
+              },
+              {
+                "kind": "live-seek",
+                "ack": {
+                  "when": 2.1146666666666665,
+                  "position": 3.5,
+                  "playing": true,
+                  "rate": 1.08,
+                  "keylock": true,
+                  "semitones": 12,
+                  "effectiveSemitones": 12,
+                  "group": 1,
+                  "origin": 0,
+                  "latencyLead": 0.12,
+                  "experimentalLeadSeconds": 0.12,
+                  "scheduleIssuedAt": 1.9946666666666666,
+                  "scheduleAcknowledgedAt": 1.9946666666666666,
+                  "transitionSeconds": 0,
+                  "superseded": false
+                },
+                "firstCapturedTime": 1.9946666666666666,
+                "onsetMinusRequested": -0.11999999999999988,
+                "firstCorrectPitchMinusRequested": -0.009999999999999787,
+                "wrongPitchAfter30ms": 0,
+                "criteriaPassed": {
+                  "onset": null,
+                  "settledPitch": true,
+                  "earlyPitch": true,
+                  "allAudibleWindowsAfter30msCorrect": true
+                },
+                "settled": {
+                  "frames": 7200,
+                  "rms": 0.0816127936468373,
+                  "peak": 0.11597444862127304,
+                  "dominantHz": 1101.0424612521524
+                }
+              }
+            ]
+          },
+          {
+            "leadSeconds": 0.2,
+            "queriedLatencySeconds": 0.12,
+            "measurements": [
+              {
+                "kind": "fresh-start",
+                "ack": {
+                  "when": 0.2,
+                  "position": 1,
+                  "playing": true,
+                  "rate": 1.08,
+                  "keylock": true,
+                  "semitones": 12,
+                  "effectiveSemitones": 12,
+                  "group": 1,
+                  "origin": 0,
+                  "latencyLead": 0.12,
+                  "experimentalLeadSeconds": 0.2,
+                  "scheduleIssuedAt": 0,
+                  "scheduleAcknowledgedAt": 0,
+                  "transitionSeconds": 0,
+                  "superseded": false
+                },
+                "firstCapturedTime": 0,
+                "onsetMinusRequested": -0.0010000000000000009,
+                "firstCorrectPitchMinusRequested": 0,
+                "wrongPitchAfter30ms": 0,
+                "criteriaPassed": {
+                  "onset": true,
+                  "settledPitch": true,
+                  "earlyPitch": true,
+                  "allAudibleWindowsAfter30msCorrect": true
+                },
+                "settled": {
+                  "frames": 7200,
+                  "rms": 0.08240126751654256,
+                  "peak": 0.11744824051856995,
+                  "dominantHz": 880.8265352008244
+                }
+              },
+              {
+                "kind": "prewarmed-restart",
+                "ack": {
+                  "when": 1.6533333333333333,
+                  "position": 1,
+                  "playing": true,
+                  "rate": 1.08,
+                  "keylock": true,
+                  "semitones": 12,
+                  "effectiveSemitones": 12,
+                  "group": 1,
+                  "origin": 0,
+                  "latencyLead": 0.12,
+                  "experimentalLeadSeconds": 0.2,
+                  "scheduleIssuedAt": 1.4533333333333334,
+                  "scheduleAcknowledgedAt": 1.4533333333333334,
+                  "transitionSeconds": 0,
+                  "superseded": false
+                },
+                "firstCapturedTime": 1.4533333333333334,
+                "onsetMinusRequested": -0.0009999999999998899,
+                "firstCorrectPitchMinusRequested": 0,
+                "wrongPitchAfter30ms": 0,
+                "criteriaPassed": {
+                  "onset": true,
+                  "settledPitch": true,
+                  "earlyPitch": true,
+                  "allAudibleWindowsAfter30msCorrect": true
+                },
+                "settled": {
+                  "frames": 7200,
+                  "rms": 0.08237679411403848,
+                  "peak": 0.1171681210398674,
+                  "dominantHz": 880.8288197687674
+                }
+              },
+              {
+                "kind": "live-seek",
+                "ack": {
+                  "when": 2.3546666666666667,
+                  "position": 3.5,
+                  "playing": true,
+                  "rate": 1.08,
+                  "keylock": true,
+                  "semitones": 12,
+                  "effectiveSemitones": 12,
+                  "group": 1,
+                  "origin": 0,
+                  "latencyLead": 0.12,
+                  "experimentalLeadSeconds": 0.2,
+                  "scheduleIssuedAt": 2.1546666666666665,
+                  "scheduleAcknowledgedAt": 2.1546666666666665,
+                  "transitionSeconds": 0,
+                  "superseded": false
+                },
+                "firstCapturedTime": 2.1546666666666665,
+                "onsetMinusRequested": -0.20000000000000018,
+                "firstCorrectPitchMinusRequested": 0,
+                "wrongPitchAfter30ms": 0,
+                "criteriaPassed": {
+                  "onset": null,
+                  "settledPitch": true,
+                  "earlyPitch": true,
+                  "allAudibleWindowsAfter30msCorrect": true
+                },
+                "settled": {
+                  "frames": 7200,
+                  "rms": 0.0816127936468373,
+                  "peak": 0.11597444862127304,
+                  "dominantHz": 1101.0424612521524
+                }
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

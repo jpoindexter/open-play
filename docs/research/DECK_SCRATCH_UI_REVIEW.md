@@ -1,6 +1,6 @@
 # Ordinary platter UI controller
 
-2026-10-17. **19/19 controlled Node interaction checks executed; syntax checked. Actual browser/AudioEngine/PCM integration remains for parent acceptance.** This unit creates no native application and does not establish hardware/DVS or Serato scratch-response parity.
+2026-10-17. **Current observational amendment: 23/23 controlled Node interaction checks executed; syntax checked.** Initial gesture-only checkpoint was 19/19. Actual browser/AudioEngine/PCM integration remains for parent acceptance. This unit creates no native application and does not establish hardware/DVS or Serato scratch-response parity.
 
 ## Scope and integration API
 
@@ -49,7 +49,7 @@ For an active owner, normal updates are coalesced while an acknowledgement is in
 
 No UI work is resurrected by an old acknowledgement. Errors clear busy/capture state, retire the owner and expose the real current error. Engine release semantics remain authoritative: ordinary versus Slip backing-clock return, playing versus paused audition, loops, keylock recovery and gain/stem routing are not reimplemented by the UI controller.
 
-## Executed checks and exact source checkpoint
+## Initial executed checks and source checkpoint
 
 ```sh
 node scripts/test_deck_scratch_ui.mjs
@@ -75,5 +75,33 @@ a22ea57e1fd4df5a4e32f37ba3bdcb9bfb8e77384859b1d24cc79e4dbc821515  prototype/deck
 6. With current original/stem gains and FX routes, scratch and release without duplicate summing or lost gains/history. Keylock bypass/recovery and ordinary Slip backing return need actual engine/PCM verification. No musical/high-speed/vendor listening-quality claim follows from raw gesture math.
 
 Source is frozen for parent integration and browser acceptance. Native application development remains gated by explicit prototype approval.
+
+## Optional event observation amendment
+
+Parent reported actual main-app keyboard forward/reverse movement, but three native pointer drags still left the paused mid-track cursor unchanged, including after a keyboard owner had prepared the source. That report is **not** pointer acceptance or a proven controller defect. This amendment adds observation only: no filter, timing, angular mapping, source behavior, release policy or listener propagation phase was changed to make automation succeed.
+
+`createDeckScratchControls({...options,onEvent:record=>{...}})` now accepts an optional observer. It defaults to a shared no-op and retains no history. Parent owns the visible opt-in `?scratch-input-debug=1` pane, query flag and record-retention limits; this module does not create hidden state automation or enable itself through a query string.
+
+Each frozen, detached record contains only explicitly selected scalar fields. All strings cap at 120 characters; nonfinite numeric event values become `null`; object/array/function values are excluded. Engine ACK generation and position require finite numbers; playing requires a boolean. No track/source/PCM objects, input values, text content, media names, buffer contents, error messages or stacks are included. Target element tag/id are bounded strings for hit-testing diagnosis; those are the element identifiers, not file metadata. Observer throws and returned rejected Promises are swallowed. A slow synchronous observer can still add timing overhead; no JavaScript callback can be made preemptible by this wrapper.
+
+Common fields are `sequence`, `type`, `reason`, `deck`, `owner`, `mode`, `phase`, `ready`, original-source `position`, snapshotted `rpm` and `revision`. Event receipts additionally report available `pointerId`, `button`, `buttons`, `clientX`, `clientY`, `defaultPrevented`, `isTrusted`, `pointerType`, `targetTag`, `targetId`, `eventTimeMs` and boolean modifier flags. Engine result records include `accepted`, `resultKind` and available scalar `generation`, `resultPosition`, `resultPlaying`. `accepted` describes the existing API convention (neither false nor null), not independently measured audio delivery.
+
+Observed event types:
+
+- `pointerdown.received`, `.refused`, `.accepted`. Refusal reasons distinguish already prevented, nonprimary button, modifiers/composition, invalid pointer ID, not a platter, missing deck/track, current deck owner, interactive child, center/invalid geometry and synchronous start failure. A deck-owned refusal includes that existing owner's mode/phase, allowing the real trace to distinguish a retained keyboard owner.
+- `pointermove.received`, `.ignored`, `.held`, `.applied`; `pointerup.received`, `.ignored`; `pointercancel.received`. No-owner receipt is explicit instead of silently disappearing. Applied records contain actual unwrapped angular delta and computed bounded velocity. Pointer-up's final angular sampling retains its existing path through the same movement routine.
+- `capture.acquired`, `.gained`, `.failed`, `.lost`, `.released`, `.release-failed`. The new got-capture listener observes only; it consumes nothing and invokes no engine operation.
+- `owner.phase`, `owner.error`; `engine.begin.sent/result`, `engine.update.sent/result/error`, `engine.end.sent/result/error`. Late-begin retirement and final-release flush retain their explicit reason. Error diagnostics include only error class/name, not message/private context.
+
+The amendment executed **23/23** controlled checks: all initial 19 plus actual receipt/capture/movement/ACK records, early refusal reasons, bounded detached scalar-only serialization and throwing/asynchronously rejecting observer isolation. Both original-time movement and immediate pending-owner cancellation/cleanup still pass when every observer invocation fails. These remain controlled tests, not a diagnosis of the native pointer failure.
+
+```text
+884da609fa84a4affa584bdba1b02f563c4100caa5cae463f91008076a9e7193  prototype/deck-scratch-ui.js
+5db16e86d00cc6dd1d2bf2b013461152df0a38fee49d8b3c6fc1b616299d62ac  scripts/test_deck_scratch_ui.mjs
+```
+
+Next actual acceptance: reload the parent app with its explicit debug flag, repeat the same native drag and read the visible sequence. Establish whether pointerdown reaches the controller, which element/coordinates it targets, whether a filter refuses it, whether capture/owner readiness occurs, whether an applied movement and engine ACK occur, and whether the engine cursor changes. Do not infer the cause from keyboard acceptance alone or substitute a synthetic event injection for the failed native interaction.
+
+Separately, parent reported a potential engine edge where a paused raw transport at exact source end can emit an ended state and be retired despite paused playback. That is a **parent-reported future engine guard**, not repaired or independently proved by this UI-only amendment; it does not explain the reported unchanged paused mid-track pointer drags. Engine/app remain parent-owned.
 
 Skills applied: use, dec-accessibility, dec-motion-animation, dec-software-principles, dec-quality-testing.

@@ -1,0 +1,18 @@
+{
+  "date": "2026-10-17",
+  "scope": "Actual opt-in public browser input/controller event trace and visible cursor. Instrumented main UI; no captured pointer PCM, native/device or sonic parity.",
+  "sourceHashes": {
+    "prototype/app.js": "c7bbcf41bae30f2f86dea012089dec6a0cd5be2ff964301f8a7259ac5538b5e0",
+    "prototype/deck-scratch-ui.js": "884da609fa84a4affa584bdba1b02f563c4100caa5cae463f91008076a9e7193",
+    "prototype/scratch-input-debug.js": "f71c0f31511de6ce96d84fb97897abed62b95e0f18310ba1e1de53459074db5e"
+  },
+  "events": 338,
+  "omitted": 0,
+  "preparedPointerPassed": true,
+  "firstTouchReadinessClosed": false,
+  "observation": "After actual keyboard preparation/cursor movement, trusted pointer quarter-turn reverse commits original-time cursor0.6726seconds and remains paused. A preceding quick gesture finished before readiness and canceled; it did not replay later. Earlier uninstrumented failures are not enough to assign a single cause, especially at the track boundary.",
+  "evidence": [
+    "deck-scratch-pointer-event-trace.json",
+    "deck-scratch-pointer-event-trace.png"
+  ]
+}
