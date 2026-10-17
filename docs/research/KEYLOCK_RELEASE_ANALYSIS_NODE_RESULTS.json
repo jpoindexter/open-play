@@ -1,0 +1,23 @@
+{
+  "passed": 4,
+  "failed": 0,
+  "cases": [
+    {
+      "name": "Correct880Hz from release has no raw476Hz windows and meets pitch/gap bounds",
+      "passed": true
+    },
+    {
+      "name": "Audible raw bridge is rejected even when later scheduled output and settled pitch are correct",
+      "passed": true
+    },
+    {
+      "name": "40ms silent bridge is rejected despite correct later pitch",
+      "passed": true
+    },
+    {
+      "name": "Correct pitch at a wrong cursor demonstrates that this classifier cannot establish alignment",
+      "passed": true
+    }
+  ],
+  "scope": "Executed analytic PCM classifier counterexamples. Does not prove production engine, actual browser, cursor alignment, device or reference quality."
+}

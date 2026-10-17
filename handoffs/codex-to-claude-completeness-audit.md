@@ -47,6 +47,11 @@ observed Fable5.1/High selector (session local_501fea16-fb28-4e3c-bba7-2e24e6ef6
 see docs/research/claude-fable/video-reference-debug-prompt.md and approvals.md.
 It is not the full completeness audit; its source claims need independent checks.
 
+
+## Active uncommitted acceptance work after checkpoint10
+
+Read FULL_BUILD_PLAN.md44–47 and ACTIVE_EXECUTION.md before the pinned snapshot below. Production engine remains0b61a4f; the stronger seven-case harness now executes6pass/1fail/0fatal and captures23raw475.2Hz windows before880Hz after release. Corrected short-block browser33measured/3blocked/17pass has unresolved bass/waveform differences; no production selection. Initial active-muted shadow completed10/3overallpass: alltenfinite audio/cursorcriteria pass,21rawcontinuous captures, but extra group creation and actualquick durations fail. Revised bounded-retention shadow actual10/10,21completecaptures,onegroupall,quick32msboth,latercursor≤1.5ms; finite isolated experiment only. New guarded adapter prerequisite and engine integration remain unaccepted; main shifted release stillfails. Its cursor oracle currently assesses a later probe, not every first-release-frame source position. Native gain-only18offline/6realtime reproduction and every raw sample support round-versus-product-ceil capture-boundary cause for the one-sample pause shapes; old failures stay unchanged. Native app and full1:1 remain forbidden/unpassed.
+
 ## Current checkpoint10 override — read before historical tables
 
 Full1:1 incomplete; native approval absent. Current source pins scratch cache/preload/reuse and observed ready-first-pointer behavior. Actual raw engine7/7 with12finite captured PCM spans; live regression6/6 is narrow and misses the known raw476Hz return instead of880Hz. Initial retained46/54failure preserved; observability run48measured/6blocked/0combinedpass,27contiguous spans,3strict pause failures each one nonzero left boundary sample. No trimming or relaxed criteria. Read FULL_BUILD_PLAN.md43, ACTIVE_EXECUTION.md, DECK_SCRATCH_CACHE_REVIEW.md and new `*cache*`/`*observable*` browser results. First trusted ready pointer0→1/3s remains paused; this is control/cursor evidence, not pointer PCM or hardware/reference acceptance.
