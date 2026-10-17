@@ -1,6 +1,7 @@
 // Independent tempo/pitch rendering. All time coordinates returned by this API
 // are rendered-buffer seconds: divide original timeline seconds by tempo.
 import { validateTransform } from "./keylock-dsp.js";
+import {createBeatgrid} from "./beatgrid.js";
 
 const aborted = () =>
   new DOMException("Pitch processing cancelled.", "AbortError");
@@ -16,6 +17,37 @@ export class KeylockRenderer {
   clear() {
     this.cache.clear();
     this.cacheBytes = 0;
+  }
+  async renderWarpLoop(buffer,{track,loop,bpm,keylock=true,semitones=0,signal}={}){
+    if(signal?.aborted)throw aborted();
+    const grid=createBeatgrid(track),first=grid?.beatAt(loop?.start),span=grid?.beatAt(loop?.end)-first;
+    if(!grid||!Number.isFinite(span)||span<=0||!Number.isFinite(bpm)||bpm<=0||loop.start<0||loop.end>buffer.duration)throw new RangeError('Invalid warped-loop pitch bounds or beatgrid.');
+    if(!this.ids.has(buffer))this.ids.set(buffer,this.nextId++);
+    const cacheKey=JSON.stringify(['warp-loop',this.ids.get(buffer),track.grid,track.bpm,track.gridWarpMarkers,loop,bpm,keylock,semitones]);
+    const cached=this.cache.get(cacheKey);if(cached){this.cache.delete(cacheKey);this.cache.set(cacheKey,cached);return cached;}
+    const sr=buffer.sampleRate,start=Math.floor(loop.start*sr),end=Math.ceil(loop.end*sr),frames=Math.max(1,Math.round(span*60/bpm*sr)),cycle=frames/sr;
+    const positions=[loop.start,...grid.nodes.filter(n=>n.time>loop.start&&n.time<loop.end).map(n=>n.time)];
+    const segments=positions.map((time,i)=>({input:i===0?0:time-start/sr,output:(grid.beatAt(time)-first)/span*cycle}));
+    const copies=Array.from({length:buffer.numberOfChannels},(_,c)=>buffer.getChannelData(c).slice(start,end));
+    const rendered=await new Promise((resolve,reject)=>{
+      const worker=new Worker(new URL('./keylock-worker.js',import.meta.url),{type:'module'});let settled=false;
+      const finish=(error,value)=>{if(settled)return;settled=true;worker.terminate();signal?.removeEventListener('abort',cancel);error?reject(error):resolve(value);};
+      const cancel=()=>finish(aborted());signal?.addEventListener('abort',cancel,{once:true});
+      worker.onerror=e=>finish(Error(e.message||'Warped-loop pitch worker failed.'));
+      worker.onmessage=({data})=>{if(data.error)finish(Error(data.error));else if(data.channels)finish(null,data.channels);};
+      if(signal?.aborted)return cancel();
+      worker.postMessage({channels:copies,sampleRate:sr,loopPlan:{segments,frames,keylock,semitones}},copies.map(c=>c.buffer));
+    });
+    if(signal?.aborted)throw aborted();
+    const result=new AudioBuffer({numberOfChannels:rendered.length,length:rendered[0].length,sampleRate:sr});rendered.forEach((channel,c)=>result.copyToChannel(channel,c));
+    this.remember(cacheKey,result);return result;
+  }
+  remember(key,result){
+    const cost=result.length*result.numberOfChannels*4;
+    if(cost>this.maxCacheBytes)return;
+    const previous=this.cache.get(key);if(previous){this.cacheBytes-=previous.length*previous.numberOfChannels*4;this.cache.delete(key);}
+    while(this.cacheBytes+cost>this.maxCacheBytes&&this.cache.size){const [oldKey,old]=this.cache.entries().next().value;this.cache.delete(oldKey);this.cacheBytes-=old.length*old.numberOfChannels*4;}
+    this.cache.set(key,result);this.cacheBytes+=cost;
   }
   async render(
     buffer,
@@ -82,23 +114,7 @@ export class KeylockRenderer {
       sampleRate: buffer.sampleRate,
     });
     rendered.forEach((channel, i) => result.copyToChannel(channel, i));
-    const cost = result.length * result.numberOfChannels * 4;
-    if (cost <= this.maxCacheBytes) {
-      // Two decks may finish the same transform concurrently. Replacing the
-      // existing entry must not count its bytes twice.
-      const previous = this.cache.get(key);
-      if (previous) {
-        this.cacheBytes -= previous.length * previous.numberOfChannels * 4;
-        this.cache.delete(key);
-      }
-      while (this.cacheBytes + cost > this.maxCacheBytes && this.cache.size) {
-        const [oldKey, old] = this.cache.entries().next().value;
-        this.cache.delete(oldKey);
-        this.cacheBytes -= old.length * old.numberOfChannels * 4;
-      }
-      this.cache.set(key, result);
-      this.cacheBytes += cost;
-    }
+    this.remember(key,result);
     return result;
   }
 }

@@ -68,7 +68,6 @@ export function createSmartSync({engine, state}) {
       if (d.reverse || (d.stemSlip || 'off') !== 'off')
         throw new Error('This Smart Sync path currently requires forward decks without Stem Slip.');
       loopBounds(d);
-      if(d.loop&&d.track.gridWarpMarkers?.length&&(d.keylock||d.keyShift))throw new Error('Warped loops with keylock or pitch shift are not available yet.');
 
     }
   }

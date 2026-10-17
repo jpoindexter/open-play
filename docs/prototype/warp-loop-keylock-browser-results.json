@@ -1,0 +1,288 @@
+{
+  "startedAt": "2026-10-17T23:20:15.052Z",
+  "completed": true,
+  "checks": [
+    "Actual grid editor stages and saves both tempo markers with metadata persistence",
+    "Whole recorded audio stays aligned across repeating source-tempo boundaries and two loop wraps",
+    "Real audio-thread PCM transport and analytical clock report alternating1and0.8 local source rates",
+    "Both eight-beat source loops retain original bounds"
+  ],
+  "errors": [],
+  "probes": [
+    {
+      "label": "First150BPMsection",
+      "audioTime": 3.5294331065759637,
+      "position": 3.2480226757369617,
+      "audioThreadLoop": true,
+      "clockRate": 0.8,
+      "shownBPM": "120.0"
+    },
+    {
+      "label": "After first loop wrap",
+      "audioTime": 5.532154195011338,
+      "position": 1.5302494331065768,
+      "audioThreadLoop": true,
+      "clockRate": 1,
+      "shownBPM": "120.0"
+    },
+    {
+      "label": "Second150BPMsection",
+      "audioTime": 7.540680272108844,
+      "position": 3.2570204081632657,
+      "audioThreadLoop": true,
+      "clockRate": 0.8,
+      "shownBPM": "120.0"
+    },
+    {
+      "label": "After second loop wrap",
+      "audioTime": 9.537596371882087,
+      "position": 1.5356916099773246,
+      "audioThreadLoop": true,
+      "clockRate": 1,
+      "shownBPM": "120.0"
+    }
+  ],
+  "criteria": {
+    "maximumPulsePhaseErrorSeconds": 0.01,
+    "minimumPairsPerSection": 3,
+    "sourceRateTolerance": 1e-06
+  },
+  "fixture": {
+    "sampleRate": 48000,
+    "duration": 30,
+    "primary": {
+      "bpm": 120,
+      "offset": 0.05
+    },
+    "secondary": {
+      "bpm": 120,
+      "offset": 0.13,
+      "markers": [
+        {
+          "time": 2.13,
+          "bpm": 150
+        },
+        {
+          "time": 3.73,
+          "bpm": 90
+        }
+      ]
+    },
+    "pulseSeconds": 0.012,
+    "carrierHz": 900,
+    "amplitude": 0.15
+  },
+  "scope": "Actual browser app grid editor/Setup/Play/Sync and one continuous master recording, forward active loops: raw primary reference523.251Hz; secondary440Hz/keylock/+3semitones; no stems. Browser pulse phase scope only; independent full-band PCM pitch inspection required. No reference/native/hardware/music-quality acceptance; this report alone does not establish pitch.",
+  "sourceBefore": {
+    "app.js": "5e34091e03c81d88cdc14476f6014aae8b51bf5a7d5bbe089fb752d3d37e8a9f",
+    "engine.js": "04cd01a303122ba0b8e1275d7d73a2907f0a99aa695f5e3650215e6136505034",
+    "panels.js": "4a4b4c544f07140758cfd8f45b00f774dea588f881d6ed0f24c0e19bc1ff02fb",
+    "beatgrid.js": "af239aef231c9d089bf2352b8f548a5f71f734d6cf753986f17f57b3999477b9",
+    "smart-sync.js": "60e54259e06d121da4074e0da47b72c52f997e374b0b1fd2cbcfa5ea120bc9a2",
+    "warp-loop.js": "8d794041a014821319c93d03edc2efcaafdb99a5db5ba43654c1c3cceec6a5f8",
+    "warp-loop-kernel.js": "8a331758bc551454a3cc65fd5ea527c42a370bd22ab6eb650ca278ea87e0f414",
+    "warp-loop-worklet.js": "bc977262180f910c6be55ea07a46f6b560a090939271bd4beec5e8fd31ed23fa",
+    "keylock.js": "05dcc7b05266984076744eb01f5f9bd76ddf6e80be279d9c4bdd9cb0164935d4",
+    "keylock-dsp.js": "78a21a3ac295c79454895bad3650d81b7782aac46432df1258e01911180fbe68",
+    "keylock-worker.js": "5cb72a1bc74e1808c32b430d72d5769427c7056edee11410eb6f8b3c7751fcec",
+    "vendor/signalsmith-stretch/SignalsmithStretch-open-play-disposable.mjs": "b2811c519f067cc5a1abd6cdccab46578d1eeef8aba42f666fab2830a9d6f46e",
+    "warp-loop-keylock-harness.js": "5a31057faff3ad90a193e2e44ef383928f8458798784bc69b73dca8887d2e5c3"
+  },
+  "physicalOutputMuted": true,
+  "persistedMarkers": [
+    {
+      "time": 2.13,
+      "bpm": 150
+    },
+    {
+      "time": 3.73,
+      "bpm": 90
+    }
+  ],
+  "recordStart": 0.7314285714285714,
+  "recording": {
+    "bytes": 170737,
+    "format": "audio/webm;codecs=opus",
+    "sha256": "8e4176ea5c449d5392ef0bd075d49c25e153c8ec32cdcc1c2eb3d1a5432eb3d9"
+  },
+  "decoded": {
+    "frames": 465695,
+    "sampleRate": 44100,
+    "channels": 2,
+    "duration": 10.559977324263038
+  },
+  "audio": {
+    "pulseTimes": [
+      [
+        0.4097732426303855,
+        0.9094331065759638,
+        1.4099092970521543,
+        1.909795918367347,
+        2.4099773242630387,
+        2.909795918367347,
+        3.40984126984127,
+        3.91031746031746,
+        4.4097732426303855,
+        4.909433106575964,
+        5.409909297052154,
+        5.9097959183673465,
+        6.409977324263038,
+        6.9097959183673465,
+        7.4098412698412695,
+        7.910317460317461,
+        8.409773242630385,
+        8.909433106575964,
+        9.409909297052154,
+        9.909795918367347,
+        10.40997732426304
+      ],
+      [
+        0.4109297052154195,
+        0.9118820861678004,
+        1.412018140589569,
+        1.9124489795918367,
+        2.41249433106576,
+        2.908140589569161,
+        3.41249433106576,
+        3.910702947845805,
+        4.41092970521542,
+        4.9118820861678,
+        5.412018140589569,
+        5.9124489795918365,
+        6.412494331065759,
+        6.908140589569161,
+        7.412494331065759,
+        7.910702947845805,
+        8.41092970521542,
+        8.9118820861678,
+        9.41201814058957,
+        9.912448979591836,
+        10.41249433106576
+      ]
+    ],
+    "sections": [
+      {
+        "name": "firstBase120",
+        "from": 0.2,
+        "to": 1.8,
+        "pairs": [
+          {
+            "time": 0.4097732426303855,
+            "errorSeconds": 0.0011564625850339905
+          },
+          {
+            "time": 0.9094331065759638,
+            "errorSeconds": 0.002448979591836653
+          },
+          {
+            "time": 1.4099092970521543,
+            "errorSeconds": 0.0021088435374148062
+          }
+        ]
+      },
+      {
+        "name": "first150",
+        "from": 2.2,
+        "to": 3.8,
+        "pairs": [
+          {
+            "time": 2.4099773242630387,
+            "errorSeconds": 0.0025170068027211556
+          },
+          {
+            "time": 2.909795918367347,
+            "errorSeconds": 0.0016553287981859732
+          },
+          {
+            "time": 3.40984126984127,
+            "errorSeconds": 0.0026530612244899388
+          }
+        ]
+      },
+      {
+        "name": "secondBase120",
+        "from": 4.2,
+        "to": 5.8,
+        "pairs": [
+          {
+            "time": 4.4097732426303855,
+            "errorSeconds": 0.0011564625850342125
+          },
+          {
+            "time": 4.909433106575964,
+            "errorSeconds": 0.00244897959183632
+          },
+          {
+            "time": 5.409909297052154,
+            "errorSeconds": 0.0021088435374148062
+          }
+        ]
+      },
+      {
+        "name": "second150",
+        "from": 6.2,
+        "to": 7.8,
+        "pairs": [
+          {
+            "time": 6.409977324263038,
+            "errorSeconds": 0.0025170068027211556
+          },
+          {
+            "time": 6.9097959183673465,
+            "errorSeconds": 0.0016553287981855291
+          },
+          {
+            "time": 7.4098412698412695,
+            "errorSeconds": 0.0026530612244899388
+          }
+        ]
+      },
+      {
+        "name": "thirdBase120",
+        "from": 8.2,
+        "to": 9.8,
+        "pairs": [
+          {
+            "time": 8.409773242630385,
+            "errorSeconds": 0.0011564625850351007
+          },
+          {
+            "time": 8.909433106575964,
+            "errorSeconds": 0.00244897959183632
+          },
+          {
+            "time": 9.409909297052154,
+            "errorSeconds": 0.0021088435374156944
+          }
+        ]
+      }
+    ]
+  },
+  "loopBounds": [
+    {
+      "start": 0.05,
+      "end": 4.05
+    },
+    {
+      "start": 0.13,
+      "end": 3.73
+    }
+  ],
+  "sourceAfter": {
+    "app.js": "5e34091e03c81d88cdc14476f6014aae8b51bf5a7d5bbe089fb752d3d37e8a9f",
+    "engine.js": "04cd01a303122ba0b8e1275d7d73a2907f0a99aa695f5e3650215e6136505034",
+    "panels.js": "4a4b4c544f07140758cfd8f45b00f774dea588f881d6ed0f24c0e19bc1ff02fb",
+    "beatgrid.js": "af239aef231c9d089bf2352b8f548a5f71f734d6cf753986f17f57b3999477b9",
+    "smart-sync.js": "60e54259e06d121da4074e0da47b72c52f997e374b0b1fd2cbcfa5ea120bc9a2",
+    "warp-loop.js": "8d794041a014821319c93d03edc2efcaafdb99a5db5ba43654c1c3cceec6a5f8",
+    "warp-loop-kernel.js": "8a331758bc551454a3cc65fd5ea527c42a370bd22ab6eb650ca278ea87e0f414",
+    "warp-loop-worklet.js": "bc977262180f910c6be55ea07a46f6b560a090939271bd4beec5e8fd31ed23fa",
+    "keylock.js": "05dcc7b05266984076744eb01f5f9bd76ddf6e80be279d9c4bdd9cb0164935d4",
+    "keylock-dsp.js": "78a21a3ac295c79454895bad3650d81b7782aac46432df1258e01911180fbe68",
+    "keylock-worker.js": "5cb72a1bc74e1808c32b430d72d5769427c7056edee11410eb6f8b3c7751fcec",
+    "vendor/signalsmith-stretch/SignalsmithStretch-open-play-disposable.mjs": "b2811c519f067cc5a1abd6cdccab46578d1eeef8aba42f666fab2830a9d6f46e",
+    "warp-loop-keylock-harness.js": "5a31057faff3ad90a193e2e44ef383928f8458798784bc69b73dca8887d2e5c3"
+  },
+  "sourceStable": true,
+  "finishedAt": "2026-10-17T23:20:26.441Z"
+}

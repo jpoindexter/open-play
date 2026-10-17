@@ -309,15 +309,17 @@ export class AudioEngine {
     if(d.track!==lease.track){lease.dispose();return;}
     const position=this.position(d);this.pause(d);d.position=position;this.onProcessing(d);this.onError?.(error);
   }
-  async startWarpLoop(d,buffers,controller,current,{positionAt,priorClock}={}){
+  async startWarpLoop(d,buffers,controller,current,{positionAt,priorClock,keylock=false,semitones=0}={}){
     const old=this.voices.get(d.index),playing=d.playing,oldClock=priorClock||this.voiceClock(d,old);let transport,committed=false;
     try{
+      const loop={start:d.loopIn,end:d.loopOut},initialTimeline=this.onGridTimeline(d,{position:d.position,when:this.ctx.currentTime}),transformed=keylock||semitones!==0;
+      if(transformed){const rendered=[];for(const buffer of buffers){rendered.push(await this.keylockRenderer.renderWarpLoop(buffer,{track:d.track,loop,bpm:initialTimeline.bpm,keylock,semitones,signal:controller.signal}));if(!current())return;}buffers=rendered;}
       transport=await createWarpLoopTransport(this.ctx,buffers,{signal:controller.signal,onError:error=>{if(this.voices.get(d.index)?.warpLoopTransport===transport){this.pause(d);this.onError?.(error);}}});
       if(!current())return;
       const when=this.ctx.currentTime+.05;
       const position=positionAt?positionAt(when):playing?oldClock(when):d.position;
       const timeline=this.onGridTimeline(d,{position,when});
-      const ack=await transport.start({track:{bpm:d.track.bpm,grid:d.track.grid,duration:d.track.duration,gridWarpMarkers:d.track.gridWarpMarkers},loop:timeline.loop,bpm:timeline.bpm,position,when});
+      const ack=await transport.start({track:{bpm:d.track.bpm,grid:d.track.grid,duration:d.track.duration,gridWarpMarkers:d.track.gridWarpMarkers},loop:timeline.loop,bpm:timeline.bpm,position,when,renderedLoop:transformed});
       if(!current())return;
       const voice={sources:[],warpLoopTransport:transport,liveOwnerController:controller,gridTimeline:timeline,stemGains:[],handoffBefore:old&&playing?{until:when,clock:oldClock,rate:at=>this.voiceRateAt(d,old,at)}:null};
       this.routeOrdinaryVoice(d,voice,transport.outputs,buffers.length===5,{when,reuseVoice:old});committed=true;this.retireVoiceAt(d.index,old,when);
@@ -416,8 +418,8 @@ export class AudioEngine {
       const scale = transformed ? tempo : 1;
       if (!current()) return;
       if(d.loop&&track.gridWarpMarkers?.length&&this.onGridTimeline?.(d,{position:d.position,when:this.ctx.currentTime})){
-        if(transformed||d.reverse)throw Error('Warped loops with keylock, pitch shift or reverse are not available yet.');
-        await this.startWarpLoop(d,buffers,controller,current,{positionAt,priorClock});return;
+        if(d.reverse)throw Error('Warped loops with reverse are not available yet.');
+        await this.startWarpLoop(d,buffers,controller,current,{positionAt,priorClock,keylock,semitones:shift});return;
       }
       if (transformed && !d.reverse && !d.loop) {
         await this.startForwardKeylock(d, buffers, controller, current, {positionAt, priorClock});
@@ -1003,9 +1005,10 @@ export class AudioEngine {
     this.onValidateTransport?.(d,{keylock,keyShift:semitones});
     this.cancelDeckScratchRequest(d);
     if(this.voices.get(d.index)?.gridTimeline){
-      const position=this.position(d),was=d.playing||d.processing;
-      this.pause(d,{preserveStemExit:true});d.position=position;d.keylock=keylock;d.keyShift=semitones;
-      if(was)await this.start(d);
+      const track=d.track,previous={keylock:d.keylock,keyShift:d.keyShift},clock=this.voiceClock(d,this.voices.get(d.index)),was=d.playing||d.processing;
+      d.position=this.position(d);d.keylock=keylock;d.keyShift=semitones;
+      try{if(was)await this.start(d,{priorClock:clock,positionAt:clock});}
+      catch(error){if(d.track===track&&d.keylock===keylock&&d.keyShift===semitones)Object.assign(d,previous);throw error;}
       return;
     }
     if (d.stemSlip && d.stemSlip !== "off") {

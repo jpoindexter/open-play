@@ -1,0 +1,53 @@
+{
+  "scope": "Failed finite actual DSP measurements, not accepted feature or browser proof",
+  "acceptance": {
+    "maxAbsolutePitchErrorHz": 1,
+    "expectedHz": 523.2511306011972,
+    "sourceHz": 440,
+    "requestedSemitones": 3
+  },
+  "attempts": [
+    {
+      "backend": "original wrapper repeated seek",
+      "windowsHz": [
+        524.8368272002106,
+        524.8351421011874
+      ],
+      "passed": false,
+      "rawPCM": "dsp-first.f32",
+      "originalSourceHashRetained": false
+    },
+    {
+      "backend": "patched disposable wrapper repeated seek",
+      "windowsHz": [
+        524.5951982873694,
+        524.8350538753165
+      ],
+      "passed": false,
+      "rawPCMRetained": false
+    },
+    {
+      "backend": "patched wrapper WASM direct streaming, no repeated seek",
+      "windowsHz": [
+        524.5995297264706,
+        524.798398432755
+      ],
+      "passed": false,
+      "rawPCMRetained": false
+    }
+  ],
+  "spectralCrossCheck": {
+    "scope": "first attempt only, global Hann16xpadding/log-parabolic FFT, no expected-frequency window",
+    "windowsHz": [
+      524.8352913571991,
+      524.8353979755418
+    ]
+  },
+  "originalPCMSHA256": "8b08173fd8caf324f5b8dad7a0143fdff34919fb2c66c43983dc4d831a605a0c",
+  "currentSourceSHA256": {
+    "prototype/keylock-dsp.js": "36749a9f9927c6af3b6b39c4bbbf16a39a636095a644611da3e6bd995c558e79",
+    "prototype/keylock.js": "05dcc7b05266984076744eb01f5f9bd76ddf6e80be279d9c4bdd9cb0164935d4",
+    "scripts/test_warp_loop_keylock.mjs": "8468379c299ef39488a2226801124468efcafdda2bf1852595c521ff2b74ccd0"
+  },
+  "consultation": "Fresh Claude Code session, observed Fable5.1High, narrow read-only diagnosis authorized by human; no full parity audit claim"
+}

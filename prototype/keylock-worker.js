@@ -1,7 +1,7 @@
-import { transformChannels } from "./keylock-dsp.js";
+import { transformChannels, transformWarpedLoop } from "./keylock-dsp.js";
 self.onmessage = async ({ data }) => {
   try {
-    const channels = await transformChannels(data.channels, data.sampleRate, {
+    const channels = data.loopPlan ? await transformWarpedLoop(data.channels,data.sampleRate,data.loopPlan,{onProgress:progress=>self.postMessage({progress})}) : await transformChannels(data.channels, data.sampleRate, {
       tempo: data.tempo,
       semitones: data.semitones,
       onProgress: (progress) => self.postMessage({ progress }),
