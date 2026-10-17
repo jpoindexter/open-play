@@ -1,5 +1,7 @@
 # Current Serato/Open Play parity audit —17 October 2026
 
+> **Later plan75 update:** source-time Beat Warp Marker model/editor and forward no-keylock Smart Sync now run through two actual audio tempo boundaries; see [result](../prototype/warp-sync-browser-results.json) and [scope/limits](../delivery/warp-sync-section75.md). This updates ANA-003/DEK-008/DEK-018 subsets only; frozen audit rows below are historical. No full-feature pass or repeated broad audit.
+
 > **Later implementation note — plan74:** the frozen snapshot and row findings below predate plans73/74. Current browser source now has actual transient-based Simple Sync and constant-grid Smart armed/beat/tempo/bar behavior, software tempo/OFF states and missing-grid load handling, with focused routed audio evidence. Read [Simple Sync](../prototype/simple-sync-browser-results.json), [Smart Sync](../prototype/smart-sync-browser-results.json), and [plan74](../delivery/smart-sync-section74.md). This is a dated subset update, not a rerun of this audit or a full parity pass. Warp grids/hardware/compositions/reference/native acceptance remain open.
 
 

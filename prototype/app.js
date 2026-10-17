@@ -1,5 +1,6 @@
 import { synchronizeSimple } from './sync.js';
 import { createSmartSync, hasBeatgrid, beatPosition } from './smart-sync.js';
+import {createBeatgrid,gridBPM} from './beatgrid.js';
 import {createLocalAudioLibrary} from "./local-audio-library.js";
 import { createStemPreparation } from "./stems.js";
 import { createStemWaveformModel, paintStemOverview, paintStemDetail, paintOriginalOverview, paintOriginalDetail } from "./stem-waveform.js";
@@ -192,6 +193,7 @@ const metadataFields = [
   "savedLoops",
   "grid",
   "gridMarkers",
+  "gridWarpMarkers",
   "locked",
   "flips",
   "sampleGain",
@@ -465,12 +467,13 @@ function drawWaves() {
       ctx.fillStyle=x%15<6?colors[d.index]:"#408498";
       ctx.fillRect(x,h/2-amp*h/2,2,amp*h);
     }
-    const beat = 60 / (d.track.bpm || 120);
-    for (let p = d.track.grid || 0; p < d.track.duration; p += beat) {
-      const x = (p / d.track.duration) * w;
-      ctx.fillStyle = "#ffffff45";
+    const grid = createBeatgrid(d.track);
+    for (const line of grid?.lines(0,d.track.duration) || []) {
+      const x = line.time / d.track.duration * w;
+      ctx.fillStyle = line.downbeat ? "#ffffff70" : "#ffffff35";
       ctx.fillRect(x, 0, 1, h);
     }
+    for(const marker of d.track.gridWarpMarkers || []) {ctx.fillStyle="#ef795d";ctx.fillRect(marker.time/d.track.duration*w,0,2,h);}
     for (let i = 0; i < d.track.cues.length; i++) {
       const q = d.track.cues[i];
       if (q) {
@@ -507,26 +510,19 @@ function drawDetailWave() {
     c.fillStyle = "#070a0c";
     c.fillRect(x0, 0, col - 1, h);
     if (!t) continue;
-    const bpm = t.bpm || 120,
-      beat = 60 / bpm,
-      offset = t.grid || 0;
+    const grid = createBeatgrid(t);
     const view = waveformView(d);
     if (view.kind === 'stems') {
       paintStemDetail(c, view.profile, {x:x0,width:col,height:h,position:p,color:colors[d.index]});
     } else if (view.kind !== 'pending' && buf) {
       paintOriginalDetail(c,buf,{x:x0,width:col,height:h,position:p,color:colors[d.index]});
     }
-    const first = Math.ceil((p - 2 - offset) / beat);
-    for (let b = first; b < first + 4 / beat + 1; b++) {
-      const y = ((b * beat + offset - p) / 4 + 0.5) * h;
-      c.fillStyle = b % 4 === 0 ? "#ffffff70" : "#ffffff20";
-      c.fillRect(x0, y, col, 1);
-      if (b % 4 === 0) {
-        c.fillStyle = "#aeb5ba";
-        c.font = "9px Arial";
-        c.fillText(String(Math.floor(b / 4) + 1), x0 + 3, y - 3);
-      }
+    for (const line of grid?.lines(p-2,p+2) || []) {
+      const y=((line.time-p)/4+.5)*h;
+      c.fillStyle=line.downbeat?"#ffffff70":"#ffffff20";c.fillRect(x0,y,col,1);
+      if(line.downbeat){c.fillStyle="#aeb5ba";c.font="9px Arial";c.fillText(String(line.bar),x0+3,y-3);}
     }
+    for(const marker of t.gridWarpMarkers || []) {const y=((marker.time-p)/4+.5)*h;if(y>=0&&y<h){c.fillStyle="#ef795d";c.fillRect(x0,y,col,2);}}
     for (const [i, q] of t.cues.entries()) {
       if (!q) continue;
       const y = ((q.position - p) / 4 + 0.5) * h;
@@ -695,9 +691,8 @@ function quantized(d, p) {
     ? 1 / Number(state.settings["Quantize Value"].split("/")[1].split(" ")[0])
     : value;
   const beat = (60 / d.track.bpm) * interval;
-  return (
-    Math.round((p - (d.track.grid || 0)) / beat) * beat + (d.track.grid || 0)
-  );
+  const grid=createBeatgrid(d.track);
+  return grid ? grid.timeAt(Math.round(grid.beatAt(p)/interval)*interval) : Math.round(p/beat)*beat;
 }
 async function deckAction(action, index, el, event = {}) {
   const d = state.decks[index];
@@ -836,11 +831,10 @@ async function deckAction(action, index, el, event = {}) {
     persist();
     notify("Loop saved to this browser session.");
   }
-  if (action === "jumpBack" || action === "jumpForward")
-    await engine.seek(
-      d,
-      pos + beat * d.loopLength * (action === "jumpBack" ? -1 : 1),
-    );
+  if (action === "jumpBack" || action === "jumpForward") {
+    const grid=createBeatgrid(d.track), beats=d.loopLength*(action==="jumpBack"?-1:1);
+    await engine.seek(d,grid?grid.timeAt(grid.beatAt(pos)+beats):pos+beat*beats);
+  }
   if (action === "syncOff" || (action === "sync" && event.shiftKey)) {
     if (state.settings["Sync Mode"] === "Smart Sync") smartSync.disengage(d);
     else {d.sync = false; d.syncRole = null;}
@@ -1081,6 +1075,7 @@ async function enqueueAnalysis(tracks, replacements = {}) {
           t.bpm = Math.round(result.bpm * 100) / 100;
           t.grid = result.grid?.firstBeat ?? null;
           t.gridMarkers = [];
+          t.gridWarpMarkers = [];
           t.metadataSources.bpm = "measured estimate";
           t.metadataSources.grid = "measured pulse phase; downbeat unverified";
         }
@@ -1700,7 +1695,7 @@ function tick() {
     }
     const bpmText = document.querySelector(`#platter-${d.index} strong`);
     const tempoText = document.querySelector(`#platter-${d.index} small`);
-    const shownBPM = d.track?.bpm ? (d.track.bpm * d.rate).toFixed(1) : "—";
+    const shownBPM = d.track?.bpm ? (gridBPM(d.track,engine.position(d))*engine.audibleRate(d)).toFixed(1) : "—";
     if (bpmText && bpmText.textContent !== shownBPM) bpmText.textContent = shownBPM;
     const shownPercent = `BPM · ${((d.rate - 1) * 100).toFixed(1)}%${state.settings["Sync Mode"] === "Smart Sync" && d.syncState === "relative" ? " · REL" : ""}`;
     if (tempoText && tempoText.textContent !== shownPercent) tempoText.textContent = shownPercent;
@@ -1723,7 +1718,7 @@ function tick() {
   $("#master-meter").value = engine.meter();
   $("#audio-status").textContent =
     `${state.decks.filter((d) => d.playing).length} decks playing · ${engine.ctx?.sampleRate || "—"} Hz audio engine · outputs in Devices`;
-  engine.updateFXBPMs(state.decks.map(deck => (deck.track?.bpm || 120)*engine.audibleRate(deck)));
+  engine.updateFXBPMs(state.decks.map(deck => gridBPM(deck.track,engine.position(deck))*engine.audibleRate(deck)));
   // Selection checks are O(4); only selection/async completion redraws overviews.
   if (state.decks.slice(0,state.deckCount).some(d => waveformView(d) !== overviewWaveViews[d.index])) drawWaves();
   drawDetailWave();
@@ -1775,7 +1770,7 @@ engine.onProcessing = (d) => {
 engine.onRateRequest = async (deck, rate) => {
   if (!["Simple Sync","Smart Sync"].includes(state.settings["Sync Mode"]) || !deck.sync)
     return engine.setRate(deck, rate, {syncInternal: true});
-  const bpm = deck.track?.bpm * rate;
+  const bpm = state.settings["Sync Mode"] === "Smart Sync" ? smartSync.tempo(deck,rate) : deck.track?.bpm * rate;
   if (!Number.isFinite(bpm) || bpm <= 0) throw new Error("Set a valid track BPM before changing synced tempo.");
   const members = state.decks.filter(d => d.sync && d.track);
   const changes = members.map(d => ({deck: d, rate: bpm / d.track.bpm}));
@@ -1784,6 +1779,9 @@ engine.onRateRequest = async (deck, rate) => {
   await Promise.all(changes.map(x => engine.setRate(x.deck, x.rate, {syncInternal: true})));
 };
 engine.onManualPosition = d => smartSync.manipulated(d);
+engine.onGridTimeline = (d,options) => smartSync.timeline(d,options);
+engine.onValidateTransport = (d,changes) => smartSync.validate(d,changes);
+engine.onGridChanged = track => smartSync.edited(track);
 engine.onError = (error) => notify(error.message);
 
 // Static HTML must not accept changes before its event handlers are installed.

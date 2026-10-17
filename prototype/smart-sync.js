@@ -1,27 +1,29 @@
-// Independently implemented constant-grid Smart Sync. Warp-marker transport is
-// deliberately rejected until the engine can follow variable beat intervals.
+// Independent Smart Sync using a source-time piecewise beatgrid.
+import {createBeatgrid,gridBPM} from './beatgrid.js';
 const engagedStates = new Set(['armed', 'beat', 'tempo']);
 const modulo = (value, divisor) => ((value % divisor) + divisor) % divisor;
 const cancelled = () => new DOMException('Sync preparation superseded.', 'AbortError');
 export const hasBeatgrid = track => !!track && Number.isFinite(track.grid) && Number.isFinite(track.bpm) && track.bpm > 0;
 export function beatPosition(track, position) {
-  return hasBeatgrid(track) ? modulo((position - track.grid) * track.bpm / 60, 4) : null;
+  return hasBeatgrid(track) ? modulo(createBeatgrid(track).beatAt(position),4) : null;
 }
 function requireGrid(track) {
   if (!hasBeatgrid(track)) throw new Error('Add or analyze a beatgrid before using Smart Sync.');
-  if (track.gridMarkers?.length) throw new Error('Smart Sync with Beat Warp Markers is not available yet.');
+  if (track.gridMarkers?.length && !track.gridWarpMarkers?.length) throw new Error('Legacy marker annotations need tempo values before warped Smart Sync.');
+  createBeatgrid(track);
 }
 export function alignedBarPosition(track, position, primaryTrack, primaryPosition) {
-  const phase = beatPosition(primaryTrack, primaryPosition), beat = 60 / track.bpm;
-  const ownBeat = (position - track.grid) / beat;
+  const phase = beatPosition(primaryTrack, primaryPosition), grid=createBeatgrid(track);
+  const ownBeat = grid.beatAt(position);
   const bar = Math.round((ownBeat - phase) / 4);
-  const candidates = [bar,bar-1,bar+1].map(n => track.grid + (n*4+phase)*beat)
+  const candidates = [bar,bar-1,bar+1].map(n => grid.timeAt(n*4+phase))
     .filter(p => p >= 0 && p < track.duration).sort((a,b) => Math.abs(a-position)-Math.abs(b-position));
   if (!candidates.length) throw new Error('No complete bar position can be aligned within this track.');
   return candidates[0];
 }
 export function createSmartSync({engine, state}) {
   const revisions = new WeakMap();
+  let syncBPM=null;
   const enabled = () => state.settings['Sync Mode'] === 'Smart Sync';
   const engaged = deck => !!deck.sync && engagedStates.has(deck.syncState);
   const revise = deck => {const n=(revisions.get(deck)||0)+1; revisions.set(deck,n);return n;};
@@ -39,13 +41,14 @@ export function createSmartSync({engine, state}) {
     return others.find(d => d.syncRole === 'primary') || others.find(d => d.playing) || others[0];
   }
   function rateFor(deck, primary) {
-    const rate = primary.track.bpm * engine.audibleRate(primary) / deck.track.bpm;
+    const rate = (syncBPM || gridBPM(primary.track,engine.position(primary))*engine.audibleRate(primary)) / deck.track.bpm;
     if (!Number.isFinite(rate) || rate < .25 || rate > 4) throw new Error('The matched tempo is outside the current transport range.');
     return rate;
   }
   function validateTransport(deck, primary) {
     for (const d of [deck,primary]) {
       requireGrid(d.track);
+      if (d.track.gridWarpMarkers?.length && (d.keylock || d.keyShift)) throw new Error('Warped Sync with keylock or key shift is not available yet.');
       if (d.reverse || d.loop || (d.stemSlip || 'off') !== 'off')
         throw new Error('This Smart Sync path currently requires forward decks without a loop or Stem Slip.');
     }
@@ -68,7 +71,10 @@ export function createSmartSync({engine, state}) {
     if (!enabled()) return;
     requireGrid(deck.track);const primary=leader(deck);
     if (!primary) {
+      validateTransport(deck,deck);
+      syncBPM=gridBPM(deck.track,engine.position(deck))*engine.audibleRate(deck);
       revise(deck);deck.sync=true;deck.syncRole='primary';deck.syncState=deck.playing?'beat':'armed';
+      if(deck.playing && deck.track.gridWarpMarkers?.length){deck.position=engine.position(deck);await engine.start(deck);}
       return;
     }
     validateTransport(deck,primary);
@@ -81,6 +87,8 @@ export function createSmartSync({engine, state}) {
   async function start(deck) {
     if (!enabled() || !engaged(deck)) return false;
     requireGrid(deck.track);
+    if(deck.track.gridWarpMarkers?.length)validateTransport(deck,deck);
+    if(deck.position>=deck.track.duration)deck.position=0;
     if (deck.syncState==='armed') {
       const primary=leader(deck);
       if (primary?.playing) {await align(deck,primary);return true;}
@@ -106,10 +114,32 @@ export function createSmartSync({engine, state}) {
     if (!enabled()) return;
     clear(deck);
     if (!hasBeatgrid(deck.track) || !previous.engaged || !state.settings['Maintain Sync on Track Load']) {reconcile();return;}
-    const rate=previous.bpm/deck.track.bpm;
+    const rate=(syncBPM||previous.bpm)/deck.track.bpm;
     if (!Number.isFinite(rate) || rate<.25 || rate>4) {reconcile();return;}
     deck.rate=rate;deck.sync=true;deck.syncState='armed';deck.syncRole=previous.role;
     reconcile();
   }
-  return {press,start,played,paused,manipulated,disengage,loaded,reconcile,engaged,reset:() => state.decks.forEach(clear)};
+  function validate(deck,changes={}){
+    if(enabled()&&engaged(deck)&&deck.track?.gridWarpMarkers?.length){const candidate={...deck,...changes};validateTransport(candidate,candidate);}
+  }
+  function timeline(deck,options){
+    if(!enabled()||!engaged(deck)||!deck.track?.gridWarpMarkers?.length)return;
+    validateTransport(deck,deck);
+    return createBeatgrid(deck.track).timeline({...options,bpm:syncBPM});
+  }
+  function tempo(deck,rate){
+    const bpm=deck.track.bpm*rate;
+    for(const d of state.decks.filter(engaged))createBeatgrid(d.track).timeline({position:engine.position(d),when:engine.ctx?.currentTime||0,bpm});
+    syncBPM=bpm;return bpm;
+  }
+  async function edited(track){
+    if(!enabled())return;
+    for(const d of state.decks.filter(d=>d.track===track&&engaged(d))){
+      if(!hasBeatgrid(track)){clear(d);continue;}
+      const position=engine.position(d);d.syncState=d.playing?'tempo':'armed';
+      if(d.playing){d.position=position;await engine.start(d);}
+    }
+  }
+  return {press,start,played,paused,manipulated,disengage,loaded,reconcile,engaged,timeline,tempo,edited,validate,
+    reset:() => {state.decks.forEach(clear);syncBPM=null;}};
 }

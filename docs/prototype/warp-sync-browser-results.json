@@ -1,0 +1,211 @@
+{
+  "startedAt": "2026-10-17T20:14:06.531Z",
+  "completed": true,
+  "checks": [
+    "Actual grid editor stages and saves both tempo markers with metadata persistence",
+    "Actual audio stays aligned within10ms across both independently specified source-tempo boundaries",
+    "Actual BufferSource parameters change to0.8 and4/3; shared clock and BPM readout observed",
+    "Tempo slider after a warp keeps its base-BPM meaning and updates both actual source rates",
+    "Unsupported warped keylock is rejected before changing the requested state"
+  ],
+  "errors": [],
+  "probes": [
+    {
+      "label": "150 BPM source section",
+      "audioTime": 3.3378684807256236,
+      "position": 2.748267573696145,
+      "sourceParameter": 0.800000011920929,
+      "clockRate": 0.8,
+      "shownBPM": "120.0"
+    },
+    {
+      "label": "90 BPM source section",
+      "audioTime": 5.340589569160998,
+      "position": 4.764074074074075,
+      "sourceParameter": 1.3333333730697632,
+      "clockRate": 1.3333333333333333,
+      "shownBPM": "120.0"
+    }
+  ],
+  "criteria": {
+    "maximumPulsePhaseErrorSeconds": 0.01,
+    "minimumPairsPerSection": 3,
+    "sourceRateTolerance": 1e-06
+  },
+  "fixture": {
+    "sampleRate": 48000,
+    "duration": 30,
+    "primary": {
+      "bpm": 120,
+      "offset": 0.05
+    },
+    "secondary": {
+      "bpm": 120,
+      "offset": 0.13,
+      "markers": [
+        {
+          "time": 2.13,
+          "bpm": 150
+        },
+        {
+          "time": 3.73,
+          "bpm": 90
+        }
+      ]
+    },
+    "pulseSeconds": 0.012,
+    "carrierHz": 900,
+    "amplitude": 0.15
+  },
+  "scope": "Actual browser app grid editor/Setup/Play/Sync and one continuous master recording, forward/no-keylock/no-stems controlled fixtures. No reference/native/hardware/music-quality acceptance.",
+  "sourceBefore": {
+    "app.js": "7ebfc28026017022faf384dcba28c78440e8aa283183016c5685c08a8fc2a1bf",
+    "engine.js": "29a6a97578750b0280b3045c18aa2570cc5504b87edf0b9ed7503c437edee8a7",
+    "panels.js": "130e02f00fc35f14a3e817ecb42853101b7aacdde8e1f59ba50c1d21fa6113ed",
+    "beatgrid.js": "9d74accf0a8278fefe1f43dd06534c442b76b44300746c9e791d583fa1e6b71e",
+    "smart-sync.js": "8b1702dfa681848e7380cb7ee21490764f82a327549adf9459120b7bf6e7c909",
+    "warp-sync-harness.js": "644ab3ea5ea1849159a884b29d38505313c7c3c19dfd854903904ab0b2c0baee"
+  },
+  "physicalOutputMuted": true,
+  "persistedMarkers": [
+    {
+      "time": 2.13,
+      "bpm": 150
+    },
+    {
+      "time": 3.73,
+      "bpm": 90
+    }
+  ],
+  "recordStart": 0.5340589569160997,
+  "recording": {
+    "bytes": 69696,
+    "format": "audio/webm;codecs=opus",
+    "sha256": "602e2904a14c019368f62f9f96a8d7e52292ea5be0981bb2745533cffa0bd5f3",
+    "localOriginal": "local-evidence/warp-sync/attempt2-original.webm"
+  },
+  "decoded": {
+    "frames": 291060,
+    "sampleRate": 44100,
+    "channels": 2,
+    "duration": 6.6
+  },
+  "audio": {
+    "pulseTimes": [
+      [
+        0.042993197278911564,
+        0.5429931972789116,
+        1.0429931972789115,
+        1.5429931972789115,
+        2.0429931972789115,
+        2.5429931972789115,
+        3.0429931972789115,
+        3.5429931972789115,
+        4.0429931972789115,
+        4.5429931972789115,
+        5.0429931972789115,
+        5.5429931972789115,
+        6.0429931972789115,
+        6.5429931972789115
+      ],
+      [
+        0.042970521541950114,
+        0.5429705215419501,
+        1.04297052154195,
+        1.54297052154195,
+        2.04297052154195,
+        2.54297052154195,
+        3.04297052154195,
+        3.54297052154195,
+        4.0429251700680275,
+        4.5429251700680275,
+        5.0429251700680275,
+        5.5429251700680275,
+        6.0429251700680275,
+        6.5429251700680275
+      ]
+    ],
+    "sections": [
+      {
+        "name": "base120",
+        "from": 0.2,
+        "to": 1.8,
+        "pairs": [
+          {
+            "time": 0.5429931972789116,
+            "errorSeconds": 2.2675736961463855e-05
+          },
+          {
+            "time": 1.0429931972789115,
+            "errorSeconds": 2.2675736961463855e-05
+          },
+          {
+            "time": 1.5429931972789115,
+            "errorSeconds": 2.2675736961463855e-05
+          }
+        ]
+      },
+      {
+        "name": "source150",
+        "from": 2.2,
+        "to": 3.8,
+        "pairs": [
+          {
+            "time": 2.5429931972789115,
+            "errorSeconds": 2.2675736961463855e-05
+          },
+          {
+            "time": 3.0429931972789115,
+            "errorSeconds": 2.2675736961463855e-05
+          },
+          {
+            "time": 3.5429931972789115,
+            "errorSeconds": 2.2675736961463855e-05
+          }
+        ]
+      },
+      {
+        "name": "source90",
+        "from": 4.2,
+        "to": 6.3,
+        "pairs": [
+          {
+            "time": 4.5429931972789115,
+            "errorSeconds": 6.802721088394748e-05
+          },
+          {
+            "time": 5.0429931972789115,
+            "errorSeconds": 6.802721088394748e-05
+          },
+          {
+            "time": 5.5429931972789115,
+            "errorSeconds": 6.802721088394748e-05
+          },
+          {
+            "time": 6.0429931972789115,
+            "errorSeconds": 6.802721088394748e-05
+          }
+        ]
+      }
+    ]
+  },
+  "sharedTempo": {
+    "nominalRate": 1.04,
+    "actualSourceRate": 1.3866666555404663,
+    "primarySourceRate": 1.0399999618530273
+  },
+  "sourceAfter": {
+    "app.js": "7ebfc28026017022faf384dcba28c78440e8aa283183016c5685c08a8fc2a1bf",
+    "engine.js": "29a6a97578750b0280b3045c18aa2570cc5504b87edf0b9ed7503c437edee8a7",
+    "panels.js": "130e02f00fc35f14a3e817ecb42853101b7aacdde8e1f59ba50c1d21fa6113ed",
+    "beatgrid.js": "9d74accf0a8278fefe1f43dd06534c442b76b44300746c9e791d583fa1e6b71e",
+    "smart-sync.js": "8b1702dfa681848e7380cb7ee21490764f82a327549adf9459120b7bf6e7c909",
+    "warp-sync-harness.js": "644ab3ea5ea1849159a884b29d38505313c7c3c19dfd854903904ab0b2c0baee"
+  },
+  "sourceStable": true,
+  "finishedAt": "2026-10-17T20:14:13.744Z",
+  "priorWorkflow": {
+    "path": "local-evidence/warp-sync/attempt1-audio-pass.json",
+    "result": "Four-observation audio/editor/unsupported-keylock workflow passed. Code inspection then found nominal tempo-slider meaning used local section BPM; corrected and added actual source-rate observation in this current workflow. Prior audio receipt remains immutable; no claim that old control behavior was executed."
+  }
+}

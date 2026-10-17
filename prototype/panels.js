@@ -1,3 +1,4 @@
+import {createBeatgrid,gridBPM} from './beatgrid.js';
 import { createVideoMixer } from "./video.js";
 import { createVideoControls } from "./video-controls.js";
 import {createVideoMIDIRouter,videoMIDITargets} from './video-midi.js';
@@ -525,51 +526,41 @@ export function createPanels(a) {
   }
   function grid(d) {
     if (!d.track) return notify("Load a track first.");
-    const t = d.track;
-    dialog(
-      `Beatgrid · ${t.title}`,
-      `<div class="note-box">BPM, offset and markers update the displayed grid. Automatic analysis proposes a constant pulse grid. Review the downbeat here; variable-tempo warping remains open.</div><div class="form-grid"><label>BPM<input id="grid-bpm" type="number" min="1" max="999" step=".01" value="${t.bpm || 120}" ${t.locked ? "disabled" : ""}></label><label>Downbeat offset (seconds)<input id="grid-offset" type="number" step=".01" value="${t.grid || 0}" ${t.locked ? "disabled" : ""}></label></div><div class="panel-controls" style="margin-top:12px"><button id="grid-half">½ BPM</button><button id="grid-double">×2 BPM</button><button id="grid-marker">Set marker at playhead</button><button id="grid-clear">Clear markers</button><button id="grid-save">Save grid</button></div><p id="grid-markers" class="muted">Markers: ${(t.gridMarkers || []).map(time).join(", ") || "None"} ${t.locked ? "· LOCKED" : ""}</p>`,
-      () => {
-        $("#grid-half").onclick = () => {
-          if (!t.locked)
-            $("#grid-bpm").value = Number($("#grid-bpm").value) / 2;
+    const t=d.track, draft=(t.gridWarpMarkers||[]).map(m=>({...m}));
+    let clearLegacy=false;
+    dialog(`Beatgrid · ${t.title}`,
+      `<p>Set the downbeat and base tempo. Each red Beat Warp Marker changes the grid tempo from its source position. Playback uses the map in forward Smart Sync without keylock.</p><div class="form-grid"><label>BPM<input id="grid-bpm" type="number" min="1" max="999" step=".01" value="${t.bpm||120}" ${t.locked?'disabled':''}></label><label>Downbeat offset (seconds)<input id="grid-offset" type="number" step=".001" value="${t.grid??0}" ${t.locked?'disabled':''}></label><label>Marker source time (seconds)<input id="grid-warp-time" type="number" min="0" step=".001" value="${engine.position(d).toFixed(3)}" ${t.locked?'disabled':''}></label><label>Tempo after marker (BPM)<input id="grid-warp-bpm" type="number" min="1" max="999" step=".01" value="${gridBPM(t,engine.position(d))}" ${t.locked?'disabled':''}></label></div><div class="panel-controls"><button id="grid-half">½ BPM</button><button id="grid-double">×2 BPM</button><button id="grid-playhead">Use playhead</button><button id="grid-marker">Set warp marker</button><button id="grid-clear">Clear markers</button><button id="grid-save">Save grid</button></div><div id="grid-markers"></div><p id="grid-status" role="status" aria-live="polite"></p>`,
+      body=>{
+        const candidate=()=>({...t,bpm:Number($('#grid-bpm').value),grid:Number($('#grid-offset').value),gridWarpMarkers:draft});
+        function validate(){const track=candidate();if(!Number.isFinite(track.bpm)||track.bpm<1||track.bpm>999||!Number.isFinite(track.grid))throw new Error('Enter a valid BPM and downbeat offset.');return createBeatgrid(track);}
+        function error(e){$('#grid-status').textContent=e.message;}
+        function render(){
+          $('#grid-markers').innerHTML=`<table><thead><tr><th>Source time</th><th>Tempo from marker</th><th></th></tr></thead><tbody>${draft.map((m,n)=>`<tr><td>${time(m.time)}</td><td>${m.bpm} BPM</td><td><button data-remove-warp="${n}" ${t.locked?'disabled':''}>Remove marker ${n+1}</button></td></tr>`).join('')||'<tr><td colspan="3">No tempo changes</td></tr>'}</tbody></table>${t.gridMarkers?.length&&!clearLegacy?'<p>Legacy time-only annotations are preserved. Add tempo markers to define changes.</p>':''}`;
+          body.querySelectorAll('[data-remove-warp]').forEach(button=>button.onclick=()=>{if(!t.locked){draft.splice(Number(button.dataset.removeWarp),1);render();}});
+        }
+        $('#grid-half').onclick=()=>{if(!t.locked)$('#grid-bpm').value=Number($('#grid-bpm').value)/2;};
+        $('#grid-double').onclick=()=>{if(!t.locked)$('#grid-bpm').value=Number($('#grid-bpm').value)*2;};
+        $('#grid-playhead').onclick=()=>{if(!t.locked)$('#grid-warp-time').value=engine.position(d).toFixed(3);};
+        $('#grid-marker').onclick=()=>{
+          if(t.locked)return notify('Beatgrid locked.');
+          const marker={time:Number($('#grid-warp-time').value),bpm:Number($('#grid-warp-bpm').value)},old=draft.map(m=>({...m}));
+          try{
+            if(!Number.isFinite(marker.bpm)||marker.bpm<1||marker.bpm>999)throw new Error('Marker BPM must be between1and999.');
+            const index=draft.findIndex(m=>Math.abs(m.time-marker.time)<.000001);if(index>=0)draft[index]=marker;else draft.push(marker);
+            draft.sort((a,b)=>a.time-b.time);validate();render();$('#grid-status').textContent='Marker staged. Save grid to apply.';
+          }catch(e){draft.splice(0,draft.length,...old);error(e);}
         };
-        $("#grid-double").onclick = () => {
-          if (!t.locked)
-            $("#grid-bpm").value = Number($("#grid-bpm").value) * 2;
+        $('#grid-clear').onclick=()=>{if(!t.locked){draft.length=0;clearLegacy=true;render();$('#grid-status').textContent='Marker removal staged. Save grid to apply.';}};
+        $('#grid-save').onclick=async()=>{
+          if(t.locked)return notify('Beatgrid locked.');
+          try{
+            validate();const next=candidate();t.bpm=next.bpm;t.grid=next.grid;t.gridWarpMarkers=draft.map(m=>({...m}));if(clearLegacy)t.gridMarkers=[];
+            t.metadataSources={...t.metadataSources,bpm:'manual',grid:'manual'};t.metadataRevision=(t.metadataRevision||0)+1;
+            await engine.onGridChanged?.(t);persist();renderDecks();renderTracks();$('#modal').close();
+          }catch(e){error(e);}
         };
-        $("#grid-marker").onclick = () => {
-          if (t.locked) return notify("Beatgrid locked.");
-          t.gridMarkers ??= [];
-          t.gridMarkers.push(engine.position(d));
-          t.metadataRevision = (t.metadataRevision || 0) + 1;
-          $("#grid-markers").textContent =
-            "Markers: " + t.gridMarkers.map(time).join(", ");
-        };
-        $("#grid-clear").onclick = () => {
-          if (!t.locked) {
-            t.gridMarkers = [];
-            t.metadataRevision = (t.metadataRevision || 0) + 1;
-            $("#grid-markers").textContent = "Markers: None";
-          }
-        };
-        $("#grid-save").onclick = () => {
-          if (t.locked) return notify("Beatgrid locked.");
-          t.bpm = Math.max(1, Number($("#grid-bpm").value) || 120);
-          t.grid = Number($("#grid-offset").value);
-          t.metadataSources = {
-            ...t.metadataSources,
-            bpm: "manual",
-            grid: "manual",
-          };
-          t.metadataRevision = (t.metadataRevision || 0) + 1;
-          persist();
-          renderDecks();
-          renderTracks();
-          $("#modal").close();
-        };
-      },
-    );
+        render();
+      });
   }
   function settings(tab = activeSettings) {
     activeSettings = tab;

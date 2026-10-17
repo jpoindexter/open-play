@@ -170,6 +170,8 @@ export class AudioEngine {
     return b;
   }
   position(d) {
+    const gridTimeline = this.voices.get(d.index)?.gridTimeline;
+    if (gridTimeline) return gridTimeline.clock(this.ctx.currentTime);
     const live = this.voices.get(d.index)?.liveKeylock;
     if (live) {
       const bridge = this.voices.get(d.index).handoffBefore;
@@ -263,6 +265,7 @@ export class AudioEngine {
     job.timer = setTimeout(poll, Math.max(10, (end - this.ctx.currentTime) * 1000));
   }
   voiceClock(d, voice) {
+    if (voice?.gridTimeline) return voice.gridTimeline.clock;
     if (voice?.liveKeylock) return at => voice.handoffBefore && at < voice.handoffBefore.until ? voice.handoffBefore.clock(at) : voice.liveKeylock.position(at);
     if (voice?.deckScratchTransport) return at => {
       const value = voice.deckScratchTransport.state();
@@ -278,6 +281,7 @@ export class AudioEngine {
     return this.voiceRateAt(d, voice, this.ctx?.currentTime || 0);
   }
   voiceRateAt(d, voice, at) {
+    if (voice?.gridTimeline) return voice.gridTimeline.rateAt(at);
     if (voice?.handoffBefore && at < voice.handoffBefore.until) return voice.handoffBefore.rate(at);
     if (voice?.liveKeylock) return voice.liveKeylock.stateAt(at).rate;
     if (voice?.deckScratchTransport) return voice.deckScratchTransport.state().rate;
@@ -343,6 +347,7 @@ export class AudioEngine {
     } finally {if (!committed) await adapter?.dispose();}
   }
   async start(d, {positionAt, priorClock} = {}) {
+    this.onValidateTransport?.(d);
     this.cancelDeckScratchRequest(d);
     if (!d.track) throw new Error("Load a track first.");
     if (d.track.missing || d.track.provider)
@@ -421,12 +426,16 @@ export class AudioEngine {
         if (!Number.isFinite(aligned) || aligned < 0 || aligned >= track.duration) throw new RangeError("Invalid synchronized source position.");
         d.position = aligned;
       }
-      this.stopSource(d.index, { preserveStemExit: true });
       if (!d.reverse && d.position >= track.duration) d.position = 0;
+      const when = syncWhen ?? this.ctx.currentTime + .01;
+      const gridTimeline = this.onGridTimeline?.(d,{position:d.position,when});
+      if (gridTimeline && (transformed || d.reverse || d.loop)) throw new Error("Warped Sync with keylock, pitch shift, reverse or loops is not available yet.");
+      this.stopSource(d.index, { preserveStemExit: true });
       const sources = buffers.map((buffer) => {
         const source = this.ctx.createBufferSource();
         source.buffer = buffer;
         source.playbackRate.value = transformed ? 1 : tempo;
+        for (const event of gridTimeline?.events || []) source.playbackRate.setValueAtTime(event.rate,event.when);
         source.loop = d.loop;
         source.loopStart =
           (d.reverse ? track.duration - d.loopOut : d.loopIn) / scale;
@@ -437,6 +446,7 @@ export class AudioEngine {
       const voice = sources[0];
       voice.sources = sources;
       voice.timelineScale = scale;
+      voice.gridTimeline = gridTimeline;
       const stemState = stems ? this.ensureStemState(d) : null;
       voice.stemHistoryState = stemState;
       voice.stemGains = stems
@@ -459,7 +469,6 @@ export class AudioEngine {
       this.voices.set(d.index, voice);
       this.setCross(this.cross);
       if (stems) this.updateStems(d);
-      const when = syncWhen ?? this.ctx.currentTime + 0.01;
       d.anchorPosition = d.position;
       d.anchorTime = when;
       d.playing = true;
@@ -548,6 +557,12 @@ export class AudioEngine {
   async setRate(d, rate, {syncInternal = false} = {}) {
     if (!syncInternal && this.onRateRequest) return this.onRateRequest(d, rate);
     this.cancelDeckScratchRequest(d);
+    if (this.voices.get(d.index)?.gridTimeline) {
+      const position=this.position(d), was=d.playing;
+      this.pause(d,{preserveStemExit:true});d.position=position;d.rate=rate;
+      if(was)await this.start(d);
+      return;
+    }
     if (d.stemSlip && d.stemSlip !== "off") {
       const pending = this.stemSlipPending.get(d.index);
       if (pending?.committing) {
@@ -621,6 +636,7 @@ export class AudioEngine {
     }
   }
   async setLoop(d, on, start, end) {
+    this.onValidateTransport?.(d,{loop:on});
     if (this.voices.get(d.index)?.deckScratchTransport || this.voices.get(d.index)?.liveKeylock || this.deckScratchRequests.has(d.index)) {
       const was = d.playing; this.pause(d, {preserveStemExit: true});
       d.loop = on; d.loopIn = start; d.loopOut = end;
@@ -920,6 +936,7 @@ export class AudioEngine {
     return out;
   }
   async setPitch(d, { keylock = d.keylock, semitones = d.keyShift || 0 } = {}) {
+    this.onValidateTransport?.(d,{keylock,keyShift:semitones});
     this.cancelDeckScratchRequest(d);
     if (d.stemSlip && d.stemSlip !== "off") {
       const pending = this.stemSlipPending.get(d.index);
@@ -1073,6 +1090,7 @@ export class AudioEngine {
     if (voice) voice.stemInitialized = true;
   }
   async setReverse(d, reverse) {
+    this.onValidateTransport?.(d,{reverse});
     if (d.stemSlip && d.stemSlip !== "off") {
       d.reverse = reverse;
       if (reverse) {
@@ -1300,6 +1318,7 @@ export class AudioEngine {
     return this.voices.get(d.index)?.stemSlipTransport?.command("query") || this.stemSlipState(d);
   }
   async setStemSlip(d, mode) {
+    this.onValidateTransport?.(d,{stemSlip:mode});
     if (!["off", "vocal", "instrumental"].includes(mode)) throw new Error("Unknown Stem Slip mode.");
     this.stemSlipRateTokens.set(d.index, (this.stemSlipRateTokens.get(d.index) || 0) + 1);
     const active = this.voices.get(d.index)?.stemSlipTransport;
