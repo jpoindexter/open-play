@@ -1,0 +1,160 @@
+{
+  "passed": 11,
+  "failed": 0,
+  "sourceHash": "2326805cd31fc2c0e8ee73a7f559b64eac64b6cef2670caa3dd1f06d30ada4ef",
+  "sourceUnchangedDuringRun": true,
+  "checks": [
+    {
+      "name": "Actual loopback binding and exact Host/Origin enforcement",
+      "passed": true,
+      "evidence": {
+        "rejections": [
+          {
+            "headers": {
+              "host": "attacker.invalid"
+            },
+            "status": 403
+          },
+          {
+            "headers": {
+              "origin": "https://attacker.invalid"
+            },
+            "status": 403
+          },
+          {
+            "headers": {
+              "origin": "null"
+            },
+            "status": 403
+          },
+          {
+            "headers": {
+              "host": ""
+            },
+            "status": 403
+          }
+        ],
+        "rejected": 4,
+        "expectedOriginAccepted": true
+      }
+    },
+    {
+      "name": "Allowed static paths, root redirect, CSP hash, MIME and HEAD bytes are real HTTP results",
+      "passed": true,
+      "evidence": {
+        "staticAllowlistAccepted": 4,
+        "headDeclaredBytes": 16
+      }
+    },
+    {
+      "name": "Static methods and direct private/outside/invalid paths are denied",
+      "passed": true,
+      "evidence": {
+        "deniedMethods": 4,
+        "deniedPaths": 5
+      }
+    },
+    {
+      "name": "Encoded-separator traversal cannot expose a disallowed sibling within asset root",
+      "passed": true,
+      "evidence": {
+        "status": 404,
+        "body": "Not found."
+      }
+    },
+    {
+      "name": "Allowed-prefix symlink cannot expose disallowed sibling inside root",
+      "passed": true,
+      "evidence": {
+        "status": 404,
+        "body": "Not found."
+      }
+    },
+    {
+      "name": "Actual closed/open/suffix ranges and HEAD range use exact bytes/headers",
+      "passed": true,
+      "evidence": {
+        "ranges": [
+          {
+            "range": "bytes=2-5",
+            "status": 206,
+            "body": "2345"
+          },
+          {
+            "range": "bytes=12-",
+            "status": 206,
+            "body": "cdef"
+          },
+          {
+            "range": "bytes=-4",
+            "status": 206,
+            "body": "cdef"
+          },
+          {
+            "range": "bytes=0-999",
+            "status": 206,
+            "body": "0123456789abcdef"
+          }
+        ],
+        "headBodyBytes": 0
+      }
+    },
+    {
+      "name": "Invalid/empty/unsatisfiable ranges fail without reading unrelated bytes",
+      "passed": true,
+      "evidence": {
+        "invalidRanges": 7,
+        "emptyBodyBytes": 0
+      }
+    },
+    {
+      "name": "Optional API proxy forwards approved actual bytes and rewrites upstream authority",
+      "passed": true,
+      "evidence": {
+        "bytes": 44,
+        "forwardedMethod": "POST",
+        "upstream404Preserved": true
+      }
+    },
+    {
+      "name": "Optional API rejects unapproved methods/routes/tokens/upload lengths before forwarding",
+      "passed": true,
+      "evidence": {
+        "lengthResults": [
+          {
+            "length": 0,
+            "status": 413
+          },
+          {
+            "length": 43,
+            "status": 413
+          },
+          {
+            "length": 134217729,
+            "status": 413
+          }
+        ],
+        "upstreamRequestsAdded": 0,
+        "invalidLengthCases": 3
+      }
+    },
+    {
+      "name": "Unavailable optional API returns explicit 503 while static playback assets remain available",
+      "passed": true,
+      "evidence": {
+        "status": 503,
+        "staticStatus": 200
+      }
+    },
+    {
+      "name": "Truncated optional upstream response cannot escape as an uncaught main-process error",
+      "passed": true,
+      "evidence": {
+        "uncaught": [],
+        "clientError": "aborted",
+        "staticStatus": 200
+      }
+    }
+  ],
+  "scope": "Actual Node HTTP integration on ephemeral127.0.0.1 sockets and isolated temporary assets/symlinks; actual proxy response/reset child process. No Electron GUI, packaged build, MIDI/audio permission/device, native audio or user acceptance evidence."
+}

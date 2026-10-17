@@ -1,3 +1,9 @@
+
+
+## Authority override — desktop test build APPROVED
+
+Jason explicitly approved HTML `f8b0abf` for a local desktop test build preserving existing UI/code. Earlier native-prohibited/pending statements are historical. Native desktop hosting is now authorized; no fullparity/physical-output/public-release approval is implied. Electron44.9.0 +packager20.3.0 pins, root owns desktop/. Buildpackages exactapprovedassets, sandboxed isolated renderer and loopback-only boundedasset/APIhost. Optionalstems retain existinglocalservice, UIunchanged. Fresh45s physicalMIDI101packets/0parsererrors, userconfirmedknob+Seratomoves; CCch1#1 values1/127 observed. Next: actualbundlelaunch/import/play/record/MIDI mapping; separatedheadphone/masterstillgap. No new nativeDSPengine rewrite.
+
 # Open Play — full build plan
 
 **Prepared:** 16 October 2026 · **Owner:** Jason · **Status:** HTML review candidate available; investigation and exact parity reconciliation remain open; native build blocked on prototype approval.
@@ -1326,3 +1332,16 @@ Next: current-source standalone engine capture, present the working HTML test, r
 
 
 Reviewed-source rerun result: standalone repeat preserved in `keylock-engine-shadow-reviewed-standalone-failure.json` reports2pass/5fail/4capture-integrity errors. Both reviewed-source attempts record the same kind of duplicate frame followed by a skipped quantum on all four buses, including independent control. This disqualifies continuous release measurement; it does not establish its cause. No further identical rerun is a completion gate. Current controlled live orchestration9/9, shadow ownership9/9 and silentpull15/15 pass. Main-interface two-demo13.2s recording is a separate observed path. The candidate is presented for hands-on testing with these limits, not release-quality or full-parity acceptance.
+
+
+## 49. Approved desktop test0.1.1 built, launched, imported and recorded
+
+Jason explicitly approved HTMLf8b0abf for a local desktop test; this supersedes all earlier native-not-approved statements. Electron44.9.0/packager20.3.0 preserve the approved interface/audio code. The local370MiB arm64 app is built and actually launched. Every191packaged prototype file matches approvedGitbytes; hostASAR/manifest hashes and provenance are saved. No rewrite, nativeDSP replacement, notarization or publicrelease. `Start Open Play Desktop.command` is the direct launch point. No Python/npm/server process is needed for ordinary packaged playback; the app owns its loopback18768server. Optionalmodelstems still depend on the existing Python/modelservice8768.
+
+Independent actualHTTP/filesystem review11/11: canonical allowlist/encodedtraversal/symlinks, Host/Origin, MIME/CSP, ranges/HEAD, boundedproxy, absent/truncatedoptionalupstream. Candidate path/proxy issues were fixed before independentfirstexecution, so no fabricatedpre-fixred is claimed. Exactlocked dependency audit reports0knownfindings; it is not a universalbinary/zero-day guarantee.
+
+ActualpackagedGUI: nativeMIDIConnect enumerates exact connectedHercules; CC1/ch1relative Librarybrowse mapping saved. Initialpermissiondenial is preserved as observation: Electron44requestedcoarse midiSysex even though existingcode requests sysexfalse. Hostlimits permissioncategory to ownedwindow/origin; no newSysEx/outputcode. Fresh45s passiveCoreMIDIcapture101packets/0parsererrors/0hardwareoutputs, userconfirmedknobandSeratoselectionmovement. Rawcounts51b00101/46b0017f/twonoteon/twonoteoff. Prior08:02windowwasmissed and inconclusive. Physicaldesktopknobselectionquestionpending.
+
+ActualpackagedREC/Play1/Play2/Stop/nativeSave/Pause saved22.2s stereo48000Hz WebM, decodedfinite nonzero RMS0.03585/peak0.17843. Generatedfixtureimport vianativechooser increasedlibrary8→9; loadeddeck2playedwithdeck1paused, advancingclock/nonzeroMaster; pausedto0decks/zeroMaster. This establishes apphost/localfileimport/playback/recording on a syntheticWAV, notusercodec breadth, per-deckPCMsourceoracle, acousticoutput, quality/latency or fullSeratoparity. Screenshot/runtimeobservation/ASARinspection in docs/prototype/desktop-0.1.1-*.
+
+Next: Jason's hands-on music/controllertest, actual master/headphoneoutputseparation, importbytepersistence and controllercoverage. Broad110groups/522requirements and reverse/loop/StemSlip/earlycursor/stemquality/Video/provider/reference gaps continue. Nativehost milestone is useful executable software; full1:1 remainsfalse. FullindependentClaudecompletenessaudit remainsunlaunched; exactpromptsuffix maintained.

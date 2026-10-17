@@ -57,3 +57,10 @@ claims and installed Effects/Info controls. Read
 `docs/research/claude-fable/PARENT_VALIDATION.md`. This is debugging assistance,
 not the full independent completeness audit, a native build approval or a public
 release authorization. Serato Video was restoredOFF after the observation.
+
+
+## 17 October2026 — G1 approved for local desktop test build
+
+Jason answered **“Approve desktop test build”** to the explicit question naming HTML revision `f8b0abf` and preserving current interface/code. This authorizes creating and running a local desktop test app from that revision. It supersedes earlier native-not-approved statements for this limited test scope. Full1:1, physical hardware/audio, release quality, signing/notarization and public distribution are not thereby accepted. Electron44.9.0 was selected to retain the web implementation; no frontend rewrite or native DSP replacement is required for this milestone.
+
+The previous08:02UTC physical capture was explicitly missed by Jason and is inconclusive. A fresh requested retry10:12:24–10:13:09UTC delivered101packets with zero parser errors; Jason confirmed knob movement and Serato selection movement during it. See HERCULES_CAPTURE_20261017_CONFIRMED.json.

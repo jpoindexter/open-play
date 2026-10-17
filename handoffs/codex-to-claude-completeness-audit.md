@@ -1,5 +1,15 @@
 
 
+CURRENT desktop milestone — plan49 overrides historical gates: user APPROVEDf8b0abf for localdesktoptest. Packaged0.1.1 launched/importedWAV/played/recorded22.2sactualnonzerostereo/pauseobserved.191approvedprototypefilesbyteexact; desktop-candidate.json pinsASARandhost. FreshconfirmedHercules101packets/0parseerrors; desktopenumeratesconnectedendpoint+savedrelativeCC1ch1browsermapping; actualdesktopknobactionawaitsuser. Start Open Play Desktop.command. Headphoneseparation/nativeDSP/full1:1/notarization/publicrelease remainunproved. No code/stackrewrite. MainUIlegacyHelp native-not-started text is inheritedapprovedHTML and historical; desktopAbout/approvalledger/currentplan governactualstate. Do not turn that stalecopyintoanativeworkban. Next: hands-onmusic+controller→realheadphone/masterroute.
+
+
+
+## Authority override — desktop test build APPROVED
+
+Jason explicitly approved HTML `f8b0abf` for a local desktop test build preserving existing UI/code. Earlier native-prohibited/pending statements are historical. Native desktop hosting is now authorized; no fullparity/physical-output/public-release approval is implied. Electron44.9.0 +packager20.3.0 pins, root owns desktop/. Buildpackages exactapprovedassets, sandboxed isolated renderer and loopback-only boundedasset/APIhost. Optionalstems retain existinglocalservice, UIunchanged. Fresh45s physicalMIDI101packets/0parsererrors, userconfirmedknob+Seratomoves; CCch1#1 values1/127 observed. Next: actualbundlelaunch/import/play/record/MIDI mapping; separatedheadphone/masterstillgap. No new nativeDSPengine rewrite.
+
+
+
 Current named hands-on HTML review source: `f8b0abf33c8e8468c7bec27eabc5be2930ed0086`, 264 tracked prototype/scripts hashes in candidate-hashes.json. Checkpoint12 preserves all failures; full1:1 false/nativeapproval false. Jason has been asked to approve this exact revision for local desktop packaging or test it in browser first. Do not treat question delivery, elapsed time, or architectural discussion as approval. Continue same interface/code; no rewrite. Read docs/prototype/REAL_TEST.md.
 
 

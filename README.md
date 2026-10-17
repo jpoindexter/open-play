@@ -2,7 +2,7 @@
 
 Independent open-source desktop DJ project, with a browser review candidate and ongoing reference investigation. The goal is familiar Serato DJ Pro design and behavior without artificial feature, account or device gates in the independent implementation.
 
-**Native development is blocked until Jason approves the HTML prototype.** The HTML candidate is available, with explicit simulations and gaps. Full 1:1 parity is not verified.
+**Jason approved HTML revision f8b0abf for a local desktop test.** Build0.1.1 is available through `Start Open Play Desktop.command`; see [desktop test instructions](desktop/README.md). Existing UI/audio code is preserved. Full1:1 and physical headphone/master routing remain unverified.
 
 - [Run the HTML prototype](prototype/README.md)
 - [Per-file Video FX save/recall evidence](docs/prototype/VIDEO_FILE_FX_REVIEW.md)
