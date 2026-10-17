@@ -1,0 +1,45 @@
+// Actual AudioEngine + actual scratch wrapper + actual kernel. The host, ports,
+// graph objects and ACK latency are instrumented; no browser/audio/UI proof.
+import assert from 'node:assert/strict';
+import {AudioEngine} from '../prototype/engine.js';
+import {DeckScratchKernel} from '../prototype/deck-scratch-kernel.js';
+const checks=[],all=[];
+const deferred=()=>{let resolve;const promise=new Promise(r=>resolve=r);return {promise,resolve};};
+const turn=()=>new Promise(resolve=>setImmediate(resolve));
+async function until(predicate){for(let i=0;i<30;i++){if(predicate())return;await turn();}throw Error('Expected controlled boundary not reached.');}
+class InstrumentedNode{
+ constructor(ctx,name,options){this.ctx=ctx;this.kernel=new DeckScratchKernel(ctx.sampleRate,options.processorOptions);this.trace=[];this.acks=[];this.holdOwners=new Set();this.connections=[];this.closed=false;this.port={postMessage:(message,transfer=[])=>{const data=structuredClone(message,{transfer});queueMicrotask(()=>{this.trace.push({type:data.type,owner:data.owner,gesture:data.gesture});let response;try{const state=data.type==='buffers'?this.kernel.load(data):this.kernel.command(data.type,data);response={id:data.id,state};}catch(error){response={id:data.id,state:this.kernel.state(),error:{name:error.name,message:error.message}};}if(data.id){this.acks.push({owner:data.owner,type:data.type,response});this.deliver();}});},close:()=>{this.closed=true;}};ctx.testNodes.push(this);}
+ deliver(){while(this.acks.length&&!this.closed){const next=this.acks[0];if(next.type==='begin'&&this.holdOwners.has(next.owner))return;this.acks.shift();this.port.onmessage?.({data:next.response});}}
+ release(owner){this.holdOwners.delete(owner);this.deliver();}
+ connect(...args){this.connections.push(args);}disconnect(){this.disconnected=true;}
+}
+globalThis.AudioWorkletNode=InstrumentedNode;
+function fixture({playing=true}={}){
+ const e=new AudioEngine(),events=[],bus=()=>({gain:{value:0,cancelScheduledValues(){},setValueAtTime(value){this.value=value;},setTargetAtTime(value){this.value=value;}},connect(){},disconnect(){}});
+ e.ctx={sampleRate:1000,currentTime:0,testNodes:[],createGain:bus,audioWorklet:{async addModule(){events.push('module prepared');}}};e.nodes=Array.from({length:4},()=>({input:{},gain:bus(),level:.8,trim:1,high:{connect(){},disconnect(){}},filter:{disconnect(){}}}));e.resume=async()=>{};e.applyChannelFX=async()=>{};e.buffer=async()=>({sampleRate:1000,channels:[new Float32Array(30000).fill(.2)]});e.onError=error=>events.push({error:error.message});e.onProcessing=()=>events.push('processing changed');
+ const d={index:0,track:{id:'fixture',duration:30},position:5,anchorPosition:5,anchorTime:0,rate:1,reverse:false,playing,slip:false,loop:false,keylock:false,keyShift:0,stems:[true,true,true,true],stemFX:[false,false,false,false]};const f={e,d,events,get node(){return e.ctx.testNodes.at(-1);},close(){for(const node of e.ctx.testNodes){node.holdOwners.clear();node.deliver();}for(const source of e.voices.values())source.deckScratchTransport?.dispose();e.voices.clear();for(const req of e.deckScratchRequests.values())req.controller.abort();e.deckScratchRequests.clear();}};all.push(f);return f;
+}
+async function test(name,run){try{const evidence=await run();checks.push({name,passed:true,evidence});}catch(error){checks.push({name,passed:false,error:error.stack});}finally{for(const f of all.splice(0))f.close();await turn();}}
+function rms(a){return Math.sqrt(a.reduce((sum,value)=>sum+value*value,0)/a.length);}
+await test('Quick release during actual reused Begin ACK cannot leave orphan audition or silent playing voice',async()=>{
+ const f=fixture();await f.e.beginDeckScratch(f.d,'first');await f.e.endDeckScratch(f.d,'first');const node=f.node;node.holdOwners.add('quick');const begin=f.e.beginDeckScratch(f.d,'quick');await until(()=>node.kernel.state().owner==='quick');assert.equal(await f.e.endDeckScratch(f.d,'quick'),false);await until(()=>node.kernel.state().phase==='idle');node.release('quick');assert.equal(await begin,false);const state=node.kernel.state();assert.equal(state.owner,null);assert.equal(state.audition,false);assert.equal(state.playing,true);assert.equal(f.e.deckScratchRequests.size,0);const outputs=Array.from({length:5},()=>[new Float32Array(100),new Float32Array(100)]);node.kernel.process(outputs);assert.ok(rms(outputs[0][0])>.1);return {phase:state.phase,playing:state.playing,resumedRMS:rms(outputs[0][0]),trace:node.trace.slice(-4)};
+});
+await test('Canceled reused paused Begin ACK stays paused and never resumes on its late acknowledgement',async()=>{
+ const f=fixture({playing:false});await f.e.beginDeckScratch(f.d,'first');await f.e.endDeckScratch(f.d,'first');const node=f.node;node.holdOwners.add('quick');const begin=f.e.beginDeckScratch(f.d,'quick');await until(()=>node.kernel.state().owner==='quick');await f.e.endDeckScratch(f.d,'quick');await until(()=>node.kernel.state().owner===null);node.release('quick');assert.equal(await begin,false);assert.equal(node.kernel.state().playing,false);assert.equal(node.kernel.state().audition,false);assert.equal(f.d.playing,false);return {paused:true};
+});
+await test('Replacement owner orders matching old End before fresh Begin even while ACKs are delayed',async()=>{
+ const f=fixture();await f.e.beginDeckScratch(f.d,'first');await f.e.endDeckScratch(f.d,'first');const node=f.node;node.holdOwners.add('slow');const old=f.e.beginDeckScratch(f.d,'slow');await until(()=>node.kernel.state().owner==='slow');const fresh=f.e.beginDeckScratch(f.d,'fresh');await until(()=>node.kernel.state().owner==='fresh');node.release('slow');assert.equal(await old,false);assert.ok(await fresh);assert.equal(node.kernel.state().owner,'fresh');assert.equal(await f.e.endDeckScratch(f.d,'slow'),false);assert.equal(node.kernel.state().owner,'fresh');const tail=node.trace.slice(-3);assert.deepEqual(tail.map(v=>[v.type,v.owner]),[['begin','slow'],['end','slow'],['begin','fresh']]);await f.e.endDeckScratch(f.d,'fresh');return {trace:tail};
+});
+await test('Scratch during buffered Play preparation aborts old transform but preserves intended playing release',async()=>{
+ const f=fixture({playing:false}),controller=new AbortController();f.d.processing=true;f.e.transforms.set(0,controller);assert.ok(await f.e.beginDeckScratch(f.d,'during-play'));assert.equal(controller.signal.aborted,true);assert.equal(f.d.processing,false);assert.equal(f.d.playing,true);await f.e.updateDeckScratch(f.d,{position:7,velocity:1},'during-play');const release=await f.e.endDeckScratch(f.d,'during-play');assert.equal(release.playing,true);assert.equal(f.d.playing,true);assert.equal(release.position,7);return {playing:release.playing,position:release.position};
+});
+await test('Actual wrapper processor failure clears engine ownership/voice and restores last observed position without touching other deck',async()=>{
+ const f=fixture(),other={sources:[],marker:'other'};f.e.voices.set(1,other);await f.e.beginDeckScratch(f.d,'active');await f.e.updateDeckScratch(f.d,{position:7,velocity:1},'active');f.node.onprocessorerror();await turn();assert.equal(f.e.voices.has(0),false);assert.equal(f.e.voices.get(1),other);assert.equal(f.e.deckScratchRequests.size,0);assert.equal(f.d.playing,false);assert.equal(f.d.position,7);assert.equal(f.e.position(f.d),7);assert.equal(f.events.filter(v=>v.error).length,1);return {position:f.d.position,playing:f.d.playing,errors:f.events.filter(v=>v.error)};
+});
+await test('Late old-processor error cannot pause or retire a newer active source',async()=>{
+ const f=fixture();await f.e.beginDeckScratch(f.d,'old');const old=f.node;f.e.pause(f.d);await f.e.beginDeckScratch(f.d,'new');const voice=f.e.voices.get(0);await f.e.updateDeckScratch(f.d,{position:8,velocity:1},'new');old.onprocessorerror();await turn();assert.equal(f.e.voices.get(0),voice);assert.equal(f.node.kernel.state().owner,'new');assert.equal(f.e.position(f.d),8);return {activeOwner:f.node.kernel.state().owner,position:f.e.position(f.d)};
+});
+await test('Global silence owns first paused pending preparation and cannot be followed by a late voice commit',async()=>{
+ const f=fixture({playing:false}),gate=deferred(),prepare=f.e.prepareOrdinaryScratch.bind(f.e);f.e.prepareOrdinaryScratch=async d=>{await gate.promise;return prepare(d);};const begin=f.e.beginDeckScratch(f.d,'never-started');f.e.silence();gate.resolve();assert.equal(await begin,false);assert.equal(f.e.voices.size,0);assert.equal(f.e.deckScratchRequests.size,0);assert.equal(f.d.scratchPreparing,false);assert.equal(f.d.playing,false);return {voices:f.e.voices.size,pending:f.e.deckScratchRequests.size};
+});
+console.log(JSON.stringify({passed:checks.filter(c=>c.passed).length,failed:checks.filter(c=>!c.passed).length,checks,scope:'Actual AudioEngine, actual deck-scratch wrapper and actual PCM kernel with controlled graph/port/ACK latency. No browser scheduling, engine captured PCM, visible UI, live-keylock or vendor/native parity acceptance.'},null,2));if(checks.some(c=>!c.passed))process.exitCode=1;

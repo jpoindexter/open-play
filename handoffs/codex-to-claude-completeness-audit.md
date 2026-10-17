@@ -406,6 +406,10 @@ Prompt SHA-256: `699d5f1556d148800fda22362be86b6f4acdcaac06dca0f5801b025af1291c8
 
 ---
 
+
+
+Latest integration override (17 October2026; read FULL_BUILD_PLAN.md41): forward unlooped live keylock and ordinary whole-deck scratch/platter now run through production browser AudioEngine. Actual adapter8/8, live engine6/6, raw engine4/4 and a main-UI master recording prove narrow synthetic behavior. **The recording also exposes failed release-pitch preservation:** raw476Hz appears briefly after held-platter release before requested880Hz resumes. Keep this open despite green gap/tone tests. A separate experimental lead sweep is pending; native remains forbidden and full1:1 incomplete. The original prompt below is unchanged.
+
 # Open Play — complete project prompt
 
 Investigate **Serato DJ Pro for macOS**, then design an independently implemented, **open-source DJ application that closely matches Serato’s interface and functionality without artificial feature limits, subscriptions, paid device unlocks, or a mandatory account**.

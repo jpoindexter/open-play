@@ -1,0 +1,533 @@
+{
+  "checks": [
+    {
+      "name": "Production start uses live forward WASM and actual22050Hz source through deck input",
+      "passed": true,
+      "evidence": {
+        "anchorTime": 0.4686666666666667,
+        "observed": {
+          "start": 0.7186666666666667,
+          "duration": 0.4,
+          "coverage": 1,
+          "frames": 19200,
+          "rms": 0.0951957087129992,
+          "peak": 0.17442916333675385,
+          "frequencyHz": 440.36740851917807,
+          "maxBelow005RunMs": 0,
+          "envelopeFit": {
+            "frequency": 4,
+            "error": 0.000020661006772495112,
+            "relativeAmplitude": 0.4533567267623743
+          }
+        },
+        "snapshot": {
+          "byteAccounting": "Acknowledged retained PCM and in-flight chunk copies only; excludes decoded inputs, SRC tables and opaque WASM heaps.",
+          "disposed": false,
+          "state": {
+            "when": 0.4686666666666667,
+            "position": 0.662,
+            "playing": true,
+            "rate": 1,
+            "keylock": true,
+            "semitones": 0,
+            "effectiveSemitones": 0
+          },
+          "sourceGeometry": [
+            {
+              "index": 0,
+              "sampleRate": 22050,
+              "frames": 1058400,
+              "channels": 2,
+              "duration": 48,
+              "paddedTailSeconds": 0,
+              "trimmedTailSeconds": 0,
+              "decodedBytes": 8467200
+            }
+          ],
+          "groups": [
+            {
+              "id": 1,
+              "origin": 0,
+              "start": 0,
+              "end": 9,
+              "nodeCount": 1,
+              "retainedPCMBytes": 3456000,
+              "retainedChunks": 18,
+              "latency": 0.12,
+              "role": "selected"
+            }
+          ],
+          "retainedPCMBytes": 3456000,
+          "inFlightPCMBytes": 0,
+          "decodedBytes": 8467200,
+          "policy": {
+            "direction": "forward",
+            "rate": [
+              0.25,
+              4
+            ],
+            "effectiveSemitones": [
+              -24,
+              24
+            ],
+            "chunkSeconds": 0.5,
+            "prerollSeconds": 1,
+            "lookaheadSeconds": 8,
+            "driverMs": 50,
+            "crossfadeSeconds": 0.01,
+            "srcTaps": 32,
+            "srcPhases": 1024,
+            "decodedSources": "Whole decoded AudioBuffers remain caller-owned; only processor PCM copies are windowed.",
+            "unsupported": [
+              "reverse",
+              "loop",
+              "Stem Slip",
+              "incremental compressed-file decoding"
+            ],
+            "quality": "Independent32-tap windowed-sinc normalization and10ms group crossfade; vendor sonic equivalence and artifact-free transitions are unverified."
+          },
+          "lastError": null
+        }
+      }
+    },
+    {
+      "name": "Production tempo and pitch controls retain live node and change actual routed PCM",
+      "passed": true,
+      "evidence": {
+        "rate": {
+          "start": 1.506,
+          "duration": 1.3,
+          "coverage": 1,
+          "frames": 62400,
+          "rms": 0.08749383507075562,
+          "peak": 0.1716412454843521,
+          "frequencyHz": 440.33194279139667,
+          "maxBelow005RunMs": 0,
+          "envelopeFit": {
+            "frequency": 5,
+            "error": 0.00008049495113835597,
+            "relativeAmplitude": 0.4254877973590449
+          }
+        },
+        "higher": {
+          "start": 3.1159999999999997,
+          "duration": 0.3,
+          "coverage": 1,
+          "frames": 14400,
+          "rms": 0.07975102088631413,
+          "peak": 0.16977033019065857,
+          "frequencyHz": 880.077453509851,
+          "maxBelow005RunMs": 0,
+          "envelopeFit": {
+            "frequency": 5,
+            "error": 0.000011171911153900083,
+            "relativeAmplitude": 0.4420239590640072
+          }
+        },
+        "restored": {
+          "start": 3.7239999999999998,
+          "duration": 0.3,
+          "coverage": 1,
+          "frames": 14400,
+          "rms": 0.08127192750263072,
+          "peak": 0.17164023220539093,
+          "frequencyHz": 440.33857650024777,
+          "maxBelow005RunMs": 0,
+          "envelopeFit": {
+            "frequency": 5,
+            "error": 0.000014444690640366415,
+            "relativeAmplitude": 0.42926640038725516
+          }
+        },
+        "nodeReused": true
+      }
+    },
+    {
+      "name": "Production near/far seeks use original-time clock and bounded live windows",
+      "passed": true,
+      "evidence": {
+        "near": {
+          "start": 4.444666666666667,
+          "duration": 0.3,
+          "coverage": 1,
+          "frames": 14400,
+          "rms": 0.0889883568466112,
+          "peak": 0.17162148654460907,
+          "frequencyHz": 550.3539643229898,
+          "maxBelow005RunMs": 0,
+          "envelopeFit": {
+            "frequency": 5.02,
+            "error": 0.000002131752164853673,
+            "relativeAmplitude": 0.4220479333861252
+          }
+        },
+        "far": {
+          "start": 5.207333333333334,
+          "duration": 0.3,
+          "coverage": 1,
+          "frames": 14400,
+          "rms": 0.08889972215815745,
+          "peak": 0.17174524068832397,
+          "frequencyHz": 880.4235927026141,
+          "maxBelow005RunMs": 0,
+          "envelopeFit": {
+            "frequency": 5.02,
+            "error": 0.000011817736423901798,
+            "relativeAmplitude": 0.42338677212271875
+          }
+        },
+        "position": 24.696666666666665,
+        "snapshot": {
+          "byteAccounting": "Acknowledged retained PCM and in-flight chunk copies only; excludes decoded inputs, SRC tables and opaque WASM heaps.",
+          "disposed": false,
+          "state": {
+            "when": 4.957333333333334,
+            "position": 24.696666666666665,
+            "playing": true,
+            "rate": 1.25,
+            "keylock": true,
+            "semitones": 0,
+            "effectiveSemitones": 0
+          },
+          "sourceGeometry": [
+            {
+              "index": 0,
+              "sampleRate": 22050,
+              "frames": 1058400,
+              "channels": 2,
+              "duration": 48,
+              "paddedTailSeconds": 0,
+              "trimmedTailSeconds": 0,
+              "decodedBytes": 8467200
+            }
+          ],
+          "groups": [
+            {
+              "id": 2,
+              "origin": 23,
+              "start": 23.5,
+              "end": 33,
+              "nodeCount": 1,
+              "retainedPCMBytes": 3648000,
+              "retainedChunks": 19,
+              "latency": 0.12,
+              "role": "selected"
+            }
+          ],
+          "retainedPCMBytes": 3648000,
+          "inFlightPCMBytes": 0,
+          "decodedBytes": 8467200,
+          "policy": {
+            "direction": "forward",
+            "rate": [
+              0.25,
+              4
+            ],
+            "effectiveSemitones": [
+              -24,
+              24
+            ],
+            "chunkSeconds": 0.5,
+            "prerollSeconds": 1,
+            "lookaheadSeconds": 8,
+            "driverMs": 50,
+            "crossfadeSeconds": 0.01,
+            "srcTaps": 32,
+            "srcPhases": 1024,
+            "decodedSources": "Whole decoded AudioBuffers remain caller-owned; only processor PCM copies are windowed.",
+            "unsupported": [
+              "reverse",
+              "loop",
+              "Stem Slip",
+              "incremental compressed-file decoding"
+            ],
+            "quality": "Independent32-tap windowed-sinc normalization and10ms group crossfade; vendor sonic equivalence and artifact-free transitions are unverified."
+          },
+          "lastError": null
+        }
+      }
+    },
+    {
+      "name": "Whole-deck raw scratch release restores live keylock through scheduled engine handoff",
+      "passed": true,
+      "evidence": {
+        "held": {
+          "start": 5.71,
+          "duration": 0.08,
+          "coverage": 1,
+          "frames": 3840,
+          "rms": 0,
+          "peak": 0,
+          "frequencyHz": null,
+          "maxBelow005RunMs": 80,
+          "envelopeFit": {
+            "frequency": 1,
+            "error": 0,
+            "relativeAmplitude": 0
+          }
+        },
+        "beforeRelease": 5.7973333333333334,
+        "when": 6.036666666666666,
+        "transition": {
+          "start": 5.956666666666666,
+          "duration": 0.35,
+          "coverage": 1,
+          "frames": 16800,
+          "rms": 0.09046366924945395,
+          "peak": 0.1712740659713745,
+          "frequencyHz": 933.2308087084585,
+          "maxBelow005RunMs": 0,
+          "envelopeFit": {
+            "frequency": 4.98,
+            "error": 0.001515760739369109,
+            "relativeAmplitude": 0.3948055186920915
+          }
+        },
+        "restored": {
+          "start": 6.286666666666666,
+          "duration": 0.3,
+          "coverage": 1,
+          "frames": 14400,
+          "rms": 0.08163518475807395,
+          "peak": 0.17161332070827484,
+          "frequencyHz": 880.4201656061595,
+          "maxBelow005RunMs": 0,
+          "envelopeFit": {
+            "frequency": 4.98,
+            "error": 0.00001159572695153422,
+            "relativeAmplitude": 0.4283358979888614
+          }
+        },
+        "snapshot": {
+          "byteAccounting": "Acknowledged retained PCM and in-flight chunk copies only; excludes decoded inputs, SRC tables and opaque WASM heaps.",
+          "disposed": false,
+          "state": {
+            "when": 6.036666666666666,
+            "position": 24.993333333337823,
+            "playing": true,
+            "rate": 1.25,
+            "keylock": true,
+            "semitones": 0,
+            "effectiveSemitones": 0
+          },
+          "sourceGeometry": [
+            {
+              "index": 0,
+              "sampleRate": 22050,
+              "frames": 1058400,
+              "channels": 2,
+              "duration": 48,
+              "paddedTailSeconds": 0,
+              "trimmedTailSeconds": 0,
+              "decodedBytes": 8467200
+            }
+          ],
+          "groups": [
+            {
+              "id": 1,
+              "origin": 23,
+              "start": 23.5,
+              "end": 33,
+              "nodeCount": 1,
+              "retainedPCMBytes": 3648000,
+              "retainedChunks": 19,
+              "latency": 0.12,
+              "role": "selected"
+            }
+          ],
+          "retainedPCMBytes": 3648000,
+          "inFlightPCMBytes": 0,
+          "decodedBytes": 8467200,
+          "policy": {
+            "direction": "forward",
+            "rate": [
+              0.25,
+              4
+            ],
+            "effectiveSemitones": [
+              -24,
+              24
+            ],
+            "chunkSeconds": 0.5,
+            "prerollSeconds": 1,
+            "lookaheadSeconds": 8,
+            "driverMs": 50,
+            "crossfadeSeconds": 0.01,
+            "srcTaps": 32,
+            "srcPhases": 1024,
+            "decodedSources": "Whole decoded AudioBuffers remain caller-owned; only processor PCM copies are windowed.",
+            "unsupported": [
+              "reverse",
+              "loop",
+              "Stem Slip",
+              "incremental compressed-file decoding"
+            ],
+            "quality": "Independent32-tap windowed-sinc normalization and10ms group crossfade; vendor sonic equivalence and artifact-free transitions are unverified."
+          },
+          "lastError": null
+        }
+      }
+    },
+    {
+      "name": "Actual five-source engine handoff transfers sole history output and keeps selected vocal level",
+      "passed": true,
+      "evidence": {
+        "before": {
+          "start": 7.206666666666666,
+          "duration": 0.3,
+          "coverage": 1,
+          "frames": 14400,
+          "rms": 0.08703809147946984,
+          "peak": 0.1710583120584488,
+          "frequencyHz": 173.36534932455112,
+          "maxBelow005RunMs": 0,
+          "envelopeFit": {
+            "frequency": 5.02,
+            "error": 0.00022752789887866068,
+            "relativeAmplitude": 0.4215740866467823
+          }
+        },
+        "transition": {
+          "start": 9.359333333333334,
+          "duration": 0.35,
+          "coverage": 1,
+          "frames": 16800,
+          "rms": 0.09153293257076263,
+          "peak": 0.17395830154418945,
+          "frequencyHz": 184.8114330254097,
+          "maxBelow005RunMs": 0,
+          "envelopeFit": {
+            "frequency": 4.94,
+            "error": 0.0015740550502765117,
+            "relativeAmplitude": 0.40854939298015963
+          }
+        },
+        "after": {
+          "start": 9.689333333333334,
+          "duration": 0.3,
+          "coverage": 1,
+          "frames": 14400,
+          "rms": 0.08120370479249382,
+          "peak": 0.17142640054225922,
+          "frequencyHz": 173.39934949435252,
+          "maxBelow005RunMs": 0,
+          "envelopeFit": {
+            "frequency": 5,
+            "error": 0.0002566503015294232,
+            "relativeAmplitude": 0.42689562520512014
+          }
+        },
+        "sourceCount": 5
+      }
+    },
+    {
+      "name": "Pause cancels current/future engine voice, pending ownership and retiring groups while control survives",
+      "passed": true,
+      "evidence": {
+        "silence": {
+          "start": 10.2,
+          "duration": 0.3,
+          "coverage": 1,
+          "frames": 14400,
+          "rms": 0,
+          "peak": 0,
+          "frequencyHz": null,
+          "maxBelow005RunMs": 300,
+          "envelopeFit": {
+            "frequency": 1,
+            "error": 0,
+            "relativeAmplitude": 0
+          }
+        },
+        "controlTone": {
+          "start": 10.2,
+          "duration": 0.3,
+          "coverage": 1,
+          "frames": 14400,
+          "rms": 0.08484084558762918,
+          "peak": 0.11999998986721039,
+          "frequencyHz": 306.9999887925056,
+          "maxBelow005RunMs": 0,
+          "envelopeFit": {
+            "frequency": 8,
+            "error": 0.000012393918819731951,
+            "relativeAmplitude": 0.001718764103364456
+          }
+        },
+        "position": 25.02000000000673
+      }
+    }
+  ],
+  "fatalErrors": [],
+  "sampleRate": 48000,
+  "startedAt": "2026-10-17T08:46:33.244Z",
+  "scope": "Actual production AudioEngine start/rate/pitch/seek/scratch-release methods with actual WASM and routed captured PCM. No native/hardware, reverse/loop/StemSlip live integration, decoded-memory or vendor sonic-quality acceptance.",
+  "sourceHashes": {
+    "engine.js": "59df85253c4a731559e6d52bb2e1ca7a4d2797121016172a9fe4a1aeb6fc2e36",
+    "keylock-live.js": "a96cd1d244e402957b4daedb823cb2015f759d4a46df9672954b9bba1f944e78",
+    "keylock-engine-harness.js": "f9a9476a7db1122d3742cda893aa0abd9f2e0aa4113535f5e1939135cca3d139"
+  },
+  "budgets": {
+    "pitchRelative": 0.01,
+    "rateEnvelopeHz": 0.15,
+    "releaseMaximumBelow005Ms": 20
+  },
+  "captureIntegrity": [
+    {
+      "label": "engine-deck-bus",
+      "preflight": {
+        "type": "preflight",
+        "id": "engine-deck-bus-preflight-1",
+        "firstFrame": 2304,
+        "lastFrame": 10496,
+        "consecutive": 64,
+        "startupGaps": []
+      },
+      "arm": {
+        "type": "armed",
+        "id": "engine-deck-bus-arm-2",
+        "firstFrame": 10496,
+        "firstSequence": 76,
+        "startupGaps": []
+      },
+      "fence": {
+        "type": "finished",
+        "id": "engine-deck-bus-finish-3",
+        "lastFrame": 504448,
+        "lastSequence": 3934
+      },
+      "blocks": 3859,
+      "coverage": 1
+    },
+    {
+      "label": "independent-control",
+      "preflight": {
+        "type": "preflight",
+        "id": "independent-control-preflight-1",
+        "firstFrame": 2304,
+        "lastFrame": 10496,
+        "consecutive": 64,
+        "startupGaps": []
+      },
+      "arm": {
+        "type": "armed",
+        "id": "independent-control-arm-2",
+        "firstFrame": 10496,
+        "firstSequence": 76,
+        "startupGaps": []
+      },
+      "fence": {
+        "type": "finished",
+        "id": "independent-control-finish-3",
+        "lastFrame": 504704,
+        "lastSequence": 3936
+      },
+      "blocks": 3861,
+      "coverage": 1
+    }
+  ],
+  "passed": 6,
+  "failed": 0,
+  "completed": true,
+  "durationMs": 10511.700000047684
+}

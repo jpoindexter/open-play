@@ -2,6 +2,7 @@ import { createStemPreparation } from "./stems.js";
 import { createStemWaveformModel, paintStemOverview, paintStemDetail, paintOriginalOverview, paintOriginalDetail } from "./stem-waveform.js";
 import { normalizeFXTempoSettings } from "./fx-tempo.js";
 import { createStemSlipControls } from "./stem-slip-ui.js";
+import {createDeckScratchControls, deckScratchUIPolicy} from "./deck-scratch-ui.js";
 import { snapshotVideoState, restoreVideoState } from "./video-state.js";
 import { createPitchPlay, pitchRanges, parseMusicalKey, shiftedKey, keyLabel, planKeySync } from "./pitchplay.js";
 import { analyzeBuffer } from "./analysis.js";
@@ -129,6 +130,7 @@ const state = {
 
 const stemPreparation = createStemPreparation(engine, state.decks);
 const stemSlipControls = createStemSlipControls({engine,state,prepare:ensurePreparedStems,render:renderDecks,notify});
+const deckScratchControls = createDeckScratchControls({engine,state,notify});
 if (saved.tags)
   for (const t of state.tracks) Object.assign(t, saved.tags[t.id] || {});
 const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
@@ -358,7 +360,7 @@ function renderDecks() {
       const t = d.track;
       if (d.keySync && d.keySyncTag !== t?.key) d.keySync = false;
       const displayedKey = parseMusicalKey(t?.key) ? keyLabel(shiftedKey(parseMusicalKey(t.key), d.keyShift || 0)) : t?.key || "—";
-      return `<article class="deck ${state.focus === d.index ? "focused" : ""}" style="--accent:${colors[d.index]}" data-drop-deck="${d.index}" data-focus="${d.index}"><div class="deck-head"><span class="deck-number">${d.index + 1}</span><div class="deck-title"><strong>${esc(t?.title || "Drag song here")}</strong><small>${esc(t?.artist || "Select a library track and Load")}${t ? " · " + time(t.duration) : ""}</small></div><span class="deck-key">${esc(displayedKey)}${d.keyShift ? ` (${d.keyShift > 0 ? "+" : ""}${d.keyShift})` : ""}</span><button data-action="load" data-deck="${d.index}">Load</button><button data-action="eject" data-deck="${d.index}" aria-label="Eject deck ${d.index + 1}">⏏</button></div><div class="deck-body"><div><nav class="deck-tabs" aria-label="Deck ${d.index + 1} performance modes">${["Cues", "Loops", "Stems", "Pitch", "Slicer"].map((tab) => `<button data-action="tab" data-deck="${d.index}" data-tab="${tab}" class="${d.tab === tab ? "active" : ""}">${tab}</button>`).join("")}</nav><div class="pads">${padMarkup(d)}</div>${d.tab === "Stems" ? `<div class="loop-line"><button data-action="stemPrepare" data-deck="${d.index}">Preparation</button><small role="status" data-stem-status="${d.index}">${esc(t?.stemState || "Stems will prepare locally on first use.")}</small></div>${stemSlipControls.markup(d)}` : ""}${d.tab === "Pitch" ? `<div class="loop-line"><label>Pitch range<select data-pitch-range="${d.index}" aria-label="Deck ${d.index + 1} Pitch Play range">${["Down", "Middle", "Up"].map(range => `<option ${range === (d.pitchRangeMode || "Middle") ? "selected" : ""}>${range}</option>`).join("")}</select></label><small>Shift-pad selects cue · hold to audition</small></div>` : ""}${d.tab === "Slicer" ? `<div class="loop-line"><label>Domain<select data-slice-domain="${d.index}" aria-label="Deck ${d.index + 1} slicer domain">${[2, 4, 8, 16, 32, 64].map((v) => `<option ${v === (d.slicerDomain || 8) ? "selected" : ""}>${v}</option>`).join("")}</select></label><label>Quantize<select data-slice-quant="${d.index}" aria-label="Deck ${d.index + 1} slice quantize">${[0.125, 0.25, 0.5, 1].map((v) => `<option ${v === (d.sliceQuant || 1) ? "selected" : ""}>${v}</option>`).join("")}</select></label><button data-action="slicerLoop" data-deck="${d.index}" class="${d.slicerLoop ? "active" : ""}">Slicer loop</button></div>` : ""}<div class="loop-line"><button data-action="loopHalf" data-deck="${d.index}">½</button><button data-action="loop" data-deck="${d.index}" class="${d.loop ? "active" : ""}">Loop ${d.loopLength}</button><button data-action="loopDouble" data-deck="${d.index}">×2</button><button data-action="loopIn" data-deck="${d.index}">IN</button><button data-action="loopOut" data-deck="${d.index}">OUT</button><button data-action="loopSave" data-deck="${d.index}">Save</button></div><div class="loop-line"><button data-action="jumpBack" data-deck="${d.index}">← ${d.loopLength}</button><button data-action="roll" data-deck="${d.index}">Hold roll</button><button data-action="jumpForward" data-deck="${d.index}">${d.loopLength} →</button><button data-action="grid" data-deck="${d.index}">Edit grid</button></div></div><div class="deck-disc"><div class="transport"><button data-action="sync" data-deck="${d.index}" class="${d.sync ? "active" : ""}">SYNC</button><button data-action="cue" data-deck="${d.index}" title="Temporary cue">▮◀</button><button data-action="play" data-deck="${d.index}" aria-label="Play or pause deck ${d.index + 1}" class="${d.playing ? "active" : ""}">${d.playing ? "❚❚" : "▶"}</button></div><div class="platter" id="platter-${d.index}"><strong>${t?.bpm ? (t.bpm * d.rate).toFixed(1) : "—"}</strong><small>BPM · ${((d.rate - 1) * 100).toFixed(1)}%</small><time id="time-${d.index}">${time(engine.position(d))}</time><small id="remain-${d.index}">−${time((t?.duration || 0) - engine.position(d))}</small></div></div><label class="tempo-control" title="Tempo; enable key lock to preserve pitch">±${d.pitchRange}%<input type="range" min="${-d.pitchRange}" max="${d.pitchRange}" step=".1" value="${(d.rate - 1) * 100}" data-tempo="${d.index}" aria-label="Deck ${d.index + 1} tempo"></label></div><div class="deck-foot"><select data-mode="${d.index}" aria-label="Deck ${d.index + 1} mode">${["INT", "REL", "ABS", "THRU", "WIR"].map((m) => `<option ${d.mode === m ? "selected" : ""}>${m}</option>`).join("")}</select>${[
+      return `<article class="deck ${state.focus === d.index ? "focused" : ""}" style="--accent:${colors[d.index]}" data-drop-deck="${d.index}" data-focus="${d.index}"><div class="deck-head"><span class="deck-number">${d.index + 1}</span><div class="deck-title"><strong>${esc(t?.title || "Drag song here")}</strong><small>${esc(t?.artist || "Select a library track and Load")}${t ? " · " + time(t.duration) : ""}</small></div><span class="deck-key">${esc(displayedKey)}${d.keyShift ? ` (${d.keyShift > 0 ? "+" : ""}${d.keyShift})` : ""}</span><button data-action="load" data-deck="${d.index}">Load</button><button data-action="eject" data-deck="${d.index}" aria-label="Eject deck ${d.index + 1}">⏏</button></div><div class="deck-body"><div><nav class="deck-tabs" aria-label="Deck ${d.index + 1} performance modes">${["Cues", "Loops", "Stems", "Pitch", "Slicer"].map((tab) => `<button data-action="tab" data-deck="${d.index}" data-tab="${tab}" class="${d.tab === tab ? "active" : ""}">${tab}</button>`).join("")}</nav><div class="pads">${padMarkup(d)}</div>${d.tab === "Stems" ? `<div class="loop-line"><button data-action="stemPrepare" data-deck="${d.index}">Preparation</button><small role="status" data-stem-status="${d.index}">${esc(t?.stemState || "Stems will prepare locally on first use.")}</small></div>${stemSlipControls.markup(d)}` : ""}${d.tab === "Pitch" ? `<div class="loop-line"><label>Pitch range<select data-pitch-range="${d.index}" aria-label="Deck ${d.index + 1} Pitch Play range">${["Down", "Middle", "Up"].map(range => `<option ${range === (d.pitchRangeMode || "Middle") ? "selected" : ""}>${range}</option>`).join("")}</select></label><small>Shift-pad selects cue · hold to audition</small></div>` : ""}${d.tab === "Slicer" ? `<div class="loop-line"><label>Domain<select data-slice-domain="${d.index}" aria-label="Deck ${d.index + 1} slicer domain">${[2, 4, 8, 16, 32, 64].map((v) => `<option ${v === (d.slicerDomain || 8) ? "selected" : ""}>${v}</option>`).join("")}</select></label><label>Quantize<select data-slice-quant="${d.index}" aria-label="Deck ${d.index + 1} slice quantize">${[0.125, 0.25, 0.5, 1].map((v) => `<option ${v === (d.sliceQuant || 1) ? "selected" : ""}>${v}</option>`).join("")}</select></label><button data-action="slicerLoop" data-deck="${d.index}" class="${d.slicerLoop ? "active" : ""}">Slicer loop</button></div>` : ""}<div class="loop-line"><button data-action="loopHalf" data-deck="${d.index}">½</button><button data-action="loop" data-deck="${d.index}" class="${d.loop ? "active" : ""}">Loop ${d.loopLength}</button><button data-action="loopDouble" data-deck="${d.index}">×2</button><button data-action="loopIn" data-deck="${d.index}">IN</button><button data-action="loopOut" data-deck="${d.index}">OUT</button><button data-action="loopSave" data-deck="${d.index}">Save</button></div><div class="loop-line"><button data-action="jumpBack" data-deck="${d.index}">← ${d.loopLength}</button><button data-action="roll" data-deck="${d.index}">Hold roll</button><button data-action="jumpForward" data-deck="${d.index}">${d.loopLength} →</button><button data-action="grid" data-deck="${d.index}">Edit grid</button></div></div><div class="deck-disc"><div class="transport"><button data-action="sync" data-deck="${d.index}" class="${d.sync ? "active" : ""}">SYNC</button><button data-action="cue" data-deck="${d.index}" title="Temporary cue">▮◀</button><button data-action="play" data-deck="${d.index}" aria-label="Play or pause deck ${d.index + 1}" class="${d.playing ? "active" : ""}">${d.playing ? "❚❚" : "▶"}</button></div><div class="platter" id="platter-${d.index}" data-deck-scratch="${d.index}" tabindex="0" role="button" aria-label="Scratch deck ${d.index + 1}" aria-describedby="scratch-help-${d.index}" aria-busy="false"><strong>${t?.bpm ? (t.bpm * d.rate).toFixed(1) : "—"}</strong><small>BPM · ${((d.rate - 1) * 100).toFixed(1)}%</small><time id="time-${d.index}">${time(engine.position(d))}</time><small id="remain-${d.index}">−${time((t?.duration || 0) - engine.position(d))}</small></div><small class="scratch-status" role="status" data-deck-scratch-status="${d.index}">Drag platter to scratch</small><span class="sr-only" id="scratch-help-${d.index}">${esc(deckScratchUIPolicy.keyboard)}</span></div><label class="tempo-control" title="Tempo; enable key lock to preserve pitch">±${d.pitchRange}%<input type="range" min="${-d.pitchRange}" max="${d.pitchRange}" step=".1" value="${(d.rate - 1) * 100}" data-tempo="${d.index}" aria-label="Deck ${d.index + 1} tempo"></label></div><div class="deck-foot"><select data-mode="${d.index}" aria-label="Deck ${d.index + 1} mode">${["INT", "REL", "ABS", "THRU", "WIR"].map((m) => `<option ${d.mode === m ? "selected" : ""}>${m}</option>`).join("")}</select>${[
         ["keylock", "Key lock"],
         ["slip", "Slip"],
         ["reverse", "Reverse"],
@@ -525,6 +527,7 @@ async function load(index, id = state.selected, options = {}) {
   const request = (deckLoadRequests.get(d) || 0) + 1;
   deckLoadRequests.set(d, request);
   const old = d.track ? { id: d.track.id, position: engine.position(d) } : null;
+  deckScratchControls.cancelDeck(d);
   pitchPlay.cancelDeck(d);
   stemSlipControls.cancelDeck(d);
   engine.pause(d);
@@ -630,6 +633,7 @@ async function deckAction(action, index, el, event = {}) {
   if (action === "eject") {
     const request = (deckLoadRequests.get(d) || 0) + 1;
     deckLoadRequests.set(d, request);
+    deckScratchControls.cancelDeck(d);
     pitchPlay.cancelDeck(d);
     stemSlipControls.cancelDeck(d);
     d.keySync = false;
@@ -784,7 +788,7 @@ async function deckAction(action, index, el, event = {}) {
     if (!d.slip) await engine.endSlip(d);
   }
   if (["keyDown", "keyUp", "keyReset"].includes(action)) {
-    if (action !== "keyReset" && !parseMusicalKey(d.track.key)) return notify("Analyze or enter a recognized key first.");
+    deckScratchControls.cancelDeck(d);
     pitchPlay.cancelDeck(d);
     d.keySync = false;
     const semitones = action === "keyReset" ? 0 : (d.keyShift || 0) + (action === "keyUp" ? 1 : -1);
@@ -796,6 +800,7 @@ async function deckAction(action, index, el, event = {}) {
     else {
       const match = planKeySync(d,state.decks.slice(0,state.deckCount));
       if (!match.ok) return notify(match.reason);
+      deckScratchControls.cancelDeck(d);
       pitchPlay.cancelDeck(d);
       await engine.setPitch(d,{keylock:true,semitones:match.semitones});
       d.keySync = true; d.keySyncTag = d.track.key;
@@ -1569,6 +1574,8 @@ function tick() {
       d.keySync = false;
       document.querySelector(`[data-action="keySync"][data-deck="${d.index}"]`)?.classList.remove("active");
     }
+    const playButton = document.querySelector(`[data-action="play"][data-deck="${d.index}"]`);
+    if (playButton) {playButton.classList.toggle('active', !!d.playing); const label = d.playing ? '❚❚' : '▶'; if (playButton.textContent !== label) playButton.textContent = label;}
     const p = engine.position(d),
       t = $(`#time-${d.index}`);
     if (t) t.textContent = time(p);
@@ -1578,18 +1585,19 @@ function tick() {
     if (head) head.style.left = `${(p / (d.track?.duration || 48)) * 100}%`;
     const platter = $(`#platter-${d.index}`);
     if (platter && !state.settings["Reduced Motion"])
-      platter.style.setProperty("--rotation", `${p * 270}deg`);
+      platter.style.setProperty("--rotation", `${p * (state.settings["Virtual Deck Speed"] === "33 RPM" ? 198 : 270)}deg`);
   }
   $("#master-meter").value = engine.meter();
   $("#audio-status").textContent =
     `${state.decks.filter((d) => d.playing).length} decks playing · ${engine.ctx?.sampleRate || "—"} Hz browser · hardware simulated`;
-  engine.updateFXBPMs(state.decks.map(deck => (deck.track?.bpm || 120)*deck.rate));
+  engine.updateFXBPMs(state.decks.map(deck => (deck.track?.bpm || 120)*engine.audibleRate(deck)));
   // Selection checks are O(4); only selection/async completion redraws overviews.
   if (state.decks.slice(0,state.deckCount).some(d => waveformView(d) !== overviewWaveViews[d.index])) drawWaves();
   drawDetailWave();
   flipAutomation.tick();
   panels.tick();
   stemSlipControls.tick();
+  deckScratchControls.tick();
   requestAnimationFrame(tick);
 }
 renderCrates();
@@ -1600,6 +1608,7 @@ load(1, "demo-1");
 requestAnimationFrame(tick);
 window.addEventListener("beforeunload", () => {
   if (!resetting) persist();
+  deckScratchControls.dispose();
   engine.silence();
   stemWaveforms.forEach(model => model.dispose());
 });

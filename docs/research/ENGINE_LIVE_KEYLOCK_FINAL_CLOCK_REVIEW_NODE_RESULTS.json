@@ -1,0 +1,167 @@
+{
+  "passed": 9,
+  "failed": 0,
+  "engineSHA256": "ea3d2d3b26ad5f63879ca5ad03ffbc7f86270ca353baa8da77962bb47702a28f",
+  "endEngineSHA256": "ea3d2d3b26ad5f63879ca5ad03ffbc7f86270ca353baa8da77962bb47702a28f",
+  "checks": [
+    {
+      "name": "Audible old clock remains authoritative before future new handoff and composes nested bridges",
+      "passed": true,
+      "evidence": {
+        "reported": 11,
+        "expectedOld": 11,
+        "handoff": 11.17
+      }
+    },
+    {
+      "name": "Old piecewise voice clock determines target instead of optimistic requested deck rate",
+      "passed": true,
+      "evidence": {
+        "target": 10.17,
+        "oldRate": 1,
+        "requestedRate": 2
+      }
+    },
+    {
+      "name": "End-clamped nonplaying adapter acknowledgement cannot mark deck playing",
+      "passed": true,
+      "evidence": {
+        "position": 30
+      }
+    },
+    {
+      "name": "Owned outer starts supersede stale preparation with latest rate and key settings",
+      "passed": true,
+      "evidence": {
+        "candidates": [
+          {
+            "rate": 1,
+            "semitones": 0,
+            "disposed": true
+          },
+          {
+            "rate": 2,
+            "semitones": 0,
+            "disposed": true
+          },
+          {
+            "rate": 2,
+            "semitones": 12,
+            "disposed": false
+          }
+        ],
+        "latestPlaying": true,
+        "preparationFX": [
+          {
+            "at": 10,
+            "bpm": 120
+          },
+          {
+            "at": 10,
+            "bpm": 120
+          },
+          {
+            "at": 10,
+            "bpm": 120
+          }
+        ]
+      }
+    },
+    {
+      "name": "Live rate and key commands send only changed parameters and preserve independent request fields",
+      "passed": true,
+      "evidence": {
+        "commands": [
+          {
+            "rate": 2
+          },
+          {
+            "keylock": true,
+            "semitones": 12
+          }
+        ],
+        "effectUpdateTimes": [
+          {
+            "at": 10,
+            "bpm": 120
+          }
+        ]
+      }
+    },
+    {
+      "name": "Actual legacy5-source construction records history ownership and transfers one shared output path",
+      "passed": true,
+      "evidence": {
+        "outputsPerHistory": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "oldGainTransferred": true
+      }
+    },
+    {
+      "name": "Rapid restart waits for scheduled prior retirement without disposing the audible grandparent early",
+      "passed": true,
+      "evidence": {
+        "grandparentRetiredOnlyAfterContextTime": 10.2,
+        "newCandidateTime": 10.37,
+        "firstCandidatePreserved": true
+      }
+    },
+    {
+      "name": "Audible rate composes the old bridge and switches to the prepared adapter at its boundary",
+      "passed": true,
+      "evidence": {
+        "when": 10.17,
+        "before": 1,
+        "atBoundary": 2
+      }
+    },
+    {
+      "name": "Channel and unit FX retain old audible tempo before a future rate boundary and update afterward",
+      "passed": true,
+      "evidence": {
+        "rateBoundary": 10.17,
+        "channelEffectUpdates": [
+          {
+            "at": 10,
+            "bpm": 120
+          },
+          {
+            "at": 10.17,
+            "bpm": 240
+          }
+        ],
+        "unitCalls": [
+          {
+            "at": 10,
+            "bpms": [
+              120,
+              120,
+              120,
+              120
+            ]
+          },
+          {
+            "at": 10.17,
+            "bpms": [
+              240,
+              120,
+              120,
+              120
+            ]
+          }
+        ],
+        "sourceCommands": [
+          {
+            "rate": 2
+          }
+        ],
+        "scope": "Controlled calls at/before the boundary; actual app rAF arrival and captured parameter timing remain separate proof."
+      }
+    }
+  ],
+  "scope": "Actual current AudioEngine start/control/routing/retirement methods with controlled adapter, native graph and clock collaborators. No actual browser PCM, physical hardware, native app or integrated audio acceptance. Source may be concurrently edited by parent; hashes delimit read-only review."
+}

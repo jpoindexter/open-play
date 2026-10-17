@@ -1,6 +1,8 @@
 import { createEffect } from "./effects.js";
 import { prepareExtendedEffects } from "./extended-effects.js";
 import { KeylockRenderer } from "./keylock.js";
+import { advanceDeckScratchPosition } from "./deck-scratch-kernel.js";
+import { prepareDeckScratch, createDeckScratchTransport } from "./deck-scratch.js";
 import { prepareStemHistory, createStemHistory } from "./stem-history.js";
 import { createStemExitFX } from "./stem-exit-fx.js";
 import { prepareStemSlip, createStemSlipTransport } from "./stem-slip.js";
@@ -38,6 +40,9 @@ export class AudioEngine {
     this.stemSlipOwners = new Map();
     this.stemSlipPending = new Map();
     this.stemSlipRateTokens = new Map();
+    this.deckScratchRequests = new Map();
+    this.deckScratchGeneration = 0;
+    this.retiringVoices = new Map();
   }
   init() {
     if (this.ctx) return;
@@ -148,6 +153,19 @@ export class AudioEngine {
     return b;
   }
   position(d) {
+    const live = this.voices.get(d.index)?.liveKeylock;
+    if (live) {
+      const bridge = this.voices.get(d.index).handoffBefore;
+      if (bridge && this.ctx.currentTime < bridge.until) return bridge.clock(this.ctx.currentTime);
+      return live.position();
+    }
+    const scratch = this.voices.get(d.index)?.deckScratchTransport;
+    if (scratch) {
+      const value = scratch.state();
+      if (value.phase === 'idle' && value.playing)
+        return advanceDeckScratchPosition(value.audiblePosition, Math.max(0, this.ctx.currentTime - value.audioTime) * value.rate * (value.reverse ? -1 : 1), value.duration, value.loop);
+      return value.audiblePosition;
+    }
     const split = this.voices.get(d.index)?.stemSlipTransport;
     if (split) return split.state().position;
     const pending = this.stemSlipPending.get(d.index);
@@ -168,24 +186,9 @@ export class AudioEngine {
   }
   stopSource(i, { preserveStemExit = false } = {}) {
     const source = this.voices.get(i);
-    if (source) {
-      source.stemSlipTransport?.dispose();
-      for (const item of source.sources || [source]) {
-        item.onended = null;
-        try {
-          item.stop();
-        } catch {}
-        item.disconnect();
-      }
-      const state = this.stemStates.get(i);
-      for (const history of state?.histories || []) {
-        // Detach only the voice gain; the zero-gain sink keeps recording silence.
-        const gain = source.stemGains?.[state.histories.indexOf(history) + 1];
-        if (gain) history.node.disconnect(gain);
-      }
-      for (const gain of source.stemGains || []) gain.disconnect();
-      this.voices.delete(i);
-    }
+    if (source) {this.disposeVoice(i, source); this.voices.delete(i);}
+    for (const job of this.retiringVoices.get(i) || []) {clearTimeout(job.timer); this.disposeVoice(i, job.voice);}
+    this.retiringVoices.delete(i);
     // Captured exits have their own finite source and deck bus. Replacing the
     // transport must not cut them; explicit stop must also clear orphan tails
     // when no ordinary voice remains (for example after seeking to track end).
@@ -198,7 +201,105 @@ export class AudioEngine {
       });
     }
   }
+  disposeVoice(i, source) {
+    source.stemSlipTransport?.dispose();
+    source.deckScratchTransport?.dispose();
+    source.liveOwnerController?.abort();
+    source.liveKeylock?.dispose().catch(error => this.onError?.(error));
+    for (const item of source.sources || [source]) {
+      item.onended = null; try {item.stop();} catch {} item.disconnect();
+    }
+    const state = source.stemHistoryState || this.stemStates.get(i);
+    for (const [index, history] of (state?.histories || []).entries()) {
+      const gain = source.stemGains?.[index + 1];
+      if (gain) {try {history.node.disconnect(gain);} catch {}}
+    }
+    for (const gain of [...(source.stemGains || []), ...(source.sourceGates || [])]) gain.disconnect();
+  }
+  retireVoiceAt(i, voice, when) {
+    if (!voice) return;
+    const end = when + .01;
+    for (const gate of voice.sourceGates || []) {
+      gate.gain.cancelScheduledValues(when); gate.gain.setValueAtTime(1, when); gate.gain.linearRampToValueAtTime(0, end);
+    }
+    // Legacy BufferSources have no outer gates; their own scheduled Stop uses
+    // the audio clock. Worklet voices always have gates and retire after fade.
+    for (const source of voice.sources || []) {source.onended = null; try {source.stop(when);} catch {}}
+    const jobs = this.retiringVoices.get(i) || new Set(); this.retiringVoices.set(i, jobs);
+    const job = {voice, timer: null}; jobs.add(job);
+    const poll = () => {
+      if (this.ctx.currentTime < end) {job.timer = setTimeout(poll, Math.min(100, Math.max(10, (end - this.ctx.currentTime) * 1000))); return;}
+      jobs.delete(job); if (!jobs.size) this.retiringVoices.delete(i); this.disposeVoice(i, voice);
+    };
+    job.timer = setTimeout(poll, Math.max(10, (end - this.ctx.currentTime) * 1000));
+  }
+  voiceClock(d, voice) {
+    if (voice?.liveKeylock) return at => voice.handoffBefore && at < voice.handoffBefore.until ? voice.handoffBefore.clock(at) : voice.liveKeylock.position(at);
+    if (voice?.deckScratchTransport) return at => {
+      const value = voice.deckScratchTransport.state();
+      return value.phase === 'idle' && value.playing ? advanceDeckScratchPosition(value.audiblePosition,
+        Math.max(0, at - value.audioTime) * value.rate * (value.reverse ? -1 : 1), value.duration, value.loop) : value.audiblePosition;
+    };
+    const start = d.anchorPosition, time = d.anchorTime, rate = d.rate * (d.reverse ? -1 : 1), playing = d.playing,
+      position = d.position, duration = d.track.duration, loop = d.loop ? {start:d.loopIn,end:d.loopOut} : null;
+    return at => playing ? advanceDeckScratchPosition(start, Math.max(0,at-time)*rate, duration,loop) : position;
+  }
+  audibleRate(d) {
+    const voice = this.voices.get(d.index);
+    return this.voiceRateAt(d, voice, this.ctx?.currentTime || 0);
+  }
+  voiceRateAt(d, voice, at) {
+    if (voice?.handoffBefore && at < voice.handoffBefore.until) return voice.handoffBefore.rate(at);
+    if (voice?.liveKeylock) return voice.liveKeylock.stateAt(at).rate;
+    if (voice?.deckScratchTransport) return voice.deckScratchTransport.state().rate;
+    const source = voice?.sources?.[0];
+    return source?.playbackRate ? source.playbackRate.value * (voice.timelineScale || 1) : d.rate;
+  }
+  async waitForVoiceRetirement(index, signal) {
+    const started = performance.now();
+    while (this.retiringVoices.get(index)?.size) {
+      if (signal.aborted) throw new DOMException('Live preparation superseded.', 'AbortError');
+      if (performance.now() - started > 5000) throw Object.assign(new Error('Previous live handoff did not retire within5seconds.'), {name:'TimeoutError'});
+      await new Promise(resolve => setTimeout(resolve, 20));
+    }
+  }
+  async createForwardKeylock(options) {
+    const {createLiveKeylock} = await import('./keylock-live.js');
+    return createLiveKeylock(this.ctx, options);
+  }
+  async startForwardKeylock(d, buffers, controller, current) {
+    const track = d.track, old = this.voices.get(d.index), initiallyPlaying = d.playing, oldClock = this.voiceClock(d, this.voices.get(d.index));
+    let adapter, committed = false;
+    try {
+      await this.waitForVoiceRetirement(d.index, controller.signal);
+      if (!current()) return;
+      adapter = await this.createForwardKeylock({buffers, position: this.position(d), rate: d.rate,
+        keylock: !!d.keylock, semitones: d.keyShift || 0, signal: controller.signal,
+        onEvent: event => {
+          if (this.voices.get(d.index)?.liveKeylock !== adapter) return;
+          if (event.type === 'ended') {d.position = track.duration; d.playing = false; this.stopSource(d.index, {preserveStemExit: true}); this.onEnd(d);}
+          if (event.type === 'error') {const position = adapter.position(); this.pause(d); d.position = position; this.onProcessing(d); this.onError?.(Object.assign(new Error(event.error.message), {name: event.error.name}));}
+        }});
+      if (!current()) return;
+      // Preparation can advance the old audible clock. Choose its position AT
+      // the returned future output time, rather than replaying a stale cursor.
+      const lead = Math.max(...adapter.snapshot().groups.map(group => group.latency), 0) + .05;
+      const when = this.ctx.currentTime + lead;
+      let position = this.position(d);
+      if (initiallyPlaying && old === this.voices.get(d.index)) position = oldClock(when);
+      if (position >= track.duration) position = initiallyPlaying ? track.duration : 0;
+      const ack = await adapter.start({position, when});
+      if (!current()) return;
+      const voice = {sources: [], liveKeylock: adapter, liveOwnerController: controller, stemGains: [],
+        handoffBefore: old && initiallyPlaying ? {until: ack.when, clock: oldClock, rate: at => this.voiceRateAt(d, old, at)} : null};
+      this.routeOrdinaryVoice(d, voice, adapter.outputs, buffers.length === 5, {when: ack.when, reuseVoice: old});
+      committed = true;
+      this.retireVoiceAt(d.index, old, ack.when);
+      d.position = ack.position; d.anchorPosition = ack.position; d.anchorTime = ack.when; d.playing = ack.playing;
+    } finally {if (!committed) await adapter?.dispose();}
+  }
   async start(d) {
+    this.cancelDeckScratchRequest(d);
     if (!d.track) throw new Error("Load a track first.");
     if (d.track.missing || d.track.provider)
       throw new Error(
@@ -238,7 +339,7 @@ export class AudioEngine {
       !controller.signal.aborted;
     try {
       await this.resume();
-      this.nodes[d.index].channelBpm = (track.bpm || 120) * tempo;
+      this.nodes[d.index].channelBpm = (track.bpm || 120) * this.audibleRate(d);
       await this.applyChannelFX(d.index);
       const original = await this.buffer(track);
       const stems = this.stemBuffers.get(track.id);
@@ -246,6 +347,10 @@ export class AudioEngine {
       const transformed = keylock || shift !== 0;
       const scale = transformed ? tempo : 1;
       if (!current()) return;
+      if (transformed && !d.reverse && !d.loop) {
+        await this.startForwardKeylock(d, buffers, controller, current);
+        return;
+      }
       if (transformed) {
         d.processing = true;
         this.onProcessing(d);
@@ -282,6 +387,7 @@ export class AudioEngine {
       voice.sources = sources;
       voice.timelineScale = scale;
       const stemState = stems ? this.ensureStemState(d) : null;
+      voice.stemHistoryState = stemState;
       voice.stemGains = stems
         ? sources.map((_, index) => {
             const gain = this.ctx.createGain();
@@ -338,6 +444,7 @@ export class AudioEngine {
 
   pause(d, { preserveStemExit = false } = {}) {
     const position = this.position(d);
+    this.cancelDeckScratchRequest(d);
     this.stemSlipRateTokens.set(d.index, (this.stemSlipRateTokens.get(d.index) || 0) + 1);
     this.transforms.get(d.index)?.abort();
     this.transforms.delete(d.index);
@@ -350,6 +457,13 @@ export class AudioEngine {
     this.stopSource(d.index, { preserveStemExit });
   }
   async seek(d, p) {
+    const live = this.voices.get(d.index)?.liveKeylock;
+    if (live) {
+      const position = Math.max(0, Math.min(d.track.duration, p));
+      let ack; try {ack = await live.seek(position);} catch (error) {if (error.name === 'AbortError') return; throw error;}
+      if (this.voices.get(d.index)?.liveKeylock === live) {d.position = ack.position; d.anchorPosition = ack.position; d.anchorTime = ack.when;}
+      return;
+    }
     if (d.stemSlip && d.stemSlip !== "off") {
       const was = d.playing || d.processing;
       this.pause(d, {preserveStemExit: true});
@@ -365,6 +479,7 @@ export class AudioEngine {
       await this.start(d);
   }
   async setRate(d, rate) {
+    this.cancelDeckScratchRequest(d);
     if (d.stemSlip && d.stemSlip !== "off") {
       const pending = this.stemSlipPending.get(d.index);
       if (pending?.committing) {
@@ -398,6 +513,18 @@ export class AudioEngine {
       }
       return;
     }
+    const live = this.voices.get(d.index)?.liveKeylock;
+    if (live) {
+      const previous = d.rate; d.rate = rate;
+      if (d.processing) return this.start(d); // Supersede prepared settings while old audio continues.
+      let ack; try {ack = await live.update({rate});} catch (error) {if (error.name === 'AbortError') return; if (d.rate === rate) d.rate = previous; throw error;}
+      if (this.voices.get(d.index)?.liveKeylock !== live || ack.superseded) return;
+      d.position = ack.position; d.anchorPosition = ack.position; d.anchorTime = ack.when;
+      if (this.nodes[d.index]) {this.nodes[d.index].channelBpm = (d.track.bpm || 120) * this.audibleRate(d); await this.applyChannelFX(d.index);}
+      if (this.voices.get(d.index)?.liveKeylock !== live) return;
+      if (this.fxState) {this.fxState[2][d.index] = (d.track.bpm || 120) * this.audibleRate(d); this.configureFX(...this.fxState);}
+      return;
+    }
     const p = this.position(d);
     if (d.slipOrigin) {
       d.slipOrigin.position +=
@@ -406,7 +533,7 @@ export class AudioEngine {
       d.slipOrigin.rate = rate;
     }
     const was = d.playing || d.processing;
-    const restart = d.keylock || d.keyShift || d.processing;
+    const restart = d.keylock || d.keyShift || d.processing || this.voices.get(d.index)?.deckScratchTransport;
     if (restart) this.pause(d, { preserveStemExit: true });
     d.rate = rate;
     d.position = p;
@@ -426,6 +553,12 @@ export class AudioEngine {
     }
   }
   async setLoop(d, on, start, end) {
+    if (this.voices.get(d.index)?.deckScratchTransport || this.voices.get(d.index)?.liveKeylock || this.deckScratchRequests.has(d.index)) {
+      const was = d.playing; this.pause(d, {preserveStemExit: true});
+      d.loop = on; d.loopIn = start; d.loopOut = end;
+      if (was) await this.start(d);
+      return;
+    }
     if (d.stemSlip && d.stemSlip !== "off") {
       d.loop = on; d.loopIn = start; d.loopOut = end;
       if (on) {
@@ -538,6 +671,10 @@ export class AudioEngine {
   updateFXBPMs(bpms) {
     if (!Array.isArray(bpms) || bpms.some(bpm => typeof bpm !== 'number' || !Number.isFinite(bpm) || bpm <= 0))
       throw new TypeError('FX track tempos must be finite positive numbers.');
+    for (const [index,bpm] of bpms.entries()) {
+      const node = this.nodes[index];
+      if (node && node.channelBpm !== bpm) {node.channelBpm = bpm; if (node.channelEffect) this.applyChannelFX(index).catch(error => this.onError?.(error));}
+    }
     if (!this.fxState) return false;
     const prior = this.fxState[2];
     if (prior.length === bpms.length && prior.every((bpm, index) => bpm === bpms[index])) return false;
@@ -707,6 +844,14 @@ export class AudioEngine {
       } else if (this.voices.get(d.index)?.stemSlipTransport) await this.refreshStemSlipBuffers(d);
       return;
     }
+    const live = this.voices.get(d.index)?.liveKeylock;
+    if (live) {
+      const previous = {keylock:d.keylock,keyShift:d.keyShift}; d.keylock = keylock; d.keyShift = semitones;
+      if (d.processing) return this.start(d);
+      let ack; try {ack = await live.update({keylock: !!keylock, semitones});} catch (error) {if (error.name === 'AbortError') return; if (d.keylock === keylock && d.keyShift === semitones) Object.assign(d,previous); throw error;}
+      if (this.voices.get(d.index)?.liveKeylock === live && !ack.superseded) {d.keylock = keylock; d.keyShift = semitones;}
+      return;
+    }
     const was = d.playing || d.processing;
     this.pause(d, { preserveStemExit: true });
     d.keylock = keylock;
@@ -829,6 +974,148 @@ export class AudioEngine {
     d.reverse = reverse;
     if (playing) await this.start(d);
   }
+  // Whole-deck scratch uses original PCM, independently of the pitch renderer.
+  // Ownership is invalidated synchronously before asynchronous preparation can commit.
+  cancelDeckScratchRequest(d) {
+    const request = this.deckScratchRequests.get(d.index);
+    if (!request) return;
+    this.deckScratchRequests.delete(d.index);
+    request.controller.abort();
+    // A reused transport may already have accepted Begin while its ACK is in
+    // flight. Queue its matching End before any newer owner's Begin.
+    if (!request.ready && request.transport && this.voices.get(d.index)?.deckScratchTransport === request.transport)
+      request.transport.command('end', {generation: request.transport.state().generation, owner: request.owner}).catch(error => {if (error.name !== 'AbortError') this.onError?.(error);});
+    d.scratchPreparing = false;
+  }
+  async prepareOrdinaryScratch(d) {
+    await this.resume();
+    await prepareDeckScratch(this.ctx);
+    let lastPosition = this.position(d);
+    const transport = createDeckScratchTransport(this.ctx, {
+      onState: value => {
+        lastPosition = value.audiblePosition;
+        if (!value.ended || this.voices.get(d.index)?.deckScratchTransport !== transport) return;
+        d.position = value.position; d.playing = false; this.cancelDeckScratchRequest(d);
+        this.stopSource(d.index, {preserveStemExit: true}); this.onEnd(d);
+      }, onError: error => {
+        if (this.voices.get(d.index)?.deckScratchTransport === transport) {
+          this.pause(d); d.position = lastPosition; this.onProcessing(d);
+        }
+        this.onError?.(error);
+      }
+    });
+    return transport;
+  }
+  routeOrdinaryVoice(d, voice, outputs, stems, {when = null, reuseVoice = null} = {}) {
+    const state = stems ? this.ensureStemState(d) : null;
+    voice.stemHistoryState = state;
+    voice.sourceGates = outputs.map(() => {
+      const gate = this.ctx.createGain();
+      gate.gain.value = when === null ? 1 : 0;
+      if (when !== null) {gate.gain.setValueAtTime(0, when); gate.gain.linearRampToValueAtTime(1, when + .01);}
+      return gate;
+    });
+    const reuse = stems && reuseVoice?.stemHistoryState === state && reuseVoice.stemGains?.length === 5;
+    voice.stemInitialized = reuse && reuseVoice.stemInitialized;
+    voice.stemGains = reuse ? reuseVoice.stemGains : stems ? outputs.map((_, index) => {
+      const gain = this.ctx.createGain(); gain.gain.value = 0;
+      gain.connect(index === 0 ? this.nodes[d.index].input : state.routes[index - 1]);
+      return gain;
+    }) : [];
+    if (reuse) reuseVoice.stemGains = []; // Transfer sole shared history output ownership.
+    outputs.forEach((source, i) => {
+      // A scratch node has five distinct output buses; other voices provide gains.
+      const connect = destination => voice.deckScratchTransport
+        ? source.connect(destination, i, 0) : source.connect(destination);
+      const gate = voice.sourceGates[i]; connect(gate);
+      if (state && i > 0) {
+        gate.connect(state.histories[i - 1].node);
+        if (!reuse) state.histories[i - 1].node.connect(voice.stemGains[i]);
+      } else gate.connect(stems ? voice.stemGains[i] : this.nodes[d.index].input);
+    });
+    this.voices.set(d.index, voice);
+    this.deckStates.set(d.index, d);
+    this.setCross(this.cross);
+    if (stems) this.updateStems(d);
+  }
+  async beginDeckScratch(d, owner) {
+    if (!d.track || d.track.missing || d.track.provider) return false;
+    if (typeof owner !== 'string' || !owner.length) throw new TypeError('Scratch owner required.');
+    if (d.stemSlip && d.stemSlip !== 'off') throw new Error('Turn selected-stem Slip off before whole-deck scratching.');
+    this.cancelDeckScratchRequest(d);
+    this.deckStates.set(d.index, d);
+    const request = {owner, track: d.track, controller: new AbortController(), transport: null, ready: false, closing: false, wasPlaying: !!(d.playing || d.processing)};
+    this.deckScratchRequests.set(d.index, request);
+    const current = () => this.deckScratchRequests.get(d.index) === request && d.track === request.track && !request.controller.signal.aborted;
+    let transport = this.voices.get(d.index)?.deckScratchTransport, committed = !!transport;
+    d.scratchPreparing = !transport;
+    try {
+      if (!transport) {
+        // Keep an existing ordinary voice audible while preparing, but prevent a
+        // pre-existing asynchronous buffered start from committing over this owner.
+        this.transforms.get(d.index)?.abort(); this.transforms.delete(d.index);
+        this.startTokens.set(d.index, (this.startTokens.get(d.index) || 0) + 1);
+        d.processing = false;
+        transport = await this.prepareOrdinaryScratch(d);
+        if (!current()) return false;
+        request.transport = transport;
+        const original = await this.buffer(request.track);
+        const stems = this.stemBuffers.get(request.track.id) || null;
+        const generation = ++this.deckScratchGeneration;
+        await transport.replaceBuffers({generation, original, stems, signal: request.controller.signal});
+        if (!current()) return false;
+        // The backing clock begins at commit, after the old voice's preparation span.
+        await transport.command('configure', {generation, position: this.position(d), rate: d.rate,
+          reverse: !!d.reverse, loop: d.loop ? {start: d.loopIn, end: d.loopOut} : null,
+          slip: !!d.slip, playing: request.wasPlaying, startAt: this.ctx.currentTime});
+        await transport.command('begin', {generation, owner});
+        if (!current()) return false;
+        this.stopSource(d.index, {preserveStemExit: true});
+        const voice = {sources: [], deckScratchTransport: transport, stemGains: []};
+        this.routeOrdinaryVoice(d, voice, Array(stems ? 5 : 1).fill(transport.node), stems);
+        committed = true;
+      } else {
+        request.transport = transport;
+        const generation = transport.state().generation;
+        await transport.command('begin', {generation, owner});
+        if (!current()) return false;
+      }
+      request.ready = true; d.scratchPreparing = false; d.playing = request.wasPlaying;
+      return {owner, generation: transport.state().generation};
+    } catch (error) {
+      if (current()) {this.deckScratchRequests.delete(d.index); d.scratchPreparing = false;}
+      if (error.name !== 'AbortError') throw error;
+      return false;
+    } finally {
+      if (!committed) transport?.dispose();
+      if (this.deckScratchRequests.get(d.index) === request) d.scratchPreparing = false;
+    }
+  }
+  async updateDeckScratch(d, movement, owner) {
+    const request = this.deckScratchRequests.get(d.index);
+    if (!request || !request.ready || request.closing || request.owner !== owner || request.track !== d.track || request.controller.signal.aborted) return false;
+    const transport = request.transport;
+    await transport.command('scratch', {...movement, generation: transport.state().generation, owner});
+    return this.deckScratchRequests.get(d.index) === request;
+  }
+  async endDeckScratch(d, owner, {cancel = false} = {}) {
+    const request = this.deckScratchRequests.get(d.index);
+    if (!request || request.owner !== owner || request.track !== d.track || request.closing) return false;
+    if (!request.ready) {this.cancelDeckScratchRequest(d); return false;}
+    request.closing = true;
+    const transport = request.transport;
+    const result = await transport.command('end', {generation: transport.state().generation, owner});
+    if (this.deckScratchRequests.get(d.index) !== request || d.track !== request.track) return false;
+    this.deckScratchRequests.delete(d.index); request.controller.abort();
+    d.position = result.position; d.playing = result.playing;
+    d.loop = !!result.loop; if (result.loop) {d.loopIn = result.loop.start; d.loopOut = result.loop.end;}
+    d.anchorPosition = result.position; d.anchorTime = result.audioTime;
+    // Preserve raw playback after release; transformed playback currently uses
+    // the explicit existing renderer until live adapter integration is verified.
+    if (d.playing && (d.keylock || d.keyShift)) await this.start(d);
+    return {owner, canceled: !!cancel, position: result.position, playing: result.playing};
+  }
+
   // Stem Slip is an independent browser policy, not a vendor state-table claim.
   // All positions are original-track seconds; scratch velocity is signed
   // original-track seconds per AudioContext second (bounded to +/-16).

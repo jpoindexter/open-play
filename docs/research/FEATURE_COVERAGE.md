@@ -29,7 +29,7 @@ Every feature remains in scope. A review route is not native acceptance. See [pr
 | DEK-006 | Tempo fader and pitch ranges | 2; REQ-114 REQ-115 | Measure rate changes, reset and fine adjustment without audible control discontinuities. | gpt-6-astra / high | claude-opus-5 / high |
 | DEK-007 | Key lock and independent key shift | 2; REQ-057 REQ-118 | Compare pitch/tempo behavior and artifacts across declared musical/rate ranges. | gpt-6-astra / high | claude-opus-5 / high |
 | DEK-008 | Sync, master and phase | 7; REQ-027 REQ-028 REQ-029 REQ-151 REQ-168 REQ-169 REQ-353 | Change leader, disable sync and handle tempo changes with predictable phase behavior. | gpt-6-astra / high | claude-opus-5 / high |
-| DEK-009 | Jog, nudge and scratching | 2; REQ-025 REQ-116 | Verify directional/speed response, touch release and latency with physical controls when claimed. | gpt-6-astra / high | claude-opus-5 / high |
+| DEK-009 | Jog, nudge and scratching | 3; REQ-025 REQ-116 REQ-522 | Verify directional/speed response, touch release and latency with physical controls when claimed. | gpt-6-astra / high | claude-opus-5 / high |
 | DEK-010 | Slip and reverse modes | 3; REQ-016 REQ-119 REQ-120 | Verify underlying timeline and exit position through cue, loop and scratch combinations. | gpt-6-astra / high | claude-opus-5 / high |
 | DEK-011 | Two/four and extensible decks | 2; REQ-007 REQ-146 | Operate two/four decks independently; document measured resource limits and extension path. | gpt-6.1-sol / xhigh | claude-opus-5 / high |
 | DEK-012 | Quantization and musical timing | 3; REQ-015 REQ-033 REQ-078 | Compare quantized/free commands around beat boundaries and grid corrections. | gpt-6-astra / high | claude-opus-5 / high |

@@ -1,0 +1,101 @@
+{
+  "passed": 7,
+  "failed": 0,
+  "engineSHA256": "59df85253c4a731559e6d52bb2e1ca7a4d2797121016172a9fe4a1aeb6fc2e36",
+  "endEngineSHA256": "59df85253c4a731559e6d52bb2e1ca7a4d2797121016172a9fe4a1aeb6fc2e36",
+  "checks": [
+    {
+      "name": "Audible old clock remains authoritative before future new handoff and composes nested bridges",
+      "passed": true,
+      "evidence": {
+        "reported": 11,
+        "expectedOld": 11,
+        "handoff": 11.17
+      }
+    },
+    {
+      "name": "Old piecewise voice clock determines target instead of optimistic requested deck rate",
+      "passed": true,
+      "evidence": {
+        "target": 10.17,
+        "oldRate": 1,
+        "requestedRate": 2
+      }
+    },
+    {
+      "name": "End-clamped nonplaying adapter acknowledgement cannot mark deck playing",
+      "passed": true,
+      "evidence": {
+        "position": 30
+      }
+    },
+    {
+      "name": "Owned outer starts supersede stale preparation with latest rate and key settings",
+      "passed": true,
+      "evidence": {
+        "candidates": [
+          {
+            "rate": 1,
+            "semitones": 0,
+            "disposed": true
+          },
+          {
+            "rate": 2,
+            "semitones": 0,
+            "disposed": true
+          },
+          {
+            "rate": 2,
+            "semitones": 12,
+            "disposed": false
+          }
+        ],
+        "latestPlaying": true
+      }
+    },
+    {
+      "name": "Live rate and key commands send only changed parameters and preserve independent request fields",
+      "passed": true,
+      "evidence": {
+        "commands": [
+          {
+            "rate": 2
+          },
+          {
+            "keylock": true,
+            "semitones": 12
+          }
+        ],
+        "effectUpdateTimes": [
+          {
+            "at": 10,
+            "bpm": 240
+          }
+        ]
+      }
+    },
+    {
+      "name": "Actual legacy5-source construction records history ownership and transfers one shared output path",
+      "passed": true,
+      "evidence": {
+        "outputsPerHistory": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "oldGainTransferred": true
+      }
+    },
+    {
+      "name": "Rapid restart waits for scheduled prior retirement without disposing the audible grandparent early",
+      "passed": true,
+      "evidence": {
+        "grandparentRetiredOnlyAfterContextTime": 10.2,
+        "newCandidateTime": 10.37,
+        "firstCandidatePreserved": true
+      }
+    }
+  ],
+  "scope": "Actual current AudioEngine start/control/routing/retirement methods with controlled adapter, native graph and clock collaborators. No actual browser PCM, physical hardware, native app or integrated audio acceptance. Source may be concurrently edited by parent; hashes delimit read-only review."
+}

@@ -1,0 +1,1623 @@
+{
+  "checks": [
+    {
+      "name": "Actual22050Hz source prepares bounded normalized window and begins at measured output time",
+      "passed": true,
+      "evidence": {
+        "captureReadiness": [
+          {
+            "label": "single",
+            "preflight": {
+              "type": "preflight",
+              "id": "single-preflight-1",
+              "firstFrame": 5376,
+              "lastFrame": 13568,
+              "consecutive": 64,
+              "startupGaps": []
+            },
+            "arm": {
+              "type": "armed",
+              "id": "single-arm-2",
+              "firstFrame": 13568,
+              "firstSequence": 102,
+              "startupGaps": []
+            }
+          },
+          {
+            "label": "control",
+            "preflight": {
+              "type": "preflight",
+              "id": "control-preflight-1",
+              "firstFrame": 5376,
+              "lastFrame": 13568,
+              "consecutive": 64,
+              "startupGaps": []
+            },
+            "arm": {
+              "type": "armed",
+              "id": "control-arm-2",
+              "firstFrame": 13568,
+              "firstSequence": 102,
+              "startupGaps": []
+            }
+          }
+        ],
+        "ack": {
+          "when": 0.41333333333333333,
+          "position": 0,
+          "playing": true,
+          "rate": 1,
+          "keylock": true,
+          "semitones": 0,
+          "effectiveSemitones": 0,
+          "group": 1,
+          "origin": 0,
+          "latencyLead": 0.12,
+          "transitionSeconds": 0,
+          "superseded": false
+        },
+        "observed": {
+          "start": 0.6633333333333333,
+          "duration": 0.4,
+          "coverage": 1,
+          "frames": 19200,
+          "rms": 0.09515156599294583,
+          "peak": 0.17444226145744324,
+          "frequencyHz": 440.3667068653134,
+          "maxBelow005RunMs": 0,
+          "envelopeFit": {
+            "frequency": 4,
+            "error": 0.000020966276828820584,
+            "relativeAmplitude": 0.451773692881552
+          }
+        },
+        "onset": 0.4093333333333333,
+        "onsetMinusRequested": -0.0040000000000000036,
+        "snapshot": {
+          "byteAccounting": "Acknowledged retained PCM and in-flight chunk copies only; excludes decoded inputs, SRC tables and opaque WASM heaps.",
+          "disposed": false,
+          "state": {
+            "when": 0.41333333333333333,
+            "position": 0.6639999999999999,
+            "playing": true,
+            "rate": 1,
+            "keylock": true,
+            "semitones": 0,
+            "effectiveSemitones": 0
+          },
+          "sourceGeometry": [
+            {
+              "index": 0,
+              "sampleRate": 22050,
+              "frames": 1058400,
+              "channels": 2,
+              "duration": 48,
+              "paddedTailSeconds": 0,
+              "trimmedTailSeconds": 0,
+              "decodedBytes": 8467200
+            }
+          ],
+          "groups": [
+            {
+              "id": 1,
+              "origin": 0,
+              "start": 0,
+              "end": 9,
+              "nodeCount": 1,
+              "retainedPCMBytes": 3456000,
+              "retainedChunks": 18,
+              "latency": 0.12,
+              "role": "selected"
+            }
+          ],
+          "retainedPCMBytes": 3456000,
+          "inFlightPCMBytes": 0,
+          "decodedBytes": 8467200,
+          "policy": {
+            "direction": "forward",
+            "rate": [
+              0.25,
+              4
+            ],
+            "effectiveSemitones": [
+              -24,
+              24
+            ],
+            "chunkSeconds": 0.5,
+            "prerollSeconds": 1,
+            "lookaheadSeconds": 8,
+            "driverMs": 50,
+            "crossfadeSeconds": 0.01,
+            "srcTaps": 32,
+            "srcPhases": 1024,
+            "decodedSources": "Whole decoded AudioBuffers remain caller-owned; only processor PCM copies are windowed.",
+            "unsupported": [
+              "reverse",
+              "loop",
+              "Stem Slip",
+              "incremental compressed-file decoding"
+            ],
+            "quality": "Independent32-tap windowed-sinc normalization and10ms group crossfade; vendor sonic equivalence and artifact-free transitions are unverified."
+          },
+          "lastError": null
+        }
+      }
+    },
+    {
+      "name": "Same live node1→1.25→.8 preserves pitch and actual source-modulation rate",
+      "passed": true,
+      "evidence": {
+        "measurements": [
+          {
+            "ack": {
+              "when": 1.2026666666666668,
+              "position": 0.7893333333333334,
+              "playing": true,
+              "rate": 1.25,
+              "keylock": true,
+              "semitones": 0,
+              "effectiveSemitones": 0,
+              "group": 1,
+              "origin": 0,
+              "latencyLead": 0.12,
+              "transitionSeconds": 0,
+              "superseded": false
+            },
+            "observed": {
+              "start": 1.4526666666666668,
+              "duration": 1.3,
+              "coverage": 1,
+              "frames": 62400,
+              "rms": 0.0874407258403938,
+              "peak": 0.1715913563966751,
+              "frequencyHz": 440.33119318996825,
+              "maxBelow005RunMs": 0,
+              "envelopeFit": {
+                "frequency": 5,
+                "error": 0.00007935128092801183,
+                "relativeAmplitude": 0.425939951289318
+              }
+            }
+          },
+          {
+            "ack": {
+              "when": 2.888,
+              "position": 2.896,
+              "playing": true,
+              "rate": 0.8,
+              "keylock": true,
+              "semitones": 0,
+              "effectiveSemitones": 0,
+              "group": 1,
+              "origin": 0,
+              "latencyLead": 0.12,
+              "transitionSeconds": 0,
+              "superseded": false
+            },
+            "observed": {
+              "start": 3.138,
+              "duration": 1.3,
+              "coverage": 1,
+              "frames": 62400,
+              "rms": 0.08903900813891437,
+              "peak": 0.1751547008752823,
+              "frequencyHz": 440.4207642327605,
+              "maxBelow005RunMs": 0,
+              "envelopeFit": {
+                "frequency": 3.2,
+                "error": 0.00007040661612321003,
+                "relativeAmplitude": 0.4595622634524241
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "Independent live keyshift changes actual pitch and restores without node replacement",
+      "passed": true,
+      "evidence": {
+        "up": {
+          "when": 4.578666666666667,
+          "position": 4.2485333333333335,
+          "playing": true,
+          "rate": 0.8,
+          "keylock": true,
+          "semitones": 12,
+          "effectiveSemitones": 12,
+          "group": 1,
+          "origin": 0,
+          "latencyLead": 0.12,
+          "transitionSeconds": 0,
+          "superseded": false
+        },
+        "higher": {
+          "start": 4.828666666666667,
+          "duration": 0.3,
+          "coverage": 1,
+          "frames": 14400,
+          "rms": 0.08808762276376862,
+          "peak": 0.17202992737293243,
+          "frequencyHz": 880.5388118944294,
+          "maxBelow005RunMs": 0,
+          "envelopeFit": {
+            "frequency": 3.28,
+            "error": 0.000010727727275040844,
+            "relativeAmplitude": 0.4514053232185691
+          }
+        },
+        "down": {
+          "when": 5.2666666666666675,
+          "position": 4.798933333333334,
+          "playing": true,
+          "rate": 0.8,
+          "keylock": true,
+          "semitones": 0,
+          "effectiveSemitones": 0,
+          "group": 1,
+          "origin": 0,
+          "latencyLead": 0.12,
+          "transitionSeconds": 0,
+          "superseded": false
+        },
+        "restored": {
+          "start": 5.5166666666666675,
+          "duration": 0.3,
+          "coverage": 1,
+          "frames": 14400,
+          "rms": 0.08929984926702987,
+          "peak": 0.17511852085590363,
+          "frequencyHz": 440.424076536909,
+          "maxBelow005RunMs": 0,
+          "envelopeFit": {
+            "frequency": 3.2,
+            "error": 0.000015100785023118628,
+            "relativeAmplitude": 0.4605341746609209
+          }
+        }
+      }
+    },
+    {
+      "name": "Near seek uses current window; far seek rebases and measured handoff has bounded gaps",
+      "passed": true,
+      "evidence": {
+        "near": {
+          "when": 5.981333333333334,
+          "position": 8.5,
+          "playing": true,
+          "rate": 0.8,
+          "keylock": true,
+          "semitones": 0,
+          "effectiveSemitones": 0,
+          "group": 1,
+          "origin": 0,
+          "latencyLead": 0.12,
+          "transitionSeconds": 0,
+          "superseded": false
+        },
+        "nearTone": {
+          "start": 6.231333333333334,
+          "duration": 0.3,
+          "coverage": 1,
+          "frames": 14400,
+          "rms": 0.0901821012188103,
+          "peak": 0.17508114874362946,
+          "frequencyHz": 550.4280910896935,
+          "maxBelow005RunMs": 0,
+          "envelopeFit": {
+            "frequency": 3.24,
+            "error": 0.0000013299834357681506,
+            "relativeAmplitude": 0.45490605954165153
+          }
+        },
+        "far": {
+          "when": 6.733333333333333,
+          "position": 24,
+          "playing": true,
+          "rate": 0.8,
+          "keylock": true,
+          "semitones": 0,
+          "effectiveSemitones": 0,
+          "group": 2,
+          "origin": 23,
+          "latencyLead": 0.12,
+          "transitionSeconds": 0.01,
+          "superseded": false
+        },
+        "transition": {
+          "start": 6.653333333333333,
+          "duration": 0.35,
+          "coverage": 1,
+          "frames": 16800,
+          "rms": 0.0970035908434877,
+          "peak": 0.17505210638046265,
+          "frequencyHz": 798.4423682416051,
+          "maxBelow005RunMs": 0,
+          "envelopeFit": {
+            "frequency": 1,
+            "error": 0.008651112402820849,
+            "relativeAmplitude": 1.5079761927481983
+          }
+        },
+        "farTone": {
+          "start": 6.983333333333333,
+          "duration": 0.3,
+          "coverage": 1,
+          "frames": 14400,
+          "rms": 0.0901180500883833,
+          "peak": 0.17506082355976105,
+          "frequencyHz": 880.5139339544212,
+          "maxBelow005RunMs": 0,
+          "envelopeFit": {
+            "frequency": 3.26,
+            "error": 0.000010562474749120643,
+            "relativeAmplitude": 0.4529374894197021
+          }
+        },
+        "snapshot": {
+          "byteAccounting": "Acknowledged retained PCM and in-flight chunk copies only; excludes decoded inputs, SRC tables and opaque WASM heaps.",
+          "disposed": false,
+          "state": {
+            "when": 6.733333333333333,
+            "position": 24.450133333333333,
+            "playing": true,
+            "rate": 0.8,
+            "keylock": true,
+            "semitones": 0,
+            "effectiveSemitones": 0
+          },
+          "sourceGeometry": [
+            {
+              "index": 0,
+              "sampleRate": 22050,
+              "frames": 1058400,
+              "channels": 2,
+              "duration": 48,
+              "paddedTailSeconds": 0,
+              "trimmedTailSeconds": 0,
+              "decodedBytes": 8467200
+            }
+          ],
+          "groups": [
+            {
+              "id": 2,
+              "origin": 23,
+              "start": 23,
+              "end": 32.5,
+              "nodeCount": 1,
+              "retainedPCMBytes": 3648000,
+              "retainedChunks": 19,
+              "latency": 0.12,
+              "role": "selected"
+            }
+          ],
+          "retainedPCMBytes": 3648000,
+          "inFlightPCMBytes": 0,
+          "decodedBytes": 8467200,
+          "policy": {
+            "direction": "forward",
+            "rate": [
+              0.25,
+              4
+            ],
+            "effectiveSemitones": [
+              -24,
+              24
+            ],
+            "chunkSeconds": 0.5,
+            "prerollSeconds": 1,
+            "lookaheadSeconds": 8,
+            "driverMs": 50,
+            "crossfadeSeconds": 0.01,
+            "srcTaps": 32,
+            "srcPhases": 1024,
+            "decodedSources": "Whole decoded AudioBuffers remain caller-owned; only processor PCM copies are windowed.",
+            "unsupported": [
+              "reverse",
+              "loop",
+              "Stem Slip",
+              "incremental compressed-file decoding"
+            ],
+            "quality": "Independent32-tap windowed-sinc normalization and10ms group crossfade; vendor sonic equivalence and artifact-free transitions are unverified."
+          },
+          "lastError": null
+        }
+      }
+    },
+    {
+      "name": "Rate4 playback refills/drops actual chunks while processor copies stay bounded",
+      "passed": true,
+      "evidence": {
+        "ack": {
+          "when": 7.432,
+          "position": 24.558933333333332,
+          "playing": true,
+          "rate": 4,
+          "keylock": true,
+          "semitones": 0,
+          "effectiveSemitones": 0,
+          "group": 2,
+          "origin": 23,
+          "latencyLead": 0.12,
+          "transitionSeconds": 0,
+          "superseded": false
+        },
+        "observed": {
+          "start": 9.532,
+          "duration": 0.3,
+          "coverage": 1,
+          "frames": 14400,
+          "rms": 0.08723020469559777,
+          "peak": 0.14124922454357147,
+          "frequencyHz": 880.1968477418601,
+          "maxBelow005RunMs": 0,
+          "envelopeFit": {
+            "frequency": 7.92,
+            "error": 0.0013390152282902797,
+            "relativeAmplitude": 0.03028238401302007
+          }
+        },
+        "snapshot": {
+          "byteAccounting": "Acknowledged retained PCM and in-flight chunk copies only; excludes decoded inputs, SRC tables and opaque WASM heaps.",
+          "disposed": false,
+          "state": {
+            "when": 7.432,
+            "position": 34.190933333333334,
+            "playing": true,
+            "rate": 4,
+            "keylock": true,
+            "semitones": 0,
+            "effectiveSemitones": 0
+          },
+          "sourceGeometry": [
+            {
+              "index": 0,
+              "sampleRate": 22050,
+              "frames": 1058400,
+              "channels": 2,
+              "duration": 48,
+              "paddedTailSeconds": 0,
+              "trimmedTailSeconds": 0,
+              "decodedBytes": 8467200
+            }
+          ],
+          "groups": [
+            {
+              "id": 2,
+              "origin": 23,
+              "start": 33,
+              "end": 42.5,
+              "nodeCount": 1,
+              "retainedPCMBytes": 3648000,
+              "retainedChunks": 19,
+              "latency": 0.12,
+              "role": "selected"
+            }
+          ],
+          "retainedPCMBytes": 3648000,
+          "inFlightPCMBytes": 0,
+          "decodedBytes": 8467200,
+          "policy": {
+            "direction": "forward",
+            "rate": [
+              0.25,
+              4
+            ],
+            "effectiveSemitones": [
+              -24,
+              24
+            ],
+            "chunkSeconds": 0.5,
+            "prerollSeconds": 1,
+            "lookaheadSeconds": 8,
+            "driverMs": 50,
+            "crossfadeSeconds": 0.01,
+            "srcTaps": 32,
+            "srcPhases": 1024,
+            "decodedSources": "Whole decoded AudioBuffers remain caller-owned; only processor PCM copies are windowed.",
+            "unsupported": [
+              "reverse",
+              "loop",
+              "Stem Slip",
+              "incremental compressed-file decoding"
+            ],
+            "quality": "Independent32-tap windowed-sinc normalization and10ms group crossfade; vendor sonic equivalence and artifact-free transitions are unverified."
+          },
+          "lastError": null
+        }
+      }
+    },
+    {
+      "name": "Five actual positional sources retain supplied order and tolerated tail geometry",
+      "passed": true,
+      "evidence": {
+        "readiness": [
+          {
+            "label": "positional-0",
+            "preflight": {
+              "type": "preflight",
+              "id": "positional-0-preflight-1",
+              "firstFrame": 479232,
+              "lastFrame": 487424,
+              "consecutive": 64,
+              "startupGaps": []
+            },
+            "arm": {
+              "type": "armed",
+              "id": "positional-0-arm-2",
+              "firstFrame": 487424,
+              "firstSequence": 64,
+              "startupGaps": []
+            }
+          },
+          {
+            "label": "positional-1",
+            "preflight": {
+              "type": "preflight",
+              "id": "positional-1-preflight-1",
+              "firstFrame": 479232,
+              "lastFrame": 487424,
+              "consecutive": 64,
+              "startupGaps": []
+            },
+            "arm": {
+              "type": "armed",
+              "id": "positional-1-arm-2",
+              "firstFrame": 487424,
+              "firstSequence": 64,
+              "startupGaps": []
+            }
+          },
+          {
+            "label": "positional-2",
+            "preflight": {
+              "type": "preflight",
+              "id": "positional-2-preflight-1",
+              "firstFrame": 479232,
+              "lastFrame": 487424,
+              "consecutive": 64,
+              "startupGaps": []
+            },
+            "arm": {
+              "type": "armed",
+              "id": "positional-2-arm-2",
+              "firstFrame": 487424,
+              "firstSequence": 64,
+              "startupGaps": []
+            }
+          },
+          {
+            "label": "positional-3",
+            "preflight": {
+              "type": "preflight",
+              "id": "positional-3-preflight-1",
+              "firstFrame": 479232,
+              "lastFrame": 487424,
+              "consecutive": 64,
+              "startupGaps": []
+            },
+            "arm": {
+              "type": "armed",
+              "id": "positional-3-arm-2",
+              "firstFrame": 487424,
+              "firstSequence": 64,
+              "startupGaps": []
+            }
+          },
+          {
+            "label": "positional-4",
+            "preflight": {
+              "type": "preflight",
+              "id": "positional-4-preflight-1",
+              "firstFrame": 479232,
+              "lastFrame": 487424,
+              "consecutive": 64,
+              "startupGaps": []
+            },
+            "arm": {
+              "type": "armed",
+              "id": "positional-4-arm-2",
+              "firstFrame": 487424,
+              "firstSequence": 64,
+              "startupGaps": []
+            }
+          }
+        ],
+        "ack": {
+          "when": 10.282666666666666,
+          "position": 0,
+          "playing": true,
+          "rate": 1,
+          "keylock": true,
+          "semitones": 0,
+          "effectiveSemitones": 0,
+          "group": 1,
+          "origin": 0,
+          "latencyLead": 0.12,
+          "transitionSeconds": 0,
+          "superseded": false
+        },
+        "observed": [
+          {
+            "start": 10.532666666666666,
+            "duration": 0.3,
+            "coverage": 1,
+            "frames": 14400,
+            "rms": 0.09200740462324243,
+            "peak": 0.17431940138339996,
+            "frequencyHz": 330.36681497593025,
+            "maxBelow005RunMs": 0,
+            "envelopeFit": {
+              "frequency": 4,
+              "error": 0.00007218523683957333,
+              "relativeAmplitude": 0.4501430080355393
+            }
+          },
+          {
+            "start": 10.532666666666666,
+            "duration": 0.3,
+            "coverage": 1,
+            "frames": 14400,
+            "rms": 0.0920130125243363,
+            "peak": 0.17444106936454773,
+            "frequencyHz": 440.35611272660805,
+            "maxBelow005RunMs": 0,
+            "envelopeFit": {
+              "frequency": 4,
+              "error": 0.00001508889592520287,
+              "relativeAmplitude": 0.4506366327150167
+            }
+          },
+          {
+            "start": 10.532666666666666,
+            "duration": 0.3,
+            "coverage": 1,
+            "frames": 14400,
+            "rms": 0.0920184505171276,
+            "peak": 0.17451058328151703,
+            "frequencyHz": 550.3601843224286,
+            "maxBelow005RunMs": 0,
+            "envelopeFit": {
+              "frequency": 4,
+              "error": 0.0000012925661011791855,
+              "relativeAmplitude": 0.4515833164356751
+            }
+          },
+          {
+            "start": 10.532666666666666,
+            "duration": 0.3,
+            "coverage": 1,
+            "frames": 14400,
+            "rms": 0.09201631202726279,
+            "peak": 0.1744558960199356,
+            "frequencyHz": 660.3829997413886,
+            "maxBelow005RunMs": 0,
+            "envelopeFit": {
+              "frequency": 4,
+              "error": 0.000007578945188565966,
+              "relativeAmplitude": 0.45156670844796865
+            }
+          },
+          {
+            "start": 10.532666666666666,
+            "duration": 0.3,
+            "coverage": 1,
+            "frames": 14400,
+            "rms": 0.09200670566988361,
+            "peak": 0.1744161993265152,
+            "frequencyHz": 770.415738262288,
+            "maxBelow005RunMs": 0,
+            "envelopeFit": {
+              "frequency": 4,
+              "error": 0.000014138681584062768,
+              "relativeAmplitude": 0.45167346333825786
+            }
+          }
+        ],
+        "snapshot": {
+          "byteAccounting": "Acknowledged retained PCM and in-flight chunk copies only; excludes decoded inputs, SRC tables and opaque WASM heaps.",
+          "disposed": false,
+          "state": {
+            "when": 10.282666666666666,
+            "position": 0.5600000000000005,
+            "playing": true,
+            "rate": 1,
+            "keylock": true,
+            "semitones": 0,
+            "effectiveSemitones": 0
+          },
+          "sourceGeometry": [
+            {
+              "index": 0,
+              "sampleRate": 22050,
+              "frames": 264600,
+              "channels": 2,
+              "duration": 12,
+              "paddedTailSeconds": 0,
+              "trimmedTailSeconds": 0,
+              "decodedBytes": 2116800
+            },
+            {
+              "index": 1,
+              "sampleRate": 48000,
+              "frames": 573600,
+              "channels": 2,
+              "duration": 11.95,
+              "paddedTailSeconds": 0.05000000000000071,
+              "trimmedTailSeconds": 0,
+              "decodedBytes": 4588800
+            },
+            {
+              "index": 2,
+              "sampleRate": 48000,
+              "frames": 573600,
+              "channels": 2,
+              "duration": 11.95,
+              "paddedTailSeconds": 0.05000000000000071,
+              "trimmedTailSeconds": 0,
+              "decodedBytes": 4588800
+            },
+            {
+              "index": 3,
+              "sampleRate": 48000,
+              "frames": 573600,
+              "channels": 2,
+              "duration": 11.95,
+              "paddedTailSeconds": 0.05000000000000071,
+              "trimmedTailSeconds": 0,
+              "decodedBytes": 4588800
+            },
+            {
+              "index": 4,
+              "sampleRate": 48000,
+              "frames": 573600,
+              "channels": 2,
+              "duration": 11.95,
+              "paddedTailSeconds": 0.05000000000000071,
+              "trimmedTailSeconds": 0,
+              "decodedBytes": 4588800
+            }
+          ],
+          "groups": [
+            {
+              "id": 1,
+              "origin": 0,
+              "start": 0,
+              "end": 9,
+              "nodeCount": 5,
+              "retainedPCMBytes": 17280000,
+              "retainedChunks": 18,
+              "latency": 0.12,
+              "role": "selected"
+            }
+          ],
+          "retainedPCMBytes": 17280000,
+          "inFlightPCMBytes": 0,
+          "decodedBytes": 20472000,
+          "policy": {
+            "direction": "forward",
+            "rate": [
+              0.25,
+              4
+            ],
+            "effectiveSemitones": [
+              -24,
+              24
+            ],
+            "chunkSeconds": 0.5,
+            "prerollSeconds": 1,
+            "lookaheadSeconds": 8,
+            "driverMs": 50,
+            "crossfadeSeconds": 0.01,
+            "srcTaps": 32,
+            "srcPhases": 1024,
+            "decodedSources": "Whole decoded AudioBuffers remain caller-owned; only processor PCM copies are windowed.",
+            "unsupported": [
+              "reverse",
+              "loop",
+              "Stem Slip",
+              "incremental compressed-file decoding"
+            ],
+            "quality": "Independent32-tap windowed-sinc normalization and10ms group crossfade; vendor sonic equivalence and artifact-free transitions are unverified."
+          },
+          "lastError": null
+        }
+      }
+    },
+    {
+      "name": "Owner abort before future start prevents five-source resurrection while shared control survives",
+      "passed": true,
+      "evidence": {
+        "ack": {
+          "when": 11.458666666666666,
+          "position": 0,
+          "playing": true,
+          "rate": 1,
+          "keylock": true,
+          "semitones": 0,
+          "effectiveSemitones": 0,
+          "group": 1,
+          "origin": 0,
+          "latencyLead": 0.12,
+          "transitionSeconds": 0,
+          "superseded": false
+        },
+        "silence": {
+          "start": 11.608666666666666,
+          "duration": 0.3,
+          "coverage": 1,
+          "frames": 14400,
+          "rms": 0,
+          "peak": 0,
+          "frequencyHz": null,
+          "maxBelow005RunMs": 300,
+          "envelopeFit": {
+            "frequency": 1,
+            "error": 0,
+            "relativeAmplitude": 0
+          }
+        },
+        "controlTone": {
+          "start": 11.608666666666666,
+          "duration": 0.3,
+          "coverage": 1,
+          "frames": 14400,
+          "rms": 0.08485694449284083,
+          "peak": 0.11999998986721039,
+          "frequencyHz": 306.9999887635183,
+          "maxBelow005RunMs": 0,
+          "envelopeFit": {
+            "frequency": 8,
+            "error": 0.000012307622945057972,
+            "relativeAmplitude": 0.0017686526791097874
+          }
+        },
+        "snapshot": {
+          "byteAccounting": "Acknowledged retained PCM and in-flight chunk copies only; excludes decoded inputs, SRC tables and opaque WASM heaps.",
+          "disposed": true,
+          "state": {
+            "when": 10.858666666666666,
+            "position": 0.5600000000000005,
+            "playing": false,
+            "rate": 1,
+            "keylock": true,
+            "semitones": 0,
+            "effectiveSemitones": 0
+          },
+          "sourceGeometry": [
+            {
+              "index": 0,
+              "sampleRate": 22050,
+              "frames": 264600,
+              "channels": 2,
+              "duration": 12,
+              "paddedTailSeconds": 0,
+              "trimmedTailSeconds": 0,
+              "decodedBytes": 2116800
+            },
+            {
+              "index": 1,
+              "sampleRate": 48000,
+              "frames": 573600,
+              "channels": 2,
+              "duration": 11.95,
+              "paddedTailSeconds": 0.05000000000000071,
+              "trimmedTailSeconds": 0,
+              "decodedBytes": 4588800
+            },
+            {
+              "index": 2,
+              "sampleRate": 48000,
+              "frames": 573600,
+              "channels": 2,
+              "duration": 11.95,
+              "paddedTailSeconds": 0.05000000000000071,
+              "trimmedTailSeconds": 0,
+              "decodedBytes": 4588800
+            },
+            {
+              "index": 3,
+              "sampleRate": 48000,
+              "frames": 573600,
+              "channels": 2,
+              "duration": 11.95,
+              "paddedTailSeconds": 0.05000000000000071,
+              "trimmedTailSeconds": 0,
+              "decodedBytes": 4588800
+            },
+            {
+              "index": 4,
+              "sampleRate": 48000,
+              "frames": 573600,
+              "channels": 2,
+              "duration": 11.95,
+              "paddedTailSeconds": 0.05000000000000071,
+              "trimmedTailSeconds": 0,
+              "decodedBytes": 4588800
+            }
+          ],
+          "groups": [],
+          "retainedPCMBytes": 0,
+          "inFlightPCMBytes": 0,
+          "decodedBytes": 20472000,
+          "policy": {
+            "direction": "forward",
+            "rate": [
+              0.25,
+              4
+            ],
+            "effectiveSemitones": [
+              -24,
+              24
+            ],
+            "chunkSeconds": 0.5,
+            "prerollSeconds": 1,
+            "lookaheadSeconds": 8,
+            "driverMs": 50,
+            "crossfadeSeconds": 0.01,
+            "srcTaps": 32,
+            "srcPhases": 1024,
+            "decodedSources": "Whole decoded AudioBuffers remain caller-owned; only processor PCM copies are windowed.",
+            "unsupported": [
+              "reverse",
+              "loop",
+              "Stem Slip",
+              "incremental compressed-file decoding"
+            ],
+            "quality": "Independent32-tap windowed-sinc normalization and10ms group crossfade; vendor sonic equivalence and artifact-free transitions are unverified."
+          },
+          "lastError": null
+        }
+      }
+    },
+    {
+      "name": "Pause cancels pending future original playback without clock or audio resurrection",
+      "passed": true,
+      "evidence": {
+        "previousPosition": 42.53226666666666,
+        "ack": {
+          "when": 12.941333333333333,
+          "position": 5,
+          "playing": true,
+          "rate": 4,
+          "keylock": true,
+          "semitones": 0,
+          "effectiveSemitones": 0,
+          "group": 3,
+          "origin": 4,
+          "latencyLead": 0.12,
+          "transitionSeconds": 0.01,
+          "superseded": false
+        },
+        "frozen": 42.53226666666666,
+        "silence": {
+          "start": 13.091333333333333,
+          "duration": 0.3,
+          "coverage": 1,
+          "frames": 14400,
+          "rms": 0,
+          "peak": 0,
+          "frequencyHz": null,
+          "maxBelow005RunMs": 300,
+          "envelopeFit": {
+            "frequency": 1,
+            "error": 0,
+            "relativeAmplitude": 0
+          }
+        },
+        "controlTone": {
+          "start": 13.091333333333333,
+          "duration": 0.3,
+          "coverage": 1,
+          "frames": 14400,
+          "rms": 0.08488371762073932,
+          "peak": 0.11999998241662979,
+          "frequencyHz": 306.99998908856674,
+          "maxBelow005RunMs": 0,
+          "envelopeFit": {
+            "frequency": 1,
+            "error": 0.00001280369157443794,
+            "relativeAmplitude": 0.008213635522056076
+          }
+        },
+        "snapshot": {
+          "byteAccounting": "Acknowledged retained PCM and in-flight chunk copies only; excludes decoded inputs, SRC tables and opaque WASM heaps.",
+          "disposed": false,
+          "state": {
+            "when": 12.010666666666667,
+            "position": 42.53226666666666,
+            "playing": false,
+            "rate": 4,
+            "keylock": true,
+            "semitones": 0,
+            "effectiveSemitones": 0
+          },
+          "sourceGeometry": [
+            {
+              "index": 0,
+              "sampleRate": 22050,
+              "frames": 1058400,
+              "channels": 2,
+              "duration": 48,
+              "paddedTailSeconds": 0,
+              "trimmedTailSeconds": 0,
+              "decodedBytes": 8467200
+            }
+          ],
+          "groups": [
+            {
+              "id": 3,
+              "origin": 4,
+              "start": 4,
+              "end": 13,
+              "nodeCount": 1,
+              "retainedPCMBytes": 3456000,
+              "retainedChunks": 18,
+              "latency": 0.12,
+              "role": "selected"
+            }
+          ],
+          "retainedPCMBytes": 3456000,
+          "inFlightPCMBytes": 0,
+          "decodedBytes": 8467200,
+          "policy": {
+            "direction": "forward",
+            "rate": [
+              0.25,
+              4
+            ],
+            "effectiveSemitones": [
+              -24,
+              24
+            ],
+            "chunkSeconds": 0.5,
+            "prerollSeconds": 1,
+            "lookaheadSeconds": 8,
+            "driverMs": 50,
+            "crossfadeSeconds": 0.01,
+            "srcTaps": 32,
+            "srcPhases": 1024,
+            "decodedSources": "Whole decoded AudioBuffers remain caller-owned; only processor PCM copies are windowed.",
+            "unsupported": [
+              "reverse",
+              "loop",
+              "Stem Slip",
+              "incremental compressed-file decoding"
+            ],
+            "quality": "Independent32-tap windowed-sinc normalization and10ms group crossfade; vendor sonic equivalence and artifact-free transitions are unverified."
+          },
+          "lastError": null
+        }
+      }
+    }
+  ],
+  "fatalErrors": [],
+  "sampleRate": 48000,
+  "startedAt": "2026-10-17T08:38:37.506Z",
+  "adapterModuleSHA256": "a96cd1d244e402957b4daedb823cb2015f759d4a46df9672954b9bba1f944e78",
+  "vendorSHA256": "b2811c519f067cc5a1abd6cdccab46578d1eeef8aba42f666fab2830a9d6f46e",
+  "scope": "Actual browser bounded forward adapter with synthetic native AudioBuffers and captured PCM. No production AudioEngine integration, reverse/loop/Stem Slip, long-file decoded-memory bound, vendor sonic equivalence, native acceptance or listening-quality proof.",
+  "budgets": {
+    "pitchRelative": 0.01,
+    "rateEnvelopeHz": 0.15,
+    "onsetAbsoluteSeconds": 0.03,
+    "farTransitionMaximumBelow005Ms": 20
+  },
+  "safety": "Capture outputs forced to zero plus destination gain0; fixed-stereo buses have actual zero ConstantSource input.",
+  "captureIntegrity": [
+    {
+      "label": "single",
+      "preflight": {
+        "type": "preflight",
+        "id": "single-preflight-1",
+        "firstFrame": 5376,
+        "lastFrame": 13568,
+        "consecutive": 64,
+        "startupGaps": []
+      },
+      "arm": {
+        "type": "armed",
+        "id": "single-arm-2",
+        "firstFrame": 13568,
+        "firstSequence": 102,
+        "startupGaps": []
+      },
+      "fence": {
+        "type": "finished",
+        "id": "single-finish-3",
+        "lastFrame": 644224,
+        "lastSequence": 5028
+      },
+      "blocks": 4927,
+      "coverage": 1
+    },
+    {
+      "label": "control",
+      "preflight": {
+        "type": "preflight",
+        "id": "control-preflight-1",
+        "firstFrame": 5376,
+        "lastFrame": 13568,
+        "consecutive": 64,
+        "startupGaps": []
+      },
+      "arm": {
+        "type": "armed",
+        "id": "control-arm-2",
+        "firstFrame": 13568,
+        "firstSequence": 102,
+        "startupGaps": []
+      },
+      "fence": {
+        "type": "finished",
+        "id": "control-finish-3",
+        "lastFrame": 644480,
+        "lastSequence": 5030
+      },
+      "blocks": 4929,
+      "coverage": 1
+    },
+    {
+      "label": "positional-0",
+      "preflight": {
+        "type": "preflight",
+        "id": "positional-0-preflight-1",
+        "firstFrame": 479232,
+        "lastFrame": 487424,
+        "consecutive": 64,
+        "startupGaps": []
+      },
+      "arm": {
+        "type": "armed",
+        "id": "positional-0-arm-2",
+        "firstFrame": 487424,
+        "firstSequence": 64,
+        "startupGaps": []
+      },
+      "fence": {
+        "type": "finished",
+        "id": "positional-0-finish-3",
+        "lastFrame": 644736,
+        "lastSequence": 1292
+      },
+      "blocks": 1229,
+      "coverage": 1
+    },
+    {
+      "label": "positional-1",
+      "preflight": {
+        "type": "preflight",
+        "id": "positional-1-preflight-1",
+        "firstFrame": 479232,
+        "lastFrame": 487424,
+        "consecutive": 64,
+        "startupGaps": []
+      },
+      "arm": {
+        "type": "armed",
+        "id": "positional-1-arm-2",
+        "firstFrame": 487424,
+        "firstSequence": 64,
+        "startupGaps": []
+      },
+      "fence": {
+        "type": "finished",
+        "id": "positional-1-finish-3",
+        "lastFrame": 644992,
+        "lastSequence": 1294
+      },
+      "blocks": 1231,
+      "coverage": 1
+    },
+    {
+      "label": "positional-2",
+      "preflight": {
+        "type": "preflight",
+        "id": "positional-2-preflight-1",
+        "firstFrame": 479232,
+        "lastFrame": 487424,
+        "consecutive": 64,
+        "startupGaps": []
+      },
+      "arm": {
+        "type": "armed",
+        "id": "positional-2-arm-2",
+        "firstFrame": 487424,
+        "firstSequence": 64,
+        "startupGaps": []
+      },
+      "fence": {
+        "type": "finished",
+        "id": "positional-2-finish-3",
+        "lastFrame": 645248,
+        "lastSequence": 1296
+      },
+      "blocks": 1233,
+      "coverage": 1
+    },
+    {
+      "label": "positional-3",
+      "preflight": {
+        "type": "preflight",
+        "id": "positional-3-preflight-1",
+        "firstFrame": 479232,
+        "lastFrame": 487424,
+        "consecutive": 64,
+        "startupGaps": []
+      },
+      "arm": {
+        "type": "armed",
+        "id": "positional-3-arm-2",
+        "firstFrame": 487424,
+        "firstSequence": 64,
+        "startupGaps": []
+      },
+      "fence": {
+        "type": "finished",
+        "id": "positional-3-finish-3",
+        "lastFrame": 645504,
+        "lastSequence": 1298
+      },
+      "blocks": 1235,
+      "coverage": 1
+    },
+    {
+      "label": "positional-4",
+      "preflight": {
+        "type": "preflight",
+        "id": "positional-4-preflight-1",
+        "firstFrame": 479232,
+        "lastFrame": 487424,
+        "consecutive": 64,
+        "startupGaps": []
+      },
+      "arm": {
+        "type": "armed",
+        "id": "positional-4-arm-2",
+        "firstFrame": 487424,
+        "firstSequence": 64,
+        "startupGaps": []
+      },
+      "fence": {
+        "type": "finished",
+        "id": "positional-4-finish-3",
+        "lastFrame": 645760,
+        "lastSequence": 1300
+      },
+      "blocks": 1237,
+      "coverage": 1
+    }
+  ],
+  "events": [
+    {
+      "type": "preparing",
+      "contextTime": 0.037333333333333336,
+      "group": 1,
+      "position": 0,
+      "origin": 0
+    },
+    {
+      "type": "prepared",
+      "contextTime": 0.112,
+      "snapshot": {
+        "byteAccounting": "Acknowledged retained PCM and in-flight chunk copies only; excludes decoded inputs, SRC tables and opaque WASM heaps.",
+        "disposed": false,
+        "state": {
+          "when": 0.037333333333333336,
+          "position": 0,
+          "playing": false,
+          "rate": 1,
+          "keylock": true,
+          "semitones": 0,
+          "effectiveSemitones": 0
+        },
+        "sourceGeometry": [
+          {
+            "index": 0,
+            "sampleRate": 22050,
+            "frames": 1058400,
+            "channels": 2,
+            "duration": 48,
+            "paddedTailSeconds": 0,
+            "trimmedTailSeconds": 0,
+            "decodedBytes": 8467200
+          }
+        ],
+        "groups": [
+          {
+            "id": 1,
+            "origin": 0,
+            "start": 0,
+            "end": 8,
+            "nodeCount": 1,
+            "retainedPCMBytes": 3072000,
+            "retainedChunks": 16,
+            "latency": 0.12,
+            "role": "selected"
+          }
+        ],
+        "retainedPCMBytes": 3072000,
+        "inFlightPCMBytes": 0,
+        "decodedBytes": 8467200,
+        "policy": {
+          "direction": "forward",
+          "rate": [
+            0.25,
+            4
+          ],
+          "effectiveSemitones": [
+            -24,
+            24
+          ],
+          "chunkSeconds": 0.5,
+          "prerollSeconds": 1,
+          "lookaheadSeconds": 8,
+          "driverMs": 50,
+          "crossfadeSeconds": 0.01,
+          "srcTaps": 32,
+          "srcPhases": 1024,
+          "decodedSources": "Whole decoded AudioBuffers remain caller-owned; only processor PCM copies are windowed.",
+          "unsupported": [
+            "reverse",
+            "loop",
+            "Stem Slip",
+            "incremental compressed-file decoding"
+          ],
+          "quality": "Independent32-tap windowed-sinc normalization and10ms group crossfade; vendor sonic equivalence and artifact-free transitions are unverified."
+        },
+        "lastError": null
+      }
+    },
+    {
+      "type": "scheduled",
+      "contextTime": 0.288,
+      "when": 0.41333333333333333,
+      "position": 0,
+      "playing": true,
+      "rate": 1,
+      "keylock": true,
+      "semitones": 0,
+      "effectiveSemitones": 0,
+      "group": 1,
+      "origin": 0,
+      "latencyLead": 0.12,
+      "transitionSeconds": 0,
+      "superseded": false
+    },
+    {
+      "type": "scheduled",
+      "contextTime": 1.0826666666666667,
+      "when": 1.2026666666666668,
+      "position": 0.7893333333333334,
+      "playing": true,
+      "rate": 1.25,
+      "keylock": true,
+      "semitones": 0,
+      "effectiveSemitones": 0,
+      "group": 1,
+      "origin": 0,
+      "latencyLead": 0.12,
+      "transitionSeconds": 0,
+      "superseded": false
+    },
+    {
+      "type": "scheduled",
+      "contextTime": 2.7626666666666666,
+      "when": 2.888,
+      "position": 2.896,
+      "playing": true,
+      "rate": 0.8,
+      "keylock": true,
+      "semitones": 0,
+      "effectiveSemitones": 0,
+      "group": 1,
+      "origin": 0,
+      "latencyLead": 0.12,
+      "transitionSeconds": 0,
+      "superseded": false
+    },
+    {
+      "type": "scheduled",
+      "contextTime": 4.458666666666667,
+      "when": 4.578666666666667,
+      "position": 4.2485333333333335,
+      "playing": true,
+      "rate": 0.8,
+      "keylock": true,
+      "semitones": 12,
+      "effectiveSemitones": 12,
+      "group": 1,
+      "origin": 0,
+      "latencyLead": 0.12,
+      "transitionSeconds": 0,
+      "superseded": false
+    },
+    {
+      "type": "scheduled",
+      "contextTime": 5.141333333333334,
+      "when": 5.2666666666666675,
+      "position": 4.798933333333334,
+      "playing": true,
+      "rate": 0.8,
+      "keylock": true,
+      "semitones": 0,
+      "effectiveSemitones": 0,
+      "group": 1,
+      "origin": 0,
+      "latencyLead": 0.12,
+      "transitionSeconds": 0,
+      "superseded": false
+    },
+    {
+      "type": "scheduled",
+      "contextTime": 5.856,
+      "when": 5.981333333333334,
+      "position": 8.5,
+      "playing": true,
+      "rate": 0.8,
+      "keylock": true,
+      "semitones": 0,
+      "effectiveSemitones": 0,
+      "group": 1,
+      "origin": 0,
+      "latencyLead": 0.12,
+      "transitionSeconds": 0,
+      "superseded": false
+    },
+    {
+      "type": "preparing",
+      "contextTime": 6.544,
+      "group": 2,
+      "position": 24,
+      "origin": 23
+    },
+    {
+      "type": "scheduled",
+      "contextTime": 6.608,
+      "when": 6.733333333333333,
+      "position": 24,
+      "playing": true,
+      "rate": 0.8,
+      "keylock": true,
+      "semitones": 0,
+      "effectiveSemitones": 0,
+      "group": 2,
+      "origin": 23,
+      "latencyLead": 0.12,
+      "transitionSeconds": 0.01,
+      "superseded": false
+    },
+    {
+      "type": "scheduled",
+      "contextTime": 7.306666666666667,
+      "when": 7.432,
+      "position": 24.558933333333332,
+      "playing": true,
+      "rate": 4,
+      "keylock": true,
+      "semitones": 0,
+      "effectiveSemitones": 0,
+      "group": 2,
+      "origin": 23,
+      "latencyLead": 0.12,
+      "transitionSeconds": 0,
+      "superseded": false
+    },
+    {
+      "type": "late-ack",
+      "contextTime": 11.941333333333333,
+      "group": 2,
+      "requestedOutput": 11.925333333333333,
+      "acknowledgedAt": 11.941333333333333
+    },
+    {
+      "type": "paused",
+      "contextTime": 11.941333333333333,
+      "when": 11.925333333333333,
+      "position": 42.53226666666666,
+      "playing": false,
+      "rate": 4,
+      "keylock": true,
+      "semitones": 0,
+      "effectiveSemitones": 0
+    },
+    {
+      "type": "preparing",
+      "contextTime": 11.941333333333333,
+      "group": 3,
+      "position": 5,
+      "origin": 4
+    },
+    {
+      "type": "scheduled",
+      "contextTime": 12.010666666666667,
+      "when": 12.941333333333333,
+      "position": 5,
+      "playing": true,
+      "rate": 4,
+      "keylock": true,
+      "semitones": 0,
+      "effectiveSemitones": 0,
+      "group": 3,
+      "origin": 4,
+      "latencyLead": 0.12,
+      "transitionSeconds": 0.01,
+      "superseded": false
+    },
+    {
+      "type": "paused",
+      "contextTime": 12.010666666666667,
+      "when": 12.010666666666667,
+      "position": 42.53226666666666,
+      "playing": false,
+      "rate": 4,
+      "keylock": true,
+      "semitones": 0,
+      "effectiveSemitones": 0
+    },
+    {
+      "type": "disposed",
+      "contextTime": 13.418666666666667,
+      "snapshot": {
+        "byteAccounting": "Acknowledged retained PCM and in-flight chunk copies only; excludes decoded inputs, SRC tables and opaque WASM heaps.",
+        "disposed": true,
+        "state": {
+          "when": 13.397333333333334,
+          "position": 42.53226666666666,
+          "playing": false,
+          "rate": 4,
+          "keylock": true,
+          "semitones": 0,
+          "effectiveSemitones": 0
+        },
+        "sourceGeometry": [
+          {
+            "index": 0,
+            "sampleRate": 22050,
+            "frames": 1058400,
+            "channels": 2,
+            "duration": 48,
+            "paddedTailSeconds": 0,
+            "trimmedTailSeconds": 0,
+            "decodedBytes": 8467200
+          }
+        ],
+        "groups": [],
+        "retainedPCMBytes": 0,
+        "inFlightPCMBytes": 0,
+        "decodedBytes": 8467200,
+        "policy": {
+          "direction": "forward",
+          "rate": [
+            0.25,
+            4
+          ],
+          "effectiveSemitones": [
+            -24,
+            24
+          ],
+          "chunkSeconds": 0.5,
+          "prerollSeconds": 1,
+          "lookaheadSeconds": 8,
+          "driverMs": 50,
+          "crossfadeSeconds": 0.01,
+          "srcTaps": 32,
+          "srcPhases": 1024,
+          "decodedSources": "Whole decoded AudioBuffers remain caller-owned; only processor PCM copies are windowed.",
+          "unsupported": [
+            "reverse",
+            "loop",
+            "Stem Slip",
+            "incremental compressed-file decoding"
+          ],
+          "quality": "Independent32-tap windowed-sinc normalization and10ms group crossfade; vendor sonic equivalence and artifact-free transitions are unverified."
+        },
+        "lastError": null
+      }
+    }
+  ],
+  "passed": 8,
+  "failed": 0,
+  "completed": true,
+  "durationMs": 13447.099999904633
+}

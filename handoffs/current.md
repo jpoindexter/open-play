@@ -13,3 +13,12 @@ Fresh passive45s Hercules observation: stable online exact-name source across84 
 Next executable unit: bounded forward live keylock adapter, then actual app/platter scratch/bypass/handoff with source ownership and preserved stem routes. Continue remaining Video output/quality/arrangement/MIDI/shortcuts, library/device/provider and quality acceptance.
 
 Return full independent findings to `handoffs/claude-to-codex-completeness-audit.md`. Full audit remains unlaunched; two bounded Fable5.1/High debug sessions are separate and source claims need independent checks. No native app until Jason explicitly approves a named HTML revision.
+
+
+## Latest override — checkpoint9 integration
+
+Read FULL_BUILD_PLAN.md41 and ACTIVE_EXECUTION.md's current override. Forward unlooped live keylock and whole-deck scratch/platter are now integrated in browser sources. Actual adapter8/8, live engine6/6, raw engine4/4 and real main master recording are recorded under `docs/prototype/`. Root/independent controlled owner/clock/routing checks supplement these narrower actual captures. An unknown-key file can now shift+12; actual output880Hz and AM4.32Hz at1.08× were measured.
+
+**Seamless scratch→keylock release remains FAILED:** two250ms recording windows return raw476Hz instead of880Hz. Existing finite handoff tests missed pitch preservation. New experimental lead sweep is a separate agent-owned unit; no production lead policy changed yet. Preserve this failure and add release-frequency acceptance before promoting readiness.
+
+Earlier source pin above describes checkpoint8; pending checkpoint9 source/manifest pin will supersede it. Full1:1 false, native unapproved, full independent Claude audit unlaunched.

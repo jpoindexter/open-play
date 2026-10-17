@@ -31,3 +31,16 @@ Continuous keylock/scratch release/clock integration; reverse/loop/StemSlip path
 **Re-entry:** read this ledger, active goal, current diff and candidate hash manifest; respect active file owners. Resume the smallest actual app acceptance unit, not another broad research inventory.
 
 **Done evidence:** all scoped behavior executed end-to-end, reference gaps closed and full independent Claude audit returned/reconciled. Genuine external blockers remain incomplete. Named HTML approval is a separate user gate before native work. A checkpoint, passing component/Node test or private push cannot satisfy full1:1/native approval. Goal remains active.
+
+
+## Current override — browser integration checkpoint9 (17 October2026)
+
+**Outcome:** full functional Serato-parity browser prototype, private records and independent Claude handoff. **Target:** Open Play browser sources only. **Must:** actual end-to-end proof and preserved original/stem routes; retain all gaps/failures/models. **Must not:** native app, licensing changes, hardware output or full-parity claims. **Authority:** Jason's continuing authorized investigation/prototype/remote updates; native approval absent.
+
+**Now:** forward live keylock and ordinary scratch/platter are connected. Actual adapter8/8; production live engine6/6; raw engine4/4 with9 finite captures; UI recording confirms880Hz shifted audio and4.32Hz source modulation at1.08×. Actual UI also exposes a real release-pitch defect: two250ms bins around15s return raw476Hz before requested880Hz. Seamless release is NOT verified.
+
+**Next:** transition agent owns NEW experimental lead-variant/harness only; parent owns production engine/app, browser, Git/remotes and records. Measure queried latency versus earliest safe scheduling lead on ready/prewarmed real WASM before changing production timing. Then close return-owner/prewarm/phase behavior with actual release-frequency capture. Existing frozen adapter, standalone harness and production vendor remain preserved. No native.
+
+**Later:** reverse/loop/StemSlip and transport compositions, resource/range/decoded-memory limits, SCNet failed quality gate, remaining Video/library/provider/device/reference scope.110groups/522requirements incomplete; goal active. Full independent Claude audit remains unlaunched.
+
+**Re-entry:** read current goal/diff, candidate manifest and section41; inspect live agent owners. Do not equate passing tone/plumbing checks with the real release criterion. Fresh45s Hercules correlation question is still pending; no new hardware capture without an agreed window.

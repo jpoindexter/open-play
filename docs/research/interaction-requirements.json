@@ -658,7 +658,7 @@
       "trigger": "Choose 33 or 45 RPM",
       "expected": "Reflect selected virtual platter speed; physical behavior and CPU cost require native validation",
       "evidence": "DOCUMENTED; runtime behavior not tested",
-      "prototype_behavior": "Implement a deterministic fixture state transition for this requirement; label audio/hardware simulation",
+      "prototype_behavior": "Actual browser forward live DSP and raw whole-deck scratch/platter subset; keylock release-pitch transient and transport/reference/quality/resource gaps remain explicit.",
       "native_status": "blocked_until_prototype_approval",
       "acceptance": "Choose 33 or 45 RPM → Reflect selected virtual platter speed; physical behavior and CPU cost require native validation",
       "source_url": "https://support.serato.com/hc/en-us/articles/223363407-DJ-Preferences",
@@ -675,6 +675,24 @@
         "primary": "Codex",
         "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
         "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "prototype_evidence": [
+        "docs/prototype/keylock-live-adapter-browser-results.json",
+        "docs/prototype/keylock-engine-browser-results.json",
+        "docs/prototype/deck-scratch-engine-browser-results.json",
+        "docs/prototype/deck-scratch-main-ui-observations.json",
+        "docs/prototype/deck-scratch-main-ui-audio-inspection.json",
+        "docs/research/ENGINE_LIVE_KEYLOCK_INTEGRATION_REVIEW.md"
+      ],
+      "browser_integration_checkpoint": {
+        "date": "2026-10-17",
+        "forward_unlooped_live_engine": "6/6 finite synthetic checks; strict captured spans",
+        "ordinary_raw_scratch_engine": "4/4;9 finite routed PCM captures",
+        "main_ui": "Paused forward/reverse and playing hold/release; unknown-key +12 accepted; actual880Hz output and4.32Hz modulation at1.08x",
+        "seamless_keylock_release_verified": false,
+        "observed_defect": "Two250ms post-release windows return raw476Hz before requested880Hz; exact transient duration not established",
+        "reference_parity_verified": false,
+        "no_limits_objective_achieved": false
       }
     },
     {
@@ -1542,7 +1560,7 @@
       "trigger": "Use independent high-quality keylock and key manipulation",
       "expected": "Retain key shift and key sync without any product entitlement requirement; equivalence requires audio evaluation",
       "evidence": "DOCUMENTED; runtime behavior not tested",
-      "prototype_behavior": "Implement a deterministic fixture state transition for this requirement; label audio/hardware simulation",
+      "prototype_behavior": "Actual browser forward live DSP and raw whole-deck scratch/platter subset; keylock release-pitch transient and transport/reference/quality/resource gaps remain explicit.",
       "native_status": "blocked_until_prototype_approval",
       "acceptance": "Use independent high-quality keylock and key manipulation → Retain key shift and key sync without any product entitlement requirement; equivalence requires audio evaluation",
       "source_url": "https://support.serato.com/hc/en-us/articles/223365767-Serato-Expansions",
@@ -1567,7 +1585,13 @@
         "docs/research/DECK_SCRATCH_RUNTIME_EVALUATION.md",
         "docs/prototype/keylock-live-patched-browser-preflight-results.json",
         "docs/prototype/keylock-disposal-browser-results.json",
-        "docs/prototype/deck-scratch-browser-results.json"
+        "docs/prototype/deck-scratch-browser-results.json",
+        "docs/prototype/keylock-live-adapter-browser-results.json",
+        "docs/prototype/keylock-engine-browser-results.json",
+        "docs/prototype/deck-scratch-engine-browser-results.json",
+        "docs/prototype/deck-scratch-main-ui-observations.json",
+        "docs/prototype/deck-scratch-main-ui-audio-inspection.json",
+        "docs/research/ENGINE_LIVE_KEYLOCK_INTEGRATION_REVIEW.md"
       ],
       "live_dsp_prerequisite_checkpoint": {
         "date": "2026-10-17",
@@ -1575,6 +1599,16 @@
         "instrumented_lifecycle": "5/5; ten retired actual terminal processors, eleven diagnostic ports closed",
         "raw_scratch_component": "7/7;13 contiguous captures; strengthened active-before-retirement oracle",
         "production_engine_and_platter_integration": false,
+        "reference_parity_verified": false,
+        "no_limits_objective_achieved": false
+      },
+      "browser_integration_checkpoint": {
+        "date": "2026-10-17",
+        "forward_unlooped_live_engine": "6/6 finite synthetic checks; strict captured spans",
+        "ordinary_raw_scratch_engine": "4/4;9 finite routed PCM captures",
+        "main_ui": "Paused forward/reverse and playing hold/release; unknown-key +12 accepted; actual880Hz output and4.32Hz modulation at1.08x",
+        "seamless_keylock_release_verified": false,
+        "observed_defect": "Two250ms post-release windows return raw476Hz before requested880Hz; exact transient duration not established",
         "reference_parity_verified": false,
         "no_limits_objective_achieved": false
       }
@@ -3308,7 +3342,7 @@
       "trigger": "Change tempo then scratch",
       "expected": "Preserve key during tempo change; documented scratch detection temporarily bypasses keylock",
       "evidence": "DOCUMENTED; installed behavior untested",
-      "prototype_behavior": "Implement specified fixture transition; identify simulation and unresolved reference states",
+      "prototype_behavior": "Actual browser forward live DSP and raw whole-deck scratch/platter subset; keylock release-pitch transient and transport/reference/quality/resource gaps remain explicit.",
       "native_status": "blocked_until_prototype_approval",
       "acceptance": "Change tempo then scratch → Preserve key during tempo change; documented scratch detection temporarily bypasses keylock",
       "source_url": "https://support.serato.com/hc/en-us/articles/234962528-Keylock",
@@ -3333,7 +3367,13 @@
         "docs/research/DECK_SCRATCH_RUNTIME_EVALUATION.md",
         "docs/prototype/keylock-live-patched-browser-preflight-results.json",
         "docs/prototype/keylock-disposal-browser-results.json",
-        "docs/prototype/deck-scratch-browser-results.json"
+        "docs/prototype/deck-scratch-browser-results.json",
+        "docs/prototype/keylock-live-adapter-browser-results.json",
+        "docs/prototype/keylock-engine-browser-results.json",
+        "docs/prototype/deck-scratch-engine-browser-results.json",
+        "docs/prototype/deck-scratch-main-ui-observations.json",
+        "docs/prototype/deck-scratch-main-ui-audio-inspection.json",
+        "docs/research/ENGINE_LIVE_KEYLOCK_INTEGRATION_REVIEW.md"
       ],
       "live_dsp_prerequisite_checkpoint": {
         "date": "2026-10-17",
@@ -3341,6 +3381,16 @@
         "instrumented_lifecycle": "5/5; ten retired actual terminal processors, eleven diagnostic ports closed",
         "raw_scratch_component": "7/7;13 contiguous captures; strengthened active-before-retirement oracle",
         "production_engine_and_platter_integration": false,
+        "reference_parity_verified": false,
+        "no_limits_objective_achieved": false
+      },
+      "browser_integration_checkpoint": {
+        "date": "2026-10-17",
+        "forward_unlooped_live_engine": "6/6 finite synthetic checks; strict captured spans",
+        "ordinary_raw_scratch_engine": "4/4;9 finite routed PCM captures",
+        "main_ui": "Paused forward/reverse and playing hold/release; unknown-key +12 accepted; actual880Hz output and4.32Hz modulation at1.08x",
+        "seamless_keylock_release_verified": false,
+        "observed_defect": "Two250ms post-release windows return raw476Hz before requested880Hz; exact transient duration not established",
         "reference_parity_verified": false,
         "no_limits_objective_achieved": false
       }
@@ -15614,6 +15664,41 @@
           "Manual descriptions clarify broad behavior, not exact bins/curves/parameters. Historical extra names do not automatically expand the current active catalog."
         ]
       }
+    },
+    {
+      "id": "REQ-522",
+      "feature_id": "DEK-009",
+      "screen": "Ordinary whole-deck platter",
+      "trigger": "Drag or keyboard-audition a loaded platter forward/backward, hold, release, cancel or replace its owner",
+      "expected": "Independent browser policy: signed original-time PCM; paused audition stays paused; ordinary/Slip release, source/mute/history routes and owner cancellation remain coherent. Vendor sensitivity, hardware and sonic parity require separate comparison.",
+      "evidence": "EXECUTED_BROWSER_SUBSET_AND_CONTROLLED_OWNER_REGRESSIONS; independent policy, reference parity unverified",
+      "prototype_behavior": "Actual engine/platter integration; real master recording exposes keylock return-pitch defect. Not full parity.",
+      "native_status": "blocked_until_prototype_approval",
+      "acceptance": "Actual pointer/keyboard audio and transport-composition tests, including zero stalled hold, paused release, stale-owner rejection and pitch-correct keylock return. Current return-pitch criterion fails.",
+      "source_url": "https://support.serato.com/hc/en-us/articles/234962528-Keylock",
+      "source_article": "234962528",
+      "routing": {
+        "codex": {
+          "model": "gpt-6-astra",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "DSP and transport require numerical reasoning backed by measurements.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "prototype_evidence": [
+        "docs/prototype/keylock-live-adapter-browser-results.json",
+        "docs/prototype/keylock-engine-browser-results.json",
+        "docs/prototype/deck-scratch-engine-browser-results.json",
+        "docs/prototype/deck-scratch-main-ui-observations.json",
+        "docs/prototype/deck-scratch-main-ui-audio-inspection.json",
+        "docs/research/ENGINE_LIVE_KEYLOCK_INTEGRATION_REVIEW.md"
+      ]
     }
   ]
 }
