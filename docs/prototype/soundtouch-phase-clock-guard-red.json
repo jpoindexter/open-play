@@ -1,0 +1,17 @@
+{
+  "passed": 0,
+  "failed": 2,
+  "checks": [
+    {
+      "name": "Whole-period alias and invalid absolute globals cannot silently pass 44100",
+      "passed": false,
+      "error": "Missing expected exception (ClockMismatchError)."
+    },
+    {
+      "name": "Whole-period alias and invalid absolute globals cannot silently pass 48000",
+      "passed": false,
+      "error": "Missing expected exception (ClockMismatchError)."
+    }
+  ],
+  "scope": "Controlled alias/coarse-reference-fence contract. Allows observed one/two-quantum global disagreement; independent phase tolerance remains .25sample. Not an independent physical clock."
+}

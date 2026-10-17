@@ -1,9 +1,9 @@
-import {AnchoredRenderClock} from './render-clock.mjs';
+import {PhaseRenderClock} from './phase-render-clock.mjs';
 import {SoundTouchNodeController} from './node-controller.mjs';
 class WindowedSoundTouchProcessor extends AudioWorkletProcessor {
-  static get parameterDescriptors() { return [{name:'renderClock',defaultValue:-1,minValue:-1,maxValue:2**30,automationRate:'a-rate'}]; }
+  static get parameterDescriptors() { return [{name:'renderClock',defaultValue:-1,minValue:-1,maxValue:1,automationRate:'a-rate'}]; }
   constructor({processorOptions}) {
-    super(); this.options = processorOptions; this.clock = new AnchoredRenderClock(processorOptions.anchorFrame); this.controller = null; this.closed = false;
+    super(); this.options = processorOptions; this.clock = new PhaseRenderClock({anchorFrame:processorOptions.anchorFrame,periodFrames:processorOptions.periodFrames}); this.controller = null; this.closed = false;
     this.port.onmessage = ({data}) => {
       const reply = (value, cause) => this.port.postMessage({id: data.id, value, error: cause && {name: cause.name, message: cause.message, stack: cause.stack}});
       try {

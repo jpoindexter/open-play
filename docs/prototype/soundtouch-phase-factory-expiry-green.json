@@ -1,0 +1,30 @@
+{
+  "passed": 1,
+  "failed": 0,
+  "counts": {
+    "constructedNodes": 1,
+    "disconnects": 1,
+    "portCloses": 1,
+    "disposeRequests": 1,
+    "disposeAcknowledgements": 1
+  },
+  "diagnostics": [
+    {
+      "type": "preparation-failed",
+      "name": "LateScheduleError",
+      "message": "Phase anchor already passed; do not silently rebase it",
+      "processorRelease": {
+        "disposed": true,
+        "beforeInitialization": true,
+        "retainedPCMBytes": 0,
+        "phaseControl": {
+          "created": false,
+          "disposed": true
+        }
+      },
+      "cleanupError": null,
+      "observedAtContextTime": 1
+    }
+  ],
+  "scope": "Actual factory/helper code with controlled allocation expiry and acknowledged mock message boundary. Not real browser processor cleanup/audio proof."
+}

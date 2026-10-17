@@ -1,0 +1,125 @@
+{
+  "passed": 8,
+  "failed": 0,
+  "checks": [
+    {
+      "name": "Large absolute anchor with bounded normalized phase starts exactly 44100",
+      "passed": true,
+      "evidence": {
+        "anchorFrame": 952560000,
+        "periodFrames": 176384,
+        "nextFrame": 952560128,
+        "blocks": 1,
+        "wraps": 0,
+        "globalDisagreements": 0,
+        "maxGlobalDifference": 0,
+        "scope": "Integer callback clock checked against every normalized phase sample. Not a physical clock, sample provenance or long-session acceptance."
+      }
+    },
+    {
+      "name": "Three exact wraps preserve integer time and per-sample tolerance 44100",
+      "passed": true,
+      "evidence": {
+        "maxPhaseErrorSamples": 0.0052490234375,
+        "snapshot": {
+          "anchorFrame": 952560000,
+          "periodFrames": 176384,
+          "nextFrame": 953089280,
+          "blocks": 4135,
+          "wraps": 3,
+          "globalDisagreements": 2067,
+          "maxGlobalDifference": 128,
+          "scope": "Integer callback clock checked against every normalized phase sample. Not a physical clock, sample provenance or long-session acceptance."
+        }
+      }
+    },
+    {
+      "name": "Interior jump, missing a-rate data and missed anchor reject atomically 44100",
+      "passed": true,
+      "evidence": {
+        "anchorFrame": 952560000,
+        "periodFrames": 176384,
+        "nextFrame": 952560128,
+        "blocks": 1,
+        "wraps": 0,
+        "globalDisagreements": 0,
+        "maxGlobalDifference": 0,
+        "scope": "Integer callback clock checked against every normalized phase sample. Not a physical clock, sample provenance or long-session acceptance."
+      }
+    },
+    {
+      "name": "Geometry and safe-integer endpoint refuse explicitly 44100",
+      "passed": true,
+      "evidence": {
+        "anchorFrame": 9007199254740736,
+        "periodFrames": 176384,
+        "nextFrame": 9007199254740864,
+        "blocks": 1,
+        "wraps": 0,
+        "globalDisagreements": 0,
+        "maxGlobalDifference": 0,
+        "scope": "Integer callback clock checked against every normalized phase sample. Not a physical clock, sample provenance or long-session acceptance."
+      }
+    },
+    {
+      "name": "Large absolute anchor with bounded normalized phase starts exactly 48000",
+      "passed": true,
+      "evidence": {
+        "anchorFrame": 1036800000,
+        "periodFrames": 192000,
+        "nextFrame": 1036800128,
+        "blocks": 1,
+        "wraps": 0,
+        "globalDisagreements": 0,
+        "maxGlobalDifference": 0,
+        "scope": "Integer callback clock checked against every normalized phase sample. Not a physical clock, sample provenance or long-session acceptance."
+      }
+    },
+    {
+      "name": "Three exact wraps preserve integer time and per-sample tolerance 48000",
+      "passed": true,
+      "evidence": {
+        "maxPhaseErrorSamples": 0.005706787109375,
+        "snapshot": {
+          "anchorFrame": 1036800000,
+          "periodFrames": 192000,
+          "nextFrame": 1037376128,
+          "blocks": 4501,
+          "wraps": 3,
+          "globalDisagreements": 2250,
+          "maxGlobalDifference": 128,
+          "scope": "Integer callback clock checked against every normalized phase sample. Not a physical clock, sample provenance or long-session acceptance."
+        }
+      }
+    },
+    {
+      "name": "Interior jump, missing a-rate data and missed anchor reject atomically 48000",
+      "passed": true,
+      "evidence": {
+        "anchorFrame": 1036800000,
+        "periodFrames": 192000,
+        "nextFrame": 1036800128,
+        "blocks": 1,
+        "wraps": 0,
+        "globalDisagreements": 0,
+        "maxGlobalDifference": 0,
+        "scope": "Integer callback clock checked against every normalized phase sample. Not a physical clock, sample provenance or long-session acceptance."
+      }
+    },
+    {
+      "name": "Geometry and safe-integer endpoint refuse explicitly 48000",
+      "passed": true,
+      "evidence": {
+        "anchorFrame": 9007199254740736,
+        "periodFrames": 192000,
+        "nextFrame": 9007199254740864,
+        "blocks": 1,
+        "wraps": 0,
+        "globalDisagreements": 0,
+        "maxGlobalDifference": 0,
+        "scope": "Integer callback clock checked against every normalized phase sample. Not a physical clock, sample provenance or long-session acceptance."
+      }
+    }
+  ],
+  "scope": "Clock arithmetic with controlled normalized Float32 phase values, six-hour integer anchors and three wraps. No actual browser AudioBufferSource/AudioParam or long-session audio acceptance."
+}

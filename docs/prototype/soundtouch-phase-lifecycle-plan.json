@@ -1,0 +1,21 @@
+{
+  "declared_before_execution": "2026-10-17 actual allocation-expiry processor retirement",
+  "cases": [
+    {
+      "id": "cleanup-44100",
+      "sampleRate": 44100
+    },
+    {
+      "id": "cleanup-48000",
+      "sampleRate": 48000
+    }
+  ],
+  "fault": "On first actual context.createBuffer called by phase helper, obtain native buffer then occupy main thread80ms so the factory future50msanchor expires. Restore native method immediately afterward. This is an intentional scheduling failure, not a normal-product-performance measurement.",
+  "criteria": [
+    "Original LateScheduleError must reject, without rebasing anchor.",
+    "Actual AudioWorklet must ACK disposed before initialization with retainedPCMBytes0; factory cleanupErrornull; phase control never created.",
+    "Same context then creates another real node, appends one second actual PCM, primes/starts real DSP, reports playing after scheduled output, and ACKs disposal with store0/emptyepochs and nodeownedphaseSource disposed.",
+    "No unhandled rejection. Physical output muted; no native heap or musical/audio quality acceptance."
+  ],
+  "scope": "Actual browser AudioContext/AudioWorklet/AudioBufferSource failure/recovery. Prior successful whole-engine captures keep their original factory identities; no credit transferred to their old failure path."
+}

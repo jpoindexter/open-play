@@ -10,7 +10,7 @@ ROOT = Path(__file__).resolve().parents[1]
 parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument('--cohort', required=True)
 parser.add_argument('--plan', default='docs/prototype/soundtouch-engine-browser-plan.json')
-parser.add_argument('--harness', choices=['engine','clock-probe'], default='engine')
+parser.add_argument('--harness', choices=['engine','clock-probe','phase-engine','phase-long','phase-lifecycle'], default='engine')
 parser.add_argument('--module-delay', type=float, default=0)
 args = parser.parse_args()
 assert 0 <= args.module_delay <= 2
@@ -37,7 +37,7 @@ for path in sorted((ROOT / 'prototype').rglob('*')):
 plan = (ROOT / args.plan).resolve()
 assert plan.is_relative_to(ROOT / 'docs/prototype')
 route('/plan.json', str(plan.relative_to(ROOT)), 'application/json')
-for name in ['pull-transport.mjs', 'window-source.mjs', 'node-controller.mjs', 'node-worklet.mjs', 'node-factory.mjs', 'bare-clock-worklet.mjs', 'render-clock.mjs', 'counter-capture.mjs', 'transport-capture.mjs']:
+for name in ['pull-transport.mjs', 'window-source.mjs', 'node-controller.mjs', 'node-worklet.mjs', 'node-factory.mjs', 'bare-clock-worklet.mjs', 'render-clock.mjs', 'phase-render-clock.mjs', 'phase-control.mjs', 'phase-capture.mjs', 'counter-capture.mjs', 'transport-capture.mjs']:
     relative = 'experiments/keylock-soundtouch/' + name
     route('/' + relative, relative)
 prefix = 'local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/'

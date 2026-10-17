@@ -1,0 +1,2054 @@
+{
+  "startedAt": "2026-10-17T18:08:46.662Z",
+  "cases": [
+    {
+      "id": "cleanup-44100",
+      "sampleRate": 44100,
+      "errors": [],
+      "passed": true,
+      "expectedFailure": {
+        "name": "LateScheduleError",
+        "message": "Phase anchor already passed; do not silently rebase it"
+      },
+      "failureDiagnostics": {
+        "type": "preparation-failed",
+        "name": "LateScheduleError",
+        "message": "Phase anchor already passed; do not silently rebase it",
+        "processorRelease": {
+          "disposed": true,
+          "beforeInitialization": true,
+          "retainedPCMBytes": 0,
+          "phaseControl": {
+            "created": false,
+            "disposed": true
+          }
+        },
+        "cleanupError": null,
+        "observedAtContextTime": 0.09287981859410431
+      },
+      "started": {
+        "frame": 15476,
+        "position": 0,
+        "playing": true,
+        "generation": 1,
+        "rate": 1.08,
+        "semitones": 2,
+        "keylock": true,
+        "effectiveSemitones": 2,
+        "ready": true,
+        "superseded": [],
+        "preparationMilliseconds": null,
+        "preparationClock": "unavailable",
+        "positionKind": "nominal-not-measured-audible",
+        "counters": [
+          {
+            "originFrame": 0,
+            "sourceCursorFrame": 7168,
+            "realFramesFed": 7168,
+            "paddingFramesFed": 0,
+            "paddingLimit": 88200,
+            "generatedFrames": 4048,
+            "extractedFrames": 0,
+            "discardedPrerollFrames": 0,
+            "outputFramesReady": 4048
+          }
+        ]
+      },
+      "recovered": {
+        "disposed": false,
+        "store": {
+          "sampleRate": 44100,
+          "durationFrames": 44100,
+          "channelCounts": [
+            2
+          ],
+          "startFrame": 0,
+          "endFrame": 44100,
+          "disposed": false,
+          "retainedPCMBytes": 352800,
+          "maxRetainedFrames": 485100,
+          "retainedChunks": 2,
+          "ownership": "Snapshotted descriptors; borrowed immutable whole-buffer PCM. Payload bytes exclude DSP and JavaScript overhead."
+        },
+        "transport": {
+          "sampleRate": 44100,
+          "nextFrame": 19968,
+          "generation": 1,
+          "disposed": false,
+          "state": {
+            "frame": 15476,
+            "position": 0.11000816326530613,
+            "playing": true,
+            "generation": 1,
+            "rate": 1.08,
+            "semitones": 2,
+            "keylock": true,
+            "effectiveSemitones": 2,
+            "anchorPosition": 0,
+            "positionKind": "nominal-not-measured-audible"
+          },
+          "sourceBytes": 352800,
+          "retainedWholeSources": false,
+          "memoryLimit": "Caller-bounded PCM window plus bounded16epochs; opaque DSP heaps not counted.",
+          "pcmOwnership": "Descriptors are snapshotted; PCM arrays are borrowed immutable data for the transport lifetime. The worklet owns transferred storage.",
+          "renderedFrames": 13568,
+          "retiredEpochs": 0,
+          "retiredSummaries": [],
+          "retiredSummaryLimit": 64,
+          "clockRetention": "Last two applied anchors; older queries reject explicitly.",
+          "epochs": [
+            {
+              "generation": 1,
+              "role": "active-or-retiring",
+              "counters": [
+                {
+                  "originFrame": 0,
+                  "sourceCursorFrame": 11264,
+                  "realFramesFed": 11264,
+                  "paddingFramesFed": 0,
+                  "paddingLimit": 88200,
+                  "generatedFrames": 8095,
+                  "extractedFrames": 4492,
+                  "discardedPrerollFrames": 0,
+                  "outputFramesReady": 3603
+                }
+              ]
+            }
+          ],
+          "scope": "Forward pull-based experiment; nominal output endpoint, not measured audible source position or proved EOS tail preservation."
+        },
+        "renderClock": {
+          "anchorFrame": 6400,
+          "periodFrames": 176384,
+          "nextFrame": 19968,
+          "blocks": 106,
+          "wraps": 0,
+          "globalDisagreements": 0,
+          "maxGlobalDifference": 0,
+          "coarseGlobalFenceFrames": 256,
+          "scope": "Integer callback clock checked against every normalized phase sample. Not a physical clock, sample provenance or long-session acceptance."
+        },
+        "phaseControl": {
+          "anchorFrame": 6400,
+          "periodFrames": 176384,
+          "periodSeconds": 3.9996371882086166,
+          "sharedBufferPCMBytes": 705536,
+          "disposed": false,
+          "ownership": "Shared immutable per-context phase buffer; this connection/source is node-owned. Excludes other context/DSP allocations."
+        }
+      },
+      "disposed": {
+        "disposed": true,
+        "store": {
+          "sampleRate": 44100,
+          "durationFrames": 44100,
+          "channelCounts": [
+            2
+          ],
+          "startFrame": 0,
+          "endFrame": 44100,
+          "disposed": true,
+          "retainedPCMBytes": 0,
+          "maxRetainedFrames": 485100,
+          "retainedChunks": 0,
+          "ownership": "Snapshotted descriptors; borrowed immutable whole-buffer PCM. Payload bytes exclude DSP and JavaScript overhead."
+        },
+        "transport": {
+          "sampleRate": 44100,
+          "nextFrame": 19968,
+          "generation": 1,
+          "disposed": true,
+          "state": {
+            "frame": 19968,
+            "position": 0.11000816326530613,
+            "playing": false,
+            "generation": 1,
+            "rate": 1.08,
+            "semitones": 2,
+            "keylock": true,
+            "effectiveSemitones": 2,
+            "anchorPosition": 0.11000816326530613,
+            "positionKind": "nominal-not-measured-audible"
+          },
+          "sourceBytes": 0,
+          "retainedWholeSources": false,
+          "memoryLimit": "Caller-bounded PCM window plus bounded16epochs; opaque DSP heaps not counted.",
+          "pcmOwnership": "Descriptors are snapshotted; PCM arrays are borrowed immutable data for the transport lifetime. The worklet owns transferred storage.",
+          "renderedFrames": 13568,
+          "retiredEpochs": 1,
+          "retiredSummaries": [
+            {
+              "generation": 1,
+              "counters": [
+                {
+                  "originFrame": 0,
+                  "sourceCursorFrame": 11264,
+                  "realFramesFed": 11264,
+                  "paddingFramesFed": 0,
+                  "paddingLimit": 88200,
+                  "generatedFrames": 8095,
+                  "extractedFrames": 4492,
+                  "discardedPrerollFrames": 0,
+                  "outputFramesReady": 3603
+                }
+              ]
+            }
+          ],
+          "retiredSummaryLimit": 64,
+          "clockRetention": "Last two applied anchors; older queries reject explicitly.",
+          "epochs": [],
+          "scope": "Forward pull-based experiment; nominal output endpoint, not measured audible source position or proved EOS tail preservation."
+        },
+        "renderClock": {
+          "anchorFrame": 6400,
+          "periodFrames": 176384,
+          "nextFrame": 19968,
+          "blocks": 106,
+          "wraps": 0,
+          "globalDisagreements": 0,
+          "maxGlobalDifference": 0,
+          "coarseGlobalFenceFrames": 256,
+          "scope": "Integer callback clock checked against every normalized phase sample. Not a physical clock, sample provenance or long-session acceptance."
+        },
+        "phaseControl": {
+          "anchorFrame": 6400,
+          "periodFrames": 176384,
+          "periodSeconds": 3.9996371882086166,
+          "sharedBufferPCMBytes": 705536,
+          "disposed": true,
+          "ownership": "Shared immutable per-context phase buffer; this connection/source is node-owned. Excludes other context/DSP allocations."
+        }
+      },
+      "diagnostics": [
+        {
+          "type": "preparation-failed",
+          "name": "LateScheduleError",
+          "message": "Phase anchor already passed; do not silently rebase it",
+          "processorRelease": {
+            "disposed": true,
+            "beforeInitialization": true,
+            "retainedPCMBytes": 0,
+            "phaseControl": {
+              "created": false,
+              "disposed": true
+            }
+          },
+          "cleanupError": null,
+          "observedAtContextTime": 0.09287981859410431
+        },
+        {
+          "type": "ready",
+          "frame": 6400,
+          "globalFrame": 6400,
+          "clock": {
+            "anchorFrame": 6400,
+            "periodFrames": 176384,
+            "nextFrame": 6528,
+            "blocks": 1,
+            "wraps": 0,
+            "globalDisagreements": 0,
+            "maxGlobalDifference": 0,
+            "coarseGlobalFenceFrames": 256,
+            "scope": "Integer callback clock checked against every normalized phase sample. Not a physical clock, sample provenance or long-session acceptance."
+          },
+          "observedAtContextTime": 0.14512471655328799
+        }
+      ]
+    },
+    {
+      "id": "cleanup-48000",
+      "sampleRate": 48000,
+      "errors": [],
+      "passed": true,
+      "expectedFailure": {
+        "name": "LateScheduleError",
+        "message": "Phase anchor already passed; do not silently rebase it"
+      },
+      "failureDiagnostics": {
+        "type": "preparation-failed",
+        "name": "LateScheduleError",
+        "message": "Phase anchor already passed; do not silently rebase it",
+        "processorRelease": {
+          "disposed": true,
+          "beforeInitialization": true,
+          "retainedPCMBytes": 0,
+          "phaseControl": {
+            "created": false,
+            "disposed": true
+          }
+        },
+        "cleanupError": null,
+        "observedAtContextTime": 0.112
+      },
+      "started": {
+        "frame": 17536,
+        "position": 0,
+        "playing": true,
+        "generation": 1,
+        "rate": 1.08,
+        "semitones": 2,
+        "keylock": true,
+        "effectiveSemitones": 2,
+        "ready": true,
+        "superseded": [],
+        "preparationMilliseconds": null,
+        "preparationClock": "unavailable",
+        "positionKind": "nominal-not-measured-audible",
+        "counters": [
+          {
+            "originFrame": 0,
+            "sourceCursorFrame": 7168,
+            "realFramesFed": 7168,
+            "paddingFramesFed": 0,
+            "paddingLimit": 96000,
+            "generatedFrames": 4405,
+            "extractedFrames": 0,
+            "discardedPrerollFrames": 0,
+            "outputFramesReady": 4405
+          }
+        ]
+      },
+      "recovered": {
+        "disposed": false,
+        "store": {
+          "sampleRate": 48000,
+          "durationFrames": 48000,
+          "channelCounts": [
+            2
+          ],
+          "startFrame": 0,
+          "endFrame": 48000,
+          "disposed": false,
+          "retainedPCMBytes": 384000,
+          "maxRetainedFrames": 528000,
+          "retainedChunks": 2,
+          "ownership": "Snapshotted descriptors; borrowed immutable whole-buffer PCM. Payload bytes exclude DSP and JavaScript overhead."
+        },
+        "transport": {
+          "sampleRate": 48000,
+          "nextFrame": 22400,
+          "generation": 1,
+          "disposed": false,
+          "state": {
+            "frame": 17536,
+            "position": 0.10944000000000001,
+            "playing": true,
+            "generation": 1,
+            "rate": 1.08,
+            "semitones": 2,
+            "keylock": true,
+            "effectiveSemitones": 2,
+            "anchorPosition": 0,
+            "positionKind": "nominal-not-measured-audible"
+          },
+          "sourceBytes": 384000,
+          "retainedWholeSources": false,
+          "memoryLimit": "Caller-bounded PCM window plus bounded16epochs; opaque DSP heaps not counted.",
+          "pcmOwnership": "Descriptors are snapshotted; PCM arrays are borrowed immutable data for the transport lifetime. The worklet owns transferred storage.",
+          "renderedFrames": 14592,
+          "retiredEpochs": 0,
+          "retiredSummaries": [],
+          "retiredSummaryLimit": 64,
+          "clockRetention": "Last two applied anchors; older queries reject explicitly.",
+          "epochs": [
+            {
+              "generation": 1,
+              "role": "active-or-retiring",
+              "counters": [
+                {
+                  "originFrame": 0,
+                  "sourceCursorFrame": 12288,
+                  "realFramesFed": 12288,
+                  "paddingFramesFed": 0,
+                  "paddingLimit": 96000,
+                  "generatedFrames": 8810,
+                  "extractedFrames": 4864,
+                  "discardedPrerollFrames": 0,
+                  "outputFramesReady": 3946
+                }
+              ]
+            }
+          ],
+          "scope": "Forward pull-based experiment; nominal output endpoint, not measured audible source position or proved EOS tail preservation."
+        },
+        "renderClock": {
+          "anchorFrame": 7808,
+          "periodFrames": 192000,
+          "nextFrame": 22400,
+          "blocks": 114,
+          "wraps": 0,
+          "globalDisagreements": 0,
+          "maxGlobalDifference": 0,
+          "coarseGlobalFenceFrames": 256,
+          "scope": "Integer callback clock checked against every normalized phase sample. Not a physical clock, sample provenance or long-session acceptance."
+        },
+        "phaseControl": {
+          "anchorFrame": 7808,
+          "periodFrames": 192000,
+          "periodSeconds": 4,
+          "sharedBufferPCMBytes": 768000,
+          "disposed": false,
+          "ownership": "Shared immutable per-context phase buffer; this connection/source is node-owned. Excludes other context/DSP allocations."
+        }
+      },
+      "disposed": {
+        "disposed": true,
+        "store": {
+          "sampleRate": 48000,
+          "durationFrames": 48000,
+          "channelCounts": [
+            2
+          ],
+          "startFrame": 0,
+          "endFrame": 48000,
+          "disposed": true,
+          "retainedPCMBytes": 0,
+          "maxRetainedFrames": 528000,
+          "retainedChunks": 0,
+          "ownership": "Snapshotted descriptors; borrowed immutable whole-buffer PCM. Payload bytes exclude DSP and JavaScript overhead."
+        },
+        "transport": {
+          "sampleRate": 48000,
+          "nextFrame": 22656,
+          "generation": 1,
+          "disposed": true,
+          "state": {
+            "frame": 22656,
+            "position": 0.11520000000000001,
+            "playing": false,
+            "generation": 1,
+            "rate": 1.08,
+            "semitones": 2,
+            "keylock": true,
+            "effectiveSemitones": 2,
+            "anchorPosition": 0.11520000000000001,
+            "positionKind": "nominal-not-measured-audible"
+          },
+          "sourceBytes": 0,
+          "retainedWholeSources": false,
+          "memoryLimit": "Caller-bounded PCM window plus bounded16epochs; opaque DSP heaps not counted.",
+          "pcmOwnership": "Descriptors are snapshotted; PCM arrays are borrowed immutable data for the transport lifetime. The worklet owns transferred storage.",
+          "renderedFrames": 14848,
+          "retiredEpochs": 1,
+          "retiredSummaries": [
+            {
+              "generation": 1,
+              "counters": [
+                {
+                  "originFrame": 0,
+                  "sourceCursorFrame": 12288,
+                  "realFramesFed": 12288,
+                  "paddingFramesFed": 0,
+                  "paddingLimit": 96000,
+                  "generatedFrames": 8810,
+                  "extractedFrames": 5120,
+                  "discardedPrerollFrames": 0,
+                  "outputFramesReady": 3690
+                }
+              ]
+            }
+          ],
+          "retiredSummaryLimit": 64,
+          "clockRetention": "Last two applied anchors; older queries reject explicitly.",
+          "epochs": [],
+          "scope": "Forward pull-based experiment; nominal output endpoint, not measured audible source position or proved EOS tail preservation."
+        },
+        "renderClock": {
+          "anchorFrame": 7808,
+          "periodFrames": 192000,
+          "nextFrame": 22656,
+          "blocks": 116,
+          "wraps": 0,
+          "globalDisagreements": 0,
+          "maxGlobalDifference": 0,
+          "coarseGlobalFenceFrames": 256,
+          "scope": "Integer callback clock checked against every normalized phase sample. Not a physical clock, sample provenance or long-session acceptance."
+        },
+        "phaseControl": {
+          "anchorFrame": 7808,
+          "periodFrames": 192000,
+          "periodSeconds": 4,
+          "sharedBufferPCMBytes": 768000,
+          "disposed": true,
+          "ownership": "Shared immutable per-context phase buffer; this connection/source is node-owned. Excludes other context/DSP allocations."
+        }
+      },
+      "diagnostics": [
+        {
+          "type": "preparation-failed",
+          "name": "LateScheduleError",
+          "message": "Phase anchor already passed; do not silently rebase it",
+          "processorRelease": {
+            "disposed": true,
+            "beforeInitialization": true,
+            "retainedPCMBytes": 0,
+            "phaseControl": {
+              "created": false,
+              "disposed": true
+            }
+          },
+          "cleanupError": null,
+          "observedAtContextTime": 0.112
+        },
+        {
+          "type": "ready",
+          "frame": 7808,
+          "globalFrame": 7808,
+          "clock": {
+            "anchorFrame": 7808,
+            "periodFrames": 192000,
+            "nextFrame": 7936,
+            "blocks": 1,
+            "wraps": 0,
+            "globalDisagreements": 0,
+            "maxGlobalDifference": 0,
+            "coarseGlobalFenceFrames": 256,
+            "scope": "Integer callback clock checked against every normalized phase sample. Not a physical clock, sample provenance or long-session acceptance."
+          },
+          "observedAtContextTime": 0.16266666666666665
+        }
+      ]
+    }
+  ],
+  "unhandledRejections": [],
+  "fatalErrors": [],
+  "completed": true,
+  "full_parity_verified": false,
+  "plan": {
+    "declared_before_execution": "2026-10-17 actual allocation-expiry processor retirement",
+    "cases": [
+      {
+        "id": "cleanup-44100",
+        "sampleRate": 44100
+      },
+      {
+        "id": "cleanup-48000",
+        "sampleRate": 48000
+      }
+    ],
+    "fault": "On first actual context.createBuffer called by phase helper, obtain native buffer then occupy main thread80ms so the factory future50msanchor expires. Restore native method immediately afterward. This is an intentional scheduling failure, not a normal-product-performance measurement.",
+    "criteria": [
+      "Original LateScheduleError must reject, without rebasing anchor.",
+      "Actual AudioWorklet must ACK disposed before initialization with retainedPCMBytes0; factory cleanupErrornull; phase control never created.",
+      "Same context then creates another real node, appends one second actual PCM, primes/starts real DSP, reports playing after scheduled output, and ACKs disposal with store0/emptyepochs and nodeownedphaseSource disposed.",
+      "No unhandled rejection. Physical output muted; no native heap or musical/audio quality acceptance."
+    ],
+    "scope": "Actual browser AudioContext/AudioWorklet/AudioBufferSource failure/recovery. Prior successful whole-engine captures keep their original factory identities; no credit transferred to their old failure path."
+  },
+  "servedSources": {
+    "cohort": "phase-lifecycle",
+    "moduleDelaySeconds": 0,
+    "scope": "Source bytes frozen once at server startup. One bare dependency import rewritten to a fixed local URL; no DSP algorithm changes.",
+    "routes": {
+      "/": {
+        "path": "experiments/keylock-soundtouch/phase-lifecycle.html",
+        "sourceSHA256": "fa524b84eead5a3cffd4e716cde16880c63438e8640dbbe663063eb97c22b2f5",
+        "servedSHA256": "fa524b84eead5a3cffd4e716cde16880c63438e8640dbbe663063eb97c22b2f5",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/phase-lifecycle-harness.mjs": {
+        "path": "experiments/keylock-soundtouch/phase-lifecycle-harness.mjs",
+        "sourceSHA256": "4ccfe2afc38cf8393b60d9cf45be26849e88f79991c56ce0e174229aa3a9b094",
+        "servedSHA256": "4ccfe2afc38cf8393b60d9cf45be26849e88f79991c56ce0e174229aa3a9b094",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/README.md": {
+        "path": "prototype/README.md",
+        "sourceSHA256": "b6aba9278ec6fc520c1d1b64494ceb73f081af40ddcfb41f6f19e284ac2715b0",
+        "servedSHA256": "b6aba9278ec6fc520c1d1b64494ceb73f081af40ddcfb41f6f19e284ac2715b0",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/analysis-browser-tests.js": {
+        "path": "prototype/analysis-browser-tests.js",
+        "sourceSHA256": "42585ce17cb7b54057d55900597b41d6b0dcc027f241f3598aeb252b5cea311d",
+        "servedSHA256": "42585ce17cb7b54057d55900597b41d6b0dcc027f241f3598aeb252b5cea311d",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/analysis-test.html": {
+        "path": "prototype/analysis-test.html",
+        "sourceSHA256": "281ddb30a9a2a96a39f0a503cbc5a0e68e1e410e4c3ece1142c94bf3591a690a",
+        "servedSHA256": "281ddb30a9a2a96a39f0a503cbc5a0e68e1e410e4c3ece1142c94bf3591a690a",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/analysis-worker.js": {
+        "path": "prototype/analysis-worker.js",
+        "sourceSHA256": "18043ae5c789285252ffae7e2bad6213367af7bcbec0e44e101b91637a3ef514",
+        "servedSHA256": "18043ae5c789285252ffae7e2bad6213367af7bcbec0e44e101b91637a3ef514",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/analysis.js": {
+        "path": "prototype/analysis.js",
+        "sourceSHA256": "6df58e927c458f7314a3f8fbc1457ab03f1677d950ec2a57b5a44969d121b89a",
+        "servedSHA256": "6df58e927c458f7314a3f8fbc1457ab03f1677d950ec2a57b5a44969d121b89a",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/app.js": {
+        "path": "prototype/app.js",
+        "sourceSHA256": "abc0e15d47fb1546cde931c21072d9dbd6f4d78ba1c65cab0fc5841b12cf02bf",
+        "servedSHA256": "abc0e15d47fb1546cde931c21072d9dbd6f4d78ba1c65cab0fc5841b12cf02bf",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/audio-capture-continuity-harness.html": {
+        "path": "prototype/audio-capture-continuity-harness.html",
+        "sourceSHA256": "646e47559e51ee58a6a084232630bc7502567910b3ca49d3b5268d75f75bd380",
+        "servedSHA256": "646e47559e51ee58a6a084232630bc7502567910b3ca49d3b5268d75f75bd380",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/audio-capture-continuity-harness.js": {
+        "path": "prototype/audio-capture-continuity-harness.js",
+        "sourceSHA256": "b16acaa5fe8c85ea3f8989e802e7ce9d954b919db43fa6460aab592f806d6309",
+        "servedSHA256": "b16acaa5fe8c85ea3f8989e802e7ce9d954b919db43fa6460aab592f806d6309",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/audio-integration-test.html": {
+        "path": "prototype/audio-integration-test.html",
+        "sourceSHA256": "9010e52dc03a3ae79c32dae01ba2cea841667d61b3eea4b4288c644c07b747bb",
+        "servedSHA256": "9010e52dc03a3ae79c32dae01ba2cea841667d61b3eea4b4288c644c07b747bb",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/audio-integration-test.js": {
+        "path": "prototype/audio-integration-test.js",
+        "sourceSHA256": "c07d1410d6cc65f535c0c79308aa911b28ddaad177c4c00a287ad7447f25f14f",
+        "servedSHA256": "c07d1410d6cc65f535c0c79308aa911b28ddaad177c4c00a287ad7447f25f14f",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/audio-monitor-engine-harness.html": {
+        "path": "prototype/audio-monitor-engine-harness.html",
+        "sourceSHA256": "0d31d046fd0b21b94e98899529bb9faad1107459f6fad00a3de252d1f3195123",
+        "servedSHA256": "0d31d046fd0b21b94e98899529bb9faad1107459f6fad00a3de252d1f3195123",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/audio-monitor-engine-harness.js": {
+        "path": "prototype/audio-monitor-engine-harness.js",
+        "sourceSHA256": "f74ebe9b75778c4a0725ba40e3283b8f749121ec2e14dd92ad571c000eca537e",
+        "servedSHA256": "f74ebe9b75778c4a0725ba40e3283b8f749121ec2e14dd92ad571c000eca537e",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/audio-monitor-harness.html": {
+        "path": "prototype/audio-monitor-harness.html",
+        "sourceSHA256": "8da4209681d8bb605947a0073ae052e7af0407eb0001ca8652ba4fd299064dcd",
+        "servedSHA256": "8da4209681d8bb605947a0073ae052e7af0407eb0001ca8652ba4fd299064dcd",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/audio-monitor-harness.js": {
+        "path": "prototype/audio-monitor-harness.js",
+        "sourceSHA256": "f04246eb0694ecab47228d84c35731958fdaa937f13217b8faef3a7f5590dfa3",
+        "servedSHA256": "f04246eb0694ecab47228d84c35731958fdaa937f13217b8faef3a7f5590dfa3",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/audio-monitor.js": {
+        "path": "prototype/audio-monitor.js",
+        "sourceSHA256": "31a07bd6277bf19ec05495d207f7228505c8c948a9314531702706596bf4eada",
+        "servedSHA256": "31a07bd6277bf19ec05495d207f7228505c8c948a9314531702706596bf4eada",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/audio-output.js": {
+        "path": "prototype/audio-output.js",
+        "sourceSHA256": "8c71a48f800393951f66cf481b2f83b195616d5b8d6174f335b5071007f96150",
+        "servedSHA256": "8c71a48f800393951f66cf481b2f83b195616d5b8d6174f335b5071007f96150",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/behavior-tests.html": {
+        "path": "prototype/behavior-tests.html",
+        "sourceSHA256": "118be8a70fb98af030f350325483d0a9cc16dfedc91cbecf6d28cabdf71865e2",
+        "servedSHA256": "118be8a70fb98af030f350325483d0a9cc16dfedc91cbecf6d28cabdf71865e2",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/behavior-tests.js": {
+        "path": "prototype/behavior-tests.js",
+        "sourceSHA256": "9963cef451196ea5e0d8513d5e57709b2deb63e99ebf00d924ff4d374d7bdb6f",
+        "servedSHA256": "9963cef451196ea5e0d8513d5e57709b2deb63e99ebf00d924ff4d374d7bdb6f",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/cdg-harness.html": {
+        "path": "prototype/cdg-harness.html",
+        "sourceSHA256": "ae26264528bcac1b0041f0f87245c75bf662f7b9ce8e9164eefbd7b2c20a5ace",
+        "servedSHA256": "ae26264528bcac1b0041f0f87245c75bf662f7b9ce8e9164eefbd7b2c20a5ace",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/cdg-harness.js": {
+        "path": "prototype/cdg-harness.js",
+        "sourceSHA256": "6388f90451b38302285f974b64afb7d88b7486cd2a95c6bdeb0858417b8c2759",
+        "servedSHA256": "6388f90451b38302285f974b64afb7d88b7486cd2a95c6bdeb0858417b8c2759",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/cdg.js": {
+        "path": "prototype/cdg.js",
+        "sourceSHA256": "b16327227ded19a003f14a4c96958467cb7822ed012e70efbe958043d99d10c2",
+        "servedSHA256": "b16327227ded19a003f14a4c96958467cb7822ed012e70efbe958043d99d10c2",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/channel-stems-integration-test.html": {
+        "path": "prototype/channel-stems-integration-test.html",
+        "sourceSHA256": "39bee268c0f13010f3a4c31f12c09d2b417f1396053e051fa3d868690b8f32b9",
+        "servedSHA256": "39bee268c0f13010f3a4c31f12c09d2b417f1396053e051fa3d868690b8f32b9",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/channel-stems-integration-test.js": {
+        "path": "prototype/channel-stems-integration-test.js",
+        "sourceSHA256": "cd281252e1776eb7ae7a724060d5580ccd4929400a6334418046f67db0a57944",
+        "servedSHA256": "cd281252e1776eb7ae7a724060d5580ccd4929400a6334418046f67db0a57944",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/deck-scratch-cache.js": {
+        "path": "prototype/deck-scratch-cache.js",
+        "sourceSHA256": "04ea486f7010df479184d629c14ea3f8cdd81ef595c5d8233c8e407890e2fa99",
+        "servedSHA256": "04ea486f7010df479184d629c14ea3f8cdd81ef595c5d8233c8e407890e2fa99",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/deck-scratch-capture-worklet.js": {
+        "path": "prototype/deck-scratch-capture-worklet.js",
+        "sourceSHA256": "dbb540f6be6f38fc6143c1f4fa2606455f55e4b313b84557298dd3548c75cbff",
+        "servedSHA256": "dbb540f6be6f38fc6143c1f4fa2606455f55e4b313b84557298dd3548c75cbff",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/deck-scratch-engine-harness.html": {
+        "path": "prototype/deck-scratch-engine-harness.html",
+        "sourceSHA256": "a17411247b889a39cad210c3a36aa743f87abd8f1a194f7095a24f8233977eaa",
+        "servedSHA256": "a17411247b889a39cad210c3a36aa743f87abd8f1a194f7095a24f8233977eaa",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/deck-scratch-engine-harness.js": {
+        "path": "prototype/deck-scratch-engine-harness.js",
+        "sourceSHA256": "de9dae3f3b70e9bb9263c88809d2d1246ee24570f0a2332b63808654a3fbd14c",
+        "servedSHA256": "de9dae3f3b70e9bb9263c88809d2d1246ee24570f0a2332b63808654a3fbd14c",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/deck-scratch-harness.html": {
+        "path": "prototype/deck-scratch-harness.html",
+        "sourceSHA256": "485bea5d4e1b99a2f223458f30897b2e2fa609f4a4193e96d66de716df73b4f0",
+        "servedSHA256": "485bea5d4e1b99a2f223458f30897b2e2fa609f4a4193e96d66de716df73b4f0",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/deck-scratch-harness.js": {
+        "path": "prototype/deck-scratch-harness.js",
+        "sourceSHA256": "1f0759f07deabae1c01e7e56eda23f2e4766d4629521ec673b69c1bf98e7918f",
+        "servedSHA256": "1f0759f07deabae1c01e7e56eda23f2e4766d4629521ec673b69c1bf98e7918f",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/deck-scratch-kernel.js": {
+        "path": "prototype/deck-scratch-kernel.js",
+        "sourceSHA256": "428c677a90114d6a23479ad0789825c7cd45bcaed3806fbafec32aba6a68d08c",
+        "servedSHA256": "428c677a90114d6a23479ad0789825c7cd45bcaed3806fbafec32aba6a68d08c",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/deck-scratch-report.js": {
+        "path": "prototype/deck-scratch-report.js",
+        "sourceSHA256": "eb3112ceea31915e53d506c3e3778d3998fd75db04c71db756313e7fba20f8ba",
+        "servedSHA256": "eb3112ceea31915e53d506c3e3778d3998fd75db04c71db756313e7fba20f8ba",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/deck-scratch-ui.js": {
+        "path": "prototype/deck-scratch-ui.js",
+        "sourceSHA256": "884da609fa84a4affa584bdba1b02f563c4100caa5cae463f91008076a9e7193",
+        "servedSHA256": "884da609fa84a4affa584bdba1b02f563c4100caa5cae463f91008076a9e7193",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/deck-scratch-worklet.js": {
+        "path": "prototype/deck-scratch-worklet.js",
+        "sourceSHA256": "55201aa5eb1e6db5ab0f23ff47e307ca53e1c65aabe572eb9cdd8e9ab10a8b87",
+        "servedSHA256": "55201aa5eb1e6db5ab0f23ff47e307ca53e1c65aabe572eb9cdd8e9ab10a8b87",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/deck-scratch.js": {
+        "path": "prototype/deck-scratch.js",
+        "sourceSHA256": "0f875b8ed8a2f0b0373455e8758fe150be937fa3311a6b35142a7d15622f189a",
+        "servedSHA256": "0f875b8ed8a2f0b0373455e8758fe150be937fa3311a6b35142a7d15622f189a",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/drag-test.html": {
+        "path": "prototype/drag-test.html",
+        "sourceSHA256": "43f1f5df048218bf31c3fae37c856d0372d86106ae4f101293b369e2840fa79f",
+        "servedSHA256": "43f1f5df048218bf31c3fae37c856d0372d86106ae4f101293b369e2840fa79f",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/effects.js": {
+        "path": "prototype/effects.js",
+        "sourceSHA256": "5994b6a68ec27e78104029403880fcc46b4f340985088fda64b8b4f7273120d6",
+        "servedSHA256": "5994b6a68ec27e78104029403880fcc46b4f340985088fda64b8b4f7273120d6",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/engine.js": {
+        "path": "prototype/engine.js",
+        "sourceSHA256": "b4683c245c6314432c06f891e85106cf0a1a5c0a615435516930ab5b38f64adf",
+        "servedSHA256": "b4683c245c6314432c06f891e85106cf0a1a5c0a615435516930ab5b38f64adf",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/extended-effects-browser-tests.js": {
+        "path": "prototype/extended-effects-browser-tests.js",
+        "sourceSHA256": "372a5b4bcbade5f73974feec82c7cc2eea3ba54313f274e900a0df79b91c91c6",
+        "servedSHA256": "372a5b4bcbade5f73974feec82c7cc2eea3ba54313f274e900a0df79b91c91c6",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/extended-effects-kernel.js": {
+        "path": "prototype/extended-effects-kernel.js",
+        "sourceSHA256": "0eb897473c10629db8f5e62944a8552de7f98cbddfc658ae0a25fb9279ac4609",
+        "servedSHA256": "0eb897473c10629db8f5e62944a8552de7f98cbddfc658ae0a25fb9279ac4609",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/extended-effects-test.html": {
+        "path": "prototype/extended-effects-test.html",
+        "sourceSHA256": "f66a0d60fe481b90032ca44c671e6fba0348fd9c39fd46ddae4fba61ea134aed",
+        "servedSHA256": "f66a0d60fe481b90032ca44c671e6fba0348fd9c39fd46ddae4fba61ea134aed",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/extended-effects-worklet.js": {
+        "path": "prototype/extended-effects-worklet.js",
+        "sourceSHA256": "635023e44ddb4c4af9c1b28e5b73cdda1ea5ad05b8a360dc1e1bd5c0604944ae",
+        "servedSHA256": "635023e44ddb4c4af9c1b28e5b73cdda1ea5ad05b8a360dc1e1bd5c0604944ae",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/extended-effects.js": {
+        "path": "prototype/extended-effects.js",
+        "sourceSHA256": "8183eba8f0dd241c30be9fe5a45db0a64ac6470300b5082ac8645df2be4e9ac2",
+        "servedSHA256": "8183eba8f0dd241c30be9fe5a45db0a64ac6470300b5082ac8645df2be4e9ac2",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/fixtures.js": {
+        "path": "prototype/fixtures.js",
+        "sourceSHA256": "781d7b2f8db43be84288066d66a85f689e21acfc0e2fe6d3ad4c5b53d99e5f77",
+        "servedSHA256": "781d7b2f8db43be84288066d66a85f689e21acfc0e2fe6d3ad4c5b53d99e5f77",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/flip.js": {
+        "path": "prototype/flip.js",
+        "sourceSHA256": "93d0a0f78409566b936997cdcabfd431eb5d301f5648a72ffed44a86beec6c65",
+        "servedSHA256": "93d0a0f78409566b936997cdcabfd431eb5d301f5648a72ffed44a86beec6c65",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/fx-adversarial-browser-tests.js": {
+        "path": "prototype/fx-adversarial-browser-tests.js",
+        "sourceSHA256": "c8822761e0a60d70c48db2b91d8f777c00ed61db35455d5bb456fec36b66f3af",
+        "servedSHA256": "c8822761e0a60d70c48db2b91d8f777c00ed61db35455d5bb456fec36b66f3af",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/fx-adversarial-test.html": {
+        "path": "prototype/fx-adversarial-test.html",
+        "sourceSHA256": "d2a75755bf12166907ee5d4bbae8ebfa4384d54f61e1a6b0f108041e651bbf57",
+        "servedSHA256": "d2a75755bf12166907ee5d4bbae8ebfa4384d54f61e1a6b0f108041e651bbf57",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/fx-tempo-capture-worklet.js": {
+        "path": "prototype/fx-tempo-capture-worklet.js",
+        "sourceSHA256": "1ffd09ad071f8dd2dca8b745ca8f9e1182e515eb32c42340bf5ff0a035e9b8b9",
+        "servedSHA256": "1ffd09ad071f8dd2dca8b745ca8f9e1182e515eb32c42340bf5ff0a035e9b8b9",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/fx-tempo-harness.html": {
+        "path": "prototype/fx-tempo-harness.html",
+        "sourceSHA256": "00b6253d49469b4ce25c912d74f8c4df07667e8528dc087d36b07d5578c9e0bb",
+        "servedSHA256": "00b6253d49469b4ce25c912d74f8c4df07667e8528dc087d36b07d5578c9e0bb",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/fx-tempo-harness.js": {
+        "path": "prototype/fx-tempo-harness.js",
+        "sourceSHA256": "be21db14052520cbad414d9312c76761229c7db102975ac5a6a0e5cb7c6c9ba6",
+        "servedSHA256": "be21db14052520cbad414d9312c76761229c7db102975ac5a6a0e5cb7c6c9ba6",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/fx-tempo.js": {
+        "path": "prototype/fx-tempo.js",
+        "sourceSHA256": "6417ffdaaf05334b906ef22c4e6f10ab90950068796b797ec323a819d838a380",
+        "servedSHA256": "6417ffdaaf05334b906ef22c4e6f10ab90950068796b797ec323a819d838a380",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/holds.js": {
+        "path": "prototype/holds.js",
+        "sourceSHA256": "a679c1037d54b4783970f1489053401f7cfd60a6f7e87f5b4cf586a14c7bc9fd",
+        "servedSHA256": "a679c1037d54b4783970f1489053401f7cfd60a6f7e87f5b4cf586a14c7bc9fd",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/index.html": {
+        "path": "prototype/index.html",
+        "sourceSHA256": "a920816b73f68e28feab40f36ae429677cd3005a4f10a5e8b0366faf7907259c",
+        "servedSHA256": "a920816b73f68e28feab40f36ae429677cd3005a4f10a5e8b0366faf7907259c",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/inventory.js": {
+        "path": "prototype/inventory.js",
+        "sourceSHA256": "38050b62181e85950e824be1704bd557bc28808bcdb4af4a17a36a42385a71a5",
+        "servedSHA256": "38050b62181e85950e824be1704bd557bc28808bcdb4af4a17a36a42385a71a5",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/karaoke-integration-harness.html": {
+        "path": "prototype/karaoke-integration-harness.html",
+        "sourceSHA256": "e60be67b0b6f2d4c15a7809fe4c045b7f9d242aeb30cb90007f76438f14c5a88",
+        "servedSHA256": "e60be67b0b6f2d4c15a7809fe4c045b7f9d242aeb30cb90007f76438f14c5a88",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/karaoke-integration-harness.js": {
+        "path": "prototype/karaoke-integration-harness.js",
+        "sourceSHA256": "461a400839b3cfc5807725af5b21b5eba4770e3402aeb696dd39355caddf1ebe",
+        "servedSHA256": "461a400839b3cfc5807725af5b21b5eba4770e3402aeb696dd39355caddf1ebe",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/keylock-cursor-analysis.js": {
+        "path": "prototype/keylock-cursor-analysis.js",
+        "sourceSHA256": "aadf86b0f524af1fa4a4b30e69214f00fe3c096ecedfc11716d56da982c7b577",
+        "servedSHA256": "aadf86b0f524af1fa4a4b30e69214f00fe3c096ecedfc11716d56da982c7b577",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/keylock-cursor-capture-worklet.js": {
+        "path": "prototype/keylock-cursor-capture-worklet.js",
+        "sourceSHA256": "3b605149cb5b6adec647115c25c18818aa5bcb0fe38d2c11214ea81047594a92",
+        "servedSHA256": "3b605149cb5b6adec647115c25c18818aa5bcb0fe38d2c11214ea81047594a92",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/keylock-cursor32-analysis.js": {
+        "path": "prototype/keylock-cursor32-analysis.js",
+        "sourceSHA256": "f71c04236897eff8025a36992000681feb4d81ccf957d09a898a243b695a1ae1",
+        "servedSHA256": "f71c04236897eff8025a36992000681feb4d81ccf957d09a898a243b695a1ae1",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/keylock-disposal-harness.html": {
+        "path": "prototype/keylock-disposal-harness.html",
+        "sourceSHA256": "7a9830fccfb599892c0ce305755843d63689dc2122fada6f0ed076b46865c4f1",
+        "servedSHA256": "7a9830fccfb599892c0ce305755843d63689dc2122fada6f0ed076b46865c4f1",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/keylock-disposal-harness.js": {
+        "path": "prototype/keylock-disposal-harness.js",
+        "sourceSHA256": "e856aa79893a427171a9ca3521d675cc0aad47ca298e0dc459fc33924b82d057",
+        "servedSHA256": "e856aa79893a427171a9ca3521d675cc0aad47ca298e0dc459fc33924b82d057",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/keylock-disposal-instrumentation.js": {
+        "path": "prototype/keylock-disposal-instrumentation.js",
+        "sourceSHA256": "e8a1d923929176084ae5946f5ef191f7f9e7353f1f8e13491f14da813ffda0fb",
+        "servedSHA256": "e8a1d923929176084ae5946f5ef191f7f9e7353f1f8e13491f14da813ffda0fb",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/keylock-dsp.js": {
+        "path": "prototype/keylock-dsp.js",
+        "sourceSHA256": "4025a619a2ccb7f92ac7c94bebb3e413289f4b715557f4bdcee255611c4233ff",
+        "servedSHA256": "4025a619a2ccb7f92ac7c94bebb3e413289f4b715557f4bdcee255611c4233ff",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/keylock-engine-cursor-harness.html": {
+        "path": "prototype/keylock-engine-cursor-harness.html",
+        "sourceSHA256": "4c7b7ec874162561bc704927a854fb6f59c83230adb66b62dd3b4d492799f11a",
+        "servedSHA256": "4c7b7ec874162561bc704927a854fb6f59c83230adb66b62dd3b4d492799f11a",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/keylock-engine-cursor-harness.js": {
+        "path": "prototype/keylock-engine-cursor-harness.js",
+        "sourceSHA256": "b8e45417bce1fc9411d58ad02416c751c73750339d8792eca5384f73def622a9",
+        "servedSHA256": "b8e45417bce1fc9411d58ad02416c751c73750339d8792eca5384f73def622a9",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/keylock-engine-cursor32-harness.html": {
+        "path": "prototype/keylock-engine-cursor32-harness.html",
+        "sourceSHA256": "45ccfe5bcddb696703223acad66d1226d14dc3dfb9097233fd8b27ee3a027dc3",
+        "servedSHA256": "45ccfe5bcddb696703223acad66d1226d14dc3dfb9097233fd8b27ee3a027dc3",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/keylock-engine-cursor32-harness.js": {
+        "path": "prototype/keylock-engine-cursor32-harness.js",
+        "sourceSHA256": "4adfbe6f7ef22819e955a20c8641be4d101c50ea7ce9c20d8ef79761530b03a4",
+        "servedSHA256": "4adfbe6f7ef22819e955a20c8641be4d101c50ea7ce9c20d8ef79761530b03a4",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/keylock-engine-harness.html": {
+        "path": "prototype/keylock-engine-harness.html",
+        "sourceSHA256": "17fd2af3fda1629a05859ecd227ca4f6c91464ed4f7cec6b5b678bc57af88a29",
+        "servedSHA256": "17fd2af3fda1629a05859ecd227ca4f6c91464ed4f7cec6b5b678bc57af88a29",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/keylock-engine-harness.js": {
+        "path": "prototype/keylock-engine-harness.js",
+        "sourceSHA256": "f5aae828a61cbe27b8c3c255fe5da2dac4db683642e0ce561a9d3302c19f28f9",
+        "servedSHA256": "f5aae828a61cbe27b8c3c255fe5da2dac4db683642e0ce561a9d3302c19f28f9",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/keylock-engine-render-clock-harness.html": {
+        "path": "prototype/keylock-engine-render-clock-harness.html",
+        "sourceSHA256": "80015c224688f158719e721b1d5a4c3bdd63aff039fa1be027e23002a189f978",
+        "servedSHA256": "80015c224688f158719e721b1d5a4c3bdd63aff039fa1be027e23002a189f978",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/keylock-engine-render-clock-harness.js": {
+        "path": "prototype/keylock-engine-render-clock-harness.js",
+        "sourceSHA256": "5db1b8d3340628f1d0a007ca13990713e58b586f2d070974cc5302cb798764b1",
+        "servedSHA256": "5db1b8d3340628f1d0a007ca13990713e58b586f2d070974cc5302cb798764b1",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/keylock-live-harness.html": {
+        "path": "prototype/keylock-live-harness.html",
+        "sourceSHA256": "d7c78c82de25854f55136f057737c31326708183bb2be93e1ee90b23c6a2e989",
+        "servedSHA256": "d7c78c82de25854f55136f057737c31326708183bb2be93e1ee90b23c6a2e989",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/keylock-live-harness.js": {
+        "path": "prototype/keylock-live-harness.js",
+        "sourceSHA256": "92c674019d2cb179e45cd7bd04629c26b9cbab64d928e9bfa43e8fc1784b9f06",
+        "servedSHA256": "92c674019d2cb179e45cd7bd04629c26b9cbab64d928e9bfa43e8fc1784b9f06",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/keylock-live-lead-experiment.js": {
+        "path": "prototype/keylock-live-lead-experiment.js",
+        "sourceSHA256": "669f76e8482b8c215e41ab791c833a207c025412f33efe2ecefd08e145d21535",
+        "servedSHA256": "669f76e8482b8c215e41ab791c833a207c025412f33efe2ecefd08e145d21535",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/keylock-live-lead-harness.html": {
+        "path": "prototype/keylock-live-lead-harness.html",
+        "sourceSHA256": "107d12872912070fe0e0a8704f5783942fc96504948ccb7d89d16083047158ee",
+        "servedSHA256": "107d12872912070fe0e0a8704f5783942fc96504948ccb7d89d16083047158ee",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/keylock-live-lead-harness.js": {
+        "path": "prototype/keylock-live-lead-harness.js",
+        "sourceSHA256": "8f88d159f52d4969cb57504af45b47547d8e8d9b42d6fc2769becd5d786600c6",
+        "servedSHA256": "8f88d159f52d4969cb57504af45b47547d8e8d9b42d6fc2769becd5d786600c6",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/keylock-live-probe.html": {
+        "path": "prototype/keylock-live-probe.html",
+        "sourceSHA256": "628d4898b15ab01a8454e5746f36f93be77c66b174a97a9ae7d58dbe9ac44c7c",
+        "servedSHA256": "628d4898b15ab01a8454e5746f36f93be77c66b174a97a9ae7d58dbe9ac44c7c",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/keylock-live-probe.js": {
+        "path": "prototype/keylock-live-probe.js",
+        "sourceSHA256": "bd545262f9a75e75c7a13be8fd74072bfe63758a6db698dc93f712c3f79356d8",
+        "servedSHA256": "bd545262f9a75e75c7a13be8fd74072bfe63758a6db698dc93f712c3f79356d8",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/keylock-live.js": {
+        "path": "prototype/keylock-live.js",
+        "sourceSHA256": "a96cd1d244e402957b4daedb823cb2015f759d4a46df9672954b9bba1f944e78",
+        "servedSHA256": "a96cd1d244e402957b4daedb823cb2015f759d4a46df9672954b9bba1f944e78",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/keylock-release-analysis.js": {
+        "path": "prototype/keylock-release-analysis.js",
+        "sourceSHA256": "2957a90303441cade061107affaee8b3ae4b68d3724fff72a5a9ca1ac30b6e5f",
+        "servedSHA256": "2957a90303441cade061107affaee8b3ae4b68d3724fff72a5a9ca1ac30b6e5f",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/keylock-retained-return-harness.html": {
+        "path": "prototype/keylock-retained-return-harness.html",
+        "sourceSHA256": "226f772eda132437a11803a47d44c8b7fde1feea8f390c8f4a77f0bb53d0a584",
+        "servedSHA256": "226f772eda132437a11803a47d44c8b7fde1feea8f390c8f4a77f0bb53d0a584",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/keylock-retained-return-harness.js": {
+        "path": "prototype/keylock-retained-return-harness.js",
+        "sourceSHA256": "bbcf97b369ecf95025ab90a06f1e28e6747ecc788f24027e1e9bffa1fbee62f2",
+        "servedSHA256": "bbcf97b369ecf95025ab90a06f1e28e6747ecc788f24027e1e9bffa1fbee62f2",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/keylock-scratch-shadow.js": {
+        "path": "prototype/keylock-scratch-shadow.js",
+        "sourceSHA256": "6e4f0d8e108705676944722ea625959b4477fb40c91c8024a3d7d48b24c6ed31",
+        "servedSHA256": "6e4f0d8e108705676944722ea625959b4477fb40c91c8024a3d7d48b24c6ed31",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/keylock-shadow-follow-experiment.js": {
+        "path": "prototype/keylock-shadow-follow-experiment.js",
+        "sourceSHA256": "16707a8f446a503eff022528461ff758b0f47031e34064241bf02d085cd6d9e4",
+        "servedSHA256": "16707a8f446a503eff022528461ff758b0f47031e34064241bf02d085cd6d9e4",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/keylock-shadow-live-harness.html": {
+        "path": "prototype/keylock-shadow-live-harness.html",
+        "sourceSHA256": "78a004016deefcc59a6da63efdb0c780bf3e3b143365170e469d0794b2d58f49",
+        "servedSHA256": "78a004016deefcc59a6da63efdb0c780bf3e3b143365170e469d0794b2d58f49",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/keylock-shadow-live-harness.js": {
+        "path": "prototype/keylock-shadow-live-harness.js",
+        "sourceSHA256": "1b225ac819b3ce6e502502ba6d06960ba01fefbd511ca6b0fd58d5ec4958a975",
+        "servedSHA256": "1b225ac819b3ce6e502502ba6d06960ba01fefbd511ca6b0fd58d5ec4958a975",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/keylock-shadow-live.js": {
+        "path": "experiments/keylock-soundtouch/live-adapter.js",
+        "sourceSHA256": "397c6157067cab169eded54233d4df72f6d3138a65abfb0d3ba12fd63868124c",
+        "servedSHA256": "397c6157067cab169eded54233d4df72f6d3138a65abfb0d3ba12fd63868124c",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/keylock-shadow-return-harness-initial.html": {
+        "path": "prototype/keylock-shadow-return-harness-initial.html",
+        "sourceSHA256": "a9ceb99f0a57e5c942b755ed9b98373bc9cd5ccd878e99d6b439b5b2a49c3c6c",
+        "servedSHA256": "a9ceb99f0a57e5c942b755ed9b98373bc9cd5ccd878e99d6b439b5b2a49c3c6c",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/keylock-shadow-return-harness-initial.js": {
+        "path": "prototype/keylock-shadow-return-harness-initial.js",
+        "sourceSHA256": "48f15499137211ab627008dfcc2ac2a816a1cfc50248d756d74ca9dca114c473",
+        "servedSHA256": "48f15499137211ab627008dfcc2ac2a816a1cfc50248d756d74ca9dca114c473",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/keylock-shadow-return-harness.html": {
+        "path": "prototype/keylock-shadow-return-harness.html",
+        "sourceSHA256": "3871c2933da976635d3f468613bb0f2a3b53facda8bd02d27e31fb481b0d2856",
+        "servedSHA256": "3871c2933da976635d3f468613bb0f2a3b53facda8bd02d27e31fb481b0d2856",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/keylock-shadow-return-harness.js": {
+        "path": "prototype/keylock-shadow-return-harness.js",
+        "sourceSHA256": "f5c8de99e1a19310131defd41993bd4737e7937d30327426eb4bcabde3bd475c",
+        "servedSHA256": "f5c8de99e1a19310131defd41993bd4737e7937d30327426eb4bcabde3bd475c",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/keylock-short-block-experiment.js": {
+        "path": "prototype/keylock-short-block-experiment.js",
+        "sourceSHA256": "642154087138f6bf2b8176d430e488c6c25ff1dd1031a8c150c62728a34a93ec",
+        "servedSHA256": "642154087138f6bf2b8176d430e488c6c25ff1dd1031a8c150c62728a34a93ec",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/keylock-short-block-harness.html": {
+        "path": "prototype/keylock-short-block-harness.html",
+        "sourceSHA256": "8aaf6a97facb11cfcbba6ad81f0c9fb60c1d3e7e22df4496acf84dff106ee920",
+        "servedSHA256": "8aaf6a97facb11cfcbba6ad81f0c9fb60c1d3e7e22df4496acf84dff106ee920",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/keylock-short-block-harness.js": {
+        "path": "prototype/keylock-short-block-harness.js",
+        "sourceSHA256": "fd736b9092b77289ecd852bef9627750f09e4e2b8e6a287f1a954c59755b3839",
+        "servedSHA256": "fd736b9092b77289ecd852bef9627750f09e4e2b8e6a287f1a954c59755b3839",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/keylock-signal-tests.js": {
+        "path": "prototype/keylock-signal-tests.js",
+        "sourceSHA256": "1db3ff6d3d6bd3621cfea2cd869744af4e45bf6b9ff5eec155c662c07dc9c24e",
+        "servedSHA256": "1db3ff6d3d6bd3621cfea2cd869744af4e45bf6b9ff5eec155c662c07dc9c24e",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/keylock-test.html": {
+        "path": "prototype/keylock-test.html",
+        "sourceSHA256": "3a46f4b810c100e915f14bca4e9bf348b5a7049b5b0e487df39157f40dbf40d6",
+        "servedSHA256": "3a46f4b810c100e915f14bca4e9bf348b5a7049b5b0e487df39157f40dbf40d6",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/keylock-test.js": {
+        "path": "prototype/keylock-test.js",
+        "sourceSHA256": "1c621b881ea3e9da57fd95ed39765ae6541d7e6aa98cd318d6f22cd000668727",
+        "servedSHA256": "1c621b881ea3e9da57fd95ed39765ae6541d7e6aa98cd318d6f22cd000668727",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/keylock-worker.js": {
+        "path": "prototype/keylock-worker.js",
+        "sourceSHA256": "14b53967f160f24d8dc6945b9469758d046a2b9043bf6ae9da273714fe4a0e4f",
+        "servedSHA256": "14b53967f160f24d8dc6945b9469758d046a2b9043bf6ae9da273714fe4a0e4f",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/keylock.js": {
+        "path": "prototype/keylock.js",
+        "sourceSHA256": "f823395f4f6a268c4e5813fd93bae9604435d8f07d3d18f80563e8ec37a6834c",
+        "servedSHA256": "f823395f4f6a268c4e5813fd93bae9604435d8f07d3d18f80563e8ec37a6834c",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/library.js": {
+        "path": "prototype/library.js",
+        "sourceSHA256": "420659003868bbc14a2f2c5c2a6914e94eebec1dff6dc4ff295545eb1bab6950",
+        "servedSHA256": "420659003868bbc14a2f2c5c2a6914e94eebec1dff6dc4ff295545eb1bab6950",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/local-audio-library-harness.html": {
+        "path": "prototype/local-audio-library-harness.html",
+        "sourceSHA256": "22d4fdd82aaa818893b09877344477fa3605a71cf3c21940ef7d2c419ca5fc2c",
+        "servedSHA256": "22d4fdd82aaa818893b09877344477fa3605a71cf3c21940ef7d2c419ca5fc2c",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/local-audio-library-harness.js": {
+        "path": "prototype/local-audio-library-harness.js",
+        "sourceSHA256": "dfca57127d671ee787a5e4fa06b63dac06c8a1f5c5a4dad56f75ad088f6bb186",
+        "servedSHA256": "dfca57127d671ee787a5e4fa06b63dac06c8a1f5c5a4dad56f75ad088f6bb186",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/local-audio-library.js": {
+        "path": "prototype/local-audio-library.js",
+        "sourceSHA256": "38814be027c5a4e614d972ffd814df9760106ca27e374a288a0ccc3d6bca0a21",
+        "servedSHA256": "38814be027c5a4e614d972ffd814df9760106ca27e374a288a0ccc3d6bca0a21",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/midi-assignment.js": {
+        "path": "prototype/midi-assignment.js",
+        "sourceSHA256": "6950ca162de7246140013895993be77c3d4fecabe2bebfdfca5bb457298a1003",
+        "servedSHA256": "6950ca162de7246140013895993be77c3d4fecabe2bebfdfca5bb457298a1003",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/midi-keyshift-harness.html": {
+        "path": "prototype/midi-keyshift-harness.html",
+        "sourceSHA256": "4c382c5bbeb5c33f7be998feaac31edce8bd88b41c1b972b70cadd9ca66669bc",
+        "servedSHA256": "4c382c5bbeb5c33f7be998feaac31edce8bd88b41c1b972b70cadd9ca66669bc",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/midi-keyshift-harness.js": {
+        "path": "prototype/midi-keyshift-harness.js",
+        "sourceSHA256": "a2795af5840b2ff1ab234a6e9c1d988c4e81e943a81a26e40dd1ac15fb07bdd6",
+        "servedSHA256": "a2795af5840b2ff1ab234a6e9c1d988c4e81e943a81a26e40dd1ac15fb07bdd6",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/midi.js": {
+        "path": "prototype/midi.js",
+        "sourceSHA256": "6bff54eef394a4af04e82b1b3f33ed1d6bf902b94002b5cab3975581aa1bcff6",
+        "servedSHA256": "6bff54eef394a4af04e82b1b3f33ed1d6bf902b94002b5cab3975581aa1bcff6",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/native-fx-controls-test.html": {
+        "path": "prototype/native-fx-controls-test.html",
+        "sourceSHA256": "07cdd53d8a42af7cb4157a88d3c54e99a5b275a0bacfd31275d85ad2e51663b9",
+        "servedSHA256": "07cdd53d8a42af7cb4157a88d3c54e99a5b275a0bacfd31275d85ad2e51663b9",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/native-fx-controls-test.js": {
+        "path": "prototype/native-fx-controls-test.js",
+        "sourceSHA256": "b0746035f89aa1e6b5bfac467bbea771ae62aa129cd627b7543cd7b27d42ec8d",
+        "servedSHA256": "b0746035f89aa1e6b5bfac467bbea771ae62aa129cd627b7543cd7b27d42ec8d",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/observed-fx-control-adapters.js": {
+        "path": "prototype/observed-fx-control-adapters.js",
+        "sourceSHA256": "29ae2cc1d84fafeb8f5b48cd0aae0c95ee8312da36d475af16903f25fefe76c3",
+        "servedSHA256": "29ae2cc1d84fafeb8f5b48cd0aae0c95ee8312da36d475af16903f25fefe76c3",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/observed-fx-controls-browser-tests.js": {
+        "path": "prototype/observed-fx-controls-browser-tests.js",
+        "sourceSHA256": "f4a6a3b4fb37165d5fd77be76920f081788def2c4484edf6a0fd3bf8067a3b71",
+        "servedSHA256": "f4a6a3b4fb37165d5fd77be76920f081788def2c4484edf6a0fd3bf8067a3b71",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/observed-fx-controls-test.html": {
+        "path": "prototype/observed-fx-controls-test.html",
+        "sourceSHA256": "0f5d8b914e62c91f0617c97dd881fba96e4674e5c00e5754b2d3d2846da29c6e",
+        "servedSHA256": "0f5d8b914e62c91f0617c97dd881fba96e4674e5c00e5754b2d3d2846da29c6e",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/overlay-midi-harness.html": {
+        "path": "prototype/overlay-midi-harness.html",
+        "sourceSHA256": "3a68d36849221d4e2fa29a656154a6a847f9c4178f1592018dbb0db509df5ed2",
+        "servedSHA256": "3a68d36849221d4e2fa29a656154a6a847f9c4178f1592018dbb0db509df5ed2",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/overlay-midi-harness.js": {
+        "path": "prototype/overlay-midi-harness.js",
+        "sourceSHA256": "7691b7589661c6819de8a3cc137ff311c67bce05874f0c3d78f73e442176b7f1",
+        "servedSHA256": "7691b7589661c6819de8a3cc137ff311c67bce05874f0c3d78f73e442176b7f1",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/overlay-midi-matrix-harness.html": {
+        "path": "prototype/overlay-midi-matrix-harness.html",
+        "sourceSHA256": "48335a9cb71b77f31e4181e04df326919b6c9f3c895ea784e26f5bed6a748ab8",
+        "servedSHA256": "48335a9cb71b77f31e4181e04df326919b6c9f3c895ea784e26f5bed6a748ab8",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/overlay-midi-matrix-harness.js": {
+        "path": "prototype/overlay-midi-matrix-harness.js",
+        "sourceSHA256": "d30d1e5980231e2633ef1d327bfceeb7a47a7ac383810fe085accdc1565b30a2",
+        "servedSHA256": "d30d1e5980231e2633ef1d327bfceeb7a47a7ac383810fe085accdc1565b30a2",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/panels.js": {
+        "path": "prototype/panels.js",
+        "sourceSHA256": "0515787f6b8ef326d11133b8cdd6d80972807ad8ef03d0b26ad3a62b7fb0d171",
+        "servedSHA256": "0515787f6b8ef326d11133b8cdd6d80972807ad8ef03d0b26ad3a62b7fb0d171",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/pause-frame-boundary-harness.html": {
+        "path": "prototype/pause-frame-boundary-harness.html",
+        "sourceSHA256": "e30c9c9afdddbe57939ea55e8416b77471dea094f56cd1b0eb3927bea3b2c828",
+        "servedSHA256": "e30c9c9afdddbe57939ea55e8416b77471dea094f56cd1b0eb3927bea3b2c828",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/pause-frame-boundary-harness.js": {
+        "path": "prototype/pause-frame-boundary-harness.js",
+        "sourceSHA256": "1e6a4aed6604d4a6530b7b32e900a3da2c325764cd72d8b1b71a5627dc9db08c",
+        "servedSHA256": "1e6a4aed6604d4a6530b7b32e900a3da2c325764cd72d8b1b71a5627dc9db08c",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/pitchplay-integration-test.html": {
+        "path": "prototype/pitchplay-integration-test.html",
+        "sourceSHA256": "76e442241216cd2b02395b82388ab3280aa8be4f2ad73fa53d3372ee08e77fc3",
+        "servedSHA256": "76e442241216cd2b02395b82388ab3280aa8be4f2ad73fa53d3372ee08e77fc3",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/pitchplay-integration-test.js": {
+        "path": "prototype/pitchplay-integration-test.js",
+        "sourceSHA256": "7ea2be6c54a38e3eae0d46b1fda7956fc225f06cbd786e45a937eb37c7d9df0c",
+        "servedSHA256": "7ea2be6c54a38e3eae0d46b1fda7956fc225f06cbd786e45a937eb37c7d9df0c",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/pitchplay.js": {
+        "path": "prototype/pitchplay.js",
+        "sourceSHA256": "125bf56483c9e98478fa7cd0286c1badec3403af49bd7e628f16964b43faa7f2",
+        "servedSHA256": "125bf56483c9e98478fa7cd0286c1badec3403af49bd7e628f16964b43faa7f2",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/render-clock-capture-worklet.js": {
+        "path": "prototype/render-clock-capture-worklet.js",
+        "sourceSHA256": "00ca498588fae8f2e19728139f1d38cf40d7480cb48e35645436bddbca372627",
+        "servedSHA256": "00ca498588fae8f2e19728139f1d38cf40d7480cb48e35645436bddbca372627",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/sampler-integration-test.html": {
+        "path": "prototype/sampler-integration-test.html",
+        "sourceSHA256": "c6c1a19138fa3d85de46bf870ab95db12c391a58abdf913ab2ab5ea9aee4b7b9",
+        "servedSHA256": "c6c1a19138fa3d85de46bf870ab95db12c391a58abdf913ab2ab5ea9aee4b7b9",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/sampler-integration-test.js": {
+        "path": "prototype/sampler-integration-test.js",
+        "sourceSHA256": "af3a959a317164fc8503835e24157421540b723347c35b21c468a3302e5a30b2",
+        "servedSHA256": "af3a959a317164fc8503835e24157421540b723347c35b21c468a3302e5a30b2",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/scratch-input-debug.js": {
+        "path": "prototype/scratch-input-debug.js",
+        "sourceSHA256": "f71c0f31511de6ce96d84fb97897abed62b95e0f18310ba1e1de53459074db5e",
+        "servedSHA256": "f71c0f31511de6ce96d84fb97897abed62b95e0f18310ba1e1de53459074db5e",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/silent-audio-pull-worklet.js": {
+        "path": "prototype/silent-audio-pull-worklet.js",
+        "sourceSHA256": "00f8d094b63f3eab16874fedf576edf1eec316706e2d7e88c4371d7c9f26f73b",
+        "servedSHA256": "00f8d094b63f3eab16874fedf576edf1eec316706e2d7e88c4371d7c9f26f73b",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/silent-audio-pull.js": {
+        "path": "prototype/silent-audio-pull.js",
+        "sourceSHA256": "44e0999cde51efa66708adf8ffd7a4c466d35f819b163b4730ce04f4d9be1c00",
+        "servedSHA256": "44e0999cde51efa66708adf8ffd7a4c466d35f819b163b4730ce04f4d9be1c00",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/slicer.js": {
+        "path": "prototype/slicer.js",
+        "sourceSHA256": "11b780386b89d910a988e13e5df3495557a5aa4b0fffa19118fc5ebacc3c7caa",
+        "servedSHA256": "11b780386b89d910a988e13e5df3495557a5aa4b0fffa19118fc5ebacc3c7caa",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/stem-exit-browser-tests.js": {
+        "path": "prototype/stem-exit-browser-tests.js",
+        "sourceSHA256": "0a3d382d374eea7f454ff78ad604fa257255ca7d01e0abb88e2f0fb940b2d1d9",
+        "servedSHA256": "0a3d382d374eea7f454ff78ad604fa257255ca7d01e0abb88e2f0fb940b2d1d9",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/stem-exit-fx.js": {
+        "path": "prototype/stem-exit-fx.js",
+        "sourceSHA256": "e3f2c4d6cb06d38bb5d53b071742979b63dd011b2d93ec746266f973f7ab2230",
+        "servedSHA256": "e3f2c4d6cb06d38bb5d53b071742979b63dd011b2d93ec746266f973f7ab2230",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/stem-exit-test.html": {
+        "path": "prototype/stem-exit-test.html",
+        "sourceSHA256": "64c815f599784f222a4039feb74faf617164b5b82f18d816090daa4c1f2c7cbb",
+        "servedSHA256": "64c815f599784f222a4039feb74faf617164b5b82f18d816090daa4c1f2c7cbb",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/stem-history-worklet.js": {
+        "path": "prototype/stem-history-worklet.js",
+        "sourceSHA256": "d1e4f452044235a110a874fad2921390878c5731f3a769896ca5bfb2faf08daa",
+        "servedSHA256": "d1e4f452044235a110a874fad2921390878c5731f3a769896ca5bfb2faf08daa",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/stem-history.js": {
+        "path": "prototype/stem-history.js",
+        "sourceSHA256": "0f1a71f7a96361bea7cd0280c72b537291659ad32f44fa8d198d3b020dbd00ec",
+        "servedSHA256": "0f1a71f7a96361bea7cd0280c72b537291659ad32f44fa8d198d3b020dbd00ec",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/stem-slip-integration-test.html": {
+        "path": "prototype/stem-slip-integration-test.html",
+        "sourceSHA256": "ae8ae696f2423fe85cc8310f5c89ad3243931446996b32e128277dece308ba4d",
+        "servedSHA256": "ae8ae696f2423fe85cc8310f5c89ad3243931446996b32e128277dece308ba4d",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/stem-slip-integration-test.js": {
+        "path": "prototype/stem-slip-integration-test.js",
+        "sourceSHA256": "514ee7089f2e80e92805ddb7a4dbf862c94354598304e700f4a9b6955adf8b28",
+        "servedSHA256": "514ee7089f2e80e92805ddb7a4dbf862c94354598304e700f4a9b6955adf8b28",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/stem-slip-kernel.js": {
+        "path": "prototype/stem-slip-kernel.js",
+        "sourceSHA256": "0c27e8506c9ed4874bcb36614fea2d2c0238ea22bb6a1be52d509fcc21fbe09a",
+        "servedSHA256": "0c27e8506c9ed4874bcb36614fea2d2c0238ea22bb6a1be52d509fcc21fbe09a",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/stem-slip-ui.js": {
+        "path": "prototype/stem-slip-ui.js",
+        "sourceSHA256": "9b9bc5eceddbe5a3906277f84c56401195bdacef3b0b35c6c3af96af3095908b",
+        "servedSHA256": "9b9bc5eceddbe5a3906277f84c56401195bdacef3b0b35c6c3af96af3095908b",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/stem-slip-worklet.js": {
+        "path": "prototype/stem-slip-worklet.js",
+        "sourceSHA256": "d75b2bff3010f6481965acedf95d94ec8afc557be1a1617456ca88ff20d69f4b",
+        "servedSHA256": "d75b2bff3010f6481965acedf95d94ec8afc557be1a1617456ca88ff20d69f4b",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/stem-slip.js": {
+        "path": "prototype/stem-slip.js",
+        "sourceSHA256": "36b92c90a8327eb1e2eec23c9d5fe6666d6c71384388e6ba2d42ad6d7537eb31",
+        "servedSHA256": "36b92c90a8327eb1e2eec23c9d5fe6666d6c71384388e6ba2d42ad6d7537eb31",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/stem-waveform-harness.html": {
+        "path": "prototype/stem-waveform-harness.html",
+        "sourceSHA256": "a244943bac26700134b2c7e6ccb7334f03284aa65f05f408f1a65a845908dacd",
+        "servedSHA256": "a244943bac26700134b2c7e6ccb7334f03284aa65f05f408f1a65a845908dacd",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/stem-waveform-harness.js": {
+        "path": "prototype/stem-waveform-harness.js",
+        "sourceSHA256": "a9afa94d4a8159d1cc888eda8f155e0e3cd96a21677ef5ae1000b024744b00b3",
+        "servedSHA256": "a9afa94d4a8159d1cc888eda8f155e0e3cd96a21677ef5ae1000b024744b00b3",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/stem-waveform.js": {
+        "path": "prototype/stem-waveform.js",
+        "sourceSHA256": "3eb83ccd3b0fe48d3e313418c021d2fa2f26c2e58b341e858a6d273f1e7c7ad2",
+        "servedSHA256": "3eb83ccd3b0fe48d3e313418c021d2fa2f26c2e58b341e858a6d273f1e7c7ad2",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/stems.js": {
+        "path": "prototype/stems.js",
+        "sourceSHA256": "6f6a0dd14caee633b966167e1f089a42cbfb7ea423a99ec7dcfeee0ede4bf866",
+        "servedSHA256": "6f6a0dd14caee633b966167e1f089a42cbfb7ea423a99ec7dcfeee0ede4bf866",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/styles.css": {
+        "path": "prototype/styles.css",
+        "sourceSHA256": "a0605801c89b0d46cd836fe1409399045519418a27cefca890d5c16ae563120b",
+        "servedSHA256": "a0605801c89b0d46cd836fe1409399045519418a27cefca890d5c16ae563120b",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/vendor/noble-hashes/LICENSE": {
+        "path": "prototype/vendor/noble-hashes/LICENSE",
+        "sourceSHA256": "4f221aee6e072336700c408c68ab3b96a3fc09f6aebe6f48f1bd99e5ef13faec",
+        "servedSHA256": "4f221aee6e072336700c408c68ab3b96a3fc09f6aebe6f48f1bd99e5ef13faec",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/vendor/noble-hashes/PROVENANCE.md": {
+        "path": "prototype/vendor/noble-hashes/PROVENANCE.md",
+        "sourceSHA256": "4cd9e728b7614c5e7da2b0a3e005e592092ab2ac836f787289ed441fab752e72",
+        "servedSHA256": "4cd9e728b7614c5e7da2b0a3e005e592092ab2ac836f787289ed441fab752e72",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/vendor/noble-hashes/_md.js": {
+        "path": "prototype/vendor/noble-hashes/_md.js",
+        "sourceSHA256": "60cf3010fda89e3e4d3f0e7ff1ce249e9c467f34b4fd41b6fd6101d9f69be763",
+        "servedSHA256": "60cf3010fda89e3e4d3f0e7ff1ce249e9c467f34b4fd41b6fd6101d9f69be763",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/vendor/noble-hashes/_u64.js": {
+        "path": "prototype/vendor/noble-hashes/_u64.js",
+        "sourceSHA256": "b09da8c07fe8187c07649494cdb7cd0bcf13df90b506a9473d19e4d5f8c2e102",
+        "servedSHA256": "b09da8c07fe8187c07649494cdb7cd0bcf13df90b506a9473d19e4d5f8c2e102",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/vendor/noble-hashes/package.json": {
+        "path": "prototype/vendor/noble-hashes/package.json",
+        "sourceSHA256": "3e361734f5269de162fa362483d7f45dee7efb533ec217157945338f7591baaf",
+        "servedSHA256": "3e361734f5269de162fa362483d7f45dee7efb533ec217157945338f7591baaf",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/vendor/noble-hashes/sha2.js": {
+        "path": "prototype/vendor/noble-hashes/sha2.js",
+        "sourceSHA256": "471746bba6ec4c6238ca41358d1d3b40b6ff31cf3363f0b4d550c649c1a8e83b",
+        "servedSHA256": "471746bba6ec4c6238ca41358d1d3b40b6ff31cf3363f0b4d550c649c1a8e83b",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/vendor/noble-hashes/utils.js": {
+        "path": "prototype/vendor/noble-hashes/utils.js",
+        "sourceSHA256": "037ad49adb78168b6b699598fd33f85f7877456b1d28b4d032e2a1a16807947c",
+        "servedSHA256": "037ad49adb78168b6b699598fd33f85f7877456b1d28b4d032e2a1a16807947c",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/vendor/signalsmith-stretch/LICENSE.txt": {
+        "path": "prototype/vendor/signalsmith-stretch/LICENSE.txt",
+        "sourceSHA256": "ee2ef82481ffb445ecdd4b3a4c1f82c0cddb2da8fe39d8e8dc384fffb3e7f06f",
+        "servedSHA256": "ee2ef82481ffb445ecdd4b3a4c1f82c0cddb2da8fe39d8e8dc384fffb3e7f06f",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/vendor/signalsmith-stretch/PATCHES.md": {
+        "path": "prototype/vendor/signalsmith-stretch/PATCHES.md",
+        "sourceSHA256": "2cef5d26aff33dc6dc637d8c4c803e67cc110ef6c4d9ff5cade6a7df665fc3e8",
+        "servedSHA256": "2cef5d26aff33dc6dc637d8c4c803e67cc110ef6c4d9ff5cade6a7df665fc3e8",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/vendor/signalsmith-stretch/PROVENANCE.md": {
+        "path": "prototype/vendor/signalsmith-stretch/PROVENANCE.md",
+        "sourceSHA256": "8dd1f7392acf51783b86de2ff77046708c29f77d910c214c8be2f7a7c2d88104",
+        "servedSHA256": "8dd1f7392acf51783b86de2ff77046708c29f77d910c214c8be2f7a7c2d88104",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/vendor/signalsmith-stretch/SignalsmithStretch-open-play-disposable.LICENSE.txt": {
+        "path": "prototype/vendor/signalsmith-stretch/SignalsmithStretch-open-play-disposable.LICENSE.txt",
+        "sourceSHA256": "ee2ef82481ffb445ecdd4b3a4c1f82c0cddb2da8fe39d8e8dc384fffb3e7f06f",
+        "servedSHA256": "ee2ef82481ffb445ecdd4b3a4c1f82c0cddb2da8fe39d8e8dc384fffb3e7f06f",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/vendor/signalsmith-stretch/SignalsmithStretch-open-play-disposable.mjs": {
+        "path": "prototype/vendor/signalsmith-stretch/SignalsmithStretch-open-play-disposable.mjs",
+        "sourceSHA256": "b2811c519f067cc5a1abd6cdccab46578d1eeef8aba42f666fab2830a9d6f46e",
+        "servedSHA256": "b2811c519f067cc5a1abd6cdccab46578d1eeef8aba42f666fab2830a9d6f46e",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/vendor/signalsmith-stretch/SignalsmithStretch-open-play.LICENSE.txt": {
+        "path": "prototype/vendor/signalsmith-stretch/SignalsmithStretch-open-play.LICENSE.txt",
+        "sourceSHA256": "ee2ef82481ffb445ecdd4b3a4c1f82c0cddb2da8fe39d8e8dc384fffb3e7f06f",
+        "servedSHA256": "ee2ef82481ffb445ecdd4b3a4c1f82c0cddb2da8fe39d8e8dc384fffb3e7f06f",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/vendor/signalsmith-stretch/SignalsmithStretch-open-play.mjs": {
+        "path": "prototype/vendor/signalsmith-stretch/SignalsmithStretch-open-play.mjs",
+        "sourceSHA256": "4c02e593d01dcdf014841382880b11dd7fcbaa485821e8b36b02e0fcabd2a00a",
+        "servedSHA256": "4c02e593d01dcdf014841382880b11dd7fcbaa485821e8b36b02e0fcabd2a00a",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/vendor/signalsmith-stretch/SignalsmithStretch.mjs": {
+        "path": "prototype/vendor/signalsmith-stretch/SignalsmithStretch.mjs",
+        "sourceSHA256": "97530b11d5bc01015af4cde40d6aa55ff10c40aa1294ca4c8c5762027d517a46",
+        "servedSHA256": "97530b11d5bc01015af4cde40d6aa55ff10c40aa1294ca4c8c5762027d517a46",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/vendor/signalsmith-stretch/UPSTREAM_README.md": {
+        "path": "prototype/vendor/signalsmith-stretch/UPSTREAM_README.md",
+        "sourceSHA256": "3d8e24bb763fbd373c5c19f62addfab5aab3b2e783ddcf45da4b67005acc0203",
+        "servedSHA256": "3d8e24bb763fbd373c5c19f62addfab5aab3b2e783ddcf45da4b67005acc0203",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/vendor/signalsmith-stretch/package.json": {
+        "path": "prototype/vendor/signalsmith-stretch/package.json",
+        "sourceSHA256": "cdb829028989a8d676482539991d89cab752b07c867d4040ebf98ed0dba00567",
+        "servedSHA256": "cdb829028989a8d676482539991d89cab752b07c867d4040ebf98ed0dba00567",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/video-analysis.js": {
+        "path": "prototype/video-analysis.js",
+        "sourceSHA256": "7a9def40c83401edc5c788acdb7373dc941fa323d41c815f94f24ca1c3b79583",
+        "servedSHA256": "7a9def40c83401edc5c788acdb7373dc941fa323d41c815f94f24ca1c3b79583",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/video-audio-fx-harness.html": {
+        "path": "prototype/video-audio-fx-harness.html",
+        "sourceSHA256": "aaa8357dd7138b001d8f5d8f2514631b030ba4206065c5663ca5db574e5cfaad",
+        "servedSHA256": "aaa8357dd7138b001d8f5d8f2514631b030ba4206065c5663ca5db574e5cfaad",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/video-audio-fx-harness.js": {
+        "path": "prototype/video-audio-fx-harness.js",
+        "sourceSHA256": "6d03f0a9af43001c195ccc006b1f05344efb6b4296b5b19e9ed0df18adab6ad8",
+        "servedSHA256": "6d03f0a9af43001c195ccc006b1f05344efb6b4296b5b19e9ed0df18adab6ad8",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/video-audio-fx-state.js": {
+        "path": "prototype/video-audio-fx-state.js",
+        "sourceSHA256": "7376fc0cd7de0679fadfb67e1eef93602cd41a17e138aaf21f903ac61ecfe67b",
+        "servedSHA256": "7376fc0cd7de0679fadfb67e1eef93602cd41a17e138aaf21f903ac61ecfe67b",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/video-audio-fx.js": {
+        "path": "prototype/video-audio-fx.js",
+        "sourceSHA256": "310b9873dfa0e68a6cc85ed1bce36410f570ff729f7fea592c5579da83619a17",
+        "servedSHA256": "310b9873dfa0e68a6cc85ed1bce36410f570ff729f7fea592c5579da83619a17",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/video-controls.js": {
+        "path": "prototype/video-controls.js",
+        "sourceSHA256": "e332bd877adcbb2a80050c800107672107b6cbdb854ba528dd5afdf426f944a5",
+        "servedSHA256": "e332bd877adcbb2a80050c800107672107b6cbdb854ba528dd5afdf426f944a5",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/video-crossfade-harness.html": {
+        "path": "prototype/video-crossfade-harness.html",
+        "sourceSHA256": "bec79aafb115c2f3abf6aa45cd2941bacea7912f8b2e34446774b9191ec5f54a",
+        "servedSHA256": "bec79aafb115c2f3abf6aa45cd2941bacea7912f8b2e34446774b9191ec5f54a",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/video-crossfade-harness.js": {
+        "path": "prototype/video-crossfade-harness.js",
+        "sourceSHA256": "0b69f748552252f3bae29a4d3d49e37c14f43227aec5f65ed698ec82aaa67122",
+        "servedSHA256": "0b69f748552252f3bae29a4d3d49e37c14f43227aec5f65ed698ec82aaa67122",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/video-crossfade.js": {
+        "path": "prototype/video-crossfade.js",
+        "sourceSHA256": "61734c97701edf75551a825ad5cd967991fc7f8658e3a1de93d9613536d471cf",
+        "servedSHA256": "61734c97701edf75551a825ad5cd967991fc7f8658e3a1de93d9613536d471cf",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/video-decode.js": {
+        "path": "prototype/video-decode.js",
+        "sourceSHA256": "8483cec6ed4258ba510c95eac8511351b20cabbbcf70bea06ff0f26de021b04b",
+        "servedSHA256": "8483cec6ed4258ba510c95eac8511351b20cabbbcf70bea06ff0f26de021b04b",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/video-effects-browser-tests.js": {
+        "path": "prototype/video-effects-browser-tests.js",
+        "sourceSHA256": "3d5e6fe2e0b3e213e2e5be3864cd4e9f75309f8bcac912fb8ff0a00be856a993",
+        "servedSHA256": "3d5e6fe2e0b3e213e2e5be3864cd4e9f75309f8bcac912fb8ff0a00be856a993",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/video-effects-catalog.js": {
+        "path": "prototype/video-effects-catalog.js",
+        "sourceSHA256": "d0baa2808028c7ad2130a3ca2ba27a533a88c45baf4092648f3070334e188c5d",
+        "servedSHA256": "d0baa2808028c7ad2130a3ca2ba27a533a88c45baf4092648f3070334e188c5d",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/video-effects-shaders.js": {
+        "path": "prototype/video-effects-shaders.js",
+        "sourceSHA256": "edd8f52428b3a23cddf4f3aa7ed040a52cf389ad2bddac1122bf008d0811c7d8",
+        "servedSHA256": "edd8f52428b3a23cddf4f3aa7ed040a52cf389ad2bddac1122bf008d0811c7d8",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/video-effects-state.js": {
+        "path": "prototype/video-effects-state.js",
+        "sourceSHA256": "4dd9d8e1557ecaaed83a75b2f692e2281180bb1c91e1479b414646fdb1283e5c",
+        "servedSHA256": "4dd9d8e1557ecaaed83a75b2f692e2281180bb1c91e1479b414646fdb1283e5c",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/video-effects-test.html": {
+        "path": "prototype/video-effects-test.html",
+        "sourceSHA256": "764776f00341e6860cc5974361964cac401e1e48defe782bfed2aa199d95b7c4",
+        "servedSHA256": "764776f00341e6860cc5974361964cac401e1e48defe782bfed2aa199d95b7c4",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/video-effects.js": {
+        "path": "prototype/video-effects.js",
+        "sourceSHA256": "ca9ab02fdc333065402c815b64103e00fcea2ca245d53e00100b4076d564f646",
+        "servedSHA256": "ca9ab02fdc333065402c815b64103e00fcea2ca245d53e00100b4076d564f646",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/video-file-identity-core.js": {
+        "path": "prototype/video-file-identity-core.js",
+        "sourceSHA256": "ec6bd28b86f29e7b3a473579c4eb65ab6039e27fd15ed83e505cd7a6fbd167ef",
+        "servedSHA256": "ec6bd28b86f29e7b3a473579c4eb65ab6039e27fd15ed83e505cd7a6fbd167ef",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/video-file-identity-harness.html": {
+        "path": "prototype/video-file-identity-harness.html",
+        "sourceSHA256": "38dc17b7700fdfabae107db4dc2ecb94bfe9ee0bb59937ded8aa7bd9a046f572",
+        "servedSHA256": "38dc17b7700fdfabae107db4dc2ecb94bfe9ee0bb59937ded8aa7bd9a046f572",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/video-file-identity-harness.js": {
+        "path": "prototype/video-file-identity-harness.js",
+        "sourceSHA256": "b9066be7f1ad03b3be14ec87b9e8fc4d2d602f5de0c4091ceb5f391e88e08397",
+        "servedSHA256": "b9066be7f1ad03b3be14ec87b9e8fc4d2d602f5de0c4091ceb5f391e88e08397",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/video-file-identity-worker.js": {
+        "path": "prototype/video-file-identity-worker.js",
+        "sourceSHA256": "8c661116594f4b6627ee8b641c22e2401d6f3efdba4225d91a47f5aaba1b661e",
+        "servedSHA256": "8c661116594f4b6627ee8b641c22e2401d6f3efdba4225d91a47f5aaba1b661e",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/video-file-identity.js": {
+        "path": "prototype/video-file-identity.js",
+        "sourceSHA256": "23a02242f9e6094973dd3a33ab74eb3cc8f85de2911da8e500c26cf45493d8f7",
+        "servedSHA256": "23a02242f9e6094973dd3a33ab74eb3cc8f85de2911da8e500c26cf45493d8f7",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/video-fx-presets-harness.html": {
+        "path": "prototype/video-fx-presets-harness.html",
+        "sourceSHA256": "2e895bfa44744c0da0b85173132f4ce5ca40a3b7ec9fec3d1c12f1c48583474b",
+        "servedSHA256": "2e895bfa44744c0da0b85173132f4ce5ca40a3b7ec9fec3d1c12f1c48583474b",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/video-fx-presets-harness.js": {
+        "path": "prototype/video-fx-presets-harness.js",
+        "sourceSHA256": "d435d602ad13466089f76bfd4cb7ce1cc758264897037a1b06a77e174fab3a45",
+        "servedSHA256": "d435d602ad13466089f76bfd4cb7ce1cc758264897037a1b06a77e174fab3a45",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/video-fx-presets.js": {
+        "path": "prototype/video-fx-presets.js",
+        "sourceSHA256": "e947ffa6e1a19cf96409cd4efc8f5d866db9b01b757b994ab0dd530de4251900",
+        "servedSHA256": "e947ffa6e1a19cf96409cd4efc8f5d866db9b01b757b994ab0dd530de4251900",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/video-karaoke-controls.js": {
+        "path": "prototype/video-karaoke-controls.js",
+        "sourceSHA256": "95147ef44b915d7413a0c195a05cad4aa7e64d4d7ecb10a893f88b033b02def7",
+        "servedSHA256": "95147ef44b915d7413a0c195a05cad4aa7e64d4d7ecb10a893f88b033b02def7",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/video-karaoke.js": {
+        "path": "prototype/video-karaoke.js",
+        "sourceSHA256": "26accfc416bac7eff7b04a80a58bc1fe190d384756103bda1a074e38d5f49cdf",
+        "servedSHA256": "26accfc416bac7eff7b04a80a58bc1fe190d384756103bda1a074e38d5f49cdf",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/video-media-controls.js": {
+        "path": "prototype/video-media-controls.js",
+        "sourceSHA256": "9f55ce66c26fd4eadb92287cb902fbecd6199d8db66f46afe8ccc9d182b057b0",
+        "servedSHA256": "9f55ce66c26fd4eadb92287cb902fbecd6199d8db66f46afe8ccc9d182b057b0",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/video-media-harness.html": {
+        "path": "prototype/video-media-harness.html",
+        "sourceSHA256": "4f11bb1cdd7f500403d5f42ff75f2a753dbabb3a40eb257a719f3f73f668d934",
+        "servedSHA256": "4f11bb1cdd7f500403d5f42ff75f2a753dbabb3a40eb257a719f3f73f668d934",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/video-media-harness.js": {
+        "path": "prototype/video-media-harness.js",
+        "sourceSHA256": "7d04be9e403444c84f0444f1f21c5ce6be101d00b04c8d6fd330fd327c86a426",
+        "servedSHA256": "7d04be9e403444c84f0444f1f21c5ce6be101d00b04c8d6fd330fd327c86a426",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/video-media.js": {
+        "path": "prototype/video-media.js",
+        "sourceSHA256": "3bfee5b2c4a2670326a25f981db292bd9ae01a87df64feb951dfb53b7e913965",
+        "servedSHA256": "3bfee5b2c4a2670326a25f981db292bd9ae01a87df64feb951dfb53b7e913965",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/video-midi-assignment-ui.js": {
+        "path": "prototype/video-midi-assignment-ui.js",
+        "sourceSHA256": "e7943f249f0b67e1e70018bc4d050a237bc8c1a39407a2808950b74c43aedc2b",
+        "servedSHA256": "e7943f249f0b67e1e70018bc4d050a237bc8c1a39407a2808950b74c43aedc2b",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/video-midi-harness.html": {
+        "path": "prototype/video-midi-harness.html",
+        "sourceSHA256": "e0f574074ce9221e304088e6e1dc17c987e8d0305b4c695d0ee22797e0684d41",
+        "servedSHA256": "e0f574074ce9221e304088e6e1dc17c987e8d0305b4c695d0ee22797e0684d41",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/video-midi-harness.js": {
+        "path": "prototype/video-midi-harness.js",
+        "sourceSHA256": "5b105a3b4b502dac9ed26958a17e5befc666c619d6cfd6cfb701b2ea47baa959",
+        "servedSHA256": "5b105a3b4b502dac9ed26958a17e5befc666c619d6cfd6cfb701b2ea47baa959",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/video-midi.js": {
+        "path": "prototype/video-midi.js",
+        "sourceSHA256": "9346f0a9ec28ddd1166fdd5b57a657409f3212550dde9b17ae712aaafbf715eb",
+        "servedSHA256": "9346f0a9ec28ddd1166fdd5b57a657409f3212550dde9b17ae712aaafbf715eb",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/video-opacity-harness.html": {
+        "path": "prototype/video-opacity-harness.html",
+        "sourceSHA256": "3a9e0b77a72c3088b773a562868126a84d7f078b1982a0934b06db0e12f9ba18",
+        "servedSHA256": "3a9e0b77a72c3088b773a562868126a84d7f078b1982a0934b06db0e12f9ba18",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/video-opacity-harness.js": {
+        "path": "prototype/video-opacity-harness.js",
+        "sourceSHA256": "62035500bff54471444c7a75e6b02989119a93756951c6a8dc6176199052972d",
+        "servedSHA256": "62035500bff54471444c7a75e6b02989119a93756951c6a8dc6176199052972d",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/video-opacity.js": {
+        "path": "prototype/video-opacity.js",
+        "sourceSHA256": "a40cc708ede1e6496be35dfde766813e4bb5988c2228c268265194b161f75d95",
+        "servedSHA256": "a40cc708ede1e6496be35dfde766813e4bb5988c2228c268265194b161f75d95",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/video-overlay-midi.js": {
+        "path": "prototype/video-overlay-midi.js",
+        "sourceSHA256": "b02150ca166d8c44ecdf932f1a1615f2c2217873f93802bc258b9ca0f1b5959f",
+        "servedSHA256": "b02150ca166d8c44ecdf932f1a1615f2c2217873f93802bc258b9ca0f1b5959f",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/video-overlays-harness.html": {
+        "path": "prototype/video-overlays-harness.html",
+        "sourceSHA256": "d28630f9b8bb51264f5bfcdfc8af49bee63c00100e68a556f6b7e5058f60d6f6",
+        "servedSHA256": "d28630f9b8bb51264f5bfcdfc8af49bee63c00100e68a556f6b7e5058f60d6f6",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/video-overlays-harness.js": {
+        "path": "prototype/video-overlays-harness.js",
+        "sourceSHA256": "4b94fb932beff2fd76e247db423ab7009e2b5b73ad7a868f522a54906878f018",
+        "servedSHA256": "4b94fb932beff2fd76e247db423ab7009e2b5b73ad7a868f522a54906878f018",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/video-overlays.js": {
+        "path": "prototype/video-overlays.js",
+        "sourceSHA256": "053112eb4cb72a698b8d550c66ad05862b968a83314e5b001a546b13f912ae5b",
+        "servedSHA256": "053112eb4cb72a698b8d550c66ad05862b968a83314e5b001a546b13f912ae5b",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/video-pipeline-harness.html": {
+        "path": "prototype/video-pipeline-harness.html",
+        "sourceSHA256": "dcc5b73ee39dfc363ea55aa8cf31da4a88635107b41e9f3581f8067b8552f85e",
+        "servedSHA256": "dcc5b73ee39dfc363ea55aa8cf31da4a88635107b41e9f3581f8067b8552f85e",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/video-pipeline-harness.js": {
+        "path": "prototype/video-pipeline-harness.js",
+        "sourceSHA256": "d57c38e9508e7a4a9f6aefc8593883d21b650ecf39418ce11bcb0e47c198083b",
+        "servedSHA256": "d57c38e9508e7a4a9f6aefc8593883d21b650ecf39418ce11bcb0e47c198083b",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/video-pipeline.js": {
+        "path": "prototype/video-pipeline.js",
+        "sourceSHA256": "75507c6ca5c84b45ac485be55e6fb0060e5f809be9caa7f416dc32d920796725",
+        "servedSHA256": "75507c6ca5c84b45ac485be55e6fb0060e5f809be9caa7f416dc32d920796725",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/video-recording-harness.html": {
+        "path": "prototype/video-recording-harness.html",
+        "sourceSHA256": "5194ad84387bdf66344b105d06b61134aab5d7d5b29c402749c3e8e40de29808",
+        "servedSHA256": "5194ad84387bdf66344b105d06b61134aab5d7d5b29c402749c3e8e40de29808",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/video-recording-harness.js": {
+        "path": "prototype/video-recording-harness.js",
+        "sourceSHA256": "47044b1d84d721a17d8d270890b85282594915cd0766757ef0776d2e25820c91",
+        "servedSHA256": "47044b1d84d721a17d8d270890b85282594915cd0766757ef0776d2e25820c91",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/video-recording.js": {
+        "path": "prototype/video-recording.js",
+        "sourceSHA256": "b0e2bb3cdfa2e6d9091ad2f62e61ad0380c1c7b4308a3a648952a009a4491ea1",
+        "servedSHA256": "b0e2bb3cdfa2e6d9091ad2f62e61ad0380c1c7b4308a3a648952a009a4491ea1",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/video-reference-menu.js": {
+        "path": "prototype/video-reference-menu.js",
+        "sourceSHA256": "8b00b0cf20630a91ea89e9896186230d795927f8a847c9c72eb059f3bf16d6e3",
+        "servedSHA256": "8b00b0cf20630a91ea89e9896186230d795927f8a847c9c72eb059f3bf16d6e3",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/video-settings.js": {
+        "path": "prototype/video-settings.js",
+        "sourceSHA256": "3f16c589ee9a019eaa70122d9cd1995b724e4c9a02da3b4124925d62ffe2ff9b",
+        "servedSHA256": "3f16c589ee9a019eaa70122d9cd1995b724e4c9a02da3b4124925d62ffe2ff9b",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/video-spectrum8-harness.html": {
+        "path": "prototype/video-spectrum8-harness.html",
+        "sourceSHA256": "90806ed4814384407acdbc5ce11e55fb12ef23746e9a32c3dc5048d03996566d",
+        "servedSHA256": "90806ed4814384407acdbc5ce11e55fb12ef23746e9a32c3dc5048d03996566d",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/video-spectrum8-harness.js": {
+        "path": "prototype/video-spectrum8-harness.js",
+        "sourceSHA256": "e975164c1d593d36ad8e5ab90d6518c8a8f6c578daecd560c21d91f80304c510",
+        "servedSHA256": "e975164c1d593d36ad8e5ab90d6518c8a8f6c578daecd560c21d91f80304c510",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/video-state.js": {
+        "path": "prototype/video-state.js",
+        "sourceSHA256": "fd23bffefc1dbc5411f604e467b960fc209c311fdf0eb21bb97a7e8f615bb548",
+        "servedSHA256": "fd23bffefc1dbc5411f604e467b960fc209c311fdf0eb21bb97a7e8f615bb548",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/video-transitions-harness.html": {
+        "path": "prototype/video-transitions-harness.html",
+        "sourceSHA256": "13ffff2c3317c046c5e56c8a34e81eef536e9983c1ef3a82914712d9174edf05",
+        "servedSHA256": "13ffff2c3317c046c5e56c8a34e81eef536e9983c1ef3a82914712d9174edf05",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/video-transitions-harness.js": {
+        "path": "prototype/video-transitions-harness.js",
+        "sourceSHA256": "16ecf933b075956b0c948c07e65f675b4c99d1faf7f01dd08abb4a0ef64f741c",
+        "servedSHA256": "16ecf933b075956b0c948c07e65f675b4c99d1faf7f01dd08abb4a0ef64f741c",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/video-transitions-kernel.js": {
+        "path": "prototype/video-transitions-kernel.js",
+        "sourceSHA256": "f247e3f3b7cda1b72014910ad36f0eed3df4a6e3834be7a21e92c4ed5d39f955",
+        "servedSHA256": "f247e3f3b7cda1b72014910ad36f0eed3df4a6e3834be7a21e92c4ed5d39f955",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/video-transitions-state.js": {
+        "path": "prototype/video-transitions-state.js",
+        "sourceSHA256": "01eb5536f9f0242a69f665f8a892e47d239c52d9774b6ad7b2919c1eb93998cf",
+        "servedSHA256": "01eb5536f9f0242a69f665f8a892e47d239c52d9774b6ad7b2919c1eb93998cf",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/video-transitions.js": {
+        "path": "prototype/video-transitions.js",
+        "sourceSHA256": "b09b7baa4e87346c634a707f4ee3fce7aa3a2b45286d6c3dfdb5d812316df2c2",
+        "servedSHA256": "b09b7baa4e87346c634a707f4ee3fce7aa3a2b45286d6c3dfdb5d812316df2c2",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/video-treatment-harness.html": {
+        "path": "prototype/video-treatment-harness.html",
+        "sourceSHA256": "986f384f56c83fded4aacac6f8bc7f3f9d8c2db6d7670644b3e4ba0ccc0d91e7",
+        "servedSHA256": "986f384f56c83fded4aacac6f8bc7f3f9d8c2db6d7670644b3e4ba0ccc0d91e7",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/video-treatment-harness.js": {
+        "path": "prototype/video-treatment-harness.js",
+        "sourceSHA256": "7a06c3d0ae165a4af1c5a7ac450eb5d594c47e03ca7504ba76f3183dd15e49d7",
+        "servedSHA256": "7a06c3d0ae165a4af1c5a7ac450eb5d594c47e03ca7504ba76f3183dd15e49d7",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/video-treatment.js": {
+        "path": "prototype/video-treatment.js",
+        "sourceSHA256": "8c52d9e8873bfb5084e0097ac6ce86a3bc5242b55eec9802523e9718c6638458",
+        "servedSHA256": "8c52d9e8873bfb5084e0097ac6ce86a3bc5242b55eec9802523e9718c6638458",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/prototype/video.js": {
+        "path": "prototype/video.js",
+        "sourceSHA256": "d09978db2178d009281ff38ab8923d33e2c18a5129c8188f7d4066db92f15823",
+        "servedSHA256": "d09978db2178d009281ff38ab8923d33e2c18a5129c8188f7d4066db92f15823",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/plan.json": {
+        "path": "docs/prototype/soundtouch-phase-lifecycle-plan.json",
+        "sourceSHA256": "546683972b28076d9b1006459781039c01fbf569e680947731d6202c425b8b56",
+        "servedSHA256": "546683972b28076d9b1006459781039c01fbf569e680947731d6202c425b8b56",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/experiments/keylock-soundtouch/pull-transport.mjs": {
+        "path": "experiments/keylock-soundtouch/pull-transport.mjs",
+        "sourceSHA256": "ccd208ae09741a07f9484547057cd312c75f07743e8479a97a926a71f6bad60c",
+        "servedSHA256": "ccd208ae09741a07f9484547057cd312c75f07743e8479a97a926a71f6bad60c",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/experiments/keylock-soundtouch/window-source.mjs": {
+        "path": "experiments/keylock-soundtouch/window-source.mjs",
+        "sourceSHA256": "86738838e3e1efff617bf8a2197d708a99f20058d47dee4d5d52703420c08dd6",
+        "servedSHA256": "86738838e3e1efff617bf8a2197d708a99f20058d47dee4d5d52703420c08dd6",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/experiments/keylock-soundtouch/node-controller.mjs": {
+        "path": "experiments/keylock-soundtouch/node-controller.mjs",
+        "sourceSHA256": "e7683372739eeb688c7b23a22e2e1455fd954e225380553b5ddf771ce7405e60",
+        "servedSHA256": "e7683372739eeb688c7b23a22e2e1455fd954e225380553b5ddf771ce7405e60",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/experiments/keylock-soundtouch/node-worklet.mjs": {
+        "path": "experiments/keylock-soundtouch/node-worklet.mjs",
+        "sourceSHA256": "0e3387073873a9372e463f1965495c0a98ae2ac1fd3d7de351c373b1e7ce30ec",
+        "servedSHA256": "0e3387073873a9372e463f1965495c0a98ae2ac1fd3d7de351c373b1e7ce30ec",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/experiments/keylock-soundtouch/node-factory.mjs": {
+        "path": "experiments/keylock-soundtouch/node-factory.mjs",
+        "sourceSHA256": "32a667c98a2ab38dde9b7dd70438825ffaf5b1554d80708df702cc7f603e154f",
+        "servedSHA256": "32a667c98a2ab38dde9b7dd70438825ffaf5b1554d80708df702cc7f603e154f",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/experiments/keylock-soundtouch/bare-clock-worklet.mjs": {
+        "path": "experiments/keylock-soundtouch/bare-clock-worklet.mjs",
+        "sourceSHA256": "e3cbe08fcaa4a0468d12e63581a62323d2c75a0362e2495643660ec460448632",
+        "servedSHA256": "e3cbe08fcaa4a0468d12e63581a62323d2c75a0362e2495643660ec460448632",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/experiments/keylock-soundtouch/render-clock.mjs": {
+        "path": "experiments/keylock-soundtouch/render-clock.mjs",
+        "sourceSHA256": "1d32829d8c8c1bb2eae6e898a23777bf2f805ada4035847695a86bb7dddb8a3c",
+        "servedSHA256": "1d32829d8c8c1bb2eae6e898a23777bf2f805ada4035847695a86bb7dddb8a3c",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/experiments/keylock-soundtouch/phase-render-clock.mjs": {
+        "path": "experiments/keylock-soundtouch/phase-render-clock.mjs",
+        "sourceSHA256": "9665c6004131b4acbdc234e8157d8b4c6ee9fd0d05051224d3efed42ce83aecf",
+        "servedSHA256": "9665c6004131b4acbdc234e8157d8b4c6ee9fd0d05051224d3efed42ce83aecf",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/experiments/keylock-soundtouch/phase-control.mjs": {
+        "path": "experiments/keylock-soundtouch/phase-control.mjs",
+        "sourceSHA256": "7df4184de9a98bf0d4aa23e11551c903c0a4a44b1b42a504db879715d527a2a9",
+        "servedSHA256": "7df4184de9a98bf0d4aa23e11551c903c0a4a44b1b42a504db879715d527a2a9",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/experiments/keylock-soundtouch/phase-capture.mjs": {
+        "path": "experiments/keylock-soundtouch/phase-capture.mjs",
+        "sourceSHA256": "1ef63ee15686a68f6ad70912390ad594e706e82c515020bc3933bc80e2ebadfb",
+        "servedSHA256": "1ef63ee15686a68f6ad70912390ad594e706e82c515020bc3933bc80e2ebadfb",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/experiments/keylock-soundtouch/counter-capture.mjs": {
+        "path": "experiments/keylock-soundtouch/counter-capture.mjs",
+        "sourceSHA256": "01cea02d2bd8141acd74a54c714a5a6062e0d0626f208bf5715032401e2b1898",
+        "servedSHA256": "01cea02d2bd8141acd74a54c714a5a6062e0d0626f208bf5715032401e2b1898",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/experiments/keylock-soundtouch/transport-capture.mjs": {
+        "path": "experiments/keylock-soundtouch/transport-capture.mjs",
+        "sourceSHA256": "355aac09a776361d2d10a1b9a18d8e771b33a307a850a43ac8b97ae115b0a980",
+        "servedSHA256": "355aac09a776361d2d10a1b9a18d8e771b33a307a850a43ac8b97ae115b0a980",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/AbstractSamplePipe.js": {
+        "path": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/AbstractSamplePipe.js",
+        "sourceSHA256": "d19086efe702bde780a282d71d5fd964a1003d01d07c77763fbc3ded2620a7f0",
+        "servedSHA256": "d19086efe702bde780a282d71d5fd964a1003d01d07c77763fbc3ded2620a7f0",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/CircularSampleBuffer.js": {
+        "path": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/CircularSampleBuffer.js",
+        "sourceSHA256": "889ff0fbba1dc94a18bb3c6615ed2b94d3a5d2a2a618b9857fca6b34183dd98f",
+        "servedSHA256": "889ff0fbba1dc94a18bb3c6615ed2b94d3a5d2a2a618b9857fca6b34183dd98f",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/FifoSampleBuffer.js": {
+        "path": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/FifoSampleBuffer.js",
+        "sourceSHA256": "907cad41629068acf14ba425f85324800d55693895eca03885d62b77ec59efba",
+        "servedSHA256": "907cad41629068acf14ba425f85324800d55693895eca03885d62b77ec59efba",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/RateTransposer.js": {
+        "path": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/RateTransposer.js",
+        "sourceSHA256": "90b15877dbba6689472139584dfff2c7d3863e72458fd9028ec80137941bf101",
+        "servedSHA256": "90b15877dbba6689472139584dfff2c7d3863e72458fd9028ec80137941bf101",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/SampleBuffer.js": {
+        "path": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/SampleBuffer.js",
+        "sourceSHA256": "4bf9cabb7141f22be55357adf1f669d671de3d7a69b5b8a90dffbf4348bad808",
+        "servedSHA256": "4bf9cabb7141f22be55357adf1f669d671de3d7a69b5b8a90dffbf4348bad808",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/SampleBufferAdapter.js": {
+        "path": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/SampleBufferAdapter.js",
+        "sourceSHA256": "cd5874e70ce27933aaf8846600f346a4fa89d709afafb0cb23ecf652505d02b4",
+        "servedSHA256": "cd5874e70ce27933aaf8846600f346a4fa89d709afafb0cb23ecf652505d02b4",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/SoundTouch.js": {
+        "path": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/SoundTouch.js",
+        "sourceSHA256": "c01a124ba0b0e20e19a0fa39f03ff558e367902bfd61f4505560ad2aeebc84f4",
+        "servedSHA256": "c01a124ba0b0e20e19a0fa39f03ff558e367902bfd61f4505560ad2aeebc84f4",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/Stretch.js": {
+        "path": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/Stretch.js",
+        "sourceSHA256": "5b0618f91b53387a03885aea361185ea6a4ab41b54f8f1b1fbce80c2153f0632",
+        "servedSHA256": "5b0618f91b53387a03885aea361185ea6a4ab41b54f8f1b1fbce80c2153f0632",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/StretchPipe.js": {
+        "path": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/StretchPipe.js",
+        "sourceSHA256": "1d769081e521e39b86bd9a36a6a955f7a786f836a79e38e6c2e42bc39d9e1f99",
+        "servedSHA256": "1d769081e521e39b86bd9a36a6a955f7a786f836a79e38e6c2e42bc39d9e1f99",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/index.js": {
+        "path": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/index.js",
+        "sourceSHA256": "9e6bcd84c753545d4aa08f851e9a3dff65c776ec3f34f832b8b78b5f80d435b1",
+        "servedSHA256": "9e6bcd84c753545d4aa08f851e9a3dff65c776ec3f34f832b8b78b5f80d435b1",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/interpolationStrategyRegistry.js": {
+        "path": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/interpolationStrategyRegistry.js",
+        "sourceSHA256": "3214eefba2f50990006ee9c4b5ea98aed72437ea1d2a9c1c70d0ce5c50288f57",
+        "servedSHA256": "3f85caef910546adc8e7a970b7053144ced03407b23e420ebd7c658d74b81434",
+        "importSpecifierOnlyRewrite": true
+      },
+      "/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/testFloatEqual.js": {
+        "path": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/testFloatEqual.js",
+        "sourceSHA256": "d48a30dbb8103c7aeb26a37c9b572845c38f59d4ebf0c88456a055e607659f95",
+        "servedSHA256": "d48a30dbb8103c7aeb26a37c9b572845c38f59d4ebf0c88456a055e607659f95",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/official/lanczos/index.js": {
+        "path": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/interpolation-strategy-lanczos/.dist/index.js",
+        "sourceSHA256": "d40f6928efaed6ba2ac1ef5ab002865d03853231f11ae86882dfb6810015504e",
+        "servedSHA256": "d40f6928efaed6ba2ac1ef5ab002865d03853231f11ae86882dfb6810015504e",
+        "importSpecifierOnlyRewrite": false
+      },
+      "/official/lanczos/index.spec.js": {
+        "path": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/interpolation-strategy-lanczos/.dist/index.spec.js",
+        "sourceSHA256": "fda855e1fe5edc81ab9deaf82976618aae0f924cdbe6b243657c9b739db72456",
+        "servedSHA256": "fda855e1fe5edc81ab9deaf82976618aae0f924cdbe6b243657c9b739db72456",
+        "importSpecifierOnlyRewrite": false
+      }
+    }
+  },
+  "acceptedCases": 2,
+  "finishedAt": "2026-10-17T18:08:47.605Z",
+  "criteriaPassed": true
+}

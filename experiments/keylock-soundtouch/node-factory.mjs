@@ -1,4 +1,4 @@
-import {CLOCK_LIMIT} from './render-clock.mjs';
+import {createPhaseControl} from './phase-control.mjs';
 const registrations = new WeakMap();
 const diagnostics = new WeakMap();
 export const soundTouchFactoryDiagnostics = context => [...(diagnostics.get(context) ?? [])];
@@ -32,27 +32,26 @@ export default async function createSoundTouchNode(context, options, {signal, du
   await awaitRegistration(registration, signal);
   if (signal?.aborted) throw failure('AbortError', 'Node preparation canceled');
   const anchorFrame = Math.ceil((context.currentTime + .05) * context.sampleRate / 128) * 128;
-  const endFrame = CLOCK_LIMIT - 128;
-  if (anchorFrame + context.sampleRate * 2 >= endFrame) throw failure('ClockRangeError', 'Experimental context clock exceeds declared range');
+  const periodFrames = Math.round(context.sampleRate * 4 / 128) * 128;
   const node = new AudioWorkletNode(context, 'open-play-windowed-soundtouch-experiment', {
     numberOfInputs: 0, numberOfOutputs: 1, outputChannelCount: [channels],
     channelCount: channels, channelCountMode: 'explicit', channelInterpretation: 'discrete',
-    processorOptions: {channels, durationFrames, anchorFrame}
+    processorOptions: {channels, durationFrames, anchorFrame, periodFrames}
   });
-  node.parameters.get('renderClock').setValueAtTime(anchorFrame, anchorFrame / context.sampleRate);
-  node.parameters.get('renderClock').linearRampToValueAtTime(endFrame, endFrame / context.sampleRate);
+  let phaseControl = null;
   // Ensure readiness/currentFrame while the caller has not connected the node.
   // This bridge is always muted and is removed during terminal cleanup.
   const keepAlive = context.createGain(); keepAlive.gain.value = 0; node.connect(keepAlive); keepAlive.connect(context.destination);
   const pending = new Map(); let sequence = 0, terminal = null, disposePromise = null, disposedSnapshot = null;
   let readyResolve, readyReject;
   const ready = new Promise((resolve, reject) => { readyResolve = resolve; readyReject = reject; });
+  ready.catch(() => {}); // Preparation may fail before the readiness await is reached.
   function cleanup(cause) {
     terminal ??= cause;
     signal?.removeEventListener('abort', aborted);
     for (const request of pending.values()) { clearTimeout(request.timer); request.reject(cause); }
     pending.clear(); readyReject(cause);
-    node.disconnect(); keepAlive.disconnect(); node.port.close();
+    phaseControl?.dispose(); node.disconnect(); keepAlive.disconnect(); node.port.close();
   }
   function fatal(cause) { if (terminal) return; diagnostic(context, {type:'fatal', name:cause.name, message:cause.message, diagnostic:cause.diagnostic}); cleanup(cause); try { onError(cause); } catch {} }
   const aborted = () => { node.dispose().catch(() => {}); };
@@ -81,19 +80,20 @@ export default async function createSoundTouchNode(context, options, {signal, du
   node.dropBuffers = before => request('dropBuffers', [before]);
   node.schedule = command => request('schedule', [command]);
   node.stop = output => request('stop', [output]);
-  node.snapshot = () => disposedSnapshot ? Promise.resolve(disposedSnapshot) : request('snapshot');
+  node.snapshot = () => disposedSnapshot ? Promise.resolve(disposedSnapshot) : request('snapshot').then(value => ({...value,phaseControl:(phaseControl?.snapshot() ?? {created:false,disposed:true})}));
   node.dispose = () => {
     if (disposePromise) return disposePromise;
     disposePromise = (async () => {
       try { if (!terminal) disposedSnapshot = await request('dispose', [], [], 2000); }
       finally { cleanup(failure('AbortError', 'SoundTouch node disposed')); }
-      return disposedSnapshot ?? {disposed: true, processorReleaseAcknowledged: false};
+      if (disposedSnapshot) disposedSnapshot = {...disposedSnapshot,phaseControl:(phaseControl?.snapshot() ?? {created:false,disposed:true})};
+      return disposedSnapshot ?? {disposed: true, processorReleaseAcknowledged: false,phaseControl:(phaseControl?.snapshot() ?? {created:false,disposed:true})};
     })();
     return disposePromise;
   };
   signal?.addEventListener('abort', aborted, {once: true});
   const timer = setTimeout(() => fatal(failure('TimeoutError', 'SoundTouch processor readiness timed out')), 5000);
-  try { await ready; if (signal?.aborted) throw failure('AbortError', 'Node preparation canceled'); return node; }
-  catch (cause) { await node.dispose().catch(() => {}); throw cause; }
+  try { phaseControl = createPhaseControl(context, node.parameters.get('renderClock'), {anchorFrame, periodFrames}); await ready; if (signal?.aborted) throw failure('AbortError', 'Node preparation canceled'); return node; }
+  catch (cause) { let cleanupError = null; await node.dispose().catch(error => { cleanupError = {name:error.name,message:error.message}; }); diagnostic(context, {type:'preparation-failed',name:cause.name,message:cause.message,processorRelease:disposedSnapshot,cleanupError}); throw cause; }
   finally { clearTimeout(timer); }
 }

@@ -1,0 +1,21 @@
+{
+  "passed": 0,
+  "failed": 2,
+  "checks": [
+    {
+      "name": "Phase source refuses already past anchor",
+      "passed": false,
+      "error": "Missing expected exception (LateScheduleError).",
+      "allocations": 1,
+      "sources": 1
+    },
+    {
+      "name": "Phase source refuses anchor expiring during preparation",
+      "passed": false,
+      "error": "Missing expected exception (LateScheduleError).",
+      "allocations": 1,
+      "sources": 1
+    }
+  ],
+  "scope": "Actual helper code against controlled clock/allocation boundary. No native AudioBufferSource timing acceptance."
+}

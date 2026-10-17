@@ -1,0 +1,53 @@
+{
+  "declared_before_execution": "2026-10-17 guarded phase clock100second playback prospective cohort",
+  "scope": "Actual unmodified AudioEngine served with a separately named SoundTouch factory adapter; no installed app or production source replacement.",
+  "cases": [
+    {
+      "id": "single-44100",
+      "sampleRate": 44100,
+      "sourceSampleRate": 48000,
+      "sources": 1
+    },
+    {
+      "id": "single-48000",
+      "sampleRate": 48000,
+      "sourceSampleRate": 44100,
+      "sources": 1
+    }
+  ],
+  "fixture": "132s stereo synthetic buffer, first16s330/550Hz, remainder660/880Hz, amplitude.14 phases.17/.53, context/source rate mismatched. Original only; no real music/stems.",
+  "criteria": {
+    "pitch_error_hz": 1,
+    "control_error_hz": 0.01,
+    "frame_tag_error_samples": 0.25,
+    "finite": true,
+    "strict_sequence": true,
+    "pause_exact_zero": true,
+    "cleanup_retained_pcm_bytes": 0,
+    "clock_scope": "nominal; audible source identity not accepted"
+  },
+  "timeline": "Engine.start(rate1.08,keylocktrue,shift0),100s steady play. Audio windows at command+.5..1.5,30.5..31.5,60.5..61.5,90.5..91.5s; first330/550 then660/880. Both sample rates must cross2^22absolutecontextframes, retain<=11seconds acknowledged processor-window payload while dropping/refilling. Actual engine.pause +actualprocessor-releaseACKs, .2.. .6sexactzero, then keylocktrue/+2 engine.start and +.5..1.5stone window, disposeall.",
+  "capture": "Complete original100spluspause/resume, stereo source+engine monitor+independent307Hz oscillator+raw normalizedphase, no trimming, bound115s/case. No source tuple/label/sample repair.",
+  "exclusions": [
+    "music artifacts",
+    "physical latency",
+    "native package",
+    "Serato-matched sonic reference",
+    "actual separated stems",
+    "audible cursor",
+    "full controller coverage",
+    "reverse/loop/Stem Slip parity"
+  ],
+  "registration_lifecycle": {
+    "server_delays_node_worklet_seconds": 0.5,
+    "aborted_waiter_timeout_ms": 400,
+    "abort_after_ms": 20,
+    "other_waiter_must_finish": true,
+    "dispose_ack_pcm_bytes": 0,
+    "terminal_no_revival": true
+  },
+  "prospective_clock": "Observer declares anchor before future phase source start, then independently counts callbacks against every original normalizedphase sample; original globalFrame/globalTime remain recorded. Earlier cohorts unchanged.",
+  "cleanup_evidence": "Both actual engine.pause calls: retain processor handles, await actual adapter.dispose, collect every factory cached processor-release acknowledgement (disposed, store.retainedPCMBytes0, transport.epochs[]). Voice-mapabsence alone is insufficient.",
+  "clock_range": "No2^22 absolute-context limit; integer callback counters checked per sample against normalized looping AudioBufferSource control with four-second quantum-aligned period. Period<=2^22frames for Float32-safe local phase; only safe-integer absolute-counter endpoint refuses. Six-hour arithmetic anchors are not six-hour browser evidence.",
+  "clock_guard": "Every normalizedphase sample remains<=.25sample error. Additional coarse absolute global-reference fence256frames refuses whole-period aliases and invalid global labels; original global disagreement is retained within this fence. Not independent physical elapsed-time proof."
+}
