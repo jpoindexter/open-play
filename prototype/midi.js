@@ -44,6 +44,7 @@ export function syntheticMIDIMessage({type,channel,number,value}) {
   return decodeMIDI(type==='Pitch bend'?[status,value&127,value>>7]:[status,number,value]);
 }
 export function matchesMIDIMap(message,mapping) {
+  if(mapping.deviceId&&mapping.deviceId!==message.deviceId)return false;
   if (mapping.channel!==message.channel || (mapping.type||'CC')!==message.type) return false;
   if (mapping.encoding==='14-bit absolute' && message.type==='CC')
     return mapping.number>=0 && mapping.number<64 && message.number>=0 && message.number<64 &&

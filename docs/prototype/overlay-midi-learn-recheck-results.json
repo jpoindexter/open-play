@@ -1,0 +1,49 @@
+{
+  "date": "2026-10-17T14:01:33.666Z",
+  "scope": "Pure assignment lifecycle and actual mapping-match policy; no GUI event suppression, actual WebMIDI or native/reference acceptance.",
+  "passed": 9,
+  "failed": 0,
+  "checks": [
+    {
+      "name": "Learning starts without a target and suppresses ordinary message dispatch",
+      "passed": true
+    },
+    {
+      "name": "Choose/capture assigns once and retains unrelated mappings",
+      "passed": true
+    },
+    {
+      "name": "Note release cannot become an assignment or trigger a command while learning",
+      "passed": true
+    },
+    {
+      "name": "Unassign removes only the chosen target and stays ready for reassignment",
+      "passed": true
+    },
+    {
+      "name": "Cancel clears arming and returns ordinary dispatch without creating a ghost mapping",
+      "passed": true
+    },
+    {
+      "name": "Invalid target/encoding cannot corrupt existing assignments",
+      "passed": true
+    },
+    {
+      "name": "Fourteen-bit continuous capture canonicalizes the actual pair and rejects unrelated CC",
+      "passed": true
+    },
+    {
+      "name": "Rechoosing an already assigned input never duplicates its mapping",
+      "passed": true
+    },
+    {
+      "name": "Explicit learned device scope rejects a different device while legacy mappings stay generic",
+      "passed": true
+    }
+  ],
+  "sourceHashes": {
+    "prototype/midi-assignment.js": "6950ca162de7246140013895993be77c3d4fecabe2bebfdfca5bb457298a1003",
+    "prototype/midi.js": "6bff54eef394a4af04e82b1b3f33ed1d6bf902b94002b5cab3975581aa1bcff6",
+    "scripts/test_video_midi_learn.mjs": "2afdf526b890be6f1aa3dae03e263e24be917550c147d4b485275f4b1de73a63"
+  }
+}

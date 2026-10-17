@@ -1,0 +1,137 @@
+{
+  "scope": "Actual extracted receiveMIDI and onState + actual assignment/router; controlled sample-onset Promise and stop witnesses. No actual sample AudioEngine/PCM/browser/native/physical acceptance.",
+  "passed": 5,
+  "failed": 0,
+  "checks": [
+    {
+      "name": "Only exact device/type/channel/controller release stops the accepted Hold owner",
+      "passed": true,
+      "evidence": {
+        "beforeExact": [
+          [
+            "play",
+            0
+          ]
+        ],
+        "afterExact": [
+          [
+            "play",
+            0
+          ],
+          [
+            "stop",
+            0
+          ]
+        ]
+      }
+    },
+    {
+      "name": "Captured release survives bank and mapping replacement without stopping another bank",
+      "passed": true,
+      "evidence": {
+        "calls": [
+          [
+            "play",
+            0
+          ],
+          [
+            "stop",
+            0
+          ]
+        ]
+      }
+    },
+    {
+      "name": "Hold ownership is reserved before awaited onset and can be released during assignment",
+      "passed": true,
+      "evidence": {
+        "ownersBeforeAwait": 1,
+        "beforeOnsetSettles": [
+          [
+            "play",
+            0
+          ],
+          [
+            "stop",
+            0
+          ]
+        ],
+        "afterOnsetSettles": [
+          [
+            "play",
+            0
+          ],
+          [
+            "stop",
+            0
+          ]
+        ]
+      }
+    },
+    {
+      "name": "Assignment-time CC Hold release performs cleanup without falling through to mapped Video fader",
+      "passed": true,
+      "evidence": {
+        "crossBefore": 1,
+        "crossAfter": 1,
+        "calls": [
+          [
+            "play",
+            0
+          ],
+          [
+            "cross"
+          ],
+          [
+            "stop",
+            0
+          ]
+        ]
+      }
+    },
+    {
+      "name": "Disconnect retires only removed input owners and keeps another input owner until its release",
+      "passed": true,
+      "evidence": {
+        "afterDisconnect": [
+          [
+            "play",
+            0
+          ],
+          [
+            "play",
+            8
+          ],
+          [
+            "stop",
+            0
+          ]
+        ],
+        "final": [
+          [
+            "play",
+            0
+          ],
+          [
+            "play",
+            8
+          ],
+          [
+            "stop",
+            0
+          ],
+          [
+            "stop",
+            8
+          ]
+        ]
+      }
+    }
+  ],
+  "sourceHashes": {
+    "prototype/panels.js": "0515787f6b8ef326d11133b8cdd6d80972807ad8ef03d0b26ad3a62b7fb0d171",
+    "prototype/midi-assignment.js": "6950ca162de7246140013895993be77c3d4fecabe2bebfdfca5bb457298a1003",
+    "prototype/midi.js": "6bff54eef394a4af04e82b1b3f33ed1d6bf902b94002b5cab3975581aa1bcff6",
+    "prototype/video-midi.js": "9346f0a9ec28ddd1166fdd5b57a657409f3212550dde9b17ae712aaafbf715eb"
+  }
+}

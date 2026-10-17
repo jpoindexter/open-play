@@ -2,7 +2,7 @@
 
 **Open Play 0.1.5 does not have established 1:1 parity with Serato DJ Pro.** This check preserves the 110-group / 522-requirement baseline, nine separate beta deltas, and adds 26 explicit release-page checks: 24 relevant to macOS and two Windows-only reference cases. These are not 26 new canonical requirements or passed implementations. The full current inventory remains unfinished.
 
-REA freshly read installed version **4.0.10.213**, evidence `ev_fb7043efffb87a67955c1c9a53cb4ff595fecba0cf6ce4d2bff726524bd49ecf`. Its plist permissions, custom URL scheme and stem extension are declarations, not runtime compatibility. The [official current download page](https://serato.com/dj/pro/downloads) still identifies 4.0.10. The [5.0 beta](https://the-drop.serato.com/announcements/lucid-beatgrids-just-dropped-in-the-serato-dj-5-0-beta/) remains separately scoped and uninstalled.
+REA freshly read installed version **4.0.10.213**, evidence `ev_70d315bdd494a9efdba20445607af197cdbc8bbbfa56e6eb1e5ab6392b744f3a`. Its plist permissions, custom URL scheme and stem extension are declarations, not runtime compatibility. The [official current download page](https://serato.com/dj/pro/downloads) still identifies 4.0.10. The [5.0 beta](https://the-drop.serato.com/announcements/lucid-beatgrids-just-dropped-in-the-serato-dj-5-0-beta/) remains separately scoped and uninstalled.
 
 ## Native gap and newer browser implementation
 
@@ -10,15 +10,15 @@ REA freshly read installed version **4.0.10.213**, evidence `ev_fb7043efffb87a67
 
 Evidence: [current-feature-check-native-observation.json](../../docs/prototype/current-feature-check-native-observation.json), [parity-current-midi-targets-0.1.5.png](../../docs/prototype/screenshots/parity-current-midi-targets-0.1.5.png), [preserved original comparison](../../docs/research/CURRENT_FEATURE_MATCH_20261017_NATIVE015.md). The official release-page Key Shift fix makes this a specific current-version obligation. Serato’s own MIDI behavior was not exercised in this check.
 
-The newer browser source has actual four-deck Key Shift and saved-mapping audio evidence: [functional review](../../docs/prototype/MIDI_KEYSHIFT_FUNCTIONAL_REVIEW.md), eight initial plus three reload checks and eight complete recordings. The later Video MIDI candidate changes four existing production files relative to0.1.5 and adds one production routing module; the audio engine is unchanged. Key Shift recordings retain the preceding candidate identity. These browser results are not a new native or physical test and do not establish complete REL-05 equivalence.
+The newer browser source has actual four-deck Key Shift and saved-mapping audio evidence: [functional review](../../docs/prototype/MIDI_KEYSHIFT_FUNCTIONAL_REVIEW.md), eight initial plus three reload checks and eight complete recordings. The prior accepted core Video MIDI candidate changed four existing files relative to0.1.5 and added its router. The current overlay draft changes seven existing files and includes four new production modules; its full28overlay/72target workflows remain unaccepted and the audio engine is unchanged. Key Shift recordings retain the preceding candidate identity. These browser results are not a new native or physical test and do not establish complete REL-05 equivalence.
 
-Core Video MIDI now has [functional review](../../docs/prototype/VIDEO_MIDI_FUNCTIONAL_REVIEW.md):14initial/4actual-reload browser checks,37saved mappings and20wholeGPU PNGs. Independent review corrected compound dispatch and held edges. Overlay-specific targets, some core commands, physical/native transfer and full REQ-516 remain open.
+Core Video MIDI now has [functional review](../../docs/prototype/VIDEO_MIDI_FUNCTIONAL_REVIEW.md):14initial/4actual-reload browser checks,37saved mappings and20wholeGPU PNGs. Independent review corrected compound dispatch and held edges. The overlay source registers 28 additional targets and visible-control assignment. Six reproduced integration defects were corrected; scoped actual browser9/9 and actual reload3/3 with7saved maps and12wholePNGs pass. Complete28overlay/72target workflows remain open. Some core commands, physical/native transfer and full REQ-516 remain open.
 
 ## Executed observations and accounting: separate phases
 
-- Earlier this date: REA Info.plist inspection and exact executable identity; no repeated deep Ghidra import.
+- This recheck: official production download/manual/product/beta pages were opened and REA re-read installed Info.plist identity as4.0.10.213; no reference runtime comparison or repeated deep Ghidra import. See REA_PARITY_RECHECK_IDENTITY_20261017.json.
 - Earlier this date: screenshots of the installed reference and running Open Play 0.1.5; actual MIDI menu inspection, with no mapping or connection change. App restored to paused main view.
-- Of the200baseline production files, 4 current browser files differ and one production routing module is added, as recorded by the Video MIDI candidate. Current ASAR still matches the unchanged0.1.5 bundle. Source correspondence alone is not a feature test.
+- Of the200baseline production files, 7 current browser files differ and four new production modules are present, as recorded by the explicitly unaccepted overlay draft. Current ASAR still matches the unchanged0.1.5 bundle. Source correspondence alone is not a feature test.
 - This generator reconciles evidence for every canonical group and requirement; no runtime test or full-feature pass is awarded. Earlier physical, storage, FX, stem and keylock evidence retains its original scope.
 
 ## Current release obligations

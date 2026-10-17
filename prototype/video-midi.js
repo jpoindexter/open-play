@@ -2,6 +2,7 @@ import {mappedValue} from './midi.js';
 import {videoEffectCatalog} from './video-effects-catalog.js';
 import {videoTransitionCatalog} from './video-transitions.js';
 import {setVideoSetting} from './video-settings.js';
+import {createVideoOverlayMIDI} from './video-overlay-midi.js';
 
 // Independent Open Play mapping policy. This registry is a subset of the
 // historical manual's 26 control groups, not current-version parity evidence.
@@ -20,6 +21,8 @@ for(const side of ['left','right','master'])for(const slot of [1,2])
     add(`Video ${side} FX ${slot} ${action}`,kind,{side,slot:slot-1,action});
 for(const action of ['panel','FX','overlays','media'])add('Video open '+action,'command');
 add('Video fullscreen','command');
+for(const kind of ['text','image'])for(const [action,type]of [['select','selection'],['opacity','continuous'],['scale','continuous'],['x','continuous'],['y','continuous'],['animation','selection'],['option','selection'],['on','command'],['route left','command'],['route master','command'],['route right','command'],['preset select','selection'],['save preset','command'],['load preset','command']])
+  add(`Video ${kind} overlay ${action}`,type,{overlayKind:kind,action});
 export const videoMIDITargets=Object.freeze(registry);
 const definitions=new Map(registry.map(spec=>[spec.target,spec]));
 const clamp=(n,low,high)=>Math.max(low,Math.min(high,n));
@@ -28,7 +31,7 @@ const clone=spec=>({name:spec.name,...structuredClone(spec.default)});
 /** MIDI changes Video state through the existing mixer owners. No AudioEngine
  * method is exposed here. Press edges are per target and input source; pending
  * commands reserve ownership synchronously before an asynchronous collaborator. */
-export function createVideoMIDIRouter({state,videoMixer,persist=()=>{},command=async()=>{},onChange=()=>{}}) {
+export function createVideoMIDIRouter({state,videoMixer,persist=()=>{},command=async()=>{},onChange=()=>{},overlayMIDI=createVideoOverlayMIDI({state,videoMixer})}) {
   const v=state.video,edges=new Map(),pending=new Set(),sourcePairs=new Map();
   const source=message=>message.deviceId||message.device||(message.synthetic?'synthetic':'default');
   function value(message,encoding) {
@@ -61,7 +64,8 @@ export function createVideoMIDIRouter({state,videoMixer,persist=()=>{},command=a
     if(spec.kind==='command'&&(!press(target,message,encoding)||pending.has(target)))return true;
     pending.add(target);
     try {
-      if(spec.side) {
+      if(spec.overlayKind)overlayMIDI.dispatch(spec.overlayKind,spec.action,input,relative);
+      else if(spec.side) {
         const list=v.fx[spec.side];
         for(let i=0;i<2;i++)list[i]||=clone(videoEffectCatalog[0]);
         const fx=list[spec.slot];

@@ -1,15 +1,16 @@
 {
-  "generated_at": "2026-10-17T13:41:52.064Z",
-  "source_checked_at": "2026-10-17T12:50:43.755803+00:00",
+  "generated_at": "2026-10-17T14:17:54.994Z",
+  "source_checked_at": "2026-10-17T14:08:08.581389+00:00",
+  "prior_native_source_checked_at": "2026-10-17T12:50:43.755803+00:00",
   "kind": "CURRENT_FEATURE_EVIDENCE_RECONCILIATION_NOT_ALL_FEATURE_RUNTIME_TEST",
-  "git_head": "7ce4ffe51696f9e68e7ef2f3afea8684e739a82b",
+  "git_head": "2e50db4b10c368d21a65718dc8b5e3c7404baffe",
   "outcome": "FULL_PARITY_NOT_ESTABLISHED",
   "full_parity_verified": false,
   "complete_latest_inventory": false,
   "reference": {
     "version": "4.0.10.213",
     "executable_sha256": "1df36a8907bf3034b174aeab7c6ceb46a87493f78704c14934eb7210e3fdd2f5",
-    "REA_plist_evidence": "ev_fb7043efffb87a67955c1c9a53cb4ff595fecba0cf6ce4d2bff726524bd49ecf",
+    "REA_plist_evidence": "ev_70d315bdd494a9efdba20445607af197cdbc8bbbfa56e6eb1e5ab6392b744f3a",
     "current_production_page": "https://serato.com/dj/pro/downloads",
     "production_page_heading": "What’s New in 4.0.10",
     "beta_separate": true
@@ -23,7 +24,10 @@
       "prototype/app.js",
       "prototype/midi.js",
       "prototype/panels.js",
-      "prototype/video-controls.js"
+      "prototype/styles.css",
+      "prototype/video-controls.js",
+      "prototype/video-state.js",
+      "prototype/video.js"
     ]
   },
   "browser_keyshift_candidate": {
@@ -156,6 +160,171 @@
     "audio_engine_unchanged": true,
     "scope": "Actual browser main app callbacks/GPU/persistence and generated local video decode/save/recall/association; synthetic MIDI, independent mapping policy, no native/hardware/reference equivalence."
   },
+  "browser_overlay_midi_draft": {
+    "frozen_at": "2026-10-17T14:12:26.755967+00:00",
+    "kind": "OVERLAY_MIDI_SCOPED_BROWSER_SUBSET_FULL_WORKFLOW_OPEN",
+    "previous_browser_commit": "2e50db4b10c368d21a65718dc8b5e3c7404baffe",
+    "baseline_native": "0.1.5",
+    "baseline_source_commit": "48a6d4dad2f217a8ba166b9ca890a287aabc4feb",
+    "existing_baseline_production_files_changed": [
+      "prototype/app.js",
+      "prototype/midi.js",
+      "prototype/panels.js",
+      "prototype/styles.css",
+      "prototype/video-controls.js",
+      "prototype/video-state.js",
+      "prototype/video.js"
+    ],
+    "new_production_files": [
+      "prototype/video-midi.js",
+      "prototype/midi-assignment.js",
+      "prototype/video-overlay-midi.js",
+      "prototype/video-midi-assignment-ui.js"
+    ],
+    "source_hashes": [
+      {
+        "path": "prototype/app.js",
+        "sha256": "abc0e15d47fb1546cde931c21072d9dbd6f4d78ba1c65cab0fc5841b12cf02bf"
+      },
+      {
+        "path": "prototype/midi.js",
+        "sha256": "6bff54eef394a4af04e82b1b3f33ed1d6bf902b94002b5cab3975581aa1bcff6"
+      },
+      {
+        "path": "prototype/panels.js",
+        "sha256": "0515787f6b8ef326d11133b8cdd6d80972807ad8ef03d0b26ad3a62b7fb0d171"
+      },
+      {
+        "path": "prototype/styles.css",
+        "sha256": "a0605801c89b0d46cd836fe1409399045519418a27cefca890d5c16ae563120b"
+      },
+      {
+        "path": "prototype/video-controls.js",
+        "sha256": "f493af06dfbd23cf827e33eacf1b63462eb4ecf451b08a40f9ca138a8413ecda"
+      },
+      {
+        "path": "prototype/video-midi.js",
+        "sha256": "9346f0a9ec28ddd1166fdd5b57a657409f3212550dde9b17ae712aaafbf715eb"
+      },
+      {
+        "path": "prototype/video-state.js",
+        "sha256": "5207f031efcb72f683fd7aecd36a6747bf52d3ed229d60cfd1cca83a740f0e0e"
+      },
+      {
+        "path": "prototype/video.js",
+        "sha256": "d09978db2178d009281ff38ab8923d33e2c18a5129c8188f7d4066db92f15823"
+      },
+      {
+        "path": "prototype/midi-assignment.js",
+        "sha256": "6950ca162de7246140013895993be77c3d4fecabe2bebfdfca5bb457298a1003"
+      },
+      {
+        "path": "prototype/video-overlay-midi.js",
+        "sha256": "2677e3f57f67cff6a2e422bb383638d631aae70a7cb56257a052381f33627e11"
+      },
+      {
+        "path": "prototype/video-midi-assignment-ui.js",
+        "sha256": "e7943f249f0b67e1e70018bc4d050a237bc8c1a39407a2808950b74c43aedc2b"
+      }
+    ],
+    "registered_video_targets": 72,
+    "overlay_targets": 28,
+    "full_parity_verified": false,
+    "browser_workflow_accepted": false,
+    "native_or_physical_accepted": false,
+    "controlled_evidence": [
+      {
+        "path": "docs/prototype/overlay-midi-policy-recheck-results.json",
+        "sha256": "82e0f03863e4d7f98a80c2fba1eca7519c1f93b713bc6e22d0bf58ac1b4ca7f5"
+      },
+      {
+        "path": "docs/prototype/overlay-midi-learn-recheck-results.json",
+        "sha256": "a1bd7e792f7b2e504e48b819b89610fb8c96bbff4d45098c5e7b084b5f37f380"
+      },
+      {
+        "path": "docs/prototype/overlay-midi-move-recheck-results.json",
+        "sha256": "3c25173207a5bf51b455de5c39924df7144b2c222030fb5dacb0fa8ec28975ba"
+      },
+      {
+        "path": "docs/prototype/overlay-midi-learning-parent-confirmed-red-results.json",
+        "sha256": "79a098dae612e8cb22d6328555ab449e8abc738613e99307928a6fb0648b77a8"
+      },
+      {
+        "path": "docs/prototype/video-midi-learning-independent-corrected-five-results.json",
+        "sha256": "6303b9b3a8cfd080aa48a8d2b1d49e8d1ddf325ee771d0be7df52900d7163c28"
+      },
+      {
+        "path": "docs/prototype/video-midi-assignment-view-owner-independent-results.json",
+        "sha256": "e9470535c3b8e4c85206215edb73b9f06dd69afed37376e1f71dd9d3ac629e73"
+      },
+      {
+        "path": "docs/prototype/video-midi-hold-release-independent-results.json",
+        "sha256": "363daf6b84f555df4212747a9df8921b921335615f67a12f52572810588a4e3e"
+      }
+    ],
+    "evidence_boundary": "Actual browser9/9 plus actualreload3/3 with controlled MIDI-service collaborator,12wholePNGs,1ownedPNGand7savedmaps. These prove bounded listed workflows; full28overlay/72Video target, text/animation/geometry/rightendpoint, physical/native/currentreference acceptance remains open. Previous core14/4browser results retain original2e50db4source.",
+    "browser_subset_executed": true,
+    "browser_subset_counts": {
+      "initial": 9,
+      "actual_reload": 3,
+      "whole_PNGs": 12,
+      "saved_mappings": 7,
+      "owned_image_fixtures": 1
+    },
+    "browser_evidence": [
+      {
+        "path": "docs/prototype/overlay-midi-browser-corrected-initial-results.json",
+        "sha256": "02ce86fa16c98fa16c0002836ecbafcfb6f8f84bbd29e5306e59dbe575a34e4a"
+      },
+      {
+        "path": "docs/prototype/overlay-midi-browser-final-restored-results.json",
+        "sha256": "09e689f2bdd33c77e377b37ef2ec2048e7d36556d5b8842ce6c47abaadd28736"
+      }
+    ],
+    "review_files": [
+      {
+        "path": "docs/prototype/VIDEO_OVERLAY_MIDI_FUNCTIONAL_REVIEW.md",
+        "sha256": "e6f869f58eebae82914efd50c4e1b790ff6b140cf6ca4929ad4cacf8a299a8b4"
+      },
+      {
+        "path": "docs/research/VIDEO_OVERLAY_MIDI_BROWSER_INDEPENDENT_REVIEW_20261017.md",
+        "sha256": "30668f4614aa331f656ae0eafcb7c5d3292825504e45914efd3c95d4c3841a67"
+      },
+      {
+        "path": "docs/research/VIDEO_MIDI_LEARNING_INDEPENDENT_REVIEW_20261017.md",
+        "sha256": "398fc0af453c127bd0db3986fa46248a6f2236e860b2cd8a7a1e2a64c83dc942"
+      },
+      {
+        "path": "docs/research/CURRENT_PARITY_OVERLAY_RECHECK_INDEPENDENT_REVIEW_20261017.md",
+        "sha256": "2dd76770236bf1b42db24ff91722a723de617b56fff42421ef125546a4ce83ba"
+      }
+    ]
+  },
+  "reference_identity_rechecked": {
+    "observed_at": "2026-10-17T14:01:33.580Z",
+    "operation": "inspect_plist",
+    "evidence_id": "ev_70d315bdd494a9efdba20445607af197cdbc8bbbfa56e6eb1e5ab6392b744f3a",
+    "authority": "shipped-artifact",
+    "bundle": {
+      "identifier": "com.serato.seratodj",
+      "executable": "Serato DJ Pro",
+      "name": "Serato DJ Pro",
+      "version": "4.0.10.213",
+      "short_version": "4.0.10"
+    },
+    "subject": {
+      "name": "Info.plist",
+      "digest": {
+        "sha256": "128f13364cecee349b684af17b804d42d2e2ec97be80dc044d6ee151283e895b"
+      },
+      "local_path": "/Applications/Serato DJ Pro.app/Contents/Info.plist",
+      "format": "plist",
+      "architecture": null
+    },
+    "limitations": [
+      "Static Info.plist identity only; no runtime feature or compatibility acceptance."
+    ]
+  },
   "scope": {
     "canonical_features": 110,
     "canonical_requirements": 522,
@@ -175,7 +344,17 @@
     "Native main-window screenshots of both applications",
     "Open Play0.1.5 MIDI target menu inspection"
   ],
-  "new_browser_unit": {
+  "current_overlay_browser_subset": {
+    "initial_checks": 9,
+    "actual_reload_checks": 3,
+    "saved_mappings": 7,
+    "whole_PNGs": 12,
+    "physical_or_native": false,
+    "full_REQ_516_verified": false,
+    "full_workflow_accepted": false,
+    "evidence": "docs/prototype/VIDEO_OVERLAY_MIDI_FUNCTIONAL_REVIEW.md"
+  },
+  "previous_core_browser_unit": {
     "initial_checks": 14,
     "actual_reload_checks": 4,
     "saved_mappings": 37,
@@ -1976,8 +2155,16 @@
   ],
   "input_hashes": [
     {
+      "path": "docs/prototype/video-overlay-midi-draft-candidate.json",
+      "sha256": "961bd7ef4dbd68c8b136d9849b35eb7db61c1a3b79bc16c9cd4fb1774609e87f"
+    },
+    {
+      "path": "docs/research/REA_PARITY_RECHECK_IDENTITY_20261017.json",
+      "sha256": "76d28d236f512ba857170392cce2020aefd695ecbab433de0aa7d737e5421ab0"
+    },
+    {
       "path": "docs/research/CURRENT_PARITY_AUDIT_20261017.json",
-      "sha256": "1cfa115de4ca43cfbe29252a9f20c73cd9086efe91cc6cdabee657f411e02522"
+      "sha256": "74de16e961768504392c64e25dbfe93af411bf8f0db0371ddb76598bb461e714"
     },
     {
       "path": "docs/research/CURRENT_VERSION_DELTAS_20261017.json",
@@ -1997,11 +2184,11 @@
     },
     {
       "path": "prototype/panels.js",
-      "sha256": "c690f08528ac3380c2995be86e378555b5eb9c3cd1d7afe5a32dea6e0efeecfe"
+      "sha256": "0515787f6b8ef326d11133b8cdd6d80972807ad8ef03d0b26ad3a62b7fb0d171"
     },
     {
       "path": "prototype/midi.js",
-      "sha256": "a93852152e272a4da19c7062585e53cca20dc073f784324bfb1b542f5c739b9c"
+      "sha256": "6bff54eef394a4af04e82b1b3f33ed1d6bf902b94002b5cab3975581aa1bcff6"
     },
     {
       "path": "prototype/engine.js",
@@ -2033,11 +2220,11 @@
     },
     {
       "path": "prototype/video-midi.js",
-      "sha256": "ed536567cc52e0275ea3712d65c463c661920b5f3e851a9c8402e988cda45115"
+      "sha256": "9346f0a9ec28ddd1166fdd5b57a657409f3212550dde9b17ae712aaafbf715eb"
     },
     {
       "path": "prototype/video-controls.js",
-      "sha256": "33d94445ef1581371f4a6badab8112048ee38ba5ce55828bc097475cd5945255"
+      "sha256": "f493af06dfbd23cf827e33eacf1b63462eb4ecf451b08a40f9ca138a8413ecda"
     },
     {
       "path": "docs/prototype/video-midi-candidate.json",

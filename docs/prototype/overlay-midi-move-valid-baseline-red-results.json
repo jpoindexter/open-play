@@ -1,0 +1,37 @@
+{
+  "date": "2026-10-17T13:47:36.829Z",
+  "scope": "Actual Video mixer resource/metadata methods with controlled Image.decode and real Blob/object URLs; no decoded pixels/GUI/hardware/native/vendor acceptance.",
+  "passed": 0,
+  "failed": 5,
+  "checks": [
+    {
+      "name": "Actual mixer moves overlay metadata and owned decoded image together",
+      "passed": false,
+      "error": "Mixer overlay move missing\n+ actual - expected\n\n+ 'undefined'\n- 'function'\n"
+    },
+    {
+      "name": "Destination identity collision refuses mutation of both arrays and assets",
+      "passed": false,
+      "error": "Mixer overlay move missing\n+ actual - expected\n\n+ 'undefined'\n- 'function'\n"
+    },
+    {
+      "name": "A decode completing after move cannot publish an image at the old location",
+      "passed": false,
+      "error": "Mixer overlay move missing\n+ actual - expected\n\n+ 'undefined'\n- 'function'\n"
+    },
+    {
+      "name": "Shared image references refuse relocation instead of invalidating another overlay",
+      "passed": false,
+      "error": "Mixer overlay move missing\n+ actual - expected\n\n+ 'undefined'\n- 'function'\n"
+    },
+    {
+      "name": "Disposed mixer rejects relocation without metadata mutation",
+      "passed": false,
+      "error": "Mixer overlay move missing\n+ actual - expected\n\n+ 'undefined'\n- 'function'\n"
+    }
+  ],
+  "mixerSource": "gitHEADbaseline",
+  "sourceHashes": {
+    "prototype/video.js": "7d4ecba07be0714dae905fc250fc1277ef59d8a8a03c9ef160d1709064a6330a"
+  }
+}

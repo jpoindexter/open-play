@@ -210,6 +210,23 @@ export function createVideoMixer({state, engine, notify, identifyFile=videoFileI
     imageTokens.set(key, (imageTokens.get(key) || 0) + 1);
     if (previous) URL.revokeObjectURL(previous.url); assets.delete(key);
   }
+  function hasOverlayImage(target,id){return !disposed&&assets.has(`${target}:${id}`);}
+  function moveOverlay(from,to,id) {
+    if(disposed)throw new Error('Video mixer was disposed.');
+    if(!['left','right','master'].includes(from)||!['left','right','master'].includes(to))throw new RangeError('Choose a valid overlay target.');
+    const source=v.overlays[from]||[],destination=v.overlays[to]||[],matches=source.filter(x=>x.id===id);
+    if(matches.length!==1)throw new Error('Choose a unique existing overlay identity.');
+    const spec=matches[0];if(from===to)return spec;
+    if(destination.some(x=>x.id===id))throw new Error('The destination already has this overlay identity.');
+    const ref=spec.imageRef||spec.id,oldKey=`${from}:${ref}`,newKey=`${to}:${ref}`,asset=assets.get(oldKey);
+    if(spec.kind==='image') {
+      if(source.some(x=>x!==spec&&x.kind==='image'&&(x.imageRef||x.id)===ref)||destination.some(x=>x.kind==='image'&&(x.imageRef||x.id)===ref)||assets.has(newKey))
+        throw new Error('A shared image reference must be separated before relocation.');
+      imageTokens.set(oldKey,(imageTokens.get(oldKey)||0)+1);imageTokens.set(newKey,(imageTokens.get(newKey)||0)+1);
+      if(asset){assets.delete(oldKey);assets.set(newKey,asset);}
+    }
+    source.splice(source.indexOf(spec),1);v.overlays[to]||=[];v.overlays[to].push(spec);return spec;
+  }
   function presetIndex(index){if(index!==0&&index!==1)throw new RangeError('Choose left or right Video FX.');return index;}
   async function withPresetIdentity(index,kind,action){
     if(disposed)throw new Error('Video mixer was disposed.');presetIndex(index);
@@ -540,7 +557,7 @@ export function createVideoMixer({state, engine, notify, identifyFile=videoFileI
   }
   function configureKaraoke(index, options) {karaoke.configure(index, options); reset(index ? 'right' : 'left');}
   function clearKaraoke(index) {karaoke.clear(index); reset(index ? 'right' : 'left');}
-  return {load, bind, play, setOverlayImage, clearOverlayImage, setResolution, setRecordingQuality, setOpacity,setOpacityLinked,startCrossfade,stopCrossfade, reset, tick,
+  return {load, bind, play, setOverlayImage, clearOverlayImage, hasOverlayImage,moveOverlay,setResolution, setRecordingQuality, setOpacity,setOpacityLinked,startCrossfade,stopCrossfade, reset, tick,
     loadKaraoke, configureKaraoke, clearKaraoke, karaokeDiagnostics: index => karaoke.diagnostics(index),
     addMedia, removeMedia, configureMedia, nextMedia, associateVideo, removeVideoAssociation,
     saveVideoFX,recallVideoFX,cancelVideoFX,videoFXEdited,exportVideoFX,importVideoFX,

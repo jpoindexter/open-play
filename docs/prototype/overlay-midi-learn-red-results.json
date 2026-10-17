@@ -1,0 +1,57 @@
+{
+  "date": "2026-10-17T13:48:24.753Z",
+  "scope": "Pure assignment lifecycle and actual mapping-match policy; no GUI event suppression, actual WebMIDI or native/reference acceptance.",
+  "passed": 0,
+  "failed": 9,
+  "checks": [
+    {
+      "name": "Learning starts without a target and suppresses ordinary message dispatch",
+      "passed": false,
+      "error": "Click assignment state machine missing\n+ actual - expected\n\n+ 'undefined'\n- 'function'\n"
+    },
+    {
+      "name": "Choose/capture assigns once and retains unrelated mappings",
+      "passed": false,
+      "error": "Click assignment state machine missing\n+ actual - expected\n\n+ 'undefined'\n- 'function'\n"
+    },
+    {
+      "name": "Note release cannot become an assignment or trigger a command while learning",
+      "passed": false,
+      "error": "Click assignment state machine missing\n+ actual - expected\n\n+ 'undefined'\n- 'function'\n"
+    },
+    {
+      "name": "Unassign removes only the chosen target and stays ready for reassignment",
+      "passed": false,
+      "error": "Click assignment state machine missing\n+ actual - expected\n\n+ 'undefined'\n- 'function'\n"
+    },
+    {
+      "name": "Cancel clears arming and returns ordinary dispatch without creating a ghost mapping",
+      "passed": false,
+      "error": "Click assignment state machine missing\n+ actual - expected\n\n+ 'undefined'\n- 'function'\n"
+    },
+    {
+      "name": "Invalid target/encoding cannot corrupt existing assignments",
+      "passed": false,
+      "error": "Click assignment state machine missing\n+ actual - expected\n\n+ 'undefined'\n- 'function'\n"
+    },
+    {
+      "name": "Fourteen-bit continuous capture canonicalizes the actual pair and rejects unrelated CC",
+      "passed": false,
+      "error": "Click assignment state machine missing\n+ actual - expected\n\n+ 'undefined'\n- 'function'\n"
+    },
+    {
+      "name": "Rechoosing an already assigned input never duplicates its mapping",
+      "passed": false,
+      "error": "Click assignment state machine missing\n+ actual - expected\n\n+ 'undefined'\n- 'function'\n"
+    },
+    {
+      "name": "Explicit learned device scope rejects a different device while legacy mappings stay generic",
+      "passed": false,
+      "error": "Expected values to be strictly equal:\n\ntrue !== false\n"
+    }
+  ],
+  "sourceHashes": {
+    "prototype/midi.js": "a93852152e272a4da19c7062585e53cca20dc073f784324bfb1b542f5c739b9c",
+    "scripts/test_video_midi_learn.mjs": "2afdf526b890be6f1aa3dae03e263e24be917550c147d4b485275f4b1de73a63"
+  }
+}

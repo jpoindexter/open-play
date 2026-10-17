@@ -1,0 +1,81 @@
+{
+  "scope": "Actual mixer assets and MIDI metadata controller with controlled Image.decode; real Blob/object URLs. No actual image pixels/browser/native/hardware.",
+  "passed": 0,
+  "failed": 3,
+  "checks": [
+    {
+      "name": "Loading metadata for one image must preserve a second overlay sharing its decoded reference",
+      "passed": false,
+      "evidence": {
+        "otherOverlay": {
+          "id": "b",
+          "imageRef": "shared",
+          "kind": "image",
+          "name": "b",
+          "on": true,
+          "opacity": 1,
+          "scale": 1,
+          "x": 0.5,
+          "y": 0.5,
+          "animation": "none",
+          "speed": 1
+        },
+        "otherAssetPresent": false
+      },
+      "error": "Another enabled overlay must not lose its decoded bytes\n\nfalse !== true\n"
+    },
+    {
+      "name": "Metadata reload cannot attach the selected image to another overlay asset and bypass reimport",
+      "passed": false,
+      "evidence": {
+        "afterReload": {
+          "kind": "image",
+          "on": false,
+          "text": "",
+          "image": null,
+          "color": "#ffffff",
+          "fontFamily": "sans-serif",
+          "fontSize": 48,
+          "align": "center",
+          "opacity": 1,
+          "animation": "none",
+          "speed": 1,
+          "x": 0.5,
+          "y": 0.5,
+          "scale": 1,
+          "id": "a",
+          "name": "a",
+          "imageRef": "a"
+        },
+        "enableError": null,
+        "enabled": true
+      },
+      "error": "Enable must require reimport rather than finding another overlay asset under its own ID"
+    },
+    {
+      "name": "Image selection cannot silently activate a text layer with a colliding identity",
+      "passed": false,
+      "evidence": {
+        "resultKind": "text",
+        "resultId": "collision",
+        "selections": {
+          "image": {
+            "target": "left",
+            "id": "a"
+          },
+          "text": {
+            "target": "left",
+            "id": "collision"
+          }
+        }
+      },
+      "error": "Selecting an image must not activate a different kind\n\n'text' !== 'image'\n"
+    }
+  ],
+  "sourceHashes": {
+    "prototype/video-overlay-midi.js": "bb1e33cc1faac9d0f8667daa519b476f391238bcd02612e9f343e34e99a2bf16",
+    "prototype/video.js": "d09978db2178d009281ff38ab8923d33e2c18a5129c8188f7d4066db92f15823",
+    "prototype/video-state.js": "5207f031efcb72f683fd7aecd36a6747bf52d3ed229d60cfd1cca83a740f0e0e",
+    "prototype/video-overlays.js": "053112eb4cb72a698b8d550c66ad05862b968a83314e5b001a546b13f912ae5b"
+  }
+}

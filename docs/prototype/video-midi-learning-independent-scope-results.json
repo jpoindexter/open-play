@@ -1,0 +1,80 @@
+{
+  "scope": "Actual assignment/match helpers, extracted receiveMIDI and editor callbacks, actual mixer and controlled editor markup with DOM/Image collaborators; no browser GUI/audio/native/physical/reference.",
+  "passed": 0,
+  "failed": 5,
+  "checks": [
+    {
+      "name": "Fourteen-bit Note capture retains its actual note number and can match that same input",
+      "passed": false,
+      "evidence": {
+        "mapping": {
+          "target": "Video crossfader",
+          "type": "Note",
+          "channel": 1,
+          "number": 28,
+          "encoding": "14-bit absolute",
+          "deviceId": "A"
+        },
+        "matchesCapturedInput": false
+      },
+      "error": "Expected values to be strictly equal:\n\n28 !== 60\n"
+    },
+    {
+      "name": "Entering assignment cannot consume the release of an already-running Hold sampler",
+      "passed": false,
+      "evidence": {
+        "beforeAssignment": true,
+        "afterRelease": true,
+        "calls": [
+          "play"
+        ]
+      },
+      "error": "An accepted Hold onset needs its release even when assignment consumes new onsets\n\ntrue !== false\n"
+    },
+    {
+      "name": "Removing one overlay through actual editor handler must preserve another shared image consumer",
+      "passed": false,
+      "evidence": {
+        "remaining": [
+          "b"
+        ],
+        "sharedAssetPresent": false,
+        "reported": null
+      },
+      "error": "Removing a must preserve b decoded resource\n\nfalse !== true\n"
+    },
+    {
+      "name": "Real overlay editor render represents the preset selected by the shared MIDI controller",
+      "passed": false,
+      "evidence": {
+        "sharedSelectedName": "Second",
+        "generatedPresetOptions": "<option value=\"0\" >First</option><option value=\"1\" >Second</option>",
+        "postRenderSelectValue": ""
+      },
+      "error": "Selected Second preset must be reflected by selected option or explicit post-render value"
+    },
+    {
+      "name": "Editing a captured device-scoped mapping must not silently broaden it to other devices",
+      "passed": false,
+      "evidence": {
+        "updated": {
+          "target": "Video crossfader",
+          "encoding": "7-bit absolute",
+          "type": "CC",
+          "channel": 1,
+          "number": 21
+        },
+        "otherDeviceMatches": true
+      },
+      "error": "Expected values to be strictly equal:\n\nundefined !== 'A'\n"
+    }
+  ],
+  "sourceHashes": {
+    "prototype/midi-assignment.js": "d19c09d26dc5d60f63bbb93d7f0323d4473c4dd8595c59dec7bda9855ac5f22e",
+    "prototype/video-midi-assignment-ui.js": "a0036b1ba263f7f3ab0d1c9acf72fdff12fd63ac048c9a253a4864f1c7930caa",
+    "prototype/panels.js": "84c47724f5add7a42934571afadc2334dfab051743afb8e7fc29e2fab7aec0b9",
+    "prototype/video-controls.js": "520609c921096598bdb60f2edf36e2b21c6185208e73ca526112cd12ae157ab4",
+    "prototype/video-midi.js": "9346f0a9ec28ddd1166fdd5b57a657409f3212550dde9b17ae712aaafbf715eb",
+    "prototype/midi.js": "6bff54eef394a4af04e82b1b3f33ed1d6bf902b94002b5cab3975581aa1bcff6"
+  }
+}

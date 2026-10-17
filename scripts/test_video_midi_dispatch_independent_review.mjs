@@ -18,7 +18,7 @@ function host(mappings,save=async()=>{}){
  const mixer={stopCrossfade(){calls.push('stopCrossfade')},saveVideoFX:save};
  const router=createVideoMIDIRouter({state,videoMixer:mixer});
  const receive=new Function('s','mappedValue','keyShiftSemitones','midiPairs','a','$','engine','renderTracks','matchesMIDIMap','videoMIDI','sampleAction','refresh',
-   'let learn=false,learnedType="CC";'+receiveSource+';return receiveMIDI;')(
+   'let learn=false,learnedType="CC";const midiSampleHolds=new Map();'+receiveSource+';return receiveMIDI;')(
    state,mappedValue,keyShiftSemitones,new Map(),{},()=>null,{stopSample(){playing=false;calls.push('sampler-stop')}},()=>{},matchesMIDIMap,router,
    async()=>{playing=true;calls.push('sampler-play')},()=>{});
  return{state,router,receive,calls,isPlaying:()=>playing};
@@ -42,8 +42,8 @@ await check('Adding an unrelated mapping must not rearm a still-held existing Vi
 await check('Unrelated input enumeration preserves held sources; removal resets only removed source',async e=>{
  const h=host([mapping('Video crossfader link','CC',20)]);
  const start=panels.indexOf('  const midiInput = createMIDI('),end=panels.indexOf('  function midi()',start);let callbacks;
- new Function('createMIDI','videoMIDI','$','notify','receiveMIDI','let midiSourceIds=new Set(),midiInputs=[],midiStatus="";'+panels.slice(start,end))(
-  value=>{callbacks=value;return{}},h.router,()=>null,()=>{},h.receive);
+ new Function('createMIDI','videoMIDI','$','notify','receiveMIDI','sampleVisuals','let midiSourceIds=new Set(),midiInputs=[],midiStatus="";const midiSampleHolds=new Map();'+panels.slice(start,end))(
+  value=>{callbacks=value;return{}},h.router,()=>null,()=>{},h.receive,()=>{});
  const input=id=>({id,name:id,state:'connected'});
  callbacks.onState([input('A'),input('B')]);await h.receive(cc(127));await h.receive({...cc(127),deviceId:'B',device:'B'});e.bothHeld=h.state.video.crossLinked;
  callbacks.onState([input('A'),input('B'),input('C')]);await h.receive(cc(127));e.unrelatedAdded=h.state.video.crossLinked;

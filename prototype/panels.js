@@ -1,6 +1,9 @@
 import { createVideoMixer } from "./video.js";
 import { createVideoControls } from "./video-controls.js";
 import {createVideoMIDIRouter,videoMIDITargets} from './video-midi.js';
+import {createVideoOverlayMIDI} from './video-overlay-midi.js';
+import {createMIDIAssignment} from './midi-assignment.js';
+import {createVideoMIDIAssignmentUI} from './video-midi-assignment-ui.js';
 import { createMIDI, mappedValue, keyShiftSemitones, syntheticMIDIMessage, matchesMIDIMap } from "./midi.js";
 import { getExtendedEffectControls } from "./extended-effects.js";
 import { implementedEffects } from "./effects.js";
@@ -70,6 +73,7 @@ export function createPanels(a) {
       };
   }
   function open(name) {
+    if(name!=='video')videoAssignmentUI?.cancel('MIDI assignment exited before changing views.');
     if (
       [
         "settings",
@@ -1307,7 +1311,11 @@ export function createPanels(a) {
     };
   }
   const videoMixer = createVideoMixer({ state: s, engine, notify });
-  const videoMIDI=createVideoMIDIRouter({state:s,videoMixer,persist,
+  const overlayMIDI=createVideoOverlayMIDI({state:s,videoMixer});
+  let videoAssignmentUI;
+  const videoAssignment=createMIDIAssignment({state:s,persist,notify,targetSpec:target=>videoMIDITargets.find(x=>x.target===target),onChange:()=>videoAssignmentUI?.sync()});
+  videoAssignmentUI=createVideoMIDIAssignmentUI({assignment:videoAssignment,notify,onExit:()=>video.controls?.syncMIDI()});
+  const videoMIDI=createVideoMIDIRouter({state:s,videoMixer,persist,overlayMIDI,
     onChange:()=>video.controls?.syncMIDI(),
     command:async action=>{
       if(s.panel!=='video'||$('#panel').hidden)open('video');
@@ -1321,6 +1329,7 @@ export function createPanels(a) {
         await canvas.requestFullscreen();
       }
     }});
+  videoMIDI.assignment=videoAssignment;
   const karaokeImportTokens = [0, 0];
   async function importKaraoke({index, audio, graphics, transparency, crop}) {
     if (![0, 1].includes(index) || !audio || !graphics)
@@ -1352,7 +1361,7 @@ export function createPanels(a) {
   }
   function video() {
     const controls = video.controls ||= createVideoControls({
-      state: s, videoMixer, engine, notify, persist, dialog, refresh, download, esc, importKaraoke,
+      state: s, videoMixer, engine, notify, persist, dialog, refresh, download, esc, importKaraoke,overlayMIDI,assignmentUI:videoAssignmentUI,
     });
     $("#panel").innerHTML =
       head("Video", "INDEPENDENT VIDEO PIPELINE", true) + controls.markup();
@@ -1553,6 +1562,9 @@ export function createPanels(a) {
     midiStatus = "Disconnected",
     learnedType = "CC";
   const midiPairs = new Map();
+  // A Hold release belongs to the input and sample accepted at onset, even if
+  // assignment, the selected bank, or the mapping changes before release.
+  const midiSampleHolds = new Map();
   let reassignMapping=null, midiSourceIds=new Set();
   async function receiveMIDI(message) {
     s.midiLog.push(
@@ -1560,7 +1572,16 @@ export function createPanels(a) {
     );
     s.midiLog = s.midiLog.slice(-100);
     if ($("#midi-log")) $("#midi-log").textContent = s.midiLog.join("\n");
-    if (learn && $("#midi-channel")) {
+    const holdInput=JSON.stringify([message.deviceId||'',message.type,message.channel,message.number]);
+    const heldSample=midiSampleHolds.get(holdInput);
+    if(!message.pressed&&heldSample!==undefined){
+      midiSampleHolds.delete(holdInput);
+      engine.stopSample(heldSample);
+      s.samples[Math.floor(heldSample/8)][heldSample%8].playing=false;
+      refresh();
+    }
+    if(videoMIDI.assignment?.receive(message))return;
+    if (learn && $("#midi-channel") && $('#modal')?.open) {
       $("#midi-channel").value = message.channel;
       $("#midi-number").value = message.number;
       $("#midi-type").value = message.type;
@@ -1609,11 +1630,12 @@ export function createPanels(a) {
         renderTracks();
       }
       if (m.target === "Sampler 1") {
-        if (message.pressed) await sampleAction(0, "play");
-        else if (s.samples[s.bank][0].mode === "Hold") {
-          engine.stopSample(s.bank * 8);
-          s.samples[s.bank][0].playing = false;
-          refresh();
+        if (message.pressed) {
+          if(s.samples[s.bank][0].mode==='Hold'){
+            if(midiSampleHolds.has(holdInput))return;
+            midiSampleHolds.set(holdInput,s.bank*8);
+          }
+          await sampleAction(0, "play");
         }
       }
       if (m.target === "FX depth") {
@@ -1633,7 +1655,13 @@ export function createPanels(a) {
     onMessage: (m) => receiveMIDI(m).catch((e) => notify(e.message)),
     onState: (inputs) => {
       const next=new Set(inputs.filter(x=>x.state==='connected').map(x=>x.id).filter(Boolean));
-      for(const id of midiSourceIds)if(!next.has(id))videoMIDI.resetInput(id);
+      for(const id of midiSourceIds)if(!next.has(id)){
+        videoMIDI.resetInput(id);
+        for(const [input,key] of midiSampleHolds)if(JSON.parse(input)[0]===id){
+          engine.stopSample(key);s.samples[Math.floor(key/8)][key%8].playing=false;midiSampleHolds.delete(input);
+        }
+        sampleVisuals();
+      }
       midiSourceIds=next;
       midiInputs = inputs;
       midiStatus = inputs.length
@@ -1646,7 +1674,7 @@ export function createPanels(a) {
     learn=false; reassignMapping=null;
     dialog(
       "MIDI mapping editor",
-      `${badge("REAL INPUT WHEN SUPPORTED · EXPLICIT TEST INJECTION")}<p id="midi-status">${esc(midiStatus)}</p><div class="panel-controls"><button id="midi-connect">Connect MIDI inputs</button><button id="midi-disconnect">Disconnect input</button></div><p class="muted">Connect requests standard MIDI input only. No SysEx or hardware output is sent. Device names are enumeration evidence; received messages are separate evidence.</p><div class="form-grid"><label>Target<select id="midi-target">${options(["Library browse", "Deck 1 play", "Deck 2 play", "Deck 1 cue", "Deck 2 cue", "Crossfader", "Sampler 1", "FX depth", "Deck 1 key shift", "Deck 2 key shift", "Deck 3 key shift", "Deck 4 key shift", ...videoMIDITargets.map(x=>x.target)], "Library browse")}</select></label><label>Encoding<select id="midi-encoding">${options(["7-bit absolute", "14-bit absolute", "Relative two’s complement", "Relative offset"], "7-bit absolute")}</select></label><label>Message<select id="midi-type">${options(["CC", "Note", "Pitch bend"], learnedType)}</select></label><label>Channel<input id="midi-channel" type="number" min="1" max="16" value="1"></label><label>Controller / note<input id="midi-number" type="number" min="0" max="127" value="1"></label><label>Synthetic test value<input id="midi-test-value" type="number" min="0" max="16383" value="64"></label></div><div class="panel-controls"><button id="midi-learn">Learn next message</button><button id="midi-send">Inject synthetic message</button><button id="midi-add">Add mapping</button><button id="midi-export">Export mapping</button><button id="midi-reset">Clear prototype mappings</button></div><div id="midi-mappings" class="log">${s.mappings.map((m, i) => `${i + 1}. ${esc(m.type || "CC")} ch${m.channel} / ${m.number} → ${esc(m.target)} · ${esc(m.encoding)} <button type="button" data-midi-reassign="${i}" aria-label="Reassign mapping ${i+1}">Reassign</button> <button type="button" data-midi-remove="${i}" aria-label="Remove mapping ${i+1}">Remove</button>`).join("<br>") || "No mappings"}</div><div id="midi-log" class="log">${s.midiLog.map(esc).join("<br>") || "No messages received"}</div><p class="muted">Mappings control real browser actions. Key Shift uses an independent -24 to +24 semitone mapping; relative steps change semitones and enable key lock. Synthetic input is a test, not physical-device proof. LED feedback, soft takeover, device-specific encodings and hardware round-trip latency remain unverified. Video continuous controls use full-range absolute or 1/127-range relative steps. Commands require 7-bit absolute CC/Note press and release; repeats while held are ignored. Linked controls keep their existing owner. Overlay-specific targets and click-to-learn remain unimplemented. This is Open Play JSON, not Serato MIDI XML.</p>`,
+      `${badge("REAL INPUT WHEN SUPPORTED · EXPLICIT TEST INJECTION")}<p id="midi-status">${esc(midiStatus)}</p><div class="panel-controls"><button id="midi-connect">Connect MIDI inputs</button><button id="midi-disconnect">Disconnect input</button></div><p class="muted">Connect requests standard MIDI input only. No SysEx or hardware output is sent. Device names are enumeration evidence; received messages are separate evidence.</p><div class="form-grid"><label>Target<select id="midi-target">${options(["Library browse", "Deck 1 play", "Deck 2 play", "Deck 1 cue", "Deck 2 cue", "Crossfader", "Sampler 1", "FX depth", "Deck 1 key shift", "Deck 2 key shift", "Deck 3 key shift", "Deck 4 key shift", ...videoMIDITargets.map(x=>x.target)], "Library browse")}</select></label><label>Encoding<select id="midi-encoding">${options(["7-bit absolute", "14-bit absolute", "Relative two’s complement", "Relative offset"], "7-bit absolute")}</select></label><label>Message<select id="midi-type">${options(["CC", "Note", "Pitch bend"], learnedType)}</select></label><label>Channel<input id="midi-channel" type="number" min="1" max="16" value="1"></label><label>Controller / note<input id="midi-number" type="number" min="0" max="127" value="1"></label><label>Synthetic test value<input id="midi-test-value" type="number" min="0" max="16383" value="64"></label></div><div class="panel-controls"><button id="midi-learn">Learn next message</button><button id="midi-send">Inject synthetic message</button><button id="midi-add">Add mapping</button><button id="midi-export">Export mapping</button><button id="midi-reset">Clear prototype mappings</button></div><div id="midi-mappings" class="log">${s.mappings.map((m, i) => `${i + 1}. ${esc(m.type || "CC")} ch${m.channel} / ${m.number} → ${esc(m.target)} · ${esc(m.encoding)} <button type="button" data-midi-reassign="${i}" aria-label="Reassign mapping ${i+1}">Reassign</button> <button type="button" data-midi-remove="${i}" aria-label="Remove mapping ${i+1}">Remove</button>`).join("<br>") || "No mappings"}</div><div id="midi-log" class="log">${s.midiLog.map(esc).join("<br>") || "No messages received"}</div><p class="muted">Mappings control real browser actions. Key Shift uses an independent -24 to +24 semitone mapping; relative steps change semitones and enable key lock. Synthetic input is a test, not physical-device proof. LED feedback, soft takeover, device-specific encodings and hardware round-trip latency remain unverified. Video continuous controls use full-range absolute or 1/127-range relative steps. Commands require 7-bit absolute CC/Note press and release; repeats while held are ignored. Linked controls keep their existing owner. Overlay controls address the selected layer of each kind. Assign MIDI inside Video selects visible controls without running their normal action; Enter unassigns and Escape exits. Images require original bytes after metadata reload. This is Open Play JSON, not Serato MIDI XML.</p>`,
       () => {
         $("#midi-connect").onclick = async () => {
           try {
@@ -1687,6 +1715,7 @@ export function createPanels(a) {
             return notify('Video commands need a 7-bit absolute CC or Note button with a release value.');
           const index=reassignMapping?s.mappings.indexOf(reassignMapping):-1;
           if(reassignMapping&&index<0)return notify('The mapping changed; select it again before reassigning.');
+          if(reassignMapping?.deviceId)mapping.deviceId=reassignMapping.deviceId;
           if(index>=0)s.mappings[index]=mapping;else s.mappings.push(mapping);
           persist();
           midi();

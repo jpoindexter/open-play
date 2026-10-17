@@ -84,7 +84,7 @@ function sanitized(value,restore) {
   const size = sizes.find(([w,h]) => width === w && height === h) || sizes[0];
   const name = own(value,'transition'), fx = own(value,'fx'), overlays = own(value,'overlays');
   const flags = key => ({enabled:own(own(value,key),'enabled') === true, random:own(own(value,key),'random') === true});
-  return {version:1,...normalizeVideoOpacityState(value),width:size[0],height:size[1],transition:transitions.has(name) ? name : 'Crossfade',
+  const result={version:1,...normalizeVideoOpacityState(value),width:size[0],height:size[1],transition:transitions.has(name) ? name : 'Crossfade',
     cross:clamp(finite(own(value,'cross'),0),-1,1),auto:own(value,'auto') === true,
     linked:typeof own(value,'linked') === 'boolean' ? own(value,'linked') : true,
     crossLinked:typeof own(value,'crossLinked') === 'boolean' ? own(value,'crossLinked') : typeof own(value,'linked') === 'boolean' ? own(value,'linked') : true,
@@ -96,6 +96,15 @@ function sanitized(value,restore) {
     fx:Object.fromEntries(targets.map(target => [target,[0,1].map(index => effectSpec(arrayEntry(own(fx,target),index),restore))])),
     overlays:Object.fromEntries(targets.map(target => [target,arrayValues(own(overlays,target))
       .map((spec,index) => overlaySpec(spec,target,index,restore)).filter(Boolean)]))};
+  result.midiOverlaySelection={};result.midiOverlayPresetNames={};
+  for(const kind of ['text','image']) {
+    const selection=own(own(value,'midiOverlaySelection'),kind),target=own(selection,'target'),id=own(selection,'id');
+    if(targets.includes(target)&&typeof id==='string'&&result.overlays[target].some(spec=>spec.kind===kind&&spec.id===id))
+      result.midiOverlaySelection[kind]={target,id};
+    const name=own(own(value,'midiOverlayPresetNames'),kind);
+    if(typeof name==='string'&&name.length>0&&name.length<=128)result.midiOverlayPresetNames[kind]=name;
+  }
+  return result;
 }
 /** Pure JSON-safe metadata snapshot. Runtime media, assets, tokens outside
  * declared FX parameters and legacy single-overlay fields are excluded. */

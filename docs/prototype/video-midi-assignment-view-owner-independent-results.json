@@ -1,0 +1,112 @@
+{
+  "scope": "Actual UI listener and assignment implementations with controlled document/window/modal event buses. Executes delayed-event ownership, suppression calls and explicit exits; not real HTMLDialogElement scheduling/native default actions/browser UI/device proof.",
+  "passed": 5,
+  "failed": 0,
+  "checks": [
+    {
+      "name": "Delayed close from previous dialog cannot cancel new panel-owned assignment; strict toolbar Exit still exits",
+      "passed": true,
+      "evidence": {
+        "afterOldClose": {
+          "active": true,
+          "target": null,
+          "encoding": "7-bit absolute",
+          "captured": false,
+          "reason": "Choose a visible Video control. Normal actions are suppressed while assigning.",
+          "assigned": 0
+        },
+        "afterExit": {
+          "active": false,
+          "target": null,
+          "encoding": "7-bit absolute",
+          "captured": false,
+          "reason": "MIDI assignment exited.",
+          "assigned": 0
+        }
+      }
+    },
+    {
+      "name": "Current modal-owned assignment cancels when its actual dialog is closed",
+      "passed": true,
+      "evidence": {
+        "state": {
+          "active": false,
+          "target": null,
+          "encoding": "7-bit absolute",
+          "captured": false,
+          "reason": "MIDI assignment cancelled when the dialog closed.",
+          "assigned": 0
+        }
+      }
+    },
+    {
+      "name": "Old close event cannot cancel assignment in an open/reopened modal; explicit close button still cancels immediately",
+      "passed": true,
+      "evidence": {
+        "reopened": {
+          "active": true,
+          "target": null,
+          "encoding": "7-bit absolute",
+          "captured": false,
+          "reason": "Choose a visible Video control. Normal actions are suppressed while assigning.",
+          "assigned": 0
+        },
+        "closed": {
+          "active": false,
+          "target": null,
+          "encoding": "7-bit absolute",
+          "captured": false,
+          "reason": "MIDI assignment cancelled when the view closed.",
+          "assigned": 0
+        }
+      }
+    },
+    {
+      "name": "Pointerdown+click chooses once, Enter unassigns once, and Escape restores trigger focus",
+      "passed": true,
+      "evidence": {
+        "state": {
+          "active": false,
+          "target": null,
+          "encoding": "7-bit absolute",
+          "captured": false,
+          "reason": "MIDI assignment cancelled with Escape.",
+          "assigned": 0
+        },
+        "counts": {
+          "focus": 2,
+          "exits": 1,
+          "chooses": 1
+        }
+      }
+    },
+    {
+      "name": "Blur and hidden cancellations retain explicit reason after view-ownership change",
+      "passed": true,
+      "evidence": {
+        "blur": {
+          "active": false,
+          "target": null,
+          "encoding": "7-bit absolute",
+          "captured": false,
+          "reason": "MIDI assignment cancelled after focus loss.",
+          "assigned": 0
+        },
+        "hidden": {
+          "active": false,
+          "target": null,
+          "encoding": "7-bit absolute",
+          "captured": false,
+          "reason": "MIDI assignment cancelled when hidden.",
+          "assigned": 0
+        }
+      }
+    }
+  ],
+  "sourceHashes": {
+    "prototype/video-midi-assignment-ui.js": "e7943f249f0b67e1e70018bc4d050a237bc8c1a39407a2808950b74c43aedc2b",
+    "prototype/midi-assignment.js": "6950ca162de7246140013895993be77c3d4fecabe2bebfdfca5bb457298a1003",
+    "prototype/panels.js": "0515787f6b8ef326d11133b8cdd6d80972807ad8ef03d0b26ad3a62b7fb0d171",
+    "prototype/overlay-midi-harness.js": "b4b45f55d95e1a1e469ea405ee925f211cfbd836c74272394667442a654b2a2a"
+  }
+}

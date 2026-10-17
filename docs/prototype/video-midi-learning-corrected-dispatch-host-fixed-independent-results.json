@@ -1,0 +1,76 @@
+{
+  "scope": "Actual extracted receiveMIDI and Add handler with real router; controlled deferred save and sampler collaborator. No actual audio/GUI/hardware.",
+  "passed": 5,
+  "failed": 0,
+  "checks": [
+    {
+      "name": "Pending Video save must not defer same-input Hold sampler onset until after Note off",
+      "passed": true,
+      "evidence": {
+        "beforeSave": [
+          "sampler-play",
+          "sampler-stop"
+        ],
+        "afterSave": [
+          "sampler-play",
+          "sampler-stop"
+        ],
+        "playing": false
+      }
+    },
+    {
+      "name": "Adding an unrelated mapping must not rearm a still-held existing Video toggle",
+      "passed": true,
+      "evidence": {
+        "beforeEdit": true,
+        "afterRepeatedHeld": true,
+        "mappingCount": 2
+      }
+    },
+    {
+      "name": "Unrelated input enumeration preserves held sources; removal resets only removed source",
+      "passed": true,
+      "evidence": {
+        "bothHeld": false,
+        "unrelatedAdded": false,
+        "otherRemoved": false,
+        "removedSourceRearmed": true
+      }
+    },
+    {
+      "name": "A refused linked Video fader cannot prevent another same-input Hold mapping and reports its original error",
+      "passed": true,
+      "evidence": {
+        "result": {
+          "ok": false,
+          "message": "Unlink the Video crossfader and stop automatic mix before manual MIDI control."
+        },
+        "afterPress": [
+          "sampler-play"
+        ],
+        "playing": false
+      }
+    },
+    {
+      "name": "Two refused matching targets preserve both errors without blocking a valid target",
+      "passed": true,
+      "evidence": {
+        "errorType": "AggregateError",
+        "errors": [
+          "Unlink the Video crossfader and stop automatic mix before manual MIDI control.",
+          "Unknown Video MIDI target."
+        ],
+        "calls": [
+          "sampler-play"
+        ]
+      }
+    }
+  ],
+  "sourceHashes": {
+    "prototype/video-midi.js": "9346f0a9ec28ddd1166fdd5b57a657409f3212550dde9b17ae712aaafbf715eb",
+    "prototype/panels.js": "0515787f6b8ef326d11133b8cdd6d80972807ad8ef03d0b26ad3a62b7fb0d171",
+    "prototype/video-controls.js": "f493af06dfbd23cf827e33eacf1b63462eb4ecf451b08a40f9ca138a8413ecda",
+    "prototype/midi.js": "6bff54eef394a4af04e82b1b3f33ed1d6bf902b94002b5cab3975581aa1bcff6",
+    "prototype/video-midi-harness.js": "5b105a3b4b502dac9ed26958a17e5befc666c619d6cfd6cfb701b2ea47baa959"
+  }
+}

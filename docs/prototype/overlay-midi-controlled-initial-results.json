@@ -1,0 +1,54 @@
+{
+  "date": "2026-10-17T13:47:06.076Z",
+  "scope": "Controlled overlay metadata/selection/preset policy with mixer/storage collaborators; no actual DOM/GPU/assets/hardware/native/vendor acceptance.",
+  "passed": 9,
+  "failed": 1,
+  "checks": [
+    {
+      "name": "Select text/image independently without enabling or modifying their content",
+      "passed": true
+    },
+    {
+      "name": "Continuous overlay values clamp their real independent ranges and address only selected kind",
+      "passed": true
+    },
+    {
+      "name": "Animation selection and documented option labels change actual metadata",
+      "passed": true
+    },
+    {
+      "name": "Move delegates resource ownership and preserves the selected overlay identity",
+      "passed": true
+    },
+    {
+      "name": "Image enable refuses absent decoded bytes and does not claim a visible overlay",
+      "passed": true
+    },
+    {
+      "name": "Save/select/load a text preset restores content without replacing overlay identity",
+      "passed": true
+    },
+    {
+      "name": "Image metadata preset reload clears owned decoded bytes and stays off until reimport",
+      "passed": true
+    },
+    {
+      "name": "Empty selections, malformed values and unknown actions do not create hidden placeholders",
+      "passed": true
+    },
+    {
+      "name": "Storage failure retains overlay contents and pending preset selection",
+      "passed": true
+    },
+    {
+      "name": "Snapshot and restore preserve selected overlay identity and preset name safely",
+      "passed": false,
+      "error": "Expected values to be strictly deep-equal:\n+ actual - expected\n\n+ undefined\n- {\n-   text: {\n-     id: 'text2',\n-     target: 'right'\n-   }\n- }\n"
+    }
+  ],
+  "sourceHashes": {
+    "prototype/video-overlay-midi.js": "bb1e33cc1faac9d0f8667daa519b476f391238bcd02612e9f343e34e99a2bf16",
+    "prototype/video-state.js": "2ce722ae9211bc5e14f81af54a8e28e64b415ac2f31b42fae1f33dc72c8118ec",
+    "scripts/test_video_overlay_midi.mjs": "65c3f421e77051de5bf9135060261196873774a34ce89b0d2b7514f45db6634d"
+  }
+}

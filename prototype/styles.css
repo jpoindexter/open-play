@@ -1304,3 +1304,8 @@ kbd {
 .platter[data-deck-scratch]:focus-visible {outline:2px solid var(--accent,#ddd);outline-offset:4px;}
 .scratch-status {display:block;max-width:160px;min-height:1.2em;margin:auto;text-align:center;font-size:10px;color:#a7adb5;}
 .sr-only {position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0;}
+
+/* Explicit assignment feedback; inactive presentation is unchanged. */
+.video-midi-assigning [data-video-midi-target]{cursor:crosshair;outline:1px dashed #79c8db;outline-offset:2px}
+.video-midi-assigning .video-midi-selected{outline:3px solid #ffe18a;outline-offset:3px}
+.video-midi-assignment [data-video-midi-status]{max-width:70ch;line-height:1.4}

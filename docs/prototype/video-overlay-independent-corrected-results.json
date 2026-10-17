@@ -1,0 +1,54 @@
+{
+  "scope": "Actual mixer assets and MIDI metadata controller with controlled Image.decode; real Blob/object URLs. No actual image pixels/browser/native/hardware.",
+  "passed": 3,
+  "failed": 0,
+  "checks": [
+    {
+      "name": "Loading metadata for one image must preserve a second overlay sharing its decoded reference",
+      "passed": true,
+      "evidence": {
+        "atomicRefusal": "A shared image reference must be separated before preset reload."
+      }
+    },
+    {
+      "name": "Metadata reload cannot attach the selected image to another overlay asset and bypass reimport",
+      "passed": true,
+      "evidence": {
+        "afterReload": {
+          "kind": "image",
+          "on": false,
+          "text": "",
+          "image": null,
+          "color": "#ffffff",
+          "fontFamily": "sans-serif",
+          "fontSize": 48,
+          "align": "center",
+          "opacity": 1,
+          "animation": "none",
+          "speed": 1,
+          "x": 0.5,
+          "y": 0.5,
+          "scale": 1,
+          "id": "a",
+          "name": "a",
+          "imageRef": "own"
+        },
+        "enableError": "Reimport the original image before enabling this overlay.",
+        "enabled": false
+      }
+    },
+    {
+      "name": "Image selection cannot silently activate a text layer with a colliding identity",
+      "passed": true,
+      "evidence": {
+        "atomicRefusal": "Choose a unique overlay identity; this selection is absent or ambiguous."
+      }
+    }
+  ],
+  "sourceHashes": {
+    "prototype/video-overlay-midi.js": "802b7a12e155f6fb0973d641cb113b88d001da9a225fa2d0c61fd6f43994dae9",
+    "prototype/video.js": "d09978db2178d009281ff38ab8923d33e2c18a5129c8188f7d4066db92f15823",
+    "prototype/video-state.js": "5207f031efcb72f683fd7aecd36a6747bf52d3ed229d60cfd1cca83a740f0e0e",
+    "prototype/video-overlays.js": "053112eb4cb72a698b8d550c66ad05862b968a83314e5b001a546b13f912ae5b"
+  }
+}

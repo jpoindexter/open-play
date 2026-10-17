@@ -1,0 +1,86 @@
+{
+  "date": "2026-10-17T14:00:26.798Z",
+  "scope": "Controlled Video MIDI router policy and collaborator boundaries only. No DOM/GPU, physical hardware, native or vendor equivalence.",
+  "passed": 14,
+  "failed": 0,
+  "checks": [
+    {
+      "name": "Continuous Video crossfader endpoints and relative movement preserve audio state",
+      "passed": true
+    },
+    {
+      "name": "Linked and autonomous faders refuse manual writes without canceling their owner",
+      "passed": true
+    },
+    {
+      "name": "Video opacity updates only its channel and rejects linked writes",
+      "passed": true
+    },
+    {
+      "name": "Toggle commands act on press edges, not repeats or release, and separate device edges",
+      "passed": true
+    },
+    {
+      "name": "One physical input can trigger two distinct Video commands once each",
+      "passed": true
+    },
+    {
+      "name": "Note release never drives a continuous fader to its minimum",
+      "passed": true
+    },
+    {
+      "name": "FX selection resets parameters and amount/on dispatch address the requested slot only",
+      "passed": true
+    },
+    {
+      "name": "Transition selection cycles relatively and absolute endpoints are bounded",
+      "passed": true
+    },
+    {
+      "name": "Fade speed maps slow-to-fast and directional commands do not duplicate on hold",
+      "passed": true
+    },
+    {
+      "name": "Pending save rejects repeated/new presses until owned save completes",
+      "passed": true
+    },
+    {
+      "name": "Unknown targets and malformed values cannot fall through into audio commands",
+      "passed": true
+    },
+    {
+      "name": "All registered panel/save/association commands resolve to the correct real collaborator",
+      "passed": true
+    },
+    {
+      "name": "14-bit CC cannot assign a two-byte command that double toggles on one physical press",
+      "passed": true
+    },
+    {
+      "name": "Different MIDI sources do not combine their 14-bit continuous byte pairs",
+      "passed": true
+    }
+  ],
+  "sources": [
+    {
+      "path": "prototype/video-midi.js",
+      "sha256": "9346f0a9ec28ddd1166fdd5b57a657409f3212550dde9b17ae712aaafbf715eb"
+    },
+    {
+      "path": "prototype/panels.js",
+      "sha256": "84c47724f5add7a42934571afadc2334dfab051743afb8e7fc29e2fab7aec0b9"
+    },
+    {
+      "path": "prototype/midi.js",
+      "sha256": "6bff54eef394a4af04e82b1b3f33ed1d6bf902b94002b5cab3975581aa1bcff6"
+    },
+    {
+      "path": "prototype/video-controls.js",
+      "sha256": "520609c921096598bdb60f2edf36e2b21c6185208e73ca526112cd12ae157ab4"
+    },
+    {
+      "path": "scripts/test_video_midi.mjs",
+      "sha256": "24040c6fffce0e22a7a0145aebb7db8a0369332e370407f47364a95043480464"
+    }
+  ]
+}

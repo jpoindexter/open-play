@@ -1,11 +1,10 @@
 {
   "date": "2026-10-17",
-  "generated_at": "2026-10-17T13:41:51.874Z",
+  "generated_at": "2026-10-17T14:17:54.702Z",
   "kind": "CURRENT_SAVED_SOURCE_AND_EVIDENCE_AUDIT_NOT_REFERENCE_RUNTIME_ACCEPTANCE",
-  "git_head": "7ce4ffe51696f9e68e7ef2f3afea8684e739a82b",
+  "git_head": "2e50db4b10c368d21a65718dc8b5e3c7404baffe",
   "dirty_at_snapshot": [
     "M FULL_BUILD_PLAN.md",
-    " M docs/delivery/ACTIVE_EXECUTION.md",
     " M docs/research/CURRENT_FEATURE_MATCH_20261017.json",
     " M docs/research/CURRENT_FEATURE_MATCH_20261017.md",
     " M docs/research/CURRENT_PARITY_AUDIT_20261017.json",
@@ -14,53 +13,94 @@
     " M handoffs/current.md",
     " M prototype/midi.js",
     " M prototype/panels.js",
+    " M prototype/styles.css",
     " M prototype/video-controls.js",
+    " M prototype/video-midi.js",
+    " M prototype/video-state.js",
+    " M prototype/video.js",
     " M scripts/audit_current_parity.mjs",
     " M scripts/check_current_release_parity.mjs",
-    "?? docs/delivery/VIDEO_MIDI_REENTRY_20261017.md",
-    "?? docs/delivery/trello-video-midi-sync.json",
-    "?? docs/prototype/VIDEO_MIDI_FUNCTIONAL_REVIEW.md",
-    "?? docs/prototype/screenshots/video-midi-current-main.png",
-    "?? docs/prototype/screenshots/video-midi-current-mapper.png",
-    "?? docs/prototype/video-midi-browser-expanded-results.json",
-    "?? docs/prototype/video-midi-browser-final-restored-results.json",
-    "?? docs/prototype/video-midi-browser-final-results.json",
-    "?? docs/prototype/video-midi-browser-observation.json",
-    "?? docs/prototype/video-midi-browser-pre-review-restored-results.json",
-    "?? docs/prototype/video-midi-browser-pre-review-results.json",
-    "?? docs/prototype/video-midi-browser-red-results.json",
-    "?? docs/prototype/video-midi-browser-stale-cache-results.json",
-    "?? docs/prototype/video-midi-candidate.json",
-    "?? docs/prototype/video-midi-controlled-final-results.json",
-    "?? docs/prototype/video-midi-controlled-initial-results.json",
-    "?? docs/prototype/video-midi-controlled-integrated-results.json",
-    "?? docs/prototype/video-midi-controlled-pair-fixed-results.json",
-    "?? docs/prototype/video-midi-controlled-pair-red-results.json",
-    "?? docs/prototype/video-midi-controlled-red-results.json",
-    "?? docs/prototype/video-midi-current-main-ax.txt",
-    "?? docs/prototype/video-midi-current-mapper-ax.txt",
-    "?? docs/prototype/video-midi-dispatch-independent-final-results.json",
-    "?? docs/prototype/video-midi-dispatch-independent-initial-results.json",
-    "?? docs/prototype/video-midi-dispatch-parent-fixed-results.json",
-    "?? docs/prototype/video-midi-dispatch-parent-red-results.json",
-    "?? docs/prototype/video-midi-expanded-independent-artifact-inspection.json",
-    "?? docs/prototype/video-midi-final-independent-artifact-inspection.json",
-    "?? docs/prototype/video-midi-keyshift-dispatch-final-results.json",
-    "?? docs/prototype/video-midi-keyshift-dispatch-regression-results.json",
-    "?? docs/prototype/video-midi-keyshift-policy-final-results.json",
-    "?? docs/prototype/video-midi-keyshift-policy-regression-results.json",
-    "?? docs/prototype/video-midi-router-independent-current-results.json",
-    "?? docs/research/CURRENT_FEATURE_MATCH_20261017_PRE_VIDEO_MIDI.json",
-    "?? docs/research/CURRENT_FEATURE_MATCH_20261017_PRE_VIDEO_MIDI.md",
-    "?? docs/research/CURRENT_PARITY_AUDIT_20261017_PRE_VIDEO_MIDI.json",
-    "?? docs/research/CURRENT_PARITY_AUDIT_20261017_PRE_VIDEO_MIDI.md",
-    "?? docs/research/VIDEO_MIDI_FINAL_ARTIFACT_REVIEW_20261017.md",
-    "?? docs/research/VIDEO_MIDI_SOURCE_REVIEW_20261017.md",
-    "?? prototype/video-midi-harness.html",
-    "?? prototype/video-midi-harness.js",
-    "?? prototype/video-midi.js",
-    "?? scripts/test_video_midi.mjs",
-    "?? scripts/test_video_midi_dispatch_independent_review.mjs"
+    " M scripts/test_video_midi_dispatch_independent_review.mjs",
+    "?? docs/delivery/OVERLAY_MIDI_REENTRY_20261017.md",
+    "?? docs/delivery/trello-overlay-parity-recheck-sync.json",
+    "?? docs/prototype/VIDEO_OVERLAY_MIDI_FUNCTIONAL_REVIEW.md",
+    "?? docs/prototype/overlay-midi-browser-corrected-initial-results.json",
+    "?? docs/prototype/overlay-midi-browser-corrected-restored-results.json",
+    "?? docs/prototype/overlay-midi-browser-delayed-dialog-close-red-results.json",
+    "?? docs/prototype/overlay-midi-browser-final-restored-results.json",
+    "?? docs/prototype/overlay-midi-browser-initial-results.json",
+    "?? docs/prototype/overlay-midi-browser-instrumented-results.json",
+    "?? docs/prototype/overlay-midi-browser-invalid-repeated-run-results.json",
+    "?? docs/prototype/overlay-midi-browser-manual-controls-results.json",
+    "?? docs/prototype/overlay-midi-browser-red-results.json",
+    "?? docs/prototype/overlay-midi-controlled-fixed-results.json",
+    "?? docs/prototype/overlay-midi-controlled-initial-results.json",
+    "?? docs/prototype/overlay-midi-controlled-red-results.json",
+    "?? docs/prototype/overlay-midi-corrected-initial-independent-artifact-inspection.json",
+    "?? docs/prototype/overlay-midi-corrected-restored-independent-artifact-inspection.json",
+    "?? docs/prototype/overlay-midi-final-restored-independent-artifact-inspection.json",
+    "?? docs/prototype/overlay-midi-learn-initial-results.json",
+    "?? docs/prototype/overlay-midi-learn-recheck-results.json",
+    "?? docs/prototype/overlay-midi-learn-red-results.json",
+    "?? docs/prototype/overlay-midi-learning-parent-confirmed-red-results.json",
+    "?? docs/prototype/overlay-midi-move-fixed-results.json",
+    "?? docs/prototype/overlay-midi-move-initial-results.json",
+    "?? docs/prototype/overlay-midi-move-recheck-results.json",
+    "?? docs/prototype/overlay-midi-move-red-results.json",
+    "?? docs/prototype/overlay-midi-move-valid-baseline-red-results.json",
+    "?? docs/prototype/overlay-midi-policy-recheck-results.json",
+    "?? docs/prototype/overlay-midi-review-parent-fixed-results.json",
+    "?? docs/prototype/overlay-midi-review-parent-red-results.json",
+    "?? docs/prototype/screenshots/overlay-midi-assignment-20261017.png",
+    "?? docs/prototype/video-midi-assignment-view-owner-independent-results.json",
+    "?? docs/prototype/video-midi-hold-release-independent-results.json",
+    "?? docs/prototype/video-midi-learning-corrected-dispatch-host-fixed-independent-results.json",
+    "?? docs/prototype/video-midi-learning-corrected-dispatch-independent-results.json",
+    "?? docs/prototype/video-midi-learning-corrected-keyshift-dispatch-independent-results.json",
+    "?? docs/prototype/video-midi-learning-corrected-keyshift-policy-independent-results.json",
+    "?? docs/prototype/video-midi-learning-corrected-move-independent-results.json",
+    "?? docs/prototype/video-midi-learning-corrected-policy-independent-results.json",
+    "?? docs/prototype/video-midi-learning-corrected-router-independent-results.json",
+    "?? docs/prototype/video-midi-learning-independent-additional-results.json",
+    "?? docs/prototype/video-midi-learning-independent-corrected-five-results.json",
+    "?? docs/prototype/video-midi-learning-independent-initial-results.json",
+    "?? docs/prototype/video-midi-learning-independent-scope-results.json",
+    "?? docs/prototype/video-midi-learning-independent-ui-results.json",
+    "?? docs/prototype/video-midi-learning-keyshift-dispatch-independent-results.json",
+    "?? docs/prototype/video-midi-learning-keyshift-policy-independent-results.json",
+    "?? docs/prototype/video-midi-learning-move-regression-independent-results.json",
+    "?? docs/prototype/video-midi-learning-router-regression-independent-results.json",
+    "?? docs/prototype/video-overlay-independent-corrected-results.json",
+    "?? docs/prototype/video-overlay-independent-final-results.json",
+    "?? docs/prototype/video-overlay-independent-initial-results.json",
+    "?? docs/prototype/video-overlay-midi-draft-candidate.json",
+    "?? docs/prototype/video-overlay-move-independent-current-results.json",
+    "?? docs/prototype/video-overlay-policy-independent-current-results.json",
+    "?? docs/research/CURRENT_FEATURE_MATCH_20261017_PRE_OVERLAY_MIDI.json",
+    "?? docs/research/CURRENT_FEATURE_MATCH_20261017_PRE_OVERLAY_MIDI.md",
+    "?? docs/research/CURRENT_PARITY_AUDIT_20261017_PRE_OVERLAY_MIDI.json",
+    "?? docs/research/CURRENT_PARITY_AUDIT_20261017_PRE_OVERLAY_MIDI.md",
+    "?? docs/research/CURRENT_PARITY_OVERLAY_RECHECK_INDEPENDENT_REVIEW_20261017.md",
+    "?? docs/research/PARITY_RECHECK_SOURCES_20261017.json",
+    "?? docs/research/PARITY_RECHECK_VERDICT_20261017.md",
+    "?? docs/research/REA_PARITY_RECHECK_IDENTITY_20261017.json",
+    "?? docs/research/VIDEO_MIDI_FOCUS_FIXTURE_REVIEW_20261017.md",
+    "?? docs/research/VIDEO_MIDI_LEARNING_INDEPENDENT_REVIEW_20261017.md",
+    "?? docs/research/VIDEO_OVERLAY_MIDI_BROWSER_INDEPENDENT_REVIEW_20261017.md",
+    "?? docs/research/VIDEO_OVERLAY_MIDI_INDEPENDENT_REVIEW_20261017.md",
+    "?? prototype/midi-assignment.js",
+    "?? prototype/overlay-midi-harness.html",
+    "?? prototype/overlay-midi-harness.js",
+    "?? prototype/video-midi-assignment-ui.js",
+    "?? prototype/video-overlay-midi.js",
+    "?? scripts/test_video_midi_assignment_view_owner_review.mjs",
+    "?? scripts/test_video_midi_hold_release_independent_review.mjs",
+    "?? scripts/test_video_midi_learn.mjs",
+    "?? scripts/test_video_midi_learning_independent_review.mjs",
+    "?? scripts/test_video_midi_learning_keyshift_regression_review.mjs",
+    "?? scripts/test_video_overlay_independent_review.mjs",
+    "?? scripts/test_video_overlay_midi.mjs",
+    "?? scripts/test_video_overlay_move.mjs"
   ],
   "reference": {
     "version": "Serato DJ Pro4.0.10.213 arm64",
@@ -335,22 +375,37 @@
     {
       "path": "prototype/midi.js",
       "candidate_sha256": "b0b5ef7b71ef551c98ccb56dba0161d3e532a93713bb6b0e2b14e6f4c96b8c5e",
-      "current_sha256": "a93852152e272a4da19c7062585e53cca20dc073f784324bfb1b542f5c739b9c"
+      "current_sha256": "6bff54eef394a4af04e82b1b3f33ed1d6bf902b94002b5cab3975581aa1bcff6"
     },
     {
       "path": "prototype/panels.js",
       "candidate_sha256": "2063234fa4d209424ec94df373fca9d66eec23cc917302a8ee8dc27ee4b92d89",
-      "current_sha256": "c690f08528ac3380c2995be86e378555b5eb9c3cd1d7afe5a32dea6e0efeecfe"
+      "current_sha256": "0515787f6b8ef326d11133b8cdd6d80972807ad8ef03d0b26ad3a62b7fb0d171"
+    },
+    {
+      "path": "prototype/styles.css",
+      "candidate_sha256": "53c77f8e18648d4476c854ee6c1d0ff8cdb64ac394c5c249e857d90434ce9a4b",
+      "current_sha256": "a0605801c89b0d46cd836fe1409399045519418a27cefca890d5c16ae563120b"
     },
     {
       "path": "prototype/video-controls.js",
       "candidate_sha256": "dc49188fec819d98e6ea5b07fde25180e07f87e18ccdcaca7899422cc3443eea",
-      "current_sha256": "33d94445ef1581371f4a6badab8112048ee38ba5ce55828bc097475cd5945255"
+      "current_sha256": "f493af06dfbd23cf827e33eacf1b63462eb4ecf451b08a40f9ca138a8413ecda"
+    },
+    {
+      "path": "prototype/video-state.js",
+      "candidate_sha256": "2ce722ae9211bc5e14f81af54a8e28e64b415ac2f31b42fae1f33dc72c8118ec",
+      "current_sha256": "5207f031efcb72f683fd7aecd36a6747bf52d3ed229d60cfd1cca83a740f0e0e"
+    },
+    {
+      "path": "prototype/video.js",
+      "candidate_sha256": "7d4ecba07be0714dae905fc250fc1277ef59d8a8a03c9ef160d1709064a6330a",
+      "current_sha256": "d09978db2178d009281ff38ab8923d33e2c18a5129c8188f7d4066db92f15823"
     },
     {
       "path": "scripts/audit_current_parity.mjs",
       "candidate_sha256": "7e1be3838a4611bd6bfd51a2fe2859b0ea6c6bcc373ae3b3938b23fe34dffd15",
-      "current_sha256": "03e9b06151138f1b66d7c83ccad6a74d5e6869f0372cae5498ebfca12e6cef23"
+      "current_sha256": "47cfb72cd8ef6d8bc473fffb3f332a9a20b540e0815c8a217cc62930370e8ed0"
     }
   ],
   "current_prototype_files_absent_from_browser_manifest": [
@@ -371,12 +426,28 @@
       "sha256": "b8e45417bce1fc9411d58ad02416c751c73750339d8792eca5384f73def622a9"
     },
     {
+      "path": "prototype/midi-assignment.js",
+      "sha256": "6950ca162de7246140013895993be77c3d4fecabe2bebfdfca5bb457298a1003"
+    },
+    {
       "path": "prototype/midi-keyshift-harness.html",
       "sha256": "4c382c5bbeb5c33f7be998feaac31edce8bd88b41c1b972b70cadd9ca66669bc"
     },
     {
       "path": "prototype/midi-keyshift-harness.js",
       "sha256": "a2795af5840b2ff1ab234a6e9c1d988c4e81e943a81a26e40dd1ac15fb07bdd6"
+    },
+    {
+      "path": "prototype/overlay-midi-harness.html",
+      "sha256": "3a68d36849221d4e2fa29a656154a6a847f9c4178f1592018dbb0db509df5ed2"
+    },
+    {
+      "path": "prototype/overlay-midi-harness.js",
+      "sha256": "7691b7589661c6819de8a3cc137ff311c67bce05874f0c3d78f73e442176b7f1"
+    },
+    {
+      "path": "prototype/video-midi-assignment-ui.js",
+      "sha256": "e7943f249f0b67e1e70018bc4d050a237bc8c1a39407a2808950b74c43aedc2b"
     },
     {
       "path": "prototype/video-midi-harness.html",
@@ -388,7 +459,11 @@
     },
     {
       "path": "prototype/video-midi.js",
-      "sha256": "ed536567cc52e0275ea3712d65c463c661920b5f3e851a9c8402e988cda45115"
+      "sha256": "9346f0a9ec28ddd1166fdd5b57a657409f3212550dde9b17ae712aaafbf715eb"
+    },
+    {
+      "path": "prototype/video-overlay-midi.js",
+      "sha256": "2677e3f57f67cff6a2e422bb383638d631aae70a7cb56257a052381f33627e11"
     }
   ],
   "scope": {
@@ -481,7 +556,7 @@
     {
       "id": "CA-03",
       "severity": "high",
-      "finding": "Desktop0.1.5 remains the frozen48a6d4d package with scoped native WAV/MP3 evidence. Current browser source changes 4 existing production files for MIDI Key Shift/Video MIDI and has 9 additional prototype files, including the new production Video MIDI router and test/diagnostic assets; these are absent from that native package. Historical physical and newer browser evidence remain separate; no full hardware/DSP/reference acceptance follows.",
+      "finding": "Desktop0.1.5 remains the frozen48a6d4d package with scoped native WAV/MP3 evidence. Current browser source changes 7 existing production files for MIDI Key Shift/Video MIDI and has 14 additional prototype files, including the new production Video MIDI router and test/diagnostic assets; these are absent from that native package. Historical physical and newer browser evidence remain separate; no full hardware/DSP/reference acceptance follows.",
       "evidence": [
         {
           "path": "docs/prototype/candidate-hashes.json",
@@ -512,8 +587,8 @@
         },
         {
           "path": "prototype/panels.js",
-          "line": 492,
-          "sha256": "c690f08528ac3380c2995be86e378555b5eb9c3cd1d7afe5a32dea6e0efeecfe"
+          "line": 496,
+          "sha256": "0515787f6b8ef326d11133b8cdd6d80972807ad8ef03d0b26ad3a62b7fb0d171"
         },
         {
           "path": "prototype/app.js",
@@ -522,8 +597,8 @@
         },
         {
           "path": "prototype/panels.js",
-          "line": 1365,
-          "sha256": "c690f08528ac3380c2995be86e378555b5eb9c3cd1d7afe5a32dea6e0efeecfe"
+          "line": 1374,
+          "sha256": "0515787f6b8ef326d11133b8cdd6d80972807ad8ef03d0b26ad3a62b7fb0d171"
         }
       ]
     },
@@ -663,7 +738,7 @@
       "id": "CA-11",
       "severity": "high",
       "status": "partially_addressed_browser_only",
-      "finding": "Unchanged desktop0.1.5 still lacks Key Shift/Video MIDI targets. New current browser source has actual four-deck Key Shift/learn/save/reload/audio subset evidence and controlled pending-commit/pair regressions; it is not a new native or physical acceptance. New Video MIDI core has14initial/4reload browser checks and corrected independent dispatcher/edge tests. Overlay-specific targets/click-to-learn and some core command acceptance remain open; native0.1.5 remains unchanged and complete mapping/reference parity stays open.",
+      "finding": "Unchanged desktop0.1.5 still lacks Key Shift/Video MIDI targets. New current browser source has actual four-deck Key Shift/learn/save/reload/audio subset evidence and controlled pending-commit/pair regressions; it is not a new native or physical acceptance. New Video MIDI core has14initial/4reload browser checks and corrected independent dispatcher/edge tests. Overlay targets/click-to-learn have9initial/3reload browser subset checks and six reproduced integration defects corrected; full28overlay/72target workflows and some core command acceptance remain open; native0.1.5 remains unchanged and complete mapping/reference parity stays open.",
       "evidence": [
         {
           "path": "docs/prototype/current-feature-check-native-observation.json",
@@ -677,13 +752,13 @@
         },
         {
           "path": "prototype/panels.js",
-          "line": 1649,
-          "sha256": "c690f08528ac3380c2995be86e378555b5eb9c3cd1d7afe5a32dea6e0efeecfe"
+          "line": 1677,
+          "sha256": "0515787f6b8ef326d11133b8cdd6d80972807ad8ef03d0b26ad3a62b7fb0d171"
         },
         {
           "path": "prototype/panels.js",
-          "line": 1557,
-          "sha256": "c690f08528ac3380c2995be86e378555b5eb9c3cd1d7afe5a32dea6e0efeecfe"
+          "line": 1569,
+          "sha256": "0515787f6b8ef326d11133b8cdd6d80972807ad8ef03d0b26ad3a62b7fb0d171"
         }
       ]
     }
@@ -783,7 +858,7 @@
     {
       "path": "prototype/panels.js",
       "line": 1,
-      "sha256": "c690f08528ac3380c2995be86e378555b5eb9c3cd1d7afe5a32dea6e0efeecfe"
+      "sha256": "0515787f6b8ef326d11133b8cdd6d80972807ad8ef03d0b26ad3a62b7fb0d171"
     },
     {
       "path": "prototype/library.js",
@@ -1008,17 +1083,17 @@
     {
       "path": "prototype/midi.js",
       "line": 1,
-      "sha256": "a93852152e272a4da19c7062585e53cca20dc073f784324bfb1b542f5c739b9c"
+      "sha256": "6bff54eef394a4af04e82b1b3f33ed1d6bf902b94002b5cab3975581aa1bcff6"
     },
     {
       "path": "prototype/video-midi.js",
       "line": 1,
-      "sha256": "ed536567cc52e0275ea3712d65c463c661920b5f3e851a9c8402e988cda45115"
+      "sha256": "9346f0a9ec28ddd1166fdd5b57a657409f3212550dde9b17ae712aaafbf715eb"
     },
     {
       "path": "prototype/video-controls.js",
       "line": 1,
-      "sha256": "33d94445ef1581371f4a6badab8112048ee38ba5ce55828bc097475cd5945255"
+      "sha256": "f493af06dfbd23cf827e33eacf1b63462eb4ecf451b08a40f9ca138a8413ecda"
     },
     {
       "path": "docs/prototype/VIDEO_MIDI_FUNCTIONAL_REVIEW.md",
@@ -1036,6 +1111,31 @@
       "sha256": "a321fc9826ba20ffcb7d5ab33d0ec641387b4605a93c5b01aa4518b74cece76f"
     },
     {
+      "path": "docs/prototype/video-overlay-midi-draft-candidate.json",
+      "line": 1,
+      "sha256": "961bd7ef4dbd68c8b136d9849b35eb7db61c1a3b79bc16c9cd4fb1774609e87f"
+    },
+    {
+      "path": "docs/research/VIDEO_MIDI_LEARNING_INDEPENDENT_REVIEW_20261017.md",
+      "line": 1,
+      "sha256": "398fc0af453c127bd0db3986fa46248a6f2236e860b2cd8a7a1e2a64c83dc942"
+    },
+    {
+      "path": "docs/prototype/VIDEO_OVERLAY_MIDI_FUNCTIONAL_REVIEW.md",
+      "line": 1,
+      "sha256": "e6f869f58eebae82914efd50c4e1b790ff6b140cf6ca4929ad4cacf8a299a8b4"
+    },
+    {
+      "path": "docs/prototype/overlay-midi-browser-corrected-initial-results.json",
+      "line": 1,
+      "sha256": "02ce86fa16c98fa16c0002836ecbafcfb6f8f84bbd29e5306e59dbe575a34e4a"
+    },
+    {
+      "path": "docs/prototype/overlay-midi-browser-final-restored-results.json",
+      "line": 1,
+      "sha256": "09e689f2bdd33c77e377b37ef2ec2048e7d36556d5b8842ce6c47abaadd28736"
+    },
+    {
       "path": "docs/research/HARDWARE_HERCULES.md",
       "line": 1,
       "sha256": "46bdcbaf573462e5ed556fbf3373f40a322a64959fd8c0fab5b3141e07f72d46"
@@ -1043,7 +1143,7 @@
     {
       "path": "prototype/styles.css",
       "line": 1,
-      "sha256": "53c77f8e18648d4476c854ee6c1d0ff8cdb64ac394c5c249e857d90434ce9a4b"
+      "sha256": "a0605801c89b0d46cd836fe1409399045519418a27cefca890d5c16ae563120b"
     },
     {
       "path": "docs/research/CURRENT_UI_COMPARISON_20261017.json",
@@ -1098,7 +1198,7 @@
     {
       "path": "prototype/video.js",
       "line": 1,
-      "sha256": "7d4ecba07be0714dae905fc250fc1277ef59d8a8a03c9ef160d1709064a6330a"
+      "sha256": "d09978db2178d009281ff38ab8923d33e2c18a5129c8188f7d4066db92f15823"
     },
     {
       "path": "prototype/video-pipeline.js",
@@ -1191,6 +1291,26 @@
       "sha256": "42e1717e268f3f4175b23834f5b9a635827fb8d3cf0f899cae7f279b614cc74f"
     },
     {
+      "path": "docs/research/REA_PARITY_RECHECK_IDENTITY_20261017.json",
+      "line": 1,
+      "sha256": "76d28d236f512ba857170392cce2020aefd695ecbab433de0aa7d737e5421ab0"
+    },
+    {
+      "path": "prototype/midi-assignment.js",
+      "line": 1,
+      "sha256": "6950ca162de7246140013895993be77c3d4fecabe2bebfdfca5bb457298a1003"
+    },
+    {
+      "path": "prototype/video-overlay-midi.js",
+      "line": 1,
+      "sha256": "2677e3f57f67cff6a2e422bb383638d631aae70a7cb56257a052381f33627e11"
+    },
+    {
+      "path": "prototype/video-midi-assignment-ui.js",
+      "line": 1,
+      "sha256": "e7943f249f0b67e1e70018bc4d050a237bc8c1a39407a2808950b74c43aedc2b"
+    },
+    {
       "path": "prototype/keylock-cursor-analysis.js",
       "line": 1,
       "sha256": "aadf86b0f524af1fa4a4b30e69214f00fe3c096ecedfc11716d56da982c7b577"
@@ -1233,7 +1353,7 @@
     {
       "path": "scripts/audit_current_parity.mjs",
       "line": 1,
-      "sha256": "03e9b06151138f1b66d7c83ccad6a74d5e6869f0372cae5498ebfca12e6cef23"
+      "sha256": "47cfb72cd8ef6d8bc473fffb3f332a9a20b540e0815c8a217cc62930370e8ed0"
     },
     {
       "path": "docs/approvals.md",
@@ -1313,7 +1433,7 @@
     {
       "path": "scripts/check_current_release_parity.mjs",
       "line": 1,
-      "sha256": "800a3fa340b35747c2b0eec9da2dbeda7f2aa8cd2f2de9abf43c1602f328d83c"
+      "sha256": "af81f39c1bdea5da6037323737362a3f65e76f54d84d4491dafc2a49def716a0"
     },
     {
       "path": "docs/prototype/midi-keyshift-candidate.json",
@@ -1383,7 +1503,7 @@
     {
       "path": "scripts/test_video_midi_dispatch_independent_review.mjs",
       "line": 1,
-      "sha256": "d226004cdc95448525eebbdeb92abec04a474f8cacc3d8f536fd510cb75f57c7"
+      "sha256": "e907d6b15399cfdc21bf81df908e814fd9da7325dd3ebb8552a98d774102368a"
     },
     {
       "path": "docs/prototype/video-midi-controlled-final-results.json",
@@ -1671,7 +1791,7 @@
         {
           "path": "prototype/panels.js",
           "line": 1,
-          "sha256": "c690f08528ac3380c2995be86e378555b5eb9c3cd1d7afe5a32dea6e0efeecfe"
+          "sha256": "0515787f6b8ef326d11133b8cdd6d80972807ad8ef03d0b26ad3a62b7fb0d171"
         }
       ],
       "reviewed_saved_evidence": [
@@ -1812,7 +1932,7 @@
         {
           "path": "prototype/panels.js",
           "line": 1,
-          "sha256": "c690f08528ac3380c2995be86e378555b5eb9c3cd1d7afe5a32dea6e0efeecfe"
+          "sha256": "0515787f6b8ef326d11133b8cdd6d80972807ad8ef03d0b26ad3a62b7fb0d171"
         },
         {
           "path": "prototype/library.js",
@@ -2029,7 +2149,7 @@
         {
           "path": "prototype/panels.js",
           "line": 1,
-          "sha256": "c690f08528ac3380c2995be86e378555b5eb9c3cd1d7afe5a32dea6e0efeecfe"
+          "sha256": "0515787f6b8ef326d11133b8cdd6d80972807ad8ef03d0b26ad3a62b7fb0d171"
         }
       ],
       "reviewed_saved_evidence": [
@@ -2150,7 +2270,7 @@
         {
           "path": "prototype/panels.js",
           "line": 1,
-          "sha256": "c690f08528ac3380c2995be86e378555b5eb9c3cd1d7afe5a32dea6e0efeecfe"
+          "sha256": "0515787f6b8ef326d11133b8cdd6d80972807ad8ef03d0b26ad3a62b7fb0d171"
         }
       ],
       "reviewed_saved_evidence": [
@@ -2255,7 +2375,7 @@
         {
           "path": "prototype/panels.js",
           "line": 1,
-          "sha256": "c690f08528ac3380c2995be86e378555b5eb9c3cd1d7afe5a32dea6e0efeecfe"
+          "sha256": "0515787f6b8ef326d11133b8cdd6d80972807ad8ef03d0b26ad3a62b7fb0d171"
         },
         {
           "path": "prototype/app.js",
@@ -2378,7 +2498,7 @@
         {
           "path": "prototype/panels.js",
           "line": 1,
-          "sha256": "c690f08528ac3380c2995be86e378555b5eb9c3cd1d7afe5a32dea6e0efeecfe"
+          "sha256": "0515787f6b8ef326d11133b8cdd6d80972807ad8ef03d0b26ad3a62b7fb0d171"
         },
         {
           "path": "prototype/app.js",
@@ -2503,7 +2623,7 @@
         {
           "path": "prototype/panels.js",
           "line": 1,
-          "sha256": "c690f08528ac3380c2995be86e378555b5eb9c3cd1d7afe5a32dea6e0efeecfe"
+          "sha256": "0515787f6b8ef326d11133b8cdd6d80972807ad8ef03d0b26ad3a62b7fb0d171"
         }
       ],
       "reviewed_saved_evidence": [
@@ -2620,7 +2740,7 @@
         {
           "path": "prototype/panels.js",
           "line": 1,
-          "sha256": "c690f08528ac3380c2995be86e378555b5eb9c3cd1d7afe5a32dea6e0efeecfe"
+          "sha256": "0515787f6b8ef326d11133b8cdd6d80972807ad8ef03d0b26ad3a62b7fb0d171"
         }
       ],
       "reviewed_saved_evidence": [
@@ -2799,7 +2919,7 @@
         {
           "path": "prototype/panels.js",
           "line": 1,
-          "sha256": "c690f08528ac3380c2995be86e378555b5eb9c3cd1d7afe5a32dea6e0efeecfe"
+          "sha256": "0515787f6b8ef326d11133b8cdd6d80972807ad8ef03d0b26ad3a62b7fb0d171"
         },
         {
           "path": "prototype/local-audio-library.js",
@@ -3213,7 +3333,7 @@
         {
           "path": "prototype/panels.js",
           "line": 1,
-          "sha256": "c690f08528ac3380c2995be86e378555b5eb9c3cd1d7afe5a32dea6e0efeecfe"
+          "sha256": "0515787f6b8ef326d11133b8cdd6d80972807ad8ef03d0b26ad3a62b7fb0d171"
         },
         {
           "path": "prototype/analysis.js",
@@ -5933,7 +6053,7 @@
         {
           "path": "prototype/panels.js",
           "line": 1,
-          "sha256": "c690f08528ac3380c2995be86e378555b5eb9c3cd1d7afe5a32dea6e0efeecfe"
+          "sha256": "0515787f6b8ef326d11133b8cdd6d80972807ad8ef03d0b26ad3a62b7fb0d171"
         }
       ],
       "reviewed_saved_evidence": [
@@ -6395,7 +6515,7 @@
         {
           "path": "prototype/panels.js",
           "line": 1,
-          "sha256": "c690f08528ac3380c2995be86e378555b5eb9c3cd1d7afe5a32dea6e0efeecfe"
+          "sha256": "0515787f6b8ef326d11133b8cdd6d80972807ad8ef03d0b26ad3a62b7fb0d171"
         },
         {
           "path": "prototype/app.js",
@@ -6845,7 +6965,7 @@
         {
           "path": "prototype/panels.js",
           "line": 1,
-          "sha256": "c690f08528ac3380c2995be86e378555b5eb9c3cd1d7afe5a32dea6e0efeecfe"
+          "sha256": "0515787f6b8ef326d11133b8cdd6d80972807ad8ef03d0b26ad3a62b7fb0d171"
         },
         {
           "path": "prototype/engine.js",
@@ -7057,7 +7177,7 @@
         {
           "path": "prototype/panels.js",
           "line": 1,
-          "sha256": "c690f08528ac3380c2995be86e378555b5eb9c3cd1d7afe5a32dea6e0efeecfe"
+          "sha256": "0515787f6b8ef326d11133b8cdd6d80972807ad8ef03d0b26ad3a62b7fb0d171"
         }
       ],
       "reviewed_saved_evidence": [
@@ -7697,7 +7817,7 @@
         {
           "path": "prototype/panels.js",
           "line": 1,
-          "sha256": "c690f08528ac3380c2995be86e378555b5eb9c3cd1d7afe5a32dea6e0efeecfe"
+          "sha256": "0515787f6b8ef326d11133b8cdd6d80972807ad8ef03d0b26ad3a62b7fb0d171"
         }
       ],
       "reviewed_saved_evidence": [
@@ -7838,7 +7958,7 @@
         {
           "path": "prototype/panels.js",
           "line": 1,
-          "sha256": "c690f08528ac3380c2995be86e378555b5eb9c3cd1d7afe5a32dea6e0efeecfe"
+          "sha256": "0515787f6b8ef326d11133b8cdd6d80972807ad8ef03d0b26ad3a62b7fb0d171"
         }
       ],
       "reviewed_saved_evidence": [
@@ -7941,7 +8061,7 @@
         {
           "path": "prototype/panels.js",
           "line": 1,
-          "sha256": "c690f08528ac3380c2995be86e378555b5eb9c3cd1d7afe5a32dea6e0efeecfe"
+          "sha256": "0515787f6b8ef326d11133b8cdd6d80972807ad8ef03d0b26ad3a62b7fb0d171"
         },
         {
           "path": "prototype/engine.js",
@@ -8423,7 +8543,7 @@
         {
           "path": "prototype/midi.js",
           "line": 1,
-          "sha256": "a93852152e272a4da19c7062585e53cca20dc073f784324bfb1b542f5c739b9c"
+          "sha256": "6bff54eef394a4af04e82b1b3f33ed1d6bf902b94002b5cab3975581aa1bcff6"
         },
         {
           "path": "prototype/audio-output.js",
@@ -8433,7 +8553,7 @@
         {
           "path": "prototype/panels.js",
           "line": 1,
-          "sha256": "c690f08528ac3380c2995be86e378555b5eb9c3cd1d7afe5a32dea6e0efeecfe"
+          "sha256": "0515787f6b8ef326d11133b8cdd6d80972807ad8ef03d0b26ad3a62b7fb0d171"
         }
       ],
       "reviewed_saved_evidence": [
@@ -8655,12 +8775,12 @@
         {
           "path": "prototype/midi.js",
           "line": 1,
-          "sha256": "a93852152e272a4da19c7062585e53cca20dc073f784324bfb1b542f5c739b9c"
+          "sha256": "6bff54eef394a4af04e82b1b3f33ed1d6bf902b94002b5cab3975581aa1bcff6"
         },
         {
           "path": "prototype/panels.js",
           "line": 1,
-          "sha256": "c690f08528ac3380c2995be86e378555b5eb9c3cd1d7afe5a32dea6e0efeecfe"
+          "sha256": "0515787f6b8ef326d11133b8cdd6d80972807ad8ef03d0b26ad3a62b7fb0d171"
         },
         {
           "path": "prototype/app.js",
@@ -8670,12 +8790,12 @@
         {
           "path": "prototype/video-midi.js",
           "line": 1,
-          "sha256": "ed536567cc52e0275ea3712d65c463c661920b5f3e851a9c8402e988cda45115"
+          "sha256": "9346f0a9ec28ddd1166fdd5b57a657409f3212550dde9b17ae712aaafbf715eb"
         },
         {
           "path": "prototype/video-controls.js",
           "line": 1,
-          "sha256": "33d94445ef1581371f4a6badab8112048ee38ba5ce55828bc097475cd5945255"
+          "sha256": "f493af06dfbd23cf827e33eacf1b63462eb4ecf451b08a40f9ca138a8413ecda"
         }
       ],
       "reviewed_saved_evidence": [
@@ -8728,10 +8848,35 @@
           "path": "docs/prototype/video-midi-browser-final-restored-results.json",
           "line": 1,
           "sha256": "a321fc9826ba20ffcb7d5ab33d0ec641387b4605a93c5b01aa4518b74cece76f"
+        },
+        {
+          "path": "docs/prototype/video-overlay-midi-draft-candidate.json",
+          "line": 1,
+          "sha256": "961bd7ef4dbd68c8b136d9849b35eb7db61c1a3b79bc16c9cd4fb1774609e87f"
+        },
+        {
+          "path": "docs/research/VIDEO_MIDI_LEARNING_INDEPENDENT_REVIEW_20261017.md",
+          "line": 1,
+          "sha256": "398fc0af453c127bd0db3986fa46248a6f2236e860b2cd8a7a1e2a64c83dc942"
+        },
+        {
+          "path": "docs/prototype/VIDEO_OVERLAY_MIDI_FUNCTIONAL_REVIEW.md",
+          "line": 1,
+          "sha256": "e6f869f58eebae82914efd50c4e1b790ff6b140cf6ca4929ad4cacf8a299a8b4"
+        },
+        {
+          "path": "docs/prototype/overlay-midi-browser-corrected-initial-results.json",
+          "line": 1,
+          "sha256": "02ce86fa16c98fa16c0002836ecbafcfb6f8f84bbd29e5306e59dbe575a34e4a"
+        },
+        {
+          "path": "docs/prototype/overlay-midi-browser-final-restored-results.json",
+          "line": 1,
+          "sha256": "09e689f2bdd33c77e377b37ef2ec2048e7d36556d5b8842ce6c47abaadd28736"
         }
       ],
-      "positive_evidence_boundary": "Confirmed0.1.1 browser knob remains historical. Separate browser Key Shift4deck audio subset and newer Video MIDI14initial/4reload checks with real GPU/save/recall/association;37saved mappings. Native0.1.5 lacks these later targets.",
-      "remaining_gap": "Video overlay-specific targets, click-to-learn/unassign and some core commands remain unexecuted/missing; full encodings/modifiers/import/presets/feedback/reconnect/reference and native/physical acceptance open.",
+      "positive_evidence_boundary": "Confirmed0.1.1 browser knob remains historical. Separate browser Key Shift4deck audio subset and newer Video MIDI14initial/4reload checks with real GPU/save/recall/association;37saved mappings. Native0.1.5 lacks these later targets. New overlay browser subset9initial/3actualreload checks with7savedmaps/12wholePNGs; full28overlay/72target acceptance remains open.",
+      "remaining_gap": "Overlay-specific targets and click-to-learn/unassign have nine initial and three actual-reload browser subset checks; complete text/geometry/animation/compound workflows remain open; some core commands remain unexecuted; full encodings/modifiers/import/presets/feedback/reconnect/reference and native/physical acceptance open.",
       "actual_done_criterion": "Learn, edit, export, import and reset mappings with validation and undo.",
       "proof_scope": "Saved evidence inspected as scoped documentary artifact; this audit does not rerun it, establish transfer to current WIP, or compare new reference runtime.",
       "requirement_evidence": [
@@ -8927,7 +9072,7 @@
         {
           "path": "prototype/midi.js",
           "line": 1,
-          "sha256": "a93852152e272a4da19c7062585e53cca20dc073f784324bfb1b542f5c739b9c"
+          "sha256": "6bff54eef394a4af04e82b1b3f33ed1d6bf902b94002b5cab3975581aa1bcff6"
         }
       ],
       "reviewed_saved_evidence": [
@@ -9106,12 +9251,12 @@
         {
           "path": "prototype/midi.js",
           "line": 1,
-          "sha256": "a93852152e272a4da19c7062585e53cca20dc073f784324bfb1b542f5c739b9c"
+          "sha256": "6bff54eef394a4af04e82b1b3f33ed1d6bf902b94002b5cab3975581aa1bcff6"
         },
         {
           "path": "prototype/panels.js",
           "line": 1,
-          "sha256": "c690f08528ac3380c2995be86e378555b5eb9c3cd1d7afe5a32dea6e0efeecfe"
+          "sha256": "0515787f6b8ef326d11133b8cdd6d80972807ad8ef03d0b26ad3a62b7fb0d171"
         }
       ],
       "reviewed_saved_evidence": [
@@ -9192,7 +9337,7 @@
         {
           "path": "prototype/panels.js",
           "line": 1,
-          "sha256": "c690f08528ac3380c2995be86e378555b5eb9c3cd1d7afe5a32dea6e0efeecfe"
+          "sha256": "0515787f6b8ef326d11133b8cdd6d80972807ad8ef03d0b26ad3a62b7fb0d171"
         },
         {
           "path": "prototype/app.js",
@@ -9293,7 +9438,7 @@
         {
           "path": "prototype/panels.js",
           "line": 1,
-          "sha256": "c690f08528ac3380c2995be86e378555b5eb9c3cd1d7afe5a32dea6e0efeecfe"
+          "sha256": "0515787f6b8ef326d11133b8cdd6d80972807ad8ef03d0b26ad3a62b7fb0d171"
         },
         {
           "path": "prototype/app.js",
@@ -9543,7 +9688,7 @@
         {
           "path": "prototype/panels.js",
           "line": 1,
-          "sha256": "c690f08528ac3380c2995be86e378555b5eb9c3cd1d7afe5a32dea6e0efeecfe"
+          "sha256": "0515787f6b8ef326d11133b8cdd6d80972807ad8ef03d0b26ad3a62b7fb0d171"
         },
         {
           "path": "prototype/app.js",
@@ -9750,7 +9895,7 @@
         {
           "path": "prototype/panels.js",
           "line": 1,
-          "sha256": "c690f08528ac3380c2995be86e378555b5eb9c3cd1d7afe5a32dea6e0efeecfe"
+          "sha256": "0515787f6b8ef326d11133b8cdd6d80972807ad8ef03d0b26ad3a62b7fb0d171"
         },
         {
           "path": "prototype/app.js",
@@ -9917,7 +10062,7 @@
         {
           "path": "prototype/panels.js",
           "line": 1,
-          "sha256": "c690f08528ac3380c2995be86e378555b5eb9c3cd1d7afe5a32dea6e0efeecfe"
+          "sha256": "0515787f6b8ef326d11133b8cdd6d80972807ad8ef03d0b26ad3a62b7fb0d171"
         }
       ],
       "reviewed_saved_evidence": [
@@ -10067,12 +10212,12 @@
         {
           "path": "prototype/midi.js",
           "line": 1,
-          "sha256": "a93852152e272a4da19c7062585e53cca20dc073f784324bfb1b542f5c739b9c"
+          "sha256": "6bff54eef394a4af04e82b1b3f33ed1d6bf902b94002b5cab3975581aa1bcff6"
         },
         {
           "path": "prototype/panels.js",
           "line": 1,
-          "sha256": "c690f08528ac3380c2995be86e378555b5eb9c3cd1d7afe5a32dea6e0efeecfe"
+          "sha256": "0515787f6b8ef326d11133b8cdd6d80972807ad8ef03d0b26ad3a62b7fb0d171"
         }
       ],
       "reviewed_saved_evidence": [
@@ -10220,12 +10365,12 @@
         {
           "path": "prototype/styles.css",
           "line": 1,
-          "sha256": "53c77f8e18648d4476c854ee6c1d0ff8cdb64ac394c5c249e857d90434ce9a4b"
+          "sha256": "a0605801c89b0d46cd836fe1409399045519418a27cefca890d5c16ae563120b"
         },
         {
           "path": "prototype/panels.js",
           "line": 1,
-          "sha256": "c690f08528ac3380c2995be86e378555b5eb9c3cd1d7afe5a32dea6e0efeecfe"
+          "sha256": "0515787f6b8ef326d11133b8cdd6d80972807ad8ef03d0b26ad3a62b7fb0d171"
         }
       ],
       "reviewed_saved_evidence": [
@@ -10411,7 +10556,7 @@
         {
           "path": "prototype/panels.js",
           "line": 1,
-          "sha256": "c690f08528ac3380c2995be86e378555b5eb9c3cd1d7afe5a32dea6e0efeecfe"
+          "sha256": "0515787f6b8ef326d11133b8cdd6d80972807ad8ef03d0b26ad3a62b7fb0d171"
         }
       ],
       "reviewed_saved_evidence": [
@@ -10553,7 +10698,7 @@
         {
           "path": "prototype/panels.js",
           "line": 1,
-          "sha256": "c690f08528ac3380c2995be86e378555b5eb9c3cd1d7afe5a32dea6e0efeecfe"
+          "sha256": "0515787f6b8ef326d11133b8cdd6d80972807ad8ef03d0b26ad3a62b7fb0d171"
         }
       ],
       "reviewed_saved_evidence": [
@@ -10770,12 +10915,12 @@
         {
           "path": "prototype/panels.js",
           "line": 1,
-          "sha256": "c690f08528ac3380c2995be86e378555b5eb9c3cd1d7afe5a32dea6e0efeecfe"
+          "sha256": "0515787f6b8ef326d11133b8cdd6d80972807ad8ef03d0b26ad3a62b7fb0d171"
         },
         {
           "path": "prototype/styles.css",
           "line": 1,
-          "sha256": "53c77f8e18648d4476c854ee6c1d0ff8cdb64ac394c5c249e857d90434ce9a4b"
+          "sha256": "a0605801c89b0d46cd836fe1409399045519418a27cefca890d5c16ae563120b"
         }
       ],
       "reviewed_saved_evidence": [
@@ -10865,7 +11010,7 @@
         {
           "path": "prototype/panels.js",
           "line": 1,
-          "sha256": "c690f08528ac3380c2995be86e378555b5eb9c3cd1d7afe5a32dea6e0efeecfe"
+          "sha256": "0515787f6b8ef326d11133b8cdd6d80972807ad8ef03d0b26ad3a62b7fb0d171"
         },
         {
           "path": "prototype/stems.js",
@@ -10961,7 +11106,7 @@
         {
           "path": "prototype/styles.css",
           "line": 1,
-          "sha256": "53c77f8e18648d4476c854ee6c1d0ff8cdb64ac394c5c249e857d90434ce9a4b"
+          "sha256": "a0605801c89b0d46cd836fe1409399045519418a27cefca890d5c16ae563120b"
         }
       ],
       "reviewed_saved_evidence": [
@@ -11377,7 +11522,7 @@
         {
           "path": "prototype/panels.js",
           "line": 1,
-          "sha256": "c690f08528ac3380c2995be86e378555b5eb9c3cd1d7afe5a32dea6e0efeecfe"
+          "sha256": "0515787f6b8ef326d11133b8cdd6d80972807ad8ef03d0b26ad3a62b7fb0d171"
         },
         {
           "path": "prototype/engine.js",
@@ -11888,7 +12033,7 @@
         {
           "path": "prototype/panels.js",
           "line": 1,
-          "sha256": "c690f08528ac3380c2995be86e378555b5eb9c3cd1d7afe5a32dea6e0efeecfe"
+          "sha256": "0515787f6b8ef326d11133b8cdd6d80972807ad8ef03d0b26ad3a62b7fb0d171"
         }
       ],
       "reviewed_saved_evidence": [
@@ -12039,12 +12184,12 @@
         {
           "path": "prototype/midi.js",
           "line": 1,
-          "sha256": "a93852152e272a4da19c7062585e53cca20dc073f784324bfb1b542f5c739b9c"
+          "sha256": "6bff54eef394a4af04e82b1b3f33ed1d6bf902b94002b5cab3975581aa1bcff6"
         },
         {
           "path": "prototype/panels.js",
           "line": 1,
-          "sha256": "c690f08528ac3380c2995be86e378555b5eb9c3cd1d7afe5a32dea6e0efeecfe"
+          "sha256": "0515787f6b8ef326d11133b8cdd6d80972807ad8ef03d0b26ad3a62b7fb0d171"
         }
       ],
       "reviewed_saved_evidence": [
@@ -12399,7 +12544,7 @@
         {
           "path": "prototype/panels.js",
           "line": 1,
-          "sha256": "c690f08528ac3380c2995be86e378555b5eb9c3cd1d7afe5a32dea6e0efeecfe"
+          "sha256": "0515787f6b8ef326d11133b8cdd6d80972807ad8ef03d0b26ad3a62b7fb0d171"
         }
       ],
       "reviewed_saved_evidence": [
@@ -12556,7 +12701,7 @@
         {
           "path": "prototype/panels.js",
           "line": 1,
-          "sha256": "c690f08528ac3380c2995be86e378555b5eb9c3cd1d7afe5a32dea6e0efeecfe"
+          "sha256": "0515787f6b8ef326d11133b8cdd6d80972807ad8ef03d0b26ad3a62b7fb0d171"
         },
         {
           "path": "prototype/library.js",
@@ -12649,7 +12794,7 @@
         {
           "path": "prototype/panels.js",
           "line": 1,
-          "sha256": "c690f08528ac3380c2995be86e378555b5eb9c3cd1d7afe5a32dea6e0efeecfe"
+          "sha256": "0515787f6b8ef326d11133b8cdd6d80972807ad8ef03d0b26ad3a62b7fb0d171"
         },
         {
           "path": "prototype/app.js",
@@ -12778,7 +12923,7 @@
         {
           "path": "prototype/panels.js",
           "line": 1,
-          "sha256": "c690f08528ac3380c2995be86e378555b5eb9c3cd1d7afe5a32dea6e0efeecfe"
+          "sha256": "0515787f6b8ef326d11133b8cdd6d80972807ad8ef03d0b26ad3a62b7fb0d171"
         },
         {
           "path": "prototype/app.js",
@@ -12905,7 +13050,7 @@
         {
           "path": "prototype/panels.js",
           "line": 1,
-          "sha256": "c690f08528ac3380c2995be86e378555b5eb9c3cd1d7afe5a32dea6e0efeecfe"
+          "sha256": "0515787f6b8ef326d11133b8cdd6d80972807ad8ef03d0b26ad3a62b7fb0d171"
         },
         {
           "path": "prototype/app.js",
@@ -13030,7 +13175,7 @@
         {
           "path": "prototype/panels.js",
           "line": 1,
-          "sha256": "c690f08528ac3380c2995be86e378555b5eb9c3cd1d7afe5a32dea6e0efeecfe"
+          "sha256": "0515787f6b8ef326d11133b8cdd6d80972807ad8ef03d0b26ad3a62b7fb0d171"
         }
       ],
       "reviewed_saved_evidence": [
@@ -13659,7 +13804,7 @@
         {
           "path": "prototype/panels.js",
           "line": 1,
-          "sha256": "c690f08528ac3380c2995be86e378555b5eb9c3cd1d7afe5a32dea6e0efeecfe"
+          "sha256": "0515787f6b8ef326d11133b8cdd6d80972807ad8ef03d0b26ad3a62b7fb0d171"
         }
       ],
       "reviewed_saved_evidence": [
@@ -14246,7 +14391,7 @@
         {
           "path": "prototype/panels.js",
           "line": 1,
-          "sha256": "c690f08528ac3380c2995be86e378555b5eb9c3cd1d7afe5a32dea6e0efeecfe"
+          "sha256": "0515787f6b8ef326d11133b8cdd6d80972807ad8ef03d0b26ad3a62b7fb0d171"
         }
       ],
       "reviewed_saved_evidence": [
@@ -14405,7 +14550,7 @@
         {
           "path": "prototype/panels.js",
           "line": 1,
-          "sha256": "c690f08528ac3380c2995be86e378555b5eb9c3cd1d7afe5a32dea6e0efeecfe"
+          "sha256": "0515787f6b8ef326d11133b8cdd6d80972807ad8ef03d0b26ad3a62b7fb0d171"
         }
       ],
       "reviewed_saved_evidence": [
@@ -14586,7 +14731,7 @@
         {
           "path": "prototype/panels.js",
           "line": 1,
-          "sha256": "c690f08528ac3380c2995be86e378555b5eb9c3cd1d7afe5a32dea6e0efeecfe"
+          "sha256": "0515787f6b8ef326d11133b8cdd6d80972807ad8ef03d0b26ad3a62b7fb0d171"
         }
       ],
       "reviewed_saved_evidence": [
@@ -15904,7 +16049,7 @@
         {
           "path": "prototype/panels.js",
           "line": 1,
-          "sha256": "c690f08528ac3380c2995be86e378555b5eb9c3cd1d7afe5a32dea6e0efeecfe"
+          "sha256": "0515787f6b8ef326d11133b8cdd6d80972807ad8ef03d0b26ad3a62b7fb0d171"
         }
       ],
       "reviewed_saved_evidence": [
@@ -16039,7 +16184,7 @@
         {
           "path": "prototype/panels.js",
           "line": 1,
-          "sha256": "c690f08528ac3380c2995be86e378555b5eb9c3cd1d7afe5a32dea6e0efeecfe"
+          "sha256": "0515787f6b8ef326d11133b8cdd6d80972807ad8ef03d0b26ad3a62b7fb0d171"
         }
       ],
       "reviewed_saved_evidence": [
@@ -16303,7 +16448,7 @@
         {
           "path": "prototype/panels.js",
           "line": 1,
-          "sha256": "c690f08528ac3380c2995be86e378555b5eb9c3cd1d7afe5a32dea6e0efeecfe"
+          "sha256": "0515787f6b8ef326d11133b8cdd6d80972807ad8ef03d0b26ad3a62b7fb0d171"
         },
         {
           "path": "prototype/app.js",
@@ -16456,7 +16601,7 @@
         {
           "path": "prototype/panels.js",
           "line": 1,
-          "sha256": "c690f08528ac3380c2995be86e378555b5eb9c3cd1d7afe5a32dea6e0efeecfe"
+          "sha256": "0515787f6b8ef326d11133b8cdd6d80972807ad8ef03d0b26ad3a62b7fb0d171"
         }
       ],
       "reviewed_saved_evidence": [
@@ -16650,7 +16795,7 @@
         {
           "path": "prototype/video.js",
           "line": 1,
-          "sha256": "7d4ecba07be0714dae905fc250fc1277ef59d8a8a03c9ef160d1709064a6330a"
+          "sha256": "d09978db2178d009281ff38ab8923d33e2c18a5129c8188f7d4066db92f15823"
         },
         {
           "path": "prototype/video-pipeline.js",
@@ -16670,7 +16815,7 @@
         {
           "path": "prototype/video-midi.js",
           "line": 1,
-          "sha256": "ed536567cc52e0275ea3712d65c463c661920b5f3e851a9c8402e988cda45115"
+          "sha256": "9346f0a9ec28ddd1166fdd5b57a657409f3212550dde9b17ae712aaafbf715eb"
         }
       ],
       "reviewed_saved_evidence": [
@@ -16703,9 +16848,34 @@
           "path": "docs/prototype/video-midi-browser-final-restored-results.json",
           "line": 1,
           "sha256": "a321fc9826ba20ffcb7d5ab33d0ec641387b4605a93c5b01aa4518b74cece76f"
+        },
+        {
+          "path": "docs/prototype/video-overlay-midi-draft-candidate.json",
+          "line": 1,
+          "sha256": "961bd7ef4dbd68c8b136d9849b35eb7db61c1a3b79bc16c9cd4fb1774609e87f"
+        },
+        {
+          "path": "docs/research/VIDEO_MIDI_LEARNING_INDEPENDENT_REVIEW_20261017.md",
+          "line": 1,
+          "sha256": "398fc0af453c127bd0db3986fa46248a6f2236e860b2cd8a7a1e2a64c83dc942"
+        },
+        {
+          "path": "docs/prototype/VIDEO_OVERLAY_MIDI_FUNCTIONAL_REVIEW.md",
+          "line": 1,
+          "sha256": "e6f869f58eebae82914efd50c4e1b790ff6b140cf6ca4929ad4cacf8a299a8b4"
+        },
+        {
+          "path": "docs/prototype/overlay-midi-browser-corrected-initial-results.json",
+          "line": 1,
+          "sha256": "02ce86fa16c98fa16c0002836ecbafcfb6f8f84bbd29e5306e59dbe575a34e4a"
+        },
+        {
+          "path": "docs/prototype/overlay-midi-browser-final-restored-results.json",
+          "line": 1,
+          "sha256": "09e689f2bdd33c77e377b37ef2ec2048e7d36556d5b8842ce6c47abaadd28736"
         }
       ],
-      "positive_evidence_boundary": "Actual local decode/link/capture/replay, CDG/Media Crate, recording-resolution and treatment evidence. New browser MIDI controls have scoped actual GPU/persistence/local-clip save/recall/association evidence; not full26manual control groups or physical/native/reference acceptance.",
+      "positive_evidence_boundary": "Actual local decode/link/capture/replay, CDG/Media Crate, recording-resolution and treatment evidence. New browser MIDI controls have scoped actual GPU/persistence/local-clip save/recall/association evidence; not full26manual control groups or physical/native/reference acceptance. New overlay browser subset9initial/3actualreload checks with7savedmaps/12wholePNGs; full28overlay/72target acceptance remains open.",
       "remaining_gap": "Exact reference AV timing/codecs/HD/performance; external display/always-on-top/arrangement/Syphon/YUV/GPU counters and full failure workflows.",
       "actual_done_criterion": "Verify decode, frame/audio synchronization, second-display placement and recovery; Serato Video manual needed.",
       "proof_scope": "Saved evidence inspected as scoped documentary artifact; this audit does not rerun it, establish transfer to current WIP, or compare new reference runtime.",
@@ -17379,7 +17549,7 @@
         {
           "path": "prototype/video-midi.js",
           "line": 1,
-          "sha256": "ed536567cc52e0275ea3712d65c463c661920b5f3e851a9c8402e988cda45115"
+          "sha256": "9346f0a9ec28ddd1166fdd5b57a657409f3212550dde9b17ae712aaafbf715eb"
         }
       ],
       "reviewed_saved_evidence": [
@@ -17422,9 +17592,34 @@
           "path": "docs/prototype/video-midi-browser-final-restored-results.json",
           "line": 1,
           "sha256": "a321fc9826ba20ffcb7d5ab33d0ec641387b4605a93c5b01aa4518b74cece76f"
+        },
+        {
+          "path": "docs/prototype/video-overlay-midi-draft-candidate.json",
+          "line": 1,
+          "sha256": "961bd7ef4dbd68c8b136d9849b35eb7db61c1a3b79bc16c9cd4fb1774609e87f"
+        },
+        {
+          "path": "docs/research/VIDEO_MIDI_LEARNING_INDEPENDENT_REVIEW_20261017.md",
+          "line": 1,
+          "sha256": "398fc0af453c127bd0db3986fa46248a6f2236e860b2cd8a7a1e2a64c83dc942"
+        },
+        {
+          "path": "docs/prototype/VIDEO_OVERLAY_MIDI_FUNCTIONAL_REVIEW.md",
+          "line": 1,
+          "sha256": "e6f869f58eebae82914efd50c4e1b790ff6b140cf6ca4929ad4cacf8a299a8b4"
+        },
+        {
+          "path": "docs/prototype/overlay-midi-browser-corrected-initial-results.json",
+          "line": 1,
+          "sha256": "02ce86fa16c98fa16c0002836ecbafcfb6f8f84bbd29e5306e59dbe575a34e4a"
+        },
+        {
+          "path": "docs/prototype/overlay-midi-browser-final-restored-results.json",
+          "line": 1,
+          "sha256": "09e689f2bdd33c77e377b37ef2ec2048e7d36556d5b8842ce6c47abaadd28736"
         }
       ],
-      "positive_evidence_boundary": "55 independent effects/six slots, observed-transition and overlay algorithms; several exact input contracts/persistence/opacity/color pipelines exercised. New browser MIDI controls have scoped actual GPU/persistence/local-clip save/recall/association evidence; not full26manual control groups or physical/native/reference acceptance.",
+      "positive_evidence_boundary": "55 independent effects/six slots, observed-transition and overlay algorithms; several exact input contracts/persistence/opacity/color pipelines exercised. New browser MIDI controls have scoped actual GPU/persistence/local-clip save/recall/association evidence; not full26manual control groups or physical/native/reference acceptance. New overlay browser subset9initial/3actualreload checks with7savedmaps/12wholePNGs; full28overlay/72target acceptance remains open.",
       "remaining_gap": "Names/resources not exact vendor shaders/parameters; current-reference visual curves, audio-EQ hardware links, every combination/performance/output path.",
       "actual_done_criterion": "Inventory each control and test compositing, persistence and recovery with original test media; expansion guide needed.",
       "proof_scope": "Saved evidence inspected as scoped documentary artifact; this audit does not rerun it, establish transfer to current WIP, or compare new reference runtime.",
@@ -17793,7 +17988,7 @@
         {
           "path": "prototype/panels.js",
           "line": 1,
-          "sha256": "c690f08528ac3380c2995be86e378555b5eb9c3cd1d7afe5a32dea6e0efeecfe"
+          "sha256": "0515787f6b8ef326d11133b8cdd6d80972807ad8ef03d0b26ad3a62b7fb0d171"
         }
       ],
       "reviewed_saved_evidence": [
@@ -18029,7 +18224,7 @@
         {
           "path": "prototype/panels.js",
           "line": 1,
-          "sha256": "c690f08528ac3380c2995be86e378555b5eb9c3cd1d7afe5a32dea6e0efeecfe"
+          "sha256": "0515787f6b8ef326d11133b8cdd6d80972807ad8ef03d0b26ad3a62b7fb0d171"
         }
       ],
       "reviewed_saved_evidence": [
@@ -18219,12 +18414,12 @@
         {
           "path": "prototype/midi.js",
           "line": 1,
-          "sha256": "a93852152e272a4da19c7062585e53cca20dc073f784324bfb1b542f5c739b9c"
+          "sha256": "6bff54eef394a4af04e82b1b3f33ed1d6bf902b94002b5cab3975581aa1bcff6"
         },
         {
           "path": "prototype/panels.js",
           "line": 1,
-          "sha256": "c690f08528ac3380c2995be86e378555b5eb9c3cd1d7afe5a32dea6e0efeecfe"
+          "sha256": "0515787f6b8ef326d11133b8cdd6d80972807ad8ef03d0b26ad3a62b7fb0d171"
         },
         {
           "path": "prototype/audio-monitor.js",
@@ -19000,17 +19195,17 @@
         {
           "path": "prototype/midi.js",
           "line": 1,
-          "sha256": "a93852152e272a4da19c7062585e53cca20dc073f784324bfb1b542f5c739b9c"
+          "sha256": "6bff54eef394a4af04e82b1b3f33ed1d6bf902b94002b5cab3975581aa1bcff6"
         },
         {
           "path": "prototype/panels.js",
           "line": 1,
-          "sha256": "c690f08528ac3380c2995be86e378555b5eb9c3cd1d7afe5a32dea6e0efeecfe"
+          "sha256": "0515787f6b8ef326d11133b8cdd6d80972807ad8ef03d0b26ad3a62b7fb0d171"
         },
         {
           "path": "prototype/video-midi.js",
           "line": 1,
-          "sha256": "ed536567cc52e0275ea3712d65c463c661920b5f3e851a9c8402e988cda45115"
+          "sha256": "9346f0a9ec28ddd1166fdd5b57a657409f3212550dde9b17ae712aaafbf715eb"
         }
       ],
       "reviewed_saved_evidence": [
@@ -19033,9 +19228,34 @@
           "path": "docs/prototype/VIDEO_MIDI_FUNCTIONAL_REVIEW.md",
           "line": 1,
           "sha256": "3857e646a7900627d9e212fff54b7b37dadc74347e963d3ff9ad2cb82d198e6f"
+        },
+        {
+          "path": "docs/prototype/video-overlay-midi-draft-candidate.json",
+          "line": 1,
+          "sha256": "961bd7ef4dbd68c8b136d9849b35eb7db61c1a3b79bc16c9cd4fb1774609e87f"
+        },
+        {
+          "path": "docs/research/VIDEO_MIDI_LEARNING_INDEPENDENT_REVIEW_20261017.md",
+          "line": 1,
+          "sha256": "398fc0af453c127bd0db3986fa46248a6f2236e860b2cd8a7a1e2a64c83dc942"
+        },
+        {
+          "path": "docs/prototype/VIDEO_OVERLAY_MIDI_FUNCTIONAL_REVIEW.md",
+          "line": 1,
+          "sha256": "e6f869f58eebae82914efd50c4e1b790ff6b140cf6ca4929ad4cacf8a299a8b4"
+        },
+        {
+          "path": "docs/prototype/overlay-midi-browser-corrected-initial-results.json",
+          "line": 1,
+          "sha256": "02ce86fa16c98fa16c0002836ecbafcfb6f8f84bbd29e5306e59dbe575a34e4a"
+        },
+        {
+          "path": "docs/prototype/overlay-midi-browser-final-restored-results.json",
+          "line": 1,
+          "sha256": "09e689f2bdd33c77e377b37ef2ec2048e7d36556d5b8842ce6c47abaadd28736"
         }
       ],
-      "positive_evidence_boundary": "Parser/physical CC1 subset retained; current actual dispatcher controlled tests accept CC16/48 and ignore unrelated CC80/112, with Note-off/relative regression coverage. New Video dispatch starts matching actions before awaiting, preserves unrelated held edges and per-device14bit pairs; independent5/5controlled boundary checks.",
+      "positive_evidence_boundary": "Parser/physical CC1 subset retained; current actual dispatcher controlled tests accept CC16/48 and ignore unrelated CC80/112, with Note-off/relative regression coverage. New Video dispatch starts matching actions before awaiting, preserves unrelated held edges and per-device14bit pairs; independent5/5controlled boundary checks. New overlay browser subset9initial/3actualreload checks with7savedmaps/12wholePNGs; full28overlay/72target acceptance remains open.",
       "remaining_gap": "Actual many-to-one/one-to-many ownership, replace/add semantics, all encodings/conflicts and physical controls.",
       "actual_done_criterion": "Verify absolute, relative and switch encodings with conflict resolution and explicit replace/add behavior; sources 225065768, 360001990956, 360001990936.",
       "proof_scope": "Saved evidence inspected as scoped documentary artifact; this audit does not rerun it, establish transfer to current WIP, or compare new reference runtime.",
@@ -19197,7 +19417,7 @@
         {
           "path": "prototype/panels.js",
           "line": 1,
-          "sha256": "c690f08528ac3380c2995be86e378555b5eb9c3cd1d7afe5a32dea6e0efeecfe"
+          "sha256": "0515787f6b8ef326d11133b8cdd6d80972807ad8ef03d0b26ad3a62b7fb0d171"
         },
         {
           "path": "prototype/app.js",
@@ -19345,7 +19565,7 @@
         {
           "path": "prototype/panels.js",
           "line": 1,
-          "sha256": "c690f08528ac3380c2995be86e378555b5eb9c3cd1d7afe5a32dea6e0efeecfe"
+          "sha256": "0515787f6b8ef326d11133b8cdd6d80972807ad8ef03d0b26ad3a62b7fb0d171"
         },
         {
           "path": "prototype/engine.js",
@@ -19461,7 +19681,7 @@
         {
           "path": "prototype/panels.js",
           "line": 1,
-          "sha256": "c690f08528ac3380c2995be86e378555b5eb9c3cd1d7afe5a32dea6e0efeecfe"
+          "sha256": "0515787f6b8ef326d11133b8cdd6d80972807ad8ef03d0b26ad3a62b7fb0d171"
         }
       ],
       "reviewed_saved_evidence": [
@@ -19622,7 +19842,7 @@
         {
           "path": "prototype/styles.css",
           "line": 1,
-          "sha256": "53c77f8e18648d4476c854ee6c1d0ff8cdb64ac394c5c249e857d90434ce9a4b"
+          "sha256": "a0605801c89b0d46cd836fe1409399045519418a27cefca890d5c16ae563120b"
         }
       ],
       "reviewed_saved_evidence": [
@@ -19827,12 +20047,12 @@
         {
           "path": "prototype/styles.css",
           "line": 1,
-          "sha256": "53c77f8e18648d4476c854ee6c1d0ff8cdb64ac394c5c249e857d90434ce9a4b"
+          "sha256": "a0605801c89b0d46cd836fe1409399045519418a27cefca890d5c16ae563120b"
         },
         {
           "path": "prototype/panels.js",
           "line": 1,
-          "sha256": "c690f08528ac3380c2995be86e378555b5eb9c3cd1d7afe5a32dea6e0efeecfe"
+          "sha256": "0515787f6b8ef326d11133b8cdd6d80972807ad8ef03d0b26ad3a62b7fb0d171"
         }
       ],
       "reviewed_saved_evidence": [
@@ -19966,7 +20186,7 @@
         {
           "path": "prototype/panels.js",
           "line": 1,
-          "sha256": "c690f08528ac3380c2995be86e378555b5eb9c3cd1d7afe5a32dea6e0efeecfe"
+          "sha256": "0515787f6b8ef326d11133b8cdd6d80972807ad8ef03d0b26ad3a62b7fb0d171"
         },
         {
           "path": "prototype/app.js",
@@ -20116,7 +20336,7 @@
         {
           "path": "prototype/panels.js",
           "line": 1,
-          "sha256": "c690f08528ac3380c2995be86e378555b5eb9c3cd1d7afe5a32dea6e0efeecfe"
+          "sha256": "0515787f6b8ef326d11133b8cdd6d80972807ad8ef03d0b26ad3a62b7fb0d171"
         },
         {
           "path": "prototype/fixtures.js",
@@ -20229,7 +20449,7 @@
         {
           "path": "prototype/panels.js",
           "line": 1,
-          "sha256": "c690f08528ac3380c2995be86e378555b5eb9c3cd1d7afe5a32dea6e0efeecfe"
+          "sha256": "0515787f6b8ef326d11133b8cdd6d80972807ad8ef03d0b26ad3a62b7fb0d171"
         },
         {
           "path": "prototype/engine.js",
