@@ -1,0 +1,34 @@
+{
+  "date": "2026-10-17",
+  "version": "0.1.3",
+  "appPath": "/Users/jasonpoindexter/Documents/GitHub/Open Play/local-evidence/desktop-builds/0.1.3/Open Play Test-darwin-arm64/Open Play Test.app",
+  "sourceCommit": "a8fe82e3651757b4661eb5f7122603224e859552",
+  "approvedHTMLBaseline": "f8b0abf33c8e8468c7bec27eabc5be2930ed0086",
+  "ASARSHA256": "cd9577b63de60caadcf2b4df70caea8c20daaaac22066ea7690b36ad99f98966",
+  "observed": [
+    "Actual native app launched after user agreed to switch builds.",
+    "Devices refresh/selector enumerated DJControl Inpulse300Mk2(06f8:b12f), MacBook Pro Speakers and Microsoft Teams virtual output.",
+    "Actual Hercules setSinkId selection completed after starting audio; explicit four-channel route displayed master1/2 and cue3/4. No microphone/camera permission was granted.",
+    "Deck1 After Hours used a four-beat loop; deck2 paused. Cue Mix0%, Cue Volume10%, Master Cue/Split Cue off.",
+    "Cue-only: deck1 level0, PFLon, Master meter0. Jason first heard headphones with speakers off; that did not prove isolation. Repeated with speakers powered: Jason confirmed headphones play; powered speakers silent.",
+    "Master-only: level0.8, PFLoff, cue mix0; nonzero Master meter. Jason confirmed speakers play; headphones silent.",
+    "Actual master recordings saved by native chooser and independently decoded whole-stream with FFmpeg:22.32s cue-only master exactlyzero bothchannels;29.88s master-only finite/nonzero.",
+    "Both decks left paused, Master meter0. Actual MIDI Connect enumerated Hercules; prior Librarybrowse CCch1#1 Relative twos complement mapping survived restart. No fresh knob action is claimed in0.1.3."
+  ],
+  "physicalTestSource": "Jason direct answers in this conversation",
+  "physicalMasterHeadphoneSeparation": "User-confirmed on exact connected Hercules for these two output states, not independently acoustically recorded",
+  "runtimeFilesMatch": true,
+  "prototypeFilesChecked": 197,
+  "screenshots": [
+    "desktop-0.1.3-cue-only.png",
+    "desktop-0.1.3-master-only.png",
+    "desktop-0.1.3-ready.png"
+  ],
+  "audioEvidence": "desktop-0.1.3-audio-inspection.json",
+  "limits": [
+    "Other hardware, full defaultmapping/LEDs/jogs and0.1.3 knob action not tested",
+    "No hot-unplug/OSfallback, clockdrift, roundtrip latency, arbitrary rates/codes or musicalquality acceptance",
+    "Imported bytes still session-only; no native DSP replacement or fullparity/publicrelease"
+  ],
+  "fullParityVerified": false
+}

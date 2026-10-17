@@ -1,3 +1,9 @@
+## Current executed subset —17October2026
+
+Later evidence supersedes early inconclusive captures below. Fresh45s capture received101packets/0parsererrors and Jason confirmed knob/Serato correlation. Jason corrected the wrong-app negative and confirmed browserknob library selection in Electron0.1.1. In0.1.3, actual output enumeration and selection expose the Hercules; explicit master1/2+cue3/4 applied. With Cue Mix0%/Volume10%, Jason confirmed cue-only headphones while powered RCA speakers silent, and master-only speakers while headphones silent. Native saved master recordings independently decode to22.32s exactlyzero duringcue and29.88s finite/nonzero duringmaster. Actual MIDI Connect and retained relative CCch1#1mapping observed0.1.3; no new knob-action test. See desktop-0.1.3-runtime-observation.json and audio-inspection.json. Fullmapping/LEDs/jogs/hot-unplug/latency/quality remain unknown. Existing firmware untouched; Open Play test output route was explicitly changed, not Serato configuration.
+
+The following dated investigation is historical evidence.
+
 # Hercules DJControl Inpulse 300 MK2 investigation
 
 Date: 2026-10-16. Connected reference unit reported by Jason; headphones and RCA speakers also confirmed connected by Jason. No firmware, driver, account, mapping or audio-route changes performed.

@@ -64,3 +64,8 @@ release authorization. Serato Video was restoredOFF after the observation.
 Jason answered **“Approve desktop test build”** to the explicit question naming HTML revision `f8b0abf` and preserving current interface/code. This authorizes creating and running a local desktop test app from that revision. It supersedes earlier native-not-approved statements for this limited test scope. Full1:1, physical hardware/audio, release quality, signing/notarization and public distribution are not thereby accepted. Electron44.9.0 was selected to retain the web implementation; no frontend rewrite or native DSP replacement is required for this milestone.
 
 The previous08:02UTC physical capture was explicitly missed by Jason and is inconclusive. A fresh requested retry10:12:24–10:13:09UTC delivered101packets with zero parser errors; Jason confirmed knob movement and Serato selection movement during it. See HERCULES_CAPTURE_20261017_CONFIRMED.json.
+
+
+## 17 October2026 — cue build switch and physical output tests
+
+Jason answered “Ready now—controller, headphones and speakers connected” to switching the running0.1.1 to the new cue build. The initially built0.1.2 permission boundary was tightened before launch, preserving that bundle; corrected0.1.3 actually launched and was tested. Jason confirmed cue-only “Headphones play; powered speakers silent”, then master-only “Speakers play; headphones silent”. The initial headphones-only report had speakers off and did not prove isolation. These are narrow user-reported physical output results, not fullcontroller/latency/quality/parity acceptance. Existing0.1.1 remains available.

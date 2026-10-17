@@ -1,13 +1,13 @@
 # Parity and prototype review gate
 
-Updated 2026-10-17. **Exact 1:1 parity status: not passed.** An annotated HTML review candidate now exists, following the user’s explicit continuation instruction and permitted simulation/gap boundary. No native application has been started.
+Updated 2026-10-17. **Exact 1:1 parity status: not passed.** An annotated HTML review candidate now exists, following the user’s explicit continuation instruction and permitted simulation/gap boundary. Local desktop testing was explicitly approved and0.1.3 launched; Jason confirmed separate Hercules cue/headphone and master/speaker output in the tested states. Native DSP and full release acceptance remain open.
 
 Jason requires 1:1 feature coverage before prototype implementation. The inventory must account for controls, modes, state transitions, secondary actions, settings, failures and hardware-specific behaviors. A list of feature titles is insufficient. A screenshot does not establish transport, DSP or hardware behavior.
 
 ## Current coverage
 
 - 168 official manual articles across 23 sections, all explicitly mapped to feature IDs; semantic review remains open.
-- 521 selected interaction requirements have explicit triggers, expected outcomes and evidence boundaries.
+- 522 selected interaction requirements have explicit triggers, expected outcomes and evidence boundaries.
 - 74 initial feature groups plus 36 research additions, each with explicit Codex/Claude model and effort recommendations.
 - Installed reference pinned to 4.0.10.213, with executable and installer hashes.
 - All five display layouts and all eight Setup tabs observed; connected Hercules enumerated through USB, audio and MIDI interfaces.
@@ -20,7 +20,7 @@ Jason requires 1:1 feature coverage before prototype implementation. The invento
 | PG-01 | Full control/state crosswalk not yet reviewed | 110 broad groups do not guarantee every secondary action is covered | Article-level and screen-level requirements mapped to feature IDs, with omissions reviewed |
 | PG-02 | Navigation blocker resolved; screen coverage still partial | All eight Setup tabs, all 59 advanced FX parameter strips, empty sampler and Scratch Banks are observed | User-authorized JXA/CoreGraphics navigation works with fresh screenshot verification. Complete remaining screen/state observations in UI_OBSERVATIONS.md |
 | PG-03 | Device-specific binary trace incomplete | Ghidra pass and CoreMIDI call sites are now established, but manufacturer dispatch and audio paths remain unresolved | Continue from retained call sites into mapping/capability decisions, preserving decompiler limitations |
-| PG-04 | Hercules physical input/output tests pending | Enumeration is not input, feedback or separate headphone/master proof | Browser action is user-confirmed in Serato, but raw capture remains unresolved despite passing virtual-source and destination self-tests; complete correlated controls and separate physical outputs |
+| PG-04 | Hercules subset executed; full device acceptance pending | One knob and two output states do not prove the complete map, LEDs, jogs, reconnect timing or latency | Actual101packet capture with usercorrelation; browserknob user-confirmed in Electron0.1.1;0.1.3 real output selection and master1/2+cue3/4 with user-confirmed isolation in both directions. Continue full map/feedback/hot-unplug and quality tests. See desktop-0.1.3-runtime-observation.json. |
 | PG-05 | Exact advanced FX/video/Flip/streaming/Phase behavior incomplete | A generic panel would conceal parity gaps | Version-appropriate expansion sources and observable states; unavailable conditions explicitly marked |
 | PG-06 | Reference inconsistencies unresolved | Choosing a convenient documented value could reproduce the wrong behavior | For example, right-deck loop shortcuts differ between shortcut and manual-loop articles; test the installed reference |
 | PG-07 | Historical gating claim not established | Current paid upgrade is not proof of a removed entitlement | Version-specific official release/support evidence and comparable historical device behavior |

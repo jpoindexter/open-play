@@ -1,0 +1,98 @@
+{
+  "sourceHashes": {
+    "main": "17425ab59fae9d787396a4dab6301b853fa145eafc3063697b09901e2fafc6c7",
+    "packager": "e8b53239d19a3741262fe08a6723f444670a7b399dec22a5ce3fd6bfcad17c80",
+    "lock": "ac2b43453eccf6df57cdcc2b8904f66b4a0a6122191103d61c9d6d4657e9bed7"
+  },
+  "endMainSHA256": "17425ab59fae9d787396a4dab6301b853fa145eafc3063697b09901e2fafc6c7",
+  "passed": 7,
+  "failed": 2,
+  "scope": "Actual desktop main source evaluated with controlled Electron callbacks; actual local ASAR extraction and byte comparisons. No GUI, actual Electron permission prompt, audio/device operation, app runtime or general security acceptance. Foreign-frame callback assertion is defense boundary evidence, not an exploit demonstration; CSP and browser policy may prevent reaching it.",
+  "checks": [
+    {
+      "name": "Renderer retains sandbox, isolation and disabled Node integration",
+      "passed": true,
+      "evidence": {
+        "partition": "persist:open-play-test",
+        "nodeIntegration": false,
+        "contextIsolation": true,
+        "sandbox": true,
+        "webSecurity": true
+      }
+    },
+    {
+      "name": "Only three named device permissions are granted to owned main renderer",
+      "passed": true,
+      "evidence": {
+        "allowed": [
+          "midi",
+          "midiSysex",
+          "speaker-selection"
+        ]
+      }
+    },
+    {
+      "name": "Foreign origins and webContents are rejected by check callback",
+      "passed": true,
+      "evidence": {
+        "rejected": [
+          "foreign origin",
+          "foreign contents"
+        ]
+      }
+    },
+    {
+      "name": "Foreign requesting frame cannot inherit top renderer speaker permission",
+      "passed": false,
+      "evidence": {
+        "granted": true
+      },
+      "error": "Request callback ignores requesting frame URL and grants foreign frame based on top webContents URL\n\ntrue !== false\n"
+    },
+    {
+      "name": "Popup and foreign top navigation are denied",
+      "passed": true,
+      "evidence": {
+        "externalNavigationPrevented": true
+      }
+    },
+    {
+      "name": "0.1.2 package and lock retain exact unchanged build dependencies",
+      "passed": true,
+      "evidence": {
+        "dependencies": {
+          "electron": "44.9.0",
+          "@electron/packager": "20.3.0"
+        }
+      }
+    },
+    {
+      "name": "Actual ASAR preserves separate candidate and approved baseline provenance",
+      "passed": true,
+      "evidence": {
+        "provenance": {
+          "approvedHTMLCommit": "f8b0abf33c8e8468c7bec27eabc5be2930ed0086",
+          "sourceCommit": "a8fe82e3651757b4661eb5f7122603224e859552",
+          "hostVersion": "0.1.2",
+          "builtAt": "2026-10-17T10:53:25.313Z",
+          "scope": "Local desktop test of subsequent reviewed cue source; existing interface preserved. Original approval baseline retained; not full parity, physical audio or native audio-engine acceptance."
+        },
+        "asarSHA256": "fcd8b5f390627c1ead43a9d5b9f56c17dbe65fc9b3fef3138b1f72e756fd24c2"
+      }
+    },
+    {
+      "name": "Every actual packaged prototype file matches immutable cue candidate",
+      "passed": true,
+      "evidence": {
+        "matchedPrototypeFiles": 197,
+        "candidate": "a8fe82e3651757b4661eb5f7122603224e859552"
+      }
+    },
+    {
+      "name": "Packaged host files match reviewed current host source",
+      "passed": false,
+      "evidence": {},
+      "error": "Stale packaged host package.json\n+ actual - expected\n\n+ '26e128693bd738e9ae5d6d6239deb96ca25768624d2df07d46517f82960263aa'\n- '61e1edfa67f492dd9c570fc6830128e799d92044ad85f7f1cd788d1443b2342c'\n"
+    }
+  ]
+}
