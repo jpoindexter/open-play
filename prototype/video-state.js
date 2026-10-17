@@ -75,6 +75,8 @@ function overlaySpec(input,target,index,restore) {
   // are not stable identifiers and must not enter persistent metadata.
   if (typeof ref === 'string' && ref.length <= 4096 && !/^(?:blob|data|https?|file|filesystem):/i.test(ref.trim())) safe.imageRef = ref;
   const metadata = videoOverlayPresetMetadata(safe);
+  const draft = own(input,'presetDraftName');
+  if(typeof draft==='string'&&draft.length<=128)metadata.presetDraftName=draft;
   if (!metadata.id) metadata.id = `overlay-${target}-${index}`;
   if (restore && metadata.kind === 'image') metadata.on = false;
   return metadata;

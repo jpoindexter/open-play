@@ -1,0 +1,101 @@
+{
+  "observed_at": "2026-10-17T14:44:59.474078+00:00",
+  "kind": "PARENT_BROWSER_CONTROL_SMOKE_OBSERVATION_NOT_AUTOMATED_REPLAY",
+  "browser_tab": "45",
+  "origin": "http://127.0.0.1:18785",
+  "phase": "After final strengthened21-case initial and actualreload5 on the current controls; owned state only",
+  "checks": [
+    {
+      "action": "Read live editor before assignment",
+      "observed": {
+        "opacity": "1",
+        "enabled": true,
+        "button": "Assign MIDI"
+      }
+    },
+    {
+      "action": "Browser pointer click Assign MIDI then Enabled checkbox",
+      "observed": {
+        "aria_pressed": "true",
+        "enabled": true,
+        "status": "Selected Video image overlay on. Move or press an input; Enter removes 1 mapping(s)."
+      }
+    },
+    {
+      "action": "Browser pointer click Opacity then ArrowDown",
+      "observed": {
+        "opacity": "1",
+        "status": "Selected Video image overlay opacity. Move or press an input; Enter removes 1 mapping(s)."
+      }
+    },
+    {
+      "action": "Browser key Escape from Opacity",
+      "observed": {
+        "aria_pressed": "false",
+        "focus_restored_to_mode_button": true,
+        "status": "MIDI assignment cancelled with Escape."
+      }
+    },
+    {
+      "action": "Assign MIDI, choose Opacity, browser key Enter",
+      "observed": {
+        "status": "Removed 1 mapping(s) for Video image overlay opacity. Move an input to reassign."
+      }
+    },
+    {
+      "action": "Escape, close editor, inspect actual MIDI mapping list",
+      "observed": {
+        "remaining_mappings": 28,
+        "selected_image_opacity_target_absent": true,
+        "text_opacity_target_retained": true
+      }
+    },
+    {
+      "action": "Open right image editor; select Scroll Left-Right and Fast through browser controls",
+      "observed": {
+        "option": "Fast",
+        "numeric_speed": "2",
+        "preset_name": "image Named A"
+      }
+    }
+  ],
+  "source_hashes": [
+    {
+      "path": "prototype/video-controls.js",
+      "sha256": "e332bd877adcbb2a80050c800107672107b6cbdb854ba528dd5afdf426f944a5"
+    },
+    {
+      "path": "prototype/video-overlay-midi.js",
+      "sha256": "b02150ca166d8c44ecdf932f1a1615f2c2217873f93802bc258b9ca0f1b5959f"
+    },
+    {
+      "path": "prototype/video-state.js",
+      "sha256": "fd23bffefc1dbc5411f604e467b960fc209c311fdf0eb21bb97a7e8f615bb548"
+    },
+    {
+      "path": "prototype/video-midi-assignment-ui.js",
+      "sha256": "e7943f249f0b67e1e70018bc4d050a237bc8c1a39407a2808950b74c43aedc2b"
+    },
+    {
+      "path": "prototype/panels.js",
+      "sha256": "0515787f6b8ef326d11133b8cdd6d80972807ad8ef03d0b26ad3a62b7fb0d171"
+    },
+    {
+      "path": "prototype/midi.js",
+      "sha256": "6bff54eef394a4af04e82b1b3f33ed1d6bf902b94002b5cab3975581aa1bcff6"
+    },
+    {
+      "path": "prototype/video-midi.js",
+      "sha256": "9346f0a9ec28ddd1166fdd5b57a657409f3212550dde9b17ae712aaafbf715eb"
+    }
+  ],
+  "screenshot": {
+    "path": "docs/prototype/screenshots/overlay-matrix-final-controls-20261017.png",
+    "sha256": "531def4f7476f7cd2abf3916b8e3ec81a2769e2ac71790ba0776674f256af8a9"
+  },
+  "limits": [
+    "These exact browser pointer/key paths, not physical DJ-controller input, native/OS coverage, screen-reader acceptance, every default action or current Serato equivalence.",
+    "The 29-map matrix reports precede the deliberate unassign smoke; the live owned test tab then had28 maps. Original reports were not rewritten."
+  ],
+  "locator_note": "First unscoped Assign MIDI locator matched two controls and failed before any click. Scoped dialog locator then executed each recorded action."
+}

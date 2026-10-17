@@ -1,0 +1,83 @@
+{
+  "scope": "Actual editor-render/callback, overlay controller, router and mixer with bounded document/storage collaborators. No browser pixels/events/native/hardware/reference transfer.",
+  "passed": 2,
+  "failed": 2,
+  "checks": [
+    {
+      "name": "MIDI animation-option Fast is represented by the real editor label selection",
+      "passed": false,
+      "evidence": {
+        "numericSpeed": 2,
+        "options": "<option value=\"\">Custom numeric value</option><option value=\"Slow\" >Slow</option><option value=\"Medium\" >Medium</option><option value=\"Fast\" >Fast</option>"
+      },
+      "error": "Numeric Fast must not be presented as Custom"
+    },
+    {
+      "name": "MIDI Save agrees with the visible Preset name used by the real GUI Save button",
+      "passed": false,
+      "evidence": {
+        "afterMIDI": [
+          "Layer A"
+        ],
+        "afterGUI": [
+          "Layer A",
+          "Performance Name"
+        ]
+      },
+      "error": "MIDI Save must use the visible selected-overlay preset name, as GUI Save does"
+    },
+    {
+      "name": "Open image editor cannot replace the independently MIDI-selected text identity",
+      "passed": true,
+      "evidence": {
+        "selection": {
+          "text": {
+            "target": "master",
+            "id": "t2"
+          },
+          "image": {
+            "target": "master",
+            "id": "i1"
+          }
+        },
+        "opacities": [
+          1,
+          0,
+          1
+        ],
+        "afterRoute": {
+          "text": {
+            "target": "left",
+            "id": "t2"
+          },
+          "image": {
+            "target": "master",
+            "id": "i1"
+          }
+        }
+      }
+    },
+    {
+      "name": "Text MIDI on/save/load/route preserve identity and the other-kind selection; missing image On still refuses",
+      "passed": true,
+      "evidence": {
+        "restored": {
+          "id": "t1",
+          "text": "ONE",
+          "on": true
+        },
+        "target": "right",
+        "otherKindSelection": {
+          "target": "master",
+          "id": "i1"
+        }
+      }
+    }
+  ],
+  "sourceHashes": {
+    "prototype/video-controls.js": "f493af06dfbd23cf827e33eacf1b63462eb4ecf451b08a40f9ca138a8413ecda",
+    "prototype/video-overlay-midi.js": "2677e3f57f67cff6a2e422bb383638d631aae70a7cb56257a052381f33627e11",
+    "prototype/video-midi.js": "9346f0a9ec28ddd1166fdd5b57a657409f3212550dde9b17ae712aaafbf715eb",
+    "prototype/video.js": "d09978db2178d009281ff38ab8923d33e2c18a5129c8188f7d4066db92f15823"
+  }
+}

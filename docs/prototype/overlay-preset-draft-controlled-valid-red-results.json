@@ -1,0 +1,43 @@
+{
+  "date": "2026-10-17T14:23:55.450Z",
+  "scope": "Actual shared overlay controller/storage and metadata snapshot helpers with a bounded relocation collaborator; no browser, pixels, native, hardware or reference acceptance.",
+  "passed": 0,
+  "failed": 6,
+  "checks": [
+    {
+      "name": "Typed preset draft is the default MIDI save name",
+      "passed": false,
+      "error": "h.controller.setPresetDraft is not a function"
+    },
+    {
+      "name": "Empty typed name refuses save without replacing existing presets",
+      "passed": false,
+      "error": "h.controller.setPresetDraft is not a function"
+    },
+    {
+      "name": "Same-layer render and route retain a typed draft; selecting a new layer resets its name",
+      "passed": false,
+      "error": "h.controller.setPresetDraft is not a function"
+    },
+    {
+      "name": "Text and image draft names remain independent",
+      "passed": false,
+      "error": "h.controller.setPresetDraft is not a function"
+    },
+    {
+      "name": "Metadata snapshot restores typed and empty draft names without enabling images",
+      "passed": false,
+      "error": "h.controller.setPresetDraft is not a function"
+    },
+    {
+      "name": "Draft validation refuses unsupported kinds and oversized values without changing metadata",
+      "passed": false,
+      "error": "Expected values to be strictly equal:\n+ actual - expected\n\n+ 'undefined'\n- 'function'\n"
+    }
+  ],
+  "sourceHashes": {
+    "prototype/video-overlay-midi.js": "2677e3f57f67cff6a2e422bb383638d631aae70a7cb56257a052381f33627e11",
+    "prototype/video-controls.js": "f493af06dfbd23cf827e33eacf1b63462eb4ecf451b08a40f9ca138a8413ecda",
+    "prototype/video-state.js": "5207f031efcb72f683fd7aecd36a6747bf52d3ed229d60cfd1cca83a740f0e0e"
+  }
+}

@@ -27,10 +27,20 @@ The overlay draft adds28 targets to the44 core Video targets and a shared select
 
 Actual browser testing then exposed a sixth defect: a queued close event from an older MIDI dialog cancelled a new panel assignment. The correction scopes cancellation to the view owning the current assignment. All red reports, fixture errors and the invalid repeated-run attempt are retained. Browser subset results are recorded separately in [the overlay review](../prototype/VIDEO_OVERLAY_MIDI_FUNCTIONAL_REVIEW.md); they never establish all 72 targets, full REQ-516, reference sonics, physical MIDI or native acceptance.
 
+## New default-CC overlay matrix
+
+The newer [functional matrix review](../prototype/VIDEO_OVERLAY_MIDI_MATRIX_REVIEW.md) now supplies executed default 7-bit CC browser witnesses for all 28 overlay targets:21 initial checks and5 actual-reload checks,29 saved mappings and115 wholeoutputPNGs. Both text/image kinds exercise selection, On, geometry, all 7 animation families/named options, actual reactive analysis, all 3 routes with visible right, MIDI preset save/select/load, missing-byte reimport and reload. A non-first text selection survives reopening an image editor; its rendered green pixels527 → 0 when its opacity is changed.
+
+Three further reproduced defects were corrected: named options displaying Custom, MIDI Save ignoring the visible typed name and editor reopen replacing another selected owner. Per-layer drafts now survive metadata reload without leaking into presets. Independent artifact inspection corroborates all115 PNGs,345 mask records,48 predicates,29mappings and16 current source hashes. Actual browser pointer/key smoke separately confirms default suppression, Escape focus and targeted Enter unassign. All failed and weaker test predecessors remain preserved with clear scopes.
+
+These results close the listed defaultCC happy-path evidence gaps; they do not establish every encoding/compound/error/resource/Reduced Motion case, all 72 Video/full REQ-516/26 manual groups, native, physical or current-reference equivalence. The older9+3overlay and14+4coreVideo runs retain original candidate identities. The desktop0.1.5 package is unchanged.
+
 ## Done and re-entry
 
-The real Done criterion is that every reconciled requirement executes on the identified deliverable with the expected visible/audio/storage/device outcome, including failures and compound states. That criterion has not been met.
+The real Done criterion is that every reconciled requirement executes on the identified deliverable with the expected visible/audio/storage/device outcome, including failures and compound states. That criterion has not been met. No full-feature, requirement or release-case parity pass is awarded; nine beta deltas remain separately scoped. Counts describe evidence accounting, not a completion percentage.
 
-Now: preserve the corrected overlay work and exact browser evidence. Next: finish text, selection/size/position/animation/preset and keyboard/pointer workflows, remaining core commands and full REQ-516; then package an approved local desktop candidate and execute native MIDI/reload/audio checks. Later: the broader backend, DSP-quality, visual and hardware gaps above. Preserve old packages, failed PCM/quality evidence, original prompt and per-feature routing. Full Claude completeness audit remains unlaunched.
+Now: preserve the corrected matrix and synchronize the plan/private records/Claude handoff. Next: remaining core Video commands and complete encoding/assignment/hold/conflict/error/resource/Reduced Motion workflows, full REQ-516/26 manual groups; then preserve 0.1.5 and package an approved local desktop candidate for actual native MIDI/reload/audio. Later: the broader backend, DSP-quality, visual and hardware gaps above. Full Claude completeness audit remains unlaunched; the updated handoff retains the original prompt byte-exact.
 
-Skills applied: use, gap-analysis, dec-quality-testing, adversarial-verify, verified-done.
+Skills applied: use, gap-analysis, dec-quality-testing, adversarial-verify, claude-codex-handoff, verified-done.
+
+Independent final accounting review: docs/research/CURRENT_PARITY_OVERLAY_MATRIX_CANDIDATE_REVIEW_20261017.md verifies current/historical source cohorts, raw evidence hashes, 157 audit and 28 feature-check input snapshots, unchanged native ASAR and unpromoted parity flags. No material issue found within that bounded review; it does not execute full parity.

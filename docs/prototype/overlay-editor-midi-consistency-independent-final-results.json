@@ -1,0 +1,124 @@
+{
+  "scope": "Actual editor-render/callback, overlay controller, router and mixer with bounded document/storage collaborators. No browser pixels/events/native/hardware/reference transfer.",
+  "passed": 8,
+  "failed": 0,
+  "checks": [
+    {
+      "name": "MIDI animation-option Fast is represented by the real editor label selection",
+      "passed": true,
+      "evidence": {
+        "numericSpeed": 2,
+        "options": "<option value=\"\">Custom numeric value</option><option value=\"Slow\" >Slow</option><option value=\"Medium\" >Medium</option><option value=\"Fast\" selected>Fast</option>"
+      }
+    },
+    {
+      "name": "MIDI Save agrees with the visible Preset name used by the real GUI Save button",
+      "passed": true,
+      "evidence": {
+        "afterMIDI": [
+          "Performance Name"
+        ],
+        "afterGUI": [
+          "Performance Name"
+        ]
+      }
+    },
+    {
+      "name": "Open image editor cannot replace the independently MIDI-selected text identity",
+      "passed": true,
+      "evidence": {
+        "selection": {
+          "text": {
+            "target": "master",
+            "id": "t2"
+          },
+          "image": {
+            "target": "master",
+            "id": "i1"
+          }
+        },
+        "opacities": [
+          1,
+          0,
+          1
+        ],
+        "afterRoute": {
+          "text": {
+            "target": "left",
+            "id": "t2"
+          },
+          "image": {
+            "target": "master",
+            "id": "i1"
+          }
+        }
+      }
+    },
+    {
+      "name": "Text MIDI on/save/load/route preserve identity and the other-kind selection; missing image On still refuses",
+      "passed": true,
+      "evidence": {
+        "restored": {
+          "id": "t1",
+          "text": "ONE",
+          "on": true
+        },
+        "target": "right",
+        "otherKindSelection": {
+          "target": "master",
+          "id": "i1"
+        }
+      }
+    },
+    {
+      "name": "Typed preset draft remains specific to its layer/kind through routing and state restore, not preset metadata",
+      "passed": true,
+      "evidence": {
+        "firstNames": [
+          "Text A Draft"
+        ],
+        "names": [
+          "Text A Draft",
+          "Layer B"
+        ],
+        "restoredDrafts": {
+          "text": "Text A Draft",
+          "image": "Image Draft"
+        }
+      }
+    },
+    {
+      "name": "An explicitly cleared visible preset draft rejects MIDI Save instead of silently using the layer name",
+      "passed": true,
+      "evidence": {
+        "error": "Give this overlay a preset name first.",
+        "records": []
+      }
+    },
+    {
+      "name": "Reactive option labels follow normalized intensity and genuine custom speed remains Custom",
+      "passed": true,
+      "evidence": {
+        "intensity": 0.35,
+        "options": "<option value=\"\">Custom numeric value</option><option value=\"Subtle\" selected>Subtle</option><option value=\"Noticeable\" >Noticeable</option><option value=\"Over the Top\" >Over the Top</option>",
+        "custom": 0.71,
+        "label": ""
+      }
+    },
+    {
+      "name": "Draft state accepts only own bounded strings without invoking accessors or coercion",
+      "passed": true,
+      "evidence": {
+        "getterPresent": false,
+        "accessorCalls": 0
+      }
+    }
+  ],
+  "sourceHashes": {
+    "prototype/video-controls.js": "b36a439ae26620417b4cf1fefdb20438bee01e64dd41239d39dea8623e4e42df",
+    "prototype/video-overlay-midi.js": "b02150ca166d8c44ecdf932f1a1615f2c2217873f93802bc258b9ca0f1b5959f",
+    "prototype/video-midi.js": "9346f0a9ec28ddd1166fdd5b57a657409f3212550dde9b17ae712aaafbf715eb",
+    "prototype/video.js": "d09978db2178d009281ff38ab8923d33e2c18a5129c8188f7d4066db92f15823",
+    "prototype/video-state.js": "fd23bffefc1dbc5411f604e467b960fc209c311fdf0eb21bb97a7e8f615bb548"
+  }
+}

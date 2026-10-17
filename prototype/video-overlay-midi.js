@@ -13,6 +13,17 @@ export function createVideoOverlayMIDI({state,videoMixer,storage=globalThis.loca
     const candidates=all(kind),selected=v.midiOverlaySelection?.[kind];
     return candidates.find(x=>x.target===selected?.target&&x.spec.id===selected?.id)||candidates[0]||null;
   }
+  function presetDraft(kind) {
+    if(!kinds.includes(kind))throw new RangeError('Unknown overlay kind.');
+    const spec=current(kind)?.spec;
+    return spec?.presetDraftName ?? spec?.name ?? '';
+  }
+  function setPresetDraft(kind,name) {
+    if(!kinds.includes(kind))throw new RangeError('Unknown overlay kind.');
+    if(typeof name!=='string'||name.length>128)throw new TypeError('Preset names must be text of at most128characters.');
+    const spec=current(kind)?.spec;if(!spec)throw new Error(`Add a ${kind} overlay first.`);
+    spec.presetDraftName=name;
+  }
   function activate(target,id) {
     const matches=v.overlays?.[target]?.filter(x=>x.id===id)||[];
     if(matches.length!==1)throw new Error('Choose a unique overlay identity; this selection is absent or ambiguous.');
@@ -58,11 +69,11 @@ export function createVideoOverlayMIDI({state,videoMixer,storage=globalThis.loca
       const index=Math.max(0,entries.findIndex(x=>x.name===v.midiOverlayPresetNames?.[kind]));
       const next=entries[chooseIndex(index,entries.length,value,relative)];v.midiOverlayPresetNames||={};v.midiOverlayPresetNames[kind]=next.name;
     }else if(action==='save preset') {
-      const name=(options.name??spec.name??`${kind} overlay`).trim().slice(0,128);if(!name)throw new Error('Give this overlay a preset name first.');
+      const name=(options.name??presetDraft(kind)).trim().slice(0,128);if(!name)throw new Error('Give this overlay a preset name first.');
       const entries=presets(),record={name,metadata:videoOverlayPresetMetadata(spec)},index=entries.findIndex(x=>x.name===name);
       if(index>=0)entries[index]=record;else entries.push(record);
       if(!storage?.setItem)throw new Error('Local overlay preset storage is unavailable.');
-      storage.setItem(storageKey,JSON.stringify(entries));v.midiOverlayPresetNames||={};v.midiOverlayPresetNames[kind]=name;
+      storage.setItem(storageKey,JSON.stringify(entries));v.midiOverlayPresetNames||={};v.midiOverlayPresetNames[kind]=name;spec.presetDraftName=name;
     }else if(action==='load preset') {
       const entries=presets(kind),saved=entries.find(x=>x.name===v.midiOverlayPresetNames?.[kind])||entries[0];
       if(!saved)throw new Error(`Save or select a ${kind} preset first.`);
@@ -72,9 +83,9 @@ export function createVideoOverlayMIDI({state,videoMixer,storage=globalThis.loca
         if(v.overlays[target].some(x=>x!==spec&&x.kind==='image'&&(x.imageRef||x.id)===ref))throw new Error('A shared image reference must be separated before preset reload.');
         videoMixer.clearOverlayImage(target,ref);
       }
-      v.overlays[target][index]={...restored,id:spec.id,imageRef:kind==='image'?ref:null,on:kind==='image'?false:restored.on};
+      v.overlays[target][index]={...restored,id:spec.id,presetDraftName:saved.name,imageRef:kind==='image'?ref:null,on:kind==='image'?false:restored.on};
     }else throw new RangeError('Unknown overlay MIDI action.');
     return current(kind);
   }
-  return {current,activate,dispatch,presets,choosePreset};
+  return {current,activate,presetDraft,setPresetDraft,dispatch,presets,choosePreset};
 }
