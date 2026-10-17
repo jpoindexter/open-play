@@ -5,17 +5,17 @@ import {createJogBend} from './jog-bend.js';
 import {createMIDIJogTouch} from './midi-jog-touch.js';
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 const key=m=>JSON.stringify([m.deviceId||'',m.type,m.channel,m.number]);
-const continuous=['tempo','trim','high','mid','low','filter','level','jog nudge','jog bend','jog surface'];
+const continuous=['fader start','tempo ignore','tempo','trim','high','mid','low','filter','level','jog nudge','jog bend','jog surface'];
 const padCommands=['auto loop','loop roll','stems','pitch play','pitch cue select'].flatMap(mode=>Array.from({length:8},(_,i)=>`${mode} pad ${i+1}`));
 const manualCommands=Array.from({length:7},(_,n)=>`manual loop pad ${n+1}`);
 const scratchCommands=Array.from({length:8},(_,n)=>[`scratch bank pad ${n+1}`,`scratch bank previous pad ${n+1}`]).flat();
-const commands=['instant double','auto loop four',...manualCommands,...scratchCommands,...padCommands,'load','play','cue','sync','sync off','headphone cue','loop','loop in','loop out','loop half','loop double','keylock','jog touch','jog touch fast','vinyl','slip','quantize','tempo range','previous','stutter'];
+const commands=['tap tempo','instant double','auto loop four',...manualCommands,...scratchCommands,...padCommands,'load','play','cue','sync','sync off','headphone cue','loop','loop in','loop out','loop half','loop double','keylock','jog touch','jog touch fast','vinyl','slip','quantize','tempo range','previous','stutter'];
 export const deckMIDITargets=Array.from({length:4},(_,i)=>[...continuous,...commands,...Array.from({length:8},(_,n)=>`hot cue ${n+1}`),...Array.from({length:8},(_,n)=>`clear cue ${n+1}`)].map(x=>`Deck ${i+1} ${x}`)).flat();
 export const samplerMIDITargets=Array.from({length:8},(_,n)=>[`Sampler ${n+1}`,`Sampler ${n+1} alt`]).flat();
 export const libraryMIDITargets=['Library browse','Library fast browse','Library focus','Prepare add','Prepare open'];
 export const fxMIDITargets=[1,2].flatMap(n=>['depth','beat','enable','select','next'].map(x=>`FX unit ${n} ${x}`));
 export function createDeckMIDIRouter({state,engine,actions,applyFX=()=>{},onChange=()=>{},onStatus=()=>{}}){
- const pairs=new Map(),buttons=new Map(),pickup=new Map(),rates=new Map(),nudges=new Map(),loads=new Map();
+ const pairs=new Map(),buttons=new Map(),pickup=new Map(),rates=new Map(),nudges=new Map(),loads=new Map(),ignoredTempo=new Map();
  const jogBend=createJogBend({engine,onError:error=>onStatus(error.message)});
  const jogTouch=createMIDIJogTouch({engine,state,beforeBegin:deck=>jogBend.resetDeck(deck.index),onError:error=>onStatus(error.message)});
  const deckFor=target=>/^Deck ([1-4]) (.+)$/.exec(target);
@@ -91,6 +91,7 @@ export function createDeckMIDIRouter({state,engine,actions,applyFX=()=>{},onChan
    if(buttons.has(key(message)))return true;
    const hot=/^hot cue ([1-8])$/.exec(action),clear=/^clear cue ([1-8])$/.exec(action),cue=action==='cue'||!!hot;
    const held={owner,cue,deviceId:message.deviceId||'',release:null};buttons.set(key(message),held);
+   if(action==='tap tempo'){await actions.tapTempo(d,message.timestamp);return true;}
    if(action==='instant double'){await actions.instantDouble(d.index);return true;}
    if(action==='auto loop four'){const started=actions.loopPads.press(d,'auto',5,{length:4,ignoreBeatJump:true});await started.pending;return true;}
    if(action==='load'){
@@ -138,10 +139,13 @@ export function createDeckMIDIRouter({state,engine,actions,applyFX=()=>{},onChan
   if(!Number.isFinite(value))throw new RangeError('MIDI control needs a finite value.');
   const center=mapping.encoding==='14-bit absolute'||message.type==='Pitch bend'?8192/16383:64/127;
   const bipolar=x=>x<center?(x-center)/center:(x-center)/(1-center);
-  if(action==='tempo'){
+  if(action==='tempo'||action==='tempo ignore'){
    const range=Number(d.pitchRange)||8;
    const requested=relative?d.rate+value*.0001:1+bipolar(value)*range/100;
-   const id=key(mapping.encoding==='14-bit absolute'&&message.type==='CC'?{...message,number:message.number%32}:message),previous=pickup.get(id),physical=requested;
+   const id=key(mapping.encoding==='14-bit absolute'&&message.type==='CC'?{...message,number:message.number%32}:message),physical=requested;
+   if(action==='tempo ignore'){ignoredTempo.set(d.index,{deviceId:message.deviceId||'',physical,caught:false,applied:d.rate});onStatus(`Deck ${d.index+1} tempo motion ignored; pickup armed.`);return true;}
+   let previous=pickup.get(id);const ignored=ignoredTempo.get(d.index);
+   if(ignored?.deviceId===(message.deviceId||'')){previous=ignored;ignoredTempo.delete(d.index);pickup.set(id,ignored);}
    // After software/Sync moves tempo, an absolute fader must cross it before
    // taking over. No surprise shared-tempo jump from its first stale value.
    const tolerance=range/100/63;
@@ -173,6 +177,11 @@ export function createDeckMIDIRouter({state,engine,actions,applyFX=()=>{},onChan
    q={track:d.track,position:clamp(engine.position(d)+value*.01,0,d.track.duration),revision:1,promise:null};nudges.set(d.index,q);
    q.promise=Promise.resolve().then(async()=>{let sent=0;while(sent!==q.revision&&d.track===q.track){sent=q.revision;await engine.seek(d,q.position);}}).finally(()=>{if(nudges.get(d.index)===q)nudges.delete(d.index);});return q.promise;
   }
+  if(action==='fader start'){
+   if(relative||message.type==='Note')throw Error('Fader Start needs an absolute continuous fader.');
+   const previous=d.level??.8,next=clamp(value,0,1);d.level=next;engine.mix(d.index,'level',next);repaintMix(d,'level');
+   await actions.faderStart(d,next,previous,message.deviceId||'');return true;
+  }
   let next;
   if(action==='level')next=relative?(d.level??.8)+value/127:value;
   else if(action==='trim')next=relative?(d.trim??1)+value/64:1+bipolar(value);
@@ -182,6 +191,8 @@ export function createDeckMIDIRouter({state,engine,actions,applyFX=()=>{},onChan
   d[action]=clamp(next,lo,hi);engine.mix(d.index,action,d[action]);repaintMix(d,action);return true;
  }
  function resetInput(deviceId){
+  actions.resetFaderStartInput?.(deviceId);
+  for(const [index,ignored]of ignoredTempo)if(deviceId===undefined||ignored.deviceId===deviceId)ignoredTempo.delete(index);
   void jogTouch.resetInput(deviceId).catch(error=>onStatus(error.message));
   void jogBend.resetInput(deviceId).catch(error=>onStatus(error.message));
   for(const [k,b]of buttons)if(deviceId===undefined||b.deviceId===deviceId){buttons.delete(k);if(b.release)void Promise.resolve(b.release()).catch(error=>onStatus(error.message));if(b.cue)void actions.cueHolds.release(b.owner,{immediate:true}).catch(error=>onStatus(error.message));}
@@ -192,12 +203,13 @@ export function createDeckMIDIRouter({state,engine,actions,applyFX=()=>{},onChan
 
 export function herculesPlaybackMappings(deviceId){
  if(!deviceId)throw Error('Connect the named Hercules input before installing its controls.');
- const maps=[],add=(target,type,channel,number,encoding='7-bit absolute',extra={})=>maps.push({target,type,channel,number,encoding,deviceId,preset:'hercules-inpulse-300-mk2-playback-v8',...extra});
+ const maps=[],add=(target,type,channel,number,encoding='7-bit absolute',extra={})=>maps.push({target,type,channel,number,encoding,deviceId,preset:'hercules-inpulse-300-mk2-playback-v9',...extra});
  add('Library browse','CC',1,1,'Relative two’s complement');add('Library fast browse','CC',4,1,'Relative two’s complement');add('Library focus','Note',1,0);add('Prepare add','Note',1,3);add('Prepare open','Note',4,3);add('Crossfader','CC',1,0);
  for(let deck=1;deck<=2;deck++){
   const ch=deck+1,t=s=>`Deck ${deck} ${s}`;
   for(const [name,n]of [['level',0],['filter',1],['low',2],['mid',3],['high',4],['trim',5]])add(t(name),'CC',ch,n);
   add(t('tempo'),'CC',ch,8,'14-bit absolute',{pickup:true});
+  add(t('tempo ignore'),'CC',ch+3,8,'14-bit absolute');add(t('fader start'),'CC',ch+3,0);add(t('tap tempo'),'Note',ch+3,12);
   add(`FX unit ${deck} depth`,'CC',ch,6);add(`FX unit ${deck} beat`,'CC',ch,7);add(`FX unit ${deck} enable`,'Note',ch,0);add(`FX unit ${deck} next`,'Note',ch+3,0);add(`FX unit ${deck} select`,'CC',ch+3,6);
   add(t('jog bend'),'CC',ch,9,'Relative two’s complement');
   add(t('jog surface'),'CC',ch,10,'Relative two’s complement');

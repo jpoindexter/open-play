@@ -1,3 +1,4 @@
+import {createDeckTapTempo} from './deck-tap-tempo.js';
 import {createInstantDouble} from './instant-double.js';
 import {createManualLoops} from './manual-loops.js';
 import {createLoopPads} from './loop-pads.js';
@@ -569,6 +570,28 @@ async function ensurePreparedStems(track) {
   }
 }
 const deckLoadRequests = new WeakMap();
+const faderStarts=new Map();
+async function faderStart(d,value,previous,deviceId=''){
+  if(!d.track)return;
+  if(value===0){
+    const active=faderStarts.get(d.index);
+    if(active)active.wanted=false;
+    if(!d.playing&&!d.processing&&!active){d.cue=engine.position(d);renderDecks();return;}
+    engine.pause(d);await engine.seek(d,d.cue);renderDecks();return;
+  }
+  if(previous>0)return;
+  const owner={track:d.track,deviceId,wanted:true,token:null};faderStarts.set(d.index,owner);
+  const seeking=engine.seek(d,d.cue);owner.token=engine.startTokens.get(d.index);await seeking;
+  if(faderStarts.get(d.index)!==owner||!owner.wanted||d.track!==owner.track||engine.startTokens.get(d.index)!==owner.token||d.playing||d.processing)return;
+  const starting=engine.start(d);owner.token=engine.startTokens.get(d.index);await starting;renderDecks();
+}
+function resetFaderStartInput(deviceId){
+  for(const [index,owner]of faderStarts)if(deviceId===undefined||owner.deviceId===deviceId){
+    faderStarts.delete(index);owner.wanted=false;const d=state.decks[index];
+    if(d.track===owner.track&&d.processing&&engine.startTokens.get(index)===owner.token)engine.pause(d);
+  }
+}
+
 async function stemPad(d, pad) {
   if (!Number.isInteger(pad) || pad < 0 || pad > 7) throw new RangeError("Unknown Stem pad.");
   if (!d.track) return notify("Load a track first.");
@@ -597,6 +620,7 @@ async function load(index, id = state.selected, options = {}) {
   const syncBefore = {engaged:!!d.sync, role:d.syncRole, bpm:(d.track?.bpm || 0)*d.rate};
   const request = (deckLoadRequests.get(d) || 0) + 1;
   deckLoadRequests.set(d, request);
+  faderStarts.delete(d.index);
   const old = d.track ? { id: d.track.id, position: engine.position(d) } : null;
   deckScratchControls.cancelDeck(d);
   pitchPlay.cancelDeck(d);
@@ -746,6 +770,7 @@ async function deckAction(action, index, el, event = {}) {
   if (action === "eject") {
     const request = (deckLoadRequests.get(d) || 0) + 1;
     deckLoadRequests.set(d, request);
+    faderStarts.delete(d.index);
     deckScratchControls.cancelDeck(d);
     pitchPlay.cancelDeck(d);
   loopPads.cancelDeck(d);
@@ -1168,6 +1193,7 @@ function reset() {
   localStorage.removeItem("openplay-review-v1");
   location.reload();
 }
+const deckTapTempo=createDeckTapTempo({engine,persist,render:()=>{renderDecks();renderTracks();},notify});
 const instantDouble=createInstantDouble({state,engine,load,render:renderDecks,notify});
 const api = {
   state,
@@ -1193,6 +1219,10 @@ const api = {
   play,
   deckAction,
   instantDouble,
+  faderStart,
+  resetFaderStartInput,
+  tapTempo:deckTapTempo.tap,
+  deckTapTempo,
   selectCrate,
   setDeckKeyShift,
   keyShiftIntent,

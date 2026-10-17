@@ -111,7 +111,7 @@ if __name__ == '__main__':
     args = parser.parse_args()
     server = ThreadingHTTPServer(('127.0.0.1', args.port), ReviewHandler)
     print(f'Open Play review: http://127.0.0.1:{args.port}/prototype/', flush=True)
-    print('Control-C stops the server. Native implementation remains unapproved.', flush=True)
+    print('Control-C stops the server. Local desktop testing is approved; full parity remains unverified.', flush=True)
     if args.open_browser:
         webbrowser.open(f'http://127.0.0.1:{args.port}/prototype/')
     try:

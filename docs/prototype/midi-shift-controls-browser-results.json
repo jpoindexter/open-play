@@ -1,0 +1,239 @@
+{
+  "startedAt": "2026-10-17T22:37:07.357Z",
+  "completed": true,
+  "scope": "Actual app MIDI editor with synthetic messages, Shift transport/tempo actions and complete master recording. No physical/native/full cold/compound/reference acceptance.",
+  "criteria": {
+    "frequencyErrorHz": 0.8,
+    "playingMinimumRMS": 0.005,
+    "silentMaximumRMS": 0.0001,
+    "tapBPMTolerance": 0.05
+  },
+  "events": [
+    {
+      "name": "cancelled-start-silent",
+      "time": 0.1393197278911565
+    },
+    {
+      "name": "fader-start-playing",
+      "time": 0.39473922902494335
+    },
+    {
+      "name": "fader-back-cue-silent",
+      "time": 0.6733786848072563
+    },
+    {
+      "name": "ignored-tempo-stable",
+      "time": 0.91718820861678
+    },
+    {
+      "name": "picked-up-tempo",
+      "time": 1.1668027210884353
+    },
+    {
+      "name": "tap-updated-metadata-same-audio",
+      "time": 2.647074829931973
+    }
+  ],
+  "checks": [
+    "Early fader return cancels without late playback; raise plays temp cue and bottom back-cues",
+    "Ignored paired14bit motion keeps tempo, normal fader requires pickup before actual pitch change",
+    "Tap BPM compensates actual rate/octave cadence, persists metadata without PFL or audio-rate change",
+    "Locked-grid Tap refuses changes; whole master recording matches declared phases"
+  ],
+  "errors": [],
+  "sourceBefore": {
+    "app.js": "1b8b7fb4c8944e75911b0e3eede0f4c5571f4234bb0af96130efa0f0fcae866b",
+    "engine.js": "c0f7fa915938ab416137807a4345878d290110dcdfce23283e46c1e665eec6b1",
+    "panels.js": "4a4b4c544f07140758cfd8f45b00f774dea588f881d6ed0f24c0e19bc1ff02fb",
+    "deck-midi.js": "3fea60ceea5bfdb0c6f2dbfe1e8353f4f2c2ea4facab00c8619ef2da046cd701",
+    "midi.js": "0cabb6dbe98e9eb3f7bc7f7eb44615fa315a0738260e5f3568a34d0aa75ec1ad",
+    "deck-tap-tempo.js": "d9e796ec29327a83a210acd4ae89a819f0628adae8b088eee707edfbfc7d8fb1",
+    "fx-tempo.js": "6417ffdaaf05334b906ef22c4e6f10ab90950068796b797ec323a819d838a380",
+    "midi-shift-controls-harness.js": "7a0e27442ee9d09b331adeecb471a62a3cb74b17229670e4d355cc72de08f330"
+  },
+  "cancelledStart": {
+    "playing": false,
+    "processing": false,
+    "hasVoice": false
+  },
+  "faderStart": {
+    "cue": 1,
+    "position": 1.001609977324263,
+    "level": 0.7874015748031497
+  },
+  "backCue": {
+    "playing": false,
+    "position": 1
+  },
+  "ignored": {
+    "rate": 1,
+    "notice": "Deck 2: move tempo fader through 0.0% to pick it up."
+  },
+  "pickedUp": {
+    "rate": 1.0200024417043096
+  },
+  "tap": {
+    "timestamps": [
+      7500.6,
+      7901.2,
+      8710.1
+    ],
+    "expectedSourceBPM": 146.14,
+    "sourceBPM": 146.14,
+    "rate": 1.0200024417043096,
+    "pfl": false,
+    "metadataSource": "manual"
+  },
+  "lockedTapPreserved": true,
+  "recording": {
+    "bytes": 46673,
+    "format": "audio/webm;codecs=opus",
+    "sha256": "e6c6358ba867928a010d77d3a871f1cf85af834f0de803e44e31bd6fc7b7db73"
+  },
+  "decoded": {
+    "duration": 2.8799773242630384,
+    "sampleRate": 44100,
+    "frames": 127007,
+    "channels": 2
+  },
+  "audio": [
+    {
+      "name": "cancelled",
+      "expected": [
+        null,
+        550
+      ],
+      "channels": [
+        {
+          "from": 0.19931972789115648,
+          "to": 0.3293197278911565,
+          "rms": 1.3529979793266724e-15,
+          "hz": 49.99906903482363
+        },
+        {
+          "from": 0.19931972789115648,
+          "to": 0.3293197278911565,
+          "rms": 0.0373018286589536,
+          "hz": 550.0070190733418
+        }
+      ]
+    },
+    {
+      "name": "fader-start",
+      "expected": [
+        440,
+        550
+      ],
+      "channels": [
+        {
+          "from": 0.45473922902494335,
+          "to": 0.5847392290249434,
+          "rms": 0.03674573003467396,
+          "hz": 440.00292453513373
+        },
+        {
+          "from": 0.45473922902494335,
+          "to": 0.5847392290249434,
+          "rms": 0.03743006386149236,
+          "hz": 549.9914453775982
+        }
+      ]
+    },
+    {
+      "name": "back-cue",
+      "expected": [
+        null,
+        550
+      ],
+      "channels": [
+        {
+          "from": 0.7333786848072563,
+          "to": 0.8633786848072562,
+          "rms": 3.7527795345493573e-07,
+          "hz": null
+        },
+        {
+          "from": 0.7333786848072563,
+          "to": 0.8633786848072562,
+          "rms": 0.037380774217743745,
+          "hz": 550.0017465041626
+        }
+      ]
+    },
+    {
+      "name": "ignored",
+      "expected": [
+        null,
+        550
+      ],
+      "channels": [
+        {
+          "from": 0.97718820861678,
+          "to": 1.10718820861678,
+          "rms": 3.728988162798206e-09,
+          "hz": null
+        },
+        {
+          "from": 0.97718820861678,
+          "to": 1.10718820861678,
+          "rms": 0.03732901151247233,
+          "hz": 550.0041833835257
+        }
+      ]
+    },
+    {
+      "name": "pickup",
+      "expected": [
+        null,
+        561.0013429373703
+      ],
+      "channels": [
+        {
+          "from": 1.2268027210884354,
+          "to": 1.3568027210884352,
+          "rms": 3.337050599144402e-11,
+          "hz": null
+        },
+        {
+          "from": 1.2268027210884354,
+          "to": 1.3568027210884352,
+          "rms": 0.037338894310932576,
+          "hz": 560.9981387814894
+        }
+      ]
+    },
+    {
+      "name": "tap",
+      "expected": [
+        null,
+        561.0013429373703
+      ],
+      "channels": [
+        {
+          "from": 2.707074829931973,
+          "to": 2.837074829931973,
+          "rms": 1.5994000685752226e-15,
+          "hz": null
+        },
+        {
+          "from": 2.707074829931973,
+          "to": 2.837074829931973,
+          "rms": 0.0373366254283069,
+          "hz": 560.9992344029837
+        }
+      ]
+    }
+  ],
+  "sourceAfter": {
+    "app.js": "1b8b7fb4c8944e75911b0e3eede0f4c5571f4234bb0af96130efa0f0fcae866b",
+    "engine.js": "c0f7fa915938ab416137807a4345878d290110dcdfce23283e46c1e665eec6b1",
+    "panels.js": "4a4b4c544f07140758cfd8f45b00f774dea588f881d6ed0f24c0e19bc1ff02fb",
+    "deck-midi.js": "3fea60ceea5bfdb0c6f2dbfe1e8353f4f2c2ea4facab00c8619ef2da046cd701",
+    "midi.js": "0cabb6dbe98e9eb3f7bc7f7eb44615fa315a0738260e5f3568a34d0aa75ec1ad",
+    "deck-tap-tempo.js": "d9e796ec29327a83a210acd4ae89a819f0628adae8b088eee707edfbfc7d8fb1",
+    "fx-tempo.js": "6417ffdaaf05334b906ef22c4e6f10ab90950068796b797ec323a819d838a380",
+    "midi-shift-controls-harness.js": "7a0e27442ee9d09b331adeecb471a62a3cb74b17229670e4d355cc72de08f330"
+  },
+  "sourceStable": true,
+  "finishedAt": "2026-10-17T22:37:10.414Z"
+}
