@@ -1,0 +1,39 @@
+{
+  "date": "2026-10-17",
+  "started_at": "2026-10-17T11:50:56.183963+00:00",
+  "version": "0.1.5",
+  "immutable_prototype_source": "48a6d4dad2f217a8ba166b9ca890a287aabc4feb",
+  "ASAR_sha256": "251bcc16caf9cfb42a3967db058717373a8c6fcb9ff97d56c330058ec8301b03",
+  "app_path": "local-evidence/desktop-builds/0.1.5/Open Play Test-darwin-arm64/Open Play Test.app",
+  "executed": [
+    "Native launch shows Open Play Test0.1.5 local-audio-persistence title; HTML content retains prototype title.",
+    "Actual native chooser imports owned WAV then MP3 under distinct filenames; library8\u21929\u219210.",
+    "Files displays2 imported tracks saved locally/0 session-only;0decks playing before quit.",
+    "Actual relaunch same exact0.1.5 bundle restores both uniquely named WAV/MP3 rows without re-import; library10,0decks playing.",
+    "Files after relaunch again reports2 saved/0 session-only; correct native0.1.5 window title survives navigation/relaunch.",
+    "Native restoredWAV doubleclick loadeddeck2; deck1 remainedpaused, deck2 advanced clock, Master nonzero. NativeREC/Stop/Save capturedentire48.18s; original24second track naturallyended andtrailing silence retained.",
+    "Native restoredMP3 doubleclick loadeddeck2; deck1 remainedpaused, deck2 advanced clock, Master nonzero. NativeREC/Stop/Save capturedentire stream; expected330Hz left/550Hz right independently verified.",
+    "After tests0decks playing/Master0; window title retainsversion0.1.5."
+  ],
+  "screenshots": [
+    "docs/prototype/screenshots/desktop-0.1.5-imports-saved.png",
+    "docs/prototype/screenshots/desktop-0.1.5-restored-after-relaunch.png",
+    "docs/prototype/screenshots/desktop-0.1.5-restored-MP3-capture.png"
+  ],
+  "native_quit_reopen_verified": true,
+  "native_restored_WAV_playback_verified": true,
+  "native_restored_MP3_playback_verified": true,
+  "scope": "Executed native clean import\u2192quit\u2192reopen\u2192restore\u2192load\u2192play/capture on owned WAV and MP3 fixtures. All original capturebytes decoded; additional declared1\u20133s toneidentity oracle. Does not prove allformats/musicquality, crash/eviction/real disk-full, originaltag writes, acousticoutput/latency, newphysical0.1.5 controller acceptance or fullreferenceparity.",
+  "full_parity_verified": false,
+  "first_process_pid": 47191,
+  "quit_observation": "After actualCmdQ, ps exact executable query returned no process and lsof18768 returned no listener before relaunch.",
+  "reopened_process_pid": 47465,
+  "native_audio_context_sample_rate": 44100,
+  "master_capture_encoder_decode_rate": 48000,
+  "audio_inspections": [
+    "docs/prototype/desktop-0.1.5-WAV-audio-inspection.json",
+    "docs/prototype/desktop-0.1.5-MP3-audio-inspection.json"
+  ],
+  "completed_at": "2026-10-17T12:00:21.431254+00:00",
+  "criterion_executed": "Owned WAV and MP3 actual native import/cleanquit/reopen/load/play/internal master capture; full parity not established."
+}

@@ -1,0 +1,129 @@
+{
+  "version": "0.1.5",
+  "sourceCommit": "48a6d4dad2f217a8ba166b9ca890a287aabc4feb",
+  "approvedHTMLBaseline": "f8b0abf33c8e8468c7bec27eabc5be2930ed0086",
+  "sourceHashes": {
+    "main": "32c30cab2ee181e1dc219653e802b42d07b30c1ed6f36edd66879813641787a4",
+    "server": "2326805cd31fc2c0e8ee73a7f559b64eac64b6cef2670caa3dd1f06d30ada4ef",
+    "packager": "a1d4829715c3cd6b260bac32f92e91a5e72aa6414c8aa7ba0e482f0b461146ad",
+    "lock": "feae75369bff0f20f43bcc752e68f90248895b192a0bbc5749eb64ef025aedac"
+  },
+  "ASARSHA256": "251bcc16caf9cfb42a3967db058717373a8c6fcb9ff97d56c330058ec8301b03",
+  "endMainSHA256": "32c30cab2ee181e1dc219653e802b42d07b30c1ed6f36edd66879813641787a4",
+  "endASARSHA256": "251bcc16caf9cfb42a3967db058717373a8c6fcb9ff97d56c330058ec8301b03",
+  "passed": 10,
+  "failed": 0,
+  "scope": "Actual packaged main source evaluated with controlled Electron callbacks; actual ASAR bytes versus root-generated immutable-candidate manifest and reviewed host, exact sanitized metadata and version-normalized prior lock hash. Correct BrowserWindow event binding does not establish native title propagation. No Git, GUI, native Electron runtime, actual permission prompt, quit/reopen storage/audio playback, device or full-parity acceptance.",
+  "checks": [
+    {
+      "name": "Actual host callbacks preserve sandbox, origin, partition and selected main-frame permission boundary",
+      "passed": true,
+      "evidence": {
+        "permissions": [
+          "midi",
+          "midiSysex",
+          "speaker-selection"
+        ],
+        "partition": "persist:open-play-test",
+        "otherPermissionsDenied": 9
+      }
+    },
+    {
+      "name": "Permission behavior is unchanged from actual packaged0.1.3 host source",
+      "passed": true,
+      "evidence": {
+        "callbackTruthTableCases": 42,
+        "oldMainSHA256": "7db5b1c815ca49f2d9125c941f46e7bf5f90a03460dc5116edcc85c21aed1469",
+        "serverUnchangedFrom013": true
+      }
+    },
+    {
+      "name": "Version-bound title uses BrowserWindow page-title callback; native propagation remains separately required",
+      "passed": true,
+      "evidence": {
+        "getVersionFixtures": [
+          "0.1.5",
+          "9.8.7"
+        ],
+        "correctCallbackNamespace": "BrowserWindow",
+        "localCallbackPreventDefault": true,
+        "nativeTitlePropagationProven": false,
+        "aboutDoesNotClaimNativeRestartAcceptance": true
+      }
+    },
+    {
+      "name": "Popup/external navigation deny rules and crash copy do not erase persistence qualification",
+      "passed": true,
+      "evidence": {
+        "externalNavigationDenied": true,
+        "crashText": "The renderer stopped (crashed). Reopen the app; saved imports will be checked. Keep original files available."
+      }
+    },
+    {
+      "name": "A rejected single-instance lock never starts another host or window",
+      "passed": true,
+      "evidence": {
+        "quits": 1,
+        "hostStarts": 0
+      }
+    },
+    {
+      "name": "Exact dependency graph is unchanged from reviewed0.1.3 after normalizing only root version fields",
+      "passed": true,
+      "evidence": {
+        "exactDependencies": {
+          "electron": "44.9.0",
+          "@electron/packager": "20.3.0"
+        },
+        "normalizedLockSHA256": "00750a039bd3271ef4443769826cc5b7d3fc61b776bb2675e2fcc5225677c99e",
+        "priorReviewedLockSHA256": "00750a039bd3271ef4443769826cc5b7d3fc61b776bb2675e2fcc5225677c99e"
+      }
+    },
+    {
+      "name": "Actual ASAR provenance and bundle version retain reviewed implementation and original approval separately",
+      "passed": true,
+      "evidence": {
+        "provenance": {
+          "approvedHTMLCommit": "f8b0abf33c8e8468c7bec27eabc5be2930ed0086",
+          "sourceCommit": "48a6d4dad2f217a8ba166b9ca890a287aabc4feb",
+          "hostVersion": "0.1.5",
+          "builtAt": "2026-10-17T11:48:45.538Z",
+          "scope": "Local desktop test of reviewed imported-audio persistence source; existing interface/audio implementation preserved. Original approval baseline retained; no new native restart, physical device, quality or full parity acceptance from packaging."
+        },
+        "ASARSHA256": "251bcc16caf9cfb42a3967db058717373a8c6fcb9ff97d56c330058ec8301b03",
+        "bundleVersions": "0.1.5"
+      }
+    },
+    {
+      "name": "Every actual packaged prototype file matches root immutable48a6d4d manifest with no unexpected files",
+      "passed": true,
+      "evidence": {
+        "filesCompared": 200,
+        "extraFiles": 0,
+        "expectedHashesSource": "Root-generated immutable-candidate package inspection; reviewer performs no Git command"
+      }
+    },
+    {
+      "name": "Packaged main/server equal reviewed bytes and sanitized runtime metadata matches exactly",
+      "passed": true,
+      "evidence": {
+        "mainSHA256": "32c30cab2ee181e1dc219653e802b42d07b30c1ed6f36edd66879813641787a4",
+        "serverSHA256": "2326805cd31fc2c0e8ee73a7f559b64eac64b6cef2670caa3dd1f06d30ada4ef",
+        "sanitizedPackageSHA256": "9c233b3febc72324a396e1f9d6ba19e87bf1883d431ae86c8fdd499307e7f25a",
+        "buildOnlyFieldsRemoved": [
+          "devDependencies",
+          "scripts",
+          "private"
+        ]
+      }
+    },
+    {
+      "name": "Reviewed host source and actual ASAR stay unchanged during independent checks",
+      "passed": true,
+      "evidence": {
+        "mainUnchanged": true,
+        "asarUnchanged": true
+      }
+    }
+  ]
+}

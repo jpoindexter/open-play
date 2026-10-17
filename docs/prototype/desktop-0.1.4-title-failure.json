@@ -1,0 +1,16 @@
+{
+  "date": "2026-10-17",
+  "observed_at": "2026-10-17T11:48:44.981503+00:00",
+  "version": "0.1.4",
+  "app_pid": 42963,
+  "process_path_verified": "local-evidence/desktop-builds/0.1.4/Open Play Test-darwin-arm64/Open Play Test.app/Contents/MacOS/Open Play Test",
+  "ASAR_sha256": "ba6e76a69958bc2e9ed5b04f6e30f94c3e2216b7ea3cfa7f0f9a1dae2aba897a",
+  "expected_native_window_title": "Open Play Test 0.1.4 \u2014 local audio persistence test",
+  "observed_native_window_title": "Open Play \u2014 DJ prototype",
+  "title_acceptance": false,
+  "native_UI_observation": "0decks playing;44100Hz;8demo tracks;current persistence footer present. No native persistence import/restart/audio test performed on this version.",
+  "screenshot": "docs/prototype/screenshots/desktop-0.1.4-title-failure.png",
+  "source_observation": "WebContents title callback did not prevent native window title change. Installed Electron BrowserWindow title-event documentation explicitly identifies preventDefault for native title; WebContents event documentation does not.",
+  "correction_proposed": "Use BrowserWindow page-title-updated listener, version0.1.5, preserve0.1.4 and verify actual native window title.",
+  "full_parity_verified": false
+}

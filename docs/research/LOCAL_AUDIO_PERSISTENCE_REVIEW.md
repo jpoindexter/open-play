@@ -1,4 +1,7 @@
 # Imported audio persistence — browser evidence, native gate open
+**Later native evidence, 17 October 2026:** desktop 0.1.5 separately executed clean quit/relaunch and restored WAV/MP3 playback with whole master captures. See [the native review](../prototype/DESKTOP_PERSISTENCE_REVIEW.md). This historical browser report remains limited to its original execution; native crash, eviction, disk exhaustion and broad codec/recovery acceptance remain open.
+
+## Original browser test record
 
 The source now stores imported original bytes and catalog metadata in a single IndexedDB transaction. Content hashes identify files; lazy reads verify bytes before decoding. Duplicate imports retain one stable identity. Failed storage remains visibly session-only; retry restores the catalog as well as retrying media writes. Source files are not modified and no hosted service is added.
 

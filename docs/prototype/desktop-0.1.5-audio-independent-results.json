@@ -1,0 +1,176 @@
+{
+  "version": "0.1.5",
+  "review": "Independent whole native-capture decode and claim check",
+  "decoder": "ffmpeg version 9.0.1 Copyright (c) 2000-2026 the FFmpeg developers",
+  "numpyVersion": "2.2.6",
+  "declaredAdditionalToneWindowSeconds": [
+    1,
+    3
+  ],
+  "wholeFileTrimmed": false,
+  "captures": [
+    {
+      "formatUnderTest": "WAV",
+      "original": "/Users/jasonpoindexter/Downloads/Open Play 0.1.5 WAV after restart.webm",
+      "retainedCopy": "/Users/jasonpoindexter/Documents/GitHub/Open Play/local-evidence/desktop-0.1.5-captures/WAV-after-restart.webm",
+      "encodedBytes": 396353,
+      "encodedSHA256": "5ce91c47413159fe79fcea7b2b9379b017d7cbd682b63e564038984389bfb171",
+      "retainedBytesIdentical": true,
+      "sourceReport": "docs/prototype/desktop-0.1.5-WAV-audio-inspection.json",
+      "sourceReportSHA256": "73705648081ac92d03e6bee4c1dcf3a06f580e280a5297bf65108c242d8d553d",
+      "decoderCommand": [
+        "ffmpeg",
+        "-v",
+        "error",
+        "-i",
+        "/Users/jasonpoindexter/Downloads/Open Play 0.1.5 WAV after restart.webm",
+        "-map",
+        "0:a:0",
+        "-c:a",
+        "pcm_f32le",
+        "-f",
+        "f32le",
+        "pipe:1"
+      ],
+      "codec": "opus",
+      "sampleRate": 48000,
+      "channels": 2,
+      "decodedFrames": 2312640,
+      "decodedSeconds": 48.18,
+      "decodedInterleavedF32SHA256": "a0a3e41825ce529e54112487a6db22e23f96f59035a598b091e743b4835b7b23",
+      "declaredToneWindowFramesHalfOpen": [
+        48000,
+        144000
+      ],
+      "channelMetrics": [
+        {
+          "channel": 0,
+          "allSamplesFinite": true,
+          "wholeRMS": 0.02189978436691496,
+          "wholePeak": 0.044179026037454605,
+          "toneAmplitudes1to3Seconds": {
+            "330": 0.044003621175538674,
+            "550": 8.627360976852735e-07
+          },
+          "dominantFFTBinHz1to3Seconds": 330.0,
+          "intendedToOppositeToneAmplitudeRatio": 51004.72936463499,
+          "wholeCaptureNonzeroSamples": 1157760,
+          "exactTrailingZeroFrames": 1148160,
+          "exactTrailingZeroSeconds": 23.92,
+          "lastOneSecondRMS": 0.0,
+          "absoluteDifferencesVsParentJSON": {
+            "wholeRMS": 4.1147640850169864e-15,
+            "wholePeak": 0.0,
+            "amplitude330": 9.71445146547012e-17,
+            "amplitude550": 2.3251054402130544e-19
+          }
+        },
+        {
+          "channel": 1,
+          "allSamplesFinite": true,
+          "wholeRMS": 0.021849947831141168,
+          "wholePeak": 0.04461264982819557,
+          "toneAmplitudes1to3Seconds": {
+            "330": 3.555182684136877e-05,
+            "550": 0.043901624525910996
+          },
+          "dominantFFTBinHz1to3Seconds": 550.0,
+          "intendedToOppositeToneAmplitudeRatio": 1234.8626899483613,
+          "wholeCaptureNonzeroSamples": 1157760,
+          "exactTrailingZeroFrames": 1148160,
+          "exactTrailingZeroSeconds": 23.92,
+          "lastOneSecondRMS": 0.0,
+          "absoluteDifferencesVsParentJSON": {
+            "wholeRMS": 2.688821387764051e-15,
+            "wholePeak": 0.0,
+            "amplitude330": 1.2197274440461925e-17,
+            "amplitude550": 0.0
+          }
+        }
+      ]
+    },
+    {
+      "formatUnderTest": "MP3",
+      "original": "/Users/jasonpoindexter/Downloads/Open Play 0.1.5 MP3 after restart.webm",
+      "retainedCopy": "/Users/jasonpoindexter/Documents/GitHub/Open Play/local-evidence/desktop-0.1.5-captures/MP3-after-restart.webm",
+      "encodedBytes": 393392,
+      "encodedSHA256": "3e8afeab04e3ff2eb84a1b60178bcc4c2f980a7d4a99f3c027699dfb3cdad6cb",
+      "retainedBytesIdentical": true,
+      "sourceReport": "docs/prototype/desktop-0.1.5-MP3-audio-inspection.json",
+      "sourceReportSHA256": "a89cbe5f0fe602e5efcb92ae9ff7d4a5fd7886ce739ef3cc5f77d8ba976ec85d",
+      "decoderCommand": [
+        "ffmpeg",
+        "-v",
+        "error",
+        "-i",
+        "/Users/jasonpoindexter/Downloads/Open Play 0.1.5 MP3 after restart.webm",
+        "-map",
+        "0:a:0",
+        "-c:a",
+        "pcm_f32le",
+        "-f",
+        "f32le",
+        "pipe:1"
+      ],
+      "codec": "opus",
+      "sampleRate": 48000,
+      "channels": 2,
+      "decodedFrames": 2030400,
+      "decodedSeconds": 42.3,
+      "decodedInterleavedF32SHA256": "8d5307a289767137629c50400f46ba64ce19e9d2baf2333f0c2e8bf707b293f9",
+      "declaredToneWindowFramesHalfOpen": [
+        48000,
+        144000
+      ],
+      "channelMetrics": [
+        {
+          "channel": 0,
+          "allSamplesFinite": true,
+          "wholeRMS": 0.022659484773216495,
+          "wholePeak": 0.04281590133905411,
+          "toneAmplitudes1to3Seconds": {
+            "330": 0.04266168634924166,
+            "550": 2.159382995355405e-06
+          },
+          "dominantFFTBinHz1to3Seconds": 330.0,
+          "intendedToOppositeToneAmplitudeRatio": 19756.42414569451,
+          "wholeCaptureNonzeroSamples": 1153920,
+          "exactTrailingZeroFrames": 870720,
+          "exactTrailingZeroSeconds": 18.14,
+          "lastOneSecondRMS": 0.0,
+          "absoluteDifferencesVsParentJSON": {
+            "wholeRMS": 2.418204525511669e-15,
+            "wholePeak": 0.0,
+            "amplitude330": 5.065392549852277e-16,
+            "amplitude550": 1.8859188570616997e-18
+          }
+        },
+        {
+          "channel": 1,
+          "allSamplesFinite": true,
+          "wholeRMS": 0.022621021871499468,
+          "wholePeak": 0.04322491213679314,
+          "toneAmplitudes1to3Seconds": {
+            "330": 2.187638366383804e-05,
+            "550": 0.04258534848227081
+          },
+          "dominantFFTBinHz1to3Seconds": 550.0,
+          "intendedToOppositeToneAmplitudeRatio": 1946.6356568185888,
+          "wholeCaptureNonzeroSamples": 1153920,
+          "exactTrailingZeroFrames": 870720,
+          "exactTrailingZeroSeconds": 18.14,
+          "lastOneSecondRMS": 0.0,
+          "absoluteDifferencesVsParentJSON": {
+            "wholeRMS": 3.479855292809475e-15,
+            "wholePeak": 0.0,
+            "amplitude330": 2.7511630126819675e-18,
+            "amplitude550": 6.036837696399289e-16
+          }
+        }
+      ]
+    }
+  ],
+  "scope": "Reviewer independently decoded original downloaded recordings and verified ignored retained copies. UI import/cleanquit/relaunch/restoration/REC/Save were observed by parent and were not independently operated by reviewer. Internal master PCM only, no acoustic/device/recovery/full-format/parity acceptance.",
+  "passed": true,
+  "claimVerdict": "Both exact original/retained recordings independently match parent size/hash/decodedgeometry/finiteRMS/peak/tone amplitudes. Full trailing samples retained. This corroborates restored-fixture internal master playback after parent-observed clean restart, not independently reexecuted UI or general format/recovery/hardware/quality parity."
+}

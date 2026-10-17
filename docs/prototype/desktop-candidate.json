@@ -1,29 +1,41 @@
 {
   "date": "2026-10-17",
-  "version": "0.1.3",
-  "appPath": "/Users/jasonpoindexter/Documents/GitHub/Open Play/local-evidence/desktop-builds/0.1.3/Open Play Test-darwin-arm64/Open Play Test.app",
+  "version": "0.1.5",
+  "appPath": "/Users/jasonpoindexter/Documents/GitHub/Open Play/local-evidence/desktop-builds/0.1.5/Open Play Test-darwin-arm64/Open Play Test.app",
   "approvedHTMLCommit": "f8b0abf33c8e8468c7bec27eabc5be2930ed0086",
-  "implementationSourceCommit": "a8fe82e3651757b4661eb5f7122603224e859552",
-  "approval": "Original local desktop test explicitly approved; Jason additionally agreed to switch to the new cue test and directly confirmed both physical output states.",
+  "implementationSourceCommit": "48a6d4dad2f217a8ba166b9ca890a287aabc4feb",
+  "approval": "Existing explicit local desktop test approval; existing interface/audio retained. No public release or full native/reference acceptance.",
   "bundleIdentifier": "org.openplay.dj.localtest",
-  "bundleVersion": "0.1.3",
-  "ASARSHA256": "cd9577b63de60caadcf2b4df70caea8c20daaaac22066ea7690b36ad99f98966",
-  "prototypeFilesChecked": 197,
+  "bundleVersion": "0.1.5",
+  "ASARSHA256": "251bcc16caf9cfb42a3967db058717373a8c6fcb9ff97d56c330058ec8301b03",
+  "prototypeFilesChecked": 200,
   "prototypeMismatches": [],
   "hostFiles": {
-    "main.cjs": "7db5b1c815ca49f2d9125c941f46e7bf5f90a03460dc5116edcc85c21aed1469",
+    "main.cjs": "32c30cab2ee181e1dc219653e802b42d07b30c1ed6f36edd66879813641787a4",
     "server.cjs": "2326805cd31fc2c0e8ee73a7f559b64eac64b6cef2670caa3dd1f06d30ada4ef",
-    "package.json": "9a5bab5f3dcc6e963713903eed1cb1ab2efb8e13be7a54ac23feb7d180a48f4d"
+    "package.json": "e34b9555b89eebdca6b3c2ed1af50f2701f4a33a7344ba9252fb6eaba456ef01"
   },
-  "packageMetadata": "Packager intentionally removes private/scripts/devDependencies; exact expected sanitized bytes verified. main/server bytes match.",
+  "packageMetadata": "Actual main/server exact; package.json exact expected packager-sanitized bytes. Independent host/package10/10; unchanged dependency graph.",
   "nativeHostBuilt": true,
   "nativeAudioEngineBuilt": false,
   "fullParityVerified": false,
   "publicRelease": false,
-  "runtimeEvidence": "desktop-0.1.3-runtime-observation.json",
+  "runtimeEvidence": "desktop-0.1.5-runtime-observation.json",
+  "nativeWindowTitle": "Actual0.1.5 title persists through relaunch; failed0.1.4 WebContents-only attempt preserved.",
+  "importedAudioPersistence": {
+    "evidence": "Executed actual native import\u2192clean quit\u2192verified process/server exit\u2192new process\u2192restored rows\u2192load\u2192play\u2192native save/whole recording decode.",
+    "formats": [
+      "ownedWAV",
+      "ownedMP3"
+    ],
+    "firstPID": 47191,
+    "reopenedPID": 47465,
+    "scope": "Clean restart fixture subset only; crash/eviction/real diskfull/allformats/metadata interoperability still open."
+  },
   "physicalMIDIProof": "../research/HERCULES_CAPTURE_20261017_CONFIRMED.json",
-  "desktopKnobAction": "User-confirmed in0.1.1; retained mapping and real enumeration confirmed0.1.3, no fresh action repeated.",
-  "headphoneMasterRouting": "User-confirmed both cue-only and master-only on connected Hercules in0.1.3; physicallatency/quality/hot-unplug remain open.",
-  "previousWorkingBuild": "desktop-candidate-0.1.1.json",
-  "unreleasedIntermediate": "0.1.2 retained locally for permission failure evidence; no user launch shortcut."
+  "desktopKnobAction": "Historical0.1.1 user-confirmed; no fresh0.1.5 action test.",
+  "headphoneMasterRouting": "Historical0.1.3 both physical states user-confirmed;0.1.5 test used default stereo output/internal master capture, no fresh physical acceptance.",
+  "previousWorkingBuild": "desktop-candidate-0.1.3.json",
+  "olderWorkingBuild": "desktop-candidate-0.1.1.json",
+  "unreleasedIntermediate": "0.1.2 retained permission failure;0.1.4 retained native title failure. No shortcuts for failed intermediate versions."
 }

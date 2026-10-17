@@ -1,8 +1,25 @@
+## Current checkpoint — native0.1.5 persistence subset executed
+Independent whole-recording review corroborates both native captures without promoting UI/PID observations to reviewer execution. Read docs/research/DESKTOP_PERSISTENCE_AUDIO_REVIEW.md and docs/prototype/desktop-0.1.5-audio-independent-results.json. All 11 related Trello descriptions were updated and read back exactly, open/incomplete, with model/effort routing preserved (docs/delivery/trello-desktop-0.1.5-sync.json). Full parity remains unverified.
+
+
+17 October2026. Default launcher opens0.1.5; explicit0.1.3/0.1.1 launchers and unchanged bundles retained. Current immutable prototype source48a6d4dad2f217a8ba166b9ca890a287aabc4feb; original approvedf8b0abf separately recorded. Actual ASAR251bcc16caf9cfb42a3967db058717373a8c6fcb9ff97d56c330058ec8301b03,200prototypefiles exact. Independent host/package10/10; dependency resolution unchanged. Native title correction first failed0.1.4(WebContents callback); actualBrowserWindow handler works0.1.5 through relaunch, and initial failure remains saved.
+
+Actual native choosers imported owned WAV and MP3. Files2saved/0session-only. CmdQ removed process47191/server18768; new process47465 restored both without reimport or autoaudio. Each restored format loaded/played on deck2 while deck1 stayed paused and was recorded/saved through macOS. Entire WAV48.18s396353bytes and MP342.30s393392bytes decode finite nonzero stereo; additional declared1–3s oracle confirms330Hz left/550Hz right. Natural end/trailing silence retained. Context44100Hz versus Opus decode48000Hz are separate. Both decks/recording stopped afterward. This is clean-restart fixture/internal master proof, not acoustic output or allformats/crash/disk-full/eviction/full metadata acceptance.
+
+Read plan53, docs/prototype/DESKTOP_PERSISTENCE_REVIEW.md, desktop-0.1.5-runtime-observation.json, two audio-inspection reports, package inspection and DESKTOP_PERSISTENCE_HOST_REVIEW.md. Browser manifest now pins48a6d4d/280source files; checkpoint13manifest retained. Existing full audit updated but awards0full-feature/requirement passes. All110groups/522requirements plus9separatebeta deltas remain in scope; complete_latest_inventory=false. Historical0.1.3 physical cue/master and0.1.1 knob are unchanged and are not fresh0.1.5 tests.
+
+**Next exact unit:** exercise keylock/tempo and scratch-return in the actual current native UI using owned identifiable audio and full master recordings, then a strict bounded harness if needed for timing/continuity. Preserve earliest-cursor and reviewed-source capture-integrity failures; do not equate tone pitch or previous7/7 with full musical/compound acceptance. Continue full FX/stems/Video/Link/providers/DVS/files/device/reference backlog from the audit. Native storage failure/recovery and codec breadth remain separate work. No new physical action capture without an agreed user window. No unbounded repeat of the20minute Ghidra import; retain timeout.
+
+Full native audio engine rewrite/public release still not authorized. Local desktop tests already approved; no repeated approval question needed. Root owns production/UI/Git/records; reviewers read-only production with unique outputs. Full Claude audit remains unlaunched; exact original PROJECT_PROMPT suffix preserved. Goal remains active until every required behavior has actual end-to-end evidence; no partial milestone closes it.
+
+
+## Prior checkpoint — historical
+
 Source/evidence checkpoint f07a389981f8cb43d4ac393094aebb879e9a21a7 is pushed to private origin/main and remote SHA verified. All113 existing Trello descriptions were read back exactly. Working desktop0.1.3 ASAR rehashed unchanged cd9577b63de60caadcf2b4df70caea8c20daaaac22066ea7690b36ad99f98966. Current browser remains paused with2savedimports. The audit unit is saved; full-parity goal stays active. Exact re-entry: read plan52/current audit/LOCAL_AUDIO_PERSISTENCE_REVIEW, freeze and package a new test version from reviewed source, preserve0.1.3, then execute native import→quit→reopen→load→play/capture and actual MP3 playback; do not repeat the unbounded Ghidra import.
 
 Current private-record sync:113 existing Trello descriptions exact-readback verified; see docs/delivery/trello-current-parity-20261017-sync.json. All remain open; model/effort recommendations retained.
 
-## Current checkpoint — current-reference audit and browser persistence
+## Historical checkpoint — current-reference audit and browser persistence
 
 17 October 2026. **Full Serato parity is NOT established.** Read `docs/research/CURRENT_PARITY_AUDIT_20261017.md/json`: all110 existing feature groups and522 requirements individually mapped to source/evidence, remaining acceptance and per-feature Codex/Claude model+effort routing. No full-feature or full-requirement passes awarded. Category counts describe evidence posture, never percent complete. Initial audit snapshots retain the original stale-status findings. A separate skeptic confirmed initial CA01–07 and corrected one recording overclaim: the documented premaster criterion is unmet, but the installed reference recording tap was not measured.
 
