@@ -37,7 +37,7 @@ function parameter(value, definition) {
   }
   return result;
 }
-function effectSpec(input) {
+function effectSpec(input,restore=false) {
   const candidate = effects.get(own(input,'name')), definition = candidate || videoEffectCatalog[0];
   const params = own(input,'params'), output = {name:definition.name,on:!!candidate && own(input,'on') === true,value:definition.default.value,params:{}};
   for (const control of definition.independentParameters) {
@@ -45,6 +45,12 @@ function effectSpec(input) {
     if (control.name === 'value') output.value = parameter(value,control);
     else output.params[control.name] = parameter(value,control);
   }
+  // Migrate earlier saved rendering only during restore. Fresh specs and
+  // snapshots use explicit new defaults; saved own zero/false remain intact.
+  if (restore && candidate && definition.default.params.behavior !== undefined && own(params,'behavior') === undefined)
+    output.params.behavior = 'Earlier Open Play';
+  if (restore && definition.name === 'Saturation' && own(params,'saturation') === undefined)
+    output.params.saturation = 0;
   // Preserve an explicit older beat period instead of silently replacing its
   // timing with the new seconds default. Own data only, as above.
   if (definition.name === 'Frame Pulse' && own(params,'periodSeconds') === undefined && own(params,'periodBeats') !== undefined) {
@@ -79,10 +85,12 @@ function sanitized(value,restore) {
   return {version:1,width:size[0],height:size[1],transition:transitions.has(name) ? name : 'Crossfade',
     cross:clamp(finite(own(value,'cross'),0),-1,1),auto:own(value,'auto') === true,
     linked:typeof own(value,'linked') === 'boolean' ? own(value,'linked') : true,
+    crossLinked:typeof own(value,'crossLinked') === 'boolean' ? own(value,'crossLinked') : typeof own(value,'linked') === 'boolean' ? own(value,'linked') : true,
+    autoCrossfadeSeconds:clamp(finite(own(value,'autoCrossfadeSeconds'),2.5),.25,10),
     audioFXLink:own(value,'audioFXLink') === true,mediaTreatment:normalizeVideoTreatment(own(value,'mediaTreatment')),
     recordingQuality:normalizeRecordingQuality(own(value,'recordingQuality')),
     media:flags('media'),transitionSelection:flags('transitionSelection'),
-    fx:Object.fromEntries(targets.map(target => [target,[0,1].map(index => effectSpec(arrayEntry(own(fx,target),index)))])),
+    fx:Object.fromEntries(targets.map(target => [target,[0,1].map(index => effectSpec(arrayEntry(own(fx,target),index),restore))])),
     overlays:Object.fromEntries(targets.map(target => [target,arrayValues(own(overlays,target))
       .map((spec,index) => overlaySpec(spec,target,index,restore)).filter(Boolean)]))};
 }

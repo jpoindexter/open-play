@@ -63,16 +63,16 @@ export async function runVideoTransitionChecks() {
       assert(same(draw(entry.name, 1), expectedRight), "Right endpoint/orientation differs");
     });
   }
-  check("All 33 independent resource-name behaviors have distinct three-position fingerprints", () => {
+  check("Resource-name fingerprints differ apart from the documented first-pass BoxBoth/BoxH alias", () => {
     const signatures = new Map();
     for (const entry of videoTransitionCatalog.filter((c) => !c.baseline)) {
-      const signature = [0.23, 0.47, 0.71].map((amount) => {
+      const signature = [0.025, 0.23, 0.47, 0.71, 0.975].map((amount) => {
         fixture(left); renderer.reset(); draw(entry.name, 0); draw(entry.name, 0.11);
         const ctx = left.getContext("2d"); ctx.fillStyle = "#00c87a";
         ctx.fillRect(13, 11, 29, 21);
         return hash(draw(entry.name, amount));
       }).join("/");
-      assert(!signatures.has(signature), entry.name + " duplicates " + signatures.get(signature));
+      assert(!signatures.has(signature) || (entry.name === "Box Both" && signatures.get(signature) === "Box H"), entry.name + " unexpectedly duplicates " + signatures.get(signature));
       signatures.set(signature, entry.name);
     }
   });
@@ -149,10 +149,123 @@ export async function runVideoTransitionChecks() {
       solid(right,"#ffff00");const live=middle(draw(name,.95,{time:3,reducedMotion:true}));assert(live[0]>250&&live[1]>250&&live[2]<2,name+" froze current input under Reduced Motion");solid(right,"#0000ff");
     }
   });
-  check("Scratch Fade blends frozen outgoing frame with live incoming frame", () => {
-    solid(left, "#ff0000"); solid(right, "#0000ff"); renderer.reset(); draw("Scratch Fade", 0); draw("Scratch Fade", 0.2);
-    solid(left, "#00ff00"); const p = middle(draw("Scratch Fade", 0.4));
-    assert(p[0] > 100 && p[1] < 2 && p[2] > 80, "Frozen outgoing contribution not retained");
+  check("ScratchFade uses both current live inputs at a held interior fader, independently of interior amount", () => {
+    solid(left,"#ff0000");solid(right,"#0000ff");renderer.reset();draw("Scratch Fade",0);draw("Scratch Fade",.2);
+    solid(left,"#00ff00");const liveLeft=middle(draw("Scratch Fade",.4));assert(same(liveLeft,[0,255,255,255]),"Departing source froze or was faded by amount: "+[...liveLeft]);
+    solid(right,"#ff0000");const liveRight=middle(draw("Scratch Fade",.7));assert(same(liveRight,[255,255,0,255]),"Incoming source not live: "+[...liveRight]);
+    assert(same(draw("Scratch Fade",.1),draw("Scratch Fade",.9)),"Interior amount altered additive upfader policy");
+    manualCorrectionProbe.scratchFade={liveLeft:[...liveLeft],liveRight:[...liveRight],policy:"Live additive interior; independent inclusive5%/95% end bands, exact reference curve unknown"};
+  });
+  check("ScratchFade end bands cut opposite live input and both upfaders independently control the interior", () => {
+    solid(left,"#ff0000");solid(right,"#0000ff");renderer.reset();
+    for(const [amount,expected] of [[.05,[255,0,0,255]],[.0501,[255,0,255,255]],[.9499,[255,0,255,255]],[.95,[0,0,255,255]]])
+      assert(same(middle(draw("Scratch Fade",amount)),expected),"ScratchFade end-band boundary at"+amount);
+    assert(same(middle(draw("Scratch Fade",.5,{upfaders:[.25,.75]})),[85,0,255,191]),"ScratchFade lost independent premultiplied upfaders");
+    assert(same(middle(draw("Scratch Fade",.5,{upfaders:[0,1]})),[0,0,255,255]),"Left mute changed right");
+    assert(same(middle(draw("Scratch Fade",.5,{upfaders:[1,0]})),[255,0,0,255]),"Right mute changed left");
+    assert(draw("Scratch Fade",.5,{upfaders:[0,0]}).every(v=>v===0),"Both upfaders zero not transparent silence");
+  });
+  check("ScratchFade preserves live alpha under ReducedMotion without a retained snapshot", () => {
+    solid(left,"rgba(255,0,0,.5)");solid(right,"rgba(0,0,255,.25)");renderer.reset();
+    const before=middle(draw("Scratch Fade",.5,{reducedMotion:true}));assert(same(before,[255,0,128,128]),"Live additive alpha/chroma differs: "+[...before]);
+    solid(left,"rgba(0,255,0,.5)");const after=middle(draw("Scratch Fade",.5,{time:3,reducedMotion:true}));
+    assert(same(after,[0,255,128,128]),"ReducedMotion retained old outgoing frame: "+[...after]);
+  });
+  const at=(data,x,y)=>data.slice((y*W+x)*4,(y*W+x)*4+4);
+  const cellPixels=data=>Array.from({length:9},(_,i)=>[...at(data,Math.floor(((i%3)+.5)*W/3),Math.floor((Math.floor(i/3)+.5)*H/3))]);
+  check("GridSimple has exactly nine uniform3x3 live cells with declared discrete row-major changes",()=>{
+    solid(left,"#ff0000");solid(right,"#0000ff");renderer.reset();manualCorrectionProbe.gridSimple=[];
+    for(let count=0;count<=9;count++){
+      const amount=count===9?1:(count+.2)/9,data=draw("Grid Simple",amount);
+      for(let y=0;y<H;y++)for(let x=0;x<W;x++){
+        const rank=Math.floor((x+.5)/W*3)+3*Math.floor((y+.5)/H*3);
+        assert(same(at(data,x,y),rank<count?[0,0,255,255]:[255,0,0,255]),"GridSimple geometry/count mismatch at "+count+" cell "+rank);
+      }
+      manualCorrectionProbe.gridSimple.push({count,amount,cells:cellPixels(data)});
+    }
+  });
+  check("GridFade has exactly nine3x3 live cells with a numeric continuous local fade, not discrete cuts",()=>{
+    solid(left,"#ff0000");solid(right,"#0000ff");renderer.reset();manualCorrectionProbe.gridFade=[];
+    for(let active=0;active<9;active++)for(const fraction of [.25,.75]){
+      const amount=(active+fraction)/9,data=draw("Grid Fade",amount);
+      for(let y=0;y<H;y++)for(let x=0;x<W;x++){
+        const rank=Math.floor((x+.5)/W*3)+3*Math.floor((y+.5)/H*3),weight=Math.max(0,Math.min(1,active+fraction-rank));
+        assert(same(at(data,x,y),[Math.round(255*(1-weight)),0,Math.round(255*weight),255]),"GridFade numeric cell mismatch at "+active+"/"+fraction+" cell "+rank);
+      }
+      manualCorrectionProbe.gridFade.push({active,fraction,cells:cellPixels(data)});
+    }
+  });
+  check("GridSequence renders nine cells in declared seeded non-row-major order and renews on a new endpoint departure",()=>{
+    solid(left,"#ff0000");solid(right,"#0000ff");renderer.reset();draw("Grid Sequence",0);
+    const expectedOrders=[[3,8,6,4,5,2,7,1,0],[3,0,8,4,2,7,6,5,1]];manualCorrectionProbe.gridSequence=[];
+    for(let cycle=0;cycle<2;cycle++){
+      if(cycle){draw("Grid Sequence",1);draw("Grid Sequence",.9);draw("Grid Sequence",.3);}
+      for(let count=0;count<=9;count++){
+        const amount=count===9?1:(count+.2)/9,data=draw("Grid Sequence",amount),selected=new Set(expectedOrders[cycle].slice(0,count));
+        for(let y=0;y<H;y++)for(let x=0;x<W;x++){
+          const cell=Math.floor((x+.5)/W*3)+3*Math.floor((y+.5)/H*3);
+          assert(same(at(data,x,y),selected.has(cell)?[0,0,255,255]:[255,0,0,255]),"GridSequence order/geometry differs in cycle "+cycle+" count "+count);
+        }
+      }
+      manualCorrectionProbe.gridSequence.push({cycle,expectedOrder:expectedOrders[cycle]});
+    }
+  });
+  check("Nine-cell grid transitions keep selected/blended sources live at held faders and respect independent upfaders",()=>{
+    for(const name of ["Grid Simple","Grid Fade","Grid Sequence"]){
+      solid(left,"#ff0000");solid(right,"#0000ff");renderer.reset();draw(name,.5);
+      solid(left,"#00ff00");solid(right,"#ffffff");const live=draw(name,.5),muted=draw(name,.5,{upfaders:[0,0]});
+      assert(live.some((v,i)=>i%4===1&&v>250),name+" retained old source colors");
+      assert(live.every((v,i)=>i%4!==1||v>250),name+" source not current at every cell");
+      assert(muted.every(v=>v===0),name+" ignored zero upfaders");
+    }
+  });
+  check("BoxBoth firstH/secondV/thirdH passes exactly equal their Box kernels and interior reversals preserve direction",()=>{
+    fixture(left);fixture(right,1);renderer.reset();const reference=createVideoTransitions({width:W,height:H});
+    const equals=(amount,name)=>{const actual=draw("Box Both",amount),expected=pixels(reference.render(left,right,{name,amount,time:1.23,frameId:++sequence}));assert(same(actual,expected,0),"BoxBoth does not equal "+name+" at "+amount);return hash(actual);};
+    try{
+      draw("Box Both",0);const first=equals(.37,"Box H");equals(.73,"Box H");equals(.4,"Box H");
+      draw("Box Both",1);const second=equals(.63,"Box V");equals(.2,"Box V");
+      draw("Box Both",0);const third=equals(.37,"Box H");assert(first===third,"Third pass did not return to H");
+      renderer.reset();equals(.37,"Box H");manualCorrectionProbe.boxBoth={firstH:first,secondV:second,thirdH:third,policy:"Observed endpoint departures; first/reset H; interior reversals retain axis"};
+    }finally{reference.dispose();}
+  });
+  check("BoxBoth/GridSequence actual pixels reset on source identity, backward clock and explicit reset",()=>{
+    fixture(left);fixture(right,1);const alternate=makeCanvas();alternate.getContext('2d').drawImage(left,0,0);
+    const reference=createVideoTransitions({width:W,height:H});
+    try{for(const name of ['Box Both','Grid Sequence']){
+      const render=(source,amount,time=10)=>pixels(renderer.render(source,right,{name,amount,time,frameId:++sequence}));
+      const expected=pixels(reference.render(left,right,{name,amount:.4,time:10,frameId:++sequence}));
+      const second=()=>{renderer.reset();render(left,0);render(left,.4);render(left,1);return render(left,.4);};
+      assert(delta(second(),expected)>3,name+' fixture did not distinguish the second traversal');
+      assert(same(render(alternate,.4),expected,0),name+' source identity did not reset traversal');
+      second();assert(same(render(left,.4,9),expected,0),name+' backward clock did not reset traversal');
+      second();renderer.reset();assert(same(render(left,.4),expected,0),name+' explicit reset did not reset traversal');
+    }}finally{reference.dispose();}
+  });
+  check("TileWave H/V follow numeric monotonic column/row progression with declared independent6x4 flip geometry",()=>{
+    solid(left,"#ff0000");solid(right,"#0000ff");manualCorrectionProbe.tileWave={};
+    for(const name of ["Tile Wave H","Tile Wave V"]){
+      renderer.reset();const horizontal=name.endsWith('H'),samples=[];
+      for(const amount of [.2,.35,.6,.8]){
+        const data=draw(name,amount);
+        for(let y=0;y<H;y++)for(let x=0;x<W;x++){
+          const px=(x+.5)/W,py=(y+.5)/H,cx=Math.floor(px*6),cy=Math.floor(py*4),delay=horizontal?cx/5:cy/3;
+          const progress=Math.max(0,Math.min(1,amount*1.8-delay*.8)),width=Math.max(Math.abs(Math.cos(Math.PI*progress)),.02);
+          let qx=px*6-cx-.5,qy=py*4-cy-.5;if(horizontal)qx/=width;else qy/=width;
+          const expected=Math.abs(qx)>.5||Math.abs(qy)>.5?[0,0,0,0]:progress<.5?[255,0,0,255]:[0,0,255,255];
+          assert(same(at(data,x,y),expected),name+" numeric geometry/axis mismatch at "+amount+" "+x+","+y+": "+[...at(data,x,y)]);
+        }
+        samples.push({amount,hash:hash(data)});
+      }
+      manualCorrectionProbe.tileWave[name]=samples;
+    }
+  });
+  check("Corrected grid/wave/BoxBoth/ScratchFade manual fader responses remain live under ReducedMotion",()=>{
+    for(const name of ["Grid Simple","Grid Fade","Grid Sequence","Tile Wave H","Tile Wave V","Box Both","Scratch Fade"]){
+      fixture(left);fixture(right,1);renderer.reset();const a=draw(name,0,{time:1,reducedMotion:true}),b=draw(name,1,{time:2,reducedMotion:true});
+      assert(delta(a,b)>20,name+" fader became inert");
+      renderer.reset();const fixed=draw(name,.37,{time:3,reducedMotion:true}),later=draw(name,.37,{time:4,reducedMotion:true});assert(same(fixed,later,0),name+" changed without fader/source input");
+    }
   });
   check("Smudge history, duplicate-frame stability, reset and mode isolation", () => {
     solid(left, "#ff0000"); solid(right, "#0000ff"); renderer.reset(); draw("Smudge Fade", 0.5, { time: 1 });
@@ -256,7 +369,7 @@ export async function runVideoTransitionChecks() {
     bench.dispose();
   } catch (error) { benchmark.error = error.message; }
   checks.push({ name: "640x360 render sample completed for all 34 entries", passed: !benchmark.error && benchmark.samples.length === 34, ...(benchmark.error ? { error: benchmark.error } : {}) });
-  const result = { passed: checks.filter((c) => c.passed).length, failed: checks.filter((c) => !c.passed).length, checks, alphaEdgeProbe, manualCorrectionProbe, supersededContracts: {historicalEvidence:"Existing video-transitions-browser-results.json retains executed original snapshot policies; those assertions are not reference acceptance.",changes:["Center spatial rectangle replaced by central-half live blend","Latch50 frozen snapshots replaced by live midpoint cut","Scratch frozen/scrubbed snapshots replaced by live end-cut hysteresis"],remainingOpen:"Scratch Fade snapshot semantics, exact curves/cut thresholds, current-version availability and visual equivalence remain unverified."}, benchmark, timingScope, durationMs: +(performance.now() - start).toFixed(1), evidence: "Executed actual WebGL draw/readPixels on original synthetic canvas fixtures; no Serato/UI integration or visual-parity proof." };
+  const result = { passed: checks.filter((c) => c.passed).length, failed: checks.filter((c) => !c.passed).length, checks, alphaEdgeProbe, manualCorrectionProbe, supersededContracts: {historicalEvidence:"Existing video-transitions-browser-results.json retains executed original snapshot policies; those assertions are not reference acceptance.",changes:["Center spatial rectangle replaced by central-half live blend","Latch50 frozen snapshots replaced by live midpoint cut","Scratch frozen/scrubbed snapshots replaced by live end-cut hysteresis","ScratchFade frozen crossfade replaced by live additive interior/end cuts","GridSimple/Fade/Sequence replaced by nine-cell geometry and declared per-traversal seeded order","BoxBoth resolves alternating H/V passes","TileWaveH/V use monotonic column/row progress"],remainingOpen:"Exact curves/cut thresholds, BoxBoth alternation event, grid sequencing distribution, TileWave tile counts and current-version visual equivalence remain unverified."}, benchmark, timingScope, durationMs: +(performance.now() - start).toFixed(1), evidence: "Executed actual WebGL draw/readPixels on original synthetic canvas fixtures; no Serato/UI integration or visual-parity proof." };
   window.videoTransitionHarnessResult = result;
   $("#results").textContent = JSON.stringify(result, null, 2);
   $("#status").textContent = `${result.passed} passed / ${result.failed} failed`;

@@ -1,3 +1,4 @@
+import {currentVideoTransitions,videoMenuEvidence} from './video-reference-menu.js';
 import { transitionVertexShader, transitionFragmentShader } from "./video-transitions-kernel.js";
 import { createTransitionState } from "./video-transitions-state.js";
 
@@ -17,10 +18,10 @@ const definitions = [
   ["Center", "Blend", "localized-candidate", "Live linear crossfade only across fader25%–75%; independent curve from historical central-half description."],
   ["Scratch", "Latch", "localized-candidate", "Live end-cut selection: independent5%/95% bands, retained side between bands, nearest-side initialization; no frozen frame."],
   ["Latch 50", "Latch", "localized-candidate", "Live hard cut at50%; independent tie selects right. No source-frame capture."],
-  ["Scratch Fade", "Latch", "localized-candidate", "Freeze departing left source on entering the interior, fade that snapshot to live right source."],
+  ["Scratch Fade", "Latch", "localized-candidate", "Live additive upfader mix in the interior; independent5%/95% end bands gate the opposite channel. No captured frames."],
   ["Box H", "3D", "localized-candidate", "Compress outgoing/incoming horizontal faces with independent depth shading."],
   ["Box V", "3D", "localized-candidate", "Compress outgoing/incoming vertical faces with independent depth shading."],
-  ["Box Both", "3D", "localized-candidate", "Scale both faces around center during the changeover."],
+  ["Box Both", "3D", "localized-candidate", "Alternate exact Box H/V geometry on observed endpoint departures, first H after reset; interior reversals keep the current axis."],
   ["Spin H", "3D", "localized-candidate", "Horizontal-axis coordinate compression simulates a horizontal card flip."],
   ["Spin V", "3D", "localized-candidate", "Vertical-axis coordinate compression simulates a vertical card flip."],
   ["Spin Both", "3D", "localized-candidate", "Combine two-axis compression with an in-plane half turn."],
@@ -29,28 +30,29 @@ const definitions = [
   ["Swap", "Swap", "localized-candidate", "Translate both panels past each other with a depth-offset changeover."],
   ["Push Slide H", "Slide", "localized-candidate", "Incoming panel pushes outgoing panel left without rescaling."],
   ["Push Slide V", "Slide", "localized-candidate", "Incoming panel pushes outgoing panel up without rescaling."],
-  ["Tile Wave H", "3D", "localized-candidate", "Staggered horizontal flips across a 6 by 4 tile field."],
-  ["Tile Wave V", "3D", "localized-candidate", "Staggered vertical flips across a 6 by 4 tile field."],
+  ["Tile Wave H", "3D", "localized-candidate", "Left-to-right column wave of live flips in an independent6×4 tile field; rows share progress."],
+  ["Tile Wave V", "3D", "localized-candidate", "Top-to-bottom row wave of live flips in an independent6×4 tile field; columns share progress."],
   ["Water Bar H", "3D", "localized-candidate", "Horizontal reveal with row-dependent beat-clock ripples; level controls ripple depth."],
   ["Water Bar V", "3D", "localized-candidate", "Vertical reveal with column-dependent beat-clock ripples; level controls ripple depth."],
   ["Tornado", "3D", "localized-candidate", "Counter-rotating radial warps with a growing center reveal."],
   ["Grid 2x2", "Slide", "localized-candidate", "Four cells wipe locally with alternating start delays."],
-  ["Grid Simple", "Slide", "localized-candidate", "Diagonal discrete changeover in a 6 by 4 grid."],
+  ["Grid Simple", "Slide", "localized-candidate", "Exactly3×3 cells switch live inputs one at a time in independent row-major order."],
   ["Grid Pop", "Slide", "localized-candidate", "Incoming image grows independently inside 4 by 3 cells."],
-  ["Grid Fade", "Slide", "localized-candidate", "Deterministic staggered soft fades in 5 by 4 cells."],
-  ["Grid Sequence", "Slide", "localized-candidate", "Row-major 4 by 4 cell sequence; current cell wipes locally."],
+  ["Grid Fade", "Slide", "localized-candidate", "Exactly3×3 cells fade live inputs one at a time in independent row-major order, linear local fades."],
+  ["Grid Sequence", "Slide", "localized-candidate", "Exactly3×3 cells switch live inputs in an independently seeded Fisher-Yates permutation renewed per observed endpoint departure."],
   ["Crossfade", "Open Play", "open-play-baseline", "Open Play linear baseline alias, separate from reference-name candidates."],
 ];
 
 export const videoTransitionCatalog = Object.freeze(definitions.map(([name, category, provenance, contract], kernelIndex) => Object.freeze({
   name, category, provenance, kernelIndex, contract,
   functionalIndependentImplementation: true,
-  referenceRuntimeAvailability: "unverified",
+  referenceRuntimeAvailability: provenance === "open-play-baseline"?"Independent Open Play baseline":currentVideoTransitions[name]?'Observed installed4.0.10 menu2026-10-17':'Not seen in installed4.0.10 popup; historical resource only',
+  referenceMenuVisible:!!currentVideoTransitions[name],referenceMenuLabel:currentVideoTransitions[name]??name,referenceMenuEvidence:videoMenuEvidence,
   referenceAlgorithm: "unknown",
   referenceEquivalent: false,
   candidate: provenance === "localized-candidate",
   baseline: provenance === "open-play-baseline",
-  temporal: ["Smudge Fade", "Scratch", "Scratch Fade"].includes(name),
+  temporal: ["Smudge Fade", "Scratch", "Box Both", "Grid Sequence"].includes(name),
   endpointContract: name === "Upfaders Only" ? "Add independently upfaded sources at every amount" : "Live left at 0, live right at 1, each with its own upfader",
 })));
 
@@ -127,7 +129,7 @@ export function createVideoTransitions({ width = 640, height = 360 } = {}) {
     }
   }
   gl.bindFramebuffer(gl.FRAMEBUFFER, null);
-  const uniform = Object.fromEntries(["leftSource", "rightSource", "historySource", "latchLeft", "latchRight", "kind", "amount", "clockTime", "tempo", "historyReady", "latchSide", "motion", "upfaders", "levels", "premultipliedOutput"].map((name) => [name, gl.getUniformLocation(program, name)]));
+  const uniform = Object.fromEntries(["leftSource", "rightSource", "historySource", "latchLeft", "latchRight", "kind", "amount", "clockTime", "tempo", "historyReady", "latchSide", "motion", "upfaders", "levels", "scratchGates", "gridOrder[0]", "premultipliedOutput"].map((name) => [name, gl.getUniformLocation(program, name)]));
   ["leftSource", "rightSource", "historySource", "latchLeft", "latchRight"].forEach((name, i) => gl.uniform1i(uniform[name], i));
   function upload(texture, source) {
     gl.bindTexture(gl.TEXTURE_2D, texture);
@@ -156,12 +158,14 @@ export function createVideoTransitions({ width = 640, height = 360 } = {}) {
     [textures[0], textures[1], frameHistory ?? textures[2], textures[4], textures[5]].forEach((texture, i) => {
       gl.activeTexture(gl.TEXTURE0 + i); gl.bindTexture(gl.TEXTURE_2D, texture);
     });
-    gl.uniform1i(uniform.kind, entry.kernelIndex); gl.uniform1f(uniform.amount, transition.mixAmount);
+    gl.uniform1i(uniform.kind, name === "Box Both" ? (transition.boxAxis === 0 ? 12 : 13) : entry.kernelIndex); gl.uniform1f(uniform.amount, transition.mixAmount);
     gl.uniform1f(uniform.clockTime, options.reducedMotion ? 0 : time % 3600);
     gl.uniform1f(uniform.tempo, Math.max(1, Math.min(999, Number.isFinite(options.bpm) ? options.bpm : 120)));
     gl.uniform1f(uniform.historyReady, frameHistoryValid ? 1 : 0);
     gl.uniform1f(uniform.latchSide, transition.side); gl.uniform1f(uniform.motion, options.reducedMotion ? 0 : 1);
     gl.uniform2f(uniform.upfaders, unit(options.upfaders?.[0]), unit(options.upfaders?.[1]));
+    gl.uniform2f(uniform.scratchGates, ...transition.upfaderGates);
+    gl.uniform1fv(uniform["gridOrder[0]"], transition.sequenceOrder);
     gl.uniform2f(uniform.levels, unit(options.leftLevel, 0), unit(options.rightLevel, 0));
     gl.bindFramebuffer(gl.FRAMEBUFFER, null);
     gl.uniform1f(uniform.premultipliedOutput, 0);

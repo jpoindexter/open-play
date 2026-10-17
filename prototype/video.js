@@ -4,19 +4,24 @@ import {createVideoKaraoke} from './video-karaoke.js';
 import {createVideoMediaLibrary, createVideoTransitionSelector} from './video-media.js';
 import {videoTransitionCatalog} from './video-transitions.js';
 import {createVideoRecordingSurface, normalizeRecordingQuality, recordingQualityOptions, recordingDimensions} from './video-recording.js';
+import {createVideoCrossfade,normalizeAutoCrossfadeSeconds} from './video-crossfade.js';
 import {drawVideoTreatment, normalizeVideoTreatment} from './video-treatment.js';
 import {primeDecodedVideo} from './video-decode.js';
 export function createVideoMixer({state, engine, notify}) {
   const v = state.video ||= {};
   Object.assign(v, {width: v.width || 640, height: v.height || 360,
     transition: v.transition || 'Crossfade', cross: v.cross || 0,
-    linked: v.linked ?? true, auto: v.auto || false, audioFXLink:v.audioFXLink === true,
+    linked: v.linked ?? true, crossLinked:v.crossLinked ?? (v.linked ?? true), auto: v.auto || false, audioFXLink:v.audioFXLink === true,
+    autoCrossfadeSeconds:normalizeAutoCrossfadeSeconds(v.autoCrossfadeSeconds),
     mediaTreatment:normalizeVideoTreatment(v.mediaTreatment), recordingQuality:normalizeRecordingQuality(v.recordingQuality),
     fx: v.fx || {left: [], right: [], master: []},
     overlays: v.overlays || {left: [], right: [], master: []}});
   const slots = [null, null], loadTokens = [0, 0], assets = new Map(), imageTokens = new Map();
   const decodedRawIds = [null, null], effectivePresentation = [null,null], presentationGenerations = [0,0];
   const recordingSurface = createVideoRecordingSurface();
+  const directionalFade = createVideoCrossfade();
+  let fadeFinished=null;
+  function finishFade(){const callback=fadeFinished;fadeFinished=null;if(callback)callback();}
   const karaoke = createVideoKaraoke({state, engine});
   const media = createVideoMediaLibrary(), transitions = createVideoTransitionSelector(videoTransitionCatalog);
   v.media ||= {enabled:false, random:false}; v.transitionSelection ||= {enabled:false, random:false};
@@ -203,6 +208,34 @@ export function createVideoMixer({state, engine, notify}) {
     v.recordingQuality = normalizeRecordingQuality(value);
     return recordingDimensions(v.recordingQuality,{width:v.width,height:v.height});
   }
+  function crossPosition(time) {
+    const wasActive=directionalFade.diagnostics().active;
+    const position=directionalFade.sample(time); if(position!==null)v.cross=position;
+    if(wasActive&&!directionalFade.diagnostics().active)finishFade();
+    return v.crossLinked ? engine.cross : v.auto && !state.settings?.['Reduced Motion'] ? Math.sin(time/2.5) : v.cross;
+  }
+  function startCrossfade(direction,onFinished) {
+    if(disposed)throw new Error('Video mixer was disposed.');
+    if(v.crossLinked)throw new Error('Unlink the Video crossfader before starting a directional fade.');
+    if(direction!=='left'&&direction!=='right')throw new RangeError('Choose left or right Video fade.');
+    const time=performance.now()/1000,from=crossPosition(time);directionalFade.cancel(time);finishFade();
+    v.cross=directionalFade.start(direction,from,v.autoCrossfadeSeconds,time,{reducedMotion:!!state.settings?.['Reduced Motion']});
+    v.auto=false;fadeFinished=typeof onFinished==='function'?onFinished:null;
+    if(!directionalFade.diagnostics().active)finishFade();return directionalFade.diagnostics();
+  }
+  function stopCrossfade() {
+    const time=performance.now()/1000,position=directionalFade.cancel(time);
+    if(position!==null)v.cross=position;finishFade();return v.cross;
+  }
+  function advanceCrossfade(time) {
+    if(v.crossLinked||v.auto)stopCrossfade();
+    else if(state.settings?.['Reduced Motion']&&directionalFade.diagnostics().active) {
+      const target=directionalFade.diagnostics().target;
+      v.cross=directionalFade.start(target<0?'left':'right',v.cross,v.autoCrossfadeSeconds,time,{reducedMotion:true});
+      finishFade();
+    }
+    return crossPosition(time);
+  }
   function drawRaw(index) {
     const c = raw[index], ctx = c.getContext('2d'), item = slots[index];
     const graphics = karaokeFrames[index];
@@ -243,6 +276,7 @@ export function createVideoMixer({state, engine, notify}) {
         duration: item.video.duration, paused: item.video.paused, firstFrame:item.firstFrame,
         readyState:item.video.readyState, seeking:item.video.seeking} : null),
       loadedImages: [...assets.keys()], karaoke: [0, 1].map(i => karaoke.diagnostics(i)), pipeline: pipeline?.diagnostics(),
+      crossfade:directionalFade.diagnostics(), crossLinked:v.crossLinked, videoCross:v.cross,
       recording: recorder?.state === 'recording', recordingQuality:normalizeRecordingQuality(v.recordingQuality),
       captureDimensions:captureSession ? {width:captureSession.lease.width,height:captureSession.lease.height,quality:captureSession.lease.quality} : null,
       captureBytes: result?.size || 0};
@@ -259,10 +293,18 @@ export function createVideoMixer({state, engine, notify}) {
     const rec = document.querySelector('#video-record-state');
     if (rec) rec.textContent = recorder?.state === 'recording' ? 'Recording processed canvas + browser master' :
       result ? `Capture ready: ${result.size} bytes` : 'Not recording';
+    const fadeStatus=document.querySelector('#video-fade-state');
+    if(fadeStatus)fadeStatus.textContent=directionalFade.diagnostics().active?'Directional fade in progress':'Directional fade stopped';
+    const crossSlider=document.querySelector('#video-cross');
+    if(crossSlider&&directionalFade.diagnostics().position!==null&&!v.crossLinked&&!v.auto)crossSlider.value=String(v.cross);
   }
-  function tick(force = false) {
-    if (disposed || (!canvas?.isConnected && recorder?.state !== 'recording')) return;
+  function tick(force = false, {render = true} = {}) {
+    if (disposed) return;
     const now = performance.now();
+    // Finite actions own control state even after their panel is detached.
+    // Complete/persist them without allocating or rendering a hidden GPU frame.
+    const cross = advanceCrossfade(now/1000);
+    if ((!render || !canvas?.isConnected) && recorder?.state !== 'recording') return;
     const interval = 1000/30, elapsed = now - lastTime;
     if (!force && elapsed < interval) return;
     // Keep the requested cadence phase aligned instead of accumulating rAF jitter.
@@ -306,7 +348,6 @@ export function createVideoMixer({state, engine, notify}) {
           (state.decks[i].playing ? state.decks[i].rate * (state.decks[i].reverse ? -1 : 1) : 0) : item?.video.paused ? 0 : item?.video.playbackRate || 0,
         position: (v.linked || item?.kind === 'fallback' || karaokeFrames[i]) && state.decks[i]?.track ? engine.position(state.decks[i]) : item?.video.currentTime || 0,
         upfader: engine.nodes?.[i]?.level ?? 1, assetId: karaokeFrames[i]?.assetId || (item ? `${item.assetId}:presentation:${presentationGenerations[i]}` : `empty:${i}`)}));
-      const cross = v.linked ? engine.cross : v.auto && !reducedMotion ? Math.sin(time/2.5) : v.cross;
       const {output, channels: processed} = pipeline.render(raw, {...v, overlays: resolvedOverlays()}, {
         time, frameId: ++frameId, reducedMotion, channels, audioFXLinks:engine.videoFXLinks?.(),
         master: {...(engine.videoAnalysis?.(4) || {audioAvailable:false}), bpm: channels[0].bpm, audioTransport:audioTransport(audioSources)},
@@ -378,7 +419,7 @@ export function createVideoMixer({state, engine, notify}) {
     return stopPromise;
   }
   async function dispose() {
-    if (disposed) return; disposed = true;
+    if (disposed) return; stopCrossfade(); disposed = true;
     // Invalidate pending decodes/start immediately; an outstanding resume may settle later.
     slots.forEach((item,i) => {++loadTokens[i]; if (item) {item.video.pause(); URL.revokeObjectURL(item.url);}});
     for (const {url} of assets.values()) URL.revokeObjectURL(url); assets.clear(); pipeline?.dispose();
@@ -401,10 +442,11 @@ export function createVideoMixer({state, engine, notify}) {
   }
   function configureKaraoke(index, options) {karaoke.configure(index, options); reset(index ? 'right' : 'left');}
   function clearKaraoke(index) {karaoke.clear(index); reset(index ? 'right' : 'left');}
-  return {load, bind, play, setOverlayImage, clearOverlayImage, setResolution, setRecordingQuality, reset, tick,
+  return {load, bind, play, setOverlayImage, clearOverlayImage, setResolution, setRecordingQuality, startCrossfade,stopCrossfade, reset, tick,
     loadKaraoke, configureKaraoke, clearKaraoke, karaokeDiagnostics: index => karaoke.diagnostics(index),
     addMedia, removeMedia, configureMedia, nextMedia, associateVideo, removeVideoAssociation,
     mediaDiagnostics, configureTransitions, nextTransition,
     record, stop, dispose, diagnostics,
+    get fading() {return directionalFade.diagnostics().active;},
     get recording() {return recorder?.state === 'recording';}, get result() {return result;}};
 }

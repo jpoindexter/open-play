@@ -88,12 +88,12 @@ on the selected deck without autoplay. File bytes require reimport after reload.
 Run `video-effects-test.html`, `video-transitions-harness.html`,
 `video-overlays-harness.html`, `video-pipeline-harness.html`, `cdg-harness.html`,
 `karaoke-integration-harness.html` and `video-media-harness.html` for the scoped
-public browser checks. Current results are72/72,51/51,32/32,32/32,21/21,19/19 and
+public browser checks. Current results are81/81,65/65,32/32,32/32,21/21,19/19 and
 32/32 respectively. The pipeline actually records and decodes output video/audio;
 requested30fps and720p/1080p canvas size are not sustained/HD capture acceptance.
 See [the current review](../docs/prototype/VIDEO_FUNCTIONAL_REVIEW.md) for reference
 unknowns, retained failures, technical limits and exact main UI evidence. Original
-algorithms do not establish visual equivalence or a proven active reference menu.
+algorithms do not establish visual equivalence. Current native menu observation separately confirms55 FX names/29 transitions; four other resource-only transition names remain labeled.
 
 Opt-in “Link audio Echo / Distortion” now reads actual DJ-FX identity/assignment/
 timing and applies original visual counterparts; other names/routes remain gaps.
@@ -101,3 +101,11 @@ Media treatment provides actual Preserve/Stretch/Center-Cut/Letterbox geometry.
 Run `video-audio-fx-harness.html`(24/24) and `video-treatment-harness.html`(21/21).
 Read [the continuation review](../docs/prototype/VIDEO_LINK_TREATMENT_REVIEW.md)
 for scope, retained failures, settings inventory and the keyboard acceptance gap.
+
+Finite left/right fades have an independent speed slider and separate audio
+crossfader link. Use Stop fade to hold the current position; saved endpoint/speed/
+link state survives reload. Continuous mix is a separate Open Play extension.
+Run `video-crossfade-harness.html` (11/11) for actual pixels/audio/hidden-panel
+checks. Read [current color/traversal/fade review](../docs/prototype/VIDEO_COLOR_CROSSFADE_REVIEW.md).
+Remaining per-channel opacity links and manual semantics stay explicit gaps;
+full parity and native approval remain false.

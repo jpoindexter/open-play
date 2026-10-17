@@ -129,20 +129,28 @@ void main(){
   vec3 hue=hueRotate(c.rgb,bands.x*TAU);z.rgb=mix(c.rgb,vec3(luma(hue))+(hue-vec3(luma(hue)))*(1.+bands.y)+vec3(bands.z*.3),amount);
  }else if(effect==22){z.rgb=c.rgb+vec3(amount*(upfader-.5)*2.*p.x);
  }else if(effect==23){
-  vec2 direction=vec2(cos(p.x),sin(p.x))/resolution*amount*20.;z=vec4(0.);float total=0.;
-  for(int i=0;i<9;i++){float weight=exp(-float(i)*.35);z+=premul(source(uv-direction*float(i)))*weight;total+=weight;}z=straight(z/total);
+  if(p.w>.5){
+   vec2 direction=vec2(cos(p.z),sin(p.z))/resolution*amount*20.;z=vec4(0.);float total=0.;
+   for(int i=0;i<9;i++){float weight=exp(-float(i)*.35);z+=premul(source(uv-direction*float(i)))*weight;total+=weight;}z=straight(z/total);
+  }else if(p.x>0.){
+   vec2 ray=(uv-.5)*resolution;vec2 direction=length(ray)>.00001?normalize(ray):vec2(0.);vec4 sum=vec4(0.);
+   for(int i=0;i<9;i++){vec2 point=clamp(uv+direction*p.x*float(i)/8./resolution,.5/resolution,1.-.5/resolution);sum+=premul(source(point))/9.;}
+   float distance=min(min(uv.x,1.-uv.x),min(uv.y,1.-uv.y));float edge=1.-smoothstep(0.,p.y,distance);z=blend(c,straight(sum),amount*edge);
+  }
  }else if(effect==24){
   vec2 point=uv;if(p.x<.5||p.x>1.5)point.x=min(uv.x,1.-uv.x);if(p.x>.5)point.y=max(uv.y,1.-uv.y);z=blend(c,source(point),amount);
  }else if(effect==25){z=blend(c,source(kaleido(uv,p.x,p.y)),amount);
  }else if(effect==26){z=blend(c,source(kaleido(uv,3.+floor(bands.y*9.),bands.x*PI)),amount*level*(1.-reducedMotion));
  }else if(effect==27){float grey=luma(c.rgb);z.rgb=mix(c.rgb,vec3(grey)+(c.rgb-vec3(grey))*p.x,amount);
  }else if(effect==28){z.rgb=(c.rgb-.5)*(1.+amount*3.)+.5;
- }else if(effect==29){z.rgb=pow(max(c.rgb,vec3(0.)),vec3(1./mix(1.,p.x,amount)));
+ }else if(effect==29){float exponent=p.w>.5?1./mix(1.,p.y,amount):mix(1.,p.x,amount);z.rgb=pow(max(c.rgb,vec3(0.)),vec3(exponent));
  }else if(effect==30){
   float distance=abs(hueOf(c.rgb)-p.x/360.);distance=min(distance,1.-distance);
   float keep=1.-smoothstep(p.y,p.y+p.z,distance);z.rgb=mix(c.rgb,mix(vec3(luma(c.rgb)),c.rgb,keep),amount);
  }else if(effect==31){
-  vec3 neon=max(c.rgb-vec3(.2),vec3(0.))*vec3(.6,.3,1.8)+edgeAt(uv)*vec3(.1,.8,.9);z.rgb=mix(c.rgb,neon,amount);
+  if(p.w>.5){vec3 neon=max(c.rgb-vec3(.2),vec3(0.))*vec3(.6,.3,1.8)+edgeAt(uv)*vec3(.1,.8,.9);z.rgb=mix(c.rgb,neon,amount);}
+  else{float hi=max(c.r,max(c.g,c.b)),lo=min(c.r,min(c.g,c.b));float colorful=hi>.00001?(hi-lo)/hi:0.;float gate=smoothstep(p.x,p.x+p.y,colorful);
+   vec3 hue=clamp(abs(fract(vec3(hueOf(c.rgb))+vec3(0.,2./3.,1./3.))*6.-3.)-1.,0.,1.);z.rgb=mix(c.rgb,hue*gate,amount);}
  }else if(effect==32){
   vec2 d=vec2(amount*p.x/resolution.x,0.);z=vec4(source(uv-d).r,source(uv+d).gb,c.a);
  }else if(effect==33||effect==34||effect==35){

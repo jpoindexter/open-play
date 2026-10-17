@@ -126,6 +126,23 @@ test("uniform conversion preserves declared channel controls, clamps kernels and
  assert.equal(videoEffectUniforms(spec("Filter",1,{radius:1000}))[1],24);
  for(const e of videoEffectCatalog)assert(videoEffectUniforms(spec(e.name)).every(Number.isFinite));
 });
+test("manual-meaning and earlier Gamma/Smudge/UV uniforms remain explicit separate algorithms",()=>{
+ assert.deepEqual(videoEffectUniforms(spec("Gamma")),[2,3,0,0]);
+ assert.deepEqual(videoEffectUniforms(spec("Gamma",1,{behavior:"Earlier Open Play",gamma:.25})),[2,.25,0,1]);
+ assert.deepEqual(videoEffectUniforms(spec("Gamma",1,{shadowPower:0})),[1,3,0,0]);
+ assert.deepEqual(videoEffectUniforms(spec("Smudge")),[24,.25,0,0]);
+ assert.deepEqual(videoEffectUniforms(spec("Smudge",1,{behavior:"Earlier Open Play",angle:90})),[24,.25,Math.PI/2,1]);
+ assert.deepEqual(videoEffectUniforms(spec("Smudge",1,{radiusPixels:0,edgeWidth:0})),[0,.01,0,0]);
+ assert.deepEqual(videoEffectUniforms(spec("UV Paint")),[.2,.05,0,0]);
+ assert.deepEqual(videoEffectUniforms(spec("UV Paint",1,{behavior:"Earlier Open Play",colorThreshold:0})),[0,.05,0,1]);
+ for(const name of ["Gamma","Smudge","UV Paint"]){const e=videoEffectCatalog.find(x=>x.name===name);assert.equal(e.default.params.behavior,"Manual Meaning");assert.equal(e.manualMeaningEvidence.exactResponseRecovered,false);assert.deepEqual(e.independentParameters.find(x=>x.name==="behavior").options,["Manual Meaning","Earlier Open Play"]);}
+ return "Executed parameter ownership/clamping; numeric output needs GPU fixtures.";
+});
+test("fresh saturation increases by default while an explicit zero remains desaturation",()=>{
+ assert.equal(spec("Saturation").params.saturation,2);
+ assert.deepEqual(videoEffectUniforms(spec("Saturation")),[2,0,0,0]);
+ assert.deepEqual(videoEffectUniforms(spec("Saturation",1,{saturation:0})),[0,0,0,0]);
+});
 test("unsupported headless execution and excessive output resolution fail honestly",()=>{
  assert.equal(videoEffectCapabilities.slots,2);assert.equal(videoEffectCapabilities.historySamples,16);
  assert.throws(()=>createVideoEffects({width:0,height:64}),/positive integer/);

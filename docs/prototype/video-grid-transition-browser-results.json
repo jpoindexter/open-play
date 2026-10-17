@@ -1,0 +1,2473 @@
+{
+  "passed": 65,
+  "failed": 0,
+  "checks": [
+    {
+      "name": "33 resource names remain distinct from the Crossfade baseline",
+      "passed": true
+    },
+    {
+      "name": "Luma Key Fade: both live endpoints, marker orientation and alpha",
+      "passed": true
+    },
+    {
+      "name": "Additive Average: both live endpoints, marker orientation and alpha",
+      "passed": true
+    },
+    {
+      "name": "Additive: both live endpoints, marker orientation and alpha",
+      "passed": true
+    },
+    {
+      "name": "Difference Fade: both live endpoints, marker orientation and alpha",
+      "passed": true
+    },
+    {
+      "name": "Smudge Fade: both live endpoints, marker orientation and alpha",
+      "passed": true
+    },
+    {
+      "name": "Melt: both live endpoints, marker orientation and alpha",
+      "passed": true
+    },
+    {
+      "name": "Default: both live endpoints, marker orientation and alpha",
+      "passed": true
+    },
+    {
+      "name": "Center: both live endpoints, marker orientation and alpha",
+      "passed": true
+    },
+    {
+      "name": "Scratch: both live endpoints, marker orientation and alpha",
+      "passed": true
+    },
+    {
+      "name": "Latch 50: both live endpoints, marker orientation and alpha",
+      "passed": true
+    },
+    {
+      "name": "Scratch Fade: both live endpoints, marker orientation and alpha",
+      "passed": true
+    },
+    {
+      "name": "Box H: both live endpoints, marker orientation and alpha",
+      "passed": true
+    },
+    {
+      "name": "Box V: both live endpoints, marker orientation and alpha",
+      "passed": true
+    },
+    {
+      "name": "Box Both: both live endpoints, marker orientation and alpha",
+      "passed": true
+    },
+    {
+      "name": "Spin H: both live endpoints, marker orientation and alpha",
+      "passed": true
+    },
+    {
+      "name": "Spin V: both live endpoints, marker orientation and alpha",
+      "passed": true
+    },
+    {
+      "name": "Spin Both: both live endpoints, marker orientation and alpha",
+      "passed": true
+    },
+    {
+      "name": "Wipe H: both live endpoints, marker orientation and alpha",
+      "passed": true
+    },
+    {
+      "name": "Wipe V: both live endpoints, marker orientation and alpha",
+      "passed": true
+    },
+    {
+      "name": "Swap: both live endpoints, marker orientation and alpha",
+      "passed": true
+    },
+    {
+      "name": "Push Slide H: both live endpoints, marker orientation and alpha",
+      "passed": true
+    },
+    {
+      "name": "Push Slide V: both live endpoints, marker orientation and alpha",
+      "passed": true
+    },
+    {
+      "name": "Tile Wave H: both live endpoints, marker orientation and alpha",
+      "passed": true
+    },
+    {
+      "name": "Tile Wave V: both live endpoints, marker orientation and alpha",
+      "passed": true
+    },
+    {
+      "name": "Water Bar H: both live endpoints, marker orientation and alpha",
+      "passed": true
+    },
+    {
+      "name": "Water Bar V: both live endpoints, marker orientation and alpha",
+      "passed": true
+    },
+    {
+      "name": "Tornado: both live endpoints, marker orientation and alpha",
+      "passed": true
+    },
+    {
+      "name": "Grid 2x2: both live endpoints, marker orientation and alpha",
+      "passed": true
+    },
+    {
+      "name": "Grid Simple: both live endpoints, marker orientation and alpha",
+      "passed": true
+    },
+    {
+      "name": "Grid Pop: both live endpoints, marker orientation and alpha",
+      "passed": true
+    },
+    {
+      "name": "Grid Fade: both live endpoints, marker orientation and alpha",
+      "passed": true
+    },
+    {
+      "name": "Grid Sequence: both live endpoints, marker orientation and alpha",
+      "passed": true
+    },
+    {
+      "name": "Crossfade: both live endpoints, marker orientation and alpha",
+      "passed": true
+    },
+    {
+      "name": "Resource-name fingerprints differ apart from the documented first-pass BoxBoth/BoxH alias",
+      "passed": true
+    },
+    {
+      "name": "Wipe orientation: horizontal is left-to-right, vertical top-to-bottom",
+      "passed": true
+    },
+    {
+      "name": "Crossfade alpha is premultiplied for mixing and straight in output",
+      "passed": true
+    },
+    {
+      "name": "Upfaders Only ignores amount at endpoints and exposes both input gains",
+      "passed": true
+    },
+    {
+      "name": "Scratch selects live inputs at independent end-cut bands and keeps them live through interior travel",
+      "passed": true
+    },
+    {
+      "name": "Latch50 live midpoint cut follows held-fader input changes and declares right tie",
+      "passed": true
+    },
+    {
+      "name": "Center uses a spatially uniform live crossfade only in the central50% of travel",
+      "passed": true
+    },
+    {
+      "name": "Center preserves premultiplied alpha and live source changes at a held fader",
+      "passed": true
+    },
+    {
+      "name": "Latch50 and Scratch hard cuts preserve selected live alpha and independent upfader silence",
+      "passed": true
+    },
+    {
+      "name": "Center/Latch50/Scratch retain manual fader and live-frame control under Reduced Motion",
+      "passed": true
+    },
+    {
+      "name": "ScratchFade uses both current live inputs at a held interior fader, independently of interior amount",
+      "passed": true
+    },
+    {
+      "name": "ScratchFade end bands cut opposite live input and both upfaders independently control the interior",
+      "passed": true
+    },
+    {
+      "name": "ScratchFade preserves live alpha under ReducedMotion without a retained snapshot",
+      "passed": true
+    },
+    {
+      "name": "GridSimple has exactly nine uniform3x3 live cells with declared discrete row-major changes",
+      "passed": true
+    },
+    {
+      "name": "GridFade has exactly nine3x3 live cells with a numeric continuous local fade, not discrete cuts",
+      "passed": true
+    },
+    {
+      "name": "GridSequence renders nine cells in declared seeded non-row-major order and renews on a new endpoint departure",
+      "passed": true
+    },
+    {
+      "name": "Nine-cell grid transitions keep selected/blended sources live at held faders and respect independent upfaders",
+      "passed": true
+    },
+    {
+      "name": "BoxBoth firstH/secondV/thirdH passes exactly equal their Box kernels and interior reversals preserve direction",
+      "passed": true
+    },
+    {
+      "name": "BoxBoth/GridSequence actual pixels reset on source identity, backward clock and explicit reset",
+      "passed": true
+    },
+    {
+      "name": "TileWave H/V follow numeric monotonic column/row progression with declared independent6x4 flip geometry",
+      "passed": true
+    },
+    {
+      "name": "Corrected grid/wave/BoxBoth/ScratchFade manual fader responses remain live under ReducedMotion",
+      "passed": true
+    },
+    {
+      "name": "Smudge history, duplicate-frame stability, reset and mode isolation",
+      "passed": true
+    },
+    {
+      "name": "Same-frame Latch 50 threshold changes select the current live input",
+      "passed": true
+    },
+    {
+      "name": "Same-frame Scratch endpoint then interior retains the new endpoint side",
+      "passed": true
+    },
+    {
+      "name": "Same-frame clock 10 to 12 to 11 clears actual Smudge feedback",
+      "passed": true
+    },
+    {
+      "name": "Same-frame controls replace current history without feeding it back",
+      "passed": true
+    },
+    {
+      "name": "Scaled transparent edge matches Canvas2D and retains straight red at fractional alpha",
+      "passed": true
+    },
+    {
+      "name": "Live cuts and remaining filtered history paths retain red chroma at transparent edges",
+      "passed": true
+    },
+    {
+      "name": "Reduced motion removes clock-driven ripple while preserving fader control",
+      "passed": true
+    },
+    {
+      "name": "Unknown names fail explicitly and disposal is final/idempotent",
+      "passed": true
+    },
+    {
+      "name": "640x360 render sample completed for all 34 entries",
+      "passed": true
+    }
+  ],
+  "alphaEdgeProbe": {
+    "fixture": "2x1 opaque red / transparent black scaled to 4x1",
+    "expectedCanvas2D": [
+      255,
+      0,
+      0,
+      255,
+      255,
+      0,
+      0,
+      191,
+      255,
+      0,
+      0,
+      64,
+      0,
+      0,
+      0,
+      0
+    ],
+    "actualWebGL": [
+      255,
+      0,
+      0,
+      255,
+      255,
+      0,
+      0,
+      191,
+      255,
+      0,
+      0,
+      64,
+      0,
+      0,
+      0,
+      0
+    ],
+    "fractionalAlphaIndices": [
+      1,
+      2
+    ],
+    "readPaths": [
+      {
+        "name": "Latch 50",
+        "actualWebGL": [
+          255,
+          0,
+          0,
+          255,
+          255,
+          0,
+          0,
+          191,
+          255,
+          0,
+          0,
+          64,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "name": "Scratch",
+        "actualWebGL": [
+          255,
+          0,
+          0,
+          255,
+          255,
+          0,
+          0,
+          191,
+          255,
+          0,
+          0,
+          64,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "name": "Scratch Fade",
+        "actualWebGL": [
+          255,
+          0,
+          0,
+          255,
+          255,
+          0,
+          0,
+          191,
+          255,
+          0,
+          0,
+          64,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "name": "Smudge Fade",
+        "actualWebGL": [
+          255,
+          0,
+          0,
+          255,
+          255,
+          0,
+          0,
+          194,
+          255,
+          0,
+          0,
+          70,
+          255,
+          0,
+          0,
+          3
+        ]
+      }
+    ]
+  },
+  "manualCorrectionProbe": {
+    "scratch": {
+      "liveLeft": [
+        0,
+        255,
+        0,
+        255
+      ],
+      "beforeRight": [
+        0,
+        255,
+        0,
+        255
+      ],
+      "cutRight": [
+        0,
+        0,
+        255,
+        255
+      ],
+      "liveRight": [
+        255,
+        255,
+        0,
+        255
+      ],
+      "beforeLeft": [
+        255,
+        255,
+        0,
+        255
+      ],
+      "cutLeft": [
+        0,
+        255,
+        0,
+        255
+      ],
+      "thresholdStatus": "Independent5%/95% bands; current reference thresholds unknown"
+    },
+    "latch50": {
+      "liveLeft": [
+        0,
+        255,
+        0,
+        255
+      ],
+      "exactTie": [
+        0,
+        0,
+        255,
+        255
+      ],
+      "liveRight": [
+        255,
+        255,
+        0,
+        255
+      ],
+      "tieStatus": "Independent right-at50% tie; current reference tie unknown"
+    },
+    "center": [
+      {
+        "amount": 0.125,
+        "declaredWeight": 0,
+        "pixel": [
+          255,
+          0,
+          0,
+          255
+        ]
+      },
+      {
+        "amount": 0.25,
+        "declaredWeight": 0,
+        "pixel": [
+          255,
+          0,
+          0,
+          255
+        ]
+      },
+      {
+        "amount": 0.375,
+        "declaredWeight": 0.25,
+        "pixel": [
+          191,
+          0,
+          64,
+          255
+        ]
+      },
+      {
+        "amount": 0.5,
+        "declaredWeight": 0.5,
+        "pixel": [
+          128,
+          0,
+          128,
+          255
+        ]
+      },
+      {
+        "amount": 0.625,
+        "declaredWeight": 0.75,
+        "pixel": [
+          64,
+          0,
+          191,
+          255
+        ]
+      },
+      {
+        "amount": 0.75,
+        "declaredWeight": 1,
+        "pixel": [
+          0,
+          0,
+          255,
+          255
+        ]
+      },
+      {
+        "amount": 0.875,
+        "declaredWeight": 1,
+        "pixel": [
+          0,
+          0,
+          255,
+          255
+        ]
+      }
+    ],
+    "centerAlpha": {
+      "partial": [
+        85,
+        0,
+        170,
+        191
+      ],
+      "live": [
+        0,
+        191,
+        64,
+        255
+      ]
+    },
+    "scratchFade": {
+      "liveLeft": [
+        0,
+        255,
+        255,
+        255
+      ],
+      "liveRight": [
+        255,
+        255,
+        0,
+        255
+      ],
+      "policy": "Live additive interior; independent inclusive5%/95% end bands, exact reference curve unknown"
+    },
+    "gridSimple": [
+      {
+        "count": 0,
+        "amount": 0.022222222222222223,
+        "cells": [
+          [
+            255,
+            0,
+            0,
+            255
+          ],
+          [
+            255,
+            0,
+            0,
+            255
+          ],
+          [
+            255,
+            0,
+            0,
+            255
+          ],
+          [
+            255,
+            0,
+            0,
+            255
+          ],
+          [
+            255,
+            0,
+            0,
+            255
+          ],
+          [
+            255,
+            0,
+            0,
+            255
+          ],
+          [
+            255,
+            0,
+            0,
+            255
+          ],
+          [
+            255,
+            0,
+            0,
+            255
+          ],
+          [
+            255,
+            0,
+            0,
+            255
+          ]
+        ]
+      },
+      {
+        "count": 1,
+        "amount": 0.13333333333333333,
+        "cells": [
+          [
+            0,
+            0,
+            255,
+            255
+          ],
+          [
+            255,
+            0,
+            0,
+            255
+          ],
+          [
+            255,
+            0,
+            0,
+            255
+          ],
+          [
+            255,
+            0,
+            0,
+            255
+          ],
+          [
+            255,
+            0,
+            0,
+            255
+          ],
+          [
+            255,
+            0,
+            0,
+            255
+          ],
+          [
+            255,
+            0,
+            0,
+            255
+          ],
+          [
+            255,
+            0,
+            0,
+            255
+          ],
+          [
+            255,
+            0,
+            0,
+            255
+          ]
+        ]
+      },
+      {
+        "count": 2,
+        "amount": 0.24444444444444446,
+        "cells": [
+          [
+            0,
+            0,
+            255,
+            255
+          ],
+          [
+            0,
+            0,
+            255,
+            255
+          ],
+          [
+            255,
+            0,
+            0,
+            255
+          ],
+          [
+            255,
+            0,
+            0,
+            255
+          ],
+          [
+            255,
+            0,
+            0,
+            255
+          ],
+          [
+            255,
+            0,
+            0,
+            255
+          ],
+          [
+            255,
+            0,
+            0,
+            255
+          ],
+          [
+            255,
+            0,
+            0,
+            255
+          ],
+          [
+            255,
+            0,
+            0,
+            255
+          ]
+        ]
+      },
+      {
+        "count": 3,
+        "amount": 0.35555555555555557,
+        "cells": [
+          [
+            0,
+            0,
+            255,
+            255
+          ],
+          [
+            0,
+            0,
+            255,
+            255
+          ],
+          [
+            0,
+            0,
+            255,
+            255
+          ],
+          [
+            255,
+            0,
+            0,
+            255
+          ],
+          [
+            255,
+            0,
+            0,
+            255
+          ],
+          [
+            255,
+            0,
+            0,
+            255
+          ],
+          [
+            255,
+            0,
+            0,
+            255
+          ],
+          [
+            255,
+            0,
+            0,
+            255
+          ],
+          [
+            255,
+            0,
+            0,
+            255
+          ]
+        ]
+      },
+      {
+        "count": 4,
+        "amount": 0.4666666666666667,
+        "cells": [
+          [
+            0,
+            0,
+            255,
+            255
+          ],
+          [
+            0,
+            0,
+            255,
+            255
+          ],
+          [
+            0,
+            0,
+            255,
+            255
+          ],
+          [
+            0,
+            0,
+            255,
+            255
+          ],
+          [
+            255,
+            0,
+            0,
+            255
+          ],
+          [
+            255,
+            0,
+            0,
+            255
+          ],
+          [
+            255,
+            0,
+            0,
+            255
+          ],
+          [
+            255,
+            0,
+            0,
+            255
+          ],
+          [
+            255,
+            0,
+            0,
+            255
+          ]
+        ]
+      },
+      {
+        "count": 5,
+        "amount": 0.5777777777777778,
+        "cells": [
+          [
+            0,
+            0,
+            255,
+            255
+          ],
+          [
+            0,
+            0,
+            255,
+            255
+          ],
+          [
+            0,
+            0,
+            255,
+            255
+          ],
+          [
+            0,
+            0,
+            255,
+            255
+          ],
+          [
+            0,
+            0,
+            255,
+            255
+          ],
+          [
+            255,
+            0,
+            0,
+            255
+          ],
+          [
+            255,
+            0,
+            0,
+            255
+          ],
+          [
+            255,
+            0,
+            0,
+            255
+          ],
+          [
+            255,
+            0,
+            0,
+            255
+          ]
+        ]
+      },
+      {
+        "count": 6,
+        "amount": 0.6888888888888889,
+        "cells": [
+          [
+            0,
+            0,
+            255,
+            255
+          ],
+          [
+            0,
+            0,
+            255,
+            255
+          ],
+          [
+            0,
+            0,
+            255,
+            255
+          ],
+          [
+            0,
+            0,
+            255,
+            255
+          ],
+          [
+            0,
+            0,
+            255,
+            255
+          ],
+          [
+            0,
+            0,
+            255,
+            255
+          ],
+          [
+            255,
+            0,
+            0,
+            255
+          ],
+          [
+            255,
+            0,
+            0,
+            255
+          ],
+          [
+            255,
+            0,
+            0,
+            255
+          ]
+        ]
+      },
+      {
+        "count": 7,
+        "amount": 0.8,
+        "cells": [
+          [
+            0,
+            0,
+            255,
+            255
+          ],
+          [
+            0,
+            0,
+            255,
+            255
+          ],
+          [
+            0,
+            0,
+            255,
+            255
+          ],
+          [
+            0,
+            0,
+            255,
+            255
+          ],
+          [
+            0,
+            0,
+            255,
+            255
+          ],
+          [
+            0,
+            0,
+            255,
+            255
+          ],
+          [
+            0,
+            0,
+            255,
+            255
+          ],
+          [
+            255,
+            0,
+            0,
+            255
+          ],
+          [
+            255,
+            0,
+            0,
+            255
+          ]
+        ]
+      },
+      {
+        "count": 8,
+        "amount": 0.911111111111111,
+        "cells": [
+          [
+            0,
+            0,
+            255,
+            255
+          ],
+          [
+            0,
+            0,
+            255,
+            255
+          ],
+          [
+            0,
+            0,
+            255,
+            255
+          ],
+          [
+            0,
+            0,
+            255,
+            255
+          ],
+          [
+            0,
+            0,
+            255,
+            255
+          ],
+          [
+            0,
+            0,
+            255,
+            255
+          ],
+          [
+            0,
+            0,
+            255,
+            255
+          ],
+          [
+            0,
+            0,
+            255,
+            255
+          ],
+          [
+            255,
+            0,
+            0,
+            255
+          ]
+        ]
+      },
+      {
+        "count": 9,
+        "amount": 1,
+        "cells": [
+          [
+            0,
+            0,
+            255,
+            255
+          ],
+          [
+            0,
+            0,
+            255,
+            255
+          ],
+          [
+            0,
+            0,
+            255,
+            255
+          ],
+          [
+            0,
+            0,
+            255,
+            255
+          ],
+          [
+            0,
+            0,
+            255,
+            255
+          ],
+          [
+            0,
+            0,
+            255,
+            255
+          ],
+          [
+            0,
+            0,
+            255,
+            255
+          ],
+          [
+            0,
+            0,
+            255,
+            255
+          ],
+          [
+            0,
+            0,
+            255,
+            255
+          ]
+        ]
+      }
+    ],
+    "gridFade": [
+      {
+        "active": 0,
+        "fraction": 0.25,
+        "cells": [
+          [
+            191,
+            0,
+            64,
+            255
+          ],
+          [
+            255,
+            0,
+            0,
+            255
+          ],
+          [
+            255,
+            0,
+            0,
+            255
+          ],
+          [
+            255,
+            0,
+            0,
+            255
+          ],
+          [
+            255,
+            0,
+            0,
+            255
+          ],
+          [
+            255,
+            0,
+            0,
+            255
+          ],
+          [
+            255,
+            0,
+            0,
+            255
+          ],
+          [
+            255,
+            0,
+            0,
+            255
+          ],
+          [
+            255,
+            0,
+            0,
+            255
+          ]
+        ]
+      },
+      {
+        "active": 0,
+        "fraction": 0.75,
+        "cells": [
+          [
+            64,
+            0,
+            191,
+            255
+          ],
+          [
+            255,
+            0,
+            0,
+            255
+          ],
+          [
+            255,
+            0,
+            0,
+            255
+          ],
+          [
+            255,
+            0,
+            0,
+            255
+          ],
+          [
+            255,
+            0,
+            0,
+            255
+          ],
+          [
+            255,
+            0,
+            0,
+            255
+          ],
+          [
+            255,
+            0,
+            0,
+            255
+          ],
+          [
+            255,
+            0,
+            0,
+            255
+          ],
+          [
+            255,
+            0,
+            0,
+            255
+          ]
+        ]
+      },
+      {
+        "active": 1,
+        "fraction": 0.25,
+        "cells": [
+          [
+            0,
+            0,
+            255,
+            255
+          ],
+          [
+            191,
+            0,
+            64,
+            255
+          ],
+          [
+            255,
+            0,
+            0,
+            255
+          ],
+          [
+            255,
+            0,
+            0,
+            255
+          ],
+          [
+            255,
+            0,
+            0,
+            255
+          ],
+          [
+            255,
+            0,
+            0,
+            255
+          ],
+          [
+            255,
+            0,
+            0,
+            255
+          ],
+          [
+            255,
+            0,
+            0,
+            255
+          ],
+          [
+            255,
+            0,
+            0,
+            255
+          ]
+        ]
+      },
+      {
+        "active": 1,
+        "fraction": 0.75,
+        "cells": [
+          [
+            0,
+            0,
+            255,
+            255
+          ],
+          [
+            64,
+            0,
+            191,
+            255
+          ],
+          [
+            255,
+            0,
+            0,
+            255
+          ],
+          [
+            255,
+            0,
+            0,
+            255
+          ],
+          [
+            255,
+            0,
+            0,
+            255
+          ],
+          [
+            255,
+            0,
+            0,
+            255
+          ],
+          [
+            255,
+            0,
+            0,
+            255
+          ],
+          [
+            255,
+            0,
+            0,
+            255
+          ],
+          [
+            255,
+            0,
+            0,
+            255
+          ]
+        ]
+      },
+      {
+        "active": 2,
+        "fraction": 0.25,
+        "cells": [
+          [
+            0,
+            0,
+            255,
+            255
+          ],
+          [
+            0,
+            0,
+            255,
+            255
+          ],
+          [
+            191,
+            0,
+            64,
+            255
+          ],
+          [
+            255,
+            0,
+            0,
+            255
+          ],
+          [
+            255,
+            0,
+            0,
+            255
+          ],
+          [
+            255,
+            0,
+            0,
+            255
+          ],
+          [
+            255,
+            0,
+            0,
+            255
+          ],
+          [
+            255,
+            0,
+            0,
+            255
+          ],
+          [
+            255,
+            0,
+            0,
+            255
+          ]
+        ]
+      },
+      {
+        "active": 2,
+        "fraction": 0.75,
+        "cells": [
+          [
+            0,
+            0,
+            255,
+            255
+          ],
+          [
+            0,
+            0,
+            255,
+            255
+          ],
+          [
+            64,
+            0,
+            191,
+            255
+          ],
+          [
+            255,
+            0,
+            0,
+            255
+          ],
+          [
+            255,
+            0,
+            0,
+            255
+          ],
+          [
+            255,
+            0,
+            0,
+            255
+          ],
+          [
+            255,
+            0,
+            0,
+            255
+          ],
+          [
+            255,
+            0,
+            0,
+            255
+          ],
+          [
+            255,
+            0,
+            0,
+            255
+          ]
+        ]
+      },
+      {
+        "active": 3,
+        "fraction": 0.25,
+        "cells": [
+          [
+            0,
+            0,
+            255,
+            255
+          ],
+          [
+            0,
+            0,
+            255,
+            255
+          ],
+          [
+            0,
+            0,
+            255,
+            255
+          ],
+          [
+            191,
+            0,
+            64,
+            255
+          ],
+          [
+            255,
+            0,
+            0,
+            255
+          ],
+          [
+            255,
+            0,
+            0,
+            255
+          ],
+          [
+            255,
+            0,
+            0,
+            255
+          ],
+          [
+            255,
+            0,
+            0,
+            255
+          ],
+          [
+            255,
+            0,
+            0,
+            255
+          ]
+        ]
+      },
+      {
+        "active": 3,
+        "fraction": 0.75,
+        "cells": [
+          [
+            0,
+            0,
+            255,
+            255
+          ],
+          [
+            0,
+            0,
+            255,
+            255
+          ],
+          [
+            0,
+            0,
+            255,
+            255
+          ],
+          [
+            64,
+            0,
+            191,
+            255
+          ],
+          [
+            255,
+            0,
+            0,
+            255
+          ],
+          [
+            255,
+            0,
+            0,
+            255
+          ],
+          [
+            255,
+            0,
+            0,
+            255
+          ],
+          [
+            255,
+            0,
+            0,
+            255
+          ],
+          [
+            255,
+            0,
+            0,
+            255
+          ]
+        ]
+      },
+      {
+        "active": 4,
+        "fraction": 0.25,
+        "cells": [
+          [
+            0,
+            0,
+            255,
+            255
+          ],
+          [
+            0,
+            0,
+            255,
+            255
+          ],
+          [
+            0,
+            0,
+            255,
+            255
+          ],
+          [
+            0,
+            0,
+            255,
+            255
+          ],
+          [
+            191,
+            0,
+            64,
+            255
+          ],
+          [
+            255,
+            0,
+            0,
+            255
+          ],
+          [
+            255,
+            0,
+            0,
+            255
+          ],
+          [
+            255,
+            0,
+            0,
+            255
+          ],
+          [
+            255,
+            0,
+            0,
+            255
+          ]
+        ]
+      },
+      {
+        "active": 4,
+        "fraction": 0.75,
+        "cells": [
+          [
+            0,
+            0,
+            255,
+            255
+          ],
+          [
+            0,
+            0,
+            255,
+            255
+          ],
+          [
+            0,
+            0,
+            255,
+            255
+          ],
+          [
+            0,
+            0,
+            255,
+            255
+          ],
+          [
+            64,
+            0,
+            191,
+            255
+          ],
+          [
+            255,
+            0,
+            0,
+            255
+          ],
+          [
+            255,
+            0,
+            0,
+            255
+          ],
+          [
+            255,
+            0,
+            0,
+            255
+          ],
+          [
+            255,
+            0,
+            0,
+            255
+          ]
+        ]
+      },
+      {
+        "active": 5,
+        "fraction": 0.25,
+        "cells": [
+          [
+            0,
+            0,
+            255,
+            255
+          ],
+          [
+            0,
+            0,
+            255,
+            255
+          ],
+          [
+            0,
+            0,
+            255,
+            255
+          ],
+          [
+            0,
+            0,
+            255,
+            255
+          ],
+          [
+            0,
+            0,
+            255,
+            255
+          ],
+          [
+            191,
+            0,
+            64,
+            255
+          ],
+          [
+            255,
+            0,
+            0,
+            255
+          ],
+          [
+            255,
+            0,
+            0,
+            255
+          ],
+          [
+            255,
+            0,
+            0,
+            255
+          ]
+        ]
+      },
+      {
+        "active": 5,
+        "fraction": 0.75,
+        "cells": [
+          [
+            0,
+            0,
+            255,
+            255
+          ],
+          [
+            0,
+            0,
+            255,
+            255
+          ],
+          [
+            0,
+            0,
+            255,
+            255
+          ],
+          [
+            0,
+            0,
+            255,
+            255
+          ],
+          [
+            0,
+            0,
+            255,
+            255
+          ],
+          [
+            64,
+            0,
+            191,
+            255
+          ],
+          [
+            255,
+            0,
+            0,
+            255
+          ],
+          [
+            255,
+            0,
+            0,
+            255
+          ],
+          [
+            255,
+            0,
+            0,
+            255
+          ]
+        ]
+      },
+      {
+        "active": 6,
+        "fraction": 0.25,
+        "cells": [
+          [
+            0,
+            0,
+            255,
+            255
+          ],
+          [
+            0,
+            0,
+            255,
+            255
+          ],
+          [
+            0,
+            0,
+            255,
+            255
+          ],
+          [
+            0,
+            0,
+            255,
+            255
+          ],
+          [
+            0,
+            0,
+            255,
+            255
+          ],
+          [
+            0,
+            0,
+            255,
+            255
+          ],
+          [
+            191,
+            0,
+            64,
+            255
+          ],
+          [
+            255,
+            0,
+            0,
+            255
+          ],
+          [
+            255,
+            0,
+            0,
+            255
+          ]
+        ]
+      },
+      {
+        "active": 6,
+        "fraction": 0.75,
+        "cells": [
+          [
+            0,
+            0,
+            255,
+            255
+          ],
+          [
+            0,
+            0,
+            255,
+            255
+          ],
+          [
+            0,
+            0,
+            255,
+            255
+          ],
+          [
+            0,
+            0,
+            255,
+            255
+          ],
+          [
+            0,
+            0,
+            255,
+            255
+          ],
+          [
+            0,
+            0,
+            255,
+            255
+          ],
+          [
+            64,
+            0,
+            191,
+            255
+          ],
+          [
+            255,
+            0,
+            0,
+            255
+          ],
+          [
+            255,
+            0,
+            0,
+            255
+          ]
+        ]
+      },
+      {
+        "active": 7,
+        "fraction": 0.25,
+        "cells": [
+          [
+            0,
+            0,
+            255,
+            255
+          ],
+          [
+            0,
+            0,
+            255,
+            255
+          ],
+          [
+            0,
+            0,
+            255,
+            255
+          ],
+          [
+            0,
+            0,
+            255,
+            255
+          ],
+          [
+            0,
+            0,
+            255,
+            255
+          ],
+          [
+            0,
+            0,
+            255,
+            255
+          ],
+          [
+            0,
+            0,
+            255,
+            255
+          ],
+          [
+            191,
+            0,
+            64,
+            255
+          ],
+          [
+            255,
+            0,
+            0,
+            255
+          ]
+        ]
+      },
+      {
+        "active": 7,
+        "fraction": 0.75,
+        "cells": [
+          [
+            0,
+            0,
+            255,
+            255
+          ],
+          [
+            0,
+            0,
+            255,
+            255
+          ],
+          [
+            0,
+            0,
+            255,
+            255
+          ],
+          [
+            0,
+            0,
+            255,
+            255
+          ],
+          [
+            0,
+            0,
+            255,
+            255
+          ],
+          [
+            0,
+            0,
+            255,
+            255
+          ],
+          [
+            0,
+            0,
+            255,
+            255
+          ],
+          [
+            64,
+            0,
+            191,
+            255
+          ],
+          [
+            255,
+            0,
+            0,
+            255
+          ]
+        ]
+      },
+      {
+        "active": 8,
+        "fraction": 0.25,
+        "cells": [
+          [
+            0,
+            0,
+            255,
+            255
+          ],
+          [
+            0,
+            0,
+            255,
+            255
+          ],
+          [
+            0,
+            0,
+            255,
+            255
+          ],
+          [
+            0,
+            0,
+            255,
+            255
+          ],
+          [
+            0,
+            0,
+            255,
+            255
+          ],
+          [
+            0,
+            0,
+            255,
+            255
+          ],
+          [
+            0,
+            0,
+            255,
+            255
+          ],
+          [
+            0,
+            0,
+            255,
+            255
+          ],
+          [
+            191,
+            0,
+            64,
+            255
+          ]
+        ]
+      },
+      {
+        "active": 8,
+        "fraction": 0.75,
+        "cells": [
+          [
+            0,
+            0,
+            255,
+            255
+          ],
+          [
+            0,
+            0,
+            255,
+            255
+          ],
+          [
+            0,
+            0,
+            255,
+            255
+          ],
+          [
+            0,
+            0,
+            255,
+            255
+          ],
+          [
+            0,
+            0,
+            255,
+            255
+          ],
+          [
+            0,
+            0,
+            255,
+            255
+          ],
+          [
+            0,
+            0,
+            255,
+            255
+          ],
+          [
+            0,
+            0,
+            255,
+            255
+          ],
+          [
+            64,
+            0,
+            191,
+            255
+          ]
+        ]
+      }
+    ],
+    "gridSequence": [
+      {
+        "cycle": 0,
+        "expectedOrder": [
+          3,
+          8,
+          6,
+          4,
+          5,
+          2,
+          7,
+          1,
+          0
+        ]
+      },
+      {
+        "cycle": 1,
+        "expectedOrder": [
+          3,
+          0,
+          8,
+          4,
+          2,
+          7,
+          6,
+          5,
+          1
+        ]
+      }
+    ],
+    "boxBoth": {
+      "firstH": "95d708c4",
+      "secondV": "ffe2ac3d",
+      "thirdH": "95d708c4",
+      "policy": "Observed endpoint departures; first/reset H; interior reversals retain axis"
+    },
+    "tileWave": {
+      "Tile Wave H": [
+        {
+          "amount": 0.2,
+          "hash": "10814c5"
+        },
+        {
+          "amount": 0.35,
+          "hash": "5c477005"
+        },
+        {
+          "amount": 0.6,
+          "hash": "6e4fa465"
+        },
+        {
+          "amount": 0.8,
+          "hash": "ad659cc5"
+        }
+      ],
+      "Tile Wave V": [
+        {
+          "amount": 0.2,
+          "hash": "8c401ac5"
+        },
+        {
+          "amount": 0.35,
+          "hash": "6ac5d5c5"
+        },
+        {
+          "amount": 0.6,
+          "hash": "a5505dc5"
+        },
+        {
+          "amount": 0.8,
+          "hash": "7b549ec5"
+        }
+      ]
+    }
+  },
+  "supersededContracts": {
+    "historicalEvidence": "Existing video-transitions-browser-results.json retains executed original snapshot policies; those assertions are not reference acceptance.",
+    "changes": [
+      "Center spatial rectangle replaced by central-half live blend",
+      "Latch50 frozen snapshots replaced by live midpoint cut",
+      "Scratch frozen/scrubbed snapshots replaced by live end-cut hysteresis",
+      "ScratchFade frozen crossfade replaced by live additive interior/end cuts",
+      "GridSimple/Fade/Sequence replaced by nine-cell geometry and declared per-traversal seeded order",
+      "BoxBoth resolves alternating H/V passes",
+      "TileWaveH/V use monotonic column/row progress"
+    ],
+    "remainingOpen": "Exact curves/cut thresholds, BoxBoth alternation event, grid sequencing distribution, TileWave tile counts and current-version visual equivalence remain unverified."
+  },
+  "benchmark": {
+    "scope": "CPU performance.now wall-clock around render() plus a WebGL finish() invocation, 640x360 output with synthetic canvas inputs. Not a GPU timer-query measurement, presentation timing, decode/effects/composite/capture pipeline latency, sustained frame rate, or 30fps proof. Browser timer resolution/rounding can report 0 or 0.1 ms; these values do not establish a zero-cost frame.",
+    "samples": [
+      {
+        "name": "Luma Key Fade",
+        "ms": 0.1
+      },
+      {
+        "name": "Upfaders Only",
+        "ms": 0
+      },
+      {
+        "name": "Additive Average",
+        "ms": 0
+      },
+      {
+        "name": "Additive",
+        "ms": 0
+      },
+      {
+        "name": "Difference Fade",
+        "ms": 0.1
+      },
+      {
+        "name": "Smudge Fade",
+        "ms": 0
+      },
+      {
+        "name": "Melt",
+        "ms": 0
+      },
+      {
+        "name": "Default",
+        "ms": 0
+      },
+      {
+        "name": "Center",
+        "ms": 0
+      },
+      {
+        "name": "Scratch",
+        "ms": 0
+      },
+      {
+        "name": "Latch 50",
+        "ms": 0
+      },
+      {
+        "name": "Scratch Fade",
+        "ms": 0
+      },
+      {
+        "name": "Box H",
+        "ms": 0
+      },
+      {
+        "name": "Box V",
+        "ms": 0
+      },
+      {
+        "name": "Box Both",
+        "ms": 0.1
+      },
+      {
+        "name": "Spin H",
+        "ms": 0
+      },
+      {
+        "name": "Spin V",
+        "ms": 0
+      },
+      {
+        "name": "Spin Both",
+        "ms": 0
+      },
+      {
+        "name": "Wipe H",
+        "ms": 0
+      },
+      {
+        "name": "Wipe V",
+        "ms": 0
+      },
+      {
+        "name": "Swap",
+        "ms": 0
+      },
+      {
+        "name": "Push Slide H",
+        "ms": 0
+      },
+      {
+        "name": "Push Slide V",
+        "ms": 0
+      },
+      {
+        "name": "Tile Wave H",
+        "ms": 0.1
+      },
+      {
+        "name": "Tile Wave V",
+        "ms": 0
+      },
+      {
+        "name": "Water Bar H",
+        "ms": 0
+      },
+      {
+        "name": "Water Bar V",
+        "ms": 0
+      },
+      {
+        "name": "Tornado",
+        "ms": 0
+      },
+      {
+        "name": "Grid 2x2",
+        "ms": 0
+      },
+      {
+        "name": "Grid Simple",
+        "ms": 0
+      },
+      {
+        "name": "Grid Pop",
+        "ms": 0
+      },
+      {
+        "name": "Grid Fade",
+        "ms": 0
+      },
+      {
+        "name": "Grid Sequence",
+        "ms": 0
+      },
+      {
+        "name": "Crossfade",
+        "ms": 0
+      }
+    ]
+  },
+  "timingScope": "CPU performance.now wall-clock around render() plus a WebGL finish() invocation, 640x360 output with synthetic canvas inputs. Not a GPU timer-query measurement, presentation timing, decode/effects/composite/capture pipeline latency, sustained frame rate, or 30fps proof. Browser timer resolution/rounding can report 0 or 0.1 ms; these values do not establish a zero-cost frame.",
+  "durationMs": 722.7,
+  "evidence": "Executed actual WebGL draw/readPixels on original synthetic canvas fixtures; no Serato/UI integration or visual-parity proof."
+}

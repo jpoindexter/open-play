@@ -1964,7 +1964,8 @@ export function createPanels(a) {
       $("#record-time").textContent = time(
         engine.ctx.currentTime - engine.recordStarted,
       );
-    if (s.panel === "video" || videoMixer.recording) videoMixer.tick();
+    if (s.panel === "video" || videoMixer.recording || videoMixer.fading)
+      videoMixer.tick(false, {render: s.panel === "video"});
   }
 
   return {

@@ -131,3 +131,22 @@ Raw screenshots stay ignored under `local-evidence/video-reference-20261016/`:
 `effects.png`, `info.png`, `yuv-menu.png`, `restored-off.png`. The persisted55effect
 cache remains separate file evidence; this readout does not establish every named
 effect's actual render behavior or the transition catalog.
+
+
+## Current Video menus observed — 17 October 2026
+
+After Jason confirmed unlock, all five slot-effect category submenus and the full
+transition popup were inspected on installed4.0.10(4010213)arm64 using authorized
+JXA navigation and CUA screenshot observations. [Structured observation](VIDEO_CURRENT_MENUS_20261017.json)
+records55 FX (15 Audio Reactive,2 Equalizer,22 Lighting,2 Record,14 Transform)
+and29 transitions, including exact displayed names. Names match the persisted
+effects cache; that cache itself remains an older on-disk artifact.
+
+Grid Pop, Tornado and Water Bar H/V resource names were absent from this observed
+transition popup. This does not prove historical removal or universal absence.
+Menu observation does not establish effect invocation, algorithms, parameter
+ranges, codecs, device restrictions or rendering. No new media/playback/selection
+was performed. Video was restoredOFF and Setup closed. Escape unexpectedly
+opened Exit confirmation; No retained the app. Window became windowed and exact
+prior window-mode restoration was not verified. Raw screenshots remain ignored
+under local-evidence/video-menus-20261017/.

@@ -14,7 +14,9 @@ const near=(a,b,tolerance=3)=>a.every((n,i)=>Math.abs(n-b[i])<=tolerance);
 const diff=(a,b)=>{let sum=0;for(let i=0;i<a.data.length;i++)sum+=Math.abs(a.data[i]-b.data[i]);return sum/a.data.length;};
 const hash=image=>{let n=2166136261;for(const b of image.data)n=Math.imul(n^b,16777619);return(n>>>0).toString(16);};
 const fx=(name,params={})=>({name,on:true,value:1,params});
-const apply=(rgb,specs)=>specs.reduce((c,s)=>c.map(n=>s.name==='Negative'?255-n:s.name==='Gamma'?255*(n/255)**(1/s.params.gamma):n),rgb);
+// These fresh specs use the corrected darkening Gamma contract. Earlier saved
+// presets retain reciprocal Gamma only through their explicit compatibility mode.
+const apply=(rgb,specs)=>specs.reduce((c,s)=>c.map(n=>s.name==='Negative'?255-n:s.name==='Gamma'?255*(n/255)**(s.params.behavior==='Earlier Open Play'?1/s.params.gamma:s.params.shadowPower):n),rgb);
 const durationValue=v=>Number.isFinite(v)?v:String(v);
 const fixtureDownloadURLs=new Map();
 function clearFixtureDownloads(){
@@ -113,7 +115,7 @@ export async function runVideoPipelineChecks(){
     await test('Actual pipeline bypass and processed-channel previews retain both source identities',()=>{
       const r=render();assert(near(pixel(r.output),[64,128,192,255])&&near(pixel(r.channels[0]),[64,128,192,255])&&near(pixel(r.channels[1]),[192,64,96,255]),'Bypass or preview identity failed.');return{left:pixel(r.channels[0]),right:pixel(r.channels[1]),output:pixel(r.output)};
     });
-    const forward=[fx('Negative'),fx('Gamma',{gamma:2})],reverse=[fx('Gamma',{gamma:2}),fx('Negative')];
+    const forward=[fx('Negative'),fx('Gamma',{shadowPower:2})],reverse=[fx('Gamma',{shadowPower:2}),fx('Negative')];
     await test('Left two-slot order changes actual channel/output pixels while right preview stays isolated',()=>{
       const a=render({fx:{left:forward}}),b=render({fx:{left:reverse}});assert(near(pixel(a.channels[0]),[...apply([64,128,192],forward),255])&&near(pixel(b.channels[0]),[...apply([64,128,192],reverse),255]),'Left slot order differs from declared independent color contract.');assert(diff(a.channels[0],b.channels[0])>20&&near(pixel(a.channels[1]),[192,64,96,255]),'Left routing leaked or order is inert.');return{forward:pixel(a.channels[0]),reverse:pixel(b.channels[0]),right:pixel(a.channels[1])};
     });

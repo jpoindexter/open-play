@@ -1,13 +1,13 @@
 # Parity and prototype review gate
 
-Updated 2026-10-16. **Exact 1:1 parity status: not passed.** An annotated HTML review candidate now exists, following the user’s explicit continuation instruction and permitted simulation/gap boundary. No native application has been started.
+Updated 2026-10-17. **Exact 1:1 parity status: not passed.** An annotated HTML review candidate now exists, following the user’s explicit continuation instruction and permitted simulation/gap boundary. No native application has been started.
 
 Jason requires 1:1 feature coverage before prototype implementation. The inventory must account for controls, modes, state transitions, secondary actions, settings, failures and hardware-specific behaviors. A list of feature titles is insufficient. A screenshot does not establish transport, DSP or hardware behavior.
 
 ## Current coverage
 
 - 168 official manual articles across 23 sections, all explicitly mapped to feature IDs; semantic review remains open.
-- 495 selected interaction requirements have explicit triggers, expected outcomes and evidence boundaries.
+- 521 selected interaction requirements have explicit triggers, expected outcomes and evidence boundaries.
 - 74 initial feature groups plus 36 research additions, each with explicit Codex/Claude model and effort recommendations.
 - Installed reference pinned to 4.0.10.213, with executable and installer hashes.
 - All five display layouts and all eight Setup tabs observed; connected Hercules enumerated through USB, audio and MIDI interfaces.
@@ -100,3 +100,11 @@ full1:1 stay open, and native approval remains absent.
 Recovered manual reconciliation adds14 distinctworkflowrequirements REQ-508–521;
 workinginventory110/521. All47proposals have source/dispositionmapping. No new
 requirementisacceptedfromitslabel, count or nearbygreencheck.
+
+
+Current continuation: native Video menus observed55 FX/29 transitions;
+independent colorFX81/81,transitions65/65,finitefades11/11 andassembledpipeline32/32.
+These close scoped independent behavior/menu observations only. Per-channel
+opacity links, eight-band Analyzer/finiteFreeze/Isolator meanings and remaining
+manual/output/library/hardware/provider/model-quality gates remain open. See
+../prototype/VIDEO_COLOR_CROSSFADE_REVIEW.md. Native approval remains absent.

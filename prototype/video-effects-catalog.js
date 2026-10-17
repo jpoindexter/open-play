@@ -1,3 +1,4 @@
+import {currentVideoEffects,videoMenuEvidence} from './video-reference-menu.js';
 // Factual names/categories only from local research; all algorithms and defaults are original.
 export const videoEffectCatalog = [
   {
@@ -479,12 +480,16 @@ export const videoEffectCatalog = [
     "referenceRuntimeVerified": false,
     "referenceAvailability": "manifest declaration; active menu unverified",
     "implementationStatus": "original-independent-WebGL2",
-    "contract": "Nine weighted one-sided spatial samples smear in a declared direction; no temporal history implied.",
+    "contract": "Manual Meaning: nine equal premultiplied spatial samples pull edge content inward along aspect-correct center rays, with independently chosen radius/edge mask. Earlier Open Play: original angle-directed weighted smear. Neither retains video frames.",
+    "manualMeaningEvidence": {"source":"local-evidence/claude-fable/official-video-manual-141226.pdf","page":20,"meaning":"Blend image edges toward center.","edition":"2015-04-09 PDF metadata; installed4.0.10 behavior unverified","exactResponseRecovered":false},
     "parameterStatus": "independent ranges/defaults; vendor parameter labels, mappings and ranges unknown",
     "default": {
       "on": false,
       "value": 0.65,
       "params": {
+        "behavior": "Manual Meaning",
+        "radiusPixels": 24,
+        "edgeWidth": 0.25,
         "angle": 0
       }
     }
@@ -562,13 +567,14 @@ export const videoEffectCatalog = [
     "referenceRuntimeVerified": false,
     "referenceAvailability": "manifest declaration; active menu unverified",
     "implementationStatus": "original-independent-WebGL2",
-    "contract": "Scale chroma around Rec709-weighted display-RGB luma, blending to the independent target saturation.",
+    "contract": "Scale chroma around Rec709-weighted display-RGB luma; fresh target2 increases color intensity. Explicit targets below1 retain independent desaturation, including saved0. Display-RGB curve, range and default are independently chosen.",
+    "manualMeaningEvidence": {"source":"local-evidence/claude-fable/official-video-manual-141226.pdf","page":20,"meaning":"Increase existing color intensity proportionally.","edition":"2015-04-09 PDF metadata; installed4.0.10 behavior unverified","exactResponseRecovered":false},
     "parameterStatus": "independent ranges/defaults; vendor parameter labels, mappings and ranges unknown",
     "default": {
       "on": false,
       "value": 0.65,
       "params": {
-        "saturation": 0
+        "saturation": 2
       }
     }
   },
@@ -602,12 +608,15 @@ export const videoEffectCatalog = [
     "referenceRuntimeVerified": false,
     "referenceAvailability": "manifest declaration; active menu unverified",
     "implementationStatus": "original-independent-WebGL2",
-    "contract": "Apply a power curve with independent positive gamma; amount interpolates the exponent from unity.",
+    "contract": "Manual Meaning: darken shadows using independent shadowPower1..4, interpolating exponent from1 by amount; black/white/alpha stay fixed. Earlier Open Play: preserve the original reciprocal gamma exponent and gamma.1..8. No vendor gamma curve is claimed.",
+    "manualMeaningEvidence": {"source":"local-evidence/claude-fable/official-video-manual-141226.pdf","page":20,"meaning":"Darken shadow tones.","edition":"2015-04-09 PDF metadata; installed4.0.10 behavior unverified","exactResponseRecovered":false},
     "parameterStatus": "independent ranges/defaults; vendor parameter labels, mappings and ranges unknown",
     "default": {
       "on": false,
       "value": 0.65,
       "params": {
+        "behavior": "Manual Meaning",
+        "shadowPower": 2,
         "gamma": 3
       }
     }
@@ -646,12 +655,17 @@ export const videoEffectCatalog = [
     "referenceRuntimeVerified": false,
     "referenceAvailability": "manifest declaration; active menu unverified",
     "implementationStatus": "original-independent-WebGL2",
-    "contract": "Original ultraviolet-inspired dark neon tint with cyan edge glow; this is an original design for an unresolved name.",
+    "contract": "Manual Meaning: display-RGB HSV colorfulness gate gives eligible hues full saturation/brightness and makes ineligible RGB black while preserving alpha. Independent threshold/softness/HSV response. Earlier Open Play retains the original neon tint/cyan edge glow.",
+    "manualMeaningEvidence": {"source":"local-evidence/claude-fable/official-video-manual-141226.pdf","page":20,"meaning":"Brighten and saturate moderately colorful pixels; other pixels black.","edition":"2015-04-09 PDF metadata; installed4.0.10 behavior unverified","exactResponseRecovered":false},
     "parameterStatus": "independent ranges/defaults; vendor parameter labels, mappings and ranges unknown",
     "default": {
       "on": false,
       "value": 0.65,
-      "params": {}
+      "params": {
+        "behavior": "Manual Meaning",
+        "colorThreshold": 0.2,
+        "softness": 0.05
+      }
     }
   },
   {
@@ -1112,21 +1126,35 @@ export const videoEffectCatalog = [
 export const videoEffectByName = new Map(videoEffectCatalog.map(effect => [effect.name, effect]));
 // Every bound here is independently chosen, not a recovered reference knob range.
 const parameterBounds = {
+  behavior:{options:["Manual Meaning","Earlier Open Play"],unit:"Historical meaning with independent response, or preserve earlier Open Play rendering"},
+  shadowPower:{min:1,max:4,unit:"Manual Meaning only; display-RGB shadow exponent"},radiusPixels:{min:0,max:96,unit:"Manual Meaning only; inward smear distance in output pixels"},colorThreshold:{min:0,max:1,unit:"Manual Meaning only; HSV colorfulness threshold"},
   mode:{options:["Low Pass","High Pass","Band Pass"]},radius:{min:.1,max:24,unit:"output pixels"},
   historySeconds:{min:.25,max:4,unit:"seconds"},delaySeconds:{min:.015625,max:4,unit:"seconds per tile age; unavailable past uses oldest actual retained frame"},columns:{min:2,max:8,step:1},
   captureToken:{kind:"caller-controlled capture identity"},periodBeats:{min:.125,max:16,unit:"beats"},periodSeconds:{min:.1,max:16,unit:"seconds; independent pulse duration"},edgeWidth:{min:.005,max:.45,unit:"normalized distance from nearest image edge"},duty:{min:.02,max:.95},panels:{min:2,max:12,step:1},
   turnsPerSecond:{min:-4,max:4},red:{min:0,max:3},green:{min:0,max:3},blue:{min:0,max:3},hue:{min:-360,max:360,unit:"degrees; Color Isolator uses0..360"},
   saturation:{min:0,max:3},luminance:{min:-1,max:1},exposure:{min:0,max:2},angle:{min:-360,max:360,unit:"degrees"},axis:{options:["Horizontal","Vertical","Both"]},sectors:{min:2,max:24,step:1},
-  gamma:{min:.1,max:8},width:{min:.001,max:.5,unit:"hue turns"},softness:{min:.001,max:.25,unit:"normalized threshold; Color Isolator allows.5"},pixels:{min:0,max:64},spill:{min:0,max:1},
+  gamma:{min:.1,max:8,unit:"Earlier Open Play only; original reciprocal exponent"},width:{min:.001,max:.5,unit:"hue turns"},softness:{min:.001,max:.25,unit:"normalized threshold; Color Isolator allows.5"},pixels:{min:0,max:64},spill:{min:0,max:1},
   scale:{min:.25,max:8},centerX:{min:0,max:1},centerY:{min:0,max:1},tiles:{min:2,max:12,step:1},
 };
 for (const effect of videoEffectCatalog) {
   effect.independentParameters = [{name:"value",default:effect.default.value,min:0,max:1,
     status:"independent amount;0 is exact bypass"}, ...Object.entries(effect.default.params).map(([name,value])=>({name,default:value,...parameterBounds[name],status:"independently designed"}))];
   if(effect.name === "Color Isolator")for(const parameter of effect.independentParameters){if(parameter.name === "hue")parameter.min=0;if(parameter.name === "softness")parameter.max=.5;}
+  if(effect.name === "Smudge")for(const parameter of effect.independentParameters){if(parameter.name === "angle")parameter.unit="Earlier Open Play only; original direction in degrees";if(parameter.name === "edgeWidth")parameter.min=.01;}
   if(effect.name === "Frame Pulse")effect.legacyParameters=[{name:"periodBeats",min:.125,max:16,unit:"beats",status:"Independent compatibility timing only when periodSeconds is absent; no frame-hold semantics."}];
   effect.historyPolicy = ["Frame Freeze","Delay Grid"].includes(effect.name)
     ? "Per-slot upstream-frame state survives parameter changes; asset/effect/off/reset or backward time clears it. Temporal storage is bounded."
     : "Per-slot record/spring state survives parameter changes; no retained video frames allocated.";
   effect.colorPolicy = "Normalized display RGB; premultiplied internal filtering, straight-alpha colour operations/output; transparent outside image bounds. Not a vendor colour-space claim.";
+}
+
+// Preserve resource provenance/candidate flags as historical evidence. Current
+// menu presence has its own narrower field; algorithms remain unverified.
+for(const effect of videoEffectCatalog){
+  const menu=currentVideoEffects[effect.name];
+  effect.referenceMenuVisible=!!menu;
+  effect.referenceMenuLabel=menu?.label??effect.name;
+  effect.referenceMenuCategory=menu?.category??null;
+  effect.referenceMenuEvidence=videoMenuEvidence;
+  if(menu)effect.referenceAvailability='Observed installed4.0.10 menu on2026-10-17; parameter/rendering equivalence unverified';
 }

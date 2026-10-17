@@ -1,34 +1,47 @@
-// Original transition lifecycle. Historical manual supplies Center/midpoint/end-cut
-// semantics; curves, ties and5%/95% Scratch bands are independent Open Play policy.
-const clamp = (n) => Math.max(0, Math.min(1, Number.isFinite(n) ? n : 0.5));
-
+// Original lifecycle. Historical manual supplies broad transition meanings;
+// thresholds, curves, traversal events and seeded ordering are independent.
+const clamp = n => Math.max(0,Math.min(1,Number.isFinite(n)?n:.5));
+export function gridSequenceOrder(cycle=0){
+  if(!Number.isSafeInteger(cycle)||cycle<0)throw new RangeError('Grid sequence cycle must be a nonnegative safe integer.');
+  let seed=(0x6d2b79f5^cycle)>>>0;
+  const random=()=>{seed=(seed+0x6d2b79f5)>>>0;let t=Math.imul(seed^(seed>>>15),1|seed);t^=t+Math.imul(t^(t>>>7),61|t);return((t^(t>>>14))>>>0)/4294967296;};
+  const order=Array.from({length:9},(_,i)=>i);
+  for(let i=8;i>0;i--){const j=Math.floor(random()*(i+1));[order[i],order[j]]=[order[j],order[i]];}
+  return Object.freeze(order);
+}
 export function createTransitionState() {
   let previous = null;
   return {
     reset() { previous = null; },
     advance({ name, amount, time = 0, frameId, left, right }) {
       amount = clamp(amount);
-      const restart = !previous || name !== previous.name ||
-        left !== previous.left || right !== previous.right || time < previous.time;
+      const restart = !previous || name !== previous.name || left !== previous.left ||
+        right !== previous.right || time < previous.time;
       const freshFrame = restart || frameId === undefined || frameId !== previous.frameId;
-      // frameId deduplicates temporal history, not control events or clock reads.
-      // Always record endpoints, threshold crossings and the latest observed time.
       const endpoint = amount <= 0 ? 0 : amount >= 1 ? 1 : null;
-      let side = restart ? (amount < 0.5 ? 0 : 1) : previous.result.side;
-      let captureLatch = name === "Scratch Fade" && restart;
-      if (name === "Latch 50") {
-        const next = amount < 0.5 ? 0 : 1;
-        side = next;
-      } else if (name === "Scratch") {
-        // End cuts select LIVE inputs. Interior travel preserves the last side.
-        if (amount <= 0.05) side = 0;
-        else if (amount >= 0.95) side = 1;
-      } else if (name === "Scratch Fade") {
-        if (endpoint !== null) { side = endpoint; captureLatch = true; }
-        else if (previous?.endpoint !== null && previous?.endpoint !== undefined) captureLatch = true;
+      let side = restart ? (amount < .5 ? 0 : 1) : previous.result.side;
+      if (name === 'Latch 50') side = amount < .5 ? 0 : 1;
+      if (name === 'Scratch') {
+        if (amount <= .05) side = 0;
+        else if (amount >= .95) side = 1;
       }
-      const mixAmount = name === "Center" ? clamp((amount - 0.25) * 2) : amount;
-      const result = { side, mixAmount, captureLatch, freshFrame, resetHistory: restart };
+      // Each observed departure from an endpoint begins a traversal. Interior
+      // reversals and duplicate frame/control events keep the current traversal.
+      // Starting in the interior counts as the first traversal (H / seed zero).
+      let cycle = restart ? 0 : previous.result.cycle;
+      let traversalStarted = restart ? endpoint === null : previous.result.traversalStarted;
+      if (!restart && previous.endpoint !== null && endpoint === null) {
+        if (traversalStarted) cycle++;
+        traversalStarted = true;
+      }
+      const sequenceOrder = restart || cycle !== previous.result.cycle ?
+        gridSequenceOrder(cycle) : previous.result.sequenceOrder;
+      const mixAmount = name === 'Center' ? clamp((amount - .25) * 2) : amount;
+      const upfaderGates = name === 'Scratch Fade' ?
+        (amount <= .05 ? [1, 0] : amount >= .95 ? [0, 1] : [1, 1]) : [1, 1];
+      const result = { side, mixAmount, captureLatch: false, freshFrame,
+        resetHistory: restart, cycle, traversalStarted, boxAxis: cycle % 2,
+        sequenceOrder, upfaderGates };
       previous = { name, time, frameId, left, right, endpoint, result };
       return result;
     },

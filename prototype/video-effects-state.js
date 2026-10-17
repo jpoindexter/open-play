@@ -85,11 +85,12 @@ export function videoEffectUniforms(spec) {
     case "RGB Eq":return [n("red",1.3,0,3),n("green",1,0,3),n("blue",.7,0,3),0];
     case "CSL Eq":return [n("hue",45,-360,360),n("saturation",1.25,0,3),n("luminance",.04,-1,1),0];
     case "Brightness":return [n("exposure",1,0,2),0,0,0];
-    case "Smudge":return [n("angle",0,-360,360)*Math.PI/180,0,0,0];
+    case "Smudge":return [n("radiusPixels",24,0,96),n("edgeWidth",.25,.01,.45),n("angle",0,-360,360)*Math.PI/180,x.behavior==="Earlier Open Play"?1:0];
     case "Mirror":return [["Horizontal","Vertical","Both"].indexOf(x.axis),0,0,0];
     case "Kaleidoscope":return [Math.round(n("sectors",6,2,24)),n("angle",0,-360,360)*Math.PI/180,0,0];
-    case "Saturation":return [n("saturation",0,0,3),0,0,0];
-    case "Gamma":return [n("gamma",3,.1,8),0,0,0];
+    case "Saturation":return [n("saturation",2,0,3),0,0,0];
+    case "Gamma":return [n("shadowPower",2,1,4),n("gamma",3,.1,8),0,x.behavior==="Earlier Open Play"?1:0];
+    case "UV Paint":return [n("colorThreshold",.2,0,1),n("softness",.05,.001,.25),0,x.behavior==="Earlier Open Play"?1:0];
     case "Color Isolator":return [n("hue",0,0,360),n("width",.08,.001,.5),n("softness",.08,.001,.5),0];
     case "Anaglyph 3D":return [n("pixels",12,0,64),0,0,0];
     case "Luma Key Black":case "Luma Key White":return [n("softness",.04,.001,.25),0,0,0];

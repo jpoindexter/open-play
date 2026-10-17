@@ -14,7 +14,8 @@ precision highp float;
 varying vec2 uv;
 uniform sampler2D leftSource, rightSource, historySource, latchLeft, latchRight;
 uniform float amount, clockTime, tempo, historyReady, latchSide, motion, premultipliedOutput;
-uniform vec2 upfaders, levels;
+uniform vec2 upfaders, levels, scratchGates;
+uniform float gridOrder[9];
 uniform int kind;
 const float PI = 3.14159265359;
 vec4 fetchPremul(sampler2D source, vec2 p) {
@@ -70,7 +71,7 @@ vec4 transition() {
   if (kind == 8) return mix(a, b, t);
   // Endpoint hysteresis / midpoint selection acts on current live textures.
   if (kind == 9 || kind == 10) return latchSide < 0.5 ? a : b;
-  if (kind == 11) return mix(fetchPremul(latchLeft, p) * upfaders.x, b, t);
+  if (kind == 11) return additive(a * scratchGates.x, b * scratchGates.y);
   if (kind == 12 || kind == 13) {
     bool horizontal = kind == 12;
     float axis = horizontal ? p.x : p.y;
@@ -81,12 +82,7 @@ vec4 transition() {
     c.rgb *= incoming ? 0.55 + 0.45 * t : 1.0 - 0.45 * t;
     return c;
   }
-  if (kind == 14) {
-    vec2 outgoing = center / (1.0 - 0.8 * t) + 0.5;
-    vec2 incoming = center / (0.2 + 0.8 * t) + 0.5;
-    vec4 ca = A(outgoing), cb = B(incoming);
-    return mix(ca, cb, smoothstep(0.2, 0.8, t));
-  }
+  // Box Both resolves to the exact Box H/V kernel per declared traversal.
   if (kind == 15 || kind == 16 || kind == 17) {
     float scale = max(abs(cos(PI * t)), 0.015);
     vec2 q = center;
@@ -113,8 +109,8 @@ vec4 transition() {
   }
   if (kind == 23 || kind == 24) {
     vec2 grid = vec2(6.0, 4.0), cell = floor(p * grid), local = fract(p * grid);
-    float delay = (sin(cell.x * 0.9 + cell.y * 1.3) + 1.0) * 0.25;
-    float progress = clamp(t * 1.6 - delay * 0.6, 0.0, 1.0);
+    float delay = kind == 23 ? cell.x / 5.0 : cell.y / 3.0;
+    float progress = clamp(t * 1.8 - delay * 0.8, 0.0, 1.0);
     float width = max(abs(cos(PI * progress)), 0.02);
     vec2 q = local - 0.5;
     if (kind == 23) q.x /= width; else q.y /= width;
@@ -147,9 +143,9 @@ vec4 transition() {
     return mix(a, b, reveal);
   }
   if (kind == 29) {
-    vec2 cell = floor(p * vec2(6.0, 4.0));
-    float order = (cell.x + cell.y * 0.7) / 7.1;
-    return order < t ? b : a;
+    vec2 cell = floor(p * 3.0);
+    float rank = cell.x + cell.y * 3.0;
+    return t * 9.0 >= rank + 1.0 ? b : a;
   }
   if (kind == 30) {
     vec2 grid = vec2(4.0, 3.0), cell = floor(p * grid), local = fract(p * grid);
@@ -158,15 +154,15 @@ vec4 transition() {
     if (abs(q.x - 0.5) > 0.5 || abs(q.y - 0.5) > 0.5) return a;
     return B((cell + q) / grid);
   }
-  if (kind == 31) {
-    vec2 cell = floor(p * vec2(5.0, 4.0));
-    float delay = hash(cell) * 0.65;
-    return mix(a, b, smoothstep(delay, delay + 0.35, t));
-  }
-  if (kind == 32) {
-    vec2 grid = vec2(4.0), cell = floor(p * grid), local = fract(p * grid);
-    float progress = t * 16.0 - (cell.x + cell.y * 4.0);
-    return local.x < progress ? b : a;
+  if (kind == 31 || kind == 32) {
+    vec2 cell = floor(p * 3.0);
+    float index = cell.x + cell.y * 3.0, rank = index;
+    if (kind == 32) {
+      // Invert the CPU's seeded cell-order permutation to a per-cell rank.
+      for (int i = 0; i < 9; i++) if (abs(gridOrder[i] - index) < 0.1) rank = float(i);
+      return t * 9.0 >= rank + 1.0 ? b : a;
+    }
+    return mix(a, b, clamp(t * 9.0 - rank, 0.0, 1.0));
   }
   // Default is an original linear interpretation. Crossfade is Open Play's
   // separately labeled baseline alias; neither claims reference equivalence.

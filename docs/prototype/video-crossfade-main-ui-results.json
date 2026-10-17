@@ -1,0 +1,85 @@
+{
+  "observedAt": "2026-10-17T06:30:47.851Z",
+  "scope": "Actual main prototype controls, persisted DOM values and endpoint timing; no reference curve, physical hardware or native proof.",
+  "checks": [
+    {
+      "name": "Linked crossfader disables manual and directional controls",
+      "executed": true,
+      "evidence": {
+        "autoDisabled": true,
+        "crossDisabled": true,
+        "leftDisabled": true
+      }
+    },
+    {
+      "name": "Fastest speed reaches right endpoint through real Fade right button",
+      "executed": true,
+      "wallMsIncludingAutomation": 416,
+      "evidence": {
+        "cross": "1",
+        "crossLinked": false,
+        "note": "Slow ← → Fast · 0.25s independent duration",
+        "status": "Directional fade stopped",
+        "transportLinked": true
+      }
+    },
+    {
+      "name": "Slowest versus fastest measured through actual speed and direction controls",
+      "executed": true,
+      "wallMsIncludingAutomation": 10065,
+      "fastWallMsIncludingAutomation": 416,
+      "ordered": true,
+      "domReads": 1916,
+      "evidence": {
+        "cross": "1",
+        "note": "Slow ← → Fast · 10.00s independent duration",
+        "status": "Directional fade stopped"
+      }
+    },
+    {
+      "name": "Finished endpoint, speed and separate link states survive reload",
+      "executed": true,
+      "evidence": {
+        "cross": "-1",
+        "crossLinked": false,
+        "note": "Slow ← → Fast · 10.00s independent duration",
+        "transportLinked": true
+      }
+    },
+    {
+      "name": "Fade survives actual panel replacement and endpoint is persisted before a reload",
+      "executed": true,
+      "canvasAbsentAfterReplacement": true,
+      "awayMs": 11584,
+      "evidence": {
+        "cross": "1",
+        "crossLinked": false,
+        "note": "Slow ← → Fast · 10.00s independent duration",
+        "status": "Directional fade stopped",
+        "transportLinked": true
+      }
+    },
+    {
+      "name": "Actual Stop fade holds intermediate endpoint across later frames",
+      "executed": true,
+      "initial": {
+        "cross": "0.75",
+        "speed": "Slow ← → Fast · 2.20s independent duration",
+        "status": "Directional fade stopped"
+      },
+      "later": {
+        "cross": "0.75",
+        "status": "Directional fade stopped"
+      },
+      "unchanged": true
+    },
+    {
+      "name": "Stopped intermediate value survives actual reload",
+      "executed": true,
+      "evidence": {
+        "cross": "0.75",
+        "status": "Directional fade stopped"
+      }
+    }
+  ]
+}

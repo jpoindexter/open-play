@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-16",
+  "updated": "2026-10-17T06:34:23.962065+00:00",
   "complete_inventory": false,
   "requirements": [
     {
@@ -9650,7 +9650,7 @@
       "trigger": "Assign master effects",
       "expected": "Retain two master effect slots in addition to per-channel effects Historical per-channel slots run in series. Link detailed effect/transition contracts for frame-history and boundary semantics rather than equating55/34 independent names with reference algorithms. Capability cost labels are historical metadata, not measured performance.",
       "evidence": "DOCUMENTED; installed runtime untested Historical official Video manual enrichment is source-qualified; no new reference behavior acceptance.",
-      "prototype_behavior": "Six actual ordered GPU slots:2left/2right/2master.32/32 assembled-pipeline checks include each position, concurrent routing and output pixels. Reference order/algorithms remain unverified.",
+      "prototype_behavior": "Six actual ordered GPU slots:2left/2right/2master.32/32 assembled-pipeline checks include each position, concurrent routing and output pixels. Reference order/algorithms remain unverified. Current native slot menus now observed55 FX and29 transitions; independent FX81/81 and transitions65/65 actual GPU checks include corrected color/traversal meanings. Four resource-only transitions remain labeled unobserved. Menu visibility is separate from reference rendering proof.",
       "native_status": "blocked_until_prototype_approval",
       "acceptance": "Assign master effects → Retain two master effect slots in addition to per-channel effects Historical per-channel slots run in series. Link detailed effect/transition contracts for frame-history and boundary semantics rather than equating55/34 independent names with reference algorithms. Capability cost labels are historical metadata, not measured performance.",
       "source_url": "https://serato.com/dj/pro/expansions",
@@ -9672,7 +9672,8 @@
       "prototype_evidence": [
         "docs/prototype/VIDEO_FUNCTIONAL_REVIEW.md",
         "docs/prototype/KARAOKE_FUNCTIONAL_REVIEW.md",
-        "docs/prototype/MEDIA_CRATE_FUNCTIONAL_REVIEW.md"
+        "docs/prototype/MEDIA_CRATE_FUNCTIONAL_REVIEW.md",
+        "docs/prototype/VIDEO_COLOR_CROSSFADE_REVIEW.md"
       ],
       "video_manual_enrichment": {
         "proposal_ids": [
@@ -9716,7 +9717,8 @@
           }
         ],
         "mergedAt": "2026-10-16T21:48:53.645708+00:00"
-      }
+      },
+      "current_menu_evidence": "docs/research/VIDEO_CURRENT_MENUS_20261017.json"
     },
     {
       "id": "REQ-348",
@@ -14585,7 +14587,7 @@
       "trigger": "Adjust speed slider",
       "expected": "Change automatic video-crossfade period; exact mapping and control interactions remain unknown. Historical speed direction is slower to the left and faster to the right; relate this setting to directional endpoint actions in REQ-513 without inventing a reference duration curve.",
       "evidence": "OBSERVED installed4.0.10.213 control labels/session choices in UI_OBSERVATIONS.md; no parameter changes or runtime acceptance. Session selection is not a default. Historical official Video manual enrichment is source-qualified; no new reference behavior acceptance.",
-      "prototype_behavior": "Gap: current fixed2.5s sinusoidal mix has no speed control and does not prove reference contour.",
+      "prototype_behavior": "Actual independent speed slider: left10s/right.25s linear finite duration, snapshotted per directional action; not the separate Continuous mix extension. Actual main UI measured10065ms versus416ms including automation, correct ordering and exact endpoints. Own scalar persists. Reference duration/contour remains unknown.",
       "native_status": "blocked_until_prototype_approval",
       "acceptance": "Adjust speed slider → Change automatic video-crossfade period; exact mapping and control interactions remain unknown. Historical speed direction is slower to the left and faster to the right; relate this setting to directional endpoint actions in REQ-513 without inventing a reference duration curve.",
       "source_url": "https://github.com/jpoindexter/open-play/blob/main/docs/research/UI_OBSERVATIONS.md",
@@ -14607,7 +14609,8 @@
       "prototype_reference_parity_verified": false,
       "prototype_evidence": [
         "docs/research/VIDEO_CONTROL_GAPS.md",
-        "docs/prototype/VIDEO_LINK_TREATMENT_REVIEW.md"
+        "docs/prototype/VIDEO_LINK_TREATMENT_REVIEW.md",
+        "docs/prototype/VIDEO_COLOR_CROSSFADE_REVIEW.md"
       ],
       "video_manual_enrichment": {
         "proposal_ids": [
@@ -14623,7 +14626,7 @@
         "acceptance_cases": [
           "Measured original-frame travel duration orders slow>fast; declared duration range/curve remains independent until reference measurement."
         ],
-        "acceptance_status": "not_established_by_registry_merge",
+        "acceptance_status": "independent_browser_speed_order_executed_reference_curve_unverified",
         "reference_runtime_verified": false,
         "current_control_observations": [],
         "mergedAt": "2026-10-16T21:48:53.645708+00:00"
@@ -14933,7 +14936,7 @@
       "trigger": "Unlink each Video channel opacity control and the Video crossfader independently; move audio and Video controls",
       "expected": "Each Video channel opacity and crossfade obeys its own link state without forcing unrelated transport/upfader/crossfader policy changes.",
       "evidence": "DOCUMENTED official historical Video manual, PDF metadata2015-04-09; current4.0.10 algorithm/loaded-runtime behavior remains unverified.",
-      "prototype_behavior": "Requirement merged from qualified source evidence; independent implementation and actual behavior evidence remain separately scoped. This merge does not establish the complete new acceptance path.",
+      "prototype_behavior": "Partial: separate crossLinked flag now controls Video crossfader without changing linked transport/upfaders. Actual AudioEngine cross .6 drives Video pixels when linked; directional actions rejected while linked; unlinked actions preserve audio gains/cross and transport flag. Main UI link controls/persistence executed. Independent per-channel opacity controls/links remain open.",
       "prototype_reference_parity_verified": false,
       "reference_runtime_verified": false,
       "native_status": "blocked_until_prototype_approval",
@@ -14942,7 +14945,7 @@
         "Actual left/right pixel alpha/brightness at0/.5/1, unlink each side while changing audio fader, and ensure other side/crossfader policy remains independent.",
         "Move real audio crossfader with video cross-link off and upfader links on; assert independent mix pixels plus unchanged transport authority."
       ],
-      "acceptance_status": "not_established_by_registry_merge",
+      "acceptance_status": "partial_independent_crossfader_link_executed_channel_links_open",
       "routing": {
         "codex": {
           "model": "gpt-6.1-sol",
@@ -14969,7 +14972,10 @@
           "Exact installed4.0.10 behavior and vendor transfer functions remain unverified.",
           "Exact installed4.0.10 behavior and vendor transfer functions remain unverified."
         ]
-      }
+      },
+      "prototype_evidence": [
+        "docs/prototype/VIDEO_COLOR_CROSSFADE_REVIEW.md"
+      ]
     },
     {
       "id": "REQ-513",
@@ -14986,7 +14992,7 @@
       "trigger": "Request automatic fade left or right at the selected speed",
       "expected": "Travel toward the requested endpoint and finish there. Speed direction relates to REQ-505; exact duration curve, reversal and cancellation policy require declared behavior and execution.",
       "evidence": "DOCUMENTED official historical Video manual, PDF metadata2015-04-09; current4.0.10 algorithm/loaded-runtime behavior remains unverified.",
-      "prototype_behavior": "Requirement merged from qualified source evidence; independent implementation and actual behavior evidence remain separately scoped. This merge does not establish the complete new acceptance path.",
+      "prototype_behavior": "Actual finite left/right, reversal, stop, exact endpoint, Reduced Motion and audio noninterference execute through real mixer/GPU11/11. Main UI buttons, speed ordering, stopped-position/reload persistence and fade completing during panel replacement execute. Independent linear curve .25..10s, duration snapshot and cancellation policies; reference curve unverified.",
       "prototype_reference_parity_verified": false,
       "reference_runtime_verified": false,
       "native_status": "blocked_until_prototype_approval",
@@ -14994,7 +15000,7 @@
       "acceptance_cases": [
         "From-.4/+ .4 request each direction; observe monotonic frame-by-frame position, exact endpoint/stop, reversal/cancellation and no audio-fader movement."
       ],
-      "acceptance_status": "not_established_by_registry_merge",
+      "acceptance_status": "independent_browser_and_main_ui_executed_reference_curve_unverified",
       "routing": {
         "codex": {
           "model": "gpt-6.1-sol",
@@ -15019,7 +15025,10 @@
         "sourceLimits": [
           "Manual defines controls/direction and slow-to-fast slider, not exact duration curve or cancellation policy."
         ]
-      }
+      },
+      "prototype_evidence": [
+        "docs/prototype/VIDEO_COLOR_CROSSFADE_REVIEW.md"
+      ]
     },
     {
       "id": "REQ-514",

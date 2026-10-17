@@ -1,0 +1,101 @@
+{
+  "startedAt": "2026-10-17T06:24:48.227Z",
+  "scope": "Actual imported mixer/GPU, decoded original PNG images in channel overlays and real AudioEngine analysis. No source-video/deck transport or native equivalence.",
+  "checks": [
+    {
+      "name": "Real red/blue channel images and AudioEngine initialize without source video",
+      "passed": false,
+      "error": "Error: Fader/pixel mismatch: {\"cross\":-1,\"active\":false,\"pixel\":[255,0,0,204],\"audioCross\":0}\n    at assert (http://127.0.0.1:8768/prototype/video-crossfade-harness.js:3:65)\n    at assertMix (http://127.0.0.1:8768/prototype/video-crossfade-harness.js:14:46)\n    at http://127.0.0.1:8768/prototype/video-crossfade-harness.js:18:294\n    at async test (http://127.0.0.1:8768/prototype/video-crossfade-harness.js:13:74)\n    at async run (http://127.0.0.1:8768/prototype/video-crossfade-harness.js:16:3)\n    at async $.onclick (http://127.0.0.1:8768/prototype/video-crossfade-harness.js:47:57)"
+    },
+    {
+      "name": "Fade right advances actual pixels monotonically and stops exactly at endpoint",
+      "passed": false,
+      "error": "Error: Fader/pixel mismatch: {\"cross\":-0.9995000004768375,\"active\":true,\"pixel\":[255,0,0,204],\"audioCross\":0}\n    at assert (http://127.0.0.1:8768/prototype/video-crossfade-harness.js:3:65)\n    at assertMix (http://127.0.0.1:8768/prototype/video-crossfade-harness.js:14:46)\n    at Array.forEach (<anonymous>)\n    at http://127.0.0.1:8768/prototype/video-crossfade-harness.js:23:82\n    at async test (http://127.0.0.1:8768/prototype/video-crossfade-harness.js:13:74)\n    at async run (http://127.0.0.1:8768/prototype/video-crossfade-harness.js:20:3)\n    at async $.onclick (http://127.0.0.1:8768/prototype/video-crossfade-harness.js:47:57)"
+    },
+    {
+      "name": "Fade left reverses actual pixels monotonically and reaches its endpoint",
+      "passed": false,
+      "error": "Error: Fader/pixel mismatch: {\"cross\":1,\"active\":true,\"pixel\":[0,0,255,204],\"audioCross\":0}\n    at assert (http://127.0.0.1:8768/prototype/video-crossfade-harness.js:3:65)\n    at assertMix (http://127.0.0.1:8768/prototype/video-crossfade-harness.js:14:46)\n    at Array.forEach (<anonymous>)\n    at http://127.0.0.1:8768/prototype/video-crossfade-harness.js:26:138\n    at async test (http://127.0.0.1:8768/prototype/video-crossfade-harness.js:13:74)\n    at async run (http://127.0.0.1:8768/prototype/video-crossfade-harness.js:25:3)\n    at async $.onclick (http://127.0.0.1:8768/prototype/video-crossfade-harness.js:47:57)"
+    },
+    {
+      "name": "A new opposite action begins at the displayed position without restarting a prior fade",
+      "passed": true,
+      "evidence": {
+        "before": {
+          "cross": -0.38324999988079167,
+          "active": true,
+          "pixel": [
+            176,
+            0,
+            79,
+            204
+          ],
+          "audioCross": 0
+        },
+        "after": {
+          "cross": -0.37274999976158263,
+          "active": true,
+          "pixel": [
+            175,
+            0,
+            80,
+            204
+          ],
+          "audioCross": 0
+        },
+        "end": {
+          "cross": -1,
+          "active": false,
+          "pixel": [
+            255,
+            0,
+            0,
+            204
+          ],
+          "audioCross": 0
+        }
+      }
+    },
+    {
+      "name": "Stop cancels travel and retains the rendered pixel blend across later frames",
+      "passed": false,
+      "error": "Error: Fader/pixel mismatch: {\"cross\":-0.48840000009536766,\"active\":false,\"pixel\":[190,0,65,204],\"audioCross\":0}\n    at assert (http://127.0.0.1:8768/prototype/video-crossfade-harness.js:3:65)\n    at assertMix (http://127.0.0.1:8768/prototype/video-crossfade-harness.js:14:46)\n    at http://127.0.0.1:8768/prototype/video-crossfade-harness.js:32:278\n    at async test (http://127.0.0.1:8768/prototype/video-crossfade-harness.js:13:74)\n    at async run (http://127.0.0.1:8768/prototype/video-crossfade-harness.js:31:3)\n    at async $.onclick (http://127.0.0.1:8768/prototype/video-crossfade-harness.js:47:57)"
+    },
+    {
+      "name": "Independent crossfader link uses real audio cross while transport link remains enabled",
+      "passed": false,
+      "error": "Error: Fader/pixel mismatch: {\"cross\":-1,\"active\":false,\"pixel\":[255,0,0,204],\"audioCross\":0.6}\n    at assert (http://127.0.0.1:8768/prototype/video-crossfade-harness.js:3:65)\n    at assertMix (http://127.0.0.1:8768/prototype/video-crossfade-harness.js:14:46)\n    at http://127.0.0.1:8768/prototype/video-crossfade-harness.js:35:441\n    at test (http://127.0.0.1:8768/prototype/video-crossfade-harness.js:13:80)\n    at run (http://127.0.0.1:8768/prototype/video-crossfade-harness.js:34:9)\n    at async $.onclick (http://127.0.0.1:8768/prototype/video-crossfade-harness.js:47:57)"
+    },
+    {
+      "name": "Reduced Motion finishes directly and also terminates an already moving fade",
+      "passed": false,
+      "error": "Error: Fader/pixel mismatch: {\"cross\":-1,\"active\":false,\"pixel\":[255,0,0,204],\"audioCross\":0.6}\n    at assert (http://127.0.0.1:8768/prototype/video-crossfade-harness.js:3:65)\n    at assertMix (http://127.0.0.1:8768/prototype/video-crossfade-harness.js:14:46)\n    at http://127.0.0.1:8768/prototype/video-crossfade-harness.js:38:412\n    at async test (http://127.0.0.1:8768/prototype/video-crossfade-harness.js:13:74)\n    at async run (http://127.0.0.1:8768/prototype/video-crossfade-harness.js:37:3)\n    at async $.onclick (http://127.0.0.1:8768/prototype/video-crossfade-harness.js:47:57)"
+    },
+    {
+      "name": "Directional commands preserve actual audio analysis and audio fader settings",
+      "passed": true,
+      "evidence": {
+        "beforeLevel": 0.02491137446318534,
+        "afterLevel": 0.02491137446318534,
+        "cross": 0.6,
+        "levels": [
+          0.8,
+          0.8,
+          0.8,
+          0.8
+        ],
+        "tolerance": 0.015
+      }
+    },
+    {
+      "name": "Disposal cancels active fade and rejects later directional starts",
+      "passed": true,
+      "evidence": {
+        "error": "Video mixer was disposed."
+      }
+    }
+  ],
+  "notifications": [],
+  "passed": 3,
+  "failed": 6
+}

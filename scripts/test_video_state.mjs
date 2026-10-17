@@ -151,4 +151,45 @@ test('Frame Pulse compatibility does not execute accessors or accept inherited t
   const result=restoreVideoState(stateWith(effect('Frame Pulse',params))).fx.left[0];
   assert.equal(calls,0);assert.equal(result.params.periodSeconds,1);assert(!('periodBeats' in result.params));
 });
+test('Earlier Gamma/Smudge/UV saved presets migrate only at restore and survive repeated round trips',()=>{
+  const prior={version:1,recordingQuality:'720p',fx:{left:[effect('Gamma',{gamma:.25},0,false),effect('Smudge',{angle:0})],right:[effect('Saturation',{saturation:0})],master:[effect('UV Paint',{})]}};
+  const before=JSON.stringify(prior),restored=restoreVideoState(JSON.parse(before));
+  for(const target of ['left','master'])for(const s of restored.fx[target])if(['Gamma','Smudge','UV Paint'].includes(s.name))assert.equal(s.params.behavior,'Earlier Open Play');
+  assert.deepEqual([restored.fx.left[0].params.gamma,restored.fx.left[0].value,restored.fx.left[0].on],[.25,0,false]);
+  assert.equal(restored.fx.left[1].params.angle,0);assert.equal(restored.fx.right[0].params.saturation,0);assert.equal(restored.recordingQuality,'720p');
+  const round=restoreVideoState(JSON.parse(JSON.stringify(snapshotVideoState(restored))));assert.deepEqual(round,restored);assert.equal(JSON.stringify(prior),before);
+  assert.equal(snapshotVideoState(stateWith(effect('Gamma',{gamma:3}))).fx.left[0].params.behavior,'Manual Meaning','Snapshot of a new runtime spec must not perform saved-record migration');
+});
+test('Fresh explicit modes survive restore and saturation old-missing versus fresh defaults stay distinct',()=>{
+  for(const name of ['Gamma','Smudge','UV Paint']){
+    const entry=videoEffectCatalog.find(e=>e.name===name),fresh={name,...entry.default},saved=snapshotVideoState(stateWith(fresh));
+    assert.equal(restoreVideoState(saved).fx.left[0].params.behavior,'Manual Meaning');
+    saved.fx.left[0].params.behavior='Earlier Open Play';assert.equal(restoreVideoState(saved).fx.left[0].params.behavior,'Earlier Open Play');
+  }
+  assert.equal(restoreVideoState(stateWith(effect('Saturation',{}))).fx.left[0].params.saturation,0);
+  assert.equal(snapshotVideoState(stateWith(effect('Saturation',{}))).fx.left[0].params.saturation,2);
+  assert.equal(restoreVideoState(stateWith(effect('Saturation',{saturation:0}))).fx.left[0].params.saturation,0);
+});
+test('Legacy mode and scalar migrations do not invoke getters, coercions or inherited controls',()=>{
+  let calls=0;const params=Object.create({behavior:'Manual Meaning',gamma:8});
+  for(const key of ['behavior','gamma','shadowPower'])Object.defineProperty(params,key,{get(){calls++;throw Error('getter');},enumerable:true});
+  const result=restoreVideoState(stateWith(effect('Gamma',params))).fx.left[0];assert.equal(calls,0);assert.equal(result.params.behavior,'Earlier Open Play');assert.equal(result.params.gamma,3);
+  const bad={toString(){calls++;throw Error('coercion');}},corrupt=restoreVideoState(stateWith(effect('UV Paint',{behavior:bad,colorThreshold:bad}))).fx.left[0];
+  assert.equal(calls,0);assert.equal(corrupt.params.behavior,'Manual Meaning');assert.equal(corrupt.params.colorThreshold,.2);
+});
+test('Independent auto-crossfade seconds persist finite bounded scalars without executing accessors',()=>{
+  for(const [input,expected] of [[0,.25],[.25,.25],[2.5,2.5],[10,10],[100,10],[-1,.25],[NaN,2.5],[Infinity,2.5],['3',2.5],[null,2.5]]){
+    assert.equal(restoreVideoState(snapshotVideoState({autoCrossfadeSeconds:input})).autoCrossfadeSeconds,expected);
+  }
+  assert.equal(restoreVideoState(Object.create({autoCrossfadeSeconds:9})).autoCrossfadeSeconds,2.5);
+  let calls=0;const hostile={};Object.defineProperty(hostile,'autoCrossfadeSeconds',{get(){calls++;throw Error('getter');}});
+  assert.equal(restoreVideoState(hostile).autoCrossfadeSeconds,2.5);assert.equal(calls,0);
+});
+test('Separate video crossfader link persists literal booleans and falls back to the prior link flag',()=>{
+  for(const [input,expected] of [[{},true],[{linked:false},false],[{linked:true},true],[{linked:true,crossLinked:false},false],[{linked:false,crossLinked:true},true],[{linked:false,crossLinked:'true'},false]]){
+    const round=restoreVideoState(snapshotVideoState(input));assert.equal(round.crossLinked,expected);assert.equal(round.linked,typeof input.linked==='boolean'?input.linked:true);
+  }
+  assert.equal(restoreVideoState(Object.create({crossLinked:false,linked:false})).crossLinked,true);
+  let calls=0;const hostile={linked:false};Object.defineProperty(hostile,'crossLinked',{get(){calls++;throw Error('getter');}});assert.equal(restoreVideoState(hostile).crossLinked,false);assert.equal(calls,0);
+});
 console.log(JSON.stringify({scope:'Executed pure metadata snapshots/restoration and corruption cases; browser persistence integration remains a separate parent check.',passed:checks.length,checks},null,2));

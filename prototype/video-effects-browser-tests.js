@@ -1,4 +1,5 @@
 import { createVideoEffects, videoEffectCatalog } from "./video-effects.js";
+import { restoreVideoState, snapshotVideoState } from "./video-state.js";
 const width=96,height=64;
 function canvas(){const c=document.createElement("canvas");c.width=width;c.height=height;return c;}
 const fixture=canvas(), solid=canvas(), background=canvas();
@@ -105,8 +106,74 @@ run.onclick=async()=>{
  await test("Colour algorithms follow numeric intensity contracts and preserve alpha",()=>{
   fill(solid,[40,90,160,128]);const negative=pixel(draw("Negative",1,{}, {},solid),48,32);
   check(negative.every((v,i)=>Math.abs(v-[215,165,95,128][i])<=2),"RGB inversion or alpha incorrect");
-  const a=pixel(draw("Gamma",.25,{gamma:3},{},solid),48,32),b=pixel(draw("Gamma",.75,{gamma:3},{},solid),48,32);check(b[0]>a[0]&&b[3]===a[3],"Gamma response must brighten monotonically and preserve alpha");
+  const a=pixel(draw("Gamma",.25,{behavior:"Earlier Open Play",gamma:3},{},solid),48,32),b=pixel(draw("Gamma",.75,{behavior:"Earlier Open Play",gamma:3},{},solid),48,32);check(b[0]>a[0]&&b[3]===a[3],"Earlier Open Play reciprocal Gamma response must brighten monotonically and preserve alpha");
   const grey=pixel(draw("Saturation",1,{saturation:0},{},solid),48,32);check(Math.abs(grey[0]-grey[1])<=1&&Math.abs(grey[1]-grey[2])<=1,"Desaturation should produce equal RGB");
+ });
+ await test("Manual Gamma darkens numeric shadow patches monotonically while retaining endpoints and alpha",()=>{
+  const values=[0,64,128,192,255],observed=[];
+  for(const alpha of [255,128]){
+   paint(solid,x=>{const g=values[Math.min(4,Math.floor(x*5/width))];return[g,g,g,alpha];});
+   const bypass=draw(null,1,{}, {},solid),half=draw("Gamma",.5,{}, {},solid),full=draw("Gamma",1,{}, {},solid),zero=draw("Gamma",0,{}, {},solid);
+   check(difference(bypass,zero)<.01,"Manual Gamma zero must be exact bypass");
+   for(let i=0;i<5;i++){const x=Math.floor((i+.5)*width/5),p=pixel(full,x,32),h=pixel(half,x,32),expected=Math.round(255*(values[i]/255)**2);observed.push({alpha,input:values[i],half:h,full:p,expected});
+    check(p.slice(0,3).every(v=>Math.abs(v-expected)<=2)&&Math.abs(p[3]-alpha)<=1,"Gamma numeric/alpha mismatch: "+JSON.stringify(observed.at(-1)));
+    if(i>0&&i<4)check(h[0]>p[0]&&h[0]<values[i],"Gamma half amount must lie strictly between identity and full shadows");
+   }
+  }
+  return {observed,curve:"Independent display-RGB power2 at full amount; historical manual meaning only, no installed-version curve claim"};
+ });
+ await test("Fresh Saturation increases measured chroma and preserves explicit zero, gray and alpha",()=>{
+  const observed=[];
+  for(const alpha of [255,128]){
+   paint(solid,x=>x<48?[100,120,140,alpha]:[100,100,100,alpha]);
+   const full=draw("Saturation",1,{}, {},solid),half=draw("Saturation",.5,{}, {},solid),desaturated=draw("Saturation",1,{saturation:0},{},solid),p=pixel(full,24,32),h=pixel(half,24,32),g=pixel(full,72,32),d=pixel(desaturated,24,32);
+   check(p.slice(0,3).every((v,i)=>Math.abs(v-[83,123,163][i])<=2)&&Math.abs(p[3]-alpha)<=1,"Fresh Saturation target2 numeric/alpha mismatch: "+p);
+   check(h[2]-h[0]>40&&h[2]-h[0]<p[2]-p[0],"Half saturation must have intermediate chroma spread");
+   check(g.slice(0,3).every(v=>Math.abs(v-100)<=1)&&Math.abs(g[3]-alpha)<=1,"Gray/alpha must remain unchanged");
+   check(Math.max(...d.slice(0,3))-Math.min(...d.slice(0,3))<=1&&Math.abs(d[3]-alpha)<=1,"Explicit zero target must retain desaturation");observed.push({alpha,full:p,half:h,gray:g,explicitZero:d});
+  }
+  return {observed,meaning:"Historical manual increasing intensity; Rec709 display-RGB interpolation/default2 independent"};
+ });
+ await test("Manual Smudge pulls all four actual borders inward with aspect-correct spatial rays",()=>{
+  const observed=[];
+  for(const [w,h] of [[256,256],[256,128]]){
+   const source=document.createElement("canvas");source.width=w;source.height=h;const ctx=source.getContext("2d"),image=ctx.createImageData(w,h),r=createVideoEffects({width:w,height:h});
+   for(let y=0;y<h;y++)for(let x=0;x<w;x++){const rgba=x<4?[255,0,0,255]:x>=w-4?[0,255,0,255]:y<4?[0,0,255,255]:y>=h-4?[255,255,0,255]:Math.abs(x-w/2)<10&&Math.abs(y-h/2)<10?[80,80,80,255]:[0,0,0,255];image.data.set(rgba,(y*w+x)*4);}ctx.putImageData(image,0,0);
+   const at=(a,x,y)=>Array.from(a.slice((y*w+x)*4,(y*w+x)*4+4));
+   try{r.render(source,[{name:"Smudge",on:true,value:1}],base);const out=r.readPixels(),samples=[[12,Math.floor(h/2),[0]],[w-13,Math.floor(h/2),[1]],[Math.floor(w/2),12,[2]],[Math.floor(w/2),h-13,[0,1]]].map(([x,y,channels])=>({x,y,channels,pixel:at(out,x,y)}));
+    for(const s of samples){for(let c=0;c<3;c++)check(s.channels.includes(c)?s.pixel[c]>20:s.pixel[c]<=2,"Smudge inward border ownership mismatch: "+JSON.stringify({w,h,...s}));check(s.pixel[3]===255,"Opaque border must stay opaque");}
+    const center=at(out,Math.floor(w/2),Math.floor(h/2));check(center.slice(0,3).every(v=>Math.abs(v-80)<=1)&&center[3]===255,"Smudge must leave center unchanged");
+    r.render(source,[],base);const bypass=r.readPixels();r.render(source,[{name:"Smudge",on:true,value:1,params:{radiusPixels:0}}],base);check(difference(bypass,r.readPixels())<.01,"Smudge radius0 must be exact bypass");observed.push({width:w,height:h,samples,center,zeroRadiusDifference:difference(bypass,r.readPixels())});
+   }finally{r.dispose();}
+  }
+  return {observed,kernel:"Independent nine equal premultiplied outward samples leave an inward trail; no temporal state"};
+ });
+ await test("Manual Smudge premultiplied filtering retains straight red through partial-alpha trails",()=>{
+  const source=document.createElement("canvas");source.width=256;source.height=128;const ctx=source.getContext("2d"),image=ctx.createImageData(256,128),r=createVideoEffects({width:256,height:128});
+  for(let y=0;y<128;y++)for(let x=0;x<4;x++)image.data.set([255,0,0,128],(y*256+x)*4);ctx.putImageData(image,0,0);
+  try{r.render(source,[{name:"Smudge",on:true,value:1}],base);const out=r.readPixels(),p=Array.from(out.slice((64*256+12)*4,(64*256+12)*4+4));check(p[0]>=253&&p[1]<=2&&p[2]<=2&&p[3]>0&&p[3]<128,"Smudge transparent trail darkened straight red or lost partial alpha: "+p);return {sample:p,width:256,height:128};}finally{r.dispose();}
+ });
+ await test("Manual UV Paint gates gray to opaque black and preserves eligible RGB hues and alpha",()=>{
+  const colors=[[100,100,100],[100,99,99],[120,80,80],[80,120,80],[80,80,120],[120,100,80]],expected=[[0,0,0],[0,0,0],[255,0,0],[0,255,0],[0,0,255],[255,128,0]],observed=[];
+  for(const alpha of [255,128]){paint(solid,x=>[...colors[Math.min(5,Math.floor(x*6/width))],alpha]);const out=draw("UV Paint",1,{}, {},solid);
+   for(let i=0;i<6;i++){const p=pixel(out,Math.floor((i+.5)*width/6),32);check(p.slice(0,3).every((v,c)=>Math.abs(v-expected[i][c])<=2)&&Math.abs(p[3]-alpha)<=1,"UV hue/gate/alpha mismatch: "+JSON.stringify({input:colors[i],alpha,p,expected:expected[i]}));observed.push({input:colors[i],alpha,actual:p,expected:expected[i]});}}
+  return {observed,colorfulness:"Independent(max-min)/max, HSV hue with full saturation/value above threshold+softness"};
+ });
+ await test("Manual UV Paint threshold and softness use measured numeric gates without cyan boundary glow",()=>{
+  paint(solid,x=>x<32?[100,80,80,255]:x<64?[100,75,75,255]:[100,70,70,255]);
+  const out=draw("UV Paint",1,{colorThreshold:.2,softness:.1},{},solid),samples=[pixel(out,16,32),pixel(out,48,32),pixel(out,80,32)],high=pixel(draw("UV Paint",1,{colorThreshold:.3,softness:.1},{},solid),48,32);
+  for(const [i,level] of [[0,0],[1,128],[2,255]])check(Math.abs(samples[i][0]-level)<=2&&samples[i][1]<=2&&samples[i][2]<=2&&samples[i][3]===255,"UV softness numeric mismatch: "+samples[i]);check(high[0]<=2&&high[1]<=2&&high[2]<=2,"Raising threshold must suppress the same patch");
+  paint(solid,x=>x<48?[100,100,100,255]:[180,180,180,255]);const gray=draw("UV Paint",1,{}, {},solid),boundary=[pixel(gray,47,32),pixel(gray,48,32)];check(boundary.every(p=>p[0]<=1&&p[1]<=1&&p[2]<=1&&p[3]===255),"Gray boundary must remain black, without old neon edge glow");
+  return {samples,raisedThreshold:high,boundary};
+ });
+ await test("Earlier saved Gamma, directional Smudge and neon UV renders survive real metadata round trips",()=>{
+  const prior={version:1,fx:{left:[{name:"Gamma",on:true,value:.5,params:{gamma:.25}},{name:"Smudge",on:true,value:1,params:{angle:0}}],right:[{name:"UV Paint",on:true,value:1,params:{}}]}};
+  const saved=restoreVideoState(JSON.parse(JSON.stringify(snapshotVideoState(restoreVideoState(prior))))),g=saved.fx.left[0],s=saved.fx.left[1],u=saved.fx.right[0];
+  check([g,s,u].every(x=>x.params.behavior==="Earlier Open Play"),"Saved legacy behavior marker must survive restore/snapshot/restore");
+  fill(solid,[64,64,64,255]);const gamma=pixel(draw(g.name,g.value,g.params,{},solid),48,32),expectedGamma=Math.round(255*(64/255)**(1/(1+(.25-1)*.5)));check(g.params.gamma===.25&&Math.abs(gamma[0]-expectedGamma)<=2,"Legacy below1 gamma was discarded or reinterpreted: "+gamma);
+  fill(solid,[100,100,100,128]);const uv=pixel(draw(u.name,u.value,u.params,{},solid),48,32);check(uv.slice(0,3).every((v,i)=>Math.abs(v-[29,15,88][i])<=2)&&Math.abs(uv[3]-128)<=1,"Legacy neon UV numeric render changed: "+uv);
+  const source=document.createElement("canvas");source.width=512;source.height=128;const ctx=source.getContext("2d");ctx.fillStyle="black";ctx.fillRect(0,0,512,128);ctx.fillStyle="red";ctx.fillRect(220,0,4,128);const r=createVideoEffects({width:512,height:128});
+  try{r.render(source,[s],base);const data=r.readPixels(),at=x=>Array.from(data.slice((64*512+x)*4,(64*512+x)*4+4)),smudge=at(242),opposite=at(202),weight=Math.exp(-.35)/Array.from({length:9},(_,i)=>Math.exp(-i*.35)).reduce((a,b)=>a+b,0),expected=Math.round(255*weight);check(Math.abs(smudge[0]-expected)<=2&&smudge[1]===0&&smudge[2]===0&&smudge[3]===255&&opposite[0]===0,"Legacy angle0 directional smear changed: "+JSON.stringify({smudge,opposite,expected}));return {gamma:{stored:g.params.gamma,actual:gamma,expected:expectedGamma},uv:{actual:uv,expected:[29,15,88,128]},smudge:{storedAngle:s.params.angle,actual:smudge,opposite,expected},meaning:"Earlier Open Play compatibility only; separate from manual-meaning checks"};}finally{r.dispose();}
  });
  await test("Upfader brightness and transport fade have explicit independent controls",()=>{
   fill(solid,[100,100,100,255]);const low=draw("Brightness",.5,{}, {upfader:0},solid),high=draw("Brightness",.5,{}, {upfader:1},solid);

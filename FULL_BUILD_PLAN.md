@@ -2,7 +2,7 @@
 
 **Prepared:** 16 October 2026 · **Owner:** Jason · **Status:** HTML review candidate available; investigation and exact parity reconciliation remain open; native build blocked on prototype approval.
 
-This document expands the supplied Serato investigation brief into a proposed delivery plan. Investigation is in progress. Local inspection identifies Serato DJ Pro 4.0.10.213 and Desktop installers 4.0.9/4.0.10. A private GitHub repository and private Trello board have been created and their visibility verified. The official manual index contains 168 articles across 23 sections. The connected Hercules DJControl Inpulse 300 MK2 is visible through USB, CoreAudio and CoreMIDI; Jason reports that its browser knob moves the highlighted Serato track; byte-level input and physical audio-routing tests remain pending. Ghidra completed deep auto-analysis; Hopper remains supplementary and its REA bridge is currently blocked. A runnable HTML candidate now covers all 110 inventoried feature groups through real interactions, explicit simulations or documented gaps. It contains 495 interaction requirements; historical counts below are retained as dated checkpoints. Exact 1:1 parity is not verified; native implementation has not begun. See the [executed prototype review](docs/prototype/REVIEW_REPORT.md). See [evidence ledger](docs/research/EVIDENCE_LEDGER.md) and [project resources](docs/delivery/project-resources.json).
+This document expands the supplied Serato investigation brief into a proposed delivery plan. Investigation is in progress. Local inspection identifies Serato DJ Pro 4.0.10.213 and Desktop installers 4.0.9/4.0.10. A private GitHub repository and private Trello board have been created and their visibility verified. The official manual index contains 168 articles across 23 sections. The connected Hercules DJControl Inpulse 300 MK2 is visible through USB, CoreAudio and CoreMIDI; Jason reports that its browser knob moves the highlighted Serato track; byte-level input and physical audio-routing tests remain pending. Ghidra completed deep auto-analysis; Hopper remains supplementary and its REA bridge is currently blocked. A runnable HTML candidate now covers all 110 inventoried feature groups through real interactions, explicit simulations or documented gaps. It contains 521 interaction requirements; historical counts below are retained as dated checkpoints. Exact 1:1 parity is not verified; native implementation has not begun. See the [executed prototype review](docs/prototype/REVIEW_REPORT.md). See [evidence ledger](docs/research/EVIDENCE_LEDGER.md) and [project resources](docs/delivery/project-resources.json).
 
 “Open Play” is a working project name taken from this workspace, not a confirmed public brand. This plan is the canonical planning artifact; the accompanying [execution prompt](PROJECT_PROMPT.md) preserves the instructions for the future executing agent.
 
@@ -1082,3 +1082,34 @@ The recovered manual adds14 distinct workflow requirements (REQ-508–521),
 bringing the working detailed inventory to521 across110 groups; complete_inventory=false.
 See docs/research/VIDEO_MANUAL_REGISTRY_RECONCILIATION.md and the merge record.
 No native development until Jason approves a named HTML revision.
+
+
+## 35. Current menus, color/traversal corrections and finite Video fades
+
+2026-10-17. Read [the executed review](docs/prototype/VIDEO_COLOR_CROSSFADE_REVIEW.md).
+After Jason unlocked the Mac, installed Serato4.0.10 menus were directly inspected:
+55 slot effects across five categories and29 transitions. Four additional localized
+transition resources were not in the observed menu; Open Play keeps them labeled
+resource-only, alongside its separate Crossfade baseline. Visibility proves no
+shader, performance or hidden-device behavior. Video was restoredOFF; window-mode
+restoration remains unverified. Raw screenshots stay ignored.
+
+Actual corrected FX checks81/81 and transition checks65/65 cover Gamma shadow
+darkening, Saturation fresh defaults, radial Smudge, color-gated UV Paint, nine-cell
+grids, alternating Box Both, directional Tile Wave and live Scratch Fade. Earlier
+saved effect behavior is retained explicitly. Exact reference algorithms stay open.
+
+Finite directional left/right fades now run with independent .25..10s speed,
+reversal, stop, endpoint persistence, Reduced Motion and separate crossfader link.
+Actual browser11/11 plus main UI measured fast416ms/slow10065ms (including UI
+automation), stopped-position reload and completion while another panel replaced
+Video. Independent review exposed and verified a fix for suspended hidden-panel
+fades: finite control state completes once without hidden GPU frames. The old
+sinusoidal mode is explicitly Continuous mix, an Open Play extension.
+
+REQ505/513 have independent executed behavior; REQ512 remains partial because
+per-channel opacity links are still open. Isolator Bass, finite Frame Freeze,
+eight-band Analyzer, other manual crosswalk meanings, output/window/quality and
+the full library/device/provider scope remain active. Inventory110/521,
+complete_inventory=false. Native development remains prohibited until named HTML
+revision approval. Per-feature Codex/Claude model and effort routing is preserved.
