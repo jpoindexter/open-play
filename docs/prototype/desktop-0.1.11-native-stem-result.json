@@ -1,0 +1,368 @@
+{
+  "execution": "Actual packaged Electron app launched by native app control; Checks menu opens a separate ephemeral native window; actual Run and native Save dialog used.",
+  "nativeHost": {
+    "version": "0.1.11",
+    "bundle": "org.openplay.dj.warp.localtest",
+    "sourceCommit": "80744b7f3b93e5fa9158fee0a378a2c2c7f80a86",
+    "asarSHA256": "0f025de6a68c29a3b0f27a9c6035e410e061882caf21f3038b0fa2428e98aef2",
+    "origin": "http://127.0.0.1:18774",
+    "mainWindow": "Open Play Warp Test 0.1.11 \u2014 current source test",
+    "checkWindow": "Open Play Warp Check 0.1.11 \u2014 isolated shared-stem audio"
+  },
+  "scope": "Scoped actual sandboxed native-renderer audio workflow. Generic harness scope text is retained; no complete native app, main-profile import/MIDI/reload, physical outputs, model/music/reference/full-parity acceptance.",
+  "originalReportSHA256": "d71fb1bd810c51aa3813afa58353bfb3e28570f074d31b3209fd99a71316f683",
+  "packagedSourceMatches": {
+    "app.js": true,
+    "engine.js": true,
+    "keylock-shadow-live.js": true,
+    "beatgrid.js": true,
+    "smart-sync.js": true,
+    "stem-coherence-harness.js": true,
+    "panels.js": true
+  },
+  "mainProcessEvidence": "docs/prototype/desktop-0.1.11-owned-process.txt",
+  "nativeWindowEvidence": "local-evidence/desktop-0.1.11-native/check-passed-ax.txt",
+  "harness": {
+    "startedAt": "2026-10-17T20:43:43.794Z",
+    "completed": true,
+    "checks": [
+      "Actual original+four stereo sources use one processor and one warp map with five selectable outputs",
+      "Vocal+Melody cancels its known550Hz component below1% of330Hz across both tempo boundaries; Bass/original leakage also below1%",
+      "Actual Vocal pad removal exposes the550Hz component on the same routed recording",
+      "Actual final Melody pad mute silences both master channels"
+    ],
+    "errors": [],
+    "events": [
+      {
+        "name": "melody-only",
+        "audioTime": 20.874739229024943,
+        "utc": "2026-10-17T20:43:54.392Z"
+      },
+      {
+        "name": "all-muted",
+        "audioTime": 22.27954648526077,
+        "utc": "2026-10-17T20:43:55.795Z"
+      }
+    ],
+    "criteria": {
+      "maximumCancellationRatio": 0.01,
+      "maximumBassLeakRatio": 0.01,
+      "minimumCarrierAmplitude": 0.005,
+      "minimumMelody550Ratio": 0.5,
+      "maximumMutedRMS": 1e-05
+    },
+    "fixture": {
+      "sampleRate": 48000,
+      "duration": 30,
+      "grid": 0.13,
+      "bpm": 120,
+      "markers": [
+        {
+          "time": 4.13,
+          "bpm": 150
+        },
+        {
+          "time": 7.33,
+          "bpm": 90
+        }
+      ],
+      "components": [
+        "original=sum of four stored stem buffers",
+        "Vocal=A550Hz amplitude.08",
+        "Melody=-A550Hz+B330Hz amplitude.06",
+        "Bass=110Hz amplitude.04",
+        "Drums=independently timed3000Hz bursts"
+      ],
+      "stereoPhaseOffsets": [
+        0,
+        0.45
+      ]
+    },
+    "scope": "Actual app prepared-buffer attachment, Stem pad controls, Keylock/Smart Sync/Play and one whole master recording. Known separated fixtures isolate transport/mixing; no new model inference or separation-quality, native, physical, musical/reference or transition-continuity acceptance.",
+    "sourceBefore": {
+      "app.js": "f0e49987b4c10f820bff4a172ec2a08dacefd8c85f6f25ffe0586336dee6fd4d",
+      "engine.js": "341ea2045977befa9bd423ccffec241d1a216d83ab1711fd7a1c4df57d6709d2",
+      "panels.js": "318629bcd27b229d793b8ff3a9220e6391867ca149e0126ff540386d8a9f45fe",
+      "beatgrid.js": "9d74accf0a8278fefe1f43dd06534c442b76b44300746c9e791d583fa1e6b71e",
+      "smart-sync.js": "e5bc4c94674900ad6242b198d13b3f4b7bac9f7b21e745f3a23850d019d4383d",
+      "stem-coherence-harness.js": "54aeaae9ca41fa45a842136befd83e19f9f5c4f923199a37f5d5d00d05bde0c3",
+      "keylock-shadow-live.js": "00c099cac8a9e91cfa487a173293c1cb0763be049b183aac770914e84aef6612"
+    },
+    "physicalOutputMuted": true,
+    "processor": {
+      "followMinimumLeadSeconds": 0.04,
+      "byteAccounting": "Acknowledged retained PCM and in-flight chunk copies only; excludes decoded inputs, SRC tables and opaque WASM heaps.",
+      "disposed": false,
+      "state": {
+        "when": 10.47219954648526,
+        "position": 0,
+        "playing": false,
+        "rate": 1,
+        "keylock": true,
+        "semitones": 0,
+        "effectiveSemitones": 0
+      },
+      "sourceGeometry": [
+        {
+          "index": 0,
+          "sampleRate": 48000,
+          "frames": 1440000,
+          "channels": 2,
+          "duration": 30,
+          "paddedTailSeconds": 0,
+          "trimmedTailSeconds": 0,
+          "decodedBytes": 11520000
+        },
+        {
+          "index": 1,
+          "sampleRate": 48000,
+          "frames": 1440000,
+          "channels": 2,
+          "duration": 30,
+          "paddedTailSeconds": 0,
+          "trimmedTailSeconds": 0,
+          "decodedBytes": 11520000
+        },
+        {
+          "index": 2,
+          "sampleRate": 48000,
+          "frames": 1440000,
+          "channels": 2,
+          "duration": 30,
+          "paddedTailSeconds": 0,
+          "trimmedTailSeconds": 0,
+          "decodedBytes": 11520000
+        },
+        {
+          "index": 3,
+          "sampleRate": 48000,
+          "frames": 1440000,
+          "channels": 2,
+          "duration": 30,
+          "paddedTailSeconds": 0,
+          "trimmedTailSeconds": 0,
+          "decodedBytes": 11520000
+        },
+        {
+          "index": 4,
+          "sampleRate": 48000,
+          "frames": 1440000,
+          "channels": 2,
+          "duration": 30,
+          "paddedTailSeconds": 0,
+          "trimmedTailSeconds": 0,
+          "decodedBytes": 11520000
+        }
+      ],
+      "groups": [
+        {
+          "id": 1,
+          "origin": 0,
+          "start": 0,
+          "end": 8,
+          "nodeCount": 1,
+          "processorChannels": 10,
+          "sourceOutputs": 5,
+          "retainedPCMBytes": 14112000,
+          "retainedChunks": 16,
+          "latency": 0.12,
+          "role": "selected"
+        }
+      ],
+      "retainedPCMBytes": 14112000,
+      "inFlightPCMBytes": 0,
+      "decodedBytes": 57600000,
+      "policy": {
+        "direction": "forward",
+        "normalMinimumLead": "queried group latency plus2 render quanta",
+        "followMinimumLeadSeconds": 0.04,
+        "followOwner": "currently active forward owner only",
+        "followCoverage": "required history must already be prepared; reject without replacement",
+        "rate": [
+          0.25,
+          4
+        ],
+        "effectiveSemitones": [
+          -24,
+          24
+        ],
+        "chunkSeconds": 0.5,
+        "requiredPrerollSeconds": 1,
+        "retentionPrerollSeconds": 2,
+        "retentionHysteresisSeconds": 1,
+        "lookaheadSeconds": 8,
+        "driverMs": 50,
+        "crossfadeSeconds": 0.01,
+        "srcTaps": 32,
+        "srcPhases": 1024,
+        "decodedSources": "Whole decoded AudioBuffers remain caller-owned; only processor PCM copies are windowed.",
+        "unsupported": [
+          "reverse",
+          "loop",
+          "Stem Slip",
+          "incremental compressed-file decoding"
+        ],
+        "quality": "Independent32-tap windowed-sinc normalization and10ms group crossfade; vendor sonic equivalence and artifact-free transitions are unverified."
+      },
+      "lastError": null
+    },
+    "scheduledEvents": [
+      {
+        "when": 10.9440589569161,
+        "rate": 1
+      },
+      {
+        "when": 15.074058956916101,
+        "rate": 0.8
+      },
+      {
+        "when": 19.0740589569161,
+        "rate": 1.3333333333333333
+      }
+    ],
+    "recordStart": 10.785668934240363,
+    "recording": {
+      "bytes": 189434,
+      "format": "audio/webm;codecs=opus",
+      "sha256": "8cad8a2cdcbfd88f4897d76fe945853030a2ade7b25e1db8a547c0a6de3c18e7",
+      "localOriginal": "local-evidence/desktop-0.1.11-native/original.webm"
+    },
+    "decoded": {
+      "frames": 558306,
+      "sampleRate": 44100,
+      "channels": 2,
+      "duration": 12.66
+    },
+    "audio": {
+      "method": "Fixed Hann-window DTFT maxima in expected tone\u00b11Hz at.25Hz spacing. Ratios compare measured bands in the same original recording window; no input/output gain or time fitting.",
+      "sections": [
+        {
+          "name": "base120",
+          "from": 0.5,
+          "to": 2,
+          "channels": [
+            {
+              "frames": 66150,
+              "rms": 0.018635417606369328,
+              "carrier330": 0.026134991540260697,
+              "cancelled550": 7.835438897618792e-07,
+              "bass110": 1.1665771639357377e-06,
+              "cancellationRatio": 2.9980644476384756e-05,
+              "bassLeakRatio": 4.4636600021034524e-05
+            },
+            {
+              "frames": 66150,
+              "rms": 0.018641616548227276,
+              "carrier330": 0.026144631253180024,
+              "cancelled550": 4.5392365885437494e-07,
+              "bass110": 8.401278454983341e-07,
+              "cancellationRatio": 1.736202184145027e-05,
+              "bassLeakRatio": 3.213385713352326e-05
+            }
+          ]
+        },
+        {
+          "name": "source150",
+          "from": 4.688390022675739,
+          "to": 5.888390022675738,
+          "channels": [
+            {
+              "frames": 52920,
+              "rms": 0.01863033037022081,
+              "carrier330": 0.026271324139709614,
+              "cancelled550": 9.45185350405913e-07,
+              "bass110": 1.8464233931252805e-06,
+              "cancellationRatio": 3.5977834439538094e-05,
+              "bassLeakRatio": 7.02828446448337e-05
+            },
+            {
+              "frames": 52920,
+              "rms": 0.018638904330972608,
+              "carrier330": 0.026246151092620903,
+              "cancelled550": 1.544356576703967e-06,
+              "bass110": 1.267250016345083e-06,
+              "cancellationRatio": 5.884125909563031e-05,
+              "bassLeakRatio": 4.8283270635494055e-05
+            }
+          ]
+        },
+        {
+          "name": "source90",
+          "from": 8.688390022675739,
+          "to": 9.888390022675738,
+          "channels": [
+            {
+              "frames": 52920,
+              "rms": 0.018635474108729233,
+              "carrier330": 0.02600832487998199,
+              "cancelled550": 2.0145273454626968e-06,
+              "bass110": 1.3447141990609798e-06,
+              "cancellationRatio": 7.745702019483893e-05,
+              "bassLeakRatio": 5.170322215161098e-05
+            },
+            {
+              "frames": 52920,
+              "rms": 0.018630765427627278,
+              "carrier330": 0.026005632644471706,
+              "cancelled550": 1.5768250862611606e-06,
+              "bass110": 9.307094248116856e-07,
+              "cancellationRatio": 6.063398294585858e-05,
+              "bassLeakRatio": 3.5788763055127456e-05
+            }
+          ]
+        }
+      ],
+      "melodyOnly": [
+        {
+          "frames": 44312,
+          "rms": 0.03107432843130896,
+          "carrier330": 0.026113507769655483,
+          "cancelled550": 0.034827069234757306,
+          "bass110": 4.583017376763328e-06,
+          "cancellationRatio": 1.333680237138696,
+          "bassLeakRatio": 0.00017550370548413655
+        },
+        {
+          "frames": 44312,
+          "rms": 0.03107480693935022,
+          "carrier330": 0.026113744654008838,
+          "cancelled550": 0.03484594811989215,
+          "bass110": 6.790184994592581e-06,
+          "cancellationRatio": 1.3343910872063611,
+          "bassLeakRatio": 0.00026002341236610775
+        }
+      ],
+      "muted": [
+        {
+          "frames": 33786,
+          "rms": 2.6924550143923954e-08,
+          "carrier330": 7.39965751143202e-12,
+          "cancelled550": 2.907520362433898e-12,
+          "bass110": 2.4959620672318392e-11,
+          "cancellationRatio": 0.3929263425965264,
+          "bassLeakRatio": 3.3730778260692875
+        },
+        {
+          "frames": 33786,
+          "rms": 3.305785938590679e-08,
+          "carrier330": 1.0787982513662386e-11,
+          "cancelled550": 3.4949030250958234e-12,
+          "bass110": 3.1197238979830347e-11,
+          "cancellationRatio": 0.3239626149439639,
+          "bassLeakRatio": 2.891851088961329
+        }
+      ]
+    },
+    "sourceAfter": {
+      "app.js": "f0e49987b4c10f820bff4a172ec2a08dacefd8c85f6f25ffe0586336dee6fd4d",
+      "engine.js": "341ea2045977befa9bd423ccffec241d1a216d83ab1711fd7a1c4df57d6709d2",
+      "panels.js": "318629bcd27b229d793b8ff3a9220e6391867ca149e0126ff540386d8a9f45fe",
+      "beatgrid.js": "9d74accf0a8278fefe1f43dd06534c442b76b44300746c9e791d583fa1e6b71e",
+      "smart-sync.js": "e5bc4c94674900ad6242b198d13b3f4b7bac9f7b21e745f3a23850d019d4383d",
+      "stem-coherence-harness.js": "54aeaae9ca41fa45a842136befd83e19f9f5c4f923199a37f5d5d00d05bde0c3",
+      "keylock-shadow-live.js": "00c099cac8a9e91cfa487a173293c1cb0763be049b183aac770914e84aef6612"
+    },
+    "sourceStable": true,
+    "finishedAt": "2026-10-17T20:43:57.159Z"
+  }
+}

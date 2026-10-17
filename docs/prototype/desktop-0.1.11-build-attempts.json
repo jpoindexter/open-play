@@ -1,0 +1,21 @@
+{
+  "scope": "Packaging attempts, not product/native acceptance",
+  "sourceCommit": "80744b7f3b93e5fa9158fee0a378a2c2c7f80a86",
+  "attempts": [
+    {
+      "outcome": "failed_before_app",
+      "phase": "git archive captured through execFileSync",
+      "error": "ENOBUFS",
+      "maxBufferMiB": 150,
+      "signal": "SIGTERM",
+      "appProduced": false
+    },
+    {
+      "outcome": "package_created",
+      "change": "git archive writes a unique temporary sibling tar; extraction reads file; archive removed after extraction",
+      "receipt": "docs/prototype/desktop-0.1.11-warp-package.json",
+      "asarSHA256": "0f025de6a68c29a3b0f27a9c6035e410e061882caf21f3038b0fa2428e98aef2",
+      "runtimeAcceptance": "Separate actual native workflow required"
+    }
+  ]
+}
