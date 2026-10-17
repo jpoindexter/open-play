@@ -12,7 +12,7 @@
 
 ## Now
 
-Last pinned candidate d05c2d114f3cb59f469d6b4c6600f5319dbb87dc; checkpoint8 source/metadata pin is being prepared. Inspect Git status and current candidate hashes. New actual bounded paths: isolated live API11/11 completed/coverage1, shared-context lifecycle5/5, raw scratch7/7 with13 contiguous captures, main Video Setup UI/reload/geometry/encoded720p/atomic refused-reset/selected fade. No production live adapter or platter integration yet. Read plan40 and the latest review files.
+Pinned source candidate 2bcde75719ae2f12a2d487bf5cf07ec2d1dcbcc9; 217 tracked source hashes. Untracked forward-adapter work remains separate and unaccepted. Inspect Git status and current candidate hashes. New actual bounded paths: isolated live API11/11 completed/coverage1, shared-context lifecycle5/5, raw scratch7/7 with13 contiguous captures, main Video Setup UI/reload/geometry/encoded720p/atomic refused-reset/selected fade. No production live adapter or platter integration yet. Read plan40 and the latest review files.
 
 The original/mid/fenced/armed capture failures are retained. Startup clock jump independently reproduces without vendor;64 observed consecutive quanta now precede strict arm. Third lifecycle wrapper had an independently reproduced readiness/abort race, now corrected and actual-browser tested. Raw scratch initial giant-report stall and vacuous retirement assertion remain documented; bounded reporter and audible-before-dispose rerun execute.
 

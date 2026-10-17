@@ -4,7 +4,7 @@
 
 Project: `/Users/jasonpoindexter/Documents/GitHub/Open Play`
 Prepared: 2026-10-17
-Current browser candidate: `d05c2d114f3cb59f469d6b4c6600f5319dbb87dc`
+Current browser candidate: `2bcde75719ae2f12a2d487bf5cf07ec2d1dcbcc9`
 Content hashes: `docs/prototype/candidate-hashes.json`
 Private repository: https://github.com/jpoindexter/open-play
 Private board: https://trello.com/b/OqMGEjpe/open-play-serato-parity
@@ -386,7 +386,7 @@ CoreMIDI enumeration or virtual delivery as physical compatibility.
 
 ## Latest live prerequisites / shared Video Setup checkpoint —17 October
 
-Read plan40 and ACTIVE_EXECUTION.md first. New source pin is being prepared; the header and candidate manifest identify the last pinned source until the metadata checkpoint updates them.
+Read plan40 and ACTIVE_EXECUTION.md first. The header and candidate manifest pin this source checkpoint. Untracked forward-adapter work is a separate active unit and is not accepted by this pin.
 
 - Live two-fix API now11/11, completed:true, fatalErrors:[], full armed coverage1. No-vendor processor-retained rows reproduce the startup clock discontinuity.64 observed consecutive blocks precede explicit arm; old failures remain unchanged. See AUDIO_CAPTURE_STARTUP_DIAGNOSIS.md and keylock-live-patched-browser-preflight-results.json.
 - Separate disposable module b2811c519f067cc5a1abd6cdccab46578d1eeef8aba42f666fab2830a9d6f46e has actual instrumented lifecycle5/5, both full capture spans coverage1, terminal/no-later-DSP evidence on ten retired identities, eleven ports closed. Post-ACK candidate PCM is0 while control440.39Hz continues. Initial ready/abort race was independently reproduced and corrected; thirteen lifecycle Node checks plus exact-factory regression remain scoped. No immediate heap-free claim.

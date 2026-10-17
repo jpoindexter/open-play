@@ -2,7 +2,7 @@
 
 Read [the full independent audit packet](codex-to-claude-completeness-audit.md). The original prompt remains verbatim; preserve all subsequent user authority.
 
-Project: `/Users/jasonpoindexter/Documents/GitHub/Open Play`. Last pinned candidate: `d05c2d114f3cb59f469d6b4c6600f5319dbb87dc`; checkpoint8 source/metadata pin is being prepared. Use `docs/prototype/candidate-hashes.json` and inspect worktree differences.
+Project: `/Users/jasonpoindexter/Documents/GitHub/Open Play`. Pinned source candidate: `2bcde75719ae2f12a2d487bf5cf07ec2d1dcbcc9`; 217 source hashes. Untracked forward-adapter work is a separate active unit. Use `docs/prototype/candidate-hashes.json` and inspect worktree differences.
 
 **Full1:1 NOT PASSED; native approval NOT GRANTED; active goal continues.** Inventory110groups/521requirements is incomplete. Read FULL_BUILD_PLAN.md40 and ACTIVE_EXECUTION.md before older dated checkpoints.
 
