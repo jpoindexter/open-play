@@ -1,0 +1,93 @@
+{
+  "observedAt": "2026-10-17T21:04:29.120427+00:00",
+  "candidate": "Open Play Playback Test 0.1.12",
+  "sourceCommit": "2708ac13479d871825ffb3e60a22547507a490f2",
+  "asarSHA256": "411f248da9d49a78221efee153e8eff9e481ed0d2151f467a0f02f5cd8dd7854",
+  "nativeWindowTitle": "Open Play Playback Test 0.1.12 \u2014 controller mixing test",
+  "origin": "http://127.0.0.1:18775",
+  "mainProcess": [
+    "54757 /Users/jasonpoindexter/Documents/GitHub/Open Play/local-evidence/desktop-builds/0.1.12/Open Play Playback Test-darwin-arm64/Open Play Playback Test.app/Contents/MacOS/Open Play Playback Test"
+  ],
+  "sourceChecks": [
+    {
+      "file": "prototype/app.js",
+      "sha256": "83d0d4a8533effa6c48521caaebb0a1bc6c095087e391500c5e292fa2f8a6118",
+      "matchesPackage": true
+    },
+    {
+      "file": "prototype/engine.js",
+      "sha256": "341ea2045977befa9bd423ccffec241d1a216d83ab1711fd7a1c4df57d6709d2",
+      "matchesPackage": true
+    },
+    {
+      "file": "prototype/keylock-shadow-live.js",
+      "sha256": "00c099cac8a9e91cfa487a173293c1cb0763be049b183aac770914e84aef6612",
+      "matchesPackage": true
+    },
+    {
+      "file": "prototype/beatgrid.js",
+      "sha256": "9d74accf0a8278fefe1f43dd06534c442b76b44300746c9e791d583fa1e6b71e",
+      "matchesPackage": true
+    },
+    {
+      "file": "prototype/smart-sync.js",
+      "sha256": "e5bc4c94674900ad6242b198d13b3f4b7bac9f7b21e745f3a23850d019d4383d",
+      "matchesPackage": true
+    },
+    {
+      "file": "prototype/deck-midi.js",
+      "sha256": "eb678db0cdda1948428b9871ebe94e648ed4105317dafc631c7b3d809506b936",
+      "matchesPackage": true
+    },
+    {
+      "file": "prototype/midi.js",
+      "sha256": "0cabb6dbe98e9eb3f7bc7f7eb44615fa315a0738260e5f3568a34d0aa75ec1ad",
+      "matchesPackage": true
+    },
+    {
+      "file": "prototype/panels.js",
+      "sha256": "05dd0a8c49a0437395053bd714890e59e0c590d5a7e70902746da7087dbc491f",
+      "matchesPackage": true
+    }
+  ],
+  "executed": [
+    {
+      "path": "normal native main window \u2192 MIDI \u2192 Use Hercules playback controls",
+      "result": "Exact connected DJControl Inpulse 300 Mk2 input enumerated; 64 starter assignments installed by the actual button. Source calls persistence; reload/reconnect storage acceptance not retested."
+    },
+    {
+      "path": "MIDI editor explicitly synthetic bound-input CC ch2 number0 value0, then number0 value100",
+      "result": "Actual deck1 slider observed0 then0.79; real source Play note ch2#7 from explicitly synthetic identity started deck1; master meter observed0.09301469. This is routed output evidence in the app, not a physical socket/listening confirmation."
+    },
+    {
+      "path": "MIDI editor explicitly synthetic Note ch3#5 press/release while paused",
+      "result": "Deck2 displayed126\u2192124 BPM, -1.6%; both sync flags1 with primary/secondary labels; 0decks remained playing. Actual engine action, no measured audible phase claim."
+    },
+    {
+      "path": "Normal deck Play buttons after MIDI Sync",
+      "result": "2decks playing and master meter0.03527811 observed; screenshot and AX retained. Both actual Play controls then paused decks; meter0."
+    },
+    {
+      "path": "Devices \u2192 refresh \u2192 named Hercules sink \u2192 Use output \u2192 four-channel \u2192 Apply; Setup Mixer",
+      "result": "Actual four-channel master1/2 and cue3/4 displayed, unmuted. Cue Mix0%, Cue Volume10% (unity digital gain). Physical sound not confirmed."
+    },
+    {
+      "path": "Normal library/deck Load buttons after test",
+      "result": "After Hours and Glass Transit reset to00:00, 0playing, Master0; both display124BPM, deck2 retains matched tempo after reload. Both Sync flags off; deck1 level0.79, deck2 0.8."
+    }
+  ],
+  "interactionNotes": [
+    "Native AX setValue did not fill number fields reliably. Keyboard Tab/select-all/type was used. One entry produced explicitly synthetic CCch2#10=100 instead of intended#0; that log is retained and no fader acceptance derives from it. Corrected#0=100 preceded positive observation."
+  ],
+  "humanStatus": "Jason replied away; no physical actions requested/captured in this test. Historical0.1.1/0.1.3 confirmations do not transfer.",
+  "limits": [
+    "No new physical button/knob/jog action",
+    "No current headphones/speakers listening confirmation",
+    "No current real MP3 import/restart acceptance",
+    "No measured two-deck audible beat phase or music quality",
+    "No full touch scratch/pad mode/LED/guide/hotplug map acceptance",
+    "No full Serato parity or release"
+  ],
+  "evidenceDirectory": "local-evidence/desktop-0.1.12-native/",
+  "fullFeatureAcceptance": false
+}
