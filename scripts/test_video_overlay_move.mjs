@@ -4,7 +4,7 @@ import {execFileSync} from 'node:child_process';
 const baseline=process.argv[3]==='--baseline';
 const mixerSource=baseline?execFileSync('git',['show','2e50db4b10c368d21a65718dc8b5e3c7404baffe:prototype/video.js'],{encoding:'utf8'}):fs.readFileSync('prototype/video.js','utf8');
 const resolved=mixerSource.replace(/from '(\.\/[^']+)'/g,(_,p)=>`from '${new URL('../prototype/'+p.slice(2),import.meta.url).href}'`);
-const {createVideoMixer}=await import('data:text/javascript;base64,'+Buffer.from(resolved).toString('base64')); 
+const {createVideoMixer}=await import('data:text/javascript;base64,'+Buffer.from(resolved).toString('base64'));
 const output=process.argv[2];if(!output||fs.existsSync(output))throw Error('Choose new result path');
 const checks=[];async function check(name,fn){try{await fn();checks.push({name,passed:true});}catch(e){checks.push({name,passed:false,error:e.message});}}
 function host(){const state={video:{overlays:{left:[{id:'i',imageRef:'i',kind:'image',on:true}],right:[],master:[]}},decks:[{},{}],settings:{}};return{state,mixer:createVideoMixer({state,engine:{position:()=>0},notify:()=>{}})};}
