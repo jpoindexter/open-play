@@ -14,6 +14,7 @@ import { describeAudioVideoLinks } from "./video-audio-fx-state.js";
 import { effectiveFXBPM, normalizeFXTempoSettings } from "./fx-tempo.js";
 import {createAudioMonitor,monitorSettings as normalizeMonitorSettings} from './audio-monitor.js';
 import {createWarpLoopTransport} from './warp-loop.js';
+import {createSyncTempoHandoff} from './sync-tempo-handoff.js';
 export class AudioEngine {
   constructor() {
     this.ctx = null;
@@ -172,6 +173,7 @@ export class AudioEngine {
   }
   position(d) {
     const gridVoice=this.voices.get(d.index);
+    if(gridVoice?.handoffBefore&&this.ctx.currentTime<gridVoice.handoffBefore.until)return gridVoice.handoffBefore.clock(this.ctx.currentTime);
     if (gridVoice?.gridTimeline) return this.voiceClock(d,gridVoice)(this.ctx.currentTime);
     const live = this.voices.get(d.index)?.liveKeylock;
     if (live) {
@@ -255,18 +257,20 @@ export class AudioEngine {
     for (const gate of voice.sourceGates || []) {
       gate.gain.cancelScheduledValues(when); gate.gain.setValueAtTime(1, when); gate.gain.linearRampToValueAtTime(0, end);
     }
-    // Legacy BufferSources have no outer gates; their own scheduled Stop uses
-    // the audio clock. Worklet voices always have gates and retire after fade.
-    for (const source of voice.sources || []) {source.onended = null; try {source.stop(when);} catch {}}
+    // Gated voices stop after their10ms audio-time fade. A legacy ungated
+    // voice still stops at the handoff boundary.
+    for (const source of voice.sources || []) {source.onended = null; try {source.stop(voice.sourceGates?.length?end:when);} catch {}}
     const jobs = this.retiringVoices.get(i) || new Set(); this.retiringVoices.set(i, jobs);
     const job = {voice, timer: null}; jobs.add(job);
     const poll = () => {
       if (this.ctx.currentTime < end) {job.timer = setTimeout(poll, Math.min(100, Math.max(10, (end - this.ctx.currentTime) * 1000))); return;}
-      jobs.delete(job); if (!jobs.size) this.retiringVoices.delete(i); this.disposeVoice(i, voice);
+      jobs.delete(job); if (!jobs.size) this.retiringVoices.delete(i); const current=this.voices.get(i);if(current?.handoffBefore?.owner===voice)current.handoffBefore=null;this.disposeVoice(i, voice);
     };
     job.timer = setTimeout(poll, Math.max(10, (end - this.ctx.currentTime) * 1000));
   }
   voiceClock(d, voice) {
+    if(voice?.handoffBefore&&!voice.gridTimeline&&!voice.liveKeylock){const bridge=voice.handoffBefore,after=this.voiceClock(d,{...voice,handoffBefore:null});return at=>at<bridge.until?bridge.clock(at):after(at);}
+
     if (voice?.gridTimeline) return at => voice.handoffBefore && at < voice.handoffBefore.until ? voice.handoffBefore.clock(at) : voice.gridTimeline.clock(at);
     if (voice?.liveKeylock) return at => voice.handoffBefore && at < voice.handoffBefore.until ? voice.handoffBefore.clock(at) : voice.liveKeylock.position(at);
     if (voice?.deckScratchTransport) return at => {
@@ -309,24 +313,25 @@ export class AudioEngine {
     if(d.track!==lease.track){lease.dispose();return;}
     const position=this.position(d);this.pause(d);d.position=position;this.onProcessing(d);this.onError?.(error);
   }
-  async startWarpLoop(d,buffers,controller,current,{positionAt,priorClock,keylock=false,semitones=0}={}){
+  async startWarpLoop(d,buffers,controller,current,{positionAt,priorClock,keylock=false,semitones=0,handoff=null}={}){
     const old=this.voices.get(d.index),playing=d.playing,oldClock=priorClock||this.voiceClock(d,old);let transport,committed=false;
     try{
       const loop={start:d.loopIn,end:d.loopOut},initialTimeline=this.onGridTimeline(d,{position:d.position,when:this.ctx.currentTime}),transformed=keylock||semitones!==0;
       if(transformed){const rendered=[];for(const buffer of buffers){rendered.push(await this.keylockRenderer.renderWarpLoop(buffer,{track:d.track,loop,bpm:initialTimeline.bpm,keylock,semitones,signal:controller.signal}));if(!current())return;}buffers=rendered;}
       transport=await createWarpLoopTransport(this.ctx,buffers,{signal:controller.signal,onError:error=>{if(this.voices.get(d.index)?.warpLoopTransport===transport){this.pause(d);this.onError?.(error);}}});
       if(!current())return;
-      const when=this.ctx.currentTime+.05;
+      const when=handoff?await handoff.prepared(d.index,this.ctx.currentTime+.05):this.ctx.currentTime+.05;
       const position=positionAt?positionAt(when):playing?oldClock(when):d.position;
       const timeline=this.onGridTimeline(d,{position,when});
       const ack=await transport.start({track:{bpm:d.track.bpm,grid:d.track.grid,duration:d.track.duration,gridWarpMarkers:d.track.gridWarpMarkers},loop:timeline.loop,bpm:timeline.bpm,position,when,renderedLoop:transformed});
+      if(handoff)await handoff.arm(d.index);
       if(!current())return;
-      const voice={sources:[],warpLoopTransport:transport,liveOwnerController:controller,gridTimeline:timeline,stemGains:[],handoffBefore:old&&playing?{until:when,clock:oldClock,rate:at=>this.voiceRateAt(d,old,at)}:null};
+      const voice={sources:[],warpLoopTransport:transport,liveOwnerController:controller,gridTimeline:timeline,stemGains:[],handoffBefore:old&&playing?{until:when,owner:old,clock:oldClock,rate:at=>this.voiceRateAt(d,old,at)}:null};
       this.routeOrdinaryVoice(d,voice,transport.outputs,buffers.length===5,{when,reuseVoice:old});committed=true;this.retireVoiceAt(d.index,old,when);
       d.position=ack.position;d.anchorPosition=ack.position;d.anchorTime=when;d.playing=true;
     }finally{if(!committed)transport?.dispose();}
   }
-  async startForwardKeylock(d, buffers, controller, current, {positionAt, priorClock} = {}) {
+  async startForwardKeylock(d, buffers, controller, current, {positionAt, priorClock,handoff=null} = {}) {
     const track = d.track, old = this.voices.get(d.index), initiallyPlaying = d.playing, oldClock = priorClock || this.voiceClock(d, this.voices.get(d.index));
     let adapter, committed = false;
     try {
@@ -349,7 +354,7 @@ export class AudioEngine {
       // Preparation can advance the old audible clock. Choose its position AT
       // the returned future output time, rather than replaying a stale cursor.
       const lead = Math.max(...adapter.snapshot().groups.map(group => group.latency), 0) + .05;
-      const when = this.ctx.currentTime + lead;
+      const when = handoff?await handoff.prepared(d.index,this.ctx.currentTime+lead):this.ctx.currentTime+lead;
       let position = this.position(d);
       if (initiallyPlaying && old === this.voices.get(d.index)) position = oldClock(when);
       if (positionAt) position = positionAt(when);
@@ -358,16 +363,17 @@ export class AudioEngine {
       const gridTimeline=this.onGridTimeline?.(d,{position,when});
       if(gridTimeline && typeof adapter.startTimeline !== 'function')throw new Error('This pitch backend cannot schedule Beat Warp Markers.');
       const ack = gridTimeline ? await adapter.startTimeline({position,when,events:gridTimeline.events}) : await adapter.start({position, when});
+      if(handoff)await handoff.arm(d.index);
       if (!current()) return;
       const voice = {sources: [], liveKeylock: adapter, liveOwnerController: controller, gridTimeline, stemGains: [],
-        handoffBefore: old && initiallyPlaying ? {until: ack.when, clock: oldClock, rate: at => this.voiceRateAt(d, old, at)} : null};
+        handoffBefore: old && initiallyPlaying ? {until: ack.when, owner:old, clock: oldClock, rate: at => this.voiceRateAt(d, old, at)} : null};
       this.routeOrdinaryVoice(d, voice, adapter.outputs, buffers.length === 5, {when: ack.when, reuseVoice: old});
       committed = true;
       this.retireVoiceAt(d.index, old, ack.when);
       d.position = ack.position; d.anchorPosition = ack.position; d.anchorTime = ack.when; d.playing = ack.playing;
     } finally {if (!committed) await adapter?.dispose();}
   }
-  async start(d, {positionAt, priorClock} = {}) {
+  async start(d, {positionAt, priorClock,handoff=null} = {}) {
     this.onValidateTransport?.(d);
     this.cancelDeckScratchRequest(d);
     if (!d.track) throw new Error("Load a track first.");
@@ -407,6 +413,7 @@ export class AudioEngine {
       this.startTokens.get(d.index) === token &&
       d.track === track &&
       !controller.signal.aborted;
+    handoff?.watch(d.index,controller,()=>this.startTokens.get(d.index)===token&&d.track===track);
     try {
       await this.resume();
       this.nodes[d.index].channelBpm = (track.bpm || 120) * this.audibleRate(d);
@@ -419,10 +426,10 @@ export class AudioEngine {
       if (!current()) return;
       if(d.loop&&track.gridWarpMarkers?.length&&this.onGridTimeline?.(d,{position:d.position,when:this.ctx.currentTime})){
         if(d.reverse)throw Error('Warped loops with reverse are not available yet.');
-        await this.startWarpLoop(d,buffers,controller,current,{positionAt,priorClock,keylock,semitones:shift});return;
+        await this.startWarpLoop(d,buffers,controller,current,{positionAt,priorClock,keylock,semitones:shift,handoff});return;
       }
       if (transformed && !d.reverse && !d.loop) {
-        await this.startForwardKeylock(d, buffers, controller, current, {positionAt, priorClock});
+        await this.startForwardKeylock(d, buffers, controller, current, {positionAt, priorClock,handoff});
         return;
       }
       if (transformed) {
@@ -446,7 +453,7 @@ export class AudioEngine {
         buffers = buffers.map((buffer) => this.reverseBuffer(track.id, buffer));
       let syncWhen = null;
       if (positionAt) {
-        syncWhen = this.ctx.currentTime + .03;
+        syncWhen = handoff?await handoff.prepared(d.index,this.ctx.currentTime+.03):this.ctx.currentTime+.03;
         const aligned = positionAt(syncWhen);
         if (!Number.isFinite(aligned) || aligned < 0 || aligned >= track.duration) throw new RangeError("Invalid synchronized source position.");
         d.position = aligned;
@@ -455,7 +462,8 @@ export class AudioEngine {
       const when = syncWhen ?? this.ctx.currentTime + .01;
       const gridTimeline = this.onGridTimeline?.(d,{position:d.position,when});
       if (gridTimeline && (transformed || d.reverse || d.loop)) throw new Error("Warped Sync with keylock, pitch shift, reverse or loops is not available yet.");
-      this.stopSource(d.index, { preserveStemExit: true });
+      const old=handoff?this.voices.get(d.index):null;
+      if(!handoff)this.stopSource(d.index, { preserveStemExit: true });
       const sources = buffers.map((buffer) => {
         const source = this.ctx.createBufferSource();
         source.buffer = buffer;
@@ -468,8 +476,20 @@ export class AudioEngine {
           (d.reverse ? track.duration - d.loopIn : d.loopOut) / scale;
         return source;
       });
+      if(handoff){
+        const voice={sources,timelineScale:scale,gridTimeline,stemGains:[],handoffBefore:old?{until:when,owner:old,clock:priorClock,rate:at=>this.voiceRateAt(d,old,at)}:null};let committed=false;
+        try{
+          sources.forEach(source=>source.start(when,Math.max(0,Math.min(source.buffer.duration-1/source.buffer.sampleRate,d.position/scale))));
+          await handoff.arm(d.index);if(!current())return;
+          this.routeOrdinaryVoice(d,voice,sources,!!stems,{when,reuseVoice:old});committed=true;this.retireVoiceAt(d.index,old,when);
+          d.anchorPosition=d.position;d.anchorTime=when;d.playing=true;
+          sources[0].onended=()=>{if(this.voices.get(d.index)!==voice)return;this.stopSource(d.index,{preserveStemExit:true});d.position=track.duration;d.playing=false;this.onEnd(d);};
+          return;
+        }finally{if(!committed)this.disposeVoice(d.index,voice);}
+      }
       const voice = sources[0];
       voice.sources = sources;
+      voice.sourceGates=sources.map(()=>this.ctx.createGain());
       voice.timelineScale = scale;
       voice.gridTimeline = gridTimeline;
       const stemState = stems ? this.ensureStemState(d) : null;
@@ -483,11 +503,12 @@ export class AudioEngine {
           })
         : [];
       sources.forEach((source, i) => {
+        const output=voice.sourceGates[i];source.connect(output);
         if (stemState && i > 0) {
-          source.connect(stemState.histories[i - 1].node);
+          output.connect(stemState.histories[i - 1].node);
           stemState.histories[i - 1].node.connect(voice.stemGains[i]);
         } else
-          source.connect(
+          output.connect(
             stems ? voice.stemGains[i] : this.nodes[d.index].input,
           );
       });
@@ -517,6 +538,7 @@ export class AudioEngine {
         ),
       );
     } catch (error) {
+      handoff?.fail(error);
       if (error.name !== "AbortError") throw error;
     } finally {
       if (current()) {
@@ -614,6 +636,32 @@ export class AudioEngine {
       d.position=position;d.anchorPosition=position;d.anchorTime=when;
     }
     return {rate,nominalRate:d.rate};
+  }
+  async setSyncedRates(changes){
+    const saved=changes.map(({deck,rate})=>({deck,rate,previous:deck.rate,track:deck.track,playing:deck.playing,clock:this.voiceClock(deck,this.voices.get(deck.index))}));
+    if(saved.some(x=>x.deck.processing&&!x.playing))throw Error('Finish deck preparation before changing group tempo.');
+    const active=saved.filter(x=>x.playing);
+    const gesture=active.some(x=>this.voices.get(x.deck.index)?.deckScratchTransport||(x.deck.stemSlip&&x.deck.stemSlip!=='off')||x.deck.reverse);
+    const requiresPreparation=active.some(x=>x.deck.keylock||x.deck.keyShift||this.voices.get(x.deck.index)?.gridTimeline||this.voices.get(x.deck.index)?.liveKeylock);
+    // Preserve the existing immediate AudioParam path for ordinary raw decks.
+    // Gesture transports retain their existing path pending group acceptance.
+    if(gesture||!requiresPreparation)return Promise.all(saved.map(x=>this.setRate(x.deck,x.rate,{syncInternal:true})));
+    const group=active.length?createSyncTempoHandoff(this.ctx,active.map(x=>x.deck.index)):null;
+    try{
+      const jobs=saved.map(async x=>{
+        x.deck.rate=x.rate;
+        try{if(x.playing)await this.start(x.deck,{priorClock:x.clock,positionAt:x.clock,handoff:group});}catch(error){group?.fail(error);throw error;}
+      });
+      const results=await Promise.allSettled(jobs);const failed=results.find(r=>r.status==='rejected');if(failed){group?.fail(failed.reason);throw failed.reason;}group?.finish();
+      for(const x of saved)if(this.nodes[x.deck.index]){this.nodes[x.deck.index].channelBpm=x.track.bpm*x.rate;try{await this.applyChannelFX(x.deck.index);}catch(error){this.onError?.(error);}}
+      if(this.fxState){for(const x of saved)this.fxState[2][x.deck.index]=x.track.bpm*x.rate;try{this.configureFX(...this.fxState);}catch(error){this.onError?.(error);}}
+    }catch(error){
+      group?.fail(error);
+      for(const x of saved)if(x.deck.track===x.track&&x.deck.rate===x.rate&&(!x.playing||group?.owns(x.deck.index))){
+        x.deck.rate=x.previous;x.deck.processing=false;const controller=group?.controller(x.deck.index);if(this.transforms.get(x.deck.index)===controller)this.transforms.delete(x.deck.index);this.onProcessing(x.deck);
+      }
+      throw error;
+    }finally{group?.dispose();}
   }
   async setRate(d, rate, {syncInternal = false} = {}) {
     if (!syncInternal && this.onRateRequest) return this.onRateRequest(d, rate);

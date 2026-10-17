@@ -1,0 +1,244 @@
+{
+  "startedAt": "2026-10-17T23:31:39.389Z",
+  "completed": true,
+  "checks": [
+    "Actual grid editor stages and saves both tempo markers with metadata persistence",
+    "Both prepared tempo changes use one output time and preserve measured pulse phase/tempo",
+    "Latest queued slider value wins without a deck stop",
+    "Pausing one transferred deck leaves the other playing; independent PCM inspection still required"
+  ],
+  "errors": [],
+  "probes": [
+    {
+      "label": "Cold126BPM transfer",
+      "anchors": [
+        1.9169614512471655,
+        1.9169614512471655
+      ],
+      "rates": [
+        1.05,
+        1.05
+      ]
+    },
+    {
+      "label": "Latest124.8BPM transfer",
+      "anchors": [
+        4.564036281179138,
+        4.564036281179138
+      ],
+      "rates": [
+        1.04,
+        1.04
+      ]
+    }
+  ],
+  "criteria": {
+    "maximumPulsePhaseErrorSeconds": 0.01,
+    "minimumPairsPerSection": 3,
+    "maximumPulsePeriodErrorSeconds": 0.003,
+    "maximumPitchErrorHz": 1,
+    "quietRMS": 0.0001,
+    "maximumQuietRunSeconds": 0.02
+  },
+  "fixture": {
+    "sampleRate": 48000,
+    "duration": 30,
+    "primary": {
+      "bpm": 120,
+      "offset": 0.05
+    },
+    "secondary": {
+      "bpm": 120,
+      "offset": 0.13,
+      "markers": [
+        {
+          "time": 2.13,
+          "bpm": 150
+        },
+        {
+          "time": 3.73,
+          "bpm": 90
+        }
+      ]
+    },
+    "pulseSeconds": 0.012,
+    "carrierHz": 900,
+    "amplitude": 0.15
+  },
+  "scope": "Actual browser app grid editor/Setup/Play/Sync and one continuous master recording, forward active loops: raw primary reference523.251Hz; secondary440Hz/keylock/+3semitones; no stems. Browser pulse phase scope only; independent full-band PCM pitch inspection required. No reference/native/hardware/music-quality acceptance; this report alone does not establish pitch.",
+  "sourceBefore": {
+    "app.js": "a7d2d10e352abdca857d138e4d0cf3854593cfc64780c71a93e26f227c85575d",
+    "engine.js": "f34657b68dfb591cb135af76231677ef218576a56719da522839ff63f2f5fc12",
+    "panels.js": "4a4b4c544f07140758cfd8f45b00f774dea588f881d6ed0f24c0e19bc1ff02fb",
+    "beatgrid.js": "af239aef231c9d089bf2352b8f548a5f71f734d6cf753986f17f57b3999477b9",
+    "smart-sync.js": "a8998b8727ae144413272163a2c438f3d8bcd92f634d5bd1872e5ac49a509f61",
+    "sync-tempo-handoff.js": "5842f9209035e24ff867004d3fef5f0a1fe7f7f4976440546b8238a225b82f9b",
+    "warp-loop.js": "8d794041a014821319c93d03edc2efcaafdb99a5db5ba43654c1c3cceec6a5f8",
+    "warp-loop-kernel.js": "8a331758bc551454a3cc65fd5ea527c42a370bd22ab6eb650ca278ea87e0f414",
+    "warp-loop-worklet.js": "bc977262180f910c6be55ea07a46f6b560a090939271bd4beec5e8fd31ed23fa",
+    "keylock.js": "05dcc7b05266984076744eb01f5f9bd76ddf6e80be279d9c4bdd9cb0164935d4",
+    "keylock-dsp.js": "78a21a3ac295c79454895bad3650d81b7782aac46432df1258e01911180fbe68",
+    "keylock-worker.js": "5cb72a1bc74e1808c32b430d72d5769427c7056edee11410eb6f8b3c7751fcec",
+    "vendor/signalsmith-stretch/SignalsmithStretch-open-play-disposable.mjs": "b2811c519f067cc5a1abd6cdccab46578d1eeef8aba42f666fab2830a9d6f46e",
+    "sync-tempo-harness.js": "d582256aafd5286bdf81cd2f97d9b07cf096a0ad35fed6f76fa0c5c25d65279f"
+  },
+  "physicalOutputMuted": true,
+  "persistedMarkers": [
+    {
+      "time": 2.13,
+      "bpm": 150
+    },
+    {
+      "time": 3.73,
+      "bpm": 90
+    }
+  ],
+  "recordStart": 0.49342403628117915,
+  "events": [
+    {
+      "name": "first-request",
+      "time": 1.004263038548753
+    },
+    {
+      "name": "first-ready",
+      "time": 1.4454421768707482
+    },
+    {
+      "name": "latest-request",
+      "time": 3.645532879818594
+    },
+    {
+      "name": "latest-ready",
+      "time": 4.092517006802721
+    },
+    {
+      "name": "left-paused",
+      "time": 5.897868480725624
+    }
+  ],
+  "recording": {
+    "bytes": 99979,
+    "format": "audio/webm;codecs=opus",
+    "sha256": "1ed8091f865b1da5770c510375c666f8d93e54fb0cc368d017aef808a9743866"
+  },
+  "decoded": {
+    "frames": 272538,
+    "sampleRate": 44100,
+    "channels": 2,
+    "duration": 6.18
+  },
+  "audio": {
+    "pulseTimes": [
+      [
+        0.12709750566893424,
+        0.6265532879818594,
+        1.1262131519274377,
+        1.6175056689342404,
+        2.093605442176871,
+        2.569954648526077,
+        3.0460090702947844,
+        3.522222222222222,
+        3.9988662131519273,
+        4.478321995464853,
+        4.958775510204082,
+        5.4399773242630385
+      ],
+      [
+        0.1274829931972789,
+        0.6277097505668934,
+        1.1286621315192744,
+        1.6182993197278912,
+        2.0950566893424036,
+        2.5714285714285716,
+        3.0476190476190474,
+        3.5239455782312925,
+        3.999342403628118,
+        4.479433106575963,
+        4.960022675736962,
+        5.440657596371882,
+        5.923219954648526
+      ]
+    ],
+    "sections": [
+      {
+        "name": "126BPM",
+        "from": 1.6454421768707481,
+        "to": 3.4955328798185943,
+        "period": 0.47619047619047616,
+        "pairs": [
+          {
+            "time": 2.093605442176871,
+            "errorSeconds": 0.0014512471655327985
+          },
+          {
+            "time": 2.569954648526077,
+            "errorSeconds": 0.0014739229024947065
+          },
+          {
+            "time": 3.0460090702947844,
+            "errorSeconds": 0.0016099773242630455
+          }
+        ],
+        "intervals": [
+          [
+            0.4763492063492061,
+            0.4760544217687075
+          ],
+          [
+            0.476371882086168,
+            0.47619047619047583
+          ]
+        ]
+      },
+      {
+        "name": "124.8BPM",
+        "from": 4.292517006802721,
+        "to": 5.747868480725623,
+        "period": 0.4807692307692308,
+        "pairs": [
+          {
+            "time": 4.478321995464853,
+            "errorSeconds": 0.0011111111111103966
+          },
+          {
+            "time": 4.958775510204082,
+            "errorSeconds": 0.001247165532880068
+          },
+          {
+            "time": 5.4399773242630385,
+            "errorSeconds": 0.0006802721088439156
+          }
+        ],
+        "intervals": [
+          [
+            0.4804535147392288,
+            0.4812018140589567
+          ],
+          [
+            0.4805895691609985,
+            0.4806349206349205
+          ]
+        ]
+      }
+    ]
+  },
+  "pauseAt": 5.897868480725624,
+  "sourceAfter": {
+    "app.js": "a7d2d10e352abdca857d138e4d0cf3854593cfc64780c71a93e26f227c85575d",
+    "engine.js": "f34657b68dfb591cb135af76231677ef218576a56719da522839ff63f2f5fc12",
+    "panels.js": "4a4b4c544f07140758cfd8f45b00f774dea588f881d6ed0f24c0e19bc1ff02fb",
+    "beatgrid.js": "af239aef231c9d089bf2352b8f548a5f71f734d6cf753986f17f57b3999477b9",
+    "smart-sync.js": "a8998b8727ae144413272163a2c438f3d8bcd92f634d5bd1872e5ac49a509f61",
+    "sync-tempo-handoff.js": "5842f9209035e24ff867004d3fef5f0a1fe7f7f4976440546b8238a225b82f9b",
+    "warp-loop.js": "8d794041a014821319c93d03edc2efcaafdb99a5db5ba43654c1c3cceec6a5f8",
+    "warp-loop-kernel.js": "8a331758bc551454a3cc65fd5ea527c42a370bd22ab6eb650ca278ea87e0f414",
+    "warp-loop-worklet.js": "bc977262180f910c6be55ea07a46f6b560a090939271bd4beec5e8fd31ed23fa",
+    "keylock.js": "05dcc7b05266984076744eb01f5f9bd76ddf6e80be279d9c4bdd9cb0164935d4",
+    "keylock-dsp.js": "78a21a3ac295c79454895bad3650d81b7782aac46432df1258e01911180fbe68",
+    "keylock-worker.js": "5cb72a1bc74e1808c32b430d72d5769427c7056edee11410eb6f8b3c7751fcec",
+    "vendor/signalsmith-stretch/SignalsmithStretch-open-play-disposable.mjs": "b2811c519f067cc5a1abd6cdccab46578d1eeef8aba42f666fab2830a9d6f46e",
+    "sync-tempo-harness.js": "d582256aafd5286bdf81cd2f97d9b07cf096a0ad35fed6f76fa0c5c25d65279f"
+  },
+  "sourceStable": true,
+  "finishedAt": "2026-10-17T23:31:46.115Z"
+}

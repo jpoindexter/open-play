@@ -1,0 +1,84 @@
+{
+  "scope": "Independent complete FFmpeg44100Hz PCM decode/finite; fixed1ms continuity and event-relative1s global20\u201320000Hz Hann16x peak; no waveform fitting/expected-frequency mask. No native/hardware/listening acceptance.",
+  "criteria": {
+    "maxPitchErrorHz": 1,
+    "maxPhaseErrorSeconds": 0.01,
+    "maxQuietRunSeconds": 0.02,
+    "quietRMS": 0.0001,
+    "pausedLeftRMS": 0.0001,
+    "playingRightRMS": 0.001
+  },
+  "passed": true,
+  "audioSHA256": "1ed8091f865b1da5770c510375c666f8d93e54fb0cc368d017aef808a9743866",
+  "pcmSHA256": "8b6d6f121ba91ade5b54ce0ac8cb9bac34b6e920bc3d0c34c0c830b268b386e6",
+  "frames": 272538,
+  "wholeFinite": true,
+  "windows": [
+    {
+      "name": "first-ready",
+      "from": 1.7454421768707482,
+      "to": 2.745442176870748,
+      "hz": [
+        549.4134773745328,
+        523.52288335281
+      ],
+      "expected": [
+        549.4136871312571,
+        523.2511306011972
+      ],
+      "errorsHz": [
+        -0.00020975672430267878,
+        0.27175275161278023
+      ]
+    },
+    {
+      "name": "latest-ready",
+      "from": 4.392517006802721,
+      "to": 5.392517006802721,
+      "hz": [
+        544.1814056398367,
+        523.4636700119664
+      ],
+      "expected": [
+        544.1811758252452,
+        523.2511306011972
+      ],
+      "errorsHz": [
+        0.00022981459153470496,
+        0.2125394107691818
+      ]
+    }
+  ],
+  "phase": [
+    {
+      "name": "126BPM",
+      "pairs": 3,
+      "maxErrorSeconds": 0.0016099773242630455
+    },
+    {
+      "name": "124.8BPM",
+      "pairs": 3,
+      "maxErrorSeconds": 0.001247165532880068
+    }
+  ],
+  "continuity": [
+    {
+      "channel": 0,
+      "from": 0.1,
+      "to": 5.877868480725623,
+      "minimum1msRMS": 0.002841815089580664,
+      "maximumQuietRunSeconds": 0.0
+    },
+    {
+      "channel": 1,
+      "from": 0.1,
+      "to": 5.877868480725623,
+      "minimum1msRMS": 0.0018466757990534457,
+      "maximumQuietRunSeconds": 0.0
+    }
+  ],
+  "pauseRMS": [
+    3.278548676650973e-06,
+    0.0036426934549129136
+  ]
+}

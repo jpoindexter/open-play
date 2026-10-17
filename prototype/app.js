@@ -1828,16 +1828,27 @@ engine.onProcessing = (d) => {
     status.textContent = d.processing ? "PROCESSING PITCH…" : "LOCAL AUDIO";
 };
 
-engine.onRateRequest = async (deck, rate) => {
-  if (!["Simple Sync","Smart Sync"].includes(state.settings["Sync Mode"]) || !deck.sync)
-    return engine.setRate(deck, rate, {syncInternal: true});
-  const bpm = state.settings["Sync Mode"] === "Smart Sync" ? smartSync.tempo(deck,rate) : deck.track?.bpm * rate;
-  if (!Number.isFinite(bpm) || bpm <= 0) throw new Error("Set a valid track BPM before changing synced tempo.");
-  const members = state.decks.filter(d => d.sync && d.track);
-  const changes = members.map(d => ({deck: d, rate: bpm / d.track.bpm}));
-  if (changes.some(x => !Number.isFinite(x.rate) || x.rate < .25 || x.rate > 4))
-    throw new Error("The matched tempo is outside a synced deck's current transport range.");
-  await Promise.all(changes.map(x => engine.setRate(x.deck, x.rate, {syncInternal: true})));
+let syncTempoQueue=null;
+engine.onRateRequest = async (deck,rate) => {
+  if(!['Simple Sync','Smart Sync'].includes(state.settings['Sync Mode'])||!deck.sync)return engine.setRate(deck,rate,{syncInternal:true});
+  const request={deck,track:deck.track,rate};
+  if(syncTempoQueue){syncTempoQueue.wanted=request;return syncTempoQueue.promise;}
+  const queue={wanted:request,promise:null};syncTempoQueue=queue;
+  queue.promise=Promise.resolve().then(async()=>{
+    while(queue.wanted){
+      const next=queue.wanted;queue.wanted=null;
+      if(next.deck.track!==next.track||!next.deck.sync)continue;
+      const priorTempo=smartSync.captureTempo(),smart=state.settings['Sync Mode']==='Smart Sync';
+      try{
+        const bpm=smart?smartSync.tempo(next.deck,next.rate):next.track.bpm*next.rate;
+        if(!Number.isFinite(bpm)||bpm<=0)throw Error('Set a valid BPM before changing synced tempo.');
+        const changes=state.decks.filter(d=>d.sync&&d.track).map(d=>({deck:d,rate:bpm/d.track.bpm}));
+        if(changes.some(x=>!Number.isFinite(x.rate)||x.rate<.25||x.rate>4))throw Error('Matched tempo is outside a synced deck transport range.');
+        await engine.setSyncedRates(changes);
+      }catch(error){if(smart)smartSync.restoreTempo(priorTempo);throw error;}
+    }
+  }).finally(()=>{if(syncTempoQueue===queue)syncTempoQueue=null;});
+  return queue.promise;
 };
 engine.onManualPosition = d => smartSync.manipulated(d);
 engine.onGridTimeline = (d,options) => smartSync.timeline(d,options);

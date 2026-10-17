@@ -184,5 +184,6 @@ export function createSmartSync({engine, state}) {
     }
   }
   return {press,start,played,paused,manipulated,disengage,loaded,reconcile,engaged,timeline,tempo,captureGrid,edited,validate,
+    captureTempo:()=>syncBPM,restoreTempo:bpm=>{syncBPM=bpm;},
     reset:() => {state.decks.forEach(clear);syncBPM=null;}};
 }

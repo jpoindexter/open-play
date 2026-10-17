@@ -1,0 +1,157 @@
+{
+  "startedAt": "2026-10-17T23:33:26.972Z",
+  "completed": true,
+  "scope": "Actual browser app DOM controls and routed stereo audio; controlled fixtures only. No native/hardware/Smart Sync/music quality acceptance.",
+  "criteria": {
+    "maximumPostSyncPhaseErrorSeconds": 0.01,
+    "minimumPreSyncErrorSeconds": 0.03,
+    "minimumPostSyncPairs": 3,
+    "postWindowSeconds": 2
+  },
+  "fixture": {
+    "sampleRate": 48000,
+    "durationSeconds": 30,
+    "bpm": [
+      120,
+      128
+    ],
+    "offsetSeconds": [
+      0.05,
+      0.13
+    ],
+    "pulseSeconds": 0.012,
+    "carrierHz": 900,
+    "amplitude": 0.15
+  },
+  "checks": [
+    "Actual postmaster audio aligned within 10ms after initially mismatched playback",
+    "Pressing Sync again reschedules and remains engaged",
+    "Virtual tempo changes both Simple Sync source rates",
+    "OFF retains current tempo and detaches the secondary from software tempo changes"
+  ],
+  "errors": [],
+  "events": [
+    {
+      "name": "record-start",
+      "audioTime": 0.06385487528344672,
+      "utc": "2026-10-17T23:33:27.031Z"
+    },
+    {
+      "name": "sync-request",
+      "audioTime": 1.364172335600907,
+      "utc": "2026-10-17T23:33:28.331Z"
+    },
+    {
+      "name": "sync-complete",
+      "audioTime": 1.6137868480725623,
+      "utc": "2026-10-17T23:33:28.578Z"
+    },
+    {
+      "name": "record-stop",
+      "audioTime": 4.214421768707483,
+      "utc": "2026-10-17T23:33:31.179Z"
+    }
+  ],
+  "sourceBefore": {
+    "app.js": "a7d2d10e352abdca857d138e4d0cf3854593cfc64780c71a93e26f227c85575d",
+    "engine.js": "f34657b68dfb591cb135af76231677ef218576a56719da522839ff63f2f5fc12",
+    "sync.js": "f45fb74d984f4f5fa87684e50b87ab16014554a0f0576b061c8bae3e214bd197",
+    "simple-sync-harness.js": "cac36adbab72e80526b478d5c3cf0776caa7af9798b5085fd05ad1a86b89f967"
+  },
+  "physicalOutputMuted": true,
+  "synced": [
+    {
+      "rate": 1,
+      "role": "primary",
+      "playing": true
+    },
+    {
+      "rate": 0.9375,
+      "role": "secondary",
+      "playing": true
+    }
+  ],
+  "recording": {
+    "bytes": 46431,
+    "format": "audio/webm;codecs=opus",
+    "sha256": "5ce54db83711d7f9224ed05033f09e6d4438e78ec0c0a43c6d6da888790cfdcb"
+  },
+  "decoded": {
+    "frames": 182573,
+    "sampleRate": 44100,
+    "channels": 2,
+    "duration": 4.139977324263039
+  },
+  "phase": {
+    "pulseTimes": [
+      [
+        0.03698412698412699,
+        0.536984126984127,
+        1.036984126984127,
+        1.536984126984127,
+        2.036984126984127,
+        2.536984126984127,
+        3.036984126984127,
+        3.536984126984127,
+        4.036984126984127
+      ],
+      [
+        0.13439909297052155,
+        0.6031519274376417,
+        1.071904761904762,
+        1.540657596371882,
+        2.0364625850340135,
+        2.5364625850340135,
+        3.0364625850340135,
+        3.5364625850340135,
+        4.0364625850340135
+      ]
+    ],
+    "pre": [
+      {
+        "left": 0.536984126984127,
+        "errorSeconds": 0.06616780045351467
+      },
+      {
+        "left": 1.036984126984127,
+        "errorSeconds": 0.03492063492063502
+      }
+    ],
+    "post": [
+      {
+        "left": 2.536984126984127,
+        "errorSeconds": 0.0005215419501136687
+      },
+      {
+        "left": 3.036984126984127,
+        "errorSeconds": 0.0005215419501136687
+      },
+      {
+        "left": 3.536984126984127,
+        "errorSeconds": 0.0005215419501136687
+      },
+      {
+        "left": 4.036984126984127,
+        "errorSeconds": 0.0005215419501132246
+      }
+    ]
+  },
+  "sharedTempo": [
+    {
+      "requested": 1.04,
+      "sourceRate": 1.0399999618530273
+    },
+    {
+      "requested": 0.9750000000000001,
+      "sourceRate": 0.9750000238418579
+    }
+  ],
+  "sourceAfter": {
+    "app.js": "a7d2d10e352abdca857d138e4d0cf3854593cfc64780c71a93e26f227c85575d",
+    "engine.js": "f34657b68dfb591cb135af76231677ef218576a56719da522839ff63f2f5fc12",
+    "sync.js": "f45fb74d984f4f5fa87684e50b87ab16014554a0f0576b061c8bae3e214bd197",
+    "simple-sync-harness.js": "cac36adbab72e80526b478d5c3cf0776caa7af9798b5085fd05ad1a86b89f967"
+  },
+  "sourceStable": true,
+  "finishedAt": "2026-10-17T23:33:31.232Z"
+}
