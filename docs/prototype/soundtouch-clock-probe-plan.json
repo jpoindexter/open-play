@@ -1,0 +1,38 @@
+{
+  "declared_before_execution": "2026-10-17",
+  "question": "Are SoundTouch DSP algorithms necessary for the observed graph-lifecycle clock anomaly? No DSP epochs are ever prepared in either variant.",
+  "cases": [
+    {
+      "id": "bare-44100",
+      "kind": "bare",
+      "sampleRate": 44100
+    },
+    {
+      "id": "paused-transport-44100",
+      "kind": "paused-transport",
+      "sampleRate": 44100
+    },
+    {
+      "id": "bare-48000",
+      "kind": "bare",
+      "sampleRate": 48000
+    },
+    {
+      "id": "paused-transport-48000",
+      "kind": "paused-transport",
+      "sampleRate": 48000
+    }
+  ],
+  "cycles": 40,
+  "nodes_per_cycle": 5,
+  "hold_ms": 50,
+  "criteria": {
+    "finite": true,
+    "contiguous": true,
+    "frame_tag_error_samples": 0.25,
+    "control_error_hz": 0.01,
+    "source_exact_zero": true,
+    "node_clock_anomalies": 0
+  },
+  "capture": "Whole original, independent307Hz continuous oscillator and future exact integer-anchored frameTag. No relabeling/cropping/repair. Any negative case fails; graph-only sufficiency evidence is limited to its exact source/clock conditions."
+}

@@ -29,7 +29,7 @@ class PullWorklet extends AudioWorkletProcessor {
       if (this.pendingLoad) {
         const data = this.pendingLoad; this.pendingLoad = null;
         this.transport = new SoundTouchTransport({sampleRate, buffers: data.buffers, initialFrame: currentFrame});
-        this.port.postMessage({requestId: data.requestId, value: {loaded: true, frame: currentFrame, sourceBytes: this.transport.sourceBytes}});
+        this.port.postMessage({requestId: data.requestId, value: {loaded: true, frame: currentFrame, sourceBytes: this.transport.snapshot().sourceBytes}});
       }
       if (this.transport) {
         const result = this.transport.render(currentFrame, outputs[0][0].length);

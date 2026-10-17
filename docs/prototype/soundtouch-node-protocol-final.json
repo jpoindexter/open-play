@@ -1,0 +1,384 @@
+{
+  "created_at": "2026-10-17T17:50:47.670Z",
+  "passed": 6,
+  "failed": 0,
+  "checks": [
+    {
+      "name": "Append extent is not file EOF; fixed coordinates survive drop/refill",
+      "passed": true,
+      "evidence": {
+        "snapshot": {
+          "disposed": false,
+          "store": {
+            "sampleRate": 48000,
+            "durationFrames": 768000,
+            "channelCounts": [
+              2
+            ],
+            "startFrame": 48000,
+            "endFrame": 408000,
+            "disposed": false,
+            "retainedPCMBytes": 2880000,
+            "maxRetainedFrames": 528000,
+            "retainedChunks": 15,
+            "ownership": "Snapshotted descriptors; borrowed immutable whole-buffer PCM. Payload bytes exclude DSP and JavaScript overhead."
+          },
+          "transport": {
+            "sampleRate": 48000,
+            "nextFrame": 144000,
+            "generation": 1,
+            "disposed": false,
+            "state": {
+              "frame": 256,
+              "position": 2.994666666666667,
+              "playing": true,
+              "generation": 1,
+              "rate": 1,
+              "semitones": 0,
+              "keylock": true,
+              "effectiveSemitones": 0,
+              "anchorPosition": 0,
+              "positionKind": "nominal-not-measured-audible"
+            },
+            "sourceBytes": 2880000,
+            "retainedWholeSources": false,
+            "memoryLimit": "Caller-bounded PCM window plus bounded16epochs; opaque DSP heaps not counted.",
+            "pcmOwnership": "Descriptors are snapshotted; PCM arrays are borrowed immutable data for the transport lifetime. The worklet owns transferred storage.",
+            "renderedFrames": 144000,
+            "retiredEpochs": 0,
+            "retiredSummaries": [
+              {
+                "generation": 1,
+                "counters": [
+                  {
+                    "originFrame": 0,
+                    "sourceCursorFrame": 149504,
+                    "realFramesFed": 149504,
+                    "paddingFramesFed": 0,
+                    "paddingLimit": 96000,
+                    "generatedFrames": 146880,
+                    "extractedFrames": 143744,
+                    "discardedPrerollFrames": 0,
+                    "outputFramesReady": 3136
+                  }
+                ]
+              }
+            ],
+            "retiredSummaryLimit": 64,
+            "clockRetention": "Last two applied anchors; older queries reject explicitly.",
+            "epochs": [
+              {
+                "generation": 1,
+                "role": "active-or-retiring",
+                "counters": [
+                  {
+                    "originFrame": 0,
+                    "sourceCursorFrame": 149504,
+                    "realFramesFed": 149504,
+                    "paddingFramesFed": 0,
+                    "paddingLimit": 96000,
+                    "generatedFrames": 146880,
+                    "extractedFrames": 143744,
+                    "discardedPrerollFrames": 0,
+                    "outputFramesReady": 3136
+                  }
+                ]
+              }
+            ],
+            "scope": "Forward pull-based experiment; nominal output endpoint, not measured audible source position or proved EOS tail preservation."
+          }
+        }
+      }
+    },
+    {
+      "name": "Effective pitch is applied once, including keylock-OFF compensation from caller",
+      "passed": true,
+      "evidence": {
+        "hz": 412.4998547630045
+      }
+    },
+    {
+      "name": "Later commands supersede scheduled stop; stop does not dispose the node",
+      "passed": true,
+      "evidence": {
+        "snapshot": {
+          "disposed": false,
+          "store": {
+            "sampleRate": 48000,
+            "durationFrames": 768000,
+            "channelCounts": [
+              2
+            ],
+            "startFrame": 0,
+            "endFrame": 384000,
+            "disposed": false,
+            "retainedPCMBytes": 3072000,
+            "maxRetainedFrames": 528000,
+            "retainedChunks": 16,
+            "ownership": "Snapshotted descriptors; borrowed immutable whole-buffer PCM. Payload bytes exclude DSP and JavaScript overhead."
+          },
+          "transport": {
+            "sampleRate": 48000,
+            "nextFrame": 129664,
+            "generation": 5,
+            "disposed": false,
+            "state": {
+              "frame": 115264,
+              "position": 3.3,
+              "playing": true,
+              "generation": 5,
+              "rate": 1,
+              "semitones": 0,
+              "keylock": true,
+              "effectiveSemitones": 0,
+              "anchorPosition": 3,
+              "positionKind": "nominal-not-measured-audible"
+            },
+            "sourceBytes": 3072000,
+            "retainedWholeSources": false,
+            "memoryLimit": "Caller-bounded PCM window plus bounded16epochs; opaque DSP heaps not counted.",
+            "pcmOwnership": "Descriptors are snapshotted; PCM arrays are borrowed immutable data for the transport lifetime. The worklet owns transferred storage.",
+            "renderedFrames": 129664,
+            "retiredEpochs": 2,
+            "retiredSummaries": [
+              {
+                "generation": 1,
+                "counters": [
+                  {
+                    "originFrame": 0,
+                    "sourceCursorFrame": 26624,
+                    "realFramesFed": 26624,
+                    "paddingFramesFed": 0,
+                    "paddingLimit": 96000,
+                    "generatedFrames": 24480,
+                    "extractedFrames": 24320,
+                    "discardedPrerollFrames": 0,
+                    "outputFramesReady": 160
+                  }
+                ]
+              },
+              {
+                "generation": 3,
+                "counters": [
+                  {
+                    "originFrame": 84000,
+                    "sourceCursorFrame": 179232,
+                    "realFramesFed": 95232,
+                    "paddingFramesFed": 0,
+                    "paddingLimit": 96000,
+                    "generatedFrames": 93024,
+                    "extractedFrames": 88800,
+                    "discardedPrerollFrames": 12000,
+                    "outputFramesReady": 4224
+                  }
+                ]
+              },
+              {
+                "generation": 5,
+                "counters": [
+                  {
+                    "originFrame": 132000,
+                    "sourceCursorFrame": 163744,
+                    "realFramesFed": 31744,
+                    "paddingFramesFed": 0,
+                    "paddingLimit": 96000,
+                    "generatedFrames": 29376,
+                    "extractedFrames": 26400,
+                    "discardedPrerollFrames": 12000,
+                    "outputFramesReady": 2976
+                  }
+                ]
+              }
+            ],
+            "retiredSummaryLimit": 64,
+            "clockRetention": "Last two applied anchors; older queries reject explicitly.",
+            "epochs": [
+              {
+                "generation": 5,
+                "role": "active-or-retiring",
+                "counters": [
+                  {
+                    "originFrame": 132000,
+                    "sourceCursorFrame": 163744,
+                    "realFramesFed": 31744,
+                    "paddingFramesFed": 0,
+                    "paddingLimit": 96000,
+                    "generatedFrames": 29376,
+                    "extractedFrames": 26400,
+                    "discardedPrerollFrames": 12000,
+                    "outputFramesReady": 2976
+                  }
+                ]
+              }
+            ],
+            "scope": "Forward pull-based experiment; nominal output endpoint, not measured audible source position or proved EOS tail preservation."
+          }
+        }
+      }
+    },
+    {
+      "name": "Late or missing-coverage active schedules reject without changing owner",
+      "passed": true,
+      "evidence": {
+        "snapshot": {
+          "disposed": false,
+          "store": {
+            "sampleRate": 48000,
+            "durationFrames": 768000,
+            "channelCounts": [
+              2
+            ],
+            "startFrame": 0,
+            "endFrame": 384000,
+            "disposed": false,
+            "retainedPCMBytes": 3072000,
+            "maxRetainedFrames": 528000,
+            "retainedChunks": 16,
+            "ownership": "Snapshotted descriptors; borrowed immutable whole-buffer PCM. Payload bytes exclude DSP and JavaScript overhead."
+          },
+          "transport": {
+            "sampleRate": 48000,
+            "nextFrame": 48000,
+            "generation": 1,
+            "disposed": false,
+            "state": {
+              "frame": 4800,
+              "position": 0.9,
+              "playing": true,
+              "generation": 1,
+              "rate": 1,
+              "semitones": 0,
+              "keylock": true,
+              "effectiveSemitones": 0,
+              "anchorPosition": 0,
+              "positionKind": "nominal-not-measured-audible"
+            },
+            "sourceBytes": 3072000,
+            "retainedWholeSources": false,
+            "memoryLimit": "Caller-bounded PCM window plus bounded16epochs; opaque DSP heaps not counted.",
+            "pcmOwnership": "Descriptors are snapshotted; PCM arrays are borrowed immutable data for the transport lifetime. The worklet owns transferred storage.",
+            "renderedFrames": 48000,
+            "retiredEpochs": 0,
+            "retiredSummaries": [
+              {
+                "generation": 1,
+                "counters": [
+                  {
+                    "originFrame": 0,
+                    "sourceCursorFrame": 46080,
+                    "realFramesFed": 46080,
+                    "paddingFramesFed": 0,
+                    "paddingLimit": 96000,
+                    "generatedFrames": 44064,
+                    "extractedFrames": 43200,
+                    "discardedPrerollFrames": 0,
+                    "outputFramesReady": 864
+                  }
+                ]
+              }
+            ],
+            "retiredSummaryLimit": 64,
+            "clockRetention": "Last two applied anchors; older queries reject explicitly.",
+            "epochs": [
+              {
+                "generation": 1,
+                "role": "active-or-retiring",
+                "counters": [
+                  {
+                    "originFrame": 0,
+                    "sourceCursorFrame": 46080,
+                    "realFramesFed": 46080,
+                    "paddingFramesFed": 0,
+                    "paddingLimit": 96000,
+                    "generatedFrames": 44064,
+                    "extractedFrames": 43200,
+                    "discardedPrerollFrames": 0,
+                    "outputFramesReady": 864
+                  }
+                ]
+              }
+            ],
+            "scope": "Forward pull-based experiment; nominal output endpoint, not measured audible source position or proved EOS tail preservation."
+          }
+        }
+      }
+    },
+    {
+      "name": "Eight-channel PCM keeps positional ordering, without stereo duplication leaking",
+      "passed": true,
+      "evidence": {
+        "channels": 8,
+        "reference": "Bit-identical to whole-source four-pair transport; does not prove phase coherence across independent stereo pairs."
+      }
+    },
+    {
+      "name": "Dispose releases retained PCM and epochs; idempotent and terminal",
+      "passed": true,
+      "evidence": {
+        "snapshot": {
+          "disposed": true,
+          "store": {
+            "sampleRate": 48000,
+            "durationFrames": 768000,
+            "channelCounts": [
+              2
+            ],
+            "startFrame": 0,
+            "endFrame": 384000,
+            "disposed": true,
+            "retainedPCMBytes": 0,
+            "maxRetainedFrames": 528000,
+            "retainedChunks": 0,
+            "ownership": "Snapshotted descriptors; borrowed immutable whole-buffer PCM. Payload bytes exclude DSP and JavaScript overhead."
+          },
+          "transport": {
+            "sampleRate": 48000,
+            "nextFrame": 0,
+            "generation": 1,
+            "disposed": true,
+            "state": {
+              "frame": 0,
+              "position": 0,
+              "playing": false,
+              "rate": 1,
+              "semitones": 0,
+              "keylock": true,
+              "effectiveSemitones": 0,
+              "anchorPosition": 0,
+              "positionKind": "nominal-not-measured-audible"
+            },
+            "sourceBytes": 0,
+            "retainedWholeSources": false,
+            "memoryLimit": "Caller-bounded PCM window plus bounded16epochs; opaque DSP heaps not counted.",
+            "pcmOwnership": "Descriptors are snapshotted; PCM arrays are borrowed immutable data for the transport lifetime. The worklet owns transferred storage.",
+            "renderedFrames": 0,
+            "retiredEpochs": 1,
+            "retiredSummaries": [
+              {
+                "generation": 1,
+                "counters": [
+                  {
+                    "originFrame": 0,
+                    "sourceCursorFrame": 7168,
+                    "realFramesFed": 7168,
+                    "paddingFramesFed": 0,
+                    "paddingLimit": 96000,
+                    "generatedFrames": 4896,
+                    "extractedFrames": 0,
+                    "discardedPrerollFrames": 0,
+                    "outputFramesReady": 4896
+                  }
+                ]
+              }
+            ],
+            "retiredSummaryLimit": 64,
+            "clockRetention": "Last two applied anchors; older queries reject explicitly.",
+            "epochs": [],
+            "scope": "Forward pull-based experiment; nominal output endpoint, not measured audible source position or proved EOS tail preservation."
+          }
+        }
+      }
+    }
+  ],
+  "scope": "Real public DSP with low-level scheduling/window protocol in serial Node; no actual AudioWorklet, engine, native, physical latency or full parity acceptance."
+}

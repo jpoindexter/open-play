@@ -1,0 +1,68 @@
+Browser tab: 50, Title: "Open Play — experimental engine integration", URL: "http://127.0.0.1:18815/".
+0 AXWebArea Open Play — experimental engine integration, URL: 127.0.0.1:18815/
+	1 heading SoundTouch engine integration, Value: 1
+		2 text SoundTouch engine integration
+	3 text Runs the existing AudioEngine with an experimental bounded SoundTouch adapter. Physical output muted. This does not change the installed app.
+	4 button (disabled) Run four engine captures, ID: run
+	5 text Capture finished: 0/4 bounded engine cases accepted. Full parity remains unverified.
+	6 text [
+  {
+    "id": "single-44100",
+    "passed": false,
+    "errors": [
+      {
+        "name": "InUseError",
+        "message": "Drop would remove PCM still required by a prepared epoch"
+      },
+      {
+        "name": "InUseError",
+        "message": "Drop would remove PCM still required by a prepared epoch",
+        "stack": "InUseError: Drop would remove PCM still required by a prepared epoch\n    at restored (http://127.0.0.1:18815/experiments/keylock-soundtouch/node-factory.mjs:3:43)\n    at node.port.onmessage (http://127.0.0.1:18815/experiments/keylock-soundtouch/node-factory.mjs:41:36)"
+      }
+    ],
+    "frames": 513024,
+    "toneChecks": 16,
+    "toneFailures": [],
+    "clock": 0.03125
+  },
+  {
+    "id": "five-44100",
+    "passed": false,
+    "errors": [
+      {
+        "name": "InUseError",
+        "message": "Drop would remove PCM still required by a prepared epoch"
+      },
+      {
+        "name": "InUseError",
+        "message": "Drop would remove PCM still required by a prepared epoch",
+        "stack": "InUseError: Drop would remove PCM still required by a prepared epoch\n    at restored (http://127.0.0.1:18815/experiments/keylock-soundtouch/node-factory.mjs:3:43)\n    at node.port.onmessage (http://127.0.0.1:18815/experiments/keylock-soundtouch/node-factory.mjs:41:36)"
+      }
+    ],
+    "frames": 523008,
+    "toneChecks": 48,
+    "toneFailures": [],
+    "clock": 0.0625
+  },
+  {
+    "id": "single-48000",
+    "passed": false,
+    "errors": [
+      {
+        "name": "InUseError",
+        "message": "Drop would remove PCM still required by a prepared epoch"
+      },
+      {
+        "name": "InUseError",
+        "message": "Drop would remove PCM still required by a prepared epoch",
+        "stack": "InUseError: Drop would remove PCM still required by a prepared epoch\n    at restored (http://127.0.0.1:18815/experiments/keylock-soundtouch/node-factory.mjs:3:43)\n    at node.port.onmessage (http://127.0.0.1:18815/experiments/keylock-soundtouch/node-factory.mjs:41:36)"
+      }
+    ],
+    "frames": 558208,
+    "toneChecks": 16,
+    "toneFailures": [],
+    "clock": 0.0625
+  }
+]
+
+The focused UI element is 0 AXWebArea Open Play — experimental engine integration, URL: 127.0.0.1:18815/

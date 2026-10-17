@@ -29,7 +29,7 @@ route('/transport-harness.mjs', 'experiments/keylock-soundtouch/transport-harnes
 plan = (ROOT / args.plan).resolve()
 assert plan.is_relative_to(ROOT / 'docs/prototype')
 route('/plan.json', str(plan.relative_to(ROOT)), 'application/json')
-for name in ['pull-transport.mjs', 'pull-worklet.mjs', 'transport-capture.mjs']:
+for name in ['pull-transport.mjs', 'pull-worklet.mjs', 'window-source.mjs', 'transport-capture.mjs']:
     relative = 'experiments/keylock-soundtouch/' + name
     route('/' + relative, relative)
 prefix = 'local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/'

@@ -1,0 +1,81 @@
+{
+  "created_at": "2026-10-17T17:21:33.675Z",
+  "passed": 0,
+  "failed": 8,
+  "loadError": "Cannot find module '/Users/jasonpoindexter/Documents/GitHub/Open Play/experiments/keylock-soundtouch/window-source.mjs' imported from /Users/jasonpoindexter/Documents/GitHub/Open Play/scripts/test_soundtouch_window_source.mjs",
+  "checks": [
+    {
+      "name": "Contiguous PCM copies preserve exact stereo samples and drop only whole chunks (44100)",
+      "passed": false,
+      "evidence": {},
+      "error": {
+        "name": "AssertionError",
+        "message": "Bounded PCM source is not implemented\n+ actual - expected\n\n+ 'undefined'\n- 'function'\n"
+      }
+    },
+    {
+      "name": "Missing future PCM is an error; only the real source endpoint permits zero padding (44100)",
+      "passed": false,
+      "evidence": {},
+      "error": {
+        "name": "AssertionError",
+        "message": "Bounded PCM source is not implemented\n+ actual - expected\n\n+ 'undefined'\n- 'function'\n"
+      }
+    },
+    {
+      "name": "Invalid append, quota exhaustion and protected drop leave source ownership unchanged (44100)",
+      "passed": false,
+      "evidence": {},
+      "error": {
+        "name": "AssertionError",
+        "message": "Bounded PCM source is not implemented\n+ actual - expected\n\n+ 'undefined'\n- 'function'\n"
+      }
+    },
+    {
+      "name": "Real DSP on refilled bounded PCM matches whole-source output bit-for-bit (44100)",
+      "passed": false,
+      "evidence": {},
+      "error": {
+        "name": "AssertionError",
+        "message": "Bounded PCM source is not implemented\n+ actual - expected\n\n+ 'undefined'\n- 'function'\n"
+      }
+    },
+    {
+      "name": "Contiguous PCM copies preserve exact stereo samples and drop only whole chunks (48000)",
+      "passed": false,
+      "evidence": {},
+      "error": {
+        "name": "AssertionError",
+        "message": "Bounded PCM source is not implemented\n+ actual - expected\n\n+ 'undefined'\n- 'function'\n"
+      }
+    },
+    {
+      "name": "Missing future PCM is an error; only the real source endpoint permits zero padding (48000)",
+      "passed": false,
+      "evidence": {},
+      "error": {
+        "name": "AssertionError",
+        "message": "Bounded PCM source is not implemented\n+ actual - expected\n\n+ 'undefined'\n- 'function'\n"
+      }
+    },
+    {
+      "name": "Invalid append, quota exhaustion and protected drop leave source ownership unchanged (48000)",
+      "passed": false,
+      "evidence": {},
+      "error": {
+        "name": "AssertionError",
+        "message": "Bounded PCM source is not implemented\n+ actual - expected\n\n+ 'undefined'\n- 'function'\n"
+      }
+    },
+    {
+      "name": "Real DSP on refilled bounded PCM matches whole-source output bit-for-bit (48000)",
+      "passed": false,
+      "evidence": {},
+      "error": {
+        "name": "AssertionError",
+        "message": "Bounded PCM source is not implemented\n+ actual - expected\n\n+ 'undefined'\n- 'function'\n"
+      }
+    }
+  ],
+  "scope": "Actual public DSP plus bounded source geometry/retention and error contracts in serial Node. No browser/native/SRC/cancellation/music/latency or full parity acceptance."
+}

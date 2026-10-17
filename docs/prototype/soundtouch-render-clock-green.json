@@ -1,0 +1,117 @@
+{
+  "passed": 6,
+  "failed": 0,
+  "checks": [
+    {
+      "name": "Future anchor starts exactly once, never from a later block 44100",
+      "passed": true,
+      "evidence": {
+        "anchor": 44160
+      }
+    },
+    {
+      "name": "Stale/duplicate global labels are diagnostic; own count matches independent ramp 44100",
+      "passed": true,
+      "evidence": {
+        "rows": [
+          44160,
+          44288,
+          44416,
+          44544,
+          44672,
+          44800,
+          44928,
+          45056,
+          45184,
+          45312,
+          45440,
+          45568,
+          45696,
+          45824,
+          45952,
+          46080,
+          46208,
+          46336,
+          46464,
+          46592
+        ],
+        "snapshot": {
+          "anchorFrame": 44160,
+          "nextFrame": 46720,
+          "blocks": 20,
+          "globalDisagreements": 10,
+          "maxGlobalDifference": 128,
+          "scope": "Callback counter checked against scheduled AudioParam at each quantum start; not physical latency."
+        }
+      }
+    },
+    {
+      "name": "A real ramp jump or invalid tag rejects atomically, never normalizes time 44100",
+      "passed": true,
+      "evidence": {
+        "anchorFrame": 44160,
+        "nextFrame": 44416,
+        "blocks": 2,
+        "globalDisagreements": 0,
+        "maxGlobalDifference": 0,
+        "scope": "Callback counter checked against scheduled AudioParam at each quantum start; not physical latency."
+      }
+    },
+    {
+      "name": "Future anchor starts exactly once, never from a later block 48000",
+      "passed": true,
+      "evidence": {
+        "anchor": 48000
+      }
+    },
+    {
+      "name": "Stale/duplicate global labels are diagnostic; own count matches independent ramp 48000",
+      "passed": true,
+      "evidence": {
+        "rows": [
+          48000,
+          48128,
+          48256,
+          48384,
+          48512,
+          48640,
+          48768,
+          48896,
+          49024,
+          49152,
+          49280,
+          49408,
+          49536,
+          49664,
+          49792,
+          49920,
+          50048,
+          50176,
+          50304,
+          50432
+        ],
+        "snapshot": {
+          "anchorFrame": 48000,
+          "nextFrame": 50560,
+          "blocks": 20,
+          "globalDisagreements": 10,
+          "maxGlobalDifference": 128,
+          "scope": "Callback counter checked against scheduled AudioParam at each quantum start; not physical latency."
+        }
+      }
+    },
+    {
+      "name": "A real ramp jump or invalid tag rejects atomically, never normalizes time 48000",
+      "passed": true,
+      "evidence": {
+        "anchorFrame": 48000,
+        "nextFrame": 48256,
+        "blocks": 2,
+        "globalDisagreements": 0,
+        "maxGlobalDifference": 0,
+        "scope": "Callback counter checked against scheduled AudioParam at each quantum start; not physical latency."
+      }
+    }
+  ],
+  "scope": "Clock arithmetic only with controlled tags/global labels. No browser timing or audio acceptance."
+}

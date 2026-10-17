@@ -1,0 +1,64 @@
+{
+  "declared_before_execution": "2026-10-17 full-quantum prospective counter with exact cleanup oracle",
+  "scope": "Actual unmodified AudioEngine served with a separately named SoundTouch factory adapter; no installed app or production source replacement.",
+  "cases": [
+    {
+      "id": "single-44100",
+      "sampleRate": 44100,
+      "sourceSampleRate": 48000,
+      "sources": 1
+    },
+    {
+      "id": "five-44100",
+      "sampleRate": 44100,
+      "sourceSampleRate": 48000,
+      "sources": 5
+    },
+    {
+      "id": "single-48000",
+      "sampleRate": 48000,
+      "sourceSampleRate": 44100,
+      "sources": 1
+    },
+    {
+      "id": "five-48000",
+      "sampleRate": 48000,
+      "sourceSampleRate": 44100,
+      "sources": 5
+    }
+  ],
+  "fixture": "32 seconds stereo: first 16s 330/550Hz, second half 660/880Hz, .14 amplitude and phases .17/.53. Five sources are independent identical synthetic clones, not separated stems.",
+  "criteria": {
+    "pitch_error_hz": 1,
+    "control_error_hz": 0.01,
+    "frame_tag_error_samples": 0.25,
+    "finite": true,
+    "strict_sequence": true,
+    "pause_exact_zero": true,
+    "cleanup_retained_pcm_bytes": 0,
+    "clock_scope": "nominal; audible source identity not accepted"
+  },
+  "timeline": "Engine.start neutral1.08:3s; engine.setPitch +2:3s; engine.setRate1.25 and setPitch keylockOFF/0:3s; adapter warm follow -0.1s:2s; engine.seek20:2s; engine.pause:0.7s; engine.start keylockON/+2:2s. Measurements each command's actual scheduled output +.5..1.5s; pause +.2.. .6s. Later phase begins only after previous planned hold.",
+  "capture": "Whole capture, all five adapter outputs plus engine deck monitorTap mix, independent307Hz oscillator and future-anchored a-rate frameTag; physical monitor and capture output muted.",
+  "exclusions": [
+    "music artifacts",
+    "physical latency",
+    "native package",
+    "Serato-matched sonic reference",
+    "actual separated stems",
+    "audible cursor",
+    "full controller coverage",
+    "reverse/loop/Stem Slip parity"
+  ],
+  "registration_lifecycle": {
+    "server_delays_node_worklet_seconds": 0.5,
+    "aborted_waiter_timeout_ms": 400,
+    "abort_after_ms": 20,
+    "other_waiter_must_finish": true,
+    "dispose_ack_pcm_bytes": 0,
+    "terminal_no_revival": true
+  },
+  "prospective_clock": "Same new callback-counter vs independent scheduled AudioParam with original globals retained; see counter-clock probe. Historical outcomes unchanged.",
+  "cleanup_evidence": "Both actual engine.pause calls: retain processor handles, await actual adapter.dispose, collect every factory cached processor-release acknowledgement (disposed, store.retainedPCMBytes0, transport.epochs[]). Voice-mapabsence alone is insufficient.",
+  "clock_range": "Per-sample absolute Float32 clock limited to2^22frames; preparation refuses within2s of its endpoint. About87s at48k/95s at44.1k context lifetime. Explicit short experiment restriction; long-session timing requires a different bounded phase clock before any app promotion."
+}

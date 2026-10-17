@@ -1,0 +1,56 @@
+Browser tab: 52, Title: "Open Play — experimental engine integration", URL: "http://127.0.0.1:18815/".
+0 AXWebArea Open Play — experimental engine integration, URL: 127.0.0.1:18815/
+	1 heading SoundTouch engine integration, Value: 1
+		2 text SoundTouch engine integration
+	3 text Runs the existing AudioEngine with an experimental bounded SoundTouch adapter. Physical output muted. This does not change the installed app.
+	4 button (disabled) Run four engine captures, ID: run
+	5 text Capture finished: 3/4 bounded engine cases accepted. Full parity remains unverified.
+	6 text [
+  {
+    "id": "single-44100",
+    "passed": true,
+    "errors": [],
+    "frames": 744960,
+    "toneChecks": 24,
+    "toneFailures": [],
+    "pause": true,
+    "clock": 0.0625
+  },
+  {
+    "id": "five-44100",
+    "passed": false,
+    "errors": [
+      {
+        "name": "Error",
+        "message": "Actual engine did not select live keylock",
+        "stack": "Error: Actual engine did not select live keylock\n    at assert (http://127.0.0.1:18815/engine-harness.mjs:3:77)\n    at connectVoice (http://127.0.0.1:18815/engine-harness.mjs:88:77)\n    at phase (http://127.0.0.1:18815/engine-harness.mjs:90:89)\n    at async $.onclick (http://127.0.0.1:18815/engine-harness.mjs:97:5)"
+      }
+    ],
+    "frames": 1024,
+    "toneChecks": 0,
+    "toneFailures": [],
+    "clock": 128
+  },
+  {
+    "id": "single-48000",
+    "passed": true,
+    "errors": [],
+    "frames": 812928,
+    "toneChecks": 24,
+    "toneFailures": [],
+    "pause": true,
+    "clock": 0.0625
+  },
+  {
+    "id": "five-48000",
+    "passed": true,
+    "errors": [],
+    "frames": 851840,
+    "toneChecks": 72,
+    "toneFailures": [],
+    "pause": true,
+    "clock": 0.0625
+  }
+]
+
+The focused UI element is 0 AXWebArea Open Play — experimental engine integration, URL: 127.0.0.1:18815/

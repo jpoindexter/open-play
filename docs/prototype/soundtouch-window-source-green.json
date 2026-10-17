@@ -1,0 +1,182 @@
+{
+  "created_at": "2026-10-17T17:25:23.925Z",
+  "passed": 8,
+  "failed": 0,
+  "checks": [
+    {
+      "name": "Contiguous PCM copies preserve exact stereo samples and drop only whole chunks (44100)",
+      "passed": true,
+      "evidence": {
+        "extent": {
+          "startFrame": 44100,
+          "endFrame": 132300
+        },
+        "pcmSHA256": "9675b2371c37cbff018d16bb963fe5e5011b3e3a85d39bb0618dbb614a0575eb",
+        "snapshot": {
+          "sampleRate": 44100,
+          "durationFrames": 617400,
+          "channelCounts": [
+            2
+          ],
+          "startFrame": 44100,
+          "endFrame": 132300,
+          "disposed": false,
+          "retainedPCMBytes": 705600,
+          "maxRetainedFrames": 176400,
+          "retainedChunks": 4,
+          "ownership": "Snapshotted descriptors; borrowed immutable whole-buffer PCM. Payload bytes exclude DSP and JavaScript overhead."
+        }
+      }
+    },
+    {
+      "name": "Missing future PCM is an error; only the real source endpoint permits zero padding (44100)",
+      "passed": true,
+      "evidence": {
+        "snapshot": {
+          "sampleRate": 44100,
+          "durationFrames": 44100,
+          "channelCounts": [
+            1
+          ],
+          "startFrame": 0,
+          "endFrame": 44100,
+          "disposed": false,
+          "retainedPCMBytes": 176400,
+          "maxRetainedFrames": 88200,
+          "retainedChunks": 2,
+          "ownership": "Snapshotted descriptors; borrowed immutable whole-buffer PCM. Payload bytes exclude DSP and JavaScript overhead."
+        }
+      }
+    },
+    {
+      "name": "Invalid append, quota exhaustion and protected drop leave source ownership unchanged (44100)",
+      "passed": true,
+      "evidence": {
+        "snapshot": {
+          "sampleRate": 44100,
+          "durationFrames": 617400,
+          "channelCounts": [
+            2
+          ],
+          "startFrame": 0,
+          "endFrame": 44100,
+          "disposed": true,
+          "retainedPCMBytes": 0,
+          "maxRetainedFrames": 44100,
+          "retainedChunks": 0,
+          "ownership": "Snapshotted descriptors; borrowed immutable whole-buffer PCM. Payload bytes exclude DSP and JavaScript overhead."
+        }
+      }
+    },
+    {
+      "name": "Real DSP on refilled bounded PCM matches whole-source output bit-for-bit (44100)",
+      "passed": true,
+      "evidence": {
+        "blocks": 2757,
+        "peakRetainedPCMBytes": 1058400,
+        "store": {
+          "sampleRate": 44100,
+          "durationFrames": 617400,
+          "channelCounts": [
+            2
+          ],
+          "startFrame": 352800,
+          "endFrame": 485100,
+          "disposed": false,
+          "retainedPCMBytes": 1058400,
+          "maxRetainedFrames": 176400,
+          "retainedChunks": 6,
+          "ownership": "Snapshotted descriptors; borrowed immutable whole-buffer PCM. Payload bytes exclude DSP and JavaScript overhead."
+        }
+      }
+    },
+    {
+      "name": "Contiguous PCM copies preserve exact stereo samples and drop only whole chunks (48000)",
+      "passed": true,
+      "evidence": {
+        "extent": {
+          "startFrame": 48000,
+          "endFrame": 144000
+        },
+        "pcmSHA256": "2a35f181557322b65c9505c14788a19e7e1bb64f674a43f6fbde653dc9719fd9",
+        "snapshot": {
+          "sampleRate": 48000,
+          "durationFrames": 672000,
+          "channelCounts": [
+            2
+          ],
+          "startFrame": 48000,
+          "endFrame": 144000,
+          "disposed": false,
+          "retainedPCMBytes": 768000,
+          "maxRetainedFrames": 192000,
+          "retainedChunks": 4,
+          "ownership": "Snapshotted descriptors; borrowed immutable whole-buffer PCM. Payload bytes exclude DSP and JavaScript overhead."
+        }
+      }
+    },
+    {
+      "name": "Missing future PCM is an error; only the real source endpoint permits zero padding (48000)",
+      "passed": true,
+      "evidence": {
+        "snapshot": {
+          "sampleRate": 48000,
+          "durationFrames": 48000,
+          "channelCounts": [
+            1
+          ],
+          "startFrame": 0,
+          "endFrame": 48000,
+          "disposed": false,
+          "retainedPCMBytes": 192000,
+          "maxRetainedFrames": 96000,
+          "retainedChunks": 2,
+          "ownership": "Snapshotted descriptors; borrowed immutable whole-buffer PCM. Payload bytes exclude DSP and JavaScript overhead."
+        }
+      }
+    },
+    {
+      "name": "Invalid append, quota exhaustion and protected drop leave source ownership unchanged (48000)",
+      "passed": true,
+      "evidence": {
+        "snapshot": {
+          "sampleRate": 48000,
+          "durationFrames": 672000,
+          "channelCounts": [
+            2
+          ],
+          "startFrame": 0,
+          "endFrame": 48000,
+          "disposed": true,
+          "retainedPCMBytes": 0,
+          "maxRetainedFrames": 48000,
+          "retainedChunks": 0,
+          "ownership": "Snapshotted descriptors; borrowed immutable whole-buffer PCM. Payload bytes exclude DSP and JavaScript overhead."
+        }
+      }
+    },
+    {
+      "name": "Real DSP on refilled bounded PCM matches whole-source output bit-for-bit (48000)",
+      "passed": true,
+      "evidence": {
+        "blocks": 3000,
+        "peakRetainedPCMBytes": 1152000,
+        "store": {
+          "sampleRate": 48000,
+          "durationFrames": 672000,
+          "channelCounts": [
+            2
+          ],
+          "startFrame": 384000,
+          "endFrame": 528000,
+          "disposed": false,
+          "retainedPCMBytes": 1152000,
+          "maxRetainedFrames": 192000,
+          "retainedChunks": 6,
+          "ownership": "Snapshotted descriptors; borrowed immutable whole-buffer PCM. Payload bytes exclude DSP and JavaScript overhead."
+        }
+      }
+    }
+  ],
+  "scope": "Actual public DSP plus bounded source geometry/retention and error contracts in serial Node. No browser/native/SRC/cancellation/music/latency or full parity acceptance."
+}

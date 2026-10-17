@@ -1,0 +1,50 @@
+{
+  "created_at": "2026-10-17T17:32:59.426Z",
+  "passed": 3,
+  "failed": 0,
+  "checks": [
+    {
+      "name": "Already aborted owner cannot initiate registration",
+      "passed": true,
+      "evidence": {
+        "result": {
+          "settled": true,
+          "name": "AbortError",
+          "message": "Node preparation canceled"
+        }
+      }
+    },
+    {
+      "name": "Abort during unresolved shared registration settles just that caller promptly",
+      "passed": true,
+      "evidence": {
+        "first": {
+          "settled": true,
+          "name": "AbortError",
+          "message": "Node registration canceled"
+        },
+        "secondBeforeAbort": {
+          "settled": false
+        },
+        "secondAfterAbort": {
+          "settled": true,
+          "name": "AbortError",
+          "message": "Node registration canceled"
+        }
+      }
+    },
+    {
+      "name": "Unresolved registration has bounded five-second rejection, without creating a node",
+      "passed": true,
+      "evidence": {
+        "elapsedMs": 5202.492166,
+        "result": {
+          "settled": true,
+          "name": "TimeoutError",
+          "message": "SoundTouch module registration timed out"
+        }
+      }
+    }
+  ],
+  "scope": "Actual factory module with a controlled unresolved addModule boundary. Establishes caller cancellation/deadline only, not real AudioWorklet/module loading or native behavior."
+}
