@@ -1,4 +1,4 @@
-// BROWSER ADAPTER PREREQUISITE ONLY: not integrated into AudioEngine/native.
+// Forward browser keylock adapter; independent ownership/windowing around Signalsmith.
 // Derived from retention clone SHA256 16707a8f446a503eff022528461ff758b0f47031e34064241bf02d085cd6d9e4.
 // Normal scheduling keeps queried latency+2quanta; only explicit active followSeek uses40ms.
 // Retained history2s, required history1s. Vendor/WASM, SRC and gain behavior unchanged.
@@ -98,6 +98,33 @@ class LiveKeylock{
   }catch(error){if(replacement&&group!==this.active)await this.disposeGroup(group).catch(()=>{});else if((programIssued||(windowIssued&&!windowComplete))&&error.name!=='AbortError')this.fail(error);throw error;}
  }
  start({position=this.position(),when}={}){this.validPosition(position);return this.operation(op=>this.schedule(op,{position,when,state:normalize(this.stateAt()),playing:true}));}
+ startTimeline({position=this.position(),when,events}={}){
+  this.validPosition(position);finite(when,'when');
+  if(!Array.isArray(events)||!events.length||events[0].when!==when)throw new TypeError('A warp map must start at its requested output time.');
+  if(this.stateAt().playing||this.clock.some(s=>s.playing&&s.when>this.context.currentTime))throw failure('InvalidStateError','Install a warp map on a fresh paused playback owner.');
+  const initial=this.stateAt(),segments=[];let sourcePosition=position,lastTime=when,lastRate=events[0].rate;
+  for(const [index,event]of events.entries()){
+   finite(event.when,'warp output time');
+   if(index&&event.when<=lastTime)throw new RangeError('Warp output times must increase.');
+   if(index)sourcePosition+=(event.when-lastTime)*lastRate;
+   this.validPosition(sourcePosition);
+   const state=normalize({...initial,rate:event.rate});
+   segments.push({...state,position:sourcePosition,when:event.when,playing:sourcePosition<this.duration});
+   lastTime=event.when;lastRate=event.rate;
+  }
+  return this.operation(async op=>{
+   const first=segments[0],ack=await this.schedule(op,{position,when,state:normalize(first),playing:true}),group=this.active;
+   // Future commands only extend the processor map. The ordinary driver fills
+   // and drops PCM around the CURRENT source clock, never a distant marker.
+   for(const state of segments.slice(1)){
+    this.checkOperation(op);await this.program(group,state);this.checkOperation(op);
+    this.clock=this.addClock(this.clock,state);
+   }
+   if(this.context.currentTime>=when)throw failure('LateScheduleError','Warp map preparation missed its requested output start.');
+   this.emit('timeline-scheduled',{group:group.id,segments:segments.map(s=>({...s}))});
+   return {...ack,timelineSegments:segments.map(s=>({...s}))};
+  });
+ }
  update({rate,keylock,semitones,when}={}){return this.operation(op=>{const previous=this.stateAt(when===undefined?this.context.currentTime+this.minimumLead(this.active):finite(when,'when')),state=normalize({rate:rate??previous.rate,keylock:keylock??previous.keylock,semitones:semitones??previous.semitones});return this.schedule(op,{position:previous.position,when,state,playing:previous.playing,follow:true});});}
  seek(position,{when}={}){this.validPosition(position);return this.operation(op=>{const at=when??(this.context.currentTime+this.minimumLead(this.active)),previous=this.stateAt(at);return this.schedule(op,{position,when,state:normalize(previous),playing:previous.playing});});}
 

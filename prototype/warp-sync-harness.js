@@ -49,11 +49,10 @@ async function run(){
   const warped=state.decks[1],source=engine.voices.get(1).sources[0];report.sharedTempo={nominalRate:warped.rate,actualSourceRate:source.playbackRate.value,primarySourceRate:engine.voices.get(0).sources[0].playbackRate.value};
   assert(Math.abs(report.sharedTempo.actualSourceRate-124.8/90)<1e-6&&Math.abs(report.sharedTempo.primarySourceRate-1.04)<1e-6,'Slider used local section BPM instead of base BPM');
   report.checks.push('Tempo slider after a warp keeps its base-BPM meaning and updates both actual source rates');
-  click(button(1,'keylock'));await until(()=>$('#notice').textContent.includes('not available'),'Unsupported keylock feedback');assert(!state.decks[1].keylock,'Unsupported warped keylock changed state');report.checks.push('Unsupported warped keylock is rejected before changing the requested state');
  }catch(e){report.errors.push({message:e.message,stack:e.stack});}
  finally{
   if(engine.recording)await engine.recordStop();for(let i=0;i<2;i++)if(state.decks[i].playing)click(button(i,'play'));await until(()=>state.decks.every(d=>!d.playing&&!d.processing),'Stopped');
-  report.sourceAfter=await identities();report.sourceStable=JSON.stringify(report.sourceBefore)===JSON.stringify(report.sourceAfter);report.completed=report.checks.length===5&&!report.errors.length&&report.sourceStable;report.finishedAt=new Date().toISOString();
+  report.sourceAfter=await identities();report.sourceStable=JSON.stringify(report.sourceBefore)===JSON.stringify(report.sourceAfter);report.completed=report.checks.length===4&&!report.errors.length&&report.sourceStable;report.finishedAt=new Date().toISOString();
   $('#warp-results').textContent=JSON.stringify({...report,recording:report.recording?{...report.recording,base64:'Retained in downloadable report'}:null},null,2);
   const a=$('#warp-download');a.href=URL.createObjectURL(new Blob([JSON.stringify(report,null,2)],{type:'application/json'}));a.download='warp-sync-browser-results.json';a.hidden=false;$('#warp-status').textContent=report.completed?'Scoped warp workflow passed; all decks paused':'Check failed: '+report.errors.map(e=>e.message).join('; ');
  }

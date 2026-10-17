@@ -170,8 +170,8 @@ export class AudioEngine {
     return b;
   }
   position(d) {
-    const gridTimeline = this.voices.get(d.index)?.gridTimeline;
-    if (gridTimeline) return gridTimeline.clock(this.ctx.currentTime);
+    const gridVoice=this.voices.get(d.index);
+    if (gridVoice?.gridTimeline) return this.voiceClock(d,gridVoice)(this.ctx.currentTime);
     const live = this.voices.get(d.index)?.liveKeylock;
     if (live) {
       const bridge = this.voices.get(d.index).handoffBefore;
@@ -265,7 +265,7 @@ export class AudioEngine {
     job.timer = setTimeout(poll, Math.max(10, (end - this.ctx.currentTime) * 1000));
   }
   voiceClock(d, voice) {
-    if (voice?.gridTimeline) return voice.gridTimeline.clock;
+    if (voice?.gridTimeline) return at => voice.handoffBefore && at < voice.handoffBefore.until ? voice.handoffBefore.clock(at) : voice.gridTimeline.clock(at);
     if (voice?.liveKeylock) return at => voice.handoffBefore && at < voice.handoffBefore.until ? voice.handoffBefore.clock(at) : voice.liveKeylock.position(at);
     if (voice?.deckScratchTransport) return at => {
       const value = voice.deckScratchTransport.state();
@@ -281,8 +281,8 @@ export class AudioEngine {
     return this.voiceRateAt(d, voice, this.ctx?.currentTime || 0);
   }
   voiceRateAt(d, voice, at) {
-    if (voice?.gridTimeline) return voice.gridTimeline.rateAt(at);
     if (voice?.handoffBefore && at < voice.handoffBefore.until) return voice.handoffBefore.rate(at);
+    if (voice?.gridTimeline) return voice.gridTimeline.rateAt(at);
     if (voice?.liveKeylock) return voice.liveKeylock.stateAt(at).rate;
     if (voice?.deckScratchTransport) return voice.deckScratchTransport.state().rate;
     const source = voice?.sources?.[0];
@@ -336,9 +336,11 @@ export class AudioEngine {
       if (positionAt) position = positionAt(when);
       if (!Number.isFinite(position) || position < 0 || position > track.duration) throw new RangeError("Invalid synchronized source position.");
       if (position >= track.duration) position = initiallyPlaying ? track.duration : 0;
-      const ack = await adapter.start({position, when});
+      const gridTimeline=this.onGridTimeline?.(d,{position,when});
+      if(gridTimeline && typeof adapter.startTimeline !== 'function')throw new Error('This pitch backend cannot schedule Beat Warp Markers.');
+      const ack = gridTimeline ? await adapter.startTimeline({position,when,events:gridTimeline.events}) : await adapter.start({position, when});
       if (!current()) return;
-      const voice = {sources: [], liveKeylock: adapter, liveOwnerController: controller, stemGains: [],
+      const voice = {sources: [], liveKeylock: adapter, liveOwnerController: controller, gridTimeline, stemGains: [],
         handoffBefore: old && initiallyPlaying ? {until: ack.when, clock: oldClock, rate: at => this.voiceRateAt(d, old, at)} : null};
       this.routeOrdinaryVoice(d, voice, adapter.outputs, buffers.length === 5, {when: ack.when, reuseVoice: old});
       committed = true;
@@ -533,6 +535,12 @@ export class AudioEngine {
   }
   async seek(d, p) {
     this.onManualPosition?.(d);
+    if(this.voices.get(d.index)?.gridTimeline){
+      const was=d.playing||d.processing;this.pause(d,{preserveStemExit:true});
+      d.position=Math.max(0,Math.min(d.track.duration,p));
+      if(was&&d.position<d.track.duration)await this.start(d);
+      return;
+    }
     const live = this.voices.get(d.index)?.liveKeylock;
     if (live) {
       const position = Math.max(0, Math.min(d.track.duration, p));
@@ -938,6 +946,12 @@ export class AudioEngine {
   async setPitch(d, { keylock = d.keylock, semitones = d.keyShift || 0 } = {}) {
     this.onValidateTransport?.(d,{keylock,keyShift:semitones});
     this.cancelDeckScratchRequest(d);
+    if(this.voices.get(d.index)?.gridTimeline){
+      const position=this.position(d),was=d.playing||d.processing;
+      this.pause(d,{preserveStemExit:true});d.position=position;d.keylock=keylock;d.keyShift=semitones;
+      if(was)await this.start(d);
+      return;
+    }
     if (d.stemSlip && d.stemSlip !== "off") {
       const pending = this.stemSlipPending.get(d.index);
       if (pending?.committing) {

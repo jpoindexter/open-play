@@ -1,0 +1,321 @@
+{
+  "startedAt": "2026-10-17T20:21:17.988Z",
+  "completed": true,
+  "checks": [
+    "Actual grid editor stages and saves both tempo markers with metadata persistence",
+    "Actual keylocked audio stays aligned within10ms across both source-tempo boundaries",
+    "Original330/550Hz carriers stay within1Hz while scheduled rates become0.8 and4/3"
+  ],
+  "errors": [],
+  "probes": [
+    {
+      "label": "150 BPM source section",
+      "audioTime": 5.404444444444445,
+      "position": 4.938235827664399,
+      "adapterState": {
+        "rate": 0.8,
+        "keylock": true,
+        "semitones": 0,
+        "effectiveSemitones": 0,
+        "position": 4.9382358276644,
+        "when": 4.394149659863945,
+        "playing": true
+      },
+      "clockRate": 0.8,
+      "shownBPM": "120.0"
+    },
+    {
+      "label": "90 BPM source section",
+      "audioTime": 9.398276643990929,
+      "position": 8.668835978835979,
+      "adapterState": {
+        "rate": 1.3333333333333333,
+        "keylock": true,
+        "semitones": 0,
+        "effectiveSemitones": 0,
+        "position": 8.668835978835979,
+        "when": 8.394149659863945,
+        "playing": true
+      },
+      "clockRate": 1.3333333333333333,
+      "shownBPM": "120.0"
+    }
+  ],
+  "criteria": {
+    "maximumPulsePhaseErrorSeconds": 0.01,
+    "minimumPairsPerSection": 3,
+    "sourceRateTolerance": 1e-06,
+    "maximumCarrierErrorHz": 1,
+    "minimumCarrierRMS": 0.005
+  },
+  "fixture": {
+    "sampleRate": 48000,
+    "duration": 30,
+    "primary": {
+      "bpm": 120,
+      "offset": 0.05
+    },
+    "secondary": {
+      "bpm": 120,
+      "offset": 0.13,
+      "markers": [
+        {
+          "time": 4.13,
+          "bpm": 150
+        },
+        {
+          "time": 7.33,
+          "bpm": 90
+        }
+      ]
+    },
+    "pulseSeconds": 0.012,
+    "pulseCarrierHz": 3000,
+    "continuousCarrierHz": [
+      330,
+      550
+    ],
+    "continuousAmplitude": 0.08,
+    "amplitude": 0.15
+  },
+  "scope": "Actual browser app grid editor/Setup/Play/Sync and one continuous master recording, forward/keylocked/no-stems controlled fixtures. No reference/native/hardware/music-quality acceptance.",
+  "sourceBefore": {
+    "app.js": "7ebfc28026017022faf384dcba28c78440e8aa283183016c5685c08a8fc2a1bf",
+    "engine.js": "341ea2045977befa9bd423ccffec241d1a216d83ab1711fd7a1c4df57d6709d2",
+    "panels.js": "96a6581ab5f4ec43e7539cbbe00a20d4c5aacb8b414c844a9255b51c4fb53fa6",
+    "beatgrid.js": "9d74accf0a8278fefe1f43dd06534c442b76b44300746c9e791d583fa1e6b71e",
+    "smart-sync.js": "a9d8711c8f147ec97e3a51b5ac591381b77cc45dba94c976e54de4e77b93b3e3",
+    "warp-keylock-harness.js": "d7ee463659fa6de2dd52259f4dce814e3474e04b7cb74d3e7bf2b6f1178ba667",
+    "keylock-shadow-live.js": "ec30bafcc974f809cc71df33533883e961bfa56eba20117e14b03c5a27d9f2a0"
+  },
+  "physicalOutputMuted": true,
+  "persistedMarkers": [
+    {
+      "time": 4.13,
+      "bpm": 150
+    },
+    {
+      "time": 7.33,
+      "bpm": 90
+    }
+  ],
+  "recordStart": 0.29024943310657597,
+  "scheduledEvents": [
+    {
+      "when": 0.43702947845804985,
+      "rate": 1
+    },
+    {
+      "when": 4.394149659863945,
+      "rate": 0.8
+    },
+    {
+      "when": 8.394149659863945,
+      "rate": 1.3333333333333333
+    }
+  ],
+  "recording": {
+    "bytes": 170105,
+    "format": "audio/webm;codecs=opus",
+    "sha256": "f61810716d4c757e286cda44aafcecda6eb22b1674ff5ad0aaab2fc8a2cf06f2",
+    "localOriginal": "local-evidence/warp-keylock/original.webm"
+  },
+  "decoded": {
+    "frames": 465695,
+    "sampleRate": 44100,
+    "channels": 2,
+    "duration": 10.559977324263038
+  },
+  "audio": {
+    "pulseMeasurement": "Two identical offline highpass biquads at2000Hz/Q.707 suppress continuous330/550 carriers; absolute.01 threshold/100ms refractory. No temporal fitting.",
+    "pulseTimes": [
+      [
+        0.11335600907029479,
+        0.6126303854875284,
+        1.1134467120181406,
+        1.6131292517006803,
+        2.1126984126984127,
+        2.6138548752834465,
+        3.11265306122449,
+        3.6142857142857143,
+        4.113356009070295,
+        4.612063492063492,
+        5.113582766439909,
+        5.61281179138322,
+        6.11374149659864,
+        6.613219954648526,
+        7.113718820861678,
+        7.61328798185941,
+        8.112562358276644,
+        8.61342403628118,
+        9.113151927437642,
+        9.612607709750566,
+        10.113809523809524
+      ],
+      [
+        0.6123809523809524,
+        1.113628117913832,
+        1.6129478458049886,
+        2.112947845804989,
+        2.613650793650794,
+        3.1128344671201815,
+        3.6142403628117914,
+        4.113219954648526,
+        4.613968253968254,
+        5.113492063492063,
+        5.6138548752834465,
+        6.113061224489796,
+        6.6125170068027215,
+        7.114172335600907,
+        7.6125170068027215,
+        8.112539682539683,
+        8.61204081632653,
+        9.111859410430839,
+        9.61124716553288,
+        10.112721088435373
+      ]
+    ],
+    "sections": [
+      {
+        "name": "base120",
+        "from": 0.4,
+        "to": 3.80390022675737,
+        "pairs": [
+          {
+            "time": 0.6126303854875284,
+            "errorSeconds": 0.0002494331065759914
+          },
+          {
+            "time": 1.1134467120181406,
+            "errorSeconds": 0.0001814058956914888
+          },
+          {
+            "time": 1.6131292517006803,
+            "errorSeconds": 0.00018140589569171084
+          },
+          {
+            "time": 2.1126984126984127,
+            "errorSeconds": 0.0002494331065761024
+          },
+          {
+            "time": 2.6138548752834465,
+            "errorSeconds": 0.0002040816326527306
+          },
+          {
+            "time": 3.11265306122449,
+            "errorSeconds": 0.00018140589569171084
+          },
+          {
+            "time": 3.6142857142857143,
+            "errorSeconds": 4.535147392292771e-05
+          }
+        ],
+        "carriers": [
+          {
+            "frames": 44100,
+            "rms": 0.025368759534381603,
+            "hz": 330.4455530544136
+          },
+          {
+            "frames": 44100,
+            "rms": 0.025361899362080807,
+            "hz": 550.4428409845186
+          }
+        ]
+      },
+      {
+        "name": "source150",
+        "from": 4.4039002267573695,
+        "to": 7.80390022675737,
+        "pairs": [
+          {
+            "time": 4.612063492063492,
+            "errorSeconds": 0.0019047619047620756
+          },
+          {
+            "time": 5.113582766439909,
+            "errorSeconds": 9.070294784585542e-05
+          },
+          {
+            "time": 5.61281179138322,
+            "errorSeconds": 0.0010430839002264491
+          },
+          {
+            "time": 6.11374149659864,
+            "errorSeconds": 0.0006802721088439156
+          },
+          {
+            "time": 6.613219954648526,
+            "errorSeconds": 0.0007029478458049354
+          },
+          {
+            "time": 7.113718820861678,
+            "errorSeconds": 0.0004535147392292771
+          },
+          {
+            "time": 7.61328798185941,
+            "errorSeconds": 0.0007709750566888829
+          }
+        ],
+        "carriers": [
+          {
+            "frames": 44100,
+            "rms": 0.025379324642403032,
+            "hz": 330.4456006324759
+          },
+          {
+            "frames": 44100,
+            "rms": 0.025467261437163484,
+            "hz": 550.4704998753725
+          }
+        ]
+      },
+      {
+        "name": "source90",
+        "from": 8.40390022675737,
+        "to": 10.359977324263038,
+        "pairs": [
+          {
+            "time": 8.61342403628118,
+            "errorSeconds": 0.001383219954648851
+          },
+          {
+            "time": 9.113151927437642,
+            "errorSeconds": 0.0012925170068029956
+          },
+          {
+            "time": 9.612607709750566,
+            "errorSeconds": 0.001360544217686055
+          },
+          {
+            "time": 10.113809523809524,
+            "errorSeconds": 0.001088435374150265
+          }
+        ],
+        "carriers": [
+          {
+            "frames": 44100,
+            "rms": 0.025350677389489804,
+            "hz": 330.44588737865297
+          },
+          {
+            "frames": 44100,
+            "rms": 0.025224573829009708,
+            "hz": 550.3777054111807
+          }
+        ]
+      }
+    ]
+  },
+  "sourceAfter": {
+    "app.js": "7ebfc28026017022faf384dcba28c78440e8aa283183016c5685c08a8fc2a1bf",
+    "engine.js": "341ea2045977befa9bd423ccffec241d1a216d83ab1711fd7a1c4df57d6709d2",
+    "panels.js": "96a6581ab5f4ec43e7539cbbe00a20d4c5aacb8b414c844a9255b51c4fb53fa6",
+    "beatgrid.js": "9d74accf0a8278fefe1f43dd06534c442b76b44300746c9e791d583fa1e6b71e",
+    "smart-sync.js": "a9d8711c8f147ec97e3a51b5ac591381b77cc45dba94c976e54de4e77b93b3e3",
+    "warp-keylock-harness.js": "d7ee463659fa6de2dd52259f4dce814e3474e04b7cb74d3e7bf2b6f1178ba667",
+    "keylock-shadow-live.js": "ec30bafcc974f809cc71df33533883e961bfa56eba20117e14b03c5a27d9f2a0"
+  },
+  "sourceStable": true,
+  "finishedAt": "2026-10-17T20:21:28.995Z"
+}

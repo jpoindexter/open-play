@@ -48,7 +48,6 @@ export function createSmartSync({engine, state}) {
   function validateTransport(deck, primary) {
     for (const d of [deck,primary]) {
       requireGrid(d.track);
-      if (d.track.gridWarpMarkers?.length && (d.keylock || d.keyShift)) throw new Error('Warped Sync with keylock or key shift is not available yet.');
       if (d.reverse || d.loop || (d.stemSlip || 'off') !== 'off')
         throw new Error('This Smart Sync path currently requires forward decks without a loop or Stem Slip.');
     }
