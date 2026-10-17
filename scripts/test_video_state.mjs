@@ -211,4 +211,19 @@ test('Old Isolator/Freeze/Analyzer presets retain earlier rendering and fresh fi
   for(const key of ['captureTime','holdActive','holdExpired'])assert(!(key in fresh.params));
  }
 });
+test('Per-file FX metadata roundtrips real declared controls by content identity without runtime state',()=>{
+ const key='sha256:'+'a'.repeat(64),runtime={};runtime.self=runtime;
+ const input={savedVideoFX:[{version:1,key,name:'original.mp4',fx:[effect('Gamma',{behavior:'Manual Meaning',shadowPower:3,texture:runtime,url:'blob:private'},0,false),effect('Frame Freeze',{behavior:'Manual Meaning',durationSeconds:.25,captureToken:0,captureTime:123},1)],file:runtime,url:'blob:clip',bytes:runtime}]};
+ const saved=snapshotVideoState(input),round=restoreVideoState(JSON.parse(JSON.stringify(saved)));assert.deepEqual(round.savedVideoFX,saved.savedVideoFX);
+ const record=round.savedVideoFX[0];assert.equal(record.key,key);assert.equal(record.fx[0].value,0);assert(!record.fx[0].on);assert.equal(record.fx[0].params.shadowPower,3);assert.equal(record.fx[1].params.durationSeconds,.25);
+ for(const field of ['texture','url','captureTime'])for(const spec of record.fx)assert(!(field in spec.params));
+ assert.deepEqual(Object.keys(record).sort(),['fx','key','name','version']);
+});
+test('Malformed or future per-file metadata is dropped and accessors cannot supply records or FX',()=>{
+ const key='sha256:'+'b'.repeat(64);let calls=0;const params={};Object.defineProperty(params,'gamma',{get(){calls++;throw Error('getter');}});
+ const list=[{version:99,key,name:'future',fx:[]},{version:1,key:'filename.mp4',name:'badkey',fx:[]},{version:1,key,name:'old',fx:[effect('Gamma',params)]}];Object.defineProperty(list,'3',{get(){calls++;throw Error('getter');}});
+ const result=restoreVideoState({savedVideoFX:list});assert.equal(result.savedVideoFX.length,1);assert.equal(result.savedVideoFX[0].fx[0].params.behavior,'Earlier Open Play');assert.equal(result.savedVideoFX[0].fx[0].params.gamma,3);assert.equal(calls,0);
+ for(const bad of [null,{},42,'records'])assert.deepEqual(restoreVideoState({savedVideoFX:bad}).savedVideoFX,[]);
+ assert.deepEqual(restoreVideoState(Object.create({savedVideoFX:list})).savedVideoFX,[]);
+});
 console.log(JSON.stringify({scope:'Executed pure metadata snapshots/restoration and corruption cases; browser persistence integration remains a separate parent check.',passed:checks.length,checks},null,2));

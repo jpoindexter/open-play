@@ -1146,3 +1146,26 @@ shortcuts/MIDI authority and the full library/hardware/provider/model-quality
 scope. Counts remain110/521 and complete_inventory=false. Native development
 remains blocked until Jason approves a named HTML candidate. Model/effort
 recommendations remain attached to each feature/requirement and Trello card.
+
+
+## 37. Per-file Video FX save/recall and streaming content identity
+
+2026-10-17. Read [the executed per-file review](docs/prototype/VIDEO_FILE_FX_REVIEW.md).
+REQ515 now has actual independent File→Worker hash→saved channel slots→reload/
+reimport→rendered pixels behavior. Actual browser15/15, Worker10/10 and full UI
+Save/edit/Recall/export/import/page reload/renamed File paths execute. Different
+content sharing a filename stays separate; matching bytes recall onto only their
+destination channel. Metadata persists without media bytes or source-file writes.
+
+Independent review reproduced/fixed two stale metadata writes across channels
+and newer imports; desired-state8/8 passes. Invocation snapshots, Recall editing,
+Cancel/new load/disposal and graceful identity-failure playback fallback have
+explicit ownership.25 Node Video scripts exit0 with their narrower pure/controlled
+scopes. Assembled actual pipeline regression33/33 also passes. The MIT incremental hashing dependency is locally vendored with exact
+provenance/advisory review; no arbitrary hash file-size cap or online service.
+
+Exact installed Serato owner/format/algorithms, arbitrary codecs, very large file
+performance and storage quota remain unverified. Output/window/quality/Syphon,
+shortcut/MIDI behavior and full library/device/provider/model-quality scope remain
+active. Inventory110/521, complete_inventory=false; per-feature Codex/Claude routing
+is retained. No native development before named HTML approval.

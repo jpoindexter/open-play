@@ -1,0 +1,594 @@
+{
+  "startedAt": "2026-10-17T07:08:52.124Z",
+  "checks": [
+    {
+      "name": "Actual original red/blue containers encode different bytes despite the same filename; renamed copy hashes identically",
+      "passed": true,
+      "evidence": {
+        "sameSourceFilename": "open-play-shared-name.webm",
+        "keyA": "sha256:f844a06f9ddd054154434101ec913c53f1a31655e954d9038cc0a8d3aa145f2c",
+        "keyB": "sha256:0663899b1923e9de74cb9b5f897ef537cdff2e9b6144b220b943470bf6778aec",
+        "renamedKey": "sha256:f844a06f9ddd054154434101ec913c53f1a31655e954d9038cc0a8d3aa145f2c",
+        "encodedFrames": [
+          92,
+          91
+        ],
+        "elapsedMs": [
+          756.2000000476837,
+          758
+        ],
+        "mime": [
+          "video/webm;codecs=vp8",
+          "video/webm;codecs=vp8"
+        ],
+        "bytes": [
+          6011,
+          5914
+        ],
+        "speakerRoute": "Disconnected before local440Hz source was connected"
+      }
+    },
+    {
+      "name": "Red File decodes a real presented frame and saves two channel slots with actual Negative pixels",
+      "passed": true,
+      "evidence": {
+        "raw": [
+          179,
+          64,
+          46,
+          255
+        ],
+        "processed": [
+          76,
+          191,
+          209,
+          255
+        ],
+        "expected": [
+          76,
+          191,
+          209,
+          255
+        ],
+        "decoded": {
+          "name": "open-play-shared-name.webm",
+          "position": 0.004782,
+          "duration": 0.747,
+          "paused": true,
+          "firstFrame": {
+            "mediaTime": 0.013,
+            "presentedFrames": 3,
+            "width": 160,
+            "height": 90
+          },
+          "readyState": 4,
+          "seeking": false
+        },
+        "record": {
+          "version": 1,
+          "key": "sha256:f844a06f9ddd054154434101ec913c53f1a31655e954d9038cc0a8d3aa145f2c",
+          "name": "open-play-shared-name.webm",
+          "fx": [
+            {
+              "name": "Negative",
+              "on": true,
+              "value": 1,
+              "params": {}
+            },
+            {
+              "name": "Gamma",
+              "on": false,
+              "value": 0.4,
+              "params": {
+                "behavior": "Manual Meaning",
+                "shadowPower": 3,
+                "gamma": 3
+              }
+            }
+          ]
+        },
+        "status": {
+          "loaded": true,
+          "identity": "sha256:f844a06f9ddd054154434101ec913c53f1a31655e954d9038cc0a8d3aa145f2c",
+          "status": "Saved channel FX · open-play-shared-name.webm",
+          "pending": false
+        }
+      }
+    },
+    {
+      "name": "Same-name blue File has no red preset match; automatic and explicit no-match keep current settings",
+      "passed": true,
+      "evidence": {
+        "raw": [
+          47,
+          73,
+          179,
+          255
+        ],
+        "retained": [
+          208,
+          182,
+          76,
+          255
+        ],
+        "expected": [
+          208,
+          182,
+          76,
+          255
+        ],
+        "status": {
+          "loaded": true,
+          "identity": "sha256:0663899b1923e9de74cb9b5f897ef537cdff2e9b6144b220b943470bf6778aec",
+          "status": "No saved FX · open-play-shared-name.webm",
+          "pending": false
+        },
+        "explicitError": "No saved FX for this video."
+      }
+    },
+    {
+      "name": "Blue File independently saves manual Gamma power2 and produces measured darkened source pixels",
+      "passed": true,
+      "evidence": {
+        "raw": [
+          47,
+          73,
+          179,
+          255
+        ],
+        "processed": [
+          9,
+          21,
+          126,
+          255
+        ],
+        "expected": [
+          9,
+          21,
+          126,
+          255
+        ],
+        "record": {
+          "version": 1,
+          "key": "sha256:0663899b1923e9de74cb9b5f897ef537cdff2e9b6144b220b943470bf6778aec",
+          "name": "open-play-shared-name.webm",
+          "fx": [
+            {
+              "name": "Gamma",
+              "on": true,
+              "value": 1,
+              "params": {
+                "behavior": "Manual Meaning",
+                "shadowPower": 2,
+                "gamma": 3
+              }
+            },
+            {
+              "name": "Filter",
+              "on": false,
+              "value": 0.65,
+              "params": {
+                "mode": "Low Pass",
+                "radius": 3
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Reloading real red bytes automatically recalls Negative before the new clip commits",
+      "passed": true,
+      "evidence": {
+        "pixel": [
+          76,
+          191,
+          209,
+          255
+        ],
+        "expected": [
+          76,
+          191,
+          209,
+          255
+        ],
+        "savedFX": {
+          "count": 2,
+          "channels": [
+            {
+              "loaded": true,
+              "identity": "sha256:f844a06f9ddd054154434101ec913c53f1a31655e954d9038cc0a8d3aa145f2c",
+              "status": "Recalled saved FX · open-play-shared-name.webm",
+              "pending": false
+            },
+            {
+              "loaded": false,
+              "identity": null,
+              "status": "No media loaded",
+              "pending": false
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Reloading real blue bytes independently recalls Gamma power2",
+      "passed": true,
+      "evidence": {
+        "pixel": [
+          9,
+          21,
+          126,
+          255
+        ],
+        "expected": [
+          9,
+          21,
+          126,
+          255
+        ],
+        "savedFX": {
+          "count": 2,
+          "channels": [
+            {
+              "loaded": true,
+              "identity": "sha256:0663899b1923e9de74cb9b5f897ef537cdff2e9b6144b220b943470bf6778aec",
+              "status": "Recalled saved FX · open-play-shared-name.webm",
+              "pending": false
+            },
+            {
+              "loaded": false,
+              "identity": null,
+              "status": "No media loaded",
+              "pending": false
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Renamed identical red bytes recall the same saved Negative record",
+      "passed": true,
+      "evidence": {
+        "pixel": [
+          76,
+          191,
+          209,
+          255
+        ],
+        "name": "open-play-fx-renamed-red.webm",
+        "identity": "sha256:f844a06f9ddd054154434101ec913c53f1a31655e954d9038cc0a8d3aa145f2c"
+      }
+    },
+    {
+      "name": "Explicit red recall changes only its channel while decoded right and configured master remain intact",
+      "passed": true,
+      "evidence": {
+        "pixel": [
+          76,
+          191,
+          209,
+          255
+        ],
+        "rightBefore": [
+          9,
+          21,
+          126,
+          255
+        ],
+        "rightAfter": [
+          9,
+          21,
+          126,
+          255
+        ],
+        "master": [
+          {
+            "name": "Gamma",
+            "on": true,
+            "value": 1,
+            "params": {
+              "behavior": "Manual Meaning",
+              "shadowPower": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "Identical red content loaded on the opposite channel recalls its record without changing left/master",
+      "passed": true,
+      "evidence": {
+        "pixel": [
+          76,
+          191,
+          209,
+          255
+        ],
+        "leftBefore": [
+          88,
+          4,
+          1,
+          255
+        ],
+        "leftAfter": [
+          88,
+          4,
+          1,
+          255
+        ],
+        "savedFX": {
+          "count": 2,
+          "channels": [
+            {
+              "loaded": true,
+              "identity": "sha256:f844a06f9ddd054154434101ec913c53f1a31655e954d9038cc0a8d3aa145f2c",
+              "status": "Recalled saved FX · open-play-fx-renamed-red.webm",
+              "pending": false
+            },
+            {
+              "loaded": true,
+              "identity": "sha256:f844a06f9ddd054154434101ec913c53f1a31655e954d9038cc0a8d3aa145f2c",
+              "status": "Recalled saved FX · open-play-fx-renamed-red.webm",
+              "pending": false
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Actual export and metadata JSON contain two scalar file presets without media/runtime resources",
+      "passed": true,
+      "evidence": {
+        "format": "open-play-video-fx-1",
+        "keys": [
+          "sha256:f844a06f9ddd054154434101ec913c53f1a31655e954d9038cc0a8d3aa145f2c",
+          "sha256:0663899b1923e9de74cb9b5f897ef537cdff2e9b6144b220b943470bf6778aec"
+        ],
+        "records": [
+          {
+            "version": 1,
+            "key": "sha256:f844a06f9ddd054154434101ec913c53f1a31655e954d9038cc0a8d3aa145f2c",
+            "name": "open-play-shared-name.webm",
+            "fx": [
+              {
+                "name": "Negative",
+                "on": true,
+                "value": 1,
+                "params": {}
+              },
+              {
+                "name": "Gamma",
+                "on": false,
+                "value": 0.4,
+                "params": {
+                  "behavior": "Manual Meaning",
+                  "shadowPower": 3,
+                  "gamma": 3
+                }
+              }
+            ]
+          },
+          {
+            "version": 1,
+            "key": "sha256:0663899b1923e9de74cb9b5f897ef537cdff2e9b6144b220b943470bf6778aec",
+            "name": "open-play-shared-name.webm",
+            "fx": [
+              {
+                "name": "Gamma",
+                "on": true,
+                "value": 1,
+                "params": {
+                  "behavior": "Manual Meaning",
+                  "shadowPower": 2,
+                  "gamma": 3
+                }
+              },
+              {
+                "name": "Filter",
+                "on": false,
+                "value": 0.65,
+                "params": {
+                  "mode": "Low Pass",
+                  "radius": 3
+                }
+              }
+            ]
+          }
+        ],
+        "metadataBytes": 1619
+      }
+    },
+    {
+      "name": "Restored JSON creates no media resources; explicit original-file reimport recalls actual saved pixels",
+      "passed": true,
+      "evidence": {
+        "beforeReimportMedia": "none",
+        "afterPixel": [
+          76,
+          191,
+          209,
+          255
+        ],
+        "identity": "sha256:f844a06f9ddd054154434101ec913c53f1a31655e954d9038cc0a8d3aa145f2c",
+        "records": 2
+      }
+    },
+    {
+      "name": "Invalid top-level import is atomic; valid mixed import reports drops and replaces only the named identity",
+      "passed": true,
+      "evidence": {
+        "invalidError": "Video FX preset import must be an array.",
+        "counts": {
+          "accepted": 1,
+          "dropped": 1,
+          "duplicates": 0,
+          "added": 0,
+          "replaced": 1,
+          "size": 2
+        },
+        "unchangedCurrentFX": true
+      }
+    },
+    {
+      "name": "Imported blue record recalls its new power3 through real decode and GPU pixels",
+      "passed": true,
+      "evidence": {
+        "pixel": [
+          2,
+          6,
+          88,
+          255
+        ],
+        "expected": [
+          2,
+          6,
+          88,
+          255
+        ],
+        "identity": "sha256:0663899b1923e9de74cb9b5f897ef537cdff2e9b6144b220b943470bf6778aec"
+      }
+    },
+    {
+      "name": "Saving and recalling per-file Video FX leave held actual AudioEngine master RMS unchanged",
+      "passed": true,
+      "evidence": {
+        "windows": [
+          {
+            "action": "baseline",
+            "samples": [
+              {
+                "time": 2.1493333333333333,
+                "level": 0.04665984003574787
+              },
+              {
+                "time": 2.2026666666666666,
+                "level": 0.04674013959423158
+              },
+              {
+                "time": 2.2506666666666666,
+                "level": 0.04649110537663138
+              },
+              {
+                "time": 2.2986666666666666,
+                "level": 0.04657548707399337
+              },
+              {
+                "time": 2.352,
+                "level": 0.04651341447387425
+              },
+              {
+                "time": 2.4,
+                "level": 0.04677809582523622
+              }
+            ],
+            "mean": 0.04662634706328578
+          },
+          {
+            "action": "save",
+            "samples": [
+              {
+                "time": 2.453333333333333,
+                "level": 0.046702656907864286
+              },
+              {
+                "time": 2.501333333333333,
+                "level": 0.0468632678915467
+              },
+              {
+                "time": 2.5493333333333332,
+                "level": 0.046659856968953
+              },
+              {
+                "time": 2.5973333333333333,
+                "level": 0.0464728432287252
+              },
+              {
+                "time": 2.6506666666666665,
+                "level": 0.0464911125607928
+              },
+              {
+                "time": 2.6986666666666665,
+                "level": 0.04657547222336619
+              }
+            ],
+            "mean": 0.04662753496354136
+          },
+          {
+            "action": "recall",
+            "samples": [
+              {
+                "time": 2.7573333333333334,
+                "level": 0.04661147720820335
+              },
+              {
+                "time": 2.8106666666666666,
+                "level": 0.04669261070443985
+              },
+              {
+                "time": 2.8586666666666667,
+                "level": 0.04647612077589765
+              },
+              {
+                "time": 2.9066666666666667,
+                "level": 0.0466212589497431
+              },
+              {
+                "time": 2.96,
+                "level": 0.046548015336593744
+              },
+              {
+                "time": 3.008,
+                "level": 0.04681497072097166
+              }
+            ],
+            "mean": 0.04662740894930823
+          }
+        ],
+        "tolerance": 0.0005,
+        "apertureSeconds": 0.042666666666666665,
+        "scope": "Actual disconnected-speaker440Hz source into existing AudioEngine channel/master; equal fixed RMS windows, not sample-for-sample equality"
+      }
+    },
+    {
+      "name": "Disposed actual mixer rejects future file preset operations",
+      "passed": true,
+      "evidence": {
+        "saveError": "Video mixer was disposed.",
+        "loadError": "Video mixer was disposed."
+      }
+    }
+  ],
+  "notifications": [],
+  "scope": "Actual generated MediaRecorder video Files, presented source decode, real module Worker streaming SHA-256, actual mixer/metadata/GPU/JSON restoration and real AudioEngine RMS. Synthetic originals only. Does not prove Serato identity/storage/curves, arbitrary codecs or native/hardware compatibility.",
+  "fixtures": {
+    "red": {
+      "name": "open-play-fx-red.webm",
+      "bytes": 6011,
+      "type": "video/webm;codecs=vp8"
+    },
+    "blue": {
+      "name": "open-play-fx-blue.webm",
+      "bytes": 5914,
+      "type": "video/webm;codecs=vp8"
+    },
+    "renamed": {
+      "name": "open-play-fx-renamed-red.webm",
+      "bytes": 6011,
+      "type": "video/webm;codecs=vp8"
+    }
+  },
+  "presetExport": {
+    "name": "open-play-video-fx-presets.json",
+    "bytes": 1179,
+    "type": "application/json"
+  },
+  "metadataExport": {
+    "name": "open-play-video-fx-metadata.json",
+    "bytes": 2844,
+    "type": "application/json"
+  },
+  "passed": 15,
+  "failed": 0,
+  "finishedAt": "2026-10-17T07:08:55.174Z"
+}

@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-17T06:51:21.316311+00:00",
+  "updated": "2026-10-17",
   "complete_inventory": false,
   "requirements": [
     {
@@ -15097,7 +15097,7 @@
       "trigger": "Save selected Video FX/values for loaded media and later reload it",
       "expected": "Recall the saved FX state with the correct media owner rather than applying one global preset to every track.",
       "evidence": "DOCUMENTED official historical Video manual, PDF metadata2015-04-09; current4.0.10 algorithm/loaded-runtime behavior remains unverified.",
-      "prototype_behavior": "Requirement merged from qualified source evidence; independent implementation and actual behavior evidence remain separately scoped. This merge does not establish the complete new acceptance path.",
+      "prototype_behavior": "Independent per-video SHA256 content identity, invocation-snapshotted two-channel FX save/explicit recall/automatic load recall, scalar metadata export/import and browser persistence. Actual15/15 Worker/decode/GPU/RMS checks plus main UI Save/edit/Recall/export/import/page reload/renamedFile paths execute. Same-name different bytes separate; matching bytes across channels recall only destination. Controlled independent8/8 fixes stale Save/import ordering. Current Serato metadata owner/format and reference algorithms remain unverified.",
       "prototype_reference_parity_verified": false,
       "reference_runtime_verified": false,
       "native_status": "blocked_until_prototype_approval",
@@ -15105,7 +15105,7 @@
       "acceptance_cases": [
         "Save differing original-media FX states, reload each and verify actual pixels/parameters and track ownership; exact associated-audio vsvideo metadata destination needs installed-version reconciliation."
       ],
-      "acceptance_status": "not_established_by_registry_merge",
+      "acceptance_status": "independent_file_scoped_save_recall_browser_executed_reference_format_owner_unverified",
       "routing": {
         "codex": {
           "model": "gpt-6.1-sol",
@@ -15130,7 +15130,13 @@
         "sourceLimits": [
           "Exact installed4.0.10 behavior and vendor transfer functions remain unverified."
         ]
-      }
+      },
+      "prototype_evidence": [
+        "docs/prototype/VIDEO_FILE_FX_REVIEW.md",
+        "docs/prototype/video-fx-presets-browser-results.json",
+        "docs/prototype/video-file-fx-ui-results.json",
+        "docs/prototype/VIDEO_FILE_FX_INDEPENDENT_REVIEW.md"
+      ]
     },
     {
       "id": "REQ-516",

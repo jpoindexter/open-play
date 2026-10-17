@@ -1,0 +1,28 @@
+# Per-file Video FX: executed independent save, recall and persistence
+
+2026-10-17. **Full Serato parity remains NOT PASSED; native development is not approved.** This checkpoint implements REQ-515 as an independent browser workflow. The official historical Video manual pp8/12 documents saving selected FX for loaded video. Exact current Serato identity rules, metadata destination/format, associated-audio semantics and algorithm equivalence remain unverified.
+
+## Actual behavior and ownership
+
+Save captures the two selected channel FX at invocation and associates detached scalar metadata with the loaded Video File's SHA-256 byte identity. Renamed identical bytes share a record; different bytes with the same filename remain separate. Master FX, transitions, overlays and associated audio-track metadata are outside this record. No source file is rewritten. The local browser stores metadata; clips must be explicitly reimported after a page reload. Saved FX metadata also has a dedicated JSON export/import dialog; the general library backup does not promise to contain Video data.
+
+A new decoded clip remains pending behind the existing clip during automatic identity lookup. A match recalls only the destination channel before the clip commits. No match preserves current FX. A genuine identity failure visibly reports unavailable lookup but still permits valid decoded playback using current FX and no fabricated digest. Cancel/new load/disposal invalidates old work and cleans the candidate; a user edit cancels pending Recall on that side. Save intentionally uses its click-time snapshot and the current Video File owner, even if unrelated audio metadata changes.
+
+Independent review reproduced two real stale writes: an older opposite-channel Save overwrote a newer Save of the same content, and an older pending Save overwrote a newer import. Per-identity revisions now retain newer writes while allowing unrelated imported identities. The review preserves initial failures and verifies the fixed desired state8/8 with controlled collaborators. Read [the independent review](VIDEO_FILE_FX_INDEPENDENT_REVIEW.md).
+
+## Executed acceptance
+
+- [Actual browser15/15](video-fx-presets-browser-results.json): generated original VP8/WebM Files share a filename but differ in real encoded bytes; actual module Workers hash them, actual presented frames decode, actual GPU pixels verify Negative and Gamma powers2/3. Automatic and explicit recall, rename, opposite-channel isolation, master preservation, JSON restore plus File reimport, atomic import and disposal execute. Six fixed AudioEngine RMS windows per action stay within unchanged .0005 tolerance; the fixture speaker route is disconnected before its oscillator starts.
+- [Main UI evidence](video-file-fx-ui-results.json): actual file pickers import generated originals; left Negative Save survives a Sepia edit and explicit Recall. A real downloaded export contains one correct keyed record. Import/merge reports1 added/1 replaced, page reload retains two records with no media, renamed red reimport recalls Negative and different blue bytes recall Gamma2. Initial immediate filechooser-return status reads were transient and explicitly corrected with settled observations, not counted as recall proof. [FX dialog](video-file-fx-ui-dialog.png), [metadata library](video-file-fx-ui-library.png).
+- [Actual Worker10/10](video-file-identity-browser-results.json): known vectors, multi-chunk bytes, same-content rename/different bytes, concurrent workers, mid-abort/no late progress, retry and invalid inputs. This alone does not establish video decoding or UI persistence; the15/15 and UI paths above supply those distinct checks.
+- [Current25 Node Video scripts all exit0](video-file-fx-node-results.json). New pure presets15/15, actual incremental Node identity/controlled Worker13/13, controlled mixer lifecycle13/13, independent concurrency review8/8 and actual Video state28/28. These narrower checks do not establish browser/native/hardware behavior.
+
+The assembled actual browser pipeline regression also passes [33/33](video-file-fx-pipeline-regression.json), including decoded transport, per-channel/master GPU routing, real AudioEngine and processed video/audio capture. It does not establish sustained frame rate or reference algorithms.
+
+## Identity dependency and limits
+
+One dedicated local module Worker reads intrinsic Blob slices of at most1MiB and updates an incremental SHA-256 hasher. No arbitrary file-size cap, whole-file read, online dependency or main-thread hash fallback was added. Save/lookup progress and Cancel are visible; unsupported Workers fail explicitly. Only the current decoded item caches its validated digest.
+
+The MIT @noble/hashes2.4.0 four-module closure is vendored unchanged with license and exact tarball/file hashes. Registry integrity and advisory results are in [the dependency review](../research/VIDEO_IDENTITY_DEPENDENCY_REVIEW.md). Zero known advisory findings are not a security proof, a signer/build-reproduction claim or proof that this release underwent the upstream historical audit. Multi-gigabyte throughput/heap limits and browser storage-quota recovery remain unverified.
+
+The tests use original synthetic video and audio. They do not prove arbitrary codecs, Serato metadata interoperability, live providers, physical devices, musical quality or output-window/Syphon compatibility. All110 feature groups and521 detailed requirements remain in scope with complete_inventory=false. Models/efforts remain recommendations attached to each requirement/card, not records of model execution. No native work is authorized by this checkpoint.

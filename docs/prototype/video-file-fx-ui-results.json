@@ -1,0 +1,159 @@
+{
+  "startedAt": "2026-10-17T07:10:11.453Z",
+  "scope": "Main prototype actual file pickers, dialogs, Save/Recall, JSON import/export, browser reload and metadata restoration. Pixels are covered by separate15/15 GPU harness; UI screenshots are visual observations.",
+  "steps": [
+    {
+      "name": "Configured left Negative",
+      "fx": [
+        {
+          "amount": "1",
+          "name": "Negative",
+          "on": true
+        },
+        {
+          "amount": "0.65",
+          "name": "Filter",
+          "on": false
+        }
+      ]
+    },
+    {
+      "name": "Saved actual red File FX",
+      "status": "Saved channel FX · open-play-fx-red.webm"
+    },
+    {
+      "name": "Live edit after Save",
+      "fx": [
+        {
+          "amount": "0.65",
+          "name": "Sepia",
+          "on": true
+        },
+        {
+          "amount": "0.65",
+          "name": "Filter",
+          "on": false
+        }
+      ]
+    },
+    {
+      "name": "Explicit Recall restored Negative after Sepia edit",
+      "fx": [
+        {
+          "amount": "1",
+          "name": "Negative",
+          "on": true
+        },
+        {
+          "amount": "0.65",
+          "name": "Filter",
+          "on": false
+        }
+      ]
+    },
+    {
+      "name": "Main UI metadata export downloaded",
+      "path": "/Users/jasonpoindexter/Downloads/open-play-video-fx.json",
+      "data": {
+        "format": "open-play-video-fx-1",
+        "records": [
+          {
+            "version": 1,
+            "key": "sha256:f844a06f9ddd054154434101ec913c53f1a31655e954d9038cc0a8d3aa145f2c",
+            "name": "open-play-fx-red.webm",
+            "fx": [
+              {
+                "name": "Negative",
+                "on": true,
+                "value": 1,
+                "params": {}
+              },
+              {
+                "name": "Filter",
+                "on": false,
+                "value": 0.65,
+                "params": {
+                  "mode": "Low Pass",
+                  "radius": 3
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "Imported harness red and blue records through metadata dialog",
+      "status": "1 added, 1 replaced, 0 malformed records skipped. Load/reload a clip or choose Recall to apply matching FX."
+    },
+    {
+      "name": "Browser reload retained two metadata records and required media reimport",
+      "dialog": "Two channel FX slots are saved against the video file's SHA-256 content identity. Renaming identical bytes keeps the same settings. Other file content has separate settings. No master FX, transition, overlays, media bytes or source files are saved or rewritten here. Reimport clips after reload; matching saved FX recall automatically. New files without a saved entry keep current channel settings.\n\n2 saved file records · metadata only, stored in this browser when available.\n\nExport saved FX metadata\nImport/merge saved FX metadata\n\nNo files are uploaded."
+    },
+    {
+      "name": "Renamed same bytes automatically recalled after full browser reload",
+      "status": "No media loaded",
+      "observation": "Immediate filechooser return preceded asynchronous decode/hash; transient observation, not recall proof. Following dialog confirms final Negative state."
+    },
+    {
+      "name": "Reloaded renamed red actual dialog FX",
+      "fx": [
+        {
+          "amount": "1",
+          "name": "Negative",
+          "on": true
+        },
+        {
+          "amount": "0.4",
+          "name": "Gamma",
+          "on": false
+        }
+      ]
+    },
+    {
+      "name": "Different bytes recalled separate imported Gamma record",
+      "status": "Recalled saved FX · open-play-fx-renamed-red.webm",
+      "observation": "Immediate filechooser return showed prior file while asynchronous replacement was pending; following dialog confirms Gamma2."
+    },
+    {
+      "name": "Blue dialog confirms Gamma with power2",
+      "fx": [
+        {
+          "amount": "1",
+          "name": "Gamma",
+          "on": true
+        },
+        {
+          "amount": "0.65",
+          "name": "Filter",
+          "on": false
+        }
+      ],
+      "power": "2"
+    },
+    {
+      "name": "Settled blue recall status after asynchronous load",
+      "status": "Recalled saved FX · open-play-fx-blue.webm"
+    },
+    {
+      "name": "Settled renamed red recall status",
+      "status": "Recalled saved FX · open-play-fx-renamed-red.webm"
+    },
+    {
+      "name": "Settled renamed red FX controls",
+      "fx": [
+        {
+          "amount": "1",
+          "name": "Negative",
+          "on": true
+        },
+        {
+          "amount": "0.4",
+          "name": "Gamma",
+          "on": false
+        }
+      ]
+    }
+  ],
+  "finishedAt": "2026-10-17T07:10:57.447Z"
+}

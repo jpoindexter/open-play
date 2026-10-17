@@ -6,9 +6,12 @@ import {videoTransitionCatalog} from './video-transitions.js';
 import {createVideoRecordingSurface, normalizeRecordingQuality, recordingQualityOptions, recordingDimensions} from './video-recording.js';
 import {createVideoCrossfade,normalizeAutoCrossfadeSeconds} from './video-crossfade.js';
 import {normalizeVideoOpacityState,effectiveVideoOpacity,videoOpacityIndex} from './video-opacity.js';
+import {snapshotVideoState} from './video-state.js';
+import {createVideoFXPresetStore,normalizeVideoFXPresets} from './video-fx-presets.js';
+import {videoFileIdentity} from './video-file-identity.js';
 import {drawVideoTreatment, normalizeVideoTreatment} from './video-treatment.js';
 import {primeDecodedVideo} from './video-decode.js';
-export function createVideoMixer({state, engine, notify}) {
+export function createVideoMixer({state, engine, notify, identifyFile=videoFileIdentity}) {
   const v = state.video ||= {};
   Object.assign(v,normalizeVideoOpacityState(v));
   Object.assign(v, {width: v.width || 640, height: v.height || 360,
@@ -19,6 +22,10 @@ export function createVideoMixer({state, engine, notify}) {
     fx: v.fx || {left: [], right: [], master: []},
     overlays: v.overlays || {left: [], right: [], master: []}});
   const slots = [null, null], loadTokens = [0, 0], assets = new Map(), imageTokens = new Map();
+  const presetStore=createVideoFXPresetStore({initial:Array.isArray(v.savedVideoFX)?v.savedVideoFX:[],sanitizeEffects:specs=>snapshotVideoState({fx:{left:specs}}).fx.left});
+  v.savedVideoFX=presetStore.snapshot();
+  const identityLoads=[null,null],presetOperations=[null,null],presetKinds=[null,null],presetTokens=[0,0],presetStatus=['No media loaded','No media loaded'];
+  let presetSaveSerial=0;const presetRevisions=new Map();
   const decodedRawIds = [null, null], effectivePresentation = [null,null], presentationGenerations = [0,0];
   const recordingSurface = createVideoRecordingSurface();
   const directionalFade = createVideoCrossfade();
@@ -49,6 +56,7 @@ export function createVideoMixer({state, engine, notify}) {
   async function load(index, file, selection = {}) {
     if (![0, 1].includes(index)) throw new RangeError('Choose left or right video.');
     if (disposed) throw new Error('Video mixer was disposed.');
+    identityLoads[index]?.abort();presetOperations[index]?.abort();++presetTokens[index];
     const token = ++loadTokens[index], video = document.createElement('video'), url = URL.createObjectURL(file);
     const startingAudioKey = audioKey(index);
     const priorManual = manualKeys[index];
@@ -67,9 +75,23 @@ export function createVideoMixer({state, engine, notify}) {
       if (!owns()) {
         video.pause(); URL.revokeObjectURL(url); return null;
       }
+      let identity=null,saved=null;
+      if(presetStore.snapshot().length){
+        const controller=new AbortController();identityLoads[index]=controller;
+        presetStatus[index]='Checking saved FX · 0%';
+        try{
+          identity=await identifyFile(file,{signal:controller.signal,onProgress:progress=>{if(owns())presetStatus[index]=`Checking saved FX · ${Math.round(progress.ratio*100)}%`;}});
+          if(owns())saved=presetStore.get(identity);
+        }catch(e){if(owns()){presetStatus[index]='Saved FX lookup unavailable: '+e.message;notify(presetStatus[index]);}}
+        finally{if(identityLoads[index]===controller)identityLoads[index]=null;}
+      }
+      if(!owns()){video.pause();URL.revokeObjectURL(url);return null;}
       const previous = slots[index];
       slots[index] = {video, url, file, name: file.name, assetId: `${index}:${token}`,
-        mediaId:selection.mediaId || null, kind:selection.kind || 'manual', firstFrame};
+        mediaId:selection.mediaId || null, kind:selection.kind || 'manual', firstFrame,identity};
+      if(saved){v.fx[index?'right':'left']=saved.fx;presetStatus[index]='Recalled saved FX · '+file.name;}
+      else if(identity)presetStatus[index]='No saved FX · '+file.name;
+      else if(!presetStore.snapshot().length)presetStatus[index]='FX not saved for this file';
       if (previous) {previous.video.pause(); URL.revokeObjectURL(previous.url);}
       reset(index ? 'right' : 'left');
       mediaErrors[index] = null;
@@ -187,6 +209,49 @@ export function createVideoMixer({state, engine, notify}) {
     imageTokens.set(key, (imageTokens.get(key) || 0) + 1);
     if (previous) URL.revokeObjectURL(previous.url); assets.delete(key);
   }
+  function presetIndex(index){if(index!==0&&index!==1)throw new RangeError('Choose left or right Video FX.');return index;}
+  async function withPresetIdentity(index,kind,action){
+    if(disposed)throw new Error('Video mixer was disposed.');presetIndex(index);
+    const item=slots[index];if(!item?.file)throw new Error('Load a local video on this side first.');
+    presetOperations[index]?.abort();const controller=new AbortController(),token=++presetTokens[index];presetOperations[index]=controller;presetKinds[index]=kind;
+    const current=()=>!disposed&&slots[index]===item&&presetTokens[index]===token&&!controller.signal.aborted;
+    try{
+      presetStatus[index]='Identifying video · 0%';
+      const key=item.identity||await identifyFile(item.file,{signal:controller.signal,onProgress:progress=>{if(current())presetStatus[index]=`Identifying video · ${Math.round(progress.ratio*100)}%`;}});
+      if(!current())return null;item.identity=key;return action(key,item);
+    }catch(e){if(!current())return null;presetStatus[index]='Video FX operation failed: '+e.message;throw e;}
+    finally{if(presetOperations[index]===controller){presetOperations[index]=null;presetKinds[index]=null;}}
+  }
+  function saveVideoFX(index){
+    if(disposed)throw new Error('Video mixer was disposed.');presetIndex(index);
+    const fx=snapshotVideoState({fx:{left:v.fx[index?'right':'left']}}).fx.left,revision=++presetSaveSerial;
+    return withPresetIdentity(index,'save',(key,item)=>{
+      if((presetRevisions.get(key)||0)>revision){presetStatus[index]='Newer saved FX retained · '+item.name;return null;}
+      const record=presetStore.put(key,item.name,fx);presetRevisions.set(key,revision);v.savedVideoFX=presetStore.snapshot();presetStatus[index]='Saved channel FX · '+item.name;return record;
+    });
+  }
+  function recallVideoFX(index){return withPresetIdentity(index,'recall',(key,item)=>{
+    const saved=presetStore.get(key);if(!saved)throw new Error('No saved FX for this video.');
+    v.fx[index?'right':'left']=saved.fx;reset(index?'right':'left');presetStatus[index]='Recalled saved FX · '+item.name;return saved;
+  });}
+  function cancelVideoFX(index){
+    presetIndex(index);const pending=!!identityLoads[index]||!!presetOperations[index];
+    if(identityLoads[index]){++loadTokens[index];identityLoads[index].abort();identityLoads[index]=null;}
+    ++presetTokens[index];presetOperations[index]?.abort();presetOperations[index]=null;presetKinds[index]=null;presetStatus[index]='Video FX operation canceled';return pending;
+  }
+  function videoFXEdited(target){
+    const index=target==='left'?0:target==='right'?1:null;
+    if(index===null||presetKinds[index]!=='recall')return false;
+    cancelVideoFX(index);presetStatus[index]='Recall canceled because channel FX were edited';return true;
+  }
+  function exportVideoFX(){return {format:'open-play-video-fx-1',records:presetStore.snapshot()};}
+  function importVideoFX(records){
+    if(disposed)throw new Error('Video mixer was disposed.');
+    const imported=normalizeVideoFXPresets(records,specs=>snapshotVideoState({fx:{left:specs}}).fx.left);
+    const result=presetStore.merge(records),revision=++presetSaveSerial;
+    for(const record of imported)presetRevisions.set(record.key,revision);
+    v.savedVideoFX=presetStore.snapshot();return result;
+  }
   function setResolution(width, height) {
     if (disposed) throw new Error('Video mixer was disposed.');
     if (startPromise || stopPromise || recorder?.state === 'recording') throw new Error('Stop video capture before changing output resolution.');
@@ -293,6 +358,7 @@ export function createVideoMixer({state, engine, notify}) {
       loadedImages: [...assets.keys()], karaoke: [0, 1].map(i => karaoke.diagnostics(i)), pipeline: pipeline?.diagnostics(),
       crossfade:directionalFade.diagnostics(), crossLinked:v.crossLinked, videoCross:v.cross,
       opacity:{levels:opacityLevels(),linked:[...v.channelOpacityLinked],manual:[...v.channelOpacity]},
+      savedFX:{count:v.savedVideoFX.length,channels:slots.map((item,i)=>({loaded:!!item,identity:item?.identity||null,status:presetStatus[i],pending:!!identityLoads[i]||!!presetOperations[i]}))},
       recording: recorder?.state === 'recording', recordingQuality:normalizeRecordingQuality(v.recordingQuality),
       captureDimensions:captureSession ? {width:captureSession.lease.width,height:captureSession.lease.height,quality:captureSession.lease.quality} : null,
       captureBytes: result?.size || 0};
@@ -302,6 +368,10 @@ export function createVideoMixer({state, engine, notify}) {
       const status = document.querySelector(`#video-status-${i}`), item = slots[i];
       const graphics = karaokeFrames[i];
       if (status) status.textContent = (graphics ? `CDG graphics · ${graphics.position.toFixed(2)}s · audio deck ${i+1} clock` : item ? `${item.name} · ${item.video.currentTime.toFixed(1)} / ${item.video.duration.toFixed(1)}s · ${item.video.paused ? 'Paused' : 'Playing'}` : 'No media loaded') + (mediaErrors[i] ? ` · Replacement failed: ${mediaErrors[i]}` : '');
+      const preset=document.querySelector('#video-fx-file-status-'+i);if(preset)preset.textContent=presetStatus[i];
+      const pending=!!identityLoads[i]||!!presetOperations[i];
+      for(const action of ['save','recall']){const button=document.querySelector(`#video-fx-${action}-${i}`);if(button)button.disabled=!item||pending;}
+      const cancel=document.querySelector('#video-fx-cancel-'+i);if(cancel)cancel.disabled=!pending;
     }
     const status = document.querySelector('#video-pipeline-state');
     if (status) status.textContent = error ? `Video unavailable: ${error}. Reset to retry.` :
@@ -446,6 +516,7 @@ export function createVideoMixer({state, engine, notify}) {
   }
   async function dispose() {
     if (disposed) return; stopCrossfade(); disposed = true;
+    for(const i of [0,1]){identityLoads[i]?.abort();presetOperations[i]?.abort();++presetTokens[i];}
     // Invalidate pending decodes/start immediately; an outstanding resume may settle later.
     slots.forEach((item,i) => {++loadTokens[i]; if (item) {item.video.pause(); URL.revokeObjectURL(item.url);}});
     for (const {url} of assets.values()) URL.revokeObjectURL(url); assets.clear(); pipeline?.dispose();
@@ -471,6 +542,7 @@ export function createVideoMixer({state, engine, notify}) {
   return {load, bind, play, setOverlayImage, clearOverlayImage, setResolution, setRecordingQuality, setOpacity,setOpacityLinked,startCrossfade,stopCrossfade, reset, tick,
     loadKaraoke, configureKaraoke, clearKaraoke, karaokeDiagnostics: index => karaoke.diagnostics(index),
     addMedia, removeMedia, configureMedia, nextMedia, associateVideo, removeVideoAssociation,
+    saveVideoFX,recallVideoFX,cancelVideoFX,videoFXEdited,exportVideoFX,importVideoFX,
     mediaDiagnostics, configureTransitions, nextTransition,
     record, stop, dispose, diagnostics,
     get fading() {return directionalFade.diagnostics().active;},

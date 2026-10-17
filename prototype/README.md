@@ -8,7 +8,7 @@ also requires MediaRecorder. Core browser playback needs no package install or h
 This is an independently written HTML/CSS/JavaScript review prototype. **It does
 not establish 1:1 Serato parity.** All 110 inventoried feature groups have a
 review destination, explicit simulation, or a documented gap. The evidence browser
-contains 507 source-linked requirements and per-feature Codex/Claude recommendations.
+contains 521 source-linked requirements and per-feature Codex/Claude recommendations.
 Some routes explicitly describe missing workflows; they are not implementation passes.
 
 ## Try it
@@ -117,3 +117,14 @@ opacity/audio links are separate from playback and crossfade links. Run
 Current FX102/102 and assembled pipeline33/33; see
 [executed spectrum/opacity review](../docs/prototype/VIDEO_SPECTRUM_OPACITY_REVIEW.md).
 Reference algorithms, physical compatibility and full parity remain unverified.
+
+
+## Saved Video FX
+
+Load a local video, configure its two channel FX, then choose Save left/right FX.
+Recall restores only that channel. Reimporting matching bytes automatically
+recalls saved FX after reload; renaming a clip does not change its content key.
+Use Saved video FX to export/import metadata separately from the library backup.
+Media bytes remain temporary. Read [the executed review](../docs/prototype/VIDEO_FILE_FX_REVIEW.md)
+and run [the actual15-check File/Worker/GPU harness](video-fx-presets-harness.html).
+Exact Serato metadata format/owner and reference visual behavior remain unverified.

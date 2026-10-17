@@ -1,5 +1,6 @@
 import { normalizeRecordingQuality } from './video-recording.js';
 import { normalizeVideoOpacityState } from './video-opacity.js';
+import { normalizeVideoFXPresets } from './video-fx-presets.js';
 import { normalizeVideoTreatment } from './video-treatment.js';
 import { videoEffectCatalog } from './video-effects-catalog.js';
 import { videoTransitionCatalog } from './video-transitions.js';
@@ -91,6 +92,7 @@ function sanitized(value,restore) {
     audioFXLink:own(value,'audioFXLink') === true,mediaTreatment:normalizeVideoTreatment(own(value,'mediaTreatment')),
     recordingQuality:normalizeRecordingQuality(own(value,'recordingQuality')),
     media:flags('media'),transitionSelection:flags('transitionSelection'),
+    savedVideoFX:normalizeVideoFXPresets(Array.isArray(own(value,'savedVideoFX'))?own(value,'savedVideoFX'):[],specs=>[0,1].map(i=>effectSpec(arrayEntry(specs,i),restore))),
     fx:Object.fromEntries(targets.map(target => [target,[0,1].map(index => effectSpec(arrayEntry(own(fx,target),index),restore))])),
     overlays:Object.fromEntries(targets.map(target => [target,arrayValues(own(overlays,target))
       .map((spec,index) => overlaySpec(spec,target,index,restore)).filter(Boolean)]))};

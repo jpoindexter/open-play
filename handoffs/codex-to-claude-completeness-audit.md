@@ -3,7 +3,7 @@
 **Full 1:1 parity remains NOT PASSED. Native development is NOT approved.**
 
 Project: `/Users/jasonpoindexter/Documents/GitHub/Open Play`
-Prepared: 2026-10-16
+Prepared: 2026-10-17
 Current browser candidate: `1da00d574efc5da4532d40be965e4a1e3d294cff`
 Content hashes: `docs/prototype/candidate-hashes.json`
 Private repository: https://github.com/jpoindexter/open-play
@@ -50,7 +50,7 @@ It is not the full completeness audit; its source claims need independent checks
 ## Read first
 
 - `AGENTS.md` if present; `PROJECT_PROMPT.md`; `docs/approvals.md`.
-- `FULL_BUILD_PLAN.md` sections23–36, with older sections retained as dated history.
+- `FULL_BUILD_PLAN.md` sections23–37, with older sections retained as dated history.
 - `docs/research/PARITY_GATE.md`, `FULL_SCOPE_CONTRACT.md`, `FEATURE_COVERAGE.md`,
   `INTERACTION_REQUIREMENTS.md`, `REQUIREMENT_GAPS_REVIEW.md`, `SOURCE_CONFLICTS.md`,
   `UI_OBSERVATIONS.md`, `EVIDENCE_LEDGER.md`, `BINARY_FINDINGS.md`,
@@ -298,6 +298,39 @@ arrangement/Syphon/MIDI/shortcut workflows, then remaining broad-scope acceptanc
 SCNet quality failure, resource limits, hardware/provider/combined workflows and
 full1:1 remain open. No native app until named-candidate approval. Models/effort
 remain per feature/requirement/card; recommendations are not executions.
+
+## Latest per-file FX checkpoint — 17 October
+
+Read docs/prototype/VIDEO_FILE_FX_REVIEW.md and VIDEO_FILE_FX_INDEPENDENT_REVIEW.md.
+Actual15/15 uses real generated File encode/decode, dedicated Worker SHA256,
+GPU Negative/Gamma2/3 pixels, JSON restoration/File reimport and held AudioEngine
+RMS. SeparateWorker10/10 and main UI Save/edit/Recall/export/import/full page
+reload/renamed File paths execute. Matching bytes share presets; different content
+with the same name remains separate. Only two destination channel FX slots save;
+master/transition/overlays/media are excluded. Metadata stores locally, with a
+dedicated export/import; general library backup is not a Video backup promise.
+
+Two reproduced stale writes (older opposite-channel Save and older Save after a
+newer same-key import) were fixed via shared per-key revisions; independent8/8
+passes while unrelated imports still allow pending Saves. Newer user edits cancel
+same-channel pending Recall. Save uses invocation snapshot and current Video File
+ownership independently from unrelated audio-track metadata. Cancel/newload/dispose
+abort old work. Genuine identity failure reports unavailable lookup but allows
+valid decoded playback with current FX and no fake digest.25 current Video Node
+scripts exit0 with their narrower declared scopes.
+
+The local incremental MIT dependency is vendored with exact provenance/advisory
+review in docs/research/VIDEO_IDENTITY_DEPENDENCY_REVIEW.md; no online service,
+main-thread whole-file fallback or arbitrary hash size cap. Large-file throughput,
+heap/storage quota, exact Serato storage destination/format and reference visual
+algorithms remain unverified. REQ515 records independent executed behavior only.
+
+Earlier dated lists remain historical: this section supersedes per-file save as a
+missing implementation, not the broader full-parity gap. Continue output/window/
+quality/Syphon/shortcut/MIDI and full library/hardware/provider/model-quality
+acceptance.110 groups/521 requirements, complete_inventory=false. Preserve all
+model/effort routing. Do not start native development or treat this checkpoint as
+approval or full1:1 closure. The original prompt below remains byte-for-byte exact.
 
 ## Original full project prompt — verbatim snapshot
 
