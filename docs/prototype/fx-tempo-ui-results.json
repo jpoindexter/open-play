@@ -1,0 +1,78 @@
+{
+  "startedAt": "2026-10-17T07:21:20.319Z",
+  "scope": "Actual main-prototype controls and reload; measured DSP repeat timing belongs to the separate browser audio harness.",
+  "steps": [
+    {
+      "name": "First actual click arms Tap while automatic timing holds",
+      "clocks": [
+        "Tap armed · automatic 124.0 BPM until a valid pair",
+        "Auto 126.0 BPM"
+      ]
+    },
+    {
+      "name": "Actual650ms pointer hold returned Auto",
+      "clocks": [
+        "Auto 124.0 BPM",
+        "Auto 126.0 BPM"
+      ]
+    },
+    {
+      "name": "Actual below-hold-threshold timed pair established manual BPM",
+      "clocks": [
+        "Manual 141.0 BPM",
+        "Auto 126.0 BPM"
+      ]
+    },
+    {
+      "name": "Manual held while deck rate changed; other bank stayed auto",
+      "clocks": [
+        "Manual 141.0 BPM",
+        "Auto 126.0 BPM"
+      ],
+      "tempo": "0.1"
+    },
+    {
+      "name": "Full page reload restored manual scalar timing, with no transient tap state",
+      "clocks": [
+        "Manual 141.0 BPM",
+        "Auto 126.0 BPM"
+      ]
+    },
+    {
+      "name": "Actual held Enter returned manual unit to Auto",
+      "clocks": [
+        "Auto 124.0 BPM",
+        "Auto 126.0 BPM"
+      ]
+    },
+    {
+      "name": "Short Enter arms Tap without automatic keydown duplicate",
+      "clocks": [
+        "Tap armed · automatic 124.0 BPM until a valid pair",
+        "Auto 126.0 BPM"
+      ]
+    },
+    {
+      "name": "Auto × follows current deck rate again",
+      "clocks": [
+        "Auto 124.2 BPM",
+        "Auto 126.0 BPM"
+      ],
+      "deckRate": "0.2"
+    }
+  ],
+  "finishedAt": "2026-10-17T07:22:10.983Z",
+  "metadataEditRetest": {
+    "at": "2026-10-17T07:35:36.676Z",
+    "before": [
+      "Auto 120.0 BPM",
+      "Auto 126.0 BPM"
+    ],
+    "after": [
+      "Auto 144.0 BPM",
+      "Auto 126.0 BPM"
+    ],
+    "path": "Actual loaded-track Edit grid dialog→144BPM→Save with FX panel already open; no FX reopen/rate edit required.",
+    "scope": "Visible live status; actual edited-BPM Echo samples separately measured by9/9 audio harness; extracted real handler/sync/engine join separately6/6."
+  }
+}

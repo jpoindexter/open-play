@@ -1,4 +1,5 @@
 import {parseBeatModifier} from './observed-fx-control-adapters.js';
+import {effectiveFXBPM} from './fx-tempo.js';
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v)),number=(v,f)=>Number.isFinite(parseFloat(v))?parseFloat(v):f;
 export const videoAudioFXPolicy=Object.freeze({
   requirement:'REQ-348',source:'docs/research/VIDEO_REMAINING_WORKFLOWS.md',referenceEquivalent:false,
@@ -21,7 +22,7 @@ export function describeAudioVideoLinks(fxState,{ready=true}={}){
     const amount=clamp(number(spec.depth,50)/100,0,1);if(amount===0)continue;
     const route=assignments[bank]||`Deck ${bank+1}`,target=route==='Deck 1'?'left':route==='Deck 2'?'right':route==='Master'?'master':null;
     if(!videoAudioFXPolicy.supported.includes(spec.name)||!target){result.unsupported.push({id:`${bank}:${slot}`,name:typeof spec.name==='string'?spec.name:'Unknown',route,reason:!target?'Video target not mapped.':'No independent semantic mapping for this audio effect.'});continue;}
-    const bpm=clamp(number(bpms[routes.indexOf(route)],number(bpms[0],120)),20,400),p=spec.params||{},[n,d]=String(spec.beat??'1/2').split('/').map(Number),beats=Number.isFinite(n)?n/(d||1):.5;
+    const bpm=effectiveFXBPM(Array.isArray(input[3])?input[3][bank]:undefined,clamp(number(bpms[routes.indexOf(route)],number(bpms[0],120)),20,400)),p=spec.params||{},[n,d]=String(spec.beat??'1/2').split('/').map(Number),beats=Number.isFinite(n)?n/(d||1):.5;
     const modifier=clamp(parseBeatModifier(p['Beat Modify'],1),.125,4),delaySeconds=clamp(60/bpm*beats*modifier,.006,96);
     result[target].push({id:`${bank}:${slot}`,name:spec.name,kind:spec.name==='Echo'?'echo':'distortion',route,target,amount,bpm,beats,beatModifier:modifier,delaySeconds,
       feedback:clamp(number(p.Feedback,80)/100,0,.9),drive:clamp(number(p.Drive,spec.name==='Echo'?0:50)/100,0,1),character:clamp(number(p.Character,50)/100,0,1),tone:clamp(number(p.Tone,0),-24,24),type:['Smooth Drive','Hard Clip','Foldback'].includes(p.Type)?p.Type:'Smooth Drive',

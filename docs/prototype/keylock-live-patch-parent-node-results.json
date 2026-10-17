@@ -1,0 +1,300 @@
+{
+  "passed": 14,
+  "failed": 0,
+  "hashes": {
+    "original": "97530b11d5bc01015af4cde40d6aa55ff10c40aa1294ca4c8c5762027d517a46",
+    "patched": "4c02e593d01dcdf014841382880b11dd7fcbaa485821e8b36b02e0fcabd2a00a"
+  },
+  "sampleRate": 48000,
+  "quantum": 128,
+  "checks": [
+    {
+      "name": "Original bytes are pinned, variant has a distinct registration and embedded WASM/Module bytes are unchanged",
+      "passed": true,
+      "evidence": {}
+    },
+    {
+      "name": "Unchanged actual WASM reproduces the multi-chunk reader RangeError instead of hiding the original regression",
+      "passed": true,
+      "evidence": {
+        "expectedOriginalFailure": {
+          "name": "RangeError",
+          "message": "offset is out of bounds",
+          "stack": "RangeError: offset is out of bounds\n    at Float32Array.set (<anonymous>)\n    at file:///Users/jasonpoindexter/Documents/GitHub/Open%20Play/prototype/vendor/signalsmith-stretch/SignalsmithStretch.mjs:320:38\n    at Array.forEach (<anonymous>)\n    at WasmProcessor.process (file:///Users/jasonpoindexter/Documents/GitHub/Open%20Play/prototype/vendor/signalsmith-stretch/SignalsmithStretch.mjs:318:15)\n    at Object.block (file:///Users/jasonpoindexter/Documents/GitHub/Open%20Play/scripts/test_keylock_live_patch.mjs:15:1152)\n    at file:///Users/jasonpoindexter/Documents/GitHub/Open%20Play/scripts/test_keylock_live_patch.mjs:27:380\n    at async check (file:///Users/jasonpoindexter/Documents/GitHub/Open%20Play/scripts/test_keylock_live_patch.mjs:14:54)\n    at async file:///Users/jasonpoindexter/Documents/GitHub/Open%20Play/scripts/test_keylock_live_patch.mjs:26:1"
+        }
+      }
+    },
+    {
+      "name": "Unchanged-versus-unchanged control records phase-sensitive output while exact actual WASM input windows agree",
+      "passed": true,
+      "evidence": {
+        "frames": 72064,
+        "maximumAbsoluteDifference": 0.2846214473247528,
+        "rmsDifference": 0.09136081411896235,
+        "referenceRMS": 0.07854841163584879,
+        "candidateRMS": 0.07936316325082379,
+        "referenceInput": {
+          "sha256": "cf4eb57d420e01560a15d661efd0302889009eade2254a2a3e2561fb8a81055f",
+          "windows": 563
+        },
+        "candidateInput": {
+          "sha256": "cf4eb57d420e01560a15d661efd0302889009eade2254a2a3e2561fb8a81055f",
+          "windows": 563
+        },
+        "sampleExactOutput": false,
+        "interpretation": "Independent unchanged WASM instances may choose different stretched phases. This control records output without treating sample-exact phase as a valid slow-rate oracle."
+      }
+    },
+    {
+      "name": "Patched irregular multi-chunk real WASM input windows equal unchanged single-buffer input at rate0.25",
+      "passed": true,
+      "evidence": {
+        "rate": 0.25,
+        "chunkCount": 23,
+        "frames": 72064,
+        "maximumAbsoluteDifference": 0.312214195728302,
+        "rmsDifference": 0.11003509309835804,
+        "referenceRMS": 0.07690851783008484,
+        "candidateRMS": 0.07891555674014514,
+        "referenceInput": {
+          "sha256": "cf4eb57d420e01560a15d661efd0302889009eade2254a2a3e2561fb8a81055f",
+          "windows": 563
+        },
+        "candidateInput": {
+          "sha256": "cf4eb57d420e01560a15d661efd0302889009eade2254a2a3e2561fb8a81055f",
+          "windows": 563
+        },
+        "outputOracle": "Finite meaningful actual output plus byte-exact actual WASM input windows; independent-instance phase-sensitive output recorded, not sample-exact acceptance"
+      }
+    },
+    {
+      "name": "Patched irregular multi-chunk real WASM input windows equal unchanged single-buffer input at rate0.8",
+      "passed": true,
+      "evidence": {
+        "rate": 0.8,
+        "chunkCount": 23,
+        "frames": 72064,
+        "maximumAbsoluteDifference": 0,
+        "rmsDifference": 0,
+        "referenceRMS": 0.08679936909470141,
+        "candidateRMS": 0.08679936909470141,
+        "referenceInput": {
+          "sha256": "0b1e532e0e0451449a6cb25c55e9e29f1506d704cfb993241e856ad92079358e",
+          "windows": 563
+        },
+        "candidateInput": {
+          "sha256": "0b1e532e0e0451449a6cb25c55e9e29f1506d704cfb993241e856ad92079358e",
+          "windows": 563
+        }
+      }
+    },
+    {
+      "name": "Patched irregular multi-chunk real WASM input windows equal unchanged single-buffer input at rate1",
+      "passed": true,
+      "evidence": {
+        "rate": 1,
+        "chunkCount": 23,
+        "frames": 72064,
+        "maximumAbsoluteDifference": 0,
+        "rmsDifference": 0,
+        "referenceRMS": 0.08609325784256584,
+        "candidateRMS": 0.08609325784256584,
+        "referenceInput": {
+          "sha256": "0f28fa6bffa1a33e62e8ef976e4c6280d030e39ee5028931a279c6d3f83ecbfb",
+          "windows": 563
+        },
+        "candidateInput": {
+          "sha256": "0f28fa6bffa1a33e62e8ef976e4c6280d030e39ee5028931a279c6d3f83ecbfb",
+          "windows": 563
+        }
+      }
+    },
+    {
+      "name": "Patched irregular multi-chunk real WASM input windows equal unchanged single-buffer input at rate1.25",
+      "passed": true,
+      "evidence": {
+        "rate": 1.25,
+        "chunkCount": 23,
+        "frames": 72064,
+        "maximumAbsoluteDifference": 0,
+        "rmsDifference": 0,
+        "referenceRMS": 0.08610763467875117,
+        "candidateRMS": 0.08610763467875117,
+        "referenceInput": {
+          "sha256": "0b5a5e681d6cc5b10e427ed14119d1c53e3f8e678372c179d4aa50070cee2a4b",
+          "windows": 563
+        },
+        "candidateInput": {
+          "sha256": "0b5a5e681d6cc5b10e427ed14119d1c53e3f8e678372c179d4aa50070cee2a4b",
+          "windows": 563
+        }
+      }
+    },
+    {
+      "name": "Patched irregular multi-chunk real WASM input windows equal unchanged single-buffer input at rate4",
+      "passed": true,
+      "evidence": {
+        "rate": 4,
+        "chunkCount": 23,
+        "frames": 72064,
+        "maximumAbsoluteDifference": 0,
+        "rmsDifference": 0,
+        "referenceRMS": 0.08339455189431853,
+        "candidateRMS": 0.08339455189431853,
+        "referenceInput": {
+          "sha256": "c7acff670795237169774f5066ce6f487e4bb8831ee215c94001ba79bb814149",
+          "windows": 563
+        },
+        "candidateInput": {
+          "sha256": "c7acff670795237169774f5066ce6f487e4bb8831ee215c94001ba79bb814149",
+          "windows": 563
+        }
+      }
+    },
+    {
+      "name": "Appending actual chunks during playback preserves sample output across the first and later chunk boundaries",
+      "passed": true,
+      "evidence": {
+        "appended": true,
+        "frames": 144000,
+        "maximumAbsoluteDifference": 0,
+        "rmsDifference": 0,
+        "referenceRMS": 0.08599855713485965,
+        "candidateRMS": 0.08599855713485965,
+        "referenceInput": {
+          "sha256": "6f371495660ca6755b941f6d3f1191b792138620b877286febae3b9de6a94d5b",
+          "windows": 1125
+        },
+        "candidateInput": {
+          "sha256": "6f371495660ca6755b941f6d3f1191b792138620b877286febae3b9de6a94d5b",
+          "windows": 1125
+        }
+      }
+    },
+    {
+      "name": "Dynamic rate, backward/forward seek and a loop preserve unchanged single-buffer PCM across chunk boundaries",
+      "passed": true,
+      "evidence": {
+        "commands": [
+          {
+            "at": 0.4,
+            "output": 0.6,
+            "rate": 1.25
+          },
+          {
+            "at": 1.1,
+            "output": 1.3,
+            "input": 2.3,
+            "rate": 0.8
+          },
+          {
+            "at": 1.9,
+            "output": 2.1,
+            "input": 0.02,
+            "rate": 1
+          },
+          {
+            "at": 2.6,
+            "output": 2.8,
+            "input": 0.4,
+            "rate": 1.25,
+            "loopStart": 0.4,
+            "loopEnd": 1.2
+          }
+        ],
+        "next": 4,
+        "frames": 177664,
+        "maximumAbsoluteDifference": 0,
+        "rmsDifference": 0,
+        "referenceRMS": 0.08594230989741028,
+        "candidateRMS": 0.08594230989741028,
+        "referenceInput": {
+          "sha256": "0460a451ff5ed2df110abc79d3ac626d7f36a4614385024171a33cd2f8590853",
+          "windows": 1388
+        },
+        "candidateInput": {
+          "sha256": "0460a451ff5ed2df110abc79d3ac626d7f36a4614385024171a33cd2f8590853",
+          "windows": 1388
+        }
+      }
+    },
+    {
+      "name": "Dropping complete old chunks preserves retained absolute input timestamps and actual audio",
+      "passed": true,
+      "evidence": {
+        "extent": {
+          "start": 2,
+          "end": 6
+        },
+        "frames": 72064,
+        "maximumAbsoluteDifference": 0,
+        "rmsDifference": 0,
+        "referenceRMS": 0.0848958836854046,
+        "candidateRMS": 0.0848958836854046,
+        "referenceInput": {
+          "sha256": "2722c096e177dbd7700089adf03e3936b1d8540bdaf1482904463666583d2c83",
+          "windows": 563
+        },
+        "candidateInput": {
+          "sha256": "2722c096e177dbd7700089adf03e3936b1d8540bdaf1482904463666583d2c83",
+          "windows": 563
+        },
+        "outputOracle": "Immediate output0 isolates retained reader timestamps from the independently tested original future-start scheduling bug."
+      }
+    },
+    {
+      "name": "A requested window entirely before retained input is safely zero padded and finite",
+      "passed": true,
+      "evidence": {
+        "extent": {
+          "start": 3,
+          "end": 6
+        },
+        "maximum": 0
+      }
+    },
+    {
+      "name": "Patched documented future output schedules retain the octave interval; unchanged source omits it",
+      "passed": true,
+      "evidence": {
+        "originalQueue": [
+          {
+            "output": 0.1,
+            "semitones": 0
+          },
+          {
+            "output": 1.5,
+            "semitones": 0
+          }
+        ],
+        "patchedQueue": [
+          {
+            "output": 0.1,
+            "semitones": 0
+          },
+          {
+            "output": 0.8,
+            "semitones": 12
+          },
+          {
+            "output": 1.5,
+            "semitones": 0
+          }
+        ],
+        "measuredOctaveWindowHz": [
+          440.38997796142405,
+          880.7197756138512
+        ]
+      }
+    },
+    {
+      "name": "Scheduling cancellation removes a future start and a later explicit start can recover actual audio",
+      "passed": true,
+      "evidence": {
+        "canceledMaximum": 0,
+        "resumedHz": 440.3893352146057
+      }
+    }
+  ],
+  "scope": "Actual unmodified WASM DSP/processor executed in the serial Node AudioWorklet host; controller wrapper patched only in a separate namespaced variant. Does not establish actual browser audio-thread scheduling/capture, production transport integration, scratch, security audit or upstream fix."
+}

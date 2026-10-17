@@ -1,4 +1,6 @@
 import { createStemPreparation } from "./stems.js";
+import { createStemWaveformModel, paintStemOverview, paintStemDetail, paintOriginalOverview, paintOriginalDetail } from "./stem-waveform.js";
+import { normalizeFXTempoSettings } from "./fx-tempo.js";
 import { createStemSlipControls } from "./stem-slip-ui.js";
 import { snapshotVideoState, restoreVideoState } from "./video-state.js";
 import { createPitchPlay, pitchRanges, parseMusicalKey, shiftedKey, keyLabel, planKeySync } from "./pitchplay.js";
@@ -33,6 +35,8 @@ try {
   saved = JSON.parse(localStorage.getItem("openplay-review-v1") || "{}");
 } catch {}
 const engine = new AudioEngine();
+const stemWaveforms = Array.from({length:4}, () => createStemWaveformModel());
+const overviewWaveViews = [];
 const state = {
   tracks: clone(demoTracks),
   crates: saved.crates || [
@@ -79,6 +83,7 @@ const state = {
       params: {},
     })),
   ),
+  fxTempo: normalizeFXTempoSettings(saved.fxTempo, 2),
   fxFavorites: [],
   fxPresets: [],
   bank: 0,
@@ -178,6 +183,7 @@ function persist() {
       JSON.stringify({
         analysisSettings: state.analysisSettings,
         video: snapshotVideoState(state.video),
+        fxTempo: normalizeFXTempoSettings(state.fxTempo, 2),
         localTags: state.localTags,
         mappings: state.mappings,
         settings: state.settings,
@@ -364,17 +370,27 @@ function renderDecks() {
         )
         .join(
           "",
-        )}<button data-action="keyDown" data-deck="${d.index}" title="Shift key down one semitone; prototype limit±24">Key −</button><button data-action="keyUp" data-deck="${d.index}" title="Shift key up one semitone; prototype limit±24">Key +</button><button data-action="keySync" data-deck="${d.index}" class="${d.keySync ? "active" : ""}">Key Sync</button><button data-action="keyReset" data-deck="${d.index}">Reset key</button><button data-action="range" data-deck="${d.index}">±${d.pitchRange}</button><button data-action="double" data-deck="${d.index}">Double</button><span class="spacer"></span><small class="muted">${d.processing ? "PROCESSING PITCH…" : d.mode === "INT" ? "LOCAL AUDIO" : "DEVICE SIMULATION"}</small></div><div class="wave-wrap" data-seek="${d.index}" tabindex="0" role="slider" aria-label="Deck ${d.index + 1} play position" aria-valuemin="0" aria-valuemax="${t?.duration || 48}" aria-valuenow="${engine.position(d)}"><canvas id="wave-${d.index}" width="900" height="100"></canvas><span class="playhead" id="head-${d.index}"></span><span class="wave-label">${t?.analyzed ? "Decoded waveform" : "Generated overview fixture"} · ${t?.bpm || "—"} BPM</span></div></article>`;
+        )}<button data-action="keyDown" data-deck="${d.index}" title="Shift key down one semitone; prototype limit±24">Key −</button><button data-action="keyUp" data-deck="${d.index}" title="Shift key up one semitone; prototype limit±24">Key +</button><button data-action="keySync" data-deck="${d.index}" class="${d.keySync ? "active" : ""}">Key Sync</button><button data-action="keyReset" data-deck="${d.index}">Reset key</button><button data-action="range" data-deck="${d.index}">±${d.pitchRange}</button><button data-action="double" data-deck="${d.index}">Double</button><span class="spacer"></span><small class="muted">${d.processing ? "PROCESSING PITCH…" : d.mode === "INT" ? "LOCAL AUDIO" : "DEVICE SIMULATION"}</small></div><div class="wave-wrap" data-seek="${d.index}" tabindex="0" role="slider" aria-label="Deck ${d.index + 1} play position" aria-valuemin="0" aria-valuemax="${t?.duration || 48}" aria-valuenow="${engine.position(d)}"><canvas id="wave-${d.index}" width="900" height="100"></canvas><span class="playhead" id="head-${d.index}"></span><span class="wave-label" data-wave-scope="${d.index}" aria-live="polite">${t?.analyzed ? "Decoded waveform" : "Generated overview fixture"} · ${t?.bpm || "—"} BPM</span></div></article>`;
     })
     .join("");
   if (state.layout === "Vertical")
     $("#decks").insertAdjacentHTML(
       "beforeend",
-      `<section class="detail-waves" aria-label="Scrolling waveforms"><canvas id="detail-wave" width="320" height="330"></canvas><span>LOCAL WAVEFORMS · ±2s</span></section>`,
+      `<section class="detail-waves" aria-label="Scrolling waveforms"><canvas id="detail-wave" width="320" height="330"></canvas><span>SOURCE WAVEFORMS · ±2s · pre-FX</span></section>`,
     );
   drawWaves();
   renderMixer();
   stemSlipControls.restoreFocus();
+}
+function waveformView(d) {
+  const stemState = engine.stemStates.get(d.index);
+  return stemWaveforms[d.index].select({
+    original: d.track && engine.buffers.get(d.track.id),
+    stems: d.track && engine.stemBuffers.get(d.track.id),
+    enabled:d.stems, stemFX:d.stemFX,
+    stemSlip:engine.voices.get(d.index)?.stemSlipTransport ? 'active' : d.stemSlip,
+    exitActive:stemState?.track === d.track && (stemState.modes.some(Boolean) || stemState.effects.some(Boolean)),
+  });
 }
 function drawWaves() {
   for (const d of state.decks.slice(0, state.deckCount)) {
@@ -384,24 +400,22 @@ function drawWaves() {
       w = c.width,
       h = c.height;
     ctx.clearRect(0, 0, w, h);
+    const view = waveformView(d);
+    overviewWaveViews[d.index] = view;
     if (!d.track) continue;
-    const buf = engine.buffers.get(d.track.id),
-      a = buf?.getChannelData(0);
-    for (let x = 0; x < w; x += 3) {
-      let amp;
-      if (a) {
-        const start = Math.floor((x / w) * a.length),
-          step = Math.max(1, Math.floor(a.length / w));
-        amp = 0;
-        for (let k = 0; k < step; k += Math.max(1, Math.floor(step / 20)))
-          amp = Math.max(amp, Math.abs(a[start + k] || 0));
-        amp = Math.min(0.95, amp * 2.5);
-      } else
-        amp =
-          0.1 +
-          0.6 * Math.abs(Math.sin(x * 0.19 + d.index) * Math.sin(x * 0.034));
-      ctx.fillStyle = x % 15 < 6 ? colors[d.index] : "#408498";
-      ctx.fillRect(x, h / 2 - (amp * h) / 2, 2, amp * h);
+    const scope = $(`[data-wave-scope="${d.index}"]`);
+    if (scope) scope.textContent = `${view.label} · ${d.track.bpm || "—"} BPM`;
+    c.setAttribute('aria-label', `Deck ${d.index+1}: ${view.label}`);
+    c.title = view.label;
+    const buf = engine.buffers.get(d.track.id);
+    if (view.kind === 'stems') {
+      paintStemOverview(ctx, view.profile, {width:w,height:h,color:colors[d.index]});
+    } else if (view.kind !== 'pending' && buf) {
+      paintOriginalOverview(ctx, buf, {width:w,height:h,color:colors[d.index]});
+    } else if (view.kind !== 'pending') for (let x=0;x<w;x+=3) {
+      const amp=.1+.6*Math.abs(Math.sin(x*.19+d.index)*Math.sin(x*.034));
+      ctx.fillStyle=x%15<6?colors[d.index]:"#408498";
+      ctx.fillRect(x,h/2-amp*h/2,2,amp*h);
     }
     const beat = 60 / (d.track.bpm || 120);
     for (let p = d.track.grid || 0; p < d.track.duration; p += beat) {
@@ -441,25 +455,18 @@ function drawDetailWave() {
       mid = x0 + col / 2,
       p = engine.position(d),
       t = d.track,
-      buf = t && engine.buffers.get(t.id),
-      data = buf?.getChannelData(0);
+      buf = t && engine.buffers.get(t.id);
     c.fillStyle = "#070a0c";
     c.fillRect(x0, 0, col - 1, h);
     if (!t) continue;
     const bpm = t.bpm || 120,
       beat = 60 / bpm,
       offset = t.grid || 0;
-    for (let y = 0; y < h; y += 2) {
-      const sec = p + (y / h - 0.5) * 4;
-      let amp = 0;
-      if (data && sec >= 0 && sec < t.duration) {
-        const start = Math.floor(sec * buf.sampleRate);
-        for (let j = 0; j < 100; j += 5)
-          amp = Math.max(amp, Math.abs(data[start + j] || 0));
-      }
-      amp = Math.min(1, amp * 2);
-      c.fillStyle = y % 12 < 4 ? colors[d.index] : "#3486a8";
-      c.fillRect(mid - (amp * (col - 28)) / 2, y, amp * (col - 28), 1.6);
+    const view = waveformView(d);
+    if (view.kind === 'stems') {
+      paintStemDetail(c, view.profile, {x:x0,width:col,height:h,position:p,color:colors[d.index]});
+    } else if (view.kind !== 'pending' && buf) {
+      paintOriginalDetail(c,buf,{x:x0,width:col,height:h,position:p,color:colors[d.index]});
     }
     const first = Math.ceil((p - 2 - offset) / beat);
     for (let b = first; b < first + 4 / beat + 1; b++) {
@@ -557,6 +564,7 @@ async function load(index, id = state.selected, options = {}) {
     state.fx,
     state.fxRoutes || [],
     state.decks.map((deck) => (deck.track?.bpm || 120) * deck.rate),
+    state.fxTempo,
   );
   state.focus = index;
   renderDecks();
@@ -1575,6 +1583,9 @@ function tick() {
   $("#master-meter").value = engine.meter();
   $("#audio-status").textContent =
     `${state.decks.filter((d) => d.playing).length} decks playing · ${engine.ctx?.sampleRate || "—"} Hz browser · hardware simulated`;
+  engine.updateFXBPMs(state.decks.map(deck => (deck.track?.bpm || 120)*deck.rate));
+  // Selection checks are O(4); only selection/async completion redraws overviews.
+  if (state.decks.slice(0,state.deckCount).some(d => waveformView(d) !== overviewWaveViews[d.index])) drawWaves();
   drawDetailWave();
   flipAutomation.tick();
   panels.tick();
@@ -1590,6 +1601,7 @@ requestAnimationFrame(tick);
 window.addEventListener("beforeunload", () => {
   if (!resetting) persist();
   engine.silence();
+  stemWaveforms.forEach(model => model.dispose());
 });
 // Exposed only for reproducible review diagnostics; acceptance tests exercise visible controls.
 window.openPlay = {

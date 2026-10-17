@@ -36,3 +36,6 @@ Raw binaries, extracted slices, disassembly, private library data, screenshots a
 
 - [Full-scope contract](docs/research/FULL_SCOPE_CONTRACT.md)
 - [Feature coverage accountability](docs/research/FEATURE_COVERAGE.md)
+
+
+- [FX Tap BPM and stem-responsive waveform evidence](docs/prototype/FX_TEMPO_WAVEFORM_REVIEW.md): actual timing/audio/source-display behavior; full reference parity remains open.

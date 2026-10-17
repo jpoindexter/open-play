@@ -128,3 +128,6 @@ Use Saved video FX to export/import metadata separately from the library backup.
 Media bytes remain temporary. Read [the executed review](../docs/prototype/VIDEO_FILE_FX_REVIEW.md)
 and run [the actual15-check File/Worker/GPU harness](video-fx-presets-harness.html).
 Exact Serato metadata format/owner and reference visual behavior remain unverified.
+
+
+- [FX Tap BPM and stem-responsive waveform evidence](../docs/prototype/FX_TEMPO_WAVEFORM_REVIEW.md): actual timing/audio/source-display behavior; full reference parity remains open.

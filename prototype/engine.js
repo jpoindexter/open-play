@@ -6,6 +6,7 @@ import { createStemExitFX } from "./stem-exit-fx.js";
 import { prepareStemSlip, createStemSlipTransport } from "./stem-slip.js";
 import { createVideoAnalysis } from "./video-analysis.js";
 import { describeAudioVideoLinks } from "./video-audio-fx-state.js";
+import { effectiveFXBPM, normalizeFXTempoSettings } from "./fx-tempo.js";
 export class AudioEngine {
   constructor() {
     this.ctx = null;
@@ -534,8 +535,18 @@ export class AudioEngine {
     n.channelEffect.output.connect(n.gain);
   }
 
-  configureFX(banks, routes = [], bpms = [120, 120, 120, 120]) {
-    const state = [banks, routes, bpms];
+  updateFXBPMs(bpms) {
+    if (!Array.isArray(bpms) || bpms.some(bpm => typeof bpm !== 'number' || !Number.isFinite(bpm) || bpm <= 0))
+      throw new TypeError('FX track tempos must be finite positive numbers.');
+    if (!this.fxState) return false;
+    const prior = this.fxState[2];
+    if (prior.length === bpms.length && prior.every((bpm, index) => bpm === bpms[index])) return false;
+    this.configureFX(this.fxState[0], this.fxState[1], [...bpms], this.fxState[3]);
+    return true;
+  }
+  configureFX(banks, routes = [], bpms = [120, 120, 120, 120], tempo = []) {
+    const settings = normalizeFXTempoSettings(tempo, banks.length);
+    const state = [banks, routes, bpms, settings];
     this.fxState = state;
     if (!this.ctx) return;
     if (!this.effectsPrepared) {
@@ -554,7 +565,7 @@ export class AudioEngine {
       for (const slot of this.fxSlots)
         slot.update(
           banks[slot.bank][slot.index],
-          bpms[slot.route] || bpms[0] || 120,
+          effectiveFXBPM(settings[slot.bank], bpms[slot.route] || bpms[0] || 120),
         );
       return;
     }
@@ -607,7 +618,7 @@ export class AudioEngine {
               effect?.dispose();
             },
           };
-          slot.update(spec, bpms[i] || bpms[0] || 120);
+          slot.update(spec, effectiveFXBPM(settings[b], bpms[i] || bpms[0] || 120));
           tail.connect(entry);
           tail = exit;
           this.fxChains.push(slot);

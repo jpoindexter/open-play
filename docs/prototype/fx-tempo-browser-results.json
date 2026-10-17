@@ -1,0 +1,929 @@
+{
+  "startedAt": "2026-10-17T07:28:13.754Z",
+  "checks": [
+    {
+      "name": "Actual engine/worklets prepare two independent Echo units and a silent PCM measurement sink",
+      "passed": true,
+      "evidence": {
+        "sampleRate": 48000,
+        "slots": 2,
+        "settings": [
+          {
+            "mode": "auto",
+            "bpm": 120
+          },
+          {
+            "mode": "auto",
+            "bpm": 120
+          }
+        ],
+        "routes": [
+          "Deck 1",
+          "Deck 2"
+        ],
+        "speakerRoute": "Original analyser disconnected; measurement output is silent and its destination gain is0"
+      }
+    },
+    {
+      "name": "Auto120 produces actual Echo repeats at0.5seconds",
+      "passed": true,
+      "evidence": {
+        "label": "auto-120",
+        "bank": 0,
+        "bpm": 120,
+        "expectedInterval": 0.5,
+        "sampleRate": 48000,
+        "captureStartFrame": 5888,
+        "sourceStart": 0.27266666666666667,
+        "analysis": {
+          "peak": 0.12279876321554184,
+          "threshold": 0.0036839628964662552,
+          "events": [
+            {
+              "sample": 31202,
+              "time": 0.6500416666666666,
+              "amplitude": 0.12279876321554184
+            },
+            {
+              "sample": 55203,
+              "time": 1.1500625,
+              "amplitude": 0.03746097534894943
+            },
+            {
+              "sample": 79205,
+              "time": 1.6501041666666667,
+              "amplitude": 0.013352611102163792
+            }
+          ]
+        },
+        "intervals": [
+          0.5000208333333334,
+          0.5000416666666667
+        ],
+        "toleranceSeconds": 0.0005,
+        "semanticLinks": {
+          "available": true,
+          "left": [
+            {
+              "id": "0:0",
+              "name": "Echo",
+              "kind": "echo",
+              "route": "Deck 1",
+              "target": "left",
+              "amount": 1,
+              "bpm": 120,
+              "beats": 1,
+              "beatModifier": 1,
+              "delaySeconds": 0.5,
+              "feedback": 0.4,
+              "drive": 0,
+              "character": 0.5,
+              "tone": 0,
+              "type": "Smooth Drive",
+              "parameterStatus": "Original visual mapping from current independent audio controls; vendor response unknown."
+            }
+          ],
+          "right": [
+            {
+              "id": "1:0",
+              "name": "Echo",
+              "kind": "echo",
+              "route": "Deck 2",
+              "target": "right",
+              "amount": 1,
+              "bpm": 180,
+              "beats": 1,
+              "beatModifier": 1,
+              "delaySeconds": 0.3333333333333333,
+              "feedback": 0.4,
+              "drive": 0,
+              "character": 0.5,
+              "tone": 0,
+              "type": "Smooth Drive",
+              "parameterStatus": "Original visual mapping from current independent audio controls; vendor response unknown."
+            }
+          ],
+          "master": [],
+          "unsupported": [],
+          "policy": {
+            "requirement": "REQ-348",
+            "source": "docs/research/VIDEO_REMAINING_WORKFLOWS.md",
+            "referenceEquivalent": false,
+            "supported": [
+              "Echo",
+              "Distortion"
+            ],
+            "mapping": "Original semantic links for exact DJ-FX bank names Echo/Distortion only. No FFT trigger, no aliases/families/31 hidden definitions inferred. Deck1→left,Deck2→right,Master→master once; other assignments are explicitly unsupported.",
+            "order": "Dedicated channel links before ordinary channel slots/overlays; dedicated master links after transition and before master overlays/slots. Independent order, not recovered vendor routing.",
+            "echo": "Three shifted real upstream-frame taps at1T,2T,3T; T=60/BPM*beat*Beat Modify using actual configured audio timing. Depth is wet opacity; Feedback is finite tap decay, not recursive video feedback.16 timestamped frames at up to320x180. Missing past timestamps contribute nothing.",
+            "distortion": "Original static row warp plus Smooth Drive/Hard Clip/Foldback RGB transform; Drive/Character/Tone/depth have declared independent visual mappings.",
+            "lifecycle": "Opt-in off, disabled/zero effect, removal/reassignment/upstream topology changes, source asset/generation changes, backward render time, transport generation/direction/seek discontinuity, pause/stop clear Echo history immediately: no visual tail after bypass. Silence alone never gates a semantic link. Resume captures new history. Timing/amount edits retain real samples; insufficient older history is not fabricated.",
+            "reducedMotion": "Suppress all Echo trails and geometric Distortion warp; retain static distortion colour and observable semantic metadata. No generated flash or zoom.",
+            "limitations": "No exact Serato transfer/parameters/order/tail claim; channel knob FX, stems, Deck3/4 and Sampler links are not mapped. Audio graph/output is never mutated by this bridge."
+          }
+        },
+        "settings": [
+          {
+            "mode": "auto",
+            "bpm": 120
+          },
+          {
+            "mode": "auto",
+            "bpm": 120
+          }
+        ],
+        "trackBPMs": [
+          120,
+          180
+        ],
+        "download": {
+          "name": "fx-tempo-auto-120.wav",
+          "bytes": 206444
+        }
+      }
+    },
+    {
+      "name": "Two deterministic taps establish manual100 and actual Echo repeats at0.6seconds",
+      "passed": true,
+      "evidence": {
+        "armed": {
+          "setting": {
+            "mode": "auto",
+            "bpm": 120
+          },
+          "armed": true,
+          "taps": 1,
+          "phase": "armed",
+          "ignored": null
+        },
+        "manual": {
+          "setting": {
+            "mode": "manual",
+            "bpm": 100
+          },
+          "armed": true,
+          "taps": 2,
+          "phase": "manual",
+          "ignored": null
+        },
+        "label": "manual-100",
+        "bank": 0,
+        "bpm": 100,
+        "expectedInterval": 0.6,
+        "sampleRate": 48000,
+        "captureStartFrame": 175104,
+        "sourceStart": 3.798,
+        "analysis": {
+          "peak": 0.12279876321554184,
+          "threshold": 0.0036839628964662552,
+          "events": [
+            {
+              "sample": 36002,
+              "time": 0.7500416666666667,
+              "amplitude": 0.12279876321554184
+            },
+            {
+              "sample": 64803,
+              "time": 1.3500625,
+              "amplitude": 0.03746097534894943
+            },
+            {
+              "sample": 93605,
+              "time": 1.9501041666666667,
+              "amplitude": 0.013352611102163792
+            }
+          ]
+        },
+        "intervals": [
+          0.6000208333333332,
+          0.6000416666666668
+        ],
+        "toleranceSeconds": 0.0005,
+        "semanticLinks": {
+          "available": true,
+          "left": [
+            {
+              "id": "0:0",
+              "name": "Echo",
+              "kind": "echo",
+              "route": "Deck 1",
+              "target": "left",
+              "amount": 1,
+              "bpm": 100,
+              "beats": 1,
+              "beatModifier": 1,
+              "delaySeconds": 0.6,
+              "feedback": 0.4,
+              "drive": 0,
+              "character": 0.5,
+              "tone": 0,
+              "type": "Smooth Drive",
+              "parameterStatus": "Original visual mapping from current independent audio controls; vendor response unknown."
+            }
+          ],
+          "right": [
+            {
+              "id": "1:0",
+              "name": "Echo",
+              "kind": "echo",
+              "route": "Deck 2",
+              "target": "right",
+              "amount": 1,
+              "bpm": 180,
+              "beats": 1,
+              "beatModifier": 1,
+              "delaySeconds": 0.3333333333333333,
+              "feedback": 0.4,
+              "drive": 0,
+              "character": 0.5,
+              "tone": 0,
+              "type": "Smooth Drive",
+              "parameterStatus": "Original visual mapping from current independent audio controls; vendor response unknown."
+            }
+          ],
+          "master": [],
+          "unsupported": [],
+          "policy": {
+            "requirement": "REQ-348",
+            "source": "docs/research/VIDEO_REMAINING_WORKFLOWS.md",
+            "referenceEquivalent": false,
+            "supported": [
+              "Echo",
+              "Distortion"
+            ],
+            "mapping": "Original semantic links for exact DJ-FX bank names Echo/Distortion only. No FFT trigger, no aliases/families/31 hidden definitions inferred. Deck1→left,Deck2→right,Master→master once; other assignments are explicitly unsupported.",
+            "order": "Dedicated channel links before ordinary channel slots/overlays; dedicated master links after transition and before master overlays/slots. Independent order, not recovered vendor routing.",
+            "echo": "Three shifted real upstream-frame taps at1T,2T,3T; T=60/BPM*beat*Beat Modify using actual configured audio timing. Depth is wet opacity; Feedback is finite tap decay, not recursive video feedback.16 timestamped frames at up to320x180. Missing past timestamps contribute nothing.",
+            "distortion": "Original static row warp plus Smooth Drive/Hard Clip/Foldback RGB transform; Drive/Character/Tone/depth have declared independent visual mappings.",
+            "lifecycle": "Opt-in off, disabled/zero effect, removal/reassignment/upstream topology changes, source asset/generation changes, backward render time, transport generation/direction/seek discontinuity, pause/stop clear Echo history immediately: no visual tail after bypass. Silence alone never gates a semantic link. Resume captures new history. Timing/amount edits retain real samples; insufficient older history is not fabricated.",
+            "reducedMotion": "Suppress all Echo trails and geometric Distortion warp; retain static distortion colour and observable semantic metadata. No generated flash or zoom.",
+            "limitations": "No exact Serato transfer/parameters/order/tail claim; channel knob FX, stems, Deck3/4 and Sampler links are not mapped. Audio graph/output is never mutated by this bridge."
+          }
+        },
+        "settings": [
+          {
+            "mode": "manual",
+            "bpm": 100
+          },
+          {
+            "mode": "auto",
+            "bpm": 120
+          }
+        ],
+        "trackBPMs": [
+          120,
+          180
+        ],
+        "download": {
+          "name": "fx-tempo-manual-100.wav",
+          "bytes": 240044
+        }
+      }
+    },
+    {
+      "name": "Half/double/bar tapping retains manual range without changing the independent other unit",
+      "passed": true,
+      "evidence": {
+        "clock": {
+          "setting": {
+            "mode": "manual",
+            "bpm": 100
+          },
+          "armed": true,
+          "taps": 6,
+          "phase": "manual",
+          "ignored": null,
+          "anchorMilliseconds": 600,
+          "intervals": [
+            600,
+            600,
+            600,
+            600,
+            600
+          ]
+        },
+        "otherUnit": {
+          "mode": "auto",
+          "bpm": 120
+        },
+        "semanticLinks": {
+          "available": true,
+          "left": [
+            {
+              "id": "0:0",
+              "name": "Echo",
+              "kind": "echo",
+              "route": "Deck 1",
+              "target": "left",
+              "amount": 1,
+              "bpm": 100,
+              "beats": 1,
+              "beatModifier": 1,
+              "delaySeconds": 0.6,
+              "feedback": 0.4,
+              "drive": 0,
+              "character": 0.5,
+              "tone": 0,
+              "type": "Smooth Drive",
+              "parameterStatus": "Original visual mapping from current independent audio controls; vendor response unknown."
+            }
+          ],
+          "right": [
+            {
+              "id": "1:0",
+              "name": "Echo",
+              "kind": "echo",
+              "route": "Deck 2",
+              "target": "right",
+              "amount": 1,
+              "bpm": 180,
+              "beats": 1,
+              "beatModifier": 1,
+              "delaySeconds": 0.3333333333333333,
+              "feedback": 0.4,
+              "drive": 0,
+              "character": 0.5,
+              "tone": 0,
+              "type": "Smooth Drive",
+              "parameterStatus": "Original visual mapping from current independent audio controls; vendor response unknown."
+            }
+          ],
+          "master": [],
+          "unsupported": [],
+          "policy": {
+            "requirement": "REQ-348",
+            "source": "docs/research/VIDEO_REMAINING_WORKFLOWS.md",
+            "referenceEquivalent": false,
+            "supported": [
+              "Echo",
+              "Distortion"
+            ],
+            "mapping": "Original semantic links for exact DJ-FX bank names Echo/Distortion only. No FFT trigger, no aliases/families/31 hidden definitions inferred. Deck1→left,Deck2→right,Master→master once; other assignments are explicitly unsupported.",
+            "order": "Dedicated channel links before ordinary channel slots/overlays; dedicated master links after transition and before master overlays/slots. Independent order, not recovered vendor routing.",
+            "echo": "Three shifted real upstream-frame taps at1T,2T,3T; T=60/BPM*beat*Beat Modify using actual configured audio timing. Depth is wet opacity; Feedback is finite tap decay, not recursive video feedback.16 timestamped frames at up to320x180. Missing past timestamps contribute nothing.",
+            "distortion": "Original static row warp plus Smooth Drive/Hard Clip/Foldback RGB transform; Drive/Character/Tone/depth have declared independent visual mappings.",
+            "lifecycle": "Opt-in off, disabled/zero effect, removal/reassignment/upstream topology changes, source asset/generation changes, backward render time, transport generation/direction/seek discontinuity, pause/stop clear Echo history immediately: no visual tail after bypass. Silence alone never gates a semantic link. Resume captures new history. Timing/amount edits retain real samples; insufficient older history is not fabricated.",
+            "reducedMotion": "Suppress all Echo trails and geometric Distortion warp; retain static distortion colour and observable semantic metadata. No generated flash or zoom.",
+            "limitations": "No exact Serato transfer/parameters/order/tail claim; channel knob FX, stems, Deck3/4 and Sampler links are not mapped. Audio graph/output is never mutated by this bridge."
+          }
+        }
+      }
+    },
+    {
+      "name": "Actual engine.setRate changes automatic track tempo to144 while manual Echo stays100",
+      "passed": true,
+      "evidence": {
+        "actualDeckRate": 1.2,
+        "trackBPM": 120,
+        "label": "manual-held-track-144",
+        "bank": 0,
+        "bpm": 100,
+        "expectedInterval": 0.6,
+        "sampleRate": 48000,
+        "captureStartFrame": 356352,
+        "sourceStart": 7.574000000000001,
+        "analysis": {
+          "peak": 0.12279875576496124,
+          "threshold": 0.003683962672948837,
+          "events": [
+            {
+              "sample": 36002,
+              "time": 0.7500416666666667,
+              "amplitude": 0.12279875576496124
+            },
+            {
+              "sample": 64803,
+              "time": 1.3500625,
+              "amplitude": 0.03746097534894943
+            },
+            {
+              "sample": 93605,
+              "time": 1.9501041666666667,
+              "amplitude": 0.013352611102163792
+            }
+          ]
+        },
+        "intervals": [
+          0.6000208333333332,
+          0.6000416666666668
+        ],
+        "toleranceSeconds": 0.0005,
+        "semanticLinks": {
+          "available": true,
+          "left": [
+            {
+              "id": "0:0",
+              "name": "Echo",
+              "kind": "echo",
+              "route": "Deck 1",
+              "target": "left",
+              "amount": 1,
+              "bpm": 100,
+              "beats": 1,
+              "beatModifier": 1,
+              "delaySeconds": 0.6,
+              "feedback": 0.4,
+              "drive": 0,
+              "character": 0.5,
+              "tone": 0,
+              "type": "Smooth Drive",
+              "parameterStatus": "Original visual mapping from current independent audio controls; vendor response unknown."
+            }
+          ],
+          "right": [
+            {
+              "id": "1:0",
+              "name": "Echo",
+              "kind": "echo",
+              "route": "Deck 2",
+              "target": "right",
+              "amount": 1,
+              "bpm": 180,
+              "beats": 1,
+              "beatModifier": 1,
+              "delaySeconds": 0.3333333333333333,
+              "feedback": 0.4,
+              "drive": 0,
+              "character": 0.5,
+              "tone": 0,
+              "type": "Smooth Drive",
+              "parameterStatus": "Original visual mapping from current independent audio controls; vendor response unknown."
+            }
+          ],
+          "master": [],
+          "unsupported": [],
+          "policy": {
+            "requirement": "REQ-348",
+            "source": "docs/research/VIDEO_REMAINING_WORKFLOWS.md",
+            "referenceEquivalent": false,
+            "supported": [
+              "Echo",
+              "Distortion"
+            ],
+            "mapping": "Original semantic links for exact DJ-FX bank names Echo/Distortion only. No FFT trigger, no aliases/families/31 hidden definitions inferred. Deck1→left,Deck2→right,Master→master once; other assignments are explicitly unsupported.",
+            "order": "Dedicated channel links before ordinary channel slots/overlays; dedicated master links after transition and before master overlays/slots. Independent order, not recovered vendor routing.",
+            "echo": "Three shifted real upstream-frame taps at1T,2T,3T; T=60/BPM*beat*Beat Modify using actual configured audio timing. Depth is wet opacity; Feedback is finite tap decay, not recursive video feedback.16 timestamped frames at up to320x180. Missing past timestamps contribute nothing.",
+            "distortion": "Original static row warp plus Smooth Drive/Hard Clip/Foldback RGB transform; Drive/Character/Tone/depth have declared independent visual mappings.",
+            "lifecycle": "Opt-in off, disabled/zero effect, removal/reassignment/upstream topology changes, source asset/generation changes, backward render time, transport generation/direction/seek discontinuity, pause/stop clear Echo history immediately: no visual tail after bypass. Silence alone never gates a semantic link. Resume captures new history. Timing/amount edits retain real samples; insufficient older history is not fabricated.",
+            "reducedMotion": "Suppress all Echo trails and geometric Distortion warp; retain static distortion colour and observable semantic metadata. No generated flash or zoom.",
+            "limitations": "No exact Serato transfer/parameters/order/tail claim; channel knob FX, stems, Deck3/4 and Sampler links are not mapped. Audio graph/output is never mutated by this bridge."
+          }
+        },
+        "settings": [
+          {
+            "mode": "manual",
+            "bpm": 100
+          },
+          {
+            "mode": "auto",
+            "bpm": 120
+          }
+        ],
+        "trackBPMs": [
+          144,
+          180
+        ],
+        "download": {
+          "name": "fx-tempo-manual-held-track-144.wav",
+          "bytes": 240044
+        }
+      }
+    },
+    {
+      "name": "Return-to-Auto restores current144BPM and actual Echo repeats at5/12seconds",
+      "passed": true,
+      "evidence": {
+        "label": "restored-auto-144",
+        "bank": 0,
+        "bpm": 144,
+        "expectedInterval": 0.4166666666666667,
+        "sampleRate": 48000,
+        "captureStartFrame": 537344,
+        "sourceStart": 11.344666666666667,
+        "analysis": {
+          "peak": 0.12279876321554184,
+          "threshold": 0.0036839628964662552,
+          "events": [
+            {
+              "sample": 27202,
+              "time": 0.5667083333333334,
+              "amplitude": 0.12279876321554184
+            },
+            {
+              "sample": 47203,
+              "time": 0.9833958333333334,
+              "amplitude": 0.03746097534894943
+            },
+            {
+              "sample": 67205,
+              "time": 1.4001041666666667,
+              "amplitude": 0.013352611102163792
+            },
+            {
+              "sample": 87207,
+              "time": 1.8168125,
+              "amplitude": 0.00485562440007925
+            }
+          ]
+        },
+        "intervals": [
+          0.4166875,
+          0.41670833333333335
+        ],
+        "toleranceSeconds": 0.0005,
+        "semanticLinks": {
+          "available": true,
+          "left": [
+            {
+              "id": "0:0",
+              "name": "Echo",
+              "kind": "echo",
+              "route": "Deck 1",
+              "target": "left",
+              "amount": 1,
+              "bpm": 144,
+              "beats": 1,
+              "beatModifier": 1,
+              "delaySeconds": 0.4166666666666667,
+              "feedback": 0.4,
+              "drive": 0,
+              "character": 0.5,
+              "tone": 0,
+              "type": "Smooth Drive",
+              "parameterStatus": "Original visual mapping from current independent audio controls; vendor response unknown."
+            }
+          ],
+          "right": [
+            {
+              "id": "1:0",
+              "name": "Echo",
+              "kind": "echo",
+              "route": "Deck 2",
+              "target": "right",
+              "amount": 1,
+              "bpm": 180,
+              "beats": 1,
+              "beatModifier": 1,
+              "delaySeconds": 0.3333333333333333,
+              "feedback": 0.4,
+              "drive": 0,
+              "character": 0.5,
+              "tone": 0,
+              "type": "Smooth Drive",
+              "parameterStatus": "Original visual mapping from current independent audio controls; vendor response unknown."
+            }
+          ],
+          "master": [],
+          "unsupported": [],
+          "policy": {
+            "requirement": "REQ-348",
+            "source": "docs/research/VIDEO_REMAINING_WORKFLOWS.md",
+            "referenceEquivalent": false,
+            "supported": [
+              "Echo",
+              "Distortion"
+            ],
+            "mapping": "Original semantic links for exact DJ-FX bank names Echo/Distortion only. No FFT trigger, no aliases/families/31 hidden definitions inferred. Deck1→left,Deck2→right,Master→master once; other assignments are explicitly unsupported.",
+            "order": "Dedicated channel links before ordinary channel slots/overlays; dedicated master links after transition and before master overlays/slots. Independent order, not recovered vendor routing.",
+            "echo": "Three shifted real upstream-frame taps at1T,2T,3T; T=60/BPM*beat*Beat Modify using actual configured audio timing. Depth is wet opacity; Feedback is finite tap decay, not recursive video feedback.16 timestamped frames at up to320x180. Missing past timestamps contribute nothing.",
+            "distortion": "Original static row warp plus Smooth Drive/Hard Clip/Foldback RGB transform; Drive/Character/Tone/depth have declared independent visual mappings.",
+            "lifecycle": "Opt-in off, disabled/zero effect, removal/reassignment/upstream topology changes, source asset/generation changes, backward render time, transport generation/direction/seek discontinuity, pause/stop clear Echo history immediately: no visual tail after bypass. Silence alone never gates a semantic link. Resume captures new history. Timing/amount edits retain real samples; insufficient older history is not fabricated.",
+            "reducedMotion": "Suppress all Echo trails and geometric Distortion warp; retain static distortion colour and observable semantic metadata. No generated flash or zoom.",
+            "limitations": "No exact Serato transfer/parameters/order/tail claim; channel knob FX, stems, Deck3/4 and Sampler links are not mapped. Audio graph/output is never mutated by this bridge."
+          }
+        },
+        "settings": [
+          {
+            "mode": "auto",
+            "bpm": 120
+          },
+          {
+            "mode": "auto",
+            "bpm": 120
+          }
+        ],
+        "trackBPMs": [
+          144,
+          180
+        ],
+        "download": {
+          "name": "fx-tempo-restored-auto-144.wav",
+          "bytes": 178444
+        }
+      }
+    },
+    {
+      "name": "Changing actual track BPM metadata refreshes the Auto clock and measures180BPM Echo without changing unit ownership",
+      "passed": true,
+      "evidence": {
+        "trackBPM": 150,
+        "actualDeckRate": 1.2,
+        "label": "auto-new-track-metadata-180",
+        "bank": 0,
+        "bpm": 180,
+        "expectedInterval": 0.3333333333333333,
+        "sampleRate": 48000,
+        "captureStartFrame": 687872,
+        "sourceStart": 14.486,
+        "analysis": {
+          "peak": 0.12279876321554184,
+          "threshold": 0.0036839628964662552,
+          "events": [
+            {
+              "sample": 23458,
+              "time": 0.48870833333333336,
+              "amplitude": 0.12279876321554184
+            },
+            {
+              "sample": 39459,
+              "time": 0.8220625,
+              "amplitude": 0.03746097534894943
+            },
+            {
+              "sample": 55461,
+              "time": 1.1554375,
+              "amplitude": 0.013352611102163792
+            },
+            {
+              "sample": 71463,
+              "time": 1.4888125,
+              "amplitude": 0.00485562440007925
+            }
+          ]
+        },
+        "intervals": [
+          0.3333541666666667,
+          0.33337499999999987
+        ],
+        "toleranceSeconds": 0.0005,
+        "semanticLinks": {
+          "available": true,
+          "left": [
+            {
+              "id": "0:0",
+              "name": "Echo",
+              "kind": "echo",
+              "route": "Deck 1",
+              "target": "left",
+              "amount": 1,
+              "bpm": 180,
+              "beats": 1,
+              "beatModifier": 1,
+              "delaySeconds": 0.3333333333333333,
+              "feedback": 0.4,
+              "drive": 0,
+              "character": 0.5,
+              "tone": 0,
+              "type": "Smooth Drive",
+              "parameterStatus": "Original visual mapping from current independent audio controls; vendor response unknown."
+            }
+          ],
+          "right": [
+            {
+              "id": "1:0",
+              "name": "Echo",
+              "kind": "echo",
+              "route": "Deck 2",
+              "target": "right",
+              "amount": 1,
+              "bpm": 180,
+              "beats": 1,
+              "beatModifier": 1,
+              "delaySeconds": 0.3333333333333333,
+              "feedback": 0.4,
+              "drive": 0,
+              "character": 0.5,
+              "tone": 0,
+              "type": "Smooth Drive",
+              "parameterStatus": "Original visual mapping from current independent audio controls; vendor response unknown."
+            }
+          ],
+          "master": [],
+          "unsupported": [],
+          "policy": {
+            "requirement": "REQ-348",
+            "source": "docs/research/VIDEO_REMAINING_WORKFLOWS.md",
+            "referenceEquivalent": false,
+            "supported": [
+              "Echo",
+              "Distortion"
+            ],
+            "mapping": "Original semantic links for exact DJ-FX bank names Echo/Distortion only. No FFT trigger, no aliases/families/31 hidden definitions inferred. Deck1→left,Deck2→right,Master→master once; other assignments are explicitly unsupported.",
+            "order": "Dedicated channel links before ordinary channel slots/overlays; dedicated master links after transition and before master overlays/slots. Independent order, not recovered vendor routing.",
+            "echo": "Three shifted real upstream-frame taps at1T,2T,3T; T=60/BPM*beat*Beat Modify using actual configured audio timing. Depth is wet opacity; Feedback is finite tap decay, not recursive video feedback.16 timestamped frames at up to320x180. Missing past timestamps contribute nothing.",
+            "distortion": "Original static row warp plus Smooth Drive/Hard Clip/Foldback RGB transform; Drive/Character/Tone/depth have declared independent visual mappings.",
+            "lifecycle": "Opt-in off, disabled/zero effect, removal/reassignment/upstream topology changes, source asset/generation changes, backward render time, transport generation/direction/seek discontinuity, pause/stop clear Echo history immediately: no visual tail after bypass. Silence alone never gates a semantic link. Resume captures new history. Timing/amount edits retain real samples; insufficient older history is not fabricated.",
+            "reducedMotion": "Suppress all Echo trails and geometric Distortion warp; retain static distortion colour and observable semantic metadata. No generated flash or zoom.",
+            "limitations": "No exact Serato transfer/parameters/order/tail claim; channel knob FX, stems, Deck3/4 and Sampler links are not mapped. Audio graph/output is never mutated by this bridge."
+          }
+        },
+        "settings": [
+          {
+            "mode": "auto",
+            "bpm": 120
+          },
+          {
+            "mode": "auto",
+            "bpm": 120
+          }
+        ],
+        "trackBPMs": [
+          180,
+          180
+        ],
+        "download": {
+          "name": "fx-tempo-auto-new-track-metadata-180.wav",
+          "bytes": 150444
+        }
+      }
+    },
+    {
+      "name": "Other unit still measures180BPM independently after unit1 manual/auto transitions",
+      "passed": true,
+      "evidence": {
+        "label": "independent-unit2-180",
+        "bank": 1,
+        "bpm": 180,
+        "expectedInterval": 0.3333333333333333,
+        "sampleRate": 48000,
+        "captureStartFrame": 824576,
+        "sourceStart": 17.328666666666667,
+        "analysis": {
+          "peak": 0.12279876321554184,
+          "threshold": 0.0036839628964662552,
+          "events": [
+            {
+              "sample": 23202,
+              "time": 0.483375,
+              "amplitude": 0.12279876321554184
+            },
+            {
+              "sample": 39203,
+              "time": 0.8167291666666666,
+              "amplitude": 0.03746097534894943
+            },
+            {
+              "sample": 55205,
+              "time": 1.1501041666666667,
+              "amplitude": 0.013352611102163792
+            },
+            {
+              "sample": 71207,
+              "time": 1.4834791666666667,
+              "amplitude": 0.00485562440007925
+            }
+          ]
+        },
+        "intervals": [
+          0.3333541666666666,
+          0.3333750000000001
+        ],
+        "toleranceSeconds": 0.0005,
+        "semanticLinks": {
+          "available": true,
+          "left": [
+            {
+              "id": "0:0",
+              "name": "Echo",
+              "kind": "echo",
+              "route": "Deck 1",
+              "target": "left",
+              "amount": 1,
+              "bpm": 180,
+              "beats": 1,
+              "beatModifier": 1,
+              "delaySeconds": 0.3333333333333333,
+              "feedback": 0.4,
+              "drive": 0,
+              "character": 0.5,
+              "tone": 0,
+              "type": "Smooth Drive",
+              "parameterStatus": "Original visual mapping from current independent audio controls; vendor response unknown."
+            }
+          ],
+          "right": [
+            {
+              "id": "1:0",
+              "name": "Echo",
+              "kind": "echo",
+              "route": "Deck 2",
+              "target": "right",
+              "amount": 1,
+              "bpm": 180,
+              "beats": 1,
+              "beatModifier": 1,
+              "delaySeconds": 0.3333333333333333,
+              "feedback": 0.4,
+              "drive": 0,
+              "character": 0.5,
+              "tone": 0,
+              "type": "Smooth Drive",
+              "parameterStatus": "Original visual mapping from current independent audio controls; vendor response unknown."
+            }
+          ],
+          "master": [],
+          "unsupported": [],
+          "policy": {
+            "requirement": "REQ-348",
+            "source": "docs/research/VIDEO_REMAINING_WORKFLOWS.md",
+            "referenceEquivalent": false,
+            "supported": [
+              "Echo",
+              "Distortion"
+            ],
+            "mapping": "Original semantic links for exact DJ-FX bank names Echo/Distortion only. No FFT trigger, no aliases/families/31 hidden definitions inferred. Deck1→left,Deck2→right,Master→master once; other assignments are explicitly unsupported.",
+            "order": "Dedicated channel links before ordinary channel slots/overlays; dedicated master links after transition and before master overlays/slots. Independent order, not recovered vendor routing.",
+            "echo": "Three shifted real upstream-frame taps at1T,2T,3T; T=60/BPM*beat*Beat Modify using actual configured audio timing. Depth is wet opacity; Feedback is finite tap decay, not recursive video feedback.16 timestamped frames at up to320x180. Missing past timestamps contribute nothing.",
+            "distortion": "Original static row warp plus Smooth Drive/Hard Clip/Foldback RGB transform; Drive/Character/Tone/depth have declared independent visual mappings.",
+            "lifecycle": "Opt-in off, disabled/zero effect, removal/reassignment/upstream topology changes, source asset/generation changes, backward render time, transport generation/direction/seek discontinuity, pause/stop clear Echo history immediately: no visual tail after bypass. Silence alone never gates a semantic link. Resume captures new history. Timing/amount edits retain real samples; insufficient older history is not fabricated.",
+            "reducedMotion": "Suppress all Echo trails and geometric Distortion warp; retain static distortion colour and observable semantic metadata. No generated flash or zoom.",
+            "limitations": "No exact Serato transfer/parameters/order/tail claim; channel knob FX, stems, Deck3/4 and Sampler links are not mapped. Audio graph/output is never mutated by this bridge."
+          }
+        },
+        "settings": [
+          {
+            "mode": "auto",
+            "bpm": 120
+          },
+          {
+            "mode": "auto",
+            "bpm": 120
+          }
+        ],
+        "trackBPMs": [
+          180,
+          180
+        ],
+        "download": {
+          "name": "fx-tempo-independent-unit2-180.wav",
+          "bytes": 150444
+        }
+      }
+    },
+    {
+      "name": "JSON roundtrip preserves only intended timing scalars without taps, armed state or effect changes",
+      "passed": true,
+      "evidence": {
+        "json": "[{\"mode\":\"auto\",\"bpm\":120},{\"mode\":\"auto\",\"bpm\":120}]",
+        "settings": [
+          {
+            "mode": "auto",
+            "bpm": 120
+          },
+          {
+            "mode": "auto",
+            "bpm": 120
+          }
+        ],
+        "effectParameters": [
+          [
+            {
+              "name": "Echo",
+              "on": false,
+              "depth": 100,
+              "beat": "1",
+              "params": {
+                "Feedback": 40,
+                "HPF": 20,
+                "Drive": 0,
+                "Beat Modify": 1
+              }
+            }
+          ],
+          [
+            {
+              "name": "Echo",
+              "on": false,
+              "depth": 100,
+              "beat": "1",
+              "params": {
+                "Feedback": 40,
+                "HPF": 20,
+                "Drive": 0,
+                "Beat Modify": 1
+              }
+            }
+          ]
+        ]
+      }
+    }
+  ],
+  "messages": [],
+  "policy": {
+    "source": "https://support.serato.com/hc/en-us/articles/224970027-Using-DJ-FX",
+    "bpmRange": [
+      20,
+      400
+    ],
+    "estimator": "First two accepted taps anchor the range; median of the last5 normalized intervals. Later quarter/half/single/double/bar intervals fold by .25,.5,1,2,4 toward that anchor, within25% deviation.",
+    "idle": "After more than max(8seconds,4.5anchor intervals), start a fresh first-tap sequence while retaining any established manual BPM until a new valid pair.",
+    "invalid": "Nonfinite/nonmonotonic timestamps are ignored. Initial intervals outside150..3000ms restart the first-tap sequence. Later outlier intervals do not alter the held clock or last accepted beat.",
+    "holdMilliseconds": 600,
+    "persistence": "Only {mode,bpm}; armed flag, taps, intervals and timestamps are session-local.",
+    "referenceResponseVerified": false
+  },
+  "scope": "Actual AudioEngine/Echo Worklets and real PCM repeat intervals; actual engine.setRate and semantic Video link metadata. Deterministic controller taps prove timing-mode integration, not real human tap gestures. Test-only measurement worklet emits silent output. Native hardware/vendor response and UI gestures require separate acceptance.",
+  "passed": 9,
+  "failed": 0,
+  "finishedAt": "2026-10-17T07:28:33.818Z"
+}

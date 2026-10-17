@@ -1,0 +1,86 @@
+{
+  "startedAt": "2026-10-17T07:23:25.581Z",
+  "scope": "Actual main UI generated WAV import, local SCNet preparation and ordinary stem mute/source-waveform display. No source-separation quality or post-FX/dual-clock waveform claim.",
+  "steps": [
+    {
+      "name": "Explicit selected-file load onto deck1",
+      "title": "openplay-stem-waveform-6sLocal file · 00:06.0"
+    },
+    {
+      "name": "First stem action completed actual local SCNet preparation",
+      "status": "Ready · SCNet-large official · four real audio sources",
+      "scope": "Stem source mix · Melody + Bass + Drums · pre-FX · — BPM"
+    },
+    {
+      "name": "All stems restored uses original mix route",
+      "scope": "Decoded waveform · original mix · — BPM",
+      "waveRect": {
+        "height": 44,
+        "viewportHeight": 720,
+        "viewportWidth": 1280,
+        "width": 492,
+        "x": 14,
+        "y": 504
+      }
+    },
+    {
+      "name": "All four ordinary mutes produce explicit all-muted source waveform",
+      "scope": "Stem source mix · all muted · — BPM"
+    },
+    {
+      "name": "Vocal-only selection from all-muted updates both source-waveform consumers",
+      "scope": "Stem source mix · Vocal · pre-FX · — BPM"
+    },
+    {
+      "name": "Cleanup restores four original-enabled stems without playback",
+      "scope": "Decoded waveform · original mix · — BPM",
+      "playButton": "▶"
+    }
+  ],
+  "finishedAt": "2026-10-17T07:24:47.800Z",
+  "screenshotComparison": {
+    "method": "Pillow screenshot pixel comparison of actual visible overview canvas bounds; no private app-state/canvas evaluation",
+    "screenshotSize": [
+      1280,
+      720
+    ],
+    "bounds": [
+      14,
+      504,
+      506,
+      548
+    ],
+    "pairs": {
+      "all-on vs all-muted": {
+        "changedPixels": 9509,
+        "totalPixels": 21648,
+        "meanAbsoluteRGBDifference": 8.8479921162848
+      },
+      "all-muted vs vocal": {
+        "changedPixels": 2279,
+        "totalPixels": 21648,
+        "meanAbsoluteRGBDifference": 3.090770509977827
+      },
+      "all-on vs vocal": {
+        "changedPixels": 9474,
+        "totalPixels": 21648,
+        "meanAbsoluteRGBDifference": 8.628895663956639
+      }
+    }
+  },
+  "stereoCorrectionRetest": {
+    "at": "2026-10-17T07:29:05.824Z",
+    "status": "Ready · SCNet-large official · four real audio sources",
+    "observed": [
+      "Full page reload +actualWAVreimport +localSCNetready",
+      "All-on original route displayed",
+      "All-four muted source scope displayed",
+      "All-on restored; deck remains paused"
+    ],
+    "screenshots": [
+      "stem-waveform-ui-all-on-v2.png",
+      "stem-waveform-ui-all-muted-v2.png"
+    ],
+    "scope": "Full UI retest after shared original stereo painter correction; actual right-only stereo behavior is separately9-case harness evidence."
+  }
+}

@@ -3,6 +3,8 @@ import fs from "node:fs";
 import vm from "node:vm";
 import { webcrypto } from "node:crypto";
 import { analyzePCM } from "../prototype/analysis.js";
+import { snapshotVideoState } from "../prototype/video-state.js";
+import { normalizeFXTempoSettings } from "../prototype/fx-tempo.js";
 const source = fs.readFileSync("prototype/app.js", "utf8");
 const fixtureSource = fs.readFileSync("scripts/test_analysis.mjs", "utf8");
 const fixtureContext = vm.createContext({ Float32Array, Math });
@@ -73,6 +75,8 @@ const results = [];
 let gate = null;
 const context = vm.createContext({
   state,
+  snapshotVideoState,
+  normalizeFXTempoSettings,
   localStorage: {
     setItem(k, v) {
       storage[k] = v;

@@ -3,6 +3,7 @@ import { createVideoControls } from "./video-controls.js";
 import { createMIDI, mappedValue } from "./midi.js";
 import { getExtendedEffectControls } from "./extended-effects.js";
 import { implementedEffects } from "./effects.js";
+import {createFXTempo,normalizeFXTempoSettings,effectiveFXBPM,fxTempoPolicy} from './fx-tempo.js';
 import {
   ruleFields,
   ruleOperators,
@@ -34,6 +35,8 @@ export function createPanels(a) {
     activeProvider = "Spotify",
     videoPhase = 0,
     learn = false;
+  s.fxTempo=normalizeFXTempoSettings(s.fxTempo,s.fx.length);
+  const fxTempoClock=createFXTempo({initial:s.fxTempo,count:s.fx.length});
   const badge = (text = "SIMULATION", real = false) =>
     `<span class="badge ${real ? "real" : ""}">${text}</span>`;
   const head = (name, label, real = false) =>
@@ -655,14 +658,35 @@ export function createPanels(a) {
       s.fx,
       s.fxRoutes || [],
       s.decks.map((d) => (d.track?.bpm || 120) * d.rate),
+      s.fxTempo,
     );
   }
+  function automaticFXBPM(bank){const route=(s.fxRoutes?.[bank]||`Deck ${bank+1}`),index=['Deck 1','Deck 2','Deck 3','Deck 4'].indexOf(route),deck=s.decks[index<0?0:index];return(deck?.track?.bpm||120)*(deck?.rate||1);}
+  function updateFXTempo(){
+    s.fx.forEach((_,bank)=>{const info=fxTempoClock.diagnostics(bank),setting=s.fxTempo[bank],automatic=automaticFXBPM(bank),manual=setting.mode==='manual',button=$(`[data-fx-tap="${bank}"]`),status=$(`[data-fx-clock="${bank}"]`);
+      if(button){const text=info.phase==='armed'?'TAP…':manual?`${effectiveFXBPM(setting,automatic).toFixed(1)} BPM`:'TAP',pressed=String(manual||info.armed);if(button.textContent!==text)button.textContent=text;button.classList.toggle('active',manual||info.armed);if(button.getAttribute('aria-pressed')!==pressed)button.setAttribute('aria-pressed',pressed);}
+      if(status){const text=info.phase==='armed'?`Tap armed · ${manual?'held manual':'automatic'} ${effectiveFXBPM(setting,automatic).toFixed(1)} BPM until a valid pair`:`${manual?'Manual':'Auto'} ${effectiveFXBPM(setting,automatic).toFixed(1)} BPM`;if(status.textContent!==text)status.textContent=text;}
+    });
+  }
+  function changedFXTempo(){s.fxTempo=fxTempoClock.snapshot();applyFX();persist();updateFXTempo();}
   function fx() {
     applyFX();
     const catalog = Object.entries(a.fxCatalog.categories);
     $("#panel").innerHTML =
       head("DJ FX", "59 INDEPENDENT AUDIO PROCESSORS", true) +
       `<div class="panel-grid">${s.fx.map((bank, b) => `<div><div class="panel-controls"><strong>FX unit ${b + 1}</strong><label>Assign <select data-fx-route="${b}">${options(["Deck 1", "Deck 2", "Deck 3", "Deck 4", "Sampler", "Master"], s.fxRoutes?.[b] || `Deck ${b + 1}`)}</select></label></div><div class="fx-bank">${bank.map((f, i) => `<div class="fx-slot"><select aria-label="FX unit ${b + 1} slot ${i + 1}" data-fx-select="${b}:${i}">${catalog.map(([category, names]) => `<optgroup label="${category}">${options(names, f.name)}</optgroup>`).join("")}</select><div class="panel-controls"><button data-fx-on="${b}:${i}" ${implementedEffects.includes(f.name) ? "" : 'disabled title="DSP not implemented"'} class="${f.on ? "active" : ""}">ON</button><input type="range" aria-label="Effect depth ${b}:${i}" min="0" max="100" value="${f.depth}" data-fx-depth="${b}:${i}"><button data-fx-params="${b}:${i}">⚙</button><button data-fx-favorite="${b}:${i}" title="Favorite effect">${s.fxFavorites.includes(f.name) ? "★" : "☆"}</button></div><select aria-label="Effect beat timing" data-fx-beat="${b}:${i}">${options(["1/32", "1/16", "1/8", "1/4", "1/2", "1", "2", "4", "8"], f.beat)}</select></div>`).join("")}</div></div>`).join("")}</div><div class="panel-controls" style="margin-top:8px"><button id="save-fx-preset">Save preset</button><select id="fx-presets" aria-label="Effect preset"><option value="">Load preset…</option>${s.fxPresets.map((p, i) => `<option value="${i}">${esc(p.name)}</option>`).join("")}</select><button id="reset-fx">Reset units</button><span class="muted">Channel FX: </span><select id="channel-fx">${options(["Filter", "Dub Echo", "Space", "Noise"], s.channelFX || "Filter")}</select><span class="muted">Independent DSP · exact reference ranges and sonic response remain unverified.</span></div>`;
+    $$('.fx-bank').forEach((bank,b)=>{const controls=document.createElement('div');controls.className='panel-controls';controls.innerHTML=`<button data-fx-tap="${b}" aria-label="Tap tempo for FX unit ${b+1}" aria-pressed="false">TAP</button><button data-fx-auto="${b}" aria-label="Return FX unit ${b+1} to automatic tempo" title="Return to current track BPM">Auto ×</button><output data-fx-clock="${b}" role="status" aria-live="polite"></output>`;bank.before(controls);});
+    $$('[data-fx-tap]').forEach(button=>{const bank=Number(button.dataset.fxTap);let timer,suppress=false,keyboardHeld=false;
+      const clear=()=>{clearTimeout(timer);timer=null;};
+      const hold=()=>{clear();timer=setTimeout(()=>{if(!button.isConnected||s.panel!=='fx')return;suppress=true;fxTempoClock.automatic(bank);changedFXTempo();},fxTempoPolicy.holdMilliseconds);};
+      button.onpointerdown=event=>{if(event.button!==0)return;suppress=false;button.setPointerCapture?.(event.pointerId);hold();};
+      button.onpointerup=clear;button.onpointercancel=clear;
+      button.onkeydown=event=>{if(event.key===' '||event.key==='Enter'){event.preventDefault();if(!event.repeat){keyboardHeld=true;suppress=false;hold();}}};
+      button.onkeyup=event=>{if(event.key===' '||event.key==='Enter'){event.preventDefault();clear();if(keyboardHeld){keyboardHeld=false;button.click();}}};button.onblur=()=>{keyboardHeld=false;clear();};
+      button.onclick=()=>{clear();if(suppress){suppress=false;return;}fxTempoClock.tap(bank);changedFXTempo();};
+    });
+    $$('[data-fx-auto]').forEach(button=>{button.onclick=()=>{fxTempoClock.automatic(Number(button.dataset.fxAuto));changedFXTempo();};});
+    const tempoHint=document.createElement('p');tempoHint.className='muted';tempoHint.textContent='Tap twice to establish a manual range; later half/double/bar taps retain that range. Hold the BPM for0.6seconds or choose Auto × to follow the current track again. Median/range filtering is independent Open Play behavior.';$('#panel').append(tempoHint);updateFXTempo();
     $$("[data-fx-select]").forEach(
       (el) =>
         (el.onchange = () => {
@@ -1937,6 +1961,7 @@ export function createPanels(a) {
     );
   }
   function tick() {
+    if(s.panel==='fx')updateFXTempo();
     if (s.panel === "flip" && $("#flip-events")) {
       const f = s.flip;
       $("#flip-events").textContent =

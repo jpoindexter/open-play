@@ -50,7 +50,7 @@ It is not the full completeness audit; its source claims need independent checks
 ## Read first
 
 - `AGENTS.md` if present; `PROJECT_PROMPT.md`; `docs/approvals.md`.
-- `FULL_BUILD_PLAN.md` sections23–37, with older sections retained as dated history.
+- `FULL_BUILD_PLAN.md` sections23–39, with older sections retained as dated history.
 - `docs/research/PARITY_GATE.md`, `FULL_SCOPE_CONTRACT.md`, `FEATURE_COVERAGE.md`,
   `INTERACTION_REQUIREMENTS.md`, `REQUIREMENT_GAPS_REVIEW.md`, `SOURCE_CONFLICTS.md`,
   `UI_OBSERVATIONS.md`, `EVIDENCE_LEDGER.md`, `BINARY_FINDINGS.md`,
@@ -331,6 +331,58 @@ quality/Syphon/shortcut/MIDI and full library/hardware/provider/model-quality
 acceptance.110 groups/521 requirements, complete_inventory=false. Preserve all
 model/effort routing. Do not start native development or treat this checkpoint as
 approval or full1:1 closure. The original prompt below remains byte-for-byte exact.
+
+## Latest FX tempo / stem-waveform checkpoint — 17 October
+
+Read docs/prototype/FX_TEMPO_WAVEFORM_REVIEW.md and FX_TEMPO_INDEPENDENT_REVIEW.md;
+read docs/research/STEM_WAVEFORM_EVALUATION.md and KEYLOCK_LIVE_PATH_REVIEW.md.
+REQ178 manual/automatic per-bank Tap timing executes actual9/9 Echo captured-PCM
+checks plus main UI arming/timed tapping/holdEnter/pointerhold/Auto×/page reload.
+Independent review caught Auto status following edited metadata while engine timing
+stayed stale; shared canonical BPM synchronization now preserves manual authority
+and refreshes Auto. Controlled review6/6, engine8/8 and pure12/12 supplement the
+actual9/9; independent estimator/ranges are not vendor-response proof.
+
+REQ183 ordinary-mute overview/detail source waveforms sum signed aligned stem PCM
+before stereo peak extraction. All-on keeps the actual original route; original
+right-only and accepted end-padding bugs were independently reproduced and repaired.
+Actual9/9 Engine/audio/pixel, real local SCNet1/1 and full UI reimport/preparation/
+all-mute/Vocal/restore paths execute.12/12 controlled waveform checks cover lifecycle,
+geometry/cancellation/eviction. Captured exit tails, Stem Slip dual clocks, source
+color styling, transformed/post-FX envelopes and sustained full-session performance
+remain gaps. Existing SCNet quality failure remains, regardless of pipeline passes.
+
+Live browser keylock is technically possible without native approval; production
+still uses earlier buffered rendering. The isolated unchanged1.3.2 probe preserved
+initial4/10 and revised9/11. Actual append processor failure and future-schedule
+ordering failure must be addressed before a real streaming adapter/scratch handoff.
+A separately named dependency-wrapper experiment is in progress; do not conflate
+it with production integration, musical acceptance or ordinary-deck scratch.
+
+The broad110/521 working inventory remains incomplete and full1:1 NOT PASSED.
+Retain all output/window/quality/shortcut/MIDI/library/device/provider/model-quality
+gaps and per-feature model/effort routing. Native development still requires Jason's
+explicit approval of a named HTML candidate. Earlier dated evidence is historical.
+
+## Capture blocker and fresh Fable session — 17 October
+
+The separately namespaced live-wrapper correction passes agent+parent Node14/14.
+It meets11 browser functional assertions but NOT full capture acceptance: retained
+startup frames128–383 are missing, completed=false/fatalErrors nonempty, even after
+fence and explicit arming. See keylock-live-patched-browser-results.json and retained
+preceding errors. No filled gaps, relaxed tolerances or production adapter acceptance.
+
+After three related failures, Jason's conditional Fable permission was used for a
+NEW local Claude Code conversation Keylock capture gap debugging, actualFable5.1/High,
+local_4d4c6b17-ae76-40be-a92f-36b9acfe61b9. Prompt at docs/research/claude-fable/
+keylock-capture-debug-prompt.md; only new findings/isolated diagnostic files allowed.
+This is a debug request, not the full completeness audit. Root owns existing sources
+and shared UI. Independently verify any returned diagnosis before applying it.
+
+A new passive all-source MIDI observer has executed SDK ABI assertions and owned
+virtual delivery/counter/disposal tests. Physical Hercules reception is unexecuted;
+a fresh movement window is pending. Do not treat previous reported knob motion,
+CoreMIDI enumeration or virtual delivery as physical compatibility.
 
 ## Original full project prompt — verbatim snapshot
 

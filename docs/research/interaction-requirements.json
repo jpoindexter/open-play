@@ -4930,7 +4930,7 @@
       "trigger": "Tap manual tempo; hold value or click X",
       "expected": "Enter manual timing then restore automatic track-derived timing",
       "evidence": "DOCUMENTED; installed behavior untested",
-      "prototype_behavior": "Implement specified fixture transition; identify simulation and unresolved reference states",
+      "prototype_behavior": "Independent per-unit armed/manual/automatic Tap BPM with normalized subdivisions and pointer/keyboard hold or Auto× reset, scalar persistence, shared current metadata/rate synchronization and semantic Video clock. Actual9/9 Echo repeat spacing plus main UI gestures/reload; controlled review6/6, engine8/8,pure12/12. Exact vendor estimator/sonics and physical controls unverified.",
       "native_status": "blocked_until_prototype_approval",
       "acceptance": "Tap manual tempo; hold value or click X → Enter manual timing then restore automatic track-derived timing",
       "source_url": "https://support.serato.com/hc/en-us/articles/224970027-Using-DJ-FX",
@@ -4947,7 +4947,14 @@
         "primary": "Codex",
         "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
         "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
-      }
+      },
+      "acceptance_status": "independent_manual_auto_clock_browser_audio_UI_executed_reference_unverified",
+      "prototype_evidence": [
+        "docs/prototype/FX_TEMPO_WAVEFORM_REVIEW.md",
+        "docs/prototype/fx-tempo-browser-results.json",
+        "docs/prototype/fx-tempo-ui-results.json",
+        "docs/prototype/FX_TEMPO_INDEPENDENT_REVIEW.md"
+      ]
     },
     {
       "id": "REQ-179",
@@ -5065,7 +5072,7 @@
       "trigger": "Toggle isolated groups and effects",
       "expected": "Combine stem mutes with vocal/instrumental/drum echo or instrumental brake; update waveform representation",
       "evidence": "DOCUMENTED; installed behavior untested",
-      "prototype_behavior": "Implement specified fixture transition; identify simulation and unresolved reference states",
+      "prototype_behavior": "Actual existing stem mutes/exit FX plus new ordinary partial-mute signed-stereo PCM overview/detail source waveforms; all-on original route and right-only original preserved; audible end bounds; actual9/9 audio/pixels, localSCNet1/1 and full UI import/preparation/mutes. Explicit remaining waveform gaps: captured exitFX/tails, Stem Slip dual clocks, source frequency-color styling/reference visual/quality/performance.",
       "native_status": "blocked_until_prototype_approval",
       "acceptance": "Toggle isolated groups and effects → Combine stem mutes with vocal/instrumental/drum echo or instrumental brake; update waveform representation",
       "source_url": "https://support.serato.com/hc/en-us/articles/5700921209615-Using-Stems",
@@ -5082,7 +5089,14 @@
         "primary": "Codex",
         "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
         "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
-      }
+      },
+      "acceptance_status": "partial_ordinary_mute_source_waveforms_executed_exit_tail_slip_and_quality_open",
+      "prototype_evidence": [
+        "docs/prototype/FX_TEMPO_WAVEFORM_REVIEW.md",
+        "docs/research/STEM_WAVEFORM_EVALUATION.md",
+        "docs/prototype/stem-waveform-browser-results.json",
+        "docs/prototype/stem-waveform-ui-results.json"
+      ]
     },
     {
       "id": "REQ-184",

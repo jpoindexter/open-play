@@ -1169,3 +1169,52 @@ performance and storage quota remain unverified. Output/window/quality/Syphon,
 shortcut/MIDI behavior and full library/device/provider/model-quality scope remain
 active. Inventory110/521, complete_inventory=false; per-feature Codex/Claude routing
 is retained. No native development before named HTML approval.
+
+
+## 38. Real manual FX timing and ordinary stem-source waveforms
+
+2026-10-17. Read [the executed review](docs/prototype/FX_TEMPO_WAVEFORM_REVIEW.md).
+REQ178 has independent per-bank Tap/manual/Auto/hold timing: actual9/9 captured
+Echo checks, actual main UI gestures and reload. Independent review reproduced
+stale engine timing after metadata edits; shared BPM synchronization now preserves
+manual authority while refreshing Auto. Controlled review6/6, engine8/8 and
+pure clock12/12 execute; exact vendor estimator/sonics remain unverified.
+All43 FX/waveform cohort Node scripts exit0; the initial missing-import controller fixture
+failure and its real-dependency correction are retained in the review.
+
+REQ183 has a bounded ordinary-mute source-waveform implementation. Actual9/9
+Engine/audio/pixel checks, real local SCNet1/1 and main UI import/preparation/
+all-mute/Vocal/restore paths execute. Independent review found/fixed original
+right-channel omission and post-end padding bars;12 Node checks execute. ExitFX
+captured tails, Stem Slip dual clocks, color styling, sustained performance and
+musical/reference quality remain open; existing SCNet quality failure is retained.
+
+The live keylock browser investigation retains first4/10 and isolated9/11 evidence.
+Append processor failure and future-schedule ordering need dependency correction;
+production keylock remains the earlier buffered path. Browser streaming is not
+blocked by native approval. Continue actual ordinary-deck scratch/bypass/continuous
+keylock and remaining Video/library/provider/hardware scope.110/521 inventory is
+incomplete; per-feature model/effort routing remains; no native app before approval.
+
+
+## 39. Separate live-wrapper correction and capture blocker
+
+2026-10-17. Unchanged Signalsmith1.3.2 remains preserved; a separately named MIT
+wrapper variant corrects the observed multi-chunk input window and future schedule
+ordering, without changing embedded WASM. Agent and parent actual-WASM14/14 execute.
+All11 browser functional assertions pass, but full-capture acceptance still FAILS
+with missing startup frames128–383. Fence and explicit arm did not repair that gap;
+no tolerance/coverage relaxation or production integration is permitted by these
+results. Deterministic Worklet shutdown, audible-clock mapping and actual signed
+scratch remain further adapter requirements.
+
+Jason's already authorized Fable fallback was invoked after three related failures:
+new Claude Code session Keylock capture gap debugging, Fable5.1/High, bounded to
+new findings and isolated probe files. Full independent Claude audit has not run.
+
+New passive Hercules diagnostic verifies Apple SDK ABI and actual owned virtual
+MIDI delivery/counters/lifecycle. Physical input still needs a fresh agreed knob
+movement window; it has not been started automatically. Original zero-record
+observations remain inconclusive, not proof of unsupported/broken hardware.
+Read docs/research/HERCULES_CAPTURE_NEXT_DIAGNOSTIC.md and ACTIVE_EXECUTION.md.
+No native application or licensing/device-gate changes.
