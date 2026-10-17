@@ -1,0 +1,11 @@
+import assert from 'node:assert/strict';
+import {alignedPosition,synchronizeSimple} from '../prototype/sync.js';
+const ownLoop={start:10,end:12},leaderLoop={start:3,end:5};
+const result=alignedPosition({ownTimes:[9.99,10.25,10.75,11.25,11.75,12.01],leaderTimes:[3,3.5,4,4.5,5.01],ownPosition:11.99,leaderPosition:4.99,ownRate:1,leaderRate:1,duration:20,ownLoop,leaderLoop});
+assert(result.position>=10&&result.position<12,'Sync seek escaped active loop');assert(result.ownTransient>=10&&result.ownTransient<12,'Sync chose an inaudible transient outside active loop');assert(result.leaderTransient>=3&&result.leaderTransient<5,'Primary transient outside active loop');
+const circular=(a,b,period)=>Math.abs(((a-b+period/2)%period+period)%period-period/2);
+assert(circular((result.ownTransient-result.position),result.delay,2)<1e-9,'Projected loop transient not aligned');
+assert.throws(()=>alignedPosition({ownTimes:[9,13],leaderTimes:[3,3.5],ownPosition:11,leaderPosition:3.1,ownRate:1,leaderRate:1,duration:20,ownLoop,leaderLoop}),/transient/i);
+const deck={index:0,track:{bpm:128,duration:20},playing:false,loop:true,loopIn:2,loopOut:4,rate:1},leader={index:1,track:{bpm:120,duration:20},playing:true,loop:true,loopIn:3,loopOut:5,rate:1};
+const engine={audibleRate:d=>d.rate,setRate:async(d,r)=>{d.rate=r;}};await synchronizeSimple({engine,deck,leader});assert.equal(deck.rate,120/128);assert.equal(deck.loopIn,2);assert.equal(deck.loopOut,4);
+console.log(JSON.stringify({passed:true,scope:'Loop-aware Simple Sync geometry/paused-tempo policy; no acoustic or hardware proof',result,checks:['exclude inaudible outside-loop transients','project across both loop boundaries','reject loop with no transient','paused tempo match preserves bounds']}));

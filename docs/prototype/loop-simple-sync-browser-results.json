@@ -1,0 +1,183 @@
+{
+  "startedAt": "2026-10-17T22:49:03.884Z",
+  "completed": true,
+  "scope": "Actual browser app DOM controls and routed stereo audio; controlled fixtures only. Two active loops; no native/hardware/Smart Sync/music quality acceptance.",
+  "criteria": {
+    "maximumPostSyncPhaseErrorSeconds": 0.01,
+    "minimumPreSyncErrorSeconds": 0.03,
+    "minimumPostSyncPairs": 6,
+    "postWindowSeconds": 4
+  },
+  "fixture": {
+    "sampleRate": 48000,
+    "durationSeconds": 30,
+    "bpm": [
+      120,
+      128
+    ],
+    "offsetSeconds": [
+      0.05,
+      0.13
+    ],
+    "pulseSeconds": 0.012,
+    "carrierHz": 900,
+    "amplitude": 0.15
+  },
+  "checks": [
+    "Actual postmaster audio aligned within 10ms after initially mismatched playback",
+    "Both different-BPM loops retain bounds and align after multiple audio wraps"
+  ],
+  "errors": [],
+  "events": [
+    {
+      "name": "record-start",
+      "audioTime": 0.06385487528344672,
+      "utc": "2026-10-17T22:49:03.937Z"
+    },
+    {
+      "name": "sync-request",
+      "audioTime": 1.364172335600907,
+      "utc": "2026-10-17T22:49:05.238Z"
+    },
+    {
+      "name": "sync-complete",
+      "audioTime": 1.619591836734694,
+      "utc": "2026-10-17T22:49:05.493Z"
+    },
+    {
+      "name": "record-stop",
+      "audioTime": 5.822403628117914,
+      "utc": "2026-10-17T22:49:09.696Z"
+    }
+  ],
+  "sourceBefore": {
+    "app.js": "5e34091e03c81d88cdc14476f6014aae8b51bf5a7d5bbe089fb752d3d37e8a9f",
+    "engine.js": "c0f7fa915938ab416137807a4345878d290110dcdfce23283e46c1e665eec6b1",
+    "sync.js": "f45fb74d984f4f5fa87684e50b87ab16014554a0f0576b061c8bae3e214bd197",
+    "loop-simple-sync-harness.js": "da482aaf0a70fdbf14e249a92abceaa4b016844ef2f08a4e5c81904ac01d53c8"
+  },
+  "physicalOutputMuted": true,
+  "synced": [
+    {
+      "rate": 1,
+      "role": "primary",
+      "playing": true
+    },
+    {
+      "rate": 0.9375,
+      "role": "secondary",
+      "playing": true
+    }
+  ],
+  "bounds": [
+    {
+      "on": true,
+      "start": 0,
+      "end": 2
+    },
+    {
+      "on": true,
+      "start": 0,
+      "end": 1.875
+    }
+  ],
+  "recording": {
+    "bytes": 64055,
+    "format": "audio/webm;codecs=opus",
+    "sha256": "c21287af5cdee717b08aa56f73b5859af84e54f345897a017a2bf93a197b84a7"
+  },
+  "decoded": {
+    "frames": 254015,
+    "sampleRate": 44100,
+    "channels": 2,
+    "duration": 5.759977324263039
+  },
+  "phase": {
+    "pulseTimes": [
+      [
+        0.03698412698412699,
+        0.536984126984127,
+        1.036984126984127,
+        1.536984126984127,
+        2.036984126984127,
+        2.536984126984127,
+        3.036984126984127,
+        3.536984126984127,
+        4.036984126984127,
+        4.536984126984127,
+        5.036984126984127,
+        5.536984126984127
+      ],
+      [
+        0.13439909297052155,
+        0.6031519274376417,
+        1.071904761904762,
+        1.540657596371882,
+        2.0364625850340135,
+        2.5364625850340135,
+        3.0364625850340135,
+        3.5364625850340135,
+        4.0364625850340135,
+        4.5364625850340135,
+        5.0364625850340135,
+        5.5364625850340135
+      ]
+    ],
+    "pre": [
+      {
+        "left": 0.536984126984127,
+        "errorSeconds": 0.06616780045351467
+      },
+      {
+        "left": 1.036984126984127,
+        "errorSeconds": 0.03492063492063502
+      }
+    ],
+    "post": [
+      {
+        "left": 2.036984126984127,
+        "errorSeconds": 0.0005215419501136687
+      },
+      {
+        "left": 2.536984126984127,
+        "errorSeconds": 0.0005215419501136687
+      },
+      {
+        "left": 3.036984126984127,
+        "errorSeconds": 0.0005215419501136687
+      },
+      {
+        "left": 3.536984126984127,
+        "errorSeconds": 0.0005215419501136687
+      },
+      {
+        "left": 4.036984126984127,
+        "errorSeconds": 0.0005215419501132246
+      },
+      {
+        "left": 4.536984126984127,
+        "errorSeconds": 0.0005215419501132246
+      },
+      {
+        "left": 5.036984126984127,
+        "errorSeconds": 0.0005215419501132246
+      },
+      {
+        "left": 5.536984126984127,
+        "errorSeconds": 0.0005215419501132246
+      }
+    ]
+  },
+  "loopPositions": [
+    1.8007936507936506,
+    1.7719107142857142
+  ],
+  "sourceAfter": {
+    "app.js": "5e34091e03c81d88cdc14476f6014aae8b51bf5a7d5bbe089fb752d3d37e8a9f",
+    "engine.js": "c0f7fa915938ab416137807a4345878d290110dcdfce23283e46c1e665eec6b1",
+    "sync.js": "f45fb74d984f4f5fa87684e50b87ab16014554a0f0576b061c8bae3e214bd197",
+    "loop-simple-sync-harness.js": "da482aaf0a70fdbf14e249a92abceaa4b016844ef2f08a4e5c81904ac01d53c8"
+  },
+  "sourceStable": true,
+  "finishedAt": "2026-10-17T22:49:09.718Z"
+}
