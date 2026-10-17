@@ -1,0 +1,11 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Startup capture-gap probe</title>
+<style>:root{color-scheme:dark;font:15px/1.5 system-ui;background:#161616;color:#eee}body{max-width:1100px;margin:28px auto;padding:0 20px}button,select,input{font:inherit;padding:8px 12px;margin-right:8px}label{margin-right:16px}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#222;padding:16px}</style>
+<h1>Startup capture-gap probe</h1>
+<p>Isolated diagnostic for the 256-frame startup hole seen in the keylock capture. Each AudioWorklet processor retains every call's <code>currentFrame</code>, <code>currentTime</code> and the first/last sample of an independent sample-index ramp that is also routed to the zero-gain destination path. Frame-label delta tells how far the context clock moved between calls; ramp delta tells how many frames the graph actually rendered between calls. Output is forced silent. No vendor schedule is ever issued; the vendor mode only replicates the second module load, WASM processor construction and latency round trip.</p>
+<p><label for="mode">Graph</label><select id="mode"><option value="baseline">Baseline: capture + ramp only</option><option value="vendor">Vendor: also load Open Play two-fix node (inactive)</option></select>
+<label for="arm">Arm policy</label><select id="arm"><option value="immediate">Immediate after processor ready</option><option value="clock-advanced">After main-thread clock passes 50 ms</option><option value="steady">Processor-observed: 8 consecutive exact 128-frame advances</option></select>
+<label for="contexts">Contexts</label><input id="contexts" type="number" min="1" max="8" value="4" style="width:4em"></p>
+<p><button id="run">Run probe</button><button id="download" disabled>Download JSON</button></p>
+<p id="status" role="status">Not run</p>
+<pre id="results">Click Run. Per-context milestones, first rows, classified anomaly pairs and armed-span verdicts appear here.</pre>
+<script type="module" src="./capture-gap-probe.js"></script></html>

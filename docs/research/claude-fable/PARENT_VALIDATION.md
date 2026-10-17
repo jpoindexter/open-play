@@ -47,3 +47,16 @@ End Video With Audio and Fader Reverse. None establishes current4.0.10 support.
 This independently verifies that release-note lead; the legacy95193PDF remains
 Fable-reported only. The manual merge does not silently promote these historical
 leads to modern controls.
+
+
+## Parent validation of bounded Fable capture review
+
+2026-10-17. This is the bounded Fable5.1 High debugging review, not the requested independent full parity audit. The original prompt and three allowed output files are preserved. Neither optional diagnostic page has been executed.
+
+The parent executed the current preflight keylock probe:11/11, completed:true, full armed-span coverage. The separate terminal lifecycle harness executed5/5. These establish isolated component behavior; production integration remains pending.
+
+Fable correctly reconciles the missing vendor dependency, retained preflight observations and strict armed-span criterion. Both worklet frame and time derive from a common clock: their agreement cannot exclude a stale first label. An initial label of zero also cannot establish that this was the context first-ever physical render or that no device callbacks occurred during setup. Findings point2 and the related first-render wording remain overstrong on that distinction.
+
+The parent independently read current upstream Chromium realtime_audio_destination_handler.cc Render (blob d83f42950336da2e8b666a125454a4c9655d712f), which conditionally pulls the graph and unconditionally advances its sample counter. That supports a plausible mechanism class only. The installed browser source revision and exact cause were not established. Other Chromium paths in the findings were not independently verified by the parent.
+
+The optional capture-gap-probe.js classifier still labels a continuous ramp plus frame-label jump as counter advancement without graph rendering. This cannot separate that hypothesis from a stale first label. Treat that code as an unexecuted draft with a known interpretation limit; do not use its verdict as accepted evidence. No additional experiment is required to retain the actual strict preflight capture result.
