@@ -50,7 +50,7 @@ It is not the full completeness audit; its source claims need independent checks
 ## Read first
 
 - `AGENTS.md` if present; `PROJECT_PROMPT.md`; `docs/approvals.md`.
-- `FULL_BUILD_PLAN.md` sections23–32, with older sections retained as dated history.
+- `FULL_BUILD_PLAN.md` sections23–34, with older sections retained as dated history.
 - `docs/research/PARITY_GATE.md`, `FULL_SCOPE_CONTRACT.md`, `FEATURE_COVERAGE.md`,
   `INTERACTION_REQUIREMENTS.md`, `REQUIREMENT_GAPS_REVIEW.md`, `SOURCE_CONFLICTS.md`,
   `UI_OBSERVATIONS.md`, `EVIDENCE_LEDGER.md`, `BINARY_FINDINGS.md`,
@@ -67,7 +67,7 @@ It is not the full completeness audit; its source claims need independent checks
 
 ## Current implementation and executed evidence
 
-The working inventory has110 groups and507 detailed requirements. AUD-005 clock
+The working inventory has110 groups and521 detailed requirements. AUD-005 clock
 drift and SYS-006 reproducible builds are independent engineering goals without
 invented vendor interaction rows. Counts do not prove exhaustive coverage.
 
@@ -225,6 +225,25 @@ Write `handoffs/claude-to-codex-completeness-audit.md` and machine-readable find
 5. License/model/service/resource risks and hardware needed for unresolved proof.
 6. Coverage verdict without equating counts with completeness. Native approval
    remains absent. Do not silently replace functionality with simulation.
+
+## Latest recovered-manual checkpoint
+
+Read `docs/prototype/VIDEO_MANUAL_RECORDING_REVIEW.md` first. Actual corrected
+Video FX74/74,transitions55/55,Media32/32,recording-quality23/23 and pipeline32/32
+pass. Main UI480p persists after reload and downloads854×480VP9/Opus while live
+output remains640×360. Prior contracts remain historical. Manual crosswalk89
+entries and provisional workflow gaps require independent review; these are not
+claims of current visual equivalence. REQ-498 is implemented independently. Recovered manual reconciliation adds
+REQ-508–521 for14 distinct workflows; all47 proposals have explicit dispositions
+in docs/research/video-manual-registry-merge.json. None is automatically accepted.
+
+Fable5.1/High bounded research completed in its separate session. Read
+`docs/research/claude-fable/video-reference-findings.md` together with
+`PARENT_VALIDATION.md`; stronger cache/current-registration claims were rejected.
+The public141226manual was independently recovered/hashed and has2015metadata.
+Installed Effects/Info controls were observed; Video restoredOFF and Setup closed.
+Do not treat historical manual prose, a55-effect cache or NoRestrictions readout
+as proof of current GPU algorithms. Native approval remains absent.
 
 ## Original full project prompt — verbatim snapshot
 

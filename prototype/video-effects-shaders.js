@@ -92,8 +92,11 @@ void main(){
   z=blend(c,straight(texture(historyFrames,vec3(fract(uv*grid),float(historyLayers[tile])))),amount);
  }else if(effect==2){z=blend(c,straight(texture(holdFrame,uv)),amount);
  }else if(effect==3){
-  float phase=fract(time*bpm/60./max(.125,p.x));
-  z=reducedMotion>.5?c:phase<(.05+.9*amount)?straight(texture(holdFrame,uv)):c;
+  float period=p.x>0.?p.x:60./bpm*p.z;
+  float wave=.5-.5*cos(TAU*time/max(.001,period));
+  float distance=min(min(uv.x,1.-uv.x),min(uv.y,1.-uv.y));
+  float border=1.-smoothstep(0.,p.y,distance);
+  z.a=c.a*(1.-amount*wave*border*(1.-reducedMotion));
  }else if(effect==4){z.rgb=mix(c.rgb,c.rgb*vec3(1.,.15,.15),amount*bands.x);
  }else if(effect==5){
   float pulse=fract(time*bpm/60./max(.125,p.x))<p.y?1.:0.;

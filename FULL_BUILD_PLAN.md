@@ -1042,3 +1042,43 @@ reference evidence and a separate findings file. Prompt:
 `docs/research/claude-fable/video-reference-debug-prompt.md`. It is not a full
 completeness-audit takeover and has no native/code/remote-write authority. Verify
 its conclusions against sources before changing reference claims.
+
+## 33. Primary Video manual recovered — source reconciliation resumes
+
+Fable supplied a successful normal-browser request, and Codex independently
+retrieved/validated the official141226 PDF:425,843bytes,SHA-256
+`85c57756dc96587b7b4822e2911decb4b9202f5a1d6b1cba047e1159236ae66c`.
+Its27pages have2015-04-09 PDFmetadata. Read
+[VIDEO_MANUAL_RECOVERY.md](docs/research/VIDEO_MANUAL_RECOVERY.md). Earlier403
+request logs remain preserved; they are superseded as a general access blocker.
+Current official hosting does not prove all historicaldetailsapplyto4.0.10.
+
+The settings prose supports the independent four treatment equations and
+separates recording resolution, outputquality and windowaspect. Parent now
+reconciles allmanualworkflows/secondarycontrols and FX/transition meanings before
+claiming reference parity. A separate actual recording-quality/capture slice is
+next. ModelsinheritVID-001 transport/ownership orVID-002 controls/pixelrouting;
+exactrecommendedIDs/efforts remaininregistry andmustbecheckedatinvocation.
+No native app, licensing changes, public release or completeness claim.
+
+
+## 34. Recovered-manual behavior corrections and recording resolution
+
+Read [VIDEO_MANUAL_RECORDING_REVIEW.md](docs/prototype/VIDEO_MANUAL_RECORDING_REVIEW.md).
+Actual browser checks pass74/74 Video FX,55/55 transitions,32/32 Media Crate,
+23/23 recording-quality and32/32 assembled-pipeline regression. Main UI480p
+persisted across reload and produced an actual854×480VP9/Opus download with live
+640×360 output. Frame Pulse/Split and Center/Latch50/Scratch now implement the
+recovered historical broad meanings using explicitly independent curves. Media
+Next is ordered even while Random is on. Prior independent result files stay
+historical, rather than being relabeled as reference acceptance.
+
+Fable's bounded research completed; parent validated the official manual and
+persisted cache and rejected unsupported fresh-registration claims. Installed
+Serato Effects/Info screens were inspected and Video restoredOFF. The manual
+crosswalk and provisional secondary-workflow gaps remain open evidence work.
+REQ-498 now records executed independent recording resolution, not a placeholder.
+The recovered manual adds14 distinct workflow requirements (REQ-508–521),
+bringing the working detailed inventory to521 across110 groups; complete_inventory=false.
+See docs/research/VIDEO_MANUAL_REGISTRY_RECONCILIATION.md and the merge record.
+No native development until Jason approves a named HTML revision.

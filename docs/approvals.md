@@ -47,3 +47,13 @@ It asks for primary-source help on unresolved Video control semantics/manual
 access, with only a separate findings file allowed. No native/code/remote write
 authority was delegated. The broader independent completeness audit has not been
 launched. This supersedes the earlier “no conversation started” cutoff only.
+
+
+### Fable reference help completed; native gate unchanged
+
+The bounded Fable5.1/High session completed its separate findings report.
+Codex independently checked the recovered public PDF, persisted effect-cache
+claims and installed Effects/Info controls. Read
+`docs/research/claude-fable/PARENT_VALIDATION.md`. This is debugging assistance,
+not the full independent completeness audit, a native build approval or a public
+release authorization. Serato Video was restoredOFF after the observation.

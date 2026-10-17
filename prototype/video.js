@@ -3,6 +3,7 @@ import {createVideoPipeline} from './video-pipeline.js';
 import {createVideoKaraoke} from './video-karaoke.js';
 import {createVideoMediaLibrary, createVideoTransitionSelector} from './video-media.js';
 import {videoTransitionCatalog} from './video-transitions.js';
+import {createVideoRecordingSurface, normalizeRecordingQuality, recordingQualityOptions, recordingDimensions} from './video-recording.js';
 import {drawVideoTreatment, normalizeVideoTreatment} from './video-treatment.js';
 import {primeDecodedVideo} from './video-decode.js';
 export function createVideoMixer({state, engine, notify}) {
@@ -10,11 +11,12 @@ export function createVideoMixer({state, engine, notify}) {
   Object.assign(v, {width: v.width || 640, height: v.height || 360,
     transition: v.transition || 'Crossfade', cross: v.cross || 0,
     linked: v.linked ?? true, auto: v.auto || false, audioFXLink:v.audioFXLink === true,
-    mediaTreatment:normalizeVideoTreatment(v.mediaTreatment),
+    mediaTreatment:normalizeVideoTreatment(v.mediaTreatment), recordingQuality:normalizeRecordingQuality(v.recordingQuality),
     fx: v.fx || {left: [], right: [], master: []},
     overlays: v.overlays || {left: [], right: [], master: []}});
   const slots = [null, null], loadTokens = [0, 0], assets = new Map(), imageTokens = new Map();
   const decodedRawIds = [null, null], effectivePresentation = [null,null], presentationGenerations = [0,0];
+  const recordingSurface = createVideoRecordingSurface();
   const karaoke = createVideoKaraoke({state, engine});
   const media = createVideoMediaLibrary(), transitions = createVideoTransitionSelector(videoTransitionCatalog);
   v.media ||= {enabled:false, random:false}; v.transitionSelection ||= {enabled:false, random:false};
@@ -192,6 +194,15 @@ export function createVideoMixer({state, engine, notify}) {
     });
     if (canvas) {canvas.width = width; canvas.height = height;} error = null; lastTime = -Infinity;
   }
+  function setRecordingQuality(value) {
+    if (disposed) throw new Error('Video mixer was disposed.');
+    if (startPromise || stopPromise || recorder?.state === 'recording')
+      throw new Error('Stop video capture before changing recording quality.');
+    if (!recordingQualityOptions.some(option => option.value === value))
+      throw new RangeError('Choose a supported recording resolution.');
+    v.recordingQuality = normalizeRecordingQuality(value);
+    return recordingDimensions(v.recordingQuality,{width:v.width,height:v.height});
+  }
   function drawRaw(index) {
     const c = raw[index], ctx = c.getContext('2d'), item = slots[index];
     const graphics = karaokeFrames[index];
@@ -232,7 +243,9 @@ export function createVideoMixer({state, engine, notify}) {
         duration: item.video.duration, paused: item.video.paused, firstFrame:item.firstFrame,
         readyState:item.video.readyState, seeking:item.video.seeking} : null),
       loadedImages: [...assets.keys()], karaoke: [0, 1].map(i => karaoke.diagnostics(i)), pipeline: pipeline?.diagnostics(),
-      recording: recorder?.state === 'recording', captureBytes: result?.size || 0};
+      recording: recorder?.state === 'recording', recordingQuality:normalizeRecordingQuality(v.recordingQuality),
+      captureDimensions:captureSession ? {width:captureSession.lease.width,height:captureSession.lease.height,quality:captureSession.lease.quality} : null,
+      captureBytes: result?.size || 0};
   }
   function updateStatus() {
     for (let i = 0; i < 2; i++) {
@@ -301,10 +314,11 @@ export function createVideoMixer({state, engine, notify}) {
         amount: (Math.max(-1, Math.min(1, cross)) + 1)/2,
         upfaders: v.linked ? channels.map(c => c.upfader) : [1,1],
       });
-      for (const target of new Set([canvas, recorder?.state === 'recording' ? captureCanvas : null])) {
-        if (!target) continue; const ctx = target.getContext('2d');
-        ctx.clearRect(0,0,target.width,target.height); ctx.drawImage(output,0,0,target.width,target.height);
+      if (canvas) {
+        const ctx = canvas.getContext('2d'); ctx.clearRect(0,0,canvas.width,canvas.height);
+        ctx.drawImage(output,0,0,canvas.width,canvas.height);
       }
+      if (recorder?.state === 'recording') recordingSurface.draw(output);
       processed.forEach((source, i) => {
         const preview = document.querySelector(`#video-preview-${i}`);
         if (preview) {const ctx = preview.getContext('2d'); ctx.clearRect(0,0,preview.width,preview.height);
@@ -324,26 +338,30 @@ export function createVideoMixer({state, engine, notify}) {
       await engine.resume();
       if (disposed) throw new Error('Video mixer was disposed.');
       tick(true); if (error) throw new Error(error);
-      const source = canvas, stream = source.captureStream(30), chunks = [];
-      for (const audio of engine.destination.stream.getAudioTracks()) stream.addTrack(audio);
-      const mime = ['video/webm;codecs=vp9,opus','video/webm;codecs=vp8,opus','video/webm','video/mp4']
-        .find(t => MediaRecorder.isTypeSupported(t));
+      const lease = recordingSurface.begin({quality:v.recordingQuality,width:v.width,height:v.height}), chunks = [];
+      let stream;
       try {
+        recordingSurface.draw(canvas);
+        const source = lease.canvas; stream = source.captureStream(30);
+        for (const audio of engine.destination.stream.getAudioTracks()) stream.addTrack(audio);
+        const mime = ['video/webm;codecs=vp9,opus','video/webm;codecs=vp8,opus','video/webm','video/mp4']
+          .find(t => MediaRecorder.isTypeSupported(t));
         const current = new MediaRecorder(stream, mime ? {mimeType:mime} : {});
         current.ondataavailable = e => {if (e.data.size) chunks.push(e.data);};
         current.onerror = e => {error = e.error?.message || 'Video capture failed.'; notify(error);};
         let finish;
-        const session = {recorder:current, chunks, stream, stopping:false,
+        const session = {recorder:current, chunks, stream, lease, stopping:false,
           done: new Promise(resolve => {finish = resolve;})};
         current.onstop = () => {
           const blob = new Blob(chunks, {type:current.mimeType});
-          stream.getVideoTracks().forEach(t => t.stop());
+          stream.getVideoTracks().forEach(t => t.stop()); recordingSurface.release(lease);
           if (captureSession === session) {result = blob; captureCanvas = null; captureSession = null;}
           finish(blob);
         };
         current.start(250);
         recorder = current; captureCanvas = source; captureSession = session;
-      } catch (e) {stream.getVideoTracks().forEach(t => t.stop()); throw e;}
+      } catch (e) {stream?.getVideoTracks().forEach(t => t.stop()); recordingSurface.release(lease); throw e;}
+
     })().finally(() => {startPromise = null;});
     return startPromise;
   }
@@ -374,6 +392,7 @@ export function createVideoMixer({state, engine, notify}) {
       }
       await session.done;
     }
+    recordingSurface.dispose();
   }
   async function loadKaraoke(index, file, trackId, options) {
     const result = await karaoke.load(index, file, trackId, options);
@@ -382,7 +401,7 @@ export function createVideoMixer({state, engine, notify}) {
   }
   function configureKaraoke(index, options) {karaoke.configure(index, options); reset(index ? 'right' : 'left');}
   function clearKaraoke(index) {karaoke.clear(index); reset(index ? 'right' : 'left');}
-  return {load, bind, play, setOverlayImage, clearOverlayImage, setResolution, reset, tick,
+  return {load, bind, play, setOverlayImage, clearOverlayImage, setResolution, setRecordingQuality, reset, tick,
     loadKaraoke, configureKaraoke, clearKaraoke, karaokeDiagnostics: index => karaoke.diagnostics(index),
     addMedia, removeMedia, configureMedia, nextMedia, associateVideo, removeVideoAssociation,
     mediaDiagnostics, configureTransitions, nextTransition,

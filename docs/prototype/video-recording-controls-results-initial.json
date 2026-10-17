@@ -1,0 +1,17 @@
+{
+  "scope": "Executed actual Video controls handlers with controlled DOM replacement and deferred mixer start/stop. No browser navigation/capture proof.",
+  "passed": 0,
+  "failed": 2,
+  "checks": [
+    {
+      "name": "Leaving Video while Start awaits completion does not report a stale-DOM error",
+      "passed": false,
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n+ actual - expected\n\n+ [\n+   \"Cannot set properties of null (setting 'disabled')\"\n+ ]\n- []\n\n    at file:///Users/jasonpoindexter/Documents/GitHub/Open%20Play/scripts/test_video_recording_controls.mjs:17:52"
+    },
+    {
+      "name": "Leaving Video while Stop awaits completion does not report a stale-DOM error",
+      "passed": false,
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n+ actual - expected\n\n+ [\n+   \"Cannot set properties of null (setting 'disabled')\"\n+ ]\n- []\n\n    at file:///Users/jasonpoindexter/Documents/GitHub/Open%20Play/scripts/test_video_recording_controls.mjs:17:52"
+    }
+  ]
+}

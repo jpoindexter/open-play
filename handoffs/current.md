@@ -16,9 +16,19 @@ linked audio/karaoke/Media reviews for exact scope and retained failures.
 
 **Full parity NOT PASSED; no native app until Jason approves a revision.**
 The active goal continues. Semantic links24/24 and treatment21/21 now execute; current regression suites pass.
-Read docs/prototype/VIDEO_LINK_TREATMENT_REVIEW.md. Working inventory110/507.
+Read docs/prototype/VIDEO_LINK_TREATMENT_REVIEW.md. Working inventory110/521.
 Next: remaining Video controls/quality/window/output, then
 remaining reference, library, conditional, hardware and provider gaps. No automatic
 Claude completeness-audit launch. Conditional Cloud Code/Fable debugging assistance
 was used for a separate reference-research session with actual Fable5.1/High.
 Read approvals.md; this does not launch the full audit or grant native approval.
+
+Latest manual/recording review: docs/prototype/VIDEO_MANUAL_RECORDING_REVIEW.md.
+Corrected browserFX74/74,transitions55/55,Media32/32,recording23/23,
+pipeline32/32,karaoke19/19,treatment21/21. Fable research completed and was
+independently qualified; Effects/Info now observed with Video restoredOFF.
+The89-entry manual crosswalk exposes further semantic gaps; acceptance staysopen.
+
+Recovered manual reconciliation addsREQ-508–521 with inherited model/effort routing.
+Mac locked at latest native observation attempt; resume native screen checks after unlock.
+Browser work remains available; no physical/reference proof inferred.

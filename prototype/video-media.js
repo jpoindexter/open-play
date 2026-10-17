@@ -10,8 +10,10 @@ const families = Object.freeze([
 ]);
 export const videoMediaPolicy = Object.freeze({
   evidence,referenceRuntimeVerified:false,
-  documented:'Enabled Media Crate supplies visuals for audio lacking associated video; Random/Next and explicit associations are documented historically.',
-  independent:'Explicit valid association wins even when fallback is off. Ordered shared cursor wraps; each track caches its fallback until explicit advance, association change or asset removal. Random excludes that track’s current fallback if there is more than one candidate.',
+  documented:'Enabled Media Crate supplies visuals for audio lacking associated video. Recovered official Video manual141226 p12 says explicit Next advances in crate order even when Random is enabled; automatic track-load selection may remain Random. Historical manual, not current runtime equivalence.',
+  manualEvidence:'docs/research/video-manual-gaps.json VMG-010; official141226 PDF2015-04-09, SHA25685c57756dc96587b7b4822e2911decb4b9202f5a1d6b1cba047e1159236ae66c',
+  supersededIndependentPolicy:'Before the recovered manual, Random also governed explicit Next. Prior random-Next passes established that independent behavior only. This source conflict supersedes that policy without erasing historical runs or claiming4.0.10 runtime parity.',
+  independent:'Explicit valid association wins even when fallback is off. Ordered shared cursor wraps; explicit Next always advances that cursor in crate order without consuming randomness. Automatic track-load resolution retains Random and excludes that track’s current fallback when multiple candidates exist. Each track caches fallback until advance, association change or asset removal; exact reference shared-cursor/wrap rules remain unverified.',
   clipEnd:'Selection never auto-advances at clip end. Caller owns loop/hold/transport and decode/error UI; no end-of-clip behavior is inferred from track-load fallback.',
   recognizedFamilies:families,extensionHints:fallbackExtensions,
   validation:'Real named Blob/File with video/* MIME, or a recognized video extension when MIME is absent, generic or conflicting. Contradictions produce asset warnings rather than codec/product gates. Clearly nonvideo files without video evidence are rejected. Metadata eligibility only: actual mixer decoding is authoritative. Whole add batch validates before mutation; duplicate File references remain distinct explicitly added entries.',
@@ -63,12 +65,12 @@ export function createVideoMediaLibrary({random=Math.random}={}) {
   const live=()=>{if(disposed)throw new Error('Video media library was disposed.');};
   const find=id=>entries.find(entry=>entry.id===id);
   const result=(asset,kind,reason)=>Object.freeze({asset,kind,reason});
-  function choose(excludeId) {
-    if(randomMode){const candidates=entries.length>1?entries.filter(e=>e.id!==excludeId):entries;
+  function choose(excludeId,ordered=false) {
+    if(randomMode&&!ordered){const candidates=entries.length>1?entries.filter(e=>e.id!==excludeId):entries;
       const selected=candidates[randomIndex(random,candidates.length)];cursor=entries.indexOf(selected);return selected;}
     cursor=(cursor+1)%entries.length;return entries[cursor];
   }
-  function resolve(trackId,{advance=false}={}) {
+  function selection(trackId,advance,ordered) {
     live();identifier(trackId,'trackId');
     if(typeof advance!=='boolean')throw new TypeError('advance must be boolean.');
     const associated=find(associations.get(trackId));
@@ -77,9 +79,10 @@ export function createVideoMediaLibrary({random=Math.random}={}) {
     if(!entries.length)return result(null,'none','empty-library');
     const cached=resolved.get(trackId);
     if(cached&&!advance)return cached;
-    const asset=choose(cached?.asset.id??lastSelected);lastSelected=asset.id;
+    const asset=choose(cached?.asset.id??lastSelected,ordered);lastSelected=asset.id;
     const selected=result(asset,'fallback','fallback-enabled-without-association');resolved.set(trackId,selected);return selected;
   }
+  function resolve(trackId,{advance=false}={}){return selection(trackId,advance,false);}
   return {
     add(files) {
       live();if(!files||typeof files==='string'||typeof files[Symbol.iterator]!=='function')throw new TypeError('add needs an iterable of named Blob/File objects.');
@@ -102,7 +105,7 @@ export function createVideoMediaLibrary({random=Math.random}={}) {
     },
     association(trackId){live();identifier(trackId,'trackId');return associations.get(trackId)??null;},
     resolve,
-    next(trackId){return resolve(trackId,{advance:true});},
+    next(trackId){return selection(trackId,true,true);},
     configure(input={}){live();const next=configuration(input);if(next.enabled!==undefined)enabled=next.enabled;if(next.random!==undefined)randomMode=next.random;return {enabled,random:randomMode};},
     diagnostics(){return {disposed,enabled,random:randomMode,assetCount:entries.length,associationCount:associations.size,resolvedTrackCount:resolved.size,cursor,lastSelectedAssetId:lastSelected,policy:videoMediaPolicy};},
     dispose(){if(disposed)return;disposed=true;entries.length=0;associations.clear();resolved.clear();cursor=-1;lastSelected=null;},

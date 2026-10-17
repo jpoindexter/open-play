@@ -66,15 +66,10 @@ vec4 transition() {
     vec2 ap = p - vec2(0.0, drip * t), bp = p + vec2(0.0, drip * (1.0 - t));
     return mix(A(ap), B(bp), smoothstep(t - 0.16, t + 0.16, 1.0 - p.y + drip * 0.2));
   }
-  if (kind == 8) {
-    float distance = max(abs(center.x), abs(center.y)) * 2.0;
-    return mix(a, b, 1.0 - smoothstep(t - 0.025, t + 0.025, distance));
-  }
-  if (kind == 9) {
-    vec2 scrub = vec2(fract(p.x + (t - 0.5) * 0.28), p.y);
-    return latchSide < 0.5 ? fetchPremul(latchLeft, scrub) * upfaders.x : fetchPremul(latchRight, scrub) * upfaders.y;
-  }
-  if (kind == 10) return latchSide < 0.5 ? fetchPremul(latchLeft, p) * upfaders.x : fetchPremul(latchRight, p) * upfaders.y;
+  // Center amount is remapped from the central half by the lifecycle planner.
+  if (kind == 8) return mix(a, b, t);
+  // Endpoint hysteresis / midpoint selection acts on current live textures.
+  if (kind == 9 || kind == 10) return latchSide < 0.5 ? a : b;
   if (kind == 11) return mix(fetchPremul(latchLeft, p) * upfaders.x, b, t);
   if (kind == 12 || kind == 13) {
     bool horizontal = kind == 12;

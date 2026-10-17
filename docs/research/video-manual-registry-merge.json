@@ -1,0 +1,3115 @@
+{
+  "schemaVersion": 1,
+  "status": "canonical-merged-generated-inventory-verified",
+  "mergedAt": "2026-10-16T21:48:53.645708+00:00",
+  "authorization": "Parent explicitly authorized exactly14 additions REQ-508\u2013521 and targeted enrichment; no feature-registry or implementation source edit.",
+  "canonical": {
+    "path": "docs/research/interaction-requirements.json",
+    "beforeCount": 507,
+    "afterCount": 521,
+    "beforeSHA256": "dcc71b21dc3cc2a8437215f7f3d8c0bbaa8c919635aac314f71f2746fef9d1a4",
+    "afterSHA256": "3ca31181910d8ec75dc2b6d85b8c46463240f3dacadc6ce9e5986ce1a3502e09",
+    "newIDs": [
+      "REQ-508",
+      "REQ-509",
+      "REQ-510",
+      "REQ-511",
+      "REQ-512",
+      "REQ-513",
+      "REQ-514",
+      "REQ-515",
+      "REQ-516",
+      "REQ-517",
+      "REQ-518",
+      "REQ-519",
+      "REQ-520",
+      "REQ-521"
+    ],
+    "deletedIDs": [],
+    "existingRowsRoutingPreserved": true,
+    "existingPrototypeBehaviorEvidencePreserved": true,
+    "protectedParentRows": [
+      "REQ-348",
+      "REQ-498"
+    ],
+    "protectedParentExistingFieldsPreserved": true,
+    "completeInventory": false
+  },
+  "features": {
+    "path": "docs/delivery/feature-registry.json",
+    "count": 110,
+    "beforeSHA256": "c4df76f65ee8962845daddcc3855e0b2350917572b6e6f8f815fb3b763e3a71c",
+    "newEntries": 0,
+    "routingChanged": false
+  },
+  "source": {
+    "url": "https://serato.com/downloads/files/141226/Serato+Video+Software+Manual+for+Serato+DJ.pdf",
+    "localPDF": "local-evidence/claude-fable/official-video-manual-141226.pdf",
+    "localText": "local-evidence/claude-fable/official-video-manual-141226.txt",
+    "bytes": 425843,
+    "sha256": "85c57756dc96587b7b4822e2911decb4b9202f5a1d6b1cba047e1159236ae66c",
+    "pages": 27,
+    "pdfCreationDate": "2015-04-09",
+    "pdfModificationDate": "2015-04-09",
+    "evidenceClass": "OFFICIAL_PRIMARY_HISTORICAL_MANUAL_RECOVERED",
+    "retrieval": "Fable recovered and parent independently verified normal browser User-Agent download. This worker independently verified local bytes/hash/pdfinfo and read all27 pages; no native app control.",
+    "editionLimit": "A2025 HTTP Last-Modified header is not the manual edition. This2015 PDF is currently linked but does not establish current4.0.10 behavior. Earlier403/404 access findings are retrieval history, not current unavailability or content proof."
+  },
+  "currentReferenceObservation": "docs/research/VIDEO_REFERENCE_SETTINGS_20261016.json",
+  "newFamilies": [
+    {
+      "provisional_key": "MR-01",
+      "final_requirement_id": "REQ-508",
+      "feature_id": "VID-001",
+      "proposal_ids": [
+        "VMG-001"
+      ],
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "xhigh"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "Architecture and persistence require reasoning across failure and concurrency boundaries.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      }
+    },
+    {
+      "provisional_key": "MR-02",
+      "final_requirement_id": "REQ-509",
+      "feature_id": "VID-001",
+      "proposal_ids": [
+        "VMG-003",
+        "VMG-006"
+      ],
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "xhigh"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "Architecture and persistence require reasoning across failure and concurrency boundaries.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      }
+    },
+    {
+      "provisional_key": "MR-03",
+      "final_requirement_id": "REQ-510",
+      "feature_id": "LIB-003",
+      "proposal_ids": [
+        "VMG-004"
+      ],
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-sonnet-5",
+          "effort": "medium"
+        },
+        "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      }
+    },
+    {
+      "provisional_key": "MR-04",
+      "final_requirement_id": "REQ-511",
+      "feature_id": "VID-001",
+      "proposal_ids": [
+        "VMG-007"
+      ],
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "xhigh"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "Architecture and persistence require reasoning across failure and concurrency boundaries.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      }
+    },
+    {
+      "provisional_key": "MR-05",
+      "final_requirement_id": "REQ-512",
+      "feature_id": "VID-002",
+      "proposal_ids": [
+        "VMG-013",
+        "VMG-014"
+      ],
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-sonnet-5",
+          "effort": "medium"
+        },
+        "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      }
+    },
+    {
+      "provisional_key": "MR-06",
+      "final_requirement_id": "REQ-513",
+      "feature_id": "VID-002",
+      "proposal_ids": [
+        "VMG-015"
+      ],
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-sonnet-5",
+          "effort": "medium"
+        },
+        "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      }
+    },
+    {
+      "provisional_key": "MR-07",
+      "final_requirement_id": "REQ-514",
+      "feature_id": "VID-002",
+      "proposal_ids": [
+        "VMG-011"
+      ],
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-sonnet-5",
+          "effort": "medium"
+        },
+        "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      }
+    },
+    {
+      "provisional_key": "MR-08",
+      "final_requirement_id": "REQ-515",
+      "feature_id": "VID-002",
+      "proposal_ids": [
+        "VMG-018"
+      ],
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-sonnet-5",
+          "effort": "medium"
+        },
+        "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      }
+    },
+    {
+      "provisional_key": "MR-09",
+      "final_requirement_id": "REQ-516",
+      "feature_id": "HW-002",
+      "proposal_ids": [
+        "VMG-029",
+        "VMG-030",
+        "VMG-031"
+      ],
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-sonnet-5",
+          "effort": "medium"
+        },
+        "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      }
+    },
+    {
+      "provisional_key": "MR-10",
+      "final_requirement_id": "REQ-517",
+      "feature_id": "HW-010",
+      "proposal_ids": [
+        "VMG-032"
+      ],
+      "routing": {
+        "codex": {
+          "model": "gpt-6-astra",
+          "effort": "xhigh"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "xhigh"
+        },
+        "rationale": "Hardware protocols and binary evidence need careful competing hypotheses.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      }
+    },
+    {
+      "provisional_key": "MR-11",
+      "final_requirement_id": "REQ-518",
+      "feature_id": "VID-001",
+      "proposal_ids": [
+        "VMG-043",
+        "VMG-044"
+      ],
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "xhigh"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "Architecture and persistence require reasoning across failure and concurrency boundaries.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      }
+    },
+    {
+      "provisional_key": "MR-12",
+      "final_requirement_id": "REQ-519",
+      "feature_id": "VID-001",
+      "proposal_ids": [
+        "VMG-045"
+      ],
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "xhigh"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "Architecture and persistence require reasoning across failure and concurrency boundaries.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      }
+    },
+    {
+      "provisional_key": "MR-13",
+      "final_requirement_id": "REQ-520",
+      "feature_id": "VID-001",
+      "proposal_ids": [
+        "VMG-045"
+      ],
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "xhigh"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "Architecture and persistence require reasoning across failure and concurrency boundaries.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      }
+    },
+    {
+      "provisional_key": "MR-14",
+      "final_requirement_id": "REQ-521",
+      "feature_id": "VID-002",
+      "proposal_ids": [
+        "VMG-046"
+      ],
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-sonnet-5",
+          "effort": "medium"
+        },
+        "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      }
+    }
+  ],
+  "enrichedExistingCount": 29,
+  "proposalMappings": [
+    {
+      "proposal_id": "VMG-001",
+      "original_classification": "new-behavior",
+      "disposition": "new-family",
+      "new_requirement_ids": [
+        "REQ-508"
+      ],
+      "enriched_requirement_ids": [],
+      "final_requirement_ids": [
+        "REQ-508"
+      ],
+      "manual_pages": [
+        7,
+        8,
+        27
+      ],
+      "source_url": "https://serato.com/downloads/files/141226/Serato+Video+Software+Manual+for+Serato+DJ.pdf",
+      "source_sha256": "85c57756dc96587b7b4822e2911decb4b9202f5a1d6b1cba047e1159236ae66c",
+      "proposal_feature_id": "VID-001",
+      "proposal_inherited_routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "xhigh"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "Architecture and persistence require reasoning across failure and concurrency boundaries.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "final_requirements": [
+        {
+          "id": "REQ-508",
+          "feature_id": "VID-001",
+          "inherited_routing": {
+            "codex": {
+              "model": "gpt-6.1-sol",
+              "effort": "xhigh"
+            },
+            "claude_code": {
+              "model": "claude-opus-5",
+              "effort": "high"
+            },
+            "rationale": "Architecture and persistence require reasoning across failure and concurrency boundaries.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        }
+      ],
+      "reference_runtime_verified": false
+    },
+    {
+      "proposal_id": "VMG-002",
+      "original_classification": "new-behavior",
+      "disposition": "enrich-existing",
+      "new_requirement_ids": [],
+      "enriched_requirement_ids": [
+        "REQ-055"
+      ],
+      "final_requirement_ids": [
+        "REQ-055"
+      ],
+      "manual_pages": [
+        7
+      ],
+      "source_url": "https://serato.com/downloads/files/141226/Serato+Video+Software+Manual+for+Serato+DJ.pdf",
+      "source_sha256": "85c57756dc96587b7b4822e2911decb4b9202f5a1d6b1cba047e1159236ae66c",
+      "proposal_feature_id": "VID-001",
+      "proposal_inherited_routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "xhigh"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "Architecture and persistence require reasoning across failure and concurrency boundaries.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "final_requirements": [
+        {
+          "id": "REQ-055",
+          "feature_id": "VID-001",
+          "inherited_routing": {
+            "codex": {
+              "model": "gpt-6.1-sol",
+              "effort": "xhigh"
+            },
+            "claude_code": {
+              "model": "claude-opus-5",
+              "effort": "high"
+            },
+            "rationale": "Architecture and persistence require reasoning across failure and concurrency boundaries.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        }
+      ],
+      "reference_runtime_verified": false
+    },
+    {
+      "proposal_id": "VMG-003",
+      "original_classification": "new-behavior",
+      "disposition": "new-and-enrich-existing",
+      "new_requirement_ids": [
+        "REQ-509"
+      ],
+      "enriched_requirement_ids": [
+        "REQ-063",
+        "REQ-067"
+      ],
+      "final_requirement_ids": [
+        "REQ-509",
+        "REQ-063",
+        "REQ-067"
+      ],
+      "manual_pages": [
+        10,
+        11
+      ],
+      "source_url": "https://serato.com/downloads/files/141226/Serato+Video+Software+Manual+for+Serato+DJ.pdf",
+      "source_sha256": "85c57756dc96587b7b4822e2911decb4b9202f5a1d6b1cba047e1159236ae66c",
+      "proposal_feature_id": "LIB-001",
+      "proposal_inherited_routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-sonnet-5",
+          "effort": "medium"
+        },
+        "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "final_requirements": [
+        {
+          "id": "REQ-509",
+          "feature_id": "VID-001",
+          "inherited_routing": {
+            "codex": {
+              "model": "gpt-6.1-sol",
+              "effort": "xhigh"
+            },
+            "claude_code": {
+              "model": "claude-opus-5",
+              "effort": "high"
+            },
+            "rationale": "Architecture and persistence require reasoning across failure and concurrency boundaries.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        },
+        {
+          "id": "REQ-063",
+          "feature_id": "LIB-001",
+          "inherited_routing": {
+            "codex": {
+              "model": "gpt-6.1-sol",
+              "effort": "high"
+            },
+            "claude_code": {
+              "model": "claude-sonnet-5",
+              "effort": "medium"
+            },
+            "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        },
+        {
+          "id": "REQ-067",
+          "feature_id": "LIB-001",
+          "inherited_routing": {
+            "codex": {
+              "model": "gpt-6.1-sol",
+              "effort": "high"
+            },
+            "claude_code": {
+              "model": "claude-sonnet-5",
+              "effort": "medium"
+            },
+            "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        }
+      ],
+      "reference_runtime_verified": false
+    },
+    {
+      "proposal_id": "VMG-004",
+      "original_classification": "new-behavior",
+      "disposition": "new-family",
+      "new_requirement_ids": [
+        "REQ-510"
+      ],
+      "enriched_requirement_ids": [],
+      "final_requirement_ids": [
+        "REQ-510"
+      ],
+      "manual_pages": [
+        10
+      ],
+      "source_url": "https://serato.com/downloads/files/141226/Serato+Video+Software+Manual+for+Serato+DJ.pdf",
+      "source_sha256": "85c57756dc96587b7b4822e2911decb4b9202f5a1d6b1cba047e1159236ae66c",
+      "proposal_feature_id": "LIB-003",
+      "proposal_inherited_routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-sonnet-5",
+          "effort": "medium"
+        },
+        "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "final_requirements": [
+        {
+          "id": "REQ-510",
+          "feature_id": "LIB-003",
+          "inherited_routing": {
+            "codex": {
+              "model": "gpt-6.1-sol",
+              "effort": "high"
+            },
+            "claude_code": {
+              "model": "claude-sonnet-5",
+              "effort": "medium"
+            },
+            "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        }
+      ],
+      "reference_runtime_verified": false
+    },
+    {
+      "proposal_id": "VMG-005",
+      "original_classification": "new-behavior",
+      "disposition": "enrich-existing",
+      "new_requirement_ids": [],
+      "enriched_requirement_ids": [
+        "REQ-083"
+      ],
+      "final_requirement_ids": [
+        "REQ-083"
+      ],
+      "manual_pages": [
+        10
+      ],
+      "source_url": "https://serato.com/downloads/files/141226/Serato+Video+Software+Manual+for+Serato+DJ.pdf",
+      "source_sha256": "85c57756dc96587b7b4822e2911decb4b9202f5a1d6b1cba047e1159236ae66c",
+      "proposal_feature_id": "LIB-003",
+      "proposal_inherited_routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-sonnet-5",
+          "effort": "medium"
+        },
+        "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "final_requirements": [
+        {
+          "id": "REQ-083",
+          "feature_id": "LIB-003",
+          "inherited_routing": {
+            "codex": {
+              "model": "gpt-6.1-sol",
+              "effort": "high"
+            },
+            "claude_code": {
+              "model": "claude-sonnet-5",
+              "effort": "medium"
+            },
+            "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        }
+      ],
+      "reference_runtime_verified": false
+    },
+    {
+      "proposal_id": "VMG-006",
+      "original_classification": "new-behavior",
+      "disposition": "new-and-enrich-existing",
+      "new_requirement_ids": [
+        "REQ-509"
+      ],
+      "enriched_requirement_ids": [
+        "REQ-063"
+      ],
+      "final_requirement_ids": [
+        "REQ-509",
+        "REQ-063"
+      ],
+      "manual_pages": [
+        11
+      ],
+      "source_url": "https://serato.com/downloads/files/141226/Serato+Video+Software+Manual+for+Serato+DJ.pdf",
+      "source_sha256": "85c57756dc96587b7b4822e2911decb4b9202f5a1d6b1cba047e1159236ae66c",
+      "proposal_feature_id": "VID-001",
+      "proposal_inherited_routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "xhigh"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "Architecture and persistence require reasoning across failure and concurrency boundaries.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "final_requirements": [
+        {
+          "id": "REQ-509",
+          "feature_id": "VID-001",
+          "inherited_routing": {
+            "codex": {
+              "model": "gpt-6.1-sol",
+              "effort": "xhigh"
+            },
+            "claude_code": {
+              "model": "claude-opus-5",
+              "effort": "high"
+            },
+            "rationale": "Architecture and persistence require reasoning across failure and concurrency boundaries.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        },
+        {
+          "id": "REQ-063",
+          "feature_id": "LIB-001",
+          "inherited_routing": {
+            "codex": {
+              "model": "gpt-6.1-sol",
+              "effort": "high"
+            },
+            "claude_code": {
+              "model": "claude-sonnet-5",
+              "effort": "medium"
+            },
+            "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        }
+      ],
+      "reference_runtime_verified": false
+    },
+    {
+      "proposal_id": "VMG-007",
+      "original_classification": "new-behavior",
+      "disposition": "new-family",
+      "new_requirement_ids": [
+        "REQ-511"
+      ],
+      "enriched_requirement_ids": [],
+      "final_requirement_ids": [
+        "REQ-511"
+      ],
+      "manual_pages": [
+        11
+      ],
+      "source_url": "https://serato.com/downloads/files/141226/Serato+Video+Software+Manual+for+Serato+DJ.pdf",
+      "source_sha256": "85c57756dc96587b7b4822e2911decb4b9202f5a1d6b1cba047e1159236ae66c",
+      "proposal_feature_id": "VID-001",
+      "proposal_inherited_routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "xhigh"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "Architecture and persistence require reasoning across failure and concurrency boundaries.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "final_requirements": [
+        {
+          "id": "REQ-511",
+          "feature_id": "VID-001",
+          "inherited_routing": {
+            "codex": {
+              "model": "gpt-6.1-sol",
+              "effort": "xhigh"
+            },
+            "claude_code": {
+              "model": "claude-opus-5",
+              "effort": "high"
+            },
+            "rationale": "Architecture and persistence require reasoning across failure and concurrency boundaries.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        }
+      ],
+      "reference_runtime_verified": false
+    },
+    {
+      "proposal_id": "VMG-008",
+      "original_classification": "enrich-existing",
+      "disposition": "enrich-existing",
+      "new_requirement_ids": [],
+      "enriched_requirement_ids": [
+        "REQ-349"
+      ],
+      "final_requirement_ids": [
+        "REQ-349"
+      ],
+      "manual_pages": [
+        11,
+        12
+      ],
+      "source_url": "https://serato.com/downloads/files/141226/Serato+Video+Software+Manual+for+Serato+DJ.pdf",
+      "source_sha256": "85c57756dc96587b7b4822e2911decb4b9202f5a1d6b1cba047e1159236ae66c",
+      "proposal_feature_id": "VID-002",
+      "proposal_inherited_routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-sonnet-5",
+          "effort": "medium"
+        },
+        "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "final_requirements": [
+        {
+          "id": "REQ-349",
+          "feature_id": "VID-001",
+          "inherited_routing": {
+            "codex": {
+              "model": "gpt-6.1-sol",
+              "effort": "xhigh"
+            },
+            "claude_code": {
+              "model": "claude-opus-5",
+              "effort": "high"
+            },
+            "rationale": "Architecture and persistence require reasoning across failure and concurrency boundaries.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        }
+      ],
+      "reference_runtime_verified": false
+    },
+    {
+      "proposal_id": "VMG-009",
+      "original_classification": "new-behavior",
+      "disposition": "enrich-existing",
+      "new_requirement_ids": [],
+      "enriched_requirement_ids": [
+        "REQ-349"
+      ],
+      "final_requirement_ids": [
+        "REQ-349"
+      ],
+      "manual_pages": [
+        12
+      ],
+      "source_url": "https://serato.com/downloads/files/141226/Serato+Video+Software+Manual+for+Serato+DJ.pdf",
+      "source_sha256": "85c57756dc96587b7b4822e2911decb4b9202f5a1d6b1cba047e1159236ae66c",
+      "proposal_feature_id": "VID-002",
+      "proposal_inherited_routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-sonnet-5",
+          "effort": "medium"
+        },
+        "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "final_requirements": [
+        {
+          "id": "REQ-349",
+          "feature_id": "VID-001",
+          "inherited_routing": {
+            "codex": {
+              "model": "gpt-6.1-sol",
+              "effort": "xhigh"
+            },
+            "claude_code": {
+              "model": "claude-opus-5",
+              "effort": "high"
+            },
+            "rationale": "Architecture and persistence require reasoning across failure and concurrency boundaries.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        }
+      ],
+      "reference_runtime_verified": false
+    },
+    {
+      "proposal_id": "VMG-010",
+      "original_classification": "policy-conflict",
+      "disposition": "enrich-existing",
+      "new_requirement_ids": [],
+      "enriched_requirement_ids": [
+        "REQ-349"
+      ],
+      "final_requirement_ids": [
+        "REQ-349"
+      ],
+      "manual_pages": [
+        12
+      ],
+      "source_url": "https://serato.com/downloads/files/141226/Serato+Video+Software+Manual+for+Serato+DJ.pdf",
+      "source_sha256": "85c57756dc96587b7b4822e2911decb4b9202f5a1d6b1cba047e1159236ae66c",
+      "proposal_feature_id": "VID-002",
+      "proposal_inherited_routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-sonnet-5",
+          "effort": "medium"
+        },
+        "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "final_requirements": [
+        {
+          "id": "REQ-349",
+          "feature_id": "VID-001",
+          "inherited_routing": {
+            "codex": {
+              "model": "gpt-6.1-sol",
+              "effort": "xhigh"
+            },
+            "claude_code": {
+              "model": "claude-opus-5",
+              "effort": "high"
+            },
+            "rationale": "Architecture and persistence require reasoning across failure and concurrency boundaries.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        }
+      ],
+      "reference_runtime_verified": false
+    },
+    {
+      "proposal_id": "VMG-011",
+      "original_classification": "new-behavior",
+      "disposition": "new-family",
+      "new_requirement_ids": [
+        "REQ-514"
+      ],
+      "enriched_requirement_ids": [],
+      "final_requirement_ids": [
+        "REQ-514"
+      ],
+      "manual_pages": [
+        10,
+        12
+      ],
+      "source_url": "https://serato.com/downloads/files/141226/Serato+Video+Software+Manual+for+Serato+DJ.pdf",
+      "source_sha256": "85c57756dc96587b7b4822e2911decb4b9202f5a1d6b1cba047e1159236ae66c",
+      "proposal_feature_id": "VID-002",
+      "proposal_inherited_routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-sonnet-5",
+          "effort": "medium"
+        },
+        "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "final_requirements": [
+        {
+          "id": "REQ-514",
+          "feature_id": "VID-002",
+          "inherited_routing": {
+            "codex": {
+              "model": "gpt-6.1-sol",
+              "effort": "high"
+            },
+            "claude_code": {
+              "model": "claude-sonnet-5",
+              "effort": "medium"
+            },
+            "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        }
+      ],
+      "reference_runtime_verified": false
+    },
+    {
+      "proposal_id": "VMG-012",
+      "original_classification": "enrich-existing",
+      "disposition": "enrich-existing",
+      "new_requirement_ids": [],
+      "enriched_requirement_ids": [
+        "REQ-153"
+      ],
+      "final_requirement_ids": [
+        "REQ-153"
+      ],
+      "manual_pages": [
+        12
+      ],
+      "source_url": "https://serato.com/downloads/files/141226/Serato+Video+Software+Manual+for+Serato+DJ.pdf",
+      "source_sha256": "85c57756dc96587b7b4822e2911decb4b9202f5a1d6b1cba047e1159236ae66c",
+      "proposal_feature_id": "DEK-014",
+      "proposal_inherited_routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-sonnet-5",
+          "effort": "medium"
+        },
+        "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "final_requirements": [
+        {
+          "id": "REQ-153",
+          "feature_id": "DEK-014",
+          "inherited_routing": {
+            "codex": {
+              "model": "gpt-6.1-sol",
+              "effort": "high"
+            },
+            "claude_code": {
+              "model": "claude-sonnet-5",
+              "effort": "medium"
+            },
+            "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        }
+      ],
+      "reference_runtime_verified": false
+    },
+    {
+      "proposal_id": "VMG-013",
+      "original_classification": "new-behavior",
+      "disposition": "new-family",
+      "new_requirement_ids": [
+        "REQ-512"
+      ],
+      "enriched_requirement_ids": [],
+      "final_requirement_ids": [
+        "REQ-512"
+      ],
+      "manual_pages": [
+        8,
+        13
+      ],
+      "source_url": "https://serato.com/downloads/files/141226/Serato+Video+Software+Manual+for+Serato+DJ.pdf",
+      "source_sha256": "85c57756dc96587b7b4822e2911decb4b9202f5a1d6b1cba047e1159236ae66c",
+      "proposal_feature_id": "VID-002",
+      "proposal_inherited_routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-sonnet-5",
+          "effort": "medium"
+        },
+        "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "final_requirements": [
+        {
+          "id": "REQ-512",
+          "feature_id": "VID-002",
+          "inherited_routing": {
+            "codex": {
+              "model": "gpt-6.1-sol",
+              "effort": "high"
+            },
+            "claude_code": {
+              "model": "claude-sonnet-5",
+              "effort": "medium"
+            },
+            "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        }
+      ],
+      "reference_runtime_verified": false
+    },
+    {
+      "proposal_id": "VMG-014",
+      "original_classification": "new-behavior",
+      "disposition": "new-family",
+      "new_requirement_ids": [
+        "REQ-512"
+      ],
+      "enriched_requirement_ids": [],
+      "final_requirement_ids": [
+        "REQ-512"
+      ],
+      "manual_pages": [
+        9,
+        13
+      ],
+      "source_url": "https://serato.com/downloads/files/141226/Serato+Video+Software+Manual+for+Serato+DJ.pdf",
+      "source_sha256": "85c57756dc96587b7b4822e2911decb4b9202f5a1d6b1cba047e1159236ae66c",
+      "proposal_feature_id": "VID-002",
+      "proposal_inherited_routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-sonnet-5",
+          "effort": "medium"
+        },
+        "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "final_requirements": [
+        {
+          "id": "REQ-512",
+          "feature_id": "VID-002",
+          "inherited_routing": {
+            "codex": {
+              "model": "gpt-6.1-sol",
+              "effort": "high"
+            },
+            "claude_code": {
+              "model": "claude-sonnet-5",
+              "effort": "medium"
+            },
+            "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        }
+      ],
+      "reference_runtime_verified": false
+    },
+    {
+      "proposal_id": "VMG-015",
+      "original_classification": "new-behavior",
+      "disposition": "new-family",
+      "new_requirement_ids": [
+        "REQ-513"
+      ],
+      "enriched_requirement_ids": [],
+      "final_requirement_ids": [
+        "REQ-513"
+      ],
+      "manual_pages": [
+        9,
+        23
+      ],
+      "source_url": "https://serato.com/downloads/files/141226/Serato+Video+Software+Manual+for+Serato+DJ.pdf",
+      "source_sha256": "85c57756dc96587b7b4822e2911decb4b9202f5a1d6b1cba047e1159236ae66c",
+      "proposal_feature_id": "VID-002",
+      "proposal_inherited_routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-sonnet-5",
+          "effort": "medium"
+        },
+        "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "final_requirements": [
+        {
+          "id": "REQ-513",
+          "feature_id": "VID-002",
+          "inherited_routing": {
+            "codex": {
+              "model": "gpt-6.1-sol",
+              "effort": "high"
+            },
+            "claude_code": {
+              "model": "claude-sonnet-5",
+              "effort": "medium"
+            },
+            "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        }
+      ],
+      "reference_runtime_verified": false
+    },
+    {
+      "proposal_id": "VMG-016",
+      "original_classification": "enrich-existing",
+      "disposition": "enrich-existing",
+      "new_requirement_ids": [],
+      "enriched_requirement_ids": [
+        "REQ-505"
+      ],
+      "final_requirement_ids": [
+        "REQ-505"
+      ],
+      "manual_pages": [
+        23
+      ],
+      "source_url": "https://serato.com/downloads/files/141226/Serato+Video+Software+Manual+for+Serato+DJ.pdf",
+      "source_sha256": "85c57756dc96587b7b4822e2911decb4b9202f5a1d6b1cba047e1159236ae66c",
+      "proposal_feature_id": "VID-002",
+      "proposal_inherited_routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-sonnet-5",
+          "effort": "medium"
+        },
+        "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "final_requirements": [
+        {
+          "id": "REQ-505",
+          "feature_id": "VID-002",
+          "inherited_routing": {
+            "codex": {
+              "model": "gpt-6.1-sol",
+              "effort": "high"
+            },
+            "claude_code": {
+              "model": "claude-sonnet-5",
+              "effort": "medium"
+            },
+            "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        }
+      ],
+      "reference_runtime_verified": false
+    },
+    {
+      "proposal_id": "VMG-017",
+      "original_classification": "enrich-existing",
+      "disposition": "enrich-existing",
+      "new_requirement_ids": [],
+      "enriched_requirement_ids": [
+        "REQ-507"
+      ],
+      "final_requirement_ids": [
+        "REQ-507"
+      ],
+      "manual_pages": [
+        13,
+        24
+      ],
+      "source_url": "https://serato.com/downloads/files/141226/Serato+Video+Software+Manual+for+Serato+DJ.pdf",
+      "source_sha256": "85c57756dc96587b7b4822e2911decb4b9202f5a1d6b1cba047e1159236ae66c",
+      "proposal_feature_id": "VID-002",
+      "proposal_inherited_routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-sonnet-5",
+          "effort": "medium"
+        },
+        "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "final_requirements": [
+        {
+          "id": "REQ-507",
+          "feature_id": "VID-002",
+          "inherited_routing": {
+            "codex": {
+              "model": "gpt-6.1-sol",
+              "effort": "high"
+            },
+            "claude_code": {
+              "model": "claude-sonnet-5",
+              "effort": "medium"
+            },
+            "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        }
+      ],
+      "reference_runtime_verified": false
+    },
+    {
+      "proposal_id": "VMG-018",
+      "original_classification": "new-behavior",
+      "disposition": "new-family",
+      "new_requirement_ids": [
+        "REQ-515"
+      ],
+      "enriched_requirement_ids": [],
+      "final_requirement_ids": [
+        "REQ-515"
+      ],
+      "manual_pages": [
+        8,
+        12
+      ],
+      "source_url": "https://serato.com/downloads/files/141226/Serato+Video+Software+Manual+for+Serato+DJ.pdf",
+      "source_sha256": "85c57756dc96587b7b4822e2911decb4b9202f5a1d6b1cba047e1159236ae66c",
+      "proposal_feature_id": "VID-002",
+      "proposal_inherited_routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-sonnet-5",
+          "effort": "medium"
+        },
+        "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "final_requirements": [
+        {
+          "id": "REQ-515",
+          "feature_id": "VID-002",
+          "inherited_routing": {
+            "codex": {
+              "model": "gpt-6.1-sol",
+              "effort": "high"
+            },
+            "claude_code": {
+              "model": "claude-sonnet-5",
+              "effort": "medium"
+            },
+            "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        }
+      ],
+      "reference_runtime_verified": false
+    },
+    {
+      "proposal_id": "VMG-019",
+      "original_classification": "enrich-existing",
+      "disposition": "enrich-existing",
+      "new_requirement_ids": [],
+      "enriched_requirement_ids": [
+        "REQ-347"
+      ],
+      "final_requirement_ids": [
+        "REQ-347"
+      ],
+      "manual_pages": [
+        13,
+        27
+      ],
+      "source_url": "https://serato.com/downloads/files/141226/Serato+Video+Software+Manual+for+Serato+DJ.pdf",
+      "source_sha256": "85c57756dc96587b7b4822e2911decb4b9202f5a1d6b1cba047e1159236ae66c",
+      "proposal_feature_id": "VID-002",
+      "proposal_inherited_routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-sonnet-5",
+          "effort": "medium"
+        },
+        "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "final_requirements": [
+        {
+          "id": "REQ-347",
+          "feature_id": "VID-002",
+          "inherited_routing": {
+            "codex": {
+              "model": "gpt-6.1-sol",
+              "effort": "high"
+            },
+            "claude_code": {
+              "model": "claude-sonnet-5",
+              "effort": "medium"
+            },
+            "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        }
+      ],
+      "reference_runtime_verified": false
+    },
+    {
+      "proposal_id": "VMG-020",
+      "original_classification": "enrich-existing",
+      "disposition": "enrich-existing",
+      "new_requirement_ids": [],
+      "enriched_requirement_ids": [
+        "REQ-283",
+        "REQ-284"
+      ],
+      "final_requirement_ids": [
+        "REQ-283",
+        "REQ-284"
+      ],
+      "manual_pages": [
+        14,
+        15
+      ],
+      "source_url": "https://serato.com/downloads/files/141226/Serato+Video+Software+Manual+for+Serato+DJ.pdf",
+      "source_sha256": "85c57756dc96587b7b4822e2911decb4b9202f5a1d6b1cba047e1159236ae66c",
+      "proposal_feature_id": "VID-002",
+      "proposal_inherited_routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-sonnet-5",
+          "effort": "medium"
+        },
+        "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "final_requirements": [
+        {
+          "id": "REQ-283",
+          "feature_id": "VID-002",
+          "inherited_routing": {
+            "codex": {
+              "model": "gpt-6.1-sol",
+              "effort": "high"
+            },
+            "claude_code": {
+              "model": "claude-sonnet-5",
+              "effort": "medium"
+            },
+            "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        },
+        {
+          "id": "REQ-284",
+          "feature_id": "VID-002",
+          "inherited_routing": {
+            "codex": {
+              "model": "gpt-6.1-sol",
+              "effort": "high"
+            },
+            "claude_code": {
+              "model": "claude-sonnet-5",
+              "effort": "medium"
+            },
+            "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        }
+      ],
+      "reference_runtime_verified": false
+    },
+    {
+      "proposal_id": "VMG-021",
+      "original_classification": "enrich-existing",
+      "disposition": "enrich-existing",
+      "new_requirement_ids": [],
+      "enriched_requirement_ids": [
+        "REQ-283",
+        "REQ-284"
+      ],
+      "final_requirement_ids": [
+        "REQ-283",
+        "REQ-284"
+      ],
+      "manual_pages": [
+        14,
+        15
+      ],
+      "source_url": "https://serato.com/downloads/files/141226/Serato+Video+Software+Manual+for+Serato+DJ.pdf",
+      "source_sha256": "85c57756dc96587b7b4822e2911decb4b9202f5a1d6b1cba047e1159236ae66c",
+      "proposal_feature_id": "VID-002",
+      "proposal_inherited_routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-sonnet-5",
+          "effort": "medium"
+        },
+        "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "final_requirements": [
+        {
+          "id": "REQ-283",
+          "feature_id": "VID-002",
+          "inherited_routing": {
+            "codex": {
+              "model": "gpt-6.1-sol",
+              "effort": "high"
+            },
+            "claude_code": {
+              "model": "claude-sonnet-5",
+              "effort": "medium"
+            },
+            "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        },
+        {
+          "id": "REQ-284",
+          "feature_id": "VID-002",
+          "inherited_routing": {
+            "codex": {
+              "model": "gpt-6.1-sol",
+              "effort": "high"
+            },
+            "claude_code": {
+              "model": "claude-sonnet-5",
+              "effort": "medium"
+            },
+            "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        }
+      ],
+      "reference_runtime_verified": false
+    },
+    {
+      "proposal_id": "VMG-022",
+      "original_classification": "enrich-existing",
+      "disposition": "enrich-existing",
+      "new_requirement_ids": [],
+      "enriched_requirement_ids": [
+        "REQ-284"
+      ],
+      "final_requirement_ids": [
+        "REQ-284"
+      ],
+      "manual_pages": [
+        14
+      ],
+      "source_url": "https://serato.com/downloads/files/141226/Serato+Video+Software+Manual+for+Serato+DJ.pdf",
+      "source_sha256": "85c57756dc96587b7b4822e2911decb4b9202f5a1d6b1cba047e1159236ae66c",
+      "proposal_feature_id": "VID-002",
+      "proposal_inherited_routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-sonnet-5",
+          "effort": "medium"
+        },
+        "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "final_requirements": [
+        {
+          "id": "REQ-284",
+          "feature_id": "VID-002",
+          "inherited_routing": {
+            "codex": {
+              "model": "gpt-6.1-sol",
+              "effort": "high"
+            },
+            "claude_code": {
+              "model": "claude-sonnet-5",
+              "effort": "medium"
+            },
+            "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        }
+      ],
+      "reference_runtime_verified": false
+    },
+    {
+      "proposal_id": "VMG-023",
+      "original_classification": "enrich-existing",
+      "disposition": "enrich-existing",
+      "new_requirement_ids": [],
+      "enriched_requirement_ids": [
+        "REQ-199"
+      ],
+      "final_requirement_ids": [
+        "REQ-199"
+      ],
+      "manual_pages": [
+        16
+      ],
+      "source_url": "https://serato.com/downloads/files/141226/Serato+Video+Software+Manual+for+Serato+DJ.pdf",
+      "source_sha256": "85c57756dc96587b7b4822e2911decb4b9202f5a1d6b1cba047e1159236ae66c",
+      "proposal_feature_id": "REC-003",
+      "proposal_inherited_routing": {
+        "codex": {
+          "model": "gpt-6-astra",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "DSP and transport require numerical reasoning backed by measurements.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "final_requirements": [
+        {
+          "id": "REQ-199",
+          "feature_id": "REC-003",
+          "inherited_routing": {
+            "codex": {
+              "model": "gpt-6-astra",
+              "effort": "high"
+            },
+            "claude_code": {
+              "model": "claude-opus-5",
+              "effort": "high"
+            },
+            "rationale": "DSP and transport require numerical reasoning backed by measurements.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        }
+      ],
+      "reference_runtime_verified": false
+    },
+    {
+      "proposal_id": "VMG-024",
+      "original_classification": "enrich-existing",
+      "disposition": "enrich-existing",
+      "new_requirement_ids": [],
+      "enriched_requirement_ids": [
+        "REQ-498"
+      ],
+      "final_requirement_ids": [
+        "REQ-498"
+      ],
+      "manual_pages": [
+        16,
+        22
+      ],
+      "source_url": "https://serato.com/downloads/files/141226/Serato+Video+Software+Manual+for+Serato+DJ.pdf",
+      "source_sha256": "85c57756dc96587b7b4822e2911decb4b9202f5a1d6b1cba047e1159236ae66c",
+      "proposal_feature_id": "VID-001",
+      "proposal_inherited_routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "xhigh"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "Architecture and persistence require reasoning across failure and concurrency boundaries.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "final_requirements": [
+        {
+          "id": "REQ-498",
+          "feature_id": "VID-001",
+          "inherited_routing": {
+            "codex": {
+              "model": "gpt-6.1-sol",
+              "effort": "xhigh"
+            },
+            "claude_code": {
+              "model": "claude-opus-5",
+              "effort": "high"
+            },
+            "rationale": "Architecture and persistence require reasoning across failure and concurrency boundaries.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        }
+      ],
+      "reference_runtime_verified": false
+    },
+    {
+      "proposal_id": "VMG-025",
+      "original_classification": "enrich-existing",
+      "disposition": "enrich-existing",
+      "new_requirement_ids": [],
+      "enriched_requirement_ids": [
+        "REQ-199"
+      ],
+      "final_requirement_ids": [
+        "REQ-199"
+      ],
+      "manual_pages": [
+        16
+      ],
+      "source_url": "https://serato.com/downloads/files/141226/Serato+Video+Software+Manual+for+Serato+DJ.pdf",
+      "source_sha256": "85c57756dc96587b7b4822e2911decb4b9202f5a1d6b1cba047e1159236ae66c",
+      "proposal_feature_id": "REC-003",
+      "proposal_inherited_routing": {
+        "codex": {
+          "model": "gpt-6-astra",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "DSP and transport require numerical reasoning backed by measurements.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "final_requirements": [
+        {
+          "id": "REQ-199",
+          "feature_id": "REC-003",
+          "inherited_routing": {
+            "codex": {
+              "model": "gpt-6-astra",
+              "effort": "high"
+            },
+            "claude_code": {
+              "model": "claude-opus-5",
+              "effort": "high"
+            },
+            "rationale": "DSP and transport require numerical reasoning backed by measurements.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        }
+      ],
+      "reference_runtime_verified": false
+    },
+    {
+      "proposal_id": "VMG-026",
+      "original_classification": "enrich-existing",
+      "disposition": "enrich-existing",
+      "new_requirement_ids": [],
+      "enriched_requirement_ids": [
+        "REQ-200"
+      ],
+      "final_requirement_ids": [
+        "REQ-200"
+      ],
+      "manual_pages": [
+        16
+      ],
+      "source_url": "https://serato.com/downloads/files/141226/Serato+Video+Software+Manual+for+Serato+DJ.pdf",
+      "source_sha256": "85c57756dc96587b7b4822e2911decb4b9202f5a1d6b1cba047e1159236ae66c",
+      "proposal_feature_id": "REC-001",
+      "proposal_inherited_routing": {
+        "codex": {
+          "model": "gpt-6-astra",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "DSP and transport require numerical reasoning backed by measurements.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "final_requirements": [
+        {
+          "id": "REQ-200",
+          "feature_id": "REC-001",
+          "inherited_routing": {
+            "codex": {
+              "model": "gpt-6-astra",
+              "effort": "high"
+            },
+            "claude_code": {
+              "model": "claude-opus-5",
+              "effort": "high"
+            },
+            "rationale": "DSP and transport require numerical reasoning backed by measurements.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        }
+      ],
+      "reference_runtime_verified": false
+    },
+    {
+      "proposal_id": "VMG-027",
+      "original_classification": "enrich-existing",
+      "disposition": "enrich-existing",
+      "new_requirement_ids": [],
+      "enriched_requirement_ids": [
+        "REQ-367",
+        "REQ-368"
+      ],
+      "final_requirement_ids": [
+        "REQ-367",
+        "REQ-368"
+      ],
+      "manual_pages": [
+        16
+      ],
+      "source_url": "https://serato.com/downloads/files/141226/Serato+Video+Software+Manual+for+Serato+DJ.pdf",
+      "source_sha256": "85c57756dc96587b7b4822e2911decb4b9202f5a1d6b1cba047e1159236ae66c",
+      "proposal_feature_id": "REC-002",
+      "proposal_inherited_routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "xhigh"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "Architecture and persistence require reasoning across failure and concurrency boundaries.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "final_requirements": [
+        {
+          "id": "REQ-367",
+          "feature_id": "REC-002",
+          "inherited_routing": {
+            "codex": {
+              "model": "gpt-6.1-sol",
+              "effort": "xhigh"
+            },
+            "claude_code": {
+              "model": "claude-opus-5",
+              "effort": "high"
+            },
+            "rationale": "Architecture and persistence require reasoning across failure and concurrency boundaries.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        },
+        {
+          "id": "REQ-368",
+          "feature_id": "REC-002",
+          "inherited_routing": {
+            "codex": {
+              "model": "gpt-6.1-sol",
+              "effort": "xhigh"
+            },
+            "claude_code": {
+              "model": "claude-opus-5",
+              "effort": "high"
+            },
+            "rationale": "Architecture and persistence require reasoning across failure and concurrency boundaries.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        }
+      ],
+      "reference_runtime_verified": false
+    },
+    {
+      "proposal_id": "VMG-028",
+      "original_classification": "covered-generic-needs-video-scope",
+      "disposition": "enrich-existing",
+      "new_requirement_ids": [],
+      "enriched_requirement_ids": [
+        "REQ-370"
+      ],
+      "final_requirement_ids": [
+        "REQ-370"
+      ],
+      "manual_pages": [
+        16
+      ],
+      "source_url": "https://serato.com/downloads/files/141226/Serato+Video+Software+Manual+for+Serato+DJ.pdf",
+      "source_sha256": "85c57756dc96587b7b4822e2911decb4b9202f5a1d6b1cba047e1159236ae66c",
+      "proposal_feature_id": "REC-002",
+      "proposal_inherited_routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "xhigh"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "Architecture and persistence require reasoning across failure and concurrency boundaries.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "final_requirements": [
+        {
+          "id": "REQ-370",
+          "feature_id": "REC-002",
+          "inherited_routing": {
+            "codex": {
+              "model": "gpt-6.1-sol",
+              "effort": "xhigh"
+            },
+            "claude_code": {
+              "model": "claude-opus-5",
+              "effort": "high"
+            },
+            "rationale": "Architecture and persistence require reasoning across failure and concurrency boundaries.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        }
+      ],
+      "reference_runtime_verified": false
+    },
+    {
+      "proposal_id": "VMG-029",
+      "original_classification": "enrich-existing",
+      "disposition": "new-and-enrich-existing",
+      "new_requirement_ids": [
+        "REQ-516"
+      ],
+      "enriched_requirement_ids": [
+        "REQ-206",
+        "REQ-208"
+      ],
+      "final_requirement_ids": [
+        "REQ-516",
+        "REQ-206",
+        "REQ-208"
+      ],
+      "manual_pages": [
+        17
+      ],
+      "source_url": "https://serato.com/downloads/files/141226/Serato+Video+Software+Manual+for+Serato+DJ.pdf",
+      "source_sha256": "85c57756dc96587b7b4822e2911decb4b9202f5a1d6b1cba047e1159236ae66c",
+      "proposal_feature_id": "HW-002",
+      "proposal_inherited_routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-sonnet-5",
+          "effort": "medium"
+        },
+        "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "final_requirements": [
+        {
+          "id": "REQ-516",
+          "feature_id": "HW-002",
+          "inherited_routing": {
+            "codex": {
+              "model": "gpt-6.1-sol",
+              "effort": "high"
+            },
+            "claude_code": {
+              "model": "claude-sonnet-5",
+              "effort": "medium"
+            },
+            "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        },
+        {
+          "id": "REQ-206",
+          "feature_id": "HW-002",
+          "inherited_routing": {
+            "codex": {
+              "model": "gpt-6.1-sol",
+              "effort": "high"
+            },
+            "claude_code": {
+              "model": "claude-sonnet-5",
+              "effort": "medium"
+            },
+            "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        },
+        {
+          "id": "REQ-208",
+          "feature_id": "HW-002",
+          "inherited_routing": {
+            "codex": {
+              "model": "gpt-6.1-sol",
+              "effort": "high"
+            },
+            "claude_code": {
+              "model": "claude-sonnet-5",
+              "effort": "medium"
+            },
+            "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        }
+      ],
+      "reference_runtime_verified": false
+    },
+    {
+      "proposal_id": "VMG-030",
+      "original_classification": "new-behavior",
+      "disposition": "new-family",
+      "new_requirement_ids": [
+        "REQ-516"
+      ],
+      "enriched_requirement_ids": [],
+      "final_requirement_ids": [
+        "REQ-516"
+      ],
+      "manual_pages": [
+        17,
+        18
+      ],
+      "source_url": "https://serato.com/downloads/files/141226/Serato+Video+Software+Manual+for+Serato+DJ.pdf",
+      "source_sha256": "85c57756dc96587b7b4822e2911decb4b9202f5a1d6b1cba047e1159236ae66c",
+      "proposal_feature_id": "HW-002",
+      "proposal_inherited_routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-sonnet-5",
+          "effort": "medium"
+        },
+        "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "final_requirements": [
+        {
+          "id": "REQ-516",
+          "feature_id": "HW-002",
+          "inherited_routing": {
+            "codex": {
+              "model": "gpt-6.1-sol",
+              "effort": "high"
+            },
+            "claude_code": {
+              "model": "claude-sonnet-5",
+              "effort": "medium"
+            },
+            "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        }
+      ],
+      "reference_runtime_verified": false
+    },
+    {
+      "proposal_id": "VMG-031",
+      "original_classification": "new-behavior",
+      "disposition": "new-family",
+      "new_requirement_ids": [
+        "REQ-516"
+      ],
+      "enriched_requirement_ids": [],
+      "final_requirement_ids": [
+        "REQ-516"
+      ],
+      "manual_pages": [
+        17,
+        18
+      ],
+      "source_url": "https://serato.com/downloads/files/141226/Serato+Video+Software+Manual+for+Serato+DJ.pdf",
+      "source_sha256": "85c57756dc96587b7b4822e2911decb4b9202f5a1d6b1cba047e1159236ae66c",
+      "proposal_feature_id": "HW-002",
+      "proposal_inherited_routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-sonnet-5",
+          "effort": "medium"
+        },
+        "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "final_requirements": [
+        {
+          "id": "REQ-516",
+          "feature_id": "HW-002",
+          "inherited_routing": {
+            "codex": {
+              "model": "gpt-6.1-sol",
+              "effort": "high"
+            },
+            "claude_code": {
+              "model": "claude-sonnet-5",
+              "effort": "medium"
+            },
+            "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        }
+      ],
+      "reference_runtime_verified": false
+    },
+    {
+      "proposal_id": "VMG-032",
+      "original_classification": "new-behavior",
+      "disposition": "new-family",
+      "new_requirement_ids": [
+        "REQ-517"
+      ],
+      "enriched_requirement_ids": [],
+      "final_requirement_ids": [
+        "REQ-517"
+      ],
+      "manual_pages": [
+        10
+      ],
+      "source_url": "https://serato.com/downloads/files/141226/Serato+Video+Software+Manual+for+Serato+DJ.pdf",
+      "source_sha256": "85c57756dc96587b7b4822e2911decb4b9202f5a1d6b1cba047e1159236ae66c",
+      "proposal_feature_id": "HW-010",
+      "proposal_inherited_routing": {
+        "codex": {
+          "model": "gpt-6-astra",
+          "effort": "xhigh"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "xhigh"
+        },
+        "rationale": "Hardware protocols and binary evidence need careful competing hypotheses.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "final_requirements": [
+        {
+          "id": "REQ-517",
+          "feature_id": "HW-010",
+          "inherited_routing": {
+            "codex": {
+              "model": "gpt-6-astra",
+              "effort": "xhigh"
+            },
+            "claude_code": {
+              "model": "claude-opus-5",
+              "effort": "xhigh"
+            },
+            "rationale": "Hardware protocols and binary evidence need careful competing hypotheses.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        }
+      ],
+      "reference_runtime_verified": false
+    },
+    {
+      "proposal_id": "VMG-033",
+      "original_classification": "enrich-existing",
+      "disposition": "enrich-existing",
+      "new_requirement_ids": [],
+      "enriched_requirement_ids": [
+        "REQ-496"
+      ],
+      "final_requirement_ids": [
+        "REQ-496"
+      ],
+      "manual_pages": [
+        22
+      ],
+      "source_url": "https://serato.com/downloads/files/141226/Serato+Video+Software+Manual+for+Serato+DJ.pdf",
+      "source_sha256": "85c57756dc96587b7b4822e2911decb4b9202f5a1d6b1cba047e1159236ae66c",
+      "proposal_feature_id": "VID-001",
+      "proposal_inherited_routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "xhigh"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "Architecture and persistence require reasoning across failure and concurrency boundaries.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "final_requirements": [
+        {
+          "id": "REQ-496",
+          "feature_id": "VID-001",
+          "inherited_routing": {
+            "codex": {
+              "model": "gpt-6.1-sol",
+              "effort": "xhigh"
+            },
+            "claude_code": {
+              "model": "claude-opus-5",
+              "effort": "high"
+            },
+            "rationale": "Architecture and persistence require reasoning across failure and concurrency boundaries.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        }
+      ],
+      "reference_runtime_verified": false
+    },
+    {
+      "proposal_id": "VMG-034",
+      "original_classification": "enrich-existing",
+      "disposition": "enrich-existing",
+      "new_requirement_ids": [],
+      "enriched_requirement_ids": [
+        "REQ-497"
+      ],
+      "final_requirement_ids": [
+        "REQ-497"
+      ],
+      "manual_pages": [
+        22
+      ],
+      "source_url": "https://serato.com/downloads/files/141226/Serato+Video+Software+Manual+for+Serato+DJ.pdf",
+      "source_sha256": "85c57756dc96587b7b4822e2911decb4b9202f5a1d6b1cba047e1159236ae66c",
+      "proposal_feature_id": "VID-001",
+      "proposal_inherited_routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "xhigh"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "Architecture and persistence require reasoning across failure and concurrency boundaries.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "final_requirements": [
+        {
+          "id": "REQ-497",
+          "feature_id": "VID-001",
+          "inherited_routing": {
+            "codex": {
+              "model": "gpt-6.1-sol",
+              "effort": "xhigh"
+            },
+            "claude_code": {
+              "model": "claude-opus-5",
+              "effort": "high"
+            },
+            "rationale": "Architecture and persistence require reasoning across failure and concurrency boundaries.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        }
+      ],
+      "reference_runtime_verified": false
+    },
+    {
+      "proposal_id": "VMG-035",
+      "original_classification": "enrich-existing",
+      "disposition": "enrich-existing",
+      "new_requirement_ids": [],
+      "enriched_requirement_ids": [
+        "REQ-499"
+      ],
+      "final_requirement_ids": [
+        "REQ-499"
+      ],
+      "manual_pages": [
+        22
+      ],
+      "source_url": "https://serato.com/downloads/files/141226/Serato+Video+Software+Manual+for+Serato+DJ.pdf",
+      "source_sha256": "85c57756dc96587b7b4822e2911decb4b9202f5a1d6b1cba047e1159236ae66c",
+      "proposal_feature_id": "VID-001",
+      "proposal_inherited_routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "xhigh"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "Architecture and persistence require reasoning across failure and concurrency boundaries.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "final_requirements": [
+        {
+          "id": "REQ-499",
+          "feature_id": "VID-001",
+          "inherited_routing": {
+            "codex": {
+              "model": "gpt-6.1-sol",
+              "effort": "xhigh"
+            },
+            "claude_code": {
+              "model": "claude-opus-5",
+              "effort": "high"
+            },
+            "rationale": "Architecture and persistence require reasoning across failure and concurrency boundaries.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        }
+      ],
+      "reference_runtime_verified": false
+    },
+    {
+      "proposal_id": "VMG-036",
+      "original_classification": "enrich-existing",
+      "disposition": "enrich-existing",
+      "new_requirement_ids": [],
+      "enriched_requirement_ids": [
+        "REQ-500"
+      ],
+      "final_requirement_ids": [
+        "REQ-500"
+      ],
+      "manual_pages": [
+        23
+      ],
+      "source_url": "https://serato.com/downloads/files/141226/Serato+Video+Software+Manual+for+Serato+DJ.pdf",
+      "source_sha256": "85c57756dc96587b7b4822e2911decb4b9202f5a1d6b1cba047e1159236ae66c",
+      "proposal_feature_id": "VID-002",
+      "proposal_inherited_routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-sonnet-5",
+          "effort": "medium"
+        },
+        "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "final_requirements": [
+        {
+          "id": "REQ-500",
+          "feature_id": "VID-002",
+          "inherited_routing": {
+            "codex": {
+              "model": "gpt-6.1-sol",
+              "effort": "high"
+            },
+            "claude_code": {
+              "model": "claude-sonnet-5",
+              "effort": "medium"
+            },
+            "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        }
+      ],
+      "reference_runtime_verified": false
+    },
+    {
+      "proposal_id": "VMG-037",
+      "original_classification": "enrich-existing",
+      "disposition": "enrich-existing",
+      "new_requirement_ids": [],
+      "enriched_requirement_ids": [
+        "REQ-501"
+      ],
+      "final_requirement_ids": [
+        "REQ-501"
+      ],
+      "manual_pages": [
+        23
+      ],
+      "source_url": "https://serato.com/downloads/files/141226/Serato+Video+Software+Manual+for+Serato+DJ.pdf",
+      "source_sha256": "85c57756dc96587b7b4822e2911decb4b9202f5a1d6b1cba047e1159236ae66c",
+      "proposal_feature_id": "VID-001",
+      "proposal_inherited_routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "xhigh"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "Architecture and persistence require reasoning across failure and concurrency boundaries.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "final_requirements": [
+        {
+          "id": "REQ-501",
+          "feature_id": "VID-001",
+          "inherited_routing": {
+            "codex": {
+              "model": "gpt-6.1-sol",
+              "effort": "xhigh"
+            },
+            "claude_code": {
+              "model": "claude-opus-5",
+              "effort": "high"
+            },
+            "rationale": "Architecture and persistence require reasoning across failure and concurrency boundaries.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        }
+      ],
+      "reference_runtime_verified": false
+    },
+    {
+      "proposal_id": "VMG-038",
+      "original_classification": "enrich-existing",
+      "disposition": "enrich-existing",
+      "new_requirement_ids": [],
+      "enriched_requirement_ids": [
+        "REQ-502"
+      ],
+      "final_requirement_ids": [
+        "REQ-502"
+      ],
+      "manual_pages": [
+        23
+      ],
+      "source_url": "https://serato.com/downloads/files/141226/Serato+Video+Software+Manual+for+Serato+DJ.pdf",
+      "source_sha256": "85c57756dc96587b7b4822e2911decb4b9202f5a1d6b1cba047e1159236ae66c",
+      "proposal_feature_id": "VID-001",
+      "proposal_inherited_routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "xhigh"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "Architecture and persistence require reasoning across failure and concurrency boundaries.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "final_requirements": [
+        {
+          "id": "REQ-502",
+          "feature_id": "VID-001",
+          "inherited_routing": {
+            "codex": {
+              "model": "gpt-6.1-sol",
+              "effort": "xhigh"
+            },
+            "claude_code": {
+              "model": "claude-opus-5",
+              "effort": "high"
+            },
+            "rationale": "Architecture and persistence require reasoning across failure and concurrency boundaries.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        }
+      ],
+      "reference_runtime_verified": false
+    },
+    {
+      "proposal_id": "VMG-039",
+      "original_classification": "enrich-existing",
+      "disposition": "enrich-existing",
+      "new_requirement_ids": [],
+      "enriched_requirement_ids": [
+        "REQ-503"
+      ],
+      "final_requirement_ids": [
+        "REQ-503"
+      ],
+      "manual_pages": [
+        23
+      ],
+      "source_url": "https://serato.com/downloads/files/141226/Serato+Video+Software+Manual+for+Serato+DJ.pdf",
+      "source_sha256": "85c57756dc96587b7b4822e2911decb4b9202f5a1d6b1cba047e1159236ae66c",
+      "proposal_feature_id": "VID-001",
+      "proposal_inherited_routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "xhigh"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "Architecture and persistence require reasoning across failure and concurrency boundaries.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "final_requirements": [
+        {
+          "id": "REQ-503",
+          "feature_id": "VID-001",
+          "inherited_routing": {
+            "codex": {
+              "model": "gpt-6.1-sol",
+              "effort": "xhigh"
+            },
+            "claude_code": {
+              "model": "claude-opus-5",
+              "effort": "high"
+            },
+            "rationale": "Architecture and persistence require reasoning across failure and concurrency boundaries.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        }
+      ],
+      "reference_runtime_verified": false
+    },
+    {
+      "proposal_id": "VMG-040",
+      "original_classification": "enrich-existing",
+      "disposition": "enrich-existing",
+      "new_requirement_ids": [],
+      "enriched_requirement_ids": [
+        "REQ-504"
+      ],
+      "final_requirement_ids": [
+        "REQ-504"
+      ],
+      "manual_pages": [
+        23
+      ],
+      "source_url": "https://serato.com/downloads/files/141226/Serato+Video+Software+Manual+for+Serato+DJ.pdf",
+      "source_sha256": "85c57756dc96587b7b4822e2911decb4b9202f5a1d6b1cba047e1159236ae66c",
+      "proposal_feature_id": "VID-001",
+      "proposal_inherited_routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "xhigh"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "Architecture and persistence require reasoning across failure and concurrency boundaries.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "final_requirements": [
+        {
+          "id": "REQ-504",
+          "feature_id": "VID-001",
+          "inherited_routing": {
+            "codex": {
+              "model": "gpt-6.1-sol",
+              "effort": "xhigh"
+            },
+            "claude_code": {
+              "model": "claude-opus-5",
+              "effort": "high"
+            },
+            "rationale": "Architecture and persistence require reasoning across failure and concurrency boundaries.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        }
+      ],
+      "reference_runtime_verified": false
+    },
+    {
+      "proposal_id": "VMG-041",
+      "original_classification": "enrich-existing",
+      "disposition": "enrich-existing",
+      "new_requirement_ids": [],
+      "enriched_requirement_ids": [
+        "REQ-347",
+        "REQ-060"
+      ],
+      "final_requirement_ids": [
+        "REQ-347",
+        "REQ-060"
+      ],
+      "manual_pages": [
+        4,
+        13,
+        19,
+        24
+      ],
+      "source_url": "https://serato.com/downloads/files/141226/Serato+Video+Software+Manual+for+Serato+DJ.pdf",
+      "source_sha256": "85c57756dc96587b7b4822e2911decb4b9202f5a1d6b1cba047e1159236ae66c",
+      "proposal_feature_id": "VID-002",
+      "proposal_inherited_routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-sonnet-5",
+          "effort": "medium"
+        },
+        "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "final_requirements": [
+        {
+          "id": "REQ-347",
+          "feature_id": "VID-002",
+          "inherited_routing": {
+            "codex": {
+              "model": "gpt-6.1-sol",
+              "effort": "high"
+            },
+            "claude_code": {
+              "model": "claude-sonnet-5",
+              "effort": "medium"
+            },
+            "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        },
+        {
+          "id": "REQ-060",
+          "feature_id": "SYS-008",
+          "inherited_routing": {
+            "codex": {
+              "model": "gpt-6.1-sol",
+              "effort": "xhigh"
+            },
+            "claude_code": {
+              "model": "claude-opus-5",
+              "effort": "high"
+            },
+            "rationale": "Independent acceptance review must challenge claims against actual workflows.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        }
+      ],
+      "reference_runtime_verified": false
+    },
+    {
+      "proposal_id": "VMG-042",
+      "original_classification": "enrich-existing",
+      "disposition": "enrich-existing",
+      "new_requirement_ids": [],
+      "enriched_requirement_ids": [
+        "REQ-348"
+      ],
+      "final_requirement_ids": [
+        "REQ-348"
+      ],
+      "manual_pages": [
+        24
+      ],
+      "source_url": "https://serato.com/downloads/files/141226/Serato+Video+Software+Manual+for+Serato+DJ.pdf",
+      "source_sha256": "85c57756dc96587b7b4822e2911decb4b9202f5a1d6b1cba047e1159236ae66c",
+      "proposal_feature_id": "VID-002",
+      "proposal_inherited_routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-sonnet-5",
+          "effort": "medium"
+        },
+        "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "final_requirements": [
+        {
+          "id": "REQ-348",
+          "feature_id": "VID-002",
+          "inherited_routing": {
+            "codex": {
+              "model": "gpt-6.1-sol",
+              "effort": "high"
+            },
+            "claude_code": {
+              "model": "claude-sonnet-5",
+              "effort": "medium"
+            },
+            "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        }
+      ],
+      "reference_runtime_verified": false
+    },
+    {
+      "proposal_id": "VMG-043",
+      "original_classification": "new-behavior",
+      "disposition": "new-family",
+      "new_requirement_ids": [
+        "REQ-518"
+      ],
+      "enriched_requirement_ids": [],
+      "final_requirement_ids": [
+        "REQ-518"
+      ],
+      "manual_pages": [
+        24
+      ],
+      "source_url": "https://serato.com/downloads/files/141226/Serato+Video+Software+Manual+for+Serato+DJ.pdf",
+      "source_sha256": "85c57756dc96587b7b4822e2911decb4b9202f5a1d6b1cba047e1159236ae66c",
+      "proposal_feature_id": "VID-001",
+      "proposal_inherited_routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "xhigh"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "Architecture and persistence require reasoning across failure and concurrency boundaries.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "final_requirements": [
+        {
+          "id": "REQ-518",
+          "feature_id": "VID-001",
+          "inherited_routing": {
+            "codex": {
+              "model": "gpt-6.1-sol",
+              "effort": "xhigh"
+            },
+            "claude_code": {
+              "model": "claude-opus-5",
+              "effort": "high"
+            },
+            "rationale": "Architecture and persistence require reasoning across failure and concurrency boundaries.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        }
+      ],
+      "reference_runtime_verified": false
+    },
+    {
+      "proposal_id": "VMG-044",
+      "original_classification": "new-behavior",
+      "disposition": "new-family",
+      "new_requirement_ids": [
+        "REQ-518"
+      ],
+      "enriched_requirement_ids": [],
+      "final_requirement_ids": [
+        "REQ-518"
+      ],
+      "manual_pages": [
+        24
+      ],
+      "source_url": "https://serato.com/downloads/files/141226/Serato+Video+Software+Manual+for+Serato+DJ.pdf",
+      "source_sha256": "85c57756dc96587b7b4822e2911decb4b9202f5a1d6b1cba047e1159236ae66c",
+      "proposal_feature_id": "VID-001",
+      "proposal_inherited_routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "xhigh"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "Architecture and persistence require reasoning across failure and concurrency boundaries.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "final_requirements": [
+        {
+          "id": "REQ-518",
+          "feature_id": "VID-001",
+          "inherited_routing": {
+            "codex": {
+              "model": "gpt-6.1-sol",
+              "effort": "xhigh"
+            },
+            "claude_code": {
+              "model": "claude-opus-5",
+              "effort": "high"
+            },
+            "rationale": "Architecture and persistence require reasoning across failure and concurrency boundaries.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        }
+      ],
+      "reference_runtime_verified": false
+    },
+    {
+      "proposal_id": "VMG-045",
+      "original_classification": "new-behavior",
+      "disposition": "new-family",
+      "new_requirement_ids": [
+        "REQ-519",
+        "REQ-520"
+      ],
+      "enriched_requirement_ids": [],
+      "final_requirement_ids": [
+        "REQ-519",
+        "REQ-520"
+      ],
+      "manual_pages": [
+        24
+      ],
+      "source_url": "https://serato.com/downloads/files/141226/Serato+Video+Software+Manual+for+Serato+DJ.pdf",
+      "source_sha256": "85c57756dc96587b7b4822e2911decb4b9202f5a1d6b1cba047e1159236ae66c",
+      "proposal_feature_id": "VID-001",
+      "proposal_inherited_routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "xhigh"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "Architecture and persistence require reasoning across failure and concurrency boundaries.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "final_requirements": [
+        {
+          "id": "REQ-519",
+          "feature_id": "VID-001",
+          "inherited_routing": {
+            "codex": {
+              "model": "gpt-6.1-sol",
+              "effort": "xhigh"
+            },
+            "claude_code": {
+              "model": "claude-opus-5",
+              "effort": "high"
+            },
+            "rationale": "Architecture and persistence require reasoning across failure and concurrency boundaries.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        },
+        {
+          "id": "REQ-520",
+          "feature_id": "VID-001",
+          "inherited_routing": {
+            "codex": {
+              "model": "gpt-6.1-sol",
+              "effort": "xhigh"
+            },
+            "claude_code": {
+              "model": "claude-opus-5",
+              "effort": "high"
+            },
+            "rationale": "Architecture and persistence require reasoning across failure and concurrency boundaries.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        }
+      ],
+      "reference_runtime_verified": false
+    },
+    {
+      "proposal_id": "VMG-046",
+      "original_classification": "new-behavior",
+      "disposition": "new-family",
+      "new_requirement_ids": [
+        "REQ-521"
+      ],
+      "enriched_requirement_ids": [],
+      "final_requirement_ids": [
+        "REQ-521"
+      ],
+      "manual_pages": [
+        19,
+        20
+      ],
+      "source_url": "https://serato.com/downloads/files/141226/Serato+Video+Software+Manual+for+Serato+DJ.pdf",
+      "source_sha256": "85c57756dc96587b7b4822e2911decb4b9202f5a1d6b1cba047e1159236ae66c",
+      "proposal_feature_id": "VID-002",
+      "proposal_inherited_routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-sonnet-5",
+          "effort": "medium"
+        },
+        "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "final_requirements": [
+        {
+          "id": "REQ-521",
+          "feature_id": "VID-002",
+          "inherited_routing": {
+            "codex": {
+              "model": "gpt-6.1-sol",
+              "effort": "high"
+            },
+            "claude_code": {
+              "model": "claude-sonnet-5",
+              "effort": "medium"
+            },
+            "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        }
+      ],
+      "reference_runtime_verified": false
+    },
+    {
+      "proposal_id": "VMG-047",
+      "original_classification": "new-behavior",
+      "disposition": "enrich-existing",
+      "new_requirement_ids": [],
+      "enriched_requirement_ids": [
+        "REQ-347"
+      ],
+      "final_requirement_ids": [
+        "REQ-347"
+      ],
+      "manual_pages": [
+        20,
+        21
+      ],
+      "source_url": "https://serato.com/downloads/files/141226/Serato+Video+Software+Manual+for+Serato+DJ.pdf",
+      "source_sha256": "85c57756dc96587b7b4822e2911decb4b9202f5a1d6b1cba047e1159236ae66c",
+      "proposal_feature_id": "VID-002",
+      "proposal_inherited_routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-sonnet-5",
+          "effort": "medium"
+        },
+        "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "final_requirements": [
+        {
+          "id": "REQ-347",
+          "feature_id": "VID-002",
+          "inherited_routing": {
+            "codex": {
+              "model": "gpt-6.1-sol",
+              "effort": "high"
+            },
+            "claude_code": {
+              "model": "claude-sonnet-5",
+              "effort": "medium"
+            },
+            "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+            "primary": "Codex",
+            "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+            "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+          }
+        }
+      ],
+      "reference_runtime_verified": false
+    }
+  ],
+  "generatedInventory": {
+    "status": "executed-parent-verified",
+    "script": "scripts/update_prototype_inventory.py",
+    "featureCount": 110,
+    "requirementCount": 521,
+    "files": {
+      "prototype/inventory.js": "a812b57cf82709f2b48f6b01e9a7d8fa825ce0a0686aa286675335c4e24db5ea",
+      "docs/prototype/coverage-manifest.json": "29168ec5edd031e7cdd5a1105f737ac86f2a8e71e89ba7fa79334eea946b3a71",
+      "docs/research/INTERACTION_REQUIREMENTS.md": "7ccba3c3afa7e06ed417d68ed79b181f76d60d676346f014776def3828d8d332",
+      "docs/research/FEATURE_COVERAGE.md": "d92c6dd0f7f5cdec5de3936928b66fdf4ddc54a9e41541e7cd23fb356cf2a705",
+      "docs/research/manual-feature-crosswalk.json": "f998bc4ba5dbd25326662781f4d13df3064e9fa71149e30509b9426a25d73d91"
+    }
+  },
+  "claimLimits": {
+    "registryMergeExecuted": true,
+    "newFunctionalAcceptanceExecuted": false,
+    "referenceAlgorithmParityVerified": false,
+    "nativeApproved": false,
+    "nativeExecuted": false,
+    "fullParity": false
+  },
+  "scope": "Generated read-only inventory data is permitted; no implementation source, feature registry, remote record or commit changed.",
+  "validatedAt": "2026-10-17 Europe/Madrid"
+}

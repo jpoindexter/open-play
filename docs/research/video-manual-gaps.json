@@ -1,0 +1,2337 @@
+{
+  "schemaVersion": 1,
+  "updatedAt": "2026-10-16T21:46:17.755088+00:00",
+  "status": "proposed-rows-only-parent-reconciliation-required",
+  "canonicalRequirementsModified": false,
+  "idPolicy": "VMG IDs are provisional. Enrich/split existing REQ rows where appropriate; do not append by count or promote every row to a new canonical requirement.",
+  "source": {
+    "url": "https://serato.com/downloads/files/141226/Serato+Video+Software+Manual+for+Serato+DJ.pdf",
+    "localPDF": "local-evidence/claude-fable/official-video-manual-141226.pdf",
+    "localText": "local-evidence/claude-fable/official-video-manual-141226.txt",
+    "bytes": 425843,
+    "sha256": "85c57756dc96587b7b4822e2911decb4b9202f5a1d6b1cba047e1159236ae66c",
+    "pages": 27,
+    "pdfCreationDate": "2015-04-09",
+    "pdfModificationDate": "2015-04-09",
+    "evidenceClass": "OFFICIAL_PRIMARY_HISTORICAL_MANUAL_RECOVERED",
+    "retrieval": "Fable recovered and parent independently verified normal browser User-Agent download. This worker independently verified local bytes/hash/pdfinfo and read all27 pages; no native app control.",
+    "editionLimit": "A2025 HTTP Last-Modified header is not the manual edition. This2015 PDF is currently linked but does not establish current4.0.10 behavior. Earlier403/404 access findings are retrieval history, not current unavailability or content proof."
+  },
+  "comparison": {
+    "canonicalPath": "docs/research/interaction-requirements.json",
+    "baselineCount": 507,
+    "videoFeatureRows": 29,
+    "semanticCompleteness": false,
+    "classificationCounts": {
+      "new-behavior": 21,
+      "enrich-existing": 24,
+      "policy-conflict": 1,
+      "covered-generic-needs-video-scope": 1
+    },
+    "registryReconciliation": "docs/research/VIDEO_MANUAL_REGISTRY_RECONCILIATION.md",
+    "recommendedNewRequirementRows": 14,
+    "recommendedNewFeatureRegistryEntries": 0,
+    "canonicalCountIfAll14Appended": 521
+  },
+  "scope": "Concrete missing state/actions or richer source contracts across playback/control/overlay/recording/MIDI/Info. Existing independent implementations and browser passes are not erased by historical differences. No source text/code/assets copied into runtime; descriptions below are original paraphrases.",
+  "requirements": [
+    {
+      "id": "VMG-001",
+      "feature_id": "VID-001",
+      "related_requirement_ids": [
+        "REQ-055",
+        "REQ-345"
+      ],
+      "coverage_action": "new-behavior",
+      "manual_pages": [
+        7,
+        8,
+        27
+      ],
+      "screen": "Output window lifecycle",
+      "trigger": "Close the video output; reopen from mix preview; enter fullscreen; escape a primary-display takeover",
+      "expected": "Keep control panel/transport alive, recreate output on explicit reopen, and restore windowed mode without losing the mix.",
+      "source_status": "DOCUMENTED_HISTORICAL_OFFICIAL_MANUAL",
+      "installed_runtime_verified": false,
+      "current_code_read": {
+        "status": "code-path-inspected-not-new-runtime-execution",
+        "finding": "Canvas fullscreen exists; no separate closeable/reopenable secondary output window lifecycle.",
+        "paths": [
+          "prototype/video-controls.js"
+        ]
+      },
+      "proposed_acceptance": "Actual browser window lifecycle with current frames/audio retained; separate authorized native second-display connect/disconnect/fullscreen recovery test.",
+      "acceptance_status": "proposed-not-executed",
+      "source_limits": "Historical manual describes a movable secondary window and double-click recovery; browser fullscreen does not establish native placement.",
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "xhigh"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "Architecture and persistence require reasoning across failure and concurrency boundaries.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "routing_policy": "Inherited unchanged from the existing feature registry; recommendation is not invocation or model availability proof.",
+      "native_status": "blocked_until_prototype_approval"
+    },
+    {
+      "id": "VMG-002",
+      "feature_id": "VID-001",
+      "related_requirement_ids": [],
+      "coverage_action": "new-behavior",
+      "manual_pages": [
+        7
+      ],
+      "screen": "Four-deck hardware / video capacity",
+      "trigger": "Use four audio decks with Video enabled",
+      "expected": "Route the two video streams through audio decks1/2 rather than silently promising four video streams.",
+      "source_status": "DOCUMENTED_HISTORICAL_OFFICIAL_MANUAL",
+      "installed_runtime_verified": false,
+      "current_code_read": {
+        "status": "code-path-inspected-not-new-runtime-execution",
+        "finding": "Mixer has exactly two video slots; current code architecture agrees, but507 has no explicit capacity/routing requirement.",
+        "paths": [
+          "prototype/video.js"
+        ]
+      },
+      "proposed_acceptance": "Load four original audio fixtures, change decks3/4 and verify video remains owned by1/2; physical hardware mapping remains separate.",
+      "acceptance_status": "proposed-not-executed",
+      "source_limits": "Exact installed4.0.10 behavior and vendor transfer functions remain unverified.",
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "xhigh"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "Architecture and persistence require reasoning across failure and concurrency boundaries.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "routing_policy": "Inherited unchanged from the existing feature registry; recommendation is not invocation or model availability proof.",
+      "native_status": "blocked_until_prototype_approval"
+    },
+    {
+      "id": "VMG-003",
+      "feature_id": "LIB-001",
+      "related_requirement_ids": [
+        "REQ-055"
+      ],
+      "coverage_action": "new-behavior",
+      "manual_pages": [
+        10,
+        11
+      ],
+      "screen": "Video library import with soundtrack",
+      "trigger": "Import a supported video and load that library item to an audio deck",
+      "expected": "Load its decoded soundtrack to the audio deck and its visuals to the corresponding Video deck as one coherent load.",
+      "source_status": "DOCUMENTED_HISTORICAL_OFFICIAL_MANUAL",
+      "installed_runtime_verified": false,
+      "current_code_read": {
+        "status": "code-path-inspected-not-new-runtime-execution",
+        "finding": "Manual Video file input deliberately mutes source audio and preserves separately loaded audio; explicit combined AV library load is not established.",
+        "paths": [
+          "prototype/app.js",
+          "prototype/video.js",
+          "prototype/video-controls.js"
+        ]
+      },
+      "proposed_acceptance": "Original file with distinct audio/video markers: library import/load yields one item, actual audio buffer and matching decoded video; superseding load cancels both sides.",
+      "acceptance_status": "proposed-not-executed",
+      "source_limits": "Historical supported containers/codecs are not a promise of universal browser decode support.",
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-sonnet-5",
+          "effort": "medium"
+        },
+        "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "routing_policy": "Inherited unchanged from the existing feature registry; recommendation is not invocation or model availability proof.",
+      "native_status": "blocked_until_prototype_approval"
+    },
+    {
+      "id": "VMG-004",
+      "feature_id": "LIB-003",
+      "related_requirement_ids": [],
+      "coverage_action": "new-behavior",
+      "manual_pages": [
+        10
+      ],
+      "screen": "All Audio / All Videos views",
+      "trigger": "Enable Video and select the audio-only or video-only library subset",
+      "expected": "Derive distinct library subsets from actual media classification while retaining crate membership.",
+      "source_status": "DOCUMENTED_HISTORICAL_OFFICIAL_MANUAL",
+      "installed_runtime_verified": false,
+      "current_code_read": {
+        "status": "code-path-inspected-not-new-runtime-execution",
+        "finding": "Generic library filtering exists, but inspected filter has no All Audio/All Videos split.",
+        "paths": [
+          "prototype/app.js",
+          "prototype/library.js"
+        ]
+      },
+      "proposed_acceptance": "Mixed original audio/video/paired-karaoke library fixture yields correct subsets without duplicating entries or destroying crates.",
+      "acceptance_status": "proposed-not-executed",
+      "source_limits": "Exact installed4.0.10 behavior and vendor transfer functions remain unverified.",
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-sonnet-5",
+          "effort": "medium"
+        },
+        "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "routing_policy": "Inherited unchanged from the existing feature registry; recommendation is not invocation or model availability proof.",
+      "native_status": "blocked_until_prototype_approval"
+    },
+    {
+      "id": "VMG-005",
+      "feature_id": "LIB-003",
+      "related_requirement_ids": [
+        "REQ-346"
+      ],
+      "coverage_action": "new-behavior",
+      "manual_pages": [
+        10
+      ],
+      "screen": "Library media status icons",
+      "trigger": "Inspect a video with soundtrack, audio with associated video, and karaoke item",
+      "expected": "Differentiate the three media/association states using validated metadata, and update after association removal.",
+      "source_status": "DOCUMENTED_HISTORICAL_OFFICIAL_MANUAL",
+      "installed_runtime_verified": false,
+      "current_code_read": {
+        "status": "code-path-inspected-not-new-runtime-execution",
+        "finding": "Track type/karaoke metadata and separate media association diagnostics exist; three documented library icon states are not established.",
+        "paths": [
+          "prototype/app.js",
+          "prototype/video-media.js"
+        ]
+      },
+      "proposed_acceptance": "Actual imported/associated/paired fixtures display the matching state; clearing association updates it without guessing from filename alone.",
+      "acceptance_status": "proposed-not-executed",
+      "source_limits": "Exact installed4.0.10 behavior and vendor transfer functions remain unverified.",
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-sonnet-5",
+          "effort": "medium"
+        },
+        "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "routing_policy": "Inherited unchanged from the existing feature registry; recommendation is not invocation or model availability proof.",
+      "native_status": "blocked_until_prototype_approval"
+    },
+    {
+      "id": "VMG-006",
+      "feature_id": "VID-001",
+      "related_requirement_ids": [
+        "REQ-055"
+      ],
+      "coverage_action": "new-behavior",
+      "manual_pages": [
+        11
+      ],
+      "screen": "Visual-only load over playing audio",
+      "trigger": "Drop a video on the related playing video deck",
+      "expected": "Replace visuals without replacing the current audio track or resetting its clock.",
+      "source_status": "DOCUMENTED_HISTORICAL_OFFICIAL_MANUAL",
+      "installed_runtime_verified": false,
+      "current_code_read": {
+        "status": "code-path-inspected-not-new-runtime-execution",
+        "finding": "Visual-only file picker implements this independent separation; drag gesture and explicit507 behavior are absent.",
+        "paths": [
+          "prototype/video.js",
+          "prototype/video-controls.js"
+        ]
+      },
+      "proposed_acceptance": "Actual playing440Hz audio plus new video: clock stays monotonic, tone/track identity unchanged, new decoded visuals visible; cancellation preserves newer audio owner.",
+      "acceptance_status": "proposed-not-executed",
+      "source_limits": "Exact installed4.0.10 behavior and vendor transfer functions remain unverified.",
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "xhigh"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "Architecture and persistence require reasoning across failure and concurrency boundaries.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "routing_policy": "Inherited unchanged from the existing feature registry; recommendation is not invocation or model availability proof.",
+      "native_status": "blocked_until_prototype_approval"
+    },
+    {
+      "id": "VMG-007",
+      "feature_id": "VID-001",
+      "related_requirement_ids": [
+        "REQ-349"
+      ],
+      "coverage_action": "new-behavior",
+      "manual_pages": [
+        11
+      ],
+      "screen": "Audio/video association lifecycle",
+      "trigger": "Associate video, reload its audio track, then explicitly unassociate",
+      "expected": "Recall the associated video on that audio track load; removal prevents the next recall.",
+      "source_status": "DOCUMENTED_HISTORICAL_OFFICIAL_MANUAL",
+      "installed_runtime_verified": false,
+      "current_code_read": {
+        "status": "code-path-inspected-not-new-runtime-execution",
+        "finding": "Session association/load/removal exists; no file-byte restoration after reload is promised.",
+        "paths": [
+          "prototype/video-media.js",
+          "prototype/video-media-controls.js",
+          "prototype/video.js"
+        ]
+      },
+      "proposed_acceptance": "Same-session associate/reload/remove with actual decoded source and generation races; persistent references require explicit missing-file recovery, never fabricated restored bytes.",
+      "acceptance_status": "proposed-not-executed",
+      "source_limits": "Manual describes recall but not modern file-handle permissions or every browser persistence policy.",
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "xhigh"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "Architecture and persistence require reasoning across failure and concurrency boundaries.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "routing_policy": "Inherited unchanged from the existing feature registry; recommendation is not invocation or model availability proof.",
+      "native_status": "blocked_until_prototype_approval"
+    },
+    {
+      "id": "VMG-008",
+      "feature_id": "VID-002",
+      "related_requirement_ids": [
+        "REQ-349"
+      ],
+      "coverage_action": "enrich-existing",
+      "manual_pages": [
+        11,
+        12
+      ],
+      "screen": "Media Crate enable and library integration",
+      "trigger": "Enable Media Crate and add videos to its visible crate",
+      "expected": "Expose a Media... library collection whose eligible videos become fallback candidates for unassociated audio.",
+      "source_status": "DOCUMENTED_HISTORICAL_OFFICIAL_MANUAL",
+      "installed_runtime_verified": false,
+      "current_code_read": {
+        "status": "code-path-inspected-not-new-runtime-execution",
+        "finding": "Independent media dialog/list exists; no integrated special library crate is created.",
+        "paths": [
+          "prototype/video-media-controls.js",
+          "prototype/video-media.js",
+          "prototype/library.js"
+        ]
+      },
+      "proposed_acceptance": "Enable creates/shows the scoped collection, add/remove updates fallback candidates; disabling preserves ordinary explicit associations.",
+      "acceptance_status": "proposed-not-executed",
+      "source_limits": "Exact installed4.0.10 behavior and vendor transfer functions remain unverified.",
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-sonnet-5",
+          "effort": "medium"
+        },
+        "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "routing_policy": "Inherited unchanged from the existing feature registry; recommendation is not invocation or model availability proof.",
+      "native_status": "blocked_until_prototype_approval"
+    },
+    {
+      "id": "VMG-009",
+      "feature_id": "VID-002",
+      "related_requirement_ids": [
+        "REQ-349"
+      ],
+      "coverage_action": "new-behavior",
+      "manual_pages": [
+        12
+      ],
+      "screen": "Media Crate ordered selection",
+      "trigger": "Change the active crate ordering then load unassociated audio with Random off",
+      "expected": "Select fallback videos according to the crate sequence represented by that ordering.",
+      "source_status": "DOCUMENTED_HISTORICAL_OFFICIAL_MANUAL",
+      "installed_runtime_verified": false,
+      "current_code_read": {
+        "status": "code-path-inspected-not-new-runtime-execution",
+        "finding": "Library uses insertion-order entries/shared cursor; media dialog has no sorting/reordering contract.",
+        "paths": [
+          "prototype/video-media.js",
+          "prototype/video-media-controls.js"
+        ]
+      },
+      "proposed_acceptance": "Original clips with distinct pixels: reorder/sort collection, then execute load sequence and verify decoded outputs; define wrap/tie policy independently.",
+      "acceptance_status": "proposed-not-executed",
+      "source_limits": "Manual gives ordering examples but not every sort/cursor/wrap edge case.",
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-sonnet-5",
+          "effort": "medium"
+        },
+        "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "routing_policy": "Inherited unchanged from the existing feature registry; recommendation is not invocation or model availability proof.",
+      "native_status": "blocked_until_prototype_approval"
+    },
+    {
+      "id": "VMG-010",
+      "feature_id": "VID-002",
+      "related_requirement_ids": [
+        "REQ-349"
+      ],
+      "coverage_action": "policy-conflict",
+      "manual_pages": [
+        12
+      ],
+      "screen": "Media Crate Next under Random",
+      "trigger": "Enable Random, then press Next",
+      "expected": "Advance to the next video in crate order even while Random remains enabled.",
+      "source_status": "DOCUMENTED_HISTORICAL_OFFICIAL_MANUAL",
+      "installed_runtime_verified": false,
+      "current_code_read": {
+        "status": "code-path-inspected-not-new-runtime-execution",
+        "finding": "Current next(trackId) calls resolve(advance:true), which still uses randomMode; existing random-Next tests establish the independent policy.",
+        "paths": [
+          "prototype/video-media.js",
+          "prototype/video-media-harness.js"
+        ]
+      },
+      "proposed_acceptance": "Arrange A/B/C originals, force random load toB, pressNext with Random stillon and require decodedC; then verify subsequent automatic load can still randomize.",
+      "acceptance_status": "proposed-not-executed",
+      "source_limits": "Historical manual specifically distinguishes Next from random automatic selection; reconcile rather than silently relabel current green tests as reference proof.",
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-sonnet-5",
+          "effort": "medium"
+        },
+        "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "routing_policy": "Inherited unchanged from the existing feature registry; recommendation is not invocation or model availability proof.",
+      "native_status": "blocked_until_prototype_approval"
+    },
+    {
+      "id": "VMG-011",
+      "feature_id": "VID-002",
+      "related_requirement_ids": [],
+      "coverage_action": "new-behavior",
+      "manual_pages": [
+        10,
+        12
+      ],
+      "screen": "Automatic transition selection",
+      "trigger": "Enable Auto transition selection then load audio; use Next separately",
+      "expected": "Select a new transition on track load, with optional Random; selection does not itself start a crossfade.",
+      "source_status": "DOCUMENTED_HISTORICAL_OFFICIAL_MANUAL",
+      "installed_runtime_verified": false,
+      "current_code_read": {
+        "status": "code-path-inspected-not-new-runtime-execution",
+        "finding": "Independent selector and one-transaction dedup exist;507 only inventories fallback/transition broadly.",
+        "paths": [
+          "prototype/video-media.js",
+          "prototype/video-media-controls.js"
+        ]
+      },
+      "proposed_acceptance": "Actual audio-generation load updates selected transition once; decoded fallback completion must not consume another load transaction; crossfader stays unchanged.",
+      "acceptance_status": "proposed-not-executed",
+      "source_limits": "Deduplication, repeat avoidance and exact catalog order are independent policies not fully specified by this manual.",
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-sonnet-5",
+          "effort": "medium"
+        },
+        "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "routing_policy": "Inherited unchanged from the existing feature registry; recommendation is not invocation or model availability proof.",
+      "native_status": "blocked_until_prototype_approval"
+    },
+    {
+      "id": "VMG-012",
+      "feature_id": "DEK-014",
+      "related_requirement_ids": [
+        "REQ-076"
+      ],
+      "coverage_action": "enrich-existing",
+      "manual_pages": [
+        12
+      ],
+      "screen": "Offline Video player",
+      "trigger": "Open Video without compatible hardware",
+      "expected": "Provide the documented offline preview path using default audio output, with video association, cues, loops and saved-effect preparation.",
+      "source_status": "DOCUMENTED_HISTORICAL_OFFICIAL_MANUAL",
+      "installed_runtime_verified": false,
+      "current_code_read": {
+        "status": "code-path-inspected-not-new-runtime-execution",
+        "finding": "Browser audio works without hardware, but hardware-disconnected single-player state and its preparation functions are not a verified equivalent.",
+        "paths": [
+          "prototype/app.js",
+          "prototype/video-controls.js"
+        ]
+      },
+      "proposed_acceptance": "Browser device-absent scenario explicitly exercises preview/cue/loop/association/FX save; authorized native hardware transition and default-device routing separately.",
+      "acceptance_status": "proposed-not-executed",
+      "source_limits": "Do not import old hardware/license gates as requirements for the independent browser.",
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-sonnet-5",
+          "effort": "medium"
+        },
+        "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "routing_policy": "Inherited unchanged from the existing feature registry; recommendation is not invocation or model availability proof.",
+      "native_status": "blocked_until_prototype_approval"
+    },
+    {
+      "id": "VMG-013",
+      "feature_id": "VID-002",
+      "related_requirement_ids": [],
+      "coverage_action": "new-behavior",
+      "manual_pages": [
+        8,
+        13
+      ],
+      "screen": "Per-channel Video upfaders",
+      "trigger": "Unlink one video channel fader and change audio level; adjust video opacity manually",
+      "expected": "Allow video opacity0..100% independent of audio level, with each channel link policy distinct from crossfader linking.",
+      "source_status": "DOCUMENTED_HISTORICAL_OFFICIAL_MANUAL",
+      "installed_runtime_verified": false,
+      "current_code_read": {
+        "status": "code-path-inspected-not-new-runtime-execution",
+        "finding": "One global linked flag couples transport/BPM/upfaders/crossfade; unlinked context supplies full upfaders and has no manual video channel-opacity sliders.",
+        "paths": [
+          "prototype/video.js",
+          "prototype/video-controls.js",
+          "prototype/video-state.js"
+        ]
+      },
+      "proposed_acceptance": "Actual left/right pixel alpha/brightness at0/.5/1, unlink each side while changing audio fader, and ensure other side/crossfader policy remains independent.",
+      "acceptance_status": "proposed-not-executed",
+      "source_limits": "Exact installed4.0.10 behavior and vendor transfer functions remain unverified.",
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-sonnet-5",
+          "effort": "medium"
+        },
+        "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "routing_policy": "Inherited unchanged from the existing feature registry; recommendation is not invocation or model availability proof.",
+      "native_status": "blocked_until_prototype_approval"
+    },
+    {
+      "id": "VMG-014",
+      "feature_id": "VID-002",
+      "related_requirement_ids": [
+        "REQ-055"
+      ],
+      "coverage_action": "new-behavior",
+      "manual_pages": [
+        9,
+        13
+      ],
+      "screen": "Crossfader-only link",
+      "trigger": "Unlink Video crossfader while keeping audio/channel-fader policies",
+      "expected": "Audio crossfader moves independently from video crossfade without forcing unrelated transport/upfader unlink.",
+      "source_status": "DOCUMENTED_HISTORICAL_OFFICIAL_MANUAL",
+      "installed_runtime_verified": false,
+      "current_code_read": {
+        "status": "code-path-inspected-not-new-runtime-execution",
+        "finding": "Global linked flag offers coarse independence, not separately modeled reference fader links.",
+        "paths": [
+          "prototype/video.js",
+          "prototype/video-controls.js"
+        ]
+      },
+      "proposed_acceptance": "Move real audio crossfader with video cross-link off and upfader links on; assert independent mix pixels plus unchanged transport authority.",
+      "acceptance_status": "proposed-not-executed",
+      "source_limits": "Exact installed4.0.10 behavior and vendor transfer functions remain unverified.",
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-sonnet-5",
+          "effort": "medium"
+        },
+        "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "routing_policy": "Inherited unchanged from the existing feature registry; recommendation is not invocation or model availability proof.",
+      "native_status": "blocked_until_prototype_approval"
+    },
+    {
+      "id": "VMG-015",
+      "feature_id": "VID-002",
+      "related_requirement_ids": [
+        "REQ-505"
+      ],
+      "coverage_action": "new-behavior",
+      "manual_pages": [
+        9,
+        23
+      ],
+      "screen": "Directional automatic crossfade",
+      "trigger": "Press auto-fade left or right",
+      "expected": "Move toward the requested endpoint and finish there; use the speed setting for transition duration.",
+      "source_status": "DOCUMENTED_HISTORICAL_OFFICIAL_MANUAL",
+      "installed_runtime_verified": false,
+      "current_code_read": {
+        "status": "code-path-inspected-not-new-runtime-execution",
+        "finding": "Current Automatic mix continuously computes a sinusoidal position rather than a finite direction-targeted action.",
+        "paths": [
+          "prototype/video.js",
+          "prototype/video-controls.js"
+        ]
+      },
+      "proposed_acceptance": "From-.4/+ .4 request each direction; observe monotonic frame-by-frame position, exact endpoint/stop, reversal/cancellation and no audio-fader movement.",
+      "acceptance_status": "proposed-not-executed",
+      "source_limits": "Manual defines controls/direction and slow-to-fast slider, not exact duration curve or cancellation policy.",
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-sonnet-5",
+          "effort": "medium"
+        },
+        "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "routing_policy": "Inherited unchanged from the existing feature registry; recommendation is not invocation or model availability proof.",
+      "native_status": "blocked_until_prototype_approval"
+    },
+    {
+      "id": "VMG-016",
+      "feature_id": "VID-002",
+      "related_requirement_ids": [
+        "REQ-505"
+      ],
+      "coverage_action": "enrich-existing",
+      "manual_pages": [
+        23
+      ],
+      "screen": "Automatic crossfade speed direction",
+      "trigger": "Move the speed slider left then right during the directional action",
+      "expected": "Left is slower and right faster; preserve endpoint semantics.",
+      "source_status": "DOCUMENTED_HISTORICAL_OFFICIAL_MANUAL",
+      "installed_runtime_verified": false,
+      "current_code_read": {
+        "status": "code-path-inspected-not-new-runtime-execution",
+        "finding": "No dedicated speed scalar/UI is implemented; continuous mix uses a fixed divisor.",
+        "paths": [
+          "prototype/video.js",
+          "prototype/video-state.js"
+        ]
+      },
+      "proposed_acceptance": "Measured original-frame travel duration orders slow>fast; declared duration range/curve remains independent until reference measurement.",
+      "acceptance_status": "proposed-not-executed",
+      "source_limits": "Exact installed4.0.10 behavior and vendor transfer functions remain unverified.",
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-sonnet-5",
+          "effort": "medium"
+        },
+        "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "routing_policy": "Inherited unchanged from the existing feature registry; recommendation is not invocation or model availability proof.",
+      "native_status": "blocked_until_prototype_approval"
+    },
+    {
+      "id": "VMG-017",
+      "feature_id": "VID-002",
+      "related_requirement_ids": [
+        "REQ-507"
+      ],
+      "coverage_action": "enrich-existing",
+      "manual_pages": [
+        13,
+        24
+      ],
+      "screen": "Cursor crossfade focus policy",
+      "trigger": "Enable cursor Video crossfade; press left/right with library or editable field focused",
+      "expected": "Arrows control video crossfade in the enabled mode and stop performing the conflicting library-horizontal navigation.",
+      "source_status": "DOCUMENTED_HISTORICAL_OFFICIAL_MANUAL",
+      "installed_runtime_verified": false,
+      "current_code_read": {
+        "status": "code-path-inspected-not-new-runtime-execution",
+        "finding": "No Video cursor handler or conflict policy is visible in inspected controls.",
+        "paths": [
+          "prototype/video-controls.js",
+          "prototype/app.js"
+        ]
+      },
+      "proposed_acceptance": "Actual key events exercise disabled/enabled/library/text/modal focus states, bounds and directions; do not invent exact vendor step/repeat rate.",
+      "acceptance_status": "proposed-not-executed",
+      "source_limits": "Manual identifies left/right keys and library conflict; editable-field/modal exceptions and numeric steps remain unspecified.",
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-sonnet-5",
+          "effort": "medium"
+        },
+        "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "routing_policy": "Inherited unchanged from the existing feature registry; recommendation is not invocation or model availability proof.",
+      "native_status": "blocked_until_prototype_approval"
+    },
+    {
+      "id": "VMG-018",
+      "feature_id": "VID-002",
+      "related_requirement_ids": [
+        "REQ-347"
+      ],
+      "coverage_action": "new-behavior",
+      "manual_pages": [
+        8,
+        12
+      ],
+      "screen": "Track-scoped FX Save",
+      "trigger": "Set Video FX/values and press FX Save for the loaded video",
+      "expected": "Recall that media-associated effect selection/parameters when that track is loaded again.",
+      "source_status": "DOCUMENTED_HISTORICAL_OFFICIAL_MANUAL",
+      "installed_runtime_verified": false,
+      "current_code_read": {
+        "status": "code-path-inspected-not-new-runtime-execution",
+        "finding": "Global Video metadata persists; no explicit per-loaded-video FX Save/recall bank.",
+        "paths": [
+          "prototype/video-controls.js",
+          "prototype/video-state.js",
+          "prototype/app.js"
+        ]
+      },
+      "proposed_acceptance": "Save differing original-media FX states, reload each and verify actual pixels/parameters and track ownership; exact associated-audio vsvideo metadata destination needs installed-version reconciliation.",
+      "acceptance_status": "proposed-not-executed",
+      "source_limits": "Exact installed4.0.10 behavior and vendor transfer functions remain unverified.",
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-sonnet-5",
+          "effort": "medium"
+        },
+        "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "routing_policy": "Inherited unchanged from the existing feature registry; recommendation is not invocation or model availability proof.",
+      "native_status": "blocked_until_prototype_approval"
+    },
+    {
+      "id": "VMG-019",
+      "feature_id": "VID-002",
+      "related_requirement_ids": [
+        "REQ-347"
+      ],
+      "coverage_action": "enrich-existing",
+      "manual_pages": [
+        13,
+        27
+      ],
+      "screen": "Serial channel effect slots",
+      "trigger": "Assign a noncommuting effect pair, then swap slots",
+      "expected": "Second slot consumes first-slot output; zoom after rotate can cover clipped borders.",
+      "source_status": "DOCUMENTED_HISTORICAL_OFFICIAL_MANUAL",
+      "installed_runtime_verified": false,
+      "current_code_read": {
+        "status": "code-path-inspected-not-new-runtime-execution",
+        "finding": "Serial independent pipeline and noncommuting pixel tests already exist; add historical source support rather than claiming a missing implementation.",
+        "paths": [
+          "prototype/video-pipeline.js",
+          "prototype/video-pipeline-harness.js"
+        ]
+      },
+      "proposed_acceptance": "Retain actual ordered pixel comparisons and test rotate→zoom geometry; exact vendor transform/zoom curves remain unknown.",
+      "acceptance_status": "proposed-not-executed",
+      "source_limits": "Exact installed4.0.10 behavior and vendor transfer functions remain unverified.",
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-sonnet-5",
+          "effort": "medium"
+        },
+        "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "routing_policy": "Inherited unchanged from the existing feature registry; recommendation is not invocation or model availability proof.",
+      "native_status": "blocked_until_prototype_approval"
+    },
+    {
+      "id": "VMG-020",
+      "feature_id": "VID-002",
+      "related_requirement_ids": [
+        "REQ-283",
+        "REQ-284"
+      ],
+      "coverage_action": "enrich-existing",
+      "manual_pages": [
+        14,
+        15
+      ],
+      "screen": "New overlay draft and discard",
+      "trigger": "Edit a saved overlay without saving, then choose New",
+      "expected": "Create a new text/image effect and discard that saved effect's unsaved edit state.",
+      "source_status": "DOCUMENTED_HISTORICAL_OFFICIAL_MANUAL",
+      "installed_runtime_verified": false,
+      "current_code_read": {
+        "status": "code-path-inspected-not-new-runtime-execution",
+        "finding": "Current live layers mutate immediately; metadata preset Save/Reload is not a saved-effect draft transaction.",
+        "paths": [
+          "prototype/video-controls.js"
+        ]
+      },
+      "proposed_acceptance": "Actual UI creates savedA, makes unsavededit, selectsNew, reloadsA and verifies oldsaved fields; do not remove unrelated active layers.",
+      "acceptance_status": "proposed-not-executed",
+      "source_limits": "Exact installed4.0.10 behavior and vendor transfer functions remain unverified.",
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-sonnet-5",
+          "effort": "medium"
+        },
+        "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "routing_policy": "Inherited unchanged from the existing feature registry; recommendation is not invocation or model availability proof.",
+      "native_status": "blocked_until_prototype_approval"
+    },
+    {
+      "id": "VMG-021",
+      "feature_id": "VID-002",
+      "related_requirement_ids": [
+        "REQ-283",
+        "REQ-284"
+      ],
+      "coverage_action": "enrich-existing",
+      "manual_pages": [
+        14,
+        15
+      ],
+      "screen": "Saved overlay live update",
+      "trigger": "Edit a named saved text/image effect, save while it is active",
+      "expected": "Update the saved definition and the currently loaded/on instance that refers to it.",
+      "source_status": "DOCUMENTED_HISTORICAL_OFFICIAL_MANUAL",
+      "installed_runtime_verified": false,
+      "current_code_read": {
+        "status": "code-path-inspected-not-new-runtime-execution",
+        "finding": "Saving preset metadata replaces localStorage entry, but loaded layers are detached copies without shared definition identity.",
+        "paths": [
+          "prototype/video-controls.js"
+        ]
+      },
+      "proposed_acceptance": "Actual saved-effect identity/reference test with two active uses, save edits and observe specified loaded-instance updates; unrelated copies stay untouched under a declared policy.",
+      "acceptance_status": "proposed-not-executed",
+      "source_limits": "Exact installed4.0.10 behavior and vendor transfer functions remain unverified.",
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-sonnet-5",
+          "effort": "medium"
+        },
+        "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "routing_policy": "Inherited unchanged from the existing feature registry; recommendation is not invocation or model availability proof.",
+      "native_status": "blocked_until_prototype_approval"
+    },
+    {
+      "id": "VMG-022",
+      "feature_id": "VID-002",
+      "related_requirement_ids": [
+        "REQ-284"
+      ],
+      "coverage_action": "enrich-existing",
+      "manual_pages": [
+        14
+      ],
+      "screen": "Image format eligibility",
+      "trigger": "Choose original BMP as well as PNG/JPEG for an image effect",
+      "expected": "Offer the documented image family and either actually decode it or display a precise unsupported-format outcome.",
+      "source_status": "DOCUMENTED_HISTORICAL_OFFICIAL_MANUAL",
+      "installed_runtime_verified": false,
+      "current_code_read": {
+        "status": "code-path-inspected-not-new-runtime-execution",
+        "finding": "File picker offersPNG/JPEG/WebP/GIF; BMP is not offered, though browser decode support has not been tested.",
+        "paths": [
+          "prototype/video-controls.js",
+          "prototype/video.js"
+        ]
+      },
+      "proposed_acceptance": "Original BMP/PNG/JPEG fixtures must decode to marked pixels or fail visibly without replacing existing image; genericaccept=image alone is not proof.",
+      "acceptance_status": "proposed-not-executed",
+      "source_limits": "Exact installed4.0.10 behavior and vendor transfer functions remain unverified.",
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-sonnet-5",
+          "effort": "medium"
+        },
+        "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "routing_policy": "Inherited unchanged from the existing feature registry; recommendation is not invocation or model availability proof.",
+      "native_status": "blocked_until_prototype_approval"
+    },
+    {
+      "id": "VMG-023",
+      "feature_id": "REC-003",
+      "related_requirement_ids": [
+        "REQ-199",
+        "REQ-200"
+      ],
+      "coverage_action": "enrich-existing",
+      "manual_pages": [
+        16
+      ],
+      "screen": "Video Mix recording input",
+      "trigger": "Select Video Mix rather than an audio-only recording input",
+      "expected": "Record processed Video main mix with its intended audio recording path and separate input identity.",
+      "source_status": "DOCUMENTED_HISTORICAL_OFFICIAL_MANUAL",
+      "installed_runtime_verified": false,
+      "current_code_read": {
+        "status": "code-path-inspected-not-new-runtime-execution",
+        "finding": "Dedicated Video capture exists, but generic recorder input selection and Video Mix source selection are not unified.",
+        "paths": [
+          "prototype/video.js",
+          "prototype/panels.js"
+        ]
+      },
+      "proposed_acceptance": "Actual namedVideoMix input captures expected processed pixels and audio; switching input and active-record restrictions are explicit.",
+      "acceptance_status": "proposed-not-executed",
+      "source_limits": "Exact installed4.0.10 behavior and vendor transfer functions remain unverified.",
+      "routing": {
+        "codex": {
+          "model": "gpt-6-astra",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "DSP and transport require numerical reasoning backed by measurements.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "routing_policy": "Inherited unchanged from the existing feature registry; recommendation is not invocation or model availability proof.",
+      "native_status": "blocked_until_prototype_approval"
+    },
+    {
+      "id": "VMG-024",
+      "feature_id": "VID-001",
+      "related_requirement_ids": [
+        "REQ-498",
+        "REQ-106"
+      ],
+      "coverage_action": "enrich-existing",
+      "manual_pages": [
+        16,
+        22
+      ],
+      "screen": "Recording size/rate/aspect contract",
+      "trigger": "Select recording quality independent of output and record a constrained-aspect mix",
+      "expected": "Use chosen recording resolution and respect output-window aspect; historical manual describes480p/24fps as its default.",
+      "source_status": "DOCUMENTED_HISTORICAL_OFFICIAL_MANUAL",
+      "installed_runtime_verified": false,
+      "current_code_read": {
+        "status": "code-path-inspected-not-new-runtime-execution",
+        "finding": "Canvas capture uses processing size and requested30fps;480p/separate recording canvas/aspect are absent.",
+        "paths": [
+          "prototype/video.js",
+          "prototype/video-controls.js"
+        ]
+      },
+      "proposed_acceptance": "Actual encoded dimensions/timestamps/audio at each supported size and aspect; retain browser-specific measured cadence. Do not treat requested cadence as observed.",
+      "acceptance_status": "proposed-not-executed",
+      "source_limits": "2015 default is not a current4.0.10 factory default. Exact480p width, cadence and aspect interactions still need installed observation.",
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "xhigh"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "Architecture and persistence require reasoning across failure and concurrency boundaries.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "routing_policy": "Inherited unchanged from the existing feature registry; recommendation is not invocation or model availability proof.",
+      "native_status": "blocked_until_prototype_approval"
+    },
+    {
+      "id": "VMG-025",
+      "feature_id": "REC-003",
+      "related_requirement_ids": [
+        "REQ-199"
+      ],
+      "coverage_action": "enrich-existing",
+      "manual_pages": [
+        16
+      ],
+      "screen": "Video recording gain and meter",
+      "trigger": "Change recording gain while monitoring its level meter",
+      "expected": "Change recorded audio level through an independent recording control and expose clipping/level feedback.",
+      "source_status": "DOCUMENTED_HISTORICAL_OFFICIAL_MANUAL",
+      "installed_runtime_verified": false,
+      "current_code_read": {
+        "status": "code-path-inspected-not-new-runtime-execution",
+        "finding": "Video capture takes engine.destination master audio without separate Video record gain/meter.",
+        "paths": [
+          "prototype/video.js",
+          "prototype/engine.js"
+        ]
+      },
+      "proposed_acceptance": "Capture known tone at several record-gain values, decode RMS/clipping and demonstrate whether live master changes independently; determine tap placement separately.",
+      "acceptance_status": "proposed-not-executed",
+      "source_limits": "Manual names record gain/meter but does not here establish the exact post/pre-master tap; do not transfer audio-only tap claims automatically.",
+      "routing": {
+        "codex": {
+          "model": "gpt-6-astra",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "DSP and transport require numerical reasoning backed by measurements.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "routing_policy": "Inherited unchanged from the existing feature registry; recommendation is not invocation or model availability proof.",
+      "native_status": "blocked_until_prototype_approval"
+    },
+    {
+      "id": "VMG-026",
+      "feature_id": "REC-001",
+      "related_requirement_ids": [
+        "REQ-200"
+      ],
+      "coverage_action": "enrich-existing",
+      "manual_pages": [
+        16
+      ],
+      "screen": "Unsaved Video take/save/Recording crate",
+      "trigger": "Stop a Video take, name and save it; record again without saving",
+      "expected": "Keep unsaved take until replacement/save, save by name and show the saved recording in Recording crate.",
+      "source_status": "DOCUMENTED_HISTORICAL_OFFICIAL_MANUAL",
+      "installed_runtime_verified": false,
+      "current_code_read": {
+        "status": "code-path-inspected-not-new-runtime-execution",
+        "finding": "Video mix result is a Blob/download; no namedVideo take in application Recording crate.",
+        "paths": [
+          "prototype/video.js",
+          "prototype/video-controls.js",
+          "prototype/app.js"
+        ]
+      },
+      "proposed_acceptance": "Actual record→stop→replace-unsaved and record→name→save sequences; saved entry reopens actual video/audio, cancel/failure preserves recoverable take.",
+      "acceptance_status": "proposed-not-executed",
+      "source_limits": "Exact installed4.0.10 behavior and vendor transfer functions remain unverified.",
+      "routing": {
+        "codex": {
+          "model": "gpt-6-astra",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "DSP and transport require numerical reasoning backed by measurements.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "routing_policy": "Inherited unchanged from the existing feature registry; recommendation is not invocation or model availability proof.",
+      "native_status": "blocked_until_prototype_approval"
+    },
+    {
+      "id": "VMG-027",
+      "feature_id": "REC-002",
+      "related_requirement_ids": [
+        "REQ-201",
+        "REQ-367",
+        "REQ-368"
+      ],
+      "coverage_action": "enrich-existing",
+      "manual_pages": [
+        16
+      ],
+      "screen": "Video destination/free space/temporary recovery",
+      "trigger": "Choose destination or exit with unsaved Video take",
+      "expected": "Report destination/storage availability honestly and preserve recoverable unsaved recording where the platform permits.",
+      "source_status": "DOCUMENTED_HISTORICAL_OFFICIAL_MANUAL",
+      "installed_runtime_verified": false,
+      "current_code_read": {
+        "status": "code-path-inspected-not-new-runtime-execution",
+        "finding": "Browser download ownership differs from native path/Recording temp folder; Video take persistence/recovery is not implemented.",
+        "paths": [
+          "prototype/video.js",
+          "prototype/video-controls.js"
+        ]
+      },
+      "proposed_acceptance": "Actual browser quota/permission/interruption cases and recovered media decode; native path/free-space/temp recovery requires separate approved execution.",
+      "acceptance_status": "proposed-not-executed",
+      "source_limits": "The manual's2GB WAV/AIFF split note is not a universal Video-container size limit. Do not assert a browser can read arbitrary disk free space.",
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "xhigh"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "Architecture and persistence require reasoning across failure and concurrency boundaries.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "routing_policy": "Inherited unchanged from the existing feature registry; recommendation is not invocation or model availability proof.",
+      "native_status": "blocked_until_prototype_approval"
+    },
+    {
+      "id": "VMG-028",
+      "feature_id": "REC-002",
+      "related_requirement_ids": [
+        "REQ-370"
+      ],
+      "coverage_action": "covered-generic-needs-video-scope",
+      "manual_pages": [
+        16
+      ],
+      "screen": "Recording capability conditional",
+      "trigger": "Attempt Video recording under a hardware path that cannot supply supported audio recording",
+      "expected": "Expose actual audio-recording capability and unsupported outcome instead of promising all hardware can record Video audio.",
+      "source_status": "DOCUMENTED_HISTORICAL_OFFICIAL_MANUAL",
+      "installed_runtime_verified": false,
+      "current_code_read": {
+        "status": "code-path-inspected-not-new-runtime-execution",
+        "finding": "Browser master capture exists; reference hardware-specific recording capability has not been executed.",
+        "paths": [
+          "prototype/video.js"
+        ]
+      },
+      "proposed_acceptance": "Browser capability matrix plus separately authorized physical device/audio path tests; no simulated device badge earns acceptance.",
+      "acceptance_status": "proposed-not-executed",
+      "source_limits": "Historical SL2 limitation is not a current universal device ban; independently verify contemporary devices.",
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "xhigh"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "Architecture and persistence require reasoning across failure and concurrency boundaries.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "routing_policy": "Inherited unchanged from the existing feature registry; recommendation is not invocation or model availability proof.",
+      "native_status": "blocked_until_prototype_approval"
+    },
+    {
+      "id": "VMG-029",
+      "feature_id": "HW-002",
+      "related_requirement_ids": [
+        "REQ-206",
+        "REQ-208"
+      ],
+      "coverage_action": "enrich-existing",
+      "manual_pages": [
+        17
+      ],
+      "screen": "Video MIDI learn/unassign state",
+      "trigger": "Open Video, enter MIDI assignment, select a Video control, move hardware, then unassign",
+      "expected": "Expose Video functions in learn mode, record assignment identity and remove it through the mapping action.",
+      "source_status": "DOCUMENTED_HISTORICAL_OFFICIAL_MANUAL",
+      "installed_runtime_verified": false,
+      "current_code_read": {
+        "status": "code-path-inspected-not-new-runtime-execution",
+        "finding": "Generic mapping UI exists; receiveMIDI dispatch currently covers deckplay/cue/audioCrossfader/library/sampler/FXdepth, not Video actions.",
+        "paths": [
+          "prototype/panels.js",
+          "prototype/midi.js"
+        ]
+      },
+      "proposed_acceptance": "Synthetic control-message semantics plus actual WebMIDI device assignment/unassign with Video visible and mouse activation suppressed during learning; preserve existing generic mappings.",
+      "acceptance_status": "proposed-not-executed",
+      "source_limits": "Exact installed4.0.10 behavior and vendor transfer functions remain unverified.",
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-sonnet-5",
+          "effort": "medium"
+        },
+        "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "routing_policy": "Inherited unchanged from the existing feature registry; recommendation is not invocation or model availability proof.",
+      "native_status": "blocked_until_prototype_approval"
+    },
+    {
+      "id": "VMG-030",
+      "feature_id": "HW-002",
+      "related_requirement_ids": [
+        "REQ-052",
+        "REQ-053",
+        "REQ-054",
+        "REQ-381"
+      ],
+      "coverage_action": "new-behavior",
+      "manual_pages": [
+        17,
+        18
+      ],
+      "screen": "Video continuous and selection MIDI targets",
+      "trigger": "Map channel opacity, crossfade, effect amount/selection, transition selection, image size and overlay opacity/animation options",
+      "expected": "Dispatch MIDI to the corresponding Video-specific values with declared absolute/relative semantics.",
+      "source_status": "DOCUMENTED_HISTORICAL_OFFICIAL_MANUAL",
+      "installed_runtime_verified": false,
+      "current_code_read": {
+        "status": "code-path-inspected-not-new-runtime-execution",
+        "finding": "No complete Video target registry/dispatch exists; manual lists26 control groups across pages17–18.",
+        "paths": [
+          "prototype/panels.js",
+          "prototype/midi.js"
+        ]
+      },
+      "proposed_acceptance": "For each supported target validate boundaries, selection enum cycling, no unintended audio mutation and actual pixel change; hardware encoder/fader execution separate.",
+      "acceptance_status": "proposed-not-executed",
+      "source_limits": "26 source control groups are not26 independent canonical requirements, devices or verified mappings. Exact response curves/steps remain unknown.",
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-sonnet-5",
+          "effort": "medium"
+        },
+        "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "routing_policy": "Inherited unchanged from the existing feature registry; recommendation is not invocation or model availability proof.",
+      "native_status": "blocked_until_prototype_approval"
+    },
+    {
+      "id": "VMG-031",
+      "feature_id": "HW-002",
+      "related_requirement_ids": [
+        "REQ-210",
+        "REQ-242"
+      ],
+      "coverage_action": "new-behavior",
+      "manual_pages": [
+        17,
+        18
+      ],
+      "screen": "Video MIDI discrete actions and panel targets",
+      "trigger": "Map link/on-off, directional auto fade, panel/fullscreen actions, overlay target/preset, FX Save and association",
+      "expected": "Execute the selected Video command rather than sending a generic audio action.",
+      "source_status": "DOCUMENTED_HISTORICAL_OFFICIAL_MANUAL",
+      "installed_runtime_verified": false,
+      "current_code_read": {
+        "status": "code-path-inspected-not-new-runtime-execution",
+        "finding": "Video buttons/panels are not dispatched by generic MIDI targets.",
+        "paths": [
+          "prototype/panels.js",
+          "prototype/video-controls.js"
+        ]
+      },
+      "proposed_acceptance": "Press/release/repeat messages test idempotent toggles/actions, correct selected deck and no duplicate save/load; execute fullscreen only within browser gesture/permission constraints.",
+      "acceptance_status": "proposed-not-executed",
+      "source_limits": "Exact installed4.0.10 behavior and vendor transfer functions remain unverified.",
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-sonnet-5",
+          "effort": "medium"
+        },
+        "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "routing_policy": "Inherited unchanged from the existing feature registry; recommendation is not invocation or model availability proof.",
+      "native_status": "blocked_until_prototype_approval"
+    },
+    {
+      "id": "VMG-032",
+      "feature_id": "HW-010",
+      "related_requirement_ids": [],
+      "coverage_action": "new-behavior",
+      "manual_pages": [
+        10
+      ],
+      "screen": "Hardware/MIDI fader authority",
+      "trigger": "Connect both a compatible mixer and a separate MIDI controller with linked Video faders",
+      "expected": "Resolve linked fader authority to the mixer according to this historical manual instead of allowing competing updates silently.",
+      "source_status": "DOCUMENTED_HISTORICAL_OFFICIAL_MANUAL",
+      "installed_runtime_verified": false,
+      "current_code_read": {
+        "status": "code-path-inspected-not-new-runtime-execution",
+        "finding": "Physical multi-controller Video authority has not been implemented or tested.",
+        "paths": [
+          "prototype/panels.js",
+          "prototype/midi.js"
+        ]
+      },
+      "proposed_acceptance": "Controlled event-order fixture then approved physical mixer+controller test, with disconnect/reconnect ownership and unrelated mappings retained.",
+      "acceptance_status": "proposed-not-executed",
+      "source_limits": "Manual's historical precedence is not proof of the exact4.0.10 hardware matrix.",
+      "routing": {
+        "codex": {
+          "model": "gpt-6-astra",
+          "effort": "xhigh"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "xhigh"
+        },
+        "rationale": "Hardware protocols and binary evidence need careful competing hypotheses.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "routing_policy": "Inherited unchanged from the existing feature registry; recommendation is not invocation or model availability proof.",
+      "native_status": "blocked_until_prototype_approval"
+    },
+    {
+      "id": "VMG-033",
+      "feature_id": "VID-001",
+      "related_requirement_ids": [
+        "REQ-496",
+        "REQ-104"
+      ],
+      "coverage_action": "enrich-existing",
+      "manual_pages": [
+        22
+      ],
+      "screen": "Window constraint only",
+      "trigger": "Select4:3/16:9/No Constraints while windowed, then enter fullscreen",
+      "expected": "Constrain preview-window aspect while windowed; do not conflate this with recording or processing resolution.",
+      "source_status": "DOCUMENTED_HISTORICAL_OFFICIAL_MANUAL",
+      "installed_runtime_verified": false,
+      "current_code_read": {
+        "status": "code-path-inspected-not-new-runtime-execution",
+        "finding": "Only16:9 processing sizes and canvas fullscreen exist.",
+        "paths": [
+          "prototype/video-controls.js",
+          "prototype/video.js"
+        ]
+      },
+      "proposed_acceptance": "Window resizing/fullscreen exit retains the constraint policy and does not silently resize a recording canvas; physical output separately verified.",
+      "acceptance_status": "proposed-not-executed",
+      "source_limits": "Exact installed4.0.10 behavior and vendor transfer functions remain unverified.",
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "xhigh"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "Architecture and persistence require reasoning across failure and concurrency boundaries.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "routing_policy": "Inherited unchanged from the existing feature registry; recommendation is not invocation or model availability proof.",
+      "native_status": "blocked_until_prototype_approval"
+    },
+    {
+      "id": "VMG-034",
+      "feature_id": "VID-001",
+      "related_requirement_ids": [
+        "REQ-497",
+        "REQ-105"
+      ],
+      "coverage_action": "enrich-existing",
+      "manual_pages": [
+        22
+      ],
+      "screen": "Output quality budget",
+      "trigger": "Choose higher/lower quality under otherwise identical playback",
+      "expected": "Trade processing quality/cost with a visible output-quality choice; keep it distinct from recording resolution.",
+      "source_status": "DOCUMENTED_HISTORICAL_OFFICIAL_MANUAL",
+      "installed_runtime_verified": false,
+      "current_code_read": {
+        "status": "code-path-inspected-not-new-runtime-execution",
+        "finding": "No five-level quality budget; existing resolution enum does not establish it.",
+        "paths": [
+          "prototype/video-controls.js",
+          "prototype/video.js"
+        ]
+      },
+      "proposed_acceptance": "Declare independent quality algorithm and measure same-fixture pixels/frame costs; exact reference implementation cannot be inferred from the five labels.",
+      "acceptance_status": "proposed-not-executed",
+      "source_limits": "Exact installed4.0.10 behavior and vendor transfer functions remain unverified.",
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "xhigh"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "Architecture and persistence require reasoning across failure and concurrency boundaries.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "routing_policy": "Inherited unchanged from the existing feature registry; recommendation is not invocation or model availability proof.",
+      "native_status": "blocked_until_prototype_approval"
+    },
+    {
+      "id": "VMG-035",
+      "feature_id": "VID-001",
+      "related_requirement_ids": [
+        "REQ-499",
+        "REQ-107"
+      ],
+      "coverage_action": "enrich-existing",
+      "manual_pages": [
+        22
+      ],
+      "screen": "Output arrangement behavior",
+      "trigger": "Select Normal, Left-Right or Left-Output-Right",
+      "expected": "Present one mixed output, two channel views or three channel/mix views in the selected arrangement.",
+      "source_status": "DOCUMENTED_HISTORICAL_OFFICIAL_MANUAL",
+      "installed_runtime_verified": false,
+      "current_code_read": {
+        "status": "code-path-inspected-not-new-runtime-execution",
+        "finding": "Separate previews exist but no selectable composed arrangement in output/capture.",
+        "paths": [
+          "prototype/video.js",
+          "prototype/video-controls.js"
+        ]
+      },
+      "proposed_acceptance": "Distinct left/right/mix marker fixtures verify order and source routing; separately resolve raw/processed/prefader stage and capture inclusion.",
+      "acceptance_status": "proposed-not-executed",
+      "source_limits": "Manual establishes member/order, not every source stage, tile geometry or hardware splitter behavior.",
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "xhigh"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "Architecture and persistence require reasoning across failure and concurrency boundaries.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "routing_policy": "Inherited unchanged from the existing feature registry; recommendation is not invocation or model availability proof.",
+      "native_status": "blocked_until_prototype_approval"
+    },
+    {
+      "id": "VMG-036",
+      "feature_id": "VID-002",
+      "related_requirement_ids": [
+        "REQ-500",
+        "REQ-108"
+      ],
+      "coverage_action": "enrich-existing",
+      "manual_pages": [
+        23
+      ],
+      "screen": "Media Treatment semantics",
+      "trigger": "Select Preserve/Stretch/Center-Cut/Letterbox on mismatched aspect media",
+      "expected": "Preserve contains without crop; Stretch fills independently; Center-Cut covers with crop; Letterbox fits width with possible vertical crop/padding.",
+      "source_status": "DOCUMENTED_HISTORICAL_OFFICIAL_MANUAL",
+      "installed_runtime_verified": false,
+      "current_code_read": {
+        "status": "code-path-inspected-not-new-runtime-execution",
+        "finding": "Independent treatment helper/integration now exists; historical manual supports broad geometry meanings, not pixel-identical alpha/interpolation or applicability.",
+        "paths": [
+          "prototype/video-treatment.js",
+          "prototype/video.js"
+        ]
+      },
+      "proposed_acceptance": "Retain both4:3 and wide decoded fixtures to distinguish the four choices, alpha/padding/history and capture tests; current reference behavior remains separate.",
+      "acceptance_status": "proposed-not-executed",
+      "source_limits": "Exact installed4.0.10 behavior and vendor transfer functions remain unverified.",
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-sonnet-5",
+          "effort": "medium"
+        },
+        "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "routing_policy": "Inherited unchanged from the existing feature registry; recommendation is not invocation or model availability proof.",
+      "native_status": "blocked_until_prototype_approval"
+    },
+    {
+      "id": "VMG-037",
+      "feature_id": "VID-001",
+      "related_requirement_ids": [
+        "REQ-501"
+      ],
+      "coverage_action": "enrich-existing",
+      "manual_pages": [
+        23
+      ],
+      "screen": "V-Sync synchronization",
+      "trigger": "Enable/disable V-Sync",
+      "expected": "Synchronize output calculation to monitor refresh when enabled; expose unconstrained capability measurement separately when disabled.",
+      "source_status": "DOCUMENTED_HISTORICAL_OFFICIAL_MANUAL",
+      "installed_runtime_verified": false,
+      "current_code_read": {
+        "status": "code-path-inspected-not-new-runtime-execution",
+        "finding": "rAF/phase-aligned ticking is not an implemented user V-Sync policy.",
+        "paths": [
+          "prototype/video.js"
+        ]
+      },
+      "proposed_acceptance": "Measured output-calculation timestamps across refresh changes; browser scheduling constraints explicit; separate native display measurements.",
+      "acceptance_status": "proposed-not-executed",
+      "source_limits": "Manual says defaulton in2015; observedunchecked session in4.0.10 is not a factory-default contradiction.",
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "xhigh"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "Architecture and persistence require reasoning across failure and concurrency boundaries.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "routing_policy": "Inherited unchanged from the existing feature registry; recommendation is not invocation or model availability proof.",
+      "native_status": "blocked_until_prototype_approval"
+    },
+    {
+      "id": "VMG-038",
+      "feature_id": "VID-001",
+      "related_requirement_ids": [
+        "REQ-502"
+      ],
+      "coverage_action": "enrich-existing",
+      "manual_pages": [
+        23
+      ],
+      "screen": "Slow-speed frame blending",
+      "trigger": "Enable blending and play below normal speed",
+      "expected": "Blend adjacent temporal frames to reduce slow-motion stepping, at added processing cost.",
+      "source_status": "DOCUMENTED_HISTORICAL_OFFICIAL_MANUAL",
+      "installed_runtime_verified": false,
+      "current_code_read": {
+        "status": "code-path-inspected-not-new-runtime-execution",
+        "finding": "Same-asset seek retention and GPU spatial interpolation do not implement adjacent decoded temporal blending.",
+        "paths": [
+          "prototype/video.js",
+          "prototype/video-decode.js"
+        ]
+      },
+      "proposed_acceptance": "Original moving marker at.25x/.5x, inspect actual adjacent-frame blend/history, seek/reverse discontinuities and measured cost; exact weights remain independent until recovered.",
+      "acceptance_status": "proposed-not-executed",
+      "source_limits": "Exact installed4.0.10 behavior and vendor transfer functions remain unverified.",
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "xhigh"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "Architecture and persistence require reasoning across failure and concurrency boundaries.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "routing_policy": "Inherited unchanged from the existing feature registry; recommendation is not invocation or model availability proof.",
+      "native_status": "blocked_until_prototype_approval"
+    },
+    {
+      "id": "VMG-039",
+      "feature_id": "VID-001",
+      "related_requirement_ids": [
+        "REQ-503"
+      ],
+      "coverage_action": "enrich-existing",
+      "manual_pages": [
+        23
+      ],
+      "screen": "Video buffer allocation",
+      "trigger": "Change buffer budget",
+      "expected": "Reserve a defined system-RAM playback buffer budget, distinct from GPU retained-frame counts and recording buffers.",
+      "source_status": "DOCUMENTED_HISTORICAL_OFFICIAL_MANUAL",
+      "installed_runtime_verified": false,
+      "current_code_read": {
+        "status": "code-path-inspected-not-new-runtime-execution",
+        "finding": "Browser-managed decode and small effect histories exist; generic RAM playback-budget allocation is absent.",
+        "paths": [
+          "prototype/video.js",
+          "prototype/video-effects.js"
+        ]
+      },
+      "proposed_acceptance": "Declared allocation/eviction stress test with observed accounting and decode recovery; never fabricate RAM usage from the slider label alone.",
+      "acceptance_status": "proposed-not-executed",
+      "source_limits": "Exact installed4.0.10 behavior and vendor transfer functions remain unverified.",
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "xhigh"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "Architecture and persistence require reasoning across failure and concurrency boundaries.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "routing_policy": "Inherited unchanged from the existing feature registry; recommendation is not invocation or model availability proof.",
+      "native_status": "blocked_until_prototype_approval"
+    },
+    {
+      "id": "VMG-040",
+      "feature_id": "VID-001",
+      "related_requirement_ids": [
+        "REQ-504"
+      ],
+      "coverage_action": "enrich-existing",
+      "manual_pages": [
+        23
+      ],
+      "screen": "Post-mix delay compensation",
+      "trigger": "Adjust positive/negative compensation",
+      "expected": "Shift the post-mix Video output relative to audio over the historical stated±0.5s span.",
+      "source_status": "DOCUMENTED_HISTORICAL_OFFICIAL_MANUAL",
+      "installed_runtime_verified": false,
+      "current_code_read": {
+        "status": "code-path-inspected-not-new-runtime-execution",
+        "finding": "No post-mix delay queue or timing-offset control exists.",
+        "paths": [
+          "prototype/video.js"
+        ]
+      },
+      "proposed_acceptance": "Original AV marker, frame timestamps and capture/output assertions for both signs, pause/seek/loop/reset; causal advance requires declared buffering/lookahead policy.",
+      "acceptance_status": "proposed-not-executed",
+      "source_limits": "Manual now identifies post-mix location and span; sign convention, step and current4.0.10 behavior remain unknown.",
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "xhigh"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "Architecture and persistence require reasoning across failure and concurrency boundaries.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "routing_policy": "Inherited unchanged from the existing feature registry; recommendation is not invocation or model availability proof.",
+      "native_status": "blocked_until_prototype_approval"
+    },
+    {
+      "id": "VMG-041",
+      "feature_id": "VID-002",
+      "related_requirement_ids": [
+        "REQ-347"
+      ],
+      "coverage_action": "enrich-existing",
+      "manual_pages": [
+        4,
+        13,
+        19,
+        24
+      ],
+      "screen": "Effect restrictions and cost ratings",
+      "trigger": "Open Effects with a lower-capability GPU or inspect a documented effect cost",
+      "expected": "Explain available/restricted effects and relative GPU usage; do not equate resource names with active menu availability.",
+      "source_status": "DOCUMENTED_HISTORICAL_OFFICIAL_MANUAL",
+      "installed_runtime_verified": false,
+      "current_code_read": {
+        "status": "code-path-inspected-not-new-runtime-execution",
+        "finding": "Independent WebGL limits and manifest/localization provenance exist; no reference capability restriction matrix.",
+        "paths": [
+          "prototype/video-effects-catalog.js",
+          "prototype/video-effects.js"
+        ]
+      },
+      "proposed_acceptance": "Actual context capability/failure fixture with visible restriction reason; historical light/medium/heavy categories are not a calibrated runtime benchmark.",
+      "acceptance_status": "proposed-not-executed",
+      "source_limits": "Manual's prose says five menus while printed headings include Filter as well; do not derive a current exhaustive category/count from that sentence.",
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-sonnet-5",
+          "effort": "medium"
+        },
+        "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "routing_policy": "Inherited unchanged from the existing feature registry; recommendation is not invocation or model availability proof.",
+      "native_status": "blocked_until_prototype_approval",
+      "current_reference_observation": {
+        "path": "docs/research/VIDEO_REFERENCE_SETTINGS_20261016.json",
+        "date": "2026-10-16",
+        "version": "4.0.10(4010213)arm64",
+        "evidenceClass": "OBSERVED_CURRENT_REFERENCE_CONTROLS_IDLE",
+        "parentExecuted": true,
+        "installedControlsObserved": true,
+        "algorithmOrLoadedRuntimeVerified": false,
+        "observed": {
+          "effectRestrictions": "No Restrictions"
+        },
+        "limit": "Current session readout only; not successful effect invocation, full catalog availability, cost measurement or a GPU capability matrix."
+      },
+      "installed_controls_observed": true
+    },
+    {
+      "id": "VMG-042",
+      "feature_id": "VID-002",
+      "related_requirement_ids": [
+        "REQ-348"
+      ],
+      "coverage_action": "enrich-existing",
+      "manual_pages": [
+        24
+      ],
+      "screen": "Global audio-linked effects enable",
+      "trigger": "Enable audio-linked Video effects while applying DJ-FX",
+      "expected": "Engage predetermined synchronized visual effects with the audio effect state, independently of ordinary spectral-reactive effects.",
+      "source_status": "DOCUMENTED_HISTORICAL_OFFICIAL_MANUAL",
+      "installed_runtime_verified": false,
+      "current_code_read": {
+        "status": "code-path-inspected-not-new-runtime-execution",
+        "finding": "Independent Echo/Distortion semantic bridge exists; remaining reference DJ-FX mappings/tails are unknown.",
+        "paths": [
+          "prototype/video-audio-fx.js",
+          "prototype/video-pipeline.js"
+        ]
+      },
+      "proposed_acceptance": "Existing actual semantic/noninterference tests for supported mappings plus documented unsupported coverage; no claim that two links recover the whole reference map.",
+      "acceptance_status": "proposed-not-executed",
+      "source_limits": "Exact installed4.0.10 behavior and vendor transfer functions remain unverified.",
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-sonnet-5",
+          "effort": "medium"
+        },
+        "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "routing_policy": "Inherited unchanged from the existing feature registry; recommendation is not invocation or model availability proof.",
+      "native_status": "blocked_until_prototype_approval",
+      "current_reference_observation": {
+        "path": "docs/research/VIDEO_REFERENCE_SETTINGS_20261016.json",
+        "date": "2026-10-16",
+        "version": "4.0.10(4010213)arm64",
+        "evidenceClass": "OBSERVED_CURRENT_REFERENCE_CONTROLS_IDLE",
+        "parentExecuted": true,
+        "installedControlsObserved": true,
+        "algorithmOrLoadedRuntimeVerified": false,
+        "observed": {
+          "audioLinkedVideoEffects": true
+        },
+        "limit": "Existing checked setting only; no new audio/video FX activation or transfer-function/tail/mapping measurement."
+      },
+      "installed_controls_observed": true
+    },
+    {
+      "id": "VMG-043",
+      "feature_id": "VID-001",
+      "related_requirement_ids": [],
+      "coverage_action": "new-behavior",
+      "manual_pages": [
+        24
+      ],
+      "screen": "Info input/output dimensions and calculation FPS",
+      "trigger": "Load left/right clips and open Info during playback",
+      "expected": "Show actual original source resolutions and current output resolution; report effect/fader calculation FPS separately from source-video FPS.",
+      "source_status": "DOCUMENTED_HISTORICAL_OFFICIAL_MANUAL",
+      "installed_runtime_verified": false,
+      "current_code_read": {
+        "status": "code-path-inspected-not-new-runtime-execution",
+        "finding": "Mixer shows processing size/framecount/CPU submission ms; decoded dimensions are available but no full Info view or measured calculationFPS estimator.",
+        "paths": [
+          "prototype/video.js",
+          "prototype/video-decode.js",
+          "prototype/video-controls.js"
+        ]
+      },
+      "proposed_acceptance": "Known24fps/30fps source fixtures with independent render cadence; readouts identify each metric and time window without turning CPU submission time into GPU-completion/frame-rate proof.",
+      "acceptance_status": "proposed-not-executed",
+      "source_limits": "Exact installed4.0.10 behavior and vendor transfer functions remain unverified.",
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "xhigh"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "Architecture and persistence require reasoning across failure and concurrency boundaries.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "routing_policy": "Inherited unchanged from the existing feature registry; recommendation is not invocation or model availability proof.",
+      "native_status": "blocked_until_prototype_approval",
+      "current_reference_observation": {
+        "path": "docs/research/VIDEO_REFERENCE_SETTINGS_20261016.json",
+        "date": "2026-10-16",
+        "version": "4.0.10(4010213)arm64",
+        "evidenceClass": "OBSERVED_CURRENT_REFERENCE_CONTROLS_IDLE",
+        "parentExecuted": true,
+        "installedControlsObserved": true,
+        "algorithmOrLoadedRuntimeVerified": false,
+        "observed": {
+          "leftRightInputResolutions": null,
+          "outputResolution": [
+            400,
+            400
+          ],
+          "outputFPS": null,
+          "mediaLoaded": false
+        },
+        "limit": "Idle output400x400 and blank input/FPS fields. Blank is not0, a performance result or a claim that input metadata cannot be displayed after loading."
+      },
+      "installed_controls_observed": true
+    },
+    {
+      "id": "VMG-044",
+      "feature_id": "VID-001",
+      "related_requirement_ids": [],
+      "coverage_action": "new-behavior",
+      "manual_pages": [
+        24
+      ],
+      "screen": "Info GPU buffering and colorspace",
+      "trigger": "Inspect each input buffering/colorspace metric",
+      "expected": "Report actual GPU buffered-frame count and native colorspace when available, otherwise label unavailable rather than inventing values.",
+      "source_status": "DOCUMENTED_HISTORICAL_OFFICIAL_MANUAL",
+      "installed_runtime_verified": false,
+      "current_code_read": {
+        "status": "code-path-inspected-not-new-runtime-execution",
+        "finding": "Effect history layer count is not decoder GPU-buffer occupancy; source QuickTime colorspace is not available through inspected browser API.",
+        "paths": [
+          "prototype/video-effects.js",
+          "prototype/video.js"
+        ]
+      },
+      "proposed_acceptance": "Inject supported telemetry provenance and unavailable paths; actual native backend counters/colorspace require separate implementation/measurement.",
+      "acceptance_status": "proposed-not-executed",
+      "source_limits": "RAM buffer budget onp23 and GPU buffered-frame readout onp24 are different quantities.",
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "xhigh"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "Architecture and persistence require reasoning across failure and concurrency boundaries.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "routing_policy": "Inherited unchanged from the existing feature registry; recommendation is not invocation or model availability proof.",
+      "native_status": "blocked_until_prototype_approval",
+      "current_reference_observation": {
+        "path": "docs/research/VIDEO_REFERENCE_SETTINGS_20261016.json",
+        "date": "2026-10-16",
+        "version": "4.0.10(4010213)arm64",
+        "evidenceClass": "OBSERVED_CURRENT_REFERENCE_CONTROLS_IDLE",
+        "parentExecuted": true,
+        "installedControlsObserved": true,
+        "algorithmOrLoadedRuntimeVerified": false,
+        "observed": {
+          "leftRightBufferedFrames": null,
+          "leftRightColorspace": null,
+          "mediaLoaded": false
+        },
+        "limit": "All source fields blank with no Video loaded; no GPU occupancy or colorspace measured."
+      },
+      "installed_controls_observed": true
+    },
+    {
+      "id": "VMG-045",
+      "feature_id": "VID-001",
+      "related_requirement_ids": [],
+      "coverage_action": "new-behavior",
+      "manual_pages": [
+        24
+      ],
+      "screen": "YUV handling, version and debug prerequisites",
+      "trigger": "Select YUV handling or enable diagnostics",
+      "expected": "Expose the defined Default/Software-only/RGB-only processing choice where supported, identify implementation version, and gate dependent debug tools honestly.",
+      "source_status": "DOCUMENTED_HISTORICAL_OFFICIAL_MANUAL",
+      "installed_runtime_verified": false,
+      "current_code_read": {
+        "status": "code-path-inspected-not-new-runtime-execution",
+        "finding": "Browser owns video color conversion; no nativeYUV backend selector or MovieInfoBatch debug dependency.",
+        "paths": [
+          "prototype/video.js",
+          "prototype/video-controls.js"
+        ]
+      },
+      "proposed_acceptance": "Real backend capability matrix and known color-ramp fixtures; unsupported choices unavailable with reason; never install legacy debug tools automatically.",
+      "acceptance_status": "proposed-not-executed",
+      "source_limits": "MovieInfoBatch/QuickTime details are historical; no requirement to copy legacy tool identity or imply native colorspace access in browser.",
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "xhigh"
+        },
+        "claude_code": {
+          "model": "claude-opus-5",
+          "effort": "high"
+        },
+        "rationale": "Architecture and persistence require reasoning across failure and concurrency boundaries.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "routing_policy": "Inherited unchanged from the existing feature registry; recommendation is not invocation or model availability proof.",
+      "native_status": "blocked_until_prototype_approval",
+      "current_reference_observation": {
+        "path": "docs/research/VIDEO_REFERENCE_SETTINGS_20261016.json",
+        "date": "2026-10-16",
+        "version": "4.0.10(4010213)arm64",
+        "evidenceClass": "OBSERVED_CURRENT_REFERENCE_CONTROLS_IDLE",
+        "parentExecuted": true,
+        "installedControlsObserved": true,
+        "algorithmOrLoadedRuntimeVerified": false,
+        "observed": {
+          "YUVHandling": {
+            "selected": "Default",
+            "choices": [
+              "Default",
+              "Software Only",
+              "RGB Only"
+            ]
+          },
+          "enableDebug": false,
+          "bufferDebugView": false,
+          "versionReadoutVisibleInInspectedInfoScreen": false
+        },
+        "limit": "YUV menu opened then closed unchanged. Debug switches not toggled; processing/prerequisites untested. VersionNumber from2015 manual was not visible here; absence from this viewport is not proof of global removal."
+      },
+      "installed_controls_observed": true
+    },
+    {
+      "id": "VMG-046",
+      "feature_id": "VID-002",
+      "related_requirement_ids": [
+        "REQ-347"
+      ],
+      "coverage_action": "new-behavior",
+      "manual_pages": [
+        19,
+        20
+      ],
+      "screen": "Historical effect behavioral input distinctions",
+      "trigger": "Use Analyzer or hardware-EQ-linked color effects while holding other inputs constant",
+      "expected": "Distinguish the documented eight-band Analyzer and hardware EQ-knob input semantics from three-band audio-reactive approximations.",
+      "source_status": "DOCUMENTED_HISTORICAL_OFFICIAL_MANUAL",
+      "installed_runtime_verified": false,
+      "current_code_read": {
+        "status": "code-path-inspected-not-new-runtime-execution",
+        "finding": "Analyzer contracts explicitly use three supplied bands; no complete eight-band/hardware-EQ Video context is present, and olderCSL/RGB EQ active registration is unverified.",
+        "paths": [
+          "prototype/video-effects-catalog.js",
+          "prototype/video-effects.js",
+          "prototype/video-analysis.js"
+        ]
+      },
+      "proposed_acceptance": "Original single-band tone sweeps and hardware-EQ changes independently prove the selected input path; keep historical names/capability restrictions separate from55-resource implementation count.",
+      "acceptance_status": "proposed-not-executed",
+      "source_limits": "Manual descriptions clarify broad behavior, not exact bins/curves/parameters. Historical extra names do not automatically expand the current active catalog.",
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-sonnet-5",
+          "effort": "medium"
+        },
+        "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "routing_policy": "Inherited unchanged from the existing feature registry; recommendation is not invocation or model availability proof.",
+      "native_status": "blocked_until_prototype_approval"
+    },
+    {
+      "id": "VMG-047",
+      "feature_id": "VID-002",
+      "related_requirement_ids": [
+        "REQ-347"
+      ],
+      "coverage_action": "new-behavior",
+      "manual_pages": [
+        20,
+        21
+      ],
+      "screen": "Historical temporal/transition semantic contracts",
+      "trigger": "Compare Delay Grid and boundary/latch transitions with their manual description",
+      "expected": "Review timestamp-grid policy versus described sixteen prior frames, and center/end-point switch behavior before claiming reference semantics.",
+      "source_status": "DOCUMENTED_HISTORICAL_OFFICIAL_MANUAL",
+      "installed_runtime_verified": false,
+      "current_code_read": {
+        "status": "code-path-inspected-not-new-runtime-execution",
+        "finding": "Independent history/timing/latch algorithms are implemented and labeled;55/34 count coverage alone does not establish the historical behavior.",
+        "paths": [
+          "prototype/video-effects-state.js",
+          "prototype/video-transitions-state.js",
+          "prototype/video-transitions-kernel.js"
+        ]
+      },
+      "proposed_acceptance": "Frame-index markers at variable cadence plus endpoint/center/scratch/upfader pixel tests; preserve old independent passes and separately record measured reference disagreements.",
+      "acceptance_status": "proposed-not-executed",
+      "source_limits": "The PDF contains apparent editorial/name/axis inconsistencies; do not silently correct them into precise4.0.10 algorithms. No protected shader/code reuse.",
+      "routing": {
+        "codex": {
+          "model": "gpt-6.1-sol",
+          "effort": "high"
+        },
+        "claude_code": {
+          "model": "claude-sonnet-5",
+          "effort": "medium"
+        },
+        "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+        "primary": "Codex",
+        "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+        "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+      },
+      "routing_policy": "Inherited unchanged from the existing feature registry; recommendation is not invocation or model availability proof.",
+      "native_status": "blocked_until_prototype_approval"
+    }
+  ],
+  "excludedOrSeparate": [
+    {
+      "topic": "Installation/license/demo/authorize",
+      "pages": [
+        4,
+        5,
+        6,
+        24
+      ],
+      "reason": "Historical vendor packaging/account/demo-watermark gates; not a mandate to reproduce vendor identity, paywall, login or activation in the independent app. No purchase/activation/account actions authorized."
+    },
+    {
+      "topic": "Legacy OS/QuickTime/DirectShow/third-party codecs",
+      "pages": [
+        4,
+        25,
+        26,
+        27
+      ],
+      "reason": "Historical compatibility facts; do not install QuickTime7/Perian/codec packs or assert modern browser/native codec support from this2015 list."
+    },
+    {
+      "topic": "WAV/AIFF2GB split",
+      "pages": [
+        16
+      ],
+      "reason": "Audio-format note with existing genericREC coverage; not a universal video container size/split rule."
+    },
+    {
+      "topic": "Contoured faders",
+      "pages": [
+        23,
+        24
+      ],
+      "reason": "Current installed label already inREQ-506, but this manual Control prose does not supply its detailed curve; do not invent a recovered contour."
+    },
+    {
+      "topic": "Full reference effect/transition implementation",
+      "pages": [
+        19,
+        20,
+        21
+      ],
+      "reason": "Descriptions constrain broad historical semantics, not current registration, transfer functions, exact pixels or source availability. Keep47/7manifest and55/33candidate distinctions;34includes independentCrossfade baseline."
+    }
+  ],
+  "sourceHashes": [
+    {
+      "path": "docs/research/interaction-requirements.json",
+      "sha256": "141e1fb1addc3563209ae97e6d509b5c5a499b76c33b71e903bc741556db4dea"
+    },
+    {
+      "path": "docs/delivery/feature-registry.json",
+      "sha256": "c4df76f65ee8962845daddcc3855e0b2350917572b6e6f8f815fb3b763e3a71c"
+    },
+    {
+      "path": "prototype/video.js",
+      "sha256": "c6c7090906b1aefc675633c6a1c97396b35995be8076a71435199d03553b159e"
+    },
+    {
+      "path": "prototype/video-controls.js",
+      "sha256": "3a970e0eedf840e45053a67b8772295a2d5321ec1cbc546936eb0c69b35c8cbf"
+    },
+    {
+      "path": "prototype/video-state.js",
+      "sha256": "418ba656d07f7dd675507883eb4c2badf147ccc5846442e4ef81410d3683097e"
+    },
+    {
+      "path": "prototype/video-media.js",
+      "sha256": "5993cbf915fd85ad164d14d582772f51d9d57181d6fbfe95ca9b31c2b9db6e25"
+    },
+    {
+      "path": "prototype/video-media-controls.js",
+      "sha256": "9f55ce66c26fd4eadb92287cb902fbecd6199d8db66f46afe8ccc9d182b057b0"
+    },
+    {
+      "path": "prototype/video-effects-catalog.js",
+      "sha256": "96490aa120eed1e9cb1eff8746961ae1c4549721f4e15f07e6885c3f224f5606"
+    },
+    {
+      "path": "prototype/video-analysis.js",
+      "sha256": "052939cf3ae5ccdee47bc49a8852e672ecb2377f86a09049439ee05e32b3aed9"
+    },
+    {
+      "path": "prototype/video-pipeline.js",
+      "sha256": "30f03106b99613e0c6317b448ca4edc14c1461d393ec2af82ca954a70d1b4a63"
+    },
+    {
+      "path": "prototype/panels.js",
+      "sha256": "19dcb68ed6e47fb9f7d6a7be7e7a3be533684dad57f139e798e9c512b2c22003"
+    },
+    {
+      "path": "prototype/app.js",
+      "sha256": "d8fc0c940cb62e2ae77c44de4ab459ee52647a9c44ad52181a2c8d022cbdf7bb"
+    },
+    {
+      "path": "prototype/midi.js",
+      "sha256": "b0b5ef7b71ef551c98ccb56dba0161d3e532a93713bb6b0e2b14e6f4c96b8c5e"
+    },
+    {
+      "path": "local-evidence/claude-fable/official-video-manual-141226.txt",
+      "sha256": "6ab119c161a02b210e73456e6032383f8c89182f20b9b8b974383488f967f198"
+    },
+    {
+      "path": "docs/research/VIDEO_REFERENCE_SETTINGS_20261016.json",
+      "sha256": "1476afd897f2316cfa40ca135e839b6f26e3d073941d202f9131d9f3f7bdd2af"
+    },
+    {
+      "path": "docs/research/UI_OBSERVATIONS.md",
+      "sha256": "1831928c646869db2aabce0d6dbb391783cbf0bc69f580b94d81c8fd0b322387"
+    }
+  ],
+  "claimLimits": {
+    "newAcceptanceExecuted": false,
+    "nativeExecuted": false,
+    "referenceRuntimeVerified": false,
+    "fullParity": false,
+    "modelsInvoked": false
+  },
+  "nextStep": "Parent reviews proposed rows against507baseline, chooses merge/enrichment IDs and bounded implementation scope, then attaches actual behavior evidence. No automatic canonical/remote update.",
+  "currentReferenceObservation": {
+    "path": "docs/research/VIDEO_REFERENCE_SETTINGS_20261016.json",
+    "record": {
+      "date": "2026-10-16",
+      "version": "4.0.10(4010213)arm64",
+      "method": "Existing user-authorized JXA/CoreGraphics click route;freshCUA screenshots",
+      "observed": {
+        "effectRestrictions": "No Restrictions",
+        "audioLinkedVideoEffects": true,
+        "outputResolution": [
+          400,
+          400
+        ],
+        "outputFPS": null,
+        "sourceMetadata": "blank,noVideoloaded",
+        "YUVHandling": {
+          "selected": "Default",
+          "choices": [
+            "Default",
+            "Software Only",
+            "RGB Only"
+          ]
+        },
+        "enableDebug": false,
+        "bufferDebugView": false
+      },
+      "restoration": {
+        "videoEnabled": false,
+        "uncheckedAndHiddenVerified": true,
+        "setupClosed": true
+      },
+      "noNewMediaPlaybackRecordingLicenseActivation": true,
+      "imageHashes": {
+        "info.png": "a80dce4fa1832fa6a647123078dae878a8fe310c4481ae5905c9b2daa9c6b0bc",
+        "yuv-menu.png": "a850d68e0b0f1b303fd8a6ebfcf439e8b3c133b7ff32ea06e85b69d5ced86d5e",
+        "effects.png": "1cbeea448ad3c686acc7803f5217ba63a94351033feff2a4c59b64acf9d947a3",
+        "restored-off.png": "19f0db23fe366d9b1a2dbe1779ec540292751c3926b2195a6d07d914c24cc0fa"
+      },
+      "currentRuntimeAlgorithmParityVerified": false,
+      "nativeApproved": false
+    },
+    "supersedes": "Earlier Effects/Info navigation failures are historical. Current controls now observed; the historical manual remains separately dated and behavior is not upgraded to verified.",
+    "workerScope": "Read the saved parent observation; this reconciliation worker did not control the native app.",
+    "recordIntegrity": "Raw screenshot hashes are preserved in the observation record; no vendor screenshots copied into these reports."
+  },
+  "sourceHashPolicy": "Original inspected runtime hashes retain their prior working cutoff; new observation/UI hashes describe this reconciliation read. No named-final-candidate or current runtime acceptance is asserted."
+}

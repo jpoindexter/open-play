@@ -3,6 +3,8 @@ import { createTransitionState } from "./video-transitions-state.js";
 
 // Factual names only: 7 manifest definitions, 26 additional localization labels.
 // Algorithms/contracts below are original interpretations, never Serato parity.
+// Center/Latch50/Scratch now follow broad historical manual semantics; exact
+// curves, threshold bands, hysteresis and current-version behavior remain unknown.
 const definitions = [
   ["Luma Key Fade", "Shader", "manifest", "Reveal incoming pixels by their luminance threshold."],
   ["Upfaders Only", "Blend", "manifest", "Ignore crossfader; add both independently upfaded sources, including at endpoints."],
@@ -12,9 +14,9 @@ const definitions = [
   ["Smudge Fade", "Shader", "manifest", "Spatial smear with a bounded trail of the preceding rendered frame."],
   ["Melt", "Shader", "manifest", "Independent column-dependent vertical drips reveal the incoming image."],
   ["Default", "Blend", "localized-candidate", "Independent linear premultiplied-alpha crossfade."],
-  ["Center", "Blend", "localized-candidate", "Reveal an expanding centered rectangle."],
-  ["Scratch", "Latch", "localized-candidate", "Hold the last endpoint's captured source until the opposite endpoint; scrub the snapshot horizontally."],
-  ["Latch 50", "Latch", "localized-candidate", "Capture selected source when crossing 50%; hold it until crossing back or reaching an endpoint."],
+  ["Center", "Blend", "localized-candidate", "Live linear crossfade only across fader25%–75%; independent curve from historical central-half description."],
+  ["Scratch", "Latch", "localized-candidate", "Live end-cut selection: independent5%/95% bands, retained side between bands, nearest-side initialization; no frozen frame."],
+  ["Latch 50", "Latch", "localized-candidate", "Live hard cut at50%; independent tie selects right. No source-frame capture."],
   ["Scratch Fade", "Latch", "localized-candidate", "Freeze departing left source on entering the interior, fade that snapshot to live right source."],
   ["Box H", "3D", "localized-candidate", "Compress outgoing/incoming horizontal faces with independent depth shading."],
   ["Box V", "3D", "localized-candidate", "Compress outgoing/incoming vertical faces with independent depth shading."],
@@ -48,7 +50,7 @@ export const videoTransitionCatalog = Object.freeze(definitions.map(([name, cate
   referenceEquivalent: false,
   candidate: provenance === "localized-candidate",
   baseline: provenance === "open-play-baseline",
-  temporal: ["Smudge Fade", "Scratch", "Latch 50", "Scratch Fade"].includes(name),
+  temporal: ["Smudge Fade", "Scratch", "Scratch Fade"].includes(name),
   endpointContract: name === "Upfaders Only" ? "Add independently upfaded sources at every amount" : "Live left at 0, live right at 1, each with its own upfader",
 })));
 
@@ -154,7 +156,7 @@ export function createVideoTransitions({ width = 640, height = 360 } = {}) {
     [textures[0], textures[1], frameHistory ?? textures[2], textures[4], textures[5]].forEach((texture, i) => {
       gl.activeTexture(gl.TEXTURE0 + i); gl.bindTexture(gl.TEXTURE_2D, texture);
     });
-    gl.uniform1i(uniform.kind, entry.kernelIndex); gl.uniform1f(uniform.amount, amount);
+    gl.uniform1i(uniform.kind, entry.kernelIndex); gl.uniform1f(uniform.amount, transition.mixAmount);
     gl.uniform1f(uniform.clockTime, options.reducedMotion ? 0 : time % 3600);
     gl.uniform1f(uniform.tempo, Math.max(1, Math.min(999, Number.isFinite(options.bpm) ? options.bpm : 120)));
     gl.uniform1f(uniform.historyReady, frameHistoryValid ? 1 : 0);

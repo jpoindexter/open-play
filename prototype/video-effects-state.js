@@ -13,12 +13,16 @@ export function normalizeVideoSpec(spec) {
   if (!spec || spec.on === false || !spec.name || spec.name === "Off") return null;
   const definition = videoEffectByName.get(spec.name);
   if (!definition) throw new Error(`Unknown independent Video effect: ${spec.name}`);
+  const params={ ...definition.default.params, ...spec.params };
+  // Saved beat-timed pulses remain beat-timed, unless seconds is explicitly
+  // supplied. This compatibility affects timing only; frames are never held.
+  if(spec.name==="Frame Pulse" && spec.params?.periodBeats!==undefined && spec.params?.periodSeconds===undefined)
+    delete params.periodSeconds;
   return { name: spec.name, id: definition.id,
-    value: clampVideo(finite(spec.value, definition.default.value)),
-    params: { ...definition.default.params, ...spec.params } };
+    value: clampVideo(finite(spec.value, definition.default.value)),params };
 }
 export function createVideoEffectState(name) {
-  return { name, holdCaptured: false, captureToken: undefined, pulseCycle: undefined,
+  return { name, holdCaptured: false, captureToken: undefined,
     historyTimes: Array(16).fill(null), nextLayer: 0, lastCaptureTime: -Infinity,
     lastTime: undefined, lastFrameId: undefined, recordPosition: 0,
     columns: [0,0,0], velocity: [0,0,0] };
@@ -43,12 +47,6 @@ export function planVideoEffectFrame(state, spec, context) {
   if (state.name === "Frame Freeze" && spec.value > 0 &&
       (!state.holdCaptured || !Object.is(state.captureToken,params.captureToken))) {
     plan.captureHold = true; state.holdCaptured = true; state.captureToken = params.captureToken;
-  }
-  if (state.name === "Frame Pulse" && !context.reducedMotion) {
-    const cycle = Math.floor(time*context.bpm/60/clampVideo(finite(params.periodBeats,1),.125,16));
-    if (!state.holdCaptured || cycle !== state.pulseCycle) {
-      plan.captureHold = true; state.holdCaptured = true; state.pulseCycle = cycle;
-    }
   }
   if (state.name === "Delay Grid") {
     const seconds = clampVideo(finite(params.historySeconds,2),.25,4);
@@ -80,9 +78,9 @@ export function videoEffectUniforms(spec) {
   switch(spec.name) {
     case "Filter": return [["Low Pass","High Pass","Band Pass"].indexOf(x.mode),n("radius",3,.1,24),0,0];
     case "Delay Grid":return [Math.round(n("columns",4,2,8)),0,0,0];
-    case "Frame Pulse":return [n("periodBeats",1,.125,16),0,0,0];
+    case "Frame Pulse":return [x.periodSeconds===undefined?0:n("periodSeconds",1,.1,16),n("edgeWidth",.12,.005,.45),n("periodBeats",1,.125,16),0];
     case "Flash On BPM":return [n("periodBeats",1,.125,16),n("duty",.15,.02,.95),0,0];
-    case "Split":return [Math.round(n("panels",4,2,12)),0,0,0];
+    case "Split":return [Math.round(n("panels",5,2,12)),0,0,0];
     case "Record Rotate":return [n("turnsPerSecond",.25,-4,4),0,0,0];
     case "RGB Eq":return [n("red",1.3,0,3),n("green",1,0,3),n("blue",.7,0,3),0];
     case "CSL Eq":return [n("hue",45,-360,360),n("saturation",1.25,0,3),n("luminance",.04,-1,1),0];

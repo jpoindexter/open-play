@@ -44,13 +44,25 @@ test("freeze planner drives an actual retained-frame capture collaborator",()=>{
  assert.deepEqual(run({time:2,pixels:[0,0,255,255]},1,1),[0,0,255,255]);
  return "Executed capture lifecycle with an in-memory frame collaborator, not GPU pixels";
 });
-test("beat pulse captures at declared120BPM cycle boundaries and respects reduced motion",()=>{
+test("edge pulse never captures whole frames, including beat boundaries and reduced motion",()=>{
  const s=createVideoEffectState("Frame Pulse"),p=spec("Frame Pulse");
- assert(planVideoEffectFrame(s,p,context(0)).captureHold);
- assert(!planVideoEffectFrame(s,p,context(.2)).captureHold);
- assert(planVideoEffectFrame(s,p,context(.5)).captureHold);
- assert(!planVideoEffectFrame(s,p,context(1,{reducedMotion:true})).captureHold);
- assert(planVideoEffectFrame(s,p,context(1.5)).captureHold);
+ for(const time of [0,.2,.5,1,1.5]){const frame=planVideoEffectFrame(s,p,context(time));assert.equal(frame.captureHold,false);assert.equal(frame.captureHistoryLayer,null);}
+ assert.equal(planVideoEffectFrame(s,p,context(2,{reducedMotion:true})).captureHold,false);
+ assert.equal(s.holdCaptured,false);assert(s.historyTimes.every(t=>t===null));
+ return "State/capture planning only; live-center and border pixels need actual GPU test.";
+});
+test("edge pulse has explicit seconds/width and preserves saved beat timing only when seconds absent",()=>{
+ assert.deepEqual(videoEffectUniforms(spec("Frame Pulse")),[1,.12,1,0]);
+ assert.deepEqual(videoEffectUniforms(spec("Frame Pulse",1,{periodBeats:2})),[0,.12,2,0]);
+ assert.deepEqual(videoEffectUniforms(spec("Frame Pulse",1,{periodBeats:2,periodSeconds:3})),[3,.12,2,0]);
+ assert.deepEqual(videoEffectUniforms(spec("Frame Pulse",1,{periodSeconds:-4,edgeWidth:100})),[.1,.45,1,0]);
+ const definition=videoEffectCatalog.find(e=>e.name==="Frame Pulse");assert.equal(definition.manualMeaningEvidence.exactResponseRecovered,false);assert(definition.legacyParameters.some(p=>p.name==="periodBeats"));
+});
+test("Split defaults to the five documented regions while custom panel counts stay independent",()=>{
+ assert.equal(videoEffectUniforms(spec("Split"))[0],5);
+ assert.equal(videoEffectUniforms(spec("Split",1,{panels:4}))[0],4);
+ assert.equal(videoEffectUniforms(spec("Split",1,{panels:500}))[0],12);
+ const definition=videoEffectCatalog.find(e=>e.name==="Split");assert.equal(definition.default.params.panels,5);assert.equal(definition.manualMeaningEvidence.page,20);assert.equal(definition.referenceRuntimeVerified,false);
 });
 test("delay history samples actual timestamps at bounded cadence and selects older frames",()=>{
  const s=createVideoEffectState("Delay Grid"),p=spec("Delay Grid");

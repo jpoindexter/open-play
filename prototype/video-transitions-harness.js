@@ -44,7 +44,7 @@ function hash(bytes) { let value = 2166136261; for (const b of bytes) value = Ma
 function middle(bytes) { const p = ((H / 2) * W + W / 2) * 4; return bytes.slice(p, p + 4); }
 
 export async function runVideoTransitionChecks() {
-  const checks = [], alphaEdgeProbe = {}, start = performance.now();
+  const checks = [], alphaEdgeProbe = {}, manualCorrectionProbe = {}, start = performance.now();
   const check = (name, run) => { try { run(); checks.push({ name, passed: true }); } catch (error) { checks.push({ name, passed: false, error: error.message }); } };
   renderer?.dispose(); renderer = createVideoTransitions({ width: W, height: H });
   fixture(left); fixture(right, 1);
@@ -99,18 +99,55 @@ export async function runVideoTransitionChecks() {
     assert(rightOnly[0] < 2 && rightOnly[2] > 250, "Right isolation failed");
     assert(draw("Upfaders Only", 0.5, { upfaders: [0, 0] }).every((v) => v === 0), "Zero upfaders must yield transparent black");
   });
-  check("Scratch holds captured source in interior and releases at opposite endpoint", () => {
-    solid(left, "#ff0000"); solid(right, "#0000ff"); renderer.reset(); draw("Scratch", 0); draw("Scratch", 0.2);
-    solid(left, "#00ff00"); const held = middle(draw("Scratch", 0.35));
-    assert(held[0] > 250 && held[1] < 2, "Departing source did not latch");
-    assert(middle(draw("Scratch", 1))[2] > 250, "Opposite endpoint did not release");
+  check("Scratch selects live inputs at independent end-cut bands and keeps them live through interior travel", () => {
+    solid(left,"#ff0000");solid(right,"#0000ff");renderer.reset();draw("Scratch",0);
+    draw("Scratch",.7);solid(left,"#00ff00");const liveLeft=middle(draw("Scratch",.7));
+    assert(liveLeft[1]>250&&liveLeft[0]<2,"Held Scratch fader froze or displaced selected left source");
+    const justBefore=middle(draw("Scratch",.9499)),cutRight=middle(draw("Scratch",.95));
+    assert(justBefore[1]>250&&justBefore[2]<2&&cutRight[2]>250&&cutRight[1]<2,"Right end cut not at declared95% threshold");
+    solid(right,"#ffff00");const liveRight=middle(draw("Scratch",.4));
+    assert(liveRight[0]>250&&liveRight[1]>250&&liveRight[2]<2,"Held right side did not follow live input changes");
+    const beforeLeft=middle(draw("Scratch",.0501)),cutLeft=middle(draw("Scratch",.05));
+    assert(beforeLeft[0]>250&&beforeLeft[1]>250&&cutLeft[0]<2&&cutLeft[1]>250,"Left end cut not at declared5% threshold");
+    manualCorrectionProbe.scratch={liveLeft:[...liveLeft],beforeRight:[...justBefore],cutRight:[...cutRight],liveRight:[...liveRight],beforeLeft:[...beforeLeft],cutLeft:[...cutLeft],thresholdStatus:"Independent5%/95% bands; current reference thresholds unknown"};
   });
-  check("Latch 50 captures each crossing and holds source-frame changes", () => {
-    solid(left, "#ff0000"); solid(right, "#0000ff"); renderer.reset(); draw("Latch 50", 0.2);
-    solid(left, "#00ff00"); assert(middle(draw("Latch 50", 0.3))[0] > 250, "Left latch updated too soon");
-    draw("Latch 50", 0.6); solid(right, "#ffff00");
-    assert(middle(draw("Latch 50", 0.8))[2] > 250, "Right latch updated too soon");
-    assert(middle(draw("Latch 50", 1))[0] > 250, "Live endpoint did not refresh");
+  check("Latch50 live midpoint cut follows held-fader input changes and declares right tie", () => {
+    solid(left,"#ff0000");solid(right,"#0000ff");renderer.reset();draw("Latch 50",.49);
+    solid(left,"#00ff00");const liveLeft=middle(draw("Latch 50",.49));
+    assert(liveLeft[0]<2&&liveLeft[1]>250,"Left midpoint side froze instead of following current frame");
+    const exactTie=middle(draw("Latch 50",.5));assert(exactTie[2]>250&&exactTie[1]<2,"Declared midpoint tie did not choose right");
+    solid(right,"#ffff00");const liveRight=middle(draw("Latch 50",.51));
+    assert(liveRight[0]>250&&liveRight[1]>250&&liveRight[2]<2,"Right midpoint side froze instead of following current frame");
+    manualCorrectionProbe.latch50={liveLeft:[...liveLeft],exactTie:[...exactTie],liveRight:[...liveRight],tieStatus:"Independent right-at50% tie; current reference tie unknown"};
+  });
+  check("Center uses a spatially uniform live crossfade only in the central50% of travel", () => {
+    solid(left,"#ff0000");solid(right,"#0000ff");renderer.reset();manualCorrectionProbe.center=[];
+    for(const [amount,weight] of [[.125,0],[.25,0],[.375,.25],[.5,.5],[.625,.75],[.75,1],[.875,1]]){
+      const actual=draw("Center",amount),expected=[Math.round(255*(1-weight)),0,Math.round(255*weight),255];
+      for(let i=0;i<actual.length;i+=4)assert(same(actual.slice(i,i+4),expected),"Center is spatial or outside declared remap at"+amount+": "+[...actual.slice(i,i+4)]);
+      manualCorrectionProbe.center.push({amount,declaredWeight:weight,pixel:[...middle(actual)]});
+    }
+  });
+  check("Center preserves premultiplied alpha and live source changes at a held fader", () => {
+    solid(left,"rgba(255,0,0,.5)");solid(right,"#0000ff");renderer.reset();
+    const partial=middle(draw("Center",.5));assert(same(partial,[85,0,170,191]),"Center alpha crossfade incorrect: "+[...partial]);
+    solid(left,"#00ff00");const live=middle(draw("Center",.375));assert(same(live,[0,191,64,255]),"Held Center fader did not blend current source: "+[...live]);
+    manualCorrectionProbe.centerAlpha={partial:[...partial],live:[...live]};
+  });
+  check("Latch50 and Scratch hard cuts preserve selected live alpha and independent upfader silence", () => {
+    for(const name of ["Latch 50","Scratch"]){
+      solid(left,"rgba(255,0,0,.5)");solid(right,"rgba(0,0,255,.25)");renderer.reset();draw(name,0);
+      const a=middle(draw(name,.49));assert(same(a,[255,0,0,128]),name+" selected-left alpha/chroma changed: "+[...a]);
+      const b=middle(draw(name,name==="Scratch"?.95:.5));assert(same(b,[0,0,255,64]),name+" selected-right alpha/chroma changed: "+[...b]);
+      const silent=draw(name,.7,{upfaders:[1,0]});assert(silent.every(v=>v===0),name+" selected zero upfader did not yield transparent black");
+    }
+  });
+  check("Center/Latch50/Scratch retain manual fader and live-frame control under Reduced Motion", () => {
+    solid(left,"#ff0000");solid(right,"#0000ff");
+    for(const name of ["Center","Latch 50","Scratch"]){renderer.reset();draw(name,0,{reducedMotion:true});
+      const before=draw(name,.2,{time:1,reducedMotion:true}),after=draw(name,.95,{time:2,reducedMotion:true});assert(delta(before,after)>80,name+" manual fader became inert under Reduced Motion");
+      solid(right,"#ffff00");const live=middle(draw(name,.95,{time:3,reducedMotion:true}));assert(live[0]>250&&live[1]>250&&live[2]<2,name+" froze current input under Reduced Motion");solid(right,"#0000ff");
+    }
   });
   check("Scratch Fade blends frozen outgoing frame with live incoming frame", () => {
     solid(left, "#ff0000"); solid(right, "#0000ff"); renderer.reset(); draw("Scratch Fade", 0); draw("Scratch Fade", 0.2);
@@ -128,7 +165,7 @@ export async function runVideoTransitionChecks() {
     draw("Default", 0.5); const switched = draw("Smudge Fade", 0.5, { time: 2 });
     assert(same(switched, withoutHistory), "Mode switch leaked history");
   });
-  check("Same-frame Latch 50 threshold changes update the selected snapshot", () => {
+  check("Same-frame Latch 50 threshold changes select the current live input", () => {
     solid(left, "#ff0000"); solid(right, "#0000ff"); renderer.reset();
     draw("Latch 50", 0.2, { frameId: "latch-controls", time: 10 });
     const p = middle(draw("Latch 50", 0.8, { frameId: "latch-controls", time: 10 }));
@@ -178,7 +215,7 @@ export async function runVideoTransitionChecks() {
     assert(fractional.every((x) => actual[x * 4] >= 253), "Straight red was darkened by alpha interpolation: " + [...actual]);
     assert(same(actual, reference), "GPU scaling differs from Canvas2D: " + [...actual] + " vs " + [...reference]);
   });
-  check("Latch and filtered history paths retain red chroma at transparent edges", () => {
+  check("Live cuts and remaining filtered history paths retain red chroma at transparent edges", () => {
     const edge = makeCanvas(2, 1), ctx = edge.getContext("2d"), image = ctx.createImageData(2, 1);
     image.data.set([255, 0, 0, 255, 0, 0, 0, 0]); ctx.putImageData(image, 0, 0);
     const scaled = createVideoTransitions({ width: 4, height: 1 });
@@ -219,7 +256,7 @@ export async function runVideoTransitionChecks() {
     bench.dispose();
   } catch (error) { benchmark.error = error.message; }
   checks.push({ name: "640x360 render sample completed for all 34 entries", passed: !benchmark.error && benchmark.samples.length === 34, ...(benchmark.error ? { error: benchmark.error } : {}) });
-  const result = { passed: checks.filter((c) => c.passed).length, failed: checks.filter((c) => !c.passed).length, checks, alphaEdgeProbe, benchmark, timingScope, durationMs: +(performance.now() - start).toFixed(1), evidence: "Executed actual WebGL draw/readPixels on original synthetic canvas fixtures; no Serato/UI integration or visual-parity proof." };
+  const result = { passed: checks.filter((c) => c.passed).length, failed: checks.filter((c) => !c.passed).length, checks, alphaEdgeProbe, manualCorrectionProbe, supersededContracts: {historicalEvidence:"Existing video-transitions-browser-results.json retains executed original snapshot policies; those assertions are not reference acceptance.",changes:["Center spatial rectangle replaced by central-half live blend","Latch50 frozen snapshots replaced by live midpoint cut","Scratch frozen/scrubbed snapshots replaced by live end-cut hysteresis"],remainingOpen:"Scratch Fade snapshot semantics, exact curves/cut thresholds, current-version availability and visual equivalence remain unverified."}, benchmark, timingScope, durationMs: +(performance.now() - start).toFixed(1), evidence: "Executed actual WebGL draw/readPixels on original synthetic canvas fixtures; no Serato/UI integration or visual-parity proof." };
   window.videoTransitionHarnessResult = result;
   $("#results").textContent = JSON.stringify(result, null, 2);
   $("#status").textContent = `${result.passed} passed / ${result.failed} failed`;

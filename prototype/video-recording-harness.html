@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Independent recording quality evidence</title>
+<style>:root{color-scheme:dark;font:15px/1.5 system-ui,sans-serif;background:#141414;color:#eee}body{max-width:1080px;margin:28px auto;padding:0 20px}button{font:inherit;padding:10px 16px}canvas,video{max-width:100%;border:1px solid #666}#media-stage video{width:240px}a{color:#9dd8ff;margin-right:16px}a:focus-visible,button:focus-visible{outline:3px solid white;outline-offset:4px}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#222;padding:16px}</style>
+<h1>Independent recording quality evidence</h1>
+<p>Runs the actual AudioEngine, processed Video mixer and five MediaRecorder sessions: existing output-size default,360p,480p,720p,1080p. Each container is decoded for dimensions, processed pixels, marker geometry and actual440Hz master audio. The live processing canvas remains1280×720. Original generated PNG/audio only; no video-source codec claim, vendor equivalence, sustained fps or native acceptance. Speakers are disconnected.</p>
+<p>Historical official manual: four recording heights;2015 metadata, not4.0.10 runtime proof. Independent480p width854 for16:9; missing saved choice preserves existing output-size capture. Current30fps request remains separate from historical24fps/default480p wording.</p>
+<button id="run">Run actual recording quality checks</button>
+<p id="status" role="status">Not run</p><div id="downloads"></div><div id="live-stage"></div><div id="media-stage"></div>
+<p id="video-status-0"></p><p id="video-status-1"></p><p id="video-pipeline-state"></p><p id="video-record-state"></p>
+<pre id="results">Click Run. Encoded frames and container audio must actually decode.</pre>
+<script type="module" src="./video-recording-harness.js"></script>
+</html>

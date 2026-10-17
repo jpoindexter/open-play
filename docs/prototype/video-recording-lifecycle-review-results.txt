@@ -1,0 +1,26 @@
+PASS latest video load wins when an older decode completes last
+PASS failed replacement preserves the already decoded video
+PASS a video decoded after disposal cannot become a live asset
+PASS overlay decode generations preserve the newest image and clear invalidates pending work
+PASS an overlay decoded after disposal cannot enter the asset map
+PASS linked reverse uses the real deck reverse flag, seeks and supplies a negative effect rate
+PASS linked BPM follows the independently declared audible tempo policy
+PASS a paused linked deck pauses video and supplies zero performance rate
+PASS duplicate record requests during audio resume create at most one recording session
+PASS restarting while a stop event is pending retains session tracks and chunks
+PASS two stop callers receive the same completed session without losing a waiter
+PASS stop during a pending start waits for that start and releases the session
+PASS dispose invalidates an audio-resume-pending capture before it can resurrect recording
+PASS dispose during a queued restart resolves even when that pending start is canceled
+PASS reset after a renderer fault disposes the failed pipeline and creates a fresh one
+PASS recording tick continues on its dedicated stream canvas through output detach and rebinding
+PASS Recording quality guards pending start, active capture and pending stop, then permits settled changes
+PASS A stale completed recorder cannot release a newer dedicated capture surface
+PASS Recorder start failure releases the surface/video tracks and leaves a retry available
+PASS Audio resume rejection settles a pending stop without allocating capture and permits retry
+PASS Encoder construction failure stops only owned video tracks, releases lease and permits retry
+PASS Canvas captureStream failure releases the newly allocated lease before any recorder exists
+PASS A renderer fault during pending resume rejects capture before allocation and Reset permits retry
+PASS Asynchronous encoder failure retains final chunks and cleans session after its stop event
+24/24 actual Video mixer lifecycle checks passed.
+Scope: real mixer with controlled DOM/media/pipeline collaborators; not browser decode, pixels, encoded capture, FFT or UI acceptance.

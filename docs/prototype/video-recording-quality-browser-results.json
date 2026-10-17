@@ -1,0 +1,718 @@
+{
+  "startedAt": "2026-10-16T21:32:06.642Z",
+  "policy": {
+    "source": "https://serato.com/downloads/files/141226/Serato+Video+Software+Manual+for+Serato+DJ.pdf",
+    "sourceSHA256": "85c57756dc96587b7b4822e2911decb4b9202f5a1d6b1cba047e1159236ae66c",
+    "sourceBoundary": "Currently linked official27-page manual with2015-04-09 metadata, not installed4.0.10 behavior proof.",
+    "documented": "Page22 offers360p/480p/720p/1080p recording; page16 states default480p at24fps and respect for output aspect ratio.",
+    "independent": "Missing/invalid saved choice keeps existing output-size capture. Selected height preserves live aspect as closely as nearest even positive width allows;16:9 480p is854×480. Exact vendor480p width/encoder/response is unknown.",
+    "cadence": "Current mixer requests30fps; requested cadence is neither measured encoded fps nor the historical24fps default.",
+    "lifecycle": "Dedicated capture canvas snapshots dimensions per lease. Draw resamples processed live output without resizing it. Only the exact current lease can release the surface. Mixer owns pending-start/recording/stop quality guards and MediaRecorder/audio tracks.",
+    "referenceEquivalent": false
+  },
+  "scope": "Actual mixer/GPU/Canvas2D/MediaRecorder/container decoder/AudioEngine. Generated PNG is a real image asset; no source-video File is loaded. Requested30fps is not measured fps or vendor equivalence.",
+  "captures": [
+    {
+      "quality": "output",
+      "expected": [
+        1280,
+        720
+      ],
+      "startGuard": "Stop video capture before changing recording quality.",
+      "activeGuard": "Stop video capture before changing recording quality.",
+      "stopGuard": "Stop video capture before changing recording quality.",
+      "file": {
+        "name": "recording-quality-output.webm",
+        "bytes": 26785,
+        "mime": "video/webm;codecs=vp9,opus"
+      },
+      "elapsedMs": 1140.1000001430511,
+      "processedFrames": 33,
+      "video": {
+        "width": 1280,
+        "height": 720,
+        "mediaTime": 0,
+        "presentedFrames": 1,
+        "callbackWidth": 1280,
+        "callbackHeight": 720,
+        "duration": 1.069,
+        "corner": [
+          0,
+          255,
+          255,
+          255
+        ],
+        "greenMarker": [
+          254,
+          1,
+          255,
+          255
+        ],
+        "blueMarker": [
+          255,
+          255,
+          1,
+          255
+        ],
+        "markerFraction": [
+          0.2,
+          0.4
+        ]
+      },
+      "audio": {
+        "rms": 0.06216843860993458,
+        "tone440": 0.08818284548812697,
+        "tone1000": 2.0293649489514786e-7,
+        "sampleRate": 48000,
+        "channels": 2,
+        "duration": 1.08
+      }
+    },
+    {
+      "quality": "360p",
+      "expected": [
+        640,
+        360
+      ],
+      "startGuard": "Stop video capture before changing recording quality.",
+      "activeGuard": "Stop video capture before changing recording quality.",
+      "stopGuard": "Stop video capture before changing recording quality.",
+      "file": {
+        "name": "recording-quality-360p.webm",
+        "bytes": 21857,
+        "mime": "video/webm;codecs=vp9,opus"
+      },
+      "elapsedMs": 1103,
+      "processedFrames": 33,
+      "video": {
+        "width": 640,
+        "height": 360,
+        "mediaTime": 0,
+        "presentedFrames": 1,
+        "callbackWidth": 640,
+        "callbackHeight": 360,
+        "duration": 1.066,
+        "corner": [
+          0,
+          255,
+          253,
+          254
+        ],
+        "greenMarker": [
+          254,
+          1,
+          255,
+          255
+        ],
+        "blueMarker": [
+          253,
+          255,
+          0,
+          255
+        ],
+        "markerFraction": [
+          0.2,
+          0.4
+        ]
+      },
+      "audio": {
+        "rms": 0.0621493051607103,
+        "tone440": 0.08816923606458062,
+        "tone1000": 2.611890228719415e-7,
+        "sampleRate": 48000,
+        "channels": 2,
+        "duration": 1.08
+      }
+    },
+    {
+      "quality": "480p",
+      "expected": [
+        854,
+        480
+      ],
+      "startGuard": "Stop video capture before changing recording quality.",
+      "activeGuard": "Stop video capture before changing recording quality.",
+      "stopGuard": "Stop video capture before changing recording quality.",
+      "file": {
+        "name": "recording-quality-480p.webm",
+        "bytes": 24152,
+        "mime": "video/webm;codecs=vp9,opus"
+      },
+      "elapsedMs": 1106.2999999523163,
+      "processedFrames": 33,
+      "video": {
+        "width": 854,
+        "height": 480,
+        "mediaTime": 0,
+        "presentedFrames": 1,
+        "callbackWidth": 854,
+        "callbackHeight": 480,
+        "duration": 1.098,
+        "corner": [
+          0,
+          255,
+          253,
+          254
+        ],
+        "greenMarker": [
+          254,
+          1,
+          255,
+          254
+        ],
+        "blueMarker": [
+          253,
+          255,
+          0,
+          254
+        ],
+        "markerFraction": [
+          0.20140515222482436,
+          0.40046838407494145
+        ]
+      },
+      "audio": {
+        "rms": 0.06216547002439956,
+        "tone440": 0.08819352976589971,
+        "tone1000": 7.311418352076941e-8,
+        "sampleRate": 48000,
+        "channels": 2,
+        "duration": 1.08
+      }
+    },
+    {
+      "quality": "720p",
+      "expected": [
+        1280,
+        720
+      ],
+      "startGuard": "Stop video capture before changing recording quality.",
+      "activeGuard": "Stop video capture before changing recording quality.",
+      "stopGuard": "Stop video capture before changing recording quality.",
+      "file": {
+        "name": "recording-quality-720p.webm",
+        "bytes": 26015,
+        "mime": "video/webm;codecs=vp9,opus"
+      },
+      "elapsedMs": 1110.5,
+      "processedFrames": 33,
+      "video": {
+        "width": 1280,
+        "height": 720,
+        "mediaTime": 0,
+        "presentedFrames": 1,
+        "callbackWidth": 1280,
+        "callbackHeight": 720,
+        "duration": 1.075,
+        "corner": [
+          0,
+          255,
+          255,
+          255
+        ],
+        "greenMarker": [
+          254,
+          1,
+          255,
+          255
+        ],
+        "blueMarker": [
+          255,
+          255,
+          1,
+          255
+        ],
+        "markerFraction": [
+          0.2,
+          0.4
+        ]
+      },
+      "audio": {
+        "rms": 0.06214725280497724,
+        "tone440": 0.08814096707277586,
+        "tone1000": 3.8165717720202447e-7,
+        "sampleRate": 48000,
+        "channels": 2,
+        "duration": 1.08
+      }
+    },
+    {
+      "quality": "1080p",
+      "expected": [
+        1920,
+        1080
+      ],
+      "startGuard": "Stop video capture before changing recording quality.",
+      "activeGuard": "Stop video capture before changing recording quality.",
+      "stopGuard": "Stop video capture before changing recording quality.",
+      "file": {
+        "name": "recording-quality-1080p.webm",
+        "bytes": 33515,
+        "mime": "video/webm;codecs=vp9,opus"
+      },
+      "elapsedMs": 1102.2999999523163,
+      "processedFrames": 33,
+      "video": {
+        "width": 1920,
+        "height": 1080,
+        "mediaTime": 0,
+        "presentedFrames": 1,
+        "callbackWidth": 1920,
+        "callbackHeight": 1080,
+        "duration": 1.067,
+        "corner": [
+          1,
+          255,
+          253,
+          255
+        ],
+        "greenMarker": [
+          255,
+          1,
+          254,
+          255
+        ],
+        "blueMarker": [
+          254,
+          255,
+          1,
+          255
+        ],
+        "markerFraction": [
+          0.2,
+          0.4
+        ]
+      },
+      "audio": {
+        "rms": 0.06224816791710057,
+        "tone440": 0.08829988694950214,
+        "tone1000": 2.8940234765902766e-7,
+        "sampleRate": 48000,
+        "channels": 2,
+        "duration": 1.08
+      }
+    }
+  ],
+  "notifications": [],
+  "passed": 23,
+  "failed": 0,
+  "checks": [
+    {
+      "name": "Actual processed1280×720 mixer with decoded original PNG and audible master fixture",
+      "passed": true,
+      "evidence": {
+        "live": [
+          1280,
+          720
+        ],
+        "processedCorner": [
+          0,
+          255,
+          255,
+          255
+        ],
+        "fixture": "recording-quality-original.png"
+      }
+    },
+    {
+      "name": "Missing saved quality preserves output-size default",
+      "passed": true,
+      "evidence": {
+        "recordingQuality": "output"
+      }
+    },
+    {
+      "name": "output: actual start guards and independent capture dimensions",
+      "passed": true,
+      "evidence": {
+        "captureDimensions": {
+          "width": 1280,
+          "height": 720,
+          "quality": "output"
+        },
+        "live": [
+          1280,
+          720
+        ],
+        "startGuard": "Stop video capture before changing recording quality.",
+        "activeGuard": "Stop video capture before changing recording quality."
+      }
+    },
+    {
+      "name": "output: actual stop guard, encoded blob and retained master track",
+      "passed": true,
+      "evidence": {
+        "name": "recording-quality-output.webm",
+        "bytes": 26785,
+        "mime": "video/webm;codecs=vp9,opus",
+        "elapsedMs": 1140.1000001430511,
+        "processedFrames": 33,
+        "stopGuard": "Stop video capture before changing recording quality."
+      }
+    },
+    {
+      "name": "output: container decodes expected dimensions, processed pixels and marker geometry",
+      "passed": true,
+      "evidence": {
+        "width": 1280,
+        "height": 720,
+        "mediaTime": 0,
+        "presentedFrames": 1,
+        "callbackWidth": 1280,
+        "callbackHeight": 720,
+        "duration": 1.069,
+        "corner": [
+          0,
+          255,
+          255,
+          255
+        ],
+        "greenMarker": [
+          254,
+          1,
+          255,
+          255
+        ],
+        "blueMarker": [
+          255,
+          255,
+          1,
+          255
+        ],
+        "markerFraction": [
+          0.2,
+          0.4
+        ]
+      }
+    },
+    {
+      "name": "output: container audio actually decodes440Hz master PCM",
+      "passed": true,
+      "evidence": {
+        "rms": 0.06216843860993458,
+        "tone440": 0.08818284548812697,
+        "tone1000": 2.0293649489514786e-7,
+        "sampleRate": 48000,
+        "channels": 2,
+        "duration": 1.08
+      }
+    },
+    {
+      "name": "360p: actual start guards and independent capture dimensions",
+      "passed": true,
+      "evidence": {
+        "captureDimensions": {
+          "width": 640,
+          "height": 360,
+          "quality": "360p"
+        },
+        "live": [
+          1280,
+          720
+        ],
+        "startGuard": "Stop video capture before changing recording quality.",
+        "activeGuard": "Stop video capture before changing recording quality."
+      }
+    },
+    {
+      "name": "360p: actual stop guard, encoded blob and retained master track",
+      "passed": true,
+      "evidence": {
+        "name": "recording-quality-360p.webm",
+        "bytes": 21857,
+        "mime": "video/webm;codecs=vp9,opus",
+        "elapsedMs": 1103,
+        "processedFrames": 33,
+        "stopGuard": "Stop video capture before changing recording quality."
+      }
+    },
+    {
+      "name": "360p: container decodes expected dimensions, processed pixels and marker geometry",
+      "passed": true,
+      "evidence": {
+        "width": 640,
+        "height": 360,
+        "mediaTime": 0,
+        "presentedFrames": 1,
+        "callbackWidth": 640,
+        "callbackHeight": 360,
+        "duration": 1.066,
+        "corner": [
+          0,
+          255,
+          253,
+          254
+        ],
+        "greenMarker": [
+          254,
+          1,
+          255,
+          255
+        ],
+        "blueMarker": [
+          253,
+          255,
+          0,
+          255
+        ],
+        "markerFraction": [
+          0.2,
+          0.4
+        ]
+      }
+    },
+    {
+      "name": "360p: container audio actually decodes440Hz master PCM",
+      "passed": true,
+      "evidence": {
+        "rms": 0.0621493051607103,
+        "tone440": 0.08816923606458062,
+        "tone1000": 2.611890228719415e-7,
+        "sampleRate": 48000,
+        "channels": 2,
+        "duration": 1.08
+      }
+    },
+    {
+      "name": "480p: actual start guards and independent capture dimensions",
+      "passed": true,
+      "evidence": {
+        "captureDimensions": {
+          "width": 854,
+          "height": 480,
+          "quality": "480p"
+        },
+        "live": [
+          1280,
+          720
+        ],
+        "startGuard": "Stop video capture before changing recording quality.",
+        "activeGuard": "Stop video capture before changing recording quality."
+      }
+    },
+    {
+      "name": "480p: actual stop guard, encoded blob and retained master track",
+      "passed": true,
+      "evidence": {
+        "name": "recording-quality-480p.webm",
+        "bytes": 24152,
+        "mime": "video/webm;codecs=vp9,opus",
+        "elapsedMs": 1106.2999999523163,
+        "processedFrames": 33,
+        "stopGuard": "Stop video capture before changing recording quality."
+      }
+    },
+    {
+      "name": "480p: container decodes expected dimensions, processed pixels and marker geometry",
+      "passed": true,
+      "evidence": {
+        "width": 854,
+        "height": 480,
+        "mediaTime": 0,
+        "presentedFrames": 1,
+        "callbackWidth": 854,
+        "callbackHeight": 480,
+        "duration": 1.098,
+        "corner": [
+          0,
+          255,
+          253,
+          254
+        ],
+        "greenMarker": [
+          254,
+          1,
+          255,
+          254
+        ],
+        "blueMarker": [
+          253,
+          255,
+          0,
+          254
+        ],
+        "markerFraction": [
+          0.20140515222482436,
+          0.40046838407494145
+        ]
+      }
+    },
+    {
+      "name": "480p: container audio actually decodes440Hz master PCM",
+      "passed": true,
+      "evidence": {
+        "rms": 0.06216547002439956,
+        "tone440": 0.08819352976589971,
+        "tone1000": 7.311418352076941e-8,
+        "sampleRate": 48000,
+        "channels": 2,
+        "duration": 1.08
+      }
+    },
+    {
+      "name": "720p: actual start guards and independent capture dimensions",
+      "passed": true,
+      "evidence": {
+        "captureDimensions": {
+          "width": 1280,
+          "height": 720,
+          "quality": "720p"
+        },
+        "live": [
+          1280,
+          720
+        ],
+        "startGuard": "Stop video capture before changing recording quality.",
+        "activeGuard": "Stop video capture before changing recording quality."
+      }
+    },
+    {
+      "name": "720p: actual stop guard, encoded blob and retained master track",
+      "passed": true,
+      "evidence": {
+        "name": "recording-quality-720p.webm",
+        "bytes": 26015,
+        "mime": "video/webm;codecs=vp9,opus",
+        "elapsedMs": 1110.5,
+        "processedFrames": 33,
+        "stopGuard": "Stop video capture before changing recording quality."
+      }
+    },
+    {
+      "name": "720p: container decodes expected dimensions, processed pixels and marker geometry",
+      "passed": true,
+      "evidence": {
+        "width": 1280,
+        "height": 720,
+        "mediaTime": 0,
+        "presentedFrames": 1,
+        "callbackWidth": 1280,
+        "callbackHeight": 720,
+        "duration": 1.075,
+        "corner": [
+          0,
+          255,
+          255,
+          255
+        ],
+        "greenMarker": [
+          254,
+          1,
+          255,
+          255
+        ],
+        "blueMarker": [
+          255,
+          255,
+          1,
+          255
+        ],
+        "markerFraction": [
+          0.2,
+          0.4
+        ]
+      }
+    },
+    {
+      "name": "720p: container audio actually decodes440Hz master PCM",
+      "passed": true,
+      "evidence": {
+        "rms": 0.06214725280497724,
+        "tone440": 0.08814096707277586,
+        "tone1000": 3.8165717720202447e-7,
+        "sampleRate": 48000,
+        "channels": 2,
+        "duration": 1.08
+      }
+    },
+    {
+      "name": "1080p: actual start guards and independent capture dimensions",
+      "passed": true,
+      "evidence": {
+        "captureDimensions": {
+          "width": 1920,
+          "height": 1080,
+          "quality": "1080p"
+        },
+        "live": [
+          1280,
+          720
+        ],
+        "startGuard": "Stop video capture before changing recording quality.",
+        "activeGuard": "Stop video capture before changing recording quality."
+      }
+    },
+    {
+      "name": "1080p: actual stop guard, encoded blob and retained master track",
+      "passed": true,
+      "evidence": {
+        "name": "recording-quality-1080p.webm",
+        "bytes": 33515,
+        "mime": "video/webm;codecs=vp9,opus",
+        "elapsedMs": 1102.2999999523163,
+        "processedFrames": 33,
+        "stopGuard": "Stop video capture before changing recording quality."
+      }
+    },
+    {
+      "name": "1080p: container decodes expected dimensions, processed pixels and marker geometry",
+      "passed": true,
+      "evidence": {
+        "width": 1920,
+        "height": 1080,
+        "mediaTime": 0,
+        "presentedFrames": 1,
+        "callbackWidth": 1920,
+        "callbackHeight": 1080,
+        "duration": 1.067,
+        "corner": [
+          1,
+          255,
+          253,
+          255
+        ],
+        "greenMarker": [
+          255,
+          1,
+          254,
+          255
+        ],
+        "blueMarker": [
+          254,
+          255,
+          1,
+          255
+        ],
+        "markerFraction": [
+          0.2,
+          0.4
+        ]
+      }
+    },
+    {
+      "name": "1080p: container audio actually decodes440Hz master PCM",
+      "passed": true,
+      "evidence": {
+        "rms": 0.06224816791710057,
+        "tone440": 0.08829988694950214,
+        "tone1000": 2.8940234765902766e-7,
+        "sampleRate": 48000,
+        "channels": 2,
+        "duration": 1.08
+      }
+    },
+    {
+      "name": "Actual live output remains1280×720 after all five captures and disposal cancels future starts",
+      "passed": true,
+      "evidence": {
+        "live": [
+          1280,
+          720
+        ],
+        "captures": 5,
+        "disposedStartRejected": true
+      }
+    }
+  ],
+  "finishedAt": "2026-10-16T21:32:12.535Z"
+}

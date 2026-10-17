@@ -1,5 +1,15 @@
 # Video control gaps and one bounded next family
 
+**Later execution update (2026-10-16):** This proposal remains a historical
+cutoff. Media Treatment subsequently passed21/21 actual checks; separate recording
+resolution passed23/23 plus mainUI480p download. The141226manual was recovered
+and independently validated; Effects/Info screens are now observed. Read
+[VIDEO_MANUAL_RECOVERY.md](VIDEO_MANUAL_RECOVERY.md),
+[VIDEO_MANUAL_GAPS.md](VIDEO_MANUAL_GAPS.md) and
+[the executed review](../prototype/VIDEO_MANUAL_RECORDING_REVIEW.md). The earlier
+403 statements below describe those requests, not continued source unavailability.
+
+
 Research cutoff: **2026-10-16**. This document is a source-bounded plan. No runtime, shared implementation contract, remote record or native application was changed. The implementation and acceptance cases below are **proposed, not executed**. Existing browser results establish their recorded paths, not universal Video parity.
 
 **Next family: Media Treatment for ordinary video sources.** Add one independently defined geometry selector, backed by pixel tests. Defer quality, synchronization, buffering, arrangements and external-output controls until their behavior is specified or observed. The names exist in the recorded installed settings; exact reference algorithms/defaults remain unverified.

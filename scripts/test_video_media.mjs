@@ -61,11 +61,22 @@ test('removing current media invalidates affected tracks/associations without sk
   assert.equal(media.resolve('a').asset,assets[0]);assert.equal(media.remove('missing'),false);
   for(const a of media.assets())media.remove(a.id);assert.equal(media.resolve('a').reason,'empty-library');assert.equal(media.diagnostics().associationCount,0);
 });
-test('deterministic random selection excludes each track current item when more than one exists',()=>{
+test('automatic random selection still excludes each track current item when more than one exists',()=>{
   let randomCalls=0;const {media,assets}=library({random:()=>{randomCalls++;return 0;}});media.configure({enabled:true,random:true});
   const first=media.resolve('a');assert.equal(first.asset,assets[0]);assert.equal(media.resolve('a'),first);assert.equal(randomCalls,1);
-  assert.equal(media.next('a').asset,assets[1]);media.resolve('b');assert.equal(media.next('a').asset,assets[0]);
-  while(media.assets().length>1)media.remove(media.assets().at(-1).id);assert.equal(media.next('a').asset,assets[0]);
+  assert.equal(media.resolve('a',{advance:true}).asset,assets[1]);media.resolve('b');assert.equal(media.resolve('a',{advance:true}).asset,assets[0]);
+  while(media.assets().length>1)media.remove(media.assets().at(-1).id);assert.equal(media.resolve('a',{advance:true}).asset,assets[0]);
+});
+test('explicit Next follows ordered B→C→A→B while Random stays enabled and consumes no randomness',()=>{
+  let calls=0;const {media,assets}=library({random:()=>{calls++;return .45;}});media.configure({enabled:true,random:true});
+  assert.equal(media.resolve('a').asset,assets[1]);assert.equal(calls,1);
+  for(const index of [2,0,1]){assert.equal(media.next('a').asset,assets[index]);assert.equal(calls,1);assert.equal(media.diagnostics().random,true);}
+  assert.equal(media.resolve('new-track').asset,assets[0]);assert.equal(calls,2,'New automatic track load must still use the injected random provider.');
+  assert.equal(media.diagnostics().random,true);assert.match(videoMediaPolicy.supersededIndependentPolicy,/Prior random-Next passes/);assert.equal(videoMediaPolicy.referenceRuntimeVerified,false);
+});
+test('explicit ordered Next works without consulting a broken automatic random provider',()=>{
+  let calls=0;const {media,assets}=library({random:()=>{calls++;return 1;}});media.configure({enabled:true,random:true});
+  assert.throws(()=>media.resolve('a'),RangeError);assert.equal(calls,1);assert.equal(media.next('a').asset,assets[0]);assert.equal(media.next('a').asset,assets[1]);assert.equal(calls,1);
 });
 test('invalid injected randomness does not consume selection state',()=>{
   let value=1;const {media,assets}=library({random:()=>value});media.configure({enabled:true,random:true});

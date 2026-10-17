@@ -107,3 +107,27 @@ The official support article 'Using Serato Video in Demo Mode' links to a Video 
 ## Additional FX selector check
 
 Opened the first left-unit effect selector while both decks remained paused, selected the next entry with Down/Return, and observed Wah Filter parameters: Resonance 8.00, Range 4.00 octaves, LFO Depth 0%, Rate 2. These are observed session values, not bounds or defaults. Restored LPF with Up/Return and verified its name and original parameter values. No effect was enabled and no parameter knob was adjusted. Four of 59 advanced parameter strips now have direct observations; 55 remain unobserved.
+
+## Current Video Effects / Info observation — navigation gap closed
+
+2026-10-16, installed4.0.10(4010213)arm64. Opened Setup, temporarily enabled
+existing Serato Video, and successfully opened both Effects and Info using the
+already-authorized JXA/CoreGraphics input with fresh screenshot verification.
+Earlier failed navigation reports remain historical; these two screens are now
+observed. No media was loaded, no playback/recording was started, no license/trial
+was activated and no Effects/Info option was changed. Video was restored OFF with
+uncheckedbox/hiddencontrols verified, then Setup closed.
+
+| Screen | Current observed state | Scope limit |
+|---|---|---|
+| Effects | Effect Restrictions: No Restrictions | Readout for this session, not successful invocation of every menu entry |
+| Effects | Enable Audio Linked Video Effects checked | Existing session selection, not factorydefault or parameter/mapping proof |
+| Info | Input resolution/bufferedframes/colourspace Left/Right blank | No Video clip loaded; do not invent values |
+| Info | Output Resolution400×400; OutputFPS blank | Observed idle value; no performance/longsession guarantee |
+| Info | YUV Handling Default; dropdown also Software Only and RGB Only | Menu opened and Escapeclosed, selectionunchanged; processing untested |
+| Info | Enable Debug and Buffer Debug View unchecked | Conditionalruntime/tool behavior untested; no VersionNumber readout visible in this screen |
+
+Raw screenshots stay ignored under `local-evidence/video-reference-20261016/`:
+`effects.png`, `info.png`, `yuv-menu.png`, `restored-off.png`. The persisted55effect
+cache remains separate file evidence; this readout does not establish every named
+effect's actual render behavior or the transition catalog.

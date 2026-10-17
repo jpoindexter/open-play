@@ -1,0 +1,53 @@
+{
+  "scope": "Executed actual Video controls handlers with controlled DOM replacement and deferred mixer start/stop. No browser navigation/capture proof.",
+  "passed": 4,
+  "failed": 0,
+  "checks": [
+    {
+      "name": "Leaving Video while Start awaits completion does not report a stale-DOM error",
+      "passed": true,
+      "evidence": {
+        "recording": true,
+        "notifications": [],
+        "replacedControls": false,
+        "detachedControlsUnchanged": true
+      }
+    },
+    {
+      "name": "Leaving Video while Stop awaits completion does not report a stale-DOM error",
+      "passed": true,
+      "evidence": {
+        "recording": false,
+        "notifications": [],
+        "replacedControls": false,
+        "detachedControlsUnchanged": true
+      }
+    },
+    {
+      "name": "Leaving and returning during Start updates only replacement controls from session state",
+      "passed": true,
+      "evidence": {
+        "recording": true,
+        "notifications": [],
+        "replacedControls": true,
+        "detachedControlsUnchanged": true,
+        "currentButton": "Stop video capture",
+        "currentQualityDisabled": true,
+        "currentDownloadDisabled": true
+      }
+    },
+    {
+      "name": "Leaving and returning during Stop updates replacement controls and Download from session result",
+      "passed": true,
+      "evidence": {
+        "recording": false,
+        "notifications": [],
+        "replacedControls": true,
+        "detachedControlsUnchanged": true,
+        "currentButton": "Record video mix",
+        "currentQualityDisabled": false,
+        "currentDownloadDisabled": false
+      }
+    }
+  ]
+}

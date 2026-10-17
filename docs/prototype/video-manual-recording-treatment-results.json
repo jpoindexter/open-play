@@ -1,0 +1,626 @@
+{
+  "startedAt": "2026-10-16T21:46:07.490Z",
+  "policy": {
+    "referenceEquivalent": false,
+    "default": "stretch",
+    "scope": "Ordinary decoded video; caller owns CDG presentation separately.",
+    "matte": "Opaque black only outside the content rectangle; decoded source alpha inside is preserved.",
+    "scheduling": "Caller draws only valid decoded frames, retaining the prior raw frame while seeking/unavailable. Caller commits presentation generation/history reset with effective geometry."
+  },
+  "checks": [
+    {
+      "name": "Actual Canvas treatment keeps internal source alpha and paints only outside-content padding black",
+      "passed": true,
+      "evidence": {
+        "padding": [
+          0,
+          0,
+          0,
+          255
+        ],
+        "fractional": [
+          [
+            255,
+            0,
+            0,
+            191
+          ],
+          [
+            255,
+            0,
+            0,
+            64
+          ]
+        ],
+        "meanDifference": 0
+      }
+    },
+    {
+      "name": "Actual AudioEngine resumes with original440Hz PCM and live capture audio destination",
+      "passed": true,
+      "evidence": {
+        "sampleRate": 48000,
+        "duration": 6,
+        "tone440": 0.1499999997598264,
+        "speakers": "Disconnected; actual master capture path remains connected."
+      }
+    },
+    {
+      "name": "Original4:3 and wide canvas streams encode real downloadable local video Files",
+      "passed": true,
+      "evidence": {
+        "standard": {
+          "anchor": "download-standard",
+          "name": "open-play-treatment-4x3.mp4",
+          "bytes": 22289,
+          "mime": "video/mp4;codecs=vp9",
+          "ownership": "Original local canvas shapes only; exact encoded File passed to mixer.load.",
+          "width": 320,
+          "height": 240,
+          "drawnFrames": 116
+        },
+        "wide": {
+          "anchor": "download-wide",
+          "name": "open-play-treatment-wide.mp4",
+          "bytes": 14003,
+          "mime": "video/mp4;codecs=avc1",
+          "ownership": "Original local canvas shapes only; exact encoded File passed to mixer.load.",
+          "width": 420,
+          "height": 180,
+          "drawnFrames": 115
+        }
+      }
+    },
+    {
+      "name": "Actual mixer.load commits muted decoded320x240 and420x180 input frames",
+      "passed": true,
+      "evidence": {
+        "inputs": [
+          {
+            "name": "open-play-treatment-4x3.mp4",
+            "position": 0.003737,
+            "duration": 0.9855,
+            "paused": true,
+            "firstFrame": {
+              "mediaTime": 0.0112,
+              "presentedFrames": 2,
+              "width": 320,
+              "height": 240
+            },
+            "readyState": 4,
+            "seeking": false
+          },
+          {
+            "name": "open-play-treatment-wide.mp4",
+            "position": 0.002829,
+            "duration": 0.979,
+            "paused": true,
+            "firstFrame": {
+              "mediaTime": 0.0127,
+              "presentedFrames": 3,
+              "width": 420,
+              "height": 180
+            },
+            "readyState": 4,
+            "seeking": false
+          }
+        ],
+        "dimensions": [
+          [
+            320,
+            240
+          ],
+          [
+            420,
+            180
+          ]
+        ]
+      }
+    },
+    {
+      "name": "Actual decoded standard preserve geometry, opaque corners and circle aspect",
+      "passed": true,
+      "evidence": {
+        "kind": "standard",
+        "mode": "preserve",
+        "mean": 0,
+        "markers": {
+          "red": 899,
+          "green": 900,
+          "blue": 899,
+          "yellow": 900
+        },
+        "circle": {
+          "width": 104,
+          "height": 104,
+          "ratio": 1
+        },
+        "expectedRatio": 1,
+        "hash": "e07ab240",
+        "decoded": [
+          320,
+          240
+        ],
+        "generations": [
+          1,
+          1
+        ]
+      }
+    },
+    {
+      "name": "Actual decoded standard stretch geometry, opaque corners and circle aspect",
+      "passed": true,
+      "evidence": {
+        "kind": "standard",
+        "mode": "stretch",
+        "mean": 0,
+        "markers": {
+          "red": 1199,
+          "green": 1199,
+          "blue": 1199,
+          "yellow": 1200
+        },
+        "circle": {
+          "width": 138,
+          "height": 104,
+          "ratio": 1.3269230769230769
+        },
+        "expectedRatio": 1.3333333333333333,
+        "hash": "9c5dbdb4",
+        "decoded": [
+          320,
+          240
+        ],
+        "generations": [
+          2,
+          2
+        ]
+      }
+    },
+    {
+      "name": "Actual decoded standard center-cut geometry, opaque corners and circle aspect",
+      "passed": true,
+      "evidence": {
+        "kind": "standard",
+        "mode": "center-cut",
+        "mean": 0,
+        "markers": {
+          "red": 0,
+          "green": 0,
+          "blue": 0,
+          "yellow": 0
+        },
+        "circle": {
+          "width": 138,
+          "height": 138,
+          "ratio": 1
+        },
+        "expectedRatio": 1,
+        "hash": "af66751f",
+        "decoded": [
+          320,
+          240
+        ],
+        "generations": [
+          3,
+          3
+        ]
+      }
+    },
+    {
+      "name": "Actual decoded standard letterbox geometry, opaque corners and circle aspect",
+      "passed": true,
+      "evidence": {
+        "kind": "standard",
+        "mode": "letterbox",
+        "mean": 0,
+        "markers": {
+          "red": 0,
+          "green": 0,
+          "blue": 0,
+          "yellow": 0
+        },
+        "circle": {
+          "width": 138,
+          "height": 138,
+          "ratio": 1
+        },
+        "expectedRatio": 1,
+        "hash": "af66751f",
+        "decoded": [
+          320,
+          240
+        ],
+        "generations": [
+          4,
+          4
+        ]
+      }
+    },
+    {
+      "name": "Actual decoded wide preserve geometry, opaque corners and circle aspect",
+      "passed": true,
+      "evidence": {
+        "kind": "wide",
+        "mode": "preserve",
+        "mean": 0.05138888888888889,
+        "markers": {
+          "red": 900,
+          "green": 900,
+          "blue": 900,
+          "yellow": 899
+        },
+        "circle": {
+          "width": 106,
+          "height": 106,
+          "ratio": 1
+        },
+        "expectedRatio": 1,
+        "hash": "1e3f186a",
+        "decoded": [
+          420,
+          180
+        ],
+        "generations": [
+          5,
+          5
+        ]
+      }
+    },
+    {
+      "name": "Actual decoded wide stretch geometry, opaque corners and circle aspect",
+      "passed": true,
+      "evidence": {
+        "kind": "wide",
+        "mode": "stretch",
+        "mean": 0,
+        "markers": {
+          "red": 1199,
+          "green": 1200,
+          "blue": 1199,
+          "yellow": 1199
+        },
+        "circle": {
+          "width": 106,
+          "height": 138,
+          "ratio": 0.7681159420289855
+        },
+        "expectedRatio": 0.7619047619047619,
+        "hash": "26035bea",
+        "decoded": [
+          420,
+          180
+        ],
+        "generations": [
+          6,
+          6
+        ]
+      }
+    },
+    {
+      "name": "Actual decoded wide center-cut geometry, opaque corners and circle aspect",
+      "passed": true,
+      "evidence": {
+        "kind": "wide",
+        "mode": "center-cut",
+        "mean": 0,
+        "markers": {
+          "red": 0,
+          "green": 0,
+          "blue": 0,
+          "yellow": 0
+        },
+        "circle": {
+          "width": 138,
+          "height": 138,
+          "ratio": 1
+        },
+        "expectedRatio": 1,
+        "hash": "f0afc367",
+        "decoded": [
+          420,
+          180
+        ],
+        "generations": [
+          7,
+          7
+        ]
+      }
+    },
+    {
+      "name": "Actual decoded wide letterbox geometry, opaque corners and circle aspect",
+      "passed": true,
+      "evidence": {
+        "kind": "wide",
+        "mode": "letterbox",
+        "mean": 0.05138888888888889,
+        "markers": {
+          "red": 900,
+          "green": 900,
+          "blue": 900,
+          "yellow": 899
+        },
+        "circle": {
+          "width": 106,
+          "height": 106,
+          "ratio": 1
+        },
+        "expectedRatio": 1,
+        "hash": "1e3f186a",
+        "decoded": [
+          420,
+          180
+        ],
+        "generations": [
+          8,
+          8
+        ]
+      }
+    },
+    {
+      "name": "Treated left/right previews and Crossfade endpoints/midpoint preserve channel routing",
+      "passed": true,
+      "evidence": {
+        "endpointHashes": [
+          "e07ab240",
+          "1e3f186a"
+        ],
+        "midpointMean": 0.11519856770833334,
+        "previewMean": [
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "name": "Changing committed treatment resets actual held Frame Freeze geometry and presentation identity",
+      "passed": true,
+      "evidence": {
+        "before": "9c5dbdb4",
+        "after": "e07ab240",
+        "oldGeneration": 10,
+        "generation": 11,
+        "mean": 0
+      }
+    },
+    {
+      "name": "Treatment requested during a real seek retains actual old pixels until decoded geometry commits",
+      "passed": true,
+      "evidence": {
+        "pending": {
+          "readyState": 1,
+          "seeking": true
+        },
+        "hashes": [
+          "e07ab240",
+          "e07ab240",
+          "af648957"
+        ],
+        "generations": [
+          11,
+          11,
+          12
+        ],
+        "mean": 0
+      }
+    },
+    {
+      "name": "Actual output resize during a pending seek resamples the last frame and defers the requested new geometry",
+      "passed": true,
+      "evidence": {
+        "pending": {
+          "readyState": 1,
+          "seeking": true
+        },
+        "dimensions": [
+          1280,
+          720
+        ],
+        "retainedMean": 0,
+        "committedMean": 0,
+        "generations": [
+          13,
+          13,
+          14
+        ],
+        "hashes": [
+          "4835ccf",
+          "27d3e22f"
+        ],
+        "scope": "Actual mixer resize, real asynchronous seek and GPU/readback; no frame-rate guarantee."
+      }
+    },
+    {
+      "name": "Actual metadata module persists four scalar treatments and ignores accessors/inherited/invalid values",
+      "passed": true,
+      "evidence": {
+        "choices": [
+          "preserve",
+          "stretch",
+          "center-cut",
+          "letterbox"
+        ],
+        "default": "stretch",
+        "scope": "Actual pure metadata API; main native select interaction remains a parent UI check."
+      }
+    },
+    {
+      "name": "Real mixer records a treatment change without restarting its container or master audio",
+      "passed": true,
+      "evidence": {
+        "bytes": 31697,
+        "mime": "video/webm;codecs=vp9,opus",
+        "wallMs": 1404.4000000953674,
+        "switchWallMs": 551.9000000953674,
+        "processedFrames": 42,
+        "dimensions": [
+          640,
+          360
+        ],
+        "scope": "Short actual recording and treatment edit; no sustainedfps guarantee."
+      }
+    },
+    {
+      "name": "Captured container decodes actual preserved then cropped corner markers at fixed640x360",
+      "passed": true,
+      "evidence": {
+        "first": {
+          "mediaTime": 0,
+          "presentedFrames": 1,
+          "width": 640,
+          "height": 360
+        },
+        "later": {
+          "mediaTime": 0.958,
+          "presentedFrames": 29,
+          "width": 640,
+          "height": 360
+        },
+        "beforeMarkers": {
+          "red": 900,
+          "green": 899,
+          "blue": 897,
+          "yellow": 899
+        },
+        "afterMarkers": {
+          "red": 0,
+          "green": 0,
+          "blue": 0,
+          "yellow": 0
+        },
+        "hashes": [
+          "77bb584b",
+          "1b8c7aed"
+        ],
+        "pixels": [
+          [
+            0,
+            0,
+            0,
+            255
+          ],
+          [
+            30,
+            41,
+            48,
+            255
+          ]
+        ]
+      }
+    },
+    {
+      "name": "Captured container really decodes nonzero440Hz engine audio across the treatment change",
+      "passed": true,
+      "evidence": {
+        "sampleRate": 48000,
+        "channels": 2,
+        "duration": 1.38,
+        "rms": 0.04665263719945683,
+        "tone440": 0.06610256254652531,
+        "tone880": 1.7922038328199918e-7,
+        "claim": "Audio decoded from the actual recorded video container; not just track presence."
+      }
+    },
+    {
+      "name": "Mixer disposal pauses actual inputs and rejects new treatment fixture loads",
+      "passed": true,
+      "evidence": {
+        "frames": 64,
+        "paused": [
+          true,
+          true
+        ],
+        "loadRejected": true
+      }
+    }
+  ],
+  "notifications": [],
+  "fixtures": {
+    "standard": {
+      "anchor": "download-standard",
+      "name": "open-play-treatment-4x3.mp4",
+      "bytes": 22289,
+      "mime": "video/mp4;codecs=vp9",
+      "ownership": "Original local canvas shapes only; exact encoded File passed to mixer.load.",
+      "width": 320,
+      "height": 240,
+      "drawnFrames": 116
+    },
+    "wide": {
+      "anchor": "download-wide",
+      "name": "open-play-treatment-wide.mp4",
+      "bytes": 14003,
+      "mime": "video/mp4;codecs=avc1",
+      "ownership": "Original local canvas shapes only; exact encoded File passed to mixer.load.",
+      "width": 420,
+      "height": 180,
+      "drawnFrames": 115
+    }
+  },
+  "seams": [
+    "Actual imported AudioEngine, video mixer, pipeline and decoded video Files; speakers disconnected while real capture destination remains connected.",
+    "Temporary observation of document.createElement mounts actual private input videos for decoded-dimension/frame inspection. No fake media/clock/pipeline.",
+    "Expected opaque geometry uses literal independently calculated Canvas rectangles from actual decoded input, not the helper being tested.",
+    "Alpha is tested with an actual transparent Canvas source; MediaRecorder fixture video is opaque. This does not establish a browser alpha-video codec matrix."
+  ],
+  "scope": "Independent browser geometry/capture evidence only after Run; no Serato/native/device equivalence or sustainedfps acceptance.",
+  "capture": {
+    "bytes": 31697,
+    "mime": "video/webm;codecs=vp9,opus",
+    "wallMs": 1404.4000000953674,
+    "switchWallMs": 551.9000000953674,
+    "processedFrames": 42,
+    "dimensions": [
+      640,
+      360
+    ],
+    "scope": "Short actual recording and treatment edit; no sustainedfps guarantee."
+  },
+  "decodedCapture": {
+    "first": {
+      "mediaTime": 0,
+      "presentedFrames": 1,
+      "width": 640,
+      "height": 360
+    },
+    "later": {
+      "mediaTime": 0.958,
+      "presentedFrames": 29,
+      "width": 640,
+      "height": 360
+    },
+    "beforeMarkers": {
+      "red": 900,
+      "green": 899,
+      "blue": 897,
+      "yellow": 899
+    },
+    "afterMarkers": {
+      "red": 0,
+      "green": 0,
+      "blue": 0,
+      "yellow": 0
+    },
+    "hashes": [
+      "77bb584b",
+      "1b8c7aed"
+    ],
+    "pixels": [
+      [
+        0,
+        0,
+        0,
+        255
+      ],
+      [
+        30,
+        41,
+        48,
+        255
+      ]
+    ]
+  },
+  "passed": 21,
+  "failed": 0,
+  "durationMs": 5318.099999904633
+}

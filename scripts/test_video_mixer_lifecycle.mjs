@@ -13,13 +13,13 @@ const deferred = () => {let resolve, reject; const promise = new Promise((a,b)=>
 const flush = async () => {for(let i=0;i<20;i++) await Promise.resolve();};
 let serial = 0;
 function environment() {
-  const env = {videos:[], images:[], recorders:[], videoTracks:[], revoked:[], renders:[], pipelines:[], now:1000};
+  const env = {videos:[], images:[], recorders:[], videoTracks:[], revoked:[], renders:[], pipelines:[], captureStreams:[], now:1000};
   const urls = new Map();
 
   const track = () => ({stopped:false,stop(){this.stopped=true;}});
   const canvas = () => {
     const c={width:640,height:360,isConnected:true,draws:0,
-      captureStream(){const t=track();env.videoTracks.push(t);return {addTrack(){},getVideoTracks:()=>[t]};}};
+      captureStream(){if(env.failCaptureStream){env.failedCaptureCanvas=c;throw env.failCaptureStream;}const t=track();env.videoTracks.push(t);const stream={sourceCanvas:c,addTrack(){},getVideoTracks:()=>[t]};env.captureStreams.push(stream);return stream;}};
     const ctx={canvas:c,save(){},restore(){},setTransform(){},clearRect(){},fillRect(){},fillText(){},drawImage(){c.draws++;}};c.getContext=()=>ctx;return c;
   };
   globalThis.performance = {now:()=>env.now};
@@ -46,7 +46,7 @@ function environment() {
   globalThis.window = {MediaRecorder:true};
   globalThis.MediaRecorder = class {
     static isTypeSupported(){return true;}
-    constructor(stream,{mimeType}={}){this.stream=stream;this.mimeType=mimeType;this.state='inactive';env.recorders.push(this);}
+    constructor(stream,{mimeType}={}){if(env.failConstructor)throw env.failConstructor;this.stream=stream;this.mimeType=mimeType;this.state='inactive';env.recorders.push(this);}
     start(){this.state='recording';}
     stop(){this.state='inactive';this.stopRequested=true;}
     data(text){this.ondataavailable?.({data:new Blob([text])});}
@@ -154,12 +154,65 @@ test('reset after a renderer fault disposes the failed pipeline and creates a fr
   assert.match(e.mixer.diagnostics().error,/context was lost/);e.mixer.reset();e.mixer.tick(true);
   assert.equal(e.pipelines[0].disposed,true);assert.equal(e.pipelines.length,2);assert.equal(e.mixer.diagnostics().error,null);await e.mixer.dispose();
 });
-test('recording tick continues on a detached capture canvas and survives output rebinding',async()=>{
-  const e=environment();await e.mixer.record();e.output.isConnected=false;const before=e.output.draws;e.mixer.tick(true);
-  assert(e.output.draws>before,'Detached recording canvas must receive a new processed frame');
-  const replacement=document.createElement('canvas');e.mixer.bind(replacement);const captured=e.output.draws;e.mixer.tick(true);
-  assert(e.output.draws>captured,'Original capture track canvas must still be updated');assert(replacement.draws>0);
+test('recording tick continues on its dedicated stream canvas through output detach and rebinding',async()=>{
+  const e=environment();await e.mixer.record();const captured=e.recorders[0].stream.sourceCanvas;
+  assert.notEqual(captured,e.output,'The actual stream must own a dedicated capture canvas');
+  e.output.isConnected=false;const before=captured.draws;e.mixer.tick(true);
+  assert(captured.draws>before,'Actual stream canvas must receive a frame while the panel is detached');
+  const replacement=document.createElement('canvas');e.mixer.bind(replacement);const afterDetach=captured.draws;e.mixer.tick(true);
+  assert(captured.draws>afterDetach,'The same actual capture track canvas must keep updating after output rebinding');assert(replacement.draws>0);
+  await e.finishCapture();assert.equal(captured.width,0,'Completed session must release its dedicated surface');await e.mixer.dispose();
+});
+test('Recording quality guards pending start, active capture and pending stop, then permits settled changes',async()=>{
+  const e=environment(),gate=deferred();e.mixer.setRecordingQuality('480p');e.engine.resume=()=>gate.promise;
+  const starting=e.mixer.record();assert.throws(()=>e.mixer.setRecordingQuality('720p'),/Stop video capture/);assert.equal(e.state.video.recordingQuality,'480p');
+  gate.resolve();await starting;const streamCanvas=e.recorders[0].stream.sourceCanvas;
+  assert.deepEqual(e.mixer.diagnostics().captureDimensions,{width:854,height:480,quality:'480p'});assert.equal(e.output.width,640);assert.equal(streamCanvas.width,854);
+  assert.throws(()=>e.mixer.setRecordingQuality('1080p'),/Stop video capture/);const stopping=e.mixer.stop();assert.equal(e.mixer.recording,false);
+  assert.throws(()=>e.mixer.setRecordingQuality('360p'),/Stop video capture/);e.recorders[0].stopped();await stopping;
+  assert.equal(e.mixer.setRecordingQuality('720p').width,1280);assert.equal(streamCanvas.width,0);assert.equal(e.mixer.diagnostics().captureDimensions,null);
+  assert.throws(()=>e.mixer.setRecordingQuality('invalid'),/supported recording/);await e.mixer.dispose();assert.throws(()=>e.mixer.setRecordingQuality('output'),/disposed/);
+});
+test('A stale completed recorder cannot release a newer dedicated capture surface',async()=>{
+  const e=environment();await e.mixer.record();const old=e.recorders[0];await e.finishCapture();e.mixer.setRecordingQuality('1080p');await e.mixer.record();
+  const current=e.recorders[1].stream.sourceCanvas;assert.equal(current.width,1920);old.stopped();
+  assert.equal(current.width,1920);assert.deepEqual(e.mixer.diagnostics().captureDimensions,{width:1920,height:1080,quality:'1080p'});const before=current.draws;e.mixer.tick(true);assert(current.draws>before);
   await e.finishCapture();await e.mixer.dispose();
+});
+test('Recorder start failure releases the surface/video tracks and leaves a retry available',async()=>{
+  const e=environment(),start=MediaRecorder.prototype.start;MediaRecorder.prototype.start=function(){throw new Error('controlled encoder start failure');};
+  await assert.rejects(e.mixer.record(),/controlled encoder start failure/);assert(e.videoTracks.every(t=>t.stopped));assert.equal(e.recorders[0].stream.sourceCanvas.width,0);assert.equal(e.mixer.recording,false);
+  MediaRecorder.prototype.start=start;e.mixer.setRecordingQuality('720p');await e.mixer.record();assert.equal(e.recorders.at(-1).stream.sourceCanvas.width,1280);await e.finishCapture();assert.equal(e.audioTrack.stopped,false);await e.mixer.dispose();
+});
+
+test('Audio resume rejection settles a pending stop without allocating capture and permits retry',async()=>{
+  const e=environment(),gate=deferred(),failure=new Error('controlled resume rejection');e.engine.resume=()=>gate.promise;
+  const starting=e.mixer.record(),stopping=e.mixer.stop();gate.reject(failure);const outcomes=await Promise.allSettled([starting,stopping]);
+  assert(outcomes.every(result=>result.status==='rejected'&&result.reason===failure));assert.equal(e.captureStreams.length,0);assert.equal(e.recorders.length,0);assert.equal(e.audioTrack.stopped,false);
+  e.engine.resume=async()=>{};e.mixer.setRecordingQuality('480p');await e.mixer.record();assert.equal(e.recorders[0].stream.sourceCanvas.width,854);await e.finishCapture();await e.mixer.dispose();
+});
+test('Encoder construction failure stops only owned video tracks, releases lease and permits retry',async()=>{
+  const e=environment();e.failConstructor=new Error('controlled encoder construction failure');await assert.rejects(e.mixer.record(),/encoder construction failure/);
+  assert.equal(e.captureStreams.length,1);assert.equal(e.captureStreams[0].sourceCanvas.width,0);assert(e.videoTracks.every(track=>track.stopped));assert.equal(e.audioTrack.stopped,false);assert.equal(e.mixer.diagnostics().captureDimensions,null);
+  e.failConstructor=null;e.mixer.setRecordingQuality('720p');await e.mixer.record();await e.finishCapture();await e.mixer.dispose();
+});
+test('Canvas captureStream failure releases the newly allocated lease before any recorder exists',async()=>{
+  const e=environment();e.failCaptureStream=new Error('controlled canvas stream failure');await assert.rejects(e.mixer.record(),/canvas stream failure/);assert.equal(e.failedCaptureCanvas.width,0);assert.equal(e.recorders.length,0);assert.equal(e.audioTrack.stopped,false);
+  e.failCaptureStream=null;e.mixer.setRecordingQuality('360p');await e.mixer.record();await e.finishCapture();await e.mixer.dispose();
+});
+test('A renderer fault during pending resume rejects capture before allocation and Reset permits retry',async()=>{
+  const e=environment();e.mixer.tick(true);const gate=deferred();e.engine.resume=()=>gate.promise;const starting=e.mixer.record();e.pipelines[0].lost=true;gate.resolve();await assert.rejects(starting,/context was lost/);
+  assert.equal(e.captureStreams.length,0);assert.equal(e.recorders.length,0);assert.equal(e.audioTrack.stopped,false);e.mixer.reset();e.engine.resume=async()=>{};await e.mixer.record();await e.finishCapture();await e.mixer.dispose();
+});
+test('Asynchronous encoder failure retains final chunks and cleans session after its stop event',async()=>{
+  const e=environment();await e.mixer.record();const current=e.recorders[0],captured=current.stream.sourceCanvas;current.data('before-');
+  // Standards-shaped error path: inactive recorder, error event, final data, stop.
+  current.state='inactive';current.onerror({error:new Error('controlled asynchronous encoder failure')});
+  assert.match(e.mixer.diagnostics().error,/asynchronous encoder failure/);assert(captured.width>0,'Surface must stay alive until the terminal stop event');
+  const stopping=e.mixer.stop();assert.throws(()=>e.mixer.setRecordingQuality('720p'),/Stop video capture/);current.data('final');current.stopRequested=true;current.stopped();const blob=await stopping;
+  assert.equal(await blob.text(),'before-final');assert.equal(e.mixer.result,blob);assert.equal(captured.width,0);assert(e.videoTracks.every(track=>track.stopped));assert.equal(e.audioTrack.stopped,false);assert.equal(e.mixer.diagnostics().captureDimensions,null);
+  // UI explicitly reports Reset to retry; error recovery is not silently assumed.
+  e.mixer.reset();e.mixer.setRecordingQuality('720p');await e.mixer.record();await e.finishCapture();await e.mixer.dispose();
 });
 
 let passed=0,failed=0;

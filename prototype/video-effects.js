@@ -102,7 +102,7 @@ export function createVideoEffects({width = 640, height = 360} = {}) {
     if(slots[index]?.name!==name)clearSlot(index);
     if(!slots[index]) {
       const state=createVideoEffectState(name);
-      if(name==="Frame Freeze" || name==="Frame Pulse") {
+      if(name==="Frame Freeze") {
         state.hold=texture(width,height);state.holdFramebuffer=framebuffer(state.hold);
       }
       if(name==="Delay Grid") {

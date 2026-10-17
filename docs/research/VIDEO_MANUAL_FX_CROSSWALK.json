@@ -1,0 +1,4402 @@
+{
+  "schemaVersion": 1,
+  "checked": "2026-10-16",
+  "scope": "Read-only historical primary-manual semantic crosswalk for55 current independent effects and34 transitions. Proposed tests are not executed acceptance. No production changes.",
+  "source": {
+    "officialUrl": "https://serato.com/downloads/files/141226/Serato+Video+Software+Manual+for+Serato+DJ.pdf",
+    "officialCurrentLinkStatus": "Parent independently verified recovery from current official link; this subagent inspected local PDF, not network retrieval.",
+    "path": "local-evidence/claude-fable/official-video-manual-141226.pdf",
+    "textPath": "local-evidence/claude-fable/official-video-manual-141226.txt",
+    "bytes": 425843,
+    "sha256": "85c57756dc96587b7b4822e2911decb4b9202f5a1d6b1cba047e1159236ae66c",
+    "pdfCreationDate": "D:20150409164132+12'00'",
+    "pdfModificationDate": "D:20150409164134+12'00'",
+    "creationCalendarDate": "2015-04-09",
+    "pagesInspected": [
+      19,
+      20,
+      21
+    ],
+    "pdfPageIndexes": [
+      18,
+      19,
+      20
+    ],
+    "editionBoundary": "Historical primary meaning evidence, not installed Serato DJ Pro4.0.10 availability, parameters, defaults, order, timing or pixel equivalence.",
+    "paraphrasesOnly": true
+  },
+  "counts": {
+    "currentEffects": 55,
+    "currentTransitions": 34,
+    "effectsWithExactManualName": 52,
+    "effectsWithNormalizedPunctuationCorrespondence": 1,
+    "effectsWithProbableLabelCorrespondence": 1,
+    "effectsNotIndividuallyDescribed": 1,
+    "transitionsWithManualName": 27,
+    "transitionsUndescribedCandidates": 6,
+    "separateOpenPlayBaseline": 1,
+    "statuses": {
+      "not_documented": 7,
+      "semantic_mismatch": 28,
+      "broadly_consistent": 42,
+      "possible_mismatch": 2,
+      "integration_gap": 2,
+      "direction_mismatch": 2,
+      "probable_label_correspondence": 1,
+      "capability_gap": 2,
+      "underspecified": 2,
+      "independent_baseline": 1
+    },
+    "ranked": {
+      "P1": 31,
+      "P2": 5
+    }
+  },
+  "sourceCaveats": [
+    "Filter on page20 is a category heading, visually verified and confirmed by14pt Serato-Black font versus9pt individual effect names. It does not specify the local manifest Filter algorithm.",
+    "Page20 literally prints TITLE for a tiling description; association with local Tile is probable, not exact-label proof.",
+    "Page21 repeats vertical-axis wording for Spin H and Spin V. Preserve ambiguity rather than silently correcting the manual.",
+    "Posterize says three colors; global palette versus per-channel levels and exact palette are not resolved by that sentence. Current2..16 levels/channel is materially different from a literal three-color result.",
+    "Box Both alternation event/cadence and Scratch threshold/hysteresis are unspecified. Proposed deterministic choices must remain labeled independent.",
+    "Absence from these pages does not prove absence from2015 software or installed4.0.10.",
+    "Broadly consistent means no concrete contradiction found in short prose, never reference parity.",
+    "Existing72/72 FX and51/51 transition tests validate prior independent contracts; some explicitly encode semantics contradicted here (Frame Pulse hold, Gamma brighten, snapshot latches). Do not relabel them manual acceptance."
+  ],
+  "implementationSourceSHA256": {
+    "prototype/video-effects-catalog.js": "96490aa120eed1e9cb1eff8746961ae1c4549721f4e15f07e6885c3f224f5606",
+    "prototype/video-effects-state.js": "773a2fa2199c5978453912c9a0cbfb2970c4805d7cd9338c959d0dd3fe4f03e7",
+    "prototype/video-effects-shaders.js": "594ac2e177ece277d589054a8c842e81616d9e52b7768a6b3d6fed1b75a2aa66",
+    "prototype/video-transitions.js": "4a615bdb91d577873eb27f0233e0a36b1352eb712d48ca740ca906554d5e664b",
+    "prototype/video-transitions-state.js": "84d4565fd358779da02effedd73a903279ab8324e00d0f2bd8a691e1e9586597",
+    "prototype/video-transitions-kernel.js": "59080aaf2a0abe9c5ed8ce66234a8e096db1d67af447b243c75318b08d987800"
+  },
+  "modelRouting": {
+    "featureId": "VID-002",
+    "source": "docs/delivery/feature-registry.json; docs/models/development-routing.json",
+    "currentRegistryRouting": {
+      "codex": {
+        "model": "gpt-6.1-sol",
+        "effort": "high"
+      },
+      "claude_code": {
+        "model": "claude-sonnet-5",
+        "effort": "medium"
+      },
+      "rationale": "UI and library workflows need state consistency and executed interaction checks.",
+      "primary": "Codex",
+      "review": "Fresh evidence review; Claude is an optional alternative, not automatically invoked",
+      "escalation": "After two materially different failed approaches: obtain missing evidence, then escalate one effort/model tier; never substitute reasoning for a hardware test"
+    },
+    "routine": {
+      "model": "gpt-6.1-sol",
+      "effort": "high"
+    },
+    "boundedDisputedNumericalOrStateAudit": {
+      "model": "gpt-6-astra",
+      "effort": "high",
+      "source": "docs/models/development-routing.json profiles.A",
+      "condition": "Only a bounded unresolved measured DSP/state/numerical dispute; obtain data first, never substitute reasoning for GPU/reference evidence."
+    },
+    "optionalFreshReview": {
+      "model": "claude-sonnet-5",
+      "effort": "medium",
+      "source": "VID-002 existing registry recommendation"
+    },
+    "availabilityClaim": false,
+    "invocationClaim": false
+  },
+  "effects": [
+    {
+      "name": "Filter",
+      "kind": "effect",
+      "manualPage": null,
+      "manualLabel": null,
+      "manualMeaningParaphrase": "No individual effect entry; Filter is a category heading on page20.",
+      "status": "not_documented",
+      "priority": null,
+      "comparison": "Local manifest identity is not explained by this manual; do not turn the heading into an algorithm specification.",
+      "proposedAcceptance": "Keep separate manifest provenance; obtain actual effect-menu/reference evidence before assigning a manual algorithm.",
+      "acceptanceExecuted": false,
+      "implementationEvidence": "code-path inspected; no new browser execution in this crosswalk",
+      "current": {
+        "id": 0,
+        "name": "Filter",
+        "category": "Analyzer",
+        "sourceStatus": "OBSERVED_LOCAL_RESOURCE",
+        "sourceEvidence": "docs/research/video-catalog-evaluation.json",
+        "candidateOnly": false,
+        "openPlayAvailable": true,
+        "referenceRuntimeVerified": false,
+        "referenceAvailability": "manifest declaration; active menu unverified",
+        "implementationStatus": "original-independent-WebGL2",
+        "contract": "Spatial low/high/band-pass using original five-point neighbourhoods; no hardware/analyzer filter binding is inferred.",
+        "parameterStatus": "independent ranges/defaults; vendor parameter labels, mappings and ranges unknown",
+        "default": {
+          "on": false,
+          "value": 0.65,
+          "params": {
+            "mode": "Low Pass",
+            "radius": 3
+          }
+        },
+        "independentParameters": [
+          {
+            "name": "value",
+            "default": 0.65,
+            "min": 0,
+            "max": 1,
+            "status": "independent amount;0 is exact bypass"
+          },
+          {
+            "name": "mode",
+            "default": "Low Pass",
+            "options": [
+              "Low Pass",
+              "High Pass",
+              "Band Pass"
+            ],
+            "status": "independently designed"
+          },
+          {
+            "name": "radius",
+            "default": 3,
+            "min": 0.1,
+            "max": 24,
+            "unit": "output pixels",
+            "status": "independently designed"
+          }
+        ],
+        "historyPolicy": "Per-slot record/spring state survives parameter changes; no retained video frames allocated.",
+        "colorPolicy": "Normalized display RGB; premultiplied internal filtering, straight-alpha colour operations/output; transparent outside image bounds. Not a vendor colour-space claim."
+      },
+      "sourceFiles": [
+        "prototype/video-effects-catalog.js",
+        "prototype/video-effects-state.js",
+        "prototype/video-effects-shaders.js"
+      ],
+      "featureModelRouting": "VID-002; see modelRouting",
+      "referenceEquivalent": false
+    },
+    {
+      "name": "Delay Grid",
+      "kind": "effect",
+      "manualPage": 20,
+      "manualLabel": "DELAY GRID",
+      "manualMeaningParaphrase": "Sixteen past frames tiled; one tile updates per update.",
+      "status": "semantic_mismatch",
+      "priority": "P1",
+      "comparison": "Current time-spaced age lookup shifts multiple tile assignments on each capture and can repeat oldest available frames; columns are adjustable2..8.",
+      "proposedAcceptance": "Feed16 distinct numbered frames and a17th; after warmup assert exactly16 tiles, exactly one changes per declared update, and the other15 stay unchanged; startup/cadence policy remains independent.",
+      "acceptanceExecuted": false,
+      "implementationEvidence": "code-path inspected; no new browser execution in this crosswalk",
+      "current": {
+        "id": 1,
+        "name": "Delay Grid",
+        "category": "Delay",
+        "sourceStatus": "OBSERVED_LOCAL_RESOURCE",
+        "sourceEvidence": "docs/research/video-catalog-evaluation.json",
+        "candidateOnly": false,
+        "openPlayAvailable": true,
+        "referenceRuntimeVerified": false,
+        "referenceAvailability": "manifest declaration; active menu unverified",
+        "implementationStatus": "original-independent-WebGL2",
+        "contract": "Tiles retained upstream input frames by actual timestamp;16 history samples cover2seconds by default at bounded history resolution.",
+        "parameterStatus": "independent ranges/defaults; vendor parameter labels, mappings and ranges unknown",
+        "default": {
+          "on": false,
+          "value": 0.65,
+          "params": {
+            "historySeconds": 2,
+            "delaySeconds": 0.125,
+            "columns": 4
+          }
+        },
+        "independentParameters": [
+          {
+            "name": "value",
+            "default": 0.65,
+            "min": 0,
+            "max": 1,
+            "status": "independent amount;0 is exact bypass"
+          },
+          {
+            "name": "historySeconds",
+            "default": 2,
+            "min": 0.25,
+            "max": 4,
+            "unit": "seconds",
+            "status": "independently designed"
+          },
+          {
+            "name": "delaySeconds",
+            "default": 0.125,
+            "min": 0.015625,
+            "max": 4,
+            "unit": "seconds per tile age; unavailable past uses oldest actual retained frame",
+            "status": "independently designed"
+          },
+          {
+            "name": "columns",
+            "default": 4,
+            "min": 2,
+            "max": 8,
+            "step": 1,
+            "status": "independently designed"
+          }
+        ],
+        "historyPolicy": "Per-slot upstream-frame state survives parameter changes; asset/effect/off/reset or backward time clears it. Temporal storage is bounded.",
+        "colorPolicy": "Normalized display RGB; premultiplied internal filtering, straight-alpha colour operations/output; transparent outside image bounds. Not a vendor colour-space claim."
+      },
+      "sourceFiles": [
+        "prototype/video-effects-catalog.js",
+        "prototype/video-effects-state.js",
+        "prototype/video-effects-shaders.js"
+      ],
+      "featureModelRouting": "VID-002; see modelRouting",
+      "referenceEquivalent": false
+    },
+    {
+      "name": "Frame Freeze",
+      "kind": "effect",
+      "manualPage": 20,
+      "manualLabel": "FRAME FREEZE",
+      "manualMeaningParaphrase": "Hold a frame for a bounded time.",
+      "status": "semantic_mismatch",
+      "priority": "P1",
+      "comparison": "Current capture persists indefinitely until token/bypass/source/reset, with no hold-duration expiry.",
+      "proposedAcceptance": "Capture red, switch source blue, verify red during a declared finite hold and blue after expiry; exact duration/retrigger behavior requires reference evidence.",
+      "acceptanceExecuted": false,
+      "implementationEvidence": "code-path inspected; no new browser execution in this crosswalk",
+      "current": {
+        "id": 2,
+        "name": "Frame Freeze",
+        "category": "Delay",
+        "sourceStatus": "OBSERVED_LOCAL_RESOURCE",
+        "sourceEvidence": "docs/research/video-catalog-evaluation.json",
+        "candidateOnly": false,
+        "openPlayAvailable": true,
+        "referenceRuntimeVerified": false,
+        "referenceAvailability": "manifest declaration; active menu unverified",
+        "implementationStatus": "original-independent-WebGL2",
+        "contract": "Capture the first enabled nonzero-amount input frame; keep it across amount changes until captureToken changes, bypass/re-enable, asset change or reset.",
+        "parameterStatus": "independent ranges/defaults; vendor parameter labels, mappings and ranges unknown",
+        "default": {
+          "on": false,
+          "value": 1,
+          "params": {
+            "captureToken": 0
+          }
+        },
+        "independentParameters": [
+          {
+            "name": "value",
+            "default": 1,
+            "min": 0,
+            "max": 1,
+            "status": "independent amount;0 is exact bypass"
+          },
+          {
+            "name": "captureToken",
+            "default": 0,
+            "kind": "caller-controlled capture identity",
+            "status": "independently designed"
+          }
+        ],
+        "historyPolicy": "Per-slot upstream-frame state survives parameter changes; asset/effect/off/reset or backward time clears it. Temporal storage is bounded.",
+        "colorPolicy": "Normalized display RGB; premultiplied internal filtering, straight-alpha colour operations/output; transparent outside image bounds. Not a vendor colour-space claim."
+      },
+      "sourceFiles": [
+        "prototype/video-effects-catalog.js",
+        "prototype/video-effects-state.js",
+        "prototype/video-effects-shaders.js"
+      ],
+      "featureModelRouting": "VID-002; see modelRouting",
+      "referenceEquivalent": false
+    },
+    {
+      "name": "Frame Pulse",
+      "kind": "effect",
+      "manualPage": 20,
+      "manualLabel": "FRAME PULSE",
+      "manualMeaningParaphrase": "Periodic motion/pulsing at the frame edges.",
+      "status": "semantic_mismatch",
+      "priority": "P1",
+      "comparison": "Current whole-frame capture/hold-duty effect freezes interior pixels as well as edges.",
+      "proposedAcceptance": "Animate independent center and border markers: center must keep advancing while border geometry/appearance pulses over a declared period; manual gives no waveform or width.",
+      "acceptanceExecuted": false,
+      "implementationEvidence": "code-path inspected; no new browser execution in this crosswalk",
+      "current": {
+        "id": 3,
+        "name": "Frame Pulse",
+        "category": "Delay",
+        "sourceStatus": "OBSERVED_LOCAL_RESOURCE",
+        "sourceEvidence": "docs/research/video-catalog-evaluation.json",
+        "candidateOnly": false,
+        "openPlayAvailable": true,
+        "referenceRuntimeVerified": false,
+        "referenceAvailability": "manifest declaration; active menu unverified",
+        "implementationStatus": "original-independent-WebGL2",
+        "contract": "Capture at beat-cycle boundaries, hold for an amount-controlled duty, then return live. Generated pulsing is disabled by reduced motion.",
+        "parameterStatus": "independent ranges/defaults; vendor parameter labels, mappings and ranges unknown",
+        "default": {
+          "on": false,
+          "value": 0.65,
+          "params": {
+            "periodBeats": 1
+          }
+        },
+        "independentParameters": [
+          {
+            "name": "value",
+            "default": 0.65,
+            "min": 0,
+            "max": 1,
+            "status": "independent amount;0 is exact bypass"
+          },
+          {
+            "name": "periodBeats",
+            "default": 1,
+            "min": 0.125,
+            "max": 16,
+            "unit": "beats",
+            "status": "independently designed"
+          }
+        ],
+        "historyPolicy": "Per-slot upstream-frame state survives parameter changes; asset/effect/off/reset or backward time clears it. Temporal storage is bounded.",
+        "colorPolicy": "Normalized display RGB; premultiplied internal filtering, straight-alpha colour operations/output; transparent outside image bounds. Not a vendor colour-space claim."
+      },
+      "sourceFiles": [
+        "prototype/video-effects-catalog.js",
+        "prototype/video-effects-state.js",
+        "prototype/video-effects-shaders.js"
+      ],
+      "featureModelRouting": "VID-002; see modelRouting",
+      "referenceEquivalent": false
+    },
+    {
+      "name": "Isolator Bass",
+      "kind": "effect",
+      "manualPage": 19,
+      "manualLabel": "ISOLATOR BASS",
+      "manualMeaningParaphrase": "One hue retained with bass-linked saturation; other hues grayscale.",
+      "status": "semantic_mismatch",
+      "priority": "P1",
+      "comparison": "Current red/warm tint attenuates green/blue, preserves all colors in silence and has no hue selection or grayscale background.",
+      "proposedAcceptance": "Use red/green/blue/gray patches and independent bass sweep; nonselected hues must remain gray while selected hue saturation follows bass. Declare hue and transfer independently.",
+      "acceptanceExecuted": false,
+      "implementationEvidence": "code-path inspected; no new browser execution in this crosswalk",
+      "current": {
+        "id": 4,
+        "name": "Isolator Bass",
+        "category": "Colour",
+        "sourceStatus": "OBSERVED_LOCAL_RESOURCE",
+        "sourceEvidence": "docs/research/video-catalog-evaluation.json",
+        "candidateOnly": false,
+        "openPlayAvailable": true,
+        "referenceRuntimeVerified": false,
+        "referenceAvailability": "manifest declaration; active menu unverified",
+        "implementationStatus": "original-independent-WebGL2",
+        "contract": "Bass amplitude attenuates green/blue to isolate a warm colour response; silence leaves input unchanged.",
+        "parameterStatus": "independent ranges/defaults; vendor parameter labels, mappings and ranges unknown",
+        "default": {
+          "on": false,
+          "value": 0.65,
+          "params": {}
+        },
+        "independentParameters": [
+          {
+            "name": "value",
+            "default": 0.65,
+            "min": 0,
+            "max": 1,
+            "status": "independent amount;0 is exact bypass"
+          }
+        ],
+        "historyPolicy": "Per-slot record/spring state survives parameter changes; no retained video frames allocated.",
+        "colorPolicy": "Normalized display RGB; premultiplied internal filtering, straight-alpha colour operations/output; transparent outside image bounds. Not a vendor colour-space claim."
+      },
+      "sourceFiles": [
+        "prototype/video-effects-catalog.js",
+        "prototype/video-effects-state.js",
+        "prototype/video-effects-shaders.js"
+      ],
+      "featureModelRouting": "VID-002; see modelRouting",
+      "referenceEquivalent": false
+    },
+    {
+      "name": "Flash On BPM",
+      "kind": "effect",
+      "manualPage": 19,
+      "manualLabel": "FLASH ON BPM",
+      "manualMeaningParaphrase": "Beat-synchronized flashes confined to darker image regions.",
+      "status": "semantic_mismatch",
+      "priority": "P1",
+      "comparison": "Current mixes every pixel toward white; already-bright regions change too, with no luminance region selection.",
+      "proposedAcceptance": "At a beat boundary compare dark and bright patches: dark changes, bright content stays unchanged under a declared mask; verify BPM cadence and Reduced Motion separately.",
+      "acceptanceExecuted": false,
+      "implementationEvidence": "code-path inspected; no new browser execution in this crosswalk",
+      "current": {
+        "id": 5,
+        "name": "Flash On BPM",
+        "category": "BPM Sync",
+        "sourceStatus": "OBSERVED_LOCAL_RESOURCE",
+        "sourceEvidence": "docs/research/video-catalog-evaluation.json",
+        "candidateOnly": false,
+        "openPlayAvailable": true,
+        "referenceRuntimeVerified": false,
+        "referenceAvailability": "manifest declaration; active menu unverified",
+        "implementationStatus": "original-independent-WebGL2",
+        "contract": "Beat-clock white flash with a declared duty; amount controls flash strength. Reduced motion disables generated flashes.",
+        "parameterStatus": "independent ranges/defaults; vendor parameter labels, mappings and ranges unknown",
+        "default": {
+          "on": false,
+          "value": 0.65,
+          "params": {
+            "periodBeats": 1,
+            "duty": 0.15
+          }
+        },
+        "independentParameters": [
+          {
+            "name": "value",
+            "default": 0.65,
+            "min": 0,
+            "max": 1,
+            "status": "independent amount;0 is exact bypass"
+          },
+          {
+            "name": "periodBeats",
+            "default": 1,
+            "min": 0.125,
+            "max": 16,
+            "unit": "beats",
+            "status": "independently designed"
+          },
+          {
+            "name": "duty",
+            "default": 0.15,
+            "min": 0.02,
+            "max": 0.95,
+            "status": "independently designed"
+          }
+        ],
+        "historyPolicy": "Per-slot record/spring state survives parameter changes; no retained video frames allocated.",
+        "colorPolicy": "Normalized display RGB; premultiplied internal filtering, straight-alpha colour operations/output; transparent outside image bounds. Not a vendor colour-space claim."
+      },
+      "sourceFiles": [
+        "prototype/video-effects-catalog.js",
+        "prototype/video-effects-state.js",
+        "prototype/video-effects-shaders.js"
+      ],
+      "featureModelRouting": "VID-002; see modelRouting",
+      "referenceEquivalent": false
+    },
+    {
+      "name": "Split",
+      "kind": "effect",
+      "manualPage": 20,
+      "manualLabel": "SPLIT",
+      "manualMeaningParaphrase": "Divide the image into five regions.",
+      "status": "semantic_mismatch",
+      "priority": "P1",
+      "comparison": "Current repeated vertical panels default4 and permit2..12, with alternating vertical offsets.",
+      "proposedAcceptance": "Use numbered source markers and assert five distinguishable regions at enabled full effect; orientation and mapping need an explicit independent contract.",
+      "acceptanceExecuted": false,
+      "implementationEvidence": "code-path inspected; no new browser execution in this crosswalk",
+      "current": {
+        "id": 6,
+        "name": "Split",
+        "category": "Split",
+        "sourceStatus": "OBSERVED_LOCAL_RESOURCE",
+        "sourceEvidence": "docs/research/video-catalog-evaluation.json",
+        "candidateOnly": false,
+        "openPlayAvailable": true,
+        "referenceRuntimeVerified": false,
+        "referenceAvailability": "manifest declaration; active menu unverified",
+        "implementationStatus": "original-independent-WebGL2",
+        "contract": "Repeated vertical source panels alternate their vertical offset.",
+        "parameterStatus": "independent ranges/defaults; vendor parameter labels, mappings and ranges unknown",
+        "default": {
+          "on": false,
+          "value": 0.65,
+          "params": {
+            "panels": 4
+          }
+        },
+        "independentParameters": [
+          {
+            "name": "value",
+            "default": 0.65,
+            "min": 0,
+            "max": 1,
+            "status": "independent amount;0 is exact bypass"
+          },
+          {
+            "name": "panels",
+            "default": 4,
+            "min": 2,
+            "max": 12,
+            "step": 1,
+            "status": "independently designed"
+          }
+        ],
+        "historyPolicy": "Per-slot record/spring state survives parameter changes; no retained video frames allocated.",
+        "colorPolicy": "Normalized display RGB; premultiplied internal filtering, straight-alpha colour operations/output; transparent outside image bounds. Not a vendor colour-space claim."
+      },
+      "sourceFiles": [
+        "prototype/video-effects-catalog.js",
+        "prototype/video-effects-state.js",
+        "prototype/video-effects-shaders.js"
+      ],
+      "featureModelRouting": "VID-002; see modelRouting",
+      "referenceEquivalent": false
+    },
+    {
+      "name": "Audio Split",
+      "kind": "effect",
+      "manualPage": 19,
+      "manualLabel": "AUDIO SPLIT",
+      "manualMeaningParaphrase": "Three regions zoom separately from bass, middle and high bands.",
+      "status": "semantic_mismatch",
+      "priority": "P1",
+      "comparison": "Current overall level makes horizontal repetitions/displacement; no three-region band-specific zoom.",
+      "proposedAcceptance": "Hold level constant; excite bass/mid/treble one at a time and verify only its region scale changes using circle/edge markers.",
+      "acceptanceExecuted": false,
+      "implementationEvidence": "code-path inspected; no new browser execution in this crosswalk",
+      "current": {
+        "id": 7,
+        "name": "Audio Split",
+        "category": "Audio Reactive",
+        "sourceStatus": "OBSERVED_LOCAL_RESOURCE",
+        "sourceEvidence": "docs/research/video-catalog-evaluation.json",
+        "candidateOnly": false,
+        "openPlayAvailable": true,
+        "referenceRuntimeVerified": false,
+        "referenceAvailability": "manifest declaration; active menu unverified",
+        "implementationStatus": "original-independent-WebGL2",
+        "contract": "Audio level creates repeated horizontal source bands with alternating horizontal displacement; silence is unchanged.",
+        "parameterStatus": "independent ranges/defaults; vendor parameter labels, mappings and ranges unknown",
+        "default": {
+          "on": false,
+          "value": 0.65,
+          "params": {}
+        },
+        "independentParameters": [
+          {
+            "name": "value",
+            "default": 0.65,
+            "min": 0,
+            "max": 1,
+            "status": "independent amount;0 is exact bypass"
+          }
+        ],
+        "historyPolicy": "Per-slot record/spring state survives parameter changes; no retained video frames allocated.",
+        "colorPolicy": "Normalized display RGB; premultiplied internal filtering, straight-alpha colour operations/output; transparent outside image bounds. Not a vendor colour-space claim."
+      },
+      "sourceFiles": [
+        "prototype/video-effects-catalog.js",
+        "prototype/video-effects-state.js",
+        "prototype/video-effects-shaders.js"
+      ],
+      "featureModelRouting": "VID-002; see modelRouting",
+      "referenceEquivalent": false
+    },
+    {
+      "name": "Audio Fade",
+      "kind": "effect",
+      "manualPage": 19,
+      "manualLabel": "AUDIO FADE",
+      "manualMeaningParaphrase": "Three regions fade separately from the three audio bands.",
+      "status": "semantic_mismatch",
+      "priority": "P1",
+      "comparison": "Current overall level changes alpha of the entire image.",
+      "proposedAcceptance": "Hold level constant while varying one band: measure alpha/luminance in each of three regions and assert only the matching region changes; region layout/transfer unknown.",
+      "acceptanceExecuted": false,
+      "implementationEvidence": "code-path inspected; no new browser execution in this crosswalk",
+      "current": {
+        "id": 8,
+        "name": "Audio Fade",
+        "category": "Audio Reactive",
+        "sourceStatus": "OBSERVED_LOCAL_RESOURCE",
+        "sourceEvidence": "docs/research/video-catalog-evaluation.json",
+        "candidateOnly": false,
+        "openPlayAvailable": true,
+        "referenceRuntimeVerified": false,
+        "referenceAvailability": "manifest declaration; active menu unverified",
+        "implementationStatus": "original-independent-WebGL2",
+        "contract": "Audio level controls source alpha; full amount is transparent at silence and preserves alpha at level1.",
+        "parameterStatus": "independent ranges/defaults; vendor parameter labels, mappings and ranges unknown",
+        "default": {
+          "on": false,
+          "value": 0.65,
+          "params": {}
+        },
+        "independentParameters": [
+          {
+            "name": "value",
+            "default": 0.65,
+            "min": 0,
+            "max": 1,
+            "status": "independent amount;0 is exact bypass"
+          }
+        ],
+        "historyPolicy": "Per-slot record/spring state survives parameter changes; no retained video frames allocated.",
+        "colorPolicy": "Normalized display RGB; premultiplied internal filtering, straight-alpha colour operations/output; transparent outside image bounds. Not a vendor colour-space claim."
+      },
+      "sourceFiles": [
+        "prototype/video-effects-catalog.js",
+        "prototype/video-effects-state.js",
+        "prototype/video-effects-shaders.js"
+      ],
+      "featureModelRouting": "VID-002; see modelRouting",
+      "referenceEquivalent": false
+    },
+    {
+      "name": "Analyzer Blocks",
+      "kind": "effect",
+      "manualPage": 19,
+      "manualLabel": "ANALYZER BLOCKS",
+      "manualMeaningParaphrase": "Image regions switch visibility to form a spectrum display.",
+      "status": "semantic_mismatch",
+      "priority": "P1",
+      "comparison": "Current overlays colored segmented bars over unchanged image instead of switching source-image regions on/off.",
+      "proposedAcceptance": "Use uniquely colored source regions; vary spectral input and assert gated regions contain source pixels or declared off pixels, rather than unrelated colored overlays. Band count not specified here.",
+      "acceptanceExecuted": false,
+      "implementationEvidence": "code-path inspected; no new browser execution in this crosswalk",
+      "current": {
+        "id": 9,
+        "name": "Analyzer Blocks",
+        "category": "Analyzer",
+        "sourceStatus": "OBSERVED_LOCAL_RESOURCE",
+        "sourceEvidence": "docs/research/video-catalog-evaluation.json",
+        "candidateOnly": false,
+        "openPlayAvailable": true,
+        "referenceRuntimeVerified": false,
+        "referenceAvailability": "manifest declaration; active menu unverified",
+        "implementationStatus": "original-independent-WebGL2",
+        "contract": "Overlay three segmented amplitude columns for bass/mid/treble. These are supplied band levels, not a claimed FFT.",
+        "parameterStatus": "independent ranges/defaults; vendor parameter labels, mappings and ranges unknown",
+        "default": {
+          "on": false,
+          "value": 0.65,
+          "params": {}
+        },
+        "independentParameters": [
+          {
+            "name": "value",
+            "default": 0.65,
+            "min": 0,
+            "max": 1,
+            "status": "independent amount;0 is exact bypass"
+          }
+        ],
+        "historyPolicy": "Per-slot record/spring state survives parameter changes; no retained video frames allocated.",
+        "colorPolicy": "Normalized display RGB; premultiplied internal filtering, straight-alpha colour operations/output; transparent outside image bounds. Not a vendor colour-space claim."
+      },
+      "sourceFiles": [
+        "prototype/video-effects-catalog.js",
+        "prototype/video-effects-state.js",
+        "prototype/video-effects-shaders.js"
+      ],
+      "featureModelRouting": "VID-002; see modelRouting",
+      "referenceEquivalent": false
+    },
+    {
+      "name": "Analyzer Image",
+      "kind": "effect",
+      "manualPage": 19,
+      "manualLabel": "ANALYZER IMAGE",
+      "manualMeaningParaphrase": "Image columns form a spectrum display.",
+      "status": "broadly_consistent",
+      "priority": null,
+      "comparison": "Current three band-height image masks fit the broad description; column count, range and spectral detail remain unknown.",
+      "proposedAcceptance": "Use source-coded columns and isolated bands to verify column visibility follows actual spectrum; do not infer an exact column count from this prose.",
+      "acceptanceExecuted": false,
+      "implementationEvidence": "code-path inspected; no new browser execution in this crosswalk",
+      "current": {
+        "id": 10,
+        "name": "Analyzer Image",
+        "category": "Analyzer",
+        "sourceStatus": "OBSERVED_LOCAL_RESOURCE",
+        "sourceEvidence": "docs/research/video-catalog-evaluation.json",
+        "candidateOnly": false,
+        "openPlayAvailable": true,
+        "referenceRuntimeVerified": false,
+        "referenceAvailability": "manifest declaration; active menu unverified",
+        "implementationStatus": "original-independent-WebGL2",
+        "contract": "Clip three image columns to heights supplied by bass/mid/treble; amount blends their alpha mask.",
+        "parameterStatus": "independent ranges/defaults; vendor parameter labels, mappings and ranges unknown",
+        "default": {
+          "on": false,
+          "value": 0.65,
+          "params": {}
+        },
+        "independentParameters": [
+          {
+            "name": "value",
+            "default": 0.65,
+            "min": 0,
+            "max": 1,
+            "status": "independent amount;0 is exact bypass"
+          }
+        ],
+        "historyPolicy": "Per-slot record/spring state survives parameter changes; no retained video frames allocated.",
+        "colorPolicy": "Normalized display RGB; premultiplied internal filtering, straight-alpha colour operations/output; transparent outside image bounds. Not a vendor colour-space claim."
+      },
+      "sourceFiles": [
+        "prototype/video-effects-catalog.js",
+        "prototype/video-effects-state.js",
+        "prototype/video-effects-shaders.js"
+      ],
+      "featureModelRouting": "VID-002; see modelRouting",
+      "referenceEquivalent": false
+    },
+    {
+      "name": "Record Rotate",
+      "kind": "effect",
+      "manualPage": 20,
+      "manualLabel": "RECORD ROTATE",
+      "manualMeaningParaphrase": "Image rotation follows record motion.",
+      "status": "broadly_consistent",
+      "priority": null,
+      "comparison": "Signed position/rate rotation is conceptually compatible; exact scale and reset behavior unknown.",
+      "proposedAcceptance": "Advance, stop and reverse record position with an asymmetric marker; confirm signed rotation and stop hold without claiming vendor degrees/revolution.",
+      "acceptanceExecuted": false,
+      "implementationEvidence": "code-path inspected; no new browser execution in this crosswalk",
+      "current": {
+        "id": 11,
+        "name": "Record Rotate",
+        "category": "Record",
+        "sourceStatus": "OBSERVED_LOCAL_RESOURCE",
+        "sourceEvidence": "docs/research/video-catalog-evaluation.json",
+        "candidateOnly": false,
+        "openPlayAvailable": true,
+        "referenceRuntimeVerified": false,
+        "referenceAvailability": "manifest declaration; active menu unverified",
+        "implementationStatus": "original-independent-WebGL2",
+        "contract": "Integrate signed context.rate to rotate the image; context.position overrides integration. Stopped rate holds angle; reduced motion disables rotation.",
+        "parameterStatus": "independent ranges/defaults; vendor parameter labels, mappings and ranges unknown",
+        "default": {
+          "on": false,
+          "value": 0.65,
+          "params": {
+            "turnsPerSecond": 0.25
+          }
+        },
+        "independentParameters": [
+          {
+            "name": "value",
+            "default": 0.65,
+            "min": 0,
+            "max": 1,
+            "status": "independent amount;0 is exact bypass"
+          },
+          {
+            "name": "turnsPerSecond",
+            "default": 0.25,
+            "min": -4,
+            "max": 4,
+            "status": "independently designed"
+          }
+        ],
+        "historyPolicy": "Per-slot record/spring state survives parameter changes; no retained video frames allocated.",
+        "colorPolicy": "Normalized display RGB; premultiplied internal filtering, straight-alpha colour operations/output; transparent outside image bounds. Not a vendor colour-space claim."
+      },
+      "sourceFiles": [
+        "prototype/video-effects-catalog.js",
+        "prototype/video-effects-state.js",
+        "prototype/video-effects-shaders.js"
+      ],
+      "featureModelRouting": "VID-002; see modelRouting",
+      "referenceEquivalent": false
+    },
+    {
+      "name": "Center Fade",
+      "kind": "effect",
+      "manualPage": 20,
+      "manualLabel": "CENTER FADE",
+      "manualMeaningParaphrase": "Fade spatially toward the center.",
+      "status": "possible_mismatch",
+      "priority": "P2",
+      "comparison": "Current radial vignette fades outer pixels and additionally multiplies by transport speed; manual places this in Transform rather than Record. Wording does not uniquely resolve fade polarity.",
+      "proposedAcceptance": "Compare center/border alpha at several amounts while holding the source static; isolate rate changes. Determine center direction and rate independence from reference before locking an exact expected mask.",
+      "acceptanceExecuted": false,
+      "implementationEvidence": "code-path inspected; no new browser execution in this crosswalk",
+      "current": {
+        "id": 12,
+        "name": "Center Fade",
+        "category": "Record",
+        "sourceStatus": "OBSERVED_LOCAL_RESOURCE",
+        "sourceEvidence": "docs/research/video-catalog-evaluation.json",
+        "candidateOnly": false,
+        "openPlayAvailable": true,
+        "referenceRuntimeVerified": false,
+        "referenceAvailability": "manifest declaration; active menu unverified",
+        "implementationStatus": "original-independent-WebGL2",
+        "contract": "Radial alpha vignette with brightness/extent scaled by absolute transport rate; complement behaviour is an independent design.",
+        "parameterStatus": "independent ranges/defaults; vendor parameter labels, mappings and ranges unknown",
+        "default": {
+          "on": false,
+          "value": 0.65,
+          "params": {}
+        },
+        "independentParameters": [
+          {
+            "name": "value",
+            "default": 0.65,
+            "min": 0,
+            "max": 1,
+            "status": "independent amount;0 is exact bypass"
+          }
+        ],
+        "historyPolicy": "Per-slot record/spring state survives parameter changes; no retained video frames allocated.",
+        "colorPolicy": "Normalized display RGB; premultiplied internal filtering, straight-alpha colour operations/output; transparent outside image bounds. Not a vendor colour-space claim."
+      },
+      "sourceFiles": [
+        "prototype/video-effects-catalog.js",
+        "prototype/video-effects-state.js",
+        "prototype/video-effects-shaders.js"
+      ],
+      "featureModelRouting": "VID-002; see modelRouting",
+      "referenceEquivalent": false
+    },
+    {
+      "name": "Record Fade",
+      "kind": "effect",
+      "manualPage": 20,
+      "manualLabel": "RECORD FADE",
+      "manualMeaningParaphrase": "Image fade follows record speed.",
+      "status": "broadly_consistent",
+      "priority": null,
+      "comparison": "Current absolute-rate alpha mapping fits the broad statement; direction, scale and stopped behavior are not specified by manual.",
+      "proposedAcceptance": "Sweep signed rate on a fixed patch and measure fade; independently declare direction symmetry and zero-rate behavior.",
+      "acceptanceExecuted": false,
+      "implementationEvidence": "code-path inspected; no new browser execution in this crosswalk",
+      "current": {
+        "id": 13,
+        "name": "Record Fade",
+        "category": "Record",
+        "sourceStatus": "OBSERVED_LOCAL_RESOURCE",
+        "sourceEvidence": "docs/research/video-catalog-evaluation.json",
+        "candidateOnly": false,
+        "openPlayAvailable": true,
+        "referenceRuntimeVerified": false,
+        "referenceAvailability": "manifest declaration; active menu unverified",
+        "implementationStatus": "original-independent-WebGL2",
+        "contract": "Absolute transport rate controls source alpha; stopped rate fades out, equal forward/reverse magnitudes match.",
+        "parameterStatus": "independent ranges/defaults; vendor parameter labels, mappings and ranges unknown",
+        "default": {
+          "on": false,
+          "value": 0.65,
+          "params": {}
+        },
+        "independentParameters": [
+          {
+            "name": "value",
+            "default": 0.65,
+            "min": 0,
+            "max": 1,
+            "status": "independent amount;0 is exact bypass"
+          }
+        ],
+        "historyPolicy": "Per-slot record/spring state survives parameter changes; no retained video frames allocated.",
+        "colorPolicy": "Normalized display RGB; premultiplied internal filtering, straight-alpha colour operations/output; transparent outside image bounds. Not a vendor colour-space claim."
+      },
+      "sourceFiles": [
+        "prototype/video-effects-catalog.js",
+        "prototype/video-effects-state.js",
+        "prototype/video-effects-shaders.js"
+      ],
+      "featureModelRouting": "VID-002; see modelRouting",
+      "referenceEquivalent": false
+    },
+    {
+      "name": "Bass Blur",
+      "kind": "effect",
+      "manualPage": 19,
+      "manualLabel": "BASS BLUR",
+      "manualMeaningParaphrase": "Blur strength responds to bass.",
+      "status": "broadly_consistent",
+      "priority": null,
+      "comparison": "Current bass-only spatial blur matches the documented dependency, not an exact kernel.",
+      "proposedAcceptance": "Measure edge-spread response to bass while keeping mid/treble/level constant; wrong bands must not change blur.",
+      "acceptanceExecuted": false,
+      "implementationEvidence": "code-path inspected; no new browser execution in this crosswalk",
+      "current": {
+        "id": 14,
+        "name": "Bass Blur",
+        "category": "Audio Reactive",
+        "sourceStatus": "OBSERVED_LOCAL_RESOURCE",
+        "sourceEvidence": "docs/research/video-catalog-evaluation.json",
+        "candidateOnly": false,
+        "openPlayAvailable": true,
+        "referenceRuntimeVerified": false,
+        "referenceAvailability": "manifest declaration; active menu unverified",
+        "implementationStatus": "original-independent-WebGL2",
+        "contract": "Original nine-point Gaussian spatial blur radius follows bass amplitude only.",
+        "parameterStatus": "independent ranges/defaults; vendor parameter labels, mappings and ranges unknown",
+        "default": {
+          "on": false,
+          "value": 0.65,
+          "params": {}
+        },
+        "independentParameters": [
+          {
+            "name": "value",
+            "default": 0.65,
+            "min": 0,
+            "max": 1,
+            "status": "independent amount;0 is exact bypass"
+          }
+        ],
+        "historyPolicy": "Per-slot record/spring state survives parameter changes; no retained video frames allocated.",
+        "colorPolicy": "Normalized display RGB; premultiplied internal filtering, straight-alpha colour operations/output; transparent outside image bounds. Not a vendor colour-space claim."
+      },
+      "sourceFiles": [
+        "prototype/video-effects-catalog.js",
+        "prototype/video-effects-state.js",
+        "prototype/video-effects-shaders.js"
+      ],
+      "featureModelRouting": "VID-002; see modelRouting",
+      "referenceEquivalent": false
+    },
+    {
+      "name": "Bass Zoom",
+      "kind": "effect",
+      "manualPage": 19,
+      "manualLabel": "BASS ZOOM",
+      "manualMeaningParaphrase": "Image zoom responds to bass.",
+      "status": "broadly_consistent",
+      "priority": null,
+      "comparison": "Current bass-only zoom matches the broad dependency.",
+      "proposedAcceptance": "Measure marker spacing under isolated bass versus isolated treble; exact zoom gain remains unknown.",
+      "acceptanceExecuted": false,
+      "implementationEvidence": "code-path inspected; no new browser execution in this crosswalk",
+      "current": {
+        "id": 15,
+        "name": "Bass Zoom",
+        "category": "Audio Reactive",
+        "sourceStatus": "OBSERVED_LOCAL_RESOURCE",
+        "sourceEvidence": "docs/research/video-catalog-evaluation.json",
+        "candidateOnly": false,
+        "openPlayAvailable": true,
+        "referenceRuntimeVerified": false,
+        "referenceAvailability": "manifest declaration; active menu unverified",
+        "implementationStatus": "original-independent-WebGL2",
+        "contract": "Centered image zoom follows bass amplitude only.",
+        "parameterStatus": "independent ranges/defaults; vendor parameter labels, mappings and ranges unknown",
+        "default": {
+          "on": false,
+          "value": 0.65,
+          "params": {}
+        },
+        "independentParameters": [
+          {
+            "name": "value",
+            "default": 0.65,
+            "min": 0,
+            "max": 1,
+            "status": "independent amount;0 is exact bypass"
+          }
+        ],
+        "historyPolicy": "Per-slot record/spring state survives parameter changes; no retained video frames allocated.",
+        "colorPolicy": "Normalized display RGB; premultiplied internal filtering, straight-alpha colour operations/output; transparent outside image bounds. Not a vendor colour-space claim."
+      },
+      "sourceFiles": [
+        "prototype/video-effects-catalog.js",
+        "prototype/video-effects-state.js",
+        "prototype/video-effects-shaders.js"
+      ],
+      "featureModelRouting": "VID-002; see modelRouting",
+      "referenceEquivalent": false
+    },
+    {
+      "name": "Treble Blur",
+      "kind": "effect",
+      "manualPage": 19,
+      "manualLabel": "TREBLE BLUR",
+      "manualMeaningParaphrase": "Blur strength responds to high frequencies.",
+      "status": "broadly_consistent",
+      "priority": null,
+      "comparison": "Current treble-only blur matches dependency.",
+      "proposedAcceptance": "Measure edge-spread response to isolated treble while holding other inputs fixed.",
+      "acceptanceExecuted": false,
+      "implementationEvidence": "code-path inspected; no new browser execution in this crosswalk",
+      "current": {
+        "id": 16,
+        "name": "Treble Blur",
+        "category": "Audio Reactive",
+        "sourceStatus": "OBSERVED_LOCAL_RESOURCE",
+        "sourceEvidence": "docs/research/video-catalog-evaluation.json",
+        "candidateOnly": false,
+        "openPlayAvailable": true,
+        "referenceRuntimeVerified": false,
+        "referenceAvailability": "manifest declaration; active menu unverified",
+        "implementationStatus": "original-independent-WebGL2",
+        "contract": "Original nine-point Gaussian spatial blur radius follows treble amplitude only.",
+        "parameterStatus": "independent ranges/defaults; vendor parameter labels, mappings and ranges unknown",
+        "default": {
+          "on": false,
+          "value": 0.65,
+          "params": {}
+        },
+        "independentParameters": [
+          {
+            "name": "value",
+            "default": 0.65,
+            "min": 0,
+            "max": 1,
+            "status": "independent amount;0 is exact bypass"
+          }
+        ],
+        "historyPolicy": "Per-slot record/spring state survives parameter changes; no retained video frames allocated.",
+        "colorPolicy": "Normalized display RGB; premultiplied internal filtering, straight-alpha colour operations/output; transparent outside image bounds. Not a vendor colour-space claim."
+      },
+      "sourceFiles": [
+        "prototype/video-effects-catalog.js",
+        "prototype/video-effects-state.js",
+        "prototype/video-effects-shaders.js"
+      ],
+      "featureModelRouting": "VID-002; see modelRouting",
+      "referenceEquivalent": false
+    },
+    {
+      "name": "Treble Zoom",
+      "kind": "effect",
+      "manualPage": 19,
+      "manualLabel": "TREBLE ZOOM",
+      "manualMeaningParaphrase": "Image zoom responds to high frequencies.",
+      "status": "broadly_consistent",
+      "priority": null,
+      "comparison": "Current treble-only zoom matches dependency.",
+      "proposedAcceptance": "Measure marker spacing under isolated treble; bass-only input must not change zoom.",
+      "acceptanceExecuted": false,
+      "implementationEvidence": "code-path inspected; no new browser execution in this crosswalk",
+      "current": {
+        "id": 17,
+        "name": "Treble Zoom",
+        "category": "Audio Reactive",
+        "sourceStatus": "OBSERVED_LOCAL_RESOURCE",
+        "sourceEvidence": "docs/research/video-catalog-evaluation.json",
+        "candidateOnly": false,
+        "openPlayAvailable": true,
+        "referenceRuntimeVerified": false,
+        "referenceAvailability": "manifest declaration; active menu unverified",
+        "implementationStatus": "original-independent-WebGL2",
+        "contract": "Centered image zoom follows treble amplitude only.",
+        "parameterStatus": "independent ranges/defaults; vendor parameter labels, mappings and ranges unknown",
+        "default": {
+          "on": false,
+          "value": 0.65,
+          "params": {}
+        },
+        "independentParameters": [
+          {
+            "name": "value",
+            "default": 0.65,
+            "min": 0,
+            "max": 1,
+            "status": "independent amount;0 is exact bypass"
+          }
+        ],
+        "historyPolicy": "Per-slot record/spring state survives parameter changes; no retained video frames allocated.",
+        "colorPolicy": "Normalized display RGB; premultiplied internal filtering, straight-alpha colour operations/output; transparent outside image bounds. Not a vendor colour-space claim."
+      },
+      "sourceFiles": [
+        "prototype/video-effects-catalog.js",
+        "prototype/video-effects-state.js",
+        "prototype/video-effects-shaders.js"
+      ],
+      "featureModelRouting": "VID-002; see modelRouting",
+      "referenceEquivalent": false
+    },
+    {
+      "name": "RGB Eq",
+      "kind": "effect",
+      "manualPage": 19,
+      "manualLabel": "RGB EQ",
+      "manualMeaningParaphrase": "Hardware EQ controls drive red, green and blue channels.",
+      "status": "integration_gap",
+      "priority": "P1",
+      "comparison": "Current independent manual RGB parameters are not bound to hardware/channel EQ knobs. The helper context has no EQ-control vector.",
+      "proposedAcceptance": "With held source/audio, change each actual EQ knob independently and assert its mapped RGB channel changes; spectral energy changes alone do not prove hardware-control binding.",
+      "acceptanceExecuted": false,
+      "implementationEvidence": "code-path inspected; no new browser execution in this crosswalk",
+      "current": {
+        "id": 18,
+        "name": "RGB Eq",
+        "category": "TTM 57SL Controls",
+        "sourceStatus": "OBSERVED_LOCAL_RESOURCE",
+        "sourceEvidence": "docs/research/video-catalog-evaluation.json",
+        "candidateOnly": false,
+        "openPlayAvailable": true,
+        "referenceRuntimeVerified": false,
+        "referenceAvailability": "manifest declaration; active menu unverified",
+        "implementationStatus": "original-independent-WebGL2",
+        "contract": "Independent manual red/green/blue gain in normalized display RGB. TTM57SL mapping is unknown.",
+        "parameterStatus": "independent ranges/defaults; vendor parameter labels, mappings and ranges unknown",
+        "default": {
+          "on": false,
+          "value": 0.65,
+          "params": {
+            "red": 1.3,
+            "green": 1,
+            "blue": 0.7
+          }
+        },
+        "independentParameters": [
+          {
+            "name": "value",
+            "default": 0.65,
+            "min": 0,
+            "max": 1,
+            "status": "independent amount;0 is exact bypass"
+          },
+          {
+            "name": "red",
+            "default": 1.3,
+            "min": 0,
+            "max": 3,
+            "status": "independently designed"
+          },
+          {
+            "name": "green",
+            "default": 1,
+            "min": 0,
+            "max": 3,
+            "status": "independently designed"
+          },
+          {
+            "name": "blue",
+            "default": 0.7,
+            "min": 0,
+            "max": 3,
+            "status": "independently designed"
+          }
+        ],
+        "historyPolicy": "Per-slot record/spring state survives parameter changes; no retained video frames allocated.",
+        "colorPolicy": "Normalized display RGB; premultiplied internal filtering, straight-alpha colour operations/output; transparent outside image bounds. Not a vendor colour-space claim."
+      },
+      "sourceFiles": [
+        "prototype/video-effects-catalog.js",
+        "prototype/video-effects-state.js",
+        "prototype/video-effects-shaders.js"
+      ],
+      "featureModelRouting": "VID-002; see modelRouting",
+      "referenceEquivalent": false
+    },
+    {
+      "name": "Audio RGB",
+      "kind": "effect",
+      "manualPage": 19,
+      "manualLabel": "AUDIO RGB",
+      "manualMeaningParaphrase": "Three frequency bands drive the RGB channels.",
+      "status": "broadly_consistent",
+      "priority": null,
+      "comparison": "Current per-band RGB gain matches the dependency; exact sign/gain/mapping unresolved.",
+      "proposedAcceptance": "Hold source and level; independently sweep bass/mid/treble and measure corresponding channel changes.",
+      "acceptanceExecuted": false,
+      "implementationEvidence": "code-path inspected; no new browser execution in this crosswalk",
+      "current": {
+        "id": 19,
+        "name": "Audio RGB",
+        "category": "Audio Reactive",
+        "sourceStatus": "OBSERVED_LOCAL_RESOURCE",
+        "sourceEvidence": "docs/research/video-catalog-evaluation.json",
+        "candidateOnly": false,
+        "openPlayAvailable": true,
+        "referenceRuntimeVerified": false,
+        "referenceAvailability": "manifest declaration; active menu unverified",
+        "implementationStatus": "original-independent-WebGL2",
+        "contract": "Bass/mid/treble independently raise red/green/blue gain; silence preserves input.",
+        "parameterStatus": "independent ranges/defaults; vendor parameter labels, mappings and ranges unknown",
+        "default": {
+          "on": false,
+          "value": 0.65,
+          "params": {}
+        },
+        "independentParameters": [
+          {
+            "name": "value",
+            "default": 0.65,
+            "min": 0,
+            "max": 1,
+            "status": "independent amount;0 is exact bypass"
+          }
+        ],
+        "historyPolicy": "Per-slot record/spring state survives parameter changes; no retained video frames allocated.",
+        "colorPolicy": "Normalized display RGB; premultiplied internal filtering, straight-alpha colour operations/output; transparent outside image bounds. Not a vendor colour-space claim."
+      },
+      "sourceFiles": [
+        "prototype/video-effects-catalog.js",
+        "prototype/video-effects-state.js",
+        "prototype/video-effects-shaders.js"
+      ],
+      "featureModelRouting": "VID-002; see modelRouting",
+      "referenceEquivalent": false
+    },
+    {
+      "name": "CSL Eq",
+      "kind": "effect",
+      "manualPage": 19,
+      "manualLabel": "CSL EQ",
+      "manualMeaningParaphrase": "Hardware EQ drives contrast, saturation and luminance.",
+      "status": "semantic_mismatch",
+      "priority": "P1",
+      "comparison": "Current manual hue/saturation/luminance controls substitute hue for contrast and have no hardware EQ binding.",
+      "proposedAcceptance": "Use gray contrast patches and hue patches; at least one declared mapped EQ control must change contrast rather than merely rotating hue, with controls for saturation/luminance. Exact knob-to-component assignment needs evidence.",
+      "acceptanceExecuted": false,
+      "implementationEvidence": "code-path inspected; no new browser execution in this crosswalk",
+      "current": {
+        "id": 20,
+        "name": "CSL Eq",
+        "category": "TTM 57SL Controls",
+        "sourceStatus": "OBSERVED_LOCAL_RESOURCE",
+        "sourceEvidence": "docs/research/video-catalog-evaluation.json",
+        "candidateOnly": false,
+        "openPlayAvailable": true,
+        "referenceRuntimeVerified": false,
+        "referenceAvailability": "manifest declaration; active menu unverified",
+        "implementationStatus": "original-independent-WebGL2",
+        "contract": "Independent hue rotation, chroma scaling and luminance offset; no vendor colour-space or hardware control mapping is inferred.",
+        "parameterStatus": "independent ranges/defaults; vendor parameter labels, mappings and ranges unknown",
+        "default": {
+          "on": false,
+          "value": 0.65,
+          "params": {
+            "hue": 45,
+            "saturation": 1.25,
+            "luminance": 0.04
+          }
+        },
+        "independentParameters": [
+          {
+            "name": "value",
+            "default": 0.65,
+            "min": 0,
+            "max": 1,
+            "status": "independent amount;0 is exact bypass"
+          },
+          {
+            "name": "hue",
+            "default": 45,
+            "min": -360,
+            "max": 360,
+            "unit": "degrees; Color Isolator uses0..360",
+            "status": "independently designed"
+          },
+          {
+            "name": "saturation",
+            "default": 1.25,
+            "min": 0,
+            "max": 3,
+            "status": "independently designed"
+          },
+          {
+            "name": "luminance",
+            "default": 0.04,
+            "min": -1,
+            "max": 1,
+            "status": "independently designed"
+          }
+        ],
+        "historyPolicy": "Per-slot record/spring state survives parameter changes; no retained video frames allocated.",
+        "colorPolicy": "Normalized display RGB; premultiplied internal filtering, straight-alpha colour operations/output; transparent outside image bounds. Not a vendor colour-space claim."
+      },
+      "sourceFiles": [
+        "prototype/video-effects-catalog.js",
+        "prototype/video-effects-state.js",
+        "prototype/video-effects-shaders.js"
+      ],
+      "featureModelRouting": "VID-002; see modelRouting",
+      "referenceEquivalent": false
+    },
+    {
+      "name": "Audio CSL",
+      "kind": "effect",
+      "manualPage": 19,
+      "manualLabel": "AUDIO CSL",
+      "manualMeaningParaphrase": "Three frequency bands drive contrast, saturation and luminance.",
+      "status": "semantic_mismatch",
+      "priority": "P1",
+      "comparison": "Current bass rotates hue rather than changing contrast. Mid/treble broadly map to saturation/luminance.",
+      "proposedAcceptance": "Hold level and sweep bands independently on neutral light/dark patches: verify a genuine contrast response, plus saturation/luminance responses. Bass\u2192contrast is a proposed independent mapping, not an exact routing proof.",
+      "acceptanceExecuted": false,
+      "implementationEvidence": "code-path inspected; no new browser execution in this crosswalk",
+      "current": {
+        "id": 21,
+        "name": "Audio CSL",
+        "category": "Audio Reactive",
+        "sourceStatus": "OBSERVED_LOCAL_RESOURCE",
+        "sourceEvidence": "docs/research/video-catalog-evaluation.json",
+        "candidateOnly": false,
+        "openPlayAvailable": true,
+        "referenceRuntimeVerified": false,
+        "referenceAvailability": "manifest declaration; active menu unverified",
+        "implementationStatus": "original-independent-WebGL2",
+        "contract": "Bass rotates hue, mid raises chroma and treble raises luminance; silence preserves input.",
+        "parameterStatus": "independent ranges/defaults; vendor parameter labels, mappings and ranges unknown",
+        "default": {
+          "on": false,
+          "value": 0.65,
+          "params": {}
+        },
+        "independentParameters": [
+          {
+            "name": "value",
+            "default": 0.65,
+            "min": 0,
+            "max": 1,
+            "status": "independent amount;0 is exact bypass"
+          }
+        ],
+        "historyPolicy": "Per-slot record/spring state survives parameter changes; no retained video frames allocated.",
+        "colorPolicy": "Normalized display RGB; premultiplied internal filtering, straight-alpha colour operations/output; transparent outside image bounds. Not a vendor colour-space claim."
+      },
+      "sourceFiles": [
+        "prototype/video-effects-catalog.js",
+        "prototype/video-effects-state.js",
+        "prototype/video-effects-shaders.js"
+      ],
+      "featureModelRouting": "VID-002; see modelRouting",
+      "referenceEquivalent": false
+    },
+    {
+      "name": "Brightness",
+      "kind": "effect",
+      "manualPage": 19,
+      "manualLabel": "BRIGHTNESS",
+      "manualMeaningParaphrase": "Increase image brightness.",
+      "status": "semantic_mismatch",
+      "priority": "P1",
+      "comparison": "Current positive amount darkens at upfader0, is identity at upfader0.5 and brightens at1; manual describes a lighting effect without this dependency.",
+      "proposedAcceptance": "On gray patches, increasing effect amount must brighten at a held neutral upfader; independently vary upfader to expose any extra coupling, without inventing a vendor exposure curve.",
+      "acceptanceExecuted": false,
+      "implementationEvidence": "code-path inspected; no new browser execution in this crosswalk",
+      "current": {
+        "id": 22,
+        "name": "Brightness",
+        "category": "Upfader",
+        "sourceStatus": "OBSERVED_LOCAL_RESOURCE",
+        "sourceEvidence": "docs/research/video-catalog-evaluation.json",
+        "candidateOnly": false,
+        "openPlayAvailable": true,
+        "referenceRuntimeVerified": false,
+        "referenceAvailability": "manifest declaration; active menu unverified",
+        "implementationStatus": "original-independent-WebGL2",
+        "contract": "Upfader-centred additive display-RGB brightness, clamped to0..1; exact reference upfader response is unknown.",
+        "parameterStatus": "independent ranges/defaults; vendor parameter labels, mappings and ranges unknown",
+        "default": {
+          "on": false,
+          "value": 0.65,
+          "params": {
+            "exposure": 1
+          }
+        },
+        "independentParameters": [
+          {
+            "name": "value",
+            "default": 0.65,
+            "min": 0,
+            "max": 1,
+            "status": "independent amount;0 is exact bypass"
+          },
+          {
+            "name": "exposure",
+            "default": 1,
+            "min": 0,
+            "max": 2,
+            "status": "independently designed"
+          }
+        ],
+        "historyPolicy": "Per-slot record/spring state survives parameter changes; no retained video frames allocated.",
+        "colorPolicy": "Normalized display RGB; premultiplied internal filtering, straight-alpha colour operations/output; transparent outside image bounds. Not a vendor colour-space claim."
+      },
+      "sourceFiles": [
+        "prototype/video-effects-catalog.js",
+        "prototype/video-effects-state.js",
+        "prototype/video-effects-shaders.js"
+      ],
+      "featureModelRouting": "VID-002; see modelRouting",
+      "referenceEquivalent": false
+    },
+    {
+      "name": "Smudge",
+      "kind": "effect",
+      "manualPage": 20,
+      "manualLabel": "SMUDGE",
+      "manualMeaningParaphrase": "Blend image edges inward toward center.",
+      "status": "semantic_mismatch",
+      "priority": "P1",
+      "comparison": "Current spatial samples follow one global angle; they do not converge from all edges toward center.",
+      "proposedAcceptance": "Place separate markers on all four borders and track smear directions; each must point inward under a declared radial kernel, center must not inherit an arbitrary global direction.",
+      "acceptanceExecuted": false,
+      "implementationEvidence": "code-path inspected; no new browser execution in this crosswalk",
+      "current": {
+        "id": 23,
+        "name": "Smudge",
+        "category": "Image",
+        "sourceStatus": "OBSERVED_LOCAL_RESOURCE",
+        "sourceEvidence": "docs/research/video-catalog-evaluation.json",
+        "candidateOnly": false,
+        "openPlayAvailable": true,
+        "referenceRuntimeVerified": false,
+        "referenceAvailability": "manifest declaration; active menu unverified",
+        "implementationStatus": "original-independent-WebGL2",
+        "contract": "Nine weighted one-sided spatial samples smear in a declared direction; no temporal history implied.",
+        "parameterStatus": "independent ranges/defaults; vendor parameter labels, mappings and ranges unknown",
+        "default": {
+          "on": false,
+          "value": 0.65,
+          "params": {
+            "angle": 0
+          }
+        },
+        "independentParameters": [
+          {
+            "name": "value",
+            "default": 0.65,
+            "min": 0,
+            "max": 1,
+            "status": "independent amount;0 is exact bypass"
+          },
+          {
+            "name": "angle",
+            "default": 0,
+            "min": -360,
+            "max": 360,
+            "unit": "degrees",
+            "status": "independently designed"
+          }
+        ],
+        "historyPolicy": "Per-slot record/spring state survives parameter changes; no retained video frames allocated.",
+        "colorPolicy": "Normalized display RGB; premultiplied internal filtering, straight-alpha colour operations/output; transparent outside image bounds. Not a vendor colour-space claim."
+      },
+      "sourceFiles": [
+        "prototype/video-effects-catalog.js",
+        "prototype/video-effects-state.js",
+        "prototype/video-effects-shaders.js"
+      ],
+      "featureModelRouting": "VID-002; see modelRouting",
+      "referenceEquivalent": false
+    },
+    {
+      "name": "Mirror",
+      "kind": "effect",
+      "manualPage": 20,
+      "manualLabel": "MIRROR",
+      "manualMeaningParaphrase": "Reflect one side of a divided image.",
+      "status": "broadly_consistent",
+      "priority": null,
+      "comparison": "Current selectable horizontal/vertical/both mirroring includes the described behavior; exact allowed axes unknown.",
+      "proposedAcceptance": "Use asymmetric quadrant markers and verify one side is reflected, with straight-alpha edges retained.",
+      "acceptanceExecuted": false,
+      "implementationEvidence": "code-path inspected; no new browser execution in this crosswalk",
+      "current": {
+        "id": 24,
+        "name": "Mirror",
+        "category": "Split",
+        "sourceStatus": "OBSERVED_LOCAL_RESOURCE",
+        "sourceEvidence": "docs/research/video-catalog-evaluation.json",
+        "candidateOnly": false,
+        "openPlayAvailable": true,
+        "referenceRuntimeVerified": false,
+        "referenceAvailability": "manifest declaration; active menu unverified",
+        "implementationStatus": "original-independent-WebGL2",
+        "contract": "Reflect the left half into the right, upper half into lower, or both, using the independently chosen axis.",
+        "parameterStatus": "independent ranges/defaults; vendor parameter labels, mappings and ranges unknown",
+        "default": {
+          "on": false,
+          "value": 0.65,
+          "params": {
+            "axis": "Horizontal"
+          }
+        },
+        "independentParameters": [
+          {
+            "name": "value",
+            "default": 0.65,
+            "min": 0,
+            "max": 1,
+            "status": "independent amount;0 is exact bypass"
+          },
+          {
+            "name": "axis",
+            "default": "Horizontal",
+            "options": [
+              "Horizontal",
+              "Vertical",
+              "Both"
+            ],
+            "status": "independently designed"
+          }
+        ],
+        "historyPolicy": "Per-slot record/spring state survives parameter changes; no retained video frames allocated.",
+        "colorPolicy": "Normalized display RGB; premultiplied internal filtering, straight-alpha colour operations/output; transparent outside image bounds. Not a vendor colour-space claim."
+      },
+      "sourceFiles": [
+        "prototype/video-effects-catalog.js",
+        "prototype/video-effects-state.js",
+        "prototype/video-effects-shaders.js"
+      ],
+      "featureModelRouting": "VID-002; see modelRouting",
+      "referenceEquivalent": false
+    },
+    {
+      "name": "Kaleidoscope",
+      "kind": "effect",
+      "manualPage": 20,
+      "manualLabel": "KALEIDOSCOPE",
+      "manualMeaningParaphrase": "Create a kaleidoscopic image.",
+      "status": "broadly_consistent",
+      "priority": null,
+      "comparison": "Current reflected polar sectors fit this broad class; sector count and controls unknown.",
+      "proposedAcceptance": "Use asymmetric markers to verify repeated reflected sectors, not merely rotation or recoloring.",
+      "acceptanceExecuted": false,
+      "implementationEvidence": "code-path inspected; no new browser execution in this crosswalk",
+      "current": {
+        "id": 25,
+        "name": "Kaleidoscope",
+        "category": "Split",
+        "sourceStatus": "OBSERVED_LOCAL_RESOURCE",
+        "sourceEvidence": "docs/research/video-catalog-evaluation.json",
+        "candidateOnly": false,
+        "openPlayAvailable": true,
+        "referenceRuntimeVerified": false,
+        "referenceAvailability": "manifest declaration; active menu unverified",
+        "implementationStatus": "original-independent-WebGL2",
+        "contract": "Aspect-correct reflected polar sectors sample source image; sector count is original.",
+        "parameterStatus": "independent ranges/defaults; vendor parameter labels, mappings and ranges unknown",
+        "default": {
+          "on": false,
+          "value": 0.65,
+          "params": {
+            "sectors": 6,
+            "angle": 0
+          }
+        },
+        "independentParameters": [
+          {
+            "name": "value",
+            "default": 0.65,
+            "min": 0,
+            "max": 1,
+            "status": "independent amount;0 is exact bypass"
+          },
+          {
+            "name": "sectors",
+            "default": 6,
+            "min": 2,
+            "max": 24,
+            "step": 1,
+            "status": "independently designed"
+          },
+          {
+            "name": "angle",
+            "default": 0,
+            "min": -360,
+            "max": 360,
+            "unit": "degrees",
+            "status": "independently designed"
+          }
+        ],
+        "historyPolicy": "Per-slot record/spring state survives parameter changes; no retained video frames allocated.",
+        "colorPolicy": "Normalized display RGB; premultiplied internal filtering, straight-alpha colour operations/output; transparent outside image bounds. Not a vendor colour-space claim."
+      },
+      "sourceFiles": [
+        "prototype/video-effects-catalog.js",
+        "prototype/video-effects-state.js",
+        "prototype/video-effects-shaders.js"
+      ],
+      "featureModelRouting": "VID-002; see modelRouting",
+      "referenceEquivalent": false
+    },
+    {
+      "name": "Audio Kaleidoscope",
+      "kind": "effect",
+      "manualPage": 19,
+      "manualLabel": "AUDIO KALEIDOSCOPE",
+      "manualMeaningParaphrase": "Kaleidoscope responds to playing audio.",
+      "status": "broadly_consistent",
+      "priority": null,
+      "comparison": "Current audio-driven sectors and angle broadly fit; exact band ownership not described.",
+      "proposedAcceptance": "Hold source; vary actual audio and verify reflected geometry changes, then silence and Reduced Motion policies separately.",
+      "acceptanceExecuted": false,
+      "implementationEvidence": "code-path inspected; no new browser execution in this crosswalk",
+      "current": {
+        "id": 26,
+        "name": "Audio Kaleidoscope",
+        "category": "Audio Reactive",
+        "sourceStatus": "OBSERVED_LOCAL_RESOURCE",
+        "sourceEvidence": "docs/research/video-catalog-evaluation.json",
+        "candidateOnly": false,
+        "openPlayAvailable": true,
+        "referenceRuntimeVerified": false,
+        "referenceAvailability": "manifest declaration; active menu unverified",
+        "implementationStatus": "original-independent-WebGL2",
+        "contract": "Audio-level-weighted reflected sectors with mid-driven sector count and bass angular displacement; silence is unchanged.",
+        "parameterStatus": "independent ranges/defaults; vendor parameter labels, mappings and ranges unknown",
+        "default": {
+          "on": false,
+          "value": 0.65,
+          "params": {}
+        },
+        "independentParameters": [
+          {
+            "name": "value",
+            "default": 0.65,
+            "min": 0,
+            "max": 1,
+            "status": "independent amount;0 is exact bypass"
+          }
+        ],
+        "historyPolicy": "Per-slot record/spring state survives parameter changes; no retained video frames allocated.",
+        "colorPolicy": "Normalized display RGB; premultiplied internal filtering, straight-alpha colour operations/output; transparent outside image bounds. Not a vendor colour-space claim."
+      },
+      "sourceFiles": [
+        "prototype/video-effects-catalog.js",
+        "prototype/video-effects-state.js",
+        "prototype/video-effects-shaders.js"
+      ],
+      "featureModelRouting": "VID-002; see modelRouting",
+      "referenceEquivalent": false
+    },
+    {
+      "name": "Saturation",
+      "kind": "effect",
+      "manualPage": 20,
+      "manualLabel": "SATURATION",
+      "manualMeaningParaphrase": "Increase image color intensity.",
+      "status": "direction_mismatch",
+      "priority": "P1",
+      "comparison": "Current default target saturation0 desaturates as positive amount rises; adjustable range can increase but default behavior opposes the manual wording. Manual default/range itself is not specified.",
+      "proposedAcceptance": "On a nonclipped colored patch, a declared positive-increase operation must raise chroma while preserving gray; retain independently labeled desaturation if offered separately.",
+      "acceptanceExecuted": false,
+      "implementationEvidence": "code-path inspected; no new browser execution in this crosswalk",
+      "current": {
+        "id": 27,
+        "name": "Saturation",
+        "category": "Image",
+        "sourceStatus": "OBSERVED_LOCAL_RESOURCE",
+        "sourceEvidence": "docs/research/video-catalog-evaluation.json",
+        "candidateOnly": false,
+        "openPlayAvailable": true,
+        "referenceRuntimeVerified": false,
+        "referenceAvailability": "manifest declaration; active menu unverified",
+        "implementationStatus": "original-independent-WebGL2",
+        "contract": "Scale chroma around Rec709-weighted display-RGB luma, blending to the independent target saturation.",
+        "parameterStatus": "independent ranges/defaults; vendor parameter labels, mappings and ranges unknown",
+        "default": {
+          "on": false,
+          "value": 0.65,
+          "params": {
+            "saturation": 0
+          }
+        },
+        "independentParameters": [
+          {
+            "name": "value",
+            "default": 0.65,
+            "min": 0,
+            "max": 1,
+            "status": "independent amount;0 is exact bypass"
+          },
+          {
+            "name": "saturation",
+            "default": 0,
+            "min": 0,
+            "max": 3,
+            "status": "independently designed"
+          }
+        ],
+        "historyPolicy": "Per-slot record/spring state survives parameter changes; no retained video frames allocated.",
+        "colorPolicy": "Normalized display RGB; premultiplied internal filtering, straight-alpha colour operations/output; transparent outside image bounds. Not a vendor colour-space claim."
+      },
+      "sourceFiles": [
+        "prototype/video-effects-catalog.js",
+        "prototype/video-effects-state.js",
+        "prototype/video-effects-shaders.js"
+      ],
+      "featureModelRouting": "VID-002; see modelRouting",
+      "referenceEquivalent": false
+    },
+    {
+      "name": "Contrast",
+      "kind": "effect",
+      "manualPage": 19,
+      "manualLabel": "CONTRAST",
+      "manualMeaningParaphrase": "Alter separation between dark and light.",
+      "status": "broadly_consistent",
+      "priority": null,
+      "comparison": "Current pivot-based contrast scaling fits broad class; exact pivot/curve unknown.",
+      "proposedAcceptance": "Measure separation of two gray patches as effect changes, preserving alpha.",
+      "acceptanceExecuted": false,
+      "implementationEvidence": "code-path inspected; no new browser execution in this crosswalk",
+      "current": {
+        "id": 28,
+        "name": "Contrast",
+        "category": "Image",
+        "sourceStatus": "OBSERVED_LOCAL_RESOURCE",
+        "sourceEvidence": "docs/research/video-catalog-evaluation.json",
+        "candidateOnly": false,
+        "openPlayAvailable": true,
+        "referenceRuntimeVerified": false,
+        "referenceAvailability": "manifest declaration; active menu unverified",
+        "implementationStatus": "original-independent-WebGL2",
+        "contract": "Scale RGB contrast around an independent0.5 pivot with hard clipping.",
+        "parameterStatus": "independent ranges/defaults; vendor parameter labels, mappings and ranges unknown",
+        "default": {
+          "on": false,
+          "value": 0.65,
+          "params": {}
+        },
+        "independentParameters": [
+          {
+            "name": "value",
+            "default": 0.65,
+            "min": 0,
+            "max": 1,
+            "status": "independent amount;0 is exact bypass"
+          }
+        ],
+        "historyPolicy": "Per-slot record/spring state survives parameter changes; no retained video frames allocated.",
+        "colorPolicy": "Normalized display RGB; premultiplied internal filtering, straight-alpha colour operations/output; transparent outside image bounds. Not a vendor colour-space claim."
+      },
+      "sourceFiles": [
+        "prototype/video-effects-catalog.js",
+        "prototype/video-effects-state.js",
+        "prototype/video-effects-shaders.js"
+      ],
+      "featureModelRouting": "VID-002; see modelRouting",
+      "referenceEquivalent": false
+    },
+    {
+      "name": "Gamma",
+      "kind": "effect",
+      "manualPage": 20,
+      "manualLabel": "GAMMA",
+      "manualMeaningParaphrase": "Darken shadow tones.",
+      "status": "direction_mismatch",
+      "priority": "P1",
+      "comparison": "Current positive default gamma3 uses reciprocal exponent and brightens shadows. Existing tests explicitly require that brightening, so they encode the opposite independent contract.",
+      "proposedAcceptance": "On gray ramps, verify a declared shadow-darkening setting reduces dark pixel levels while preserving black/white; exact exponent and parameter polarity remain unknown.",
+      "acceptanceExecuted": false,
+      "implementationEvidence": "code-path inspected; no new browser execution in this crosswalk",
+      "current": {
+        "id": 29,
+        "name": "Gamma",
+        "category": "Image",
+        "sourceStatus": "OBSERVED_LOCAL_RESOURCE",
+        "sourceEvidence": "docs/research/video-catalog-evaluation.json",
+        "candidateOnly": false,
+        "openPlayAvailable": true,
+        "referenceRuntimeVerified": false,
+        "referenceAvailability": "manifest declaration; active menu unverified",
+        "implementationStatus": "original-independent-WebGL2",
+        "contract": "Apply a power curve with independent positive gamma; amount interpolates the exponent from unity.",
+        "parameterStatus": "independent ranges/defaults; vendor parameter labels, mappings and ranges unknown",
+        "default": {
+          "on": false,
+          "value": 0.65,
+          "params": {
+            "gamma": 3
+          }
+        },
+        "independentParameters": [
+          {
+            "name": "value",
+            "default": 0.65,
+            "min": 0,
+            "max": 1,
+            "status": "independent amount;0 is exact bypass"
+          },
+          {
+            "name": "gamma",
+            "default": 3,
+            "min": 0.1,
+            "max": 8,
+            "status": "independently designed"
+          }
+        ],
+        "historyPolicy": "Per-slot record/spring state survives parameter changes; no retained video frames allocated.",
+        "colorPolicy": "Normalized display RGB; premultiplied internal filtering, straight-alpha colour operations/output; transparent outside image bounds. Not a vendor colour-space claim."
+      },
+      "sourceFiles": [
+        "prototype/video-effects-catalog.js",
+        "prototype/video-effects-state.js",
+        "prototype/video-effects-shaders.js"
+      ],
+      "featureModelRouting": "VID-002; see modelRouting",
+      "referenceEquivalent": false
+    },
+    {
+      "name": "Color Isolator",
+      "kind": "effect",
+      "manualPage": 19,
+      "manualLabel": "COLOR ISOLATOR",
+      "manualMeaningParaphrase": "Keep one color while converting others to gray.",
+      "status": "broadly_consistent",
+      "priority": null,
+      "comparison": "Current selected-hue interval and grayscale complement match broad meaning.",
+      "proposedAcceptance": "Test several saturated hue patches plus gray; selected interval stays colored, others become grayscale.",
+      "acceptanceExecuted": false,
+      "implementationEvidence": "code-path inspected; no new browser execution in this crosswalk",
+      "current": {
+        "id": 30,
+        "name": "Color Isolator",
+        "category": "Colour",
+        "sourceStatus": "OBSERVED_LOCAL_RESOURCE",
+        "sourceEvidence": "docs/research/video-catalog-evaluation.json",
+        "candidateOnly": false,
+        "openPlayAvailable": true,
+        "referenceRuntimeVerified": false,
+        "referenceAvailability": "manifest declaration; active menu unverified",
+        "implementationStatus": "original-independent-WebGL2",
+        "contract": "Preserve a chosen hue interval while making other hues grayscale; hue/width/softness are original.",
+        "parameterStatus": "independent ranges/defaults; vendor parameter labels, mappings and ranges unknown",
+        "default": {
+          "on": false,
+          "value": 0.65,
+          "params": {
+            "hue": 0,
+            "width": 0.08,
+            "softness": 0.08
+          }
+        },
+        "independentParameters": [
+          {
+            "name": "value",
+            "default": 0.65,
+            "min": 0,
+            "max": 1,
+            "status": "independent amount;0 is exact bypass"
+          },
+          {
+            "name": "hue",
+            "default": 0,
+            "min": 0,
+            "max": 360,
+            "unit": "degrees; Color Isolator uses0..360",
+            "status": "independently designed"
+          },
+          {
+            "name": "width",
+            "default": 0.08,
+            "min": 0.001,
+            "max": 0.5,
+            "unit": "hue turns",
+            "status": "independently designed"
+          },
+          {
+            "name": "softness",
+            "default": 0.08,
+            "min": 0.001,
+            "max": 0.5,
+            "unit": "normalized threshold; Color Isolator allows.5",
+            "status": "independently designed"
+          }
+        ],
+        "historyPolicy": "Per-slot record/spring state survives parameter changes; no retained video frames allocated.",
+        "colorPolicy": "Normalized display RGB; premultiplied internal filtering, straight-alpha colour operations/output; transparent outside image bounds. Not a vendor colour-space claim."
+      },
+      "sourceFiles": [
+        "prototype/video-effects-catalog.js",
+        "prototype/video-effects-state.js",
+        "prototype/video-effects-shaders.js"
+      ],
+      "featureModelRouting": "VID-002; see modelRouting",
+      "referenceEquivalent": false
+    },
+    {
+      "name": "UV Paint",
+      "kind": "effect",
+      "manualPage": 20,
+      "manualLabel": "UV PAINT",
+      "manualMeaningParaphrase": "Boost saturation/brightness of moderately colorful pixels; others black.",
+      "status": "semantic_mismatch",
+      "priority": "P1",
+      "comparison": "Current neon tint and cyan edge glow retain gray/noncolorful content and do not implement the stated colorfulness gate.",
+      "proposedAcceptance": "Use gray, low-chroma and moderate-chroma patches: gray must become black and eligible color must become bright/saturated; exact threshold and output hue need declared independent choices.",
+      "acceptanceExecuted": false,
+      "implementationEvidence": "code-path inspected; no new browser execution in this crosswalk",
+      "current": {
+        "id": 31,
+        "name": "UV Paint",
+        "category": "Colour",
+        "sourceStatus": "OBSERVED_LOCAL_RESOURCE",
+        "sourceEvidence": "docs/research/video-catalog-evaluation.json",
+        "candidateOnly": false,
+        "openPlayAvailable": true,
+        "referenceRuntimeVerified": false,
+        "referenceAvailability": "manifest declaration; active menu unverified",
+        "implementationStatus": "original-independent-WebGL2",
+        "contract": "Original ultraviolet-inspired dark neon tint with cyan edge glow; this is an original design for an unresolved name.",
+        "parameterStatus": "independent ranges/defaults; vendor parameter labels, mappings and ranges unknown",
+        "default": {
+          "on": false,
+          "value": 0.65,
+          "params": {}
+        },
+        "independentParameters": [
+          {
+            "name": "value",
+            "default": 0.65,
+            "min": 0,
+            "max": 1,
+            "status": "independent amount;0 is exact bypass"
+          }
+        ],
+        "historyPolicy": "Per-slot record/spring state survives parameter changes; no retained video frames allocated.",
+        "colorPolicy": "Normalized display RGB; premultiplied internal filtering, straight-alpha colour operations/output; transparent outside image bounds. Not a vendor colour-space claim."
+      },
+      "sourceFiles": [
+        "prototype/video-effects-catalog.js",
+        "prototype/video-effects-state.js",
+        "prototype/video-effects-shaders.js"
+      ],
+      "featureModelRouting": "VID-002; see modelRouting",
+      "referenceEquivalent": false
+    },
+    {
+      "name": "Anaglyph 3D",
+      "kind": "effect",
+      "manualPage": 19,
+      "manualLabel": "ANAGLYPH 3D",
+      "manualMeaningParaphrase": "Stereoscopic glasses-style color separation.",
+      "status": "broadly_consistent",
+      "priority": null,
+      "comparison": "Opposed red/cyan displacement is consistent with the class; glasses standard/separation unknown.",
+      "proposedAcceptance": "Use a vertical white marker and confirm opposed red/cyan edges with preserved alpha.",
+      "acceptanceExecuted": false,
+      "implementationEvidence": "code-path inspected; no new browser execution in this crosswalk",
+      "current": {
+        "id": 32,
+        "name": "Anaglyph 3D",
+        "category": "Colour",
+        "sourceStatus": "OBSERVED_LOCAL_RESOURCE",
+        "sourceEvidence": "docs/research/video-catalog-evaluation.json",
+        "candidateOnly": false,
+        "openPlayAvailable": true,
+        "referenceRuntimeVerified": false,
+        "referenceAvailability": "manifest declaration; active menu unverified",
+        "implementationStatus": "original-independent-WebGL2",
+        "contract": "Oppositely displaced red and cyan channels; independent separation in output pixels.",
+        "parameterStatus": "independent ranges/defaults; vendor parameter labels, mappings and ranges unknown",
+        "default": {
+          "on": false,
+          "value": 0.65,
+          "params": {
+            "pixels": 12
+          }
+        },
+        "independentParameters": [
+          {
+            "name": "value",
+            "default": 0.65,
+            "min": 0,
+            "max": 1,
+            "status": "independent amount;0 is exact bypass"
+          },
+          {
+            "name": "pixels",
+            "default": 12,
+            "min": 0,
+            "max": 64,
+            "status": "independently designed"
+          }
+        ],
+        "historyPolicy": "Per-slot record/spring state survives parameter changes; no retained video frames allocated.",
+        "colorPolicy": "Normalized display RGB; premultiplied internal filtering, straight-alpha colour operations/output; transparent outside image bounds. Not a vendor colour-space claim."
+      },
+      "sourceFiles": [
+        "prototype/video-effects-catalog.js",
+        "prototype/video-effects-state.js",
+        "prototype/video-effects-shaders.js"
+      ],
+      "featureModelRouting": "VID-002; see modelRouting",
+      "referenceEquivalent": false
+    },
+    {
+      "name": "Luma Key Black",
+      "kind": "effect",
+      "manualPage": 20,
+      "manualLabel": "LUMA KEY BLACK",
+      "manualMeaningParaphrase": "Dark source areas reveal the other deck.",
+      "status": "broadly_consistent",
+      "priority": null,
+      "comparison": "Current threshold key with supplied secondary deck fits; master-only or missing secondary behavior remains independent.",
+      "proposedAcceptance": "Use dark/bright source patches over a distinctly colored opposite deck; dark reveals opposite, bright retains original.",
+      "acceptanceExecuted": false,
+      "implementationEvidence": "code-path inspected; no new browser execution in this crosswalk",
+      "current": {
+        "id": 33,
+        "name": "Luma Key Black",
+        "category": "Alpha Based",
+        "sourceStatus": "OBSERVED_LOCAL_RESOURCE",
+        "sourceEvidence": "docs/research/video-catalog-evaluation.json",
+        "candidateOnly": false,
+        "openPlayAvailable": true,
+        "referenceRuntimeVerified": false,
+        "referenceAvailability": "manifest declaration; active menu unverified",
+        "implementationStatus": "original-independent-WebGL2",
+        "contract": "Remove pixels below a display-RGB luma threshold. Output alpha or composite over optional secondarySource with straight-alpha over.",
+        "parameterStatus": "independent ranges/defaults; vendor parameter labels, mappings and ranges unknown",
+        "default": {
+          "on": false,
+          "value": 0.65,
+          "params": {
+            "softness": 0.04
+          }
+        },
+        "independentParameters": [
+          {
+            "name": "value",
+            "default": 0.65,
+            "min": 0,
+            "max": 1,
+            "status": "independent amount;0 is exact bypass"
+          },
+          {
+            "name": "softness",
+            "default": 0.04,
+            "min": 0.001,
+            "max": 0.25,
+            "unit": "normalized threshold; Color Isolator allows.5",
+            "status": "independently designed"
+          }
+        ],
+        "historyPolicy": "Per-slot record/spring state survives parameter changes; no retained video frames allocated.",
+        "colorPolicy": "Normalized display RGB; premultiplied internal filtering, straight-alpha colour operations/output; transparent outside image bounds. Not a vendor colour-space claim."
+      },
+      "sourceFiles": [
+        "prototype/video-effects-catalog.js",
+        "prototype/video-effects-state.js",
+        "prototype/video-effects-shaders.js"
+      ],
+      "featureModelRouting": "VID-002; see modelRouting",
+      "referenceEquivalent": false
+    },
+    {
+      "name": "Luma Key White",
+      "kind": "effect",
+      "manualPage": 20,
+      "manualLabel": "LUMA KEY WHITE",
+      "manualMeaningParaphrase": "Bright source areas reveal the other deck.",
+      "status": "broadly_consistent",
+      "priority": null,
+      "comparison": "Current inverse luma key with supplied secondary deck fits broad meaning.",
+      "proposedAcceptance": "Use dark/bright patches and assert bright reveals opposite deck while dark retains original.",
+      "acceptanceExecuted": false,
+      "implementationEvidence": "code-path inspected; no new browser execution in this crosswalk",
+      "current": {
+        "id": 34,
+        "name": "Luma Key White",
+        "category": "Alpha Based",
+        "sourceStatus": "OBSERVED_LOCAL_RESOURCE",
+        "sourceEvidence": "docs/research/video-catalog-evaluation.json",
+        "candidateOnly": false,
+        "openPlayAvailable": true,
+        "referenceRuntimeVerified": false,
+        "referenceAvailability": "manifest declaration; active menu unverified",
+        "implementationStatus": "original-independent-WebGL2",
+        "contract": "Remove pixels above an independent luma threshold. Output alpha or composite over secondarySource.",
+        "parameterStatus": "independent ranges/defaults; vendor parameter labels, mappings and ranges unknown",
+        "default": {
+          "on": false,
+          "value": 0.65,
+          "params": {
+            "softness": 0.04
+          }
+        },
+        "independentParameters": [
+          {
+            "name": "value",
+            "default": 0.65,
+            "min": 0,
+            "max": 1,
+            "status": "independent amount;0 is exact bypass"
+          },
+          {
+            "name": "softness",
+            "default": 0.04,
+            "min": 0.001,
+            "max": 0.25,
+            "unit": "normalized threshold; Color Isolator allows.5",
+            "status": "independently designed"
+          }
+        ],
+        "historyPolicy": "Per-slot record/spring state survives parameter changes; no retained video frames allocated.",
+        "colorPolicy": "Normalized display RGB; premultiplied internal filtering, straight-alpha colour operations/output; transparent outside image bounds. Not a vendor colour-space claim."
+      },
+      "sourceFiles": [
+        "prototype/video-effects-catalog.js",
+        "prototype/video-effects-state.js",
+        "prototype/video-effects-shaders.js"
+      ],
+      "featureModelRouting": "VID-002; see modelRouting",
+      "referenceEquivalent": false
+    },
+    {
+      "name": "Chroma Key Green",
+      "kind": "effect",
+      "manualPage": 19,
+      "manualLabel": "CHROMA KEY GREEN",
+      "manualMeaningParaphrase": "Green source areas reveal the other video.",
+      "status": "broadly_consistent",
+      "priority": null,
+      "comparison": "Current green-dominance key/composite fits, thresholds/spill unknown.",
+      "proposedAcceptance": "Use green/red/blue patches over opposite deck; only green reveals opposite while edge alpha remains correct.",
+      "acceptanceExecuted": false,
+      "implementationEvidence": "code-path inspected; no new browser execution in this crosswalk",
+      "current": {
+        "id": 35,
+        "name": "Chroma Key Green",
+        "category": "Alpha Based",
+        "sourceStatus": "OBSERVED_LOCAL_RESOURCE",
+        "sourceEvidence": "docs/research/video-catalog-evaluation.json",
+        "candidateOnly": false,
+        "openPlayAvailable": true,
+        "referenceRuntimeVerified": false,
+        "referenceAvailability": "manifest declaration; active menu unverified",
+        "implementationStatus": "original-independent-WebGL2",
+        "contract": "Remove green-dominant pixels with independent threshold/softness/spill suppression; preserve other hues.",
+        "parameterStatus": "independent ranges/defaults; vendor parameter labels, mappings and ranges unknown",
+        "default": {
+          "on": false,
+          "value": 0.65,
+          "params": {
+            "softness": 0.04,
+            "spill": 0.5
+          }
+        },
+        "independentParameters": [
+          {
+            "name": "value",
+            "default": 0.65,
+            "min": 0,
+            "max": 1,
+            "status": "independent amount;0 is exact bypass"
+          },
+          {
+            "name": "softness",
+            "default": 0.04,
+            "min": 0.001,
+            "max": 0.25,
+            "unit": "normalized threshold; Color Isolator allows.5",
+            "status": "independently designed"
+          },
+          {
+            "name": "spill",
+            "default": 0.5,
+            "min": 0,
+            "max": 1,
+            "status": "independently designed"
+          }
+        ],
+        "historyPolicy": "Per-slot record/spring state survives parameter changes; no retained video frames allocated.",
+        "colorPolicy": "Normalized display RGB; premultiplied internal filtering, straight-alpha colour operations/output; transparent outside image bounds. Not a vendor colour-space claim."
+      },
+      "sourceFiles": [
+        "prototype/video-effects-catalog.js",
+        "prototype/video-effects-state.js",
+        "prototype/video-effects-shaders.js"
+      ],
+      "featureModelRouting": "VID-002; see modelRouting",
+      "referenceEquivalent": false
+    },
+    {
+      "name": "Color Photocopy",
+      "kind": "effect",
+      "manualPage": 19,
+      "manualLabel": "COLOR PHOTOCOPY",
+      "manualMeaningParaphrase": "Replace blurred regions with solid colors.",
+      "status": "possible_mismatch",
+      "priority": "P2",
+      "comparison": "Current per-pixel channel threshold plus edge darkening has no blur stage or region-level fill. Description is too short to recover exact segmentation.",
+      "proposedAcceptance": "Use small high-frequency texture and broad flat regions; compare smoothing/flat region fill against raw channel thresholding. Define original region/blur policy before adding strict acceptance.",
+      "acceptanceExecuted": false,
+      "implementationEvidence": "code-path inspected; no new browser execution in this crosswalk",
+      "current": {
+        "id": 36,
+        "name": "Color Photocopy",
+        "category": "Multisample",
+        "sourceStatus": "OBSERVED_LOCAL_RESOURCE",
+        "sourceEvidence": "docs/research/video-catalog-evaluation.json",
+        "candidateOnly": false,
+        "openPlayAvailable": true,
+        "referenceRuntimeVerified": false,
+        "referenceAvailability": "manifest declaration; active menu unverified",
+        "implementationStatus": "original-independent-WebGL2",
+        "contract": "Threshold individual colour channels into a hard printed palette and darken detected edges.",
+        "parameterStatus": "independent ranges/defaults; vendor parameter labels, mappings and ranges unknown",
+        "default": {
+          "on": false,
+          "value": 0.65,
+          "params": {}
+        },
+        "independentParameters": [
+          {
+            "name": "value",
+            "default": 0.65,
+            "min": 0,
+            "max": 1,
+            "status": "independent amount;0 is exact bypass"
+          }
+        ],
+        "historyPolicy": "Per-slot record/spring state survives parameter changes; no retained video frames allocated.",
+        "colorPolicy": "Normalized display RGB; premultiplied internal filtering, straight-alpha colour operations/output; transparent outside image bounds. Not a vendor colour-space claim."
+      },
+      "sourceFiles": [
+        "prototype/video-effects-catalog.js",
+        "prototype/video-effects-state.js",
+        "prototype/video-effects-shaders.js"
+      ],
+      "featureModelRouting": "VID-002; see modelRouting",
+      "referenceEquivalent": false
+    },
+    {
+      "name": "Emboss",
+      "kind": "effect",
+      "manualPage": 20,
+      "manualLabel": "EMBOSS",
+      "manualMeaningParaphrase": "Produce a raised or recessed appearance.",
+      "status": "broadly_consistent",
+      "priority": null,
+      "comparison": "Diagonal difference relief fits broad class; direction/kernel unknown.",
+      "proposedAcceptance": "Use step edges and assert paired light/dark relief around edges with neutral interior.",
+      "acceptanceExecuted": false,
+      "implementationEvidence": "code-path inspected; no new browser execution in this crosswalk",
+      "current": {
+        "id": 37,
+        "name": "Emboss",
+        "category": "Multisample",
+        "sourceStatus": "OBSERVED_LOCAL_RESOURCE",
+        "sourceEvidence": "docs/research/video-catalog-evaluation.json",
+        "candidateOnly": false,
+        "openPlayAvailable": true,
+        "referenceRuntimeVerified": false,
+        "referenceAvailability": "manifest declaration; active menu unverified",
+        "implementationStatus": "original-independent-WebGL2",
+        "contract": "Diagonal source difference produces a grey-pivot relief image; independent kernel/direction.",
+        "parameterStatus": "independent ranges/defaults; vendor parameter labels, mappings and ranges unknown",
+        "default": {
+          "on": false,
+          "value": 0.65,
+          "params": {}
+        },
+        "independentParameters": [
+          {
+            "name": "value",
+            "default": 0.65,
+            "min": 0,
+            "max": 1,
+            "status": "independent amount;0 is exact bypass"
+          }
+        ],
+        "historyPolicy": "Per-slot record/spring state survives parameter changes; no retained video frames allocated.",
+        "colorPolicy": "Normalized display RGB; premultiplied internal filtering, straight-alpha colour operations/output; transparent outside image bounds. Not a vendor colour-space claim."
+      },
+      "sourceFiles": [
+        "prototype/video-effects-catalog.js",
+        "prototype/video-effects-state.js",
+        "prototype/video-effects-shaders.js"
+      ],
+      "featureModelRouting": "VID-002; see modelRouting",
+      "referenceEquivalent": false
+    },
+    {
+      "name": "Sharpen",
+      "kind": "effect",
+      "manualPage": 20,
+      "manualLabel": "SHARPEN",
+      "manualMeaningParaphrase": "Increase edge definition.",
+      "status": "broadly_consistent",
+      "priority": null,
+      "comparison": "Current source-minus-blur detail boost fits class.",
+      "proposedAcceptance": "Measure edge slope/overshoot on held patches and retain alpha.",
+      "acceptanceExecuted": false,
+      "implementationEvidence": "code-path inspected; no new browser execution in this crosswalk",
+      "current": {
+        "id": 38,
+        "name": "Sharpen",
+        "category": "Multisample",
+        "sourceStatus": "OBSERVED_LOCAL_RESOURCE",
+        "sourceEvidence": "docs/research/video-catalog-evaluation.json",
+        "candidateOnly": false,
+        "openPlayAvailable": true,
+        "referenceRuntimeVerified": false,
+        "referenceAvailability": "manifest declaration; active menu unverified",
+        "implementationStatus": "original-independent-WebGL2",
+        "contract": "Add the difference between the source and nine-point blur, clamping final display RGB.",
+        "parameterStatus": "independent ranges/defaults; vendor parameter labels, mappings and ranges unknown",
+        "default": {
+          "on": false,
+          "value": 0.65,
+          "params": {}
+        },
+        "independentParameters": [
+          {
+            "name": "value",
+            "default": 0.65,
+            "min": 0,
+            "max": 1,
+            "status": "independent amount;0 is exact bypass"
+          }
+        ],
+        "historyPolicy": "Per-slot record/spring state survives parameter changes; no retained video frames allocated.",
+        "colorPolicy": "Normalized display RGB; premultiplied internal filtering, straight-alpha colour operations/output; transparent outside image bounds. Not a vendor colour-space claim."
+      },
+      "sourceFiles": [
+        "prototype/video-effects-catalog.js",
+        "prototype/video-effects-state.js",
+        "prototype/video-effects-shaders.js"
+      ],
+      "featureModelRouting": "VID-002; see modelRouting",
+      "referenceEquivalent": false
+    },
+    {
+      "name": "Blur",
+      "kind": "effect",
+      "manualPage": 19,
+      "manualLabel": "BLUR",
+      "manualMeaningParaphrase": "Blur image content.",
+      "status": "broadly_consistent",
+      "priority": null,
+      "comparison": "Current Gaussian-like spatial blur fits; kernel radius/range unknown.",
+      "proposedAcceptance": "Measure broadened edge-spread at positive amount.",
+      "acceptanceExecuted": false,
+      "implementationEvidence": "code-path inspected; no new browser execution in this crosswalk",
+      "current": {
+        "id": 39,
+        "name": "Blur",
+        "category": "Multisample",
+        "sourceStatus": "OBSERVED_LOCAL_RESOURCE",
+        "sourceEvidence": "docs/research/video-catalog-evaluation.json",
+        "candidateOnly": false,
+        "openPlayAvailable": true,
+        "referenceRuntimeVerified": false,
+        "referenceAvailability": "manifest declaration; active menu unverified",
+        "implementationStatus": "original-independent-WebGL2",
+        "contract": "Nine-point Gaussian blur with amount-controlled radius in output pixels.",
+        "parameterStatus": "independent ranges/defaults; vendor parameter labels, mappings and ranges unknown",
+        "default": {
+          "on": false,
+          "value": 0.65,
+          "params": {}
+        },
+        "independentParameters": [
+          {
+            "name": "value",
+            "default": 0.65,
+            "min": 0,
+            "max": 1,
+            "status": "independent amount;0 is exact bypass"
+          }
+        ],
+        "historyPolicy": "Per-slot record/spring state survives parameter changes; no retained video frames allocated.",
+        "colorPolicy": "Normalized display RGB; premultiplied internal filtering, straight-alpha colour operations/output; transparent outside image bounds. Not a vendor colour-space claim."
+      },
+      "sourceFiles": [
+        "prototype/video-effects-catalog.js",
+        "prototype/video-effects-state.js",
+        "prototype/video-effects-shaders.js"
+      ],
+      "featureModelRouting": "VID-002; see modelRouting",
+      "referenceEquivalent": false
+    },
+    {
+      "name": "Edge Detect",
+      "kind": "effect",
+      "manualPage": 20,
+      "manualLabel": "EDGE DETECT",
+      "manualMeaningParaphrase": "Keep image edges.",
+      "status": "broadly_consistent",
+      "priority": null,
+      "comparison": "Current luma finite-difference edge map fits class; hue edge sensitivity unknown.",
+      "proposedAcceptance": "Flat patches become dark and their boundaries remain visible; use equal-luma color boundaries to document current limitation.",
+      "acceptanceExecuted": false,
+      "implementationEvidence": "code-path inspected; no new browser execution in this crosswalk",
+      "current": {
+        "id": 40,
+        "name": "Edge Detect",
+        "category": "Multisample",
+        "sourceStatus": "OBSERVED_LOCAL_RESOURCE",
+        "sourceEvidence": "docs/research/video-catalog-evaluation.json",
+        "candidateOnly": false,
+        "openPlayAvailable": true,
+        "referenceRuntimeVerified": false,
+        "referenceAvailability": "manifest declaration; active menu unverified",
+        "implementationStatus": "original-independent-WebGL2",
+        "contract": "Luminance finite-difference edge map with a black background and preserved source alpha.",
+        "parameterStatus": "independent ranges/defaults; vendor parameter labels, mappings and ranges unknown",
+        "default": {
+          "on": false,
+          "value": 0.65,
+          "params": {}
+        },
+        "independentParameters": [
+          {
+            "name": "value",
+            "default": 0.65,
+            "min": 0,
+            "max": 1,
+            "status": "independent amount;0 is exact bypass"
+          }
+        ],
+        "historyPolicy": "Per-slot record/spring state survives parameter changes; no retained video frames allocated.",
+        "colorPolicy": "Normalized display RGB; premultiplied internal filtering, straight-alpha colour operations/output; transparent outside image bounds. Not a vendor colour-space claim."
+      },
+      "sourceFiles": [
+        "prototype/video-effects-catalog.js",
+        "prototype/video-effects-state.js",
+        "prototype/video-effects-shaders.js"
+      ],
+      "featureModelRouting": "VID-002; see modelRouting",
+      "referenceEquivalent": false
+    },
+    {
+      "name": "LED Billboard",
+      "kind": "effect",
+      "manualPage": 20,
+      "manualLabel": "LED BILLBOARD",
+      "manualMeaningParaphrase": "Represent the image with LED-like points.",
+      "status": "broadly_consistent",
+      "priority": null,
+      "comparison": "Current sampled circular apertures fit class.",
+      "proposedAcceptance": "Verify separated dot apertures and source-color sampling on spatial markers.",
+      "acceptanceExecuted": false,
+      "implementationEvidence": "code-path inspected; no new browser execution in this crosswalk",
+      "current": {
+        "id": 41,
+        "name": "LED Billboard",
+        "category": "Multisample",
+        "sourceStatus": "OBSERVED_LOCAL_RESOURCE",
+        "sourceEvidence": "docs/research/video-catalog-evaluation.json",
+        "candidateOnly": false,
+        "openPlayAvailable": true,
+        "referenceRuntimeVerified": false,
+        "referenceAvailability": "manifest declaration; active menu unverified",
+        "implementationStatus": "original-independent-WebGL2",
+        "contract": "Sample a colour at each cell centre and display it through an antialiased circular LED aperture.",
+        "parameterStatus": "independent ranges/defaults; vendor parameter labels, mappings and ranges unknown",
+        "default": {
+          "on": false,
+          "value": 0.65,
+          "params": {}
+        },
+        "independentParameters": [
+          {
+            "name": "value",
+            "default": 0.65,
+            "min": 0,
+            "max": 1,
+            "status": "independent amount;0 is exact bypass"
+          }
+        ],
+        "historyPolicy": "Per-slot record/spring state survives parameter changes; no retained video frames allocated.",
+        "colorPolicy": "Normalized display RGB; premultiplied internal filtering, straight-alpha colour operations/output; transparent outside image bounds. Not a vendor colour-space claim."
+      },
+      "sourceFiles": [
+        "prototype/video-effects-catalog.js",
+        "prototype/video-effects-state.js",
+        "prototype/video-effects-shaders.js"
+      ],
+      "featureModelRouting": "VID-002; see modelRouting",
+      "referenceEquivalent": false
+    },
+    {
+      "name": "V-Hold",
+      "kind": "effect",
+      "manualPage": 20,
+      "manualLabel": "V-HOLD",
+      "manualMeaningParaphrase": "Broken-television-style image disturbance.",
+      "status": "broadly_consistent",
+      "priority": null,
+      "comparison": "Current vertical wrapping and row jitter fit the broad metaphor; exact cadence unknown.",
+      "proposedAcceptance": "Track vertical wrapping/row displacement over time and confirm Reduced Motion removes generated movement.",
+      "acceptanceExecuted": false,
+      "implementationEvidence": "code-path inspected; no new browser execution in this crosswalk",
+      "current": {
+        "id": 42,
+        "name": "V-Hold",
+        "category": "Time Based",
+        "sourceStatus": "OBSERVED_LOCAL_RESOURCE",
+        "sourceEvidence": "docs/research/video-catalog-evaluation.json",
+        "candidateOnly": false,
+        "openPlayAvailable": true,
+        "referenceRuntimeVerified": false,
+        "referenceAvailability": "manifest declaration; active menu unverified",
+        "implementationStatus": "original-independent-WebGL2",
+        "contract": "Wrap source vertically with generated sinusoidal drift and row jitter. Reduced motion disables the generated displacement.",
+        "parameterStatus": "independent ranges/defaults; vendor parameter labels, mappings and ranges unknown",
+        "default": {
+          "on": false,
+          "value": 0.65,
+          "params": {}
+        },
+        "independentParameters": [
+          {
+            "name": "value",
+            "default": 0.65,
+            "min": 0,
+            "max": 1,
+            "status": "independent amount;0 is exact bypass"
+          }
+        ],
+        "historyPolicy": "Per-slot record/spring state survives parameter changes; no retained video frames allocated.",
+        "colorPolicy": "Normalized display RGB; premultiplied internal filtering, straight-alpha colour operations/output; transparent outside image bounds. Not a vendor colour-space claim."
+      },
+      "sourceFiles": [
+        "prototype/video-effects-catalog.js",
+        "prototype/video-effects-state.js",
+        "prototype/video-effects-shaders.js"
+      ],
+      "featureModelRouting": "VID-002; see modelRouting",
+      "referenceEquivalent": false
+    },
+    {
+      "name": "Posterize",
+      "kind": "effect",
+      "manualPage": 20,
+      "manualLabel": "POSTERIZE",
+      "manualMeaningParaphrase": "Reduce image color count to three.",
+      "status": "semantic_mismatch",
+      "priority": "P1",
+      "comparison": "Current quantizes each RGB channel to2..16 levels; default6 produces up to216 combinations and full amount produces up to8. Literal three-color palette versus three channel levels needs explicit interpretation.",
+      "proposedAcceptance": "Use separated flat color patches: count interior output colors at the declared three-color setting; do not silently substitute3 levels/channel (up to27 colors). Record palette-vs-channel ambiguity before implementation.",
+      "acceptanceExecuted": false,
+      "implementationEvidence": "code-path inspected; no new browser execution in this crosswalk",
+      "current": {
+        "id": 43,
+        "name": "Posterize",
+        "category": "Image",
+        "sourceStatus": "OBSERVED_LOCAL_RESOURCE",
+        "sourceEvidence": "docs/research/video-catalog-evaluation.json",
+        "candidateOnly": false,
+        "openPlayAvailable": true,
+        "referenceRuntimeVerified": false,
+        "referenceAvailability": "manifest declaration; active menu unverified",
+        "implementationStatus": "original-independent-WebGL2",
+        "contract": "Round each display-RGB channel to2..16 independently chosen levels.",
+        "parameterStatus": "independent ranges/defaults; vendor parameter labels, mappings and ranges unknown",
+        "default": {
+          "on": false,
+          "value": 0.65,
+          "params": {}
+        },
+        "independentParameters": [
+          {
+            "name": "value",
+            "default": 0.65,
+            "min": 0,
+            "max": 1,
+            "status": "independent amount;0 is exact bypass"
+          }
+        ],
+        "historyPolicy": "Per-slot record/spring state survives parameter changes; no retained video frames allocated.",
+        "colorPolicy": "Normalized display RGB; premultiplied internal filtering, straight-alpha colour operations/output; transparent outside image bounds. Not a vendor colour-space claim."
+      },
+      "sourceFiles": [
+        "prototype/video-effects-catalog.js",
+        "prototype/video-effects-state.js",
+        "prototype/video-effects-shaders.js"
+      ],
+      "featureModelRouting": "VID-002; see modelRouting",
+      "referenceEquivalent": false
+    },
+    {
+      "name": "Negative",
+      "kind": "effect",
+      "manualPage": 20,
+      "manualLabel": "NEGATIVE",
+      "manualMeaningParaphrase": "Invert image color.",
+      "status": "broadly_consistent",
+      "priority": null,
+      "comparison": "Current RGB inversion fits broad meaning.",
+      "proposedAcceptance": "Assert output approximately255-input per channel on known patches while alpha stays constant.",
+      "acceptanceExecuted": false,
+      "implementationEvidence": "code-path inspected; no new browser execution in this crosswalk",
+      "current": {
+        "id": 44,
+        "name": "Negative",
+        "category": "Image",
+        "sourceStatus": "OBSERVED_LOCAL_RESOURCE",
+        "sourceEvidence": "docs/research/video-catalog-evaluation.json",
+        "candidateOnly": false,
+        "openPlayAvailable": true,
+        "referenceRuntimeVerified": false,
+        "referenceAvailability": "manifest declaration; active menu unverified",
+        "implementationStatus": "original-independent-WebGL2",
+        "contract": "Invert display-RGB channels, blending by amount and preserving alpha.",
+        "parameterStatus": "independent ranges/defaults; vendor parameter labels, mappings and ranges unknown",
+        "default": {
+          "on": false,
+          "value": 0.65,
+          "params": {}
+        },
+        "independentParameters": [
+          {
+            "name": "value",
+            "default": 0.65,
+            "min": 0,
+            "max": 1,
+            "status": "independent amount;0 is exact bypass"
+          }
+        ],
+        "historyPolicy": "Per-slot record/spring state survives parameter changes; no retained video frames allocated.",
+        "colorPolicy": "Normalized display RGB; premultiplied internal filtering, straight-alpha colour operations/output; transparent outside image bounds. Not a vendor colour-space claim."
+      },
+      "sourceFiles": [
+        "prototype/video-effects-catalog.js",
+        "prototype/video-effects-state.js",
+        "prototype/video-effects-shaders.js"
+      ],
+      "featureModelRouting": "VID-002; see modelRouting",
+      "referenceEquivalent": false
+    },
+    {
+      "name": "Sepia",
+      "kind": "effect",
+      "manualPage": 20,
+      "manualLabel": "SEPIA",
+      "manualMeaningParaphrase": "Move image toward a sepia appearance.",
+      "status": "broadly_consistent",
+      "priority": null,
+      "comparison": "Current warm monochrome blend fits broad meaning; matrix unknown.",
+      "proposedAcceptance": "Known colored patches converge to warm monochrome as amount rises.",
+      "acceptanceExecuted": false,
+      "implementationEvidence": "code-path inspected; no new browser execution in this crosswalk",
+      "current": {
+        "id": 45,
+        "name": "Sepia",
+        "category": "Image",
+        "sourceStatus": "OBSERVED_LOCAL_RESOURCE",
+        "sourceEvidence": "docs/research/video-catalog-evaluation.json",
+        "candidateOnly": false,
+        "openPlayAvailable": true,
+        "referenceRuntimeVerified": false,
+        "referenceAvailability": "manifest declaration; active menu unverified",
+        "implementationStatus": "original-independent-WebGL2",
+        "contract": "Original warm monochrome colour matrix, blended by amount.",
+        "parameterStatus": "independent ranges/defaults; vendor parameter labels, mappings and ranges unknown",
+        "default": {
+          "on": false,
+          "value": 0.65,
+          "params": {}
+        },
+        "independentParameters": [
+          {
+            "name": "value",
+            "default": 0.65,
+            "min": 0,
+            "max": 1,
+            "status": "independent amount;0 is exact bypass"
+          }
+        ],
+        "historyPolicy": "Per-slot record/spring state survives parameter changes; no retained video frames allocated.",
+        "colorPolicy": "Normalized display RGB; premultiplied internal filtering, straight-alpha colour operations/output; transparent outside image bounds. Not a vendor colour-space claim."
+      },
+      "sourceFiles": [
+        "prototype/video-effects-catalog.js",
+        "prototype/video-effects-state.js",
+        "prototype/video-effects-shaders.js"
+      ],
+      "featureModelRouting": "VID-002; see modelRouting",
+      "referenceEquivalent": false
+    },
+    {
+      "name": "Rotoscope",
+      "kind": "effect",
+      "manualPage": 20,
+      "manualLabel": "ROTOSCOPE",
+      "manualMeaningParaphrase": "Hand-drawn-style rendering.",
+      "status": "broadly_consistent",
+      "priority": null,
+      "comparison": "Current smoothed quantized color with dark edges fits broad style; no exact aesthetic proof.",
+      "proposedAcceptance": "Check broad color regions flatten and boundaries persist; aesthetic acceptance requires reference frames/human review.",
+      "acceptanceExecuted": false,
+      "implementationEvidence": "code-path inspected; no new browser execution in this crosswalk",
+      "current": {
+        "id": 46,
+        "name": "Rotoscope",
+        "category": "Image",
+        "sourceStatus": "OBSERVED_LOCAL_RESOURCE",
+        "sourceEvidence": "docs/research/video-catalog-evaluation.json",
+        "candidateOnly": false,
+        "openPlayAvailable": true,
+        "referenceRuntimeVerified": false,
+        "referenceAvailability": "manifest declaration; active menu unverified",
+        "implementationStatus": "original-independent-WebGL2",
+        "contract": "Blur colour fields before quantization and darken their luminance edges; original painterly poster style.",
+        "parameterStatus": "independent ranges/defaults; vendor parameter labels, mappings and ranges unknown",
+        "default": {
+          "on": false,
+          "value": 0.65,
+          "params": {}
+        },
+        "independentParameters": [
+          {
+            "name": "value",
+            "default": 0.65,
+            "min": 0,
+            "max": 1,
+            "status": "independent amount;0 is exact bypass"
+          }
+        ],
+        "historyPolicy": "Per-slot record/spring state survives parameter changes; no retained video frames allocated.",
+        "colorPolicy": "Normalized display RGB; premultiplied internal filtering, straight-alpha colour operations/output; transparent outside image bounds. Not a vendor colour-space claim."
+      },
+      "sourceFiles": [
+        "prototype/video-effects-catalog.js",
+        "prototype/video-effects-state.js",
+        "prototype/video-effects-shaders.js"
+      ],
+      "featureModelRouting": "VID-002; see modelRouting",
+      "referenceEquivalent": false
+    },
+    {
+      "name": "Rotate",
+      "kind": "effect",
+      "manualPage": 20,
+      "manualLabel": "ROTATE",
+      "manualMeaningParaphrase": "Rotate image content.",
+      "status": "broadly_consistent",
+      "priority": null,
+      "comparison": "Current static rotation fits broad meaning; localized candidate now also has a historical manual name.",
+      "proposedAcceptance": "Track asymmetric corners under angle changes; no reference angle-range claim.",
+      "acceptanceExecuted": false,
+      "implementationEvidence": "code-path inspected; no new browser execution in this crosswalk",
+      "current": {
+        "id": 47,
+        "name": "Rotate",
+        "category": "Transform",
+        "sourceStatus": "OBSERVED_LOCALIZATION_LABEL",
+        "sourceEvidence": "docs/research/video-catalog-evaluation.json",
+        "candidateOnly": true,
+        "openPlayAvailable": true,
+        "referenceRuntimeVerified": false,
+        "referenceAvailability": "localization candidate; registration unverified",
+        "implementationStatus": "original-independent-WebGL2",
+        "contract": "Static aspect-correct rotation with transparent outside pixels; angle in independently chosen degrees.",
+        "parameterStatus": "independent ranges/defaults; vendor parameter labels, mappings and ranges unknown",
+        "default": {
+          "on": false,
+          "value": 0.65,
+          "params": {
+            "angle": 90
+          }
+        },
+        "independentParameters": [
+          {
+            "name": "value",
+            "default": 0.65,
+            "min": 0,
+            "max": 1,
+            "status": "independent amount;0 is exact bypass"
+          },
+          {
+            "name": "angle",
+            "default": 90,
+            "min": -360,
+            "max": 360,
+            "unit": "degrees",
+            "status": "independently designed"
+          }
+        ],
+        "historyPolicy": "Per-slot record/spring state survives parameter changes; no retained video frames allocated.",
+        "colorPolicy": "Normalized display RGB; premultiplied internal filtering, straight-alpha colour operations/output; transparent outside image bounds. Not a vendor colour-space claim."
+      },
+      "sourceFiles": [
+        "prototype/video-effects-catalog.js",
+        "prototype/video-effects-state.js",
+        "prototype/video-effects-shaders.js"
+      ],
+      "featureModelRouting": "VID-002; see modelRouting",
+      "referenceEquivalent": false
+    },
+    {
+      "name": "Zoom",
+      "kind": "effect",
+      "manualPage": 20,
+      "manualLabel": "ZOOM",
+      "manualMeaningParaphrase": "Zoom into the image center.",
+      "status": "broadly_consistent",
+      "priority": null,
+      "comparison": "Current center defaults0.5,0.5 and scale4 fit meaning; selectable noncenter controls are an independent extension.",
+      "proposedAcceptance": "Centered circle grows symmetrically and stays centered as amount increases.",
+      "acceptanceExecuted": false,
+      "implementationEvidence": "code-path inspected; no new browser execution in this crosswalk",
+      "current": {
+        "id": 48,
+        "name": "Zoom",
+        "category": "Transform",
+        "sourceStatus": "OBSERVED_LOCALIZATION_LABEL",
+        "sourceEvidence": "docs/research/video-catalog-evaluation.json",
+        "candidateOnly": true,
+        "openPlayAvailable": true,
+        "referenceRuntimeVerified": false,
+        "referenceAvailability": "localization candidate; registration unverified",
+        "implementationStatus": "original-independent-WebGL2",
+        "contract": "Scale around an independent centre point; amount interpolates from1x to target scale.",
+        "parameterStatus": "independent ranges/defaults; vendor parameter labels, mappings and ranges unknown",
+        "default": {
+          "on": false,
+          "value": 0.65,
+          "params": {
+            "scale": 4,
+            "centerX": 0.5,
+            "centerY": 0.5
+          }
+        },
+        "independentParameters": [
+          {
+            "name": "value",
+            "default": 0.65,
+            "min": 0,
+            "max": 1,
+            "status": "independent amount;0 is exact bypass"
+          },
+          {
+            "name": "scale",
+            "default": 4,
+            "min": 0.25,
+            "max": 8,
+            "status": "independently designed"
+          },
+          {
+            "name": "centerX",
+            "default": 0.5,
+            "min": 0,
+            "max": 1,
+            "status": "independently designed"
+          },
+          {
+            "name": "centerY",
+            "default": 0.5,
+            "min": 0,
+            "max": 1,
+            "status": "independently designed"
+          }
+        ],
+        "historyPolicy": "Per-slot record/spring state survives parameter changes; no retained video frames allocated.",
+        "colorPolicy": "Normalized display RGB; premultiplied internal filtering, straight-alpha colour operations/output; transparent outside image bounds. Not a vendor colour-space claim."
+      },
+      "sourceFiles": [
+        "prototype/video-effects-catalog.js",
+        "prototype/video-effects-state.js",
+        "prototype/video-effects-shaders.js"
+      ],
+      "featureModelRouting": "VID-002; see modelRouting",
+      "referenceEquivalent": false
+    },
+    {
+      "name": "Tile",
+      "kind": "effect",
+      "manualPage": 20,
+      "manualLabel": "TITLE",
+      "manualMeaningParaphrase": "Printed label TITLE; description concerns increasing image tiling.",
+      "status": "probable_label_correspondence",
+      "priority": null,
+      "comparison": "Local label Tile matches tiling meaning, but manual literally prints TITLE. Do not call this an exact-name match or silently repair the source.",
+      "proposedAcceptance": "Use numbered source motif and count repeated tiles as amount increases; obtain menu/reference evidence to resolve TITLE versus Tile.",
+      "acceptanceExecuted": false,
+      "implementationEvidence": "code-path inspected; no new browser execution in this crosswalk",
+      "current": {
+        "id": 49,
+        "name": "Tile",
+        "category": "Transform",
+        "sourceStatus": "OBSERVED_LOCALIZATION_LABEL",
+        "sourceEvidence": "docs/research/video-catalog-evaluation.json",
+        "candidateOnly": true,
+        "openPlayAvailable": true,
+        "referenceRuntimeVerified": false,
+        "referenceAvailability": "localization candidate; registration unverified",
+        "implementationStatus": "original-independent-WebGL2",
+        "contract": "Repeat complete source images in an independently chosen integer grid.",
+        "parameterStatus": "independent ranges/defaults; vendor parameter labels, mappings and ranges unknown",
+        "default": {
+          "on": false,
+          "value": 0.65,
+          "params": {
+            "tiles": 5
+          }
+        },
+        "independentParameters": [
+          {
+            "name": "value",
+            "default": 0.65,
+            "min": 0,
+            "max": 1,
+            "status": "independent amount;0 is exact bypass"
+          },
+          {
+            "name": "tiles",
+            "default": 5,
+            "min": 2,
+            "max": 12,
+            "step": 1,
+            "status": "independently designed"
+          }
+        ],
+        "historyPolicy": "Per-slot record/spring state survives parameter changes; no retained video frames allocated.",
+        "colorPolicy": "Normalized display RGB; premultiplied internal filtering, straight-alpha colour operations/output; transparent outside image bounds. Not a vendor colour-space claim."
+      },
+      "sourceFiles": [
+        "prototype/video-effects-catalog.js",
+        "prototype/video-effects-state.js",
+        "prototype/video-effects-shaders.js"
+      ],
+      "featureModelRouting": "VID-002; see modelRouting",
+      "referenceEquivalent": false
+    },
+    {
+      "name": "Zoom/Tile",
+      "kind": "effect",
+      "manualPage": 20,
+      "manualLabel": "ZOOM TILE",
+      "manualMeaningParaphrase": "Combine tiling and zoom.",
+      "status": "broadly_consistent",
+      "priority": null,
+      "comparison": "Current wrapped scaled coordinates broadly combine both.",
+      "proposedAcceptance": "Show repeated motifs with changing magnification, not a fixed recoloring.",
+      "acceptanceExecuted": false,
+      "implementationEvidence": "code-path inspected; no new browser execution in this crosswalk",
+      "current": {
+        "id": 50,
+        "name": "Zoom/Tile",
+        "category": "Transform",
+        "sourceStatus": "OBSERVED_LOCALIZATION_LABEL",
+        "sourceEvidence": "docs/research/video-catalog-evaluation.json",
+        "candidateOnly": true,
+        "openPlayAvailable": true,
+        "referenceRuntimeVerified": false,
+        "referenceAvailability": "localization candidate; registration unverified",
+        "implementationStatus": "original-independent-WebGL2",
+        "contract": "Continuously vary source scale through repeated wrapped tiles, combining fractional zoom and tiling.",
+        "parameterStatus": "independent ranges/defaults; vendor parameter labels, mappings and ranges unknown",
+        "default": {
+          "on": false,
+          "value": 0.65,
+          "params": {}
+        },
+        "independentParameters": [
+          {
+            "name": "value",
+            "default": 0.65,
+            "min": 0,
+            "max": 1,
+            "status": "independent amount;0 is exact bypass"
+          }
+        ],
+        "historyPolicy": "Per-slot record/spring state survives parameter changes; no retained video frames allocated.",
+        "colorPolicy": "Normalized display RGB; premultiplied internal filtering, straight-alpha colour operations/output; transparent outside image bounds. Not a vendor colour-space claim."
+      },
+      "sourceFiles": [
+        "prototype/video-effects-catalog.js",
+        "prototype/video-effects-state.js",
+        "prototype/video-effects-shaders.js"
+      ],
+      "featureModelRouting": "VID-002; see modelRouting",
+      "referenceEquivalent": false
+    },
+    {
+      "name": "False Color",
+      "kind": "effect",
+      "manualPage": 20,
+      "manualLabel": "FALSE COLOR",
+      "manualMeaningParaphrase": "Map source colors through several preset palettes.",
+      "status": "capability_gap",
+      "priority": "P2",
+      "comparison": "Current offers one continuous heat-like luma mapping, with no selectable palette set.",
+      "proposedAcceptance": "At held source/amount select at least two explicitly independent presets and verify distinct mappings; vendor palette identities remain unknown.",
+      "acceptanceExecuted": false,
+      "implementationEvidence": "code-path inspected; no new browser execution in this crosswalk",
+      "current": {
+        "id": 51,
+        "name": "False Color",
+        "category": "Colour",
+        "sourceStatus": "OBSERVED_LOCALIZATION_LABEL",
+        "sourceEvidence": "docs/research/video-catalog-evaluation.json",
+        "candidateOnly": true,
+        "openPlayAvailable": true,
+        "referenceRuntimeVerified": false,
+        "referenceAvailability": "localization candidate; registration unverified",
+        "implementationStatus": "original-independent-WebGL2",
+        "contract": "Map display luma through an original blue/green/red heat palette.",
+        "parameterStatus": "independent ranges/defaults; vendor parameter labels, mappings and ranges unknown",
+        "default": {
+          "on": false,
+          "value": 0.65,
+          "params": {}
+        },
+        "independentParameters": [
+          {
+            "name": "value",
+            "default": 0.65,
+            "min": 0,
+            "max": 1,
+            "status": "independent amount;0 is exact bypass"
+          }
+        ],
+        "historyPolicy": "Per-slot record/spring state survives parameter changes; no retained video frames allocated.",
+        "colorPolicy": "Normalized display RGB; premultiplied internal filtering, straight-alpha colour operations/output; transparent outside image bounds. Not a vendor colour-space claim."
+      },
+      "sourceFiles": [
+        "prototype/video-effects-catalog.js",
+        "prototype/video-effects-state.js",
+        "prototype/video-effects-shaders.js"
+      ],
+      "featureModelRouting": "VID-002; see modelRouting",
+      "referenceEquivalent": false
+    },
+    {
+      "name": "Analyzer",
+      "kind": "effect",
+      "manualPage": 19,
+      "manualLabel": "ANALYZER",
+      "manualMeaningParaphrase": "Eight spectrum bands; control changes display color.",
+      "status": "semantic_mismatch",
+      "priority": "P1",
+      "comparison": "Current only three supplied bass/mid/treble columns with fixed band colors; no eight-band input or color parameter.",
+      "proposedAcceptance": "Use8 independently isolated frequency fixtures and verify eight distinguishable responses; change color parameter at constant spectrum. Do not upsample3 values and call it8 actual bands.",
+      "acceptanceExecuted": false,
+      "implementationEvidence": "code-path inspected; no new browser execution in this crosswalk",
+      "current": {
+        "id": 52,
+        "name": "Analyzer",
+        "category": "Analyzer",
+        "sourceStatus": "OBSERVED_LOCALIZATION_LABEL",
+        "sourceEvidence": "docs/research/video-catalog-evaluation.json",
+        "candidateOnly": true,
+        "openPlayAvailable": true,
+        "referenceRuntimeVerified": false,
+        "referenceAvailability": "localization candidate; registration unverified",
+        "implementationStatus": "original-independent-WebGL2",
+        "contract": "Three solid supplied-band amplitude bars on black, blended with the source.",
+        "parameterStatus": "independent ranges/defaults; vendor parameter labels, mappings and ranges unknown",
+        "default": {
+          "on": false,
+          "value": 0.65,
+          "params": {}
+        },
+        "independentParameters": [
+          {
+            "name": "value",
+            "default": 0.65,
+            "min": 0,
+            "max": 1,
+            "status": "independent amount;0 is exact bypass"
+          }
+        ],
+        "historyPolicy": "Per-slot record/spring state survives parameter changes; no retained video frames allocated.",
+        "colorPolicy": "Normalized display RGB; premultiplied internal filtering, straight-alpha colour operations/output; transparent outside image bounds. Not a vendor colour-space claim."
+      },
+      "sourceFiles": [
+        "prototype/video-effects-catalog.js",
+        "prototype/video-effects-state.js",
+        "prototype/video-effects-shaders.js"
+      ],
+      "featureModelRouting": "VID-002; see modelRouting",
+      "referenceEquivalent": false
+    },
+    {
+      "name": "Analyzer Line",
+      "kind": "effect",
+      "manualPage": 19,
+      "manualLabel": "ANALYZER LINE",
+      "manualMeaningParaphrase": "Line-style spectrum display with adjustable color.",
+      "status": "capability_gap",
+      "priority": "P2",
+      "comparison": "Current interpolates three bands into a fixed white line and exposes no color control. Manual does not specify band count for Line.",
+      "proposedAcceptance": "Hold spectrum, change declared color and inspect line pixels; test actual spectral detail separately without inventing count.",
+      "acceptanceExecuted": false,
+      "implementationEvidence": "code-path inspected; no new browser execution in this crosswalk",
+      "current": {
+        "id": 53,
+        "name": "Analyzer Line",
+        "category": "Analyzer",
+        "sourceStatus": "OBSERVED_LOCALIZATION_LABEL",
+        "sourceEvidence": "docs/research/video-catalog-evaluation.json",
+        "candidateOnly": true,
+        "openPlayAvailable": true,
+        "referenceRuntimeVerified": false,
+        "referenceAvailability": "localization candidate; registration unverified",
+        "implementationStatus": "original-independent-WebGL2",
+        "contract": "Interpolate supplied bass/mid/treble amplitudes into a visible spectrum-style line; no inferred FFT or vendor bins.",
+        "parameterStatus": "independent ranges/defaults; vendor parameter labels, mappings and ranges unknown",
+        "default": {
+          "on": false,
+          "value": 0.65,
+          "params": {}
+        },
+        "independentParameters": [
+          {
+            "name": "value",
+            "default": 0.65,
+            "min": 0,
+            "max": 1,
+            "status": "independent amount;0 is exact bypass"
+          }
+        ],
+        "historyPolicy": "Per-slot record/spring state survives parameter changes; no retained video frames allocated.",
+        "colorPolicy": "Normalized display RGB; premultiplied internal filtering, straight-alpha colour operations/output; transparent outside image bounds. Not a vendor colour-space claim."
+      },
+      "sourceFiles": [
+        "prototype/video-effects-catalog.js",
+        "prototype/video-effects-state.js",
+        "prototype/video-effects-shaders.js"
+      ],
+      "featureModelRouting": "VID-002; see modelRouting",
+      "referenceEquivalent": false
+    },
+    {
+      "name": "Block Columns",
+      "kind": "effect",
+      "manualPage": 20,
+      "manualLabel": "BLOCK COLUMNS",
+      "manualMeaningParaphrase": "Image blocks bounce and fall with bass.",
+      "status": "semantic_mismatch",
+      "priority": "P1",
+      "comparison": "Current three spring columns use bass/mid/treble separately; mid and treble can move columns while bass is zero.",
+      "proposedAcceptance": "Hold bass0; excite mid/treble at constant level and assert no bass-driven bounce. Bass impulse must move blocks then decay/fall; layout and dynamics independent.",
+      "acceptanceExecuted": false,
+      "implementationEvidence": "code-path inspected; no new browser execution in this crosswalk",
+      "current": {
+        "id": 54,
+        "name": "Block Columns",
+        "category": "Split",
+        "sourceStatus": "OBSERVED_LOCALIZATION_LABEL",
+        "sourceEvidence": "docs/research/video-catalog-evaluation.json",
+        "candidateOnly": true,
+        "openPlayAvailable": true,
+        "referenceRuntimeVerified": false,
+        "referenceAvailability": "localization candidate; registration unverified",
+        "implementationStatus": "original-independent-WebGL2",
+        "contract": "Three source-image columns follow independently integrated damped springs driven by bass/mid/treble.",
+        "parameterStatus": "independent ranges/defaults; vendor parameter labels, mappings and ranges unknown",
+        "default": {
+          "on": false,
+          "value": 0.65,
+          "params": {}
+        },
+        "independentParameters": [
+          {
+            "name": "value",
+            "default": 0.65,
+            "min": 0,
+            "max": 1,
+            "status": "independent amount;0 is exact bypass"
+          }
+        ],
+        "historyPolicy": "Per-slot record/spring state survives parameter changes; no retained video frames allocated.",
+        "colorPolicy": "Normalized display RGB; premultiplied internal filtering, straight-alpha colour operations/output; transparent outside image bounds. Not a vendor colour-space claim."
+      },
+      "sourceFiles": [
+        "prototype/video-effects-catalog.js",
+        "prototype/video-effects-state.js",
+        "prototype/video-effects-shaders.js"
+      ],
+      "featureModelRouting": "VID-002; see modelRouting",
+      "referenceEquivalent": false
+    }
+  ],
+  "transitions": [
+    {
+      "name": "Luma Key Fade",
+      "kind": "transition",
+      "manualPage": 21,
+      "manualLabel": "LUMA KEY FADE",
+      "manualMeaningParaphrase": "Transition using luminance keying.",
+      "status": "broadly_consistent",
+      "priority": null,
+      "comparison": "Current incoming luminance threshold fits class; exact threshold/order unknown.",
+      "proposedAcceptance": "Use high/low-luma incoming patches and verify selective reveal through fader travel.",
+      "acceptanceExecuted": false,
+      "implementationEvidence": "code-path inspected; no new browser execution in this crosswalk",
+      "current": {
+        "name": "Luma Key Fade",
+        "category": "Shader",
+        "provenance": "manifest",
+        "kernelIndex": 0,
+        "contract": "Reveal incoming pixels by their luminance threshold.",
+        "functionalIndependentImplementation": true,
+        "referenceRuntimeAvailability": "unverified",
+        "referenceAlgorithm": "unknown",
+        "referenceEquivalent": false,
+        "candidate": false,
+        "baseline": false,
+        "temporal": false,
+        "endpointContract": "Live left at 0, live right at 1, each with its own upfader"
+      },
+      "sourceFiles": [
+        "prototype/video-transitions.js",
+        "prototype/video-transitions-state.js",
+        "prototype/video-transitions-kernel.js"
+      ],
+      "featureModelRouting": "VID-002; see modelRouting",
+      "referenceEquivalent": false
+    },
+    {
+      "name": "Upfaders Only",
+      "kind": "transition",
+      "manualPage": 21,
+      "manualLabel": "UPFADERS ONLY",
+      "manualMeaningParaphrase": "Video deck levels controlled by hardware channel faders.",
+      "status": "integration_gap",
+      "priority": "P2",
+      "comparison": "Current independently upfaded source addition ignores crossfader, which is compatible; actual hardware mapping is not established by synthetic upfader values.",
+      "proposedAcceptance": "Exercise actual mapped channel faders and verify independent deck visibility with crossfader fixed and swept; no routing or MIDI acceptance from source alone.",
+      "acceptanceExecuted": false,
+      "implementationEvidence": "code-path inspected; no new browser execution in this crosswalk",
+      "current": {
+        "name": "Upfaders Only",
+        "category": "Blend",
+        "provenance": "manifest",
+        "kernelIndex": 1,
+        "contract": "Ignore crossfader; add both independently upfaded sources, including at endpoints.",
+        "functionalIndependentImplementation": true,
+        "referenceRuntimeAvailability": "unverified",
+        "referenceAlgorithm": "unknown",
+        "referenceEquivalent": false,
+        "candidate": false,
+        "baseline": false,
+        "temporal": false,
+        "endpointContract": "Add independently upfaded sources at every amount"
+      },
+      "sourceFiles": [
+        "prototype/video-transitions.js",
+        "prototype/video-transitions-state.js",
+        "prototype/video-transitions-kernel.js"
+      ],
+      "featureModelRouting": "VID-002; see modelRouting",
+      "referenceEquivalent": false
+    },
+    {
+      "name": "Additive Average",
+      "kind": "transition",
+      "manualPage": 20,
+      "manualLabel": "ADDITIVE AVERAGE",
+      "manualMeaningParaphrase": "Blend between ordinary and additive transition behavior.",
+      "status": "broadly_consistent",
+      "priority": null,
+      "comparison": "Current normalized additive weighting is a plausible independent interpretation; exact midpoint formula unknown.",
+      "proposedAcceptance": "Compare midpoint output to ordinary and additive on identical fixtures; record normalized-clamp choices without claiming exact interpolation.",
+      "acceptanceExecuted": false,
+      "implementationEvidence": "code-path inspected; no new browser execution in this crosswalk",
+      "current": {
+        "name": "Additive Average",
+        "category": "Blend",
+        "provenance": "manifest",
+        "kernelIndex": 2,
+        "contract": "Normalize overlapping two-stage additive weights.",
+        "functionalIndependentImplementation": true,
+        "referenceRuntimeAvailability": "unverified",
+        "referenceAlgorithm": "unknown",
+        "referenceEquivalent": false,
+        "candidate": false,
+        "baseline": false,
+        "temporal": false,
+        "endpointContract": "Live left at 0, live right at 1, each with its own upfader"
+      },
+      "sourceFiles": [
+        "prototype/video-transitions.js",
+        "prototype/video-transitions-state.js",
+        "prototype/video-transitions-kernel.js"
+      ],
+      "featureModelRouting": "VID-002; see modelRouting",
+      "referenceEquivalent": false
+    },
+    {
+      "name": "Additive",
+      "kind": "transition",
+      "manualPage": 20,
+      "manualLabel": "ADDITIVE",
+      "manualMeaningParaphrase": "Mix brighter portions of images.",
+      "status": "broadly_consistent",
+      "priority": null,
+      "comparison": "Current additive premultiplied sum fits broad blend class; manual does not specify an explicit luma gate or weights.",
+      "proposedAcceptance": "Compare dark and bright overlaps; document weighting/clipping and preserve alpha. Do not infer a hard brightness threshold from prose.",
+      "acceptanceExecuted": false,
+      "implementationEvidence": "code-path inspected; no new browser execution in this crosswalk",
+      "current": {
+        "name": "Additive",
+        "category": "Blend",
+        "provenance": "manifest",
+        "kernelIndex": 3,
+        "contract": "Overlap both sources at full weight in the middle; clamp their sum.",
+        "functionalIndependentImplementation": true,
+        "referenceRuntimeAvailability": "unverified",
+        "referenceAlgorithm": "unknown",
+        "referenceEquivalent": false,
+        "candidate": false,
+        "baseline": false,
+        "temporal": false,
+        "endpointContract": "Live left at 0, live right at 1, each with its own upfader"
+      },
+      "sourceFiles": [
+        "prototype/video-transitions.js",
+        "prototype/video-transitions-state.js",
+        "prototype/video-transitions-kernel.js"
+      ],
+      "featureModelRouting": "VID-002; see modelRouting",
+      "referenceEquivalent": false
+    },
+    {
+      "name": "Difference Fade",
+      "kind": "transition",
+      "manualPage": 21,
+      "manualLabel": "DIFFERENCE FADE",
+      "manualMeaningParaphrase": "Ordinary transition passes through image difference.",
+      "status": "broadly_consistent",
+      "priority": null,
+      "comparison": "Current difference-weighted midpoint fits broad class.",
+      "proposedAcceptance": "Known color pairs produce absolute-difference-like midpoint then recover source endpoints.",
+      "acceptanceExecuted": false,
+      "implementationEvidence": "code-path inspected; no new browser execution in this crosswalk",
+      "current": {
+        "name": "Difference Fade",
+        "category": "Blend",
+        "provenance": "manifest",
+        "kernelIndex": 4,
+        "contract": "Crossfade through absolute color difference at the midpoint.",
+        "functionalIndependentImplementation": true,
+        "referenceRuntimeAvailability": "unverified",
+        "referenceAlgorithm": "unknown",
+        "referenceEquivalent": false,
+        "candidate": false,
+        "baseline": false,
+        "temporal": false,
+        "endpointContract": "Live left at 0, live right at 1, each with its own upfader"
+      },
+      "sourceFiles": [
+        "prototype/video-transitions.js",
+        "prototype/video-transitions-state.js",
+        "prototype/video-transitions-kernel.js"
+      ],
+      "featureModelRouting": "VID-002; see modelRouting",
+      "referenceEquivalent": false
+    },
+    {
+      "name": "Smudge Fade",
+      "kind": "transition",
+      "manualPage": 21,
+      "manualLabel": "SMUDGE FADE",
+      "manualMeaningParaphrase": "Blend both videos inward from edges toward center.",
+      "status": "semantic_mismatch",
+      "priority": "P1",
+      "comparison": "Current global horizontal/wavy offset with temporal prior-output trail does not converge from image edges toward center.",
+      "proposedAcceptance": "Track four differently colored border markers during fader movement; all edges should smear inward under declared geometry, with live moving sources.",
+      "acceptanceExecuted": false,
+      "implementationEvidence": "code-path inspected; no new browser execution in this crosswalk",
+      "current": {
+        "name": "Smudge Fade",
+        "category": "Shader",
+        "provenance": "manifest",
+        "kernelIndex": 5,
+        "contract": "Spatial smear with a bounded trail of the preceding rendered frame.",
+        "functionalIndependentImplementation": true,
+        "referenceRuntimeAvailability": "unverified",
+        "referenceAlgorithm": "unknown",
+        "referenceEquivalent": false,
+        "candidate": false,
+        "baseline": false,
+        "temporal": true,
+        "endpointContract": "Live left at 0, live right at 1, each with its own upfader"
+      },
+      "sourceFiles": [
+        "prototype/video-transitions.js",
+        "prototype/video-transitions-state.js",
+        "prototype/video-transitions-kernel.js"
+      ],
+      "featureModelRouting": "VID-002; see modelRouting",
+      "referenceEquivalent": false
+    },
+    {
+      "name": "Melt",
+      "kind": "transition",
+      "manualPage": 21,
+      "manualLabel": "MELT",
+      "manualMeaningParaphrase": "Melt-like combination of two images.",
+      "status": "broadly_consistent",
+      "priority": null,
+      "comparison": "Current column drips fit broad metaphor; exact direction/timing unknown.",
+      "proposedAcceptance": "Verify spatially uneven flowing reveal between real moving sources, preserving endpoints/alpha.",
+      "acceptanceExecuted": false,
+      "implementationEvidence": "code-path inspected; no new browser execution in this crosswalk",
+      "current": {
+        "name": "Melt",
+        "category": "Shader",
+        "provenance": "manifest",
+        "kernelIndex": 6,
+        "contract": "Independent column-dependent vertical drips reveal the incoming image.",
+        "functionalIndependentImplementation": true,
+        "referenceRuntimeAvailability": "unverified",
+        "referenceAlgorithm": "unknown",
+        "referenceEquivalent": false,
+        "candidate": false,
+        "baseline": false,
+        "temporal": false,
+        "endpointContract": "Live left at 0, live right at 1, each with its own upfader"
+      },
+      "sourceFiles": [
+        "prototype/video-transitions.js",
+        "prototype/video-transitions-state.js",
+        "prototype/video-transitions-kernel.js"
+      ],
+      "featureModelRouting": "VID-002; see modelRouting",
+      "referenceEquivalent": false
+    },
+    {
+      "name": "Default",
+      "kind": "transition",
+      "manualPage": 21,
+      "manualLabel": "DEFAULT",
+      "manualMeaningParaphrase": "Ordinary video transition.",
+      "status": "broadly_consistent",
+      "priority": null,
+      "comparison": "Independent linear crossfade is plausible; transfer curve and video gamma remain unknown.",
+      "proposedAcceptance": "Known opaque patches interpolate across fader travel; do not infer exact curve from the word standard.",
+      "acceptanceExecuted": false,
+      "implementationEvidence": "code-path inspected; no new browser execution in this crosswalk",
+      "current": {
+        "name": "Default",
+        "category": "Blend",
+        "provenance": "localized-candidate",
+        "kernelIndex": 7,
+        "contract": "Independent linear premultiplied-alpha crossfade.",
+        "functionalIndependentImplementation": true,
+        "referenceRuntimeAvailability": "unverified",
+        "referenceAlgorithm": "unknown",
+        "referenceEquivalent": false,
+        "candidate": true,
+        "baseline": false,
+        "temporal": false,
+        "endpointContract": "Live left at 0, live right at 1, each with its own upfader"
+      },
+      "sourceFiles": [
+        "prototype/video-transitions.js",
+        "prototype/video-transitions-state.js",
+        "prototype/video-transitions-kernel.js"
+      ],
+      "featureModelRouting": "VID-002; see modelRouting",
+      "referenceEquivalent": false
+    },
+    {
+      "name": "Center",
+      "kind": "transition",
+      "manualPage": 21,
+      "manualLabel": "CENTER",
+      "manualMeaningParaphrase": "Ordinary blend restricted to the middle half of fader travel.",
+      "status": "semantic_mismatch",
+      "priority": "P1",
+      "comparison": "Current spatial expanding rectangle is a different concept; effect is not a remapped central50% crossfade.",
+      "proposedAcceptance": "Use solid moving sources: output entirely left at t<=.25, entirely right at t>=.75, and a spatially uniform blend inside. Linear remap is an independent curve choice.",
+      "acceptanceExecuted": false,
+      "implementationEvidence": "code-path inspected; no new browser execution in this crosswalk",
+      "current": {
+        "name": "Center",
+        "category": "Blend",
+        "provenance": "localized-candidate",
+        "kernelIndex": 8,
+        "contract": "Reveal an expanding centered rectangle.",
+        "functionalIndependentImplementation": true,
+        "referenceRuntimeAvailability": "unverified",
+        "referenceAlgorithm": "unknown",
+        "referenceEquivalent": false,
+        "candidate": true,
+        "baseline": false,
+        "temporal": false,
+        "endpointContract": "Live left at 0, live right at 1, each with its own upfader"
+      },
+      "sourceFiles": [
+        "prototype/video-transitions.js",
+        "prototype/video-transitions-state.js",
+        "prototype/video-transitions-kernel.js"
+      ],
+      "featureModelRouting": "VID-002; see modelRouting",
+      "referenceEquivalent": false
+    },
+    {
+      "name": "Scratch",
+      "kind": "transition",
+      "manualPage": 21,
+      "manualLabel": "SCRATCH",
+      "manualMeaningParaphrase": "Rapid switching near fader ends.",
+      "status": "semantic_mismatch",
+      "priority": "P1",
+      "comparison": "Current captures/fixes endpoint frames and scrubs snapshots across the entire interior; no documented temporal-freeze requirement. Exact cut thresholds/hysteresis are unspecified.",
+      "proposedAcceptance": "Keep fader fixed away from cuts while sources animate: selected source must remain live; sweep endpoints and verify cuts in declared narrow endpoint regions. Resolve thresholds from reference before equivalence.",
+      "acceptanceExecuted": false,
+      "implementationEvidence": "code-path inspected; no new browser execution in this crosswalk",
+      "current": {
+        "name": "Scratch",
+        "category": "Latch",
+        "provenance": "localized-candidate",
+        "kernelIndex": 9,
+        "contract": "Hold the last endpoint's captured source until the opposite endpoint; scrub the snapshot horizontally.",
+        "functionalIndependentImplementation": true,
+        "referenceRuntimeAvailability": "unverified",
+        "referenceAlgorithm": "unknown",
+        "referenceEquivalent": false,
+        "candidate": true,
+        "baseline": false,
+        "temporal": true,
+        "endpointContract": "Live left at 0, live right at 1, each with its own upfader"
+      },
+      "sourceFiles": [
+        "prototype/video-transitions.js",
+        "prototype/video-transitions-state.js",
+        "prototype/video-transitions-kernel.js"
+      ],
+      "featureModelRouting": "VID-002; see modelRouting",
+      "referenceEquivalent": false
+    },
+    {
+      "name": "Latch 50",
+      "kind": "transition",
+      "manualPage": 21,
+      "manualLabel": "LATCH 50",
+      "manualMeaningParaphrase": "Immediate source cut at fader midpoint.",
+      "status": "semantic_mismatch",
+      "priority": "P1",
+      "comparison": "Current captures selected frames and freezes until recrossing/endpoints rather than simply selecting the live source.",
+      "proposedAcceptance": "At .49 display current left; at .51 display current right; keep .51 fixed and change right frames: output must track live right. At .50 tie policy independent.",
+      "acceptanceExecuted": false,
+      "implementationEvidence": "code-path inspected; no new browser execution in this crosswalk",
+      "current": {
+        "name": "Latch 50",
+        "category": "Latch",
+        "provenance": "localized-candidate",
+        "kernelIndex": 10,
+        "contract": "Capture selected source when crossing 50%; hold it until crossing back or reaching an endpoint.",
+        "functionalIndependentImplementation": true,
+        "referenceRuntimeAvailability": "unverified",
+        "referenceAlgorithm": "unknown",
+        "referenceEquivalent": false,
+        "candidate": true,
+        "baseline": false,
+        "temporal": true,
+        "endpointContract": "Live left at 0, live right at 1, each with its own upfader"
+      },
+      "sourceFiles": [
+        "prototype/video-transitions.js",
+        "prototype/video-transitions-state.js",
+        "prototype/video-transitions-kernel.js"
+      ],
+      "featureModelRouting": "VID-002; see modelRouting",
+      "referenceEquivalent": false
+    },
+    {
+      "name": "Scratch Fade",
+      "kind": "transition",
+      "manualPage": 21,
+      "manualLabel": "SCRATCH FADE",
+      "manualMeaningParaphrase": "Scratch variation allowing channel-upfader mixing.",
+      "status": "semantic_mismatch",
+      "priority": "P1",
+      "comparison": "Current freezes departing left then crossfades it across the interior; generic upfader gain exists but snapshot semantics are not documented.",
+      "proposedAcceptance": "Use independently moving sources; exercise fader endpoint cuts and both upfaders. Sources must not freeze merely on entering the interior; exact fade/cut curve requires reference.",
+      "acceptanceExecuted": false,
+      "implementationEvidence": "code-path inspected; no new browser execution in this crosswalk",
+      "current": {
+        "name": "Scratch Fade",
+        "category": "Latch",
+        "provenance": "localized-candidate",
+        "kernelIndex": 11,
+        "contract": "Freeze departing left source on entering the interior, fade that snapshot to live right source.",
+        "functionalIndependentImplementation": true,
+        "referenceRuntimeAvailability": "unverified",
+        "referenceAlgorithm": "unknown",
+        "referenceEquivalent": false,
+        "candidate": true,
+        "baseline": false,
+        "temporal": true,
+        "endpointContract": "Live left at 0, live right at 1, each with its own upfader"
+      },
+      "sourceFiles": [
+        "prototype/video-transitions.js",
+        "prototype/video-transitions-state.js",
+        "prototype/video-transitions-kernel.js"
+      ],
+      "featureModelRouting": "VID-002; see modelRouting",
+      "referenceEquivalent": false
+    },
+    {
+      "name": "Box H",
+      "kind": "transition",
+      "manualPage": 21,
+      "manualLabel": "BOX H",
+      "manualMeaningParaphrase": "Images on outer faces of a horizontally turning box.",
+      "status": "broadly_consistent",
+      "priority": null,
+      "comparison": "Current compressed shaded faces approximate the concept; no recovered perspective/projection.",
+      "proposedAcceptance": "Numbered face markers expose rotation/compression and source ownership; compare only broad box-turn behavior pending reference.",
+      "acceptanceExecuted": false,
+      "implementationEvidence": "code-path inspected; no new browser execution in this crosswalk",
+      "current": {
+        "name": "Box H",
+        "category": "3D",
+        "provenance": "localized-candidate",
+        "kernelIndex": 12,
+        "contract": "Compress outgoing/incoming horizontal faces with independent depth shading.",
+        "functionalIndependentImplementation": true,
+        "referenceRuntimeAvailability": "unverified",
+        "referenceAlgorithm": "unknown",
+        "referenceEquivalent": false,
+        "candidate": true,
+        "baseline": false,
+        "temporal": false,
+        "endpointContract": "Live left at 0, live right at 1, each with its own upfader"
+      },
+      "sourceFiles": [
+        "prototype/video-transitions.js",
+        "prototype/video-transitions-state.js",
+        "prototype/video-transitions-kernel.js"
+      ],
+      "featureModelRouting": "VID-002; see modelRouting",
+      "referenceEquivalent": false
+    },
+    {
+      "name": "Box V",
+      "kind": "transition",
+      "manualPage": 21,
+      "manualLabel": "BOX V",
+      "manualMeaningParaphrase": "Images on outer faces of a vertically turning box.",
+      "status": "broadly_consistent",
+      "priority": null,
+      "comparison": "Current vertical compressed shaded faces approximate concept.",
+      "proposedAcceptance": "Track face markers through a vertical turn; no exact camera/projection claim.",
+      "acceptanceExecuted": false,
+      "implementationEvidence": "code-path inspected; no new browser execution in this crosswalk",
+      "current": {
+        "name": "Box V",
+        "category": "3D",
+        "provenance": "localized-candidate",
+        "kernelIndex": 13,
+        "contract": "Compress outgoing/incoming vertical faces with independent depth shading.",
+        "functionalIndependentImplementation": true,
+        "referenceRuntimeAvailability": "unverified",
+        "referenceAlgorithm": "unknown",
+        "referenceEquivalent": false,
+        "candidate": true,
+        "baseline": false,
+        "temporal": false,
+        "endpointContract": "Live left at 0, live right at 1, each with its own upfader"
+      },
+      "sourceFiles": [
+        "prototype/video-transitions.js",
+        "prototype/video-transitions-state.js",
+        "prototype/video-transitions-kernel.js"
+      ],
+      "featureModelRouting": "VID-002; see modelRouting",
+      "referenceEquivalent": false
+    },
+    {
+      "name": "Box Both",
+      "kind": "transition",
+      "manualPage": 20,
+      "manualLabel": "BOX BOTH",
+      "manualMeaningParaphrase": "Alternate the two box-turn transition directions.",
+      "status": "semantic_mismatch",
+      "priority": "P1",
+      "comparison": "Current simultaneously scales both source faces instead of alternating Box H and Box V. Manual does not specify when alternation occurs.",
+      "proposedAcceptance": "Verify each resolved pass equals one declared H or V box mode and alternating events select the other; establish event/cycle policy independently until reference observed.",
+      "acceptanceExecuted": false,
+      "implementationEvidence": "code-path inspected; no new browser execution in this crosswalk",
+      "current": {
+        "name": "Box Both",
+        "category": "3D",
+        "provenance": "localized-candidate",
+        "kernelIndex": 14,
+        "contract": "Scale both faces around center during the changeover.",
+        "functionalIndependentImplementation": true,
+        "referenceRuntimeAvailability": "unverified",
+        "referenceAlgorithm": "unknown",
+        "referenceEquivalent": false,
+        "candidate": true,
+        "baseline": false,
+        "temporal": false,
+        "endpointContract": "Live left at 0, live right at 1, each with its own upfader"
+      },
+      "sourceFiles": [
+        "prototype/video-transitions.js",
+        "prototype/video-transitions-state.js",
+        "prototype/video-transitions-kernel.js"
+      ],
+      "featureModelRouting": "VID-002; see modelRouting",
+      "referenceEquivalent": false
+    },
+    {
+      "name": "Spin H",
+      "kind": "transition",
+      "manualPage": 21,
+      "manualLabel": "SPIN H",
+      "manualMeaningParaphrase": "Manual describes spin about a vertical axis.",
+      "status": "underspecified",
+      "priority": null,
+      "comparison": "Current x compression is compatible with a vertical-axis card turn despite contract text calling it horizontal-axis; manual uses vertical-axis wording for both H and V.",
+      "proposedAcceptance": "Track horizontal marker compression and record actual axis; obtain reference to resolve duplicated manual axis wording before claiming H/V mapping.",
+      "acceptanceExecuted": false,
+      "implementationEvidence": "code-path inspected; no new browser execution in this crosswalk",
+      "current": {
+        "name": "Spin H",
+        "category": "3D",
+        "provenance": "localized-candidate",
+        "kernelIndex": 15,
+        "contract": "Horizontal-axis coordinate compression simulates a horizontal card flip.",
+        "functionalIndependentImplementation": true,
+        "referenceRuntimeAvailability": "unverified",
+        "referenceAlgorithm": "unknown",
+        "referenceEquivalent": false,
+        "candidate": true,
+        "baseline": false,
+        "temporal": false,
+        "endpointContract": "Live left at 0, live right at 1, each with its own upfader"
+      },
+      "sourceFiles": [
+        "prototype/video-transitions.js",
+        "prototype/video-transitions-state.js",
+        "prototype/video-transitions-kernel.js"
+      ],
+      "featureModelRouting": "VID-002; see modelRouting",
+      "referenceEquivalent": false
+    },
+    {
+      "name": "Spin V",
+      "kind": "transition",
+      "manualPage": 21,
+      "manualLabel": "SPIN V",
+      "manualMeaningParaphrase": "Manual also describes spin about a vertical axis.",
+      "status": "underspecified",
+      "priority": null,
+      "comparison": "Current y compression differs from literal duplicate text, but likely editorial ambiguity prevents a confident required-axis conclusion.",
+      "proposedAcceptance": "Compare H/V transforms with asymmetric markers; preserve documented wording and require reference before selecting corrected axis.",
+      "acceptanceExecuted": false,
+      "implementationEvidence": "code-path inspected; no new browser execution in this crosswalk",
+      "current": {
+        "name": "Spin V",
+        "category": "3D",
+        "provenance": "localized-candidate",
+        "kernelIndex": 16,
+        "contract": "Vertical-axis coordinate compression simulates a vertical card flip.",
+        "functionalIndependentImplementation": true,
+        "referenceRuntimeAvailability": "unverified",
+        "referenceAlgorithm": "unknown",
+        "referenceEquivalent": false,
+        "candidate": true,
+        "baseline": false,
+        "temporal": false,
+        "endpointContract": "Live left at 0, live right at 1, each with its own upfader"
+      },
+      "sourceFiles": [
+        "prototype/video-transitions.js",
+        "prototype/video-transitions-state.js",
+        "prototype/video-transitions-kernel.js"
+      ],
+      "featureModelRouting": "VID-002; see modelRouting",
+      "referenceEquivalent": false
+    },
+    {
+      "name": "Spin Both",
+      "kind": "transition",
+      "manualPage": 21,
+      "manualLabel": "SPIN BOTH",
+      "manualMeaningParaphrase": "Spin involving both axes.",
+      "status": "broadly_consistent",
+      "priority": null,
+      "comparison": "Current both-axis compression and in-plane rotation approximates broad class; exact trajectory unknown.",
+      "proposedAcceptance": "Use asymmetric markers to show both-axis contribution, not merely one-dimensional scale.",
+      "acceptanceExecuted": false,
+      "implementationEvidence": "code-path inspected; no new browser execution in this crosswalk",
+      "current": {
+        "name": "Spin Both",
+        "category": "3D",
+        "provenance": "localized-candidate",
+        "kernelIndex": 17,
+        "contract": "Combine two-axis compression with an in-plane half turn.",
+        "functionalIndependentImplementation": true,
+        "referenceRuntimeAvailability": "unverified",
+        "referenceAlgorithm": "unknown",
+        "referenceEquivalent": false,
+        "candidate": true,
+        "baseline": false,
+        "temporal": false,
+        "endpointContract": "Live left at 0, live right at 1, each with its own upfader"
+      },
+      "sourceFiles": [
+        "prototype/video-transitions.js",
+        "prototype/video-transitions-state.js",
+        "prototype/video-transitions-kernel.js"
+      ],
+      "featureModelRouting": "VID-002; see modelRouting",
+      "referenceEquivalent": false
+    },
+    {
+      "name": "Wipe H",
+      "kind": "transition",
+      "manualPage": null,
+      "manualLabel": null,
+      "manualMeaningParaphrase": "No description in pages19\u201321.",
+      "status": "not_documented",
+      "priority": null,
+      "comparison": "Localized candidate remains unverified by this manual.",
+      "proposedAcceptance": "Keep candidate provenance and test original left-to-right wipe independently; do not infer reference menu availability.",
+      "acceptanceExecuted": false,
+      "implementationEvidence": "code-path inspected; no new browser execution in this crosswalk",
+      "current": {
+        "name": "Wipe H",
+        "category": "Wipe",
+        "provenance": "localized-candidate",
+        "kernelIndex": 18,
+        "contract": "Incoming image reveals left to right.",
+        "functionalIndependentImplementation": true,
+        "referenceRuntimeAvailability": "unverified",
+        "referenceAlgorithm": "unknown",
+        "referenceEquivalent": false,
+        "candidate": true,
+        "baseline": false,
+        "temporal": false,
+        "endpointContract": "Live left at 0, live right at 1, each with its own upfader"
+      },
+      "sourceFiles": [
+        "prototype/video-transitions.js",
+        "prototype/video-transitions-state.js",
+        "prototype/video-transitions-kernel.js"
+      ],
+      "featureModelRouting": "VID-002; see modelRouting",
+      "referenceEquivalent": false
+    },
+    {
+      "name": "Wipe V",
+      "kind": "transition",
+      "manualPage": null,
+      "manualLabel": null,
+      "manualMeaningParaphrase": "No description in pages19\u201321.",
+      "status": "not_documented",
+      "priority": null,
+      "comparison": "Localized candidate remains unverified by this manual.",
+      "proposedAcceptance": "Keep candidate provenance and test original vertical wipe independently.",
+      "acceptanceExecuted": false,
+      "implementationEvidence": "code-path inspected; no new browser execution in this crosswalk",
+      "current": {
+        "name": "Wipe V",
+        "category": "Wipe",
+        "provenance": "localized-candidate",
+        "kernelIndex": 19,
+        "contract": "Incoming image reveals top to bottom.",
+        "functionalIndependentImplementation": true,
+        "referenceRuntimeAvailability": "unverified",
+        "referenceAlgorithm": "unknown",
+        "referenceEquivalent": false,
+        "candidate": true,
+        "baseline": false,
+        "temporal": false,
+        "endpointContract": "Live left at 0, live right at 1, each with its own upfader"
+      },
+      "sourceFiles": [
+        "prototype/video-transitions.js",
+        "prototype/video-transitions-state.js",
+        "prototype/video-transitions-kernel.js"
+      ],
+      "featureModelRouting": "VID-002; see modelRouting",
+      "referenceEquivalent": false
+    },
+    {
+      "name": "Swap",
+      "kind": "transition",
+      "manualPage": 21,
+      "manualLabel": "SWAP",
+      "manualMeaningParaphrase": "Animated exchange between the two video sources.",
+      "status": "broadly_consistent",
+      "priority": null,
+      "comparison": "Current panel translation fits broad animation class; manual sentence has an apparent text error, so no exact choreography inferred.",
+      "proposedAcceptance": "Track both source markers through exchange and verify final ownership; reference trajectory unknown.",
+      "acceptanceExecuted": false,
+      "implementationEvidence": "code-path inspected; no new browser execution in this crosswalk",
+      "current": {
+        "name": "Swap",
+        "category": "Swap",
+        "provenance": "localized-candidate",
+        "kernelIndex": 20,
+        "contract": "Translate both panels past each other with a depth-offset changeover.",
+        "functionalIndependentImplementation": true,
+        "referenceRuntimeAvailability": "unverified",
+        "referenceAlgorithm": "unknown",
+        "referenceEquivalent": false,
+        "candidate": true,
+        "baseline": false,
+        "temporal": false,
+        "endpointContract": "Live left at 0, live right at 1, each with its own upfader"
+      },
+      "sourceFiles": [
+        "prototype/video-transitions.js",
+        "prototype/video-transitions-state.js",
+        "prototype/video-transitions-kernel.js"
+      ],
+      "featureModelRouting": "VID-002; see modelRouting",
+      "referenceEquivalent": false
+    },
+    {
+      "name": "Push Slide H",
+      "kind": "transition",
+      "manualPage": 21,
+      "manualLabel": "PUSH SLIDE H",
+      "manualMeaningParaphrase": "Incoming image pushes previous image horizontally offscreen.",
+      "status": "broadly_consistent",
+      "priority": null,
+      "comparison": "Current translated unscaled panels fit broad description.",
+      "proposedAcceptance": "Track fixed marker sizes while source positions translate horizontally and incoming pushes outgoing.",
+      "acceptanceExecuted": false,
+      "implementationEvidence": "code-path inspected; no new browser execution in this crosswalk",
+      "current": {
+        "name": "Push Slide H",
+        "category": "Slide",
+        "provenance": "localized-candidate",
+        "kernelIndex": 21,
+        "contract": "Incoming panel pushes outgoing panel left without rescaling.",
+        "functionalIndependentImplementation": true,
+        "referenceRuntimeAvailability": "unverified",
+        "referenceAlgorithm": "unknown",
+        "referenceEquivalent": false,
+        "candidate": true,
+        "baseline": false,
+        "temporal": false,
+        "endpointContract": "Live left at 0, live right at 1, each with its own upfader"
+      },
+      "sourceFiles": [
+        "prototype/video-transitions.js",
+        "prototype/video-transitions-state.js",
+        "prototype/video-transitions-kernel.js"
+      ],
+      "featureModelRouting": "VID-002; see modelRouting",
+      "referenceEquivalent": false
+    },
+    {
+      "name": "Push Slide V",
+      "kind": "transition",
+      "manualPage": 21,
+      "manualLabel": "PUSH SLIDE V",
+      "manualMeaningParaphrase": "Incoming image pushes previous image vertically offscreen.",
+      "status": "broadly_consistent",
+      "priority": null,
+      "comparison": "Current vertical translated panels fit broad description.",
+      "proposedAcceptance": "Track marker sizes and vertical displacement; source image should not be rescaled as the push proceeds.",
+      "acceptanceExecuted": false,
+      "implementationEvidence": "code-path inspected; no new browser execution in this crosswalk",
+      "current": {
+        "name": "Push Slide V",
+        "category": "Slide",
+        "provenance": "localized-candidate",
+        "kernelIndex": 22,
+        "contract": "Incoming panel pushes outgoing panel up without rescaling.",
+        "functionalIndependentImplementation": true,
+        "referenceRuntimeAvailability": "unverified",
+        "referenceAlgorithm": "unknown",
+        "referenceEquivalent": false,
+        "candidate": true,
+        "baseline": false,
+        "temporal": false,
+        "endpointContract": "Live left at 0, live right at 1, each with its own upfader"
+      },
+      "sourceFiles": [
+        "prototype/video-transitions.js",
+        "prototype/video-transitions-state.js",
+        "prototype/video-transitions-kernel.js"
+      ],
+      "featureModelRouting": "VID-002; see modelRouting",
+      "referenceEquivalent": false
+    },
+    {
+      "name": "Tile Wave H",
+      "kind": "transition",
+      "manualPage": 21,
+      "manualLabel": "TILE WAVE H",
+      "manualMeaningParaphrase": "Sideways wipe made from flipping tiles.",
+      "status": "semantic_mismatch",
+      "priority": "P1",
+      "comparison": "Current sinusoidal delays depend on both row and column, with nonmonotonic x order; a side-to-side wave is not enforced.",
+      "proposedAcceptance": "Track first/half-flip times along each row: tile progress must be monotonic in declared horizontal direction; vertical rows must not reorder that wave unexpectedly.",
+      "acceptanceExecuted": false,
+      "implementationEvidence": "code-path inspected; no new browser execution in this crosswalk",
+      "current": {
+        "name": "Tile Wave H",
+        "category": "3D",
+        "provenance": "localized-candidate",
+        "kernelIndex": 23,
+        "contract": "Staggered horizontal flips across a 6 by 4 tile field.",
+        "functionalIndependentImplementation": true,
+        "referenceRuntimeAvailability": "unverified",
+        "referenceAlgorithm": "unknown",
+        "referenceEquivalent": false,
+        "candidate": true,
+        "baseline": false,
+        "temporal": false,
+        "endpointContract": "Live left at 0, live right at 1, each with its own upfader"
+      },
+      "sourceFiles": [
+        "prototype/video-transitions.js",
+        "prototype/video-transitions-state.js",
+        "prototype/video-transitions-kernel.js"
+      ],
+      "featureModelRouting": "VID-002; see modelRouting",
+      "referenceEquivalent": false
+    },
+    {
+      "name": "Tile Wave V",
+      "kind": "transition",
+      "manualPage": 21,
+      "manualLabel": "TILE WAVE V",
+      "manualMeaningParaphrase": "Vertical wipe made from flipping tiles.",
+      "status": "semantic_mismatch",
+      "priority": "P1",
+      "comparison": "Same nonmonotonic two-dimensional delay field as H; changing compression axis alone does not create vertical wave order.",
+      "proposedAcceptance": "Track flip times down each column and assert monotonic declared vertical direction, with H/V visibly distinct.",
+      "acceptanceExecuted": false,
+      "implementationEvidence": "code-path inspected; no new browser execution in this crosswalk",
+      "current": {
+        "name": "Tile Wave V",
+        "category": "3D",
+        "provenance": "localized-candidate",
+        "kernelIndex": 24,
+        "contract": "Staggered vertical flips across a 6 by 4 tile field.",
+        "functionalIndependentImplementation": true,
+        "referenceRuntimeAvailability": "unverified",
+        "referenceAlgorithm": "unknown",
+        "referenceEquivalent": false,
+        "candidate": true,
+        "baseline": false,
+        "temporal": false,
+        "endpointContract": "Live left at 0, live right at 1, each with its own upfader"
+      },
+      "sourceFiles": [
+        "prototype/video-transitions.js",
+        "prototype/video-transitions-state.js",
+        "prototype/video-transitions-kernel.js"
+      ],
+      "featureModelRouting": "VID-002; see modelRouting",
+      "referenceEquivalent": false
+    },
+    {
+      "name": "Water Bar H",
+      "kind": "transition",
+      "manualPage": null,
+      "manualLabel": null,
+      "manualMeaningParaphrase": "No description in pages19\u201321.",
+      "status": "not_documented",
+      "priority": null,
+      "comparison": "Localized candidate remains independent; neither inclusion nor meaning proved.",
+      "proposedAcceptance": "Test original ripple/wipe contract only and keep reference availability open.",
+      "acceptanceExecuted": false,
+      "implementationEvidence": "code-path inspected; no new browser execution in this crosswalk",
+      "current": {
+        "name": "Water Bar H",
+        "category": "3D",
+        "provenance": "localized-candidate",
+        "kernelIndex": 25,
+        "contract": "Horizontal reveal with row-dependent beat-clock ripples; level controls ripple depth.",
+        "functionalIndependentImplementation": true,
+        "referenceRuntimeAvailability": "unverified",
+        "referenceAlgorithm": "unknown",
+        "referenceEquivalent": false,
+        "candidate": true,
+        "baseline": false,
+        "temporal": false,
+        "endpointContract": "Live left at 0, live right at 1, each with its own upfader"
+      },
+      "sourceFiles": [
+        "prototype/video-transitions.js",
+        "prototype/video-transitions-state.js",
+        "prototype/video-transitions-kernel.js"
+      ],
+      "featureModelRouting": "VID-002; see modelRouting",
+      "referenceEquivalent": false
+    },
+    {
+      "name": "Water Bar V",
+      "kind": "transition",
+      "manualPage": null,
+      "manualLabel": null,
+      "manualMeaningParaphrase": "No description in pages19\u201321.",
+      "status": "not_documented",
+      "priority": null,
+      "comparison": "Localized candidate remains independent.",
+      "proposedAcceptance": "Test original vertical ripple contract only.",
+      "acceptanceExecuted": false,
+      "implementationEvidence": "code-path inspected; no new browser execution in this crosswalk",
+      "current": {
+        "name": "Water Bar V",
+        "category": "3D",
+        "provenance": "localized-candidate",
+        "kernelIndex": 26,
+        "contract": "Vertical reveal with column-dependent beat-clock ripples; level controls ripple depth.",
+        "functionalIndependentImplementation": true,
+        "referenceRuntimeAvailability": "unverified",
+        "referenceAlgorithm": "unknown",
+        "referenceEquivalent": false,
+        "candidate": true,
+        "baseline": false,
+        "temporal": false,
+        "endpointContract": "Live left at 0, live right at 1, each with its own upfader"
+      },
+      "sourceFiles": [
+        "prototype/video-transitions.js",
+        "prototype/video-transitions-state.js",
+        "prototype/video-transitions-kernel.js"
+      ],
+      "featureModelRouting": "VID-002; see modelRouting",
+      "referenceEquivalent": false
+    },
+    {
+      "name": "Tornado",
+      "kind": "transition",
+      "manualPage": null,
+      "manualLabel": null,
+      "manualMeaningParaphrase": "No description in pages19\u201321.",
+      "status": "not_documented",
+      "priority": null,
+      "comparison": "Localized candidate remains independent.",
+      "proposedAcceptance": "Test original twist/reveal contract only.",
+      "acceptanceExecuted": false,
+      "implementationEvidence": "code-path inspected; no new browser execution in this crosswalk",
+      "current": {
+        "name": "Tornado",
+        "category": "3D",
+        "provenance": "localized-candidate",
+        "kernelIndex": 27,
+        "contract": "Counter-rotating radial warps with a growing center reveal.",
+        "functionalIndependentImplementation": true,
+        "referenceRuntimeAvailability": "unverified",
+        "referenceAlgorithm": "unknown",
+        "referenceEquivalent": false,
+        "candidate": true,
+        "baseline": false,
+        "temporal": false,
+        "endpointContract": "Live left at 0, live right at 1, each with its own upfader"
+      },
+      "sourceFiles": [
+        "prototype/video-transitions.js",
+        "prototype/video-transitions-state.js",
+        "prototype/video-transitions-kernel.js"
+      ],
+      "featureModelRouting": "VID-002; see modelRouting",
+      "referenceEquivalent": false
+    },
+    {
+      "name": "Grid 2x2",
+      "kind": "transition",
+      "manualPage": 21,
+      "manualLabel": "GRID 2X2",
+      "manualMeaningParaphrase": "Four cells change in a simple pattern with fader travel.",
+      "status": "broadly_consistent",
+      "priority": null,
+      "comparison": "Current2x2 delayed local wipes match count and broad class; exact ordering unknown.",
+      "proposedAcceptance": "Identify exactly four cell regions and record their changeover ordering, without inventing reference cell timing.",
+      "acceptanceExecuted": false,
+      "implementationEvidence": "code-path inspected; no new browser execution in this crosswalk",
+      "current": {
+        "name": "Grid 2x2",
+        "category": "Slide",
+        "provenance": "localized-candidate",
+        "kernelIndex": 28,
+        "contract": "Four cells wipe locally with alternating start delays.",
+        "functionalIndependentImplementation": true,
+        "referenceRuntimeAvailability": "unverified",
+        "referenceAlgorithm": "unknown",
+        "referenceEquivalent": false,
+        "candidate": true,
+        "baseline": false,
+        "temporal": false,
+        "endpointContract": "Live left at 0, live right at 1, each with its own upfader"
+      },
+      "sourceFiles": [
+        "prototype/video-transitions.js",
+        "prototype/video-transitions-state.js",
+        "prototype/video-transitions-kernel.js"
+      ],
+      "featureModelRouting": "VID-002; see modelRouting",
+      "referenceEquivalent": false
+    },
+    {
+      "name": "Grid Simple",
+      "kind": "transition",
+      "manualPage": 21,
+      "manualLabel": "GRID SIMPLE",
+      "manualMeaningParaphrase": "Nine cells change in a simple pattern.",
+      "status": "semantic_mismatch",
+      "priority": "P1",
+      "comparison": "Current6x4 grid has24 cells.",
+      "proposedAcceptance": "Use coded source cells and detect exactly3x3 regions through a full sweep; define original simple ordering.",
+      "acceptanceExecuted": false,
+      "implementationEvidence": "code-path inspected; no new browser execution in this crosswalk",
+      "current": {
+        "name": "Grid Simple",
+        "category": "Slide",
+        "provenance": "localized-candidate",
+        "kernelIndex": 29,
+        "contract": "Diagonal discrete changeover in a 6 by 4 grid.",
+        "functionalIndependentImplementation": true,
+        "referenceRuntimeAvailability": "unverified",
+        "referenceAlgorithm": "unknown",
+        "referenceEquivalent": false,
+        "candidate": true,
+        "baseline": false,
+        "temporal": false,
+        "endpointContract": "Live left at 0, live right at 1, each with its own upfader"
+      },
+      "sourceFiles": [
+        "prototype/video-transitions.js",
+        "prototype/video-transitions-state.js",
+        "prototype/video-transitions-kernel.js"
+      ],
+      "featureModelRouting": "VID-002; see modelRouting",
+      "referenceEquivalent": false
+    },
+    {
+      "name": "Grid Pop",
+      "kind": "transition",
+      "manualPage": null,
+      "manualLabel": null,
+      "manualMeaningParaphrase": "No description in pages19\u201321.",
+      "status": "not_documented",
+      "priority": null,
+      "comparison": "Localized candidate remains independent.",
+      "proposedAcceptance": "Test original growing-cell contract only.",
+      "acceptanceExecuted": false,
+      "implementationEvidence": "code-path inspected; no new browser execution in this crosswalk",
+      "current": {
+        "name": "Grid Pop",
+        "category": "Slide",
+        "provenance": "localized-candidate",
+        "kernelIndex": 30,
+        "contract": "Incoming image grows independently inside 4 by 3 cells.",
+        "functionalIndependentImplementation": true,
+        "referenceRuntimeAvailability": "unverified",
+        "referenceAlgorithm": "unknown",
+        "referenceEquivalent": false,
+        "candidate": true,
+        "baseline": false,
+        "temporal": false,
+        "endpointContract": "Live left at 0, live right at 1, each with its own upfader"
+      },
+      "sourceFiles": [
+        "prototype/video-transitions.js",
+        "prototype/video-transitions-state.js",
+        "prototype/video-transitions-kernel.js"
+      ],
+      "featureModelRouting": "VID-002; see modelRouting",
+      "referenceEquivalent": false
+    },
+    {
+      "name": "Grid Fade",
+      "kind": "transition",
+      "manualPage": 21,
+      "manualLabel": "GRID FADE",
+      "manualMeaningParaphrase": "Nine cells fade in a simple pattern.",
+      "status": "semantic_mismatch",
+      "priority": "P1",
+      "comparison": "Current5x4 grid has20 cells and hashed stagger delays.",
+      "proposedAcceptance": "Detect3x3 cell boundaries; within each cell verify a continuous fade and declare simple ordering independently.",
+      "acceptanceExecuted": false,
+      "implementationEvidence": "code-path inspected; no new browser execution in this crosswalk",
+      "current": {
+        "name": "Grid Fade",
+        "category": "Slide",
+        "provenance": "localized-candidate",
+        "kernelIndex": 31,
+        "contract": "Deterministic staggered soft fades in 5 by 4 cells.",
+        "functionalIndependentImplementation": true,
+        "referenceRuntimeAvailability": "unverified",
+        "referenceAlgorithm": "unknown",
+        "referenceEquivalent": false,
+        "candidate": true,
+        "baseline": false,
+        "temporal": false,
+        "endpointContract": "Live left at 0, live right at 1, each with its own upfader"
+      },
+      "sourceFiles": [
+        "prototype/video-transitions.js",
+        "prototype/video-transitions-state.js",
+        "prototype/video-transitions-kernel.js"
+      ],
+      "featureModelRouting": "VID-002; see modelRouting",
+      "referenceEquivalent": false
+    },
+    {
+      "name": "Grid Sequence",
+      "kind": "transition",
+      "manualPage": 21,
+      "manualLabel": "GRID SEQUENCE",
+      "manualMeaningParaphrase": "Nine cells change in a partly random pattern.",
+      "status": "semantic_mismatch",
+      "priority": "P1",
+      "comparison": "Current4x4 grid has16 cells in deterministic row-major order.",
+      "proposedAcceptance": "Detect3x3 cells and verify declared seeded/per-event varied ordering rather than always row-major; distribution/repeat policy unknown.",
+      "acceptanceExecuted": false,
+      "implementationEvidence": "code-path inspected; no new browser execution in this crosswalk",
+      "current": {
+        "name": "Grid Sequence",
+        "category": "Slide",
+        "provenance": "localized-candidate",
+        "kernelIndex": 32,
+        "contract": "Row-major 4 by 4 cell sequence; current cell wipes locally.",
+        "functionalIndependentImplementation": true,
+        "referenceRuntimeAvailability": "unverified",
+        "referenceAlgorithm": "unknown",
+        "referenceEquivalent": false,
+        "candidate": true,
+        "baseline": false,
+        "temporal": false,
+        "endpointContract": "Live left at 0, live right at 1, each with its own upfader"
+      },
+      "sourceFiles": [
+        "prototype/video-transitions.js",
+        "prototype/video-transitions-state.js",
+        "prototype/video-transitions-kernel.js"
+      ],
+      "featureModelRouting": "VID-002; see modelRouting",
+      "referenceEquivalent": false
+    },
+    {
+      "name": "Crossfade",
+      "kind": "transition",
+      "manualPage": null,
+      "manualLabel": null,
+      "manualMeaningParaphrase": "Separate Open Play baseline alias.",
+      "status": "independent_baseline",
+      "priority": null,
+      "comparison": "Never counted as a described reference transition.",
+      "proposedAcceptance": "Keep exact independent baseline tests and separate inventory counts.",
+      "acceptanceExecuted": false,
+      "implementationEvidence": "code-path inspected; no new browser execution in this crosswalk",
+      "current": {
+        "name": "Crossfade",
+        "category": "Open Play",
+        "provenance": "open-play-baseline",
+        "kernelIndex": 33,
+        "contract": "Open Play linear baseline alias, separate from reference-name candidates.",
+        "functionalIndependentImplementation": true,
+        "referenceRuntimeAvailability": "unverified",
+        "referenceAlgorithm": "unknown",
+        "referenceEquivalent": false,
+        "candidate": false,
+        "baseline": true,
+        "temporal": false,
+        "endpointContract": "Live left at 0, live right at 1, each with its own upfader"
+      },
+      "sourceFiles": [
+        "prototype/video-transitions.js",
+        "prototype/video-transitions-state.js",
+        "prototype/video-transitions-kernel.js"
+      ],
+      "featureModelRouting": "VID-002; see modelRouting",
+      "referenceEquivalent": false
+    }
+  ],
+  "unknowns": [
+    "Installed4.0.10 exact menu availability and behavior.",
+    "Vendor parameters/ranges/defaults/curve polarity; manual prose rarely specifies these.",
+    "Audio spectrum bin boundaries and exact band-to-component ownership, hardware-control protocol/knob mapping, region orientation, frame update cadence, temporal retrigger/reset behavior.",
+    "Precise pixel algorithms, palette identities, masking widths, projection, cut thresholds and interpolation color space.",
+    "Current runtime satisfaction of any new manual acceptance case; this task does not execute browser/native reference comparisons."
+  ]
+}

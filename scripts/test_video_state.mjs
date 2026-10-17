@@ -45,6 +45,16 @@ test('Semantic-link opt-in and treatment metadata preserve only supported own sc
   let invoked=0;const hostile={};Object.defineProperty(hostile,'mediaTreatment',{get(){invoked++;return 'preserve';}});
   assert.equal(restoreVideoState(hostile).mediaTreatment,'stretch');assert.equal(invoked,0);
 });
+test('Recording resolution metadata preserves supported scalars without restoring runtime capture sessions',()=>{
+  for(const recordingQuality of ['output','360p','480p','720p','1080p']){
+    const restored=restoreVideoState(snapshotVideoState({recordingQuality,recorder:{active:true},captureCanvas:{}}));
+    assert.equal(restored.recordingQuality,recordingQuality);assert(!('recorder' in restored));assert(!('captureCanvas' in restored));
+  }
+  for(const recordingQuality of ['unknown',480,{},null])assert.equal(restoreVideoState({recordingQuality}).recordingQuality,'output');
+  assert.equal(restoreVideoState(Object.create({recordingQuality:'1080p'})).recordingQuality,'output');
+  let invoked=0;const hostile={};Object.defineProperty(hostile,'recordingQuality',{get(){invoked++;return'1080p';}});
+  assert.equal(restoreVideoState(hostile).recordingQuality,'output');assert.equal(invoked,0);
+});
 test('All55 defaults survive snapshots, remain detached and occupy only two ordered slots per target',()=>{
   assert.equal(videoEffectCatalog.length,55);
   for(const entry of videoEffectCatalog){
@@ -125,5 +135,20 @@ test('Media and transition flags persist separately without storing asset bytes 
   assert.equal(JSON.stringify(result).includes('private'),false);
   const inherited=Object.create({enabled:true,random:true});
   assert.deepEqual(restoreVideoState({media:inherited}).media,{enabled:false,random:false});
+});
+test('Frame Pulse legacy beat timing survives JSON restore without seconds taking precedence',()=>{
+  const input=stateWith(effect('Frame Pulse',{periodBeats:.125}));
+  const restored=restoreVideoState(JSON.parse(JSON.stringify(snapshotVideoState(input)))).fx.left[0];
+  assert.equal(restored.params.periodBeats,.125);assert(!('periodSeconds' in restored.params));
+  assert.equal(restoreVideoState(stateWith(effect('Frame Pulse',{periodBeats:99}))).fx.left[0].params.periodBeats,16);
+  assert.equal(restoreVideoState(stateWith(effect('Frame Pulse',{periodBeats:'bad'}))).fx.left[0].params.periodBeats,1);
+  const seconds=restoreVideoState(stateWith(effect('Frame Pulse',{periodBeats:2,periodSeconds:.5}))).fx.left[0];
+  assert.equal(seconds.params.periodSeconds,.5);assert(!('periodBeats' in seconds.params));
+});
+test('Frame Pulse compatibility does not execute accessors or accept inherited timing',()=>{
+  let calls=0;const params=Object.create({periodBeats:8});
+  Object.defineProperty(params,'periodSeconds',{get(){calls++;throw Error('getter');}});
+  const result=restoreVideoState(stateWith(effect('Frame Pulse',params))).fx.left[0];
+  assert.equal(calls,0);assert.equal(result.params.periodSeconds,1);assert(!('periodBeats' in result.params));
 });
 console.log(JSON.stringify({scope:'Executed pure metadata snapshots/restoration and corruption cases; browser persistence integration remains a separate parent check.',passed:checks.length,checks},null,2));

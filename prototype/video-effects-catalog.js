@@ -77,13 +77,15 @@ export const videoEffectCatalog = [
     "referenceRuntimeVerified": false,
     "referenceAvailability": "manifest declaration; active menu unverified",
     "implementationStatus": "original-independent-WebGL2",
-    "contract": "Capture at beat-cycle boundaries, hold for an amount-controlled duty, then return live. Generated pulsing is disabled by reduced motion.",
+    "contract": "Live video with a raised-cosine border-alpha pulse; the center remains live and unchanged. Default period1second and edgeWidth.12 are independent choices. Explicit legacy periodBeats remains a BPM timing alternative. Reduced Motion is exact live bypass; no frame capture.",
+    "manualMeaningEvidence": {"source":"local-evidence/claude-fable/official-video-manual-141226.pdf","page":20,"meaning":"Periodic pulsing at video-frame edges.","edition":"2015-04-09 PDF metadata; installed4.0.10 behavior unverified","exactResponseRecovered":false},
     "parameterStatus": "independent ranges/defaults; vendor parameter labels, mappings and ranges unknown",
     "default": {
       "on": false,
       "value": 0.65,
       "params": {
-        "periodBeats": 1
+        "periodSeconds": 1,
+        "edgeWidth": 0.12
       }
     }
   },
@@ -139,13 +141,14 @@ export const videoEffectCatalog = [
     "referenceRuntimeVerified": false,
     "referenceAvailability": "manifest declaration; active menu unverified",
     "implementationStatus": "original-independent-WebGL2",
-    "contract": "Repeated vertical source panels alternate their vertical offset.",
+    "contract": "Default five repeated vertical source regions, alternating vertical offset. Five regions follows the historical manual meaning; vertical arrangement, offsets, blending and optional2..12-panel extension are independently designed.",
+    "manualMeaningEvidence": {"source":"local-evidence/claude-fable/official-video-manual-141226.pdf","page":20,"meaning":"Divide video into five areas.","edition":"2015-04-09 PDF metadata; installed4.0.10 behavior unverified","exactResponseRecovered":false},
     "parameterStatus": "independent ranges/defaults; vendor parameter labels, mappings and ranges unknown",
     "default": {
       "on": false,
       "value": 0.65,
       "params": {
-        "panels": 4
+        "panels": 5
       }
     }
   },
@@ -1111,7 +1114,7 @@ export const videoEffectByName = new Map(videoEffectCatalog.map(effect => [effec
 const parameterBounds = {
   mode:{options:["Low Pass","High Pass","Band Pass"]},radius:{min:.1,max:24,unit:"output pixels"},
   historySeconds:{min:.25,max:4,unit:"seconds"},delaySeconds:{min:.015625,max:4,unit:"seconds per tile age; unavailable past uses oldest actual retained frame"},columns:{min:2,max:8,step:1},
-  captureToken:{kind:"caller-controlled capture identity"},periodBeats:{min:.125,max:16,unit:"beats"},duty:{min:.02,max:.95},panels:{min:2,max:12,step:1},
+  captureToken:{kind:"caller-controlled capture identity"},periodBeats:{min:.125,max:16,unit:"beats"},periodSeconds:{min:.1,max:16,unit:"seconds; independent pulse duration"},edgeWidth:{min:.005,max:.45,unit:"normalized distance from nearest image edge"},duty:{min:.02,max:.95},panels:{min:2,max:12,step:1},
   turnsPerSecond:{min:-4,max:4},red:{min:0,max:3},green:{min:0,max:3},blue:{min:0,max:3},hue:{min:-360,max:360,unit:"degrees; Color Isolator uses0..360"},
   saturation:{min:0,max:3},luminance:{min:-1,max:1},exposure:{min:0,max:2},angle:{min:-360,max:360,unit:"degrees"},axis:{options:["Horizontal","Vertical","Both"]},sectors:{min:2,max:24,step:1},
   gamma:{min:.1,max:8},width:{min:.001,max:.5,unit:"hue turns"},softness:{min:.001,max:.25,unit:"normalized threshold; Color Isolator allows.5"},pixels:{min:0,max:64},spill:{min:0,max:1},
@@ -1121,7 +1124,8 @@ for (const effect of videoEffectCatalog) {
   effect.independentParameters = [{name:"value",default:effect.default.value,min:0,max:1,
     status:"independent amount;0 is exact bypass"}, ...Object.entries(effect.default.params).map(([name,value])=>({name,default:value,...parameterBounds[name],status:"independently designed"}))];
   if(effect.name === "Color Isolator")for(const parameter of effect.independentParameters){if(parameter.name === "hue")parameter.min=0;if(parameter.name === "softness")parameter.max=.5;}
-  effect.historyPolicy = ["Frame Freeze","Frame Pulse","Delay Grid"].includes(effect.name)
+  if(effect.name === "Frame Pulse")effect.legacyParameters=[{name:"periodBeats",min:.125,max:16,unit:"beats",status:"Independent compatibility timing only when periodSeconds is absent; no frame-hold semantics."}];
+  effect.historyPolicy = ["Frame Freeze","Delay Grid"].includes(effect.name)
     ? "Per-slot upstream-frame state survives parameter changes; asset/effect/off/reset or backward time clears it. Temporal storage is bounded."
     : "Per-slot record/spring state survives parameter changes; no retained video frames allocated.";
   effect.colorPolicy = "Normalized display RGB; premultiplied internal filtering, straight-alpha colour operations/output; transparent outside image bounds. Not a vendor colour-space claim.";

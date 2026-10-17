@@ -54,10 +54,28 @@ run.onclick=async()=>{
   check(pixel(a,36,56)[1]>250,"One-sample-old tile must show green");
   check(pixel(a,60,56)[0]>250,"Two-sample-old tile must show red");
  });
- await test("Pulse holds within its duty and captures at the next beat boundary",()=>{
-  fill(solid,[255,0,0,255]);draw("Frame Pulse",1,{}, {time:0},solid);
-  fill(solid,[0,0,255,255]);check(pixel(draw("Frame Pulse",1,{}, {time:.2},solid),48,32)[0]===255,"Pulse should retain current cycle frame");
-  check(pixel(draw("Frame Pulse",1,{}, {time:.5},solid),48,32)[2]===255,"Next beat must capture blue");
+ await test("Manual Frame Pulse keeps center live while only border alpha pulses",()=>{
+  fill(solid,[255,0,0,128]);const first=draw("Frame Pulse",1,{}, {time:0},solid);
+  fill(solid,[0,0,255,128]);const quarter=draw("Frame Pulse",1,{}, {time:.25},solid),peak=draw("Frame Pulse",1,{}, {time:.5},solid),returned=draw("Frame Pulse",1,{}, {time:1},solid);
+  const center=pixel(peak,48,32),edge=pixel(peak,0,32),middleEdge=pixel(quarter,0,32),back=pixel(returned,0,32);
+  check(pixel(first,48,32)[0]===255&&center[0]===0&&center[2]===255&&Math.abs(center[3]-128)<=1,"Pulse must use current blue center, not retained red frame, and preserve center alpha");
+  check(edge[3]<=2&&Math.abs(middleEdge[3]-64)<=2&&Math.abs(back[3]-128)<=1,"Border must fade smoothly at quarter/half/full independent1s period");
+  for(const [x,y] of [[0,32],[95,32],[48,0],[48,63]])check(pixel(peak,x,y)[3]<=2,"All four frame edges must pulse");
+  const reduced=draw("Frame Pulse",1,{}, {time:.5,reducedMotion:true},solid),bypass=draw(null,1,{}, {},solid);check(difference(reduced,bypass)<.01,"Reduced Motion must retain exact live source without generated border pulse");
+  return {center,edge,quarterEdge:middleEdge,returnedEdge:back,reducedDifference:difference(reduced,bypass),meaningSource:"historical manual p20; waveform/width/timing independent"};
+ });
+ await test("Frame Pulse duration and legacy beat timing remain explicit distinct policies",()=>{
+  fill(solid,[40,90,160,255]);const slow=draw("Frame Pulse",1,{periodSeconds:2},{time:.5,bpm:240},solid),slowPeak=draw("Frame Pulse",1,{periodSeconds:2},{time:1,bpm:120},solid);
+  check(Math.abs(pixel(slow,0,32)[3]-128)<=3&&pixel(slowPeak,0,32)[3]<=3,"Explicit2s period must not become BPM-driven");
+  const legacyPeak=draw("Frame Pulse",1,{periodBeats:1},{time:.25,bpm:120},solid),legacyReturn=draw("Frame Pulse",1,{periodBeats:1},{time:.5,bpm:120},solid);
+  check(pixel(legacyPeak,0,32)[3]<=3&&pixel(legacyReturn,0,32)[3]===255,"Saved1beat period must remain.5s at120BPM without holding frames");
+  const fastPeriod=60/400*.125,fast=draw("Frame Pulse",1,{periodBeats:.125},{time:fastPeriod/2,bpm:400},solid);check(pixel(fast,0,32)[3]<=3,"Legacy sub.1s beat period must not inherit new seconds-control minimum");
+  return {secondsQuarter:pixel(slow,0,32),secondsPeak:pixel(slowPeak,0,32),legacyPeak:pixel(legacyPeak,0,32),legacyReturn:pixel(legacyReturn,0,32),fastLegacyPeak:pixel(fast,0,32),fastPeriod};
+ });
+ await test("Manual Split defaults to exactly five repeated source regions",()=>{
+  paint(solid,(x)=>x<32?[255,0,0,255]:x<64?[0,255,0,255]:[0,0,255,255]);const image=draw("Split",1,{}, {},solid),samples=[];
+  for(let panel=0;panel<5;panel++)for(const [fraction,channel] of [[.15,0],[.5,1],[.85,2]]){const x=Math.floor((panel+fraction)*width/5),p=pixel(image,x,32);samples.push({panel,fraction,x,pixel:p});check(p[channel]>=253&&p[(channel+1)%3]<=2&&p[(channel+2)%3]<=2,"Five-region source markers missing at panel"+panel+" fraction"+fraction+": "+p);}
+  return {regions:5,samples,meaningSource:"historical manual p20; vertical region layout/offset is independent"};
  });
  await test("BPM flash cadence and reduced-motion policy",()=>{
   fill(solid,[30,40,50,255]);

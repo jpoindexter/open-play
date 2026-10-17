@@ -83,3 +83,20 @@ REQ-496–507 account for12 previously omitted observed Video settings, bringing
 working detailed inventory to507 while all110 groups and PG-01–07 remain open.
 Reference mappings/ranges/quality/timing/output, native and physical acceptance
 remain gaps. A separate Fable research conversation does not grant native approval.
+
+
+## Recovered manual and recording-resolution continuation
+
+The141226 official PDF is recovered (2015metadata); current hosting is not current
+algorithm proof. Video Effects/Info screens are now observed with Video restoredOFF.
+Read VIDEO_REFERENCE_SETTINGS_20261016.json. PG-02 remains partial elsewhere.
+Actual corrected FX74/74,transitions55/55,Media32/32,recording23/23 and assembled
+pipeline32/32 prove bounded independent paths. REQ-498 now has real recording
+resolution and main-UI480p download evidence. Read
+[VIDEO_MANUAL_RECORDING_REVIEW.md](../prototype/VIDEO_MANUAL_RECORDING_REVIEW.md).
+The recovered crosswalk exposes further behavior/control gaps; PG-01–07 and
+full1:1 stay open, and native approval remains absent.
+
+Recovered manual reconciliation adds14 distinctworkflowrequirements REQ-508–521;
+workinginventory110/521. All47proposals have source/dispositionmapping. No new
+requirementisacceptedfromitslabel, count or nearbygreencheck.

@@ -1,3 +1,4 @@
+import { normalizeRecordingQuality } from './video-recording.js';
 import { normalizeVideoTreatment } from './video-treatment.js';
 import { videoEffectCatalog } from './video-effects-catalog.js';
 import { videoTransitionCatalog } from './video-transitions.js';
@@ -44,6 +45,13 @@ function effectSpec(input) {
     if (control.name === 'value') output.value = parameter(value,control);
     else output.params[control.name] = parameter(value,control);
   }
+  // Preserve an explicit older beat period instead of silently replacing its
+  // timing with the new seconds default. Own data only, as above.
+  if (definition.name === 'Frame Pulse' && own(params,'periodSeconds') === undefined && own(params,'periodBeats') !== undefined) {
+    const control = definition.legacyParameters.find(control => control.name === 'periodBeats');
+    output.params.periodBeats = parameter(own(params,'periodBeats'),{...control,default:1});
+    delete output.params.periodSeconds;
+  }
   return output;
 }
 const stringFields = ['text','color','fontFamily','align','animation','speed'];
@@ -72,6 +80,7 @@ function sanitized(value,restore) {
     cross:clamp(finite(own(value,'cross'),0),-1,1),auto:own(value,'auto') === true,
     linked:typeof own(value,'linked') === 'boolean' ? own(value,'linked') : true,
     audioFXLink:own(value,'audioFXLink') === true,mediaTreatment:normalizeVideoTreatment(own(value,'mediaTreatment')),
+    recordingQuality:normalizeRecordingQuality(own(value,'recordingQuality')),
     media:flags('media'),transitionSelection:flags('transitionSelection'),
     fx:Object.fromEntries(targets.map(target => [target,[0,1].map(index => effectSpec(arrayEntry(own(fx,target),index)))])),
     overlays:Object.fromEntries(targets.map(target => [target,arrayValues(own(overlays,target))
