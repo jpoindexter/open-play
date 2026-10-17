@@ -1,6 +1,16 @@
 # Open Play desktop test
 
-The default **Start Open Play Desktop.command** opens local test version0.1.5. Separate0.1.3 and0.1.1 launchers preserve the earlier working bundles. Quit the running test before opening another saved version: the host permits one instance. The native window title now identifies the version even while the HTML page retains its prototype title. This is the approved Electron host around the existing interface/audio implementation, not a native DSP rewrite or public release.
+The default **Start Open Play Desktop.command** opens local test **0.1.6**. The separate **Start Open Play Desktop 0.1.5.command** preserves the prior persistence/keylock build; earlier0.1.3/0.1.1 launchers remain available. Quit the running test before switching versions. This is the already-approved Electron wrapper around the existing browser implementation, with no native DSP rewrite or public release.
+
+Version0.1.6 packages immutable source `dd068e4dc9338d1f4f131e0c64c9195073fbebed`; approved baseline `f8b0abf` remains separate. Actual ASAR `f9e85d9ef3150fd37c15f5b3d72a4e3f6a06a42a59bf29617a43bdf566cdba6e`:222/222 prototype files match. Host changes are title/About metadata; sandbox, permissions, fixed loopback origin and storage partition remain unchanged. The cleanly closed0.1.5 local profile was backed up before launch; older bundles are unchanged.
+
+Actual0.1.6 native main-app tests: synthetic Learn/Add saved a deck2 relative Key Shift mapping alongside the original browse mapping; verified66/62 input moved+2/backto0 with tempo still+8%. Native REC/Save retained both complete stereo recordings. **The declared audio-accuracy test fails one of four channel checks:** +2left371.4587Hz versus370.4125Hz expected exceeds the1Hz limit; three independent estimates corroborate it. The other three channel checks pass. This is an independent fixture criterion, not an established Serato comparison. No threshold change or cause claim.
+
+Actual native Video mapping controls rendered master-text opacity:8,318 bright pixels →0→8,318 with exact restored ROI. A clean quit removes PID93085/listener; newPID94208 restores all3 mappings and3 saved imported tracks without autoplay. Reopened mappings export byte-identically and execute again. These are synthetic main-app subset tests, not physical MIDI, all72 Video workflows/REQ-516, hardware quality or full parity.
+
+Read `docs/prototype/DESKTOP_016_FUNCTIONAL_REVIEW.md`, exact candidate manifest and independent host/audio/Video/restart reviews. Whole original native screenshots may contain JPEG bytes despite their historical .png filenames; originals are preserved. Failed numeric automation/incorrect6→−24 input and test-only assertions remain recorded. Current0.1.6 is available for local testing with these limits.
+
+## Preserved0.1.5 evidence and runtime requirements
 
 Version0.1.5 packages immutable source48a6d4dad2f217a8ba166b9ca890a287aabc4feb, separately recording original approvedHTMLf8b0abf. All200prototypefiles and actual host bytes were checked; sanitized package metadata is expected. Build output is ignored under local-evidence. Failed0.1.4 title build and0.1.2 permission build remain as evidence, without launch shortcuts.
 

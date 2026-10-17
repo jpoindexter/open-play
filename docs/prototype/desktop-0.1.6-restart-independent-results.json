@@ -1,0 +1,206 @@
+{
+  "scope": "Independent offline original-image/export byte/pixel comparison and consistency review of parent saved OS/UI observations. No reviewer UI/process/device operations, native audio afterrestart, storagebyte-decode/crash-recovery or allVideo/reference/fullparity execution.",
+  "pixelPlan": {
+    "path": "docs/prototype/desktop-0.1.6-video-pixel-plan.json",
+    "SHA256": "ac18c107779fa4bebb6ebb8b4770731f268351aa1e288b0580f7b71528598aa2",
+    "fixedROI": [
+      2100,
+      1370,
+      2750,
+      1510
+    ],
+    "predicate": "Each R,G,B >180"
+  },
+  "frames": [
+    {
+      "path": "docs/prototype/screenshots/desktop-0.1.6-video-output-baseline.png",
+      "bytes": 636950,
+      "originalSHA256": "09b5b05772f766acad24884dc9a3db3c3924842c513228d44ab6d4a5680207ba",
+      "actualEncodedFormat": "JPEG",
+      "dimensions": [
+        2880,
+        1898
+      ],
+      "wholeImageDecoded": true,
+      "wholeDecodedRGBASHA256": "7c49b33298040fcdbf25b92b8c438f36297731b95f33bdcbdb4b31734083065d",
+      "ROI": [
+        2100,
+        1370,
+        2750,
+        1510
+      ],
+      "brightPixels": 8318,
+      "brightMaskSHA256": "389a1242bd6bf4dc5f527bc6828078ac7c1ad64be4ea025aeddccdcee204ba89",
+      "decodedROISHA256": "c290b61c9fd858c25a3bc53c47342b020158f7adf2b28955c927c3310156fd79",
+      "brightBoundingBoxImageExclusive": [
+        2154,
+        1413,
+        2628,
+        1466
+      ]
+    },
+    {
+      "path": "docs/prototype/screenshots/desktop-0.1.6-video-output-reopened.png",
+      "bytes": 658268,
+      "originalSHA256": "9c6f6125f6cca42740206b193d7872084cd3dcafa3748d05a38fccff789e5485",
+      "actualEncodedFormat": "JPEG",
+      "dimensions": [
+        2880,
+        1898
+      ],
+      "wholeImageDecoded": true,
+      "wholeDecodedRGBASHA256": "1dcca178f688b08eb963845aeb469ba50efe58d78c5ac3c9b1bd6601cedbbd89",
+      "ROI": [
+        2100,
+        1370,
+        2750,
+        1510
+      ],
+      "brightPixels": 8318,
+      "brightMaskSHA256": "389a1242bd6bf4dc5f527bc6828078ac7c1ad64be4ea025aeddccdcee204ba89",
+      "decodedROISHA256": "c290b61c9fd858c25a3bc53c47342b020158f7adf2b28955c927c3310156fd79",
+      "brightBoundingBoxImageExclusive": [
+        2154,
+        1413,
+        2628,
+        1466
+      ]
+    },
+    {
+      "path": "docs/prototype/screenshots/desktop-0.1.6-video-output-reopened-off.png",
+      "bytes": 648838,
+      "originalSHA256": "96222a0f721d3ed955f1be3dc8de8ae186abc93213f1f82b3c275856041d4aaf",
+      "actualEncodedFormat": "JPEG",
+      "dimensions": [
+        2880,
+        1898
+      ],
+      "wholeImageDecoded": true,
+      "wholeDecodedRGBASHA256": "6f84103e4de1b922210094328b622e2466719fc66b2ea296105671ffc0b1068d",
+      "ROI": [
+        2100,
+        1370,
+        2750,
+        1510
+      ],
+      "brightPixels": 0,
+      "brightMaskSHA256": "02e725c3bcc0a1fd566c0d6d4822f049c7ba74f1e846527d1ddcdbb3feed32e7",
+      "decodedROISHA256": "65b7e7567f0021cd09ecce5fce87c8cd76206bf2406e961200e4725bdfbf61c9",
+      "brightBoundingBoxImageExclusive": null
+    }
+  ],
+  "pixelChecks": {
+    "originalBaselineAtLeast100": true,
+    "reopenedBrightMaskExactlyEqualsOriginalBaseline": true,
+    "reopenedOffBrightPixelsExactlyZero": true
+  },
+  "pixelCriterionPassed": true,
+  "reopenedROIChangedPixelsVsOriginalBaseline": 0,
+  "MIDIExport": {
+    "restoredPath": "docs/prototype/desktop-0.1.6-midi-restored-export.json",
+    "originalDownloads": "/Users/jasonpoindexter/Downloads/open-play-native-016-midi-restored.json",
+    "SHA256": "2b3935a876e55db3a0c0cce2b01f0b3c18e93cbf795b6446bc7ae1a4566ff117",
+    "bytes": 554,
+    "originalInitialRestoredBytesIdentical": true,
+    "value": {
+      "format": "open-play-midi-v1",
+      "physicalCompatibilityVerified": false,
+      "mappings": [
+        {
+          "target": "Library browse",
+          "encoding": "Relative two\u2019s complement",
+          "type": "CC",
+          "channel": 1,
+          "number": 1
+        },
+        {
+          "target": "Deck 2 key shift",
+          "encoding": "Relative offset",
+          "type": "CC",
+          "channel": 16,
+          "number": 119
+        },
+        {
+          "target": "Video text overlay opacity",
+          "encoding": "7-bit absolute",
+          "type": "CC",
+          "channel": 16,
+          "number": 118
+        }
+      ]
+    }
+  },
+  "parentObservations": {
+    "stop": {
+      "path": "docs/prototype/desktop-0.1.6-restart-stop-observation.json",
+      "SHA256": "7c4b0a6fa874b8d5f8fbb03e160e8fd9360a9e6bec2a66d572835c2dc223721c",
+      "value": {
+        "prior_pid": 93085,
+        "old_native_process_absent": true,
+        "listener18768_absent": true,
+        "observed_at": "2026-10-17T15:48:17.698898+00:00",
+        "scope": "OS checks after cleannativeCmdQ, before relaunch."
+      }
+    },
+    "newProcess": {
+      "path": "docs/prototype/desktop-0.1.6-restart-new-process.json",
+      "SHA256": "2c94b4cd8b9887b4580f0713a1b69fc4a1d8124f6f3ef2dce3a3fa3473d12e92",
+      "value": {
+        "observed_at": "2026-10-17T15:48:49.131591+00:00",
+        "previous_pid": 93085,
+        "new_pid": 94208,
+        "listener": "127.0.0.1:18768",
+        "executable": "/Users/jasonpoindexter/Documents/GitHub/Open Play/local-evidence/desktop-builds/0.1.6/Open Play Test-darwin-arm64/Open Play Test.app/Contents/MacOS/Open Play Test",
+        "new_process_confirmed": true
+      }
+    },
+    "initialUI": {
+      "path": "docs/prototype/desktop-0.1.6-ui-initial-actions.json",
+      "SHA256": "86ea6e252c2c4f31c8984852213f072dc4c85a07abf1b30579d59b80a41c4b0f",
+      "actions": 93
+    },
+    "restoredUI": {
+      "path": "docs/prototype/desktop-0.1.6-ui-restored-actions.json",
+      "SHA256": "618e2b0111c7d0daa6399bb60011048fa7b30d06597c487418993a7ee1cc3f93",
+      "actions": 23,
+      "firstStep": 94,
+      "lastStep": 116
+    },
+    "savedStatePredicates": {
+      "noAutoAudioState94": true,
+      "failedNumeric646Retained": true,
+      "failedNumeric6Retained": true,
+      "correct66VisibleBeforeInject": true,
+      "actualSynthetic119Equals66Log": true,
+      "GlassTransitAndPlus2InSubsequentState": true,
+      "restoredDeck2TempoZero": true,
+      "actualSynthetic118Equals0Log": true,
+      "FilesStatusThreeLocallyZeroSession": true,
+      "finalNoPlaying116": true,
+      "keyResetByFinalState": true
+    },
+    "independentlyObservedNativeRuntime": false
+  },
+  "preservedFrozenArtifacts": {
+    "docs/research/DESKTOP_016_HOST_INDEPENDENT_REVIEW_20261017.md": "7384e2fd099086e3deacad4d6500149b750d408f5ca6b60c9ed920731a65a0be",
+    "docs/research/DESKTOP_016_MIDI_AUDIO_INDEPENDENT_REVIEW_20261017.md": "648fa38686e108adc99f86c58e737c0420782f28dbfc76bb412431f3e810700b",
+    "docs/research/DESKTOP_016_VIDEO_ARTIFACT_INDEPENDENT_REVIEW_20261017.md": "547a720c477a46a1f6154b7d66b07958912de72dc141872798294a544282acde",
+    "docs/prototype/desktop-0.1.6-midi-audio-independent-results.json": "3424c69811687797546f42b560f83060f816eb50a6733666be9a81a21819de4a",
+    "docs/prototype/desktop-0.1.6-video-artifact-independent-results.json": "c18499650fe47dd4349c7d653d13197e01be75e7c6eb654fce0302d8aa6ec974"
+  },
+  "preservedASARs": [
+    {
+      "version": "0.1.5",
+      "path": "local-evidence/desktop-builds/0.1.5/Open Play Test-darwin-arm64/Open Play Test.app/Contents/Resources/app.asar",
+      "SHA256": "251bcc16caf9cfb42a3967db058717373a8c6fcb9ff97d56c330058ec8301b03"
+    },
+    {
+      "version": "0.1.6",
+      "path": "local-evidence/desktop-builds/0.1.6/Open Play Test-darwin-arm64/Open Play Test.app/Contents/Resources/app.asar",
+      "SHA256": "f9e85d9ef3150fd37c15f5b3d72a4e3f6a06a42a59bf29617a43bdf566cdba6e"
+    }
+  ],
+  "priorAudioDeclaredCriterionStillFailed": true,
+  "fullParityVerified": false,
+  "physicalMIDICompatibilityVerified": false
+}

@@ -1,0 +1,106 @@
+{
+  "version": "0.1.6",
+  "sourceCommit": "dd068e4dc9338d1f4f131e0c64c9195073fbebed",
+  "approvedHTMLCommit": "f8b0abf33c8e8468c7bec27eabc5be2930ed0086",
+  "ASARSHA256": "f9e85d9ef3150fd37c15f5b3d72a4e3f6a06a42a59bf29617a43bdf566cdba6e",
+  "sourceHashes": {
+    "main": "5f9e2348cc59a3fcb827b251468030158b19e982f76f77be88e50f88aa9bb4fd",
+    "server": "2326805cd31fc2c0e8ee73a7f559b64eac64b6cef2670caa3dd1f06d30ada4ef",
+    "package": "e36c14d9939e78ac5aada3fa8ba60735034373a48c50c234354815bd7fce82f6",
+    "lock": "373b98a57df6a58e6ec247f88ffb45badffdde72b925da99e8fa8abbdc5ed5a1",
+    "packager": "39be3c61b227cabdc6beaa8167e5ad17a0124d06a51e65f8a2a448cf518949c3",
+    "manifest": "4db2296bf86607ae2264d94bde0421ab9bebec2c80cbbaf035314145597c6e4d"
+  },
+  "passed": 7,
+  "failed": 1,
+  "scope": "Actual ASAR extraction/hash and actual main source under controlled Electron callback host. No GUI, native title propagation, real permissions, storage migration/reload/audio/MIDI/device/reference or full-parity execution. No Git commands or existing evidence writes.",
+  "checks": [
+    {
+      "name": "Actual host preserves sandbox, persistent partition, origin and existing server bytes",
+      "passed": true,
+      "evidence": {
+        "webPreferences": {
+          "partition": "persist:open-play-test",
+          "nodeIntegration": false,
+          "contextIsolation": true,
+          "sandbox": true,
+          "webSecurity": true
+        },
+        "serverSHA256": "2326805cd31fc2c0e8ee73a7f559b64eac64b6cef2670caa3dd1f06d30ada4ef",
+        "origin": "http://127.0.0.1:18768"
+      }
+    },
+    {
+      "name": "Actual permission callbacks retain allowlist and main-frame/window/origin ownership",
+      "passed": true,
+      "evidence": {
+        "callbackComparisons": 159,
+        "actualPermissionPromptProven": false
+      }
+    },
+    {
+      "name": "Version-bound BrowserWindow title and About describe current candidate without awarding parity",
+      "passed": false,
+      "evidence": {},
+      "error": "AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:\n\n  assert(about.detail.includes(candidate.slice(0,8)))\n\n    at /Users/jasonpoindexter/Documents/GitHub/Open Play/scripts/test_desktop_016_host_review.cjs:22:639\n    at async check (/Users/jasonpoindexter/Documents/GitHub/Open Play/scripts/test_desktop_016_host_review.cjs:6:53)\n    at async /Users/jasonpoindexter/Documents/GitHub/Open Play/scripts/test_desktop_016_host_review.cjs:22:2"
+    },
+    {
+      "name": "Navigation, single-instance and crash handling retain bounded behavior",
+      "passed": true,
+      "evidence": {
+        "externalNavigationDenied": true,
+        "rejectedInstanceHostStarts": 0
+      }
+    },
+    {
+      "name": "Dependency metadata changes only root version relative to reviewed0.1.5 lock",
+      "passed": true,
+      "evidence": {
+        "normalizedLockSHA256": "feae75369bff0f20f43bcc752e68f90248895b192a0bbc5749eb64ef025aedac",
+        "dependencies": {
+          "electron": "44.9.0",
+          "@electron/packager": "20.3.0"
+        }
+      }
+    },
+    {
+      "name": "Actual ASAR provenance, bundle and sanitized runtime package identify0.1.6/dd068e4 separately from approval",
+      "passed": true,
+      "evidence": {
+        "provenance": {
+          "approvedHTMLCommit": "f8b0abf33c8e8468c7bec27eabc5be2930ed0086",
+          "sourceCommit": "dd068e4dc9338d1f4f131e0c64c9195073fbebed",
+          "hostVersion": "0.1.6",
+          "builtAt": "2026-10-17T15:36:47.520Z",
+          "scope": "Local desktop test of current reviewed browser Key Shift and Video MIDI controls; existing interface/audio implementation preserved. Original approval baseline and prior0.1.5 retained; packaging does not establish main-app mapping/reload/audio, physical device, quality or full parity acceptance."
+        },
+        "ASARSHA256": "f9e85d9ef3150fd37c15f5b3d72a4e3f6a06a42a59bf29617a43bdf566cdba6e",
+        "runtimePackage": {
+          "name": "open-play-desktop-test",
+          "productName": "Open Play Test",
+          "version": "0.1.6",
+          "description": "Local desktop test host for the approved Open Play HTML revision",
+          "main": "main.cjs"
+        }
+      }
+    },
+    {
+      "name": "Every actual packaged prototype file matches immutable-candidate manifest; archive contains only declared export roots",
+      "passed": true,
+      "evidence": {
+        "prototypeFiles": 222,
+        "totalFiles": 1043,
+        "unexpectedPrototypeFiles": 0,
+        "expectedIdentitySource": "Parent immutable Git-candidate manifest; reviewer independently extracts and hashes actual ASAR bytes, without Git commands"
+      }
+    },
+    {
+      "name": "Old0.1.5 and new candidate identities remain unchanged through review",
+      "passed": true,
+      "evidence": {
+        "priorASARUnchanged": true,
+        "currentSourcesAndASARUnchanged": true
+      }
+    }
+  ]
+}

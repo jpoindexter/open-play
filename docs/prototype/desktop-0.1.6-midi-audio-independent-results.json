@@ -1,0 +1,1792 @@
+{
+  "scope": "Independent whole Downloads original decode, all sample values finite, every1s/finalpartial spectral window retained, whole1ms quiet-bin inventory, declared5\u20137s stereo frequency/RMS criteria. No trimming, source injection, GUI, MIDI event delivery, native cursor/firstsample/instantaneous continuity/music/hardware/reference/fullparity proof. Parent native UI observations are not independent UI execution by this inspector.",
+  "plan": {
+    "path": "docs/prototype/desktop-0.1.6-audio-inspection-plan.json",
+    "SHA256": "8b6165e15792ae8f12c411dd70646184ccfe415a6c43e4dfdc5d8bda948a4587",
+    "value": {
+      "declared_before_decode": "2026-10-17T15:44:22.200597+00:00",
+      "scope": "Whole original native MediaRecorder streams decoded in full; additional declared steady measurement5-7seconds in each recording. NativeUI syntheticCC mapping, not physicalinput or fullkeylockquality.",
+      "cases": [
+        {
+          "file": "open-play-native-016-midi-plus2.webm",
+          "expected_hz": [
+            370.4124759420931,
+            617.3541265701551
+          ],
+          "key_shift_semitones": 2
+        },
+        {
+          "file": "open-play-native-016-midi-minus2-return.webm",
+          "expected_hz": [
+            330,
+            550
+          ],
+          "key_shift_semitones": 0
+        }
+      ],
+      "window_seconds": [
+        5,
+        7
+      ],
+      "frequency_error_hz_max": 1,
+      "minimum_window_RMS": 0.001,
+      "stereo_required": true,
+      "whole_samples_finite_required": true,
+      "tempo_UI_both_percent": 8,
+      "full_parity_verified": false
+    }
+  },
+  "sourceFixture": {
+    "path": "local-evidence/keylock-native-fixtures/native-keylock-stereo-120s.wav",
+    "SHA256": "99833309d13090de63a9fcdb7ca8f6bcf601975bfb8cb2e3ef691bb369a0a119"
+  },
+  "method": {
+    "frequency": "Whole declared interval mean removal, Hann, global20\u201320000Hz maximum,4x-or-more power-of-two zero padding, log-parabolic spectral interpolation. Search is not restricted near expected tone.",
+    "frequencyEstimatorSelfChecks": [
+      {
+        "sampleRate": 44100,
+        "expectedHz": 330,
+        "measuredHz": 330.00002839846286,
+        "errorHz": 2.839846285951353e-05
+      },
+      {
+        "sampleRate": 44100,
+        "expectedHz": 370.4124759420931,
+        "measuredHz": 370.41244672254777,
+        "errorHz": 2.9219545353953436e-05
+      },
+      {
+        "sampleRate": 44100,
+        "expectedHz": 550,
+        "measuredHz": 549.9999709777338,
+        "errorHz": 2.9022266176070843e-05
+      },
+      {
+        "sampleRate": 44100,
+        "expectedHz": 617.3541265701551,
+        "measuredHz": 617.3541304968157,
+        "errorHz": 3.926660610886756e-06
+      },
+      {
+        "sampleRate": 48000,
+        "expectedHz": 330,
+        "measuredHz": 330.0000074287852,
+        "errorHz": 7.428785181673447e-06
+      },
+      {
+        "sampleRate": 48000,
+        "expectedHz": 370.4124759420931,
+        "measuredHz": 370.41245562406004,
+        "errorHz": 2.031803308000235e-05
+      },
+      {
+        "sampleRate": 48000,
+        "expectedHz": 550,
+        "measuredHz": 550.0000118732297,
+        "errorHz": 1.187322970963578e-05
+      },
+      {
+        "sampleRate": 48000,
+        "expectedHz": 617.3541265701551,
+        "measuredHz": 617.3541539851586,
+        "errorHz": 2.7415003501118917e-05
+      }
+    ],
+    "python": "3.11.13 (main, Jun  3 2025, 18:38:25) [Clang 17.0.0 (clang-1700.0.13.3)]",
+    "numpy": "2.2.6",
+    "ffmpeg": "ffmpeg version 9.0.1 Copyright (c) 2000-2026 the FFmpeg developers"
+  },
+  "records": [
+    {
+      "file": "open-play-native-016-midi-plus2.webm",
+      "original": "/Users/jasonpoindexter/Downloads/open-play-native-016-midi-plus2.webm",
+      "retainedCopy": "local-evidence/desktop-0.1.6-midi-audio/open-play-native-016-midi-plus2.webm",
+      "SHA256": "6fd70a39e30c9eb76abaecf884552214a84a1936c2ade2bb80eae86e3c538daf",
+      "encodedBytes": 306656,
+      "originalEqualsRetainedCopy": true,
+      "ffprobe": {
+        "streams": [
+          {
+            "index": 0,
+            "codec_name": "opus",
+            "codec_long_name": "Opus (Opus Interactive Audio Codec)",
+            "codec_type": "audio",
+            "codec_tag_string": "[0][0][0][0]",
+            "codec_tag": "0x0000",
+            "mime_codec_string": "opus",
+            "sample_fmt": "fltp",
+            "sample_rate": "48000",
+            "channels": 2,
+            "channel_layout": "stereo",
+            "bits_per_sample": 0,
+            "initial_padding": 0,
+            "r_frame_rate": "0/0",
+            "avg_frame_rate": "0/0",
+            "time_base": "1/1000",
+            "start_pts": 0,
+            "start_time": "0.000000",
+            "extradata_size": 19,
+            "disposition": {
+              "default": 1,
+              "dub": 0,
+              "original": 0,
+              "comment": 0,
+              "lyrics": 0,
+              "karaoke": 0,
+              "forced": 0,
+              "hearing_impaired": 0,
+              "visual_impaired": 0,
+              "clean_effects": 0,
+              "attached_pic": 0,
+              "timed_thumbnails": 0,
+              "non_diegetic": 0,
+              "captions": 0,
+              "descriptions": 0,
+              "metadata": 0,
+              "dependent": 0,
+              "still_image": 0,
+              "multilayer": 0
+            },
+            "tags": {
+              "language": "eng"
+            }
+          }
+        ],
+        "format": {
+          "filename": "/Users/jasonpoindexter/Downloads/open-play-native-016-midi-plus2.webm",
+          "nb_streams": 1,
+          "nb_programs": 0,
+          "nb_stream_groups": 0,
+          "format_name": "matroska,webm",
+          "format_long_name": "Matroska / WebM",
+          "start_time": "0.000000",
+          "size": "306656",
+          "probe_score": 100,
+          "tags": {
+            "encoder": "Chrome"
+          }
+        }
+      },
+      "completeDecode": {
+        "path": "local-evidence/desktop-0.1.6-midi-audio-independent/open-play-native-016-midi-plus2.webm.whole-f32le",
+        "SHA256": "a0925231f6ca1a644ea5da87ca8f1001e94283bce6814d300466d34f19f6fcbb",
+        "bytes": 8017920,
+        "sampleRate": 48000,
+        "channels": 2,
+        "frames": 1002240,
+        "durationSeconds": 20.88,
+        "sampleValues": 2004480,
+        "nonfiniteSampleValues": 0,
+        "channelRMS": [
+          0.03997638743253228,
+          0.04003117564436413
+        ],
+        "channelPeakAbs": [
+          0.062178317457437515,
+          0.06287242472171783
+        ],
+        "firstStereoSample": [
+          0.0,
+          0.0
+        ],
+        "lastStereoSample": [
+          0.0,
+          0.0
+        ]
+      },
+      "declaredWindow": [
+        {
+          "channel": 0,
+          "startSample": 240000,
+          "endSampleExclusive": 336000,
+          "samples": 96000,
+          "RMS": 0.0425410662114606,
+          "dominantHz": 371.458668939683,
+          "expectedHz": 370.4124759420931,
+          "errorHz": 1.0461929975898556,
+          "passed": false
+        },
+        {
+          "channel": 1,
+          "startSample": 240000,
+          "endSampleExclusive": 336000,
+          "samples": 96000,
+          "RMS": 0.0425803809882833,
+          "dominantHz": 617.9345921488637,
+          "expectedHz": 617.3541265701551,
+          "errorHz": 0.5804655787085267,
+          "passed": true
+        }
+      ],
+      "everyOneSecondWindowIncludingFinalPartial": [
+        {
+          "startSample": 0,
+          "endSampleExclusive": 48000,
+          "startSeconds": 0.0,
+          "endSeconds": 1.0,
+          "partial": false,
+          "channels": [
+            {
+              "channel": 0,
+              "RMS": 0.004771442342948744,
+              "quietByWindowRMS": false,
+              "dominantHz": 370.47208046394996,
+              "errorFromDeclaredExpectedHz": 0.05960452185684062,
+              "withinDeclaredFrequencyBudget": true
+            },
+            {
+              "channel": 1,
+              "RMS": 0.004824548265586387,
+              "quietByWindowRMS": false,
+              "dominantHz": 617.7368893827982,
+              "errorFromDeclaredExpectedHz": 0.3827628126430227,
+              "withinDeclaredFrequencyBudget": true
+            }
+          ]
+        },
+        {
+          "startSample": 48000,
+          "endSampleExclusive": 96000,
+          "startSeconds": 1.0,
+          "endSeconds": 2.0,
+          "partial": false,
+          "channels": [
+            {
+              "channel": 0,
+              "RMS": 0.04260723761773317,
+              "quietByWindowRMS": false,
+              "dominantHz": 371.4583324885416,
+              "errorFromDeclaredExpectedHz": 1.0458565464484764,
+              "withinDeclaredFrequencyBudget": false
+            },
+            {
+              "channel": 1,
+              "RMS": 0.04265036570074593,
+              "quietByWindowRMS": false,
+              "dominantHz": 617.9348337603063,
+              "errorFromDeclaredExpectedHz": 0.5807071901512018,
+              "withinDeclaredFrequencyBudget": true
+            }
+          ]
+        },
+        {
+          "startSample": 96000,
+          "endSampleExclusive": 144000,
+          "startSeconds": 2.0,
+          "endSeconds": 3.0,
+          "partial": false,
+          "channels": [
+            {
+              "channel": 0,
+              "RMS": 0.04251674819224195,
+              "quietByWindowRMS": false,
+              "dominantHz": 371.458710093037,
+              "errorFromDeclaredExpectedHz": 1.0462341509438602,
+              "withinDeclaredFrequencyBudget": false
+            },
+            {
+              "channel": 1,
+              "RMS": 0.042592483554121145,
+              "quietByWindowRMS": false,
+              "dominantHz": 617.9345744417592,
+              "errorFromDeclaredExpectedHz": 0.5804478716040649,
+              "withinDeclaredFrequencyBudget": true
+            }
+          ]
+        },
+        {
+          "startSample": 144000,
+          "endSampleExclusive": 192000,
+          "startSeconds": 3.0,
+          "endSeconds": 4.0,
+          "partial": false,
+          "channels": [
+            {
+              "channel": 0,
+              "RMS": 0.04255101880541874,
+              "quietByWindowRMS": false,
+              "dominantHz": 371.4589589085997,
+              "errorFromDeclaredExpectedHz": 1.0464829665065736,
+              "withinDeclaredFrequencyBudget": false
+            },
+            {
+              "channel": 1,
+              "RMS": 0.04260969293910611,
+              "quietByWindowRMS": false,
+              "dominantHz": 617.9337769874222,
+              "errorFromDeclaredExpectedHz": 0.5796504172670893,
+              "withinDeclaredFrequencyBudget": true
+            }
+          ]
+        },
+        {
+          "startSample": 192000,
+          "endSampleExclusive": 240000,
+          "startSeconds": 4.0,
+          "endSeconds": 5.0,
+          "partial": false,
+          "channels": [
+            {
+              "channel": 0,
+              "RMS": 0.04254407817294136,
+              "quietByWindowRMS": false,
+              "dominantHz": 371.4595090960501,
+              "errorFromDeclaredExpectedHz": 1.0470331539569884,
+              "withinDeclaredFrequencyBudget": false
+            },
+            {
+              "channel": 1,
+              "RMS": 0.042593401822368954,
+              "quietByWindowRMS": false,
+              "dominantHz": 617.9333740854204,
+              "errorFromDeclaredExpectedHz": 0.5792475152652514,
+              "withinDeclaredFrequencyBudget": true
+            }
+          ]
+        },
+        {
+          "startSample": 240000,
+          "endSampleExclusive": 288000,
+          "startSeconds": 5.0,
+          "endSeconds": 6.0,
+          "partial": false,
+          "channels": [
+            {
+              "channel": 0,
+              "RMS": 0.04254201023280596,
+              "quietByWindowRMS": false,
+              "dominantHz": 371.45890535942476,
+              "errorFromDeclaredExpectedHz": 1.0464294173316375,
+              "withinDeclaredFrequencyBudget": false
+            },
+            {
+              "channel": 1,
+              "RMS": 0.04257995612033635,
+              "quietByWindowRMS": false,
+              "dominantHz": 617.9344806523407,
+              "errorFromDeclaredExpectedHz": 0.5803540821855222,
+              "withinDeclaredFrequencyBudget": true
+            }
+          ]
+        },
+        {
+          "startSample": 288000,
+          "endSampleExclusive": 336000,
+          "startSeconds": 6.0,
+          "endSeconds": 7.0,
+          "partial": false,
+          "channels": [
+            {
+              "channel": 0,
+              "RMS": 0.04254012216916615,
+              "quietByWindowRMS": false,
+              "dominantHz": 371.4583029589041,
+              "errorFromDeclaredExpectedHz": 1.0458270168109607,
+              "withinDeclaredFrequencyBudget": false
+            },
+            {
+              "channel": 1,
+              "RMS": 0.04258080585199096,
+              "quietByWindowRMS": false,
+              "dominantHz": 617.9343786759056,
+              "errorFromDeclaredExpectedHz": 0.5802521057504464,
+              "withinDeclaredFrequencyBudget": true
+            }
+          ]
+        },
+        {
+          "startSample": 336000,
+          "endSampleExclusive": 384000,
+          "startSeconds": 7.0,
+          "endSeconds": 8.0,
+          "partial": false,
+          "channels": [
+            {
+              "channel": 0,
+              "RMS": 0.04253179880136888,
+              "quietByWindowRMS": false,
+              "dominantHz": 371.45869389739227,
+              "errorFromDeclaredExpectedHz": 1.0462179552991415,
+              "withinDeclaredFrequencyBudget": false
+            },
+            {
+              "channel": 1,
+              "RMS": 0.042582471202081335,
+              "quietByWindowRMS": false,
+              "dominantHz": 617.9336143502379,
+              "errorFromDeclaredExpectedHz": 0.5794877800827862,
+              "withinDeclaredFrequencyBudget": true
+            }
+          ]
+        },
+        {
+          "startSample": 384000,
+          "endSampleExclusive": 432000,
+          "startSeconds": 8.0,
+          "endSeconds": 9.0,
+          "partial": false,
+          "channels": [
+            {
+              "channel": 0,
+              "RMS": 0.04253779948607504,
+              "quietByWindowRMS": false,
+              "dominantHz": 371.45934789682144,
+              "errorFromDeclaredExpectedHz": 1.0468719547283172,
+              "withinDeclaredFrequencyBudget": false
+            },
+            {
+              "channel": 1,
+              "RMS": 0.04259012546262856,
+              "quietByWindowRMS": false,
+              "dominantHz": 617.9339666819081,
+              "errorFromDeclaredExpectedHz": 0.5798401117530148,
+              "withinDeclaredFrequencyBudget": true
+            }
+          ]
+        },
+        {
+          "startSample": 432000,
+          "endSampleExclusive": 480000,
+          "startSeconds": 9.0,
+          "endSeconds": 10.0,
+          "partial": false,
+          "channels": [
+            {
+              "channel": 0,
+              "RMS": 0.04251788925487851,
+              "quietByWindowRMS": false,
+              "dominantHz": 371.45841110930576,
+              "errorFromDeclaredExpectedHz": 1.0459351672126331,
+              "withinDeclaredFrequencyBudget": false
+            },
+            {
+              "channel": 1,
+              "RMS": 0.042607291469804943,
+              "quietByWindowRMS": false,
+              "dominantHz": 617.9344336186145,
+              "errorFromDeclaredExpectedHz": 0.5803070484594173,
+              "withinDeclaredFrequencyBudget": true
+            }
+          ]
+        },
+        {
+          "startSample": 480000,
+          "endSampleExclusive": 528000,
+          "startSeconds": 10.0,
+          "endSeconds": 11.0,
+          "partial": false,
+          "channels": [
+            {
+              "channel": 0,
+              "RMS": 0.042535658527785195,
+              "quietByWindowRMS": false,
+              "dominantHz": 371.4586109816397,
+              "errorFromDeclaredExpectedHz": 1.0461350395465843,
+              "withinDeclaredFrequencyBudget": false
+            },
+            {
+              "channel": 1,
+              "RMS": 0.042604703006252485,
+              "quietByWindowRMS": false,
+              "dominantHz": 617.9346977112203,
+              "errorFromDeclaredExpectedHz": 0.5805711410652066,
+              "withinDeclaredFrequencyBudget": true
+            }
+          ]
+        },
+        {
+          "startSample": 528000,
+          "endSampleExclusive": 576000,
+          "startSeconds": 11.0,
+          "endSeconds": 12.0,
+          "partial": false,
+          "channels": [
+            {
+              "channel": 0,
+              "RMS": 0.042516611672026916,
+              "quietByWindowRMS": false,
+              "dominantHz": 371.45829685725954,
+              "errorFromDeclaredExpectedHz": 1.0458209151664164,
+              "withinDeclaredFrequencyBudget": false
+            },
+            {
+              "channel": 1,
+              "RMS": 0.04259363932488682,
+              "quietByWindowRMS": false,
+              "dominantHz": 617.9344502558646,
+              "errorFromDeclaredExpectedHz": 0.5803236857094589,
+              "withinDeclaredFrequencyBudget": true
+            }
+          ]
+        },
+        {
+          "startSample": 576000,
+          "endSampleExclusive": 624000,
+          "startSeconds": 12.0,
+          "endSeconds": 13.0,
+          "partial": false,
+          "channels": [
+            {
+              "channel": 0,
+              "RMS": 0.04253293790114017,
+              "quietByWindowRMS": false,
+              "dominantHz": 371.45862205779207,
+              "errorFromDeclaredExpectedHz": 1.0461461156989458,
+              "withinDeclaredFrequencyBudget": false
+            },
+            {
+              "channel": 1,
+              "RMS": 0.042577613067659455,
+              "quietByWindowRMS": false,
+              "dominantHz": 617.9340701797996,
+              "errorFromDeclaredExpectedHz": 0.5799436096444879,
+              "withinDeclaredFrequencyBudget": true
+            }
+          ]
+        },
+        {
+          "startSample": 624000,
+          "endSampleExclusive": 672000,
+          "startSeconds": 13.0,
+          "endSeconds": 14.0,
+          "partial": false,
+          "channels": [
+            {
+              "channel": 0,
+              "RMS": 0.04253730043283286,
+              "quietByWindowRMS": false,
+              "dominantHz": 371.4588296681412,
+              "errorFromDeclaredExpectedHz": 1.0463537260480962,
+              "withinDeclaredFrequencyBudget": false
+            },
+            {
+              "channel": 1,
+              "RMS": 0.04259112375123841,
+              "quietByWindowRMS": false,
+              "dominantHz": 617.9349769252402,
+              "errorFromDeclaredExpectedHz": 0.5808503550850901,
+              "withinDeclaredFrequencyBudget": true
+            }
+          ]
+        },
+        {
+          "startSample": 672000,
+          "endSampleExclusive": 720000,
+          "startSeconds": 14.0,
+          "endSeconds": 15.0,
+          "partial": false,
+          "channels": [
+            {
+              "channel": 0,
+              "RMS": 0.04251782474066424,
+              "quietByWindowRMS": false,
+              "dominantHz": 371.458948359312,
+              "errorFromDeclaredExpectedHz": 1.0464724172188653,
+              "withinDeclaredFrequencyBudget": false
+            },
+            {
+              "channel": 1,
+              "RMS": 0.042594149562469846,
+              "quietByWindowRMS": false,
+              "dominantHz": 617.9352582219407,
+              "errorFromDeclaredExpectedHz": 0.5811316517855403,
+              "withinDeclaredFrequencyBudget": true
+            }
+          ]
+        },
+        {
+          "startSample": 720000,
+          "endSampleExclusive": 768000,
+          "startSeconds": 15.0,
+          "endSeconds": 16.0,
+          "partial": false,
+          "channels": [
+            {
+              "channel": 0,
+              "RMS": 0.04252404200546635,
+              "quietByWindowRMS": false,
+              "dominantHz": 371.4594637861134,
+              "errorFromDeclaredExpectedHz": 1.0469878440202933,
+              "withinDeclaredFrequencyBudget": false
+            },
+            {
+              "channel": 1,
+              "RMS": 0.04258093450728906,
+              "quietByWindowRMS": false,
+              "dominantHz": 617.934833463797,
+              "errorFromDeclaredExpectedHz": 0.5807068936418318,
+              "withinDeclaredFrequencyBudget": true
+            }
+          ]
+        },
+        {
+          "startSample": 768000,
+          "endSampleExclusive": 816000,
+          "startSeconds": 16.0,
+          "endSeconds": 17.0,
+          "partial": false,
+          "channels": [
+            {
+              "channel": 0,
+              "RMS": 0.04252305233557504,
+              "quietByWindowRMS": false,
+              "dominantHz": 371.45788456970155,
+              "errorFromDeclaredExpectedHz": 1.045408627608424,
+              "withinDeclaredFrequencyBudget": false
+            },
+            {
+              "channel": 1,
+              "RMS": 0.04258179962425139,
+              "quietByWindowRMS": false,
+              "dominantHz": 617.9351318395926,
+              "errorFromDeclaredExpectedHz": 0.581005269437469,
+              "withinDeclaredFrequencyBudget": true
+            }
+          ]
+        },
+        {
+          "startSample": 816000,
+          "endSampleExclusive": 864000,
+          "startSeconds": 17.0,
+          "endSeconds": 18.0,
+          "partial": false,
+          "channels": [
+            {
+              "channel": 0,
+              "RMS": 0.04254349975560102,
+              "quietByWindowRMS": false,
+              "dominantHz": 371.4588904902337,
+              "errorFromDeclaredExpectedHz": 1.0464145481406035,
+              "withinDeclaredFrequencyBudget": false
+            },
+            {
+              "channel": 1,
+              "RMS": 0.042584500543451344,
+              "quietByWindowRMS": false,
+              "dominantHz": 617.9345311173267,
+              "errorFromDeclaredExpectedHz": 0.5804045471716108,
+              "withinDeclaredFrequencyBudget": true
+            }
+          ]
+        },
+        {
+          "startSample": 864000,
+          "endSampleExclusive": 912000,
+          "startSeconds": 18.0,
+          "endSeconds": 19.0,
+          "partial": false,
+          "channels": [
+            {
+              "channel": 0,
+              "RMS": 0.04252347391641585,
+              "quietByWindowRMS": false,
+              "dominantHz": 371.45833968655484,
+              "errorFromDeclaredExpectedHz": 1.0458637444617125,
+              "withinDeclaredFrequencyBudget": false
+            },
+            {
+              "channel": 1,
+              "RMS": 0.04257605131112436,
+              "quietByWindowRMS": false,
+              "dominantHz": 617.9338403204771,
+              "errorFromDeclaredExpectedHz": 0.5797137503219574,
+              "withinDeclaredFrequencyBudget": true
+            }
+          ]
+        },
+        {
+          "startSample": 912000,
+          "endSampleExclusive": 960000,
+          "startSeconds": 19.0,
+          "endSeconds": 20.0,
+          "partial": false,
+          "channels": [
+            {
+              "channel": 0,
+              "RMS": 0.02790355443867509,
+              "quietByWindowRMS": false,
+              "dominantHz": 371.45588957333865,
+              "errorFromDeclaredExpectedHz": 1.043413631245528,
+              "withinDeclaredFrequencyBudget": false
+            },
+            {
+              "channel": 1,
+              "RMS": 0.027966322754128064,
+              "quietByWindowRMS": false,
+              "dominantHz": 617.9332977261846,
+              "errorFromDeclaredExpectedHz": 0.5791711560294743,
+              "withinDeclaredFrequencyBudget": true
+            }
+          ]
+        },
+        {
+          "startSample": 960000,
+          "endSampleExclusive": 1002240,
+          "startSeconds": 20.0,
+          "endSeconds": 20.88,
+          "partial": true,
+          "channels": [
+            {
+              "channel": 0,
+              "RMS": 0.0,
+              "quietByWindowRMS": true,
+              "dominantHz": null,
+              "errorFromDeclaredExpectedHz": null,
+              "withinDeclaredFrequencyBudget": null
+            },
+            {
+              "channel": 1,
+              "RMS": 0.0,
+              "quietByWindowRMS": true,
+              "dominantHz": null,
+              "errorFromDeclaredExpectedHz": null,
+              "withinDeclaredFrequencyBudget": null
+            }
+          ]
+        }
+      ],
+      "wholeOneMillisecondQuietBins": {
+        "thresholdRMS": 0.001,
+        "notInstantaneousContinuityProof": true,
+        "channels": [
+          {
+            "channel": 0,
+            "runs": [
+              {
+                "startSample": 0,
+                "endSampleExclusive": 46800,
+                "startSeconds": 0.0,
+                "endSeconds": 0.975,
+                "bins": 975
+              },
+              {
+                "startSample": 932736,
+                "endSampleExclusive": 932832,
+                "startSeconds": 19.432,
+                "endSeconds": 19.434,
+                "bins": 2
+              },
+              {
+                "startSample": 932880,
+                "endSampleExclusive": 932928,
+                "startSeconds": 19.435,
+                "endSeconds": 19.436,
+                "bins": 1
+              },
+              {
+                "startSample": 933024,
+                "endSampleExclusive": 933120,
+                "startSeconds": 19.438,
+                "endSeconds": 19.44,
+                "bins": 2
+              },
+              {
+                "startSample": 933216,
+                "endSampleExclusive": 1002240,
+                "startSeconds": 19.442,
+                "endSeconds": 20.88,
+                "bins": 1438
+              }
+            ]
+          },
+          {
+            "channel": 1,
+            "runs": [
+              {
+                "startSample": 0,
+                "endSampleExclusive": 46848,
+                "startSeconds": 0.0,
+                "endSeconds": 0.976,
+                "bins": 976
+              },
+              {
+                "startSample": 932784,
+                "endSampleExclusive": 932832,
+                "startSeconds": 19.433,
+                "endSeconds": 19.434,
+                "bins": 1
+              },
+              {
+                "startSample": 933024,
+                "endSampleExclusive": 933072,
+                "startSeconds": 19.438,
+                "endSeconds": 19.439,
+                "bins": 1
+              },
+              {
+                "startSample": 933168,
+                "endSampleExclusive": 1002240,
+                "startSeconds": 19.441,
+                "endSeconds": 20.88,
+                "bins": 1439
+              }
+            ]
+          }
+        ]
+      },
+      "declaredCriterionPassed": false
+    },
+    {
+      "file": "open-play-native-016-midi-minus2-return.webm",
+      "original": "/Users/jasonpoindexter/Downloads/open-play-native-016-midi-minus2-return.webm",
+      "retainedCopy": "local-evidence/desktop-0.1.6-midi-audio/open-play-native-016-midi-minus2-return.webm",
+      "SHA256": "2462ad14b4ec933b0fe809ebacff3ccc39973c285645a836a1a916cc361a86ff",
+      "encodedBytes": 460534,
+      "originalEqualsRetainedCopy": true,
+      "ffprobe": {
+        "streams": [
+          {
+            "index": 0,
+            "codec_name": "opus",
+            "codec_long_name": "Opus (Opus Interactive Audio Codec)",
+            "codec_type": "audio",
+            "codec_tag_string": "[0][0][0][0]",
+            "codec_tag": "0x0000",
+            "mime_codec_string": "opus",
+            "sample_fmt": "fltp",
+            "sample_rate": "48000",
+            "channels": 2,
+            "channel_layout": "stereo",
+            "bits_per_sample": 0,
+            "initial_padding": 0,
+            "r_frame_rate": "0/0",
+            "avg_frame_rate": "0/0",
+            "time_base": "1/1000",
+            "start_pts": 0,
+            "start_time": "0.000000",
+            "extradata_size": 19,
+            "disposition": {
+              "default": 1,
+              "dub": 0,
+              "original": 0,
+              "comment": 0,
+              "lyrics": 0,
+              "karaoke": 0,
+              "forced": 0,
+              "hearing_impaired": 0,
+              "visual_impaired": 0,
+              "clean_effects": 0,
+              "attached_pic": 0,
+              "timed_thumbnails": 0,
+              "non_diegetic": 0,
+              "captions": 0,
+              "descriptions": 0,
+              "metadata": 0,
+              "dependent": 0,
+              "still_image": 0,
+              "multilayer": 0
+            },
+            "tags": {
+              "language": "eng"
+            }
+          }
+        ],
+        "format": {
+          "filename": "/Users/jasonpoindexter/Downloads/open-play-native-016-midi-minus2-return.webm",
+          "nb_streams": 1,
+          "nb_programs": 0,
+          "nb_stream_groups": 0,
+          "format_name": "matroska,webm",
+          "format_long_name": "Matroska / WebM",
+          "start_time": "0.000000",
+          "size": "460534",
+          "probe_score": 100,
+          "tags": {
+            "encoder": "Chrome"
+          }
+        }
+      },
+      "completeDecode": {
+        "path": "local-evidence/desktop-0.1.6-midi-audio-independent/open-play-native-016-midi-minus2-return.webm.whole-f32le",
+        "SHA256": "ab27ba5eccfec973161a5e7d8915e66d4cd52c7811f2fe9f99827df9cffa88df",
+        "bytes": 11796480,
+        "sampleRate": 48000,
+        "channels": 2,
+        "frames": 1474560,
+        "durationSeconds": 30.72,
+        "sampleValues": 2949120,
+        "nonfiniteSampleValues": 0,
+        "channelRMS": [
+          0.04148271117366136,
+          0.04149235897453833
+        ],
+        "channelPeakAbs": [
+          0.0636724978685379,
+          0.06413330137729645
+        ],
+        "firstStereoSample": [
+          0.0,
+          0.0
+        ],
+        "lastStereoSample": [
+          0.0,
+          0.0
+        ]
+      },
+      "declaredWindow": [
+        {
+          "channel": 0,
+          "startSample": 240000,
+          "endSampleExclusive": 336000,
+          "samples": 96000,
+          "RMS": 0.04348936743244524,
+          "dominantHz": 330.43110019964814,
+          "expectedHz": 330,
+          "errorHz": 0.4311001996481423,
+          "passed": true
+        },
+        {
+          "channel": 1,
+          "startSample": 240000,
+          "endSampleExclusive": 336000,
+          "samples": 96000,
+          "RMS": 0.04349359896546982,
+          "dominantHz": 550.4265412545449,
+          "expectedHz": 550,
+          "errorHz": 0.4265412545448726,
+          "passed": true
+        }
+      ],
+      "everyOneSecondWindowIncludingFinalPartial": [
+        {
+          "startSample": 0,
+          "endSampleExclusive": 48000,
+          "startSeconds": 0.0,
+          "endSeconds": 1.0,
+          "partial": false,
+          "channels": [
+            {
+              "channel": 0,
+              "RMS": 0.0,
+              "quietByWindowRMS": true,
+              "dominantHz": null,
+              "errorFromDeclaredExpectedHz": null,
+              "withinDeclaredFrequencyBudget": null
+            },
+            {
+              "channel": 1,
+              "RMS": 0.0,
+              "quietByWindowRMS": true,
+              "dominantHz": null,
+              "errorFromDeclaredExpectedHz": null,
+              "withinDeclaredFrequencyBudget": null
+            }
+          ]
+        },
+        {
+          "startSample": 48000,
+          "endSampleExclusive": 96000,
+          "startSeconds": 1.0,
+          "endSeconds": 2.0,
+          "partial": false,
+          "channels": [
+            {
+              "channel": 0,
+              "RMS": 0.034617547069429586,
+              "quietByWindowRMS": false,
+              "dominantHz": 330.4303510546701,
+              "errorFromDeclaredExpectedHz": 0.4303510546700977,
+              "withinDeclaredFrequencyBudget": true
+            },
+            {
+              "channel": 1,
+              "RMS": 0.03462971899007289,
+              "quietByWindowRMS": false,
+              "dominantHz": 550.4242448890828,
+              "errorFromDeclaredExpectedHz": 0.42424488908284275,
+              "withinDeclaredFrequencyBudget": true
+            }
+          ]
+        },
+        {
+          "startSample": 96000,
+          "endSampleExclusive": 144000,
+          "startSeconds": 2.0,
+          "endSeconds": 3.0,
+          "partial": false,
+          "channels": [
+            {
+              "channel": 0,
+              "RMS": 0.043485682833155154,
+              "quietByWindowRMS": false,
+              "dominantHz": 330.43114867897856,
+              "errorFromDeclaredExpectedHz": 0.431148678978559,
+              "withinDeclaredFrequencyBudget": true
+            },
+            {
+              "channel": 1,
+              "RMS": 0.04351316742517966,
+              "quietByWindowRMS": false,
+              "dominantHz": 550.4260283894735,
+              "errorFromDeclaredExpectedHz": 0.42602838947345845,
+              "withinDeclaredFrequencyBudget": true
+            }
+          ]
+        },
+        {
+          "startSample": 144000,
+          "endSampleExclusive": 192000,
+          "startSeconds": 3.0,
+          "endSeconds": 4.0,
+          "partial": false,
+          "channels": [
+            {
+              "channel": 0,
+              "RMS": 0.04348520785972124,
+              "quietByWindowRMS": false,
+              "dominantHz": 330.4315421218587,
+              "errorFromDeclaredExpectedHz": 0.43154212185868346,
+              "withinDeclaredFrequencyBudget": true
+            },
+            {
+              "channel": 1,
+              "RMS": 0.04348664816314368,
+              "quietByWindowRMS": false,
+              "dominantHz": 550.4260874660024,
+              "errorFromDeclaredExpectedHz": 0.4260874660024001,
+              "withinDeclaredFrequencyBudget": true
+            }
+          ]
+        },
+        {
+          "startSample": 192000,
+          "endSampleExclusive": 240000,
+          "startSeconds": 4.0,
+          "endSeconds": 5.0,
+          "partial": false,
+          "channels": [
+            {
+              "channel": 0,
+              "RMS": 0.04350134246175022,
+              "quietByWindowRMS": false,
+              "dominantHz": 330.43061641220174,
+              "errorFromDeclaredExpectedHz": 0.4306164122017435,
+              "withinDeclaredFrequencyBudget": true
+            },
+            {
+              "channel": 1,
+              "RMS": 0.043491836667444994,
+              "quietByWindowRMS": false,
+              "dominantHz": 550.4267742879432,
+              "errorFromDeclaredExpectedHz": 0.4267742879432035,
+              "withinDeclaredFrequencyBudget": true
+            }
+          ]
+        },
+        {
+          "startSample": 240000,
+          "endSampleExclusive": 288000,
+          "startSeconds": 5.0,
+          "endSeconds": 6.0,
+          "partial": false,
+          "channels": [
+            {
+              "channel": 0,
+              "RMS": 0.043492851903727134,
+              "quietByWindowRMS": false,
+              "dominantHz": 330.4303151750814,
+              "errorFromDeclaredExpectedHz": 0.4303151750813754,
+              "withinDeclaredFrequencyBudget": true
+            },
+            {
+              "channel": 1,
+              "RMS": 0.0434949876128874,
+              "quietByWindowRMS": false,
+              "dominantHz": 550.4255567610791,
+              "errorFromDeclaredExpectedHz": 0.4255567610790649,
+              "withinDeclaredFrequencyBudget": true
+            }
+          ]
+        },
+        {
+          "startSample": 288000,
+          "endSampleExclusive": 336000,
+          "startSeconds": 6.0,
+          "endSeconds": 7.0,
+          "partial": false,
+          "channels": [
+            {
+              "channel": 0,
+              "RMS": 0.043485882681956876,
+              "quietByWindowRMS": false,
+              "dominantHz": 330.4307276896156,
+              "errorFromDeclaredExpectedHz": 0.43072768961559404,
+              "withinDeclaredFrequencyBudget": true
+            },
+            {
+              "channel": 1,
+              "RMS": 0.0434922102737146,
+              "quietByWindowRMS": false,
+              "dominantHz": 550.4269624853549,
+              "errorFromDeclaredExpectedHz": 0.4269624853549203,
+              "withinDeclaredFrequencyBudget": true
+            }
+          ]
+        },
+        {
+          "startSample": 336000,
+          "endSampleExclusive": 384000,
+          "startSeconds": 7.0,
+          "endSeconds": 8.0,
+          "partial": false,
+          "channels": [
+            {
+              "channel": 0,
+              "RMS": 0.043478212630184206,
+              "quietByWindowRMS": false,
+              "dominantHz": 330.4312649305212,
+              "errorFromDeclaredExpectedHz": 0.43126493052119486,
+              "withinDeclaredFrequencyBudget": true
+            },
+            {
+              "channel": 1,
+              "RMS": 0.04349595235304793,
+              "quietByWindowRMS": false,
+              "dominantHz": 550.4275275749272,
+              "errorFromDeclaredExpectedHz": 0.4275275749272396,
+              "withinDeclaredFrequencyBudget": true
+            }
+          ]
+        },
+        {
+          "startSample": 384000,
+          "endSampleExclusive": 432000,
+          "startSeconds": 8.0,
+          "endSeconds": 9.0,
+          "partial": false,
+          "channels": [
+            {
+              "channel": 0,
+              "RMS": 0.0434918130100486,
+              "quietByWindowRMS": false,
+              "dominantHz": 330.4308106680765,
+              "errorFromDeclaredExpectedHz": 0.4308106680765036,
+              "withinDeclaredFrequencyBudget": true
+            },
+            {
+              "channel": 1,
+              "RMS": 0.043489262176519626,
+              "quietByWindowRMS": false,
+              "dominantHz": 550.427284122461,
+              "errorFromDeclaredExpectedHz": 0.4272841224609465,
+              "withinDeclaredFrequencyBudget": true
+            }
+          ]
+        },
+        {
+          "startSample": 432000,
+          "endSampleExclusive": 480000,
+          "startSeconds": 9.0,
+          "endSeconds": 10.0,
+          "partial": false,
+          "channels": [
+            {
+              "channel": 0,
+              "RMS": 0.04346359037527319,
+              "quietByWindowRMS": false,
+              "dominantHz": 330.43138816009235,
+              "errorFromDeclaredExpectedHz": 0.4313881600923537,
+              "withinDeclaredFrequencyBudget": true
+            },
+            {
+              "channel": 1,
+              "RMS": 0.04351509329279218,
+              "quietByWindowRMS": false,
+              "dominantHz": 550.4272888670102,
+              "errorFromDeclaredExpectedHz": 0.4272888670102475,
+              "withinDeclaredFrequencyBudget": true
+            }
+          ]
+        },
+        {
+          "startSample": 480000,
+          "endSampleExclusive": 528000,
+          "startSeconds": 10.0,
+          "endSeconds": 11.0,
+          "partial": false,
+          "channels": [
+            {
+              "channel": 0,
+              "RMS": 0.04347875057861371,
+              "quietByWindowRMS": false,
+              "dominantHz": 330.43036387931903,
+              "errorFromDeclaredExpectedHz": 0.43036387931903164,
+              "withinDeclaredFrequencyBudget": true
+            },
+            {
+              "channel": 1,
+              "RMS": 0.043486596999327776,
+              "quietByWindowRMS": false,
+              "dominantHz": 550.4273462705929,
+              "errorFromDeclaredExpectedHz": 0.4273462705929205,
+              "withinDeclaredFrequencyBudget": true
+            }
+          ]
+        },
+        {
+          "startSample": 528000,
+          "endSampleExclusive": 576000,
+          "startSeconds": 11.0,
+          "endSeconds": 12.0,
+          "partial": false,
+          "channels": [
+            {
+              "channel": 0,
+              "RMS": 0.043486527137062185,
+              "quietByWindowRMS": false,
+              "dominantHz": 330.43135448186223,
+              "errorFromDeclaredExpectedHz": 0.431354481862229,
+              "withinDeclaredFrequencyBudget": true
+            },
+            {
+              "channel": 1,
+              "RMS": 0.04348245452226194,
+              "quietByWindowRMS": false,
+              "dominantHz": 550.4270288844968,
+              "errorFromDeclaredExpectedHz": 0.42702888449684906,
+              "withinDeclaredFrequencyBudget": true
+            }
+          ]
+        },
+        {
+          "startSample": 576000,
+          "endSampleExclusive": 624000,
+          "startSeconds": 12.0,
+          "endSeconds": 13.0,
+          "partial": false,
+          "channels": [
+            {
+              "channel": 0,
+              "RMS": 0.0434888174021706,
+              "quietByWindowRMS": false,
+              "dominantHz": 330.43094312613715,
+              "errorFromDeclaredExpectedHz": 0.43094312613715147,
+              "withinDeclaredFrequencyBudget": true
+            },
+            {
+              "channel": 1,
+              "RMS": 0.043492893290437526,
+              "quietByWindowRMS": false,
+              "dominantHz": 550.4259307110283,
+              "errorFromDeclaredExpectedHz": 0.42593071102828617,
+              "withinDeclaredFrequencyBudget": true
+            }
+          ]
+        },
+        {
+          "startSample": 624000,
+          "endSampleExclusive": 672000,
+          "startSeconds": 13.0,
+          "endSeconds": 14.0,
+          "partial": false,
+          "channels": [
+            {
+              "channel": 0,
+              "RMS": 0.04348449166355739,
+              "quietByWindowRMS": false,
+              "dominantHz": 330.43100412668826,
+              "errorFromDeclaredExpectedHz": 0.43100412668826493,
+              "withinDeclaredFrequencyBudget": true
+            },
+            {
+              "channel": 1,
+              "RMS": 0.04352075007302952,
+              "quietByWindowRMS": false,
+              "dominantHz": 550.4275631296184,
+              "errorFromDeclaredExpectedHz": 0.42756312961842013,
+              "withinDeclaredFrequencyBudget": true
+            }
+          ]
+        },
+        {
+          "startSample": 672000,
+          "endSampleExclusive": 720000,
+          "startSeconds": 14.0,
+          "endSeconds": 15.0,
+          "partial": false,
+          "channels": [
+            {
+              "channel": 0,
+              "RMS": 0.04350353509137945,
+              "quietByWindowRMS": false,
+              "dominantHz": 330.4304505825644,
+              "errorFromDeclaredExpectedHz": 0.43045058256439006,
+              "withinDeclaredFrequencyBudget": true
+            },
+            {
+              "channel": 1,
+              "RMS": 0.043515509756534586,
+              "quietByWindowRMS": false,
+              "dominantHz": 550.4261165557127,
+              "errorFromDeclaredExpectedHz": 0.4261165557127242,
+              "withinDeclaredFrequencyBudget": true
+            }
+          ]
+        },
+        {
+          "startSample": 720000,
+          "endSampleExclusive": 768000,
+          "startSeconds": 15.0,
+          "endSeconds": 16.0,
+          "partial": false,
+          "channels": [
+            {
+              "channel": 0,
+              "RMS": 0.04349203879033196,
+              "quietByWindowRMS": false,
+              "dominantHz": 330.4311838158188,
+              "errorFromDeclaredExpectedHz": 0.4311838158188266,
+              "withinDeclaredFrequencyBudget": true
+            },
+            {
+              "channel": 1,
+              "RMS": 0.04349712266106929,
+              "quietByWindowRMS": false,
+              "dominantHz": 550.4254653748998,
+              "errorFromDeclaredExpectedHz": 0.42546537489977254,
+              "withinDeclaredFrequencyBudget": true
+            }
+          ]
+        },
+        {
+          "startSample": 768000,
+          "endSampleExclusive": 816000,
+          "startSeconds": 16.0,
+          "endSeconds": 17.0,
+          "partial": false,
+          "channels": [
+            {
+              "channel": 0,
+              "RMS": 0.04348643607656752,
+              "quietByWindowRMS": false,
+              "dominantHz": 330.4304998378897,
+              "errorFromDeclaredExpectedHz": 0.4304998378897267,
+              "withinDeclaredFrequencyBudget": true
+            },
+            {
+              "channel": 1,
+              "RMS": 0.04351024310415754,
+              "quietByWindowRMS": false,
+              "dominantHz": 550.4254662798908,
+              "errorFromDeclaredExpectedHz": 0.42546627989077024,
+              "withinDeclaredFrequencyBudget": true
+            }
+          ]
+        },
+        {
+          "startSample": 816000,
+          "endSampleExclusive": 864000,
+          "startSeconds": 17.0,
+          "endSeconds": 18.0,
+          "partial": false,
+          "channels": [
+            {
+              "channel": 0,
+              "RMS": 0.043473343359346835,
+              "quietByWindowRMS": false,
+              "dominantHz": 330.43013276805,
+              "errorFromDeclaredExpectedHz": 0.4301327680499867,
+              "withinDeclaredFrequencyBudget": true
+            },
+            {
+              "channel": 1,
+              "RMS": 0.043494057227052366,
+              "quietByWindowRMS": false,
+              "dominantHz": 550.4262586789257,
+              "errorFromDeclaredExpectedHz": 0.4262586789257057,
+              "withinDeclaredFrequencyBudget": true
+            }
+          ]
+        },
+        {
+          "startSample": 864000,
+          "endSampleExclusive": 912000,
+          "startSeconds": 18.0,
+          "endSeconds": 19.0,
+          "partial": false,
+          "channels": [
+            {
+              "channel": 0,
+              "RMS": 0.0434871284234717,
+              "quietByWindowRMS": false,
+              "dominantHz": 330.4303846244333,
+              "errorFromDeclaredExpectedHz": 0.4303846244333158,
+              "withinDeclaredFrequencyBudget": true
+            },
+            {
+              "channel": 1,
+              "RMS": 0.04350160400000477,
+              "quietByWindowRMS": false,
+              "dominantHz": 550.4253023160046,
+              "errorFromDeclaredExpectedHz": 0.4253023160046041,
+              "withinDeclaredFrequencyBudget": true
+            }
+          ]
+        },
+        {
+          "startSample": 912000,
+          "endSampleExclusive": 960000,
+          "startSeconds": 19.0,
+          "endSeconds": 20.0,
+          "partial": false,
+          "channels": [
+            {
+              "channel": 0,
+              "RMS": 0.04347656725153854,
+              "quietByWindowRMS": false,
+              "dominantHz": 330.4306006283156,
+              "errorFromDeclaredExpectedHz": 0.4306006283155739,
+              "withinDeclaredFrequencyBudget": true
+            },
+            {
+              "channel": 1,
+              "RMS": 0.04348733736047268,
+              "quietByWindowRMS": false,
+              "dominantHz": 550.426514673721,
+              "errorFromDeclaredExpectedHz": 0.42651467372104435,
+              "withinDeclaredFrequencyBudget": true
+            }
+          ]
+        },
+        {
+          "startSample": 960000,
+          "endSampleExclusive": 1008000,
+          "startSeconds": 20.0,
+          "endSeconds": 21.0,
+          "partial": false,
+          "channels": [
+            {
+              "channel": 0,
+              "RMS": 0.04348993506579206,
+              "quietByWindowRMS": false,
+              "dominantHz": 330.43084665103066,
+              "errorFromDeclaredExpectedHz": 0.430846651030663,
+              "withinDeclaredFrequencyBudget": true
+            },
+            {
+              "channel": 1,
+              "RMS": 0.04350325535343964,
+              "quietByWindowRMS": false,
+              "dominantHz": 550.4255853618179,
+              "errorFromDeclaredExpectedHz": 0.4255853618178662,
+              "withinDeclaredFrequencyBudget": true
+            }
+          ]
+        },
+        {
+          "startSample": 1008000,
+          "endSampleExclusive": 1056000,
+          "startSeconds": 21.0,
+          "endSeconds": 22.0,
+          "partial": false,
+          "channels": [
+            {
+              "channel": 0,
+              "RMS": 0.043500605644604506,
+              "quietByWindowRMS": false,
+              "dominantHz": 330.4306127535533,
+              "errorFromDeclaredExpectedHz": 0.4306127535533051,
+              "withinDeclaredFrequencyBudget": true
+            },
+            {
+              "channel": 1,
+              "RMS": 0.04350162120134225,
+              "quietByWindowRMS": false,
+              "dominantHz": 550.4259485415275,
+              "errorFromDeclaredExpectedHz": 0.42594854152753214,
+              "withinDeclaredFrequencyBudget": true
+            }
+          ]
+        },
+        {
+          "startSample": 1056000,
+          "endSampleExclusive": 1104000,
+          "startSeconds": 22.0,
+          "endSeconds": 23.0,
+          "partial": false,
+          "channels": [
+            {
+              "channel": 0,
+              "RMS": 0.04350743113494907,
+              "quietByWindowRMS": false,
+              "dominantHz": 330.4306696507734,
+              "errorFromDeclaredExpectedHz": 0.4306696507733818,
+              "withinDeclaredFrequencyBudget": true
+            },
+            {
+              "channel": 1,
+              "RMS": 0.043500104895956855,
+              "quietByWindowRMS": false,
+              "dominantHz": 550.4269007878277,
+              "errorFromDeclaredExpectedHz": 0.4269007878276625,
+              "withinDeclaredFrequencyBudget": true
+            }
+          ]
+        },
+        {
+          "startSample": 1104000,
+          "endSampleExclusive": 1152000,
+          "startSeconds": 23.0,
+          "endSeconds": 24.0,
+          "partial": false,
+          "channels": [
+            {
+              "channel": 0,
+              "RMS": 0.043495488580724606,
+              "quietByWindowRMS": false,
+              "dominantHz": 330.43186011906045,
+              "errorFromDeclaredExpectedHz": 0.4318601190604454,
+              "withinDeclaredFrequencyBudget": true
+            },
+            {
+              "channel": 1,
+              "RMS": 0.043501134722206056,
+              "quietByWindowRMS": false,
+              "dominantHz": 550.4277511345009,
+              "errorFromDeclaredExpectedHz": 0.42775113450090885,
+              "withinDeclaredFrequencyBudget": true
+            }
+          ]
+        },
+        {
+          "startSample": 1152000,
+          "endSampleExclusive": 1200000,
+          "startSeconds": 24.0,
+          "endSeconds": 25.0,
+          "partial": false,
+          "channels": [
+            {
+              "channel": 0,
+              "RMS": 0.04349940905323133,
+              "quietByWindowRMS": false,
+              "dominantHz": 330.4302535685661,
+              "errorFromDeclaredExpectedHz": 0.4302535685661155,
+              "withinDeclaredFrequencyBudget": true
+            },
+            {
+              "channel": 1,
+              "RMS": 0.04348314228296652,
+              "quietByWindowRMS": false,
+              "dominantHz": 550.4265454406034,
+              "errorFromDeclaredExpectedHz": 0.42654544060337685,
+              "withinDeclaredFrequencyBudget": true
+            }
+          ]
+        },
+        {
+          "startSample": 1200000,
+          "endSampleExclusive": 1248000,
+          "startSeconds": 25.0,
+          "endSeconds": 26.0,
+          "partial": false,
+          "channels": [
+            {
+              "channel": 0,
+              "RMS": 0.043478835236233415,
+              "quietByWindowRMS": false,
+              "dominantHz": 330.4308403514566,
+              "errorFromDeclaredExpectedHz": 0.43084035145659527,
+              "withinDeclaredFrequencyBudget": true
+            },
+            {
+              "channel": 1,
+              "RMS": 0.043488452389357335,
+              "quietByWindowRMS": false,
+              "dominantHz": 550.4274272053768,
+              "errorFromDeclaredExpectedHz": 0.42742720537683,
+              "withinDeclaredFrequencyBudget": true
+            }
+          ]
+        },
+        {
+          "startSample": 1248000,
+          "endSampleExclusive": 1296000,
+          "startSeconds": 26.0,
+          "endSeconds": 27.0,
+          "partial": false,
+          "channels": [
+            {
+              "channel": 0,
+              "RMS": 0.043494816196491766,
+              "quietByWindowRMS": false,
+              "dominantHz": 330.43120846989325,
+              "errorFromDeclaredExpectedHz": 0.43120846989324946,
+              "withinDeclaredFrequencyBudget": true
+            },
+            {
+              "channel": 1,
+              "RMS": 0.04350128776989853,
+              "quietByWindowRMS": false,
+              "dominantHz": 550.4280882352411,
+              "errorFromDeclaredExpectedHz": 0.42808823524114814,
+              "withinDeclaredFrequencyBudget": true
+            }
+          ]
+        },
+        {
+          "startSample": 1296000,
+          "endSampleExclusive": 1344000,
+          "startSeconds": 27.0,
+          "endSeconds": 28.0,
+          "partial": false,
+          "channels": [
+            {
+              "channel": 0,
+              "RMS": 0.04349518714083457,
+              "quietByWindowRMS": false,
+              "dominantHz": 330.43040415380716,
+              "errorFromDeclaredExpectedHz": 0.43040415380716013,
+              "withinDeclaredFrequencyBudget": true
+            },
+            {
+              "channel": 1,
+              "RMS": 0.043509194009593105,
+              "quietByWindowRMS": false,
+              "dominantHz": 550.4262124053637,
+              "errorFromDeclaredExpectedHz": 0.4262124053636853,
+              "withinDeclaredFrequencyBudget": true
+            }
+          ]
+        },
+        {
+          "startSample": 1344000,
+          "endSampleExclusive": 1392000,
+          "startSeconds": 28.0,
+          "endSeconds": 29.0,
+          "partial": false,
+          "channels": [
+            {
+              "channel": 0,
+              "RMS": 0.04348657182958597,
+              "quietByWindowRMS": false,
+              "dominantHz": 330.4309446935693,
+              "errorFromDeclaredExpectedHz": 0.43094469356930176,
+              "withinDeclaredFrequencyBudget": true
+            },
+            {
+              "channel": 1,
+              "RMS": 0.04350478037403278,
+              "quietByWindowRMS": false,
+              "dominantHz": 550.4276530645657,
+              "errorFromDeclaredExpectedHz": 0.42765306456567487,
+              "withinDeclaredFrequencyBudget": true
+            }
+          ]
+        },
+        {
+          "startSample": 1392000,
+          "endSampleExclusive": 1440000,
+          "startSeconds": 29.0,
+          "endSeconds": 30.0,
+          "partial": false,
+          "channels": [
+            {
+              "channel": 0,
+              "RMS": 0.02452025137354648,
+              "quietByWindowRMS": false,
+              "dominantHz": 330.42357197207235,
+              "errorFromDeclaredExpectedHz": 0.4235719720723523,
+              "withinDeclaredFrequencyBudget": true
+            },
+            {
+              "channel": 1,
+              "RMS": 0.024525247269413998,
+              "quietByWindowRMS": false,
+              "dominantHz": 550.427134845365,
+              "errorFromDeclaredExpectedHz": 0.42713484536500346,
+              "withinDeclaredFrequencyBudget": true
+            }
+          ]
+        },
+        {
+          "startSample": 1440000,
+          "endSampleExclusive": 1474560,
+          "startSeconds": 30.0,
+          "endSeconds": 30.72,
+          "partial": true,
+          "channels": [
+            {
+              "channel": 0,
+              "RMS": 0.0,
+              "quietByWindowRMS": true,
+              "dominantHz": null,
+              "errorFromDeclaredExpectedHz": null,
+              "withinDeclaredFrequencyBudget": null
+            },
+            {
+              "channel": 1,
+              "RMS": 0.0,
+              "quietByWindowRMS": true,
+              "dominantHz": null,
+              "errorFromDeclaredExpectedHz": null,
+              "withinDeclaredFrequencyBudget": null
+            }
+          ]
+        }
+      ],
+      "wholeOneMillisecondQuietBins": {
+        "thresholdRMS": 0.001,
+        "notInstantaneousContinuityProof": true,
+        "channels": [
+          {
+            "channel": 0,
+            "runs": [
+              {
+                "startSample": 0,
+                "endSampleExclusive": 65136,
+                "startSeconds": 0.0,
+                "endSeconds": 1.357,
+                "bins": 1357
+              },
+              {
+                "startSample": 1407360,
+                "endSampleExclusive": 1407408,
+                "startSeconds": 29.32,
+                "endSeconds": 29.321,
+                "bins": 1
+              },
+              {
+                "startSample": 1407504,
+                "endSampleExclusive": 1408224,
+                "startSeconds": 29.323,
+                "endSeconds": 29.338,
+                "bins": 15
+              },
+              {
+                "startSample": 1408272,
+                "endSampleExclusive": 1474560,
+                "startSeconds": 29.339,
+                "endSeconds": 30.72,
+                "bins": 1381
+              }
+            ]
+          },
+          {
+            "channel": 1,
+            "runs": [
+              {
+                "startSample": 0,
+                "endSampleExclusive": 65184,
+                "startSeconds": 0.0,
+                "endSeconds": 1.358,
+                "bins": 1358
+              },
+              {
+                "startSample": 1407456,
+                "endSampleExclusive": 1474560,
+                "startSeconds": 29.322,
+                "endSeconds": 30.72,
+                "bins": 1398
+              }
+            ]
+          }
+        ]
+      },
+      "declaredCriterionPassed": true
+    }
+  ],
+  "declaredCriteriaPassed": false,
+  "fullParityVerified": false,
+  "physicalInputVerified": false,
+  "nativeMIDIDeliveryIndependentlyObserved": false
+}

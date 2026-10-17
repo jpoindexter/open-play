@@ -4,7 +4,7 @@ const path=require('node:path');
 const {createAssetServer}=require('./server.cjs');
 app.setName('Open Play Test');
 let host,window;
-const testTitle=`Open Play Test ${app.getVersion()} — local audio persistence test`;
+const testTitle=`Open Play Test ${app.getVersion()} — MIDI controls test`;
 if(!app.requestSingleInstanceLock())app.quit();
 else{
  app.on('second-instance',()=>{if(window){if(window.isMinimized())window.restore();window.show();window.focus();}});
@@ -31,7 +31,7 @@ else{
    window.on('closed',()=>window=null);
    window.loadURL(host.origin+'/prototype/');
   };
-  Menu.setApplicationMenu(Menu.buildFromTemplate([{label:app.name,submenu:[{label:'About this test build',click:()=>dialog.showMessageBox({type:'info',title:'Open Play Test',message:testTitle,detail:`Electron ${process.versions.electron}; Chromium ${process.versions.chrome}. Existing interface and browser audio engine; reviewed persistence source48a6d4d, approved baseline f8b0abf. Imported bytes are saved locally when storage succeeds; Files reports session-only failures. Prior browser storage/reload/WAV playback evidence does not establish this desktop quit/reopen path. Historical0.1.3 Hercules headphone/master isolation and0.1.1 knob navigation were user-confirmed; full mapping, hot-plug, latency and quality remain incomplete. Optional stems use the existing local model service. No public release or notarization.\n\nProject: ${assets}`})},{type:'separator'},{role:'quit'}]},{label:'Edit',submenu:[{role:'undo'},{role:'redo'},{type:'separator'},{role:'cut'},{role:'copy'},{role:'paste'},{role:'selectAll'}]},{label:'View',submenu:[{role:'reload'},{role:'resetZoom'},{role:'zoomIn'},{role:'zoomOut'},{role:'togglefullscreen'},{type:'separator'},{role:'toggleDevTools'}]},{label:'Window',submenu:[{role:'minimize'},{role:'front'}]}]));
+  Menu.setApplicationMenu(Menu.buildFromTemplate([{label:app.name,submenu:[{label:'About this test build',click:()=>dialog.showMessageBox({type:'info',title:'Open Play Test',message:testTitle,detail:`Electron ${process.versions.electron}; Chromium ${process.versions.chrome}. Existing interface and browser audio engine; current browser controls source dd068e4, approved baseline f8b0abf; prior0.1.5 retained. Imported bytes are saved locally when storage succeeds; Files reports session-only failures. Prior browser Key Shift/Video MIDI and imported-audio evidence does not establish this main-app mapping/reload/audio path. Historical0.1.3 Hercules headphone/master isolation and0.1.1 knob navigation were user-confirmed; full mapping, hot-plug, latency and quality remain incomplete. Optional stems use the existing local model service. No public release or notarization.\n\nProject: ${assets}`})},{type:'separator'},{role:'quit'}]},{label:'Edit',submenu:[{role:'undo'},{role:'redo'},{type:'separator'},{role:'cut'},{role:'copy'},{role:'paste'},{role:'selectAll'}]},{label:'View',submenu:[{role:'reload'},{role:'resetZoom'},{role:'zoomIn'},{role:'zoomOut'},{role:'togglefullscreen'},{type:'separator'},{role:'toggleDevTools'}]},{label:'Window',submenu:[{role:'minimize'},{role:'front'}]}]));
   createWindow();app.on('activate',()=>{if(!BrowserWindow.getAllWindows().length)createWindow();});
  }).catch(error=>{dialog.showErrorBox('Open Play could not start',error.message);app.quit();});
  app.on('window-all-closed',()=>app.quit());

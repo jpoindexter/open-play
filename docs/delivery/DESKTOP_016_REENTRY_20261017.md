@@ -1,0 +1,9 @@
+# Re-entry — actual desktop0.1.6
+
+Active full parity goal is not achieved. Previousdd068e4 and this native delivery are verified progress. Read plan63, native functional review/candidate and original initial93+restored23 UI actions before changing anything. CurrentappPID94208 is intentionally left paused/open for Jason; do not launch a competing same-profile instance. Defaultlauncher targets0.1.6; preserved0.1.5launcher/bundle remain. Profilebeforebackup is ignoredlocal; never restore/delete without need.
+
+Native006 source dd068e4, ASARf9e85d9e…;222prototypefiles; host metadata/version onlychanged. ActualLearn/Add/synthetic66/62, nativeREC/Save, Video rendered opacity0/127, fullquit/newPID/mapexports/importrestore/reinjection executed. Source/physical/all72/fullREQ516/currentreference are separate. Exact initial/restored3map exports match2b3935a8. Realinput still needs physical acceptance.
+
+Audio gate FAILED +2left1.046193Hz error>1Hz; other3channels pass. Entire originals/decodedPCM and fixed5–7s plan retained. Do not loosen budget or replace with a repeated greenrun. Next causal diagnosis should distinguish originalsource, actual scheduledrate/pitch ratio, actualWASM output and encodeddecoder path, with a meaningful failing regression first. Other stem/cursor/FX/services/hardware/visual gaps remain in plan63/currentaudit; nofullparityflags may be promoted.
+
+Originalnumericautomation/−24misinput and falsely namedfirst+2 screenshot are preserved; only verified+2 screenshot is relevant. Whole native screenshots haveJPEGbytes despite.pngnames. Rawlocalfiles required for independentreplay; Git alone is insufficient. FullClaudeaudit unlaunched; originalprompt suffix exact. PrivateGitHub/Trello updates alreadyauthorized; preserveprefixes/models, exactreadback. No publicrelease/nativeDSPrewrite.
