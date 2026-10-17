@@ -1,0 +1,439 @@
+{
+  "startedAt": "2026-10-17T20:05:18.615Z",
+  "completed": true,
+  "checks": [
+    "Armed decks do not autoplay; Play produces beat and downbeat alignment in actual audio",
+    "A one-second source playhead move enters Tempo Sync, retains pulse intervals and a stable audible bar offset",
+    "Re-Sync restores Beat Sync and actual downbeat alignment",
+    "Virtual tempo updates both engaged Smart Sync source rates",
+    "Software OFF enters relative then disengaged states; no physical slider acceptance",
+    "Analyzed missing-grid load disables Smart Sync despite Maintain Sync on Track Load"
+  ],
+  "errors": [],
+  "events": [
+    {
+      "name": "record-start",
+      "audioTime": 0.5166439909297053,
+      "utc": "2026-10-17T20:05:19.121Z"
+    },
+    {
+      "name": "seek-request",
+      "audioTime": 2.815419501133787,
+      "utc": "2026-10-17T20:05:21.423Z"
+    },
+    {
+      "name": "tempo-ready",
+      "audioTime": 2.8328344671201813,
+      "utc": "2026-10-17T20:05:21.439Z"
+    },
+    {
+      "name": "resync-request",
+      "audioTime": 5.137414965986395,
+      "utc": "2026-10-17T20:05:23.741Z"
+    },
+    {
+      "name": "resync-ready",
+      "audioTime": 5.143219954648526,
+      "utc": "2026-10-17T20:05:23.752Z"
+    },
+    {
+      "name": "record-stop",
+      "audioTime": 7.4478004535147395,
+      "utc": "2026-10-17T20:05:26.054Z"
+    }
+  ],
+  "states": [
+    {
+      "name": "primary-armed",
+      "decks": [
+        {
+          "sync": true,
+          "status": "armed",
+          "role": "primary",
+          "playing": false,
+          "rate": 1,
+          "position": 0
+        },
+        {
+          "sync": false,
+          "status": "off",
+          "role": null,
+          "playing": false,
+          "rate": 1,
+          "position": 0
+        }
+      ]
+    },
+    {
+      "name": "secondary-armed",
+      "decks": [
+        {
+          "sync": true,
+          "status": "beat",
+          "role": "primary",
+          "playing": true,
+          "rate": 1,
+          "position": 0.0132199546485261
+        },
+        {
+          "sync": true,
+          "status": "armed",
+          "role": "secondary",
+          "playing": false,
+          "rate": 0.9375,
+          "position": 0
+        }
+      ]
+    },
+    {
+      "name": "beat-aligned",
+      "decks": [
+        {
+          "sync": true,
+          "status": "beat",
+          "role": "primary",
+          "playing": true,
+          "rate": 1,
+          "position": 0.03063492063492068
+        },
+        {
+          "sync": true,
+          "status": "beat",
+          "role": "secondary",
+          "playing": true,
+          "rate": 0.9375,
+          "position": 0.1236437074829932
+        }
+      ]
+    },
+    {
+      "name": "tempo-offset",
+      "decks": [
+        {
+          "sync": true,
+          "status": "beat",
+          "role": "primary",
+          "playing": true,
+          "rate": 1,
+          "position": 2.3468253968253965
+        },
+        {
+          "sync": true,
+          "status": "tempo",
+          "role": "secondary",
+          "playing": true,
+          "rate": 0.9375,
+          "position": 3.2738988095238093
+        }
+      ]
+    },
+    {
+      "name": "beat-restored",
+      "decks": [
+        {
+          "sync": true,
+          "status": "beat",
+          "role": "primary",
+          "playing": true,
+          "rate": 1,
+          "position": 4.657210884353741
+        },
+        {
+          "sync": true,
+          "status": "beat",
+          "role": "secondary",
+          "playing": true,
+          "rate": 0.9375,
+          "position": 6.346943027210885
+        }
+      ]
+    },
+    {
+      "name": "relative-off",
+      "decks": [
+        {
+          "sync": true,
+          "status": "beat",
+          "role": "primary",
+          "playing": true,
+          "rate": 1.04,
+          "position": 6.985011337868481
+        },
+        {
+          "sync": false,
+          "status": "relative",
+          "role": null,
+          "playing": true,
+          "rate": 0.9750000000000001,
+          "position": 8.5065731292517
+        }
+      ]
+    },
+    {
+      "name": "second-off",
+      "decks": [
+        {
+          "sync": true,
+          "status": "beat",
+          "role": "primary",
+          "playing": true,
+          "rate": 1.04,
+          "position": 6.985011337868481
+        },
+        {
+          "sync": false,
+          "status": "off",
+          "role": null,
+          "playing": true,
+          "rate": 0.9750000000000001,
+          "position": 8.5065731292517
+        }
+      ]
+    },
+    {
+      "name": "missing-grid-load",
+      "decks": [
+        {
+          "sync": true,
+          "status": "beat",
+          "role": "primary",
+          "playing": true,
+          "rate": 1.04,
+          "position": 7.093680725623583
+        },
+        {
+          "sync": false,
+          "status": "off",
+          "role": null,
+          "playing": false,
+          "rate": 0.9749999642372131,
+          "position": 0
+        }
+      ]
+    }
+  ],
+  "scope": "Actual browser app and one whole postmaster recording; controlled constant-grid, two-deck, forward BufferSource/no-keylock/no-stems. No native/hardware/warp/music-quality acceptance.",
+  "criteria": {
+    "maximumAlignedPulseSeconds": 0.01,
+    "maximumAlignedDownbeatSeconds": 0.01,
+    "minimumTempoDownbeatOffsetSeconds": 0.35,
+    "minimumPulsePairsPerSegment": 3,
+    "minimumDownbeatPairsPerSegment": 1,
+    "maximumTempoIntervalErrorSeconds": 0.01,
+    "maximumTempoOffsetDriftSeconds": 0.01,
+    "wholeRecordingFinite": true
+  },
+  "fixture": {
+    "sampleRate": 48000,
+    "duration": 30,
+    "bpm": [
+      120,
+      128
+    ],
+    "grid": [
+      0.05,
+      0.13
+    ],
+    "carrierHz": 900,
+    "pulseFrames": 576,
+    "amplitude": {
+      "downbeat": 0.25,
+      "other": 0.1
+    }
+  },
+  "sourceBefore": {
+    "app.js": "3d918c21a4b5a766d2f8fc6325d38291236973840810945484315ac8e0b06b26",
+    "engine.js": "9430277f44da3416d43db3c0869785fb2d0f4199a65d7a0f7ebe2e82eb790f65",
+    "panels.js": "cb879bde826f9f9e9b50d35695024b3acf0b2a644a2b81f3b32c8a683029053c",
+    "styles.css": "f42b5727bc733cd6cd19e912156936738ec4df3a0358eec34929257c9b71fdd1",
+    "smart-sync.js": "0c99c27fc6a1eacc080fde6509ba26852308fbb3764b3d132cd8fa46be3214f4",
+    "smart-sync-harness.js": "0eb3da5d250c3cc7fefcc84a5526003a52d32e855249c8e65072cfdf0a08cad1"
+  },
+  "physicalOutputMuted": true,
+  "recording": {
+    "bytes": 72954,
+    "format": "audio/webm;codecs=opus",
+    "sha256": "cc88013d88d907fde158030116cffac8a4822c3325adab05dfedf52e87d7fa6c",
+    "localOriginal": "local-evidence/smart-sync/attempt2-original.webm"
+  },
+  "decoded": {
+    "frames": 304290,
+    "sampleRate": 44100,
+    "channels": 2,
+    "duration": 6.9
+  },
+  "audio": {
+    "pulses": [
+      [
+        0.03390022675736962,
+        0.5344897959183673,
+        1.0344897959183674,
+        1.5344897959183674,
+        2.03390022675737,
+        2.5344897959183674,
+        3.0344897959183674,
+        3.5344897959183674,
+        4.033900226757369,
+        4.534489795918367,
+        5.034489795918367,
+        5.534489795918367,
+        6.033900226757369,
+        6.534489795918367
+      ],
+      [
+        0.03394557823129252,
+        0.5345804988662132,
+        1.034580498866213,
+        1.534580498866213,
+        2.0339455782312927,
+        2.4779138321995466,
+        2.9772789115646257,
+        3.4779138321995466,
+        3.9779138321995466,
+        4.477913832199547,
+        5.034580498866213,
+        5.534580498866213,
+        6.033945578231292,
+        6.534580498866213
+      ]
+    ],
+    "bars": [
+      [
+        0.03623582766439909,
+        2.0362358276643993,
+        4.036235827664399,
+        6.036235827664399
+      ],
+      [
+        0.0364172335600907,
+        2.0364172335600905,
+        2.979750566893424,
+        6.0364172335600905
+      ]
+    ],
+    "segments": [
+      {
+        "name": "beat",
+        "from": 0.15,
+        "to": 2.1487755102040818,
+        "pulseErrors": [
+          {
+            "time": 0.5344897959183673,
+            "errorSeconds": 9.070294784585542e-05
+          },
+          {
+            "time": 1.0344897959183674,
+            "errorSeconds": 9.070294784563337e-05
+          },
+          {
+            "time": 1.5344897959183674,
+            "errorSeconds": 9.070294784563337e-05
+          },
+          {
+            "time": 2.03390022675737,
+            "errorSeconds": 4.535147392292771e-05
+          }
+        ],
+        "downbeatErrors": [
+          {
+            "time": 2.0362358276643993,
+            "errorSeconds": 0.00018140589569126675
+          }
+        ]
+      },
+      {
+        "name": "tempo",
+        "from": 2.5161904761904763,
+        "to": 4.470770975056689,
+        "pulseErrors": [
+          {
+            "time": 2.5344897959183674,
+            "errorSeconds": 0.05657596371882079
+          },
+          {
+            "time": 3.0344897959183674,
+            "errorSeconds": 0.057210884353741775
+          },
+          {
+            "time": 3.5344897959183674,
+            "errorSeconds": 0.05657596371882079
+          },
+          {
+            "time": 4.033900226757369,
+            "errorSeconds": 0.05598639455782273
+          }
+        ],
+        "downbeatErrors": [
+          {
+            "time": 4.036235827664399,
+            "errorSeconds": 1.056485260770975
+          }
+        ],
+        "intervals": [
+          [
+            0.5,
+            0.5,
+            0.49941043083900194
+          ],
+          [
+            0.500634920634921,
+            0.5
+          ]
+        ]
+      },
+      {
+        "name": "restored",
+        "from": 4.82657596371882,
+        "to": 6.800000000000001,
+        "pulseErrors": [
+          {
+            "time": 5.034489795918367,
+            "errorSeconds": 9.070294784585542e-05
+          },
+          {
+            "time": 5.534489795918367,
+            "errorSeconds": 9.070294784585542e-05
+          },
+          {
+            "time": 6.033900226757369,
+            "errorSeconds": 4.535147392292771e-05
+          },
+          {
+            "time": 6.534489795918367,
+            "errorSeconds": 9.070294784585542e-05
+          }
+        ],
+        "downbeatErrors": [
+          {
+            "time": 6.036235827664399,
+            "errorSeconds": 0.00018140589569171084
+          }
+        ]
+      }
+    ]
+  },
+  "sharedTempo": [
+    {
+      "requested": 1.04,
+      "source": 1.0399999618530273
+    },
+    {
+      "requested": 0.9750000000000001,
+      "source": 0.9750000238418579
+    }
+  ],
+  "sourceAfter": {
+    "app.js": "3d918c21a4b5a766d2f8fc6325d38291236973840810945484315ac8e0b06b26",
+    "engine.js": "9430277f44da3416d43db3c0869785fb2d0f4199a65d7a0f7ebe2e82eb790f65",
+    "panels.js": "cb879bde826f9f9e9b50d35695024b3acf0b2a644a2b81f3b32c8a683029053c",
+    "styles.css": "f42b5727bc733cd6cd19e912156936738ec4df3a0358eec34929257c9b71fdd1",
+    "smart-sync.js": "0c99c27fc6a1eacc080fde6509ba26852308fbb3764b3d132cd8fa46be3214f4",
+    "smart-sync-harness.js": "0eb3da5d250c3cc7fefcc84a5526003a52d32e855249c8e65072cfdf0a08cad1"
+  },
+  "sourceStable": true,
+  "finishedAt": "2026-10-17T20:05:26.199Z",
+  "priorAttempt": {
+    "path": "local-evidence/smart-sync/attempt1.json",
+    "failure": "Armed and re-Sync aligned; the test wrongly required pulse alignment during a one-source-second seek at128BPM (2.133 beats). Corrected Tempo Sync criterion to steady intervals/stable offset. Initial accent threshold.04 was below normal-pulse bound.044, corrected to.07 between normal.044 and accent.11. Beat/bar10ms and Tempo10ms drift criteria retained."
+  }
+}

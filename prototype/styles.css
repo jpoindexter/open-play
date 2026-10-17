@@ -335,6 +335,14 @@ main {
   display: flex;
   gap: 3px;
 }
+.beat-position {display:flex;flex-direction:column;align-items:center;gap:3px;min-height:25px;font-size:10px;text-transform:uppercase;color:var(--muted)}
+.beat-dots {display:flex;gap:4px}
+.beat-dots i {width:14px;height:3px;background:#555}
+.beat-position[data-state="beat"],.beat-position[data-state="armed"],.beat-position[data-state="relative"] {color:#73cff4}
+.beat-position[data-state="tempo"] {color:#f0c65f}
+.beat-dots i.lit {background:currentColor}
+.transport [data-sync-state="tempo"] {background:#634b13;color:#ffe5a3;border-color:#d5b14f}
+.transport [data-sync-state="relative"],.transport [data-sync-state="armed"] {background:transparent;color:#8bd9fc;border-color:#73cff4}
 .transport button {
   flex: 1;
   padding: 2px 5px;

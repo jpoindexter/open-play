@@ -523,6 +523,7 @@ export class AudioEngine {
     this.stopSource(d.index, { preserveStemExit });
   }
   async seek(d, p) {
+    this.onManualPosition?.(d);
     const live = this.voices.get(d.index)?.liveKeylock;
     if (live) {
       const position = Math.max(0, Math.min(d.track.duration, p));
@@ -1163,6 +1164,7 @@ export class AudioEngine {
   async beginDeckScratch(d, owner) {
     if (!d.track || d.track.missing || d.track.provider) return false;
     if (typeof owner !== 'string' || !owner.length) throw new TypeError('Scratch owner required.');
+    this.onManualPosition?.(d);
     if (d.stemSlip && d.stemSlip !== 'off') throw new Error('Turn selected-stem Slip off before whole-deck scratching.');
     let retained=this.deckScratchShadows.get(d.index);
     if(retained&&!retained.sourcesMatch()){retained.dispose();retained=null;}

@@ -630,6 +630,7 @@ export function createPanels(a) {
                 input.type === "checkbox" ? input.checked : input.value;
               if(monitorFields.has(input.dataset.setting))engine.setMonitorSettings(monitorState());
               persist();
+              if (input.dataset.setting === "Sync Mode") renderDecks();
               if (input.dataset.setting === "Library Text Size")
                 $("#tracks").style.fontSize =
                   `${10 + Number(input.value) * 0.08}px`;
