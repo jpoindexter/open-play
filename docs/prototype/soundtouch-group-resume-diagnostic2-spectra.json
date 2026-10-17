@@ -1,0 +1,202 @@
+{
+  "plan": {
+    "declaredBeforeInspection": "2026-10-17T18:48:30.388261+00:00",
+    "scope": "Separate diagnostic inspection of retained exact normalized input and bit-exact replay; no regrading parentengine1/2.",
+    "sourceReport": "docs/prototype/soundtouch-group-resume-diagnostic2-results.json",
+    "sourceReportSHA256": "17c4227a48e3e4643dd6d6b818a91a004c45582c40f1324a6cfa310d14d3b8a0",
+    "inputWindowSeconds": [
+      5,
+      7
+    ],
+    "outputWindowRelativeToResume": [
+      2.5060000000000002,
+      3.5060000000000002
+    ],
+    "method": "Global20\u201320000Hz HannFFT >=16xpadding/logparabolic; all8isolatedstereo stem components; whole files hash/finite checks",
+    "pitchErrorHzDiagnosticBudget": 1,
+    "noGainDelayFit": true,
+    "fullParityVerified": false
+  },
+  "records": [
+    {
+      "role": "normalized",
+      "raw": {
+        "file": "local-evidence/soundtouch-group-resume-diagnostic2/normalized-input.f32le",
+        "bytes": 22080000,
+        "sha256": "a638ea3d6b93fbea5116577b1ef0667c54151ea0fdc01d3e50420faf69f9ca31",
+        "frames": 552000,
+        "channels": 10,
+        "sampleRate": 48000
+      },
+      "wholeFinite": true,
+      "firstFrame": 240000,
+      "lastExclusive": 336000,
+      "channels": [
+        {
+          "stem": 0,
+          "channel": 0,
+          "expectedHz": 394,
+          "Hz": 394.0000003531397,
+          "errorHz": 3.5313968282935093e-07,
+          "RMS": 0.017677866146495115
+        },
+        {
+          "stem": 0,
+          "channel": 1,
+          "expectedHz": 514,
+          "Hz": 514.0000000082094,
+          "errorHz": 8.209440238715615e-09,
+          "RMS": 0.017677988922417478
+        },
+        {
+          "stem": 1,
+          "channel": 0,
+          "expectedHz": 622,
+          "Hz": 621.9999995744772,
+          "errorHz": 4.2552278500807006e-07,
+          "RMS": 0.01767811309057646
+        },
+        {
+          "stem": 1,
+          "channel": 1,
+          "expectedHz": 766,
+          "Hz": 766.0000001535785,
+          "errorHz": 1.535785258965916e-07,
+          "RMS": 0.017678285748817857
+        },
+        {
+          "stem": 2,
+          "channel": 0,
+          "expectedHz": 926,
+          "Hz": 925.9999997069318,
+          "errorHz": 2.930681830548565e-07,
+          "RMS": 0.017678466868292993
+        },
+        {
+          "stem": 2,
+          "channel": 1,
+          "expectedHz": 1186,
+          "Hz": 1186.000000372824,
+          "errorHz": 3.728239335032413e-07,
+          "RMS": 0.01767867986846239
+        },
+        {
+          "stem": 3,
+          "channel": 0,
+          "expectedHz": 1438,
+          "Hz": 1438.000000477282,
+          "errorHz": 4.77281901112292e-07,
+          "RMS": 0.017678732658725344
+        },
+        {
+          "stem": 3,
+          "channel": 1,
+          "expectedHz": 1774,
+          "Hz": 1774.0000005680943,
+          "errorHz": 5.680942649632925e-07,
+          "RMS": 0.017678540611174316
+        }
+      ]
+    },
+    {
+      "role": "output",
+      "raw": {
+        "file": "local-evidence/soundtouch-group-resume-diagnostic2/replayed-output.f32le",
+        "bytes": 7690240,
+        "sha256": "ad7429c1540d27eb73a64bc0f7ef891a922f6220048cfaeb32e27294b733da81",
+        "frames": 192256,
+        "channels": 10,
+        "sampleRate": 48000
+      },
+      "wholeFinite": true,
+      "firstFrame": 120544,
+      "lastExclusive": 168544,
+      "channels": [
+        {
+          "stem": 0,
+          "channel": 0,
+          "expectedHz": 442.250047033893,
+          "Hz": 438.9310557921061,
+          "errorHz": 3.3189912417868754,
+          "RMS": 0.017342330273734077
+        },
+        {
+          "stem": 0,
+          "channel": 1,
+          "expectedHz": 576.9454928310178,
+          "Hz": 577.6030530416159,
+          "errorHz": 0.6575602105981488,
+          "RMS": 0.017656244337281697
+        },
+        {
+          "stem": 1,
+          "channel": 0,
+          "expectedHz": 698.17139404843,
+          "Hz": 701.3678932754979,
+          "errorHz": 3.196499227067875,
+          "RMS": 0.017331015416732126
+        },
+        {
+          "stem": 1,
+          "channel": 1,
+          "expectedHz": 859.8059290049797,
+          "Hz": 860.1598861326612,
+          "errorHz": 0.3539571276814968,
+          "RMS": 0.017666471260911185
+        },
+        {
+          "stem": 2,
+          "channel": 0,
+          "expectedHz": 1039.3998567344795,
+          "Hz": 1039.029344441675,
+          "errorHz": 0.3705122928045057,
+          "RMS": 0.01765325903565553
+        },
+        {
+          "stem": 2,
+          "channel": 1,
+          "expectedHz": 1331.2399892949163,
+          "Hz": 1331.579731193165,
+          "errorHz": 0.33974189824857604,
+          "RMS": 0.017667670747916153
+        },
+        {
+          "stem": 3,
+          "channel": 0,
+          "expectedHz": 1614.1004254688785,
+          "Hz": 1614.136904039937,
+          "errorHz": 0.03647857105852381,
+          "RMS": 0.017672036222408267
+        },
+        {
+          "stem": 3,
+          "channel": 1,
+          "expectedHz": 1991.2476737008278,
+          "Hz": 1990.3911196404272,
+          "errorHz": 0.8565540604006401,
+          "RMS": 0.01764355694005671
+        }
+      ]
+    }
+  ],
+  "inputMaxErrorHz": 5.680942649632925e-07,
+  "outputFailures": [
+    {
+      "stem": 0,
+      "channel": 0,
+      "expectedHz": 442.250047033893,
+      "Hz": 438.9310557921061,
+      "errorHz": 3.3189912417868754,
+      "RMS": 0.017342330273734077
+    },
+    {
+      "stem": 1,
+      "channel": 0,
+      "expectedHz": 698.17139404843,
+      "Hz": 701.3678932754979,
+      "errorHz": 3.196499227067875,
+      "RMS": 0.017331015416732126
+    }
+  ],
+  "scope": "Exact saved SRC output inputs are clean steady tones in this declared interval; actual public grouped DSP output reproduces captured deviations. Does not isolate a particular internal routine or prove music/other sources/native parity."
+}

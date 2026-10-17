@@ -1,0 +1,112 @@
+{
+  "declaredScope": "Actual adapter class with import-only factory substitution, controlled AudioBuffer/Gain/append ACK. Malformed numeric ACK validation: NaN/undefined/null/string/positive and negative Infinity. Not real AudioWorklet PCM/transfer/heap/native acceptance.",
+  "sourceSHA256": "5f787e315d112c25d224dc4a471b930d2d6b19873b8c2b433f5563bdf04643a2",
+  "scriptSHA256": "b3105321278ac7b55c9b4e7685c01bfc786e3ec0ebb8cae5df338c144f838fc7",
+  "passed": 3,
+  "failed": 3,
+  "records": [
+    {
+      "mode": "NaN",
+      "before": {
+        "retained": 0,
+        "inFlight": 960000
+      },
+      "afterSuccess": {
+        "retained": 15360000,
+        "inFlight": 0
+      },
+      "after": {
+        "retained": 0,
+        "inFlight": 0
+      },
+      "errors": [
+        "Malformed ACK successfully completed preparation",
+        "Malformed ACK was not rejected"
+      ],
+      "passed": false
+    },
+    {
+      "mode": "undefined",
+      "before": {
+        "retained": 0,
+        "inFlight": 960000
+      },
+      "afterSuccess": {
+        "retained": 15360000,
+        "inFlight": 0
+      },
+      "after": {
+        "retained": 0,
+        "inFlight": 0
+      },
+      "errors": [
+        "Malformed ACK successfully completed preparation",
+        "Malformed ACK was not rejected"
+      ],
+      "passed": false
+    },
+    {
+      "mode": "null",
+      "before": {
+        "retained": 0,
+        "inFlight": 960000
+      },
+      "after": {
+        "retained": 0,
+        "inFlight": 0
+      },
+      "error": "Grouped atomic append extent differs from context-frame window",
+      "errors": [],
+      "passed": true
+    },
+    {
+      "mode": "string",
+      "before": {
+        "retained": 0,
+        "inFlight": 960000
+      },
+      "afterSuccess": {
+        "retained": 15360000,
+        "inFlight": 0
+      },
+      "after": {
+        "retained": 0,
+        "inFlight": 0
+      },
+      "errors": [
+        "Malformed ACK successfully completed preparation",
+        "Malformed ACK was not rejected"
+      ],
+      "passed": false
+    },
+    {
+      "mode": "Infinity",
+      "before": {
+        "retained": 0,
+        "inFlight": 960000
+      },
+      "after": {
+        "retained": 0,
+        "inFlight": 0
+      },
+      "error": "Grouped atomic append extent differs from context-frame window",
+      "errors": [],
+      "passed": true
+    },
+    {
+      "mode": "negative-Infinity",
+      "before": {
+        "retained": 0,
+        "inFlight": 960000
+      },
+      "after": {
+        "retained": 0,
+        "inFlight": 0
+      },
+      "error": "Grouped atomic append extent differs from context-frame window",
+      "errors": [],
+      "passed": true
+    }
+  ],
+  "fullParityVerified": false
+}

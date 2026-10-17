@@ -1,0 +1,77 @@
+{
+  "declaredScope": "Actual adapter class with import-only factory substitution, controlled AudioBuffer/Gain/append ACK. Success/rejection/wrong extent/abort accounting. Not real AudioWorklet PCM/transfer/heap/native acceptance.",
+  "sourceSHA256": "69e4d930aa98bea862afda033209c4afddc56386ea3f134e3abd82928205d784",
+  "scriptSHA256": "acbb5a7a3fbea2e051fb2d6405f85ee240bf02b610f5867140366591a91badf5",
+  "passed": 0,
+  "failed": 4,
+  "records": [
+    {
+      "mode": "success",
+      "before": {
+        "retained": 960000,
+        "inFlight": 960000
+      },
+      "afterSuccess": {
+        "retained": 15360000,
+        "inFlight": 0
+      },
+      "after": {
+        "retained": 0,
+        "inFlight": 0
+      },
+      "errors": [
+        "Unacknowledged chunk counted as retained"
+      ],
+      "passed": false
+    },
+    {
+      "mode": "rejection",
+      "before": {
+        "retained": 960000,
+        "inFlight": 960000
+      },
+      "after": {
+        "retained": 0,
+        "inFlight": 0
+      },
+      "error": "Controlled append rejection",
+      "errors": [
+        "Unacknowledged chunk counted as retained"
+      ],
+      "passed": false
+    },
+    {
+      "mode": "bad-extent",
+      "before": {
+        "retained": 960000,
+        "inFlight": 960000
+      },
+      "after": {
+        "retained": 0,
+        "inFlight": 0
+      },
+      "error": "Grouped atomic append extent differs from context-frame window",
+      "errors": [
+        "Unacknowledged chunk counted as retained"
+      ],
+      "passed": false
+    },
+    {
+      "mode": "abort",
+      "before": {
+        "retained": 960000,
+        "inFlight": 960000
+      },
+      "after": {
+        "retained": 0,
+        "inFlight": 0
+      },
+      "error": "AbortError",
+      "errors": [
+        "Unacknowledged chunk counted as retained"
+      ],
+      "passed": false
+    }
+  ],
+  "fullParityVerified": false
+}

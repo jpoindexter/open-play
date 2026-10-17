@@ -1,0 +1,165 @@
+{
+  "scope": "Actual shared-guide hook contracts under controlled Stretch boundary; real public DSP recombination/spectral captures are separate. Not browser/native/music proof.",
+  "sourceSHA256": "c2b0a4169b40e3b3a2763562940b499ad4b84df009ab53149ebc194ab79e668b",
+  "checks": [
+    {
+      "name": "Original decisions broadcast without running follower content search",
+      "passed": true,
+      "evidence": {
+        "participants": 3,
+        "registered": 3,
+        "nextDecision": 30,
+        "retainedDecisions": 0,
+        "maxPendingDecisions": 4096,
+        "peakPendingDecisions": 1,
+        "produced": 30,
+        "consumed": 60,
+        "readers": [
+          {
+            "index": 0,
+            "next": 30,
+            "disposed": false
+          },
+          {
+            "index": 1,
+            "next": 30,
+            "disposed": false
+          },
+          {
+            "index": 2,
+            "next": 30,
+            "disposed": false
+          }
+        ]
+      }
+    },
+    {
+      "name": "Follower cannot request a missing decision or advance its cursor",
+      "passed": true,
+      "evidence": {
+        "participants": 2,
+        "registered": 2,
+        "nextDecision": 0,
+        "retainedDecisions": 0,
+        "maxPendingDecisions": 4096,
+        "peakPendingDecisions": 0,
+        "produced": 0,
+        "consumed": 0,
+        "readers": [
+          {
+            "index": 0,
+            "next": 0,
+            "disposed": false
+          },
+          {
+            "index": 1,
+            "next": 0,
+            "disposed": false
+          }
+        ]
+      }
+    },
+    {
+      "name": "Geometry mismatch rejects without consuming a valid original decision",
+      "passed": true,
+      "evidence": {
+        "participants": 2,
+        "registered": 2,
+        "nextDecision": 1,
+        "retainedDecisions": 0,
+        "maxPendingDecisions": 4096,
+        "peakPendingDecisions": 1,
+        "produced": 1,
+        "consumed": 1,
+        "readers": [
+          {
+            "index": 0,
+            "next": 1,
+            "disposed": false
+          },
+          {
+            "index": 1,
+            "next": 1,
+            "disposed": false
+          }
+        ]
+      }
+    },
+    {
+      "name": "Bounded follower lag refuses before another original correlation search",
+      "passed": true,
+      "evidence": {
+        "participants": 2,
+        "registered": 2,
+        "nextDecision": 3,
+        "retainedDecisions": 2,
+        "maxPendingDecisions": 2,
+        "peakPendingDecisions": 2,
+        "produced": 3,
+        "consumed": 1,
+        "readers": [
+          {
+            "index": 0,
+            "next": 3,
+            "disposed": false
+          },
+          {
+            "index": 1,
+            "next": 1,
+            "disposed": false
+          }
+        ]
+      }
+    },
+    {
+      "name": "Terminal detachment restores original methods and releases pending guide rows",
+      "passed": true,
+      "evidence": {
+        "participants": 2,
+        "registered": 2,
+        "nextDecision": 1,
+        "retainedDecisions": 0,
+        "maxPendingDecisions": 4096,
+        "peakPendingDecisions": 1,
+        "produced": 1,
+        "consumed": 0,
+        "readers": [
+          {
+            "index": 0,
+            "next": 1,
+            "disposed": true
+          },
+          {
+            "index": 1,
+            "next": 0,
+            "disposed": true
+          }
+        ]
+      }
+    },
+    {
+      "name": "Participant overflow and invalid producer offsets are explicit",
+      "passed": true,
+      "evidence": {
+        "participants": 1,
+        "registered": 1,
+        "nextDecision": 0,
+        "retainedDecisions": 0,
+        "maxPendingDecisions": 4096,
+        "peakPendingDecisions": 0,
+        "produced": 0,
+        "consumed": 0,
+        "readers": [
+          {
+            "index": 0,
+            "next": 0,
+            "disposed": false
+          }
+        ]
+      }
+    }
+  ],
+  "passed": 6,
+  "failed": 0,
+  "fullParityVerified": false
+}

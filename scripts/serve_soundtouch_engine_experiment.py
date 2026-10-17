@@ -10,8 +10,9 @@ ROOT = Path(__file__).resolve().parents[1]
 parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument('--cohort', required=True)
 parser.add_argument('--plan', default='docs/prototype/soundtouch-engine-browser-plan.json')
-parser.add_argument('--harness', choices=['engine','clock-probe','phase-engine','phase-long','phase-lifecycle'], default='engine')
+parser.add_argument('--harness', choices=['engine','clock-probe','phase-engine','phase-long','phase-lifecycle','group-stems','phase-group-engine'], default='engine')
 parser.add_argument('--module-delay', type=float, default=0)
+parser.add_argument('--adapter', choices=['live-adapter.js','group-live-adapter.js'], default='live-adapter.js')
 args = parser.parse_args()
 assert 0 <= args.module_delay <= 2
 assert re.fullmatch('[a-z0-9-]{1,40}', args.cohort)
@@ -33,11 +34,11 @@ for path in sorted((ROOT / 'prototype').rglob('*')):
     if not path.is_file(): continue
     relative = str(path.relative_to(ROOT))
     mime = 'application/wasm' if path.suffix == '.wasm' else 'text/javascript' if path.suffix in ['.js', '.mjs'] else 'application/octet-stream'
-    route('/' + relative, 'experiments/keylock-soundtouch/live-adapter.js' if relative == 'prototype/keylock-shadow-live.js' else relative, mime)
+    route('/' + relative, 'experiments/keylock-soundtouch/' + args.adapter if relative == 'prototype/keylock-shadow-live.js' else relative, mime)
 plan = (ROOT / args.plan).resolve()
 assert plan.is_relative_to(ROOT / 'docs/prototype')
 route('/plan.json', str(plan.relative_to(ROOT)), 'application/json')
-for name in ['pull-transport.mjs', 'window-source.mjs', 'node-controller.mjs', 'node-worklet.mjs', 'node-factory.mjs', 'bare-clock-worklet.mjs', 'render-clock.mjs', 'phase-render-clock.mjs', 'phase-control.mjs', 'phase-capture.mjs', 'counter-capture.mjs', 'transport-capture.mjs']:
+for name in ['group-node-factory.mjs', 'group-node-worklet.mjs', 'group-node-controller.mjs', 'grouped-fullseek-pull-transport.mjs', 'shared-overlap-guide.mjs', 'pull-transport.mjs', 'window-source.mjs', 'node-controller.mjs', 'node-worklet.mjs', 'node-factory.mjs', 'bare-clock-worklet.mjs', 'render-clock.mjs', 'phase-render-clock.mjs', 'phase-control.mjs', 'phase-capture.mjs', 'counter-capture.mjs', 'transport-capture.mjs']:
     relative = 'experiments/keylock-soundtouch/' + name
     route('/' + relative, relative)
 prefix = 'local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/'
@@ -50,7 +51,7 @@ for path in sorted((ROOT / prefix / 'core/.dist').glob('*.js')):
     route('/' + relative, relative, transform=import_path_only if path.name == 'interpolationStrategyRegistry.js' else None)
 for path in sorted((ROOT / prefix / 'interpolation-strategy-lanczos/.dist').glob('*.js')):
     route('/official/lanczos/' + path.name, str(path.relative_to(ROOT)))
-sources = {'cohort': args.cohort, 'moduleDelaySeconds': args.module_delay, 'scope': 'Source bytes frozen once at server startup. One bare dependency import rewritten to a fixed local URL; no DSP algorithm changes.',
+sources = {'cohort': args.cohort, 'moduleDelaySeconds': args.module_delay, 'scope': 'Source bytes frozen once at server startup. One bare dependency import rewritten to a fixed local URL. Experimental modules retain their own declared algorithm variants; grouped guide/full-search changes are NOT an unchanged-DSP claim.',
            'routes': {url: metadata for url, (_, _, metadata) in PAGES.items()}}
 # Preserve every served byte, including import-only rewriting, before UI runs.
 for url, (data, _, _) in PAGES.items():
@@ -69,7 +70,7 @@ class Handler(BaseHTTPRequestHandler):
     def do_GET(self):
         if not self.valid() or self.path not in PAGES: return self.send_error(404)
         data, mime, _ = PAGES[self.path]
-        if self.path == '/experiments/keylock-soundtouch/node-worklet.mjs' and args.module_delay:
+        if self.path in ['/experiments/keylock-soundtouch/node-worklet.mjs','/experiments/keylock-soundtouch/group-node-worklet.mjs'] and args.module_delay:
             import time
             time.sleep(args.module_delay)
         self.respond(data, mime)

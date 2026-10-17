@@ -1,0 +1,69 @@
+{
+  "declaredScope": "Actual adapter class with import-only factory substitution, controlled AudioBuffer/Gain/append ACK. Success/rejection/wrong extent/abort accounting. Not real AudioWorklet PCM/transfer/heap/native acceptance.",
+  "sourceSHA256": "5f787e315d112c25d224dc4a471b930d2d6b19873b8c2b433f5563bdf04643a2",
+  "scriptSHA256": "acbb5a7a3fbea2e051fb2d6405f85ee240bf02b610f5867140366591a91badf5",
+  "passed": 4,
+  "failed": 0,
+  "records": [
+    {
+      "mode": "success",
+      "before": {
+        "retained": 0,
+        "inFlight": 960000
+      },
+      "afterSuccess": {
+        "retained": 15360000,
+        "inFlight": 0
+      },
+      "after": {
+        "retained": 0,
+        "inFlight": 0
+      },
+      "errors": [],
+      "passed": true
+    },
+    {
+      "mode": "rejection",
+      "before": {
+        "retained": 0,
+        "inFlight": 960000
+      },
+      "after": {
+        "retained": 0,
+        "inFlight": 0
+      },
+      "error": "Controlled append rejection",
+      "errors": [],
+      "passed": true
+    },
+    {
+      "mode": "bad-extent",
+      "before": {
+        "retained": 0,
+        "inFlight": 960000
+      },
+      "after": {
+        "retained": 0,
+        "inFlight": 0
+      },
+      "error": "Grouped atomic append extent differs from context-frame window",
+      "errors": [],
+      "passed": true
+    },
+    {
+      "mode": "abort",
+      "before": {
+        "retained": 0,
+        "inFlight": 960000
+      },
+      "after": {
+        "retained": 0,
+        "inFlight": 0
+      },
+      "error": "AbortError",
+      "errors": [],
+      "passed": true
+    }
+  ],
+  "fullParityVerified": false
+}

@@ -1,0 +1,85 @@
+{
+  "declaredAt": "2026-10-17T18:23:48.651Z",
+  "scope": "Actual serial SoundTouchTransport5positional sources; original is exact sum of4different known synthetic stems. Proposed unmuted recombination criterion, not reference-measured Serato sonic behavior or source model quality.",
+  "cases": [
+    {
+      "id": "unity",
+      "rate": 1,
+      "semitones": 0,
+      "sampleRate": 44100,
+      "keylock": true
+    },
+    {
+      "id": "tempo",
+      "rate": 1.08,
+      "semitones": 0,
+      "sampleRate": 44100,
+      "keylock": true
+    },
+    {
+      "id": "shifted",
+      "rate": 1.08,
+      "semitones": 2,
+      "sampleRate": 44100,
+      "keylock": true
+    },
+    {
+      "id": "unity",
+      "rate": 1,
+      "semitones": 0,
+      "sampleRate": 48000,
+      "keylock": true
+    },
+    {
+      "id": "tempo",
+      "rate": 1.08,
+      "semitones": 0,
+      "sampleRate": 48000,
+      "keylock": true
+    },
+    {
+      "id": "shifted",
+      "rate": 1.08,
+      "semitones": 2,
+      "sampleRate": 48000,
+      "keylock": true
+    }
+  ],
+  "fixture": {
+    "seconds": 4,
+    "stemLeftHz": [
+      197,
+      311,
+      463,
+      719
+    ],
+    "stemRightHz": [
+      257,
+      383,
+      593,
+      887
+    ],
+    "amplitudeEach": 0.025,
+    "phasePerStem": [
+      0.13,
+      0.37,
+      0.73,
+      1.17
+    ],
+    "original": "samplewise Float32 sum of four stems; no separation model"
+  },
+  "windowSeconds": [
+    0.5,
+    2.5
+  ],
+  "relativeRMSResidualMax": 0.03,
+  "acceptanceRationale": "Preserve the existing3percent stem reconstruction budget when comparing the processed original to the sum of processed complementary stems. Shared command frames alone do not imply waveform coherence.",
+  "capture": "Whole3s/quantum rounded output all10channels; every sample finite; original PCM retained exclusive; no gain fit/delay fit/phase repair/trim.",
+  "exclusions": [
+    "Reference sonic parity",
+    "Native/browser runtime",
+    "Musical stems/model reconstruction",
+    "Exact source cursor",
+    "Physical outputs"
+  ]
+}

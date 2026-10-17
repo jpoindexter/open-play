@@ -1,0 +1,584 @@
+{
+  "plan": {
+    "declared_before_spectral_inspection": "2026-10-17T18:28:06.893889+00:00",
+    "scope": "Additional spectral inspection of all already retained grouped-stem raw PCM; separate from previously declared recombination criterion. No retrograde of original results; no new capture.",
+    "sourceReport": "docs/prototype/soundtouch-grouped-fullseek-stems-results.json",
+    "windowSeconds": [
+      0.5,
+      2.5
+    ],
+    "frequencyErrorHzMax": 1,
+    "RMSMin": 0.001,
+    "method": "Global20\u201320000Hz Hann FFT at>=16xpadding/logparabolic interpolation, each isolatedstem/stereochannel; no expected-frequency-restrictedsearch",
+    "cases": 6,
+    "measurements": 48,
+    "fullParityVerified": false
+  },
+  "selfchecks": [
+    {
+      "sr": 44100,
+      "expected": 197,
+      "got": 197.00000043141108
+    },
+    {
+      "sr": 44100,
+      "expected": 311,
+      "got": 311.0000002382013
+    },
+    {
+      "sr": 44100,
+      "expected": 463,
+      "got": 462.99999954342843
+    },
+    {
+      "sr": 44100,
+      "expected": 719,
+      "got": 718.9999995642678
+    },
+    {
+      "sr": 44100,
+      "expected": 257,
+      "got": 257.00000000955566
+    },
+    {
+      "sr": 44100,
+      "expected": 383,
+      "got": 383.0000004106313
+    },
+    {
+      "sr": 44100,
+      "expected": 593,
+      "got": 592.999999599841
+    },
+    {
+      "sr": 44100,
+      "expected": 887,
+      "got": 886.9999996171298
+    },
+    {
+      "sr": 48000,
+      "expected": 197,
+      "got": 197.00000018576873
+    },
+    {
+      "sr": 48000,
+      "expected": 311,
+      "got": 310.99999948151975
+    },
+    {
+      "sr": 48000,
+      "expected": 463,
+      "got": 462.9999994550688
+    },
+    {
+      "sr": 48000,
+      "expected": 719,
+      "got": 718.9999995907666
+    },
+    {
+      "sr": 48000,
+      "expected": 257,
+      "got": 256.99999999221336
+    },
+    {
+      "sr": 48000,
+      "expected": 383,
+      "got": 382.9999998565349
+    },
+    {
+      "sr": 48000,
+      "expected": 593,
+      "got": 592.9999996748857
+    },
+    {
+      "sr": 48000,
+      "expected": 887,
+      "got": 886.999999505486
+    }
+  ],
+  "cases": [
+    {
+      "id": "unity",
+      "sampleRate": 44100,
+      "rawSHA256": "5bf778c4501a4cd434c4138ae6f8c35aabb99cddbf5e880bf04d76727c9ecaaf",
+      "channels": [
+        {
+          "stem": 0,
+          "channel": 0,
+          "expectedHz": 197.0,
+          "Hz": 196.99930165095836,
+          "RMS": 0.01767775493363107,
+          "errorHz": 0.0006983490416416771,
+          "passed": true
+        },
+        {
+          "stem": 0,
+          "channel": 1,
+          "expectedHz": 257.0,
+          "Hz": 256.9990883484297,
+          "RMS": 0.01767769834781104,
+          "errorHz": 0.0009116515702771721,
+          "passed": true
+        },
+        {
+          "stem": 1,
+          "channel": 0,
+          "expectedHz": 311.0,
+          "Hz": 310.9988970967292,
+          "RMS": 0.017677694300065397,
+          "errorHz": 0.0011029032708052,
+          "passed": true
+        },
+        {
+          "stem": 1,
+          "channel": 1,
+          "expectedHz": 383.0,
+          "Hz": 382.9986420798659,
+          "RMS": 0.01767765541368773,
+          "errorHz": 0.001357920134125834,
+          "passed": true
+        },
+        {
+          "stem": 2,
+          "channel": 0,
+          "expectedHz": 463.0,
+          "Hz": 462.99835754617,
+          "RMS": 0.017677618601766486,
+          "errorHz": 0.001642453830015711,
+          "passed": true
+        },
+        {
+          "stem": 2,
+          "channel": 1,
+          "expectedHz": 593.0,
+          "Hz": 592.9978972436894,
+          "RMS": 0.01767757489512449,
+          "errorHz": 0.002102756310591758,
+          "passed": true
+        },
+        {
+          "stem": 3,
+          "channel": 0,
+          "expectedHz": 719.0,
+          "Hz": 718.9974509746669,
+          "RMS": 0.017677705231148453,
+          "errorHz": 0.0025490253331099666,
+          "passed": true
+        },
+        {
+          "stem": 3,
+          "channel": 1,
+          "expectedHz": 887.0,
+          "Hz": 886.9968576919453,
+          "RMS": 0.01767767079948328,
+          "errorHz": 0.003142308054748355,
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "id": "tempo",
+      "sampleRate": 44100,
+      "rawSHA256": "8255deb5aec516d1ea022a7e1343fbb3ac78bc732e92d82781b626a237de56eb",
+      "channels": [
+        {
+          "stem": 0,
+          "channel": 0,
+          "expectedHz": 197.0,
+          "Hz": 196.43879188812198,
+          "RMS": 0.01760403886859886,
+          "errorHz": 0.5612081118780168,
+          "passed": true
+        },
+        {
+          "stem": 0,
+          "channel": 1,
+          "expectedHz": 257.0,
+          "Hz": 257.04604376514686,
+          "RMS": 0.017674379683168737,
+          "errorHz": 0.04604376514686237,
+          "passed": true
+        },
+        {
+          "stem": 1,
+          "channel": 0,
+          "expectedHz": 311.0,
+          "Hz": 311.15159656124854,
+          "RMS": 0.017577739462917186,
+          "errorHz": 0.15159656124853882,
+          "passed": true
+        },
+        {
+          "stem": 1,
+          "channel": 1,
+          "expectedHz": 383.0,
+          "Hz": 382.8694327627171,
+          "RMS": 0.01766909179970419,
+          "errorHz": 0.13056723728288944,
+          "passed": true
+        },
+        {
+          "stem": 2,
+          "channel": 0,
+          "expectedHz": 463.0,
+          "Hz": 463.19395643160857,
+          "RMS": 0.017659454332063226,
+          "errorHz": 0.19395643160856935,
+          "passed": true
+        },
+        {
+          "stem": 2,
+          "channel": 1,
+          "expectedHz": 593.0,
+          "Hz": 593.3363176860772,
+          "RMS": 0.017662162235097624,
+          "errorHz": 0.3363176860772228,
+          "passed": true
+        },
+        {
+          "stem": 3,
+          "channel": 0,
+          "expectedHz": 719.0,
+          "Hz": 719.1605444023945,
+          "RMS": 0.017671565015949107,
+          "errorHz": 0.16054440239452106,
+          "passed": true
+        },
+        {
+          "stem": 3,
+          "channel": 1,
+          "expectedHz": 887.0,
+          "Hz": 886.1600485585782,
+          "RMS": 0.017628074923856624,
+          "errorHz": 0.8399514414218174,
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "id": "shifted",
+      "sampleRate": 44100,
+      "rawSHA256": "66d82676ebce073dd8e61f4e94f7fdbe7f60e3fe35f9ab5cfa2505c092c07ada",
+      "channels": [
+        {
+          "stem": 0,
+          "channel": 0,
+          "expectedHz": 221.1250235169465,
+          "Hz": 221.7015532704824,
+          "RMS": 0.017642128772017786,
+          "errorHz": 0.5765297535359082,
+          "passed": true
+        },
+        {
+          "stem": 0,
+          "channel": 1,
+          "expectedHz": 288.4727464155089,
+          "Hz": 288.34412269484744,
+          "RMS": 0.01767497415204253,
+          "errorHz": 0.12862372066143735,
+          "passed": true
+        },
+        {
+          "stem": 1,
+          "channel": 0,
+          "expectedHz": 349.085697024215,
+          "Hz": 348.496211151326,
+          "RMS": 0.017623509567656747,
+          "errorHz": 0.5894858728889858,
+          "passed": true
+        },
+        {
+          "stem": 1,
+          "channel": 1,
+          "expectedHz": 429.90296450248985,
+          "Hz": 429.82375601581805,
+          "RMS": 0.017672671636613336,
+          "errorHz": 0.0792084866718028,
+          "passed": true
+        },
+        {
+          "stem": 2,
+          "channel": 0,
+          "expectedHz": 519.6999283672397,
+          "Hz": 519.738112546234,
+          "RMS": 0.017662510510914844,
+          "errorHz": 0.03818417899424276,
+          "passed": true
+        },
+        {
+          "stem": 2,
+          "channel": 1,
+          "expectedHz": 665.6199946474582,
+          "Hz": 665.523657706045,
+          "RMS": 0.01766078177483818,
+          "errorHz": 0.09633694141314209,
+          "passed": true
+        },
+        {
+          "stem": 3,
+          "channel": 0,
+          "expectedHz": 807.0502127344392,
+          "Hz": 807.0020068220358,
+          "RMS": 0.017668936590738503,
+          "errorHz": 0.048205912403432194,
+          "passed": true
+        },
+        {
+          "stem": 3,
+          "channel": 1,
+          "expectedHz": 995.6238368504139,
+          "Hz": 995.7261074531492,
+          "RMS": 0.017637476329963098,
+          "errorHz": 0.10227060273530242,
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "id": "unity",
+      "sampleRate": 48000,
+      "rawSHA256": "a743a8f2c9f5d86f6ad7aa29db7235f48676ee75f152aad0f87566dcafe83aa3",
+      "channels": [
+        {
+          "stem": 0,
+          "channel": 0,
+          "expectedHz": 197.0,
+          "Hz": 196.9973277515354,
+          "RMS": 0.017677668734889372,
+          "errorHz": 0.0026722484645915756,
+          "passed": true
+        },
+        {
+          "stem": 0,
+          "channel": 1,
+          "expectedHz": 257.0,
+          "Hz": 256.99651441225757,
+          "RMS": 0.017677403908057963,
+          "errorHz": 0.003485587742432017,
+          "passed": true
+        },
+        {
+          "stem": 1,
+          "channel": 0,
+          "expectedHz": 311.0,
+          "Hz": 310.9957809190176,
+          "RMS": 0.017677365523417123,
+          "errorHz": 0.004219080982409196,
+          "passed": true
+        },
+        {
+          "stem": 1,
+          "channel": 1,
+          "expectedHz": 383.0,
+          "Hz": 382.9948062016233,
+          "RMS": 0.01767783762461821,
+          "errorHz": 0.005193798376694758,
+          "passed": true
+        },
+        {
+          "stem": 2,
+          "channel": 0,
+          "expectedHz": 463.0,
+          "Hz": 462.9937201452512,
+          "RMS": 0.017677756851666285,
+          "errorHz": 0.006279854748811431,
+          "passed": true
+        },
+        {
+          "stem": 2,
+          "channel": 1,
+          "expectedHz": 593.0,
+          "Hz": 592.9919613054758,
+          "RMS": 0.01767778538068501,
+          "errorHz": 0.008038694524202583,
+          "passed": true
+        },
+        {
+          "stem": 3,
+          "channel": 0,
+          "expectedHz": 719.0,
+          "Hz": 718.9902563218618,
+          "RMS": 0.017677345397373843,
+          "errorHz": 0.00974367813819299,
+          "passed": true
+        },
+        {
+          "stem": 3,
+          "channel": 1,
+          "expectedHz": 887.0,
+          "Hz": 886.9879856058947,
+          "RMS": 0.01767748785627727,
+          "errorHz": 0.012014394105335668,
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "id": "tempo",
+      "sampleRate": 48000,
+      "rawSHA256": "07dca70d191cd07c31b45677ff428655e6b6a2079b5028bbc09df4e76e999cc0",
+      "channels": [
+        {
+          "stem": 0,
+          "channel": 0,
+          "expectedHz": 197.0,
+          "Hz": 196.43646232366638,
+          "RMS": 0.0175998973466402,
+          "errorHz": 0.563537676333624,
+          "passed": true
+        },
+        {
+          "stem": 0,
+          "channel": 1,
+          "expectedHz": 257.0,
+          "Hz": 257.0434172850555,
+          "RMS": 0.017672699088768354,
+          "errorHz": 0.043417285055511456,
+          "passed": true
+        },
+        {
+          "stem": 1,
+          "channel": 0,
+          "expectedHz": 311.0,
+          "Hz": 311.1493595823984,
+          "RMS": 0.01757605361128733,
+          "errorHz": 0.14935958239840375,
+          "passed": true
+        },
+        {
+          "stem": 1,
+          "channel": 1,
+          "expectedHz": 383.0,
+          "Hz": 382.8655315271284,
+          "RMS": 0.017670594850711662,
+          "errorHz": 0.13446847287161745,
+          "passed": true
+        },
+        {
+          "stem": 2,
+          "channel": 0,
+          "expectedHz": 463.0,
+          "Hz": 463.1889422394078,
+          "RMS": 0.0176621113695696,
+          "errorHz": 0.1889422394078224,
+          "passed": true
+        },
+        {
+          "stem": 2,
+          "channel": 1,
+          "expectedHz": 593.0,
+          "Hz": 593.329956305465,
+          "RMS": 0.01766268889992983,
+          "errorHz": 0.32995630546497523,
+          "passed": true
+        },
+        {
+          "stem": 3,
+          "channel": 0,
+          "expectedHz": 719.0,
+          "Hz": 719.1528510953217,
+          "RMS": 0.01767031404522439,
+          "errorHz": 0.15285109532169372,
+          "passed": true
+        },
+        {
+          "stem": 3,
+          "channel": 1,
+          "expectedHz": 887.0,
+          "Hz": 886.1514441565834,
+          "RMS": 0.017627389045425677,
+          "errorHz": 0.8485558434166478,
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "id": "shifted",
+      "sampleRate": 48000,
+      "rawSHA256": "5fc764b9b45c7ae3a4af45991795e972eda9f41a5f20bc8be48a8e64fd855e34",
+      "channels": [
+        {
+          "stem": 0,
+          "channel": 0,
+          "expectedHz": 221.1250235169465,
+          "Hz": 221.4446979309318,
+          "RMS": 0.017645689036574395,
+          "errorHz": 0.3196744139852967,
+          "passed": true
+        },
+        {
+          "stem": 0,
+          "channel": 1,
+          "expectedHz": 288.4727464155089,
+          "Hz": 288.4066541846366,
+          "RMS": 0.01767296097099149,
+          "errorHz": 0.0660922308723002,
+          "passed": true
+        },
+        {
+          "stem": 1,
+          "channel": 0,
+          "expectedHz": 349.085697024215,
+          "Hz": 348.8830572646401,
+          "RMS": 0.017623311594200785,
+          "errorHz": 0.202639759574879,
+          "passed": true
+        },
+        {
+          "stem": 1,
+          "channel": 1,
+          "expectedHz": 429.90296450248985,
+          "Hz": 429.9094438067948,
+          "RMS": 0.017671729732403378,
+          "errorHz": 0.006479304304946254,
+          "passed": true
+        },
+        {
+          "stem": 2,
+          "channel": 0,
+          "expectedHz": 519.6999283672397,
+          "Hz": 519.5735451098437,
+          "RMS": 0.017662614067540078,
+          "errorHz": 0.12638325739601441,
+          "passed": true
+        },
+        {
+          "stem": 2,
+          "channel": 1,
+          "expectedHz": 665.6199946474582,
+          "Hz": 665.3972184617687,
+          "RMS": 0.01766279290817716,
+          "errorHz": 0.22277618568944035,
+          "passed": true
+        },
+        {
+          "stem": 3,
+          "channel": 0,
+          "expectedHz": 807.0502127344392,
+          "Hz": 806.8997777244346,
+          "RMS": 0.017669777372832273,
+          "errorHz": 0.15043501000468495,
+          "passed": true
+        },
+        {
+          "stem": 3,
+          "channel": 1,
+          "expectedHz": 995.6238368504139,
+          "Hz": 995.9203380795398,
+          "RMS": 0.01763632144116996,
+          "errorHz": 0.29650122912585175,
+          "passed": true
+        }
+      ],
+      "passed": true
+    }
+  ],
+  "passed": 6,
+  "failedMeasurements": 0,
+  "fullParityVerified": false
+}

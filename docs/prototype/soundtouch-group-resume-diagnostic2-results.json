@@ -1,0 +1,1326 @@
+{
+  "plan": {
+    "declaredAt": "2026-10-17T18:46:22.124Z",
+    "scope": "Causal Node replay with controlled AudioBuffer class/geometry and exact SRC function, saved48k-context/44.1k-source resumedgroup seed. Not browser/native/API acceptance or regrading1/2 enginecohort.",
+    "parentReport": "docs/prototype/soundtouch-engine-browser-group-engine-results.json",
+    "parentReportSHA256": "090728fc043be5371737a99f7fdd73b1945dae00486b0664bf881f4079813c05",
+    "parentRaw": {
+      "path": "local-evidence/soundtouch-engine-browser-group-engine/five-group-48000.f32",
+      "bytes": 53638144,
+      "sha256": "00a12aa423b84ee39ec25eff4ca737493d70fddf235fc24577f0c534d1cc76e3"
+    },
+    "sourceRate": 44100,
+    "sampleRate": 48000,
+    "groupOriginSeconds": 20.5,
+    "relativePositionSeconds": 2.0066666666666677,
+    "rate": 1.25,
+    "semitones": 2,
+    "sourceDurationSeconds": 11.5,
+    "renderSeconds": 4,
+    "serialStartFrame": 256,
+    "comparisonSeconds": [
+      0.1,
+      4
+    ],
+    "failedWindowRelativeToResume": [
+      2.5060000000000002,
+      3.5060000000000002
+    ],
+    "noAlignmentFit": true,
+    "loggingMustBeBitIdentical": true,
+    "fullParityVerified": false
+  },
+  "sources": [
+    {
+      "file": "scripts/diagnose_grouped_resume_phase.mjs",
+      "snapshot": "local-evidence/soundtouch-group-resume-diagnostic2/source-snapshots/scripts/diagnose_grouped_resume_phase.mjs",
+      "bytes": 8278,
+      "sha256": "1e174ed90dbc1851fa959bcf749fda86ed6868512c5c2aa543a7a4a569d4cb9c"
+    },
+    {
+      "file": "experiments/keylock-soundtouch/group-live-adapter.js",
+      "snapshot": "local-evidence/soundtouch-group-resume-diagnostic2/source-snapshots/experiments/keylock-soundtouch/group-live-adapter.js",
+      "bytes": 27220,
+      "sha256": "69e4d930aa98bea862afda033209c4afddc56386ea3f134e3abd82928205d784"
+    },
+    {
+      "file": "experiments/keylock-soundtouch/group-node-factory.mjs",
+      "snapshot": "local-evidence/soundtouch-group-resume-diagnostic2/source-snapshots/experiments/keylock-soundtouch/group-node-factory.mjs",
+      "bytes": 7638,
+      "sha256": "894ccc46228bfdd64834aead355b30ce64074ea357e6608b319b553aa843f0cc"
+    },
+    {
+      "file": "experiments/keylock-soundtouch/grouped-fullseek-pull-transport.mjs",
+      "snapshot": "local-evidence/soundtouch-group-resume-diagnostic2/source-snapshots/experiments/keylock-soundtouch/grouped-fullseek-pull-transport.mjs",
+      "bytes": 16756,
+      "sha256": "3e7d9768c5213047432375f8638c4f234f47df164c02175be1114bb380276847"
+    },
+    {
+      "file": "experiments/keylock-soundtouch/shared-overlap-guide.mjs",
+      "snapshot": "local-evidence/soundtouch-group-resume-diagnostic2/source-snapshots/experiments/keylock-soundtouch/shared-overlap-guide.mjs",
+      "bytes": 2842,
+      "sha256": "c2b0a4169b40e3b3a2763562940b499ad4b84df009ab53149ebc194ab79e668b"
+    },
+    {
+      "file": "experiments/keylock-soundtouch/window-source.mjs",
+      "snapshot": "local-evidence/soundtouch-group-resume-diagnostic2/source-snapshots/experiments/keylock-soundtouch/window-source.mjs",
+      "bytes": 7248,
+      "sha256": "86738838e3e1efff617bf8a2197d708a99f20058d47dee4d5d52703420c08dd6"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/.tsbuildinfo",
+      "snapshot": "local-evidence/soundtouch-group-resume-diagnostic2/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/.tsbuildinfo",
+      "bytes": 22048,
+      "sha256": "a4067c275cf65f113c8d4c5ac13ebf3e7368050623353fa005102ff84d0de218"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/LICENSE",
+      "snapshot": "local-evidence/soundtouch-group-resume-diagnostic2/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/LICENSE",
+      "bytes": 284,
+      "sha256": "753801acf995db0807e9dab615775310b1f74696e7776ee246bf9b31714cdaf9"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/AbstractSamplePipe.js",
+      "snapshot": "local-evidence/soundtouch-group-resume-diagnostic2/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/AbstractSamplePipe.js",
+      "bytes": 3025,
+      "sha256": "d19086efe702bde780a282d71d5fd964a1003d01d07c77763fbc3ded2620a7f0"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/CircularSampleBuffer.js",
+      "snapshot": "local-evidence/soundtouch-group-resume-diagnostic2/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/CircularSampleBuffer.js",
+      "bytes": 8492,
+      "sha256": "889ff0fbba1dc94a18bb3c6615ed2b94d3a5d2a2a618b9857fca6b34183dd98f"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/FifoSampleBuffer.js",
+      "snapshot": "local-evidence/soundtouch-group-resume-diagnostic2/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/FifoSampleBuffer.js",
+      "bytes": 8316,
+      "sha256": "907cad41629068acf14ba425f85324800d55693895eca03885d62b77ec59efba"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/index.js",
+      "snapshot": "local-evidence/soundtouch-group-resume-diagnostic2/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/index.js",
+      "bytes": 1355,
+      "sha256": "9e6bcd84c753545d4aa08f851e9a3dff65c776ec3f34f832b8b78b5f80d435b1"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/interpolationStrategyRegistry.js",
+      "snapshot": "local-evidence/soundtouch-group-resume-diagnostic2/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/interpolationStrategyRegistry.js",
+      "bytes": 5359,
+      "sha256": "3214eefba2f50990006ee9c4b5ea98aed72437ea1d2a9c1c70d0ce5c50288f57"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/RateTransposer.js",
+      "snapshot": "local-evidence/soundtouch-group-resume-diagnostic2/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/RateTransposer.js",
+      "bytes": 11564,
+      "sha256": "90b15877dbba6689472139584dfff2c7d3863e72458fd9028ec80137941bf101"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/SampleBuffer.js",
+      "snapshot": "local-evidence/soundtouch-group-resume-diagnostic2/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/SampleBuffer.js",
+      "bytes": 51,
+      "sha256": "4bf9cabb7141f22be55357adf1f669d671de3d7a69b5b8a90dffbf4348bad808"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/SampleBufferAdapter.js",
+      "snapshot": "local-evidence/soundtouch-group-resume-diagnostic2/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/SampleBufferAdapter.js",
+      "bytes": 2802,
+      "sha256": "cd5874e70ce27933aaf8846600f346a4fa89d709afafb0cb23ecf652505d02b4"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/SoundTouch.js",
+      "snapshot": "local-evidence/soundtouch-group-resume-diagnostic2/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/SoundTouch.js",
+      "bytes": 9212,
+      "sha256": "c01a124ba0b0e20e19a0fa39f03ff558e367902bfd61f4505560ad2aeebc84f4"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/Stretch.js",
+      "snapshot": "local-evidence/soundtouch-group-resume-diagnostic2/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/Stretch.js",
+      "bytes": 25222,
+      "sha256": "5b0618f91b53387a03885aea361185ea6a4ab41b54f8f1b1fbce80c2153f0632"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/StretchPipe.js",
+      "snapshot": "local-evidence/soundtouch-group-resume-diagnostic2/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/StretchPipe.js",
+      "bytes": 250,
+      "sha256": "1d769081e521e39b86bd9a36a6a955f7a786f836a79e38e6c2e42bc39d9e1f99"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/testFloatEqual.js",
+      "snapshot": "local-evidence/soundtouch-group-resume-diagnostic2/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/testFloatEqual.js",
+      "bytes": 753,
+      "sha256": "d48a30dbb8103c7aeb26a37c9b572845c38f59d4ebf0c88456a055e607659f95"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/package.json",
+      "snapshot": "local-evidence/soundtouch-group-resume-diagnostic2/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/package.json",
+      "bytes": 1273,
+      "sha256": "b6624f855f7ad9007c78d2afb25a5477caa5c3fd4347c8732d81f95b73994139"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/AbstractSamplePipe.d.ts.map",
+      "snapshot": "local-evidence/soundtouch-group-resume-diagnostic2/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/AbstractSamplePipe.d.ts.map",
+      "bytes": 995,
+      "sha256": "0a4ae4299fc804ecda3a5af256cbe192452b59f4ef7188cc80560e91cf0cfb17"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/AbstractSamplePipe.js.map",
+      "snapshot": "local-evidence/soundtouch-group-resume-diagnostic2/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/AbstractSamplePipe.js.map",
+      "bytes": 1093,
+      "sha256": "b9bc122cde6f40605b5daef491545f4800013eb5a3fa70b91213c2a50c40fa7d"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/CircularSampleBuffer.d.ts.map",
+      "snapshot": "local-evidence/soundtouch-group-resume-diagnostic2/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/CircularSampleBuffer.d.ts.map",
+      "bytes": 1011,
+      "sha256": "205abefd689d67788873e3911fe28c47d6cccb2dff1b81525140e2a8a8160c75"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/CircularSampleBuffer.js.map",
+      "snapshot": "local-evidence/soundtouch-group-resume-diagnostic2/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/CircularSampleBuffer.js.map",
+      "bytes": 5511,
+      "sha256": "e82d7c6e3889aeb1becfc9c48995f90249ed3aa60c28cbf7310487a94441d891"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/FifoSampleBuffer.d.ts.map",
+      "snapshot": "local-evidence/soundtouch-group-resume-diagnostic2/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/FifoSampleBuffer.d.ts.map",
+      "bytes": 1191,
+      "sha256": "66dea3edda90d18640b2f67de0f448faf6bf1ab169869f18642269b8f99ed204"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/FifoSampleBuffer.js.map",
+      "snapshot": "local-evidence/soundtouch-group-resume-diagnostic2/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/FifoSampleBuffer.js.map",
+      "bytes": 4385,
+      "sha256": "66d2a31fa31228c8fa05caf8a1f3a88969c412343586bc207aaecc22db7fa6d0"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/index.d.ts.map",
+      "snapshot": "local-evidence/soundtouch-group-resume-diagnostic2/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/index.d.ts.map",
+      "bytes": 1117,
+      "sha256": "7442113fd4c2412be93ea2a323afb349c6356ee39ac58ba1bffec2819cd71465"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/index.js.map",
+      "snapshot": "local-evidence/soundtouch-group-resume-diagnostic2/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/index.js.map",
+      "bytes": 728,
+      "sha256": "3073a2078febb2e2208077657c9eb1fa91b05204470be6db995e10fa52ef032c"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/interpolationStrategyRegistry.d.ts.map",
+      "snapshot": "local-evidence/soundtouch-group-resume-diagnostic2/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/interpolationStrategyRegistry.d.ts.map",
+      "bytes": 2078,
+      "sha256": "e4f5ccfcf646c1e8da23924a0df33b2eaaa9c5966fc59cdea8e016d9313f1dde"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/interpolationStrategyRegistry.js.map",
+      "snapshot": "local-evidence/soundtouch-group-resume-diagnostic2/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/interpolationStrategyRegistry.js.map",
+      "bytes": 4389,
+      "sha256": "7f7d48ed1cec2b732069d14aca421e3d00924f48f5355f0fd4e4cda103929c25"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/RateTransposer.d.ts.map",
+      "snapshot": "local-evidence/soundtouch-group-resume-diagnostic2/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/RateTransposer.d.ts.map",
+      "bytes": 1960,
+      "sha256": "50091a8c8f9e2b02ea99052c189806be50bd2c01a707ab887ae843a465f7b30f"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/RateTransposer.js.map",
+      "snapshot": "local-evidence/soundtouch-group-resume-diagnostic2/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/RateTransposer.js.map",
+      "bytes": 7089,
+      "sha256": "715445f69f8b0ce9df5e0c969bdad85f64de9449de114ffcc3dd308e695b0bdb"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/SampleBuffer.d.ts.map",
+      "snapshot": "local-evidence/soundtouch-group-resume-diagnostic2/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/SampleBuffer.d.ts.map",
+      "bytes": 654,
+      "sha256": "f8be039927ba7dac037ba5b0bfd74285118f617fa9f9cf6c2da31a1b67480e6f"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/SampleBuffer.js.map",
+      "snapshot": "local-evidence/soundtouch-group-resume-diagnostic2/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/SampleBuffer.js.map",
+      "bytes": 116,
+      "sha256": "726f2b14aab17c8ff35afd7eaec7bed31578fc1db71f4b94917082a767de0523"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/SampleBufferAdapter.d.ts.map",
+      "snapshot": "local-evidence/soundtouch-group-resume-diagnostic2/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/SampleBufferAdapter.d.ts.map",
+      "bytes": 693,
+      "sha256": "0acdf97c4ab6e2807e337959da28aa672575df4d52871917d0e01183d8837022"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/SampleBufferAdapter.js.map",
+      "snapshot": "local-evidence/soundtouch-group-resume-diagnostic2/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/SampleBufferAdapter.js.map",
+      "bytes": 2553,
+      "sha256": "532ccbdc0d5749c1463a4eb63adfa0605b9e24f5f3938b0e0a0bf8329debc0de"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/SoundTouch.d.ts.map",
+      "snapshot": "local-evidence/soundtouch-group-resume-diagnostic2/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/SoundTouch.d.ts.map",
+      "bytes": 1838,
+      "sha256": "2b54b6ce6941a40aba3d75bb193bdf86c406ac49ac520f602d97833c365f36b2"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/SoundTouch.js.map",
+      "snapshot": "local-evidence/soundtouch-group-resume-diagnostic2/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/SoundTouch.js.map",
+      "bytes": 5108,
+      "sha256": "5ad314d3027fd2cfbd89e85f4e37574cd00137ec71dc4dcc3793530c4c20885a"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/Stretch.d.ts.map",
+      "snapshot": "local-evidence/soundtouch-group-resume-diagnostic2/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/Stretch.d.ts.map",
+      "bytes": 3218,
+      "sha256": "ea80087fdb8a44d44587f1f018e0596e689ef6277802be66bdd11c23165d6710"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/Stretch.js.map",
+      "snapshot": "local-evidence/soundtouch-group-resume-diagnostic2/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/Stretch.js.map",
+      "bytes": 22217,
+      "sha256": "5179cf061ec0f2132d9d5052f07b52144cfa255a21cb454ccba0283f14297cf5"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/StretchPipe.d.ts.map",
+      "snapshot": "local-evidence/soundtouch-group-resume-diagnostic2/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/StretchPipe.d.ts.map",
+      "bytes": 1022,
+      "sha256": "538d802e13a7faa70dd76bde46b33996715099476c6727e6301537048c30f906"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/StretchPipe.js.map",
+      "snapshot": "local-evidence/soundtouch-group-resume-diagnostic2/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/StretchPipe.js.map",
+      "bytes": 128,
+      "sha256": "47b323aed7ba54dc3a78f5d8b52e0284c94fab6faa938315cb9669f73b7ccc27"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/testFloatEqual.d.ts.map",
+      "snapshot": "local-evidence/soundtouch-group-resume-diagnostic2/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/testFloatEqual.d.ts.map",
+      "bytes": 226,
+      "sha256": "173f02f6d13762902c5574545d1af22eec66fc1b6cf261598c186c136a87ae75"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/testFloatEqual.js.map",
+      "snapshot": "local-evidence/soundtouch-group-resume-diagnostic2/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/testFloatEqual.js.map",
+      "bytes": 328,
+      "sha256": "658238f530c8d21a3abf2df32afdf5823aebb649adb83ad7320c8b56f90cdbfb"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/README.md",
+      "snapshot": "local-evidence/soundtouch-group-resume-diagnostic2/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/README.md",
+      "bytes": 10595,
+      "sha256": "fd89df9fb6845b1655cc058d14b3cc5a4b6e6ec6a1c43d7acb8e5753bcf12833"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/AbstractSamplePipe.d.ts",
+      "snapshot": "local-evidence/soundtouch-group-resume-diagnostic2/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/AbstractSamplePipe.d.ts",
+      "bytes": 2815,
+      "sha256": "2823d640580d246c03089888d9024e2b10846ef6163879804f798e3283c05bed"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/CircularSampleBuffer.d.ts",
+      "snapshot": "local-evidence/soundtouch-group-resume-diagnostic2/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/CircularSampleBuffer.d.ts",
+      "bytes": 3991,
+      "sha256": "a6193ff499014c4ce8468982a3e1d417d51ca500f80f89033f6a73ce0fb31fe8"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/FifoSampleBuffer.d.ts",
+      "snapshot": "local-evidence/soundtouch-group-resume-diagnostic2/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/FifoSampleBuffer.d.ts",
+      "bytes": 4804,
+      "sha256": "b91454488460a1ecd9b33566392c16a3c659fbee58a367bca55122d70cada953"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/index.d.ts",
+      "snapshot": "local-evidence/soundtouch-group-resume-diagnostic2/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/index.d.ts",
+      "bytes": 1793,
+      "sha256": "8ae800df2e3ba7915d026b96bff913a9d72646c168f60c69028a98d3b9fc5b41"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/interpolationStrategyRegistry.d.ts",
+      "snapshot": "local-evidence/soundtouch-group-resume-diagnostic2/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/interpolationStrategyRegistry.d.ts",
+      "bytes": 4016,
+      "sha256": "6c0c5e59a32ed44892d1ca83e8607f744c3f2e120e69c5c90328c1e87ebd3556"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/RateTransposer.d.ts",
+      "snapshot": "local-evidence/soundtouch-group-resume-diagnostic2/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/RateTransposer.d.ts",
+      "bytes": 6027,
+      "sha256": "80ad361e7122e61119e612b573e5f4dd66b753f6f59e3751ce77fa3e07287ff6"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/SampleBuffer.d.ts",
+      "snapshot": "local-evidence/soundtouch-group-resume-diagnostic2/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/SampleBuffer.d.ts",
+      "bytes": 2061,
+      "sha256": "c54411b2137c77cc2fe78298bd3c5b8c35be7a5776fdc46c343f6a92a28606d4"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/SampleBufferAdapter.d.ts",
+      "snapshot": "local-evidence/soundtouch-group-resume-diagnostic2/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/SampleBufferAdapter.d.ts",
+      "bytes": 1726,
+      "sha256": "b3818c4e950ba747ee10c756374c575bc50b90c57856eba5ceefa7edce3e7327"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/SoundTouch.d.ts",
+      "snapshot": "local-evidence/soundtouch-group-resume-diagnostic2/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/SoundTouch.d.ts",
+      "bytes": 6279,
+      "sha256": "ce216ed5de2323cb3d0280df2e1d756e1b33cb5078cb7c0bb3cac18fb37bb249"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/Stretch.d.ts",
+      "snapshot": "local-evidence/soundtouch-group-resume-diagnostic2/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/Stretch.d.ts",
+      "bytes": 7023,
+      "sha256": "6797d6c913c92f656c7584a9887e073d28b9c6db832b511dd218d2e72fe8a5f3"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/StretchPipe.d.ts",
+      "snapshot": "local-evidence/soundtouch-group-resume-diagnostic2/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/StretchPipe.d.ts",
+      "bytes": 3256,
+      "sha256": "a354cb74b447154a2fc3e5161c3012832c2815312a792a56d941ef7b5071a89b"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/testFloatEqual.d.ts",
+      "snapshot": "local-evidence/soundtouch-group-resume-diagnostic2/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/testFloatEqual.d.ts",
+      "bytes": 441,
+      "sha256": "12470c991e9eb221178eff11b44d29aea3b989745ab44b49a1ce41fd79aa7ed7"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/interpolation-strategy-lanczos/LICENSE",
+      "snapshot": "local-evidence/soundtouch-group-resume-diagnostic2/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/interpolation-strategy-lanczos/LICENSE",
+      "bytes": 284,
+      "sha256": "753801acf995db0807e9dab615775310b1f74696e7776ee246bf9b31714cdaf9"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/interpolation-strategy-lanczos/.dist/index.js",
+      "snapshot": "local-evidence/soundtouch-group-resume-diagnostic2/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/interpolation-strategy-lanczos/.dist/index.js",
+      "bytes": 3081,
+      "sha256": "d40f6928efaed6ba2ac1ef5ab002865d03853231f11ae86882dfb6810015504e"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/interpolation-strategy-lanczos/.dist/index.spec.js",
+      "snapshot": "local-evidence/soundtouch-group-resume-diagnostic2/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/interpolation-strategy-lanczos/.dist/index.spec.js",
+      "bytes": 4944,
+      "sha256": "fda855e1fe5edc81ab9deaf82976618aae0f924cdbe6b243657c9b739db72456"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/interpolation-strategy-lanczos/package.json",
+      "snapshot": "local-evidence/soundtouch-group-resume-diagnostic2/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/interpolation-strategy-lanczos/package.json",
+      "bytes": 882,
+      "sha256": "b2b022a08d6000020e6d4484c67648d2f3e73a1fd871bfc7ff95cddb2959c61f"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/interpolation-strategy-lanczos/.dist/index.d.ts.map",
+      "snapshot": "local-evidence/soundtouch-group-resume-diagnostic2/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/interpolation-strategy-lanczos/.dist/index.d.ts.map",
+      "bytes": 1411,
+      "sha256": "0d81694fc927d3fe4d71093f691fce40344f63ffcd0c0e9393876da79d52a6b8"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/interpolation-strategy-lanczos/.dist/index.js.map",
+      "snapshot": "local-evidence/soundtouch-group-resume-diagnostic2/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/interpolation-strategy-lanczos/.dist/index.js.map",
+      "bytes": 3396,
+      "sha256": "45f58a30eaa086930b10622d5dbca2ba7f8ae060dce8df9cc19e3ada7752c42d"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/interpolation-strategy-lanczos/.dist/index.spec.d.ts.map",
+      "snapshot": "local-evidence/soundtouch-group-resume-diagnostic2/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/interpolation-strategy-lanczos/.dist/index.spec.d.ts.map",
+      "bytes": 114,
+      "sha256": "e774e8287bc7fe7d7adaa091be4d9eb300c76eaddecb7c6d7224abb344d3e476"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/interpolation-strategy-lanczos/.dist/index.spec.js.map",
+      "snapshot": "local-evidence/soundtouch-group-resume-diagnostic2/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/interpolation-strategy-lanczos/.dist/index.spec.js.map",
+      "bytes": 5178,
+      "sha256": "dab74c826de3a45124c3f1b6488da47d8d8c52d66880a4b38e42c7c509826a01"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/interpolation-strategy-lanczos/README.md",
+      "snapshot": "local-evidence/soundtouch-group-resume-diagnostic2/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/interpolation-strategy-lanczos/README.md",
+      "bytes": 1710,
+      "sha256": "419b1104c885f6f694b79dd5a7d0c7fbce390caa552b844e7ac7b0aaf33ce1aa"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/interpolation-strategy-lanczos/.dist/index.d.ts",
+      "snapshot": "local-evidence/soundtouch-group-resume-diagnostic2/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/interpolation-strategy-lanczos/.dist/index.d.ts",
+      "bytes": 2079,
+      "sha256": "b11191c9e3b1f27cecc54baf7e8ca51208f6f3a1fd71d2cd741bd1bc4c749e13"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/interpolation-strategy-lanczos/.dist/index.spec.d.ts",
+      "snapshot": "local-evidence/soundtouch-group-resume-diagnostic2/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/interpolation-strategy-lanczos/.dist/index.spec.d.ts",
+      "bytes": 51,
+      "sha256": "e04d938303fe7fa3851a60d608014912163108a8045713ebbe0a6acac28bf40c"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/interpolation-strategy-lanczos/src/index.spec.ts",
+      "snapshot": "local-evidence/soundtouch-group-resume-diagnostic2/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/interpolation-strategy-lanczos/src/index.spec.ts",
+      "bytes": 4620,
+      "sha256": "6e62e30583cd143edf446d4d73fb7f0e7a4345407391dd21e5032d030d3143dc"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/interpolation-strategy-lanczos/src/index.ts",
+      "snapshot": "local-evidence/soundtouch-group-resume-diagnostic2/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/interpolation-strategy-lanczos/src/index.ts",
+      "bytes": 5417,
+      "sha256": "12462a3dc82202d215b6fba4ae6da50605c1e6fc47e29c47bee46ede6261fb62"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/interpolation-strategy-lanczos/.dist/tsconfig.tsbuildinfo",
+      "snapshot": "local-evidence/soundtouch-group-resume-diagnostic2/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/interpolation-strategy-lanczos/.dist/tsconfig.tsbuildinfo",
+      "bytes": 32104,
+      "sha256": "7c352aef89b46cfb27d9f179b6c37a10e1d09544bf73124fff436e2267b7f606"
+    }
+  ],
+  "fixtureHashes": [
+    [
+      "780f7ac03480d855c8c03e79237e91ebc32fb7ff3f2d3cee3a06ad748053f858",
+      "f55b9506bb14dd3a47f86c0825020b29dae09b70d71a0ab31fadccccc649743e"
+    ],
+    [
+      "210322807c1f0a6a54f3bf49c304b884223560a638ce538f3516e9f90e10acc9",
+      "495ca11172d6d96690a28ce57d26a79f3629c4290ba697ff9cb29c894f65fee7"
+    ],
+    [
+      "640a8c69c8b07c50be834da7b0588abac24ecbdfd78c9948adadcf1cff23b01a",
+      "c9e1d09dcb14a763c1abe4791e236112359bf7fb8141d60161c15f35cf9463db"
+    ],
+    [
+      "656c244b104510dc7aa4b4373d68650110dcd984b1eea88b7178b0b8b1965abb",
+      "7ed4cfcf21979ac14b527d713884816caea42f031758a67c578379955bbcd922"
+    ],
+    [
+      "08bcbf09ddfa0e9b11b3ae8d1773de86dbcd489c86cb5f4bada9cbbf88c4c728",
+      "21cb7e8663bfbf8e8f2c575f408e87644ca7bf4f6cc9f233f6cf14ec35a557ea"
+    ]
+  ],
+  "normalized": {
+    "file": "local-evidence/soundtouch-group-resume-diagnostic2/normalized-input.f32le",
+    "bytes": 22080000,
+    "sha256": "a638ea3d6b93fbea5116577b1ef0667c54151ea0fdc01d3e50420faf69f9ca31",
+    "frames": 552000,
+    "channels": 10,
+    "sampleRate": 48000
+  },
+  "output": {
+    "file": "local-evidence/soundtouch-group-resume-diagnostic2/replayed-output.f32le",
+    "bytes": 7690240,
+    "sha256": "ad7429c1540d27eb73a64bc0f7ef891a922f6220048cfaeb32e27294b733da81",
+    "frames": 192256,
+    "channels": 10,
+    "sampleRate": 48000
+  },
+  "loggingBitIdentical": true,
+  "guideOffsetTranscript": [
+    {
+      "sequence": 0,
+      "offset": 917,
+      "inputStartIndex": 0,
+      "inputFrameCount": 7808,
+      "overlapLength": 384,
+      "seekWindowLength": 5184,
+      "seekLength": 1104,
+      "nominalSkip": 5345.392308842036,
+      "skipFract": 0
+    },
+    {
+      "sequence": 1,
+      "offset": 372,
+      "inputStartIndex": 0,
+      "inputFrameCount": 7583,
+      "overlapLength": 384,
+      "seekWindowLength": 5184,
+      "seekLength": 1104,
+      "nominalSkip": 5345.392308842036,
+      "skipFract": 0.39230884203607275
+    },
+    {
+      "sequence": 2,
+      "offset": 197,
+      "inputStartIndex": 0,
+      "inputFrameCount": 7358,
+      "overlapLength": 384,
+      "seekWindowLength": 5184,
+      "seekLength": 1104,
+      "nominalSkip": 5345.392308842036,
+      "skipFract": 0.7846176840721455
+    },
+    {
+      "sequence": 3,
+      "offset": 21,
+      "inputStartIndex": 0,
+      "inputFrameCount": 7132,
+      "overlapLength": 384,
+      "seekWindowLength": 5184,
+      "seekLength": 1104,
+      "nominalSkip": 5345.392308842036,
+      "skipFract": 0.17692652610821824
+    },
+    {
+      "sequence": 4,
+      "offset": 43,
+      "inputStartIndex": 0,
+      "inputFrameCount": 6907,
+      "overlapLength": 384,
+      "seekWindowLength": 5184,
+      "seekLength": 1104,
+      "nominalSkip": 5345.392308842036,
+      "skipFract": 0.569235368144291
+    },
+    {
+      "sequence": 5,
+      "offset": 65,
+      "inputStartIndex": 0,
+      "inputFrameCount": 7706,
+      "overlapLength": 384,
+      "seekWindowLength": 5184,
+      "seekLength": 1104,
+      "nominalSkip": 5345.392308842036,
+      "skipFract": 0.9615442101803637
+    },
+    {
+      "sequence": 6,
+      "offset": 86,
+      "inputStartIndex": 0,
+      "inputFrameCount": 7480,
+      "overlapLength": 384,
+      "seekWindowLength": 5184,
+      "seekLength": 1104,
+      "nominalSkip": 5345.392308842036,
+      "skipFract": 0.3538530522164365
+    },
+    {
+      "sequence": 7,
+      "offset": 108,
+      "inputStartIndex": 0,
+      "inputFrameCount": 7255,
+      "overlapLength": 384,
+      "seekWindowLength": 5184,
+      "seekLength": 1104,
+      "nominalSkip": 5345.392308842036,
+      "skipFract": 0.7461618942525092
+    },
+    {
+      "sequence": 8,
+      "offset": 129,
+      "inputStartIndex": 0,
+      "inputFrameCount": 7029,
+      "overlapLength": 384,
+      "seekWindowLength": 5184,
+      "seekLength": 1104,
+      "nominalSkip": 5345.392308842036,
+      "skipFract": 0.13847073628858197
+    },
+    {
+      "sequence": 9,
+      "offset": 719,
+      "inputStartIndex": 0,
+      "inputFrameCount": 7828,
+      "overlapLength": 384,
+      "seekWindowLength": 5184,
+      "seekLength": 1104,
+      "nominalSkip": 5345.392308842036,
+      "skipFract": 0.5307795783246547
+    },
+    {
+      "sequence": 10,
+      "offset": 174,
+      "inputStartIndex": 0,
+      "inputFrameCount": 7603,
+      "overlapLength": 384,
+      "seekWindowLength": 5184,
+      "seekLength": 1104,
+      "nominalSkip": 5345.392308842036,
+      "skipFract": 0.9230884203607275
+    },
+    {
+      "sequence": 11,
+      "offset": 0,
+      "inputStartIndex": 0,
+      "inputFrameCount": 7377,
+      "overlapLength": 384,
+      "seekWindowLength": 5184,
+      "seekLength": 1104,
+      "nominalSkip": 5345.392308842036,
+      "skipFract": 0.3153972623968002
+    },
+    {
+      "sequence": 12,
+      "offset": 22,
+      "inputStartIndex": 0,
+      "inputFrameCount": 7152,
+      "overlapLength": 384,
+      "seekWindowLength": 5184,
+      "seekLength": 1104,
+      "nominalSkip": 5345.392308842036,
+      "skipFract": 0.707706104432873
+    },
+    {
+      "sequence": 13,
+      "offset": 611,
+      "inputStartIndex": 0,
+      "inputFrameCount": 6926,
+      "overlapLength": 384,
+      "seekWindowLength": 5184,
+      "seekLength": 1104,
+      "nominalSkip": 5345.392308842036,
+      "skipFract": 0.10001494646894571
+    },
+    {
+      "sequence": 14,
+      "offset": 66,
+      "inputStartIndex": 0,
+      "inputFrameCount": 7725,
+      "overlapLength": 384,
+      "seekWindowLength": 5184,
+      "seekLength": 1104,
+      "nominalSkip": 5345.392308842036,
+      "skipFract": 0.49232378850501846
+    },
+    {
+      "sequence": 15,
+      "offset": 821,
+      "inputStartIndex": 0,
+      "inputFrameCount": 7500,
+      "overlapLength": 384,
+      "seekWindowLength": 5184,
+      "seekLength": 1104,
+      "nominalSkip": 5345.392308842036,
+      "skipFract": 0.8846326305410912
+    },
+    {
+      "sequence": 16,
+      "offset": 275,
+      "inputStartIndex": 0,
+      "inputFrameCount": 7274,
+      "overlapLength": 384,
+      "seekWindowLength": 5184,
+      "seekLength": 1104,
+      "nominalSkip": 5345.392308842036,
+      "skipFract": 0.27694147257716395
+    },
+    {
+      "sequence": 17,
+      "offset": 101,
+      "inputStartIndex": 0,
+      "inputFrameCount": 7049,
+      "overlapLength": 384,
+      "seekWindowLength": 5184,
+      "seekLength": 1104,
+      "nominalSkip": 5345.392308842036,
+      "skipFract": 0.6692503146132367
+    },
+    {
+      "sequence": 18,
+      "offset": 122,
+      "inputStartIndex": 0,
+      "inputFrameCount": 7847,
+      "overlapLength": 384,
+      "seekWindowLength": 5184,
+      "seekLength": 1104,
+      "nominalSkip": 5345.392308842036,
+      "skipFract": 0.06155915664930944
+    },
+    {
+      "sequence": 19,
+      "offset": 878,
+      "inputStartIndex": 0,
+      "inputFrameCount": 7622,
+      "overlapLength": 384,
+      "seekWindowLength": 5184,
+      "seekLength": 1104,
+      "nominalSkip": 5345.392308842036,
+      "skipFract": 0.4538679986853822
+    },
+    {
+      "sequence": 20,
+      "offset": 333,
+      "inputStartIndex": 0,
+      "inputFrameCount": 7397,
+      "overlapLength": 384,
+      "seekWindowLength": 5184,
+      "seekLength": 1104,
+      "nominalSkip": 5345.392308842036,
+      "skipFract": 0.8461768407214549
+    },
+    {
+      "sequence": 21,
+      "offset": 158,
+      "inputStartIndex": 0,
+      "inputFrameCount": 7171,
+      "overlapLength": 384,
+      "seekWindowLength": 5184,
+      "seekLength": 1104,
+      "nominalSkip": 5345.392308842036,
+      "skipFract": 0.23848568275752768
+    },
+    {
+      "sequence": 22,
+      "offset": 180,
+      "inputStartIndex": 0,
+      "inputFrameCount": 6946,
+      "overlapLength": 384,
+      "seekWindowLength": 5184,
+      "seekLength": 1104,
+      "nominalSkip": 5345.392308842036,
+      "skipFract": 0.6307945247936004
+    },
+    {
+      "sequence": 23,
+      "offset": 5,
+      "inputStartIndex": 0,
+      "inputFrameCount": 7744,
+      "overlapLength": 384,
+      "seekWindowLength": 5184,
+      "seekLength": 1104,
+      "nominalSkip": 5345.392308842036,
+      "skipFract": 0.023103366829673178
+    },
+    {
+      "sequence": 24,
+      "offset": 27,
+      "inputStartIndex": 0,
+      "inputFrameCount": 7519,
+      "overlapLength": 384,
+      "seekWindowLength": 5184,
+      "seekLength": 1104,
+      "nominalSkip": 5345.392308842036,
+      "skipFract": 0.4154122088657459
+    },
+    {
+      "sequence": 25,
+      "offset": 49,
+      "inputStartIndex": 0,
+      "inputFrameCount": 7294,
+      "overlapLength": 384,
+      "seekWindowLength": 5184,
+      "seekLength": 1104,
+      "nominalSkip": 5345.392308842036,
+      "skipFract": 0.8077210509018187
+    },
+    {
+      "sequence": 26,
+      "offset": 70,
+      "inputStartIndex": 0,
+      "inputFrameCount": 7068,
+      "overlapLength": 384,
+      "seekWindowLength": 5184,
+      "seekLength": 1104,
+      "nominalSkip": 5345.392308842036,
+      "skipFract": 0.20002989293789142
+    },
+    {
+      "sequence": 27,
+      "offset": 826,
+      "inputStartIndex": 0,
+      "inputFrameCount": 6843,
+      "overlapLength": 384,
+      "seekWindowLength": 5184,
+      "seekLength": 1104,
+      "nominalSkip": 5345.392308842036,
+      "skipFract": 0.5923387349739642
+    },
+    {
+      "sequence": 28,
+      "offset": 281,
+      "inputStartIndex": 0,
+      "inputFrameCount": 7642,
+      "overlapLength": 384,
+      "seekWindowLength": 5184,
+      "seekLength": 1104,
+      "nominalSkip": 5345.392308842036,
+      "skipFract": 0.9846475770100369
+    },
+    {
+      "sequence": 29,
+      "offset": 302,
+      "inputStartIndex": 0,
+      "inputFrameCount": 7416,
+      "overlapLength": 384,
+      "seekWindowLength": 5184,
+      "seekLength": 1104,
+      "nominalSkip": 5345.392308842036,
+      "skipFract": 0.37695641904610966
+    },
+    {
+      "sequence": 30,
+      "offset": 128,
+      "inputStartIndex": 0,
+      "inputFrameCount": 7191,
+      "overlapLength": 384,
+      "seekWindowLength": 5184,
+      "seekLength": 1104,
+      "nominalSkip": 5345.392308842036,
+      "skipFract": 0.7692652610821824
+    },
+    {
+      "sequence": 31,
+      "offset": 149,
+      "inputStartIndex": 0,
+      "inputFrameCount": 6965,
+      "overlapLength": 384,
+      "seekWindowLength": 5184,
+      "seekLength": 1104,
+      "nominalSkip": 5345.392308842036,
+      "skipFract": 0.16157410311825515
+    },
+    {
+      "sequence": 32,
+      "offset": 171,
+      "inputStartIndex": 0,
+      "inputFrameCount": 7764,
+      "overlapLength": 384,
+      "seekWindowLength": 5184,
+      "seekLength": 1104,
+      "nominalSkip": 5345.392308842036,
+      "skipFract": 0.5538829451543279
+    },
+    {
+      "sequence": 33,
+      "offset": 193,
+      "inputStartIndex": 0,
+      "inputFrameCount": 7539,
+      "overlapLength": 384,
+      "seekWindowLength": 5184,
+      "seekLength": 1104,
+      "nominalSkip": 5345.392308842036,
+      "skipFract": 0.9461917871904006
+    },
+    {
+      "sequence": 34,
+      "offset": 18,
+      "inputStartIndex": 0,
+      "inputFrameCount": 7313,
+      "overlapLength": 384,
+      "seekWindowLength": 5184,
+      "seekLength": 1104,
+      "nominalSkip": 5345.392308842036,
+      "skipFract": 0.3385006292264734
+    },
+    {
+      "sequence": 35,
+      "offset": 40,
+      "inputStartIndex": 0,
+      "inputFrameCount": 7088,
+      "overlapLength": 384,
+      "seekWindowLength": 5184,
+      "seekLength": 1104,
+      "nominalSkip": 5345.392308842036,
+      "skipFract": 0.7308094712625461
+    },
+    {
+      "sequence": 36,
+      "offset": 61,
+      "inputStartIndex": 0,
+      "inputFrameCount": 6862,
+      "overlapLength": 384,
+      "seekWindowLength": 5184,
+      "seekLength": 1104,
+      "nominalSkip": 5345.392308842036,
+      "skipFract": 0.12311831329861889
+    },
+    {
+      "sequence": 37,
+      "offset": 83,
+      "inputStartIndex": 0,
+      "inputFrameCount": 7661,
+      "overlapLength": 384,
+      "seekWindowLength": 5184,
+      "seekLength": 1104,
+      "nominalSkip": 5345.392308842036,
+      "skipFract": 0.5154271553346916
+    },
+    {
+      "sequence": 38,
+      "offset": 105,
+      "inputStartIndex": 0,
+      "inputFrameCount": 7436,
+      "overlapLength": 384,
+      "seekWindowLength": 5184,
+      "seekLength": 1104,
+      "nominalSkip": 5345.392308842036,
+      "skipFract": 0.9077359973707644
+    },
+    {
+      "sequence": 39,
+      "offset": 126,
+      "inputStartIndex": 0,
+      "inputFrameCount": 7210,
+      "overlapLength": 384,
+      "seekWindowLength": 5184,
+      "seekLength": 1104,
+      "nominalSkip": 5345.392308842036,
+      "skipFract": 0.3000448394068371
+    },
+    {
+      "sequence": 40,
+      "offset": 148,
+      "inputStartIndex": 0,
+      "inputFrameCount": 6985,
+      "overlapLength": 384,
+      "seekWindowLength": 5184,
+      "seekLength": 1104,
+      "nominalSkip": 5345.392308842036,
+      "skipFract": 0.6923536814429099
+    },
+    {
+      "sequence": 41,
+      "offset": 169,
+      "inputStartIndex": 0,
+      "inputFrameCount": 7783,
+      "overlapLength": 384,
+      "seekWindowLength": 5184,
+      "seekLength": 1104,
+      "nominalSkip": 5345.392308842036,
+      "skipFract": 0.08466252347898262
+    },
+    {
+      "sequence": 42,
+      "offset": 191,
+      "inputStartIndex": 0,
+      "inputFrameCount": 7558,
+      "overlapLength": 384,
+      "seekWindowLength": 5184,
+      "seekLength": 1104,
+      "nominalSkip": 5345.392308842036,
+      "skipFract": 0.47697136551505537
+    },
+    {
+      "sequence": 43,
+      "offset": 17,
+      "inputStartIndex": 0,
+      "inputFrameCount": 7333,
+      "overlapLength": 384,
+      "seekWindowLength": 5184,
+      "seekLength": 1104,
+      "nominalSkip": 5345.392308842036,
+      "skipFract": 0.8692802075511281
+    },
+    {
+      "sequence": 44,
+      "offset": 38,
+      "inputStartIndex": 0,
+      "inputFrameCount": 7107,
+      "overlapLength": 384,
+      "seekWindowLength": 5184,
+      "seekLength": 1104,
+      "nominalSkip": 5345.392308842036,
+      "skipFract": 0.26158904958720086
+    },
+    {
+      "sequence": 45,
+      "offset": 60,
+      "inputStartIndex": 0,
+      "inputFrameCount": 6882,
+      "overlapLength": 384,
+      "seekWindowLength": 5184,
+      "seekLength": 1104,
+      "nominalSkip": 5345.392308842036,
+      "skipFract": 0.6538978916232736
+    },
+    {
+      "sequence": 46,
+      "offset": 81,
+      "inputStartIndex": 0,
+      "inputFrameCount": 7680,
+      "overlapLength": 384,
+      "seekWindowLength": 5184,
+      "seekLength": 1104,
+      "nominalSkip": 5345.392308842036,
+      "skipFract": 0.046206733659346355
+    },
+    {
+      "sequence": 47,
+      "offset": 103,
+      "inputStartIndex": 0,
+      "inputFrameCount": 7455,
+      "overlapLength": 384,
+      "seekWindowLength": 5184,
+      "seekLength": 1104,
+      "nominalSkip": 5345.392308842036,
+      "skipFract": 0.4385155756954191
+    }
+  ],
+  "actualTransportSnapshot": {
+    "sampleRate": 48000,
+    "nextFrame": 192256,
+    "generation": 1,
+    "disposed": false,
+    "state": {
+      "frame": 256,
+      "position": 7.006666666666668,
+      "playing": true,
+      "generation": 1,
+      "rate": 1.25,
+      "semitones": 2,
+      "keylock": true,
+      "effectiveSemitones": 2,
+      "anchorPosition": 2.0066666666666677,
+      "positionKind": "nominal-not-measured-audible"
+    },
+    "sourceBytes": 22080000,
+    "retainedWholeSources": true,
+    "memoryLimit": "Whole caller-provided PCM plus bounded16epochs; opaque DSP heaps not counted.",
+    "pcmOwnership": "Descriptors are snapshotted; PCM arrays are borrowed immutable data for the transport lifetime. The worklet owns transferred storage.",
+    "renderedFrames": 192256,
+    "retiredEpochs": 0,
+    "retiredSummaries": [
+      {
+        "generation": 1,
+        "counters": [
+          {
+            "originFrame": 84320,
+            "sourceCursorFrame": 343392,
+            "realFramesFed": 259072,
+            "paddingFramesFed": 0,
+            "paddingLimit": 96000,
+            "generatedFrames": 205264,
+            "extractedFrames": 201600,
+            "discardedPrerollFrames": 9600,
+            "outputFramesReady": 3664
+          },
+          {
+            "originFrame": 84320,
+            "sourceCursorFrame": 343392,
+            "realFramesFed": 259072,
+            "paddingFramesFed": 0,
+            "paddingLimit": 96000,
+            "generatedFrames": 205264,
+            "extractedFrames": 201600,
+            "discardedPrerollFrames": 9600,
+            "outputFramesReady": 3664
+          },
+          {
+            "originFrame": 84320,
+            "sourceCursorFrame": 343392,
+            "realFramesFed": 259072,
+            "paddingFramesFed": 0,
+            "paddingLimit": 96000,
+            "generatedFrames": 205264,
+            "extractedFrames": 201600,
+            "discardedPrerollFrames": 9600,
+            "outputFramesReady": 3664
+          },
+          {
+            "originFrame": 84320,
+            "sourceCursorFrame": 343392,
+            "realFramesFed": 259072,
+            "paddingFramesFed": 0,
+            "paddingLimit": 96000,
+            "generatedFrames": 205264,
+            "extractedFrames": 201600,
+            "discardedPrerollFrames": 9600,
+            "outputFramesReady": 3664
+          },
+          {
+            "originFrame": 84320,
+            "sourceCursorFrame": 343392,
+            "realFramesFed": 259072,
+            "paddingFramesFed": 0,
+            "paddingLimit": 96000,
+            "generatedFrames": 205264,
+            "extractedFrames": 201600,
+            "discardedPrerollFrames": 9600,
+            "outputFramesReady": 3664
+          }
+        ]
+      }
+    ],
+    "retiredSummaryLimit": 64,
+    "clockRetention": "Last two applied anchors; older queries reject explicitly.",
+    "epochs": [
+      {
+        "generation": 1,
+        "role": "active-or-retiring",
+        "counters": [
+          {
+            "originFrame": 84320,
+            "sourceCursorFrame": 343392,
+            "realFramesFed": 259072,
+            "paddingFramesFed": 0,
+            "paddingLimit": 96000,
+            "generatedFrames": 205264,
+            "extractedFrames": 201600,
+            "discardedPrerollFrames": 9600,
+            "outputFramesReady": 3664
+          },
+          {
+            "originFrame": 84320,
+            "sourceCursorFrame": 343392,
+            "realFramesFed": 259072,
+            "paddingFramesFed": 0,
+            "paddingLimit": 96000,
+            "generatedFrames": 205264,
+            "extractedFrames": 201600,
+            "discardedPrerollFrames": 9600,
+            "outputFramesReady": 3664
+          },
+          {
+            "originFrame": 84320,
+            "sourceCursorFrame": 343392,
+            "realFramesFed": 259072,
+            "paddingFramesFed": 0,
+            "paddingLimit": 96000,
+            "generatedFrames": 205264,
+            "extractedFrames": 201600,
+            "discardedPrerollFrames": 9600,
+            "outputFramesReady": 3664
+          },
+          {
+            "originFrame": 84320,
+            "sourceCursorFrame": 343392,
+            "realFramesFed": 259072,
+            "paddingFramesFed": 0,
+            "paddingLimit": 96000,
+            "generatedFrames": 205264,
+            "extractedFrames": 201600,
+            "discardedPrerollFrames": 9600,
+            "outputFramesReady": 3664
+          },
+          {
+            "originFrame": 84320,
+            "sourceCursorFrame": 343392,
+            "realFramesFed": 259072,
+            "paddingFramesFed": 0,
+            "paddingLimit": 96000,
+            "generatedFrames": 205264,
+            "extractedFrames": 201600,
+            "discardedPrerollFrames": 9600,
+            "outputFramesReady": 3664
+          }
+        ],
+        "overlapGuide": {
+          "participants": 5,
+          "registered": 5,
+          "nextDecision": 48,
+          "retainedDecisions": 0,
+          "maxPendingDecisions": 4096,
+          "peakPendingDecisions": 3,
+          "produced": 48,
+          "consumed": 192,
+          "readers": [
+            {
+              "index": 0,
+              "next": 48,
+              "disposed": false
+            },
+            {
+              "index": 1,
+              "next": 48,
+              "disposed": false
+            },
+            {
+              "index": 2,
+              "next": 48,
+              "disposed": false
+            },
+            {
+              "index": 3,
+              "next": 48,
+              "disposed": false
+            },
+            {
+              "index": 4,
+              "next": 48,
+              "disposed": false
+            }
+          ]
+        }
+      }
+    ],
+    "scope": "Forward pull-based experiment; nominal output endpoint, not measured audible source position or proved EOS tail preservation."
+  },
+  "alignment": {
+    "oldRawStartFrame": 91264,
+    "oldResumeFrame": 850784,
+    "oldStartOffset": 759520,
+    "newScheduledFrame": 256,
+    "noShiftFit": true
+  },
+  "comparison": [
+    {
+      "channel": 0,
+      "firstRelative": 4800,
+      "lastExclusiveRelative": 192000,
+      "RMSDifference": 0,
+      "peakDifference": 0,
+      "relativeRMS": 0,
+      "bitExact": true
+    },
+    {
+      "channel": 1,
+      "firstRelative": 4800,
+      "lastExclusiveRelative": 192000,
+      "RMSDifference": 0,
+      "peakDifference": 0,
+      "relativeRMS": 0,
+      "bitExact": true
+    },
+    {
+      "channel": 2,
+      "firstRelative": 4800,
+      "lastExclusiveRelative": 192000,
+      "RMSDifference": 0,
+      "peakDifference": 0,
+      "relativeRMS": 0,
+      "bitExact": true
+    },
+    {
+      "channel": 3,
+      "firstRelative": 4800,
+      "lastExclusiveRelative": 192000,
+      "RMSDifference": 0,
+      "peakDifference": 0,
+      "relativeRMS": 0,
+      "bitExact": true
+    },
+    {
+      "channel": 4,
+      "firstRelative": 4800,
+      "lastExclusiveRelative": 192000,
+      "RMSDifference": 0,
+      "peakDifference": 0,
+      "relativeRMS": 0,
+      "bitExact": true
+    },
+    {
+      "channel": 5,
+      "firstRelative": 4800,
+      "lastExclusiveRelative": 192000,
+      "RMSDifference": 0,
+      "peakDifference": 0,
+      "relativeRMS": 0,
+      "bitExact": true
+    },
+    {
+      "channel": 6,
+      "firstRelative": 4800,
+      "lastExclusiveRelative": 192000,
+      "RMSDifference": 0,
+      "peakDifference": 0,
+      "relativeRMS": 0,
+      "bitExact": true
+    },
+    {
+      "channel": 7,
+      "firstRelative": 4800,
+      "lastExclusiveRelative": 192000,
+      "RMSDifference": 0,
+      "peakDifference": 0,
+      "relativeRMS": 0,
+      "bitExact": true
+    },
+    {
+      "channel": 8,
+      "firstRelative": 4800,
+      "lastExclusiveRelative": 192000,
+      "RMSDifference": 0,
+      "peakDifference": 0,
+      "relativeRMS": 0,
+      "bitExact": true
+    },
+    {
+      "channel": 9,
+      "firstRelative": 4800,
+      "lastExclusiveRelative": 192000,
+      "RMSDifference": 0,
+      "peakDifference": 0,
+      "relativeRMS": 0,
+      "bitExact": true
+    }
+  ],
+  "allChannelsExact": true,
+  "fullParityVerified": false
+}

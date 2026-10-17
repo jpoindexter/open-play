@@ -1,0 +1,2727 @@
+{
+  "plan": {
+    "declaredAt": "2026-10-17T18:58:38.519058+00:00",
+    "scope": "Known gated tones through installed native R3 C API in RealTime mode, driven by offline Python. Whole untrimmed outputs. No app integration, physical callbacks, realtime deadlines, music/reference/seek acceptance.",
+    "library": "/opt/homebrew/Cellar/rubberband/4.0.0/lib/librubberband.3.dylib",
+    "librarySHA256": "04069acff8ca0db7529cd1b6d73e2bc8a6d2729ea77351a70c3e3f4181c8296c",
+    "headerSHA256": "ccdb6fbad995ae924219ea89598b2dafbcea2e4fb4bb5e211b3dde589f7b9453",
+    "cppHeaderSHA256": "deaf2147bd57a72aeec876f8dd76a6e282282d8dd1f52d8aa01f93fa70b5ed44",
+    "scriptSHA256": "aef1f025b27b9e3fb37169da48a5e2c739f4f6563e875eed83bea0941b1df34f",
+    "sampleRates": [
+      44100,
+      48000
+    ],
+    "rates": [
+      1,
+      1.08,
+      1.25
+    ],
+    "pitchSemitones": 2,
+    "channels": 10,
+    "sourceDurationSeconds": 4,
+    "markersSeconds": [
+      [
+        0.2,
+        0.3
+      ],
+      [
+        1.5,
+        1.6
+      ],
+      [
+        3.9,
+        4
+      ]
+    ],
+    "fadeSeconds": 0.005,
+    "stemAmplitude": 0.025,
+    "leftHz": [
+      197,
+      311,
+      463,
+      719
+    ],
+    "rightHz": [
+      257,
+      383,
+      593,
+      887
+    ],
+    "sourcePhases": [
+      0.13,
+      0.37,
+      0.73,
+      1.17
+    ],
+    "inputProcessBlockFrames": 2048,
+    "optionsHex": "0x34010001",
+    "compensation": "Prepend getPreferredStartPad zeros; analytical output coordinates add getStartDelay. Do not fit/crop output or alter input endpoint.",
+    "markerMeasurement": "Energy centroid of each isolated stem/channel within fixed source-marker start/rate-.15 .. end/rate+.15 output seconds, API delay added. Compare with exact input energy centroid divided by rate. No alignment/gain/phase fit.",
+    "criteria": {
+      "wholeFinite": true,
+      "markerCentroidErrorSecondsMax": 0.01,
+      "exactPostAPIDelayDurationFrames": true
+    },
+    "fullParityVerified": false
+  },
+  "cases": [
+    {
+      "sampleRate": 44100,
+      "rate": 1,
+      "input": {
+        "path": "local-evidence/rubberband-endpoint-markers/input-44100.f32le",
+        "sha256": "181b4a07063140f021d47f9db342952b5e0b80475fc139073fcafd3c48e13db9",
+        "bytes": 7056000,
+        "frames": 176400,
+        "channels": 10
+      },
+      "output": {
+        "path": "local-evidence/rubberband-endpoint-markers/output-44100-1.f32le",
+        "sha256": "3e9fb2617922a505e08b82d3d98689d812503352d81b750ec6211d8f1c2cdeb8",
+        "bytes": 7286600,
+        "frames": 182165,
+        "channels": 10
+      },
+      "preferredStartPad": 2048,
+      "startDelay": 1825,
+      "expectedFrames": 176400,
+      "postAPIDelayFrames": 180340,
+      "extraFrames": 3940,
+      "durationExact": false,
+      "wholeFinite": true,
+      "markers": [
+        {
+          "marker": 0,
+          "channel": 2,
+          "windowFrames": [
+            4030,
+            21670
+          ],
+          "expectedSeconds": 0.24998906054249195,
+          "observedSeconds": 0.24962308069484967,
+          "errorSeconds": -0.0003659798476422782,
+          "passed": true
+        },
+        {
+          "marker": 0,
+          "channel": 3,
+          "windowFrames": [
+            4030,
+            21670
+          ],
+          "expectedSeconds": 0.24998674429732234,
+          "observedSeconds": 0.2521393745252742,
+          "errorSeconds": 0.0021526302279518406,
+          "passed": true
+        },
+        {
+          "marker": 0,
+          "channel": 4,
+          "windowFrames": [
+            4030,
+            21670
+          ],
+          "expectedSeconds": 0.24998445233342384,
+          "observedSeconds": 0.2518545149266109,
+          "errorSeconds": 0.001870062593187033,
+          "passed": true
+        },
+        {
+          "marker": 0,
+          "channel": 5,
+          "windowFrames": [
+            4030,
+            21670
+          ],
+          "expectedSeconds": 0.24999086962347614,
+          "observedSeconds": 0.25451175976726514,
+          "errorSeconds": 0.004520890143789008,
+          "passed": true
+        },
+        {
+          "marker": 0,
+          "channel": 6,
+          "windowFrames": [
+            4030,
+            21670
+          ],
+          "expectedSeconds": 0.24998957643508363,
+          "observedSeconds": 0.2587307449601496,
+          "errorSeconds": 0.008741168525065957,
+          "passed": true
+        },
+        {
+          "marker": 0,
+          "channel": 7,
+          "windowFrames": [
+            4030,
+            21670
+          ],
+          "expectedSeconds": 0.24998929467737008,
+          "observedSeconds": 0.25298869030821575,
+          "errorSeconds": 0.0029993956308456693,
+          "passed": true
+        },
+        {
+          "marker": 0,
+          "channel": 8,
+          "windowFrames": [
+            4030,
+            21670
+          ],
+          "expectedSeconds": 0.24998876383122154,
+          "observedSeconds": 0.250373927741974,
+          "errorSeconds": 0.0003851639107524396,
+          "passed": true
+        },
+        {
+          "marker": 0,
+          "channel": 9,
+          "windowFrames": [
+            4030,
+            21670
+          ],
+          "expectedSeconds": 0.24998855358101377,
+          "observedSeconds": 0.25401346932480834,
+          "errorSeconds": 0.0040249157437945715,
+          "passed": true
+        },
+        {
+          "marker": 1,
+          "channel": 2,
+          "windowFrames": [
+            61360,
+            79000
+          ],
+          "expectedSeconds": 1.5499903904295882,
+          "observedSeconds": 1.5505034983121213,
+          "errorSeconds": 0.0005131078825331148,
+          "passed": true
+        },
+        {
+          "marker": 1,
+          "channel": 3,
+          "windowFrames": [
+            61360,
+            79000
+          ],
+          "expectedSeconds": 1.5499800420038845,
+          "observedSeconds": 1.5517861784705242,
+          "errorSeconds": 0.0018061364666397406,
+          "passed": true
+        },
+        {
+          "marker": 1,
+          "channel": 4,
+          "windowFrames": [
+            61360,
+            79000
+          ],
+          "expectedSeconds": 1.5499950316641928,
+          "observedSeconds": 1.5514483939810384,
+          "errorSeconds": 0.0014533623168455634,
+          "passed": true
+        },
+        {
+          "marker": 1,
+          "channel": 5,
+          "windowFrames": [
+            61360,
+            79000
+          ],
+          "expectedSeconds": 1.5499867767719608,
+          "observedSeconds": 1.551691328304644,
+          "errorSeconds": 0.0017045515326832295,
+          "passed": true
+        },
+        {
+          "marker": 1,
+          "channel": 6,
+          "windowFrames": [
+            61360,
+            79000
+          ],
+          "expectedSeconds": 1.5499887893116524,
+          "observedSeconds": 1.5516264210270252,
+          "errorSeconds": 0.0016376317153727893,
+          "passed": true
+        },
+        {
+          "marker": 1,
+          "channel": 7,
+          "windowFrames": [
+            61360,
+            79000
+          ],
+          "expectedSeconds": 1.5499887386083049,
+          "observedSeconds": 1.5554275283945302,
+          "errorSeconds": 0.005438789786225362,
+          "passed": true
+        },
+        {
+          "marker": 1,
+          "channel": 8,
+          "windowFrames": [
+            61360,
+            79000
+          ],
+          "expectedSeconds": 1.549988532830011,
+          "observedSeconds": 1.5526585904837873,
+          "errorSeconds": 0.00267005765377637,
+          "passed": true
+        },
+        {
+          "marker": 1,
+          "channel": 9,
+          "windowFrames": [
+            61360,
+            79000
+          ],
+          "expectedSeconds": 1.5499887059265063,
+          "observedSeconds": 1.5504048970878896,
+          "errorSeconds": 0.0004161911613833613,
+          "passed": true
+        },
+        {
+          "marker": 2,
+          "channel": 2,
+          "windowFrames": [
+            167200,
+            182165
+          ],
+          "expectedSeconds": 3.9499871805894298,
+          "observedSeconds": 3.9509265117912937,
+          "errorSeconds": 0.0009393312018639577,
+          "passed": true
+        },
+        {
+          "marker": 2,
+          "channel": 3,
+          "windowFrames": [
+            167200,
+            182165
+          ],
+          "expectedSeconds": 3.949996097881518,
+          "observedSeconds": 3.9510964907214667,
+          "errorSeconds": 0.0011003928399486718,
+          "passed": true
+        },
+        {
+          "marker": 2,
+          "channel": 4,
+          "windowFrames": [
+            167200,
+            182165
+          ],
+          "expectedSeconds": 3.9499891043166313,
+          "observedSeconds": 3.9512375364143155,
+          "errorSeconds": 0.0012484320976842156,
+          "passed": true
+        },
+        {
+          "marker": 2,
+          "channel": 5,
+          "windowFrames": [
+            167200,
+            182165
+          ],
+          "expectedSeconds": 3.9499919117836626,
+          "observedSeconds": 3.9510134293477353,
+          "errorSeconds": 0.0010215175640726493,
+          "passed": true
+        },
+        {
+          "marker": 2,
+          "channel": 6,
+          "windowFrames": [
+            167200,
+            182165
+          ],
+          "expectedSeconds": 3.9499891000538554,
+          "observedSeconds": 3.9509456553633906,
+          "errorSeconds": 0.0009565553095352008,
+          "passed": true
+        },
+        {
+          "marker": 2,
+          "channel": 7,
+          "windowFrames": [
+            167200,
+            182165
+          ],
+          "expectedSeconds": 3.9499889766392786,
+          "observedSeconds": 3.950648939419948,
+          "errorSeconds": 0.0006599627806695985,
+          "passed": true
+        },
+        {
+          "marker": 2,
+          "channel": 8,
+          "windowFrames": [
+            167200,
+            182165
+          ],
+          "expectedSeconds": 3.9499886268942963,
+          "observedSeconds": 3.951022660339224,
+          "errorSeconds": 0.0010340334449274735,
+          "passed": true
+        },
+        {
+          "marker": 2,
+          "channel": 9,
+          "windowFrames": [
+            167200,
+            182165
+          ],
+          "expectedSeconds": 3.949988551267966,
+          "observedSeconds": 3.9503117318064493,
+          "errorSeconds": 0.00032318053848312545,
+          "passed": true
+        }
+      ],
+      "tailBeyondNominal": {
+        "frames": 3940,
+        "RMS": [
+          0.0005216566349021789,
+          0.0006751347385258064,
+          0.00012424867516737387,
+          6.0629133252643686e-05,
+          5.983914707797755e-05,
+          7.939425315433394e-05,
+          0.00013023270027015828,
+          0.00013007308702859597,
+          0.00017377778512992528,
+          9.831679555209985e-05
+        ],
+        "peak": [
+          0.0046388451009988785,
+          0.006443154066801071,
+          0.0011385862017050385,
+          0.0007191946497187018,
+          0.0004992788890376687,
+          0.0007922283257357776,
+          0.0011527691967785358,
+          0.0012545378413051367,
+          0.001282819313928485,
+          0.0009492845856584609
+        ]
+      },
+      "offlineCallTimingsMs": {
+        "count": 88,
+        "median": 8.284229086712003,
+        "p95": 10.995918232947586,
+        "max": 37.40633302368224,
+        "notRealtimeCallbackAcceptance": true
+      },
+      "retrieveFrameCounts": [
+        182,
+        1825,
+        2052,
+        2053,
+        2053,
+        2052,
+        2053,
+        2053,
+        2052,
+        2053,
+        2052,
+        2053,
+        2053,
+        2052,
+        2053,
+        2053,
+        2052,
+        2053,
+        2053,
+        2052,
+        2053,
+        2052,
+        2053,
+        2053,
+        2052,
+        2053,
+        2053,
+        2052,
+        2053,
+        2052,
+        2053,
+        2053,
+        2052,
+        2053,
+        2053,
+        2044,
+        2053,
+        2052,
+        2053,
+        2053,
+        2052,
+        2053,
+        2053,
+        2052,
+        2053,
+        2053,
+        2052,
+        2053,
+        2044,
+        2053,
+        2053,
+        2052,
+        2053,
+        2053,
+        2052,
+        2053,
+        2052,
+        2053,
+        1825,
+        2052,
+        2053,
+        2045,
+        2052,
+        2053,
+        2052,
+        2053,
+        2053,
+        2052,
+        2053,
+        2053,
+        2052,
+        2053,
+        2052,
+        2045,
+        2053,
+        2052,
+        2053,
+        2053,
+        2052,
+        2053,
+        2052,
+        2053,
+        2053,
+        2052,
+        2053,
+        2053,
+        7997
+      ],
+      "criteriaPassed": false
+    },
+    {
+      "sampleRate": 44100,
+      "rate": 1.08,
+      "input": {
+        "path": "local-evidence/rubberband-endpoint-markers/input-44100.f32le",
+        "sha256": "181b4a07063140f021d47f9db342952b5e0b80475fc139073fcafd3c48e13db9",
+        "bytes": 7056000,
+        "frames": 176400,
+        "channels": 10
+      },
+      "output": {
+        "path": "local-evidence/rubberband-endpoint-markers/output-44100-1.08.f32le",
+        "sha256": "0870ac5eb2d3cfacfe9b24bae54f52b07422fae18db65246bf96e7bf62ab1dd1",
+        "bytes": 6752360,
+        "frames": 168809,
+        "channels": 10
+      },
+      "preferredStartPad": 2048,
+      "startDelay": 1825,
+      "expectedFrames": 163333,
+      "postAPIDelayFrames": 166984,
+      "extraFrames": 3651,
+      "durationExact": false,
+      "wholeFinite": true,
+      "markers": [
+        {
+          "marker": 0,
+          "channel": 2,
+          "windowFrames": [
+            3377,
+            20690
+          ],
+          "expectedSeconds": 0.2314713523541592,
+          "observedSeconds": 0.23216554915142282,
+          "errorSeconds": 0.0006941967972636243,
+          "passed": true
+        },
+        {
+          "marker": 0,
+          "channel": 3,
+          "windowFrames": [
+            3377,
+            20690
+          ],
+          "expectedSeconds": 0.23146920768270585,
+          "observedSeconds": 0.23222317638200818,
+          "errorSeconds": 0.000753968699302332,
+          "passed": true
+        },
+        {
+          "marker": 0,
+          "channel": 4,
+          "windowFrames": [
+            3377,
+            20690
+          ],
+          "expectedSeconds": 0.23146708549391096,
+          "observedSeconds": 0.23289229750129725,
+          "errorSeconds": 0.001425212007386295,
+          "passed": true
+        },
+        {
+          "marker": 0,
+          "channel": 5,
+          "windowFrames": [
+            3377,
+            20690
+          ],
+          "expectedSeconds": 0.23147302742914455,
+          "observedSeconds": 0.2324687424384202,
+          "errorSeconds": 0.000995715009275644,
+          "passed": true
+        },
+        {
+          "marker": 0,
+          "channel": 6,
+          "windowFrames": [
+            3377,
+            20690
+          ],
+          "expectedSeconds": 0.23147183003248484,
+          "observedSeconds": 0.23650369179759023,
+          "errorSeconds": 0.005031861765105394,
+          "passed": true
+        },
+        {
+          "marker": 0,
+          "channel": 7,
+          "windowFrames": [
+            3377,
+            20690
+          ],
+          "expectedSeconds": 0.231471569145713,
+          "observedSeconds": 0.23283646659431173,
+          "errorSeconds": 0.0013648974485987175,
+          "passed": true
+        },
+        {
+          "marker": 0,
+          "channel": 8,
+          "windowFrames": [
+            3377,
+            20690
+          ],
+          "expectedSeconds": 0.2314710776215014,
+          "observedSeconds": 0.2421796834898231,
+          "errorSeconds": 0.010708605868321702,
+          "passed": false
+        },
+        {
+          "marker": 0,
+          "channel": 9,
+          "windowFrames": [
+            3377,
+            20690
+          ],
+          "expectedSeconds": 0.2314708829453831,
+          "observedSeconds": 0.23186899941196332,
+          "errorSeconds": 0.0003981164665802228,
+          "passed": true
+        },
+        {
+          "marker": 1,
+          "channel": 2,
+          "windowFrames": [
+            56460,
+            73773
+          ],
+          "expectedSeconds": 1.4351762874348037,
+          "observedSeconds": 1.435830807118064,
+          "errorSeconds": 0.0006545196832603573,
+          "passed": true
+        },
+        {
+          "marker": 1,
+          "channel": 3,
+          "windowFrames": [
+            56460,
+            73773
+          ],
+          "expectedSeconds": 1.4351667055591522,
+          "observedSeconds": 1.4362554936351344,
+          "errorSeconds": 0.0010887880759822277,
+          "passed": true
+        },
+        {
+          "marker": 1,
+          "channel": 4,
+          "windowFrames": [
+            56460,
+            73773
+          ],
+          "expectedSeconds": 1.4351805848742525,
+          "observedSeconds": 1.43708494142141,
+          "errorSeconds": 0.001904356547157482,
+          "passed": true
+        },
+        {
+          "marker": 1,
+          "channel": 5,
+          "windowFrames": [
+            56460,
+            73773
+          ],
+          "expectedSeconds": 1.4351729414555192,
+          "observedSeconds": 1.4372821066447796,
+          "errorSeconds": 0.002109165189260409,
+          "passed": true
+        },
+        {
+          "marker": 1,
+          "channel": 6,
+          "windowFrames": [
+            56460,
+            73773
+          ],
+          "expectedSeconds": 1.4351748049181965,
+          "observedSeconds": 1.4359940742952062,
+          "errorSeconds": 0.0008192693770097126,
+          "passed": true
+        },
+        {
+          "marker": 1,
+          "channel": 7,
+          "windowFrames": [
+            56460,
+            73773
+          ],
+          "expectedSeconds": 1.4351747579706526,
+          "observedSeconds": 1.4365563799518473,
+          "errorSeconds": 0.001381621981194625,
+          "passed": true
+        },
+        {
+          "marker": 1,
+          "channel": 8,
+          "windowFrames": [
+            56460,
+            73773
+          ],
+          "expectedSeconds": 1.4351745674351952,
+          "observedSeconds": 1.4364655742402237,
+          "errorSeconds": 0.0012910068050284718,
+          "passed": true
+        },
+        {
+          "marker": 1,
+          "channel": 9,
+          "windowFrames": [
+            56460,
+            73773
+          ],
+          "expectedSeconds": 1.435174727709728,
+          "observedSeconds": 1.4342777887460423,
+          "errorSeconds": -0.0008969389636857006,
+          "passed": true
+        },
+        {
+          "marker": 2,
+          "channel": 2,
+          "windowFrames": [
+            154460,
+            168809
+          ],
+          "expectedSeconds": 3.657395537582805,
+          "observedSeconds": 3.658322989037473,
+          "errorSeconds": 0.0009274514546677715,
+          "passed": true
+        },
+        {
+          "marker": 2,
+          "channel": 3,
+          "windowFrames": [
+            154460,
+            168809
+          ],
+          "expectedSeconds": 3.657403794334739,
+          "observedSeconds": 3.6580053046474967,
+          "errorSeconds": 0.0006015103127579025,
+          "passed": true
+        },
+        {
+          "marker": 2,
+          "channel": 4,
+          "windowFrames": [
+            154460,
+            168809
+          ],
+          "expectedSeconds": 3.6573973188116953,
+          "observedSeconds": 3.6587393507067425,
+          "errorSeconds": 0.0013420318950472243,
+          "passed": true
+        },
+        {
+          "marker": 2,
+          "channel": 5,
+          "windowFrames": [
+            154460,
+            168809
+          ],
+          "expectedSeconds": 3.6573999183182058,
+          "observedSeconds": 3.6582094109439054,
+          "errorSeconds": 0.000809492625699626,
+          "passed": true
+        },
+        {
+          "marker": 2,
+          "channel": 6,
+          "windowFrames": [
+            154460,
+            168809
+          ],
+          "expectedSeconds": 3.6573973148646806,
+          "observedSeconds": 3.658584278018394,
+          "errorSeconds": 0.0011869631537133607,
+          "passed": true
+        },
+        {
+          "marker": 2,
+          "channel": 7,
+          "windowFrames": [
+            154460,
+            168809
+          ],
+          "expectedSeconds": 3.6573972005919244,
+          "observedSeconds": 3.658478660001487,
+          "errorSeconds": 0.0010814594095625019,
+          "passed": true
+        },
+        {
+          "marker": 2,
+          "channel": 8,
+          "windowFrames": [
+            154460,
+            168809
+          ],
+          "expectedSeconds": 3.6573968767539777,
+          "observedSeconds": 3.661456059535612,
+          "errorSeconds": 0.004059182781634085,
+          "passed": true
+        },
+        {
+          "marker": 2,
+          "channel": 9,
+          "windowFrames": [
+            154460,
+            168809
+          ],
+          "expectedSeconds": 3.657396806729598,
+          "observedSeconds": 3.657776562883016,
+          "errorSeconds": 0.00037975615341778735,
+          "passed": true
+        }
+      ],
+      "tailBeyondNominal": {
+        "frames": 3651,
+        "RMS": [
+          0.0007442056167095258,
+          0.0006071175506824957,
+          0.00010110932538388606,
+          0.00010885959932705067,
+          4.4852996893808093e-05,
+          5.1594990778707125e-05,
+          0.00010540468877247383,
+          0.00011132889079443754,
+          0.00010688209068953567,
+          3.991192377836481e-05
+        ],
+        "peak": [
+          0.006013503763824701,
+          0.0051333606243133545,
+          0.0009460809524171054,
+          0.0009525136556476355,
+          0.0003927889629267156,
+          0.00041054494795389473,
+          0.0011419195216149092,
+          0.001112662605009973,
+          0.0011347810504958034,
+          0.00045380432857200503
+        ]
+      },
+      "offlineCallTimingsMs": {
+        "count": 88,
+        "median": 7.4986874824389815,
+        "p95": 9.716864861547945,
+        "max": 34.041125094518065,
+        "notRealtimeCallbackAcceptance": true
+      },
+      "retrieveFrameCounts": [
+        182,
+        1825,
+        1824,
+        1825,
+        2053,
+        1824,
+        1825,
+        2044,
+        1825,
+        1824,
+        2053,
+        1817,
+        1825,
+        2053,
+        1824,
+        1818,
+        2044,
+        1825,
+        1824,
+        2053,
+        1817,
+        1825,
+        2053,
+        1824,
+        1818,
+        2052,
+        1818,
+        1824,
+        2053,
+        1817,
+        1825,
+        2053,
+        1824,
+        1818,
+        2052,
+        1818,
+        1824,
+        2053,
+        1817,
+        1825,
+        2052,
+        1825,
+        1817,
+        1825,
+        2053,
+        1817,
+        1825,
+        2044,
+        1825,
+        1824,
+        2053,
+        1817,
+        1825,
+        2053,
+        1824,
+        1818,
+        2044,
+        1825,
+        1824,
+        2053,
+        1817,
+        1825,
+        2053,
+        1824,
+        1818,
+        2044,
+        1825,
+        1824,
+        2053,
+        1817,
+        1825,
+        2053,
+        1824,
+        1825,
+        2044,
+        1818,
+        1824,
+        2053,
+        1817,
+        1825,
+        2053,
+        1824,
+        1825,
+        1817,
+        2045,
+        1824,
+        7573
+      ],
+      "criteriaPassed": false
+    },
+    {
+      "sampleRate": 44100,
+      "rate": 1.25,
+      "input": {
+        "path": "local-evidence/rubberband-endpoint-markers/input-44100.f32le",
+        "sha256": "181b4a07063140f021d47f9db342952b5e0b80475fc139073fcafd3c48e13db9",
+        "bytes": 7056000,
+        "frames": 176400,
+        "channels": 10
+      },
+      "output": {
+        "path": "local-evidence/rubberband-endpoint-markers/output-44100-1.25.f32le",
+        "sha256": "3fea37b4f0fe8e8fe8a9c5ece64a5d17722059ab4438889b6535be32b381c663",
+        "bytes": 5861040,
+        "frames": 146526,
+        "channels": 10
+      },
+      "preferredStartPad": 2048,
+      "startDelay": 1825,
+      "expectedFrames": 141120,
+      "postAPIDelayFrames": 144701,
+      "extraFrames": 3581,
+      "durationExact": false,
+      "wholeFinite": true,
+      "markers": [
+        {
+          "marker": 0,
+          "channel": 2,
+          "windowFrames": [
+            2266,
+            19024
+          ],
+          "expectedSeconds": 0.19999124843399357,
+          "observedSeconds": 0.20111451149983692,
+          "errorSeconds": 0.001123263065843344,
+          "passed": true
+        },
+        {
+          "marker": 0,
+          "channel": 3,
+          "windowFrames": [
+            2266,
+            19024
+          ],
+          "expectedSeconds": 0.19998939543785788,
+          "observedSeconds": 0.20108219139547562,
+          "errorSeconds": 0.0010927959576177426,
+          "passed": true
+        },
+        {
+          "marker": 0,
+          "channel": 4,
+          "windowFrames": [
+            2266,
+            19024
+          ],
+          "expectedSeconds": 0.19998756186673908,
+          "observedSeconds": 0.20138879129588513,
+          "errorSeconds": 0.0014012294291460559,
+          "passed": true
+        },
+        {
+          "marker": 0,
+          "channel": 5,
+          "windowFrames": [
+            2266,
+            19024
+          ],
+          "expectedSeconds": 0.19999269569878092,
+          "observedSeconds": 0.20740311453887733,
+          "errorSeconds": 0.007410418840096411,
+          "passed": true
+        },
+        {
+          "marker": 0,
+          "channel": 6,
+          "windowFrames": [
+            2266,
+            19024
+          ],
+          "expectedSeconds": 0.1999916611480669,
+          "observedSeconds": 0.20510783777017555,
+          "errorSeconds": 0.0051161766221086424,
+          "passed": true
+        },
+        {
+          "marker": 0,
+          "channel": 7,
+          "windowFrames": [
+            2266,
+            19024
+          ],
+          "expectedSeconds": 0.19999143574189607,
+          "observedSeconds": 0.20136842158433238,
+          "errorSeconds": 0.0013769858424363124,
+          "passed": true
+        },
+        {
+          "marker": 0,
+          "channel": 8,
+          "windowFrames": [
+            2266,
+            19024
+          ],
+          "expectedSeconds": 0.19999101106497724,
+          "observedSeconds": 0.20725943060579266,
+          "errorSeconds": 0.007268419540815418,
+          "passed": true
+        },
+        {
+          "marker": 0,
+          "channel": 9,
+          "windowFrames": [
+            2266,
+            19024
+          ],
+          "expectedSeconds": 0.199990842864811,
+          "observedSeconds": 0.20022056348186934,
+          "errorSeconds": 0.00022972061705833768,
+          "passed": true
+        },
+        {
+          "marker": 1,
+          "channel": 2,
+          "windowFrames": [
+            48130,
+            64888
+          ],
+          "expectedSeconds": 1.2399923123436705,
+          "observedSeconds": 1.240750042104723,
+          "errorSeconds": 0.0007577297610525946,
+          "passed": true
+        },
+        {
+          "marker": 1,
+          "channel": 3,
+          "windowFrames": [
+            48130,
+            64888
+          ],
+          "expectedSeconds": 1.2399840336031076,
+          "observedSeconds": 1.2409652001271956,
+          "errorSeconds": 0.000981166524087973,
+          "passed": true
+        },
+        {
+          "marker": 1,
+          "channel": 4,
+          "windowFrames": [
+            48130,
+            64888
+          ],
+          "expectedSeconds": 1.2399960253313542,
+          "observedSeconds": 1.2419829601026144,
+          "errorSeconds": 0.001986934771260218,
+          "passed": true
+        },
+        {
+          "marker": 1,
+          "channel": 5,
+          "windowFrames": [
+            48130,
+            64888
+          ],
+          "expectedSeconds": 1.2399894214175686,
+          "observedSeconds": 1.2421773646091985,
+          "errorSeconds": 0.0021879431916298486,
+          "passed": true
+        },
+        {
+          "marker": 1,
+          "channel": 6,
+          "windowFrames": [
+            48130,
+            64888
+          ],
+          "expectedSeconds": 1.2399910314493219,
+          "observedSeconds": 1.242189282469524,
+          "errorSeconds": 0.002198251020202102,
+          "passed": true
+        },
+        {
+          "marker": 1,
+          "channel": 7,
+          "windowFrames": [
+            48130,
+            64888
+          ],
+          "expectedSeconds": 1.239990990886644,
+          "observedSeconds": 1.2416043396431722,
+          "errorSeconds": 0.0016133487565281879,
+          "passed": true
+        },
+        {
+          "marker": 1,
+          "channel": 8,
+          "windowFrames": [
+            48130,
+            64888
+          ],
+          "expectedSeconds": 1.2399908262640087,
+          "observedSeconds": 1.241439096941359,
+          "errorSeconds": 0.0014482706773502052,
+          "passed": true
+        },
+        {
+          "marker": 1,
+          "channel": 9,
+          "windowFrames": [
+            48130,
+            64888
+          ],
+          "expectedSeconds": 1.239990964741205,
+          "observedSeconds": 1.2428393636249855,
+          "errorSeconds": 0.002848398883780412,
+          "passed": true
+        },
+        {
+          "marker": 2,
+          "channel": 2,
+          "windowFrames": [
+            132802,
+            146526
+          ],
+          "expectedSeconds": 3.159989744471544,
+          "observedSeconds": 3.1639579476872624,
+          "errorSeconds": 0.003968203215718447,
+          "passed": true
+        },
+        {
+          "marker": 2,
+          "channel": 3,
+          "windowFrames": [
+            132802,
+            146526
+          ],
+          "expectedSeconds": 3.1599968783052144,
+          "observedSeconds": 3.1614720277476387,
+          "errorSeconds": 0.0014751494424243283,
+          "passed": true
+        },
+        {
+          "marker": 2,
+          "channel": 4,
+          "windowFrames": [
+            132802,
+            146526
+          ],
+          "expectedSeconds": 3.159991283453305,
+          "observedSeconds": 3.1615839179208485,
+          "errorSeconds": 0.00159263446754343,
+          "passed": true
+        },
+        {
+          "marker": 2,
+          "channel": 5,
+          "windowFrames": [
+            132802,
+            146526
+          ],
+          "expectedSeconds": 3.15999352942693,
+          "observedSeconds": 3.16169247365157,
+          "errorSeconds": 0.0016989442246400088,
+          "passed": true
+        },
+        {
+          "marker": 2,
+          "channel": 6,
+          "windowFrames": [
+            132802,
+            146526
+          ],
+          "expectedSeconds": 3.1599912800430845,
+          "observedSeconds": 3.1616114622114786,
+          "errorSeconds": 0.001620182168394102,
+          "passed": true
+        },
+        {
+          "marker": 2,
+          "channel": 7,
+          "windowFrames": [
+            132802,
+            146526
+          ],
+          "expectedSeconds": 3.159991181311423,
+          "observedSeconds": 3.1610522072059375,
+          "errorSeconds": 0.0010610258945145112,
+          "passed": true
+        },
+        {
+          "marker": 2,
+          "channel": 8,
+          "windowFrames": [
+            132802,
+            146526
+          ],
+          "expectedSeconds": 3.159990901515437,
+          "observedSeconds": 3.1639543097317717,
+          "errorSeconds": 0.003963408216334674,
+          "passed": true
+        },
+        {
+          "marker": 2,
+          "channel": 9,
+          "windowFrames": [
+            132802,
+            146526
+          ],
+          "expectedSeconds": 3.159990841014373,
+          "observedSeconds": 3.160706519122262,
+          "errorSeconds": 0.0007156781078889729,
+          "passed": true
+        }
+      ],
+      "tailBeyondNominal": {
+        "frames": 3581,
+        "RMS": [
+          0.0006107923739305373,
+          0.00036330879469714675,
+          7.024567444569369e-05,
+          0.00016011942423233797,
+          9.645208871851148e-05,
+          8.189358276850181e-05,
+          0.0001583374776751096,
+          0.00017798079287470204,
+          0.00013385305260321374,
+          9.378601807790059e-05
+        ],
+        "peak": [
+          0.004247633274644613,
+          0.002865486079826951,
+          0.000961550569627434,
+          0.0023899616207927465,
+          0.0017065793508663774,
+          0.0014018233632668853,
+          0.0018893640954047441,
+          0.0033010179176926613,
+          0.0015475937398150563,
+          0.0015487618511542678
+        ]
+      },
+      "offlineCallTimingsMs": {
+        "count": 88,
+        "median": 6.911145523190498,
+        "p95": 9.092387452255931,
+        "max": 34.538333071395755,
+        "notRealtimeCallbackAcceptance": true
+      },
+      "retrieveFrameCounts": [
+        168,
+        1497,
+        1710,
+        1711,
+        1496,
+        1711,
+        1711,
+        1496,
+        1711,
+        1710,
+        1497,
+        1703,
+        1711,
+        1490,
+        1711,
+        1710,
+        1497,
+        1711,
+        1703,
+        1497,
+        1710,
+        1711,
+        1497,
+        1703,
+        1710,
+        1497,
+        1711,
+        1710,
+        1491,
+        1710,
+        1711,
+        1490,
+        1711,
+        1710,
+        1497,
+        1711,
+        1703,
+        1497,
+        1703,
+        1711,
+        1496,
+        1711,
+        1710,
+        1491,
+        1710,
+        1711,
+        1497,
+        1710,
+        1703,
+        1497,
+        1711,
+        1703,
+        1497,
+        1710,
+        1711,
+        1497,
+        1703,
+        1710,
+        1497,
+        1711,
+        1710,
+        1491,
+        1710,
+        1704,
+        1496,
+        1711,
+        1710,
+        1497,
+        1704,
+        1710,
+        1497,
+        1710,
+        1711,
+        1490,
+        1711,
+        1710,
+        1491,
+        1710,
+        1711,
+        1497,
+        1710,
+        1703,
+        1497,
+        1711,
+        1710,
+        1497,
+        7286
+      ],
+      "criteriaPassed": false
+    },
+    {
+      "sampleRate": 48000,
+      "rate": 1,
+      "input": {
+        "path": "local-evidence/rubberband-endpoint-markers/input-48000.f32le",
+        "sha256": "e487b8f9b4ca949f3f9c93401c7f6c34a87875f43d15a74ee7a3cc0eb6d195d2",
+        "bytes": 7680000,
+        "frames": 192000,
+        "channels": 10
+      },
+      "output": {
+        "path": "local-evidence/rubberband-endpoint-markers/output-48000-1.f32le",
+        "sha256": "3c31239d7cb3b46b189160b9213137d7065102d4f335f6d740be87e721ff49d9",
+        "bytes": 7907880,
+        "frames": 197697,
+        "channels": 10
+      },
+      "preferredStartPad": 2048,
+      "startDelay": 1825,
+      "expectedFrames": 192000,
+      "postAPIDelayFrames": 195872,
+      "extraFrames": 3872,
+      "durationExact": false,
+      "wholeFinite": true,
+      "markers": [
+        {
+          "marker": 0,
+          "channel": 2,
+          "windowFrames": [
+            4225,
+            23425
+          ],
+          "expectedSeconds": 0.24999016630218243,
+          "observedSeconds": 0.25480293907311413,
+          "errorSeconds": 0.0048127727709317,
+          "passed": true
+        },
+        {
+          "marker": 0,
+          "channel": 3,
+          "windowFrames": [
+            4225,
+            23425
+          ],
+          "expectedSeconds": 0.24998758215255718,
+          "observedSeconds": 0.2509826150572667,
+          "errorSeconds": 0.0009950329047095363,
+          "passed": true
+        },
+        {
+          "marker": 0,
+          "channel": 4,
+          "windowFrames": [
+            4225,
+            23425
+          ],
+          "expectedSeconds": 0.2499853868751642,
+          "observedSeconds": 0.2504857897253247,
+          "errorSeconds": 0.0005004028501605085,
+          "passed": true
+        },
+        {
+          "marker": 0,
+          "channel": 5,
+          "windowFrames": [
+            4225,
+            23425
+          ],
+          "expectedSeconds": 0.2499917694079202,
+          "observedSeconds": 0.2513161634253653,
+          "errorSeconds": 0.0013243940174450797,
+          "passed": true
+        },
+        {
+          "marker": 0,
+          "channel": 6,
+          "windowFrames": [
+            4225,
+            23425
+          ],
+          "expectedSeconds": 0.2499905966267338,
+          "observedSeconds": 0.2532801928697754,
+          "errorSeconds": 0.003289596243041565,
+          "passed": true
+        },
+        {
+          "marker": 0,
+          "channel": 7,
+          "windowFrames": [
+            4225,
+            23425
+          ],
+          "expectedSeconds": 0.24999016048124273,
+          "observedSeconds": 0.25087337364540563,
+          "errorSeconds": 0.0008832131641628993,
+          "passed": true
+        },
+        {
+          "marker": 0,
+          "channel": 8,
+          "windowFrames": [
+            4225,
+            23425
+          ],
+          "expectedSeconds": 0.2499897204852637,
+          "observedSeconds": 0.24998659348359092,
+          "errorSeconds": -3.1270016727646954e-06,
+          "passed": true
+        },
+        {
+          "marker": 0,
+          "channel": 9,
+          "windowFrames": [
+            4225,
+            23425
+          ],
+          "expectedSeconds": 0.24998949902692286,
+          "observedSeconds": 0.25000101016553994,
+          "errorSeconds": 1.1511138617081862e-05,
+          "passed": true
+        },
+        {
+          "marker": 1,
+          "channel": 2,
+          "windowFrames": [
+            66625,
+            85825
+          ],
+          "expectedSeconds": 1.549992088297676,
+          "observedSeconds": 1.5502146589760566,
+          "errorSeconds": 0.00022257067838049593,
+          "passed": true
+        },
+        {
+          "marker": 1,
+          "channel": 3,
+          "windowFrames": [
+            66625,
+            85825
+          ],
+          "expectedSeconds": 1.549980702586526,
+          "observedSeconds": 1.5577909401941883,
+          "errorSeconds": 0.007810237607662307,
+          "passed": true
+        },
+        {
+          "marker": 1,
+          "channel": 4,
+          "windowFrames": [
+            66625,
+            85825
+          ],
+          "expectedSeconds": 1.5499959112128017,
+          "observedSeconds": 1.5510668892284005,
+          "errorSeconds": 0.0010709780155988557,
+          "passed": true
+        },
+        {
+          "marker": 1,
+          "channel": 5,
+          "windowFrames": [
+            66625,
+            85825
+          ],
+          "expectedSeconds": 1.5499877391231924,
+          "observedSeconds": 1.5505487715132749,
+          "errorSeconds": 0.0005610323900824277,
+          "passed": true
+        },
+        {
+          "marker": 1,
+          "channel": 6,
+          "windowFrames": [
+            66625,
+            85825
+          ],
+          "expectedSeconds": 1.5499897296299123,
+          "observedSeconds": 1.551808584765743,
+          "errorSeconds": 0.0018188551358306881,
+          "passed": true
+        },
+        {
+          "marker": 1,
+          "channel": 7,
+          "windowFrames": [
+            66625,
+            85825
+          ],
+          "expectedSeconds": 1.5499896569982483,
+          "observedSeconds": 1.550547102317421,
+          "errorSeconds": 0.0005574453191727891,
+          "passed": true
+        },
+        {
+          "marker": 1,
+          "channel": 8,
+          "windowFrames": [
+            66625,
+            85825
+          ],
+          "expectedSeconds": 1.549989407863352,
+          "observedSeconds": 1.5516664344515514,
+          "errorSeconds": 0.0016770265881993485,
+          "passed": true
+        },
+        {
+          "marker": 1,
+          "channel": 9,
+          "windowFrames": [
+            66625,
+            85825
+          ],
+          "expectedSeconds": 1.5499896186278874,
+          "observedSeconds": 1.553952218699629,
+          "errorSeconds": 0.003962600071741651,
+          "passed": true
+        },
+        {
+          "marker": 2,
+          "channel": 2,
+          "windowFrames": [
+            181825,
+            197697
+          ],
+          "expectedSeconds": 3.949987439360013,
+          "observedSeconds": 3.9508503227203047,
+          "errorSeconds": 0.0008628833602917219,
+          "passed": true
+        },
+        {
+          "marker": 2,
+          "channel": 3,
+          "windowFrames": [
+            181825,
+            197697
+          ],
+          "expectedSeconds": 3.9499972281887423,
+          "observedSeconds": 3.9511274710606714,
+          "errorSeconds": 0.001130242871929088,
+          "passed": true
+        },
+        {
+          "marker": 2,
+          "channel": 4,
+          "windowFrames": [
+            181825,
+            197697
+          ],
+          "expectedSeconds": 3.949990045659101,
+          "observedSeconds": 3.9513447806232125,
+          "errorSeconds": 0.001354734964111426,
+          "passed": true
+        },
+        {
+          "marker": 2,
+          "channel": 5,
+          "windowFrames": [
+            181825,
+            197697
+          ],
+          "expectedSeconds": 3.9499927785250426,
+          "observedSeconds": 3.951498388684297,
+          "errorSeconds": 0.0015056101592545446,
+          "passed": true
+        },
+        {
+          "marker": 2,
+          "channel": 6,
+          "windowFrames": [
+            181825,
+            197697
+          ],
+          "expectedSeconds": 3.9499900633123475,
+          "observedSeconds": 3.951483414576767,
+          "errorSeconds": 0.00149335126441974,
+          "passed": true
+        },
+        {
+          "marker": 2,
+          "channel": 7,
+          "windowFrames": [
+            181825,
+            197697
+          ],
+          "expectedSeconds": 3.949989866380276,
+          "observedSeconds": 3.950868459780436,
+          "errorSeconds": 0.0008785934001602769,
+          "passed": true
+        },
+        {
+          "marker": 2,
+          "channel": 8,
+          "windowFrames": [
+            181825,
+            197697
+          ],
+          "expectedSeconds": 3.949989536912318,
+          "observedSeconds": 3.9500326457168353,
+          "errorSeconds": 4.3108804517189014e-05,
+          "passed": true
+        },
+        {
+          "marker": 2,
+          "channel": 9,
+          "windowFrames": [
+            181825,
+            197697
+          ],
+          "expectedSeconds": 3.9499894959331145,
+          "observedSeconds": 3.952651854535907,
+          "errorSeconds": 0.002662358602792292,
+          "passed": true
+        }
+      ],
+      "tailBeyondNominal": {
+        "frames": 3872,
+        "RMS": [
+          0.0005157879393031528,
+          0.0007524131336738447,
+          4.290294921443738e-05,
+          8.749563590543369e-05,
+          6.429808038970242e-05,
+          0.00013691912433459304,
+          0.00013356455866117515,
+          0.00013298778027524255,
+          0.00023850867641179072,
+          8.065561157078374e-05
+        ],
+        "peak": [
+          0.0036005456931889057,
+          0.006411734502762556,
+          0.00036900275154039264,
+          0.0010494178859516978,
+          0.0007710174540989101,
+          0.0011038113152608275,
+          0.0011801159707829356,
+          0.001260998542420566,
+          0.0015090580563992262,
+          0.0008612285600975156
+        ]
+      },
+      "offlineCallTimingsMs": {
+        "count": 95,
+        "median": 7.938083028420806,
+        "p95": 10.020567080937326,
+        "max": 42.75462497025728,
+        "notRealtimeCallbackAcceptance": true
+      },
+      "retrieveFrameCounts": [
+        182,
+        1825,
+        2052,
+        2053,
+        2053,
+        2052,
+        2053,
+        2053,
+        2052,
+        2053,
+        2052,
+        2053,
+        2053,
+        2052,
+        2053,
+        2053,
+        2052,
+        2053,
+        2053,
+        2052,
+        2053,
+        2052,
+        2053,
+        2053,
+        2052,
+        2053,
+        2053,
+        2052,
+        2053,
+        2052,
+        2053,
+        2053,
+        2052,
+        2053,
+        2053,
+        2044,
+        2053,
+        2052,
+        2053,
+        2053,
+        2052,
+        2053,
+        2053,
+        2052,
+        2053,
+        2053,
+        2052,
+        2053,
+        2044,
+        2053,
+        2053,
+        2052,
+        2053,
+        2053,
+        2052,
+        2053,
+        2052,
+        2053,
+        1825,
+        2052,
+        2053,
+        2045,
+        2052,
+        2053,
+        2052,
+        2053,
+        2053,
+        2052,
+        2053,
+        2053,
+        2052,
+        2053,
+        2052,
+        2045,
+        2053,
+        2052,
+        2053,
+        2053,
+        2052,
+        2053,
+        2052,
+        2053,
+        2053,
+        2052,
+        2053,
+        2053,
+        2044,
+        2053,
+        2053,
+        2052,
+        2053,
+        2052,
+        2053,
+        9169
+      ],
+      "criteriaPassed": false
+    },
+    {
+      "sampleRate": 48000,
+      "rate": 1.08,
+      "input": {
+        "path": "local-evidence/rubberband-endpoint-markers/input-48000.f32le",
+        "sha256": "e487b8f9b4ca949f3f9c93401c7f6c34a87875f43d15a74ee7a3cc0eb6d195d2",
+        "bytes": 7680000,
+        "frames": 192000,
+        "channels": 10
+      },
+      "output": {
+        "path": "local-evidence/rubberband-endpoint-markers/output-48000-1.08.f32le",
+        "sha256": "f9fe69d3f8ad5f7ac310f6e8cd1b059e8a99b5ec22f82df62935a7de9b14f46c",
+        "bytes": 7334200,
+        "frames": 183355,
+        "channels": 10
+      },
+      "preferredStartPad": 2048,
+      "startDelay": 1825,
+      "expectedFrames": 177778,
+      "postAPIDelayFrames": 181530,
+      "extraFrames": 3752,
+      "durationExact": false,
+      "wholeFinite": true,
+      "markers": [
+        {
+          "marker": 0,
+          "channel": 2,
+          "windowFrames": [
+            3514,
+            22358
+          ],
+          "expectedSeconds": 0.23147237620572444,
+          "observedSeconds": 0.23296835091103946,
+          "errorSeconds": 0.0014959747053150119,
+          "passed": true
+        },
+        {
+          "marker": 0,
+          "channel": 3,
+          "windowFrames": [
+            3514,
+            22358
+          ],
+          "expectedSeconds": 0.23146998347458997,
+          "observedSeconds": 0.23209874548010964,
+          "errorSeconds": 0.000628762005519673,
+          "passed": true
+        },
+        {
+          "marker": 0,
+          "channel": 4,
+          "windowFrames": [
+            3514,
+            22358
+          ],
+          "expectedSeconds": 0.2314679508103372,
+          "observedSeconds": 0.23161877303249798,
+          "errorSeconds": 0.00015082222216078467,
+          "passed": true
+        },
+        {
+          "marker": 0,
+          "channel": 5,
+          "windowFrames": [
+            3514,
+            22358
+          ],
+          "expectedSeconds": 0.23147386056288907,
+          "observedSeconds": 0.2316287665313411,
+          "errorSeconds": 0.00015490596845202376,
+          "passed": true
+        },
+        {
+          "marker": 0,
+          "channel": 6,
+          "windowFrames": [
+            3514,
+            22358
+          ],
+          "expectedSeconds": 0.23147277465438315,
+          "observedSeconds": 0.23204957945751095,
+          "errorSeconds": 0.0005768048031278006,
+          "passed": true
+        },
+        {
+          "marker": 0,
+          "channel": 7,
+          "windowFrames": [
+            3514,
+            22358
+          ],
+          "expectedSeconds": 0.23147237081596547,
+          "observedSeconds": 0.232056922486374,
+          "errorSeconds": 0.000584551670408523,
+          "passed": true
+        },
+        {
+          "marker": 0,
+          "channel": 8,
+          "windowFrames": [
+            3514,
+            22358
+          ],
+          "expectedSeconds": 0.23147196341228118,
+          "observedSeconds": 0.23781101191543927,
+          "errorSeconds": 0.0063390485031580845,
+          "passed": true
+        },
+        {
+          "marker": 0,
+          "channel": 9,
+          "windowFrames": [
+            3514,
+            22358
+          ],
+          "expectedSeconds": 0.2314717583582619,
+          "observedSeconds": 0.23167689904111255,
+          "errorSeconds": 0.00020514068285065745,
+          "passed": true
+        },
+        {
+          "marker": 1,
+          "channel": 2,
+          "windowFrames": [
+            61292,
+            80136
+          ],
+          "expectedSeconds": 1.4351778595348852,
+          "observedSeconds": 1.4355223813870803,
+          "errorSeconds": 0.0003445218521951343,
+          "passed": true
+        },
+        {
+          "marker": 1,
+          "channel": 3,
+          "windowFrames": [
+            61292,
+            80136
+          ],
+          "expectedSeconds": 1.435167317209746,
+          "observedSeconds": 1.4359809808802293,
+          "errorSeconds": 0.000813663670483189,
+          "passed": true
+        },
+        {
+          "marker": 1,
+          "channel": 4,
+          "windowFrames": [
+            61292,
+            80136
+          ],
+          "expectedSeconds": 1.4351813992711127,
+          "observedSeconds": 1.4358539079156845,
+          "errorSeconds": 0.0006725086445718009,
+          "passed": true
+        },
+        {
+          "marker": 1,
+          "channel": 5,
+          "windowFrames": [
+            61292,
+            80136
+          ],
+          "expectedSeconds": 1.4351738325214745,
+          "observedSeconds": 1.4361262939035888,
+          "errorSeconds": 0.0009524613821143557,
+          "passed": true
+        },
+        {
+          "marker": 1,
+          "channel": 6,
+          "windowFrames": [
+            61292,
+            80136
+          ],
+          "expectedSeconds": 1.435175675583252,
+          "observedSeconds": 1.4359246757638204,
+          "errorSeconds": 0.0007490001805683377,
+          "passed": true
+        },
+        {
+          "marker": 1,
+          "channel": 7,
+          "windowFrames": [
+            61292,
+            80136
+          ],
+          "expectedSeconds": 1.4351756083317113,
+          "observedSeconds": 1.4364482249317991,
+          "errorSeconds": 0.001272616600087817,
+          "passed": true
+        },
+        {
+          "marker": 1,
+          "channel": 8,
+          "windowFrames": [
+            61292,
+            80136
+          ],
+          "expectedSeconds": 1.4351753776512517,
+          "observedSeconds": 1.4353404294491332,
+          "errorSeconds": 0.00016505179788151025,
+          "passed": true
+        },
+        {
+          "marker": 1,
+          "channel": 9,
+          "windowFrames": [
+            61292,
+            80136
+          ],
+          "expectedSeconds": 1.4351755728035993,
+          "observedSeconds": 1.4342922474150928,
+          "errorSeconds": -0.0008833253885065506,
+          "passed": true
+        },
+        {
+          "marker": 2,
+          "channel": 2,
+          "windowFrames": [
+            167958,
+            183355
+          ],
+          "expectedSeconds": 3.657395777185197,
+          "observedSeconds": 3.657778564483766,
+          "errorSeconds": 0.0003827872985691094,
+          "passed": true
+        },
+        {
+          "marker": 2,
+          "channel": 3,
+          "windowFrames": [
+            167958,
+            183355
+          ],
+          "expectedSeconds": 3.6574048409155018,
+          "observedSeconds": 3.657767365319675,
+          "errorSeconds": 0.00036252440417339216,
+          "passed": true
+        },
+        {
+          "marker": 2,
+          "channel": 4,
+          "windowFrames": [
+            167958,
+            183355
+          ],
+          "expectedSeconds": 3.657398190425093,
+          "observedSeconds": 3.658035605640236,
+          "errorSeconds": 0.0006374152151429335,
+          "passed": true
+        },
+        {
+          "marker": 2,
+          "channel": 5,
+          "windowFrames": [
+            167958,
+            183355
+          ],
+          "expectedSeconds": 3.6574007208565207,
+          "observedSeconds": 3.658017416548592,
+          "errorSeconds": 0.0006166956920714561,
+          "passed": true
+        },
+        {
+          "marker": 2,
+          "channel": 6,
+          "windowFrames": [
+            167958,
+            183355
+          ],
+          "expectedSeconds": 3.657398206770692,
+          "observedSeconds": 3.658135929387113,
+          "errorSeconds": 0.0007377226164213546,
+          "passed": true
+        },
+        {
+          "marker": 2,
+          "channel": 7,
+          "windowFrames": [
+            167958,
+            183355
+          ],
+          "expectedSeconds": 3.6573980244261812,
+          "observedSeconds": 3.658180008629241,
+          "errorSeconds": 0.00078198420305986,
+          "passed": true
+        },
+        {
+          "marker": 2,
+          "channel": 8,
+          "windowFrames": [
+            167958,
+            183355
+          ],
+          "expectedSeconds": 3.6573977193632574,
+          "observedSeconds": 3.6575546817553484,
+          "errorSeconds": 0.00015696239209095353,
+          "passed": true
+        },
+        {
+          "marker": 2,
+          "channel": 9,
+          "windowFrames": [
+            167958,
+            183355
+          ],
+          "expectedSeconds": 3.65739768141955,
+          "observedSeconds": 3.6630604470582826,
+          "errorSeconds": 0.00566276563873247,
+          "passed": true
+        }
+      ],
+      "tailBeyondNominal": {
+        "frames": 3752,
+        "RMS": [
+          0.0007477369391394469,
+          0.0006655208180296703,
+          7.290399933644185e-05,
+          8.384145180605185e-05,
+          8.647509121634623e-05,
+          7.50744487989392e-05,
+          6.536376743194332e-05,
+          9.651765638563672e-05,
+          0.00019128918369184866,
+          1.3592796896916446e-05
+        ],
+        "peak": [
+          0.004614768084138632,
+          0.005346976220607758,
+          0.000574670557398349,
+          0.0007948717684485018,
+          0.0006798010435886681,
+          0.0006397102843038738,
+          0.000767768535297364,
+          0.0008371217991225421,
+          0.0010488490806892514,
+          9.853684605332091e-05
+        ]
+      },
+      "offlineCallTimingsMs": {
+        "count": 95,
+        "median": 7.3055000975728035,
+        "p95": 8.834512671455741,
+        "max": 40.444582933560014,
+        "notRealtimeCallbackAcceptance": true
+      },
+      "retrieveFrameCounts": [
+        182,
+        1825,
+        1824,
+        1825,
+        2053,
+        1824,
+        1825,
+        2044,
+        1825,
+        1824,
+        2053,
+        1817,
+        1825,
+        2053,
+        1824,
+        1818,
+        2044,
+        1825,
+        1824,
+        2053,
+        1817,
+        1825,
+        2053,
+        1824,
+        1818,
+        2052,
+        1818,
+        1824,
+        2053,
+        1817,
+        1825,
+        2053,
+        1824,
+        1818,
+        2052,
+        1818,
+        1824,
+        2053,
+        1817,
+        1825,
+        2052,
+        1825,
+        1817,
+        1825,
+        2053,
+        1817,
+        1825,
+        2044,
+        1825,
+        1824,
+        2053,
+        1817,
+        1825,
+        2053,
+        1824,
+        1818,
+        2044,
+        1825,
+        1824,
+        2053,
+        1817,
+        1825,
+        2053,
+        1824,
+        1818,
+        2044,
+        1825,
+        1824,
+        2053,
+        1817,
+        1825,
+        2053,
+        1824,
+        1825,
+        2044,
+        1818,
+        1824,
+        2053,
+        1817,
+        1825,
+        2053,
+        1824,
+        1825,
+        1817,
+        2045,
+        1824,
+        1825,
+        2044,
+        1825,
+        1825,
+        2052,
+        1825,
+        1817,
+        8906
+      ],
+      "criteriaPassed": false
+    },
+    {
+      "sampleRate": 48000,
+      "rate": 1.25,
+      "input": {
+        "path": "local-evidence/rubberband-endpoint-markers/input-48000.f32le",
+        "sha256": "e487b8f9b4ca949f3f9c93401c7f6c34a87875f43d15a74ee7a3cc0eb6d195d2",
+        "bytes": 7680000,
+        "frames": 192000,
+        "channels": 10
+      },
+      "output": {
+        "path": "local-evidence/rubberband-endpoint-markers/output-48000-1.25.f32le",
+        "sha256": "65b89f103af36194960ae647efcabb8eb20d6404ad67bce5dcc2dd7e17e4ed56",
+        "bytes": 6356400,
+        "frames": 158910,
+        "channels": 10
+      },
+      "preferredStartPad": 2048,
+      "startDelay": 1825,
+      "expectedFrames": 153600,
+      "postAPIDelayFrames": 157085,
+      "extraFrames": 3485,
+      "durationExact": false,
+      "wholeFinite": true,
+      "markers": [
+        {
+          "marker": 0,
+          "channel": 2,
+          "windowFrames": [
+            2305,
+            20545
+          ],
+          "expectedSeconds": 0.19999213304174596,
+          "observedSeconds": 0.20365398264758927,
+          "errorSeconds": 0.0036618496058433148,
+          "passed": true
+        },
+        {
+          "marker": 0,
+          "channel": 3,
+          "windowFrames": [
+            2305,
+            20545
+          ],
+          "expectedSeconds": 0.19999006572204575,
+          "observedSeconds": 0.20125715791320392,
+          "errorSeconds": 0.00126709219115817,
+          "passed": true
+        },
+        {
+          "marker": 0,
+          "channel": 4,
+          "windowFrames": [
+            2305,
+            20545
+          ],
+          "expectedSeconds": 0.19998830950013136,
+          "observedSeconds": 0.20117079417280956,
+          "errorSeconds": 0.0011824846726782023,
+          "passed": true
+        },
+        {
+          "marker": 0,
+          "channel": 5,
+          "windowFrames": [
+            2305,
+            20545
+          ],
+          "expectedSeconds": 0.19999341552633615,
+          "observedSeconds": 0.20160249815913406,
+          "errorSeconds": 0.001609082632797909,
+          "passed": true
+        },
+        {
+          "marker": 0,
+          "channel": 6,
+          "windowFrames": [
+            2305,
+            20545
+          ],
+          "expectedSeconds": 0.19999247730138706,
+          "observedSeconds": 0.20414494492885069,
+          "errorSeconds": 0.00415246762746363,
+          "passed": true
+        },
+        {
+          "marker": 0,
+          "channel": 7,
+          "windowFrames": [
+            2305,
+            20545
+          ],
+          "expectedSeconds": 0.1999921283849942,
+          "observedSeconds": 0.20105550542214268,
+          "errorSeconds": 0.001063377037148483,
+          "passed": true
+        },
+        {
+          "marker": 0,
+          "channel": 8,
+          "windowFrames": [
+            2305,
+            20545
+          ],
+          "expectedSeconds": 0.19999177638821095,
+          "observedSeconds": 0.19990171527186157,
+          "errorSeconds": -9.006111634937697e-05,
+          "passed": true
+        },
+        {
+          "marker": 0,
+          "channel": 9,
+          "windowFrames": [
+            2305,
+            20545
+          ],
+          "expectedSeconds": 0.19999159922153828,
+          "observedSeconds": 0.2002476571827755,
+          "errorSeconds": 0.0002560579612372327,
+          "passed": true
+        },
+        {
+          "marker": 1,
+          "channel": 2,
+          "windowFrames": [
+            52225,
+            70465
+          ],
+          "expectedSeconds": 1.239993670638141,
+          "observedSeconds": 1.2408987071013713,
+          "errorSeconds": 0.0009050364632303687,
+          "passed": true
+        },
+        {
+          "marker": 1,
+          "channel": 3,
+          "windowFrames": [
+            52225,
+            70465
+          ],
+          "expectedSeconds": 1.2399845620692207,
+          "observedSeconds": 1.2405603411213124,
+          "errorSeconds": 0.0005757790520917183,
+          "passed": true
+        },
+        {
+          "marker": 1,
+          "channel": 4,
+          "windowFrames": [
+            52225,
+            70465
+          ],
+          "expectedSeconds": 1.2399967289702414,
+          "observedSeconds": 1.246546826076861,
+          "errorSeconds": 0.00655009710661969,
+          "passed": true
+        },
+        {
+          "marker": 1,
+          "channel": 5,
+          "windowFrames": [
+            52225,
+            70465
+          ],
+          "expectedSeconds": 1.239990191298554,
+          "observedSeconds": 1.2422083045764227,
+          "errorSeconds": 0.002218113277868694,
+          "passed": true
+        },
+        {
+          "marker": 1,
+          "channel": 6,
+          "windowFrames": [
+            52225,
+            70465
+          ],
+          "expectedSeconds": 1.2399917837039298,
+          "observedSeconds": 1.2422761492930452,
+          "errorSeconds": 0.002284365589115378,
+          "passed": true
+        },
+        {
+          "marker": 1,
+          "channel": 7,
+          "windowFrames": [
+            52225,
+            70465
+          ],
+          "expectedSeconds": 1.2399917255985986,
+          "observedSeconds": 1.241802972569249,
+          "errorSeconds": 0.001811246970650382,
+          "passed": true
+        },
+        {
+          "marker": 1,
+          "channel": 8,
+          "windowFrames": [
+            52225,
+            70465
+          ],
+          "expectedSeconds": 1.2399915262906815,
+          "observedSeconds": 1.2401050510806926,
+          "errorSeconds": 0.00011352479001103255,
+          "passed": true
+        },
+        {
+          "marker": 1,
+          "channel": 9,
+          "windowFrames": [
+            52225,
+            70465
+          ],
+          "expectedSeconds": 1.23999169490231,
+          "observedSeconds": 1.2404686195363759,
+          "errorSeconds": 0.0004769246340659006,
+          "passed": true
+        },
+        {
+          "marker": 2,
+          "channel": 2,
+          "windowFrames": [
+            144385,
+            158910
+          ],
+          "expectedSeconds": 3.1599899514880105,
+          "observedSeconds": 3.1609263242777286,
+          "errorSeconds": 0.0009363727897180318,
+          "passed": true
+        },
+        {
+          "marker": 2,
+          "channel": 3,
+          "windowFrames": [
+            144385,
+            158910
+          ],
+          "expectedSeconds": 3.159997782550994,
+          "observedSeconds": 3.161105181649178,
+          "errorSeconds": 0.0011073990981840254,
+          "passed": true
+        },
+        {
+          "marker": 2,
+          "channel": 4,
+          "windowFrames": [
+            144385,
+            158910
+          ],
+          "expectedSeconds": 3.1599920365272807,
+          "observedSeconds": 3.1668364439699417,
+          "errorSeconds": 0.006844407442661016,
+          "passed": true
+        },
+        {
+          "marker": 2,
+          "channel": 5,
+          "windowFrames": [
+            144385,
+            158910
+          ],
+          "expectedSeconds": 3.159994222820034,
+          "observedSeconds": 3.1648858529443507,
+          "errorSeconds": 0.004891630124316482,
+          "passed": true
+        },
+        {
+          "marker": 2,
+          "channel": 6,
+          "windowFrames": [
+            144385,
+            158910
+          ],
+          "expectedSeconds": 3.159992050649878,
+          "observedSeconds": 3.1615011523222063,
+          "errorSeconds": 0.0015091016723283168,
+          "passed": true
+        },
+        {
+          "marker": 2,
+          "channel": 7,
+          "windowFrames": [
+            144385,
+            158910
+          ],
+          "expectedSeconds": 3.1599918931042206,
+          "observedSeconds": 3.1641448811305213,
+          "errorSeconds": 0.004152988026300708,
+          "passed": true
+        },
+        {
+          "marker": 2,
+          "channel": 8,
+          "windowFrames": [
+            144385,
+            158910
+          ],
+          "expectedSeconds": 3.1599916295298547,
+          "observedSeconds": 3.159030651934285,
+          "errorSeconds": -0.0009609775955699007,
+          "passed": true
+        },
+        {
+          "marker": 2,
+          "channel": 9,
+          "windowFrames": [
+            144385,
+            158910
+          ],
+          "expectedSeconds": 3.1599915967464915,
+          "observedSeconds": 3.1603062616831115,
+          "errorSeconds": 0.0003146649366199128,
+          "passed": true
+        }
+      ],
+      "tailBeyondNominal": {
+        "frames": 3485,
+        "RMS": [
+          0.0005148994110376487,
+          0.00047826198083573507,
+          5.586839620870837e-05,
+          0.00012115667235833547,
+          9.457534867555137e-05,
+          0.00010095540126185767,
+          0.00016516734622586934,
+          0.00014670138522219171,
+          0.0003056272233273141,
+          7.74972839396936e-05
+        ],
+        "peak": [
+          0.003456416307017207,
+          0.004140825010836124,
+          0.000499569927342236,
+          0.0018485800828784704,
+          0.0016598498914390802,
+          0.0007275576354004443,
+          0.0023935851640999317,
+          0.002471821615472436,
+          0.0028078092727810144,
+          0.0009796535596251488
+        ]
+      },
+      "offlineCallTimingsMs": {
+        "count": 95,
+        "median": 6.923832930624485,
+        "p95": 8.535899966955185,
+        "max": 38.485333090648055,
+        "notRealtimeCallbackAcceptance": true
+      },
+      "retrieveFrameCounts": [
+        168,
+        1497,
+        1710,
+        1711,
+        1496,
+        1711,
+        1711,
+        1496,
+        1711,
+        1710,
+        1497,
+        1703,
+        1711,
+        1490,
+        1711,
+        1710,
+        1497,
+        1711,
+        1703,
+        1497,
+        1710,
+        1711,
+        1497,
+        1703,
+        1710,
+        1497,
+        1711,
+        1710,
+        1491,
+        1710,
+        1711,
+        1490,
+        1711,
+        1710,
+        1497,
+        1711,
+        1703,
+        1497,
+        1703,
+        1711,
+        1496,
+        1711,
+        1710,
+        1491,
+        1710,
+        1711,
+        1497,
+        1710,
+        1703,
+        1497,
+        1711,
+        1703,
+        1497,
+        1710,
+        1711,
+        1497,
+        1703,
+        1710,
+        1497,
+        1711,
+        1710,
+        1491,
+        1710,
+        1704,
+        1496,
+        1711,
+        1710,
+        1497,
+        1704,
+        1710,
+        1497,
+        1710,
+        1711,
+        1490,
+        1711,
+        1710,
+        1491,
+        1710,
+        1711,
+        1497,
+        1710,
+        1703,
+        1497,
+        1711,
+        1710,
+        1497,
+        1703,
+        1711,
+        1490,
+        1711,
+        1710,
+        1711,
+        1497,
+        8137
+      ],
+      "criteriaPassed": false
+    }
+  ],
+  "passed": 0,
+  "failed": 6,
+  "fullParityVerified": false
+}

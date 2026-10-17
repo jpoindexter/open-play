@@ -1,0 +1,77 @@
+{
+  "declared_before_execution": "2026-10-17T18:39:21.954059+00:00",
+  "scope": "Actual unchanged AudioEngine selected separately served grouped adapter. Atomic5source append/refill/ownership; no production source/native017/default replacement.",
+  "cases": [
+    {
+      "id": "five-group-44100",
+      "sampleRate": 44100,
+      "sourceSampleRate": 48000,
+      "sources": 5
+    },
+    {
+      "id": "five-group-48000",
+      "sampleRate": 48000,
+      "sourceSampleRate": 44100,
+      "sources": 5
+    }
+  ],
+  "fixture": {
+    "seconds": 32,
+    "leftHz": [
+      197,
+      311,
+      463,
+      719
+    ],
+    "rightHz": [
+      257,
+      383,
+      593,
+      887
+    ],
+    "phases": [
+      0.13,
+      0.37,
+      0.73,
+      1.17
+    ],
+    "amplitudeEach": 0.025,
+    "first16seconds": "listed tones",
+    "second16seconds": "double listed tones",
+    "original": "Float32 sum offour DIFFERENT synthetic stereo stems, not model-separated music"
+  },
+  "criteria": {
+    "pitch_error_hz": 1,
+    "control_error_hz": 0.01,
+    "frame_tag_error_samples": 0.25,
+    "finite": true,
+    "strict_sequence": true,
+    "pause_exact_zero": true,
+    "cleanup_retained_pcm_bytes": 0,
+    "clock_scope": "nominal; audible source identity not accepted",
+    "reconstruction_relative_RMS": 0.03
+  },
+  "timeline": "Engine.start neutral1.08:3s; engine.setPitch +2:3s; engine.setRate1.25 and setPitch keylockOFF/0:3s; adapter warm follow -0.1s:2s; engine.seek20:2s; engine.pause:0.7s; engine.start keylockON/+2:2s. Measurements each command's actual scheduled output +.5..1.5s; pause +.2.. .6s. Later phase begins only after previous planned hold.; afterresume actualengine.updateStems selects onlystemindex2 for2s: monitorTap must emit thatstem frequency. Raworiginal+allstems+engineMonitor/307control/normalizedphase retained. Mixedmonitor crossings descriptive; isolatedstem+solomonitor criteria1Hz.",
+  "capture": "Whole capture, all five adapter outputs plus engine deck monitorTap mix, independent307Hz oscillator and future-anchored a-rate frameTag; physical monitor and capture output muted.",
+  "exclusions": [
+    "music artifacts",
+    "physical latency",
+    "native package",
+    "Serato-matched sonic reference",
+    "actual separated stems",
+    "audible cursor",
+    "full controller coverage",
+    "reverse/loop/Stem Slip parity"
+  ],
+  "registration_lifecycle": {
+    "server_delays_node_worklet_seconds": 0.5,
+    "aborted_waiter_timeout_ms": 400,
+    "abort_after_ms": 20,
+    "other_waiter_must_finish": true,
+    "dispose_ack_pcm_bytes": 0,
+    "terminal_no_revival": true
+  },
+  "prospective_clock": "Observer declares anchor before future phase source start, then independently counts callbacks against every original normalizedphase sample; original globalFrame/globalTime remain recorded. Earlier cohorts unchanged.",
+  "cleanup_evidence": "Both actualengine.pause calls await real grouped processor release/store0/emptyepochs/nodephase source disposal. Oneprocessor may own all5sources; storegeometry mustmatch5.",
+  "clock_range": "No2^22 absolute-context limit; integer callback counters checked per sample against normalized looping AudioBufferSource control with four-second quantum-aligned period. Period<=2^22frames for Float32-safe local phase; only safe-integer absolute-counter endpoint refuses. Six-hour arithmetic anchors are not six-hour browser evidence."
+}

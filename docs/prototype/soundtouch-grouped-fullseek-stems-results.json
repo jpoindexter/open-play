@@ -1,0 +1,2993 @@
+{
+  "plan": {
+    "declaredAt": "2026-10-17T18:27:46.516Z",
+    "scope": "Actual serial SoundTouchTransport5positional sources; original is exact sum of4different known synthetic stems. Proposed unmuted recombination criterion, not reference-measured Serato sonic behavior or source model quality.",
+    "cases": [
+      {
+        "id": "unity",
+        "rate": 1,
+        "semitones": 0,
+        "sampleRate": 44100,
+        "keylock": true
+      },
+      {
+        "id": "tempo",
+        "rate": 1.08,
+        "semitones": 0,
+        "sampleRate": 44100,
+        "keylock": true
+      },
+      {
+        "id": "shifted",
+        "rate": 1.08,
+        "semitones": 2,
+        "sampleRate": 44100,
+        "keylock": true
+      },
+      {
+        "id": "unity",
+        "rate": 1,
+        "semitones": 0,
+        "sampleRate": 48000,
+        "keylock": true
+      },
+      {
+        "id": "tempo",
+        "rate": 1.08,
+        "semitones": 0,
+        "sampleRate": 48000,
+        "keylock": true
+      },
+      {
+        "id": "shifted",
+        "rate": 1.08,
+        "semitones": 2,
+        "sampleRate": 48000,
+        "keylock": true
+      }
+    ],
+    "fixture": {
+      "seconds": 4,
+      "stemLeftHz": [
+        197,
+        311,
+        463,
+        719
+      ],
+      "stemRightHz": [
+        257,
+        383,
+        593,
+        887
+      ],
+      "amplitudeEach": 0.025,
+      "phasePerStem": [
+        0.13,
+        0.37,
+        0.73,
+        1.17
+      ],
+      "original": "samplewise Float32 sum of four stems; no separation model"
+    },
+    "windowSeconds": [
+      0.5,
+      2.5
+    ],
+    "relativeRMSResidualMax": 0.03,
+    "acceptanceRationale": "Preserve the existing3percent stem reconstruction budget when comparing the processed original to the sum of processed complementary stems. Shared command frames alone do not imply waveform coherence.",
+    "capture": "Whole3s/quantum rounded output all10channels; every sample finite; original PCM retained exclusive; no gain fit/delay fit/phase repair/trim.",
+    "exclusions": [
+      "Reference sonic parity",
+      "Native/browser runtime",
+      "Musical stems/model reconstruction",
+      "Exact source cursor",
+      "Physical outputs"
+    ]
+  },
+  "sourceIdentities": [
+    {
+      "file": "scripts/test_soundtouch_stem_reconstruction.mjs",
+      "snapshot": "local-evidence/soundtouch-grouped-fullseek-stems/source-snapshots/scripts/test_soundtouch_stem_reconstruction.mjs",
+      "bytes": 5684,
+      "sha256": "73915e4fddbabd4b647d7281c112e08e426e71bdd716f0409f1ec753a0b9ceb1"
+    },
+    {
+      "file": "experiments/keylock-soundtouch/grouped-fullseek-pull-transport.mjs",
+      "snapshot": "local-evidence/soundtouch-grouped-fullseek-stems/source-snapshots/experiments/keylock-soundtouch/grouped-fullseek-pull-transport.mjs",
+      "bytes": 16756,
+      "sha256": "3e7d9768c5213047432375f8638c4f234f47df164c02175be1114bb380276847"
+    },
+    {
+      "file": "experiments/keylock-soundtouch/window-source.mjs",
+      "snapshot": "local-evidence/soundtouch-grouped-fullseek-stems/source-snapshots/experiments/keylock-soundtouch/window-source.mjs",
+      "bytes": 7248,
+      "sha256": "86738838e3e1efff617bf8a2197d708a99f20058d47dee4d5d52703420c08dd6"
+    },
+    {
+      "file": "experiments/keylock-soundtouch/shared-overlap-guide.mjs",
+      "snapshot": "local-evidence/soundtouch-grouped-fullseek-stems/source-snapshots/experiments/keylock-soundtouch/shared-overlap-guide.mjs",
+      "bytes": 2842,
+      "sha256": "c2b0a4169b40e3b3a2763562940b499ad4b84df009ab53149ebc194ab79e668b"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/.tsbuildinfo",
+      "snapshot": "local-evidence/soundtouch-grouped-fullseek-stems/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/.tsbuildinfo",
+      "bytes": 22048,
+      "sha256": "a4067c275cf65f113c8d4c5ac13ebf3e7368050623353fa005102ff84d0de218"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/LICENSE",
+      "snapshot": "local-evidence/soundtouch-grouped-fullseek-stems/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/LICENSE",
+      "bytes": 284,
+      "sha256": "753801acf995db0807e9dab615775310b1f74696e7776ee246bf9b31714cdaf9"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/AbstractSamplePipe.js",
+      "snapshot": "local-evidence/soundtouch-grouped-fullseek-stems/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/AbstractSamplePipe.js",
+      "bytes": 3025,
+      "sha256": "d19086efe702bde780a282d71d5fd964a1003d01d07c77763fbc3ded2620a7f0"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/CircularSampleBuffer.js",
+      "snapshot": "local-evidence/soundtouch-grouped-fullseek-stems/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/CircularSampleBuffer.js",
+      "bytes": 8492,
+      "sha256": "889ff0fbba1dc94a18bb3c6615ed2b94d3a5d2a2a618b9857fca6b34183dd98f"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/FifoSampleBuffer.js",
+      "snapshot": "local-evidence/soundtouch-grouped-fullseek-stems/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/FifoSampleBuffer.js",
+      "bytes": 8316,
+      "sha256": "907cad41629068acf14ba425f85324800d55693895eca03885d62b77ec59efba"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/index.js",
+      "snapshot": "local-evidence/soundtouch-grouped-fullseek-stems/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/index.js",
+      "bytes": 1355,
+      "sha256": "9e6bcd84c753545d4aa08f851e9a3dff65c776ec3f34f832b8b78b5f80d435b1"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/interpolationStrategyRegistry.js",
+      "snapshot": "local-evidence/soundtouch-grouped-fullseek-stems/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/interpolationStrategyRegistry.js",
+      "bytes": 5359,
+      "sha256": "3214eefba2f50990006ee9c4b5ea98aed72437ea1d2a9c1c70d0ce5c50288f57"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/RateTransposer.js",
+      "snapshot": "local-evidence/soundtouch-grouped-fullseek-stems/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/RateTransposer.js",
+      "bytes": 11564,
+      "sha256": "90b15877dbba6689472139584dfff2c7d3863e72458fd9028ec80137941bf101"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/SampleBuffer.js",
+      "snapshot": "local-evidence/soundtouch-grouped-fullseek-stems/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/SampleBuffer.js",
+      "bytes": 51,
+      "sha256": "4bf9cabb7141f22be55357adf1f669d671de3d7a69b5b8a90dffbf4348bad808"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/SampleBufferAdapter.js",
+      "snapshot": "local-evidence/soundtouch-grouped-fullseek-stems/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/SampleBufferAdapter.js",
+      "bytes": 2802,
+      "sha256": "cd5874e70ce27933aaf8846600f346a4fa89d709afafb0cb23ecf652505d02b4"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/SoundTouch.js",
+      "snapshot": "local-evidence/soundtouch-grouped-fullseek-stems/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/SoundTouch.js",
+      "bytes": 9212,
+      "sha256": "c01a124ba0b0e20e19a0fa39f03ff558e367902bfd61f4505560ad2aeebc84f4"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/Stretch.js",
+      "snapshot": "local-evidence/soundtouch-grouped-fullseek-stems/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/Stretch.js",
+      "bytes": 25222,
+      "sha256": "5b0618f91b53387a03885aea361185ea6a4ab41b54f8f1b1fbce80c2153f0632"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/StretchPipe.js",
+      "snapshot": "local-evidence/soundtouch-grouped-fullseek-stems/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/StretchPipe.js",
+      "bytes": 250,
+      "sha256": "1d769081e521e39b86bd9a36a6a955f7a786f836a79e38e6c2e42bc39d9e1f99"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/testFloatEqual.js",
+      "snapshot": "local-evidence/soundtouch-grouped-fullseek-stems/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/testFloatEqual.js",
+      "bytes": 753,
+      "sha256": "d48a30dbb8103c7aeb26a37c9b572845c38f59d4ebf0c88456a055e607659f95"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/package.json",
+      "snapshot": "local-evidence/soundtouch-grouped-fullseek-stems/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/package.json",
+      "bytes": 1273,
+      "sha256": "b6624f855f7ad9007c78d2afb25a5477caa5c3fd4347c8732d81f95b73994139"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/AbstractSamplePipe.d.ts.map",
+      "snapshot": "local-evidence/soundtouch-grouped-fullseek-stems/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/AbstractSamplePipe.d.ts.map",
+      "bytes": 995,
+      "sha256": "0a4ae4299fc804ecda3a5af256cbe192452b59f4ef7188cc80560e91cf0cfb17"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/AbstractSamplePipe.js.map",
+      "snapshot": "local-evidence/soundtouch-grouped-fullseek-stems/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/AbstractSamplePipe.js.map",
+      "bytes": 1093,
+      "sha256": "b9bc122cde6f40605b5daef491545f4800013eb5a3fa70b91213c2a50c40fa7d"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/CircularSampleBuffer.d.ts.map",
+      "snapshot": "local-evidence/soundtouch-grouped-fullseek-stems/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/CircularSampleBuffer.d.ts.map",
+      "bytes": 1011,
+      "sha256": "205abefd689d67788873e3911fe28c47d6cccb2dff1b81525140e2a8a8160c75"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/CircularSampleBuffer.js.map",
+      "snapshot": "local-evidence/soundtouch-grouped-fullseek-stems/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/CircularSampleBuffer.js.map",
+      "bytes": 5511,
+      "sha256": "e82d7c6e3889aeb1becfc9c48995f90249ed3aa60c28cbf7310487a94441d891"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/FifoSampleBuffer.d.ts.map",
+      "snapshot": "local-evidence/soundtouch-grouped-fullseek-stems/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/FifoSampleBuffer.d.ts.map",
+      "bytes": 1191,
+      "sha256": "66dea3edda90d18640b2f67de0f448faf6bf1ab169869f18642269b8f99ed204"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/FifoSampleBuffer.js.map",
+      "snapshot": "local-evidence/soundtouch-grouped-fullseek-stems/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/FifoSampleBuffer.js.map",
+      "bytes": 4385,
+      "sha256": "66d2a31fa31228c8fa05caf8a1f3a88969c412343586bc207aaecc22db7fa6d0"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/index.d.ts.map",
+      "snapshot": "local-evidence/soundtouch-grouped-fullseek-stems/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/index.d.ts.map",
+      "bytes": 1117,
+      "sha256": "7442113fd4c2412be93ea2a323afb349c6356ee39ac58ba1bffec2819cd71465"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/index.js.map",
+      "snapshot": "local-evidence/soundtouch-grouped-fullseek-stems/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/index.js.map",
+      "bytes": 728,
+      "sha256": "3073a2078febb2e2208077657c9eb1fa91b05204470be6db995e10fa52ef032c"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/interpolationStrategyRegistry.d.ts.map",
+      "snapshot": "local-evidence/soundtouch-grouped-fullseek-stems/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/interpolationStrategyRegistry.d.ts.map",
+      "bytes": 2078,
+      "sha256": "e4f5ccfcf646c1e8da23924a0df33b2eaaa9c5966fc59cdea8e016d9313f1dde"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/interpolationStrategyRegistry.js.map",
+      "snapshot": "local-evidence/soundtouch-grouped-fullseek-stems/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/interpolationStrategyRegistry.js.map",
+      "bytes": 4389,
+      "sha256": "7f7d48ed1cec2b732069d14aca421e3d00924f48f5355f0fd4e4cda103929c25"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/RateTransposer.d.ts.map",
+      "snapshot": "local-evidence/soundtouch-grouped-fullseek-stems/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/RateTransposer.d.ts.map",
+      "bytes": 1960,
+      "sha256": "50091a8c8f9e2b02ea99052c189806be50bd2c01a707ab887ae843a465f7b30f"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/RateTransposer.js.map",
+      "snapshot": "local-evidence/soundtouch-grouped-fullseek-stems/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/RateTransposer.js.map",
+      "bytes": 7089,
+      "sha256": "715445f69f8b0ce9df5e0c969bdad85f64de9449de114ffcc3dd308e695b0bdb"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/SampleBuffer.d.ts.map",
+      "snapshot": "local-evidence/soundtouch-grouped-fullseek-stems/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/SampleBuffer.d.ts.map",
+      "bytes": 654,
+      "sha256": "f8be039927ba7dac037ba5b0bfd74285118f617fa9f9cf6c2da31a1b67480e6f"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/SampleBuffer.js.map",
+      "snapshot": "local-evidence/soundtouch-grouped-fullseek-stems/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/SampleBuffer.js.map",
+      "bytes": 116,
+      "sha256": "726f2b14aab17c8ff35afd7eaec7bed31578fc1db71f4b94917082a767de0523"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/SampleBufferAdapter.d.ts.map",
+      "snapshot": "local-evidence/soundtouch-grouped-fullseek-stems/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/SampleBufferAdapter.d.ts.map",
+      "bytes": 693,
+      "sha256": "0acdf97c4ab6e2807e337959da28aa672575df4d52871917d0e01183d8837022"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/SampleBufferAdapter.js.map",
+      "snapshot": "local-evidence/soundtouch-grouped-fullseek-stems/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/SampleBufferAdapter.js.map",
+      "bytes": 2553,
+      "sha256": "532ccbdc0d5749c1463a4eb63adfa0605b9e24f5f3938b0e0a0bf8329debc0de"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/SoundTouch.d.ts.map",
+      "snapshot": "local-evidence/soundtouch-grouped-fullseek-stems/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/SoundTouch.d.ts.map",
+      "bytes": 1838,
+      "sha256": "2b54b6ce6941a40aba3d75bb193bdf86c406ac49ac520f602d97833c365f36b2"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/SoundTouch.js.map",
+      "snapshot": "local-evidence/soundtouch-grouped-fullseek-stems/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/SoundTouch.js.map",
+      "bytes": 5108,
+      "sha256": "5ad314d3027fd2cfbd89e85f4e37574cd00137ec71dc4dcc3793530c4c20885a"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/Stretch.d.ts.map",
+      "snapshot": "local-evidence/soundtouch-grouped-fullseek-stems/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/Stretch.d.ts.map",
+      "bytes": 3218,
+      "sha256": "ea80087fdb8a44d44587f1f018e0596e689ef6277802be66bdd11c23165d6710"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/Stretch.js.map",
+      "snapshot": "local-evidence/soundtouch-grouped-fullseek-stems/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/Stretch.js.map",
+      "bytes": 22217,
+      "sha256": "5179cf061ec0f2132d9d5052f07b52144cfa255a21cb454ccba0283f14297cf5"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/StretchPipe.d.ts.map",
+      "snapshot": "local-evidence/soundtouch-grouped-fullseek-stems/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/StretchPipe.d.ts.map",
+      "bytes": 1022,
+      "sha256": "538d802e13a7faa70dd76bde46b33996715099476c6727e6301537048c30f906"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/StretchPipe.js.map",
+      "snapshot": "local-evidence/soundtouch-grouped-fullseek-stems/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/StretchPipe.js.map",
+      "bytes": 128,
+      "sha256": "47b323aed7ba54dc3a78f5d8b52e0284c94fab6faa938315cb9669f73b7ccc27"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/testFloatEqual.d.ts.map",
+      "snapshot": "local-evidence/soundtouch-grouped-fullseek-stems/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/testFloatEqual.d.ts.map",
+      "bytes": 226,
+      "sha256": "173f02f6d13762902c5574545d1af22eec66fc1b6cf261598c186c136a87ae75"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/testFloatEqual.js.map",
+      "snapshot": "local-evidence/soundtouch-grouped-fullseek-stems/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/testFloatEqual.js.map",
+      "bytes": 328,
+      "sha256": "658238f530c8d21a3abf2df32afdf5823aebb649adb83ad7320c8b56f90cdbfb"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/README.md",
+      "snapshot": "local-evidence/soundtouch-grouped-fullseek-stems/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/README.md",
+      "bytes": 10595,
+      "sha256": "fd89df9fb6845b1655cc058d14b3cc5a4b6e6ec6a1c43d7acb8e5753bcf12833"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/AbstractSamplePipe.d.ts",
+      "snapshot": "local-evidence/soundtouch-grouped-fullseek-stems/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/AbstractSamplePipe.d.ts",
+      "bytes": 2815,
+      "sha256": "2823d640580d246c03089888d9024e2b10846ef6163879804f798e3283c05bed"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/CircularSampleBuffer.d.ts",
+      "snapshot": "local-evidence/soundtouch-grouped-fullseek-stems/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/CircularSampleBuffer.d.ts",
+      "bytes": 3991,
+      "sha256": "a6193ff499014c4ce8468982a3e1d417d51ca500f80f89033f6a73ce0fb31fe8"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/FifoSampleBuffer.d.ts",
+      "snapshot": "local-evidence/soundtouch-grouped-fullseek-stems/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/FifoSampleBuffer.d.ts",
+      "bytes": 4804,
+      "sha256": "b91454488460a1ecd9b33566392c16a3c659fbee58a367bca55122d70cada953"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/index.d.ts",
+      "snapshot": "local-evidence/soundtouch-grouped-fullseek-stems/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/index.d.ts",
+      "bytes": 1793,
+      "sha256": "8ae800df2e3ba7915d026b96bff913a9d72646c168f60c69028a98d3b9fc5b41"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/interpolationStrategyRegistry.d.ts",
+      "snapshot": "local-evidence/soundtouch-grouped-fullseek-stems/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/interpolationStrategyRegistry.d.ts",
+      "bytes": 4016,
+      "sha256": "6c0c5e59a32ed44892d1ca83e8607f744c3f2e120e69c5c90328c1e87ebd3556"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/RateTransposer.d.ts",
+      "snapshot": "local-evidence/soundtouch-grouped-fullseek-stems/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/RateTransposer.d.ts",
+      "bytes": 6027,
+      "sha256": "80ad361e7122e61119e612b573e5f4dd66b753f6f59e3751ce77fa3e07287ff6"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/SampleBuffer.d.ts",
+      "snapshot": "local-evidence/soundtouch-grouped-fullseek-stems/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/SampleBuffer.d.ts",
+      "bytes": 2061,
+      "sha256": "c54411b2137c77cc2fe78298bd3c5b8c35be7a5776fdc46c343f6a92a28606d4"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/SampleBufferAdapter.d.ts",
+      "snapshot": "local-evidence/soundtouch-grouped-fullseek-stems/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/SampleBufferAdapter.d.ts",
+      "bytes": 1726,
+      "sha256": "b3818c4e950ba747ee10c756374c575bc50b90c57856eba5ceefa7edce3e7327"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/SoundTouch.d.ts",
+      "snapshot": "local-evidence/soundtouch-grouped-fullseek-stems/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/SoundTouch.d.ts",
+      "bytes": 6279,
+      "sha256": "ce216ed5de2323cb3d0280df2e1d756e1b33cb5078cb7c0bb3cac18fb37bb249"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/Stretch.d.ts",
+      "snapshot": "local-evidence/soundtouch-grouped-fullseek-stems/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/Stretch.d.ts",
+      "bytes": 7023,
+      "sha256": "6797d6c913c92f656c7584a9887e073d28b9c6db832b511dd218d2e72fe8a5f3"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/StretchPipe.d.ts",
+      "snapshot": "local-evidence/soundtouch-grouped-fullseek-stems/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/StretchPipe.d.ts",
+      "bytes": 3256,
+      "sha256": "a354cb74b447154a2fc3e5161c3012832c2815312a792a56d941ef7b5071a89b"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/testFloatEqual.d.ts",
+      "snapshot": "local-evidence/soundtouch-grouped-fullseek-stems/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/core/.dist/testFloatEqual.d.ts",
+      "bytes": 441,
+      "sha256": "12470c991e9eb221178eff11b44d29aea3b989745ab44b49a1ce41fd79aa7ed7"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/interpolation-strategy-lanczos/LICENSE",
+      "snapshot": "local-evidence/soundtouch-grouped-fullseek-stems/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/interpolation-strategy-lanczos/LICENSE",
+      "bytes": 284,
+      "sha256": "753801acf995db0807e9dab615775310b1f74696e7776ee246bf9b31714cdaf9"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/interpolation-strategy-lanczos/.dist/index.js",
+      "snapshot": "local-evidence/soundtouch-grouped-fullseek-stems/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/interpolation-strategy-lanczos/.dist/index.js",
+      "bytes": 3081,
+      "sha256": "d40f6928efaed6ba2ac1ef5ab002865d03853231f11ae86882dfb6810015504e"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/interpolation-strategy-lanczos/.dist/index.spec.js",
+      "snapshot": "local-evidence/soundtouch-grouped-fullseek-stems/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/interpolation-strategy-lanczos/.dist/index.spec.js",
+      "bytes": 4944,
+      "sha256": "fda855e1fe5edc81ab9deaf82976618aae0f924cdbe6b243657c9b739db72456"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/interpolation-strategy-lanczos/package.json",
+      "snapshot": "local-evidence/soundtouch-grouped-fullseek-stems/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/interpolation-strategy-lanczos/package.json",
+      "bytes": 882,
+      "sha256": "b2b022a08d6000020e6d4484c67648d2f3e73a1fd871bfc7ff95cddb2959c61f"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/interpolation-strategy-lanczos/.dist/index.d.ts.map",
+      "snapshot": "local-evidence/soundtouch-grouped-fullseek-stems/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/interpolation-strategy-lanczos/.dist/index.d.ts.map",
+      "bytes": 1411,
+      "sha256": "0d81694fc927d3fe4d71093f691fce40344f63ffcd0c0e9393876da79d52a6b8"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/interpolation-strategy-lanczos/.dist/index.js.map",
+      "snapshot": "local-evidence/soundtouch-grouped-fullseek-stems/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/interpolation-strategy-lanczos/.dist/index.js.map",
+      "bytes": 3396,
+      "sha256": "45f58a30eaa086930b10622d5dbca2ba7f8ae060dce8df9cc19e3ada7752c42d"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/interpolation-strategy-lanczos/.dist/index.spec.d.ts.map",
+      "snapshot": "local-evidence/soundtouch-grouped-fullseek-stems/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/interpolation-strategy-lanczos/.dist/index.spec.d.ts.map",
+      "bytes": 114,
+      "sha256": "e774e8287bc7fe7d7adaa091be4d9eb300c76eaddecb7c6d7224abb344d3e476"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/interpolation-strategy-lanczos/.dist/index.spec.js.map",
+      "snapshot": "local-evidence/soundtouch-grouped-fullseek-stems/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/interpolation-strategy-lanczos/.dist/index.spec.js.map",
+      "bytes": 5178,
+      "sha256": "dab74c826de3a45124c3f1b6488da47d8d8c52d66880a4b38e42c7c509826a01"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/interpolation-strategy-lanczos/README.md",
+      "snapshot": "local-evidence/soundtouch-grouped-fullseek-stems/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/interpolation-strategy-lanczos/README.md",
+      "bytes": 1710,
+      "sha256": "419b1104c885f6f694b79dd5a7d0c7fbce390caa552b844e7ac7b0aaf33ce1aa"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/interpolation-strategy-lanczos/.dist/index.d.ts",
+      "snapshot": "local-evidence/soundtouch-grouped-fullseek-stems/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/interpolation-strategy-lanczos/.dist/index.d.ts",
+      "bytes": 2079,
+      "sha256": "b11191c9e3b1f27cecc54baf7e8ca51208f6f3a1fd71d2cd741bd1bc4c749e13"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/interpolation-strategy-lanczos/.dist/index.spec.d.ts",
+      "snapshot": "local-evidence/soundtouch-grouped-fullseek-stems/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/interpolation-strategy-lanczos/.dist/index.spec.d.ts",
+      "bytes": 51,
+      "sha256": "e04d938303fe7fa3851a60d608014912163108a8045713ebbe0a6acac28bf40c"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/interpolation-strategy-lanczos/src/index.spec.ts",
+      "snapshot": "local-evidence/soundtouch-grouped-fullseek-stems/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/interpolation-strategy-lanczos/src/index.spec.ts",
+      "bytes": 4620,
+      "sha256": "6e62e30583cd143edf446d4d73fb7f0e7a4345407391dd21e5032d030d3143dc"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/interpolation-strategy-lanczos/src/index.ts",
+      "snapshot": "local-evidence/soundtouch-grouped-fullseek-stems/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/interpolation-strategy-lanczos/src/index.ts",
+      "bytes": 5417,
+      "sha256": "12462a3dc82202d215b6fba4ae6da50605c1e6fc47e29c47bee46ede6261fb62"
+    },
+    {
+      "file": "local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/interpolation-strategy-lanczos/.dist/tsconfig.tsbuildinfo",
+      "snapshot": "local-evidence/soundtouch-grouped-fullseek-stems/source-snapshots/local-evidence/keylock-soundtouch-source/node_modules/@soundtouchjs/interpolation-strategy-lanczos/.dist/tsconfig.tsbuildinfo",
+      "bytes": 32104,
+      "sha256": "7c352aef89b46cfb27d9f179b6c37a10e1d09544bf73124fff436e2267b7f606"
+    }
+  ],
+  "sourceSHA256": "3e7d9768c5213047432375f8638c4f234f47df164c02175be1114bb380276847",
+  "cases": [
+    {
+      "id": "unity",
+      "rate": 1,
+      "semitones": 0,
+      "sampleRate": 44100,
+      "keylock": true,
+      "passed": true,
+      "errors": [],
+      "inputHashes": [
+        [
+          "2725fd165d551c060b64f34e8819c7c013305b1f9d7e6c23a13cba8426192e37",
+          "2ae640a23ef1bd431246a77915503331671bfe708397b36e5bd28332a43a5201"
+        ],
+        [
+          "0b400414d881f8027cd0f4e30036cd38316d6770d90d0a652f2527d2f013507a",
+          "de671b1a9f59e8489afd87c22065f1d51f6c68d5d8e3b09a5dbfbae3d9dc3ae7"
+        ],
+        [
+          "ea71aa71c89fb0d4aff20e77ccd5f26d54ebf9caed2365c845e784eef8bfe7c8",
+          "11f0da3d31ddf380fd006ed6bbb3806d8ca9435df970109666052ce9113fe2e6"
+        ],
+        [
+          "06e411c8eeec77c077ffce2246d77a8128a4e4d1dc692433e45418684e7f1ba3",
+          "c6ae35b40b9e0e76460933e6afba73deff1066f1ef188212c1cc96fa4b38b23e"
+        ],
+        [
+          "b02c7228ae0de03ceeb2356e5ef97a2f2cfa2482e108182d2259c5e644fe1fcf",
+          "1fa200302ab5b918783315dee2f323d1f12edb6a7009ccf73532a21e99a9bf1a"
+        ]
+      ],
+      "ack": {
+        "frame": 256,
+        "position": 0,
+        "playing": true,
+        "generation": 1,
+        "rate": 1,
+        "semitones": 0,
+        "keylock": true,
+        "effectiveSemitones": 0,
+        "ready": true,
+        "superseded": [],
+        "preparationMilliseconds": 19.008207999999996,
+        "preparationClock": "performance.now",
+        "positionKind": "nominal-not-measured-audible",
+        "counters": [
+          {
+            "originFrame": 0,
+            "sourceCursorFrame": 7168,
+            "realFramesFed": 7168,
+            "paddingFramesFed": 0,
+            "paddingLimit": 88200,
+            "generatedFrames": 4499,
+            "extractedFrames": 0,
+            "discardedPrerollFrames": 0,
+            "outputFramesReady": 4499
+          },
+          {
+            "originFrame": 0,
+            "sourceCursorFrame": 7168,
+            "realFramesFed": 7168,
+            "paddingFramesFed": 0,
+            "paddingLimit": 88200,
+            "generatedFrames": 4499,
+            "extractedFrames": 0,
+            "discardedPrerollFrames": 0,
+            "outputFramesReady": 4499
+          },
+          {
+            "originFrame": 0,
+            "sourceCursorFrame": 7168,
+            "realFramesFed": 7168,
+            "paddingFramesFed": 0,
+            "paddingLimit": 88200,
+            "generatedFrames": 4499,
+            "extractedFrames": 0,
+            "discardedPrerollFrames": 0,
+            "outputFramesReady": 4499
+          },
+          {
+            "originFrame": 0,
+            "sourceCursorFrame": 7168,
+            "realFramesFed": 7168,
+            "paddingFramesFed": 0,
+            "paddingLimit": 88200,
+            "generatedFrames": 4499,
+            "extractedFrames": 0,
+            "discardedPrerollFrames": 0,
+            "outputFramesReady": 4499
+          },
+          {
+            "originFrame": 0,
+            "sourceCursorFrame": 7168,
+            "realFramesFed": 7168,
+            "paddingFramesFed": 0,
+            "paddingLimit": 88200,
+            "generatedFrames": 4499,
+            "extractedFrames": 0,
+            "discardedPrerollFrames": 0,
+            "outputFramesReady": 4499
+          }
+        ]
+      },
+      "allFinite": true,
+      "raw": {
+        "path": "local-evidence/soundtouch-grouped-fullseek-stems/unity-44100.f32le",
+        "frames": 132352,
+        "channels": 10,
+        "sampleRate": 44100,
+        "bytes": 5294080,
+        "sha256": "5bf778c4501a4cd434c4138ae6f8c35aabb99cddbf5e880bf04d76727c9ecaaf"
+      },
+      "channels": [
+        {
+          "channel": 0,
+          "firstFrame": 22050,
+          "lastExclusive": 110250,
+          "referenceRMS": 0.035355496817814865,
+          "residualRMS": 9.603042976664379e-10,
+          "relativeRMS": 2.716138603891889e-8,
+          "peakResidual": 5.122274160385132e-9,
+          "passed": true
+        },
+        {
+          "channel": 1,
+          "firstFrame": 22050,
+          "lastExclusive": 110250,
+          "referenceRMS": 0.03535493419123925,
+          "residualRMS": 9.51321680618238e-10,
+          "relativeRMS": 2.6907748589558113e-8,
+          "peakResidual": 7.450580596923828e-9,
+          "passed": true
+        }
+      ],
+      "snapshot": {
+        "sampleRate": 44100,
+        "nextFrame": 132352,
+        "generation": 1,
+        "disposed": false,
+        "state": {
+          "frame": 256,
+          "position": 2.995374149659864,
+          "playing": true,
+          "generation": 1,
+          "rate": 1,
+          "semitones": 0,
+          "keylock": true,
+          "effectiveSemitones": 0,
+          "anchorPosition": 0,
+          "positionKind": "nominal-not-measured-audible"
+        },
+        "sourceBytes": 7056000,
+        "retainedWholeSources": true,
+        "memoryLimit": "Whole caller-provided PCM plus bounded16epochs; opaque DSP heaps not counted.",
+        "pcmOwnership": "Descriptors are snapshotted; PCM arrays are borrowed immutable data for the transport lifetime. The worklet owns transferred storage.",
+        "renderedFrames": 132352,
+        "retiredEpochs": 0,
+        "retiredSummaries": [
+          {
+            "generation": 1,
+            "counters": [
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 137216,
+                "realFramesFed": 137216,
+                "paddingFramesFed": 0,
+                "paddingLimit": 88200,
+                "generatedFrames": 134970,
+                "extractedFrames": 132096,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 2874
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 137216,
+                "realFramesFed": 137216,
+                "paddingFramesFed": 0,
+                "paddingLimit": 88200,
+                "generatedFrames": 134970,
+                "extractedFrames": 132096,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 2874
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 137216,
+                "realFramesFed": 137216,
+                "paddingFramesFed": 0,
+                "paddingLimit": 88200,
+                "generatedFrames": 134970,
+                "extractedFrames": 132096,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 2874
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 137216,
+                "realFramesFed": 137216,
+                "paddingFramesFed": 0,
+                "paddingLimit": 88200,
+                "generatedFrames": 134970,
+                "extractedFrames": 132096,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 2874
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 137216,
+                "realFramesFed": 137216,
+                "paddingFramesFed": 0,
+                "paddingLimit": 88200,
+                "generatedFrames": 134970,
+                "extractedFrames": 132096,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 2874
+              }
+            ]
+          }
+        ],
+        "retiredSummaryLimit": 64,
+        "clockRetention": "Last two applied anchors; older queries reject explicitly.",
+        "epochs": [
+          {
+            "generation": 1,
+            "role": "active-or-retiring",
+            "counters": [
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 137216,
+                "realFramesFed": 137216,
+                "paddingFramesFed": 0,
+                "paddingLimit": 88200,
+                "generatedFrames": 134970,
+                "extractedFrames": 132096,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 2874
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 137216,
+                "realFramesFed": 137216,
+                "paddingFramesFed": 0,
+                "paddingLimit": 88200,
+                "generatedFrames": 134970,
+                "extractedFrames": 132096,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 2874
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 137216,
+                "realFramesFed": 137216,
+                "paddingFramesFed": 0,
+                "paddingLimit": 88200,
+                "generatedFrames": 134970,
+                "extractedFrames": 132096,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 2874
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 137216,
+                "realFramesFed": 137216,
+                "paddingFramesFed": 0,
+                "paddingLimit": 88200,
+                "generatedFrames": 134970,
+                "extractedFrames": 132096,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 2874
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 137216,
+                "realFramesFed": 137216,
+                "paddingFramesFed": 0,
+                "paddingLimit": 88200,
+                "generatedFrames": 134970,
+                "extractedFrames": 132096,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 2874
+              }
+            ],
+            "overlapGuide": {
+              "participants": 5,
+              "registered": 5,
+              "nextDecision": 30,
+              "retainedDecisions": 0,
+              "maxPendingDecisions": 4096,
+              "peakPendingDecisions": 1,
+              "produced": 30,
+              "consumed": 120,
+              "readers": [
+                {
+                  "index": 0,
+                  "next": 30,
+                  "disposed": false
+                },
+                {
+                  "index": 1,
+                  "next": 30,
+                  "disposed": false
+                },
+                {
+                  "index": 2,
+                  "next": 30,
+                  "disposed": false
+                },
+                {
+                  "index": 3,
+                  "next": 30,
+                  "disposed": false
+                },
+                {
+                  "index": 4,
+                  "next": 30,
+                  "disposed": false
+                }
+              ]
+            }
+          }
+        ],
+        "scope": "Forward pull-based experiment; nominal output endpoint, not measured audible source position or proved EOS tail preservation."
+      },
+      "disposed": {
+        "sampleRate": 44100,
+        "nextFrame": 132352,
+        "generation": 1,
+        "disposed": true,
+        "state": {
+          "frame": 132352,
+          "position": 2.995374149659864,
+          "playing": false,
+          "generation": 1,
+          "rate": 1,
+          "semitones": 0,
+          "keylock": true,
+          "effectiveSemitones": 0,
+          "anchorPosition": 2.995374149659864,
+          "positionKind": "nominal-not-measured-audible"
+        },
+        "sourceBytes": 0,
+        "retainedWholeSources": false,
+        "memoryLimit": "Whole caller-provided PCM plus bounded16epochs; opaque DSP heaps not counted.",
+        "pcmOwnership": "Descriptors are snapshotted; PCM arrays are borrowed immutable data for the transport lifetime. The worklet owns transferred storage.",
+        "renderedFrames": 132352,
+        "retiredEpochs": 1,
+        "retiredSummaries": [
+          {
+            "generation": 1,
+            "counters": [
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 137216,
+                "realFramesFed": 137216,
+                "paddingFramesFed": 0,
+                "paddingLimit": 88200,
+                "generatedFrames": 134970,
+                "extractedFrames": 132096,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 2874
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 137216,
+                "realFramesFed": 137216,
+                "paddingFramesFed": 0,
+                "paddingLimit": 88200,
+                "generatedFrames": 134970,
+                "extractedFrames": 132096,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 2874
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 137216,
+                "realFramesFed": 137216,
+                "paddingFramesFed": 0,
+                "paddingLimit": 88200,
+                "generatedFrames": 134970,
+                "extractedFrames": 132096,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 2874
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 137216,
+                "realFramesFed": 137216,
+                "paddingFramesFed": 0,
+                "paddingLimit": 88200,
+                "generatedFrames": 134970,
+                "extractedFrames": 132096,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 2874
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 137216,
+                "realFramesFed": 137216,
+                "paddingFramesFed": 0,
+                "paddingLimit": 88200,
+                "generatedFrames": 134970,
+                "extractedFrames": 132096,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 2874
+              }
+            ]
+          }
+        ],
+        "retiredSummaryLimit": 64,
+        "clockRetention": "Last two applied anchors; older queries reject explicitly.",
+        "epochs": [],
+        "scope": "Forward pull-based experiment; nominal output endpoint, not measured audible source position or proved EOS tail preservation."
+      }
+    },
+    {
+      "id": "tempo",
+      "rate": 1.08,
+      "semitones": 0,
+      "sampleRate": 44100,
+      "keylock": true,
+      "passed": true,
+      "errors": [],
+      "inputHashes": [
+        [
+          "2725fd165d551c060b64f34e8819c7c013305b1f9d7e6c23a13cba8426192e37",
+          "2ae640a23ef1bd431246a77915503331671bfe708397b36e5bd28332a43a5201"
+        ],
+        [
+          "0b400414d881f8027cd0f4e30036cd38316d6770d90d0a652f2527d2f013507a",
+          "de671b1a9f59e8489afd87c22065f1d51f6c68d5d8e3b09a5dbfbae3d9dc3ae7"
+        ],
+        [
+          "ea71aa71c89fb0d4aff20e77ccd5f26d54ebf9caed2365c845e784eef8bfe7c8",
+          "11f0da3d31ddf380fd006ed6bbb3806d8ca9435df970109666052ce9113fe2e6"
+        ],
+        [
+          "06e411c8eeec77c077ffce2246d77a8128a4e4d1dc692433e45418684e7f1ba3",
+          "c6ae35b40b9e0e76460933e6afba73deff1066f1ef188212c1cc96fa4b38b23e"
+        ],
+        [
+          "b02c7228ae0de03ceeb2356e5ef97a2f2cfa2482e108182d2259c5e644fe1fcf",
+          "1fa200302ab5b918783315dee2f323d1f12edb6a7009ccf73532a21e99a9bf1a"
+        ]
+      ],
+      "ack": {
+        "frame": 256,
+        "position": 0,
+        "playing": true,
+        "generation": 1,
+        "rate": 1.08,
+        "semitones": 0,
+        "keylock": true,
+        "effectiveSemitones": 0,
+        "ready": true,
+        "superseded": [],
+        "preparationMilliseconds": 9.316540999999972,
+        "preparationClock": "performance.now",
+        "positionKind": "nominal-not-measured-audible",
+        "counters": [
+          {
+            "originFrame": 0,
+            "sourceCursorFrame": 7168,
+            "realFramesFed": 7168,
+            "paddingFramesFed": 0,
+            "paddingLimit": 88200,
+            "generatedFrames": 4410,
+            "extractedFrames": 0,
+            "discardedPrerollFrames": 0,
+            "outputFramesReady": 4410
+          },
+          {
+            "originFrame": 0,
+            "sourceCursorFrame": 7168,
+            "realFramesFed": 7168,
+            "paddingFramesFed": 0,
+            "paddingLimit": 88200,
+            "generatedFrames": 4410,
+            "extractedFrames": 0,
+            "discardedPrerollFrames": 0,
+            "outputFramesReady": 4410
+          },
+          {
+            "originFrame": 0,
+            "sourceCursorFrame": 7168,
+            "realFramesFed": 7168,
+            "paddingFramesFed": 0,
+            "paddingLimit": 88200,
+            "generatedFrames": 4410,
+            "extractedFrames": 0,
+            "discardedPrerollFrames": 0,
+            "outputFramesReady": 4410
+          },
+          {
+            "originFrame": 0,
+            "sourceCursorFrame": 7168,
+            "realFramesFed": 7168,
+            "paddingFramesFed": 0,
+            "paddingLimit": 88200,
+            "generatedFrames": 4410,
+            "extractedFrames": 0,
+            "discardedPrerollFrames": 0,
+            "outputFramesReady": 4410
+          },
+          {
+            "originFrame": 0,
+            "sourceCursorFrame": 7168,
+            "realFramesFed": 7168,
+            "paddingFramesFed": 0,
+            "paddingLimit": 88200,
+            "generatedFrames": 4410,
+            "extractedFrames": 0,
+            "discardedPrerollFrames": 0,
+            "outputFramesReady": 4410
+          }
+        ]
+      },
+      "allFinite": true,
+      "raw": {
+        "path": "local-evidence/soundtouch-grouped-fullseek-stems/tempo-44100.f32le",
+        "frames": 132352,
+        "channels": 10,
+        "sampleRate": 44100,
+        "bytes": 5294080,
+        "sha256": "8255deb5aec516d1ea022a7e1343fbb3ac78bc732e92d82781b626a237de56eb"
+      },
+      "channels": [
+        {
+          "channel": 0,
+          "firstFrame": 22050,
+          "lastExclusive": 110250,
+          "referenceRMS": 0.035262912840879714,
+          "residualRMS": 9.813573470937336e-10,
+          "relativeRMS": 2.7829730105451246e-8,
+          "peakResidual": 8.381903171539307e-9,
+          "passed": true
+        },
+        {
+          "channel": 1,
+          "firstFrame": 22050,
+          "lastExclusive": 110250,
+          "referenceRMS": 0.035308929486744293,
+          "residualRMS": 9.762473500434793e-10,
+          "relativeRMS": 2.764873827199952e-8,
+          "peakResidual": 7.450580596923828e-9,
+          "passed": true
+        }
+      ],
+      "snapshot": {
+        "sampleRate": 44100,
+        "nextFrame": 132352,
+        "generation": 1,
+        "disposed": false,
+        "state": {
+          "frame": 256,
+          "position": 3.2350040816326535,
+          "playing": true,
+          "generation": 1,
+          "rate": 1.08,
+          "semitones": 0,
+          "keylock": true,
+          "effectiveSemitones": 0,
+          "anchorPosition": 0,
+          "positionKind": "nominal-not-measured-audible"
+        },
+        "sourceBytes": 7056000,
+        "retainedWholeSources": true,
+        "memoryLimit": "Whole caller-provided PCM plus bounded16epochs; opaque DSP heaps not counted.",
+        "pcmOwnership": "Descriptors are snapshotted; PCM arrays are borrowed immutable data for the transport lifetime. The worklet owns transferred storage.",
+        "renderedFrames": 132352,
+        "retiredEpochs": 0,
+        "retiredSummaries": [
+          {
+            "generation": 1,
+            "counters": [
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 145408,
+                "realFramesFed": 145408,
+                "paddingFramesFed": 0,
+                "paddingLimit": 88200,
+                "generatedFrames": 132300,
+                "extractedFrames": 132096,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 204
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 145408,
+                "realFramesFed": 145408,
+                "paddingFramesFed": 0,
+                "paddingLimit": 88200,
+                "generatedFrames": 132300,
+                "extractedFrames": 132096,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 204
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 145408,
+                "realFramesFed": 145408,
+                "paddingFramesFed": 0,
+                "paddingLimit": 88200,
+                "generatedFrames": 132300,
+                "extractedFrames": 132096,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 204
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 145408,
+                "realFramesFed": 145408,
+                "paddingFramesFed": 0,
+                "paddingLimit": 88200,
+                "generatedFrames": 132300,
+                "extractedFrames": 132096,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 204
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 145408,
+                "realFramesFed": 145408,
+                "paddingFramesFed": 0,
+                "paddingLimit": 88200,
+                "generatedFrames": 132300,
+                "extractedFrames": 132096,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 204
+              }
+            ]
+          }
+        ],
+        "retiredSummaryLimit": 64,
+        "clockRetention": "Last two applied anchors; older queries reject explicitly.",
+        "epochs": [
+          {
+            "generation": 1,
+            "role": "active-or-retiring",
+            "counters": [
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 145408,
+                "realFramesFed": 145408,
+                "paddingFramesFed": 0,
+                "paddingLimit": 88200,
+                "generatedFrames": 132300,
+                "extractedFrames": 132096,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 204
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 145408,
+                "realFramesFed": 145408,
+                "paddingFramesFed": 0,
+                "paddingLimit": 88200,
+                "generatedFrames": 132300,
+                "extractedFrames": 132096,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 204
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 145408,
+                "realFramesFed": 145408,
+                "paddingFramesFed": 0,
+                "paddingLimit": 88200,
+                "generatedFrames": 132300,
+                "extractedFrames": 132096,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 204
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 145408,
+                "realFramesFed": 145408,
+                "paddingFramesFed": 0,
+                "paddingLimit": 88200,
+                "generatedFrames": 132300,
+                "extractedFrames": 132096,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 204
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 145408,
+                "realFramesFed": 145408,
+                "paddingFramesFed": 0,
+                "paddingLimit": 88200,
+                "generatedFrames": 132300,
+                "extractedFrames": 132096,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 204
+              }
+            ],
+            "overlapGuide": {
+              "participants": 5,
+              "registered": 5,
+              "nextDecision": 30,
+              "retainedDecisions": 0,
+              "maxPendingDecisions": 4096,
+              "peakPendingDecisions": 1,
+              "produced": 30,
+              "consumed": 120,
+              "readers": [
+                {
+                  "index": 0,
+                  "next": 30,
+                  "disposed": false
+                },
+                {
+                  "index": 1,
+                  "next": 30,
+                  "disposed": false
+                },
+                {
+                  "index": 2,
+                  "next": 30,
+                  "disposed": false
+                },
+                {
+                  "index": 3,
+                  "next": 30,
+                  "disposed": false
+                },
+                {
+                  "index": 4,
+                  "next": 30,
+                  "disposed": false
+                }
+              ]
+            }
+          }
+        ],
+        "scope": "Forward pull-based experiment; nominal output endpoint, not measured audible source position or proved EOS tail preservation."
+      },
+      "disposed": {
+        "sampleRate": 44100,
+        "nextFrame": 132352,
+        "generation": 1,
+        "disposed": true,
+        "state": {
+          "frame": 132352,
+          "position": 3.2350040816326535,
+          "playing": false,
+          "generation": 1,
+          "rate": 1.08,
+          "semitones": 0,
+          "keylock": true,
+          "effectiveSemitones": 0,
+          "anchorPosition": 3.2350040816326535,
+          "positionKind": "nominal-not-measured-audible"
+        },
+        "sourceBytes": 0,
+        "retainedWholeSources": false,
+        "memoryLimit": "Whole caller-provided PCM plus bounded16epochs; opaque DSP heaps not counted.",
+        "pcmOwnership": "Descriptors are snapshotted; PCM arrays are borrowed immutable data for the transport lifetime. The worklet owns transferred storage.",
+        "renderedFrames": 132352,
+        "retiredEpochs": 1,
+        "retiredSummaries": [
+          {
+            "generation": 1,
+            "counters": [
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 145408,
+                "realFramesFed": 145408,
+                "paddingFramesFed": 0,
+                "paddingLimit": 88200,
+                "generatedFrames": 132300,
+                "extractedFrames": 132096,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 204
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 145408,
+                "realFramesFed": 145408,
+                "paddingFramesFed": 0,
+                "paddingLimit": 88200,
+                "generatedFrames": 132300,
+                "extractedFrames": 132096,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 204
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 145408,
+                "realFramesFed": 145408,
+                "paddingFramesFed": 0,
+                "paddingLimit": 88200,
+                "generatedFrames": 132300,
+                "extractedFrames": 132096,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 204
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 145408,
+                "realFramesFed": 145408,
+                "paddingFramesFed": 0,
+                "paddingLimit": 88200,
+                "generatedFrames": 132300,
+                "extractedFrames": 132096,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 204
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 145408,
+                "realFramesFed": 145408,
+                "paddingFramesFed": 0,
+                "paddingLimit": 88200,
+                "generatedFrames": 132300,
+                "extractedFrames": 132096,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 204
+              }
+            ]
+          }
+        ],
+        "retiredSummaryLimit": 64,
+        "clockRetention": "Last two applied anchors; older queries reject explicitly.",
+        "epochs": [],
+        "scope": "Forward pull-based experiment; nominal output endpoint, not measured audible source position or proved EOS tail preservation."
+      }
+    },
+    {
+      "id": "shifted",
+      "rate": 1.08,
+      "semitones": 2,
+      "sampleRate": 44100,
+      "keylock": true,
+      "passed": true,
+      "errors": [],
+      "inputHashes": [
+        [
+          "2725fd165d551c060b64f34e8819c7c013305b1f9d7e6c23a13cba8426192e37",
+          "2ae640a23ef1bd431246a77915503331671bfe708397b36e5bd28332a43a5201"
+        ],
+        [
+          "0b400414d881f8027cd0f4e30036cd38316d6770d90d0a652f2527d2f013507a",
+          "de671b1a9f59e8489afd87c22065f1d51f6c68d5d8e3b09a5dbfbae3d9dc3ae7"
+        ],
+        [
+          "ea71aa71c89fb0d4aff20e77ccd5f26d54ebf9caed2365c845e784eef8bfe7c8",
+          "11f0da3d31ddf380fd006ed6bbb3806d8ca9435df970109666052ce9113fe2e6"
+        ],
+        [
+          "06e411c8eeec77c077ffce2246d77a8128a4e4d1dc692433e45418684e7f1ba3",
+          "c6ae35b40b9e0e76460933e6afba73deff1066f1ef188212c1cc96fa4b38b23e"
+        ],
+        [
+          "b02c7228ae0de03ceeb2356e5ef97a2f2cfa2482e108182d2259c5e644fe1fcf",
+          "1fa200302ab5b918783315dee2f323d1f12edb6a7009ccf73532a21e99a9bf1a"
+        ]
+      ],
+      "ack": {
+        "frame": 256,
+        "position": 0,
+        "playing": true,
+        "generation": 1,
+        "rate": 1.08,
+        "semitones": 2,
+        "keylock": true,
+        "effectiveSemitones": 2,
+        "ready": true,
+        "superseded": [],
+        "preparationMilliseconds": 8.341542000000004,
+        "preparationClock": "performance.now",
+        "positionKind": "nominal-not-measured-audible",
+        "counters": [
+          {
+            "originFrame": 0,
+            "sourceCursorFrame": 7168,
+            "realFramesFed": 7168,
+            "paddingFramesFed": 0,
+            "paddingLimit": 88200,
+            "generatedFrames": 4048,
+            "extractedFrames": 0,
+            "discardedPrerollFrames": 0,
+            "outputFramesReady": 4048
+          },
+          {
+            "originFrame": 0,
+            "sourceCursorFrame": 7168,
+            "realFramesFed": 7168,
+            "paddingFramesFed": 0,
+            "paddingLimit": 88200,
+            "generatedFrames": 4048,
+            "extractedFrames": 0,
+            "discardedPrerollFrames": 0,
+            "outputFramesReady": 4048
+          },
+          {
+            "originFrame": 0,
+            "sourceCursorFrame": 7168,
+            "realFramesFed": 7168,
+            "paddingFramesFed": 0,
+            "paddingLimit": 88200,
+            "generatedFrames": 4048,
+            "extractedFrames": 0,
+            "discardedPrerollFrames": 0,
+            "outputFramesReady": 4048
+          },
+          {
+            "originFrame": 0,
+            "sourceCursorFrame": 7168,
+            "realFramesFed": 7168,
+            "paddingFramesFed": 0,
+            "paddingLimit": 88200,
+            "generatedFrames": 4048,
+            "extractedFrames": 0,
+            "discardedPrerollFrames": 0,
+            "outputFramesReady": 4048
+          },
+          {
+            "originFrame": 0,
+            "sourceCursorFrame": 7168,
+            "realFramesFed": 7168,
+            "paddingFramesFed": 0,
+            "paddingLimit": 88200,
+            "generatedFrames": 4048,
+            "extractedFrames": 0,
+            "discardedPrerollFrames": 0,
+            "outputFramesReady": 4048
+          }
+        ]
+      },
+      "allFinite": true,
+      "raw": {
+        "path": "local-evidence/soundtouch-grouped-fullseek-stems/shifted-44100.f32le",
+        "frames": 132352,
+        "channels": 10,
+        "sampleRate": 44100,
+        "bytes": 5294080,
+        "sha256": "66d82676ebce073dd8e61f4e94f7fdbe7f60e3fe35f9ab5cfa2505c092c07ada"
+      },
+      "channels": [
+        {
+          "channel": 0,
+          "firstFrame": 22050,
+          "lastExclusive": 110250,
+          "referenceRMS": 0.035300449419581756,
+          "residualRMS": 1.5489681459402001e-9,
+          "relativeRMS": 4.3879558799071875e-8,
+          "peakResidual": 1.210719347000122e-8,
+          "passed": true
+        },
+        {
+          "channel": 1,
+          "firstFrame": 22050,
+          "lastExclusive": 110250,
+          "referenceRMS": 0.035326821140787064,
+          "residualRMS": 1.555444541009279e-9,
+          "relativeRMS": 4.403013038762832e-8,
+          "peakResidual": 1.0244548320770264e-8,
+          "passed": true
+        }
+      ],
+      "snapshot": {
+        "sampleRate": 44100,
+        "nextFrame": 132352,
+        "generation": 1,
+        "disposed": false,
+        "state": {
+          "frame": 256,
+          "position": 3.2350040816326535,
+          "playing": true,
+          "generation": 1,
+          "rate": 1.08,
+          "semitones": 2,
+          "keylock": true,
+          "effectiveSemitones": 2,
+          "anchorPosition": 0,
+          "positionKind": "nominal-not-measured-audible"
+        },
+        "sourceBytes": 7056000,
+        "retainedWholeSources": true,
+        "memoryLimit": "Whole caller-provided PCM plus bounded16epochs; opaque DSP heaps not counted.",
+        "pcmOwnership": "Descriptors are snapshotted; PCM arrays are borrowed immutable data for the transport lifetime. The worklet owns transferred storage.",
+        "renderedFrames": 132352,
+        "retiredEpochs": 0,
+        "retiredSummaries": [
+          {
+            "generation": 1,
+            "counters": [
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 146432,
+                "realFramesFed": 146432,
+                "paddingFramesFed": 0,
+                "paddingLimit": 88200,
+                "generatedFrames": 133563,
+                "extractedFrames": 132096,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 1467
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 146432,
+                "realFramesFed": 146432,
+                "paddingFramesFed": 0,
+                "paddingLimit": 88200,
+                "generatedFrames": 133563,
+                "extractedFrames": 132096,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 1467
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 146432,
+                "realFramesFed": 146432,
+                "paddingFramesFed": 0,
+                "paddingLimit": 88200,
+                "generatedFrames": 133563,
+                "extractedFrames": 132096,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 1467
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 146432,
+                "realFramesFed": 146432,
+                "paddingFramesFed": 0,
+                "paddingLimit": 88200,
+                "generatedFrames": 133563,
+                "extractedFrames": 132096,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 1467
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 146432,
+                "realFramesFed": 146432,
+                "paddingFramesFed": 0,
+                "paddingLimit": 88200,
+                "generatedFrames": 133563,
+                "extractedFrames": 132096,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 1467
+              }
+            ]
+          }
+        ],
+        "retiredSummaryLimit": 64,
+        "clockRetention": "Last two applied anchors; older queries reject explicitly.",
+        "epochs": [
+          {
+            "generation": 1,
+            "role": "active-or-retiring",
+            "counters": [
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 146432,
+                "realFramesFed": 146432,
+                "paddingFramesFed": 0,
+                "paddingLimit": 88200,
+                "generatedFrames": 133563,
+                "extractedFrames": 132096,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 1467
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 146432,
+                "realFramesFed": 146432,
+                "paddingFramesFed": 0,
+                "paddingLimit": 88200,
+                "generatedFrames": 133563,
+                "extractedFrames": 132096,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 1467
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 146432,
+                "realFramesFed": 146432,
+                "paddingFramesFed": 0,
+                "paddingLimit": 88200,
+                "generatedFrames": 133563,
+                "extractedFrames": 132096,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 1467
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 146432,
+                "realFramesFed": 146432,
+                "paddingFramesFed": 0,
+                "paddingLimit": 88200,
+                "generatedFrames": 133563,
+                "extractedFrames": 132096,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 1467
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 146432,
+                "realFramesFed": 146432,
+                "paddingFramesFed": 0,
+                "paddingLimit": 88200,
+                "generatedFrames": 133563,
+                "extractedFrames": 132096,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 1467
+              }
+            ],
+            "overlapGuide": {
+              "participants": 5,
+              "registered": 5,
+              "nextDecision": 33,
+              "retainedDecisions": 0,
+              "maxPendingDecisions": 4096,
+              "peakPendingDecisions": 1,
+              "produced": 33,
+              "consumed": 132,
+              "readers": [
+                {
+                  "index": 0,
+                  "next": 33,
+                  "disposed": false
+                },
+                {
+                  "index": 1,
+                  "next": 33,
+                  "disposed": false
+                },
+                {
+                  "index": 2,
+                  "next": 33,
+                  "disposed": false
+                },
+                {
+                  "index": 3,
+                  "next": 33,
+                  "disposed": false
+                },
+                {
+                  "index": 4,
+                  "next": 33,
+                  "disposed": false
+                }
+              ]
+            }
+          }
+        ],
+        "scope": "Forward pull-based experiment; nominal output endpoint, not measured audible source position or proved EOS tail preservation."
+      },
+      "disposed": {
+        "sampleRate": 44100,
+        "nextFrame": 132352,
+        "generation": 1,
+        "disposed": true,
+        "state": {
+          "frame": 132352,
+          "position": 3.2350040816326535,
+          "playing": false,
+          "generation": 1,
+          "rate": 1.08,
+          "semitones": 2,
+          "keylock": true,
+          "effectiveSemitones": 2,
+          "anchorPosition": 3.2350040816326535,
+          "positionKind": "nominal-not-measured-audible"
+        },
+        "sourceBytes": 0,
+        "retainedWholeSources": false,
+        "memoryLimit": "Whole caller-provided PCM plus bounded16epochs; opaque DSP heaps not counted.",
+        "pcmOwnership": "Descriptors are snapshotted; PCM arrays are borrowed immutable data for the transport lifetime. The worklet owns transferred storage.",
+        "renderedFrames": 132352,
+        "retiredEpochs": 1,
+        "retiredSummaries": [
+          {
+            "generation": 1,
+            "counters": [
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 146432,
+                "realFramesFed": 146432,
+                "paddingFramesFed": 0,
+                "paddingLimit": 88200,
+                "generatedFrames": 133563,
+                "extractedFrames": 132096,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 1467
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 146432,
+                "realFramesFed": 146432,
+                "paddingFramesFed": 0,
+                "paddingLimit": 88200,
+                "generatedFrames": 133563,
+                "extractedFrames": 132096,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 1467
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 146432,
+                "realFramesFed": 146432,
+                "paddingFramesFed": 0,
+                "paddingLimit": 88200,
+                "generatedFrames": 133563,
+                "extractedFrames": 132096,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 1467
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 146432,
+                "realFramesFed": 146432,
+                "paddingFramesFed": 0,
+                "paddingLimit": 88200,
+                "generatedFrames": 133563,
+                "extractedFrames": 132096,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 1467
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 146432,
+                "realFramesFed": 146432,
+                "paddingFramesFed": 0,
+                "paddingLimit": 88200,
+                "generatedFrames": 133563,
+                "extractedFrames": 132096,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 1467
+              }
+            ]
+          }
+        ],
+        "retiredSummaryLimit": 64,
+        "clockRetention": "Last two applied anchors; older queries reject explicitly.",
+        "epochs": [],
+        "scope": "Forward pull-based experiment; nominal output endpoint, not measured audible source position or proved EOS tail preservation."
+      }
+    },
+    {
+      "id": "unity",
+      "rate": 1,
+      "semitones": 0,
+      "sampleRate": 48000,
+      "keylock": true,
+      "passed": true,
+      "errors": [],
+      "inputHashes": [
+        [
+          "53f7a34aa65aff636126c89e1a9d9198e6026246cd6a1ac39991899d2c4280bb",
+          "955f3cd474f0685303d5f7ee4a464a4ef9bf3bbdef0be18e961e84f25a3f6a2c"
+        ],
+        [
+          "fc793b59c7b1df88cd920a6d535adaa698eccec434a3c5114e9972b2de6dac7f",
+          "2568f8b414329ef3835c646a9c72d909b4c8ba2122ccebae7a32a5ace5f683cf"
+        ],
+        [
+          "c401ee15d671b464a4425d02047866c9506017dec40bdcd2fe4f516b88bdc440",
+          "cbbf95bc2b688496cc437dfdceeaf79f6a62c1e9485e050de3973d171be46bb5"
+        ],
+        [
+          "00f8b643fc96e3d83da6277b059a598465d8f17f878dff41fdd6fd38be2b4aa1",
+          "566a9e278345aa8e6990b5c492bce7406cfd623e9b2dc2bd55bda78fcda7e4bf"
+        ],
+        [
+          "de0fa892f8b3590b0a3b2abaea7d00d0e3576cc3231e0de0f9e21825e25fe7f2",
+          "be80ade21be6796d16c549f53af823856665c9383dc8d33a657e6e4173bcb903"
+        ]
+      ],
+      "ack": {
+        "frame": 256,
+        "position": 0,
+        "playing": true,
+        "generation": 1,
+        "rate": 1,
+        "semitones": 0,
+        "keylock": true,
+        "effectiveSemitones": 0,
+        "ready": true,
+        "superseded": [],
+        "preparationMilliseconds": 10.177082999999811,
+        "preparationClock": "performance.now",
+        "positionKind": "nominal-not-measured-audible",
+        "counters": [
+          {
+            "originFrame": 0,
+            "sourceCursorFrame": 7168,
+            "realFramesFed": 7168,
+            "paddingFramesFed": 0,
+            "paddingLimit": 96000,
+            "generatedFrames": 4896,
+            "extractedFrames": 0,
+            "discardedPrerollFrames": 0,
+            "outputFramesReady": 4896
+          },
+          {
+            "originFrame": 0,
+            "sourceCursorFrame": 7168,
+            "realFramesFed": 7168,
+            "paddingFramesFed": 0,
+            "paddingLimit": 96000,
+            "generatedFrames": 4896,
+            "extractedFrames": 0,
+            "discardedPrerollFrames": 0,
+            "outputFramesReady": 4896
+          },
+          {
+            "originFrame": 0,
+            "sourceCursorFrame": 7168,
+            "realFramesFed": 7168,
+            "paddingFramesFed": 0,
+            "paddingLimit": 96000,
+            "generatedFrames": 4896,
+            "extractedFrames": 0,
+            "discardedPrerollFrames": 0,
+            "outputFramesReady": 4896
+          },
+          {
+            "originFrame": 0,
+            "sourceCursorFrame": 7168,
+            "realFramesFed": 7168,
+            "paddingFramesFed": 0,
+            "paddingLimit": 96000,
+            "generatedFrames": 4896,
+            "extractedFrames": 0,
+            "discardedPrerollFrames": 0,
+            "outputFramesReady": 4896
+          },
+          {
+            "originFrame": 0,
+            "sourceCursorFrame": 7168,
+            "realFramesFed": 7168,
+            "paddingFramesFed": 0,
+            "paddingLimit": 96000,
+            "generatedFrames": 4896,
+            "extractedFrames": 0,
+            "discardedPrerollFrames": 0,
+            "outputFramesReady": 4896
+          }
+        ]
+      },
+      "allFinite": true,
+      "raw": {
+        "path": "local-evidence/soundtouch-grouped-fullseek-stems/unity-48000.f32le",
+        "frames": 144000,
+        "channels": 10,
+        "sampleRate": 48000,
+        "bytes": 5760000,
+        "sha256": "a743a8f2c9f5d86f6ad7aa29db7235f48676ee75f152aad0f87566dcafe83aa3"
+      },
+      "channels": [
+        {
+          "channel": 0,
+          "firstFrame": 24000,
+          "lastExclusive": 120000,
+          "referenceRMS": 0.03535533241413814,
+          "residualRMS": 9.523046888734306e-10,
+          "relativeRMS": 2.693524919292277e-8,
+          "peakResidual": 5.587935447692871e-9,
+          "passed": true
+        },
+        {
+          "channel": 1,
+          "firstFrame": 24000,
+          "lastExclusive": 120000,
+          "referenceRMS": 0.035355667008369535,
+          "residualRMS": 9.456458467113998e-10,
+          "relativeRMS": 2.674665553580259e-8,
+          "peakResidual": 6.075424607843161e-9,
+          "passed": true
+        }
+      ],
+      "snapshot": {
+        "sampleRate": 48000,
+        "nextFrame": 144000,
+        "generation": 1,
+        "disposed": false,
+        "state": {
+          "frame": 256,
+          "position": 2.994666666666667,
+          "playing": true,
+          "generation": 1,
+          "rate": 1,
+          "semitones": 0,
+          "keylock": true,
+          "effectiveSemitones": 0,
+          "anchorPosition": 0,
+          "positionKind": "nominal-not-measured-audible"
+        },
+        "sourceBytes": 7680000,
+        "retainedWholeSources": true,
+        "memoryLimit": "Whole caller-provided PCM plus bounded16epochs; opaque DSP heaps not counted.",
+        "pcmOwnership": "Descriptors are snapshotted; PCM arrays are borrowed immutable data for the transport lifetime. The worklet owns transferred storage.",
+        "renderedFrames": 144000,
+        "retiredEpochs": 0,
+        "retiredSummaries": [
+          {
+            "generation": 1,
+            "counters": [
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 149504,
+                "realFramesFed": 149504,
+                "paddingFramesFed": 0,
+                "paddingLimit": 96000,
+                "generatedFrames": 146880,
+                "extractedFrames": 143744,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 3136
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 149504,
+                "realFramesFed": 149504,
+                "paddingFramesFed": 0,
+                "paddingLimit": 96000,
+                "generatedFrames": 146880,
+                "extractedFrames": 143744,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 3136
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 149504,
+                "realFramesFed": 149504,
+                "paddingFramesFed": 0,
+                "paddingLimit": 96000,
+                "generatedFrames": 146880,
+                "extractedFrames": 143744,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 3136
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 149504,
+                "realFramesFed": 149504,
+                "paddingFramesFed": 0,
+                "paddingLimit": 96000,
+                "generatedFrames": 146880,
+                "extractedFrames": 143744,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 3136
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 149504,
+                "realFramesFed": 149504,
+                "paddingFramesFed": 0,
+                "paddingLimit": 96000,
+                "generatedFrames": 146880,
+                "extractedFrames": 143744,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 3136
+              }
+            ]
+          }
+        ],
+        "retiredSummaryLimit": 64,
+        "clockRetention": "Last two applied anchors; older queries reject explicitly.",
+        "epochs": [
+          {
+            "generation": 1,
+            "role": "active-or-retiring",
+            "counters": [
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 149504,
+                "realFramesFed": 149504,
+                "paddingFramesFed": 0,
+                "paddingLimit": 96000,
+                "generatedFrames": 146880,
+                "extractedFrames": 143744,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 3136
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 149504,
+                "realFramesFed": 149504,
+                "paddingFramesFed": 0,
+                "paddingLimit": 96000,
+                "generatedFrames": 146880,
+                "extractedFrames": 143744,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 3136
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 149504,
+                "realFramesFed": 149504,
+                "paddingFramesFed": 0,
+                "paddingLimit": 96000,
+                "generatedFrames": 146880,
+                "extractedFrames": 143744,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 3136
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 149504,
+                "realFramesFed": 149504,
+                "paddingFramesFed": 0,
+                "paddingLimit": 96000,
+                "generatedFrames": 146880,
+                "extractedFrames": 143744,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 3136
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 149504,
+                "realFramesFed": 149504,
+                "paddingFramesFed": 0,
+                "paddingLimit": 96000,
+                "generatedFrames": 146880,
+                "extractedFrames": 143744,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 3136
+              }
+            ],
+            "overlapGuide": {
+              "participants": 5,
+              "registered": 5,
+              "nextDecision": 30,
+              "retainedDecisions": 0,
+              "maxPendingDecisions": 4096,
+              "peakPendingDecisions": 1,
+              "produced": 30,
+              "consumed": 120,
+              "readers": [
+                {
+                  "index": 0,
+                  "next": 30,
+                  "disposed": false
+                },
+                {
+                  "index": 1,
+                  "next": 30,
+                  "disposed": false
+                },
+                {
+                  "index": 2,
+                  "next": 30,
+                  "disposed": false
+                },
+                {
+                  "index": 3,
+                  "next": 30,
+                  "disposed": false
+                },
+                {
+                  "index": 4,
+                  "next": 30,
+                  "disposed": false
+                }
+              ]
+            }
+          }
+        ],
+        "scope": "Forward pull-based experiment; nominal output endpoint, not measured audible source position or proved EOS tail preservation."
+      },
+      "disposed": {
+        "sampleRate": 48000,
+        "nextFrame": 144000,
+        "generation": 1,
+        "disposed": true,
+        "state": {
+          "frame": 144000,
+          "position": 2.994666666666667,
+          "playing": false,
+          "generation": 1,
+          "rate": 1,
+          "semitones": 0,
+          "keylock": true,
+          "effectiveSemitones": 0,
+          "anchorPosition": 2.994666666666667,
+          "positionKind": "nominal-not-measured-audible"
+        },
+        "sourceBytes": 0,
+        "retainedWholeSources": false,
+        "memoryLimit": "Whole caller-provided PCM plus bounded16epochs; opaque DSP heaps not counted.",
+        "pcmOwnership": "Descriptors are snapshotted; PCM arrays are borrowed immutable data for the transport lifetime. The worklet owns transferred storage.",
+        "renderedFrames": 144000,
+        "retiredEpochs": 1,
+        "retiredSummaries": [
+          {
+            "generation": 1,
+            "counters": [
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 149504,
+                "realFramesFed": 149504,
+                "paddingFramesFed": 0,
+                "paddingLimit": 96000,
+                "generatedFrames": 146880,
+                "extractedFrames": 143744,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 3136
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 149504,
+                "realFramesFed": 149504,
+                "paddingFramesFed": 0,
+                "paddingLimit": 96000,
+                "generatedFrames": 146880,
+                "extractedFrames": 143744,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 3136
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 149504,
+                "realFramesFed": 149504,
+                "paddingFramesFed": 0,
+                "paddingLimit": 96000,
+                "generatedFrames": 146880,
+                "extractedFrames": 143744,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 3136
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 149504,
+                "realFramesFed": 149504,
+                "paddingFramesFed": 0,
+                "paddingLimit": 96000,
+                "generatedFrames": 146880,
+                "extractedFrames": 143744,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 3136
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 149504,
+                "realFramesFed": 149504,
+                "paddingFramesFed": 0,
+                "paddingLimit": 96000,
+                "generatedFrames": 146880,
+                "extractedFrames": 143744,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 3136
+              }
+            ]
+          }
+        ],
+        "retiredSummaryLimit": 64,
+        "clockRetention": "Last two applied anchors; older queries reject explicitly.",
+        "epochs": [],
+        "scope": "Forward pull-based experiment; nominal output endpoint, not measured audible source position or proved EOS tail preservation."
+      }
+    },
+    {
+      "id": "tempo",
+      "rate": 1.08,
+      "semitones": 0,
+      "sampleRate": 48000,
+      "keylock": true,
+      "passed": true,
+      "errors": [],
+      "inputHashes": [
+        [
+          "53f7a34aa65aff636126c89e1a9d9198e6026246cd6a1ac39991899d2c4280bb",
+          "955f3cd474f0685303d5f7ee4a464a4ef9bf3bbdef0be18e961e84f25a3f6a2c"
+        ],
+        [
+          "fc793b59c7b1df88cd920a6d535adaa698eccec434a3c5114e9972b2de6dac7f",
+          "2568f8b414329ef3835c646a9c72d909b4c8ba2122ccebae7a32a5ace5f683cf"
+        ],
+        [
+          "c401ee15d671b464a4425d02047866c9506017dec40bdcd2fe4f516b88bdc440",
+          "cbbf95bc2b688496cc437dfdceeaf79f6a62c1e9485e050de3973d171be46bb5"
+        ],
+        [
+          "00f8b643fc96e3d83da6277b059a598465d8f17f878dff41fdd6fd38be2b4aa1",
+          "566a9e278345aa8e6990b5c492bce7406cfd623e9b2dc2bd55bda78fcda7e4bf"
+        ],
+        [
+          "de0fa892f8b3590b0a3b2abaea7d00d0e3576cc3231e0de0f9e21825e25fe7f2",
+          "be80ade21be6796d16c549f53af823856665c9383dc8d33a657e6e4173bcb903"
+        ]
+      ],
+      "ack": {
+        "frame": 256,
+        "position": 0,
+        "playing": true,
+        "generation": 1,
+        "rate": 1.08,
+        "semitones": 0,
+        "keylock": true,
+        "effectiveSemitones": 0,
+        "ready": true,
+        "superseded": [],
+        "preparationMilliseconds": 8.353875000000016,
+        "preparationClock": "performance.now",
+        "positionKind": "nominal-not-measured-audible",
+        "counters": [
+          {
+            "originFrame": 0,
+            "sourceCursorFrame": 7168,
+            "realFramesFed": 7168,
+            "paddingFramesFed": 0,
+            "paddingLimit": 96000,
+            "generatedFrames": 4800,
+            "extractedFrames": 0,
+            "discardedPrerollFrames": 0,
+            "outputFramesReady": 4800
+          },
+          {
+            "originFrame": 0,
+            "sourceCursorFrame": 7168,
+            "realFramesFed": 7168,
+            "paddingFramesFed": 0,
+            "paddingLimit": 96000,
+            "generatedFrames": 4800,
+            "extractedFrames": 0,
+            "discardedPrerollFrames": 0,
+            "outputFramesReady": 4800
+          },
+          {
+            "originFrame": 0,
+            "sourceCursorFrame": 7168,
+            "realFramesFed": 7168,
+            "paddingFramesFed": 0,
+            "paddingLimit": 96000,
+            "generatedFrames": 4800,
+            "extractedFrames": 0,
+            "discardedPrerollFrames": 0,
+            "outputFramesReady": 4800
+          },
+          {
+            "originFrame": 0,
+            "sourceCursorFrame": 7168,
+            "realFramesFed": 7168,
+            "paddingFramesFed": 0,
+            "paddingLimit": 96000,
+            "generatedFrames": 4800,
+            "extractedFrames": 0,
+            "discardedPrerollFrames": 0,
+            "outputFramesReady": 4800
+          },
+          {
+            "originFrame": 0,
+            "sourceCursorFrame": 7168,
+            "realFramesFed": 7168,
+            "paddingFramesFed": 0,
+            "paddingLimit": 96000,
+            "generatedFrames": 4800,
+            "extractedFrames": 0,
+            "discardedPrerollFrames": 0,
+            "outputFramesReady": 4800
+          }
+        ]
+      },
+      "allFinite": true,
+      "raw": {
+        "path": "local-evidence/soundtouch-grouped-fullseek-stems/tempo-48000.f32le",
+        "frames": 144000,
+        "channels": 10,
+        "sampleRate": 48000,
+        "bytes": 5760000,
+        "sha256": "07dca70d191cd07c31b45677ff428655e6b6a2079b5028bbc09df4e76e999cc0"
+      },
+      "channels": [
+        {
+          "channel": 0,
+          "firstFrame": 24000,
+          "lastExclusive": 120000,
+          "referenceRMS": 0.03526684653465564,
+          "residualRMS": 9.706919377842644e-10,
+          "relativeRMS": 2.7524205682251616e-8,
+          "peakResidual": 7.450580596923828e-9,
+          "passed": true
+        },
+        {
+          "channel": 1,
+          "firstFrame": 24000,
+          "lastExclusive": 120000,
+          "referenceRMS": 0.03530659742638857,
+          "residualRMS": 9.661266114045687e-10,
+          "relativeRMS": 2.736391161507039e-8,
+          "peakResidual": 8.381903171539307e-9,
+          "passed": true
+        }
+      ],
+      "snapshot": {
+        "sampleRate": 48000,
+        "nextFrame": 144000,
+        "generation": 1,
+        "disposed": false,
+        "state": {
+          "frame": 256,
+          "position": 3.2342400000000002,
+          "playing": true,
+          "generation": 1,
+          "rate": 1.08,
+          "semitones": 0,
+          "keylock": true,
+          "effectiveSemitones": 0,
+          "anchorPosition": 0,
+          "positionKind": "nominal-not-measured-audible"
+        },
+        "sourceBytes": 7680000,
+        "retainedWholeSources": true,
+        "memoryLimit": "Whole caller-provided PCM plus bounded16epochs; opaque DSP heaps not counted.",
+        "pcmOwnership": "Descriptors are snapshotted; PCM arrays are borrowed immutable data for the transport lifetime. The worklet owns transferred storage.",
+        "renderedFrames": 144000,
+        "retiredEpochs": 0,
+        "retiredSummaries": [
+          {
+            "generation": 1,
+            "counters": [
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 157696,
+                "realFramesFed": 157696,
+                "paddingFramesFed": 0,
+                "paddingLimit": 96000,
+                "generatedFrames": 144000,
+                "extractedFrames": 143744,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 256
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 157696,
+                "realFramesFed": 157696,
+                "paddingFramesFed": 0,
+                "paddingLimit": 96000,
+                "generatedFrames": 144000,
+                "extractedFrames": 143744,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 256
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 157696,
+                "realFramesFed": 157696,
+                "paddingFramesFed": 0,
+                "paddingLimit": 96000,
+                "generatedFrames": 144000,
+                "extractedFrames": 143744,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 256
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 157696,
+                "realFramesFed": 157696,
+                "paddingFramesFed": 0,
+                "paddingLimit": 96000,
+                "generatedFrames": 144000,
+                "extractedFrames": 143744,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 256
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 157696,
+                "realFramesFed": 157696,
+                "paddingFramesFed": 0,
+                "paddingLimit": 96000,
+                "generatedFrames": 144000,
+                "extractedFrames": 143744,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 256
+              }
+            ]
+          }
+        ],
+        "retiredSummaryLimit": 64,
+        "clockRetention": "Last two applied anchors; older queries reject explicitly.",
+        "epochs": [
+          {
+            "generation": 1,
+            "role": "active-or-retiring",
+            "counters": [
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 157696,
+                "realFramesFed": 157696,
+                "paddingFramesFed": 0,
+                "paddingLimit": 96000,
+                "generatedFrames": 144000,
+                "extractedFrames": 143744,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 256
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 157696,
+                "realFramesFed": 157696,
+                "paddingFramesFed": 0,
+                "paddingLimit": 96000,
+                "generatedFrames": 144000,
+                "extractedFrames": 143744,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 256
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 157696,
+                "realFramesFed": 157696,
+                "paddingFramesFed": 0,
+                "paddingLimit": 96000,
+                "generatedFrames": 144000,
+                "extractedFrames": 143744,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 256
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 157696,
+                "realFramesFed": 157696,
+                "paddingFramesFed": 0,
+                "paddingLimit": 96000,
+                "generatedFrames": 144000,
+                "extractedFrames": 143744,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 256
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 157696,
+                "realFramesFed": 157696,
+                "paddingFramesFed": 0,
+                "paddingLimit": 96000,
+                "generatedFrames": 144000,
+                "extractedFrames": 143744,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 256
+              }
+            ],
+            "overlapGuide": {
+              "participants": 5,
+              "registered": 5,
+              "nextDecision": 30,
+              "retainedDecisions": 0,
+              "maxPendingDecisions": 4096,
+              "peakPendingDecisions": 1,
+              "produced": 30,
+              "consumed": 120,
+              "readers": [
+                {
+                  "index": 0,
+                  "next": 30,
+                  "disposed": false
+                },
+                {
+                  "index": 1,
+                  "next": 30,
+                  "disposed": false
+                },
+                {
+                  "index": 2,
+                  "next": 30,
+                  "disposed": false
+                },
+                {
+                  "index": 3,
+                  "next": 30,
+                  "disposed": false
+                },
+                {
+                  "index": 4,
+                  "next": 30,
+                  "disposed": false
+                }
+              ]
+            }
+          }
+        ],
+        "scope": "Forward pull-based experiment; nominal output endpoint, not measured audible source position or proved EOS tail preservation."
+      },
+      "disposed": {
+        "sampleRate": 48000,
+        "nextFrame": 144000,
+        "generation": 1,
+        "disposed": true,
+        "state": {
+          "frame": 144000,
+          "position": 3.2342400000000002,
+          "playing": false,
+          "generation": 1,
+          "rate": 1.08,
+          "semitones": 0,
+          "keylock": true,
+          "effectiveSemitones": 0,
+          "anchorPosition": 3.2342400000000002,
+          "positionKind": "nominal-not-measured-audible"
+        },
+        "sourceBytes": 0,
+        "retainedWholeSources": false,
+        "memoryLimit": "Whole caller-provided PCM plus bounded16epochs; opaque DSP heaps not counted.",
+        "pcmOwnership": "Descriptors are snapshotted; PCM arrays are borrowed immutable data for the transport lifetime. The worklet owns transferred storage.",
+        "renderedFrames": 144000,
+        "retiredEpochs": 1,
+        "retiredSummaries": [
+          {
+            "generation": 1,
+            "counters": [
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 157696,
+                "realFramesFed": 157696,
+                "paddingFramesFed": 0,
+                "paddingLimit": 96000,
+                "generatedFrames": 144000,
+                "extractedFrames": 143744,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 256
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 157696,
+                "realFramesFed": 157696,
+                "paddingFramesFed": 0,
+                "paddingLimit": 96000,
+                "generatedFrames": 144000,
+                "extractedFrames": 143744,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 256
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 157696,
+                "realFramesFed": 157696,
+                "paddingFramesFed": 0,
+                "paddingLimit": 96000,
+                "generatedFrames": 144000,
+                "extractedFrames": 143744,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 256
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 157696,
+                "realFramesFed": 157696,
+                "paddingFramesFed": 0,
+                "paddingLimit": 96000,
+                "generatedFrames": 144000,
+                "extractedFrames": 143744,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 256
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 157696,
+                "realFramesFed": 157696,
+                "paddingFramesFed": 0,
+                "paddingLimit": 96000,
+                "generatedFrames": 144000,
+                "extractedFrames": 143744,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 256
+              }
+            ]
+          }
+        ],
+        "retiredSummaryLimit": 64,
+        "clockRetention": "Last two applied anchors; older queries reject explicitly.",
+        "epochs": [],
+        "scope": "Forward pull-based experiment; nominal output endpoint, not measured audible source position or proved EOS tail preservation."
+      }
+    },
+    {
+      "id": "shifted",
+      "rate": 1.08,
+      "semitones": 2,
+      "sampleRate": 48000,
+      "keylock": true,
+      "passed": true,
+      "errors": [],
+      "inputHashes": [
+        [
+          "53f7a34aa65aff636126c89e1a9d9198e6026246cd6a1ac39991899d2c4280bb",
+          "955f3cd474f0685303d5f7ee4a464a4ef9bf3bbdef0be18e961e84f25a3f6a2c"
+        ],
+        [
+          "fc793b59c7b1df88cd920a6d535adaa698eccec434a3c5114e9972b2de6dac7f",
+          "2568f8b414329ef3835c646a9c72d909b4c8ba2122ccebae7a32a5ace5f683cf"
+        ],
+        [
+          "c401ee15d671b464a4425d02047866c9506017dec40bdcd2fe4f516b88bdc440",
+          "cbbf95bc2b688496cc437dfdceeaf79f6a62c1e9485e050de3973d171be46bb5"
+        ],
+        [
+          "00f8b643fc96e3d83da6277b059a598465d8f17f878dff41fdd6fd38be2b4aa1",
+          "566a9e278345aa8e6990b5c492bce7406cfd623e9b2dc2bd55bda78fcda7e4bf"
+        ],
+        [
+          "de0fa892f8b3590b0a3b2abaea7d00d0e3576cc3231e0de0f9e21825e25fe7f2",
+          "be80ade21be6796d16c549f53af823856665c9383dc8d33a657e6e4173bcb903"
+        ]
+      ],
+      "ack": {
+        "frame": 256,
+        "position": 0,
+        "playing": true,
+        "generation": 1,
+        "rate": 1.08,
+        "semitones": 2,
+        "keylock": true,
+        "effectiveSemitones": 2,
+        "ready": true,
+        "superseded": [],
+        "preparationMilliseconds": 7.1693330000000515,
+        "preparationClock": "performance.now",
+        "positionKind": "nominal-not-measured-audible",
+        "counters": [
+          {
+            "originFrame": 0,
+            "sourceCursorFrame": 7168,
+            "realFramesFed": 7168,
+            "paddingFramesFed": 0,
+            "paddingLimit": 96000,
+            "generatedFrames": 4405,
+            "extractedFrames": 0,
+            "discardedPrerollFrames": 0,
+            "outputFramesReady": 4405
+          },
+          {
+            "originFrame": 0,
+            "sourceCursorFrame": 7168,
+            "realFramesFed": 7168,
+            "paddingFramesFed": 0,
+            "paddingLimit": 96000,
+            "generatedFrames": 4405,
+            "extractedFrames": 0,
+            "discardedPrerollFrames": 0,
+            "outputFramesReady": 4405
+          },
+          {
+            "originFrame": 0,
+            "sourceCursorFrame": 7168,
+            "realFramesFed": 7168,
+            "paddingFramesFed": 0,
+            "paddingLimit": 96000,
+            "generatedFrames": 4405,
+            "extractedFrames": 0,
+            "discardedPrerollFrames": 0,
+            "outputFramesReady": 4405
+          },
+          {
+            "originFrame": 0,
+            "sourceCursorFrame": 7168,
+            "realFramesFed": 7168,
+            "paddingFramesFed": 0,
+            "paddingLimit": 96000,
+            "generatedFrames": 4405,
+            "extractedFrames": 0,
+            "discardedPrerollFrames": 0,
+            "outputFramesReady": 4405
+          },
+          {
+            "originFrame": 0,
+            "sourceCursorFrame": 7168,
+            "realFramesFed": 7168,
+            "paddingFramesFed": 0,
+            "paddingLimit": 96000,
+            "generatedFrames": 4405,
+            "extractedFrames": 0,
+            "discardedPrerollFrames": 0,
+            "outputFramesReady": 4405
+          }
+        ]
+      },
+      "allFinite": true,
+      "raw": {
+        "path": "local-evidence/soundtouch-grouped-fullseek-stems/shifted-48000.f32le",
+        "frames": 144000,
+        "channels": 10,
+        "sampleRate": 48000,
+        "bytes": 5760000,
+        "sha256": "5fc764b9b45c7ae3a4af45991795e972eda9f41a5f20bc8be48a8e64fd855e34"
+      },
+      "channels": [
+        {
+          "channel": 0,
+          "firstFrame": 24000,
+          "lastExclusive": 120000,
+          "referenceRMS": 0.03530812607794586,
+          "residualRMS": 1.5517067035672096e-9,
+          "relativeRMS": 4.39475802295958e-8,
+          "peakResidual": 9.313225746154785e-9,
+          "passed": true
+        },
+        {
+          "channel": 1,
+          "firstFrame": 24000,
+          "lastExclusive": 120000,
+          "referenceRMS": 0.035333541983535305,
+          "residualRMS": 1.5471483137583287e-9,
+          "relativeRMS": 4.378695785662438e-8,
+          "peakResidual": 9.313225746154785e-9,
+          "passed": true
+        }
+      ],
+      "snapshot": {
+        "sampleRate": 48000,
+        "nextFrame": 144000,
+        "generation": 1,
+        "disposed": false,
+        "state": {
+          "frame": 256,
+          "position": 3.2342400000000002,
+          "playing": true,
+          "generation": 1,
+          "rate": 1.08,
+          "semitones": 2,
+          "keylock": true,
+          "effectiveSemitones": 2,
+          "anchorPosition": 0,
+          "positionKind": "nominal-not-measured-audible"
+        },
+        "sourceBytes": 7680000,
+        "retainedWholeSources": true,
+        "memoryLimit": "Whole caller-provided PCM plus bounded16epochs; opaque DSP heaps not counted.",
+        "pcmOwnership": "Descriptors are snapshotted; PCM arrays are borrowed immutable data for the transport lifetime. The worklet owns transferred storage.",
+        "renderedFrames": 144000,
+        "retiredEpochs": 0,
+        "retiredSummaries": [
+          {
+            "generation": 1,
+            "counters": [
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 159744,
+                "realFramesFed": 159744,
+                "paddingFramesFed": 0,
+                "paddingLimit": 96000,
+                "generatedFrames": 145352,
+                "extractedFrames": 143744,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 1608
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 159744,
+                "realFramesFed": 159744,
+                "paddingFramesFed": 0,
+                "paddingLimit": 96000,
+                "generatedFrames": 145352,
+                "extractedFrames": 143744,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 1608
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 159744,
+                "realFramesFed": 159744,
+                "paddingFramesFed": 0,
+                "paddingLimit": 96000,
+                "generatedFrames": 145352,
+                "extractedFrames": 143744,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 1608
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 159744,
+                "realFramesFed": 159744,
+                "paddingFramesFed": 0,
+                "paddingLimit": 96000,
+                "generatedFrames": 145352,
+                "extractedFrames": 143744,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 1608
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 159744,
+                "realFramesFed": 159744,
+                "paddingFramesFed": 0,
+                "paddingLimit": 96000,
+                "generatedFrames": 145352,
+                "extractedFrames": 143744,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 1608
+              }
+            ]
+          }
+        ],
+        "retiredSummaryLimit": 64,
+        "clockRetention": "Last two applied anchors; older queries reject explicitly.",
+        "epochs": [
+          {
+            "generation": 1,
+            "role": "active-or-retiring",
+            "counters": [
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 159744,
+                "realFramesFed": 159744,
+                "paddingFramesFed": 0,
+                "paddingLimit": 96000,
+                "generatedFrames": 145352,
+                "extractedFrames": 143744,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 1608
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 159744,
+                "realFramesFed": 159744,
+                "paddingFramesFed": 0,
+                "paddingLimit": 96000,
+                "generatedFrames": 145352,
+                "extractedFrames": 143744,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 1608
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 159744,
+                "realFramesFed": 159744,
+                "paddingFramesFed": 0,
+                "paddingLimit": 96000,
+                "generatedFrames": 145352,
+                "extractedFrames": 143744,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 1608
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 159744,
+                "realFramesFed": 159744,
+                "paddingFramesFed": 0,
+                "paddingLimit": 96000,
+                "generatedFrames": 145352,
+                "extractedFrames": 143744,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 1608
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 159744,
+                "realFramesFed": 159744,
+                "paddingFramesFed": 0,
+                "paddingLimit": 96000,
+                "generatedFrames": 145352,
+                "extractedFrames": 143744,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 1608
+              }
+            ],
+            "overlapGuide": {
+              "participants": 5,
+              "registered": 5,
+              "nextDecision": 33,
+              "retainedDecisions": 0,
+              "maxPendingDecisions": 4096,
+              "peakPendingDecisions": 1,
+              "produced": 33,
+              "consumed": 132,
+              "readers": [
+                {
+                  "index": 0,
+                  "next": 33,
+                  "disposed": false
+                },
+                {
+                  "index": 1,
+                  "next": 33,
+                  "disposed": false
+                },
+                {
+                  "index": 2,
+                  "next": 33,
+                  "disposed": false
+                },
+                {
+                  "index": 3,
+                  "next": 33,
+                  "disposed": false
+                },
+                {
+                  "index": 4,
+                  "next": 33,
+                  "disposed": false
+                }
+              ]
+            }
+          }
+        ],
+        "scope": "Forward pull-based experiment; nominal output endpoint, not measured audible source position or proved EOS tail preservation."
+      },
+      "disposed": {
+        "sampleRate": 48000,
+        "nextFrame": 144000,
+        "generation": 1,
+        "disposed": true,
+        "state": {
+          "frame": 144000,
+          "position": 3.2342400000000002,
+          "playing": false,
+          "generation": 1,
+          "rate": 1.08,
+          "semitones": 2,
+          "keylock": true,
+          "effectiveSemitones": 2,
+          "anchorPosition": 3.2342400000000002,
+          "positionKind": "nominal-not-measured-audible"
+        },
+        "sourceBytes": 0,
+        "retainedWholeSources": false,
+        "memoryLimit": "Whole caller-provided PCM plus bounded16epochs; opaque DSP heaps not counted.",
+        "pcmOwnership": "Descriptors are snapshotted; PCM arrays are borrowed immutable data for the transport lifetime. The worklet owns transferred storage.",
+        "renderedFrames": 144000,
+        "retiredEpochs": 1,
+        "retiredSummaries": [
+          {
+            "generation": 1,
+            "counters": [
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 159744,
+                "realFramesFed": 159744,
+                "paddingFramesFed": 0,
+                "paddingLimit": 96000,
+                "generatedFrames": 145352,
+                "extractedFrames": 143744,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 1608
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 159744,
+                "realFramesFed": 159744,
+                "paddingFramesFed": 0,
+                "paddingLimit": 96000,
+                "generatedFrames": 145352,
+                "extractedFrames": 143744,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 1608
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 159744,
+                "realFramesFed": 159744,
+                "paddingFramesFed": 0,
+                "paddingLimit": 96000,
+                "generatedFrames": 145352,
+                "extractedFrames": 143744,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 1608
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 159744,
+                "realFramesFed": 159744,
+                "paddingFramesFed": 0,
+                "paddingLimit": 96000,
+                "generatedFrames": 145352,
+                "extractedFrames": 143744,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 1608
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 159744,
+                "realFramesFed": 159744,
+                "paddingFramesFed": 0,
+                "paddingLimit": 96000,
+                "generatedFrames": 145352,
+                "extractedFrames": 143744,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 1608
+              }
+            ]
+          }
+        ],
+        "retiredSummaryLimit": 64,
+        "clockRetention": "Last two applied anchors; older queries reject explicitly.",
+        "epochs": [],
+        "scope": "Forward pull-based experiment; nominal output endpoint, not measured audible source position or proved EOS tail preservation."
+      }
+    }
+  ],
+  "passed": 6,
+  "failed": 0,
+  "fullParityVerified": false
+}

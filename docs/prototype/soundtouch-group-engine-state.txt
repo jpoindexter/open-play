@@ -1,0 +1,52 @@
+Browser tab: 61, Title: "Open Play — experimental engine integration", URL: "http://127.0.0.1:18815/".
+0 AXWebArea Open Play — experimental engine integration, URL: 127.0.0.1:18815/
+	1 heading Grouped nonidentical-stems AudioEngine integration, Value: 1
+		2 text Grouped nonidentical-stems AudioEngine integration
+	3 text Runs the existing AudioEngine with an experimental bounded SoundTouch adapter. Physical output muted. This does not change the installed app.
+	4 button (disabled) Run four engine captures, ID: run
+	5 text Capture finished: 1/2 bounded engine cases accepted. Full parity remains unverified.
+	6 text [
+  {
+    "id": "five-group-44100",
+    "passed": true,
+    "errors": [],
+    "frames": 875520,
+    "toneChecks": 56,
+    "toneFailures": [],
+    "pause": true,
+    "clock": 0.0052490234375
+  },
+  {
+    "id": "five-group-48000",
+    "passed": false,
+    "errors": [],
+    "frames": 957824,
+    "toneChecks": 56,
+    "toneFailures": [
+      {
+        "frames": 48000,
+        "rms": 0.017342330273734507,
+        "peak": 0.025000454857945442,
+        "hz": 438.8301240130067,
+        "source": 1,
+        "channel": 0,
+        "expectedHz": 442.250047033893,
+        "passed": false
+      },
+      {
+        "frames": 48000,
+        "rms": 0.017331015416732484,
+        "peak": 0.025001052767038345,
+        "hz": 701.4551727444866,
+        "source": 2,
+        "channel": 0,
+        "expectedHz": 698.17139404843,
+        "passed": false
+      }
+    ],
+    "pause": true,
+    "clock": 0.005706787109375
+  }
+]
+
+The focused UI element is 0 AXWebArea Open Play — experimental engine integration, URL: 127.0.0.1:18815/

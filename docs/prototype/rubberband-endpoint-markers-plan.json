@@ -1,0 +1,65 @@
+{
+  "declaredAt": "2026-10-17T18:58:38.519058+00:00",
+  "scope": "Known gated tones through installed native R3 C API in RealTime mode, driven by offline Python. Whole untrimmed outputs. No app integration, physical callbacks, realtime deadlines, music/reference/seek acceptance.",
+  "library": "/opt/homebrew/Cellar/rubberband/4.0.0/lib/librubberband.3.dylib",
+  "librarySHA256": "04069acff8ca0db7529cd1b6d73e2bc8a6d2729ea77351a70c3e3f4181c8296c",
+  "headerSHA256": "ccdb6fbad995ae924219ea89598b2dafbcea2e4fb4bb5e211b3dde589f7b9453",
+  "cppHeaderSHA256": "deaf2147bd57a72aeec876f8dd76a6e282282d8dd1f52d8aa01f93fa70b5ed44",
+  "scriptSHA256": "aef1f025b27b9e3fb37169da48a5e2c739f4f6563e875eed83bea0941b1df34f",
+  "sampleRates": [
+    44100,
+    48000
+  ],
+  "rates": [
+    1,
+    1.08,
+    1.25
+  ],
+  "pitchSemitones": 2,
+  "channels": 10,
+  "sourceDurationSeconds": 4,
+  "markersSeconds": [
+    [
+      0.2,
+      0.3
+    ],
+    [
+      1.5,
+      1.6
+    ],
+    [
+      3.9,
+      4
+    ]
+  ],
+  "fadeSeconds": 0.005,
+  "stemAmplitude": 0.025,
+  "leftHz": [
+    197,
+    311,
+    463,
+    719
+  ],
+  "rightHz": [
+    257,
+    383,
+    593,
+    887
+  ],
+  "sourcePhases": [
+    0.13,
+    0.37,
+    0.73,
+    1.17
+  ],
+  "inputProcessBlockFrames": 2048,
+  "optionsHex": "0x34010001",
+  "compensation": "Prepend getPreferredStartPad zeros; analytical output coordinates add getStartDelay. Do not fit/crop output or alter input endpoint.",
+  "markerMeasurement": "Energy centroid of each isolated stem/channel within fixed source-marker start/rate-.15 .. end/rate+.15 output seconds, API delay added. Compare with exact input energy centroid divided by rate. No alignment/gain/phase fit.",
+  "criteria": {
+    "wholeFinite": true,
+    "markerCentroidErrorSecondsMax": 0.01,
+    "exactPostAPIDelayDurationFrames": true
+  },
+  "fullParityVerified": false
+}

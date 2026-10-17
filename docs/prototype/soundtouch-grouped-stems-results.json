@@ -1,0 +1,2571 @@
+{
+  "plan": {
+    "declaredAt": "2026-10-17T18:25:28.692Z",
+    "scope": "Actual serial SoundTouchTransport5positional sources; original is exact sum of4different known synthetic stems. Proposed unmuted recombination criterion, not reference-measured Serato sonic behavior or source model quality.",
+    "cases": [
+      {
+        "id": "unity",
+        "rate": 1,
+        "semitones": 0,
+        "sampleRate": 44100,
+        "keylock": true
+      },
+      {
+        "id": "tempo",
+        "rate": 1.08,
+        "semitones": 0,
+        "sampleRate": 44100,
+        "keylock": true
+      },
+      {
+        "id": "shifted",
+        "rate": 1.08,
+        "semitones": 2,
+        "sampleRate": 44100,
+        "keylock": true
+      },
+      {
+        "id": "unity",
+        "rate": 1,
+        "semitones": 0,
+        "sampleRate": 48000,
+        "keylock": true
+      },
+      {
+        "id": "tempo",
+        "rate": 1.08,
+        "semitones": 0,
+        "sampleRate": 48000,
+        "keylock": true
+      },
+      {
+        "id": "shifted",
+        "rate": 1.08,
+        "semitones": 2,
+        "sampleRate": 48000,
+        "keylock": true
+      }
+    ],
+    "fixture": {
+      "seconds": 4,
+      "stemLeftHz": [
+        197,
+        311,
+        463,
+        719
+      ],
+      "stemRightHz": [
+        257,
+        383,
+        593,
+        887
+      ],
+      "amplitudeEach": 0.025,
+      "phasePerStem": [
+        0.13,
+        0.37,
+        0.73,
+        1.17
+      ],
+      "original": "samplewise Float32 sum of four stems; no separation model"
+    },
+    "windowSeconds": [
+      0.5,
+      2.5
+    ],
+    "relativeRMSResidualMax": 0.03,
+    "acceptanceRationale": "Preserve the existing3percent stem reconstruction budget when comparing the processed original to the sum of processed complementary stems. Shared command frames alone do not imply waveform coherence.",
+    "capture": "Whole3s/quantum rounded output all10channels; every sample finite; original PCM retained exclusive; no gain fit/delay fit/phase repair/trim.",
+    "exclusions": [
+      "Reference sonic parity",
+      "Native/browser runtime",
+      "Musical stems/model reconstruction",
+      "Exact source cursor",
+      "Physical outputs"
+    ]
+  },
+  "sourceSHA256": "eff5ab62fbcb1038623e0fc17d39cfa31843fde331f0c5d2885388d205172682",
+  "cases": [
+    {
+      "id": "unity",
+      "rate": 1,
+      "semitones": 0,
+      "sampleRate": 44100,
+      "keylock": true,
+      "passed": true,
+      "errors": [],
+      "inputHashes": [
+        [
+          "2725fd165d551c060b64f34e8819c7c013305b1f9d7e6c23a13cba8426192e37",
+          "2ae640a23ef1bd431246a77915503331671bfe708397b36e5bd28332a43a5201"
+        ],
+        [
+          "0b400414d881f8027cd0f4e30036cd38316d6770d90d0a652f2527d2f013507a",
+          "de671b1a9f59e8489afd87c22065f1d51f6c68d5d8e3b09a5dbfbae3d9dc3ae7"
+        ],
+        [
+          "ea71aa71c89fb0d4aff20e77ccd5f26d54ebf9caed2365c845e784eef8bfe7c8",
+          "11f0da3d31ddf380fd006ed6bbb3806d8ca9435df970109666052ce9113fe2e6"
+        ],
+        [
+          "06e411c8eeec77c077ffce2246d77a8128a4e4d1dc692433e45418684e7f1ba3",
+          "c6ae35b40b9e0e76460933e6afba73deff1066f1ef188212c1cc96fa4b38b23e"
+        ],
+        [
+          "b02c7228ae0de03ceeb2356e5ef97a2f2cfa2482e108182d2259c5e644fe1fcf",
+          "1fa200302ab5b918783315dee2f323d1f12edb6a7009ccf73532a21e99a9bf1a"
+        ]
+      ],
+      "ack": {
+        "frame": 256,
+        "position": 0,
+        "playing": true,
+        "generation": 1,
+        "rate": 1,
+        "semitones": 0,
+        "keylock": true,
+        "effectiveSemitones": 0,
+        "ready": true,
+        "superseded": [],
+        "preparationMilliseconds": 20.22699999999999,
+        "preparationClock": "performance.now",
+        "positionKind": "nominal-not-measured-audible",
+        "counters": [
+          {
+            "originFrame": 0,
+            "sourceCursorFrame": 7168,
+            "realFramesFed": 7168,
+            "paddingFramesFed": 0,
+            "paddingLimit": 88200,
+            "generatedFrames": 4499,
+            "extractedFrames": 0,
+            "discardedPrerollFrames": 0,
+            "outputFramesReady": 4499
+          },
+          {
+            "originFrame": 0,
+            "sourceCursorFrame": 7168,
+            "realFramesFed": 7168,
+            "paddingFramesFed": 0,
+            "paddingLimit": 88200,
+            "generatedFrames": 4499,
+            "extractedFrames": 0,
+            "discardedPrerollFrames": 0,
+            "outputFramesReady": 4499
+          },
+          {
+            "originFrame": 0,
+            "sourceCursorFrame": 7168,
+            "realFramesFed": 7168,
+            "paddingFramesFed": 0,
+            "paddingLimit": 88200,
+            "generatedFrames": 4499,
+            "extractedFrames": 0,
+            "discardedPrerollFrames": 0,
+            "outputFramesReady": 4499
+          },
+          {
+            "originFrame": 0,
+            "sourceCursorFrame": 7168,
+            "realFramesFed": 7168,
+            "paddingFramesFed": 0,
+            "paddingLimit": 88200,
+            "generatedFrames": 4499,
+            "extractedFrames": 0,
+            "discardedPrerollFrames": 0,
+            "outputFramesReady": 4499
+          },
+          {
+            "originFrame": 0,
+            "sourceCursorFrame": 7168,
+            "realFramesFed": 7168,
+            "paddingFramesFed": 0,
+            "paddingLimit": 88200,
+            "generatedFrames": 4499,
+            "extractedFrames": 0,
+            "discardedPrerollFrames": 0,
+            "outputFramesReady": 4499
+          }
+        ]
+      },
+      "allFinite": true,
+      "raw": {
+        "path": "local-evidence/soundtouch-grouped-stems/unity-44100.f32le",
+        "frames": 132352,
+        "channels": 10,
+        "sampleRate": 44100,
+        "bytes": 5294080,
+        "sha256": "6b138f0ef898316b9421b25a87bdd72dad18f9a29444c0f1c48150e1d9f519ca"
+      },
+      "channels": [
+        {
+          "channel": 0,
+          "firstFrame": 22050,
+          "lastExclusive": 110250,
+          "referenceRMS": 0.03535533904883753,
+          "residualRMS": 9.5769043448822e-10,
+          "relativeRMS": 2.7087576028201275e-8,
+          "peakResidual": 3.725290298461914e-9,
+          "passed": true
+        },
+        {
+          "channel": 1,
+          "firstFrame": 22050,
+          "lastExclusive": 110250,
+          "referenceRMS": 0.03535533906247692,
+          "residualRMS": 9.488656168619925e-10,
+          "relativeRMS": 2.6837972482324058e-8,
+          "peakResidual": 3.725290298461914e-9,
+          "passed": true
+        }
+      ],
+      "snapshot": {
+        "sampleRate": 44100,
+        "nextFrame": 132352,
+        "generation": 1,
+        "disposed": false,
+        "state": {
+          "frame": 256,
+          "position": 2.995374149659864,
+          "playing": true,
+          "generation": 1,
+          "rate": 1,
+          "semitones": 0,
+          "keylock": true,
+          "effectiveSemitones": 0,
+          "anchorPosition": 0,
+          "positionKind": "nominal-not-measured-audible"
+        },
+        "sourceBytes": 7056000,
+        "retainedWholeSources": true,
+        "memoryLimit": "Whole caller-provided PCM plus bounded16epochs; opaque DSP heaps not counted.",
+        "pcmOwnership": "Descriptors are snapshotted; PCM arrays are borrowed immutable data for the transport lifetime. The worklet owns transferred storage.",
+        "renderedFrames": 132352,
+        "retiredEpochs": 0,
+        "retiredSummaries": [
+          {
+            "generation": 1,
+            "counters": [
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 137216,
+                "realFramesFed": 137216,
+                "paddingFramesFed": 0,
+                "paddingLimit": 88200,
+                "generatedFrames": 134970,
+                "extractedFrames": 132096,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 2874
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 137216,
+                "realFramesFed": 137216,
+                "paddingFramesFed": 0,
+                "paddingLimit": 88200,
+                "generatedFrames": 134970,
+                "extractedFrames": 132096,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 2874
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 137216,
+                "realFramesFed": 137216,
+                "paddingFramesFed": 0,
+                "paddingLimit": 88200,
+                "generatedFrames": 134970,
+                "extractedFrames": 132096,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 2874
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 137216,
+                "realFramesFed": 137216,
+                "paddingFramesFed": 0,
+                "paddingLimit": 88200,
+                "generatedFrames": 134970,
+                "extractedFrames": 132096,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 2874
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 137216,
+                "realFramesFed": 137216,
+                "paddingFramesFed": 0,
+                "paddingLimit": 88200,
+                "generatedFrames": 134970,
+                "extractedFrames": 132096,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 2874
+              }
+            ]
+          }
+        ],
+        "retiredSummaryLimit": 64,
+        "clockRetention": "Last two applied anchors; older queries reject explicitly.",
+        "epochs": [
+          {
+            "generation": 1,
+            "role": "active-or-retiring",
+            "counters": [
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 137216,
+                "realFramesFed": 137216,
+                "paddingFramesFed": 0,
+                "paddingLimit": 88200,
+                "generatedFrames": 134970,
+                "extractedFrames": 132096,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 2874
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 137216,
+                "realFramesFed": 137216,
+                "paddingFramesFed": 0,
+                "paddingLimit": 88200,
+                "generatedFrames": 134970,
+                "extractedFrames": 132096,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 2874
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 137216,
+                "realFramesFed": 137216,
+                "paddingFramesFed": 0,
+                "paddingLimit": 88200,
+                "generatedFrames": 134970,
+                "extractedFrames": 132096,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 2874
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 137216,
+                "realFramesFed": 137216,
+                "paddingFramesFed": 0,
+                "paddingLimit": 88200,
+                "generatedFrames": 134970,
+                "extractedFrames": 132096,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 2874
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 137216,
+                "realFramesFed": 137216,
+                "paddingFramesFed": 0,
+                "paddingLimit": 88200,
+                "generatedFrames": 134970,
+                "extractedFrames": 132096,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 2874
+              }
+            ],
+            "overlapGuide": {
+              "participants": 5,
+              "registered": 5,
+              "nextDecision": 30,
+              "retainedDecisions": 0,
+              "maxPendingDecisions": 4096,
+              "peakPendingDecisions": 1,
+              "produced": 30,
+              "consumed": 120,
+              "readers": [
+                {
+                  "index": 0,
+                  "next": 30,
+                  "disposed": false
+                },
+                {
+                  "index": 1,
+                  "next": 30,
+                  "disposed": false
+                },
+                {
+                  "index": 2,
+                  "next": 30,
+                  "disposed": false
+                },
+                {
+                  "index": 3,
+                  "next": 30,
+                  "disposed": false
+                },
+                {
+                  "index": 4,
+                  "next": 30,
+                  "disposed": false
+                }
+              ]
+            }
+          }
+        ],
+        "scope": "Forward pull-based experiment; nominal output endpoint, not measured audible source position or proved EOS tail preservation."
+      },
+      "disposed": {
+        "sampleRate": 44100,
+        "nextFrame": 132352,
+        "generation": 1,
+        "disposed": true,
+        "state": {
+          "frame": 132352,
+          "position": 2.995374149659864,
+          "playing": false,
+          "generation": 1,
+          "rate": 1,
+          "semitones": 0,
+          "keylock": true,
+          "effectiveSemitones": 0,
+          "anchorPosition": 2.995374149659864,
+          "positionKind": "nominal-not-measured-audible"
+        },
+        "sourceBytes": 0,
+        "retainedWholeSources": false,
+        "memoryLimit": "Whole caller-provided PCM plus bounded16epochs; opaque DSP heaps not counted.",
+        "pcmOwnership": "Descriptors are snapshotted; PCM arrays are borrowed immutable data for the transport lifetime. The worklet owns transferred storage.",
+        "renderedFrames": 132352,
+        "retiredEpochs": 1,
+        "retiredSummaries": [
+          {
+            "generation": 1,
+            "counters": [
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 137216,
+                "realFramesFed": 137216,
+                "paddingFramesFed": 0,
+                "paddingLimit": 88200,
+                "generatedFrames": 134970,
+                "extractedFrames": 132096,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 2874
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 137216,
+                "realFramesFed": 137216,
+                "paddingFramesFed": 0,
+                "paddingLimit": 88200,
+                "generatedFrames": 134970,
+                "extractedFrames": 132096,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 2874
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 137216,
+                "realFramesFed": 137216,
+                "paddingFramesFed": 0,
+                "paddingLimit": 88200,
+                "generatedFrames": 134970,
+                "extractedFrames": 132096,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 2874
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 137216,
+                "realFramesFed": 137216,
+                "paddingFramesFed": 0,
+                "paddingLimit": 88200,
+                "generatedFrames": 134970,
+                "extractedFrames": 132096,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 2874
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 137216,
+                "realFramesFed": 137216,
+                "paddingFramesFed": 0,
+                "paddingLimit": 88200,
+                "generatedFrames": 134970,
+                "extractedFrames": 132096,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 2874
+              }
+            ]
+          }
+        ],
+        "retiredSummaryLimit": 64,
+        "clockRetention": "Last two applied anchors; older queries reject explicitly.",
+        "epochs": [],
+        "scope": "Forward pull-based experiment; nominal output endpoint, not measured audible source position or proved EOS tail preservation."
+      }
+    },
+    {
+      "id": "tempo",
+      "rate": 1.08,
+      "semitones": 0,
+      "sampleRate": 44100,
+      "keylock": true,
+      "passed": true,
+      "errors": [],
+      "inputHashes": [
+        [
+          "2725fd165d551c060b64f34e8819c7c013305b1f9d7e6c23a13cba8426192e37",
+          "2ae640a23ef1bd431246a77915503331671bfe708397b36e5bd28332a43a5201"
+        ],
+        [
+          "0b400414d881f8027cd0f4e30036cd38316d6770d90d0a652f2527d2f013507a",
+          "de671b1a9f59e8489afd87c22065f1d51f6c68d5d8e3b09a5dbfbae3d9dc3ae7"
+        ],
+        [
+          "ea71aa71c89fb0d4aff20e77ccd5f26d54ebf9caed2365c845e784eef8bfe7c8",
+          "11f0da3d31ddf380fd006ed6bbb3806d8ca9435df970109666052ce9113fe2e6"
+        ],
+        [
+          "06e411c8eeec77c077ffce2246d77a8128a4e4d1dc692433e45418684e7f1ba3",
+          "c6ae35b40b9e0e76460933e6afba73deff1066f1ef188212c1cc96fa4b38b23e"
+        ],
+        [
+          "b02c7228ae0de03ceeb2356e5ef97a2f2cfa2482e108182d2259c5e644fe1fcf",
+          "1fa200302ab5b918783315dee2f323d1f12edb6a7009ccf73532a21e99a9bf1a"
+        ]
+      ],
+      "ack": {
+        "frame": 256,
+        "position": 0,
+        "playing": true,
+        "generation": 1,
+        "rate": 1.08,
+        "semitones": 0,
+        "keylock": true,
+        "effectiveSemitones": 0,
+        "ready": true,
+        "superseded": [],
+        "preparationMilliseconds": 8.547416999999996,
+        "preparationClock": "performance.now",
+        "positionKind": "nominal-not-measured-audible",
+        "counters": [
+          {
+            "originFrame": 0,
+            "sourceCursorFrame": 7168,
+            "realFramesFed": 7168,
+            "paddingFramesFed": 0,
+            "paddingLimit": 88200,
+            "generatedFrames": 4410,
+            "extractedFrames": 0,
+            "discardedPrerollFrames": 0,
+            "outputFramesReady": 4410
+          },
+          {
+            "originFrame": 0,
+            "sourceCursorFrame": 7168,
+            "realFramesFed": 7168,
+            "paddingFramesFed": 0,
+            "paddingLimit": 88200,
+            "generatedFrames": 4410,
+            "extractedFrames": 0,
+            "discardedPrerollFrames": 0,
+            "outputFramesReady": 4410
+          },
+          {
+            "originFrame": 0,
+            "sourceCursorFrame": 7168,
+            "realFramesFed": 7168,
+            "paddingFramesFed": 0,
+            "paddingLimit": 88200,
+            "generatedFrames": 4410,
+            "extractedFrames": 0,
+            "discardedPrerollFrames": 0,
+            "outputFramesReady": 4410
+          },
+          {
+            "originFrame": 0,
+            "sourceCursorFrame": 7168,
+            "realFramesFed": 7168,
+            "paddingFramesFed": 0,
+            "paddingLimit": 88200,
+            "generatedFrames": 4410,
+            "extractedFrames": 0,
+            "discardedPrerollFrames": 0,
+            "outputFramesReady": 4410
+          },
+          {
+            "originFrame": 0,
+            "sourceCursorFrame": 7168,
+            "realFramesFed": 7168,
+            "paddingFramesFed": 0,
+            "paddingLimit": 88200,
+            "generatedFrames": 4410,
+            "extractedFrames": 0,
+            "discardedPrerollFrames": 0,
+            "outputFramesReady": 4410
+          }
+        ]
+      },
+      "allFinite": true,
+      "raw": {
+        "path": "local-evidence/soundtouch-grouped-stems/tempo-44100.f32le",
+        "frames": 132352,
+        "channels": 10,
+        "sampleRate": 44100,
+        "bytes": 5294080,
+        "sha256": "01b69f6c5fda1d8a4f046e2a77b10211a97a9e3f476f375663a52517a9c3b6d2"
+      },
+      "channels": [
+        {
+          "channel": 0,
+          "firstFrame": 22050,
+          "lastExclusive": 110250,
+          "referenceRMS": 0.03520023754940119,
+          "residualRMS": 1.0010720353397295e-9,
+          "relativeRMS": 2.843935453375255e-8,
+          "peakResidual": 7.450580596923828e-9,
+          "passed": true
+        },
+        {
+          "channel": 1,
+          "firstFrame": 22050,
+          "lastExclusive": 110250,
+          "referenceRMS": 0.035247515728582535,
+          "residualRMS": 9.92835982488405e-10,
+          "relativeRMS": 2.816754491674161e-8,
+          "peakResidual": 7.450580596923828e-9,
+          "passed": true
+        }
+      ],
+      "snapshot": {
+        "sampleRate": 44100,
+        "nextFrame": 132352,
+        "generation": 1,
+        "disposed": false,
+        "state": {
+          "frame": 256,
+          "position": 3.2350040816326535,
+          "playing": true,
+          "generation": 1,
+          "rate": 1.08,
+          "semitones": 0,
+          "keylock": true,
+          "effectiveSemitones": 0,
+          "anchorPosition": 0,
+          "positionKind": "nominal-not-measured-audible"
+        },
+        "sourceBytes": 7056000,
+        "retainedWholeSources": true,
+        "memoryLimit": "Whole caller-provided PCM plus bounded16epochs; opaque DSP heaps not counted.",
+        "pcmOwnership": "Descriptors are snapshotted; PCM arrays are borrowed immutable data for the transport lifetime. The worklet owns transferred storage.",
+        "renderedFrames": 132352,
+        "retiredEpochs": 0,
+        "retiredSummaries": [
+          {
+            "generation": 1,
+            "counters": [
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 145408,
+                "realFramesFed": 145408,
+                "paddingFramesFed": 0,
+                "paddingLimit": 88200,
+                "generatedFrames": 132300,
+                "extractedFrames": 132096,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 204
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 145408,
+                "realFramesFed": 145408,
+                "paddingFramesFed": 0,
+                "paddingLimit": 88200,
+                "generatedFrames": 132300,
+                "extractedFrames": 132096,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 204
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 145408,
+                "realFramesFed": 145408,
+                "paddingFramesFed": 0,
+                "paddingLimit": 88200,
+                "generatedFrames": 132300,
+                "extractedFrames": 132096,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 204
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 145408,
+                "realFramesFed": 145408,
+                "paddingFramesFed": 0,
+                "paddingLimit": 88200,
+                "generatedFrames": 132300,
+                "extractedFrames": 132096,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 204
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 145408,
+                "realFramesFed": 145408,
+                "paddingFramesFed": 0,
+                "paddingLimit": 88200,
+                "generatedFrames": 132300,
+                "extractedFrames": 132096,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 204
+              }
+            ]
+          }
+        ],
+        "retiredSummaryLimit": 64,
+        "clockRetention": "Last two applied anchors; older queries reject explicitly.",
+        "epochs": [
+          {
+            "generation": 1,
+            "role": "active-or-retiring",
+            "counters": [
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 145408,
+                "realFramesFed": 145408,
+                "paddingFramesFed": 0,
+                "paddingLimit": 88200,
+                "generatedFrames": 132300,
+                "extractedFrames": 132096,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 204
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 145408,
+                "realFramesFed": 145408,
+                "paddingFramesFed": 0,
+                "paddingLimit": 88200,
+                "generatedFrames": 132300,
+                "extractedFrames": 132096,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 204
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 145408,
+                "realFramesFed": 145408,
+                "paddingFramesFed": 0,
+                "paddingLimit": 88200,
+                "generatedFrames": 132300,
+                "extractedFrames": 132096,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 204
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 145408,
+                "realFramesFed": 145408,
+                "paddingFramesFed": 0,
+                "paddingLimit": 88200,
+                "generatedFrames": 132300,
+                "extractedFrames": 132096,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 204
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 145408,
+                "realFramesFed": 145408,
+                "paddingFramesFed": 0,
+                "paddingLimit": 88200,
+                "generatedFrames": 132300,
+                "extractedFrames": 132096,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 204
+              }
+            ],
+            "overlapGuide": {
+              "participants": 5,
+              "registered": 5,
+              "nextDecision": 30,
+              "retainedDecisions": 0,
+              "maxPendingDecisions": 4096,
+              "peakPendingDecisions": 1,
+              "produced": 30,
+              "consumed": 120,
+              "readers": [
+                {
+                  "index": 0,
+                  "next": 30,
+                  "disposed": false
+                },
+                {
+                  "index": 1,
+                  "next": 30,
+                  "disposed": false
+                },
+                {
+                  "index": 2,
+                  "next": 30,
+                  "disposed": false
+                },
+                {
+                  "index": 3,
+                  "next": 30,
+                  "disposed": false
+                },
+                {
+                  "index": 4,
+                  "next": 30,
+                  "disposed": false
+                }
+              ]
+            }
+          }
+        ],
+        "scope": "Forward pull-based experiment; nominal output endpoint, not measured audible source position or proved EOS tail preservation."
+      },
+      "disposed": {
+        "sampleRate": 44100,
+        "nextFrame": 132352,
+        "generation": 1,
+        "disposed": true,
+        "state": {
+          "frame": 132352,
+          "position": 3.2350040816326535,
+          "playing": false,
+          "generation": 1,
+          "rate": 1.08,
+          "semitones": 0,
+          "keylock": true,
+          "effectiveSemitones": 0,
+          "anchorPosition": 3.2350040816326535,
+          "positionKind": "nominal-not-measured-audible"
+        },
+        "sourceBytes": 0,
+        "retainedWholeSources": false,
+        "memoryLimit": "Whole caller-provided PCM plus bounded16epochs; opaque DSP heaps not counted.",
+        "pcmOwnership": "Descriptors are snapshotted; PCM arrays are borrowed immutable data for the transport lifetime. The worklet owns transferred storage.",
+        "renderedFrames": 132352,
+        "retiredEpochs": 1,
+        "retiredSummaries": [
+          {
+            "generation": 1,
+            "counters": [
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 145408,
+                "realFramesFed": 145408,
+                "paddingFramesFed": 0,
+                "paddingLimit": 88200,
+                "generatedFrames": 132300,
+                "extractedFrames": 132096,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 204
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 145408,
+                "realFramesFed": 145408,
+                "paddingFramesFed": 0,
+                "paddingLimit": 88200,
+                "generatedFrames": 132300,
+                "extractedFrames": 132096,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 204
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 145408,
+                "realFramesFed": 145408,
+                "paddingFramesFed": 0,
+                "paddingLimit": 88200,
+                "generatedFrames": 132300,
+                "extractedFrames": 132096,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 204
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 145408,
+                "realFramesFed": 145408,
+                "paddingFramesFed": 0,
+                "paddingLimit": 88200,
+                "generatedFrames": 132300,
+                "extractedFrames": 132096,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 204
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 145408,
+                "realFramesFed": 145408,
+                "paddingFramesFed": 0,
+                "paddingLimit": 88200,
+                "generatedFrames": 132300,
+                "extractedFrames": 132096,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 204
+              }
+            ]
+          }
+        ],
+        "retiredSummaryLimit": 64,
+        "clockRetention": "Last two applied anchors; older queries reject explicitly.",
+        "epochs": [],
+        "scope": "Forward pull-based experiment; nominal output endpoint, not measured audible source position or proved EOS tail preservation."
+      }
+    },
+    {
+      "id": "shifted",
+      "rate": 1.08,
+      "semitones": 2,
+      "sampleRate": 44100,
+      "keylock": true,
+      "passed": true,
+      "errors": [],
+      "inputHashes": [
+        [
+          "2725fd165d551c060b64f34e8819c7c013305b1f9d7e6c23a13cba8426192e37",
+          "2ae640a23ef1bd431246a77915503331671bfe708397b36e5bd28332a43a5201"
+        ],
+        [
+          "0b400414d881f8027cd0f4e30036cd38316d6770d90d0a652f2527d2f013507a",
+          "de671b1a9f59e8489afd87c22065f1d51f6c68d5d8e3b09a5dbfbae3d9dc3ae7"
+        ],
+        [
+          "ea71aa71c89fb0d4aff20e77ccd5f26d54ebf9caed2365c845e784eef8bfe7c8",
+          "11f0da3d31ddf380fd006ed6bbb3806d8ca9435df970109666052ce9113fe2e6"
+        ],
+        [
+          "06e411c8eeec77c077ffce2246d77a8128a4e4d1dc692433e45418684e7f1ba3",
+          "c6ae35b40b9e0e76460933e6afba73deff1066f1ef188212c1cc96fa4b38b23e"
+        ],
+        [
+          "b02c7228ae0de03ceeb2356e5ef97a2f2cfa2482e108182d2259c5e644fe1fcf",
+          "1fa200302ab5b918783315dee2f323d1f12edb6a7009ccf73532a21e99a9bf1a"
+        ]
+      ],
+      "ack": {
+        "frame": 256,
+        "position": 0,
+        "playing": true,
+        "generation": 1,
+        "rate": 1.08,
+        "semitones": 2,
+        "keylock": true,
+        "effectiveSemitones": 2,
+        "ready": true,
+        "superseded": [],
+        "preparationMilliseconds": 7.31879200000003,
+        "preparationClock": "performance.now",
+        "positionKind": "nominal-not-measured-audible",
+        "counters": [
+          {
+            "originFrame": 0,
+            "sourceCursorFrame": 7168,
+            "realFramesFed": 7168,
+            "paddingFramesFed": 0,
+            "paddingLimit": 88200,
+            "generatedFrames": 4048,
+            "extractedFrames": 0,
+            "discardedPrerollFrames": 0,
+            "outputFramesReady": 4048
+          },
+          {
+            "originFrame": 0,
+            "sourceCursorFrame": 7168,
+            "realFramesFed": 7168,
+            "paddingFramesFed": 0,
+            "paddingLimit": 88200,
+            "generatedFrames": 4048,
+            "extractedFrames": 0,
+            "discardedPrerollFrames": 0,
+            "outputFramesReady": 4048
+          },
+          {
+            "originFrame": 0,
+            "sourceCursorFrame": 7168,
+            "realFramesFed": 7168,
+            "paddingFramesFed": 0,
+            "paddingLimit": 88200,
+            "generatedFrames": 4048,
+            "extractedFrames": 0,
+            "discardedPrerollFrames": 0,
+            "outputFramesReady": 4048
+          },
+          {
+            "originFrame": 0,
+            "sourceCursorFrame": 7168,
+            "realFramesFed": 7168,
+            "paddingFramesFed": 0,
+            "paddingLimit": 88200,
+            "generatedFrames": 4048,
+            "extractedFrames": 0,
+            "discardedPrerollFrames": 0,
+            "outputFramesReady": 4048
+          },
+          {
+            "originFrame": 0,
+            "sourceCursorFrame": 7168,
+            "realFramesFed": 7168,
+            "paddingFramesFed": 0,
+            "paddingLimit": 88200,
+            "generatedFrames": 4048,
+            "extractedFrames": 0,
+            "discardedPrerollFrames": 0,
+            "outputFramesReady": 4048
+          }
+        ]
+      },
+      "allFinite": true,
+      "raw": {
+        "path": "local-evidence/soundtouch-grouped-stems/shifted-44100.f32le",
+        "frames": 132352,
+        "channels": 10,
+        "sampleRate": 44100,
+        "bytes": 5294080,
+        "sha256": "5b46391cc6c4d5657912c7659019619e67b1b571bb55cf814b74b2ded2e95c72"
+      },
+      "channels": [
+        {
+          "channel": 0,
+          "firstFrame": 22050,
+          "lastExclusive": 110250,
+          "referenceRMS": 0.03522452639847738,
+          "residualRMS": 1.5749434271764423e-9,
+          "relativeRMS": 4.471155720760864e-8,
+          "peakResidual": 1.0244548320770264e-8,
+          "passed": true
+        },
+        {
+          "channel": 1,
+          "firstFrame": 22050,
+          "lastExclusive": 110250,
+          "referenceRMS": 0.035164058833015724,
+          "residualRMS": 1.5622379516749274e-9,
+          "relativeRMS": 4.442712256550241e-8,
+          "peakResidual": 1.1641532182693481e-8,
+          "passed": true
+        }
+      ],
+      "snapshot": {
+        "sampleRate": 44100,
+        "nextFrame": 132352,
+        "generation": 1,
+        "disposed": false,
+        "state": {
+          "frame": 256,
+          "position": 3.2350040816326535,
+          "playing": true,
+          "generation": 1,
+          "rate": 1.08,
+          "semitones": 2,
+          "keylock": true,
+          "effectiveSemitones": 2,
+          "anchorPosition": 0,
+          "positionKind": "nominal-not-measured-audible"
+        },
+        "sourceBytes": 7056000,
+        "retainedWholeSources": true,
+        "memoryLimit": "Whole caller-provided PCM plus bounded16epochs; opaque DSP heaps not counted.",
+        "pcmOwnership": "Descriptors are snapshotted; PCM arrays are borrowed immutable data for the transport lifetime. The worklet owns transferred storage.",
+        "renderedFrames": 132352,
+        "retiredEpochs": 0,
+        "retiredSummaries": [
+          {
+            "generation": 1,
+            "counters": [
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 146432,
+                "realFramesFed": 146432,
+                "paddingFramesFed": 0,
+                "paddingLimit": 88200,
+                "generatedFrames": 133563,
+                "extractedFrames": 132096,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 1467
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 146432,
+                "realFramesFed": 146432,
+                "paddingFramesFed": 0,
+                "paddingLimit": 88200,
+                "generatedFrames": 133563,
+                "extractedFrames": 132096,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 1467
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 146432,
+                "realFramesFed": 146432,
+                "paddingFramesFed": 0,
+                "paddingLimit": 88200,
+                "generatedFrames": 133563,
+                "extractedFrames": 132096,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 1467
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 146432,
+                "realFramesFed": 146432,
+                "paddingFramesFed": 0,
+                "paddingLimit": 88200,
+                "generatedFrames": 133563,
+                "extractedFrames": 132096,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 1467
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 146432,
+                "realFramesFed": 146432,
+                "paddingFramesFed": 0,
+                "paddingLimit": 88200,
+                "generatedFrames": 133563,
+                "extractedFrames": 132096,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 1467
+              }
+            ]
+          }
+        ],
+        "retiredSummaryLimit": 64,
+        "clockRetention": "Last two applied anchors; older queries reject explicitly.",
+        "epochs": [
+          {
+            "generation": 1,
+            "role": "active-or-retiring",
+            "counters": [
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 146432,
+                "realFramesFed": 146432,
+                "paddingFramesFed": 0,
+                "paddingLimit": 88200,
+                "generatedFrames": 133563,
+                "extractedFrames": 132096,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 1467
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 146432,
+                "realFramesFed": 146432,
+                "paddingFramesFed": 0,
+                "paddingLimit": 88200,
+                "generatedFrames": 133563,
+                "extractedFrames": 132096,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 1467
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 146432,
+                "realFramesFed": 146432,
+                "paddingFramesFed": 0,
+                "paddingLimit": 88200,
+                "generatedFrames": 133563,
+                "extractedFrames": 132096,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 1467
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 146432,
+                "realFramesFed": 146432,
+                "paddingFramesFed": 0,
+                "paddingLimit": 88200,
+                "generatedFrames": 133563,
+                "extractedFrames": 132096,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 1467
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 146432,
+                "realFramesFed": 146432,
+                "paddingFramesFed": 0,
+                "paddingLimit": 88200,
+                "generatedFrames": 133563,
+                "extractedFrames": 132096,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 1467
+              }
+            ],
+            "overlapGuide": {
+              "participants": 5,
+              "registered": 5,
+              "nextDecision": 33,
+              "retainedDecisions": 0,
+              "maxPendingDecisions": 4096,
+              "peakPendingDecisions": 1,
+              "produced": 33,
+              "consumed": 132,
+              "readers": [
+                {
+                  "index": 0,
+                  "next": 33,
+                  "disposed": false
+                },
+                {
+                  "index": 1,
+                  "next": 33,
+                  "disposed": false
+                },
+                {
+                  "index": 2,
+                  "next": 33,
+                  "disposed": false
+                },
+                {
+                  "index": 3,
+                  "next": 33,
+                  "disposed": false
+                },
+                {
+                  "index": 4,
+                  "next": 33,
+                  "disposed": false
+                }
+              ]
+            }
+          }
+        ],
+        "scope": "Forward pull-based experiment; nominal output endpoint, not measured audible source position or proved EOS tail preservation."
+      },
+      "disposed": {
+        "sampleRate": 44100,
+        "nextFrame": 132352,
+        "generation": 1,
+        "disposed": true,
+        "state": {
+          "frame": 132352,
+          "position": 3.2350040816326535,
+          "playing": false,
+          "generation": 1,
+          "rate": 1.08,
+          "semitones": 2,
+          "keylock": true,
+          "effectiveSemitones": 2,
+          "anchorPosition": 3.2350040816326535,
+          "positionKind": "nominal-not-measured-audible"
+        },
+        "sourceBytes": 0,
+        "retainedWholeSources": false,
+        "memoryLimit": "Whole caller-provided PCM plus bounded16epochs; opaque DSP heaps not counted.",
+        "pcmOwnership": "Descriptors are snapshotted; PCM arrays are borrowed immutable data for the transport lifetime. The worklet owns transferred storage.",
+        "renderedFrames": 132352,
+        "retiredEpochs": 1,
+        "retiredSummaries": [
+          {
+            "generation": 1,
+            "counters": [
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 146432,
+                "realFramesFed": 146432,
+                "paddingFramesFed": 0,
+                "paddingLimit": 88200,
+                "generatedFrames": 133563,
+                "extractedFrames": 132096,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 1467
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 146432,
+                "realFramesFed": 146432,
+                "paddingFramesFed": 0,
+                "paddingLimit": 88200,
+                "generatedFrames": 133563,
+                "extractedFrames": 132096,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 1467
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 146432,
+                "realFramesFed": 146432,
+                "paddingFramesFed": 0,
+                "paddingLimit": 88200,
+                "generatedFrames": 133563,
+                "extractedFrames": 132096,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 1467
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 146432,
+                "realFramesFed": 146432,
+                "paddingFramesFed": 0,
+                "paddingLimit": 88200,
+                "generatedFrames": 133563,
+                "extractedFrames": 132096,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 1467
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 146432,
+                "realFramesFed": 146432,
+                "paddingFramesFed": 0,
+                "paddingLimit": 88200,
+                "generatedFrames": 133563,
+                "extractedFrames": 132096,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 1467
+              }
+            ]
+          }
+        ],
+        "retiredSummaryLimit": 64,
+        "clockRetention": "Last two applied anchors; older queries reject explicitly.",
+        "epochs": [],
+        "scope": "Forward pull-based experiment; nominal output endpoint, not measured audible source position or proved EOS tail preservation."
+      }
+    },
+    {
+      "id": "unity",
+      "rate": 1,
+      "semitones": 0,
+      "sampleRate": 48000,
+      "keylock": true,
+      "passed": true,
+      "errors": [],
+      "inputHashes": [
+        [
+          "53f7a34aa65aff636126c89e1a9d9198e6026246cd6a1ac39991899d2c4280bb",
+          "955f3cd474f0685303d5f7ee4a464a4ef9bf3bbdef0be18e961e84f25a3f6a2c"
+        ],
+        [
+          "fc793b59c7b1df88cd920a6d535adaa698eccec434a3c5114e9972b2de6dac7f",
+          "2568f8b414329ef3835c646a9c72d909b4c8ba2122ccebae7a32a5ace5f683cf"
+        ],
+        [
+          "c401ee15d671b464a4425d02047866c9506017dec40bdcd2fe4f516b88bdc440",
+          "cbbf95bc2b688496cc437dfdceeaf79f6a62c1e9485e050de3973d171be46bb5"
+        ],
+        [
+          "00f8b643fc96e3d83da6277b059a598465d8f17f878dff41fdd6fd38be2b4aa1",
+          "566a9e278345aa8e6990b5c492bce7406cfd623e9b2dc2bd55bda78fcda7e4bf"
+        ],
+        [
+          "de0fa892f8b3590b0a3b2abaea7d00d0e3576cc3231e0de0f9e21825e25fe7f2",
+          "be80ade21be6796d16c549f53af823856665c9383dc8d33a657e6e4173bcb903"
+        ]
+      ],
+      "ack": {
+        "frame": 256,
+        "position": 0,
+        "playing": true,
+        "generation": 1,
+        "rate": 1,
+        "semitones": 0,
+        "keylock": true,
+        "effectiveSemitones": 0,
+        "ready": true,
+        "superseded": [],
+        "preparationMilliseconds": 9.288958000000093,
+        "preparationClock": "performance.now",
+        "positionKind": "nominal-not-measured-audible",
+        "counters": [
+          {
+            "originFrame": 0,
+            "sourceCursorFrame": 7168,
+            "realFramesFed": 7168,
+            "paddingFramesFed": 0,
+            "paddingLimit": 96000,
+            "generatedFrames": 4896,
+            "extractedFrames": 0,
+            "discardedPrerollFrames": 0,
+            "outputFramesReady": 4896
+          },
+          {
+            "originFrame": 0,
+            "sourceCursorFrame": 7168,
+            "realFramesFed": 7168,
+            "paddingFramesFed": 0,
+            "paddingLimit": 96000,
+            "generatedFrames": 4896,
+            "extractedFrames": 0,
+            "discardedPrerollFrames": 0,
+            "outputFramesReady": 4896
+          },
+          {
+            "originFrame": 0,
+            "sourceCursorFrame": 7168,
+            "realFramesFed": 7168,
+            "paddingFramesFed": 0,
+            "paddingLimit": 96000,
+            "generatedFrames": 4896,
+            "extractedFrames": 0,
+            "discardedPrerollFrames": 0,
+            "outputFramesReady": 4896
+          },
+          {
+            "originFrame": 0,
+            "sourceCursorFrame": 7168,
+            "realFramesFed": 7168,
+            "paddingFramesFed": 0,
+            "paddingLimit": 96000,
+            "generatedFrames": 4896,
+            "extractedFrames": 0,
+            "discardedPrerollFrames": 0,
+            "outputFramesReady": 4896
+          },
+          {
+            "originFrame": 0,
+            "sourceCursorFrame": 7168,
+            "realFramesFed": 7168,
+            "paddingFramesFed": 0,
+            "paddingLimit": 96000,
+            "generatedFrames": 4896,
+            "extractedFrames": 0,
+            "discardedPrerollFrames": 0,
+            "outputFramesReady": 4896
+          }
+        ]
+      },
+      "allFinite": true,
+      "raw": {
+        "path": "local-evidence/soundtouch-grouped-stems/unity-48000.f32le",
+        "frames": 144000,
+        "channels": 10,
+        "sampleRate": 48000,
+        "bytes": 5760000,
+        "sha256": "cb461248b46bda3eac0ae121d06c0b818bb89277a7fd8b46917599d3ba1841bf"
+      },
+      "channels": [
+        {
+          "channel": 0,
+          "firstFrame": 24000,
+          "lastExclusive": 120000,
+          "referenceRMS": 0.035354742009307605,
+          "residualRMS": 9.962463381464169e-10,
+          "relativeRMS": 2.8178577512576444e-8,
+          "peakResidual": 7.450580596923828e-9,
+          "passed": true
+        },
+        {
+          "channel": 1,
+          "firstFrame": 24000,
+          "lastExclusive": 120000,
+          "referenceRMS": 0.035354003291087975,
+          "residualRMS": 9.880425331778163e-10,
+          "relativeRMS": 2.794711888899105e-8,
+          "peakResidual": 7.450580596923828e-9,
+          "passed": true
+        }
+      ],
+      "snapshot": {
+        "sampleRate": 48000,
+        "nextFrame": 144000,
+        "generation": 1,
+        "disposed": false,
+        "state": {
+          "frame": 256,
+          "position": 2.994666666666667,
+          "playing": true,
+          "generation": 1,
+          "rate": 1,
+          "semitones": 0,
+          "keylock": true,
+          "effectiveSemitones": 0,
+          "anchorPosition": 0,
+          "positionKind": "nominal-not-measured-audible"
+        },
+        "sourceBytes": 7680000,
+        "retainedWholeSources": true,
+        "memoryLimit": "Whole caller-provided PCM plus bounded16epochs; opaque DSP heaps not counted.",
+        "pcmOwnership": "Descriptors are snapshotted; PCM arrays are borrowed immutable data for the transport lifetime. The worklet owns transferred storage.",
+        "renderedFrames": 144000,
+        "retiredEpochs": 0,
+        "retiredSummaries": [
+          {
+            "generation": 1,
+            "counters": [
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 149504,
+                "realFramesFed": 149504,
+                "paddingFramesFed": 0,
+                "paddingLimit": 96000,
+                "generatedFrames": 146880,
+                "extractedFrames": 143744,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 3136
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 149504,
+                "realFramesFed": 149504,
+                "paddingFramesFed": 0,
+                "paddingLimit": 96000,
+                "generatedFrames": 146880,
+                "extractedFrames": 143744,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 3136
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 149504,
+                "realFramesFed": 149504,
+                "paddingFramesFed": 0,
+                "paddingLimit": 96000,
+                "generatedFrames": 146880,
+                "extractedFrames": 143744,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 3136
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 149504,
+                "realFramesFed": 149504,
+                "paddingFramesFed": 0,
+                "paddingLimit": 96000,
+                "generatedFrames": 146880,
+                "extractedFrames": 143744,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 3136
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 149504,
+                "realFramesFed": 149504,
+                "paddingFramesFed": 0,
+                "paddingLimit": 96000,
+                "generatedFrames": 146880,
+                "extractedFrames": 143744,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 3136
+              }
+            ]
+          }
+        ],
+        "retiredSummaryLimit": 64,
+        "clockRetention": "Last two applied anchors; older queries reject explicitly.",
+        "epochs": [
+          {
+            "generation": 1,
+            "role": "active-or-retiring",
+            "counters": [
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 149504,
+                "realFramesFed": 149504,
+                "paddingFramesFed": 0,
+                "paddingLimit": 96000,
+                "generatedFrames": 146880,
+                "extractedFrames": 143744,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 3136
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 149504,
+                "realFramesFed": 149504,
+                "paddingFramesFed": 0,
+                "paddingLimit": 96000,
+                "generatedFrames": 146880,
+                "extractedFrames": 143744,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 3136
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 149504,
+                "realFramesFed": 149504,
+                "paddingFramesFed": 0,
+                "paddingLimit": 96000,
+                "generatedFrames": 146880,
+                "extractedFrames": 143744,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 3136
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 149504,
+                "realFramesFed": 149504,
+                "paddingFramesFed": 0,
+                "paddingLimit": 96000,
+                "generatedFrames": 146880,
+                "extractedFrames": 143744,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 3136
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 149504,
+                "realFramesFed": 149504,
+                "paddingFramesFed": 0,
+                "paddingLimit": 96000,
+                "generatedFrames": 146880,
+                "extractedFrames": 143744,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 3136
+              }
+            ],
+            "overlapGuide": {
+              "participants": 5,
+              "registered": 5,
+              "nextDecision": 30,
+              "retainedDecisions": 0,
+              "maxPendingDecisions": 4096,
+              "peakPendingDecisions": 1,
+              "produced": 30,
+              "consumed": 120,
+              "readers": [
+                {
+                  "index": 0,
+                  "next": 30,
+                  "disposed": false
+                },
+                {
+                  "index": 1,
+                  "next": 30,
+                  "disposed": false
+                },
+                {
+                  "index": 2,
+                  "next": 30,
+                  "disposed": false
+                },
+                {
+                  "index": 3,
+                  "next": 30,
+                  "disposed": false
+                },
+                {
+                  "index": 4,
+                  "next": 30,
+                  "disposed": false
+                }
+              ]
+            }
+          }
+        ],
+        "scope": "Forward pull-based experiment; nominal output endpoint, not measured audible source position or proved EOS tail preservation."
+      },
+      "disposed": {
+        "sampleRate": 48000,
+        "nextFrame": 144000,
+        "generation": 1,
+        "disposed": true,
+        "state": {
+          "frame": 144000,
+          "position": 2.994666666666667,
+          "playing": false,
+          "generation": 1,
+          "rate": 1,
+          "semitones": 0,
+          "keylock": true,
+          "effectiveSemitones": 0,
+          "anchorPosition": 2.994666666666667,
+          "positionKind": "nominal-not-measured-audible"
+        },
+        "sourceBytes": 0,
+        "retainedWholeSources": false,
+        "memoryLimit": "Whole caller-provided PCM plus bounded16epochs; opaque DSP heaps not counted.",
+        "pcmOwnership": "Descriptors are snapshotted; PCM arrays are borrowed immutable data for the transport lifetime. The worklet owns transferred storage.",
+        "renderedFrames": 144000,
+        "retiredEpochs": 1,
+        "retiredSummaries": [
+          {
+            "generation": 1,
+            "counters": [
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 149504,
+                "realFramesFed": 149504,
+                "paddingFramesFed": 0,
+                "paddingLimit": 96000,
+                "generatedFrames": 146880,
+                "extractedFrames": 143744,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 3136
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 149504,
+                "realFramesFed": 149504,
+                "paddingFramesFed": 0,
+                "paddingLimit": 96000,
+                "generatedFrames": 146880,
+                "extractedFrames": 143744,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 3136
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 149504,
+                "realFramesFed": 149504,
+                "paddingFramesFed": 0,
+                "paddingLimit": 96000,
+                "generatedFrames": 146880,
+                "extractedFrames": 143744,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 3136
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 149504,
+                "realFramesFed": 149504,
+                "paddingFramesFed": 0,
+                "paddingLimit": 96000,
+                "generatedFrames": 146880,
+                "extractedFrames": 143744,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 3136
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 149504,
+                "realFramesFed": 149504,
+                "paddingFramesFed": 0,
+                "paddingLimit": 96000,
+                "generatedFrames": 146880,
+                "extractedFrames": 143744,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 3136
+              }
+            ]
+          }
+        ],
+        "retiredSummaryLimit": 64,
+        "clockRetention": "Last two applied anchors; older queries reject explicitly.",
+        "epochs": [],
+        "scope": "Forward pull-based experiment; nominal output endpoint, not measured audible source position or proved EOS tail preservation."
+      }
+    },
+    {
+      "id": "tempo",
+      "rate": 1.08,
+      "semitones": 0,
+      "sampleRate": 48000,
+      "keylock": true,
+      "passed": true,
+      "errors": [],
+      "inputHashes": [
+        [
+          "53f7a34aa65aff636126c89e1a9d9198e6026246cd6a1ac39991899d2c4280bb",
+          "955f3cd474f0685303d5f7ee4a464a4ef9bf3bbdef0be18e961e84f25a3f6a2c"
+        ],
+        [
+          "fc793b59c7b1df88cd920a6d535adaa698eccec434a3c5114e9972b2de6dac7f",
+          "2568f8b414329ef3835c646a9c72d909b4c8ba2122ccebae7a32a5ace5f683cf"
+        ],
+        [
+          "c401ee15d671b464a4425d02047866c9506017dec40bdcd2fe4f516b88bdc440",
+          "cbbf95bc2b688496cc437dfdceeaf79f6a62c1e9485e050de3973d171be46bb5"
+        ],
+        [
+          "00f8b643fc96e3d83da6277b059a598465d8f17f878dff41fdd6fd38be2b4aa1",
+          "566a9e278345aa8e6990b5c492bce7406cfd623e9b2dc2bd55bda78fcda7e4bf"
+        ],
+        [
+          "de0fa892f8b3590b0a3b2abaea7d00d0e3576cc3231e0de0f9e21825e25fe7f2",
+          "be80ade21be6796d16c549f53af823856665c9383dc8d33a657e6e4173bcb903"
+        ]
+      ],
+      "ack": {
+        "frame": 256,
+        "position": 0,
+        "playing": true,
+        "generation": 1,
+        "rate": 1.08,
+        "semitones": 0,
+        "keylock": true,
+        "effectiveSemitones": 0,
+        "ready": true,
+        "superseded": [],
+        "preparationMilliseconds": 7.2192499999998745,
+        "preparationClock": "performance.now",
+        "positionKind": "nominal-not-measured-audible",
+        "counters": [
+          {
+            "originFrame": 0,
+            "sourceCursorFrame": 7168,
+            "realFramesFed": 7168,
+            "paddingFramesFed": 0,
+            "paddingLimit": 96000,
+            "generatedFrames": 4800,
+            "extractedFrames": 0,
+            "discardedPrerollFrames": 0,
+            "outputFramesReady": 4800
+          },
+          {
+            "originFrame": 0,
+            "sourceCursorFrame": 7168,
+            "realFramesFed": 7168,
+            "paddingFramesFed": 0,
+            "paddingLimit": 96000,
+            "generatedFrames": 4800,
+            "extractedFrames": 0,
+            "discardedPrerollFrames": 0,
+            "outputFramesReady": 4800
+          },
+          {
+            "originFrame": 0,
+            "sourceCursorFrame": 7168,
+            "realFramesFed": 7168,
+            "paddingFramesFed": 0,
+            "paddingLimit": 96000,
+            "generatedFrames": 4800,
+            "extractedFrames": 0,
+            "discardedPrerollFrames": 0,
+            "outputFramesReady": 4800
+          },
+          {
+            "originFrame": 0,
+            "sourceCursorFrame": 7168,
+            "realFramesFed": 7168,
+            "paddingFramesFed": 0,
+            "paddingLimit": 96000,
+            "generatedFrames": 4800,
+            "extractedFrames": 0,
+            "discardedPrerollFrames": 0,
+            "outputFramesReady": 4800
+          },
+          {
+            "originFrame": 0,
+            "sourceCursorFrame": 7168,
+            "realFramesFed": 7168,
+            "paddingFramesFed": 0,
+            "paddingLimit": 96000,
+            "generatedFrames": 4800,
+            "extractedFrames": 0,
+            "discardedPrerollFrames": 0,
+            "outputFramesReady": 4800
+          }
+        ]
+      },
+      "allFinite": true,
+      "raw": {
+        "path": "local-evidence/soundtouch-grouped-stems/tempo-48000.f32le",
+        "frames": 144000,
+        "channels": 10,
+        "sampleRate": 48000,
+        "bytes": 5760000,
+        "sha256": "5b3138544af3501e8c1f39bbf3c09374859475756ed77d6a5ffbf95a01c2923d"
+      },
+      "channels": [
+        {
+          "channel": 0,
+          "firstFrame": 24000,
+          "lastExclusive": 120000,
+          "referenceRMS": 0.03529185135570737,
+          "residualRMS": 9.92835791692503e-10,
+          "relativeRMS": 2.81321538415678e-8,
+          "peakResidual": 7.450580596923828e-9,
+          "passed": true
+        },
+        {
+          "channel": 1,
+          "firstFrame": 24000,
+          "lastExclusive": 120000,
+          "referenceRMS": 0.035195827297165375,
+          "residualRMS": 9.843028846287743e-10,
+          "relativeRMS": 2.796646535164834e-8,
+          "peakResidual": 7.916241884231567e-9,
+          "passed": true
+        }
+      ],
+      "snapshot": {
+        "sampleRate": 48000,
+        "nextFrame": 144000,
+        "generation": 1,
+        "disposed": false,
+        "state": {
+          "frame": 256,
+          "position": 3.2342400000000002,
+          "playing": true,
+          "generation": 1,
+          "rate": 1.08,
+          "semitones": 0,
+          "keylock": true,
+          "effectiveSemitones": 0,
+          "anchorPosition": 0,
+          "positionKind": "nominal-not-measured-audible"
+        },
+        "sourceBytes": 7680000,
+        "retainedWholeSources": true,
+        "memoryLimit": "Whole caller-provided PCM plus bounded16epochs; opaque DSP heaps not counted.",
+        "pcmOwnership": "Descriptors are snapshotted; PCM arrays are borrowed immutable data for the transport lifetime. The worklet owns transferred storage.",
+        "renderedFrames": 144000,
+        "retiredEpochs": 0,
+        "retiredSummaries": [
+          {
+            "generation": 1,
+            "counters": [
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 157696,
+                "realFramesFed": 157696,
+                "paddingFramesFed": 0,
+                "paddingLimit": 96000,
+                "generatedFrames": 144000,
+                "extractedFrames": 143744,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 256
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 157696,
+                "realFramesFed": 157696,
+                "paddingFramesFed": 0,
+                "paddingLimit": 96000,
+                "generatedFrames": 144000,
+                "extractedFrames": 143744,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 256
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 157696,
+                "realFramesFed": 157696,
+                "paddingFramesFed": 0,
+                "paddingLimit": 96000,
+                "generatedFrames": 144000,
+                "extractedFrames": 143744,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 256
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 157696,
+                "realFramesFed": 157696,
+                "paddingFramesFed": 0,
+                "paddingLimit": 96000,
+                "generatedFrames": 144000,
+                "extractedFrames": 143744,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 256
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 157696,
+                "realFramesFed": 157696,
+                "paddingFramesFed": 0,
+                "paddingLimit": 96000,
+                "generatedFrames": 144000,
+                "extractedFrames": 143744,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 256
+              }
+            ]
+          }
+        ],
+        "retiredSummaryLimit": 64,
+        "clockRetention": "Last two applied anchors; older queries reject explicitly.",
+        "epochs": [
+          {
+            "generation": 1,
+            "role": "active-or-retiring",
+            "counters": [
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 157696,
+                "realFramesFed": 157696,
+                "paddingFramesFed": 0,
+                "paddingLimit": 96000,
+                "generatedFrames": 144000,
+                "extractedFrames": 143744,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 256
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 157696,
+                "realFramesFed": 157696,
+                "paddingFramesFed": 0,
+                "paddingLimit": 96000,
+                "generatedFrames": 144000,
+                "extractedFrames": 143744,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 256
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 157696,
+                "realFramesFed": 157696,
+                "paddingFramesFed": 0,
+                "paddingLimit": 96000,
+                "generatedFrames": 144000,
+                "extractedFrames": 143744,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 256
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 157696,
+                "realFramesFed": 157696,
+                "paddingFramesFed": 0,
+                "paddingLimit": 96000,
+                "generatedFrames": 144000,
+                "extractedFrames": 143744,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 256
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 157696,
+                "realFramesFed": 157696,
+                "paddingFramesFed": 0,
+                "paddingLimit": 96000,
+                "generatedFrames": 144000,
+                "extractedFrames": 143744,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 256
+              }
+            ],
+            "overlapGuide": {
+              "participants": 5,
+              "registered": 5,
+              "nextDecision": 30,
+              "retainedDecisions": 0,
+              "maxPendingDecisions": 4096,
+              "peakPendingDecisions": 1,
+              "produced": 30,
+              "consumed": 120,
+              "readers": [
+                {
+                  "index": 0,
+                  "next": 30,
+                  "disposed": false
+                },
+                {
+                  "index": 1,
+                  "next": 30,
+                  "disposed": false
+                },
+                {
+                  "index": 2,
+                  "next": 30,
+                  "disposed": false
+                },
+                {
+                  "index": 3,
+                  "next": 30,
+                  "disposed": false
+                },
+                {
+                  "index": 4,
+                  "next": 30,
+                  "disposed": false
+                }
+              ]
+            }
+          }
+        ],
+        "scope": "Forward pull-based experiment; nominal output endpoint, not measured audible source position or proved EOS tail preservation."
+      },
+      "disposed": {
+        "sampleRate": 48000,
+        "nextFrame": 144000,
+        "generation": 1,
+        "disposed": true,
+        "state": {
+          "frame": 144000,
+          "position": 3.2342400000000002,
+          "playing": false,
+          "generation": 1,
+          "rate": 1.08,
+          "semitones": 0,
+          "keylock": true,
+          "effectiveSemitones": 0,
+          "anchorPosition": 3.2342400000000002,
+          "positionKind": "nominal-not-measured-audible"
+        },
+        "sourceBytes": 0,
+        "retainedWholeSources": false,
+        "memoryLimit": "Whole caller-provided PCM plus bounded16epochs; opaque DSP heaps not counted.",
+        "pcmOwnership": "Descriptors are snapshotted; PCM arrays are borrowed immutable data for the transport lifetime. The worklet owns transferred storage.",
+        "renderedFrames": 144000,
+        "retiredEpochs": 1,
+        "retiredSummaries": [
+          {
+            "generation": 1,
+            "counters": [
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 157696,
+                "realFramesFed": 157696,
+                "paddingFramesFed": 0,
+                "paddingLimit": 96000,
+                "generatedFrames": 144000,
+                "extractedFrames": 143744,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 256
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 157696,
+                "realFramesFed": 157696,
+                "paddingFramesFed": 0,
+                "paddingLimit": 96000,
+                "generatedFrames": 144000,
+                "extractedFrames": 143744,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 256
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 157696,
+                "realFramesFed": 157696,
+                "paddingFramesFed": 0,
+                "paddingLimit": 96000,
+                "generatedFrames": 144000,
+                "extractedFrames": 143744,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 256
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 157696,
+                "realFramesFed": 157696,
+                "paddingFramesFed": 0,
+                "paddingLimit": 96000,
+                "generatedFrames": 144000,
+                "extractedFrames": 143744,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 256
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 157696,
+                "realFramesFed": 157696,
+                "paddingFramesFed": 0,
+                "paddingLimit": 96000,
+                "generatedFrames": 144000,
+                "extractedFrames": 143744,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 256
+              }
+            ]
+          }
+        ],
+        "retiredSummaryLimit": 64,
+        "clockRetention": "Last two applied anchors; older queries reject explicitly.",
+        "epochs": [],
+        "scope": "Forward pull-based experiment; nominal output endpoint, not measured audible source position or proved EOS tail preservation."
+      }
+    },
+    {
+      "id": "shifted",
+      "rate": 1.08,
+      "semitones": 2,
+      "sampleRate": 48000,
+      "keylock": true,
+      "passed": true,
+      "errors": [],
+      "inputHashes": [
+        [
+          "53f7a34aa65aff636126c89e1a9d9198e6026246cd6a1ac39991899d2c4280bb",
+          "955f3cd474f0685303d5f7ee4a464a4ef9bf3bbdef0be18e961e84f25a3f6a2c"
+        ],
+        [
+          "fc793b59c7b1df88cd920a6d535adaa698eccec434a3c5114e9972b2de6dac7f",
+          "2568f8b414329ef3835c646a9c72d909b4c8ba2122ccebae7a32a5ace5f683cf"
+        ],
+        [
+          "c401ee15d671b464a4425d02047866c9506017dec40bdcd2fe4f516b88bdc440",
+          "cbbf95bc2b688496cc437dfdceeaf79f6a62c1e9485e050de3973d171be46bb5"
+        ],
+        [
+          "00f8b643fc96e3d83da6277b059a598465d8f17f878dff41fdd6fd38be2b4aa1",
+          "566a9e278345aa8e6990b5c492bce7406cfd623e9b2dc2bd55bda78fcda7e4bf"
+        ],
+        [
+          "de0fa892f8b3590b0a3b2abaea7d00d0e3576cc3231e0de0f9e21825e25fe7f2",
+          "be80ade21be6796d16c549f53af823856665c9383dc8d33a657e6e4173bcb903"
+        ]
+      ],
+      "ack": {
+        "frame": 256,
+        "position": 0,
+        "playing": true,
+        "generation": 1,
+        "rate": 1.08,
+        "semitones": 2,
+        "keylock": true,
+        "effectiveSemitones": 2,
+        "ready": true,
+        "superseded": [],
+        "preparationMilliseconds": 6.180166000000099,
+        "preparationClock": "performance.now",
+        "positionKind": "nominal-not-measured-audible",
+        "counters": [
+          {
+            "originFrame": 0,
+            "sourceCursorFrame": 7168,
+            "realFramesFed": 7168,
+            "paddingFramesFed": 0,
+            "paddingLimit": 96000,
+            "generatedFrames": 4405,
+            "extractedFrames": 0,
+            "discardedPrerollFrames": 0,
+            "outputFramesReady": 4405
+          },
+          {
+            "originFrame": 0,
+            "sourceCursorFrame": 7168,
+            "realFramesFed": 7168,
+            "paddingFramesFed": 0,
+            "paddingLimit": 96000,
+            "generatedFrames": 4405,
+            "extractedFrames": 0,
+            "discardedPrerollFrames": 0,
+            "outputFramesReady": 4405
+          },
+          {
+            "originFrame": 0,
+            "sourceCursorFrame": 7168,
+            "realFramesFed": 7168,
+            "paddingFramesFed": 0,
+            "paddingLimit": 96000,
+            "generatedFrames": 4405,
+            "extractedFrames": 0,
+            "discardedPrerollFrames": 0,
+            "outputFramesReady": 4405
+          },
+          {
+            "originFrame": 0,
+            "sourceCursorFrame": 7168,
+            "realFramesFed": 7168,
+            "paddingFramesFed": 0,
+            "paddingLimit": 96000,
+            "generatedFrames": 4405,
+            "extractedFrames": 0,
+            "discardedPrerollFrames": 0,
+            "outputFramesReady": 4405
+          },
+          {
+            "originFrame": 0,
+            "sourceCursorFrame": 7168,
+            "realFramesFed": 7168,
+            "paddingFramesFed": 0,
+            "paddingLimit": 96000,
+            "generatedFrames": 4405,
+            "extractedFrames": 0,
+            "discardedPrerollFrames": 0,
+            "outputFramesReady": 4405
+          }
+        ]
+      },
+      "allFinite": true,
+      "raw": {
+        "path": "local-evidence/soundtouch-grouped-stems/shifted-48000.f32le",
+        "frames": 144000,
+        "channels": 10,
+        "sampleRate": 48000,
+        "bytes": 5760000,
+        "sha256": "148f1d08f7108101188e58cc24e6c38e2f405ab1179d64df197128ea5e3ff404"
+      },
+      "channels": [
+        {
+          "channel": 0,
+          "firstFrame": 24000,
+          "lastExclusive": 120000,
+          "referenceRMS": 0.03515600966669244,
+          "residualRMS": 1.5550469348225596e-9,
+          "relativeRMS": 4.423274852765343e-8,
+          "peakResidual": 1.0244548320770264e-8,
+          "passed": true
+        },
+        {
+          "channel": 1,
+          "firstFrame": 24000,
+          "lastExclusive": 120000,
+          "referenceRMS": 0.035169456103861185,
+          "residualRMS": 1.551503556769422e-9,
+          "relativeRMS": 4.411508532254741e-8,
+          "peakResidual": 9.313225746154785e-9,
+          "passed": true
+        }
+      ],
+      "snapshot": {
+        "sampleRate": 48000,
+        "nextFrame": 144000,
+        "generation": 1,
+        "disposed": false,
+        "state": {
+          "frame": 256,
+          "position": 3.2342400000000002,
+          "playing": true,
+          "generation": 1,
+          "rate": 1.08,
+          "semitones": 2,
+          "keylock": true,
+          "effectiveSemitones": 2,
+          "anchorPosition": 0,
+          "positionKind": "nominal-not-measured-audible"
+        },
+        "sourceBytes": 7680000,
+        "retainedWholeSources": true,
+        "memoryLimit": "Whole caller-provided PCM plus bounded16epochs; opaque DSP heaps not counted.",
+        "pcmOwnership": "Descriptors are snapshotted; PCM arrays are borrowed immutable data for the transport lifetime. The worklet owns transferred storage.",
+        "renderedFrames": 144000,
+        "retiredEpochs": 0,
+        "retiredSummaries": [
+          {
+            "generation": 1,
+            "counters": [
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 159744,
+                "realFramesFed": 159744,
+                "paddingFramesFed": 0,
+                "paddingLimit": 96000,
+                "generatedFrames": 145352,
+                "extractedFrames": 143744,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 1608
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 159744,
+                "realFramesFed": 159744,
+                "paddingFramesFed": 0,
+                "paddingLimit": 96000,
+                "generatedFrames": 145352,
+                "extractedFrames": 143744,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 1608
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 159744,
+                "realFramesFed": 159744,
+                "paddingFramesFed": 0,
+                "paddingLimit": 96000,
+                "generatedFrames": 145352,
+                "extractedFrames": 143744,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 1608
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 159744,
+                "realFramesFed": 159744,
+                "paddingFramesFed": 0,
+                "paddingLimit": 96000,
+                "generatedFrames": 145352,
+                "extractedFrames": 143744,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 1608
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 159744,
+                "realFramesFed": 159744,
+                "paddingFramesFed": 0,
+                "paddingLimit": 96000,
+                "generatedFrames": 145352,
+                "extractedFrames": 143744,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 1608
+              }
+            ]
+          }
+        ],
+        "retiredSummaryLimit": 64,
+        "clockRetention": "Last two applied anchors; older queries reject explicitly.",
+        "epochs": [
+          {
+            "generation": 1,
+            "role": "active-or-retiring",
+            "counters": [
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 159744,
+                "realFramesFed": 159744,
+                "paddingFramesFed": 0,
+                "paddingLimit": 96000,
+                "generatedFrames": 145352,
+                "extractedFrames": 143744,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 1608
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 159744,
+                "realFramesFed": 159744,
+                "paddingFramesFed": 0,
+                "paddingLimit": 96000,
+                "generatedFrames": 145352,
+                "extractedFrames": 143744,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 1608
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 159744,
+                "realFramesFed": 159744,
+                "paddingFramesFed": 0,
+                "paddingLimit": 96000,
+                "generatedFrames": 145352,
+                "extractedFrames": 143744,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 1608
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 159744,
+                "realFramesFed": 159744,
+                "paddingFramesFed": 0,
+                "paddingLimit": 96000,
+                "generatedFrames": 145352,
+                "extractedFrames": 143744,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 1608
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 159744,
+                "realFramesFed": 159744,
+                "paddingFramesFed": 0,
+                "paddingLimit": 96000,
+                "generatedFrames": 145352,
+                "extractedFrames": 143744,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 1608
+              }
+            ],
+            "overlapGuide": {
+              "participants": 5,
+              "registered": 5,
+              "nextDecision": 33,
+              "retainedDecisions": 0,
+              "maxPendingDecisions": 4096,
+              "peakPendingDecisions": 1,
+              "produced": 33,
+              "consumed": 132,
+              "readers": [
+                {
+                  "index": 0,
+                  "next": 33,
+                  "disposed": false
+                },
+                {
+                  "index": 1,
+                  "next": 33,
+                  "disposed": false
+                },
+                {
+                  "index": 2,
+                  "next": 33,
+                  "disposed": false
+                },
+                {
+                  "index": 3,
+                  "next": 33,
+                  "disposed": false
+                },
+                {
+                  "index": 4,
+                  "next": 33,
+                  "disposed": false
+                }
+              ]
+            }
+          }
+        ],
+        "scope": "Forward pull-based experiment; nominal output endpoint, not measured audible source position or proved EOS tail preservation."
+      },
+      "disposed": {
+        "sampleRate": 48000,
+        "nextFrame": 144000,
+        "generation": 1,
+        "disposed": true,
+        "state": {
+          "frame": 144000,
+          "position": 3.2342400000000002,
+          "playing": false,
+          "generation": 1,
+          "rate": 1.08,
+          "semitones": 2,
+          "keylock": true,
+          "effectiveSemitones": 2,
+          "anchorPosition": 3.2342400000000002,
+          "positionKind": "nominal-not-measured-audible"
+        },
+        "sourceBytes": 0,
+        "retainedWholeSources": false,
+        "memoryLimit": "Whole caller-provided PCM plus bounded16epochs; opaque DSP heaps not counted.",
+        "pcmOwnership": "Descriptors are snapshotted; PCM arrays are borrowed immutable data for the transport lifetime. The worklet owns transferred storage.",
+        "renderedFrames": 144000,
+        "retiredEpochs": 1,
+        "retiredSummaries": [
+          {
+            "generation": 1,
+            "counters": [
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 159744,
+                "realFramesFed": 159744,
+                "paddingFramesFed": 0,
+                "paddingLimit": 96000,
+                "generatedFrames": 145352,
+                "extractedFrames": 143744,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 1608
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 159744,
+                "realFramesFed": 159744,
+                "paddingFramesFed": 0,
+                "paddingLimit": 96000,
+                "generatedFrames": 145352,
+                "extractedFrames": 143744,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 1608
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 159744,
+                "realFramesFed": 159744,
+                "paddingFramesFed": 0,
+                "paddingLimit": 96000,
+                "generatedFrames": 145352,
+                "extractedFrames": 143744,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 1608
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 159744,
+                "realFramesFed": 159744,
+                "paddingFramesFed": 0,
+                "paddingLimit": 96000,
+                "generatedFrames": 145352,
+                "extractedFrames": 143744,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 1608
+              },
+              {
+                "originFrame": 0,
+                "sourceCursorFrame": 159744,
+                "realFramesFed": 159744,
+                "paddingFramesFed": 0,
+                "paddingLimit": 96000,
+                "generatedFrames": 145352,
+                "extractedFrames": 143744,
+                "discardedPrerollFrames": 0,
+                "outputFramesReady": 1608
+              }
+            ]
+          }
+        ],
+        "retiredSummaryLimit": 64,
+        "clockRetention": "Last two applied anchors; older queries reject explicitly.",
+        "epochs": [],
+        "scope": "Forward pull-based experiment; nominal output endpoint, not measured audible source position or proved EOS tail preservation."
+      }
+    }
+  ],
+  "passed": 6,
+  "failed": 0,
+  "fullParityVerified": false
+}
