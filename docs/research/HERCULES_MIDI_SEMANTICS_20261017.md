@@ -15,3 +15,9 @@ Inspected MK2 XML has0x10–0x17 and0x50,0x52–0x57 at0x96/0x97. **0x51 is infe
 ## Plan86 — Stems and Pitch Play pages
 
 The official MK2 guide above supplies primary Stem toggle/FX behavior and Pitch Play’s semitone layouts/Shift cue-selection semantics. Independent inputs share the existing actual preparation/mix/Pitch Play actions. v6 adds48candidate assignments for212total. The inspected XML confirms0x20–0x27 and0x40–0x43 at0x96/0x97. **0x44–0x47 (remaining Pitch pads) and0x48–0x4F (Shift cue-select) are inferred**, not in the inspected XML or captured physically. Preserve earlier missing0x51 and Sampler-alt hypotheses. Software synthetic prepared-audio checks are in plan86; no physical, exact-default or new model/FX-quality claim. Manual Loop/Scratch Bank pages and other remaining hardware requirements remain open.
+
+## Plan87 — Manual Loop and Scratch Bank pages
+
+[Manual Looping](https://support.serato.com/hc/en-us/articles/226514068-Manual-Looping) and [Managing Loops](https://support.serato.com/hc/en-us/articles/226383867-Managing-Loops), plus the MK2 guide, establish edit/toggle/reloop/selected-slot/save behavior.7Manual inputs implemented, no invented8th. Independent fine-jog edit is1ms/tick; vendor sensitivity unmeasured. Scratch inputs share panel load/cue/repeat/keylock settings and previous-track path, on addressed deck. Existing load pauses; continuing-playing exact reference remains open.
+
+**All0x60–0x66 Manual Loop notes are inferred/absent inspected XML.** Scratch byte facts in XML:0x70–0x76,0x78–0x7C,0x7E/0x7F;**0x77 and0x7D inferred**. Source custom effect action names are not Pro semantics. v7adds46bindings for258candidate assignments, not258physical functions. Earlier hypotheses remain. Software actual-app recording is in plan87, no physical/default-map/native claim.

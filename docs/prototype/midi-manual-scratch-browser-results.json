@@ -1,0 +1,195 @@
+{
+  "startedAt": "2026-10-17T22:08:06.737Z",
+  "completed": true,
+  "scope": "Actual app MIDI editor/synthetic messages, manual loop audio and Scratch Bank UI/loads. No physical, native, full loop/range/persistence/compound/reference acceptance.",
+  "criteria": {
+    "frequencyErrorHz": 0.8,
+    "playingMinimumRMS": 0.005,
+    "loopBoundaryToleranceSeconds": 1e-06,
+    "reloopPositionToleranceSeconds": 0.08
+  },
+  "events": [
+    {
+      "name": "record-start",
+      "time": 0
+    },
+    {
+      "name": "edited-loop",
+      "time": 0.07546485260770974
+    },
+    {
+      "name": "scratch-sample-playing",
+      "time": 0.7314285714285714
+    },
+    {
+      "name": "locked-load-keeps-playing",
+      "time": 1.0332879818594105
+    },
+    {
+      "name": "original-restored",
+      "time": 1.3235374149659864
+    }
+  ],
+  "checks": [
+    "Actual Manual In/Out fine jog edit and visible edit states without tempo changes",
+    "Selected-slot save reaches stored metadata; next/previous focus and actual reloop",
+    "Scratch Bank UI cue/repeat settings load addressed deck and previous track",
+    "Playing-lock refusal preserves active source/settings; master recording matches all phases"
+  ],
+  "errors": [],
+  "sourceBefore": {
+    "app.js": "a50893c19804a89cdda189989ab0811687bdd597c5fb28167f04291f248d49c3",
+    "engine.js": "c0f7fa915938ab416137807a4345878d290110dcdfce23283e46c1e665eec6b1",
+    "panels.js": "17734701ceef6c48154c99fd797dcfa73906ec7ac0f4e394cf3db8c80ff90a09",
+    "deck-midi.js": "24304c4314cf1bd722b42dc806c2b1c48c3b28f2a3661774458958d73d7b1e7a",
+    "midi.js": "0cabb6dbe98e9eb3f7bc7f7eb44615fa315a0738260e5f3568a34d0aa75ec1ad",
+    "manual-loops.js": "0623f47435f8da71925b35ddb0579a98c51485b2dcd6936a199af79e6ec56719",
+    "beatgrid.js": "9d74accf0a8278fefe1f43dd06534c442b76b44300746c9e791d583fa1e6b71e",
+    "midi-manual-scratch-harness.js": "764f05dcba8b0a6816ffb443ce0256583e9ffffe4f37d9b0e42b45a787e600eb"
+  },
+  "manual": {
+    "start": 1.025,
+    "end": 1.95,
+    "nominalRate": 1
+  },
+  "savedLoops": [
+    {
+      "start": 1.025,
+      "end": 1.95,
+      "name": "Loop 1"
+    },
+    {
+      "start": 1.025,
+      "end": 1.95,
+      "name": "Loop 2"
+    }
+  ],
+  "reloop": 1.026609977324263,
+  "scratch": {
+    "id": "demo-2",
+    "position": 2,
+    "repeat": true,
+    "keylock": false,
+    "oppositeUnchanged": true
+  },
+  "lockedRefusal": {
+    "track": "demo-2",
+    "keylock": false,
+    "repeat": true,
+    "playing": true
+  },
+  "previous": {
+    "id": "demo-0",
+    "position": 1.2530045351473922,
+    "expected": 1.2530045351473922
+  },
+  "recording": {
+    "bytes": 26323,
+    "format": "audio/webm;codecs=opus",
+    "sha256": "b190d4da1e79211b323c44149f2a92f79fe189c23cffdbfb73d875714e56fe0a"
+  },
+  "decoded": {
+    "duration": 1.62,
+    "sampleRate": 44100,
+    "frames": 71442,
+    "channels": 2
+  },
+  "audio": [
+    {
+      "name": "edited-loop",
+      "expected": [
+        400,
+        550
+      ],
+      "channels": [
+        {
+          "from": 0.15546485260770976,
+          "to": 0.27546485260770975,
+          "rms": 0.037372692817386276,
+          "hz": 400.0013093994102
+        },
+        {
+          "from": 0.15546485260770976,
+          "to": 0.27546485260770975,
+          "rms": 0.03731280149725487,
+          "hz": 550.005426278726
+        }
+      ]
+    },
+    {
+      "name": "scratch-sample",
+      "expected": [
+        800,
+        550
+      ],
+      "channels": [
+        {
+          "from": 0.8114285714285714,
+          "to": 0.9314285714285715,
+          "rms": 0.0373780550794253,
+          "hz": 800.0023899443859
+        },
+        {
+          "from": 0.8114285714285714,
+          "to": 0.9314285714285715,
+          "rms": 0.037434885840424995,
+          "hz": 550.0082555418044
+        }
+      ]
+    },
+    {
+      "name": "locked-refusal",
+      "expected": [
+        800,
+        550
+      ],
+      "channels": [
+        {
+          "from": 1.1132879818594106,
+          "to": 1.2332879818594105,
+          "rms": 0.037430251370641786,
+          "hz": 799.9983363607031
+        },
+        {
+          "from": 1.1132879818594106,
+          "to": 1.2332879818594105,
+          "rms": 0.03744195527730223,
+          "hz": 549.9932975240937
+        }
+      ]
+    },
+    {
+      "name": "restored-original",
+      "expected": [
+        400,
+        550
+      ],
+      "channels": [
+        {
+          "from": 1.4035374149659865,
+          "to": 1.5235374149659864,
+          "rms": 0.03739306307719007,
+          "hz": 399.9992999426702
+        },
+        {
+          "from": 1.4035374149659865,
+          "to": 1.5235374149659864,
+          "rms": 0.03735037366485058,
+          "hz": 550.0100633906587
+        }
+      ]
+    }
+  ],
+  "sourceAfter": {
+    "app.js": "a50893c19804a89cdda189989ab0811687bdd597c5fb28167f04291f248d49c3",
+    "engine.js": "c0f7fa915938ab416137807a4345878d290110dcdfce23283e46c1e665eec6b1",
+    "panels.js": "17734701ceef6c48154c99fd797dcfa73906ec7ac0f4e394cf3db8c80ff90a09",
+    "deck-midi.js": "24304c4314cf1bd722b42dc806c2b1c48c3b28f2a3661774458958d73d7b1e7a",
+    "midi.js": "0cabb6dbe98e9eb3f7bc7f7eb44615fa315a0738260e5f3568a34d0aa75ec1ad",
+    "manual-loops.js": "0623f47435f8da71925b35ddb0579a98c51485b2dcd6936a199af79e6ec56719",
+    "beatgrid.js": "9d74accf0a8278fefe1f43dd06534c442b76b44300746c9e791d583fa1e6b71e",
+    "midi-manual-scratch-harness.js": "764f05dcba8b0a6816ffb443ce0256583e9ffffe4f37d9b0e42b45a787e600eb"
+  },
+  "sourceStable": true,
+  "finishedAt": "2026-10-17T22:08:08.530Z"
+}

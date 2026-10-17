@@ -7,7 +7,9 @@ const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 const key=m=>JSON.stringify([m.deviceId||'',m.type,m.channel,m.number]);
 const continuous=['tempo','trim','high','mid','low','filter','level','jog nudge','jog bend','jog surface'];
 const padCommands=['auto loop','loop roll','stems','pitch play','pitch cue select'].flatMap(mode=>Array.from({length:8},(_,i)=>`${mode} pad ${i+1}`));
-const commands=[...padCommands,'load','play','cue','sync','sync off','headphone cue','loop','loop in','loop out','loop half','loop double','keylock','jog touch','jog touch fast','vinyl','slip','quantize','tempo range','previous','stutter'];
+const manualCommands=Array.from({length:7},(_,n)=>`manual loop pad ${n+1}`);
+const scratchCommands=Array.from({length:8},(_,n)=>[`scratch bank pad ${n+1}`,`scratch bank previous pad ${n+1}`]).flat();
+const commands=[...manualCommands,...scratchCommands,...padCommands,'load','play','cue','sync','sync off','headphone cue','loop','loop in','loop out','loop half','loop double','keylock','jog touch','jog touch fast','vinyl','slip','quantize','tempo range','previous','stutter'];
 export const deckMIDITargets=Array.from({length:4},(_,i)=>[...continuous,...commands,...Array.from({length:8},(_,n)=>`hot cue ${n+1}`),...Array.from({length:8},(_,n)=>`clear cue ${n+1}`)].map(x=>`Deck ${i+1} ${x}`)).flat();
 export const samplerMIDITargets=Array.from({length:8},(_,n)=>[`Sampler ${n+1}`,`Sampler ${n+1} alt`]).flat();
 export const fxMIDITargets=[1,2].flatMap(n=>['depth','beat','enable'].map(x=>`FX unit ${n} ${x}`));
@@ -63,6 +65,7 @@ export function createDeckMIDIRouter({state,engine,actions,applyFX=()=>{},onChan
   if(!d||![...continuous,...commands,...Array.from({length:8},(_,n)=>`hot cue ${n+1}`),...Array.from({length:8},(_,n)=>`clear cue ${n+1}`)].includes(action))return false;
   const owner=`midi:${key(message)}`;
   if(action==='jog touch'||action==='jog touch fast'){
+   if(d.loopEdit)return true;
    if(mapping.encoding!=='7-bit absolute'||message.type==='Pitch bend')throw Error('Jog touch needs a7-bit Note/CC button with release.');
    if(message.pressed)await jogTouch.press(d,message,{fast:action==='jog touch fast',vinyl:d.vinyl!==false});
    else jogTouch.releaseMessage(message);return true;
@@ -72,6 +75,14 @@ export function createDeckMIDIRouter({state,engine,actions,applyFX=()=>{},onChan
    if(buttons.has(key(message)))return true;
    const hot=/^hot cue ([1-8])$/.exec(action),clear=/^clear cue ([1-8])$/.exec(action),cue=action==='cue'||!!hot;
    const held={owner,cue,deviceId:message.deviceId||'',release:null};buttons.set(key(message),held);
+   const manualPad=/^manual loop pad ([1-7])$/.exec(action),scratchPad=/^scratch bank( previous)? pad ([1-8])$/.exec(action);
+   if(manualPad||scratchPad){
+    try{
+     if(mapping.encoding!=='7-bit absolute'||message.type==='Pitch bend')throw Error('Performance pads need a7-bit Note/CC button with release.');
+     if(manualPad){await jogTouch.resetDeck(d.index);await jogBend.resetDeck(d.index);await actions.manualLoops.press(d,Number(manualPad[1])-1);}
+     else await actions.scratchAction(Number(scratchPad[2])-1,d.index,!!scratchPad[1]);
+    }catch(error){if(buttons.get(key(message))===held)buttons.delete(key(message));throw error;}return true;
+   }
    const performancePad=/^(stems|pitch play|pitch cue select) pad ([1-8])$/.exec(action);
    if(performancePad){
     try{
@@ -118,6 +129,10 @@ export function createDeckMIDIRouter({state,engine,actions,applyFX=()=>{},onChan
    if(!caught){onStatus(`Deck ${d.index+1}: move tempo fader through ${((d.rate-1)*100).toFixed(1)}% to pick it up.`);return true;}
    await scheduleRate(d,clamp(requested,.25,4));onChange({deck:d.index,field:'tempo',value:d.rate});return true;
   }
+  if(['jog surface','jog bend','jog nudge'].includes(action)&&d.loopEdit){
+   if(!relative)throw Error('Loop boundary jog requires a relative MIDI encoding.');
+   await actions.manualLoops.move(d,value);return true;
+  }
   if(action==='jog surface'){
    if(!relative)throw Error('Jog surface requires a relative MIDI encoding.');
    if(await jogTouch.move(d,value,message.deviceId||''))return true;
@@ -154,7 +169,7 @@ export function createDeckMIDIRouter({state,engine,actions,applyFX=()=>{},onChan
 
 export function herculesPlaybackMappings(deviceId){
  if(!deviceId)throw Error('Connect the named Hercules input before installing its controls.');
- const maps=[],add=(target,type,channel,number,encoding='7-bit absolute',extra={})=>maps.push({target,type,channel,number,encoding,deviceId,preset:'hercules-inpulse-300-mk2-playback-v6',...extra});
+ const maps=[],add=(target,type,channel,number,encoding='7-bit absolute',extra={})=>maps.push({target,type,channel,number,encoding,deviceId,preset:'hercules-inpulse-300-mk2-playback-v7',...extra});
  add('Library browse','CC',1,1,'Relative two’s complement');add('Crossfader','CC',1,0);
  for(let deck=1;deck<=2;deck++){
   const ch=deck+1,t=s=>`Deck ${deck} ${s}`;
@@ -171,7 +186,9 @@ export function herculesPlaybackMappings(deviceId){
   for(const [name,n]of [['sync off',5],['loop half',9],['loop double',10]])add(t(name),'Note',ch+3,n);
   for(const [name,n]of [['slip',1],['quantize',2]])add(t(name),'Note',ch,n);
   for(const [name,n]of [['tempo range',2],['previous',6],['stutter',7]])add(t(name),'Note',ch+3,n);
+  for(let n=0;n<7;n++)add(t(`manual loop pad ${n+1}`),'Note',deck+6,n+0x60);
   for(let n=0;n<8;n++){
+   add(t(`scratch bank pad ${n+1}`),'Note',deck+6,n+0x70);add(t(`scratch bank previous pad ${n+1}`),'Note',deck+6,n+0x78);
    add(t(`stems pad ${n+1}`),'Note',deck+6,n+0x20);add(t(`pitch play pad ${n+1}`),'Note',deck+6,n+0x40);add(t(`pitch cue select pad ${n+1}`),'Note',deck+6,n+0x48);
    add(t(`auto loop pad ${n+1}`),'Note',deck+6,n+0x10);add(t(`loop roll pad ${n+1}`),'Note',deck+6,n+0x50);
    add(t(`hot cue ${n+1}`),'Note',deck+6,n);add(t(`clear cue ${n+1}`),'Note',deck+6,n+8);
