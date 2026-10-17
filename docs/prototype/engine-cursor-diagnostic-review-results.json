@@ -1,0 +1,765 @@
+{
+  "kind": "Independent bounded pre-execution cursor diagnostic review",
+  "date": "2026-10-17",
+  "initialHarnessSHA256": "cc86e8afd1d6b32af80475b6c4f3e661894ee4fb1165ddf751f48be788e00f41",
+  "initialFindings": {
+    "identityFailure": {
+      "rejected": "injected final identity failure",
+      "exportReached": false
+    },
+    "identityHangingCall": {
+      "stillPendingAfter20ms": true,
+      "exportReached": false
+    },
+    "corruptPreflightCleanupReport": {
+      "fatalErrors": [
+        {
+          "phase": "capture integrity",
+          "error": "Preflight stereo frame/sequence discontinuity"
+        }
+      ]
+    },
+    "controlRightChannel": {
+      "classification": "source graph and missing assertion; initial native graph was not executed",
+      "evidence": "Mono oscillator into explicit2/discrete bus, only controlL metrics checked"
+    }
+  },
+  "frozenSourceHashes": {
+    "prototype/keylock-cursor-analysis.js": "aadf86b0f524af1fa4a4b30e69214f00fe3c096ecedfc11716d56da982c7b577",
+    "prototype/keylock-cursor-capture-worklet.js": "3b605149cb5b6adec647115c25c18818aa5bcb0fe38d2c11214ea81047594a92",
+    "prototype/keylock-engine-cursor-harness.js": "b8e45417bce1fc9411d58ad02416c751c73750339d8792eca5384f73def622a9",
+    "prototype/keylock-engine-cursor-harness.html": "4c7b7ec874162561bc704927a854fb6f59c83230adb66b62dd3b4d492799f11a",
+    "scripts/run_native_cursor_harness.cjs": "5731a72022d210750765eda30cc17c17f3fe0d892fcc60de20028056d0b2fd57",
+    "scripts/test_engine_cursor_diagnostic.mjs": "fa20a577423b1559bbe9ac4e31f8a47f8de6c5233a07c568d81ec4c437cc4b5d"
+  },
+  "correctedControlledEvidence": {
+    "identityRejection": {
+      "report": {
+        "fatalErrors": [
+          {
+            "phase": "final source identities",
+            "error": "injected final identity failure"
+          }
+        ],
+        "sourceHashes": {
+          "a": "a"
+        },
+        "sourceStable": false
+      },
+      "exportContinuationReached": true
+    },
+    "identityTimeout": {
+      "elapsedMs": 4001.4385,
+      "report": {
+        "fatalErrors": [
+          {
+            "phase": "final source identities",
+            "error": "final source identities timed out"
+          }
+        ],
+        "sourceHashes": {
+          "a": "a"
+        },
+        "sourceStable": false
+      },
+      "exportContinuationReached": true
+    },
+    "corruptPreflight": {
+      "receivedProducerRows": 2,
+      "report": {
+        "fatalErrors": [
+          {
+            "phase": "capture integrity",
+            "error": "Preflight stereo frame/sequence discontinuity"
+          }
+        ],
+        "captureTranscript": {
+          "preflight": {
+            "type": "preflight",
+            "id": "p",
+            "rows": [
+              {
+                "frame": 0,
+                "frames": 128,
+                "sequence": 0,
+                "inputChannels": [
+                  2,
+                  2
+                ]
+              },
+              {
+                "frame": 128,
+                "frames": 128,
+                "sequence": 1,
+                "inputChannels": [
+                  2,
+                  2
+                ]
+              },
+              {
+                "frame": 256,
+                "frames": 128,
+                "sequence": 2,
+                "inputChannels": [
+                  2,
+                  2
+                ]
+              },
+              {
+                "frame": 384,
+                "frames": 128,
+                "sequence": 3,
+                "inputChannels": [
+                  2,
+                  2
+                ]
+              },
+              {
+                "frame": 512,
+                "frames": 128,
+                "sequence": 4,
+                "inputChannels": [
+                  2,
+                  2
+                ]
+              },
+              {
+                "frame": 640,
+                "frames": 128,
+                "sequence": 5,
+                "inputChannels": [
+                  0,
+                  2
+                ]
+              },
+              {
+                "frame": 768,
+                "frames": 128,
+                "sequence": 6,
+                "inputChannels": [
+                  2,
+                  2
+                ]
+              },
+              {
+                "frame": 896,
+                "frames": 128,
+                "sequence": 7,
+                "inputChannels": [
+                  2,
+                  2
+                ]
+              },
+              {
+                "frame": 1024,
+                "frames": 128,
+                "sequence": 8,
+                "inputChannels": [
+                  2,
+                  2
+                ]
+              },
+              {
+                "frame": 1152,
+                "frames": 128,
+                "sequence": 9,
+                "inputChannels": [
+                  2,
+                  2
+                ]
+              },
+              {
+                "frame": 1280,
+                "frames": 128,
+                "sequence": 10,
+                "inputChannels": [
+                  2,
+                  2
+                ]
+              },
+              {
+                "frame": 1408,
+                "frames": 128,
+                "sequence": 11,
+                "inputChannels": [
+                  2,
+                  2
+                ]
+              },
+              {
+                "frame": 1536,
+                "frames": 128,
+                "sequence": 12,
+                "inputChannels": [
+                  2,
+                  2
+                ]
+              },
+              {
+                "frame": 1664,
+                "frames": 128,
+                "sequence": 13,
+                "inputChannels": [
+                  2,
+                  2
+                ]
+              },
+              {
+                "frame": 1792,
+                "frames": 128,
+                "sequence": 14,
+                "inputChannels": [
+                  2,
+                  2
+                ]
+              },
+              {
+                "frame": 1920,
+                "frames": 128,
+                "sequence": 15,
+                "inputChannels": [
+                  2,
+                  2
+                ]
+              },
+              {
+                "frame": 2048,
+                "frames": 128,
+                "sequence": 16,
+                "inputChannels": [
+                  2,
+                  2
+                ]
+              },
+              {
+                "frame": 2176,
+                "frames": 128,
+                "sequence": 17,
+                "inputChannels": [
+                  2,
+                  2
+                ]
+              },
+              {
+                "frame": 2304,
+                "frames": 128,
+                "sequence": 18,
+                "inputChannels": [
+                  2,
+                  2
+                ]
+              },
+              {
+                "frame": 2432,
+                "frames": 128,
+                "sequence": 19,
+                "inputChannels": [
+                  2,
+                  2
+                ]
+              },
+              {
+                "frame": 2560,
+                "frames": 128,
+                "sequence": 20,
+                "inputChannels": [
+                  2,
+                  2
+                ]
+              },
+              {
+                "frame": 2688,
+                "frames": 128,
+                "sequence": 21,
+                "inputChannels": [
+                  2,
+                  2
+                ]
+              },
+              {
+                "frame": 2816,
+                "frames": 128,
+                "sequence": 22,
+                "inputChannels": [
+                  2,
+                  2
+                ]
+              },
+              {
+                "frame": 2944,
+                "frames": 128,
+                "sequence": 23,
+                "inputChannels": [
+                  2,
+                  2
+                ]
+              },
+              {
+                "frame": 3072,
+                "frames": 128,
+                "sequence": 24,
+                "inputChannels": [
+                  2,
+                  2
+                ]
+              },
+              {
+                "frame": 3200,
+                "frames": 128,
+                "sequence": 25,
+                "inputChannels": [
+                  2,
+                  2
+                ]
+              },
+              {
+                "frame": 3328,
+                "frames": 128,
+                "sequence": 26,
+                "inputChannels": [
+                  2,
+                  2
+                ]
+              },
+              {
+                "frame": 3456,
+                "frames": 128,
+                "sequence": 27,
+                "inputChannels": [
+                  2,
+                  2
+                ]
+              },
+              {
+                "frame": 3584,
+                "frames": 128,
+                "sequence": 28,
+                "inputChannels": [
+                  2,
+                  2
+                ]
+              },
+              {
+                "frame": 3712,
+                "frames": 128,
+                "sequence": 29,
+                "inputChannels": [
+                  2,
+                  2
+                ]
+              },
+              {
+                "frame": 3840,
+                "frames": 128,
+                "sequence": 30,
+                "inputChannels": [
+                  2,
+                  2
+                ]
+              },
+              {
+                "frame": 3968,
+                "frames": 128,
+                "sequence": 31,
+                "inputChannels": [
+                  2,
+                  2
+                ]
+              },
+              {
+                "frame": 4096,
+                "frames": 128,
+                "sequence": 32,
+                "inputChannels": [
+                  2,
+                  2
+                ]
+              },
+              {
+                "frame": 4224,
+                "frames": 128,
+                "sequence": 33,
+                "inputChannels": [
+                  2,
+                  2
+                ]
+              },
+              {
+                "frame": 4352,
+                "frames": 128,
+                "sequence": 34,
+                "inputChannels": [
+                  2,
+                  2
+                ]
+              },
+              {
+                "frame": 4480,
+                "frames": 128,
+                "sequence": 35,
+                "inputChannels": [
+                  2,
+                  2
+                ]
+              },
+              {
+                "frame": 4608,
+                "frames": 128,
+                "sequence": 36,
+                "inputChannels": [
+                  2,
+                  2
+                ]
+              },
+              {
+                "frame": 4736,
+                "frames": 128,
+                "sequence": 37,
+                "inputChannels": [
+                  2,
+                  2
+                ]
+              },
+              {
+                "frame": 4864,
+                "frames": 128,
+                "sequence": 38,
+                "inputChannels": [
+                  2,
+                  2
+                ]
+              },
+              {
+                "frame": 4992,
+                "frames": 128,
+                "sequence": 39,
+                "inputChannels": [
+                  2,
+                  2
+                ]
+              },
+              {
+                "frame": 5120,
+                "frames": 128,
+                "sequence": 40,
+                "inputChannels": [
+                  2,
+                  2
+                ]
+              },
+              {
+                "frame": 5248,
+                "frames": 128,
+                "sequence": 41,
+                "inputChannels": [
+                  2,
+                  2
+                ]
+              },
+              {
+                "frame": 5376,
+                "frames": 128,
+                "sequence": 42,
+                "inputChannels": [
+                  2,
+                  2
+                ]
+              },
+              {
+                "frame": 5504,
+                "frames": 128,
+                "sequence": 43,
+                "inputChannels": [
+                  2,
+                  2
+                ]
+              },
+              {
+                "frame": 5632,
+                "frames": 128,
+                "sequence": 44,
+                "inputChannels": [
+                  2,
+                  2
+                ]
+              },
+              {
+                "frame": 5760,
+                "frames": 128,
+                "sequence": 45,
+                "inputChannels": [
+                  2,
+                  2
+                ]
+              },
+              {
+                "frame": 5888,
+                "frames": 128,
+                "sequence": 46,
+                "inputChannels": [
+                  2,
+                  2
+                ]
+              },
+              {
+                "frame": 6016,
+                "frames": 128,
+                "sequence": 47,
+                "inputChannels": [
+                  2,
+                  2
+                ]
+              },
+              {
+                "frame": 6144,
+                "frames": 128,
+                "sequence": 48,
+                "inputChannels": [
+                  2,
+                  2
+                ]
+              },
+              {
+                "frame": 6272,
+                "frames": 128,
+                "sequence": 49,
+                "inputChannels": [
+                  2,
+                  2
+                ]
+              },
+              {
+                "frame": 6400,
+                "frames": 128,
+                "sequence": 50,
+                "inputChannels": [
+                  2,
+                  2
+                ]
+              },
+              {
+                "frame": 6528,
+                "frames": 128,
+                "sequence": 51,
+                "inputChannels": [
+                  2,
+                  2
+                ]
+              },
+              {
+                "frame": 6656,
+                "frames": 128,
+                "sequence": 52,
+                "inputChannels": [
+                  2,
+                  2
+                ]
+              },
+              {
+                "frame": 6784,
+                "frames": 128,
+                "sequence": 53,
+                "inputChannels": [
+                  2,
+                  2
+                ]
+              },
+              {
+                "frame": 6912,
+                "frames": 128,
+                "sequence": 54,
+                "inputChannels": [
+                  2,
+                  2
+                ]
+              },
+              {
+                "frame": 7040,
+                "frames": 128,
+                "sequence": 55,
+                "inputChannels": [
+                  2,
+                  2
+                ]
+              },
+              {
+                "frame": 7168,
+                "frames": 128,
+                "sequence": 56,
+                "inputChannels": [
+                  2,
+                  2
+                ]
+              },
+              {
+                "frame": 7296,
+                "frames": 128,
+                "sequence": 57,
+                "inputChannels": [
+                  2,
+                  2
+                ]
+              },
+              {
+                "frame": 7424,
+                "frames": 128,
+                "sequence": 58,
+                "inputChannels": [
+                  2,
+                  2
+                ]
+              },
+              {
+                "frame": 7552,
+                "frames": 128,
+                "sequence": 59,
+                "inputChannels": [
+                  2,
+                  2
+                ]
+              },
+              {
+                "frame": 7680,
+                "frames": 128,
+                "sequence": 60,
+                "inputChannels": [
+                  2,
+                  2
+                ]
+              },
+              {
+                "frame": 7808,
+                "frames": 128,
+                "sequence": 61,
+                "inputChannels": [
+                  2,
+                  2
+                ]
+              },
+              {
+                "frame": 7936,
+                "frames": 128,
+                "sequence": 62,
+                "inputChannels": [
+                  2,
+                  2
+                ]
+              },
+              {
+                "frame": 8064,
+                "frames": 128,
+                "sequence": 63,
+                "inputChannels": [
+                  2,
+                  2
+                ]
+              }
+            ],
+            "consecutive": 64,
+            "startupGaps": []
+          },
+          "arm": {
+            "type": "armed",
+            "id": "a",
+            "firstFrame": 8192,
+            "firstSequence": 64
+          },
+          "fence": {
+            "type": "finished",
+            "id": "f",
+            "lastFrame": 8448,
+            "lastSequence": 65
+          },
+          "rows": [
+            {
+              "frame": 8192,
+              "frames": 128,
+              "sequence": 64,
+              "inputChannels": [
+                2,
+                2
+              ],
+              "channelLengths": [
+                128,
+                128,
+                128,
+                128
+              ]
+            },
+            {
+              "frame": 8320,
+              "frames": 128,
+              "sequence": 65,
+              "inputChannels": [
+                2,
+                2
+              ],
+              "channelLengths": [
+                128,
+                128,
+                128,
+                128
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "dualControl": {
+      "both307Hz": {
+        "left": {
+          "rms": 0.05655955444378081,
+          "peak": 0.07999999821186066,
+          "hz": 307.00000007761315,
+          "passed": true
+        },
+        "right": {
+          "rms": 0.05655955444378081,
+          "peak": 0.07999999821186066,
+          "hz": 307.00000007761315,
+          "passed": true
+        },
+        "passed": true
+      },
+      "missingRight": {
+        "left": {
+          "rms": 0.05655955444378081,
+          "peak": 0.07999999821186066,
+          "hz": 307.00000007761315,
+          "passed": true
+        },
+        "right": {
+          "rms": 0,
+          "peak": 0,
+          "hz": null,
+          "passed": false
+        },
+        "passed": false
+      }
+    }
+  },
+  "checks": {
+    "correctedIdentityFailureRetainsContinuation": true,
+    "correctedHangingIdentityTimesOutAndRetainsContinuation": true,
+    "initialBadPreflightLostProducerMetadata": true,
+    "correctedBadPreflightRetainsAllRows": true,
+    "correctedControlRequiresBothChannels": true,
+    "explicitDualMergerConnectionsPresent": true
+  },
+  "allChecksPassed": true,
+  "rootControlledSuite": {
+    "command": "node scripts/test_engine_cursor_diagnostic.mjs",
+    "executed": 8,
+    "passed": 8,
+    "failed": 0,
+    "scope": "Analytic marker and actual capture producer, not actual WebAudio graph or native engine"
+  },
+  "scope": "Corrected branches executed as exact extracted source segments with controlled rejection, unresolved final fetch, invalid producer preflight and stereo tone vectors. Initial branches replayed from exact source previously read at recorded hash. No actual native/browser/device run, no host security audit. Native cursor acceptance remains unexecuted by reviewer.",
+  "verdict": "No remaining blocking measurement/evidence-loss defect found in the bounded frozen source. Actual native results, calibration confidence and complete raw/capture integrity still require execution.",
+  "limitations": [
+    "400ms marker fits do not prove firstsample cursor",
+    "Quick duration starts after BeginACK; not physical touch latency",
+    "same/different bases alone do not establish forced processor rebase; inspect actual recorded shadow state",
+    "No source modifications"
+  ]
+}

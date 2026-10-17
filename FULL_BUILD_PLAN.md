@@ -1461,3 +1461,24 @@ Read docs/prototype/DESKTOP_KEYLOCK_REVIEW.md, runtime-observation/fixture/crite
 Per-feature Codex/Claude model+effort recommendations remain in canonical registry/cards. Full Claude completeness audit remains unlaunched; exact original PROJECT_PROMPT suffix retained. Goal remains active.
 
 Independent reviews are complete: whole-recording review reproduces all 91 window classifications and quiet runs; separate engine review reconstructs all 26,460 exported samples/57 windows and all five pitch/gap decisions, while retaining unavailable stereo-block and exact-cursor limits. Five existing related Trello descriptions were updated and read back exactly, open/incomplete, with original model/effort recommendations preserved (docs/delivery/trello-native-keylock-sync.json).
+
+
+## 55. Full native cursor capture, timestamp/control disagreement and unresolved marker confidence
+
+17 October 2026. Previous goal turn was progress: scoped native keylock/engine evidence pushed at `f7a2db6`. Full110groups/522requirements plus9separatebeta deltas remain open. This unit adds four test-only prototype assets and three scripts; the existing200production prototype files and0.1.5 bundle remain unchanged. No native DSP rewrite/public release.
+
+A separate official Electron44.9 diagnostic on18769 executed calibration plus10real production-engine scratch-return cases at44100Hz, rate1.08/+12. One full4channel capture retains deckL/R+independent307HzcontrolL/R. Actual native Run and both Save dialogs executed; complete raw15,775,744bytes/985,984frames is finite, SHA189c5708ef1e35719563f5a0e2011ec737f6c9e5107326d1be7ebb1b5985dc52. Complete JSON3261506bytes SHA98f0147512f10a86c302f47dccd766bdf0689d3ab66cab5506747758c28235a8 preserves all producer rows/fences/source hashes/movements. Source stable. Actual diagnostic quit exits0/port18769closed; product app stays separate.
+
+**Result remains failed:** three duplicate/skip producer timestamp pairs yield6armed errors; complete=false/allCriteriaPassed=false,0acceptedcases. Calibration/case analysis in the actual run was blocked by this global gate. No timestamp/PCM repair, no invalid-span trimming and no reclassification from later exploratory intervals. Native0.1.5's earlier7/7 bounded engine test remains separate evidence.
+
+Independent raw phase analysis finds both307Hz controls continue through every suspect row: predicted nextblock RMS errorabout5.76e-8–9.16e-8 versus.036–.040 for forced±128sample alternatives. This proves timestamp/control-audio disagreement for those rows, not cause, deck continuity or correct return position. Whole raw/files remain unchanged.
+
+Exploratory only: an inspector reconstructs original contiguous800ms subintervals with originalframe/sequence/bytegeometry and every acceptedCase=false. Calibration fits have confident errorsabout.5–.75ms, but several early400ms marker fits have insufficient.04 uniqueness. A distant backward/same alias is therefore ambiguous, not a proven7second wrongreturn. Correctpitch/nearposition cannot rescue deficient confidence or globalcapture. Firstsampleposition/music/compound/hardware/reference acceptance remain open.
+
+Read docs/prototype/ENGINE_CURSOR_NATIVE_RESULT.md, engine-cursor-native-initial-results.json, independent clock/source reviews, raw identities, producer transcript and exploratory-subinterval report. Eight controlled analyzer/producer checks and independent correction checks cover malformed/ambiguous evidence, not native acceptance. Source-review export/transcript/control-right defects were corrected before Run; initial snapshots retained. Main sourceengineb468 and old bundles are preserved.
+
+**Next exact unit:** add a separately scheduled AudioParam render-clock observation to the test recorder, retaining actual values plus unmodified currentFrame/currentTime/PCM/control phase. Compare clocks before changing production scheduling or interpreting faulty global timestamps. Increase marker information/calibration where globalfits are ambiguous without relaxing.8/.04/10ms/20ms budgets. Do not rerun identicalmatrix hoping for green, repair oldcapture, or call unconfidentposition an enginefault. Continue all FX/stems/compound/backend/reference/device gaps from currentaudit; this diagnostic never replaces fullgoal.
+
+Per-feature Codex/Claude model+effort recommendations retained. Full Claude completeness audit remains unlaunched; originalprompt suffix byteexact. Goal remains active.
+
+Independent source/clock reviews are frozen. The supplementary original-subinterval extraction/ambiguity verdict was independently checked without acceptance promotion. Four existing related Trello descriptions were updated/read back exactly, still open/incomplete, with model/effort routing preserved (docs/delivery/trello-cursor-initial-sync.json).

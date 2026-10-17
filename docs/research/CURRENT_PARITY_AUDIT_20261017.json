@@ -1,33 +1,36 @@
 {
   "date": "2026-10-17",
-  "generated_at": "2026-10-17T12:20:59.051Z",
+  "generated_at": "2026-10-17T12:41:14.538Z",
   "kind": "CURRENT_SAVED_SOURCE_AND_EVIDENCE_AUDIT_NOT_REFERENCE_RUNTIME_ACCEPTANCE",
-  "git_head": "fa0e7005b556ccda15d5f155755ad70a7d4be161",
+  "git_head": "f7a2db63b726be9952e5c1d32f633e90afef376a",
   "dirty_at_snapshot": [
     "M FULL_BUILD_PLAN.md",
     " M docs/delivery/ACTIVE_EXECUTION.md",
-    " M docs/prototype/desktop-candidate-0.1.5.json",
-    " M docs/prototype/desktop-candidate.json",
+    " M docs/research/CURRENT_PARITY_AUDIT_20261017.json",
+    " M docs/research/CURRENT_PARITY_AUDIT_20261017.md",
     " M handoffs/codex-to-claude-completeness-audit.md",
     " M handoffs/current.md",
     " M scripts/audit_current_parity.mjs",
-    "?? docs/delivery/trello-native-keylock-sync.json",
-    "?? docs/prototype/DESKTOP_KEYLOCK_REVIEW.md",
-    "?? docs/prototype/desktop-0.1.5-engine-keylock-independent-results.json",
-    "?? docs/prototype/desktop-0.1.5-keylock-audio-inspection.json",
-    "?? docs/prototype/desktop-0.1.5-keylock-fixture.json",
-    "?? docs/prototype/desktop-0.1.5-keylock-independent-results.json",
-    "?? docs/prototype/desktop-0.1.5-keylock-quiet-inspection.json",
-    "?? docs/prototype/desktop-0.1.5-keylock-runtime-observation.json",
-    "?? docs/prototype/desktop-0.1.5-keylock-shifted-criterion.json",
-    "?? docs/prototype/desktop-0.1.5-shifted-keylock-audio-inspection.json",
-    "?? docs/prototype/keylock-engine-native-0.1.5-results.json",
-    "?? docs/prototype/screenshots/desktop-0.1.5-after-keylock-tests.png",
-    "?? docs/prototype/screenshots/desktop-0.1.5-engine-keylock-results.png",
-    "?? docs/prototype/screenshots/desktop-0.1.5-keylock-scratch-capture.png",
-    "?? docs/prototype/screenshots/desktop-0.1.5-shifted-stationary-capture.png",
-    "?? docs/research/DESKTOP_KEYLOCK_NATIVE_REVIEW.md",
-    "?? docs/research/ENGINE_KEYLOCK_NATIVE_REVIEW.md"
+    "?? docs/delivery/trello-cursor-initial-sync.json",
+    "?? docs/prototype/ENGINE_CURSOR_NATIVE_RESULT.md",
+    "?? docs/prototype/engine-cursor-clock-independent-results.json",
+    "?? docs/prototype/engine-cursor-controlled-initial-results.json",
+    "?? docs/prototype/engine-cursor-controlled-results.json",
+    "?? docs/prototype/engine-cursor-diagnostic-review-results.json",
+    "?? docs/prototype/engine-cursor-native-initial-results.json",
+    "?? docs/prototype/engine-cursor-native-initial-subinterval-diagnostic.json",
+    "?? docs/prototype/engine-cursor-native-observation.json",
+    "?? docs/prototype/screenshots/engine-cursor-native-initial-failure.png",
+    "?? docs/research/ENGINE_CURSOR_CLOCK_EVIDENCE_REVIEW.md",
+    "?? docs/research/ENGINE_CURSOR_DIAGNOSTIC_PLAN.md",
+    "?? docs/research/ENGINE_CURSOR_DIAGNOSTIC_REVIEW.md",
+    "?? prototype/keylock-cursor-analysis.js",
+    "?? prototype/keylock-cursor-capture-worklet.js",
+    "?? prototype/keylock-engine-cursor-harness.html",
+    "?? prototype/keylock-engine-cursor-harness.js",
+    "?? scripts/inspect_engine_cursor_initial.mjs",
+    "?? scripts/run_native_cursor_harness.cjs",
+    "?? scripts/test_engine_cursor_diagnostic.mjs"
   ],
   "reference": {
     "version": "Serato DJ Pro4.0.10.213 arm64",
@@ -297,10 +300,27 @@
     {
       "path": "scripts/audit_current_parity.mjs",
       "candidate_sha256": "7e1be3838a4611bd6bfd51a2fe2859b0ea6c6bcc373ae3b3938b23fe34dffd15",
-      "current_sha256": "eb1e082e2cb21176b4e424a805bc5fce0d69c56b61a2c2463154880b7d95fa85"
+      "current_sha256": "887665e12ed1f67b6cf1164fa882986f3dc14fba2ea5fa9ec14b42e6b1b37cf0"
     }
   ],
-  "current_prototype_files_absent_from_browser_manifest": [],
+  "current_prototype_files_absent_from_browser_manifest": [
+    {
+      "path": "prototype/keylock-cursor-analysis.js",
+      "sha256": "aadf86b0f524af1fa4a4b30e69214f00fe3c096ecedfc11716d56da982c7b577"
+    },
+    {
+      "path": "prototype/keylock-cursor-capture-worklet.js",
+      "sha256": "3b605149cb5b6adec647115c25c18818aa5bcb0fe38d2c11214ea81047594a92"
+    },
+    {
+      "path": "prototype/keylock-engine-cursor-harness.html",
+      "sha256": "4c7b7ec874162561bc704927a854fb6f59c83230adb66b62dd3b4d492799f11a"
+    },
+    {
+      "path": "prototype/keylock-engine-cursor-harness.js",
+      "sha256": "b8e45417bce1fc9411d58ad02416c751c73750339d8792eca5384f73def622a9"
+    }
+  ],
   "scope": {
     "feature_groups": 110,
     "requirements": 522,
@@ -391,7 +411,7 @@
     {
       "id": "CA-03",
       "severity": "high",
-      "finding": "Current browser/desktop0.1.5 prototype source48a6d4d is frozen and its clean-restart WAV/MP3 subset executed. Historical0.1.3 physical outputs and0.1.1 knob remain separate; no new full hardware/DSP/reference acceptance follows from matching assets.",
+      "finding": "The original200 prototype files still match frozen48a6d4d used by desktop0.1.5; its clean-restart WAV/MP3 subset executed. Four added cursor-diagnostic assets run in a separate source host and are absent from that product bundle. Historical0.1.3 physical outputs and0.1.1 knob remain separate; no new full hardware/DSP/reference acceptance follows from matching assets.",
       "evidence": [
         {
           "path": "docs/prototype/candidate-hashes.json",
@@ -544,6 +564,28 @@
           "path": "docs/research/CURRENT_VERSION_DELTAS_20261017.json",
           "line": 14,
           "sha256": "2e9cf93f53f7da0815a8a92fda137c399d58ef02e9ee549ac4133492aff0f649"
+        }
+      ]
+    },
+    {
+      "id": "CA-10",
+      "severity": "high",
+      "finding": "The new ten-case production-engine cursor diagnostic has0accepted cases: three duplicate/skip producer timestamp pairs fail the global armed gate. Independent control audio continues phase, but cause/deck continuity are unproven; several exploratory early marker probes are ambiguous. This does not invalidate or expand the separate prior bounded7/7 native result.",
+      "evidence": [
+        {
+          "path": "docs/prototype/engine-cursor-native-initial-results.json",
+          "line": 4640,
+          "sha256": "98f0147512f10a86c302f47dccd766bdf0689d3ab66cab5506747758c28235a8"
+        },
+        {
+          "path": "docs/research/ENGINE_CURSOR_CLOCK_EVIDENCE_REVIEW.md",
+          "line": 1,
+          "sha256": "192aae4bc71653b5a0c68dad05cd0b6126a6c43ddcd27f6a837c46a5d2e59209"
+        },
+        {
+          "path": "docs/prototype/ENGINE_CURSOR_NATIVE_RESULT.md",
+          "line": 21,
+          "sha256": "905f969828d364ffdc9bd90c98fa47cd68c5a8dbf1d236304b1657e532283c45"
         }
       ]
     }
@@ -734,6 +776,26 @@
       "path": "docs/research/DECK_SCRATCH_ENGINE_REVIEW.md",
       "line": 1,
       "sha256": "65ab0a6070f4817f304dde5985c23d01656d035517ca71a2694a2768a880496b"
+    },
+    {
+      "path": "docs/prototype/engine-cursor-native-initial-results.json",
+      "line": 1,
+      "sha256": "98f0147512f10a86c302f47dccd766bdf0689d3ab66cab5506747758c28235a8"
+    },
+    {
+      "path": "docs/research/ENGINE_CURSOR_CLOCK_EVIDENCE_REVIEW.md",
+      "line": 1,
+      "sha256": "192aae4bc71653b5a0c68dad05cd0b6126a6c43ddcd27f6a837c46a5d2e59209"
+    },
+    {
+      "path": "docs/research/ENGINE_CURSOR_DIAGNOSTIC_REVIEW.md",
+      "line": 1,
+      "sha256": "a4beb5e08ef7796c020b5e7ea11cd983aab3b6b761d86570b0d045ea27b8540b"
+    },
+    {
+      "path": "docs/prototype/ENGINE_CURSOR_NATIVE_RESULT.md",
+      "line": 1,
+      "sha256": "905f969828d364ffdc9bd90c98fa47cd68c5a8dbf1d236304b1657e532283c45"
     },
     {
       "path": "prototype/deck-scratch.js",
@@ -986,9 +1048,49 @@
       "sha256": "42e1717e268f3f4175b23834f5b9a635827fb8d3cf0f899cae7f279b614cc74f"
     },
     {
+      "path": "prototype/keylock-cursor-analysis.js",
+      "line": 1,
+      "sha256": "aadf86b0f524af1fa4a4b30e69214f00fe3c096ecedfc11716d56da982c7b577"
+    },
+    {
+      "path": "prototype/keylock-cursor-capture-worklet.js",
+      "line": 1,
+      "sha256": "3b605149cb5b6adec647115c25c18818aa5bcb0fe38d2c11214ea81047594a92"
+    },
+    {
+      "path": "prototype/keylock-engine-cursor-harness.js",
+      "line": 1,
+      "sha256": "b8e45417bce1fc9411d58ad02416c751c73750339d8792eca5384f73def622a9"
+    },
+    {
+      "path": "prototype/keylock-engine-cursor-harness.html",
+      "line": 1,
+      "sha256": "4c7b7ec874162561bc704927a854fb6f59c83230adb66b62dd3b4d492799f11a"
+    },
+    {
+      "path": "scripts/run_native_cursor_harness.cjs",
+      "line": 1,
+      "sha256": "5731a72022d210750765eda30cc17c17f3fe0d892fcc60de20028056d0b2fd57"
+    },
+    {
+      "path": "scripts/inspect_engine_cursor_initial.mjs",
+      "line": 1,
+      "sha256": "dcbfc7870bdc76e25b32960e91295acefc3c7d5cc43d40c053bb1a3e45449b6e"
+    },
+    {
+      "path": "docs/prototype/engine-cursor-native-observation.json",
+      "line": 1,
+      "sha256": "2f3f1df493a32c68145cb69635bf65a55f3d7fea8ed6e17d45e3f3a62291f305"
+    },
+    {
+      "path": "docs/prototype/engine-cursor-native-initial-subinterval-diagnostic.json",
+      "line": 1,
+      "sha256": "bcd54370278d414c3914cf6ff8a45a48a878a2946516ff23b781345c075ba12e"
+    },
+    {
       "path": "scripts/audit_current_parity.mjs",
       "line": 1,
-      "sha256": "eb1e082e2cb21176b4e424a805bc5fce0d69c56b61a2c2463154880b7d95fa85"
+      "sha256": "887665e12ed1f67b6cf1164fa882986f3dc14fba2ea5fa9ec14b42e6b1b37cf0"
     },
     {
       "path": "docs/approvals.md",
@@ -4476,10 +4578,30 @@
           "path": "docs/research/ENGINE_KEYLOCK_NATIVE_REVIEW.md",
           "line": 1,
           "sha256": "fe7331b0447ee399833d0542cf48d3e14ba45db919b02d032fff2d110fea6d1e"
+        },
+        {
+          "path": "docs/prototype/engine-cursor-native-initial-results.json",
+          "line": 1,
+          "sha256": "98f0147512f10a86c302f47dccd766bdf0689d3ab66cab5506747758c28235a8"
+        },
+        {
+          "path": "docs/research/ENGINE_CURSOR_CLOCK_EVIDENCE_REVIEW.md",
+          "line": 1,
+          "sha256": "192aae4bc71653b5a0c68dad05cd0b6126a6c43ddcd27f6a837c46a5d2e59209"
+        },
+        {
+          "path": "docs/research/ENGINE_CURSOR_DIAGNOSTIC_REVIEW.md",
+          "line": 1,
+          "sha256": "a4beb5e08ef7796c020b5e7ea11cd983aab3b6b761d86570b0d045ea27b8540b"
+        },
+        {
+          "path": "docs/prototype/ENGINE_CURSOR_NATIVE_RESULT.md",
+          "line": 1,
+          "sha256": "905f969828d364ffdc9bd90c98fa47cd68c5a8dbf1d236304b1657e532283c45"
         }
       ],
       "positive_evidence_boundary": "Real Signalsmith; actual native sustained-pitch UI paths and one strict stationary+12 engine return pitch/gap case passed; prior IAB capture failures retained.",
-      "remaining_gap": "Earliest audible cursor, full continuous/compound return matrix, reverse/loop/Stem Slip, music/quality/resource and reference acceptance remain open; native pass is bounded44100Hz fixture.",
+      "remaining_gap": "Latest full cursor matrix has0accepted cases:6armed frame errors and marker ambiguity remain unresolved. Earlier bounded44100Hz engine pitch/gap pass stays separate; full audible cursor, compound/music/resource/reference acceptance open.",
       "actual_done_criterion": "Compare pitch/tempo behavior and artifacts across declared musical/rate ranges.",
       "proof_scope": "Saved evidence inspected as scoped documentary artifact; this audit does not rerun it, establish transfer to current WIP, or compare new reference runtime.",
       "requirement_evidence": [
@@ -4888,6 +5010,26 @@
           "path": "docs/research/ENGINE_KEYLOCK_NATIVE_REVIEW.md",
           "line": 1,
           "sha256": "fe7331b0447ee399833d0542cf48d3e14ba45db919b02d032fff2d110fea6d1e"
+        },
+        {
+          "path": "docs/prototype/engine-cursor-native-initial-results.json",
+          "line": 1,
+          "sha256": "98f0147512f10a86c302f47dccd766bdf0689d3ab66cab5506747758c28235a8"
+        },
+        {
+          "path": "docs/research/ENGINE_CURSOR_CLOCK_EVIDENCE_REVIEW.md",
+          "line": 1,
+          "sha256": "192aae4bc71653b5a0c68dad05cd0b6126a6c43ddcd27f6a837c46a5d2e59209"
+        },
+        {
+          "path": "docs/research/ENGINE_CURSOR_DIAGNOSTIC_REVIEW.md",
+          "line": 1,
+          "sha256": "a4beb5e08ef7796c020b5e7ea11cd983aab3b6b761d86570b0d045ea27b8540b"
+        },
+        {
+          "path": "docs/prototype/ENGINE_CURSOR_NATIVE_RESULT.md",
+          "line": 1,
+          "sha256": "905f969828d364ffdc9bd90c98fa47cd68c5a8dbf1d236304b1657e532283c45"
         }
       ],
       "positive_evidence_boundary": "Actual native backward/stationary keyboard scratch and sustained pitch return; separate bounded engine release criterion passed. Hercules browser knob remains distinct from jog.",

@@ -1,0 +1,115 @@
+{
+  "date": "2026-10-17",
+  "criteria": {
+    "rate": 1.08,
+    "semitones": 12,
+    "sourceSeconds": 16,
+    "probeSeconds": 0.4,
+    "probeOffsets": [
+      0,
+      0.05,
+      0.2
+    ],
+    "cursorErrorSeconds": 0.01,
+    "correlationMinimum": 0.8,
+    "correlationMargin": 0.04
+  },
+  "checks": [
+    {
+      "name": "Every release-relative probe finds independently generated correct audible marker",
+      "passed": true,
+      "evidence": {
+        "probes": [
+          {
+            "offset": 0,
+            "error": -4.3520742565306136e-14,
+            "margin": 0.05804321206600782,
+            "score": 0.9999714723215779
+          },
+          {
+            "offset": 0.05,
+            "error": -4.929390229335695e-14,
+            "margin": 0.07265581069309701,
+            "score": 0.999972130877553
+          },
+          {
+            "offset": 0.2,
+            "error": -6.750155989720952e-14,
+            "margin": 0.07881065606149629,
+            "score": 0.9999662081058592
+          }
+        ]
+      }
+    },
+    {
+      "name": "Correct tone with wrong180ms audible position cannot pass",
+      "passed": true,
+      "evidence": {
+        "errors": [
+          0.17999999999993666,
+          0.17999999999993088,
+          0.17999999999991356
+        ]
+      }
+    },
+    {
+      "name": "Flat periodic and silent markers never manufacture unique positions",
+      "passed": true,
+      "evidence": {
+        "rejected": {
+          "flat": 3,
+          "periodic": 3,
+          "silent": 3
+        }
+      }
+    },
+    {
+      "name": "Incomplete early interval is rejected rather than fitting a later excerpt",
+      "passed": true,
+      "evidence": {}
+    },
+    {
+      "name": "Actual exported capture producer retains all four channels every row and terminal fence",
+      "passed": true,
+      "evidence": {
+        "frames": 384,
+        "rows": 3
+      }
+    },
+    {
+      "name": "Armed duplicate frames missing control nonfinite PCM and wrong fence are rejected",
+      "passed": true,
+      "evidence": {
+        "rejected": [
+          "duplicate frame",
+          "missing control",
+          "NaN",
+          "wrong fence",
+          "wrong sequence",
+          "wrong PCM length"
+        ]
+      }
+    },
+    {
+      "name": "Claimed64 preflight missing rows and armed-empty records are rejected",
+      "passed": true,
+      "evidence": {}
+    },
+    {
+      "name": "Premature arm cannot produce a fictitious valid recording",
+      "passed": true,
+      "evidence": {
+        "error": "Arm before valid preflight"
+      }
+    }
+  ],
+  "passed": 8,
+  "failed": 0,
+  "sourceHashes": {
+    "prototype/keylock-cursor-analysis.js": "aadf86b0f524af1fa4a4b30e69214f00fe3c096ecedfc11716d56da982c7b577",
+    "prototype/keylock-cursor-capture-worklet.js": "3b605149cb5b6adec647115c25c18818aa5bcb0fe38d2c11214ea81047594a92",
+    "prototype/keylock-engine-cursor-harness.js": "b8e45417bce1fc9411d58ad02416c751c73750339d8792eca5384f73def622a9",
+    "scripts/run_native_cursor_harness.cjs": "5731a72022d210750765eda30cc17c17f3fe0d892fcc60de20028056d0b2fd57"
+  },
+  "scope": "Controlled analytic PCM and exact exported capture producer only. No actual WebAudio scheduling, engine/WASM, native UI, hardware or reference acceptance."
+}
