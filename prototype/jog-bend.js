@@ -49,5 +49,5 @@ export function createJogBend({engine,now=()=>performance.now(),setTimer=setTime
  function resetInput(deviceId){
   return Promise.all([...active.values()].filter(s=>deviceId===undefined||s.deviceId===deviceId).map(release));
  }
- return{tick,resetInput,diagnostics:()=>[...active.values()].map(s=>({deck:s.deck.index,closing:s.closing,queued:s.desired,deviceId:s.deviceId}))};
+ return{tick,resetInput,resetDeck:index=>Promise.all([...active.values()].filter(s=>s.deck.index===index).map(release)),diagnostics:()=>[...active.values()].map(s=>({deck:s.deck.index,closing:s.closing,queued:s.desired,deviceId:s.deviceId}))};
 }

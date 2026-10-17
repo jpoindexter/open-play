@@ -203,3 +203,8 @@ Skills applied: use, dec-quality-testing, adversarial-verify (CA-01–07 indepen
 ### Plan82 dated subset: MIDI jog bend browser source
 
 Actual synthetic MIDI/normal engine positive bend + idle return has a full finite1.74s stereo master recording; frequency330→356.4→330Hz, opposite synced550Hz stable, nominal rates unchanged. docs/prototype/jog-bend-browser-results.json. Controlled lifecycle policy checks cover rejected-update restoration and replacement voice ownership; they are not acoustic/hardware acceptance. Native0.1.12 retains its prior phase-step jog. Negative/keylocked/hardware/warp/gesture/quality cases remain open. No frozen audit row/full requirement/feature flag promoted. Jason away; physical mixing test awaits his return. See full plan82 and current Claude handoff.
+
+
+### Plan83 dated subset: MIDI touch/surface release routing
+
+Actual browser MIDI editor + synthetic packets drive the existing scratch worklet: held-left attenuation, signed actual cursor movement, movement audio, normal Note Off playback, Vinyl-off subsequent bend and nominal return with right deck continuous. Whole finite3s stereo recording: docs/prototype/midi-jog-touch-browser-results.json. Prepared fixtures only; no fresh hardware, calibration, musical-quality or composed/keylocked acceptance. Native0.1.12 remains unchanged. Full audit rows/flags unpromoted; full Claude audit unlaunched. See plan83/current handoff.

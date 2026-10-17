@@ -1,0 +1,226 @@
+{
+  "startedAt": "2026-10-17T21:30:27.665Z",
+  "completed": true,
+  "scope": "Actual browser MIDI editor, real existing scratch transport and complete master recording; prepared synthetic carriers, physical destination muted. No current native/physical calibration, cold-start latency, scratch musical quality, keylocked/Slip/warp composition or full parity acceptance.",
+  "criteria": {
+    "heldMaximumRMS": 0.0001,
+    "movingMinimumRMS": 0.005,
+    "minimumSignedCursorMoveSeconds": 0.07,
+    "frequencyErrorHz": 0.5
+  },
+  "events": [
+    {
+      "name": "record-start",
+      "time": 0
+    },
+    {
+      "name": "touch-held",
+      "time": 0.4411791383219955
+    },
+    {
+      "name": "forward-start",
+      "time": 0.6849886621315193
+    },
+    {
+      "name": "backward-start",
+      "time": 1.253877551020408
+    },
+    {
+      "name": "release-playing",
+      "time": 1.8227664399092969
+    },
+    {
+      "name": "vinyl-off-bend",
+      "time": 2.2813605442176867
+    },
+    {
+      "name": "vinyl-off-return",
+      "time": 2.6993197278911563
+    }
+  ],
+  "checks": [
+    "Actual MIDI mappings route touch/surface/Vinyl commands",
+    "Touch holds source while right deck continues",
+    "Forward/backward packets move actual scratch cursor and produce master audio",
+    "Note Off resumes nominal playback; Vinyl-off surface bends the released scratch transport without entering scratch"
+  ],
+  "errors": [],
+  "sourceBefore": {
+    "app.js": "83d0d4a8533effa6c48521caaebb0a1bc6c095087e391500c5e292fa2f8a6118",
+    "engine.js": "c0f7fa915938ab416137807a4345878d290110dcdfce23283e46c1e665eec6b1",
+    "deck-midi.js": "2ba4ec3cdaf57730b06eb23c7baae4d988128c70839c3910a9f8b415aca5a466",
+    "midi-jog-touch.js": "2409b8579bb3646a9173edb9cec1d2773c77097d8748244241fdb1fce16e6b2c",
+    "jog-bend.js": "14ceb8c46b3ca70ee756b21246234bc27bee3cc59400af590eae446a0c70e33b",
+    "midi.js": "0cabb6dbe98e9eb3f7bc7f7eb44615fa315a0738260e5f3568a34d0aa75ec1ad",
+    "panels.js": "52919c10acd1b01ae9919d04a2cca77396329f4a09e683052fd3dc2db2fdfd02",
+    "midi-jog-touch-harness.js": "dabfc74c2708e03cc05227167aeb8143e1d68fc1351ae9dd31c43e89edf76851"
+  },
+  "physicalOutputMuted": true,
+  "fixturePrepared": true,
+  "cursor": {
+    "initial": 0.45463129575560696,
+    "forwardPosition": 0.562158177476037,
+    "backwardPosition": 0.454631295755607
+  },
+  "final": {
+    "playing": [
+      true,
+      true
+    ],
+    "nominal": [
+      1,
+      1
+    ],
+    "audible": [
+      1,
+      1
+    ],
+    "phase": "idle"
+  },
+  "recording": {
+    "bytes": 48605,
+    "format": "audio/webm;codecs=opus",
+    "sha256": "ea0ae7b0d1d11b67e9534b562626e3a396c900d9466cb73f2e5251392d988435",
+    "originalRetained": "local-evidence/midi-jog-touch/original.webm"
+  },
+  "decoded": {
+    "duration": 3,
+    "sampleRate": 44100,
+    "frames": 132300,
+    "channels": 2
+  },
+  "audio": [
+    {
+      "name": "baseline",
+      "channels": [
+        {
+          "from": 0.1,
+          "to": 0.3,
+          "rms": 0.03741024541954277,
+          "hz": 330.0002052338873
+        },
+        {
+          "from": 0.1,
+          "to": 0.3,
+          "rms": 0.03732732882314623,
+          "hz": 550.0043126126235
+        }
+      ]
+    },
+    {
+      "name": "touch-hold",
+      "channels": [
+        {
+          "from": 0.5211791383219955,
+          "to": 0.6411791383219956,
+          "rms": 4.7761560298706925e-05,
+          "hz": null
+        },
+        {
+          "from": 0.5211791383219955,
+          "to": 0.6411791383219956,
+          "rms": 0.037307608030679604,
+          "hz": 550.0059155648421
+        }
+      ]
+    },
+    {
+      "name": "forward",
+      "channels": [
+        {
+          "from": 0.7849886621315193,
+          "to": 0.9849886621315194,
+          "rms": 0.036547932464812256,
+          "hz": 86.58504866532223
+        },
+        {
+          "from": 0.7849886621315193,
+          "to": 0.9849886621315194,
+          "rms": 0.03726346167840202,
+          "hz": 550.0030025974527
+        }
+      ]
+    },
+    {
+      "name": "backward",
+      "channels": [
+        {
+          "from": 1.3538775510204082,
+          "to": 1.5538775510204081,
+          "rms": 0.036362872074565546,
+          "hz": 83.3340571920092
+        },
+        {
+          "from": 1.3538775510204082,
+          "to": 1.5538775510204081,
+          "rms": 0.03726705795802948,
+          "hz": 549.9966202933845
+        }
+      ]
+    },
+    {
+      "name": "released",
+      "channels": [
+        {
+          "from": 1.902766439909297,
+          "to": 2.122766439909297,
+          "rms": 0.03730707335853912,
+          "hz": 330.00185582316175
+        },
+        {
+          "from": 1.902766439909297,
+          "to": 2.122766439909297,
+          "rms": 0.03732525385171673,
+          "hz": 549.9932298102035
+        }
+      ]
+    },
+    {
+      "name": "vinyl-off-bend",
+      "channels": [
+        {
+          "from": 2.321360544217687,
+          "to": 2.461360544217687,
+          "rms": 0.037395043423164916,
+          "hz": 356.3961804601472
+        },
+        {
+          "from": 2.321360544217687,
+          "to": 2.461360544217687,
+          "rms": 0.0373366234843453,
+          "hz": 549.991489327698
+        }
+      ]
+    },
+    {
+      "name": "final",
+      "channels": [
+        {
+          "from": 2.7593197278911563,
+          "to": 2.9793197278911565,
+          "rms": 0.037391383961645694,
+          "hz": 330.00312683095854
+        },
+        {
+          "from": 2.7593197278911563,
+          "to": 2.9793197278911565,
+          "rms": 0.03728868846932849,
+          "hz": 550.0018398380832
+        }
+      ]
+    }
+  ],
+  "sourceAfter": {
+    "app.js": "83d0d4a8533effa6c48521caaebb0a1bc6c095087e391500c5e292fa2f8a6118",
+    "engine.js": "c0f7fa915938ab416137807a4345878d290110dcdfce23283e46c1e665eec6b1",
+    "deck-midi.js": "2ba4ec3cdaf57730b06eb23c7baae4d988128c70839c3910a9f8b415aca5a466",
+    "midi-jog-touch.js": "2409b8579bb3646a9173edb9cec1d2773c77097d8748244241fdb1fce16e6b2c",
+    "jog-bend.js": "14ceb8c46b3ca70ee756b21246234bc27bee3cc59400af590eae446a0c70e33b",
+    "midi.js": "0cabb6dbe98e9eb3f7bc7f7eb44615fa315a0738260e5f3568a34d0aa75ec1ad",
+    "panels.js": "52919c10acd1b01ae9919d04a2cca77396329f4a09e683052fd3dc2db2fdfd02",
+    "midi-jog-touch-harness.js": "dabfc74c2708e03cc05227167aeb8143e1d68fc1351ae9dd31c43e89edf76851"
+  },
+  "sourceStable": true,
+  "finishedAt": "2026-10-17T21:30:30.939Z",
+  "originalReport": "local-evidence/midi-jog-touch/first-results.json"
+}

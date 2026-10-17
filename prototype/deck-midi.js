@@ -2,15 +2,17 @@
 // not imported controller scripts. Physical acceptance is recorded separately.
 import {mappedValue} from './midi.js';
 import {createJogBend} from './jog-bend.js';
+import {createMIDIJogTouch} from './midi-jog-touch.js';
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 const key=m=>JSON.stringify([m.deviceId||'',m.type,m.channel,m.number]);
-const continuous=['tempo','trim','high','mid','low','filter','level','jog nudge','jog bend'];
-const commands=['load','play','cue','sync','sync off','headphone cue','loop','loop in','loop out','loop half','loop double','keylock'];
+const continuous=['tempo','trim','high','mid','low','filter','level','jog nudge','jog bend','jog surface'];
+const commands=['load','play','cue','sync','sync off','headphone cue','loop','loop in','loop out','loop half','loop double','keylock','jog touch','jog touch fast','vinyl'];
 export const deckMIDITargets=Array.from({length:4},(_,i)=>[...continuous,...commands,...Array.from({length:8},(_,n)=>`hot cue ${n+1}`)].map(x=>`Deck ${i+1} ${x}`)).flat();
 export const fxMIDITargets=[1,2].flatMap(n=>['depth','beat','enable'].map(x=>`FX unit ${n} ${x}`));
 export function createDeckMIDIRouter({state,engine,actions,applyFX=()=>{},onChange=()=>{},onStatus=()=>{}}){
  const pairs=new Map(),buttons=new Map(),pickup=new Map(),rates=new Map(),nudges=new Map();
  const jogBend=createJogBend({engine,onError:error=>onStatus(error.message)});
+ const jogTouch=createMIDIJogTouch({engine,state,beforeBegin:deck=>jogBend.resetDeck(deck.index),onError:error=>onStatus(error.message)});
  const deckFor=target=>/^Deck ([1-4]) (.+)$/.exec(target);
  const repaintMix=(d,field)=>onChange({deck:d.index,field,value:d[field]});
  function scheduleRate(d,rate){
@@ -20,6 +22,7 @@ export function createDeckMIDIRouter({state,engine,actions,applyFX=()=>{},onChan
  }
  function release(message){
   if(message.pressed)return false;
+  if(jogTouch.releaseMessage(message))return true;
   const hold=buttons.get(key(message));if(!hold)return false;
   buttons.delete(key(message));if(hold.cue)void actions.cueHolds.release(hold.owner,{immediate:true}).catch(error=>onStatus(error.message));return true;
  }
@@ -47,12 +50,18 @@ export function createDeckMIDIRouter({state,engine,actions,applyFX=()=>{},onChan
   const d=state.decks[Number(match[1])-1],action=match[2];
   if(!d||![...continuous,...commands,...Array.from({length:8},(_,n)=>`hot cue ${n+1}`)].includes(action))return false;
   const owner=`midi:${key(message)}`;
+  if(action==='jog touch'||action==='jog touch fast'){
+   if(mapping.encoding!=='7-bit absolute'||message.type==='Pitch bend')throw Error('Jog touch needs a7-bit Note/CC button with release.');
+   if(message.pressed)await jogTouch.press(d,message,{fast:action==='jog touch fast',vinyl:d.vinyl!==false});
+   else jogTouch.releaseMessage(message);return true;
+  }
   if(!continuous.includes(action)){
    if(!message.pressed){release(message);return true;}
    if(buttons.has(key(message)))return true;
    const hot=/^hot cue ([1-8])$/.exec(action),cue=action==='cue'||!!hot;
    buttons.set(key(message),{owner,cue,deviceId:message.deviceId||''});
    if(cue){await actions.cueHolds.press(owner,d,hot?Number(hot[1])-1:null);return true;}
+   if(action==='vinyl'){await jogTouch.resetDeck(d.index);await jogBend.resetDeck(d.index);d.vinyl=d.vinyl===false;onStatus(`Deck ${d.index+1} Vinyl ${d.vinyl?'on':'off'}.`);onChange({deck:d.index,action});return true;}
    const names={load:'load',play:'play',sync:'sync','sync off':'syncOff','headphone cue':'pfl',loop:'loop','loop in':'loopIn','loop out':'loopOut','loop half':'loopHalf','loop double':'loopDouble',keylock:'keylock'};
    await actions.deckAction(names[action],d.index,{});onChange({deck:d.index,action});return true;
   }
@@ -77,11 +86,15 @@ export function createDeckMIDIRouter({state,engine,actions,applyFX=()=>{},onChan
    if(!caught){onStatus(`Deck ${d.index+1}: move tempo fader through ${((d.rate-1)*100).toFixed(1)}% to pick it up.`);return true;}
    await scheduleRate(d,clamp(requested,.25,4));onChange({deck:d.index,field:'tempo',value:d.rate});return true;
   }
-  if(action==='jog bend'&&d.playing){
+  if(action==='jog surface'){
+   if(!relative)throw Error('Jog surface requires a relative MIDI encoding.');
+   if(await jogTouch.move(d,value,message.deviceId||''))return true;
+  }
+  if((action==='jog bend'||action==='jog surface')&&d.playing){
    if(!relative)throw Error('Jog bend requires a relative MIDI encoding.');
    await jogBend.tick(d,value,message.deviceId||'');return true;
   }
-  if(action==='jog nudge'||action==='jog bend'){
+  if(action==='jog nudge'||action==='jog bend'||action==='jog surface'){
    if(!relative)throw Error('Jog nudge requires a relative MIDI encoding.');
    if(!value||!d.track)return true;
    // Phase steps for beatmatching; this target does not claim scratch/touch.
@@ -99,6 +112,7 @@ export function createDeckMIDIRouter({state,engine,actions,applyFX=()=>{},onChan
   d[action]=clamp(next,lo,hi);engine.mix(d.index,action,d[action]);repaintMix(d,action);return true;
  }
  function resetInput(deviceId){
+  void jogTouch.resetInput(deviceId).catch(error=>onStatus(error.message));
   void jogBend.resetInput(deviceId).catch(error=>onStatus(error.message));
   for(const [k,b]of buttons)if(deviceId===undefined||b.deviceId===deviceId){buttons.delete(k);if(b.cue)void actions.cueHolds.release(b.owner,{immediate:true}).catch(error=>onStatus(error.message));}
   pickup.clear();pairs.clear();
@@ -108,14 +122,19 @@ export function createDeckMIDIRouter({state,engine,actions,applyFX=()=>{},onChan
 
 export function herculesPlaybackMappings(deviceId){
  if(!deviceId)throw Error('Connect the named Hercules input before installing its controls.');
- const maps=[],add=(target,type,channel,number,encoding='7-bit absolute',extra={})=>maps.push({target,type,channel,number,encoding,deviceId,preset:'hercules-inpulse-300-mk2-playback-v2',...extra});
+ const maps=[],add=(target,type,channel,number,encoding='7-bit absolute',extra={})=>maps.push({target,type,channel,number,encoding,deviceId,preset:'hercules-inpulse-300-mk2-playback-v3',...extra});
  add('Library browse','CC',1,1,'Relative two’s complement');add('Crossfader','CC',1,0);
  for(let deck=1;deck<=2;deck++){
   const ch=deck+1,t=s=>`Deck ${deck} ${s}`;
   for(const [name,n]of [['level',0],['filter',1],['low',2],['mid',3],['high',4],['trim',5]])add(t(name),'CC',ch,n);
   add(t('tempo'),'CC',ch,8,'14-bit absolute',{pickup:true});
   add(`FX unit ${deck} depth`,'CC',ch,6);add(`FX unit ${deck} beat`,'CC',ch,7);add(`FX unit ${deck} enable`,'Note',ch,0);
-  for(const n of [9,10])add(t('jog bend'),'CC',ch,n,'Relative two’s complement');
+  add(t('jog bend'),'CC',ch,9,'Relative two’s complement');
+  add(t('jog surface'),'CC',ch,10,'Relative two’s complement');
+  add(t('jog touch'),'Note',ch,8);add(t('jog touch fast'),'Note',ch+3,8);
+  add(t('jog surface'),'CC',ch+3,10,'Relative two’s complement');
+  add(t('jog bend'),'CC',ch+3,9,'Relative two’s complement');
+  add(t('vinyl'),'Note',ch+3,1);
   for(const [name,n]of [['loop',3],['sync',5],['cue',6],['play',7],['loop in',9],['loop out',10],['headphone cue',12],['load',13]])add(t(name),'Note',ch,n);
   for(const [name,n]of [['sync off',5],['loop half',9],['loop double',10]])add(t(name),'Note',ch+3,n);
   for(let n=0;n<8;n++)add(t(`hot cue ${n+1}`),'Note',deck+6,n);

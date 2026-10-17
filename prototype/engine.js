@@ -568,14 +568,20 @@ export class AudioEngine {
     if(!voice||!d.track||!current())return false;
     // Piecewise maps and gesture transports need their own future-clock map;
     // never silently replace them with a raw seek or alter a synced group.
-    if(voice.gridTimeline||voice.deckScratchTransport||voice.stemSlipTransport||
+    if(voice.gridTimeline||voice.stemSlipTransport||
+      (voice.deckScratchTransport&&(voice.deckScratchTransport.state().phase!=='idle'||this.deckScratchRequests.has(d.index)))||
       (factor!==1&&(d.processing||this.deckScratchRequests.has(d.index))))
       throw Error('Jog bend is not available during preparation, warped Sync, scratch or Stem Slip.');
     if(factor!==1&&!voice.liveKeylock&&(d.keylock||d.keyShift))
       throw Error('This rendered loop/reverse pitch path cannot bend while preserving key.');
     const rate=Math.max(.25,Math.min(4,d.rate*factor));
     if(factor!==1)this.onManualPosition?.(d);
-    if(voice.liveKeylock){
+    if(voice.deckScratchTransport){
+      const transport=voice.deckScratchTransport;
+      const ack=await transport.command('rate',{generation:transport.state().generation,rate});
+      if(!current())return false;
+      d.position=ack.position;d.anchorPosition=ack.position;d.anchorTime=ack.audioTime;
+    }else if(voice.liveKeylock){
       const ack=await voice.liveKeylock.update({rate});
       if(!current()||ack.superseded)return false;
       d.position=ack.position;d.anchorPosition=ack.position;d.anchorTime=ack.when;
