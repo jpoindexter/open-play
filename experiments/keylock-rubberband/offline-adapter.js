@@ -1,0 +1,49 @@
+// Experimental complete-buffer offline R3 cache. Stable outputs; existing AudioEngine unchanged.
+const abort=()=>new DOMException('R3 preparation superseded.','AbortError');
+const pauseTask=()=>new Promise(r=>setTimeout(r,0));
+const policy=Object.freeze({direction:'forward',preparation:'Offline R3 native child; full decoded-buffer cache. Preparation latency and memory remain limitations.',unsupported:['reverse','loop','Stem Slip','incremental compressed-file decoding'],rate:[.25,4],effectiveSemitones:[-24,24]});
+function normalize(s){const rate=Number(s.rate),semitones=Number(s.semitones),effectiveSemitones=semitones+(s.keylock?0:12*Math.log2(rate));if(!Number.isFinite(rate)||rate<.25||rate>4||!Number.isFinite(semitones)||semitones< -24||semitones>24||effectiveSemitones< -24||effectiveSemitones>24)throw RangeError('Unsupported forward transform range.');return {rate,keylock:!!s.keylock,semitones,effectiveSemitones};}
+export async function createLiveKeylock(context,options={}){const owner=new OfflineOwner(context,options);try{await owner.prepare();return owner;}catch(e){await owner.dispose();throw e;}}
+class OfflineOwner{
+ constructor(context,{buffers,position=0,rate=1,keylock=true,semitones=0,signal,onEvent=()=>{}}){
+  if(!Array.isArray(buffers)||![1,5].includes(buffers.length)||buffers.some(b=>!(b instanceof AudioBuffer)||b.numberOfChannels<1||b.numberOfChannels>8))throw TypeError('Supply original or original plus four AudioBuffers.');
+  this.ctx=context;this.buffers=buffers;this.duration=buffers[0].duration;this.frames=Math.ceil(this.duration*context.sampleRate);this.channelCounts=buffers.map(b=>b.numberOfChannels);this.channels=this.channelCounts.reduce((a,b)=>a+b,0);this.onEvent=onEvent;this.outputs=buffers.map(()=>context.createGain());this.cache=new Map();this.jobs=new Set();this.voices=new Set();this.generation=0;this.disposed=false;this.initial=normalize({rate,keylock,semitones});this.clock=[{when:context.currentTime,position:this.validPosition(position),playing:false,...this.initial}];this.ownerSignal=signal;this.ownerAbort=()=>this.dispose();if(signal?.aborted)throw abort();signal?.addEventListener('abort',this.ownerAbort,{once:true});
+ }
+ check(){if(this.disposed||this.ownerSignal?.aborted)throw abort();}
+ validPosition(v){if(!Number.isFinite(v)||v<0||v>this.duration)throw RangeError('Position outside media.');return v;}
+ emit(type,detail={}){try{this.onEvent({type,contextTime:this.ctx.currentTime,...detail});}catch{}}
+ stateAt(at=this.ctx.currentTime){let s=this.clock[0];for(const row of this.clock)if(row.when<=at)s=row;else break;const position=Math.min(this.duration,s.position+(s.playing?Math.max(0,at-s.when)*s.rate:0));return {...s,position,playing:s.playing&&position<this.duration};}
+ position(at){return this.stateAt(at).position;}
+ async prepare(){this.check();await this.render(this.initial);this.check();this.emit('prepared',{snapshot:this.snapshot()});}
+ async normalizeInputs(){if(this.normalized)return this.normalized;const output=[];for(const b of this.buffers){this.check();if(b.sampleRate===this.ctx.sampleRate&&b.length===this.frames){output.push(b);continue;}const c=new OfflineAudioContext(b.numberOfChannels,this.frames,this.ctx.sampleRate),s=c.createBufferSource();s.buffer=b;s.connect(c.destination);s.start();output.push(await c.startRendering());}this.check();this.normalized=output;return output;}
+ async render(state){
+  this.check();const key=state.rate+':'+state.effectiveSemitones;if(this.cache.has(key))return this.cache.get(key);
+  const controller=new AbortController();this.jobs.add(controller);
+  try{
+   const buffers=await this.normalizeInputs();this.check();const expected=Math.round(this.frames/state.rate);if(this.frames*this.channels>80000000||expected*this.channels>80000000)throw RangeError('Track exceeds this experimental full-buffer cache budget; current app remains available.');
+   const body=new ArrayBuffer(40+this.frames*this.channels*4),h=new DataView(body);new Uint8Array(body,0,8).set(new TextEncoder().encode('OPR3OFF1'));h.setUint32(8,this.ctx.sampleRate,true);h.setUint32(12,this.channels,true);h.setBigUint64(16,BigInt(this.frames),true);h.setFloat64(24,1/state.rate,true);h.setFloat64(32,2**(state.effectiveSemitones/12),true);
+   const sources=buffers.flatMap(b=>Array.from({length:b.numberOfChannels},(_,c)=>b.getChannelData(c))),pcm=new Float32Array(body,40);
+   for(let at=0;at<this.frames;at+=32768){this.check();if(controller.signal.aborted)throw abort();const end=Math.min(this.frames,at+32768);for(let n=at;n<end;n++)for(let c=0;c<this.channels;c++)pcm[n*this.channels+c]=sources[c][n];await pauseTask();}
+   const response=await fetch('/api/keylock-r3',{method:'POST',headers:{'Content-Type':'application/octet-stream','X-Open-Play':'offline-r3'},body,signal:controller.signal});if(!response.ok)throw Error(await response.text());const bytes=await response.arrayBuffer();this.check();if(controller.signal.aborted)throw abort();
+   if(bytes.byteLength<32)throw Error('Incomplete R3 response.');const v=new DataView(bytes);if(new TextDecoder().decode(new Uint8Array(bytes,0,8))!=='OPR3OUT1'||v.getUint32(8,true)!==this.ctx.sampleRate||v.getUint32(12,true)!==this.channels||v.getBigUint64(16,true)!==BigInt(expected)||v.getUint32(24,true)!==3||bytes.byteLength!==32+expected*this.channels*4)throw Error('R3 response geometry mismatch.');
+   const data=new Float32Array(bytes,32),rendered=[];let channel=0;for(const count of this.channelCounts){const b=this.ctx.createBuffer(count,expected,this.ctx.sampleRate);for(let c=0;c<count;c++,channel++){const target=b.getChannelData(c);for(let n=0;n<expected;n++)target[n]=data[n*this.channels+channel];}rendered.push(b);}
+   this.check();const result={key,buffers:rendered,rate:state.rate,bytes:expected*this.channels*4};this.cache.clear();this.cache.set(key,result);return result;
+  }finally{this.jobs.delete(controller);}
+ }
+ minimumLead(){return 2*128/this.ctx.sampleRate;}
+ async schedule({position,when,state,playing,follow=false}){
+  this.check();const generation=++this.generation;for(const job of this.jobs)job.abort();const prepared=await this.render(state);this.check();if(generation!==this.generation)throw abort();
+  const now=this.ctx.currentTime,at=when??now+this.minimumLead();if(at<now)throw Object.assign(Error('Requested output time elapsed during offline preparation.'),{name:'LateScheduleError'});
+  const mapped={when:at,position:follow?this.position(at):this.validPosition(position),playing:!!playing,...state};mapped.playing&&=mapped.position<this.duration;
+  for(const voice of this.voices){voice.gain.gain.cancelScheduledValues(at);voice.gain.gain.setValueAtTime(1,at);voice.gain.gain.linearRampToValueAtTime(0,at+.01);try{voice.source.stop(at+.01);}catch{}}
+  if(mapped.playing)prepared.buffers.forEach((b,i)=>{const source=this.ctx.createBufferSource(),gain=this.ctx.createGain();source.buffer=b;gain.gain.setValueAtTime(0,at);gain.gain.linearRampToValueAtTime(1,at+.01);source.connect(gain);gain.connect(this.outputs[i]);const voice={source,gain};this.voices.add(voice);source.onended=()=>{source.disconnect();gain.disconnect();this.voices.delete(voice);if(!this.disposed&&generation===this.generation&&i===0&&this.position()>=this.duration)this.emit('ended',{position:this.duration});};source.start(at,Math.min(b.duration,mapped.position/state.rate));});
+  this.clock=this.clock.filter(s=>s.when<at);this.clock.push(mapped);while(this.clock.length>2&&this.clock[1].when<=now)this.clock.shift();const ack={...mapped,group:generation,latencyLead:0,minimumLeadSeconds:this.minimumLead(),superseded:false};this.emit('scheduled',ack);return ack;
+ }
+ start({position=this.position(),when}={}){return this.schedule({position,when,state:normalize(this.stateAt()),playing:true});}
+ update({rate,keylock,semitones,when}={}){const current=this.stateAt(),state=normalize({rate:rate??current.rate,keylock:keylock??current.keylock,semitones:semitones??current.semitones});return this.schedule({position:current.position,when,state,playing:current.playing,follow:true});}
+ seek(position,{when}={}){const current=this.stateAt();return this.schedule({position,when,state:normalize(current),playing:current.playing});}
+ followSeek(position,options={}){return this.seek(position,options);}
+ async pause({when=this.ctx.currentTime}={}){this.check();++this.generation;for(const job of this.jobs)job.abort();const current=this.stateAt(when),mapped={...current,when,playing:false};for(const voice of this.voices){voice.gain.gain.cancelScheduledValues(when);voice.gain.gain.setValueAtTime(0,when);try{voice.source.stop(when);}catch{}}this.clock=this.clock.filter(s=>s.when<when);this.clock.push(mapped);this.emit('paused',mapped);return mapped;}
+ snapshot(){const retained=[...this.cache.values()].reduce((n,c)=>n+c.bytes,0);return {disposed:this.disposed,state:this.stateAt(),groups:[{id:this.generation,latency:0,role:'selected',retainedPCMBytes:retained}],retainedPCMBytes:retained,inFlightJobs:this.jobs.size,policy,lastError:null};}
+ async dispose(){if(this.disposed)return {disposed:true,retainedPCMBytes:0};this.disposed=true;++this.generation;this.ownerSignal?.removeEventListener('abort',this.ownerAbort);for(const job of this.jobs)job.abort();for(const voice of this.voices){try{voice.source.stop();}catch{}voice.source.disconnect();voice.gain.disconnect();}this.voices.clear();this.cache.clear();this.normalized=null;this.buffers=[];for(const out of this.outputs)out.disconnect();return {disposed:true,retainedPCMBytes:0};}
+}

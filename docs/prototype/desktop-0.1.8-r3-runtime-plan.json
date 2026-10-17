@@ -1,0 +1,34 @@
+{
+  "declaredAt": "2026-10-17T19:12:01.271959+00:00",
+  "scope": "One actual optional0.1.8 native main-UI smoke path after new native offline-cache integration. No broad retest, hardware/restart/compound/music/full-parity claim. User requested pragmatic change-focused testing.",
+  "app": "local-evidence/desktop-builds/0.1.8/Open Play R3 Test-darwin-arm64/Open Play R3 Test.app",
+  "ASARSHA256": "8361fe68d51f55e56df534a6cf0b14c6f8c29ab908b7b34bc9cf54bdb4618d72",
+  "helperSHA256": "6abdbe2b3787cea14a39eadb4da8a75f7677bdf43e41c0dd76591195c07630a2",
+  "fixture": "local-evidence/keylock-native-fixtures/native-keylock-stereo-120s.wav",
+  "fixtureSHA256": "99833309d13090de63a9fcdb7ca8f6bcf601975bfb8cb2e3ef691bb369a0a119",
+  "steps": [
+    "Native Import chooser and deck2 load; deck1 paused",
+    "Set keylockON,tempo+8%,keyshift+2 then play",
+    "Native REC and Save, whole saved file retained/decoded",
+    "Inspect predeclared8\u201310seconds stereo FFT against330/550 \u00d72^(2/12), each<=1Hz, RMS>.001, whole finite",
+    "Pause deck2 after capture"
+  ],
+  "frequencyHz": [
+    370.4124759420931,
+    617.3541265701551
+  ],
+  "windowSeconds": [
+    8,
+    10
+  ],
+  "frequencyErrorHzMax": 1,
+  "fullParityVerified": false,
+  "notEstablished": [
+    "Stems/sourcecoherence through app",
+    "Live realtime processing or preparation latency budget",
+    "Transient/cursor/tail quality",
+    "Loop/reverse/StemSlip/compound",
+    "Physical controller/output/latency",
+    "Long tracks/resources/portable distribution/source-license release review"
+  ]
+}

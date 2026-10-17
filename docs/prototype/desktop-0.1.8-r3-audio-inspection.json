@@ -1,0 +1,138 @@
+{
+  "checkedAt": "2026-10-17T19:16:11.711671+00:00",
+  "plan": {
+    "declaredAt": "2026-10-17T19:12:01.271959+00:00",
+    "scope": "One actual optional0.1.8 native main-UI smoke path after new native offline-cache integration. No broad retest, hardware/restart/compound/music/full-parity claim. User requested pragmatic change-focused testing.",
+    "app": "local-evidence/desktop-builds/0.1.8/Open Play R3 Test-darwin-arm64/Open Play R3 Test.app",
+    "ASARSHA256": "8361fe68d51f55e56df534a6cf0b14c6f8c29ab908b7b34bc9cf54bdb4618d72",
+    "helperSHA256": "6abdbe2b3787cea14a39eadb4da8a75f7677bdf43e41c0dd76591195c07630a2",
+    "fixture": "local-evidence/keylock-native-fixtures/native-keylock-stereo-120s.wav",
+    "fixtureSHA256": "99833309d13090de63a9fcdb7ca8f6bcf601975bfb8cb2e3ef691bb369a0a119",
+    "steps": [
+      "Native Import chooser and deck2 load; deck1 paused",
+      "Set keylockON,tempo+8%,keyshift+2 then play",
+      "Native REC and Save, whole saved file retained/decoded",
+      "Inspect predeclared8\u201310seconds stereo FFT against330/550 \u00d72^(2/12), each<=1Hz, RMS>.001, whole finite",
+      "Pause deck2 after capture"
+    ],
+    "frequencyHz": [
+      370.4124759420931,
+      617.3541265701551
+    ],
+    "windowSeconds": [
+      8,
+      10
+    ],
+    "frequencyErrorHzMax": 1,
+    "fullParityVerified": false,
+    "notEstablished": [
+      "Stems/sourcecoherence through app",
+      "Live realtime processing or preparation latency budget",
+      "Transient/cursor/tail quality",
+      "Loop/reverse/StemSlip/compound",
+      "Physical controller/output/latency",
+      "Long tracks/resources/portable distribution/source-license release review"
+    ]
+  },
+  "original": {
+    "path": "/Users/jasonpoindexter/Downloads/open-play-native-018-r3-plus2.webm",
+    "sha256": "f861404f1e221c15d9899c565a360b73da27203b94c91439159da4c01562ec9a",
+    "bytes": 633039
+  },
+  "retainedCopy": "local-evidence/desktop-0.1.8-r3-audio/open-play-native-018-r3-plus2.webm",
+  "copyMatchesOriginal": true,
+  "wholeDecode": {
+    "path": "local-evidence/desktop-0.1.8-r3-audio/whole-f32le",
+    "sha256": "805e97e0a9bfd0c3883e11ff7ca6f43a5fb8434ba32c77e731c76b45eb995ca7",
+    "bytes": 15045120,
+    "sampleRate": 48000,
+    "channels": 2,
+    "frames": 1880640,
+    "seconds": 39.18,
+    "allFinite": true
+  },
+  "probe": {
+    "streams": [
+      {
+        "index": 0,
+        "codec_name": "opus",
+        "codec_long_name": "Opus (Opus Interactive Audio Codec)",
+        "codec_type": "audio",
+        "codec_tag_string": "[0][0][0][0]",
+        "codec_tag": "0x0000",
+        "mime_codec_string": "opus",
+        "sample_fmt": "fltp",
+        "sample_rate": "48000",
+        "channels": 2,
+        "channel_layout": "stereo",
+        "bits_per_sample": 0,
+        "initial_padding": 0,
+        "r_frame_rate": "0/0",
+        "avg_frame_rate": "0/0",
+        "time_base": "1/1000",
+        "start_pts": 0,
+        "start_time": "0.000000",
+        "extradata_size": 19,
+        "disposition": {
+          "default": 1,
+          "dub": 0,
+          "original": 0,
+          "comment": 0,
+          "lyrics": 0,
+          "karaoke": 0,
+          "forced": 0,
+          "hearing_impaired": 0,
+          "visual_impaired": 0,
+          "clean_effects": 0,
+          "attached_pic": 0,
+          "timed_thumbnails": 0,
+          "non_diegetic": 0,
+          "captions": 0,
+          "descriptions": 0,
+          "metadata": 0,
+          "dependent": 0,
+          "still_image": 0,
+          "multilayer": 0
+        },
+        "tags": {
+          "language": "eng"
+        }
+      }
+    ],
+    "format": {
+      "filename": "/Users/jasonpoindexter/Downloads/open-play-native-018-r3-plus2.webm",
+      "nb_streams": 1,
+      "nb_programs": 0,
+      "nb_stream_groups": 0,
+      "format_name": "matroska,webm",
+      "format_long_name": "Matroska / WebM",
+      "start_time": "0.000000",
+      "size": "633039",
+      "probe_score": 100,
+      "tags": {
+        "encoder": "Chrome"
+      }
+    }
+  },
+  "declaredWindow": [
+    {
+      "channel": 0,
+      "expectedHz": 370.4124759420931,
+      "Hz": 370.41230239125935,
+      "RMS": 0.04356366727827172,
+      "errorHz": 0.00017355083377879055,
+      "passed": true
+    },
+    {
+      "channel": 1,
+      "expectedHz": 617.3541265701551,
+      "Hz": 617.3541616968538,
+      "RMS": 0.04356247747003526,
+      "errorHz": 3.51266986626797e-05,
+      "passed": true
+    }
+  ],
+  "declaredCriteriaPassed": true,
+  "scope": "Single actual main-app import/play/offline-R3/+8tempo/+2keyshift/REC/nativeSave path. Whole original decoded; only predeclared8\u201310s frequency window evaluated. No extra retrospective spectral matrix or broader parity/hardware/cursor claim.",
+  "fullParityVerified": false
+}

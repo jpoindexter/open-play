@@ -1,0 +1,17 @@
+{
+  "declaredAt": "2026-10-17T19:07:52.269474+00:00",
+  "scope": "New independently authored C++ child worker against installed R3 CAPI. Actual stdin/stdout audio and actual process cancellation; not browser/app/callback/reference/full parity.",
+  "sourceSHA256": "7ab1ba407ebf9197519607d7473590d9558f3444e23ea228f92c282a816ed8b7",
+  "executable": "local-evidence/keylock-rubberband-worker/r3-offline",
+  "executableSHA256": "6abdbe2b3787cea14a39eadb4da8a75f7677bdf43e41c0dd76591195c07630a2",
+  "librarySHA256": "04069acff8ca0db7529cd1b6d73e2bc8a6d2729ea77351a70c3e3f4181c8296c",
+  "requestPCMFrames": 455680,
+  "requestPCMHash": "5bee5ab4a7c18aae873c5180fc8a4b9f396b1933ea5775d3da51ac35c94f6957",
+  "responseExpectedFrames": 364544,
+  "responsePCMExpectedSHA256": "52c4794d432df9b2e478d7f0ddaf3d5310c93b27ee48c7eb068ba2080df06a0b",
+  "checks": [
+    "Whole response version/sampleRate/channels/frames/R3 engine/bytes and every PCM byte equals existing accepted offline fixture",
+    "Terminate actual worker after processing-start notification; child exits SIGTERM and no completed result is accepted"
+  ],
+  "fullParityVerified": false
+}
