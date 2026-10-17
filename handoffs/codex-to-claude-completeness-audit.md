@@ -4,7 +4,7 @@
 
 Project: `/Users/jasonpoindexter/Documents/GitHub/Open Play`
 Prepared: 2026-10-17
-Current browser candidate: `88f0ba86afb6a3b17b4a8f455ba55a0c0218b5f9`
+Current browser candidate: `e5a9a6e481aadc6171f5f652041777c08ab0cf53`
 Content hashes: `docs/prototype/candidate-hashes.json`
 Private repository: https://github.com/jpoindexter/open-play
 Private board: https://trello.com/b/OqMGEjpe/open-play-serato-parity
@@ -47,10 +47,16 @@ observed Fable5.1/High selector (session local_501fea16-fb28-4e3c-bba7-2e24e6ef6
 see docs/research/claude-fable/video-reference-debug-prompt.md and approvals.md.
 It is not the full completeness audit; its source claims need independent checks.
 
+## Current checkpoint10 override — read before historical tables
+
+Full1:1 incomplete; native approval absent. Current source pins scratch cache/preload/reuse and observed ready-first-pointer behavior. Actual raw engine7/7 with12finite captured PCM spans; live regression6/6 is narrow and misses the known raw476Hz return instead of880Hz. Initial retained46/54failure preserved; observability run48measured/6blocked/0combinedpass,27contiguous spans,3strict pause failures each one nonzero left boundary sample. No trimming or relaxed criteria. Read FULL_BUILD_PLAN.md43, ACTIVE_EXECUTION.md, DECK_SCRATCH_CACHE_REVIEW.md and new `*cache*`/`*observable*` browser results. First trusted ready pointer0→1/3s remains paused; this is control/cursor evidence, not pointer PCM or hardware/reference acceptance.
+
+Fable5.1 High read-only return diagnosis is saved and independently qualified in PARENT_VALIDATION.md; active-muted follower and supported shorter-block strategies are isolated experiments. No production lead/vendor changes. Do not accept speculative physical latency floors, cursor bounds or correct pitch without measured original-time alignment. Full completeness audit still not launched. Check current source owners before editing.
+
 ## Read first
 
 - `AGENTS.md` if present; `PROJECT_PROMPT.md`; `docs/approvals.md`.
-- `FULL_BUILD_PLAN.md` sections23–40, with older sections retained as dated history.
+- `FULL_BUILD_PLAN.md` sections23–43, with older sections retained as dated history.
 - `docs/research/PARITY_GATE.md`, `FULL_SCOPE_CONTRACT.md`, `FEATURE_COVERAGE.md`,
   `INTERACTION_REQUIREMENTS.md`, `REQUIREMENT_GAPS_REVIEW.md`, `SOURCE_CONFLICTS.md`,
   `UI_OBSERVATIONS.md`, `EVIDENCE_LEDGER.md`, `BINARY_FINDINGS.md`,
@@ -67,7 +73,7 @@ It is not the full completeness audit; its source claims need independent checks
 
 ## Current implementation and executed evidence
 
-The working inventory has110 groups and521 detailed requirements. AUD-005 clock
+The working inventory has110 groups and522 detailed requirements. AUD-005 clock
 drift and SYS-006 reproducible builds are independent engineering goals without
 invented vendor interaction rows. Counts do not prove exhaustive coverage.
 

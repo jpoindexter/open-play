@@ -12,7 +12,7 @@
 
 ## Now
 
-Committed checkpoint9 source `88f0ba86afb6a3b17b4a8f455ba55a0c0218b5f9`,230 tracked hashes, metadata HEADc16d161. New cache/observer/diagnostic worktree differs and is not yet pinned. Inspect status before edits.
+Committed checkpoint10 source `e5a9a6e481aadc6171f5f652041777c08ab0cf53`,240 tracked prototype/scripts hashes. Cache/observer/diagnostic evidence is pinned. New shadow/short-block experiment files remain separate and unaccepted; inspect current diff/owners.
 
 Current cache engine SHA `0b61a4f9411c78254f6ec02e972cec835c4c10ddb4ce4a5d936ef57bfc6e8057`: actual browser7/7,12 finite stereo PCM captures with all raw hashes/source hashes/armed frames independently inspected. Three preparations=three load/ACKs, one natural-end callback, zero cleanup errors. Explicit terminal clear differs from intended nonaudible paused retention. Actual routed live-keylock regression6/6 remains narrow and does NOT pass seamless return. Independent controlled cache12/12, old races7/7, root engine10/10, live orchestration9/9 and UI23/23. First ready-preloaded trusted pointer quarter-turn0→1/3s remains paused; no prior scratch gesture, normal browser activation required. Pointer trace is actual UI/control proof, not recorded pointer PCM or referencequality. Read plan43 and current raw artifacts/reviews.
 
@@ -22,7 +22,7 @@ Current cache engine SHA `0b61a4f9411c78254f6ec02e972cec835c4c10ddb4ce4a5d936ef5
 
 Parent owns production engine/app, browser/native control, Git/remotes and delivery records. Transition agent owns observability-only retained-return harness/test/review changes: save pause metrics/snapshots before assertion and explicitly record missing/blocked conditions; no thresholds/scheduling changes or production edits. Other cache/UI reviews are frozen.
 
-Fable5.1 High bounded read-only diagnosis RUNNING in Claude Code, conversation Keylock return approaches diagnosis (`local_8cfa291a-0ea8-4124-beea-ec382f4365f1`), Thiscomputer/OpenPlay. Exact prompt `docs/research/claude-fable/keylock-return-debug-prompt.md` permits ONLY new `keylock-return-findings.md`. Parent must independently verify recommendations. This is a debug review, not the full independent completeness audit.
+Fable5.1 High bounded read-only diagnosis RETURNED in Claude Code, conversation Keylock return approaches diagnosis (`local_8cfa291a-0ea8-4124-beea-ec382f4365f1`), Thiscomputer/OpenPlay. Exact prompt `docs/research/claude-fable/keylock-return-debug-prompt.md` permits ONLY new `keylock-return-findings.md`. Parent qualifications are saved in PARENT_VALIDATION.md; recommendations remain unaccepted until actual behavior. This is a debug review, not the full independent completeness audit.
 
 Refresh returned findings; finish harness observability; measure the smallest candidate that can return pitch-correct at arbitrary original-time cursor within declared30ms/20ms criteria. Preserve source clocks/owners/stem/history/FX routes and invalidation. Commit only exact frozen reviewed paths; regenerate manifest from named source commit.
 
@@ -35,3 +35,5 @@ Fresh45s Hercules observation after Jason's Ready now ran08:02:42–08:03:27UTC:
 **Re-entry:** current goal→this ledger→Git status and file owners→plan43/raw results→Fable finding and retained harness freeze.
 
 **Done evidence:** actual end-to-end scoped behaviors and reference gaps closed, full independent audit reconciled; externally blocked capabilities remain incomplete. No source trace, synthetic check, commit or checkpoint establishes full parity. Native approval remains a separate human gate.
+
+Corrected retained observability actual:48measured/6blocked/0combinedpass,27contiguous capture spans,3strict mute failures each one nonzero left first sample followed47999zero. Saved raw result and inspection, original46-condition failure preserved. Shadow follower and supported short-block candidates are isolated new-file units; no production timing/vendor changes.
