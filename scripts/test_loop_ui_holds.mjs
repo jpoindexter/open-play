@@ -1,0 +1,10 @@
+import assert from 'node:assert/strict';
+import {createLoopPads} from '../prototype/loop-pads.js';
+let now=0;const d={index:0,track:{bpm:120,grid:0,duration:40},position:3.2,playing:true,loop:true,loopIn:3,loopOut:4},state={decks:[d],settings:{}},calls=[];
+const engine={ctx:{get currentTime(){return now;}},voices:new Map(),startTokens:new Map([[0,1]]),position:d=>d.position,audibleRate:()=>1,setLoop:async(d,on,start,end)=>{calls.push('loop');Object.assign(d,{loop:on,loopIn:start,loopOut:end});},seek:async(d,p)=>{calls.push('seek');d.position=p;}};
+const p=createLoopPads({state,engine});
+const early=p.hold('pointer:1',d,2);await p.release('pointer:1');await early;assert.equal(calls.length,0);
+await p.hold('pointer:1',d,2);now=.4;await p.hold('button: ',d,3);await p.release('pointer:1');assert(p.rolling(d,3));assert(!p.rolling(d,2));now=1.2;await p.releaseAll();assert.equal(d.loopIn,3);assert.equal(d.loopOut,4);assert.equal(d.loop,true);assert(Math.abs(d.position-3.4)<1e-9);
+await p.hold('pointer:2',d,2);p.cancelDeck(d);const before=calls.length;await p.releaseAll();assert.equal(calls.length,before);
+for(let i=0;i<10;i++)p.range(d,-1);assert.equal(p.describe(d)[0].label,'0.03125 beats');for(let i=0;i<12;i++)p.range(d,1);assert.equal(p.describe(d)[7].label,'128 beats');state.settings['Show Beat Jump Controls']=true;assert.equal(p.describe(d)[4].label,'Jump back');
+console.log(JSON.stringify({passed:true,scope:'Owned UI Roll lifecycle with engine collaborators; no audio/native/hardware proof',checks:['release before onset','overlap owner and active size','releaseAll restores prior loop and backing clock','cancel invalidates stale release','bounded visible ranges and Beat Jump labels']}));
