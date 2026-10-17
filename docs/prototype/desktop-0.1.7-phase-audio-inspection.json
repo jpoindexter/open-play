@@ -1,0 +1,779 @@
+{
+  "checkedAt": "2026-10-17T18:16:23.392327+00:00",
+  "plan": {
+    "declared_at": "2026-10-17T18:13:29.052786+00:00",
+    "version": "0.1.7",
+    "ASAR_sha256": "6d79bff7d0c33a827ff3734ba2485293571a90102275e3fbebe3212b4592b025",
+    "source": "b099cda6a5ef7742850e7949eab0709e10f6070e",
+    "interfaceEngineBase": "dd068e4dc9338d1f4f131e0c64c9195073fbebed",
+    "fixture": "local-evidence/keylock-native-fixtures/native-keylock-stereo-120s.wav",
+    "fixtureSHA256": "99833309d13090de63a9fcdb7ca8f6bcf601975bfb8cb2e3ef691bb369a0a119",
+    "must_preserve": [
+      "0.1.6 bundle/profile/default launcher",
+      "All old recordings/failures/thresholds",
+      "No user music/account or private library copy",
+      "Sandbox and exact origin permissions"
+    ],
+    "runtime_criteria": [
+      "Native title/version and correct new PID/profile/port",
+      "Actual main UI imports known stereo120s fixture, loads deck2, enables keylock, sets+8% tempo and+2 keyshift",
+      "Actual native REC/Save whole master recording; declared8\u201310second stereo frequency window <=1Hz from330*2^(2/12),550*2^(2/12); RMS>.001; whole original decode finite; every1s window including endpoints retained",
+      "Actual pause returns transport to stopped/nonrecording; seek/resume and rate/keyshift return executed separately",
+      "No physical/controller/fullreference acceptance without fresh witness"
+    ],
+    "audio_cases": [
+      {
+        "file": "open-play-native-017-phase-plus2.webm",
+        "expectedHz": [
+          370.4124759420931,
+          617.3541265701551
+        ],
+        "windowSeconds": [
+          8,
+          10
+        ],
+        "frequencyErrorHzMax": 1,
+        "minimumRMS": 0.001
+      }
+    ],
+    "not_claimed": [
+      "FullSerato parity",
+      "Music or firstsample/cursor/attack/tail quality",
+      "Hours of native playback or nativeheap leak absence",
+      "Physical routing/MIDI/hotplug/latency",
+      "All source-rate/stem/reverse/loop/compound states"
+    ],
+    "full_parity_verified": false
+  },
+  "frequencyMethod": "Global20\u201320000Hz peak,16x-or-more power-of-two Hann FFT and log-parabolic interpolation; never restrict search near expected tone",
+  "estimatorSelfChecks": [
+    {
+      "sr": 44100,
+      "expected": 330,
+      "measured": 329.99999993891686
+    },
+    {
+      "sr": 44100,
+      "expected": 550,
+      "measured": 549.9999998984767
+    },
+    {
+      "sr": 44100,
+      "expected": 370.4124759420931,
+      "measured": 370.4124755097274
+    },
+    {
+      "sr": 44100,
+      "expected": 617.3541265701551,
+      "measured": 617.3541264445885
+    },
+    {
+      "sr": 48000,
+      "expected": 330,
+      "measured": 329.99999976142175
+    },
+    {
+      "sr": 48000,
+      "expected": 550,
+      "measured": 549.9999996207486
+    },
+    {
+      "sr": 48000,
+      "expected": 370.4124759420931,
+      "measured": 370.41247560669814
+    },
+    {
+      "sr": 48000,
+      "expected": 617.3541265701551,
+      "measured": 617.3541260941197
+    }
+  ],
+  "records": [
+    {
+      "original": "/Users/jasonpoindexter/Downloads/open-play-native-017-phase-plus2.webm",
+      "originalSHA256": "9a4573635e102822bee93065bb469c9112539131bcde0d8290e6372b920d77a9",
+      "bytes": 291217,
+      "retainedCopy": "local-evidence/desktop-0.1.7-phase-audio/open-play-native-017-phase-plus2.webm",
+      "copySHA256": "9a4573635e102822bee93065bb469c9112539131bcde0d8290e6372b920d77a9",
+      "probe": {
+        "streams": [
+          {
+            "index": 0,
+            "codec_name": "opus",
+            "codec_long_name": "Opus (Opus Interactive Audio Codec)",
+            "codec_type": "audio",
+            "codec_tag_string": "[0][0][0][0]",
+            "codec_tag": "0x0000",
+            "mime_codec_string": "opus",
+            "sample_fmt": "fltp",
+            "sample_rate": "48000",
+            "channels": 2,
+            "channel_layout": "stereo",
+            "bits_per_sample": 0,
+            "initial_padding": 0,
+            "r_frame_rate": "0/0",
+            "avg_frame_rate": "0/0",
+            "time_base": "1/1000",
+            "start_pts": 0,
+            "start_time": "0.000000",
+            "extradata_size": 19,
+            "disposition": {
+              "default": 1,
+              "dub": 0,
+              "original": 0,
+              "comment": 0,
+              "lyrics": 0,
+              "karaoke": 0,
+              "forced": 0,
+              "hearing_impaired": 0,
+              "visual_impaired": 0,
+              "clean_effects": 0,
+              "attached_pic": 0,
+              "timed_thumbnails": 0,
+              "non_diegetic": 0,
+              "captions": 0,
+              "descriptions": 0,
+              "metadata": 0,
+              "dependent": 0,
+              "still_image": 0,
+              "multilayer": 0
+            },
+            "tags": {
+              "language": "eng"
+            }
+          }
+        ],
+        "format": {
+          "filename": "/Users/jasonpoindexter/Downloads/open-play-native-017-phase-plus2.webm",
+          "nb_streams": 1,
+          "nb_programs": 0,
+          "nb_stream_groups": 0,
+          "format_name": "matroska,webm",
+          "format_long_name": "Matroska / WebM",
+          "start_time": "0.000000",
+          "size": "291217",
+          "probe_score": 100,
+          "tags": {
+            "encoder": "Chrome"
+          }
+        }
+      },
+      "wholeDecode": {
+        "path": "local-evidence/desktop-0.1.7-phase-audio/open-play-native-017-phase-plus2.webm.whole-f32le",
+        "bytes": 11151360,
+        "sha256": "e6a9ed0ac2b622600ee9153833f41173f78a2e70b4c2ac308f92c4da17b7a140",
+        "sampleRate": 48000,
+        "channels": 2,
+        "frames": 1393920,
+        "seconds": 29.04,
+        "allFinite": true,
+        "RMS": [
+          0.033637144310434255,
+          0.03363934500844148
+        ],
+        "peak": [
+          0.06226614862680435,
+          0.06902825087308884
+        ]
+      },
+      "declaredWindowSeconds": [
+        8,
+        10
+      ],
+      "declaredWindow": [
+        {
+          "channel": 0,
+          "expectedHz": 370.4124759420931,
+          "Hz": 370.4742454276259,
+          "RMS": 0.04356767856547341,
+          "errorHz": 0.06176948553274997,
+          "passed": true
+        },
+        {
+          "channel": 1,
+          "expectedHz": 617.3541265701551,
+          "Hz": 617.4575987172472,
+          "RMS": 0.043543737794012646,
+          "errorHz": 0.10347214709202035,
+          "passed": true
+        }
+      ],
+      "every1sWindowIncludingFinalPartial": [
+        {
+          "startSample": 0,
+          "endExclusive": 48000,
+          "partial": false,
+          "channels": [
+            {
+              "channel": 0,
+              "RMS": 0.0,
+              "Hz": null,
+              "errorHz": null
+            },
+            {
+              "channel": 1,
+              "RMS": 0.0,
+              "Hz": null,
+              "errorHz": null
+            }
+          ]
+        },
+        {
+          "startSample": 48000,
+          "endExclusive": 96000,
+          "partial": false,
+          "channels": [
+            {
+              "channel": 0,
+              "RMS": 0.0,
+              "Hz": null,
+              "errorHz": null
+            },
+            {
+              "channel": 1,
+              "RMS": 0.0,
+              "Hz": null,
+              "errorHz": null
+            }
+          ]
+        },
+        {
+          "startSample": 96000,
+          "endExclusive": 144000,
+          "partial": false,
+          "channels": [
+            {
+              "channel": 0,
+              "RMS": 0.0,
+              "Hz": null,
+              "errorHz": null
+            },
+            {
+              "channel": 1,
+              "RMS": 0.0,
+              "Hz": null,
+              "errorHz": null
+            }
+          ]
+        },
+        {
+          "startSample": 144000,
+          "endExclusive": 192000,
+          "partial": false,
+          "channels": [
+            {
+              "channel": 0,
+              "RMS": 0.0,
+              "Hz": null,
+              "errorHz": null
+            },
+            {
+              "channel": 1,
+              "RMS": 0.0,
+              "Hz": null,
+              "errorHz": null
+            }
+          ]
+        },
+        {
+          "startSample": 192000,
+          "endExclusive": 240000,
+          "partial": false,
+          "channels": [
+            {
+              "channel": 0,
+              "RMS": 0.0,
+              "Hz": null,
+              "errorHz": null
+            },
+            {
+              "channel": 1,
+              "RMS": 0.0,
+              "Hz": null,
+              "errorHz": null
+            }
+          ]
+        },
+        {
+          "startSample": 240000,
+          "endExclusive": 288000,
+          "partial": false,
+          "channels": [
+            {
+              "channel": 0,
+              "RMS": 0.009575579871181506,
+              "Hz": 370.3981923847993,
+              "errorHz": 0.014283557293822469
+            },
+            {
+              "channel": 1,
+              "RMS": 0.009540342158784642,
+              "Hz": 617.3606029135767,
+              "errorHz": 0.006476343421581987
+            }
+          ]
+        },
+        {
+          "startSample": 288000,
+          "endExclusive": 336000,
+          "partial": false,
+          "channels": [
+            {
+              "channel": 0,
+              "RMS": 0.04354880471068345,
+              "Hz": 370.3897950423409,
+              "errorHz": 0.0226808997522312
+            },
+            {
+              "channel": 1,
+              "RMS": 0.0435381510533998,
+              "Hz": 617.3172021454401,
+              "errorHz": 0.036924424715039095
+            }
+          ]
+        },
+        {
+          "startSample": 336000,
+          "endExclusive": 384000,
+          "partial": false,
+          "channels": [
+            {
+              "channel": 0,
+              "RMS": 0.04357727781462551,
+              "Hz": 370.44726627430373,
+              "errorHz": 0.0347903322106049
+            },
+            {
+              "channel": 1,
+              "RMS": 0.04355049220547355,
+              "Hz": 617.4118766376439,
+              "errorHz": 0.057750067488768764
+            }
+          ]
+        },
+        {
+          "startSample": 384000,
+          "endExclusive": 432000,
+          "partial": false,
+          "channels": [
+            {
+              "channel": 0,
+              "RMS": 0.04356168333916734,
+              "Hz": 370.3996255147156,
+              "errorHz": 0.012850427377543383
+            },
+            {
+              "channel": 1,
+              "RMS": 0.04356168792189162,
+              "Hz": 617.3329692055677,
+              "errorHz": 0.02115736458745232
+            }
+          ]
+        },
+        {
+          "startSample": 432000,
+          "endExclusive": 480000,
+          "partial": false,
+          "channels": [
+            {
+              "channel": 0,
+              "RMS": 0.04357367296690666,
+              "Hz": 370.53585490173793,
+              "errorHz": 0.12337895964481049
+            },
+            {
+              "channel": 1,
+              "RMS": 0.04352578026346194,
+              "Hz": 617.5592860681134,
+              "errorHz": 0.20515949795822053
+            }
+          ]
+        },
+        {
+          "startSample": 480000,
+          "endExclusive": 528000,
+          "partial": false,
+          "channels": [
+            {
+              "channel": 0,
+              "RMS": 0.04358156191376252,
+              "Hz": 370.44203455824646,
+              "errorHz": 0.02955861615333788
+            },
+            {
+              "channel": 1,
+              "RMS": 0.04355722094645612,
+              "Hz": 617.4039846654098,
+              "errorHz": 0.049858095254649015
+            }
+          ]
+        },
+        {
+          "startSample": 528000,
+          "endExclusive": 576000,
+          "partial": false,
+          "channels": [
+            {
+              "channel": 0,
+              "RMS": 0.04355317597942063,
+              "Hz": 370.47364209651,
+              "errorHz": 0.0611661544168669
+            },
+            {
+              "channel": 1,
+              "RMS": 0.0435819992386234,
+              "Hz": 617.4550650015864,
+              "errorHz": 0.10093843143124559
+            }
+          ]
+        },
+        {
+          "startSample": 576000,
+          "endExclusive": 624000,
+          "partial": false,
+          "channels": [
+            {
+              "channel": 0,
+              "RMS": 0.04356452428769902,
+              "Hz": 370.421474009842,
+              "errorHz": 0.00899806774884837
+            },
+            {
+              "channel": 1,
+              "RMS": 0.04357143701036298,
+              "Hz": 617.3691148884213,
+              "errorHz": 0.01498831826620517
+            }
+          ]
+        },
+        {
+          "startSample": 624000,
+          "endExclusive": 672000,
+          "partial": false,
+          "channels": [
+            {
+              "channel": 0,
+              "RMS": 0.04356393516232766,
+              "Hz": 370.4742814769218,
+              "errorHz": 0.061805534828693
+            },
+            {
+              "channel": 1,
+              "RMS": 0.043574956663412635,
+              "Hz": 617.4576439740748,
+              "errorHz": 0.10351740391968178
+            }
+          ]
+        },
+        {
+          "startSample": 672000,
+          "endExclusive": 720000,
+          "partial": false,
+          "channels": [
+            {
+              "channel": 0,
+              "RMS": 0.043561247285026215,
+              "Hz": 370.4121476968291,
+              "errorHz": 0.0003282452640291922
+            },
+            {
+              "channel": 1,
+              "RMS": 0.04356301051540973,
+              "Hz": 617.3539282771096,
+              "errorHz": 0.00019829304551421956
+            }
+          ]
+        },
+        {
+          "startSample": 720000,
+          "endExclusive": 768000,
+          "partial": false,
+          "channels": [
+            {
+              "channel": 0,
+              "RMS": 0.043572055445078854,
+              "Hz": 370.418452662504,
+              "errorHz": 0.005976720410899361
+            },
+            {
+              "channel": 1,
+              "RMS": 0.043569297413538925,
+              "Hz": 617.3657028076705,
+              "errorHz": 0.011576237515328103
+            }
+          ]
+        },
+        {
+          "startSample": 768000,
+          "endExclusive": 816000,
+          "partial": false,
+          "channels": [
+            {
+              "channel": 0,
+              "RMS": 0.043557380885121906,
+              "Hz": 370.4030373459647,
+              "errorHz": 0.009438596128404697
+            },
+            {
+              "channel": 1,
+              "RMS": 0.043550095236633564,
+              "Hz": 617.3385692553452,
+              "errorHz": 0.015557314809939271
+            }
+          ]
+        },
+        {
+          "startSample": 816000,
+          "endExclusive": 864000,
+          "partial": false,
+          "channels": [
+            {
+              "channel": 0,
+              "RMS": 0.04356024264529056,
+              "Hz": 370.4126580023365,
+              "errorHz": 0.00018206024338951465
+            },
+            {
+              "channel": 1,
+              "RMS": 0.04356689091077764,
+              "Hz": 617.3536368661563,
+              "errorHz": 0.0004897039988236429
+            }
+          ]
+        },
+        {
+          "startSample": 864000,
+          "endExclusive": 912000,
+          "partial": false,
+          "channels": [
+            {
+              "channel": 0,
+              "RMS": 0.04356458771425859,
+              "Hz": 370.41011502701105,
+              "errorHz": 0.002360915082078918
+            },
+            {
+              "channel": 1,
+              "RMS": 0.043568095597798916,
+              "Hz": 617.3492998295886,
+              "errorHz": 0.004826740566500121
+            }
+          ]
+        },
+        {
+          "startSample": 912000,
+          "endExclusive": 960000,
+          "partial": false,
+          "channels": [
+            {
+              "channel": 0,
+              "RMS": 0.043538803361619985,
+              "Hz": 370.40422945711185,
+              "errorHz": 0.008246484981270896
+            },
+            {
+              "channel": 1,
+              "RMS": 0.043602043366202645,
+              "Hz": 617.3401719702821,
+              "errorHz": 0.013954599873045481
+            }
+          ]
+        },
+        {
+          "startSample": 960000,
+          "endExclusive": 1008000,
+          "partial": false,
+          "channels": [
+            {
+              "channel": 0,
+              "RMS": 0.04355833002443927,
+              "Hz": 370.4169064139968,
+              "errorHz": 0.0044304719036745155
+            },
+            {
+              "channel": 1,
+              "RMS": 0.04359164586092274,
+              "Hz": 617.3605950536692,
+              "errorHz": 0.006468483514026957
+            }
+          ]
+        },
+        {
+          "startSample": 1008000,
+          "endExclusive": 1056000,
+          "partial": false,
+          "channels": [
+            {
+              "channel": 0,
+              "RMS": 0.043589080320387684,
+              "Hz": 370.3956244464759,
+              "errorHz": 0.01685149561723165
+            },
+            {
+              "channel": 1,
+              "RMS": 0.04358760901974915,
+              "Hz": 617.3263887190861,
+              "errorHz": 0.027737851068991404
+            }
+          ]
+        },
+        {
+          "startSample": 1056000,
+          "endExclusive": 1104000,
+          "partial": false,
+          "channels": [
+            {
+              "channel": 0,
+              "RMS": 0.04355129901765658,
+              "Hz": 370.4322553080425,
+              "errorHz": 0.01977936594937546
+            },
+            {
+              "channel": 1,
+              "RMS": 0.043579629636269074,
+              "Hz": 617.3878211640217,
+              "errorHz": 0.03369459386658491
+            }
+          ]
+        },
+        {
+          "startSample": 1104000,
+          "endExclusive": 1152000,
+          "partial": false,
+          "channels": [
+            {
+              "channel": 0,
+              "RMS": 0.022444507429743157,
+              "Hz": 370.37235470816904,
+              "errorHz": 0.040121233924082844
+            },
+            {
+              "channel": 1,
+              "RMS": 0.022434134549454133,
+              "Hz": 617.3031498041603,
+              "errorHz": 0.05097676599484657
+            }
+          ]
+        },
+        {
+          "startSample": 1152000,
+          "endExclusive": 1200000,
+          "partial": false,
+          "channels": [
+            {
+              "channel": 0,
+              "RMS": 0.0,
+              "Hz": null,
+              "errorHz": null
+            },
+            {
+              "channel": 1,
+              "RMS": 0.0,
+              "Hz": null,
+              "errorHz": null
+            }
+          ]
+        },
+        {
+          "startSample": 1200000,
+          "endExclusive": 1248000,
+          "partial": false,
+          "channels": [
+            {
+              "channel": 0,
+              "RMS": 0.0,
+              "Hz": null,
+              "errorHz": null
+            },
+            {
+              "channel": 1,
+              "RMS": 0.0,
+              "Hz": null,
+              "errorHz": null
+            }
+          ]
+        },
+        {
+          "startSample": 1248000,
+          "endExclusive": 1296000,
+          "partial": false,
+          "channels": [
+            {
+              "channel": 0,
+              "RMS": 0.0,
+              "Hz": null,
+              "errorHz": null
+            },
+            {
+              "channel": 1,
+              "RMS": 0.0,
+              "Hz": null,
+              "errorHz": null
+            }
+          ]
+        },
+        {
+          "startSample": 1296000,
+          "endExclusive": 1344000,
+          "partial": false,
+          "channels": [
+            {
+              "channel": 0,
+              "RMS": 0.0,
+              "Hz": null,
+              "errorHz": null
+            },
+            {
+              "channel": 1,
+              "RMS": 0.0,
+              "Hz": null,
+              "errorHz": null
+            }
+          ]
+        },
+        {
+          "startSample": 1344000,
+          "endExclusive": 1392000,
+          "partial": false,
+          "channels": [
+            {
+              "channel": 0,
+              "RMS": 0.0,
+              "Hz": null,
+              "errorHz": null
+            },
+            {
+              "channel": 1,
+              "RMS": 0.0,
+              "Hz": null,
+              "errorHz": null
+            }
+          ]
+        },
+        {
+          "startSample": 1392000,
+          "endExclusive": 1393920,
+          "partial": true,
+          "channels": [
+            {
+              "channel": 0,
+              "RMS": 0.0,
+              "Hz": null,
+              "errorHz": null
+            },
+            {
+              "channel": 1,
+              "RMS": 0.0,
+              "Hz": null,
+              "errorHz": null
+            }
+          ]
+        }
+      ],
+      "passed": true
+    }
+  ],
+  "declaredCriteriaPassed": true,
+  "scope": "Actual saved main-app master original decoded wholly, steady declared frequency criterion. Not acoustic/native cursor/instantaneous continuity/music or full parity proof.",
+  "fullParityVerified": false
+}

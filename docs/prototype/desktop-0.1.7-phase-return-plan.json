@@ -1,0 +1,43 @@
+{
+  "declared_at": "2026-10-17T18:17:38.956184+00:00",
+  "version": "0.1.7",
+  "ASAR_sha256": "6d79bff7d0c33a827ff3734ba2485293571a90102275e3fbebe3212b4592b025",
+  "source": "b099cda6a5ef7742850e7949eab0709e10f6070e",
+  "interfaceEngineBase": "dd068e4dc9338d1f4f131e0c64c9195073fbebed",
+  "fixture": "local-evidence/keylock-native-fixtures/native-keylock-stereo-120s.wav",
+  "fixtureSHA256": "99833309d13090de63a9fcdb7ca8f6bcf601975bfb8cb2e3ef691bb369a0a119",
+  "must_preserve": [
+    "0.1.6 bundle/profile/default launcher",
+    "All old recordings/failures/thresholds",
+    "No user music/account or private library copy",
+    "Sandbox and exact origin permissions"
+  ],
+  "runtime_criteria": [
+    "After pause reset keyshift from+2 to0 with keylock stillon andtempo+8; click actual play-position slider to seek; resume actualmainapp REC/Save entire master.",
+    "Both declared8\u201310s stereochannels <=1Hz from330/550 andRMS>.001; wholedecodefinite/every1s retained.",
+    "Actual UI seek state is not sample-accurate source cursor proof because fixture is stationary."
+  ],
+  "audio_cases": [
+    {
+      "file": "open-play-native-017-phase-return.webm",
+      "expectedHz": [
+        330,
+        550
+      ],
+      "windowSeconds": [
+        8,
+        10
+      ],
+      "frequencyErrorHzMax": 1,
+      "minimumRMS": 0.001
+    }
+  ],
+  "not_claimed": [
+    "FullSerato parity",
+    "Music or firstsample/cursor/attack/tail quality",
+    "Hours of native playback or nativeheap leak absence",
+    "Physical routing/MIDI/hotplug/latency",
+    "All source-rate/stem/reverse/loop/compound states"
+  ],
+  "full_parity_verified": false
+}

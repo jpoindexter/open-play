@@ -1,0 +1,45 @@
+{
+  "declared_at": "2026-10-17T18:13:29.052786+00:00",
+  "version": "0.1.7",
+  "ASAR_sha256": "6d79bff7d0c33a827ff3734ba2485293571a90102275e3fbebe3212b4592b025",
+  "source": "b099cda6a5ef7742850e7949eab0709e10f6070e",
+  "interfaceEngineBase": "dd068e4dc9338d1f4f131e0c64c9195073fbebed",
+  "fixture": "local-evidence/keylock-native-fixtures/native-keylock-stereo-120s.wav",
+  "fixtureSHA256": "99833309d13090de63a9fcdb7ca8f6bcf601975bfb8cb2e3ef691bb369a0a119",
+  "must_preserve": [
+    "0.1.6 bundle/profile/default launcher",
+    "All old recordings/failures/thresholds",
+    "No user music/account or private library copy",
+    "Sandbox and exact origin permissions"
+  ],
+  "runtime_criteria": [
+    "Native title/version and correct new PID/profile/port",
+    "Actual main UI imports known stereo120s fixture, loads deck2, enables keylock, sets+8% tempo and+2 keyshift",
+    "Actual native REC/Save whole master recording; declared8\u201310second stereo frequency window <=1Hz from330*2^(2/12),550*2^(2/12); RMS>.001; whole original decode finite; every1s window including endpoints retained",
+    "Actual pause returns transport to stopped/nonrecording; seek/resume and rate/keyshift return executed separately",
+    "No physical/controller/fullreference acceptance without fresh witness"
+  ],
+  "audio_cases": [
+    {
+      "file": "open-play-native-017-phase-plus2.webm",
+      "expectedHz": [
+        370.4124759420931,
+        617.3541265701551
+      ],
+      "windowSeconds": [
+        8,
+        10
+      ],
+      "frequencyErrorHzMax": 1,
+      "minimumRMS": 0.001
+    }
+  ],
+  "not_claimed": [
+    "FullSerato parity",
+    "Music or firstsample/cursor/attack/tail quality",
+    "Hours of native playback or nativeheap leak absence",
+    "Physical routing/MIDI/hotplug/latency",
+    "All source-rate/stem/reverse/loop/compound states"
+  ],
+  "full_parity_verified": false
+}
