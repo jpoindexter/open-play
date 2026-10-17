@@ -44,3 +44,5 @@ Continuous keylock/scratch release/clock integration; reverse/loop/StemSlip path
 **Later:** reverse/loop/StemSlip and transport compositions, resource/range/decoded-memory limits, SCNet failed quality gate, remaining Video/library/provider/device/reference scope.110groups/522requirements incomplete; goal active. Full independent Claude audit remains unlaunched.
 
 **Re-entry:** read current goal/diff, candidate manifest and section41; inspect live agent owners. Do not equate passing tone/plumbing checks with the real release criterion. Fresh45s Hercules correlation question is still pending; no new hardware capture without an agreed window.
+
+Checkpoint9 source `88f0ba86afb6a3b17b4a8f455ba55a0c0218b5f9` pins 230 tracked prototype/scripts files. Actual eight-point lead sweep completed8 points/no fatal,4/8 meet its finite criteria; experimental module is not imported by production. Pointer acceptance remains unverified after coordinate drags did not move the cursor; opt-in visible event tracing is next.

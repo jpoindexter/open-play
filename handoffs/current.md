@@ -1,24 +1,15 @@
 # Current handoff: Codex to Claude
 
-Read [the full independent audit packet](codex-to-claude-completeness-audit.md). The original prompt remains verbatim; preserve all subsequent user authority.
+Project: `/Users/jasonpoindexter/Documents/GitHub/Open Play`. Current committed browser source: `88f0ba86afb6a3b17b4a8f455ba55a0c0218b5f9`; 230 tracked prototype/scripts hashes in `docs/prototype/candidate-hashes.json`. Experimental lead and pointer-event diagnostic work is separate; inspect the current diff and live file owners before editing.
 
-Project: `/Users/jasonpoindexter/Documents/GitHub/Open Play`. Pinned source candidate: `2bcde75719ae2f12a2d487bf5cf07ec2d1dcbcc9`; 217 source hashes. Untracked forward-adapter work is a separate active unit. Use `docs/prototype/candidate-hashes.json` and inspect worktree differences.
+**Full1:1 NOT PASSED; native approval NOT GRANTED; active goal continues.** Current inventory110groups/522requirements remains incomplete. Read FULL_BUILD_PLAN.md41 and ACTIVE_EXECUTION.md current override before historical results.
 
-**Full1:1 NOT PASSED; native approval NOT GRANTED; active goal continues.** Inventory110groups/521requirements is incomplete. Read FULL_BUILD_PLAN.md40 and ACTIVE_EXECUTION.md before older dated checkpoints.
+Actual standalone forward adapter8/8, routed live engine6/6 and raw scratch engine4/4 execute their finite synthetic criteria. Main UI keyboard forward/reverse/hold plus master recording prove real playback: unknown-key file+12 produces880Hz;1.08x source modulation measures4.32Hz. Read each raw result's source hash and scope.
 
-Latest parent executed: isolated live keylock11/11 with full armed capture; instrumented terminal lifecycle5/5; raw ordinary scratch7/7 over13 contiguous captures; shared Video Setup UI/reload/geometry/encoded720p/atomic capture-reset/fade paths. Keylock and scratch components are **not integrated into AudioEngine/platter** yet. Buffered renderer, SCNet quality failure and resource/range bounds remain gaps.
+**Failed real criterion:** stationary platter release briefly returns raw476Hz instead of requested880Hz (two250ms spectral bins; not an exact duration). Green low-RMS handoff tests missed pitch preservation. Production scheduling remains unchanged while a separate actual eight-point experiment measures readiness versus output lead. Pointer coordinate drags produced no cursor movement; event tracing is pending, so pointer acceptance is not claimed.
 
-Fresh passive45s Hercules observation: stable online exact-name source across84 scans, successful connection, zero callbacks/no parse errors/output. Movement/Serato confirmation for that exact window remains pending. Do not infer a broken/unsupported controller or private receive path.
+Next: reconcile actual lead sweep, test retained/prewarmed return ownership and release frequency; use optional visible pointer diagnostics to verify delivered events. Preserve original/vocal/other/bass/drums routing and all historical failures. Reverse/loop/StemSlip live paths, SCNet failed reconstruction/quality gate, decoded-memory/range/CPU limits and remaining Video/library/device/provider/reference scope remain gaps.
 
-Next executable unit: bounded forward live keylock adapter, then actual app/platter scratch/bypass/handoff with source ownership and preserved stem routes. Continue remaining Video output/quality/arrangement/MIDI/shortcuts, library/device/provider and quality acceptance.
+Fresh45s Hercules observer: stable online source across84 scans, successful connection, zero callbacks/errors/output. Exact-window movement/Serato correlation still awaits Jason's answer. No new capture without an agreed window.
 
-Return full independent findings to `handoffs/claude-to-codex-completeness-audit.md`. Full audit remains unlaunched; two bounded Fable5.1/High debug sessions are separate and source claims need independent checks. No native app until Jason explicitly approves a named HTML revision.
-
-
-## Latest override — checkpoint9 integration
-
-Read FULL_BUILD_PLAN.md41 and ACTIVE_EXECUTION.md's current override. Forward unlooped live keylock and whole-deck scratch/platter are now integrated in browser sources. Actual adapter8/8, live engine6/6, raw engine4/4 and real main master recording are recorded under `docs/prototype/`. Root/independent controlled owner/clock/routing checks supplement these narrower actual captures. An unknown-key file can now shift+12; actual output880Hz and AM4.32Hz at1.08× were measured.
-
-**Seamless scratch→keylock release remains FAILED:** two250ms recording windows return raw476Hz instead of880Hz. Existing finite handoff tests missed pitch preservation. New experimental lead sweep is a separate agent-owned unit; no production lead policy changed yet. Preserve this failure and add release-frequency acceptance before promoting readiness.
-
-Earlier source pin above describes checkpoint8; pending checkpoint9 source/manifest pin will supersede it. Full1:1 false, native unapproved, full independent Claude audit unlaunched.
+Read [the full independent audit packet](codex-to-claude-completeness-audit.md). Original PROJECT_PROMPT.md remains its byte-exact suffix. Return findings to `handoffs/claude-to-codex-completeness-audit.md`. Full audit remains unlaunched; bounded Fable5.1/High debug sessions are separate and do not establish completeness. No native app before explicit approval of a named HTML revision.
