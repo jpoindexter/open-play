@@ -1,3 +1,4 @@
+import {createLoopPads} from './loop-pads.js';
 import { synchronizeSimple } from './sync.js';
 import { createSmartSync, hasBeatgrid, beatPosition } from './smart-sync.js';
 import {createBeatgrid,gridBPM} from './beatgrid.js';
@@ -575,6 +576,7 @@ async function load(index, id = state.selected, options = {}) {
   const old = d.track ? { id: d.track.id, position: engine.position(d) } : null;
   deckScratchControls.cancelDeck(d);
   pitchPlay.cancelDeck(d);
+  loopPads.cancelDeck(d);
   stemSlipControls.cancelDeck(d);
   engine.pause(d);
   engine.clearDeckScratchCache(d.index);
@@ -644,6 +646,7 @@ async function setDeckKeyShift(index, semitones) {
   if (!d) throw new RangeError("Unknown deck.");
   deckScratchControls.cancelDeck(d);
   pitchPlay.cancelDeck(d);
+  loopPads.cancelDeck(d);
   d.keySync = false;
   const request={track:d.track,semitones};
   deckKeyShiftRequests.set(d,request);
@@ -716,6 +719,7 @@ async function deckAction(action, index, el, event = {}) {
     deckLoadRequests.set(d, request);
     deckScratchControls.cancelDeck(d);
     pitchPlay.cancelDeck(d);
+  loopPads.cancelDeck(d);
     stemSlipControls.cancelDeck(d);
     d.keySync = false;
     engine.pause(d);
@@ -891,6 +895,7 @@ async function deckAction(action, index, el, event = {}) {
       if (!match.ok) return notify(match.reason);
       deckScratchControls.cancelDeck(d);
       pitchPlay.cancelDeck(d);
+  loopPads.cancelDeck(d);
       await engine.setPitch(d,{keylock:true,semitones:match.semitones});
       d.keySync = true; d.keySyncTag = d.track.key;
       notify(`Key Sync: ${match.key} · ${match.semitones >= 0 ? "+" : ""}${match.semitones} semitones · compatible with deck${match.targets.length > 1 ? "s" : ""} ${match.targets.map(i=>i+1).join(", ")}.`);
@@ -1218,6 +1223,8 @@ const cueHolds = createCueHolds({
   notify,
 });
 api.cueHolds = cueHolds;
+const loopPads=createLoopPads({state,engine,render:renderDecks,notify});
+api.loopPads=loopPads;
 const slicer = createSlicer({ engine, render: renderDecks, notify });
 const pitchPlay = createPitchPlay({engine,render:renderDecks,persist,notify,quantized});
 const panels = createPanels(api);

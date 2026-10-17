@@ -6,7 +6,8 @@ import {createMIDIJogTouch} from './midi-jog-touch.js';
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 const key=m=>JSON.stringify([m.deviceId||'',m.type,m.channel,m.number]);
 const continuous=['tempo','trim','high','mid','low','filter','level','jog nudge','jog bend','jog surface'];
-const commands=['load','play','cue','sync','sync off','headphone cue','loop','loop in','loop out','loop half','loop double','keylock','jog touch','jog touch fast','vinyl','slip','quantize','tempo range','previous','stutter'];
+const loopCommands=['auto loop','loop roll'].flatMap(mode=>Array.from({length:8},(_,i)=>`${mode} pad ${i+1}`));
+const commands=[...loopCommands,'load','play','cue','sync','sync off','headphone cue','loop','loop in','loop out','loop half','loop double','keylock','jog touch','jog touch fast','vinyl','slip','quantize','tempo range','previous','stutter'];
 export const deckMIDITargets=Array.from({length:4},(_,i)=>[...continuous,...commands,...Array.from({length:8},(_,n)=>`hot cue ${n+1}`),...Array.from({length:8},(_,n)=>`clear cue ${n+1}`)].map(x=>`Deck ${i+1} ${x}`)).flat();
 export const samplerMIDITargets=Array.from({length:8},(_,n)=>[`Sampler ${n+1}`,`Sampler ${n+1} alt`]).flat();
 export const fxMIDITargets=[1,2].flatMap(n=>['depth','beat','enable'].map(x=>`FX unit ${n} ${x}`));
@@ -70,7 +71,13 @@ export function createDeckMIDIRouter({state,engine,actions,applyFX=()=>{},onChan
    if(!message.pressed){release(message);return true;}
    if(buttons.has(key(message)))return true;
    const hot=/^hot cue ([1-8])$/.exec(action),clear=/^clear cue ([1-8])$/.exec(action),cue=action==='cue'||!!hot;
-   buttons.set(key(message),{owner,cue,deviceId:message.deviceId||''});
+   const held={owner,cue,deviceId:message.deviceId||'',release:null};buttons.set(key(message),held);
+   const loopPad=/^(auto loop|loop roll) pad ([1-8])$/.exec(action);
+   if(loopPad){
+    if(mapping.encoding!=='7-bit absolute'||message.type==='Pitch bend')throw Error('Loop pads need a7-bit Note/CC button with release.');
+    try{const started=actions.loopPads.press(d,loopPad[1]==='auto loop'?'auto':'roll',Number(loopPad[2])-1);held.release=started.release;await started.pending;}
+    catch(error){if(buttons.get(key(message))===held)buttons.delete(key(message));throw error;}return true;
+   }
    if(clear){await actions.cueHolds.press(owner,d,Number(clear[1])-1,true);return true;}
    if(cue){await actions.cueHolds.press(owner,d,hot?Number(hot[1])-1:null);return true;}
    if(action==='vinyl'){await jogTouch.resetDeck(d.index);await jogBend.resetDeck(d.index);d.vinyl=d.vinyl===false;onStatus(`Deck ${d.index+1} Vinyl ${d.vinyl?'on':'off'}.`);onChange({deck:d.index,action});return true;}
@@ -134,7 +141,7 @@ export function createDeckMIDIRouter({state,engine,actions,applyFX=()=>{},onChan
 
 export function herculesPlaybackMappings(deviceId){
  if(!deviceId)throw Error('Connect the named Hercules input before installing its controls.');
- const maps=[],add=(target,type,channel,number,encoding='7-bit absolute',extra={})=>maps.push({target,type,channel,number,encoding,deviceId,preset:'hercules-inpulse-300-mk2-playback-v4',...extra});
+ const maps=[],add=(target,type,channel,number,encoding='7-bit absolute',extra={})=>maps.push({target,type,channel,number,encoding,deviceId,preset:'hercules-inpulse-300-mk2-playback-v5',...extra});
  add('Library browse','CC',1,1,'Relative two’s complement');add('Crossfader','CC',1,0);
  for(let deck=1;deck<=2;deck++){
   const ch=deck+1,t=s=>`Deck ${deck} ${s}`;
@@ -152,6 +159,7 @@ export function herculesPlaybackMappings(deviceId){
   for(const [name,n]of [['slip',1],['quantize',2]])add(t(name),'Note',ch,n);
   for(const [name,n]of [['tempo range',2],['previous',6],['stutter',7]])add(t(name),'Note',ch+3,n);
   for(let n=0;n<8;n++){
+   add(t(`auto loop pad ${n+1}`),'Note',deck+6,n+0x10);add(t(`loop roll pad ${n+1}`),'Note',deck+6,n+0x50);
    add(t(`hot cue ${n+1}`),'Note',deck+6,n);add(t(`clear cue ${n+1}`),'Note',deck+6,n+8);
    add(`Sampler ${n+1}`,'Note',deck+6,n+0x30);add(`Sampler ${n+1} alt`,'Note',deck+6,n+0x38);
   }

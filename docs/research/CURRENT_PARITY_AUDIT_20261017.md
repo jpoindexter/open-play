@@ -213,3 +213,8 @@ Actual browser MIDI editor + synthetic packets drive the existing scratch workle
 ### Plan84 dated subset: transport/Quantize/Sampler MIDI
 
 Actual editor/synthetic input changes cue placement per deck, visible Quantize mixed/all states, range/Slip state and previous/stutter transport. Whole finite1.5s sampler recording covers original bank release after mapping removal, newer slot ownership and alt stop/load. docs/prototype/midi-sampler-buttons-browser-results.json. No physical/native/full acceptance. Refreshed Pro guide semantics supersede community Mixxx action choices; Sampler-alt byte range remains inferred. Native0.1.12 unchanged; full flags and audit rows unpromoted.
+
+
+### Plan85 — loop-pad software subset,17October2026
+
+Actual browser MIDI editor/synthetic notes: Auto Loop0–0.25s repeats then toggles off; momentary Roll returns1.629637s against1.628027s independent expected; bottom-row size4→2→4 and source4→2→4s. Complete4.679977s stereo recording, finite; expected320/640Hz left and550Hz right, errors<0.014Hz. Original discontinuous330Hz fixture attempt retained;320Hz fixture rerun passed without product changes. Receipt: docs/prototype/midi-loop-pads-browser-results.json; collaborator policy receipt separate. v5 has164candidate address assignments;0x51 is inferred, not found in inspected XML. Native0.1.12 unchanged, no physical action while away. Full flags/counts unchanged; full range/UI/shared legacy roll ownership, changing rate/Sync/compound modes/music quality/reference/device acceptance remain open.

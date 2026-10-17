@@ -1,0 +1,180 @@
+{
+  "startedAt": "2026-10-17T21:58:01.417Z",
+  "completed": true,
+  "scope": "Actual app MIDI editor, synthetic messages and master recording. No native, physical pads or full transport-composition acceptance.",
+  "criteria": {
+    "frequencyErrorHz": 0.8,
+    "playingMinimumRMS": 0.005,
+    "returnPositionToleranceSeconds": 0.05
+  },
+  "events": [
+    {
+      "name": "auto-start",
+      "time": 0.01741496598639458
+    },
+    {
+      "name": "auto-repeated",
+      "time": 1.219047619047619
+    },
+    {
+      "name": "auto-exit",
+      "time": 1.486077097505669
+    },
+    {
+      "name": "linear-past-one-second",
+      "time": 2.681904761904762
+    },
+    {
+      "name": "roll-start",
+      "time": 2.948934240362812
+    },
+    {
+      "name": "roll-repeated",
+      "time": 4.1505668934240365
+    },
+    {
+      "name": "roll-return",
+      "time": 4.382766439909298
+    }
+  ],
+  "checks": [
+    "Real Auto Loop wraps, toggles off and ordinary playback progresses",
+    "Roll repeats then original Note Off returns continuing source timeline",
+    "Independent bottom-row Beat Jump size/movement follows setting",
+    "Whole recorded master contains expected before/after carriers on both decks"
+  ],
+  "errors": [],
+  "sourceBefore": {
+    "app.js": "7ed084d9ad43915fa8c376015fc965f66330fcd5ae31dd0b4b3c4c554d3cb38c",
+    "engine.js": "c0f7fa915938ab416137807a4345878d290110dcdfce23283e46c1e665eec6b1",
+    "panels.js": "2accf21901d75c01ec82f4b9b69fe0f1f9aa768f5d9bdf166efd16a4519d1e40",
+    "deck-midi.js": "630ff80bec4986919d7f2b289fe0a18300dc2fb05cffb7969fd15ab2acbfd5dc",
+    "midi.js": "0cabb6dbe98e9eb3f7bc7f7eb44615fa315a0738260e5f3568a34d0aa75ec1ad",
+    "loop-pads.js": "bcec88a25f31d7782c25d9073d58a16d9031b9f4cbaaf8ab7ec310f9c46da89f",
+    "beatgrid.js": "9d74accf0a8278fefe1f43dd06534c442b76b44300746c9e791d583fa1e6b71e",
+    "midi-loop-pads-harness.js": "ef8cc4ee21c6d2d00d4914c6e6c8704abef5f7a948f0d0222df544f07aed85a5"
+  },
+  "auto": {
+    "start": 0,
+    "end": 0.25,
+    "afterWait": 0.1690476190476189
+  },
+  "roll": {
+    "expected": 1.6280272108843536,
+    "returned": 1.6296371882086171
+  },
+  "beatJump": {
+    "length": 4,
+    "position": 4,
+    "loop": false
+  },
+  "recording": {
+    "bytes": 75749,
+    "format": "audio/webm;codecs=opus",
+    "sha256": "b829d61e438210cc099477f0472491045d8b49ac5717cf59a1fb24bc95ba50ff"
+  },
+  "decoded": {
+    "duration": 4.679977324263039,
+    "sampleRate": 44100,
+    "frames": 206387,
+    "channels": 2
+  },
+  "audio": [
+    {
+      "name": "auto",
+      "expected": [
+        320,
+        550
+      ],
+      "channels": [
+        {
+          "from": 1.279047619047619,
+          "to": 1.3990476190476189,
+          "rms": 0.03730094364315843,
+          "hz": 319.9907186784694
+        },
+        {
+          "from": 1.279047619047619,
+          "to": 1.3990476190476189,
+          "rms": 0.03726579378146663,
+          "hz": 549.997707671532
+        }
+      ]
+    },
+    {
+      "name": "linear",
+      "expected": [
+        640,
+        550
+      ],
+      "channels": [
+        {
+          "from": 2.741904761904762,
+          "to": 2.861904761904762,
+          "rms": 0.03725671230446863,
+          "hz": 640.0024958813594
+        },
+        {
+          "from": 2.741904761904762,
+          "to": 2.861904761904762,
+          "rms": 0.03740198270363123,
+          "hz": 549.9937131822631
+        }
+      ]
+    },
+    {
+      "name": "rolling",
+      "expected": [
+        320,
+        550
+      ],
+      "channels": [
+        {
+          "from": 4.210566893424036,
+          "to": 4.330566893424036,
+          "rms": 0.037396815269163546,
+          "hz": 320.0027536702905
+        },
+        {
+          "from": 4.210566893424036,
+          "to": 4.330566893424036,
+          "rms": 0.0372243509703641,
+          "hz": 549.9953104646651
+        }
+      ]
+    },
+    {
+      "name": "returned",
+      "expected": [
+        640,
+        550
+      ],
+      "channels": [
+        {
+          "from": 4.442766439909297,
+          "to": 4.562766439909297,
+          "rms": 0.03727830443438292,
+          "hz": 640.0021282047305
+        },
+        {
+          "from": 4.442766439909297,
+          "to": 4.562766439909297,
+          "rms": 0.0373685420777797,
+          "hz": 550.0138871779882
+        }
+      ]
+    }
+  ],
+  "sourceAfter": {
+    "app.js": "7ed084d9ad43915fa8c376015fc965f66330fcd5ae31dd0b4b3c4c554d3cb38c",
+    "engine.js": "c0f7fa915938ab416137807a4345878d290110dcdfce23283e46c1e665eec6b1",
+    "panels.js": "2accf21901d75c01ec82f4b9b69fe0f1f9aa768f5d9bdf166efd16a4519d1e40",
+    "deck-midi.js": "630ff80bec4986919d7f2b289fe0a18300dc2fb05cffb7969fd15ab2acbfd5dc",
+    "midi.js": "0cabb6dbe98e9eb3f7bc7f7eb44615fa315a0738260e5f3568a34d0aa75ec1ad",
+    "loop-pads.js": "bcec88a25f31d7782c25d9073d58a16d9031b9f4cbaaf8ab7ec310f9c46da89f",
+    "beatgrid.js": "9d74accf0a8278fefe1f43dd06534c442b76b44300746c9e791d583fa1e6b71e",
+    "midi-loop-pads-harness.js": "ef8cc4ee21c6d2d00d4914c6e6c8704abef5f7a948f0d0222df544f07aed85a5"
+  },
+  "sourceStable": true,
+  "finishedAt": "2026-10-17T21:58:06.731Z"
+}
