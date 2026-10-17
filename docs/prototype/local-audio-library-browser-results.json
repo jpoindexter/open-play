@@ -1,0 +1,89 @@
+{
+  "startedAt": "2026-10-17T11:24:05.529Z",
+  "name": "openplay-storage-review-9da55965-da1d-48f2-a1ed-6ef0c57d6b58",
+  "checks": [
+    {
+      "name": "Commit original bytes and catalog metadata atomically",
+      "passed": true,
+      "evidence": {
+        "fileSize": 12,
+        "id": "local-c94d2322d4d744898e1db3192d1b04729d39fde46700a622be24a0799c1971ac"
+      }
+    },
+    {
+      "name": "List returns metadata without eagerly copying all audio blobs",
+      "passed": true,
+      "evidence": {
+        "entries": 1,
+        "filename": "fixture-original.wav"
+      }
+    },
+    {
+      "name": "Close/reopen reconstructs File with exact original bytes and attributes",
+      "passed": true,
+      "evidence": {
+        "sha256": "c94d2322d4d744898e1db3192d1b04729d39fde46700a622be24a0799c1971ac",
+        "bytes": 12
+      }
+    },
+    {
+      "name": "Duplicate content updates one stable entry instead of adding a second",
+      "passed": true,
+      "evidence": {
+        "entries": 1
+      }
+    },
+    {
+      "name": "False content identity is rejected before either object store changes",
+      "passed": true
+    },
+    {
+      "name": "Uncloneable metadata aborts the real transaction without replacing original audio",
+      "passed": true
+    },
+    {
+      "name": "Injected quota error after catalog request rolls back real transaction",
+      "passed": true,
+      "evidence": {
+        "failure": "injected",
+        "transaction": "real browser IndexedDB"
+      }
+    },
+    {
+      "name": "Corrupted stored bytes fail their hash instead of silently decoding wrong media",
+      "passed": true,
+      "evidence": {
+        "error": "Saved audio failed its identity check. Re-import the original file."
+      }
+    },
+    {
+      "name": "Missing media record is explicit while catalog identity remains recoverable",
+      "passed": true
+    },
+    {
+      "name": "Reimport repairs missing audio under the same stable content identity",
+      "passed": true
+    },
+    {
+      "name": "Concurrent distinct imports commit two catalog/media pairs",
+      "passed": true
+    },
+    {
+      "name": "Close while hashing prevents a late save and refuses subsequent operations",
+      "passed": true
+    },
+    {
+      "name": "Unavailable storage rejects explicitly rather than claiming a saved file",
+      "passed": true
+    }
+  ],
+  "scope": "Actual browser IndexedDB transactions, structured Blob/File storage, close/reopen and integrity reads on owned synthetic fixtures. Quota failure uses an injected throw inside a real transaction; no real disk exhaustion. No main UI/native restart/audio/device/reference acceptance.",
+  "sourceHashes": {
+    "local-audio-library.js": "38814be027c5a4e614d972ffd814df9760106ca27e374a288a0ccc3d6bca0a21",
+    "local-audio-library-harness.js": "dfca57127d671ee787a5e4fa06b63dac06c8a1f5c5a4dad56f75ad088f6bb186"
+  },
+  "ownedTestDatabaseRemoved": true,
+  "passed": 13,
+  "failed": 0,
+  "completed": true
+}

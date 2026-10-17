@@ -127,8 +127,10 @@ export class AudioEngine {
   async buffer(track) {
     this.init();
     if (this.buffers.has(track.id)) return this.buffers.get(track.id);
-    if (track.file) {
-      const b = await this.ctx.decodeAudioData(await track.file.arrayBuffer());
+    if (track.file || track.readFile) {
+      const file=track.file||await track.readFile();
+      const b = await this.ctx.decodeAudioData(await file.arrayBuffer());
+      track.file=file;
       this.buffers.set(track.id, b);
       track.duration = b.duration;
       return b;

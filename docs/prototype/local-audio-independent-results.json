@@ -1,0 +1,109 @@
+{
+  "sourceHashes": {
+    "local-audio-library.js": "38814be027c5a4e614d972ffd814df9760106ca27e374a288a0ccc3d6bca0a21",
+    "app.js": "221131cff9da50c199180f951466ded89750c79f98d095494572625e831fc5a5",
+    "engine.js": "b4683c245c6314432c06f891e85106cf0a1a5c0a615435516930ab5b38f64adf",
+    "panels.js": "2063234fa4d209424ec94df373fca9d66eec23cc917302a8ee8dc27ee4b92d89"
+  },
+  "endSourceHashes": {
+    "local-audio-library.js": "38814be027c5a4e614d972ffd814df9760106ca27e374a288a0ccc3d6bca0a21",
+    "app.js": "221131cff9da50c199180f951466ded89750c79f98d095494572625e831fc5a5",
+    "engine.js": "b4683c245c6314432c06f891e85106cf0a1a5c0a615435516930ab5b38f64adf",
+    "panels.js": "2063234fa4d209424ec94df373fca9d66eec23cc917302a8ee8dc27ee4b92d89"
+  },
+  "passed": 12,
+  "failed": 0,
+  "scope": "Actual storage module/engine/retry function with controlled IndexedDB opening/transaction callbacks, source bytes and decoder/file collaborators. No real IndexedDB atomicity, native/browser UI restart, quota exhaustion, audio playback or physical acceptance. Parent owns actual browser transaction and app restart tests.",
+  "checks": [
+    {
+      "name": "Blocked opening rejects and retry is not poisoned by late old success",
+      "passed": true,
+      "evidence": {
+        "oldClosed": 1,
+        "opens": 2
+      }
+    },
+    {
+      "name": "Timed-out opening closes its late result while a retry remains usable",
+      "passed": true,
+      "evidence": {
+        "opens": 2
+      }
+    },
+    {
+      "name": "Version change closes owned connection and next operation reopens",
+      "passed": true,
+      "evidence": {
+        "opens": 2
+      }
+    },
+    {
+      "name": "Close during pending open rejects late success and closes its connection",
+      "passed": true,
+      "evidence": {
+        "closed": 1
+      }
+    },
+    {
+      "name": "Close aborts active transaction and settles pending operation",
+      "passed": true,
+      "evidence": {
+        "transactions": 1
+      }
+    },
+    {
+      "name": "Actual engine lazily reads saved File once then uses decoded cache",
+      "passed": true,
+      "evidence": {
+        "reads": 1,
+        "decodes": 1
+      }
+    },
+    {
+      "name": "Actual engine refuses failed restored reads without caching unusable media",
+      "passed": true,
+      "evidence": {
+        "cached": false
+      }
+    },
+    {
+      "name": "Retry preserves failed catalog restore warning even with no session tracks",
+      "passed": true,
+      "evidence": {
+        "listAttempts": 1,
+        "visibleWarning": "still blocked"
+      }
+    },
+    {
+      "name": "Retry restores missing IDs lazily and preserves current duplicate edits and session bytes",
+      "passed": true,
+      "evidence": {
+        "rows": 2,
+        "catalogAttempts": 2,
+        "lazyMediaReads": 0,
+        "saves": 1
+      }
+    },
+    {
+      "name": "Invalid saved metadata retains restore warning through successful empty retry",
+      "passed": true,
+      "evidence": {
+        "warning": "Some saved entries are invalid. Re-import their original files; stored audio has not been deleted."
+      }
+    },
+    {
+      "name": "Late upgrade after blocked open is aborted without creating stores",
+      "passed": true,
+      "evidence": {
+        "aborted": 1
+      }
+    },
+    {
+      "name": "Late upgrade after owner close is aborted without creating stores",
+      "passed": true,
+      "evidence": {
+        "aborted": 1
+      }
+    }
+  ]
+}

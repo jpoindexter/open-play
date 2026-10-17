@@ -1,0 +1,44 @@
+{
+  "observed_at": "2026-10-17T11:22:06.393305+00:00",
+  "reference_version": "4.0.10.213",
+  "open_play_version": "0.1.3",
+  "method": "Current CUA screenshots and Open Play AX. Read-only main comparison, closing only Open Play Devices dialog. Different window pixel sizes; no pixel identity claim.",
+  "screenshots_local_only": {
+    "serato-main.png": {
+      "path": "/Users/jasonpoindexter/Documents/GitHub/Open Play/local-evidence/current-parity-20261017/serato-main.png",
+      "sha256": "948e36bcb736a3a4cbc2a0b6367c915714da65568c66fbc7624ebb1723c73d9d"
+    },
+    "open-play-0.1.3-main.png": {
+      "path": "/Users/jasonpoindexter/Documents/GitHub/Open Play/local-evidence/current-parity-20261017/open-play-0.1.3-main.png",
+      "sha256": "5d46a235ac5ad19ad776aef036fb911350f3eed09f276136578c807fd6331640"
+    },
+    "open-play-0.1.3.png": {
+      "path": "/Users/jasonpoindexter/Documents/GitHub/Open Play/local-evidence/current-parity-20261017/open-play-0.1.3.png",
+      "sha256": "1dee43eea2fc1ea1463387c4bde084926d356150d9f886285bef9a06a2d8d1b8"
+    }
+  },
+  "full_visual_parity": false,
+  "observations": [
+    {
+      "reference": "Vertical layout: 8 cue pads, vertical side mode icons, two lanes immediately below pads and 1/8,1/4,1/2,1,2,4,8,16 loop-size grid with side arrows.",
+      "open_play": "Vertical layout: text mode bar Cues/Loops/Stems/Pitch/Slicer; compact half/Loop4/double/IN/OUT/Save and beat-jump controls.",
+      "verdict": "Observed control placement and presentation mismatch; icon/empty lane exact semantics not inferred."
+    },
+    {
+      "reference": "Vertical main view has no separate always-visible full-width gain/EQ/filter/channel/crossfader strip below decks in this state.",
+      "open_play": "Main view includes full-width gain/EQ/filter/level/cue/crossfader strip below decks.",
+      "verdict": "Observed current-state layout difference; hardware/setup-dependent reference variants remain untested."
+    },
+    {
+      "reference": "Both apps show two decks, central vertical waveforms, lower library and left navigation.",
+      "open_play": "Shared broad structure.",
+      "verdict": "Broad resemblance does not establish 1:1 geometry, controls, themes, layouts or behavior."
+    }
+  ],
+  "limits": [
+    "Only one current main state, not all panels/layouts.",
+    "No reference audio behavior or DSP algorithms proven.",
+    "Raw reference screenshot includes personal library names and stays in ignored local-evidence; no copyrighted assets copied into app.",
+    "Open Play current source persistence WIP is not the tested desktop artifact."
+  ]
+}

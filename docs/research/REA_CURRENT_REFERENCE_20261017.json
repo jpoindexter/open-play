@@ -1,0 +1,65 @@
+{
+  "date": "2026-10-17",
+  "referenceApp": "Serato DJ Pro4.0.10.213",
+  "appPath": "/Applications/Serato DJ Pro.app",
+  "bundleRootSHA256": "6975e01fe0ab9ccca33688606b66aa4230e90205782246bc6fb97dc03514d31e",
+  "REAInspectionEvidenceID": "ev_59985e1ddc5011587132521175f23f8da0db5092a7978ae3bb6b12d20b42496b",
+  "provider": {
+    "id": "rea-artifact-graph",
+    "name": "REA safe artifact graph provider",
+    "version": "1"
+  },
+  "authority": "shipped-artifact",
+  "operation": "inspect_artifact",
+  "coverage": {
+    "status": "complete-within-substeps",
+    "substeps_completed": 1,
+    "observations_retained": 1,
+    "observations_omitted": 0,
+    "hypotheses_retained": 0,
+    "hypotheses_omitted": 0,
+    "unexplored_branches_retained": 2,
+    "unexplored_branches_omitted": 0,
+    "next_probes_retained": 2,
+    "next_probes_omitted": 0
+  },
+  "inventoryCoverage": {
+    "scope": "container-entries",
+    "status": "complete"
+  },
+  "inventoryEvidenceID": "ev_3ca9b18d2cf6f2963c6ca9c6b151a443410908a880e9ad7390eee84b8e3f09d2",
+  "counts": {
+    "nodes": 1742,
+    "occurrences": 1924,
+    "edges": 1780
+  },
+  "unexploredBranches": [
+    {
+      "branch_id": "aib_85c5a56c68afb274ac2e6ea8a23ffd45a8ff91d6ea45b917f910aaaa3f3b2b91",
+      "reason": "format-specific-analysis-required",
+      "detail": "open_binary was not run by provider-neutral artifact inspection.",
+      "next_probe": {
+        "operation": "open_binary",
+        "rationale": "Bind one deep native provider before function-level analysis.",
+        "authority": "native-analysis-provider"
+      },
+      "evidence_id": "ev_3ca9b18d2cf6f2963c6ca9c6b151a443410908a880e9ad7390eee84b8e3f09d2"
+    },
+    {
+      "branch_id": "aib_60c2bd0744f0d93b11ead133b410b031be1271e0454074bc3fbaedca60cb7196",
+      "reason": "format-specific-analysis-required",
+      "detail": "inspect_plist was not run by provider-neutral artifact inspection.",
+      "next_probe": {
+        "operation": "inspect_plist",
+        "rationale": "Parse property-list values without executing the artifact.",
+        "authority": "artifact-bytes"
+      },
+      "evidence_id": "ev_3ca9b18d2cf6f2963c6ca9c6b151a443410908a880e9ad7390eee84b8e3f09d2"
+    }
+  ],
+  "limitations": [
+    "Inspection derives bounded static hypotheses and next probes; it does not execute the artifact or claim format-specific semantics."
+  ],
+  "executableSHA256": "1df36a8907bf3034b174aeab7c6ceb46a87493f78704c14934eb7210e3fdd2f5",
+  "scope": "Fresh REA static artifact inventory. No runtime/DSP/feature behavior or complete parity acceptance. Complete inventory and proprietary resourcebytes remain ignored local evidence."
+}

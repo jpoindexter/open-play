@@ -1363,9 +1363,10 @@ export function createPanels(a) {
   }
   function files() {
     $("#panel").innerHTML =
-      head("Files", "BROWSER IMPORT / FILESYSTEM SIMULATED") +
-      `<div class="panel-controls"><button id="files-import">Choose local audio</button><button id="files-rescan">Re-scan / relocate</button><label>Volume state <select id="volume-state">${options(["Connected", "Disconnected", "Read-only"], s.volume || "Connected")}</select></label><button id="files-copy">Copy / move fixture</button><span class="muted">USB storage is distinct from USB audio and MIDI. No filesystem writes are performed.</span></div><p id="files-result" class="muted">Imported files remain local to this browser session. Reload requires re-importing their bytes.</p>`;
+      head("Files", "LOCAL AUDIO LIBRARY", true) +
+      `<div class="panel-controls"><button id="files-import">Choose local audio</button><button id="files-save-local">Retry local audio storage</button><button id="files-rescan">Re-scan / relocate</button><label>Volume state <select id="volume-state">${options(["Connected", "Disconnected", "Read-only"], s.volume || "Connected")}</select></label><button id="files-copy">Copy / move fixture</button><span class="muted">USB storage is distinct from USB audio and MIDI. Copy/move/relocate controls are fixtures and do not rewrite original files. Imported audio is stored separately in local browser storage.</span></div><p id="files-result" class="muted">${s.tracks.filter(t=>t.storage==='saved').length} imported tracks saved locally; ${s.tracks.filter(t=>t.storage==='session').length} session-only. Saved audio returns after restart. Keep your original files; browser storage may be cleared or limited by available disk space.${s.localAudio?.error?` Saving warning: ${esc(s.localAudio.error)}`:''}</p>`;
     $("#files-import").onclick = () => $("#audio-files").click();
+    $("#files-save-local").onclick=async()=>{const button=$("#files-save-local");button.disabled=true;try{const count=await a.retryLocalAudio();notify(s.localAudio.error||`${count} session tracks saved locally; local catalog refreshed.`);files();}catch(error){notify(error.message);}finally{if(button.isConnected)button.disabled=false;}};
     $("#files-rescan").onclick = libraryTools;
     $("#volume-state").onchange = (e) => {
       s.volume = e.target.value;
@@ -1907,7 +1908,7 @@ export function createPanels(a) {
     decks:
       "Real local play/pause/seek, rate, cues, loops, beat jump and instant-double positioning. Reverse, Slip restoration, cue-hold and slicer now drive actual browser audio. Keylock and independent pitch now use real buffered DSP; Pitch Play range/hold semantics, DVS and full Smart Sync remain under review.",
     mixer:
-      "Real gain, EQ/filter, channel level and linear crossfade. Headphone routing, external mixing, exact power curves and native meters remain unverified.",
+      "Real gain, EQ/filter, channel level, linear crossfade and independent master/cue buses. Saved desktop0.1.3 evidence includes user-confirmed Hercules headphone/master isolation in both directions. Other routes, full blend curves, external mixing, latency and reference parity remain unverified.",
     fx: "All 59 named DJ processors now execute independent DSP, with real deck/sampler/master assignment. All 59 reference parameter strips are inventoried; observed control mappings, exact ranges/modes and sonic equivalence remain separately tracked.",
     sampler:
       "Real Trigger/Hold/OnOff, repeat, pitch/gain/mute, cue/loop start, keylock and global browser mixer-bus routing. Actual-engine suite passed 17/17. Physical outputs, exact bend/nudge behavior and shared file gain semantics remain open.",
@@ -1919,10 +1920,10 @@ export function createPanels(a) {
     recording:
       "Real browser master stream capture/download. Native AIFF/WAV, pre-master/external inputs, auto-split and recovery are simulated or gaps.",
     audio:
-      "Settings/route/recovery fixtures. Real output is the browser default device; no multi-output or latency proof.",
+      "Real output enumeration/selection and explicit four-channel master/cue routes. Desktop0.1.3 Hercules isolation was user-confirmed; this browser page is not a live device proof. Buffer/rate settings, physical hot-plug recovery, other devices and latency remain unverified.",
     hardware:
-      "Device and DVS/CDJ/Phase states are explicit simulations. No actual hardware controls or diagnostics are sent.",
-    midi: "Real Web MIDI connection path, learn/mapping and timestamped messages; synthetic injection is explicitly marked. Actual access timed out in this browser. No physical input/output, feedback or interoperability proof.",
+      "DVS/CDJ/Phase and lower device fixtures are explicit simulations. Separate real MIDI input and output selection exist; saved evidence covers the Hercules browser knob in0.1.1 and two audio-routing states in0.1.3. Full mapping, LED output, jogs and other hardware remain open.",
+    midi: "Real Web MIDI input, learn/mapping and timestamped messages; synthetic injection stays marked. Historical native0.1.1 Hercules relative browser-knob navigation was user-confirmed after101 captured packets. Current connection, full map, output feedback and other encodings remain unverified.",
     video:
       "Local video decode, two-source Canvas compositor, text/image overlays, audio-linked transport and actual video/master capture. Full codecs, karaoke, HD, Syphon and exact effect/transition catalogs remain gaps.",
     link: "Join/leave/tempo/peer/loss state simulation; no Link networking.",
@@ -1932,7 +1933,7 @@ export function createPanels(a) {
       "Eight settings tabs with persisted values and conditional actions. Some settings affect prototype behavior; native processing controls are explicit fixtures. Exact layout/conditional-state parity remains open.",
     help: "Implemented shortcut list, contextual titles, official search and diagnostics. Native accessibility/screen-reader equivalence untested.",
     system:
-      "Research, provenance and lifecycle diagnostics with explicit native gaps. No installer, updater or native build exists.",
+      "Research, provenance and lifecycle diagnostics. Local Electron0.1.3 test build and scoped hardware evidence exist separately; this page does not attest the running package. Installer/update/rollback, long-session and full native/reference acceptance remain open.",
   };
   function coverage() {
     dialog(
@@ -1996,7 +1997,7 @@ export function createPanels(a) {
   function system() {
     dialog(
       "System, services & evidence",
-      `<div class="device-card"><h3>Open Play · browser review candidate</h3><p>Independent HTML/CSS/JavaScript implementation. No native application has been built. Core playback needs no hosted backend, account, telemetry or artificial local feature paywall. Optional local stems require the documented model/environment setup.</p><div class="panel-controls"><button id="diagnostics-export">Export diagnostics</button><button id="diagnostics-offline">Check local state</button><button id="system-backup">Library backup</button></div><pre id="diagnostic-result" class="log">Audio context: ${engine.ctx?.state || "not created"}\nBrowser sample rate: ${engine.ctx?.sampleRate || "unknown"}\nDecoded buffers: ${engine.buffers.size}\nPrototype persistence: ${s.sessionSaved ? "saved this session" : "not yet saved this session"}\nNative build: NOT STARTED\nHardware proof: NOT ESTABLISHED</pre></div><div class="note-box">Installer/update/rollback, full crash recovery, long-session stability, multi-device drift, extension isolation and reproducible native builds remain acceptance work. Browser file access is session-scoped; imported audio bytes are not persisted. No source Serato binaries, artwork, models or code are shipped here.</div><p><a href="../FULL_BUILD_PLAN.md" target="_blank">Build plan</a> · <a href="../docs/research/SOURCE_CONFLICTS.md" target="_blank">Source conflicts</a> · <a href="../docs/research/HISTORICAL_GATING.md" target="_blank">Historical gating</a> · <a href="../docs/decisions/001-foundation-and-models.md" target="_blank">Foundation / model decision</a></p>`,
+      `<div class="device-card"><h3>Open Play · browser review candidate</h3><p>Independent HTML/CSS/JavaScript implementation. A local Electron test build exists; this browser page does not identify or verify a running desktop package. Core playback needs no hosted backend, account, telemetry or artificial local feature paywall. Optional local stems require the documented model/environment setup.</p><div class="panel-controls"><button id="diagnostics-export">Export diagnostics</button><button id="diagnostics-offline">Check local state</button><button id="system-backup">Library backup</button></div><pre id="diagnostic-result" class="log">Audio context: ${engine.ctx?.state || "not created"}\nBrowser sample rate: ${engine.ctx?.sampleRate || "unknown"}\nDecoded buffers: ${engine.buffers.size}\nPrototype persistence: ${s.sessionSaved ? "saved this session" : "not yet saved this session"}\nDesktop evidence: version0.1.3 historical test checkpoint\nHardware evidence: Hercules browser knob in0.1.1; cue/master isolation in0.1.3 user-confirmed\nCurrent hardware connection and full parity: not established by this panel</pre></div><div class="note-box">Installer/update/rollback, full crash recovery, long-session stability, multi-device drift, extension isolation and reproducible native builds remain acceptance work. Imported audio is saved locally when browser storage succeeds; failures remain session-only and are reported in Files. App quit/reopen/playback acceptance is still pending for this source revision. No source Serato binaries, artwork, models or code are shipped here.</div><p><a href="../FULL_BUILD_PLAN.md" target="_blank">Build plan</a> · <a href="../docs/research/SOURCE_CONFLICTS.md" target="_blank">Source conflicts</a> · <a href="../docs/research/HISTORICAL_GATING.md" target="_blank">Historical gating</a> · <a href="../docs/decisions/001-foundation-and-models.md" target="_blank">Foundation / model decision</a></p>`,
       () => {
         $("#diagnostics-export").onclick = () =>
           download(

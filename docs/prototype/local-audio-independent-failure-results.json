@@ -1,0 +1,80 @@
+{
+  "sourceHashes": {
+    "local-audio-library.js": "c527cf33d342eed8790f489f22f10d35d9d84bcbcb2c740ea5163937bf48560b",
+    "app.js": "8a909e187343471b33757e341b1129c96b565dd3bb5f9af2750aa7f36f1384db",
+    "engine.js": "b4683c245c6314432c06f891e85106cf0a1a5c0a615435516930ab5b38f64adf",
+    "panels.js": "e35d7d16d92505ea947367d3c425469470338939b69ca74b3ec03029d4048f9b"
+  },
+  "endSourceHashes": {
+    "local-audio-library.js": "c527cf33d342eed8790f489f22f10d35d9d84bcbcb2c740ea5163937bf48560b",
+    "app.js": "8a909e187343471b33757e341b1129c96b565dd3bb5f9af2750aa7f36f1384db",
+    "engine.js": "b4683c245c6314432c06f891e85106cf0a1a5c0a615435516930ab5b38f64adf",
+    "panels.js": "e35d7d16d92505ea947367d3c425469470338939b69ca74b3ec03029d4048f9b"
+  },
+  "passed": 7,
+  "failed": 1,
+  "scope": "Actual storage module/engine/retry function with controlled IndexedDB opening/transaction callbacks, source bytes and decoder/file collaborators. No real IndexedDB atomicity, native/browser UI restart, quota exhaustion, audio playback or physical acceptance. Parent owns actual browser transaction and app restart tests.",
+  "checks": [
+    {
+      "name": "Blocked opening rejects and retry is not poisoned by late old success",
+      "passed": true,
+      "evidence": {
+        "oldClosed": 1,
+        "opens": 2
+      }
+    },
+    {
+      "name": "Timed-out opening closes its late result while a retry remains usable",
+      "passed": true,
+      "evidence": {
+        "opens": 2
+      }
+    },
+    {
+      "name": "Version change closes owned connection and next operation reopens",
+      "passed": true,
+      "evidence": {
+        "opens": 2
+      }
+    },
+    {
+      "name": "Close during pending open rejects late success and closes its connection",
+      "passed": true,
+      "evidence": {
+        "closed": 1
+      }
+    },
+    {
+      "name": "Close aborts active transaction and settles pending operation",
+      "passed": true,
+      "evidence": {
+        "transactions": 1
+      }
+    },
+    {
+      "name": "Actual engine lazily reads saved File once then uses decoded cache",
+      "passed": true,
+      "evidence": {
+        "reads": 1,
+        "decodes": 1
+      }
+    },
+    {
+      "name": "Actual engine refuses failed restored reads without caching unusable media",
+      "passed": true,
+      "evidence": {
+        "cached": false
+      }
+    },
+    {
+      "name": "Retry must not silently clear a failed catalog restore when no session tracks exist",
+      "passed": false,
+      "evidence": {
+        "count": 0,
+        "errorAfterRetry": null,
+        "saveCalls": 0
+      },
+      "error": "Retry clears startup failure without restoring catalog or saving a track"
+    }
+  ]
+}

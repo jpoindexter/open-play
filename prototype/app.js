@@ -1,3 +1,4 @@
+import {createLocalAudioLibrary} from "./local-audio-library.js";
 import { createStemPreparation } from "./stems.js";
 import { createStemWaveformModel, paintStemOverview, paintStemDetail, paintOriginalOverview, paintOriginalDetail } from "./stem-waveform.js";
 import { normalizeFXTempoSettings } from "./fx-tempo.js";
@@ -128,6 +129,22 @@ const state = {
   link: { joined: false, tempo: 124, peers: 0 },
   sessionSaved: false,
 };
+
+const localAudio=createLocalAudioLibrary();
+state.localAudio={error:null,restoreError:null,saveError:null,restored:0};
+function localAudioWarning(){state.localAudio.error=state.localAudio.restoreError||state.localAudio.saveError;return state.localAudio.error;}
+async function restoreLocalAudio(){
+  const records=await localAudio.list();let invalid=false,added=0;
+  for(const record of records){
+    if(!/^local-[a-f0-9]{64}$/.test(record.id||'')||record.contentHash!==record.id.slice(6)||typeof record.filename!=='string'||!Number.isFinite(record.duration)||record.duration<=0){invalid=true;continue;}
+    if(trackById(record.id))continue;
+    const track={...record,...state.localTags[record.contentHash],id:record.id,contentHash:record.contentHash,file:null,storage:'saved',readFile:()=>localAudio.file(record.id)};
+    state.tracks.push(track);added++;
+  }
+  state.localAudio.restoreError=invalid?'Some saved entries are invalid. Re-import their original files; stored audio has not been deleted.':null;
+  state.localAudio.restored+=added;localAudioWarning();return added;
+}
+try{await restoreLocalAudio();}catch(error){state.localAudio.restoreError=error.message;localAudioWarning();}
 
 const stemPreparation = createStemPreparation(engine, state.decks);
 const stemSlipControls = createStemSlipControls({engine,state,prepare:ensurePreparedStems,render:renderDecks,notify});
@@ -839,8 +856,28 @@ async function deckAction(action, index, el, event = {}) {
   if (action === "grid") return panels.grid(d);
   renderDecks();
 }
-async function importFiles(files) {
-  let n = 0;
+let importTail=Promise.resolve();
+function importFiles(files){
+  const snapshot=Array.from(files),job=importTail.catch(()=>{}).then(()=>importLocalFiles(snapshot));
+  importTail=job;return job;
+}
+async function saveLocalAudio(track,file,bytes){
+  try{await localAudio.save(track,file,bytes);track.storage='saved';delete track.storageError;return true;}
+  catch(error){track.storage='session';track.storageError=error.message;state.localAudio.saveError=error.message;localAudioWarning();return false;}
+}
+async function retryLocalAudio(){
+  try{await restoreLocalAudio();}catch(error){state.localAudio.restoreError=error.message;localAudioWarning();}
+  let savedCount=0;
+  for(const track of state.tracks.filter(t=>t.contentHash&&t.storage!=='saved'&&t.file)){
+    try{if(await saveLocalAudio(track,track.file,await track.file.arrayBuffer()))savedCount++;}
+    catch(error){track.storageError=error.message;state.localAudio.saveError=error.message;localAudioWarning();}
+  }
+  if(!state.tracks.some(t=>t.storage==='session'))state.localAudio.saveError=null;
+  localAudioWarning();
+  renderTracks();persist();return savedCount;
+}
+async function importLocalFiles(files) {
+  let n = 0, savedCount=0;
   const imported = [];
   for (const file of files) {
     if (!file.size) continue;
@@ -876,6 +913,7 @@ async function importFiles(files) {
         existing.missing = false;
         state.selected = existing.id;
         await engine.buffer(existing);
+        if(await saveLocalAudio(existing,file,bytes))savedCount++;
         imported.push(existing);
         n++;
         continue;
@@ -883,6 +921,7 @@ async function importFiles(files) {
       Object.assign(track, state.localTags[track.contentHash] || {});
       await engine.buffer(track);
       track.analyzed = true;
+      if(await saveLocalAudio(track,file,bytes))savedCount++;
       state.tracks.push(track);
       imported.push(track);
       state.selected = track.id;
@@ -895,7 +934,7 @@ async function importFiles(files) {
   }
   renderTracks();
   notify(
-    `${n} local audio file${n === 1 ? "" : "s"} imported. Audio stays local; saved metadata reconnects when the same file is imported again.`,
+    `${n} local audio file${n === 1 ? "" : "s"} imported; ${savedCount} saved locally.${n>savedCount?` ${n-savedCount} session-only: open Files to retry saving.`:" Audio will return after restart."}`,
   );
   persist();
   if (state.analysisSettings.onImport) void enqueueAnalysis(imported);
@@ -1089,6 +1128,7 @@ const api = {
   download,
   reset,
   importFiles,
+  retryLocalAudio,
   analyze,
   enqueueAnalysis,
   cancelAnalysis,
@@ -1603,7 +1643,7 @@ function tick() {
   }
   $("#master-meter").value = engine.meter();
   $("#audio-status").textContent =
-    `${state.decks.filter((d) => d.playing).length} decks playing · ${engine.ctx?.sampleRate || "—"} Hz browser · hardware simulated`;
+    `${state.decks.filter((d) => d.playing).length} decks playing · ${engine.ctx?.sampleRate || "—"} Hz audio engine · outputs in Devices`;
   engine.updateFXBPMs(state.decks.map(deck => (deck.track?.bpm || 120)*engine.audibleRate(deck)));
   // Selection checks are O(4); only selection/async completion redraws overviews.
   if (state.decks.slice(0,state.deckCount).some(d => waveformView(d) !== overviewWaveViews[d.index])) drawWaves();
@@ -1625,6 +1665,7 @@ window.addEventListener("beforeunload", () => {
   deckScratchControls.dispose();
   engine.silence();
   stemWaveforms.forEach(model => model.dispose());
+  localAudio.close();
 });
 // Exposed only for reproducible review diagnostics; acceptance tests exercise visible controls.
 window.openPlay = {
@@ -1661,3 +1702,4 @@ document.querySelectorAll("[data-startup-inert]").forEach(element => {
   element.removeAttribute("data-startup-inert");
 });
 document.body.dataset.ready = "true";
+if(state.localAudio.error)notify(state.localAudio.error);
