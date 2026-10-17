@@ -1,5 +1,7 @@
 # Current Serato/Open Play parity audit —17 October 2026
 
+> **Later plan78 update:** browser original + four stems now share one ten-channel keylock processor/map. A focused actual-app cancellation/control recording passes; see [result](../prototype/stem-coherence-browser-results.json) and [scope](../delivery/stem-coherence-section78.md). This is prepared-fixture transport evidence, not new ML/music/native/hardware/reference acceptance. Historical audit rows and quality failures remain.
+
 > **Later plan77 update:** two actual live future-marker saves retain Beat Sync alignment and a nontrivial Tempo Sync offset with browser keylock. See [result](../prototype/live-grid-edit-browser-results.json) and [scope](../delivery/live-grid-edit-section77.md). This updates ANA-003/DEK-008/018 subsets; arbitrary edits, compositions, native/hardware/reference acceptance remain open. Historical audit rows are preserved.
 
 > **Later plan76 update:** keylocked forward warp playback now passes one actual browser timing/pitch workflow; see [result](../prototype/warp-keylock-browser-results.json) and [scope](../delivery/warp-keylock-section76.md). This updates DEK-007/008/018 subsets only; historical audit rows and previous failures remain. No full parity or native transfer.
