@@ -1,0 +1,635 @@
+{
+  "startedAt": "2026-10-17T22:19:13.612Z",
+  "completed": true,
+  "scope": "Actual app MIDI editor/synthetic input, library/Prepare/fixed loop/Instant Double/FX actions and recorded master. No physical/native/full transport/FX/reference acceptance.",
+  "criteria": {
+    "frequencyErrorHz": 0.8,
+    "playingMinimumRMS": 0.005,
+    "doubleClockDifferenceSeconds": 0.003,
+    "doubleAmplitudeRatio": [
+      1.85,
+      2.15
+    ],
+    "tailMinimumRMS": 0.0001
+  },
+  "events": [
+    {
+      "name": "single-source",
+      "time": 0
+    },
+    {
+      "name": "double-source",
+      "time": 0.4121541950113379
+    },
+    {
+      "name": "delay-source",
+      "time": 0.7546485260770975
+    },
+    {
+      "name": "selected-delay-tail",
+      "time": 1.4048072562358276
+    }
+  ],
+  "checks": [
+    "Crate/track focus and fast browse reach actual lists, Prepare row/storage",
+    "Fixed4beat hardware Loop action is independent of Beat Jump setting",
+    "Double Load reaches playing source file/future clock and additive recorded audio",
+    "FX selectors reach Delay constructor and actual tail after source pause"
+  ],
+  "errors": [],
+  "fxCalls": [
+    {
+      "time": 0.11029478458049886,
+      "slots": [
+        [
+          {
+            "name": "LPF",
+            "on": false,
+            "depth": 50,
+            "beat": "1/2"
+          },
+          {
+            "name": "Delay",
+            "on": false,
+            "depth": 50,
+            "beat": "1/2"
+          },
+          {
+            "name": "Reverb",
+            "on": false,
+            "depth": 50,
+            "beat": "1/2"
+          }
+        ],
+        [
+          {
+            "name": "LPF",
+            "on": false,
+            "depth": 50,
+            "beat": "1/2"
+          },
+          {
+            "name": "Delay",
+            "on": false,
+            "depth": 50,
+            "beat": "1/2"
+          },
+          {
+            "name": "Reverb",
+            "on": false,
+            "depth": 50,
+            "beat": "1/2"
+          }
+        ]
+      ],
+      "bpms": [
+        120,
+        120,
+        120,
+        120
+      ],
+      "stack": [
+        "    at engine.configureFX (http://127.0.0.1:18829/prototype/midi-everyday-harness.js:17:273)",
+        "    at AudioEngine.updateFXBPMs (http://127.0.0.1:18829/prototype/engine.js:825:10)",
+        "    at tick (http://127.0.0.1:18829/prototype/app.js:1746:10)"
+      ]
+    },
+    {
+      "time": 0.47020408163265304,
+      "slots": [
+        [
+          {
+            "name": "LPF",
+            "on": false,
+            "depth": 50,
+            "beat": "1/2"
+          },
+          {
+            "name": "Delay",
+            "on": false,
+            "depth": 50,
+            "beat": "1/2"
+          },
+          {
+            "name": "Reverb",
+            "on": false,
+            "depth": 50,
+            "beat": "1/2"
+          }
+        ],
+        [
+          {
+            "name": "LPF",
+            "on": false,
+            "depth": 50,
+            "beat": "1/2"
+          },
+          {
+            "name": "Delay",
+            "on": false,
+            "depth": 50,
+            "beat": "1/2"
+          },
+          {
+            "name": "Reverb",
+            "on": false,
+            "depth": 50,
+            "beat": "1/2"
+          }
+        ]
+      ],
+      "bpms": [
+        120,
+        120,
+        120,
+        120
+      ],
+      "stack": [
+        "    at engine.configureFX (http://127.0.0.1:18829/prototype/midi-everyday-harness.js:17:273)",
+        "    at load (http://127.0.0.1:18829/prototype/app.js:641:10)",
+        "    at Object.deckAction (http://127.0.0.1:18829/prototype/app.js:736:33)"
+      ]
+    },
+    {
+      "time": 0.5224489795918368,
+      "slots": [
+        [
+          {
+            "name": "LPF",
+            "on": false,
+            "depth": 50,
+            "beat": "1/2"
+          },
+          {
+            "name": "Delay",
+            "on": false,
+            "depth": 50,
+            "beat": "1/2"
+          },
+          {
+            "name": "Reverb",
+            "on": false,
+            "depth": 50,
+            "beat": "1/2"
+          }
+        ],
+        [
+          {
+            "name": "LPF",
+            "on": false,
+            "depth": 50,
+            "beat": "1/2"
+          },
+          {
+            "name": "Delay",
+            "on": false,
+            "depth": 50,
+            "beat": "1/2"
+          },
+          {
+            "name": "Reverb",
+            "on": false,
+            "depth": 50,
+            "beat": "1/2"
+          }
+        ]
+      ],
+      "bpms": [
+        120,
+        120,
+        120,
+        120
+      ],
+      "stack": [
+        "    at engine.configureFX (http://127.0.0.1:18829/prototype/midi-everyday-harness.js:17:273)",
+        "    at load (http://127.0.0.1:18829/prototype/app.js:641:10)",
+        "    at Object.instantDouble (http://127.0.0.1:18829/prototype/instant-double.js:10:13)"
+      ]
+    },
+    {
+      "time": 0.5224489795918368,
+      "slots": [
+        [
+          {
+            "name": "LPF",
+            "on": false,
+            "depth": 50,
+            "beat": "1/2"
+          },
+          {
+            "name": "Delay",
+            "on": false,
+            "depth": 50,
+            "beat": "1/2"
+          },
+          {
+            "name": "Reverb",
+            "on": false,
+            "depth": 50,
+            "beat": "1/2"
+          }
+        ],
+        [
+          {
+            "name": "LPF",
+            "on": false,
+            "depth": 50,
+            "beat": "1/2"
+          },
+          {
+            "name": "Delay",
+            "on": false,
+            "depth": 50,
+            "beat": "1/2"
+          },
+          {
+            "name": "Reverb",
+            "on": false,
+            "depth": 50,
+            "beat": "1/2"
+          }
+        ]
+      ],
+      "bpms": [
+        120,
+        120,
+        120,
+        120
+      ],
+      "stack": [
+        "    at engine.configureFX (http://127.0.0.1:18829/prototype/midi-everyday-harness.js:17:273)",
+        "    at AudioEngine.setRate (http://127.0.0.1:18829/prototype/engine.js:673:12)",
+        "    at async Object.instantDouble (http://127.0.0.1:18829/prototype/instant-double.js:15:3)"
+      ]
+    },
+    {
+      "time": 0.893968253968254,
+      "slots": [
+        [
+          {
+            "name": "Delay",
+            "on": false,
+            "depth": 50,
+            "beat": "1/2"
+          },
+          {
+            "name": "Delay",
+            "on": false,
+            "depth": 50,
+            "beat": "1/2"
+          },
+          {
+            "name": "Reverb",
+            "on": false,
+            "depth": 50,
+            "beat": "1/2"
+          }
+        ],
+        [
+          {
+            "name": "LPF",
+            "on": false,
+            "depth": 50,
+            "beat": "1/2"
+          },
+          {
+            "name": "Delay",
+            "on": false,
+            "depth": 50,
+            "beat": "1/2"
+          },
+          {
+            "name": "Reverb",
+            "on": false,
+            "depth": 50,
+            "beat": "1/2"
+          }
+        ]
+      ],
+      "bpms": [
+        120,
+        120,
+        120,
+        120
+      ],
+      "stack": [
+        "    at engine.configureFX (http://127.0.0.1:18829/prototype/midi-everyday-harness.js:17:273)",
+        "    at applyFX (http://127.0.0.1:18829/prototype/panels.js:699:12)",
+        "    at Object.selectFX (http://127.0.0.1:18829/prototype/panels.js:1603:55)"
+      ]
+    },
+    {
+      "time": 0.893968253968254,
+      "slots": [
+        [
+          {
+            "name": "Delay",
+            "on": true,
+            "depth": 50,
+            "beat": "1/2"
+          },
+          {
+            "name": "Delay",
+            "on": false,
+            "depth": 50,
+            "beat": "1/2"
+          },
+          {
+            "name": "Reverb",
+            "on": false,
+            "depth": 50,
+            "beat": "1/2"
+          }
+        ],
+        [
+          {
+            "name": "LPF",
+            "on": false,
+            "depth": 50,
+            "beat": "1/2"
+          },
+          {
+            "name": "Delay",
+            "on": false,
+            "depth": 50,
+            "beat": "1/2"
+          },
+          {
+            "name": "Reverb",
+            "on": false,
+            "depth": 50,
+            "beat": "1/2"
+          }
+        ]
+      ],
+      "bpms": [
+        120,
+        120,
+        120,
+        120
+      ],
+      "stack": [
+        "    at engine.configureFX (http://127.0.0.1:18829/prototype/midi-everyday-harness.js:17:273)",
+        "    at applyFX (http://127.0.0.1:18829/prototype/panels.js:699:12)",
+        "    at Object.dispatch (http://127.0.0.1:18829/prototype/deck-midi.js:77:4)"
+      ]
+    }
+  ],
+  "sourceBefore": {
+    "app.js": "3fb0e27eb20ace661d4e5394e8eb4b8a8a741fb47833c5e10caa0340ee0bd696",
+    "engine.js": "c0f7fa915938ab416137807a4345878d290110dcdfce23283e46c1e665eec6b1",
+    "panels.js": "db14c7c9d1e0c2b1bc3129e27a2f148be1d0e2140520469374aa7e2cadcfe5c7",
+    "deck-midi.js": "311910061b082fdf3ce363ec685998a7ff58af6c7691c60ca5d2d0f10d34e614",
+    "midi.js": "0cabb6dbe98e9eb3f7bc7f7eb44615fa315a0738260e5f3568a34d0aa75ec1ad",
+    "loop-pads.js": "e19167e9745bfed2cbea86a9f28296d2c5ffdac52963ec9aaf9ff530ab940115",
+    "instant-double.js": "33ff776c8753f58b917928bd6fdaa5a9bf9d17be6577d7ca86b2e673a854178a",
+    "effects.js": "0185d8adfa94f9a549afbfb9af8b8657388bff8d946cdf3b525da933c60fe0a6",
+    "extended-effects.js": "6fa545171852d6f854bee78110a39c8af98d0db0c74657b399ebf560349a9c7d",
+    "styles.css": "af937f3bd163a19ebb72b4e7fe7671e1bbd7dce369a7fe431e6122cd79ade217",
+    "midi-everyday-harness.js": "20da2b1344324759c2e8f5766c0600fffd1d5894d1d5d6f22bbd968df0b20145"
+  },
+  "library": {
+    "crate": "itunes",
+    "focus": "tracks",
+    "selected": "demo-3",
+    "prepare": [
+      "demo-3"
+    ]
+  },
+  "fixedLoop": {
+    "in": 1,
+    "out": 3,
+    "beatJumpSetting": true
+  },
+  "double": {
+    "sourcePosition": 1.4311791383219954,
+    "targetPosition": 1.4311791383219954,
+    "rate": [
+      1,
+      1
+    ],
+    "playing": [
+      true,
+      true
+    ],
+    "amplitudeRatio": 2.002193211517533
+  },
+  "fx": {
+    "name": "Delay",
+    "on": true,
+    "chains": 6
+  },
+  "fxDuringPlay": [
+    [
+      [
+        {
+          "name": "Delay",
+          "on": true,
+          "depth": 50,
+          "beat": "1/2",
+          "params": {}
+        },
+        {
+          "name": "Delay",
+          "on": false,
+          "depth": 50,
+          "beat": "1/2",
+          "params": {}
+        },
+        {
+          "name": "Reverb",
+          "on": false,
+          "depth": 50,
+          "beat": "1/2",
+          "params": {}
+        }
+      ],
+      [
+        {
+          "name": "LPF",
+          "on": false,
+          "depth": 50,
+          "beat": "1/2",
+          "params": {}
+        },
+        {
+          "name": "Delay",
+          "on": false,
+          "depth": 50,
+          "beat": "1/2",
+          "params": {}
+        },
+        {
+          "name": "Reverb",
+          "on": false,
+          "depth": 50,
+          "beat": "1/2",
+          "params": {}
+        }
+      ]
+    ],
+    [],
+    [
+      120,
+      120,
+      120,
+      120
+    ],
+    [
+      {
+        "mode": "auto",
+        "bpm": 120
+      },
+      {
+        "mode": "auto",
+        "bpm": 120
+      }
+    ]
+  ],
+  "fxAfterPause": [
+    [
+      [
+        {
+          "name": "Delay",
+          "on": true,
+          "depth": 50,
+          "beat": "1/2",
+          "params": {}
+        },
+        {
+          "name": "Delay",
+          "on": false,
+          "depth": 50,
+          "beat": "1/2",
+          "params": {}
+        },
+        {
+          "name": "Reverb",
+          "on": false,
+          "depth": 50,
+          "beat": "1/2",
+          "params": {}
+        }
+      ],
+      [
+        {
+          "name": "LPF",
+          "on": false,
+          "depth": 50,
+          "beat": "1/2",
+          "params": {}
+        },
+        {
+          "name": "Delay",
+          "on": false,
+          "depth": 50,
+          "beat": "1/2",
+          "params": {}
+        },
+        {
+          "name": "Reverb",
+          "on": false,
+          "depth": 50,
+          "beat": "1/2",
+          "params": {}
+        }
+      ]
+    ],
+    [],
+    [
+      120,
+      120,
+      120,
+      120
+    ],
+    [
+      {
+        "mode": "auto",
+        "bpm": 120
+      },
+      {
+        "mode": "auto",
+        "bpm": 120
+      }
+    ]
+  ],
+  "recording": {
+    "bytes": 27289,
+    "format": "audio/webm;codecs=opus",
+    "sha256": "4e5f04e00ef048cdc8d333590d1c7750f769c8cd749da03c6463b7b890fb2983"
+  },
+  "decoded": {
+    "duration": 1.68,
+    "sampleRate": 44100,
+    "frames": 74088,
+    "channels": 2
+  },
+  "audio": [
+    {
+      "name": "single",
+      "channels": [
+        {
+          "from": 0.08,
+          "to": 0.2,
+          "rms": 0.0310750239874211,
+          "hz": 329.99558984923067
+        },
+        {
+          "from": 0.08,
+          "to": 0.2,
+          "rms": 1.8770320819612134e-11,
+          "hz": null
+        }
+      ]
+    },
+    {
+      "name": "doubled",
+      "channels": [
+        {
+          "from": 0.4921541950113379,
+          "to": 0.6121541950113378,
+          "rms": 0.062218202075359025,
+          "hz": 330.00404968776826
+        },
+        {
+          "from": 0.4921541950113379,
+          "to": 0.6121541950113378,
+          "rms": 1.6604118210369868e-15,
+          "hz": null
+        }
+      ]
+    },
+    {
+      "name": "tail",
+      "channels": [
+        {
+          "from": 1.4848072562358277,
+          "to": 1.6048072562358275,
+          "rms": 0.011246574409589564,
+          "hz": 330.2087326690385
+        },
+        {
+          "from": 1.4848072562358277,
+          "to": 1.6048072562358275,
+          "rms": 1.5412604306316986e-15,
+          "hz": null
+        }
+      ]
+    }
+  ],
+  "sourceAfter": {
+    "app.js": "3fb0e27eb20ace661d4e5394e8eb4b8a8a741fb47833c5e10caa0340ee0bd696",
+    "engine.js": "c0f7fa915938ab416137807a4345878d290110dcdfce23283e46c1e665eec6b1",
+    "panels.js": "db14c7c9d1e0c2b1bc3129e27a2f148be1d0e2140520469374aa7e2cadcfe5c7",
+    "deck-midi.js": "311910061b082fdf3ce363ec685998a7ff58af6c7691c60ca5d2d0f10d34e614",
+    "midi.js": "0cabb6dbe98e9eb3f7bc7f7eb44615fa315a0738260e5f3568a34d0aa75ec1ad",
+    "loop-pads.js": "e19167e9745bfed2cbea86a9f28296d2c5ffdac52963ec9aaf9ff530ab940115",
+    "instant-double.js": "33ff776c8753f58b917928bd6fdaa5a9bf9d17be6577d7ca86b2e673a854178a",
+    "effects.js": "0185d8adfa94f9a549afbfb9af8b8657388bff8d946cdf3b525da933c60fe0a6",
+    "extended-effects.js": "6fa545171852d6f854bee78110a39c8af98d0db0c74657b399ebf560349a9c7d",
+    "styles.css": "af937f3bd163a19ebb72b4e7fe7671e1bbd7dce369a7fe431e6122cd79ade217",
+    "midi-everyday-harness.js": "20da2b1344324759c2e8f5766c0600fffd1d5894d1d5d6f22bbd968df0b20145"
+  },
+  "sourceStable": true,
+  "finishedAt": "2026-10-17T22:19:15.497Z"
+}

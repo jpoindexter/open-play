@@ -1,0 +1,91 @@
+{
+  "attempts": [
+    {
+      "file": "local-evidence/midi-everyday/first-results.json",
+      "completed": false,
+      "errors": [
+        {
+          "message": "Double playheads diverged",
+          "stack": "Error: Double playheads diverged\n    at assert (http://127.0.0.1:18828/prototype/midi-everyday-harness.js:1:120)\n    at run (http://127.0.0.1:18828/prototype/midi-everyday-harness.js:27:553)"
+        }
+      ],
+      "recording": {
+        "bytes": 5973,
+        "format": "audio/webm;codecs=opus",
+        "sha256": "7911410884a3f4e24f4261ed96e6a51ffe2ca313029fe707b83b597aff12f3e8"
+      },
+      "effectFactoryHash": null,
+      "matchesCurrentDeclaredFiles": false
+    },
+    {
+      "file": "local-evidence/midi-everyday/second-results.json",
+      "completed": false,
+      "errors": [
+        {
+          "message": "tail expected330Hz audio",
+          "stack": "Error: tail expected330Hz audio\n    at assert (http://127.0.0.1:18828/prototype/midi-everyday-harness.js:1:120)\n    at run (http://127.0.0.1:18828/prototype/midi-everyday-harness.js:30:223)"
+        }
+      ],
+      "recording": {
+        "bytes": 27289,
+        "format": "audio/webm;codecs=opus",
+        "sha256": "3da66702099b8f9141cd8945a4df5ebeb6805aba4c4fcfaa3e536f11ee4c31af"
+      },
+      "effectFactoryHash": null,
+      "matchesCurrentDeclaredFiles": false
+    },
+    {
+      "file": "local-evidence/midi-everyday/third-results.json",
+      "completed": false,
+      "errors": [
+        {
+          "message": "tail expected330Hz audio",
+          "stack": "Error: tail expected330Hz audio\n    at assert (http://127.0.0.1:18828/prototype/midi-everyday-harness.js:1:120)\n    at run (http://127.0.0.1:18828/prototype/midi-everyday-harness.js:30:223)"
+        }
+      ],
+      "recording": {
+        "bytes": 27289,
+        "format": "audio/webm;codecs=opus",
+        "sha256": "74cfce8b386988ba3e1c6034690735dee1f9f4a77bf68445993973d6e84eff25"
+      },
+      "effectFactoryHash": "5994b6a68ec27e78104029403880fcc46b4f340985088fda64b8b4f7273120d6",
+      "matchesCurrentDeclaredFiles": false
+    },
+    {
+      "file": "local-evidence/midi-everyday/fourth-results.json",
+      "completed": false,
+      "errors": [
+        {
+          "message": "tail expected330Hz audio",
+          "stack": "Error: tail expected330Hz audio\n    at assert (http://127.0.0.1:18828/prototype/midi-everyday-harness.js:1:120)\n    at run (http://127.0.0.1:18828/prototype/midi-everyday-harness.js:31:223)"
+        }
+      ],
+      "recording": {
+        "bytes": 27289,
+        "format": "audio/webm;codecs=opus",
+        "sha256": "ce7f813c80d067deff20b07e17ee7d64bd7bbcf0a1a6fd3d80ede2024d839b5a"
+      },
+      "effectFactoryHash": "5994b6a68ec27e78104029403880fcc46b4f340985088fda64b8b4f7273120d6",
+      "matchesCurrentDeclaredFiles": false
+    },
+    {
+      "file": "local-evidence/midi-everyday/fresh-results.json",
+      "completed": true,
+      "errors": [],
+      "recording": {
+        "bytes": 27289,
+        "format": "audio/webm;codecs=opus",
+        "sha256": "4e5f04e00ef048cdc8d333590d1c7750f769c8cd749da03c6463b7b890fb2983"
+      },
+      "effectFactoryHash": "0185d8adfa94f9a549afbfb9af8b8657388bff8d946cdf3b525da933c60fe0a6",
+      "matchesCurrentDeclaredFiles": true
+    }
+  ],
+  "observedFactoryRegressionBeforeFix": "createEffect with same mutable slot on:false\u2192true returned update:true, so engine did not reconstruct bypass. Targeted assertion failed before snapshot fix and passed afterward.",
+  "interpretation": [
+    "First run checked playing flag before future scheduled audio onset; later measurements wait for actual anchor time.",
+    "Second run reproduced missing tail. Third/fourth used cached old effect factory despite saved fix; hashes5994b6a versus current0185d8a established cache mismatch.",
+    "Fresh origin18829/no-store loaded current source; all11declared source hashes match, actual audio tail and Double checks passed.",
+    "Use existing scripts/serve_prototype.py (already no-store) or immutable native host for follow-on diagnostics; do not rely on ad-hoc cacheable HTTP plus reload."
+  ]
+}

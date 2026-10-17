@@ -1,3 +1,4 @@
+import {createInstantDouble} from './instant-double.js';
 import {createManualLoops} from './manual-loops.js';
 import {createLoopPads} from './loop-pads.js';
 import { synchronizeSimple } from './sync.js';
@@ -282,6 +283,9 @@ function filtered() {
         : String(x || "").localeCompare(String(y || ""))) * state.sortDir
     );
   });
+}
+function selectCrate(id){
+  state.crate=id;state.search="";$("#search").value="";renderCrates();renderTracks();
 }
 function renderCrates() {
   const q = $("#crate-search").value.toLowerCase(),
@@ -584,6 +588,10 @@ async function load(index, id = state.selected, options = {}) {
   const d = state.decks[index],
     t = trackById(id);
   if (!t) return notify("Select a track first.");
+  if(!options.skipDouble && state.settings["Instant Doubles"]){
+    const paired=state.decks[index^1],source=paired?.track===t?paired:state.decks.find(other=>other!==d&&other.track===t);
+    if(source)return instantDouble(index,source);
+  }
   if (d.playing && state.settings["Lock Playing Deck"])
     return notify("Playing deck locked. Pause it before replacement.");
   const syncBefore = {engaged:!!d.sync, role:d.syncRole, bpm:(d.track?.bpm || 0)*d.rate};
@@ -754,6 +762,7 @@ async function deckAction(action, index, el, event = {}) {
     d.position = 0;
     return renderDecks();
   }
+  if (action === "double") return instantDouble(index);
   if (!d.track) return notify("Load a track first.");
   const pos = engine.position(d),
     beat = 60 / (d.track.bpm || 120);
@@ -911,17 +920,6 @@ async function deckAction(action, index, el, event = {}) {
     notify(d.pfl?'Deck selected for cue. Use Devices to route the headphone bus.':'Deck removed from cue.');
   }
   if (action === "range") d.pitchRange = { 8: 16, 16: 50, 50: 8 }[d.pitchRange];
-  if (action === "double") {
-    const source = state.decks.find((o) => o.index !== index && o.track);
-    if (!source) return notify("Load the other deck first.");
-    await load(index, source.track.id, { position: engine.position(source) });
-    d.rate = source.rate;
-    d.keylock = source.keylock;
-    d.sync = source.sync;
-    d.loop = source.loop;
-    d.loopIn = source.loopIn;
-    d.loopOut = source.loopOut;
-  }
   if (action === "grid") return panels.grid(d);
   renderDecks();
 }
@@ -1170,6 +1168,7 @@ function reset() {
   localStorage.removeItem("openplay-review-v1");
   location.reload();
 }
+const instantDouble=createInstantDouble({state,engine,load,render:renderDecks,notify});
 const api = {
   state,
   engine,
@@ -1193,6 +1192,8 @@ const api = {
   load,
   play,
   deckAction,
+  instantDouble,
+  selectCrate,
   setDeckKeyShift,
   keyShiftIntent,
   trackById,
@@ -1253,14 +1254,7 @@ document.addEventListener("click", async (e) => {
       await deckAction(el.dataset.action, Number(el.dataset.deck), el, e);
       return;
     }
-    if (el.dataset.crate) {
-      state.crate = el.dataset.crate;
-      state.search = "";
-      $("#search").value = "";
-      renderCrates();
-      renderTracks();
-      return;
-    }
+    if (el.dataset.crate) {selectCrate(el.dataset.crate);return;}
     if (el.dataset.provider) {
       panels.provider(el.dataset.provider);
       return;

@@ -27,6 +27,8 @@ export async function prepareExtendedEffects(ctx) {
   return prepared.get(ctx);
 }
 export function createExtendedEffect(ctx, spec, bpm = 120) {
+  // Keep processor identity stable even for direct callers with mutable slots.
+  spec = {...spec, params: {...spec.params}};
   if (!extendedEffectDefinitions[spec.name])
     throw new Error(`Unsupported extended FX: ${spec.name}`);
   if (!prepared.has(ctx))

@@ -25,6 +25,8 @@ function beatValue(value) {
   return Number.isFinite(n) ? n / (d || 1) : 0.5;
 }
 export function createEffect(ctx, spec, bpm = 120) {
+  // The app mutates slot objects in place; construction identity is immutable.
+  spec = {...spec, params: {...spec.params}};
   if (
     extendedEffectNames.includes(spec.name) ||
     channelEffectNames.includes(spec.name)

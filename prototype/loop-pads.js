@@ -14,13 +14,13 @@ export function createLoopPads({state,engine,render=()=>{},notify=()=>{}}){
   return{start,end};
  }
  function cancelDeck(d){rolls.delete(d.index);epochs.set(d.index,(epochs.get(d.index)||0)+1);}
- function press(d,mode,pad){
+ function press(d,mode,pad,{length=null,ignoreBeatJump=false}={}){
   if(!['auto','roll'].includes(mode)||!Number.isInteger(pad)||pad<0||pad>7)throw Error('Unknown loop pad.');
   if(!d.track||!Number.isFinite(d.track.bpm)||d.track.bpm<=0)throw Error('Analyze a BPM/beatgrid before using loop pads.');
-  const track=d.track,epoch=epochs.get(d.index)||0,owns=()=>valid(d,track)&&(epochs.get(d.index)||0)===epoch,beatJump=!!state.settings['Show Beat Jump Controls']&&pad>=4;
+  const track=d.track,epoch=epochs.get(d.index)||0,owns=()=>valid(d,track)&&(epochs.get(d.index)||0)===epoch,beatJump=!ignoreBeatJump&&!!state.settings['Show Beat Jump Controls']&&pad>=4;
   // Capture mode/length when pressed; changing settings while held cannot
   // reinterpret its Note Off as another action.
-  const beats=clamp((d.loopPadBase||.125)*2**pad,1/32,128);
+  const beats=clamp(length??(d.loopPadBase||.125)*2**pad,1/32,128);
   const held={released:false};let release=null;
   if(mode==='roll'&&!beatJump)release=()=>{held.released=true;return run(d,async()=>{
    if(rolls.get(d.index)!==held)return;

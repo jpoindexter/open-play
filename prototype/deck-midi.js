@@ -9,12 +9,13 @@ const continuous=['tempo','trim','high','mid','low','filter','level','jog nudge'
 const padCommands=['auto loop','loop roll','stems','pitch play','pitch cue select'].flatMap(mode=>Array.from({length:8},(_,i)=>`${mode} pad ${i+1}`));
 const manualCommands=Array.from({length:7},(_,n)=>`manual loop pad ${n+1}`);
 const scratchCommands=Array.from({length:8},(_,n)=>[`scratch bank pad ${n+1}`,`scratch bank previous pad ${n+1}`]).flat();
-const commands=[...manualCommands,...scratchCommands,...padCommands,'load','play','cue','sync','sync off','headphone cue','loop','loop in','loop out','loop half','loop double','keylock','jog touch','jog touch fast','vinyl','slip','quantize','tempo range','previous','stutter'];
+const commands=['instant double','auto loop four',...manualCommands,...scratchCommands,...padCommands,'load','play','cue','sync','sync off','headphone cue','loop','loop in','loop out','loop half','loop double','keylock','jog touch','jog touch fast','vinyl','slip','quantize','tempo range','previous','stutter'];
 export const deckMIDITargets=Array.from({length:4},(_,i)=>[...continuous,...commands,...Array.from({length:8},(_,n)=>`hot cue ${n+1}`),...Array.from({length:8},(_,n)=>`clear cue ${n+1}`)].map(x=>`Deck ${i+1} ${x}`)).flat();
 export const samplerMIDITargets=Array.from({length:8},(_,n)=>[`Sampler ${n+1}`,`Sampler ${n+1} alt`]).flat();
-export const fxMIDITargets=[1,2].flatMap(n=>['depth','beat','enable'].map(x=>`FX unit ${n} ${x}`));
+export const libraryMIDITargets=['Library browse','Library fast browse','Library focus','Prepare add','Prepare open'];
+export const fxMIDITargets=[1,2].flatMap(n=>['depth','beat','enable','select','next'].map(x=>`FX unit ${n} ${x}`));
 export function createDeckMIDIRouter({state,engine,actions,applyFX=()=>{},onChange=()=>{},onStatus=()=>{}}){
- const pairs=new Map(),buttons=new Map(),pickup=new Map(),rates=new Map(),nudges=new Map();
+ const pairs=new Map(),buttons=new Map(),pickup=new Map(),rates=new Map(),nudges=new Map(),loads=new Map();
  const jogBend=createJogBend({engine,onError:error=>onStatus(error.message)});
  const jogTouch=createMIDIJogTouch({engine,state,beforeBegin:deck=>jogBend.resetDeck(deck.index),onError:error=>onStatus(error.message)});
  const deckFor=target=>/^Deck ([1-4]) (.+)$/.exec(target);
@@ -31,6 +32,18 @@ export function createDeckMIDIRouter({state,engine,actions,applyFX=()=>{},onChan
   buttons.delete(key(message));if(hold.release)void Promise.resolve(hold.release()).catch(error=>onStatus(error.message));if(hold.cue)void actions.cueHolds.release(hold.owner,{immediate:true}).catch(error=>onStatus(error.message));return true;
  }
  async function dispatch(message,mapping){
+  if(libraryMIDITargets.includes(mapping.target)){
+   const browse=mapping.target==='Library browse'||mapping.target==='Library fast browse';
+   if(browse){
+    if(message.type==='Note'&&!message.pressed)return true;
+    const relative=mapping.encoding.startsWith('Relative');let value=mappedValue(message,mapping.encoding,pairs);if(mapping.invert)value=relative?-value:1-value;
+    actions.libraryControl(mapping.target,relative?value:message.value>0?1:-1);return true;
+   }
+   if(!message.pressed){release(message);return true;}
+   if(buttons.has(key(message)))return true;
+   if(mapping.encoding!=='7-bit absolute'||message.type==='Pitch bend')throw Error('Library commands need a7-bit Note/CC button.');
+   buttons.set(key(message),{deviceId:message.deviceId||''});actions.libraryControl(mapping.target);return true;
+  }
   const sample=/^Sampler ([1-8])( alt)?$/.exec(mapping.target);
   if(sample){
    if(mapping.encoding!=='7-bit absolute'||message.type==='Pitch bend')throw Error('Sampler pads need a7-bit Note/CC button with release.');
@@ -41,14 +54,17 @@ export function createDeckMIDIRouter({state,engine,actions,applyFX=()=>{},onChan
    catch(error){if(buttons.get(key(message))===held)buttons.delete(key(message));throw error;}
    return true;
   }
-  const fx=/^FX unit ([12]) (depth|beat|enable)$/.exec(mapping.target);
+  const fx=/^FX unit ([12]) (depth|beat|enable|select|next)$/.exec(mapping.target);
   if(fx){
    const bank=Number(fx[1])-1,slots=state.fx[bank];if(!slots)return true;
    const relative=mapping.encoding.startsWith('Relative');
-   if(fx[2]==='enable'){
+   if(fx[2]==='select'){
+    let value=mappedValue(message,mapping.encoding,pairs);if(mapping.invert)value=relative?-value:1-value;actions.selectFX(bank,value,relative);return true;
+   }
+   if(fx[2]==='enable'||fx[2]==='next'){
     if(!message.pressed){release(message);return true;}
     if(buttons.has(key(message)))return true;
-    buttons.set(key(message),{deviceId:message.deviceId||''});slots[0].on=!slots[0].on;
+    buttons.set(key(message),{deviceId:message.deviceId||''});if(fx[2]==='next'){actions.selectFX(bank,1,true);return true;}slots[0].on=!slots[0].on;
    }else{
     let value=mappedValue(message,mapping.encoding,pairs);if(mapping.invert)value=relative?-value:1-value;
     if(fx[2]==='depth')for(const slot of slots)slot.depth=clamp(relative?slot.depth+value:value*100,0,100);
@@ -75,6 +91,13 @@ export function createDeckMIDIRouter({state,engine,actions,applyFX=()=>{},onChan
    if(buttons.has(key(message)))return true;
    const hot=/^hot cue ([1-8])$/.exec(action),clear=/^clear cue ([1-8])$/.exec(action),cue=action==='cue'||!!hot;
    const held={owner,cue,deviceId:message.deviceId||'',release:null};buttons.set(key(message),held);
+   if(action==='instant double'){await actions.instantDouble(d.index);return true;}
+   if(action==='auto loop four'){const started=actions.loopPads.press(d,'auto',5,{length:4,ignoreBeatJump:true});await started.pending;return true;}
+   if(action==='load'){
+    const id=JSON.stringify([message.deviceId||'',d.index]),now=Number.isFinite(message.timestamp)?message.timestamp:performance.now(),last=loads.get(id);
+    if(last!==undefined&&now>=last&&now-last<=450){loads.delete(id);await actions.instantDouble(d.index);}
+    else{loads.set(id,now);await actions.deckAction('load',d.index,{});}return true;
+   }
    const manualPad=/^manual loop pad ([1-7])$/.exec(action),scratchPad=/^scratch bank( previous)? pad ([1-8])$/.exec(action);
    if(manualPad||scratchPad){
     try{
@@ -162,27 +185,27 @@ export function createDeckMIDIRouter({state,engine,actions,applyFX=()=>{},onChan
   void jogTouch.resetInput(deviceId).catch(error=>onStatus(error.message));
   void jogBend.resetInput(deviceId).catch(error=>onStatus(error.message));
   for(const [k,b]of buttons)if(deviceId===undefined||b.deviceId===deviceId){buttons.delete(k);if(b.release)void Promise.resolve(b.release()).catch(error=>onStatus(error.message));if(b.cue)void actions.cueHolds.release(b.owner,{immediate:true}).catch(error=>onStatus(error.message));}
-  pickup.clear();pairs.clear();
+  pickup.clear();pairs.clear();loads.clear();
  }
  return{dispatch,release,resetInput};
 }
 
 export function herculesPlaybackMappings(deviceId){
  if(!deviceId)throw Error('Connect the named Hercules input before installing its controls.');
- const maps=[],add=(target,type,channel,number,encoding='7-bit absolute',extra={})=>maps.push({target,type,channel,number,encoding,deviceId,preset:'hercules-inpulse-300-mk2-playback-v7',...extra});
- add('Library browse','CC',1,1,'Relative two’s complement');add('Crossfader','CC',1,0);
+ const maps=[],add=(target,type,channel,number,encoding='7-bit absolute',extra={})=>maps.push({target,type,channel,number,encoding,deviceId,preset:'hercules-inpulse-300-mk2-playback-v8',...extra});
+ add('Library browse','CC',1,1,'Relative two’s complement');add('Library fast browse','CC',4,1,'Relative two’s complement');add('Library focus','Note',1,0);add('Prepare add','Note',1,3);add('Prepare open','Note',4,3);add('Crossfader','CC',1,0);
  for(let deck=1;deck<=2;deck++){
   const ch=deck+1,t=s=>`Deck ${deck} ${s}`;
   for(const [name,n]of [['level',0],['filter',1],['low',2],['mid',3],['high',4],['trim',5]])add(t(name),'CC',ch,n);
   add(t('tempo'),'CC',ch,8,'14-bit absolute',{pickup:true});
-  add(`FX unit ${deck} depth`,'CC',ch,6);add(`FX unit ${deck} beat`,'CC',ch,7);add(`FX unit ${deck} enable`,'Note',ch,0);
+  add(`FX unit ${deck} depth`,'CC',ch,6);add(`FX unit ${deck} beat`,'CC',ch,7);add(`FX unit ${deck} enable`,'Note',ch,0);add(`FX unit ${deck} next`,'Note',ch+3,0);add(`FX unit ${deck} select`,'CC',ch+3,6);
   add(t('jog bend'),'CC',ch,9,'Relative two’s complement');
   add(t('jog surface'),'CC',ch,10,'Relative two’s complement');
   add(t('jog touch'),'Note',ch,8);add(t('jog touch fast'),'Note',ch+3,8);
   add(t('jog surface'),'CC',ch+3,10,'Relative two’s complement');
   add(t('jog bend'),'CC',ch+3,9,'Relative two’s complement');
   add(t('vinyl'),'Note',ch+3,1);
-  for(const [name,n]of [['loop',3],['sync',5],['cue',6],['play',7],['loop in',9],['loop out',10],['headphone cue',12],['load',13]])add(t(name),'Note',ch,n);
+  for(const [name,n]of [['auto loop four',3],['sync',5],['cue',6],['play',7],['loop in',9],['loop out',10],['headphone cue',12],['load',13]])add(t(name),'Note',ch,n);
   for(const [name,n]of [['sync off',5],['loop half',9],['loop double',10]])add(t(name),'Note',ch+3,n);
   for(const [name,n]of [['slip',1],['quantize',2]])add(t(name),'Note',ch,n);
   for(const [name,n]of [['tempo range',2],['previous',6],['stutter',7]])add(t(name),'Note',ch+3,n);
