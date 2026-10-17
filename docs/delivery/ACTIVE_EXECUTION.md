@@ -12,7 +12,7 @@
 
 ## Now
 
-Last pinned tested browser candidate: `1543307d0181eae0b22a83999f11cfe54817c9bd` (per-file Video FX). Private repository records updated through `46e25f5`. Actual File/Worker/GPU15/15, Worker10/10, main UI persistence/export/import/recall and assembled pipeline33/33 executed.25 Video Node scripts exit0 at narrower scope. See [review](../prototype/VIDEO_FILE_FX_REVIEW.md).
+Current source candidate: `d05c2d114f3cb59f469d6b4c6600f5319dbb87dc` (manual FX clocks and stereo ordinary-mute source waveforms). Private code/metadata records track this checkpoint; inspect current Git status before editing. Actual timing9/9, waveform9/9, SCNet1/1 and main UI paths execute.43 cohort Node scripts and separate actual-WASM14/14 pass at narrower scope. Experimental live capture remains failed/incomplete; production streaming and ordinary scratch are not integrated. See [review](../prototype/FX_TEMPO_WAVEFORM_REVIEW.md).
 
 REQ178/FX002 manual Tap BPM/Auto is now actual9/9 audio plus main UI accepted as independent behavior. Metadata timing mismatch was reproduced/repaired; manual authority/slot ownership persist. No exact vendor estimator/sonic claim.
 
