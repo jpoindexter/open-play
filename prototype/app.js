@@ -822,6 +822,12 @@ async function play(d) {
   renderTracks();
 }
 function deckQuantize(d){return typeof d.quantize==='boolean'?d.quantize:state.quantize;}
+function autoLoopEnd(d, start) {
+  const grid = createBeatgrid(d.track);
+  return Math.min(d.track.duration, grid
+    ? grid.timeAt(grid.beatAt(start) + d.loopLength)
+    : start + 60 / (d.track.bpm || 120) * d.loopLength);
+}
 function quantized(d, p) {
   if (!deckQuantize(d) || !d.track?.bpm) return p;
   const value = parseFloat(state.settings["Quantize Value"]) || 1;
@@ -946,7 +952,7 @@ async function deckAction(action, index, el, event = {}) {
   }
   if (action === "loop") {
     const start = quantized(d, pos),
-      end = Math.min(d.track.duration, start + beat * d.loopLength);
+      end = autoLoopEnd(d, start);
     const ending = d.loop;
     if (!ending) engine.beginSlip(d, "loop");
     await engine.setLoop(
@@ -968,7 +974,7 @@ async function deckAction(action, index, el, event = {}) {
         d,
         true,
         d.loopIn,
-        Math.min(d.track.duration, d.loopIn + beat * d.loopLength),
+        autoLoopEnd(d, d.loopIn),
       );
   }
   if (action === "loopIn") return manualLoops.command(d,"in");
