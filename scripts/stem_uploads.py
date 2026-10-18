@@ -1,5 +1,9 @@
 """Bounded temporary WAV transport, separate from persistent preparation jobs."""
 from pathlib import Path
+import fcntl
+import json
+import os
+import re
 import shutil
 import struct
 import threading
@@ -17,12 +21,50 @@ class StemUploads:
         self.root = Path(root)
         self.sessions = {}
         self.lock = threading.RLock()
+        self.recovered = []
+        self._recover()
+
+    def _recover(self):
+        if not self.root.is_dir() or self.root.is_symlink():
+            return
+        for directory in self.root.iterdir():
+            if directory.is_symlink() or not directory.is_dir() or not re.fullmatch('[a-f0-9]{32}', directory.name):
+                continue
+            # Unknown/legacy layouts have no provable ownership. Leave them intact.
+            if {p.name for p in directory.iterdir()} != {'input.part', '.owner.lock'}:
+                continue
+            owner, data = directory / '.owner.lock', directory / 'input.part'
+            if owner.is_symlink() or data.is_symlink() or not owner.is_file() or not data.is_file():
+                continue
+            try:
+                with owner.open('r+') as stream:
+                    fcntl.flock(stream, fcntl.LOCK_EX | fcntl.LOCK_NB)
+                    record = json.loads(stream.read(1024))
+                    if record.get('schema') != 1 or record.get('id') != directory.name or type(record.get('pid')) is not int or record['pid'] <= 0:
+                        continue
+                    try:
+                        os.kill(record['pid'], 0)
+                        continue
+                    except ProcessLookupError:
+                        pass
+                    data.unlink()
+                    owner.unlink()
+                    directory.rmdir()
+                    self.recovered.append(directory.name)
+            except (OSError, ValueError, AttributeError):
+                # Locked, live, inaccessible or ambiguous files are never reclaimed.
+                continue
 
     def _discard(self, session):
         # Paths are generated here, never supplied by a client or cache receipt.
         path = session['path']
         path.unlink(missing_ok=True)
+        if session.get('owner') is not None:
+            (path.parent / '.owner.lock').unlink()
         path.parent.rmdir()
+        if session.get('owner') is not None:
+            session['owner'].close()
+            session['owner'] = None
 
     def _expire(self):
         now = time.monotonic()
@@ -42,6 +84,7 @@ class StemUploads:
         self.jobs.runtime(backend)
         with self.lock:
             self._expire()
+            self._recover()
             pending = [s for s in self.sessions.values() if not s.get('job')]
             if len(pending) >= 2:
                 raise ValueError('Two audio uploads are already active. Wait or cancel one.')
@@ -52,10 +95,14 @@ class StemUploads:
             ident = uuid.uuid4().hex
             directory = self.root / ident
             directory.mkdir()
+            owner = (directory / '.owner.lock').open('x+')
+            fcntl.flock(owner, fcntl.LOCK_EX | fcntl.LOCK_NB)
+            json.dump(dict(schema=1, id=ident, pid=os.getpid(), createdAt=time.time()), owner)
+            owner.flush()
             path = directory / 'input.part'
             path.touch(exist_ok=False)
             self.sessions[ident] = dict(path=path, size=size, received=0, backend=backend,
-                                        updated=time.monotonic(), job=None)
+                                        updated=time.monotonic(), job=None, owner=owner)
             return dict(id=ident, received=0, size=size, chunkBytes=CHUNK_BYTES)
 
     def append(self, ident, offset, data):

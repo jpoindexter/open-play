@@ -28,7 +28,7 @@ Planning-table statuses are a dated baseline. Current scoped implementation evid
 | DEK-004 | Manual, automatic and saved loops | gpt-6-astra / high | claude-opus-5 / high | Research pending |
 | DEK-005 | Beat jump | gpt-6-astra / high | claude-opus-5 / high | Research pending |
 | DEK-006 | Tempo fader and pitch ranges | gpt-6-astra / high | claude-opus-5 / high | Research pending |
-| DEK-007 | Key lock and independent key shift | gpt-6-astra / high | claude-opus-5 / high | Prior reference DSP evidence preserved; long preparation resource path passes; pitch/music/context/native/reference open (plan157) |
+| DEK-007 | Key lock and independent key shift | gpt-6-astra / high | claude-opus-5 / high | Prior reference DSP preserved; actual long preparation resource path passes; musical/keylock composition/reference remain open (plan158) |
 | DEK-008 | Sync, master and phase | gpt-6-astra / high | claude-opus-5 / high | Research pending |
 | DEK-009 | Jog, nudge and scratching | gpt-6-astra / high | claude-opus-5 / high | Research pending |
 | DEK-010 | Slip and reverse modes | gpt-6-astra / high | claude-opus-5 / high | Research pending |
@@ -44,9 +44,9 @@ Planning-table statuses are a dated baseline. Current scoped implementation evid
 | FX-002 | Tempo-synced effect timing | gpt-6-astra / high | claude-opus-5 / high | Research pending |
 | SMP-001 | Sampler slots and banks | gpt-6.1-sol / high | claude-sonnet-5 / medium | Research pending |
 | SMP-002 | Sampler audio modes and routing | gpt-6-astra / high | claude-opus-5 / high | Research pending |
-| STM-001 | Local stem separation | gpt-6.1-sol / high | claude-sonnet-5 / high | Seven-minute actual SCNet sources/playback pass;600s/resource/crash-restart/music parity open (plan157) |
+| STM-001 | Local stem separation | gpt-6.1-sol / high | claude-sonnet-5 / high | Actual630s real sources/recorded controls pass; full memory/music attribution/reference open (plan158) |
 | STM-002 | Stem mute/solo/mix controls | gpt-6-astra / high | claude-opus-5 / high | Research pending |
-| STM-003 | Stem cache/cancel/fallback | gpt-6.1-sol / xhigh | claude-opus-5 / high | Actual chunked Cancel/retry, cache reuse and explanatory notice pass; crash-restart recovery open (plan157) |
+| STM-003 | Stem cache/cancel/fallback | gpt-6.1-sol / xhigh | claude-opus-5 / high | Real dead-owner crash recovery, live/unknown retention and old cache pass; power-loss/full lifecycle open (plan158) |
 | REC-001 | Record the actual master mix | gpt-6-astra / high | claude-opus-5 / high | Research pending |
 | REC-002 | Recording limits and recovery | gpt-6.1-sol / xhigh | claude-opus-5 / high | Research pending |
 | AUD-001 | Output/input device selection | gpt-6-astra / xhigh | claude-opus-5 / xhigh | Research pending |

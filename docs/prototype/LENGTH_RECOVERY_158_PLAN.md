@@ -1,0 +1,13 @@
+# Length and interrupted-upload recovery: checkpoint158
+
+Outcome: resource-feasible tracks beyond10minutes reach real Stems preparation/playback; a crashed uploader's generated partial files are reclaimed without touching live uploads/originals/completed caches. Prior157was progress: real seven-minute preparation passed; base88013413c69c92971e82fe7cb0132ab713101059 is clean/pushed privately.
+
+Now: remove the browser600second rejection. Derive worker decode ceiling and timeout from the exact canonical WAV's declared frames/rate, retaining an explicit1GiB decoded working-input allowance and actual disk-space check. Keep worker/model/postprocessor source unchanged so exact older completed cache identities remain usable. Full browser/model memory accumulation is still open; derived budgets are admission guards, not a measured RAM bound.
+
+Add a held advisory ownership lock and small PID/schema/ID receipt to each new temporary upload. Recover only canonical generated directories with a valid dead-owner receipt and an available exclusive lock. Preserve live owners, symlinks, unknown/legacy layouts, originals and completed job folders. Execute a real child-process abrupt termination/restart check; do not merely mock a stale dictionary.
+
+Next: one actual owned630second stereo44.1kHz input, beyond the former600second ceiling, through browser Prepare/chunk upload/real SCNet/four full sources/recorded mute/restore/Stop. Keep the same functional bounds declared in157: two complete2second finite/hash/contiguous-quantum channels, baseline capture+50–150ms RMS>.005, mute/restore+100–200ms (<1e−7 peak/>.005 RMS), Stop+100–250ms peak<1e−7. No changed gates, bit-zero chase or unrelated matrices. Keep musical attribution, continuity/cursor/native/hardware/full-parity claims separate.
+
+Done for this unit: actual630second sources/control audio pass, dynamic worker guard/timeout and exact bytes are observed, real dead-owned temporary upload is removed on reinitialization, concurrently live and unknown paths remain unchanged, and old short completed cache remains byte/mtime identical. Full110groups/522requirements/9beta/26release/55extendedFX/Stems/keylock scope stays active.
+
+Must preserve frozen0.1.23/tested272alternative mappings/launchers/user8768/18775/18768, source provenance and exact original prompt suffix. No native package/new Claude audit/hardware output/timed MIDI/readiness question while Jason is away. Raw audio/PCM/proprietary Serato files remain ignored. Refresh actual jobs/processes before retry; retain failures. Update full plan/Trello/models/three scoped registry rows/full Claude handoff from observed results.

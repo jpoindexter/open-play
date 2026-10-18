@@ -92,7 +92,6 @@ export function createStemPreparation(engine, decks, {onChange = () => {}} = {})
       status('Decoding local audio…');
       cancelled();
       const audio = await engine.buffer(track); cancelled();
-      if (audio.duration > 600) throw new Error('Prototype preparation currently accepts tracks up to 10 minutes.');
       status('Sending decoded audio to the local worker…');
       cancelled();
       const size = 44 + audio.length * audio.numberOfChannels * 4;

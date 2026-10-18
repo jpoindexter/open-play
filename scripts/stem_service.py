@@ -9,6 +9,7 @@ import subprocess
 import threading
 import uuid
 from stem_job_cache import restore_complete, save_complete, valid_exports
+from stem_limits import preparation_budget
 
 ROOT = Path(__file__).resolve().parents[1]
 JOBS_ROOT = ROOT / 'local-evidence/stem-jobs'
@@ -81,19 +82,24 @@ class StemJobs:
         with self.lock:
             if job['state'] == 'cancelled':
                 return
+            try:
+                job['budget'] = preparation_budget(directory / 'input.wav')
+            except (ValueError, OSError) as error:
+                job.update(state='failed', error=str(error))
+                return
             job['state'] = 'running'
             with (directory / 'worker.log').open('wb') as log:
                 try:
                     process = subprocess.Popen([str(interpreter), str(ROOT / 'scripts/stem_worker.py'),
                         str(directory / 'input.wav'), str(directory / 'output'),
-                        '--status', str(directory / 'status.json'), '--max-seconds', '600', *options],
+                        '--status', str(directory / 'status.json'), '--max-seconds', str(job['budget']['maximumDecodeSeconds']), *options],
                         stdout=log, stderr=log, start_new_session=True)
                     job['process'] = process
                 except OSError as error:
                     job.update(state='failed', error=str(error))
                     return
         try:
-            result = process.wait(timeout=900)
+            result = process.wait(timeout=job['budget']['workerTimeoutSeconds'])
             with self.lock:
                 if job['state'] == 'cancelled':
                     return
@@ -110,7 +116,7 @@ class StemJobs:
         except subprocess.TimeoutExpired:
             self.cancel(job['id'])
             with self.lock:
-                job.update(state='failed', error='Preparation exceeded 15 minutes.')
+                job.update(state='failed', error=f"Preparation exceeded its {job['budget']['workerTimeoutSeconds']} second processing budget.")
         finally:
             with self.lock:
                 job['process'] = None
@@ -127,6 +133,8 @@ class StemJobs:
         value = {'id': job['id'], 'state': job['state'], 'stage': status.get('state', job['state']),
                  'progress': status.get('progress', 1 if job['state'] == 'complete' else 0),
                  'error': job['error']}
+        if job.get('budget'):
+            value['preparationBudget'] = job['budget']
         if job.get('cache_warning'):
             value['cache_warning'] = job['cache_warning']
         if job['state'] == 'complete':

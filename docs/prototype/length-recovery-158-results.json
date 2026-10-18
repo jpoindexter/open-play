@@ -1,0 +1,98 @@
+{
+  "checkpoint": 158,
+  "passed": true,
+  "originalBytes": 989975,
+  "originalSHA256": "ddba41cc282b9728107cf27359b98990fbda0898f29224dd97e83282d9aa3895",
+  "scope": "Actual production UI Prepare on an owned630second stereo44.1kHz decoded AudioBuffer, partial upload Cancel/retry, real local SCNet inference/exports/decode/activation and recorded Stems all-pad mute/restore/Stop. Physical mute. No compressed import/music quality/native/hardware/reference or unlimited-duration acceptance.",
+  "sourceHashes": {
+    "app.js": "a34c271bb8b2270c071ab77c8ce7727cf6943733a0e21b7c6da9157c0c13089a",
+    "engine.js": "22f4609c72e352a7a548fc71d8a480d706f3362428bbefd8b2beb09c8cbfc264",
+    "stems.js": "5fb06aba4f6a97e4150d1bcfeef394574b0c9e9ed6ee099b78b89482b08ea4b7",
+    "panels.js": "06217033416d62af4602c1572086dc03bb9f25458a8f90c884f3d552c7b1d4fe",
+    "stem-length-158-harness.js": "b808c21bcbaf51c167cddd9eb55bd084f5ae31e3c3bc4e9adcedff75247d1dcb",
+    "stem-activation-capture-145.js": "730b9c3de31e9c3546ec1ab86f8fd85ce2a1ccfe6f78fc25d8f483f8b9d75331"
+  },
+  "originalPCMUnchanged": true,
+  "partialUploadCancelledAndRetrySucceeded": true,
+  "uploadedBytes": 222264044,
+  "chunkRequests": 53,
+  "largestChunkBytes": 4194304,
+  "exactInputSHA256": "d46aa7ba1e5a7791dd0893d6200078c5aee3ad7ba626a47cadcf20cba6d349d4",
+  "actualModel": "SCNet-large official",
+  "modelSHA256": "719e5abb8ed920305dad546ac3cd6fb0b1e9c3092d14ce21827bfc0423af3070",
+  "timing": {
+    "model_load_seconds": 0.7469623750075698,
+    "inference_seconds": 412.9631837080233,
+    "total_seconds": 416.00119658303447,
+    "realtime_factor": 0.6554971169968623
+  },
+  "job": "1d5ad6be799945acad7997aaafbcbb2e",
+  "input": {
+    "duration": 630,
+    "frames": 27783000,
+    "channels": 2,
+    "sampleRate": 44100,
+    "decodedPCMBytes": 222264000,
+    "encodedWavBytes": 222264044
+  },
+  "preparationBudget": {
+    "inputDurationSeconds": 630,
+    "inputFrames": 27783000,
+    "inputSampleRate": 44100,
+    "decodedWorkingBytes": 222264000,
+    "reservedOutputDiskBytes": 1245537728,
+    "maximumDecodeSeconds": 630,
+    "workerTimeoutSeconds": 2010
+  },
+  "outputs": [
+    {
+      "name": "drums",
+      "bytes": 222264088,
+      "sha256": "37231ab66c00aecc52ad7c520857800b65a364ea6278f9b45fef0eeb3f16d978"
+    },
+    {
+      "name": "bass",
+      "bytes": 222264088,
+      "sha256": "cea2084926aa7c3b155383ebca3792aa37a5bb0586467270b7871c73dbe785dc"
+    },
+    {
+      "name": "other",
+      "bytes": 222264088,
+      "sha256": "df8322db463a8ba70fbab5a49c27dda86e385491eabce91585ae6db8c67288e3"
+    },
+    {
+      "name": "vocals",
+      "bytes": 222264088,
+      "sha256": "dc03e3fb93132dc6ce0220ddba43f0ff01e8aceece28743c4202d7efd78787e9"
+    }
+  ],
+  "channels": [
+    {
+      "channel": 0,
+      "frames": 88200,
+      "sha256": "d9c88d8d38a69d4ea1acaca2b5f6edc75ff0d801056481b442f2e33f0736b1e1",
+      "quanta": 690,
+      "baselineRMS": 0.24278411482460427,
+      "mutedPeak": 0.0,
+      "restoredRMS": 0.24278411482460427,
+      "stoppedPeak": 0.0
+    },
+    {
+      "channel": 1,
+      "frames": 88200,
+      "sha256": "b7992f862feefac5cdb2741d90508695fda0b12d877c6f232d8b3c52efbf7b8d",
+      "quanta": 690,
+      "baselineRMS": 0.24278411590827065,
+      "mutedPeak": 0.0,
+      "restoredRMS": 0.24278411590827065,
+      "stoppedPeak": 0.0
+    }
+  ],
+  "physicalOutputMuted": true,
+  "limits": "1GiB upload/decoded working input; input-derived decode ceiling/timeout and free-disk guard; original plus four decoded outputs still require memory.",
+  "musicalSourceQualityAcceptance": false,
+  "unlimitedDurationAcceptance": false,
+  "nativeAcceptance": false,
+  "hardwareAcceptance": false,
+  "fullParityAcceptance": false
+}

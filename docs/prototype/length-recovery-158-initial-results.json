@@ -1,0 +1,18 @@
+{
+  "checkpoint": 158,
+  "passed": false,
+  "originalBytes": 48436,
+  "originalSHA256": "5cad4864d3d16f0d5ce0b4a68aac7bee3002fa5db030a664c186a3b8f62390dc",
+  "workflowCompleted": false,
+  "sourceStable": true,
+  "failure": [
+    {
+      "message": "Failed \u00b7 Stem duration does not match original audio.",
+      "stack": "Error: Failed \u00b7 Stem duration does not match original audio.\n    at assert (http://127.0.0.1:8797/prototype/stem-length-158-harness.js:1:120)\n    at run (http://127.0.0.1:8797/prototype/stem-length-158-harness.js:29:3)"
+    }
+  ],
+  "cause": "Test fixture created630second buffer but retained420second track.duration; production duration guard correctly rejected mismatched metadata. No production DSP fix required.",
+  "actualFreshModelJobCompleted": true,
+  "actualLongPlaybackAccepted": false,
+  "fullParityAcceptance": false
+}
