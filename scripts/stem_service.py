@@ -8,6 +8,7 @@ import signal
 import subprocess
 import threading
 import uuid
+from stem_job_cache import restore_complete, save_complete, valid_exports
 
 ROOT = Path(__file__).resolve().parents[1]
 JOBS_ROOT = ROOT / 'local-evidence/stem-jobs'
@@ -16,7 +17,7 @@ MAX_BYTES = 128 * 1024 * 1024
 
 class StemJobs:
     def __init__(self):
-        self.jobs = {}
+        self.jobs = restore_complete(JOBS_ROOT)
         self.lock = threading.RLock()
         self.pool = ThreadPoolExecutor(max_workers=1, thread_name_prefix='stem-worker')
 
@@ -36,7 +37,9 @@ class StemJobs:
         with self.lock:
             for job in self.jobs.values():
                 if job['hash'] == key and job['state'] == 'complete':
-                    return self.public(job)
+                    if valid_exports(job['directory'], job['backend']):
+                        return self.public(job)
+                    job.update(state='failed', error='Cached exports changed or are incomplete. Prepare again.')
             if sum(j['state'] in {'queued', 'running'} for j in self.jobs.values()) >= 4:
                 raise ValueError('Preparation queue is full. Wait or cancel a job.')
             interpreter, _ = self.runtime(backend)
@@ -76,6 +79,11 @@ class StemJobs:
                     return
                 if result == 0 and (directory / 'output/manifest.json').is_file():
                     job['state'] = 'complete'
+                    try:
+                        save_complete(job)
+                    except (OSError, ValueError) as error:
+                        # Inference remains usable if only its restart receipt fails.
+                        job['cache_warning'] = str(error)
                 else:
                     status = self.read_json(directory / 'status.json')
                     job.update(state='failed', error=status.get('error', 'Local separation failed.'))
@@ -99,6 +107,8 @@ class StemJobs:
         value = {'id': job['id'], 'state': job['state'], 'stage': status.get('state', job['state']),
                  'progress': status.get('progress', 1 if job['state'] == 'complete' else 0),
                  'error': job['error']}
+        if job.get('cache_warning'):
+            value['cache_warning'] = job['cache_warning']
         if job['state'] == 'complete':
             manifest = self.read_json(job['directory'] / 'output/manifest.json')
             value.update(model=manifest.get('model'), duration=manifest.get('duration'),

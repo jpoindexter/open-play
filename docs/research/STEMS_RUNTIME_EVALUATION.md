@@ -197,3 +197,7 @@ To recreate the SCNet dependency without installing its training stack, download
 ## 18 October2026 — mixture-consistent export policy
 
 SCNet defaults to an independent minimum-change uniform mixture projection before Float WAV export; explicit raw mode remains available. Raw model quality findings and the original table above remain historical/unmodified. See [scoped review](../prototype/STEM_MIXTURE_CONSISTENCY_REVIEW.md) for actual API/default/cache execution, slight SI-SDR tradeoff and negative other result. Sum conservation is not source-attribution quality. No new model or general benchmark claim.
+
+## 18October2026 — completed cache and rejected quality experiment
+
+[Cache review](../prototype/STEM_JOB_CACHE_REVIEW.md) records real SCNet/API/process-restart reuse and current8768service activation. [Fixed-shift evaluation](../prototype/STEM_SHIFT_DEVELOPMENT_REVIEW.md) failed declared development guards; no inference/default change. Historical model/quality results above are unchanged; desktop local testing is approved, full native/reference acceptance remains open.

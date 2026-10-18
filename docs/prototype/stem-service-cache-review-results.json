@@ -1,0 +1,81 @@
+{
+  "executedAt": "2026-10-18T03:32:04Z",
+  "passed": 10,
+  "total": 10,
+  "checks": [
+    {
+      "name": "Blocked canonical path traversal: /prototype/../.git/HEAD",
+      "passed": true,
+      "evidence": {
+        "httpStatus": 404
+      }
+    },
+    {
+      "name": "Blocked canonical path traversal: /prototype/%2e%2e/.git/HEAD",
+      "passed": true,
+      "evidence": {
+        "httpStatus": 404
+      }
+    },
+    {
+      "name": "Blocked canonical path traversal: /prototype/%2e%2e/local-evidence/stems-runtime/models/955717e8.safetensors",
+      "passed": true,
+      "evidence": {
+        "httpStatus": 404
+      }
+    },
+    {
+      "name": "Reject unexpected Host",
+      "passed": true,
+      "evidence": {
+        "httpStatus": 403
+      }
+    },
+    {
+      "name": "Reject cross-origin mutation",
+      "passed": true,
+      "evidence": {
+        "httpStatus": 403
+      }
+    },
+    {
+      "name": "Reject mutation without custom header",
+      "passed": true,
+      "evidence": {
+        "httpStatus": 403
+      }
+    },
+    {
+      "name": "Reject undersized WAV without starting job",
+      "passed": true,
+      "evidence": {
+        "httpStatus": 413
+      }
+    },
+    {
+      "name": "Active identical uploads have independent cancellation ownership",
+      "passed": true,
+      "evidence": {
+        "distinctIds": true,
+        "secondState": "queued",
+        "execution": "actual service methods; recorded queue, no inference"
+      }
+    },
+    {
+      "name": "Completed immutable job may be reused",
+      "passed": true,
+      "evidence": {
+        "cachedIdMatches": true
+      }
+    },
+    {
+      "name": "Cancellation escalates and reaps resistant process",
+      "passed": true,
+      "evidence": {
+        "state": "cancelled",
+        "exitCode": -9,
+        "seconds": 2.01
+      }
+    }
+  ]
+}

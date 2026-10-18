@@ -16,6 +16,7 @@ import subprocess
 import sys
 import tempfile
 import time
+import wave
 import stem_service
 
 parser = argparse.ArgumentParser()
@@ -64,7 +65,16 @@ with tempfile.TemporaryDirectory() as directory:
         first, second = jobs.create(payload), jobs.create(payload)
         jobs.cancel(first['id'])
         record('Active identical uploads have independent cancellation ownership', first['id'] != second['id'] and jobs.get(second['id'])['state']=='queued', distinctIds=first['id']!=second['id'], secondState=jobs.get(second['id'])['state'], execution='actual service methods; recorded queue, no inference')
-        jobs.jobs[second['id']]['state']='complete'
+        job=jobs.jobs[second['id']]
+        output=job['directory']/'output';output.mkdir()
+        stems=[]
+        for name in ['vocals','other','bass','drums']:
+            path=output/(name+'.wav')
+            with wave.open(str(path),'wb') as stream:
+                stream.setnchannels(2);stream.setsampwidth(2);stream.setframerate(44100);stream.writeframes(b'\x00'*16)
+            stems.append({'name':name,'file':path.name,'sha256':hashlib.sha256(path.read_bytes()).hexdigest()})
+        (output/'manifest.json').write_text(json.dumps({'state':'complete','backend':'scnet','frames':4,'sample_rate':44100,'channels':2,'duration':4/44100,'stems':stems}))
+        job['state']='complete'
         cached=jobs.create(payload)
         record('Completed immutable job may be reused',cached['id']==second['id'],cachedIdMatches=cached['id']==second['id'])
         process=subprocess.Popen([sys.executable,'-c','import signal,time;signal.signal(signal.SIGTERM,signal.SIG_IGN);print("ready",flush=True);time.sleep(30)'], stdout=subprocess.PIPE, text=True, start_new_session=True)

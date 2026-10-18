@@ -1,0 +1,203 @@
+{
+  "experiment": "fixed-time-shift-average-development-v1",
+  "scope": "Two previously inspected same-band MUSDB18 CC BY-NC-SA3.0 previews; development only, no model training or reference-product/listening/general-quality acceptance.",
+  "criteria": {
+    "minimum_mean_improvement_db_per_track": 0.2,
+    "maximum_source_degradation_db": 0.1,
+    "maximum_reconstruction_relative_rms": 1e-06
+  },
+  "offsets_seconds": [
+    0,
+    0.25,
+    0.5
+  ],
+  "metric": "Full stereo flattened mean-removed SI-SDR; known padding cropped, no post-hoc temporal alignment/filtering.",
+  "model_sha256": "719e5abb8ed920305dad546ac3cd6fb0b1e9c3092d14ce21827bfc0423af3070",
+  "source_commit": "5d95bf96b19c3eede63248d171efeca8e3abb948",
+  "experiment_sha256": "21dc9706fc0c6a4f9eaa9ba3a7ee6fb37595447f92a5225e7438a6ffed19540b",
+  "tracks": [
+    {
+      "source": {
+        "title": "The Easton Ellises - Falcon 69",
+        "subset": "test",
+        "archive_member": "test/The Easton Ellises - Falcon 69.stem.mp4",
+        "license": "CC BY-NC-SA 3.0",
+        "archive_source": "https://github.com/sigsep/sigsep-mus-db/releases/download/v0.4.0/MUSDB18-7-STEMS.zip",
+        "source_sha256": "1edfa8b5abac9a7b962b33d9b3f65c9e0f4e6490567fd5bc51af313fedecc0b5"
+      },
+      "mixture_sha256": "85bd6a402cd824a225192d5f3f178e67f6d469ff8b4c2790c2270267a7bebd35",
+      "views": [
+        {
+          "left_padding_frames": 0,
+          "reused_baseline_manifest": "02d9a4f6276a2b9cc758684939c47f7e7d7045158ed6f0304dffbeec536956a6"
+        },
+        {
+          "left_padding_frames": 11025,
+          "inference_seconds": 5.684728499967605
+        },
+        {
+          "left_padding_frames": 22050,
+          "inference_seconds": 4.992147083161399
+        }
+      ],
+      "baseline_si_sdr_db": {
+        "drums": 9.94452217200909,
+        "bass": 7.143201177740529,
+        "other": 2.512200380823437,
+        "vocals": 5.240481301432885
+      },
+      "candidate_si_sdr_db": {
+        "drums": 10.017405095674405,
+        "bass": 7.354763368132689,
+        "other": 2.177604151615399,
+        "vocals": 4.43105834796236
+      },
+      "delta_db": {
+        "drums": 0.07288292366531479,
+        "bass": 0.21156219039215962,
+        "other": -0.3345962292080382,
+        "vocals": -0.8094229534705244
+      },
+      "mean_delta_db": -0.21489351715527205,
+      "development_guard_passed": false,
+      "baseline_projection": {
+        "algorithm": "uniform-mixture-consistency-v1",
+        "sources": 4,
+        "frames": 299880,
+        "block_frames": 65536,
+        "raw_reconstruction_rms_error": 0.0028186775972535226,
+        "raw_reconstruction_relative_rms": 0.016497298758761963,
+        "reconstruction_rms_error": 4.2865946230429684e-09,
+        "reconstruction_relative_rms": 2.50887977479043e-08,
+        "per_source_correction_rms": 0.0007046693993133806,
+        "source_attribution_verified": false
+      },
+      "candidate_projection": {
+        "algorithm": "uniform-mixture-consistency-v1",
+        "sources": 4,
+        "frames": 299880,
+        "block_frames": 65536,
+        "raw_reconstruction_rms_error": 0.0018771393178855904,
+        "raw_reconstruction_relative_rms": 0.010986615911359186,
+        "reconstruction_rms_error": 4.272657651155069e-09,
+        "reconstruction_relative_rms": 2.5007226734159702e-08,
+        "per_source_correction_rms": 0.0004692848294713976,
+        "source_attribution_verified": false
+      },
+      "candidate_exports": [
+        {
+          "name": "drums",
+          "sha256": "a77c4bdf49e0e1c334d97fba2e7901e175585bb72166fae49080bbf2d1001a7e"
+        },
+        {
+          "name": "bass",
+          "sha256": "392cf0fcf1c409781aa54b34b4688dc0f40f8f82c6447fcd01e5b472a2097f74"
+        },
+        {
+          "name": "other",
+          "sha256": "0c98132c66ee7053c1a91f398aa175ac22081ddcf5a52dd2bd54d96ad3e7551a"
+        },
+        {
+          "name": "vocals",
+          "sha256": "37f3bac48ac1f0dbd4008ddd9003153a6d2b158c84606e95d56455cd128ddd39"
+        }
+      ]
+    },
+    {
+      "source": {
+        "title": "The Easton Ellises (Baumi) - SDRNR",
+        "subset": "test",
+        "archive_member": "test/The Easton Ellises (Baumi) - SDRNR.stem.mp4",
+        "license": "CC BY-NC-SA 3.0",
+        "archive_source": "https://github.com/sigsep/sigsep-mus-db/releases/download/v0.4.0/MUSDB18-7-STEMS.zip",
+        "source_sha256": "04d349ad1f50d54d9433250cc1a099669e02af850cc5fc00435d756b41531d84"
+      },
+      "mixture_sha256": "393f19ed616a0740e9cd4389416fb37608b6667878911d616b62856d3fb59877",
+      "views": [
+        {
+          "left_padding_frames": 0,
+          "reused_baseline_manifest": "d3bbfeca359456c3cfa8bf231efd6efb4710dd498b342bd57f6493b77d3430c9"
+        },
+        {
+          "left_padding_frames": 11025,
+          "inference_seconds": 4.9370127089787275
+        },
+        {
+          "left_padding_frames": 22050,
+          "inference_seconds": 5.236497125122696
+        }
+      ],
+      "baseline_si_sdr_db": {
+        "drums": 8.075661373674077,
+        "bass": 5.091733211526778,
+        "other": -1.0051075191799133,
+        "vocals": 5.712842219498721
+      },
+      "candidate_si_sdr_db": {
+        "drums": 8.561912403069718,
+        "bass": 5.305270300072201,
+        "other": -1.0636203441877257,
+        "vocals": 5.720443300525046
+      },
+      "delta_db": {
+        "drums": 0.4862510293956408,
+        "bass": 0.21353708854542308,
+        "other": -0.05851282500781241,
+        "vocals": 0.007601081026325396
+      },
+      "mean_delta_db": 0.16221909348989422,
+      "development_guard_passed": false,
+      "baseline_projection": {
+        "algorithm": "uniform-mixture-consistency-v1",
+        "sources": 4,
+        "frames": 299880,
+        "block_frames": 65536,
+        "raw_reconstruction_rms_error": 0.005201965067071605,
+        "raw_reconstruction_relative_rms": 0.03024555948068662,
+        "reconstruction_rms_error": 4.185168213033027e-09,
+        "reconstruction_relative_rms": 2.4333641708829827e-08,
+        "per_source_correction_rms": 0.0013004912667679011,
+        "source_attribution_verified": false
+      },
+      "candidate_projection": {
+        "algorithm": "uniform-mixture-consistency-v1",
+        "sources": 4,
+        "frames": 299880,
+        "block_frames": 65536,
+        "raw_reconstruction_rms_error": 0.0036545051746334173,
+        "raw_reconstruction_relative_rms": 0.02124823066027917,
+        "reconstruction_rms_error": 4.167671234284508e-09,
+        "reconstruction_relative_rms": 2.4231909785480227e-08,
+        "per_source_correction_rms": 0.0009136262936583543,
+        "source_attribution_verified": false
+      },
+      "candidate_exports": [
+        {
+          "name": "drums",
+          "sha256": "b5d1420cd6e5c10adbdb1c7ff32858b1c1bbce84a2ebc7ccc3c7077fb573a2f1"
+        },
+        {
+          "name": "bass",
+          "sha256": "beb064259c9473e21662f05d834f803c3bec5bc0b76ad708e4b10d5be18dd5c2"
+        },
+        {
+          "name": "other",
+          "sha256": "f1d784a21c6353d6a3906437e7dfbdad4c0e886cfcf209f93977414429fbfb73"
+        },
+        {
+          "name": "vocals",
+          "sha256": "5039b7c651ff65eeb4ccec86b11dd29ca1347538a31cf0373ea4f504172cb3ec"
+        }
+      ]
+    }
+  ],
+  "runtime": {
+    "torch": "2.5.1",
+    "device": "cpu",
+    "threads": 4
+  },
+  "production_changed": false,
+  "full_parity_verified": false,
+  "development_guard_passed": false,
+  "verdict": "Reject promotion under the declared guards; production default remains unchanged."
+}

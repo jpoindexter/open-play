@@ -1,0 +1,124 @@
+{
+  "scope": "Actual local HTTP/SCNet inference/export then normal service-process restart and immutable completed-cache reuse; not browser/native/audio/hardware/quality acceptance.",
+  "production_service_port_8768_untouched": true,
+  "port": 18862,
+  "first_pid": 23128,
+  "input_sha256": "393f19ed616a0740e9cd4389416fb37608b6667878911d616b62856d3fb59877",
+  "initial_state": "queued",
+  "job_id": "c6d2ffa656a94c4e96d99d73dd11eeac",
+  "model": "SCNet-large official",
+  "receipt": {
+    "schema": 1,
+    "id": "c6d2ffa656a94c4e96d99d73dd11eeac",
+    "hash": "4f415515b71173e08e394e079702df6332bfde9ae0ef4816c39c72765557ff66",
+    "backend": "scnet"
+  },
+  "model_sha256": "719e5abb8ed920305dad546ac3cd6fb0b1e9c3092d14ce21827bfc0423af3070",
+  "timing": {
+    "model_load_seconds": 1.0175880419556051,
+    "inference_seconds": 5.501253084046766,
+    "total_seconds": 6.679780832957476,
+    "realtime_factor": 0.8090078064774656
+  },
+  "second_pid": 23161,
+  "cache_request_seconds": 0.006490916945040226,
+  "completed": true,
+  "restored_job_id_matches": true,
+  "all_four_download_hashes_unchanged": true,
+  "worker_status_log_manifest_unchanged": true,
+  "exports": {
+    "drums": "fca1809b2f44ac97da630c485cf7742609e90e05587024d65032a68338c5f508",
+    "bass": "6be6f1a1aa92ba81fc4a67d4d8fb593765b0bfa482bfaa9cade97a5c9fa049c4",
+    "other": "f3e35348dc0f3a01717aa68101d034ef378d13ac65daa189598e96aaa6ac2837",
+    "vocals": "317d987ed2517a418ffb3e83d5f6d32481aadc79e386bca68e8689625ae3e459"
+  },
+  "service_checks": {
+    "executedAt": "2026-10-18T03:32:04Z",
+    "passed": 10,
+    "total": 10,
+    "checks": [
+      {
+        "name": "Blocked canonical path traversal: /prototype/../.git/HEAD",
+        "passed": true,
+        "evidence": {
+          "httpStatus": 404
+        }
+      },
+      {
+        "name": "Blocked canonical path traversal: /prototype/%2e%2e/.git/HEAD",
+        "passed": true,
+        "evidence": {
+          "httpStatus": 404
+        }
+      },
+      {
+        "name": "Blocked canonical path traversal: /prototype/%2e%2e/local-evidence/stems-runtime/models/955717e8.safetensors",
+        "passed": true,
+        "evidence": {
+          "httpStatus": 404
+        }
+      },
+      {
+        "name": "Reject unexpected Host",
+        "passed": true,
+        "evidence": {
+          "httpStatus": 403
+        }
+      },
+      {
+        "name": "Reject cross-origin mutation",
+        "passed": true,
+        "evidence": {
+          "httpStatus": 403
+        }
+      },
+      {
+        "name": "Reject mutation without custom header",
+        "passed": true,
+        "evidence": {
+          "httpStatus": 403
+        }
+      },
+      {
+        "name": "Reject undersized WAV without starting job",
+        "passed": true,
+        "evidence": {
+          "httpStatus": 413
+        }
+      },
+      {
+        "name": "Active identical uploads have independent cancellation ownership",
+        "passed": true,
+        "evidence": {
+          "distinctIds": true,
+          "secondState": "queued",
+          "execution": "actual service methods; recorded queue, no inference"
+        }
+      },
+      {
+        "name": "Completed immutable job may be reused",
+        "passed": true,
+        "evidence": {
+          "cachedIdMatches": true
+        }
+      },
+      {
+        "name": "Cancellation escalates and reaps resistant process",
+        "passed": true,
+        "evidence": {
+          "state": "cancelled",
+          "exitCode": -9,
+          "seconds": 2.01
+        }
+      }
+    ]
+  },
+  "source_sha256": {
+    "stem_service.py": "95c69586763b400dc7d52d032bc1eeeb475612e547c5fcd9ea5f18bc0fd80a1d",
+    "stem_job_cache.py": "df549cd8cd109628f629f91e56024a01951dcb46d8bb638cac90bb8812db85bd",
+    "stem_worker.py": "d5a361c27b1efc17a31933426d094888298c0bbac63ff52d55e144347b6e9321",
+    "stem_mix_consistency.py": "82be014dec145470db13fc5c0072c1808adeefc2c7a5fb82366f2f5003cae38b",
+    "serve_prototype.py": "81805f18d68060625934b0b8d611079b0644deee5a6dbcfb6622819e2c8b8bd2",
+    "verify_stem_job_cache_restart.py": "36bc2d056821b39c3e010f3b1580e7ff99b73f74fc7393b672f071ee2f68a1fb"
+  }
+}
