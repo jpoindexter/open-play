@@ -1,0 +1,15 @@
+import assert from 'node:assert/strict';
+import {createStemPreparation} from '../prototype/stems.js';
+import {AudioEngine} from '../prototype/engine.js';
+const ident='a'.repeat(32),track={id:'track',stemJob:ident},buffers={kept:true},events=[];
+let reply;globalThis.fetch=()=>new Promise(resolve=>reply=resolve);
+const engine={stemBuffers:new Map([['track',buffers]]),buffer:async()=>{throw Error('Preparation allowed again');}};
+const adapter=createStemPreparation(engine,[],{onChange:t=>events.push(t.stemJob)});
+const clearing=adapter.clearFiles(track);assert.equal(track.stemJob,ident);assert.equal(engine.stemBuffers.get('track'),buffers);
+await assert.rejects(adapter.prepare(track),/moving to Trash/);await assert.rejects(adapter.clearFiles(track),/already moving/);
+reply({ok:true,json:async()=>({id:ident,state:'trashed'})});await clearing;assert.equal(track.stemJob,undefined);assert.equal(engine.stemBuffers.get('track'),buffers);assert.deepEqual(events,[undefined]);await assert.rejects(adapter.prepare(track),/Preparation allowed again/);
+const failed={id:'failure',stemJob:ident};globalThis.fetch=async()=>({ok:false,json:async()=>({error:'Trash unavailable'})});await assert.rejects(adapter.clearFiles(failed),/Trash unavailable/);assert.equal(failed.stemJob,ident);
+const e=new AudioEngine(),t={id:'restore'},other={id:'other'},a={index:0,track:t,playing:true,stemSlip:'vocal',stems:[false,true,true,true],stemFX:[true,false,false,false]},b={index:1,track:t,playing:false,stemSlip:'off'},c={index:2,track:other,playing:true},calls=[];
+e.stemBuffers.set(t.id,buffers);e.stemBuffers.set(other.id,other);e.stemSlipTracks.set(0,t);e.pause=d=>{calls.push(['pause',d.index]);d.playing=false;};e.clearDeckScratchCache=i=>calls.push(['clear',i]);e.start=async d=>{assert.equal(e.stemBuffers.has(t.id),false);assert.equal(d.stemSlip,'off');assert.equal(e.stemSlipTracks.has(d.index),false);calls.push(['start',d.index]);d.playing=true;};
+await e.restoreFullMix(t,[a,b,c]);assert.deepEqual(calls,[['pause',0],['pause',1],['clear',0],['clear',1],['start',0]]);assert.equal(a.playing,true);assert.equal(b.playing,false);assert.equal(c.playing,true);assert.deepEqual(a.stems,[true,true,true,true]);assert.deepEqual(a.stemFX,[false,false,false,false]);assert.equal(e.stemBuffers.get(other.id),other);
+console.log(JSON.stringify({passed:true,scope:'Actual preparation/engine operation methods with controlled HTTP and playback collaborators; native Trash, actual SCNet and browser audio separate',checks:['Pending Trash operation blocks overlapping preparation and retains loaded buffers until/after ACK','Successful clear removes saved job association; failure retains it; preparing can resume','Full mix restore disarms Stem Slip and invalidates its scratch cache before resuming only previously playing matching decks']}));

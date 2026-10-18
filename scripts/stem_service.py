@@ -121,6 +121,30 @@ class StemJobs:
         with self.lock:
             return self.public(self.jobs[ident]) if ident in self.jobs else None
 
+    def trash(self, ident):
+        from stem_job_cache import IDENT
+        if not isinstance(ident, str) or not IDENT.fullmatch(ident):
+            raise ValueError('Invalid preparation job.')
+        with self.lock:
+            job = self.jobs.get(ident)
+            if not job:
+                return None
+            if job['state'] == 'trashed':
+                return self.public(job)
+            if job['state'] in {'queued', 'running'} or (job.get('process') and job['process'].poll() is None):
+                raise ValueError('Cancel preparation before moving its files to Trash.')
+            directory = JOBS_ROOT / ident
+            if job['directory'] != directory or directory.is_symlink() or JOBS_ROOT.is_symlink() or not directory.is_dir():
+                raise ValueError('Preparation cache folder is unavailable or invalid.')
+            try:
+                from send2trash import send2trash
+            except ImportError as error:
+                raise RuntimeError('Send2Trash is required to move prepared files safely. Files were retained.') from error
+            send2trash(str(directory))
+            job.update(state='trashed', process=None, error=None)
+            job.pop('cache_warning', None)
+            return self.public(job)
+
     def cancel(self, ident):
         process = None
         with self.lock:

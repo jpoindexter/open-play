@@ -25,3 +25,5 @@ Raw audio/logs/receipts/source capsules remain ignored under local-evidence/stem
 ## Remaining scope
 
 Browser prepared/decode state across application restart, explicit cache clear/eviction/UI, legacy migration, fault/disk-pressure/large-cache performance and all model-quality/native/controller/reference acceptance remain open. Completion receipts cover normal service restart; interrupted jobs require a new request. Full110groups/522requirements plus9beta deltas/26release checks remain unaccepted, original prompt/model routing unchanged. Full independent Claude audit unlaunched. The active main service1199 must remain running for desktop preparation; desktop0.1.16 remains prepared for one physical Play test when the human returns.
+
+Current follow-up plan117: [native Trash/regeneration review](STEM_CLEAR_REVIEW.md). Main service is now25079/session8983; prior1199has exited. Historical restart results above remain tied to plan116.

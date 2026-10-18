@@ -1,0 +1,16 @@
+{
+  "port": 18863,
+  "checks": [
+    {
+      "name": "Cross-origin new cache DELETE rejected",
+      "status": 403,
+      "passed": true
+    },
+    {
+      "name": "New cache DELETE without custom header rejected",
+      "status": 403,
+      "passed": true
+    }
+  ],
+  "scope": "Actual HTTP request guards on new cache endpoint; deliberately unknown ID, no file action triggered."
+}

@@ -157,7 +157,7 @@ async function restoreLocalAudio(){
 try{await restoreLocalAudio();}catch(error){state.localAudio.restoreError=error.message;localAudioWarning();}
 
 const smartSync = createSmartSync({engine,state});
-const stemPreparation = createStemPreparation(engine, state.decks);
+const stemPreparation = createStemPreparation(engine, state.decks, {onChange:()=>persist()});
 const stemSlipControls = createStemSlipControls({engine,state,prepare:ensurePreparedStems,render:renderDecks,notify});
 const scratchInputDebug = createScratchInputDebug();
 const deckScratchControls = createDeckScratchControls({engine,state,notify,onEvent:scratchInputDebug?.onEvent});
@@ -208,6 +208,8 @@ const metadataFields = [
   "metadataSources",
   "analysisGainDb",
   "metadataRevision",
+  "stemJob",
+  "stemModel",
 ];
 function trackMetadata(t) {
   return Object.fromEntries(metadataFields.map((k) => [k, t[k]]));

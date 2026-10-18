@@ -1222,18 +1222,21 @@ export function createPanels(a) {
     const t = trackById(s.selected);
     dialog(
       "Stems preparation",
-      `${badge("LOCAL MODEL INFERENCE", true)}<p>Prepare four real sources for ${esc(t?.title || "the selected track")}. Audio stays on this computer. Use the deck's Stems pads to mute sources or apply effects after preparation.</p><label>Separation model <select id="stems-model"><option value="scnet">SCNet large · recommended quality</option><option value="spleeter">Spleeter · faster fallback</option></select></label><div class="panel-controls"><button id="stems-queue" ${!t || stemPreparation.active.has(t.id) ? "disabled" : ""}>Prepare selected</button><button id="stems-cancel">Cancel preparation</button><button id="stems-full">Restore full mix</button></div><p id="stems-state" role="status">${esc(t?.stemState || "Not prepared")}</p><div class="note-box">Real model inference, not studio source tracks. Separation may contain leakage. Prototype limit: 10 minutes / 128 MiB decoded audio. The worker runs on loopback; no account or cloud service is required.</div>`,
+      `${badge("LOCAL MODEL INFERENCE", true)}<p>Prepare four real sources for ${esc(t?.title || "the selected track")}. Audio stays on this computer. Use the deck's Stems pads to mute sources or apply effects after preparation.</p><label>Separation model <select id="stems-model"><option value="scnet">SCNet large · recommended quality</option><option value="spleeter">Spleeter · faster fallback</option></select></label><div class="panel-controls"><button id="stems-queue" ${!t || stemPreparation.active.has(t.id) ? "disabled" : ""}>Prepare selected</button><button id="stems-cancel">Cancel preparation</button><button id="stems-full">Restore full mix</button><button id="stems-clear" ${!t?.stemJob || stemPreparation.active.has(t.id) ? "disabled" : ""}>Move prepared files to Trash</button></div><p class="muted">Moving prepared files to Trash retains the original track and any Stems already loaded for playback. Prepare again to regenerate files. Emptying system Trash is a separate action.</p><p id="stems-state" role="status">${esc(t?.stemState || "Not prepared")}</p><div class="note-box">Real model inference, not studio source tracks. Separation may contain leakage. Prototype limit: 10 minutes / 128 MiB decoded audio. The worker runs on loopback; no account or cloud service is required.</div>`,
       () => {
         const output = $("#stems-state"),
           button = $("#stems-queue"),
-          cancelButton = $("#stems-cancel");
+          cancelButton = $("#stems-cancel"),
+          clearButton = $("#stems-clear");
         const showProgress = (text) => {
           output.textContent = text;
           cancelButton.disabled = text.startsWith("Activating");
+          clearButton.disabled = true;
         };
         const settled = () => {
           button.disabled = false;
           cancelButton.disabled = false;
+          clearButton.disabled = !t?.stemJob || stemPreparation.active.has(t.id);
         };
         const active = t && stemPreparation.active.get(t.id);
         if (active)
@@ -1263,18 +1266,18 @@ export function createPanels(a) {
         $("#stems-full").onclick = async () => {
           if (!t || stemPreparation.active.has(t.id))
             return notify("Cancel preparation before restoring the full mix.");
-          engine.stemBuffers.delete(t.id);
-          for (const d of s.decks.filter((d) => d.track === t)) {
-            const was = d.playing || d.processing;
-            engine.pause(d);
-            d.stems = [true, true, true, true];
-            d.stemFX = [false, false, false, false];
-            if (was) await engine.start(d);
-          }
-          t.stemState = "Original mix · local prepared files retained";
+          try{await engine.restoreFullMix(t,s.decks);}catch(error){notify(error.message);return;}
+          t.stemState = t.stemJob ? "Original mix · local prepared files retained" : "Original mix · no prepared files saved";
           output.textContent = t.stemState;
           renderDecks();
           renderTracks();
+        };
+        clearButton.onclick=async()=>{
+          if(!t)return;
+          clearButton.disabled=true;button.disabled=true;
+          try{await stemPreparation.clearFiles(t);output.textContent=t.stemState;renderTracks();renderDecks();}
+          catch(error){notify(error.message);output.textContent=error.message;}
+          finally{settled();}
         };
       },
     );

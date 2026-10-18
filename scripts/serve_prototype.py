@@ -57,7 +57,13 @@ class ReviewHandler(SimpleHTTPRequestHandler):
         if not self.permitted(mutation=True):
             return
         parts = urlsplit(self.path).path.strip('/').split('/')
-        result = JOBS.cancel(parts[2]) if len(parts) == 3 and parts[:2] == ['api', 'stems'] else None
+        try:
+            if len(parts) == 4 and parts[:2] == ['api', 'stems'] and parts[3] == 'cache':
+                result = JOBS.trash(parts[2])
+            else:
+                result = JOBS.cancel(parts[2]) if len(parts) == 3 and parts[:2] == ['api', 'stems'] else None
+        except (OSError, ValueError, RuntimeError) as error:
+            return self.json_response({'error': str(error)}, 400)
         self.json_response(result or {'error': 'Job not found'}, 200 if result else 404)
 
     def do_GET(self):

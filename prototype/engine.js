@@ -1128,6 +1128,16 @@ export class AudioEngine {
       if (was) await this.start(d);
     }
   }
+  async restoreFullMix(track,decks=[]){
+    const loaded=decks.filter(d=>d.track===track),resume=loaded.map(d=>({deck:d,playing:!!(d.playing||d.processing)}));
+    for(const d of loaded)this.pause(d);
+    this.stemBuffers.delete(track.id);
+    for(const d of loaded){
+      d.stems=[true,true,true,true];d.stemFX=[false,false,false,false];d.stemSlip='off';d.stemSlipPhase='idle';
+      this.stemSlipTracks.delete(d.index);this.clearDeckScratchCache(d.index);
+    }
+    for(const {deck,playing}of resume)if(playing&&deck.track===track)await this.start(deck);
+  }
   ensureStemMonitor(index) {
     const n=this.nodes[index];
     if(!this.audioMonitor||!n.cueTap||n.stemMonitor)return;

@@ -1,0 +1,235 @@
+{
+  "startedAt": "2026-10-18T03:44:43.213Z",
+  "completed": true,
+  "criteria": {
+    "frequencyErrorHz": 1,
+    "minimumRMS": 0.005,
+    "cacheMoveMaximumStateJumpSeconds": 0.02
+  },
+  "scope": "Actual app Prepare/Play/Stem Slip/Move prepared files to Trash/Restore full mix/Prepare again, real local SCNet on owned eight-second tones. Native macOS Trash only for this newly created generated cache, not original library audio. Browser/API/audio evidence, not native16/controller/quality/reference acceptance.",
+  "windows": [
+    {
+      "name": "before-trash",
+      "from": 0.15,
+      "to": 0.45
+    },
+    {
+      "name": "after-trash",
+      "from": 0.7885487528344669,
+      "to": 1.0885487528344668
+    },
+    {
+      "name": "full-mix-return",
+      "from": 1.3226077097505669,
+      "to": 1.622607709750567
+    },
+    {
+      "name": "regenerated",
+      "from": 10.482879818594105,
+      "to": 10.782879818594104
+    }
+  ],
+  "checks": [
+    "Real native Trash removes only generated prepared job; same loaded voice and canonical clock continue",
+    "Restore full mix exits armed Stem Slip and resumes original loop without requiring separated buffers",
+    "Prepare again executes a new real SCNet job; original decoded audio and library track retained",
+    "Whole finite master and four fixed source-carrier windows before/after Trash, full-mix restore and regeneration"
+  ],
+  "errors": [],
+  "sourceBefore": {
+    "app.js": "69a7dbf931855c0402305fb56b4aa7242a1a88f61a348adbb7d27afd49537cda",
+    "panels.js": "e841c9ac87d9e580527bd73a6dc774f828c99599f58567cb12765a437d528159",
+    "stems.js": "02dd493dc72208959d235f776908e191ef00168c7f5b91cbacd02a60f2ab7643",
+    "engine.js": "c05a925316b172b64b9412fb291704b7670afd129f6870cc1477af32dff67dd7",
+    "stem-slip.js": "36b92c90a8327eb1e2eec23c9d5fe6666d6c71384388e6ba2d42ad6d7537eb31",
+    "stem-slip-kernel.js": "0c27e8506c9ed4874bcb36614fea2d2c0238ea22bb6a1be52d509fcc21fbe09a",
+    "stem-clear-harness.js": "787bec85c52dd682c82fae3cadd60dd8716d778456fc90ccd06a53c0d011ba2d"
+  },
+  "originalPCMHash": "f04f783609b18b9e0de8bd383c307c1e66412de5ec0494bcb7929a329dd37f37",
+  "firstJob": "dd7f4a2b27e3482aba2331c918674b24",
+  "firstAPI": {
+    "id": "dd7f4a2b27e3482aba2331c918674b24",
+    "state": "complete",
+    "stage": "complete",
+    "progress": 1,
+    "error": null,
+    "model": "SCNet-large official",
+    "duration": 8,
+    "timing": {
+      "model_load_seconds": 1.2478342910762876,
+      "inference_seconds": 7.695819332962856,
+      "total_seconds": 9.061808083206415,
+      "realtime_factor": 0.961977416620357
+    },
+    "license": "MIT_explicit_owner_confirmation_SCNet_issue_35",
+    "stems": [
+      {
+        "name": "drums",
+        "url": "/api/stems/dd7f4a2b27e3482aba2331c918674b24/drums.wav"
+      },
+      {
+        "name": "bass",
+        "url": "/api/stems/dd7f4a2b27e3482aba2331c918674b24/bass.wav"
+      },
+      {
+        "name": "other",
+        "url": "/api/stems/dd7f4a2b27e3482aba2331c918674b24/other.wav"
+      },
+      {
+        "name": "vocals",
+        "url": "/api/stems/dd7f4a2b27e3482aba2331c918674b24/vocals.wav"
+      }
+    ]
+  },
+  "recordStart": 9.885895691609978,
+  "clear": {
+    "before": {
+      "at": 10.408344671201814,
+      "position": 1.674988662131875
+    },
+    "after": {
+      "at": 10.518639455782314,
+      "position": 1.7852834467124388
+    },
+    "sameVoice": true,
+    "loadedStemsKept": true,
+    "playing": true,
+    "stemSlip": "vocal",
+    "buttonDisabled": true,
+    "stateText": "Prepared files moved to Trash \u00b7 loaded Stems remain available"
+  },
+  "trashedAPI": {
+    "id": "dd7f4a2b27e3482aba2331c918674b24",
+    "state": "trashed",
+    "stage": "trashed",
+    "progress": 0,
+    "error": null
+  },
+  "restore": {
+    "playing": true,
+    "stemSlip": "off",
+    "hasPreparedBuffers": false,
+    "hasSplitVoice": false,
+    "loop": true
+  },
+  "secondJob": "a2877adfbffa4ece8ec544451917a589",
+  "secondAPI": {
+    "id": "a2877adfbffa4ece8ec544451917a589",
+    "state": "complete",
+    "stage": "complete",
+    "progress": 1,
+    "error": null,
+    "model": "SCNet-large official",
+    "duration": 8,
+    "timing": {
+      "model_load_seconds": 0.8934679999947548,
+      "inference_seconds": 7.188528666971251,
+      "total_seconds": 8.151356749935076,
+      "realtime_factor": 0.8985660833714064
+    },
+    "license": "MIT_explicit_owner_confirmation_SCNet_issue_35",
+    "stems": [
+      {
+        "name": "drums",
+        "url": "/api/stems/a2877adfbffa4ece8ec544451917a589/drums.wav"
+      },
+      {
+        "name": "bass",
+        "url": "/api/stems/a2877adfbffa4ece8ec544451917a589/bass.wav"
+      },
+      {
+        "name": "other",
+        "url": "/api/stems/a2877adfbffa4ece8ec544451917a589/other.wav"
+      },
+      {
+        "name": "vocals",
+        "url": "/api/stems/a2877adfbffa4ece8ec544451917a589/vocals.wav"
+      }
+    ]
+  },
+  "originalPCMUnchanged": true,
+  "recording": {
+    "bytes": 174601,
+    "format": "audio/webm;codecs=opus",
+    "sha256": "6db3c2a5ebabeefb4bc5ce861391b2136ed606412dbd65e0390bbf266a20fbfc"
+  },
+  "decoded": {
+    "duration": 10.799977324263038,
+    "frames": 476279,
+    "sampleRate": 44100,
+    "channels": 2
+  },
+  "audio": [
+    {
+      "name": "before-trash",
+      "from": 0.15,
+      "to": 0.45,
+      "channels": [
+        {
+          "rms": 0.037327528110253326,
+          "hz": 330.0013348417697
+        },
+        {
+          "rms": 0.03736866391657687,
+          "hz": 550.0026680953304
+        }
+      ]
+    },
+    {
+      "name": "after-trash",
+      "from": 0.7885487528344669,
+      "to": 1.0885487528344668,
+      "channels": [
+        {
+          "rms": 0.03733857752089366,
+          "hz": 329.99986865825656
+        },
+        {
+          "rms": 0.03735633068807293,
+          "hz": 549.9993870119555
+        }
+      ]
+    },
+    {
+      "name": "full-mix-return",
+      "from": 1.3226077097505669,
+      "to": 1.622607709750567,
+      "channels": [
+        {
+          "rms": 0.03731213650512954,
+          "hz": 329.9999065340878
+        },
+        {
+          "rms": 0.037412735133245,
+          "hz": 549.9986745273943
+        }
+      ]
+    },
+    {
+      "name": "regenerated",
+      "from": 10.482879818594105,
+      "to": 10.782879818594104,
+      "channels": [
+        {
+          "rms": 0.03731260432299663,
+          "hz": 329.9997927799157
+        },
+        {
+          "rms": 0.03740033193066082,
+          "hz": 549.9939083135957
+        }
+      ]
+    }
+  ],
+  "sourceAfter": {
+    "app.js": "69a7dbf931855c0402305fb56b4aa7242a1a88f61a348adbb7d27afd49537cda",
+    "panels.js": "e841c9ac87d9e580527bd73a6dc774f828c99599f58567cb12765a437d528159",
+    "stems.js": "02dd493dc72208959d235f776908e191ef00168c7f5b91cbacd02a60f2ab7643",
+    "engine.js": "c05a925316b172b64b9412fb291704b7670afd129f6870cc1477af32dff67dd7",
+    "stem-slip.js": "36b92c90a8327eb1e2eec23c9d5fe6666d6c71384388e6ba2d42ad6d7537eb31",
+    "stem-slip-kernel.js": "0c27e8506c9ed4874bcb36614fea2d2c0238ea22bb6a1be52d509fcc21fbe09a",
+    "stem-clear-harness.js": "787bec85c52dd682c82fae3cadd60dd8716d778456fc90ccd06a53c0d011ba2d"
+  },
+  "sourceStable": true,
+  "finishedAt": "2026-10-18T03:45:03.994Z"
+}

@@ -19,8 +19,9 @@ async function request(url, options) {
   if (!response.ok) throw new Error(value.error || 'Local separation service unavailable.');
   return value;
 }
-export function createStemPreparation(engine, decks) {
+export function createStemPreparation(engine, decks, {onChange = () => {}} = {}) {
   const active = new Map();
+  const clearing = new Set();
   async function cancel(track) {
     const job = active.get(track.id);
     if (!job) return;
@@ -38,6 +39,7 @@ export function createStemPreparation(engine, decks) {
     try { update(message); } catch {}
   }
   function prepare(track, update = () => {}, backend = "scnet") {
+    if(clearing.has(track.id))return Promise.reject(new Error('Prepared files are moving to Trash. Wait before preparing again.'));
     const existing = active.get(track.id);
     if (existing) {
       if (existing.backend !== backend)
@@ -97,6 +99,8 @@ export function createStemPreparation(engine, decks) {
       status('Activating separated audio…');
       await engine.attachStems(track, buffers, decks);
       track.stemModel = result.model;
+      track.stemJob = result.id;
+      onChange(track);
       status(`Ready · ${result.model} · four real audio sources`);
       return result;
     } catch (error) {
@@ -107,5 +111,20 @@ export function createStemPreparation(engine, decks) {
       job.subscribers.clear();
     }
   }
-  return {prepare, cancel, active};
+  async function clearFiles(track) {
+    if (active.has(track.id)) throw new Error('Cancel preparation before moving prepared files to Trash.');
+    if(clearing.has(track.id))throw new Error('Prepared files are already moving to Trash.');
+    if (!/^[a-f0-9]{32}$/.test(track.stemJob || '')) throw new Error('No saved preparation job is associated with this track. Prepare it first.');
+    const ident=track.stemJob;
+    clearing.add(track.id);
+    try{
+    const result=await request(`/api/stems/${ident}/cache`, {method:'DELETE', headers});
+    if(result.id!==ident||result.state!=='trashed')throw new Error('The prepared files were not confirmed in Trash.');
+    if(track.stemJob===ident)delete track.stemJob;
+    track.stemState=engine.stemBuffers.has(track.id)?'Prepared files moved to Trash · loaded Stems remain available':'Prepared files moved to Trash · prepare again to regenerate';
+    onChange(track);
+    return result;
+    }finally{clearing.delete(track.id);}
+  }
+  return {prepare, cancel, clearFiles, active};
 }
