@@ -44,9 +44,9 @@ Planning-table statuses are a dated baseline. Current scoped implementation evid
 | FX-002 | Tempo-synced effect timing | gpt-6-astra / high | claude-opus-5 / high | Research pending |
 | SMP-001 | Sampler slots and banks | gpt-6.1-sol / high | claude-sonnet-5 / medium | Research pending |
 | SMP-002 | Sampler audio modes and routing | gpt-6-astra / high | claude-opus-5 / high | Research pending |
-| STM-001 | Local stem separation | gpt-6.1-sol / high | claude-sonnet-5 / high | Actual mixed Prepare/API/cache/decode and final-handover controls/audio checked; inference quality/resources/full acceptance open (plan149) |
+| STM-001 | Local stem separation | gpt-6.1-sol / high | claude-sonnet-5 / high | Four-WASM memory-query components checked; actual four-deck browser resource report unrecovered, quality/CPU/full acceptance open (plan150) |
 | STM-002 | Stem mute/solo/mix controls | gpt-6-astra / high | claude-opus-5 / high | Research pending |
-| STM-003 | Stem cache/cancel/fallback | gpt-6.1-sol / xhigh | claude-opus-5 / high | Actual pre-commit Cancel and committed-handover disabled controls/late-cancel guard checked; resources/other caches/context/reopen open (plan149) |
+| STM-003 | Stem cache/cancel/fallback | gpt-6.1-sol / xhigh | claude-opus-5 / high | Memory-query/drop/dispose components checked; actual browser resource/export recovery, other caches/context/reopen open (plan150) |
 | REC-001 | Record the actual master mix | gpt-6-astra / high | claude-opus-5 / high | Research pending |
 | REC-002 | Recording limits and recovery | gpt-6.1-sol / xhigh | claude-opus-5 / high | Research pending |
 | AUD-001 | Output/input device selection | gpt-6-astra / xhigh | claude-opus-5 / xhigh | Research pending |

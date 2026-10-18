@@ -51,6 +51,15 @@ function registerWorkletProcessor(Module, audioNodeKey) {
 			}];
 			
 			let remoteMethods = {
+				resourceSnapshot: () => {
+					const buffers = new Set(this.audioBuffers.flat(1).map(channel => channel.buffer));
+					const memory = this.wasmModule?.exports?.memory?.buffer || this.wasmModule?.HEAP8?.buffer;
+					return {frame:currentFrame,sampleRate,channels:this.channels,
+						retainedChunks:this.audioBuffers.length,startFrame:this.audioBuffersStart,endFrame:this.audioBuffersEnd,
+						retainedPCMViewBytes:this.audioBuffers.reduce((sum,chunk)=>sum+chunk.reduce((n,channel)=>n+channel.byteLength,0),0),
+						uniqueRetainedArrayBufferBytes:[...buffers].reduce((sum,buffer)=>sum+buffer.byteLength,0),
+						wasmLinearMemoryCapacityBytes:memory?.byteLength ?? null,timeMapSegments:this.timeMap.length};
+				},
 				configure: config => {
 					Object.assign(this.config, config);
 					this.configure();
