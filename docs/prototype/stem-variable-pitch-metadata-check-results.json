@@ -1,0 +1,216 @@
+{
+  "startedAt": "2026-10-18T01:23:08.922Z",
+  "completed": false,
+  "checks": [],
+  "errors": [
+    {
+      "message": "Initial resampled factor is wrong",
+      "stack": "Error: Initial resampled factor is wrong\n    at assert (http://127.0.0.1:18855/prototype/stem-variable-pitch-harness.js:2:34)\n    at HTMLButtonElement.run (http://127.0.0.1:18855/prototype/stem-variable-pitch-harness.js:48:252)"
+    }
+  ],
+  "events": [],
+  "criteria": {
+    "maximumCancellationRatio": 0.01,
+    "maximumBassLeakRatio": 0.01,
+    "minimumCarrierAmplitude": 0.005,
+    "minimumMelody550Ratio": 0.5,
+    "maximumMutedRMS": 1e-05,
+    "minimumDelayTailRMS": 0.0005
+  },
+  "fixture": {
+    "sampleRate": 48000,
+    "duration": 30,
+    "grid": 0.13,
+    "bpm": 120,
+    "markers": [
+      {
+        "time": 4.13,
+        "bpm": 150
+      },
+      {
+        "time": 7.33,
+        "bpm": 90
+      }
+    ],
+    "components": [
+      "original=sum of four stored stem buffers",
+      "Vocal=A550Hz amplitude.08",
+      "Melody=-A550Hz+B330Hz amplitude.06",
+      "Bass=110Hz amplitude.04",
+      "Drums=independently timed3000Hz bursts"
+    ],
+    "stereoPhaseOffsets": [
+      0,
+      0.45
+    ]
+  },
+  "scope": "Actual five-source variable-pitch mapped resampling with keylock OFF across source-tempo map, then normal Key+enables keylock/replaces warped voice, Stem pad mutes and normal enabled Delay. Whole master checks shifted cancellation, dry Melody positive control, real wet tail after source mute and late decay. Owned prepared fixtures; no new model inference, separation/music/native/physical/full-reference acceptance.",
+  "sourceBefore": {
+    "app.js": "266c98f7be3fc6c543b0ae86f2f070b2015afa73a108206bb498db8dd003f588",
+    "engine.js": "f7038cb2085bfa78a42a7240c38e4bc04ddd6ef9e22aef368aea9f128c4545cf",
+    "panels.js": "4a4b4c544f07140758cfd8f45b00f774dea588f881d6ed0f24c0e19bc1ff02fb",
+    "beatgrid.js": "af239aef231c9d089bf2352b8f548a5f71f734d6cf753986f17f57b3999477b9",
+    "smart-sync.js": "a8998b8727ae144413272163a2c438f3d8bcd92f634d5bd1872e5ac49a509f61",
+    "stem-variable-pitch-harness.js": "e11df86adceecf1997e3022db6a9eade28b4ae1c7ce6921ba5563248fc5bd18d",
+    "keylock-shadow-live.js": "863aba35c67736765bc86db10ee1920d4c1a67f9915bc8c5d2d8454d270a95cc",
+    "pcm-resample.js": "8789e7cfc543c393830ad04e2d56e3359786eb6a4473ff08edda1c899fc19ae2",
+    "pitch-time-map.js": "2eb6a2ea7d7c6dde94defb921f90343ea4d4ea98c025722f2e570cc0f8c62252",
+    "effects.js": "0185d8adfa94f9a549afbfb9af8b8657388bff8d946cdf3b525da933c60fe0a6",
+    "vendor/signalsmith-stretch/SignalsmithStretch-open-play-history.mjs": "1f470f846a993cc750ee2e111817adb08879493025c7322eadc8cf98323e4ef8"
+  },
+  "physicalOutputMuted": true,
+  "processor": {
+    "resamplePitch": true,
+    "maxPCMBytes": 536870912,
+    "followMinimumLeadSeconds": 0.04,
+    "byteAccounting": "Acknowledged retained PCM and in-flight chunk copies only; excludes decoded inputs, SRC tables and opaque WASM heaps.",
+    "disposed": false,
+    "state": {
+      "when": 0.2438095238095238,
+      "position": 0,
+      "playing": false,
+      "rate": 1,
+      "keylock": false,
+      "semitones": 2,
+      "effectiveSemitones": 2
+    },
+    "sourceGeometry": [
+      {
+        "index": 0,
+        "sampleRate": 48000,
+        "frames": 1440000,
+        "channels": 2,
+        "duration": 30,
+        "paddedTailSeconds": 0,
+        "trimmedTailSeconds": 0,
+        "decodedBytes": 11520000
+      },
+      {
+        "index": 1,
+        "sampleRate": 48000,
+        "frames": 1440000,
+        "channels": 2,
+        "duration": 30,
+        "paddedTailSeconds": 0,
+        "trimmedTailSeconds": 0,
+        "decodedBytes": 11520000
+      },
+      {
+        "index": 2,
+        "sampleRate": 48000,
+        "frames": 1440000,
+        "channels": 2,
+        "duration": 30,
+        "paddedTailSeconds": 0,
+        "trimmedTailSeconds": 0,
+        "decodedBytes": 11520000
+      },
+      {
+        "index": 3,
+        "sampleRate": 48000,
+        "frames": 1440000,
+        "channels": 2,
+        "duration": 30,
+        "paddedTailSeconds": 0,
+        "trimmedTailSeconds": 0,
+        "decodedBytes": 11520000
+      },
+      {
+        "index": 4,
+        "sampleRate": 48000,
+        "frames": 1440000,
+        "channels": 2,
+        "duration": 30,
+        "paddedTailSeconds": 0,
+        "trimmedTailSeconds": 0,
+        "decodedBytes": 11520000
+      }
+    ],
+    "groups": [
+      {
+        "id": 1,
+        "pitchMap": [
+          {
+            "position": 0,
+            "prepared": 0,
+            "factor": 1.122462048309373
+          },
+          {
+            "position": 4.13,
+            "prepared": 3.679411705919601,
+            "factor": 0.8979696386474985
+          },
+          {
+            "position": 7.33,
+            "prepared": 7.2430065784809585,
+            "factor": 1.4966160644124973
+          }
+        ],
+        "pitchSemitones": 2.0000000000000004,
+        "pitchFactor": 1.122462048309373,
+        "origin": 0,
+        "start": 0,
+        "end": 8.000029578370581,
+        "nodeCount": 1,
+        "processorChannels": 10,
+        "sourceOutputs": 5,
+        "retainedPCMBytes": 13566400,
+        "retainedChunks": 18,
+        "latency": 0.12,
+        "role": "selected"
+      }
+    ],
+    "retainedPCMBytes": 13566400,
+    "inFlightPCMBytes": 0,
+    "decodedBytes": 57600000,
+    "policy": {
+      "direction": "forward",
+      "normalMinimumLead": "queried group latency plus2 render quanta",
+      "followMinimumLeadSeconds": 0.04,
+      "followOwner": "currently active forward owner only",
+      "followCoverage": "required history must already be prepared; reject without replacement",
+      "rate": [
+        0.25,
+        4
+      ],
+      "effectiveSemitones": [
+        -24,
+        24
+      ],
+      "chunkSeconds": 0.5,
+      "requiredPrerollSeconds": 1,
+      "retentionPrerollSeconds": 2,
+      "retentionHysteresisSeconds": 1,
+      "lookaheadSeconds": 8,
+      "driverMs": 50,
+      "crossfadeSeconds": 0.01,
+      "srcTaps": 32,
+      "srcPhases": 1024,
+      "decodedSources": "Whole decoded AudioBuffers remain caller-owned; only processor PCM copies are windowed.",
+      "unsupported": [
+        "reverse",
+        "loop",
+        "Stem Slip",
+        "incremental compressed-file decoding"
+      ],
+      "quality": "Independent32-tap windowed-sinc normalization and10ms group crossfade; vendor sonic equivalence and artifact-free transitions are unverified."
+    },
+    "lastError": null
+  },
+  "sourceAfter": {
+    "app.js": "266c98f7be3fc6c543b0ae86f2f070b2015afa73a108206bb498db8dd003f588",
+    "engine.js": "f7038cb2085bfa78a42a7240c38e4bc04ddd6ef9e22aef368aea9f128c4545cf",
+    "panels.js": "4a4b4c544f07140758cfd8f45b00f774dea588f881d6ed0f24c0e19bc1ff02fb",
+    "beatgrid.js": "af239aef231c9d089bf2352b8f548a5f71f734d6cf753986f17f57b3999477b9",
+    "smart-sync.js": "a8998b8727ae144413272163a2c438f3d8bcd92f634d5bd1872e5ac49a509f61",
+    "stem-variable-pitch-harness.js": "e11df86adceecf1997e3022db6a9eade28b4ae1c7ce6921ba5563248fc5bd18d",
+    "keylock-shadow-live.js": "863aba35c67736765bc86db10ee1920d4c1a67f9915bc8c5d2d8454d270a95cc",
+    "pcm-resample.js": "8789e7cfc543c393830ad04e2d56e3359786eb6a4473ff08edda1c899fc19ae2",
+    "pitch-time-map.js": "2eb6a2ea7d7c6dde94defb921f90343ea4d4ea98c025722f2e570cc0f8c62252",
+    "effects.js": "0185d8adfa94f9a549afbfb9af8b8657388bff8d946cdf3b525da933c60fe0a6",
+    "vendor/signalsmith-stretch/SignalsmithStretch-open-play-history.mjs": "1f470f846a993cc750ee2e111817adb08879493025c7322eadc8cf98323e4ef8"
+  },
+  "sourceStable": true,
+  "finishedAt": "2026-10-18T01:23:09.660Z",
+  "interpretation": "Harness metadata equality failed before recording:12*log2(2**(2/12)) is2.0000000000000004. Pitch-map factors are correct; use1e-9 numerical metadata equality. Audio1Hz/10ms/1percent gates unchanged."
+}

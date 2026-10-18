@@ -339,7 +339,8 @@ export class AudioEngine {
       if (!current()) return;
       const prospectiveGrid=this.onGridTimeline?.(d,{position:this.position(d),when:this.ctx.currentTime});
       adapter = await this.createForwardKeylock({buffers, position: this.position(d), rate: d.rate,
-        resamplePitch:!!d.keylock||!prospectiveGrid,
+        resamplePitch:true,
+        pitchRateMap:prospectiveGrid?[{position:0,rate:prospectiveGrid.bpm/prospectiveGrid.grid[0].bpm},...prospectiveGrid.grid.slice(1).map(node=>({position:node.time,rate:prospectiveGrid.bpm/node.bpm}))]:null,
         keylock: !!d.keylock, semitones: d.keyShift || 0, signal: controller.signal,
         onEvent: event => {
           const shadow=this.deckScratchShadows.get(d.index);

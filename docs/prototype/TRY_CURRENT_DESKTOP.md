@@ -15,3 +15,5 @@ All 29 declared served modules match actual ASAR hashes with no-store. Source: *
 Previous 0.1.14 remains available with **Start Open Play Playback Test 0.1.14.command** and its [historical guide](TRY_PLAYBACK_DESKTOP_0.1.14.md). Earlier versions remain too. Close one playback test before opening another; they share the profile/port 18775. Stable pre-switch profile backup: local-evidence/profile-backups/playback-before-0.1.15/.
 
 [Native observations](desktop-0.1.15-playback-observation.json) · [Package receipt](desktop-0.1.15-playback-package.json) · [Full plan](../../FULL_BUILD_PLAN.md) · [Claude handoff](../../handoffs/current.md).
+
+Browser-source plan106 adds variable-pitch warped resampling and an explicit-anchor refill correction. Those changes are outside this frozen0.1.15package; current native/controller testing retains the scope above.

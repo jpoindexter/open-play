@@ -1,4 +1,5 @@
 import {copyPCMChunk} from './pcm-resample.js';
+import {createPitchTimeMap} from './pitch-time-map.js';
 // Forward browser keylock adapter; independent ownership/windowing around Signalsmith.
 // Derived from retention clone SHA256 16707a8f446a503eff022528461ff758b0f47031e34064241bf02d085cd6d9e4.
 // Normal scheduling keeps queried latency+2quanta; only explicit active followSeek uses40ms.
@@ -23,14 +24,15 @@ export async function copyKeylockChunk(buffer,sampleRate,startFrame,frameCount,o
 function normalize(state){const rate=finite(state.rate,'rate'),semitones=finite(state.semitones,'semitones');if(rate<.25||rate>4)throw new RangeError('Current forward prototype rate policy is.25..4');if(semitones< -24||semitones>24)throw new RangeError('Current requested key-shift policy is±24semitones');const effectiveSemitones=semitones+(state.keylock?0:12*Math.log2(rate));if(effectiveSemitones< -24||effectiveSemitones>24)throw new RangeError('Current effective-transposition policy is±24semitones');return{rate,keylock:!!state.keylock,semitones,effectiveSemitones};}
 function gainAt(param,value,when){param.cancelScheduledValues(when);param.setValueAtTime(value,when);}
 
-export async function createLiveKeylock(context,{buffers,position=0,rate=1,keylock=true,semitones=0,signal,onEvent=()=>{},resamplePitch=false,maxPCMBytes=512*1024*1024}={}){
- const adapter=new LiveKeylock(context,{buffers,position,rate,keylock,semitones,signal,onEvent,resamplePitch,maxPCMBytes});try{await adapter.prepare();adapter.assertOwner();return adapter;}catch(error){await adapter.dispose().catch(()=>{});throw error;}
+export async function createLiveKeylock(context,{buffers,position=0,rate=1,keylock=true,semitones=0,signal,onEvent=()=>{},resamplePitch=false,pitchRateMap=null,maxPCMBytes=512*1024*1024}={}){
+ const adapter=new LiveKeylock(context,{buffers,position,rate,keylock,semitones,signal,onEvent,resamplePitch,pitchRateMap,maxPCMBytes});try{await adapter.prepare();adapter.assertOwner();return adapter;}catch(error){await adapter.dispose().catch(()=>{});throw error;}
 }
 class LiveKeylock{
- constructor(context,{buffers,position,rate,keylock,semitones,signal,onEvent,resamplePitch,maxPCMBytes}){
+ constructor(context,{buffers,position,rate,keylock,semitones,signal,onEvent,resamplePitch,pitchRateMap,maxPCMBytes}){
   if(!context?.createGain||!Number.isFinite(context.sampleRate)||context.sampleRate<=0)throw new TypeError('A usable AudioContext is required');
   if(!Array.isArray(buffers)||(buffers.length!==1&&buffers.length!==5))throw new RangeError('Supply original only or all5 positional original/stem buffers');
   if(!Number.isSafeInteger(maxPCMBytes)||maxPCMBytes<1)throw new RangeError('Invalid live PCM budget');this.maxPCMBytes=maxPCMBytes;this.resamplePitch=!!resamplePitch;
+  this.pitchRateMap=pitchRateMap?.map(point=>({...point}));
   this.context=context;this.sources=buffers.map(geometry);this.duration=this.sources[0].duration;this.sampleRate=context.sampleRate;this.chunkFrames=Math.max(1,Math.round(this.sampleRate*CHUNK_SECONDS));this.durationFrames=Math.ceil(this.duration*this.sampleRate);this.onEvent=onEvent;this.controller=new AbortController();this.signal=this.controller.signal;this.ownerSignal=signal;this.ownerAbort=()=>this.dispose().catch(()=>{});this.disposed=false;this.revision=0;this.pending=null;this.serial=Promise.resolve();this.groupSequence=0;this.groups=new Set();this.active=null;this.retiring=null;this.retirementPromise=null;this.timer=null;this.driverBusy=false;this.disposePromise=null;this.lastError=null;this.ended=false;this.inFlightPCMBytes=0;this.initialState=normalize({rate,keylock,semitones});this.initialPosition=this.validPosition(position);this.clock=[{when:context.currentTime,position:this.initialPosition,playing:false,...this.initialState}];
   if(this.sources.length===5){const stems=this.sources.slice(1),first=stems[0];if(stems.some(s=>s.sampleRate!==first.sampleRate||s.length!==first.length||Math.abs(s.duration-this.duration)>.1+1e-9))throw new RangeError('Prepared stems must share sample rate/length and stay within.1s of original duration');}
   this.sourceGeometry=this.sources.map((s,index)=>({index,sampleRate:s.sampleRate,frames:s.length,channels:s.numberOfChannels,duration:s.duration,paddedTailSeconds:Math.max(0,this.duration-s.duration),trimmedTailSeconds:Math.max(0,s.duration-this.duration),decodedBytes:s.length*s.numberOfChannels*4}));
@@ -48,7 +50,10 @@ class LiveKeylock{
  addClock(segments,state){return this.pruneClock([...segments.filter(s=>s.when<state.when),state]);}
  checkGroup(group){this.assertOwner();alive(group.controller.signal);if(!this.groups.has(group))throw abortError();}
  async newGroup(position,state,operation){
-  this.assertOwner();const controller=new AbortController(),abort=()=>controller.abort();this.signal.addEventListener('abort',abort,{once:true});const group={id:++this.groupSequence,controller,ownerDetach:()=>this.signal.removeEventListener('abort',abort),nodes:[],gains:[],routingNodes:[],chunks:[],pitchSemitones:this.resamplePitch?state.effectiveSemitones:0,pitchFactor:this.resamplePitch?2**(state.effectiveSemitones/12):1,pitchEndFrame:0,originFrame:Math.max(0,Math.floor((position-RETENTION_PREROLL_SECONDS)*this.sampleRate/this.chunkFrames)*this.chunkFrames),endFrame:0,startFrame:0,latency:0,segments:[{when:this.context.currentTime,position,playing:false,...state}],refill:null,fillSerial:Promise.resolve(),disposePromise:null};group.startFrame=group.endFrame=group.originFrame;this.groups.add(group);this.emit('preparing',{group:group.id,position,origin:group.originFrame/this.sampleRate});
+  this.assertOwner();const pitchMap=this.resamplePitch&&!state.keylock&&this.pitchRateMap?createPitchTimeMap(this.pitchRateMap.map(point=>({position:point.position,factor:point.rate*2**(state.semitones/12)})),this.duration):null;const controller=new AbortController(),abort=()=>controller.abort();this.signal.addEventListener('abort',abort,{once:true});const group={id:++this.groupSequence,controller,ownerDetach:()=>this.signal.removeEventListener('abort',abort),nodes:[],gains:[],routingNodes:[],chunks:[],pitchSemitones:this.resamplePitch?state.effectiveSemitones:0,pitchFactor:this.resamplePitch?2**(state.effectiveSemitones/12):1,pitchEndFrame:0,originFrame:Math.max(0,Math.floor((position-RETENTION_PREROLL_SECONDS)*this.sampleRate/this.chunkFrames)*this.chunkFrames),endFrame:0,startFrame:0,latency:0,segments:[{when:this.context.currentTime,position,playing:false,...state}],refill:null,fillSerial:Promise.resolve(),disposePromise:null};group.pitchMap=pitchMap;
+  group.mapSemitones=state.semitones;group.mapKeylock=state.keylock;
+  if(group.pitchMap){group.pitchFactor=group.pitchMap.factorAt(position);group.pitchSemitones=12*Math.log2(group.pitchFactor);group.preparedOrigin=group.pitchMap.preparedAt(group.originFrame/this.sampleRate);}
+  group.startFrame=group.endFrame=group.originFrame;this.groups.add(group);this.emit('preparing',{group:group.id,position,origin:group.originFrame/this.sampleRate});
   const cancelPreparation=()=>controller.abort();if(operation){operation.group=group;operation.controller.signal.addEventListener('abort',cancelPreparation,{once:true});group.detachOperation=()=>operation.controller.signal.removeEventListener('abort',cancelPreparation);}
   try{
    this.checkGroup(group);
@@ -73,6 +78,7 @@ class LiveKeylock{
  }
  async fill(group,position){const previous=group.fillSerial;const pending=previous.catch(()=>{}).then(()=>this.fillWindow(group,position));group.fillSerial=pending;return pending;}
  async fillWindow(group,position){
+  if(group.pitchMap)return this.fillMappedWindow(group,position);
   if(group.pitchFactor!==1)return this.fillResampledWindow(group,position);
   this.checkGroup(group);const target=Math.min(this.durationFrames,Math.ceil((position+LOOKAHEAD_SECONDS)*this.sampleRate/this.chunkFrames)*this.chunkFrames);
   const keep=Math.max(group.originFrame,Math.floor((position-RETENTION_PREROLL_SECONDS)*this.sampleRate/this.chunkFrames)*this.chunkFrames);if(keep>group.startFrame){const before=(keep-group.originFrame)/this.sampleRate;const extents=await Promise.all(group.nodes.map(node=>node.dropBuffers(before)));this.checkGroup(group);const first=extents[0];if(extents.some(e=>e.start!==first.start||e.end!==first.end))throw Error('Positional source windows lost alignment during drop');group.startFrame=group.originFrame+Math.round(first.start*this.sampleRate);group.chunks=group.chunks.filter(chunk=>chunk.end>group.startFrame);}
@@ -116,6 +122,37 @@ class LiveKeylock{
   }
  }
 
+ async fillMappedWindow(group,position){
+  this.checkGroup(group);const map=group.pitchMap,sr=this.sampleRate,origin=group.preparedOrigin;
+  const targetOriginal=Math.min(this.durationFrames,Math.ceil((position+LOOKAHEAD_SECONDS)*sr/this.chunkFrames)*this.chunkFrames);
+  const target=Math.ceil((map.preparedAt(targetOriginal/sr)-origin)*sr);
+  const keep=Math.max(group.originFrame,Math.floor((position-RETENTION_PREROLL_SECONDS)*sr/this.chunkFrames)*this.chunkFrames);
+  if(keep>group.startFrame){
+   const before=Math.floor((map.preparedAt(keep/sr)-origin)*sr)/sr;
+   const extents=await Promise.all(group.nodes.map(node=>node.dropBuffers(before)));this.checkGroup(group);const first=extents[0];
+   if(extents.some(e=>e.start!==first.start||e.end!==first.end))throw Error('Mapped source windows lost alignment');
+   group.startFrame=map.sourceAt(origin+first.start)*sr;group.chunks=group.chunks.filter(c=>c.end>group.startFrame);
+  }
+  while(group.pitchEndFrame<target){
+   this.checkGroup(group);const start=group.pitchEndFrame,segment=map.preparedSegment(origin+start/sr),q=segment.factor;
+   const boundary=segment.next?Math.ceil((segment.next.prepared-origin)*sr):target;
+   const count=Math.min(Math.max(1,Math.floor(this.chunkFrames/q)),target-start,boundary-start);
+   if(count<1)throw Error('Mapped PCM source boundary did not advance');
+   const pcm=[],bytes=[];let inFlight=0;
+   try{
+    for(const source of this.sources){
+     const cost=count*source.numberOfChannels*4;this.checkPCMAllocation(cost);this.inFlightPCMBytes+=cost;inFlight+=cost;
+     const offset=(segment.position+(origin-segment.prepared)*q)*source.sampleRate;
+     pcm.push(...await copyPCMChunk(source.channels,source.sampleRate,sr/q,start,count,{signal:group.controller.signal,offsetSourceFrames:offset}));bytes.push(cost);this.checkGroup(group);
+    }
+    const extent=await group.nodes[0].addBuffers(pcm,pcm.map(c=>c.buffer));this.checkGroup(group);
+    if(Math.abs(extent-(start+count)/sr)>1/sr)throw Error('Mapped processor append extent mismatch');
+    group.pitchEndFrame=start+count;const end=Math.min(this.durationFrames,map.sourceAt(origin+group.pitchEndFrame/sr)*sr);
+    group.chunks.push({start:map.sourceAt(origin+start/sr)*sr,end,bytes});group.endFrame=end;
+   }finally{this.inFlightPCMBytes-=inFlight;}
+  }
+ }
+
  coverage(group,position){const first=Math.max(0,Math.floor((position-REQUIRED_PREROLL_SECONDS)*this.sampleRate)),last=Math.min(this.durationFrames,Math.ceil((position+Math.max(.5,group.latency*5))*this.sampleRate));return first>=group.startFrame&&last<=group.endFrame;}
  operation(run){this.assertOwner();if(this.pending)this.pending.controller.abort();const op={revision:++this.revision,controller:new AbortController(),group:null};this.pending=op;const result=this.serial.catch(()=>{}).then(async()=>{this.assertOwner();alive(op.controller.signal);try{return await run(op);}finally{if(this.pending===op)this.pending=null;}});this.serial=result;return result;}
  checkOperation(op){this.assertOwner();alive(op.controller.signal);if(this.pending!==op)throw abortError();}
@@ -124,11 +161,14 @@ class LiveKeylock{
  at(group,when,shadowFollow=false){const minimum=this.context.currentTime+this.minimumLead(group,shadowFollow);if(when===undefined)return minimum;finite(when,'when');if(when<minimum)throw failure('LateScheduleError',shadowFollow?'Requested follow output precedes40ms lead':'Requested output time precedes current queried-latency lead');return when;}
  assertFollowOwner(at=this.context.currentTime+FOLLOW_LEAD_SECONDS){this.assertOwner();const current=this.stateAt(),future=this.stateAt(at);if(!current.playing||current.rate<=0||!future.playing||future.rate<=0)throw failure('InvalidStateError','followSeek requires an already active forward owner; use normal start for paused/future-start owners');}
  assertFollowCoverage(position,group=this.active){if(!this.coverage(group,position))throw Object.assign(failure('FollowCoverageError','followSeek requires already prepared1s history; use normal seek while externally muted to rebase'),{position,requiredStart:Math.max(0,position-REQUIRED_PREROLL_SECONDS),retainedStart:group.startFrame/this.sampleRate,retainedEnd:group.endFrame/this.sampleRate});}
- async program(group,state){this.checkGroup(group);const input=(state.position-group.originFrame/this.sampleRate)/group.pitchFactor;const command={active:state.playing,input,output:state.when,rate:state.rate/group.pitchFactor,semitones:state.effectiveSemitones-group.pitchSemitones};group.lastScheduleIssuedAt=this.context.currentTime;this.emit('schedule-issued',{group:group.id,command:{...command},issuedAt:group.lastScheduleIssuedAt});await Promise.all(group.nodes.map(node=>node.schedule(command)));this.checkGroup(group);if(state.playing){const end=state.when+(this.duration-state.position)/state.rate;await Promise.all(group.nodes.map(node=>node.stop(end)));this.checkGroup(group);}group.segments=this.addClock(group.segments,state);if(this.context.currentTime>state.when)this.emit('late-ack',{group:group.id,requestedOutput:state.when,acknowledgedAt:this.context.currentTime});}
+ async program(group,state){this.checkGroup(group);const factor=group.pitchMap?.factorAt(state.position)??group.pitchFactor;const input=group.pitchMap?group.pitchMap.preparedAt(state.position)-group.preparedOrigin:(state.position-group.originFrame/this.sampleRate)/factor;const residual=state.effectiveSemitones-(group.pitchMap?12*Math.log2(factor):group.pitchSemitones);if(group.pitchMap&&Math.abs(residual)>1e-7)throw new RangeError('Warp command does not match the prepared pitch map');const command={active:state.playing,input,output:state.when,rate:state.rate/factor,semitones:group.pitchMap?0:residual};group.lastScheduleIssuedAt=this.context.currentTime;this.emit('schedule-issued',{group:group.id,command:{...command},issuedAt:group.lastScheduleIssuedAt});await Promise.all(group.nodes.map(node=>node.schedule(command)));this.checkGroup(group);if(state.playing){const end=state.when+(this.duration-state.position)/state.rate;await Promise.all(group.nodes.map(node=>node.stop(end)));this.checkGroup(group);}group.segments=this.addClock(group.segments,state);if(this.context.currentTime>state.when)this.emit('late-ack',{group:group.id,requestedOutput:state.when,acknowledgedAt:this.context.currentTime});}
  async schedule(op,{position,when,notBefore,state,playing,follow=false,shadowFollow=false}){
   this.checkOperation(op);if(shadowFollow){this.assertFollowOwner(when??this.context.currentTime+FOLLOW_LEAD_SECONDS);this.assertFollowCoverage(position);}let group=this.active,replacement=false,programIssued=false,windowIssued=false,windowComplete=false;
   try{
-   if(!this.coverage(group,position)||(this.resamplePitch&&state.effectiveSemitones!==group.pitchSemitones)){await this.waitRetiring(op);this.checkOperation(op);group=await this.newGroup(position,state,op);replacement=true;this.checkOperation(op);}else{windowIssued=true;await this.fill(group,position);windowComplete=true;this.checkOperation(op);}
+   if(!this.coverage(group,position)||(this.resamplePitch&&(group.pitchMap?(state.keylock!==group.mapKeylock||state.semitones!==group.mapSemitones):state.effectiveSemitones!==group.pitchSemitones))){await this.waitRetiring(op);this.checkOperation(op);group=await this.newGroup(position,state,op);replacement=true;this.checkOperation(op);}else if(when===undefined){windowIssued=true;await this.fill(group,position);windowComplete=true;this.checkOperation(op);}
+   // An explicit future anchor already has required history/lookahead coverage.
+   // Do not spend its reserved DSP lead topping up the full8s window. The
+   // ordinary driver replenishes it after scheduling; implicit times can wait.
    if(shadowFollow){this.assertFollowOwner(when??this.context.currentTime+FOLLOW_LEAD_SECONDS);this.assertFollowCoverage(position,group);}const implicitTime=notBefore===undefined?undefined:Math.max(notBefore,this.context.currentTime+this.minimumLead(group,shadowFollow));const output=this.at(group,when??implicitTime,shadowFollow),mapped={when:output,position:follow?this.stateAt(output).position:position,playing:playing,...state};mapped.playing=playing&&mapped.position<this.duration;if(!this.coverage(group,mapped.position))throw failure('PreparationOverrunError','Requested advancing position left the prepared bounded window');programIssued=true;await this.program(group,mapped);
    // Accepted active commands must remain in the application clock even if a newer request is queued.
    if(replacement)this.checkOperation(op);
@@ -153,7 +193,7 @@ class LiveKeylock{
    segments.push({...state,position:sourcePosition,when:event.when,playing:sourcePosition<this.duration});
    lastTime=event.when;lastRate=event.rate;
   }
-  if(this.resamplePitch&&segments.some(s=>s.effectiveSemitones!==this.active.pitchSemitones))throw new RangeError('Variable-pitch warp maps require the spectral timeline mode.');
+  if(this.resamplePitch&&segments.some(s=>Math.abs(s.effectiveSemitones-(this.active.pitchMap?12*Math.log2(this.active.pitchMap.factorAt(s.position)):this.active.pitchSemitones))>1e-7))throw new RangeError('Warp pitch factors do not match prepared source map.');
   return this.operation(async op=>{
    const first=segments[0],ack=await this.schedule(op,{position,when,state:normalize(first),playing:true}),group=this.active;
    // Future commands only extend the processor map. The ordinary driver fills
@@ -187,6 +227,6 @@ class LiveKeylock{
  async retire(){if(this.retirementPromise)return this.retirementPromise;const old=this.retiring;if(!old)return;this.retiring=null;this.retirementPromise=this.disposeGroup(old).finally(()=>this.retirementPromise=null);return this.retirementPromise;}
  fail(error){if(this.disposed)return;this.lastError={name:error.name,message:error.message};this.emit('error',{error:this.lastError});this.dispose().catch(()=>{});}
  disposeGroup(group){if(group.disposePromise)return group.disposePromise;group.controller.abort();group.detachOperation?.();group.ownerDetach();for(const gain of group.gains){gainAt(gain.gain,0,this.context.currentTime);gain.disconnect();}for(const node of group.routingNodes)node.disconnect();group.disposePromise=(async()=>{const results=await Promise.allSettled(group.nodes.map(node=>node.dispose()));await Promise.allSettled([group.fillSerial]);this.groups.delete(group);group.chunks=[];group.nodes=[];group.gains=[];group.routingNodes=[];const failed=results.find(result=>result.status==='rejected');if(failed&&failed.reason?.name!=='AbortError')throw failed.reason;})();return group.disposePromise;}
- snapshot(){const groups=[...this.groups].map(g=>({id:g.id,pitchSemitones:g.pitchSemitones,pitchFactor:g.pitchFactor,origin:g.originFrame/this.sampleRate,start:g.startFrame/this.sampleRate,end:g.endFrame/this.sampleRate,nodeCount:g.nodes.length,processorChannels:g.channels,sourceOutputs:g.gains.length,retainedPCMBytes:g.chunks.reduce((sum,c)=>sum+c.bytes.reduce((a,b)=>a+b,0),0),retainedChunks:g.chunks.length,latency:g.latency,role:g.disposePromise?'disposing':g===this.active?'selected':g===this.retiring?'retiring':'preparing'}));return{resamplePitch:this.resamplePitch,maxPCMBytes:this.maxPCMBytes,followMinimumLeadSeconds:FOLLOW_LEAD_SECONDS,byteAccounting:'Acknowledged retained PCM and in-flight chunk copies only; excludes decoded inputs, SRC tables and opaque WASM heaps.',disposed:this.disposed,state:this.stateAt(),sourceGeometry:this.sourceGeometry,groups,retainedPCMBytes:groups.reduce((sum,g)=>sum+g.retainedPCMBytes,0),inFlightPCMBytes:this.inFlightPCMBytes,decodedBytes:this.sourceGeometry.reduce((sum,s)=>sum+s.decodedBytes,0),policy,lastError:this.lastError};}
+ snapshot(){const groups=[...this.groups].map(g=>({id:g.id,pitchMap:g.pitchMap?.nodes||null,pitchSemitones:g.pitchSemitones,pitchFactor:g.pitchFactor,origin:g.originFrame/this.sampleRate,start:g.startFrame/this.sampleRate,end:g.endFrame/this.sampleRate,nodeCount:g.nodes.length,processorChannels:g.channels,sourceOutputs:g.gains.length,retainedPCMBytes:g.chunks.reduce((sum,c)=>sum+c.bytes.reduce((a,b)=>a+b,0),0),retainedChunks:g.chunks.length,latency:g.latency,role:g.disposePromise?'disposing':g===this.active?'selected':g===this.retiring?'retiring':'preparing'}));return{resamplePitch:this.resamplePitch,maxPCMBytes:this.maxPCMBytes,followMinimumLeadSeconds:FOLLOW_LEAD_SECONDS,byteAccounting:'Acknowledged retained PCM and in-flight chunk copies only; excludes decoded inputs, SRC tables and opaque WASM heaps.',disposed:this.disposed,state:this.stateAt(),sourceGeometry:this.sourceGeometry,groups,retainedPCMBytes:groups.reduce((sum,g)=>sum+g.retainedPCMBytes,0),inFlightPCMBytes:this.inFlightPCMBytes,decodedBytes:this.sourceGeometry.reduce((sum,s)=>sum+s.decodedBytes,0),policy,lastError:this.lastError};}
  dispose(){if(this.disposePromise)return this.disposePromise;const frozen=this.stateAt();this.clock=[{...frozen,when:this.context.currentTime,playing:false}];this.disposed=true;this.controller.abort();this.pending?.controller.abort();if(this.timer){clearTimeout(this.timer);this.timer=null;}this.ownerSignal?.removeEventListener('abort',this.ownerAbort);for(const output of this.outputs)gainAt(output.gain,0,this.context.currentTime);this.disposePromise=(async()=>{const results=await Promise.allSettled([...this.groups].map(group=>this.disposeGroup(group)));for(const output of this.outputs)output.disconnect();this.retiring=null;this.sources=[];this.emit('disposed',{snapshot:this.snapshot()});const rejected=results.find(result=>result.status==='rejected');if(rejected)throw rejected.reason;return{disposed:true,retainedPCMBytes:this.snapshot().retainedPCMBytes};})();return this.disposePromise;}
 }
