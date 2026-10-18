@@ -63,3 +63,7 @@ Factory catalogs are private under local-evidence/factory-catalog-141; all197 im
 ## Re-entry142
 
 Accepted private v2 catalogs: local-evidence/factory-catalog-142b. Hercules335 assignments/275 compiled-case assignments/38 unresolved items. Actual isolated browser eight-mode flow passed with synthetic MIDI/authored audio, not physical/native acceptance. Frozen0.1.23/profile untouched. Read docs/research/FACTORY_CONDITIONAL_CONTROLLER_20261018.md. Next offline task: remaining named FX/master/cue/jog contracts; no capture request until Jason returns. Keylocked Stems activation continuity still open.
+
+## Re-entry143
+
+V3 private catalogs: local-evidence/factory-catalog-143. Hercules356 assignments/18 unresolved items; actual source-driven browser master/cue/FX/fader/transport tests and wet Delay timing passed; physical/native acceptance open. Frozen0.1.23/profile unchanged. Read docs/research/FACTORY_MIXER_FX_INPUTS_20261018.md. Next: prove platter movement unit/skip/double-click semantics; do not infer512ticks/revolution from the normalized source range or copy248community calibration as official. No capture request while Jason is away. Keylocked Stems activation continuity still open.

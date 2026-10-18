@@ -14,7 +14,7 @@ from pathlib import Path
 import xml.etree.ElementTree as ET
 from import_serato_maps import tree, integer, digest, ENCODINGS
 
-VERSION = 'open-play-factory-adapter-v2'
+VERSION = 'open-play-factory-adapter-v3'
 PAD_MODES = {0: 'hot cues', 2: 'loop roll', 5: 'sampler', 9: 'manual loop',
              11: 'auto loop', 14: 'pitch play', 23: 'scratch bank', 25: 'stems'}
 MODE_NAMES = {'Hot Cues Mode': 'hot cues', 'Loop Roll Mode': 'loop roll',
@@ -29,11 +29,17 @@ BUTTONS = {'play': 'play', 'load_track': 'load', 'cue': 'cue', 'sync': 'sync',
            'previous_track': 'previous', 'pitch_range': 'tempo range',
            'auto_loop_enable': 'auto loop four', 'loop_in': 'loop in',
            'loop_out': 'loop out', 'loop_length_half': 'loop half',
-           'loop_length_double': 'loop double', 'platter_touch': 'jog touch'}
+           'loop_length_double': 'loop double', 'platter_touch': 'jog touch',
+           'cue_play': 'stutter', 'tap_tempo': 'tap tempo',
+           'upfader_start_enable': 'fader start enable'}
 CONTINUOUS = {'upfader': 'level', 'deck_eq_hi': 'high', 'deck_eq_mid': 'mid',
               'deck_eq_lo': 'low', 'trim': 'trim', 'deck_filter_auto': 'filter',
               'pitch_slider': 'tempo', 'pitch_slider_shift': 'tempo ignore'}
 TOGGLES = {'play', 'pfl', 'slip_mode', 'quantize', 'platter_jog_mode', 'auto_loop_enable'}
+GLOBALS = {'master_volume': 'Master volume', 'cue_gain': 'Cue volume',
+           'tab_library': 'Library backward'}
+FX_ACTIONS = {'effect_level_1_slot_enable', 'effect_level_1_slot_parameter_1',
+              'effect_scroll', 'effect_bank_beats_multiplier'}
 
 
 def canonical(value):
@@ -53,24 +59,38 @@ def node_count(value):
     return count
 
 
-def adapt(control, action):
+def adapt(control, action, *, hercules=False):
     if set(control.attrib) - {'channel', 'event_type', 'control', 'data_type', 'complement_control', 'access'}:
         raise ValueError('Additional input attributes retained; no adapter')
     if control.get('access') not in [None, 'read only', 'read write']:
         raise ValueError('Non-input access retained')
     name = action.tag
+    fx = name in FX_ACTIONS
+    if fx and not hercules: raise ValueError('FX slot/level addressing needs a verified device-specific policy')
     if set(action.attrib) - {'deck_set', 'deck_id', 'slot_id'} or action.get('deck_set', 'Default') != 'Default':
         raise ValueError('Additional action addressing retained')
     slot = integer(action.get('slot_id', '0'), 0, 127, 'Slot')
     modifier = re.fullmatch(r'modifier_([1-9]|1[0-6])', name)
     grid = name in ['grid_control_mode_input', 'grid_control_pad', 'grid_control_pad_shift']
-    if slot != 0 and not grid: raise ValueError('Nonzero slot needs a separate adapter')
-    global_action = name in ['library_scroll', 'fast_library_scroll', 'crossfader', 'add_song_to_prepare_crate', 'library_prepare_tab'] or bool(modifier and action.get('deck_id') is None)
+    if slot != 0 and not grid and not fx: raise ValueError('Nonzero slot needs a separate adapter')
+    global_action = name in ['library_scroll', 'fast_library_scroll', 'crossfader', 'add_song_to_prepare_crate', 'library_prepare_tab', *GLOBALS] or bool(modifier and action.get('deck_id') is None)
     if global_action:
         if action.attrib: raise ValueError('Global action has additional addressing')
         target = {'library_scroll': 'Library browse', 'fast_library_scroll': 'Library fast browse',
                   'crossfader': 'Crossfader', 'add_song_to_prepare_crate': 'Prepare add',
-                  'library_prepare_tab': 'Prepare open'}.get(name, f'Controller modifier {modifier[1]}' if modifier else '')
+                  'library_prepare_tab': 'Prepare open', **GLOBALS}.get(name, f'Controller modifier {modifier[1]}' if modifier else '')
+    elif fx:
+        unit = integer(action.get('deck_id'), 0, 1, 'FX unit')+1
+        if name == 'effect_bank_beats_multiplier':
+            if slot: raise ValueError('FX unit beat action has unexpected slot')
+            target = f'FX unit {unit} beat multiplier'
+        else:
+            # Exact Hercules resource plus official quickstart identify these
+            # controls with its first slot; the legacy schema slot note conflicts.
+            if slot != 1: raise ValueError('Other FX slot numbering remains unresolved')
+            suffix = {'effect_level_1_slot_enable': 'enable', 'effect_level_1_slot_parameter_1': 'depth',
+                      'effect_scroll': 'menu' if control.get('event_type') == 'Note On' else 'select'}[name]
+            target = f'FX unit {unit} slot 1 {suffix}'
     else:
         deck = integer(action.get('deck_id'), 0, 3, 'Deck') + 1
         if name == 'grid_control_mode_input':
@@ -88,7 +108,7 @@ def adapt(control, action):
     channel = integer(control.get('channel'), 1, 16, 'Channel')
     number = integer(control.get('control'), 0, 127, 'Controller')
     kind = 'Note' if event == 'Note On' else 'CC'
-    if (grid or modifier or name in ['add_song_to_prepare_crate', 'library_prepare_tab']) and kind != 'Note':
+    if (grid or modifier or name in ['add_song_to_prepare_crate', 'library_prepare_tab', 'tab_library', 'upfader_start_enable']) and kind != 'Note':
         raise ValueError('Performance/modifier/library button requires Note press and release')
     encoding = ENCODINGS.get(control.get('data_type', 'Absolute 7'))
     if encoding is None: raise ValueError('MIDI encoding needs an adapter')
@@ -103,21 +123,24 @@ def adapt(control, action):
     rule = rules[0] if rules else None
     invert = False
     if kind == 'Note':
-        if name not in BUTTONS and not grid and not modifier and name not in ['add_song_to_prepare_crate', 'library_prepare_tab']: raise ValueError('Button action needs an adapter')
+        if name not in BUTTONS and not grid and not modifier and name not in ['add_song_to_prepare_crate', 'library_prepare_tab', 'tab_library', 'effect_level_1_slot_enable', 'effect_scroll']: raise ValueError('Button action needs an adapter')
         if encoding != '7-bit absolute': raise ValueError('Button encoding needs an adapter')
         if rule is not None:
-            toggle = not len(rule) and dict(rule.attrib) == {'action_on': 'press', 'behaviour': 'toggle'} and name in TOGGLES
-            explicit = not len(rule) and dict(rule.attrib) in [{'behaviour': 'explicit'}, {'behaviour': 'explicit', 'action_on': 'any'}] and (grid or modifier)
+            toggle = not len(rule) and dict(rule.attrib) == {'action_on': 'press', 'behaviour': 'toggle'} and name in TOGGLES|{'effect_level_1_slot_enable', 'effect_scroll'}
+            explicit = not len(rule) and dict(rule.attrib) in [{'behaviour': 'explicit'}, {'behaviour': 'explicit', 'action_on': 'any'}] and (grid or modifier or name == 'upfader_start_enable')
             prepare = name == 'library_prepare_tab' and not rule.attrib and all(c.tag == 'alias' and c.attrib in [{'name': 'on', 'value': '127'}, {'name': 'off', 'value': '0'}] for c in rule) and len(rule) == 2
-            if not (toggle or explicit or prepare): raise ValueError('Button translation semantics need an adapter')
+            backward = name == 'tab_library' and not len(rule) and rule.attrib == {'action_on': 'press', 'behaviour': 'static', 'static_value': 'Backward'}
+            if not (toggle or explicit or prepare or backward): raise ValueError('Button translation semantics need an adapter')
     else:
-        if name not in CONTINUOUS and not global_action: raise ValueError('CC command semantics need an adapter')
+        if name not in CONTINUOUS and not global_action and not fx: raise ValueError('CC command semantics need an adapter')
         if name in ['library_scroll', 'fast_library_scroll']:
             if not encoding.startswith('Relative') or rule is not None: raise ValueError('Relative library translation needs an adapter')
         elif encoding not in ['7-bit absolute', '14-bit absolute']:
             raise ValueError('Continuous encoding needs an adapter')
         if rule is not None:
             maximum = '16383' if encoding == '14-bit absolute' else '127'
+            if name == 'effect_scroll' and not len(rule) and rule.attrib == {'action_on': 'any', 'behaviour': 'explicit_on_down'}:
+                return dict(target=target, type=kind, channel=channel, number=number, encoding=encoding, invert=False), False
             if rule.attrib or len(rule) != 1 or rule[0].tag != 'range': raise ValueError('Continuous translation needs an adapter')
             attrs = rule[0].attrib
             if len(rule[0]) or dict(attrs) not in [
@@ -172,6 +195,10 @@ def parse_factory(data, filename):
         if count > 100000 or depth > 48: raise ValueError('Definition structure exceeds limits')
         stack.extend((child, depth+1) for child in node)
     controls, mappings, issues, defaults = [], [], [], set()
+    hercules = any(d.find('vendor_id') is not None and d.find('product_id') is not None and
+                   int(d.find('vendor_id').get('value', '-1'), 0) == 0x06f8 and
+                   int(d.find('product_id').get('value', '-1'), 0) == 0xb12f
+                   for d in root if d.tag.endswith('_device'))
     envelope = tree(root)
     for section_index, section in enumerate(root):
         if section.tag not in ['midi', 'hid', 'audio']: continue
@@ -202,7 +229,7 @@ def parse_factory(data, filename):
                     issues.append({'controlIndex': index, 'reason': 'Additional input event semantics retained'}); continue
                 for action in clicks[0]:
                     try:
-                        mapping, default = adapt(control, action)
+                        mapping, default = adapt(control, action, hercules=hercules)
                         mapping.update(sourceControlIndex=index, sourceAction=action.tag)
                         if condition is not None: mapping.update(sourceCaseIndex=condition[0], conditions=condition[1])
                         mappings.append(mapping)
@@ -215,6 +242,8 @@ def parse_factory(data, filename):
     if outputs: issues.append({'reason': 'All output/lighting branches retained but inactive', 'branches': outputs})
     issues.append({'reason': 'Device metadata, initialization and global semantics retained; no hardware initialization or compatibility claim'})
     issues.append({'reason': 'Adapter targets DJ Pro app branches. Runtime predicates cover conjunctions of supported modifiers/pad modes only. Other app/state branches retained inactive; compound events may be partially adapted. Initial Hot Cues is Open Play policy, not proved vendor initialization.'})
+    if hercules:
+        issues.append({'reason': 'Hercules first FX slot follows its official device guide despite conflicting legacy schema slot notes. FX selection timeout2s, normalized effect-list selection and cue/master tapers are independent Open Play policies; hardware and exact vendor response unverified.'})
     descriptors = [c for c in root if c.tag.endswith('_device')]
     name = next((c.get('display_name') or c.get('name') for c in descriptors if c.get('display_name') or c.get('name')), Path(filename).stem)
     profile = dict(adapterVersion=VERSION, id=digest(data), name=name, sourceFile=filename,

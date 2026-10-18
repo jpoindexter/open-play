@@ -104,6 +104,7 @@ const state = {
     })),
   ),
   fxTempo: normalizeFXTempoSettings(saved.fxTempo, 2),
+  fxBeatMultipliers: saved.fxBeatMultipliers||[1,1],
   fxFavorites: [],
   fxPresets: [],
   bank: 0,
@@ -240,6 +241,7 @@ function persist() {
         analysisSettings: state.analysisSettings,
         video: snapshotVideoState(state.video),
         fxTempo: normalizeFXTempoSettings(state.fxTempo, 2),
+        fxBeatMultipliers: state.fxBeatMultipliers,
         localTags: state.localTags,
         mappings: state.mappings,
         settings: state.settings,
@@ -1287,8 +1289,16 @@ const instantDouble=createInstantDouble({state,engine,load,render:renderDecks,no
 const jogBend=createJogBend({engine,onError:error=>notify(error.message)});
 function setMasterOutput(value,{save=true}={}){
   const db=engine.setMasterDB(value);state.settings["Master Output Level"]=db;
-  $("#master-level").value=db;$("#master-level-value").textContent=`${db.toFixed(1)}dB`;
+  $("#master-level").value=db;updateMasterReadout();
   if(save)persist();return db;
+}
+function updateMasterReadout(){
+  const volume=engine.masterVolume,db=engine.masterDB;
+  $("#master-level-value").textContent=volume===0?'−∞ · 0%':`${db.toFixed(1)}dB${volume<1?` · ${(volume*100).toFixed(0)}%`:''}`;
+}
+function setMasterVolume(value,{save=true}={}){
+  engine.setMasterVolume(value);state.settings['Master Volume']=value*100;updateMasterReadout();
+  if(save)persist();return value;
 }
 const trackGain=createTrackGain({state,engine,persist,onChange:(track,value)=>{
   for(const d of state.decks)if(d.track?.id===track.id){
@@ -1300,6 +1310,7 @@ const trackGain=createTrackGain({state,engine,persist,onChange:(track,value)=>{
 const api = {
   trackGain,
   setMasterOutput,
+  setMasterVolume,
   renderMixer,
   state,
   engine,
@@ -1394,6 +1405,8 @@ api.pitchPlay=pitchPlay;
 engine.onPrepareSampleGain=track=>trackGain.refresh(track);
 const panels = createPanels(api);
 setMasterOutput(normalizedMasterDB(state.settings["Master Output Level"]),{save:false});
+const initialMasterVolume=Number(state.settings['Master Volume']??100);
+setMasterVolume(Number.isFinite(initialMasterVolume)?Math.max(0,Math.min(100,initialMasterVolume))/100:1,{save:false});
 $("#master-level").addEventListener("click",e=>{if(e.ctrlKey||e.metaKey||e.altKey){e.preventDefault();setMasterOutput(e.altKey?3:0);}});
 document.addEventListener("click",e=>{if(e.target.dataset.trackGain!==undefined&&(e.ctrlKey||e.metaKey||e.altKey)){e.preventDefault();const d=state.decks[Number(e.target.dataset.trackGain)];if(d?.track)try{e.altKey?trackGain.resetAuto(d.track):trackGain.set(d.track,0);}catch(error){notify(error.message);}}});
 document.addEventListener("keydown",e=>{if(e.target.dataset.trackGain!==undefined&&["ArrowLeft","ArrowRight","ArrowUp","ArrowDown"].includes(e.key)){e.preventDefault();const d=state.decks[Number(e.target.dataset.trackGain)];if(d?.track)trackGain.set(d.track,trackGainDB(d.track)+(["ArrowRight","ArrowUp"].includes(e.key)?1:-1)*(e.shiftKey?.01:.1));}});

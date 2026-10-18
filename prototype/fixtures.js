@@ -202,6 +202,7 @@ export const settingsSchema = {
     ["Send Usage Data", "check", false],
   ],
   Mixer: [
+    ["Master Volume", "range", 100],
     ["EQ Boost", ["6 dB", "12 dB"], "6 dB"],
     ["Output Mode", ["Stereo", "Mono"], "Stereo"],
     ["Cue Mix", "range", 50],

@@ -16,6 +16,7 @@ import {videoSetupField,videoSetupValue,applyVideoSetupSetting,resetVideoSetupSe
 import {createAudioOutputSelection} from './audio-output.js';
 import {createControllerCatalogStore} from './controller-catalog.js';
 import {createControllerPerformance,controllerPerformanceTarget} from './controller-performance.js';
+import {createControllerMixer,controllerMixerTarget,controllerFXMultipliers,withFXMultipliers} from './controller-mixer.js';
 import {controllerCatalogMarkup,mountControllerCatalog} from './controller-catalog-ui.js';
 import {mixerFields,mixerSettingsFromPreferences,eqBands,normalizeEQBoost,rescaleEQGain} from './mixer-curves.js';
 import {
@@ -51,6 +52,7 @@ export function createPanels(a) {
     activeProvider = "Spotify",
     videoPhase = 0,
     learn = false;
+  let controllerMixer;
   s.fxTempo=normalizeFXTempoSettings(s.fxTempo,s.fx.length);
   const fxTempoClock=createFXTempo({initial:s.fxTempo,count:s.fx.length});
   const monitorFields=new Set(['Cue Mix','Cue Volume','Master Cue','Split Cue','Output Mode']);
@@ -649,6 +651,7 @@ export function createPanels(a) {
               s.settings[input.dataset.setting] =
                 input.type === "checkbox" ? input.checked : input.value;
               if(monitorFields.has(input.dataset.setting))engine.setMonitorSettings(monitorState());
+              if(input.dataset.setting==='Master Volume')a.setMasterVolume(percent('Master Volume',1));
               if(input.dataset.setting==='EQ Boost'){applyEQBoost();renderMixer();}
               if(['Use Auto Gain','Auto Gain Reference'].includes(input.dataset.setting)){a.trackGain.refreshAll();renderDecks();}
               if(mixerFields.has(input.dataset.setting)){engine.setMixerSettings(mixerSettingsFromPreferences(s.settings));renderMixer();}
@@ -674,7 +677,7 @@ export function createPanels(a) {
           for (const [name, type, v] of settingsSchema[tab])
             if (type !== "section"&&!videoSetupField(name)) s.settings[name] = v;
           if(tab==='DJ Preferences'){a.trackGain.refreshAll();renderDecks();}
-          if(tab==='Mixer'){engine.setMonitorSettings(monitorState());engine.setMixerSettings(mixerSettingsFromPreferences(s.settings));applyEQBoost();renderMixer();}
+          if(tab==='Mixer'){a.setMasterVolume(percent('Master Volume',1));engine.setMonitorSettings(monitorState());engine.setMixerSettings(mixerSettingsFromPreferences(s.settings));applyEQBoost();renderMixer();}
           persist();
           settings(tab);
           if(sharedVideo&&s.panel==='video')refresh();
@@ -721,7 +724,7 @@ export function createPanels(a) {
   };
   function applyFX() {
     engine.configureFX(
-      s.fx,
+      withFXMultipliers(s.fx,s.fxBeatMultipliers),
       s.fxRoutes || [],
       s.decks.map((d) => (d.track?.bpm || 120) * d.rate),
       s.fxTempo,
@@ -752,17 +755,26 @@ export function createPanels(a) {
       button.onclick=()=>{clear();if(suppress){suppress=false;return;}fxTempoClock.tap(bank);changedFXTempo();};
     });
     $$('[data-fx-auto]').forEach(button=>{button.onclick=()=>{fxTempoClock.automatic(Number(button.dataset.fxAuto));changedFXTempo();};});
+    $$('.fx-bank').forEach((bank,b)=>{
+      const label=document.createElement('label');label.textContent='Beat multiplier ';
+      const select=document.createElement('select');select.dataset.fxMultiplier=String(b);select.setAttribute('aria-label',`FX unit ${b+1} beat multiplier`);
+      for(const value of controllerFXMultipliers){const option=document.createElement('option');option.value=String(value);option.textContent=(value<1?'1/'+(1/value):String(value))+'×';select.append(option);}
+      select.value=String(s.fxBeatMultipliers?.[b]||1);select.onchange=()=>{s.fxBeatMultipliers[b]=Number(select.value);applyFX();persist();};label.append(select);bank.before(label);
+    });
     const tempoHint=document.createElement('p');tempoHint.className='muted';tempoHint.textContent='Tap twice to establish a manual range; later half/double/bar taps retain that range. Hold the BPM for0.6seconds or choose Auto × to follow the current track again. Median/range filtering is independent Open Play behavior.';$('#panel').append(tempoHint);updateFXTempo();
     $$("[data-fx-select]").forEach(
       (el) =>
         (el.onchange = () => {
           const [b, i] = el.dataset.fxSelect.split(":");
-          s.fx[b][i].name = el.value;
+          const chosen=el.value;
+          controllerMixer?.cancelSelection(Number(b),Number(i));
+          s.fx[b][i].name = chosen;
           s.fx[b][i].params = {};
           s.fx[b][i].on = false;
           refresh();
         }),
     );
+    controllerMixer?.syncUI();
     $$("[data-fx-on]").forEach(
       (el) =>
         (el.onclick = () => {
@@ -1626,6 +1638,11 @@ export function createPanels(a) {
   // assignment, the selected bank, or the mapping changes before release.
   let reassignMapping=null, midiSourceIds=new Set();
   function libraryControl(action,value=0){
+    if(action==='Library backward'){
+      const crate=s.crates.find(c=>c.id===s.crate);
+      if(s.browserFocus==='crates'&&crate&&s.crates.some(c=>c.parent===crate.id)){crate.collapsed=!crate.collapsed;persist();renderCrates();notify(`${crate.name} ${crate.collapsed?'collapsed':'expanded'}.`);return;}
+      action='Library focus';
+    }
     if(action==='Library focus')s.browserFocus=s.browserFocus==='crates'?'tracks':'crates';
     else if(action==='Prepare open'){
       if(s.panel!=='prepare'||$("#panel").hidden)open('prepare');
@@ -1662,6 +1679,7 @@ export function createPanels(a) {
     }
   }});
   const controllerPerformance=createControllerPerformance({state:s,dispatch:(message,mapping)=>deckMIDI.dispatch(message,mapping),onMode:()=>renderDecks(),onStatus:notify});
+  controllerMixer=createControllerMixer({state:s,engine,setMasterVolume:a.setMasterVolume,updateCue:value=>{s.settings['Cue Volume']=value*100;engine.setMonitorSettings(monitorState());persist();const input=$('[data-setting="Cue Volume"]');if(input)input.value=String(value*100);},applyFX,effectNames:implementedEffects,persist,onStatus:notify});
   async function receiveMIDI(message) {
     s.midiLog.push(
       `${message.synthetic ? "SYNTHETIC" : message.device} · ${message.timestamp.toFixed(1)}ms · ${message.type} ch${message.channel} ${message.number}=${message.value}`,
@@ -1670,6 +1688,7 @@ export function createPanels(a) {
     if ($("#midi-log")) $("#midi-log").textContent = s.midiLog.join("\n");
     deckMIDI.release(message);
     controllerPerformance.release(message);
+    controllerMixer.release(message);
     if(videoMIDI.assignment?.receive(message))return;
     if (learn && $("#midi-channel") && $('#modal')?.open) {
       $("#midi-channel").value = message.channel;
@@ -1686,6 +1705,7 @@ export function createPanels(a) {
       if (!matchesMIDIMap(message,m)) continue;
       if(!controllerPerformance.matches(message,m))continue;
       actions.push((async()=>{
+      if(await controllerMixer.dispatch(message,m))return;
       if(await controllerPerformance.dispatch(message,m))return;
       if(await deckMIDI.dispatch(message,m))return;
       if(m.target.startsWith('Video ')) {
@@ -1737,6 +1757,7 @@ export function createPanels(a) {
       for(const id of midiSourceIds)if(!next.has(id)){
         videoMIDI.resetInput(id);deckMIDI.resetInput(id);
         controllerPerformance.resetInput(id);
+        controllerMixer.resetInput(id);
         sampleVisuals();
       }
       midiSourceIds=next;
@@ -1755,7 +1776,7 @@ export function createPanels(a) {
     learn=false; reassignMapping=null;
     dialog(
       "MIDI mapping editor",
-      `${badge("REAL INPUT WHEN SUPPORTED · EXPLICIT TEST INJECTION")}<p id="midi-status">${esc(midiStatus)}</p><div class="panel-controls"><button id="midi-connect">Connect MIDI inputs</button><button id="midi-disconnect">Disconnect input</button><button id="midi-hercules">Use Hercules playback controls</button></div><p class="muted">Connect requests standard MIDI input only. No SysEx or hardware output is sent. Device names are enumeration evidence; received messages are separate evidence.</p><div class="form-grid"><label>Target<select id="midi-target">${options([...libraryMIDITargets, ...deckMIDITargets, ...fxMIDITargets, "Crossfader", "Master Output Level", ...samplerMIDITargets, "FX depth", "Deck 1 key shift", "Deck 2 key shift", "Deck 3 key shift", "Deck 4 key shift", ...videoMIDITargets.map(x=>x.target),...new Set(s.mappings.map(m=>m.target).filter(t=>controllerPerformanceTarget.test(t)))], "Library browse")}</select></label><label>Encoding<select id="midi-encoding">${options(["7-bit absolute", "14-bit absolute", "Relative two’s complement", "Relative offset"], "7-bit absolute")}</select></label><label>Message<select id="midi-type">${options(["CC", "Note", "Pitch bend"], learnedType)}</select></label><label>Channel<input id="midi-channel" type="number" min="1" max="16" value="1"></label><label>Controller / note<input id="midi-number" type="number" min="0" max="127" value="1"></label><label>Invert absolute / relative direction<input id="midi-invert" type="checkbox"></label><label>Synthetic input identity<select id="midi-test-device"><option value="">Unbound test input</option>${midiInputs.map(x=>`<option value="${esc(x.id)}">${esc(x.name)} (synthetic)</option>`).join('')}</select></label><label>Synthetic test value<input id="midi-test-value" type="number" min="0" max="16383" value="64"></label></div><div class="panel-controls"><button id="midi-learn">Learn next message</button><button id="midi-send">Inject synthetic message</button><button id="midi-add">Add mapping</button><button id="midi-export">Export mapping</button><button id="midi-reset">Clear prototype mappings</button></div>${controllerCatalogMarkup}<div id="midi-mappings" class="log">${s.mappings.map((m, i) => `${i + 1}. ${esc(m.type || "CC")} ch${m.channel} / ${m.number} → ${esc(m.target)}${m.conditions?.length?` · if ${esc(m.conditions.map(p=>p.kind==='modifier'?`${p.deck?'deck '+p.deck+' ':''}modifier ${p.number} ${p.equals?'on':'off'}`:`deck ${p.deck} mode ${p.negate?'not ':''}${p.equals}`).join(' and '))}`:''} · ${esc(m.encoding)} · ${esc(m.mappingSource||((m.preset||'').startsWith('hercules-inpulse-300-mk2-playback-')?'Alternative mapping — Open Play Hercules preset':'User mapping'))} <button type="button" data-midi-reassign="${i}" aria-label="Reassign mapping ${i+1}">Reassign</button> <button type="button" data-midi-remove="${i}" aria-label="Remove mapping ${i+1}">Remove</button>`).join("<br>") || "No mappings"}</div><div id="midi-log" class="log">${s.midiLog.map(esc).join("<br>") || "No messages received"}</div><p class="muted">Mappings control real browser actions. Key Shift uses an independent -24 to +24 semitone mapping; relative steps change semitones and enable key lock. Synthetic input is a test, not physical-device proof. Hercules playback preset binds this enumerated input only and keeps existing mappings. Smart Sync and REL use tempo-fader movement around the current software tempo; the first packet establishes a baseline. Ordinary absolute tempo uses pickup after software changes. The second OFF press or a reload from REL restores the known hardware fader position; without a received position, the next fader packet takes absolute control. The updated Hercules preset uses continuous temporary jog bend (up to8%, return after150ms idle); paused motion seeks in10ms steps. The old explicit Jog nudge target is retained. Touch/surface now use the scratch engine at an assumed248ticks/revolution with Virtual Deck Speed; Shift-touch is4× and Shift-Slip toggles per-deck Vinyl. Quantize/Slip/range, previous/stutter and all8Sampler pads are routed. Auto Loop/Roll pads honor Show Beat Jump Controls, including bottom-row jump/half/double/jump. Stems/Pitch Play and Shift cue-selection pads now use their existing audio actions. Manual Loop inputs now support boundary editing via jog, selected-slot save and reloop; Scratch Bank pads load their addressed deck or restore its previous track. Browser focus/normal-fast browse and Prepare controls use the actual lists; double Load triggers Instant Double, and Shift FX controls select slot1. Shift fader-start/back-cue, rate-compensated deck Tap Tempo and tempo-ignore/pickup are now routed. Physical response, composed/keylocked audio and LED feedback remain unverified. FX knobs address each unit’s depth and beat; FX On toggles its first slot. Device-specific direction and hardware round-trip latency remain unverified. Video continuous controls use full-range absolute or 1/127-range relative steps. Commands require 7-bit absolute CC/Note press and release; repeats while held are ignored. Linked controls keep their existing owner. Overlay controls address the selected layer of each kind. Assign MIDI inside Video selects visible controls without running their normal action; Enter unassigns and Escape exits. Images require original bytes after metadata reload. The editor exports Open Play JSON. The catalog imports normalized adapter JSON; raw Serato XML must first pass the explicit offline adapter.</p>`,
+      `${badge("REAL INPUT WHEN SUPPORTED · EXPLICIT TEST INJECTION")}<p id="midi-status">${esc(midiStatus)}</p><div class="panel-controls"><button id="midi-connect">Connect MIDI inputs</button><button id="midi-disconnect">Disconnect input</button><button id="midi-hercules">Use Hercules playback controls</button></div><p class="muted">Connect requests standard MIDI input only. No SysEx or hardware output is sent. Device names are enumeration evidence; received messages are separate evidence.</p><div class="form-grid"><label>Target<select id="midi-target">${options([...libraryMIDITargets, ...deckMIDITargets, ...fxMIDITargets, "Crossfader", "Master Output Level", ...samplerMIDITargets, "FX depth", "Deck 1 key shift", "Deck 2 key shift", "Deck 3 key shift", "Deck 4 key shift", ...videoMIDITargets.map(x=>x.target),...new Set(s.mappings.map(m=>m.target).filter(t=>controllerPerformanceTarget.test(t)||controllerMixerTarget.test(t)))], "Library browse")}</select></label><label>Encoding<select id="midi-encoding">${options(["7-bit absolute", "14-bit absolute", "Relative two’s complement", "Relative offset"], "7-bit absolute")}</select></label><label>Message<select id="midi-type">${options(["CC", "Note", "Pitch bend"], learnedType)}</select></label><label>Channel<input id="midi-channel" type="number" min="1" max="16" value="1"></label><label>Controller / note<input id="midi-number" type="number" min="0" max="127" value="1"></label><label>Invert absolute / relative direction<input id="midi-invert" type="checkbox"></label><label>Synthetic input identity<select id="midi-test-device"><option value="">Unbound test input</option>${midiInputs.map(x=>`<option value="${esc(x.id)}">${esc(x.name)} (synthetic)</option>`).join('')}</select></label><label>Synthetic test value<input id="midi-test-value" type="number" min="0" max="16383" value="64"></label></div><div class="panel-controls"><button id="midi-learn">Learn next message</button><button id="midi-send">Inject synthetic message</button><button id="midi-add">Add mapping</button><button id="midi-export">Export mapping</button><button id="midi-reset">Clear prototype mappings</button></div>${controllerCatalogMarkup}<div id="midi-mappings" class="log">${s.mappings.map((m, i) => `${i + 1}. ${esc(m.type || "CC")} ch${m.channel} / ${m.number} → ${esc(m.target)}${m.conditions?.length?` · if ${esc(m.conditions.map(p=>p.kind==='modifier'?`${p.deck?'deck '+p.deck+' ':''}modifier ${p.number} ${p.equals?'on':'off'}`:`deck ${p.deck} mode ${p.negate?'not ':''}${p.equals}`).join(' and '))}`:''} · ${esc(m.encoding)} · ${esc(m.mappingSource||((m.preset||'').startsWith('hercules-inpulse-300-mk2-playback-')?'Alternative mapping — Open Play Hercules preset':'User mapping'))} <button type="button" data-midi-reassign="${i}" aria-label="Reassign mapping ${i+1}">Reassign</button> <button type="button" data-midi-remove="${i}" aria-label="Remove mapping ${i+1}">Remove</button>`).join("<br>") || "No mappings"}</div><div id="midi-log" class="log">${s.midiLog.map(esc).join("<br>") || "No messages received"}</div><p class="muted">Mappings control real browser actions. Key Shift uses an independent -24 to +24 semitone mapping; relative steps change semitones and enable key lock. Synthetic input is a test, not physical-device proof. Hercules playback preset binds this enumerated input only and keeps existing mappings. Smart Sync and REL use tempo-fader movement around the current software tempo; the first packet establishes a baseline. Ordinary absolute tempo uses pickup after software changes. The second OFF press or a reload from REL restores the known hardware fader position; without a received position, the next fader packet takes absolute control. The updated Hercules preset uses continuous temporary jog bend (up to8%, return after150ms idle); paused motion seeks in10ms steps. The old explicit Jog nudge target is retained. Touch/surface now use the scratch engine at an assumed248ticks/revolution with Virtual Deck Speed; Shift-touch is4× and Shift-Slip toggles per-deck Vinyl. Quantize/Slip/range, previous/stutter and all8Sampler pads are routed. Auto Loop/Roll pads honor Show Beat Jump Controls, including bottom-row jump/half/double/jump. Stems/Pitch Play and Shift cue-selection pads now use their existing audio actions. Manual Loop inputs now support boundary editing via jog, selected-slot save and reloop; Scratch Bank pads load their addressed deck or restore its previous track. Browser focus/normal-fast browse and Prepare controls use the actual lists; double Load triggers Instant Double, and Shift FX controls select slot1. Shift fader-start/back-cue, rate-compensated deck Tap Tempo and tempo-ignore/pickup are now routed. Physical response, composed/keylocked audio and LED feedback remain unverified. FX knobs address each unit’s depth and beat; FX On toggles its first slot. Device-specific direction and hardware round-trip latency remain unverified. Video continuous controls use full-range absolute or 1/127-range relative steps. Commands require 7-bit absolute CC/Note press and release; repeats while held are ignored. Linked controls keep their existing owner. Overlay controls address the selected layer of each kind. Assign MIDI inside Video selects visible controls without running their normal action; Enter unassigns and Escape exits. Images require original bytes after metadata reload. The editor exports Open Play JSON. The catalog imports normalized adapter JSON; raw Serato XML must first pass the explicit offline adapter.</p>`,
       () => {
         controllerCatalogUI=mountControllerCatalog({root:$('#controller-catalog'),store:controllerCatalog,state:s,persist,inputs:()=>midiInputs,esc,download,onApplied:midi,notify});
         $("#midi-connect").onclick = async () => {
@@ -1768,7 +1789,7 @@ export function createPanels(a) {
             $("#midi-status").textContent = midiStatus;
           }
         };
-        $("#midi-disconnect").onclick = () => {deckMIDI.resetInput();controllerPerformance.resetInput();midiInput.disconnect();};
+        $("#midi-disconnect").onclick = () => {deckMIDI.resetInput();controllerPerformance.resetInput();controllerMixer.resetInput();midiInput.disconnect();};
         $('#midi-hercules').onclick=async()=>{
           try{
             await midiInput.connect();
@@ -1847,7 +1868,7 @@ export function createPanels(a) {
         $("#midi-reset").onclick = () => {
           s.mappings = [];
           s.midiLog = [];
-          videoMIDI.resetInput();deckMIDI.resetInput();controllerPerformance.resetInput();
+          videoMIDI.resetInput();deckMIDI.resetInput();controllerPerformance.resetInput();controllerMixer.resetInput();
           persist();
           midi();
         };

@@ -48,7 +48,7 @@ export function mountControllerCatalog({root,store,state,persist,inputs,esc,down
       const result=bindControllerProfile(p,device(),state.mappings),previous=state.mappings;
       state.mappings=result.mappings;
       try{if(persist()===false)throw Error('Mapping storage failed; earlier assignments were restored.');}catch(error){state.mappings=previous;throw error;}
-      const message=`Added ${result.added.length} controls; kept ${result.conflicts.length} conflicting assignments unchanged. ${p.issues.length} unresolved items retained. Physical response unverified.`;
+      const message=`Added ${result.added.length} assignments; retained ${result.unchanged.length} identical and ${result.conflicts.length} conflicting assignments. ${p.issues.length} unresolved items retained. Physical response unverified.`;
       notify(message);onApplied();
     }catch(error){status(error.message);}
   };

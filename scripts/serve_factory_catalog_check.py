@@ -10,7 +10,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--catalog-dir', type=Path, required=True)
     parser.add_argument('--port', type=int, default=8780)
-    parser.add_argument('--harness', choices=['factory-catalog-harness.html', 'controller-conditions-harness.html'], default='factory-catalog-harness.html')
+    parser.add_argument('--harness', choices=['factory-catalog-harness.html', 'controller-conditions-harness.html', 'controller-controls-harness.html'], default='factory-catalog-harness.html')
     args = parser.parse_args()
     fixtures = {}
     for path in sorted(args.catalog_dir.glob('factory-*.json')):

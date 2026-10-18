@@ -14,7 +14,7 @@ const scratchCommands=Array.from({length:8},(_,n)=>[`scratch bank pad ${n+1}`,`s
 const commands=['censor','tap tempo','instant double','auto loop four',...manualCommands,...scratchCommands,...padCommands,'load','play','cue','sync','sync off','headphone cue','loop','loop in','loop out','loop half','loop double','keylock','jog touch','jog touch fast','vinyl','slip','quantize','tempo range','previous','stutter'];
 export const deckMIDITargets=Array.from({length:4},(_,i)=>[...continuous,...commands,...Array.from({length:8},(_,n)=>`hot cue ${n+1}`),...Array.from({length:8},(_,n)=>`clear cue ${n+1}`)].map(x=>`Deck ${i+1} ${x}`)).flat();
 export const samplerMIDITargets=Array.from({length:8},(_,n)=>[`Sampler ${n+1}`,`Sampler ${n+1} alt`]).flat();
-export const libraryMIDITargets=['Library browse','Library fast browse','Library focus','Prepare add','Prepare open'];
+export const libraryMIDITargets=['Library browse','Library fast browse','Library focus','Library backward','Prepare add','Prepare open'];
 export const fxMIDITargets=[1,2].flatMap(n=>['depth','beat','enable','select','next'].map(x=>`FX unit ${n} ${x}`));
 export function createDeckMIDIRouter({state,engine,actions,applyFX=()=>{},onChange=()=>{},onStatus=()=>{},jogBend=createJogBend({engine,onError:error=>onStatus(error.message)})}){
  const pairs=new Map(),buttons=new Map(),pickup=new Map(),rates=new Map(),nudges=new Map(),loads=new Map(),ignoredTempo=new Map(),physicalTempo=new Map(),absoluteTakeover=new Map();
@@ -209,7 +209,7 @@ export function createDeckMIDIRouter({state,engine,actions,applyFX=()=>{},onChan
    q={track:d.track,position:clamp(engine.position(d)+value*.01,0,d.track.duration),revision:1,promise:null};nudges.set(d.index,q);
    q.promise=Promise.resolve().then(async()=>{let sent=0;while(sent!==q.revision&&d.track===q.track){sent=q.revision;await engine.seek(d,q.position);}}).finally(()=>{if(nudges.get(d.index)===q)nudges.delete(d.index);});return q.promise;
   }
-  if(action==='fader start'){
+   if(action==='fader start'||(action==='level'&&d.controllerFaderStartDevices?.has(message.deviceId))){
    if(relative||message.type==='Note')throw Error('Fader Start needs an absolute continuous fader.');
    const previous=d.level??.8,next=clamp(value,0,1);d.level=next;engine.mix(d.index,'level',next);repaintMix(d,'level');
    await actions.faderStart(d,next,previous,message.deviceId||'');return true;

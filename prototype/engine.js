@@ -36,6 +36,7 @@ export class AudioEngine {
     this.deckTrackGainDB=[0,0,0,0];
     this.masterDB=0;
     this.masterLevel = 1;
+    this.masterVolume = 1;
     this.monitorSettings=normalizeMonitorSettings();
     this.onEnd = () => {};
     this.onSampleEnd = () => {};
@@ -86,7 +87,7 @@ export class AudioEngine {
     this.samplerInput.connect(this.samplerOutput);
     this.samplerOutput.connect(this.masterInput);
     this.masterInput.connect(this.master);
-    this.master.gain.value = this.masterLevel;
+    this.master.gain.value = this.masterLevel*this.masterVolume;
     this.analyser = this.ctx.createAnalyser();
     this.analyser.fftSize = 256;
     this.destination = this.ctx.createMediaStreamDestination();
@@ -1046,8 +1047,14 @@ export class AudioEngine {
   setMasterDB(value){
     if(!Number.isFinite(Number(value)))throw new TypeError('Master level needs a finite decibel value.');
     this.masterDB=normalizedMasterDB(value);this.masterLevel=10**(this.masterDB/20);
-    this.master?.gain.setTargetAtTime(this.masterLevel,this.ctx.currentTime,.01);
+    this.master?.gain.setTargetAtTime(this.masterLevel*this.masterVolume,this.ctx.currentTime,.01);
     return this.masterDB;
+  }
+  setMasterVolume(value){
+    if(typeof value!=='number'||!Number.isFinite(value)||value<0||value>1)throw new TypeError('Master volume needs a fraction from0 to1.');
+    this.masterVolume=value;
+    this.master?.gain.setTargetAtTime(this.masterLevel*value,this.ctx.currentTime,.01);
+    return value;
   }
   videoAnalysis(index = 4) {
     if (!this.ctx) return {bass: 0, mid: 0, treble: 0, level: 0, audioAvailable: false, spectrum8: null, spectrum8Available: false};

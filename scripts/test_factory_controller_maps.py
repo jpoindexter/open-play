@@ -43,5 +43,10 @@ class FactoryAdapterTest(unittest.TestCase):
         self.assertEqual(p['mappings'], [])
         self.assertTrue(any('requires Note' in i['reason'] for i in p['issues']))
 
+    def test_master_percent_and_specific_fx_policy(self):
+        p = self.parse('<midi><control channel="1" control="3" complement_control="35" data_type="Absolute 14" event_type="Control Change"><userio event="click"><master_volume/></userio></control><control channel="2" control="6" event_type="Control Change"><userio event="click"><effect_level_1_slot_parameter_1 deck_id="0" slot_id="1"/></userio></control></midi>')
+        self.assertEqual([m['target'] for m in p['mappings']], ['Master volume'])
+        self.assertTrue(any('device-specific' in i['reason'] for i in p['issues']))
+
 
 if __name__ == '__main__': unittest.main()

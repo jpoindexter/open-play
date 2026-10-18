@@ -1,0 +1,104 @@
+{
+  "startedAt": "2026-10-18T12:25:32.447Z",
+  "scope": "Actual browser app, recovered factory profiles, synthetic MIDI/authored tones; no hardware/native/vendor sonic acceptance",
+  "checks": [
+    "Actual v2→v3 import/bind retained335 assignments and added21, including a companion fader-enable action at its existing modifier address",
+    "Actual PCM proves master0 mutes master while PFL remains audible, and cue0 mutes cue while master remains audible",
+    "Source first-slot enable/depth changed actual LPF audio and preserved other slot/unit depths",
+    "Unit beat multiplier reached active effect configuration without changing slot base beats",
+    "Open FX selection deferred commit, displayed pending choice, and respected a later manual selection",
+    "Source Stutter, Tap Tempo, held fader-start/back-cue/release and browser fold/focus reached actual app actions"
+  ],
+  "errors": [],
+  "audio": [
+    {
+      "label": "baseline",
+      "buses": [
+        {
+          "bus": "master",
+          "rms": 0.1138344699664613,
+          "peak": 0.16098523139953613,
+          "frames": 5292
+        },
+        {
+          "bus": "cue",
+          "rms": 0.20099432500530492,
+          "peak": 0.28424710035324097,
+          "frames": 5292
+        }
+      ]
+    },
+    {
+      "label": "master-zero",
+      "buses": [
+        {
+          "bus": "master",
+          "rms": 0,
+          "peak": 0,
+          "frames": 5292
+        },
+        {
+          "bus": "cue",
+          "rms": 0.20099432500530492,
+          "peak": 0.28424710035324097,
+          "frames": 5292
+        }
+      ]
+    },
+    {
+      "label": "cue-zero",
+      "buses": [
+        {
+          "bus": "master",
+          "rms": 0.11383446996646125,
+          "peak": 0.16098523139953613,
+          "frames": 5292
+        },
+        {
+          "bus": "cue",
+          "rms": 0,
+          "peak": 0,
+          "frames": 5292
+        }
+      ]
+    },
+    {
+      "label": "lpf-depth-zero",
+      "buses": [
+        {
+          "bus": "master",
+          "rms": 0.11383446996646124,
+          "peak": 0.16098523139953613,
+          "frames": 5292
+        },
+        {
+          "bus": "cue",
+          "rms": 0.20095752165516756,
+          "peak": 0.28419506549835205,
+          "frames": 5292
+        }
+      ]
+    },
+    {
+      "label": "lpf-depth-full",
+      "buses": [
+        {
+          "bus": "master",
+          "rms": 2.452813296063226e-7,
+          "peak": 3.474612810805411e-7,
+          "frames": 5292
+        },
+        {
+          "bus": "cue",
+          "rms": 0.20095752165516756,
+          "peak": 0.28419506549835205,
+          "frames": 5292
+        }
+      ]
+    }
+  ],
+  "fullParity": false,
+  "physicalCompatibilityVerified": false,
+  "completed": true,
+  "finishedAt": "2026-10-18T12:25:40.111Z"
+}

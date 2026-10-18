@@ -2,10 +2,11 @@
 // are evaluated. Source provenance and physical compatibility are separate.
 import {officialFactoryDigests} from './controller-factory-digests.js';
 import {controllerPerformanceTarget,validateControllerConditions} from './controller-performance.js';
+import {controllerMixerTarget} from './controller-mixer.js';
 export const controllerCatalogFormat='open-play-controller-catalog-v1';
 export const controllerCatalogMaxBytes=32*1024*1024;
 const sha=/^[a-f0-9]{64}$/;
-const commands=/^Deck [1-4] (play|load|cue|sync|sync off|loop|hot cue [1-8]|headphone cue|slip|quantize|vinyl|previous|tempo range|auto loop four|loop in|loop out|loop half|loop double|jog touch)$/;
+const commands=/^Deck [1-4] (play|load|cue|sync|sync off|loop|hot cue [1-8]|headphone cue|slip|quantize|vinyl|previous|tempo range|auto loop four|loop in|loop out|loop half|loop double|jog touch|stutter|tap tempo)$/;
 const continuous=/^Deck [1-4] (level|high|mid|low|trim|filter|tempo|tempo ignore)$/;
 const relative=['Relative two’s complement','Relative offset'];
 // Populate only from reviewed recovery evidence, never an imported claim.
@@ -39,13 +40,16 @@ export function validateControllerMapping(mapping){
   if(!mapping||Object.keys(mapping).some(key=>!fields.includes(key)))throw Error('Mapping has unsupported options; keep it inactive until an adapter handles them.');
   if(!Number.isInteger(mapping.channel)||mapping.channel<1||mapping.channel>16||!Number.isInteger(mapping.number)||mapping.number<0||mapping.number>127)throw Error('Invalid MIDI channel or controller number.');
   if(mapping.invert!==undefined&&typeof mapping.invert!=='boolean')throw Error('Invalid mapping direction.');
-  if(controllerPerformanceTarget.test(mapping.target)){
+  if(controllerMixerTarget.test(mapping.target)){
+    const button=/ (enable|menu)$/.test(mapping.target);
+    if(button?(mapping.type!=='Note'||mapping.encoding!=='7-bit absolute'):(mapping.type!=='CC'||!['7-bit absolute','14-bit absolute'].includes(mapping.encoding)||(mapping.encoding==='14-bit absolute'&&mapping.number>31)))throw Error('Unsupported factory mixer/FX input encoding.');
+  }else if(controllerPerformanceTarget.test(mapping.target)){
     if(mapping.type!=='Note'||mapping.encoding!=='7-bit absolute')throw Error('Controller performance actions need Note press/release.');
   }else if(['Library browse','Library fast browse'].includes(mapping.target)){
     if(mapping.type!=='CC'||!relative.includes(mapping.encoding))throw Error('Imported browse needs an explicit relative CC encoding.');
   }else if(mapping.target==='Crossfader'||continuous.test(mapping.target)){
     if(mapping.type!=='CC'||!['7-bit absolute','14-bit absolute'].includes(mapping.encoding)||(mapping.encoding==='14-bit absolute'&&mapping.number>31))throw Error('Continuous controls need a supported absolute CC/pair encoding.');
-  }else if((!commands.test(mapping.target)&&!['Prepare add','Prepare open'].includes(mapping.target))||mapping.type!=='Note'||mapping.encoding!=='7-bit absolute')throw Error('This catalog action has no supported adapter.');
+  }else if((!commands.test(mapping.target)&&!['Prepare add','Prepare open','Library backward'].includes(mapping.target))||mapping.type!=='Note'||mapping.encoding!=='7-bit absolute')throw Error('This catalog action has no supported adapter.');
   const conditions=validateControllerConditions(mapping.conditions);
   return {target:mapping.target,type:mapping.type,channel:mapping.channel,number:mapping.number,encoding:mapping.encoding,invert:!!mapping.invert,...(conditions?{conditions}:{})};
 }
@@ -73,16 +77,20 @@ export function parseControllerCatalog(text,{kind='user',name=''}={}){
 }
 export function bindControllerProfile(profile,device,current){
   if(!device?.id||device.state!=='connected')throw Error('Select a connected MIDI input before applying this profile.');
-  const result=[...current],added=[],conflicts=[],seen=new Set();
+  const result=[...current],added=[],conflicts=[],unchanged=[],seen=new Set();
+  const runtime=m=>JSON.stringify({target:m.target,type:m.type||'CC',channel:m.channel,number:m.number,encoding:m.encoding,invert:!!m.invert,...(m.conditions?{conditions:m.conditions}:{})});
+  const incoming=new Set(profile.mappings.map(m=>runtime(validateControllerMapping(m))));
   for(const source of profile.mappings){
     const next={...validateControllerMapping(source),deviceId:device.id,controllerProfile:profile.id,mappingSource:controllerSourceLabel(profile)};
     // Multiple cases/actions at one source address belong to one input graph.
     // Existing assignments still own their address; incoming siblings coexist.
-    const overlap=current.some(old=>(!old.deviceId||old.deviceId===device.id)&&(old.type||'CC')===next.type&&old.channel===next.channel&&(old.number===next.number||(next.type==='CC'&&(old.encoding==='14-bit absolute'||next.encoding==='14-bit absolute')&&old.number<64&&next.number<64&&old.number%32===next.number%32)));
+    const same=old=>old.deviceId===device.id&&runtime(old)===runtime(next);
+    if(current.some(same)){unchanged.push(source);continue;}
+    const overlap=current.some(old=>(!old.deviceId||old.deviceId===device.id)&&(old.type||'CC')===next.type&&old.channel===next.channel&&(old.number===next.number||(next.type==='CC'&&(old.encoding==='14-bit absolute'||next.encoding==='14-bit absolute')&&old.number<64&&next.number<64&&old.number%32===next.number%32))&&!(verifiedProfiles.has(profile)&&old.controllerProfile===profile.id&&old.mappingSource==='Official Serato'&&incoming.has(runtime(old))));
     const identity=JSON.stringify(next);
     if(overlap)conflicts.push(source);else if(!seen.has(identity)){seen.add(identity);result.push(next);added.push(next);}
   }
-  return {mappings:result,added,conflicts};
+  return {mappings:result,added,conflicts,unchanged};
 }
 export function createControllerCatalogStore({factory=globalThis.indexedDB,name='openplay-controller-catalog-v1'}={}){
   let opening=null;
