@@ -1,0 +1,185 @@
+{
+  "created_at": "2026-10-18T00:09:28.581Z",
+  "modulePath": "prototype/vendor/signalsmith-stretch/SignalsmithStretch-open-play-history.mjs",
+  "moduleSHA256": "1f470f846a993cc750ee2e111817adb08879493025c7322eadc8cf98323e4ef8",
+  "phase": "production-history",
+  "passed": 10,
+  "failed": 0,
+  "checks": [
+    {
+      "name": "Queried fullseek history sr44100 {\"preset\":\"default\"}",
+      "passed": true,
+      "evidence": {
+        "sampleRate": 44100,
+        "config": {
+          "preset": "default"
+        },
+        "block": 5292,
+        "interval": 1323,
+        "inputLatency": 2646,
+        "outputLatency": 2646,
+        "actualBufferLength": 6615
+      }
+    },
+    {
+      "name": "Queried fullseek history sr44100 {\"preset\":\"cheaper\"}",
+      "passed": true,
+      "evidence": {
+        "sampleRate": 44100,
+        "config": {
+          "preset": "cheaper"
+        },
+        "block": 4410,
+        "interval": 1764,
+        "inputLatency": 2205,
+        "outputLatency": 3969,
+        "actualBufferLength": 6174
+      }
+    },
+    {
+      "name": "Queried fullseek history sr44100 {\"blockMs\":120,\"intervalMs\":10,\"splitComputation\":false}",
+      "passed": true,
+      "evidence": {
+        "sampleRate": 44100,
+        "config": {
+          "blockMs": 120,
+          "intervalMs": 10,
+          "splitComputation": false
+        },
+        "block": 5292,
+        "interval": 441,
+        "inputLatency": 2646,
+        "outputLatency": 2646,
+        "actualBufferLength": 5733
+      }
+    },
+    {
+      "name": "Queried fullseek history sr44100 {\"blockMs\":100,\"intervalMs\":20,\"splitComputation\":true}",
+      "passed": true,
+      "evidence": {
+        "sampleRate": 44100,
+        "config": {
+          "blockMs": 100,
+          "intervalMs": 20,
+          "splitComputation": true
+        },
+        "block": 4410,
+        "interval": 882,
+        "inputLatency": 2205,
+        "outputLatency": 3087,
+        "actualBufferLength": 5292
+      }
+    },
+    {
+      "name": "Queried fullseek history sr48000 {\"preset\":\"default\"}",
+      "passed": true,
+      "evidence": {
+        "sampleRate": 48000,
+        "config": {
+          "preset": "default"
+        },
+        "block": 5760,
+        "interval": 1440,
+        "inputLatency": 2880,
+        "outputLatency": 2880,
+        "actualBufferLength": 7200
+      }
+    },
+    {
+      "name": "Queried fullseek history sr48000 {\"preset\":\"cheaper\"}",
+      "passed": true,
+      "evidence": {
+        "sampleRate": 48000,
+        "config": {
+          "preset": "cheaper"
+        },
+        "block": 4800,
+        "interval": 1920,
+        "inputLatency": 2400,
+        "outputLatency": 4320,
+        "actualBufferLength": 6720
+      }
+    },
+    {
+      "name": "Queried fullseek history sr48000 {\"blockMs\":120,\"intervalMs\":10,\"splitComputation\":false}",
+      "passed": true,
+      "evidence": {
+        "sampleRate": 48000,
+        "config": {
+          "blockMs": 120,
+          "intervalMs": 10,
+          "splitComputation": false
+        },
+        "block": 5760,
+        "interval": 480,
+        "inputLatency": 2880,
+        "outputLatency": 2880,
+        "actualBufferLength": 6240
+      }
+    },
+    {
+      "name": "Queried fullseek history sr48000 {\"blockMs\":100,\"intervalMs\":20,\"splitComputation\":true}",
+      "passed": true,
+      "evidence": {
+        "sampleRate": 48000,
+        "config": {
+          "blockMs": 100,
+          "intervalMs": 20,
+          "splitComputation": true
+        },
+        "block": 4800,
+        "interval": 960,
+        "inputLatency": 2400,
+        "outputLatency": 3360,
+        "actualBufferLength": 5760
+      }
+    },
+    {
+      "name": "Actualneutral keylock at1.08 retains330/550Hz within0.01Hz sr44100",
+      "passed": true,
+      "evidence": {
+        "sampleRate": 44100,
+        "rate": 1.08,
+        "semitones": 0,
+        "measurementSeconds": [
+          5,
+          7
+        ],
+        "nonfinite": 0,
+        "measuredHz": [
+          330.0000435534835,
+          550.0000401337817
+        ],
+        "errorHz": [
+          0.00004355348352191868,
+          0.000040133781681106484
+        ],
+        "declaredMaximumErrorHz": 0.01
+      }
+    },
+    {
+      "name": "Actualneutral keylock at1.08 retains330/550Hz within0.01Hz sr48000",
+      "passed": true,
+      "evidence": {
+        "sampleRate": 48000,
+        "rate": 1.08,
+        "semitones": 0,
+        "measurementSeconds": [
+          5,
+          7
+        ],
+        "nonfinite": 0,
+        "measuredHz": [
+          329.9998862455107,
+          549.9999906158472
+        ],
+        "errorHz": [
+          0.00011375448929129561,
+          0.000009384152804159385
+        ],
+        "declaredMaximumErrorHz": 0.01
+      }
+    }
+  ],
+  "scope": "ActualWASM serialprocessor geometry+neutralpitch contract only. Does not accept native shifted1Hzgate, fullkeylock/compound/musical/reference/physical behavior."
+}

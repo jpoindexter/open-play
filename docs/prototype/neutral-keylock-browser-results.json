@@ -1,0 +1,426 @@
+{
+  "startedAt": "2026-10-18T00:10:00.029Z",
+  "workflowCompleted": true,
+  "checks": [
+    "Actual tempo input reaches1.08 while retaining the live forward adapter",
+    "Actual Key+ controls reach+2 on the retained adapter; residual pitch error is independently graded"
+  ],
+  "errors": [],
+  "scope": "Actual browser app Key lock/Play/tempo/Key+/Pause controls, unchanged default analysis profile and one whole postmaster recording. Owned stereo tone fixture; no imported music/native/hardware/reference or general keylock acceptance.",
+  "criteria": {
+    "neutralMaximumErrorHz": 0.01,
+    "shiftedMaximumErrorHz": 1,
+    "measurementSecondsAfterSettledState": [
+      5,
+      7
+    ]
+  },
+  "fixture": {
+    "sampleRate": 44100,
+    "duration": 30,
+    "tonesHz": [
+      330,
+      550
+    ],
+    "amplitude": 0.12
+  },
+  "states": [
+    {
+      "name": "neutral1.08",
+      "audioTime": 0.26702947845804986,
+      "playing": true,
+      "rate": 1.08,
+      "keylock": true,
+      "keyShift": 0,
+      "audibleRate": 1.08,
+      "shownBPM": "129.6",
+      "live": true,
+      "adapterSnapshot": {
+        "followMinimumLeadSeconds": 0.04,
+        "byteAccounting": "Acknowledged retained PCM and in-flight chunk copies only; excludes decoded inputs, SRC tables and opaque WASM heaps.",
+        "disposed": false,
+        "state": {
+          "when": 0.25126984126984125,
+          "position": 0.017020408163265298,
+          "playing": true,
+          "rate": 1.08,
+          "keylock": true,
+          "semitones": 0,
+          "effectiveSemitones": 0
+        },
+        "sourceGeometry": [
+          {
+            "index": 0,
+            "sampleRate": 44100,
+            "frames": 1323000,
+            "channels": 2,
+            "duration": 30,
+            "paddedTailSeconds": 0,
+            "trimmedTailSeconds": 0,
+            "decodedBytes": 10584000
+          }
+        ],
+        "groups": [
+          {
+            "id": 1,
+            "origin": 0,
+            "start": 0,
+            "end": 8.5,
+            "nodeCount": 1,
+            "processorChannels": 2,
+            "sourceOutputs": 1,
+            "retainedPCMBytes": 2998800,
+            "retainedChunks": 17,
+            "latency": 0.12,
+            "role": "selected"
+          }
+        ],
+        "retainedPCMBytes": 2998800,
+        "inFlightPCMBytes": 0,
+        "decodedBytes": 10584000,
+        "policy": {
+          "direction": "forward",
+          "normalMinimumLead": "queried group latency plus2 render quanta",
+          "followMinimumLeadSeconds": 0.04,
+          "followOwner": "currently active forward owner only",
+          "followCoverage": "required history must already be prepared; reject without replacement",
+          "rate": [
+            0.25,
+            4
+          ],
+          "effectiveSemitones": [
+            -24,
+            24
+          ],
+          "chunkSeconds": 0.5,
+          "requiredPrerollSeconds": 1,
+          "retentionPrerollSeconds": 2,
+          "retentionHysteresisSeconds": 1,
+          "lookaheadSeconds": 8,
+          "driverMs": 50,
+          "crossfadeSeconds": 0.01,
+          "srcTaps": 32,
+          "srcPhases": 1024,
+          "decodedSources": "Whole decoded AudioBuffers remain caller-owned; only processor PCM copies are windowed.",
+          "unsupported": [
+            "reverse",
+            "loop",
+            "Stem Slip",
+            "incremental compressed-file decoding"
+          ],
+          "quality": "Independent32-tap windowed-sinc normalization and10ms group crossfade; vendor sonic equivalence and artifact-free transitions are unverified."
+        },
+        "lastError": null
+      }
+    },
+    {
+      "name": "shifted1.08+2",
+      "audioTime": 7.801904761904762,
+      "playing": true,
+      "rate": 1.08,
+      "keylock": true,
+      "keyShift": 2,
+      "audibleRate": 1.08,
+      "shownBPM": "129.6",
+      "live": true,
+      "adapterSnapshot": {
+        "followMinimumLeadSeconds": 0.04,
+        "byteAccounting": "Acknowledged retained PCM and in-flight chunk copies only; excludes decoded inputs, SRC tables and opaque WASM heaps.",
+        "disposed": false,
+        "state": {
+          "when": 7.794195011337869,
+          "position": 8.154685714285714,
+          "playing": true,
+          "rate": 1.08,
+          "keylock": true,
+          "semitones": 2,
+          "effectiveSemitones": 2
+        },
+        "sourceGeometry": [
+          {
+            "index": 0,
+            "sampleRate": 44100,
+            "frames": 1323000,
+            "channels": 2,
+            "duration": 30,
+            "paddedTailSeconds": 0,
+            "trimmedTailSeconds": 0,
+            "decodedBytes": 10584000
+          }
+        ],
+        "groups": [
+          {
+            "id": 1,
+            "origin": 0,
+            "start": 6,
+            "end": 16.5,
+            "nodeCount": 1,
+            "processorChannels": 2,
+            "sourceOutputs": 1,
+            "retainedPCMBytes": 3704400,
+            "retainedChunks": 21,
+            "latency": 0.12,
+            "role": "selected"
+          }
+        ],
+        "retainedPCMBytes": 3704400,
+        "inFlightPCMBytes": 0,
+        "decodedBytes": 10584000,
+        "policy": {
+          "direction": "forward",
+          "normalMinimumLead": "queried group latency plus2 render quanta",
+          "followMinimumLeadSeconds": 0.04,
+          "followOwner": "currently active forward owner only",
+          "followCoverage": "required history must already be prepared; reject without replacement",
+          "rate": [
+            0.25,
+            4
+          ],
+          "effectiveSemitones": [
+            -24,
+            24
+          ],
+          "chunkSeconds": 0.5,
+          "requiredPrerollSeconds": 1,
+          "retentionPrerollSeconds": 2,
+          "retentionHysteresisSeconds": 1,
+          "lookaheadSeconds": 8,
+          "driverMs": 50,
+          "crossfadeSeconds": 0.01,
+          "srcTaps": 32,
+          "srcPhases": 1024,
+          "decodedSources": "Whole decoded AudioBuffers remain caller-owned; only processor PCM copies are windowed.",
+          "unsupported": [
+            "reverse",
+            "loop",
+            "Stem Slip",
+            "incremental compressed-file decoding"
+          ],
+          "quality": "Independent32-tap windowed-sinc normalization and10ms group crossfade; vendor sonic equivalence and artifact-free transitions are unverified."
+        },
+        "lastError": null
+      }
+    }
+  ],
+  "sourceBefore": {
+    "app.js": "266c98f7be3fc6c543b0ae86f2f070b2015afa73a108206bb498db8dd003f588",
+    "engine.js": "f34657b68dfb591cb135af76231677ef218576a56719da522839ff63f2f5fc12",
+    "keylock-shadow-live.js": "4a5625d3d7ace212fbbd0dc140a30a351a11cf4bfeafd07be406a26dd0004a63",
+    "keylock.js": "05dcc7b05266984076744eb01f5f9bd76ddf6e80be279d9c4bdd9cb0164935d4",
+    "keylock-dsp.js": "78a21a3ac295c79454895bad3650d81b7782aac46432df1258e01911180fbe68",
+    "panels.js": "4a4b4c544f07140758cfd8f45b00f774dea588f881d6ed0f24c0e19bc1ff02fb",
+    "neutral-keylock-harness.js": "17b085bb0f6340fe53383af5b0b5d47148253f77016cdcc4e0f2fd87013a87f0",
+    "vendor/signalsmith-stretch/SignalsmithStretch-open-play-disposable.mjs": "b2811c519f067cc5a1abd6cdccab46578d1eeef8aba42f666fab2830a9d6f46e",
+    "vendor/signalsmith-stretch/SignalsmithStretch-open-play-history.mjs": "1f470f846a993cc750ee2e111817adb08879493025c7322eadc8cf98323e4ef8"
+  },
+  "physicalOutputMuted": true,
+  "recordStartAudioTime": 0.09868480725623582,
+  "neutral": {
+    "name": "neutral1.08",
+    "audioTime": 0.26702947845804986,
+    "playing": true,
+    "rate": 1.08,
+    "keylock": true,
+    "keyShift": 0,
+    "audibleRate": 1.08,
+    "shownBPM": "129.6",
+    "live": true,
+    "adapterSnapshot": {
+      "followMinimumLeadSeconds": 0.04,
+      "byteAccounting": "Acknowledged retained PCM and in-flight chunk copies only; excludes decoded inputs, SRC tables and opaque WASM heaps.",
+      "disposed": false,
+      "state": {
+        "when": 0.25126984126984125,
+        "position": 0.017020408163265298,
+        "playing": true,
+        "rate": 1.08,
+        "keylock": true,
+        "semitones": 0,
+        "effectiveSemitones": 0
+      },
+      "sourceGeometry": [
+        {
+          "index": 0,
+          "sampleRate": 44100,
+          "frames": 1323000,
+          "channels": 2,
+          "duration": 30,
+          "paddedTailSeconds": 0,
+          "trimmedTailSeconds": 0,
+          "decodedBytes": 10584000
+        }
+      ],
+      "groups": [
+        {
+          "id": 1,
+          "origin": 0,
+          "start": 0,
+          "end": 8.5,
+          "nodeCount": 1,
+          "processorChannels": 2,
+          "sourceOutputs": 1,
+          "retainedPCMBytes": 2998800,
+          "retainedChunks": 17,
+          "latency": 0.12,
+          "role": "selected"
+        }
+      ],
+      "retainedPCMBytes": 2998800,
+      "inFlightPCMBytes": 0,
+      "decodedBytes": 10584000,
+      "policy": {
+        "direction": "forward",
+        "normalMinimumLead": "queried group latency plus2 render quanta",
+        "followMinimumLeadSeconds": 0.04,
+        "followOwner": "currently active forward owner only",
+        "followCoverage": "required history must already be prepared; reject without replacement",
+        "rate": [
+          0.25,
+          4
+        ],
+        "effectiveSemitones": [
+          -24,
+          24
+        ],
+        "chunkSeconds": 0.5,
+        "requiredPrerollSeconds": 1,
+        "retentionPrerollSeconds": 2,
+        "retentionHysteresisSeconds": 1,
+        "lookaheadSeconds": 8,
+        "driverMs": 50,
+        "crossfadeSeconds": 0.01,
+        "srcTaps": 32,
+        "srcPhases": 1024,
+        "decodedSources": "Whole decoded AudioBuffers remain caller-owned; only processor PCM copies are windowed.",
+        "unsupported": [
+          "reverse",
+          "loop",
+          "Stem Slip",
+          "incremental compressed-file decoding"
+        ],
+        "quality": "Independent32-tap windowed-sinc normalization and10ms group crossfade; vendor sonic equivalence and artifact-free transitions are unverified."
+      },
+      "lastError": null
+    }
+  },
+  "shifted": {
+    "name": "shifted1.08+2",
+    "audioTime": 7.801904761904762,
+    "playing": true,
+    "rate": 1.08,
+    "keylock": true,
+    "keyShift": 2,
+    "audibleRate": 1.08,
+    "shownBPM": "129.6",
+    "live": true,
+    "adapterSnapshot": {
+      "followMinimumLeadSeconds": 0.04,
+      "byteAccounting": "Acknowledged retained PCM and in-flight chunk copies only; excludes decoded inputs, SRC tables and opaque WASM heaps.",
+      "disposed": false,
+      "state": {
+        "when": 7.794195011337869,
+        "position": 8.154685714285714,
+        "playing": true,
+        "rate": 1.08,
+        "keylock": true,
+        "semitones": 2,
+        "effectiveSemitones": 2
+      },
+      "sourceGeometry": [
+        {
+          "index": 0,
+          "sampleRate": 44100,
+          "frames": 1323000,
+          "channels": 2,
+          "duration": 30,
+          "paddedTailSeconds": 0,
+          "trimmedTailSeconds": 0,
+          "decodedBytes": 10584000
+        }
+      ],
+      "groups": [
+        {
+          "id": 1,
+          "origin": 0,
+          "start": 6,
+          "end": 16.5,
+          "nodeCount": 1,
+          "processorChannels": 2,
+          "sourceOutputs": 1,
+          "retainedPCMBytes": 3704400,
+          "retainedChunks": 21,
+          "latency": 0.12,
+          "role": "selected"
+        }
+      ],
+      "retainedPCMBytes": 3704400,
+      "inFlightPCMBytes": 0,
+      "decodedBytes": 10584000,
+      "policy": {
+        "direction": "forward",
+        "normalMinimumLead": "queried group latency plus2 render quanta",
+        "followMinimumLeadSeconds": 0.04,
+        "followOwner": "currently active forward owner only",
+        "followCoverage": "required history must already be prepared; reject without replacement",
+        "rate": [
+          0.25,
+          4
+        ],
+        "effectiveSemitones": [
+          -24,
+          24
+        ],
+        "chunkSeconds": 0.5,
+        "requiredPrerollSeconds": 1,
+        "retentionPrerollSeconds": 2,
+        "retentionHysteresisSeconds": 1,
+        "lookaheadSeconds": 8,
+        "driverMs": 50,
+        "crossfadeSeconds": 0.01,
+        "srcTaps": 32,
+        "srcPhases": 1024,
+        "decodedSources": "Whole decoded AudioBuffers remain caller-owned; only processor PCM copies are windowed.",
+        "unsupported": [
+          "reverse",
+          "loop",
+          "Stem Slip",
+          "incremental compressed-file decoding"
+        ],
+        "quality": "Independent32-tap windowed-sinc normalization and10ms group crossfade; vendor sonic equivalence and artifact-free transitions are unverified."
+      },
+      "lastError": null
+    }
+  },
+  "recording": {
+    "bytes": 240891,
+    "format": "audio/webm;codecs=opus",
+    "sha256": "88c10653881350678ab80a80ab7140c703d7c9effb22b60b54543da07bc9841f"
+  },
+  "decoded": {
+    "frames": 664145,
+    "sampleRate": 44100,
+    "channels": 2,
+    "duration": 15.059977324263038
+  },
+  "finalPlayingDecks": 0,
+  "sourceAfter": {
+    "app.js": "266c98f7be3fc6c543b0ae86f2f070b2015afa73a108206bb498db8dd003f588",
+    "engine.js": "f34657b68dfb591cb135af76231677ef218576a56719da522839ff63f2f5fc12",
+    "keylock-shadow-live.js": "4a5625d3d7ace212fbbd0dc140a30a351a11cf4bfeafd07be406a26dd0004a63",
+    "keylock.js": "05dcc7b05266984076744eb01f5f9bd76ddf6e80be279d9c4bdd9cb0164935d4",
+    "keylock-dsp.js": "78a21a3ac295c79454895bad3650d81b7782aac46432df1258e01911180fbe68",
+    "panels.js": "4a4b4c544f07140758cfd8f45b00f774dea588f881d6ed0f24c0e19bc1ff02fb",
+    "neutral-keylock-harness.js": "17b085bb0f6340fe53383af5b0b5d47148253f77016cdcc4e0f2fd87013a87f0",
+    "vendor/signalsmith-stretch/SignalsmithStretch-open-play-disposable.mjs": "b2811c519f067cc5a1abd6cdccab46578d1eeef8aba42f666fab2830a9d6f46e",
+    "vendor/signalsmith-stretch/SignalsmithStretch-open-play-history.mjs": "1f470f846a993cc750ee2e111817adb08879493025c7322eadc8cf98323e4ef8"
+  },
+  "sourceStable": true,
+  "finishedAt": "2026-10-18T00:10:15.281Z",
+  "rawReport": {
+    "path": "local-evidence/neutral-keylock/after/original.json",
+    "bytes": 335285,
+    "sha256": "15d0f1ac6d3e48ff679ab5dde9056a79393415144f5db1bb95214491a43c44de"
+  },
+  "originalAudioPath": "local-evidence/neutral-keylock/after/master.webm",
+  "rawAudioRetained": true
+}

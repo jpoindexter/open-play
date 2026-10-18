@@ -1,0 +1,158 @@
+{
+  "scope": "Actual live adapter and WASM, controlled serial clock/ports and simplified gain graph. Pending rate/pitch/seek/start/pause only, not browser timing/physical audio or pitch quality acceptance.",
+  "passed": 2,
+  "failed": 3,
+  "checks": [
+    {
+      "name": "Pending start survives rate control",
+      "passed": false,
+      "evidence": {
+        "start": {
+          "when": 1,
+          "position": 0,
+          "playing": true,
+          "rate": 1,
+          "keylock": true,
+          "semitones": 0,
+          "effectiveSemitones": 0,
+          "group": 1,
+          "origin": 0,
+          "latencyLead": 0.12,
+          "operationKind": "normal",
+          "minimumLeadSeconds": 0.12533333333333332,
+          "scheduleIssuedAt": 0,
+          "scheduleAcknowledgedAt": 0,
+          "transitionSeconds": 0,
+          "superseded": false
+        },
+        "ack": {
+          "when": 0.12533333333333332,
+          "position": 0,
+          "playing": false,
+          "rate": 1.08,
+          "keylock": true,
+          "semitones": 0,
+          "effectiveSemitones": 0,
+          "group": 1,
+          "origin": 0,
+          "latencyLead": 0.12,
+          "operationKind": "normal",
+          "minimumLeadSeconds": 0.12533333333333332,
+          "scheduleIssuedAt": 0,
+          "scheduleAcknowledgedAt": 0,
+          "transitionSeconds": 0,
+          "superseded": false
+        }
+      },
+      "error": "AssertionError [ERR_ASSERTION]: An implicit control before pending playback must keep that future start\n+ actual - expected\n\n+ 0.12533333333333332\n- 1\n\n    at file:///Users/jasonpoindexter/Documents/GitHub/Open%20Play/scripts/test_keylock_pending_controls.mjs:28:39\n    at async check (file:///Users/jasonpoindexter/Documents/GitHub/Open%20Play/scripts/test_keylock_pending_controls.mjs:5:79)\n    at async file:///Users/jasonpoindexter/Documents/GitHub/Open%20Play/scripts/test_keylock_pending_controls.mjs:22:43"
+    },
+    {
+      "name": "Pending start survives pitch control",
+      "passed": false,
+      "evidence": {
+        "start": {
+          "when": 1,
+          "position": 0,
+          "playing": true,
+          "rate": 1,
+          "keylock": true,
+          "semitones": 0,
+          "effectiveSemitones": 0,
+          "group": 1,
+          "origin": 0,
+          "latencyLead": 0.12,
+          "operationKind": "normal",
+          "minimumLeadSeconds": 0.12533333333333332,
+          "scheduleIssuedAt": 0,
+          "scheduleAcknowledgedAt": 0,
+          "transitionSeconds": 0,
+          "superseded": false
+        },
+        "ack": {
+          "when": 0.12533333333333332,
+          "position": 0,
+          "playing": false,
+          "rate": 1,
+          "keylock": true,
+          "semitones": 2,
+          "effectiveSemitones": 2,
+          "group": 1,
+          "origin": 0,
+          "latencyLead": 0.12,
+          "operationKind": "normal",
+          "minimumLeadSeconds": 0.12533333333333332,
+          "scheduleIssuedAt": 0,
+          "scheduleAcknowledgedAt": 0,
+          "transitionSeconds": 0,
+          "superseded": false
+        }
+      },
+      "error": "AssertionError [ERR_ASSERTION]: An implicit control before pending playback must keep that future start\n+ actual - expected\n\n+ 0.12533333333333332\n- 1\n\n    at file:///Users/jasonpoindexter/Documents/GitHub/Open%20Play/scripts/test_keylock_pending_controls.mjs:28:39\n    at async check (file:///Users/jasonpoindexter/Documents/GitHub/Open%20Play/scripts/test_keylock_pending_controls.mjs:5:79)\n    at async file:///Users/jasonpoindexter/Documents/GitHub/Open%20Play/scripts/test_keylock_pending_controls.mjs:22:43"
+    },
+    {
+      "name": "Pending start survives seek control",
+      "passed": false,
+      "evidence": {
+        "start": {
+          "when": 1,
+          "position": 0,
+          "playing": true,
+          "rate": 1,
+          "keylock": true,
+          "semitones": 0,
+          "effectiveSemitones": 0,
+          "group": 1,
+          "origin": 0,
+          "latencyLead": 0.12,
+          "operationKind": "normal",
+          "minimumLeadSeconds": 0.12533333333333332,
+          "scheduleIssuedAt": 0,
+          "scheduleAcknowledgedAt": 0,
+          "transitionSeconds": 0,
+          "superseded": false
+        },
+        "ack": {
+          "when": 0.12533333333333332,
+          "position": 2,
+          "playing": false,
+          "rate": 1,
+          "keylock": true,
+          "semitones": 0,
+          "effectiveSemitones": 0,
+          "group": 1,
+          "origin": 0,
+          "latencyLead": 0.12,
+          "operationKind": "normal",
+          "minimumLeadSeconds": 0.12533333333333332,
+          "scheduleIssuedAt": 0,
+          "scheduleAcknowledgedAt": 0,
+          "transitionSeconds": 0,
+          "superseded": false
+        }
+      },
+      "error": "AssertionError [ERR_ASSERTION]: An implicit control before pending playback must keep that future start\n+ actual - expected\n\n+ 0.12533333333333332\n- 1\n\n    at file:///Users/jasonpoindexter/Documents/GitHub/Open%20Play/scripts/test_keylock_pending_controls.mjs:28:39\n    at async check (file:///Users/jasonpoindexter/Documents/GitHub/Open%20Play/scripts/test_keylock_pending_controls.mjs:5:79)\n    at async file:///Users/jasonpoindexter/Documents/GitHub/Open%20Play/scripts/test_keylock_pending_controls.mjs:22:43"
+    },
+    {
+      "name": "Explicit pause still cancels future playback",
+      "passed": true,
+      "evidence": {
+        "signal": {
+          "rms": 0,
+          "peak": 0,
+          "hz": null
+        }
+      }
+    },
+    {
+      "name": "Parameter edits on a truly paused owner remain paused",
+      "passed": true,
+      "evidence": {
+        "signal": {
+          "rms": 0,
+          "peak": 0,
+          "hz": null
+        }
+      }
+    }
+  ]
+}

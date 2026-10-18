@@ -1,8 +1,9 @@
 // Forward browser keylock adapter; independent ownership/windowing around Signalsmith.
 // Derived from retention clone SHA256 16707a8f446a503eff022528461ff758b0f47031e34064241bf02d085cd6d9e4.
 // Normal scheduling keeps queried latency+2quanta; only explicit active followSeek uses40ms.
-// Retained history2s, required history1s. Vendor/WASM, SRC and gain behavior unchanged.
-import Stretch from './vendor/signalsmith-stretch/SignalsmithStretch-open-play-disposable.mjs';
+// Retained source history2s, required source history1s. The distinct wrapper also
+// supplies the DSP's queried block+interval seek history; preset/WASM/SRC unchanged.
+import Stretch from './vendor/signalsmith-stretch/SignalsmithStretch-open-play-history.mjs';
 
 const CHUNK_SECONDS=.5,REQUIRED_PREROLL_SECONDS=1,RETENTION_PREROLL_SECONDS=2,LOOKAHEAD_SECONDS=8,DRIVER_MS=50,CROSSFADE_SECONDS=.01,FOLLOW_LEAD_SECONDS=.04;
 const policy=Object.freeze({direction:'forward',normalMinimumLead:'queried group latency plus2 render quanta',followMinimumLeadSeconds:FOLLOW_LEAD_SECONDS,followOwner:'currently active forward owner only',followCoverage:'required history must already be prepared; reject without replacement',rate:[.25,4],effectiveSemitones:[-24,24],chunkSeconds:CHUNK_SECONDS,requiredPrerollSeconds:REQUIRED_PREROLL_SECONDS,retentionPrerollSeconds:RETENTION_PREROLL_SECONDS,retentionHysteresisSeconds:RETENTION_PREROLL_SECONDS-REQUIRED_PREROLL_SECONDS,lookaheadSeconds:LOOKAHEAD_SECONDS,driverMs:DRIVER_MS,crossfadeSeconds:CROSSFADE_SECONDS,srcTaps:32,srcPhases:1024,decodedSources:'Whole decoded AudioBuffers remain caller-owned; only processor PCM copies are windowed.',unsupported:['reverse','loop','Stem Slip','incremental compressed-file decoding'],quality:'Independent32-tap windowed-sinc normalization and10ms group crossfade; vendor sonic equivalence and artifact-free transitions are unverified.'});
@@ -111,11 +112,11 @@ class LiveKeylock{
  assertFollowOwner(at=this.context.currentTime+FOLLOW_LEAD_SECONDS){this.assertOwner();const current=this.stateAt(),future=this.stateAt(at);if(!current.playing||current.rate<=0||!future.playing||future.rate<=0)throw failure('InvalidStateError','followSeek requires an already active forward owner; use normal start for paused/future-start owners');}
  assertFollowCoverage(position,group=this.active){if(!this.coverage(group,position))throw Object.assign(failure('FollowCoverageError','followSeek requires already prepared1s history; use normal seek while externally muted to rebase'),{position,requiredStart:Math.max(0,position-REQUIRED_PREROLL_SECONDS),retainedStart:group.startFrame/this.sampleRate,retainedEnd:group.endFrame/this.sampleRate});}
  async program(group,state){this.checkGroup(group);const input=state.position-group.originFrame/this.sampleRate;const command={active:state.playing,input,output:state.when,rate:state.rate,semitones:state.effectiveSemitones};group.lastScheduleIssuedAt=this.context.currentTime;this.emit('schedule-issued',{group:group.id,command:{...command},issuedAt:group.lastScheduleIssuedAt});await Promise.all(group.nodes.map(node=>node.schedule(command)));this.checkGroup(group);if(state.playing){const end=state.when+(this.duration-state.position)/state.rate;await Promise.all(group.nodes.map(node=>node.stop(end)));this.checkGroup(group);}group.segments=this.addClock(group.segments,state);if(this.context.currentTime>state.when)this.emit('late-ack',{group:group.id,requestedOutput:state.when,acknowledgedAt:this.context.currentTime});}
- async schedule(op,{position,when,state,playing,follow=false,shadowFollow=false}){
+ async schedule(op,{position,when,notBefore,state,playing,follow=false,shadowFollow=false}){
   this.checkOperation(op);if(shadowFollow){this.assertFollowOwner(when??this.context.currentTime+FOLLOW_LEAD_SECONDS);this.assertFollowCoverage(position);}let group=this.active,replacement=false,programIssued=false,windowIssued=false,windowComplete=false;
   try{
    if(!this.coverage(group,position)){await this.waitRetiring(op);this.checkOperation(op);group=await this.newGroup(position,state,op);replacement=true;this.checkOperation(op);}else{windowIssued=true;await this.fill(group,position);windowComplete=true;this.checkOperation(op);}
-   if(shadowFollow){this.assertFollowOwner(when??this.context.currentTime+FOLLOW_LEAD_SECONDS);this.assertFollowCoverage(position,group);}const output=this.at(group,when,shadowFollow),mapped={when:output,position:follow?this.stateAt(output).position:position,playing:playing,...state};mapped.playing=playing&&mapped.position<this.duration;if(!this.coverage(group,mapped.position))throw failure('PreparationOverrunError','Requested advancing position left the prepared bounded window');programIssued=true;await this.program(group,mapped);
+   if(shadowFollow){this.assertFollowOwner(when??this.context.currentTime+FOLLOW_LEAD_SECONDS);this.assertFollowCoverage(position,group);}const implicitTime=notBefore===undefined?undefined:Math.max(notBefore,this.context.currentTime+this.minimumLead(group,shadowFollow));const output=this.at(group,when??implicitTime,shadowFollow),mapped={when:output,position:follow?this.stateAt(output).position:position,playing:playing,...state};mapped.playing=playing&&mapped.position<this.duration;if(!this.coverage(group,mapped.position))throw failure('PreparationOverrunError','Requested advancing position left the prepared bounded window');programIssued=true;await this.program(group,mapped);
    // Accepted active commands must remain in the application clock even if a newer request is queued.
    if(replacement)this.checkOperation(op);
    this.assertOwner();const old=this.active;this.clock=this.addClock(this.clock,mapped);this.ended=false;
@@ -152,8 +153,17 @@ class LiveKeylock{
    return {...ack,timelineSegments:segments.map(s=>({...s}))};
   });
  }
- update({rate,keylock,semitones,when}={}){return this.operation(op=>{const previous=this.stateAt(when===undefined?this.context.currentTime+this.minimumLead(this.active):finite(when,'when')),state=normalize({rate:rate??previous.rate,keylock:keylock??previous.keylock,semitones:semitones??previous.semitones});return this.schedule(op,{position:previous.position,when,state,playing:previous.playing,follow:true});});}
- seek(position,{when}={}){this.validPosition(position);return this.operation(op=>{const at=when??(this.context.currentTime+this.minimumLead(this.active)),previous=this.stateAt(at);return this.schedule(op,{position,when,state:normalize(previous),playing:previous.playing});});}
+ controlTime(when){
+  if(when!==undefined)return finite(when,'when');
+  const earliest=this.context.currentTime+this.minimumLead(this.active);
+  // The engine can acknowledge Play before its future audio anchor. An
+  // implicit control in that gap edits the intended playing state, rather
+  // than replacing the queued start with the currently silent state.
+  if(this.stateAt(earliest).playing)return earliest;
+  return this.clock.find(state=>state.playing&&state.when>earliest)?.when??earliest;
+ }
+ update({rate,keylock,semitones,when}={}){return this.operation(op=>{const at=this.controlTime(when),previous=this.stateAt(at),state=normalize({rate:rate??previous.rate,keylock:keylock??previous.keylock,semitones:semitones??previous.semitones});return this.schedule(op,{position:previous.position,when,notBefore:when===undefined?at:undefined,state,playing:previous.playing,follow:true});});}
+ seek(position,{when}={}){this.validPosition(position);return this.operation(op=>{const at=this.controlTime(when),previous=this.stateAt(at);return this.schedule(op,{position,when,notBefore:when===undefined?at:undefined,state:normalize(previous),playing:previous.playing});});}
 
  followSeek(position,{when}={}){this.validPosition(position);const at=when===undefined?this.context.currentTime+FOLLOW_LEAD_SECONDS:finite(when,'when');this.assertFollowOwner(at);this.assertFollowCoverage(position);return this.operation(op=>{this.checkOperation(op);const output=when??this.context.currentTime+FOLLOW_LEAD_SECONDS;this.assertFollowOwner(output);this.assertFollowCoverage(position);const previous=this.stateAt(output);return this.schedule(op,{position,when,state:normalize(previous),playing:true,shadowFollow:true});});}
 

@@ -15,3 +15,5 @@ This version includes recent loop/Sync/warped-loop keylock/tempo-display and mou
 0.1.13 remains available through **Start Open Play Playback Test 0.1.13.command**; see its [historical guide](TRY_PLAYBACK_DESKTOP_0.1.13.md). Earlier versions remain too. Close the current test before launching an older playback test: they share profile/port18775. Pre-switch profile backup retained under local-evidence/profile-backups/playback-before-0.1.14/.
 
 [Native observations](desktop-0.1.14-playback-observation.json) · [Package receipt](desktop-0.1.14-playback-package.json) · [Full plan](../../FULL_BUILD_PLAN.md) · [Claude handoff](../../handoffs/current.md).
+
+Browser-source plan100 adds queued keylock Play and neutral-pitch corrections after this package. They are not included in0.1.14; its native results retain the scope above. The prepared first hands-on test uses ordinary playback with keylock off.
