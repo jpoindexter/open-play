@@ -210,8 +210,10 @@ export const settingsSchema = {
     ["Split Cue", "check", false],
     ["Upfader Curve", "range", 50],
     ["Crossfader Curve", ["Linear", "Power"], "Linear"],
+    ["Crossfader Curve Amount", "range", 50],
     ["Crossfader Reverse", "check", false],
     ["Crossfader Disable", "check", false],
+    ...Array.from({length:4},(_,i)=>[`Deck ${i+1} Crossfader Assign`,['A','Thru','B'],i%2?'B':'A']),
     ["Mixing Mode", ["Internal", "External — simulated"], "Internal"],
   ],
   FX: [

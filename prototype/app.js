@@ -1,3 +1,4 @@
+import {mixerSettingsFromPreferences} from './mixer-curves.js';
 import {createDeckTapTempo} from './deck-tap-tempo.js';
 import {createInstantDouble} from './instant-double.js';
 import {createManualLoops} from './manual-loops.js';
@@ -581,7 +582,7 @@ function renderMixer() {
       .slice(0, state.deckCount)
       .map(
         (d) =>
-          `<div class="channel-strip" style="--accent:${colors[d.index]}"><strong>${d.index + 1}</strong>${["trim", "high", "mid", "low", "filter"].map((k) => `<label class="knob-group">${k === "trim" ? "GAIN" : k.toUpperCase()}<input aria-label="Deck ${d.index + 1} ${k}" type="range" data-mix="${d.index}:${k}" min="${k === "trim" ? 0 : k === "filter" ? -1 : -24}" max="${k === "trim" ? 2 : k === "filter" ? 1 : 6}" step="${["trim", "filter"].includes(k) ? ".01" : ".5"}" value="${d[k] ?? (k === "trim" ? 1 : 0)}"></label>`).join("")}<label class="fader-group">LEVEL<input type="range" min="0" max="1" step=".01" value="${d.level ?? 0.8}" data-mix="${d.index}:level" aria-label="Deck ${d.index + 1} level"></label><button data-action="pfl" data-deck="${d.index}" class="${d.pfl ? "active" : ""}" title="Select deck for headphone cue">CUE ◇</button></div>`,
+          `<div class="channel-strip" style="--accent:${colors[d.index]}"><strong>${d.index + 1}</strong>${["trim", "high", "mid", "low", "filter"].map((k) => `<label class="knob-group">${k === "trim" ? "GAIN" : k.toUpperCase()}<input aria-label="Deck ${d.index + 1} ${k}" type="range" data-mix="${d.index}:${k}" min="${k === "trim" ? 0 : k === "filter" ? -1 : -24}" max="${k === "trim" ? 2 : k === "filter" ? 1 : 6}" step="${["trim", "filter"].includes(k) ? ".01" : ".5"}" value="${d[k] ?? (k === "trim" ? 1 : 0)}"></label>`).join("")}<label class="fader-group">LEVEL<input type="range" min="0" max="1" step=".01" value="${d.level ?? 0.8}" data-mix="${d.index}:level" aria-label="Deck ${d.index + 1} level"></label><label class="cross-assign">XF ASSIGN<select data-cross-assign="${d.index}" aria-label="Deck ${d.index+1} crossfader assignment">${["A","Thru","B"].map(side=>`<option ${side===engine.mixerSettings.assignments[d.index]?"selected":""}>${side}</option>`).join("")}</select></label><button data-action="pfl" data-deck="${d.index}" class="${d.pfl ? "active" : ""}" title="Select deck for headphone cue">CUE ◇</button></div>`,
       )
       .join("") +
     `<label class="crossfader">A — CROSSFADER — B<input id="crossfader" type="range" min="-1" max="1" step=".01" value="${engine.cross}" aria-label="Crossfader"></label>`;
@@ -1247,6 +1248,7 @@ const deckTapTempo=createDeckTapTempo({engine,persist,render:()=>{renderDecks();
 const instantDouble=createInstantDouble({state,engine,load,render:renderDecks,notify});
 const jogBend=createJogBend({engine,onError:error=>notify(error.message)});
 const api = {
+  renderMixer,
   state,
   engine,
   $,
@@ -1422,6 +1424,13 @@ document.addEventListener("input", (e) => {
   if (e.target.id === "crossfader") engine.setCross(Number(e.target.value));
 });
 document.addEventListener("change", (e) => {
+  if(e.target.dataset.crossAssign!==undefined){
+    const index=Number(e.target.dataset.crossAssign);
+    if(Number.isInteger(index)&&index>=0&&index<4&&["A","B","Thru"].includes(e.target.value)){
+      state.settings[`Deck ${index+1} Crossfader Assign`]=e.target.value;
+      engine.setMixerSettings(mixerSettingsFromPreferences(state.settings));persist();
+    }
+  }
   if (e.target.dataset.pitchRange !== undefined) {
     const d = state.decks[Number(e.target.dataset.pitchRange)];
     if (pitchRanges[e.target.value]) d.pitchRangeMode = e.target.value;

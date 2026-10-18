@@ -18,6 +18,7 @@ import {createSyncTempoHandoff} from './sync-tempo-handoff.js';
 import {createReverseCensorPlan} from './reverse-censor-plan.js';
 import {CensorBacking} from './censor-backing.js';
 import {createBeatgrid} from './beatgrid.js';
+import {normalizeMixerSettings,crossfaderGain,upfaderGain} from './mixer-curves.js';
 export class AudioEngine {
   constructor() {
     this.ctx = null;
@@ -27,6 +28,7 @@ export class AudioEngine {
     this.recording = false;
     this.chunks = [];
     this.cross = 0;
+    this.mixerSettings=normalizeMixerSettings();
     this.masterLevel = 0.55;
     this.monitorSettings=normalizeMonitorSettings();
     this.onEnd = () => {};
@@ -121,7 +123,7 @@ export class AudioEngine {
       });
     }
     this.audioMonitor=createAudioMonitor(this.ctx,{master:this.analyser,deckTaps:this.nodes.map(n=>n.cueTap),settings:this.monitorSettings});
-    this.setCross(0);
+    this.setCross(this.cross);
     if (this.fxState) this.configureFX(...this.fxState);
   }
   async resume() {
@@ -797,16 +799,21 @@ export class AudioEngine {
       if (on && d.position >= end) await this.seek(d, start);
     }
   }
+  setMixerSettings(value) {
+    this.mixerSettings=normalizeMixerSettings(value);
+    this.setCross(this.cross);
+    return structuredClone(this.mixerSettings);
+  }
   setCross(value) {
-    this.cross = Number(value);
+    if(!Number.isFinite(Number(value)))throw new TypeError('Crossfader needs a finite position.');
+    this.cross = Math.max(-1,Math.min(1,Number(value)));
     if (!this.ctx) return;
     for (let i = 0; i < 4; i++) {
-      const side =
-          i % 2 ? Math.min(1, 1 + this.cross) : Math.min(1, 1 - this.cross),
+      const side = crossfaderGain(this.cross,this.mixerSettings.assignments[i],this.mixerSettings),
         n = this.nodes[i];
       this.audioMonitor?.setPFL(i,!!n.pfl,n.trim);
       n.gain.gain.setTargetAtTime(
-        (this.voices.get(i)?.stemSlipTransport ? 1 : side) * n.level * n.trim,
+        (this.voices.get(i)?.stemSlipTransport ? 1 : side) * upfaderGain(n.level,this.mixerSettings) * n.trim,
         this.ctx.currentTime,
         0.01,
       );
