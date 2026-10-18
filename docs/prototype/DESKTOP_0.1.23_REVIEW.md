@@ -51,6 +51,8 @@ Final main window:0decks playing, both00:00.0; After Hours124BPM and Glass Trans
 
 ## Remaining acceptance and next step
 
+The paused Serato reference app was closed with normal Command+Q and Return at its Exit confirmation; its main process is absent. This isolates the upcoming controller test from another DJ app receiving the same buttons. Keep other DJ apps closed for that test. Open Play remains stopped.
+
 First physical action when Jason returns: press left Hercules Play, confirm deck1/RCA sound, then press the same button to stop. Proceed one action at a time. No timed capture/readiness request while he is away. Prior historical knob and socket confirmations keep their original version scopes; they do not establish every control/socket on23.
 
 Exact vendor GUI/taper, physical fader/jog/buttons/pads/headphones, manual beatmatching, music quality, phase/transients, latency, hotplug/multiple controllers, pending failure races, DVS/CDJ modes and all keylock/warp/StemSlip/loop compositions remain open. Native23does not earn full native/reference/parity flags. Full110groups/522requirements,9beta deltas/26releasechecks and55extendedFX/Stems-keylock acceptance boundaries remain intact. No broad Auto Gain/Rapid Sync/FX/Stems behavior matrix was repeated.

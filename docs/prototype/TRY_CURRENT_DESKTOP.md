@@ -4,6 +4,8 @@ The app is open and stopped. Deck1: After Hours124BPM. Deck2: Glass Transit126BP
 
 **Hercules is selected: master1/2, headphones3/4, CueMix0%, CueVolume10%, mute off.** The normal MIDI dialog enumerates DJControl Inpulse300Mk2 as connected. Its272mapping export is byte-identical before/after the isolated checks. Device enumeration and routing assignments do not prove sound or every physical control.
 
+Serato DJ Pro has been closed after its paused reference inspection, so a controller button will not also drive that app. Keep other DJ applications closed during the physical test.
+
 When you return, press the **left physical Hercules Play** once. Confirm deck1starts and the RCA speakers play, then press the same button to stop. Continue one action at a time. No timed capture runs while you are away. Current physical sound, knobs/faders/jogs/pads and headphone/speaker isolation remain pending.
 
 Use **Start Open Play Current Test.command**, **Start Open Play Playback Test.command**, or **Start Open Play Playback Test0.1.23.command**. Close one playback version before opening another; they share the dedicated saved profile and port18775. Previous22bundle/versionedlauncher/guide remain, with a stable closed-profile backup before23.
