@@ -838,9 +838,10 @@ async function deckAction(action, index, el, event = {}) {
   if(action==='quantize'){d.quantize=!deckQuantize(d);return renderDecks();}
   if (action === "tab") {
     d.tab = el.dataset.tab;
+    d.controllerPadMode={Cues:'hot cues',Stems:'stems',Pitch:'pitch play'}[d.tab]||null;
     return renderDecks();
   }
-  if(action==='loopMode'){d.loopPadMode=el.dataset.mode;renderDecks();document.querySelector(`[data-action="loopMode"][data-deck="${index}"][data-mode="${d.loopPadMode}"]`)?.focus();return;}
+  if(action==='loopMode'){d.loopPadMode=el.dataset.mode;d.controllerPadMode=null;renderDecks();document.querySelector(`[data-action="loopMode"][data-deck="${index}"][data-mode="${d.loopPadMode}"]`)?.focus();return;}
   if(action==='loopRangeDown'||action==='loopRangeUp'){loopPads.range(d,action==='loopRangeDown'?-1:1);document.querySelector(`[data-action="${action}"][data-deck="${index}"]`)?.focus();return;}
   if(action==='roll')return; // Momentary pointer/keyboard lifecycle owns this button.
   if (action === "eject") {

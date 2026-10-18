@@ -9,11 +9,18 @@ import argparse
 import copy
 import hashlib
 import json
+import re
 from pathlib import Path
 import xml.etree.ElementTree as ET
 from import_serato_maps import tree, integer, digest, ENCODINGS
 
-VERSION = 'open-play-factory-adapter-v1'
+VERSION = 'open-play-factory-adapter-v2'
+PAD_MODES = {0: 'hot cues', 2: 'loop roll', 5: 'sampler', 9: 'manual loop',
+             11: 'auto loop', 14: 'pitch play', 23: 'scratch bank', 25: 'stems'}
+MODE_NAMES = {'Hot Cues Mode': 'hot cues', 'Loop Roll Mode': 'loop roll',
+              'Sampler Mode': 'sampler', 'Manual Loop Mode': 'manual loop',
+              'Auto Loop Mode': 'auto loop', 'Pitch Play Mode': 'pitch play',
+              'Scratch Bank Mode': 'scratch bank', 'Stems Pad Mode': 'stems'}
 FIELDS = ['adapterVersion', 'name', 'sourceFile', 'sourceSHA256', 'sourceEnvelope',
           'controls', 'mappings', 'issues', 'outputBranches']
 BUTTONS = {'play': 'play', 'load_track': 'load', 'cue': 'cue', 'sync': 'sync',
@@ -55,14 +62,25 @@ def adapt(control, action):
     if set(action.attrib) - {'deck_set', 'deck_id', 'slot_id'} or action.get('deck_set', 'Default') != 'Default':
         raise ValueError('Additional action addressing retained')
     slot = integer(action.get('slot_id', '0'), 0, 127, 'Slot')
-    if slot != 0: raise ValueError('Nonzero slot needs a separate adapter')
-    global_action = name in ['library_scroll', 'crossfader']
+    modifier = re.fullmatch(r'modifier_([1-9]|1[0-6])', name)
+    grid = name in ['grid_control_mode_input', 'grid_control_pad', 'grid_control_pad_shift']
+    if slot != 0 and not grid: raise ValueError('Nonzero slot needs a separate adapter')
+    global_action = name in ['library_scroll', 'fast_library_scroll', 'crossfader', 'add_song_to_prepare_crate', 'library_prepare_tab'] or bool(modifier and action.get('deck_id') is None)
     if global_action:
         if action.attrib: raise ValueError('Global action has additional addressing')
-        target = 'Library browse' if name == 'library_scroll' else 'Crossfader'
+        target = {'library_scroll': 'Library browse', 'fast_library_scroll': 'Library fast browse',
+                  'crossfader': 'Crossfader', 'add_song_to_prepare_crate': 'Prepare add',
+                  'library_prepare_tab': 'Prepare open'}.get(name, f'Controller modifier {modifier[1]}' if modifier else '')
     else:
         deck = integer(action.get('deck_id'), 0, 3, 'Deck') + 1
-        suffix = BUTTONS.get(name) or CONTINUOUS.get(name)
+        if name == 'grid_control_mode_input':
+            if slot not in PAD_MODES: raise ValueError('Unknown pad mode identity retained')
+            suffix = 'pad mode '+PAD_MODES[slot]
+        elif name.startswith('grid_control_pad'):
+            if slot > 7: raise ValueError('Pad slot exceeds eight supported pads')
+            suffix = f'active {"shift " if name.endswith("_shift") else ""}pad {slot+1}'
+        elif modifier: suffix = f'controller modifier {modifier[1]}'
+        else: suffix = BUTTONS.get(name) or CONTINUOUS.get(name)
         if suffix is None: raise ValueError('Action needs a separate adapter')
         target = f'Deck {deck} {suffix}'
     event = control.get('event_type')
@@ -70,6 +88,8 @@ def adapt(control, action):
     channel = integer(control.get('channel'), 1, 16, 'Channel')
     number = integer(control.get('control'), 0, 127, 'Controller')
     kind = 'Note' if event == 'Note On' else 'CC'
+    if (grid or modifier or name in ['add_song_to_prepare_crate', 'library_prepare_tab']) and kind != 'Note':
+        raise ValueError('Performance/modifier/library button requires Note press and release')
     encoding = ENCODINGS.get(control.get('data_type', 'Absolute 7'))
     if encoding is None: raise ValueError('MIDI encoding needs an adapter')
     if encoding == '14-bit absolute':
@@ -83,12 +103,16 @@ def adapt(control, action):
     rule = rules[0] if rules else None
     invert = False
     if kind == 'Note':
-        if name not in BUTTONS or encoding != '7-bit absolute': raise ValueError('Button encoding/action needs an adapter')
-        if rule is not None and (len(rule) or dict(rule.attrib) != {'action_on': 'press', 'behaviour': 'toggle'} or name not in TOGGLES):
-            raise ValueError('Button translation semantics need an adapter')
+        if name not in BUTTONS and not grid and not modifier and name not in ['add_song_to_prepare_crate', 'library_prepare_tab']: raise ValueError('Button action needs an adapter')
+        if encoding != '7-bit absolute': raise ValueError('Button encoding needs an adapter')
+        if rule is not None:
+            toggle = not len(rule) and dict(rule.attrib) == {'action_on': 'press', 'behaviour': 'toggle'} and name in TOGGLES
+            explicit = not len(rule) and dict(rule.attrib) in [{'behaviour': 'explicit'}, {'behaviour': 'explicit', 'action_on': 'any'}] and (grid or modifier)
+            prepare = name == 'library_prepare_tab' and not rule.attrib and all(c.tag == 'alias' and c.attrib in [{'name': 'on', 'value': '127'}, {'name': 'off', 'value': '0'}] for c in rule) and len(rule) == 2
+            if not (toggle or explicit or prepare): raise ValueError('Button translation semantics need an adapter')
     else:
         if name not in CONTINUOUS and not global_action: raise ValueError('CC command semantics need an adapter')
-        if name == 'library_scroll':
+        if name in ['library_scroll', 'fast_library_scroll']:
             if not encoding.startswith('Relative') or rule is not None: raise ValueError('Relative library translation needs an adapter')
         elif encoding not in ['7-bit absolute', '14-bit absolute']:
             raise ValueError('Continuous encoding needs an adapter')
@@ -103,6 +127,37 @@ def adapt(control, action):
             invert = attrs['out_min'] == '1'
     return dict(target=target, type=kind, channel=channel, number=number,
                 encoding=encoding, invert=invert), rule is None
+
+
+def conditions(node):
+    """Compile only known conjunctions; app predicates target DJ Pro explicitly."""
+    if node is None or node.attrib or not len(node): raise ValueError('Condition structure needs an adapter')
+    predicates = []
+    for term in node:
+        if len(term) or set(term.attrib)-{'cmp_value', 'operator', 'deck_id', 'deck_set'}:
+            raise ValueError('Additional condition semantics retained')
+        operator = term.get('operator', 'equal')
+        if operator not in ['equal', 'not equal']: raise ValueError('Condition operator needs an adapter')
+        value = term.get('cmp_value'); negate = operator == 'not equal'
+        if term.tag == 'current_active_app':
+            if set(term.attrib)-{'cmp_value', 'operator'}: raise ValueError('App condition addressing retained')
+            if value not in ['Serato DJ', 'Serato DJ Pro', 'Serato DJ Lite']: raise ValueError('Unknown app identity retained')
+            matches = value in ['Serato DJ', 'Serato DJ Pro']
+            if matches == negate: return None
+            continue
+        if term.get('deck_set', 'Default') != 'Default': raise ValueError('Condition deck layer needs an adapter')
+        modifier = re.fullmatch(r'modifier_([1-9]|1[0-6])', term.tag)
+        if modifier:
+            if value not in ['on', 'off']: raise ValueError('Modifier value needs an adapter')
+            deck = integer(term.get('deck_id'), 0, 3, 'Condition deck')+1 if term.get('deck_id') is not None else 0
+            predicates.append(dict(kind='modifier', number=int(modifier[1]), deck=deck, equals=(value == 'on') != negate))
+        elif term.tag == 'grid_control_mode':
+            if value not in MODE_NAMES: raise ValueError('Unknown condition pad mode retained')
+            deck = integer(term.get('deck_id'), 0, 3, 'Condition deck')+1
+            predicates.append(dict(kind='padMode', deck=deck, equals=MODE_NAMES[value], negate=negate))
+        else: raise ValueError('Condition state needs an adapter')
+    if len(predicates) > 16: raise ValueError('Too many condition predicates')
+    return predicates
 
 
 def parse_factory(data, filename):
@@ -129,25 +184,37 @@ def parse_factory(data, filename):
             index = start+offset
             if section.tag != 'midi' or control.tag != 'control':
                 issues.append({'controlIndex': index, 'reason': 'Non-MIDI/control data retained; no runtime adapter'}); continue
-            if any(child.tag != 'userio' for child in control):
-                issues.append({'controlIndex': index, 'reason': 'Conditional/other branches retained; not flattened'}); continue
-            clicks = [child for child in control if child.get('event') == 'click']
-            if not clicks: continue  # Output-only remains in the retained source graph.
-            if len(clicks) != 1 or set(clicks[0].attrib) != {'event'} or len(clicks[0]) != 1 or any(c.get('event') not in ['click', 'output'] for c in control):
-                issues.append({'controlIndex': index, 'reason': 'Compound/other input event retained; no adapter'}); continue
-            action = clicks[0][0]
-            try:
-                mapping, default = adapt(control, action)
-                mapping.update(sourceControlIndex=index, sourceAction=action.tag)
-                mappings.append(mapping)
-                if default: defaults.add(action.tag)
-            except ValueError as error:
-                issues.append({'controlIndex': index, 'action': action.tag, 'reason': str(error)})
+            if any(child.tag not in ['userio', 'case'] for child in control):
+                issues.append({'controlIndex': index, 'reason': 'Additional control branches retained; no adapter'}); continue
+            branches = [(control, None)] if not control.findall('case') else []
+            if control.findall('case') and control.findall('userio'):
+                issues.append({'controlIndex': index, 'reason': 'Mixed direct/case branches retained; no adapter'}); continue
+            for case_index, case in enumerate(control.findall('case')):
+                try:
+                    if case.attrib or any(c.tag not in ['condition', 'userio'] for c in case) or len(case.findall('condition')) != 1: raise ValueError('Case structure needs an adapter')
+                    predicates = conditions(case.find('condition'))
+                    if predicates is not None: branches.append((case, (case_index, predicates)))
+                except ValueError as error: issues.append({'controlIndex': index, 'caseIndex': case_index, 'reason': str(error)})
+            for branch, condition in branches:
+                clicks = [child for child in branch if child.tag == 'userio' and child.get('event') == 'click']
+                if not clicks: continue
+                if len(clicks) != 1 or set(clicks[0].attrib) != {'event'} or any(c.tag == 'userio' and c.get('event') not in ['click', 'output'] for c in branch):
+                    issues.append({'controlIndex': index, 'reason': 'Additional input event semantics retained'}); continue
+                for action in clicks[0]:
+                    try:
+                        mapping, default = adapt(control, action)
+                        mapping.update(sourceControlIndex=index, sourceAction=action.tag)
+                        if condition is not None: mapping.update(sourceCaseIndex=condition[0], conditions=condition[1])
+                        mappings.append(mapping)
+                        if default: defaults.add(action.tag)
+                    except ValueError as error:
+                        issues.append({'controlIndex': index, 'action': action.tag, 'reason': str(error)})
     if defaults:
         issues.append({'reason': 'Source omits translation: Open Play uses its named action behavior; vendor default equivalence unverified', 'actions': sorted(defaults)})
     outputs = sum(node.get('event') == 'output' for node in root.iter('userio'))
     if outputs: issues.append({'reason': 'All output/lighting branches retained but inactive', 'branches': outputs})
     issues.append({'reason': 'Device metadata, initialization and global semantics retained; no hardware initialization or compatibility claim'})
+    issues.append({'reason': 'Adapter targets DJ Pro app branches. Runtime predicates cover conjunctions of supported modifiers/pad modes only. Other app/state branches retained inactive; compound events may be partially adapted. Initial Hot Cues is Open Play policy, not proved vendor initialization.'})
     descriptors = [c for c in root if c.tag.endswith('_device')]
     name = next((c.get('display_name') or c.get('name') for c in descriptors if c.get('display_name') or c.get('name')), Path(filename).stem)
     profile = dict(adapterVersion=VERSION, id=digest(data), name=name, sourceFile=filename,
@@ -170,10 +237,14 @@ def main():
     parser.add_argument('--output-dir', type=Path, required=True)
     parser.add_argument('--registry', type=Path, required=True, help='New JS digest-only trust registry')
     parser.add_argument('--report', type=Path, required=True)
+    parser.add_argument('--previous-registry', type=Path, help='Reviewed earlier digest registry; preserve import compatibility')
     args = parser.parse_args()
     if args.output_dir.exists() or args.registry.exists() or args.report.exists(): raise ValueError('Refusing overwrite')
     inventory = json.loads(args.inventory.read_text())
     profiles, registry = [], {}
+    previous = {}
+    if args.previous_registry:
+        previous = json.loads(args.previous_registry.read_text().split('export const officialFactoryDigests=', 1)[1].strip().removesuffix(';'))
     for record in inventory['files']:
         if record.get('root') != 'root' or Path(record['path']).parts[0] not in ['midi', 'hid', 'audio']: continue
         path = args.root / record['path']
@@ -182,7 +253,10 @@ def main():
         if digest(data) != record['sha256']: raise ValueError('Definition differs from reviewed inventory')
         profile = parse_factory(data, record['path'])
         if node_count(profile) > 450000: raise ValueError('Single profile exceeds catalog node budget')
-        profiles.append(profile); registry[profile['sourceSHA256']] = profile_digest(profile)
+        profiles.append(profile)
+        old = previous.get(profile['sourceSHA256'], [])
+        old = [old] if isinstance(old, str) else old
+        registry[profile['sourceSHA256']] = list(dict.fromkeys(old+[profile_digest(profile)]))
     if len(profiles) != inventory['hardwareDefinitions']: raise ValueError('Definition count mismatch')
     batches, batch = [], []
     for profile in profiles:
@@ -201,7 +275,7 @@ def main():
     report = {'adapterVersion': VERSION, 'definitions': len(profiles), 'sourceGraphsReconstructed': len(profiles),
               'translatedAssignments': sum(len(p['mappings']) for p in profiles), 'shards': shards,
               'fullyTranslatedDefinitions': 0, 'physicalCompatibilityVerified': False,
-              'profiles': [{'sourceFile': p['sourceFile'], 'sourceSHA256': p['id'], 'normalizedSHA256': registry[p['id']], 'controls': len(p['controls']), 'mappings': len(p['mappings']), 'issues': len(p['issues'])} for p in profiles]}
+              'profiles': [{'sourceFile': p['sourceFile'], 'sourceSHA256': p['id'], 'normalizedSHA256': profile_digest(p), 'controls': len(p['controls']), 'mappings': len(p['mappings']), 'conditionalMappings': sum('conditions' in m for m in p['mappings']), 'issues': len(p['issues'])} for p in profiles]}
     args.report.write_text(json.dumps(report, indent=2)+'\n')
     print(json.dumps({key: report[key] for key in ['definitions', 'sourceGraphsReconstructed', 'translatedAssignments', 'fullyTranslatedDefinitions']}))
     print(f'{len(shards)} private catalog shards written')

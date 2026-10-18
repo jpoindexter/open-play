@@ -1,6 +1,7 @@
 // Mapping catalogs are local data. No controller scripts, native code or SysEx
 // are evaluated. Source provenance and physical compatibility are separate.
 import {officialFactoryDigests} from './controller-factory-digests.js';
+import {controllerPerformanceTarget,validateControllerConditions} from './controller-performance.js';
 export const controllerCatalogFormat='open-play-controller-catalog-v1';
 export const controllerCatalogMaxBytes=32*1024*1024;
 const sha=/^[a-f0-9]{64}$/;
@@ -22,7 +23,8 @@ export async function attestControllerCatalog(catalog){
     const expected=officialFactoryDigests[p.sourceSHA256];
     if(!expected)continue;
     const data=Object.fromEntries(authenticatedFields.map(key=>[key,p[key]??null]));
-    if(await sha256(new TextEncoder().encode(canonical(data)))!==expected)throw Error('Known factory source has modified or unsupported catalog content; import the reviewed factory-adapter output.');
+    const actual=await sha256(new TextEncoder().encode(canonical(data)));
+    if(!(Array.isArray(expected)?expected:[expected]).includes(actual))throw Error('Known factory source has modified or unsupported catalog content; import the reviewed factory-adapter output.');
     verifiedProfiles.add(p);freeze(p);
   }
   return catalog;
@@ -33,16 +35,19 @@ export function controllerSourceLabel(profile){
     ?`Alternative mapping — ${profile.provenance.name}`:'User mapping';
 }
 export function validateControllerMapping(mapping){
-  const fields=['target','type','channel','number','encoding','invert','sourceControlIndex','sourceAction'];
+  const fields=['target','type','channel','number','encoding','invert','sourceControlIndex','sourceCaseIndex','sourceAction','conditions'];
   if(!mapping||Object.keys(mapping).some(key=>!fields.includes(key)))throw Error('Mapping has unsupported options; keep it inactive until an adapter handles them.');
   if(!Number.isInteger(mapping.channel)||mapping.channel<1||mapping.channel>16||!Number.isInteger(mapping.number)||mapping.number<0||mapping.number>127)throw Error('Invalid MIDI channel or controller number.');
   if(mapping.invert!==undefined&&typeof mapping.invert!=='boolean')throw Error('Invalid mapping direction.');
-  if(mapping.target==='Library browse'){
+  if(controllerPerformanceTarget.test(mapping.target)){
+    if(mapping.type!=='Note'||mapping.encoding!=='7-bit absolute')throw Error('Controller performance actions need Note press/release.');
+  }else if(['Library browse','Library fast browse'].includes(mapping.target)){
     if(mapping.type!=='CC'||!relative.includes(mapping.encoding))throw Error('Imported browse needs an explicit relative CC encoding.');
   }else if(mapping.target==='Crossfader'||continuous.test(mapping.target)){
     if(mapping.type!=='CC'||!['7-bit absolute','14-bit absolute'].includes(mapping.encoding)||(mapping.encoding==='14-bit absolute'&&mapping.number>31))throw Error('Continuous controls need a supported absolute CC/pair encoding.');
-  }else if(!commands.test(mapping.target)||mapping.type!=='Note'||mapping.encoding!=='7-bit absolute')throw Error('This catalog action has no supported unconditional adapter.');
-  return {target:mapping.target,type:mapping.type,channel:mapping.channel,number:mapping.number,encoding:mapping.encoding,invert:!!mapping.invert};
+  }else if((!commands.test(mapping.target)&&!['Prepare add','Prepare open'].includes(mapping.target))||mapping.type!=='Note'||mapping.encoding!=='7-bit absolute')throw Error('This catalog action has no supported adapter.');
+  const conditions=validateControllerConditions(mapping.conditions);
+  return {target:mapping.target,type:mapping.type,channel:mapping.channel,number:mapping.number,encoding:mapping.encoding,invert:!!mapping.invert,...(conditions?{conditions}:{})};
 }
 export function parseControllerCatalog(text,{kind='user',name=''}={}){
   if(typeof text!=='string'||new TextEncoder().encode(text).length>controllerCatalogMaxBytes)throw Error('Choose a catalog JSON of at most32MiB.');
@@ -68,11 +73,14 @@ export function parseControllerCatalog(text,{kind='user',name=''}={}){
 }
 export function bindControllerProfile(profile,device,current){
   if(!device?.id||device.state!=='connected')throw Error('Select a connected MIDI input before applying this profile.');
-  const result=[...current],added=[],conflicts=[];
+  const result=[...current],added=[],conflicts=[],seen=new Set();
   for(const source of profile.mappings){
     const next={...validateControllerMapping(source),deviceId:device.id,controllerProfile:profile.id,mappingSource:controllerSourceLabel(profile)};
-    const overlap=result.some(old=>(!old.deviceId||old.deviceId===device.id)&&(old.type||'CC')===next.type&&old.channel===next.channel&&(old.number===next.number||(next.type==='CC'&&(old.encoding==='14-bit absolute'||next.encoding==='14-bit absolute')&&old.number<64&&next.number<64&&old.number%32===next.number%32)));
-    if(overlap)conflicts.push(source);else{result.push(next);added.push(next);}
+    // Multiple cases/actions at one source address belong to one input graph.
+    // Existing assignments still own their address; incoming siblings coexist.
+    const overlap=current.some(old=>(!old.deviceId||old.deviceId===device.id)&&(old.type||'CC')===next.type&&old.channel===next.channel&&(old.number===next.number||(next.type==='CC'&&(old.encoding==='14-bit absolute'||next.encoding==='14-bit absolute')&&old.number<64&&next.number<64&&old.number%32===next.number%32)));
+    const identity=JSON.stringify(next);
+    if(overlap)conflicts.push(source);else if(!seen.has(identity)){seen.add(identity);result.push(next);added.push(next);}
   }
   return {mappings:result,added,conflicts};
 }
@@ -107,7 +115,7 @@ export function createControllerCatalogStore({factory=globalThis.indexedDB,name=
       for(const record of records){
         // Recheck persisted data: IndexedDB clones do not retain trust stamps.
         const catalog=await attestControllerCatalog(parseControllerCatalog(JSON.stringify(record.catalog),record.catalog.profiles[0]?.provenance));
-        for(const p of catalog.profiles)if(!unique.has(p.id))unique.set(p.id,p);
+        for(const p of catalog.profiles){const previous=unique.get(p.id);const revision=profile=>verifiedProfiles.has(profile)?Number(/-v(\d+)$/.exec(profile.adapterVersion)?.[1]||0):0;if(!previous||revision(p)>revision(previous))unique.set(p.id,p);}
       }
       return [...unique.values()];
     },

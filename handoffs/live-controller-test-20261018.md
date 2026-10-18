@@ -59,3 +59,7 @@ Checkpoint140: official factory resources recovered from sealed signed installed
 ## Re-entry after factory import141
 
 Factory catalogs are private under local-evidence/factory-catalog-141; all197 imported on isolated8781,56 Hercules assignments available,55 applied because of one retained channel2 complementary-CC conflict. No physical acceptance for this imported profile. Frozen0.1.23/profile unchanged. Read docs/research/FACTORY_CONTROLLER_IMPORT_20261018.md before modifying mappings. Next independent work is conditional/modifier/pad-state adapter; no timed captures until Jason returns. Keylocked Stems activation remains open.
+
+## Re-entry142
+
+Accepted private v2 catalogs: local-evidence/factory-catalog-142b. Hercules335 assignments/275 compiled-case assignments/38 unresolved items. Actual isolated browser eight-mode flow passed with synthetic MIDI/authored audio, not physical/native acceptance. Frozen0.1.23/profile untouched. Read docs/research/FACTORY_CONDITIONAL_CONTROLLER_20261018.md. Next offline task: remaining named FX/master/cue/jog contracts; no capture request until Jason returns. Keylocked Stems activation continuity still open.

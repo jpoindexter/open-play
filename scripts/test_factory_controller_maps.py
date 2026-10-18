@@ -24,12 +24,24 @@ class FactoryAdapterTest(unittest.TestCase):
         for invalid in [control.replace('40', '41'), control.replace('16383', '8191')]:
             self.assertEqual(self.parse('<midi>'+invalid+'</midi>')['mappings'], [])
 
-    def test_compound_actions_and_entities_inactive(self):
+    def test_compound_partial_action_is_reported_and_entities_rejected(self):
         p = self.parse('<midi><control channel="1" control="7" event_type="Note On"><userio event="click"><play deck_id="0"/><modifier/></userio></control></midi>')
-        self.assertEqual(p['mappings'], [])
+        self.assertEqual([m['target'] for m in p['mappings']], ['Deck 1 play'])
+        self.assertTrue(any(i.get('action') == 'modifier' for i in p['issues']))
         with self.assertRaises(ValueError): parse_factory(b'<!DOCTYPE root><root/>', 'test.xml')
         before = profile_digest(p); p['controls'][0]['attributes']['control'] = '8'
         self.assertNotEqual(before, profile_digest(p))
+
+    def test_app_branch_and_modifier_remain_distinct(self):
+        p = self.parse('<midi><control channel="7" control="0" event_type="Note On"><case><condition><current_active_app cmp_value="Serato DJ Lite" operator="not equal"/><modifier_1 cmp_value="on"/></condition><userio event="click"><grid_control_pad deck_id="0" slot_id="0"/></userio></case><case><condition><current_active_app cmp_value="Serato DJ Lite"/></condition><userio event="click"><play deck_id="0"/></userio></case></control></midi>')
+        self.assertEqual([m['target'] for m in p['mappings']], ['Deck 1 active pad 1'])
+        self.assertEqual(p['mappings'][0]['conditions'], [dict(kind='modifier', number=1, deck=0, equals=True)])
+        self.assertEqual(p['mappings'][0]['sourceCaseIndex'], 0)
+
+    def test_cc_modifier_is_retained_without_note_adapter(self):
+        p = self.parse('<midi><control channel="1" control="7" event_type="Control Change"><userio event="click"><modifier_1><translation behaviour="explicit"/></modifier_1></userio></control></midi>')
+        self.assertEqual(p['mappings'], [])
+        self.assertTrue(any('requires Note' in i['reason'] for i in p['issues']))
 
 
 if __name__ == '__main__': unittest.main()

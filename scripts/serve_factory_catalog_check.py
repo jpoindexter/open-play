@@ -10,6 +10,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--catalog-dir', type=Path, required=True)
     parser.add_argument('--port', type=int, default=8780)
+    parser.add_argument('--harness', choices=['factory-catalog-harness.html', 'controller-conditions-harness.html'], default='factory-catalog-harness.html')
     args = parser.parse_args()
     fixtures = {}
     for path in sorted(args.catalog_dir.glob('factory-*.json')):
@@ -32,7 +33,7 @@ if __name__ == '__main__':
             super().do_GET()
 
     server = ThreadingHTTPServer(('127.0.0.1', args.port), FactoryCheckHandler)
-    print(f'Isolated factory check: http://127.0.0.1:{args.port}/prototype/factory-catalog-harness.html', flush=True)
+    print(f'Isolated factory check: http://127.0.0.1:{args.port}/prototype/{args.harness}', flush=True)
     try: server.serve_forever()
     except KeyboardInterrupt: pass
     finally: server.server_close(); JOBS.close()
