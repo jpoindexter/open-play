@@ -1098,10 +1098,10 @@ export function createPanels(a) {
         ...track.cues.flatMap((c, i) =>
           c ? [[`cue:${i}`, `${c.name} · ${time(c.position)}`]] : [],
         ),
-        ...track.savedLoops.map((l, i) => [
+        ...track.savedLoops.flatMap((l, i) => l ? [[
           `loop:${i}`,
           `${l.name} · ${time(l.start)}`,
-        ]),
+        ]] : []),
       ];
       dialog(
         `Sampler ${i + 1} · advanced`,

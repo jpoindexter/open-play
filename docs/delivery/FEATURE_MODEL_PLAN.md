@@ -96,7 +96,7 @@ Planning-table statuses are a dated baseline. Current scoped implementation evid
 | DEK-020 | Slicer and slicer loop | gpt-6-astra / high | claude-opus-5 / high | Partial:170actual reverse tempo continuous/source clocks coherent; default rate/reference/quality/native/full parity open |
 | FX-003 | Advanced FX parameters, favorites and named presets | gpt-6.1-sol / high | claude-sonnet-5 / medium | Research pending |
 | FX-004 | Channel FX and hardware filter-knob assignment | gpt-6-astra / high | claude-opus-5 / high | Research pending |
-| SMP-003 | Sampler advanced pitch, sync, cue/loop start and gain | gpt-6-astra / high | claude-opus-5 / high | Research pending |
+| SMP-003 | Sampler advanced pitch, sync, cue/loop start and gain | gpt-6-astra / high | claude-opus-5 / high | Partial:174 actual sparse saved-loop selector/fresh-restored raw-keylocked Repeat/Stop pass; persistent Sync/reference/quality/native parity open |
 | SCR-001 | Scratch Banks, per-slot load settings and previous-track return | gpt-6.1-sol / high | claude-sonnet-5 / medium | Research pending |
 | FLP-001 | Flip recording, playback, loop, save and edit | gpt-6-astra / high | claude-opus-5 / high | Research pending |
 | VID-001 | Video decks, linked AV playback and external display | gpt-6.1-sol / xhigh | claude-opus-5 / high | Research pending |
