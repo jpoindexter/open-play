@@ -65,6 +65,7 @@ export function createPanels(a) {
     const target=$('#audio-output-status');if(!target)return;
     const route=value.routing;
     target.textContent=value.lastError||`${value.label} · ${route?.layout||'stereo'} · master ${route?.masterChannels.join('/')||'1/2'} · cue ${route?.cueChannels.length?route.cueChannels.join('/'):'not sent to output'} · cue mix ${Math.round((route?.settings.mix??.5)*100)}% · cue volume ${Math.round((route?.settings.volume??.1)*100)}%${route?.settings.masterCue?' · Master Cue':''}${route?.settings.splitCue?' · Split Cue':''}${route?.physicalMuted?' · MUTED':''}. Physical sockets remain unverified.`;
+    if(value.discovery){const d=value.discovery;target.textContent+=` Device discovery: ${d.returnedDevices} devices returned, ${d.audioOutputs} audio outputs, ${d.addressableOutputs} addressable, ${d.namedOutputs} named; window ${d.documentVisibility}.`;}
   }
   const badge = (text = "SIMULATION", real = false) =>
     `<span class="badge ${real ? "real" : ""}">${text}</span>`;

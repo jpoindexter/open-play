@@ -1,10 +1,10 @@
 // Explicit output selection; no automatic restoration of a multi-channel cue route.
 export function createAudioOutputSelection(engine,{devices=globalThis.navigator?.mediaDevices,onChange=()=>{}}={}){
- let selected='',label='System default',outputs=[],revision=0,serial=Promise.resolve(),disposed=false,lastError=null;
+ let selected='',label='System default',outputs=[],discovery=null,revision=0,serial=Promise.resolve(),disposed=false,lastError=null;
  const emit=()=>{try{onChange(snapshot());}catch{}};
  const current=token=>!disposed&&token===revision;
- const snapshot=()=>({deviceId:selected,label,outputs:outputs.map(x=>({...x})),canSelect:typeof engine.ctx?.setSinkId==='function',routing:engine.audioMonitor?.snapshot()||null,lastError,disposed});
- async function list(){if(disposed)throw Error('Output selection closed.');if(!devices?.enumerateDevices)throw Object.assign(Error('This runtime cannot enumerate audio outputs.'),{name:'NotSupportedError'});const found=await devices.enumerateDevices();if(disposed)return[];outputs=found.filter(x=>x.kind==='audiooutput'&&x.deviceId).map((x,i)=>({deviceId:x.deviceId,label:x.label||`Audio output${i+1}`}));emit();return outputs.map(x=>({...x}));}
+ const snapshot=()=>({deviceId:selected,label,outputs:outputs.map(x=>({...x})),discovery:discovery?{...discovery}:null,canSelect:typeof engine.ctx?.setSinkId==='function',routing:engine.audioMonitor?.snapshot()||null,lastError,disposed});
+ async function list(){if(disposed)throw Error('Output selection closed.');if(!devices?.enumerateDevices)throw Object.assign(Error('This runtime cannot enumerate audio outputs.'),{name:'NotSupportedError'});const found=await devices.enumerateDevices();if(disposed)return[];outputs=found.filter(x=>x.kind==='audiooutput'&&x.deviceId).map((x,i)=>({deviceId:x.deviceId,label:x.label||`Audio output${i+1}`}));discovery={returnedDevices:found.length,audioOutputs:found.filter(x=>x.kind==='audiooutput').length,addressableOutputs:outputs.length,namedOutputs:outputs.filter(x=>x.label&&!/^Audio output\d+$/.test(x.label)).length,documentVisibility:globalThis.document?.visibilityState||'unknown'};emit();return outputs.map(x=>({...x}));}
  const enqueue=run=>{const token=++revision;const result=serial.catch(()=>{}).then(()=>{if(!current(token))return false;return run(token);});serial=result;return result;};
  function select(deviceId=''){
   if(typeof deviceId!=='string')return Promise.reject(new TypeError('Output device ID must be text.'));

@@ -1,0 +1,133 @@
+{
+  "version": "0.1.18",
+  "sourceCommit": "a8a4168c505e9878d262ffbd282244f6b102efd5",
+  "ASARSHA256": "5317f8953be2a2d745b5d910dd353c414ce55a282762db056699041338097aa9",
+  "actualNativeWorkflow": "Main Devices > Refresh > native Checks > Device permission decisions > native alert read via AX.",
+  "decisions": [
+    {
+      "kind": "check",
+      "permission": "media",
+      "mainContents": true,
+      "ownOrigin": true,
+      "isMainFrame": true,
+      "requestingUrlOwn": true,
+      "mediaType": "audio",
+      "allowed": false
+    },
+    {
+      "kind": "check",
+      "permission": "speaker-selection",
+      "mainContents": true,
+      "ownOrigin": true,
+      "isMainFrame": true,
+      "requestingUrlOwn": true,
+      "mediaType": null,
+      "allowed": true
+    },
+    {
+      "kind": "check",
+      "permission": "media",
+      "mainContents": true,
+      "ownOrigin": true,
+      "isMainFrame": true,
+      "requestingUrlOwn": true,
+      "mediaType": "video",
+      "allowed": false
+    },
+    {
+      "kind": "request",
+      "permission": "midiSysex",
+      "mainContents": true,
+      "ownOrigin": true,
+      "isMainFrame": true,
+      "requestingUrlOwn": true,
+      "mediaType": null,
+      "allowed": true
+    },
+    {
+      "kind": "check",
+      "permission": "background-sync",
+      "mainContents": false,
+      "ownOrigin": true,
+      "isMainFrame": false,
+      "requestingUrlOwn": false,
+      "mediaType": null,
+      "allowed": false
+    },
+    {
+      "kind": "check",
+      "permission": "media",
+      "mainContents": true,
+      "ownOrigin": true,
+      "isMainFrame": true,
+      "requestingUrlOwn": true,
+      "mediaType": "audio",
+      "allowed": false
+    },
+    {
+      "kind": "check",
+      "permission": "midi",
+      "mainContents": true,
+      "ownOrigin": true,
+      "isMainFrame": true,
+      "requestingUrlOwn": true,
+      "mediaType": null,
+      "allowed": true
+    },
+    {
+      "kind": "check",
+      "permission": "midiSysex",
+      "mainContents": true,
+      "ownOrigin": true,
+      "isMainFrame": true,
+      "requestingUrlOwn": true,
+      "mediaType": null,
+      "allowed": true
+    },
+    {
+      "kind": "check",
+      "permission": "media",
+      "mainContents": true,
+      "ownOrigin": true,
+      "isMainFrame": true,
+      "requestingUrlOwn": true,
+      "mediaType": "audio",
+      "allowed": false
+    },
+    {
+      "kind": "check",
+      "permission": "media",
+      "mainContents": true,
+      "ownOrigin": true,
+      "isMainFrame": true,
+      "requestingUrlOwn": true,
+      "mediaType": "audio",
+      "allowed": false
+    },
+    {
+      "kind": "check",
+      "permission": "speaker-selection",
+      "mainContents": true,
+      "ownOrigin": true,
+      "isMainFrame": true,
+      "requestingUrlOwn": true,
+      "mediaType": null,
+      "allowed": true
+    },
+    {
+      "kind": "check",
+      "permission": "media",
+      "mainContents": true,
+      "ownOrigin": true,
+      "isMainFrame": true,
+      "requestingUrlOwn": true,
+      "mediaType": "video",
+      "allowed": false
+    }
+  ],
+  "observed": "Specific outputs remain absent. Speaker selection is allowed in correct own-origin main frame. Audio/video media denied. The hypothesis of own-main speaker-selection denial is refuted; no permission-policy change justified.",
+  "additionalObservation": "Explicit AppleScript app activation (previously authorized fallback) plus one refresh still default-only.",
+  "scope": "Actual native permission decision facts, not raw enumeration return contents, exact root cause, capture, physical audio or full parity.",
+  "fullParityVerified": false,
+  "readyForFourChannelPhysicalTest": false
+}
