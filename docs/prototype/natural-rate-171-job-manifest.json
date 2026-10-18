@@ -1,0 +1,81 @@
+{
+  "schema_version": 1,
+  "state": "complete",
+  "cached": false,
+  "cache_key": "840cff788f9abaa8ddc333af0d956f09afb87d24430ea816892931921aa421a4",
+  "source_sha256": "8bd922074bc1df1e87f00cb967ce6e30c7183f1eed41d74763e9613c5f496df7",
+  "model": "SCNet-large official",
+  "backend": "scnet",
+  "model_sha256": "719e5abb8ed920305dad546ac3cd6fb0b1e9c3092d14ce21827bfc0423af3070",
+  "model_revision": "5d95bf96b19c3eede63248d171efeca8e3abb948",
+  "model_url": "https://drive.google.com/file/d/1s7QvQwn8ag9oVstGDBQ6KZvacJkvyK7t/view",
+  "weight_redistribution": "MIT_explicit_owner_confirmation_SCNet_issue_35",
+  "runtime": {
+    "torch": "2.5.1",
+    "scnet_commit": "5d95bf96b19c3eede63248d171efeca8e3abb948"
+  },
+  "sample_rate": 44100,
+  "channels": 2,
+  "frames": 299880,
+  "duration": 6.8,
+  "parameters": {
+    "segment": 30,
+    "overlap_seconds": 1,
+    "device": "cpu",
+    "mixture_consistency": "uniform-mixture-consistency-v1",
+    "postprocess_source_sha256": "82be014dec145470db13fc5c0072c1808adeefc2c7a5fb82366f2f5003cae38b"
+  },
+  "stems": [
+    {
+      "name": "drums",
+      "ui_name": "drums",
+      "file": "drums.wav",
+      "sha256": "16311538283e63336ce1750b163b8a6dc04d353ed1b52e48f4f3c4ba215c1b78",
+      "rms": 0.09953670613236534,
+      "peak": 0.5885504484176636
+    },
+    {
+      "name": "bass",
+      "ui_name": "bass",
+      "file": "bass.wav",
+      "sha256": "2964c15e0b44553a7c44182736bbc5b81214b7b893def2181de227451606b9b0",
+      "rms": 0.060168631044970645,
+      "peak": 0.25875937938690186
+    },
+    {
+      "name": "other",
+      "ui_name": "melody",
+      "file": "other.wav",
+      "sha256": "820d01b1b71a887f15b771c52357df720f302d6749fc1ffb14780a6bbb2b4130",
+      "rms": 0.05105235662821448,
+      "peak": 0.2714133560657501
+    },
+    {
+      "name": "vocals",
+      "ui_name": "vocals",
+      "file": "vocals.wav",
+      "sha256": "56f9c6301b4a4cd928ca1474e74d55b3072543f2195ec48463588b7d973a06f2",
+      "rms": 0.0908747667036113,
+      "peak": 0.4345419704914093
+    }
+  ],
+  "mixture_consistency": {
+    "algorithm": "uniform-mixture-consistency-v1",
+    "sources": 4,
+    "frames": 299880,
+    "block_frames": 65536,
+    "raw_reconstruction_rms_error": 0.005204708881330441,
+    "raw_reconstruction_relative_rms": 0.030246765091771582,
+    "reconstruction_rms_error": 4.184574201012715e-09,
+    "reconstruction_relative_rms": 2.4318330910136368e-08,
+    "per_source_correction_rms": 0.0013011772203326102,
+    "source_attribution_verified": false
+  },
+  "timing": {
+    "model_load_seconds": 1.3501352090388536,
+    "inference_seconds": 7.207185290986672,
+    "total_seconds": 8.7138695421163,
+    "realtime_factor": 1.0598801898509813
+  },
+  "reconstruction_rms_error": 7.234325138938402e-09
+}
