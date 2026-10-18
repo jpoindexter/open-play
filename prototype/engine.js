@@ -787,8 +787,18 @@ export class AudioEngine {
       this.configureFX(...this.fxState);
     }
   }
-  async setLoop(d, on, start, end) {
+  async setLoop(d, on, start, end, {positionAt=null,priorClock=null,playing=d.playing}={}) {
     this.onValidateTransport?.(d,{loop:on,loopIn:start,loopOut:end});
+    if(positionAt){
+      const position=positionAt(this.ctx.currentTime),prior=priorClock||this.voiceClock(d,this.voices.get(d.index));
+      if(!Number.isFinite(position)||position<0||position>d.track.duration)throw new RangeError('Invalid loop transition position.');
+      d.position=this.position(d);d.loop=on;d.loopIn=start;d.loopOut=end;
+      // One owned preparation selects source position at its actual future
+      // output time, without a second render/seek after preparing the loop.
+      if(playing)await this.start(d,{priorClock:prior,positionAt});
+      else{this.pause(d,{preserveStemExit:true});d.position=position;}
+      return;
+    }
     if(this.voices.get(d.index)?.gridTimeline){
       const prior=this.voiceClock(d,this.voices.get(d.index)),was=d.playing;d.position=this.position(d);d.loop=on;d.loopIn=start;d.loopOut=end;
       if(was)await this.start(d,{priorClock:prior,positionAt:at=>{const p=prior(at);return on&&p>=end?start+((p-start)%(end-start)+(end-start))%(end-start):p;}});

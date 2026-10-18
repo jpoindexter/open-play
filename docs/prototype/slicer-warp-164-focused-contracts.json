@@ -1,0 +1,72 @@
+[
+  {
+    "command": [
+      "node",
+      "scripts/test_slicer_warp.mjs"
+    ],
+    "result": {
+      "passed": true,
+      "scope": "Slicer beat-domain/owner integration with controlled transport collaborator; actual browser/audio verified separately.",
+      "tests": [
+        {
+          "name": "Warped eight-beat domain and pad4 half-slice use continuous beat coordinates",
+          "passed": true
+        },
+        {
+          "name": "Quantization is a fraction of the selected slice, not always one base beat",
+          "passed": true
+        },
+        {
+          "name": "Fixed domain survives cursor movement and pad release",
+          "passed": true
+        },
+        {
+          "name": "Release before preparation finishes returns a paused audition without resurrection",
+          "passed": true
+        },
+        {
+          "name": "Stop/cancel invalidates pending preparation and late release",
+          "passed": true
+        },
+        {
+          "name": "Older overlapping-pad release cannot terminate the newer owner",
+          "passed": true
+        }
+      ]
+    }
+  },
+  {
+    "command": [
+      "node",
+      "scripts/test_loop_ui_holds.mjs"
+    ],
+    "result": {
+      "passed": true,
+      "scope": "Owned UI Roll lifecycle with engine collaborators; no audio/native/hardware proof",
+      "checks": [
+        "release before onset",
+        "overlap owner and active size",
+        "releaseAll restores prior loop and backing clock",
+        "cancel invalidates stale release",
+        "bounded visible ranges and Beat Jump labels"
+      ]
+    }
+  },
+  {
+    "command": [
+      "node",
+      "scripts/test_smart_sync_loops.mjs"
+    ],
+    "result": {
+      "passed": true,
+      "scope": "Smart Sync loop geometry/state with engine collaborators; no acoustic/native/hardware proof",
+      "checks": [
+        "bar alignment inside active loop",
+        "different-BPM whole-bar loops engage Beat Sync",
+        "short loop degrades bar lock to Tempo Sync without seek",
+        "restore whole bar allows explicit re-Sync",
+        "warped loop clock is passed to backend and keylock may use loop backend while reverse bar alignment still refuses early; existing reverse loop keeps Tempo Sync clock and Play, non-loop reverse clock allowed while bar alignment still refuses"
+      ]
+    }
+  }
+]

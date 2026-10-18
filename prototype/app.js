@@ -428,7 +428,7 @@ function padMarkup(d) {
   return labels
     .map(
       (label, i) =>
-        `<button class="pad ${d.tab === "Cues" && t?.cues[i] ? "set" : ""} ${(d.tab === "Stems" && (i < 4 ? d.stems[i] : d.stemFX?.[i - 4])) || (loopControls && d.loopPadMode==='auto' && loopControls[i].active) || (loopControls && d.loopPadMode==='roll' && !loopControls[i].jump && loopPads.rolling(d,i)) ? "active" : ""}" data-deck="${d.index}" data-action="pad" data-pad="${i}" ${loopControls?`aria-label="Deck ${d.index+1} ${loopControls[i].jump?'':d.loopPadMode==='roll'?'Loop Roll ':'Auto Loop '}${esc(label)}" aria-pressed="${!loopControls[i].jump && (d.loopPadMode==='roll'?loopPads.rolling(d,i):loopControls[i].active)}"`:""} style="--pad:${d.tab === "Pitch" && pitchRanges[d.pitchRangeMode || "Middle"][i] === 0 ? "#ffffff" : colors[i]}" title="${d.tab === "Cues" ? "Click set/trigger; Shift-click delete; right-click edit" : "Audio performance control"}">${esc(label)}<small>${d.tab === "Cues" && t?.cues[i] ? time(t.cues[i].position) : d.tab === "Stems" ? (engine.stemBuffers.has(t?.id) ? "AUDIO" : stemPreparation.active.has(t?.id) ? "PREPARING" : "ANALYZE") : loopControls ? loopControls[i].detail : d.tab === "Pitch" ? `CUE ${(d.pitchCue || 0) + 1}` : i + 1}</small></button>`,
+        `<button class="pad ${d.tab === "Cues" && t?.cues[i] ? "set" : ""} ${(d.tab === "Slicer" && d.slice === i) || (d.tab === "Stems" && (i < 4 ? d.stems[i] : d.stemFX?.[i - 4])) || (loopControls && d.loopPadMode==='auto' && loopControls[i].active) || (loopControls && d.loopPadMode==='roll' && !loopControls[i].jump && loopPads.rolling(d,i)) ? "active" : ""}" data-deck="${d.index}" data-action="pad" data-pad="${i}" ${loopControls?`aria-label="Deck ${d.index+1} ${loopControls[i].jump?'':d.loopPadMode==='roll'?'Loop Roll ':'Auto Loop '}${esc(label)}" aria-pressed="${!loopControls[i].jump && (d.loopPadMode==='roll'?loopPads.rolling(d,i):loopControls[i].active)}"`:d.tab === "Slicer"?`aria-label="Deck ${d.index+1} Slice ${i+1}" aria-pressed="${d.slice===i}"`:""} style="--pad:${d.tab === "Pitch" && pitchRanges[d.pitchRangeMode || "Middle"][i] === 0 ? "#ffffff" : colors[i]}" title="${d.tab === "Cues" ? "Click set/trigger; Shift-click delete; right-click edit" : "Audio performance control"}">${esc(label)}<small>${d.tab === "Cues" && t?.cues[i] ? time(t.cues[i].position) : d.tab === "Stems" ? (engine.stemBuffers.has(t?.id) ? "AUDIO" : stemPreparation.active.has(t?.id) ? "PREPARING" : "ANALYZE") : loopControls ? loopControls[i].detail : d.tab === "Pitch" ? `CUE ${(d.pitchCue || 0) + 1}` : i + 1}</small></button>`,
     )
     .join("");
 }
@@ -686,6 +686,7 @@ async function load(index, id = state.selected, options = {}) {
   pitchPlay.cancelDeck(d);
   loopPads.cancelDeck(d);
   manualLoops.cancelDeck(d);
+  slicer.cancelDeck(d);
   stemSlipControls.cancelDeck(d);
   engine.pause(d);
   engine.clearDeckScratchCache(d.index);
@@ -765,6 +766,7 @@ async function setDeckKeyShift(index, semitones) {
   pitchPlay.cancelDeck(d);
   loopPads.cancelDeck(d);
   manualLoops.cancelDeck(d);
+  slicer.cancelDeck(d);
   d.keySync = false;
   const request={track:d.track,semitones};
   deckKeyShiftRequests.set(d,request);
@@ -786,6 +788,7 @@ async function play(d) {
   if(pending&&pending.track!==d.track)cancelPendingPlay(d);
   if (d.playing || d.processing || playRequests.has(d)) {
     cancelPendingPlay(d);
+    slicer.cancelDeck(d);
     stemSlipControls.cancelDeck(d);
     engine.pause(d);
     smartSync.paused(d);
@@ -839,6 +842,7 @@ async function deckAction(action, index, el, event = {}) {
   }
   if(action==='quantize'){d.quantize=!deckQuantize(d);return renderDecks();}
   if (action === "tab") {
+    if(d.tab==='Slicer'&&el.dataset.tab!=='Slicer')await slicer.releaseDeck(d);
     d.tab = el.dataset.tab;
     d.controllerPadMode={Cues:'hot cues',Stems:'stems',Pitch:'pitch play'}[d.tab]||null;
     return renderDecks();
@@ -855,6 +859,7 @@ async function deckAction(action, index, el, event = {}) {
     pitchPlay.cancelDeck(d);
   loopPads.cancelDeck(d);
   manualLoops.cancelDeck(d);
+  slicer.cancelDeck(d);
     stemSlipControls.cancelDeck(d);
     d.keySync = false;
     engine.pause(d);
@@ -1022,6 +1027,7 @@ async function deckAction(action, index, el, event = {}) {
       pitchPlay.cancelDeck(d);
   loopPads.cancelDeck(d);
   manualLoops.cancelDeck(d);
+  slicer.cancelDeck(d);
       await engine.setPitch(d,{keylock:true,semitones:match.semitones});
       d.keySync = true; d.keySyncTag = d.track.key;
       notify(`Key Sync: ${match.key} · ${match.semitones >= 0 ? "+" : ""}${match.semitones} semitones · compatible with deck${match.targets.length > 1 ? "s" : ""} ${match.targets.map(i=>i+1).join(", ")}.`);
@@ -1399,7 +1405,7 @@ function loopHoldTarget(el){
 }
 const loopOperation=p=>void p.catch(error=>notify(error.message));
 api.loopPads=loopPads;
-const slicer = createSlicer({ engine, render: renderDecks, notify });
+const slicer = createSlicer({ engine, render: renderLoopDecks, notify });
 const pitchPlay = createPitchPlay({engine,render:renderDecks,persist,notify,quantized});
 api.pitchPlay=pitchPlay;
 engine.onPrepareSampleGain=track=>trackGain.refresh(track);
@@ -1540,6 +1546,7 @@ async function seekOverview(deck, position, event) {
     notify("Needle search protected; hold Shift to override.");
     return false;
   }
+  slicer.cancelDeck(deck);
   try {await engine.seek(deck, position);return true;}
   catch (error) {notify(error.message);return false;}
 }

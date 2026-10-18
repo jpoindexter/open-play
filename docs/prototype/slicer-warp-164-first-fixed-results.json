@@ -1,0 +1,217 @@
+{
+  "checkpoint": 164,
+  "passed": false,
+  "originalBytes": 1486556,
+  "originalSHA256": "b3d19acad8ba90a5385141959346ada29dd7fef29dde3ef78cedcd07df9054c7",
+  "sourceHashes": {
+    "app.js": "ce58e28f1f43af820b6312428c7418a5572b6af70de11abc75ab57c23d1bc0c5",
+    "engine.js": "85b3468ba45397734271a83b8f4444d1ef851cf25c0dea40fc09c527c11425b7",
+    "stems.js": "5fb06aba4f6a97e4150d1bcfeef394574b0c9e9ed6ee099b78b89482b08ea4b7",
+    "panels.js": "06217033416d62af4602c1572086dc03bb9f25458a8f90c884f3d552c7b1d4fe",
+    "keylock.js": "62adbfdd77df20deb1328302d4a8daf3d7bdc29870af453d39acfd2a02bf060b",
+    "keylock-worker.js": "5cb72a1bc74e1808c32b430d72d5769427c7056edee11410eb6f8b3c7751fcec",
+    "keylock-dsp.js": "f4cb1881fedb018f395a6711d263aa142feb8dfe93638a3d1f97fc432c15ac3d",
+    "smart-sync.js": "98d34b559882d16e3b3e8c715d6a3c35a6197cb8d6a984fe5470b80592ca934e",
+    "slicer.js": "9a6c396a3bec3a88a02e3cf26ca803864326f2b6c8e413fd4dc9ebb0cb828225",
+    "tempo-slider.js": "b83de88ef715f7bdd68d9d7745862f9ecaac80c41f53e91c7041b01f1576f7cf",
+    "sync-tempo-handoff.js": "5842f9209035e24ff867004d3fef5f0a1fe7f7f4976440546b8238a225b82f9b",
+    "beatgrid.js": "af239aef231c9d089bf2352b8f548a5f71f734d6cf753986f17f57b3999477b9",
+    "warp-loop.js": "33091f4414d2066ce47657aa96312dfefc6ca0a061ccab04ddf00ef6121addc4",
+    "warp-loop-kernel.js": "8a331758bc551454a3cc65fd5ea527c42a370bd22ab6eb650ca278ea87e0f414",
+    "warp-loop-worklet.js": "bc977262180f910c6be55ea07a46f6b560a090939271bd4beec5e8fd31ed23fa",
+    "reverse-censor-plan.js": "38adfb04c0e498a8e2cb27b0240f037d315f24b0c8cd6968e338ff29b0af3807",
+    "stem-slicer-164-harness.js": "fd93377b06734e9effd98a3cff8c5c5b809f37b4b4196c1ffe832557ae91ae4a",
+    "stem-activation-capture-145.js": "730b9c3de31e9c3546ec1ab86f8fd85ce2a1ccfe6f78fc25d8f483f8b9d75331",
+    "stem-history-worklet.js": "d1e4f452044235a110a874fad2921390878c5731f3a769896ca5bfb2faf08daa",
+    "keylock-shadow-live.js": "41bf27051270a4741f83b59bc7c0111767b589ef3986b4aafb43ad36dc067551",
+    "vendor/signalsmith-stretch/SignalsmithStretch-open-play-replace.mjs": "abc12a3afe332b3aa32c1e1ec931f362225f0de09beb727a90944cf7c96baf46",
+    "vendor/signalsmith-stretch/SignalsmithStretch-open-play-reference-dsp.mjs": "0512cae2a33873956026e64cb47854c1c677baf1beb1bc0242edfb9557987f21"
+  },
+  "criteria": {
+    "minimumRMS": 1e-05,
+    "maximumPositionError": 0.01,
+    "maximumStoppedPeak": 1e-07
+  },
+  "rawReferenceCriterion": {
+    "windowSeconds": [
+      0.1,
+      0.5
+    ],
+    "maximumRelativeRMS": 0.0001,
+    "alignment": "Observed anchor/known grid/linear loop kernel; no fitting."
+  },
+  "observations": [
+    {
+      "name": "raw-slice-release",
+      "sliceBoundsCorrect": true,
+      "releaseSourceClockError": 0.0,
+      "releaseClockCorrect": true,
+      "packets": [
+        {
+          "kind": "heldPCM",
+          "channel": 0,
+          "frames": 26460,
+          "rms": 0.1356817942749904,
+          "peak": 0.7586244344711304,
+          "sha256": "35ed29c31ebf29200ed29b93f1ed98a536710c05bf531e86f709ce6609fcfa8f",
+          "contiguousQuanta": 207,
+          "rawRelativeRMSError": 3.7686343803183254e-08,
+          "rawSelectedSliceAudioCorrect": true
+        },
+        {
+          "kind": "heldPCM",
+          "channel": 1,
+          "frames": 26460,
+          "rms": 0.1441802337203368,
+          "peak": 0.6966029405593872,
+          "sha256": "55bf402e51727b7f32d79215f89b4982d7999341c66a2eb2d8a3931ca029efdf",
+          "contiguousQuanta": 207,
+          "rawRelativeRMSError": 3.817449478718518e-08,
+          "rawSelectedSliceAudioCorrect": true
+        },
+        {
+          "kind": "afterPCM",
+          "channel": 0,
+          "frames": 13230,
+          "rms": 0.1163970374592353,
+          "peak": 0.5339934825897217,
+          "sha256": "163125803a5f9b5b43bfa0feeeb1797a3408047887ef7e012481246296f3fa51",
+          "contiguousQuanta": 104
+        },
+        {
+          "kind": "afterPCM",
+          "channel": 1,
+          "frames": 13230,
+          "rms": 0.1349585065781383,
+          "peak": 0.5973753929138184,
+          "sha256": "9b7ed9ba87515b965a04d807c7bee3b85b7d687601e9a46be20c77e3b9bb9f1a",
+          "contiguousQuanta": 104
+        }
+      ]
+    },
+    {
+      "name": "keyed-slice-release",
+      "sliceBoundsCorrect": true,
+      "releaseSourceClockError": 0.0,
+      "releaseClockCorrect": true,
+      "packets": [
+        {
+          "kind": "heldPCM",
+          "channel": 0,
+          "frames": 26460,
+          "rms": 0.1102516805132995,
+          "peak": 0.4420110583305359,
+          "sha256": "048c1fa5290c46e02905af61cdc2e1fbbbdff983678f9c0b7021f057360ba6c1",
+          "contiguousQuanta": 207
+        },
+        {
+          "kind": "heldPCM",
+          "channel": 1,
+          "frames": 26460,
+          "rms": 0.12537820635700692,
+          "peak": 0.45876461267471313,
+          "sha256": "9de503e36c9715d04c6e2acd5a1d4f2e27c8f0b402bd08d6fb82c70ca7315ff5",
+          "contiguousQuanta": 207
+        },
+        {
+          "kind": "afterPCM",
+          "channel": 0,
+          "frames": 13230,
+          "rms": 0.1313466630259535,
+          "peak": 0.4872875511646271,
+          "sha256": "f2b7fa81983daa0808ece529b7e19c3ddd8aca0cd04e176339f6bb3d7e64f39d",
+          "contiguousQuanta": 104
+        },
+        {
+          "kind": "afterPCM",
+          "channel": 1,
+          "frames": 13230,
+          "rms": 0.13921125790752445,
+          "peak": 0.48029881715774536,
+          "sha256": "9dc411250dcee3a5fcdf16dfabef4e12685629c8dfaf97197657816c9ddbd97a",
+          "contiguousQuanta": 104
+        }
+      ]
+    },
+    {
+      "name": "fixed-slice-release",
+      "sliceBoundsCorrect": true,
+      "releaseSourceClockError": 2.3912925170068022,
+      "releaseClockCorrect": false,
+      "packets": [
+        {
+          "kind": "heldPCM",
+          "channel": 0,
+          "frames": 26460,
+          "rms": 0.10877594767996152,
+          "peak": 0.4420110583305359,
+          "sha256": "3195d116caca5e39c6c7aa6eb6f32ec2dde61ae847e19a93e96db4bf944933f2",
+          "contiguousQuanta": 207
+        },
+        {
+          "kind": "heldPCM",
+          "channel": 1,
+          "frames": 26460,
+          "rms": 0.12379876465914291,
+          "peak": 0.45876461267471313,
+          "sha256": "1ef7ef1f10c4330bca9148672f67b063b7d3e2d2b52314cce63eed97ab4f3ce7",
+          "contiguousQuanta": 207
+        },
+        {
+          "kind": "afterPCM",
+          "channel": 0,
+          "frames": 13230,
+          "rms": 0.11615855623764174,
+          "peak": 0.45231643319129944,
+          "sha256": "f305ad5297320e359acc59cffcf7b8af26188260c32a13dfdcaab55699b26c92",
+          "contiguousQuanta": 104
+        },
+        {
+          "kind": "afterPCM",
+          "channel": 1,
+          "frames": 13230,
+          "rms": 0.12041402336382648,
+          "peak": 0.45876461267471313,
+          "sha256": "16b63cc0aa86fc18056ca1c703444b7fffe3ad1194c4c9f4fa4b1e3b036a9f87",
+          "contiguousQuanta": 104
+        }
+      ]
+    },
+    {
+      "name": "stop-during-slice-preparation",
+      "sliceBoundsCorrect": true,
+      "releaseSourceClockError": null,
+      "releaseClockCorrect": true,
+      "packets": [
+        {
+          "kind": "afterPCM",
+          "channel": 0,
+          "frames": 13230,
+          "rms": 0.0,
+          "peak": 0.0,
+          "sha256": "9d55c9c2f49808c72a9d28e4f661bae87b1ed419741fa38e5ffeff9648f33d7d",
+          "contiguousQuanta": 104
+        },
+        {
+          "kind": "afterPCM",
+          "channel": 1,
+          "frames": 13230,
+          "rms": 0.0,
+          "peak": 0.0,
+          "sha256": "9d55c9c2f49808c72a9d28e4f661bae87b1ed419741fa38e5ffeff9648f33d7d",
+          "contiguousQuanta": 104
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "failureState": null,
+  "default48000Acceptance": false,
+  "musicalPitchAccuracyAccepted": false,
+  "sourceAttributionAccepted": false,
+  "exactSeratoParityAccepted": false,
+  "seamlessTransitionAccepted": false,
+  "nativeAcceptance": false,
+  "hardwareAcceptance": false,
+  "fullParityAcceptance": false
+}
