@@ -1,0 +1,165 @@
+{
+  "scope": "Whole finite PCM; all detected pulse spacings in fixed5\u20137s-after-settled windows,0.01amplitude threshold/100ms refractory,3intervals per channel minimum,10ms maximum interval error fixed before execution. No timing fit/repair, physical latency, transient fidelity or sample-phase acceptance.",
+  "pcmSHA256": "01d0c0ee6367719a46cc26f63fb20103ed8892801ac370d153b0faa68bf04f81",
+  "criteria": {
+    "neutralMaximumErrorHz": 0.01,
+    "shiftedMaximumErrorHz": 1,
+    "measurementSecondsAfterSettledState": [
+      5,
+      7
+    ],
+    "pulseIntervalOriginalSeconds": 0.5,
+    "maximumPulseIntervalErrorSeconds": 0.01,
+    "minimumIntervalsPerWindow": 3
+  },
+  "rows": [
+    {
+      "name": "neutral",
+      "rate": 1.08,
+      "fromSeconds": 5.174149659863946,
+      "toSeconds": 7.174149659863946,
+      "expectedIntervalSeconds": 0.4629629629629629,
+      "channels": [
+        {
+          "channel": 0,
+          "pulseTimes": [
+            5.505056689342403,
+            5.966485260770975,
+            6.429750566893424,
+            6.892834467120181
+          ],
+          "intervalSeconds": [
+            0.46142857142857174,
+            0.463265306122449,
+            0.4630839002267573
+          ],
+          "errorSeconds": [
+            -0.0015343915343911663,
+            0.0003023431594860737,
+            0.00012093726379436287
+          ],
+          "criterionPassed": true
+        },
+        {
+          "channel": 1,
+          "pulseTimes": [
+            5.505351473922903,
+            5.966984126984127,
+            6.429727891156462,
+            6.89281179138322
+          ],
+          "intervalSeconds": [
+            0.4616326530612245,
+            0.46274376417233487,
+            0.46308390022675816
+          ],
+          "errorSeconds": [
+            -0.0013303099017384357,
+            -0.00021919879062803904,
+            0.00012093726379525105
+          ],
+          "criterionPassed": true
+        }
+      ]
+    },
+    {
+      "name": "shifted",
+      "rate": 1.08,
+      "fromSeconds": 13.034104308390022,
+      "toSeconds": 15.034104308390022,
+      "expectedIntervalSeconds": 0.4629629629629629,
+      "channels": [
+        {
+          "channel": 0,
+          "pulseTimes": [
+            13.37421768707483,
+            13.836802721088436,
+            14.301587301587302,
+            14.764172335600907
+          ],
+          "intervalSeconds": [
+            0.46258503401360507,
+            0.4647845804988666,
+            0.46258503401360507
+          ],
+          "errorSeconds": [
+            -0.00037792894935784194,
+            0.001821617535903708,
+            -0.00037792894935784194
+          ],
+          "criterionPassed": true
+        },
+        {
+          "channel": 1,
+          "pulseTimes": [
+            13.374263038548753,
+            13.836122448979593,
+            14.301111111111112,
+            14.764172335600907
+          ],
+          "intervalSeconds": [
+            0.46185941043084,
+            0.46498866213151935,
+            0.46306122448979536
+          ],
+          "errorSeconds": [
+            -0.001103552532122909,
+            0.0020256991685564385,
+            9.826152683245493e-05
+          ],
+          "criterionPassed": true
+        }
+      ]
+    },
+    {
+      "name": "afterTempo",
+      "rate": 1.04,
+      "fromSeconds": 20.574784580498864,
+      "toSeconds": 22.574784580498864,
+      "expectedIntervalSeconds": 0.4807692307692307,
+      "channels": [
+        {
+          "channel": 0,
+          "pulseTimes": [
+            20.980294784580497,
+            21.462312925170068,
+            21.943537414965988,
+            22.424557823129252
+          ],
+          "intervalSeconds": [
+            0.48201814058957027,
+            0.48122448979592036,
+            0.4810204081632641
+          ],
+          "errorSeconds": [
+            0.0012489098203395388,
+            0.00045525902668963614,
+            0.0002511773940333528
+          ],
+          "criterionPassed": true
+        },
+        {
+          "channel": 1,
+          "pulseTimes": [
+            20.980272108843536,
+            21.46233560090703,
+            21.9434693877551,
+            22.42281179138322
+          ],
+          "intervalSeconds": [
+            0.4820634920634923,
+            0.48113378684807273,
+            0.4793424036281202
+          ],
+          "errorSeconds": [
+            0.0012942612942615783,
+            0.00036455607884200436,
+            -0.0014268271411105315
+          ],
+          "criterionPassed": true
+        }
+      ]
+    }
+  ],
+  "pulseIntervalCriterionPassed": true
+}

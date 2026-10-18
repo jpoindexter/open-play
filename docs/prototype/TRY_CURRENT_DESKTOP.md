@@ -19,3 +19,5 @@ This version includes recent loop/Sync/warped-loop keylock/tempo-display and mou
 Browser-source plan100 adds queued keylock Play and neutral-pitch corrections after this package. They are not included in0.1.14; its native results retain the scope above. The prepared first hands-on test uses ordinary playback with keylock off.
 
 Browser-source plan101 adds resampled offline pitch and continuous loop key-change preparation. These changes are also outside this frozen0.1.14package; normal live shifted-pitch accuracy and preparation response time remain open.
+
+Browser-source plan102 adds bounded live resampled keylock with recorded key/tempo outcomes. It is not in this frozen0.1.14build; the prepared controller test still uses the package and scope above.

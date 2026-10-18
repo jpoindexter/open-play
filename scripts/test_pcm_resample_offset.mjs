@@ -1,0 +1,12 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import crypto from 'node:crypto';
+import {copyPCMChunk} from '../prototype/pcm-resample.js';
+const sourceRate=22050,outputRate=48000/(2**(2/12)),offsetSourceFrames=5512.5;
+const source=[330,550].map(hz=>Float32Array.from({length:sourceRate},(_,n)=>.12*Math.sin(2*Math.PI*hz*n/sourceRate)));
+const whole=await copyPCMChunk(source,sourceRate,outputRate,0,4800,{offsetSourceFrames});
+const left=await copyPCMChunk(source,sourceRate,outputRate,0,2400,{offsetSourceFrames}),right=await copyPCMChunk(source,sourceRate,outputRate,2400,2400,{offsetSourceFrames});
+for(let c=0;c<2;c++)for(let n=0;n<4800;n++)assert.equal(whole[c][n],n<2400?left[c][n]:right[c][n-2400]);
+await assert.rejects(copyPCMChunk(source,sourceRate,outputRate,0,1,{offsetSourceFrames:NaN}),TypeError);
+const result={scope:'One mixed-rate/fractional-source-origin chunk boundary, exact whole-vs-adjacent PCM equality and invalid-offset refusal. Not broad SRC/music/cursor acceptance.',sourceRate,outputRate,offsetSourceFrames,frames:4800,channels:2,wholeVsAdjacentBitIdentical:true,nonfiniteOffsetRefused:true,moduleSHA256:crypto.createHash('sha256').update(fs.readFileSync('prototype/pcm-resample.js')).digest('hex')};
+fs.writeFileSync('docs/prototype/pcm-resample-offset-results.json',JSON.stringify(result,null,2)+'\n',{flag:'wx'});console.log(JSON.stringify(result,null,2));

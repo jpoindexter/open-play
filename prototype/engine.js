@@ -337,7 +337,9 @@ export class AudioEngine {
     try {
       await this.waitForVoiceRetirement(d.index, controller.signal);
       if (!current()) return;
+      const prospectiveGrid=this.onGridTimeline?.(d,{position:this.position(d),when:this.ctx.currentTime});
       adapter = await this.createForwardKeylock({buffers, position: this.position(d), rate: d.rate,
+        resamplePitch:!!d.keylock||!prospectiveGrid,
         keylock: !!d.keylock, semitones: d.keyShift || 0, signal: controller.signal,
         onEvent: event => {
           const shadow=this.deckScratchShadows.get(d.index);

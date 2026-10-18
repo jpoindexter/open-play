@@ -19,7 +19,9 @@ def main():
     assert np.isfinite(x).all()
     assert report['workflowCompleted'] and report['sourceStable'] and report['physicalOutputMuted']
     windows=[]
-    for name,shift,limit in [('neutral',0,report['criteria']['neutralMaximumErrorHz']),('shifted',2,report['criteria']['shiftedMaximumErrorHz'])]:
+    phases=[('neutral',0,report['criteria']['neutralMaximumErrorHz']),('shifted',2,report['criteria']['shiftedMaximumErrorHz'])]
+    if 'afterTempo' in report:phases.append(('afterTempo',2,report['criteria']['shiftedMaximumErrorHz']))
+    for name,shift,limit in phases:
         offset=report[name]['audioTime']-report['recordStartAudioTime']
         first,last=[offset+t for t in report['criteria']['measurementSecondsAfterSettledState']]
         data=x[round(first*sr):round(last*sr)]
@@ -31,6 +33,7 @@ def main():
         errors=[measured[c]-expected[c] for c in range(2)] if audible else [None,None]
         windows.append({'name':name,'fromSeconds':first,'toSeconds':last,'frames':len(data),'rms':rms,'audible':audible,'expectedHz':expected,'measuredHz':measured,'errorHz':errors,'maximumErrorHz':limit,'criterionPassed':audible and all(abs(e)<=limit for e in errors)})
     result={'scope':'Actual browser master recording, whole finite44100Hz stereo decode; fixed5–7s after each observed settled state, global20–20000Hz Hann16x/log-parabolic spectral maximum, no frequency mask, fitted alignment or correction. Not native/physical/music/reference acceptance.','audioSHA256':hashlib.sha256(audio.read_bytes()).hexdigest(),'pcmSHA256':hashlib.sha256(pcm.read_bytes()).hexdigest(),'frames':len(x),'sampleRate':sr,'wholeFinite':True,'windows':windows,'neutralCriterionPassed':windows[0]['criterionPassed'],'shiftedCriterionPassed':windows[1]['criterionPassed'],'fullKeylockAccepted':False}
+    if len(windows)>2:result['afterTempoCriterionPassed']=windows[2]['criterionPassed']
     out.write_text(json.dumps(result,indent=2)+'\n')
     print(json.dumps(result,indent=2))
 
