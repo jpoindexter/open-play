@@ -1,0 +1,27 @@
+{
+  "checkpoint": 156,
+  "evidenceKind": "Verified in current source files and arithmetic; not a long-track UI/inference acceptance run.",
+  "decodedWavTransportMaximumBytes": 134217728,
+  "sampleRateForCalculation": 44100,
+  "channels": 2,
+  "bytesPerSample": 4,
+  "wavHeaderBytes": 44,
+  "maximumAcceptedFrames": 16777210,
+  "maximumAcceptedSeconds": 380.4356009070295,
+  "scope": "The preparation encoder and upload service use a128MiB decoded-WAV request bound. A compressed MP3 can therefore hit preparation rejection after decoding at this duration. Keep bounded requests; next investigate chunked transport/worker handling rather than promise unbounded memory.",
+  "sourceFiles": {
+    "prototype/stems.js": {
+      "sha256": "d209b8ce97b5deb12392b8a687b7d719f4743f08aa6df145fe444ab51ade2337"
+    },
+    "scripts/stem_service.py": {
+      "sha256": "d337ce3930a4191f121384cea91c93442d21cb038035dbfdccc5f15e7fe61526"
+    },
+    "scripts/stem_worker.py": {
+      "sha256": "d5a361c27b1efc17a31933426d094888298c0bbac63ff52d55e144347b6e9321"
+    }
+  },
+  "fullParityAcceptance": false,
+  "serviceWorkerMaximumSeconds": 600,
+  "workerCliDefaultMaximumSeconds": 1800,
+  "workerDurationGuardVerifiedInFiles": true
+}
