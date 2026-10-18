@@ -63,10 +63,10 @@ export function createSmartSync({engine, state}) {
     if (!Number.isFinite(rate) || rate < .25 || rate > 4) throw new Error('The matched tempo is outside the current transport range.');
     return rate;
   }
-  function validateTransport(deck, primary) {
+  function validateTransport(deck, primary, allowReverseLoop=false) {
     for (const d of [deck,primary]) {
       requireGrid(d.track);
-      if (d.reverse || (d.stemSlip || 'off') !== 'off')
+      if ((d.reverse && !(allowReverseLoop && d.loop)) || (d.stemSlip || 'off') !== 'off')
         throw new Error('This Smart Sync path currently requires forward decks without Stem Slip.');
       loopBounds(d);
 
@@ -121,7 +121,7 @@ export function createSmartSync({engine, state}) {
     if(!isCurrent()||deck.track!==track)throw cancelled();
     if (!enabled() || !engaged(deck)) return false;
     requireGrid(deck.track);
-    if(deck.track.gridWarpMarkers?.length)validateTransport(deck,deck);
+    if(deck.track.gridWarpMarkers?.length)validateTransport(deck,deck,true);
     if(deck.position>=deck.track.duration)deck.position=0;
     if (deck.syncState==='armed') {
       const primary=leader(deck);
@@ -131,7 +131,7 @@ export function createSmartSync({engine, state}) {
   }
   function played(deck) {
     if (enabled() && engaged(deck) && deck.syncState==='armed')
-      deck.syncState=leader(deck)?.playing||!barCompatible(deck)?'tempo':'beat';
+      deck.syncState=deck.reverse||leader(deck)?.playing||!barCompatible(deck)?'tempo':'beat';
   }
   function paused(deck) {
     if (enabled() && engaged(deck) && deck.syncState==='beat') {revise(deck);deck.syncState='armed';}
@@ -154,11 +154,11 @@ export function createSmartSync({engine, state}) {
     reconcile();
   }
   function validate(deck,changes={}){
-    if(enabled()&&engaged(deck)&&deck.track?.gridWarpMarkers?.length){const candidate={...deck,...changes};validateTransport(candidate,candidate);}
+    if(enabled()&&engaged(deck)&&deck.track?.gridWarpMarkers?.length){const candidate={...deck,...changes};validateTransport(candidate,candidate,true);}
   }
   function timeline(deck,options){
     if(!enabled()||!engaged(deck)||!deck.track?.gridWarpMarkers?.length)return;
-    validateTransport(deck,deck);
+    validateTransport(deck,deck,true);
     return createBeatgrid(deck.track).timeline({...options,bpm:syncBPM,loop:loopBounds(deck)});
   }
   function tempo(deck,rate){

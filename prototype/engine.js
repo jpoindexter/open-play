@@ -341,17 +341,23 @@ export class AudioEngine {
     try{
       const loop={start:d.loopIn,end:d.loopOut},initialTimeline=this.onGridTimeline(d,{position:d.position,when:this.ctx.currentTime}),transformed=keylock||semitones!==0;
       if(transformed){const rendered=[];for(const buffer of buffers){rendered.push(await this.keylockRenderer.renderWarpLoop(buffer,{track:d.track,loop,bpm:initialTimeline.bpm,keylock,semitones,signal:controller.signal}));if(!current())return;}buffers=rendered;}
+      const reversePlan=d.reverse?createReverseCensorPlan(d.track,initialTimeline.bpm):null;
+      if(reversePlan)buffers=buffers.map(buffer=>this.reverseBuffer(d.track.id,buffer));
       transport=await createWarpLoopTransport(this.ctx,buffers,{signal:controller.signal,onError:error=>{const current=this.voices.get(d.index);if(current?.censorBacking?.liveVoice.warpLoopTransport===transport)current.censorBacking.fail(error);else if(current?.warpLoopTransport===transport){this.pause(d);this.onError?.(error);}}});
       if(!current())return;
       const when=handoff?await handoff.prepared(d.index,this.ctx.currentTime+.05):this.ctx.currentTime+.05;
       const position=positionAt?positionAt(when):playing?oldClock(when):d.position;
-      const timeline=this.onGridTimeline(d,{position,when});
-      const ack=await transport.start({track:{bpm:d.track.bpm,grid:d.track.grid,duration:d.track.duration,gridWarpMarkers:d.track.gridWarpMarkers},loop:timeline.loop,bpm:timeline.bpm,position,when,renderedLoop:transformed});
+      const forwardTimeline=this.onGridTimeline(d,{position,when});
+      const reverseTimeline=reversePlan?createBeatgrid(reversePlan.track).timeline({position:reversePlan.duration-position,when,bpm:forwardTimeline.bpm,loop:reversePlan.loop(loop)}):null;
+      // Audio-thread coordinates advance through reversed PCM. All callers of
+      // the deck clock still receive original source seconds and loop bounds.
+      const timeline=reverseTimeline?{...forwardTimeline,reverse:true,clock:at=>reversePlan.duration-reverseTimeline.clock(at),rateAt:at=>reverseTimeline.rateAt(at)}:forwardTimeline;
+      const ack=await transport.start({track:reversePlan?.track||{bpm:d.track.bpm,grid:d.track.grid,duration:d.track.duration,gridWarpMarkers:d.track.gridWarpMarkers},loop:reversePlan?reversePlan.loop(loop):timeline.loop,bpm:timeline.bpm,position:reversePlan?reversePlan.duration-position:position,when,renderedLoop:transformed});
       if(handoff)await handoff.arm(d.index);
       if(!current())return;
       const voice={sources:[],warpLoopTransport:transport,liveOwnerController:controller,gridTimeline:timeline,stemGains:[],handoffBefore:old&&playing?{until:when,owner:old,clock:oldClock,rate:at=>this.voiceRateAt(d,old,at)}:null};
       this.routeOrdinaryVoice(d,voice,transport.outputs,buffers.length===5,{when,reuseVoice:old});committed=true;this.retireVoiceAt(d.index,old,when);
-      d.position=ack.position;d.anchorPosition=ack.position;d.anchorTime=when;d.playing=true;
+      d.position=reversePlan?reversePlan.duration-ack.position:ack.position;d.anchorPosition=d.position;d.anchorTime=when;d.playing=true;
     }finally{if(!committed)transport?.dispose();}
   }
   async startForwardKeylock(d, buffers, controller, current, {positionAt, priorClock,handoff=null} = {}) {
@@ -454,7 +460,6 @@ export class AudioEngine {
       const scale = transformed ? tempo : 1;
       if (!current()) return;
       if(d.loop&&track.gridWarpMarkers?.length&&this.onGridTimeline?.(d,{position:d.position,when:this.ctx.currentTime})){
-        if(d.reverse)throw Error('Warped loops with reverse are not available yet.');
         await this.startWarpLoop(d,buffers,controller,current,{positionAt,priorClock,keylock,semitones:shift,handoff});return;
       }
       if (transformed && !d.reverse && !d.loop) {
@@ -1379,6 +1384,7 @@ export class AudioEngine {
   }
   async setReverse(d, reverse) {
     this.onValidateTransport?.(d,{reverse});
+    if(reverse!==d.reverse)this.onManualPosition?.(d);
     if (d.stemSlip && d.stemSlip !== "off") {
       d.reverse = reverse;
       if (reverse) {

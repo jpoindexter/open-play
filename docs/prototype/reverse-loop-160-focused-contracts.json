@@ -1,0 +1,60 @@
+[
+  {
+    "command": "node scripts/test_warp_loop.mjs",
+    "exitCode": 0,
+    "output": {
+      "passed": true,
+      "scope": "Warped musical-loop clock and PCM kernel; no real worklet/native/hardware acceptance",
+      "checks": [
+        "eight-beat periodic clock and100-second no-drift projection",
+        "local tempo rates follow source sections",
+        "PCM sample positions before/across/repeated loop boundaries",
+        "silent future start and terminal dispose",
+        "loop bounds and audible-only rate validation"
+      ]
+    }
+  },
+  {
+    "command": "node scripts/test_smart_sync_loops.mjs",
+    "exitCode": 0,
+    "output": {
+      "passed": true,
+      "scope": "Smart Sync loop geometry/state with engine collaborators; no acoustic/native/hardware proof",
+      "checks": [
+        "bar alignment inside active loop",
+        "different-BPM whole-bar loops engage Beat Sync",
+        "short loop degrades bar lock to Tempo Sync without seek",
+        "restore whole bar allows explicit re-Sync",
+        "warped loop clock is passed to backend and keylock may use loop backend while reverse bar alignment still refuses early; existing reverse loop keeps Tempo Sync clock and Play, non-loop reverse still refuses"
+      ]
+    }
+  },
+  {
+    "command": "node scripts/test_reverse_censor_plan.mjs",
+    "exitCode": 0,
+    "output": {
+      "passed": true,
+      "scope": "Reverse grid integral and controlled forward-voice lease; browser audio separate",
+      "checks": [
+        "Reverse source crosses marker into its original left-side tempo",
+        "Output event times integrate all reversed rates",
+        "Known eight-beat reverse loop preserves tempo sections through27cycles",
+        "Actual five-bus PCM kernel decreases source ramp and wraps",
+        "Release before scheduled start cancels mute/reverse voice",
+        "Release after start restores exact original owner and warp map",
+        "Failed route/canceled preparation preserve the forward owner"
+      ]
+    }
+  },
+  {
+    "command": "node scripts/test_warp_loop_keylock.mjs",
+    "exitCode": 0,
+    "executedEarlierThisTurn": true,
+    "expectedHz": 523.2511306011972,
+    "observedHz": [
+      523.4680496579768,
+      523.5365109659216
+    ],
+    "scope": "Actual offline Signalsmith DSP plus loop kernel, separate from browser acceptance"
+  }
+]
