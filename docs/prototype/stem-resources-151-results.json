@@ -1,0 +1,214 @@
+{
+  "checkpoint": 151,
+  "passed": false,
+  "audioPassed": false,
+  "sampledResourceBoundsPassed": true,
+  "scope": "Four actual live keylocked decks, authored48second330/550Hz stereo original and three independent decoded Stem generations. Actual Play/pads/Stop, direct production attachStems, read-only actual worklet PCM/WASM capacity queries, 24second left-channel per-deck captures. Physical outputs muted. Not total process memory, CPU/deadline, right-channel acoustic, musical/model/native/hardware/reference acceptance.",
+  "criteria": {
+    "captureSeconds": 24,
+    "minimum10msRMSRatio": 0.85,
+    "maximumAdjacentJump": 0.03,
+    "maximumNearZeroRunSeconds": 0.001,
+    "nearZeroAbsolute": 1e-07,
+    "maximumRetainedWindowSourceSeconds": 12,
+    "maximumWASMCapacityBytesPerWorklet": 134217728
+  },
+  "originalSHA256": "5839cfbdade0c89a1ef45e8e76812b1ed3f74432c05f4fdb7033961a0995de70",
+  "originalBytes": 24932811,
+  "sourceHashes": {
+    "app.js": "a34c271bb8b2270c071ab77c8ce7727cf6943733a0e21b7c6da9157c0c13089a",
+    "engine.js": "22f4609c72e352a7a548fc71d8a480d706f3362428bbefd8b2beb09c8cbfc264",
+    "keylock-shadow-live.js": "c59dcc99838f3bcfa76cac228cf92183b1b7dc567f6f426f3f30328bc64d2c0e",
+    "pcm-resample.js": "8789e7cfc543c393830ad04e2d56e3359786eb6a4473ff08edda1c899fc19ae2",
+    "stem-resource-harness.js": "a3ae46ed51bc130a3b94c33003b61904a5ec3b6374f3005a53ebcf208726afba",
+    "stem-activation-capture-145.js": "730b9c3de31e9c3546ec1ab86f8fd85ce2a1ccfe6f78fc25d8f483f8b9d75331",
+    "vendor/signalsmith-stretch/SignalsmithStretch-open-play-replace.mjs": "7fab930586aa9055c2b47a18ce7740e2b22d723498ba59cc7c09844566ef08de"
+  },
+  "sourceStable": true,
+  "generations": [
+    {
+      "generation": 1,
+      "bufferIDs": [
+        2,
+        3,
+        4,
+        5
+      ],
+      "startedAt": 2.7834920634920635,
+      "returnedAt": 3.709387755102041,
+      "banks": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "sameOwners": [
+        true,
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "generation": 2,
+      "bufferIDs": [
+        6,
+        7,
+        8,
+        9
+      ],
+      "startedAt": 8.826485260770975,
+      "returnedAt": 10.071655328798187,
+      "banks": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "sameOwners": [
+        true,
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "generation": 3,
+      "bufferIDs": [
+        10,
+        11,
+        12,
+        13
+      ],
+      "startedAt": 15.209070294784581,
+      "returnedAt": 16.46294784580499,
+      "banks": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "sameOwners": [
+        true,
+        true,
+        true,
+        true
+      ]
+    }
+  ],
+  "sampleCount": 44,
+  "sampledMaximumSourceWindowSeconds": 11.000004016888777,
+  "sampledMaximumRetainedArrayBufferBytesPerWorklet": [
+    33339600,
+    29370168,
+    39204432,
+    33339600
+  ],
+  "observedWASMCapacityBytesPerWorklet": [
+    [
+      6225920
+    ],
+    [
+      6225920
+    ],
+    [
+      6225920
+    ],
+    [
+      6225920
+    ]
+  ],
+  "stableAccountingComparisonsPerDeck": [
+    42,
+    35,
+    36,
+    42
+  ],
+  "uniqueDecodedBuffersBeforeStop": 9,
+  "uniqueDecodedBuffersAfterStop": 5,
+  "uniqueDecodedBuffersAfterCacheClear": 1,
+  "disposedAdapterDecodedCounterIsZero": [
+    false,
+    false,
+    false,
+    false
+  ],
+  "disposedCounterConsistencyPassed": false,
+  "channels": [
+    {
+      "deck": 0,
+      "channel": 0,
+      "frames": 1058400,
+      "sha256": "9d945371b4a7eff97ca6fe4668de020f2c0ac23c5be62e4b2bcca475966cdc06",
+      "contiguousQuanta": 8269,
+      "baselineRMS": 0.12059530345131862,
+      "minimum10msRMSRatio": 0.979372706644803,
+      "maximumAdjacentJump": 0.008072411175817251,
+      "longestNearZeroRunSeconds": 2.2675736961451248e-05,
+      "minimumRMSWindowAudioTime": 8.972063492063493,
+      "stoppedPeak": 0.0,
+      "expectedFrequencyHz": 330.0,
+      "measuredFrequencyHz": 329.9999875815738,
+      "passed": true
+    },
+    {
+      "deck": 1,
+      "channel": 0,
+      "frames": 1058400,
+      "sha256": "724fb3296e5fa7de7e560a4e7730e9b401e7572669b491ce4ad7046322f5823a",
+      "contiguousQuanta": 8269,
+      "baselineRMS": 0.12081894613132195,
+      "minimum10msRMSRatio": 0.7320637460903964,
+      "maximumAdjacentJump": 0.009969767648726702,
+      "longestNearZeroRunSeconds": 0.0,
+      "minimumRMSWindowAudioTime": 9.152063492063492,
+      "stoppedPeak": 0.0,
+      "expectedFrequencyHz": 392.43834795089793,
+      "measuredFrequencyHz": 392.46759204577256,
+      "passed": false
+    },
+    {
+      "deck": 2,
+      "channel": 0,
+      "frames": 1058400,
+      "sha256": "a6059995ad55fda7e07b0632eb8163183f959c6b024c208a6a91df996db3e924",
+      "contiguousQuanta": 8269,
+      "baselineRMS": 0.12070981486790572,
+      "minimum10msRMSRatio": 0.988705259473919,
+      "maximumAdjacentJump": 0.00716800126247108,
+      "longestNearZeroRunSeconds": 0.0,
+      "minimumRMSWindowAudioTime": 10.292063492063493,
+      "stoppedPeak": 0.0,
+      "expectedFrequencyHz": 293.99657698631194,
+      "measuredFrequencyHz": 293.996296530691,
+      "passed": true
+    },
+    {
+      "deck": 3,
+      "channel": 0,
+      "frames": 1058400,
+      "sha256": "ab570cf6546516a36fa61b736a1e1cfc74da2f1c2562aad7e2fd902f80f2be9f",
+      "contiguousQuanta": 8269,
+      "baselineRMS": 0.12058852465332663,
+      "minimum10msRMSRatio": 0.9765493294580758,
+      "maximumAdjacentJump": 0.008046228263992816,
+      "longestNearZeroRunSeconds": 2.2675736961451248e-05,
+      "minimumRMSWindowAudioTime": 13.052063492063493,
+      "stoppedPeak": 0.0,
+      "expectedFrequencyHz": 330.0,
+      "measuredFrequencyHz": 329.99972571189386,
+      "passed": true
+    }
+  ],
+  "mainThreadTimerMaximumExcessMs": 20.5,
+  "captureWallMilliseconds": 24006.299999952316,
+  "inspection": "All retained PCM finite/hash/quantum checked. Continuity+50ms to actual Stop; fixed+50\u2013150ms baseline. Stop+100\u2013300ms. Last steady500ms Hann/log-parabolic FFT. No fitting/PCM repair. Sampled resource maxima are not all-time/process bounds. Decoded ownership is explicit roots, not GC proof.",
+  "cpuDeadlineAcceptance": false,
+  "totalProcessMemoryAcceptance": false,
+  "garbageCollectionAcceptance": false,
+  "rightChannelAcousticAcceptance": false,
+  "musicalSeparationQualityAcceptance": false,
+  "nativeAcceptance": false,
+  "hardwareAcceptance": false,
+  "fullParityAcceptance": false
+}

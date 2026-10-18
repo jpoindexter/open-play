@@ -1,0 +1,274 @@
+{
+  "checkpoint": 151,
+  "scope": "Actual AudioContext/eighteen-channel WASM live adapter disposal/reference counters only; silent physical graph. Not app Stop workflow, GC, process memory, continuity or full parity acceptance.",
+  "errors": [],
+  "sourceBefore": {
+    "keylock-shadow-live.js": "41bf27051270a4741f83b59bc7c0111767b589ef3986b4aafb43ad36dc067551",
+    "pcm-resample.js": "8789e7cfc543c393830ad04e2d56e3359786eb6a4473ff08edda1c899fc19ae2",
+    "keylock-disposal-151-harness.js": "e82d829a43b41a3a3a963ab615ba27e4b13c7e85bb5388fa7d5bc21242fe576e",
+    "vendor/signalsmith-stretch/SignalsmithStretch-open-play-replace.mjs": "7fab930586aa9055c2b47a18ce7740e2b22d723498ba59cc7c09844566ef08de"
+  },
+  "before": {
+    "reservedStems": true,
+    "stemBanks": 2,
+    "activeStemBank": 0,
+    "stagedStemBank": null,
+    "publicOutputs": 5,
+    "stemsReady": true,
+    "resamplePitch": true,
+    "maxPCMBytes": 536870912,
+    "followMinimumLeadSeconds": 0.04,
+    "byteAccounting": "Acknowledged retained PCM and in-flight chunk copies only; excludes decoded inputs, SRC tables and opaque WASM heaps.",
+    "disposed": false,
+    "state": {
+      "when": 0.2696598639455782,
+      "position": 0.1631292517006803,
+      "playing": true,
+      "rate": 1.1,
+      "keylock": true,
+      "semitones": 3,
+      "effectiveSemitones": 3
+    },
+    "sourceGeometry": [
+      {
+        "index": 0,
+        "sampleRate": 44100,
+        "frames": 44100,
+        "channels": 2,
+        "duration": 1,
+        "paddedTailSeconds": 0,
+        "trimmedTailSeconds": 0,
+        "decodedBytes": 352800,
+        "reservedSilence": false
+      },
+      {
+        "index": 1,
+        "sampleRate": 44100,
+        "frames": 44100,
+        "channels": 2,
+        "duration": 1,
+        "paddedTailSeconds": 0,
+        "trimmedTailSeconds": 0,
+        "decodedBytes": 352800,
+        "reservedSilence": false
+      },
+      {
+        "index": 2,
+        "sampleRate": 44100,
+        "frames": 44100,
+        "channels": 2,
+        "duration": 1,
+        "paddedTailSeconds": 0,
+        "trimmedTailSeconds": 0,
+        "decodedBytes": 352800,
+        "reservedSilence": false
+      },
+      {
+        "index": 3,
+        "sampleRate": 44100,
+        "frames": 44100,
+        "channels": 2,
+        "duration": 1,
+        "paddedTailSeconds": 0,
+        "trimmedTailSeconds": 0,
+        "decodedBytes": 352800,
+        "reservedSilence": false
+      },
+      {
+        "index": 4,
+        "sampleRate": 44100,
+        "frames": 44100,
+        "channels": 2,
+        "duration": 1,
+        "paddedTailSeconds": 0,
+        "trimmedTailSeconds": 0,
+        "decodedBytes": 352800,
+        "reservedSilence": false
+      },
+      {
+        "index": 5,
+        "sampleRate": 44100,
+        "frames": 44100,
+        "channels": 2,
+        "duration": 1,
+        "paddedTailSeconds": 0,
+        "trimmedTailSeconds": 0,
+        "decodedBytes": 0,
+        "reservedSilence": true
+      },
+      {
+        "index": 6,
+        "sampleRate": 44100,
+        "frames": 44100,
+        "channels": 2,
+        "duration": 1,
+        "paddedTailSeconds": 0,
+        "trimmedTailSeconds": 0,
+        "decodedBytes": 0,
+        "reservedSilence": true
+      },
+      {
+        "index": 7,
+        "sampleRate": 44100,
+        "frames": 44100,
+        "channels": 2,
+        "duration": 1,
+        "paddedTailSeconds": 0,
+        "trimmedTailSeconds": 0,
+        "decodedBytes": 0,
+        "reservedSilence": true
+      },
+      {
+        "index": 8,
+        "sampleRate": 44100,
+        "frames": 44100,
+        "channels": 2,
+        "duration": 1,
+        "paddedTailSeconds": 0,
+        "trimmedTailSeconds": 0,
+        "decodedBytes": 0,
+        "reservedSilence": true
+      }
+    ],
+    "groups": [
+      {
+        "id": 1,
+        "pitchMap": null,
+        "pitchSemitones": 3,
+        "pitchFactor": 1.189207115002721,
+        "origin": 0,
+        "start": 0,
+        "end": 1,
+        "nodeCount": 1,
+        "processorChannels": 18,
+        "sourceOutputs": 9,
+        "retainedPCMBytes": 2670048,
+        "retainedChunks": 3,
+        "latency": 0.12,
+        "role": "selected"
+      }
+    ],
+    "retainedPCMBytes": 2670048,
+    "inFlightPCMBytes": 0,
+    "decodedBytes": 1764000,
+    "policy": {
+      "direction": "forward",
+      "normalMinimumLead": "queried group latency plus2 render quanta",
+      "followMinimumLeadSeconds": 0.04,
+      "followOwner": "currently active forward owner only",
+      "followCoverage": "required history must already be prepared; reject without replacement",
+      "rate": [
+        0.25,
+        4
+      ],
+      "effectiveSemitones": [
+        -24,
+        24
+      ],
+      "chunkSeconds": 0.5,
+      "requiredPrerollSeconds": 1,
+      "retentionPrerollSeconds": 2,
+      "retentionHysteresisSeconds": 1,
+      "lookaheadSeconds": 8,
+      "driverMs": 50,
+      "crossfadeSeconds": 0.01,
+      "srcTaps": 32,
+      "srcPhases": 1024,
+      "decodedSources": "Whole decoded AudioBuffers remain caller-owned; only processor PCM copies are windowed.",
+      "unsupported": [
+        "reverse",
+        "loop",
+        "Stem Slip",
+        "incremental compressed-file decoding"
+      ],
+      "quality": "Independent32-tap windowed-sinc normalization and10ms group crossfade; vendor sonic equivalence and artifact-free transitions are unverified."
+    },
+    "lastError": null
+  },
+  "beforeRetainedReferences": 5,
+  "actualWorklet": {
+    "frame": 18432,
+    "sampleRate": 44100,
+    "channels": 18,
+    "retainedChunks": 3,
+    "startFrame": 0,
+    "endFrame": 37084,
+    "retainedPCMViewBytes": 2670048,
+    "uniqueRetainedArrayBufferBytes": 2670048,
+    "wasmLinearMemoryCapacityBytes": 6225920,
+    "timeMapSegments": 2
+  },
+  "disposal": {
+    "disposed": true,
+    "retainedPCMBytes": 0
+  },
+  "after": {
+    "reservedStems": true,
+    "stemBanks": 2,
+    "activeStemBank": 0,
+    "stagedStemBank": null,
+    "publicOutputs": 5,
+    "stemsReady": true,
+    "resamplePitch": true,
+    "maxPCMBytes": 536870912,
+    "followMinimumLeadSeconds": 0.04,
+    "byteAccounting": "Acknowledged retained PCM and in-flight chunk copies only; excludes decoded inputs, SRC tables and opaque WASM heaps.",
+    "disposed": true,
+    "state": {
+      "when": 0.4179591836734694,
+      "position": 0.1631292517006803,
+      "playing": false,
+      "rate": 1.1,
+      "keylock": true,
+      "semitones": 3,
+      "effectiveSemitones": 3
+    },
+    "sourceGeometry": [],
+    "groups": [],
+    "retainedPCMBytes": 0,
+    "inFlightPCMBytes": 0,
+    "decodedBytes": 0,
+    "policy": {
+      "direction": "forward",
+      "normalMinimumLead": "queried group latency plus2 render quanta",
+      "followMinimumLeadSeconds": 0.04,
+      "followOwner": "currently active forward owner only",
+      "followCoverage": "required history must already be prepared; reject without replacement",
+      "rate": [
+        0.25,
+        4
+      ],
+      "effectiveSemitones": [
+        -24,
+        24
+      ],
+      "chunkSeconds": 0.5,
+      "requiredPrerollSeconds": 1,
+      "retentionPrerollSeconds": 2,
+      "retentionHysteresisSeconds": 1,
+      "lookaheadSeconds": 8,
+      "driverMs": 50,
+      "crossfadeSeconds": 0.01,
+      "srcTaps": 32,
+      "srcPhases": 1024,
+      "decodedSources": "Whole decoded AudioBuffers remain caller-owned; only processor PCM copies are windowed.",
+      "unsupported": [
+        "reverse",
+        "loop",
+        "Stem Slip",
+        "incremental compressed-file decoding"
+      ],
+      "quality": "Independent32-tap windowed-sinc normalization and10ms group crossfade; vendor sonic equivalence and artifact-free transitions are unverified."
+    },
+    "lastError": null
+  },
+  "afterRetainedReferences": 0,
+  "passed": true,
+  "sourceAfter": {
+    "keylock-shadow-live.js": "41bf27051270a4741f83b59bc7c0111767b589ef3986b4aafb43ad36dc067551",
+    "pcm-resample.js": "8789e7cfc543c393830ad04e2d56e3359786eb6a4473ff08edda1c899fc19ae2",
+    "keylock-disposal-151-harness.js": "e82d829a43b41a3a3a963ab615ba27e4b13c7e85bb5388fa7d5bc21242fe576e",
+    "vendor/signalsmith-stretch/SignalsmithStretch-open-play-replace.mjs": "7fab930586aa9055c2b47a18ce7740e2b22d723498ba59cc7c09844566ef08de"
+  },
+  "sourceStable": true
+}
