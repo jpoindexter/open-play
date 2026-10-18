@@ -1,3 +1,5 @@
+Current source follow-up (plan114): [warped-loop Censor review](WARPED_LOOP_CENSOR_REVIEW.md) adds the loop composition. The historical scope/results below remain tied to their original candidate. Frozen native0.1.16 is unchanged.
+
 # Non-loop warped Smart Sync Censor
 
 18October2026, source after private `57091fc`. This is new browser-source behavior; native0.1.15 and its profile/launchers remain unchanged. Full parity is unaccepted.

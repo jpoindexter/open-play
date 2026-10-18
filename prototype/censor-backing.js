@@ -6,7 +6,7 @@ export class CensorBacking{
   const cancel=()=>this.controller.abort();this.request.controller.signal.addEventListener('abort',cancel,{once:true});
   try{
    if(this.request.controller.signal.aborted)throw new DOMException('Censor canceled.','AbortError');
-   const outputs=this.liveVoice.liveKeylock?.outputs||this.liveVoice.sources;
+   const outputs=this.liveVoice.liveKeylock?.outputs||this.liveVoice.warpLoopTransport?.outputs||this.liveVoice.sources;
    this.pull=await this.engine.createScratchShadowPull({outputs,signal:this.controller.signal,onError:error=>this.fail(error)});
    if(this.request.controller.signal.aborted||this.deck.track!==this.track||this.engine.voices.get(this.deck.index)!==this.liveVoice)throw new DOMException('Censor owner changed.','AbortError');
    return this;

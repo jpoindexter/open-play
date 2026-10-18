@@ -17,6 +17,7 @@ import {createWarpLoopTransport} from './warp-loop.js';
 import {createSyncTempoHandoff} from './sync-tempo-handoff.js';
 import {createReverseCensorPlan} from './reverse-censor-plan.js';
 import {CensorBacking} from './censor-backing.js';
+import {createBeatgrid} from './beatgrid.js';
 export class AudioEngine {
   constructor() {
     this.ctx = null;
@@ -326,7 +327,7 @@ export class AudioEngine {
     try{
       const loop={start:d.loopIn,end:d.loopOut},initialTimeline=this.onGridTimeline(d,{position:d.position,when:this.ctx.currentTime}),transformed=keylock||semitones!==0;
       if(transformed){const rendered=[];for(const buffer of buffers){rendered.push(await this.keylockRenderer.renderWarpLoop(buffer,{track:d.track,loop,bpm:initialTimeline.bpm,keylock,semitones,signal:controller.signal}));if(!current())return;}buffers=rendered;}
-      transport=await createWarpLoopTransport(this.ctx,buffers,{signal:controller.signal,onError:error=>{if(this.voices.get(d.index)?.warpLoopTransport===transport){this.pause(d);this.onError?.(error);}}});
+      transport=await createWarpLoopTransport(this.ctx,buffers,{signal:controller.signal,onError:error=>{const current=this.voices.get(d.index);if(current?.censorBacking?.liveVoice.warpLoopTransport===transport)current.censorBacking.fail(error);else if(current?.warpLoopTransport===transport){this.pause(d);this.onError?.(error);}}});
       if(!current())return;
       const when=handoff?await handoff.prepared(d.index,this.ctx.currentTime+.05):this.ctx.currentTime+.05;
       const position=positionAt?positionAt(when):playing?oldClock(when):d.position;
@@ -1341,20 +1342,27 @@ export class AudioEngine {
   }
   async beginWarpedCensor(d,owner){
     const live=this.voices.get(d.index),request={owner,censor:true,track:d.track,controller:new AbortController(),ready:false,closing:false,reverse:null,backing:null};
-    if(d.loop)throw new Error('Censor with a warped loop is not implemented yet.');
     const plan=createReverseCensorPlan(d.track,live.gridTimeline.bpm),clock=this.voiceClock(d,live);this.deckScratchRequests.set(d.index,request);d.scratchPreparing=true;
     const current=()=>this.deckScratchRequests.get(d.index)===request&&d.track===request.track&&d.playing&&!request.controller.signal.aborted;
     let adapter,backing,committed=false;
     try{
-      const original=await this.buffer(d.track),stems=this.stemBuffers.get(d.track.id),buffers=(stems?[original,...stems]:[original]).map(buffer=>this.reverseBuffer(d.track.id,buffer));
+      const original=await this.buffer(d.track),stems=this.stemBuffers.get(d.track.id);let buffers=stems?[original,...stems]:[original];
+      const loop=d.loop?{start:d.loopIn,end:d.loopOut}:null,reverseLoop=loop?plan.loop(loop):null;
+      if(loop&&(d.keylock||d.keyShift)){
+        const rendered=[];for(const buffer of buffers){rendered.push(await this.keylockRenderer.renderWarpLoop(buffer,{track:d.track,loop,bpm:live.gridTimeline.bpm,keylock:!!d.keylock,semitones:d.keyShift||0,signal:request.controller.signal}));if(!current())return false;}buffers=rendered;
+      }
+      buffers=buffers.map(buffer=>this.reverseBuffer(d.track.id,buffer));
       if(!current())return false;
-      adapter=await this.createForwardKeylock({buffers,position:Math.max(0,plan.duration-clock(this.ctx.currentTime)),rate:plan.rateAt(Math.max(0,plan.duration-clock(this.ctx.currentTime))),keylock:!!d.keylock,semitones:d.keyShift||0,resamplePitch:true,pitchRateMap:plan.points,signal:request.controller.signal,onEvent:event=>{
+      if(loop){
+        const transport=await createWarpLoopTransport(this.ctx,buffers,{signal:request.controller.signal,onError:error=>{if(this.voices.get(d.index)?.censorReverse===adapter){this.pause(d);this.onError?.(error);}}});let timeline=null;
+        adapter={outputs:transport.outputs,position:at=>timeline?.clock(at??this.ctx.currentTime)??plan.duration-clock(this.ctx.currentTime),stateAt:at=>({rate:timeline?.rateAt(at??this.ctx.currentTime)??plan.rateAt(plan.duration-clock(this.ctx.currentTime))}),snapshot:()=>({groups:[],loop:reverseLoop,renderedLoop:!!(d.keylock||d.keyShift),timeline}),async dispose(){transport.dispose();},startTimeline:async({position,when})=>{timeline=createBeatgrid(plan.track).timeline({position,when,bpm:live.gridTimeline.bpm,loop:reverseLoop});return transport.start({track:plan.track,loop:reverseLoop,bpm:live.gridTimeline.bpm,position,when,renderedLoop:!!(d.keylock||d.keyShift)});}};
+      }else adapter=await this.createForwardKeylock({buffers,position:Math.max(0,plan.duration-clock(this.ctx.currentTime)),rate:plan.rateAt(Math.max(0,plan.duration-clock(this.ctx.currentTime))),keylock:!!d.keylock,semitones:d.keyShift||0,resamplePitch:true,pitchRateMap:plan.points,signal:request.controller.signal,onEvent:event=>{
         if(event.type==='error'&&this.voices.get(d.index)?.censorReverse===adapter){const error=Object.assign(Error(event.error.message),{name:event.error.name});this.pause(d);this.onError?.(error);}
       }});request.reverse=adapter;if(!current())return false;
       backing=await new CensorBacking(this,d,live,request).prepare();request.backing=backing;if(!current())return false;
       const lead=Math.max(...adapter.snapshot().groups.map(g=>g.latency),0)+.05,when=this.ctx.currentTime+lead,position=clock(when),reversePosition=plan.duration-position;
       if(reversePosition<=0)return false;
-      const events=plan.events(reversePosition,when),ack=await adapter.startTimeline({position:reversePosition,when,events});if(!current())return false;
+      const events=loop?null:plan.events(reversePosition,when),ack=await adapter.startTimeline({position:reversePosition,when,events});if(!current())return false;
       const voice={sources:[],stemGains:[],censorReverse:adapter,censorOwnerController:request.controller,censorBacking:backing,handoffBefore:{until:ack.when,owner:live,clock,rate:at=>this.voiceRateAt(d,live,at)}};
       backing.claim(voice,ack.when);this.routeOrdinaryVoice(d,voice,adapter.outputs,!!stems,{when:ack.when,reuseVoice:live});committed=true;request.ready=true;d.scratchPreparing=false;d.position=position;d.anchorPosition=position;d.anchorTime=ack.when;
       return{owner,when:ack.when,position,reversePosition,events};

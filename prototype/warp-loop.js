@@ -13,6 +13,6 @@ export async function createWarpLoopTransport(ctx,buffers,{signal,onError=()=>{}
  try{
   const records=buffers.map(buffer=>({sampleRate:buffer.sampleRate,channels:Array.from({length:buffer.numberOfChannels},(_,c)=>buffer.getChannelData(c).slice())}));
   await send('load',{buffers:records},records.flatMap(b=>b.channels.map(c=>c.buffer)));if(signal?.aborted)throw aborted();
-  return{node,outputs:buffers.map((_,i)=>({connect:destination=>node.connect(destination,i,0)})),start:options=>send('start',{options}),dispose};
+  return{node,outputs:buffers.map((_,i)=>({connect:(destination,_output=0,input=0)=>node.connect(destination,i,input),disconnect:(destination,_output=0,input=0)=>node.disconnect(destination,i,input)})),start:options=>send('start',{options}),dispose};
  }catch(error){dispose();throw error;}
 }

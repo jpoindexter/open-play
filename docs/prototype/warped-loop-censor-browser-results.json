@@ -1,0 +1,727 @@
+{
+  "startedAt": "2026-10-18T03:13:01.933Z",
+  "completed": true,
+  "criteria": {
+    "frequencyErrorHz": 1,
+    "minimumRMS": 0.005,
+    "forwardClockStateSeconds": 0.01,
+    "muteAmplitudeRatio": [
+      0.6,
+      0.73
+    ]
+  },
+  "scope": "Actual app grid/Smart Sync/U and Stem pad workflows for a known eight-beat warped loop; raw, keylocked+2, unlocked+2; prepared synthetic five-source PCM. Reverse repeats and exact forward owner return. Not native, physical, model inference, music-quality or full reference acceptance.",
+  "modes": [
+    {
+      "keylock": false,
+      "semitones": 0,
+      "sections": [
+        {
+          "name": "reverse90",
+          "from": 1.0656235827664402,
+          "to": 1.3656235827664402,
+          "expectedLeft": 586.6666666666666,
+          "expectedRate": 1.3333333333333333
+        },
+        {
+          "name": "reverse150",
+          "from": 3.06562358276644,
+          "to": 3.36562358276644,
+          "expectedLeft": 264,
+          "expectedRate": 0.8
+        },
+        {
+          "name": "reverse120",
+          "from": 4.06562358276644,
+          "to": 4.36562358276644,
+          "expectedLeft": 220,
+          "expectedRate": 1
+        },
+        {
+          "name": "wrapped90",
+          "from": 5.06562358276644,
+          "to": 5.36562358276644,
+          "expectedLeft": 586.6666666666666,
+          "expectedRate": 1.3333333333333333
+        },
+        {
+          "name": "wrapped90-vocal-muted",
+          "from": 5.480249433106576,
+          "to": 5.780249433106576,
+          "expectedLeft": 586.6666666666666
+        },
+        {
+          "name": "forward90-vocal-muted",
+          "from": 6.924421768707483,
+          "to": 7.224421768707483,
+          "expectedLeft": 586.6666666666666
+        }
+      ],
+      "start": {
+        "when": 0.49117913832199545,
+        "position": 0.3999092970521541,
+        "reverseLoop": {
+          "start": 3.533333333333333,
+          "end": 8
+        },
+        "rendered": false
+      },
+      "return": {
+        "actual": 2.8076190476190472,
+        "expected": 2.8076190476190472,
+        "originalOwner": true,
+        "loop": true,
+        "bounds": [
+          0,
+          4.466666666666667
+        ],
+        "vocalMuted": true,
+        "syncState": "beat"
+      },
+      "pullAfterReturn": {
+        "retired": true,
+        "lastPulled": {
+          "type": "pulled",
+          "blocks": 2176,
+          "frames": 278528,
+          "inputs": [
+            {
+              "channels": 2,
+              "frames": 128,
+              "rms": 0.05747721936587055,
+              "peak": 0.11996958404779434
+            },
+            {
+              "channels": 2,
+              "frames": 128,
+              "rms": 0.01915907296358208,
+              "peak": 0.039989862591028214
+            },
+            {
+              "channels": 2,
+              "frames": 128,
+              "rms": 0.01915907296358208,
+              "peak": 0.039989862591028214
+            },
+            {
+              "channels": 2,
+              "frames": 128,
+              "rms": 0.01915907296358208,
+              "peak": 0.039989862591028214
+            },
+            {
+              "channels": 2,
+              "frames": 128,
+              "rms": 0,
+              "peak": 0
+            }
+          ]
+        },
+        "sourceCount": 5,
+        "outputPolicy": "Always zero; independent inputs are consumed only for silent DSP continuity."
+      },
+      "pullDisposal": {
+        "type": "disposed",
+        "id": 1,
+        "disposed": true
+      },
+      "audio": [
+        {
+          "name": "reverse90",
+          "from": 1.0656235827664402,
+          "to": 1.3656235827664402,
+          "expectedLeft": 586.6666666666666,
+          "expectedRate": 1.3333333333333333,
+          "channels": [
+            {
+              "rms": 0.037358809990833144,
+              "hz": 586.6663516754983
+            },
+            {
+              "rms": 0.037496475646214465,
+              "hz": 550.0003167883218
+            }
+          ]
+        },
+        {
+          "name": "reverse150",
+          "from": 3.06562358276644,
+          "to": 3.36562358276644,
+          "expectedLeft": 264,
+          "expectedRate": 0.8,
+          "channels": [
+            {
+              "rms": 0.03734707105491178,
+              "hz": 264.0013085285333
+            },
+            {
+              "rms": 0.03726194025976284,
+              "hz": 549.9992346188902
+            }
+          ]
+        },
+        {
+          "name": "reverse120",
+          "from": 4.06562358276644,
+          "to": 4.36562358276644,
+          "expectedLeft": 220,
+          "expectedRate": 1,
+          "channels": [
+            {
+              "rms": 0.03728430705965211,
+              "hz": 220.0003569242022
+            },
+            {
+              "rms": 0.03730292312090443,
+              "hz": 550.0050860105115
+            }
+          ]
+        },
+        {
+          "name": "wrapped90",
+          "from": 5.06562358276644,
+          "to": 5.36562358276644,
+          "expectedLeft": 586.6666666666666,
+          "expectedRate": 1.3333333333333333,
+          "channels": [
+            {
+              "rms": 0.03735854683606962,
+              "hz": 586.6663568069824
+            },
+            {
+              "rms": 0.03749556448442502,
+              "hz": 550.0003138906657
+            }
+          ]
+        },
+        {
+          "name": "wrapped90-vocal-muted",
+          "from": 5.480249433106576,
+          "to": 5.780249433106576,
+          "expectedLeft": 586.6666666666666,
+          "channels": [
+            {
+              "rms": 0.024859643779442817,
+              "hz": 586.6664233591068
+            },
+            {
+              "rms": 0.03749744376670965,
+              "hz": 550.000213235301
+            }
+          ]
+        },
+        {
+          "name": "forward90-vocal-muted",
+          "from": 6.924421768707483,
+          "to": 7.224421768707483,
+          "expectedLeft": 586.6666666666666,
+          "channels": [
+            {
+              "rms": 0.024876686812979512,
+              "hz": 586.6663760818544
+            },
+            {
+              "rms": 0.03748702039706592,
+              "hz": 550.0018469397502
+            }
+          ]
+        }
+      ],
+      "muteRatios": [
+        0.6654339069591665,
+        0.6658901086848782
+      ]
+    },
+    {
+      "keylock": true,
+      "semitones": 2,
+      "sections": [
+        {
+          "name": "reverse90",
+          "from": 11.601678004535149,
+          "to": 11.90167800453515,
+          "expectedLeft": 493.8833012561241,
+          "expectedRate": 1.3333333333333333
+        },
+        {
+          "name": "reverse150",
+          "from": 13.601678004535149,
+          "to": 13.90167800453515,
+          "expectedLeft": 370.4124759420931,
+          "expectedRate": 0.8
+        },
+        {
+          "name": "reverse120",
+          "from": 14.601678004535149,
+          "to": 14.90167800453515,
+          "expectedLeft": 246.94165062806206,
+          "expectedRate": 1
+        },
+        {
+          "name": "wrapped90",
+          "from": 15.601678004535149,
+          "to": 15.90167800453515,
+          "expectedLeft": 493.8833012561241,
+          "expectedRate": 1.3333333333333333
+        },
+        {
+          "name": "wrapped90-vocal-muted",
+          "from": 16.00469387755102,
+          "to": 16.30469387755102,
+          "expectedLeft": 493.8833012561241
+        },
+        {
+          "name": "forward90-vocal-muted",
+          "from": 18.22673469387755,
+          "to": 18.52673469387755,
+          "expectedLeft": 493.8833012561241
+        }
+      ],
+      "start": {
+        "when": 9.40764172335601,
+        "position": 1.8260015117157988,
+        "reverseLoop": {
+          "start": 3.533333333333333,
+          "end": 8
+        },
+        "rendered": true
+      },
+      "return": {
+        "actual": 2.8187452758881317,
+        "expected": 2.8187452758881317,
+        "originalOwner": true,
+        "loop": true,
+        "bounds": [
+          0,
+          4.466666666666667
+        ],
+        "vocalMuted": true,
+        "syncState": "beat"
+      },
+      "pullAfterReturn": {
+        "retired": true,
+        "lastPulled": {
+          "type": "pulled",
+          "blocks": 3008,
+          "frames": 385024,
+          "inputs": [
+            {
+              "channels": 2,
+              "frames": 128,
+              "rms": 0.05772373080912655,
+              "peak": 0.11771739274263382
+            },
+            {
+              "channels": 2,
+              "frames": 128,
+              "rms": 0.019574852573039325,
+              "peak": 0.03925827145576477
+            },
+            {
+              "channels": 2,
+              "frames": 128,
+              "rms": 0.019574852573039325,
+              "peak": 0.03925827145576477
+            },
+            {
+              "channels": 2,
+              "frames": 128,
+              "rms": 0.019574852573039325,
+              "peak": 0.03925827145576477
+            },
+            {
+              "channels": 2,
+              "frames": 128,
+              "rms": 0,
+              "peak": 0
+            }
+          ]
+        },
+        "sourceCount": 5,
+        "outputPolicy": "Always zero; independent inputs are consumed only for silent DSP continuity."
+      },
+      "pullDisposal": {
+        "type": "disposed",
+        "id": 1,
+        "disposed": true
+      },
+      "audio": [
+        {
+          "name": "reverse90",
+          "from": 11.601678004535149,
+          "to": 11.90167800453515,
+          "expectedLeft": 493.8833012561241,
+          "expectedRate": 1.3333333333333333,
+          "channels": [
+            {
+              "rms": 0.0367662165537525,
+              "hz": 494.36247568768476
+            },
+            {
+              "rms": 0.03723209833872964,
+              "hz": 549.998838781827
+            }
+          ]
+        },
+        {
+          "name": "reverse150",
+          "from": 13.601678004535149,
+          "to": 13.90167800453515,
+          "expectedLeft": 370.4124759420931,
+          "expectedRate": 0.8,
+          "channels": [
+            {
+              "rms": 0.03626814080338857,
+              "hz": 370.79958735405
+            },
+            {
+              "rms": 0.03741102718836995,
+              "hz": 550.0006920558934
+            }
+          ]
+        },
+        {
+          "name": "reverse120",
+          "from": 14.601678004535149,
+          "to": 14.90167800453515,
+          "expectedLeft": 246.94165062806206,
+          "expectedRate": 1,
+          "channels": [
+            {
+              "rms": 0.0369833628913652,
+              "hz": 247.23627052995946
+            },
+            {
+              "rms": 0.037380587515803955,
+              "hz": 549.9916630356689
+            }
+          ]
+        },
+        {
+          "name": "wrapped90",
+          "from": 15.601678004535149,
+          "to": 15.90167800453515,
+          "expectedLeft": 493.8833012561241,
+          "expectedRate": 1.3333333333333333,
+          "channels": [
+            {
+              "rms": 0.036766216448738606,
+              "hz": 494.36247579233407
+            },
+            {
+              "rms": 0.0372320983193159,
+              "hz": 549.9988388675401
+            }
+          ]
+        },
+        {
+          "name": "wrapped90-vocal-muted",
+          "from": 16.00469387755102,
+          "to": 16.30469387755102,
+          "expectedLeft": 493.8833012561241,
+          "channels": [
+            {
+              "rms": 0.0244919483059596,
+              "hz": 494.3645087337633
+            },
+            {
+              "rms": 0.03722754548799922,
+              "hz": 549.9982433186976
+            }
+          ]
+        },
+        {
+          "name": "forward90-vocal-muted",
+          "from": 18.22673469387755,
+          "to": 18.52673469387755,
+          "expectedLeft": 493.8833012561241,
+          "channels": [
+            {
+              "rms": 0.024496759578722823,
+              "hz": 494.3646157075991
+            },
+            {
+              "rms": 0.0372475073259307,
+              "hz": 550.0061948679729
+            }
+          ]
+        }
+      ],
+      "muteRatios": [
+        0.6661536233979247,
+        0.6662844846403354
+      ]
+    },
+    {
+      "keylock": false,
+      "semitones": 2,
+      "sections": [
+        {
+          "name": "reverse90",
+          "from": 22.903990929705216,
+          "to": 23.203990929705217,
+          "expectedLeft": 658.5110683414988,
+          "expectedRate": 1.3333333333333333
+        },
+        {
+          "name": "reverse150",
+          "from": 24.903990929705216,
+          "to": 25.203990929705217,
+          "expectedLeft": 296.32998075367453,
+          "expectedRate": 0.8
+        },
+        {
+          "name": "reverse120",
+          "from": 25.903990929705216,
+          "to": 26.203990929705217,
+          "expectedLeft": 246.94165062806206,
+          "expectedRate": 1
+        },
+        {
+          "name": "wrapped90",
+          "from": 26.903990929705216,
+          "to": 27.203990929705217,
+          "expectedLeft": 658.5110683414988,
+          "expectedRate": 1.3333333333333333
+        },
+        {
+          "name": "wrapped90-vocal-muted",
+          "from": 27.318616780045353,
+          "to": 27.618616780045354,
+          "expectedLeft": 658.5110683414988
+        },
+        {
+          "name": "forward90-vocal-muted",
+          "from": 29.517437641723355,
+          "to": 29.817437641723355,
+          "expectedLeft": 658.5110683414988
+        }
+      ],
+      "start": {
+        "when": 20.70995464852608,
+        "position": 1.8260015117157953,
+        "reverseLoop": {
+          "start": 3.533333333333333,
+          "end": 8
+        },
+        "rendered": true
+      },
+      "return": {
+        "actual": 2.803265306122446,
+        "expected": 2.803265306122446,
+        "originalOwner": true,
+        "loop": true,
+        "bounds": [
+          0,
+          4.466666666666667
+        ],
+        "vocalMuted": true,
+        "syncState": "beat"
+      },
+      "pullAfterReturn": {
+        "retired": true,
+        "lastPulled": {
+          "type": "pulled",
+          "blocks": 3008,
+          "frames": 385024,
+          "inputs": [
+            {
+              "channels": 2,
+              "frames": 128,
+              "rms": 0.060808187903717024,
+              "peak": 0.11925695836544037
+            },
+            {
+              "channels": 2,
+              "frames": 128,
+              "rms": 0.019973760323350163,
+              "peak": 0.03974739462137222
+            },
+            {
+              "channels": 2,
+              "frames": 128,
+              "rms": 0.019973760323350163,
+              "peak": 0.03974739462137222
+            },
+            {
+              "channels": 2,
+              "frames": 128,
+              "rms": 0.019973760323350163,
+              "peak": 0.03974739462137222
+            },
+            {
+              "channels": 2,
+              "frames": 128,
+              "rms": 0,
+              "peak": 0
+            }
+          ]
+        },
+        "sourceCount": 5,
+        "outputPolicy": "Always zero; independent inputs are consumed only for silent DSP continuity."
+      },
+      "pullDisposal": {
+        "type": "disposed",
+        "id": 1,
+        "disposed": true
+      },
+      "audio": [
+        {
+          "name": "reverse90",
+          "from": 22.903990929705216,
+          "to": 23.203990929705217,
+          "expectedLeft": 658.5110683414988,
+          "expectedRate": 1.3333333333333333,
+          "channels": [
+            {
+              "rms": 0.03718181356658106,
+              "hz": 658.6850024813492
+            },
+            {
+              "rms": 0.037336815881343154,
+              "hz": 550.0016663787113
+            }
+          ]
+        },
+        {
+          "name": "reverse150",
+          "from": 24.903990929705216,
+          "to": 25.203990929705217,
+          "expectedLeft": 296.32998075367453,
+          "expectedRate": 0.8,
+          "channels": [
+            {
+              "rms": 0.036358078585146995,
+              "hz": 296.76087755855593
+            },
+            {
+              "rms": 0.03734096655310287,
+              "hz": 549.9984021535871
+            }
+          ]
+        },
+        {
+          "name": "reverse120",
+          "from": 25.903990929705216,
+          "to": 26.203990929705217,
+          "expectedLeft": 246.94165062806206,
+          "expectedRate": 1,
+          "channels": [
+            {
+              "rms": 0.03698431992060694,
+              "hz": 247.23856049360586
+            },
+            {
+              "rms": 0.03729399625416877,
+              "hz": 550.0041922220513
+            }
+          ]
+        },
+        {
+          "name": "wrapped90",
+          "from": 26.903990929705216,
+          "to": 27.203990929705217,
+          "expectedLeft": 658.5110683414988,
+          "expectedRate": 1.3333333333333333,
+          "channels": [
+            {
+              "rms": 0.037181813489004414,
+              "hz": 658.6850024813414
+            },
+            {
+              "rms": 0.03733681609035673,
+              "hz": 550.0016663857951
+            }
+          ]
+        },
+        {
+          "name": "wrapped90-vocal-muted",
+          "from": 27.318616780045353,
+          "to": 27.618616780045354,
+          "expectedLeft": 658.5110683414988,
+          "channels": [
+            {
+              "rms": 0.0247788853148247,
+              "hz": 658.689309488984
+            },
+            {
+              "rms": 0.0373635445805606,
+              "hz": 549.9991822764601
+            }
+          ]
+        },
+        {
+          "name": "forward90-vocal-muted",
+          "from": 29.517437641723355,
+          "to": 29.817437641723355,
+          "expectedLeft": 658.5110683414988,
+          "channels": [
+            {
+              "rms": 0.024803527201050037,
+              "hz": 658.6870920218033
+            },
+            {
+              "rms": 0.037325758541413366,
+              "hz": 549.999615540543
+            }
+          ]
+        }
+      ],
+      "muteRatios": [
+        0.6664248725294809,
+        0.6670876128294564
+      ]
+    }
+  ],
+  "checks": [
+    "{\"keylock\":false,\"semitones\":0} wraps in reverse and restores original forward loop owner",
+    "{\"keylock\":true,\"semitones\":2} wraps in reverse and restores original forward loop owner",
+    "{\"keylock\":false,\"semitones\":2} wraps in reverse and restores original forward loop owner",
+    "Eighteen fixed master windows prove reversed section order, repeated wrap, key/pitch, audible forward return and opposite deck; retained source mute amplitude"
+  ],
+  "errors": [],
+  "sourceBefore": {
+    "app.js": "e01bcfb7e0b468aa9ed2b455f0dc34360d3210e3cbc2dd1c9e83f4ac2439cb1e",
+    "engine.js": "654eda228e608821b117d0e3b02e5888c679cf44b1ac084dadf8794ca1d4e276",
+    "censor.js": "4f0909f5562e1dd28e4b9f406015dd3963e96f706c32e863242494c0c2ccc794",
+    "censor-backing.js": "78689e7a7e96df4eb1b89a9e607cc90cbe81eb04afb43dac26e8b9905a988db6",
+    "reverse-censor-plan.js": "38adfb04c0e498a8e2cb27b0240f037d315f24b0c8cd6968e338ff29b0af3807",
+    "beatgrid.js": "af239aef231c9d089bf2352b8f548a5f71f734d6cf753986f17f57b3999477b9",
+    "warp-loop.js": "33091f4414d2066ce47657aa96312dfefc6ca0a061ccab04ddf00ef6121addc4",
+    "warp-loop-kernel.js": "8a331758bc551454a3cc65fd5ea527c42a370bd22ab6eb650ca278ea87e0f414",
+    "warp-loop-worklet.js": "bc977262180f910c6be55ea07a46f6b560a090939271bd4beec5e8fd31ed23fa",
+    "keylock.js": "62adbfdd77df20deb1328302d4a8daf3d7bdc29870af453d39acfd2a02bf060b",
+    "keylock-dsp.js": "f4cb1881fedb018f395a6711d263aa142feb8dfe93638a3d1f97fc432c15ac3d",
+    "keylock-worker.js": "5cb72a1bc74e1808c32b430d72d5769427c7056edee11410eb6f8b3c7751fcec",
+    "warped-loop-censor-harness.js": "557474413adf30c9610c0ff6715bbee4cbbd75242d75f6c0937629b5ade9161a"
+  },
+  "recordStart": 0.07546485260770976,
+  "recording": {
+    "bytes": 481533,
+    "format": "audio/webm;codecs=opus",
+    "sha256": "603d97dffc28a89953da0347915cafbd4733cd20c04c01a9381459c9d3b87a71"
+  },
+  "decoded": {
+    "duration": 29.81997732426304,
+    "frames": 1315061,
+    "sampleRate": 44100,
+    "channels": 2
+  },
+  "sourceAfter": {
+    "app.js": "e01bcfb7e0b468aa9ed2b455f0dc34360d3210e3cbc2dd1c9e83f4ac2439cb1e",
+    "engine.js": "654eda228e608821b117d0e3b02e5888c679cf44b1ac084dadf8794ca1d4e276",
+    "censor.js": "4f0909f5562e1dd28e4b9f406015dd3963e96f706c32e863242494c0c2ccc794",
+    "censor-backing.js": "78689e7a7e96df4eb1b89a9e607cc90cbe81eb04afb43dac26e8b9905a988db6",
+    "reverse-censor-plan.js": "38adfb04c0e498a8e2cb27b0240f037d315f24b0c8cd6968e338ff29b0af3807",
+    "beatgrid.js": "af239aef231c9d089bf2352b8f548a5f71f734d6cf753986f17f57b3999477b9",
+    "warp-loop.js": "33091f4414d2066ce47657aa96312dfefc6ca0a061ccab04ddf00ef6121addc4",
+    "warp-loop-kernel.js": "8a331758bc551454a3cc65fd5ea527c42a370bd22ab6eb650ca278ea87e0f414",
+    "warp-loop-worklet.js": "bc977262180f910c6be55ea07a46f6b560a090939271bd4beec5e8fd31ed23fa",
+    "keylock.js": "62adbfdd77df20deb1328302d4a8daf3d7bdc29870af453d39acfd2a02bf060b",
+    "keylock-dsp.js": "f4cb1881fedb018f395a6711d263aa142feb8dfe93638a3d1f97fc432c15ac3d",
+    "keylock-worker.js": "5cb72a1bc74e1808c32b430d72d5769427c7056edee11410eb6f8b3c7751fcec",
+    "warped-loop-censor-harness.js": "557474413adf30c9610c0ff6715bbee4cbbd75242d75f6c0937629b5ade9161a"
+  },
+  "sourceStable": true,
+  "finishedAt": "2026-10-18T03:13:31.990Z"
+}

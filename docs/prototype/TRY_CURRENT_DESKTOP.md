@@ -15,3 +15,5 @@ Source **eaffc59146d40f757ea502f6ac7eb97e0d5a6404**, ASAR **a2925237fab3fe2f9064
 Previous 0.1.15 is preserved: **Start Open Play Playback Test 0.1.15.command** and [historical guide](TRY_PLAYBACK_DESKTOP_0.1.15.md). Close one test before opening another; versions share the dedicated profile and port18775. Stable pre-switch profile backup: local-evidence/profile-backups/playback-before-0.1.16/ (158 files / 8017227 bytes, all hashes match). Earlier bundles remain available too.
 
 [Native observations](desktop-0.1.16-playback-observation.json) · [Scoped review](DESKTOP_0.1.16_REVIEW.md) · [Package receipt](desktop-0.1.16-playback-package.json) · [Full plan](../../FULL_BUILD_PLAN.md) · [Claude handoff](../../handoffs/current.md).
+
+Browser-source plan114 adds [warped-loop Censor](WARPED_LOOP_CENSOR_REVIEW.md); this is not in the frozen0.1.16 desktop candidate. Keep that candidate for the physical core playback test.
