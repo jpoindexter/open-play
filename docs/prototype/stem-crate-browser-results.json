@@ -1,0 +1,160 @@
+{
+  "startedAt": "2026-10-18T04:05:46.504Z",
+  "phase": 2,
+  "completed": true,
+  "scope": "Actual production File input change (synthetic chooser selection), crate drop, pinned SCNet, two reloads, cached decode, real keyboard removal, OS Trash, original library/File preservation and browser audio. Not native picker/desktop16/controller/model-quality/full reference acceptance.",
+  "criteria": {
+    "frequencyErrorHz": 1,
+    "minimumRMS": 0.005
+  },
+  "trackId": "local-50b81ad45ae9e684db89e01b1c1f19121774b3975d0c202f6e55c870144ef394",
+  "originalFileSHA256": "50b81ad45ae9e684db89e01b1c1f19121774b3975d0c202f6e55c870144ef394",
+  "sourceBefore": {
+    "app.js": "f2087f7692f35e4de471d208b9be9a4094773f04e629b02b87628c19b43f8b5f",
+    "panels.js": "1669c714b3a399268a2ab3d130ebf912e488d92322a922951967c929c6f488f3",
+    "styles.css": "2579ad679a323da2e74857a516f88302b8f15c0fcad72f8e9af5c4dbf89033d0",
+    "stems.js": "54e581545704ae23f74fb4d503eb035348127c0c3409ba318dbe59555e667ce1",
+    "stem-crate.js": "bf78ebcd1b2ec9685eacbb0efce84b6c746fec26b97933e0f9b1d5a43c450608",
+    "engine.js": "c05a925316b172b64b9412fb291704b7670afd129f6870cc1477af32dff67dd7",
+    "local-audio-library.js": "38814be027c5a4e614d972ffd814df9760106ca27e374a288a0ccc3d6bca0a21",
+    "stem-crate-harness.js": "e21ad4af5f31e1ccde4168c80bd9251441a9ee545710b1b4ff80adf4e83973d4"
+  },
+  "errors": [],
+  "checks": [
+    "Drop adds/persists membership and prepares via SCNet while track is not loaded; pending and verified ready states observed",
+    "First reload restores original File and crate; live service verifies readiness without decoding or inferring",
+    "Real Command+Delete removes prepared membership/files while the original library File, playing voice and decoded Stems stay intact",
+    "Whole finite master and before/after removal tone windows meet fixed pitch/RMS criteria",
+    "Second reload keeps crate removal and original File/library entry"
+  ],
+  "pending": {
+    "member": true,
+    "label": "Stems preparing",
+    "loadedOnDeck": false
+  },
+  "job": "90c68da8aca348518ab5d3a70972d994",
+  "initialAPI": {
+    "id": "90c68da8aca348518ab5d3a70972d994",
+    "state": "complete",
+    "stage": "complete",
+    "progress": 1,
+    "error": null,
+    "model": "SCNet-large official",
+    "duration": 8,
+    "timing": {
+      "model_load_seconds": 1.2811860828660429,
+      "inference_seconds": 7.631834542145953,
+      "total_seconds": 9.032266750000417,
+      "realtime_factor": 0.9539793177682441
+    },
+    "license": "MIT_explicit_owner_confirmation_SCNet_issue_35",
+    "stems": [
+      {
+        "name": "drums",
+        "url": "/api/stems/90c68da8aca348518ab5d3a70972d994/drums.wav"
+      },
+      {
+        "name": "bass",
+        "url": "/api/stems/90c68da8aca348518ab5d3a70972d994/bass.wav"
+      },
+      {
+        "name": "other",
+        "url": "/api/stems/90c68da8aca348518ab5d3a70972d994/other.wav"
+      },
+      {
+        "name": "vocals",
+        "url": "/api/stems/90c68da8aca348518ab5d3a70972d994/vocals.wav"
+      }
+    ]
+  },
+  "originalLibraryKept": true,
+  "reloaded": {
+    "member": true,
+    "readyLabel": "Stems ready",
+    "decodedStems": false,
+    "savedFileHashMatches": true
+  },
+  "recordStart": 15.162630385487528,
+  "windows": [
+    {
+      "name": "before-remove",
+      "from": 0.15,
+      "to": 0.45
+    },
+    {
+      "name": "after-remove",
+      "from": 16.351723356009067,
+      "to": 16.651723356009068
+    }
+  ],
+  "removal": {
+    "member": false,
+    "savedJob": null,
+    "libraryTrackKept": true,
+    "sameVoice": true,
+    "sameBuffers": true,
+    "playing": true,
+    "absentFromCrate": true,
+    "message": "Removed from Stems crate \u00b7 prepared files moved to Trash; loaded audio retained"
+  },
+  "recording": {
+    "bytes": 269589,
+    "format": "audio/webm;codecs=opus",
+    "sha256": "5f5da67c64ea8250b3f4456cc4baf8ab3602fa3c60b8081a04d73a83a26a6bb0"
+  },
+  "decoded": {
+    "duration": 16.67997732426304,
+    "frames": 735587,
+    "sampleRate": 44100,
+    "channels": 2
+  },
+  "audio": [
+    {
+      "name": "before-remove",
+      "from": 0.15,
+      "to": 0.45,
+      "channels": [
+        {
+          "rms": 0.03736983216834168,
+          "hz": 660.0031756676951
+        },
+        {
+          "rms": 0.037239023757963424,
+          "hz": 880.001854387856
+        }
+      ]
+    },
+    {
+      "name": "after-remove",
+      "from": 16.351723356009067,
+      "to": 16.651723356009068,
+      "channels": [
+        {
+          "rms": 0.0373455343868729,
+          "hz": 660.0003908413267
+        },
+        {
+          "rms": 0.03724144914035044,
+          "hz": 880.0022790936217
+        }
+      ]
+    }
+  ],
+  "finalReload": {
+    "member": false,
+    "originalFileAndLibraryRetained": true,
+    "decodedStems": false
+  },
+  "sourceAfter": {
+    "app.js": "f2087f7692f35e4de471d208b9be9a4094773f04e629b02b87628c19b43f8b5f",
+    "panels.js": "1669c714b3a399268a2ab3d130ebf912e488d92322a922951967c929c6f488f3",
+    "styles.css": "2579ad679a323da2e74857a516f88302b8f15c0fcad72f8e9af5c4dbf89033d0",
+    "stems.js": "54e581545704ae23f74fb4d503eb035348127c0c3409ba318dbe59555e667ce1",
+    "stem-crate.js": "bf78ebcd1b2ec9685eacbb0efce84b6c746fec26b97933e0f9b1d5a43c450608",
+    "engine.js": "c05a925316b172b64b9412fb291704b7670afd129f6870cc1477af32dff67dd7",
+    "local-audio-library.js": "38814be027c5a4e614d972ffd814df9760106ca27e374a288a0ccc3d6bca0a21",
+    "stem-crate-harness.js": "e21ad4af5f31e1ccde4168c80bd9251441a9ee545710b1b4ff80adf4e83973d4"
+  },
+  "sourceStable": true,
+  "finishedAt": "2026-10-18T04:07:03.018Z"
+}

@@ -1,0 +1,18 @@
+{
+  "passed": true,
+  "scope": "Actual files, production cache/service methods and fresh interpreter; controlled queued worker, not real inference/API/native/device acceptance",
+  "checks": [
+    {
+      "name": "Fresh interpreter restores verified complete cache; identical request bypasses worker startup",
+      "passed": true
+    },
+    {
+      "name": "Status read detects changed source hash; new preparation creates a new owner without deleting old evidence",
+      "passed": true
+    },
+    {
+      "name": "Malformed receipt, linked job folder and unfinished jobs are not restored",
+      "passed": true
+    }
+  ]
+}

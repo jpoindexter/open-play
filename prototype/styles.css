@@ -1321,3 +1321,8 @@ kbd {
 
 /* Visible focus for the controller's crate/track browser switch. */
 #crates.midi-focused, #tracks.midi-focused { outline: 1px solid #5fbae8; outline-offset: -1px; }
+
+/* Saved preparation is distinct from loaded playback; shape and label accompany color. */
+.stem-status { display: inline-block; margin-inline-start: 4px; font-size: 11px; line-height: 1; color: var(--muted); }
+.stem-status[hidden] { display: none; }
+.stem-status.stem-ready { color: var(--text); }

@@ -10,6 +10,7 @@ import {createBeatgrid} from './beatgrid.js';
 import {currentDeckBPM} from './deck-tempo.js';
 import {createLocalAudioLibrary} from "./local-audio-library.js";
 import { createStemPreparation } from "./stems.js";
+import {createStemCrate,normalizeStemCrateTrack} from "./stem-crate.js";
 import { createStemWaveformModel, paintStemOverview, paintStemDetail, paintOriginalOverview, paintOriginalDetail } from "./stem-waveform.js";
 import { normalizeFXTempoSettings } from "./fx-tempo.js";
 import { createStemSlipControls } from "./stem-slip-ui.js";
@@ -148,7 +149,7 @@ async function restoreLocalAudio(){
   for(const record of records){
     if(!/^local-[a-f0-9]{64}$/.test(record.id||'')||record.contentHash!==record.id.slice(6)||typeof record.filename!=='string'||!Number.isFinite(record.duration)||record.duration<=0){invalid=true;continue;}
     if(trackById(record.id))continue;
-    const track={...record,...state.localTags[record.contentHash],id:record.id,contentHash:record.contentHash,file:null,storage:'saved',readFile:()=>localAudio.file(record.id)};
+    const track=normalizeStemCrateTrack({...record,...state.localTags[record.contentHash],id:record.id,contentHash:record.contentHash,file:null,storage:'saved',readFile:()=>localAudio.file(record.id)});
     state.tracks.push(track);added++;
   }
   state.localAudio.restoreError=invalid?'Some saved entries are invalid. Re-import their original files; stored audio has not been deleted.':null;
@@ -157,7 +158,8 @@ async function restoreLocalAudio(){
 try{await restoreLocalAudio();}catch(error){state.localAudio.restoreError=error.message;localAudioWarning();}
 
 const smartSync = createSmartSync({engine,state});
-const stemPreparation = createStemPreparation(engine, state.decks, {onChange:()=>persist()});
+let stemCrate;
+const stemPreparation = createStemPreparation(engine, state.decks, {onChange:t=>{persist();stemCrate?.changed(t);}});
 const stemSlipControls = createStemSlipControls({engine,state,prepare:ensurePreparedStems,render:renderDecks,notify});
 const scratchInputDebug = createScratchInputDebug();
 const deckScratchControls = createDeckScratchControls({engine,state,notify,onEvent:scratchInputDebug?.onEvent});
@@ -168,6 +170,7 @@ document.addEventListener('pointerdown',resumePreparedAudio,{capture:true});
 document.addEventListener('keydown',resumePreparedAudio,{capture:true});
 if (saved.tags)
   for (const t of state.tracks) Object.assign(t, saved.tags[t.id] || {});
+stemCrate=createStemCrate({state,preparation:stemPreparation,persist,onMembership:()=>{const libraryFocus=!!document.activeElement.closest('#tracks');renderTracks();if(libraryFocus)focusSelectedTrack();},onStatus:updateStemStatus});
 const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
 const time = (v) => {
   v = Math.max(0, Number(v) || 0);
@@ -210,6 +213,8 @@ const metadataFields = [
   "metadataRevision",
   "stemJob",
   "stemModel",
+  "stemBackend",
+  "inStemCrate",
 ];
 function trackMetadata(t) {
   return Object.fromEntries(metadataFields.map((k) => [k, t[k]]));
@@ -259,7 +264,7 @@ function filtered() {
   if (state.crate === "prepare")
     a = a.filter((t) => state.prepare.includes(t.id));
   else if (state.crate === "stems")
-    a = a.filter((t) => engine.stemBuffers.has(t.id) || stemPreparation.active.has(t.id));
+    a = a.filter(t => stemCrate.member(t));
   else if (state.crate === "history")
     a = a.filter((t) => state.history.some((h) => h.id === t.id));
   else {
@@ -318,7 +323,7 @@ function renderCrates() {
     [
       ["all", "✳", "All music"],
       ["itunes", "♫", "iTunes / local"],
-      ["stems", "≋", "Prepared stems"],
+      ["stems", "≋", "Stems"],
       ["prepare", "◷", "Prepare"],
     ]
       .map(
@@ -351,11 +356,22 @@ function renderCrates() {
       }),
   );
 }
+function stemStatusMarkup(track){
+  const value=stemCrate.status(track);
+  return `<span data-stem-cache-status="${esc(track.id)}" class="stem-status stem-${value.phase}" role="img" aria-label="${esc(value.label)}" title="${esc(value.label)}" ${value.phase==='off'?'hidden':''}>${value.symbol}</span>`;
+}
+function updateStemStatus(track){
+  const value=stemCrate.status(track);
+  for(const node of document.querySelectorAll(`[data-stem-cache-status="${CSS.escape(track.id)}"]`)){
+    node.className=`stem-status stem-${value.phase}`;node.hidden=value.phase==='off';node.textContent=value.symbol;node.setAttribute('aria-label',value.label);node.title=value.label;node.setAttribute('aria-busy',String(['checking','preparing','removing'].includes(value.phase)));
+  }
+}
+function focusSelectedTrack(){($(`[data-track="${CSS.escape(state.selected)}"]`)||$('#tracks')).focus({preventScroll:true});}
 function renderTracks() {
   const a = filtered();
   $("#tracks").innerHTML = state.grid
-    ? `<div class="art-grid">${a.map((t) => `<button class="art-card ${state.selected === t.id ? "active" : ""}" data-track="${t.id}" draggable="true"><div class="art-cover" style="--art:${t.color}">◉</div><strong>${esc(t.title)}</strong><small>${esc(t.artist)} · ${t.bpm || "—"} BPM</small></button>`).join("")}</div>`
-    : `<table><thead><tr><th style="width:28px"><button title="File status">◉</button></th>${state.columns.map((c) => `<th><button data-sort="${c}">${{ duration: "LENGTH", title: "SONG" }[c] || c.toUpperCase()} ${state.sort === c ? (state.sortDir === 1 ? "▴" : "▾") : ""}</button></th>`).join("")}</tr></thead><tbody>${a.map((t) => `<tr tabindex="0" draggable="true" data-track="${t.id}" class="${t.id === state.selected ? "selected" : ""}" aria-selected="${t.id === state.selected}"><td class="${t.missing ? "problem" : ""}" title="${t.missing ? "Missing file" : t.locked ? "Beatgrid locked" : "Local audio"}">${t.missing ? "⚠" : t.locked ? "▣" : "♫"}</td>${state.columns.map((c) => `<td title="${esc(analysisFieldHint(t, c))}" class="${c === "key" ? "key" : ""}">${esc(c === "duration" ? time(t.duration) : c === "rating" ? "★".repeat(t.rating) : c === "bpm" ? t.bpm || "—" : (t[c] ?? "—"))}</td>`).join("")}</tr>`).join("")}</tbody></table>`;
+    ? `<div class="art-grid">${a.map((t) => `<button class="art-card ${state.selected === t.id ? "active" : ""}" data-track="${t.id}" draggable="true"><div class="art-cover" style="--art:${t.color}">◉</div><strong>${esc(t.title)}</strong>${stemStatusMarkup(t)}<small>${esc(t.artist)} · ${t.bpm || "—"} BPM</small></button>`).join("")}</div>`
+    : `<table><thead><tr><th style="width:50px"><button title="File status">◉</button></th>${state.columns.map((c) => `<th><button data-sort="${c}">${{ duration: "LENGTH", title: "SONG" }[c] || c.toUpperCase()} ${state.sort === c ? (state.sortDir === 1 ? "▴" : "▾") : ""}</button></th>`).join("")}</tr></thead><tbody>${a.map((t) => `<tr tabindex="0" draggable="true" data-track="${t.id}" class="${t.id === state.selected ? "selected" : ""}" aria-selected="${t.id === state.selected}"><td class="${t.missing ? "problem" : ""}" title="${t.missing ? "Missing file" : t.locked ? "Beatgrid locked" : "Local audio"}">${t.missing ? "⚠" : t.locked ? "▣" : "♫"}${stemStatusMarkup(t)}</td>${state.columns.map((c) => `<td title="${esc(analysisFieldHint(t, c))}" class="${c === "key" ? "key" : ""}">${esc(c === "duration" ? time(t.duration) : c === "rating" ? "★".repeat(t.rating) : c === "bpm" ? t.bpm || "—" : (t[c] ?? "—"))}</td>`).join("")}</tr>`).join("")}</tbody></table>`;
   if (!a.length)
     $("#tracks").innerHTML =
       '<div class="empty">No tracks here.<br><br>Import local audio, add tracks to this crate, or clear the search.</div>';
@@ -1044,6 +1060,7 @@ async function importLocalFiles(files) {
         continue;
       }
       Object.assign(track, state.localTags[track.contentHash] || {});
+      normalizeStemCrateTrack(track);
       await engine.buffer(track);
       track.analyzed = true;
       if(await saveLocalAudio(track,file,bytes))savedCount++;
@@ -1271,6 +1288,7 @@ const api = {
   enqueueAnalysis,
   cancelAnalysis,
   stemPreparation,
+  stemCrate,
   ensurePreparedStems,
   stemPad,
   analysisFieldHint,
@@ -1352,6 +1370,7 @@ document.addEventListener("click", async (e) => {
     }
     if (el.dataset.track) {
       state.selected = el.dataset.track;
+      el.focus({preventScroll:true});
       $$("[data-track]").forEach((r) => {
         const selected = r.dataset.track === state.selected;
         r.classList.toggle("selected", selected);
@@ -1554,7 +1573,7 @@ document.addEventListener("drop", (e) => {
     if (deck) load(Number(deck.dataset.dropDeck), id);
     if (crate) {
       if (crate.dataset.crate === "stems" && trackById(id)) {
-        void ensurePreparedStems(trackById(id)).catch(error => notify(error.message));
+        void stemCrate.add(trackById(id)).catch(error => notify(error.message));
         renderTracks();
         return;
       }
@@ -1661,6 +1680,9 @@ document.addEventListener("keydown", async (e) => {
   }
   const k = e.key.toLowerCase(),
     mod = e.metaKey || e.ctrlKey;
+  if(mod&&!e.shiftKey&&['Backspace','Delete'].includes(e.key)&&state.crate==='stems'&&e.target.closest('#tracks')){
+    e.preventDefault();if(!e.repeat){const track=trackById(state.selected);if(stemCrate.member(track))void stemCrate.remove(track).then(()=>notify(track.stemState)).catch(error=>notify(error.message));}return;
+  }
   if (mod && k === "f") {
     e.preventDefault();
     $("#search").focus();
@@ -1692,6 +1714,7 @@ document.addEventListener("keydown", async (e) => {
     if (a[j]) {
       state.selected = a[j].id;
       renderTracks();
+      focusSelectedTrack();
       $(`[data-track="${state.selected}"]`)?.scrollIntoView({
         block: "nearest",
       });
@@ -1849,6 +1872,7 @@ renderTracks();
 renderDecks();
 load(0, "demo-0");
 load(1, "demo-1");
+void stemCrate.refreshAll();
 requestAnimationFrame(tick);
 window.addEventListener("beforeunload", () => {
   if (!resetting) persist();

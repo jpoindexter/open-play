@@ -49,9 +49,10 @@ with tempfile.TemporaryDirectory() as directory:
     checks.append({'name':'Fresh interpreter restores verified complete cache; identical request bypasses worker startup','passed':True})
     jobs=service();assert ident in jobs.jobs
     corrupted=output/'other.wav';corrupted.write_bytes(corrupted.read_bytes()+b'changed')
+    assert jobs.get(ident)['state']=='failed'
     replacement=jobs.create(payload);assert replacement['id']!=ident and jobs.jobs[ident]['state']=='failed' and corrupted.read_bytes().endswith(b'changed')
     jobs.close();assert ident not in restore_complete(root)
-    checks.append({'name':'Changed source hash invalidates cache and creates a new owner without deleting old evidence','passed':True})
+    checks.append({'name':'Status read detects changed source hash; new preparation creates a new owner without deleting old evidence','passed':True})
     # Corrupt/symlink metadata must not become API jobs or block startup.
     malformed=root/('a'*32);malformed.mkdir();(malformed/'service-cache.json').write_text('{')
     linked=root/('b'*32);linked.symlink_to(job['directory'],target_is_directory=True)

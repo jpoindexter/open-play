@@ -38,6 +38,7 @@ export function createPanels(a) {
     renderDecks,
     download,
     stemPreparation,
+    stemCrate,
   } = a;
   let activeSettings = "DJ Preferences",
     activeProvider = "Spotify",
@@ -1247,7 +1248,7 @@ export function createPanels(a) {
           if (!t) return;
           button.disabled = true;
           try {
-            await stemPreparation.prepare(
+            await stemCrate.add(
               t,
               showProgress,
               $("#stems-model").value,

@@ -33,3 +33,5 @@ Receipts: [browser/audio](stem-clear-browser-results.json), [actual Trash filesy
 ## Remaining scope
 
 Exact vendor Stems-crate removal/keyboard/icons, persisted crate membership/readiness and external/stale cache reconciliation, Finder recovery, large-cache/volume/error/concurrent-client behavior, musical quality, compound/latency/physical/native/reference acceptance remain open. Loaded buffers intentionally survive disk Trash until restored/unloaded; the current prepared-view filter still includes them. No full cache/Stem Slip feature flag is promoted. Full110groups/522requirements plus9beta deltas/26release checks and model routing/original prompt remain intact; full Claude audit unlaunched. Keep main service8983 running and native16 prepared for the human’s next Play test.
+
+Current plan118 follow-up: [persistent crate/removal review](STEM_CRATE_REVIEW.md) replaces the former buffer-only view. Current main service27522/session82214 supersedes prior8983. Historical plan117 results above stay unchanged.

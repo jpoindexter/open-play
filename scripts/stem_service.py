@@ -119,7 +119,10 @@ class StemJobs:
 
     def get(self, ident):
         with self.lock:
-            return self.public(self.jobs[ident]) if ident in self.jobs else None
+            job = self.jobs.get(ident)
+            if job and job['state'] == 'complete' and not valid_exports(job['directory'], job['backend']):
+                job.update(state='failed', error='Cached exports changed or are incomplete. Prepare again.')
+            return self.public(job) if job else None
 
     def trash(self, ident):
         from stem_job_cache import IDENT

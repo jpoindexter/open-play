@@ -16,7 +16,7 @@ const headers = {'X-Open-Play': 'local-prototype', 'Content-Type': 'audio/wav'};
 async function request(url, options) {
   const response = await fetch(url, options);
   const value = await response.json();
-  if (!response.ok) throw new Error(value.error || 'Local separation service unavailable.');
+  if (!response.ok) {const error=new Error(value.error || 'Local separation service unavailable.');error.status=response.status;throw error;}
   return value;
 }
 export function createStemPreparation(engine, decks, {onChange = () => {}} = {}) {
@@ -99,6 +99,7 @@ export function createStemPreparation(engine, decks, {onChange = () => {}} = {})
       status('Activating separated audio…');
       await engine.attachStems(track, buffers, decks);
       track.stemModel = result.model;
+      track.stemBackend = job.backend;
       track.stemJob = result.id;
       onChange(track);
       status(`Ready · ${result.model} · four real audio sources`);
@@ -121,10 +122,36 @@ export function createStemPreparation(engine, decks, {onChange = () => {}} = {})
     const result=await request(`/api/stems/${ident}/cache`, {method:'DELETE', headers});
     if(result.id!==ident||result.state!=='trashed')throw new Error('The prepared files were not confirmed in Trash.');
     if(track.stemJob===ident)delete track.stemJob;
+    track.inStemCrate=false;
     track.stemState=engine.stemBuffers.has(track.id)?'Prepared files moved to Trash · loaded Stems remain available':'Prepared files moved to Trash · prepare again to regenerate';
     onChange(track);
     return result;
     }finally{clearing.delete(track.id);}
   }
-  return {prepare, cancel, clearFiles, active};
+  async function removeFromCrate(track){
+    if(clearing.has(track.id))throw new Error('Prepared files are already being removed.');
+    clearing.add(track.id);
+    const ids=new Set(),job=active.get(track.id);if(track.stemJob)ids.add(track.stemJob);
+    const result={removed:false,trashed:[],missing:[]};
+    try{
+      if(job){
+        if(!job.committing)await cancel(track);
+        try{await job.promise;}catch(error){if(error.name!=='AbortError')throw error;}
+        if(job.id)ids.add(job.id);
+      }
+      if(track.stemJob)ids.add(track.stemJob);
+      for(const ident of ids){
+        if(!/^[a-f0-9]{32}$/.test(ident))throw new Error('Invalid saved preparation reference.');
+        try{
+          const value=await request(`/api/stems/${ident}/cache`,{method:'DELETE',headers});
+          if(value.id!==ident||value.state!=='trashed')throw new Error('Prepared files were not confirmed in Trash.');
+          result.trashed.push(ident);
+        }catch(error){if(error.status===404)result.missing.push(ident);else throw error;}
+      }
+      delete track.stemJob;track.inStemCrate=false;result.removed=true;
+      track.stemState=result.missing.length?'Removed from Stems crate · saved job unavailable; original track retained':ids.size?'Removed from Stems crate · prepared files moved to Trash; loaded audio retained':'Removed from Stems crate · original track retained';
+      onChange(track);return result;
+    }finally{clearing.delete(track.id);}
+  }
+  return {prepare, cancel, clearFiles, removeFromCrate, active, clearing};
 }

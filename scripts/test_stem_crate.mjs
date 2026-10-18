@@ -1,0 +1,24 @@
+import assert from 'node:assert/strict';
+import {createStemCrate} from '../prototype/stem-crate.js';
+import {createStemPreparation} from '../prototype/stems.js';
+const id='a'.repeat(32),second='b'.repeat(32),names=['vocals','other','bass','drums'];
+const deferred=()=>{let resolve;const promise=new Promise(r=>resolve=r);return{promise,resolve};},tick=()=>new Promise(r=>setImmediate(r));
+const value=(ident=id,duration=8)=>({id:ident,state:'complete',duration,model:'scnet',stems:names.map(name=>({name,url:'/stems/'+name}))}),json=(v,ok=true,status=200)=>({ok,status,json:async()=>v});
+const track={id:'local',duration:8,stemJob:id},state={tracks:[track]},prep={active:new Map(),clearing:new Set()};let replies=new Map();
+const crate=createStemCrate({state,preparation:prep,fetchJob:ident=>replies.has(ident)?replies.get(ident):Promise.resolve(json(value(ident)))});
+assert(crate.member(track),'Legacy saved association migrates into crate');await crate.refresh(track);assert.equal(crate.status(track).phase,'ready');replies.set(id,Promise.resolve(json(value(id,48))));await crate.refresh(track);assert.equal(crate.status(track).phase,'unavailable','Wrong source duration must not look ready');
+const old=deferred();replies.set(id,old.promise);const pending=crate.refresh(track);track.stemJob=second;crate.changed(track);await tick();assert.equal(crate.status(track).phase,'ready');old.resolve(json(value(id)));await pending;assert.equal(crate.status(track).job,second,'Late old readiness response cannot replace current association');
+const audio={numberOfChannels:2,length:8,sampleRate:8,duration:1,getChannelData:()=>new Float32Array(8)},calls=[];
+function fixture({source=Promise.resolve(audio),post,attach=async()=>{}}={}){
+ const t={id:'t',duration:1,inStemCrate:true},engine={buffer:()=>source,stemBuffers:new Map(),ctx:{decodeAudioData:async()=>audio},attachStems:attach};
+ globalThis.fetch=async(url,options={})=>{calls.push([options.method||'GET',url]);if(options.method==='POST')return post?post:json(value(id,1));if(options.method==='DELETE')return json({id,state:url.endsWith('/cache')?'trashed':'cancelled'});return{ok:true,arrayBuffer:async()=>new ArrayBuffer(1)};};
+ const adapter=createStemPreparation(engine,[]);return{t,engine,adapter};
+}
+const originalFetch=globalThis.fetch;
+try{
+ const gate=deferred(),f=fixture({source:gate.promise}),start=f.adapter.prepare(f.t).catch(e=>e);const removal=f.adapter.removeFromCrate(f.t);gate.resolve(audio);assert.equal((await start).name,'AbortError');assert.equal((await removal).removed,true);assert.equal(f.t.inStemCrate,false);assert.equal(calls.length,0,'Pre-upload removal must not start a server job');
+ calls.length=0;const post=deferred(),late=fixture({post:post.promise}),started=late.adapter.prepare(late.t).catch(e=>e);while(!calls.length)await tick();const removing=late.adapter.removeFromCrate(late.t);post.resolve(json({id,state:'queued'}));assert.equal((await started).name,'AbortError');const removed=await removing;assert.deepEqual(removed.trashed,[id]);assert.deepEqual(calls.map(x=>x[0]),['POST','DELETE','DELETE']);assert(calls[1][1].endsWith(id)&&calls[2][1].endsWith(id+'/cache'),'Returned job is cancelled then moved, with no source activation');
+ calls.length=0;const activation=deferred(),commit=fixture({attach:async(t,b)=>{await activation.promise;commit.engine.stemBuffers.set(t.id,b);}}),work=commit.adapter.prepare(commit.t);while(!commit.adapter.active.get(commit.t.id)?.committing)await tick();const removeCommit=commit.adapter.removeFromCrate(commit.t);assert.equal(calls.filter(c=>c[0]==='DELETE').length,0);activation.resolve();await work;await removeCommit;assert(commit.engine.stemBuffers.has(commit.t.id),'Committed loaded sources survive disk removal');assert.equal(calls.filter(c=>c[0]==='DELETE').length,1,'Atomic activation finishes; only cache is then moved');
+ const missing=fixture();missing.t.stemJob=id;globalThis.fetch=async()=>json({error:'Job not found'},false,404);const gone=await missing.adapter.removeFromCrate(missing.t);assert.deepEqual(gone.missing,[id]);assert.deepEqual(gone.trashed,[]);assert.equal(missing.t.inStemCrate,false);assert.match(missing.t.stemState,/unavailable/);
+}finally{globalThis.fetch=originalFetch;}
+console.log(JSON.stringify({passed:true,scope:'Actual crate/preparation methods with controlled HTTP/decode/activation; actual model/Trash/browser reload and audio separate',checks:['Saved membership and duration-checked readiness, stale async response ownership','Crate removal before upload creates no server job','Late returned pending job is cancelled then trashed before any activation','Committing activation completes once; loaded buffers retained while prepared cache removed','Missing saved job removes membership with explicit unavailable state, no false Trash claim']}));

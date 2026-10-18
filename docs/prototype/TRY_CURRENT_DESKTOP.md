@@ -23,3 +23,5 @@ Browser-source plan115 adds [selected-stem Censor](STEM_SLIP_CENSOR_REVIEW.md) u
 Plan116 updates the external Stems service: [verified completed cache survives service restart](STEM_JOB_CACHE_REVIEW.md). Native0.1.16 is unchanged; this is service/API evidence, not a new native playback or physical-controller pass.
 
 Browser-source plan117 adds [prepared-file Trash/regeneration and full-mix restore](STEM_CLEAR_REVIEW.md). It is not packaged in native0.1.16. The external service is now session8983/PID25079; keep it running for preparation.
+
+Browser-source plan118 adds [persistent Stems crate/readiness/keyboard removal](STEM_CRATE_REVIEW.md). It is not in native0.1.16; a future package must declare stem-crate.js. External service is now27522/session82214.
