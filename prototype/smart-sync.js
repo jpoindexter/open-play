@@ -122,7 +122,9 @@ export function createSmartSync({engine, state}) {
     if (!enabled() || !engaged(deck)) return false;
     requireGrid(deck.track);
     if(deck.track.gridWarpMarkers?.length)validateTransport(deck,deck,true);
-    if(deck.position>=deck.track.duration)deck.position=0;
+    // Track End is the beginning of reverse playback in source coordinates.
+    // Only an exhausted forward deck should replay from source0.
+    if(!deck.reverse&&deck.position>=deck.track.duration)deck.position=0;
     if (deck.syncState==='armed') {
       const primary=leader(deck);
       if (primary?.playing) {await align(deck,primary,isCurrent);return true;}

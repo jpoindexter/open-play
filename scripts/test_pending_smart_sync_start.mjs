@@ -11,4 +11,11 @@ const canceled=fixture();let current=true;const cp=canceled.smart.press(canceled
 const replaced=fixture(),rp=replaced.smart.press(replaced.deck),rs=replaced.smart.start(replaced.deck);replaced.deck.track={bpm:110,grid:0,duration:20};replaced.resolve();const outcomes=await Promise.allSettled([rp,rs]);assert.equal(outcomes.every(x=>x.status==='rejected'&&x.reason.name==='AbortError'),true);assert.equal(replaced.calls.length,0);
 const stopped=fixture(),sp=stopped.smart.press(stopped.deck),ss=stopped.smart.start(stopped.deck);stopped.engine.startTokens.set(1,2);stopped.resolve();await sp;await assert.rejects(ss,{name:'AbortError'});assert.equal(stopped.calls.length,0);
 const failed=fixture(),fp=failed.smart.press(failed.deck),fs=failed.smart.start(failed.deck);failed.reject(Error('Output preparation failed'));const errors=await Promise.allSettled([fp,fs]);assert.equal(errors.every(x=>x.status==='rejected'&&/Output preparation/.test(x.reason.message)),true);assert.equal(failed.calls.length,0);
+// End is the valid starting coordinate for a reverse Tempo Sync deck. The
+// forward replay reset must not silently turn it into an exhausted reverse0.
+for(const reverse of [false,true]){
+ const endpoint=fixture();endpoint.deck.track={...endpoint.deck.track,gridWarpMarkers:[{time:1,bpm:130}]};endpoint.deck.sync=true;endpoint.deck.syncState='tempo';endpoint.deck.reverse=reverse;endpoint.deck.position=endpoint.deck.track.duration;
+ assert.equal(await endpoint.smart.start(endpoint.deck),false);
+ assert.equal(endpoint.deck.position,reverse?endpoint.deck.track.duration:0,reverse?'Reverse End remains the playback start':'Forward End replays from0');
+}
 console.log(JSON.stringify({passed:true,scope:'Smart Sync pending-start policy with controlled rate/synchronize collaborators; real GUI/MIDI/phase/cancel behavior checked separately',checks:['Play waits for pending Sync and aligns once','Current-owner cancellation leaves Sync armed and playback stopped','Track replacement cancels pending Sync/start','External transport token cancels queued start','Sync failure propagates without an unsynced fallback']}));

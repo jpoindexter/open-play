@@ -1,0 +1,23 @@
+# Reverse controls and End playback —162
+
+The browser had a real endpoint defect: a synced reverse deck at track End was reset to original0 by Smart Sync's forward replay policy. Actual Play then immediately ended. `prototype/smart-sync.js` now limits that reset to forward playback; reverse retains End as its valid starting coordinate. No DSP/model/backend/native change.
+
+## Executed evidence
+
+Actual normal file chooser/import → library selection/Load → Prepare using the existing completed SCNet-large official job →120/150/90 warped grid → Smart Sync → Q reverse → active seek across the1.8s marker → tempo slider → Key+ → another Key+ immediately followed by actual Play/Pause → End/Play → Home. Selected Melody/Bass/Drums, original/Vocal silent. Physically muted internal stereo capture; hardware may be unplugged.
+
+Initial setup click requested5s but integer pixel coordinates landed4.989430894s outside the diagnostic10ms setup tolerance. Original8758B/SHA afda409a7b9b00967fd7b24b27db9761d6178860000999023a95bcf74b41b199 retained; exact Home/Right keyboard setup replaces this diagnostic approximation without a production change.
+
+Corrected actual workflow reproduced the endpoint failure. Original798730B/SHA e641849f270f4f8ac403e44b8f5304e578b15dfd06d19ec4aafbbb666385183a has four recorded stages and remains passed:false in `reverse-controls-162-before-results.json`. A focused Smart Sync regression also fails before the fix: Reverse End0 != expected20. Original failure/source capsule preserved privately.
+
+After the endpoint fix the actual workflow completes. Original993768B/SHA eb4a8ca28b55193dd6c74dd4911965e8087990ee29fd738262a0a6ca085e5751. Ten whole17640frame/0.4s channel streams are independently SHA/finite/producer-quantum checked,138quanta each. Active stereo RMS spans0.10816–0.14215. During real key+2 preparation, both processing and an owned transform are observed; actual Play/Pause clears voice/request. After1.2s it remains stopped; subsequent complete0.4s channels have peak0 under unchanged1e−7. No artificial preparation stall or substituted Stop API. End/Play now retains original6.8, advances backward to6.4577554 while keyed+2 remains selected, and Home stops at0 with no voice. Selected gain mask stays[0,0,1,1,1]. This establishes actual endpoint/control/owner behavior and positive audio; it does not independently prove musical pitch accuracy, perceptual seamlessness or every audio direction sample.
+
+`inspect_reverse_controls_162.py` validates exact served sources, input/export identities, whole captures, selection/state and endpoint/cancellation. Canonical result reproduces from the exact immutable original and final source capsule. Focused pending-Sync/start/endpoint and loop/Smart Sync contracts pass; no broad FX/controller/tone/inference matrices repeated. Nine completed job files including outputs retain exact bytes/hashes/mtimes; no new inference. Input MP3 SHA cb2e756d1fa4ce264767a4f6adbaf9e3f69a040db7889d830abdb429cc1a5ac3, source canonical PCM afbbca4ce1d2268bdf9020087983b4808582f9dbcc03073bc8a262a26144e9c5; job8266a41f62fc4fc5b92808dd3d988cec. This existing MUSDB research excerpt is not a fresh holdout or a shippable music asset; original music/PCM remains ignored.
+
+## Remaining tempo gap and limits
+
+The current run exposes a separate tempo-basis inconsistency, not a tempo parity pass: first Sync at original5s selects the90BPM marker region, but nominal `deck.rate` remains1. The actual relative slider6 then targets1.06 against base120, yielding127.2BPM instead of adjusting a coherent90BPM nominal basis. Recorded source clocks and visible127.2BPM support this observation; exact vendor relative-control semantics remain unverified. Correct and execute this next; do not replay the solved endpoint/cancel matrix merely for another green result.
+
+161's four invalid natural-end producer streams and lossy-codec1e−7 failure remain retained and false. No PCM repair, timestamp stitching, lag/gain fit or threshold relaxation. Resource/context/long-track memory, source attribution/musical quality, compound transport/reference/native/hardware and all110groups/522requirements/9beta/26release obligations remain open. Full parity flags stayfalse. The frozen desktop0.1.23/tested272Alternative mapping/profile/launchers/user8768/18775/18768 are preserved; browser changes are not native acceptance. Official mapping provenance remains distinct from Alternative mappings and physical device acceptance.
+
+Next exact packet: `handoffs/stems-162-tempo-basis-followup.md`. Per-feature model/effort metadata is preserved dated planning guidance, not invocation proof. Full Claude audit remains unlaunched; full packet retains the byte-exact original prompt.

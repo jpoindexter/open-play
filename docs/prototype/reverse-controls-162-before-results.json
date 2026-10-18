@@ -1,0 +1,166 @@
+{
+  "checkpoint": 162,
+  "passed": false,
+  "originalBytes": 798730,
+  "originalSHA256": "e641849f270f4f8ac403e44b8f5304e578b15dfd06d19ec4aafbbb666385183a",
+  "sourceHashes": {
+    "app.js": "a34c271bb8b2270c071ab77c8ce7727cf6943733a0e21b7c6da9157c0c13089a",
+    "engine.js": "025f7a6bf8b94b367a3a956d03f55838aaf4e6b6aaf2747a256f8093a5c84be9",
+    "stems.js": "5fb06aba4f6a97e4150d1bcfeef394574b0c9e9ed6ee099b78b89482b08ea4b7",
+    "panels.js": "06217033416d62af4602c1572086dc03bb9f25458a8f90c884f3d552c7b1d4fe",
+    "keylock.js": "62adbfdd77df20deb1328302d4a8daf3d7bdc29870af453d39acfd2a02bf060b",
+    "keylock-worker.js": "5cb72a1bc74e1808c32b430d72d5769427c7056edee11410eb6f8b3c7751fcec",
+    "keylock-dsp.js": "f4cb1881fedb018f395a6711d263aa142feb8dfe93638a3d1f97fc432c15ac3d",
+    "smart-sync.js": "193587bafa32154179bc9564c197e6c6099edcea725791968163635719b1d519",
+    "beatgrid.js": "af239aef231c9d089bf2352b8f548a5f71f734d6cf753986f17f57b3999477b9",
+    "warp-loop.js": "33091f4414d2066ce47657aa96312dfefc6ca0a061ccab04ddf00ef6121addc4",
+    "warp-loop-kernel.js": "8a331758bc551454a3cc65fd5ea527c42a370bd22ab6eb650ca278ea87e0f414",
+    "warp-loop-worklet.js": "bc977262180f910c6be55ea07a46f6b560a090939271bd4beec5e8fd31ed23fa",
+    "reverse-censor-plan.js": "38adfb04c0e498a8e2cb27b0240f037d315f24b0c8cd6968e338ff29b0af3807",
+    "stem-reverse-162-harness.js": "079705ba73fe7a6c9c1af67e4a0496698a9a9e5421dfbd429764abc17fa4e60a",
+    "stem-activation-capture-145.js": "730b9c3de31e9c3546ec1ab86f8fd85ce2a1ccfe6f78fc25d8f483f8b9d75331",
+    "stem-history-worklet.js": "d1e4f452044235a110a874fad2921390878c5731f3a769896ca5bfb2faf08daa",
+    "keylock-shadow-live.js": "41bf27051270a4741f83b59bc7c0111767b589ef3986b4aafb43ad36dc067551",
+    "vendor/signalsmith-stretch/SignalsmithStretch-open-play-replace.mjs": "abc12a3afe332b3aa32c1e1ec931f362225f0de09beb727a90944cf7c96baf46",
+    "vendor/signalsmith-stretch/SignalsmithStretch-open-play-reference-dsp.mjs": "0512cae2a33873956026e64cb47854c1c677baf1beb1bc0242edfb9557987f21"
+  },
+  "observations": [
+    {
+      "name": "reverse-seek-across-marker",
+      "sourceClockMaximumError": 4.440892098500626e-16,
+      "packets": [
+        {
+          "channel": 0,
+          "frames": 17640,
+          "rms": 0.1291895039606587,
+          "peak": 0.7277770042419434,
+          "sha256": "44e32c80f926e39da86314045cc37475a0c128db9c4f6411b3018ffec406e199",
+          "contiguousQuanta": 138
+        },
+        {
+          "channel": 1,
+          "frames": 17640,
+          "rms": 0.13690061993883923,
+          "peak": 0.659741222858429,
+          "sha256": "acf1ef368c34e764bee41dd51c0c714c9ad78fce56eb080416acdfeb40e788b5",
+          "contiguousQuanta": 138
+        }
+      ]
+    },
+    {
+      "name": "reverse-tempo-change",
+      "sourceClockMaximumError": 8.881784197001252e-16,
+      "packets": [
+        {
+          "channel": 0,
+          "frames": 17640,
+          "rms": 0.14200542400246166,
+          "peak": 0.5083636045455933,
+          "sha256": "feb4c0f171454150804f0fdc31a18bf0d022cf8969ebae7c1a710aebdc7b3130",
+          "contiguousQuanta": 138
+        },
+        {
+          "channel": 1,
+          "frames": 17640,
+          "rms": 0.1393446851596926,
+          "peak": 0.4811711609363556,
+          "sha256": "940e126a0a4d3d69b294c18c07e05a2fb0352186140b140d954438b33fac3705",
+          "contiguousQuanta": 138
+        }
+      ]
+    },
+    {
+      "name": "reverse-key-change",
+      "sourceClockMaximumError": 4.440892098500626e-16,
+      "packets": [
+        {
+          "channel": 0,
+          "frames": 17640,
+          "rms": 0.13144665557631027,
+          "peak": 0.4255472421646118,
+          "sha256": "f4d0537a57145959033db232888a14e8c698f572534ee19b97ca34bcddeb0556",
+          "contiguousQuanta": 138
+        },
+        {
+          "channel": 1,
+          "frames": 17640,
+          "rms": 0.13652561094370422,
+          "peak": 0.5193153619766235,
+          "sha256": "c0a0b886f6258a86b77c91f0f99c86be2ff2244dbbeaec35df8ddb3e0d12198c",
+          "contiguousQuanta": 138
+        }
+      ]
+    },
+    {
+      "name": "stop-during-reverse-key-preparation",
+      "sourceClockMaximumError": null,
+      "packets": [
+        {
+          "channel": 0,
+          "frames": 17640,
+          "rms": 0.0,
+          "peak": 0.0,
+          "sha256": "02607efec461e90244f5e92910fd9e08ee09893c0f27f374cf0b0e92bc99500a",
+          "contiguousQuanta": 138
+        },
+        {
+          "channel": 1,
+          "frames": 17640,
+          "rms": 0.0,
+          "peak": 0.0,
+          "sha256": "02607efec461e90244f5e92910fd9e08ee09893c0f27f374cf0b0e92bc99500a",
+          "contiguousQuanta": 138
+        }
+      ]
+    }
+  ],
+  "errors": [
+    {
+      "message": "Reverse from End timed out",
+      "stack": "Error: Reverse from End timed out\n    at assert (http://127.0.0.1:8801/prototype/stem-reverse-162-harness.js:1:120)\n    at until (http://127.0.0.1:8801/prototype/stem-reverse-162-harness.js:6:85)\n    at async run (http://127.0.0.1:8801/prototype/stem-reverse-162-harness.js:42:52)"
+    }
+  ],
+  "failureState": {
+    "at": 49.85904761904762,
+    "position": 0,
+    "playing": false,
+    "processing": false,
+    "reverse": true,
+    "rate": 1.06,
+    "keylock": true,
+    "keyShift": 2,
+    "syncState": "tempo",
+    "voice": false,
+    "gridReverse": false,
+    "anchorTime": 20.1159410430839,
+    "anchorPosition": 0,
+    "live": false,
+    "mask": [
+      false,
+      true,
+      true,
+      true
+    ],
+    "pending": false,
+    "retiring": 0,
+    "notifications": "\u00b7 0.0%\n00:00.0\n\u221200:48.0\nDrag platter to scratch\nFocused platter only: hold Left/Right for -1/+1 original seconds per second; Space/Enter hold still; Escape cancels. Keyup releases; focus/window loss cancels.\n\u00b18%\nINT\nREL\nABS\nTHRU\nWIR\nQ\nKey lock\nSlip\nReverse\nRepeat\nCensor\nKey \u2212\nKey +\nKey Sync\nReset key\n\u00b18\nDouble\nLOCAL AUDIO\nDecoded waveform \u00b7 126 BPM\nSOURCE WAVEFORMS \u00b7 \u00b12s \u00b7 pre-FX\n1\nGAIN\nHIGH\nMID\nLOW\nFILTER\nLEVEL\nXF ASSIGN\nA\nThru\nB\nCUE \u25c7\n2\nGAIN\nHIGH\nMID\nLOW\nFILTER\nLEVEL\nXF ASSIGN\nA\nThru\nB\nCUE \u25c7\nA \u2014 CROSSFADER \u2014 B\n\uff0b Crate\n\uff0b Smart\nSearch crates\n\u2733All music\n\u266biTunes / local\n\u224bStems\n\u25f7Prepare\nCRATES\n\u00b7\n\u25b0Warm up\n\u00b7\n\u25b0Night shift\n\u00b7\n\u25b0Peak time\n\u00b7\n\u25b0Closing\nSTREAMING \u00b7 SIMULATION\n\u25cbApple Music\n\u25cbSpotify\n\u25cbBeatport\n\u25cbBeatsource\n\u25cbSoundCloud\n\u25cbTIDAL\n\uff0b Import audio\nLibrary tools\nAnalyze\n\u2699\nSelected track\nCurrent crate\nAll tracks\n\u25a6\nFiles\nPrepare\nHistory\nSearch tracks\nColumns\n\u25c9\tSONG \u25b4\tARTIST\tBPM\tKEY\tPLAYS\tALBUM\tLENGTH\n\u266b\tAfter Hours\tOpen Play Lab\t124\t8A\t0\tNight shift\t00:48.0\n\u266b\tCopper Steps\tOpen Play Lab\t120\t5A\t0\tWarm up\t00:48.0\n\u266b\tGlass Transit\tOpen Play Lab\t126\t9A\t0\tNight shift\t00:48.0\n\u266b\tLast Light\tOpen Play Lab\t125\t8B\t0\tClosing\t00:48.0\n\u266b\tLow Orbit\tOpen Play Lab\t122\t7A\t0\tWarm up\t00:48.0\n\u266b\u25cf\tSDRNR-private-research-159\tLocal file\t120\t\u2014\t2\tImported\t00:06.7\n\u266b\tSignal Blue\tOpen Play Lab\t130\t11A\t0\tPeak time\t00:48.0\n\u266b\tSlow Current\tOpen Play Lab\t112\t6A\t0\tWarm up\t00:48.0\n\u266b\tTidal Lines\tOpen Play Lab\t128\t10A\t0\tPeak time\t00:48.0\nAutoplay\n9 tracks \u00b7 06:30.8 \u00b7 all\nDemo audio generated locally \u2022 no uploads\nFinished: 1 measured, 0 failed. Existing/manual metadata and locked grids preserved unless replacement was requested."
+  },
+  "criteria": {
+    "minimumRMS": 1e-05,
+    "maximumStoppedPeak": 1e-07,
+    "maximumPositionError": 0.01
+  },
+  "tempoBasisFollowup": {
+    "initialSyncBPM": 90,
+    "afterSliderSixBPM": 127.2,
+    "scope": "Observed source-clock behavior; relative tempo basis still needs correction/acceptance."
+  },
+  "relativeTempoContinuityAccepted": false,
+  "musicalPitchAccuracyAccepted": false,
+  "sourceAttributionAccepted": false,
+  "exactSeratoParityAccepted": false,
+  "seamlessTransitionAccepted": false,
+  "nativeAcceptance": false,
+  "hardwareAcceptance": false,
+  "fullParityAcceptance": false
+}

@@ -1,0 +1,159 @@
+{
+  "checkpoint": 162,
+  "passed": true,
+  "originalBytes": 993768,
+  "originalSHA256": "eb4a8ca28b55193dd6c74dd4911965e8087990ee29fd738262a0a6ca085e5751",
+  "sourceHashes": {
+    "app.js": "a34c271bb8b2270c071ab77c8ce7727cf6943733a0e21b7c6da9157c0c13089a",
+    "engine.js": "025f7a6bf8b94b367a3a956d03f55838aaf4e6b6aaf2747a256f8093a5c84be9",
+    "stems.js": "5fb06aba4f6a97e4150d1bcfeef394574b0c9e9ed6ee099b78b89482b08ea4b7",
+    "panels.js": "06217033416d62af4602c1572086dc03bb9f25458a8f90c884f3d552c7b1d4fe",
+    "keylock.js": "62adbfdd77df20deb1328302d4a8daf3d7bdc29870af453d39acfd2a02bf060b",
+    "keylock-worker.js": "5cb72a1bc74e1808c32b430d72d5769427c7056edee11410eb6f8b3c7751fcec",
+    "keylock-dsp.js": "f4cb1881fedb018f395a6711d263aa142feb8dfe93638a3d1f97fc432c15ac3d",
+    "smart-sync.js": "703e7657ff695249fff1f81a9590be49583cad87b16902e98dbce304c9961e78",
+    "beatgrid.js": "af239aef231c9d089bf2352b8f548a5f71f734d6cf753986f17f57b3999477b9",
+    "warp-loop.js": "33091f4414d2066ce47657aa96312dfefc6ca0a061ccab04ddf00ef6121addc4",
+    "warp-loop-kernel.js": "8a331758bc551454a3cc65fd5ea527c42a370bd22ab6eb650ca278ea87e0f414",
+    "warp-loop-worklet.js": "bc977262180f910c6be55ea07a46f6b560a090939271bd4beec5e8fd31ed23fa",
+    "reverse-censor-plan.js": "38adfb04c0e498a8e2cb27b0240f037d315f24b0c8cd6968e338ff29b0af3807",
+    "stem-reverse-162-harness.js": "079705ba73fe7a6c9c1af67e4a0496698a9a9e5421dfbd429764abc17fa4e60a",
+    "stem-activation-capture-145.js": "730b9c3de31e9c3546ec1ab86f8fd85ce2a1ccfe6f78fc25d8f483f8b9d75331",
+    "stem-history-worklet.js": "d1e4f452044235a110a874fad2921390878c5731f3a769896ca5bfb2faf08daa",
+    "keylock-shadow-live.js": "41bf27051270a4741f83b59bc7c0111767b589ef3986b4aafb43ad36dc067551",
+    "vendor/signalsmith-stretch/SignalsmithStretch-open-play-replace.mjs": "abc12a3afe332b3aa32c1e1ec931f362225f0de09beb727a90944cf7c96baf46",
+    "vendor/signalsmith-stretch/SignalsmithStretch-open-play-reference-dsp.mjs": "0512cae2a33873956026e64cb47854c1c677baf1beb1bc0242edfb9557987f21"
+  },
+  "observations": [
+    {
+      "name": "reverse-seek-across-marker",
+      "sourceClockMaximumError": 8.881784197001252e-16,
+      "packets": [
+        {
+          "channel": 0,
+          "frames": 17640,
+          "rms": 0.13172190875491172,
+          "peak": 0.7277770042419434,
+          "sha256": "f07be7931d226f547b5e4e800854dc1dd12521316037e61fe625b9af7642adeb",
+          "contiguousQuanta": 138
+        },
+        {
+          "channel": 1,
+          "frames": 17640,
+          "rms": 0.13835997685830678,
+          "peak": 0.6597412824630737,
+          "sha256": "e121d40f61a1d2d415f8f3a72f4bb7e534bcfe20627eeb66a7aec6ce5beed389",
+          "contiguousQuanta": 138
+        }
+      ]
+    },
+    {
+      "name": "reverse-tempo-change",
+      "sourceClockMaximumError": 8.881784197001252e-16,
+      "packets": [
+        {
+          "channel": 0,
+          "frames": 17640,
+          "rms": 0.1421472041598608,
+          "peak": 0.5440354943275452,
+          "sha256": "47b598d757087865d4ca89d1312ae218270c5d75d5849940cb6e7aec1dca982c",
+          "contiguousQuanta": 138
+        },
+        {
+          "channel": 1,
+          "frames": 17640,
+          "rms": 0.1392684032227188,
+          "peak": 0.4767463207244873,
+          "sha256": "f9699c7c25b909b633ca89ce2c6091cd0d7dbb111c67c3406691e9280a49d6da",
+          "contiguousQuanta": 138
+        }
+      ]
+    },
+    {
+      "name": "reverse-key-change",
+      "sourceClockMaximumError": 4.440892098500626e-16,
+      "packets": [
+        {
+          "channel": 0,
+          "frames": 17640,
+          "rms": 0.13043909889149263,
+          "peak": 0.4457324147224426,
+          "sha256": "0b80571ca01fadebf579a4d1f084eec987e866b8b00897fdd2dc6f6a9101d6e4",
+          "contiguousQuanta": 138
+        },
+        {
+          "channel": 1,
+          "frames": 17640,
+          "rms": 0.13577162424054065,
+          "peak": 0.6013919115066528,
+          "sha256": "4ab7f61ee36ee6c798486d32ec14f8c9cd8a7dfaa20f1aa52168e31b74098c84",
+          "contiguousQuanta": 138
+        }
+      ]
+    },
+    {
+      "name": "stop-during-reverse-key-preparation",
+      "sourceClockMaximumError": null,
+      "packets": [
+        {
+          "channel": 0,
+          "frames": 17640,
+          "rms": 0.0,
+          "peak": 0.0,
+          "sha256": "02607efec461e90244f5e92910fd9e08ee09893c0f27f374cf0b0e92bc99500a",
+          "contiguousQuanta": 138
+        },
+        {
+          "channel": 1,
+          "frames": 17640,
+          "rms": 0.0,
+          "peak": 0.0,
+          "sha256": "02607efec461e90244f5e92910fd9e08ee09893c0f27f374cf0b0e92bc99500a",
+          "contiguousQuanta": 138
+        }
+      ]
+    },
+    {
+      "name": "reverse-from-track-end",
+      "sourceClockMaximumError": 0.0,
+      "packets": [
+        {
+          "channel": 0,
+          "frames": 17640,
+          "rms": 0.1081563708898305,
+          "peak": 0.4632624387741089,
+          "sha256": "3b4762cbe21494efab75866bffdf9f700c75ad39d988bd1e484e009c975abf97",
+          "contiguousQuanta": 138
+        },
+        {
+          "channel": 1,
+          "frames": 17640,
+          "rms": 0.11378788472708552,
+          "peak": 0.47649621963500977,
+          "sha256": "dcc0011fdc7c9edeba5ad467917064312dab9a9d7e11da5f1342f5715a900e23",
+          "contiguousQuanta": 138
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "failureState": null,
+  "criteria": {
+    "minimumRMS": 1e-05,
+    "maximumStoppedPeak": 1e-07,
+    "maximumPositionError": 0.01
+  },
+  "tempoBasisFollowup": {
+    "initialSyncBPM": 90,
+    "afterSliderSixBPM": 127.2,
+    "scope": "Observed source-clock behavior; relative tempo basis still needs correction/acceptance."
+  },
+  "relativeTempoContinuityAccepted": false,
+  "musicalPitchAccuracyAccepted": false,
+  "sourceAttributionAccepted": false,
+  "exactSeratoParityAccepted": false,
+  "seamlessTransitionAccepted": false,
+  "nativeAcceptance": false,
+  "hardwareAcceptance": false,
+  "fullParityAcceptance": false
+}
