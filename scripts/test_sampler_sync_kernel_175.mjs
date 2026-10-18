@@ -1,0 +1,12 @@
+import assert from 'node:assert/strict';
+import {pathToFileURL} from 'node:url';
+const {WarpLoopKernel}=await import(process.argv[2]?pathToFileURL(process.argv[2]).href:new URL('../prototype/warp-loop-kernel.js',import.meta.url).href);
+const track={bpm:120,grid:0,duration:2,gridWarpMarkers:[]};
+const channels=[Float32Array.from({length:200},(_,i)=>i/200),Float32Array.from({length:200},(_,i)=>-i/200)];
+const kernel=new WarpLoopKernel(100);kernel.load([{sampleRate:100,channels}]);kernel.start({track,loop:null,bpm:240,position:0,when:.25});
+const out=[new Float32Array(200),new Float32Array(200)];kernel.process([out],0);
+for(let c=0;c<2;c++)for(let i=0;i<200;i++)assert.ok(Math.abs(out[c][i]-(i>=25&&i<125?channels[c][2*(i-25)]:0))<1e-6,`raw ${c}:${i}`);
+assert.equal(kernel.endedFrame,125);
+const rendered=[Float32Array.from({length:100},(_,i)=>i/100)];kernel.load([{sampleRate:100,channels:rendered}]);kernel.start({track,loop:null,renderedLoop:true,renderedSpan:{start:0,end:2},bpm:240,position:0,when:.25});assert.equal(kernel.endedFrame,null);
+const renderedOut=[new Float32Array(200)];kernel.process([renderedOut],0);for(let i=0;i<200;i++)assert.ok(Math.abs(renderedOut[0][i]-(i>=25&&i<125?rendered[0][i-25]:0))<1e-6,`rendered ${i}`);assert.equal(kernel.endedFrame,125);
+console.log(JSON.stringify({passed:true,scope:'nonloop raw/rendered kernel mapping, scheduled silence and exact ending frame; no browser/native/quality acceptance'}));

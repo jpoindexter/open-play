@@ -15,6 +15,7 @@ import { effectiveFXBPM, normalizeFXTempoSettings } from "./fx-tempo.js";
 import {createAudioMonitor,monitorSettings as normalizeMonitorSettings} from './audio-monitor.js';
 import {createWarpLoopTransport} from './warp-loop.js';
 import {createSyncTempoHandoff} from './sync-tempo-handoff.js';
+import {startSyncedSample,sampleVoiceClock,disposeSampleVoice} from './sample-sync-transport.js';
 import {createReverseCensorPlan} from './reverse-censor-plan.js';
 import {CensorBacking} from './censor-backing.js';
 import {createBeatgrid} from './beatgrid.js';
@@ -48,6 +49,7 @@ export class AudioEngine {
     this.onProcessing = () => {};
     this.deckStates = new Map();
     this.sampleTokens = new Map();
+    this.sampleRetiring = new Map();
     this.sampleRequests = new Map();
     this.onSampleState = () => {};
     this.samplerRoute = "Master";
@@ -682,7 +684,7 @@ export class AudioEngine {
     }
     return {rate,nominalRate:d.rate};
   }
-  async setSyncedRates(changes){
+  async setSyncedRates(changes,{participants=[]}={}){
     const saved=changes.map(({deck,rate})=>({deck,rate,owner:{},previous:deck.rate,track:deck.track,playing:deck.playing,clock:this.voiceClock(deck,this.voices.get(deck.index))}));
     if(saved.some(x=>x.deck.processing&&!x.playing))throw Error('Finish deck preparation before changing group tempo.');
     const active=saved.filter(x=>x.playing);
@@ -691,14 +693,17 @@ export class AudioEngine {
     // Preserve the existing immediate AudioParam path for ordinary raw decks.
     // Reverse grid voices support the same future starts; scratch and Stems
     // Slip gesture transports retain their existing separate rate path.
-    if(gesture||!requiresPreparation)return Promise.all(saved.map(x=>this.setRate(x.deck,x.rate,{syncInternal:true})));
-    const group=active.length?createSyncTempoHandoff(this.ctx,active.map(x=>x.deck.index)):null;
+    if(gesture&&participants.length)throw Error('Finish the active scratch or Stem Slip gesture before changing the shared Sampler tempo.');
+    if(gesture||(!requiresPreparation&&!participants.length))return Promise.all(saved.map(x=>this.setRate(x.deck,x.rate,{syncInternal:true})));
+    const ids=[...active.map(x=>x.deck.index),...participants.map(x=>x.id)];
+    const group=ids.length?createSyncTempoHandoff(this.ctx,ids):null;
     try{
       const jobs=saved.map(async x=>{
         this.rateOwners.set(x.deck,x.owner);
         x.deck.rate=x.rate;
         try{if(x.playing)await this.start(x.deck,{priorClock:x.clock,positionAt:x.clock,handoff:group});}catch(error){group?.fail(error);throw error;}
       });
+      jobs.push(...participants.map(x=>x.start(group).catch(error=>{group?.fail(error);throw error;})));
       const results=await Promise.allSettled(jobs);const failed=results.find(r=>r.status==='rejected');if(failed){group?.fail(failed.reason);throw failed.reason;}group?.finish();
       for(const x of saved)if(this.nodes[x.deck.index]){this.nodes[x.deck.index].channelBpm=x.track.bpm*x.rate;try{await this.applyChannelFX(x.deck.index);}catch(error){this.onError?.(error);}}
       if(this.fxState){for(const x of saved)this.fxState[2][x.deck.index]=x.track.bpm*x.rate;try{this.configureFX(...this.fxState);}catch(error){this.onError?.(error);}}
@@ -1972,6 +1977,7 @@ export class AudioEngine {
     const voice = this.samples?.get(slot),
       request = this.sampleRequests.get(slot);
     if (!voice) return request?.settings.start || 0;
+    if (voice.gridTimeline) return sampleVoiceClock(voice)(this.ctx.currentTime);
     let position =
       voice.anchorPosition +
       Math.max(0, this.ctx.currentTime - voice.anchorTime) *
@@ -1988,6 +1994,8 @@ export class AudioEngine {
   async sample(track, slot, options = {}) {
     if (!track) throw new Error("Load a sample first.");
     this.onPrepareSampleGain?.(track);
+    const syncPlan=this.onSamplePlan?.(track,slot,options);
+    if(syncPlan)return startSyncedSample(this,track,slot,options,syncPlan);
     const settings = {
       ...(typeof options === "boolean" ? { repeat: options } : options),
     };
@@ -2056,9 +2064,9 @@ export class AudioEngine {
       source.onended = () => {
         if (this.samples.get(slot)?.source === source) {
           this.samples.delete(slot);
-          this.sampleRequests.delete(slot);
-          this.onSampleState(slot, { playing: false, processing: false });
-          this.onSampleEnd(slot);
+          const pending=this.sampleRequests.get(slot);
+          if(pending?.controller===controller){this.sampleRequests.delete(slot);this.onSampleState(slot,{playing:false,processing:false});this.onSampleEnd(slot);}
+          else this.onSampleState(slot,{playing:false,processing:!!pending?.processing});
         }
         source.disconnect();
         trackGain.disconnect();
@@ -2088,6 +2096,10 @@ export class AudioEngine {
     next.rate = Math.max(0.5, Math.min(2, Number(next.rate) || 1));
     const transformChanged =
       next.rate !== before.rate || !!next.keylock !== !!before.keylock;
+    if(voice?.syncTransport){
+      if(transformChanged||next.repeat!==before.repeat)return this.sample(request.track,slot,{...next,start:position,syncOverride:{preserve:true}});
+      Object.assign(before,next);voice.gain.gain.setTargetAtTime(before.muted?0:(before.gain??.8)*.5,this.ctx.currentTime,.01);return true;
+    }
     if (
       transformChanged &&
       (request.processing || next.keylock || before.keylock)
@@ -2109,12 +2121,21 @@ export class AudioEngine {
     }
     return !!voice;
   }
+  cancelSamplePreparation(slot) {
+    const request=this.sampleRequests.get(slot),voice=this.samples?.get(slot);
+    if(!request?.processing)return;
+    this.sampleTokens.set(slot,(this.sampleTokens.get(slot)||0)+1);request.controller.abort();
+    if(voice?.request)this.sampleRequests.set(slot,voice.request);else this.sampleRequests.delete(slot);
+    this.onSampleState(slot,{playing:!!voice,processing:false});
+  }
   stopSample(slot) {
     this.sampleTokens.set(slot, (this.sampleTokens.get(slot) || 0) + 1);
     this.sampleRequests.get(slot)?.controller.abort();
     this.sampleRequests.delete(slot);
+    for(const job of this.sampleRetiring.get(slot)||[]){clearTimeout(job.timer);disposeSampleVoice(job.voice);}this.sampleRetiring.delete(slot);
     const voice = this.samples?.get(slot);
     if (voice) {
+      if(voice.syncTransport){disposeSampleVoice(voice);this.samples.delete(slot);this.onSampleState(slot,{playing:false,processing:false});return;}
       voice.source.onended = null;
       try {
         voice.source.stop();
@@ -2130,6 +2151,7 @@ export class AudioEngine {
     for (const slot of new Set([
       ...this.sampleRequests.keys(),
       ...(this.samples?.keys() || []),
+      ...this.sampleRetiring.keys(),
     ]))
       this.stopSample(slot);
   }

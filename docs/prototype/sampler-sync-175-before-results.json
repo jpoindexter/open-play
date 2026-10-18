@@ -1,0 +1,109 @@
+{
+  "checkpoint": 175,
+  "passed": false,
+  "kind": "actual persistent Sampler Sync absent; one-shot tempo match does not follow leader",
+  "originalPath": "local-evidence/stem-resource-150/browser-exports/9447255d3e5e4667ba74814ccf465319.json",
+  "originalBytes": 7509851,
+  "originalSHA256": "24ab6b3f570263285cf142ddf01f44e5a363972fdf8846ca3d54225ff28fb26c",
+  "context": {
+    "sampleRate": 48000,
+    "constructor": "AudioContext",
+    "requestedSampleRate": null
+  },
+  "sourceHashes": {
+    "app.js": "9c462ce20cfda887a78cf1fd0c070587b0882221ee7b680784390e232f224f00",
+    "engine.js": "29e569677b1b5619929378394d5dea7d297e3dac496080e64d8aa84159df4535",
+    "panels.js": "91d6cc82ead293149f6be58c0420b4f4df5d0a016de9f761fcc9ccff5534bb21",
+    "manual-loops.js": "a2215ea2414788a0a0b73a1e9b99efdc24399be8003fc18c7c7de00377976304",
+    "beatgrid.js": "af239aef231c9d089bf2352b8f548a5f71f734d6cf753986f17f57b3999477b9",
+    "smart-sync.js": "98d34b559882d16e3b3e8c715d6a3c35a6197cb8d6a984fe5470b80592ca934e",
+    "sync-tempo-handoff.js": "5842f9209035e24ff867004d3fef5f0a1fe7f7f4976440546b8238a225b82f9b",
+    "stems.js": "5fb06aba4f6a97e4150d1bcfeef394574b0c9e9ed6ee099b78b89482b08ea4b7",
+    "keylock.js": "62adbfdd77df20deb1328302d4a8daf3d7bdc29870af453d39acfd2a02bf060b",
+    "keylock-worker.js": "5cb72a1bc74e1808c32b430d72d5769427c7056edee11410eb6f8b3c7751fcec",
+    "keylock-dsp.js": "f4cb1881fedb018f395a6711d263aa142feb8dfe93638a3d1f97fc432c15ac3d",
+    "track-gain.js": "f390adbddd4e317444294a92d9e5a82b89d6abaa591578a158a00308628d5bfa",
+    "sampler-sync-175-harness.js": "f550edc567edbd99269a5da86e95a6246e76c92daf580b8e5f574cb988187b56",
+    "stem-activation-capture-145.js": "730b9c3de31e9c3546ec1ab86f8fd85ce2a1ccfe6f78fc25d8f483f8b9d75331",
+    "vendor/signalsmith-stretch/SignalsmithStretch-open-play-reference-dsp.mjs": "0512cae2a33873956026e64cb47854c1c677baf1beb1bc0242edfb9557987f21"
+  },
+  "persistentSyncControlPresent": false,
+  "observations": [
+    {
+      "name": "initial-sync",
+      "packets": [
+        {
+          "channel": 0,
+          "frames": 144000,
+          "quanta": 1125,
+          "sha256": "f613383fc79d318ea64ebeba95410c0520ec7c55b9996165dbac1e0ec5382a50",
+          "rms": 0.06772066797963834,
+          "peak": 0.27587005496025085
+        },
+        {
+          "channel": 1,
+          "frames": 144000,
+          "quanta": 1125,
+          "sha256": "0457a576cb21860cff1241376f7f99bdb042fc93e34655dca68a311b96dd61c4",
+          "rms": 0.06713428392834332,
+          "peak": 0.2930281460285187
+        }
+      ],
+      "leaderBPM": 124,
+      "sampleNominalBPM": 124.00000000000001,
+      "maximumBarPhaseErrorSeconds": 0.8724086021505366,
+      "sampleSyncState": null,
+      "syncState": null
+    },
+    {
+      "name": "leader-tempo-change",
+      "packets": [
+        {
+          "channel": 0,
+          "frames": 144000,
+          "quanta": 1125,
+          "sha256": "99d9107bd5eca94d1492152295833e758dee556cb317c8006c1cfbc0131830dc",
+          "rms": 0.06902871692142867,
+          "peak": 0.2722715139389038
+        },
+        {
+          "channel": 1,
+          "frames": 144000,
+          "quanta": 1125,
+          "sha256": "77cbe80c72d92c6073a8770b89bdab0b160cf718f02aad6cdcf7dde15b6128bb",
+          "rms": 0.06651834051196952,
+          "peak": 0.2813315987586975
+        }
+      ],
+      "leaderBPM": 131.44,
+      "sampleNominalBPM": 124.00000000000001,
+      "maximumBarPhaseErrorSeconds": 0.5560146241237383,
+      "sampleSyncState": null,
+      "syncState": null
+    },
+    {
+      "name": "stop",
+      "packets": [
+        {
+          "channel": 0,
+          "frames": 14400,
+          "quanta": 113,
+          "sha256": "c72274a22cba2dcef62e0f62834446ee39b0cd95ad0faa27a89b3b49f48aa390",
+          "rms": 0.0,
+          "peak": 0.0
+        },
+        {
+          "channel": 1,
+          "frames": 14400,
+          "quanta": 113,
+          "sha256": "c72274a22cba2dcef62e0f62834446ee39b0cd95ad0faa27a89b3b49f48aa390",
+          "rms": 0.0,
+          "peak": 0.0
+        }
+      ]
+    }
+  ],
+  "fullParityAcceptance": false,
+  "nativeAcceptance": false,
+  "hardwareAcceptance": false
+}

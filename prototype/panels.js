@@ -1,6 +1,7 @@
 import {trackGainDB} from './track-gain.js';
 import {createDeckMIDIRouter,deckMIDITargets,libraryMIDITargets,fxMIDITargets,samplerMIDITargets,herculesPlaybackMappings} from './deck-midi.js';
 import {createBeatgrid,gridBPM} from './beatgrid.js';
+import {createSamplerSync} from './sampler-sync.js';
 import { createVideoMixer } from "./video.js";
 import { createVideoControls } from "./video-controls.js";
 import {createVideoMIDIRouter,videoMIDITargets} from './video-midi.js';
@@ -53,6 +54,14 @@ export function createPanels(a) {
     videoPhase = 0,
     learn = false;
   let controllerMixer;
+  const samplerSync=createSamplerSync({state:s,engine,trackById,optionsFor:key=>sampleOptions(s.samples[Math.floor(key/8)][key%8]),render:()=>sampleVisuals(),requestTempo:bpm=>a.setSamplerTempo(bpm)});
+  document.addEventListener('click',event=>{
+    const button=event.target.closest('[data-sample-sync]');if(!button||button.disabled)return;
+    const key=Number(button.dataset.sampleSync);
+    if(button.dataset.syncAction==='off')samplerSync.off(key);
+    else void samplerSync.enable(key).catch(error=>notify(error.message));
+    persist();
+  });
   s.fxTempo=normalizeFXTempoSettings(s.fxTempo,s.fx.length);
   const fxTempoClock=createFXTempo({initial:s.fxTempo,count:s.fx.length});
   const monitorFields=new Set(['Cue Mix','Cue Volume','Master Cue','Split Cue','Output Mode']);
@@ -656,7 +665,7 @@ export function createPanels(a) {
               if(['Use Auto Gain','Auto Gain Reference'].includes(input.dataset.setting)){a.trackGain.refreshAll();renderDecks();}
               if(mixerFields.has(input.dataset.setting)){engine.setMixerSettings(mixerSettingsFromPreferences(s.settings));renderMixer();}
               persist();
-              if (input.dataset.setting === "Sync Mode") renderDecks();
+              if (input.dataset.setting === "Sync Mode") {samplerSync.settingsChanged();renderDecks();}
               if (input.dataset.setting === "Library Text Size")
                 $("#tracks").style.fontSize =
                   `${10 + Number(input.value) * 0.08}px`;
@@ -940,11 +949,15 @@ export function createPanels(a) {
         : ((slot.volume ?? 80) / 100),
     };
   }
+  function samplerSyncMarkup(key,advanced=false){
+    const v=samplerSync.stateFor(key);
+    return `<div class="panel-controls"><button ${advanced?'id="sample-sync-toggle"':''} data-sample-sync="${key}" data-sync-action="on" aria-label="Sync sample ${key%8+1}" aria-pressed="${v.active}" ${v.available?'':'disabled'} title="${esc(v.reason||'Synchronize this sample with the active Sync tracks')}">Sync</button><button ${advanced?'id="sample-sync-off"':''} data-sample-sync="${key}" data-sync-action="off" aria-label="Sync off sample ${key%8+1}" ${v.active?'':'disabled'}>Off</button><span class="muted" data-sample-sync-status="${key}" role="status">${esc(v.label)}</span></div>`;
+  }
   function sampler() {
     const slots = s.samples[s.bank];
     $("#panel").innerHTML =
       head("Sampler", "REAL PLAY / HOLD / REPEAT / PITCH / GAIN", true) +
-      `<div class="panel-controls" style="margin-bottom:7px">${["A", "B", "C", "D"].map((b, i) => `<button data-sample-bank="${i}" class="${s.bank === i ? "active" : ""}">${b}</button>`).join("")}<span class="muted">Browser audio buses · Alt-click stops · Key Lock preserves pitch during speed changes.</span><label>Output <select id="sampler-output" aria-label="Sampler browser output bus">${options(["Master", "Deck 1", "Deck 2", "Deck 3", "Deck 4"], engine.samplerRoute)}</select></label><button id="sampler-stop-all">Stop all samples</button></div><div class="sampler-slots">${slots.map((slot, i) => `<div class="sample-slot" data-sample-drop="${i}"><h3>${i + 1} · ${esc(trackById(slot.track)?.title || "Empty slot")}</h3><div class="panel-controls"><button data-sample="${i}:load">Load</button><button data-sample="${i}:play" aria-label="Play sample ${i + 1}" aria-pressed="${!!slot.playing}" class="${slot.playing ? "active" : ""}">▶</button><button data-sample="${i}:stop" aria-label="Stop sample ${i + 1}">■</button><button data-sample="${i}:eject" aria-label="Eject sample ${i + 1}">×</button></div><select data-sample-mode="${i}" aria-label="Slot ${i + 1} play mode">${options(["Trigger", "Hold", "On/Off"], slot.mode === "Repeat" ? "Trigger" : slot.mode)}</select><label class="muted"><input type="checkbox" data-sample-repeat="${i}" ${slot.repeat || slot.mode === "Repeat" ? "checked" : ""}> Repeat</label><button data-sample="${i}:advanced" style="width:100%;margin-top:5px">Advanced</button><small class="sample-status" data-sample-status="${i}">${slot.processing ? (slot.keylock ? "Preparing Key Lock…" : "Preparing audio…") : slot.playing ? "Playing" : "Stopped"}</small></div>`).join("")}</div>`;
+      `<div class="panel-controls" style="margin-bottom:7px">${["A", "B", "C", "D"].map((b, i) => `<button data-sample-bank="${i}" class="${s.bank === i ? "active" : ""}">${b}</button>`).join("")}<span class="muted">Browser audio buses · Alt-click stops · Key Lock preserves pitch during speed changes.</span><label>Output <select id="sampler-output" aria-label="Sampler browser output bus">${options(["Master", "Deck 1", "Deck 2", "Deck 3", "Deck 4"], engine.samplerRoute)}</select></label><button id="sampler-stop-all">Stop all samples</button></div><div class="sampler-slots">${slots.map((slot, i) => `<div class="sample-slot" data-sample-drop="${i}"><h3>${i + 1} · ${esc(trackById(slot.track)?.title || "Empty slot")}</h3><div class="panel-controls"><button data-sample="${i}:load">Load</button><button data-sample="${i}:play" aria-label="Play sample ${i + 1}" aria-pressed="${!!slot.playing}" class="${slot.playing ? "active" : ""}">▶</button><button data-sample="${i}:stop" aria-label="Stop sample ${i + 1}">■</button><button data-sample="${i}:eject" aria-label="Eject sample ${i + 1}">×</button></div><select data-sample-mode="${i}" aria-label="Slot ${i + 1} play mode">${options(["Trigger", "Hold", "On/Off"], slot.mode === "Repeat" ? "Trigger" : slot.mode)}</select><label class="muted"><input type="checkbox" data-sample-repeat="${i}" ${slot.repeat || slot.mode === "Repeat" ? "checked" : ""}> Repeat</label>${samplerSyncMarkup(s.bank*8+i)}<button data-sample="${i}:advanced" style="width:100%;margin-top:5px">Advanced</button><small class="sample-status" data-sample-status="${i}">${slot.processing ? (slot.keylock ? "Preparing Key Lock…" : "Preparing audio…") : slot.playing ? "Playing" : "Stopped"}</small></div>`).join("")}</div>`;
     $("#sampler-output").onchange = e => engine.setSamplerOutput(e.target.value);
     $("#sampler-stop-all").onclick = () => engine.stopAllSamples();
     $$("[data-sample-bank]").forEach(
@@ -957,13 +970,13 @@ export function createPanels(a) {
     $$("[data-sample]").forEach((b) => {
       const [i, action] = b.dataset.sample.split(":");
       b.onclick = (e) => {
-        if (action === "play" && slots[i].mode === "Hold" && e.detail > 0)
+        if (action === "play" && !slots[i].sync && slots[i].mode === "Hold" && e.detail > 0)
           return;
         sampleAction(Number(i), e.altKey ? "stop" : action);
       };
       if (action === "play") {
         b.onpointerdown = (e) => {
-          if (slots[i].mode !== "Hold" || e.altKey) return;
+          if (slots[i].sync || slots[i].mode !== "Hold" || e.altKey) return;
           e.preventDefault();
           pointerSamples.set(Number(i), s.bank * 8 + Number(i));
           sampleAction(Number(i), "play", "pointer");
@@ -971,7 +984,7 @@ export function createPanels(a) {
         b.onkeydown = (e) => {
           if (
             (e.key === " " || e.key === "Enter") &&
-            slots[i].mode === "Hold"
+            !slots[i].sync && slots[i].mode === "Hold"
           ) {
             e.preventDefault();
             if (!e.repeat) sampleAction(Number(i), "play", "keyboard");
@@ -1022,7 +1035,7 @@ export function createPanels(a) {
       return{pending,release:null};
     }
     if(!slot.track||!trackById(slot.track)){notify('Load a sample first.');return{pending:Promise.resolve(),release:null};}
-    const hold=slot.mode==='Hold',pending=sampleAction(index,'play','midi');
+    const hold=!slot.sync&&slot.mode==='Hold',pending=sampleAction(index,'play','midi');
     const token=engine.sampleTokens.get(key);
     return{pending,release:hold?()=>{
       if(engine.sampleTokens.get(key)!==token)return;
@@ -1039,7 +1052,11 @@ export function createPanels(a) {
         button.setAttribute("aria-pressed", String(!!slot.playing));
       }
       if (status) status.textContent = slot.processing ? (slot.keylock ? "Preparing Key Lock…" : "Preparing audio…") : slot.playing ? "Playing" : "Stopped";
+      const mode=$(`[data-sample-mode="${i}"]`);if(mode)mode.disabled=!!slot.sync;
     }
+    $$('[data-sample-sync]').forEach(button=>{const value=samplerSync.stateFor(Number(button.dataset.sampleSync)),off=button.dataset.syncAction==='off';button.disabled=off?!value.active:!value.available;if(!off){button.setAttribute('aria-pressed',String(value.active));button.classList.toggle('active',value.active);}});
+    $$('[data-sample-sync-status]').forEach(el=>{const value=samplerSync.stateFor(Number(el.dataset.sampleSyncStatus));if(el.textContent!==value.label)el.textContent=value.label;el.dataset.state=value.status;});
+    const pitch=$('#sample-pitch'),toggle=$('#sample-sync-toggle');if(pitch&&toggle&&document.activeElement!==pitch){const key=Number(toggle.dataset.sampleSync),slot=s.samples[Math.floor(key/8)][key%8];if(slot.sync&&Math.abs(Number(pitch.value)-slot.pitch)>1e-6)pitch.value=slot.pitch;}
   }
   function releaseSampleHolds(index = null, source = "pointer") {
     const held = source === "keyboard" ? keyboardSamples : pointerSamples;
@@ -1061,6 +1078,7 @@ export function createPanels(a) {
     const slot = s.samples[s.bank][i],
       key = s.bank * 8 + i;
     if (action === "load" || action === "eject" || action === "stop") {
+      if(action!=='stop')samplerSync.off(key);
       engine.stopSample(key);
       slot.playing = false;
     }
@@ -1071,7 +1089,7 @@ export function createPanels(a) {
     if (action === "eject") slot.track = null;
     if (action === "play") {
       if (!slot.track) return notify("Load a sample first.");
-      if (slot.mode === "On/Off" && (slot.playing || slot.processing)) {
+      if (!slot.sync && slot.mode === "On/Off" && (slot.playing || slot.processing)) {
         engine.stopSample(key);
         slot.playing = false;
       } else {
@@ -1105,14 +1123,13 @@ export function createPanels(a) {
       ];
       dialog(
         `Sampler ${i + 1} · advanced`,
-        `<div class="form-grid"><label>Volume<input id="sample-volume" type="range" min="0" max="100" value="${slot.volume ?? 80}"></label><label>Track gain (dB)<input id="sample-gain" type="number" min="-24" max="24" step=".1" value="${trackGainDB(track)}"></label><label>Pitch (%)<input id="sample-pitch" type="number" min="-50" max="100" step=".1" value="${slot.pitch || 0}"></label><label><span>Key Lock</span><input id="sample-keylock" type="checkbox" ${slot.keylock ? "checked" : ""}></label><label>Play from<select id="sample-from">${starts.map(([value, name]) => `<option value="${value}" ${value === (slot.from || "start") ? "selected" : ""}>${esc(name)}</option>`).join("")}</select></label><label><span>Mute</span><input id="sample-mute" type="checkbox" ${slot.muted ? "checked" : ""}></label></div><div class="panel-controls"><button id="sample-sync">Match focused deck tempo</button><button id="sample-reset-pitch">Reset pitch</button><button id="sample-apply">Apply</button></div><p class="muted">Gain/volume/mute affect real audio. Pitch (%) changes speed; Key Lock preserves the original pitch using local buffered processing. Speed changes with Key Lock may pause briefly while processing. Play from applies on the next trigger. Output selection routes browser mixer buses, not separate hardware/headphone outputs. File tags remain untouched.</p>`,
+        `${samplerSyncMarkup(key,true)}<div class="form-grid"><label>Volume<input id="sample-volume" type="range" min="0" max="100" value="${slot.volume ?? 80}"></label><label>Track gain (dB)<input id="sample-gain" type="number" min="-24" max="24" step=".1" value="${trackGainDB(track)}"></label><label>Pitch (%)<input id="sample-pitch" type="number" min="-50" max="100" step=".1" value="${slot.pitch || 0}"></label><label><span>Key Lock</span><input id="sample-keylock" type="checkbox" ${slot.keylock ? "checked" : ""}></label><label>Play from<select id="sample-from">${starts.map(([value, name]) => `<option value="${value}" ${value === (slot.from || "start") ? "selected" : ""}>${esc(name)}</option>`).join("")}</select></label><label><span>Mute</span><input id="sample-mute" type="checkbox" ${slot.muted ? "checked" : ""}></label></div><div class="panel-controls"><button id="sample-sync">Match focused deck tempo</button><button id="sample-reset-pitch">Reset pitch</button><button id="sample-apply">Apply</button></div><p class="muted">Gain/volume/mute affect real audio. Pitch (%) changes speed; Key Lock preserves the original pitch using local buffered processing. Speed changes with Key Lock may pause briefly while processing. Play from applies on the next trigger. Output selection routes browser mixer buses, not separate hardware/headphone outputs. File tags remain untouched.</p>`,
         () => {
-          const update = () => {
+          const update = (event) => {
             slot.volume = Number($("#sample-volume").value);
-            slot.pitch = Math.max(
-              -50,
-              Math.min(100, Number($("#sample-pitch").value) || 0),
-            );
+            const wantedPitch=Math.max(-50,Math.min(100,Number($("#sample-pitch").value)||0));
+            if(!slot.sync)slot.pitch=wantedPitch;
+            else if(event?.target.id==='sample-pitch')void samplerSync.tempo(key,1+wantedPitch/100).catch(error=>{notify(error.message);$("#sample-pitch").value=slot.pitch;});
             slot.keylock = $("#sample-keylock").checked;
             slot.from = $("#sample-from").value;
             slot.muted = $("#sample-mute").checked;
@@ -1121,7 +1138,8 @@ export function createPanels(a) {
             s.samples.forEach((bank,b) => bank.forEach((other,j) => {
               if (other.track === slot.track) {
                 const {rate,keylock,gain} = sampleOptions(other);
-                void engine.updateSample(b * 8 + j,{rate,keylock,gain}).catch(error => notify(error.message));
+                const changes=other.sync?{gain,...(event?.target.id==='sample-keylock'&&other===slot?{keylock}:{})}:{rate,keylock,gain};
+                void engine.updateSample(b * 8 + j,changes).catch(error => notify(error.message));
               }
             }));
             persist();
@@ -1130,7 +1148,7 @@ export function createPanels(a) {
             $("#sample-" + id).oninput = update;
           $("#sample-reset-pitch").onclick = () => {
             $("#sample-pitch").value = 0;
-            update();
+            update({target:$("#sample-pitch")});
           };
           $("#sample-sync").onclick = () => {
             const deck = s.decks[s.focus];
@@ -1138,7 +1156,7 @@ export function createPanels(a) {
               return notify("Both tracks need BPM values.");
             $("#sample-pitch").value =
               ((deck.track.bpm * deck.rate) / track.bpm - 1) * 100;
-            update();
+            update({target:$("#sample-pitch")});
           };
           $("#sample-apply").onclick = () => {
             update();
@@ -2205,6 +2223,7 @@ export function createPanels(a) {
     );
   }
   function tick() {
+    samplerSync.tick();
     if(s.panel==='fx')updateFXTempo();
     if (s.panel === "flip" && $("#flip-events")) {
       const f = s.flip;
@@ -2238,6 +2257,7 @@ export function createPanels(a) {
   }
 
   return {
+    samplerSync,
     resetTempoAbsolute:deck=>deckMIDI.resetTempoAbsolute(deck),
     open,
     refresh,

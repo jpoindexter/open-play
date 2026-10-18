@@ -1310,7 +1310,15 @@ const trackGain=createTrackGain({state,engine,persist,onChange:(track,value)=>{
     const mode=document.querySelector(`[data-track-gain-mode="${d.index}"]`);if(mode)mode.textContent=autoGainMode(track,state.settings);
   }
 }});
+async function setSamplerTempo(bpm){
+  if(!Number.isFinite(bpm)||bpm<=0)throw Error('Enter a positive shared tempo.');
+  const primary=state.decks.find(d=>d.track&&d.sync&&d.syncRole==='primary')||state.decks.find(d=>d.track&&d.sync);
+  if(primary)await engine.onRateRequest(primary,bpm/primary.track.bpm);
+  else await engine.setSyncedRates([],{participants:panels.samplerSync.participants(bpm)});
+  panels.samplerSync.rememberTempo(bpm);
+}
 const api = {
+  setSamplerTempo,
   trackGain,
   setMasterOutput,
   setMasterVolume,
@@ -2022,7 +2030,7 @@ engine.onRateRequest = async (deck,rate) => {
         if(!Number.isFinite(bpm)||bpm<=0)throw Error('Set a valid BPM before changing synced tempo.');
         const changes=state.decks.filter(d=>d.sync&&d.track).map(d=>({deck:d,rate:bpm/d.track.bpm}));
         if(changes.some(x=>!Number.isFinite(x.rate)||x.rate<.25||x.rate>4))throw Error('Matched tempo is outside a synced deck transport range.');
-        await slicer.changeRates(changes,()=>engine.setSyncedRates(changes));
+        await slicer.changeRates(changes,()=>engine.setSyncedRates(changes,{participants:panels.samplerSync.participants(bpm)}));
       }catch(error){if(smart)smartSync.restoreTempo(priorTempo);throw error;}
     }
   }).finally(()=>{if(syncTempoQueue===queue)syncTempoQueue=null;});
