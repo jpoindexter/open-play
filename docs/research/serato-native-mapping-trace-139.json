@@ -184,6 +184,12 @@
       "sha256": "7ad761ec0447e2574d2bfc85cf5b662aec843eb61b5f6a698e72ca5d99a0bb30",
       "bytes": 8090,
       "evidenceFolder": "ghidra-json-resource"
+    },
+    {
+      "address": "1013940e0",
+      "sha256": "d615b0f8efee5cb9c83001594d370d23b71c74115e1aa4359180b5bfcc6a9138",
+      "bytes": 21145,
+      "evidenceFolder": "ghidra-json-resource-reader"
     }
   ],
   "fullAnalysisAttempt": {
@@ -245,8 +251,11 @@
     "compilerFunctionStartsParsed": 164990,
     "activeDeviceMappingLoader": "0x100976ddc",
     "observedMappingResourceKey": "midi_mapping",
-    "nextResourceLoaderTrace": "0x1013940e0",
-    "resourceDataStatus": "unrecovered; no full-factory or HID/lighting parity claim"
+    "nextResourceLoaderTrace": "Follow official/default native userio/resource selection separately from JSON user-file imports.",
+    "resourceDataStatus": "unrecovered; no full-factory or HID/lighting parity claim",
+    "mappingResourceReader": "0x1013940e0",
+    "readerObservedDiagnostic": "Loading a user file of type",
+    "jsonFactoryProvenance": "NOT established. This caller path explicitly describes user-file loading; it must not be promoted to default factory mapping recovery."
   },
   "officialFactoryMappingsRecovered": 0,
   "fullParityAccepted": false

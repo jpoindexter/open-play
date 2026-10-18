@@ -115,3 +115,6 @@ Frozen source2a334132ca1a423029fceb8aa3e39953655df525/ASARfa4b2c4629a0f313cefc61
 
 Live continuation: right fader raised→Jason confirms RCA sound returns/deck2runs. Native screenshot shows raised level/rightCUEblue; AX range still0 is stale, not exact volume evidence. Pending rightTEMPOphysical move/BPM+speed response. No map/code/package change. Receipt controller-physical-20261018-results.json; full flags unchanged.
 
+---
+
+End of verbatim Trello description. Trailing source whitespace above is retained intentionally.
