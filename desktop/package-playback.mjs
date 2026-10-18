@@ -39,7 +39,7 @@ await put('assets/docs/prototype/TRY_CURRENT_DESKTOP.md',`# Packaged desktop tes
 
 Private local test from source ${sourceCommit}. This package includes the approved interface and current playback fixes; packaging alone does not establish sound, hardware response or full Serato parity.
 
-Use the normal app controls. Playback versions share the saved profile and port ${port}; close one before opening another. Output starts muted. When ready, select the named Hercules in Devices, apply four channels (master1/2, cue3/4), and test one action at a time. No timed controller capture runs while Jason is away.
+Use the normal app controls. Playback versions share the saved profile and port ${port}; close one before opening another. After launch, inspect Devices; routing starts at system-default stereo and is not restored automatically. When ready, select the named Hercules in Devices, apply four channels (master1/2, cue3/4), and test one action at a time. No timed controller capture runs while Jason is away.
 
 The workspace docs/prototype/TRY_CURRENT_DESKTOP.md and desktop-${version}-playback-observation.json will record subsequent native observations. Bundled research is a frozen source snapshot. Previous versions and profile backups remain available.
 `);

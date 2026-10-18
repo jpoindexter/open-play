@@ -1,23 +1,17 @@
-# Current desktop test: Open Play Playback Test0.1.14
+# Current desktop test: Open Play Playback Test 0.1.15
 
-Open **Start Open Play Current Test.command** or **Start Open Play Playback Test.command**. The0.1.14window is already open with After Hours124BPM and Glass Transit126BPM at00:00.0, both stopped. Local desktop testing is approved; full Serato parity remains open.
+Open **Start Open Play Current Test.command** or **Start Open Play Playback Test.command**. The 0.1.15 window is already open. After Hours (124 BPM) and Glass Transit (126 BPM) are at 00:00, stopped, with Sync and keylock off. Master is zero, channel levels 0.8 and crossfader centered.
 
-**First hands-on action when you return:** press the left Hercules Play button once, confirm deck1 starts and RCA speakers play, then stop with the same button. We will check one action at a time. No timed capture runs while you are away.
+**When you return:** press the left Hercules Play button once, confirm deck 1 starts and the RCA speakers play, then stop with the same button. We will check one action at a time. No timed controller capture runs while you are away.
 
-The updated272-entry v9 starter is installed on the enumerated Hercules input. Its native export survived one quit/relaunch byte-identically. These are candidate assignments; physical response is still unverified for most controls. See the [hardware semantics ledger](../research/HERCULES_MIDI_SEMANTICS_20261017.md) for inferred bytes and unresolved behavior. No hardware output/LED/SysEx/firmware changes.
+The 272-entry v9 mapping export is byte-identical to the saved 0.1.14 export. Hercules is enumerated as connected. Most physical assignments still need your hands-on test; enumeration/export are not proof of knob response. No hardware output, LED, SysEx or firmware changes.
 
-Current explicit route: **Hercules master1/2, headphones3/4; CueMix0%,CueVolume10%,muteoff**. Deck levels0.8, crossfadercenter, Sync off, Mastermeter0. After restart: Devices → Refresh audio outputs → namedHercules → Use selected output → Four channels → Apply channels. Output selection deliberately returns to stereo before pair application. Keep controller/headphones/speakers connected for the hands-on test.
+Current explicit route: **Hercules master 1/2, headphones 3/4; Cue Mix 0%, Cue Volume 10%, mute off**. After reload/restart, routing returns to system-default stereo. Devices → Refresh audio outputs → named Hercules → Use selected output → Four channels → Apply channels. Keep the controller, headphones and speakers connected for the hands-on test. The frozen bundled guide's sentence “Output starts muted” is inaccurate; actual startup Devices reports system-default stereo without MUTED. This workspace guide corrects it.
 
-Executed on this exact package: normal GUI Play starts each deck, Sync shows both124BPM/Primary–Secondary, stop returns0playing. Channel levels were0 during that check; it does not prove sound or audible beat alignment. All27declared served modules match actual package/disk hashes with no-store; actual ASAR identity checked. Other browser receipts remain browser evidence. Current physical mixing, imported MP3 quality, latency and full parity remain open.
+Executed on this exact package through its normal GUI: both keylocks, secondary key+2, two-deck Play and Sync at 124 BPM; live secondary key+3 and primary tempo+8% transfer both displayed tempos to 133.9 BPM. Master remains nonzero. Both decks then stop. Normal REC/Save exports a whole 46.38-second, 602103-byte stereo Opus capture with finite/nonzero PCM (48 kHz decode; engine is 44.1 kHz). This checks native audio generation/export, not audible speaker output, pitch/phase accuracy or physical controls. Browser numerical audio measurements remain separate evidence.
 
-This version includes recent loop/Sync/warped-loop keylock/tempo-display and mouse Play changes without replacing the interface. Package source **d0949ed2a7ef8d8c1c655c588cea4772934e470e**. Bundled docs are that frozen source snapshot; this workspace guide and runtime receipt provide the newer observation.
+All 29 declared served modules match actual ASAR hashes with no-store. Source: **02ddc7586476e45e7e40a6cccb30fa40ca8a3639**. ASAR: **7430617a44d7a23ff25e41342cf231d35397309ef2bc093a1ff962d25fa1fbf3**. Includes playback fixes 100–102; interface retained. Full Serato parity remains open.
 
-0.1.13 remains available through **Start Open Play Playback Test 0.1.13.command**; see its [historical guide](TRY_PLAYBACK_DESKTOP_0.1.13.md). Earlier versions remain too. Close the current test before launching an older playback test: they share profile/port18775. Pre-switch profile backup retained under local-evidence/profile-backups/playback-before-0.1.14/.
+Previous 0.1.14 remains available with **Start Open Play Playback Test 0.1.14.command** and its [historical guide](TRY_PLAYBACK_DESKTOP_0.1.14.md). Earlier versions remain too. Close one playback test before opening another; they share the profile/port 18775. Stable pre-switch profile backup: local-evidence/profile-backups/playback-before-0.1.15/.
 
-[Native observations](desktop-0.1.14-playback-observation.json) · [Package receipt](desktop-0.1.14-playback-package.json) · [Full plan](../../FULL_BUILD_PLAN.md) · [Claude handoff](../../handoffs/current.md).
-
-Browser-source plan100 adds queued keylock Play and neutral-pitch corrections after this package. They are not included in0.1.14; its native results retain the scope above. The prepared first hands-on test uses ordinary playback with keylock off.
-
-Browser-source plan101 adds resampled offline pitch and continuous loop key-change preparation. These changes are also outside this frozen0.1.14package; normal live shifted-pitch accuracy and preparation response time remain open.
-
-Browser-source plan102 adds bounded live resampled keylock with recorded key/tempo outcomes. It is not in this frozen0.1.14build; the prepared controller test still uses the package and scope above.
+[Native observations](desktop-0.1.15-playback-observation.json) · [Package receipt](desktop-0.1.15-playback-package.json) · [Full plan](../../FULL_BUILD_PLAN.md) · [Claude handoff](../../handoffs/current.md).
