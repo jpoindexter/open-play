@@ -1,0 +1,106 @@
+{
+  "before": {
+    "passed": false,
+    "scope": "Slicer beat-domain/owner integration with controlled transport collaborator; actual browser/audio verified separately.",
+    "tests": [
+      {
+        "name": "Warped eight-beat domain and pad4 half-slice use continuous beat coordinates",
+        "passed": true
+      },
+      {
+        "name": "Quantization is a fraction of the selected slice, not always one base beat",
+        "passed": true
+      },
+      {
+        "name": "Fixed domain survives cursor movement and pad release",
+        "passed": true
+      },
+      {
+        "name": "Release before preparation finishes returns a paused audition without resurrection",
+        "passed": true
+      },
+      {
+        "name": "Stop/cancel invalidates pending preparation and late release",
+        "passed": true
+      },
+      {
+        "name": "Older overlapping-pad release cannot terminate the newer owner",
+        "passed": true
+      },
+      {
+        "name": "A newer shifting-domain pad uses the advancing root clock while an older slice loops",
+        "passed": true
+      },
+      {
+        "name": "Expired backing release retires at source End and delivers natural end once",
+        "passed": false,
+        "error": "The expression evaluated to a falsy value:\n\n  assert(!f.d.playing&&!f.d.processing&&!f.d.loop)\n"
+      },
+      {
+        "name": "Preparation crossing the endpoint waits for the backing clock before ending",
+        "passed": false,
+        "error": "The expression evaluated to a falsy value:\n\n  assert(!f.d.playing)\n"
+      },
+      {
+        "name": "Cancellation while endpoint preparation waits cannot end a newer transport",
+        "passed": false,
+        "error": "6.8 != 2"
+      },
+      {
+        "name": "Natural-end callback may start repeat/replacement without a stale post-callback pause",
+        "passed": false,
+        "error": "Expected values to be strictly equal:\n\n0 !== 1\n"
+      }
+    ]
+  },
+  "after": {
+    "passed": true,
+    "scope": "Slicer beat-domain/owner integration with controlled transport collaborator; actual browser/audio verified separately.",
+    "tests": [
+      {
+        "name": "Warped eight-beat domain and pad4 half-slice use continuous beat coordinates",
+        "passed": true
+      },
+      {
+        "name": "Quantization is a fraction of the selected slice, not always one base beat",
+        "passed": true
+      },
+      {
+        "name": "Fixed domain survives cursor movement and pad release",
+        "passed": true
+      },
+      {
+        "name": "Release before preparation finishes returns a paused audition without resurrection",
+        "passed": true
+      },
+      {
+        "name": "Stop/cancel invalidates pending preparation and late release",
+        "passed": true
+      },
+      {
+        "name": "Older overlapping-pad release cannot terminate the newer owner",
+        "passed": true
+      },
+      {
+        "name": "A newer shifting-domain pad uses the advancing root clock while an older slice loops",
+        "passed": true
+      },
+      {
+        "name": "Expired backing release retires at source End and delivers natural end once",
+        "passed": true
+      },
+      {
+        "name": "Preparation crossing the endpoint waits for the backing clock before ending",
+        "passed": true
+      },
+      {
+        "name": "Cancellation while endpoint preparation waits cannot end a newer transport",
+        "passed": true
+      },
+      {
+        "name": "Natural-end callback may start repeat/replacement without a stale post-callback pause",
+        "passed": true
+      }
+    ]
+  }
+}

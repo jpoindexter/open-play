@@ -19,6 +19,18 @@ export function createSlicer({engine,render=()=>{},notify=()=>{}}){
   h.token=engine.startTokens.get(h.d.index);await pending;return owns(h);
  }
  function fail(h,error){if(owns(h)){restoreFields(h);engine.pause(h.d);forget(h);render();}if(error.name!=='AbortError')notify(error.message);return false;}
+ const expired=(h,position)=>h.playing&&!h.prior.on&&(h.d.reverse?position<=0:position>=h.track.duration);
+ async function finishBackground(h){
+  // A prepared future output may cross the endpoint before the current clock
+  // does. Keep the old owner until that boundary; Stop/Load can still cancel.
+  while(owns(h)&&!expired(h,h.clock(engine.ctx.currentTime)))await new Promise(resolve=>setTimeout(resolve,10));
+  if(!owns(h))return false;
+  const d=h.d;restoreFields(h);engine.pause(d,{preserveStemExit:true});d.position=d.reverse?0:h.track.duration;forget(h);
+  // Forget the hold before the existing callback can repeat or replace track.
+  try{await engine.onEnd?.(d);return true;}
+  catch(error){if(error.name!=='AbortError')notify(error.message);return false;}
+  finally{render();}
+ }
  async function press(key,d,index){
   if(!d.track||held.has(key))return false;
   let h;
@@ -37,10 +49,21 @@ export function createSlicer({engine,render=()=>{},notify=()=>{}}){
  async function release(key){
   const h=held.get(key);if(!h)return false;held.delete(key);
   if(!owns(h)){if(active.get(h.d.index)===h)forget(h);return false;}
+  let ending;
   try{
-   const current=await transition(h,h.prior,h.clock,h.playing);
-   if(current){forget(h);render();}return current;
-  }catch(error){return fail(h,error);}
+   if(expired(h,h.clock(engine.ctx.currentTime)))return finishBackground(h);
+   const positionAt=at=>{const position=h.clock(at);if(expired(h,position))throw Object.assign(Error('Slicer background reached its endpoint.'),{name:'SlicerEndedError'});return position;};
+   const pending=transition(h,h.prior,positionAt,h.playing);
+   // Slow preparation must not keep the temporary slice playing past the
+   // backing endpoint. Successful handoff/Stop/Load invalidates this watcher.
+   if(h.playing&&!h.prior.on)ending=finishBackground(h);
+   const current=await pending;
+   if(current){forget(h);render();return true;}return ending?await ending:false;
+  }catch(error){
+   if(error.name==='SlicerEndedError')return ending||finishBackground(h);
+   if(error.name==='AbortError'&&ending)return ending;
+   return fail(h,error);
+  }
  }
  async function domainLoop(d,on){
   if(!d.track)return false;
