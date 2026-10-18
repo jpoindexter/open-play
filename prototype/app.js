@@ -1,3 +1,4 @@
+import {normalizedMasterDB} from './master-output-kernel.js';
 import {mixerSettingsFromPreferences} from './mixer-curves.js';
 import {createDeckTapTempo} from './deck-tap-tempo.js';
 import {createInstantDouble} from './instant-double.js';
@@ -60,7 +61,7 @@ const state = {
     { id: "peak", name: "Peak time", tracks: ["demo-3", "demo-5"] },
     { id: "close", name: "Closing", tracks: ["demo-7"] },
   ],
-  settings: { ...defaultSettings(), ...saved.settings },
+  settings: { "Master Output Level":0, ...defaultSettings(), ...saved.settings },
   selected: "demo-0",
   crate: "all",
   search: "",
@@ -1247,7 +1248,13 @@ function reset() {
 const deckTapTempo=createDeckTapTempo({engine,persist,render:()=>{renderDecks();renderTracks();},notify});
 const instantDouble=createInstantDouble({state,engine,load,render:renderDecks,notify});
 const jogBend=createJogBend({engine,onError:error=>notify(error.message)});
+function setMasterOutput(value,{save=true}={}){
+  const db=engine.setMasterDB(value);state.settings["Master Output Level"]=db;
+  $("#master-level").value=db;$("#master-level-value").textContent=`${db.toFixed(1)}dB`;
+  if(save)persist();return db;
+}
 const api = {
+  setMasterOutput,
   renderMixer,
   state,
   engine,
@@ -1340,6 +1347,8 @@ const slicer = createSlicer({ engine, render: renderDecks, notify });
 const pitchPlay = createPitchPlay({engine,render:renderDecks,persist,notify,quantized});
 api.pitchPlay=pitchPlay;
 const panels = createPanels(api);
+setMasterOutput(normalizedMasterDB(state.settings["Master Output Level"]),{save:false});
+$("#master-level").addEventListener("click",e=>{if(e.ctrlKey||e.metaKey||e.altKey){e.preventDefault();setMasterOutput(e.altKey?3:0);}});
 document.addEventListener("click", async (e) => {
   const el = e.target.closest("button,[data-track],[data-focus]");
   if (!el) return;
@@ -1422,6 +1431,7 @@ document.addEventListener("input", (e) => {
     engine.mix(Number(i), k, e.target.value);
   }
   if (e.target.id === "crossfader") engine.setCross(Number(e.target.value));
+  if(e.target.id==="master-level")setMasterOutput(Number(e.target.value));
 });
 document.addEventListener("change", (e) => {
   if(e.target.dataset.crossAssign!==undefined){
@@ -1863,7 +1873,13 @@ function tick() {
     if (platter && !state.settings["Reduced Motion"])
       platter.style.setProperty("--rotation", `${p * (state.settings["Virtual Deck Speed"] === "33 RPM" ? 198 : 270)}deg`);
   }
-  $("#master-meter").value = engine.meter();
+  const master=engine.masterSnapshot(),meter=$("#master-meter"),peak=$("#master-peak-value"),limit=$("#master-limit");
+  meter.value=Math.max(-60,Math.min(9,master.displayDB));
+  const peakText=master.displayDB<=-100?"−∞":`${master.displayDB.toFixed(1)}dB`;
+  if(peak.textContent!==peakText)peak.textContent=peakText;
+  meter.setAttribute("aria-valuetext",`${peakText} relative to nominal; stereo sample peak`);
+  limit.textContent=master.limiting?"LIMIT":"—";limit.classList.toggle("limiting",master.limiting);
+  limit.setAttribute("aria-label",master.limiting?"Master limiter active":"Master limiter idle");
   $("#audio-status").textContent =
     `${state.decks.filter((d) => d.playing).length} decks playing · ${engine.ctx?.sampleRate || "—"} Hz audio engine · outputs in Devices`;
   engine.updateFXBPMs(state.decks.map(deck => deckBPM(deck)??120));

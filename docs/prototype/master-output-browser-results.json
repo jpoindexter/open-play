@@ -1,0 +1,721 @@
+{
+  "startedAt": "2026-10-18T04:36:46.753Z",
+  "completed": true,
+  "scope": "Actual app master GUI, synthetic modifier events and MIDI-editor inputs. Independent post-output Float32 witness plus complete recording; independent sample limiter, not exact vendor/true-peak/native/physical acceptance.",
+  "criteria": {
+    "settlingSeconds": 0.9,
+    "captureSeconds": 0.3,
+    "meterDBTolerance": 0.08,
+    "outputRelativeRMSTolerance": 0.02,
+    "maximumLimitedSample": 1.0000001,
+    "limitedRMSRange": [
+      0.65,
+      0.72
+    ]
+  },
+  "cases": [
+    {
+      "name": "neutral gain stereo baseline",
+      "db": 0,
+      "limited": false,
+      "silent": false,
+      "at": 0.8997732426303855,
+      "meter": {
+        "type": "meter",
+        "frames": 2304,
+        "peak": [
+          0.4999731481075287,
+          0.4999731481075287
+        ],
+        "rms": [
+          0.35345405363068205,
+          0.35345405363068205
+        ],
+        "outputPeak": [
+          0.35395388250799115,
+          0.35395388250799115
+        ],
+        "gainReductionDB": 0,
+        "invalid": 0,
+        "at": 1.3583673469387756,
+        "ready": true,
+        "displayDB": -6.021066390954703,
+        "limiting": false,
+        "headroomDB": 3,
+        "gainDB": 0
+      },
+      "ui": {
+        "level": 0,
+        "meter": -6.021066390954703,
+        "warning": "\u2014"
+      },
+      "captures": [
+        {
+          "peak": 0.35395386815071106,
+          "rms": 0.25022745269153984,
+          "frames": 13230,
+          "startFrame": 46848,
+          "sha256": "a0bba56e8d581069d3d892311c42cc98ccab0a7b719dc198d99fdd812eeccb90"
+        },
+        {
+          "peak": 0.35395386815071106,
+          "rms": 0.25022745269153984,
+          "frames": 13230,
+          "startFrame": 46848,
+          "sha256": "ad41b6525f476f8e376be4439f99f0f085a73bf712410fb8c16c49261df4e1c0"
+        }
+      ],
+      "expectedMeterDB": -6.020599913279624,
+      "meterErrorDB": 0.0004664776750784583,
+      "expectedRMS": 0.25029663242522665,
+      "relativeRMSErrors": [
+        0.00027639098863019296,
+        0.00027639098863019296
+      ],
+      "passed": true
+    },
+    {
+      "name": "GUI minus12",
+      "db": -12,
+      "limited": false,
+      "silent": false,
+      "at": 2.1072108843537416,
+      "meter": {
+        "type": "meter",
+        "frames": 2304,
+        "peak": [
+          0.1255875676870346,
+          0.1255875676870346
+        ],
+        "rms": [
+          0.08879356250105892,
+          0.08879356250105892
+        ],
+        "outputPeak": [
+          0.08890918911509373,
+          0.08890918911509373
+        ],
+        "gainReductionDB": 0,
+        "invalid": 0,
+        "at": 2.56,
+        "ready": true,
+        "displayDB": -18.021067013275108,
+        "limiting": false,
+        "headroomDB": 3,
+        "gainDB": -12
+      },
+      "ui": {
+        "level": -12,
+        "meter": -18.021067013275108,
+        "warning": "\u2014"
+      },
+      "captures": [
+        {
+          "peak": 0.08890918642282486,
+          "rms": 0.06285429244207985,
+          "frames": 13230,
+          "startFrame": 100096,
+          "sha256": "72ef8c0809ee128f621e165126e79a2c66125425b0f918171760e3411656bc75"
+        },
+        {
+          "peak": 0.08890918642282486,
+          "rms": 0.06285429244207985,
+          "frames": 13230,
+          "startFrame": 100096,
+          "sha256": "b652047938f8fdc9876ab45ec26ceafb7a68885120225fb5a153582ae081d2b1"
+        }
+      ],
+      "expectedMeterDB": -18.020599913279625,
+      "meterErrorDB": 0.0004670999954825561,
+      "expectedRMS": 0.06287167148414677,
+      "relativeRMSErrors": [
+        0.00027642086899659635,
+        0.00027642086899659635
+      ],
+      "passed": true
+    },
+    {
+      "name": "GUI plus6",
+      "db": 6,
+      "limited": false,
+      "silent": false,
+      "at": 3.3088435374149663,
+      "meter": {
+        "type": "meter",
+        "frames": 2304,
+        "peak": [
+          0.9975775480270386,
+          0.9975775480270386
+        ],
+        "rms": [
+          0.70510052070331,
+          0.70510052070331
+        ],
+        "outputPeak": [
+          0.7062308197220069,
+          0.7062308197220069
+        ],
+        "gainReductionDB": 0,
+        "invalid": 0,
+        "at": 3.7616326530612243,
+        "ready": true,
+        "displayDB": -0.02106667731224804,
+        "limiting": false,
+        "headroomDB": 3,
+        "gainDB": 6
+      },
+      "ui": {
+        "level": 6,
+        "meter": -0.02106667731224804,
+        "warning": "\u2014"
+      },
+      "captures": [
+        {
+          "peak": 0.7062308192253113,
+          "rms": 0.4992693950782966,
+          "frames": 13230,
+          "startFrame": 153088,
+          "sha256": "65a7da9b3e6cc06e6db184d5b349400f40e6676f7816ea72c7bd91551889b08e"
+        },
+        {
+          "peak": 0.7062308192253113,
+          "rms": 0.4992693950782966,
+          "frames": 13230,
+          "startFrame": 153088,
+          "sha256": "43b5a013180768bd54112614fafbee4c80e026453bfcfd46f96934851d83c7b8"
+        }
+      ],
+      "expectedMeterDB": -0.020599913279624286,
+      "meterErrorDB": 0.0004667640326237524,
+      "expectedRMS": 0.49940743824167244,
+      "relativeRMSErrors": [
+        0.00027641391137844806,
+        0.00027641391137844806
+      ],
+      "passed": true
+    },
+    {
+      "name": "GUI plus12 limiting",
+      "db": 12,
+      "limited": true,
+      "silent": false,
+      "at": 4.510476190476191,
+      "meter": {
+        "type": "meter",
+        "frames": 2304,
+        "peak": [
+          1.9904289245605469,
+          1.9904289245605469
+        ],
+        "rms": [
+          1.4074827249387094,
+          1.4074827249387094
+        ],
+        "outputPeak": [
+          1,
+          1
+        ],
+        "gainReductionDB": 2.9789334829412195,
+        "invalid": 0,
+        "at": 4.963265306122449,
+        "ready": true,
+        "displayDB": 5.97893348294122,
+        "limiting": true,
+        "headroomDB": 3,
+        "gainDB": 12
+      },
+      "ui": {
+        "level": 12,
+        "meter": 5.97893348294122,
+        "warning": "LIMIT"
+      },
+      "captures": [
+        {
+          "peak": 1,
+          "rms": 0.7101085978438739,
+          "frames": 13230,
+          "startFrame": 206080,
+          "sha256": "c1c7a72f9b30ab02147774adf4852c1f929a2e952ce616f2c6596245fc981151"
+        },
+        {
+          "peak": 1,
+          "rms": 0.7101085978438739,
+          "frames": 13230,
+          "startFrame": 206080,
+          "sha256": "eef8a9c0aa467a24e4756eee57410c5e6616a39f59989262c251087510933b49"
+        }
+      ],
+      "expectedMeterDB": 5.979400086720376,
+      "meterErrorDB": 0.0004666037791558608,
+      "passed": true
+    },
+    {
+      "name": "Control-click resets0",
+      "db": 0,
+      "limited": false,
+      "silent": false,
+      "at": 5.712108843537415,
+      "meter": {
+        "type": "meter",
+        "frames": 2304,
+        "peak": [
+          0.4999731481075287,
+          0.4999731481075287
+        ],
+        "rms": [
+          0.35336171643003783,
+          0.35336171643003783
+        ],
+        "outputPeak": [
+          0.35395388250032517,
+          0.35395388250032517
+        ],
+        "gainReductionDB": 3.24474012969511e-10,
+        "invalid": 0,
+        "at": 6.164897959183674,
+        "ready": true,
+        "displayDB": -6.021066390954703,
+        "limiting": false,
+        "headroomDB": 3,
+        "gainDB": 0
+      },
+      "ui": {
+        "level": 0,
+        "meter": -6.021066390954703,
+        "warning": "\u2014"
+      },
+      "captures": [
+        {
+          "peak": 0.35395386815071106,
+          "rms": 0.25022745256727785,
+          "frames": 13230,
+          "startFrame": 259072,
+          "sha256": "3561f3d238bf41f66f9b9060e96321aa289bf03e8743cdb5398be730192c0ec5"
+        },
+        {
+          "peak": 0.35395386815071106,
+          "rms": 0.25022745256727785,
+          "frames": 13230,
+          "startFrame": 259072,
+          "sha256": "1c9991410315a88a4d5b69de4e6a0778011c6d8e008f8eae2664e1548c9e3c18"
+        }
+      ],
+      "expectedMeterDB": -6.020599913279624,
+      "meterErrorDB": 0.0004664776750784583,
+      "expectedRMS": 0.25029663242522665,
+      "relativeRMSErrors": [
+        0.00027639148508906697,
+        0.00027639148508906697
+      ],
+      "passed": true
+    },
+    {
+      "name": "Alt-click sets3",
+      "db": 3,
+      "limited": false,
+      "silent": false,
+      "at": 6.9137414965986395,
+      "meter": {
+        "type": "meter",
+        "frames": 2304,
+        "peak": [
+          0.706230878829956,
+          0.706230878829956
+        ],
+        "rms": [
+          0.4993900555307582,
+          0.4993900555307582
+        ],
+        "outputPeak": [
+          0.49997317346951115,
+          0.49997317346951115
+        ],
+        "gainReductionDB": 1.0626888681417873e-12,
+        "invalid": 0,
+        "at": 7.366530612244898,
+        "ready": true,
+        "displayDB": -3.0210659503472277,
+        "limiting": false,
+        "headroomDB": 3,
+        "gainDB": 3
+      },
+      "ui": {
+        "level": 3,
+        "meter": -3.0210659503472277,
+        "warning": "\u2014"
+      },
+      "captures": [
+        {
+          "peak": 0.4999731779098511,
+          "rms": 0.353455679810538,
+          "frames": 13230,
+          "startFrame": 312064,
+          "sha256": "bdf0df3be8932b6c366500486765d98f3181d195676ffe56f632bd24a7c3c634"
+        },
+        {
+          "peak": 0.4999731779098511,
+          "rms": 0.353455679810538,
+          "frames": 13230,
+          "startFrame": 312064,
+          "sha256": "b27006d979e42889029217f80bd251d9f171cbbc26a3f88f76eb5f493c2c1f59"
+        }
+      ],
+      "expectedMeterDB": -3.0205999132796233,
+      "meterErrorDB": 0.0004660370676043968,
+      "expectedRMS": 0.35355339059327373,
+      "relativeRMSErrors": [
+        0.0002763678282698967,
+        0.0002763678282698967
+      ],
+      "passed": true
+    },
+    {
+      "name": "MIDI maximum12 limiting",
+      "db": 12,
+      "limited": true,
+      "silent": false,
+      "at": 8.144399092970522,
+      "meter": {
+        "type": "meter",
+        "frames": 2304,
+        "peak": [
+          1.9904289245605469,
+          1.9904289245605469
+        ],
+        "rms": [
+          1.4068798618634326,
+          1.4068798618634326
+        ],
+        "outputPeak": [
+          1,
+          1
+        ],
+        "gainReductionDB": 2.9789334829412195,
+        "invalid": 0,
+        "at": 8.568163265306122,
+        "ready": true,
+        "displayDB": 5.97893348294122,
+        "limiting": true,
+        "headroomDB": 3,
+        "gainDB": 12
+      },
+      "ui": {
+        "level": 12,
+        "meter": 5.97893348294122,
+        "warning": "LIMIT"
+      },
+      "captures": [
+        {
+          "peak": 1,
+          "rms": 0.7101085987683372,
+          "frames": 13230,
+          "startFrame": 366336,
+          "sha256": "6ebaefe70641a22ef475a518d04fe93b779354dcfbdb10a3402c545c26fd06cd"
+        },
+        {
+          "peak": 1,
+          "rms": 0.7101085987683372,
+          "frames": 13230,
+          "startFrame": 366336,
+          "sha256": "958c13922f5b0e737739572fa93cb3b2ef444c5a4a46f2e001f2dbe944ca221c"
+        }
+      ],
+      "expectedMeterDB": 5.979400086720376,
+      "meterErrorDB": 0.0004666037791558608,
+      "passed": true
+    },
+    {
+      "name": "MIDI center0",
+      "db": 0,
+      "limited": false,
+      "silent": false,
+      "at": 9.351836734693878,
+      "meter": {
+        "type": "meter",
+        "frames": 2304,
+        "peak": [
+          0.4999731481075287,
+          0.4999731481075287
+        ],
+        "rms": [
+          0.35348732344352224,
+          0.35348732344352224
+        ],
+        "outputPeak": [
+          0.35395388249282667,
+          0.35395388249282667
+        ],
+        "gainReductionDB": 5.819687331020056e-10,
+        "invalid": 0,
+        "at": 9.769795918367347,
+        "ready": true,
+        "displayDB": -6.021066390954703,
+        "limiting": false,
+        "headroomDB": 3,
+        "gainDB": 0
+      },
+      "ui": {
+        "level": 0,
+        "meter": -6.021066390954703,
+        "warning": "\u2014"
+      },
+      "captures": [
+        {
+          "peak": 0.35395386815071106,
+          "rms": 0.25022745228466164,
+          "frames": 13230,
+          "startFrame": 419584,
+          "sha256": "a850de0a133db2683ad738a3fed4acba47e1c2f2367098e3bc3daef814820fee"
+        },
+        {
+          "peak": 0.35395386815071106,
+          "rms": 0.25022745228466164,
+          "frames": 13230,
+          "startFrame": 419584,
+          "sha256": "2d3fd5b5a8c53bb9864532c3aaae0689509f5392014a981acae7d35d4e05eb39"
+        }
+      ],
+      "expectedMeterDB": -6.020599913279624,
+      "meterErrorDB": 0.0004664776750784583,
+      "expectedRMS": 0.25029663242522665,
+      "relativeRMSErrors": [
+        0.0002763926142141937,
+        0.0002763926142141937
+      ],
+      "passed": true
+    },
+    {
+      "name": "MIDI minimum minus12",
+      "db": -12,
+      "limited": false,
+      "silent": false,
+      "at": 10.553469387755102,
+      "meter": {
+        "type": "meter",
+        "frames": 2304,
+        "peak": [
+          0.1255875676870346,
+          0.1255875676870346
+        ],
+        "rms": [
+          0.0887853253335382,
+          0.0887853253335382
+        ],
+        "outputPeak": [
+          0.08890918911508285,
+          0.08890918911508285
+        ],
+        "gainReductionDB": 1.0626888681417873e-12,
+        "invalid": 0,
+        "at": 10.971428571428572,
+        "ready": true,
+        "displayDB": -18.021067013275108,
+        "limiting": false,
+        "headroomDB": 3,
+        "gainDB": -12
+      },
+      "ui": {
+        "level": -12,
+        "meter": -18.021067013275108,
+        "warning": "\u2014"
+      },
+      "captures": [
+        {
+          "peak": 0.08890918642282486,
+          "rms": 0.06285429248814083,
+          "frames": 13230,
+          "startFrame": 472576,
+          "sha256": "9caeb20cb6d006a0bc61ab8b54d43a3ed9e97f7fd5e5d5ead2ff56274bb996b1"
+        },
+        {
+          "peak": 0.08890918642282486,
+          "rms": 0.06285429248814083,
+          "frames": 13230,
+          "startFrame": 472576,
+          "sha256": "a95db97dbfec249a3126a705be05eabd02faa488213408afb4850ca5beee5689"
+        }
+      ],
+      "expectedMeterDB": -18.020599913279625,
+      "meterErrorDB": 0.0004670999954825561,
+      "expectedRMS": 0.06287167148414677,
+      "relativeRMSErrors": [
+        0.0002764201363777419,
+        0.0002764201363777419
+      ],
+      "passed": true
+    },
+    {
+      "name": "MIDI relative plus tenth",
+      "db": -11.9,
+      "limited": false,
+      "silent": false,
+      "at": 11.755102040816327,
+      "meter": {
+        "type": "meter",
+        "frames": 2304,
+        "peak": [
+          0.12704181671142578,
+          0.12704181671142578
+        ],
+        "rms": [
+          0.08980169014557808,
+          0.08980169014557808
+        ],
+        "outputPeak": [
+          0.0899387185813452,
+          0.0899387185813452
+        ],
+        "gainReductionDB": 1.0626888681417873e-12,
+        "invalid": 0,
+        "at": 12.173061224489796,
+        "ready": true,
+        "displayDB": -17.921066088310283,
+        "limiting": false,
+        "headroomDB": 3,
+        "gainDB": -11.9
+      },
+      "ui": {
+        "level": -11.9,
+        "meter": -17.921066088310283,
+        "warning": "\u2014"
+      },
+      "captures": [
+        {
+          "peak": 0.08993871510028839,
+          "rms": 0.06358211565586415,
+          "frames": 13230,
+          "startFrame": 525568,
+          "sha256": "e404dca70ec0f6bdbb60507df776eb0466bb0810ba90366b02ac48a382f8b598"
+        },
+        {
+          "peak": 0.08993871510028839,
+          "rms": 0.06358211565586415,
+          "frames": 13230,
+          "startFrame": 525568,
+          "sha256": "d41499f0adeb4cb0b1a27afb4234f59c9452b590865c4f982a89c8fc13c4f7fc"
+        }
+      ],
+      "expectedMeterDB": -17.920599913279624,
+      "meterErrorDB": 0.0004661750306595991,
+      "expectedRMS": 0.06359969112834081,
+      "relativeRMSErrors": [
+        0.00027634524892883316,
+        0.00027634524892883316
+      ],
+      "passed": true
+    },
+    {
+      "name": "pause clears output and meter",
+      "db": -11.9,
+      "limited": false,
+      "silent": true,
+      "at": 12.962539682539683,
+      "meter": {
+        "type": "meter",
+        "frames": 2304,
+        "peak": [
+          0,
+          0
+        ],
+        "rms": [
+          0,
+          0
+        ],
+        "outputPeak": [
+          0,
+          0
+        ],
+        "gainReductionDB": 1.0626888681417873e-12,
+        "invalid": 0,
+        "at": 13.426938775510203,
+        "ready": true,
+        "displayDB": -120,
+        "limiting": false,
+        "headroomDB": 3,
+        "gainDB": -11.9
+      },
+      "ui": {
+        "level": -11.9,
+        "meter": -60,
+        "warning": "\u2014"
+      },
+      "captures": [
+        {
+          "peak": 0,
+          "rms": 0,
+          "frames": 13230,
+          "startFrame": 578816,
+          "sha256": "9d55c9c2f49808c72a9d28e4f661bae87b1ed419741fa38e5ffeff9648f33d7d"
+        },
+        {
+          "peak": 0,
+          "rms": 0,
+          "frames": 13230,
+          "startFrame": 578816,
+          "sha256": "9d55c9c2f49808c72a9d28e4f661bae87b1ed419741fa38e5ffeff9648f33d7d"
+        }
+      ],
+      "passed": true
+    }
+  ],
+  "errors": [],
+  "sourceBefore": {
+    "index.html": "ea7ed4b0851f31ef18ea5928bbd0f34fcf146a330e8a150c2459a36f0d899bb3",
+    "styles.css": "809789307480360fe1117520fda6cbeca163b7beb1430ceb1b1c3131739b224a",
+    "app.js": "843b922a3523ad3bc81ab956e5edf478e5427f648714a511229d06e05a327911",
+    "engine.js": "23fb6d01d7e6ea568dc0330cc213609f1bff3725ee864113854cb41713c0c7e7",
+    "panels.js": "0e3640dde1fe417a71d172049a3d599871a992af3b1ce03be8cea6084130ade8",
+    "master-output.js": "385d9b980fc3dc0b94f89793afdac05cf9cb8dca06a34d98a89e7598ded94b06",
+    "master-output-kernel.js": "026ff69ebb81864bef923067554e9de0e60847090713f5cf2b35e0b2ce7981ed",
+    "master-output-worklet.js": "885aef6a3a3f4e0a079c02072c7e27f4510dac7f0133b20a407d5c5bbd6956ae",
+    "fx-tempo-capture-worklet.js": "1ffd09ad071f8dd2dca8b745ca8f9e1182e515eb32c42340bf5ff0a035e9b8b9",
+    "master-output-harness.js": "16376798a4ab97cdc68955ce83cd5d42ca5ec808ef1c2b8bf91b043de96fac02"
+  },
+  "recordStart": 0.16253968253968254,
+  "savedDB": 3,
+  "recording": {
+    "bytes": 201344,
+    "format": "audio/webm;codecs=opus",
+    "sha256": "4d6f16dedae8fd6088406197ddb54b436c8fd0e49e2d4ca1706162821af33040"
+  },
+  "decoded": {
+    "duration": 13.26,
+    "frames": 584766,
+    "sampleRate": 44100,
+    "channels": 2
+  },
+  "audioPassed": true,
+  "sourceAfter": {
+    "index.html": "ea7ed4b0851f31ef18ea5928bbd0f34fcf146a330e8a150c2459a36f0d899bb3",
+    "styles.css": "809789307480360fe1117520fda6cbeca163b7beb1430ceb1b1c3131739b224a",
+    "app.js": "843b922a3523ad3bc81ab956e5edf478e5427f648714a511229d06e05a327911",
+    "engine.js": "23fb6d01d7e6ea568dc0330cc213609f1bff3725ee864113854cb41713c0c7e7",
+    "panels.js": "0e3640dde1fe417a71d172049a3d599871a992af3b1ce03be8cea6084130ade8",
+    "master-output.js": "385d9b980fc3dc0b94f89793afdac05cf9cb8dca06a34d98a89e7598ded94b06",
+    "master-output-kernel.js": "026ff69ebb81864bef923067554e9de0e60847090713f5cf2b35e0b2ce7981ed",
+    "master-output-worklet.js": "885aef6a3a3f4e0a079c02072c7e27f4510dac7f0133b20a407d5c5bbd6956ae",
+    "fx-tempo-capture-worklet.js": "1ffd09ad071f8dd2dca8b745ca8f9e1182e515eb32c42340bf5ff0a035e9b8b9",
+    "master-output-harness.js": "16376798a4ab97cdc68955ce83cd5d42ca5ec808ef1c2b8bf91b043de96fac02"
+  },
+  "sourceStable": true,
+  "recordedAt": "2026-10-18T04:37:00.251Z",
+  "sourceReload": {
+    "index.html": "ea7ed4b0851f31ef18ea5928bbd0f34fcf146a330e8a150c2459a36f0d899bb3",
+    "styles.css": "809789307480360fe1117520fda6cbeca163b7beb1430ceb1b1c3131739b224a",
+    "app.js": "843b922a3523ad3bc81ab956e5edf478e5427f648714a511229d06e05a327911",
+    "engine.js": "23fb6d01d7e6ea568dc0330cc213609f1bff3725ee864113854cb41713c0c7e7",
+    "panels.js": "0e3640dde1fe417a71d172049a3d599871a992af3b1ce03be8cea6084130ade8",
+    "master-output.js": "385d9b980fc3dc0b94f89793afdac05cf9cb8dca06a34d98a89e7598ded94b06",
+    "master-output-kernel.js": "026ff69ebb81864bef923067554e9de0e60847090713f5cf2b35e0b2ce7981ed",
+    "master-output-worklet.js": "885aef6a3a3f4e0a079c02072c7e27f4510dac7f0133b20a407d5c5bbd6956ae",
+    "fx-tempo-capture-worklet.js": "1ffd09ad071f8dd2dca8b745ca8f9e1182e515eb32c42340bf5ff0a035e9b8b9",
+    "master-output-harness.js": "16376798a4ab97cdc68955ce83cd5d42ca5ec808ef1c2b8bf91b043de96fac02"
+  },
+  "reload": {
+    "db": 3,
+    "preference": 3,
+    "slider": 3,
+    "stopped": true
+  },
+  "finishedAt": "2026-10-18T04:37:30.995Z"
+}

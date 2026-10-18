@@ -19,6 +19,8 @@ import {createReverseCensorPlan} from './reverse-censor-plan.js';
 import {CensorBacking} from './censor-backing.js';
 import {createBeatgrid} from './beatgrid.js';
 import {normalizeMixerSettings,crossfaderGain,upfaderGain,eqBands,normalizeEQBoost,boundedEQGain,rescaleEQGain} from './mixer-curves.js';
+import {createMasterOutput} from './master-output.js';
+import {normalizedMasterDB} from './master-output-kernel.js';
 export class AudioEngine {
   constructor() {
     this.ctx = null;
@@ -30,7 +32,8 @@ export class AudioEngine {
     this.cross = 0;
     this.mixerSettings=normalizeMixerSettings();
     this.eqBoost=6;
-    this.masterLevel = 0.55;
+    this.masterDB=0;
+    this.masterLevel = 1;
     this.monitorSettings=normalizeMonitorSettings();
     this.onEnd = () => {};
     this.onSampleEnd = () => {};
@@ -85,8 +88,10 @@ export class AudioEngine {
     this.analyser = this.ctx.createAnalyser();
     this.analyser.fftSize = 256;
     this.destination = this.ctx.createMediaStreamDestination();
-    this.master.connect(this.analyser);
-    this.master.connect(this.destination);
+    this.masterOutput=createMasterOutput(this.ctx,{onError:error=>this.onError?.(error)});
+    this.master.connect(this.masterOutput.input);
+    this.masterOutput.output.connect(this.analyser);
+    this.masterOutput.output.connect(this.destination);
     for (let i = 0; i < 4; i++) {
       const input = this.ctx.createGain(),
         low = this.ctx.createBiquadFilter(),
@@ -131,6 +136,7 @@ export class AudioEngine {
     this.init();
     await this.ctx.resume();
     await this.effectsReady;
+    await this.masterOutput.ready;
   }
   async buffer(track) {
     this.init();
@@ -1018,13 +1024,16 @@ export class AudioEngine {
     });
   }
   meter() {
-    if (!this.ctx) return 0;
-    const a = new Uint8Array(this.analyser.fftSize);
-    this.analyser.getByteTimeDomainData(a);
-    return (
-      Math.sqrt(a.reduce((s, v) => s + ((v - 128) / 128) ** 2, 0) / a.length) *
-      3
-    );
+    return Math.min(1,Math.max(...(this.masterOutput?.snapshot().peak||[0,0])));
+  }
+  masterSnapshot(){
+    return {...(this.masterOutput?.snapshot()||{ready:false,displayDB:-120,limiting:false,peak:[0,0],rms:[0,0],outputPeak:[0,0],gainReductionDB:0,invalid:0}),gainDB:this.masterDB};
+  }
+  setMasterDB(value){
+    if(!Number.isFinite(Number(value)))throw new TypeError('Master level needs a finite decibel value.');
+    this.masterDB=normalizedMasterDB(value);this.masterLevel=10**(this.masterDB/20);
+    this.master?.gain.setTargetAtTime(this.masterLevel,this.ctx.currentTime,.01);
+    return this.masterDB;
   }
   videoAnalysis(index = 4) {
     if (!this.ctx) return {bass: 0, mid: 0, treble: 0, level: 0, audioAvailable: false, spectrum8: null, spectrum8Available: false};
