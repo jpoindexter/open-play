@@ -14,4 +14,5 @@ function openIsolatedCheck({BrowserWindow,origin,title,route,label}){
 }
 function openPlaybackCheck(options){return openIsolatedCheck({...options,route:'/prototype/rapid-sync-play-harness.html',label:'synthetic input check'});}
 function openAutoGainCheck(options){return openIsolatedCheck({...options,route:'/prototype/auto-gain-harness.html',label:'measured Auto Gain check'});}
-module.exports={openPlaybackCheck,openAutoGainCheck};
+function openRelativeTempoCheck(options){return openIsolatedCheck({...options,route:'/prototype/relative-tempo-harness.html',label:'relative controller tempo check'});}
+module.exports={openPlaybackCheck,openAutoGainCheck,openRelativeTempoCheck};

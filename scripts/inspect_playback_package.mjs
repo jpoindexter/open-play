@@ -41,7 +41,14 @@ try{
   let blocked=false;diagnostic.events['web:will-navigate']({preventDefault(){blocked=true;}},'https://foreign.invalid');assert.equal(blocked,true);blocked=false;diagnostic.events['web:will-navigate']({preventDefault(){blocked=true;}},origin+'/prototype/');assert.equal(blocked,false);
   const autoAction=menus[0].find(m=>m.label==='Checks').submenu.find(x=>x.label==='Measured Auto Gain');
   if(Number(version.split('.').at(-1))>=17){assert(autoAction);autoAction.click();const auto=windows.at(-1);assert.equal(auto.url,origin+'/prototype/auto-gain-harness.html');assert(!auto.options.webPreferences.partition.startsWith('persist:'));assert.notEqual(auto.options.webPreferences.partition,diagnostic.options.webPreferences.partition);assert.equal(auto.webContents.session.check(auto.webContents,'midi',origin,{isMainFrame:true}),false);}
-  return{mainPartition:main.options.webPreferences.partition,diagnosticPartitionPersistent:false,uniqueDiagnosticSessions:true,devicePermissionsDenied:true,sandboxRetained:true};
+  let relativeCheckVerified=false;
+  if(Number(version.split('.').at(-1))>=22){
+   const action=menus[0].find(m=>m.label==='Checks').submenu.find(x=>x.label==='Relative Controller Tempo');assert(action);action.click();const relative=windows.at(-1);
+   assert.equal(relative.url,origin+'/prototype/relative-tempo-harness.html');assert(!relative.options.webPreferences.partition.startsWith('persist:'));assert.notEqual(relative.options.webPreferences.partition,diagnostic.options.webPreferences.partition);
+   assert.equal(relative.webContents.session.check(relative.webContents,'midi',origin,{isMainFrame:true}),false);let allowed;relative.webContents.session.request(relative.webContents,'speaker-selection',v=>allowed=v);assert.equal(allowed,false);
+   assert.equal(relative.options.webPreferences.sandbox,true);assert.equal(relative.options.webPreferences.contextIsolation,true);relativeCheckVerified=true;
+  }
+  return{mainPartition:main.options.webPreferences.partition,diagnosticPartitionPersistent:false,uniqueDiagnosticSessions:true,devicePermissionsDenied:true,sandboxRetained:true,relativeCheckVerified};
  });
 }catch(error){report.error={message:error.message,stack:error.stack};}
 report.passed=checks.filter(c=>c.passed).length;report.failed=checks.filter(c=>!c.passed).length;report.completed=report.failed===0&&!report.error;
