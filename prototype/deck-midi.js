@@ -1,3 +1,4 @@
+import {trackGainDB} from './track-gain.js';
 // Independently authored playback/mixer MIDI actions. Device addresses are data,
 // not imported controller scripts. Physical acceptance is recorded separately.
 import {mappedValue} from './midi.js';
@@ -6,7 +7,7 @@ import {createMIDIJogTouch} from './midi-jog-touch.js';
 import {normalizeEQBoost} from './mixer-curves.js';
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 const key=m=>JSON.stringify([m.deviceId||'',m.type,m.channel,m.number]);
-const continuous=['fader start','tempo ignore','tempo','trim','high','mid','low','filter','level','jog nudge','jog bend','jog surface'];
+const continuous=['track gain','fader start','tempo ignore','tempo','trim','high','mid','low','filter','level','jog nudge','jog bend','jog surface'];
 const padCommands=['auto loop','loop roll','stems','pitch play','pitch cue select'].flatMap(mode=>Array.from({length:8},(_,i)=>`${mode} pad ${i+1}`));
 const manualCommands=Array.from({length:7},(_,n)=>`manual loop pad ${n+1}`);
 const scratchCommands=Array.from({length:8},(_,n)=>[`scratch bank pad ${n+1}`,`scratch bank previous pad ${n+1}`]).flat();
@@ -143,6 +144,7 @@ export function createDeckMIDIRouter({state,engine,actions,applyFX=()=>{},onChan
   if(!Number.isFinite(value))throw new RangeError('MIDI control needs a finite value.');
   const center=mapping.encoding==='14-bit absolute'||message.type==='Pitch bend'?8192/16383:64/127;
   const bipolar=x=>x<center?(x-center)/center:(x-center)/(1-center);
+  if(action==='track gain'){if(d.track)actions.trackGain.set(d.track,relative?trackGainDB(d.track)+value*.1:bipolar(value)*24);return true;}
   if(action==='tempo'||action==='tempo ignore'){
    const range=Number(d.pitchRange)||8;
    const requested=relative?d.rate+value*.0001:1+bipolar(value)*range/100;

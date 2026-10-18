@@ -1,3 +1,4 @@
+import {trackGainDB} from './track-gain.js';
 import {createDeckMIDIRouter,deckMIDITargets,libraryMIDITargets,fxMIDITargets,samplerMIDITargets,herculesPlaybackMappings} from './deck-midi.js';
 import {createBeatgrid,gridBPM} from './beatgrid.js';
 import { createVideoMixer } from "./video.js";
@@ -478,12 +479,15 @@ export function createPanels(a) {
                       "rating",
                       "comment",
                       "color",
+                      "sampleGain",
+                      "trackGainDb",
                     ]
                       .filter((k) => k in tag)
                       .map((k) => [k, tag[k]]),
                   ),
                 );
             }
+            for(const track of s.tracks)a.trackGain.refresh(track);
             persist();
             renderCrates();
             renderTracks();
@@ -883,8 +887,7 @@ export function createPanels(a) {
       keylock: !!slot.keylock,
       gain: slot.muted
         ? 0
-        : ((slot.volume ?? 80) / 100) *
-          Math.pow(10, (track?.sampleGain || 0) / 20),
+        : ((slot.volume ?? 80) / 100),
     };
   }
   function sampler() {
@@ -1052,7 +1055,7 @@ export function createPanels(a) {
       ];
       dialog(
         `Sampler ${i + 1} · advanced`,
-        `<div class="form-grid"><label>Volume<input id="sample-volume" type="range" min="0" max="100" value="${slot.volume ?? 80}"></label><label>Track gain (dB)<input id="sample-gain" type="number" min="-24" max="12" step=".5" value="${track.sampleGain || 0}"></label><label>Pitch (%)<input id="sample-pitch" type="number" min="-50" max="100" step=".1" value="${slot.pitch || 0}"></label><label><span>Key Lock</span><input id="sample-keylock" type="checkbox" ${slot.keylock ? "checked" : ""}></label><label>Play from<select id="sample-from">${starts.map(([value, name]) => `<option value="${value}" ${value === (slot.from || "start") ? "selected" : ""}>${esc(name)}</option>`).join("")}</select></label><label><span>Mute</span><input id="sample-mute" type="checkbox" ${slot.muted ? "checked" : ""}></label></div><div class="panel-controls"><button id="sample-sync">Match focused deck tempo</button><button id="sample-reset-pitch">Reset pitch</button><button id="sample-apply">Apply</button></div><p class="muted">Gain/volume/mute affect real audio. Pitch (%) changes speed; Key Lock preserves the original pitch using local buffered processing. Speed changes with Key Lock may pause briefly while processing. Play from applies on the next trigger. Output selection routes browser mixer buses, not separate hardware/headphone outputs. File tags remain untouched.</p>`,
+        `<div class="form-grid"><label>Volume<input id="sample-volume" type="range" min="0" max="100" value="${slot.volume ?? 80}"></label><label>Track gain (dB)<input id="sample-gain" type="number" min="-24" max="24" step=".1" value="${trackGainDB(track)}"></label><label>Pitch (%)<input id="sample-pitch" type="number" min="-50" max="100" step=".1" value="${slot.pitch || 0}"></label><label><span>Key Lock</span><input id="sample-keylock" type="checkbox" ${slot.keylock ? "checked" : ""}></label><label>Play from<select id="sample-from">${starts.map(([value, name]) => `<option value="${value}" ${value === (slot.from || "start") ? "selected" : ""}>${esc(name)}</option>`).join("")}</select></label><label><span>Mute</span><input id="sample-mute" type="checkbox" ${slot.muted ? "checked" : ""}></label></div><div class="panel-controls"><button id="sample-sync">Match focused deck tempo</button><button id="sample-reset-pitch">Reset pitch</button><button id="sample-apply">Apply</button></div><p class="muted">Gain/volume/mute affect real audio. Pitch (%) changes speed; Key Lock preserves the original pitch using local buffered processing. Speed changes with Key Lock may pause briefly while processing. Play from applies on the next trigger. Output selection routes browser mixer buses, not separate hardware/headphone outputs. File tags remain untouched.</p>`,
         () => {
           const update = () => {
             slot.volume = Number($("#sample-volume").value);
@@ -1063,10 +1066,7 @@ export function createPanels(a) {
             slot.keylock = $("#sample-keylock").checked;
             slot.from = $("#sample-from").value;
             slot.muted = $("#sample-mute").checked;
-            track.sampleGain = Math.max(
-              -24,
-              Math.min(12, Number($("#sample-gain").value) || 0),
-            );
+            a.trackGain.set(track,Number($("#sample-gain").value)||0);
             // File gain belongs to the track, so every active slot sharing it updates.
             s.samples.forEach((bank,b) => bank.forEach((other,j) => {
               if (other.track === slot.track) {
@@ -1973,14 +1973,11 @@ export function createPanels(a) {
             );
           if (!Number.isFinite(value))
             return notify("No measured gain recommendation is available.");
-          const linear = Math.min(2, Math.pow(10, value / 20));
-          d.trim = linear;
-          engine.mix(d.index, "trim", linear);
-          t.analysisGainDb = 20 * Math.log10(linear);
+          t.analysisGainDb = a.trackGain.set(t,value);
           persist();
           renderDecks();
           notify(
-            `Deck ${d.index + 1} gain set to ${t.analysisGainDb.toFixed(2)} dB${value > 20 * Math.log10(2) ? " (limited by the deck's +6.02 dB range)" : ""}.`,
+            `Stored track gain set to ${t.analysisGainDb.toFixed(2)} dB from ungated RMS. Channel trim is unchanged; this is not perceived-loudness Auto Gain.`,
           );
         };
         $("#analysis-stems").onclick = stems;

@@ -1,0 +1,516 @@
+{
+  "startedAt": "2026-10-18T04:47:20.404Z",
+  "completed": true,
+  "scope": "Owned production File-input change imports (synthetic chooser), actual deck loading/track gain/analysis/MIDI/sampler advanced/output controls, independent channel0Float32 windows, whole recordings and saved-file playback after full reload. Manual gain, not perceived Auto Gain/native/hardware acceptance.",
+  "criteria": {
+    "settlingSeconds": 0.3,
+    "captureSeconds": 0.3,
+    "maximumRelativeAmplitudeError": 0.02,
+    "maximumAbsentTone": 1e-06
+  },
+  "cases": [
+    {
+      "name": "deck neutral",
+      "expected": [
+        0.011327132550146207,
+        0
+      ],
+      "measured": [
+        0.011327132789308423,
+        2.943081763190083e-11
+      ],
+      "deckTargets": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "trackA": 0,
+      "trim": 1,
+      "pcm": {
+        "frames": 13230,
+        "startFrame": 25088,
+        "sha256": "782488199020ad3ba6d150d5b05d0c178f8d013e165d011e60a09930042f528b"
+      },
+      "errors": [
+        2.1114100690056148e-08,
+        2.943081763190083e-11
+      ],
+      "passed": true
+    },
+    {
+      "name": "GUI track plus24",
+      "expected": [
+        0.1795229526883141,
+        0
+      ],
+      "measured": [
+        0.17952295949060249,
+        1.7547372321216777e-10
+      ],
+      "deckTargets": [
+        24,
+        24,
+        0,
+        0
+      ],
+      "trackA": 24,
+      "trim": 1,
+      "pcm": {
+        "frames": 13230,
+        "startFrame": 51712,
+        "sha256": "ac053755d7e5cb0db0fa56653d25819127be1758e03b148e983617f9e19b2a02"
+      },
+      "errors": [
+        3.789091174155601e-08,
+        1.7547372321216777e-10
+      ],
+      "passed": true
+    },
+    {
+      "name": "Control reset0",
+      "expected": [
+        0.011327132550146207,
+        0
+      ],
+      "measured": [
+        0.011327132789308475,
+        2.943081821853411e-11
+      ],
+      "deckTargets": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "trackA": 0,
+      "trim": 1,
+      "pcm": {
+        "frames": 13230,
+        "startFrame": 78080,
+        "sha256": "d66e146e706929bcd763b9953a1a91791279ba2cc71af6a3110bf89318c293fd"
+      },
+      "errors": [
+        2.1114105130948246e-08,
+        2.943081821853411e-11
+      ],
+      "passed": true
+    },
+    {
+      "name": "MIDI minimum minus24",
+      "expected": [
+        0.000714693747441541,
+        0
+      ],
+      "measured": [
+        0.0007146937486753964,
+        1.2548975475047703e-12
+      ],
+      "deckTargets": [
+        -24,
+        -24,
+        0,
+        0
+      ],
+      "trackA": -24,
+      "trim": 1,
+      "pcm": {
+        "frames": 13230,
+        "startFrame": 105472,
+        "sha256": "565cf1f0fbc65a7cb45e460e3ba2699a9576575aeb920879f6dc072983c2f7cb"
+      },
+      "errors": [
+        1.7264112361914385e-09,
+        1.2548975475047703e-12
+      ],
+      "passed": true
+    },
+    {
+      "name": "MIDI center0",
+      "expected": [
+        0.011327132550146207,
+        0
+      ],
+      "measured": [
+        0.011327132789308416,
+        2.943081973098928e-11
+      ],
+      "deckTargets": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "trackA": 0,
+      "trim": 1,
+      "pcm": {
+        "frames": 13230,
+        "startFrame": 132096,
+        "sha256": "10119545adf075a550bd5b2524f61819fc0cb1be27a0f87165ec78284872130b"
+      },
+      "errors": [
+        2.1114100023922333e-08,
+        2.943081973098928e-11
+      ],
+      "passed": true
+    },
+    {
+      "name": "reload track recalls plus6",
+      "expected": [
+        0.022600600713964067,
+        0
+      ],
+      "measured": [
+        0.022600600567941952,
+        1.2571004740135383e-11
+      ],
+      "deckTargets": [
+        6,
+        6,
+        0,
+        0
+      ],
+      "trackA": 6,
+      "trim": 1,
+      "pcm": {
+        "frames": 13230,
+        "startFrame": 160256,
+        "sha256": "229e4bc5e2bae0008f2c138f188b86feabde03e94256fc96fa4244fb5c77bd52"
+      },
+      "errors": [
+        6.460983748013405e-09,
+        1.2571004740135383e-11
+      ],
+      "passed": true
+    },
+    {
+      "name": "apply measured RMS suggestion as stored track gain",
+      "expected": [
+        0.045094126900231256,
+        0
+      ],
+      "measured": [
+        0.04509412771250731,
+        5.749368511308818e-13
+      ],
+      "deckTargets": [
+        12,
+        12,
+        0,
+        0
+      ],
+      "trackA": 12,
+      "trim": 1,
+      "pcm": {
+        "frames": 13230,
+        "startFrame": 186880,
+        "sha256": "140758422e00c64202f457b8a66bb1d341141c55cf4ed5e7103ba3eaf1f89b0f"
+      },
+      "errors": [
+        1.8012901170649798e-08,
+        5.749368511308818e-13
+      ],
+      "passed": true
+    },
+    {
+      "name": "sampler master A plus6 B neutral",
+      "expected": [
+        0.011300300356982033,
+        0.008495349412609656
+      ],
+      "measured": [
+        0.011300300275510614,
+        0.008495349559658912
+      ],
+      "deckTargets": [
+        6,
+        6,
+        0,
+        0
+      ],
+      "trackA": 6,
+      "trim": 1,
+      "pcm": {
+        "frames": 13230,
+        "startFrame": 214528,
+        "sha256": "8272425e972eb2f12c24e3c6338757cd2730c9b2de21b9536974a869c1bbfd00"
+      },
+      "errors": [
+        7.2096685288514095e-09,
+        1.7309383038011106e-08
+      ],
+      "passed": true
+    },
+    {
+      "name": "sampler advanced shared plus12",
+      "expected": [
+        0.022547063450115628,
+        0.008495349412609656
+      ],
+      "measured": [
+        0.0225470637963498,
+        0.008495349513624734
+      ],
+      "deckTargets": [
+        12,
+        12,
+        0,
+        0
+      ],
+      "trackA": 12,
+      "trim": 1,
+      "pcm": {
+        "frames": 13230,
+        "startFrame": 241152,
+        "sha256": "07d169f9dcae14835a4e3472526426f6ffd7155fa151a7df2fac33c8ef0a5b69"
+      },
+      "errors": [
+        1.5356065086180593e-08,
+        1.1890632478639418e-08
+      ],
+      "passed": true
+    },
+    {
+      "name": "sampler deck route no double track gain",
+      "expected": [
+        0.0180376507600925,
+        0.006796279530087725
+      ],
+      "measured": [
+        0.018037651334873027,
+        0.006796279689799403
+      ],
+      "deckTargets": [
+        12,
+        12,
+        0,
+        0
+      ],
+      "trackA": 12,
+      "trim": 1,
+      "pcm": {
+        "frames": 13230,
+        "startFrame": 267776,
+        "sha256": "533d3e777b1d9122e6146d5e30e5cccbec42567c762060b281a9a4eee5259ad3"
+      },
+      "errors": [
+        3.1865597938107726e-08,
+        2.349986893968037e-08
+      ],
+      "passed": true
+    },
+    {
+      "name": "sampler edit shared minus6 only A",
+      "expected": [
+        0.002270805691094883,
+        0.006796279530087725
+      ],
+      "measured": [
+        0.002270805668819192,
+        0.006796279758883027
+      ],
+      "deckTargets": [
+        -6,
+        -6,
+        0,
+        0
+      ],
+      "trackA": -6,
+      "trim": 1,
+      "pcm": {
+        "frames": 13230,
+        "startFrame": 294400,
+        "sha256": "1cac2c889790cd9e318d3adb53a18faeb70c146fa016550d789669823af5a60a"
+      },
+      "errors": [
+        9.809597911747403e-09,
+        3.36647869580986e-08
+      ],
+      "passed": true
+    },
+    {
+      "name": "sampler return master no channel attenuation",
+      "expected": [
+        0.0028385071138686034,
+        0.008495349412609656
+      ],
+      "measured": [
+        0.0028385070041039183,
+        0.008495349544753275
+      ],
+      "deckTargets": [
+        -6,
+        -6,
+        0,
+        0
+      ],
+      "trackA": -6,
+      "trim": 1,
+      "pcm": {
+        "frames": 13230,
+        "startFrame": 321280,
+        "sha256": "c2bb4193bb0bceb2e19997fd822cfee8a522c9b53fa043fe4f977cc17f371170"
+      },
+      "errors": [
+        3.866986442169207e-08,
+        1.5554818544316618e-08
+      ],
+      "passed": true
+    },
+    {
+      "name": "sampler stop all silence",
+      "expected": [
+        0,
+        0
+      ],
+      "measured": [
+        0,
+        0
+      ],
+      "deckTargets": [
+        -6,
+        -6,
+        0,
+        0
+      ],
+      "trackA": -6,
+      "trim": 1,
+      "pcm": {
+        "frames": 13230,
+        "startFrame": 347648,
+        "sha256": "9d55c9c2f49808c72a9d28e4f661bae87b1ed419741fa38e5ffeff9648f33d7d"
+      },
+      "errors": [
+        0,
+        0
+      ],
+      "passed": true
+    },
+    {
+      "name": "saved File actual playback plus6",
+      "expected": [
+        0.022600600713964067,
+        0
+      ],
+      "measured": [
+        0.02260060056794178,
+        1.257101440867191e-11
+      ],
+      "deckTargets": [
+        6,
+        0,
+        0,
+        0
+      ],
+      "trackA": 6,
+      "trim": 1,
+      "pcm": {
+        "frames": 13230,
+        "startFrame": 1267712,
+        "sha256": "5438902ff1d6f75baa7bd0d111a08be67bfdd185f7716b5b2e490d79b6d4af3f"
+      },
+      "errors": [
+        6.460991408552275e-09,
+        1.257101440867191e-11
+      ],
+      "passed": true
+    }
+  ],
+  "recordings": [
+    {
+      "bytes": 122050,
+      "sha256": "4f3a46e09dccc85080254bb14d02d49e2b98d6182edab9c2481a985ffd240305",
+      "format": "audio/webm;codecs=opus",
+      "duration": 7.859977324263038,
+      "frames": 346625,
+      "sampleRate": 44100,
+      "channels": 2
+    },
+    {
+      "bytes": 9837,
+      "sha256": "c2a42ada948e88d8caba8881233338ff80409e932a2e487758ba54f241f4ff11",
+      "format": "audio/webm;codecs=opus",
+      "duration": 0.5999773242630385,
+      "frames": 26459,
+      "sampleRate": 44100,
+      "channels": 2
+    }
+  ],
+  "errors": [],
+  "sourceBefore": {
+    "app.js": "a5e93e105736877173355e970e7fe21b76c788c45815a12c93b0d337799a2f14",
+    "engine.js": "e1315efff1193293ccde62b4692a46f3c68b599f7d3d2b17b95849c58d0c1e3f",
+    "panels.js": "254f7655a252b23ed5768c112d8f05f172520409fcab780e9e28f50503b72ac5",
+    "deck-midi.js": "e945f45e6c5198e8d8103a9bc10b4073c00aefc213ed32344592fe20a2988b1e",
+    "track-gain.js": "27ac8d5d4f597895a5c514d3b77e9de59adb810e5e38e18d49478ca7290ee8ef",
+    "styles.css": "34a174a1fec6ddbae90dfd24ccb89edebc9ed41b3afa67c918c6f0ebadb6af4e",
+    "local-audio-library.js": "38814be027c5a4e614d972ffd814df9760106ca27e374a288a0ccc3d6bca0a21",
+    "fx-tempo-capture-worklet.js": "1ffd09ad071f8dd2dca8b745ca8f9e1182e515eb32c42340bf5ff0a035e9b8b9",
+    "track-gain-harness.js": "b3893bfb437f19c25b560b91a39e6c286775c8d7a7dde90c140134140cf3c478"
+  },
+  "files": [
+    {
+      "id": "local-50f646c936672041b0eac5f1d35138bd0b2d08c76631b2b3071e01f9fa1b7314",
+      "sha256": "50f646c936672041b0eac5f1d35138bd0b2d08c76631b2b3071e01f9fa1b7314",
+      "name": "A"
+    },
+    {
+      "id": "local-41e249f5335b316096c1c93291fa94545e62960db383bc4f58f314e15299b790",
+      "sha256": "41e249f5335b316096c1c93291fa94545e62960db383bc4f58f314e15299b790",
+      "name": "B"
+    }
+  ],
+  "a": "local-50f646c936672041b0eac5f1d35138bd0b2d08c76631b2b3071e01f9fa1b7314",
+  "b": "local-41e249f5335b316096c1c93291fa94545e62960db383bc4f58f314e15299b790",
+  "measuredGain": {
+    "method": "ungated_pcm_rms",
+    "rms": 0.014142135630062124,
+    "rmsDbfs": -36.98970003947168,
+    "samplePeak": 0.019999995827674866,
+    "samplePeakDbfs": -33.979401898738345,
+    "clippedSamples": 0,
+    "targetRmsDbfs": -14,
+    "recommendedDb": 12,
+    "truePeakMeasured": false,
+    "lufsMeasured": false
+  },
+  "savedGain": 6,
+  "sourceAfter": {
+    "app.js": "a5e93e105736877173355e970e7fe21b76c788c45815a12c93b0d337799a2f14",
+    "engine.js": "e1315efff1193293ccde62b4692a46f3c68b599f7d3d2b17b95849c58d0c1e3f",
+    "panels.js": "254f7655a252b23ed5768c112d8f05f172520409fcab780e9e28f50503b72ac5",
+    "deck-midi.js": "e945f45e6c5198e8d8103a9bc10b4073c00aefc213ed32344592fe20a2988b1e",
+    "track-gain.js": "27ac8d5d4f597895a5c514d3b77e9de59adb810e5e38e18d49478ca7290ee8ef",
+    "styles.css": "34a174a1fec6ddbae90dfd24ccb89edebc9ed41b3afa67c918c6f0ebadb6af4e",
+    "local-audio-library.js": "38814be027c5a4e614d972ffd814df9760106ca27e374a288a0ccc3d6bca0a21",
+    "fx-tempo-capture-worklet.js": "1ffd09ad071f8dd2dca8b745ca8f9e1182e515eb32c42340bf5ff0a035e9b8b9",
+    "track-gain-harness.js": "b3893bfb437f19c25b560b91a39e6c286775c8d7a7dde90c140134140cf3c478"
+  },
+  "sourceStable": true,
+  "reload": {
+    "gain": 6,
+    "legacy": 6,
+    "files": [
+      {
+        "id": "local-50f646c936672041b0eac5f1d35138bd0b2d08c76631b2b3071e01f9fa1b7314",
+        "sha256": "50f646c936672041b0eac5f1d35138bd0b2d08c76631b2b3071e01f9fa1b7314"
+      },
+      {
+        "id": "local-41e249f5335b316096c1c93291fa94545e62960db383bc4f58f314e15299b790",
+        "sha256": "41e249f5335b316096c1c93291fa94545e62960db383bc4f58f314e15299b790"
+      }
+    ]
+  },
+  "sourceReload": {
+    "app.js": "a5e93e105736877173355e970e7fe21b76c788c45815a12c93b0d337799a2f14",
+    "engine.js": "e1315efff1193293ccde62b4692a46f3c68b599f7d3d2b17b95849c58d0c1e3f",
+    "panels.js": "254f7655a252b23ed5768c112d8f05f172520409fcab780e9e28f50503b72ac5",
+    "deck-midi.js": "e945f45e6c5198e8d8103a9bc10b4073c00aefc213ed32344592fe20a2988b1e",
+    "track-gain.js": "27ac8d5d4f597895a5c514d3b77e9de59adb810e5e38e18d49478ca7290ee8ef",
+    "styles.css": "34a174a1fec6ddbae90dfd24ccb89edebc9ed41b3afa67c918c6f0ebadb6af4e",
+    "local-audio-library.js": "38814be027c5a4e614d972ffd814df9760106ca27e374a288a0ccc3d6bca0a21",
+    "fx-tempo-capture-worklet.js": "1ffd09ad071f8dd2dca8b745ca8f9e1182e515eb32c42340bf5ff0a035e9b8b9",
+    "track-gain-harness.js": "b3893bfb437f19c25b560b91a39e6c286775c8d7a7dde90c140134140cf3c478"
+  },
+  "finishedAt": "2026-10-18T04:48:29.581Z"
+}

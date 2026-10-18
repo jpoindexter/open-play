@@ -21,6 +21,7 @@ import {createBeatgrid} from './beatgrid.js';
 import {normalizeMixerSettings,crossfaderGain,upfaderGain,eqBands,normalizeEQBoost,boundedEQGain,rescaleEQGain} from './mixer-curves.js';
 import {createMasterOutput} from './master-output.js';
 import {normalizedMasterDB} from './master-output-kernel.js';
+import {trackGainDB,boundedTrackGain} from './track-gain.js';
 export class AudioEngine {
   constructor() {
     this.ctx = null;
@@ -32,6 +33,7 @@ export class AudioEngine {
     this.cross = 0;
     this.mixerSettings=normalizeMixerSettings();
     this.eqBoost=6;
+    this.deckTrackGainDB=[0,0,0,0];
     this.masterDB=0;
     this.masterLevel = 1;
     this.monitorSettings=normalizeMonitorSettings();
@@ -93,7 +95,7 @@ export class AudioEngine {
     this.masterOutput.output.connect(this.analyser);
     this.masterOutput.output.connect(this.destination);
     for (let i = 0; i < 4; i++) {
-      const input = this.ctx.createGain(),
+      const input = this.ctx.createGain(),deckInput=this.ctx.createGain(),
         low = this.ctx.createBiquadFilter(),
         mid = this.ctx.createBiquadFilter(),
         high = this.ctx.createBiquadFilter(),
@@ -110,6 +112,7 @@ export class AudioEngine {
       filter.type = "lowpass";
       filter.frequency.value = 20000;
       input.connect(low);
+      deckInput.gain.value=10**(this.deckTrackGainDB[i]/20);deckInput.connect(input);
       low.connect(mid);
       mid.connect(high);
       high.connect(monitorTap);monitorTap.connect(gain);
@@ -117,6 +120,7 @@ export class AudioEngine {
       gain.connect(this.masterInput);
       this.nodes.push({
         input,
+        deckInput,
         low,
         mid,
         high,
@@ -400,6 +404,7 @@ export class AudioEngine {
     this.onValidateTransport?.(d);
     this.cancelDeckScratchRequest(d);
     if (!d.track) throw new Error("Load a track first.");
+    this.setDeckTrackGain(d.index,trackGainDB(d.track));
     if (d.track.missing || d.track.provider)
       throw new Error(
         d.track.provider
@@ -521,7 +526,7 @@ export class AudioEngine {
         ? sources.map((_, index) => {
             const gain = this.ctx.createGain();
             gain.gain.value = 0;
-            gain.connect(index === 0 ? this.nodes[d.index].input : (stemState.inputs||stemState.routes)[index - 1]);
+            gain.connect(index === 0 ? this.nodes[d.index].deckInput : (stemState.inputs||stemState.routes)[index - 1]);
             return gain;
           })
         : [];
@@ -532,7 +537,7 @@ export class AudioEngine {
           stemState.histories[i - 1].node.connect(voice.stemGains[i]);
         } else
           output.connect(
-            stems ? voice.stemGains[i] : this.nodes[d.index].input,
+            stems ? voice.stemGains[i] : this.nodes[d.index].deckInput,
           );
       });
       this.voices.set(d.index, voice);
@@ -810,6 +815,15 @@ export class AudioEngine {
     this.mixerSettings=normalizeMixerSettings(value);
     this.setCross(this.cross);
     return structuredClone(this.mixerSettings);
+  }
+  setDeckTrackGain(index,value){
+    if(!Number.isInteger(index)||index<0||index>3)throw new RangeError('Track gain needs a deck0..3.');
+    const db=boundedTrackGain(value);this.deckTrackGainDB[index]=db;
+    if(this.ctx){const node=this.nodes[index],gain=10**(db/20);node.deckInput.gain.setTargetAtTime(gain,this.ctx.currentTime,.01);node.stemMonitor?.trackGain.gain.setTargetAtTime(gain,this.ctx.currentTime,.01);}
+    return db;
+  }
+  updateSampleTrackGain(track,value){
+    const db=boundedTrackGain(value);for(const voice of this.samples?.values()||[])if(voice.track.id===track.id)voice.trackGain.gain.setTargetAtTime(10**(db/20),this.ctx.currentTime,.01);
   }
   setEQBoost(value){
     const previous=this.eqBoost,next=normalizeEQBoost(value);
@@ -1166,14 +1180,14 @@ export class AudioEngine {
   ensureStemMonitor(index) {
     const n=this.nodes[index];
     if(!this.audioMonitor||!n.cueTap||n.stemMonitor)return;
-    const input=this.ctx.createGain(),low=this.ctx.createBiquadFilter(),mid=this.ctx.createBiquadFilter(),high=this.ctx.createBiquadFilter(),filter=this.ctx.createBiquadFilter(),gate=this.ctx.createGain();
+    const input=this.ctx.createGain(),trackGain=this.ctx.createGain(),low=this.ctx.createBiquadFilter(),mid=this.ctx.createBiquadFilter(),high=this.ctx.createBiquadFilter(),filter=this.ctx.createBiquadFilter(),gate=this.ctx.createGain();
     for(const [key,node]of Object.entries({low,mid,high,filter})){
       const original=n[key];node.type=original.type;
       for(const parameter of ['frequency','Q','gain'])node[parameter].value=original[parameter].value;
       if(key!=='filter'&&Number.isFinite(n.eqTargets?.[key]))node.gain.setTargetAtTime(n.eqTargets[key],this.ctx.currentTime,.015);
     }
-    gate.gain.value=0;input.connect(low);low.connect(mid);mid.connect(high);high.connect(gate);gate.connect(n.cueTap);
-    n.stemMonitor={input,low,mid,high,filter,gate,monitorTap:gate,channelValue:n.channelValue,channelBpm:n.channelBpm};
+    gate.gain.value=0;trackGain.gain.value=10**(this.deckTrackGainDB[index]/20);input.connect(trackGain);trackGain.connect(low);low.connect(mid);mid.connect(high);high.connect(gate);gate.connect(n.cueTap);
+    n.stemMonitor={input,trackGain,low,mid,high,filter,gate,monitorTap:gate,channelValue:n.channelValue,channelBpm:n.channelBpm};
     this.applyChannelFXStrip(n.stemMonitor);
   }
   ensureStemState(d) {
@@ -1195,7 +1209,7 @@ export class AudioEngine {
         effects: [null, null, null, null],
         histories: Array.from({ length: 4 }, () => createStemHistory(this.ctx)),
         routes: Array.from({length: 4}, () => {
-          const gain = this.ctx.createGain(); gain.connect(this.nodes[d.index].input); return gain;
+          const gain = this.ctx.createGain(); gain.connect(this.nodes[d.index].deckInput); return gain;
         }),
       };
       state.inputs=state.routes.map(route=>{
@@ -1341,7 +1355,7 @@ export class AudioEngine {
     voice.stemInitialized = reuse && reuseVoice.stemInitialized;
     voice.stemGains = reuse ? reuseVoice.stemGains : stems ? outputs.map((_, index) => {
       const gain = this.ctx.createGain(); gain.gain.value = 0;
-      gain.connect(index === 0 ? this.nodes[d.index].input : (state.inputs||state.routes)[index - 1]);
+      gain.connect(index === 0 ? this.nodes[d.index].deckInput : (state.inputs||state.routes)[index - 1]);
       return gain;
     }) : [];
     if (reuse) reuseVoice.stemGains = []; // Transfer sole shared history output ownership.
@@ -1353,7 +1367,7 @@ export class AudioEngine {
       if (state && i > 0) {
         gate.connect(state.histories[i - 1].node);
         if (!reuse) state.histories[i - 1].node.connect(voice.stemGains[i]);
-      } else gate.connect(stems ? voice.stemGains[i] : this.nodes[d.index].input);
+      } else gate.connect(stems ? voice.stemGains[i] : this.nodes[d.index].deckInput);
     });
     this.voices.set(d.index, voice);
     this.deckStates.set(d.index, d);
@@ -1680,7 +1694,7 @@ export class AudioEngine {
         voice = {sources: [], stemSlipTransport: transport, stemGains: []};
         for (let i = 0; i < 5; i++) {
           const gain = this.ctx.createGain(); gain.gain.value = 0;
-          gain.connect(i === 0 ? this.nodes[d.index].input : (state.inputs||state.routes)[i - 1]);
+          gain.connect(i === 0 ? this.nodes[d.index].deckInput : (state.inputs||state.routes)[i - 1]);
           voice.stemGains.push(gain);
           if (i > 0) {
             transport.node.connect(state.histories[i - 1].node, i - 1);
@@ -1886,14 +1900,14 @@ export class AudioEngine {
         : original;
       if (!current()) return false;
       const source = this.ctx.createBufferSource(),
-        gain = this.ctx.createGain();
+        gain = this.ctx.createGain(),trackGain=this.ctx.createGain();
       source.buffer = buffer;
       source.loop = !!settings.repeat && settings.loopEnd > settings.loopStart;
       source.loopStart = settings.loopStart / scale;
       source.loopEnd = settings.loopEnd / scale;
       source.playbackRate.value = settings.keylock ? 1 : settings.rate;
       gain.gain.value = settings.muted ? 0 : (settings.gain ?? 0.8) * 0.5;
-      source.connect(gain);
+      trackGain.gain.value=10**(trackGainDB(track)/20);source.connect(trackGain);trackGain.connect(gain);
       gain.connect(this.samplerInput);
       const start = Math.min(
         original.duration - 1 / original.sampleRate,
@@ -1903,6 +1917,7 @@ export class AudioEngine {
       this.samples.set(slot, {
         source,
         gain,
+        trackGain,
         settings,
         track,
         anchorPosition: start,
@@ -1917,6 +1932,7 @@ export class AudioEngine {
           this.onSampleEnd(slot);
         }
         source.disconnect();
+        trackGain.disconnect();
         gain.disconnect();
       };
       source.start(this.ctx.currentTime, Math.max(0, start / scale));
@@ -1975,6 +1991,7 @@ export class AudioEngine {
         voice.source.stop();
       } catch {}
       voice.source.disconnect();
+      voice.trackGain.disconnect();
       voice.gain.disconnect();
       this.samples.delete(slot);
     }
