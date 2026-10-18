@@ -1,0 +1,13 @@
+import assert from 'node:assert/strict';
+import {createDeckMIDIRouter} from '../prototype/deck-midi.js';
+const tests=[],near=(a,b)=>assert.ok(Math.abs(a-b)<1e-9,`${a} != ${b}`);
+async function check(name,run){try{await run();tests.push({name,passed:true});}catch(e){tests.push({name,passed:false,error:e.message});}}
+function setup(){const deck={index:0,mode:'INT',track:{id:'test',bpm:100},rate:1,pitchRange:8,sync:false,syncState:'off'},state={decks:[deck],settings:{'Sync Mode':'Simple Sync'}};
+ const router=createDeckMIDIRouter({state,engine:{voices:new Map(),setRate:async(d,r)=>{d.rate=r;}},actions:{}});
+ async function send(raw,ignore=false){for(const[number,value]of[[8,raw>>7],[40,raw&127]])await router.dispatch({type:'CC',channel:ignore?5:2,number,value,deviceId:'controller',pressed:value>0},{target:'Deck 1 '+(ignore?'tempo ignore':'tempo'),encoding:'14-bit absolute'});}
+ return{deck,router,send};}
+await check('Simple Sync +20% with known -2% physical fader moves relatively and never waits for unreachable pickup',async()=>{const t=setup();await t.send(8192);await t.send(6144);near(t.deck.rate,.98);t.deck.sync=true;t.deck.rate=1.2;await t.send(6144);near(t.deck.rate,1.2);await t.send(7168);near(t.deck.rate,1.21);});
+await check('Simple Sync GUI/shared tempo rebases the next controller movement',async()=>{const t=setup();await t.send(8192);t.deck.sync=true;t.deck.rate=1.2;await t.send(8192);await t.send(9216);t.deck.rate=1.3;await t.send(10240);near(t.deck.rate,1.3+1024/8191*.08);});
+await check('Simple Sync Shift-ignore repositions without a release jump, then resumes relative movement',async()=>{const t=setup();t.deck.sync=true;t.deck.rate=1.2;await t.send(8192);await t.send(4096,true);near(t.deck.rate,1.2);await t.send(4096);near(t.deck.rate,1.2);await t.send(5120);near(t.deck.rate,1.21);});
+await check('Explicit known/unknown absolute reset supports Simple controller OFF without inventing a position',async()=>{const t=setup();t.deck.sync=true;t.deck.rate=1.2;await t.send(8192);await t.send(5120);t.deck.sync=false;t.deck.syncState='off';await t.router.resetTempoAbsolute(t.deck);near(t.deck.rate,.97);await t.send(6144);near(t.deck.rate,.98);t.router.resetInput('controller');t.deck.rate=1.2;assert.equal(await t.router.resetTempoAbsolute(t.deck),false);near(t.deck.rate,1.2);await t.send(8192);near(t.deck.rate,1);});
+const report={passed:tests.every(t=>t.passed),scope:'Production MIDI router with controlled engine collaborator. Controller/internal-deck path, not actual app OFF dispatch/audio, physical hardware, DVS/CDJ modes or exact vendor taper.',tests};console.log(JSON.stringify(report,null,2));if(!report.passed)process.exitCode=1;

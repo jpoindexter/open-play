@@ -1,0 +1,46 @@
+{
+  "passed": true,
+  "scope": "Controlled production MIDI router with engine collaborator; no actual audio, UI, hardware or exact vendor taper proof",
+  "tests": [
+    {
+      "name": "Smart Sync outside hardware range: baseline no jump, next fader movement changes tempo",
+      "passed": true
+    },
+    {
+      "name": "First Sync-off keeps relative control; explicit second-OFF reset immediately restores known physical pitch",
+      "passed": true
+    },
+    {
+      "name": "External shared-tempo change rebases at last physical position without pickup dead zone",
+      "passed": true
+    },
+    {
+      "name": "Shift-ignore repositions fader without changing relative tempo or adding a release jump",
+      "passed": true
+    },
+    {
+      "name": "A new track or different input establishes its own no-jump relative baseline",
+      "passed": true
+    },
+    {
+      "name": "Ordinary unsynced absolute pickup remains in force",
+      "passed": true
+    },
+    {
+      "name": "Rapid paired packets coalesce without losing relative movement while engine work is pending",
+      "passed": true
+    },
+    {
+      "name": "Reversing after the transport limit moves immediately rather than retaining a saturated offset",
+      "passed": true
+    },
+    {
+      "name": "Known physical position restores across track replacement; disconnect invalidates that cached position",
+      "passed": true
+    },
+    {
+      "name": "Explicit absolute reset without a received position grants takeover to the next actual packet",
+      "passed": true
+    }
+  ]
+}

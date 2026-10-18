@@ -155,7 +155,8 @@ export function createDeckMIDIRouter({state,engine,actions,applyFX=()=>{},onChan
    const range=Number(d.pitchRange)||8;
    let requested=relative?d.rate+value*.0001:1+bipolar(value)*range/100;
    const id=key(mapping.encoding==='14-bit absolute'&&message.type==='CC'?{...message,number:message.number%32}:message),physical=requested;
-   const relativePitch=!relative&&state.settings?.['Sync Mode']==='Smart Sync'&&(d.sync||d.syncState==='relative');
+   const syncMode=state.settings?.['Sync Mode'];
+   const relativePitch=!relative&&((syncMode==='Simple Sync'&&d.sync)||(syncMode==='Smart Sync'&&(d.sync||d.syncState==='relative')));
    if(!relative)physicalTempo.set(d.index,{position:bipolar(value),deviceId:message.deviceId||''});
    if(action==='tempo ignore'){ignoredTempo.set(d.index,{deviceId:message.deviceId||'',track:d.track,physical,caught:false,applied:d.rate,relativePitch,offset:d.rate-physical});onStatus(`Deck ${d.index+1} tempo motion ignored; ${relativePitch?'relative baseline moved':'pickup armed'}.`);return true;}
    let previous=pickup.get(id);if(previous?.track!==d.track)previous=undefined;
@@ -163,7 +164,7 @@ export function createDeckMIDIRouter({state,engine,actions,applyFX=()=>{},onChan
    if(ignored?.track===d.track&&ignored.deviceId===(message.deviceId||'')){previous=ignored;ignoredTempo.delete(d.index);pickup.set(id,ignored);}
    if(relativePitch){
     absoluteTakeover.delete(d.index);
-    // Hardware travel is a movement coordinate while Smart Sync/REL owns tempo.
+    // Hardware travel is a movement coordinate while controller Sync/Smart REL owns tempo.
     // Requiring pickup at the software rate can make a narrow fader unusable.
     const pending=rates.get(d.index),ownPending=pending?.track===d.track&&pending.latest===previous?.applied;
     const unchanged=previous?.relativePitch&&(ownPending||Math.abs(previous.applied-d.rate)<1e-9);

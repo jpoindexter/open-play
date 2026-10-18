@@ -433,7 +433,7 @@ function syncControls(d) {
   if (mode === "Off") return "";
   const smart = mode === "Smart Sync", status = smart ? d.syncState || "off" : d.sync ? "beat" : "off";
   const role = d.sync ? (d.syncRole === "primary" ? "Primary" : "Secondary") : "Not synced";
-  return `<button data-action="syncOff" data-deck="${d.index}" aria-label="Disengage sync on deck ${d.index + 1}" title="Disengage sync; keep the current software tempo" ${d.sync || status === "relative" ? "" : "disabled"}>OFF</button><button data-action="sync" data-deck="${d.index}" data-sync-state="${status}" aria-label="Sync deck ${d.index + 1}" aria-pressed="${!!d.sync}" title="${smart && !hasBeatgrid(d.track) ? "Add or analyze a beatgrid first" : role + "; press again to re-sync"}" ${smart && !hasBeatgrid(d.track) ? "disabled" : ""} class="${d.sync ? "active" : ""}">SYNC</button>`;
+  return `<button data-action="syncOff" data-deck="${d.index}" aria-label="Disengage sync on deck ${d.index + 1}" title="${smart?"First OFF: keep relative tempo; second OFF: restore controller pitch":"Disengage sync and restore the last received controller pitch when available"}" ${d.sync || status === "relative" ? "" : "disabled"}>OFF</button><button data-action="sync" data-deck="${d.index}" data-sync-state="${status}" aria-label="Sync deck ${d.index + 1}" aria-pressed="${!!d.sync}" title="${smart && !hasBeatgrid(d.track) ? "Add or analyze a beatgrid first" : role + "; press again to re-sync"}" ${smart && !hasBeatgrid(d.track) ? "disabled" : ""} class="${d.sync ? "active" : ""}">SYNC</button>`;
 }
 function smartSyncIndicator(d) {
   if (state.settings["Sync Mode"] !== "Smart Sync") return "";
@@ -972,7 +972,10 @@ async function deckAction(action, index, el, event = {}) {
       const wasRelative=d.syncState==='relative';smartSync.disengage(d);
       if(wasRelative)await panels.resetTempoAbsolute(d);
     }
-    else {d.sync = false; d.syncRole = null;}
+    else {
+      const wasSynced=d.sync;d.sync=false;d.syncRole=null;d.syncState='off';
+      if(wasSynced&&state.settings["Sync Mode"]==='Simple Sync')await panels.resetTempoAbsolute(d);
+    }
   } else if (action === "sync") {
     if (state.settings["Sync Mode"] === "Off") return;
     if (state.settings["Sync Mode"] === "Smart Sync") {

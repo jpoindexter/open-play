@@ -19,3 +19,5 @@ Full Serato parity remains unaccepted; the independent full Claude audit is unla
 [Native22review](DESKTOP_0.1.22_REVIEW.md) · [Native recorded result](desktop-0.1.22-relative-tempo-native-results.json) · [Main setup observation](desktop-0.1.22-playback-observation.json) · [Previous21guide](TRY_PLAYBACK_DESKTOP_0.1.21.md) · [Full plan](../../FULL_BUILD_PLAN.md)
 
 Browser-only plan132 now addresses the out-of-range GUI tempo jump; [its review](GUI_TEMPO_REVIEW.md) records actual keyboard/pointer/audio evidence and remaining Simple Sync controller requirements. This change is not packaged in22. The prepared desktop test above remains unchanged.
+
+Browser-only plan133 corrects Simple Sync's controller fader lockout and one-OFF absolute-pitch restore; [review/evidence](SIMPLE_SYNC_CONTROLLER_REVIEW.md). This is not in22. A fresh23batch is next, with22retained and exact packaged behavior checked before any default-launcher promotion.

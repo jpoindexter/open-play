@@ -1,0 +1,22 @@
+{
+  "passed": true,
+  "scope": "Production MIDI router with controlled engine collaborator. Controller/internal-deck path, not actual app OFF dispatch/audio, physical hardware, DVS/CDJ modes or exact vendor taper.",
+  "tests": [
+    {
+      "name": "Simple Sync +20% with known -2% physical fader moves relatively and never waits for unreachable pickup",
+      "passed": true
+    },
+    {
+      "name": "Simple Sync GUI/shared tempo rebases the next controller movement",
+      "passed": true
+    },
+    {
+      "name": "Simple Sync Shift-ignore repositions without a release jump, then resumes relative movement",
+      "passed": true
+    },
+    {
+      "name": "Explicit known/unknown absolute reset supports Simple controller OFF without inventing a position",
+      "passed": true
+    }
+  ]
+}
