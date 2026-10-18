@@ -1,0 +1,327 @@
+{
+  "checkpoint": 148,
+  "passed": false,
+  "scope": "Actual production Play, mixed staged/cold attachStems cancellation/retry and actual immediate Vocal pads. Authored Vocal equals original, other three buffers silent. Per-deck stereo rendered audio; no model inference, musical quality, native/hardware or full parity acceptance.",
+  "criteria": {
+    "captureSeconds": 4,
+    "minimum10msRMSRatio": 0.85,
+    "maximumAdjacentJump": 0.03,
+    "maximumNearZeroRunSeconds": 0.001,
+    "nearZeroAbsolute": 1e-07,
+    "firstMuteWindowStartSeconds": 0.03,
+    "firstMuteWindowEndSeconds": 0.08,
+    "maximumFirstMuteRMS": 0.0001
+  },
+  "sampleRate": 44100,
+  "channels": [
+    {
+      "deck": 0,
+      "channel": 0,
+      "frames": 176400,
+      "sha256": "bc6bcc2ce0b791b8740e0b097557aa163761fc0c8c520b570e3ca9edf30e57f9",
+      "contiguousQuanta": 1379,
+      "baselineRMS": 0.24113739230689252,
+      "minimum10msRMSRatio": 0.9767854245551433,
+      "maximumAdjacentJump": 0.016136186197400093,
+      "longestNearZeroRunSeconds": 0.0,
+      "firstMuteRMS": 1.7094981112354247e-06,
+      "laterMutePeak": 0.0,
+      "restoredRMS": 0.24125936361604614,
+      "stoppedPeak": 0.0,
+      "continuityPassed": true,
+      "firstPadPassed": true,
+      "laterMuteRestoreStopPassed": true,
+      "passed": true
+    },
+    {
+      "deck": 0,
+      "channel": 1,
+      "frames": 176400,
+      "sha256": "71cb42b2de6305eca642679ebab987956a5e779d4930807ca10b69ca15d546ce",
+      "contiguousQuanta": 1379,
+      "baselineRMS": 0.2411911395602557,
+      "minimum10msRMSRatio": 0.9996962204649206,
+      "maximumAdjacentJump": 0.026780549553222954,
+      "longestNearZeroRunSeconds": 0.0,
+      "firstMuteRMS": 1.5824416870618076e-06,
+      "laterMutePeak": 0.0,
+      "restoredRMS": 0.2411906928734579,
+      "stoppedPeak": 0.0,
+      "continuityPassed": true,
+      "firstPadPassed": true,
+      "laterMuteRestoreStopPassed": true,
+      "passed": true
+    },
+    {
+      "deck": 1,
+      "channel": 0,
+      "frames": 176400,
+      "sha256": "124b8bb4a2e2eff56f65c4688e79b59dc2dd412ab1d3bda6f7bf1a70faa6e15a",
+      "contiguousQuanta": 1379,
+      "baselineRMS": 0.24119771698720027,
+      "minimum10msRMSRatio": 0.9836914488215164,
+      "maximumAdjacentJump": 0.017637915909290314,
+      "longestNearZeroRunSeconds": 0.0,
+      "firstMuteRMS": 0.24114366832136383,
+      "laterMutePeak": 0.0,
+      "restoredRMS": 0.24085660438024897,
+      "stoppedPeak": 0.0,
+      "continuityPassed": true,
+      "firstPadPassed": false,
+      "laterMuteRestoreStopPassed": true,
+      "passed": false
+    },
+    {
+      "deck": 1,
+      "channel": 1,
+      "frames": 176400,
+      "sha256": "355e09aac11697f4cb207d155e7a7e63d461560181773b981569d6ec972522df",
+      "contiguousQuanta": 1379,
+      "baselineRMS": 0.241071010926579,
+      "minimum10msRMSRatio": 0.9959748288496553,
+      "maximumAdjacentJump": 0.02938681934028864,
+      "longestNearZeroRunSeconds": 0.0,
+      "firstMuteRMS": 0.24161689099706424,
+      "laterMutePeak": 0.0,
+      "restoredRMS": 0.24093217357557495,
+      "stoppedPeak": 0.0,
+      "continuityPassed": true,
+      "firstPadPassed": false,
+      "laterMuteRestoreStopPassed": true,
+      "passed": false
+    }
+  ],
+  "originalSHA256": "16329c4f39645ee416a5eccc9a4372f148ad2a3bd4940ca45fafa41d42dd78fe",
+  "originalBytes": 3930607,
+  "sourceHashes": {
+    "app.js": "a34c271bb8b2270c071ab77c8ce7727cf6943733a0e21b7c6da9157c0c13089a",
+    "engine.js": "26750c5c74f99b534bedacfcac459f46f8cb69be3acc8a340166d7ccd2f60244",
+    "panels.js": "daf7da508bb154a936c02d3ff09be4347e3b0d2a39b9f9c0439fcc1c2ace682b",
+    "keylock-shadow-live.js": "c59dcc99838f3bcfa76cac228cf92183b1b7dc567f6f426f3f30328bc64d2c0e",
+    "sync-tempo-handoff.js": "5842f9209035e24ff867004d3fef5f0a1fe7f7f4976440546b8238a225b82f9b",
+    "stem-mixed-activation-harness.js": "3a75e18a0e5f361b589834500b310600972e7ef645648b334025e6d418072fb4",
+    "stem-activation-capture-145.js": "730b9c3de31e9c3546ec1ab86f8fd85ce2a1ccfe6f78fc25d8f483f8b9d75331",
+    "vendor/signalsmith-stretch/SignalsmithStretch-open-play-replace.mjs": "66c9e002c6312d12a3107e21aa11be33f5ce7d92b1a4f4d85777cf54f3a74df9"
+  },
+  "sourceStable": true,
+  "cancelledMixedOwnersRetained": true,
+  "originalDecodedAudioUnchanged": true,
+  "retry": {
+    "startedAt": 0.7314285714285714,
+    "returnedAt": 0.8707482993197279,
+    "sameOwners": [
+      true,
+      false
+    ],
+    "cachePublished": true,
+    "live": {
+      "reservedStems": true,
+      "stemBanks": 2,
+      "activeStemBank": 0,
+      "stagedStemBank": null,
+      "publicOutputs": 5,
+      "stemsReady": true,
+      "resamplePitch": true,
+      "maxPCMBytes": 536870912,
+      "followMinimumLeadSeconds": 0.04,
+      "byteAccounting": "Acknowledged retained PCM and in-flight chunk copies only; excludes decoded inputs, SRC tables and opaque WASM heaps.",
+      "disposed": false,
+      "state": {
+        "when": 0.2744897959183673,
+        "position": 1.6558843537414967,
+        "playing": true,
+        "rate": 1.1,
+        "keylock": true,
+        "semitones": 0,
+        "effectiveSemitones": 0
+      },
+      "sourceGeometry": [
+        {
+          "index": 0,
+          "sampleRate": 44100,
+          "frames": 705600,
+          "channels": 2,
+          "duration": 16,
+          "paddedTailSeconds": 0,
+          "trimmedTailSeconds": 0,
+          "decodedBytes": 5644800,
+          "reservedSilence": false
+        },
+        {
+          "index": 1,
+          "sampleRate": 44100,
+          "frames": 705600,
+          "channels": 2,
+          "duration": 16,
+          "paddedTailSeconds": 0,
+          "trimmedTailSeconds": 0,
+          "decodedBytes": 5644800,
+          "reservedSilence": false
+        },
+        {
+          "index": 2,
+          "sampleRate": 44100,
+          "frames": 705600,
+          "channels": 2,
+          "duration": 16,
+          "paddedTailSeconds": 0,
+          "trimmedTailSeconds": 0,
+          "decodedBytes": 5644800,
+          "reservedSilence": false
+        },
+        {
+          "index": 3,
+          "sampleRate": 44100,
+          "frames": 705600,
+          "channels": 2,
+          "duration": 16,
+          "paddedTailSeconds": 0,
+          "trimmedTailSeconds": 0,
+          "decodedBytes": 5644800,
+          "reservedSilence": false
+        },
+        {
+          "index": 4,
+          "sampleRate": 44100,
+          "frames": 705600,
+          "channels": 2,
+          "duration": 16,
+          "paddedTailSeconds": 0,
+          "trimmedTailSeconds": 0,
+          "decodedBytes": 5644800,
+          "reservedSilence": false
+        },
+        {
+          "index": 5,
+          "sampleRate": 44100,
+          "frames": 705600,
+          "channels": 2,
+          "duration": 16,
+          "paddedTailSeconds": 0,
+          "trimmedTailSeconds": 0,
+          "decodedBytes": 0,
+          "reservedSilence": true
+        },
+        {
+          "index": 6,
+          "sampleRate": 44100,
+          "frames": 705600,
+          "channels": 2,
+          "duration": 16,
+          "paddedTailSeconds": 0,
+          "trimmedTailSeconds": 0,
+          "decodedBytes": 0,
+          "reservedSilence": true
+        },
+        {
+          "index": 7,
+          "sampleRate": 44100,
+          "frames": 705600,
+          "channels": 2,
+          "duration": 16,
+          "paddedTailSeconds": 0,
+          "trimmedTailSeconds": 0,
+          "decodedBytes": 0,
+          "reservedSilence": true
+        },
+        {
+          "index": 8,
+          "sampleRate": 44100,
+          "frames": 705600,
+          "channels": 2,
+          "duration": 16,
+          "paddedTailSeconds": 0,
+          "trimmedTailSeconds": 0,
+          "decodedBytes": 0,
+          "reservedSilence": true
+        }
+      ],
+      "groups": [
+        {
+          "id": 1,
+          "pitchMap": null,
+          "pitchSemitones": 0,
+          "pitchFactor": 1,
+          "origin": 0,
+          "start": 0,
+          "end": 10,
+          "nodeCount": 1,
+          "processorChannels": 18,
+          "sourceOutputs": 9,
+          "retainedPCMBytes": 31752000,
+          "retainedChunks": 20,
+          "latency": 0.12,
+          "role": "selected"
+        }
+      ],
+      "retainedPCMBytes": 31752000,
+      "inFlightPCMBytes": 0,
+      "decodedBytes": 28224000,
+      "policy": {
+        "direction": "forward",
+        "normalMinimumLead": "queried group latency plus2 render quanta",
+        "followMinimumLeadSeconds": 0.04,
+        "followOwner": "currently active forward owner only",
+        "followCoverage": "required history must already be prepared; reject without replacement",
+        "rate": [
+          0.25,
+          4
+        ],
+        "effectiveSemitones": [
+          -24,
+          24
+        ],
+        "chunkSeconds": 0.5,
+        "requiredPrerollSeconds": 1,
+        "retentionPrerollSeconds": 2,
+        "retentionHysteresisSeconds": 1,
+        "lookaheadSeconds": 8,
+        "driverMs": 50,
+        "crossfadeSeconds": 0.01,
+        "srcTaps": 32,
+        "srcPhases": 1024,
+        "decodedSources": "Whole decoded AudioBuffers remain caller-owned; only processor PCM copies are windowed.",
+        "unsupported": [
+          "reverse",
+          "loop",
+          "Stem Slip",
+          "incremental compressed-file decoding"
+        ],
+        "quality": "Independent32-tap windowed-sinc normalization and10ms group crossfade; vendor sonic equivalence and artifact-free transitions are unverified."
+      },
+      "lastError": null
+    },
+    "handoffTimes": [
+      null,
+      0.9707482993197278
+    ]
+  },
+  "firstPads": [
+    {
+      "deck": 0,
+      "at": 0.8707482993197279,
+      "enabled": [
+        false,
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "deck": 1,
+      "at": 0.8765532879818594,
+      "enabled": [
+        false,
+        true,
+        true,
+        true
+      ]
+    }
+  ],
+  "inspection": "Every original sample finite/hash/quantum checked. Continuity from capture+50ms until actual pad, 10ms windows against fixed capture+50\u2013150ms baseline. Actual pad+30\u201380ms mute response; later+160\u2013250ms, restore+30\u2013200ms, Stop+100\u2013250ms. No fitted time/gain/pitch or PCM repair.",
+  "nativeAcceptance": false,
+  "hardwareAcceptance": false,
+  "musicalSeparationQualityAcceptance": false,
+  "exactAudibleCursorAcceptance": false,
+  "fullParityAcceptance": false
+}

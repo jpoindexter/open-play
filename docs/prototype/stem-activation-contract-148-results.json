@@ -1,0 +1,23 @@
+{
+  "passed": true,
+  "scope": "Actual attachStems and handoff coordination with controlled renderer/clock/failure/Stop. No browser/audio/model/native/physical acceptance.",
+  "engineSHA256": "c964306aa486e37e1e3b612b81d386e67e08aa645b27edbb6eee33921a57f1e8",
+  "checks": [
+    {
+      "name": "Both playing decks retain old voices until all replacements are ready; paused deck is not resumed",
+      "passed": true
+    },
+    {
+      "name": "Failed replacement retains old audible voices and previous prepared cache",
+      "passed": true
+    },
+    {
+      "name": "Failed replacement retains old audible voices and absent prepared cache",
+      "passed": true
+    },
+    {
+      "name": "Superseding Stop is retained rather than restarting a stopped deck",
+      "passed": true
+    }
+  ]
+}

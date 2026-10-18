@@ -1235,6 +1235,19 @@ export class AudioEngine {
       }
       throw error;
     } finally { signal?.removeEventListener('abort',cancelled);for(const detach of ownerLinks)detach();handoff?.dispose(); }
+    // Committed cold voices still bridge to their audible predecessor until
+    // the future handoff. Do not announce Ready while pads can only control
+    // the not-yet-audible replacement. The commit is already final here;
+    // Stop/supersession retains ownership rather than rolling it back.
+    const settling = replacements.map(({deck}) => ({deck,voice:this.voices.get(deck.index)}))
+      .filter(({voice}) => Number.isFinite(voice?.handoffBefore?.until))
+      .map(item => ({...item,until:item.voice.handoffBefore.until+.01}));
+    const settleStarted=performance.now();
+    while(settling.some(({deck,voice,until}) => deck.playing&&this.voices.get(deck.index)===voice&&this.ctx.currentTime<until)) {
+      if(this.ctx.state==='closed'||performance.now()-settleStarted>5000)
+        throw new Error('Stem activation committed, but the audio handoff did not finish.');
+      await new Promise(resolve=>setTimeout(resolve,10));
+    }
     for (const d of loaded.filter(d => !continuous.some(x => x.deck === d))) {
       if (this.voices.get(d.index)?.stemSlipTransport) {
         await this.refreshStemSlipBuffers(d);
