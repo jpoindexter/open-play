@@ -1,0 +1,38 @@
+{
+  "passed": true,
+  "scope": "Controlled GUI-coordinate model with asynchronous engine collaborator; not browser input/audio, native, hardware or vendor equivalence.",
+  "tests": [
+    {
+      "name": "Synced +20% at ±8% starts centered; one GUI step changes pitch by 0.1%, not 12.1%",
+      "passed": true
+    },
+    {
+      "name": "Ordinary GUI tempo remains absolute and accepts external rate changes while focused",
+      "passed": true
+    },
+    {
+      "name": "External shared or MIDI tempo changes rebase the next GUI step at the last GUI position",
+      "passed": true
+    },
+    {
+      "name": "REL disengagement, absolute hardware reset, range changes and replacement tracks retain valid coordinates",
+      "passed": true
+    },
+    {
+      "name": "Rapid GUI gestures accumulate while audio work is pending",
+      "passed": true
+    },
+    {
+      "name": "Transport saturation consumes overshoot; reversing by one GUI step moves immediately",
+      "passed": true
+    },
+    {
+      "name": "Rejected rate changes rebase at actual audio state and permit a subsequent gesture",
+      "passed": true
+    },
+    {
+      "name": "Reset sets actual pitch to zero; unloaded decks never request audio changes",
+      "passed": true
+    }
+  ]
+}

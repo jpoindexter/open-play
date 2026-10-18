@@ -1,0 +1,77 @@
+{
+  "date": "2026-10-18",
+  "reference": "Installed Serato DJ Pro4.0.10.213 macOS, Hercules connected, inspected Vertical layout",
+  "method": "Normal paused UI, bundled Serato demo tracks, authorized CGEvent fallback for controls rejected by accessibility; no playback, proprietary code or audio copied. Raw screenshots private/ignored.",
+  "observations": [
+    {
+      "state": "both demo tracks paused",
+      "left": {
+        "nominalBPM": 100,
+        "actualBPM": 99.5,
+        "pitchPercent": -0.5,
+        "rangePercent": 8,
+        "clock": "00:00.0"
+      },
+      "right": {
+        "nominalBPM": 120,
+        "actualBPM": 119,
+        "pitchPercent": -0.9,
+        "rangePercent": 8,
+        "clock": "00:00.0"
+      }
+    },
+    {
+      "state": "both SYNC buttons blue",
+      "leftActualBPM": 99.5,
+      "rightActualBPM": 99.5,
+      "rightPitchPercent": -17.1,
+      "selectedRangePercent": 8,
+      "REL": "blue on both",
+      "clocks": "both00:00.0"
+    },
+    {
+      "state": "right OFF clicked once",
+      "rightActualBPM": 119,
+      "rightPitchPercent": -0.9,
+      "rightSYNC": "inactive",
+      "leftActualBPM": 99.5,
+      "leftSYNC": "blue",
+      "clocks": "both00:00.0"
+    },
+    {
+      "state": "left OFF clicked; final screenshot inspected",
+      "leftActualBPM": 99.5,
+      "leftPitchPercent": -0.5,
+      "rightActualBPM": 119,
+      "rightPitchPercent": -0.9,
+      "SYNC": "both inactive",
+      "clocks": "both00:00.0"
+    }
+  ],
+  "limits": [
+    "Selected Sync preference was not inspected in this sequence; do not infer Smart Sync first-OFF semantics from it.",
+    "No separate vertical GUI tempo slider was visible in the inspected connected-hardware layout; this does not prove absence in every mode.",
+    "Out-of-range pitch display is observed. Exact GUI mapping, taper, gesture behavior, musical quality and hardware timing remain unverified."
+  ],
+  "sources": [
+    {
+      "url": "https://support.serato.com/hc/en-us/articles/227561947-Relative-Pitch-Tempo-Control-Smart-Sync",
+      "claim": "Documented shared Sync pitch, first/second OFF relative behavior, hardware Shift reposition."
+    },
+    {
+      "url": "https://support.serato.com/hc/en-us/articles/360001274635-Practice-mode",
+      "claim": "Documented Practice BPM box drag/fine drag and Control/Command-click zero-pitch reset. Connected reference above was not Practice mode."
+    },
+    {
+      "url": "https://support.serato.com/hc/en-us/articles/203056994-SYNC-with-Serato-DJ",
+      "claim": "Documented Simple Sync controller relative shared tempo and one-OFF absolute return; vinyl/CDJ exceptions differ."
+    }
+  ],
+  "privateScreenshotHashes": {
+    "both-demo-paused.png": "3b9423e4f06850da9c7329c32ed04e0491f2fec3b5419b5645df298b18c936b1",
+    "final-paused.png": "5f5a6782223d99c665891e0cf9d3d6bd84568669cf23c56d1c06ba625f2677df",
+    "first-off-paused.png": "07197084d84ae1032696315b963b7f198e6ec9dd93fb292f458748fabf4c1ab7",
+    "left-demo-load.png": "951a3776c17449fa13de66c020a142cbf871d1b60ed01f5fad2a0ae3f3f128dc",
+    "synced-paused.png": "1fc980d5c89e7c1f647def14a03dfa83a0a02e7c63f170bb1afe490d5db1e687"
+  }
+}

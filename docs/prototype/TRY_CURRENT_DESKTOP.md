@@ -17,3 +17,5 @@ Source100eacd6226142ae2ff86876006236991424799d. ASAR28504c15e462e0b2111289991374
 Full Serato parity remains unaccepted; the independent full Claude audit is unlaunched. GUI tempo-slider position outside the selected pitch range remains a known core display gap. Current native report export used read-only Elements UI copying because this diagnostic has no ordinary download button; no console/injected JavaScript was used. Prefer a direct export action in a later diagnostic update rather than repeating that extraction flow.
 
 [Native22review](DESKTOP_0.1.22_REVIEW.md) · [Native recorded result](desktop-0.1.22-relative-tempo-native-results.json) · [Main setup observation](desktop-0.1.22-playback-observation.json) · [Previous21guide](TRY_PLAYBACK_DESKTOP_0.1.21.md) · [Full plan](../../FULL_BUILD_PLAN.md)
+
+Browser-only plan132 now addresses the out-of-range GUI tempo jump; [its review](GUI_TEMPO_REVIEW.md) records actual keyboard/pointer/audio evidence and remaining Simple Sync controller requirements. This change is not packaged in22. The prepared desktop test above remains unchanged.

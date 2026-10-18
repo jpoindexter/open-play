@@ -1,0 +1,223 @@
+{
+  "passed": false,
+  "scope": "Production app browser controls and actual generated-tone audio. Physical graph muted. Not native, physical MIDI, real music, exact vendor taper/GUI mapping, keylock/warp/StemSlip compositions or full parity.",
+  "inspection": "Independent Python full-window hash/finite checks and global20\u201320000Hz Hann16x FFT peak. No expected-frequency mask or fitted waveform; fixed0.3Hz/.005RMS/1e-6silence criteria. Snapshot windows only, not whole-run continuity.",
+  "originalBytes": 429870,
+  "originalSHA256": "567e8399dcbd585c68c3329e89d8b94724c8f6d9bfd4f6f8c8b055ecc0cd28fe",
+  "sampleRate": 44100,
+  "sourceBefore": {
+    "app.js": "5d6a8e952eca5b53b6d50736678ffdf757af291400eaaf4ba865222e944b8d3e",
+    "engine.js": "a4ec10d9401a3e7fd6d7184e331ae59adf6213a87df5152969c8a3edb8fab9f8",
+    "smart-sync.js": "b57c0016cc9467b2f7fe178f7acd1522c2c4d1611c3b6ff6288c97fefcd1e3f1",
+    "deck-tempo.js": "8834de1db544204d1baab0b282b3b2063941629d6bf255a83de5cf5177ac744e",
+    "gui-tempo-harness.js": "383eaf7e7e942e71b7c6155180a0383da0da17bf564ebe8023c8c110e079f2e3",
+    "fx-tempo-capture-worklet.js": "1ffd09ad071f8dd2dca8b745ca8f9e1182e515eb32c42340bf5ff0a035e9b8b9",
+    "tempo-slider.js": "absent"
+  },
+  "sourceAfter": {
+    "app.js": "5d6a8e952eca5b53b6d50736678ffdf757af291400eaaf4ba865222e944b8d3e",
+    "engine.js": "a4ec10d9401a3e7fd6d7184e331ae59adf6213a87df5152969c8a3edb8fab9f8",
+    "smart-sync.js": "b57c0016cc9467b2f7fe178f7acd1522c2c4d1611c3b6ff6288c97fefcd1e3f1",
+    "deck-tempo.js": "8834de1db544204d1baab0b282b3b2063941629d6bf255a83de5cf5177ac744e",
+    "gui-tempo-harness.js": "383eaf7e7e942e71b7c6155180a0383da0da17bf564ebe8023c8c110e079f2e3",
+    "fx-tempo-capture-worklet.js": "1ffd09ad071f8dd2dca8b745ca8f9e1182e515eb32c42340bf5ff0a035e9b8b9",
+    "tempo-slider.js": "absent"
+  },
+  "sourceStable": true,
+  "cases": [
+    {
+      "name": "Before: actual +20%, slider incorrectly clamped to +8%",
+      "rates": [
+        1,
+        1.2
+      ],
+      "decks": [
+        {
+          "sync": true,
+          "state": "beat",
+          "playing": true,
+          "pitchRange": 8,
+          "position": 8.337573696145125,
+          "slider": {
+            "value": "0",
+            "min": "-8",
+            "max": "8",
+            "ariaValueText": null,
+            "label": "\u00b18%"
+          }
+        },
+        {
+          "sync": true,
+          "state": "beat",
+          "playing": true,
+          "pitchRange": 8,
+          "position": 10.005088831156561,
+          "slider": {
+            "value": "8",
+            "min": "-8",
+            "max": "8",
+            "ariaValueText": null,
+            "label": "\u00b18%"
+          }
+        }
+      ],
+      "measurements": [
+        {
+          "channel": 0,
+          "frames": 13230,
+          "sha256": "1a7d6a81cc6e104718ce742ff92d6d71a23cf6aa236856281a5f61038ae2a177",
+          "allFinite": true,
+          "rms": 0.05691723467219056,
+          "peak": 0.08049294352531433,
+          "frequencyHz": 329.99999565846025,
+          "expectedHz": 330,
+          "frequencyErrorHz": -4.341539749930234e-06,
+          "passed": true
+        },
+        {
+          "channel": 1,
+          "frames": 13230,
+          "sha256": "48bb3d8f58d590984064b99dbca78ab0578ffbe0628aa90caf871ab5eac33d5f",
+          "allFinite": true,
+          "rms": 0.05475013596979595,
+          "peak": 0.07745975255966187,
+          "frequencyHz": 660.000031272683,
+          "expectedHz": 660.0,
+          "frequencyErrorHz": 3.1272683031602355e-05,
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "Before: ArrowDown jumps to +7.9%, changing both synced decks",
+      "rates": [
+        0.8991666666666666,
+        1.079
+      ],
+      "decks": [
+        {
+          "sync": true,
+          "state": "beat",
+          "playing": true,
+          "pitchRange": 8,
+          "position": 13.816607399246319,
+          "slider": {
+            "value": "-8",
+            "min": "-8",
+            "max": "8",
+            "ariaValueText": null,
+            "label": "\u00b18%"
+          }
+        },
+        {
+          "sync": true,
+          "state": "beat",
+          "playing": true,
+          "pitchRange": 8,
+          "position": 16.579929529398747,
+          "slider": {
+            "value": "7.9",
+            "min": "-8",
+            "max": "8",
+            "ariaValueText": null,
+            "label": "\u00b18%"
+          }
+        }
+      ],
+      "measurements": [
+        {
+          "channel": 0,
+          "frames": 13230,
+          "sha256": "1037e35c3411c231708da9c3b63bb92bfb3a761ad62ab10d418f7264ae1a4d7b",
+          "allFinite": true,
+          "rms": 0.05690125547750786,
+          "peak": 0.08049219101667404,
+          "frequencyHz": 296.72498864020304,
+          "expectedHz": 296.725,
+          "frequencyErrorHz": -1.1359796985743742e-05,
+          "passed": true
+        },
+        {
+          "channel": 1,
+          "frames": 13230,
+          "sha256": "d0952c9669054f693374a3193d73217adca43776f6c209fbbd16b2bd79d3de64",
+          "allFinite": true,
+          "rms": 0.054744541335076946,
+          "peak": 0.07746588438749313,
+          "frequencyHz": 593.4499930346833,
+          "expectedHz": 593.4499999999999,
+          "frequencyErrorHz": -6.965316629248264e-06,
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "Before: stopped",
+      "rates": [
+        0.8991666666666666,
+        1.079
+      ],
+      "decks": [
+        {
+          "sync": true,
+          "state": "beat",
+          "playing": false,
+          "pitchRange": 8,
+          "position": 16.682196441442787,
+          "slider": {
+            "value": "-8",
+            "min": "-8",
+            "max": "8",
+            "ariaValueText": null,
+            "label": "\u00b18%"
+          }
+        },
+        {
+          "sync": true,
+          "state": "beat",
+          "playing": false,
+          "pitchRange": 8,
+          "position": 20.01863645601705,
+          "slider": {
+            "value": "7.9",
+            "min": "-8",
+            "max": "8",
+            "ariaValueText": null,
+            "label": "\u00b18%"
+          }
+        }
+      ],
+      "measurements": [
+        {
+          "channel": 0,
+          "frames": 13230,
+          "sha256": "9d55c9c2f49808c72a9d28e4f661bae87b1ed419741fa38e5ffeff9648f33d7d",
+          "allFinite": true,
+          "rms": 0.0,
+          "peak": 0.0,
+          "frequencyHz": null,
+          "expectedHz": 0,
+          "frequencyErrorHz": null,
+          "passed": true
+        },
+        {
+          "channel": 1,
+          "frames": 13230,
+          "sha256": "9d55c9c2f49808c72a9d28e4f661bae87b1ed419741fa38e5ffeff9648f33d7d",
+          "allFinite": true,
+          "rms": 0.0,
+          "peak": 0.0,
+          "frequencyHz": null,
+          "expectedHz": 0,
+          "frequencyErrorHz": null,
+          "passed": true
+        }
+      ],
+      "passed": true
+    }
+  ],
+  "maxFrequencyErrorHz": 3.1272683031602355e-05,
+  "bugReproduced": true
+}

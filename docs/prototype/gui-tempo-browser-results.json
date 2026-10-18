@@ -1,0 +1,750 @@
+{
+  "passed": true,
+  "scope": "Production app browser controls and actual generated-tone audio. Physical graph muted. Not native, physical MIDI, real music, exact vendor taper/GUI mapping, keylock/warp/StemSlip compositions or full parity.",
+  "inspection": "Independent Python full-window hash/finite checks and global20\u201320000Hz Hann16x FFT peak. No expected-frequency mask or fitted waveform; fixed0.3Hz/.005RMS/1e-6silence criteria. Snapshot windows only, not whole-run continuity.",
+  "originalBytes": 1573336,
+  "originalSHA256": "aa105447d785fa1c0c4ce9758fb63fe4257f69400ea828e7ea6bb45e2d1fc207",
+  "sampleRate": 44100,
+  "sourceBefore": {
+    "app.js": "87f35027b4daca098b481b5232294fe8ab3af0e9088a8565cbc079167aba55ad",
+    "engine.js": "a4ec10d9401a3e7fd6d7184e331ae59adf6213a87df5152969c8a3edb8fab9f8",
+    "smart-sync.js": "b57c0016cc9467b2f7fe178f7acd1522c2c4d1611c3b6ff6288c97fefcd1e3f1",
+    "deck-tempo.js": "8834de1db544204d1baab0b282b3b2063941629d6bf255a83de5cf5177ac744e",
+    "gui-tempo-harness.js": "3dbe8a15627d5135b63bd578c3aeb30ddce309a93b06222f64af52191ed73a43",
+    "fx-tempo-capture-worklet.js": "1ffd09ad071f8dd2dca8b745ca8f9e1182e515eb32c42340bf5ff0a035e9b8b9",
+    "tempo-slider.js": "b83de88ef715f7bdd68d9d7745862f9ecaac80c41f53e91c7041b01f1576f7cf"
+  },
+  "sourceAfter": {
+    "app.js": "87f35027b4daca098b481b5232294fe8ab3af0e9088a8565cbc079167aba55ad",
+    "engine.js": "a4ec10d9401a3e7fd6d7184e331ae59adf6213a87df5152969c8a3edb8fab9f8",
+    "smart-sync.js": "b57c0016cc9467b2f7fe178f7acd1522c2c4d1611c3b6ff6288c97fefcd1e3f1",
+    "deck-tempo.js": "8834de1db544204d1baab0b282b3b2063941629d6bf255a83de5cf5177ac744e",
+    "gui-tempo-harness.js": "3dbe8a15627d5135b63bd578c3aeb30ddce309a93b06222f64af52191ed73a43",
+    "fx-tempo-capture-worklet.js": "1ffd09ad071f8dd2dca8b745ca8f9e1182e515eb32c42340bf5ff0a035e9b8b9",
+    "tempo-slider.js": "b83de88ef715f7bdd68d9d7745862f9ecaac80c41f53e91c7041b01f1576f7cf"
+  },
+  "sourceStable": true,
+  "cases": [
+    {
+      "name": "Synced +20% baseline",
+      "rates": [
+        1,
+        1.2
+      ],
+      "decks": [
+        {
+          "sync": true,
+          "state": "beat",
+          "playing": true,
+          "pitchRange": 8,
+          "position": 0.7736734693877554,
+          "slider": {
+            "value": "0",
+            "min": "-8",
+            "max": "8",
+            "ariaValueText": "Pitch +0.0 percent; relative adjustment +0.0 percent; 120.0 BPM",
+            "label": "\u00b18% \u00b7 REL"
+          }
+        },
+        {
+          "sync": true,
+          "state": "beat",
+          "playing": true,
+          "pitchRange": 8,
+          "position": 0.9284081980960444,
+          "slider": {
+            "value": "0",
+            "min": "-8",
+            "max": "8",
+            "ariaValueText": "Pitch +20.0 percent; relative adjustment +0.0 percent; 120.0 BPM",
+            "label": "\u00b18% \u00b7 REL"
+          }
+        }
+      ],
+      "measurements": [
+        {
+          "channel": 0,
+          "frames": 13230,
+          "sha256": "97ebc499c3f542a08b98ebd92343944eaaafe5d2db26b839f4c65071404b9d2c",
+          "allFinite": true,
+          "rms": 0.05729266411552527,
+          "peak": 0.08102387189865112,
+          "frequencyHz": 329.9999953271626,
+          "expectedHz": 330,
+          "frequencyErrorHz": -4.672837405905739e-06,
+          "passed": true
+        },
+        {
+          "channel": 1,
+          "frames": 13230,
+          "sha256": "0458fdec27cc92dd31f770086e35d7157e3daeb0907ebce5b6a3175016ce441b",
+          "allFinite": true,
+          "rms": 0.056162066248852595,
+          "peak": 0.07945945858955383,
+          "frequencyHz": 660.0000313114903,
+          "expectedHz": 660.0,
+          "frequencyErrorHz": 3.1311490261032304e-05,
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "ArrowDown: one relative step, both synced decks",
+      "rates": [
+        0.9991666666666668,
+        1.199
+      ],
+      "decks": [
+        {
+          "sync": true,
+          "state": "beat",
+          "playing": true,
+          "pitchRange": 8,
+          "position": 1.5164217689842863,
+          "slider": {
+            "value": "0",
+            "min": "-8",
+            "max": "8",
+            "ariaValueText": "Pitch -0.1 percent; relative adjustment +0.0 percent; 119.9 BPM",
+            "label": "\u00b18% \u00b7 REL"
+          }
+        },
+        {
+          "sync": true,
+          "state": "beat",
+          "playing": true,
+          "pitchRange": 8,
+          "position": 1.8197061764345146,
+          "slider": {
+            "value": "-0.1",
+            "min": "-8",
+            "max": "8",
+            "ariaValueText": "Pitch +19.9 percent; relative adjustment -0.1 percent; 119.9 BPM",
+            "label": "\u00b18% \u00b7 REL"
+          }
+        }
+      ],
+      "measurements": [
+        {
+          "channel": 0,
+          "frames": 13230,
+          "sha256": "844c1791b956d2e0c1275c61e43ef890240a559ef980ddb6dd62b67649ad0c03",
+          "allFinite": true,
+          "rms": 0.05728188037848674,
+          "peak": 0.08102258294820786,
+          "frequencyHz": 329.7249997062864,
+          "expectedHz": 329.725,
+          "frequencyErrorHz": -2.9371364007602097e-07,
+          "passed": true
+        },
+        {
+          "channel": 1,
+          "frames": 13230,
+          "sha256": "40ac52672e2deb61ea944a7b9326b9b3cfd30e3fda148949d3f3f0e695a4aa67",
+          "allFinite": true,
+          "rms": 0.05614150600036041,
+          "peak": 0.07946313917636871,
+          "frequencyHz": 659.4499999546954,
+          "expectedHz": 659.45,
+          "frequencyErrorHz": -4.5304659579414874e-08,
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "ArrowUp: return to synced baseline",
+      "rates": [
+        1,
+        1.2
+      ],
+      "decks": [
+        {
+          "sync": true,
+          "state": "beat",
+          "playing": true,
+          "pitchRange": 8,
+          "position": 2.247521391369048,
+          "slider": {
+            "value": "0",
+            "min": "-8",
+            "max": "8",
+            "ariaValueText": "Pitch +0.0 percent; relative adjustment +0.0 percent; 120.0 BPM",
+            "label": "\u00b18% \u00b7 REL"
+          }
+        },
+        {
+          "sync": true,
+          "state": "beat",
+          "playing": true,
+          "pitchRange": 8,
+          "position": 2.6970257393508277,
+          "slider": {
+            "value": "0",
+            "min": "-8",
+            "max": "8",
+            "ariaValueText": "Pitch +20.0 percent; relative adjustment +0.0 percent; 120.0 BPM",
+            "label": "\u00b18% \u00b7 REL"
+          }
+        }
+      ],
+      "measurements": [
+        {
+          "channel": 0,
+          "frames": 13230,
+          "sha256": "78be3a713d72c7ab442407b6924ad26da4393c07523016264534c690343c115a",
+          "allFinite": true,
+          "rms": 0.05727920176192488,
+          "peak": 0.08100501447916031,
+          "frequencyHz": 329.9999953672571,
+          "expectedHz": 330,
+          "frequencyErrorHz": -4.632742900412268e-06,
+          "passed": true
+        },
+        {
+          "channel": 1,
+          "frames": 13230,
+          "sha256": "3e79b125654cf5d0fa442cf4d2adfab7a0b240ff253e6b38b63ba3272b9f3388",
+          "allFinite": true,
+          "rms": 0.056161124277630446,
+          "peak": 0.07945597916841507,
+          "frequencyHz": 660.0000312996989,
+          "expectedHz": 660.0,
+          "frequencyErrorHz": 3.1299698889597494e-05,
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "First OFF and ArrowDown: only REL deck changes",
+      "rates": [
+        1,
+        1.199
+      ],
+      "decks": [
+        {
+          "sync": true,
+          "state": "beat",
+          "playing": true,
+          "pitchRange": 8,
+          "position": 3.2750043845663273,
+          "slider": {
+            "value": "0",
+            "min": "-8",
+            "max": "8",
+            "ariaValueText": "Pitch +0.0 percent; relative adjustment +0.0 percent; 120.0 BPM",
+            "label": "\u00b18% \u00b7 REL"
+          }
+        },
+        {
+          "sync": false,
+          "state": "relative",
+          "playing": true,
+          "pitchRange": 8,
+          "position": 3.9296628698459295,
+          "slider": {
+            "value": "-0.1",
+            "min": "-8",
+            "max": "8",
+            "ariaValueText": "Pitch +19.9 percent; relative adjustment -0.1 percent; 119.9 BPM",
+            "label": "\u00b18% \u00b7 REL"
+          }
+        }
+      ],
+      "measurements": [
+        {
+          "channel": 0,
+          "frames": 13230,
+          "sha256": "b3bfdf457ccbbc37064865456c95bfa9eb28984be22ea5f60200b26ee3f1eada",
+          "allFinite": true,
+          "rms": 0.05727920176192488,
+          "peak": 0.08100501447916031,
+          "frequencyHz": 329.99999524151065,
+          "expectedHz": 330,
+          "frequencyErrorHz": -4.7584893536622985e-06,
+          "passed": true
+        },
+        {
+          "channel": 1,
+          "frames": 13230,
+          "sha256": "55f318231a7c2dab3e62de3a641a2cd3ce666970359dc8e992c690fb2ebc7fd5",
+          "allFinite": true,
+          "rms": 0.05614248599047599,
+          "peak": 0.07946101576089859,
+          "frequencyHz": 659.4499994978166,
+          "expectedHz": 659.45,
+          "frequencyErrorHz": -5.021834112994839e-07,
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "Range8\u219216 and ArrowUp preserve tempo offset",
+      "rates": [
+        1,
+        1.2
+      ],
+      "decks": [
+        {
+          "sync": true,
+          "state": "beat",
+          "playing": true,
+          "pitchRange": 8,
+          "position": 4.285072411777211,
+          "slider": {
+            "value": "0",
+            "min": "-8",
+            "max": "8",
+            "ariaValueText": "Pitch +0.0 percent; relative adjustment +0.0 percent; 120.0 BPM",
+            "label": "\u00b18% \u00b7 REL"
+          }
+        },
+        {
+          "sync": false,
+          "state": "relative",
+          "playing": true,
+          "pitchRange": 16,
+          "position": 5.141065335251036,
+          "slider": {
+            "value": "0.1",
+            "min": "-16",
+            "max": "16",
+            "ariaValueText": "Pitch +20.0 percent; relative adjustment +0.1 percent; 120.0 BPM",
+            "label": "\u00b116% \u00b7 REL"
+          }
+        }
+      ],
+      "measurements": [
+        {
+          "channel": 0,
+          "frames": 13230,
+          "sha256": "a61893e5f34211aaa0b2e0b475c18c4efe08b609d2064915931dd7665021105e",
+          "allFinite": true,
+          "rms": 0.05727920176192488,
+          "peak": 0.08100501447916031,
+          "frequencyHz": 329.9999957847452,
+          "expectedHz": 330,
+          "frequencyErrorHz": -4.215254818973335e-06,
+          "passed": true
+        },
+        {
+          "channel": 1,
+          "frames": 13230,
+          "sha256": "2117a2f383b658dddad421160204f9e96de6c7ec5ac2e5ce39d594f6ad2b8b95",
+          "allFinite": true,
+          "rms": 0.05616155264038674,
+          "peak": 0.07945895195007324,
+          "frequencyHz": 660.0000313316862,
+          "expectedHz": 660.0,
+          "frequencyErrorHz": 3.133168615931936e-05,
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "Primary GUI step changes shared tempo",
+      "rates": [
+        1.001,
+        1.2011999999999998
+      ],
+      "decks": [
+        {
+          "sync": true,
+          "state": "beat",
+          "playing": true,
+          "pitchRange": 8,
+          "position": 5.318702903972461,
+          "slider": {
+            "value": "0.1",
+            "min": "-8",
+            "max": "8",
+            "ariaValueText": "Pitch +0.1 percent; relative adjustment +0.1 percent; 120.1 BPM",
+            "label": "\u00b18% \u00b7 REL"
+          }
+        },
+        {
+          "sync": true,
+          "state": "beat",
+          "playing": true,
+          "pitchRange": 16,
+          "position": 6.382443479184392,
+          "slider": {
+            "value": "0.1",
+            "min": "-16",
+            "max": "16",
+            "ariaValueText": "Pitch +20.1 percent; relative adjustment +0.1 percent; 120.1 BPM",
+            "label": "\u00b116% \u00b7 REL"
+          }
+        }
+      ],
+      "measurements": [
+        {
+          "channel": 0,
+          "frames": 13230,
+          "sha256": "2a8c226f3681ce3ab9ea78669d5c5b82fb66d242ffff63c491ee59fcc438a137",
+          "allFinite": true,
+          "rms": 0.05730684050164916,
+          "peak": 0.08102288842201233,
+          "frequencyHz": 330.3300116728964,
+          "expectedHz": 330.33,
+          "frequencyErrorHz": 1.1672896391701215e-05,
+          "passed": true
+        },
+        {
+          "channel": 1,
+          "frames": 13230,
+          "sha256": "0032e3807918cf470c4eb553d1cb5eae02c3f08b919d0b847f43caf77367afbd",
+          "allFinite": true,
+          "rms": 0.05614626657090036,
+          "peak": 0.0794631764292717,
+          "frequencyHz": 660.660009050158,
+          "expectedHz": 660.6600000000001,
+          "frequencyErrorHz": 9.050157927958935e-06,
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "Secondary GUI step rebases after primary change",
+      "rates": [
+        1.0001666666666666,
+        1.2002
+      ],
+      "decks": [
+        {
+          "sync": true,
+          "state": "beat",
+          "playing": true,
+          "pitchRange": 8,
+          "position": 6.073820681755776,
+          "slider": {
+            "value": "0.1",
+            "min": "-8",
+            "max": "8",
+            "ariaValueText": "Pitch +0.0 percent; relative adjustment +0.1 percent; 120.0 BPM",
+            "label": "\u00b18% \u00b7 REL"
+          }
+        },
+        {
+          "sync": true,
+          "state": "beat",
+          "playing": true,
+          "pitchRange": 16,
+          "position": 7.288584784705624,
+          "slider": {
+            "value": "0",
+            "min": "-16",
+            "max": "16",
+            "ariaValueText": "Pitch +20.0 percent; relative adjustment +0.0 percent; 120.0 BPM",
+            "label": "\u00b116% \u00b7 REL"
+          }
+        }
+      ],
+      "measurements": [
+        {
+          "channel": 0,
+          "frames": 13230,
+          "sha256": "bcc571570fa7c6d08b7694bd6795bc7d6f7c835f2b2248030050d95567464136",
+          "allFinite": true,
+          "rms": 0.05728227340106795,
+          "peak": 0.08102350682020187,
+          "frequencyHz": 330.0549947957967,
+          "expectedHz": 330.055,
+          "frequencyErrorHz": -5.20420331895366e-06,
+          "passed": true
+        },
+        {
+          "channel": 1,
+          "frames": 13230,
+          "sha256": "7e0c792ec45d351879c8349289325ab496756c9870442d4e23a68265e8c0c6f8",
+          "allFinite": true,
+          "rms": 0.05616550870217843,
+          "peak": 0.079463429749012,
+          "frequencyHz": 660.109976186816,
+          "expectedHz": 660.11,
+          "frequencyErrorHz": -2.381318404331978e-05,
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "Control+Home resets actual pitch and shared tempo",
+      "rates": [
+        0.8333333333333334,
+        1
+      ],
+      "decks": [
+        {
+          "sync": true,
+          "state": "beat",
+          "playing": true,
+          "pitchRange": 8,
+          "position": 6.782098946430786,
+          "slider": {
+            "value": "0.1",
+            "min": "-8",
+            "max": "8",
+            "ariaValueText": "Pitch -16.7 percent; relative adjustment +0.1 percent; 100.0 BPM",
+            "label": "\u00b18% \u00b7 REL"
+          }
+        },
+        {
+          "sync": true,
+          "state": "beat",
+          "playing": true,
+          "pitchRange": 16,
+          "position": 8.138518700654815,
+          "slider": {
+            "value": "0",
+            "min": "-16",
+            "max": "16",
+            "ariaValueText": "Pitch +0.0 percent; relative adjustment +0.0 percent; 100.0 BPM",
+            "label": "\u00b116% \u00b7 REL"
+          }
+        }
+      ],
+      "measurements": [
+        {
+          "channel": 0,
+          "frames": 13230,
+          "sha256": "73baadb56becb6dfe8da0b514c61f66ff2fd1c927a45fbbc7915f8a3e8ea2307",
+          "allFinite": true,
+          "rms": 0.057281990151498194,
+          "peak": 0.08101769536733627,
+          "frequencyHz": 274.9999884952458,
+          "expectedHz": 275.0,
+          "frequencyErrorHz": -1.1504754183988553e-05,
+          "passed": true
+        },
+        {
+          "channel": 1,
+          "frames": 13230,
+          "sha256": "33eea734a2a8e792dcee91d168432baf93c6fdbbe94cb64f207b1118ed03364c",
+          "allFinite": true,
+          "rms": 0.056151867592993635,
+          "peak": 0.07941072434186935,
+          "frequencyHz": 550.0000045413072,
+          "expectedHz": 550,
+          "frequencyErrorHz": 4.5413072484734585e-06,
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "Second OFF and End use ordinary absolute +16%",
+      "rates": [
+        0.8333333333333334,
+        1.16
+      ],
+      "decks": [
+        {
+          "sync": true,
+          "state": "beat",
+          "playing": true,
+          "pitchRange": 8,
+          "position": 8.010821517286928,
+          "slider": {
+            "value": "0.1",
+            "min": "-8",
+            "max": "8",
+            "ariaValueText": "Pitch -16.7 percent; relative adjustment +0.1 percent; 100.0 BPM",
+            "label": "\u00b18% \u00b7 REL"
+          }
+        },
+        {
+          "sync": false,
+          "state": "off",
+          "playing": true,
+          "pitchRange": 16,
+          "position": 9.666856104382584,
+          "slider": {
+            "value": "16",
+            "min": "-16",
+            "max": "16",
+            "ariaValueText": "Pitch +16.0 percent; 116.0 BPM",
+            "label": "\u00b116%"
+          }
+        }
+      ],
+      "measurements": [
+        {
+          "channel": 0,
+          "frames": 13230,
+          "sha256": "7742da3c4446c2dfd98c5d28ddf04b77c6253fdc1d84acfb28798fa6186ee77c",
+          "allFinite": true,
+          "rms": 0.057281993641740636,
+          "peak": 0.08101782202720642,
+          "frequencyHz": 274.99998862508403,
+          "expectedHz": 275.0,
+          "frequencyErrorHz": -1.1374915970918664e-05,
+          "passed": true
+        },
+        {
+          "channel": 1,
+          "frames": 13230,
+          "sha256": "4c7d69ad28ff2ea82a44d2829bb4716314360586d809dc41a481dd783a6a94b3",
+          "allFinite": true,
+          "rms": 0.05614865587437654,
+          "peak": 0.0794624537229538,
+          "frequencyHz": 637.9999831671388,
+          "expectedHz": 638.0,
+          "frequencyErrorHz": -1.6832861206239613e-05,
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "Command-click resets only unsynced deck",
+      "rates": [
+        0.8333333333333334,
+        1
+      ],
+      "decks": [
+        {
+          "sync": true,
+          "state": "beat",
+          "playing": true,
+          "pitchRange": 8,
+          "position": 8.862219834100634,
+          "slider": {
+            "value": "0.1",
+            "min": "-8",
+            "max": "8",
+            "ariaValueText": "Pitch -16.7 percent; relative adjustment +0.1 percent; 100.0 BPM",
+            "label": "\u00b18% \u00b7 REL"
+          }
+        },
+        {
+          "sync": false,
+          "state": "off",
+          "playing": true,
+          "pitchRange": 16,
+          "position": 10.759122756323308,
+          "slider": {
+            "value": "0",
+            "min": "-16",
+            "max": "16",
+            "ariaValueText": "Pitch +0.0 percent; 100.0 BPM",
+            "label": "\u00b116%"
+          }
+        }
+      ],
+      "measurements": [
+        {
+          "channel": 0,
+          "frames": 13230,
+          "sha256": "5dbe39a888cc53b8c2eb9fa86f5bedd040dd97e9ad012283b0770fcb36179a33",
+          "allFinite": true,
+          "rms": 0.05728199631222207,
+          "peak": 0.08101790398359299,
+          "frequencyHz": 274.9999887824236,
+          "expectedHz": 275.0,
+          "frequencyErrorHz": -1.1217576400213147e-05,
+          "passed": true
+        },
+        {
+          "channel": 1,
+          "frames": 13230,
+          "sha256": "c0c5ae9bb0b3d79cb786504cf32e83542c25f45a999dfae3933a98037c553971",
+          "allFinite": true,
+          "rms": 0.05616146915764663,
+          "peak": 0.07942420244216919,
+          "frequencyHz": 550.0000045162562,
+          "expectedHz": 550,
+          "frequencyErrorHz": 4.516256240094663e-06,
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "Both normal Play buttons stop; captured silence",
+      "rates": [
+        0.8333333333333334,
+        1
+      ],
+      "decks": [
+        {
+          "sync": true,
+          "state": "armed",
+          "playing": false,
+          "pitchRange": 8,
+          "position": 9.220194126397303,
+          "slider": {
+            "value": "0.1",
+            "min": "-8",
+            "max": "8",
+            "ariaValueText": "Pitch -16.7 percent; relative adjustment +0.1 percent; 100.0 BPM",
+            "label": "\u00b18% \u00b7 REL"
+          }
+        },
+        {
+          "sync": false,
+          "state": "off",
+          "playing": false,
+          "pitchRange": 16,
+          "position": 11.467331373103352,
+          "slider": {
+            "value": "0",
+            "min": "-16",
+            "max": "16",
+            "ariaValueText": "Pitch +0.0 percent; 100.0 BPM",
+            "label": "\u00b116%"
+          }
+        }
+      ],
+      "measurements": [
+        {
+          "channel": 0,
+          "frames": 13230,
+          "sha256": "9d55c9c2f49808c72a9d28e4f661bae87b1ed419741fa38e5ffeff9648f33d7d",
+          "allFinite": true,
+          "rms": 0.0,
+          "peak": 0.0,
+          "frequencyHz": null,
+          "expectedHz": 0,
+          "frequencyErrorHz": null,
+          "passed": true
+        },
+        {
+          "channel": 1,
+          "frames": 13230,
+          "sha256": "9d55c9c2f49808c72a9d28e4f661bae87b1ed419741fa38e5ffeff9648f33d7d",
+          "allFinite": true,
+          "rms": 0.0,
+          "peak": 0.0,
+          "frequencyHz": null,
+          "expectedHz": 0,
+          "frequencyErrorHz": null,
+          "passed": true
+        }
+      ],
+      "passed": true
+    }
+  ],
+  "maxFrequencyErrorHz": 3.133168615931936e-05,
+  "currentSourceMatches": true,
+  "executionContext": {
+    "operator": "CUA browser real locator key presses and Command-click; app preparation/capture helper places generated buffers and mutes physical output.",
+    "nativePreserved": {
+      "version": "0.1.22",
+      "ASARSHA256": "28504c15e462e0b2111289991374b7d10506d4c65a3c37dc3f914a8ea2800240",
+      "readOnlyAX": "0decksplaying/both00:00.0/Master\u221212",
+      "newNativeAcceptance": false
+    },
+    "cleanup": {
+      "ownTab121": "closed",
+      "ownHelper18874": "exit130 after explicit CtrlC, confirmed live session14551 before stop",
+      "main8768": "HTTP200 after browser workflow; not stopped"
+    },
+    "renderedScreenshotSHA256": "f9c9812370ebaf78b507e241396596dd13cd5b0882d0a51d1b92fb9338aa89dc"
+  }
+}
