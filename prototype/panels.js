@@ -1292,7 +1292,7 @@ export function createPanels(a) {
           clearButton = $("#stems-clear");
         const showProgress = (text) => {
           output.textContent = text;
-          cancelButton.disabled = text.startsWith("Activating");
+          cancelButton.disabled = false;
           clearButton.disabled = true;
         };
         const settled = () => {

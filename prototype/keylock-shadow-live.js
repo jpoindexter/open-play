@@ -35,13 +35,18 @@ class LiveKeylock{
   this.pitchRateMap=pitchRateMap?.map(point=>({...point}));
   this.context=context;this.sources=buffers.map(geometry);this.duration=this.sources[0].duration;this.sampleRate=context.sampleRate;this.chunkFrames=Math.max(1,Math.round(this.sampleRate*CHUNK_SECONDS));this.durationFrames=Math.ceil(this.duration*this.sampleRate);this.onEvent=onEvent;this.controller=new AbortController();this.signal=this.controller.signal;this.ownerSignal=signal;this.ownerAbort=()=>this.dispose().catch(()=>{});this.disposed=false;this.revision=0;this.pending=null;this.serial=Promise.resolve();this.groupSequence=0;this.groups=new Set();this.active=null;this.retiring=null;this.retirementPromise=null;this.timer=null;this.driverBusy=false;this.disposePromise=null;this.lastError=null;this.ended=false;this.inFlightPCMBytes=0;this.initialState=normalize({rate,keylock,semitones});this.initialPosition=this.validPosition(position);this.clock=[{when:context.currentTime,position:this.initialPosition,playing:false,...this.initialState}];
   if(this.sources.length===5){const stems=this.sources.slice(1),first=stems[0];if(stems.some(s=>s.sampleRate!==first.sampleRate||s.length!==first.length||Math.abs(s.duration-this.duration)>.1+1e-9))throw new RangeError('Prepared stems must share sample rate/length and stay within.1s of original duration');}
-  this.reservedStems=!!reserveStems&&buffers.length===1;this.stemsReady=buffers.length===5;
-  if(this.reservedStems)for(let i=0;i<4;i++)this.sources.push({empty:true,buffer:null,channels:null,sampleRate:this.sampleRate,length:this.durationFrames,numberOfChannels:2,duration:this.duration});
+  this.reservedStems=!!reserveStems&&(buffers.length===1||this.sources.slice(1).every(source=>source.numberOfChannels<=2));this.stemsReady=buffers.length===5;this.activeStemBank=0;this.stemBankSwitchUntil=0;this.stemStage=null;
+  if(this.reservedStems){
+   for(const source of this.sources.slice(1))if(source.numberOfChannels===1){source.channels=[source.channels[0],source.channels[0]];source.numberOfChannels=2;}
+   while(this.sources.length<9)this.sources.push(this.emptyStemSource());
+  }
   this.describeSources();
   if(signal?.aborted){this.controller.abort();throw abortError();}
-  this.outputs=this.sources.map(s=>{const node=context.createGain();node.channelCount=s.numberOfChannels;node.channelCountMode='explicit';node.channelInterpretation='discrete';node.gain.value=1;return node;});
+  this.outputs=this.sources.slice(0,this.reservedStems?5:this.sources.length).map(s=>{const node=context.createGain();node.channelCount=s.numberOfChannels;node.channelCountMode='explicit';node.channelInterpretation='discrete';node.gain.value=1;return node;});
+  this.stemBankGates=this.reservedStems?Array.from({length:2},(_,bank)=>Array.from({length:4},(_,index)=>{const gain=context.createGain();gain.channelCount=2;gain.channelCountMode='explicit';gain.channelInterpretation='discrete';gain.gain.value=bank===0?1:0;gain.connect(this.outputs[index+1]);return gain;})):[];
   signal?.addEventListener('abort',this.ownerAbort,{once:true});
  }
+ emptyStemSource(){return{empty:true,buffer:null,channels:null,sampleRate:this.sampleRate,length:this.durationFrames,numberOfChannels:2,duration:this.duration};}
  describeSources(){this.sourceGeometry=this.sources.map((s,index)=>({index,sampleRate:s.sampleRate,frames:s.length,channels:s.numberOfChannels,duration:s.duration,paddedTailSeconds:Math.max(0,this.duration-s.duration),trimmedTailSeconds:Math.max(0,s.duration-this.duration),decodedBytes:s.buffer?s.length*s.buffer.numberOfChannels*4:0,reservedSilence:!!s.empty}));}
  async copySource(group,source,start,count){
   if(source.empty){this.checkGroup(group);return Array.from({length:source.numberOfChannels},()=>new Float32Array(count));}
@@ -50,44 +55,51 @@ class LiveKeylock{
   if(group.pitchFactor!==1)return copyPCMChunk(source.channels,source.sampleRate,sr/group.pitchFactor,start,count,{signal:group.controller.signal,offsetSourceFrames:group.originFrame*(source.sampleRate/sr)});
   return copyPCMChunk(source.channels,source.sampleRate,sr,group.originFrame+start,count,{signal:group.controller.signal});
  }
- replaceStems(buffers){
-  this.assertOwner();if(!this.reservedStems)throw failure('InvalidStateError','This live owner did not reserve Stem channels');
+ async replaceStems(buffers,options={}){const stage=await this.prepareStemReplacement(buffers,options);stage.validate();return stage.commit();}
+ prepareStemReplacement(buffers,{signal}={}){
+  this.assertOwner();if(!this.reservedStems)throw failure('InvalidStateError','This live owner did not reserve Stem banks');
   if(!Array.isArray(buffers)||buffers.length!==4)throw new RangeError('Supply four prepared Stem buffers');
   const sources=buffers.map(geometry),first=sources[0];
   if(sources.some(s=>s.numberOfChannels>2||s.sampleRate!==first.sampleRate||s.length!==first.length||Math.abs(s.duration-this.duration)>.1+1e-9))throw new RangeError('Reserved Stems require aligned mono/stereo buffers within.1s of the original');
-  // Preserve each fixed stereo slot. Mono input is duplicated without changing
-  // its caller-owned buffer or allocating a whole-track stereo copy.
   for(const source of sources)if(source.numberOfChannels===1){source.channels=[source.channels[0],source.channels[0]];source.numberOfChannels=2;}
   return this.operation(async op=>{
-   await this.waitRetiring(op);this.checkOperation(op);const group=this.active;
-   await this.fill(group,this.position());this.checkOperation(op);
-   const previous=group.fillSerial;
-   const install=previous.catch(()=>{}).then(async()=>{
-    this.checkOperation(op);this.checkGroup(group);let chunks=0;
-    for(const chunk of group.chunks){
-     this.checkOperation(op);const pcm=[],cost=chunk.processorFrameCount*8*4;this.checkPCMAllocation(cost);this.inFlightPCMBytes+=cost;
-     try{
-      for(const source of sources){pcm.push(...await this.copySource(group,source,chunk.processorStartFrame,chunk.processorFrameCount));this.checkOperation(op);this.checkGroup(group);}
-      const ack=await group.nodes[0].replaceBufferChannels(chunk.processorStartFrame,this.sources[0].numberOfChannels,pcm,pcm.map(c=>c.buffer));
-      this.checkOperation(op);this.checkGroup(group);
-      if(ack.startFrame!==chunk.processorStartFrame||ack.endFrame!==chunk.processorStartFrame+chunk.processorFrameCount||ack.channels!==8)throw Error('Stem replacement acknowledgment mismatch');
-      chunks++;
-     }finally{this.inFlightPCMBytes-=cost;}
-    }
-    this.checkOperation(op);this.sources=[this.sources[0],...sources];this.describeSources();
-    // The transfer acknowledgment precedes audible output from the processor's
-    // existing analysis history. Keep preparation pending for the queried
-    // latency plus two render quanta; a first pad press must not pay this cost.
-    const acknowledgedAt=this.context.currentTime,readyAt=acknowledgedAt+group.latency+2*128/this.sampleRate,deadline=performance.now()+10000;
-    while(this.context.currentTime<readyAt){
-     this.checkOperation(op);this.checkGroup(group);
-     if(performance.now()>deadline)throw failure('TimeoutError','Stem output readiness did not advance on the audio clock');
-     await new Promise(resolve=>setTimeout(resolve,10));
-    }
-    this.checkOperation(op);this.checkGroup(group);this.stemsReady=true;
-    const response={group:group.id,chunks,channels:group.channels,acknowledgedAt,readyAt,originalChannelsUnchanged:true};this.emit('stems-replaced',response);return response;
-   });
-   group.fillSerial=install;return install;
+   const aborted=()=>op.controller.abort();if(signal?.aborted)op.controller.abort();signal?.addEventListener('abort',aborted,{once:true});
+   let stage;
+   try{
+    await this.waitRetiring(op);while(this.context.currentTime<this.stemBankSwitchUntil){this.checkOperation(op);await new Promise(resolve=>setTimeout(resolve,5));}this.checkOperation(op);const group=this.active,bank=this.stemsReady?1-this.activeStemBank:0,sourceOffset=1+bank*4;
+    let settled=false,prepared=false;
+    const valid=()=>{this.assertOwner();alive(signal);if(settled||this.stemStage!==stage||this.active!==group||this.revision!==op.revision)throw abortError();};
+    stage={bank,group:group.id,validate:()=>{valid();if(!prepared)throw failure('InvalidStateError','Stem bank is not ready');},
+     cancel:()=>{if(settled)return;settled=true;if(this.stemStage===stage){this.stemStage=null;for(let i=0;i<4;i++)this.sources[sourceOffset+i]=this.emptyStemSource();this.describeSources();}op.controller.abort();},
+     commit:({when=this.context.currentTime}={})=>{
+      stage.validate();finite(when,'Stem bank switch time');if(when<this.context.currentTime)throw failure('LateScheduleError','Stem bank switch time already elapsed');
+      if(this.stemsReady&&bank!==this.activeStemBank){for(let b=0;b<2;b++)for(const gate of this.stemBankGates[b]){gainAt(gate.gain,b===this.activeStemBank?1:0,when);gate.gain.linearRampToValueAtTime(b===bank?1:0,when+CROSSFADE_SECONDS);}}
+      this.stemBankSwitchUntil=when+CROSSFADE_SECONDS;this.activeStemBank=bank;this.stemsReady=true;settled=true;this.stemStage=null;const response={...stage.receipt,when,bank};this.emit('stems-replaced',response);return response;
+     }};
+    this.stemStage=stage;
+    await this.fill(group,this.position());this.checkOperation(op);
+    const previous=group.fillSerial;
+    const install=previous.catch(()=>{}).then(async()=>{
+     this.checkOperation(op);this.checkGroup(group);let chunks=0;
+     for(const chunk of group.chunks){
+      this.checkOperation(op);const pcm=[],cost=chunk.processorFrameCount*8*4;this.checkPCMAllocation(cost);this.inFlightPCMBytes+=cost;
+      try{
+       for(const source of sources){pcm.push(...await this.copySource(group,source,chunk.processorStartFrame,chunk.processorFrameCount));this.checkOperation(op);this.checkGroup(group);}
+       const firstChannel=this.sources[0].numberOfChannels+bank*8;
+       const ack=await group.nodes[0].replaceBufferChannels(chunk.processorStartFrame,firstChannel,pcm,pcm.map(c=>c.buffer));this.checkOperation(op);this.checkGroup(group);
+       if(ack.startFrame!==chunk.processorStartFrame||ack.endFrame!==chunk.processorStartFrame+chunk.processorFrameCount||ack.firstChannel!==firstChannel||ack.channels!==8)throw Error('Stem replacement acknowledgment mismatch');
+       chunks++;
+      }finally{this.inFlightPCMBytes-=cost;}
+     }
+     this.checkOperation(op);for(let i=0;i<4;i++)this.sources[sourceOffset+i]=sources[i];this.describeSources();
+     const acknowledgedAt=this.context.currentTime,readyAt=acknowledgedAt+group.latency+2*128/this.sampleRate,deadline=performance.now()+10000;
+     this.emit('stem-bank-warming',{bank,group:group.id,acknowledgedAt,readyAt});
+     while(this.context.currentTime<readyAt){this.checkOperation(op);this.checkGroup(group);if(performance.now()>deadline)throw failure('TimeoutError','Stem output readiness did not advance on the audio clock');await new Promise(resolve=>setTimeout(resolve,10));}
+     this.checkOperation(op);this.checkGroup(group);valid();prepared=true;stage.receipt={group:group.id,bank,chunks,channels:group.channels,acknowledgedAt,readyAt,originalChannelsUnchanged:true};return stage;
+    });
+    group.fillSerial=install;return await install;
+   }catch(error){stage?.cancel();throw error;}
+   finally{signal?.removeEventListener('abort',aborted);}
   });
  }
  validPosition(position){finite(position,'position');if(position<0||position>this.duration)throw new RangeError('Position must lie within original audible duration');return position;}
@@ -120,7 +132,8 @@ class LiveKeylock{
      for(let c=0;c<source.numberOfChannels;c++)splitter.connect(merger,offset+c,c);
      merger.connect(gain);group.routingNodes.push(merger);
     }else node.connect(gain);
-    gain.connect(this.outputs[group.gains.length]);group.gains.push(gain);offset+=source.numberOfChannels;
+    const sourceIndex=group.gains.length;
+    gain.connect(this.reservedStems&&sourceIndex>0?this.stemBankGates[Math.floor((sourceIndex-1)/4)][(sourceIndex-1)%4]:this.outputs[sourceIndex]);group.gains.push(gain);offset+=source.numberOfChannels;
    }
    group.latency=await node.latency();group.channels=channels;this.checkGroup(group);
    if(!Number.isFinite(group.latency)||group.latency<0)throw Error('Processor latency is not finite');await this.fill(group,position);this.checkGroup(group);return group;
@@ -203,7 +216,7 @@ class LiveKeylock{
  }
 
  coverage(group,position){const first=Math.max(0,Math.floor((position-REQUIRED_PREROLL_SECONDS)*this.sampleRate)),last=Math.min(this.durationFrames,Math.ceil((position+Math.max(.5,group.latency*5))*this.sampleRate));return first>=group.startFrame&&last<=group.endFrame;}
- operation(run){this.assertOwner();if(this.pending)this.pending.controller.abort();const op={revision:++this.revision,controller:new AbortController(),group:null};this.pending=op;const result=this.serial.catch(()=>{}).then(async()=>{this.assertOwner();alive(op.controller.signal);try{return await run(op);}finally{if(this.pending===op)this.pending=null;}});this.serial=result;return result;}
+ operation(run){this.assertOwner();this.stemStage?.cancel();if(this.pending)this.pending.controller.abort();const op={revision:++this.revision,controller:new AbortController(),group:null};this.pending=op;const result=this.serial.catch(()=>{}).then(async()=>{this.assertOwner();alive(op.controller.signal);try{return await run(op);}finally{if(this.pending===op)this.pending=null;}});this.serial=result;return result;}
  checkOperation(op){this.assertOwner();alive(op.controller.signal);if(this.pending!==op)throw abortError();}
  async waitRetiring(op){while(this.retiring||this.retirementPromise){this.checkOperation(op);if(this.retirementPromise){await this.retirementPromise;continue;}if(this.context.currentTime>=this.retiring.retireAt){await this.retire();break;}await new Promise((resolve,reject)=>{const aborted=()=>{clearTimeout(timer);reject(abortError());};const timer=setTimeout(()=>{op.controller.signal.removeEventListener('abort',aborted);resolve();},DRIVER_MS);op.controller.signal.addEventListener('abort',aborted,{once:true});});}}
  minimumLead(group,shadowFollow=false){return shadowFollow?FOLLOW_LEAD_SECONDS:group.latency+2*128/this.sampleRate;}
@@ -276,6 +289,6 @@ class LiveKeylock{
  async retire(){if(this.retirementPromise)return this.retirementPromise;const old=this.retiring;if(!old)return;this.retiring=null;this.retirementPromise=this.disposeGroup(old).finally(()=>this.retirementPromise=null);return this.retirementPromise;}
  fail(error){if(this.disposed)return;this.lastError={name:error.name,message:error.message};this.emit('error',{error:this.lastError});this.dispose().catch(()=>{});}
  disposeGroup(group){if(group.disposePromise)return group.disposePromise;group.controller.abort();group.detachOperation?.();group.ownerDetach();for(const gain of group.gains){gainAt(gain.gain,0,this.context.currentTime);gain.disconnect();}for(const node of group.routingNodes)node.disconnect();group.disposePromise=(async()=>{const results=await Promise.allSettled(group.nodes.map(node=>node.dispose()));await Promise.allSettled([group.fillSerial]);this.groups.delete(group);group.chunks=[];group.nodes=[];group.gains=[];group.routingNodes=[];const failed=results.find(result=>result.status==='rejected');if(failed&&failed.reason?.name!=='AbortError')throw failed.reason;})();return group.disposePromise;}
- snapshot(){const groups=[...this.groups].map(g=>({id:g.id,pitchMap:g.pitchMap?.nodes||null,pitchSemitones:g.pitchSemitones,pitchFactor:g.pitchFactor,origin:g.originFrame/this.sampleRate,start:g.startFrame/this.sampleRate,end:g.endFrame/this.sampleRate,nodeCount:g.nodes.length,processorChannels:g.channels,sourceOutputs:g.gains.length,retainedPCMBytes:g.chunks.reduce((sum,c)=>sum+c.bytes.reduce((a,b)=>a+b,0),0),retainedChunks:g.chunks.length,latency:g.latency,role:g.disposePromise?'disposing':g===this.active?'selected':g===this.retiring?'retiring':'preparing'}));return{reservedStems:this.reservedStems,stemsReady:this.stemsReady,resamplePitch:this.resamplePitch,maxPCMBytes:this.maxPCMBytes,followMinimumLeadSeconds:FOLLOW_LEAD_SECONDS,byteAccounting:'Acknowledged retained PCM and in-flight chunk copies only; excludes decoded inputs, SRC tables and opaque WASM heaps.',disposed:this.disposed,state:this.stateAt(),sourceGeometry:this.sourceGeometry,groups,retainedPCMBytes:groups.reduce((sum,g)=>sum+g.retainedPCMBytes,0),inFlightPCMBytes:this.inFlightPCMBytes,decodedBytes:this.sourceGeometry.reduce((sum,s)=>sum+s.decodedBytes,0),policy,lastError:this.lastError};}
- dispose(){if(this.disposePromise)return this.disposePromise;const frozen=this.stateAt();this.clock=[{...frozen,when:this.context.currentTime,playing:false}];this.disposed=true;this.controller.abort();this.pending?.controller.abort();if(this.timer){clearTimeout(this.timer);this.timer=null;}this.ownerSignal?.removeEventListener('abort',this.ownerAbort);for(const output of this.outputs)gainAt(output.gain,0,this.context.currentTime);this.disposePromise=(async()=>{const results=await Promise.allSettled([...this.groups].map(group=>this.disposeGroup(group)));for(const output of this.outputs)output.disconnect();this.retiring=null;this.sources=[];this.emit('disposed',{snapshot:this.snapshot()});const rejected=results.find(result=>result.status==='rejected');if(rejected)throw rejected.reason;return{disposed:true,retainedPCMBytes:this.snapshot().retainedPCMBytes};})();return this.disposePromise;}
+ snapshot(){const groups=[...this.groups].map(g=>({id:g.id,pitchMap:g.pitchMap?.nodes||null,pitchSemitones:g.pitchSemitones,pitchFactor:g.pitchFactor,origin:g.originFrame/this.sampleRate,start:g.startFrame/this.sampleRate,end:g.endFrame/this.sampleRate,nodeCount:g.nodes.length,processorChannels:g.channels,sourceOutputs:g.gains.length,retainedPCMBytes:g.chunks.reduce((sum,c)=>sum+c.bytes.reduce((a,b)=>a+b,0),0),retainedChunks:g.chunks.length,latency:g.latency,role:g.disposePromise?'disposing':g===this.active?'selected':g===this.retiring?'retiring':'preparing'}));return{reservedStems:this.reservedStems,stemBanks:this.reservedStems?2:0,activeStemBank:this.activeStemBank,stagedStemBank:this.stemStage?.bank??null,publicOutputs:this.outputs.length,stemsReady:this.stemsReady,resamplePitch:this.resamplePitch,maxPCMBytes:this.maxPCMBytes,followMinimumLeadSeconds:FOLLOW_LEAD_SECONDS,byteAccounting:'Acknowledged retained PCM and in-flight chunk copies only; excludes decoded inputs, SRC tables and opaque WASM heaps.',disposed:this.disposed,state:this.stateAt(),sourceGeometry:this.sourceGeometry,groups,retainedPCMBytes:groups.reduce((sum,g)=>sum+g.retainedPCMBytes,0),inFlightPCMBytes:this.inFlightPCMBytes,decodedBytes:this.sourceGeometry.reduce((sum,s)=>sum+s.decodedBytes,0),policy,lastError:this.lastError};}
+ dispose(){if(this.disposePromise)return this.disposePromise;const frozen=this.stateAt();this.stemStage?.cancel();this.clock=[{...frozen,when:this.context.currentTime,playing:false}];this.disposed=true;this.controller.abort();this.pending?.controller.abort();if(this.timer){clearTimeout(this.timer);this.timer=null;}this.ownerSignal?.removeEventListener('abort',this.ownerAbort);for(const output of this.outputs)gainAt(output.gain,0,this.context.currentTime);this.disposePromise=(async()=>{const results=await Promise.allSettled([...this.groups].map(group=>this.disposeGroup(group)));for(const output of this.outputs)output.disconnect();for(const bank of this.stemBankGates)for(const gate of bank)gate.disconnect();this.retiring=null;this.sources=[];this.emit('disposed',{snapshot:this.snapshot()});const rejected=results.find(result=>result.status==='rejected');if(rejected)throw rejected.reason;return{disposed:true,retainedPCMBytes:this.snapshot().retainedPCMBytes};})();return this.disposePromise;}
 }

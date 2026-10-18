@@ -10,14 +10,14 @@ import numpy as np
 ROOT = Path(__file__).resolve().parents[1]
 
 
-def inspect(path, sources):
+def inspect(path, sources, processor_channels=10):
     original = path.read_bytes(); r = json.loads(original)
     assert r['workflowCompleted'] and r['sourceStable'] and not r['errors'] and r['originalUnchanged']
     assert r['job']['state'] == 'complete' and r['job']['model'] == 'SCNet-large official'
     assert not r['activation']['voiceChanged'] and r['initialLive']['reservedStems']
     assert r['activation']['live']['stemsReady']
     assert r['initialLive']['groups'][0]['id'] == r['activation']['live']['groups'][0]['id']
-    assert r['initialLive']['groups'][0]['processorChannels'] == r['activation']['live']['groups'][0]['processorChannels'] == 10
+    assert r['initialLive']['groups'][0]['processorChannels'] == r['activation']['live']['groups'][0]['processorChannels'] == processor_channels
     assert r['firstPad']['enabled'] == [False, True, True, True]
     assert r['firstPad']['restored'] == [True]*4 and r['firstPad']['gainValues'] == [0, 0, 1, 1, 1]
     for name, sha in r['sourceBefore'].items():

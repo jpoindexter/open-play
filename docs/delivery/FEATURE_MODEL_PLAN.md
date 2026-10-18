@@ -44,9 +44,9 @@ Planning-table statuses are a dated baseline. Current scoped implementation evid
 | FX-002 | Tempo-synced effect timing | gpt-6-astra / high | claude-opus-5 / high | Research pending |
 | SMP-001 | Sampler slots and banks | gpt-6.1-sol / high | claude-sonnet-5 / medium | Research pending |
 | SMP-002 | Sampler audio modes and routing | gpt-6-astra / high | claude-opus-5 / high | Research pending |
-| STM-001 | Local stem separation | gpt-6.1-sol / high | claude-sonnet-5 / high | Real local cache and scoped keylocked activation executed; musical quality remains open (plan145) |
+| STM-001 | Local stem separation | gpt-6.1-sol / high | claude-sonnet-5 / high | Real local cache, bank-staged activation/failure/cancel/retry executed; musical quality/resources remain open (plan146) |
 | STM-002 | Stem mute/solo/mix controls | gpt-6-astra / high | claude-opus-5 / high | Research pending |
-| STM-003 | Stem cache/cancel/fallback | gpt-6.1-sol / xhigh | claude-opus-5 / high | Same-instance activation and initial ownership checks executed; warm-up/repeat rollback and other cache gaps remain open (plan145) |
+| STM-003 | Stem cache/cancel/fallback | gpt-6.1-sol / xhigh | claude-opus-5 / high | Staged-bank failure, warm-up Cancel, retry and mixed-owner coordination checked; refill/SRC/other cache cases remain open (plan146) |
 | REC-001 | Record the actual master mix | gpt-6-astra / high | claude-opus-5 / high | Research pending |
 | REC-002 | Recording limits and recovery | gpt-6.1-sol / xhigh | claude-opus-5 / high | Research pending |
 | AUD-001 | Output/input device selection | gpt-6-astra / xhigh | claude-opus-5 / xhigh | Research pending |

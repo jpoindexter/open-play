@@ -239,23 +239,15 @@ await test('A progress callback can cancel before upload without a subsequent PO
   assert.equal(f.calls.activations.length, 0);
 });
 
-await test('Activation is indivisible: cancellation rejects and matching callers still share completion', async () => {
-  const gate = deferred();
-  const f = fixture({attach: () => gate.promise});
-  const first = [], second = [];
-  const p = f.preparation.prepare(f.track, message => first.push(message));
-  await until(() => f.calls.activations.length === 1);
-  const shared = f.preparation.prepare(f.track, message => second.push(message));
-  assert.equal(shared, p);
-  assert.match(second[0], /^Activating/);
-  await assert.rejects(f.preparation.cancel(f.track), /activation is finishing/);
-  assert.equal(f.preparation.active.get(f.track.id).cancelled, false);
-  gate.resolve();
-  await shared;
-  assert.match(second.at(-1), /^Ready/);
-  assert.equal(f.track.stemModel, 'scnet');
-  assert.equal(deletes(f.calls).length, 0);
-  assert.equal(f.preparation.active.size, 0);
+await test('Activation cancellation reaches its AbortSignal, preserves shared rejection and does not cancel completed cache', async () => {
+  const gate=deferred();
+  const f=fixture({attach:(_track,_buffers,_decks,{signal})=>{signal.addEventListener('abort',()=>gate.reject(new DOMException('Cancelled','AbortError')),{once:true});return gate.promise;}});
+  const first=[],second=[];const p=f.preparation.prepare(f.track,message=>first.push(message));
+  const rejected=assert.rejects(p,{name:'AbortError'});await until(()=>f.calls.activations.length===1);
+  const shared=f.preparation.prepare(f.track,message=>second.push(message));assert.equal(shared,p);assert.match(second[0],/^Activating/);
+  await f.preparation.cancel(f.track);await rejected;
+  assert(f.calls.activations[0][3].signal.aborted);assert.equal(deletes(f.calls).length,0);assert.match(second.at(-1),/^Cancelled/);
+  assert.equal(f.track.stemModel,undefined);assert.equal(f.preparation.active.size,0);gate.resolve();await tick();assert.match(second.at(-1),/^Cancelled/);
 });
 
 console.log(JSON.stringify({

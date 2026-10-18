@@ -25,9 +25,9 @@ export function createStemPreparation(engine, decks, {onChange = () => {}} = {})
   async function cancel(track) {
     const job = active.get(track.id);
     if (!job) return;
-    if (job.committing) throw new Error('Audio activation is finishing. Use Restore full mix afterward.');
     job.cancelled = true;
-    if (job.id) await request(`/api/stems/${job.id}`, {method:'DELETE', headers});
+    job.controller.abort();
+    if (job.id && !job.committing) await request(`/api/stems/${job.id}`, {method:'DELETE', headers});
   }
   function subscribe(job, update) {
     if (typeof update !== 'function') return;
@@ -49,7 +49,7 @@ export function createStemPreparation(engine, decks, {onChange = () => {}} = {})
     }
     if (track.provider || track.missing)
       return Promise.reject(new Error('Choose an available local file.'));
-    const job = {cancelled:false, id:null, backend, subscribers:new Set()};
+    const job = {cancelled:false, id:null, backend, controller:new AbortController(), subscribers:new Set()};
     active.set(track.id, job);
     subscribe(job, update);
     // Publish the shared promise before progress callbacks can re-enter prepare.
@@ -97,7 +97,7 @@ export function createStemPreparation(engine, decks, {onChange = () => {}} = {})
       cancelled();
       job.committing = true;
       status('Activating separated audio…');
-      await engine.attachStems(track, buffers, decks);
+      await engine.attachStems(track, buffers, decks, {signal:job.controller.signal});
       track.stemModel = result.model;
       track.stemBackend = job.backend;
       track.stemJob = result.id;

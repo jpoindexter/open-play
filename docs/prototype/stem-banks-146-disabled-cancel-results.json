@@ -1,0 +1,39 @@
+{
+  "checkpoint": 146,
+  "workflowCompleted": false,
+  "audioContinuityAcceptance": false,
+  "rawSHA256": "e5523539f72aac2a83c4dd8d6576dd4d59c7ad74cc666e9228cd369779afeda1",
+  "rawBytes": 16890,
+  "errors": [
+    {
+      "message": "Cancel during audible-bank warm-up timed out",
+      "stack": "Error: Cancel during audible-bank warm-up timed out\n    at assert (http://127.0.0.1:8785/prototype/stem-activation-inplace-146-harness.js:1:108)\n    at until (http://127.0.0.1:8785/prototype/stem-activation-inplace-146-harness.js:5:85)\n    at async run (http://127.0.0.1:8785/prototype/stem-activation-inplace-146-harness.js:25:28)"
+    }
+  ],
+  "cancelWarmup": {
+    "bankBefore": 0,
+    "startedAt": 2.2000907029478456,
+    "clicked": true,
+    "warming": {
+      "type": "stem-bank-warming",
+      "contextTime": 2.246530612244898,
+      "bank": 1,
+      "group": 1,
+      "acknowledgedAt": 2.246530612244898,
+      "readyAt": 2.3723356009070296
+    },
+    "clickedAt": 2.246530612244898
+  },
+  "sourceHashes": {
+    "app.js": "a34c271bb8b2270c071ab77c8ce7727cf6943733a0e21b7c6da9157c0c13089a",
+    "engine.js": "26750c5c74f99b534bedacfcac459f46f8cb69be3acc8a340166d7ccd2f60244",
+    "stems.js": "ae15916c201e9ebd9c5f2ca602f3d94d23f13391be6fa442620276720a63c85d",
+    "panels.js": "fe97a95a4e89e478c9178800a1acf6423ad2c32143c0498fafc185be65a5ae50",
+    "sync-tempo-handoff.js": "5842f9209035e24ff867004d3fef5f0a1fe7f7f4976440546b8238a225b82f9b",
+    "stem-activation-inplace-146-harness.js": "0d9e526c8d4af835c67da5affe4add21dfa9d323d998ba7bdd42932a87b96785",
+    "stem-activation-capture-145.js": "730b9c3de31e9c3546ec1ab86f8fd85ce2a1ccfe6f78fc25d8f483f8b9d75331",
+    "keylock-shadow-live.js": "c59dcc99838f3bcfa76cac228cf92183b1b7dc567f6f426f3f30328bc64d2c0e",
+    "vendor/signalsmith-stretch/SignalsmithStretch-open-play-replace.mjs": "66c9e002c6312d12a3107e21aa11be33f5ce7d92b1a4f4d85777cf54f3a74df9"
+  },
+  "finding": "Cancel was attempted during warm-up but the panel still disabled Cancel during Activating; the next job completed and cancellation wait timed out. No PCM was exported for this failed workflow. Executed sources and full workflow receipt remain private."
+}

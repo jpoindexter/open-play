@@ -361,7 +361,7 @@ export class AudioEngine {
       await this.waitForVoiceRetirement(d.index, controller.signal);
       if (!current()) return;
       const prospectiveGrid=this.onGridTimeline?.(d,{position:this.position(d),when:this.ctx.currentTime});
-      adapter = await this.createForwardKeylock({buffers, reserveStems:buffers.length===1, position: this.position(d), rate: d.rate,
+      adapter = await this.createForwardKeylock({buffers, reserveStems:true, position: this.position(d), rate: d.rate,
         resamplePitch:true,
         pitchRateMap:prospectiveGrid?[{position:0,rate:prospectiveGrid.bpm/prospectiveGrid.grid[0].bpm},...prospectiveGrid.grid.slice(1).map(node=>({position:node.time,rate:prospectiveGrid.bpm/node.bpm}))]:null,
         keylock: !!d.keylock, semitones: d.keyShift || 0, signal: controller.signal,
@@ -401,7 +401,7 @@ export class AudioEngine {
       d.position = ack.position; d.anchorPosition = ack.position; d.anchorTime = ack.when; d.playing = ack.playing;
     } finally {if (!committed) await adapter?.dispose();}
   }
-  async start(d, {positionAt, priorClock,handoff=null} = {}) {
+  async start(d, {positionAt, priorClock,handoff=null,preparedStems} = {}) {
     this.onValidateTransport?.(d);
     this.cancelDeckScratchRequest(d);
     if (!d.track) throw new Error("Load a track first.");
@@ -448,7 +448,7 @@ export class AudioEngine {
       this.nodes[d.index].channelBpm = (track.bpm || 120) * this.audibleRate(d);
       await this.applyChannelFX(d.index);
       const original = await this.buffer(track);
-      const stems = this.stemBuffers.get(track.id);
+      const stems = preparedStems===undefined?this.stemBuffers.get(track.id):preparedStems;
       let buffers = stems ? [original, ...stems] : [original];
       const transformed = keylock || shift !== 0;
       const scale = transformed ? tempo : 1;
@@ -1156,7 +1156,9 @@ export class AudioEngine {
     d.keyShift = semitones;
     if (was) await this.start(d);
   }
-  async attachStems(track, buffers, decks = []) {
+  async attachStems(track, buffers, decks = [], {signal} = {}) {
+    const checkCancelled=()=>{if(signal?.aborted)throw new DOMException('Stem activation cancelled.', 'AbortError');};
+    checkCancelled();
     if (
       buffers.length !== 4 ||
       buffers.some((b) => Math.abs(b.duration - track.duration) > 0.1)
@@ -1172,25 +1174,37 @@ export class AudioEngine {
       return d.playing && !d.processing && !d.reverse &&
         voice && !voice.deckScratchTransport && !voice.stemSlipTransport;
     }).map(deck => ({deck, clock: this.voiceClock(deck, this.voices.get(deck.index))}));
-    this.stemBuffers.set(track.id, buffers);
     const inplace = continuous.filter(({deck}) => this.voices.get(deck.index)?.liveKeylock?.reservedStems)
       .map(item => ({...item, voice:this.voices.get(item.deck.index)}));
     const replacements = continuous.filter(item => !inplace.some(x => x.deck === item.deck));
-    const handoff = replacements.length ? createSyncTempoHandoff(this.ctx, replacements.map(x => x.deck.index)) : null;
+    const handoff = continuous.length ? createSyncTempoHandoff(this.ctx, continuous.map(x => x.deck.index)) : null;
+    const staged=[],ownerLinks=[];
+    const cancelled=()=>{const error=new DOMException('Stem activation cancelled.','AbortError');handoff?.fail(error);for(const item of staged)item.stage.cancel();};
+    signal?.addEventListener('abort',cancelled,{once:true});
     try {
+      checkCancelled();
       const results = await Promise.allSettled([
         ...replacements.map(async ({deck, clock}) => {
           try {
             this.clearDeckScratchCache(deck.index);
-            await this.start(deck, {priorClock: clock, positionAt: clock, handoff});
+            await this.start(deck, {priorClock: clock, positionAt: clock, handoff,preparedStems:buffers});
           }
           catch (error) { handoff.fail(error); throw error; }
         }),
         ...inplace.map(async ({deck,voice}) => {
           this.clearDeckScratchCache(deck.index);
-          await voice.liveKeylock.replaceStems(buffers);
-          if (deck.track !== track || this.voices.get(deck.index) !== voice || !deck.playing)
-            throw new DOMException('Stem activation owner changed.', 'AbortError');
+          const controller=new AbortController(),current=()=>deck.track===track&&this.voices.get(deck.index)===voice&&deck.playing;
+          handoff.watch(deck.index,controller,current);
+          const ownerSignal=voice.liveOwnerController?.signal,ownerAborted=()=>controller.abort();
+          ownerSignal?.addEventListener('abort',ownerAborted,{once:true});ownerLinks.push(()=>ownerSignal?.removeEventListener('abort',ownerAborted));
+          if(ownerSignal?.aborted)controller.abort();
+          try{
+            const stage=await voice.liveKeylock.prepareStemReplacement(buffers,{signal:controller.signal});
+            const item={deck,voice,stage};staged.push(item);
+            if(!current())throw new DOMException('Stem activation owner changed.','AbortError');
+            item.when=await handoff.prepared(deck.index,this.ctx.currentTime+.01);
+            await handoff.arm(deck.index);
+          }catch(error){handoff.fail(error);throw error;}
         }),
       ]);
       const failed = results.find(result => result.status === 'rejected');
@@ -1198,12 +1212,17 @@ export class AudioEngine {
       // A deck can stop after its own transfer while a sibling is preparing.
       for (const {deck,voice} of inplace) if (deck.track !== track || this.voices.get(deck.index) !== voice || !deck.playing)
         throw new DOMException('Stem activation owner changed.', 'AbortError');
+      checkCancelled();
+      for(const {stage} of staged)stage.validate();
+      for(const {stage,when} of staged)stage.commit({when});
       handoff?.finish();
+      this.stemBuffers.set(track.id,buffers);
       for (const {deck,voice} of inplace) {
         voice.stemsReady = true;
         this.updateStems(deck);
       }
     } catch (error) {
+      for(const {stage} of staged)stage.cancel();
       handoff?.fail(error);
       if (this.stemBuffers.get(track.id) === buffers) {
         if (previous) this.stemBuffers.set(track.id, previous);
@@ -1215,7 +1234,7 @@ export class AudioEngine {
         this.onProcessing(deck);
       }
       throw error;
-    } finally { handoff?.dispose(); }
+    } finally { signal?.removeEventListener('abort',cancelled);for(const detach of ownerLinks)detach();handoff?.dispose(); }
     for (const d of loaded.filter(d => !continuous.some(x => x.deck === d))) {
       if (this.voices.get(d.index)?.stemSlipTransport) {
         await this.refreshStemSlipBuffers(d);
