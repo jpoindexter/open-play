@@ -2,6 +2,7 @@ import { parseBeatModifier } from "./observed-fx-control-adapters.js";
 // Independent Web Audio processors. No claim of Serato's proprietary transfer functions.
 import {
   createExtendedEffect,
+  createLPFProcessor,
   extendedEffectNames,
   channelEffectNames,
 } from "./extended-effects.js";
@@ -44,7 +45,7 @@ export function createEffect(ctx, spec, bpm = 120) {
     dry = ctx.createGain(),
     wet = ctx.createGain();
   const nodes = [input, output, dry, wet],
-    sources = [];
+    sources = [], cleanups = [];
   input.connect(dry);
   dry.connect(output);
   wet.connect(output);
@@ -61,44 +62,16 @@ export function createEffect(ctx, spec, bpm = 120) {
   if (active && spec.name === "LPF") {
     const min = clamp(frequency(p["Min Freq"], 200), 20, 20000),
       max = clamp(frequency(p["Max Freq"], 20000), min, 20000);
-    // Each biquad contributes 12 dB/octave. Odd multiples of 6 need a
-    // separate first-order stage; rounding them to a biquad aliases controls.
-    const slope = clamp(Math.round(number(p.Slope, 24) / 6) * 6, 6, 48);
-    const count = Math.floor(slope / 12), single = slope % 12 === 6;
-    const cutoff = max * Math.pow(min / max, depth);
-    const filters = [];
-    let previous = input;
-    for (let i = 0; i < count; i++) {
-      const filter = node("createBiquadFilter");
-      filters.push(filter);
-      filter.type = "lowpass";
-      filter.frequency.value = cutoff;
-      filter.Q.value = clamp(number(p.Resonance, 1.77), 0.1, 12) / count;
-      previous.connect(filter);
-      previous = filter;
-    }
-    if (single) {
-      const k = Math.tan(Math.PI * Math.min(cutoff, ctx.sampleRate * .49) / ctx.sampleRate);
-      const b = k / (1 + k);
-      const firstOrder = ctx.createIIRFilter([b, b], [1, (k - 1) / (k + 1)]);
-      nodes.push(firstOrder);
-      previous.connect(firstOrder);
-      previous = firstOrder;
-    }
-    previous.connect(wet);
-    applyParams = (next, nextDepth) => {
-      const nextSlope = clamp(Math.round(number(next.Slope, 24) / 6) * 6, 6, 48);
-      if (nextSlope !== slope) return false;
-      const lo = clamp(frequency(next["Min Freq"], 200), 20, 20000);
-      const hi = clamp(frequency(next["Max Freq"], 20000), lo, 20000);
-      const nextCutoff = hi * Math.pow(lo / hi, nextDepth);
-      // Web Audio IIR coefficients are immutable. The owning slot rebuilds
-      // when this stage's cutoff changes, as it does for a topology change.
-      if (single && nextCutoff !== cutoff) return false;
-      for (const filter of filters) {
-        smooth(filter.frequency, nextCutoff);
-        smooth(filter.Q, clamp(number(next.Resonance, 1.77), 0.1, 12) / count);
-      }
+    const slope = clamp(Math.round(number(p.Slope,24)/6)*6,6,48);
+    const cutoff=max*Math.pow(min/max,depth);
+    const processor=createLPFProcessor(ctx,{cutoff,resonance:clamp(number(p.Resonance,1.77),.1,12),slope});
+    nodes.push(processor);input.connect(processor);processor.connect(wet);
+    cleanups.push(()=>{processor.port.postMessage({type:'dispose'});processor.port.close();});
+    applyParams=(next,nextDepth)=>{
+      const lo=clamp(frequency(next['Min Freq'],200),20,20000),hi=clamp(frequency(next['Max Freq'],20000),lo,20000);
+      smooth(processor.parameters.get('cutoff'),hi*Math.pow(lo/hi,nextDepth));
+      smooth(processor.parameters.get('resonance'),clamp(number(next.Resonance,1.77),.1,12));
+      processor.parameters.get('slope').setValueAtTime(clamp(Math.round(number(next.Slope,24)/6)*6,6,48),ctx.currentTime);
       return true;
     };
   } else if (active && spec.name === "Delay") {
@@ -270,6 +243,7 @@ export function createEffect(ctx, spec, bpm = 120) {
       if (disposed) return;
       disposed = true;
       for (const source of sources) source.stop();
+      for (const cleanup of cleanups) cleanup();
       for (const n of nodes) n.disconnect();
     },
   };

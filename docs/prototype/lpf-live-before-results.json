@@ -1,0 +1,185 @@
+{
+  "passed": false,
+  "bugReproduced": true,
+  "scope": "Actual production browser LPF advanced Save/depth controls, generated DC+two-tone engine buffer and post-master stereo PCM. Physical graph muted. Not file import, music/listening, native, hardware, exact vendor response, all rates or full FX parity.",
+  "inspection": "Full retained Float32 hashes/finite/adjacent differences and fixed DC windows. Live endpoint100/2000Hz amplitudes independently projected and compared to W3C native-biquad plus bilinear one-pole/dry-wet transfer;1%relative amplitude,0.03jump,0.005mean-change criteria. No fitted waveform, acoustic/music/full-reference proof.",
+  "originalBytes": 946415,
+  "originalSHA256": "efd769d802ef683d5204d260a71bafeac7cdcc646ff39135e2d4e79706902a22",
+  "sampleRate": 44100,
+  "sourceBefore": {
+    "app.js": "131f2278e3db5460c0b5008c8328a3b073f1d8d03cff01e694ee8027f04a54b4",
+    "engine.js": "a4ec10d9401a3e7fd6d7184e331ae59adf6213a87df5152969c8a3edb8fab9f8",
+    "effects.js": "6d4b0d2ac5328813ec3bf281aec0376fdd25aab4cdcab3ca90ab23c2ea1989b1",
+    "extended-effects.js": "6fa545171852d6f854bee78110a39c8af98d0db0c74657b399ebf560349a9c7d",
+    "extended-effects-worklet.js": "635023e44ddb4c4af9c1b28e5b73cdda1ea5ad05b8a360dc1e1bd5c0604944ae",
+    "panels.js": "21ecd5626eef61d3798a5779472f68f263398f155ea2b1e29c10e9857a901e48",
+    "lpf-live-harness.js": "035954cb335aaa254c23be720653ccdc1205a24dc4b979085082ba355aee36c4",
+    "fx-tempo-capture-worklet.js": "1ffd09ad071f8dd2dca8b745ca8f9e1182e515eb32c42340bf5ff0a035e9b8b9",
+    "lpf-kernel.js": "absent"
+  },
+  "sourceAfter": {
+    "app.js": "131f2278e3db5460c0b5008c8328a3b073f1d8d03cff01e694ee8027f04a54b4",
+    "engine.js": "a4ec10d9401a3e7fd6d7184e331ae59adf6213a87df5152969c8a3edb8fab9f8",
+    "effects.js": "6d4b0d2ac5328813ec3bf281aec0376fdd25aab4cdcab3ca90ab23c2ea1989b1",
+    "extended-effects.js": "6fa545171852d6f854bee78110a39c8af98d0db0c74657b399ebf560349a9c7d",
+    "extended-effects-worklet.js": "635023e44ddb4c4af9c1b28e5b73cdda1ea5ad05b8a360dc1e1bd5c0604944ae",
+    "panels.js": "21ecd5626eef61d3798a5779472f68f263398f155ea2b1e29c10e9857a901e48",
+    "lpf-live-harness.js": "035954cb335aaa254c23be720653ccdc1205a24dc4b979085082ba355aee36c4",
+    "fx-tempo-capture-worklet.js": "1ffd09ad071f8dd2dca8b745ca8f9e1182e515eb32c42340bf5ff0a035e9b8b9",
+    "lpf-kernel.js": "absent"
+  },
+  "sourceStable": true,
+  "currentSourceMatches": false,
+  "cases": [
+    {
+      "name": "6dB live cutoff400\u2192800",
+      "specBefore": {
+        "name": "LPF",
+        "on": true,
+        "depth": 100,
+        "beat": "1/2",
+        "params": {
+          "Resonance": "1.77",
+          "Slope": "6 dB",
+          "Min Freq": "400 Hz",
+          "Max Freq": "400 Hz"
+        }
+      },
+      "specAfter": {
+        "name": "LPF",
+        "on": true,
+        "depth": 100,
+        "beat": "1/2",
+        "params": {
+          "Resonance": "1.77",
+          "Slope": "6 dB",
+          "Min Freq": "800 Hz",
+          "Max Freq": "800 Hz"
+        }
+      },
+      "commandBefore": 0.8823582766439909,
+      "commandAfter": 0.8881632653061224,
+      "voicePreserved": true,
+      "playing": true,
+      "positionBefore": 0.3150793650793651,
+      "positionAfter": 1.3251473922902495,
+      "metrics": [
+        {
+          "channel": 0,
+          "frames": 44100,
+          "allFinite": true,
+          "sha256": "20df1af442d02100dd47c45ca59356e669162ad6c599a9bbc05a7521590a5f8b",
+          "maxAdjacentSampleJump": 0.2447933927178383,
+          "peak": 0.2853226363658905,
+          "meanBefore": 0.24147937712080084,
+          "meanAfter": 0.24147937678290604,
+          "meanChange": 3.378947954768563e-10,
+          "endpointTones": [
+            {
+              "hz": 100,
+              "measuredAmplitude": 0.03194914101468294,
+              "expectedAmplitude": 0.031949142822538086,
+              "relativeError": 5.658540366504036e-08
+            },
+            {
+              "hz": 2000,
+              "measuredAmplitude": 0.011898941644131744,
+              "expectedAmplitude": 0.011898942359283732,
+              "relativeError": 6.010214743314077e-08
+            }
+          ],
+          "passed": false
+        },
+        {
+          "channel": 1,
+          "frames": 44100,
+          "allFinite": true,
+          "sha256": "20df1af442d02100dd47c45ca59356e669162ad6c599a9bbc05a7521590a5f8b",
+          "maxAdjacentSampleJump": 0.2447933927178383,
+          "peak": 0.2853226363658905,
+          "meanBefore": 0.24147937712080084,
+          "meanAfter": 0.24147937678290604,
+          "meanChange": 3.378947954768563e-10,
+          "endpointTones": [
+            {
+              "hz": 100,
+              "measuredAmplitude": 0.03194914101468294,
+              "expectedAmplitude": 0.031949142822538086,
+              "relativeError": 5.658540366504036e-08
+            },
+            {
+              "hz": 2000,
+              "measuredAmplitude": 0.011898941644131744,
+              "expectedAmplitude": 0.011898942359283732,
+              "relativeError": 6.010214743314077e-08
+            }
+          ],
+          "passed": false
+        }
+      ]
+    },
+    {
+      "name": "Normal Stop produces silence",
+      "specBefore": {
+        "name": "LPF",
+        "on": true,
+        "depth": 100,
+        "beat": "1/2",
+        "params": {
+          "Resonance": "1.77",
+          "Slope": "6 dB",
+          "Min Freq": "800 Hz",
+          "Max Freq": "800 Hz"
+        }
+      },
+      "specAfter": {
+        "name": "LPF",
+        "on": true,
+        "depth": 100,
+        "beat": "1/2",
+        "params": {
+          "Resonance": "1.77",
+          "Slope": "6 dB",
+          "Min Freq": "800 Hz",
+          "Max Freq": "800 Hz"
+        }
+      },
+      "commandBefore": 2.1942857142857144,
+      "commandAfter": 2.1942857142857144,
+      "voicePreserved": true,
+      "playing": false,
+      "positionBefore": 1.3251473922902495,
+      "positionAfter": 1.3251473922902495,
+      "metrics": [
+        {
+          "channel": 0,
+          "frames": 44100,
+          "allFinite": true,
+          "sha256": "fd6f479534cdd14635e88dfedf25c3859c01062b645f2a85570f20451b4a95bc",
+          "maxAdjacentSampleJump": 0.0,
+          "peak": 0.0,
+          "meanBefore": 0.0,
+          "meanAfter": 0.0,
+          "meanChange": 0.0,
+          "endpointTones": [],
+          "passed": true
+        },
+        {
+          "channel": 1,
+          "frames": 44100,
+          "allFinite": true,
+          "sha256": "fd6f479534cdd14635e88dfedf25c3859c01062b645f2a85570f20451b4a95bc",
+          "maxAdjacentSampleJump": 0.0,
+          "peak": 0.0,
+          "meanBefore": 0.0,
+          "meanAfter": 0.0,
+          "meanChange": 0.0,
+          "endpointTones": [],
+          "passed": true
+        }
+      ]
+    }
+  ],
+  "maxAdjacentSampleJump": 0.2447933927178383,
+  "maxEndpointAmplitudeRelativeError": 6.010214743314077e-08
+}

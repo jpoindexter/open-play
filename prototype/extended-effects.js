@@ -26,6 +26,12 @@ export async function prepareExtendedEffects(ctx) {
     );
   return prepared.get(ctx);
 }
+export function createLPFProcessor(ctx,parameterData){
+  if(!prepared.has(ctx))throw new Error('Await prepareExtendedEffects(context) before creating LPF.');
+  return new AudioWorkletNode(ctx,'open-play-stateful-lpf-v1',{
+    numberOfInputs:1,numberOfOutputs:1,parameterData,
+  });
+}
 export function createExtendedEffect(ctx, spec, bpm = 120) {
   // Keep processor identity stable even for direct callers with mutable slots.
   spec = {...spec, params: {...spec.params}};

@@ -1,0 +1,331 @@
+{
+  "passed": true,
+  "scope": "Actual OfflineAudioContext production LPF worklet against independent native Biquad/IIR cascade, stereo DC/tones/impulses,48000Hz/500Hz cutoff/Resonance1.77, eight slopes. No live automation, native desktop, hardware, music or Serato response acceptance.",
+  "inspection": "Independent full-channel Float32 hashes/finite and sample-by-sample native-node comparison; fixed1e-5 absolute/relative RMS criteria. Native API oracle is prior Open Play policy, not Serato.",
+  "originalBytes": 8202951,
+  "originalSHA256": "1dfe3f069ed2dd84fc2eb6968506ab2878326a5b88c91df694812863bac0d2bc",
+  "sourceBefore": {
+    "effects.js": "f1d4a8fc22b4333a95bca2ad89c6898ed77c1a5d840dcddfa197c67684646ab0",
+    "extended-effects.js": "63afacc86fcf9c75e64b2ee80328b71f56fe205090a3b05e8d306d6df07e48e2",
+    "extended-effects-worklet.js": "f00802d547f2c07d39874a1774bcd0af53037f0b712956ee7f317779c3238463",
+    "lpf-kernel.js": "c557a18ea0c0f09d171aaa88520314c766c0124b5a3f4eb70e268071d2debef6",
+    "lpf-reference-test.js": "a1369c2df90242797182c4f9d14b7e0d5332001473d6d495f8e6c4a661599bcb"
+  },
+  "sourceAfter": {
+    "effects.js": "f1d4a8fc22b4333a95bca2ad89c6898ed77c1a5d840dcddfa197c67684646ab0",
+    "extended-effects.js": "63afacc86fcf9c75e64b2ee80328b71f56fe205090a3b05e8d306d6df07e48e2",
+    "extended-effects-worklet.js": "f00802d547f2c07d39874a1774bcd0af53037f0b712956ee7f317779c3238463",
+    "lpf-kernel.js": "c557a18ea0c0f09d171aaa88520314c766c0124b5a3f4eb70e268071d2debef6",
+    "lpf-reference-test.js": "a1369c2df90242797182c4f9d14b7e0d5332001473d6d495f8e6c4a661599bcb"
+  },
+  "sourceStable": true,
+  "currentSourceMatches": true,
+  "results": [
+    {
+      "slope": 6,
+      "channels": [
+        {
+          "channel": 0,
+          "frames": 48000,
+          "sha256": "94ad6bfc2d4c3dbdf418c02d307be1761d79825cc91f6a579540eb2587206d1c"
+        },
+        {
+          "channel": 1,
+          "frames": 48000,
+          "sha256": "3e509178967259efc5b95d0c6dc4b89ec8e4c72bb252924dc6bf062f3d7f5daf"
+        },
+        {
+          "channel": 2,
+          "frames": 48000,
+          "sha256": "94ad6bfc2d4c3dbdf418c02d307be1761d79825cc91f6a579540eb2587206d1c"
+        },
+        {
+          "channel": 3,
+          "frames": 48000,
+          "sha256": "3e509178967259efc5b95d0c6dc4b89ec8e4c72bb252924dc6bf062f3d7f5daf"
+        }
+      ],
+      "comparison": [
+        {
+          "channel": 0,
+          "maxAbsoluteError": 0.0,
+          "relativeRMSError": 0.0
+        },
+        {
+          "channel": 1,
+          "maxAbsoluteError": 0.0,
+          "relativeRMSError": 0.0
+        }
+      ],
+      "passed": true
+    },
+    {
+      "slope": 12,
+      "channels": [
+        {
+          "channel": 0,
+          "frames": 48000,
+          "sha256": "604a04bfb5eb603604a6808cb82be38c20f804317014ab23d6f040c38aac1ce7"
+        },
+        {
+          "channel": 1,
+          "frames": 48000,
+          "sha256": "538a38f8fa5654db2462a31a14986dfadecb068c3c4776fdc8a290395da383c4"
+        },
+        {
+          "channel": 2,
+          "frames": 48000,
+          "sha256": "23ad8c06b7fc2a4c3e9b3aec3aab6b5d57316406972eac089e9337f2449de6ac"
+        },
+        {
+          "channel": 3,
+          "frames": 48000,
+          "sha256": "d28d572de50367fca642325a4f1ab71f1e75c7677c0f2fdb57d520db042d609c"
+        }
+      ],
+      "comparison": [
+        {
+          "channel": 0,
+          "maxAbsoluteError": 1.4901161193847656e-08,
+          "relativeRMSError": 6.382982819390654e-10
+        },
+        {
+          "channel": 1,
+          "maxAbsoluteError": 1.4901161193847656e-08,
+          "relativeRMSError": 9.517510908153112e-09
+        }
+      ],
+      "passed": true
+    },
+    {
+      "slope": 18,
+      "channels": [
+        {
+          "channel": 0,
+          "frames": 48000,
+          "sha256": "7a362c846e9ad6b4dcc6057e5d5d95963c163a70e1fdec60eff857e6fa02b29e"
+        },
+        {
+          "channel": 1,
+          "frames": 48000,
+          "sha256": "c87e9bd57b0b2dd70c9ad60ab6ea20e0c554a14f55f0dd10fc7245f0ea4d5086"
+        },
+        {
+          "channel": 2,
+          "frames": 48000,
+          "sha256": "4819fe9ccb7e13d0486f8ae56ca69a4b0ae6b4da4e7404e97eb2ec3877ade5b9"
+        },
+        {
+          "channel": 3,
+          "frames": 48000,
+          "sha256": "13fe63c7c8efffd84bff44247ef998a33ed0c98dd92c5a9354e0c2c18b3d9cf2"
+        }
+      ],
+      "comparison": [
+        {
+          "channel": 0,
+          "maxAbsoluteError": 1.4901161193847656e-08,
+          "relativeRMSError": 1.6281644309521994e-08
+        },
+        {
+          "channel": 1,
+          "maxAbsoluteError": 1.4901161193847656e-08,
+          "relativeRMSError": 1.8877287912734722e-08
+        }
+      ],
+      "passed": true
+    },
+    {
+      "slope": 24,
+      "channels": [
+        {
+          "channel": 0,
+          "frames": 48000,
+          "sha256": "11c3e7c5c1cb368420ef67db99df01e541fb557ce9e0244ae9bddf658c354c7f"
+        },
+        {
+          "channel": 1,
+          "frames": 48000,
+          "sha256": "ddfcb2f9655249d75ab5ca2b21cb9df559fc6bc4a46c7fe52065552c51ceec06"
+        },
+        {
+          "channel": 2,
+          "frames": 48000,
+          "sha256": "0f4eff36b689cf4a6484b2cde548e3d92bda24714d2239bb66614c09012d809f"
+        },
+        {
+          "channel": 3,
+          "frames": 48000,
+          "sha256": "503d6a3ff85378a31fda30d5ffbd1ab931b55b64c146e715dbc81eadd8f355cc"
+        }
+      ],
+      "comparison": [
+        {
+          "channel": 0,
+          "maxAbsoluteError": 1.4901161193847656e-08,
+          "relativeRMSError": 2.5922524370936004e-08
+        },
+        {
+          "channel": 1,
+          "maxAbsoluteError": 1.4901161193847656e-08,
+          "relativeRMSError": 3.8721346239829535e-08
+        }
+      ],
+      "passed": true
+    },
+    {
+      "slope": 30,
+      "channels": [
+        {
+          "channel": 0,
+          "frames": 48000,
+          "sha256": "9f99c218e918b9b6859fd1abad6295b6e3fd26f86fb27579bba511ec7e16c1e1"
+        },
+        {
+          "channel": 1,
+          "frames": 48000,
+          "sha256": "8575f2fa456a30159963b7e4eab3bbe4af08e423ec44ba21b5238e491a48c3a7"
+        },
+        {
+          "channel": 2,
+          "frames": 48000,
+          "sha256": "b2974dfd399621bb87545c681f32e140258e5eb8f77f338fbbdd01fdf14abfd9"
+        },
+        {
+          "channel": 3,
+          "frames": 48000,
+          "sha256": "34beeea687790e07f42a6ac11164e8d01e8fb7c4d9ddfc0d4fa9ede1dcd28583"
+        }
+      ],
+      "comparison": [
+        {
+          "channel": 0,
+          "maxAbsoluteError": 1.4901161193847656e-08,
+          "relativeRMSError": 2.4365365199693252e-08
+        },
+        {
+          "channel": 1,
+          "maxAbsoluteError": 1.4901161193847656e-08,
+          "relativeRMSError": 3.716943145783038e-08
+        }
+      ],
+      "passed": true
+    },
+    {
+      "slope": 36,
+      "channels": [
+        {
+          "channel": 0,
+          "frames": 48000,
+          "sha256": "1bc0093776796514eaf8fc78f01d30c10c20f7004c0a240be45fac3ea8e6e830"
+        },
+        {
+          "channel": 1,
+          "frames": 48000,
+          "sha256": "549d2099371ef9a27950cd664283c979e2e1c2dd648fb139004a5715e2352ad3"
+        },
+        {
+          "channel": 2,
+          "frames": 48000,
+          "sha256": "a7deb3a6d0a98d21f4a9382377b4439fe9d854dc7d8cd841c50eb91101491c87"
+        },
+        {
+          "channel": 3,
+          "frames": 48000,
+          "sha256": "23da50f9411b227fa7827df2f34b0d7899aa284197e4b32df2edd702e42f2f09"
+        }
+      ],
+      "comparison": [
+        {
+          "channel": 0,
+          "maxAbsoluteError": 1.4901161193847656e-08,
+          "relativeRMSError": 2.393113369695745e-08
+        },
+        {
+          "channel": 1,
+          "maxAbsoluteError": 1.4901161193847656e-08,
+          "relativeRMSError": 2.7110061168184803e-08
+        }
+      ],
+      "passed": true
+    },
+    {
+      "slope": 42,
+      "channels": [
+        {
+          "channel": 0,
+          "frames": 48000,
+          "sha256": "2f5746608184d039bbb9562991d8f3d35d97439d2298efcf9d8cf33514026e99"
+        },
+        {
+          "channel": 1,
+          "frames": 48000,
+          "sha256": "6aa4feff68fc43e60eaae2c048d872d2d117490b852252c27d54b6491ad1730b"
+        },
+        {
+          "channel": 2,
+          "frames": 48000,
+          "sha256": "d76ec73b47f33549e0280b38ae9280cfbf8baf3c9140cce205fcd60a0a3b715d"
+        },
+        {
+          "channel": 3,
+          "frames": 48000,
+          "sha256": "911f5aacb57d0a5e3dc36fc15147fc451194a8dd5588ec7eb25c08c0f2aba80d"
+        }
+      ],
+      "comparison": [
+        {
+          "channel": 0,
+          "maxAbsoluteError": 1.4901161193847656e-08,
+          "relativeRMSError": 2.7872005508851613e-08
+        },
+        {
+          "channel": 1,
+          "maxAbsoluteError": 1.4901161193847656e-08,
+          "relativeRMSError": 2.7090167967044407e-08
+        }
+      ],
+      "passed": true
+    },
+    {
+      "slope": 48,
+      "channels": [
+        {
+          "channel": 0,
+          "frames": 48000,
+          "sha256": "da09e011341b02b02a79f9d1dd66bd2037eddf078a90e157a1ce4f4fc7a78d33"
+        },
+        {
+          "channel": 1,
+          "frames": 48000,
+          "sha256": "b02dedee08927711b00d92dcd93816ad04e37e508590fe04b1bfc1443277f8ba"
+        },
+        {
+          "channel": 2,
+          "frames": 48000,
+          "sha256": "abaa22f3aac2410ec5e6024042a3a857db8a712b556df3ed6f232aba6f091a6e"
+        },
+        {
+          "channel": 3,
+          "frames": 48000,
+          "sha256": "bba30bd724aac8dec5fcb7774e006fd0a2fae10073c730d00f5dbc153e44704a"
+        }
+      ],
+      "comparison": [
+        {
+          "channel": 0,
+          "maxAbsoluteError": 1.4901161193847656e-08,
+          "relativeRMSError": 2.9516059654647615e-08
+        },
+        {
+          "channel": 1,
+          "maxAbsoluteError": 1.4901161193847656e-08,
+          "relativeRMSError": 2.8148530710932436e-08
+        }
+      ],
+      "passed": true
+    }
+  ],
+  "maxAbsoluteError": 1.4901161193847656e-08,
+  "maxRelativeRMSError": 3.8721346239829535e-08
+}

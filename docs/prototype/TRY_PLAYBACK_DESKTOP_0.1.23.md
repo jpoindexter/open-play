@@ -19,3 +19,5 @@ Source2a334132ca1a423029fceb8aa3e39953655df525; ASARfa4b2c4629a0f313cefc619878bb
 Full Serato parity remains unaccepted; the full independent Claude audit remains unlaunched. The package contains a frozen source snapshot of research; current workspace plan and handoff govern later work. Preserve this prepared app while independent FX work continues.
 
 [Native23review](DESKTOP_0.1.23_REVIEW.md) · [GUI native audio](desktop-0.1.23-gui-native-results.json) · [Simple Sync native audio](desktop-0.1.23-simple-controller-native-results.json) · [Main observation](desktop-0.1.23-playback-observation.json) · [Previous22guide](TRY_PLAYBACK_DESKTOP_0.1.22.md) · [Full plan](../../FULL_BUILD_PLAN.md)
+
+Browser-only plan135 replaces the LPF history-reset path with a stateful processor and measured live cutoff/depth/slope behavior. [Review](LPF_LIVE_REVIEW.md). This is not packaged in23; the prepared core controller test remains unchanged.

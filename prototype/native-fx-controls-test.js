@@ -1,3 +1,4 @@
+import {prepareExtendedEffects} from './extended-effects.js';
 import { createEffect } from './effects.js';
 const cases = [
   ['LPF','Resonance',.1,10], ['LPF','Slope',12,48],
@@ -15,6 +16,7 @@ async function render(name, params) {
     const t=i/sr, envelope=t<1.2 ? 1 : 0;
     b.getChannelData(c)[i]=envelope*(.15*Math.sin(2*Math.PI*(123.37+c*59.82)*t)+.15*Math.sin(2*Math.PI*(4000+c*250)*t));
   }
+  if(name==="LPF")await prepareExtendedEffects(ctx);
   const spec={name,on:true,depth:75,beat:'1/2',params:{...name==='Delay'?{Feedback:60}:{},...name==='Wah Filter'?{'LFO Depth':70}:{},...params}};
   const effect=createEffect(ctx,spec,120), source=ctx.createBufferSource();source.buffer=b;source.connect(effect.input);effect.output.connect(ctx.destination);source.start();
   try{return await ctx.startRendering();}finally{effect.dispose();}

@@ -1,4 +1,5 @@
 import { ExtendedEffectKernel } from "./extended-effects-kernel.js";
+import {LPFKernel} from './lpf-kernel.js';
 class ExtendedEffectsProcessor extends AudioWorkletProcessor {
   constructor(options) {
     super();
@@ -29,3 +30,18 @@ class ExtendedEffectsProcessor extends AudioWorkletProcessor {
   }
 }
 registerProcessor("open-play-extended-effect-v1", ExtendedEffectsProcessor);
+
+class LPFProcessor extends AudioWorkletProcessor {
+  static get parameterDescriptors(){return[
+    {name:'cutoff',defaultValue:1000,minValue:20,maxValue:20000,automationRate:'a-rate'},
+    {name:'resonance',defaultValue:1.77,minValue:.1,maxValue:12,automationRate:'a-rate'},
+    {name:'slope',defaultValue:24,minValue:6,maxValue:48,automationRate:'k-rate'},
+  ];}
+  constructor(){super();this.kernel=new LPFKernel(sampleRate);this.alive=true;this.port.onmessage=e=>{if(e.data?.type==='dispose')this.alive=false;};}
+  process(inputs,outputs,parameters){
+    if(!this.alive)return false;
+    if(outputs[0]?.length)this.kernel.process(inputs[0]||[],outputs[0],parameters.cutoff,parameters.resonance,parameters.slope);
+    return true;
+  }
+}
+registerProcessor('open-play-stateful-lpf-v1',LPFProcessor);

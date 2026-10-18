@@ -136,6 +136,7 @@ lifecycleButton.onclick = async () => {
         ctx = new OfflineAudioContext(2, N, sr),
         source = ctx.createBufferSource(),
         buffer = ctx.createBuffer(2, N, sr);
+      if(name==="LPF")await prepareExtendedEffects(ctx);
       for (let c = 0; c < 2; c++)
         for (let n = 0; n < N; n++)
           buffer.getChannelData(c)[n] =
@@ -197,10 +198,10 @@ lifecycleButton.onclick = async () => {
           : name === "LPF"
             ? fx.update({ ...spec, params: { Slope: 48 } }, 120)
             : false;
-      if ((name === "Reverb" || name === "LPF") && structural !== false)
-        throw new Error(
-          "Topology/IR shape update must request a slot replacement",
-        );
+      if (name === "Reverb" && structural !== false)
+        throw new Error("Impulse response change must request a slot replacement");
+      if (name === "LPF" && structural !== true)
+        throw new Error("LPF slope change must preserve its warmed processor");
       fx.dispose();
       records.push({
         name,

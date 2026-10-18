@@ -1,3 +1,4 @@
+import {prepareExtendedEffects} from './extended-effects.js';
 import { createSlicer } from "./slicer.js";
 import { decodeMIDI, mappedValue } from "./midi.js";
 import { AudioEngine } from "./engine.js";
@@ -22,6 +23,7 @@ async function renderEffect(name, on, type = "impulse", params = {}) {
   else
     for (let i = 0; i < a.length; i++)
       a[i] = Math.sin((2 * Math.PI * 6000 * i) / 24000) * 0.2;
+  if(name==="LPF"&&on)await prepareExtendedEffects(ctx);
   const source = ctx.createBufferSource();
   source.buffer = b;
   const effect = createEffect(
