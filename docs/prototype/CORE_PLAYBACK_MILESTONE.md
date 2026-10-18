@@ -31,3 +31,5 @@ LPF plan128 is committed atb2bc13a61cc95c38f4ec15162adc171c360f9fd0: eight disti
 [Current test instructions](TRY_CURRENT_DESKTOP.md) · [Native original-scope result](desktop-0.1.21-core-sync-native-results.json) · [Full plan](../../FULL_BUILD_PLAN.md)
 
 Plan130 found and corrected the hardware fader lockout after out-of-range Smart Sync in browser source. [Relative-tempo review](MIDI_RELATIVE_TEMPO_REVIEW.md) records actual audio/OFF/reload/fallback proof. Native21retains old code; prepare22next before testing these advanced fader transitions. Physical firstPlay remains separately pending.
+
+Plan131 supersedes the pending-package note: [native22](DESKTOP_0.1.22_REVIEW.md) now includes the relative-controller fix, executed11case native audio workflow and preserved272mapping/quadsetup. Defaults22; physical firstPlay remains pending. Keep22prepared while independently addressing actual core gaps in browser.

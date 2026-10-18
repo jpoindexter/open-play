@@ -1,0 +1,735 @@
+{
+  "startedAt": "2026-10-18T07:15:43.813Z",
+  "completed": true,
+  "scope": "Actual production app GUI-handler and MIDI-editor inputs, generated engine buffers, post-master stereo Float32 and whole recording. Not physical MIDI, native, file import, music, exact vendor taper or full relative-mode acceptance.",
+  "criteria": {
+    "settleSeconds": 0.3,
+    "captureSeconds": 0.3,
+    "frequencyToleranceHz": 0.3,
+    "minimumRMS": 0.005,
+    "silencePeak": 1e-06
+  },
+  "cases": [
+    {
+      "name": "Unknown physical position after second OFF takes over on its first packet",
+      "expectedRates": [
+        1,
+        1
+      ],
+      "expectedFrequencies": [
+        330,
+        550
+      ],
+      "rates": [
+        1,
+        1
+      ],
+      "sync": [
+        {
+          "sync": true,
+          "state": "beat",
+          "position": 0.34990929705215024,
+          "playing": true
+        },
+        {
+          "sync": false,
+          "state": "off",
+          "position": 0.3595192746067221,
+          "playing": true
+        }
+      ],
+      "pcm": [
+        {
+          "startFrame": 3876352,
+          "frames": 13230,
+          "sha256": "7f7463abc51b8bf3a867c9efc4c091a73ca44e7156048e2a9a5149dcdd56ec68",
+          "base64": "Retained privately in original report and complete Float32 window"
+        },
+        {
+          "startFrame": 3876352,
+          "frames": 13230,
+          "sha256": "267c41f40aff6742be095b6ddd6441a68824c8b632dfc98fef131435cd2cec38",
+          "base64": "Retained privately in original report and complete Float32 window"
+        }
+      ],
+      "measured": [
+        {
+          "frames": 13230,
+          "finite": true,
+          "rms": 0.05691723467219154,
+          "peak": 0.08049294352531433,
+          "hz": 329.99999824213097
+        },
+        {
+          "frames": 13230,
+          "finite": true,
+          "rms": 0.05475068052777285,
+          "peak": 0.07742896676063538,
+          "hz": 550.000003378114
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "Synced20percent center establishes no-jump physical baseline",
+      "expectedRates": [
+        1,
+        1.2
+      ],
+      "expectedFrequencies": [
+        330,
+        660
+      ],
+      "rates": [
+        1,
+        1.2
+      ],
+      "sync": [
+        {
+          "sync": true,
+          "state": "beat",
+          "position": 0.9826530612244824,
+          "playing": true
+        },
+        {
+          "sync": true,
+          "state": "beat",
+          "position": 1.1873197422849289,
+          "playing": true
+        }
+      ],
+      "pcm": [
+        {
+          "startFrame": 3904256,
+          "frames": 13230,
+          "sha256": "1a182ecf503e3510c616146a9a916d49908c87dbb24a8df2f8f3f36cb9ed2924",
+          "base64": "Retained privately in original report and complete Float32 window"
+        },
+        {
+          "startFrame": 3904256,
+          "frames": 13230,
+          "sha256": "c95967b104e5cc89a428fd2c64ca6697d5362ae1d087a0db50f3f0071f247cd2",
+          "base64": "Retained privately in original report and complete Float32 window"
+        }
+      ],
+      "measured": [
+        {
+          "frames": 13230,
+          "finite": true,
+          "rms": 0.05691723467219154,
+          "peak": 0.08049294352531433,
+          "hz": 329.99999824213097
+        },
+        {
+          "frames": 13230,
+          "finite": true,
+          "rms": 0.054750647362312214,
+          "peak": 0.07746266573667526,
+          "hz": 660.0000234896316
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "Hardware fader movement changes both synced decks",
+      "expectedRates": [
+        1.0083343507101288,
+        1.2100012208521547
+      ],
+      "expectedFrequencies": [
+        332.7503357343425,
+        665.500671468685
+      ],
+      "rates": [
+        1.0083343507101288,
+        1.2100012208521547
+      ],
+      "sync": [
+        {
+          "sync": true,
+          "state": "beat",
+          "position": 1.6238627738693057,
+          "playing": true
+        },
+        {
+          "sync": true,
+          "state": "beat",
+          "position": 1.9567713974587169,
+          "playing": true
+        }
+      ],
+      "pcm": [
+        {
+          "startFrame": 3932416,
+          "frames": 13230,
+          "sha256": "9d151bd9bc531bccab7ac97d40cf5831077eb81cc10726c1bb4c1d547eaa654a",
+          "base64": "Retained privately in original report and complete Float32 window"
+        },
+        {
+          "startFrame": 3932416,
+          "frames": 13230,
+          "sha256": "560c26c10a8c5e8f73c2bddd977d7c9ca1411e9449ecf4d42c890bc1ae74e9b8",
+          "base64": "Retained privately in original report and complete Float32 window"
+        }
+      ],
+      "measured": [
+        {
+          "frames": 13230,
+          "finite": true,
+          "rms": 0.056869847677929755,
+          "peak": 0.08049233257770538,
+          "hz": 332.7503510067006
+        },
+        {
+          "frames": 13230,
+          "finite": true,
+          "rms": 0.054761347717525666,
+          "peak": 0.07746519893407822,
+          "hz": 665.5006823355626
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "First OFF keeps relative tempo",
+      "expectedRates": [
+        1.0083343507101288,
+        1.2100012208521547
+      ],
+      "expectedFrequencies": [
+        332.7503357343425,
+        665.500671468685
+      ],
+      "rates": [
+        1.0083343507101288,
+        1.2100012208521547
+      ],
+      "sync": [
+        {
+          "sync": true,
+          "state": "beat",
+          "position": 2.2326132278269393,
+          "playing": true
+        },
+        {
+          "sync": false,
+          "state": "relative",
+          "position": 2.6872719134203207,
+          "playing": true
+        }
+      ],
+      "pcm": [
+        {
+          "startFrame": 3959040,
+          "frames": 13230,
+          "sha256": "aa00eaf59f7f8ed9bf5785ac89b2fe254105fc9dae2aa68a8282b5234ca8f80c",
+          "base64": "Retained privately in original report and complete Float32 window"
+        },
+        {
+          "startFrame": 3959040,
+          "frames": 13230,
+          "sha256": "2e7cd9e657c03d7203e26d02a28d9dae5ca7f91d7dd19cc82d725408a3077e65",
+          "base64": "Retained privately in original report and complete Float32 window"
+        }
+      ],
+      "measured": [
+        {
+          "frames": 13230,
+          "finite": true,
+          "rms": 0.05688460359679571,
+          "peak": 0.08049184828996658,
+          "hz": 332.7503514291742
+        },
+        {
+          "frames": 13230,
+          "finite": true,
+          "rms": 0.05474248526337049,
+          "peak": 0.07746332883834839,
+          "hz": 665.5006811948781
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "Relative fader moves its deck without changing the primary",
+      "expectedRates": [
+        1.0083343507101288,
+        1.2200024417043096
+      ],
+      "expectedFrequencies": [
+        332.7503357343425,
+        671.0013429373703
+      ],
+      "rates": [
+        1.0083343507101288,
+        1.2200024417043096
+      ],
+      "sync": [
+        {
+          "sync": true,
+          "state": "beat",
+          "position": 2.8472170515341544,
+          "playing": true
+        },
+        {
+          "sync": false,
+          "state": "relative",
+          "position": 3.42781542387463,
+          "playing": true
+        }
+      ],
+      "pcm": [
+        {
+          "startFrame": 3986176,
+          "frames": 13230,
+          "sha256": "b5b49ffaa932adb86728a528241d327566cafe3981d4c366a81885786db860ec",
+          "base64": "Retained privately in original report and complete Float32 window"
+        },
+        {
+          "startFrame": 3986176,
+          "frames": 13230,
+          "sha256": "0f88238f2e977059725116f439402654ee272ab270d6112dd92893c1730c9607",
+          "base64": "Retained privately in original report and complete Float32 window"
+        }
+      ],
+      "measured": [
+        {
+          "frames": 13230,
+          "finite": true,
+          "rms": 0.056929247015485164,
+          "peak": 0.08049140870571136,
+          "hz": 332.75034921819224
+        },
+        {
+          "frames": 13230,
+          "finite": true,
+          "rms": 0.05475703763595795,
+          "peak": 0.07746630162000656,
+          "hz": 671.0013279486581
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "Shift-ignore repositions physical fader",
+      "expectedRates": [
+        1.0083343507101288,
+        1.2200024417043096
+      ],
+      "expectedFrequencies": [
+        332.7503357343425,
+        671.0013429373703
+      ],
+      "rates": [
+        1.0083343507101288,
+        1.2200024417043096
+      ],
+      "sync": [
+        {
+          "sync": true,
+          "state": "beat",
+          "position": 3.4735276147405467,
+          "playing": true
+        },
+        {
+          "sync": false,
+          "state": "relative",
+          "position": 4.185600142498395,
+          "playing": true
+        }
+      ],
+      "pcm": [
+        {
+          "startFrame": 4013312,
+          "frames": 13230,
+          "sha256": "889a7f936f27f7721c714bf158e1966d4699fa2371bb4e82fb7ba8db96a27b39",
+          "base64": "Retained privately in original report and complete Float32 window"
+        },
+        {
+          "startFrame": 4013312,
+          "frames": 13230,
+          "sha256": "7b0fc6bc8ff09985d56b736f17004c5743d48a8aab6d914e7faa75bf492ded14",
+          "base64": "Retained privately in original report and complete Float32 window"
+        }
+      ],
+      "measured": [
+        {
+          "frames": 13230,
+          "finite": true,
+          "rms": 0.05688384532073576,
+          "peak": 0.08049190044403076,
+          "hz": 332.75035179857065
+        },
+        {
+          "frames": 13230,
+          "finite": true,
+          "rms": 0.054769621311735524,
+          "peak": 0.07746407389640808,
+          "hz": 671.0013285728043
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "Returning from Shift-ignore has no tempo jump",
+      "expectedRates": [
+        1.0083343507101288,
+        1.2200024417043096
+      ],
+      "expectedFrequencies": [
+        332.7503357343425,
+        671.0013429373703
+      ],
+      "rates": [
+        1.0083343507101288,
+        1.2200024417043096
+      ],
+      "sync": [
+        {
+          "sync": true,
+          "state": "beat",
+          "position": 4.093984808197357,
+          "playing": true
+        },
+        {
+          "sync": false,
+          "state": "relative",
+          "position": 4.936302760948121,
+          "playing": true
+        }
+      ],
+      "pcm": [
+        {
+          "startFrame": 4040448,
+          "frames": 13230,
+          "sha256": "50793d303982bd3866762c931b719659853f4fa84ffc3e1558bbc6005c200cfd",
+          "base64": "Retained privately in original report and complete Float32 window"
+        },
+        {
+          "startFrame": 4040448,
+          "frames": 13230,
+          "sha256": "0edd42f746f4b7756a705cf18675db05ef9401a089751197999a41d9245ff03b",
+          "base64": "Retained privately in original report and complete Float32 window"
+        }
+      ],
+      "measured": [
+        {
+          "frames": 13230,
+          "finite": true,
+          "rms": 0.056930010658836044,
+          "peak": 0.08049237728118896,
+          "hz": 332.7503504330434
+        },
+        {
+          "frames": 13230,
+          "finite": true,
+          "rms": 0.05474783153754601,
+          "peak": 0.07746572047472,
+          "hz": 671.0013269514245
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "Relative movement resumes after reposition",
+      "expectedRates": [
+        1.0083343507101288,
+        1.2300024417043096
+      ],
+      "expectedFrequencies": [
+        332.7503357343425,
+        676.5013429373703
+      ],
+      "rates": [
+        1.0083343507101288,
+        1.2300024417043096
+      ],
+      "sync": [
+        {
+          "sync": true,
+          "state": "beat",
+          "position": 4.714442001654168,
+          "playing": true
+        },
+        {
+          "sync": false,
+          "state": "relative",
+          "position": 5.690023970623398,
+          "playing": true
+        }
+      ],
+      "pcm": [
+        {
+          "startFrame": 4067584,
+          "frames": 13230,
+          "sha256": "84e777c2c2d96bffa37b715e24d91d7fec63d51482e3f4985eb81628643b794e",
+          "base64": "Retained privately in original report and complete Float32 window"
+        },
+        {
+          "startFrame": 4067584,
+          "frames": 13230,
+          "sha256": "e390bb619459c86bbc1b3f2cf9cde8e52ca5f3bb5eb1d9d656d43b318cfc4ed9",
+          "base64": "Retained privately in original report and complete Float32 window"
+        }
+      ],
+      "measured": [
+        {
+          "frames": 13230,
+          "finite": true,
+          "rms": 0.0568831468056258,
+          "peak": 0.08049287647008896,
+          "hz": 332.7503532860247
+        },
+        {
+          "frames": 13230,
+          "finite": true,
+          "rms": 0.05475609827484037,
+          "peak": 0.07746369391679764,
+          "hz": 676.5013081154115
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "Second OFF immediately restores cached absolute pitch",
+      "expectedRates": [
+        1.0083343507101288,
+        0.97
+      ],
+      "expectedFrequencies": [
+        332.7503357343425,
+        533.5
+      ],
+      "rates": [
+        1.0083343507101288,
+        0.97
+      ],
+      "sync": [
+        {
+          "sync": true,
+          "state": "beat",
+          "position": 5.323192455611802,
+          "playing": true
+        },
+        {
+          "sync": false,
+          "state": "off",
+          "position": 6.354115407653947,
+          "playing": true
+        }
+      ],
+      "pcm": [
+        {
+          "startFrame": 4094208,
+          "frames": 13230,
+          "sha256": "be3becdd11bb463372ec213d4aec645bd178150c4644cbed7266ac9175253b3c",
+          "base64": "Retained privately in original report and complete Float32 window"
+        },
+        {
+          "startFrame": 4094208,
+          "frames": 13230,
+          "sha256": "1de65977ae3a52a710ab808b24c74c9f4e832ffa39bf197f5df50534dd5fb6b8",
+          "base64": "Retained privately in original report and complete Float32 window"
+        }
+      ],
+      "measured": [
+        {
+          "frames": 13230,
+          "finite": true,
+          "rms": 0.05693541769018615,
+          "peak": 0.08049242943525314,
+          "hz": 332.7503521467105
+        },
+        {
+          "frames": 13230,
+          "finite": true,
+          "rms": 0.054756875894329704,
+          "peak": 0.07746660709381104,
+          "hz": 533.5000106770358
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "Reload from REL restores the hardware pitch before playback",
+      "expectedRates": [
+        1.0083343507101288,
+        0.98
+      ],
+      "expectedFrequencies": [
+        332.7503357343425,
+        539
+      ],
+      "rates": [
+        1.0083343507101288,
+        0.98
+      ],
+      "sync": [
+        {
+          "sync": true,
+          "state": "beat",
+          "position": 6.008036716314123,
+          "playing": true
+        },
+        {
+          "sync": false,
+          "state": "off",
+          "position": 0.2974000057882179,
+          "playing": true
+        }
+      ],
+      "pcm": [
+        {
+          "startFrame": 4124160,
+          "frames": 13230,
+          "sha256": "08fe69f9362fed331e715502ca020919aebd23530a0b4eb7c0d4d3f77c109bf5",
+          "base64": "Retained privately in original report and complete Float32 window"
+        },
+        {
+          "startFrame": 4124160,
+          "frames": 13230,
+          "sha256": "80212a79065aaf7f684b20a4709d8e1cb371948dc214a5ab2ee098f7a79aa4af",
+          "base64": "Retained privately in original report and complete Float32 window"
+        }
+      ],
+      "measured": [
+        {
+          "frames": 13230,
+          "finite": true,
+          "rms": 0.05693586952200943,
+          "peak": 0.08049267530441284,
+          "hz": 332.7503512598532
+        },
+        {
+          "frames": 13230,
+          "finite": true,
+          "rms": 0.054761609924329574,
+          "peak": 0.0774412602186203,
+          "hz": 539.0000105072451
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "Both Stop controls silence the captured master",
+      "expectedRates": [
+        1.0083343507101288,
+        0.98
+      ],
+      "expectedFrequencies": [
+        0,
+        0
+      ],
+      "rates": [
+        1.0083343507101288,
+        0.98
+      ],
+      "sync": [
+        {
+          "sync": true,
+          "state": "armed",
+          "position": 6.318265313042529,
+          "playing": false
+        },
+        {
+          "sync": false,
+          "state": "off",
+          "position": 0.5989111227675622,
+          "playing": false
+        }
+      ],
+      "pcm": [
+        {
+          "startFrame": 4151296,
+          "frames": 13230,
+          "sha256": "9d55c9c2f49808c72a9d28e4f661bae87b1ed419741fa38e5ffeff9648f33d7d",
+          "base64": "Retained privately in original report and complete Float32 window"
+        },
+        {
+          "startFrame": 4151296,
+          "frames": 13230,
+          "sha256": "9d55c9c2f49808c72a9d28e4f661bae87b1ed419741fa38e5ffeff9648f33d7d",
+          "base64": "Retained privately in original report and complete Float32 window"
+        }
+      ],
+      "measured": [
+        {
+          "frames": 13230,
+          "finite": true,
+          "rms": 0,
+          "peak": 0,
+          "hz": null
+        },
+        {
+          "frames": 13230,
+          "finite": true,
+          "rms": 0,
+          "peak": 0,
+          "hz": null
+        }
+      ],
+      "passed": true
+    }
+  ],
+  "errors": [],
+  "sourceBefore": {
+    "app.js": "5d6a8e952eca5b53b6d50736678ffdf757af291400eaaf4ba865222e944b8d3e",
+    "engine.js": "a4ec10d9401a3e7fd6d7184e331ae59adf6213a87df5152969c8a3edb8fab9f8",
+    "smart-sync.js": "b57c0016cc9467b2f7fe178f7acd1522c2c4d1611c3b6ff6288c97fefcd1e3f1",
+    "deck-midi.js": "572e6471923d77217a93f975ddca40fd63ba9d0442673a7ad94b2514315326d6",
+    "midi.js": "0cabb6dbe98e9eb3f7bc7f7eb44615fa315a0738260e5f3568a34d0aa75ec1ad",
+    "panels.js": "21ecd5626eef61d3798a5779472f68f263398f155ea2b1e29c10e9857a901e48",
+    "fx-tempo-capture-worklet.js": "1ffd09ad071f8dd2dca8b745ca8f9e1182e515eb32c42340bf5ff0a035e9b8b9",
+    "relative-tempo-harness.js": "feb26c4c499d995fa7f187820ce16b8f7e7474663b52dd7d3da3a846764c8666"
+  },
+  "sampleRate": 44100,
+  "reloadBefore": {
+    "rate": 1.2200012208521547,
+    "state": "relative"
+  },
+  "reloadAfter": {
+    "rate": 0.98,
+    "state": "off"
+  },
+  "recording": {
+    "bytes": 109685,
+    "sha256": "f411589f141f839ce92ce0b5ac13bcc0cd2588156691b5ce6b7f7e001d967e70",
+    "base64": "Retained privately in original report and complete master",
+    "format": "audio/webm;codecs=opus",
+    "sampleRate": 44100,
+    "frames": 301644,
+    "channels": 2,
+    "allFinite": true
+  },
+  "sourceAfter": {
+    "app.js": "5d6a8e952eca5b53b6d50736678ffdf757af291400eaaf4ba865222e944b8d3e",
+    "engine.js": "a4ec10d9401a3e7fd6d7184e331ae59adf6213a87df5152969c8a3edb8fab9f8",
+    "smart-sync.js": "b57c0016cc9467b2f7fe178f7acd1522c2c4d1611c3b6ff6288c97fefcd1e3f1",
+    "deck-midi.js": "572e6471923d77217a93f975ddca40fd63ba9d0442673a7ad94b2514315326d6",
+    "midi.js": "0cabb6dbe98e9eb3f7bc7f7eb44615fa315a0738260e5f3568a34d0aa75ec1ad",
+    "panels.js": "21ecd5626eef61d3798a5779472f68f263398f155ea2b1e29c10e9857a901e48",
+    "fx-tempo-capture-worklet.js": "1ffd09ad071f8dd2dca8b745ca8f9e1182e515eb32c42340bf5ff0a035e9b8b9",
+    "relative-tempo-harness.js": "feb26c4c499d995fa7f187820ce16b8f7e7474663b52dd7d3da3a846764c8666"
+  },
+  "sourceStable": true,
+  "finishedAt": "2026-10-18T07:15:50.947Z",
+  "nativeEvidence": {
+    "version": "0.1.22",
+    "runtime": "Electron44.9.0 macOS arm64",
+    "sourceCommit": "100eacd6226142ae2ff86876006236991424799d",
+    "asarSHA256": "28504c15e462e0b2111289991374b7d10506d4c65a3c37dc3f914a8ea2800240",
+    "entry": "Normal native Checks\u2192Relative Controller Tempo\u2192Run",
+    "exportMethod": "Copied original pre element in native DevTools Elements UI; saved one outerHTML node using new local plain-text document. No console or injected JavaScript. Hidden JSON extracted from that saved local DOM node.",
+    "originalBytes": 1716868,
+    "originalSHA256": "6b03d68ca4a766b57cdfd6ea5c420f4edfda96a2a3e80a497809cbfbbc68044b",
+    "originalPath": "local-evidence/desktop-0.1.22-native/relative-original.json",
+    "copiedDOMPath": "local-evidence/desktop-0.1.22-native/relative-original-dom.txt",
+    "copiedDOMSHA256": "a87362f086578d5c3775bbbbfede382ad21b39d4933544fefae65e0b261474ce",
+    "caseCount": 11,
+    "rawWindowCount": 22,
+    "worstFrequencyErrorHz": 3.4821958820430154e-05,
+    "genericScopePreserved": true,
+    "physicalAcceptance": false,
+    "fullParity": false
+  }
+}

@@ -1,3 +1,5 @@
+> Plan131: [current native22](../prototype/DESKTOP_0.1.22_REVIEW.md) executes11relative-controller audio cases;272mappings preserved and actual stoppedHerculesquad setup ready. Physical/manualbeatmatch/fullparity acceptance open. GUI out-of-range tempo position remains a concrete core gap.
+
 > Plan130: [core relative-tempo fix](../prototype/MIDI_RELATIVE_TEMPO_REVIEW.md) closes reproduced out-of-range MIDI pickup lockout in browser source.11actual-audio cases include immediate OFF/reload and unknown-position takeover; native21has old behavior. Package22next; physical/fullreference acceptance open.
 
 > Plan129: [core playback milestone](../prototype/CORE_PLAYBACK_MILESTONE.md) takes priority over more FX refinement. Current native21 isolated GUI-handler/syntheticMIDI Sync/Play produces six aligned pulse pairs each; main272mappings/quadroute preserved. Physical controls/sound and full parity remain open.

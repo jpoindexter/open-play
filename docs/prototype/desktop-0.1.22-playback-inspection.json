@@ -1,0 +1,55 @@
+{
+  "version": "0.1.22",
+  "archiveSHA256": "28504c15e462e0b2111289991374b7d10506d4c65a3c37dc3f914a8ea2800240",
+  "sourceCommit": "100eacd6226142ae2ff86876006236991424799d",
+  "checks": [
+    {
+      "name": "Archive and all declared prototype module bytes match immutable source",
+      "passed": true,
+      "evidence": {
+        "allPrototypeFiles": 340,
+        "declaredModules": 58
+      }
+    },
+    {
+      "name": "Staged host/helper bytes and sanitized package identity match receipt",
+      "passed": true,
+      "evidence": {
+        "stagedFiles": 11,
+        "version": "0.1.22"
+      }
+    },
+    {
+      "name": "Only four generated diagnostic WAVs match independently referenced hashes",
+      "passed": true,
+      "evidence": {
+        "generatedWAVs": 4,
+        "noNativeReferenceLibrary": true
+      }
+    },
+    {
+      "name": "Archive excludes raw evidence, user profiles, Git and credentials",
+      "passed": true,
+      "evidence": {
+        "files": 1865
+      }
+    },
+    {
+      "name": "Packaged main profile/permissions and isolated check session remain distinct",
+      "passed": true,
+      "evidence": {
+        "mainPartition": "persist:open-play-playback-test",
+        "diagnosticPartitionPersistent": false,
+        "uniqueDiagnosticSessions": true,
+        "devicePermissionsDenied": true,
+        "sandboxRetained": true,
+        "relativeCheckVerified": true
+      }
+    }
+  ],
+  "scope": "Actual ASAR bytes and controlled packaged host/check-window callbacks, not native UI/audio/device acceptance.",
+  "fullParityVerified": false,
+  "passed": 5,
+  "failed": 0,
+  "completed": true
+}
