@@ -467,7 +467,7 @@ function renderDecks() {
         )
         .join(
           "",
-        )}<button data-action="censor" data-deck="${d.index}" aria-pressed="${!!d.censor}" class="${d.censor ? "active" : ""}" ${d.mode === "ABS" || !t || !d.playing ? "disabled" : ""} title="Hold for reverse; release resumes the forward timeline">Censor</button><button data-action="keyDown" data-deck="${d.index}" title="Shift key down one semitone; prototype limit±24">Key −</button><button data-action="keyUp" data-deck="${d.index}" title="Shift key up one semitone; prototype limit±24">Key +</button><button data-action="keySync" data-deck="${d.index}" class="${d.keySync ? "active" : ""}">Key Sync</button><button data-action="keyReset" data-deck="${d.index}">Reset key</button><button data-action="range" data-deck="${d.index}">±${d.pitchRange}</button><button data-action="double" data-deck="${d.index}">Double</button><span class="spacer"></span><small class="muted">${d.playQueued ? "PREPARING PLAYBACK" : d.processing ? "PROCESSING PITCH…" : d.mode === "INT" ? "LOCAL AUDIO" : "DEVICE SIMULATION"}</small></div><div class="wave-wrap" data-seek="${d.index}" tabindex="0" role="slider" aria-label="Deck ${d.index + 1} play position" aria-valuemin="0" aria-valuemax="${t?.duration || 48}" aria-valuenow="${engine.position(d)}"><canvas id="wave-${d.index}" width="900" height="100"></canvas><span class="playhead" id="head-${d.index}"></span><span class="wave-label" data-wave-scope="${d.index}" aria-live="polite">${t?.analyzed ? "Decoded waveform" : "Generated overview fixture"} · ${t?.bpm || "—"} BPM</span></div></article>`;
+        )}<button data-action="censor" data-deck="${d.index}" aria-pressed="${!!d.censor}" class="${d.censor ? "active" : ""}" ${d.mode === "ABS" || !t || !d.playing ? "disabled" : ""} title="Hold for reverse; release resumes the forward timeline">Censor</button><button data-action="keyDown" data-deck="${d.index}" title="Shift key down one semitone; prototype limit±24">Key −</button><button data-action="keyUp" data-deck="${d.index}" title="Shift key up one semitone; prototype limit±24">Key +</button><button data-action="keySync" data-deck="${d.index}" class="${d.keySync ? "active" : ""}">Key Sync</button><button data-action="keyReset" data-deck="${d.index}">Reset key</button><button data-action="range" data-deck="${d.index}">±${d.pitchRange}</button><button data-action="double" data-deck="${d.index}">Double</button><span class="spacer"></span><small class="muted">${d.playQueued ? "PREPARING PLAYBACK" : d.processing ? "PROCESSING PITCH…" : d.mode === "INT" ? "LOCAL AUDIO" : "DEVICE SIMULATION"}</small></div><div class="wave-wrap" data-seek="${d.index}" tabindex="0" role="slider" aria-label="Deck ${d.index + 1} play position" aria-valuemin="0" aria-valuemax="${t?.duration || 0}" aria-valuenow="${engine.position(d)}" aria-valuetext="${time(engine.position(d))} of ${time(t?.duration || 0)}" aria-disabled="${!t}" title="Left/Right: 1 second. Home/End: start/end. Shift-click or Shift+Home/End overrides needle protection."><canvas id="wave-${d.index}" width="900" height="100"></canvas><span class="playhead" id="head-${d.index}"></span><span class="wave-label" data-wave-scope="${d.index}" aria-live="polite">${t?.analyzed ? "Decoded waveform" : "Generated overview fixture"} · ${t?.bpm || "—"} BPM</span></div></article>`;
     })
     .join("");
   if (state.layout === "Vertical")
@@ -1484,22 +1484,21 @@ document.addEventListener("change", (e) => {
     renderDecks();
   }
 });
+async function seekOverview(deck, position, event) {
+  if (!deck?.track) return false;
+  if (deck.playing && state.settings["Disable Needle Search During Playback"] && !event.shiftKey) {
+    notify("Needle search protected; hold Shift to override.");
+    return false;
+  }
+  try {await engine.seek(deck, position);return true;}
+  catch (error) {notify(error.message);return false;}
+}
 document.addEventListener("click", (e) => {
   const r = e.target.closest("[data-seek]");
   if (!r) return;
   const d = state.decks[Number(r.dataset.seek)];
   if (!d.track) return;
-  if (
-    d.playing &&
-    state.settings["Disable Needle Search During Playback"] &&
-    !e.shiftKey
-  )
-    return notify("Needle search protected; hold Shift to override.");
-  engine.seek(
-    d,
-    ((e.clientX - r.getBoundingClientRect().left) / r.clientWidth) *
-      d.track.duration,
-  );
+  void seekOverview(d, ((e.clientX - r.getBoundingClientRect().left) / r.clientWidth) * d.track.duration, e);
 });
 document.addEventListener('pointerdown', e=>{
   const button=e.target.closest('[data-action="censor"]');if(!button||button.disabled||e.button!==0)return;
@@ -1760,13 +1759,12 @@ document.addEventListener("keydown", async (e) => {
     }
     return;
   }
-  if (
-    e.target.dataset.seek !== undefined &&
-    ["ArrowLeft", "ArrowRight"].includes(e.key)
-  ) {
+  const overview = e.target.closest("[data-seek]");
+  if (overview && ["ArrowLeft", "ArrowRight", "Home", "End"].includes(e.key)) {
     e.preventDefault();
-    const d = state.decks[Number(e.target.dataset.seek)];
-    engine.seek(d, engine.position(d) + (e.key === "ArrowLeft" ? -1 : 1));
+    const d = state.decks[Number(overview.dataset.seek)];
+    const target = e.key === "Home" ? 0 : e.key === "End" ? d.track?.duration || 0 : engine.position(d) + (e.key === "ArrowLeft" ? -1 : 1);
+    await seekOverview(d, target, e);
     return;
   }
   if (
@@ -1884,6 +1882,12 @@ function tick() {
     if (rem) rem.textContent = "−" + time((d.track?.duration || 0) - p);
     const head = $(`#head-${d.index}`);
     if (head) head.style.left = `${(p / (d.track?.duration || 48)) * 100}%`;
+    const overview = document.querySelector(`[data-seek="${d.index}"]`);
+    if (overview) {
+      const duration = d.track?.duration || 0;
+      const values = {"aria-valuenow": String(Math.max(0, Math.min(duration, p)).toFixed(3)), "aria-valuemax": String(duration), "aria-valuetext": `${time(p)} of ${time(duration)}`, "aria-disabled": String(!d.track)};
+      for (const [name, value] of Object.entries(values)) if (overview.getAttribute(name) !== value) overview.setAttribute(name, value);
+    }
     const scratchStatus = document.querySelector(`[data-deck-scratch-status="${d.index}"]`);
     if (scratchStatus && scratchStatus.dataset.warmState !== (d.scratchWarmState || 'empty')) {
       scratchStatus.dataset.warmState = d.scratchWarmState || 'empty';
