@@ -1,3 +1,9 @@
+# Current factory recovery — checkpoint140 supersedes the earlier zero-source status
+
+Official installed factory definition data is now recovered:182MIDI/14HID/1audio definitions,29lighting tables and supporting resources,229archive entries total. Source identity is backed by successful Apple deep/strict signature/resource verification and CRC/SHA256 checks. Exact Hercules300MK2XML has374control elements/547conditions. See [factory recovery report](SERATO_FACTORY_RESOURCE_TRACE_20261018.md), [full metadata inventory](official-serato-controller-resources-140.json), [hardware-name candidate join](controller-map-hardware-coverage-140.json) and [Hercules contract](HERCULES_OFFICIAL_FACTORY_140.json).
+
+This closes the source-recovery gap for the197definitions in this particular installed userio archive. It does not complete factory-schema translation, all historical/partner/native-embedded coverage, device association, hardware parity or all-controller acceptance. The current prototype factory-label registry is still empty; raw factory profiles have not been installed. Next is an independent factory-envelope/conditional/output adapter with authenticated provenance. Existing tested native profile is preserved. The earlier custom-XML collection and executed browser catalog evidence below remain historical and separately scoped.
+
 # Bulk controller mappings: official sources and alternatives
 
 18 October 2026. **Official Serato factory mappings have not yet been recovered.** Jason requested bulk mapping import for every controller, with official Serato mappings as the primary target. He subsequently authorized alternatives when clearly labeled. No downloaded community/alternative map has been installed in the running desktop app.

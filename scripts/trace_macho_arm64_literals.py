@@ -58,7 +58,9 @@ def trace(path, needles, calls_to=()):
             if end < 0: continue
             va = address(start)
             if va is not None: literals.append({'needle': needle, 'address': hex(va), 'fileOffset': start, 'text': data[start:end].decode(errors='replace'), 'references': []})
-    targets = {int(row['address'], 16): row for row in literals}
+    targets = {}
+    for row in literals:
+        targets.setdefault(int(row['address'], 16), []).append(row)
     pages = {target & ~4095 for target in targets}
     calls = {int(value, 0): [] for value in calls_to}
     for base, length, file in text_sections:
@@ -83,7 +85,9 @@ def trace(path, needles, calls_to=()):
                 target = page+(((add >> 10) & 4095) << (12 if add & (1 << 22) else 0))
                 if target not in targets: continue
                 pc = base+delta+step*4; index = bisect.bisect_right(starts, pc)-1
-                targets[target]['references'].append({'adrp': hex(base+delta), 'add': hex(pc), 'compilerFunctionStartCandidate': hex(starts[index]) if index >= 0 else None})
+                reference = {'adrp': hex(base+delta), 'add': hex(pc), 'compilerFunctionStartCandidate': hex(starts[index]) if index >= 0 else None}
+                for literal in targets[target]:
+                    literal['references'].append(reference)
     return {'binary': Path(path).name, 'functionStarts': len(starts), 'literals': literals,
             'directBLReferences': {hex(key): value for key, value in calls.items()},
             'scope': 'Bounded nearby ADRP/ADD candidates only; register overwrite/path and indirect uses require disassembly review. Compiler function boundaries do not establish full auto-analysis or runtime execution.'}

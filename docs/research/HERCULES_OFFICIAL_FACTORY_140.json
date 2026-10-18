@@ -1,0 +1,262 @@
+{
+  "date": "2026-10-18",
+  "sourceResource": "userio/midi/midi_hercules_dj_control_inpulse_300_mk2.xml",
+  "sourceSHA256": "1f33a04a1c5b924a0b2b1ea12a35216ddebed8d099cd6ed7cb6e5890e03d5ec3",
+  "parentSignatureAttestation": "docs/research/serato-factory-resource-trace-140.json",
+  "nativeDescriptor": {
+    "kind": "native_intro_device",
+    "name": "DJControl Inpulse 300 Mk2",
+    "displayName": "DJControl Inpulse 300 Mk2",
+    "vendorID": "0x06f8",
+    "productID": "0xb12f"
+  },
+  "sourceControlElements": 374,
+  "sourceConditions": 547,
+  "sourceOutputBranches": 593,
+  "softwareMixerStates": {
+    "software_mic_gain": "SOFTWARE_MIXER_STATE_HIDDEN",
+    "software_cue_gain": "SOFTWARE_MIXER_STATE_READONLY",
+    "software_cf_curve": "SOFTWARE_MIXER_STATE_NORMAL",
+    "software_uf_curve": "SOFTWARE_MIXER_STATE_NORMAL",
+    "software_cue_mix": "SOFTWARE_MIXER_STATE_NORMAL",
+    "software_master_cue": "SOFTWARE_MIXER_STATE_DISABLE",
+    "software_split_cue": "SOFTWARE_MIXER_STATE_NORMAL",
+    "software_crossfader_reverse": "SOFTWARE_MIXER_STATE_NORMAL"
+  },
+  "outputs": [
+    "MasterOut",
+    "CueOut"
+  ],
+  "knownUnconditionalInputContracts": [
+    {
+      "input": {
+        "channel": "2",
+        "control": "7",
+        "event_type": "Note On"
+      },
+      "action": "play",
+      "actionParameters": {
+        "deck_id": "0"
+      },
+      "translationRules": [
+        {
+          "action_on": "press",
+          "behaviour": "toggle"
+        }
+      ]
+    },
+    {
+      "input": {
+        "channel": "2",
+        "control": "5",
+        "event_type": "Note On"
+      },
+      "action": "sync",
+      "actionParameters": {
+        "deck_id": "0"
+      },
+      "translationRules": []
+    },
+    {
+      "input": {
+        "channel": "5",
+        "control": "5",
+        "event_type": "Note On"
+      },
+      "action": "sync_off",
+      "actionParameters": {
+        "deck_id": "0"
+      },
+      "translationRules": []
+    },
+    {
+      "input": {
+        "channel": "2",
+        "complement_control": "40",
+        "control": "8",
+        "data_type": "Absolute 14",
+        "event_type": "Control Change"
+      },
+      "action": "pitch_slider",
+      "actionParameters": {
+        "deck_id": "0"
+      },
+      "translationRules": [
+        {}
+      ]
+    },
+    {
+      "input": {
+        "channel": "2",
+        "complement_control": "32",
+        "control": "0",
+        "data_type": "Absolute 14",
+        "event_type": "Control Change"
+      },
+      "action": "upfader",
+      "actionParameters": {
+        "deck_id": "0"
+      },
+      "translationRules": []
+    },
+    {
+      "input": {
+        "channel": "5",
+        "complement_control": "32",
+        "control": "0",
+        "data_type": "Absolute 14",
+        "event_type": "Control Change"
+      },
+      "action": "upfader",
+      "actionParameters": {
+        "deck_id": "0"
+      },
+      "translationRules": []
+    },
+    {
+      "input": {
+        "channel": "2",
+        "control": "12",
+        "event_type": "Note On"
+      },
+      "action": "pfl",
+      "actionParameters": {
+        "deck_id": "0"
+      },
+      "translationRules": []
+    },
+    {
+      "input": {
+        "channel": "2",
+        "control": "13",
+        "event_type": "Note On"
+      },
+      "action": "load_track",
+      "actionParameters": {
+        "deck_id": "0"
+      },
+      "translationRules": []
+    },
+    {
+      "input": {
+        "channel": "3",
+        "control": "7",
+        "event_type": "Note On"
+      },
+      "action": "play",
+      "actionParameters": {
+        "deck_id": "1"
+      },
+      "translationRules": [
+        {
+          "action_on": "press",
+          "behaviour": "toggle"
+        }
+      ]
+    },
+    {
+      "input": {
+        "channel": "3",
+        "control": "5",
+        "event_type": "Note On"
+      },
+      "action": "sync",
+      "actionParameters": {
+        "deck_id": "1"
+      },
+      "translationRules": []
+    },
+    {
+      "input": {
+        "channel": "6",
+        "control": "5",
+        "event_type": "Note On"
+      },
+      "action": "sync_off",
+      "actionParameters": {
+        "deck_id": "1"
+      },
+      "translationRules": []
+    },
+    {
+      "input": {
+        "channel": "3",
+        "complement_control": "40",
+        "control": "8",
+        "data_type": "Absolute 14",
+        "event_type": "Control Change"
+      },
+      "action": "pitch_slider",
+      "actionParameters": {
+        "deck_id": "1"
+      },
+      "translationRules": [
+        {}
+      ]
+    },
+    {
+      "input": {
+        "channel": "3",
+        "complement_control": "32",
+        "control": "0",
+        "data_type": "Absolute 14",
+        "event_type": "Control Change"
+      },
+      "action": "upfader",
+      "actionParameters": {
+        "deck_id": "1"
+      },
+      "translationRules": []
+    },
+    {
+      "input": {
+        "channel": "6",
+        "complement_control": "32",
+        "control": "0",
+        "data_type": "Absolute 14",
+        "event_type": "Control Change"
+      },
+      "action": "upfader",
+      "actionParameters": {
+        "deck_id": "1"
+      },
+      "translationRules": []
+    },
+    {
+      "input": {
+        "channel": "3",
+        "control": "12",
+        "event_type": "Note On"
+      },
+      "action": "pfl",
+      "actionParameters": {
+        "deck_id": "1"
+      },
+      "translationRules": []
+    },
+    {
+      "input": {
+        "channel": "3",
+        "control": "13",
+        "event_type": "Note On"
+      },
+      "action": "load_track",
+      "actionParameters": {
+        "deck_id": "1"
+      },
+      "translationRules": []
+    },
+    {
+      "input": {
+        "channel": "1",
+        "control": "1",
+        "data_type": "Relative 2's Complement",
+        "event_type": "Control Change"
+      },
+      "action": "library_scroll",
+      "actionParameters": {},
+      "translationRules": []
+    }
+  ],
+  "boundary": "Source protocol facts, not raw XML or implementation. Runtime action defaults/inversion/conditional modifier/LED/SysEx adapters are not established by address recovery. No initialization/output sent; existing272native-profile assignments retained."
+}
