@@ -1,0 +1,46 @@
+{
+  "version": "0.1.16",
+  "archiveSHA256": "a2925237fab3fe2f9064bacb6a62b91cf6cc4f6b02cb166534d90952907076df",
+  "sourceCommit": "eaffc59146d40f757ea502f6ac7eb97e0d5a6404",
+  "checks": [
+    {
+      "name": "Archive and all declared prototype module bytes match immutable source",
+      "passed": true,
+      "evidence": {
+        "allPrototypeFiles": 308,
+        "declaredModules": 40
+      }
+    },
+    {
+      "name": "Staged host/helper bytes and sanitized package identity match receipt",
+      "passed": true,
+      "evidence": {
+        "stagedFiles": 6,
+        "version": "0.1.16"
+      }
+    },
+    {
+      "name": "Archive excludes raw evidence, user profiles, Git and credentials",
+      "passed": true,
+      "evidence": {
+        "files": 1692
+      }
+    },
+    {
+      "name": "Packaged main profile/permissions and isolated check session remain distinct",
+      "passed": true,
+      "evidence": {
+        "mainPartition": "persist:open-play-playback-test",
+        "diagnosticPartitionPersistent": false,
+        "uniqueDiagnosticSessions": true,
+        "devicePermissionsDenied": true,
+        "sandboxRetained": true
+      }
+    }
+  ],
+  "scope": "Actual ASAR bytes and controlled packaged host/check-window callbacks, not native UI/audio/device acceptance.",
+  "fullParityVerified": false,
+  "passed": 4,
+  "failed": 0,
+  "completed": true
+}

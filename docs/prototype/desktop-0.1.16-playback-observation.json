@@ -1,0 +1,88 @@
+{
+  "date": "2026-10-18",
+  "plan": 113,
+  "version": "0.1.16",
+  "sourceCommit": "eaffc59146d40f757ea502f6ac7eb97e0d5a6404",
+  "asarSHA256": "a2925237fab3fe2f9064bacb6a62b91cf6cc4f6b02cb166534d90952907076df",
+  "mainProcessAtFirstCheck": 17645,
+  "mainProcessAfterNormalRestart": 18011,
+  "windowTitle": "Open Play Playback Test 0.1.16 \u2014 controller mixing test",
+  "executed": [
+    "Normal native Checks \u2192 Rapid Sync and Play opens distinct synthetic input check window",
+    "Normal native Run and Download original evidence via macOS Save; complete master decoded by Electron harness",
+    "Close isolated check window with red close button; return to main stopped",
+    "Normal main MIDI export before switch and after normal restart is byte-identical",
+    "Normal Devices workflow selected named Hercules and applied four-channel master 1/2 and cue 3/4"
+  ],
+  "rapidWorkflow": {
+    "completed": true,
+    "errors": [],
+    "guiMaximumPulseErrorMs": 1.1564625850339905,
+    "syntheticMidiMaximumPulseErrorMs": 1.405895691610759,
+    "minimumPairs": 5,
+    "maximumErrorMs": 10,
+    "cancel": {
+      "at": 7.691609977324262,
+      "playsBefore": 2,
+      "after": {
+        "playing": false,
+        "processing": false,
+        "queued": false,
+        "plays": 2
+      },
+      "from": 8.041609977324262,
+      "to": 8.241609977324263,
+      "rightRMS": 4.0591412496438124e-08,
+      "passed": true
+    },
+    "recording": {
+      "bytes": 133901,
+      "format": "audio/webm;codecs=opus",
+      "sha256": "5a0db4291512bbb17d4828c6fad6c240d84447a54dea8b345408b01f625560aa"
+    },
+    "decoded": {
+      "duration": 8.279977324263038,
+      "frames": 365147,
+      "sampleRate": 44100,
+      "channels": 2
+    },
+    "report": "docs/prototype/desktop-0.1.16-rapid-sync-native-results.json",
+    "rawReport": "local-evidence/desktop-0.1.16-native/rapid-sync-play-native-0.1.16.json"
+  },
+  "mapping": {
+    "count": 272,
+    "bytes": 64916,
+    "beforeAfterRestartByteIdentical": true,
+    "sha256": "37b61c1dbf16d43a1f14d7d932c88dc3a4d2ba1a062ae23e5175c91d58953864"
+  },
+  "ready": {
+    "playingDecks": 0,
+    "masterMeter": 0,
+    "tracks": [
+      "After Hours 124 BPM",
+      "Glass Transit 126 BPM"
+    ],
+    "sync": false,
+    "keylock": false,
+    "channelLevels": [
+      0.8,
+      0.8
+    ],
+    "crossfader": "center",
+    "midiEnumerated": "DJControl Inpulse 300 Mk2 (connected)",
+    "route": "DJControl Inpulse 300 Mk2 (06f8:b12f) \u00b7 four-channel \u00b7 master 1/2 \u00b7 cue 3/4 \u00b7 cue mix 0% \u00b7 cue volume 10%",
+    "routePersistsAfterRestart": false,
+    "physicalOutputVerifiedThisVersion": false
+  },
+  "preservation": {
+    "previous015AsarSHA256": "7430617a44d7a23ff25e41342cf231d35397309ef2bc093a1ff962d25fa1fbf3",
+    "previousBundleUntouched": true,
+    "profileBackup": "local-evidence/profile-backups/playback-before-0.1.16",
+    "backupFiles": 158,
+    "backupBytes": 8017227,
+    "copyHashesMatch": true
+  },
+  "evidenceScope": "Externally observed actual packaged Electron window/menu/process and harness result. Report original scope string is unchanged; synthetic inputs and known pulse fixtures do not establish physical hardware, acoustic latency, music quality or full Sync/reference acceptance. Package isolation callback checks are controlled checks, separate from observed native behavior.",
+  "limitation": "Cmd-W did not close diagnostic window; normal red close button did. Output starts at system-default stereo and must be selected again after restart.",
+  "fullParityVerified": false
+}
