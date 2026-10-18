@@ -12,6 +12,13 @@ else{
   const assets=app.isPackaged?path.join(app.getAppPath(),'assets'):path.resolve(__dirname,'..');
   host=await createAssetServer({root:assets});
   const partition='persist:open-play-test';
+  // Bounded, in-memory diagnostics only: no URLs, device IDs or captured media.
+  // Observing a decision must never change the existing permission policy.
+  const permissionDecisions=[];
+  const recordPermission=(kind,permission,contents,origin,details,allowed)=>{
+   permissionDecisions.push({kind,permission,mainContents:contents===window?.webContents,ownOrigin:(()=>{try{return new URL(origin).origin===host.origin;}catch{return false;}})(),isMainFrame:details?.isMainFrame??null,requestingUrlOwn:(()=>{try{return new URL(details?.requestingUrl).origin===host.origin;}catch{return false;}})(),mediaType:details?.mediaType??null,allowed});
+   if(permissionDecisions.length>80)permissionDecisions.shift();
+  };
   const createWindow=()=>{
    window=new BrowserWindow({width:1440,height:1000,minWidth:1000,minHeight:700,title:testTitle,backgroundColor:'#111111',webPreferences:{partition,nodeIntegration:false,contextIsolation:true,sandbox:true,webSecurity:true}});
    const own=url=>{try{return new URL(url).origin===host.origin;}catch{return false;}};
@@ -22,8 +29,8 @@ else{
    // Output enumeration/selection is required by the authorized cue test.
    // This grants neither microphone nor camera capture.
    const localDevicePermission=permission=>['midi','midiSysex','speaker-selection'].includes(permission);
-   ses.setPermissionCheckHandler((contents,permission,origin,details)=>contents===window?.webContents&&own(origin)&&details?.isMainFrame===true&&localDevicePermission(permission));
-   ses.setPermissionRequestHandler((contents,permission,callback,details)=>callback(contents===window?.webContents&&own(contents.getURL())&&details?.isMainFrame===true&&own(details.requestingUrl)&&localDevicePermission(permission)));
+   ses.setPermissionCheckHandler((contents,permission,origin,details)=>{const allowed=contents===window?.webContents&&own(origin)&&details?.isMainFrame===true&&localDevicePermission(permission);recordPermission('check',permission,contents,origin,details,allowed);return allowed;});
+   ses.setPermissionRequestHandler((contents,permission,callback,details)=>{const allowed=contents===window?.webContents&&own(contents.getURL())&&details?.isMainFrame===true&&own(details.requestingUrl)&&localDevicePermission(permission);recordPermission('request',permission,contents,details?.requestingUrl,details,allowed);callback(allowed);});
    window.on('page-title-updated',event=>event.preventDefault());
    window.webContents.setWindowOpenHandler(()=>({action:'deny'}));
    window.webContents.on('will-navigate',(event,url)=>{if(!own(url))event.preventDefault();});

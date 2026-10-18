@@ -11,7 +11,7 @@ const git=args=>execFileSync('git',args,{cwd:root,maxBuffer:150*1024*1024});
 const sha=bytes=>createHash('sha256').update(bytes).digest('hex');
 const sourceCommit=git(['rev-parse','HEAD']).toString().trim();
 const get=file=>git(['show',`${sourceCommit}:${file}`]);
-const version='0.1.17',name='Open Play Playback Test',port=18775,bundle='org.openplay.dj.playback.localtest';
+const version='0.1.18',name='Open Play Playback Test',port=18775,bundle='org.openplay.dj.playback.localtest';
 const profile='Open Play Playback Test',partition='persist:open-play-playback-test';
 const stage=await mkdtemp(path.join(tmpdir(),'open-play-playback-'));
 await mkdir(path.join(stage,'assets'));
@@ -30,7 +30,7 @@ main=change(main,'createAssetServer({root:assets})',`createAssetServer({root:ass
 main=change(main,'persist:open-play-test',partition);
 main=change(main,'current browser controls source dd068e4, approved baseline f8b0abf; prior0.1.5 retained.',`current browser source ${sourceCommit.slice(0,7)}, original local-test approval f8b0abf; all earlier apps/default launcher retained. Separate profile and port ${port}. Playback and independent Hercules starter MIDI controls. Stable separate playback-test profile. Full controller acceptance and Serato parity remain open. No public release.`);
 main=change(main,"const {createAssetServer}=require('./server.cjs');","const {createAssetServer}=require('./server.cjs');\nconst {openPlaybackCheck,openAutoGainCheck}=require('./playback-check-window.cjs');");
-main=change(main,"{label:'Window',submenu:","{label:'Checks',submenu:[{label:'Rapid Sync and Play',click:()=>openPlaybackCheck({BrowserWindow,origin:host.origin,title:testTitle})},{label:'Measured Auto Gain',click:()=>openAutoGainCheck({BrowserWindow,origin:host.origin,title:testTitle})}]},{label:'Window',submenu:");
+main=change(main,"{label:'Window',submenu:","{label:'Checks',submenu:[{label:'Rapid Sync and Play',click:()=>openPlaybackCheck({BrowserWindow,origin:host.origin,title:testTitle})},{label:'Measured Auto Gain',click:()=>openAutoGainCheck({BrowserWindow,origin:host.origin,title:testTitle})},{label:'Device permission decisions',click:()=>dialog.showMessageBox(window,{type:'info',title:'Local permission decisions',message:'Last80 device permission decisions',detail:JSON.stringify(permissionDecisions,null,2)})}]},{label:'Window',submenu:");
 await put('main.cjs',main);await put('server.cjs',get('desktop/server.cjs'));await put('playback-check-window.cjs',get('desktop/playback-check-window.cjs'));
 const manifest=JSON.parse(get('desktop/package.json'));
 Object.assign(manifest,{name:'open-play-playback-local-test',productName:name,version,description:'Optional current-source desktop test; full parity unverified'});delete manifest.scripts;
