@@ -1,0 +1,71 @@
+{
+  "checkpoint": 152,
+  "scope": "Actual WASM and actual SRC, two18-channel processors/serial128-frame clock. Original and bank0 Melody are equal; bank1 silent in control and populated at3seconds in treatment. Original/active input references, schedule and geometry unchanged. No production change/app/browser/device/reference acceptance.",
+  "originalSHA256": "4ea454af01ed7e2aa824c7fd3169fe323ccc484641c5bc7629b4516800b354c7",
+  "sourceHashes": {
+    "prototype/vendor/signalsmith-stretch/SignalsmithStretch-open-play-replace.mjs": "7fab930586aa9055c2b47a18ce7740e2b22d723498ba59cc7c09844566ef08de",
+    "prototype/pcm-resample.js": "8789e7cfc543c393830ad04e2d56e3359786eb6a4473ff08edda1c899fc19ae2",
+    "experiments/inactive_stem_bank_152.mjs": "5b7292df1e7ac52e51d64ca05e116e4af9aaf8d125f3aeaf2f372551a0d5371d"
+  },
+  "inspection": {
+    "baselineStart": 0.6,
+    "baselineSeconds": 0.2,
+    "intervalStart": 2.7,
+    "intervalEnd": 3.7,
+    "windowSeconds": 0.01
+  },
+  "rows": [
+    {
+      "case": "unchanged-inactive-bank",
+      "channel": 0,
+      "frames": 264704,
+      "sha256": "e13a3c1f793ce6e278db08ac2f47fb57e450f79f7a9db1d80082a62a44adc815",
+      "baselineRMS": 0.0424234478786853,
+      "minimum10msRMSRatio": 0.9905891687397904,
+      "minimumAt": 2.85
+    },
+    {
+      "case": "unchanged-inactive-bank",
+      "channel": 4,
+      "frames": 264704,
+      "sha256": "5027d4e8184bcb032b43bebbdd12e369b3014f6898f28b082b8fdeb28f3ecb63",
+      "baselineRMS": 0.04242345259742111,
+      "minimum10msRMSRatio": 0.9905915425621857,
+      "minimumAt": 2.85
+    },
+    {
+      "case": "populated-inactive-bank",
+      "channel": 0,
+      "frames": 264704,
+      "sha256": "e13a3c1f793ce6e278db08ac2f47fb57e450f79f7a9db1d80082a62a44adc815",
+      "baselineRMS": 0.0424234478786853,
+      "minimum10msRMSRatio": 0.9905891687397904,
+      "minimumAt": 2.85
+    },
+    {
+      "case": "populated-inactive-bank",
+      "channel": 4,
+      "frames": 264704,
+      "sha256": "5027d4e8184bcb032b43bebbdd12e369b3014f6898f28b082b8fdeb28f3ecb63",
+      "baselineRMS": 0.04242345259742111,
+      "minimum10msRMSRatio": 0.9905915425621857,
+      "minimumAt": 2.85
+    }
+  ],
+  "comparisons": [
+    {
+      "channel": 0,
+      "maximumDifferenceBeforeChange": 0.0,
+      "maximumDifferenceAfterChange": 0.0
+    },
+    {
+      "channel": 4,
+      "maximumDifferenceBeforeChange": 0.0,
+      "maximumDifferenceAfterChange": 0.0
+    }
+  ],
+  "inactivePopulationChangedObservedOutputs": false,
+  "browserDipExplained": false,
+  "productionChanged": false,
+  "fullParityAcceptance": false
+}

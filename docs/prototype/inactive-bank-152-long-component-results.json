@@ -1,0 +1,71 @@
+{
+  "checkpoint": 152,
+  "scope": "Actual WASM and actual SRC, two18-channel processors/serial128-frame clock. Original and bank0 Melody are equal; bank1 silent in control and populated at the prior failing preparation start in treatment. Original/active input references, schedule and geometry unchanged. No production change/app/browser/device/reference acceptance.",
+  "originalSHA256": "a558cc037a58a3f3f92ad0ca964dda27f2cd3c4ca1d2b2316bf02efa2d90f6c4",
+  "sourceHashes": {
+    "prototype/vendor/signalsmith-stretch/SignalsmithStretch-open-play-replace.mjs": "7fab930586aa9055c2b47a18ce7740e2b22d723498ba59cc7c09844566ef08de",
+    "prototype/pcm-resample.js": "8789e7cfc543c393830ad04e2d56e3359786eb6a4473ff08edda1c899fc19ae2",
+    "experiments/inactive_stem_bank_152_long.mjs": "e0ac6ce6dcee5d3a359da20cd5c50d4536ca3b2401c3bb7686c8584ac3ba62ee"
+  },
+  "inspection": {
+    "baselineStart": 0.822063492063492,
+    "baselineSeconds": 0.2,
+    "intervalStart": 0.822063492063492,
+    "intervalEnd": 11.4,
+    "windowSeconds": 0.01
+  },
+  "rows": [
+    {
+      "case": "unchanged-inactive-bank",
+      "channel": 0,
+      "frames": 529280,
+      "sha256": "506d6e0b26b222cb65ee2d2f318d743ef621ca7678a5a32f214d6967f9a63e9b",
+      "baselineRMS": 0.04242479444550137,
+      "minimum10msRMSRatio": 0.9905255111166152,
+      "minimumAt": 2.392063492063492
+    },
+    {
+      "case": "unchanged-inactive-bank",
+      "channel": 4,
+      "frames": 529280,
+      "sha256": "c0b6227d7fdb8b3d7ff8f183543777d3572c3de06609582353baa8acb7eef07d",
+      "baselineRMS": 0.04242479466751901,
+      "minimum10msRMSRatio": 0.9905238416774131,
+      "minimumAt": 2.392063492063492
+    },
+    {
+      "case": "populated-inactive-bank",
+      "channel": 0,
+      "frames": 529280,
+      "sha256": "506d6e0b26b222cb65ee2d2f318d743ef621ca7678a5a32f214d6967f9a63e9b",
+      "baselineRMS": 0.04242479444550137,
+      "minimum10msRMSRatio": 0.9905255111166152,
+      "minimumAt": 2.392063492063492
+    },
+    {
+      "case": "populated-inactive-bank",
+      "channel": 4,
+      "frames": 529280,
+      "sha256": "c0b6227d7fdb8b3d7ff8f183543777d3572c3de06609582353baa8acb7eef07d",
+      "baselineRMS": 0.04242479466751901,
+      "minimum10msRMSRatio": 0.9905238416774131,
+      "minimumAt": 2.392063492063492
+    }
+  ],
+  "comparisons": [
+    {
+      "channel": 0,
+      "maximumDifferenceBeforeChange": 0.0,
+      "maximumDifferenceAfterChange": 0.0
+    },
+    {
+      "channel": 4,
+      "maximumDifferenceBeforeChange": 0.0,
+      "maximumDifferenceAfterChange": 0.0
+    }
+  ],
+  "inactivePopulationChangedObservedOutputs": false,
+  "browserDipExplained": false,
+  "productionChanged": false,
+  "fullParityAcceptance": false
+}

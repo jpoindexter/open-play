@@ -1,0 +1,300 @@
+{
+  "checkpoint": 152,
+  "scope": "Four actual live keylocked decks, authored48second330/550Hz stereo original and two independent decoded Stem generations. Actual Play/pads/Stop, direct production attachStems, read-only actual worklet PCM/WASM capacity queries, 12second left-channel deck and original/old-bank/new-bank traces. Physical outputs muted. Not total process memory, CPU/deadline, right-channel acoustic, musical/model/native/hardware/reference acceptance.",
+  "originalSHA256": "ada3c7e6898f8ef2f47f432de142d1e8fb9d5541368b4fe998568b6a3b9acf23",
+  "originalBytes": 21514789,
+  "sourceHashes": {
+    "app.js": "a34c271bb8b2270c071ab77c8ce7727cf6943733a0e21b7c6da9157c0c13089a",
+    "engine.js": "22f4609c72e352a7a548fc71d8a480d706f3362428bbefd8b2beb09c8cbfc264",
+    "keylock-shadow-live.js": "41bf27051270a4741f83b59bc7c0111767b589ef3986b4aafb43ad36dc067551",
+    "pcm-resample.js": "8789e7cfc543c393830ad04e2d56e3359786eb6a4473ff08edda1c899fc19ae2",
+    "stem-bank-trace-152-harness.js": "e3bfe0980c1d9aec91d4bc8037b8b694beb716e3a5eb314dfc857f070fe8a5f3",
+    "stem-activation-capture-145.js": "730b9c3de31e9c3546ec1ab86f8fd85ce2a1ccfe6f78fc25d8f483f8b9d75331",
+    "vendor/signalsmith-stretch/SignalsmithStretch-open-play-replace.mjs": "7fab930586aa9055c2b47a18ce7740e2b22d723498ba59cc7c09844566ef08de"
+  },
+  "inspection": {
+    "baselineStart": 3.765578231292517,
+    "baselineSeconds": 0.2,
+    "intervalStart": 8.861587301587303,
+    "intervalEnd": 10.335510204081633,
+    "windowSeconds": 0.01,
+    "note": "Full original PCM finite/hash/quanta checked; these fixed event-relative windows diagnose the second preparation only. No fitted alignment/gain or repaired PCM."
+  },
+  "rows": [
+    {
+      "trace": "deck0-monitor",
+      "frames": 529200,
+      "sha256": "390339d815df5c3dde97c54a0c5eae2a865ccc7e9cda3ba7fd36ef5e835931b4",
+      "contiguousQuanta": 4135,
+      "baselineRMS": 0.12059614585553813,
+      "minimum10msRMSRatio": 0.9802610792640535,
+      "minimumAt": 9.871587301587303,
+      "belowOriginalFloor": false
+    },
+    {
+      "trace": "deck1-monitor",
+      "frames": 529200,
+      "sha256": "a2d9ecf0e5f97ed0185bb742bb5df5d5a12390ee78a3ad4fce791fdd68939b8b",
+      "contiguousQuanta": 4135,
+      "baselineRMS": 0.12059261904792952,
+      "minimum10msRMSRatio": 0.9904990477928991,
+      "minimumAt": 9.751587301587302,
+      "belowOriginalFloor": false
+    },
+    {
+      "trace": "deck2-monitor",
+      "frames": 529200,
+      "sha256": "af1500eb828d0d4c522071f016288ba8ca1ee30b0a5af899873cfd4b66039b76",
+      "contiguousQuanta": 4135,
+      "baselineRMS": 0.1207347391243627,
+      "minimum10msRMSRatio": 0.9888032905404126,
+      "minimumAt": 8.941587301587303,
+      "belowOriginalFloor": false
+    },
+    {
+      "trace": "deck3-monitor",
+      "frames": 529200,
+      "sha256": "c112c019f03aac305b5bb7f2de1a9796a4f0429a4f55fa3e1ed7adc16c288876",
+      "contiguousQuanta": 4135,
+      "baselineRMS": 0.12058627457135444,
+      "minimum10msRMSRatio": 0.980057674127701,
+      "minimumAt": 9.651587301587302,
+      "belowOriginalFloor": false
+    },
+    {
+      "trace": "deck1-original",
+      "frames": 529200,
+      "sha256": "a02ee68cb050c80578325bfe92e7949dd5eaaa752746215efe6368f2e463568a",
+      "contiguousQuanta": 4135,
+      "baselineRMS": 0.04242500695655733,
+      "minimum10msRMSRatio": 0.990497251636775,
+      "minimumAt": 9.751587301587302,
+      "belowOriginalFloor": false
+    },
+    {
+      "trace": "deck1-bank0-melody",
+      "frames": 529200,
+      "sha256": "d1db1a2fe9605e1db5b709b727fe7d594da1acf63c86f646c7867b174df955fc",
+      "contiguousQuanta": 4135,
+      "baselineRMS": 0.042425008110219764,
+      "minimum10msRMSRatio": 0.9904990472214473,
+      "minimumAt": 9.751587301587302,
+      "belowOriginalFloor": false
+    },
+    {
+      "trace": "deck1-bank1-melody",
+      "frames": 529200,
+      "sha256": "4ddeb778505aafdbeb0348b8d215887e61c188ac693ed9e4212db8410cc25032",
+      "contiguousQuanta": 4135,
+      "baselineRMS": 0.0,
+      "afterPreparationRMS": 0.04242321780041342
+    }
+  ],
+  "captureIntegrity": [
+    {
+      "trace": "deck0-monitor",
+      "wholeQuantumContinuityPassed": false,
+      "preStopQuantumContinuityPassed": true,
+      "continuityIssues": [
+        {
+          "quantum": 4080,
+          "expected": 551168,
+          "actual": 551040
+        }
+      ],
+      "expectedInputDisconnectAfterStop": 0,
+      "producerErrorCount": 1,
+      "firstProducerError": {
+        "expected": 551168,
+        "actual": 551040
+      },
+      "lastProducerError": {
+        "expected": 551168,
+        "actual": 551040
+      }
+    },
+    {
+      "trace": "deck1-monitor",
+      "wholeQuantumContinuityPassed": false,
+      "preStopQuantumContinuityPassed": true,
+      "continuityIssues": [
+        {
+          "quantum": 4080,
+          "expected": 551168,
+          "actual": 551040
+        }
+      ],
+      "expectedInputDisconnectAfterStop": 0,
+      "producerErrorCount": 1,
+      "firstProducerError": {
+        "expected": 551168,
+        "actual": 551040
+      },
+      "lastProducerError": {
+        "expected": 551168,
+        "actual": 551040
+      }
+    },
+    {
+      "trace": "deck2-monitor",
+      "wholeQuantumContinuityPassed": false,
+      "preStopQuantumContinuityPassed": true,
+      "continuityIssues": [
+        {
+          "quantum": 4080,
+          "expected": 551168,
+          "actual": 551040
+        }
+      ],
+      "expectedInputDisconnectAfterStop": 0,
+      "producerErrorCount": 1,
+      "firstProducerError": {
+        "expected": 551168,
+        "actual": 551040
+      },
+      "lastProducerError": {
+        "expected": 551168,
+        "actual": 551040
+      }
+    },
+    {
+      "trace": "deck3-monitor",
+      "wholeQuantumContinuityPassed": false,
+      "preStopQuantumContinuityPassed": true,
+      "continuityIssues": [
+        {
+          "quantum": 4080,
+          "expected": 551168,
+          "actual": 551040
+        }
+      ],
+      "expectedInputDisconnectAfterStop": 0,
+      "producerErrorCount": 1,
+      "firstProducerError": {
+        "expected": 551168,
+        "actual": 551040
+      },
+      "lastProducerError": {
+        "expected": 551168,
+        "actual": 551040
+      }
+    },
+    {
+      "trace": "deck1-original",
+      "wholeQuantumContinuityPassed": false,
+      "preStopQuantumContinuityPassed": true,
+      "continuityIssues": [
+        {
+          "quantum": 4080,
+          "expected": 551168,
+          "actual": 551040
+        }
+      ],
+      "expectedInputDisconnectAfterStop": 329,
+      "producerErrorCount": 330,
+      "firstProducerError": {
+        "frame": 516096,
+        "inputMissing": true
+      },
+      "lastProducerError": {
+        "frame": 558080,
+        "inputMissing": true
+      }
+    },
+    {
+      "trace": "deck1-bank0-melody",
+      "wholeQuantumContinuityPassed": false,
+      "preStopQuantumContinuityPassed": true,
+      "continuityIssues": [
+        {
+          "quantum": 4080,
+          "expected": 551168,
+          "actual": 551040
+        }
+      ],
+      "expectedInputDisconnectAfterStop": 329,
+      "producerErrorCount": 330,
+      "firstProducerError": {
+        "frame": 516096,
+        "inputMissing": true
+      },
+      "lastProducerError": {
+        "frame": 558080,
+        "inputMissing": true
+      }
+    },
+    {
+      "trace": "deck1-bank1-melody",
+      "wholeQuantumContinuityPassed": false,
+      "preStopQuantumContinuityPassed": true,
+      "continuityIssues": [
+        {
+          "quantum": 4080,
+          "expected": 551168,
+          "actual": 551040
+        }
+      ],
+      "expectedInputDisconnectAfterStop": 329,
+      "producerErrorCount": 330,
+      "firstProducerError": {
+        "frame": 516096,
+        "inputMissing": true
+      },
+      "lastProducerError": {
+        "frame": 558080,
+        "inputMissing": true
+      }
+    }
+  ],
+  "wholeCaptureQuantumContinuityPassed": false,
+  "preStopDiagnosticIntervalValid": true,
+  "replacementCalls": 37,
+  "replacementStart": 9.102222222222222,
+  "replacementEnd": 9.996190476190476,
+  "chunkFrames": [
+    18541,
+    18541,
+    14,
+    18541,
+    1,
+    18541,
+    1,
+    18541,
+    1,
+    18541,
+    18541,
+    1,
+    18541,
+    1,
+    18541,
+    1,
+    18541,
+    18541,
+    1,
+    18541,
+    1,
+    18541,
+    1,
+    18541,
+    18541,
+    1,
+    18541,
+    1,
+    18541,
+    1,
+    18541,
+    1,
+    18541,
+    18541,
+    1,
+    18541,
+    1
+  ],
+  "gainSamplesDuringPreparation": 43,
+  "sampledGainsStableDuringPreparation": true,
+  "dipReproducedInThisTrace": false,
+  "prior151FailureStillOpen": true,
+  "productionChanged": false,
+  "browserDipExplained": false,
+  "fullParityAcceptance": false
+}
