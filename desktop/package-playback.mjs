@@ -11,7 +11,7 @@ const git=args=>execFileSync('git',args,{cwd:root,maxBuffer:150*1024*1024});
 const sha=bytes=>createHash('sha256').update(bytes).digest('hex');
 const sourceCommit=git(['rev-parse','HEAD']).toString().trim();
 const get=file=>git(['show',`${sourceCommit}:${file}`]);
-const version='0.1.15',name='Open Play Playback Test',port=18775,bundle='org.openplay.dj.playback.localtest';
+const version='0.1.16',name='Open Play Playback Test',port=18775,bundle='org.openplay.dj.playback.localtest';
 const profile='Open Play Playback Test',partition='persist:open-play-playback-test';
 const stage=await mkdtemp(path.join(tmpdir(),'open-play-playback-'));
 await mkdir(path.join(stage,'assets'));
@@ -29,7 +29,9 @@ main=change(main,'Open Play Test ${app.getVersion()} — MIDI controls test','Op
 main=change(main,'createAssetServer({root:assets})',`createAssetServer({root:assets,port:${port}})`);
 main=change(main,'persist:open-play-test',partition);
 main=change(main,'current browser controls source dd068e4, approved baseline f8b0abf; prior0.1.5 retained.',`current browser source ${sourceCommit.slice(0,7)}, original local-test approval f8b0abf; all earlier apps/default launcher retained. Separate profile and port ${port}. Playback and independent Hercules starter MIDI controls. Stable separate playback-test profile. Full controller acceptance and Serato parity remain open. No public release.`);
-await put('main.cjs',main);await put('server.cjs',get('desktop/server.cjs'));
+main=change(main,"const {createAssetServer}=require('./server.cjs');","const {createAssetServer}=require('./server.cjs');\nconst {openPlaybackCheck}=require('./playback-check-window.cjs');");
+main=change(main,"{label:'Window',submenu:","{label:'Checks',submenu:[{label:'Rapid Sync and Play',click:()=>openPlaybackCheck({BrowserWindow,origin:host.origin,title:testTitle})}]},{label:'Window',submenu:");
+await put('main.cjs',main);await put('server.cjs',get('desktop/server.cjs'));await put('playback-check-window.cjs',get('desktop/playback-check-window.cjs'));
 const manifest=JSON.parse(get('desktop/package.json'));
 Object.assign(manifest,{name:'open-play-playback-local-test',productName:name,version,description:'Optional current-source desktop test; full parity unverified'});delete manifest.scripts;
 await put('package.json',JSON.stringify(manifest,null,2)+'\n');
@@ -39,15 +41,15 @@ await put('assets/docs/prototype/TRY_CURRENT_DESKTOP.md',`# Packaged desktop tes
 
 Private local test from source ${sourceCommit}. This package includes the approved interface and current playback fixes; packaging alone does not establish sound, hardware response or full Serato parity.
 
-Use the normal app controls. Playback versions share the saved profile and port ${port}; close one before opening another. After launch, inspect Devices; routing starts at system-default stereo and is not restored automatically. When ready, select the named Hercules in Devices, apply four channels (master1/2, cue3/4), and test one action at a time. No timed controller capture runs while Jason is away.
+Use the normal app controls. Playback versions share the saved profile and port ${port}; close one before opening another. After launch, inspect Devices; routing starts at system-default stereo and is not restored automatically. When ready, select the named Hercules in Devices, apply four channels (master1/2, cue3/4), and test one action at a time. No timed controller capture runs while Jason is away. The Checks → Rapid Sync and Play menu opens a separate volatile session with all device permissions denied. Its synthetic fixtures/mappings do not use the main saved player session. Close that check window after saving its report.
 
 The workspace docs/prototype/TRY_CURRENT_DESKTOP.md and desktop-${version}-playback-observation.json will record subsequent native observations. Bundled research is a frozen source snapshot. Previous versions and profile backups remain available.
 `);
-const modules=['app.js','engine.js','keylock-shadow-live.js','pcm-resample.js','vendor/signalsmith-stretch/SignalsmithStretch-open-play-history.mjs','beatgrid.js','smart-sync.js','sync.js','sync-tempo-handoff.js','deck-midi.js','deck-tap-tempo.js','deck-tempo.js','midi.js','panels.js','jog-bend.js','midi-jog-touch.js','loop-pads.js','manual-loops.js','pitchplay.js','instant-double.js','effects.js','extended-effects.js','keylock.js','keylock-dsp.js','keylock-worker.js','warp-loop.js','warp-loop-kernel.js','warp-loop-worklet.js','styles.css'];
-const provenance={builtAt:new Date().toISOString(),approvedPrototype:'f8b0abf33c8e8468c7bec27eabc5be2930ed0086',sourceCommit,version,name,bundle,port,profile,partition,electronVersion:'44.9.0',prototypeFiles:modules.map(file=>({file:'prototype/'+file,sha256:sha(get('prototype/'+file))})),packagingSources:await Promise.all(['desktop/package-playback.mjs'].map(async file=>({file,sha256:sha(await readFile(path.join(root,file)))}))),stagedWrites:writes,scope:'Optional private local test. Complete prototype archived from the declared commit; no adapter substitution or native R3 helper. Main app uses a separate persistent playback-test profile and own-origin MIDI/speaker permissions; microphone and camera remain denied. Package identity does not prove runtime, physical hardware, music quality or full parity. Prior apps/defaults untouched.'};
+const modules=['app.js','engine.js','censor.js','censor-backing.js','reverse-censor-plan.js','pitch-time-map.js','deck-scratch.js','deck-scratch-kernel.js','deck-scratch-worklet.js','silent-audio-pull.js','silent-audio-pull-worklet.js','rapid-sync-play-harness.js','rapid-sync-play-harness.html','keylock-shadow-live.js','pcm-resample.js','vendor/signalsmith-stretch/SignalsmithStretch-open-play-history.mjs','beatgrid.js','smart-sync.js','sync.js','sync-tempo-handoff.js','deck-midi.js','deck-tap-tempo.js','deck-tempo.js','midi.js','panels.js','jog-bend.js','midi-jog-touch.js','loop-pads.js','manual-loops.js','pitchplay.js','instant-double.js','effects.js','extended-effects.js','keylock.js','keylock-dsp.js','keylock-worker.js','warp-loop.js','warp-loop-kernel.js','warp-loop-worklet.js','styles.css'];
+const provenance={builtAt:new Date().toISOString(),approvedPrototype:'f8b0abf33c8e8468c7bec27eabc5be2930ed0086',sourceCommit,version,name,bundle,port,profile,partition,electronVersion:'44.9.0',prototypeFiles:modules.map(file=>({file:'prototype/'+file,sha256:sha(get('prototype/'+file))})),packagingSources:await Promise.all(['desktop/package-playback.mjs','desktop/playback-check-window.cjs'].map(async file=>({file,sha256:sha(await readFile(path.join(root,file)))}))),stagedWrites:writes,scope:'Optional private local test. Complete prototype archived from the declared commit; no adapter substitution or native R3 helper. Main app uses a separate persistent playback-test profile and own-origin MIDI/speaker permissions; microphone and camera remain denied. Package identity does not prove runtime, physical hardware, music quality or full parity. Prior apps/defaults untouched.'};
 await put('BUILD_PROVENANCE.json',JSON.stringify(provenance,null,2)+'\n');
 const outputs=await packager({dir:stage,out:path.join(root,'local-evidence/desktop-builds',version),name,platform:'darwin',arch:process.arch,electronVersion:'44.9.0',appBundleId:bundle,appVersion:version,asar:true,overwrite:false,prune:true,osxSign:false});
 const asarPath=path.join(outputs[0],name+'.app','Contents','Resources','app.asar');
 const receipt={...provenance,stage,outputs,asarPath,asarSHA256:sha(await readFile(asarPath))};
-await writeFile(path.join(root,'docs/prototype/desktop-0.1.15-playback-package.json'),JSON.stringify(receipt,null,2)+'\n',{flag:'wx'});
+await writeFile(path.join(root,`docs/prototype/desktop-${version}-playback-package.json`),JSON.stringify(receipt,null,2)+'\n',{flag:'wx'});
 console.log(JSON.stringify({outputs,asarPath,asarSHA256:receipt.asarSHA256,sourceCommit}));
