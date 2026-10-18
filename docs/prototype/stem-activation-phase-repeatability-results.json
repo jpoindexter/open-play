@@ -1,0 +1,37 @@
+{
+  "scope": "Identical same-start instance controls over actual unchanged WASM serial clock; no browser/native acceptance",
+  "originalSHA256": "4f8f4557c2853972a97827acf36c6bd09eb96cf36cfc2fb3b70462036c1ee4cd",
+  "moduleSHA256": "1f470f846a993cc750ee2e111817adb08879493025c7322eadc8cf98323e4ef8",
+  "comparisons": [
+    {
+      "layout": "warm2",
+      "channel": 0,
+      "byteIdentical": true,
+      "frames": 88320,
+      "sha256": "9540b0b743ec516263179bc85e5c42d340e887df30dbbeae42643dacdd7fca37"
+    },
+    {
+      "layout": "warm2",
+      "channel": 1,
+      "byteIdentical": true,
+      "frames": 88320,
+      "sha256": "4e8444229ffdeee70f24ae118fd1b303cd0852699210c2210305e0f1e8d50fe7"
+    },
+    {
+      "layout": "warm10",
+      "channel": 0,
+      "byteIdentical": true,
+      "frames": 88320,
+      "sha256": "d7104977d9fcd84e3893087237c0b0e4da3755a39004d2e1c3680743fa956f91"
+    },
+    {
+      "layout": "warm10",
+      "channel": 1,
+      "byteIdentical": true,
+      "frames": 88320,
+      "sha256": "ad414b732528e4ddd4b4eb9fa29fa7c6d80f6247271aca972ba1955b33e39fdf"
+    }
+  ],
+  "finding": "Duplicate2channel and duplicate10channel outputs are byte-identical; the initial layout/start differences are not explained by random variation between identical instances.",
+  "fullParityVerified": false
+}

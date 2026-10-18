@@ -1,0 +1,99 @@
+{
+  "scope": "Independent least-squares fits on retained actual browser PCM; no new render, alignment, gain adjustment or changed acceptance thresholds.",
+  "originalSHA256": "9ad14fe163ba1e141443b48db686aa222a126bf72017361ca1e40838afea613a",
+  "sampleRate": 44100,
+  "captureStartFrame": 30976,
+  "activation": {
+    "playing": true,
+    "processing": false,
+    "voiceChanged": true,
+    "originalExpectedPosition": 0.41323582766439904,
+    "actualPosition": 0.41323582766439904,
+    "loop": false,
+    "model": "SCNet-large official",
+    "sourceCount": 0
+  },
+  "channels": [
+    {
+      "channel": 0,
+      "knownToneHz": 330,
+      "frames": 176400,
+      "sha256": "e30ccd22dc67a00694b512f63653014fcb01d7efc4bc21b29fe80be5523bb6fa",
+      "allFinite": true,
+      "fits": [
+        {
+          "captureWindowSeconds": [
+            0.05,
+            0.25
+          ],
+          "audioWindowSeconds": [
+            0.7524036281179138,
+            0.9524036281179138
+          ],
+          "amplitude": 0.19439814150898738,
+          "phaseDegrees": 36.39689349712073,
+          "DC": 5.743316472128185e-06,
+          "residualRMS": 0.0004894504954413949
+        },
+        {
+          "captureWindowSeconds": [
+            0.8,
+            1.0
+          ],
+          "audioWindowSeconds": [
+            1.5024036281179138,
+            1.7024036281179138
+          ],
+          "amplitude": 0.194458616201737,
+          "phaseDegrees": -166.58371686256845,
+          "DC": 1.190704471224781e-06,
+          "residualRMS": 0.0005190209159391849
+        }
+      ],
+      "phaseChangeDegrees": 157.0193896403108,
+      "amplitudeRatio": 1.0003110867844733
+    },
+    {
+      "channel": 1,
+      "knownToneHz": 550,
+      "frames": 176400,
+      "sha256": "d00ba1aca1fb195288fd80fa0c5e3074d40e7d656345691c6005082ed0327df2",
+      "allFinite": true,
+      "fits": [
+        {
+          "captureWindowSeconds": [
+            0.05,
+            0.25
+          ],
+          "audioWindowSeconds": [
+            0.7524036281179138,
+            0.9524036281179138
+          ],
+          "amplitude": 0.19441933737484376,
+          "phaseDegrees": 19.135361818418225,
+          "DC": -2.875759558246002e-06,
+          "residualRMS": 0.000469949538705666
+        },
+        {
+          "captureWindowSeconds": [
+            0.8,
+            1.0
+          ],
+          "audioWindowSeconds": [
+            1.5024036281179138,
+            1.7024036281179138
+          ],
+          "amplitude": 0.19445300211410507,
+          "phaseDegrees": -42.95268862516705,
+          "DC": -6.751664971053031e-06,
+          "residualRMS": 6.725570939837738e-05
+        }
+      ],
+      "phaseChangeDegrees": -62.088050443585274,
+      "amplitudeRatio": 1.000173155302944
+    }
+  ],
+  "finding": "The prior inspector already uses absolute audio sample times. Independent fits retain the phase changes; a capture-relative time-axis mistake does not explain the activation failure.",
+  "reviewDecision": "Do not accept deferred transfer as a continuity fix: it explicitly moves the cross-instance dip to the first partial Stem action. Preserve the failure until the real activation and pad workflows meet their unchanged requirements.",
+  "fullParityAccepted": false
+}

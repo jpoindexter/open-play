@@ -1,0 +1,120 @@
+{
+  "date": "2026-10-18",
+  "candidate": {
+    "version": "0.1.23",
+    "sourceCommit": "2a334132ca1a423029fceb8aa3e39953655df525",
+    "asarSHA256": "fa4b2c4629a0f313cefc619878bb333f8ae60cbb4d8ac1e5eebcef1bfa58825e"
+  },
+  "hardware": "Hercules DJControl Inpulse300Mk2",
+  "observedSetup": {
+    "output": "DJControl Inpulse300Mk2",
+    "layout": "four-channel",
+    "masterChannels": [
+      1,
+      2
+    ],
+    "cueChannels": [
+      3,
+      4
+    ],
+    "cueMixPercent": 0,
+    "cueVolumePercent": 10,
+    "masterDB": -12
+  },
+  "checks": [
+    {
+      "control": "Left physical Play/pause",
+      "humanAction": "Jason pressed once to play, then again to pause",
+      "humanReported": "Timer moves; RCA speakers play. Yes, pressed again to pause.",
+      "nativeObservedAfter": {
+        "playingDecks": 0,
+        "deck1PositionSeconds": 8.052,
+        "deck2PositionSeconds": 0
+      },
+      "result": "user_confirmed_transport_and_speaker_output; paused_state_observed",
+      "rawAX": "local-evidence/controller-physical-20261018/left-play-ax.txt",
+      "limits": "Not all MIDI controls, headphone isolation, Sync/beatmatch, music/latency or full parity acceptance."
+    },
+    {
+      "control": "Right physical Play/pause",
+      "humanAction": "Pressed right Play once to start deck2, then again to pause",
+      "humanReported": "Deck2 plays and pauses; RCA speakers work",
+      "nativeObservedAfter": {
+        "playingDecks": 0,
+        "deck1PositionSeconds": 9.187,
+        "deck2PositionSeconds": 2.076
+      },
+      "result": "user_confirmed_right_transport_and_speaker_output; paused_state_observed; fresh_isolation_confirmed",
+      "rawAX": "local-evidence/controller-physical-20261018/right-play-ax.txt",
+      "limits": "The later fresh isolation action confirmed only deck2 ran; earlier left-position delta does not establish cross-control."
+    },
+    {
+      "control": "Right Play isolation",
+      "humanAction": "Right Play once, left paused, leave right running",
+      "humanReported": "Only deck2 is playing",
+      "nativeObservedAfter": {
+        "playingDecks": 1,
+        "deck1PositionSeconds": 9.187,
+        "deck2PositionSeconds": 11.748
+      },
+      "result": "human_confirmed_and_native_observed_isolated_right_transport",
+      "rawAX": "local-evidence/controller-physical-20261018/right-isolation-ax.txt"
+    },
+    {
+      "control": "Centre-right physical channel volume fader",
+      "humanAction": "First down; later full up/down sweep, leave down",
+      "humanReported": "Speakers silent; deck2 keeps running. Confirmed centre-right fader swept.",
+      "nativeObservedAfter": {
+        "playingDecks": 1,
+        "deck1Level": 0.8,
+        "deck2Level": 0,
+        "deck2PositionSeconds": 8.44,
+        "masterDB": -12
+      },
+      "midiObserved": "CC channel3 controller0, paired controller32, from named connected Hercules input",
+      "result": "final_zero_level_observed_with_playing_deck; user_reported_speaker_silence",
+      "rawAX": [
+        "local-evidence/controller-physical-20261018/right-volume-sweep-midi-ax.txt",
+        "local-evidence/controller-physical-20261018/right-volume-after-sweep-ax.txt"
+      ],
+      "limits": "Earlier observation stayed at0.8 and original loop was near track fadeout; that earlier action alone was inconclusive. Fresh sweep used steady early loop8\u201310s, then observed level0. No source/profile mutation was needed. Intermediate full-scale value was not captured."
+    },
+    {
+      "control": "Right physical headphone CUE with right channel level zero",
+      "humanAction": "Press right channel headphone CUE once; fader remains down",
+      "humanReported": "Headphones play; speakers silent",
+      "nativeObservedAfter": {
+        "playingDecks": 1,
+        "deck2Level": 0,
+        "deck2PositionSeconds": 8.366
+      },
+      "result": "human_confirmed_headphone_audio_and_RCA_silence",
+      "rawAX": "local-evidence/controller-physical-20261018/right-headphone-cue-ax.txt",
+      "limits": "Native CUE label is constant; selected state not exposed in AX. Acoustic isolation is human-reported, not recorded at sockets."
+    },
+    {
+      "control": "Right physical volume return",
+      "humanAction": "Raise same centre-right fader about halfway, leave there",
+      "humanReported": "Speakers play; deck2 keeps running",
+      "nativeObservedAfter": {
+        "playingDecks": 1,
+        "deck2PositionSeconds": 9.62,
+        "axLevelValue": 0,
+        "screenshotLevel": "thumb above zero, below halfway; exact value not measured",
+        "screenshotRightCue": "blue active"
+      },
+      "result": "human_confirmed_RCA_sound_return; screenshot_shows_level_increased_and_right_cue_active",
+      "rawAX": "local-evidence/controller-physical-20261018/right-volume-return-ax.txt",
+      "screenshot": "local-evidence/controller-physical-20261018/fader-return-screen.png",
+      "limits": "AX range value remained0 despite visually moved thumb and audible sound return. Treat AX value as stale here; no exact volume or transfer-curve acceptance."
+    }
+  ],
+  "pending": "Move long RIGHT TEMPO slider clearly away from centre; ask BPM126 and audible speed response",
+  "fullParityAccepted": false,
+  "mappingBackup": {
+    "path": "local-evidence/controller-physical-20261018/mapping-before-fader-diagnosis.json",
+    "entries": 272,
+    "sha256": "37b61c1dbf16d43a1f14d7d932c88dc3a4d2ba1a062ae23e5175c91d58953864",
+    "changed": false
+  }
+}

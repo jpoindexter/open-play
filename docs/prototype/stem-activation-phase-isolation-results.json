@@ -1,0 +1,197 @@
+{
+  "scope": "Actual unchanged Signalsmith WASM serial128-frame processor; compare2/10channel layout and warm/late startup at same logical input trajectory. Not browser/native/controller/listening or parity acceptance.",
+  "originalBytes": 3648,
+  "originalSHA256": "9b031240b9607e74228da77469837676eedbfe2729255136096603343efa4610",
+  "modulePath": "prototype/vendor/signalsmith-stretch/SignalsmithStretch-open-play-history.mjs",
+  "moduleSHA256": "1f470f846a993cc750ee2e111817adb08879493025c7322eadc8cf98323e4ef8",
+  "currentModuleBytesMatch": true,
+  "sampleRate": 44100,
+  "quantum": 128,
+  "fixedComparisonWindow": [
+    1,
+    1.8
+  ],
+  "inputs": {
+    "job": "a2877adfbffa4ece8ec544451917a589",
+    "PCMChannelHashes": [
+      "f04f783609b18b9e0de8bd383c307c1e66412de5ec0494bcb7929a329dd37f37",
+      "d56845e1a3f57558af8bb021e6cfea908caa3b03ce40209d485ca66d5469460f",
+      "a1dbf4a8629c4352d8627299c3b639c484e7bd1ea911b85b908e50e5ca92c9e6",
+      "5c1107a1f415b5fb263a6cb0ec7a432d1e3f7717b0ac671421dd1e17d0004c26",
+      "227438331abe63bdf588a2de4113037cb0d66cda67785184edd5fc5f97273e87",
+      "7f30ef59f35988df0bc249c98c6e986356c5ba44e7ba7aebf8126c2ca32dabdc",
+      "8830b7aa575ff8c2003a2cd11498bb45a3e85f5f0d7adce085f7d4291439d7dd",
+      "098a2c91ba070504ddbacd01752b37bc07f17333103cd9e0461baa56f586ec0a",
+      "2ffa023c8caf7337f301e198ea69e83c2161e080364dc26e1437fd6bcc74c92e",
+      "232d046ec1f5afe967828026c3a43f5dedfccead0563edb2c3f764a69f81f5a4"
+    ]
+  },
+  "outputs": [
+    {
+      "name": "warm2",
+      "channels": 2,
+      "createdFrame": 0,
+      "command": {
+        "input": 0,
+        "output": 0.25,
+        "rate": 1.1,
+        "semitones": 0
+      },
+      "latency": 0.12,
+      "pcm": [
+        {
+          "file": "warm2-0.f32",
+          "frames": 88320,
+          "sha256": "9540b0b743ec516263179bc85e5c42d340e887df30dbbeae42643dacdd7fca37"
+        },
+        {
+          "file": "warm2-1.f32",
+          "frames": 88320,
+          "sha256": "4e8444229ffdeee70f24ae118fd1b303cd0852699210c2210305e0f1e8d50fe7"
+        }
+      ]
+    },
+    {
+      "name": "late2",
+      "channels": 2,
+      "createdFrame": 22144,
+      "command": {
+        "input": 0.55,
+        "output": 0.75,
+        "rate": 1.1,
+        "semitones": 0
+      },
+      "latency": 0.12,
+      "pcm": [
+        {
+          "file": "late2-0.f32",
+          "frames": 88320,
+          "sha256": "b0899288fa9e707b106939a3ec184a48f130cc8adeaa72298840a4417c3f0406"
+        },
+        {
+          "file": "late2-1.f32",
+          "frames": 88320,
+          "sha256": "c89e3b9ccb2cc5f20d8baa9bac2a7b15cf3fd8a35546d60566934b1d6d7826c7"
+        }
+      ]
+    },
+    {
+      "name": "warm10",
+      "channels": 10,
+      "createdFrame": 0,
+      "command": {
+        "input": 0,
+        "output": 0.25,
+        "rate": 1.1,
+        "semitones": 0
+      },
+      "latency": 0.12,
+      "pcm": [
+        {
+          "file": "warm10-0.f32",
+          "frames": 88320,
+          "sha256": "d7104977d9fcd84e3893087237c0b0e4da3755a39004d2e1c3680743fa956f91"
+        },
+        {
+          "file": "warm10-1.f32",
+          "frames": 88320,
+          "sha256": "ad414b732528e4ddd4b4eb9fa29fa7c6d80f6247271aca972ba1955b33e39fdf"
+        }
+      ]
+    },
+    {
+      "name": "late10",
+      "channels": 10,
+      "createdFrame": 22144,
+      "command": {
+        "input": 0.55,
+        "output": 0.75,
+        "rate": 1.1,
+        "semitones": 0
+      },
+      "latency": 0.12,
+      "pcm": [
+        {
+          "file": "late10-0.f32",
+          "frames": 88320,
+          "sha256": "46b51117b60af911774ef51212a2403242081fce85a200a9eef47d6f17af79e9"
+        },
+        {
+          "file": "late10-1.f32",
+          "frames": 88320,
+          "sha256": "904a95b6345233d3abcacadd8bf39fc326fbbd9156f7c6b92ee9032a5e995ec5"
+        }
+      ]
+    }
+  ],
+  "comparisons": [
+    {
+      "reference": "warm2",
+      "candidate": "late2",
+      "channels": [
+        {
+          "channel": 0,
+          "knownToneHz": 330,
+          "phaseChangeDegrees": -82.88594488422194,
+          "relativeRMSError": 1.3237732424411597,
+          "maximumSampleDifference": 0.15953019261360168,
+          "amplitudeRatio": 1.000030995649701
+        },
+        {
+          "channel": 1,
+          "knownToneHz": 550,
+          "phaseChangeDegrees": -135.065610152897,
+          "relativeRMSError": 1.8481893247317343,
+          "maximumSampleDifference": 0.22195705026388168,
+          "amplitudeRatio": 0.999991833452151
+        }
+      ]
+    },
+    {
+      "reference": "warm2",
+      "candidate": "warm10",
+      "channels": [
+        {
+          "channel": 0,
+          "knownToneHz": 330,
+          "phaseChangeDegrees": 13.016478758600483,
+          "relativeRMSError": 0.22671372870252923,
+          "maximumSampleDifference": 0.0278284614905715,
+          "amplitudeRatio": 1.000020393926574
+        },
+        {
+          "channel": 1,
+          "knownToneHz": 550,
+          "phaseChangeDegrees": 24.90067047256841,
+          "relativeRMSError": 0.43118709210370976,
+          "maximumSampleDifference": 0.05188284255564213,
+          "amplitudeRatio": 1.0000011738062404
+        }
+      ]
+    },
+    {
+      "reference": "warm2",
+      "candidate": "late10",
+      "channels": [
+        {
+          "channel": 0,
+          "knownToneHz": 330,
+          "phaseChangeDegrees": -100.03247251997735,
+          "relativeRMSError": 1.5324710550359883,
+          "maximumSampleDifference": 0.18476346135139465,
+          "amplitudeRatio": 1.0000215603943836
+        },
+        {
+          "channel": 1,
+          "knownToneHz": 550,
+          "phaseChangeDegrees": -165.55168034553006,
+          "relativeRMSError": 1.9841166548484102,
+          "maximumSampleDifference": 0.23826126754283905,
+          "amplitudeRatio": 0.9999931997715286
+        }
+      ]
+    }
+  ],
+  "finding": "Both later2channel startup and same-start10channel layout change the first original pair relative to warm2. This disproves a solely misaligned application-clock explanation. Exact internal phase-state mechanism remains an inference; no backend or architecture fix accepted.",
+  "fullParityVerified": false
+}
