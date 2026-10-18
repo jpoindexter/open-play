@@ -1,0 +1,129 @@
+{
+  "before": {
+    "passed": false,
+    "scope": "Slicer beat-domain/owner integration with controlled transport collaborator; actual browser/audio verified separately.",
+    "tests": [
+      {
+        "name": "Warped eight-beat domain and pad4 half-slice use continuous beat coordinates",
+        "passed": true
+      },
+      {
+        "name": "Quantization is a fraction of the selected slice, not always one base beat",
+        "passed": true
+      },
+      {
+        "name": "Fixed domain survives cursor movement and pad release",
+        "passed": true
+      },
+      {
+        "name": "Release before preparation finishes returns a paused audition without resurrection",
+        "passed": true
+      },
+      {
+        "name": "Stop/cancel invalidates pending preparation and late release",
+        "passed": true
+      },
+      {
+        "name": "Older overlapping-pad release cannot terminate the newer owner",
+        "passed": true
+      },
+      {
+        "name": "A newer shifting-domain pad uses the advancing root clock while an older slice loops",
+        "passed": true
+      },
+      {
+        "name": "Expired backing release retires at source End and delivers natural end once",
+        "passed": true
+      },
+      {
+        "name": "Preparation crossing the endpoint waits for the backing clock before ending",
+        "passed": true
+      },
+      {
+        "name": "Cancellation while endpoint preparation waits cannot end a newer transport",
+        "passed": true
+      },
+      {
+        "name": "Natural-end callback may start repeat/replacement without a stale post-callback pause",
+        "passed": true
+      },
+      {
+        "name": "Tempo handoff retains the pad owner and advances its original warped background",
+        "passed": false,
+        "error": "f.slicer.changeRates is not a function"
+      },
+      {
+        "name": "Release during tempo preparation waits and returns to the re-timed background",
+        "passed": false,
+        "error": "f.slicer.changeRates is not a function"
+      },
+      {
+        "name": "Stop while tempo preparation waits prevents a late release from resuming",
+        "passed": false,
+        "error": "f.slicer.changeRates is not a function"
+      }
+    ]
+  },
+  "after": {
+    "passed": true,
+    "scope": "Slicer beat-domain/owner integration with controlled transport collaborator; actual browser/audio verified separately.",
+    "tests": [
+      {
+        "name": "Warped eight-beat domain and pad4 half-slice use continuous beat coordinates",
+        "passed": true
+      },
+      {
+        "name": "Quantization is a fraction of the selected slice, not always one base beat",
+        "passed": true
+      },
+      {
+        "name": "Fixed domain survives cursor movement and pad release",
+        "passed": true
+      },
+      {
+        "name": "Release before preparation finishes returns a paused audition without resurrection",
+        "passed": true
+      },
+      {
+        "name": "Stop/cancel invalidates pending preparation and late release",
+        "passed": true
+      },
+      {
+        "name": "Older overlapping-pad release cannot terminate the newer owner",
+        "passed": true
+      },
+      {
+        "name": "A newer shifting-domain pad uses the advancing root clock while an older slice loops",
+        "passed": true
+      },
+      {
+        "name": "Expired backing release retires at source End and delivers natural end once",
+        "passed": true
+      },
+      {
+        "name": "Preparation crossing the endpoint waits for the backing clock before ending",
+        "passed": true
+      },
+      {
+        "name": "Cancellation while endpoint preparation waits cannot end a newer transport",
+        "passed": true
+      },
+      {
+        "name": "Natural-end callback may start repeat/replacement without a stale post-callback pause",
+        "passed": true
+      },
+      {
+        "name": "Tempo handoff retains the pad owner and advances its original warped background",
+        "passed": true
+      },
+      {
+        "name": "Release during tempo preparation waits and returns to the re-timed background",
+        "passed": true
+      },
+      {
+        "name": "Stop while tempo preparation waits prevents a late release from resuming",
+        "passed": true
+      }
+    ]
+  }
+}

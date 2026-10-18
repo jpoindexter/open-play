@@ -14,6 +14,31 @@ export function createSlicer({engine,render=()=>{},notify=()=>{}}){
  function forget(h){if(active.get(h.d.index)!==h)return;active.delete(h.d.index);h.d.slice=null;for(const [key,value]of held)if(value===h)held.delete(key);}
  function restoreFields(h){Object.assign(h.d,{loop:h.prior.on,loopIn:h.prior.start,loopOut:h.prior.end});}
  function cancelDeck(d){const h=active.get(d.index);if(!h)return;const current=owns(h);forget(h);if(current)restoreFields(h);}
+ async function changeRates(changes,apply){
+  const sessions=changes.map(({deck,rate})=>({h:active.get(deck.index),rate})).filter(({h})=>h&&owns(h));
+  const pending=apply();
+  // A rate handoff creates new transport tokens while retaining this gesture.
+  // Adopt only those tokens, never a later Stop, Load or newer pad owner.
+  for(const {h}of sessions)h.token=engine.startTokens.get(h.d.index);
+  const completion=Promise.resolve(pending).then(result=>{
+   for(const {h,rate}of sessions){
+    if(!owns(h)||!h.playing)continue;
+    const before=h.clock,when=h.d.anchorTime,position=before(when),voice=engine.voices.get(h.d.index),bpm=voice?.gridTimeline?.bpm,
+      grid=bpm?createBeatgrid(h.track):null,toCoordinate=p=>grid?grid.beatAt(p):p,fromCoordinate=p=>grid?grid.timeAt(p):p,
+      start=toCoordinate(position),speed=grid?bpm/60:rate,direction=h.d.reverse?-1:1,
+      lo=toCoordinate(h.prior.start),hi=toCoordinate(h.prior.end);
+    h.clock=at=>{
+     if(at<when)return before(at);
+     let value=start+Math.max(0,at-when)*speed*direction;
+     if(h.prior.on&&((direction>0&&value>=hi)||(direction<0&&value<lo)))value=lo+((value-lo)%(hi-lo)+(hi-lo))%(hi-lo);
+     return Math.min(h.track.duration,Math.max(0,fromCoordinate(value)));
+    };
+   }
+   return result;
+  });
+  for(const {h}of sessions)h.rateTask=completion;
+  try{return await completion;}finally{for(const {h}of sessions)if(h.rateTask===completion)delete h.rateTask;}
+ }
  async function transition(h,loop,positionAt,playing){
   const pending=engine.setLoop(h.d,loop.on,loop.start,loop.end,{positionAt,priorClock:engine.voiceClock(h.d,engine.voices.get(h.d.index)),playing});
   h.token=engine.startTokens.get(h.d.index);await pending;return owns(h);
@@ -48,6 +73,7 @@ export function createSlicer({engine,render=()=>{},notify=()=>{}}){
  }
  async function release(key){
   const h=held.get(key);if(!h)return false;held.delete(key);
+  try{await h.rateTask;}catch(error){return fail(h,error);}
   if(!owns(h)){if(active.get(h.d.index)===h)forget(h);return false;}
   let ending;
   try{
@@ -73,5 +99,5 @@ export function createSlicer({engine,render=()=>{},notify=()=>{}}){
    d.slicerLoop=on;await engine.setLoop(d,on,b.start,b.end);render();return true;
   }catch(error){d.slicerLoop=false;fixed.delete(d.index);notify(error.message);render();return false;}
  }
- return{press,release,releaseAll:()=>Promise.all([...held.keys()].map(release)),releaseDeck:d=>Promise.all([...held].filter(([,h])=>h.d===d).map(([key])=>release(key))),cancelDeck,domainLoop,bounds};
+ return{press,release,releaseAll:()=>Promise.all([...held.keys()].map(release)),releaseDeck:d=>Promise.all([...held].filter(([,h])=>h.d===d).map(([key])=>release(key))),cancelDeck,changeRates,domainLoop,bounds};
 }

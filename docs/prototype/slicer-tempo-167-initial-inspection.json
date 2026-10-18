@@ -1,0 +1,191 @@
+{
+  "checkpoint": 167,
+  "passed": false,
+  "originalBytes": 897455,
+  "originalSHA256": "4a21210b1281b66695422b8fc221beb0aebf430f996d1650fd7527029423840d",
+  "sourceHashes": {
+    "app.js": "ce58e28f1f43af820b6312428c7418a5572b6af70de11abc75ab57c23d1bc0c5",
+    "engine.js": "85b3468ba45397734271a83b8f4444d1ef851cf25c0dea40fc09c527c11425b7",
+    "stems.js": "5fb06aba4f6a97e4150d1bcfeef394574b0c9e9ed6ee099b78b89482b08ea4b7",
+    "panels.js": "06217033416d62af4602c1572086dc03bb9f25458a8f90c884f3d552c7b1d4fe",
+    "keylock.js": "62adbfdd77df20deb1328302d4a8daf3d7bdc29870af453d39acfd2a02bf060b",
+    "keylock-worker.js": "5cb72a1bc74e1808c32b430d72d5769427c7056edee11410eb6f8b3c7751fcec",
+    "keylock-dsp.js": "f4cb1881fedb018f395a6711d263aa142feb8dfe93638a3d1f97fc432c15ac3d",
+    "smart-sync.js": "98d34b559882d16e3b3e8c715d6a3c35a6197cb8d6a984fe5470b80592ca934e",
+    "slicer.js": "b50605d17d5c88919b8993494b6afafdc6b0ca1d0b539fd37b74b7a20b167923",
+    "tempo-slider.js": "b83de88ef715f7bdd68d9d7745862f9ecaac80c41f53e91c7041b01f1576f7cf",
+    "sync-tempo-handoff.js": "5842f9209035e24ff867004d3fef5f0a1fe7f7f4976440546b8238a225b82f9b",
+    "beatgrid.js": "af239aef231c9d089bf2352b8f548a5f71f734d6cf753986f17f57b3999477b9",
+    "warp-loop.js": "33091f4414d2066ce47657aa96312dfefc6ca0a061ccab04ddf00ef6121addc4",
+    "warp-loop-kernel.js": "8a331758bc551454a3cc65fd5ea527c42a370bd22ab6eb650ca278ea87e0f414",
+    "warp-loop-worklet.js": "bc977262180f910c6be55ea07a46f6b560a090939271bd4beec5e8fd31ed23fa",
+    "reverse-censor-plan.js": "38adfb04c0e498a8e2cb27b0240f037d315f24b0c8cd6968e338ff29b0af3807",
+    "stem-slicer-167-harness.js": "e847b18984db1a2ef264fd00d797802d6efe86c6baec2138eecb5a60c0f64cc7",
+    "stem-activation-capture-145.js": "730b9c3de31e9c3546ec1ab86f8fd85ce2a1ccfe6f78fc25d8f483f8b9d75331",
+    "stem-history-worklet.js": "d1e4f452044235a110a874fad2921390878c5731f3a769896ca5bfb2faf08daa",
+    "keylock-shadow-live.js": "41bf27051270a4741f83b59bc7c0111767b589ef3986b4aafb43ad36dc067551",
+    "vendor/signalsmith-stretch/SignalsmithStretch-open-play-replace.mjs": "abc12a3afe332b3aa32c1e1ec931f362225f0de09beb727a90944cf7c96baf46",
+    "vendor/signalsmith-stretch/SignalsmithStretch-open-play-reference-dsp.mjs": "0512cae2a33873956026e64cb47854c1c677baf1beb1bc0242edfb9557987f21"
+  },
+  "criteria": {
+    "maximumSourceClockErrorSeconds": 0.01,
+    "minimumRMS": 1e-05,
+    "rawWindowSeconds": [
+      0.05,
+      0.25
+    ],
+    "maximumRawRelativeRMS": 0.0001,
+    "alignment": "Known exports/grid/actual anchors; no fit."
+  },
+  "observations": [
+    {
+      "name": "raw-held-tempo",
+      "heldRateAndSliceCorrect": true,
+      "temporaryLoopRetired": false,
+      "expectedBackgroundSourcePosition": 1.0412763718820863,
+      "observedSourcePosition": 0.010240589569161074,
+      "sourceClockErrorSeconds": 1.0310357823129253,
+      "sourceClockCorrect": false,
+      "packets": [
+        {
+          "kind": "heldPCM",
+          "channel": 0,
+          "frames": 13230,
+          "contiguousQuanta": 104,
+          "sha256": "d78f53c13d0b6ba8505c8b6814ff5b5ea7f16aec25f56522b8a2003da608bee1",
+          "rms": 0.11151250153747991,
+          "peak": 0.5636212825775146,
+          "rawRelativeRMSError": 4.3400979527551465e-08,
+          "rawSelectedSliceCorrect": true
+        },
+        {
+          "kind": "heldPCM",
+          "channel": 1,
+          "frames": 13230,
+          "contiguousQuanta": 104,
+          "sha256": "2de566b2934bc0d19dd4d4618cba46065f68b3b9816b2ef363c385a699e36bb9",
+          "rms": 0.09985555100458295,
+          "peak": 0.5129194855690002,
+          "rawRelativeRMSError": 4.358391450817959e-08,
+          "rawSelectedSliceCorrect": true
+        },
+        {
+          "kind": "retimedPCM",
+          "channel": 0,
+          "frames": 13230,
+          "contiguousQuanta": 104,
+          "sha256": "1746fc6a85bd87ef1de1d5e857426131b2506df35936c74c223c304af7380462",
+          "rms": 0.11045786394268692,
+          "peak": 0.5501251816749573,
+          "rawRelativeRMSError": 1.3789534404392003,
+          "rawSelectedSliceCorrect": false
+        },
+        {
+          "kind": "retimedPCM",
+          "channel": 1,
+          "frames": 13230,
+          "contiguousQuanta": 104,
+          "sha256": "53d8dccf471e273987998983ea15c6162a6cffd9beed1c9d4fcb0eb5f13b9578",
+          "rms": 0.0980670962232368,
+          "peak": 0.5129194855690002,
+          "rawRelativeRMSError": 1.3707947593593077,
+          "rawSelectedSliceCorrect": false
+        },
+        {
+          "kind": "afterPCM",
+          "channel": 0,
+          "frames": 13230,
+          "contiguousQuanta": 104,
+          "sha256": "20d7f8360fe5ea1de5932254ebdd6c439c75eede21934a8be789e7251c4665cd",
+          "rms": 0.11025795410035302,
+          "peak": 0.5591225624084473
+        },
+        {
+          "kind": "afterPCM",
+          "channel": 1,
+          "frames": 13230,
+          "contiguousQuanta": 104,
+          "sha256": "782d658754cdf39c2ab237124258def889b3e32a6f8face7672bb5d1861f5c14",
+          "rms": 0.09723295071612031,
+          "peak": 0.5093996524810791
+        }
+      ]
+    },
+    {
+      "name": "keyed-held-tempo",
+      "heldRateAndSliceCorrect": true,
+      "temporaryLoopRetired": false,
+      "expectedBackgroundSourcePosition": 2.3611489040060474,
+      "observedSourcePosition": 0.05827097505668994,
+      "sourceClockErrorSeconds": 2.3028779289493575,
+      "sourceClockCorrect": false,
+      "packets": [
+        {
+          "kind": "heldPCM",
+          "channel": 0,
+          "frames": 13230,
+          "contiguousQuanta": 104,
+          "sha256": "f7b7dbeaa2eda86ebfacfe5ae7373e10b4859ef3872a18863b635d33595b7cfd",
+          "rms": 0.09949267732489088,
+          "peak": 0.43896836042404175
+        },
+        {
+          "kind": "heldPCM",
+          "channel": 1,
+          "frames": 13230,
+          "contiguousQuanta": 104,
+          "sha256": "e81b600484d3e40dfc3c2d343acd8eac0afefe9c75ff7418fab0cd4071a89cdc",
+          "rms": 0.08621554549243053,
+          "peak": 0.3565250039100647
+        },
+        {
+          "kind": "retimedPCM",
+          "channel": 0,
+          "frames": 13230,
+          "contiguousQuanta": 104,
+          "sha256": "c3f69b09b87a83711d1e79176fa7495547061cfa58c8123a1de0e1d4d0752e9a",
+          "rms": 0.09715553656593374,
+          "peak": 0.42503437399864197
+        },
+        {
+          "kind": "retimedPCM",
+          "channel": 1,
+          "frames": 13230,
+          "contiguousQuanta": 104,
+          "sha256": "4dbbd2b818851f69c3c704e1f94c3442c9c3e53b805c7727c8a85d9e05339c43",
+          "rms": 0.08154027187315636,
+          "peak": 0.3320184350013733
+        },
+        {
+          "kind": "afterPCM",
+          "channel": 0,
+          "frames": 13230,
+          "contiguousQuanta": 104,
+          "sha256": "d8173926c4f5502778ad692a6ddd4fba36d4f1a0a95a68d2290a767c25151007",
+          "rms": 0.09654916446270637,
+          "peak": 0.4263021945953369
+        },
+        {
+          "kind": "afterPCM",
+          "channel": 1,
+          "frames": 13230,
+          "contiguousQuanta": 104,
+          "sha256": "58f5dc3a595b837429c12ee087b6e7bd44925cc51e490872bcd481782cfff14a",
+          "rms": 0.08148609943580291,
+          "peak": 0.3291652798652649
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "originalUnchanged": true,
+  "importedFileUnchanged": true,
+  "default48000Acceptance": false,
+  "musicalPitchQualityAccepted": false,
+  "sourceAttributionAccepted": false,
+  "afterReleaseAudioReferenceAccepted": false,
+  "exactSeratoParityAccepted": false,
+  "nativeAcceptance": false,
+  "hardwareAcceptance": false,
+  "fullParityAcceptance": false
+}

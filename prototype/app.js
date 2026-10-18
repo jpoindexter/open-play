@@ -2011,7 +2011,7 @@ engine.onProcessing = (d) => {
 
 let syncTempoQueue=null;
 engine.onRateRequest = async (deck,rate) => {
-  if(!['Simple Sync','Smart Sync'].includes(state.settings['Sync Mode'])||!deck.sync)return engine.setRate(deck,rate,{syncInternal:true});
+  if(!['Simple Sync','Smart Sync'].includes(state.settings['Sync Mode'])||!deck.sync)return slicer.changeRates([{deck,rate}],()=>engine.setRate(deck,rate,{syncInternal:true}));
   const request={deck,track:deck.track,rate};
   if(syncTempoQueue){syncTempoQueue.wanted=request;return syncTempoQueue.promise;}
   const queue={wanted:request,promise:null};syncTempoQueue=queue;
@@ -2025,7 +2025,7 @@ engine.onRateRequest = async (deck,rate) => {
         if(!Number.isFinite(bpm)||bpm<=0)throw Error('Set a valid BPM before changing synced tempo.');
         const changes=state.decks.filter(d=>d.sync&&d.track).map(d=>({deck:d,rate:bpm/d.track.bpm}));
         if(changes.some(x=>!Number.isFinite(x.rate)||x.rate<.25||x.rate>4))throw Error('Matched tempo is outside a synced deck transport range.');
-        await engine.setSyncedRates(changes);
+        await slicer.changeRates(changes,()=>engine.setSyncedRates(changes));
       }catch(error){if(smart)smartSync.restoreTempo(priorTempo);throw error;}
     }
   }).finally(()=>{if(syncTempoQueue===queue)syncTempoQueue=null;});
