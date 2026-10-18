@@ -1,0 +1,11 @@
+# Coherent warped Sync tempo basis —163
+
+Outcome: first/repeated primary Smart Sync engagement, group tempo and the actual relative GUI slider share a consistent nominal tempo basis while actual forward/reverse warped audio retains its source-coordinate clock. Prior162was progress; full110groups/522requirements/9beta/26release/55extendedFX/Stems/keylock scope remains active, full parity false.
+
+Now: reproduce the observed90→127.2BPM jump with actual Import/Load/Prepare/Grid/Sync/relative slider controls, using the exact existing MP3 and completed real SCNet cache. Preserve original failure and source identities. Establish the intended relative slider increment from the current implementation contract and official reference documentation; do not silently assume a multiplicative6percent or a vendor composition policy.
+
+Done for this unit: first Sync at a90BPM region produces a coherent common-tempo/nominal-rate pair; moving the GUI relative slider by6percentage points changes the nominal rate accordingly, with expected original-coordinate clocks and positive selected real musical audio. Execute affected raw/keyed reverse and forward boundary, repeated Sync at another marker region, and a group member where practical. Stop/load/cancel ownership and unsynced absolute slider policy must retain their existing behavior. Claims remain scoped to actual observations; pitch quality/perceptual/vendor/native/hardware parity requires separate evidence.
+
+Next: fix the observed basis/transition at its source, use one focused browser workflow and owner regression if needed, then update affected records/private Trello/full build plan/full Claude handoff. No solved endpoint/FX/controller/tone/inference matrices,161numeric-residue chase, native package/rewrite or hardware/readiness request. Controller may remain unplugged, physical browser output muted. Preserve frozen0.1.23/tested272Alternative mappings/profile/launchers/user8768/18775/18768; all raw music/PCM/proprietary artifacts/SDK/credentials remain ignored. Dated model/effort metadata and exact original prompt suffix stay intact.
+
+Re-entry: refresh current Git/source/runtime/authority; read `handoffs/stems-162-tempo-basis-followup.md` and this plan. Done evidence must come from actual UI+audio behavior, not only a collaborator test or displayed BPM label.

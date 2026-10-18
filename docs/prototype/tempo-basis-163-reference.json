@@ -1,0 +1,17 @@
+{
+  "checkpoint": 163,
+  "source": {
+    "title": "Relative Pitch & Tempo Control (Smart Sync)",
+    "url": "https://support.serato.com/hc/en-us/articles/227561947-Relative-Pitch-Tempo-Control-Smart-Sync",
+    "retrieved": "2026-10-18"
+  },
+  "documented": [
+    "Pitch movements on one synced deck affect other synced decks.",
+    "Disengaged Sync retains relative control responding to movement, independent of absolute physical slider location.",
+    "Reload with Sync disabled or a second OFF restores absolute control; controller0returns original BPM."
+  ],
+  "independentImplementationContract": "GUI relative motion adds percentage-point differences to nominal deck rate; createTempoSlider existing tests express this. At common90/base120 rate.75, delta+6points yields.81/common97.2. This is not a claim of vendor-exact numerical response for this combined warped/reverse/keyed workflow.",
+  "contextScope": "After controller unplug default AudioContext advertised48000Hz. Only diagnostic construction requests44100Hz to retain exact input/cache identities; no production setting/DSP change or new inference. Default48k/context migration and sample-rate-independent preparation remain separately unverified.",
+  "exactSeratoCompositionAccepted": false,
+  "fullParityAcceptance": false
+}

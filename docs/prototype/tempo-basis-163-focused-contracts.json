@@ -1,0 +1,148 @@
+{
+  "before": {
+    "passed": false,
+    "scope": "Smart Sync/GUI coordinate integration with controlled engine collaborators; actual browser musical workflow required separately.",
+    "tests": [
+      {
+        "name": "First paused primary Sync at90BPM establishes nominal90/120 before relative slider movement",
+        "passed": false,
+        "error": "1 != 0.75"
+      },
+      {
+        "name": "Repeated primary Sync after a paused seek to150BPM retains the shared90BPM basis",
+        "passed": false,
+        "error": "150 != 90"
+      },
+      {
+        "name": "First running primary Sync derives common tempo from local BPM and audible source rate",
+        "passed": false,
+        "error": "0.8 != 1"
+      },
+      {
+        "name": "Secondary arming uses the coherent shared tempo and its own base BPM",
+        "passed": true
+      },
+      {
+        "name": "Invalid nominal transport range rejects before publishing Sync state",
+        "passed": false,
+        "error": "Missing expected rejection."
+      }
+    ]
+  },
+  "after": [
+    {
+      "command": [
+        "node",
+        "scripts/test_smart_sync_tempo_basis.mjs"
+      ],
+      "returncode": 0,
+      "result": {
+        "passed": true,
+        "scope": "Smart Sync/GUI coordinate integration with controlled engine collaborators; actual browser musical workflow required separately.",
+        "tests": [
+          {
+            "name": "First paused primary Sync at90BPM establishes nominal90/120 before relative slider movement",
+            "passed": true
+          },
+          {
+            "name": "Repeated primary Sync after a paused seek to150BPM retains the shared90BPM basis",
+            "passed": true
+          },
+          {
+            "name": "First running primary Sync derives common tempo from local BPM and audible source rate",
+            "passed": true
+          },
+          {
+            "name": "Secondary arming uses the coherent shared tempo and its own base BPM",
+            "passed": true
+          },
+          {
+            "name": "Invalid nominal transport range rejects before publishing Sync state",
+            "passed": true
+          }
+        ]
+      }
+    },
+    {
+      "command": [
+        "node",
+        "scripts/test_gui_tempo_slider.mjs"
+      ],
+      "returncode": 0,
+      "result": {
+        "passed": true,
+        "scope": "Controlled GUI-coordinate model with asynchronous engine collaborator; not browser input/audio, native, hardware or vendor equivalence.",
+        "tests": [
+          {
+            "name": "Synced +20% at \u00b18% starts centered; one GUI step changes pitch by 0.1%, not 12.1%",
+            "passed": true
+          },
+          {
+            "name": "Ordinary GUI tempo remains absolute and accepts external rate changes while focused",
+            "passed": true
+          },
+          {
+            "name": "External shared or MIDI tempo changes rebase the next GUI step at the last GUI position",
+            "passed": true
+          },
+          {
+            "name": "REL disengagement, absolute hardware reset, range changes and replacement tracks retain valid coordinates",
+            "passed": true
+          },
+          {
+            "name": "Rapid GUI gestures accumulate while audio work is pending",
+            "passed": true
+          },
+          {
+            "name": "Transport saturation consumes overshoot; reversing by one GUI step moves immediately",
+            "passed": true
+          },
+          {
+            "name": "Rejected rate changes rebase at actual audio state and permit a subsequent gesture",
+            "passed": true
+          },
+          {
+            "name": "Reset sets actual pitch to zero; unloaded decks never request audio changes",
+            "passed": true
+          }
+        ]
+      }
+    },
+    {
+      "command": [
+        "node",
+        "scripts/test_smart_sync_loops.mjs"
+      ],
+      "returncode": 0,
+      "result": {
+        "passed": true,
+        "scope": "Smart Sync loop geometry/state with engine collaborators; no acoustic/native/hardware proof",
+        "checks": [
+          "bar alignment inside active loop",
+          "different-BPM whole-bar loops engage Beat Sync",
+          "short loop degrades bar lock to Tempo Sync without seek",
+          "restore whole bar allows explicit re-Sync",
+          "warped loop clock is passed to backend and keylock may use loop backend while reverse bar alignment still refuses early; existing reverse loop keeps Tempo Sync clock and Play, non-loop reverse clock allowed while bar alignment still refuses"
+        ]
+      }
+    },
+    {
+      "command": [
+        "node",
+        "scripts/test_pending_smart_sync_start.mjs"
+      ],
+      "returncode": 0,
+      "result": {
+        "passed": true,
+        "scope": "Smart Sync pending-start policy with controlled rate/synchronize collaborators; real GUI/MIDI/phase/cancel behavior checked separately",
+        "checks": [
+          "Play waits for pending Sync and aligns once",
+          "Current-owner cancellation leaves Sync armed and playback stopped",
+          "Track replacement cancels pending Sync/start",
+          "External transport token cancels queued start",
+          "Sync failure propagates without an unsynced fallback"
+        ]
+      }
+    }
+  ]
+}

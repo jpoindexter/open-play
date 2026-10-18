@@ -1,0 +1,219 @@
+{
+  "checkpoint": 163,
+  "passed": true,
+  "originalBytes": 898789,
+  "originalSHA256": "ca6e9cc7f16bf8b07f9e6f188b62b9b2278240f22635388801654ba5d050522e",
+  "sourceHashes": {
+    "app.js": "a34c271bb8b2270c071ab77c8ce7727cf6943733a0e21b7c6da9157c0c13089a",
+    "engine.js": "025f7a6bf8b94b367a3a956d03f55838aaf4e6b6aaf2747a256f8093a5c84be9",
+    "stems.js": "5fb06aba4f6a97e4150d1bcfeef394574b0c9e9ed6ee099b78b89482b08ea4b7",
+    "panels.js": "06217033416d62af4602c1572086dc03bb9f25458a8f90c884f3d552c7b1d4fe",
+    "keylock.js": "62adbfdd77df20deb1328302d4a8daf3d7bdc29870af453d39acfd2a02bf060b",
+    "keylock-worker.js": "5cb72a1bc74e1808c32b430d72d5769427c7056edee11410eb6f8b3c7751fcec",
+    "keylock-dsp.js": "f4cb1881fedb018f395a6711d263aa142feb8dfe93638a3d1f97fc432c15ac3d",
+    "smart-sync.js": "98d34b559882d16e3b3e8c715d6a3c35a6197cb8d6a984fe5470b80592ca934e",
+    "tempo-slider.js": "b83de88ef715f7bdd68d9d7745862f9ecaac80c41f53e91c7041b01f1576f7cf",
+    "sync-tempo-handoff.js": "5842f9209035e24ff867004d3fef5f0a1fe7f7f4976440546b8238a225b82f9b",
+    "beatgrid.js": "af239aef231c9d089bf2352b8f548a5f71f734d6cf753986f17f57b3999477b9",
+    "warp-loop.js": "33091f4414d2066ce47657aa96312dfefc6ca0a061ccab04ddf00ef6121addc4",
+    "warp-loop-kernel.js": "8a331758bc551454a3cc65fd5ea527c42a370bd22ab6eb650ca278ea87e0f414",
+    "warp-loop-worklet.js": "bc977262180f910c6be55ea07a46f6b560a090939271bd4beec5e8fd31ed23fa",
+    "reverse-censor-plan.js": "38adfb04c0e498a8e2cb27b0240f037d315f24b0c8cd6968e338ff29b0af3807",
+    "stem-tempo-163-harness.js": "af096f4ead17817465f4efcf8aac0243fabffdad4279372e8b752e2d2fdc3960",
+    "stem-activation-capture-145.js": "730b9c3de31e9c3546ec1ab86f8fd85ce2a1ccfe6f78fc25d8f483f8b9d75331",
+    "stem-history-worklet.js": "d1e4f452044235a110a874fad2921390878c5731f3a769896ca5bfb2faf08daa",
+    "keylock-shadow-live.js": "41bf27051270a4741f83b59bc7c0111767b589ef3986b4aafb43ad36dc067551",
+    "vendor/signalsmith-stretch/SignalsmithStretch-open-play-replace.mjs": "abc12a3afe332b3aa32c1e1ec931f362225f0de09beb727a90944cf7c96baf46",
+    "vendor/signalsmith-stretch/SignalsmithStretch-open-play-reference-dsp.mjs": "0512cae2a33873956026e64cb47854c1c677baf1beb1bc0242edfb9557987f21"
+  },
+  "criteria": {
+    "minimumRMS": 1e-05,
+    "maximumPositionError": 0.01,
+    "maximumTempoError": 1e-06
+  },
+  "observations": [
+    {
+      "name": "raw-reverse-initial",
+      "expectedBPM": 90,
+      "expectedNominalRate": 0.75,
+      "observedBPM": [
+        90
+      ],
+      "observedNominalRate": [
+        0.75
+      ],
+      "tempoBasisCorrect": true,
+      "sourceClockMaximumError": 8.881784197001252e-16,
+      "packets": [
+        {
+          "deck": 0,
+          "channel": 0,
+          "frames": 13230,
+          "rms": 0.13809777680968532,
+          "sha256": "f00ad1fe90c815b585356264a4b83e9b8b192ef99d6ae1f8b84b2ab16f74ee18",
+          "contiguousQuanta": 104
+        },
+        {
+          "deck": 0,
+          "channel": 1,
+          "frames": 13230,
+          "rms": 0.13060264677655894,
+          "sha256": "a07a1b677218d46acbe0e69ba1f7aa48ef5f684188e10e6e7bde2db15e9a292e",
+          "contiguousQuanta": 104
+        }
+      ]
+    },
+    {
+      "name": "raw-reverse-slider6",
+      "expectedBPM": 97.2,
+      "expectedNominalRate": 0.81,
+      "observedBPM": [
+        97.2
+      ],
+      "observedNominalRate": [
+        0.81
+      ],
+      "tempoBasisCorrect": true,
+      "sourceClockMaximumError": 8.881784197001252e-16,
+      "packets": [
+        {
+          "deck": 0,
+          "channel": 0,
+          "frames": 13230,
+          "rms": 0.13560829611412695,
+          "sha256": "92c8e4f9a3e3cb3ac86445812ed62681a35942ee8a2e97c50f346c013c85d536",
+          "contiguousQuanta": 104
+        },
+        {
+          "deck": 0,
+          "channel": 1,
+          "frames": 13230,
+          "rms": 0.13157900381628895,
+          "sha256": "44e74b469e9eab7dd57e07e37cb4e269af2f769e6d4cc7fc08f52f0c457ae979",
+          "contiguousQuanta": 104
+        }
+      ]
+    },
+    {
+      "name": "keyed-reverse-slider-minus2",
+      "expectedBPM": 87.6,
+      "expectedNominalRate": 0.73,
+      "observedBPM": [
+        87.60000000000001
+      ],
+      "observedNominalRate": [
+        0.7300000000000001
+      ],
+      "tempoBasisCorrect": true,
+      "sourceClockMaximumError": 1.7763568394002505e-15,
+      "packets": [
+        {
+          "deck": 0,
+          "channel": 0,
+          "frames": 13230,
+          "rms": 0.13790252874198988,
+          "sha256": "41ad7f02666af1a6532607eda1bb0b34afaac840935b595fda11869c36d85f24",
+          "contiguousQuanta": 104
+        },
+        {
+          "deck": 0,
+          "channel": 1,
+          "frames": 13230,
+          "rms": 0.13081812126188597,
+          "sha256": "30fec950243b86e091e5c7a9e74742029d61aab5c54532fb6a51469a27a8fdd0",
+          "contiguousQuanta": 104
+        }
+      ]
+    },
+    {
+      "name": "keyed-forward-repeated-sync",
+      "expectedBPM": 87.6,
+      "expectedNominalRate": 0.73,
+      "observedBPM": [
+        87.60000000000001
+      ],
+      "observedNominalRate": [
+        0.7300000000000001
+      ],
+      "tempoBasisCorrect": true,
+      "sourceClockMaximumError": 0,
+      "packets": [
+        {
+          "deck": 0,
+          "channel": 0,
+          "frames": 13230,
+          "rms": 0.1305159420027092,
+          "sha256": "619269a47bc66026a969cbcb18d3b19264e595d18e19ce9f0b1ba1a639f7a4cc",
+          "contiguousQuanta": 104
+        },
+        {
+          "deck": 0,
+          "channel": 1,
+          "frames": 13230,
+          "rms": 0.1435873493027101,
+          "sha256": "7d9c0c392e2a709e8c582ce6eccded8ba9efa755487ba29e1029bd257d2f6575",
+          "contiguousQuanta": 104
+        }
+      ]
+    },
+    {
+      "name": "forward-group-secondary-slider2",
+      "expectedBPM": 90,
+      "expectedNominalRate": 0.75,
+      "observedBPM": [
+        90.00000000000001,
+        90.00000000000001
+      ],
+      "observedNominalRate": [
+        0.7500000000000001,
+        0.7500000000000001
+      ],
+      "tempoBasisCorrect": true,
+      "sourceClockMaximumError": 2.220446049250313e-16,
+      "packets": [
+        {
+          "deck": 0,
+          "channel": 0,
+          "frames": 13230,
+          "rms": 0.12193267290744546,
+          "sha256": "3bc40c704f3858f4b81a84f6f81ef4f32c20676eeb43b9e1e79fd31a0f830a13",
+          "contiguousQuanta": 104
+        },
+        {
+          "deck": 0,
+          "channel": 1,
+          "frames": 13230,
+          "rms": 0.13237929877072718,
+          "sha256": "95378407ab13a5a712a51b819ac1111e63b53bb946911a04b9c18e4788eeed7d",
+          "contiguousQuanta": 104
+        },
+        {
+          "deck": 1,
+          "channel": 0,
+          "frames": 13230,
+          "rms": 0.12193267301812082,
+          "sha256": "d95fb165757ba5bf6bbdbee2138fb61158524d78c285963514ff22a2dc309c0e",
+          "contiguousQuanta": 104
+        },
+        {
+          "deck": 1,
+          "channel": 1,
+          "frames": 13230,
+          "rms": 0.13237929884259975,
+          "sha256": "ef9d184c94c9f1c3332da85d8663501cb7a62b2608a1965f37aab9808dbdebb6",
+          "contiguousQuanta": 104
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "failureState": null,
+  "sampleRateScope": "Diagnostic explicitly requests44100Hz to reuse exact musical decoded PCM/cache; default48k/context migration not established.",
+  "musicalPitchAccuracyAccepted": false,
+  "sourceAttributionAccepted": false,
+  "exactSeratoParityAccepted": false,
+  "seamlessTransitionAccepted": false,
+  "nativeAcceptance": false,
+  "hardwareAcceptance": false,
+  "fullParityAcceptance": false
+}

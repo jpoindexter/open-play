@@ -92,7 +92,12 @@ export function createSmartSync({engine, state}) {
     requireGrid(deck.track);const primary=leader(deck);
     if (!primary) {
       validateTransport(deck,deck);
-      syncBPM=gridBPM(deck.track,engine.position(deck))*engine.audibleRate(deck);
+      // An engaged primary already has a common tempo. In particular a paused
+      // warped deck's nominal rate is not its local source playback rate.
+      const bpm=engaged(deck)&&syncBPM?syncBPM:gridBPM(deck.track,engine.position(deck))*engine.audibleRate(deck);
+      const rate=bpm/deck.track.bpm;
+      if(!Number.isFinite(rate)||rate<.25||rate>4)throw new Error('The matched tempo is outside the current transport range.');
+      syncBPM=bpm;deck.rate=rate;
       revise(deck);deck.sync=true;deck.syncRole='primary';deck.syncState=deck.playing?(barCompatible(deck)?'beat':'tempo'):'armed';
       if(deck.playing && deck.track.gridWarpMarkers?.length){deck.position=engine.position(deck);await engine.start(deck);}
       return;
