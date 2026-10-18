@@ -25,6 +25,7 @@ export function createStemPreparation(engine, decks, {onChange = () => {}} = {})
   async function cancel(track) {
     const job = active.get(track.id);
     if (!job) return;
+    if (job.activationCommitted) return false;
     job.cancelled = true;
     job.controller.abort();
     if (job.id && !job.committing) await request(`/api/stems/${job.id}`, {method:'DELETE', headers});
@@ -97,7 +98,10 @@ export function createStemPreparation(engine, decks, {onChange = () => {}} = {})
       cancelled();
       job.committing = true;
       status('Activating separated audio…');
-      await engine.attachStems(track, buffers, decks, {signal:job.controller.signal});
+      await engine.attachStems(track, buffers, decks, {
+        signal:job.controller.signal,
+        onCommitted:()=>{job.activationCommitted=true;status('Finishing audio handover…');},
+      });
       track.stemModel = result.model;
       track.stemBackend = job.backend;
       track.stemJob = result.id;

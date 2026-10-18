@@ -250,6 +250,16 @@ await test('Activation cancellation reaches its AbortSignal, preserves shared re
   assert.equal(f.track.stemModel,undefined);assert.equal(f.preparation.active.size,0);gate.resolve();await tick();assert.match(second.at(-1),/^Cancelled/);
 });
 
+await test('Committed activation rejects late cancellation and keeps shared subscribers in the handover phase', async () => {
+  const gate=deferred();
+  const f=fixture({attach:(_track,_buffers,_decks,{onCommitted})=>{onCommitted();return gate.promise;}});
+  const first=[],second=[];const p=f.preparation.prepare(f.track,message=>first.push(message));
+  await until(()=>f.calls.activations.length===1);assert.match(first.at(-1),/^Finishing audio handover/);
+  const shared=f.preparation.prepare(f.track,message=>second.push(message));assert.equal(shared,p);assert.match(second[0],/^Finishing audio handover/);
+  assert.equal(await f.preparation.cancel(f.track),false);assert(!f.calls.activations[0][3].signal.aborted);assert.equal(deletes(f.calls).length,0);
+  gate.resolve();await p;assert.match(first.at(-1),/^Ready/);assert.match(second.at(-1),/^Ready/);assert.equal(f.preparation.active.size,0);
+});
+
 console.log(JSON.stringify({
   scope: 'Executed real stems.js adapter with mocked network, decode and activation. Does not establish service inference, SCNet quality, browser UI, or audio routing.',
   passed: checks.length, checks,

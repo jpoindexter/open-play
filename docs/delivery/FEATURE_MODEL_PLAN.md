@@ -1,6 +1,6 @@
 # Feature and model execution plan
 
-Generated from FULL_BUILD_PLAN.md and PARITY_ADDITIONS.md. All native work is blocked until prototype approval. No row is an implemented-parity claim.
+Generated from FULL_BUILD_PLAN.md and PARITY_ADDITIONS.md. Jason approved local desktop tests; frozen desktop 0.1.23 and its tested profile remain preserved. Current work targets the browser. No row is a full implemented-parity claim.
 Planning-table statuses are a dated baseline. Current scoped implementation evidence is in docs/prototype/DSP_FUNCTIONAL_REVIEW.md and STEM_SLIP_FUNCTIONAL_REVIEW.md; no status implies complete parity. STM-005 routine execution now uses Sol/high, with bounded Astra/high escalation for a measured unresolved dispute.
 
 | ID | Feature | Codex / effort | Claude Code / effort | Status |
@@ -44,9 +44,9 @@ Planning-table statuses are a dated baseline. Current scoped implementation evid
 | FX-002 | Tempo-synced effect timing | gpt-6-astra / high | claude-opus-5 / high | Research pending |
 | SMP-001 | Sampler slots and banks | gpt-6.1-sol / high | claude-sonnet-5 / medium | Research pending |
 | SMP-002 | Sampler audio modes and routing | gpt-6-astra / high | claude-opus-5 / high | Research pending |
-| STM-001 | Local stem separation | gpt-6.1-sol / high | claude-sonnet-5 / high | Mixed-deck activation/first pads and retained-window/SRC/mapped audio checked; inference quality/resources/full acceptance open (plan148) |
+| STM-001 | Local stem separation | gpt-6.1-sol / high | claude-sonnet-5 / high | Actual mixed Prepare/API/cache/decode and final-handover controls/audio checked; inference quality/resources/full acceptance open (plan149) |
 | STM-002 | Stem mute/solo/mix controls | gpt-6-astra / high | claude-opus-5 / high | Research pending |
-| STM-003 | Stem cache/cancel/fallback | gpt-6.1-sol / xhigh | claude-opus-5 / high | Mixed-owner cancellation/retry/first-pad audio checked; final committed-handover UI/resources/other caches open (plan148) |
+| STM-003 | Stem cache/cancel/fallback | gpt-6.1-sol / xhigh | claude-opus-5 / high | Actual pre-commit Cancel and committed-handover disabled controls/late-cancel guard checked; resources/other caches/context/reopen open (plan149) |
 | REC-001 | Record the actual master mix | gpt-6-astra / high | claude-opus-5 / high | Research pending |
 | REC-002 | Recording limits and recovery | gpt-6.1-sol / xhigh | claude-opus-5 / high | Research pending |
 | AUD-001 | Output/input device selection | gpt-6-astra / xhigh | claude-opus-5 / xhigh | Research pending |

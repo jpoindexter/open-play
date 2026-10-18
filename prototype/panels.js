@@ -1292,7 +1292,7 @@ export function createPanels(a) {
           clearButton = $("#stems-clear");
         const showProgress = (text) => {
           output.textContent = text;
-          cancelButton.disabled = false;
+          cancelButton.disabled = text.startsWith('Finishing audio handover');
           clearButton.disabled = true;
         };
         const settled = () => {

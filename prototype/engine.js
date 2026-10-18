@@ -1156,7 +1156,7 @@ export class AudioEngine {
     d.keyShift = semitones;
     if (was) await this.start(d);
   }
-  async attachStems(track, buffers, decks = [], {signal} = {}) {
+  async attachStems(track, buffers, decks = [], {signal,onCommitted} = {}) {
     const checkCancelled=()=>{if(signal?.aborted)throw new DOMException('Stem activation cancelled.', 'AbortError');};
     checkCancelled();
     if (
@@ -1242,6 +1242,8 @@ export class AudioEngine {
     const settling = replacements.map(({deck}) => ({deck,voice:this.voices.get(deck.index)}))
       .filter(({voice}) => Number.isFinite(voice?.handoffBefore?.until))
       .map(item => ({...item,until:item.voice.handoffBefore.until+.01}));
+    // This notification cannot roll back an already committed activation.
+    try { onCommitted?.(); } catch {}
     const settleStarted=performance.now();
     while(settling.some(({deck,voice,until}) => deck.playing&&this.voices.get(deck.index)===voice&&this.ctx.currentTime<until)) {
       if(this.ctx.state==='closed'||performance.now()-settleStarted>5000)
