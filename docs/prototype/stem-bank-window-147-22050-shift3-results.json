@@ -1,0 +1,153 @@
+{
+  "checkpoint": 147,
+  "passed": true,
+  "scope": "Actual production app Play and Stem pads; real cached SCNet buffers attached through the production engine after a nonzero group origin and retained-window drop. One same-instance repeat into the other bank. Generated original tone at declared source sample rate. No fresh inference, music quality, exact audible cursor, native or physical acceptance.",
+  "originalSHA256": "ce0ad447e0f22f094c7ec579b89e7d4f2fe803334a7ee57e3770e2064928ee85",
+  "originalBytes": 1366123,
+  "criteria": {
+    "captureSeconds": 2.5,
+    "minimum10msRMSRatio": 0.85,
+    "maximumAdjacentJump": 0.03,
+    "maximumNearZeroRunSeconds": 0.001,
+    "nearZeroAbsolute": 1e-07,
+    "maximumFrequencyRelativeError": 0.01
+  },
+  "inspectionInterval": "Same50ms startup/100ms end exclusions for continuity; every retained sample hash/finite checked. Fixed final500ms Hann FFT; no PCM repair, timing or gain fit.",
+  "sourceRate": 22050,
+  "sampleRate": 44100,
+  "semitones": 3,
+  "rate": 1.1,
+  "actualOriginalSampleRate": 22050,
+  "groupOriginSeconds": 2,
+  "retainedWindowStartSeconds": 2.49997934510806,
+  "batches": [
+    {
+      "bank": 0,
+      "chunks": 12,
+      "firstProcessorFrame": 18541,
+      "lastProcessorFrame": 222502,
+      "firstSourceSeconds": 2.49997934510806,
+      "lastSourceSeconds": 8.000021802774047,
+      "observedRetainedStart": 2.49997934510806
+    },
+    {
+      "bank": 1,
+      "chunks": 11,
+      "firstProcessorFrame": 37082,
+      "lastProcessorFrame": 222502,
+      "firstSourceSeconds": 2.99995869021612,
+      "lastSourceSeconds": 8.000021802774047,
+      "observedRetainedStart": 2.49997934510806
+    }
+  ],
+  "clockAfterInitial": {
+    "at": 1.0448979591836736,
+    "expected": 4.815521541950114,
+    "actual": 4.815521541950114,
+    "error": 0
+  },
+  "clockAfterRepeat": {
+    "at": 1.509297052154195,
+    "expected": 5.326360544217687,
+    "actual": 5.326360544217687,
+    "error": 0
+  },
+  "channels": [
+    {
+      "channel": 0,
+      "frames": 110250,
+      "sha256": "12d16e53ee2d0660f9d019b3f17c948b89908b8880ea2df80098d4badb3ba4f9",
+      "contiguousQuanta": 862,
+      "baselineRMS": 0.13750329278986864,
+      "minimum10msRMSRatio": 0.9897990936234564,
+      "maximumAdjacentJump": 0.011207774761714973,
+      "longestNearZeroRunSeconds": 0.0,
+      "expectedFrequencyHz": 392.43834795089793,
+      "measuredFrequencyHz": 392.46752883242044,
+      "relativeFrequencyError": 7.435787474611904e-05,
+      "passed": true
+    },
+    {
+      "channel": 1,
+      "frames": 110250,
+      "sha256": "500d7034e7118d5cde678497cc1eb7bc8c7f546c60e27913047b757860fd67f7",
+      "contiguousQuanta": 862,
+      "baselineRMS": 0.13751699915852275,
+      "minimum10msRMSRatio": 0.9959470462141401,
+      "maximumAdjacentJump": 0.018590794876217842,
+      "longestNearZeroRunSeconds": 0.0,
+      "expectedFrequencyHz": 654.0639132514966,
+      "measuredFrequencyHz": 654.0692577307112,
+      "relativeFrequencyError": 8.171188023575852e-06,
+      "passed": true
+    }
+  ],
+  "tail": {
+    "muted": [
+      {
+        "channel": 0,
+        "frames": 3528,
+        "peak": 0.0,
+        "rms": 0.0,
+        "sha256": "aeb61e00cf0f57fe1d9400cd6959dc886e2e125b91a37bcef184c31c8deb6023"
+      },
+      {
+        "channel": 1,
+        "frames": 3528,
+        "peak": 0.0,
+        "rms": 0.0,
+        "sha256": "0f97790543329f8249a5b0ede1f5847b264bf4a2d08f661a948bd69bd96836e7"
+      }
+    ],
+    "restored": [
+      {
+        "channel": 0,
+        "frames": 3528,
+        "peak": 0.19460821151733398,
+        "rms": 0.1374302464235802,
+        "sha256": "93b944ac86cdad0c3fabde4cf34a3c15378338ade114f8c099d81b2482a9b75c"
+      },
+      {
+        "channel": 1,
+        "frames": 3528,
+        "peak": 0.1945725530385971,
+        "rms": 0.1375320656065444,
+        "sha256": "2eaca7f065e842ab3e97a544df3e1ea8ff61b5d7ccb51bf7ee62626e21e3b952"
+      }
+    ],
+    "stopped": [
+      {
+        "channel": 0,
+        "frames": 3528,
+        "peak": 0.0,
+        "rms": 0.0,
+        "sha256": "0f97790543329f8249a5b0ede1f5847b264bf4a2d08f661a948bd69bd96836e7"
+      },
+      {
+        "channel": 1,
+        "frames": 3528,
+        "peak": 0.0,
+        "rms": 0.0,
+        "sha256": "0f97790543329f8249a5b0ede1f5847b264bf4a2d08f661a948bd69bd96836e7"
+      }
+    ]
+  },
+  "sourceHashes": {
+    "app.js": "a34c271bb8b2270c071ab77c8ce7727cf6943733a0e21b7c6da9157c0c13089a",
+    "engine.js": "26750c5c74f99b534bedacfcac459f46f8cb69be3acc8a340166d7ccd2f60244",
+    "panels.js": "daf7da508bb154a936c02d3ff09be4347e3b0d2a39b9f9c0439fcc1c2ace682b",
+    "keylock-shadow-live.js": "c59dcc99838f3bcfa76cac228cf92183b1b7dc567f6f426f3f30328bc64d2c0e",
+    "pcm-resample.js": "8789e7cfc543c393830ad04e2d56e3359786eb6a4473ff08edda1c899fc19ae2",
+    "stem-bank-window-harness.js": "4e15c7a29428bc831b95f0d5c700493965a2ee897ad91007913e0cb279baec4f",
+    "stem-activation-capture-145.js": "730b9c3de31e9c3546ec1ab86f8fd85ce2a1ccfe6f78fc25d8f483f8b9d75331",
+    "vendor/signalsmith-stretch/SignalsmithStretch-open-play-replace.mjs": "66c9e002c6312d12a3107e21aa11be33f5ce7d92b1a4f4d85777cf54f3a74df9"
+  },
+  "sourceStable": true,
+  "originalDecodedAudioUnchanged": true,
+  "nativeAcceptance": false,
+  "hardwareAcceptance": false,
+  "musicalSeparationQualityAcceptance": false,
+  "exactAudibleCursorAcceptance": false,
+  "fullParityAcceptance": false,
+  "remaining": "One source/tempo/pitch geometry per declared fixture; variable pitch maps, other rates/formats, long/multi-deck resources, musical quality and other transport/native/hardware/reference gaps remain."
+}

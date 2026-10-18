@@ -28,7 +28,7 @@ Planning-table statuses are a dated baseline. Current scoped implementation evid
 | DEK-004 | Manual, automatic and saved loops | gpt-6-astra / high | claude-opus-5 / high | Research pending |
 | DEK-005 | Beat jump | gpt-6-astra / high | claude-opus-5 / high | Research pending |
 | DEK-006 | Tempo fader and pitch ranges | gpt-6-astra / high | claude-opus-5 / high | Research pending |
-| DEK-007 | Key lock and independent key shift | gpt-6-astra / high | claude-opus-5 / high | Research pending |
+| DEK-007 | Key lock and independent key shift | gpt-6-astra / high | claude-opus-5 / high | Actual dropped-window/SRC/key-shift and mapped Stem-bank audio checked; all-range music/gesture/cursor/native/reference acceptance open (plan147) |
 | DEK-008 | Sync, master and phase | gpt-6-astra / high | claude-opus-5 / high | Research pending |
 | DEK-009 | Jog, nudge and scratching | gpt-6-astra / high | claude-opus-5 / high | Research pending |
 | DEK-010 | Slip and reverse modes | gpt-6-astra / high | claude-opus-5 / high | Research pending |
@@ -44,9 +44,9 @@ Planning-table statuses are a dated baseline. Current scoped implementation evid
 | FX-002 | Tempo-synced effect timing | gpt-6-astra / high | claude-opus-5 / high | Research pending |
 | SMP-001 | Sampler slots and banks | gpt-6.1-sol / high | claude-sonnet-5 / medium | Research pending |
 | SMP-002 | Sampler audio modes and routing | gpt-6-astra / high | claude-opus-5 / high | Research pending |
-| STM-001 | Local stem separation | gpt-6.1-sol / high | claude-sonnet-5 / high | Real local cache, bank-staged activation/failure/cancel/retry executed; musical quality/resources remain open (plan146) |
+| STM-001 | Local stem separation | gpt-6.1-sol / high | claude-sonnet-5 / high | Local-cache activation plus dropped-window/SRC/mapped-bank audio checked; new inference quality, resources and full acceptance open (plan147) |
 | STM-002 | Stem mute/solo/mix controls | gpt-6-astra / high | claude-opus-5 / high | Research pending |
-| STM-003 | Stem cache/cancel/fallback | gpt-6.1-sol / xhigh | claude-opus-5 / high | Staged-bank failure, warm-up Cancel, retry and mixed-owner coordination checked; refill/SRC/other cache cases remain open (plan146) |
+| STM-003 | Stem cache/cancel/fallback | gpt-6.1-sol / xhigh | claude-opus-5 / high | Failure/Cancel/retry plus actual nonzero-origin/window-drop/SRC/mapped replacement checked; mixed-owner acoustic/resources/other caches open (plan147) |
 | REC-001 | Record the actual master mix | gpt-6-astra / high | claude-opus-5 / high | Research pending |
 | REC-002 | Recording limits and recovery | gpt-6.1-sol / xhigh | claude-opus-5 / high | Research pending |
 | AUD-001 | Output/input device selection | gpt-6-astra / xhigh | claude-opus-5 / xhigh | Research pending |
