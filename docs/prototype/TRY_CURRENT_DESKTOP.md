@@ -19,3 +19,5 @@ Previous build: **Start Open Play Playback Test 0.1.19.command**, with its [hist
 Browser-source plan127 adds [waveform position/keyboard feedback](WAVEFORM_SEEK_REVIEW.md). It is not packaged in0.1.21; that prepared desktop and its physical-test sequence remain unchanged.
 
 Plan129: the existing isolated native21RapidSync/Play check now executed through the normal Checks menu. GUI-handler/syntheticMIDI cases reached BeatSync with six recorded pulse pairs each (worst1.474/.522ms,10ms criterion); queuedPlay cancellation passed. This does not verify physicalcontrols/manualbeatmatch/music/fileimport. The main272mappings/quadroute were preserved. [Core milestone and limits](CORE_PLAYBACK_MILESTONE.md). Further FX refinement is deferred behind the hands-on controller milestone.
+
+Plan130 browser-source fix: Smart Sync beyond±8% could leave the hardware fader unable to pick up its software tempo. Relative movement/OFF/reload/fallback now have actual browser audio evidence, but this fix is **not in0.1.21**. A0.1.22test package is next; keep the21firstPlay test separate from advanced tempo-fader acceptance. [Scope and evidence](MIDI_RELATIVE_TEMPO_REVIEW.md).

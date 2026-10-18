@@ -1,0 +1,984 @@
+{
+  "startedAt": "2026-10-18T07:05:44.010Z",
+  "completed": true,
+  "scope": "Actual production app GUI-handler and MIDI-editor inputs, generated engine buffers, post-master stereo Float32 and whole recording. Not physical MIDI, native, file import, music, exact vendor taper or full relative-mode acceptance.",
+  "criteria": {
+    "settleSeconds": 0.3,
+    "captureSeconds": 0.3,
+    "frequencyToleranceHz": 0.3,
+    "minimumRMS": 0.005,
+    "silencePeak": 1e-06
+  },
+  "cases": [
+    {
+      "name": "Unknown physical position after second OFF takes over on its first packet",
+      "expectedRates": [
+        1,
+        1
+      ],
+      "expectedFrequencies": [
+        330,
+        550
+      ],
+      "rates": [
+        1,
+        1
+      ],
+      "sync": [
+        {
+          "sync": true,
+          "state": "beat",
+          "position": 0.3382993197278912,
+          "playing": true
+        },
+        {
+          "sync": false,
+          "state": "off",
+          "position": 0.3537233560090704,
+          "playing": true
+        }
+      ],
+      "pcm": [
+        {
+          "startFrame": 20480,
+          "frames": 13230,
+          "sha256": "1d0c24550f188e216145ad944d9a705d834ab58ee232c754efbd0416fe1943f5",
+          "base64": "Retained in private original and hash-matched Float32 file"
+        },
+        {
+          "startFrame": 20480,
+          "frames": 13230,
+          "sha256": "849221615ea8fc04599cfc78b229d51a87ea14747a0362971fca675cb67e34c5",
+          "base64": "Retained in private original and hash-matched Float32 file"
+        }
+      ],
+      "measured": [
+        {
+          "frames": 13230,
+          "finite": true,
+          "rms": 0.0572926641155262,
+          "peak": 0.08102387189865112,
+          "hz": 330.0000014228447
+        },
+        {
+          "frames": 13230,
+          "finite": true,
+          "rms": 0.056162129706503146,
+          "peak": 0.07942505925893784,
+          "hz": 549.9999964244587
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "Synced20percent center establishes no-jump physical baseline",
+      "expectedRates": [
+        1,
+        1.2
+      ],
+      "expectedFrequencies": [
+        330,
+        660
+      ],
+      "rates": [
+        1,
+        1.2
+      ],
+      "sync": [
+        {
+          "sync": true,
+          "state": "beat",
+          "position": 0.9652380952380952,
+          "playing": true
+        },
+        {
+          "sync": true,
+          "state": "beat",
+          "position": 1.1664217831012613,
+          "playing": true
+        }
+      ],
+      "pcm": [
+        {
+          "startFrame": 48128,
+          "frames": 13230,
+          "sha256": "ee5aafb1835d6a83d17a36a7388145b030917a8e76c0b0eafa5ee2b9ef666dce",
+          "base64": "Retained in private original and hash-matched Float32 file"
+        },
+        {
+          "startFrame": 48128,
+          "frames": 13230,
+          "sha256": "3e9806f4b005967882b31c4b3a02b083a30b5e734aef07b2202ec503286ed962",
+          "base64": "Retained in private original and hash-matched Float32 file"
+        }
+      ],
+      "measured": [
+        {
+          "frames": 13230,
+          "finite": true,
+          "rms": 0.05729266411552617,
+          "peak": 0.08102387189865112,
+          "hz": 329.9999994142261
+        },
+        {
+          "frames": 13230,
+          "finite": true,
+          "rms": 0.05616209666131728,
+          "peak": 0.07945962995290756,
+          "hz": 660.0000234895238
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "Hardware fader movement changes both synced decks",
+      "expectedRates": [
+        1.0083343507101288,
+        1.2100012208521547
+      ],
+      "expectedFrequencies": [
+        332.7503357343425,
+        665.500671468685
+      ],
+      "rates": [
+        1.0083343507101288,
+        1.2100012208521547
+      ],
+      "sync": [
+        {
+          "sync": true,
+          "state": "beat",
+          "position": 1.6006428192207873,
+          "playing": true
+        },
+        {
+          "sync": true,
+          "state": "beat",
+          "position": 1.9289074516036884,
+          "playing": true
+        }
+      ],
+      "pcm": [
+        {
+          "startFrame": 76032,
+          "frames": 13230,
+          "sha256": "57456883905fc5b42e6f3027eff32553fa1c34b80404bb00bfade9b52d008b1d",
+          "base64": "Retained in private original and hash-matched Float32 file"
+        },
+        {
+          "startFrame": 76032,
+          "frames": 13230,
+          "sha256": "5d58321097b54414532bf8abced486e332847ebf2ea23d2ba11b446469b7d23d",
+          "base64": "Retained in private original and hash-matched Float32 file"
+        }
+      ],
+      "measured": [
+        {
+          "frames": 13230,
+          "finite": true,
+          "rms": 0.05728419175785345,
+          "peak": 0.08102276921272278,
+          "hz": 332.75035255527325
+        },
+        {
+          "frames": 13230,
+          "finite": true,
+          "rms": 0.05614292003928991,
+          "peak": 0.07946258783340454,
+          "hz": 665.5006792900267
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "First OFF keeps relative tempo",
+      "expectedRates": [
+        1.0083343507101288,
+        1.2100012208521547
+      ],
+      "expectedFrequencies": [
+        332.7503357343425,
+        665.500671468685
+      ],
+      "rates": [
+        1.0083343507101288,
+        1.2100012208521547
+      ],
+      "sync": [
+        {
+          "sync": true,
+          "state": "beat",
+          "position": 2.221100012677597,
+          "playing": true
+        },
+        {
+          "sync": false,
+          "state": "relative",
+          "position": 2.6734560544106962,
+          "playing": true
+        }
+      ],
+      "pcm": [
+        {
+          "startFrame": 103168,
+          "frames": 13230,
+          "sha256": "046517069283a1266008907687fca4dfb34d0bcc98a60265bdd35be0c32209c4",
+          "base64": "Retained in private original and hash-matched Float32 file"
+        },
+        {
+          "startFrame": 103168,
+          "frames": 13230,
+          "sha256": "60154a80178398983980fab965e254aa7c0d812fcd978cd009b0ced9b4589548",
+          "base64": "Retained in private original and hash-matched Float32 file"
+        }
+      ],
+      "measured": [
+        {
+          "frames": 13230,
+          "finite": true,
+          "rms": 0.05728047099081025,
+          "peak": 0.08102171868085861,
+          "hz": 332.75035145345305
+        },
+        {
+          "frames": 13230,
+          "finite": true,
+          "rms": 0.05614288133082609,
+          "peak": 0.07945984601974487,
+          "hz": 665.5006810477278
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "Relative fader moves its deck without changing the primary",
+      "expectedRates": [
+        1.0083343507101288,
+        1.2200024417043096
+      ],
+      "expectedFrequencies": [
+        332.7503357343425,
+        671.0013429373703
+      ],
+      "rates": [
+        1.0083343507101288,
+        1.2200024417043096
+      ],
+      "sync": [
+        {
+          "sync": true,
+          "state": "beat",
+          "position": 2.841557206134407,
+          "playing": true
+        },
+        {
+          "sync": false,
+          "state": "relative",
+          "position": 3.4210236082877166,
+          "playing": true
+        }
+      ],
+      "pcm": [
+        {
+          "startFrame": 130304,
+          "frames": 13230,
+          "sha256": "38f6ec9e08f069a69e6ec8a7b03c69a2741183ad436f16f4db42099faa59c76e",
+          "base64": "Retained in private original and hash-matched Float32 file"
+        },
+        {
+          "startFrame": 130304,
+          "frames": 13230,
+          "sha256": "d049b50e2551285583108a478efd9770279a566c3b8cddcd09cec65f7e8d9034",
+          "base64": "Retained in private original and hash-matched Float32 file"
+        }
+      ],
+      "measured": [
+        {
+          "frames": 13230,
+          "finite": true,
+          "rms": 0.05728330448781779,
+          "peak": 0.0810215026140213,
+          "hz": 332.7503503627072
+        },
+        {
+          "frames": 13230,
+          "finite": true,
+          "rms": 0.05618006884933092,
+          "peak": 0.0794617161154747,
+          "hz": 671.0013202910646
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "Shift-ignore repositions physical fader",
+      "expectedRates": [
+        1.0083343507101288,
+        1.2200024417043096
+      ],
+      "expectedFrequencies": [
+        332.7503357343425,
+        671.0013429373703
+      ],
+      "rates": [
+        1.0083343507101288,
+        1.2200024417043096
+      ],
+      "sync": [
+        {
+          "sync": true,
+          "state": "beat",
+          "position": 3.4620143995912165,
+          "playing": true
+        },
+        {
+          "sync": false,
+          "state": "relative",
+          "position": 4.17172622673744,
+          "playing": true
+        }
+      ],
+      "pcm": [
+        {
+          "startFrame": 157440,
+          "frames": 13230,
+          "sha256": "71b5daef830b95a04d8a60297157dfba52e62e1f647bda1e54bc536c2eee4880",
+          "base64": "Retained in private original and hash-matched Float32 file"
+        },
+        {
+          "startFrame": 157440,
+          "frames": 13230,
+          "sha256": "bcc38b30397788a3a776690f212d4cd6b6870720b76f19816dbe9a65a48d28fb",
+          "base64": "Retained in private original and hash-matched Float32 file"
+        }
+      ],
+      "measured": [
+        {
+          "frames": 13230,
+          "finite": true,
+          "rms": 0.05728137708835964,
+          "peak": 0.08102253079414368,
+          "hz": 332.7503525901317
+        },
+        {
+          "frames": 13230,
+          "finite": true,
+          "rms": 0.056154757549609226,
+          "peak": 0.07946358621120453,
+          "hz": 671.0013207621284
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "Returning from Shift-ignore has no tempo jump",
+      "expectedRates": [
+        1.0083343507101288,
+        1.2200024417043096
+      ],
+      "expectedFrequencies": [
+        332.7503357343425,
+        671.0013429373703
+      ],
+      "rates": [
+        1.0083343507101288,
+        1.2200024417043096
+      ],
+      "sync": [
+        {
+          "sync": true,
+          "state": "beat",
+          "position": 4.082471593048027,
+          "playing": true
+        },
+        {
+          "sync": false,
+          "state": "relative",
+          "position": 4.922428845187164,
+          "playing": true
+        }
+      ],
+      "pcm": [
+        {
+          "startFrame": 184576,
+          "frames": 13230,
+          "sha256": "bd890a915027671e56b67ef46adbb125abe6024b3412bf0daeda03e2a2b29874",
+          "base64": "Retained in private original and hash-matched Float32 file"
+        },
+        {
+          "startFrame": 184832,
+          "frames": 13230,
+          "sha256": "53be6180793401fcbac063a178c89291bb6f5822d17fb374caa3954b01b444d8",
+          "base64": "Retained in private original and hash-matched Float32 file"
+        }
+      ],
+      "measured": [
+        {
+          "frames": 13230,
+          "finite": true,
+          "rms": 0.057282427964723784,
+          "peak": 0.08102326840162277,
+          "hz": 332.7503497938973
+        },
+        {
+          "frames": 13230,
+          "finite": true,
+          "rms": 0.05615890716018401,
+          "peak": 0.07945964485406876,
+          "hz": 671.001327167431
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "Relative movement resumes after reposition",
+      "expectedRates": [
+        1.0083343507101288,
+        1.2300024417043096
+      ],
+      "expectedFrequencies": [
+        332.7503357343425,
+        676.5013429373703
+      ],
+      "rates": [
+        1.0083343507101288,
+        1.2300024417043096
+      ],
+      "sync": [
+        {
+          "sync": true,
+          "state": "beat",
+          "position": 4.708782156254429,
+          "playing": true
+        },
+        {
+          "sync": false,
+          "state": "relative",
+          "position": 5.683232155036493,
+          "playing": true
+        }
+      ],
+      "pcm": [
+        {
+          "startFrame": 211968,
+          "frames": 13230,
+          "sha256": "de5f86b79d1a32e3ad881fe229a7f4751b4f650d6e63bfb9450773fbd1169327",
+          "base64": "Retained in private original and hash-matched Float32 file"
+        },
+        {
+          "startFrame": 211968,
+          "frames": 13230,
+          "sha256": "6a61758e7aad8b83ff0a6a5fd4ea12f982b4c61cd4976b3d8258fc93319432c5",
+          "base64": "Retained in private original and hash-matched Float32 file"
+        }
+      ],
+      "measured": [
+        {
+          "frames": 13230,
+          "finite": true,
+          "rms": 0.05725137098630626,
+          "peak": 0.0810237005352974,
+          "hz": 332.7503518881353
+        },
+        {
+          "frames": 13230,
+          "finite": true,
+          "rms": 0.05615422653224095,
+          "peak": 0.07946372032165527,
+          "hz": 676.5013412378788
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "Second OFF immediately restores cached absolute pitch",
+      "expectedRates": [
+        1.0083343507101288,
+        0.97
+      ],
+      "expectedFrequencies": [
+        332.7503357343425,
+        533.5
+      ],
+      "rates": [
+        1.0083343507101288,
+        0.97
+      ],
+      "sync": [
+        {
+          "sync": true,
+          "state": "beat",
+          "position": 5.317532610212053,
+          "playing": true
+        },
+        {
+          "sync": false,
+          "state": "off",
+          "position": 6.347323592067035,
+          "playing": true
+        }
+      ],
+      "pcm": [
+        {
+          "startFrame": 238592,
+          "frames": 13230,
+          "sha256": "adf1b6a7878e88dca2e9a5139bffa05f40b45851af82a0661c7fde4b763c6cf9",
+          "base64": "Retained in private original and hash-matched Float32 file"
+        },
+        {
+          "startFrame": 238592,
+          "frames": 13230,
+          "sha256": "5247bc42beb41f01d5ea6bb7dcdc21c4cd7383960ed0de5ebab4ad9e7ac0bc05",
+          "base64": "Retained in private original and hash-matched Float32 file"
+        }
+      ],
+      "measured": [
+        {
+          "frames": 13230,
+          "finite": true,
+          "rms": 0.057250904540955466,
+          "peak": 0.08102352172136307,
+          "hz": 332.75035281482116
+        },
+        {
+          "frames": 13230,
+          "finite": true,
+          "rms": 0.056154420051368274,
+          "peak": 0.0794614776968956,
+          "hz": 533.5000139826317
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "Reload from REL restores the hardware pitch before playback",
+      "expectedRates": [
+        1.0083343507101288,
+        0.98
+      ],
+      "expectedFrequencies": [
+        332.7503357343425,
+        539
+      ],
+      "rates": [
+        1.0083343507101288,
+        0.98
+      ],
+      "sync": [
+        {
+          "sync": true,
+          "state": "beat",
+          "position": 6.002376870914381,
+          "playing": true
+        },
+        {
+          "sync": false,
+          "state": "off",
+          "position": 0.29171111678860884,
+          "playing": true
+        }
+      ],
+      "pcm": [
+        {
+          "startFrame": 268544,
+          "frames": 13230,
+          "sha256": "a6e0ca943bfd2ff838f60c21991011aafb4c6dc8cc3aacebac7768cc66d0127e",
+          "base64": "Retained in private original and hash-matched Float32 file"
+        },
+        {
+          "startFrame": 268544,
+          "frames": 13230,
+          "sha256": "28da9e0c014f3a6e25d611c422f8092c54a48c061eb104061ad39011eba2396f",
+          "base64": "Retained in private original and hash-matched Float32 file"
+        }
+      ],
+      "measured": [
+        {
+          "frames": 13230,
+          "finite": true,
+          "rms": 0.057251373156638606,
+          "peak": 0.08102302998304367,
+          "hz": 332.75035024718625
+        },
+        {
+          "frames": 13230,
+          "finite": true,
+          "rms": 0.05613719131373027,
+          "peak": 0.07943765819072723,
+          "hz": 539.00000265027
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "Both Stop controls silence the captured master",
+      "expectedRates": [
+        1.0083343507101288,
+        0.98
+      ],
+      "expectedFrequencies": [
+        0,
+        0
+      ],
+      "rates": [
+        1.0083343507101288,
+        0.98
+      ],
+      "sync": [
+        {
+          "sync": true,
+          "state": "armed",
+          "position": 6.3067520978931935,
+          "playing": false
+        },
+        {
+          "sync": false,
+          "state": "off",
+          "position": 0.5932222337679522,
+          "playing": false
+        }
+      ],
+      "pcm": [
+        {
+          "startFrame": 295424,
+          "frames": 13230,
+          "sha256": "9d55c9c2f49808c72a9d28e4f661bae87b1ed419741fa38e5ffeff9648f33d7d",
+          "base64": "Retained in private original and hash-matched Float32 file"
+        },
+        {
+          "startFrame": 295424,
+          "frames": 13230,
+          "sha256": "9d55c9c2f49808c72a9d28e4f661bae87b1ed419741fa38e5ffeff9648f33d7d",
+          "base64": "Retained in private original and hash-matched Float32 file"
+        }
+      ],
+      "measured": [
+        {
+          "frames": 13230,
+          "finite": true,
+          "rms": 0,
+          "peak": 0,
+          "hz": null
+        },
+        {
+          "frames": 13230,
+          "finite": true,
+          "rms": 0,
+          "peak": 0,
+          "hz": null
+        }
+      ],
+      "passed": true
+    }
+  ],
+  "errors": [],
+  "sourceBefore": {
+    "app.js": "5d6a8e952eca5b53b6d50736678ffdf757af291400eaaf4ba865222e944b8d3e",
+    "engine.js": "a4ec10d9401a3e7fd6d7184e331ae59adf6213a87df5152969c8a3edb8fab9f8",
+    "smart-sync.js": "b57c0016cc9467b2f7fe178f7acd1522c2c4d1611c3b6ff6288c97fefcd1e3f1",
+    "deck-midi.js": "572e6471923d77217a93f975ddca40fd63ba9d0442673a7ad94b2514315326d6",
+    "midi.js": "0cabb6dbe98e9eb3f7bc7f7eb44615fa315a0738260e5f3568a34d0aa75ec1ad",
+    "panels.js": "21ecd5626eef61d3798a5779472f68f263398f155ea2b1e29c10e9857a901e48",
+    "fx-tempo-capture-worklet.js": "1ffd09ad071f8dd2dca8b745ca8f9e1182e515eb32c42340bf5ff0a035e9b8b9",
+    "relative-tempo-harness.js": "feb26c4c499d995fa7f187820ce16b8f7e7474663b52dd7d3da3a846764c8666"
+  },
+  "sampleRate": 44100,
+  "reloadBefore": {
+    "rate": 1.2200012208521547,
+    "state": "relative"
+  },
+  "reloadAfter": {
+    "rate": 0.98,
+    "state": "off"
+  },
+  "recording": {
+    "bytes": 107781,
+    "sha256": "b6666406e0f5007c58d3dc88d758462436e4eeca5dce4f92cb8c1d3bb6e54494",
+    "base64": "Retained in private original and complete encoded master",
+    "format": "audio/webm;codecs=opus",
+    "sampleRate": 44100,
+    "frames": 301644,
+    "channels": 2,
+    "allFinite": true
+  },
+  "sourceAfter": {
+    "app.js": "5d6a8e952eca5b53b6d50736678ffdf757af291400eaaf4ba865222e944b8d3e",
+    "engine.js": "a4ec10d9401a3e7fd6d7184e331ae59adf6213a87df5152969c8a3edb8fab9f8",
+    "smart-sync.js": "b57c0016cc9467b2f7fe178f7acd1522c2c4d1611c3b6ff6288c97fefcd1e3f1",
+    "deck-midi.js": "572e6471923d77217a93f975ddca40fd63ba9d0442673a7ad94b2514315326d6",
+    "midi.js": "0cabb6dbe98e9eb3f7bc7f7eb44615fa315a0738260e5f3568a34d0aa75ec1ad",
+    "panels.js": "21ecd5626eef61d3798a5779472f68f263398f155ea2b1e29c10e9857a901e48",
+    "fx-tempo-capture-worklet.js": "1ffd09ad071f8dd2dca8b745ca8f9e1182e515eb32c42340bf5ff0a035e9b8b9",
+    "relative-tempo-harness.js": "feb26c4c499d995fa7f187820ce16b8f7e7474663b52dd7d3da3a846764c8666"
+  },
+  "sourceStable": true,
+  "finishedAt": "2026-10-18T07:05:51.048Z",
+  "sourceServedAfterWorkflow": [
+    {
+      "path": "prototype/app.js",
+      "sha256": "5d6a8e952eca5b53b6d50736678ffdf757af291400eaaf4ba865222e944b8d3e",
+      "matchesDiskAndBeforeAfter": true,
+      "cacheControl": "no-store"
+    },
+    {
+      "path": "prototype/engine.js",
+      "sha256": "a4ec10d9401a3e7fd6d7184e331ae59adf6213a87df5152969c8a3edb8fab9f8",
+      "matchesDiskAndBeforeAfter": true,
+      "cacheControl": "no-store"
+    },
+    {
+      "path": "prototype/smart-sync.js",
+      "sha256": "b57c0016cc9467b2f7fe178f7acd1522c2c4d1611c3b6ff6288c97fefcd1e3f1",
+      "matchesDiskAndBeforeAfter": true,
+      "cacheControl": "no-store"
+    },
+    {
+      "path": "prototype/deck-midi.js",
+      "sha256": "572e6471923d77217a93f975ddca40fd63ba9d0442673a7ad94b2514315326d6",
+      "matchesDiskAndBeforeAfter": true,
+      "cacheControl": "no-store"
+    },
+    {
+      "path": "prototype/midi.js",
+      "sha256": "0cabb6dbe98e9eb3f7bc7f7eb44615fa315a0738260e5f3568a34d0aa75ec1ad",
+      "matchesDiskAndBeforeAfter": true,
+      "cacheControl": "no-store"
+    },
+    {
+      "path": "prototype/panels.js",
+      "sha256": "21ecd5626eef61d3798a5779472f68f263398f155ea2b1e29c10e9857a901e48",
+      "matchesDiskAndBeforeAfter": true,
+      "cacheControl": "no-store"
+    },
+    {
+      "path": "prototype/fx-tempo-capture-worklet.js",
+      "sha256": "1ffd09ad071f8dd2dca8b745ca8f9e1182e515eb32c42340bf5ff0a035e9b8b9",
+      "matchesDiskAndBeforeAfter": true,
+      "cacheControl": "no-store"
+    },
+    {
+      "path": "prototype/relative-tempo-harness.js",
+      "sha256": "feb26c4c499d995fa7f187820ce16b8f7e7474663b52dd7d3da3a846764c8666",
+      "matchesDiskAndBeforeAfter": true,
+      "cacheControl": "no-store"
+    }
+  ],
+  "retainedEvidence": {
+    "originalPath": "local-evidence/controller-tempo-130/browser-original.json",
+    "originalBytes": 1714296,
+    "originalSHA256": "54f10ec403442d21b407d913f82d8dc90416ce9c190ad6f80b05105cb9a69e38",
+    "windows": [
+      {
+        "case": 1,
+        "channel": 0,
+        "path": "local-evidence/controller-tempo-130/final-windows/case-01-channel-0.f32",
+        "frames": 13230,
+        "sha256": "1d0c24550f188e216145ad944d9a705d834ab58ee232c754efbd0416fe1943f5",
+        "allFinite": true
+      },
+      {
+        "case": 1,
+        "channel": 1,
+        "path": "local-evidence/controller-tempo-130/final-windows/case-01-channel-1.f32",
+        "frames": 13230,
+        "sha256": "849221615ea8fc04599cfc78b229d51a87ea14747a0362971fca675cb67e34c5",
+        "allFinite": true
+      },
+      {
+        "case": 2,
+        "channel": 0,
+        "path": "local-evidence/controller-tempo-130/final-windows/case-02-channel-0.f32",
+        "frames": 13230,
+        "sha256": "ee5aafb1835d6a83d17a36a7388145b030917a8e76c0b0eafa5ee2b9ef666dce",
+        "allFinite": true
+      },
+      {
+        "case": 2,
+        "channel": 1,
+        "path": "local-evidence/controller-tempo-130/final-windows/case-02-channel-1.f32",
+        "frames": 13230,
+        "sha256": "3e9806f4b005967882b31c4b3a02b083a30b5e734aef07b2202ec503286ed962",
+        "allFinite": true
+      },
+      {
+        "case": 3,
+        "channel": 0,
+        "path": "local-evidence/controller-tempo-130/final-windows/case-03-channel-0.f32",
+        "frames": 13230,
+        "sha256": "57456883905fc5b42e6f3027eff32553fa1c34b80404bb00bfade9b52d008b1d",
+        "allFinite": true
+      },
+      {
+        "case": 3,
+        "channel": 1,
+        "path": "local-evidence/controller-tempo-130/final-windows/case-03-channel-1.f32",
+        "frames": 13230,
+        "sha256": "5d58321097b54414532bf8abced486e332847ebf2ea23d2ba11b446469b7d23d",
+        "allFinite": true
+      },
+      {
+        "case": 4,
+        "channel": 0,
+        "path": "local-evidence/controller-tempo-130/final-windows/case-04-channel-0.f32",
+        "frames": 13230,
+        "sha256": "046517069283a1266008907687fca4dfb34d0bcc98a60265bdd35be0c32209c4",
+        "allFinite": true
+      },
+      {
+        "case": 4,
+        "channel": 1,
+        "path": "local-evidence/controller-tempo-130/final-windows/case-04-channel-1.f32",
+        "frames": 13230,
+        "sha256": "60154a80178398983980fab965e254aa7c0d812fcd978cd009b0ced9b4589548",
+        "allFinite": true
+      },
+      {
+        "case": 5,
+        "channel": 0,
+        "path": "local-evidence/controller-tempo-130/final-windows/case-05-channel-0.f32",
+        "frames": 13230,
+        "sha256": "38f6ec9e08f069a69e6ec8a7b03c69a2741183ad436f16f4db42099faa59c76e",
+        "allFinite": true
+      },
+      {
+        "case": 5,
+        "channel": 1,
+        "path": "local-evidence/controller-tempo-130/final-windows/case-05-channel-1.f32",
+        "frames": 13230,
+        "sha256": "d049b50e2551285583108a478efd9770279a566c3b8cddcd09cec65f7e8d9034",
+        "allFinite": true
+      },
+      {
+        "case": 6,
+        "channel": 0,
+        "path": "local-evidence/controller-tempo-130/final-windows/case-06-channel-0.f32",
+        "frames": 13230,
+        "sha256": "71b5daef830b95a04d8a60297157dfba52e62e1f647bda1e54bc536c2eee4880",
+        "allFinite": true
+      },
+      {
+        "case": 6,
+        "channel": 1,
+        "path": "local-evidence/controller-tempo-130/final-windows/case-06-channel-1.f32",
+        "frames": 13230,
+        "sha256": "bcc38b30397788a3a776690f212d4cd6b6870720b76f19816dbe9a65a48d28fb",
+        "allFinite": true
+      },
+      {
+        "case": 7,
+        "channel": 0,
+        "path": "local-evidence/controller-tempo-130/final-windows/case-07-channel-0.f32",
+        "frames": 13230,
+        "sha256": "bd890a915027671e56b67ef46adbb125abe6024b3412bf0daeda03e2a2b29874",
+        "allFinite": true
+      },
+      {
+        "case": 7,
+        "channel": 1,
+        "path": "local-evidence/controller-tempo-130/final-windows/case-07-channel-1.f32",
+        "frames": 13230,
+        "sha256": "53be6180793401fcbac063a178c89291bb6f5822d17fb374caa3954b01b444d8",
+        "allFinite": true
+      },
+      {
+        "case": 8,
+        "channel": 0,
+        "path": "local-evidence/controller-tempo-130/final-windows/case-08-channel-0.f32",
+        "frames": 13230,
+        "sha256": "de5f86b79d1a32e3ad881fe229a7f4751b4f650d6e63bfb9450773fbd1169327",
+        "allFinite": true
+      },
+      {
+        "case": 8,
+        "channel": 1,
+        "path": "local-evidence/controller-tempo-130/final-windows/case-08-channel-1.f32",
+        "frames": 13230,
+        "sha256": "6a61758e7aad8b83ff0a6a5fd4ea12f982b4c61cd4976b3d8258fc93319432c5",
+        "allFinite": true
+      },
+      {
+        "case": 9,
+        "channel": 0,
+        "path": "local-evidence/controller-tempo-130/final-windows/case-09-channel-0.f32",
+        "frames": 13230,
+        "sha256": "adf1b6a7878e88dca2e9a5139bffa05f40b45851af82a0661c7fde4b763c6cf9",
+        "allFinite": true
+      },
+      {
+        "case": 9,
+        "channel": 1,
+        "path": "local-evidence/controller-tempo-130/final-windows/case-09-channel-1.f32",
+        "frames": 13230,
+        "sha256": "5247bc42beb41f01d5ea6bb7dcdc21c4cd7383960ed0de5ebab4ad9e7ac0bc05",
+        "allFinite": true
+      },
+      {
+        "case": 10,
+        "channel": 0,
+        "path": "local-evidence/controller-tempo-130/final-windows/case-10-channel-0.f32",
+        "frames": 13230,
+        "sha256": "a6e0ca943bfd2ff838f60c21991011aafb4c6dc8cc3aacebac7768cc66d0127e",
+        "allFinite": true
+      },
+      {
+        "case": 10,
+        "channel": 1,
+        "path": "local-evidence/controller-tempo-130/final-windows/case-10-channel-1.f32",
+        "frames": 13230,
+        "sha256": "28da9e0c014f3a6e25d611c422f8092c54a48c061eb104061ad39011eba2396f",
+        "allFinite": true
+      },
+      {
+        "case": 11,
+        "channel": 0,
+        "path": "local-evidence/controller-tempo-130/final-windows/case-11-channel-0.f32",
+        "frames": 13230,
+        "sha256": "9d55c9c2f49808c72a9d28e4f661bae87b1ed419741fa38e5ffeff9648f33d7d",
+        "allFinite": true
+      },
+      {
+        "case": 11,
+        "channel": 1,
+        "path": "local-evidence/controller-tempo-130/final-windows/case-11-channel-1.f32",
+        "frames": 13230,
+        "sha256": "9d55c9c2f49808c72a9d28e4f661bae87b1ed419741fa38e5ffeff9648f33d7d",
+        "allFinite": true
+      }
+    ],
+    "worstFrequencyErrorHz": 2.3489523755415576e-05,
+    "initialWorkflows": [
+      "local-evidence/controller-tempo-130/initial-delayed-reset-original.json",
+      "local-evidence/controller-tempo-130/cached-reset-only-original.json"
+    ],
+    "initialScopeLimit": "Initial nine cases covered secondOFF plus later packet; next ten cases added immediate cached reset/reload; final eleven cases add unknown-position explicit takeover. Earlier runs do not prove later paths."
+  },
+  "reference": {
+    "urls": [
+      "https://support.serato.com/hc/en-us/articles/227561947-Relative-Pitch-Tempo-Control-Smart-Sync",
+      "https://support.serato.com/hc/en-us/articles/227561927-Disengage-Sync"
+    ],
+    "checked": "2026-10-18",
+    "scope": "Documented qualitative movement/OFF/reload/Shift behavior; numerical taper and native/physical response unverified."
+  },
+  "remaining": [
+    "Exact vendor relative taper and physical packet timing",
+    "GUI relative slider position at out-of-range tempos",
+    "All keylock/warp/StemSlip and transport compositions",
+    "Permission reconnect/failure and simultaneous-controller stress",
+    "Physical Hercules and native packaging/behavior"
+  ],
+  "cleanup": {
+    "testTab": 119,
+    "closed": true,
+    "isolatedPort": 18873,
+    "isolatedHelperStopped": true,
+    "nativeCurrent": "0.1.21",
+    "nativePlayingDecks": 0,
+    "nativeClocks": [
+      "00:00.0",
+      "00:00.0"
+    ],
+    "nativeMasterDB": -12,
+    "containsPatch": false
+  }
+}

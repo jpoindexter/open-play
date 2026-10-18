@@ -29,3 +29,5 @@ Closed only the isolated check using its native close button. Main app read-only
 LPF plan128 is committed atb2bc13a61cc95c38f4ec15162adc171c360f9fd0: eight distinct offline slopes, four update contracts and stopped normalUI save/readback. Odd-slope live cutoff/slot reset is still unverified in a playing app; no new LPF test or production edit occurred in plan129. Re-entry after the core milestone: actual muted app LPF6dB playback→savechangedcutoff→measure output/transport continuity, then18dB and topology return. Preserve original reference endpoints and unverified sonic/6dBresonance limits. Do not resume this ahead of a concrete core failure.
 
 [Current test instructions](TRY_CURRENT_DESKTOP.md) · [Native original-scope result](desktop-0.1.21-core-sync-native-results.json) · [Full plan](../../FULL_BUILD_PLAN.md)
+
+Plan130 found and corrected the hardware fader lockout after out-of-range Smart Sync in browser source. [Relative-tempo review](MIDI_RELATIVE_TEMPO_REVIEW.md) records actual audio/OFF/reload/fallback proof. Native21retains old code; prepare22next before testing these advanced fader transitions. Physical firstPlay remains separately pending.

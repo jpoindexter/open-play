@@ -17,14 +17,20 @@ export const samplerMIDITargets=Array.from({length:8},(_,n)=>[`Sampler ${n+1}`,`
 export const libraryMIDITargets=['Library browse','Library fast browse','Library focus','Prepare add','Prepare open'];
 export const fxMIDITargets=[1,2].flatMap(n=>['depth','beat','enable','select','next'].map(x=>`FX unit ${n} ${x}`));
 export function createDeckMIDIRouter({state,engine,actions,applyFX=()=>{},onChange=()=>{},onStatus=()=>{},jogBend=createJogBend({engine,onError:error=>onStatus(error.message)})}){
- const pairs=new Map(),buttons=new Map(),pickup=new Map(),rates=new Map(),nudges=new Map(),loads=new Map(),ignoredTempo=new Map();
+ const pairs=new Map(),buttons=new Map(),pickup=new Map(),rates=new Map(),nudges=new Map(),loads=new Map(),ignoredTempo=new Map(),physicalTempo=new Map(),absoluteTakeover=new Map();
  const jogTouch=createMIDIJogTouch({engine,state,beforeBegin:deck=>jogBend.resetDeck(deck.index),onError:error=>onStatus(error.message)});
  const deckFor=target=>/^Deck ([1-4]) (.+)$/.exec(target);
  const repaintMix=(d,field)=>onChange({deck:d.index,field,value:d[field]});
  function scheduleRate(d,rate){
-  let q=rates.get(d.index);if(q){q.wanted=rate;return q.promise;}
-  q={wanted:rate,promise:null};rates.set(d.index,q);
-  q.promise=Promise.resolve().then(async()=>{while(q.wanted!==null){const next=q.wanted;q.wanted=null;await engine.setRate(d,next);}}).finally(()=>{if(rates.get(d.index)===q)rates.delete(d.index);});return q.promise;
+  let q=rates.get(d.index);if(q&&q.track===d.track){q.wanted=rate;q.latest=rate;return q.promise;}
+  q={track:d.track,wanted:rate,latest:rate,promise:null};rates.set(d.index,q);
+  q.promise=Promise.resolve().then(async()=>{while(q.wanted!==null&&d.track===q.track){const next=q.wanted;q.wanted=null;await engine.setRate(d,next);}}).finally(()=>{if(rates.get(d.index)===q)rates.delete(d.index);});return q.promise;
+ }
+ async function resetTempoAbsolute(d){
+  absoluteTakeover.set(d.index,d.track);
+  const physical=physicalTempo.get(d.index);if(!physical)return false;
+  const requested=clamp(1+physical.position*(Number(d.pitchRange)||8)/100,.25,4);
+  await scheduleRate(d,requested);onChange({deck:d.index,field:'tempo',value:d.rate});return true;
  }
  function release(message){
   if(message.pressed)return false;
@@ -147,19 +153,34 @@ export function createDeckMIDIRouter({state,engine,actions,applyFX=()=>{},onChan
   if(action==='track gain'){if(d.track)actions.trackGain.set(d.track,relative?trackGainDB(d.track)+value*.1:bipolar(value)*24);return true;}
   if(action==='tempo'||action==='tempo ignore'){
    const range=Number(d.pitchRange)||8;
-   const requested=relative?d.rate+value*.0001:1+bipolar(value)*range/100;
+   let requested=relative?d.rate+value*.0001:1+bipolar(value)*range/100;
    const id=key(mapping.encoding==='14-bit absolute'&&message.type==='CC'?{...message,number:message.number%32}:message),physical=requested;
-   if(action==='tempo ignore'){ignoredTempo.set(d.index,{deviceId:message.deviceId||'',physical,caught:false,applied:d.rate});onStatus(`Deck ${d.index+1} tempo motion ignored; pickup armed.`);return true;}
-   let previous=pickup.get(id);const ignored=ignoredTempo.get(d.index);
-   if(ignored?.deviceId===(message.deviceId||'')){previous=ignored;ignoredTempo.delete(d.index);pickup.set(id,ignored);}
+   const relativePitch=!relative&&state.settings?.['Sync Mode']==='Smart Sync'&&(d.sync||d.syncState==='relative');
+   if(!relative)physicalTempo.set(d.index,{position:bipolar(value),deviceId:message.deviceId||''});
+   if(action==='tempo ignore'){ignoredTempo.set(d.index,{deviceId:message.deviceId||'',track:d.track,physical,caught:false,applied:d.rate,relativePitch,offset:d.rate-physical});onStatus(`Deck ${d.index+1} tempo motion ignored; ${relativePitch?'relative baseline moved':'pickup armed'}.`);return true;}
+   let previous=pickup.get(id);if(previous?.track!==d.track)previous=undefined;
+   const ignored=ignoredTempo.get(d.index);
+   if(ignored?.track===d.track&&ignored.deviceId===(message.deviceId||'')){previous=ignored;ignoredTempo.delete(d.index);pickup.set(id,ignored);}
+   if(relativePitch){
+    absoluteTakeover.delete(d.index);
+    // Hardware travel is a movement coordinate while Smart Sync/REL owns tempo.
+    // Requiring pickup at the software rate can make a narrow fader unusable.
+    const pending=rates.get(d.index),ownPending=pending?.track===d.track&&pending.latest===previous?.applied;
+    const unchanged=previous?.relativePitch&&(ownPending||Math.abs(previous.applied-d.rate)<1e-9);
+    const offset=unchanged?previous.offset:d.rate-(previous?.physical??physical);
+    requested=clamp(physical+offset,.25,4);
+    pickup.set(id,{deviceId:message.deviceId||'',track:d.track,physical,caught:true,applied:requested,relativePitch:true,offset:requested-physical});
+    await scheduleRate(d,requested);onChange({deck:d.index,field:'tempo',value:d.rate});return true;
+   }
    // After software/Sync moves tempo, an absolute fader must cross it before
    // taking over. No surprise shared-tempo jump from its first stale value.
    const tolerance=range/100/63;
-   let caught=relative||mapping.pickup===false||Math.abs(physical-d.rate)<=tolerance;
+   let caught=relative||mapping.pickup===false||previous?.relativePitch||(absoluteTakeover.has(d.index)&&absoluteTakeover.get(d.index)===d.track)||Math.abs(physical-d.rate)<=tolerance;
    if(previous&&Math.abs(previous.applied-d.rate)<=tolerance&&previous.caught)caught=true;
    if(previous&&(physical-d.rate)*(previous.physical-d.rate)<=0)caught=true;
-   pickup.set(id,{physical,caught,applied:caught?requested:d.rate});
+   pickup.set(id,{deviceId:message.deviceId||'',track:d.track,physical,caught,applied:caught?requested:d.rate,relativePitch:false});
    if(!caught){onStatus(`Deck ${d.index+1}: move tempo fader through ${((d.rate-1)*100).toFixed(1)}% to pick it up.`);return true;}
+   absoluteTakeover.delete(d.index);
    await scheduleRate(d,clamp(requested,.25,4));onChange({deck:d.index,field:'tempo',value:d.rate});return true;
   }
   if(['jog surface','jog bend','jog nudge'].includes(action)&&d.loopEdit){
@@ -198,13 +219,14 @@ export function createDeckMIDIRouter({state,engine,actions,applyFX=()=>{},onChan
  }
  function resetInput(deviceId){
   actions.resetFaderStartInput?.(deviceId);
+  for(const [index,physical]of physicalTempo)if(deviceId===undefined||physical.deviceId===deviceId)physicalTempo.delete(index);
   for(const [index,ignored]of ignoredTempo)if(deviceId===undefined||ignored.deviceId===deviceId)ignoredTempo.delete(index);
   void jogTouch.resetInput(deviceId).catch(error=>onStatus(error.message));
   void jogBend.resetInput(deviceId).catch(error=>onStatus(error.message));
   for(const [k,b]of buttons)if(deviceId===undefined||b.deviceId===deviceId){buttons.delete(k);if(b.release)void Promise.resolve(b.release()).catch(error=>onStatus(error.message));if(b.cue)void actions.cueHolds.release(b.owner,{immediate:true}).catch(error=>onStatus(error.message));}
   pickup.clear();pairs.clear();loads.clear();
  }
- return{dispatch,release,resetInput};
+ return{dispatch,release,resetInput,resetTempoAbsolute};
 }
 
 export function herculesPlaybackMappings(deviceId){

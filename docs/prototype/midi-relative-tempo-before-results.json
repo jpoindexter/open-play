@@ -1,0 +1,38 @@
+{
+  "passed": false,
+  "scope": "Controlled production MIDI router with engine collaborator; no actual audio, UI, hardware or exact vendor taper proof",
+  "tests": [
+    {
+      "name": "Smart Sync outside hardware range: baseline no jump, next fader movement changes tempo",
+      "passed": false,
+      "error": "1.2 != 1.2100012208521547"
+    },
+    {
+      "name": "First Sync-off keeps relative control; second resumes absolute hardware control",
+      "passed": false,
+      "error": "1.2 != 1.2100012208521547"
+    },
+    {
+      "name": "External shared-tempo change rebases at last physical position without pickup dead zone",
+      "passed": false,
+      "error": "1.3 != 1.3100012208521548"
+    },
+    {
+      "name": "Shift-ignore repositions fader without changing relative tempo or adding a release jump",
+      "passed": false,
+      "error": "1.2 != 1.21"
+    },
+    {
+      "name": "A new track or different input establishes its own no-jump relative baseline",
+      "passed": false,
+      "error": "1.4 != 1.4100012208521546"
+    },
+    {
+      "name": "Ordinary unsynced absolute pickup remains in force",
+      "passed": true
+    }
+  ],
+  "sourceCommit": "a0dd5a07e5b7dfeafc3ad81b50d221e725258794",
+  "sourceIdentity": "Production deck-midi.js before relative-pitch implementation",
+  "failedCases": 5
+}

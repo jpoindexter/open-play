@@ -656,7 +656,7 @@ async function load(index, id = state.selected, options = {}) {
   }
   if (d.playing && state.settings["Lock Playing Deck"])
     return notify("Playing deck locked. Pause it before replacement.");
-  const syncBefore = {engaged:!!d.sync, role:d.syncRole, bpm:(d.track?.bpm || 0)*d.rate};
+  const syncBefore = {engaged:!!d.sync, relative:d.syncState==='relative', role:d.syncRole, bpm:(d.track?.bpm || 0)*d.rate};
   cancelPendingPlay(d);
   const request = (deckLoadRequests.get(d) || 0) + 1;
   deckLoadRequests.set(d, request);
@@ -701,6 +701,10 @@ async function load(index, id = state.selected, options = {}) {
   d.stemFX = [false, false, false, false];
   if (!state.settings["Maintain Sync on Track Load"]) d.sync = false;
   smartSync.loaded(d,syncBefore);
+  if(syncBefore.relative&&!d.sync){
+    await panels.resetTempoAbsolute(d);
+    if(state.decks[index]!==d||deckLoadRequests.get(d)!==request)return;
+  }
   if (state.settings["Turn off FX"])
     state.fx[index % 2].forEach((f) => (f.on = false));
   engine.configureFX(
@@ -949,7 +953,10 @@ async function deckAction(action, index, el, event = {}) {
     await engine.seek(d,grid?grid.timeAt(grid.beatAt(pos)+beats):pos+beat*beats);
   }
   if (action === "syncOff" || (action === "sync" && event.shiftKey)) {
-    if (state.settings["Sync Mode"] === "Smart Sync") smartSync.disengage(d);
+    if (state.settings["Sync Mode"] === "Smart Sync") {
+      const wasRelative=d.syncState==='relative';smartSync.disengage(d);
+      if(wasRelative)await panels.resetTempoAbsolute(d);
+    }
     else {d.sync = false; d.syncRole = null;}
   } else if (action === "sync") {
     if (state.settings["Sync Mode"] === "Off") return;

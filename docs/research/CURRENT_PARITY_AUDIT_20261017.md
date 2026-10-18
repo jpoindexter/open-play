@@ -1,3 +1,5 @@
+> Plan130: [core relative-tempo fix](../prototype/MIDI_RELATIVE_TEMPO_REVIEW.md) closes reproduced out-of-range MIDI pickup lockout in browser source.11actual-audio cases include immediate OFF/reload and unknown-position takeover; native21has old behavior. Package22next; physical/fullreference acceptance open.
+
 > Plan129: [core playback milestone](../prototype/CORE_PLAYBACK_MILESTONE.md) takes priority over more FX refinement. Current native21 isolated GUI-handler/syntheticMIDI Sync/Play produces six aligned pulse pairs each; main272mappings/quadroute preserved. Physical controls/sound and full parity remain open.
 
 > Plan128: [LPF slope review](../prototype/LPF_SLOPE_REVIEW.md): eight distinct production offline-audio slopes and four update contracts executed; normal6dB save/reopen executed. Paused reference6/48endpoints observed. Exact response/live engine/native/physical parity open;21unchanged.
