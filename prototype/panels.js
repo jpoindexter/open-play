@@ -10,6 +10,7 @@ import {createVideoMIDIAssignmentUI} from './video-midi-assignment-ui.js';
 import { createMIDI, mappedValue, keyShiftSemitones, syntheticMIDIMessage, matchesMIDIMap } from "./midi.js";
 import { getExtendedEffectControls } from "./extended-effects.js";
 import { implementedEffects } from "./effects.js";
+import {lpfParameterFields, validateLPFParameters} from './lpf-parameters.js';
 import {createFXTempo,normalizeFXTempoSettings,effectiveFXBPM,fxTempoPolicy} from './fx-tempo.js';
 import {videoSetupField,videoSetupValue,applyVideoSetupSetting,resetVideoSetupSettings} from './video-settings.js';
 import {createAudioOutputSelection} from './audio-output.js';
@@ -694,12 +695,6 @@ export function createPanels(a) {
     );
   }
   const effectParams = {
-    LPF: [
-      ["Resonance", "1.77"],
-      ["Slope", "24 dB"],
-      ["Min Freq", "200 Hz"],
-      ["Max Freq", "20.0 kHz"],
-    ],
     Delay: [
       ["Feedback", "40%"],
       ["HPF", "20.0 Hz"],
@@ -811,20 +806,50 @@ export function createPanels(a) {
         (el.onclick = () => {
           const [b, i] = el.dataset.fxParams.split(":"),
             f = s.fx[b][i],
-            params =
+            params = f.name === 'LPF' ? lpfParameterFields.map(c => ({...c,observedLabel:true})) :
               effectParams[f.name]?.map(([name,value]) => ({name,value,observedLabel:true})) ||
               getExtendedEffectControls(f.name);
           dialog(
             `${f.name} · advanced parameters`,
             params
-              ? `<p class="muted">${params.every(c => c.observedLabel) ? "Parameter labels were observed in Serato. The mappings below are independent implementations." : "These are functional independent controls. Some observed reference controls remain unmapped; see the gap matrix."} Values affect real audio. Exact Serato response is unverified. Most live parameter changes preserve processor state. Other topology and impulse-response changes reset that slot. LPF cutoff, depth and slope changes preserve its processor; slope transitions blend warmed filter branches.</p><div class="settings-grid">${params.map(c => `<label class="setting">${esc(c.name)}${c.options ? `<select data-param="${esc(c.name)}">${options(c.options, f.params[c.name] ?? c.value)}</select>` : `<input data-param="${esc(c.name)}" value="${esc(f.params[c.name] ?? c.value)}">`}</label>`).join("")}</div><div class="form-actions"><button id="save-effect">Save values</button></div>`
+              ? `<p class="muted">${params.every(c => c.observedLabel) ? "Parameter labels were observed in Serato. The mappings below are independent implementations." : "These are functional independent controls. Some observed reference controls remain unmapped; see the gap matrix."} Values affect real audio. Exact Serato response is unverified. Most live parameter changes preserve processor state. Other topology and impulse-response changes reset that slot.${f.name === 'LPF' ? ' LPF changes do not reset the filter. Ranges shown here are supported by Open Play.' : ''}</p><div class="settings-grid">${params.map((c,index) => `<label class="setting"><span>${esc(c.name)}${c.hint ? `<small class="fx-field-hint" id="fx-param-hint-${index}">${esc(c.hint)}</small>` : ''}</span>${c.options ? `<select data-param="${esc(c.name)}">${options(c.options, f.params[c.name] ?? c.value)}</select>` : `<input data-param="${esc(c.name)}"${c.hint ? ` aria-describedby="fx-param-hint-${index}"` : ''} value="${esc(f.params[c.name] ?? c.value)}">`}</label>`).join("")}</div>${f.name === 'LPF' ? '<p id="fx-parameter-error" class="note-box" role="alert" hidden></p>' : ''}<div class="form-actions"><button id="save-effect">Save values</button></div>`
               : `<div class="note-box">${esc(f.name)} exists in the installed catalog. Its specific parameter labels, ranges and transfer function have not been observed. No invented substitute controls are presented as parity.</div><p>Inventory: FX-003. This is an explicit prototype gap for Claude's independent investigation.</p>`,
             (body) => {
+              const fields = [...body.querySelectorAll('[data-param]')];
+              const error = body.querySelector('#fx-parameter-error');
+              const clearErrors = () => {
+                for (const field of fields) {
+                  field.setCustomValidity('');
+                  field.removeAttribute('aria-invalid');
+                  const ids = (field.getAttribute('aria-describedby') || '').split(/\s+/).filter(id => id && id !== 'fx-parameter-error');
+                  if (ids.length) field.setAttribute('aria-describedby', ids.join(' '));
+                  else field.removeAttribute('aria-describedby');
+                }
+                error.hidden = true;
+                error.textContent = '';
+              };
+              if (error) for (const field of fields) field.addEventListener('input', clearErrors);
               if ($("#save-effect"))
                 $("#save-effect").onclick = () => {
-                  body
-                    .querySelectorAll("[data-param]")
-                    .forEach((e) => (f.params[e.dataset.param] = e.value));
+                  const proposal = Object.fromEntries(fields.map(e => [e.dataset.param, e.value]));
+                  if (f.name === 'LPF') {
+                    clearErrors();
+                    const result = validateLPFParameters({...f.params, ...proposal});
+                    if (!result.ok) {
+                      error.textContent = `Values were not saved. ${Object.values(result.errors).join(' ')} Playback keeps the last saved values.`;
+                      error.hidden = false;
+                      for (const field of fields) {
+                        const message = result.errors[field.dataset.param];
+                        if (!message) continue;
+                        field.setCustomValidity(message);
+                        field.setAttribute('aria-invalid', 'true');
+                        field.setAttribute('aria-describedby', `${field.getAttribute('aria-describedby') || ''} fx-parameter-error`.trim());
+                      }
+                      fields.find(e => result.errors[e.dataset.param]).focus();
+                      return;
+                    }
+                    f.params = result.params;
+                  } else Object.assign(f.params, proposal);
                   applyFX();
                   $("#modal").close();
                 };

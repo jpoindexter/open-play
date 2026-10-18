@@ -1,0 +1,221 @@
+{
+  "passed": false,
+  "bugReproduced": true,
+  "scope": "Production browser LPF advanced Save/error/cancel/readback with generated DC+100/2000Hz engine buffer and post-master stereo PCM. Physical graph muted. Not native, hardware, real-file/music or vendor-range/sonic acceptance.",
+  "inspection": "Full retained Float32 hash/finite checks, independent100/2000Hz amplitude projection versus requested native-chain transfer with fixed1%relative tolerance; explicit transactional values/error/focus/ARIA/cancel and exact stopped silence. No vendor ranges/sonics, screen-reader, native or physical acceptance.",
+  "originalBytes": 429003,
+  "originalSHA256": "b1ab5fd56a08fbe3a872b2e1d49f5e807a4b8daee17a0b77a1f97f492760f823",
+  "sampleRate": 44100,
+  "sourceBefore": {
+    "app.js": "131f2278e3db5460c0b5008c8328a3b073f1d8d03cff01e694ee8027f04a54b4",
+    "panels.js": "bb0ec1061bd694ea69dbe2f02113bc1a7591504836c80c41273d44dd6a71cab5",
+    "effects.js": "f1d4a8fc22b4333a95bca2ad89c6898ed77c1a5d840dcddfa197c67684646ab0",
+    "extended-effects.js": "63afacc86fcf9c75e64b2ee80328b71f56fe205090a3b05e8d306d6df07e48e2",
+    "extended-effects-worklet.js": "f00802d547f2c07d39874a1774bcd0af53037f0b712956ee7f317779c3238463",
+    "lpf-kernel.js": "c557a18ea0c0f09d171aaa88520314c766c0124b5a3f4eb70e268071d2debef6",
+    "lpf-validation-harness.js": "8a0b102c8c2d3b042eae062e689d69ba31a16a3a637f7ec82d89d16617626c16",
+    "fx-tempo-capture-worklet.js": "1ffd09ad071f8dd2dca8b745ca8f9e1182e515eb32c42340bf5ff0a035e9b8b9",
+    "lpf-parameters.js": "absent"
+  },
+  "sourceAfter": {
+    "app.js": "131f2278e3db5460c0b5008c8328a3b073f1d8d03cff01e694ee8027f04a54b4",
+    "panels.js": "bb0ec1061bd694ea69dbe2f02113bc1a7591504836c80c41273d44dd6a71cab5",
+    "effects.js": "f1d4a8fc22b4333a95bca2ad89c6898ed77c1a5d840dcddfa197c67684646ab0",
+    "extended-effects.js": "63afacc86fcf9c75e64b2ee80328b71f56fe205090a3b05e8d306d6df07e48e2",
+    "extended-effects-worklet.js": "f00802d547f2c07d39874a1774bcd0af53037f0b712956ee7f317779c3238463",
+    "lpf-kernel.js": "c557a18ea0c0f09d171aaa88520314c766c0124b5a3f4eb70e268071d2debef6",
+    "lpf-validation-harness.js": "8a0b102c8c2d3b042eae062e689d69ba31a16a3a637f7ec82d89d16617626c16",
+    "fx-tempo-capture-worklet.js": "1ffd09ad071f8dd2dca8b745ca8f9e1182e515eb32c42340bf5ff0a035e9b8b9",
+    "lpf-parameters.js": "absent"
+  },
+  "sourceStable": true,
+  "currentSourceMatches": false,
+  "maxEndpointAmplitudeRelativeError": 1.0319110070712265e-05,
+  "cases": [
+    {
+      "name": "Valid12dB/400Hz baseline",
+      "savedParams": {
+        "Resonance": "1.77",
+        "Slope": "12 dB",
+        "Min Freq": "400 Hz",
+        "Max Freq": "400 Hz"
+      },
+      "form": null,
+      "paramsUnchanged": true,
+      "voicePreserved": true,
+      "playing": true,
+      "metrics": [
+        {
+          "channel": 0,
+          "frames": 13230,
+          "sha256": "9684962629deee6d1170c521fe070e511b08aaa3ef87716bcffc6ef00aa2feab",
+          "allFinite": true,
+          "peak": 0.2763388454914093,
+          "mean": 0.24147937688427448,
+          "tones": [
+            {
+              "hz": 100,
+              "measuredAmplitude": 0.033558394097682895,
+              "expectedAmplitude": 0.03355839488099105,
+              "relativeError": 2.33416454281698e-08
+            },
+            {
+              "hz": 2000,
+              "measuredAmplitude": 0.0013049903649093556,
+              "expectedAmplitude": 0.0013049896549179177,
+              "relativeError": 5.440590545257362e-07
+            }
+          ]
+        },
+        {
+          "channel": 1,
+          "frames": 13230,
+          "sha256": "9684962629deee6d1170c521fe070e511b08aaa3ef87716bcffc6ef00aa2feab",
+          "allFinite": true,
+          "peak": 0.2763388454914093,
+          "mean": 0.24147937688427448,
+          "tones": [
+            {
+              "hz": 100,
+              "measuredAmplitude": 0.033558394097682895,
+              "expectedAmplitude": 0.03355839488099105,
+              "relativeError": 2.33416454281698e-08
+            },
+            {
+              "hz": 2000,
+              "measuredAmplitude": 0.0013049903649093556,
+              "expectedAmplitude": 0.0013049896549179177,
+              "relativeError": 5.440590545257362e-07
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Mixed valid changes with NaN minimum are rejected atomically",
+      "savedParams": {
+        "Resonance": "1.77",
+        "Slope": "18 dB",
+        "Min Freq": "NaN",
+        "Max Freq": "4 kHz"
+      },
+      "form": {
+        "open": false,
+        "error": "",
+        "focus": null,
+        "fields": [
+          {
+            "name": "Resonance",
+            "value": "1.77",
+            "invalid": null,
+            "describedBy": null,
+            "validity": true
+          },
+          {
+            "name": "Slope",
+            "value": "18 dB",
+            "invalid": null,
+            "describedBy": null,
+            "validity": true
+          },
+          {
+            "name": "Min Freq",
+            "value": "NaN",
+            "invalid": null,
+            "describedBy": null,
+            "validity": true
+          },
+          {
+            "name": "Max Freq",
+            "value": "4 kHz",
+            "invalid": null,
+            "describedBy": null,
+            "validity": true
+          }
+        ]
+      },
+      "paramsUnchanged": false,
+      "voicePreserved": true,
+      "playing": true,
+      "metrics": [
+        {
+          "channel": 0,
+          "frames": 13230,
+          "sha256": "e01bc90631858e3782c0fc717ea3c2a5fb002422ba5a6c622c08fbbb14c5e5c2",
+          "allFinite": true,
+          "peak": 0.2752399444580078,
+          "mean": 0.2414793766477481,
+          "tones": [
+            {
+              "hz": 100,
+              "measuredAmplitude": 0.03373278725654369,
+              "expectedAmplitude": 0.033732788417642504,
+              "relativeError": 3.44204813412371e-08
+            },
+            {
+              "hz": 2000,
+              "measuredAmplitude": 3.160666940193855e-05,
+              "expectedAmplitude": 3.1606343252603596e-05,
+              "relativeError": 1.0319110070712265e-05
+            }
+          ]
+        },
+        {
+          "channel": 1,
+          "frames": 13230,
+          "sha256": "e01bc90631858e3782c0fc717ea3c2a5fb002422ba5a6c622c08fbbb14c5e5c2",
+          "allFinite": true,
+          "peak": 0.2752399444580078,
+          "mean": 0.2414793766477481,
+          "tones": [
+            {
+              "hz": 100,
+              "measuredAmplitude": 0.03373278725654369,
+              "expectedAmplitude": 0.033732788417642504,
+              "relativeError": 3.44204813412371e-08
+            },
+            {
+              "hz": 2000,
+              "measuredAmplitude": 3.160666940193855e-05,
+              "expectedAmplitude": 3.1606343252603596e-05,
+              "relativeError": 1.0319110070712265e-05
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Normal Stop produces silence",
+      "savedParams": {
+        "Resonance": "1.77",
+        "Slope": "18 dB",
+        "Min Freq": "NaN",
+        "Max Freq": "4 kHz"
+      },
+      "form": null,
+      "paramsUnchanged": true,
+      "voicePreserved": true,
+      "playing": false,
+      "metrics": [
+        {
+          "channel": 0,
+          "frames": 13230,
+          "sha256": "acedbfbf91fa460815912622829c4f72743ab9ce322d01e2b25badb49dd7d17d",
+          "allFinite": true,
+          "peak": 0.0,
+          "mean": 0.0,
+          "tones": []
+        },
+        {
+          "channel": 1,
+          "frames": 13230,
+          "sha256": "acedbfbf91fa460815912622829c4f72743ab9ce322d01e2b25badb49dd7d17d",
+          "allFinite": true,
+          "peak": 0.0,
+          "mean": 0.0,
+          "tones": []
+        }
+      ]
+    }
+  ]
+}

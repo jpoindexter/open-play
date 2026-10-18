@@ -1,0 +1,323 @@
+{
+  "scope": "Pure LPF parser policy only; no browser/audio/vendor-range acceptance",
+  "passed": true,
+  "cases": [
+    {
+      "name": "Omitted fields use defaults",
+      "proposal": {},
+      "result": {
+        "ok": true,
+        "params": {
+          "Resonance": "1.77",
+          "Slope": "24 dB",
+          "Min Freq": "200 Hz",
+          "Max Freq": "20000 Hz"
+        },
+        "errors": {}
+      },
+      "inputUnchanged": true,
+      "passed": true
+    },
+    {
+      "name": "Units, exponent, whitespace normalize as one proposal",
+      "proposal": {
+        "Resonance": " 2e0 ",
+        "Slope": "18 dB/octave",
+        "Min Freq": ".4 kHz",
+        "Max Freq": "4e2 HZ",
+        "legacy": "keep"
+      },
+      "result": {
+        "ok": true,
+        "params": {
+          "Resonance": "2",
+          "Slope": "18 dB",
+          "Min Freq": "400 Hz",
+          "Max Freq": "400 Hz",
+          "legacy": "keep"
+        },
+        "errors": {}
+      },
+      "inputUnchanged": true,
+      "passed": true
+    },
+    {
+      "name": "Numeric lower boundaries",
+      "proposal": {
+        "Resonance": 0.1,
+        "Slope": 6,
+        "Min Freq": 20,
+        "Max Freq": 20
+      },
+      "result": {
+        "ok": true,
+        "params": {
+          "Resonance": "0.1",
+          "Slope": "6 dB",
+          "Min Freq": "20 Hz",
+          "Max Freq": "20 Hz"
+        },
+        "errors": {}
+      },
+      "inputUnchanged": true,
+      "passed": true
+    },
+    {
+      "name": "Numeric upper boundaries",
+      "proposal": {
+        "Resonance": 12,
+        "Slope": 48,
+        "Min Freq": 20000,
+        "Max Freq": 20000
+      },
+      "result": {
+        "ok": true,
+        "params": {
+          "Resonance": "12",
+          "Slope": "48 dB",
+          "Min Freq": "20000 Hz",
+          "Max Freq": "20000 Hz"
+        },
+        "errors": {}
+      },
+      "inputUnchanged": true,
+      "passed": true
+    },
+    {
+      "name": "Reject invalid frequency \"\"",
+      "proposal": {
+        "Resonance": "1.77",
+        "Slope": "12 dB",
+        "Min Freq": "",
+        "Max Freq": "400 Hz"
+      },
+      "result": {
+        "ok": false,
+        "params": null,
+        "errors": {
+          "Min Freq": "Enter a frequency from 20 to 20,000 Hz, using Hz or kHz."
+        }
+      },
+      "inputUnchanged": true,
+      "passed": true
+    },
+    {
+      "name": "Reject invalid frequency \"NaN\"",
+      "proposal": {
+        "Resonance": "1.77",
+        "Slope": "12 dB",
+        "Min Freq": "NaN",
+        "Max Freq": "400 Hz"
+      },
+      "result": {
+        "ok": false,
+        "params": null,
+        "errors": {
+          "Min Freq": "Enter a frequency from 20 to 20,000 Hz, using Hz or kHz."
+        }
+      },
+      "inputUnchanged": true,
+      "passed": true
+    },
+    {
+      "name": "Reject invalid frequency \"Infinity\"",
+      "proposal": {
+        "Resonance": "1.77",
+        "Slope": "12 dB",
+        "Min Freq": "Infinity",
+        "Max Freq": "400 Hz"
+      },
+      "result": {
+        "ok": false,
+        "params": null,
+        "errors": {
+          "Min Freq": "Enter a frequency from 20 to 20,000 Hz, using Hz or kHz."
+        }
+      },
+      "inputUnchanged": true,
+      "passed": true
+    },
+    {
+      "name": "Reject invalid frequency \"1e999\"",
+      "proposal": {
+        "Resonance": "1.77",
+        "Slope": "12 dB",
+        "Min Freq": "1e999",
+        "Max Freq": "400 Hz"
+      },
+      "result": {
+        "ok": false,
+        "params": null,
+        "errors": {
+          "Min Freq": "Enter a frequency from 20 to 20,000 Hz, using Hz or kHz."
+        }
+      },
+      "inputUnchanged": true,
+      "passed": true
+    },
+    {
+      "name": "Reject invalid frequency \"400 Hz junk\"",
+      "proposal": {
+        "Resonance": "1.77",
+        "Slope": "12 dB",
+        "Min Freq": "400 Hz junk",
+        "Max Freq": "400 Hz"
+      },
+      "result": {
+        "ok": false,
+        "params": null,
+        "errors": {
+          "Min Freq": "Enter a frequency from 20 to 20,000 Hz, using Hz or kHz."
+        }
+      },
+      "inputUnchanged": true,
+      "passed": true
+    },
+    {
+      "name": "Reject invalid frequency null",
+      "proposal": {
+        "Resonance": "1.77",
+        "Slope": "12 dB",
+        "Min Freq": null,
+        "Max Freq": "400 Hz"
+      },
+      "result": {
+        "ok": false,
+        "params": null,
+        "errors": {
+          "Min Freq": "Enter a frequency from 20 to 20,000 Hz, using Hz or kHz."
+        }
+      },
+      "inputUnchanged": true,
+      "passed": true
+    },
+    {
+      "name": "Reject invalid frequency {}",
+      "proposal": {
+        "Resonance": "1.77",
+        "Slope": "12 dB",
+        "Min Freq": {},
+        "Max Freq": "400 Hz"
+      },
+      "result": {
+        "ok": false,
+        "params": null,
+        "errors": {
+          "Min Freq": "Enter a frequency from 20 to 20,000 Hz, using Hz or kHz."
+        }
+      },
+      "inputUnchanged": true,
+      "passed": true
+    },
+    {
+      "name": "Reject invalid frequency []",
+      "proposal": {
+        "Resonance": "1.77",
+        "Slope": "12 dB",
+        "Min Freq": [],
+        "Max Freq": "400 Hz"
+      },
+      "result": {
+        "ok": false,
+        "params": null,
+        "errors": {
+          "Min Freq": "Enter a frequency from 20 to 20,000 Hz, using Hz or kHz."
+        }
+      },
+      "inputUnchanged": true,
+      "passed": true
+    },
+    {
+      "name": "Frequency below supported range",
+      "proposal": {
+        "Resonance": "1.77",
+        "Slope": "12 dB",
+        "Min Freq": "19 Hz",
+        "Max Freq": "400 Hz"
+      },
+      "result": {
+        "ok": false,
+        "params": null,
+        "errors": {
+          "Min Freq": "Enter a frequency from 20 to 20,000 Hz, using Hz or kHz."
+        }
+      },
+      "inputUnchanged": true,
+      "passed": true
+    },
+    {
+      "name": "Frequency above supported range",
+      "proposal": {
+        "Resonance": "1.77",
+        "Slope": "12 dB",
+        "Min Freq": "400 Hz",
+        "Max Freq": "20.001 kHz"
+      },
+      "result": {
+        "ok": false,
+        "params": null,
+        "errors": {
+          "Max Freq": "Enter a frequency from 20 to 20,000 Hz, using Hz or kHz."
+        }
+      },
+      "inputUnchanged": true,
+      "passed": true
+    },
+    {
+      "name": "Reject whole crossed proposal",
+      "proposal": {
+        "Resonance": "2",
+        "Slope": "12 dB",
+        "Min Freq": "900 Hz",
+        "Max Freq": "800 Hz"
+      },
+      "result": {
+        "ok": false,
+        "params": null,
+        "errors": {
+          "Min Freq": "Min Freq must be at or below Max Freq.",
+          "Max Freq": "Max Freq must be at or above Min Freq."
+        }
+      },
+      "inputUnchanged": true,
+      "passed": true
+    },
+    {
+      "name": "Reject slope not multiple of six",
+      "proposal": {
+        "Resonance": "1.77",
+        "Slope": "19 dB",
+        "Min Freq": "400 Hz",
+        "Max Freq": "400 Hz"
+      },
+      "result": {
+        "ok": false,
+        "params": null,
+        "errors": {
+          "Slope": "Enter a slope from 6 to 48 dB/octave, in steps of 6."
+        }
+      },
+      "inputUnchanged": true,
+      "passed": true
+    },
+    {
+      "name": "Reject resonance and slope together",
+      "proposal": {
+        "Resonance": "-1",
+        "Slope": "54 dB",
+        "Min Freq": "400 Hz",
+        "Max Freq": "400 Hz"
+      },
+      "result": {
+        "ok": false,
+        "params": null,
+        "errors": {
+          "Resonance": "Enter a resonance from 0.1 to 12.",
+          "Slope": "Enter a slope from 6 to 48 dB/octave, in steps of 6."
+        }
+      },
+      "inputUnchanged": true,
+      "passed": true
+    }
+  ]
+}
