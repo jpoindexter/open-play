@@ -3,6 +3,7 @@
 import {mappedValue} from './midi.js';
 import {createJogBend} from './jog-bend.js';
 import {createMIDIJogTouch} from './midi-jog-touch.js';
+import {normalizeEQBoost} from './mixer-curves.js';
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 const key=m=>JSON.stringify([m.deviceId||'',m.type,m.channel,m.number]);
 const continuous=['fader start','tempo ignore','tempo','trim','high','mid','low','filter','level','jog nudge','jog bend','jog surface'];
@@ -189,8 +190,8 @@ export function createDeckMIDIRouter({state,engine,actions,applyFX=()=>{},onChan
   if(action==='level')next=relative?(d.level??.8)+value/127:value;
   else if(action==='trim')next=relative?(d.trim??1)+value/64:1+bipolar(value);
   else if(action==='filter')next=relative?(d.filter||0)+value/64:bipolar(value);
-  else next=relative?(d[action]||0)+value*.5:(value<center?bipolar(value)*24:bipolar(value)*6);
-  const [lo,hi]=action==='level'?[0,1]:action==='trim'?[0,2]:action==='filter'?[-1,1]:[-24,6];
+  else next=relative?(d[action]||0)+value*.5:(value<center?bipolar(value)*24:bipolar(value)*normalizeEQBoost(state.settings?.['EQ Boost']));
+  const [lo,hi]=action==='level'?[0,1]:action==='trim'?[0,2]:action==='filter'?[-1,1]:[-24,normalizeEQBoost(state.settings?.['EQ Boost'])];
   d[action]=clamp(next,lo,hi);engine.mix(d.index,action,d[action]);repaintMix(d,action);return true;
  }
  function resetInput(deviceId){

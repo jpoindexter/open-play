@@ -14,3 +14,13 @@ export function crossfaderGain(position,assignment,settings){
  return settings.curve==='Power'?t**(2**(1-2*settings.amount)):Math.min(1,t/Math.max(.02,1-settings.amount));
 }
 export function upfaderGain(level,settings){return clamp(finite(level,0),0,1)**(4**(1-2*settings.upfader));}
+export const eqBands=['low','mid','high'];
+export function normalizeEQBoost(value){return value===12||value==='12 dB'?12:6;}
+export function boundedEQGain(value,boost){
+ if(!Number.isFinite(Number(value)))throw new TypeError('EQ needs a finite gain.');
+ return clamp(Number(value),-24,normalizeEQBoost(boost));
+}
+export function rescaleEQGain(value,previous,next){
+ const gain=boundedEQGain(value??0,previous);
+ return gain>0?gain*normalizeEQBoost(next)/normalizeEQBoost(previous):gain;
+}

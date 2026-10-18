@@ -18,7 +18,7 @@ import {createSyncTempoHandoff} from './sync-tempo-handoff.js';
 import {createReverseCensorPlan} from './reverse-censor-plan.js';
 import {CensorBacking} from './censor-backing.js';
 import {createBeatgrid} from './beatgrid.js';
-import {normalizeMixerSettings,crossfaderGain,upfaderGain} from './mixer-curves.js';
+import {normalizeMixerSettings,crossfaderGain,upfaderGain,eqBands,normalizeEQBoost,boundedEQGain,rescaleEQGain} from './mixer-curves.js';
 export class AudioEngine {
   constructor() {
     this.ctx = null;
@@ -29,6 +29,7 @@ export class AudioEngine {
     this.chunks = [];
     this.cross = 0;
     this.mixerSettings=normalizeMixerSettings();
+    this.eqBoost=6;
     this.masterLevel = 0.55;
     this.monitorSettings=normalizeMonitorSettings();
     this.onEnd = () => {};
@@ -804,6 +805,13 @@ export class AudioEngine {
     this.setCross(this.cross);
     return structuredClone(this.mixerSettings);
   }
+  setEQBoost(value){
+    const previous=this.eqBoost,next=normalizeEQBoost(value);
+    this.eqBoost=next;
+    if(this.ctx&&next!==previous)for(let i=0;i<this.nodes.length;i++)for(const band of eqBands)
+      this.mix(i,band,rescaleEQGain(this.nodes[i].eqTargets?.[band],previous,next));
+    return next;
+  }
   setCross(value) {
     if(!Number.isFinite(Number(value)))throw new TypeError('Crossfader needs a finite position.');
     this.cross = Math.max(-1,Math.min(1,Number(value)));
@@ -845,6 +853,7 @@ export class AudioEngine {
       n[kind] = value;
       this.setCross(this.cross);
     } else if (["low", "mid", "high"].includes(kind)) {
+      value=boundedEQGain(value,this.eqBoost);
       (n.eqTargets||=( {} ))[kind]=value;
       n[kind].gain.setTargetAtTime(value, this.ctx.currentTime, 0.015);
       n.stemMonitor?.[kind].gain.setTargetAtTime(value,this.ctx.currentTime,.015);

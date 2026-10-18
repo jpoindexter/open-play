@@ -12,7 +12,7 @@ import { implementedEffects } from "./effects.js";
 import {createFXTempo,normalizeFXTempoSettings,effectiveFXBPM,fxTempoPolicy} from './fx-tempo.js';
 import {videoSetupField,videoSetupValue,applyVideoSetupSetting,resetVideoSetupSettings} from './video-settings.js';
 import {createAudioOutputSelection} from './audio-output.js';
-import {mixerFields,mixerSettingsFromPreferences} from './mixer-curves.js';
+import {mixerFields,mixerSettingsFromPreferences,eqBands,normalizeEQBoost,rescaleEQGain} from './mixer-curves.js';
 import {
   ruleFields,
   ruleOperators,
@@ -53,6 +53,12 @@ export function createPanels(a) {
   const monitorState=()=>({mix:percent('Cue Mix',.5),volume:percent('Cue Volume',.1),masterCue:s.settings['Master Cue']===true,splitCue:s.settings['Split Cue']===true,mono:s.settings['Output Mode']==='Mono'});
   engine.setMonitorSettings(monitorState());
   engine.setMixerSettings(mixerSettingsFromPreferences(s.settings));
+  function applyEQBoost(){
+    const previous=engine.eqBoost,next=normalizeEQBoost(s.settings['EQ Boost']);
+    for(const deck of s.decks)for(const band of eqBands)deck[band]=rescaleEQGain(deck[band],previous,next);
+    engine.setEQBoost(next);
+  }
+  applyEQBoost();
   const audioOutputs=createAudioOutputSelection(engine,{onChange:updateOutputStatus});
   function updateOutputStatus(value=audioOutputs.snapshot()){
     const target=$('#audio-output-status');if(!target)return;
@@ -601,7 +607,7 @@ export function createPanels(a) {
         })
         .join(
           "",
-        )}</div>${tab==='Mixer'?'<p class="muted">Cue Mix, Cue Volume, Master Cue, Split Cue and Mono output control real audio buses. Crossfader type, curve amount (0 slow · 100 fast), reverse, disable, A/B/Thru assignment and upfader curve also affect live audio. The midpoint Linear/upfader defaults preserve the previous mix. Curve equations are independent approximations of documented behavior; exact vendor curves are unmeasured. Cue volume10% is unity; higher values add up to12dB. Four-channel routing is applied separately in Devices. Physical headphone/master sockets and exact reference curves remain unverified.</p>':''}${sharedVideo?'<p class="muted">Recording resolution, media treatment and fade speed share the live Video controls. Fade speed runs from Slow (10s) to Fast (0.25s), using the existing independent linear duration. Match live output preserves the existing capture default. Other Video output preferences on this tab remain stored simulations.</p><p id="video-setup-status" role="status" aria-live="polite"></p>':''}<div class="form-actions">${tab === "MIDI" ? '<button id="open-mapping">Mapping editor</button>' : ""}${tab === "CD/Vinyl" ? '<button id="open-calibration">Calibration simulation</button>' : ""}${tab === "Library + Display" ? '<button id="open-providers">Provider settings</button>' : ""}${tab === "Audio" ? '<button id="open-devices">Audio output routing</button><button id="song-info">Livestream song info</button>' : ""}${tab === "FX" ? '<button id="open-fx">FX catalog & presets</button>' : ""}<button id="reset-settings">Reset this tab</button><button id="save-settings">Close</button></div>`,
+        )}</div>${tab==='Mixer'?'<p class="muted">EQ Boost changes the live positive EQ range to6dB or12dB for GUI and MIDI. Changing range preserves positive knob position; neutral and cuts stay unchanged. Cue Mix, Cue Volume, Master Cue, Split Cue and Mono output control real audio buses. Crossfader type, curve amount (0 slow · 100 fast), reverse, disable, A/B/Thru assignment and upfader curve also affect live audio. The midpoint Linear/upfader defaults preserve the previous mix. Curve equations are independent approximations of documented behavior; exact vendor curves are unmeasured. Cue volume10% is unity; higher values add up to12dB. Four-channel routing is applied separately in Devices. Physical headphone/master sockets and exact reference curves remain unverified.</p>':''}${sharedVideo?'<p class="muted">Recording resolution, media treatment and fade speed share the live Video controls. Fade speed runs from Slow (10s) to Fast (0.25s), using the existing independent linear duration. Match live output preserves the existing capture default. Other Video output preferences on this tab remain stored simulations.</p><p id="video-setup-status" role="status" aria-live="polite"></p>':''}<div class="form-actions">${tab === "MIDI" ? '<button id="open-mapping">Mapping editor</button>' : ""}${tab === "CD/Vinyl" ? '<button id="open-calibration">Calibration simulation</button>' : ""}${tab === "Library + Display" ? '<button id="open-providers">Provider settings</button>' : ""}${tab === "Audio" ? '<button id="open-devices">Audio output routing</button><button id="song-info">Livestream song info</button>' : ""}${tab === "FX" ? '<button id="open-fx">FX catalog & presets</button>' : ""}<button id="reset-settings">Reset this tab</button><button id="save-settings">Close</button></div>`,
       (body) => {
         body
           .querySelectorAll("[data-settings-tab]")
@@ -627,6 +633,7 @@ export function createPanels(a) {
               s.settings[input.dataset.setting] =
                 input.type === "checkbox" ? input.checked : input.value;
               if(monitorFields.has(input.dataset.setting))engine.setMonitorSettings(monitorState());
+              if(input.dataset.setting==='EQ Boost'){applyEQBoost();renderMixer();}
               if(mixerFields.has(input.dataset.setting)){engine.setMixerSettings(mixerSettingsFromPreferences(s.settings));renderMixer();}
               persist();
               if (input.dataset.setting === "Sync Mode") renderDecks();
@@ -649,7 +656,7 @@ export function createPanels(a) {
           }
           for (const [name, type, v] of settingsSchema[tab])
             if (type !== "section"&&!videoSetupField(name)) s.settings[name] = v;
-          if(tab==='Mixer'){engine.setMonitorSettings(monitorState());engine.setMixerSettings(mixerSettingsFromPreferences(s.settings));renderMixer();}
+          if(tab==='Mixer'){engine.setMonitorSettings(monitorState());engine.setMixerSettings(mixerSettingsFromPreferences(s.settings));applyEQBoost();renderMixer();}
           persist();
           settings(tab);
           if(sharedVideo&&s.panel==='video')refresh();
