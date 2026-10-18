@@ -1,0 +1,377 @@
+{
+  "checkpoint": 155,
+  "variant": "stock",
+  "buildRecord": {
+    "variant": "stock",
+    "referenceStereo": 0,
+    "processorKey": "signalsmith-stretch-reference-155-stock",
+    "command": [
+      "/Users/jasonpoindexter/Documents/GitHub/Open Play/local-evidence/toolchains/emsdk-open-play/upstream/emscripten/em++",
+      "/Users/jasonpoindexter/Documents/GitHub/Open Play/local-evidence/reference-policy-155/build-initial/source/web/emscripten/main.cpp",
+      "-o",
+      "/Users/jasonpoindexter/Documents/GitHub/Open Play/local-evidence/reference-policy-155/build-initial/stock-dsp.mjs",
+      "-I",
+      "/Users/jasonpoindexter/Documents/GitHub/Open Play/local-evidence/reference-policy-155/build-initial/source",
+      "-std=c++11",
+      "-O3",
+      "-ffast-math",
+      "-fno-exceptions",
+      "-fno-rtti",
+      "--pre-js",
+      "/Users/jasonpoindexter/Documents/GitHub/Open Play/local-evidence/reference-policy-155/build-initial/source/web/emscripten/pre.js",
+      "-Wall",
+      "-Wextra",
+      "-Wfatal-errors",
+      "-Wpedantic",
+      "-pedantic-errors",
+      "-sSINGLE_FILE=1",
+      "-sMODULARIZE=1",
+      "-sEXPORT_ES6=1",
+      "-sEXPORT_NAME=OpenPlayDSP155",
+      "-sENVIRONMENT=web,worker,shell",
+      "-sNO_EXIT_RUNTIME=1",
+      "-sFILESYSTEM=0",
+      "-sEXPORTED_RUNTIME_METHODS=HEAP8,UTF8ToString",
+      "-sINITIAL_MEMORY=512kb",
+      "-sALLOW_MEMORY_GROWTH=1",
+      "-sMEMORY_GROWTH_GEOMETRIC_STEP=0.5",
+      "-sABORTING_MALLOC=1",
+      "-sSTRICT=1",
+      "-sDYNAMIC_EXECUTION=0",
+      "-DOPEN_PLAY_REFERENCE_STEREO=0"
+    ],
+    "dspSHA256": "8e3fccea15f79dc8f6ee1540342e7d1d6c5f59c79560af0635586e8071d5a438",
+    "workletSHA256": "471cabf5b8fc3152c566a880005247b952023766cb1f45f3cb679a6783d89372"
+  },
+  "scope": "Matched rebuilt WASM/SRC with recorded154 startup and exact applied-render-quantum replacement order. Control receives first bank only; treatment receives both. Source heads/tails and full SRC ranges checked. First-bank future source PCM is made available at final first-bank acknowledgment, following production fill source semantics, before its seek visibility; not recorded append/transfer timing. Full original input retained; no append/drop, browser async transfer, bank-gate fades or physical output. Not old151 reproduction or full parity.",
+  "originalSHA256": "9b2f56148d7508d47c8bdda072400f7e9aedc549f3b86f13737bbb7d9158a247",
+  "browserOriginalSHA256": "17a3428bb0397108ad7d559313f84eb06cf79aaa2d325be3b98d8714c2c8fcb4",
+  "sourceHashes": {
+    "local-evidence/reference-policy-155/build-initial/stock-worklet.mjs": "471cabf5b8fc3152c566a880005247b952023766cb1f45f3cb679a6783d89372",
+    "local-evidence/reference-policy-155/build-initial/stock-dsp.mjs": "8e3fccea15f79dc8f6ee1540342e7d1d6c5f59c79560af0635586e8071d5a438",
+    "local-evidence/reference-policy-155/build-initial/build-manifest.json": "776deb4860dbcbb20e1ab3f23eb2778e5edce28c71712d1334d15274c25a92d3",
+    "prototype/pcm-resample.js": "8789e7cfc543c393830ad04e2d56e3359786eb6a4473ff08edda1c899fc19ae2",
+    "experiments/reference_policy_155.mjs": "88d72efb8ba0f987b7d1b7ca8afea73559ef9478a32af378e6c950930c315360"
+  },
+  "inspection": {
+    "baselineStart": 3.7481632653061223,
+    "baselineSeconds": 0.2,
+    "intervalStart": 8.809342403628118,
+    "intervalEnd": 10.242630385487528,
+    "windowSeconds": 0.01,
+    "alignment": "Recorded global frames only. Complete component PCM and three full browser raw streams; no offset/gain/phase fitting."
+  },
+  "cases": [
+    {
+      "deck": 1,
+      "keyShift": 3,
+      "observedStartup": {
+        "createdFrame": 8704,
+        "wasmReadyFrame": 8960,
+        "notReadyQuanta": 2,
+        "renderQuanta": 128,
+        "inactiveQuantaBeforeFirstActive": 36,
+        "firstActiveFrame": 16640,
+        "firstActiveCommand": {
+          "input": 0.8408964152537146,
+          "output": 0.43702947845804985,
+          "rate": 0.9249860567790861,
+          "semitones": 0
+        },
+        "inputLatencySeconds": 0.06,
+        "outputLatencySeconds": 0.06,
+        "seekHistoryFrames": 6615
+      },
+      "firstRenderFrame": 12032,
+      "replacementCount": 62,
+      "recordedFirstBankCalls": 26,
+      "recordedSecondBankCalls": 36,
+      "outputHashes": [
+        {
+          "case": "first-bank-only",
+          "channel": 0,
+          "frames": 545664,
+          "sha256": "688e6ac0b59b4b1783018e2de43e42521e9598ca55b1369a3b5d91c10453cb29"
+        },
+        {
+          "case": "first-bank-only",
+          "channel": 4,
+          "frames": 545664,
+          "sha256": "7828fbb92fab95b40d7d485377395d9970696e7b2c5a85ae2dedfa50e5ff69d0"
+        },
+        {
+          "case": "first-bank-only",
+          "channel": 12,
+          "frames": 545664,
+          "sha256": "1d23158fe269e15b0e40ad0b44c3384cd9dc489c3b9ddb240ff3338f51079bb7"
+        },
+        {
+          "case": "both-recorded-banks",
+          "channel": 0,
+          "frames": 545664,
+          "sha256": "688e6ac0b59b4b1783018e2de43e42521e9598ca55b1369a3b5d91c10453cb29"
+        },
+        {
+          "case": "both-recorded-banks",
+          "channel": 4,
+          "frames": 545664,
+          "sha256": "7828fbb92fab95b40d7d485377395d9970696e7b2c5a85ae2dedfa50e5ff69d0"
+        },
+        {
+          "case": "both-recorded-banks",
+          "channel": 12,
+          "frames": 545664,
+          "sha256": "c22bd561fd225de6ded125906ad10c2652148f31a2bf4191007e7516af592343"
+        }
+      ],
+      "syntheticFutureSourceAvailability": [
+        {
+          "case": "first-bank-only",
+          "syntheticOperations": 25,
+          "startFrame": 426461,
+          "endFrame": 1780010,
+          "availableAtFrame": 145920,
+          "firstSeekVisibilitySeconds": 9.857627570498414
+        },
+        {
+          "case": "both-recorded-banks",
+          "syntheticOperations": 25,
+          "startFrame": 426461,
+          "endFrame": 1780010,
+          "availableAtFrame": 145920,
+          "firstSeekVisibilitySeconds": 9.857627570498414
+        }
+      ],
+      "activeControlTreatment": [
+        {
+          "channel": 0,
+          "frames": 545664,
+          "bitIdentical": true,
+          "nonidenticalSamples": 0,
+          "maximumAbsoluteDifference": 0.0,
+          "rmsDifference": 0.0,
+          "firstDifferentGlobalFrame": null,
+          "lastDifferentGlobalFrame": null
+        },
+        {
+          "channel": 4,
+          "frames": 545664,
+          "bitIdentical": true,
+          "nonidenticalSamples": 0,
+          "maximumAbsoluteDifference": 0.0,
+          "rmsDifference": 0.0,
+          "firstDifferentGlobalFrame": null,
+          "lastDifferentGlobalFrame": null
+        }
+      ],
+      "ratios": [
+        {
+          "case": "first-bank-only",
+          "channel": 0,
+          "baselineRMS": 0.04242890937910446,
+          "minimum10msRMSRatio": 0.990335387075683,
+          "minimumAt": 9.389342403628119
+        },
+        {
+          "case": "first-bank-only",
+          "channel": 4,
+          "baselineRMS": 0.04242890944736541,
+          "minimum10msRMSRatio": 0.9903361015271904,
+          "minimumAt": 9.389342403628119
+        },
+        {
+          "case": "both-recorded-banks",
+          "channel": 0,
+          "baselineRMS": 0.04242890937910446,
+          "minimum10msRMSRatio": 0.990335387075683,
+          "minimumAt": 9.389342403628119
+        },
+        {
+          "case": "both-recorded-banks",
+          "channel": 4,
+          "baselineRMS": 0.04242890944736541,
+          "minimum10msRMSRatio": 0.9903361015271904,
+          "minimumAt": 9.389342403628119
+        }
+      ],
+      "newBankPositiveControlRMS": 0.04242631635784538,
+      "browserComparisons": [
+        {
+          "trace": "deck1-original",
+          "channel": 0,
+          "frames": 529200,
+          "bitIdentical": false,
+          "nonidenticalSamples": 529199,
+          "maximumAbsoluteDifference": 0.0018924463365692645,
+          "rmsDifference": 0.001291362130837296,
+          "firstDifferentGlobalFrame": 28416,
+          "lastDifferentGlobalFrame": 557615
+        },
+        {
+          "trace": "deck1-bank0-melody",
+          "channel": 4,
+          "frames": 529200,
+          "bitIdentical": false,
+          "nonidenticalSamples": 431805,
+          "maximumAbsoluteDifference": 0.0018923537572845817,
+          "rmsDifference": 0.0011632982014521285,
+          "firstDifferentGlobalFrame": 125810,
+          "lastDifferentGlobalFrame": 557615
+        },
+        {
+          "trace": "deck1-bank1-melody",
+          "channel": 12,
+          "frames": 529200,
+          "bitIdentical": false,
+          "nonidenticalSamples": 147360,
+          "maximumAbsoluteDifference": 0.0018777784425765276,
+          "rmsDifference": 0.0006759839487215198,
+          "firstDifferentGlobalFrame": 410255,
+          "lastDifferentGlobalFrame": 557615
+        }
+      ],
+      "inactivePopulationChangedObservedActiveOutputs": false
+    },
+    {
+      "deck": 2,
+      "keyShift": -2,
+      "observedStartup": {
+        "createdFrame": 12800,
+        "wasmReadyFrame": 13056,
+        "notReadyQuanta": 2,
+        "renderQuanta": 88,
+        "inactiveQuantaBeforeFirstActive": 40,
+        "firstActiveFrame": 22272,
+        "firstActiveCommand": {
+          "input": 1.122462048309373,
+          "output": 0.5647392290249433,
+          "rate": 0.8979696386474985,
+          "semitones": 0
+        },
+        "inputLatencySeconds": 0.06,
+        "outputLatencySeconds": 0.06,
+        "seekHistoryFrames": 6615
+      },
+      "firstRenderFrame": 17152,
+      "replacementCount": 49,
+      "recordedFirstBankCalls": 23,
+      "recordedSecondBankCalls": 26,
+      "outputHashes": [
+        {
+          "case": "first-bank-only",
+          "channel": 0,
+          "frames": 540544,
+          "sha256": "0a6132b7630b8b5d156a490b62d7798004efa6d2b6e750651c225571b0a15dcd"
+        },
+        {
+          "case": "first-bank-only",
+          "channel": 4,
+          "frames": 540544,
+          "sha256": "7e3ab9b7aebd05b0bd05cb74d2038bdd49d0b396566e4f1746e9eb86257d62d2"
+        },
+        {
+          "case": "first-bank-only",
+          "channel": 12,
+          "frames": 540544,
+          "sha256": "346458708e0286aa1e9de1003e7a54f715b529cef8e38239cb3b26a3477e74c8"
+        },
+        {
+          "case": "both-recorded-banks",
+          "channel": 0,
+          "frames": 540544,
+          "sha256": "485ba84659c3c99c7abfc1909614a2144a45ddba94afe917e720b8325cfe4eef"
+        },
+        {
+          "case": "both-recorded-banks",
+          "channel": 4,
+          "frames": 540544,
+          "sha256": "e624697a750a82e4d9cfec04bf431c156af0690bf9b4462f683c9229d22c0865"
+        },
+        {
+          "case": "both-recorded-banks",
+          "channel": 12,
+          "frames": 540544,
+          "sha256": "a4b9720fbee2eaad939135f4f6b0a20d239a4880b7cf98e5acaa9de243462171"
+        }
+      ],
+      "syntheticFutureSourceAvailability": [
+        {
+          "case": "first-bank-only",
+          "syntheticOperations": 14,
+          "startFrame": 544507,
+          "endFrame": 2376028,
+          "availableAtFrame": 145920,
+          "firstSeekVisibilitySeconds": 12.937938500857207
+        },
+        {
+          "case": "both-recorded-banks",
+          "syntheticOperations": 14,
+          "startFrame": 544507,
+          "endFrame": 2376028,
+          "availableAtFrame": 145920,
+          "firstSeekVisibilitySeconds": 12.937938500857207
+        }
+      ],
+      "activeControlTreatment": [
+        {
+          "channel": 0,
+          "frames": 540544,
+          "bitIdentical": false,
+          "nonidenticalSamples": 150259,
+          "maximumAbsoluteDifference": 0.011146624106913805,
+          "rmsDifference": 0.0022043584999098613,
+          "firstDifferentGlobalFrame": 407437,
+          "lastDifferentGlobalFrame": 557695
+        },
+        {
+          "channel": 4,
+          "frames": 540544,
+          "bitIdentical": false,
+          "nonidenticalSamples": 150259,
+          "maximumAbsoluteDifference": 0.011145639989990741,
+          "rmsDifference": 0.0022043585914852852,
+          "firstDifferentGlobalFrame": 407437,
+          "lastDifferentGlobalFrame": 557695
+        }
+      ],
+      "ratios": [
+        {
+          "case": "first-bank-only",
+          "channel": 0,
+          "baselineRMS": 0.04244180098892004,
+          "minimum10msRMSRatio": 0.9896830153946021,
+          "minimumAt": 9.209342403628117
+        },
+        {
+          "case": "first-bank-only",
+          "channel": 4,
+          "baselineRMS": 0.04244179995538854,
+          "minimum10msRMSRatio": 0.989683087237545,
+          "minimumAt": 9.209342403628117
+        },
+        {
+          "case": "both-recorded-banks",
+          "channel": 0,
+          "baselineRMS": 0.04244180098892004,
+          "minimum10msRMSRatio": 0.9174976559611532,
+          "minimumAt": 9.279342403628117
+        },
+        {
+          "case": "both-recorded-banks",
+          "channel": 4,
+          "baselineRMS": 0.04244179995538854,
+          "minimum10msRMSRatio": 0.9174971791797545,
+          "minimumAt": 9.279342403628117
+        }
+      ],
+      "newBankPositiveControlRMS": 0.04242051527772047,
+      "browserComparisons": [],
+      "inactivePopulationChangedObservedActiveOutputs": true
+    }
+  ],
+  "allActiveControlsBitIdentical": false,
+  "allComparedBrowserStreamsBitIdentical": false,
+  "original151FailureStillOpen": true,
+  "rootCauseResolved": false,
+  "fullParityAcceptance": false
+}

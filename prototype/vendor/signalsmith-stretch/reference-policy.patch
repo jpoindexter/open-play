@@ -1,0 +1,35 @@
+--- a/signalsmith-stretch.h
++++ b/signalsmith-stretch.h
+@@ -524,6 +524,14 @@
+ 	std::vector<Sample> tmpProcessBuffer, tmpPreRollBuffer;
+ 
+ 	int channels = 0, bands = 0;
++	// Open Play reserved groups: original stereo anchors shared analysis.
++	// Other geometries retain the upstream reference policy.
++	int phaseReferenceChannels() const {
++#if defined(OPEN_PLAY_REFERENCE_STEREO) && OPEN_PLAY_REFERENCE_STEREO
++		if (channels == 18) return std::min(channels, 2);
++#endif
++		return channels;
++	}
+ 	int prevInputOffset = -1;
+ 	bool didSeek = false;
+ 	Sample seekTimeFactor = 1;
+@@ -728,7 +736,7 @@
+ 				// Find maximum-energy channel and calculate that
+ 				int maxChannel = 0;
+ 				Sample maxEnergy = predictionsForChannel(0)[b].energy;
+-				for (int c = 1; c < channels; ++c) {
++				for (int c = 1; c < phaseReferenceChannels(); ++c) {
+ 					Sample e = predictionsForChannel(c)[b].energy;
+ 					if (e > maxEnergy) {
+ 						maxChannel = c;
+@@ -824,7 +832,7 @@
+ 				for (int b = 0; b < bands; ++b) {
+ 					Sample e = _impl::norm(bins[b].input);
+ 					bins[b].inputEnergy = e; // Used for interpolating prediction energy
+-					energy[b] += e;
++					if (c < phaseReferenceChannels()) energy[b] += e;
+ 				}
+ 			}
+ 			for (int b = 0; b < bands; ++b) {

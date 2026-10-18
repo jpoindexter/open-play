@@ -18,6 +18,7 @@ if (typeof exports === 'object' && typeof module === 'object')
   module.exports = SignalsmithStretch;
 else if (typeof define === 'function' && define['amd'])
   define([], () => SignalsmithStretch);
+import ReferenceStereoDSP from './SignalsmithStretch-open-play-reference-dsp.mjs';
 function registerWorkletProcessor(Module, audioNodeKey) {
 	class WasmProcessor extends AudioWorkletProcessor {
 		constructor(options) {
@@ -227,7 +228,8 @@ function registerWorkletProcessor(Module, audioNodeKey) {
 				} catch(error) {this.port.postMessage([messageId,{name:error.name,message:error.message},'error']);}
 			};
 			this.port.onmessage = dispatch;
-			Module().then(wasmModule => {
+			const createDSP = options.numberOfOutputs && options.outputChannelCount?.[0] === 18 ? ReferenceStereoDSP : Module;
+			createDSP().then(wasmModule => {
 				if(this.disposed)return;
 				this.wasmModule = wasmModule;
 				wasmModule._main();
