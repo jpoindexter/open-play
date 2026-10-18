@@ -190,7 +190,8 @@ function registerWorkletProcessor(Module, audioNodeKey) {
 							const next = chunk.slice();
 							for (let channel = 0; channel < sampleBuffers.length; channel++) next[firstChannel + channel] = sampleBuffers[channel];
 							this.audioBuffers[index] = next;
-							return {startFrame, endFrame:startFrame + length, firstChannel, channels:sampleBuffers.length};
+							return {startFrame, endFrame:startFrame + length, firstChannel, channels:sampleBuffers.length,
+								appliedFrame:currentFrame, appliedRenderQuanta:this.renderQuanta};
 						}
 						cursor += length;
 					}

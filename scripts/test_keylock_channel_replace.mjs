@@ -5,7 +5,7 @@ import {createHash} from 'node:crypto';
 const root=new URL('../',import.meta.url),path='prototype/vendor/signalsmith-stretch/SignalsmithStretch-open-play-replace.mjs';
 const source=await readFile(new URL(path,root),'utf8'),parent=await readFile(new URL('prototype/vendor/signalsmith-stretch/SignalsmithStretch-open-play-history.mjs',root),'utf8');
 assert.equal(source.split('\n')[9],parent.split('\n')[9]);
-const registry=new Map();globalThis.sampleRate=44100;globalThis.currentTime=0;
+const registry=new Map();globalThis.sampleRate=44100;globalThis.currentTime=0;globalThis.currentFrame=0;
 globalThis.AudioWorkletProcessor=class{constructor(){this.events=[];this.port={onmessage:null,postMessage:data=>this.events.push(data)};}};
 globalThis.registerProcessor=(name,ctor)=>registry.set(name,ctor);
 await import(new URL(path,root));
@@ -21,8 +21,10 @@ check('Invalid geometry/boundary cannot mutate any retained channel',()=>{
  before.forEach((chunk,i)=>chunk.forEach((channel,c)=>assert.equal(processor.audioBuffers[i][c],channel)));
 });
 check('Accepted replacement preserves original refs, DSP instance, geometry and schedule',()=>{
+ globalThis.currentFrame=128;globalThis.currentTime=128/sampleRate;
+ assert(processor.process([[]],[Array.from({length:10},()=>new Float32Array(128))],{}));
  const module=processor.wasmModule,timeline=JSON.stringify(processor.timeMap),first=processor.audioBuffers[0],replacement=Array.from({length:8},(_,c)=>new Float32Array(22050).fill((c+1)/100));
- const ack=call('replaceBufferChannels',0,2,replacement);assert.notEqual(ack[2],'error');assert.deepEqual(ack[1],{startFrame:0,endFrame:22050,firstChannel:2,channels:8});
+ const ack=call('replaceBufferChannels',0,2,replacement);assert.notEqual(ack[2],'error');assert.deepEqual(ack[1],{startFrame:0,endFrame:22050,firstChannel:2,channels:8,appliedFrame:128,appliedRenderQuanta:1});
  assert.equal(processor.audioBuffers[0][0],first[0]);assert.equal(processor.audioBuffers[0][1],first[1]);assert.equal(processor.wasmModule,module);assert.equal(processor.channels,10);assert.equal(JSON.stringify(processor.timeMap),timeline);
  replacement.forEach((channel,c)=>assert.equal(processor.audioBuffers[0][c+2],channel));
 });

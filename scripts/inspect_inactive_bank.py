@@ -100,10 +100,13 @@ def browser(path):
     gains = [g for g in r['mainThreadTimerDelays'] if r['generations'][1]['startedAt'] <= g['audioTime'] <= r['generations'][1]['returnedAt']]
     assert gains
     startup = [s['remote'].get('startup') for s in r['samples'][0]['decks']]
-    if r.get('diagnosticCheckpoint') == 153:
+    if r.get('diagnosticCheckpoint') in [153,154]:
         assert all(startup)
         assert all(p['startFrame']+p['frames'] <= round(r['stopAt']*sr) and not p['errors'] for p in r['pcm'])
         assert all(s['firstActiveFrame'] is not None and s['inactiveQuantaBeforeFirstActive'] >= 0 for s in startup)
+    if r.get('diagnosticCheckpoint') == 154:
+        assert all(isinstance(c.get('appliedRenderQuanta'),int) and c['appliedRenderQuanta'] >= 0 and
+                   isinstance(c.get('appliedFrame'),int) for c in r['calls'])
     return dict(checkpoint=r.get('diagnosticCheckpoint',152),scope=r['scope'],originalSHA256=hashlib.sha256(raw).hexdigest(),originalBytes=len(raw),sourceHashes=r['sourceBefore'],startup=startup,
                 inspection=dict(baselineStart=baseline_start,baselineSeconds=.2,intervalStart=start,intervalEnd=end,windowSeconds=.01,
                                 note='Full original PCM finite/hash/quanta checked; these fixed event-relative windows diagnose the second preparation only. No fitted alignment/gain or repaired PCM.'),
@@ -112,8 +115,8 @@ def browser(path):
                 chunkFrames=[c['endFrame']-c['startFrame'] for c in calls],gainSamplesDuringPreparation=len(gains),
                 sampledGainsStableDuringPreparation=all(g['deck1StemGains']==[0,0,1,1,1] and g['bankGains']==[[1]*4,[0]*4] and g['groupGains']==[1]*9 for g in gains),
                 dipReproducedInThisTrace=any(row.get('belowOriginalFloor',False) for row in rows),
-                prior151FailureStillOpen=True,productionChanged=r.get('diagnosticCheckpoint') == 153,
-                productionChangeScope='Startup observability only' if r.get('diagnosticCheckpoint') == 153 else 'None',
+                prior151FailureStillOpen=True,productionChanged=r.get('diagnosticCheckpoint') in [153,154],
+                productionChangeScope={153:'Startup observability only',154:'Replacement render-clock acknowledgment metadata only'}.get(r.get('diagnosticCheckpoint'),'None'),
                 browserDipExplained=False,fullParityAcceptance=False)
 
 

@@ -1,0 +1,20 @@
+{
+  "passed": true,
+  "scope": "Actual WASM readiness and new RPC ownership/validation only; no browser, production engine or audio continuity acceptance.",
+  "sourceSHA256": "b50b6b4271d76a2926a913b356e0dc3c64e7135f2939817ab239dd1c68064971",
+  "embeddedWASMUnchanged": true,
+  "checks": [
+    {
+      "name": "Invalid geometry/boundary cannot mutate any retained channel",
+      "passed": true
+    },
+    {
+      "name": "Accepted replacement preserves original refs, DSP instance, geometry and schedule",
+      "passed": true
+    },
+    {
+      "name": "Dropped chunk timestamps stay absolute and disposed RPC stays terminal",
+      "passed": true
+    }
+  ]
+}

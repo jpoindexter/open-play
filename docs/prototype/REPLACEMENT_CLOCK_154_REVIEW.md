@@ -1,0 +1,47 @@
+# Recorded replacement order exposes cross-channel coupling — checkpoint154
+
+18 October2026. **An actual-WASM differential now establishes that populating the inactive bank can change the original and selected old-Stem audio. The−2-semitone cohort reproduces this interaction. The earlier151 +3-semitone0.7320637461failure is still open; this is not a production audio fix or full parity.**
+
+## Actual browser observation
+
+The only production change adds `appliedFrame` and `appliedRenderQuanta` to the existing successful replacement acknowledgment. No DSP, SRC, gain, source-fill or schedule behavior changed. The existing actual-WASM replacement contract test executes three ownership/validation/terminal-disposal cases, now also checking the acknowledgment after an actual render. Its historical10-channel fixture is an RPC-contract check, not a current eighteen-channel app geometry claim.
+
+`stem-bank-trace-154-harness.html/.js` executes the same declared four-deck, two-generation, physically muted pre-Stop path. Its complete21584879byte original is retained privately at `local-evidence/stem-resource-150/browser-exports/852078ad6f654b6986751629bcf35304.json`, SHA256`17a3428bb0397108ad7d559313f84eb06cf79aaa2d325be3b98d8714c2c8fcb4`. Small browser receipt and independent inspector match. All seven full twelve-second left streams contain529200finite/hash-checked samples with contiguous quantum clocks and no producer errors. All four owners survive bank0→1. This is authored330/550Hz PCM/direct decoded-Stem attachment, not new inference, music-quality, native or physical acceptance.
+
+The−2deck monitor's minimum10msRMS ratio is0.9351930751 during the fixed second-preparation interval; the +3monitor is0.9904152981. Both remain above the unchanged0.85floor. This nonreproduction does not replace151's failed cohort, and this pre-Stop protocol makes no new Stop-acoustics claim. Checkpoint152's separate post-Stop clock failure remains retained.
+
+## Controlled replacement replay
+
+`experiments/replacement_clock_154.mjs` recreates each recorded +3/−2processor's startup, eighteen-channel geometry, first active command and replacement order against the actual production WASM. The +3case replays62calls (26first-bank/36second-bank); the−2case49calls (23/26). Every acknowledgment's frame equals the derived first ready render frame plus128×recorded render count. No main-thread time fitting is needed. Actual SRC copies match their whole prepared ranges and every recorded Melody head/tail. Each case has two processors: control receives the first bank only; treatment receives both recorded banks. Original and first-bank data/schedule are otherwise identical.
+
+Full component arrays are retained and independently hash/finite checked:545664samples per output for +3 and540544for−2. On +3, original and old Melody remain bit-identical between control and treatment. On−2, both change when only the inactive bank is populated:150259samples differ per stream, first global frame407437 (9.2389342404s), maximum absolute differences0.00966138/0.00966290. The original control's minimum ratio is0.9899878577, treatment0.9351930767; old Melody0.9899892926versus0.9351930740. Their treatment minima occur at9.2793424036s, matching the new browser monitor's minimum time and ratio to numerical precision. This is direct causal evidence of cross-channel dependence in this controlled fixture, although no raw−2browser tap was captured to prove full sample identity there.
+
+The first replay's full +3browser comparison **fails** beginning frame435392. It retained original input but omitted subsequent first-bank source fills: first-bank PCM ended at426461prepared frames, and the known seek window reaches that missing future input around9.85763s. Consequently old Melody eventually becomes zero in the replay. All full failed comparisons/originals remain retained in `replacement-clock-154-results.json`; no capture is cropped, corrected or relabeled as passing.
+
+## Source-aware availability control
+
+Production `keylock-shadow-live.js` publishes each prepared bank's source objects after its final replacement, and subsequent fills copy from those objects. `experiments/replacement_sources_154.mjs` therefore repeats the differential with declared future first-bank PCM availability. It materializes only the future region beyond the final recorded first-bank replacement after that bank's final acknowledgment, before the region reaches any DSP seek window. For +3this is25synthetic operations from426461to1780010, available frame145920 before seek visibility9.8576275705s; for−2,14operations from544507to2376028, same availability frame, before visibility12.9379385009s.
+
+These are source-availability controls, **not recorded browser append/transfer timings**. All original input stays retained from startup; append/drop, transfer cost, gate fades, total resource/deadline behavior and the unrecorded151startup are outside scope. The inspector validates contiguous future availability, the common recorded final acknowledgment and availability before seek visibility. This change follows source semantics; no time/phase/gain fitting is applied.
+
+With that declared availability, every sample of all three complete +3browser raw streams matches the treatment replay bit for bit:529200original,529200old Melody and529200new Melody samples. The−2control/treatment differences remain unchanged. This gives a reproducible differential tied to actual browser timing and inputs, while preserving the first replay's failed whole comparison. Canonical extended receipt: `replacement-sources-154-results.json`; initial diagnostic: `replacement-clock-154-results.json`.
+
+```sh
+python3 scripts/inspect_replacement_clock_154.py local-evidence/replacement-clock-154/source-aware-replay/original.json local-evidence/stem-resource-150/browser-exports/852078ad6f654b6986751629bcf35304.json /tmp/open-play-replacement154.json
+```
+
+The output must not exist. Source/PCM hashes, recorded call order, whole component arrays and all three complete browser raw streams are checked. `allActiveControlsBitIdentical` correctly remains false; this is a discovered interaction, not a passing isolation gate.
+
+## Source interpretation and exact next implementation
+
+The pinned [official Signalsmith source](https://github.com/Signalsmith-Audio/signalsmith-stretch/blob/a670068d9aeb64913331d5cc29337b19a457a7df/signalsmith-stretch.h#L724-L812) selects the highest-energy channel per frequency bin, then phase-locks the others to it. Energy smoothing/peak selection also spans channels. This is a plausible mechanism for the observed compiled-WASM dependence when partially filled, inaudible channels enter the analysis. The header reads version1.3.2, matching the package; we have not established that this exact commit/compiler produced the published WASM. The differential proves the interaction; attributing its exact instructions to this source remains an inference until a matched build/patch experiment.
+
+Next: build stock and one narrowly changed candidate from the same pinned MIT sources/toolchain. Candidate policy: for reserved eighteen-channel Stem groups, anchor analysis/phase reference to the original stereo pair while retaining per-channel prediction energy and stereo relations. Keep ordinary geometries unchanged. Compare the same recorded-source differential before any browser promotion. Then execute the actual four-deck preparation/first-pad/mute/restore/Stop path and its known failure contract. No arbitrary gain compensation, threshold relaxation, phase fitting, architectural rewrite or silent replacement of failed recordings.
+
+Official Emscripten4.0.18 is now installed only under ignored `local-evidence/toolchains/emsdk-open-play`; `em++ --version` executes and identifies tagfae107463db4d20a276a27ede393048deaeebf76. Pinned upstream main.cpp/pre.js/header/MIT licenses and Linear dependency inputs are downloaded with hashes. These are build inputs, not an already compiled or accepted candidate. No shell startup file was edited and no native app was built. Read `docs/research/keylock-reference-154-toolchain.json` and source receipt. Do not run the upstream install-latest script; use the resolved local version.
+
+## Preserved goal and limits
+
+Previous turn153 was progress: committed startup observability, actual browser/replay evidence, plan/Trello/handoff. This turn adds exact replacement-clock evidence, a causal−2differential and a source-aware full +3browser replay, changing the next action from blind timing sweeps to a bounded reference-policy implementation. No new Claude consultation/full completeness audit was launched.
+
+Full110groups/522requirements/9beta/26release,55extendedFX and actual Stems/keylock remain the goal. All full-parity flags stay false. Musical SCNet reconstruction failure, old151dip, transport/scratch/reverse/loops/Stem Slip, full resources/deadlines/native/physical/reference and other feature gaps remain open. Frozen0.1.23/tested272alternative mappings/launchers/user8768 are untouched. No controller readiness request, timed MIDI capture or hardware output. Official Serato source remains separate from `Alternative mapping — author/project`. Factory19252assignments/145of197definitions and Hercules356/18unresolved stay unchanged. Per-feature Codex/Claude model-effort recommendations remain dated planning metadata. Preserve the exact original prompt suffix in the full handoff.
