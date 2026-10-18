@@ -24,5 +24,5 @@ const checks=[];
  checks.push({name:'Stop during committed handover exits readiness wait without restarting or rolling back the prepared cache',passed:true});
 }
 const result={checkpoint:148,passed:true,scope:'Real attachStems with controlled clock/cold voice; no browser/audio/native acceptance.',engineSHA256:createHash('sha256').update(readFileSync(new URL('../prototype/engine.js',import.meta.url))).digest('hex'),checks};
-writeFileSync(new URL('../docs/prototype/stem-ready-contract-148-results.json',import.meta.url),JSON.stringify(result,null,2)+'\n',{flag:'wx'});
+writeFileSync(process.argv[2]||new URL('../docs/prototype/stem-ready-contract-148-results.json',import.meta.url),JSON.stringify(result,null,2)+'\n',{flag:'wx'});
 console.log(JSON.stringify(result,null,2));

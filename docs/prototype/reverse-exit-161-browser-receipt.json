@@ -1,0 +1,143 @@
+{
+  "workflowCompleted": true,
+  "sourceStable": true,
+  "import": {
+    "id": "local-cb2e756d1fa4ce264767a4f6adbaf9e3f69a040db7889d830abdb429cc1a5ac3",
+    "contentHash": "cb2e756d1fa4ce264767a4f6adbaf9e3f69a040db7889d830abdb429cc1a5ac3",
+    "filename": "SDRNR-private-research-159.mp3",
+    "bytes": 167100,
+    "type": "MP3",
+    "storage": "saved",
+    "duration": 6.8
+  },
+  "input": {
+    "frames": 299880,
+    "sampleRate": 44100,
+    "channels": 2,
+    "duration": 6.8
+  },
+  "ready": {
+    "status": "Ready · SCNet-large official · four real audio sources",
+    "job": "8266a41f62fc4fc5b92808dd3d988cec",
+    "model": "SCNet-large official",
+    "buffers": [
+      {
+        "frames": 299880,
+        "sampleRate": 44100,
+        "channels": 2,
+        "duration": 6.8
+      },
+      {
+        "frames": 299880,
+        "sampleRate": 44100,
+        "channels": 2,
+        "duration": 6.8
+      },
+      {
+        "frames": 299880,
+        "sampleRate": 44100,
+        "channels": 2,
+        "duration": 6.8
+      },
+      {
+        "frames": 299880,
+        "sampleRate": 44100,
+        "channels": 2,
+        "duration": 6.8
+      }
+    ]
+  },
+  "stages": [
+    {
+      "name": "raw-loop-exit-reverse",
+      "mask": [
+        false,
+        true,
+        true,
+        true
+      ],
+      "rate": 1,
+      "keylock": false,
+      "keyShift": 0,
+      "reverse": true,
+      "syncState": "tempo"
+    },
+    {
+      "name": "raw-forward-return",
+      "mask": [
+        false,
+        true,
+        true,
+        true
+      ],
+      "rate": 1,
+      "keylock": false,
+      "keyShift": 0,
+      "reverse": false,
+      "syncState": "tempo"
+    },
+    {
+      "name": "raw-natural-start",
+      "mask": [
+        false,
+        true,
+        true,
+        true
+      ],
+      "rate": 1,
+      "keylock": false,
+      "keyShift": 0,
+      "reverse": true,
+      "syncState": "tempo"
+    },
+    {
+      "name": "keylock-key3-loop-exit-reverse",
+      "mask": [
+        false,
+        true,
+        true,
+        true
+      ],
+      "rate": 1,
+      "keylock": true,
+      "keyShift": 3,
+      "reverse": true,
+      "syncState": "tempo"
+    },
+    {
+      "name": "keylock-key3-forward-return",
+      "mask": [
+        false,
+        true,
+        true,
+        true
+      ],
+      "rate": 1,
+      "keylock": true,
+      "keyShift": 3,
+      "reverse": false,
+      "syncState": "tempo"
+    },
+    {
+      "name": "keylock-key3-natural-start",
+      "mask": [
+        false,
+        true,
+        true,
+        true
+      ],
+      "rate": 1,
+      "keylock": true,
+      "keyShift": 3,
+      "reverse": true,
+      "syncState": "tempo"
+    }
+  ],
+  "errors": [],
+  "receipt": {
+    "id": "7c5aa8b64de3472382e964e5d66dbe3a",
+    "bytes": 7892367,
+    "sha256": "c960185d3760b2b84ef2b7a052f180de78330a65a001591168b217cf0e461c3b",
+    "duplicate": false
+  }
+}

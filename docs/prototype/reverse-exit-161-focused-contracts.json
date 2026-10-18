@@ -1,0 +1,26 @@
+[
+  {
+    "command": "node scripts/test_smart_sync_loops.mjs",
+    "exitCode": 0,
+    "stdout": "{\"passed\":true,\"scope\":\"Smart Sync loop geometry/state with engine collaborators; no acoustic/native/hardware proof\",\"checks\":[\"bar alignment inside active loop\",\"different-BPM whole-bar loops engage Beat Sync\",\"short loop degrades bar lock to Tempo Sync without seek\",\"restore whole bar allows explicit re-Sync\",\"warped loop clock is passed to backend and keylock may use loop backend while reverse bar alignment still refuses early; existing reverse loop keeps Tempo Sync clock and Play, non-loop reverse clock allowed while bar alignment still refuses\"]}\n",
+    "stderr": ""
+  },
+  {
+    "command": "node scripts/test_sync_tempo_handoff.mjs",
+    "exitCode": 0,
+    "stdout": "{\"passed\":true,\"scope\":\"Two audio-time barrier ownership/failure policy; no actual audio/native/hardware proof\",\"checks\":[\"all preparation ready before common output time\",\"all future starts armed before any group commit\",\"render failure aborts owners and rejects waits\",\"missed lead rejects group instead of late commit\"]}\n",
+    "stderr": ""
+  },
+  {
+    "command": "node scripts/test_stem_activation_ready.mjs",
+    "exitCode": 1,
+    "stdout": "",
+    "stderr": "node:fs:560\n  return binding.open(\n                 ^\n\nError: EEXIST: file already exists, open '/Users/jasonpoindexter/Documents/GitHub/Open Play/docs/prototype/stem-ready-contract-148-results.json'\n    at Object.openSync (node:fs:560:18)\n    at writeFileSync (node:fs:2444:35)\n    at file:///Users/jasonpoindexter/Documents/GitHub/Open%20Play/scripts/test_stem_activation_ready.mjs:27:1 {\n  errno: -17,\n  code: 'EEXIST',\n  syscall: 'open',\n  path: '/Users/jasonpoindexter/Documents/GitHub/Open Play/docs/prototype/stem-ready-contract-148-results.json'\n}\n\nNode.js v22.23.2\n"
+  },
+  {
+    "command": "node scripts/test_pending_smart_sync_start.mjs",
+    "exitCode": 0,
+    "stdout": "{\"passed\":true,\"scope\":\"Smart Sync pending-start policy with controlled rate/synchronize collaborators; real GUI/MIDI/phase/cancel behavior checked separately\",\"checks\":[\"Play waits for pending Sync and aligns once\",\"Current-owner cancellation leaves Sync armed and playback stopped\",\"Track replacement cancels pending Sync/start\",\"External transport token cancels queued start\",\"Sync failure propagates without an unsynced fallback\"]}\n",
+    "stderr": ""
+  }
+]

@@ -360,16 +360,19 @@ export class AudioEngine {
       d.position=reversePlan?reversePlan.duration-ack.position:ack.position;d.anchorPosition=d.position;d.anchorTime=when;d.playing=true;
     }finally{if(!committed)transport?.dispose();}
   }
-  async startForwardKeylock(d, buffers, controller, current, {positionAt, priorClock,handoff=null} = {}) {
+  async startForwardKeylock(d, buffers, controller, current, {positionAt, priorClock,handoff=null,reverse=false} = {}) {
     const track = d.track, old = this.voices.get(d.index), initiallyPlaying = d.playing, oldClock = priorClock || this.voiceClock(d, this.voices.get(d.index));
     let adapter, committed = false;
     try {
       await this.waitForVoiceRetirement(d.index, controller.signal);
       if (!current()) return;
       const prospectiveGrid=this.onGridTimeline?.(d,{position:this.position(d),when:this.ctx.currentTime});
-      adapter = await this.createForwardKeylock({buffers, reserveStems:true, position: this.position(d), rate: d.rate,
+      const reversePlan=reverse?createReverseCensorPlan(track,prospectiveGrid.bpm):null;
+      const playbackPosition=position=>reversePlan?reversePlan.duration-position:position;
+      if(reversePlan)buffers=buffers.map(buffer=>this.reverseBuffer(track.id,buffer));
+      adapter = await this.createForwardKeylock({buffers, reserveStems:true, position: playbackPosition(this.position(d)), rate: reversePlan?reversePlan.rateAt(playbackPosition(this.position(d))):d.rate,
         resamplePitch:true,
-        pitchRateMap:prospectiveGrid?[{position:0,rate:prospectiveGrid.bpm/prospectiveGrid.grid[0].bpm},...prospectiveGrid.grid.slice(1).map(node=>({position:node.time,rate:prospectiveGrid.bpm/node.bpm}))]:null,
+        pitchRateMap:reversePlan?.points|| (prospectiveGrid?[{position:0,rate:prospectiveGrid.bpm/prospectiveGrid.grid[0].bpm},...prospectiveGrid.grid.slice(1).map(node=>({position:node.time,rate:prospectiveGrid.bpm/node.bpm}))]:null),
         keylock: !!d.keylock, semitones: d.keyShift || 0, signal: controller.signal,
         onEvent: event => {
           const backing=this.voices.get(d.index)?.censorBacking;
@@ -377,12 +380,12 @@ export class AudioEngine {
           const shadow=this.deckScratchShadows.get(d.index);
           if(shadow?.adapter===adapter){
             if(event.type==='error')shadow.fail(Object.assign(Error(event.error.message),{name:event.error.name}));
-            if(event.type==='ended'){this.pause(d);d.position=track.duration;this.onEnd(d);}
+            if(event.type==='ended'){this.pause(d);d.position=reversePlan?0:track.duration;this.onEnd(d);}
             return;
           }
           if (this.voices.get(d.index)?.liveKeylock !== adapter) return;
-          if (event.type === 'ended') {this.pause(d,{preserveStemExit:true});d.position=track.duration;this.onEnd(d);}
-          if (event.type === 'error') {const position = adapter.position(); this.pause(d); d.position = position; this.onProcessing(d); this.onError?.(Object.assign(new Error(event.error.message), {name: event.error.name}));}
+          if (event.type === 'ended') {this.pause(d,{preserveStemExit:true});d.position=reversePlan?0:track.duration;this.onEnd(d);}
+          if (event.type === 'error') {const position = playbackPosition(adapter.position()); this.pause(d); d.position = position; this.onProcessing(d); this.onError?.(Object.assign(new Error(event.error.message), {name: event.error.name}));}
         }});
       if (!current()) return;
       // Preparation can advance the old audible clock. Choose its position AT
@@ -393,10 +396,12 @@ export class AudioEngine {
       if (initiallyPlaying && old === this.voices.get(d.index)) position = oldClock(when);
       if (positionAt) position = positionAt(when);
       if (!Number.isFinite(position) || position < 0 || position > track.duration) throw new RangeError("Invalid synchronized source position.");
-      if (position >= track.duration) position = initiallyPlaying ? track.duration : 0;
-      const gridTimeline=this.onGridTimeline?.(d,{position,when});
+      if (!reversePlan && position >= track.duration) position = initiallyPlaying ? track.duration : 0;
+      const forwardTimeline=this.onGridTimeline?.(d,{position,when});
+      const reversedTimeline=reversePlan?createBeatgrid(reversePlan.track).timeline({position:playbackPosition(position),when,bpm:forwardTimeline.bpm}):null;
+      const gridTimeline=reversedTimeline?{...forwardTimeline,reverse:true,clock:at=>playbackPosition(reversedTimeline.clock(at)),rateAt:at=>reversedTimeline.rateAt(at),events:reversePlan.events(playbackPosition(position),when)}:forwardTimeline;
       if(gridTimeline && typeof adapter.startTimeline !== 'function')throw new Error('This pitch backend cannot schedule Beat Warp Markers.');
-      const ack = gridTimeline ? await adapter.startTimeline({position,when,events:gridTimeline.events}) : await adapter.start({position, when});
+      const ack = gridTimeline ? await adapter.startTimeline({position:playbackPosition(position),when,events:gridTimeline.events}) : await adapter.start({position, when});
       if(handoff)await handoff.arm(d.index);
       if (!current()) return;
       const voice = {sources: [], liveKeylock: adapter, liveOwnerController: controller, gridTimeline, reservedStems:adapter.reservedStems, stemsReady:buffers.length===5, stemGains: [],
@@ -404,7 +409,7 @@ export class AudioEngine {
       this.routeOrdinaryVoice(d, voice, adapter.outputs, buffers.length === 5 || adapter.reservedStems, {when: ack.when, reuseVoice: old});
       committed = true;
       this.retireVoiceAt(d.index, old, ack.when);
-      d.position = ack.position; d.anchorPosition = ack.position; d.anchorTime = ack.when; d.playing = ack.playing;
+      d.position = playbackPosition(ack.position); d.anchorPosition = d.position; d.anchorTime = ack.when; d.playing = ack.playing;
     } finally {if (!committed) await adapter?.dispose();}
   }
   async start(d, {positionAt, priorClock,handoff=null,preparedStems} = {}) {
@@ -462,8 +467,8 @@ export class AudioEngine {
       if(d.loop&&track.gridWarpMarkers?.length&&this.onGridTimeline?.(d,{position:d.position,when:this.ctx.currentTime})){
         await this.startWarpLoop(d,buffers,controller,current,{positionAt,priorClock,keylock,semitones:shift,handoff});return;
       }
-      if (transformed && !d.reverse && !d.loop) {
-        await this.startForwardKeylock(d, buffers, controller, current, {positionAt, priorClock,handoff});
+      if (transformed && !d.loop && (!d.reverse || this.onGridTimeline?.(d,{position:d.position,when:this.ctx.currentTime}))) {
+        await this.startForwardKeylock(d, buffers, controller, current, {positionAt, priorClock,handoff,reverse:!!d.reverse});
         return;
       }
       if (transformed) {
@@ -494,10 +499,14 @@ export class AudioEngine {
       }
       if (!d.reverse && d.position >= track.duration) d.position = 0;
       const when = syncWhen ?? this.ctx.currentTime + .01;
-      const gridTimeline = this.onGridTimeline?.(d,{position:d.position,when});
-      if (gridTimeline && (transformed || d.reverse || d.loop)) throw new Error("Warped Sync with keylock, pitch shift, reverse or loops is not available yet.");
-      const old=handoff?this.voices.get(d.index):null;
-      if(!handoff)this.stopSource(d.index, { preserveStemExit: true });
+      let gridTimeline = this.onGridTimeline?.(d,{position:d.position,when});
+      if(gridTimeline&&d.reverse){
+        const plan=createReverseCensorPlan(track,gridTimeline.bpm),reversed=createBeatgrid(plan.track).timeline({position:track.duration-d.position,when,bpm:gridTimeline.bpm});
+        gridTimeline={...gridTimeline,reverse:true,events:plan.events(track.duration-d.position,when),clock:at=>track.duration-reversed.clock(at),rateAt:at=>reversed.rateAt(at)};
+      }
+      if (gridTimeline && (transformed || d.loop)) throw new Error("Warped Sync needs its loop or live pitch transport for this combination.");
+      const old=handoff||positionAt?this.voices.get(d.index):null;
+      if(!handoff&&!old)this.stopSource(d.index, { preserveStemExit: true });
       const sources = buffers.map((buffer) => {
         const source = this.ctx.createBufferSource();
         source.buffer = buffer;
@@ -510,14 +519,14 @@ export class AudioEngine {
           (d.reverse ? track.duration - d.loopIn : d.loopOut) / scale;
         return source;
       });
-      if(handoff){
-        const voice={sources,timelineScale:scale,gridTimeline,stemGains:[],handoffBefore:old?{until:when,owner:old,clock:priorClock,rate:at=>this.voiceRateAt(d,old,at)}:null};let committed=false;
+      if(handoff||old){
+        const voice={sources,timelineScale:scale,gridTimeline,stemGains:[],handoffBefore:old?{until:when,owner:old,clock:priorClock||this.voiceClock(d,old),rate:at=>this.voiceRateAt(d,old,at)}:null};let committed=false;
         try{
-          sources.forEach(source=>source.start(when,Math.max(0,Math.min(source.buffer.duration-1/source.buffer.sampleRate,d.position/scale))));
-          await handoff.arm(d.index);if(!current())return;
+          sources.forEach(source=>source.start(when,Math.max(0,Math.min(source.buffer.duration-1/source.buffer.sampleRate,(d.reverse?track.duration-d.position:d.position)/scale))));
+          await handoff?.arm(d.index);if(!current())return;
           this.routeOrdinaryVoice(d,voice,sources,!!stems,{when,reuseVoice:old});committed=true;this.retireVoiceAt(d.index,old,when);
           d.anchorPosition=d.position;d.anchorTime=when;d.playing=true;
-          sources[0].onended=()=>{if(this.voices.get(d.index)!==voice)return;this.stopSource(d.index,{preserveStemExit:true});d.position=track.duration;d.playing=false;this.onEnd(d);};
+          sources[0].onended=()=>{if(this.voices.get(d.index)!==voice)return;this.stopSource(d.index,{preserveStemExit:true});d.position=d.reverse?0:track.duration;d.playing=false;this.onEnd(d);};
           return;
         }finally{if(!committed)this.disposeVoice(d.index,voice);}
       }
@@ -617,7 +626,7 @@ export class AudioEngine {
     if(this.voices.get(d.index)?.gridTimeline){
       const was=d.playing||d.processing;this.pause(d,{preserveStemExit:true});
       d.position=Math.max(0,Math.min(d.track.duration,p));
-      if(was&&d.position<d.track.duration)await this.start(d);
+      if(was&&(d.reverse?d.position>0:d.position<d.track.duration))await this.start(d);
       return;
     }
     const live = this.voices.get(d.index)?.liveKeylock;

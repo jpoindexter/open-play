@@ -63,10 +63,10 @@ export function createSmartSync({engine, state}) {
     if (!Number.isFinite(rate) || rate < .25 || rate > 4) throw new Error('The matched tempo is outside the current transport range.');
     return rate;
   }
-  function validateTransport(deck, primary, allowReverseLoop=false) {
+  function validateTransport(deck, primary, allowReverseClock=false) {
     for (const d of [deck,primary]) {
       requireGrid(d.track);
-      if ((d.reverse && !(allowReverseLoop && d.loop)) || (d.stemSlip || 'off') !== 'off')
+      if ((d.reverse && !allowReverseClock) || (d.stemSlip || 'off') !== 'off')
         throw new Error('This Smart Sync path currently requires forward decks without Stem Slip.');
       loopBounds(d);
 

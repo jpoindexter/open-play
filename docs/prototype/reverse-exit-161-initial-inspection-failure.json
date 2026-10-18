@@ -1,0 +1,77 @@
+{
+  "checkpoint": 161,
+  "originalBytes": 7892367,
+  "originalSHA256": "c960185d3760b2b84ef2b7a052f180de78330a65a001591168b217cf0e461c3b",
+  "workflowControlsCompleted": true,
+  "wholeStreamAcceptance": false,
+  "badStreams": [
+    {
+      "name": "raw-natural-start",
+      "channel": 0,
+      "errors": [
+        {
+          "expected": 485120,
+          "actual": 484992
+        },
+        {
+          "expected": 544768,
+          "actual": 544640
+        }
+      ]
+    },
+    {
+      "name": "raw-natural-start",
+      "channel": 1,
+      "errors": [
+        {
+          "expected": 485120,
+          "actual": 484992
+        },
+        {
+          "expected": 544768,
+          "actual": 544640
+        }
+      ]
+    },
+    {
+      "name": "keylock-key3-natural-start",
+      "channel": 0,
+      "errors": [
+        {
+          "expected": 887296,
+          "actual": 887168
+        }
+      ]
+    },
+    {
+      "name": "keylock-key3-natural-start",
+      "channel": 1,
+      "errors": [
+        {
+          "expected": 887296,
+          "actual": 887168
+        }
+      ]
+    }
+  ],
+  "naiveLinearExpectedRelativeRMSE": [
+    0.7888999572862512,
+    0.8152573895596869,
+    0.7938077446632511,
+    0.8158656140288602
+  ],
+  "lagDiagnosticOnlyNeverAcceptance": [
+    {
+      "name": "raw-loop-exit-reverse",
+      "lagFrames": -21,
+      "relativeRMSError": 0.19061227157841207
+    },
+    {
+      "name": "raw-forward-return",
+      "lagFrames": -24,
+      "relativeRMSError": 0.23453458622036014
+    }
+  ],
+  "initialInspectorExitCode": 1,
+  "reason": "Strict complete timestamp check correctly refuses four natural-end streams; naive linear SRC expectation is also not native AudioBufferSource. Originals/criteria retained."
+}

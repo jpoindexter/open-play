@@ -1,0 +1,65 @@
+{
+  "checkpoint": 161,
+  "functionalTransportSubsetPassed": true,
+  "checks": {
+    "loopExitAndForwardRawDirection": true,
+    "selectedKeylockedAudioPositive": true,
+    "actualNaturalStatesAtZeroAndRetired": true,
+    "unmodifiedNaturalRawTailSamplesSilent": true,
+    "wholeMasterDecodeFiniteAndAudible": true,
+    "explicitStopPassed": true
+  },
+  "initialWholeStreamGatePassed": false,
+  "combinedStrictFollowupMeasurementGatePassed": false,
+  "retainedFailedFollowupReport": "docs/prototype/reverse-exit-161-followup-results.json",
+  "naturalTailSamples": [
+    {
+      "name": "raw-natural-start",
+      "channel": 0,
+      "originalPCM_SHA256": "13d77531190d4cb31cb40c865270855ae61c5cee55c5a44b904df14742ece990",
+      "finalTailSamples": 22050,
+      "peak": 0.0,
+      "sampleOrderOnlyNoClockClaim": true,
+      "wholeProducerStreamAccepted": false
+    },
+    {
+      "name": "raw-natural-start",
+      "channel": 1,
+      "originalPCM_SHA256": "28ae1b8ee46c70d4bf8a666ad06d65072188bc570dd13aa62ea6a5b260e458f1",
+      "finalTailSamples": 22050,
+      "peak": 0.0,
+      "sampleOrderOnlyNoClockClaim": true,
+      "wholeProducerStreamAccepted": false
+    },
+    {
+      "name": "keylock-key3-natural-start",
+      "channel": 0,
+      "originalPCM_SHA256": "369cd956f7cab483b2d0d47d0f8719707e217fd8293f604eeb9f59bb2a7f69fc",
+      "finalTailSamples": 22050,
+      "peak": 0.0,
+      "sampleOrderOnlyNoClockClaim": true,
+      "wholeProducerStreamAccepted": false
+    },
+    {
+      "name": "keylock-key3-natural-start",
+      "channel": 1,
+      "originalPCM_SHA256": "16010fa07867c6d71797d74546b84d20d59b39937b971985cf1edb12ae3da925",
+      "finalTailSamples": 22050,
+      "peak": 0.0,
+      "sampleOrderOnlyNoClockClaim": true,
+      "wholeProducerStreamAccepted": false
+    }
+  ],
+  "codecSilentPeaks": [
+    [
+      1.317503347308957e-06,
+      1.109241111407755e-06
+    ],
+    [
+      1.5558167376639176e-07,
+      1.6629721244498796e-07
+    ]
+  ],
+  "interpretation": "Actual Loop-off/non-loop reverse/keylock/forward return/0-second end are evidenced. Four natural-end producer streams stay invalid. Fixed lossy-container silence gate remains false; do not repair PCM, fit delay/gain, raise the old gate or alter production DSP for codec residue. Raw tails are only sample-order silence, not elapsed-time/contiguous-clock acceptance. Full parity/quality/reference/native/hardware remain open.",
+  "fullParityAcceptance": false
+}

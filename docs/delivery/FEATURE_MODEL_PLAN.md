@@ -25,13 +25,13 @@ Planning-table statuses are a dated baseline. Current scoped implementation evid
 | DEK-001 | Load, unload and deck focus | gpt-6.1-sol / high | claude-sonnet-5 / medium | Research pending |
 | DEK-002 | Play, pause, seek and end-of-track | gpt-6-astra / high | claude-opus-5 / high | Research pending |
 | DEK-003 | Cue and hot cues | gpt-6-astra / high | claude-opus-5 / high | Research pending |
-| DEK-004 | Manual, automatic and saved loops | gpt-6-astra / high | claude-opus-5 / high | Actual eight-beat musical reverse loop/wrap/forward return recorded; non-loop exit/edits/reference open (plan160) |
+| DEK-004 | Manual, automatic and saved loops | gpt-6-astra / high | claude-opus-5 / high | Actual Loop-off keeps reverse/non-loop transport; source0 ends; failed acquisition/codec gates retained (plan161) |
 | DEK-005 | Beat jump | gpt-6-astra / high | claude-opus-5 / high | Research pending |
 | DEK-006 | Tempo fader and pitch ranges | gpt-6-astra / high | claude-opus-5 / high | Research pending |
-| DEK-007 | Key lock and independent key shift | gpt-6-astra / high | claude-opus-5 / high | Actual musical keylock-key3 reverse loop composition recorded; pitch/perceptual/reference open (plan160) |
+| DEK-007 | Key lock and independent key shift | gpt-6-astra / high | claude-opus-5 / high | Actual18channel keyed reverse/forward/end observed; pitch/transition/reference and measurement limits open (plan161) |
 | DEK-008 | Sync, master and phase | gpt-6-astra / high | claude-opus-5 / high | Research pending |
 | DEK-009 | Jog, nudge and scratching | gpt-6-astra / high | claude-opus-5 / high | Research pending |
-| DEK-010 | Slip and reverse modes | gpt-6-astra / high | claude-opus-5 / high | Persistent warped-loop reverse implemented/recorded; non-loop/exit/overlap/vendor policy open (plan160) |
+| DEK-010 | Slip and reverse modes | gpt-6-astra / high | claude-opus-5 / high | Non-loop reverse/Loop-off/forward return/0-end implemented and recorded; edits/overlap/reference open (plan161) |
 | DEK-011 | Two/four and extensible decks | gpt-6.1-sol / xhigh | claude-opus-5 / high | Research pending |
 | DEK-012 | Quantization and musical timing | gpt-6-astra / high | claude-opus-5 / high | Research pending |
 | MIX-001 | Channel gain, faders and mute | gpt-6-astra / high | claude-opus-5 / high | Research pending |
@@ -44,9 +44,9 @@ Planning-table statuses are a dated baseline. Current scoped implementation evid
 | FX-002 | Tempo-synced effect timing | gpt-6-astra / high | claude-opus-5 / high | Research pending |
 | SMP-001 | Sampler slots and banks | gpt-6.1-sol / high | claude-sonnet-5 / medium | Research pending |
 | SMP-002 | Sampler audio modes and routing | gpt-6-astra / high | claude-opus-5 / high | Research pending |
-| STM-001 | Local stem separation | gpt-6.1-sol / high | claude-sonnet-5 / high | Real selected SCNet sources recorded in raw/keylocked reverse loop; source quality/reference open (plan160) |
+| STM-001 | Local stem separation | gpt-6.1-sol / high | claude-sonnet-5 / high | Real selected cached sources reverse/non-loop/keylock recorded; source quality and failed measurement gates open (plan161) |
 | STM-002 | Stem mute/solo/mix controls | gpt-6-astra / high | claude-opus-5 / high | Research pending |
-| STM-003 | Stem cache/cancel/fallback | gpt-6.1-sol / xhigh | claude-opus-5 / high | Nine completed musical cache files+mtimes identical through reverse runs; context/resource lifecycle open (plan160) |
+| STM-003 | Stem cache/cancel/fallback | gpt-6.1-sol / xhigh | claude-opus-5 / high | Same nine musical cache files+mtimes; reverse end retires voice; stale preparation/context/resources open (plan161) |
 | REC-001 | Record the actual master mix | gpt-6-astra / high | claude-opus-5 / high | Research pending |
 | REC-002 | Recording limits and recovery | gpt-6.1-sol / xhigh | claude-opus-5 / high | Research pending |
 | AUD-001 | Output/input device selection | gpt-6-astra / xhigh | claude-opus-5 / xhigh | Research pending |
@@ -91,7 +91,7 @@ Planning-table statuses are a dated baseline. Current scoped implementation evid
 | DEK-015 | Temporary cue hold/release and continued playback | gpt-6-astra / high | claude-opus-5 / high | Research pending |
 | DEK-016 | Cue/loop names, colors, order and chronological preference | gpt-6.1-sol / high | claude-sonnet-5 / medium | Research pending |
 | DEK-017 | Loop roll and underlying timeline | gpt-6-astra / high | claude-opus-5 / high | Research pending |
-| DEK-018 | Smart sync state machine and relative-pitch takeover | gpt-6-astra / high | claude-opus-5 / high | Already-engaged reverse-loop clock/Play keeps Tempo Sync; exact vendor state/bar realignment open (plan160) |
+| DEK-018 | Smart sync state machine and relative-pitch takeover | gpt-6-astra / high | claude-opus-5 / high | Reverse non-loop Tempo Sync clock/Play allowed; forward bar alignment restricted; vendor state open (plan161) |
 | DEK-019 | Pitch Play and key sync | gpt-6-astra / high | claude-opus-5 / high | Research pending |
 | DEK-020 | Slicer and slicer loop | gpt-6-astra / high | claude-opus-5 / high | Research pending |
 | FX-003 | Advanced FX parameters, favorites and named presets | gpt-6.1-sol / high | claude-sonnet-5 / medium | Research pending |
