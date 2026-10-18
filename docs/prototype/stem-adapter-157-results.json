@@ -1,0 +1,58 @@
+{
+  "scope": "Executed real stems.js adapter with mocked network, decode and activation. Does not establish service inference, SCNet quality, browser UI, or audio routing.",
+  "passed": 13,
+  "checks": [
+    {
+      "name": "Matching callers share one promise, POST, decode/activation and all progress",
+      "passed": true
+    },
+    {
+      "name": "Progress listener failure cannot fail shared preparation or other listeners",
+      "passed": true
+    },
+    {
+      "name": "Late callers receive current worker progress and share the polling request",
+      "passed": true
+    },
+    {
+      "name": "A different backend conflicts without replacing or canceling active work",
+      "passed": true
+    },
+    {
+      "name": "Cancel during source decoding creates no server job and permits clean retry",
+      "passed": true
+    },
+    {
+      "name": "Immediate cancellation starts neither source decoding nor upload",
+      "passed": true
+    },
+    {
+      "name": "Cancel during POST deletes the returned job before any channel download",
+      "passed": true
+    },
+    {
+      "name": "Failed shared POST notifies both callers, releases active work, and can retry",
+      "passed": true
+    },
+    {
+      "name": "Cancellation during channel download skips arrayBuffer/decode and activation",
+      "passed": true
+    },
+    {
+      "name": "Cancellation during channel decode cannot activate partial or finished buffers",
+      "passed": true
+    },
+    {
+      "name": "A progress callback can cancel before upload without a subsequent POST",
+      "passed": true
+    },
+    {
+      "name": "Activation cancellation reaches its AbortSignal, preserves shared rejection and does not cancel completed cache",
+      "passed": true
+    },
+    {
+      "name": "Committed activation rejects late cancellation and keeps shared subscribers in the handover phase",
+      "passed": true
+    }
+  ]
+}

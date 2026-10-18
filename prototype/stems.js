@@ -1,16 +1,39 @@
 // Same-origin loopback preparation. Audio never leaves this computer.
-export function encodeWav(buffer) {
+const SINGLE_UPLOAD_BYTES = 128 * 1024 * 1024;
+const CHUNK_BYTES = 4 * 1024 * 1024;
+function wavHeader(buffer) {
   const channels = buffer.numberOfChannels, bytes = buffer.length * channels * 4;
-  if (bytes + 44 > 128 * 1024 * 1024) throw new Error('Decoded audio exceeds the 128 MiB local preparation limit.');
-  const result = new ArrayBuffer(44 + bytes), view = new DataView(result);
+  if (!Number.isSafeInteger(bytes) || bytes + 36 > 0xffffffff) throw new Error('Decoded audio exceeds the WAV format size limit.');
+  const result = new ArrayBuffer(44), view = new DataView(result);
   const text = (at, value) => [...value].forEach((c, i) => view.setUint8(at + i, c.charCodeAt(0)));
   text(0, 'RIFF'); view.setUint32(4, 36 + bytes, true); text(8, 'WAVE'); text(12, 'fmt ');
   view.setUint32(16, 16, true); view.setUint16(20, 3, true); view.setUint16(22, channels, true);
   view.setUint32(24, buffer.sampleRate, true); view.setUint32(28, buffer.sampleRate * channels * 4, true);
   view.setUint16(32, channels * 4, true); view.setUint16(34, 32, true); text(36, 'data'); view.setUint32(40, bytes, true);
-  const arrays = Array.from({length: channels}, (_, c) => buffer.getChannelData(c));
-  for (let i = 0, at = 44; i < buffer.length; i++) for (let c = 0; c < channels; c++, at += 4) view.setFloat32(at, arrays[c][i], true);
   return result;
+}
+export function* wavChunks(buffer, maximumBytes = CHUNK_BYTES) {
+  const header = wavHeader(buffer), channels = buffer.numberOfChannels, frameBytes = channels * 4;
+  if (!Number.isInteger(maximumBytes) || maximumBytes < 44 + frameBytes || maximumBytes > CHUNK_BYTES) throw new Error('Invalid WAV chunk size.');
+  const arrays = Array.from({length: channels}, (_, c) => buffer.getChannelData(c));
+  let frame = 0, first = true;
+  do {
+    const prefix = first ? 44 : 0;
+    const frames = Math.min(buffer.length - frame, Math.floor((maximumBytes - prefix) / frameBytes));
+    const part = new ArrayBuffer(prefix + frames * frameBytes), view = new DataView(part);
+    if (first) new Uint8Array(part).set(new Uint8Array(header));
+    for (let i = 0, at = prefix; i < frames; i++) for (let c = 0; c < channels; c++, at += 4) view.setFloat32(at, arrays[c][frame + i], true);
+    frame += frames; first = false;
+    yield part;
+  } while (frame < buffer.length);
+}
+export function encodeWav(buffer) {
+  const bytes = 44 + buffer.length * buffer.numberOfChannels * 4;
+  if (bytes > SINGLE_UPLOAD_BYTES) throw new Error('Decoded audio exceeds the 128 MiB single-request limit.');
+  const result = new Uint8Array(bytes);
+  let offset = 0;
+  for (const part of wavChunks(buffer)) { result.set(new Uint8Array(part), offset); offset += part.byteLength; }
+  return result.buffer;
 }
 const headers = {'X-Open-Play': 'local-prototype', 'Content-Type': 'audio/wav'};
 async function request(url, options) {
@@ -29,6 +52,7 @@ export function createStemPreparation(engine, decks, {onChange = () => {}} = {})
     job.cancelled = true;
     job.controller.abort();
     if (job.id && !job.committing) await request(`/api/stems/${job.id}`, {method:'DELETE', headers});
+    else if (job.uploadId) await request(`/api/stems/uploads/${job.uploadId}`, {method:'DELETE', headers});
   }
   function subscribe(job, update) {
     if (typeof update !== 'function') return;
@@ -71,8 +95,30 @@ export function createStemPreparation(engine, decks, {onChange = () => {}} = {})
       if (audio.duration > 600) throw new Error('Prototype preparation currently accepts tracks up to 10 minutes.');
       status('Sending decoded audio to the local worker…');
       cancelled();
-      const body = encodeWav(audio); cancelled();
-      let result = await request(`/api/stems?model=${encodeURIComponent(job.backend)}`, {method:'POST', headers, body});
+      const size = 44 + audio.length * audio.numberOfChannels * 4;
+      let result;
+      if (size <= SINGLE_UPLOAD_BYTES) {
+        const body = encodeWav(audio); cancelled();
+        result = await request(`/api/stems?model=${encodeURIComponent(job.backend)}`, {method:'POST', headers, body});
+      } else {
+        // Await begin/commit responses even after Cancel so their ownership IDs are not lost.
+        const upload = await request(`/api/stems/uploads?model=${encodeURIComponent(job.backend)}`, {
+          method:'POST', headers:{...headers,'Content-Type':'application/json'}, body:JSON.stringify({size}),
+        });
+        job.uploadId = upload.id; cancelled();
+        let offset = 0;
+        for (const body of wavChunks(audio)) {
+          cancelled();
+          const chunk = await request(`/api/stems/uploads/${job.uploadId}?offset=${offset}`, {
+            method:'POST', headers:{...headers,'Content-Type':'application/octet-stream'}, body, signal:job.controller.signal,
+          });
+          offset += body.byteLength;
+          if (chunk.received !== offset || chunk.size !== size) throw new Error('Local audio upload did not confirm its exact byte boundary.');
+          status(`Sending decoded audio to the local worker… ${Math.floor(offset / size * 100)}%`);
+        }
+        cancelled();
+        result = await request(`/api/stems/uploads/${job.uploadId}/commit`, {method:'POST', headers});
+      }
       job.id = result.id;
       if (job.cancelled) { await cancel(track); cancelled(); }
       while (result.state !== 'complete') {
@@ -109,9 +155,14 @@ export function createStemPreparation(engine, decks, {onChange = () => {}} = {})
       status(`Ready · ${result.model} · four real audio sources`);
       return result;
     } catch (error) {
-      status(error.name === 'AbortError' ? 'Cancelled · original audio preserved' : `Failed · ${error.message}`);
-      throw error;
+      const failure = job.cancelled || error.name === 'AbortError'
+        ? new DOMException('Preparation cancelled. Original audio is preserved.', 'AbortError') : error;
+      status(failure.name === 'AbortError' ? 'Cancelled · original audio preserved' : `Failed · ${failure.message}`);
+      throw failure;
     } finally {
+      if (job.uploadId && (!job.id || job.cancelled)) {
+        try { await request(`/api/stems/uploads/${job.uploadId}`, {method:'DELETE', headers}); } catch {}
+      }
       if (active.get(track.id) === job) active.delete(track.id);
       job.subscribers.clear();
     }

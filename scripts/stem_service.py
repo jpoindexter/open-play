@@ -20,6 +20,8 @@ class StemJobs:
         self.jobs = restore_complete(JOBS_ROOT)
         self.lock = threading.RLock()
         self.pool = ThreadPoolExecutor(max_workers=1, thread_name_prefix='stem-worker')
+        from stem_uploads import StemUploads
+        self.uploads = StemUploads(self, JOBS_ROOT / '.uploads')
 
     def runtime(self, backend="scnet"):
         # Backend/interpreter selection is explicit and never installs anything.
@@ -31,9 +33,24 @@ class StemJobs:
     def create(self, data, backend="scnet"):
         if len(data) < 44 or data[:4] != b'RIFF' or data[8:12] != b'WAVE':
             raise ValueError('Upload must be a decoded WAV file.')
+        return self._create(data, backend)
+
+    def create_file(self, path, backend="scnet"):
+        # Only the generated, closed upload file is handed here by StemUploads.
+        return self._create(path, backend)
+
+    def _create(self, source, backend):
         # Cached exports belong to the exact worker/postprocessor, not just audio/model.
+        self.runtime(backend)
         pipeline = b''.join((ROOT / 'scripts' / name).read_bytes() for name in ('stem_worker.py', 'stem_mix_consistency.py'))
-        key = hashlib.sha256(backend.encode() + hashlib.sha256(pipeline).digest() + data).hexdigest()
+        fingerprint = hashlib.sha256(backend.encode() + hashlib.sha256(pipeline).digest())
+        if isinstance(source, bytes):
+            fingerprint.update(source)
+        else:
+            with source.open('rb') as stream:
+                for block in iter(lambda: stream.read(1024 * 1024), b''):
+                    fingerprint.update(block)
+        key = fingerprint.hexdigest()
         with self.lock:
             for job in self.jobs.values():
                 if job['hash'] == key and job['state'] == 'complete':
@@ -48,7 +65,10 @@ class StemJobs:
             ident = uuid.uuid4().hex
             directory = JOBS_ROOT / ident
             directory.mkdir(parents=True)
-            (directory / 'input.wav').write_bytes(data)
+            if isinstance(source, bytes):
+                (directory / 'input.wav').write_bytes(source)
+            else:
+                source.replace(directory / 'input.wav')
             job = {'id': ident, 'hash': key, 'state': 'queued', 'directory': directory,
                    'process': None, 'error': None, 'backend': backend}
             self.jobs[ident] = job
@@ -184,6 +204,7 @@ class StemJobs:
             return path if path.is_file() else None
 
     def close(self):
+        self.uploads.close()
         for ident in list(self.jobs):
             self.cancel(ident)
         self.pool.shutdown(wait=False, cancel_futures=True)

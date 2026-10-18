@@ -7,6 +7,7 @@ import argparse
 import webbrowser
 import json
 from stem_service import StemJobs, MAX_BYTES
+from stem_uploads import CHUNK_BYTES
 
 JOBS = StemJobs()
 
@@ -38,6 +39,9 @@ class ReviewHandler(SimpleHTTPRequestHandler):
     def do_POST(self):
         if not self.permitted(mutation=True):
             return
+        parts = urlsplit(self.path).path.strip('/').split('/')
+        if parts[:3] == ['api', 'stems', 'uploads']:
+            return self.upload_post(parts)
         if urlsplit(self.path).path != '/api/stems':
             return self.send_error(404)
         try:
@@ -53,12 +57,38 @@ class ReviewHandler(SimpleHTTPRequestHandler):
         except (ValueError, OSError) as error:
             self.json_response({'error': str(error)}, 400)
 
+    def upload_post(self, parts):
+        try:
+            length = int(self.headers.get('Content-Length', '0'))
+            limit = 1024 if len(parts) == 3 else (0 if len(parts) == 5 else CHUNK_BYTES)
+            if not 0 <= length <= limit:
+                return self.json_response({'error': 'Audio upload request exceeds its chunk boundary.'}, 413)
+            self.connection.settimeout(30)
+            data = self.rfile.read(length)
+            if len(data) != length:
+                raise ValueError('Incomplete upload request.')
+            query = parse_qs(urlsplit(self.path).query)
+            if len(parts) == 3:
+                metadata = json.loads(data)
+                result = JOBS.uploads.begin(metadata.get('size'), query.get('model', ['scnet'])[0])
+            elif len(parts) == 4:
+                result = JOBS.uploads.append(parts[3], int(query.get('offset', ['-1'])[0]), data)
+            elif len(parts) == 5 and parts[4] == 'commit':
+                result = JOBS.uploads.commit(parts[3])
+            else:
+                return self.send_error(404)
+            self.json_response(result, 202 if len(parts) == 5 else 200)
+        except (ValueError, OSError, AttributeError) as error:
+            self.json_response({'error': str(error)}, 400)
+
     def do_DELETE(self):
         if not self.permitted(mutation=True):
             return
         parts = urlsplit(self.path).path.strip('/').split('/')
         try:
-            if len(parts) == 4 and parts[:2] == ['api', 'stems'] and parts[3] == 'cache':
+            if len(parts) == 4 and parts[:3] == ['api', 'stems', 'uploads']:
+                result = JOBS.uploads.cancel(parts[3])
+            elif len(parts) == 4 and parts[:2] == ['api', 'stems'] and parts[3] == 'cache':
                 result = JOBS.trash(parts[2])
             else:
                 result = JOBS.cancel(parts[2]) if len(parts) == 3 and parts[:2] == ['api', 'stems'] else None
