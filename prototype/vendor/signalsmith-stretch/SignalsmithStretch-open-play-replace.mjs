@@ -23,6 +23,11 @@ function registerWorkletProcessor(Module, audioNodeKey) {
 		constructor(options) {
 			super(options);
 			this.disposed = false;
+			this.createdFrame = typeof currentFrame === 'number' ? currentFrame : null;
+			this.wasmReadyFrame = null;
+			this.notReadyQuanta = this.renderQuanta = this.inactiveQuantaBeforeFirstActive = 0;
+			this.firstActiveFrame = null;
+			this.firstActiveCommand = null;
 			this.wasmReady = false;
 			this.wasmModule = null;
 			this.channels = 0;
@@ -55,6 +60,7 @@ function registerWorkletProcessor(Module, audioNodeKey) {
 					const buffers = new Set(this.audioBuffers.flat(1).map(channel => channel.buffer));
 					const memory = this.wasmModule?.exports?.memory?.buffer || this.wasmModule?.HEAP8?.buffer;
 					return {frame:currentFrame,sampleRate,channels:this.channels,
+						startup:{createdFrame:this.createdFrame,wasmReadyFrame:this.wasmReadyFrame,notReadyQuanta:this.notReadyQuanta,renderQuanta:this.renderQuanta,inactiveQuantaBeforeFirstActive:this.inactiveQuantaBeforeFirstActive,firstActiveFrame:this.firstActiveFrame,firstActiveCommand:this.firstActiveCommand,inputLatencySeconds:this.inputLatencySeconds,outputLatencySeconds:this.outputLatencySeconds,seekHistoryFrames:this.bufferLength},
 						retainedChunks:this.audioBuffers.length,startFrame:this.audioBuffersStart,endFrame:this.audioBuffersEnd,
 						retainedPCMViewBytes:this.audioBuffers.reduce((sum,chunk)=>sum+chunk.reduce((n,channel)=>n+channel.byteLength,0),0),
 						uniqueRetainedArrayBufferBytes:[...buffers].reduce((sum,buffer)=>sum+buffer.byteLength,0),
@@ -226,6 +232,7 @@ function registerWorkletProcessor(Module, audioNodeKey) {
 				wasmModule._main();
 				this.channels = options.numberOfOutputs ? options.outputChannelCount[0] : 2;
 				this.configure();this.wasmReady = true;
+				this.wasmReadyFrame = typeof currentFrame === 'number' ? currentFrame : null;
 				const methodArgCounts = {};
 				for(const key in remoteMethods)methodArgCounts[key]=remoteMethods[key].length;
 				this.port.postMessage(['ready',methodArgCounts]);
@@ -273,6 +280,7 @@ function registerWorkletProcessor(Module, audioNodeKey) {
 		process(inputList, outputList, parameters) {
 			if(this.disposed){outputList.forEach(output=>output.forEach(channel=>channel.fill(0)));return false;}
 			if (!this.wasmReady) {
+				this.notReadyQuanta++;
 				outputList.forEach(output => {
 					output.forEach(channel => {
 						channel.fill(0);
@@ -288,6 +296,14 @@ function registerWorkletProcessor(Module, audioNodeKey) {
 			}
 			let currentMapSegment = this.timeMap[0];
 
+			this.renderQuanta++;
+			if (this.firstActiveFrame === null) {
+				if (currentMapSegment.active) {
+					this.firstActiveFrame = typeof currentFrame === 'number' ? currentFrame : null;
+					this.firstActiveCommand = {input:currentMapSegment.input,output:currentMapSegment.output,rate:currentMapSegment.rate,semitones:currentMapSegment.semitones};
+				}
+				else this.inactiveQuantaBeforeFirstActive++;
+			}
 			let wasmModule = this.wasmModule;
 			wasmModule._setTransposeSemitones(currentMapSegment.semitones, currentMapSegment.tonalityHz/sampleRate);
 			wasmModule._setFormantSemitones(currentMapSegment.formantSemitones, currentMapSegment.formantCompensation);

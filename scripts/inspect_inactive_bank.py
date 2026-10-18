@@ -99,7 +99,12 @@ def browser(path):
     assert calls and all(c['channels'] == 8 and c['endFrame'] > c['startFrame'] for c in calls)
     gains = [g for g in r['mainThreadTimerDelays'] if r['generations'][1]['startedAt'] <= g['audioTime'] <= r['generations'][1]['returnedAt']]
     assert gains
-    return dict(checkpoint=152,scope=r['scope'],originalSHA256=hashlib.sha256(raw).hexdigest(),originalBytes=len(raw),sourceHashes=r['sourceBefore'],
+    startup = [s['remote'].get('startup') for s in r['samples'][0]['decks']]
+    if r.get('diagnosticCheckpoint') == 153:
+        assert all(startup)
+        assert all(p['startFrame']+p['frames'] <= round(r['stopAt']*sr) and not p['errors'] for p in r['pcm'])
+        assert all(s['firstActiveFrame'] is not None and s['inactiveQuantaBeforeFirstActive'] >= 0 for s in startup)
+    return dict(checkpoint=r.get('diagnosticCheckpoint',152),scope=r['scope'],originalSHA256=hashlib.sha256(raw).hexdigest(),originalBytes=len(raw),sourceHashes=r['sourceBefore'],startup=startup,
                 inspection=dict(baselineStart=baseline_start,baselineSeconds=.2,intervalStart=start,intervalEnd=end,windowSeconds=.01,
                                 note='Full original PCM finite/hash/quanta checked; these fixed event-relative windows diagnose the second preparation only. No fitted alignment/gain or repaired PCM.'),
                 rows=rows,captureIntegrity=integrity,wholeCaptureQuantumContinuityPassed=all(v['wholeQuantumContinuityPassed'] for v in integrity),
@@ -107,7 +112,9 @@ def browser(path):
                 chunkFrames=[c['endFrame']-c['startFrame'] for c in calls],gainSamplesDuringPreparation=len(gains),
                 sampledGainsStableDuringPreparation=all(g['deck1StemGains']==[0,0,1,1,1] and g['bankGains']==[[1]*4,[0]*4] and g['groupGains']==[1]*9 for g in gains),
                 dipReproducedInThisTrace=any(row.get('belowOriginalFloor',False) for row in rows),
-                prior151FailureStillOpen=True,productionChanged=False,browserDipExplained=False,fullParityAcceptance=False)
+                prior151FailureStillOpen=True,productionChanged=r.get('diagnosticCheckpoint') == 153,
+                productionChangeScope='Startup observability only' if r.get('diagnosticCheckpoint') == 153 else 'None',
+                browserDipExplained=False,fullParityAcceptance=False)
 
 
 if __name__ == '__main__':

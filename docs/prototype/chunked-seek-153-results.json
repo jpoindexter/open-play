@@ -1,0 +1,119 @@
+{
+  "checkpoint": 153,
+  "scope": "Actual WASM/SRC and recorded browser startup counters. Full input versus bounded append/drop, all appended PCM verified bit-identical. Fixed50ms serial driver freezes clock during copying. Original and Melody present from start, no Stem replacement or browser async/transfer emulation. Not original151 reproduction/native/hardware acceptance.",
+  "originalSHA256": "4e562fbb22afe3b8abf744cf5f6b5f4a392ce33e4ed2bb43d19f408c04eb6e1e",
+  "browserOriginalSHA256": "2909c7e64ab8331045f21b21e4ea015c9ccf26b1b00958b052a00784afb1d692",
+  "sourceHashes": {
+    "prototype/vendor/signalsmith-stretch/SignalsmithStretch-open-play-replace.mjs": "26a99104af73c5ca75c9999d7a0aead476d30dd3a26862e2a13a9eb407a53bb8",
+    "prototype/pcm-resample.js": "8789e7cfc543c393830ad04e2d56e3359786eb6a4473ff08edda1c899fc19ae2",
+    "experiments/chunked_seek_153.mjs": "ef1ae53c81a42a82d280a5b4520fa7e8e13de93ad6f88589c1d5cdddbe073605"
+  },
+  "frames": 545152,
+  "recordedStartup": {
+    "createdFrame": 8192,
+    "wasmReadyFrame": 8448,
+    "notReadyQuanta": 2,
+    "renderQuanta": 124,
+    "inactiveQuantaBeforeFirstActive": 38,
+    "firstActiveFrame": 16128,
+    "firstActiveCommand": {
+      "input": 0.8408964152537146,
+      "output": 0.42541950113378685,
+      "rate": 0.9249860567790861,
+      "semitones": 0
+    },
+    "inputLatencySeconds": 0.06,
+    "outputLatencySeconds": 0.06,
+    "seekHistoryFrames": 6615
+  },
+  "firstRenderFrameDerivedFromRecordedActiveHistory": 11264,
+  "appendedChunks": 67,
+  "dropOperations": 24,
+  "oneFrameChunks": 21,
+  "minimumHistoryMarginFrames": 33127,
+  "minimumFutureMarginFrames": 289679,
+  "outputs": [
+    {
+      "case": "whole",
+      "channel": 0,
+      "frames": 545152,
+      "sha256": "1903a0251a0e774a8dbff3f7c21edbdee8dc9ab9c98c49db205b7d1a1ed9539a"
+    },
+    {
+      "case": "whole",
+      "channel": 4,
+      "frames": 545152,
+      "sha256": "256bf68cd75b3438bdc1dd46b0da7a120429d0c170a1343599a0c60ded44f5cc"
+    },
+    {
+      "case": "bounded-chunks",
+      "channel": 0,
+      "frames": 545152,
+      "sha256": "1903a0251a0e774a8dbff3f7c21edbdee8dc9ab9c98c49db205b7d1a1ed9539a"
+    },
+    {
+      "case": "bounded-chunks",
+      "channel": 4,
+      "frames": 545152,
+      "sha256": "256bf68cd75b3438bdc1dd46b0da7a120429d0c170a1343599a0c60ded44f5cc"
+    }
+  ],
+  "wholeVersusBounded": [
+    {
+      "channel": 0,
+      "frames": 545152,
+      "bitIdentical": true,
+      "nonidenticalSamples": 0,
+      "maximumAbsoluteDifference": 0.0,
+      "rmsDifference": 0.0
+    },
+    {
+      "channel": 4,
+      "frames": 545152,
+      "bitIdentical": true,
+      "nonidenticalSamples": 0,
+      "maximumAbsoluteDifference": 0.0,
+      "rmsDifference": 0.0
+    }
+  ],
+  "browserComparisons": [
+    {
+      "trace": "deck1-original",
+      "channel": 0,
+      "startFrame": 27136,
+      "endFrame": 556336,
+      "frames": 529200,
+      "bitIdentical": true,
+      "nonidenticalSamples": 0,
+      "maximumAbsoluteDifference": 0.0,
+      "rmsDifference": 0.0
+    },
+    {
+      "trace": "deck1-original",
+      "channel": 0,
+      "startFrame": 162734,
+      "endFrame": 387084,
+      "frames": 224350,
+      "bitIdentical": true,
+      "nonidenticalSamples": 0,
+      "maximumAbsoluteDifference": 0.0,
+      "rmsDifference": 0.0
+    },
+    {
+      "trace": "deck1-bank0-melody",
+      "channel": 4,
+      "startFrame": 162734,
+      "endFrame": 387084,
+      "frames": 224350,
+      "bitIdentical": true,
+      "nonidenticalSamples": 0,
+      "maximumAbsoluteDifference": 0.0,
+      "rmsDifference": 0.0
+    }
+  ],
+  "comparisonPolicy": "Full retained component PCM; browser alignment uses recorded global frames only. Steady interval is first readiness +300ms to second preparation -200ms. No fitted audio/time/gain corrections.",
+  "allDeclaredComparisonsBitIdentical": true,
+  "original151FailureStillOpen": true,
+  "asynchronousBrowserReplacementReproduced": false,
+  "fullParityAcceptance": false
+}
