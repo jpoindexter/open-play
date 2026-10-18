@@ -1,0 +1,657 @@
+{
+  "checkpoint": 173,
+  "passed": true,
+  "originalBytes": 21818574,
+  "originalSHA256": "cbd66c684fc68a505fca351015cc8fd13380d6d5be225352739b5f0bdc993c46",
+  "context": {
+    "sampleRate": 48000,
+    "constructor": "AudioContext",
+    "requestedSampleRate": null
+  },
+  "sourceHashes": {
+    "app.js": "9c462ce20cfda887a78cf1fd0c070587b0882221ee7b680784390e232f224f00",
+    "engine.js": "29e569677b1b5619929378394d5dea7d297e3dac496080e64d8aa84159df4535",
+    "stems.js": "5fb06aba4f6a97e4150d1bcfeef394574b0c9e9ed6ee099b78b89482b08ea4b7",
+    "panels.js": "06217033416d62af4602c1572086dc03bb9f25458a8f90c884f3d552c7b1d4fe",
+    "keylock.js": "62adbfdd77df20deb1328302d4a8daf3d7bdc29870af453d39acfd2a02bf060b",
+    "keylock-worker.js": "5cb72a1bc74e1808c32b430d72d5769427c7056edee11410eb6f8b3c7751fcec",
+    "keylock-dsp.js": "f4cb1881fedb018f395a6711d263aa142feb8dfe93638a3d1f97fc432c15ac3d",
+    "smart-sync.js": "98d34b559882d16e3b3e8c715d6a3c35a6197cb8d6a984fe5470b80592ca934e",
+    "slicer.js": "09ba9e951312560102c1a81a2be070843531262a1ca71ddb7bdd2edc5d340acb",
+    "tempo-slider.js": "b83de88ef715f7bdd68d9d7745862f9ecaac80c41f53e91c7041b01f1576f7cf",
+    "sync-tempo-handoff.js": "5842f9209035e24ff867004d3fef5f0a1fe7f7f4976440546b8238a225b82f9b",
+    "beatgrid.js": "af239aef231c9d089bf2352b8f548a5f71f734d6cf753986f17f57b3999477b9",
+    "manual-loops.js": "a2215ea2414788a0a0b73a1e9b99efdc24399be8003fc18c7c7de00377976304",
+    "loop-pads.js": "a7ea6977caa7753a5c1eb343f2a491223e23235121db96a15105375c9eedb174",
+    "warp-loop.js": "33091f4414d2066ce47657aa96312dfefc6ca0a061ccab04ddf00ef6121addc4",
+    "warp-loop-kernel.js": "8a331758bc551454a3cc65fd5ea527c42a370bd22ab6eb650ca278ea87e0f414",
+    "warp-loop-worklet.js": "bc977262180f910c6be55ea07a46f6b560a090939271bd4beec5e8fd31ed23fa",
+    "reverse-censor-plan.js": "38adfb04c0e498a8e2cb27b0240f037d315f24b0c8cd6968e338ff29b0af3807",
+    "stem-saved-loop-173-harness.js": "b8175fe2b190adaadf5a8175f6f4e7eb61f7f4c9d931077b6b94188db6f0c573",
+    "stem-activation-capture-145.js": "730b9c3de31e9c3546ec1ab86f8fd85ce2a1ccfe6f78fc25d8f483f8b9d75331",
+    "stem-history-worklet.js": "d1e4f452044235a110a874fad2921390878c5731f3a769896ca5bfb2faf08daa",
+    "keylock-shadow-live.js": "41bf27051270a4741f83b59bc7c0111767b589ef3986b4aafb43ad36dc067551",
+    "vendor/signalsmith-stretch/SignalsmithStretch-open-play-replace.mjs": "abc12a3afe332b3aa32c1e1ec931f362225f0de09beb727a90944cf7c96baf46",
+    "vendor/signalsmith-stretch/SignalsmithStretch-open-play-reference-dsp.mjs": "0512cae2a33873956026e64cb47854c1c677baf1beb1bc0242edfb9557987f21"
+  },
+  "job": "539aeee35cbe4518a7800f4ebbb004c5",
+  "observations": [
+    {
+      "name": "saved-recall-play",
+      "requestedBeats": 8,
+      "observedBeats": 8.0,
+      "observedStart": 0,
+      "observedEnd": 4.466666666666667,
+      "expectedEnd": 4.466666666666667,
+      "geometryAccepted": true,
+      "clockSamples": 502,
+      "maximumClockErrorSeconds": 8.881784197001252e-16,
+      "observedWraps": 1,
+      "packets": [
+        {
+          "channel": 0,
+          "frames": 240000,
+          "contiguousQuanta": 1875,
+          "sha256": "4116e69207bbeab43f2d78c95b3c74bd4788d336bb93187f1ac0448d1e6e39f4",
+          "rms": 0.11626994448618559,
+          "peak": 0.5113158226013184,
+          "audioAccepted": true
+        },
+        {
+          "channel": 1,
+          "frames": 240000,
+          "contiguousQuanta": 1875,
+          "sha256": "e3197ebd4edd8cd6ae9898787f0cf753dc78b5aa739b039a96bf9aac624aa20e",
+          "rms": 0.12532079980787142,
+          "peak": 0.5668329000473022,
+          "audioAccepted": true
+        }
+      ],
+      "accepted": true
+    },
+    {
+      "name": "loopHalf",
+      "requestedBeats": 4,
+      "observedBeats": 4.0,
+      "observedStart": 0,
+      "observedEnd": 1.8,
+      "expectedEnd": 1.8,
+      "geometryAccepted": true,
+      "clockSamples": 251,
+      "maximumClockErrorSeconds": 9.992007221626409e-16,
+      "observedWraps": 1,
+      "packets": [
+        {
+          "channel": 0,
+          "frames": 120000,
+          "contiguousQuanta": 938,
+          "sha256": "3041f1799044eb8622fdffeee4300c3ad2e8d32f21c5193963454f82aad13b0c",
+          "rms": 0.11188408231473074,
+          "peak": 0.5061168670654297,
+          "audioAccepted": true
+        },
+        {
+          "channel": 1,
+          "frames": 120000,
+          "contiguousQuanta": 938,
+          "sha256": "61448193f140d5131df412aeb3ddf1d3b02e58580a17505e08b19ca78a2f6127",
+          "rms": 0.12445148373659073,
+          "peak": 0.5054701566696167,
+          "audioAccepted": true
+        }
+      ],
+      "accepted": true
+    },
+    {
+      "name": "loopDouble",
+      "requestedBeats": 8,
+      "observedBeats": 8.0,
+      "observedStart": 0,
+      "observedEnd": 4.466666666666667,
+      "expectedEnd": 4.466666666666667,
+      "geometryAccepted": true,
+      "clockSamples": 501,
+      "maximumClockErrorSeconds": 8.881784197001252e-16,
+      "observedWraps": 1,
+      "packets": [
+        {
+          "channel": 0,
+          "frames": 240000,
+          "contiguousQuanta": 1875,
+          "sha256": "b0f2be4c147b97c601f827f81011c3f7b690a649ece3282bb50acdcc97d8cc38",
+          "rms": 0.11561963977623406,
+          "peak": 0.49789127707481384,
+          "audioAccepted": true
+        },
+        {
+          "channel": 1,
+          "frames": 240000,
+          "contiguousQuanta": 1875,
+          "sha256": "a8fdac3e23a7e24259aa36d13feafe403fab005e3a66c92b88db546c45ad2c83",
+          "rms": 0.12420206375800943,
+          "peak": 0.5500993728637695,
+          "audioAccepted": true
+        }
+      ],
+      "accepted": true
+    },
+    {
+      "name": "stop",
+      "packets": [
+        {
+          "channel": 0,
+          "frames": 14400,
+          "contiguousQuanta": 113,
+          "sha256": "c72274a22cba2dcef62e0f62834446ee39b0cd95ad0faa27a89b3b49f48aa390",
+          "rms": 0.0,
+          "peak": 0.0,
+          "audioAccepted": true
+        },
+        {
+          "channel": 1,
+          "frames": 14400,
+          "contiguousQuanta": 113,
+          "sha256": "c72274a22cba2dcef62e0f62834446ee39b0cd95ad0faa27a89b3b49f48aa390",
+          "rms": 0.0,
+          "peak": 0.0,
+          "audioAccepted": true
+        }
+      ],
+      "accepted": true
+    }
+  ],
+  "saves": [
+    {
+      "name": "empty-without-loop",
+      "accepted": true,
+      "before": {
+        "notice": "Finished: 1 measured, 0 failed. Existing/manual metadata and locked grids preserved unless replacement was requested.",
+        "nominalBPM": 120,
+        "shownBPM": 120,
+        "tempoValue": 0,
+        "tempoValueText": "Pitch +0.0 percent; relative adjustment +0.0 percent; 120.0 BPM",
+        "trackId": "local-cb2e756d1fa4ce264767a4f6adbaf9e3f69a040db7889d830abdb429cc1a5ac3",
+        "at": 4.709333333333333,
+        "position": 0,
+        "playing": false,
+        "processing": false,
+        "reverse": false,
+        "rate": 1,
+        "keylock": true,
+        "keyShift": 3,
+        "sync": true,
+        "syncState": "armed",
+        "voice": false,
+        "gridBPM": null,
+        "anchorTime": 0,
+        "anchorPosition": 0,
+        "loopSlot": 0,
+        "savedLoops": [],
+        "loop": false,
+        "loopLength": 4,
+        "loopIn": 0,
+        "loopOut": 0,
+        "slicerLoop": false,
+        "mask": [
+          false,
+          true,
+          true,
+          true
+        ],
+        "pending": false,
+        "focus": {
+          "tag": "BUTTON",
+          "deck": "0"
+        },
+        "pressed": null
+      },
+      "after": {
+        "notice": "Set a valid Loop In and Out first.",
+        "nominalBPM": 120,
+        "shownBPM": 120,
+        "tempoValue": 0,
+        "tempoValueText": "Pitch +0.0 percent; relative adjustment +0.0 percent; 120.0 BPM",
+        "trackId": "local-cb2e756d1fa4ce264767a4f6adbaf9e3f69a040db7889d830abdb429cc1a5ac3",
+        "at": 4.741333333333333,
+        "position": 0,
+        "playing": false,
+        "processing": false,
+        "reverse": false,
+        "rate": 1,
+        "keylock": true,
+        "keyShift": 3,
+        "sync": true,
+        "syncState": "armed",
+        "voice": false,
+        "gridBPM": null,
+        "anchorTime": 0,
+        "anchorPosition": 0,
+        "loopSlot": 7,
+        "savedLoops": [],
+        "loop": false,
+        "loopLength": 4,
+        "loopIn": 0,
+        "loopOut": 0,
+        "slicerLoop": false,
+        "mask": [
+          false,
+          true,
+          true,
+          true
+        ],
+        "pending": false,
+        "focus": {
+          "tag": "BUTTON",
+          "deck": "0"
+        },
+        "pressed": null
+      }
+    },
+    {
+      "name": "save-active-to-empty",
+      "accepted": true,
+      "before": {
+        "notice": "Set a valid Loop In and Out first.",
+        "nominalBPM": 120,
+        "shownBPM": 120,
+        "tempoValue": 0,
+        "tempoValueText": "Pitch +0.0 percent; relative adjustment +0.0 percent; 120.0 BPM",
+        "trackId": "local-cb2e756d1fa4ce264767a4f6adbaf9e3f69a040db7889d830abdb429cc1a5ac3",
+        "at": 4.746666666666667,
+        "position": 1,
+        "playing": false,
+        "processing": false,
+        "reverse": false,
+        "rate": 1,
+        "keylock": true,
+        "keyShift": 3,
+        "sync": true,
+        "syncState": "tempo",
+        "voice": false,
+        "gridBPM": null,
+        "anchorTime": 4.746666666666667,
+        "anchorPosition": 0,
+        "loopSlot": 7,
+        "savedLoops": [],
+        "loop": true,
+        "loopLength": 8,
+        "loopIn": 0,
+        "loopOut": 4.466666666666667,
+        "slicerLoop": false,
+        "mask": [
+          false,
+          true,
+          true,
+          true
+        ],
+        "pending": false,
+        "focus": {
+          "tag": "BODY"
+        },
+        "pressed": null
+      },
+      "after": {
+        "notice": "Loop saved to slot 2.",
+        "nominalBPM": 120,
+        "shownBPM": 120,
+        "tempoValue": 0,
+        "tempoValueText": "Pitch +0.0 percent; relative adjustment +0.0 percent; 120.0 BPM",
+        "trackId": "local-cb2e756d1fa4ce264767a4f6adbaf9e3f69a040db7889d830abdb429cc1a5ac3",
+        "at": 4.762666666666667,
+        "position": 1,
+        "playing": false,
+        "processing": false,
+        "reverse": false,
+        "rate": 1,
+        "keylock": true,
+        "keyShift": 3,
+        "sync": true,
+        "syncState": "tempo",
+        "voice": false,
+        "gridBPM": null,
+        "anchorTime": 4.746666666666667,
+        "anchorPosition": 0,
+        "loopSlot": 1,
+        "savedLoops": [
+          null,
+          {
+            "start": 0,
+            "end": 4.466666666666667,
+            "name": "Loop 2"
+          }
+        ],
+        "loop": true,
+        "loopLength": 8,
+        "loopIn": 0,
+        "loopOut": 4.466666666666667,
+        "slicerLoop": false,
+        "mask": [
+          false,
+          true,
+          true,
+          true
+        ],
+        "pending": false,
+        "focus": {
+          "tag": "BODY"
+        },
+        "pressed": null
+      }
+    },
+    {
+      "name": "explicit-save",
+      "accepted": true,
+      "before": {
+        "notice": "Loop saved to slot 2.",
+        "nominalBPM": 120,
+        "shownBPM": 120,
+        "tempoValue": 0,
+        "tempoValueText": "Pitch +0.0 percent; relative adjustment +0.0 percent; 120.0 BPM",
+        "trackId": "local-cb2e756d1fa4ce264767a4f6adbaf9e3f69a040db7889d830abdb429cc1a5ac3",
+        "at": 4.762666666666667,
+        "position": 1,
+        "playing": false,
+        "processing": false,
+        "reverse": false,
+        "rate": 1,
+        "keylock": true,
+        "keyShift": 3,
+        "sync": true,
+        "syncState": "tempo",
+        "voice": false,
+        "gridBPM": null,
+        "anchorTime": 4.746666666666667,
+        "anchorPosition": 0,
+        "loopSlot": 1,
+        "savedLoops": [
+          null,
+          {
+            "start": 0,
+            "end": 4.466666666666667,
+            "name": "Loop 2"
+          }
+        ],
+        "loop": true,
+        "loopLength": 8,
+        "loopIn": 0,
+        "loopOut": 4.466666666666667,
+        "slicerLoop": false,
+        "mask": [
+          false,
+          true,
+          true,
+          true
+        ],
+        "pending": false,
+        "focus": {
+          "tag": "BODY"
+        },
+        "pressed": null
+      },
+      "after": {
+        "notice": "Loop saved to slot 2.",
+        "nominalBPM": 120,
+        "shownBPM": 120,
+        "tempoValue": 0,
+        "tempoValueText": "Pitch +0.0 percent; relative adjustment +0.0 percent; 120.0 BPM",
+        "trackId": "local-cb2e756d1fa4ce264767a4f6adbaf9e3f69a040db7889d830abdb429cc1a5ac3",
+        "at": 4.762666666666667,
+        "position": 1,
+        "playing": false,
+        "processing": false,
+        "reverse": false,
+        "rate": 1,
+        "keylock": true,
+        "keyShift": 3,
+        "sync": true,
+        "syncState": "tempo",
+        "voice": false,
+        "gridBPM": null,
+        "anchorTime": 4.746666666666667,
+        "anchorPosition": 0,
+        "loopSlot": 1,
+        "savedLoops": [
+          null,
+          {
+            "start": 0,
+            "end": 4.466666666666667,
+            "name": "Loop 2"
+          }
+        ],
+        "loop": true,
+        "loopLength": 8,
+        "loopIn": 0,
+        "loopOut": 4.466666666666667,
+        "slicerLoop": false,
+        "mask": [
+          false,
+          true,
+          true,
+          true
+        ],
+        "pending": false,
+        "focus": {
+          "tag": "BODY"
+        },
+        "pressed": null
+      }
+    },
+    {
+      "name": "save-recent-to-empty",
+      "accepted": true,
+      "before": {
+        "notice": "Loop saved to slot 2.",
+        "nominalBPM": 120,
+        "shownBPM": 120,
+        "tempoValue": 0,
+        "tempoValueText": "Pitch +0.0 percent; relative adjustment +0.0 percent; 120.0 BPM",
+        "trackId": "local-cb2e756d1fa4ce264767a4f6adbaf9e3f69a040db7889d830abdb429cc1a5ac3",
+        "at": 4.768,
+        "position": 3,
+        "playing": false,
+        "processing": false,
+        "reverse": false,
+        "rate": 1,
+        "keylock": true,
+        "keyShift": 3,
+        "sync": true,
+        "syncState": "tempo",
+        "voice": false,
+        "gridBPM": null,
+        "anchorTime": 4.762666666666667,
+        "anchorPosition": 1,
+        "loopSlot": 1,
+        "savedLoops": [
+          null,
+          {
+            "start": 0,
+            "end": 4.466666666666667,
+            "name": "Loop 2"
+          }
+        ],
+        "loop": false,
+        "loopLength": 8,
+        "loopIn": 0,
+        "loopOut": 4.466666666666667,
+        "slicerLoop": false,
+        "mask": [
+          false,
+          true,
+          true,
+          true
+        ],
+        "pending": false,
+        "focus": {
+          "tag": "BODY"
+        },
+        "pressed": null
+      },
+      "after": {
+        "notice": "Loop saved to slot 3.",
+        "nominalBPM": 120,
+        "shownBPM": 120,
+        "tempoValue": 0,
+        "tempoValueText": "Pitch +0.0 percent; relative adjustment +0.0 percent; 120.0 BPM",
+        "trackId": "local-cb2e756d1fa4ce264767a4f6adbaf9e3f69a040db7889d830abdb429cc1a5ac3",
+        "at": 4.784,
+        "position": 3,
+        "playing": false,
+        "processing": false,
+        "reverse": false,
+        "rate": 1,
+        "keylock": true,
+        "keyShift": 3,
+        "sync": true,
+        "syncState": "tempo",
+        "voice": false,
+        "gridBPM": null,
+        "anchorTime": 4.762666666666667,
+        "anchorPosition": 1,
+        "loopSlot": 2,
+        "savedLoops": [
+          null,
+          {
+            "start": 0,
+            "end": 4.466666666666667,
+            "name": "Loop 2"
+          },
+          {
+            "start": 0,
+            "end": 4.466666666666667,
+            "name": "Loop 3"
+          }
+        ],
+        "loop": false,
+        "loopLength": 8,
+        "loopIn": 0,
+        "loopOut": 4.466666666666667,
+        "slicerLoop": false,
+        "mask": [
+          false,
+          true,
+          true,
+          true
+        ],
+        "pending": false,
+        "focus": {
+          "tag": "BODY"
+        },
+        "pressed": null
+      }
+    },
+    {
+      "name": "recall-paused",
+      "accepted": true,
+      "before": {
+        "notice": "Loop saved to slot 3.",
+        "nominalBPM": 120,
+        "shownBPM": 120,
+        "tempoValue": 0,
+        "tempoValueText": "Pitch +0.0 percent; relative adjustment +0.0 percent; 120.0 BPM",
+        "trackId": "local-cb2e756d1fa4ce264767a4f6adbaf9e3f69a040db7889d830abdb429cc1a5ac3",
+        "at": 4.789333333333333,
+        "position": 3,
+        "playing": false,
+        "processing": false,
+        "reverse": false,
+        "rate": 1,
+        "keylock": true,
+        "keyShift": 3,
+        "sync": true,
+        "syncState": "tempo",
+        "voice": false,
+        "gridBPM": null,
+        "anchorTime": 4.762666666666667,
+        "anchorPosition": 1,
+        "loopSlot": 2,
+        "savedLoops": [
+          null,
+          {
+            "start": 0,
+            "end": 4.466666666666667,
+            "name": "Loop 2"
+          },
+          {
+            "start": 0,
+            "end": 4.466666666666667,
+            "name": "Loop 3"
+          }
+        ],
+        "loop": false,
+        "loopLength": 4,
+        "loopIn": 0,
+        "loopOut": 4.466666666666667,
+        "slicerLoop": false,
+        "mask": [
+          false,
+          true,
+          true,
+          true
+        ],
+        "pending": false,
+        "focus": {
+          "tag": "BODY"
+        },
+        "pressed": null
+      },
+      "after": {
+        "notice": "Loop saved to slot 3.",
+        "nominalBPM": 120,
+        "shownBPM": 120,
+        "tempoValue": 0,
+        "tempoValueText": "Pitch +0.0 percent; relative adjustment +0.0 percent; 120.0 BPM",
+        "trackId": "local-cb2e756d1fa4ce264767a4f6adbaf9e3f69a040db7889d830abdb429cc1a5ac3",
+        "at": 4.8,
+        "position": 0,
+        "playing": false,
+        "processing": false,
+        "reverse": false,
+        "rate": 1,
+        "keylock": true,
+        "keyShift": 3,
+        "sync": true,
+        "syncState": "tempo",
+        "voice": false,
+        "gridBPM": null,
+        "anchorTime": 4.789333333333333,
+        "anchorPosition": 3,
+        "loopSlot": 1,
+        "savedLoops": [
+          null,
+          {
+            "start": 0,
+            "end": 4.466666666666667,
+            "name": "Loop 2"
+          },
+          {
+            "start": 0,
+            "end": 4.466666666666667,
+            "name": "Loop 3"
+          }
+        ],
+        "loop": true,
+        "loopLength": 8,
+        "loopIn": 0,
+        "loopOut": 4.466666666666667,
+        "slicerLoop": false,
+        "mask": [
+          false,
+          true,
+          true,
+          true
+        ],
+        "pending": false,
+        "focus": {
+          "tag": "BODY"
+        },
+        "pressed": null
+      }
+    }
+  ],
+  "exactVendorCompositionAccepted": false,
+  "sourceAttributionAccepted": false,
+  "pitchQualityAccepted": false,
+  "nativeAcceptance": false,
+  "hardwareAcceptance": false,
+  "fullParityAcceptance": false
+}

@@ -919,17 +919,8 @@ async function deckAction(action, index, el, event = {}) {
       if(mode==='roll')return; // Hold handlers own momentary pads.
       d.loopSlot=n;
       const l = d.track.savedLoops[n];
-      if (l) {
-        await engine.setLoop(d, true, l.start, l.end);
-        await engine.seek(d, l.start);
-      } else {
-        d.track.savedLoops[n] = {
-          start: pos,
-          end: Math.min(d.track.duration, pos + beat * d.loopLength),
-          name: `Loop ${n + 1}`,
-        };
-        persist();
-      }
+      if (l) return manualLoops.recall(d, n);
+      return manualLoops.command(d, "save");
     } else if (d.tab === "Stems") {
       return stemPad(d, n);
     } else if (d.tab === "Pitch") {

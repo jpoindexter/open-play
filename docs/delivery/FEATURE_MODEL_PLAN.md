@@ -25,7 +25,7 @@ Planning-table statuses are a dated baseline. Current scoped implementation evid
 | DEK-001 | Load, unload and deck focus | gpt-6.1-sol / high | claude-sonnet-5 / medium | Research pending |
 | DEK-002 | Play, pause, seek and end-of-track | gpt-6-astra / high | claude-opus-5 / high | Partial:171natural48k MP3/Stems/keylock/tempo/Stop scoped pass; full rate/quality/reference/native parity open |
 | DEK-003 | Cue and hot cues | gpt-6-astra / high | claude-opus-5 / high | Research pending |
-| DEK-004 | Manual, automatic and saved loops | gpt-6-astra / high | claude-opus-5 / high | Partial:172actual warped Auto Loop8/half4/double8 raw/key+3 geometry/clock pass; saved loops/vendor/source/quality/native/full parity open |
+| DEK-004 | Manual, automatic and saved loops | gpt-6-astra / high | claude-opus-5 / high | Partial:173actual active/recent saved slots and recall8/half4/double8 pass; full loop/persistence/reference/native parity open |
 | DEK-005 | Beat jump | gpt-6-astra / high | claude-opus-5 / high | Research pending |
 | DEK-006 | Tempo fader and pitch ranges | gpt-6-astra / high | claude-opus-5 / high | Partial:171natural48k MP3/Stems/keylock/tempo/Stop scoped pass; full rate/quality/reference/native parity open |
 | DEK-007 | Key lock and independent key shift | gpt-6-astra / high | claude-opus-5 / high | Partial:172actual warped Auto Loop8/half4/double8 raw/key+3 geometry/clock pass; saved loops/vendor/source/quality/native/full parity open |

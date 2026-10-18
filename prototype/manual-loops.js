@@ -9,6 +9,16 @@ export function createManualLoops({state,engine,quantized=(_d,p)=>p,persist=()=>
  function run(d,fn){const track=d.track,epoch=epochs.get(d.index)||0,previous=queues.get(d.index)||Promise.resolve();const next=previous.catch(()=>{}).then(()=>{if(valid(d)&&d.track===track&&(epochs.get(d.index)||0)===epoch)return fn();});queues.set(d.index,next);void next.finally(()=>{if(queues.get(d.index)===next)queues.delete(d.index);}).catch(()=>{});return next;}
  function cancelDeck(d){epochs.set(d.index,(epochs.get(d.index)||0)+1);d.loopEdit=null;}
  async function bounds(d,on,start,end){await engine.setLoop(d,on,start,end);const grid=createBeatgrid(d.track);d.loopLength=grid?grid.beatAt(end)-grid.beatAt(start):(end-start)*(d.track.bpm||120)/60;}
+ function recall(d,slot){
+  if(!Number.isInteger(slot)||slot<0||slot>7)throw Error('Unknown saved loop slot.');
+  return run(d,async()=>{
+   const saved=d.track.savedLoops[slot];
+   if(!saved)throw Error('Save a loop to this slot first.');
+   d.loopSlot=slot;d.loopEdit=null;
+   await bounds(d,true,saved.start,saved.end);
+   await engine.seek(d,saved.start);render();return true;
+  });
+ }
  function command(d,action){
   if(!actions.includes(action))throw Error('Unknown manual loop action.');
   if(!valid(d)){notify('Load a track first.');return Promise.resolve(false);}
@@ -48,5 +58,5 @@ export function createManualLoops({state,engine,quantized=(_d,p)=>p,persist=()=>
    await bounds(d,d.loop,start,end);render();return true;
   });
  }
- return{command,press:(d,pad)=>command(d,actions[pad]),move,cancelDeck};
+ return{command,recall,press:(d,pad)=>command(d,actions[pad]),move,cancelDeck};
 }
