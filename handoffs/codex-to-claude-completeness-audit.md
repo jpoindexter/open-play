@@ -1,3 +1,13 @@
+## 107. Direct mapped-owner future Pause and restart
+
+18 October2026, afterc252c3a. One focused actual-WASM controlled-clock contract reproduces mapped Pause before a queued start rejecting with Warp command does not match the prepared pitch map. At source8s the future local rate is4/3, while the prior paused nominal state remains1. Its inactive command must not be required to match an audible pitch map. Guard now checks that match only for playing commands; inactive commands still send zero spectral transposition and cancel future playback. The refill underrun margin now uses the factor at current source position instead of the initial group factor (source-level correction, no real underrun/OS-pressure acceptance).
+
+The same actual-WASM contract goes0/1→1/1: future Play at1s, Pause at0, process through1.5s yields exactzero peak/RMS; owner remains undisposed. Same-owner future restart at2s yields RMS0.084842, measured493.883313Hz vs493.883301Hz expected (<1Hz), then dispose retains0PCM bytes. AudioBuffer-shaped input/controlled serial ports/clock and simplified gain graph are explicit test limits. This is direct adapter behavior; main GUI Pause uses voice disposal and was tested in prior browser/native units. No new normal GUI/browser/native/physical/musical/full-feature acceptance or repeat of prior passing matrices. Plan106 recordings retain candidatec252c3a and are not relabeled as executions of this new guard.
+
+Evidence: scripts/test_mapped_keylock_pause.mjs; docs/prototype/mapped-keylock-pause-{before-results,results}.json, both include source hashes and preserve the failed result. Native0.1.15/profile/launchers untouched; human away/no timed capture. Full110groups/522requirements plus9beta deltas/26release checks unchanged,46false/476unset/0true full flags/all full-feature flags false. Existing model/effort routing, byte-exact20996byte prompt/full handoff suffix preserved. Full independent Claude completeness audit unlaunched.
+
+Now: preserve the scoped cancellation correction. Next: continue remaining actual musical/separation-quality and unsupported transport compositions rather than repeating the already passing tone/FX matrix. Human re-entry remains native15 left physicalPlay→RCA sound→samebuttonstop, then one action at a time. Full Serato parity remains open.
+
 ## 106. Variable-pitch warped playback and prepared-anchor scheduling
 
 18 October2026, afterdfce2c4. Full110groups/522requirements plus9beta deltas/26release checks unchanged;46false/476unset/0true full-requirement flags/all full-feature flags false. Human away/no timed capture. Native0.1.15/profile/launchers remain idle and unchanged; browser-only code below is not in that frozen bundle.

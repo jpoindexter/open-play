@@ -1,0 +1,149 @@
+{
+  "scope": "Direct actual-WASM mapped adapter with controlled serial clock/ports, AudioBuffer-shaped source and simplified gain graph. Future Pause silence and same-owner audible restart only. Not normal app GUI, browser, native, physical or full parity.",
+  "sourceHashes": {
+    "prototype/keylock-shadow-live.js": "33d04ed40979bb0fb259d09d6fb1f04c6c2b7e7ef75914647191e43a4d2f894a",
+    "prototype/pitch-time-map.js": "2eb6a2ea7d7c6dde94defb921f90343ea4d4ea98c025722f2e570cc0f8c62252",
+    "prototype/pcm-resample.js": "8789e7cfc543c393830ad04e2d56e3359786eb6a4473ff08edda1c899fc19ae2",
+    "prototype/vendor/signalsmith-stretch/SignalsmithStretch-open-play-history.mjs": "1f470f846a993cc750ee2e111817adb08879493025c7322eadc8cf98323e4ef8"
+  },
+  "passed": 0,
+  "failed": 1,
+  "checks": [
+    {
+      "name": "Mapped Pause cancels a future start without destroying the owner, then restarts audibly",
+      "passed": false,
+      "evidence": {
+        "initial": {
+          "resamplePitch": true,
+          "maxPCMBytes": 536870912,
+          "followMinimumLeadSeconds": 0.04,
+          "byteAccounting": "Acknowledged retained PCM and in-flight chunk copies only; excludes decoded inputs, SRC tables and opaque WASM heaps.",
+          "disposed": false,
+          "state": {
+            "when": 0,
+            "position": 8,
+            "playing": false,
+            "rate": 1,
+            "keylock": false,
+            "semitones": 2,
+            "effectiveSemitones": 2
+          },
+          "sourceGeometry": [
+            {
+              "index": 0,
+              "sampleRate": 48000,
+              "frames": 1536000,
+              "channels": 2,
+              "duration": 32,
+              "paddedTailSeconds": 0,
+              "trimmedTailSeconds": 0,
+              "decodedBytes": 12288000
+            }
+          ],
+          "groups": [
+            {
+              "id": 1,
+              "pitchMap": [
+                {
+                  "position": 0,
+                  "prepared": 0,
+                  "factor": 1.122462048309373
+                },
+                {
+                  "position": 4,
+                  "prepared": 3.563594872561357,
+                  "factor": 0.8979696386474985
+                },
+                {
+                  "position": 7,
+                  "prepared": 6.90446506558763,
+                  "factor": 1.4966160644124973
+                }
+              ],
+              "pitchSemitones": 6.980449991346125,
+              "pitchFactor": 1.4966160644124973,
+              "origin": 6,
+              "start": 6,
+              "end": 16.00002781941462,
+              "nodeCount": 1,
+              "processorChannels": 2,
+              "sourceOutputs": 1,
+              "retainedPCMBytes": 2736848,
+              "retainedChunks": 22,
+              "latency": 0.12,
+              "role": "selected"
+            }
+          ],
+          "retainedPCMBytes": 2736848,
+          "inFlightPCMBytes": 0,
+          "decodedBytes": 12288000,
+          "policy": {
+            "direction": "forward",
+            "normalMinimumLead": "queried group latency plus2 render quanta",
+            "followMinimumLeadSeconds": 0.04,
+            "followOwner": "currently active forward owner only",
+            "followCoverage": "required history must already be prepared; reject without replacement",
+            "rate": [
+              0.25,
+              4
+            ],
+            "effectiveSemitones": [
+              -24,
+              24
+            ],
+            "chunkSeconds": 0.5,
+            "requiredPrerollSeconds": 1,
+            "retentionPrerollSeconds": 2,
+            "retentionHysteresisSeconds": 1,
+            "lookaheadSeconds": 8,
+            "driverMs": 50,
+            "crossfadeSeconds": 0.01,
+            "srcTaps": 32,
+            "srcPhases": 1024,
+            "decodedSources": "Whole decoded AudioBuffers remain caller-owned; only processor PCM copies are windowed.",
+            "unsupported": [
+              "reverse",
+              "loop",
+              "Stem Slip",
+              "incremental compressed-file decoding"
+            ],
+            "quality": "Independent32-tap windowed-sinc normalization and10ms group crossfade; vendor sonic equivalence and artifact-free transitions are unverified."
+          },
+          "lastError": null
+        },
+        "start": {
+          "when": 1,
+          "position": 8,
+          "playing": true,
+          "rate": 1.3333333333333333,
+          "keylock": false,
+          "semitones": 2,
+          "effectiveSemitones": 6.980449991346125,
+          "group": 1,
+          "origin": 6,
+          "latencyLead": 0.12,
+          "operationKind": "normal",
+          "minimumLeadSeconds": 0.12533333333333332,
+          "scheduleIssuedAt": 0,
+          "scheduleAcknowledgedAt": 0,
+          "transitionSeconds": 0,
+          "superseded": false,
+          "timelineSegments": [
+            {
+              "rate": 1.3333333333333333,
+              "keylock": false,
+              "semitones": 2,
+              "effectiveSemitones": 6.980449991346125,
+              "position": 8,
+              "when": 1,
+              "playing": true
+            }
+          ]
+        },
+        "retainedAfterDispose": 0
+      },
+      "error": "RangeError: Warp command does not match the prepared pitch map\n    at LiveKeylock.program (file:///Users/jasonpoindexter/Documents/GitHub/Open%20Play/prototype/keylock-shadow-live.js:164:421)\n    at file:///Users/jasonpoindexter/Documents/GitHub/Open%20Play/prototype/keylock-shadow-live.js:224:338\n    at file:///Users/jasonpoindexter/Documents/GitHub/Open%20Play/prototype/keylock-shadow-live.js:157:298\n    at async file:///Users/jasonpoindexter/Documents/GitHub/Open%20Play/scripts/test_mapped_keylock_pause.mjs:27:3\n    at async check (file:///Users/jasonpoindexter/Documents/GitHub/Open%20Play/scripts/test_mapped_keylock_pause.mjs:5:79)\n    at async file:///Users/jasonpoindexter/Documents/GitHub/Open%20Play/scripts/test_mapped_keylock_pause.mjs:22:1"
+    }
+  ],
+  "fullParityVerified": false
+}
