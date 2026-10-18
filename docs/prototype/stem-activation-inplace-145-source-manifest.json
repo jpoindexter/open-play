@@ -1,0 +1,36 @@
+{
+  "checkpoint": 145,
+  "date": "2026-10-18",
+  "baseline": "4c4be035cfae004db9e38bd7c9952d4bb201477f",
+  "sourceSHA256": {
+    "prototype/engine.js": "f83e25fc84ed1cf380c4d9d6c45b90d9c44435756f7764e54fe620b14a000ae8",
+    "prototype/keylock-shadow-live.js": "ff6799f627555067be2ec98ea4599ee0835ec013b506a44c936220aefc829343",
+    "prototype/vendor/signalsmith-stretch/SignalsmithStretch-open-play-replace.mjs": "66c9e002c6312d12a3107e21aa11be33f5ce7d92b1a4f4d85777cf54f3a74df9",
+    "prototype/vendor/signalsmith-stretch/SignalsmithStretch-open-play-replace.LICENSE.txt": "ee2ef82481ffb445ecdd4b3a4c1f82c0cddb2da8fe39d8e8dc384fffb3e7f06f",
+    "prototype/stem-activation-inplace-145-harness.js": "5826ac2bc7a74e66d3ad54c5047febced098efc1c46da24f56d360f777514d26",
+    "prototype/stem-activation-capture-145.js": "730b9c3de31e9c3546ec1ab86f8fd85ce2a1ccfe6f78fc25d8f483f8b9d75331",
+    "scripts/test_keylock_channel_replace.mjs": "16c7ce6f9df6ea605cae7a0e50c60a53ef1d82a556065c84ff091817081ea465",
+    "scripts/test_stem_activation_inplace.mjs": "e64dc32130ea4b10a52d4476ef4d354264b15bb1b83857642ac49793d5774161",
+    "scripts/inspect_keylock_channel_replace.py": "5164642f06a86ac70b3b1bb4f13241283856aaffaf0257043f04f1855eb4d3a4",
+    "scripts/inspect_stem_activation_browser_inplace.py": "ce8a55764900b19c0ac33a72db5c954fb6814d374c40e15ec4b0d2d4779430c1"
+  },
+  "embeddedWASMByteIdenticalToPreservedHistory": true,
+  "licenseByteIdentical": true,
+  "promptSuffixVerified": true,
+  "scopedBrowserActivationPassed": true,
+  "nativeChanged": false,
+  "fullParity": false,
+  "focusedChecks": {
+    "newProcessorRPC": {
+      "command": "node scripts/test_keylock_channel_replace.mjs",
+      "observedExitCode": 0,
+      "checks": 3
+    },
+    "newEngineOwnership": {
+      "command": "node --experimental-default-type=module scripts/test_stem_activation_inplace.mjs",
+      "observedExitCode": 0,
+      "checks": 3
+    }
+  },
+  "privateEvidenceDirectory": "local-evidence/keylock-channel-replace-145/"
+}

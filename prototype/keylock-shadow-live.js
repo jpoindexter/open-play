@@ -5,7 +5,7 @@ import {createPitchTimeMap} from './pitch-time-map.js';
 // Normal scheduling keeps queried latency+2quanta; only explicit active followSeek uses40ms.
 // Retained source history2s, required source history1s. The distinct wrapper also
 // supplies the DSP's queried block+interval seek history; preset/WASM/SRC unchanged.
-import Stretch from './vendor/signalsmith-stretch/SignalsmithStretch-open-play-history.mjs';
+import Stretch from './vendor/signalsmith-stretch/SignalsmithStretch-open-play-replace.mjs';
 
 const CHUNK_SECONDS=.5,REQUIRED_PREROLL_SECONDS=1,RETENTION_PREROLL_SECONDS=2,LOOKAHEAD_SECONDS=8,DRIVER_MS=50,CROSSFADE_SECONDS=.01,FOLLOW_LEAD_SECONDS=.04;
 const policy=Object.freeze({direction:'forward',normalMinimumLead:'queried group latency plus2 render quanta',followMinimumLeadSeconds:FOLLOW_LEAD_SECONDS,followOwner:'currently active forward owner only',followCoverage:'required history must already be prepared; reject without replacement',rate:[.25,4],effectiveSemitones:[-24,24],chunkSeconds:CHUNK_SECONDS,requiredPrerollSeconds:REQUIRED_PREROLL_SECONDS,retentionPrerollSeconds:RETENTION_PREROLL_SECONDS,retentionHysteresisSeconds:RETENTION_PREROLL_SECONDS-REQUIRED_PREROLL_SECONDS,lookaheadSeconds:LOOKAHEAD_SECONDS,driverMs:DRIVER_MS,crossfadeSeconds:CROSSFADE_SECONDS,srcTaps:32,srcPhases:1024,decodedSources:'Whole decoded AudioBuffers remain caller-owned; only processor PCM copies are windowed.',unsupported:['reverse','loop','Stem Slip','incremental compressed-file decoding'],quality:'Independent32-tap windowed-sinc normalization and10ms group crossfade; vendor sonic equivalence and artifact-free transitions are unverified.'});
@@ -24,21 +24,71 @@ export async function copyKeylockChunk(buffer,sampleRate,startFrame,frameCount,o
 function normalize(state){const rate=finite(state.rate,'rate'),semitones=finite(state.semitones,'semitones');if(rate<.25||rate>4)throw new RangeError('Current forward prototype rate policy is.25..4');if(semitones< -24||semitones>24)throw new RangeError('Current requested key-shift policy is±24semitones');const effectiveSemitones=semitones+(state.keylock?0:12*Math.log2(rate));if(effectiveSemitones< -24||effectiveSemitones>24)throw new RangeError('Current effective-transposition policy is±24semitones');return{rate,keylock:!!state.keylock,semitones,effectiveSemitones};}
 function gainAt(param,value,when){param.cancelScheduledValues(when);param.setValueAtTime(value,when);}
 
-export async function createLiveKeylock(context,{buffers,position=0,rate=1,keylock=true,semitones=0,signal,onEvent=()=>{},resamplePitch=false,pitchRateMap=null,maxPCMBytes=512*1024*1024}={}){
- const adapter=new LiveKeylock(context,{buffers,position,rate,keylock,semitones,signal,onEvent,resamplePitch,pitchRateMap,maxPCMBytes});try{await adapter.prepare();adapter.assertOwner();return adapter;}catch(error){await adapter.dispose().catch(()=>{});throw error;}
+export async function createLiveKeylock(context,{buffers,position=0,rate=1,keylock=true,semitones=0,signal,onEvent=()=>{},resamplePitch=false,pitchRateMap=null,maxPCMBytes=512*1024*1024,reserveStems=false}={}){
+ const adapter=new LiveKeylock(context,{buffers,position,rate,keylock,semitones,signal,onEvent,resamplePitch,pitchRateMap,maxPCMBytes,reserveStems});try{await adapter.prepare();adapter.assertOwner();return adapter;}catch(error){await adapter.dispose().catch(()=>{});throw error;}
 }
 class LiveKeylock{
- constructor(context,{buffers,position,rate,keylock,semitones,signal,onEvent,resamplePitch,pitchRateMap,maxPCMBytes}){
+ constructor(context,{buffers,position,rate,keylock,semitones,signal,onEvent,resamplePitch,pitchRateMap,maxPCMBytes,reserveStems}){
   if(!context?.createGain||!Number.isFinite(context.sampleRate)||context.sampleRate<=0)throw new TypeError('A usable AudioContext is required');
   if(!Array.isArray(buffers)||(buffers.length!==1&&buffers.length!==5))throw new RangeError('Supply original only or all5 positional original/stem buffers');
   if(!Number.isSafeInteger(maxPCMBytes)||maxPCMBytes<1)throw new RangeError('Invalid live PCM budget');this.maxPCMBytes=maxPCMBytes;this.resamplePitch=!!resamplePitch;
   this.pitchRateMap=pitchRateMap?.map(point=>({...point}));
   this.context=context;this.sources=buffers.map(geometry);this.duration=this.sources[0].duration;this.sampleRate=context.sampleRate;this.chunkFrames=Math.max(1,Math.round(this.sampleRate*CHUNK_SECONDS));this.durationFrames=Math.ceil(this.duration*this.sampleRate);this.onEvent=onEvent;this.controller=new AbortController();this.signal=this.controller.signal;this.ownerSignal=signal;this.ownerAbort=()=>this.dispose().catch(()=>{});this.disposed=false;this.revision=0;this.pending=null;this.serial=Promise.resolve();this.groupSequence=0;this.groups=new Set();this.active=null;this.retiring=null;this.retirementPromise=null;this.timer=null;this.driverBusy=false;this.disposePromise=null;this.lastError=null;this.ended=false;this.inFlightPCMBytes=0;this.initialState=normalize({rate,keylock,semitones});this.initialPosition=this.validPosition(position);this.clock=[{when:context.currentTime,position:this.initialPosition,playing:false,...this.initialState}];
   if(this.sources.length===5){const stems=this.sources.slice(1),first=stems[0];if(stems.some(s=>s.sampleRate!==first.sampleRate||s.length!==first.length||Math.abs(s.duration-this.duration)>.1+1e-9))throw new RangeError('Prepared stems must share sample rate/length and stay within.1s of original duration');}
-  this.sourceGeometry=this.sources.map((s,index)=>({index,sampleRate:s.sampleRate,frames:s.length,channels:s.numberOfChannels,duration:s.duration,paddedTailSeconds:Math.max(0,this.duration-s.duration),trimmedTailSeconds:Math.max(0,s.duration-this.duration),decodedBytes:s.length*s.numberOfChannels*4}));
+  this.reservedStems=!!reserveStems&&buffers.length===1;this.stemsReady=buffers.length===5;
+  if(this.reservedStems)for(let i=0;i<4;i++)this.sources.push({empty:true,buffer:null,channels:null,sampleRate:this.sampleRate,length:this.durationFrames,numberOfChannels:2,duration:this.duration});
+  this.describeSources();
   if(signal?.aborted){this.controller.abort();throw abortError();}
   this.outputs=this.sources.map(s=>{const node=context.createGain();node.channelCount=s.numberOfChannels;node.channelCountMode='explicit';node.channelInterpretation='discrete';node.gain.value=1;return node;});
   signal?.addEventListener('abort',this.ownerAbort,{once:true});
+ }
+ describeSources(){this.sourceGeometry=this.sources.map((s,index)=>({index,sampleRate:s.sampleRate,frames:s.length,channels:s.numberOfChannels,duration:s.duration,paddedTailSeconds:Math.max(0,this.duration-s.duration),trimmedTailSeconds:Math.max(0,s.duration-this.duration),decodedBytes:s.buffer?s.length*s.buffer.numberOfChannels*4:0,reservedSilence:!!s.empty}));}
+ async copySource(group,source,start,count){
+  if(source.empty){this.checkGroup(group);return Array.from({length:source.numberOfChannels},()=>new Float32Array(count));}
+  const sr=this.sampleRate;
+  if(group.pitchMap){const origin=group.preparedOrigin,segment=group.pitchMap.preparedSegment(origin+start/sr),q=segment.factor,offset=(segment.position+(origin-segment.prepared)*q)*source.sampleRate;return copyPCMChunk(source.channels,source.sampleRate,sr/q,start,count,{signal:group.controller.signal,offsetSourceFrames:offset});}
+  if(group.pitchFactor!==1)return copyPCMChunk(source.channels,source.sampleRate,sr/group.pitchFactor,start,count,{signal:group.controller.signal,offsetSourceFrames:group.originFrame*(source.sampleRate/sr)});
+  return copyPCMChunk(source.channels,source.sampleRate,sr,group.originFrame+start,count,{signal:group.controller.signal});
+ }
+ replaceStems(buffers){
+  this.assertOwner();if(!this.reservedStems)throw failure('InvalidStateError','This live owner did not reserve Stem channels');
+  if(!Array.isArray(buffers)||buffers.length!==4)throw new RangeError('Supply four prepared Stem buffers');
+  const sources=buffers.map(geometry),first=sources[0];
+  if(sources.some(s=>s.numberOfChannels>2||s.sampleRate!==first.sampleRate||s.length!==first.length||Math.abs(s.duration-this.duration)>.1+1e-9))throw new RangeError('Reserved Stems require aligned mono/stereo buffers within.1s of the original');
+  // Preserve each fixed stereo slot. Mono input is duplicated without changing
+  // its caller-owned buffer or allocating a whole-track stereo copy.
+  for(const source of sources)if(source.numberOfChannels===1){source.channels=[source.channels[0],source.channels[0]];source.numberOfChannels=2;}
+  return this.operation(async op=>{
+   await this.waitRetiring(op);this.checkOperation(op);const group=this.active;
+   await this.fill(group,this.position());this.checkOperation(op);
+   const previous=group.fillSerial;
+   const install=previous.catch(()=>{}).then(async()=>{
+    this.checkOperation(op);this.checkGroup(group);let chunks=0;
+    for(const chunk of group.chunks){
+     this.checkOperation(op);const pcm=[],cost=chunk.processorFrameCount*8*4;this.checkPCMAllocation(cost);this.inFlightPCMBytes+=cost;
+     try{
+      for(const source of sources){pcm.push(...await this.copySource(group,source,chunk.processorStartFrame,chunk.processorFrameCount));this.checkOperation(op);this.checkGroup(group);}
+      const ack=await group.nodes[0].replaceBufferChannels(chunk.processorStartFrame,this.sources[0].numberOfChannels,pcm,pcm.map(c=>c.buffer));
+      this.checkOperation(op);this.checkGroup(group);
+      if(ack.startFrame!==chunk.processorStartFrame||ack.endFrame!==chunk.processorStartFrame+chunk.processorFrameCount||ack.channels!==8)throw Error('Stem replacement acknowledgment mismatch');
+      chunks++;
+     }finally{this.inFlightPCMBytes-=cost;}
+    }
+    this.checkOperation(op);this.sources=[this.sources[0],...sources];this.describeSources();
+    // The transfer acknowledgment precedes audible output from the processor's
+    // existing analysis history. Keep preparation pending for the queried
+    // latency plus two render quanta; a first pad press must not pay this cost.
+    const acknowledgedAt=this.context.currentTime,readyAt=acknowledgedAt+group.latency+2*128/this.sampleRate,deadline=performance.now()+10000;
+    while(this.context.currentTime<readyAt){
+     this.checkOperation(op);this.checkGroup(group);
+     if(performance.now()>deadline)throw failure('TimeoutError','Stem output readiness did not advance on the audio clock');
+     await new Promise(resolve=>setTimeout(resolve,10));
+    }
+    this.checkOperation(op);this.checkGroup(group);this.stemsReady=true;
+    const response={group:group.id,chunks,channels:group.channels,acknowledgedAt,readyAt,originalChannelsUnchanged:true};this.emit('stems-replaced',response);return response;
+   });
+   group.fillSerial=install;return install;
+  });
  }
  validPosition(position){finite(position,'position');if(position<0||position>this.duration)throw new RangeError('Position must lie within original audible duration');return position;}
  assertOwner(){alive(this.signal);if(this.disposed)throw abortError();}
@@ -87,11 +137,11 @@ class LiveKeylock{
    try{
     for(const source of this.sources){
      const cost=count*source.numberOfChannels*4;this.checkPCMAllocation(cost);this.inFlightPCMBytes+=cost;inFlight+=cost;
-     pcm.push(...await copyKeylockChunk(source.buffer,this.sampleRate,start,count,{signal:group.controller.signal}));bytes.push(cost);this.checkGroup(group);
+     pcm.push(...await this.copySource(group,source,start-group.originFrame,count));bytes.push(cost);this.checkGroup(group);
     }
     const extent=await group.nodes[0].addBuffers(pcm,pcm.map(channel=>channel.buffer));this.checkGroup(group);
     const expected=(start+count-group.originFrame)/this.sampleRate;if(Math.abs(extent-expected)>1/this.sampleRate)throw Error('Processor append extent does not match context-frame window');
-    group.chunks.push({start,end:start+count,bytes});group.endFrame+=count;
+    group.chunks.push({start,end:start+count,bytes,processorStartFrame:start-group.originFrame,processorFrameCount:count});group.endFrame+=count;
    }finally{this.inFlightPCMBytes-=inFlight;}
   }
  }
@@ -112,12 +162,12 @@ class LiveKeylock{
    try{
     for(const source of this.sources){
      const cost=count*source.numberOfChannels*4;this.checkPCMAllocation(cost);this.inFlightPCMBytes+=cost;inFlight+=cost;
-     pcm.push(...await copyPCMChunk(source.channels,source.sampleRate,sr/q,start,count,{signal:group.controller.signal,offsetSourceFrames:group.originFrame*(source.sampleRate/sr)}));bytes.push(cost);this.checkGroup(group);
+     pcm.push(...await this.copySource(group,source,start,count));bytes.push(cost);this.checkGroup(group);
     }
     const extent=await group.nodes[0].addBuffers(pcm,pcm.map(c=>c.buffer));this.checkGroup(group);
     if(Math.abs(extent-(start+count)/sr)>1/sr)throw Error('Resampled processor append extent mismatch');
     group.pitchEndFrame=start+count;const end=Math.min(this.durationFrames,group.originFrame+group.pitchEndFrame*q);
-    group.chunks.push({start:group.originFrame+start*q,end,bytes});group.endFrame=end;
+    group.chunks.push({start:group.originFrame+start*q,end,bytes,processorStartFrame:start,processorFrameCount:count});group.endFrame=end;
    }finally{this.inFlightPCMBytes-=inFlight;}
   }
  }
@@ -142,13 +192,12 @@ class LiveKeylock{
    try{
     for(const source of this.sources){
      const cost=count*source.numberOfChannels*4;this.checkPCMAllocation(cost);this.inFlightPCMBytes+=cost;inFlight+=cost;
-     const offset=(segment.position+(origin-segment.prepared)*q)*source.sampleRate;
-     pcm.push(...await copyPCMChunk(source.channels,source.sampleRate,sr/q,start,count,{signal:group.controller.signal,offsetSourceFrames:offset}));bytes.push(cost);this.checkGroup(group);
+     pcm.push(...await this.copySource(group,source,start,count));bytes.push(cost);this.checkGroup(group);
     }
     const extent=await group.nodes[0].addBuffers(pcm,pcm.map(c=>c.buffer));this.checkGroup(group);
     if(Math.abs(extent-(start+count)/sr)>1/sr)throw Error('Mapped processor append extent mismatch');
     group.pitchEndFrame=start+count;const end=Math.min(this.durationFrames,map.sourceAt(origin+group.pitchEndFrame/sr)*sr);
-    group.chunks.push({start:map.sourceAt(origin+start/sr)*sr,end,bytes});group.endFrame=end;
+    group.chunks.push({start:map.sourceAt(origin+start/sr)*sr,end,bytes,processorStartFrame:start,processorFrameCount:count});group.endFrame=end;
    }finally{this.inFlightPCMBytes-=inFlight;}
   }
  }
@@ -227,6 +276,6 @@ class LiveKeylock{
  async retire(){if(this.retirementPromise)return this.retirementPromise;const old=this.retiring;if(!old)return;this.retiring=null;this.retirementPromise=this.disposeGroup(old).finally(()=>this.retirementPromise=null);return this.retirementPromise;}
  fail(error){if(this.disposed)return;this.lastError={name:error.name,message:error.message};this.emit('error',{error:this.lastError});this.dispose().catch(()=>{});}
  disposeGroup(group){if(group.disposePromise)return group.disposePromise;group.controller.abort();group.detachOperation?.();group.ownerDetach();for(const gain of group.gains){gainAt(gain.gain,0,this.context.currentTime);gain.disconnect();}for(const node of group.routingNodes)node.disconnect();group.disposePromise=(async()=>{const results=await Promise.allSettled(group.nodes.map(node=>node.dispose()));await Promise.allSettled([group.fillSerial]);this.groups.delete(group);group.chunks=[];group.nodes=[];group.gains=[];group.routingNodes=[];const failed=results.find(result=>result.status==='rejected');if(failed&&failed.reason?.name!=='AbortError')throw failed.reason;})();return group.disposePromise;}
- snapshot(){const groups=[...this.groups].map(g=>({id:g.id,pitchMap:g.pitchMap?.nodes||null,pitchSemitones:g.pitchSemitones,pitchFactor:g.pitchFactor,origin:g.originFrame/this.sampleRate,start:g.startFrame/this.sampleRate,end:g.endFrame/this.sampleRate,nodeCount:g.nodes.length,processorChannels:g.channels,sourceOutputs:g.gains.length,retainedPCMBytes:g.chunks.reduce((sum,c)=>sum+c.bytes.reduce((a,b)=>a+b,0),0),retainedChunks:g.chunks.length,latency:g.latency,role:g.disposePromise?'disposing':g===this.active?'selected':g===this.retiring?'retiring':'preparing'}));return{resamplePitch:this.resamplePitch,maxPCMBytes:this.maxPCMBytes,followMinimumLeadSeconds:FOLLOW_LEAD_SECONDS,byteAccounting:'Acknowledged retained PCM and in-flight chunk copies only; excludes decoded inputs, SRC tables and opaque WASM heaps.',disposed:this.disposed,state:this.stateAt(),sourceGeometry:this.sourceGeometry,groups,retainedPCMBytes:groups.reduce((sum,g)=>sum+g.retainedPCMBytes,0),inFlightPCMBytes:this.inFlightPCMBytes,decodedBytes:this.sourceGeometry.reduce((sum,s)=>sum+s.decodedBytes,0),policy,lastError:this.lastError};}
+ snapshot(){const groups=[...this.groups].map(g=>({id:g.id,pitchMap:g.pitchMap?.nodes||null,pitchSemitones:g.pitchSemitones,pitchFactor:g.pitchFactor,origin:g.originFrame/this.sampleRate,start:g.startFrame/this.sampleRate,end:g.endFrame/this.sampleRate,nodeCount:g.nodes.length,processorChannels:g.channels,sourceOutputs:g.gains.length,retainedPCMBytes:g.chunks.reduce((sum,c)=>sum+c.bytes.reduce((a,b)=>a+b,0),0),retainedChunks:g.chunks.length,latency:g.latency,role:g.disposePromise?'disposing':g===this.active?'selected':g===this.retiring?'retiring':'preparing'}));return{reservedStems:this.reservedStems,stemsReady:this.stemsReady,resamplePitch:this.resamplePitch,maxPCMBytes:this.maxPCMBytes,followMinimumLeadSeconds:FOLLOW_LEAD_SECONDS,byteAccounting:'Acknowledged retained PCM and in-flight chunk copies only; excludes decoded inputs, SRC tables and opaque WASM heaps.',disposed:this.disposed,state:this.stateAt(),sourceGeometry:this.sourceGeometry,groups,retainedPCMBytes:groups.reduce((sum,g)=>sum+g.retainedPCMBytes,0),inFlightPCMBytes:this.inFlightPCMBytes,decodedBytes:this.sourceGeometry.reduce((sum,s)=>sum+s.decodedBytes,0),policy,lastError:this.lastError};}
  dispose(){if(this.disposePromise)return this.disposePromise;const frozen=this.stateAt();this.clock=[{...frozen,when:this.context.currentTime,playing:false}];this.disposed=true;this.controller.abort();this.pending?.controller.abort();if(this.timer){clearTimeout(this.timer);this.timer=null;}this.ownerSignal?.removeEventListener('abort',this.ownerAbort);for(const output of this.outputs)gainAt(output.gain,0,this.context.currentTime);this.disposePromise=(async()=>{const results=await Promise.allSettled([...this.groups].map(group=>this.disposeGroup(group)));for(const output of this.outputs)output.disconnect();this.retiring=null;this.sources=[];this.emit('disposed',{snapshot:this.snapshot()});const rejected=results.find(result=>result.status==='rejected');if(rejected)throw rejected.reason;return{disposed:true,retainedPCMBytes:this.snapshot().retainedPCMBytes};})();return this.disposePromise;}
 }
