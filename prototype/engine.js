@@ -1245,6 +1245,7 @@ export class AudioEngine {
     if (!request) return;
     this.deckScratchRequests.delete(d.index);
     request.controller.abort();
+    if(request.censor)this.onCensorEnd?.(d,request.owner);
     // A reused transport may already have accepted Begin while its ACK is in
     // flight. Queue its matching End before any newer owner's Begin.
     if (!request.ready && request.transport && request.beginPosted)
@@ -1312,20 +1313,42 @@ export class AudioEngine {
     this.setCross(this.cross);
     if (stems) this.updateStems(d);
   }
-  async beginDeckScratch(d, owner) {
+  async prepareCensorPitchTransport(d, request) {
+    let transport;
+    try {
+      const original=await this.buffer(d.track),stems=this.stemBuffers.get(d.track.id)||null;
+      const rate=d.rate,semitones=(d.keyShift||0)+(d.keylock?0:12*Math.log2(rate));
+      const buffers=[];
+      for(const buffer of stems?[original,...stems]:[original]){
+        const rendered=await this.keylockRenderer.render(buffer,{tempo:rate,semitones,signal:request.controller.signal});
+        buffers.push({sampleRate:rendered.sampleRate/rate,channels:Array.from({length:rendered.numberOfChannels},(_,c)=>rendered.getChannelData(c))});
+      }
+      if(request.controller.signal.aborted)throw new DOMException('Censor preparation canceled.','AbortError');
+      transport=await this.prepareOrdinaryScratch(d);request.transport=transport;
+      await transport.replaceBuffers({generation:++this.deckScratchGeneration,original:buffers[0],stems:stems?buffers.slice(1):null,signal:request.controller.signal});
+      return transport;
+    } catch(error){transport?.dispose();throw error;}
+  }
+  async beginDeckScratch(d, owner, {censor=false}={}) {
     if (!d.track || d.track.missing || d.track.provider) return false;
     if (typeof owner !== 'string' || !owner.length) throw new TypeError('Scratch owner required.');
-    this.onManualPosition?.(d);
+    if(censor){
+      if(d.mode==='ABS')throw new Error('Censor is unavailable in Absolute mode.');
+      if(!d.playing)return false;
+      if(this.voices.get(d.index)?.gridTimeline)throw new Error('Censor with warped Sync is not implemented yet.');
+      if(this.deckScratchRequests.has(d.index))throw new Error('Release the current scratch gesture before Censor.');
+    }else this.onManualPosition?.(d);
     if (d.stemSlip && d.stemSlip !== 'off') throw new Error('Turn selected-stem Slip off before whole-deck scratching.');
     let retained=this.deckScratchShadows.get(d.index);
     if(retained&&!retained.sourcesMatch()){retained.dispose();retained=null;}
     this.cancelDeckScratchRequest(d,{preserveShadow:!!retained});
     this.deckStates.set(d.index, d);
-    const request = {owner, track: d.track, controller: new AbortController(), transport: null, ready: false, closing: false, wasPlaying: !!(d.playing || d.processing)};
+    const request = {owner, censor, track: d.track, controller: new AbortController(), transport: null, ready: false, closing: false, wasPlaying: !!(d.playing || d.processing)};
     this.deckScratchRequests.set(d.index, request);
     if(retained){retained.reserve(request);request.shadowLease=retained;}
     const current = () => this.deckScratchRequests.get(d.index) === request && d.track === request.track && !request.controller.signal.aborted && !request.closing;
-    let transport = this.voices.get(d.index)?.deckScratchTransport, committed = !!transport;
+    const pitchedCensor=censor&&(d.keylock||d.keyShift);
+    let transport = pitchedCensor?null:this.voices.get(d.index)?.deckScratchTransport, committed = !!transport;
     let preparedShadow=null;
     d.scratchPreparing = !transport;
     try {
@@ -1336,7 +1359,7 @@ export class AudioEngine {
         if(pending!==selected)pending?.abort();this.transforms.delete(d.index);
         this.startTokens.set(d.index, (this.startTokens.get(d.index) || 0) + 1);
         d.processing = false;
-        transport = await this.preloadDeckScratch(d);
+        transport = pitchedCensor?await this.prepareCensorPitchTransport(d,request):await this.preloadDeckScratch(d);
         if (!current()) return false;
         request.transport = transport;
         const live=this.voices.get(d.index);
@@ -1353,7 +1376,7 @@ export class AudioEngine {
           slip: !!d.slip, playing: request.wasPlaying, startAt: this.ctx.currentTime});
         if (!current()) return false;
         request.beginPosted = true;
-        await transport.command('begin', {generation, owner});
+        await transport.command(censor?'censor':'begin', {generation, owner});
         if (!current()) return false;
         const voice = {sources: [], deckScratchTransport: transport, scratchOwner:owner, stemGains: []};
         if(preparedShadow){
@@ -1370,7 +1393,7 @@ export class AudioEngine {
         const generation = transport.state().generation;
         if (!current()) return false;
         request.beginPosted = true;
-        await transport.command('begin', {generation, owner});
+        await transport.command(censor?'censor':'begin', {generation, owner});
         if (!current()) return false;
         if(retained)retained.claim(request,this.voices.get(d.index));
       }

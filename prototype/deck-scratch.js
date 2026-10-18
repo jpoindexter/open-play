@@ -69,7 +69,7 @@ export function createDeckScratchTransport(ctx,{outputChannels=2,rampMillisecond
     if(type==='dispose'){terminal(abort('Scratch transport disposed.'));return Promise.resolve(state());}
     if(disposed)return Promise.reject(abort('Scratch transport disposed.'));
     const payload={...data};
-    if(type==='begin'){
+    if(type==='begin'||type==='censor'){
       if(payload.gesture===undefined)payload.gesture=++gestureSequence;
       else if(Number.isSafeInteger(payload.gesture))gestureSequence=Math.max(gestureSequence,payload.gesture);
       activeGesture={generation:payload.generation,owner:payload.owner,gesture:payload.gesture};

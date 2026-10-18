@@ -65,7 +65,8 @@ export class KeylockScratchShadow {
   }
   sample(){
     if(this.phase!=='active'||!this.current())return;
-    this.desired=this.engine.position(this.deck);this.pump();
+    const raw=this.rawVoice.deckScratchTransport.state();
+    this.desired=raw.phase==='censor'&&raw.hidden?raw.hidden.position:this.engine.position(this.deck);this.pump();
   }
   pump(){
     if(this.pending||this.desired===null||this.phase!=='active'||!this.current())return;

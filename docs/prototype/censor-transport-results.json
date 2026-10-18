@@ -1,0 +1,22 @@
+{
+  "executed": true,
+  "command": "node scripts/test_censor_transport.mjs",
+  "scope": "Actual five-output PCM kernel, controlled engine early-cancel and hold/MIDI ownership; normal browser recording separate.",
+  "source_sha256": {
+    "prototype/censor.js": "4f0909f5562e1dd28e4b9f406015dd3963e96f706c32e863242494c0c2ccc794",
+    "prototype/deck-scratch-kernel.js": "a31a9b2039bde9bcaa4d3413bb8c3986cedfcd1aeffd8ee6f97484572542440f",
+    "prototype/engine.js": "ad5b0505dbd2fd016b0ac5dfb5abbe110e58187e14be091a4ca88c985100a2c9",
+    "prototype/deck-midi.js": "f1983f7a6d2b7ccf054f2fe981d86f8e161876d8e59fb38e2f26569b54d662b8",
+    "scripts/test_censor_transport.mjs": "e6954c071f601a1d4bcd716ea98bf0dd3c42fc1c6a8c5c2294a4144a6cb7eab1"
+  },
+  "passed": true,
+  "initial_contract_failure": "Paused state test wrongly demanded exact zero during existing 3ms mute ramp; final check excludes the first5ms and proves no sustained paused audition. Initial test source retained.",
+  "checks": [
+    "Five source buses reverse continuously past watchdog with Slip off",
+    "End restores independent forward clock; stale owner ignored",
+    "Loop clock and paused transport",
+    "Multiple held inputs, early release and ABS guard",
+    "Actual engine cancels queued preparation without replacing old voice",
+    "MIDI Note Off releases Censor; 272-address Hercules preset unchanged"
+  ]
+}

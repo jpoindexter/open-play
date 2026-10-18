@@ -1,0 +1,728 @@
+{
+  "scope": "Retained pre-scheduled-start baseline failures. Buffer identity matched; initial window included a queued start. Capture now waits for declared anchor+50ms before marking baseline; 1Hz/10ms-state/RMS criteria unchanged. These failures remain failures; no blanket onset/quality acceptance.",
+  "attempts": [
+    {
+      "retained_directory": "local-evidence/censor/first-workflow",
+      "result": {
+        "startedAt": "2026-10-18T02:10:04.873Z",
+        "completed": false,
+        "scope": "Actual normal browser pointer/U/J/MIDI Censor on raw chirp and fixed keylocked+2/tempo1.08. Synthetic inputs, not native/physical/reference/warped/selected-stem/full transport acceptance.",
+        "criteria": {
+          "cursorReturnSeconds": 0.01,
+          "frequencyErrorHz": 1,
+          "playingMinimumRMS": 0.005,
+          "windowStart": 0.1,
+          "windowEnd": 0.35
+        },
+        "events": [
+          {
+            "name": "raw-before",
+            "time": 0,
+            "expectedLeftAtEvent": 500.7609977324263,
+            "leftSlopeHzPerSecond": 40,
+            "expectedRight": 550
+          },
+          {
+            "name": "raw-reverse-early",
+            "time": 0.7430385487528345,
+            "expectedLeftAtEvent": 517.4793650794844,
+            "leftSlopeHzPerSecond": -40,
+            "expectedRight": 550
+          },
+          {
+            "name": "raw-reverse-late",
+            "time": 1.3003174603174603,
+            "expectedLeftAtEvent": 495.18820861732354,
+            "leftSlopeHzPerSecond": -40,
+            "expectedRight": 550
+          },
+          {
+            "name": "raw-return",
+            "time": 1.799546485260771,
+            "expectedLeftAtEvent": 572.7428571428571,
+            "leftSlopeHzPerSecond": 40,
+            "expectedRight": 550
+          },
+          {
+            "name": "pitched-before",
+            "time": 2.414875283446712,
+            "expectedLeftAtEvent": 370.4124759420931,
+            "leftSlopeHzPerSecond": 0,
+            "expectedRight": 550
+          },
+          {
+            "name": "pitched-reverse",
+            "time": 3.747120181405896,
+            "expectedLeftAtEvent": 370.4124759420931,
+            "leftSlopeHzPerSecond": 0,
+            "expectedRight": 550
+          },
+          {
+            "name": "pitched-return",
+            "time": 4.736870748299319,
+            "expectedLeftAtEvent": 370.4124759420931,
+            "leftSlopeHzPerSecond": 0,
+            "expectedRight": 550
+          }
+        ],
+        "checks": [
+          "Raw pointer/U/J continuous reverse, independent forward clock, shared holds and input-targeted release",
+          "Actual MIDI and keyboard shared pitched Censor; Note Off and blur; fixed-key/tempo forward-clock return",
+          "Paused and Absolute-mode UI do not start Censor"
+        ],
+        "errors": [
+          {
+            "message": "pitched-before channel 0 failed pitch/audio gate (625.7928328702544 vs 370.4124759420931)",
+            "stack": "Error: pitched-before channel 0 failed pitch/audio gate (625.7928328702544 vs 370.4124759420931)\n    at assert (http://127.0.0.1:18857/prototype/censor-harness.js:1:120)\n    at run (http://127.0.0.1:18857/prototype/censor-harness.js:39:354)"
+          }
+        ],
+        "sourceBefore": {
+          "app.js": "08692565bcca2f22611ea709e7de1e27adcc6edeccc473d180570405b2207b7d",
+          "engine.js": "ad5b0505dbd2fd016b0ac5dfb5abbe110e58187e14be091a4ca88c985100a2c9",
+          "censor.js": "4f0909f5562e1dd28e4b9f406015dd3963e96f706c32e863242494c0c2ccc794",
+          "deck-scratch.js": "d99f2cc3f06b0257fcedaa5fa8f4bc515016aef7652bbefb7e4f5bd9c47f6eb1",
+          "deck-scratch-kernel.js": "a31a9b2039bde9bcaa4d3413bb8c3986cedfcd1aeffd8ee6f97484572542440f",
+          "deck-scratch-worklet.js": "55201aa5eb1e6db5ab0f23ff47e307ca53e1c65aabe572eb9cdd8e9ab10a8b87",
+          "deck-midi.js": "f1983f7a6d2b7ccf054f2fe981d86f8e161876d8e59fb38e2f26569b54d662b8",
+          "keylock.js": "62adbfdd77df20deb1328302d4a8daf3d7bdc29870af453d39acfd2a02bf060b",
+          "keylock-scratch-shadow.js": "7463021735d41857137844bf9cf1f63ff4ac4a1789b47b1d1ab7899a4bc6f9f0",
+          "censor-harness.js": "fc7e426a73c3ded4a0b0a4722a6d90b0ce5881c30d6767bc3a4fe78860180103"
+        },
+        "rawStart": {
+          "generation": 3,
+          "gesture": 1,
+          "lastGesture": 1,
+          "owner": "censor:1",
+          "phase": "censor",
+          "position": 5.756258503398378,
+          "audiblePosition": 5.442789115649241,
+          "rate": 1,
+          "reverse": false,
+          "loop": null,
+          "slip": false,
+          "playing": true,
+          "audition": false,
+          "velocity": -1,
+          "duration": 18,
+          "startAt": 0.6385487528344671,
+          "audioTime": 0.7952834467120181,
+          "reason": "censor",
+          "ended": false,
+          "disposed": false,
+          "sourceCount": 1,
+          "outputChannels": 2,
+          "sanitizedSamples": 0,
+          "hidden": {
+            "position": 5.756258503398378,
+            "rate": 1,
+            "loop": null,
+            "playing": true
+          },
+          "loadingGeneration": null
+        },
+        "rawHeld": {
+          "generation": 3,
+          "gesture": 1,
+          "lastGesture": 1,
+          "owner": "censor:1",
+          "phase": "censor",
+          "position": 6.754716553266,
+          "audiblePosition": 4.444331065781618,
+          "rate": 1,
+          "reverse": false,
+          "loop": null,
+          "slip": false,
+          "playing": true,
+          "audition": false,
+          "velocity": -1,
+          "duration": 18,
+          "startAt": 0.6385487528344671,
+          "audioTime": 1.7937414965986396,
+          "reason": "censor",
+          "ended": false,
+          "disposed": false,
+          "sourceCount": 1,
+          "outputChannels": 2,
+          "sanitizedSamples": 0,
+          "hidden": {
+            "position": 6.754716553266,
+            "rate": 1,
+            "loop": null,
+            "playing": true
+          },
+          "loadingGeneration": null
+        },
+        "rawReturn": {
+          "actual": 6.818571428548453,
+          "expected": 6.8185714285714285
+        },
+        "pitchedStart": {
+          "generation": 5,
+          "gesture": 1,
+          "lastGesture": 1,
+          "owner": "censor:3",
+          "phase": "censor",
+          "position": 6.2708979591836735,
+          "audiblePosition": 6.2708979591836735,
+          "rate": 1.08,
+          "reverse": false,
+          "loop": null,
+          "slip": false,
+          "playing": true,
+          "audition": false,
+          "velocity": -1.08,
+          "duration": 18.000000000000004,
+          "startAt": 3.7964625850340137,
+          "audioTime": 3.7964625850340137,
+          "reason": "censor",
+          "ended": false,
+          "disposed": false,
+          "sourceCount": 1,
+          "outputChannels": 2,
+          "sanitizedSamples": 0,
+          "hidden": {
+            "position": 6.2708979591836735,
+            "rate": 1.08,
+            "loop": null,
+            "playing": true
+          },
+          "loadingGeneration": null
+        },
+        "pitchedReturn": {
+          "actual": 7.349232653058008,
+          "expected": 7.349232653058008,
+          "live": true
+        },
+        "recording": {
+          "bytes": 84475,
+          "format": "audio/webm;codecs=opus",
+          "sha256": "5e35a0a8d0c7c0e5bd0b911cb4673c6d4e6740d6bd8d83fcc7a13e1bcbb378ed"
+        },
+        "decoded": {
+          "duration": 5.219977324263039,
+          "sampleRate": 44100,
+          "frames": 230201,
+          "channels": 2
+        },
+        "audio": [
+          {
+            "name": "raw-before",
+            "expectedLeft": 509.7609977324263,
+            "expectedRight": 550,
+            "channels": [
+              {
+                "from": 0.1,
+                "to": 0.35,
+                "rms": 0.03736713408525101,
+                "hz": 509.17203195914857
+              },
+              {
+                "from": 0.1,
+                "to": 0.35,
+                "rms": 0.037384683096783076,
+                "hz": 550.0001370566911
+              }
+            ]
+          },
+          {
+            "name": "raw-reverse-early",
+            "expectedLeft": 508.4793650794844,
+            "expectedRight": 550,
+            "channels": [
+              {
+                "from": 0.8430385487528345,
+                "to": 1.0930385487528345,
+                "rms": 0.03725731079370782,
+                "hz": 509.09368518699955
+              },
+              {
+                "from": 0.8430385487528345,
+                "to": 1.0930385487528345,
+                "rms": 0.03734094051806226,
+                "hz": 549.9901739286765
+              }
+            ]
+          },
+          {
+            "name": "raw-reverse-late",
+            "expectedLeft": 486.18820861732354,
+            "expectedRight": 550,
+            "channels": [
+              {
+                "from": 1.4003174603174604,
+                "to": 1.6503174603174604,
+                "rms": 0.03738584321242822,
+                "hz": 486.80220994970233
+              },
+              {
+                "from": 1.4003174603174604,
+                "to": 1.6503174603174604,
+                "rms": 0.03729848109506167,
+                "hz": 549.9924256997939
+              }
+            ]
+          },
+          {
+            "name": "raw-return",
+            "expectedLeft": 581.7428571428571,
+            "expectedRight": 550,
+            "channels": [
+              {
+                "from": 1.899546485260771,
+                "to": 2.149546485260771,
+                "rms": 0.03736582365190678,
+                "hz": 581.1486707864309
+              },
+              {
+                "from": 1.899546485260771,
+                "to": 2.149546485260771,
+                "rms": 0.037381028661682844,
+                "hz": 550.0026370323237
+              }
+            ]
+          },
+          {
+            "name": "pitched-before",
+            "expectedLeft": 370.4124759420931,
+            "expectedRight": 550,
+            "channels": [
+              {
+                "from": 2.5148752834467123,
+                "to": 2.7648752834467123,
+                "rms": 0.031202618971312598,
+                "hz": 625.7928328702544
+              },
+              {
+                "from": 2.5148752834467123,
+                "to": 2.7648752834467123,
+                "rms": 0.03734669274950916,
+                "hz": 550.0052069108216
+              }
+            ]
+          },
+          {
+            "name": "pitched-reverse",
+            "expectedLeft": 370.4124759420931,
+            "expectedRight": 550,
+            "channels": [
+              {
+                "from": 3.847120181405896,
+                "to": 4.097120181405896,
+                "rms": 0.03737915506420689,
+                "hz": 370.4166909125075
+              },
+              {
+                "from": 3.847120181405896,
+                "to": 4.097120181405896,
+                "rms": 0.0373393299948384,
+                "hz": 549.9862710852796
+              }
+            ]
+          },
+          {
+            "name": "pitched-return",
+            "expectedLeft": 370.4124759420931,
+            "expectedRight": 550,
+            "channels": [
+              {
+                "from": 4.836870748299319,
+                "to": 5.086870748299319,
+                "rms": 0.03730417284775035,
+                "hz": 370.41493160670586
+              },
+              {
+                "from": 4.836870748299319,
+                "to": 5.086870748299319,
+                "rms": 0.03732171400909552,
+                "hz": 549.9970056522959
+              }
+            ]
+          }
+        ],
+        "sourceAfter": {
+          "app.js": "08692565bcca2f22611ea709e7de1e27adcc6edeccc473d180570405b2207b7d",
+          "engine.js": "ad5b0505dbd2fd016b0ac5dfb5abbe110e58187e14be091a4ca88c985100a2c9",
+          "censor.js": "4f0909f5562e1dd28e4b9f406015dd3963e96f706c32e863242494c0c2ccc794",
+          "deck-scratch.js": "d99f2cc3f06b0257fcedaa5fa8f4bc515016aef7652bbefb7e4f5bd9c47f6eb1",
+          "deck-scratch-kernel.js": "a31a9b2039bde9bcaa4d3413bb8c3986cedfcd1aeffd8ee6f97484572542440f",
+          "deck-scratch-worklet.js": "55201aa5eb1e6db5ab0f23ff47e307ca53e1c65aabe572eb9cdd8e9ab10a8b87",
+          "deck-midi.js": "f1983f7a6d2b7ccf054f2fe981d86f8e161876d8e59fb38e2f26569b54d662b8",
+          "keylock.js": "62adbfdd77df20deb1328302d4a8daf3d7bdc29870af453d39acfd2a02bf060b",
+          "keylock-scratch-shadow.js": "7463021735d41857137844bf9cf1f63ff4ac4a1789b47b1d1ab7899a4bc6f9f0",
+          "censor-harness.js": "fc7e426a73c3ded4a0b0a4722a6d90b0ce5881c30d6767bc3a4fe78860180103"
+        },
+        "sourceStable": true,
+        "finishedAt": "2026-10-18T02:10:10.174Z"
+      }
+    },
+    {
+      "retained_directory": "local-evidence/censor/source-trace",
+      "result": {
+        "startedAt": "2026-10-18T02:12:43.354Z",
+        "completed": false,
+        "scope": "Actual normal browser pointer/U/J/MIDI Censor on raw chirp and fixed keylocked+2/tempo1.08. Synthetic inputs, not native/physical/reference/warped/selected-stem/full transport acceptance.",
+        "criteria": {
+          "cursorReturnSeconds": 0.01,
+          "frequencyErrorHz": 1,
+          "playingMinimumRMS": 0.005,
+          "windowStart": 0.1,
+          "windowEnd": 0.35
+        },
+        "events": [
+          {
+            "name": "raw-before",
+            "time": 0,
+            "expectedLeftAtEvent": 500.7609977324263,
+            "leftSlopeHzPerSecond": 40,
+            "expectedRight": 550
+          },
+          {
+            "name": "raw-reverse-early",
+            "time": 0.7546485260770975,
+            "expectedLeftAtEvent": 518.4081632654254,
+            "leftSlopeHzPerSecond": -40,
+            "expectedRight": 550
+          },
+          {
+            "name": "raw-reverse-late",
+            "time": 1.3090249433106576,
+            "expectedLeftAtEvent": 496.2331065764895,
+            "leftSlopeHzPerSecond": -40,
+            "expectedRight": 550
+          },
+          {
+            "name": "raw-return",
+            "time": 1.8111564625850343,
+            "expectedLeftAtEvent": 573.2072562358277,
+            "leftSlopeHzPerSecond": 40,
+            "expectedRight": 550
+          },
+          {
+            "name": "pitched-before",
+            "time": 2.4322902494331067,
+            "expectedLeftAtEvent": 370.4124759420931,
+            "leftSlopeHzPerSecond": 0,
+            "expectedRight": 550
+          },
+          {
+            "name": "pitched-reverse",
+            "time": 3.755827664399093,
+            "expectedLeftAtEvent": 370.4124759420931,
+            "leftSlopeHzPerSecond": 0,
+            "expectedRight": 550
+          },
+          {
+            "name": "pitched-return",
+            "time": 4.742675736961451,
+            "expectedLeftAtEvent": 370.4124759420931,
+            "leftSlopeHzPerSecond": 0,
+            "expectedRight": 550
+          }
+        ],
+        "checks": [
+          "Raw pointer/U/J continuous reverse, independent forward clock, shared holds and input-targeted release",
+          "Actual MIDI and keyboard shared pitched Censor; Note Off and blur; fixed-key/tempo forward-clock return",
+          "Paused and Absolute-mode UI do not start Censor"
+        ],
+        "errors": [
+          {
+            "message": "pitched-before channel 0 failed pitch/audio gate (1400.912352377036 vs 370.4124759420931)",
+            "stack": "Error: pitched-before channel 0 failed pitch/audio gate (1400.912352377036 vs 370.4124759420931)\n    at assert (http://127.0.0.1:18857/prototype/censor-harness.js:1:120)\n    at run (http://127.0.0.1:18857/prototype/censor-harness.js:42:354)"
+          }
+        ],
+        "livePreparations": [
+          {
+            "time": 2.29297052154195,
+            "bufferMatchesCurrent": true,
+            "bufferSHA": "d12df69124011218f714febd27b7dcbec8dd1ca1f2d85f066270d3de5aa2df7e",
+            "rate": 1.08,
+            "semitones": 2
+          }
+        ],
+        "sourceBefore": {
+          "app.js": "08692565bcca2f22611ea709e7de1e27adcc6edeccc473d180570405b2207b7d",
+          "engine.js": "ad5b0505dbd2fd016b0ac5dfb5abbe110e58187e14be091a4ca88c985100a2c9",
+          "censor.js": "4f0909f5562e1dd28e4b9f406015dd3963e96f706c32e863242494c0c2ccc794",
+          "deck-scratch.js": "d99f2cc3f06b0257fcedaa5fa8f4bc515016aef7652bbefb7e4f5bd9c47f6eb1",
+          "deck-scratch-kernel.js": "a31a9b2039bde9bcaa4d3413bb8c3986cedfcd1aeffd8ee6f97484572542440f",
+          "deck-scratch-worklet.js": "55201aa5eb1e6db5ab0f23ff47e307ca53e1c65aabe572eb9cdd8e9ab10a8b87",
+          "deck-midi.js": "f1983f7a6d2b7ccf054f2fe981d86f8e161876d8e59fb38e2f26569b54d662b8",
+          "keylock.js": "62adbfdd77df20deb1328302d4a8daf3d7bdc29870af453d39acfd2a02bf060b",
+          "keylock-scratch-shadow.js": "7463021735d41857137844bf9cf1f63ff4ac4a1789b47b1d1ab7899a4bc6f9f0",
+          "censor-harness.js": "7e725e7323cd3feeedff26fa7611f16bb285c91149844fedf9c568fab08e2090"
+        },
+        "rawStart": {
+          "generation": 3,
+          "gesture": 1,
+          "lastGesture": 1,
+          "owner": "censor:1",
+          "phase": "censor",
+          "position": 5.773673469384772,
+          "audiblePosition": 5.460204081635635,
+          "rate": 1,
+          "reverse": false,
+          "loop": null,
+          "slip": false,
+          "playing": true,
+          "audition": false,
+          "velocity": -1,
+          "duration": 18,
+          "startAt": 1.1551927437641722,
+          "audioTime": 1.3119274376417234,
+          "reason": "censor",
+          "ended": false,
+          "disposed": false,
+          "sourceCount": 1,
+          "outputChannels": 2,
+          "sanitizedSamples": 0,
+          "hidden": {
+            "position": 5.773673469384772,
+            "rate": 1,
+            "loop": null,
+            "playing": true
+          },
+          "loadingGeneration": null
+        },
+        "rawHeld": {
+          "generation": 3,
+          "gesture": 1,
+          "lastGesture": 1,
+          "owner": "censor:1",
+          "phase": "censor",
+          "position": 6.772131519252395,
+          "audiblePosition": 4.461746031768013,
+          "rate": 1,
+          "reverse": false,
+          "loop": null,
+          "slip": false,
+          "playing": true,
+          "audition": false,
+          "velocity": -1,
+          "duration": 18,
+          "startAt": 1.1551927437641722,
+          "audioTime": 2.3103854875283445,
+          "reason": "censor",
+          "ended": false,
+          "disposed": false,
+          "sourceCount": 1,
+          "outputChannels": 2,
+          "sanitizedSamples": 0,
+          "hidden": {
+            "position": 6.772131519252395,
+            "rate": 1,
+            "loop": null,
+            "playing": true
+          },
+          "loadingGeneration": null
+        },
+        "rawReturn": {
+          "actual": 6.8301814058728265,
+          "expected": 6.830181405895692
+        },
+        "pitchedSource": {
+          "time": 2.426485260770975,
+          "anchor": 2.584875283446712,
+          "sourceMatchesCurrent": true,
+          "currentSHA": "d12df69124011218f714febd27b7dcbec8dd1ca1f2d85f066270d3de5aa2df7e"
+        },
+        "pitchedStart": {
+          "generation": 5,
+          "gesture": 1,
+          "lastGesture": 1,
+          "owner": "censor:3",
+          "phase": "censor",
+          "position": 6.25835918367345,
+          "audiblePosition": 6.245820408163285,
+          "rate": 1.08,
+          "reverse": false,
+          "loop": null,
+          "slip": false,
+          "playing": true,
+          "audition": false,
+          "velocity": -1.08,
+          "duration": 18.000000000000004,
+          "startAt": 4.3014965986394555,
+          "audioTime": 4.307301587301587,
+          "reason": "censor",
+          "ended": false,
+          "disposed": false,
+          "sourceCount": 1,
+          "outputChannels": 2,
+          "sanitizedSamples": 0,
+          "hidden": {
+            "position": 6.25835918367345,
+            "rate": 1.08,
+            "loop": null,
+            "playing": true
+          },
+          "loadingGeneration": null
+        },
+        "pitchedReturn": {
+          "actual": 7.330424489792704,
+          "expected": 7.330424489792704,
+          "live": true
+        },
+        "recording": {
+          "bytes": 84475,
+          "format": "audio/webm;codecs=opus",
+          "sha256": "613631c76c8f52f001e9533cbc3cfc2931d3d526323ad27b89dd90608379d2f4"
+        },
+        "decoded": {
+          "duration": 5.219977324263039,
+          "sampleRate": 44100,
+          "frames": 230201,
+          "channels": 2
+        },
+        "audio": [
+          {
+            "name": "raw-before",
+            "expectedLeft": 509.7609977324263,
+            "expectedRight": 550,
+            "channels": [
+              {
+                "from": 0.1,
+                "to": 0.35,
+                "rms": 0.037373554941728906,
+                "hz": 509.1715149222224
+              },
+              {
+                "from": 0.1,
+                "to": 0.35,
+                "rms": 0.037296070297581904,
+                "hz": 550.0041293709522
+              }
+            ]
+          },
+          {
+            "name": "raw-reverse-early",
+            "expectedLeft": 509.4081632654254,
+            "expectedRight": 550,
+            "channels": [
+              {
+                "from": 0.8546485260770975,
+                "to": 1.1046485260770975,
+                "rms": 0.0372502186849131,
+                "hz": 509.9935588059412
+              },
+              {
+                "from": 0.8546485260770975,
+                "to": 1.1046485260770975,
+                "rms": 0.037395958438590955,
+                "hz": 549.9993593925566
+              }
+            ]
+          },
+          {
+            "name": "raw-reverse-late",
+            "expectedLeft": 487.2331065764895,
+            "expectedRight": 550,
+            "channels": [
+              {
+                "from": 1.4090249433106576,
+                "to": 1.6590249433106576,
+                "rms": 0.03735683659715564,
+                "hz": 487.8245184690815
+              },
+              {
+                "from": 1.4090249433106576,
+                "to": 1.6590249433106576,
+                "rms": 0.03730764033249144,
+                "hz": 550.0079536370558
+              }
+            ]
+          },
+          {
+            "name": "raw-return",
+            "expectedLeft": 582.2072562358277,
+            "expectedRight": 550,
+            "channels": [
+              {
+                "from": 1.9111564625850344,
+                "to": 2.1611564625850344,
+                "rms": 0.03726323490228751,
+                "hz": 581.6352275448954
+              },
+              {
+                "from": 1.9111564625850344,
+                "to": 2.1611564625850344,
+                "rms": 0.03732164063003669,
+                "hz": 550.0007970828566
+              }
+            ]
+          },
+          {
+            "name": "pitched-before",
+            "expectedLeft": 370.4124759420931,
+            "expectedRight": 550,
+            "channels": [
+              {
+                "from": 2.5322902494331068,
+                "to": 2.7822902494331068,
+                "rms": 0.031108472228875604,
+                "hz": 1400.912352377036
+              },
+              {
+                "from": 2.5322902494331068,
+                "to": 2.7822902494331068,
+                "rms": 0.03731255814244947,
+                "hz": 549.9996649564046
+              }
+            ]
+          },
+          {
+            "name": "pitched-reverse",
+            "expectedLeft": 370.4124759420931,
+            "expectedRight": 550,
+            "channels": [
+              {
+                "from": 3.855827664399093,
+                "to": 4.105827664399093,
+                "rms": 0.03730068059463249,
+                "hz": 370.4078177780749
+              },
+              {
+                "from": 3.855827664399093,
+                "to": 4.105827664399093,
+                "rms": 0.037298774517487754,
+                "hz": 550.0057852244304
+              }
+            ]
+          },
+          {
+            "name": "pitched-return",
+            "expectedLeft": 370.4124759420931,
+            "expectedRight": 550,
+            "channels": [
+              {
+                "from": 4.842675736961451,
+                "to": 5.092675736961451,
+                "rms": 0.03731846600666076,
+                "hz": 370.4133542932447
+              },
+              {
+                "from": 4.842675736961451,
+                "to": 5.092675736961451,
+                "rms": 0.03734911592689769,
+                "hz": 550.0058129210461
+              }
+            ]
+          }
+        ],
+        "sourceAfter": {
+          "app.js": "08692565bcca2f22611ea709e7de1e27adcc6edeccc473d180570405b2207b7d",
+          "engine.js": "ad5b0505dbd2fd016b0ac5dfb5abbe110e58187e14be091a4ca88c985100a2c9",
+          "censor.js": "4f0909f5562e1dd28e4b9f406015dd3963e96f706c32e863242494c0c2ccc794",
+          "deck-scratch.js": "d99f2cc3f06b0257fcedaa5fa8f4bc515016aef7652bbefb7e4f5bd9c47f6eb1",
+          "deck-scratch-kernel.js": "a31a9b2039bde9bcaa4d3413bb8c3986cedfcd1aeffd8ee6f97484572542440f",
+          "deck-scratch-worklet.js": "55201aa5eb1e6db5ab0f23ff47e307ca53e1c65aabe572eb9cdd8e9ab10a8b87",
+          "deck-midi.js": "f1983f7a6d2b7ccf054f2fe981d86f8e161876d8e59fb38e2f26569b54d662b8",
+          "keylock.js": "62adbfdd77df20deb1328302d4a8daf3d7bdc29870af453d39acfd2a02bf060b",
+          "keylock-scratch-shadow.js": "7463021735d41857137844bf9cf1f63ff4ac4a1789b47b1d1ab7899a4bc6f9f0",
+          "censor-harness.js": "7e725e7323cd3feeedff26fa7611f16bb285c91149844fedf9c568fab08e2090"
+        },
+        "sourceStable": true,
+        "finishedAt": "2026-10-18T02:12:49.154Z"
+      }
+    }
+  ]
+}

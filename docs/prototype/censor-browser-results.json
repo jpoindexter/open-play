@@ -1,0 +1,364 @@
+{
+  "startedAt": "2026-10-18T02:13:51.709Z",
+  "completed": true,
+  "scope": "Actual normal browser pointer/U/J/MIDI Censor on raw chirp and fixed keylocked+2/tempo1.08. Synthetic inputs, not native/physical/reference/warped/selected-stem/full transport acceptance.",
+  "criteria": {
+    "cursorReturnSeconds": 0.01,
+    "frequencyErrorHz": 1,
+    "playingMinimumRMS": 0.005,
+    "windowStart": 0.1,
+    "windowEnd": 0.35
+  },
+  "events": [
+    {
+      "name": "raw-before",
+      "time": 0,
+      "expectedLeftAtEvent": 501.68979591836734,
+      "leftSlopeHzPerSecond": 40,
+      "expectedRight": 550
+    },
+    {
+      "name": "raw-reverse-early",
+      "time": 0.760453514739229,
+      "expectedLeftAtEvent": 519.1047619048812,
+      "leftSlopeHzPerSecond": -40,
+      "expectedRight": 550
+    },
+    {
+      "name": "raw-reverse-late",
+      "time": 1.3119274376417231,
+      "expectedLeftAtEvent": 497.04580498920564,
+      "leftSlopeHzPerSecond": -40,
+      "expectedRight": 550
+    },
+    {
+      "name": "raw-return",
+      "time": 1.8169614512471655,
+      "expectedLeftAtEvent": 574.368253968254,
+      "leftSlopeHzPerSecond": 40,
+      "expectedRight": 550
+    },
+    {
+      "name": "pitched-before",
+      "time": 2.641269841269841,
+      "expectedLeftAtEvent": 370.4124759420931,
+      "leftSlopeHzPerSecond": 0,
+      "expectedRight": 550
+    },
+    {
+      "name": "pitched-reverse",
+      "time": 3.9764172335600905,
+      "expectedLeftAtEvent": 370.4124759420931,
+      "leftSlopeHzPerSecond": 0,
+      "expectedRight": 550
+    },
+    {
+      "name": "pitched-return",
+      "time": 4.963265306122449,
+      "expectedLeftAtEvent": 370.4124759420931,
+      "leftSlopeHzPerSecond": 0,
+      "expectedRight": 550
+    }
+  ],
+  "checks": [
+    "Raw pointer/U/J continuous reverse, independent forward clock, shared holds and input-targeted release",
+    "Actual MIDI and keyboard shared pitched Censor; Note Off and blur; fixed-key/tempo forward-clock return",
+    "Paused and Absolute-mode UI do not start Censor",
+    "Seven fixed whole-master chirp/tone windows; forward and reverse key processing"
+  ],
+  "errors": [],
+  "livePreparations": [
+    {
+      "time": 2.287165532879819,
+      "bufferMatchesCurrent": true,
+      "bufferSHA": "d12df69124011218f714febd27b7dcbec8dd1ca1f2d85f066270d3de5aa2df7e",
+      "rate": 1.08,
+      "semitones": 2
+    }
+  ],
+  "sourceBefore": {
+    "app.js": "08692565bcca2f22611ea709e7de1e27adcc6edeccc473d180570405b2207b7d",
+    "engine.js": "ad5b0505dbd2fd016b0ac5dfb5abbe110e58187e14be091a4ca88c985100a2c9",
+    "censor.js": "4f0909f5562e1dd28e4b9f406015dd3963e96f706c32e863242494c0c2ccc794",
+    "deck-scratch.js": "d99f2cc3f06b0257fcedaa5fa8f4bc515016aef7652bbefb7e4f5bd9c47f6eb1",
+    "deck-scratch-kernel.js": "a31a9b2039bde9bcaa4d3413bb8c3986cedfcd1aeffd8ee6f97484572542440f",
+    "deck-scratch-worklet.js": "55201aa5eb1e6db5ab0f23ff47e307ca53e1c65aabe572eb9cdd8e9ab10a8b87",
+    "deck-midi.js": "f1983f7a6d2b7ccf054f2fe981d86f8e161876d8e59fb38e2f26569b54d662b8",
+    "keylock.js": "62adbfdd77df20deb1328302d4a8daf3d7bdc29870af453d39acfd2a02bf060b",
+    "keylock-scratch-shadow.js": "7463021735d41857137844bf9cf1f63ff4ac4a1789b47b1d1ab7899a4bc6f9f0",
+    "censor-harness.js": "e166dfa30a8b1f41d6a9071cc05f7e4b0cc3d563a6e9d4f88a34433116141d21"
+  },
+  "rawStart": {
+    "generation": 3,
+    "gesture": 1,
+    "lastGesture": 1,
+    "owner": "censor:1",
+    "phase": "censor",
+    "position": 5.796893424033299,
+    "audiblePosition": 5.483424036284162,
+    "rate": 1,
+    "reverse": false,
+    "loop": null,
+    "slip": false,
+    "playing": true,
+    "audition": false,
+    "velocity": -1,
+    "duration": 18,
+    "startAt": 1.1784126984126984,
+    "audioTime": 1.3351473922902495,
+    "reason": "censor",
+    "ended": false,
+    "disposed": false,
+    "sourceCount": 1,
+    "outputChannels": 2,
+    "sanitizedSamples": 0,
+    "hidden": {
+      "position": 5.796893424033299,
+      "rate": 1,
+      "loop": null,
+      "playing": true
+    },
+    "loadingGeneration": null
+  },
+  "rawHeld": {
+    "generation": 3,
+    "gesture": 1,
+    "lastGesture": 1,
+    "owner": "censor:1",
+    "phase": "censor",
+    "position": 6.795351473900921,
+    "audiblePosition": 4.484965986416539,
+    "rate": 1,
+    "reverse": false,
+    "loop": null,
+    "slip": false,
+    "playing": true,
+    "audition": false,
+    "velocity": -1,
+    "duration": 18,
+    "startAt": 1.1784126984126984,
+    "audioTime": 2.3336054421768706,
+    "reason": "censor",
+    "ended": false,
+    "disposed": false,
+    "sourceCount": 1,
+    "outputChannels": 2,
+    "sanitizedSamples": 0,
+    "hidden": {
+      "position": 6.795351473900921,
+      "rate": 1,
+      "loop": null,
+      "playing": true
+    },
+    "loadingGeneration": null
+  },
+  "rawReturn": {
+    "actual": 6.859206349183374,
+    "expected": 6.8592063492063495
+  },
+  "pitchedSource": {
+    "time": 2.641269841269841,
+    "anchor": 2.5790702947845805,
+    "sourceMatchesCurrent": true,
+    "currentSHA": "d12df69124011218f714febd27b7dcbec8dd1ca1f2d85f066270d3de5aa2df7e"
+  },
+  "pitchedStart": {
+    "generation": 5,
+    "gesture": 1,
+    "lastGesture": 1,
+    "owner": "censor:3",
+    "phase": "censor",
+    "position": 6.50286530612243,
+    "audiblePosition": 6.490326530612265,
+    "rate": 1.08,
+    "reverse": false,
+    "loop": null,
+    "slip": false,
+    "playing": true,
+    "audition": false,
+    "velocity": -1.08,
+    "duration": 18.000000000000004,
+    "startAt": 4.54530612244898,
+    "audioTime": 4.556916099773242,
+    "reason": "censor",
+    "ended": false,
+    "disposed": false,
+    "sourceCount": 1,
+    "outputChannels": 2,
+    "sanitizedSamples": 0,
+    "hidden": {
+      "position": 6.50286530612243,
+      "rate": 1.08,
+      "loop": null,
+      "playing": true
+    },
+    "loadingGeneration": null
+  },
+  "pitchedReturn": {
+    "actual": 7.568661224486582,
+    "expected": 7.568661224486582,
+    "live": true
+  },
+  "recording": {
+    "bytes": 87373,
+    "format": "audio/webm;codecs=opus",
+    "sha256": "c405ee8e9aee2f73c8c48dc4a09ccfc2897cda92afdf3f6740e8e4ad07cd1fd6",
+    "original_local_path": "local-evidence/censor/final/master.webm"
+  },
+  "decoded": {
+    "duration": 5.3999773242630384,
+    "sampleRate": 44100,
+    "frames": 238139,
+    "channels": 2
+  },
+  "audio": [
+    {
+      "name": "raw-before",
+      "expectedLeft": 510.68979591836734,
+      "expectedRight": 550,
+      "channels": [
+        {
+          "from": 0.1,
+          "to": 0.35,
+          "rms": 0.03728800645312017,
+          "hz": 510.3858669690664
+        },
+        {
+          "from": 0.1,
+          "to": 0.35,
+          "rms": 0.03733013277573351,
+          "hz": 549.9980158171034
+        }
+      ]
+    },
+    {
+      "name": "raw-reverse-early",
+      "expectedLeft": 510.10476190488123,
+      "expectedRight": 550,
+      "channels": [
+        {
+          "from": 0.8604535147392289,
+          "to": 1.110453514739229,
+          "rms": 0.03729440663874484,
+          "hz": 510.4286265944671
+        },
+        {
+          "from": 0.8604535147392289,
+          "to": 1.110453514739229,
+          "rms": 0.03721652118454596,
+          "hz": 550.0048140032944
+        }
+      ]
+    },
+    {
+      "name": "raw-reverse-late",
+      "expectedLeft": 488.04580498920564,
+      "expectedRight": 550,
+      "channels": [
+        {
+          "from": 1.4119274376417232,
+          "to": 1.6619274376417232,
+          "rms": 0.03732868567141243,
+          "hz": 488.32381211115035
+        },
+        {
+          "from": 1.4119274376417232,
+          "to": 1.6619274376417232,
+          "rms": 0.03735068934178068,
+          "hz": 550.0118272586894
+        }
+      ]
+    },
+    {
+      "name": "raw-return",
+      "expectedLeft": 583.368253968254,
+      "expectedRight": 550,
+      "channels": [
+        {
+          "from": 1.9169614512471655,
+          "to": 2.1669614512471655,
+          "rms": 0.037267414965765994,
+          "hz": 583.0434143580995
+        },
+        {
+          "from": 1.9169614512471655,
+          "to": 2.1669614512471655,
+          "rms": 0.037290238526055716,
+          "hz": 550.0007659556691
+        }
+      ]
+    },
+    {
+      "name": "pitched-before",
+      "expectedLeft": 370.4124759420931,
+      "expectedRight": 550,
+      "channels": [
+        {
+          "from": 2.7412698412698413,
+          "to": 2.9912698412698413,
+          "rms": 0.03733615848833496,
+          "hz": 370.41183087926487
+        },
+        {
+          "from": 2.7412698412698413,
+          "to": 2.9912698412698413,
+          "rms": 0.03724741299597515,
+          "hz": 550.0075691856832
+        }
+      ]
+    },
+    {
+      "name": "pitched-reverse",
+      "expectedLeft": 370.4124759420931,
+      "expectedRight": 550,
+      "channels": [
+        {
+          "from": 4.076417233560091,
+          "to": 4.326417233560091,
+          "rms": 0.03730588921566966,
+          "hz": 370.41232036339073
+        },
+        {
+          "from": 4.076417233560091,
+          "to": 4.326417233560091,
+          "rms": 0.037310084882850425,
+          "hz": 550.0098157562946
+        }
+      ]
+    },
+    {
+      "name": "pitched-return",
+      "expectedLeft": 370.4124759420931,
+      "expectedRight": 550,
+      "channels": [
+        {
+          "from": 5.063265306122449,
+          "to": 5.313265306122449,
+          "rms": 0.03729039740218621,
+          "hz": 370.4143962872269
+        },
+        {
+          "from": 5.063265306122449,
+          "to": 5.313265306122449,
+          "rms": 0.037253864790847815,
+          "hz": 549.9946277551643
+        }
+      ]
+    }
+  ],
+  "sourceAfter": {
+    "app.js": "08692565bcca2f22611ea709e7de1e27adcc6edeccc473d180570405b2207b7d",
+    "engine.js": "ad5b0505dbd2fd016b0ac5dfb5abbe110e58187e14be091a4ca88c985100a2c9",
+    "censor.js": "4f0909f5562e1dd28e4b9f406015dd3963e96f706c32e863242494c0c2ccc794",
+    "deck-scratch.js": "d99f2cc3f06b0257fcedaa5fa8f4bc515016aef7652bbefb7e4f5bd9c47f6eb1",
+    "deck-scratch-kernel.js": "a31a9b2039bde9bcaa4d3413bb8c3986cedfcd1aeffd8ee6f97484572542440f",
+    "deck-scratch-worklet.js": "55201aa5eb1e6db5ab0f23ff47e307ca53e1c65aabe572eb9cdd8e9ab10a8b87",
+    "deck-midi.js": "f1983f7a6d2b7ccf054f2fe981d86f8e161876d8e59fb38e2f26569b54d662b8",
+    "keylock.js": "62adbfdd77df20deb1328302d4a8daf3d7bdc29870af453d39acfd2a02bf060b",
+    "keylock-scratch-shadow.js": "7463021735d41857137844bf9cf1f63ff4ac4a1789b47b1d1ab7899a4bc6f9f0",
+    "censor-harness.js": "e166dfa30a8b1f41d6a9071cc05f7e4b0cc3d563a6e9d4f88a34433116141d21"
+  },
+  "sourceStable": true,
+  "finishedAt": "2026-10-18T02:13:57.746Z",
+  "all_declared_served_hashes_match_disk": true
+}

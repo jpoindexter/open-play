@@ -55,7 +55,7 @@ export class DeckScratchKernel{
     this.transition={position:this.cursor,velocity:this.velocity,loop:copyLoop(oldLoop),left:this.rampFrames};this.cursor=position;this.velocity=velocity;
   }
   finish(reason='released'){
-    if(this.phase!=='scratching')return;
+    if(!['scratching','censor'].includes(this.phase))return;
     const final=this.hidden?this.hidden.position:this.cursor,wasPlaying=this.hidden?this.hidden.playing:this.playing;
     if(!this.hidden&&this.loop&&(final<this.loop.start||final>=this.loop.end)){this.loop=null;reason+='-outside-loop-cleared';}
     this.position=final;this.changeHead(final,wasPlaying?signedRate(this):0,null);this.playing=wasPlaying;this.phase='idle';this.owner=null;this.gesture=0;this.hidden=null;this.audition=false;this.reason=reason;
@@ -71,14 +71,15 @@ export class DeckScratchKernel{
     }
     if(!this.sources.length)throw new Error('Load scratch PCM first.');integer(data.generation,'Load generation');
     if(data.generation!==this.generation)return this.state({ignored:'stale-generation'});
-    if(['begin','scratch','end'].includes(type))this.ownerValue(data);
-    if(type==='begin'){
+    if(['begin','censor','scratch','end'].includes(type))this.ownerValue(data);
+    if(type==='begin'||type==='censor'){
       if(data.gesture<=this.lastGesture)return this.state({ignored:'stale-gesture'});
       this.finish('replaced-gesture');this.lastGesture=data.gesture;this.gesture=data.gesture;this.owner=data.owner;
-      const prior=signedRate(this);this.hidden=this.slip?{position:this.position,rate:prior,loop:copyLoop(this.loop),playing:this.playing}:null;
-      this.changeHead(this.position,0,this.loop);this.phase='scratching';this.audition=true;this.lastMove=this.audioTime;this.setGain(0);this.reason='touch';
+      const censor=type==='censor',prior=signedRate(this);this.hidden=this.slip||censor?{position:this.position,rate:prior,loop:copyLoop(this.loop),playing:this.playing}:null;
+      this.changeHead(this.position,censor&&this.playing?-this.rate:0,this.loop);this.phase=censor?'censor':'scratching';this.audition=!censor;this.lastMove=this.audioTime;this.setGain(censor&&this.playing?1:0);this.reason=censor?'censor':'touch';
     }else if(type==='scratch'||type==='end'){
-      if(this.phase!=='scratching'||data.owner!==this.owner||data.gesture!==this.gesture)return this.state({ignored:'stale-owner'});
+      if(!['scratching','censor'].includes(this.phase)||data.owner!==this.owner||data.gesture!==this.gesture)return this.state({ignored:'stale-owner'});
+      if(type==='scratch'&&this.phase==='censor')return this.state({ignored:'censor-active'});
       if(type==='end')this.finish();
       else{const position=this.positionValue(data.position),velocity=finite(data.velocity,'Scratch velocity');if(Math.abs(velocity)>16)throw new RangeError('Scratch velocity must be within ±16.');this.changeHead(position,velocity,null);if(!this.hidden)this.position=position;this.lastMove=this.audioTime;this.ended=false;this.setGain(velocity===0?0:1);this.reason='move';}
     }else if(type==='configure'){
@@ -125,8 +126,8 @@ export class DeckScratchKernel{
         if(this.transition){const old=this.sample(source,channel,this.transition.position),mix=this.transition.left/this.rampFrames;value=value*(1-mix)+old*mix;}
         const out=value*this.gain;outputs[source][channel][frame]=Number.isFinite(out)?out:0;
       }
-      if(this.phase==='scratching'){
-        this.cursor=advanceDeckScratchPosition(this.cursor,this.velocity/this.sr,this.duration);
+      if(this.phase==='scratching'||this.phase==='censor'){
+        this.cursor=advanceDeckScratchPosition(this.cursor,this.velocity/this.sr,this.duration,this.phase==='censor'?this.loop:null);
         if(this.hidden){if(this.hidden.playing){this.hidden.position=advanceDeckScratchPosition(this.hidden.position,this.hidden.rate/this.sr,this.duration,this.hidden.loop);if(!this.hidden.loop&&((this.hidden.rate>0&&this.hidden.position>=this.duration)||(this.hidden.rate<0&&this.hidden.position<=0)))this.hidden.playing=false;}this.position=this.hidden.position;}
         else this.position=this.cursor;
       }else if(this.playing){

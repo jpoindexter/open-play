@@ -310,6 +310,7 @@ export const helpKeys = [
   ["Load selected → left / right", "Shift + ← / →"],
   ["Play / pause left / right", "W / S"],
   ["Reverse left / right", "Q / A"],
+  ["Hold Censor left / right", "U / J"],
   ["Hold pitch bend down / up (left)", "T / Y"],
   ["Hold pitch bend down / up (right)", "G / H"],
   ["Keylock left / right", "F5 / F10"],

@@ -9,7 +9,7 @@ const continuous=['fader start','tempo ignore','tempo','trim','high','mid','low'
 const padCommands=['auto loop','loop roll','stems','pitch play','pitch cue select'].flatMap(mode=>Array.from({length:8},(_,i)=>`${mode} pad ${i+1}`));
 const manualCommands=Array.from({length:7},(_,n)=>`manual loop pad ${n+1}`);
 const scratchCommands=Array.from({length:8},(_,n)=>[`scratch bank pad ${n+1}`,`scratch bank previous pad ${n+1}`]).flat();
-const commands=['tap tempo','instant double','auto loop four',...manualCommands,...scratchCommands,...padCommands,'load','play','cue','sync','sync off','headphone cue','loop','loop in','loop out','loop half','loop double','keylock','jog touch','jog touch fast','vinyl','slip','quantize','tempo range','previous','stutter'];
+const commands=['censor','tap tempo','instant double','auto loop four',...manualCommands,...scratchCommands,...padCommands,'load','play','cue','sync','sync off','headphone cue','loop','loop in','loop out','loop half','loop double','keylock','jog touch','jog touch fast','vinyl','slip','quantize','tempo range','previous','stutter'];
 export const deckMIDITargets=Array.from({length:4},(_,i)=>[...continuous,...commands,...Array.from({length:8},(_,n)=>`hot cue ${n+1}`),...Array.from({length:8},(_,n)=>`clear cue ${n+1}`)].map(x=>`Deck ${i+1} ${x}`)).flat();
 export const samplerMIDITargets=Array.from({length:8},(_,n)=>[`Sampler ${n+1}`,`Sampler ${n+1} alt`]).flat();
 export const libraryMIDITargets=['Library browse','Library fast browse','Library focus','Prepare add','Prepare open'];
@@ -90,6 +90,10 @@ export function createDeckMIDIRouter({state,engine,actions,applyFX=()=>{},onChan
    if(buttons.has(key(message)))return true;
    const hot=/^hot cue ([1-8])$/.exec(action),clear=/^clear cue ([1-8])$/.exec(action),cue=action==='cue'||!!hot;
    const held={owner,cue,deviceId:message.deviceId||'',release:null};buttons.set(key(message),held);
+   if(action==='censor'){
+    if(mapping.encoding!=='7-bit absolute'||message.type==='Pitch bend'){buttons.delete(key(message));throw Error('Censor needs a7-bit Note/CC button with release.');}
+    held.release=()=>actions.censorHolds.release(owner);await actions.censorHolds.press(owner,d);return true;
+   }
    if(action==='tap tempo'){await actions.tapTempo(d,message.timestamp);return true;}
    if(action==='instant double'){await actions.instantDouble(d.index);return true;}
    if(action==='auto loop four'){const started=actions.loopPads.press(d,'auto',5,{length:4,ignoreBeatJump:true});await started.pending;return true;}

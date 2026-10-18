@@ -3,6 +3,7 @@ import {createInstantDouble} from './instant-double.js';
 import {createManualLoops} from './manual-loops.js';
 import {createLoopPads} from './loop-pads.js';
 import {createJogBend} from './jog-bend.js';
+import {createCensorHolds} from './censor.js';
 import { synchronizeSimple } from './sync.js';
 import { createSmartSync, hasBeatgrid, beatPosition } from './smart-sync.js';
 import {createBeatgrid} from './beatgrid.js';
@@ -440,7 +441,7 @@ function renderDecks() {
         )
         .join(
           "",
-        )}<button data-action="keyDown" data-deck="${d.index}" title="Shift key down one semitone; prototype limit±24">Key −</button><button data-action="keyUp" data-deck="${d.index}" title="Shift key up one semitone; prototype limit±24">Key +</button><button data-action="keySync" data-deck="${d.index}" class="${d.keySync ? "active" : ""}">Key Sync</button><button data-action="keyReset" data-deck="${d.index}">Reset key</button><button data-action="range" data-deck="${d.index}">±${d.pitchRange}</button><button data-action="double" data-deck="${d.index}">Double</button><span class="spacer"></span><small class="muted">${d.processing ? "PROCESSING PITCH…" : d.mode === "INT" ? "LOCAL AUDIO" : "DEVICE SIMULATION"}</small></div><div class="wave-wrap" data-seek="${d.index}" tabindex="0" role="slider" aria-label="Deck ${d.index + 1} play position" aria-valuemin="0" aria-valuemax="${t?.duration || 48}" aria-valuenow="${engine.position(d)}"><canvas id="wave-${d.index}" width="900" height="100"></canvas><span class="playhead" id="head-${d.index}"></span><span class="wave-label" data-wave-scope="${d.index}" aria-live="polite">${t?.analyzed ? "Decoded waveform" : "Generated overview fixture"} · ${t?.bpm || "—"} BPM</span></div></article>`;
+        )}<button data-action="censor" data-deck="${d.index}" aria-pressed="${!!d.censor}" class="${d.censor ? "active" : ""}" ${d.mode === "ABS" || !t || !d.playing ? "disabled" : ""} title="Hold for reverse; release resumes the forward timeline">Censor</button><button data-action="keyDown" data-deck="${d.index}" title="Shift key down one semitone; prototype limit±24">Key −</button><button data-action="keyUp" data-deck="${d.index}" title="Shift key up one semitone; prototype limit±24">Key +</button><button data-action="keySync" data-deck="${d.index}" class="${d.keySync ? "active" : ""}">Key Sync</button><button data-action="keyReset" data-deck="${d.index}">Reset key</button><button data-action="range" data-deck="${d.index}">±${d.pitchRange}</button><button data-action="double" data-deck="${d.index}">Double</button><span class="spacer"></span><small class="muted">${d.processing ? "PROCESSING PITCH…" : d.mode === "INT" ? "LOCAL AUDIO" : "DEVICE SIMULATION"}</small></div><div class="wave-wrap" data-seek="${d.index}" tabindex="0" role="slider" aria-label="Deck ${d.index + 1} play position" aria-valuemin="0" aria-valuemax="${t?.duration || 48}" aria-valuenow="${engine.position(d)}"><canvas id="wave-${d.index}" width="900" height="100"></canvas><span class="playhead" id="head-${d.index}"></span><span class="wave-label" data-wave-scope="${d.index}" aria-live="polite">${t?.analyzed ? "Decoded waveform" : "Generated overview fixture"} · ${t?.bpm || "—"} BPM</span></div></article>`;
     })
     .join("");
   if (state.layout === "Vertical")
@@ -1276,6 +1277,11 @@ const cueHolds = createCueHolds({
   notify,
 });
 api.cueHolds = cueHolds;
+const censorHolds=createCensorHolds({engine,onChange:(d,active)=>{
+  document.querySelectorAll(`[data-action="censor"][data-deck="${d.index}"]`).forEach(button=>{button.classList.toggle('active',active);button.setAttribute('aria-pressed',String(active));});
+},onError:error=>notify(error.message)});
+engine.onCensorEnd=censorHolds.forget;
+api.censorHolds=censorHolds;
 const manualLoops=createManualLoops({state,engine,quantized,persist,render:renderDecks,notify});
 api.manualLoops=manualLoops;
 function renderLoopDecks(){
@@ -1309,6 +1315,7 @@ document.addEventListener("click", async (e) => {
     if (el.dataset.action) {
       const d = state.decks[Number(el.dataset.deck)];
       if (
+        el.dataset.action === "censor" ||
         el.dataset.action === "cue" ||
         (el.dataset.action === "pad" && ["Cues", "Slicer", "Pitch"].includes(d.tab))
       )
@@ -1420,6 +1427,14 @@ document.addEventListener("click", (e) => {
       d.track.duration,
   );
 });
+document.addEventListener('pointerdown', e=>{
+  const button=e.target.closest('[data-action="censor"]');if(!button||button.disabled||e.button!==0)return;
+  e.preventDefault();void censorHolds.press(`pointer:${e.pointerId}`,state.decks[Number(button.dataset.deck)]);
+});
+document.addEventListener('pointerup',e=>void censorHolds.release(`pointer:${e.pointerId}`));
+document.addEventListener('pointercancel',e=>void censorHolds.release(`pointer:${e.pointerId}`));
+window.addEventListener('blur',()=>void censorHolds.releaseAll());
+document.addEventListener('visibilitychange',()=>{if(document.hidden)void censorHolds.releaseAll();});
 document.addEventListener("pointerdown", (e) => {
   const el = e.target.closest('[data-action="cue"],[data-action="pad"]');
   if (!el || e.button !== 0) return;
@@ -1577,6 +1592,9 @@ $("#columns").onclick = () => panels.columns();
 $("#library-tools").onclick = () => panels.libraryTools();
 document.addEventListener("keydown", async (e) => {
   const tag = e.target.tagName;
+  if([' ','Enter'].includes(e.key)&&e.target.dataset.action==='censor'){
+    e.preventDefault();if(!e.repeat)void censorHolds.press(`button:${e.code||e.key}`,state.decks[Number(e.target.dataset.deck)]);return;
+  }
   const loopTarget=[' ','Enter'].includes(e.key)?loopHoldTarget(e.target):null;
   if(loopTarget){e.preventDefault();if(!e.repeat){try{loopOperation(loopPads.hold('button:'+e.key,loopTarget.d,loopTarget.pad,loopTarget.options));}catch(error){notify(error.message);}}return;}
   if([' ','Enter'].includes(e.key)&&e.target.dataset.deck!==undefined&&(['loopMode','loopRangeDown','loopRangeUp'].includes(e.target.dataset.action)||(e.target.dataset.action==='pad'&&state.decks[Number(e.target.dataset.deck)].tab==='Loops'))){
@@ -1687,6 +1705,9 @@ document.addEventListener("keydown", async (e) => {
     catch(error){notify(error.message);}
     return;
   }
+  if(!mod&&!e.altKey&&['u','j'].includes(k)){
+    e.preventDefault();if(!e.repeat)void censorHolds.press(`key:${e.code||k}`,state.decks[k==='u'?0:1]);return;
+  }
   if(!mod&&!e.altKey&&['t','y','g','h'].includes(k)){
     e.preventDefault();
     if(!e.repeat)void jogBend.hold(state.decks[k==='t'||k==='y'?0:1],`keyboard:${e.code||k}`,k==='t'||k==='g'?-1:1).catch(error=>notify(error.message));
@@ -1713,6 +1734,8 @@ document.addEventListener("keydown", async (e) => {
   }
 });
 document.addEventListener("keyup", (e) => {
+  void censorHolds.release(`key:${e.code||e.key.toLowerCase()}`);
+  void censorHolds.release(`button:${e.code||e.key}`);
   void jogBend.releaseHold(`keyboard:${e.code||e.key.toLowerCase()}`).catch(error=>notify(error.message));
   loopOperation(loopPads.release("button:"+e.key));
   void pitchPlay.release("button:" + e.key);
