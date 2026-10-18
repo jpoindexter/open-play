@@ -686,10 +686,11 @@ export class AudioEngine {
     const saved=changes.map(({deck,rate})=>({deck,rate,owner:{},previous:deck.rate,track:deck.track,playing:deck.playing,clock:this.voiceClock(deck,this.voices.get(deck.index))}));
     if(saved.some(x=>x.deck.processing&&!x.playing))throw Error('Finish deck preparation before changing group tempo.');
     const active=saved.filter(x=>x.playing);
-    const gesture=active.some(x=>this.voices.get(x.deck.index)?.deckScratchTransport||(x.deck.stemSlip&&x.deck.stemSlip!=='off')||x.deck.reverse);
+    const gesture=active.some(x=>this.voices.get(x.deck.index)?.deckScratchTransport||(x.deck.stemSlip&&x.deck.stemSlip!=='off'));
     const requiresPreparation=active.some(x=>x.deck.keylock||x.deck.keyShift||this.voices.get(x.deck.index)?.gridTimeline||this.voices.get(x.deck.index)?.liveKeylock);
     // Preserve the existing immediate AudioParam path for ordinary raw decks.
-    // Gesture transports retain their existing path pending group acceptance.
+    // Reverse grid voices support the same future starts; scratch and Stems
+    // Slip gesture transports retain their existing separate rate path.
     if(gesture||!requiresPreparation)return Promise.all(saved.map(x=>this.setRate(x.deck,x.rate,{syncInternal:true})));
     const group=active.length?createSyncTempoHandoff(this.ctx,active.map(x=>x.deck.index)):null;
     try{

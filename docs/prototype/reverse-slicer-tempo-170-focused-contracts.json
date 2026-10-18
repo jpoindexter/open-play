@@ -1,0 +1,41 @@
+{
+  "before": {
+    "passed": false,
+    "scope": "Actual AudioEngine reverse-rate group selection/barriers/rollback with controlled preparation; no audio/native proof. Actual GUI/PCM verified separately.",
+    "tests": [
+      {
+        "name": "Reverse warped tempo retains audible voice while replacement prepares at a future handoff",
+        "passed": false,
+        "error": "The expression evaluated to a falsy value:\n\n  assert(retained)\n"
+      },
+      {
+        "name": "Mixed forward/reverse keyed members share one prepared future start without early retirement",
+        "passed": false,
+        "error": "The expression evaluated to a falsy value:\n\n  assert(retained)\n"
+      },
+      {
+        "name": "Reverse preparation failure retains audible owner and restores the uncommitted rate",
+        "passed": false,
+        "error": "Expected values to be strictly equal:\n+ actual - expected\n\n+ undefined\n- {\n-   censorBacking: null,\n-   gridTimeline: {\n-     bpm: 120,\n-     clock: [Function: clock],\n-     rateAt: [Function: rateAt],\n-     reverse: true\n-   },\n-   sources: []\n- }\n"
+      }
+    ]
+  },
+  "after": {
+    "passed": true,
+    "scope": "Actual AudioEngine reverse-rate group selection/barriers/rollback with controlled preparation; no audio/native proof. Actual GUI/PCM verified separately.",
+    "tests": [
+      {
+        "name": "Reverse warped tempo retains audible voice while replacement prepares at a future handoff",
+        "passed": true
+      },
+      {
+        "name": "Mixed forward/reverse keyed members share one prepared future start without early retirement",
+        "passed": true
+      },
+      {
+        "name": "Reverse preparation failure retains audible owner and restores the uncommitted rate",
+        "passed": true
+      }
+    ]
+  }
+}

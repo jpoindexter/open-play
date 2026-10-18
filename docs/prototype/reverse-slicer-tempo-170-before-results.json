@@ -1,0 +1,303 @@
+{
+  "checkpoint": 170,
+  "passed": false,
+  "originalBytes": 5319203,
+  "originalSHA256": "1d3c1cd8d7a63023531a65ef6c357b92897623f403d62270bd662dd2dae249c7",
+  "sourceHashes": {
+    "app.js": "8ba6135f0cfa9da99ebbc27d7343abfdc977a0b4f0c0cfd9aca3f3ea112a8d0f",
+    "engine.js": "384de569f83bf68a1a0e0201b3cb51d3288ea23b79090362e6f59d5188342884",
+    "stems.js": "5fb06aba4f6a97e4150d1bcfeef394574b0c9e9ed6ee099b78b89482b08ea4b7",
+    "panels.js": "06217033416d62af4602c1572086dc03bb9f25458a8f90c884f3d552c7b1d4fe",
+    "keylock.js": "62adbfdd77df20deb1328302d4a8daf3d7bdc29870af453d39acfd2a02bf060b",
+    "keylock-worker.js": "5cb72a1bc74e1808c32b430d72d5769427c7056edee11410eb6f8b3c7751fcec",
+    "keylock-dsp.js": "f4cb1881fedb018f395a6711d263aa142feb8dfe93638a3d1f97fc432c15ac3d",
+    "smart-sync.js": "98d34b559882d16e3b3e8c715d6a3c35a6197cb8d6a984fe5470b80592ca934e",
+    "slicer.js": "09ba9e951312560102c1a81a2be070843531262a1ca71ddb7bdd2edc5d340acb",
+    "tempo-slider.js": "b83de88ef715f7bdd68d9d7745862f9ecaac80c41f53e91c7041b01f1576f7cf",
+    "sync-tempo-handoff.js": "5842f9209035e24ff867004d3fef5f0a1fe7f7f4976440546b8238a225b82f9b",
+    "beatgrid.js": "af239aef231c9d089bf2352b8f548a5f71f734d6cf753986f17f57b3999477b9",
+    "warp-loop.js": "33091f4414d2066ce47657aa96312dfefc6ca0a061ccab04ddf00ef6121addc4",
+    "warp-loop-kernel.js": "8a331758bc551454a3cc65fd5ea527c42a370bd22ab6eb650ca278ea87e0f414",
+    "warp-loop-worklet.js": "bc977262180f910c6be55ea07a46f6b560a090939271bd4beec5e8fd31ed23fa",
+    "reverse-censor-plan.js": "38adfb04c0e498a8e2cb27b0240f037d315f24b0c8cd6968e338ff29b0af3807",
+    "stem-slicer-170-harness.js": "1beeea2248d466af8b5c491b3a6b5693cf67de728035a6fac6906dc4d16803b3",
+    "stem-activation-capture-145.js": "730b9c3de31e9c3546ec1ab86f8fd85ce2a1ccfe6f78fc25d8f483f8b9d75331",
+    "stem-history-worklet.js": "d1e4f452044235a110a874fad2921390878c5731f3a769896ca5bfb2faf08daa",
+    "keylock-shadow-live.js": "41bf27051270a4741f83b59bc7c0111767b589ef3986b4aafb43ad36dc067551",
+    "vendor/signalsmith-stretch/SignalsmithStretch-open-play-replace.mjs": "abc12a3afe332b3aa32c1e1ec931f362225f0de09beb727a90944cf7c96baf46",
+    "vendor/signalsmith-stretch/SignalsmithStretch-open-play-reference-dsp.mjs": "0512cae2a33873956026e64cb47854c1c677baf1beb1bc0242edfb9557987f21"
+  },
+  "criteria": {
+    "minimumRMS": 1e-05,
+    "maximumPositionError": 0.01,
+    "maximumStoppedPeak": 1e-07,
+    "maximumEndDeadlineLateness": 0.05,
+    "continuityBinSeconds": 0.01,
+    "continuityRMSFloor": 1e-07,
+    "maximumSilentRunSeconds": 0.05
+  },
+  "rawReferenceCriterion": {
+    "windowSeconds": [
+      0.05,
+      0.25
+    ],
+    "maximumRelativeRMS": 0.0001,
+    "alignment": "Known exports/grid/anchors/reverse sample mapping, no fit."
+  },
+  "observations": [
+    {
+      "name": "raw-reverse-slicer-tempo",
+      "selectedSliceCorrect": true,
+      "releasedTransportCorrect": true,
+      "expectedBackgroundPosition": 4.148318065003779,
+      "observedPosition": 4.148318065003778,
+      "backgroundClockErrorSeconds": 8.881784197001252e-16,
+      "backgroundClockCorrect": true,
+      "packets": [
+        {
+          "kind": "heldPCM",
+          "channel": 0,
+          "frames": 13230,
+          "contiguousQuanta": 104,
+          "sha256": "5049d91bcfb0c3f3ecb008af589e760acf10af6a9a4d199b3319af5a182d1619",
+          "rms": 0.13354319772523507,
+          "peak": 0.5636212825775146,
+          "maximumQuietRunSeconds": 0.0,
+          "minimumBinRMS": 0.04262215510875645,
+          "rawRelativeRMSError": 3.030251847813781e-08,
+          "rawSelectedSourceCorrect": true
+        },
+        {
+          "kind": "heldPCM",
+          "channel": 1,
+          "frames": 13230,
+          "contiguousQuanta": 104,
+          "sha256": "647ba47e51dd3e42ffc6a5e71691b91f213f7be3bfb6f1c22ba2809be19f75f7",
+          "rms": 0.1443630363780781,
+          "peak": 0.5129194259643555,
+          "maximumQuietRunSeconds": 0.0,
+          "minimumBinRMS": 0.05457660498105735,
+          "rawRelativeRMSError": 2.8328843945639882e-08,
+          "rawSelectedSourceCorrect": true
+        },
+        {
+          "kind": "transitionPCM",
+          "channel": 0,
+          "frames": 132300,
+          "contiguousQuanta": 1034,
+          "sha256": "065972e2e5a5cd7d0e989f38981ac69f856a9db4381cf6c2c12edd80d334fdd0",
+          "rms": 0.12888242121021867,
+          "peak": 0.5593015551567078,
+          "maximumQuietRunSeconds": 0.04,
+          "minimumBinRMS": 0.0,
+          "continuousAudioCorrect": true
+        },
+        {
+          "kind": "transitionPCM",
+          "channel": 1,
+          "frames": 132300,
+          "contiguousQuanta": 1034,
+          "sha256": "cf9f5b7bde917553385a68a3fbc528c4e3a30359f9b3b3107f064b1fdc2ea84e",
+          "rms": 0.13660264162847188,
+          "peak": 0.5123779773712158,
+          "maximumQuietRunSeconds": 0.04,
+          "minimumBinRMS": 0.0,
+          "continuousAudioCorrect": true
+        },
+        {
+          "kind": "afterPCM",
+          "channel": 0,
+          "frames": 13230,
+          "contiguousQuanta": 104,
+          "sha256": "eac9cf85b3290e3c1ad9f5d0e58aee136f3527408896083ca16649233eee98e3",
+          "rms": 0.12870743749636168,
+          "peak": 0.4644790291786194,
+          "maximumQuietRunSeconds": 0.0,
+          "minimumBinRMS": 0.07038312116023974,
+          "rawRelativeRMSError": 4.1643207934040536e-08,
+          "rawSelectedSourceCorrect": true
+        },
+        {
+          "kind": "afterPCM",
+          "channel": 1,
+          "frames": 13230,
+          "contiguousQuanta": 104,
+          "sha256": "79b97abfe6edb8b1829ab97048527b5df224c3c458e444f56c49b082d922e1e1",
+          "rms": 0.12594106863171417,
+          "peak": 0.5390674471855164,
+          "maximumQuietRunSeconds": 0.0,
+          "minimumBinRMS": 0.07104628646821294,
+          "rawRelativeRMSError": 4.167946125244565e-08,
+          "rawSelectedSourceCorrect": true
+        }
+      ]
+    },
+    {
+      "name": "keyed-reverse-slicer-tempo",
+      "selectedSliceCorrect": true,
+      "releasedTransportCorrect": true,
+      "expectedBackgroundPosition": 0.9737410430839022,
+      "observedPosition": 0.9737410430839013,
+      "backgroundClockErrorSeconds": 8.881784197001252e-16,
+      "backgroundClockCorrect": true,
+      "packets": [
+        {
+          "kind": "heldPCM",
+          "channel": 0,
+          "frames": 13230,
+          "contiguousQuanta": 104,
+          "sha256": "b74a32b2dc41d6823c07f97af8a8a6adcf32b3fe6c9d165f39f61dab7c881af4",
+          "rms": 0.13352697793733526,
+          "peak": 0.46341511607170105,
+          "maximumQuietRunSeconds": 0.0,
+          "minimumBinRMS": 0.039033956130850485
+        },
+        {
+          "kind": "heldPCM",
+          "channel": 1,
+          "frames": 13230,
+          "contiguousQuanta": 104,
+          "sha256": "89247ecdce78cd6948fff96604da7ee0951d1ed215d4316eae26ceb673bfd54b",
+          "rms": 0.1443021353698264,
+          "peak": 0.5425002574920654,
+          "maximumQuietRunSeconds": 0.0,
+          "minimumBinRMS": 0.04009579153618834
+        },
+        {
+          "kind": "transitionPCM",
+          "channel": 0,
+          "frames": 132300,
+          "contiguousQuanta": 1034,
+          "sha256": "afad6ffd51abe32893cf83d43a1f8421c9e918c93d2f0c5c97f0961364f7bfeb",
+          "rms": 0.11008081518869284,
+          "peak": 0.40831929445266724,
+          "maximumQuietRunSeconds": 0.8200000000000001,
+          "minimumBinRMS": 0.0,
+          "continuousAudioCorrect": false
+        },
+        {
+          "kind": "transitionPCM",
+          "channel": 1,
+          "frames": 132300,
+          "contiguousQuanta": 1034,
+          "sha256": "fbab71ce5d65fffd8f97e6d2b3d803fafa3e33107f092cfc4aaf5bde6798ce17",
+          "rms": 0.11541609419320183,
+          "peak": 0.4903603494167328,
+          "maximumQuietRunSeconds": 0.8200000000000001,
+          "minimumBinRMS": 0.0,
+          "continuousAudioCorrect": false
+        },
+        {
+          "kind": "afterPCM",
+          "channel": 0,
+          "frames": 13230,
+          "contiguousQuanta": 104,
+          "sha256": "2910de06eadf22273adc44913eb1326159cd11e8ee75e55982abb88576b1621f",
+          "rms": 0.09646905703618766,
+          "peak": 0.31666240096092224,
+          "maximumQuietRunSeconds": 0.0,
+          "minimumBinRMS": 0.05118754729443283
+        },
+        {
+          "kind": "afterPCM",
+          "channel": 1,
+          "frames": 13230,
+          "contiguousQuanta": 104,
+          "sha256": "eef060a3354ea82804f5b5469a5aa505a96560f54e19b1ad47f7493168b78681",
+          "rms": 0.1150964566477707,
+          "peak": 0.3745955228805542,
+          "maximumQuietRunSeconds": 0.0,
+          "minimumBinRMS": 0.06109071569864813
+        }
+      ]
+    },
+    {
+      "name": "keyed-reverse-nonloop-tempo",
+      "selectedSliceCorrect": true,
+      "releasedTransportCorrect": true,
+      "expectedBackgroundPosition": 1.925529856386999,
+      "observedPosition": 2.6398155706727167,
+      "backgroundClockErrorSeconds": 0.7142857142857177,
+      "backgroundClockCorrect": false,
+      "packets": [
+        {
+          "kind": "heldPCM",
+          "channel": 0,
+          "frames": 13230,
+          "contiguousQuanta": 104,
+          "sha256": "75dadf1b54f9b6587b7c9eaa5bcc9fa85e923847355f09be8eb2864cad106a9e",
+          "rms": 0.13948124040938986,
+          "peak": 0.4544938802719116,
+          "maximumQuietRunSeconds": 0.0,
+          "minimumBinRMS": 0.05651026025175585
+        },
+        {
+          "kind": "heldPCM",
+          "channel": 1,
+          "frames": 13230,
+          "contiguousQuanta": 104,
+          "sha256": "cf7ddca001b378c3bedacc3b463169dabbda7cedc0b08b7b7d6fc5c531713f31",
+          "rms": 0.1447117247439087,
+          "peak": 0.4698614478111267,
+          "maximumQuietRunSeconds": 0.0,
+          "minimumBinRMS": 0.056981277496083525
+        },
+        {
+          "kind": "transitionPCM",
+          "channel": 0,
+          "frames": 132300,
+          "contiguousQuanta": 1034,
+          "sha256": "347a3b6c98bed26c5c34fafe2723c96acd57760833b548b375cd97d1f24bb97d",
+          "rms": 0.11623365515847062,
+          "peak": 0.5068104267120361,
+          "maximumQuietRunSeconds": 0.52,
+          "minimumBinRMS": 0.0,
+          "continuousAudioCorrect": false
+        },
+        {
+          "kind": "transitionPCM",
+          "channel": 1,
+          "frames": 132300,
+          "contiguousQuanta": 1034,
+          "sha256": "5292ad78d02d2aaa1127d5fa7936d615429fa14d57e43c9f5130170f99a98f04",
+          "rms": 0.11812455989914067,
+          "peak": 0.5666702389717102,
+          "maximumQuietRunSeconds": 0.52,
+          "minimumBinRMS": 0.0,
+          "continuousAudioCorrect": false
+        },
+        {
+          "kind": "afterPCM",
+          "channel": 0,
+          "frames": 13230,
+          "contiguousQuanta": 104,
+          "sha256": "3ca88a74d4d0091ff7503a9498b4fec03d2c530dc89352fcd641c74a5f0decfe",
+          "rms": 0.13223544778856988,
+          "peak": 0.5398763418197632,
+          "maximumQuietRunSeconds": 0.0,
+          "minimumBinRMS": 0.05199747020824335
+        },
+        {
+          "kind": "afterPCM",
+          "channel": 1,
+          "frames": 13230,
+          "contiguousQuanta": 104,
+          "sha256": "f7b5976835f12ab0cec26b831e3264f661d76e19ad5a89459fc4b6723f946847",
+          "rms": 0.12857466849252275,
+          "peak": 0.4719043970108032,
+          "maximumQuietRunSeconds": 0.0,
+          "minimumBinRMS": 0.050603697924098044
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "default48000Acceptance": false,
+  "musicalPitchQualityAccepted": false,
+  "sourceAttributionAccepted": false,
+  "exactSeratoParityAccepted": false,
+  "perceptuallySeamlessAcceptance": false,
+  "nativeAcceptance": false,
+  "hardwareAcceptance": false,
+  "fullParityAcceptance": false
+}
