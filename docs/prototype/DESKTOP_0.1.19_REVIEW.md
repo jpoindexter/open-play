@@ -1,3 +1,5 @@
+> Plan126: the named sink already completed in19/20. Stale immediate AudioParam.value-based MUTED status was mistaken for a pending switch; Play/resume was not established as necessary.21reports accepted control target and sets explicit quad routing with zero decks playing. Automatic resume hypothesis rejected and removed; see OUTPUT_SELECTION_STATUS_REVIEW.md. Historical observations below remain scoped to19; their suspended-switch interpretation is superseded.
+
 # Desktop0.1.19: prepared for first hands-on playback
 
 **The Hercules named four-channel route is applied. The earlier missing-output conclusion was an inspection error, not a demonstrated app regression.** A collapsed native selector shows its selected item; inspect the refreshed expanded menu. Actual API counts now visible in Devices:6devices,4audiooutputs,4addressable,4named,windowvisible. Native18trace shows correct own-main speaker permission allowed; media/mic/camera remain denied.19adds count/status only; no routing/audio permission change. Historical17/18records retain explicit correction notices.

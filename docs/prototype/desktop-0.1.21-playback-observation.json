@@ -1,0 +1,39 @@
+{
+  "date": "2026-10-18",
+  "version": "0.1.21",
+  "sourceCommit": "ca5da7d7190aead7a605efcc77a70091cb0a1b30",
+  "ASARSHA256": "9e1aa183fd2959e69eb7eb3fb1c08acf1a3aead3ad98785f47cf7246133d238b",
+  "actualNativeWorkflow": [
+    "Fresh launch:0decksplaying, both clocks00:00.0, Master-12dB.",
+    "Devices > Refresh > expand Output device > named Hercules > Use selected output. First returned AX status shows named stereo and no MUTED; selection button enabled. No Play, context-resume workaround, close/reopen or scripting of renderer.",
+    "Choose Four channels > Apply channels. First returned AX status shows named Hercules/master1/2/cue3/4/mix0%/cuevol10%, no MUTED.",
+    "Close Devices; observe0decksplaying and both clocks00:00.0. Normal MIDI editor sees connectedHercules; Export through native Save dialog.",
+    "Close mapping editor; leave both decks stopped, Master-12dB/meter silence, levels.8/.8, crossfadercenter, Sync/keylockoff."
+  ],
+  "statusMeaning": "physicalMuted reports the successfully scheduled mute target; it is control state, not measured samples, acoustic output or socket proof. AudioParam.value may lag until the rendering thread advances.",
+  "mapping": {
+    "entries": 272,
+    "bytes": 64916,
+    "sha256": "37b61c1dbf16d43a1f14d7d932c88dc3a4d2ba1a062ae23e5175c91d58953864",
+    "matchesEarlierExports": true
+  },
+  "sourceChanges": "audio-monitor.js reports accepted target; audio-output.js exposes pending state; panels.js provides busy/status/Apply feedback. No automatic context resume, DSP/transport/routing/permission change.",
+  "retainedExperiment": "Candidate20 and OUTPUT_RESUME_HYPOTHESIS.md record rejected automatic-resume hypothesis. Native selection had already resolved; stale status was the defect.",
+  "proofFiles": [
+    "local-evidence/desktop-0.1.21-native/initial-stopped.ax.txt",
+    "local-evidence/desktop-0.1.21-native/selection-first-observation.ax.txt",
+    "local-evidence/desktop-0.1.21-native/quad-first-observation.ax.txt",
+    "local-evidence/desktop-0.1.21-native/final-stopped.ax.txt",
+    "local-evidence/desktop-0.1.21-native/quad.png",
+    "local-evidence/desktop-0.1.21-native/main-stopped.png"
+  ],
+  "limits": [
+    "Current physical Play/sound/socket/controller/latency/music acceptance awaits human. No timed capture while away.",
+    "No rendered PCM/audio matrix repeated for control-state-only change. Prior native17AutoGain and native16Sync evidence retain their original versions.",
+    "Pending UI ownership/error logic is contract-tested; native slow-switch/error/disconnect paths not forced.",
+    "Waveform ARIA consistency and full Serato reference acceptance remain open."
+  ],
+  "readyForFirstHandsOnTest": true,
+  "physicalAcceptanceVerified": false,
+  "fullParityVerified": false
+}
