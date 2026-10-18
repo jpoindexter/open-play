@@ -48,7 +48,18 @@ try{
    assert.equal(relative.webContents.session.check(relative.webContents,'midi',origin,{isMainFrame:true}),false);let allowed;relative.webContents.session.request(relative.webContents,'speaker-selection',v=>allowed=v);assert.equal(allowed,false);
    assert.equal(relative.options.webPreferences.sandbox,true);assert.equal(relative.options.webPreferences.contextIsolation,true);relativeCheckVerified=true;
   }
-  return{mainPartition:main.options.webPreferences.partition,diagnosticPartitionPersistent:false,uniqueDiagnosticSessions:true,devicePermissionsDenied:true,sandboxRetained:true,relativeCheckVerified};
+  let guiTempoCheckVerified=false,simpleControllerCheckVerified=false;
+  if(Number(version.split('.').at(-1))>=23){
+   for(const [label,route]of [['GUI Tempo after Sync','gui-tempo-harness.html'],['Simple Sync Controller','simple-sync-controller-harness.html']]){
+    const previousPartitions=new Set(windows.map(w=>w.options.webPreferences.partition));
+    const action=menus[0].find(m=>m.label==='Checks').submenu.find(x=>x.label===label);assert(action);action.click();const w=windows.at(-1);
+    assert.equal(w.url,origin+'/prototype/'+route);assert(!w.options.webPreferences.partition.startsWith('persist:'));assert(!previousPartitions.has(w.options.webPreferences.partition));
+    assert.equal(w.webContents.session.check(w.webContents,'midi',origin,{isMainFrame:true}),false);let allowed;w.webContents.session.request(w.webContents,'speaker-selection',v=>allowed=v);assert.equal(allowed,false);
+    assert.equal(w.options.webPreferences.nodeIntegration,false);assert.equal(w.options.webPreferences.contextIsolation,true);assert.equal(w.options.webPreferences.sandbox,true);assert.equal(w.options.webPreferences.webSecurity,true);
+   }
+   guiTempoCheckVerified=true;simpleControllerCheckVerified=true;
+  }
+  return{mainPartition:main.options.webPreferences.partition,diagnosticPartitionPersistent:false,uniqueDiagnosticSessions:true,devicePermissionsDenied:true,sandboxRetained:true,relativeCheckVerified,guiTempoCheckVerified,simpleControllerCheckVerified};
  });
 }catch(error){report.error={message:error.message,stack:error.stack};}
 report.passed=checks.filter(c=>c.passed).length;report.failed=checks.filter(c=>!c.passed).length;report.completed=report.failed===0&&!report.error;
