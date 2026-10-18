@@ -1,0 +1,98 @@
+{
+  "startedAt": "2026-10-18T05:02:54.397Z",
+  "completed": false,
+  "scope": "Owned independently referenced WAV imports and actual worker/Setup/deck/track/sampler controls; post-output channel0Float32 and complete recordings, full reload and actual normalized playback. Independent reference mapping, not exact Serato/native/physical acceptance.",
+  "criteria": {
+    "maximumWorkerLoudnessErrorLU": 0.01,
+    "settlingSeconds": 0.3,
+    "captureSeconds": 0.3,
+    "maximumRelativeAmplitudeError": 0.02,
+    "maximumAbsentTone": 1e-06
+  },
+  "cases": [],
+  "recordings": [],
+  "errors": [
+    {
+      "message": "Owned WAV hash",
+      "stack": "Error: Owned WAV hash\n    at assert (http://127.0.0.1:18869/prototype/auto-gain-harness.js:1:108)\n    at HTMLButtonElement.run (http://127.0.0.1:18869/prototype/auto-gain-harness.js:24:350)"
+    }
+  ],
+  "sourceBefore": {
+    "app.js": "d05039e2ad62b06f167d03e2a8d901e39419cb979178325d341218d5299c07aa",
+    "analysis.js": "ea43703bd65ed07f15d570916ab28dd8eed60d87d1e81bc9cd4eb249bbf0a141",
+    "analysis-worker.js": "18043ae5c789285252ffae7e2bad6213367af7bcbec0e44e101b91637a3ef514",
+    "loudness.js": "3c1f142c1c2a5b5875f7d9e5e09e94aa0efc5e305d1eabd70b81a2217dff440d",
+    "auto-gain.js": "23cc5b716e49e832412f8c4f07d8616ec68477572c49d5132a0c274cfd22ea6c",
+    "track-gain.js": "f390adbddd4e317444294a92d9e5a82b89d6abaa591578a158a00308628d5bfa",
+    "engine.js": "a4ec10d9401a3e7fd6d7184e331ae59adf6213a87df5152969c8a3edb8fab9f8",
+    "panels.js": "ba731ea55b778efcc60cdb1daafb93bfe83932cc37e23bbcd7289b38f9bcfd23",
+    "styles.css": "bcfaee97bd3881d938f43b7fb1654a38a3cc58c3967acc9e5ae6ce6775821c8d",
+    "auto-gain-harness.js": "a7649fe4087fb7c083a35ee6de237336063b3057338adcb8d8668d1f5f974a39"
+  },
+  "fixtures": [
+    {
+      "name": "A",
+      "hz": 1000,
+      "amplitude": 0.05,
+      "duration": 8,
+      "sampleRate": 44100,
+      "channels": 2,
+      "wavSHA256": "7cdd612829a79c7044f19edebdba2104758d594bae0e11273ad0e31219a0ce12",
+      "wavBytes": 2822444,
+      "url": "/local-evidence/auto-gain/fixtures/A.wav",
+      "reference": {
+        "integratedLUFS": -26.011142067908875,
+        "channels": 2,
+        "sampleRate": 44100,
+        "frames": 352800
+      }
+    },
+    {
+      "name": "B",
+      "hz": 8000,
+      "amplitude": 0.2,
+      "duration": 8,
+      "sampleRate": 44100,
+      "channels": 2,
+      "wavSHA256": "00f9f25ef3e7e0f3585d63094022e282d5d3995500b2f2f011351abd38219361",
+      "wavBytes": 2822444,
+      "url": "/local-evidence/auto-gain/fixtures/B.wav",
+      "reference": {
+        "integratedLUFS": -10.626904644158468,
+        "channels": 2,
+        "sampleRate": 44100,
+        "frames": 352800
+      }
+    },
+    {
+      "name": "silence",
+      "hz": 1000,
+      "amplitude": 0,
+      "duration": 1,
+      "sampleRate": 44100,
+      "channels": 2,
+      "wavSHA256": "745c4de0ab69ba1b7804e1faa6cb9a0001d2f08747cb3d279700d63ceb97ede6",
+      "wavBytes": 352844,
+      "url": "/local-evidence/auto-gain/fixtures/silence.wav",
+      "reference": {
+        "integratedLUFS": null,
+        "channels": 2,
+        "sampleRate": 44100,
+        "frames": 44100
+      }
+    }
+  ],
+  "sourceAfter": {
+    "app.js": "d05039e2ad62b06f167d03e2a8d901e39419cb979178325d341218d5299c07aa",
+    "analysis.js": "ea43703bd65ed07f15d570916ab28dd8eed60d87d1e81bc9cd4eb249bbf0a141",
+    "analysis-worker.js": "18043ae5c789285252ffae7e2bad6213367af7bcbec0e44e101b91637a3ef514",
+    "loudness.js": "3c1f142c1c2a5b5875f7d9e5e09e94aa0efc5e305d1eabd70b81a2217dff440d",
+    "auto-gain.js": "23cc5b716e49e832412f8c4f07d8616ec68477572c49d5132a0c274cfd22ea6c",
+    "track-gain.js": "f390adbddd4e317444294a92d9e5a82b89d6abaa591578a158a00308628d5bfa",
+    "engine.js": "a4ec10d9401a3e7fd6d7184e331ae59adf6213a87df5152969c8a3edb8fab9f8",
+    "panels.js": "ba731ea55b778efcc60cdb1daafb93bfe83932cc37e23bbcd7289b38f9bcfd23",
+    "styles.css": "bcfaee97bd3881d938f43b7fb1654a38a3cc58c3967acc9e5ae6ce6775821c8d",
+    "auto-gain-harness.js": "a7649fe4087fb7c083a35ee6de237336063b3057338adcb8d8668d1f5f974a39"
+  },
+  "sourceStable": true
+}

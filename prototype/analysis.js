@@ -1,3 +1,4 @@
+import {integratedLoudness} from './loudness.js';
 // Independently implemented local PCM analysis. Estimates, not reference-product parity.
 // Scientific methods and measured limits: docs/research/AUDIO_ANALYSIS_EVALUATION.md.
 const N = 2048,
@@ -325,6 +326,7 @@ export function analyzePCM(channels, sampleRate, options = {}) {
     analyzedDuration,
     partial: analyzedDuration < duration,
     gain,
+    loudness:integratedLoudness(channels,sampleRate),
     bpm: null,
     key: null,
     tempo: null,

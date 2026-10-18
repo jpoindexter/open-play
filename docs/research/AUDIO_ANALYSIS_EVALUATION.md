@@ -1,5 +1,7 @@
 # Browser PCM analysis: executed measurements and limits
 
+18 October2026 update: this historical RMS/tempo/key evaluation remains scoped to its original checks. Current analysis adds a separate integrated-LUFS field and actual Auto Gain; read [LOUDNESS_AUTO_GAIN_REVIEW.md](../prototype/LOUDNESS_AUTO_GAIN_REVIEW.md). The legacy `gain` object remains explicitly ungated RMS, not LUFS.
+
 Date: 2026-10-16. Scope: local HTML prototype, no native app or remote audio processing.
 
 ## Implemented behavior

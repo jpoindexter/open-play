@@ -1,0 +1,17 @@
+{
+  "source": "https://github.com/jiixyj/libebur128",
+  "version": "1.2.6",
+  "commit": "67b33abe1558160ed76ada1322329b0e9e058b02",
+  "license": "MIT",
+  "files": {
+    "ebur128.c": "c2fc562f1088cacab4d21250b6e04996ef36c7694ea901e08cc4d64eb542b78d",
+    "ebur128.h": "a988fa03828bcdd6258e6c52300d709a58727272a9ce6cd3fbf351f090517111",
+    "COPYING": "d6b4754bb67bdd08b97d5d11b2d7434997a371585a78fe77007149df3af8d09c",
+    "libebur128-reference.dylib": "5a34e5d99effec554072a7c7485f8dd3675b9a6b3be8085b3feb681315f4fa03"
+  },
+  "compiler": "Apple clang version 21.0.0 (clang-2100.3.20.102)",
+  "command": "clang -std=c99 -fPIC -dynamiclib -O2 local-evidence/loudness-reference/libebur128/ebur128.c -o local-evidence/loudness-reference/libebur128/libebur128-reference.dylib -lm",
+  "compileExit": 0,
+  "warning": "ARM build uses manual FTZ; native C reference still passes the declared comparisons",
+  "scope": "Local test reference only; native C binary/source not shipped. Formula attribution/complete MIT license retained in prototype/vendor/libebur128."
+}

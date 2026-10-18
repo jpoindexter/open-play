@@ -1859,6 +1859,7 @@ export class AudioEngine {
   }
   async sample(track, slot, options = {}) {
     if (!track) throw new Error("Load a sample first.");
+    this.onPrepareSampleGain?.(track);
     const settings = {
       ...(typeof options === "boolean" ? { repeat: options } : options),
     };

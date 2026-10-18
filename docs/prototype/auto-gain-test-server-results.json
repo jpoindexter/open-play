@@ -1,0 +1,35 @@
+{
+  "scope": "Exact owned-fixture route checks only; not a general security audit",
+  "passed": true,
+  "productionHandlerChanged": false,
+  "routes": [
+    {
+      "path": "/local-evidence/auto-gain/fixtures/A.wav",
+      "status": 404
+    },
+    {
+      "path": "/test-fixtures/auto-gain/unlisted.wav",
+      "status": 404
+    },
+    {
+      "path": "/test-fixtures/auto-gain/A.wav",
+      "status": 200,
+      "sha256": "7cdd612829a79c7044f19edebdba2104758d594bae0e11273ad0e31219a0ce12"
+    },
+    {
+      "path": "/test-fixtures/auto-gain/B.wav",
+      "status": 200,
+      "sha256": "00f9f25ef3e7e0f3585d63094022e282d5d3995500b2f2f011351abd38219361"
+    },
+    {
+      "path": "/test-fixtures/auto-gain/silence.wav",
+      "status": 200,
+      "sha256": "745c4de0ab69ba1b7804e1faa6cb9a0001d2f08747cb3d279700d63ceb97ede6"
+    },
+    {
+      "path": "/test-fixtures/auto-gain/mono.wav",
+      "status": 200,
+      "sha256": "7cfc057475c10fffc4e1342c842bec789e3a566dbfa7c5b4e71f43812ff0507c"
+    }
+  ]
+}

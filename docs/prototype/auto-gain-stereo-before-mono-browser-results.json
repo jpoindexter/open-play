@@ -1,0 +1,839 @@
+{
+  "startedAt": "2026-10-18T05:04:14.983Z",
+  "completed": true,
+  "scope": "Owned independently referenced WAV imports and actual worker/Setup/deck/track/sampler controls; post-output channel0Float32 and complete recordings, full reload and actual normalized playback. Independent reference mapping, not exact Serato/native/physical acceptance.",
+  "criteria": {
+    "maximumWorkerLoudnessErrorLU": 0.01,
+    "settlingSeconds": 0.3,
+    "captureSeconds": 0.3,
+    "maximumRelativeAmplitudeError": 0.02,
+    "maximumAbsentTone": 1e-06
+  },
+  "cases": [
+    {
+      "name": "A automatic92 on load",
+      "expected": [
+        0.10060442766635748,
+        0
+      ],
+      "measured": [
+        0.10060443161820955,
+        3.2546861223264766e-10
+      ],
+      "reference": "92 dB",
+      "enabled": true,
+      "deckTargets": [
+        11.01114206790766,
+        -4.373095355841636,
+        0,
+        0
+      ],
+      "mode": "AUTO",
+      "slider": 11.0111420679077,
+      "trim": 1,
+      "pcm": {
+        "frames": 13230,
+        "startFrame": 50944,
+        "sha256": "d8ec4d233a9768844d03c58cf4ed662da0b26a3ce0e8d5bc62f9b4a9bca21b9a"
+      },
+      "errors": [
+        3.9281094821319584e-08,
+        3.2546861223264766e-10
+      ],
+      "passed": true
+    },
+    {
+      "name": "reference89 lowers target3dB",
+      "expected": [
+        0.0712224804567767,
+        0
+      ],
+      "measured": [
+        0.07122248229602211,
+        1.9234739107913344e-10
+      ],
+      "reference": "89 dB",
+      "enabled": true,
+      "deckTargets": [
+        8.01114206790766,
+        -7.373095355841636,
+        0,
+        0
+      ],
+      "mode": "AUTO",
+      "slider": 8.01114206790766,
+      "trim": 1,
+      "pcm": {
+        "frames": 13230,
+        "startFrame": 77824,
+        "sha256": "7321e0cca2095245a7a88bd2506179fc61feb8a63db0d43360bbe56c284fd776"
+      },
+      "errors": [
+        2.5823944760361428e-08,
+        1.9234739107913344e-10
+      ],
+      "passed": true
+    },
+    {
+      "name": "reference98 raises target9dB",
+      "expected": [
+        0.20073222324169565,
+        0
+      ],
+      "measured": [
+        0.20073222131198012,
+        8.649932616395301e-10
+      ],
+      "reference": "98 dB",
+      "enabled": true,
+      "deckTargets": [
+        17.01114206790766,
+        1.6269046441583637,
+        0,
+        0
+      ],
+      "mode": "AUTO",
+      "slider": 17.0111420679077,
+      "trim": 1,
+      "pcm": {
+        "frames": 13230,
+        "startFrame": 104448,
+        "sha256": "33c35b9a5e76fa5f02b6d5decefb7d83c32b8740f0cae503f77964ecb8881356"
+      },
+      "errors": [
+        9.613381868334159e-09,
+        8.649932616395301e-10
+      ],
+      "passed": true
+    },
+    {
+      "name": "Control zero is an auto adjustment",
+      "expected": [
+        0.02831783137536552,
+        0
+      ],
+      "measured": [
+        0.028317831816390453,
+        6.288218388512344e-13
+      ],
+      "reference": "98 dB",
+      "enabled": true,
+      "deckTargets": [
+        0,
+        1.6269046441583637,
+        0,
+        0
+      ],
+      "mode": "AUTO",
+      "slider": 0,
+      "trim": 1,
+      "pcm": {
+        "frames": 13230,
+        "startFrame": 131072,
+        "sha256": "daa2561f51b139922e27314cc7669a23981bfc95258929d50c447170570949e4"
+      },
+      "errors": [
+        1.557410689301264e-08,
+        6.288218388512344e-13
+      ],
+      "passed": true
+    },
+    {
+      "name": "Alt restores computed reference98",
+      "expected": [
+        0.20073222324169565,
+        0
+      ],
+      "measured": [
+        0.2007322213119797,
+        8.649932093423956e-10
+      ],
+      "reference": "98 dB",
+      "enabled": true,
+      "deckTargets": [
+        17.01114206790766,
+        1.6269046441583637,
+        0,
+        0
+      ],
+      "mode": "AUTO",
+      "slider": 17.0111420679077,
+      "trim": 1,
+      "pcm": {
+        "frames": 13230,
+        "startFrame": 157952,
+        "sha256": "7187c5530fbf0241f9e4388a2cc6df1bf146b9329fe04c411a792a8a805d2b09"
+      },
+      "errors": [
+        9.613383977757906e-09,
+        8.649932093423956e-10
+      ],
+      "passed": true
+    },
+    {
+      "name": "manual auto adjustment to3",
+      "expected": [
+        0.04000000000000001,
+        0
+      ],
+      "measured": [
+        0.04000000147206344,
+        3.613687119107769e-11
+      ],
+      "reference": "98 dB",
+      "enabled": true,
+      "deckTargets": [
+        3,
+        1.6269046441583637,
+        0,
+        0
+      ],
+      "mode": "AUTO",
+      "slider": 3,
+      "trim": 1,
+      "pcm": {
+        "frames": 13230,
+        "startFrame": 184576,
+        "sha256": "ea81c114633e496739974a8a9a20b04351b9977ac89bca5ef98a16a2e4f47cd1"
+      },
+      "errors": [
+        3.680158577878956e-08,
+        3.613687119107769e-11
+      ],
+      "passed": true
+    },
+    {
+      "name": "reference95 preserves relative adjustment",
+      "expected": [
+        0.02831783137536552,
+        0
+      ],
+      "measured": [
+        0.028317831816389968,
+        6.288919523180728e-13
+      ],
+      "reference": "95 dB",
+      "enabled": true,
+      "deckTargets": [
+        0,
+        -1.3730953558416363,
+        0,
+        0
+      ],
+      "mode": "AUTO",
+      "slider": 0,
+      "trim": 1,
+      "pcm": {
+        "frames": 13230,
+        "startFrame": 211456,
+        "sha256": "3f953268d02d34cffcbcc7d84a80408d82e3a265e234c3f9a6171166d7bea628"
+      },
+      "errors": [
+        1.557408979557806e-08,
+        6.288919523180728e-13
+      ],
+      "passed": true
+    },
+    {
+      "name": "disable uses manual memory0",
+      "expected": [
+        0.02831783137536552,
+        0
+      ],
+      "measured": [
+        0.02831783181639055,
+        6.289383851993653e-13
+      ],
+      "reference": "95 dB",
+      "enabled": false,
+      "deckTargets": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "mode": "MANUAL",
+      "slider": 0,
+      "trim": 1,
+      "pcm": {
+        "frames": 13230,
+        "startFrame": 238080,
+        "sha256": "576784894c0b2241d8ec9ebb1d02aca664deea935917fd4fdd43fce9ac880e23"
+      },
+      "errors": [
+        1.5574110223681714e-08,
+        6.289383851993653e-13
+      ],
+      "passed": true
+    },
+    {
+      "name": "manual mode remembers6",
+      "expected": [
+        0.05650150178491018,
+        0
+      ],
+      "measured": [
+        0.056501500931534165,
+        7.042245684797187e-11
+      ],
+      "reference": "95 dB",
+      "enabled": false,
+      "deckTargets": [
+        6,
+        0,
+        0,
+        0
+      ],
+      "mode": "MANUAL",
+      "slider": 6,
+      "trim": 1,
+      "pcm": {
+        "frames": 13230,
+        "startFrame": 264448,
+        "sha256": "61271764cc8a1d4d08ae0e505fffa60dea210e174f56426eaae563585668bf0a"
+      },
+      "errors": [
+        1.5103598816068597e-08,
+        7.042245684797187e-11
+      ],
+      "passed": true
+    },
+    {
+      "name": "enable restores separate auto adjustment0",
+      "expected": [
+        0.02831783137536552,
+        0
+      ],
+      "measured": [
+        0.02831783181639048,
+        6.289329048434251e-13
+      ],
+      "reference": "95 dB",
+      "enabled": true,
+      "deckTargets": [
+        0,
+        -1.3730953558416363,
+        0,
+        0
+      ],
+      "mode": "AUTO",
+      "slider": 0,
+      "trim": 1,
+      "pcm": {
+        "frames": 13230,
+        "startFrame": 291328,
+        "sha256": "1e580bbf330cea6dcbe735c3ea7020f20db30660767b65e68bfcb605669c33ca"
+      },
+      "errors": [
+        1.557410778119106e-08,
+        6.289329048434251e-13
+      ],
+      "passed": true
+    },
+    {
+      "name": "Alt reset after mode switch",
+      "expected": [
+        0.1421075312340141,
+        0
+      ],
+      "measured": [
+        0.14210753876975118,
+        1.4603633884228673e-10
+      ],
+      "reference": "95 dB",
+      "enabled": true,
+      "deckTargets": [
+        14.01114206790766,
+        -1.3730953558416363,
+        0,
+        0
+      ],
+      "mode": "AUTO",
+      "slider": 14.0111420679077,
+      "trim": 1,
+      "pcm": {
+        "frames": 13230,
+        "startFrame": 318208,
+        "sha256": "270e674a8ae62a941532b0afcbc7f77635e8c0908e8c216a3c0d8a2096085625"
+      },
+      "errors": [
+        5.302841454835061e-08,
+        1.4603633884228673e-10
+      ],
+      "passed": true
+    },
+    {
+      "name": "different frequency and level B normalizes",
+      "expected": [
+        0,
+        0.0967086264061791
+      ],
+      "measured": [
+        6.740510737263467e-10,
+        0.0967086285510481
+      ],
+      "reference": "95 dB",
+      "enabled": true,
+      "deckTargets": [
+        -1.3730953558416363,
+        -1.3730953558416363,
+        0,
+        0
+      ],
+      "mode": "AUTO",
+      "slider": -1.37309535584164,
+      "trim": 1,
+      "pcm": {
+        "frames": 13230,
+        "startFrame": 345856,
+        "sha256": "e86a0d98e02117770a91d32eb7d430999f23dd991f57d7c3ad48c1f9e48debe8"
+      },
+      "errors": [
+        6.740510737263467e-10,
+        2.2178673120265557e-08
+      ],
+      "passed": true
+    },
+    {
+      "name": "silent file no fabricated loudness or gain",
+      "expected": [
+        0,
+        0
+      ],
+      "measured": [
+        0,
+        0
+      ],
+      "reference": "95 dB",
+      "enabled": true,
+      "deckTargets": [
+        0,
+        -1.3730953558416363,
+        0,
+        0
+      ],
+      "mode": "AUTO \u00b7 NO LEVEL",
+      "slider": 0,
+      "trim": 1,
+      "pcm": {
+        "frames": 13230,
+        "startFrame": 373504,
+        "sha256": "9d55c9c2f49808c72a9d28e4f661bae87b1ed419741fa38e5ffeff9648f33d7d"
+      },
+      "errors": [
+        0,
+        0
+      ],
+      "passed": true
+    },
+    {
+      "name": "A load with saved manual6 still uses Auto Gain",
+      "expected": [
+        0.10060442766635748,
+        0
+      ],
+      "measured": [
+        0.10060443161820966,
+        3.2546828023319623e-10
+      ],
+      "reference": "92 dB",
+      "enabled": true,
+      "deckTargets": [
+        11.01114206790766,
+        -4.373095355841636,
+        0,
+        0
+      ],
+      "mode": "AUTO",
+      "slider": 11.0111420679077,
+      "trim": 1,
+      "pcm": {
+        "frames": 13230,
+        "startFrame": 401408,
+        "sha256": "aa13e1ec4c83beaa92efb052552eb4be3deb0de92b9fd2dcfe8c01b23eb47b60"
+      },
+      "errors": [
+        3.928109593154261e-08,
+        3.2546828023319623e-10
+      ],
+      "passed": true
+    },
+    {
+      "name": "sampler trigger uses computed gain",
+      "expected": [
+        0,
+        0.03423223218891751
+      ],
+      "measured": [
+        1.197944323072645e-10,
+        0.03423223102397493
+      ],
+      "reference": "92 dB",
+      "enabled": true,
+      "deckTargets": [
+        11.01114206790766,
+        -4.373095355841636,
+        0,
+        0
+      ],
+      "mode": "AUTO",
+      "slider": 11.0111420679077,
+      "trim": 1,
+      "pcm": {
+        "frames": 13230,
+        "startFrame": 428800,
+        "sha256": "e60312e4a8c6709a9ef087bf19a6718c07ad17872d596b16589f4d6b7fa08fca"
+      },
+      "errors": [
+        1.197944323072645e-10,
+        3.403057602380244e-08
+      ],
+      "passed": true
+    },
+    {
+      "name": "sampler manual edit adjusts auto value",
+      "expected": [
+        0,
+        0.05663566275073104
+      ],
+      "measured": [
+        5.1145423462345863e-11,
+        0.056635663632779436
+      ],
+      "reference": "92 dB",
+      "enabled": true,
+      "deckTargets": [
+        11.01114206790766,
+        0,
+        0,
+        0
+      ],
+      "mode": "AUTO",
+      "slider": 11.0111420679077,
+      "trim": 1,
+      "pcm": {
+        "frames": 13230,
+        "startFrame": 455936,
+        "sha256": "132feb62945ea6326ed27d7a38f6e9f02724c6e7a8e009c9a3fa71cdb06bd75c"
+      },
+      "errors": [
+        5.1145423462345863e-11,
+        1.5574080913793864e-08
+      ],
+      "passed": true
+    },
+    {
+      "name": "deck Alt reset updates same-file sample",
+      "expected": [
+        0,
+        0.03423223218891751
+      ],
+      "measured": [
+        1.2015995102987686e-10,
+        0.0342322310239668
+      ],
+      "reference": "92 dB",
+      "enabled": true,
+      "deckTargets": [
+        11.01114206790766,
+        -4.373095355841636,
+        0,
+        0
+      ],
+      "mode": "AUTO",
+      "slider": 11.0111420679077,
+      "trim": 1,
+      "pcm": {
+        "frames": 13230,
+        "startFrame": 482560,
+        "sha256": "a1b3d4b0b7012e2d6af5bee59e7682a4f29d0a94fb1d3ce911e9c2fe1f15abf5"
+      },
+      "errors": [
+        1.2015995102987686e-10,
+        3.4030813389485104e-08
+      ],
+      "passed": true
+    },
+    {
+      "name": "sampler stop silence",
+      "expected": [
+        0,
+        0
+      ],
+      "measured": [
+        0,
+        0
+      ],
+      "reference": "92 dB",
+      "enabled": true,
+      "deckTargets": [
+        11.01114206790766,
+        -4.373095355841636,
+        0,
+        0
+      ],
+      "mode": "AUTO",
+      "slider": 11.0111420679077,
+      "trim": 1,
+      "pcm": {
+        "frames": 13230,
+        "startFrame": 509184,
+        "sha256": "9d55c9c2f49808c72a9d28e4f661bae87b1ed419741fa38e5ffeff9648f33d7d"
+      },
+      "errors": [
+        0,
+        0
+      ],
+      "passed": true
+    },
+    {
+      "name": "restored File actually plays with Auto Gain",
+      "expected": [
+        0.10060442766635748,
+        0
+      ],
+      "measured": [
+        0.10060443161820955,
+        3.254686122307759e-10
+      ],
+      "reference": "92 dB",
+      "enabled": true,
+      "deckTargets": [
+        11.01114206790766,
+        8.741157127738,
+        0,
+        0
+      ],
+      "mode": "AUTO",
+      "slider": 11.0111420679077,
+      "trim": 1,
+      "pcm": {
+        "frames": 13230,
+        "startFrame": 398080,
+        "sha256": "ba68fa2e190903e6322e58b68fee157848b2fd9d0e6d6b73a5bd249617c11d0d"
+      },
+      "errors": [
+        3.9281094821319584e-08,
+        3.254686122307759e-10
+      ],
+      "passed": true
+    }
+  ],
+  "recordings": [
+    {
+      "bytes": 168641,
+      "sha256": "8d9b606d787a2a444c3e2c184f1b9723fd14be0c9ee43a15e129af374dad8759",
+      "format": "audio/webm;codecs=opus",
+      "duration": 10.97997732426304,
+      "frames": 484217,
+      "sampleRate": 44100,
+      "channels": 2
+    },
+    {
+      "bytes": 8871,
+      "sha256": "a01fe9a8281139813726b48a208f62ec6d48a6cd761594a2205777f647ca8c13",
+      "format": "audio/webm;codecs=opus",
+      "duration": 0.5399773242630386,
+      "frames": 23813,
+      "sampleRate": 44100,
+      "channels": 2
+    }
+  ],
+  "errors": [],
+  "sourceBefore": {
+    "app.js": "d05039e2ad62b06f167d03e2a8d901e39419cb979178325d341218d5299c07aa",
+    "analysis.js": "ea43703bd65ed07f15d570916ab28dd8eed60d87d1e81bc9cd4eb249bbf0a141",
+    "analysis-worker.js": "18043ae5c789285252ffae7e2bad6213367af7bcbec0e44e101b91637a3ef514",
+    "loudness.js": "3c1f142c1c2a5b5875f7d9e5e09e94aa0efc5e305d1eabd70b81a2217dff440d",
+    "auto-gain.js": "23cc5b716e49e832412f8c4f07d8616ec68477572c49d5132a0c274cfd22ea6c",
+    "track-gain.js": "f390adbddd4e317444294a92d9e5a82b89d6abaa591578a158a00308628d5bfa",
+    "engine.js": "a4ec10d9401a3e7fd6d7184e331ae59adf6213a87df5152969c8a3edb8fab9f8",
+    "panels.js": "ba731ea55b778efcc60cdb1daafb93bfe83932cc37e23bbcd7289b38f9bcfd23",
+    "styles.css": "bcfaee97bd3881d938f43b7fb1654a38a3cc58c3967acc9e5ae6ce6775821c8d",
+    "auto-gain-harness.js": "3e0231c67f64be49ee2983b15d678b0ce631af60740a4b3d1b7669e7139bbff0"
+  },
+  "fixtures": [
+    {
+      "name": "A",
+      "hz": 1000,
+      "amplitude": 0.05,
+      "duration": 8,
+      "sampleRate": 44100,
+      "channels": 2,
+      "wavSHA256": "7cdd612829a79c7044f19edebdba2104758d594bae0e11273ad0e31219a0ce12",
+      "wavBytes": 2822444,
+      "url": "/test-fixtures/auto-gain/A.wav",
+      "reference": {
+        "integratedLUFS": -26.011142067908875,
+        "channels": 2,
+        "sampleRate": 44100,
+        "frames": 352800
+      },
+      "id": "local-7cdd612829a79c7044f19edebdba2104758d594bae0e11273ad0e31219a0ce12"
+    },
+    {
+      "name": "B",
+      "hz": 8000,
+      "amplitude": 0.2,
+      "duration": 8,
+      "sampleRate": 44100,
+      "channels": 2,
+      "wavSHA256": "00f9f25ef3e7e0f3585d63094022e282d5d3995500b2f2f011351abd38219361",
+      "wavBytes": 2822444,
+      "url": "/test-fixtures/auto-gain/B.wav",
+      "reference": {
+        "integratedLUFS": -10.626904644158468,
+        "channels": 2,
+        "sampleRate": 44100,
+        "frames": 352800
+      },
+      "id": "local-00f9f25ef3e7e0f3585d63094022e282d5d3995500b2f2f011351abd38219361"
+    },
+    {
+      "name": "silence",
+      "hz": 1000,
+      "amplitude": 0,
+      "duration": 1,
+      "sampleRate": 44100,
+      "channels": 2,
+      "wavSHA256": "745c4de0ab69ba1b7804e1faa6cb9a0001d2f08747cb3d279700d63ceb97ede6",
+      "wavBytes": 352844,
+      "url": "/test-fixtures/auto-gain/silence.wav",
+      "reference": {
+        "integratedLUFS": null,
+        "channels": 2,
+        "sampleRate": 44100,
+        "frames": 44100
+      },
+      "id": "local-745c4de0ab69ba1b7804e1faa6cb9a0001d2f08747cb3d279700d63ceb97ede6"
+    }
+  ],
+  "a": "local-7cdd612829a79c7044f19edebdba2104758d594bae0e11273ad0e31219a0ce12",
+  "b": "local-00f9f25ef3e7e0f3585d63094022e282d5d3995500b2f2f011351abd38219361",
+  "silent": "local-745c4de0ab69ba1b7804e1faa6cb9a0001d2f08747cb3d279700d63ceb97ede6",
+  "analysis": [
+    {
+      "name": "A",
+      "reference": -26.011142067908875,
+      "actual": {
+        "version": "bs1770-integrated-v1",
+        "method": "K-weighted integrated loudness with absolute and relative gating",
+        "integratedLUFS": -26.01114206790766,
+        "channels": 2,
+        "sampleRate": 44100,
+        "duration": 8,
+        "wholeInput": true,
+        "absoluteGateLUFS": -70,
+        "relativeGateLUFS": -36.01114206790766,
+        "relativeGateLU": -10,
+        "blockSeconds": 0.4,
+        "overlap": 0.75,
+        "totalBlocks": 77,
+        "absoluteGatedBlocks": 77,
+        "retainedBlocks": 77,
+        "truePeakMeasured": false,
+        "reason": null
+      },
+      "errorLU": 1.2150280781497713e-12
+    },
+    {
+      "name": "B",
+      "reference": -10.626904644158468,
+      "actual": {
+        "version": "bs1770-integrated-v1",
+        "method": "K-weighted integrated loudness with absolute and relative gating",
+        "integratedLUFS": -10.626904644158364,
+        "channels": 2,
+        "sampleRate": 44100,
+        "duration": 8,
+        "wholeInput": true,
+        "absoluteGateLUFS": -70,
+        "relativeGateLUFS": -20.626904644158362,
+        "relativeGateLU": -10,
+        "blockSeconds": 0.4,
+        "overlap": 0.75,
+        "totalBlocks": 77,
+        "absoluteGatedBlocks": 77,
+        "retainedBlocks": 77,
+        "truePeakMeasured": false,
+        "reason": null
+      },
+      "errorLU": 1.0480505352461478e-13
+    },
+    {
+      "name": "silence",
+      "reference": null,
+      "actual": {
+        "version": "bs1770-integrated-v1",
+        "method": "K-weighted integrated loudness with absolute and relative gating",
+        "integratedLUFS": null,
+        "channels": 2,
+        "sampleRate": 44100,
+        "duration": 1,
+        "wholeInput": true,
+        "absoluteGateLUFS": -70,
+        "relativeGateLUFS": null,
+        "relativeGateLU": -10,
+        "blockSeconds": 0.4,
+        "overlap": 0.75,
+        "totalBlocks": 7,
+        "absoluteGatedBlocks": 0,
+        "retainedBlocks": 0,
+        "truePeakMeasured": false,
+        "reason": "below_absolute_gate"
+      },
+      "errorLU": null
+    }
+  ],
+  "saved": {
+    "manualA": 6,
+    "offsetA": 0,
+    "offsetB": 0,
+    "reference": "92 dB"
+  },
+  "sourceAfter": {
+    "app.js": "d05039e2ad62b06f167d03e2a8d901e39419cb979178325d341218d5299c07aa",
+    "analysis.js": "ea43703bd65ed07f15d570916ab28dd8eed60d87d1e81bc9cd4eb249bbf0a141",
+    "analysis-worker.js": "18043ae5c789285252ffae7e2bad6213367af7bcbec0e44e101b91637a3ef514",
+    "loudness.js": "3c1f142c1c2a5b5875f7d9e5e09e94aa0efc5e305d1eabd70b81a2217dff440d",
+    "auto-gain.js": "23cc5b716e49e832412f8c4f07d8616ec68477572c49d5132a0c274cfd22ea6c",
+    "track-gain.js": "f390adbddd4e317444294a92d9e5a82b89d6abaa591578a158a00308628d5bfa",
+    "engine.js": "a4ec10d9401a3e7fd6d7184e331ae59adf6213a87df5152969c8a3edb8fab9f8",
+    "panels.js": "ba731ea55b778efcc60cdb1daafb93bfe83932cc37e23bbcd7289b38f9bcfd23",
+    "styles.css": "bcfaee97bd3881d938f43b7fb1654a38a3cc58c3967acc9e5ae6ce6775821c8d",
+    "auto-gain-harness.js": "3e0231c67f64be49ee2983b15d678b0ce631af60740a4b3d1b7669e7139bbff0"
+  },
+  "sourceStable": true,
+  "reload": {
+    "manualA": 6,
+    "offsetA": 0,
+    "reference": "92 dB",
+    "files": [
+      {
+        "id": "local-7cdd612829a79c7044f19edebdba2104758d594bae0e11273ad0e31219a0ce12",
+        "sha256": "7cdd612829a79c7044f19edebdba2104758d594bae0e11273ad0e31219a0ce12"
+      },
+      {
+        "id": "local-00f9f25ef3e7e0f3585d63094022e282d5d3995500b2f2f011351abd38219361",
+        "sha256": "00f9f25ef3e7e0f3585d63094022e282d5d3995500b2f2f011351abd38219361"
+      },
+      {
+        "id": "local-745c4de0ab69ba1b7804e1faa6cb9a0001d2f08747cb3d279700d63ceb97ede6",
+        "sha256": "745c4de0ab69ba1b7804e1faa6cb9a0001d2f08747cb3d279700d63ceb97ede6"
+      }
+    ]
+  },
+  "sourceReload": {
+    "app.js": "d05039e2ad62b06f167d03e2a8d901e39419cb979178325d341218d5299c07aa",
+    "analysis.js": "ea43703bd65ed07f15d570916ab28dd8eed60d87d1e81bc9cd4eb249bbf0a141",
+    "analysis-worker.js": "18043ae5c789285252ffae7e2bad6213367af7bcbec0e44e101b91637a3ef514",
+    "loudness.js": "3c1f142c1c2a5b5875f7d9e5e09e94aa0efc5e305d1eabd70b81a2217dff440d",
+    "auto-gain.js": "23cc5b716e49e832412f8c4f07d8616ec68477572c49d5132a0c274cfd22ea6c",
+    "track-gain.js": "f390adbddd4e317444294a92d9e5a82b89d6abaa591578a158a00308628d5bfa",
+    "engine.js": "a4ec10d9401a3e7fd6d7184e331ae59adf6213a87df5152969c8a3edb8fab9f8",
+    "panels.js": "ba731ea55b778efcc60cdb1daafb93bfe83932cc37e23bbcd7289b38f9bcfd23",
+    "styles.css": "bcfaee97bd3881d938f43b7fb1654a38a3cc58c3967acc9e5ae6ce6775821c8d",
+    "auto-gain-harness.js": "3e0231c67f64be49ee2983b15d678b0ce631af60740a4b3d1b7669e7139bbff0"
+  },
+  "finishedAt": "2026-10-18T05:05:22.685Z"
+}
