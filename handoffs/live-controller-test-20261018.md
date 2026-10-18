@@ -55,3 +55,7 @@ Follow-up: resource reader0x1013940e0 completed as31sttargeted function and expl
 
 
 Checkpoint140: official factory resources recovered from sealed signed installed app,229ZIPentries/197definitionfiles,182MIDI/14HID/1audio. Exact MK2XML private path local-evidence/serato-mapping-import-140/official-userio-checked/midi/midi_hercules_dj_control_inpulse_300_mk2.xml.374control elements/547conditions; sourceSHA1f33a04a1c5b924a0b2b1ea12a35216ddebed8d099cd6ed7cb6e5890e03d5ec3. See docs/research/HERCULES_OFFICIAL_FACTORY_140.json and SERATO_FACTORY_RESOURCE_TRACE_20261018.md. Source recovery replaces earlier0recovered status; physical/native acceptance does not change. No messages output, useraway, no newtestwindow. Next factory-schema adapter/authenticatedsource labels/boundedactualprofile import, preserve tested native23profile. Rawresources/pseudocode/codec input ignoredprivate.
+
+## Re-entry after factory import141
+
+Factory catalogs are private under local-evidence/factory-catalog-141; all197 imported on isolated8781,56 Hercules assignments available,55 applied because of one retained channel2 complementary-CC conflict. No physical acceptance for this imported profile. Frozen0.1.23/profile unchanged. Read docs/research/FACTORY_CONTROLLER_IMPORT_20261018.md before modifying mappings. Next independent work is conditional/modifier/pad-state adapter; no timed captures until Jason returns. Keylocked Stems activation remains open.

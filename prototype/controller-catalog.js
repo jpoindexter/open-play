@@ -1,14 +1,34 @@
 // Mapping catalogs are local data. No controller scripts, native code or SysEx
 // are evaluated. Source provenance and physical compatibility are separate.
+import {officialFactoryDigests} from './controller-factory-digests.js';
 export const controllerCatalogFormat='open-play-controller-catalog-v1';
 export const controllerCatalogMaxBytes=32*1024*1024;
 const sha=/^[a-f0-9]{64}$/;
-const commands=/^Deck [1-4] (play|load|cue|sync|sync off|loop|hot cue [1-8])$/;
+const commands=/^Deck [1-4] (play|load|cue|sync|sync off|loop|hot cue [1-8]|headphone cue|slip|quantize|vinyl|previous|tempo range|auto loop four|loop in|loop out|loop half|loop double|jog touch)$/;
+const continuous=/^Deck [1-4] (level|high|mid|low|trim|filter|tempo|tempo ignore)$/;
 const relative=['Relative two’s complement','Relative offset'];
 // Populate only from reviewed recovery evidence, never an imported claim.
-const officialSourceHashes=new Set();
+const verifiedProfiles=new WeakSet();
+const authenticatedFields=['adapterVersion','name','sourceFile','sourceSHA256','sourceEnvelope','controls','mappings','issues','outputBranches'];
+function canonical(value){
+  if(Array.isArray(value))return '['+value.map(canonical).join(',')+']';
+  if(value&&typeof value==='object')return '{'+Object.keys(value).sort().map(key=>JSON.stringify(key)+':'+canonical(value[key])).join(',')+'}';
+  return JSON.stringify(value);
+}
+function freeze(value){if(value&&typeof value==='object'){Object.values(value).forEach(freeze);Object.freeze(value);}return value;}
+async function sha256(bytes){return Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',bytes)),x=>x.toString(16).padStart(2,'0')).join('');}
+export async function attestControllerCatalog(catalog){
+  for(const p of catalog.profiles){
+    const expected=officialFactoryDigests[p.sourceSHA256];
+    if(!expected)continue;
+    const data=Object.fromEntries(authenticatedFields.map(key=>[key,p[key]??null]));
+    if(await sha256(new TextEncoder().encode(canonical(data)))!==expected)throw Error('Known factory source has modified or unsupported catalog content; import the reviewed factory-adapter output.');
+    verifiedProfiles.add(p);freeze(p);
+  }
+  return catalog;
+}
 export function controllerSourceLabel(profile){
-  if(officialSourceHashes.has(profile.sourceSHA256))return 'Official Serato';
+  if(verifiedProfiles.has(profile))return 'Official Serato';
   return profile.provenance?.kind==='alternative'
     ?`Alternative mapping — ${profile.provenance.name}`:'User mapping';
 }
@@ -19,6 +39,8 @@ export function validateControllerMapping(mapping){
   if(mapping.invert!==undefined&&typeof mapping.invert!=='boolean')throw Error('Invalid mapping direction.');
   if(mapping.target==='Library browse'){
     if(mapping.type!=='CC'||!relative.includes(mapping.encoding))throw Error('Imported browse needs an explicit relative CC encoding.');
+  }else if(mapping.target==='Crossfader'||continuous.test(mapping.target)){
+    if(mapping.type!=='CC'||!['7-bit absolute','14-bit absolute'].includes(mapping.encoding)||(mapping.encoding==='14-bit absolute'&&mapping.number>31))throw Error('Continuous controls need a supported absolute CC/pair encoding.');
   }else if(!commands.test(mapping.target)||mapping.type!=='Note'||mapping.encoding!=='7-bit absolute')throw Error('This catalog action has no supported unconditional adapter.');
   return {target:mapping.target,type:mapping.type,channel:mapping.channel,number:mapping.number,encoding:mapping.encoding,invert:!!mapping.invert};
 }
@@ -37,8 +59,9 @@ export function parseControllerCatalog(text,{kind='user',name=''}={}){
     if(typeof profile.name!=='string'||!profile.name||profile.name.length>256||!Array.isArray(profile.controls)||!Array.isArray(profile.mappings)||!Array.isArray(profile.issues))throw Error('Invalid controller profile.');
     profile.mappings.forEach(validateControllerMapping);
     // Retain the raw claim for review, without promoting its authority.
-    if(profile.provenance)profile.importedProvenanceClaim=profile.provenance;
+    if(profile.provenance&&!Object.hasOwn(profile,'importedProvenanceClaim'))profile.importedProvenanceClaim=profile.provenance;
     profile.provenance={kind,name:kind==='alternative'?name:''};
+    delete profile.officialSourceVerified;
     profile.bindingRequired=true;profile.deviceMatch=null;profile.physicalCompatibilityVerified=false;
   }
   return catalog;
@@ -48,7 +71,7 @@ export function bindControllerProfile(profile,device,current){
   const result=[...current],added=[],conflicts=[];
   for(const source of profile.mappings){
     const next={...validateControllerMapping(source),deviceId:device.id,controllerProfile:profile.id,mappingSource:controllerSourceLabel(profile)};
-    const overlap=result.some(old=>(!old.deviceId||old.deviceId===device.id)&&(old.type||'CC')===next.type&&old.channel===next.channel&&(old.number===next.number||(old.type==='CC'&&old.encoding==='14-bit absolute'&&old.number<64&&next.number<64&&old.number%32===next.number%32)));
+    const overlap=result.some(old=>(!old.deviceId||old.deviceId===device.id)&&(old.type||'CC')===next.type&&old.channel===next.channel&&(old.number===next.number||(next.type==='CC'&&(old.encoding==='14-bit absolute'||next.encoding==='14-bit absolute')&&old.number<64&&next.number<64&&old.number%32===next.number%32)));
     if(overlap)conflicts.push(source);else{result.push(next);added.push(next);}
   }
   return {mappings:result,added,conflicts};
@@ -73,11 +96,20 @@ export function createControllerCatalogStore({factory=globalThis.indexedDB,name=
   });}
   return {
     async importText(text,source){
-      const catalog=parseControllerCatalog(text,source),bytes=new TextEncoder().encode(text);
-      const id=Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',bytes)),x=>x.toString(16).padStart(2,'0')).join('');
+      const catalog=await attestControllerCatalog(parseControllerCatalog(text,source)),bytes=new TextEncoder().encode(text);
+      const id=await sha256(bytes);
       // Different source labels do not overwrite an earlier import of these bytes.
       return transaction('readwrite',(store,set)=>{const get=store.get(id);get.onsuccess=()=>{if(get.result){set({record:get.result,duplicate:true});return;}const record={id,catalog,importedAt:new Date().toISOString()};store.add(record);set({record,duplicate:false});};});
     },
-    async profiles(){return transaction('readonly',(store,set)=>{const get=store.getAll();get.onsuccess=()=>{const unique=new Map();for(const record of get.result)for(const p of record.catalog.profiles)if(!unique.has(p.id))unique.set(p.id,p);set([...unique.values()]);};});},
+    async profiles(){
+      const records=await transaction('readonly',(store,set)=>{const get=store.getAll();get.onsuccess=()=>set(get.result);});
+      const unique=new Map();
+      for(const record of records){
+        // Recheck persisted data: IndexedDB clones do not retain trust stamps.
+        const catalog=await attestControllerCatalog(parseControllerCatalog(JSON.stringify(record.catalog),record.catalog.profiles[0]?.provenance));
+        for(const p of catalog.profiles)if(!unique.has(p.id))unique.set(p.id,p);
+      }
+      return [...unique.values()];
+    },
   };
 }
