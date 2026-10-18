@@ -1,0 +1,77 @@
+{
+  "scope": "Development comparison on two previously inspected MUSDB18 excerpts; not new held-out evidence. Raw model metrics remain unchanged. No listening or Serato equivalence.",
+  "predeclared_criteria": {
+    "maximum_reconstruction_relative_rms": 1e-06,
+    "maximum_per_source_si_sdr_degradation_db": 0.1
+  },
+  "tracks": [
+    {
+      "track": "track1",
+      "statistics": {
+        "algorithm": "uniform-mixture-consistency-v1",
+        "sources": 4,
+        "frames": 299880,
+        "block_frames": 65536,
+        "raw_reconstruction_rms_error": 0.002818677597253522,
+        "raw_reconstruction_relative_rms": 0.016497298758761963,
+        "reconstruction_rms_error": 4.2865946230429684e-09,
+        "reconstruction_relative_rms": 2.50887977479043e-08,
+        "per_source_correction_rms": 0.0007046693993133805,
+        "source_attribution_verified": false
+      },
+      "before_si_sdr_db": {
+        "drums": 9.935842651821869,
+        "bass": 7.13886196323935,
+        "other": 2.5092647518884115,
+        "vocals": 5.239269363845128
+      },
+      "after_si_sdr_db": {
+        "drums": 9.94452217200909,
+        "bass": 7.143201177740529,
+        "other": 2.512200380823437,
+        "vocals": 5.240481301432885
+      },
+      "delta_db": {
+        "drums": 0.008679520187222067,
+        "bass": 0.004339214501179356,
+        "other": 0.002935628935025747,
+        "vocals": 0.0012119375877563954
+      }
+    },
+    {
+      "track": "track2",
+      "statistics": {
+        "algorithm": "uniform-mixture-consistency-v1",
+        "sources": 4,
+        "frames": 299880,
+        "block_frames": 65536,
+        "raw_reconstruction_rms_error": 0.005201965067071605,
+        "raw_reconstruction_relative_rms": 0.03024555948068662,
+        "reconstruction_rms_error": 4.185168213033027e-09,
+        "reconstruction_relative_rms": 2.4333641708829827e-08,
+        "per_source_correction_rms": 0.0013004912667679011,
+        "source_attribution_verified": false
+      },
+      "before_si_sdr_db": {
+        "drums": 8.08535676907099,
+        "bass": 5.055688638051061,
+        "other": -1.0120592825105186,
+        "vocals": 5.705455436132682
+      },
+      "after_si_sdr_db": {
+        "drums": 8.075661373674077,
+        "bass": 5.091733211526778,
+        "other": -1.0051075191799133,
+        "vocals": 5.712842219498721
+      },
+      "delta_db": {
+        "drums": -0.009695395396914108,
+        "bass": 0.0360445734757171,
+        "other": 0.006951763330605321,
+        "vocals": 0.00738678336603904
+      }
+    }
+  ],
+  "source_sha256": "82be014dec145470db13fc5c0072c1808adeefc2c7a5fb82366f2f5003cae38b",
+  "development_criteria_passed": true
+}

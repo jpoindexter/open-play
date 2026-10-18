@@ -30,7 +30,9 @@ class StemJobs:
     def create(self, data, backend="scnet"):
         if len(data) < 44 or data[:4] != b'RIFF' or data[8:12] != b'WAVE':
             raise ValueError('Upload must be a decoded WAV file.')
-        key = hashlib.sha256(backend.encode() + data).hexdigest()
+        # Cached exports belong to the exact worker/postprocessor, not just audio/model.
+        pipeline = b''.join((ROOT / 'scripts' / name).read_bytes() for name in ('stem_worker.py', 'stem_mix_consistency.py'))
+        key = hashlib.sha256(backend.encode() + hashlib.sha256(pipeline).digest() + data).hexdigest()
         with self.lock:
             for job in self.jobs.values():
                 if job['hash'] == key and job['state'] == 'complete':

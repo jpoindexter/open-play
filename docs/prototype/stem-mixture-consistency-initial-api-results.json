@@ -1,0 +1,191 @@
+{
+  "scope": "Actual POST through existing desktop host proxy\u2192loopback service\u2192pinned SCNet inference\u2192uniform projection\u2192four downloaded Float WAV exports\u2192completed job reuse. Data/API path only; not native GUI/browser playback/acoustics/listening/general separation quality/reference parity. Previously inspected development excerpt, not a new holdout.",
+  "job": {
+    "id": "bdb1680bb1be465eb4ff7d809517525f",
+    "state": "complete",
+    "stage": "complete",
+    "progress": 1,
+    "error": null,
+    "model": "SCNet-large official",
+    "duration": 6.8,
+    "timing": {
+      "model_load_seconds": 1.160939582856372,
+      "inference_seconds": 5.412464666878805,
+      "total_seconds": 6.730176500044763,
+      "realtime_factor": 0.7959506863057065
+    },
+    "license": "MIT_explicit_owner_confirmation_SCNet_issue_35",
+    "stems": [
+      {
+        "name": "drums",
+        "url": "/api/stems/bdb1680bb1be465eb4ff7d809517525f/drums.wav"
+      },
+      {
+        "name": "bass",
+        "url": "/api/stems/bdb1680bb1be465eb4ff7d809517525f/bass.wav"
+      },
+      {
+        "name": "other",
+        "url": "/api/stems/bdb1680bb1be465eb4ff7d809517525f/other.wav"
+      },
+      {
+        "name": "vocals",
+        "url": "/api/stems/bdb1680bb1be465eb4ff7d809517525f/vocals.wav"
+      }
+    ]
+  },
+  "events": [
+    {
+      "id": "bdb1680bb1be465eb4ff7d809517525f",
+      "state": "queued",
+      "stage": "queued",
+      "progress": 0,
+      "error": null
+    },
+    {
+      "id": "bdb1680bb1be465eb4ff7d809517525f",
+      "state": "running",
+      "stage": "loading_model",
+      "progress": 0,
+      "error": null
+    },
+    {
+      "id": "bdb1680bb1be465eb4ff7d809517525f",
+      "state": "running",
+      "stage": "decoding",
+      "progress": 0.02,
+      "error": null
+    },
+    {
+      "id": "bdb1680bb1be465eb4ff7d809517525f",
+      "state": "running",
+      "stage": "separating",
+      "progress": 0.03,
+      "error": null
+    },
+    {
+      "id": "bdb1680bb1be465eb4ff7d809517525f",
+      "state": "running",
+      "stage": "complete",
+      "progress": 1,
+      "error": null
+    }
+  ],
+  "seconds": 7.307730375090614,
+  "sample_rate": 44100,
+  "frames": 299880,
+  "files": {
+    "drums": {
+      "bytes": 2399128,
+      "sha256": "e422507a1ca16ea36ee6c31b1a73141a0bbc8dd43f49919d01a92bd759d14ce0"
+    },
+    "bass": {
+      "bytes": 2399128,
+      "sha256": "78283bbceb4821f0df27b560a302a0ed65dcd06276ff991e21b2bb2cfa8ad1ab"
+    },
+    "other": {
+      "bytes": 2399128,
+      "sha256": "6fabe55e0f9eceed3be7fcbf51b81eede5309c1df22ed8a71a28e6d738786bf7"
+    },
+    "vocals": {
+      "bytes": 2399128,
+      "sha256": "6173f6108e9671808a70a67bfd92a0f21130dbe5be20c1978fa44ae5b2a17262"
+    }
+  },
+  "manifest": {
+    "schema_version": 1,
+    "state": "complete",
+    "cached": false,
+    "cache_key": "49b3c61f5bc3593c5406a793c393c27a9de4bdfe48e1d1ab8798b4f2bb6f2479",
+    "source_sha256": "393f19ed616a0740e9cd4389416fb37608b6667878911d616b62856d3fb59877",
+    "model": "SCNet-large official",
+    "backend": "scnet",
+    "model_sha256": "719e5abb8ed920305dad546ac3cd6fb0b1e9c3092d14ce21827bfc0423af3070",
+    "model_revision": "5d95bf96b19c3eede63248d171efeca8e3abb948",
+    "model_url": "https://drive.google.com/file/d/1s7QvQwn8ag9oVstGDBQ6KZvacJkvyK7t/view",
+    "weight_redistribution": "MIT_explicit_owner_confirmation_SCNet_issue_35",
+    "runtime": {
+      "torch": "2.5.1",
+      "scnet_commit": "5d95bf96b19c3eede63248d171efeca8e3abb948"
+    },
+    "sample_rate": 44100,
+    "channels": 2,
+    "frames": 299880,
+    "duration": 6.8,
+    "parameters": {
+      "segment": 30,
+      "overlap_seconds": 1,
+      "device": "cpu",
+      "mixture_consistency": "uniform-mixture-consistency-v1",
+      "postprocess_source_sha256": "82be014dec145470db13fc5c0072c1808adeefc2c7a5fb82366f2f5003cae38b"
+    },
+    "stems": [
+      {
+        "name": "drums",
+        "ui_name": "drums",
+        "file": "drums.wav",
+        "sha256": "e422507a1ca16ea36ee6c31b1a73141a0bbc8dd43f49919d01a92bd759d14ce0",
+        "rms": 0.09924279287686345,
+        "peak": 0.6048992872238159
+      },
+      {
+        "name": "bass",
+        "ui_name": "bass",
+        "file": "bass.wav",
+        "sha256": "78283bbceb4821f0df27b560a302a0ed65dcd06276ff991e21b2bb2cfa8ad1ab",
+        "rms": 0.06059003880003544,
+        "peak": 0.26554474234580994
+      },
+      {
+        "name": "other",
+        "ui_name": "melody",
+        "file": "other.wav",
+        "sha256": "6fabe55e0f9eceed3be7fcbf51b81eede5309c1df22ed8a71a28e6d738786bf7",
+        "rms": 0.050602329050375656,
+        "peak": 0.26682716608047485
+      },
+      {
+        "name": "vocals",
+        "ui_name": "vocals",
+        "file": "vocals.wav",
+        "sha256": "6173f6108e9671808a70a67bfd92a0f21130dbe5be20c1978fa44ae5b2a17262",
+        "rms": 0.09096799138560784,
+        "peak": 0.44017255306243896
+      }
+    ],
+    "mixture_consistency": {
+      "algorithm": "uniform-mixture-consistency-v1",
+      "sources": 4,
+      "frames": 299880,
+      "block_frames": 65536,
+      "raw_reconstruction_rms_error": 0.005201965067071605,
+      "raw_reconstruction_relative_rms": 0.03024555948068662,
+      "reconstruction_rms_error": 4.185168213033027e-09,
+      "reconstruction_relative_rms": 2.4333641708829827e-08,
+      "per_source_correction_rms": 0.0013004912667679011,
+      "source_attribution_verified": false
+    },
+    "timing": {
+      "model_load_seconds": 1.160939582856372,
+      "inference_seconds": 5.412464666878805,
+      "total_seconds": 6.730176500044763,
+      "realtime_factor": 0.7959506863057065
+    },
+    "reconstruction_rms_error": 7.195489981626224e-09
+  },
+  "export_reconstruction_relative_rms": 2.433364170882983e-08,
+  "export_si_sdr_db": {
+    "drums": 8.075661373674077,
+    "bass": 5.091733211526778,
+    "other": -1.0051075191799133,
+    "vocals": 5.712842219498721
+  },
+  "completed_job_reused": true,
+  "fullParityVerified": false,
+  "source_hashes": {
+    "scripts/stem_worker.py": "e51c78bf6b97047589215615fc51698f0791e1386afe8edf9fc7f0a11aba341a",
+    "scripts/stem_service.py": "4171aef6aef9a85c39170db3fe9bee15d46c84d2598e44102b895ad747d167a5",
+    "scripts/stem_mix_consistency.py": "82be014dec145470db13fc5c0072c1808adeefc2c7a5fb82366f2f5003cae38b",
+    "scripts/verify_stem_consistency_export.py": "afd988341a594ea817ed6a0a064413ad89cde624afd583239aefd22ebb008669"
+  }
+}

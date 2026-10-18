@@ -15,6 +15,7 @@ import shutil
 import subprocess
 import sys
 import time
+from stem_mix_consistency import project_inplace, REVISION as CONSISTENCY_REVISION
 
 ROOT = Path(__file__).resolve().parents[1]
 MODEL_SHA256 = "d9fa14133cfcc034a6758923bb3a8ca9f8dfd0b582134643bbf83f72c17576dd"
@@ -138,8 +139,11 @@ def run(args):
     source_hash = digest(args.input)
     parameters = ({"segment": args.segment, "overlap": 0.25, "shifts": 0, "device": "cpu"}
                   if args.backend == "htdemucs" else {"segment": 30, "overlap_seconds": 1, "device": "cpu"})
+    consistency = args.mixture_consistency or ('uniform' if args.backend == 'scnet' else 'none')
+    parameters['mixture_consistency'] = CONSISTENCY_REVISION if consistency == 'uniform' else 'none'
+    parameters['postprocess_source_sha256'] = digest(Path(__file__).with_name('stem_mix_consistency.py')) if consistency == 'uniform' else None
     cache_key = hashlib.sha256(json.dumps({"input": source_hash, "model": model_hash,
-        "parameters": parameters, "worker": 1}, sort_keys=True).encode()).hexdigest()
+        "parameters": parameters, "worker_sha256": digest(Path(__file__))}, sort_keys=True).encode()).hexdigest()
     manifest_path = output / "manifest.json"
     if manifest_path.exists():
         saved = json.loads(manifest_path.read_text())
@@ -220,6 +224,12 @@ def run(args):
     inference_seconds = time.monotonic() - inference_start
     if separated.shape != (4, 2, len(audio)) or not np.isfinite(separated).all():
         raise ValueError("Invalid separation result shape or values")
+    consistency_result = None
+    if consistency == 'uniform':
+        status('recombining', progress=0.96)
+        consistency_result = project_inplace(audio, separated)
+        if not np.isfinite(separated).all():
+            raise ValueError('Non-finite mixture-consistent export')
     status("writing", progress=0.97)
     stems = []
     for name, data in zip(sources, separated):
@@ -241,7 +251,7 @@ def run(args):
         "weight_redistribution": "research_only_author_statement" if args.backend == "htdemucs" else "MIT_author_JOSS_paper_explicitly_includes_pretrained_models",
         "runtime": runtime,
         "sample_rate": rate, "channels": 2, "frames": len(audio), "duration": duration,
-        "parameters": parameters, "stems": stems,
+        "parameters": parameters, "stems": stems, "mixture_consistency": consistency_result,
         "timing": {"model_load_seconds": model_load_seconds,
             "inference_seconds": inference_seconds, "total_seconds": time.monotonic() - started,
             "realtime_factor": inference_seconds / duration},
@@ -261,6 +271,7 @@ def main():
     parser.add_argument("output", type=Path)
     parser.add_argument("--backend", choices=["htdemucs", "spleeter", "scnet"], default="htdemucs")
     parser.add_argument("--model", type=Path)
+    parser.add_argument("--mixture-consistency", choices=["none", "uniform"], help="Default: uniform for SCNet, none for other backends; raw inference metrics stay in the manifest")
     parser.add_argument("--status", type=Path)
     parser.add_argument("--segment", type=float, default=7.8)
     parser.add_argument("--threads", type=int, default=4)
