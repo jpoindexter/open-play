@@ -1,5 +1,7 @@
 # Open Play
 
+Current local desktop test: **0.1.23**, open/stopped with the Hercules master1/2 and cue3/4 selected. Use `Start Open Play Current Test.command`; see [current instructions](docs/prototype/TRY_CURRENT_DESKTOP.md) and [scoped native evidence](docs/prototype/DESKTOP_0.1.23_REVIEW.md). Physical firstPlay/full parity remain pending;22and its profile backup remain available.
+
 Independent open-source desktop DJ project, with a browser review candidate and ongoing reference investigation. The goal is familiar Serato DJ Pro design and behavior without artificial feature, account or device gates in the independent implementation.
 
 **Jason approved HTML revision f8b0abf for a local desktop test.** Build0.1.1 is available through `Start Open Play Desktop.command`; see [desktop test instructions](desktop/README.md). Existing UI/audio code is preserved. Full1:1 and physical headphone/master routing remain unverified.

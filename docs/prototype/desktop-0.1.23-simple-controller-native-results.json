@@ -1,0 +1,600 @@
+{
+  "passed": true,
+  "scope": "Actual native Electron0.1.23 isolated Checks window, normal UI inputs and Save dialog, production audio graph with generated buffers and physical output muted. Scoped native execution only; full native/reference/physical/music/latency/phase/continuity/composition acceptance remains open.",
+  "genericHarnessScopeVerbatim": "Actual production browser Simple Sync GUI-handler and synthetic MIDI-editor inputs, generated engine buffers, post-master stereo Float32 and whole recording. Internal MIDI-controller route only. Not physical hardware, native, DVS/CDJ modes, file import, musical quality, exact vendor taper or full Sync parity",
+  "nativeExecution": {
+    "version": "0.1.23",
+    "sourceCommit": "2a334132ca1a423029fceb8aa3e39953655df525",
+    "ASARSHA256": "fa4b2c4629a0f313cefc619878bb333f8ae60cbb4d8ac1e5eebcef1bfa58825e",
+    "menu": "Checks \u2192 Simple Sync Controller \u2192 Run \u2192 Download",
+    "originalExport": "Normal native Save dialog; no DevTools or injected JavaScript"
+  },
+  "inspection": "Independent full-window hashes/finite checks and global20\u201320000Hz Hann16x FFT without expected-frequency mask. Fixed0.3Hz/.005RMS/1e-6silence, rate1e-8. Snapshot windows only; no acoustic or whole-run continuity proof.",
+  "originalBytes": 1716066,
+  "originalSHA256": "28d2158338d4cf256874833ac58fea8098c9e55107316f02730cc6ced66dce5f",
+  "sampleRate": 44100,
+  "sourceBefore": {
+    "app.js": "131f2278e3db5460c0b5008c8328a3b073f1d8d03cff01e694ee8027f04a54b4",
+    "engine.js": "a4ec10d9401a3e7fd6d7184e331ae59adf6213a87df5152969c8a3edb8fab9f8",
+    "sync.js": "f45fb74d984f4f5fa87684e50b87ab16014554a0f0576b061c8bae3e214bd197",
+    "smart-sync.js": "b57c0016cc9467b2f7fe178f7acd1522c2c4d1611c3b6ff6288c97fefcd1e3f1",
+    "deck-midi.js": "5e939909bfd6ed820a6c888d69d405fce7dcc81835a0a7ff42c6d7f5fce1e040",
+    "midi.js": "0cabb6dbe98e9eb3f7bc7f7eb44615fa315a0738260e5f3568a34d0aa75ec1ad",
+    "panels.js": "21ecd5626eef61d3798a5779472f68f263398f155ea2b1e29c10e9857a901e48",
+    "tempo-slider.js": "b83de88ef715f7bdd68d9d7745862f9ecaac80c41f53e91c7041b01f1576f7cf",
+    "fx-tempo-capture-worklet.js": "1ffd09ad071f8dd2dca8b745ca8f9e1182e515eb32c42340bf5ff0a035e9b8b9",
+    "simple-sync-controller-harness.js": "fad6a441878afb396157b0f2078686bf834d164a36fd3842a0800ee947904fcf"
+  },
+  "sourceAfter": {
+    "app.js": "131f2278e3db5460c0b5008c8328a3b073f1d8d03cff01e694ee8027f04a54b4",
+    "engine.js": "a4ec10d9401a3e7fd6d7184e331ae59adf6213a87df5152969c8a3edb8fab9f8",
+    "sync.js": "f45fb74d984f4f5fa87684e50b87ab16014554a0f0576b061c8bae3e214bd197",
+    "smart-sync.js": "b57c0016cc9467b2f7fe178f7acd1522c2c4d1611c3b6ff6288c97fefcd1e3f1",
+    "deck-midi.js": "5e939909bfd6ed820a6c888d69d405fce7dcc81835a0a7ff42c6d7f5fce1e040",
+    "midi.js": "0cabb6dbe98e9eb3f7bc7f7eb44615fa315a0738260e5f3568a34d0aa75ec1ad",
+    "panels.js": "21ecd5626eef61d3798a5779472f68f263398f155ea2b1e29c10e9857a901e48",
+    "tempo-slider.js": "b83de88ef715f7bdd68d9d7745862f9ecaac80c41f53e91c7041b01f1576f7cf",
+    "fx-tempo-capture-worklet.js": "1ffd09ad071f8dd2dca8b745ca8f9e1182e515eb32c42340bf5ff0a035e9b8b9",
+    "simple-sync-controller-harness.js": "fad6a441878afb396157b0f2078686bf834d164a36fd3842a0800ee947904fcf"
+  },
+  "sourceStable": true,
+  "packageSourceMatches": true,
+  "cases": [
+    {
+      "name": "Simple Sync +20percent preserves the cached -2percent controller coordinate",
+      "rates": [
+        1,
+        1.2
+      ],
+      "decks": [
+        {
+          "sync": true,
+          "state": "off",
+          "position": 0.3382993197278914,
+          "playing": true
+        },
+        {
+          "sync": true,
+          "state": "off",
+          "position": 0.3780952531193938,
+          "playing": true
+        }
+      ],
+      "measurements": [
+        {
+          "channel": 0,
+          "frames": 13230,
+          "allFinite": true,
+          "sha256": "17ed6fce8fc0f5fa970a09eb2321e369fede093c59e4c95e5973fbab2082e2ea",
+          "rms": 0.05691723467219056,
+          "peak": 0.08049294352531433,
+          "frequencyHz": 329.9999955317518,
+          "expectedHz": 330,
+          "frequencyErrorHz": -4.4682482212010655e-06,
+          "passed": true
+        },
+        {
+          "channel": 1,
+          "frames": 13230,
+          "allFinite": true,
+          "sha256": "96d9661fc91b36e4ea5ac4f024c9e06ce54fea5daa33a6a7af19087e7f601686",
+          "rms": 0.05475064596047797,
+          "peak": 0.07746266573667526,
+          "frequencyHz": 660.0000313403447,
+          "expectedHz": 660.0,
+          "frequencyErrorHz": 3.134034466256708e-05,
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "Controller movement changes shared Simple Sync tempo beyond its absolute range",
+      "rates": [
+        1.0083333333333333,
+        1.21
+      ],
+      "decks": [
+        {
+          "sync": true,
+          "state": "off",
+          "position": 0.9561436106017932,
+          "playing": true
+        },
+        {
+          "sync": true,
+          "state": "off",
+          "position": 1.1195084315092394,
+          "playing": true
+        }
+      ],
+      "measurements": [
+        {
+          "channel": 0,
+          "frames": 13230,
+          "allFinite": true,
+          "sha256": "8937dcf38f74ac72dbb410699423e02bd03e8599139aa31cd406e0884002dde4",
+          "rms": 0.05693485432557796,
+          "peak": 0.0804915726184845,
+          "frequencyHz": 332.74999661523043,
+          "expectedHz": 332.75,
+          "frequencyErrorHz": -3.384769570402568e-06,
+          "passed": true
+        },
+        {
+          "channel": 1,
+          "frames": 13230,
+          "allFinite": true,
+          "sha256": "dce7858792ce785abf4a8d9d224374104bf9ee5f007b842946eb74cb5390550f",
+          "rms": 0.05476422903203664,
+          "peak": 0.07746627181768417,
+          "frequencyHz": 665.5000192705191,
+          "expectedHz": 665.5,
+          "frequencyErrorHz": 1.927051914663025e-05,
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "One GUI OFF restores cached -1percent and leaves primary tempo unchanged",
+      "rates": [
+        1.0083333333333333,
+        0.99
+      ],
+      "decks": [
+        {
+          "sync": true,
+          "state": "off",
+          "position": 1.5648934168393924,
+          "playing": true
+        },
+        {
+          "sync": false,
+          "state": "off",
+          "position": 1.7835991488508636,
+          "playing": true
+        }
+      ],
+      "measurements": [
+        {
+          "channel": 0,
+          "frames": 13230,
+          "allFinite": true,
+          "sha256": "f9584aa93cf4fb0f5cc169b5e6e0d07800ffab26fdd459e57b733ebdc6782406",
+          "rms": 0.056882398150838856,
+          "peak": 0.08049162477254868,
+          "frequencyHz": 332.749996436025,
+          "expectedHz": 332.75,
+          "frequencyErrorHz": -3.5639749853544345e-06,
+          "passed": true
+        },
+        {
+          "channel": 1,
+          "frames": 13230,
+          "allFinite": true,
+          "sha256": "687436fec37352b3f5783713a68fd407e1bf24d586366909829f7eec24c882e8",
+          "rms": 0.0547557731868406,
+          "peak": 0.07746294140815735,
+          "frequencyHz": 544.5000001159725,
+          "expectedHz": 544.5,
+          "frequencyErrorHz": 1.1597251159400912e-07,
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "Unsynced controller fader resumes ordinary absolute pitch",
+      "rates": [
+        1.0083333333333333,
+        0.98
+      ],
+      "decks": [
+        {
+          "sync": true,
+          "state": "off",
+          "position": 2.185349950120022,
+          "playing": true
+        },
+        {
+          "sync": false,
+          "state": "off",
+          "position": 2.3897560736976255,
+          "playing": true
+        }
+      ],
+      "measurements": [
+        {
+          "channel": 0,
+          "frames": 13230,
+          "allFinite": true,
+          "sha256": "b8404714ee7fc75410b27b44a469ffcd9cc520ff0aef0a09791f8e5b70a8f754",
+          "rms": 0.05693085573405652,
+          "peak": 0.08049219101667404,
+          "frequencyHz": 332.749996603866,
+          "expectedHz": 332.75,
+          "frequencyErrorHz": -3.3961339909183152e-06,
+          "passed": true
+        },
+        {
+          "channel": 1,
+          "frames": 13230,
+          "allFinite": true,
+          "sha256": "e3f4f1b3cb6e43a2f7f40f0871b6949509d6a428bfb296663be5a1af075c73d2",
+          "rms": 0.05472715616060187,
+          "peak": 0.07744907587766647,
+          "frequencyHz": 539.0000100300172,
+          "expectedHz": 539.0,
+          "frequencyErrorHz": 1.0030017165263416e-05,
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "Synthetic MIDI Sync re-engages shared Simple Sync",
+      "rates": [
+        1.0083333333333333,
+        1.2099999904632568
+      ],
+      "decks": [
+        {
+          "sync": true,
+          "state": "off",
+          "position": 2.8292199374867137,
+          "playing": true
+        },
+        {
+          "sync": true,
+          "state": "off",
+          "position": 2.7950639390545367,
+          "playing": true
+        }
+      ],
+      "measurements": [
+        {
+          "channel": 0,
+          "frames": 13230,
+          "allFinite": true,
+          "sha256": "1ebddd5377db22b9d413acc7276237389a89363fcc0cf5992c0a10d236a57190",
+          "rms": 0.05693905159717238,
+          "peak": 0.08049286156892776,
+          "frequencyHz": 332.74999662667017,
+          "expectedHz": 332.75,
+          "frequencyErrorHz": -3.3733298323568306e-06,
+          "passed": true
+        },
+        {
+          "channel": 1,
+          "frames": 13230,
+          "allFinite": true,
+          "sha256": "5fc276a08cdc9b937ddc4551e0ad1542a260f1a6aad359fb84a47da09d8f36d6",
+          "rms": 0.05475446453615888,
+          "peak": 0.0774666965007782,
+          "frequencyHz": 665.500019284911,
+          "expectedHz": 665.5,
+          "frequencyErrorHz": 1.9284910990791104e-05,
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "GUI primary tempo then controller movement rebases relative pitch",
+      "rates": [
+        1.026,
+        1.2311999999999999
+      ],
+      "decks": [
+        {
+          "sync": true,
+          "state": "off",
+          "position": 3.466733472482418,
+          "playing": true
+        },
+        {
+          "sync": true,
+          "state": "off",
+          "position": 3.560080180495775,
+          "playing": true
+        }
+      ],
+      "measurements": [
+        {
+          "channel": 0,
+          "frames": 13230,
+          "allFinite": true,
+          "sha256": "381e2253b8a5a1f3a71269333bedcaff4a1038b8a6458796069af53f48f0265c",
+          "rms": 0.05689137295075141,
+          "peak": 0.08049160987138748,
+          "frequencyHz": 338.58000329613907,
+          "expectedHz": 338.58,
+          "frequencyErrorHz": 3.296139084341121e-06,
+          "passed": true
+        },
+        {
+          "channel": 1,
+          "frames": 13230,
+          "allFinite": true,
+          "sha256": "75d7715549ad611fd80483ee5b043d6a78d31d1bb77fe7a734ce2d712e1be773",
+          "rms": 0.05474642285669463,
+          "peak": 0.07746649533510208,
+          "frequencyHz": 677.1599939992831,
+          "expectedHz": 677.1600000000001,
+          "frequencyErrorHz": -6.0007170077369665e-06,
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "Mapped Shift-ignore and release leave Simple Sync tempo unchanged",
+      "rates": [
+        1.026,
+        1.2311999999999999
+      ],
+      "decks": [
+        {
+          "sync": true,
+          "state": "off",
+          "position": 4.109972670505376,
+          "playing": true
+        },
+        {
+          "sync": true,
+          "state": "off",
+          "position": 4.331967188228554,
+          "playing": true
+        }
+      ],
+      "measurements": [
+        {
+          "channel": 0,
+          "frames": 13230,
+          "allFinite": true,
+          "sha256": "2b841e7733ddbb27a3ad1bacbbc636b8d763f2e29a268a6539d1a81209b78887",
+          "rms": 0.05691868124864709,
+          "peak": 0.0804920643568039,
+          "frequencyHz": 338.58000291590594,
+          "expectedHz": 338.58,
+          "frequencyErrorHz": 2.9159059522498865e-06,
+          "passed": true
+        },
+        {
+          "channel": 1,
+          "frames": 13230,
+          "allFinite": true,
+          "sha256": "b02e941f3399e0e8e4a3524c6c8882b634d9f4f6b6eef75f22d2825c780e82e7",
+          "rms": 0.05475452308715482,
+          "peak": 0.07745985686779022,
+          "frequencyHz": 677.1599939875853,
+          "expectedHz": 677.1600000000001,
+          "frequencyErrorHz": -6.012414814904332e-06,
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "Controller movement resumes after Shift reposition",
+      "rates": [
+        1.0343333333333333,
+        1.2411999999999999
+      ],
+      "decks": [
+        {
+          "sync": true,
+          "state": "off",
+          "position": 4.743815524215872,
+          "playing": true
+        },
+        {
+          "sync": true,
+          "state": "off",
+          "position": 5.092578583339986,
+          "playing": true
+        }
+      ],
+      "measurements": [
+        {
+          "channel": 0,
+          "frames": 13230,
+          "allFinite": true,
+          "sha256": "06b84284a9edc92fcbd6faaf30c8fa09a1b7d8c407b854860ac5ba6f9c8296c3",
+          "rms": 0.05691633145400994,
+          "peak": 0.0804917961359024,
+          "frequencyHz": 341.330004223567,
+          "expectedHz": 341.3300000000001,
+          "frequencyErrorHz": 4.2235669184265134e-06,
+          "passed": true
+        },
+        {
+          "channel": 1,
+          "frames": 13230,
+          "allFinite": true,
+          "sha256": "fcafd49f628ecad7291e667b8082515d1e1a722d9db02b73a2377816bbe0f2e4",
+          "rms": 0.054734632544138,
+          "peak": 0.07746584713459015,
+          "frequencyHz": 682.6599820505844,
+          "expectedHz": 682.6600000000001,
+          "frequencyErrorHz": -1.7949415678231162e-05,
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "Synthetic MIDI OFF restores cached -3percent immediately",
+      "rates": [
+        1.0343333333333333,
+        0.97
+      ],
+      "decks": [
+        {
+          "sync": true,
+          "state": "off",
+          "position": 5.3802706203330946,
+          "playing": true
+        },
+        {
+          "sync": false,
+          "state": "off",
+          "position": 5.7744604148486305,
+          "playing": true
+        }
+      ],
+      "measurements": [
+        {
+          "channel": 0,
+          "frames": 13230,
+          "allFinite": true,
+          "sha256": "e925a8c9f2148336d43fd7953a35cc7b2a55a1516ecfc6457d62327671b89cbe",
+          "rms": 0.05692468800809475,
+          "peak": 0.08049092441797256,
+          "frequencyHz": 341.3300042981924,
+          "expectedHz": 341.3300000000001,
+          "frequencyErrorHz": 4.298192322949035e-06,
+          "passed": true
+        },
+        {
+          "channel": 1,
+          "frames": 13230,
+          "allFinite": true,
+          "sha256": "ff5af2fce4009fe9cc54205ef855c20521e45c035e41e55f6e0d001b656e9484",
+          "rms": 0.05474163956007558,
+          "peak": 0.07746337354183197,
+          "frequencyHz": 533.5000210737588,
+          "expectedHz": 533.5,
+          "frequencyErrorHz": 2.1073758830425504e-05,
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "Unknown primary controller position is preserved until first actual packet",
+      "rates": [
+        1,
+        0.97
+      ],
+      "decks": [
+        {
+          "sync": false,
+          "state": "off",
+          "position": 6.030379045620527,
+          "playing": true
+        },
+        {
+          "sync": false,
+          "state": "off",
+          "position": 6.39385272336709,
+          "playing": true
+        }
+      ],
+      "measurements": [
+        {
+          "channel": 0,
+          "frames": 13230,
+          "allFinite": true,
+          "sha256": "2e02b23749019d6dcd0dda04a3e4f6dcc252553fa2eb7d0181567ec5a90bb154",
+          "rms": 0.05690444076041213,
+          "peak": 0.08047493547201157,
+          "frequencyHz": 329.99999589379667,
+          "expectedHz": 330,
+          "frequencyErrorHz": -4.106203334686143e-06,
+          "passed": true
+        },
+        {
+          "channel": 1,
+          "frames": 13230,
+          "allFinite": true,
+          "sha256": "2ac90a5683bb78c7167409674f75c4868999564462f2742a3a474b719c57e07d",
+          "rms": 0.054750916437874726,
+          "peak": 0.07746570557355881,
+          "frequencyHz": 533.5000209889039,
+          "expectedHz": 533.5,
+          "frequencyErrorHz": 2.0988903884244792e-05,
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "Both normal Play controls stop the master",
+      "rates": [
+        1,
+        0.97
+      ],
+      "decks": [
+        {
+          "sync": false,
+          "state": "off",
+          "position": 6.332238456051367,
+          "playing": false
+        },
+        {
+          "sync": false,
+          "state": "off",
+          "position": 6.692287199289621,
+          "playing": false
+        }
+      ],
+      "measurements": [
+        {
+          "channel": 0,
+          "frames": 13230,
+          "allFinite": true,
+          "sha256": "9d55c9c2f49808c72a9d28e4f661bae87b1ed419741fa38e5ffeff9648f33d7d",
+          "rms": 0.0,
+          "peak": 0.0,
+          "frequencyHz": null,
+          "expectedHz": 0,
+          "frequencyErrorHz": null,
+          "passed": true
+        },
+        {
+          "channel": 1,
+          "frames": 13230,
+          "allFinite": true,
+          "sha256": "9d55c9c2f49808c72a9d28e4f661bae87b1ed419741fa38e5ffeff9648f33d7d",
+          "rms": 0.0,
+          "peak": 0.0,
+          "frequencyHz": null,
+          "expectedHz": 0,
+          "frequencyErrorHz": null,
+          "passed": true
+        }
+      ],
+      "passed": true
+    }
+  ],
+  "maxFrequencyErrorHz": 3.134034466256708e-05,
+  "fullNativeAcceptance": false,
+  "fullParityVerified": false,
+  "physicalAcceptance": false,
+  "unknownPositionAfterOFF": {
+    "rate": 1.0343333333333333,
+    "sync": false,
+    "state": "off"
+  },
+  "wholeRecording": {
+    "bytes": 108719,
+    "sha256": "4f3345d632747b85b9251f4542daef5404fe0c8abc258d285426a04ef44ba52e",
+    "format": "audio/webm;codecs=opus",
+    "browserDecode": {
+      "sampleRate": 44100,
+      "frames": 298998,
+      "channels": 2,
+      "allFinite": true
+    },
+    "independentDecode": {
+      "sampleRate": 48000,
+      "channels": 2,
+      "frames": 325440,
+      "allFinite": true,
+      "peak": 0.08294736593961716,
+      "pcmSHA256": "7e22fd9953d3005f493b4a4a5995a89ab4239d03e00060a95bf0d8d3d28a35a4"
+    }
+  }
+}
