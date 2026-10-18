@@ -1,0 +1,55 @@
+{
+  "before": {
+    "passed": false,
+    "scope": "Actual AudioEngine group rollback, pause and newer setRate with controlled preparation collaborators; actual browser/audio verified separately.",
+    "tests": [
+      {
+        "name": "Stopping one prepared group member restores its nominal rate and retains the other audible owner",
+        "passed": false,
+        "error": "Expected values to be strictly equal:\n\n1.06 !== 1\n"
+      },
+      {
+        "name": "A replaced track is not rolled back by its cancelled previous group",
+        "passed": true
+      },
+      {
+        "name": "A newer paused request for the same rate retains its own authority",
+        "passed": true
+      },
+      {
+        "name": "A newer playing transport is not mutated by its cancelled previous group",
+        "passed": true
+      },
+      {
+        "name": "Ordinary preparation failure restores nominal rates without retiring current audible voices",
+        "passed": true
+      }
+    ]
+  },
+  "after": {
+    "passed": true,
+    "scope": "Actual AudioEngine group rollback, pause and newer setRate with controlled preparation collaborators; actual browser/audio verified separately.",
+    "tests": [
+      {
+        "name": "Stopping one prepared group member restores its nominal rate and retains the other audible owner",
+        "passed": true
+      },
+      {
+        "name": "A replaced track is not rolled back by its cancelled previous group",
+        "passed": true
+      },
+      {
+        "name": "A newer paused request for the same rate retains its own authority",
+        "passed": true
+      },
+      {
+        "name": "A newer playing transport is not mutated by its cancelled previous group",
+        "passed": true
+      },
+      {
+        "name": "Ordinary preparation failure restores nominal rates without retiring current audible voices",
+        "passed": true
+      }
+    ]
+  }
+}

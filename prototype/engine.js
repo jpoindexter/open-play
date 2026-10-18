@@ -52,6 +52,7 @@ export class AudioEngine {
     this.onSampleState = () => {};
     this.samplerRoute = "Master";
     this.startTokens = new Map();
+    this.rateOwners = new WeakMap();
     this.fxChains = [];
     this.fxState = null;
     this.channelFXType = "Filter";
@@ -594,6 +595,7 @@ export class AudioEngine {
 
   async synchronize(d, {rate, positionAt, priorClock}) {
     const track = d.track, previousRate = d.rate;
+    this.rateOwners.set(d, {});
     let scheduled = false;
     d.rate = rate;
     try {
@@ -681,7 +683,7 @@ export class AudioEngine {
     return {rate,nominalRate:d.rate};
   }
   async setSyncedRates(changes){
-    const saved=changes.map(({deck,rate})=>({deck,rate,previous:deck.rate,track:deck.track,playing:deck.playing,clock:this.voiceClock(deck,this.voices.get(deck.index))}));
+    const saved=changes.map(({deck,rate})=>({deck,rate,owner:{},previous:deck.rate,track:deck.track,playing:deck.playing,clock:this.voiceClock(deck,this.voices.get(deck.index))}));
     if(saved.some(x=>x.deck.processing&&!x.playing))throw Error('Finish deck preparation before changing group tempo.');
     const active=saved.filter(x=>x.playing);
     const gesture=active.some(x=>this.voices.get(x.deck.index)?.deckScratchTransport||(x.deck.stemSlip&&x.deck.stemSlip!=='off')||x.deck.reverse);
@@ -692,6 +694,7 @@ export class AudioEngine {
     const group=active.length?createSyncTempoHandoff(this.ctx,active.map(x=>x.deck.index)):null;
     try{
       const jobs=saved.map(async x=>{
+        this.rateOwners.set(x.deck,x.owner);
         x.deck.rate=x.rate;
         try{if(x.playing)await this.start(x.deck,{priorClock:x.clock,positionAt:x.clock,handoff:group});}catch(error){group?.fail(error);throw error;}
       });
@@ -700,7 +703,10 @@ export class AudioEngine {
       if(this.fxState){for(const x of saved)this.fxState[2][x.deck.index]=x.track.bpm*x.rate;try{this.configureFX(...this.fxState);}catch(error){this.onError?.(error);}}
     }catch(error){
       group?.fail(error);
-      for(const x of saved)if(x.deck.track===x.track&&x.deck.rate===x.rate&&(!x.playing||group?.owns(x.deck.index))){
+      // Stop revokes a voice token, but must still roll back this uncommitted
+      // rate. A newer rate request, track or active voice retains authority.
+      for(const x of saved)if(x.deck.track===x.track&&x.deck.rate===x.rate&&this.rateOwners.get(x.deck)===x.owner&&
+        (!x.playing||group?.owns(x.deck.index)||(!x.deck.playing&&!x.deck.processing&&!this.voices.has(x.deck.index)))){
         x.deck.rate=x.previous;x.deck.processing=false;const controller=group?.controller(x.deck.index);if(this.transforms.get(x.deck.index)===controller)this.transforms.delete(x.deck.index);this.onProcessing(x.deck);
       }
       throw error;
@@ -708,6 +714,7 @@ export class AudioEngine {
   }
   async setRate(d, rate, {syncInternal = false} = {}) {
     if (!syncInternal && this.onRateRequest) return this.onRateRequest(d, rate);
+    this.rateOwners.set(d, {});
     this.cancelDeckScratchRequest(d);
     if (this.voices.get(d.index)?.gridTimeline) {
       const position=this.position(d), was=d.playing;

@@ -1,0 +1,232 @@
+{
+  "checkpoint": 169,
+  "passed": false,
+  "originalBytes": 1196355,
+  "originalSHA256": "7fdc7559878e7c210b845f66eca3b9b0e4ad7a368febd85e2f8643b9d4a07c57",
+  "sourceHashes": {
+    "app.js": "8ba6135f0cfa9da99ebbc27d7343abfdc977a0b4f0c0cfd9aca3f3ea112a8d0f",
+    "engine.js": "85b3468ba45397734271a83b8f4444d1ef851cf25c0dea40fc09c527c11425b7",
+    "stems.js": "5fb06aba4f6a97e4150d1bcfeef394574b0c9e9ed6ee099b78b89482b08ea4b7",
+    "panels.js": "06217033416d62af4602c1572086dc03bb9f25458a8f90c884f3d552c7b1d4fe",
+    "keylock.js": "62adbfdd77df20deb1328302d4a8daf3d7bdc29870af453d39acfd2a02bf060b",
+    "keylock-worker.js": "5cb72a1bc74e1808c32b430d72d5769427c7056edee11410eb6f8b3c7751fcec",
+    "keylock-dsp.js": "f4cb1881fedb018f395a6711d263aa142feb8dfe93638a3d1f97fc432c15ac3d",
+    "smart-sync.js": "98d34b559882d16e3b3e8c715d6a3c35a6197cb8d6a984fe5470b80592ca934e",
+    "slicer.js": "09ba9e951312560102c1a81a2be070843531262a1ca71ddb7bdd2edc5d340acb",
+    "tempo-slider.js": "b83de88ef715f7bdd68d9d7745862f9ecaac80c41f53e91c7041b01f1576f7cf",
+    "sync-tempo-handoff.js": "5842f9209035e24ff867004d3fef5f0a1fe7f7f4976440546b8238a225b82f9b",
+    "beatgrid.js": "af239aef231c9d089bf2352b8f548a5f71f734d6cf753986f17f57b3999477b9",
+    "warp-loop.js": "33091f4414d2066ce47657aa96312dfefc6ca0a061ccab04ddf00ef6121addc4",
+    "warp-loop-kernel.js": "8a331758bc551454a3cc65fd5ea527c42a370bd22ab6eb650ca278ea87e0f414",
+    "warp-loop-worklet.js": "bc977262180f910c6be55ea07a46f6b560a090939271bd4beec5e8fd31ed23fa",
+    "reverse-censor-plan.js": "38adfb04c0e498a8e2cb27b0240f037d315f24b0c8cd6968e338ff29b0af3807",
+    "stem-slicer-169-harness.js": "4907362758f3052346f349b6563a1d729cb3db06c5b9ccdcc0f6a3fd6a6b3a77",
+    "stem-activation-capture-145.js": "730b9c3de31e9c3546ec1ab86f8fd85ce2a1ccfe6f78fc25d8f483f8b9d75331",
+    "stem-history-worklet.js": "d1e4f452044235a110a874fad2921390878c5731f3a769896ca5bfb2faf08daa",
+    "keylock-shadow-live.js": "41bf27051270a4741f83b59bc7c0111767b589ef3986b4aafb43ad36dc067551",
+    "vendor/signalsmith-stretch/SignalsmithStretch-open-play-replace.mjs": "abc12a3afe332b3aa32c1e1ec931f362225f0de09beb727a90944cf7c96baf46",
+    "vendor/signalsmith-stretch/SignalsmithStretch-open-play-reference-dsp.mjs": "0512cae2a33873956026e64cb47854c1c677baf1beb1bc0242edfb9557987f21"
+  },
+  "criteria": {
+    "maximumSourceClockErrorSeconds": 0.01,
+    "nominalTolerance": 1e-08,
+    "shownBPMTolerance": 0.05,
+    "stoppedPeak": 1e-07,
+    "minimumRMS": 1e-05,
+    "cancelledPriorBPM": 120,
+    "relativeInputFrom": 6,
+    "relativeInputTo": 2,
+    "expectedNextBPM": 115.2,
+    "alignment": "Known warp grid and observed anchors; no fitted alignment."
+  },
+  "observations": [
+    {
+      "name": "cancelled-slicer-rate-restart",
+      "stopRetirementCorrect": true,
+      "cancelledNominalRestored": false,
+      "restartTempoCoherent": false,
+      "nextRelativeTempoCorrect": false,
+      "lowerControlLowersActualTempo": false,
+      "stoppedNominalBPM": 127.2,
+      "stoppedShownBPM": 120,
+      "restartNominalBPM": 127.2,
+      "restartGridBPM": 120,
+      "nextNominalBPM": 122.4,
+      "nextGridBPM": 122.4,
+      "restartSourceClockErrorSeconds": 0.0,
+      "nextSourceClockErrorSeconds": 0.005493333333333572,
+      "packets": [
+        {
+          "kind": "beforePCM",
+          "channel": 0,
+          "frames": 13230,
+          "contiguousQuanta": 104,
+          "sha256": "11d08bdf1e95f8285e1aea3a2c5a1ae67f392a09933f5dcea528f7373de365f8",
+          "rms": 0.09949489714100153,
+          "peak": 0.4389684200286865
+        },
+        {
+          "kind": "beforePCM",
+          "channel": 1,
+          "frames": 13230,
+          "contiguousQuanta": 104,
+          "sha256": "2def8e7cacf74d73da1aec02be4816455f305894134dc0c2fec5c7a84063d9a9",
+          "rms": 0.08620910429387756,
+          "peak": 0.3565250039100647
+        },
+        {
+          "kind": "stoppedPCM",
+          "channel": 0,
+          "frames": 13230,
+          "contiguousQuanta": 104,
+          "sha256": "9d55c9c2f49808c72a9d28e4f661bae87b1ed419741fa38e5ffeff9648f33d7d",
+          "rms": 0.0,
+          "peak": 0.0
+        },
+        {
+          "kind": "stoppedPCM",
+          "channel": 1,
+          "frames": 13230,
+          "contiguousQuanta": 104,
+          "sha256": "9d55c9c2f49808c72a9d28e4f661bae87b1ed419741fa38e5ffeff9648f33d7d",
+          "rms": 0.0,
+          "peak": 0.0
+        },
+        {
+          "kind": "restartPCM",
+          "channel": 0,
+          "frames": 13230,
+          "contiguousQuanta": 104,
+          "sha256": "1a4cd97ea5a442d68f3f6412a127970aedc9a887f8eb2380abc86b4f472c3bd2",
+          "rms": 0.11550270937322807,
+          "peak": 0.385576456785202
+        },
+        {
+          "kind": "restartPCM",
+          "channel": 1,
+          "frames": 13230,
+          "contiguousQuanta": 104,
+          "sha256": "87bf39bee0bbd8fc9cdd18c2dca0fbc0b98849a5ec91cc803ce8e25f4781e667",
+          "rms": 0.12877741086684386,
+          "peak": 0.5581549406051636
+        },
+        {
+          "kind": "afterPCM",
+          "channel": 0,
+          "frames": 13230,
+          "contiguousQuanta": 104,
+          "sha256": "b6a29c2a854bab283ac6b7ed6927db41d111dfea12d4ed1247306bd9e2e766ae",
+          "rms": 0.11140433033909243,
+          "peak": 0.5414191484451294
+        },
+        {
+          "kind": "afterPCM",
+          "channel": 1,
+          "frames": 13230,
+          "contiguousQuanta": 104,
+          "sha256": "2be1426bcd5eae99187f242451655b11988aa20f359154dd595e5c49cbbd03a8",
+          "rms": 0.11292852617484711,
+          "peak": 0.49402761459350586
+        }
+      ]
+    },
+    {
+      "name": "cancelled-ordinary-rate-restart",
+      "stopRetirementCorrect": true,
+      "cancelledNominalRestored": false,
+      "restartTempoCoherent": false,
+      "nextRelativeTempoCorrect": false,
+      "lowerControlLowersActualTempo": false,
+      "stoppedNominalBPM": 127.2,
+      "stoppedShownBPM": 120,
+      "restartNominalBPM": 127.2,
+      "restartGridBPM": 120,
+      "nextNominalBPM": 122.4,
+      "nextGridBPM": 122.4,
+      "restartSourceClockErrorSeconds": 0.0,
+      "nextSourceClockErrorSeconds": 0.005354013605442409,
+      "packets": [
+        {
+          "kind": "beforePCM",
+          "channel": 0,
+          "frames": 13230,
+          "contiguousQuanta": 104,
+          "sha256": "6df69631f5450c728d9f0242d2af82b9a6274f8e45026a267123c9e1cb790099",
+          "rms": 0.1191622723012031,
+          "peak": 0.4444233477115631
+        },
+        {
+          "kind": "beforePCM",
+          "channel": 1,
+          "frames": 13230,
+          "contiguousQuanta": 104,
+          "sha256": "9482e48e290df6ba11fc65e08c9a153444b3bd847a9bc634656d87ef83fa6a58",
+          "rms": 0.13302296428099816,
+          "peak": 0.5459151268005371
+        },
+        {
+          "kind": "stoppedPCM",
+          "channel": 0,
+          "frames": 13230,
+          "contiguousQuanta": 104,
+          "sha256": "9d55c9c2f49808c72a9d28e4f661bae87b1ed419741fa38e5ffeff9648f33d7d",
+          "rms": 0.0,
+          "peak": 0.0
+        },
+        {
+          "kind": "stoppedPCM",
+          "channel": 1,
+          "frames": 13230,
+          "contiguousQuanta": 104,
+          "sha256": "9d55c9c2f49808c72a9d28e4f661bae87b1ed419741fa38e5ffeff9648f33d7d",
+          "rms": 0.0,
+          "peak": 0.0
+        },
+        {
+          "kind": "restartPCM",
+          "channel": 0,
+          "frames": 13230,
+          "contiguousQuanta": 104,
+          "sha256": "afbadf48f9d58fc7623e6937282e2629819548faf33fb446eb9f0556818bf719",
+          "rms": 0.13829788362817197,
+          "peak": 0.45489975810050964
+        },
+        {
+          "kind": "restartPCM",
+          "channel": 1,
+          "frames": 13230,
+          "contiguousQuanta": 104,
+          "sha256": "ecf4ebb30f11e0c5faa1fa45a505b70c598a35d606627ce8356bfcf6b8fbfac9",
+          "rms": 0.14637518090841023,
+          "peak": 0.5022962689399719
+        },
+        {
+          "kind": "afterPCM",
+          "channel": 0,
+          "frames": 13230,
+          "contiguousQuanta": 104,
+          "sha256": "80648d1b334ded70b1a7724ad18e177d8e6f7f0fecc3d3da1baa52fbf8e6f6f2",
+          "rms": 0.1152135471921193,
+          "peak": 0.47536394000053406
+        },
+        {
+          "kind": "afterPCM",
+          "channel": 1,
+          "frames": 13230,
+          "contiguousQuanta": 104,
+          "sha256": "6f5a87bf3bbe88dba32c635c0995bc350a03d2b854150f05b3f9d9471823ad8e",
+          "rms": 0.11893762192445881,
+          "peak": 0.4753004312515259
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "default48000Acceptance": false,
+  "musicalPitchQualityAccepted": false,
+  "sourceAttributionAccepted": false,
+  "exactSeratoParityAccepted": false,
+  "nativeAcceptance": false,
+  "hardwareAcceptance": false,
+  "fullParityAcceptance": false
+}
