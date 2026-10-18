@@ -1,0 +1,64 @@
+{
+  "passed": 4,
+  "failed": 0,
+  "scope": "Actual output selection controller with controlled suspended context and asynchronous resume. Not native OS sink, rendered audio or physical sockets.",
+  "checks": [
+    {
+      "name": "Stopped selection resumes the muted engine, selects the sink and settles stereo without any deck Play",
+      "passed": true,
+      "evidence": {
+        "events": [
+          "mute:true",
+          "resume",
+          "setSink:A",
+          "connect:stereo",
+          "mute:false"
+        ],
+        "visiblePending": {
+          "label": "Selected output",
+          "phase": "resuming"
+        },
+        "deckStartCalls": 0
+      }
+    },
+    {
+      "name": "A failed resume reports the error, never switches sink and clears the visible pending state",
+      "passed": true,
+      "evidence": {
+        "events": [
+          "mute:true",
+          "resume",
+          "connect:stereo",
+          "mute:false"
+        ],
+        "error": "NotAllowedError"
+      }
+    },
+    {
+      "name": "Disposal while resume is pending cannot select a sink or reopen physical output afterward",
+      "passed": true,
+      "evidence": {
+        "events": [
+          "mute:true",
+          "resume"
+        ],
+        "lateCallbacks": 0
+      }
+    },
+    {
+      "name": "A newer selection supersedes a pending resume before any obsolete sink switch",
+      "passed": true,
+      "evidence": {
+        "events": [
+          "mute:true",
+          "resume",
+          "mute:true",
+          "setSink:B",
+          "connect:stereo",
+          "mute:false"
+        ],
+        "finalSink": "B"
+      }
+    }
+  ]
+}

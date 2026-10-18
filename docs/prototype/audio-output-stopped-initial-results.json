@@ -1,0 +1,27 @@
+{
+  "passed": 0,
+  "failed": 4,
+  "scope": "Actual output selection controller with controlled suspended context and asynchronous resume. Not native OS sink, rendered audio or physical sockets.",
+  "checks": [
+    {
+      "name": "Stopped selection resumes the muted engine, selects the sink and settles stereo without any deck Play",
+      "passed": false,
+      "error": "Expected values to be strictly equal:\n+ actual - expected\n\n+ 'setSink:A'\n- 'resume'\n"
+    },
+    {
+      "name": "A failed resume reports the error, never switches sink and clears the visible pending state",
+      "passed": false,
+      "error": "Expected values to be strictly equal:\n+ actual - expected\n\n+ 'AssertionError'\n- 'NotAllowedError'\n"
+    },
+    {
+      "name": "Disposal while resume is pending cannot select a sink or reopen physical output afterward",
+      "passed": false,
+      "error": "Expected values to be strictly equal:\n+ actual - expected\n\n+ {\n+   error: 'A suspended sink must not be switched before resume\\n' +\n+     '+ actual - expected\\n' +\n+     '\\n' +\n+     \"+ 'suspended'\\n\" +\n+     \"- 'running'\\n\"\n+ }\n- false\n"
+    },
+    {
+      "name": "A newer selection supersedes a pending resume before any obsolete sink switch",
+      "passed": false,
+      "error": "Expected values to be strictly equal:\n+ actual - expected\n\n+ {\n+   error: 'A suspended sink must not be switched before resume\\n' +\n+     '+ actual - expected\\n' +\n+     '\\n' +\n+     \"+ 'suspended'\\n\" +\n+     \"- 'running'\\n\"\n+ }\n- false\n"
+    }
+  ]
+}

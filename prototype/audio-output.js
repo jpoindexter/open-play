@@ -1,9 +1,9 @@
 // Explicit output selection; no automatic restoration of a multi-channel cue route.
 export function createAudioOutputSelection(engine,{devices=globalThis.navigator?.mediaDevices,onChange=()=>{}}={}){
- let selected='',label='System default',outputs=[],discovery=null,revision=0,serial=Promise.resolve(),disposed=false,lastError=null;
+ let selected='',label='System default',outputs=[],discovery=null,pending=null,revision=0,serial=Promise.resolve(),disposed=false,lastError=null;
  const emit=()=>{try{onChange(snapshot());}catch{}};
  const current=token=>!disposed&&token===revision;
- const snapshot=()=>({deviceId:selected,label,outputs:outputs.map(x=>({...x})),discovery:discovery?{...discovery}:null,canSelect:typeof engine.ctx?.setSinkId==='function',routing:engine.audioMonitor?.snapshot()||null,lastError,disposed});
+ const snapshot=()=>({deviceId:selected,label,outputs:outputs.map(x=>({...x})),discovery:discovery?{...discovery}:null,pending:pending?{label:pending.label,phase:pending.phase}:null,canSelect:typeof engine.ctx?.setSinkId==='function',routing:engine.audioMonitor?.snapshot()||null,lastError,disposed});
  async function list(){if(disposed)throw Error('Output selection closed.');if(!devices?.enumerateDevices)throw Object.assign(Error('This runtime cannot enumerate audio outputs.'),{name:'NotSupportedError'});const found=await devices.enumerateDevices();if(disposed)return[];outputs=found.filter(x=>x.kind==='audiooutput'&&x.deviceId).map((x,i)=>({deviceId:x.deviceId,label:x.label||`Audio output${i+1}`}));discovery={returnedDevices:found.length,audioOutputs:found.filter(x=>x.kind==='audiooutput').length,addressableOutputs:outputs.length,namedOutputs:outputs.filter(x=>x.label&&!/^Audio output\d+$/.test(x.label)).length,documentVisibility:globalThis.document?.visibilityState||'unknown'};emit();return outputs.map(x=>({...x}));}
  const enqueue=run=>{const token=++revision;const result=serial.catch(()=>{}).then(()=>{if(!current(token))return false;return run(token);});serial=result;return result;};
  function select(deviceId=''){
@@ -11,7 +11,17 @@ export function createAudioOutputSelection(engine,{devices=globalThis.navigator?
   return enqueue(async token=>{
    engine.init();if(typeof engine.ctx.setSinkId!=='function')throw Object.assign(Error('This runtime cannot select an audio output. System default playback remains available.'),{name:'NotSupportedError'});
    const old=String(engine.ctx.sinkId||'');engine.audioMonitor.mutePhysical(true);lastError=null;
+   pending={token,label:outputs.find(x=>x.deviceId===deviceId)?.label||(!deviceId?'System default':'selected output'),phase:'switching'};
    try{
+    // Chromium may leave a sink switch pending while its context is suspended.
+    // Start the muted context only; no deck or sampler voice is started here.
+    if(['suspended','interrupted'].includes(engine.ctx.state)){
+     pending.phase='resuming';emit();await engine.ctx.resume();
+     if(!current(token))return false;
+     if(engine.ctx.state!=='running')throw Object.assign(Error('Audio could not start for output selection. Try again.'),{name:'InvalidStateError'});
+     pending.phase='switching';
+    }
+    emit();
     await engine.ctx.setSinkId(deviceId);
     if(disposed)return false;
     // A native sink switch already happened even if a newer request is queued.
@@ -19,7 +29,7 @@ export function createAudioOutputSelection(engine,{devices=globalThis.navigator?
     selected=String(engine.ctx.sinkId||'');label=outputs.find(x=>x.deviceId===selected)?.label||(!selected?'System default':'Selected audio output');
     engine.audioMonitor.connectPhysical('stereo');
     if(!current(token)){emit();return false;}
-    engine.audioMonitor.mutePhysical(false);emit();return snapshot();
+    engine.audioMonitor.mutePhysical(false);pending=null;emit();return snapshot();
    }catch(error){
     if(current(token)){
      lastError=error.message;
@@ -30,7 +40,7 @@ export function createAudioOutputSelection(engine,{devices=globalThis.navigator?
      if(current(token)&&retained&&available){engine.audioMonitor.connectPhysical('stereo');engine.audioMonitor.mutePhysical(false);}
      emit();
     }throw error;
-   }
+   }finally{if(pending?.token===token){pending=null;if(!disposed)emit();}}
   });
  }
  function route(layout,{masterStart=0,cueStart=2}={}){

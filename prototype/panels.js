@@ -64,8 +64,10 @@ export function createPanels(a) {
   function updateOutputStatus(value=audioOutputs.snapshot()){
     const target=$('#audio-output-status');if(!target)return;
     const route=value.routing;
+    const apply=$('#audio-output-apply');if(apply)apply.disabled=!!value.pending;
     target.textContent=value.lastError||`${value.label} · ${route?.layout||'stereo'} · master ${route?.masterChannels.join('/')||'1/2'} · cue ${route?.cueChannels.length?route.cueChannels.join('/'):'not sent to output'} · cue mix ${Math.round((route?.settings.mix??.5)*100)}% · cue volume ${Math.round((route?.settings.volume??.1)*100)}%${route?.settings.masterCue?' · Master Cue':''}${route?.settings.splitCue?' · Split Cue':''}${route?.physicalMuted?' · MUTED':''}. Physical sockets remain unverified.`;
     if(value.discovery){const d=value.discovery;target.textContent+=` Device discovery: ${d.returnedDevices} devices returned, ${d.audioOutputs} audio outputs, ${d.addressableOutputs} addressable, ${d.namedOutputs} named; window ${d.documentVisibility}.`;}
+    if(value.pending)target.textContent=`${value.pending.phase==='resuming'?'Starting audio for':'Switching to'} ${value.pending.label}… Output is muted until selection completes. `+target.textContent;
   }
   const badge = (text = "SIMULATION", real = false) =>
     `<span class="badge ${real ? "real" : ""}">${text}</span>`;
@@ -1490,7 +1492,7 @@ export function createPanels(a) {
   function bindOutputRouting(){
     const showError=error=>{const status=$('#audio-output-status');if(status)status.textContent=error.message;notify(error.message);};
     $('#audio-output-refresh').onclick=async()=>{try{const selected=$('#audio-output-device').value,outputs=await audioOutputs.list(),element=$('#audio-output-device');if(!element)return;element.innerHTML='<option value="">System default</option>'+outputs.filter(x=>x.deviceId!=='default').map(x=>`<option value="${esc(x.deviceId)}">${esc(x.label)}</option>`).join('');if([...element.options].some(x=>x.value===selected))element.value=selected;updateOutputStatus();}catch(error){showError(error);}};
-    $('#audio-output-select').onclick=async()=>{const button=$('#audio-output-select');button.disabled=true;try{await audioOutputs.select($('#audio-output-device').value);updateOutputStatus();}catch(error){showError(error);}finally{if(button.isConnected)button.disabled=false;}};
+    $('#audio-output-select').onclick=async()=>{const button=$('#audio-output-select');button.disabled=true;button.textContent='Switching output…';button.setAttribute('aria-busy','true');try{await audioOutputs.select($('#audio-output-device').value);updateOutputStatus();}catch(error){showError(error);}finally{if(button.isConnected){button.disabled=false;button.textContent='Use selected output';button.removeAttribute('aria-busy');}}};
     $('#audio-output-apply').onclick=async()=>{try{const master=$('#audio-master-pair').value,cue=$('#audio-cue-pair').value;await audioOutputs.route($('#audio-output-layout').value,{masterStart:master==='3–4'?2:0,cueStart:cue==='3–4'?2:0});s.settings['Master Channels']=master;s.settings['Headphone Channels']=cue;persist();updateOutputStatus();}catch(error){showError(error);}};
     $('#audio-monitor-settings').onclick=()=>settings('Mixer');updateOutputStatus();
   }
