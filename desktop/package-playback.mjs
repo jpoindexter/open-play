@@ -11,7 +11,7 @@ const git=args=>execFileSync('git',args,{cwd:root,maxBuffer:150*1024*1024});
 const sha=bytes=>createHash('sha256').update(bytes).digest('hex');
 const sourceCommit=git(['rev-parse','HEAD']).toString().trim();
 const get=file=>git(['show',`${sourceCommit}:${file}`]);
-const version='0.1.14',name='Open Play Playback Test',port=18775,bundle='org.openplay.dj.playback.localtest';
+const version='0.1.15',name='Open Play Playback Test',port=18775,bundle='org.openplay.dj.playback.localtest';
 const profile='Open Play Playback Test',partition='persist:open-play-playback-test';
 const stage=await mkdtemp(path.join(tmpdir(),'open-play-playback-'));
 await mkdir(path.join(stage,'assets'));
@@ -33,11 +33,21 @@ await put('main.cjs',main);await put('server.cjs',get('desktop/server.cjs'));
 const manifest=JSON.parse(get('desktop/package.json'));
 Object.assign(manifest,{name:'open-play-playback-local-test',productName:name,version,description:'Optional current-source desktop test; full parity unverified'});delete manifest.scripts;
 await put('package.json',JSON.stringify(manifest,null,2)+'\n');
-const modules=['app.js','engine.js','keylock-shadow-live.js','beatgrid.js','smart-sync.js','sync.js','sync-tempo-handoff.js','deck-midi.js','deck-tap-tempo.js','deck-tempo.js','midi.js','panels.js','jog-bend.js','midi-jog-touch.js','loop-pads.js','manual-loops.js','pitchplay.js','instant-double.js','effects.js','extended-effects.js','keylock.js','keylock-dsp.js','keylock-worker.js','warp-loop.js','warp-loop-kernel.js','warp-loop-worklet.js','styles.css'];
+// The archived workspace guide describes the previous installed candidate. Generate
+// only this package's identity/instructions; keep prototype source byte-for-byte.
+await put('assets/docs/prototype/TRY_CURRENT_DESKTOP.md',`# Packaged desktop test ${version}
+
+Private local test from source ${sourceCommit}. This package includes the approved interface and current playback fixes; packaging alone does not establish sound, hardware response or full Serato parity.
+
+Use the normal app controls. Playback versions share the saved profile and port ${port}; close one before opening another. Output starts muted. When ready, select the named Hercules in Devices, apply four channels (master1/2, cue3/4), and test one action at a time. No timed controller capture runs while Jason is away.
+
+The workspace docs/prototype/TRY_CURRENT_DESKTOP.md and desktop-${version}-playback-observation.json will record subsequent native observations. Bundled research is a frozen source snapshot. Previous versions and profile backups remain available.
+`);
+const modules=['app.js','engine.js','keylock-shadow-live.js','pcm-resample.js','vendor/signalsmith-stretch/SignalsmithStretch-open-play-history.mjs','beatgrid.js','smart-sync.js','sync.js','sync-tempo-handoff.js','deck-midi.js','deck-tap-tempo.js','deck-tempo.js','midi.js','panels.js','jog-bend.js','midi-jog-touch.js','loop-pads.js','manual-loops.js','pitchplay.js','instant-double.js','effects.js','extended-effects.js','keylock.js','keylock-dsp.js','keylock-worker.js','warp-loop.js','warp-loop-kernel.js','warp-loop-worklet.js','styles.css'];
 const provenance={builtAt:new Date().toISOString(),approvedPrototype:'f8b0abf33c8e8468c7bec27eabc5be2930ed0086',sourceCommit,version,name,bundle,port,profile,partition,electronVersion:'44.9.0',prototypeFiles:modules.map(file=>({file:'prototype/'+file,sha256:sha(get('prototype/'+file))})),packagingSources:await Promise.all(['desktop/package-playback.mjs'].map(async file=>({file,sha256:sha(await readFile(path.join(root,file)))}))),stagedWrites:writes,scope:'Optional private local test. Complete prototype archived from the declared commit; no adapter substitution or native R3 helper. Main app uses a separate persistent playback-test profile and own-origin MIDI/speaker permissions; microphone and camera remain denied. Package identity does not prove runtime, physical hardware, music quality or full parity. Prior apps/defaults untouched.'};
 await put('BUILD_PROVENANCE.json',JSON.stringify(provenance,null,2)+'\n');
 const outputs=await packager({dir:stage,out:path.join(root,'local-evidence/desktop-builds',version),name,platform:'darwin',arch:process.arch,electronVersion:'44.9.0',appBundleId:bundle,appVersion:version,asar:true,overwrite:false,prune:true,osxSign:false});
 const asarPath=path.join(outputs[0],name+'.app','Contents','Resources','app.asar');
 const receipt={...provenance,stage,outputs,asarPath,asarSHA256:sha(await readFile(asarPath))};
-await writeFile(path.join(root,'docs/prototype/desktop-0.1.14-playback-package.json'),JSON.stringify(receipt,null,2)+'\n',{flag:'wx'});
+await writeFile(path.join(root,'docs/prototype/desktop-0.1.15-playback-package.json'),JSON.stringify(receipt,null,2)+'\n',{flag:'wx'});
 console.log(JSON.stringify({outputs,asarPath,asarSHA256:receipt.asarSHA256,sourceCommit}));
