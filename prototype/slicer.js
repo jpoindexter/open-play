@@ -6,7 +6,7 @@ export function createSlicer({engine,render=()=>{},notify=()=>{}}){
  function bounds(d){
   const grid=createBeatgrid(d.track);if(!grid)throw Error('Set a beatgrid before using Slicer.');
   const domain=d.slicerDomain||8;if(![2,4,8,16,32,64].includes(domain))throw Error('Choose a valid Slicer domain.');
-  const saved=fixed.get(d.index),position=engine.position(d),startBeat=d.slicerLoop&&saved?.track===d.track&&saved.domain===domain?saved.startBeat:Math.floor(grid.beatAt(position)/domain)*domain;
+  const saved=fixed.get(d.index),owner=active.get(d.index),position=owner&&owns(owner)?owner.clock(engine.ctx.currentTime):engine.position(d),startBeat=d.slicerLoop&&saved?.track===d.track&&saved.domain===domain?saved.startBeat:Math.floor(grid.beatAt(position)/domain)*domain;
   const start=Math.max(0,grid.timeAt(startBeat)),end=Math.min(d.track.duration,grid.timeAt(startBeat+domain));
   return{grid,domain,startBeat,start,end,length:end-start,sliceBeats:domain/8};
  }

@@ -1,0 +1,72 @@
+{
+  "before": {
+    "passed": false,
+    "scope": "Slicer beat-domain/owner integration with controlled transport collaborator; actual browser/audio verified separately.",
+    "tests": [
+      {
+        "name": "Warped eight-beat domain and pad4 half-slice use continuous beat coordinates",
+        "passed": true
+      },
+      {
+        "name": "Quantization is a fraction of the selected slice, not always one base beat",
+        "passed": true
+      },
+      {
+        "name": "Fixed domain survives cursor movement and pad release",
+        "passed": true
+      },
+      {
+        "name": "Release before preparation finishes returns a paused audition without resurrection",
+        "passed": true
+      },
+      {
+        "name": "Stop/cancel invalidates pending preparation and late release",
+        "passed": true
+      },
+      {
+        "name": "Older overlapping-pad release cannot terminate the newer owner",
+        "passed": true
+      },
+      {
+        "name": "A newer shifting-domain pad uses the advancing root clock while an older slice loops",
+        "passed": false,
+        "error": "0.25 != 1.2"
+      }
+    ]
+  },
+  "after": {
+    "passed": true,
+    "scope": "Slicer beat-domain/owner integration with controlled transport collaborator; actual browser/audio verified separately.",
+    "tests": [
+      {
+        "name": "Warped eight-beat domain and pad4 half-slice use continuous beat coordinates",
+        "passed": true
+      },
+      {
+        "name": "Quantization is a fraction of the selected slice, not always one base beat",
+        "passed": true
+      },
+      {
+        "name": "Fixed domain survives cursor movement and pad release",
+        "passed": true
+      },
+      {
+        "name": "Release before preparation finishes returns a paused audition without resurrection",
+        "passed": true
+      },
+      {
+        "name": "Stop/cancel invalidates pending preparation and late release",
+        "passed": true
+      },
+      {
+        "name": "Older overlapping-pad release cannot terminate the newer owner",
+        "passed": true
+      },
+      {
+        "name": "A newer shifting-domain pad uses the advancing root clock while an older slice loops",
+        "passed": true
+      }
+    ]
+  },
+  "scope": "Seven focused Slicer integration cases; only two new actual overlap cases recorded. No broad solved tone/FX/controller/model/fixed/Stop replay."
+}

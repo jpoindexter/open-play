@@ -1,0 +1,193 @@
+{
+  "checkpoint": 165,
+  "passed": false,
+  "originalBytes": 455193,
+  "originalSHA256": "ccc7a2ef972539df5252140c54c6337ff7fbd8c0a8ea65a07c0ff565f6a9bd59",
+  "sourceHashes": {
+    "app.js": "ce58e28f1f43af820b6312428c7418a5572b6af70de11abc75ab57c23d1bc0c5",
+    "engine.js": "85b3468ba45397734271a83b8f4444d1ef851cf25c0dea40fc09c527c11425b7",
+    "stems.js": "5fb06aba4f6a97e4150d1bcfeef394574b0c9e9ed6ee099b78b89482b08ea4b7",
+    "panels.js": "06217033416d62af4602c1572086dc03bb9f25458a8f90c884f3d552c7b1d4fe",
+    "keylock.js": "62adbfdd77df20deb1328302d4a8daf3d7bdc29870af453d39acfd2a02bf060b",
+    "keylock-worker.js": "5cb72a1bc74e1808c32b430d72d5769427c7056edee11410eb6f8b3c7751fcec",
+    "keylock-dsp.js": "f4cb1881fedb018f395a6711d263aa142feb8dfe93638a3d1f97fc432c15ac3d",
+    "smart-sync.js": "98d34b559882d16e3b3e8c715d6a3c35a6197cb8d6a984fe5470b80592ca934e",
+    "slicer.js": "9a6c396a3bec3a88a02e3cf26ca803864326f2b6c8e413fd4dc9ebb0cb828225",
+    "tempo-slider.js": "b83de88ef715f7bdd68d9d7745862f9ecaac80c41f53e91c7041b01f1576f7cf",
+    "sync-tempo-handoff.js": "5842f9209035e24ff867004d3fef5f0a1fe7f7f4976440546b8238a225b82f9b",
+    "beatgrid.js": "af239aef231c9d089bf2352b8f548a5f71f734d6cf753986f17f57b3999477b9",
+    "warp-loop.js": "33091f4414d2066ce47657aa96312dfefc6ca0a061ccab04ddf00ef6121addc4",
+    "warp-loop-kernel.js": "8a331758bc551454a3cc65fd5ea527c42a370bd22ab6eb650ca278ea87e0f414",
+    "warp-loop-worklet.js": "bc977262180f910c6be55ea07a46f6b560a090939271bd4beec5e8fd31ed23fa",
+    "reverse-censor-plan.js": "38adfb04c0e498a8e2cb27b0240f037d315f24b0c8cd6968e338ff29b0af3807",
+    "stem-slicer-165-harness.js": "157d058082f3fd8f5134879c2b822f24ef3afaf3fe3cec89745bded03589b38a",
+    "stem-activation-capture-145.js": "730b9c3de31e9c3546ec1ab86f8fd85ce2a1ccfe6f78fc25d8f483f8b9d75331",
+    "stem-history-worklet.js": "d1e4f452044235a110a874fad2921390878c5731f3a769896ca5bfb2faf08daa",
+    "keylock-shadow-live.js": "41bf27051270a4741f83b59bc7c0111767b589ef3986b4aafb43ad36dc067551",
+    "vendor/signalsmith-stretch/SignalsmithStretch-open-play-replace.mjs": "abc12a3afe332b3aa32c1e1ec931f362225f0de09beb727a90944cf7c96baf46",
+    "vendor/signalsmith-stretch/SignalsmithStretch-open-play-reference-dsp.mjs": "0512cae2a33873956026e64cb47854c1c677baf1beb1bc0242edfb9557987f21"
+  },
+  "criteria": {
+    "minimumRMS": 1e-05,
+    "maximumPositionError": 0.01,
+    "maximumStoppedPeak": 1e-07
+  },
+  "rawReferenceCriterion": {
+    "window": "Central two-thirds of each complete held capture",
+    "maximumRelativeRMS": 0.0001,
+    "alignment": "Known exports/observed anchors/independent beat clock, no fit."
+  },
+  "observations": [
+    {
+      "name": "raw-shifting-overlap",
+      "backgroundBeatAtSecond": 2.2613605442176876,
+      "expectedDomainBeat": 2.0,
+      "expectedBounds": {
+        "start": 1.2,
+        "end": 1.25
+      },
+      "observedBounds": {
+        "start": 0.25,
+        "end": 0.3125
+      },
+      "shiftingDomainCorrect": false,
+      "olderReleaseRetainsNewerOwner": true,
+      "keyboardFocusPreserved": true,
+      "releaseSourceClockError": 0.0,
+      "packets": [
+        {
+          "kind": "firstPCM",
+          "channel": 0,
+          "frames": 6615,
+          "rms": 0.10886556190715115,
+          "sha256": "e69e1ae416f7345f27dd9366c16ecce563284c6149f90a7f39a9c32051c508a8",
+          "contiguousQuanta": 52,
+          "rawRelativeRMSError": 4.186080218498872e-08,
+          "rawAudioMatchesObservedSlice": true
+        },
+        {
+          "kind": "firstPCM",
+          "channel": 1,
+          "frames": 6615,
+          "rms": 0.09841958347314768,
+          "sha256": "48fa066402a667f449e8a43b72ba63147ef718570ed3c2bf77b076b3b3256102",
+          "contiguousQuanta": 52,
+          "rawRelativeRMSError": 4.3676570031164026e-08,
+          "rawAudioMatchesObservedSlice": true
+        },
+        {
+          "kind": "secondPCM",
+          "channel": 0,
+          "frames": 13230,
+          "rms": 0.06358092931006586,
+          "sha256": "f122a9e0fcad02c9a83ac11677f77841c350bea2966248ad33d269787bbd34ef",
+          "contiguousQuanta": 104,
+          "rawRelativeRMSError": 4.0372390324191045e-08,
+          "rawAudioMatchesObservedSlice": true
+        },
+        {
+          "kind": "secondPCM",
+          "channel": 1,
+          "frames": 13230,
+          "rms": 0.07105949685613379,
+          "sha256": "2e0097d156db996e626fbeebe55f7d89fbc29a4ee0266c32d2004410d2223819",
+          "contiguousQuanta": 104,
+          "rawRelativeRMSError": 4.171091896007464e-08,
+          "rawAudioMatchesObservedSlice": true
+        },
+        {
+          "kind": "afterOlderPCM",
+          "channel": 0,
+          "frames": 6615,
+          "rms": 0.06083445054983387,
+          "sha256": "f71a714f8b8911e781bc9b81141fadce7133bb1a88a924d7807787a7b9d3ed6e",
+          "contiguousQuanta": 52,
+          "rawRelativeRMSError": 4.17188544197529e-08,
+          "rawAudioMatchesObservedSlice": true
+        },
+        {
+          "kind": "afterOlderPCM",
+          "channel": 1,
+          "frames": 6615,
+          "rms": 0.06694717849067088,
+          "sha256": "3522a04ef40fc8d7c3122854976075a160204d96d916c5cb0a293c0ca2b629a0",
+          "contiguousQuanta": 52,
+          "rawRelativeRMSError": 4.2561475731680304e-08,
+          "rawAudioMatchesObservedSlice": true
+        },
+        {
+          "kind": "afterPCM",
+          "channel": 0,
+          "frames": 13230,
+          "rms": 0.12698564035482407,
+          "sha256": "09f52beac0e54acb57af097459c12c174d3a60e9fb92e030c747a6283bc1bea3",
+          "contiguousQuanta": 104
+        },
+        {
+          "kind": "afterPCM",
+          "channel": 1,
+          "frames": 13230,
+          "rms": 0.14716817651672007,
+          "sha256": "f60090390d2c6a2d78304cf487e5dd4265519686e4a5080c675409cf623f170f",
+          "contiguousQuanta": 104
+        }
+      ]
+    }
+  ],
+  "errors": [
+    {
+      "message": "New pad must use advancing background domain",
+      "stack": "Error: New pad must use advancing background domain\n    at assert (http://127.0.0.1:8804/prototype/stem-slicer-165-harness.js:1:120)\n    at run (http://127.0.0.1:8804/prototype/stem-slicer-165-harness.js:40:4)"
+    }
+  ],
+  "failureState": {
+    "at": 29.553197278911565,
+    "position": 1.9180045351473922,
+    "playing": true,
+    "processing": false,
+    "reverse": false,
+    "rate": 1,
+    "keylock": false,
+    "keyShift": 0,
+    "sync": true,
+    "syncState": "tempo",
+    "voice": true,
+    "gridBPM": 120,
+    "anchorTime": 29.20297052154195,
+    "anchorPosition": 1.590621315192743,
+    "loop": false,
+    "loopIn": 0,
+    "loopOut": 0,
+    "slicerLoop": false,
+    "slice": null,
+    "mask": [
+      false,
+      true,
+      true,
+      true
+    ],
+    "gains": [
+      0,
+      0,
+      1,
+      1,
+      1
+    ],
+    "pending": false,
+    "focus": {
+      "tag": "BUTTON",
+      "deck": "0",
+      "pad": "2"
+    },
+    "pressed": "false",
+    "notifications": "OW\nFILTER\nLEVEL\nXF ASSIGN\nA\nThru\nB\nCUE \u25c7\n2\nGAIN\nHIGH\nMID\nLOW\nFILTER\nLEVEL\nXF ASSIGN\nA\nThru\nB\nCUE \u25c7\nA \u2014 CROSSFADER \u2014 B\n\uff0b Crate\n\uff0b Smart\nSearch crates\n\u2733All music\n\u266biTunes / local\n\u224bStems\n\u25f7Prepare\nCRATES\n\u00b7\n\u25b0Warm up\n\u00b7\n\u25b0Night shift\n\u00b7\n\u25b0Peak time\n\u00b7\n\u25b0Closing\nSTREAMING \u00b7 SIMULATION\n\u25cbApple Music\n\u25cbSpotify\n\u25cbBeatport\n\u25cbBeatsource\n\u25cbSoundCloud\n\u25cbTIDAL\n\uff0b Import audio\nLibrary tools\nAnalyze\n\u2699\nSelected track\nCurrent crate\nAll tracks\n\u25a6\nFiles\nPrepare\nHistory\nSearch tracks\nColumns\n\u25c9\tSONG \u25b4\tARTIST\tBPM\tKEY\tPLAYS\tALBUM\tLENGTH\n\u266b\tAfter Hours\tOpen Play Lab\t124\t8A\t0\tNight shift\t00:48.0\n\u266b\tCopper Steps\tOpen Play Lab\t120\t5A\t0\tWarm up\t00:48.0\n\u266b\tGlass Transit\tOpen Play Lab\t126\t9A\t0\tNight shift\t00:48.0\n\u266b\tLast Light\tOpen Play Lab\t125\t8B\t0\tClosing\t00:48.0\n\u266b\tLow Orbit\tOpen Play Lab\t122\t7A\t0\tWarm up\t00:48.0\n\u266b\u25cf\tSDRNR-private-research-159\tLocal file\t120\t\u2014\t1\tImported\t00:06.7\n\u266b\tSignal Blue\tOpen Play Lab\t130\t11A\t0\tPeak time\t00:48.0\n\u266b\tSlow Current\tOpen Play Lab\t112\t6A\t0\tWarm up\t00:48.0\n\u266b\tTidal Lines\tOpen Play Lab\t128\t10A\t0\tPeak time\t00:48.0\nAutoplay\n9 tracks \u00b7 06:30.8 \u00b7 all\nDemo audio generated locally \u2022 no uploads\nFinished: 1 measured, 0 failed. Existing/manual metadata and locked grids preserved unless replacement was requested."
+  },
+  "default48000Acceptance": false,
+  "musicalPitchAccuracyAccepted": false,
+  "sourceAttributionAccepted": false,
+  "exactSeratoParityAccepted": false,
+  "seamlessTransitionAccepted": false,
+  "nativeAcceptance": false,
+  "hardwareAcceptance": false,
+  "fullParityAcceptance": false
+}
