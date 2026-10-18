@@ -1,0 +1,220 @@
+{
+  "startedAt": "2026-10-18T01:13:49.326Z",
+  "completed": false,
+  "checks": [
+    "Actual original+four stereo sources use one processor and one warp map with five selectable outputs"
+  ],
+  "errors": [
+    {
+      "message": "Live shared pitch+3 timed out",
+      "stack": "Error: Live shared pitch+3 timed out\n    at assert (http://127.0.0.1:18851/prototype/stem-resampled-harness.js:2:34)\n    at until (http://127.0.0.1:18851/prototype/stem-resampled-harness.js:6:85)\n    at async HTMLButtonElement.run (http://127.0.0.1:18851/prototype/stem-resampled-harness.js:53:75)"
+    }
+  ],
+  "events": [],
+  "criteria": {
+    "maximumCancellationRatio": 0.01,
+    "maximumBassLeakRatio": 0.01,
+    "minimumCarrierAmplitude": 0.005,
+    "minimumMelody550Ratio": 0.5,
+    "maximumMutedRMS": 1e-05,
+    "minimumDelayTailRMS": 0.0005
+  },
+  "fixture": {
+    "sampleRate": 48000,
+    "duration": 30,
+    "grid": 0.13,
+    "bpm": 120,
+    "markers": [
+      {
+        "time": 4.13,
+        "bpm": 150
+      },
+      {
+        "time": 7.33,
+        "bpm": 90
+      }
+    ],
+    "components": [
+      "original=sum of four stored stem buffers",
+      "Vocal=A550Hz amplitude.08",
+      "Melody=-A550Hz+B330Hz amplitude.06",
+      "Bass=110Hz amplitude.04",
+      "Drums=independently timed3000Hz bursts"
+    ],
+    "stereoPhaseOffsets": [
+      0,
+      0.45
+    ]
+  },
+  "scope": "Actual five-source bounded resampled live keylock, source-tempo map, Key+group replacement, Stem pad mutes and normal enabled Delay. Whole master checks shifted cancellation, dry Melody positive control, real wet tail after source mute and late decay. Owned prepared fixtures; no new model inference, separation/music/native/physical/full-reference acceptance.",
+  "sourceBefore": {
+    "app.js": "266c98f7be3fc6c543b0ae86f2f070b2015afa73a108206bb498db8dd003f588",
+    "engine.js": "638c1d7e6e1ac5b7043a30fc8a4891c485ca83f0ea148789084d30f731061101",
+    "panels.js": "4a4b4c544f07140758cfd8f45b00f774dea588f881d6ed0f24c0e19bc1ff02fb",
+    "beatgrid.js": "af239aef231c9d089bf2352b8f548a5f71f734d6cf753986f17f57b3999477b9",
+    "smart-sync.js": "a8998b8727ae144413272163a2c438f3d8bcd92f634d5bd1872e5ac49a509f61",
+    "stem-resampled-harness.js": "15245f4ffcfd16015430ef9c8a7ed1b5ec0d8653cbff03fbe4724ac1c636f8be",
+    "keylock-shadow-live.js": "deab9dd00bb6caa32c225af3e04ca5ed004f788a984eab2fbf832d1058ee72a7",
+    "pcm-resample.js": "8789e7cfc543c393830ad04e2d56e3359786eb6a4473ff08edda1c899fc19ae2",
+    "effects.js": "0185d8adfa94f9a549afbfb9af8b8657388bff8d946cdf3b525da933c60fe0a6",
+    "vendor/signalsmith-stretch/SignalsmithStretch-open-play-history.mjs": "1f470f846a993cc750ee2e111817adb08879493025c7322eadc8cf98323e4ef8"
+  },
+  "physicalOutputMuted": true,
+  "processor": {
+    "resamplePitch": true,
+    "maxPCMBytes": 536870912,
+    "followMinimumLeadSeconds": 0.04,
+    "byteAccounting": "Acknowledged retained PCM and in-flight chunk copies only; excludes decoded inputs, SRC tables and opaque WASM heaps.",
+    "disposed": false,
+    "state": {
+      "when": 0.20317460317460317,
+      "position": 0,
+      "playing": false,
+      "rate": 1,
+      "keylock": true,
+      "semitones": 2,
+      "effectiveSemitones": 2
+    },
+    "sourceGeometry": [
+      {
+        "index": 0,
+        "sampleRate": 48000,
+        "frames": 1440000,
+        "channels": 2,
+        "duration": 30,
+        "paddedTailSeconds": 0,
+        "trimmedTailSeconds": 0,
+        "decodedBytes": 11520000
+      },
+      {
+        "index": 1,
+        "sampleRate": 48000,
+        "frames": 1440000,
+        "channels": 2,
+        "duration": 30,
+        "paddedTailSeconds": 0,
+        "trimmedTailSeconds": 0,
+        "decodedBytes": 11520000
+      },
+      {
+        "index": 2,
+        "sampleRate": 48000,
+        "frames": 1440000,
+        "channels": 2,
+        "duration": 30,
+        "paddedTailSeconds": 0,
+        "trimmedTailSeconds": 0,
+        "decodedBytes": 11520000
+      },
+      {
+        "index": 3,
+        "sampleRate": 48000,
+        "frames": 1440000,
+        "channels": 2,
+        "duration": 30,
+        "paddedTailSeconds": 0,
+        "trimmedTailSeconds": 0,
+        "decodedBytes": 11520000
+      },
+      {
+        "index": 4,
+        "sampleRate": 48000,
+        "frames": 1440000,
+        "channels": 2,
+        "duration": 30,
+        "paddedTailSeconds": 0,
+        "trimmedTailSeconds": 0,
+        "decodedBytes": 11520000
+      }
+    ],
+    "groups": [
+      {
+        "id": 1,
+        "pitchSemitones": 2,
+        "pitchFactor": 1.122462048309373,
+        "origin": 0,
+        "start": 0,
+        "end": 8.000023727984559,
+        "nodeCount": 1,
+        "processorChannels": 10,
+        "sourceOutputs": 5,
+        "retainedPCMBytes": 12572400,
+        "retainedChunks": 17,
+        "latency": 0.12,
+        "role": "selected"
+      }
+    ],
+    "retainedPCMBytes": 12572400,
+    "inFlightPCMBytes": 0,
+    "decodedBytes": 57600000,
+    "policy": {
+      "direction": "forward",
+      "normalMinimumLead": "queried group latency plus2 render quanta",
+      "followMinimumLeadSeconds": 0.04,
+      "followOwner": "currently active forward owner only",
+      "followCoverage": "required history must already be prepared; reject without replacement",
+      "rate": [
+        0.25,
+        4
+      ],
+      "effectiveSemitones": [
+        -24,
+        24
+      ],
+      "chunkSeconds": 0.5,
+      "requiredPrerollSeconds": 1,
+      "retentionPrerollSeconds": 2,
+      "retentionHysteresisSeconds": 1,
+      "lookaheadSeconds": 8,
+      "driverMs": 50,
+      "crossfadeSeconds": 0.01,
+      "srcTaps": 32,
+      "srcPhases": 1024,
+      "decodedSources": "Whole decoded AudioBuffers remain caller-owned; only processor PCM copies are windowed.",
+      "unsupported": [
+        "reverse",
+        "loop",
+        "Stem Slip",
+        "incremental compressed-file decoding"
+      ],
+      "quality": "Independent32-tap windowed-sinc normalization and10ms group crossfade; vendor sonic equivalence and artifact-free transitions are unverified."
+    },
+    "lastError": null
+  },
+  "scheduledEvents": [
+    {
+      "when": 0.8433786848072562,
+      "rate": 1
+    },
+    {
+      "when": 4.9733786848072565,
+      "rate": 0.8
+    },
+    {
+      "when": 8.973378684807257,
+      "rate": 1.3333333333333333
+    }
+  ],
+  "recordStart": 0.6791836734693878,
+  "livePitchRequest": 10.785668934240363,
+  "recording": {
+    "bytes": 354281,
+    "format": "audio/webm;codecs=opus",
+    "sha256": "3485f7466a0e37d51c405cb3878f8cc0909ea01e4052693058d24294f7117f09"
+  },
+  "sourceAfter": {
+    "app.js": "266c98f7be3fc6c543b0ae86f2f070b2015afa73a108206bb498db8dd003f588",
+    "engine.js": "638c1d7e6e1ac5b7043a30fc8a4891c485ca83f0ea148789084d30f731061101",
+    "panels.js": "4a4b4c544f07140758cfd8f45b00f774dea588f881d6ed0f24c0e19bc1ff02fb",
+    "beatgrid.js": "af239aef231c9d089bf2352b8f548a5f71f734d6cf753986f17f57b3999477b9",
+    "smart-sync.js": "a8998b8727ae144413272163a2c438f3d8bcd92f634d5bd1872e5ac49a509f61",
+    "stem-resampled-harness.js": "15245f4ffcfd16015430ef9c8a7ed1b5ec0d8653cbff03fbe4724ac1c636f8be",
+    "keylock-shadow-live.js": "deab9dd00bb6caa32c225af3e04ca5ed004f788a984eab2fbf832d1058ee72a7",
+    "pcm-resample.js": "8789e7cfc543c393830ad04e2d56e3359786eb6a4473ff08edda1c899fc19ae2",
+    "effects.js": "0185d8adfa94f9a549afbfb9af8b8657388bff8d946cdf3b525da933c60fe0a6",
+    "vendor/signalsmith-stretch/SignalsmithStretch-open-play-history.mjs": "1f470f846a993cc750ee2e111817adb08879493025c7322eadc8cf98323e4ef8"
+  },
+  "sourceStable": true,
+  "finishedAt": "2026-10-18T01:14:12.139Z",
+  "interpretation": "Harness-owner assertion error: warped setPitch intentionally replaces the voice; this first run waited on the retired adapter. Not an application timeout. Whole original recording and exact source snapshots retained; later corrected run must inspect current voice."
+}
