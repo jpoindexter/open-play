@@ -2,6 +2,8 @@
 
 **55 of55 extended effects now expose their four observed labels:220 controls.** All exposed controls change independently rendered audio. This closes the extended label-to-executable-control gap; it does not establish Serato transfer functions, parameter mappings, ranges, factory defaults, complete enum catalogs or sonic parity. The four native Web Audio effects are outside this55-effect matrix.
 
+18October2026 scoped native-WebAudio LPF update (outside this55-effect table): actual reference6/48dB endpoints and24/36examples observed. [Review](../prototype/LPF_SLOPE_REVIEW.md) records eight independent audio slopes; complete steps/defaults/transfer/live-continuity remain unverified.
+
 [Observed reference strips](FX_OBSERVED_PARAMETERS.md) provide label/value evidence. Runtime adapter metadata marks proposed ranges and incomplete mode catalogs. Source: `prototype/observed-fx-control-adapters.js`.
 
 | Effect | Observed labels | Current executable controls | Schema status |

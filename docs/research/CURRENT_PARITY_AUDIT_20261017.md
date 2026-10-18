@@ -1,3 +1,5 @@
+> Plan128: [LPF slope review](../prototype/LPF_SLOPE_REVIEW.md): eight distinct production offline-audio slopes and four update contracts executed; normal6dB save/reopen executed. Paused reference6/48endpoints observed. Exact response/live engine/native/physical parity open;21unchanged.
+
 > Plan127: [browser waveform seek/accessible feedback](../prototype/WAVEFORM_SEEK_REVIEW.md) executed in one22-observation workflow. Home/End and shared needle guard added; clocks/ranges/playheads align. Browser-only: native21/physical/fullreference acceptance unchanged.
 
 > Plan126: [actual native21 output setup/status](../prototype/OUTPUT_SELECTION_STATUS_REVIEW.md) executed with both decks stopped and no Play workaround. Stale mute snapshot corrected; automatic resume hypothesis rejected and removed. Physical sound/controller/full parity remain open. All flags unchanged.

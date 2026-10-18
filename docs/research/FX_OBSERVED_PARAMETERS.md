@@ -2,7 +2,7 @@
 
 Reference: Serato DJ Pro 4.0.10.213 arm64, 16 October 2026. Both decks remained paused. Slot 1 was returned to LPF after collection. Screenshots remain private local evidence; the JSON contains hashes and transcribed facts.
 
-All 236 labels were extracted from the visible strips. Session values are OCR transcriptions, not verified defaults. Eighteen single-digit OCR omissions were manually verified as Beat Modify = 1; ranges and additional enum choices remain unmeasured. This closes the missing-label inventory, not control semantics or DSP parity.
+All 236 labels were extracted from the visible strips. Session values are OCR transcriptions, not verified defaults. Eighteen single-digit OCR omissions were manually verified as Beat Modify = 1; ranges and additional enum choices were unmeasured in this16Octobercollection. A later [18October LPF observation](LPF_REFERENCE_CONTROLS_20261018.json) establishes6/48dB endpoints and24/36examples only. This closes the missing-label inventory, not control semantics or DSP parity.
 
 | Effect | Parameter 1 | Parameter 2 | Parameter 3 | Parameter 4 |
 |---|---|---|---|---|

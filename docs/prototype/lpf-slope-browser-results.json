@@ -1,0 +1,155 @@
+{
+  "executedAt": "2026-10-18T06:36:41.836Z",
+  "scope": "Actual OfflineAudioContext createEffect LPF spectral measurement and update contract; no app UI, native, acoustic or vendor transfer acceptance",
+  "sampleRate": 48000,
+  "cutoff": 500,
+  "frequencies": [
+    2000,
+    4000
+  ],
+  "analysisWindowSeconds": [
+    0.5,
+    1
+  ],
+  "slopeToleranceDB": 3,
+  "minAdjacentDifferenceDB": 4,
+  "results": [
+    {
+      "slope": 6,
+      "low": 0.02413108367011002,
+      "high": 0.01212729468788496,
+      "attenuationDB": 5.976257892539917,
+      "finite": true,
+      "passed": true
+    },
+    {
+      "slope": 12,
+      "low": 0.0064418387108186375,
+      "high": 0.0015075893349593213,
+      "attenuationDB": 12.614535807469148,
+      "finite": true,
+      "passed": true
+    },
+    {
+      "slope": 18,
+      "low": 0.0015544854798001785,
+      "high": 0.00018282980528006542,
+      "attenuationDB": 18.590793459992806,
+      "finite": true,
+      "passed": true
+    },
+    {
+      "slope": 24,
+      "low": 0.0004108268532117571,
+      "high": 2.2676336504977252e-05,
+      "attenuationDB": 25.161718598576236,
+      "finite": true,
+      "passed": true
+    },
+    {
+      "slope": 30,
+      "low": 9.913697078805814e-05,
+      "high": 2.7500257280901515e-06,
+      "attenuationDB": 31.137977752377818,
+      "finite": true,
+      "passed": true
+    },
+    {
+      "slope": 36,
+      "low": 2.618252640934448e-05,
+      "high": 3.4102966867636655e-07,
+      "attenuationDB": 37.7043877431821,
+      "finite": true,
+      "passed": true
+    },
+    {
+      "slope": 42,
+      "low": 6.3181272422823305e-06,
+      "high": 4.135759942935804e-08,
+      "attenuationDB": 43.680660909920874,
+      "finite": true,
+      "passed": true
+    },
+    {
+      "slope": 48,
+      "low": 1.6683349600808639e-06,
+      "high": 5.1285277383224985e-09,
+      "attenuationDB": 50.24581083533097,
+      "finite": true,
+      "passed": true
+    }
+  ],
+  "lifecycle": [
+    {
+      "name": "Same six-dB cutoff retains slot",
+      "passed": true
+    },
+    {
+      "name": "Six-dB cutoff change requests owning-slot rebuild",
+      "passed": true
+    },
+    {
+      "name": "Six to twelve requests topology rebuild",
+      "passed": true
+    },
+    {
+      "name": "Existing 24-dB live frequency update retained",
+      "passed": true
+    }
+  ],
+  "distinct": true,
+  "passed": true,
+  "servedSourceAfterWorkflow": [
+    {
+      "path": "prototype/effects.js",
+      "status": 200,
+      "cacheControl": "no-store",
+      "sha256": "6d4b0d2ac5328813ec3bf281aec0376fdd25aab4cdcab3ca90ab23c2ea1989b1",
+      "bytes": 10037,
+      "matchesDisk": true
+    },
+    {
+      "path": "prototype/panels.js",
+      "status": 200,
+      "cacheControl": "no-store",
+      "sha256": "24e62d8ef7b3fed4ea3e8ac5a1ba68b8304bfdf11811dff565115854aa48f33a",
+      "bytes": 131531,
+      "matchesDisk": true
+    },
+    {
+      "path": "prototype/lpf-slope-test.js",
+      "status": 200,
+      "cacheControl": "no-store",
+      "sha256": "c15e96d62744f1f21b13d3b301dfddc3b7f4e4cd96bbbf5a9f521ef9502cb2f9",
+      "bytes": 2918,
+      "matchesDisk": true
+    },
+    {
+      "path": "prototype/lpf-slope-test.html",
+      "status": 200,
+      "cacheControl": "no-store",
+      "sha256": "1cd55cbd4415e51c82932f6eb4b1c22f0e738c5904fca816c8d4dc495d32c93d",
+      "bytes": 352,
+      "matchesDisk": true
+    }
+  ],
+  "normalUI": {
+    "path": "FX \u2192 first LPF advanced parameters \u2192 Slope6dB \u2192 Save values \u2192 reopen",
+    "savedReopenedValue": "6 dB",
+    "limitationVisible": true,
+    "playingDecks": 0,
+    "restoredSlope": "24 dB",
+    "scope": "Executed parameter-dialog save/readback; no playing-audio or engine-topology observation in this UI path",
+    "privateScreenshot": "local-evidence/fx-reference-128/normal-ui-six-db.png"
+  },
+  "nativeUnchanged": {
+    "version": "0.1.21",
+    "observedPlayingDecks": 0,
+    "clockStrings": [
+      "00:00.0",
+      "00:00.0"
+    ],
+    "masterDB": -12,
+    "containsThisPatch": false
+  }
+}
