@@ -17,3 +17,5 @@ Previous 0.1.14 remains available with **Start Open Play Playback Test 0.1.14.co
 [Native observations](desktop-0.1.15-playback-observation.json) · [Package receipt](desktop-0.1.15-playback-package.json) · [Full plan](../../FULL_BUILD_PLAN.md) · [Claude handoff](../../handoffs/current.md).
 
 Browser-source plan106 adds variable-pitch warped resampling and an explicit-anchor refill correction. Those changes are outside this frozen0.1.15package; current native/controller testing retains the scope above.
+
+Browser-source plans109–111 add repeat-safe keyboard playback, held pitch bends, basic Censor and non-loop warped Censor in both keylock modes with prepared-source routing. These changes are not in0.1.15. The next fresh package must declare censor.js, censor-backing.js, reverse-censor-plan.js and pitch-time-map.js; keep this version available for the current controller test.

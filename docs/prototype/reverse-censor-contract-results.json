@@ -1,0 +1,18 @@
+{
+  "executed": true,
+  "command": "node scripts/test_reverse_censor_plan.mjs",
+  "passed": true,
+  "scope": "Reverse tempo integral and controlled backing-voice ownership; no actual audio or hardware from this contract.",
+  "source_sha256": {
+    "prototype/reverse-censor-plan.js": "666203648e4bc8bf319cca5eed26f1f475ddbc6b9b86b04a1dd5b2baf499be56",
+    "prototype/censor-backing.js": "2115d943efc39897aaf21b6282d1d131c2499b81a51400175a11b329b828ccf6",
+    "scripts/test_reverse_censor_plan.mjs": "59009d17c57ac38b12aab53bd5ea8fab76cba09904acbb17507faa919fea3143"
+  },
+  "checks": [
+    "Reverse markers enter their original left-side tempo",
+    "Integrated output timestamps and boundary rate selection",
+    "Release before scheduled output cancels mute/new voice",
+    "Release after start restores exact original voice/grid",
+    "Failed route and canceled preparation preserve forward owner"
+  ]
+}

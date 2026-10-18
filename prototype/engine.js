@@ -15,6 +15,8 @@ import { effectiveFXBPM, normalizeFXTempoSettings } from "./fx-tempo.js";
 import {createAudioMonitor,monitorSettings as normalizeMonitorSettings} from './audio-monitor.js';
 import {createWarpLoopTransport} from './warp-loop.js';
 import {createSyncTempoHandoff} from './sync-tempo-handoff.js';
+import {createReverseCensorPlan} from './reverse-censor-plan.js';
+import {CensorBacking} from './censor-backing.js';
 export class AudioEngine {
   constructor() {
     this.ctx = null;
@@ -174,6 +176,7 @@ export class AudioEngine {
   position(d) {
     const gridVoice=this.voices.get(d.index);
     if(gridVoice?.handoffBefore&&this.ctx.currentTime<gridVoice.handoffBefore.until)return gridVoice.handoffBefore.clock(this.ctx.currentTime);
+    if(gridVoice?.censorReverse)return d.track.duration-gridVoice.censorReverse.position();
     if (gridVoice?.gridTimeline) return this.voiceClock(d,gridVoice)(this.ctx.currentTime);
     const live = this.voices.get(d.index)?.liveKeylock;
     if (live) {
@@ -225,6 +228,9 @@ export class AudioEngine {
     }
   }
   disposeVoice(i, source) {
+    source.censorBacking?.dispose();source.censorBacking=null;
+    source.censorOwnerController?.abort();
+    source.censorReverse?.dispose().catch(error=>this.onError?.(error));
     source.warpLoopTransport?.dispose();
     source.stemSlipTransport?.dispose();
     if (source.deckScratchTransport) {
@@ -271,6 +277,7 @@ export class AudioEngine {
   voiceClock(d, voice) {
     if(voice?.handoffBefore&&!voice.gridTimeline&&!voice.liveKeylock){const bridge=voice.handoffBefore,after=this.voiceClock(d,{...voice,handoffBefore:null});return at=>at<bridge.until?bridge.clock(at):after(at);}
 
+    if(voice?.censorReverse){const duration=d.track.duration;return at=>voice.handoffBefore&&at<voice.handoffBefore.until?voice.handoffBefore.clock(at):duration-voice.censorReverse.position(at);}
     if (voice?.gridTimeline) return at => voice.handoffBefore && at < voice.handoffBefore.until ? voice.handoffBefore.clock(at) : voice.gridTimeline.clock(at);
     if (voice?.liveKeylock) return at => voice.handoffBefore && at < voice.handoffBefore.until ? voice.handoffBefore.clock(at) : voice.liveKeylock.position(at);
     if (voice?.deckScratchTransport) return at => {
@@ -288,6 +295,7 @@ export class AudioEngine {
   }
   voiceRateAt(d, voice, at) {
     if (voice?.handoffBefore && at < voice.handoffBefore.until) return voice.handoffBefore.rate(at);
+    if(voice?.censorReverse)return voice.censorReverse.stateAt(at).rate;
     if (voice?.gridTimeline) return voice.gridTimeline.rateAt(at);
     if (voice?.liveKeylock) return voice.liveKeylock.stateAt(at).rate;
     if (voice?.deckScratchTransport) return voice.deckScratchTransport.state().rate;
@@ -343,6 +351,8 @@ export class AudioEngine {
         pitchRateMap:prospectiveGrid?[{position:0,rate:prospectiveGrid.bpm/prospectiveGrid.grid[0].bpm},...prospectiveGrid.grid.slice(1).map(node=>({position:node.time,rate:prospectiveGrid.bpm/node.bpm}))]:null,
         keylock: !!d.keylock, semitones: d.keyShift || 0, signal: controller.signal,
         onEvent: event => {
+          const backing=this.voices.get(d.index)?.censorBacking;
+          if(backing?.liveVoice.liveKeylock===adapter){if(event.type==='error')backing.fail(Object.assign(Error(event.error.message),{name:event.error.name}));return;}
           const shadow=this.deckScratchShadows.get(d.index);
           if(shadow?.adapter===adapter){
             if(event.type==='error')shadow.fail(Object.assign(Error(event.error.message),{name:event.error.name}));
@@ -728,7 +738,7 @@ export class AudioEngine {
       d.slipOrigin.rate = rate;
     }
     const was = d.playing || d.processing;
-    const restart = d.keylock || d.keyShift || d.processing || this.voices.get(d.index)?.deckScratchTransport;
+    const restart = d.keylock || d.keyShift || d.processing || this.voices.get(d.index)?.deckScratchTransport || this.voices.get(d.index)?.censorReverse;
     if (restart) this.pause(d, { preserveStemExit: true });
     d.rate = rate;
     d.position = p;
@@ -1329,16 +1339,38 @@ export class AudioEngine {
       return transport;
     } catch(error){transport?.dispose();throw error;}
   }
+  async beginWarpedCensor(d,owner){
+    const live=this.voices.get(d.index),request={owner,censor:true,track:d.track,controller:new AbortController(),ready:false,closing:false,reverse:null,backing:null};
+    if(d.loop)throw new Error('Censor with a warped loop is not implemented yet.');
+    const plan=createReverseCensorPlan(d.track,live.gridTimeline.bpm),clock=this.voiceClock(d,live);this.deckScratchRequests.set(d.index,request);d.scratchPreparing=true;
+    const current=()=>this.deckScratchRequests.get(d.index)===request&&d.track===request.track&&d.playing&&!request.controller.signal.aborted;
+    let adapter,backing,committed=false;
+    try{
+      const original=await this.buffer(d.track),stems=this.stemBuffers.get(d.track.id),buffers=(stems?[original,...stems]:[original]).map(buffer=>this.reverseBuffer(d.track.id,buffer));
+      if(!current())return false;
+      adapter=await this.createForwardKeylock({buffers,position:Math.max(0,plan.duration-clock(this.ctx.currentTime)),rate:plan.rateAt(Math.max(0,plan.duration-clock(this.ctx.currentTime))),keylock:!!d.keylock,semitones:d.keyShift||0,resamplePitch:true,pitchRateMap:plan.points,signal:request.controller.signal,onEvent:event=>{
+        if(event.type==='error'&&this.voices.get(d.index)?.censorReverse===adapter){const error=Object.assign(Error(event.error.message),{name:event.error.name});this.pause(d);this.onError?.(error);}
+      }});request.reverse=adapter;if(!current())return false;
+      backing=await new CensorBacking(this,d,live,request).prepare();request.backing=backing;if(!current())return false;
+      const lead=Math.max(...adapter.snapshot().groups.map(g=>g.latency),0)+.05,when=this.ctx.currentTime+lead,position=clock(when),reversePosition=plan.duration-position;
+      if(reversePosition<=0)return false;
+      const events=plan.events(reversePosition,when),ack=await adapter.startTimeline({position:reversePosition,when,events});if(!current())return false;
+      const voice={sources:[],stemGains:[],censorReverse:adapter,censorOwnerController:request.controller,censorBacking:backing,handoffBefore:{until:ack.when,owner:live,clock,rate:at=>this.voiceRateAt(d,live,at)}};
+      backing.claim(voice,ack.when);this.routeOrdinaryVoice(d,voice,adapter.outputs,!!stems,{when:ack.when,reuseVoice:live});committed=true;request.ready=true;d.scratchPreparing=false;d.position=position;d.anchorPosition=position;d.anchorTime=ack.when;
+      return{owner,when:ack.when,position,reversePosition,events};
+    }catch(error){if(current()){this.deckScratchRequests.delete(d.index);d.scratchPreparing=false;}if(error.name!=='AbortError')throw error;return false;}
+    finally{if(!committed){backing?.dispose();await adapter?.dispose();if(this.deckScratchRequests.get(d.index)===request){this.deckScratchRequests.delete(d.index);d.scratchPreparing=false;}}}
+  }
   async beginDeckScratch(d, owner, {censor=false}={}) {
     if (!d.track || d.track.missing || d.track.provider) return false;
     if (typeof owner !== 'string' || !owner.length) throw new TypeError('Scratch owner required.');
     if(censor){
       if(d.mode==='ABS')throw new Error('Censor is unavailable in Absolute mode.');
       if(!d.playing)return false;
-      if(this.voices.get(d.index)?.gridTimeline)throw new Error('Censor with warped Sync is not implemented yet.');
       if(this.deckScratchRequests.has(d.index))throw new Error('Release the current scratch gesture before Censor.');
     }else this.onManualPosition?.(d);
     if (d.stemSlip && d.stemSlip !== 'off') throw new Error('Turn selected-stem Slip off before whole-deck scratching.');
+    if(censor&&this.voices.get(d.index)?.gridTimeline)return this.beginWarpedCensor(d,owner);
     let retained=this.deckScratchShadows.get(d.index);
     if(retained&&!retained.sourcesMatch()){retained.dispose();retained=null;}
     this.cancelDeckScratchRequest(d,{preserveShadow:!!retained});
@@ -1424,6 +1456,7 @@ export class AudioEngine {
     const shadow=this.deckScratchShadows.get(d.index);
     if (!request.ready&&!shadow) {this.cancelDeckScratchRequest(d); return false;}
     request.closing = true;
+    if(request.backing){const result=request.backing.adopt();if(result&&!result.playing){this.pause(d);d.position=result.position;this.onEnd(d);}return result;}
     const transport = request.transport;
     const shadowRevision=shadow?.beginRelease(owner);
     const result = await transport.command('end', {generation: transport.state().generation, owner});

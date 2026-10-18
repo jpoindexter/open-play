@@ -1,0 +1,784 @@
+{
+  "startedAt": "2026-10-18T02:29:12.424Z",
+  "completed": true,
+  "criteria": {
+    "frequencyErrorHz": 1,
+    "minimumRMS": 0.005,
+    "forwardClockStateSeconds": 0.01,
+    "muteAmplitudeRatio": [
+      0.6,
+      0.73
+    ]
+  },
+  "scope": "Actual app Smart Sync/Censor across reversed90\u2192150\u2192120 source tempo sections, keylock on then off, +2semitones, original plus four prepared synthetic sources. No new model inference/native/physical/loop/quality/reference acceptance.",
+  "modes": [
+    {
+      "keylock": true,
+      "sections": [
+        {
+          "name": "before",
+          "from": 0.8407936507936508,
+          "to": 1.2407936507936508,
+          "expectedLeft": 370.4124759420931
+        },
+        {
+          "name": "reverse-0",
+          "from": 1.986031746031746,
+          "to": 2.386031746031746,
+          "expectedLeft": 370.4124759420931
+        },
+        {
+          "name": "reverse-1",
+          "from": 4.562063492063492,
+          "to": 4.962063492063492,
+          "expectedLeft": 370.4124759420931
+        },
+        {
+          "name": "reverse-2",
+          "from": 5.812063492063492,
+          "to": 6.212063492063492,
+          "expectedLeft": 370.4124759420931
+        },
+        {
+          "name": "reverse-vocal-muted",
+          "from": 6.301972789115647,
+          "to": 6.451972789115647,
+          "expectedLeft": 370.4124759420931
+        },
+        {
+          "name": "return-vocal-muted",
+          "from": 6.637074829931973,
+          "to": 7.0370748299319725,
+          "expectedLeft": 370.4124759420931
+        },
+        {
+          "name": "return-all",
+          "from": 7.240793650793651,
+          "to": 7.6407936507936505,
+          "expectedLeft": 370.4124759420931
+        }
+      ],
+      "sourceSemitones": 2,
+      "initialSyncState": {
+        "sync": true,
+        "state": "beat",
+        "role": "secondary"
+      },
+      "forwardSourceOutputs": 5,
+      "forwardStart": 1.2654875283446712,
+      "reverseSnapshot": {
+        "resamplePitch": true,
+        "maxPCMBytes": 536870912,
+        "followMinimumLeadSeconds": 0.04,
+        "byteAccounting": "Acknowledged retained PCM and in-flight chunk copies only; excludes decoded inputs, SRC tables and opaque WASM heaps.",
+        "disposed": false,
+        "state": {
+          "when": 2.4107256235827665,
+          "position": 12.601783824640968,
+          "playing": true,
+          "rate": 1.3333333333333333,
+          "keylock": true,
+          "semitones": 2,
+          "effectiveSemitones": 2
+        },
+        "sourceGeometry": [
+          {
+            "index": 0,
+            "sampleRate": 48000,
+            "frames": 864000,
+            "channels": 2,
+            "duration": 18,
+            "paddedTailSeconds": 0,
+            "trimmedTailSeconds": 0,
+            "decodedBytes": 6912000
+          },
+          {
+            "index": 1,
+            "sampleRate": 48000,
+            "frames": 864000,
+            "channels": 2,
+            "duration": 18,
+            "paddedTailSeconds": 0,
+            "trimmedTailSeconds": 0,
+            "decodedBytes": 6912000
+          },
+          {
+            "index": 2,
+            "sampleRate": 48000,
+            "frames": 864000,
+            "channels": 2,
+            "duration": 18,
+            "paddedTailSeconds": 0,
+            "trimmedTailSeconds": 0,
+            "decodedBytes": 6912000
+          },
+          {
+            "index": 3,
+            "sampleRate": 48000,
+            "frames": 864000,
+            "channels": 2,
+            "duration": 18,
+            "paddedTailSeconds": 0,
+            "trimmedTailSeconds": 0,
+            "decodedBytes": 6912000
+          },
+          {
+            "index": 4,
+            "sampleRate": 48000,
+            "frames": 864000,
+            "channels": 2,
+            "duration": 18,
+            "paddedTailSeconds": 0,
+            "trimmedTailSeconds": 0,
+            "decodedBytes": 6912000
+          }
+        ],
+        "groups": [
+          {
+            "id": 1,
+            "pitchMap": null,
+            "pitchSemitones": 2,
+            "pitchFactor": 1.122462048309373,
+            "origin": 11,
+            "start": 11,
+            "end": 18,
+            "nodeCount": 1,
+            "processorChannels": 10,
+            "sourceOutputs": 5,
+            "retainedPCMBytes": 11000840,
+            "retainedChunks": 15,
+            "latency": 0.12,
+            "role": "selected"
+          }
+        ],
+        "retainedPCMBytes": 11000840,
+        "inFlightPCMBytes": 0,
+        "decodedBytes": 34560000,
+        "policy": {
+          "direction": "forward",
+          "normalMinimumLead": "queried group latency plus2 render quanta",
+          "followMinimumLeadSeconds": 0.04,
+          "followOwner": "currently active forward owner only",
+          "followCoverage": "required history must already be prepared; reject without replacement",
+          "rate": [
+            0.25,
+            4
+          ],
+          "effectiveSemitones": [
+            -24,
+            24
+          ],
+          "chunkSeconds": 0.5,
+          "requiredPrerollSeconds": 1,
+          "retentionPrerollSeconds": 2,
+          "retentionHysteresisSeconds": 1,
+          "lookaheadSeconds": 8,
+          "driverMs": 50,
+          "crossfadeSeconds": 0.01,
+          "srcTaps": 32,
+          "srcPhases": 1024,
+          "decodedSources": "Whole decoded AudioBuffers remain caller-owned; only processor PCM copies are windowed.",
+          "unsupported": [
+            "reverse",
+            "loop",
+            "Stem Slip",
+            "incremental compressed-file decoding"
+          ],
+          "quality": "Independent32-tap windowed-sinc normalization and10ms group crossfade; vendor sonic equivalence and artifact-free transitions are unverified."
+        },
+        "lastError": null
+      },
+      "scheduled": [
+        {
+          "when": 2.4107256235827665,
+          "position": 12.565291005291005,
+          "rate": 1.3333333333333333
+        },
+        {
+          "when": 4.986757369614512,
+          "position": 16,
+          "rate": 0.8
+        },
+        {
+          "when": 6.236757369614512,
+          "position": 17,
+          "rate": 1
+        }
+      ],
+      "return": {
+        "actual": 11.636099773242629,
+        "expected": 11.636099773242629,
+        "originalVoiceRestored": true,
+        "originalGridRetained": true
+      },
+      "audio": [
+        {
+          "name": "before",
+          "from": 0.8407936507936508,
+          "to": 1.2407936507936508,
+          "expectedLeft": 370.4124759420931,
+          "channels": [
+            {
+              "from": 0.8407936507936508,
+              "to": 1.2407936507936508,
+              "rms": 0.03736342257731832,
+              "hz": 370.41378601071244
+            },
+            {
+              "from": 0.8407936507936508,
+              "to": 1.2407936507936508,
+              "rms": 0.03729666433941251,
+              "hz": 549.9994402595145
+            }
+          ]
+        },
+        {
+          "name": "reverse-0",
+          "from": 1.986031746031746,
+          "to": 2.386031746031746,
+          "expectedLeft": 370.4124759420931,
+          "channels": [
+            {
+              "from": 1.986031746031746,
+              "to": 2.386031746031746,
+              "rms": 0.037304304376102715,
+              "hz": 370.4136054785475
+            },
+            {
+              "from": 1.986031746031746,
+              "to": 2.386031746031746,
+              "rms": 0.0372776515355071,
+              "hz": 549.9987423845505
+            }
+          ]
+        },
+        {
+          "name": "reverse-1",
+          "from": 4.562063492063492,
+          "to": 4.962063492063492,
+          "expectedLeft": 370.4124759420931,
+          "channels": [
+            {
+              "from": 4.562063492063492,
+              "to": 4.962063492063492,
+              "rms": 0.037313907202117295,
+              "hz": 370.4138280652855
+            },
+            {
+              "from": 4.562063492063492,
+              "to": 4.962063492063492,
+              "rms": 0.037279607510775914,
+              "hz": 550.0046379113901
+            }
+          ]
+        },
+        {
+          "name": "reverse-2",
+          "from": 5.812063492063492,
+          "to": 6.212063492063492,
+          "expectedLeft": 370.4124759420931,
+          "channels": [
+            {
+              "from": 5.812063492063492,
+              "to": 6.212063492063492,
+              "rms": 0.037288951240082954,
+              "hz": 370.40981097133704
+            },
+            {
+              "from": 5.812063492063492,
+              "to": 6.212063492063492,
+              "rms": 0.03724844400639227,
+              "hz": 550.0056290973035
+            }
+          ]
+        },
+        {
+          "name": "reverse-vocal-muted",
+          "from": 6.301972789115647,
+          "to": 6.451972789115647,
+          "expectedLeft": 370.4124759420931,
+          "channels": [
+            {
+              "from": 6.301972789115647,
+              "to": 6.451972789115647,
+              "rms": 0.024899561294933086,
+              "hz": 370.41663605765854
+            },
+            {
+              "from": 6.301972789115647,
+              "to": 6.451972789115647,
+              "rms": 0.037290300270595315,
+              "hz": 550.0068601662657
+            }
+          ]
+        },
+        {
+          "name": "return-vocal-muted",
+          "from": 6.637074829931973,
+          "to": 7.0370748299319725,
+          "expectedLeft": 370.4124759420931,
+          "channels": [
+            {
+              "from": 6.637074829931973,
+              "to": 7.0370748299319725,
+              "rms": 0.024912470098800814,
+              "hz": 370.411410782782
+            },
+            {
+              "from": 6.637074829931973,
+              "to": 7.0370748299319725,
+              "rms": 0.03728769596724795,
+              "hz": 550.0001669675393
+            }
+          ]
+        },
+        {
+          "name": "return-all",
+          "from": 7.240793650793651,
+          "to": 7.6407936507936505,
+          "expectedLeft": 370.4124759420931,
+          "channels": [
+            {
+              "from": 7.240793650793651,
+              "to": 7.6407936507936505,
+              "rms": 0.03728934752413355,
+              "hz": 370.4125619904458
+            },
+            {
+              "from": 7.240793650793651,
+              "to": 7.6407936507936505,
+              "rms": 0.037277489808360785,
+              "hz": 550.0002203473414
+            }
+          ]
+        }
+      ],
+      "muteRatios": [
+        {
+          "name": "reverse-vocal-muted",
+          "ratio": 0.667739259283584
+        },
+        {
+          "name": "return-vocal-muted",
+          "ratio": 0.6680854386813162
+        }
+      ]
+    },
+    {
+      "keylock": false,
+      "sections": [
+        {
+          "name": "before",
+          "from": 8.40469387755102,
+          "to": 8.80469387755102,
+          "expectedLeft": 493.8833012561242
+        },
+        {
+          "name": "reverse-0",
+          "from": 9.457052154195011,
+          "to": 9.857052154195012,
+          "expectedLeft": 493.8833012561241
+        },
+        {
+          "name": "reverse-1",
+          "from": 11.800884353741496,
+          "to": 12.200884353741497,
+          "expectedLeft": 296.32998075367453
+        },
+        {
+          "name": "reverse-2",
+          "from": 13.050884353741496,
+          "to": 13.450884353741497,
+          "expectedLeft": 370.4124759420931
+        },
+        {
+          "name": "reverse-vocal-muted",
+          "from": 13.546598639455784,
+          "to": 13.696598639455782,
+          "expectedLeft": 370.4124759420931
+        },
+        {
+          "name": "return-vocal-muted",
+          "from": 13.890408163265306,
+          "to": 14.290408163265306,
+          "expectedLeft": 493.8833012561242
+        },
+        {
+          "name": "return-all",
+          "from": 14.499931972789117,
+          "to": 14.899931972789117,
+          "expectedLeft": 493.8833012561242
+        }
+      ],
+      "sourceSemitones": 2,
+      "initialSyncState": {
+        "sync": true,
+        "state": "beat",
+        "role": "secondary"
+      },
+      "forwardSourceOutputs": 5,
+      "forwardStart": 8.82938775510204,
+      "reverseSnapshot": {
+        "resamplePitch": true,
+        "maxPCMBytes": 536870912,
+        "followMinimumLeadSeconds": 0.04,
+        "byteAccounting": "Acknowledged retained PCM and in-flight chunk copies only; excludes decoded inputs, SRC tables and opaque WASM heaps.",
+        "disposed": false,
+        "state": {
+          "when": 9.881746031746031,
+          "position": 12.903643235071806,
+          "playing": true,
+          "rate": 1.3333333333333333,
+          "keylock": false,
+          "semitones": 2,
+          "effectiveSemitones": 6.980449991346125
+        },
+        "sourceGeometry": [
+          {
+            "index": 0,
+            "sampleRate": 48000,
+            "frames": 864000,
+            "channels": 2,
+            "duration": 18,
+            "paddedTailSeconds": 0,
+            "trimmedTailSeconds": 0,
+            "decodedBytes": 6912000
+          },
+          {
+            "index": 1,
+            "sampleRate": 48000,
+            "frames": 864000,
+            "channels": 2,
+            "duration": 18,
+            "paddedTailSeconds": 0,
+            "trimmedTailSeconds": 0,
+            "decodedBytes": 6912000
+          },
+          {
+            "index": 2,
+            "sampleRate": 48000,
+            "frames": 864000,
+            "channels": 2,
+            "duration": 18,
+            "paddedTailSeconds": 0,
+            "trimmedTailSeconds": 0,
+            "decodedBytes": 6912000
+          },
+          {
+            "index": 3,
+            "sampleRate": 48000,
+            "frames": 864000,
+            "channels": 2,
+            "duration": 18,
+            "paddedTailSeconds": 0,
+            "trimmedTailSeconds": 0,
+            "decodedBytes": 6912000
+          },
+          {
+            "index": 4,
+            "sampleRate": 48000,
+            "frames": 864000,
+            "channels": 2,
+            "duration": 18,
+            "paddedTailSeconds": 0,
+            "trimmedTailSeconds": 0,
+            "decodedBytes": 6912000
+          }
+        ],
+        "groups": [
+          {
+            "id": 1,
+            "pitchMap": [
+              {
+                "position": 0,
+                "prepared": 0,
+                "factor": 1.4966160644124973
+              },
+              {
+                "position": 16,
+                "prepared": 10.690784617684072,
+                "factor": 0.8979696386474985
+              },
+              {
+                "position": 17,
+                "prepared": 11.804408015359495,
+                "factor": 1.122462048309373
+              }
+            ],
+            "pitchSemitones": 6.980449991346125,
+            "pitchFactor": 1.4966160644124973,
+            "origin": 11,
+            "start": 11,
+            "end": 18,
+            "nodeCount": 1,
+            "processorChannels": 10,
+            "sourceOutputs": 5,
+            "retainedPCMBytes": 9429280,
+            "retainedChunks": 16,
+            "latency": 0.12,
+            "role": "selected"
+          }
+        ],
+        "retainedPCMBytes": 9429280,
+        "inFlightPCMBytes": 0,
+        "decodedBytes": 34560000,
+        "policy": {
+          "direction": "forward",
+          "normalMinimumLead": "queried group latency plus2 render quanta",
+          "followMinimumLeadSeconds": 0.04,
+          "followOwner": "currently active forward owner only",
+          "followCoverage": "required history must already be prepared; reject without replacement",
+          "rate": [
+            0.25,
+            4
+          ],
+          "effectiveSemitones": [
+            -24,
+            24
+          ],
+          "chunkSeconds": 0.5,
+          "requiredPrerollSeconds": 1,
+          "retentionPrerollSeconds": 2,
+          "retentionHysteresisSeconds": 1,
+          "lookaheadSeconds": 8,
+          "driverMs": 50,
+          "crossfadeSeconds": 0.01,
+          "srcTaps": 32,
+          "srcPhases": 1024,
+          "decodedSources": "Whole decoded AudioBuffers remain caller-owned; only processor PCM copies are windowed.",
+          "unsupported": [
+            "reverse",
+            "loop",
+            "Stem Slip",
+            "incremental compressed-file decoding"
+          ],
+          "quality": "Independent32-tap windowed-sinc normalization and10ms group crossfade; vendor sonic equivalence and artifact-free transitions are unverified."
+        },
+        "lastError": null
+      },
+      "scheduled": [
+        {
+          "when": 9.881746031746031,
+          "position": 12.874890400604686,
+          "rate": 1.3333333333333333
+        },
+        {
+          "when": 12.225578231292516,
+          "position": 16,
+          "rate": 0.8
+        },
+        {
+          "when": 13.475578231292516,
+          "position": 17,
+          "rate": 1
+        }
+      ],
+      "return": {
+        "actual": 11.036250944822372,
+        "expected": 11.036250944822372,
+        "originalVoiceRestored": true,
+        "originalGridRetained": true
+      },
+      "audio": [
+        {
+          "name": "before",
+          "from": 8.40469387755102,
+          "to": 8.80469387755102,
+          "expectedLeft": 493.8833012561242,
+          "channels": [
+            {
+              "from": 8.40469387755102,
+              "to": 8.80469387755102,
+              "rms": 0.03735049575590848,
+              "hz": 493.88451087149065
+            },
+            {
+              "from": 8.40469387755102,
+              "to": 8.80469387755102,
+              "rms": 0.03741968759275405,
+              "hz": 549.9935485955496
+            }
+          ]
+        },
+        {
+          "name": "reverse-0",
+          "from": 9.457052154195011,
+          "to": 9.857052154195012,
+          "expectedLeft": 493.8833012561241,
+          "channels": [
+            {
+              "from": 9.457052154195011,
+              "to": 9.857052154195012,
+              "rms": 0.03734114555589797,
+              "hz": 493.88710293751313
+            },
+            {
+              "from": 9.457052154195011,
+              "to": 9.857052154195012,
+              "rms": 0.03743815113878729,
+              "hz": 549.996982974815
+            }
+          ]
+        },
+        {
+          "name": "reverse-1",
+          "from": 11.800884353741496,
+          "to": 12.200884353741497,
+          "expectedLeft": 296.32998075367453,
+          "channels": [
+            {
+              "from": 11.800884353741496,
+              "to": 12.200884353741497,
+              "rms": 0.03734480470756328,
+              "hz": 296.3295315076423
+            },
+            {
+              "from": 11.800884353741496,
+              "to": 12.200884353741497,
+              "rms": 0.03730318081680432,
+              "hz": 549.9996063060438
+            }
+          ]
+        },
+        {
+          "name": "reverse-2",
+          "from": 13.050884353741496,
+          "to": 13.450884353741497,
+          "expectedLeft": 370.4124759420931,
+          "channels": [
+            {
+              "from": 13.050884353741496,
+              "to": 13.450884353741497,
+              "rms": 0.03731959037889791,
+              "hz": 370.41353706999405
+            },
+            {
+              "from": 13.050884353741496,
+              "to": 13.450884353741497,
+              "rms": 0.03730752302933776,
+              "hz": 550.0020332428724
+            }
+          ]
+        },
+        {
+          "name": "reverse-vocal-muted",
+          "from": 13.546598639455784,
+          "to": 13.696598639455782,
+          "expectedLeft": 370.4124759420931,
+          "channels": [
+            {
+              "from": 13.546598639455784,
+              "to": 13.696598639455782,
+              "rms": 0.024916999149225648,
+              "hz": 370.4083033063807
+            },
+            {
+              "from": 13.546598639455784,
+              "to": 13.696598639455782,
+              "rms": 0.03734268612535159,
+              "hz": 550.0015301432893
+            }
+          ]
+        },
+        {
+          "name": "return-vocal-muted",
+          "from": 13.890408163265306,
+          "to": 14.290408163265306,
+          "expectedLeft": 493.8833012561242,
+          "channels": [
+            {
+              "from": 13.890408163265306,
+              "to": 14.290408163265306,
+              "rms": 0.024895389258239507,
+              "hz": 493.88264050698126
+            },
+            {
+              "from": 13.890408163265306,
+              "to": 14.290408163265306,
+              "rms": 0.03733602710317286,
+              "hz": 549.997461507671
+            }
+          ]
+        },
+        {
+          "name": "return-all",
+          "from": 14.499931972789117,
+          "to": 14.899931972789117,
+          "expectedLeft": 493.8833012561242,
+          "channels": [
+            {
+              "from": 14.499931972789117,
+              "to": 14.899931972789117,
+              "rms": 0.0372955128240875,
+              "hz": 493.8865887021152
+            },
+            {
+              "from": 14.499931972789117,
+              "to": 14.899931972789117,
+              "rms": 0.03732448312989851,
+              "hz": 550.0022791437827
+            }
+          ]
+        }
+      ],
+      "muteRatios": [
+        {
+          "name": "reverse-vocal-muted",
+          "ratio": 0.6680964347306916
+        },
+        {
+          "name": "return-vocal-muted",
+          "ratio": 0.6675170113805403
+        }
+      ]
+    }
+  ],
+  "checks": [
+    "Locked reversed rate map, actual source outputs and original forward owner restored",
+    "Unlocked reversed rate map, actual source outputs and original forward owner restored",
+    "Fourteen whole-master pitch/other-deck windows and Stem mute/return amplitude ratios"
+  ],
+  "errors": [],
+  "sourceBefore": {
+    "app.js": "08692565bcca2f22611ea709e7de1e27adcc6edeccc473d180570405b2207b7d",
+    "engine.js": "852699a8eaa0704ffd4ade7351e2325dbaafd4f6257a04bdbee65d41d397e25f",
+    "censor.js": "4f0909f5562e1dd28e4b9f406015dd3963e96f706c32e863242494c0c2ccc794",
+    "censor-backing.js": "2115d943efc39897aaf21b6282d1d131c2499b81a51400175a11b329b828ccf6",
+    "reverse-censor-plan.js": "666203648e4bc8bf319cca5eed26f1f475ddbc6b9b86b04a1dd5b2baf499be56",
+    "beatgrid.js": "af239aef231c9d089bf2352b8f548a5f71f734d6cf753986f17f57b3999477b9",
+    "smart-sync.js": "a8998b8727ae144413272163a2c438f3d8bcd92f634d5bd1872e5ac49a509f61",
+    "keylock-shadow-live.js": "eed7a433632ca6a4523d091b7b08e2530d1fc89d3004531387370a5fdf756745",
+    "pitch-time-map.js": "2eb6a2ea7d7c6dde94defb921f90343ea4d4ea98c025722f2e570cc0f8c62252",
+    "pcm-resample.js": "8789e7cfc543c393830ad04e2d56e3359786eb6a4473ff08edda1c899fc19ae2",
+    "warped-censor-harness.js": "571a2993c0a6e4c982839ca4a65ac1cfbb185ded05309a25887d8fb3edde97f4"
+  },
+  "recordStart": 0.5746938775510204,
+  "recording": {
+    "bytes": 241479,
+    "format": "audio/webm;codecs=opus",
+    "sha256": "0591455521280d648a074c6e7b333a17496195605f616862947fc63afe7dff58",
+    "original_local_path": "local-evidence/warped-censor/final/master.webm"
+  },
+  "decoded": {
+    "duration": 14.939977324263038,
+    "frames": 658853,
+    "sampleRate": 44100,
+    "channels": 2
+  },
+  "sourceAfter": {
+    "app.js": "08692565bcca2f22611ea709e7de1e27adcc6edeccc473d180570405b2207b7d",
+    "engine.js": "852699a8eaa0704ffd4ade7351e2325dbaafd4f6257a04bdbee65d41d397e25f",
+    "censor.js": "4f0909f5562e1dd28e4b9f406015dd3963e96f706c32e863242494c0c2ccc794",
+    "censor-backing.js": "2115d943efc39897aaf21b6282d1d131c2499b81a51400175a11b329b828ccf6",
+    "reverse-censor-plan.js": "666203648e4bc8bf319cca5eed26f1f475ddbc6b9b86b04a1dd5b2baf499be56",
+    "beatgrid.js": "af239aef231c9d089bf2352b8f548a5f71f734d6cf753986f17f57b3999477b9",
+    "smart-sync.js": "a8998b8727ae144413272163a2c438f3d8bcd92f634d5bd1872e5ac49a509f61",
+    "keylock-shadow-live.js": "eed7a433632ca6a4523d091b7b08e2530d1fc89d3004531387370a5fdf756745",
+    "pitch-time-map.js": "2eb6a2ea7d7c6dde94defb921f90343ea4d4ea98c025722f2e570cc0f8c62252",
+    "pcm-resample.js": "8789e7cfc543c393830ad04e2d56e3359786eb6a4473ff08edda1c899fc19ae2",
+    "warped-censor-harness.js": "571a2993c0a6e4c982839ca4a65ac1cfbb185ded05309a25887d8fb3edde97f4"
+  },
+  "sourceStable": true,
+  "finishedAt": "2026-10-18T02:29:28.015Z",
+  "all_declared_served_hashes_match_disk": true
+}

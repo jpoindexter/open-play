@@ -1,0 +1,303 @@
+{
+  "scope": "Retained harness setup/premise failures. No audio gate relaxed. Mute setup now awaits its scheduled AudioParam value; Sync setup awaits armed before Play and records initial Beat Sync. Rapid Sync/Play behavior is not fixed or accepted by this workflow.",
+  "attempts": [
+    {
+      "retained_directory": "local-evidence/warped-censor/setup-failure",
+      "result": {
+        "startedAt": "2026-10-18T02:26:51.939Z",
+        "completed": false,
+        "criteria": {
+          "frequencyErrorHz": 1,
+          "minimumRMS": 0.005,
+          "forwardClockStateSeconds": 0.01,
+          "muteAmplitudeRatio": [
+            0.6,
+            0.73
+          ]
+        },
+        "scope": "Actual app Smart Sync/Censor across reversed90\u2192150\u2192120 source tempo sections, keylock on then off, +2semitones, original plus four prepared synthetic sources. No new model inference/native/physical/loop/quality/reference acceptance.",
+        "modes": [],
+        "checks": [],
+        "errors": [
+          {
+            "message": "Physical graph not muted",
+            "stack": "Error: Physical graph not muted\n    at assert (http://127.0.0.1:18858/prototype/warped-censor-harness.js:1:108)\n    at run (http://127.0.0.1:18858/prototype/warped-censor-harness.js:16:103)"
+          }
+        ],
+        "sourceBefore": {
+          "app.js": "08692565bcca2f22611ea709e7de1e27adcc6edeccc473d180570405b2207b7d",
+          "engine.js": "852699a8eaa0704ffd4ade7351e2325dbaafd4f6257a04bdbee65d41d397e25f",
+          "censor.js": "4f0909f5562e1dd28e4b9f406015dd3963e96f706c32e863242494c0c2ccc794",
+          "censor-backing.js": "2115d943efc39897aaf21b6282d1d131c2499b81a51400175a11b329b828ccf6",
+          "reverse-censor-plan.js": "666203648e4bc8bf319cca5eed26f1f475ddbc6b9b86b04a1dd5b2baf499be56",
+          "beatgrid.js": "af239aef231c9d089bf2352b8f548a5f71f734d6cf753986f17f57b3999477b9",
+          "smart-sync.js": "a8998b8727ae144413272163a2c438f3d8bcd92f634d5bd1872e5ac49a509f61",
+          "keylock-shadow-live.js": "eed7a433632ca6a4523d091b7b08e2530d1fc89d3004531387370a5fdf756745",
+          "pitch-time-map.js": "2eb6a2ea7d7c6dde94defb921f90343ea4d4ea98c025722f2e570cc0f8c62252",
+          "pcm-resample.js": "8789e7cfc543c393830ad04e2d56e3359786eb6a4473ff08edda1c899fc19ae2",
+          "warped-censor-harness.js": "de732088a7028ef849740c81b77eab73805e52900e25281ed0bc6e4f4b092983"
+        },
+        "sourceAfter": {
+          "app.js": "08692565bcca2f22611ea709e7de1e27adcc6edeccc473d180570405b2207b7d",
+          "engine.js": "852699a8eaa0704ffd4ade7351e2325dbaafd4f6257a04bdbee65d41d397e25f",
+          "censor.js": "4f0909f5562e1dd28e4b9f406015dd3963e96f706c32e863242494c0c2ccc794",
+          "censor-backing.js": "2115d943efc39897aaf21b6282d1d131c2499b81a51400175a11b329b828ccf6",
+          "reverse-censor-plan.js": "666203648e4bc8bf319cca5eed26f1f475ddbc6b9b86b04a1dd5b2baf499be56",
+          "beatgrid.js": "af239aef231c9d089bf2352b8f548a5f71f734d6cf753986f17f57b3999477b9",
+          "smart-sync.js": "a8998b8727ae144413272163a2c438f3d8bcd92f634d5bd1872e5ac49a509f61",
+          "keylock-shadow-live.js": "eed7a433632ca6a4523d091b7b08e2530d1fc89d3004531387370a5fdf756745",
+          "pitch-time-map.js": "2eb6a2ea7d7c6dde94defb921f90343ea4d4ea98c025722f2e570cc0f8c62252",
+          "pcm-resample.js": "8789e7cfc543c393830ad04e2d56e3359786eb6a4473ff08edda1c899fc19ae2",
+          "warped-censor-harness.js": "de732088a7028ef849740c81b77eab73805e52900e25281ed0bc6e4f4b092983"
+        },
+        "sourceStable": true,
+        "finishedAt": "2026-10-18T02:26:51.966Z"
+      }
+    },
+    {
+      "retained_directory": "local-evidence/warped-censor/initial-sync-state",
+      "result": {
+        "startedAt": "2026-10-18T02:27:13.937Z",
+        "completed": false,
+        "criteria": {
+          "frequencyErrorHz": 1,
+          "minimumRMS": 0.005,
+          "forwardClockStateSeconds": 0.01,
+          "muteAmplitudeRatio": [
+            0.6,
+            0.73
+          ]
+        },
+        "scope": "Actual app Smart Sync/Censor across reversed90\u2192150\u2192120 source tempo sections, keylock on then off, +2semitones, original plus four prepared synthetic sources. No new model inference/native/physical/loop/quality/reference acceptance.",
+        "modes": [
+          {
+            "keylock": true,
+            "sections": [
+              {
+                "name": "before",
+                "from": 0.8524036281179139,
+                "to": 1.2524036281179138,
+                "expectedLeft": 370.4124759420931
+              }
+            ],
+            "sourceSemitones": 2,
+            "forwardSourceOutputs": 5,
+            "forwardStart": 1.294512471655329,
+            "reverseSnapshot": {
+              "resamplePitch": true,
+              "maxPCMBytes": 536870912,
+              "followMinimumLeadSeconds": 0.04,
+              "byteAccounting": "Acknowledged retained PCM and in-flight chunk copies only; excludes decoded inputs, SRC tables and opaque WASM heaps.",
+              "disposed": false,
+              "state": {
+                "when": 2.3875056689342404,
+                "position": 13.50397581254724,
+                "playing": true,
+                "rate": 1.3333333333333333,
+                "keylock": true,
+                "semitones": 2,
+                "effectiveSemitones": 2
+              },
+              "sourceGeometry": [
+                {
+                  "index": 0,
+                  "sampleRate": 48000,
+                  "frames": 864000,
+                  "channels": 2,
+                  "duration": 18,
+                  "paddedTailSeconds": 0,
+                  "trimmedTailSeconds": 0,
+                  "decodedBytes": 6912000
+                },
+                {
+                  "index": 1,
+                  "sampleRate": 48000,
+                  "frames": 864000,
+                  "channels": 2,
+                  "duration": 18,
+                  "paddedTailSeconds": 0,
+                  "trimmedTailSeconds": 0,
+                  "decodedBytes": 6912000
+                },
+                {
+                  "index": 2,
+                  "sampleRate": 48000,
+                  "frames": 864000,
+                  "channels": 2,
+                  "duration": 18,
+                  "paddedTailSeconds": 0,
+                  "trimmedTailSeconds": 0,
+                  "decodedBytes": 6912000
+                },
+                {
+                  "index": 3,
+                  "sampleRate": 48000,
+                  "frames": 864000,
+                  "channels": 2,
+                  "duration": 18,
+                  "paddedTailSeconds": 0,
+                  "trimmedTailSeconds": 0,
+                  "decodedBytes": 6912000
+                },
+                {
+                  "index": 4,
+                  "sampleRate": 48000,
+                  "frames": 864000,
+                  "channels": 2,
+                  "duration": 18,
+                  "paddedTailSeconds": 0,
+                  "trimmedTailSeconds": 0,
+                  "decodedBytes": 6912000
+                }
+              ],
+              "groups": [
+                {
+                  "id": 1,
+                  "pitchMap": null,
+                  "pitchSemitones": 2,
+                  "pitchFactor": 1.122462048309373,
+                  "origin": 12,
+                  "start": 12,
+                  "end": 18,
+                  "nodeCount": 1,
+                  "processorChannels": 10,
+                  "sourceOutputs": 5,
+                  "retainedPCMBytes": 9429280,
+                  "retainedChunks": 13,
+                  "latency": 0.12,
+                  "role": "selected"
+                }
+              ],
+              "retainedPCMBytes": 9429280,
+              "inFlightPCMBytes": 0,
+              "decodedBytes": 34560000,
+              "policy": {
+                "direction": "forward",
+                "normalMinimumLead": "queried group latency plus2 render quanta",
+                "followMinimumLeadSeconds": 0.04,
+                "followOwner": "currently active forward owner only",
+                "followCoverage": "required history must already be prepared; reject without replacement",
+                "rate": [
+                  0.25,
+                  4
+                ],
+                "effectiveSemitones": [
+                  -24,
+                  24
+                ],
+                "chunkSeconds": 0.5,
+                "requiredPrerollSeconds": 1,
+                "retentionPrerollSeconds": 2,
+                "retentionHysteresisSeconds": 1,
+                "lookaheadSeconds": 8,
+                "driverMs": 50,
+                "crossfadeSeconds": 0.01,
+                "srcTaps": 32,
+                "srcPhases": 1024,
+                "decodedSources": "Whole decoded AudioBuffers remain caller-owned; only processor PCM copies are windowed.",
+                "unsupported": [
+                  "reverse",
+                  "loop",
+                  "Stem Slip",
+                  "incremental compressed-file decoding"
+                ],
+                "quality": "Independent32-tap windowed-sinc normalization and10ms group crossfade; vendor sonic equivalence and artifact-free transitions are unverified."
+              },
+              "lastError": null
+            },
+            "scheduled": [
+              {
+                "when": 2.3875056689342404,
+                "position": 13.467482993197278,
+                "rate": 1.3333333333333333
+              },
+              {
+                "when": 4.286893424036283,
+                "position": 16,
+                "rate": 0.8
+              },
+              {
+                "when": 5.536893424036283,
+                "position": 17,
+                "rate": 1
+              }
+            ],
+            "audio": [
+              {
+                "name": "before",
+                "from": 0.8524036281179139,
+                "to": 1.2524036281179138,
+                "expectedLeft": 370.4124759420931,
+                "channels": [
+                  {
+                    "from": 0.8524036281179139,
+                    "to": 1.2524036281179138,
+                    "rms": 0.03735362239681853,
+                    "hz": 370.4144693988309
+                  },
+                  {
+                    "from": 0.8524036281179139,
+                    "to": 1.2524036281179138,
+                    "rms": 0.03730854672566658,
+                    "hz": 550.0048266325414
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "checks": [],
+        "errors": [
+          {
+            "message": "Censor dropped Smart Sync",
+            "stack": "Error: Censor dropped Smart Sync\n    at assert (http://127.0.0.1:18858/prototype/warped-censor-harness.js:1:108)\n    at run (http://127.0.0.1:18858/prototype/warped-censor-harness.js:35:317)"
+          },
+          {
+            "message": "Missing seven fixed sections",
+            "stack": "Error: Missing seven fixed sections\n    at assert (http://127.0.0.1:18858/prototype/warped-censor-harness.js:1:108)\n    at run (http://127.0.0.1:18858/prototype/warped-censor-harness.js:45:155)"
+          }
+        ],
+        "sourceBefore": {
+          "app.js": "08692565bcca2f22611ea709e7de1e27adcc6edeccc473d180570405b2207b7d",
+          "engine.js": "852699a8eaa0704ffd4ade7351e2325dbaafd4f6257a04bdbee65d41d397e25f",
+          "censor.js": "4f0909f5562e1dd28e4b9f406015dd3963e96f706c32e863242494c0c2ccc794",
+          "censor-backing.js": "2115d943efc39897aaf21b6282d1d131c2499b81a51400175a11b329b828ccf6",
+          "reverse-censor-plan.js": "666203648e4bc8bf319cca5eed26f1f475ddbc6b9b86b04a1dd5b2baf499be56",
+          "beatgrid.js": "af239aef231c9d089bf2352b8f548a5f71f734d6cf753986f17f57b3999477b9",
+          "smart-sync.js": "a8998b8727ae144413272163a2c438f3d8bcd92f634d5bd1872e5ac49a509f61",
+          "keylock-shadow-live.js": "eed7a433632ca6a4523d091b7b08e2530d1fc89d3004531387370a5fdf756745",
+          "pitch-time-map.js": "2eb6a2ea7d7c6dde94defb921f90343ea4d4ea98c025722f2e570cc0f8c62252",
+          "pcm-resample.js": "8789e7cfc543c393830ad04e2d56e3359786eb6a4473ff08edda1c899fc19ae2",
+          "warped-censor-harness.js": "112b3bd50af556d08cefca0b33765dfe56d1a7c7bc96676bc3919cb8b0e6157c"
+        },
+        "recordStart": 0.592108843537415,
+        "recording": {
+          "bytes": 30855,
+          "format": "audio/webm;codecs=opus",
+          "sha256": "ed4c3865c3f02b7f53d1b6d6f8305e2070db81308283bae05e8e3b40c7d45da8"
+        },
+        "decoded": {
+          "duration": 1.9199773242630385,
+          "frames": 84671,
+          "sampleRate": 44100,
+          "channels": 2
+        },
+        "sourceAfter": {
+          "app.js": "08692565bcca2f22611ea709e7de1e27adcc6edeccc473d180570405b2207b7d",
+          "engine.js": "852699a8eaa0704ffd4ade7351e2325dbaafd4f6257a04bdbee65d41d397e25f",
+          "censor.js": "4f0909f5562e1dd28e4b9f406015dd3963e96f706c32e863242494c0c2ccc794",
+          "censor-backing.js": "2115d943efc39897aaf21b6282d1d131c2499b81a51400175a11b329b828ccf6",
+          "reverse-censor-plan.js": "666203648e4bc8bf319cca5eed26f1f475ddbc6b9b86b04a1dd5b2baf499be56",
+          "beatgrid.js": "af239aef231c9d089bf2352b8f548a5f71f734d6cf753986f17f57b3999477b9",
+          "smart-sync.js": "a8998b8727ae144413272163a2c438f3d8bcd92f634d5bd1872e5ac49a509f61",
+          "keylock-shadow-live.js": "eed7a433632ca6a4523d091b7b08e2530d1fc89d3004531387370a5fdf756745",
+          "pitch-time-map.js": "2eb6a2ea7d7c6dde94defb921f90343ea4d4ea98c025722f2e570cc0f8c62252",
+          "pcm-resample.js": "8789e7cfc543c393830ad04e2d56e3359786eb6a4473ff08edda1c899fc19ae2",
+          "warped-censor-harness.js": "112b3bd50af556d08cefca0b33765dfe56d1a7c7bc96676bc3919cb8b0e6157c"
+        },
+        "sourceStable": true,
+        "finishedAt": "2026-10-18T02:27:16.464Z"
+      }
+    }
+  ]
+}
