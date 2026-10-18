@@ -1,3 +1,11 @@
+## 144. Factory platter contracts and retained alternative mappings
+
+18 October2026. No product/native/controller-profile changes or new parity acceptance. A new bounded read-only RTTI inspection tool reproduced the actual private binary's platter callback table; targeted Ghidra inspected the dispatcher, constructor and mode helpers. ACI source facts now establish explicit jog mode0=nudge/1=scratch, skip overriding jog, a separate direct-skip action and microsecond elapsed-time input. Motion's physical rotation unit remains unresolved. Decompiled control flow has warnings; do not infer512ticks/revolution or promote the248-tick alternative calibration to official equivalence.
+
+The ACI schema also supplies omitted translation defaults: play/PFL toggle_on_down; cue/sync/sync_off explicit; load/cue-play explicit_on_down; pitch range increment_wrapped on press with initial8. These are source facts, not newly executed Open Play equivalence. Three authored-fixture inspection checks passed after correcting one test field; the actual binary reproduction also passed. Runtime matrices were not repeated because product bytes did not change.
+
+Read docs/research/FACTORY_PLATTER_CONTRACT_20261018.md and factory-platter-contract-144.json. Current v3 coverage remains19,252 assignments/145 of197 definitions; Hercules356/18 unresolved, none fully translated. Alternatives remain labeled Alternative mapping plus author/project, separately from authenticated Official Serato and User mapping. Next: bounded motion-dispatch disassembly and virtual-speed unit trace, then prevent duplicate Load/Double Click ownership before adapter extension. Frozen0.1.23/tested272-map profile untouched; no captures/hardware output/repackage. Keep all original FX/Stems/keylock and full-parity gaps active; Claude audit unlaunched. Earlier checkpoints below are historical.
+
 ## 58. Video MIDI core routing, rendered output and corrected compound dispatch
 
 17 October 2026. Previous goal turn made concrete progress at `7ce4ffe`: four-deck browser MIDI Key Shift with real audio evidence and a full parity audit. This continuation implements the next missing Video mapper workflows. **Full 110-group / 522-requirement parity remains unproven; nine beta deltas and 26 provisional release checks remain separate.**
