@@ -73,16 +73,19 @@ export function createSlicer({engine,render=()=>{},notify=()=>{}}){
  }
  async function release(key){
   const h=held.get(key);if(!h)return false;held.delete(key);
-  try{await h.rateTask;}catch(error){return fail(h,error);}
-  if(!owns(h)){if(active.get(h.d.index)===h)forget(h);return false;}
   let ending;
+  // The background owns its endpoint even if a now-unneeded tempo render is
+  // still pending. Its retirement aborts that render through the normal owner.
+  if(h.rateTask&&owns(h)&&h.playing&&!h.prior.on)ending=finishBackground(h);
+  try{await h.rateTask;}catch(error){if(error.name==='AbortError'&&ending)return ending;return fail(h,error);}
+  if(!owns(h)){if(active.get(h.d.index)===h)forget(h);return ending?await ending:false;}
   try{
-   if(expired(h,h.clock(engine.ctx.currentTime)))return finishBackground(h);
+   if(expired(h,h.clock(engine.ctx.currentTime)))return ending||finishBackground(h);
    const positionAt=at=>{const position=h.clock(at);if(expired(h,position))throw Object.assign(Error('Slicer background reached its endpoint.'),{name:'SlicerEndedError'});return position;};
    const pending=transition(h,h.prior,positionAt,h.playing);
    // Slow preparation must not keep the temporary slice playing past the
    // backing endpoint. Successful handoff/Stop/Load invalidates this watcher.
-   if(h.playing&&!h.prior.on)ending=finishBackground(h);
+   if(h.playing&&!h.prior.on)ending ||= finishBackground(h);
    const current=await pending;
    if(current){forget(h);render();return true;}return ending?await ending:false;
   }catch(error){

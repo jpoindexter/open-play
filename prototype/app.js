@@ -1486,17 +1486,17 @@ document.addEventListener("contextmenu", (e) => {
 document.addEventListener('pointerdown',e=>{
   if(e.target.dataset.tempo===undefined||e.button!==0||!(e.ctrlKey||e.metaKey))return;
   e.preventDefault();e.target.focus();const d=state.decks[Number(e.target.dataset.tempo)];
-  tempoSliders.reset(d).then(()=>updateTempoSlider(d)).catch(error=>notify(error.message));
+  tempoSliders.reset(d).then(()=>updateTempoSlider(d)).catch(error=>{if(error.name!=='AbortError')notify(error.message);});
 });
 document.addEventListener('keydown',e=>{
   if(e.target.dataset.tempo===undefined||e.key!=='Home'||!(e.ctrlKey||e.metaKey))return;
   e.preventDefault();const d=state.decks[Number(e.target.dataset.tempo)];
-  tempoSliders.reset(d).then(()=>updateTempoSlider(d)).catch(error=>notify(error.message));
+  tempoSliders.reset(d).then(()=>updateTempoSlider(d)).catch(error=>{if(error.name!=='AbortError')notify(error.message);});
 });
 document.addEventListener("input", (e) => {
   if (e.target.dataset.tempo !== undefined) {
     const d = state.decks[Number(e.target.dataset.tempo)];
-    tempoSliders.set(d,Number(e.target.value)).then(()=>updateTempoSlider(d)).catch(error=>{updateTempoSlider(d);notify(error.message);});
+    tempoSliders.set(d,Number(e.target.value)).then(()=>updateTempoSlider(d)).catch(error=>{updateTempoSlider(d);if(error.name!=='AbortError')notify(error.message);});
     $(`#platter-${d.index} small`).textContent = `BPM · ${((d.rate - 1) * 100).toFixed(1)}%`;
     $(`#platter-${d.index} strong`).textContent = shownDeckBPM(d);
   }

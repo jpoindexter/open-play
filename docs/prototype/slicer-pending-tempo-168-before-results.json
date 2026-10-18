@@ -1,0 +1,199 @@
+{
+  "checkpoint": 168,
+  "passed": false,
+  "originalBytes": 902830,
+  "originalSHA256": "3ce7d361c1a7b070c25733b76fba3bc824e6b7ac01d1b700763c620e9ab3ae36",
+  "sourceHashes": {
+    "app.js": "93c8af9f45e4417da8a9f7e96b3c351e2d33ce30285bef329b62037c0aec49e7",
+    "engine.js": "85b3468ba45397734271a83b8f4444d1ef851cf25c0dea40fc09c527c11425b7",
+    "stems.js": "5fb06aba4f6a97e4150d1bcfeef394574b0c9e9ed6ee099b78b89482b08ea4b7",
+    "panels.js": "06217033416d62af4602c1572086dc03bb9f25458a8f90c884f3d552c7b1d4fe",
+    "keylock.js": "62adbfdd77df20deb1328302d4a8daf3d7bdc29870af453d39acfd2a02bf060b",
+    "keylock-worker.js": "5cb72a1bc74e1808c32b430d72d5769427c7056edee11410eb6f8b3c7751fcec",
+    "keylock-dsp.js": "f4cb1881fedb018f395a6711d263aa142feb8dfe93638a3d1f97fc432c15ac3d",
+    "smart-sync.js": "98d34b559882d16e3b3e8c715d6a3c35a6197cb8d6a984fe5470b80592ca934e",
+    "slicer.js": "79647c802f9986bffa918648884c3beee1fc0060adbfa8c73353df1fbad3c900",
+    "tempo-slider.js": "b83de88ef715f7bdd68d9d7745862f9ecaac80c41f53e91c7041b01f1576f7cf",
+    "sync-tempo-handoff.js": "5842f9209035e24ff867004d3fef5f0a1fe7f7f4976440546b8238a225b82f9b",
+    "beatgrid.js": "af239aef231c9d089bf2352b8f548a5f71f734d6cf753986f17f57b3999477b9",
+    "warp-loop.js": "33091f4414d2066ce47657aa96312dfefc6ca0a061ccab04ddf00ef6121addc4",
+    "warp-loop-kernel.js": "8a331758bc551454a3cc65fd5ea527c42a370bd22ab6eb650ca278ea87e0f414",
+    "warp-loop-worklet.js": "bc977262180f910c6be55ea07a46f6b560a090939271bd4beec5e8fd31ed23fa",
+    "reverse-censor-plan.js": "38adfb04c0e498a8e2cb27b0240f037d315f24b0c8cd6968e338ff29b0af3807",
+    "stem-slicer-168-harness.js": "388c6543ccbf6b39f56ede0db0fee8ef750ffc9c71612499536606670cbd922f",
+    "stem-activation-capture-145.js": "730b9c3de31e9c3546ec1ab86f8fd85ce2a1ccfe6f78fc25d8f483f8b9d75331",
+    "stem-history-worklet.js": "d1e4f452044235a110a874fad2921390878c5731f3a769896ca5bfb2faf08daa",
+    "keylock-shadow-live.js": "41bf27051270a4741f83b59bc7c0111767b589ef3986b4aafb43ad36dc067551",
+    "vendor/signalsmith-stretch/SignalsmithStretch-open-play-replace.mjs": "abc12a3afe332b3aa32c1e1ec931f362225f0de09beb727a90944cf7c96baf46",
+    "vendor/signalsmith-stretch/SignalsmithStretch-open-play-reference-dsp.mjs": "0512cae2a33873956026e64cb47854c1c677baf1beb1bc0242edfb9557987f21"
+  },
+  "criteria": {
+    "minimumRMS": 1e-05,
+    "maximumPositionError": 0.01,
+    "maximumStoppedPeak": 1e-07,
+    "maximumEndDeadlineLateness": 0.05
+  },
+  "observations": [
+    {
+      "name": "pending-rate-release",
+      "pendingPreparationObserved": true,
+      "terminalOrReleaseStateCorrect": true,
+      "expectedSourcePosition": 4.983378382464099,
+      "observedSourcePosition": 4.983378382464099,
+      "sourceClockErrorSeconds": 0.0,
+      "naturalEndCorrect": true,
+      "naturalEndCount": 0,
+      "expiredEndCallbackDelayAfterRelease": null,
+      "cancellationNoticeCorrect": true,
+      "notice": "Finished: 1 measured, 0 failed. Existing/manual metadata and locked grids preserved unless replacement was requested.",
+      "packets": [
+        {
+          "kind": "heldPCM",
+          "channel": 0,
+          "frames": 13230,
+          "contiguousQuanta": 104,
+          "sha256": "c1bea33389416a6208062f8b09f80edf88403f6db61b127808981b569d09724b",
+          "rms": 0.09949267735767522,
+          "peak": 0.4389684200286865
+        },
+        {
+          "kind": "heldPCM",
+          "channel": 1,
+          "frames": 13230,
+          "contiguousQuanta": 104,
+          "sha256": "26cdcf122c1fbdf5ed9c53aa22663a4cbcee9db87bcce52b3c5b595ceac61087",
+          "rms": 0.08621554551147399,
+          "peak": 0.3565250039100647
+        },
+        {
+          "kind": "afterPCM",
+          "channel": 0,
+          "frames": 13230,
+          "contiguousQuanta": 104,
+          "sha256": "1d7980806669879b4a20f26c4f81527e99b585bf66d88141ee867c582410c39e",
+          "rms": 0.12952513048250688,
+          "peak": 0.46767279505729675
+        },
+        {
+          "kind": "afterPCM",
+          "channel": 1,
+          "frames": 13230,
+          "contiguousQuanta": 104,
+          "sha256": "eff30b9396c332f75a6561b6e1d6d5e6dfbb3eceea2a22169c8b183f9a2b300b",
+          "rms": 0.13221977973169408,
+          "peak": 0.5167926549911499
+        }
+      ]
+    },
+    {
+      "name": "pending-rate-stop",
+      "pendingPreparationObserved": true,
+      "terminalOrReleaseStateCorrect": true,
+      "expectedSourcePosition": null,
+      "observedSourcePosition": 0.03804421768707478,
+      "sourceClockErrorSeconds": 0.0,
+      "naturalEndCorrect": true,
+      "naturalEndCount": 0,
+      "expiredEndCallbackDelayAfterRelease": null,
+      "cancellationNoticeCorrect": false,
+      "notice": "Synced tempo preparation superseded.",
+      "packets": [
+        {
+          "kind": "heldPCM",
+          "channel": 0,
+          "frames": 13230,
+          "contiguousQuanta": 104,
+          "sha256": "a4d905d5c9cb5a3b1636a51aeaebe8bce883243d73fdccb9aaf115d38785e2d1",
+          "rms": 0.09949489714041065,
+          "peak": 0.4389684200286865
+        },
+        {
+          "kind": "heldPCM",
+          "channel": 1,
+          "frames": 13230,
+          "contiguousQuanta": 104,
+          "sha256": "22acb5df66d897e95319a97d6f0098ec35d1cc4c023484f80c74d32c901b543f",
+          "rms": 0.08620910429396475,
+          "peak": 0.3565250039100647
+        },
+        {
+          "kind": "afterPCM",
+          "channel": 0,
+          "frames": 13230,
+          "contiguousQuanta": 104,
+          "sha256": "9d55c9c2f49808c72a9d28e4f661bae87b1ed419741fa38e5ffeff9648f33d7d",
+          "rms": 0.0,
+          "peak": 0.0
+        },
+        {
+          "kind": "afterPCM",
+          "channel": 1,
+          "frames": 13230,
+          "contiguousQuanta": 104,
+          "sha256": "9d55c9c2f49808c72a9d28e4f661bae87b1ed419741fa38e5ffeff9648f33d7d",
+          "rms": 0.0,
+          "peak": 0.0
+        }
+      ]
+    },
+    {
+      "name": "expired-pending-rate-release",
+      "pendingPreparationObserved": true,
+      "terminalOrReleaseStateCorrect": true,
+      "expectedSourcePosition": null,
+      "observedSourcePosition": 6.8,
+      "sourceClockErrorSeconds": null,
+      "naturalEndCorrect": false,
+      "naturalEndCount": 1,
+      "expiredEndCallbackDelayAfterRelease": 0.8707482993197289,
+      "cancellationNoticeCorrect": false,
+      "notice": "Synced tempo preparation superseded.",
+      "packets": [
+        {
+          "kind": "heldPCM",
+          "channel": 0,
+          "frames": 13230,
+          "contiguousQuanta": 104,
+          "sha256": "6dfe3514c65a78fc8d85db7096967bee53ce122874e25429f14d37e734363629",
+          "rms": 0.12318233488348,
+          "peak": 0.3376826345920563
+        },
+        {
+          "kind": "heldPCM",
+          "channel": 1,
+          "frames": 13230,
+          "contiguousQuanta": 104,
+          "sha256": "f5b2705c4dfa7a2e1e8d768f8c021690f6f95066aa1806b08a62d04e7ad977e2",
+          "rms": 0.1331768076364252,
+          "peak": 0.3423783779144287
+        },
+        {
+          "kind": "afterPCM",
+          "channel": 0,
+          "frames": 13230,
+          "contiguousQuanta": 104,
+          "sha256": "9d55c9c2f49808c72a9d28e4f661bae87b1ed419741fa38e5ffeff9648f33d7d",
+          "rms": 0.0,
+          "peak": 0.0
+        },
+        {
+          "kind": "afterPCM",
+          "channel": 1,
+          "frames": 13230,
+          "contiguousQuanta": 104,
+          "sha256": "9d55c9c2f49808c72a9d28e4f661bae87b1ed419741fa38e5ffeff9648f33d7d",
+          "rms": 0.0,
+          "peak": 0.0
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "default48000Acceptance": false,
+  "musicalPitchQualityAccepted": false,
+  "sourceAttributionAccepted": false,
+  "exactSeratoParityAccepted": false,
+  "nativeAcceptance": false,
+  "hardwareAcceptance": false,
+  "fullParityAcceptance": false
+}
