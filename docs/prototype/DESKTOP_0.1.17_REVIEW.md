@@ -1,3 +1,5 @@
+> **Plan125 correction:** Plan125 correction: the earlier default-only conclusion was an inspection error: collapsed macOS select AX lists only its selected item. The post-refresh expanded19menu shows the named Hercules, built-in speakers and Teams. Actual19discovery returns6devices/4audiooutputs/4addressable/4named, visiblewindow. Own-main speaker permission is allowed. No enumeration regression demonstrated; no permission change made. Native19named setSinkId and explicit master1/2,cue3/4 route applied after silent level0engine activation settled the sink. Physical audio/controls remain unverified. Historical investigation below retained; its unresolved-enumeration interpretation is superseded.
+
 # Desktop0.1.17: measured Auto Gain; four-channel readiness unresolved
 
 The actual packaged Auto Gain workflow passes its declared20cases. **The main output selector lists only System default, so this candidate is not ready for the intended four-channel Hercules test.** Default/current launchers remain16. The open17window is stopped with Master-12dB; close one version before launching another, because profile and18775port are shared.

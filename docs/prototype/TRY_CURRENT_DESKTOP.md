@@ -1,29 +1,19 @@
-> Plan124 current state: default launchers still target0.1.16, which is closed.0.1.17 is open/stopped, Master-12dB. Its actual20case native Auto Gain test passed, but named output enumeration is unresolved; do not start a four-channel test yet. See [desktop17review](DESKTOP_0.1.17_REVIEW.md). The16route/status below is historical, not the current17runtime. Close17before launching16. No timed capture while Jason is away.
+# Current desktop test: Open Play Playback Test 0.1.19
 
-# Current desktop test: Open Play Playback Test 0.1.16
+The app is open and stopped. After Hours is on deck 1 at 124 BPM; Glass Transit is on deck 2 at 126 BPM. Both clocks show 00:00.0. Sync and key lock are off, channel levels are 0.8, and the crossfader is centered. Master is −12 dB for the first listening test.
 
-Open **Start Open Play Current Test.command** or **Start Open Play Playback Test.command**. The 0.1.16 window is already open and stopped: After Hours (124 BPM), Glass Transit (126 BPM), Sync/keylock off, channel levels 0.8, crossfader centered, Master meter zero.
+**The selected Hercules route is master 1/2 and headphones 3/4.** Cue Mix is 0%, Cue Volume is 10%, and output is unmuted.
 
-**When you return:** press the left Hercules Play button once, confirm deck 1 starts and the RCA speakers play, then stop with that same button. We will check one action at a time. No timed capture runs while you are away.
+When you return, press the **left physical Hercules Play** once. Check that deck 1 starts and the RCA speakers play; press the same button to stop. Continue one action at a time. No timed capture runs while you are away. Physical sound, buttons and socket isolation on this version still need your confirmation.
 
-Hercules is enumerated connected. The normal main-window mapping export after restart is byte-identical to the pre-switch export: 272 entries, 64916 bytes, SHA256 37b61c1dbf16d43a1f14d7d932c88dc3a4d2ba1a062ae23e5175c91d58953864. This preserves assignments; it does not prove all physical controls respond.
+Open **Start Open Play Current Test.command** or **Start Open Play Playback Test.command** to return to this build. The normal MIDI export preserves all 272 mappings: 64916 bytes, SHA256 37b61c1dbf16d43a1f14d7d932c88dc3a4d2ba1a062ae23e5175c91d58953864. This preserves assignments; it does not verify every physical control.
 
-Current explicit route: **Hercules master 1/2, cue/headphones 3/4; Cue Mix 0%, Cue Volume 10%, mute off**. Keep the controller, headphones and speakers connected for hands-on testing. After reload/restart the app returns to system-default stereo. Reapply through Devices → Refresh audio outputs → named Hercules → Use selected output → Four channels → Apply channels. Physical sockets have not been retested on this version.
+After restart or reload, routing deliberately returns to system-default stereo. In Devices, press Refresh, **expand the output dropdown**, select the named Hercules, then Use selected output. If the switch remains MUTED while the engine is stopped, close Devices, set deck 1 level to zero with CUE off, and start it silently. Once the named stereo output settles, reopen Devices, choose Four channels, set master 1/2 and headphones 3/4, and Apply channels. Stop playback before restoring the channel level. The pending-switch explanation in the interface still needs improvement.
 
-Executed once on this exact native package: **Checks → Rapid Sync and Play** opens an isolated temporary session, then normal Run/Download captures the real audio engine. GUI and synthetic MIDI rapid Sync→Play both reach Beat Sync with six measured pulse pairs, maximum error 1.156 / 1.406 ms against the existing 10 ms criterion. Rapid Sync→Play→Play cancels with no later counted start or sustained secondary audio. Whole 8.28-second stereo master exported, decoded finite; no acoustic or physical-controller claim. Test fixtures and its two synthetic mappings remain separate from the main profile. Close the check with its red window button; Cmd-W is not supported there.
+The earlier missing-output conclusion was an inspection error: a collapsed native selector shows its selected item. The expanded menu and actual discovery counts show the outputs. No permission change was needed.
 
-Source **eaffc59146d40f757ea502f6ac7eb97e0d5a6404**, ASAR **a2925237fab3fe2f9064bacb6a62b91cf6cc4f6b02cb166534d90952907076df**. All 308 prototype files match frozen source; 40 declared modules served by the native host match ASAR with no-store. Includes core keyboard, Censor, mapped-pitch and rapid input fixes through plan112. Existing interface retained. All full Serato parity flags remain unaccepted; full independent Claude audit is unlaunched.
+Source: 89e464721e9b4a44999dfbe1250024e7e0a1baf6. ASAR: 1df2dca8ad4aa2321bfcc5a4a7f356c9ce9c4f7e610349bd40c2df4ce2157b7d. The 20-case native Auto Gain test was executed on 0.1.17; 0.1.19 retains the same DSP source and adds device-discovery status. That audio evidence remains scoped to 0.1.17. The named four-channel route and mapping export were separately executed on 0.1.19. Full Serato parity remains unaccepted; the independent full Claude audit is unlaunched.
 
-Previous 0.1.15 is preserved: **Start Open Play Playback Test 0.1.15.command** and [historical guide](TRY_PLAYBACK_DESKTOP_0.1.15.md). Close one test before opening another; versions share the dedicated profile and port18775. Stable pre-switch profile backup: local-evidence/profile-backups/playback-before-0.1.16/ (158 files / 8017227 bytes, all hashes match). Earlier bundles remain available too.
+The previous build is preserved as **Start Open Play Playback Test 0.1.16.command**, with its [historical guide](TRY_PLAYBACK_DESKTOP_0.1.16.md). Close one version before opening another; they share the dedicated profile and port 18775. Investigation bundles 0.1.17 and 0.1.18 and profile backups remain available. The separate prototype/Stems service on port 8768 remains running. Bundled research is a frozen snapshot; workspace plan 125 corrects the earlier inspection error.
 
-[Native observations](desktop-0.1.16-playback-observation.json) · [Scoped review](DESKTOP_0.1.16_REVIEW.md) · [Package receipt](desktop-0.1.16-playback-package.json) · [Full plan](../../FULL_BUILD_PLAN.md) · [Claude handoff](../../handoffs/current.md).
-
-Browser-source plan114 adds [warped-loop Censor](WARPED_LOOP_CENSOR_REVIEW.md); this is not in the frozen0.1.16 desktop candidate. Keep that candidate for the physical core playback test.
-
-Browser-source plan115 adds [selected-stem Censor](STEM_SLIP_CENSOR_REVIEW.md) under the existing independent Stem Slip policy. This is not in the frozen0.1.16 candidate; its physical-test sequence stays unchanged.
-
-Plan116 updates the external Stems service: [verified completed cache survives service restart](STEM_JOB_CACHE_REVIEW.md). Native0.1.16 is unchanged; this is service/API evidence, not a new native playback or physical-controller pass.
-
-Browser-source plan117 adds [prepared-file Trash/regeneration and full-mix restore](STEM_CLEAR_REVIEW.md). It is not packaged in native0.1.16. The external service is now session8983/PID25079; keep it running for preparation.
-
-Browser-source plan118 adds [persistent Stems crate/readiness/keyboard removal](STEM_CRATE_REVIEW.md). It is not in native0.1.16; a future package must declare stem-crate.js. External service is now27522/session82214.
+[Review](DESKTOP_0.1.19_REVIEW.md) · [Native observations](desktop-0.1.19-playback-observation.json) · [Full plan](../../FULL_BUILD_PLAN.md) · [Claude handoff](../../handoffs/current.md)
