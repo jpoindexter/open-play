@@ -67,7 +67,7 @@ export function createPanels(a) {
     const apply=$('#audio-output-apply');if(apply)apply.disabled=!!value.pending;
     target.textContent=value.lastError||`${value.label} · ${route?.layout||'stereo'} · master ${route?.masterChannels.join('/')||'1/2'} · cue ${route?.cueChannels.length?route.cueChannels.join('/'):'not sent to output'} · cue mix ${Math.round((route?.settings.mix??.5)*100)}% · cue volume ${Math.round((route?.settings.volume??.1)*100)}%${route?.settings.masterCue?' · Master Cue':''}${route?.settings.splitCue?' · Split Cue':''}${route?.physicalMuted?' · MUTED':''}. Physical sockets remain unverified.`;
     if(value.discovery){const d=value.discovery;target.textContent+=` Device discovery: ${d.returnedDevices} devices returned, ${d.audioOutputs} audio outputs, ${d.addressableOutputs} addressable, ${d.namedOutputs} named; window ${d.documentVisibility}.`;}
-    if(value.pending)target.textContent=`${value.pending.phase==='resuming'?'Starting audio for':'Switching to'} ${value.pending.label}… Output is muted until selection completes. `+target.textContent;
+    if(value.pending)target.textContent=`Switching to ${value.pending.label}… Output is muted until selection completes. `+target.textContent;
   }
   const badge = (text = "SIMULATION", real = false) =>
     `<span class="badge ${real ? "real" : ""}">${text}</span>`;

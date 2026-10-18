@@ -1,0 +1,52 @@
+{
+  "passed": 5,
+  "failed": 0,
+  "scope": "Actual monitor and output controller with controlled render-quantum lag and asynchronous sink. Proves commanded UI state and ownership, not rendered PCM, native OS sink or physical sockets.",
+  "checks": [
+    {
+      "name": "Mute status follows accepted target while AudioParam.value still reports the previous render quantum",
+      "passed": true,
+      "evidence": {
+        "renderValueAfterUnmuteCommand": 0,
+        "scheduledTarget": 1,
+        "commandedMuted": false
+      }
+    },
+    {
+      "name": "A rejected gain schedule cannot falsely change the reported mute target",
+      "passed": true,
+      "evidence": {
+        "commandedMuted": true
+      }
+    },
+    {
+      "name": "Completed stopped selection clears pending and stale MUTED status without context resume or deck Play",
+      "passed": true,
+      "evidence": {
+        "state": "suspended",
+        "events": [
+          "A"
+        ],
+        "pending": null,
+        "commandedMuted": false,
+        "rawParamValue": 0
+      }
+    },
+    {
+      "name": "Selection rejection clears pending and preserves the observed error without claiming completion",
+      "passed": true,
+      "evidence": {
+        "error": "NotAllowedError",
+        "deviceId": ""
+      }
+    },
+    {
+      "name": "Disposal during actual sink selection cannot reopen the graph or emit late callbacks",
+      "passed": true,
+      "evidence": {
+        "lateCallbacks": 0,
+        "commandedMuted": true
+      }
+    }
+  ]
+}

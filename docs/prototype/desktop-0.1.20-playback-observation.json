@@ -1,0 +1,20 @@
+{
+  "version": "0.1.20",
+  "sourceCommit": "228eff4639e92f9bdba86730276837f81d3f862c",
+  "ASARSHA256": "611f6c53013b9ecf0093955959cac500eca32be4be55f18a37ffef610144ef4e",
+  "actualNativeWorkflow": [
+    "Fresh launch0decksplaying,Master-12dB; Devices Refresh,expand menu,namedHercules,Use selected output; no Play action.",
+    "First result has namedHercules stereo/normal enabled Use selected button, but stale MUTED text.",
+    "Close and reopen Devices, still without Play: fresh snapshot shows same named stereo output without MUTED."
+  ],
+  "inference": "Selection was complete. A stale AudioParam.value snapshot, not a demonstrated hung sink switch, produced the confusing status. Earlier19selectedlabel also meant native setSinkId had resolved.",
+  "rejectedHypothesis": "Forced context resume was tested in candidate20 but did not correct stale status. Final source removes automatic resume. The first four controlled green cases tested an artificial dependency and do not prove that hypothesis.",
+  "retainedSource": "docs/research/experiments/OUTPUT_RESUME_HYPOTHESIS.md",
+  "evidence": [
+    "local-evidence/desktop-0.1.20-native/initial-stopped.ax.txt",
+    "local-evidence/desktop-0.1.20-native/selection-first-observation.ax.txt",
+    "local-evidence/desktop-0.1.20-native/fresh-snapshot-without-play.ax.txt"
+  ],
+  "physicalAcceptanceVerified": false,
+  "fullParityVerified": false
+}

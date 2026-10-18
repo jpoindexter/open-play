@@ -13,14 +13,6 @@ export function createAudioOutputSelection(engine,{devices=globalThis.navigator?
    const old=String(engine.ctx.sinkId||'');engine.audioMonitor.mutePhysical(true);lastError=null;
    pending={token,label:outputs.find(x=>x.deviceId===deviceId)?.label||(!deviceId?'System default':'selected output'),phase:'switching'};
    try{
-    // Chromium may leave a sink switch pending while its context is suspended.
-    // Start the muted context only; no deck or sampler voice is started here.
-    if(['suspended','interrupted'].includes(engine.ctx.state)){
-     pending.phase='resuming';emit();await engine.ctx.resume();
-     if(!current(token))return false;
-     if(engine.ctx.state!=='running')throw Object.assign(Error('Audio could not start for output selection. Try again.'),{name:'InvalidStateError'});
-     pending.phase='switching';
-    }
     emit();
     await engine.ctx.setSinkId(deviceId);
     if(disposed)return false;
