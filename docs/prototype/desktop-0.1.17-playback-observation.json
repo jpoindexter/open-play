@@ -1,0 +1,53 @@
+{
+  "date": "2026-10-18",
+  "version": "0.1.17",
+  "sourceCommit": "beb4d59b4722ad6f75426f2ff722d3cd71344bb8",
+  "ASARSHA256": "76ed78d895b97816117039f78054d009ead8667569c97a6de5db5691dda3cf74",
+  "appPath": "/Users/jasonpoindexter/Documents/GitHub/Open Play/local-evidence/desktop-builds/0.1.17/Open Play Playback Test-darwin-arm64/Open Play Playback Test.app",
+  "actualNativeWorkflow": "Checks > Measured Auto Gain > Run > Reload saved > Verify restored > Download via native Save dialog; check closed using red close button. Main process subsequently quit normally and reopened.",
+  "autoGain": {
+    "cases": 20,
+    "passed": true,
+    "originalSHA256": "064fb1062def168ded629c1c8df17492096de5673b7f0c93c440f29bac9b8dc2",
+    "independentReport": "desktop-0.1.17-auto-gain-independent-results.json",
+    "physicalMutedDuringCapture": true
+  },
+  "mappingExports": [
+    {
+      "name": "before16-mapping.json",
+      "bytes": 64916,
+      "sha256": "37b61c1dbf16d43a1f14d7d932c88dc3a4d2ba1a062ae23e5175c91d58953864",
+      "entries": 272
+    },
+    {
+      "name": "after17-mapping.json",
+      "bytes": 64916,
+      "sha256": "37b61c1dbf16d43a1f14d7d932c88dc3a4d2ba1a062ae23e5175c91d58953864",
+      "entries": 272
+    }
+  ],
+  "mappingByteIdentical": true,
+  "observed": [
+    "Native17 launched with persistent main profile; zero decks playing and generated124/126BPM tracks.",
+    "Actual MIDI editor enumerated DJControl Inpulse300Mk2 connected; normal Export mapping retained272entries byte-identical to16.",
+    "Master output changed through normal slider/Home to-12dB; value persisted through main reload and full process restart.",
+    "Audio output selector offers System default only. Refresh, main reload, foreground raise, silent level0 Play activation and full process restart did not produce named outputs. No specific sink/four-channel route applied.",
+    "macOS system_profiler independently reports named Hercules USB,4outputs,44100Hz/default output; built-in speakers and Teams virtual output also present. This is identity/capability evidence, not sound.",
+    "Clean restarted17 left0decksplaying,Master-12dB/meter-infinity,channellevels.8/.8,Sync/keylockoff,system-default stereo,CueMix0%,CueVolume10%.",
+    "Default/current launchers still target16, whose bundle and versioned launcher/guide are preserved;16 is no longer the running process.17 is not promoted as ready for four-channel hardware test."
+  ],
+  "screenshots": [
+    "local-evidence/desktop-0.1.17-native/auto-gain-passed.png",
+    "local-evidence/desktop-0.1.17-native/output-default-only.png",
+    "local-evidence/desktop-0.1.17-native/main-stopped.png"
+  ],
+  "limits": [
+    "No human physical action/acoustic/socket validation on17; user away; no timed capture.",
+    "No exact Serato calibration, current physical mapping, truepeak, musical quality, transport-composition or full feature acceptance.",
+    "Output-enumeration cause remains unresolved; do not broaden microphone/camera/security permissions or assume a fix.",
+    "Diagnostic imported files are owned fixtures in volatile session; main profile imports unchanged except normal analysis/preferences."
+  ],
+  "fullParityVerified": false,
+  "readyForFourChannelPhysicalTest": false,
+  "next": "Capture bounded own-main-window native permission decisions without changing permissions in a fresh immutable candidate; compare exact requesting frame/origin/permission rather than repeating refreshes."
+}

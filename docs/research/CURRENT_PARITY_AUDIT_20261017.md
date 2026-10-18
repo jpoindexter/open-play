@@ -1,3 +1,5 @@
+> Plan124,18Oct2026: native17 actual isolated20case Auto Gain/import/worker/deck/sampler/reload/audio passes;54servedassets matchsource. [Review](../prototype/DESKTOP_0.1.17_REVIEW.md). Named output selector remains default-only despite macOS Hercules4ch identity; no physical/four-channel readiness or full-parity promotion. Defaultlaunchers16retained,17open/stoppedMaster-12dB. Next bounded permission trace; full independent Claude audit unlaunched. Historical native/browser/physical claims below retain their original scope.
+
 # Current Serato/Open Play parity audit —17 October 2026
 
 > **Later plan78 update:** browser original + four stems now share one ten-channel keylock processor/map. A focused actual-app cancellation/control recording passes; see [result](../prototype/stem-coherence-browser-results.json) and [scope](../delivery/stem-coherence-section78.md). This is prepared-fixture transport evidence, not new ML/music/native/hardware/reference acceptance. Historical audit rows and quality failures remain.

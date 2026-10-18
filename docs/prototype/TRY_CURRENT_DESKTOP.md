@@ -1,3 +1,5 @@
+> Plan124 current state: default launchers still target0.1.16, which is closed.0.1.17 is open/stopped, Master-12dB. Its actual20case native Auto Gain test passed, but named output enumeration is unresolved; do not start a four-channel test yet. See [desktop17review](DESKTOP_0.1.17_REVIEW.md). The16route/status below is historical, not the current17runtime. Close17before launching16. No timed capture while Jason is away.
+
 # Current desktop test: Open Play Playback Test 0.1.16
 
 Open **Start Open Play Current Test.command** or **Start Open Play Playback Test.command**. The 0.1.16 window is already open and stopped: After Hours (124 BPM), Glass Transit (126 BPM), Sync/keylock off, channel levels 0.8, crossfader centered, Master meter zero.

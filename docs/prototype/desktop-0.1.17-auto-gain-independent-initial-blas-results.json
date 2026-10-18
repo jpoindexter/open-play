@@ -1,0 +1,489 @@
+{
+  "version": "0.1.17",
+  "sourceCommit": "beb4d59b4722ad6f75426f2ff722d3cd71344bb8",
+  "ASARSHA256": "76ed78d895b97816117039f78054d009ead8667569c97a6de5db5691dda3cf74",
+  "originalSHA256": "064fb1062def168ded629c1c8df17492096de5673b7f0c93c440f29bac9b8dc2",
+  "originalBytes": 1685647,
+  "nativeObservation": "Actual native Checks > Measured Auto Gain > Run > Reload > Verify restored > Download via native Save dialog.",
+  "scope": "Packaged production worker/import/controls/actual audio graph; independent channel0 PCM projections and whole stereo recording decode. Physical graph muted. Original generic harness scope retained verbatim. Not acoustic, physical controls, exact Serato calibration, music quality or full parity acceptance.",
+  "windows": [
+    {
+      "case": 0,
+      "name": "A automatic92 on load",
+      "sha256": "21ea6cccaa12e06965d190503f006b04dc77ebcfdd7640c643adeca118bb07ec",
+      "frames": 13230,
+      "allFinite": true,
+      "peak": 0.10060379654169083,
+      "nonzeroSamples": 13230,
+      "expected": [
+        0.10060442766635748,
+        0
+      ],
+      "independentAmplitudes": [
+        0.10060443161820896,
+        3.2546828022237086e-10
+      ],
+      "errors": [
+        3.928108907935932e-08,
+        3.2546828022237086e-10
+      ],
+      "passed": true
+    },
+    {
+      "case": 1,
+      "name": "reference89 lowers target3dB",
+      "sha256": "fa085572899f51e752a8b555016984876c52920a25eab8518fe3219b0b04e3b6",
+      "frames": 13230,
+      "allFinite": true,
+      "peak": 0.07122203707695007,
+      "nonzeroSamples": 13230,
+      "expected": [
+        0.0712224804567767,
+        0
+      ],
+      "independentAmplitudes": [
+        0.07122248229602064,
+        1.9234716346700726e-10
+      ],
+      "errors": [
+        2.582392421481364e-08,
+        1.9234716346700726e-10
+      ],
+      "passed": true
+    },
+    {
+      "case": 2,
+      "name": "reference98 raises target9dB",
+      "sha256": "2e4eaaecdd71cb0d396e663d6e5729b91352d7ff1ae39c2cb22a8e196ad5acfd",
+      "frames": 13230,
+      "allFinite": true,
+      "peak": 0.20073094964027405,
+      "nonzeroSamples": 13230,
+      "expected": [
+        0.20073222324169565,
+        0
+      ],
+      "independentAmplitudes": [
+        0.2007322213119807,
+        8.649931311648343e-10
+      ],
+      "errors": [
+        9.613379019223924e-09,
+        8.649931311648343e-10
+      ],
+      "passed": true
+    },
+    {
+      "case": 3,
+      "name": "Control zero is an auto adjustment",
+      "sha256": "542de3b8fa0b1d462c90abe39da00ec3b7b98f7db0d693ccf257a58d80329b09",
+      "frames": 13230,
+      "allFinite": true,
+      "peak": 0.028317654505372047,
+      "nonzeroSamples": 13230,
+      "expected": [
+        0.02831783137536552,
+        0
+      ],
+      "independentAmplitudes": [
+        0.02831783181639041,
+        6.288904724488865e-13
+      ],
+      "errors": [
+        1.557410526615755e-08,
+        6.288904724488865e-13
+      ],
+      "passed": true
+    },
+    {
+      "case": 4,
+      "name": "Alt restores computed reference98",
+      "sha256": "bc8bba44760fa93bcf3bb3d4763af41ee1fb841bbf512fc33923524947884676",
+      "frames": 13230,
+      "allFinite": true,
+      "peak": 0.20073094964027405,
+      "nonzeroSamples": 13230,
+      "expected": [
+        0.20073222324169565,
+        0
+      ],
+      "independentAmplitudes": [
+        0.20073222131198068,
+        8.649929513619556e-10
+      ],
+      "errors": [
+        9.613379157495574e-09,
+        8.649929513619556e-10
+      ],
+      "passed": true
+    },
+    {
+      "case": 5,
+      "name": "manual auto adjustment to3",
+      "sha256": "3a331508f2c3912c36cebd728dde3f7fe0fafc2357d6dfd86079520ec77ca116",
+      "frames": 13230,
+      "allFinite": true,
+      "peak": 0.03999974951148033,
+      "nonzeroSamples": 13230,
+      "expected": [
+        0.04000000000000001,
+        0
+      ],
+      "independentAmplitudes": [
+        0.04000000147206385,
+        3.613696665630706e-11
+      ],
+      "errors": [
+        3.6801595972024697e-08,
+        3.613696665630706e-11
+      ],
+      "passed": true
+    },
+    {
+      "case": 6,
+      "name": "reference95 preserves relative adjustment",
+      "sha256": "b44aca30b2fc835a0e07984a63dad12948461d7ab031bdeab7579832dd62f96a",
+      "frames": 13230,
+      "allFinite": true,
+      "peak": 0.028317654505372047,
+      "nonzeroSamples": 13230,
+      "expected": [
+        0.02831783137536552,
+        0
+      ],
+      "independentAmplitudes": [
+        0.028317831816390415,
+        6.288410929272714e-13
+      ],
+      "errors": [
+        1.5574105511193755e-08,
+        6.288410929272714e-13
+      ],
+      "passed": true
+    },
+    {
+      "case": 7,
+      "name": "disable uses manual memory0",
+      "sha256": "a5582c727fae08fa27be71c47c41dfd41d0c4046e55ad5043e8c8d64c961bd97",
+      "frames": 13230,
+      "allFinite": true,
+      "peak": 0.028317654505372047,
+      "nonzeroSamples": 13230,
+      "expected": [
+        0.02831783137536552,
+        0
+      ],
+      "independentAmplitudes": [
+        0.028317831816390415,
+        6.288424813471824e-13
+      ],
+      "errors": [
+        1.5574105511193755e-08,
+        6.288424813471824e-13
+      ],
+      "passed": true
+    },
+    {
+      "case": 8,
+      "name": "manual mode remembers6",
+      "sha256": "e05306d4ba0b930327bae5706cca7ba1837102732001f6826db9eaea56b1223b",
+      "frames": 13230,
+      "allFinite": true,
+      "peak": 0.05650114268064499,
+      "nonzeroSamples": 13230,
+      "expected": [
+        0.05650150178491018,
+        0
+      ],
+      "independentAmplitudes": [
+        0.0565015009315338,
+        7.04223792086416e-11
+      ],
+      "errors": [
+        1.5103605328862273e-08,
+        7.04223792086416e-11
+      ],
+      "passed": true
+    },
+    {
+      "case": 9,
+      "name": "enable restores separate auto adjustment0",
+      "sha256": "69c348cbd7620cb5313540cadc09943c33e4c107852a6879e9c2c3c1726f5374",
+      "frames": 13230,
+      "allFinite": true,
+      "peak": 0.028317654505372047,
+      "nonzeroSamples": 13230,
+      "expected": [
+        0.02831783137536552,
+        0
+      ],
+      "independentAmplitudes": [
+        0.02831783181639041,
+        6.289038063679841e-13
+      ],
+      "errors": [
+        1.557410526615755e-08,
+        6.289038063679841e-13
+      ],
+      "passed": true
+    },
+    {
+      "case": 10,
+      "name": "Alt reset after mode switch",
+      "sha256": "d6aa4be0a71cfb8e77d4f2b3b190791b11968cd7bbdccea277589692dcced0b4",
+      "frames": 13230,
+      "allFinite": true,
+      "peak": 0.14210663735866547,
+      "nonzeroSamples": 13230,
+      "expected": [
+        0.1421075312340141,
+        0
+      ],
+      "independentAmplitudes": [
+        0.1421075387697517,
+        1.4603595760931686e-10
+      ],
+      "errors": [
+        5.302841835200571e-08,
+        1.4603595760931686e-10
+      ],
+      "passed": true
+    },
+    {
+      "case": 11,
+      "name": "different frequency and level B normalizes",
+      "sha256": "a60d32d81cee6a183b5ab96545757f50ce5ed044e024b82fcfe8c12528cca62e",
+      "frames": 13230,
+      "allFinite": true,
+      "peak": 0.0967080146074295,
+      "nonzeroSamples": 13230,
+      "expected": [
+        0,
+        0.0967086264061791
+      ],
+      "independentAmplitudes": [
+        6.740510974826118e-10,
+        0.096708628551048
+      ],
+      "errors": [
+        6.740510974826118e-10,
+        2.2178672029470345e-08
+      ],
+      "passed": true
+    },
+    {
+      "case": 12,
+      "name": "silent file no fabricated loudness or gain",
+      "sha256": "9d55c9c2f49808c72a9d28e4f661bae87b1ed419741fa38e5ffeff9648f33d7d",
+      "frames": 13230,
+      "allFinite": true,
+      "peak": 0.0,
+      "nonzeroSamples": 0,
+      "expected": [
+        0,
+        0
+      ],
+      "independentAmplitudes": [
+        0.0,
+        0.0
+      ],
+      "errors": [
+        0.0,
+        0.0
+      ],
+      "passed": true
+    },
+    {
+      "case": 13,
+      "name": "A load with saved manual6 still uses Auto Gain",
+      "sha256": "aa13e1ec4c83beaa92efb052552eb4be3deb0de92b9fd2dcfe8c01b23eb47b60",
+      "frames": 13230,
+      "allFinite": true,
+      "peak": 0.10060379654169083,
+      "nonzeroSamples": 13230,
+      "expected": [
+        0.10060442766635748,
+        0
+      ],
+      "independentAmplitudes": [
+        0.10060443161820896,
+        3.2546828019502226e-10
+      ],
+      "errors": [
+        3.928108907935932e-08,
+        3.2546828019502226e-10
+      ],
+      "passed": true
+    },
+    {
+      "case": 14,
+      "name": "sampler trigger uses computed gain",
+      "sha256": "e60312e4a8c6709a9ef087bf19a6718c07ad17872d596b16589f4d6b7fa08fca",
+      "frames": 13230,
+      "allFinite": true,
+      "peak": 0.034232016652822495,
+      "nonzeroSamples": 13230,
+      "expected": [
+        0,
+        0.03423223218891751
+      ],
+      "independentAmplitudes": [
+        1.1979443230825036e-10,
+        0.03423223102397526
+      ],
+      "errors": [
+        1.1979443230825036e-10,
+        3.403056629217416e-08
+      ],
+      "passed": true
+    },
+    {
+      "case": 15,
+      "name": "sampler manual edit adjusts auto value",
+      "sha256": "3fe94b950f2db2910e8981dbf43548ec23ca87c077cf58d13205e0b8ebe7b6ea",
+      "frames": 13230,
+      "allFinite": true,
+      "peak": 0.056635309010744095,
+      "nonzeroSamples": 13230,
+      "expected": [
+        0,
+        0.05663566275073104
+      ],
+      "independentAmplitudes": [
+        5.114543131243686e-11,
+        0.05663566363277927
+      ],
+      "errors": [
+        5.114543131243686e-11,
+        1.557407794462081e-08
+      ],
+      "passed": true
+    },
+    {
+      "case": 16,
+      "name": "deck Alt reset updates same-file sample",
+      "sha256": "f3c592f46312e6bbbd572c3e08e3e24ae220a6d46c24c507e15e4f6a888128db",
+      "frames": 13230,
+      "allFinite": true,
+      "peak": 0.034232016652822495,
+      "nonzeroSamples": 13230,
+      "expected": [
+        0,
+        0.03423223218891751
+      ],
+      "independentAmplitudes": [
+        1.2015996324220307e-10,
+        0.034232231023966816
+      ],
+      "errors": [
+        1.2015996324220307e-10,
+        3.4030812978800796e-08
+      ],
+      "passed": true
+    },
+    {
+      "case": 17,
+      "name": "sampler stop silence",
+      "sha256": "9d55c9c2f49808c72a9d28e4f661bae87b1ed419741fa38e5ffeff9648f33d7d",
+      "frames": 13230,
+      "allFinite": true,
+      "peak": 0.0,
+      "nonzeroSamples": 0,
+      "expected": [
+        0,
+        0
+      ],
+      "independentAmplitudes": [
+        0.0,
+        0.0
+      ],
+      "errors": [
+        0.0,
+        0.0
+      ],
+      "passed": true
+    },
+    {
+      "case": 18,
+      "name": "mono stereo-playback compensation matches A",
+      "sha256": "21ea6cccaa12e06965d190503f006b04dc77ebcfdd7640c643adeca118bb07ec",
+      "frames": 13230,
+      "allFinite": true,
+      "peak": 0.10060379654169083,
+      "nonzeroSamples": 13230,
+      "expected": [
+        0.10060442766635748,
+        0
+      ],
+      "independentAmplitudes": [
+        0.10060443161820896,
+        3.2546828022237086e-10
+      ],
+      "errors": [
+        3.928108907935932e-08,
+        3.2546828022237086e-10
+      ],
+      "passed": true
+    },
+    {
+      "case": 19,
+      "name": "restored File actually plays with Auto Gain",
+      "sha256": "ba68fa2e190903e6322e58b68fee157848b2fd9d0e6d6b73a5bd249617c11d0d",
+      "frames": 13230,
+      "allFinite": true,
+      "peak": 0.10060379654169083,
+      "nonzeroSamples": 13230,
+      "expected": [
+        0.10060442766635748,
+        0
+      ],
+      "independentAmplitudes": [
+        0.100604431618209,
+        3.254686122421113e-10
+      ],
+      "errors": [
+        3.928108949319164e-08,
+        3.254686122421113e-10
+      ],
+      "passed": true
+    }
+  ],
+  "recordings": [
+    {
+      "bytes": 177383,
+      "sha256": "87534f56c9a1ca02beed4cb691ab9a22afe85130087811126e55257aaae97d7e",
+      "format": "audio/webm;codecs=opus",
+      "duration": 11.579977324263039,
+      "frames": 510677,
+      "sampleRate": 44100,
+      "channels": 2,
+      "decodedFrames": 555840,
+      "decodedSampleRate": 48000,
+      "decodedSHA256": "7e030de195b325fba83a9a6d91829833cea2a2757ca09b044f34f4da567e75d0",
+      "allFinite": true,
+      "peaks": [
+        0.2613924741744995,
+        0.2611277103424072
+      ]
+    },
+    {
+      "bytes": 9837,
+      "sha256": "fd7be9aa28ffe8f89aaf2272ae39428fad195f797a1332ae3f7291968b7194b5",
+      "format": "audio/webm;codecs=opus",
+      "duration": 0.5999773242630385,
+      "frames": 26459,
+      "sampleRate": 44100,
+      "channels": 2,
+      "decodedFrames": 28800,
+      "decodedSampleRate": 48000,
+      "decodedSHA256": "dfc38f770749b8b01e8213cf3c9d7e179e8df671b072343609cba86dd9226e53",
+      "allFinite": true,
+      "peaks": [
+        0.10190484672784805,
+        0.10190484672784805
+      ]
+    }
+  ],
+  "fullParityVerified": false,
+  "passed": true
+}
