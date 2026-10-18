@@ -2,6 +2,7 @@ import {createDeckTapTempo} from './deck-tap-tempo.js';
 import {createInstantDouble} from './instant-double.js';
 import {createManualLoops} from './manual-loops.js';
 import {createLoopPads} from './loop-pads.js';
+import {createJogBend} from './jog-bend.js';
 import { synchronizeSimple } from './sync.js';
 import { createSmartSync, hasBeatgrid, beatPosition } from './smart-sync.js';
 import {createBeatgrid} from './beatgrid.js';
@@ -1210,6 +1211,7 @@ function reset() {
 }
 const deckTapTempo=createDeckTapTempo({engine,persist,render:()=>{renderDecks();renderTracks();},notify});
 const instantDouble=createInstantDouble({state,engine,load,render:renderDecks,notify});
+const jogBend=createJogBend({engine,onError:error=>notify(error.message)});
 const api = {
   state,
   engine,
@@ -1234,6 +1236,7 @@ const api = {
   play,
   deckAction,
   instantDouble,
+  jogBend,
   faderStart,
   resetFaderStartInput,
   tapTempo:deckTapTempo.tap,
@@ -1676,9 +1679,18 @@ document.addEventListener("keydown", async (e) => {
     !e.getModifierState("CapsLock")
   )
     return;
-  if (k === "w" || k === "s") {
+  if (!mod&&!e.altKey&&["w","s","q","a","f5","f10"].includes(k)) {
     e.preventDefault();
-    await play(state.decks[k === "w" ? 0 : 1]);
+    if(e.repeat)return;
+    const index=["w","q","f5"].includes(k)?0:1;
+    try{await deckAction(k==='w'||k==='s'?'play':k==='q'||k==='a'?'reverse':'keylock',index,{},e);}
+    catch(error){notify(error.message);}
+    return;
+  }
+  if(!mod&&!e.altKey&&['t','y','g','h'].includes(k)){
+    e.preventDefault();
+    if(!e.repeat)void jogBend.hold(state.decks[k==='t'||k==='y'?0:1],`keyboard:${e.code||k}`,k==='t'||k==='g'?-1:1).catch(error=>notify(error.message));
+    return;
   }
   if (/^[0-9]$/.test(k)) {
     const n = (Number(k) + 9) % 10,
@@ -1701,6 +1713,7 @@ document.addEventListener("keydown", async (e) => {
   }
 });
 document.addEventListener("keyup", (e) => {
+  void jogBend.releaseHold(`keyboard:${e.code||e.key.toLowerCase()}`).catch(error=>notify(error.message));
   loopOperation(loopPads.release("button:"+e.key));
   void pitchPlay.release("button:" + e.key);
   void cueHolds.release("key:" + e.key.toLowerCase());
@@ -1709,6 +1722,8 @@ document.addEventListener("keyup", (e) => {
   const n = "zxcvbnm,".indexOf(e.key.toLowerCase());
   if (e.key.length === 1 && n >= 0) panels.releaseSampleHolds(n, "keyboard");
 });
+window.addEventListener('blur',()=>void jogBend.releaseHolds().catch(error=>notify(error.message)));
+document.addEventListener('visibilitychange',()=>{if(document.hidden)void jogBend.releaseHolds().catch(error=>notify(error.message));});
 engine.onSampleEnd = (key) => {
   const slot = state.samples[Math.floor(key / 8)]?.[key % 8];
   if (slot) slot.playing = false;

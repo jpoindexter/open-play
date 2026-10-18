@@ -1,0 +1,18 @@
+import assert from 'node:assert/strict';
+import {createJogBend} from '../prototype/jog-bend.js';
+const flush=()=>new Promise(resolve=>setImmediate(resolve));
+const d={index:0,track:{id:'owned'},playing:true,rate:1.2},voices=new Map([[0,{}]]),calls=[],timers=new Map();let id=0;
+const actor=createJogBend({engine:{voices,setJogBend:async(deck,f,{voice})=>{assert.equal(voices.get(0),voice);calls.push(f);return true;}},setTimer:fn=>{timers.set(++id,fn);return id;},clearTimer:n=>timers.delete(n)});
+await actor.hold(d,'KeyY',1);assert.equal(calls.at(-1),1.04);
+await actor.hold(d,'KeyY',1);assert.equal(calls.at(-1),1.04,'repeat must not accumulate');
+await actor.hold(d,'KeyT',-1);assert.equal(calls.at(-1),1);
+await actor.releaseHold('KeyT');assert.equal(calls.at(-1),1.04);
+await actor.tick(d,10,'hercules');assert.equal(calls.at(-1),1.08);
+[...timers.values()].at(-1)();await flush();assert.equal(calls.at(-1),1.04,'MIDI timeout must retain held keyboard bend');
+await actor.tick(d,-10,'hercules');await actor.releaseHolds();assert.equal(calls.at(-1),.92,'keyboard blur must retain active MIDI bend');
+await actor.resetInput('hercules');assert.equal(calls.at(-1),1);assert.equal(actor.diagnostics().length,0);
+assert.equal(d.rate,1.2,'nominal deck tempo must stay unchanged');
+let acknowledge;const pending=[],old=voices.get(0),late=createJogBend({engine:{voices,setJogBend:async(deck,f,{voice})=>{pending.push([f,voice]);if(pending.length===1)await new Promise(resolve=>acknowledge=resolve);return true;}}});
+const press=late.hold(d,'KeyY',1);await flush();const release=late.releaseHold('KeyY');acknowledge();await Promise.all([press,release]);assert.deepEqual(pending.map(x=>x[0]),[1.04,1]);
+await late.hold(d,'KeyY',1);voices.set(0,{});const count=pending.length;await late.releaseHold('KeyY');assert.equal(pending.length,count,'late release must not alter replacement voice');assert.equal(late.diagnostics().length,0);
+console.log(JSON.stringify({passed:true,scope:'Shared keyboard/MIDI bend actor with controlled engine/timers; real audio checked separately',checks:['held/repeat/opposing keys','MIDI timeout retains keyboard; keyboard release retains MIDI','early release is serialized behind pending bend','replacement voice survives late release','nominal tempo unchanged']}));

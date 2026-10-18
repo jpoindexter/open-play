@@ -1,0 +1,22 @@
+{
+  "executed": true,
+  "commands": [
+    "node scripts/test_jog_bend_policy.mjs",
+    "node scripts/test_keyboard_bend_policy.mjs"
+  ],
+  "scope": "Controlled actor/engine/timer contracts; not native or physical acceptance. Both commands executed once after the actor change; no broad matrix rerun.",
+  "source_sha256": {
+    "prototype/jog-bend.js": "d4afec10d14ee78ddc93f03e0fe88847ed3584e20a8c05e3a2a45f65cdbdc858",
+    "scripts/test_jog_bend_policy.mjs": "f813871e28f3ce23e00f913235552ea8bfce04810996fdf3e3bd727513beb728",
+    "scripts/test_keyboard_bend_policy.mjs": "f83c51ae4bd1c00a35f715951bdc6cca439d79cfcf7a4e494435222f006a250a"
+  },
+  "existing_midi_policy_passed": true,
+  "keyboard_policy_passed": true,
+  "checks": [
+    "Signed bounded MIDI bend and nominal-rate preservation",
+    "Input ownership/idle/disconnect/current-voice recovery",
+    "Held/repeat/opposing keyboard input",
+    "MIDI timeout retains keyboard; keyboard release retains MIDI",
+    "Early release serialized behind pending bend; replacement voice survives late release"
+  ]
+}

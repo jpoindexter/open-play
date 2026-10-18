@@ -1,0 +1,216 @@
+{
+  "startedAt": "2026-10-18T01:59:18.735Z",
+  "completed": true,
+  "criteria": {
+    "frequencyErrorHz": 0.5,
+    "minimumRMS": 0.005,
+    "pausedMaximumRMS": 0.0001,
+    "windowOffsetSeconds": 0.1,
+    "windowLengthSeconds": 0.25
+  },
+  "scope": "Actual app keyboard events/shared MIDI editor and whole stereo master. Owned tones, no native/physical/warped/keylocked/quality/full-shortcut acceptance.",
+  "events": [
+    {
+      "name": "baseline",
+      "time": 0
+    },
+    {
+      "name": "held",
+      "time": 0.4643990929705215
+    },
+    {
+      "name": "opposite",
+      "time": 1.3757823129251698
+    },
+    {
+      "name": "midi-idle-held",
+      "time": 2.020136054421769
+    },
+    {
+      "name": "released",
+      "time": 2.4903401360544217
+    },
+    {
+      "name": "blur-return",
+      "time": 2.9663492063492063
+    },
+    {
+      "name": "paused",
+      "time": 3.5584580498866214
+    }
+  ],
+  "checks": [
+    "Shift guard and repeat-safe two-deck Play",
+    "Held dual-deck bends survive 900ms without repeat; opposite keys cancel",
+    "Actual MIDI editor shares bend ownership and idle preserves keyboard",
+    "Keyup in an input and window blur return nominal rates",
+    "Reverse Q/A moves both cursors backwards and ignores repeat",
+    "F5/F10 toggle keylock once; Pause ignores repeat",
+    "Seven declared whole-master pitch/silence windows"
+  ],
+  "errors": [],
+  "sourceBefore": {
+    "app.js": "6b79720f1d68da02876088181e24e5e8d540da0c01ae7cf395e70e500f814469",
+    "engine.js": "f7038cb2085bfa78a42a7240c38e4bc04ddd6ef9e22aef368aea9f128c4545cf",
+    "jog-bend.js": "d4afec10d14ee78ddc93f03e0fe88847ed3584e20a8c05e3a2a45f65cdbdc858",
+    "deck-midi.js": "a29e8363ea07f3d72dbfba0b837ec3baeb9895bbae984d29f43665f158037713",
+    "panels.js": "3106430667e9e83e95bf310a1c6ea6d58fb1e439dfdecca4cb1d8bd733b40dcc",
+    "midi.js": "0cabb6dbe98e9eb3f7bc7f7eb44615fa315a0738260e5f3568a34d0aa75ec1ad",
+    "keyboard-playback-harness.js": "a6c886bf244898257edfd88f4ab080c0791328289ba57547db0e1485052f2d5b"
+  },
+  "heldAfter900ms": [
+    {
+      "nominal": 1,
+      "audible": 1.0399999618530273
+    },
+    {
+      "nominal": 1,
+      "audible": 0.9599999785423279
+    }
+  ],
+  "recording": {
+    "bytes": 65091,
+    "format": "audio/webm;codecs=opus",
+    "sha256": "56a9e0db5ebf9255a85046d1fce0a8762b558b19e0a737202c7637f20cfdc115",
+    "original_local_path": "local-evidence/keyboard-playback/final/master.webm"
+  },
+  "decoded": {
+    "duration": 4.0199773242630386,
+    "sampleRate": 44100,
+    "frames": 177281,
+    "channels": 2
+  },
+  "audio": [
+    {
+      "name": "baseline",
+      "channels": [
+        {
+          "from": 0.1,
+          "to": 0.35,
+          "rms": 0.03738559101326593,
+          "hz": 329.99925827718164
+        },
+        {
+          "from": 0.1,
+          "to": 0.35,
+          "rms": 0.037338963926837006,
+          "hz": 549.9995700565344
+        }
+      ]
+    },
+    {
+      "name": "held",
+      "channels": [
+        {
+          "from": 0.5643990929705215,
+          "to": 0.8143990929705215,
+          "rms": 0.037326679102390424,
+          "hz": 343.2017180030641
+        },
+        {
+          "from": 0.5643990929705215,
+          "to": 0.8143990929705215,
+          "rms": 0.03731896906417305,
+          "hz": 528.0018752198318
+        }
+      ]
+    },
+    {
+      "name": "opposite",
+      "channels": [
+        {
+          "from": 1.47578231292517,
+          "to": 1.72578231292517,
+          "rms": 0.037287184822561666,
+          "hz": 329.99968239516613
+        },
+        {
+          "from": 1.47578231292517,
+          "to": 1.72578231292517,
+          "rms": 0.03733324693524291,
+          "hz": 527.9958108019308
+        }
+      ]
+    },
+    {
+      "name": "midi-idle-held",
+      "channels": [
+        {
+          "from": 2.120136054421769,
+          "to": 2.370136054421769,
+          "rms": 0.03731719126024023,
+          "hz": 343.20034724010856
+        },
+        {
+          "from": 2.120136054421769,
+          "to": 2.370136054421769,
+          "rms": 0.037312606701696116,
+          "hz": 528.0007544014875
+        }
+      ]
+    },
+    {
+      "name": "released",
+      "channels": [
+        {
+          "from": 2.590340136054422,
+          "to": 2.840340136054422,
+          "rms": 0.03731882299731364,
+          "hz": 330.00175357240323
+        },
+        {
+          "from": 2.590340136054422,
+          "to": 2.840340136054422,
+          "rms": 0.03731838123623853,
+          "hz": 550.0149015857744
+        }
+      ]
+    },
+    {
+      "name": "blur-return",
+      "channels": [
+        {
+          "from": 3.0663492063492064,
+          "to": 3.3163492063492064,
+          "rms": 0.03728797600928049,
+          "hz": 330.0030599616732
+        },
+        {
+          "from": 3.0663492063492064,
+          "to": 3.3163492063492064,
+          "rms": 0.03731022003122264,
+          "hz": 549.9965731212512
+        }
+      ]
+    },
+    {
+      "name": "paused",
+      "channels": [
+        {
+          "from": 3.6584580498866215,
+          "to": 3.9084580498866215,
+          "rms": 2.4384659170545525e-05,
+          "hz": null
+        },
+        {
+          "from": 3.6584580498866215,
+          "to": 3.9084580498866215,
+          "rms": 3.087833715791772e-06,
+          "hz": null
+        }
+      ]
+    }
+  ],
+  "sourceAfter": {
+    "app.js": "6b79720f1d68da02876088181e24e5e8d540da0c01ae7cf395e70e500f814469",
+    "engine.js": "f7038cb2085bfa78a42a7240c38e4bc04ddd6ef9e22aef368aea9f128c4545cf",
+    "jog-bend.js": "d4afec10d14ee78ddc93f03e0fe88847ed3584e20a8c05e3a2a45f65cdbdc858",
+    "deck-midi.js": "a29e8363ea07f3d72dbfba0b837ec3baeb9895bbae984d29f43665f158037713",
+    "panels.js": "3106430667e9e83e95bf310a1c6ea6d58fb1e439dfdecca4cb1d8bd733b40dcc",
+    "midi.js": "0cabb6dbe98e9eb3f7bc7f7eb44615fa315a0738260e5f3568a34d0aa75ec1ad",
+    "keyboard-playback-harness.js": "a6c886bf244898257edfd88f4ab080c0791328289ba57547db0e1485052f2d5b"
+  },
+  "sourceStable": true,
+  "finishedAt": "2026-10-18T01:59:23.468Z",
+  "all_declared_served_hashes_match_disk": true
+}

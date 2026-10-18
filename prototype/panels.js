@@ -1603,7 +1603,7 @@ export function createPanels(a) {
     slot.name=list[next];slot.params={};slot.on=false;applyFX();
     if(s.panel==='fx')refresh();notify(`FX unit ${bank+1}: ${slot.name}.`);
   }
-  const deckMIDI=createDeckMIDIRouter({state:s,engine,actions:{...a,midiSample,scratchAction,libraryControl,selectFX},applyFX,onStatus:notify,onChange:change=>{
+  const deckMIDI=createDeckMIDIRouter({state:s,engine,jogBend:a.jogBend,actions:{...a,midiSample,scratchAction,libraryControl,selectFX},applyFX,onStatus:notify,onChange:change=>{
     if(change.field && change.field!=='tempo'){
       const slider=$(`[data-mix="${change.deck}:${change.field}"]`);if(slider)slider.value=change.value;
     }

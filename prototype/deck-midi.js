@@ -14,9 +14,8 @@ export const deckMIDITargets=Array.from({length:4},(_,i)=>[...continuous,...comm
 export const samplerMIDITargets=Array.from({length:8},(_,n)=>[`Sampler ${n+1}`,`Sampler ${n+1} alt`]).flat();
 export const libraryMIDITargets=['Library browse','Library fast browse','Library focus','Prepare add','Prepare open'];
 export const fxMIDITargets=[1,2].flatMap(n=>['depth','beat','enable','select','next'].map(x=>`FX unit ${n} ${x}`));
-export function createDeckMIDIRouter({state,engine,actions,applyFX=()=>{},onChange=()=>{},onStatus=()=>{}}){
+export function createDeckMIDIRouter({state,engine,actions,applyFX=()=>{},onChange=()=>{},onStatus=()=>{},jogBend=createJogBend({engine,onError:error=>onStatus(error.message)})}){
  const pairs=new Map(),buttons=new Map(),pickup=new Map(),rates=new Map(),nudges=new Map(),loads=new Map(),ignoredTempo=new Map();
- const jogBend=createJogBend({engine,onError:error=>onStatus(error.message)});
  const jogTouch=createMIDIJogTouch({engine,state,beforeBegin:deck=>jogBend.resetDeck(deck.index),onError:error=>onStatus(error.message)});
  const deckFor=target=>/^Deck ([1-4]) (.+)$/.exec(target);
  const repaintMix=(d,field)=>onChange({deck:d.index,field,value:d[field]});

@@ -1,0 +1,424 @@
+{
+  "scope": "Retained test-authoring failures; no production audio tolerance or code changed between these workflow attempts. First pre-report exception is separately retained under local-evidence/keyboard-playback/initial-harness/.",
+  "attempts": [
+    {
+      "retained_directory": "local-evidence/keyboard-playback/initial-workflow",
+      "result": {
+        "startedAt": "2026-10-18T01:57:13.280Z",
+        "completed": false,
+        "criteria": {
+          "frequencyErrorHz": 0.5,
+          "minimumRMS": 0.005,
+          "pausedMaximumRMS": 0.0001,
+          "windowOffsetSeconds": 0.1,
+          "windowLengthSeconds": 0.25
+        },
+        "scope": "Actual app keyboard events/shared MIDI editor and whole stereo master. Owned tones, no native/physical/warped/keylocked/quality/full-shortcut acceptance.",
+        "events": [
+          {
+            "name": "baseline",
+            "time": 0
+          },
+          {
+            "name": "held",
+            "time": 0.4643990929705215
+          }
+        ],
+        "checks": [
+          "Shift guard and repeat-safe two-deck Play"
+        ],
+        "errors": [
+          {
+            "message": "Held bend expired without repeats",
+            "stack": "Error: Held bend expired without repeats\n    at assert (http://127.0.0.1:18856/prototype/keyboard-playback-harness.js:1:108)\n    at run (http://127.0.0.1:18856/prototype/keyboard-playback-harness.js:27:287)"
+          },
+          {
+            "message": "Missing declared audio stages",
+            "stack": "Error: Missing declared audio stages\n    at assert (http://127.0.0.1:18856/prototype/keyboard-playback-harness.js:1:108)\n    at run (http://127.0.0.1:18856/prototype/keyboard-playback-harness.js:42:194)"
+          }
+        ],
+        "sourceBefore": {
+          "app.js": "6b79720f1d68da02876088181e24e5e8d540da0c01ae7cf395e70e500f814469",
+          "engine.js": "f7038cb2085bfa78a42a7240c38e4bc04ddd6ef9e22aef368aea9f128c4545cf",
+          "jog-bend.js": "d4afec10d14ee78ddc93f03e0fe88847ed3584e20a8c05e3a2a45f65cdbdc858",
+          "deck-midi.js": "a29e8363ea07f3d72dbfba0b837ec3baeb9895bbae984d29f43665f158037713",
+          "panels.js": "3106430667e9e83e95bf310a1c6ea6d58fb1e439dfdecca4cb1d8bd733b40dcc",
+          "midi.js": "0cabb6dbe98e9eb3f7bc7f7eb44615fa315a0738260e5f3568a34d0aa75ec1ad",
+          "keyboard-playback-harness.js": "b3b956418ab186289b527b488ba103195adc9972213eba1c659cb742241cc67f"
+        },
+        "recording": {
+          "bytes": 21477,
+          "format": "audio/webm;codecs=opus",
+          "sha256": "8bb7055891c70b022884bce7a6a4efff7b973a9f02f104ed39a5df1cbc355d40"
+        },
+        "decoded": {
+          "duration": 1.3199773242630386,
+          "sampleRate": 44100,
+          "frames": 58211,
+          "channels": 2
+        },
+        "audio": [
+          {
+            "name": "baseline",
+            "channels": [
+              {
+                "from": 0.1,
+                "to": 0.35,
+                "rms": 0.037360394054019835,
+                "hz": 330.00324817402765
+              },
+              {
+                "from": 0.1,
+                "to": 0.35,
+                "rms": 0.03729967097864742,
+                "hz": 550.0090495475605
+              }
+            ]
+          },
+          {
+            "name": "held",
+            "channels": [
+              {
+                "from": 0.5643990929705215,
+                "to": 0.8143990929705215,
+                "rms": 0.03732142415815543,
+                "hz": 343.2008944473679
+              },
+              {
+                "from": 0.5643990929705215,
+                "to": 0.8143990929705215,
+                "rms": 0.03737043294648867,
+                "hz": 528.0059683083086
+              }
+            ]
+          }
+        ],
+        "sourceAfter": {
+          "app.js": "6b79720f1d68da02876088181e24e5e8d540da0c01ae7cf395e70e500f814469",
+          "engine.js": "f7038cb2085bfa78a42a7240c38e4bc04ddd6ef9e22aef368aea9f128c4545cf",
+          "jog-bend.js": "d4afec10d14ee78ddc93f03e0fe88847ed3584e20a8c05e3a2a45f65cdbdc858",
+          "deck-midi.js": "a29e8363ea07f3d72dbfba0b837ec3baeb9895bbae984d29f43665f158037713",
+          "panels.js": "3106430667e9e83e95bf310a1c6ea6d58fb1e439dfdecca4cb1d8bd733b40dcc",
+          "midi.js": "0cabb6dbe98e9eb3f7bc7f7eb44615fa315a0738260e5f3568a34d0aa75ec1ad",
+          "keyboard-playback-harness.js": "b3b956418ab186289b527b488ba103195adc9972213eba1c659cb742241cc67f"
+        },
+        "sourceStable": true,
+        "finishedAt": "2026-10-18T01:57:14.824Z"
+      }
+    },
+    {
+      "retained_directory": "local-evidence/keyboard-playback/overlap-harness",
+      "result": {
+        "startedAt": "2026-10-18T01:57:49.634Z",
+        "completed": false,
+        "criteria": {
+          "frequencyErrorHz": 0.5,
+          "minimumRMS": 0.005,
+          "pausedMaximumRMS": 0.0001,
+          "windowOffsetSeconds": 0.1,
+          "windowLengthSeconds": 0.25
+        },
+        "scope": "Actual app keyboard events/shared MIDI editor and whole stereo master. Owned tones, no native/physical/warped/keylocked/quality/full-shortcut acceptance.",
+        "events": [
+          {
+            "name": "baseline",
+            "time": 0
+          },
+          {
+            "name": "held",
+            "time": 0.4643990929705214
+          },
+          {
+            "name": "opposite",
+            "time": 1.3757823129251698
+          }
+        ],
+        "checks": [
+          "Shift guard and repeat-safe two-deck Play"
+        ],
+        "errors": [
+          {
+            "message": "Shared MIDI and keyboard bend timed out",
+            "stack": "Error: Shared MIDI and keyboard bend timed out\n    at assert (http://127.0.0.1:18856/prototype/keyboard-playback-harness.js:1:108)\n    at until (http://127.0.0.1:18856/prototype/keyboard-playback-harness.js:5:79)\n    at async run (http://127.0.0.1:18856/prototype/keyboard-playback-harness.js:30:309)"
+          },
+          {
+            "message": "Missing declared audio stages",
+            "stack": "Error: Missing declared audio stages\n    at assert (http://127.0.0.1:18856/prototype/keyboard-playback-harness.js:1:108)\n    at run (http://127.0.0.1:18856/prototype/keyboard-playback-harness.js:43:194)"
+          }
+        ],
+        "sourceBefore": {
+          "app.js": "6b79720f1d68da02876088181e24e5e8d540da0c01ae7cf395e70e500f814469",
+          "engine.js": "f7038cb2085bfa78a42a7240c38e4bc04ddd6ef9e22aef368aea9f128c4545cf",
+          "jog-bend.js": "d4afec10d14ee78ddc93f03e0fe88847ed3584e20a8c05e3a2a45f65cdbdc858",
+          "deck-midi.js": "a29e8363ea07f3d72dbfba0b837ec3baeb9895bbae984d29f43665f158037713",
+          "panels.js": "3106430667e9e83e95bf310a1c6ea6d58fb1e439dfdecca4cb1d8bd733b40dcc",
+          "midi.js": "0cabb6dbe98e9eb3f7bc7f7eb44615fa315a0738260e5f3568a34d0aa75ec1ad",
+          "keyboard-playback-harness.js": "3dd93970c3d10396b71b2b52e4b90b4b381211edf735918fc91637383f6d0442"
+        },
+        "heldAfter900ms": [
+          {
+            "nominal": 1,
+            "audible": 1.0399999618530273
+          },
+          {
+            "nominal": 1,
+            "audible": 0.9599999785423279
+          }
+        ],
+        "recording": {
+          "bytes": 224043,
+          "format": "audio/webm;codecs=opus",
+          "sha256": "ca80ae74a651b62ff30e74a9439ef0b3403ccd233a6eaa2fcd43dd240add39f8"
+        },
+        "decoded": {
+          "duration": 13.86,
+          "sampleRate": 44100,
+          "frames": 611226,
+          "channels": 2
+        },
+        "audio": [
+          {
+            "name": "baseline",
+            "channels": [
+              {
+                "from": 0.1,
+                "to": 0.35,
+                "rms": 0.03738559101326593,
+                "hz": 329.99925827718164
+              },
+              {
+                "from": 0.1,
+                "to": 0.35,
+                "rms": 0.037338963926837006,
+                "hz": 549.9995700565344
+              }
+            ]
+          },
+          {
+            "name": "held",
+            "channels": [
+              {
+                "from": 0.5643990929705214,
+                "to": 0.8143990929705214,
+                "rms": 0.03736374372772187,
+                "hz": 343.2004034063467
+              },
+              {
+                "from": 0.5643990929705214,
+                "to": 0.8143990929705214,
+                "rms": 0.0373553986228256,
+                "hz": 527.9949857083298
+              }
+            ]
+          },
+          {
+            "name": "opposite",
+            "channels": [
+              {
+                "from": 1.47578231292517,
+                "to": 1.72578231292517,
+                "rms": 0.03736638437213204,
+                "hz": 329.9985198721139
+              },
+              {
+                "from": 1.47578231292517,
+                "to": 1.72578231292517,
+                "rms": 0.03732030872902981,
+                "hz": 527.9975316401077
+              }
+            ]
+          }
+        ],
+        "sourceAfter": {
+          "app.js": "6b79720f1d68da02876088181e24e5e8d540da0c01ae7cf395e70e500f814469",
+          "engine.js": "f7038cb2085bfa78a42a7240c38e4bc04ddd6ef9e22aef368aea9f128c4545cf",
+          "jog-bend.js": "d4afec10d14ee78ddc93f03e0fe88847ed3584e20a8c05e3a2a45f65cdbdc858",
+          "deck-midi.js": "a29e8363ea07f3d72dbfba0b837ec3baeb9895bbae984d29f43665f158037713",
+          "panels.js": "3106430667e9e83e95bf310a1c6ea6d58fb1e439dfdecca4cb1d8bd733b40dcc",
+          "midi.js": "0cabb6dbe98e9eb3f7bc7f7eb44615fa315a0738260e5f3568a34d0aa75ec1ad",
+          "keyboard-playback-harness.js": "3dd93970c3d10396b71b2b52e4b90b4b381211edf735918fc91637383f6d0442"
+        },
+        "sourceStable": true,
+        "finishedAt": "2026-10-18T01:58:04.228Z"
+      }
+    },
+    {
+      "retained_directory": "local-evidence/keyboard-playback/blur-metadata",
+      "result": {
+        "startedAt": "2026-10-18T01:58:37.969Z",
+        "completed": false,
+        "criteria": {
+          "frequencyErrorHz": 0.5,
+          "minimumRMS": 0.005,
+          "pausedMaximumRMS": 0.0001,
+          "windowOffsetSeconds": 0.1,
+          "windowLengthSeconds": 0.25
+        },
+        "scope": "Actual app keyboard events/shared MIDI editor and whole stereo master. Owned tones, no native/physical/warped/keylocked/quality/full-shortcut acceptance.",
+        "events": [
+          {
+            "name": "baseline",
+            "time": 0
+          },
+          {
+            "name": "held",
+            "time": 0.45859410430839
+          },
+          {
+            "name": "opposite",
+            "time": 1.3699773242630386
+          },
+          {
+            "name": "midi-idle-held",
+            "time": 2.0259410430839
+          },
+          {
+            "name": "released",
+            "time": 2.48453514739229
+          }
+        ],
+        "checks": [
+          "Shift guard and repeat-safe two-deck Play"
+        ],
+        "errors": [
+          {
+            "message": "Blur setup timed out",
+            "stack": "Error: Blur setup timed out\n    at assert (http://127.0.0.1:18856/prototype/keyboard-playback-harness.js:1:108)\n    at until (http://127.0.0.1:18856/prototype/keyboard-playback-harness.js:5:79)\n    at async run (http://127.0.0.1:18856/prototype/keyboard-playback-harness.js:34:12)"
+          },
+          {
+            "message": "Missing declared audio stages",
+            "stack": "Error: Missing declared audio stages\n    at assert (http://127.0.0.1:18856/prototype/keyboard-playback-harness.js:1:108)\n    at run (http://127.0.0.1:18856/prototype/keyboard-playback-harness.js:45:194)"
+          }
+        ],
+        "sourceBefore": {
+          "app.js": "6b79720f1d68da02876088181e24e5e8d540da0c01ae7cf395e70e500f814469",
+          "engine.js": "f7038cb2085bfa78a42a7240c38e4bc04ddd6ef9e22aef368aea9f128c4545cf",
+          "jog-bend.js": "d4afec10d14ee78ddc93f03e0fe88847ed3584e20a8c05e3a2a45f65cdbdc858",
+          "deck-midi.js": "a29e8363ea07f3d72dbfba0b837ec3baeb9895bbae984d29f43665f158037713",
+          "panels.js": "3106430667e9e83e95bf310a1c6ea6d58fb1e439dfdecca4cb1d8bd733b40dcc",
+          "midi.js": "0cabb6dbe98e9eb3f7bc7f7eb44615fa315a0738260e5f3568a34d0aa75ec1ad",
+          "keyboard-playback-harness.js": "43679a356149c1557fcfc08acfed01f7b47d1cba8eb0154b1b7562d0b288b611"
+        },
+        "heldAfter900ms": [
+          {
+            "nominal": 1,
+            "audible": 1.0399999618530273
+          },
+          {
+            "nominal": 1,
+            "audible": 0.9599999785423279
+          }
+        ],
+        "recording": {
+          "bytes": 241479,
+          "format": "audio/webm;codecs=opus",
+          "sha256": "cff2e3297af02f3e077a12c9d93d14005b1909fea8896d6fb9d137d714852230"
+        },
+        "decoded": {
+          "duration": 14.939977324263038,
+          "sampleRate": 44100,
+          "frames": 658853,
+          "channels": 2
+        },
+        "audio": [
+          {
+            "name": "baseline",
+            "channels": [
+              {
+                "from": 0.1,
+                "to": 0.35,
+                "rms": 0.03732757076354404,
+                "hz": 329.9991308916279
+              },
+              {
+                "from": 0.1,
+                "to": 0.35,
+                "rms": 0.037344092369427526,
+                "hz": 550.0063979702926
+              }
+            ]
+          },
+          {
+            "name": "held",
+            "channels": [
+              {
+                "from": 0.55859410430839,
+                "to": 0.80859410430839,
+                "rms": 0.037410530266632616,
+                "hz": 343.19766606179803
+              },
+              {
+                "from": 0.55859410430839,
+                "to": 0.80859410430839,
+                "rms": 0.03732188869512429,
+                "hz": 528.0013064396313
+              }
+            ]
+          },
+          {
+            "name": "opposite",
+            "channels": [
+              {
+                "from": 1.4699773242630387,
+                "to": 1.7199773242630387,
+                "rms": 0.037316283236636945,
+                "hz": 329.9985556754297
+              },
+              {
+                "from": 1.4699773242630387,
+                "to": 1.7199773242630387,
+                "rms": 0.037335305858633344,
+                "hz": 527.9978602715307
+              }
+            ]
+          },
+          {
+            "name": "midi-idle-held",
+            "channels": [
+              {
+                "from": 2.1259410430839,
+                "to": 2.3759410430839,
+                "rms": 0.037359787052506525,
+                "hz": 343.2014273289813
+              },
+              {
+                "from": 2.1259410430839,
+                "to": 2.3759410430839,
+                "rms": 0.037350860456919745,
+                "hz": 527.9976258708749
+              }
+            ]
+          },
+          {
+            "name": "released",
+            "channels": [
+              {
+                "from": 2.58453514739229,
+                "to": 2.83453514739229,
+                "rms": 0.037373699050581896,
+                "hz": 330.0004075202652
+              },
+              {
+                "from": 2.58453514739229,
+                "to": 2.83453514739229,
+                "rms": 0.03731670934751058,
+                "hz": 550.005687980836
+              }
+            ]
+          }
+        ],
+        "sourceAfter": {
+          "app.js": "6b79720f1d68da02876088181e24e5e8d540da0c01ae7cf395e70e500f814469",
+          "engine.js": "f7038cb2085bfa78a42a7240c38e4bc04ddd6ef9e22aef368aea9f128c4545cf",
+          "jog-bend.js": "d4afec10d14ee78ddc93f03e0fe88847ed3584e20a8c05e3a2a45f65cdbdc858",
+          "deck-midi.js": "a29e8363ea07f3d72dbfba0b837ec3baeb9895bbae984d29f43665f158037713",
+          "panels.js": "3106430667e9e83e95bf310a1c6ea6d58fb1e439dfdecca4cb1d8bd733b40dcc",
+          "midi.js": "0cabb6dbe98e9eb3f7bc7f7eb44615fa315a0738260e5f3568a34d0aa75ec1ad",
+          "keyboard-playback-harness.js": "43679a356149c1557fcfc08acfed01f7b47d1cba8eb0154b1b7562d0b288b611"
+        },
+        "sourceStable": true,
+        "finishedAt": "2026-10-18T01:58:53.614Z"
+      }
+    }
+  ]
+}

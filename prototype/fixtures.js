@@ -309,6 +309,10 @@ export function newDeck(index) {
 export const helpKeys = [
   ["Load selected → left / right", "Shift + ← / →"],
   ["Play / pause left / right", "W / S"],
+  ["Reverse left / right", "Q / A"],
+  ["Hold pitch bend down / up (left)", "T / Y"],
+  ["Hold pitch bend down / up (right)", "G / H"],
+  ["Keylock left / right", "F5 / F10"],
   ["Cue pads left / right", "1–5 / 6–0"],
   ["Delete cue", "Shift + Command + number"],
   ["Set temporary cue left / right", "I / K"],
