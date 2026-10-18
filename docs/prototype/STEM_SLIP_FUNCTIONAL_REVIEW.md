@@ -1,3 +1,5 @@
+Current source follow-up (plan115): [selected-stem Censor review](STEM_SLIP_CENSOR_REVIEW.md) adds recorded reverse/rejoin and lifecycle checks. Local desktop testing is approved; frozen0.1.16 does not include this new path. Historical results/policies below retain their original scope.
+
 # Stem Slip — independent browser implementation and evidence
 
 16 October 2026. **Full Serato parity is not passed; native development is not approved.**

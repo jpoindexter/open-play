@@ -1,0 +1,20 @@
+import assert from 'node:assert/strict';
+import {AudioEngine} from '../prototype/engine.js';
+import {StemSlipKernel} from '../prototype/stem-slip-kernel.js';
+const near=(a,b)=>assert.ok(Math.abs(a-b)<1e-8,`${a} != ${b}`),sr=1000;
+function fixture(mode='vocal',defer=null){
+ const kernel=new StemSlipKernel(sr),buffers=Array.from({length:4},(_,i)=>({sampleRate:sr,channels:[Float32Array.from({length:20000},(_,n)=>n/20000*(i+1))]}));kernel.load(buffers);kernel.command('configure',{duration:20,position:5,rate:1.1,bpm:120,playing:true,mode});
+ let resolve;const gate=new Promise(r=>resolve=r),calls=[],transport={command:(type,data)=>{calls.push([type,data]);const value=kernel.command(type,data);return type===defer?gate.then(()=>value):Promise.resolve(value);},state:()=>kernel.state()};
+ const d={index:0,track:{id:'track',duration:20},mode:'INT',playing:true,stemSlip:mode,stemSlipRelease:4},engine=new AudioEngine(),voice={stemSlipTransport:transport};engine.ctx={currentTime:0};engine.voices.set(0,voice);engine.position=()=>kernel.position;engine.selectedPosition=()=>kernel.selected;engine.setCross=()=>{};engine.updateStems=()=>{};engine.stemBuffers.set('track',buffers);const ended=[];engine.onCensorEnd=(deck,owner)=>ended.push(owner);
+ return{kernel,transport,d,engine,voice,calls,resolve,ended};
+}
+for(const mode of ['vocal','instrumental']){
+ const f=fixture(mode),{engine,d,kernel}=f;assert.ok(await engine.beginDeckScratch(d,'hold',{censor:true}));assert.equal(kernel.phase,'manipulating');assert.equal(kernel.reverse,true);
+ const outputs=Array.from({length:4},()=>[new Float32Array(250),new Float32Array(250)]);kernel.process(outputs,0);
+ for(let stem=0;stem<4;stem++){const selected=mode==='vocal'?stem===0:stem>0,position=5+(selected?-1:1)*.1*1.1;assert.ok(Math.abs(outputs[stem][0][100]-position/20*(stem+1))<1e-6,'Selected reverse/complement forward PCM');}
+ const result=await engine.endDeckScratch(d,'hold');assert.equal(result.releasedImmediately,true);assert.equal(kernel.phase,'idle');assert.equal(kernel.release,null);near(kernel.selected,kernel.position);assert.equal(engine.voices.get(0),f.voice);assert.equal(d.stemSlip,mode);assert.equal(engine.deckScratchRequests.size,0);
+}
+const early=fixture('vocal','begin'),pending=early.engine.beginDeckScratch(early.d,'early',{censor:true});assert.equal(early.kernel.owner,'early');await early.engine.endDeckScratch(early.d,'early');early.resolve();assert.equal(await pending,false);assert.equal(early.calls.some(([type])=>type==='reverse'),false);assert.equal(early.kernel.owner,null);assert.equal(early.kernel.reverse,false);assert.equal(early.engine.deckScratchRequests.size,0);
+const replacement=fixture();await replacement.engine.beginDeckScratch(replacement.d,'old',{censor:true});await replacement.engine.beginStemSlipGesture(replacement.d,'new-cue');assert.deepEqual(replacement.ended,['old']);assert.equal(replacement.kernel.owner,'new-cue');assert.equal(await replacement.engine.endDeckScratch(replacement.d,'old'),false);assert.equal(replacement.kernel.owner,'new-cue');
+const mode=fixture();await mode.engine.beginDeckScratch(mode.d,'mode',{censor:true});await mode.engine.setStemSlip(mode.d,'instrumental');assert.deepEqual(mode.ended,['mode']);assert.equal(mode.kernel.mode,'instrumental');assert.equal(mode.kernel.owner,null);assert.equal(mode.kernel.reverse,false);assert.equal(mode.engine.deckScratchRequests.size,0);
+console.log(JSON.stringify({passed:true,scope:'Actual engine request/gesture methods with real selected-stem PCM kernel; worklet scheduling/browser/native/device/reference evidence separate',checks:['Vocal and instrumental selection reverse only selected PCM while complement advances','Release immediately rejoins canonical cursor despite configured4beat Slip release, retaining mode/voice','Release before Begin ACK cannot post late reverse','New selected gesture invalidates old Censor; stale Censor release cannot end it','Mode change clears Censor ownership before reconfiguring selected group']}));

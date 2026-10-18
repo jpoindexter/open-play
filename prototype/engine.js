@@ -1257,6 +1257,7 @@ export class AudioEngine {
     this.deckScratchRequests.delete(d.index);
     request.controller.abort();
     if(request.censor)this.onCensorEnd?.(d,request.owner);
+    if(request.stemSlip)void this.endStemSlipGesture(d,request.owner,{immediate:true}).catch(error=>{if(error.name!=='AbortError')this.onError?.(error);});
     // A reused transport may already have accepted Begin while its ACK is in
     // flight. Queue its matching End before any newer owner's Begin.
     if (!request.ready && request.transport && request.beginPosted)
@@ -1369,6 +1370,22 @@ export class AudioEngine {
     }catch(error){if(current()){this.deckScratchRequests.delete(d.index);d.scratchPreparing=false;}if(error.name!=='AbortError')throw error;return false;}
     finally{if(!committed){backing?.dispose();await adapter?.dispose();if(this.deckScratchRequests.get(d.index)===request){this.deckScratchRequests.delete(d.index);d.scratchPreparing=false;}}}
   }
+  async beginStemSlipCensor(d,owner){
+    if(this.stemSlipOwners.has(d.index))throw new Error('Release the selected-stem gesture before Censor.');
+    const request={owner,censor:true,stemSlip:true,track:d.track,mode:d.stemSlip,controller:new AbortController(),ready:false,closing:false};
+    this.deckScratchRequests.set(d.index,request);d.scratchPreparing=true;
+    const current=()=>this.deckScratchRequests.get(d.index)===request&&!request.controller.signal.aborted&&d.track===request.track&&d.stemSlip===request.mode&&d.playing;
+    let committed=false;
+    try{
+      if(!await this.beginStemSlipGesture(d,owner)||!current())return false;
+      const transport=this.voices.get(d.index)?.stemSlipTransport;if(!transport)return false;request.transport=transport;
+      await transport.command('reverse',{owner,reverse:true});if(!current())return false;
+      request.ready=true;d.scratchPreparing=false;committed=true;
+      return{owner,selectedGroup:request.mode,position:this.position(d),selectedPosition:this.selectedPosition(d)};
+    }finally{
+      if(!committed){if(this.deckScratchRequests.get(d.index)===request){this.deckScratchRequests.delete(d.index);d.scratchPreparing=false;}await this.endStemSlipGesture(d,owner,{immediate:true});}
+    }
+  }
   async beginDeckScratch(d, owner, {censor=false}={}) {
     if (!d.track || d.track.missing || d.track.provider) return false;
     if (typeof owner !== 'string' || !owner.length) throw new TypeError('Scratch owner required.');
@@ -1377,7 +1394,10 @@ export class AudioEngine {
       if(!d.playing)return false;
       if(this.deckScratchRequests.has(d.index))throw new Error('Release the current scratch gesture before Censor.');
     }else this.onManualPosition?.(d);
-    if (d.stemSlip && d.stemSlip !== 'off') throw new Error('Turn selected-stem Slip off before whole-deck scratching.');
+    if (d.stemSlip && d.stemSlip !== 'off') {
+      if(censor)return this.beginStemSlipCensor(d,owner);
+      throw new Error('Use the selected-stem scratch control while Stem Slip is armed.');
+    }
     if(censor&&this.voices.get(d.index)?.gridTimeline)return this.beginWarpedCensor(d,owner);
     let retained=this.deckScratchShadows.get(d.index);
     if(retained&&!retained.sourcesMatch()){retained.dispose();retained=null;}
@@ -1464,6 +1484,12 @@ export class AudioEngine {
     const shadow=this.deckScratchShadows.get(d.index);
     if (!request.ready&&!shadow) {this.cancelDeckScratchRequest(d); return false;}
     request.closing = true;
+    if(request.stemSlip){
+      const ended=await this.endStemSlipGesture(d,owner,{immediate:true});
+      if(this.deckScratchRequests.get(d.index)!==request)return false;
+      this.deckScratchRequests.delete(d.index);d.scratchPreparing=false;
+      return ended?{owner,position:this.position(d),playing:d.playing,selectedGroup:request.mode,releasedImmediately:true}:false;
+    }
     if(request.backing){const result=request.backing.adopt();if(result&&!result.playing){this.pause(d);d.position=result.position;this.onEnd(d);}return result;}
     const transport = request.transport;
     const shadowRevision=shadow?.beginRelease(owner);
@@ -1517,6 +1543,7 @@ export class AudioEngine {
   async setStemSlip(d, mode) {
     this.onValidateTransport?.(d,{stemSlip:mode});
     if (!["off", "vocal", "instrumental"].includes(mode)) throw new Error("Unknown Stem Slip mode.");
+    if(this.deckScratchRequests.get(d.index)?.stemSlip)this.cancelDeckScratchRequest(d);
     this.stemSlipRateTokens.set(d.index, (this.stemSlipRateTokens.get(d.index) || 0) + 1);
     const active = this.voices.get(d.index)?.stemSlipTransport;
     if (mode === "off") {
@@ -1604,6 +1631,7 @@ export class AudioEngine {
             if (this.voices.get(d.index) !== voice) return;
             d.stemSlipPhase = value.phase;
             if (value.ended) {
+              this.cancelDeckScratchRequest(d);
               d.position = track.duration; d.playing = false;
               d.stemSlip = "off"; d.stemSlipPhase = "idle";
               this.stemSlipOwners.delete(d.index);
@@ -1691,6 +1719,8 @@ export class AudioEngine {
   }
   async beginStemSlipGesture(d, owner) {
     if (!["vocal", "instrumental"].includes(d.stemSlip)) return false;
+    const censor=this.deckScratchRequests.get(d.index);
+    if(censor?.stemSlip&&censor.owner!==owner)this.cancelDeckScratchRequest(d);
     const intent = {owner, track: d.track};
     this.stemSlipOwners.set(d.index, intent);
     let voice = this.voices.get(d.index);

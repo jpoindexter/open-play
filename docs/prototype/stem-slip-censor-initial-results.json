@@ -1,0 +1,228 @@
+{
+  "startedAt": "2026-10-18T03:20:31.256Z",
+  "completed": false,
+  "criteria": {
+    "frequencyErrorHz": 1,
+    "minimumRMS": 0.005,
+    "minimumReverseFrequencyDropHz": 6,
+    "joinedStateSeconds": 0.005
+  },
+  "scope": "Actual app Stem Slip mode/release/Play/U/mode replacement and canonical end with four prepared synthetic sources; vocal raw and instrumental keylock+2 at1.08rate. Independent selected-group Censor with immediate release despite4beat Slip Release. Vendor Stem Slip reference conflict remains open; not native/physical/model/music/full parity acceptance.",
+  "modes": [
+    {
+      "mode": "vocal",
+      "keylock": false,
+      "semitones": 0,
+      "windows": [
+        {
+          "name": "forward-before",
+          "from": 0.32414965986394556,
+          "to": 0.5241496598639456,
+          "expectedSelectedHz": 353.63625795917693,
+          "expectedComplementHz": 594
+        },
+        {
+          "name": "reverse-early",
+          "from": 0.7363038548752834,
+          "to": 0.9363038548752833,
+          "expectedSelectedHz": 351.04531591833273,
+          "expectedComplementHz": 594
+        },
+        {
+          "name": "reverse-late",
+          "from": 1.1363038548752833,
+          "to": 1.3363038548752835,
+          "expectedSelectedHz": 341.7141159183327,
+          "expectedComplementHz": 594
+        },
+        {
+          "name": "forward-return",
+          "from": 1.549002267573696,
+          "to": 1.749002267573696,
+          "expectedSelectedHz": 382.20961959174224,
+          "expectedComplementHz": 594
+        }
+      ],
+      "before": {
+        "mode": "vocal",
+        "phase": "idle",
+        "owner": null,
+        "position": 5.102048979591523,
+        "selectedPosition": 5.102048979591523,
+        "rate": 1.08,
+        "velocity": 1.08,
+        "bpm": 120,
+        "scale": 1,
+        "playing": true,
+        "audition": false,
+        "startAt": 0.1028798185941043,
+        "audioTime": 0.19736961451247165,
+        "duration": 20,
+        "release": null,
+        "loop": null,
+        "reverse": false,
+        "ended": false
+      },
+      "reverse": {
+        "mode": "vocal",
+        "phase": "manipulating",
+        "owner": "censor:1",
+        "position": 5.547175510202401,
+        "selectedPosition": 5.52209795918207,
+        "rate": 1.08,
+        "velocity": -1.08,
+        "bpm": 120,
+        "scale": 1,
+        "playing": true,
+        "audition": true,
+        "startAt": 0.1028798185941043,
+        "audioTime": 0.6095238095238095,
+        "duration": 20,
+        "release": null,
+        "loop": null,
+        "reverse": true,
+        "ended": false
+      },
+      "return": {
+        "mode": "vocal",
+        "phase": "idle",
+        "owner": null,
+        "position": 6.424889795913992,
+        "selectedPosition": 6.424889795913992,
+        "rate": 1.08,
+        "velocity": 1.08,
+        "bpm": 120,
+        "scale": 1,
+        "playing": true,
+        "audition": false,
+        "startAt": 0.1028798185941043,
+        "audioTime": 1.4222222222222223,
+        "duration": 20,
+        "release": null,
+        "loop": null,
+        "reverse": false,
+        "ended": false
+      },
+      "audio": [
+        {
+          "name": "forward-before",
+          "from": 0.32414965986394556,
+          "to": 0.5241496598639456,
+          "expectedSelectedHz": 353.63625795917693,
+          "expectedComplementHz": 594,
+          "channels": [
+            {
+              "rms": 0.0372832455297647,
+              "hz": 353.39840628921934
+            },
+            {
+              "rms": 0.03733977682926202,
+              "hz": 594.0121147442127
+            }
+          ]
+        },
+        {
+          "name": "reverse-early",
+          "from": 0.7363038548752834,
+          "to": 0.9363038548752833,
+          "expectedSelectedHz": 351.04531591833273,
+          "expectedComplementHz": 594,
+          "channels": [
+            {
+              "rms": 0.037302909258814236,
+              "hz": 351.28470167279255
+            },
+            {
+              "rms": 0.03730122541467598,
+              "hz": 594.0085251514597
+            }
+          ]
+        },
+        {
+          "name": "reverse-late",
+          "from": 1.1363038548752833,
+          "to": 1.3363038548752835,
+          "expectedSelectedHz": 341.7141159183327,
+          "expectedComplementHz": 594,
+          "channels": [
+            {
+              "rms": 0.037286227529758575,
+              "hz": 341.9646136979766
+            },
+            {
+              "rms": 0.03732825642933449,
+              "hz": 594.0029617453325
+            }
+          ]
+        },
+        {
+          "name": "forward-return",
+          "from": 1.549002267573696,
+          "to": 1.749002267573696,
+          "expectedSelectedHz": 382.20961959174224,
+          "expectedComplementHz": 594,
+          "channels": [
+            {
+              "rms": 0.03730861047212595,
+              "hz": 381.97686931458605
+            },
+            {
+              "rms": 0.037338143206258105,
+              "hz": 593.9835903087595
+            }
+          ]
+        }
+      ],
+      "measuredReverseDropHz": 9.320087974815976
+    }
+  ],
+  "checks": [
+    "Eight fixed master windows verify selected reverse chirp/forward return and uninterrupted complementary carrier"
+  ],
+  "errors": [
+    {
+      "message": "Cannot read properties of undefined (reading 'active')",
+      "stack": "TypeError: Cannot read properties of undefined (reading 'active')\n    at http://127.0.0.1:18861/prototype/stem-slip-censor-harness.js:28:273\n    at until (http://127.0.0.1:18861/prototype/stem-slip-censor-harness.js:5:79)\n    at HTMLButtonElement.run (http://127.0.0.1:18861/prototype/stem-slip-censor-harness.js:28:220)"
+    }
+  ],
+  "sourceBefore": {
+    "app.js": "e01bcfb7e0b468aa9ed2b455f0dc34360d3210e3cbc2dd1c9e83f4ac2439cb1e",
+    "engine.js": "8661e3431d3ba7202fd43f406eabe6ac2bae65990da20b48223817ebd56e0bdf",
+    "censor.js": "4f0909f5562e1dd28e4b9f406015dd3963e96f706c32e863242494c0c2ccc794",
+    "stem-slip-ui.js": "9b9bc5eceddbe5a3906277f84c56401195bdacef3b0b35c6c3af96af3095908b",
+    "stem-slip.js": "36b92c90a8327eb1e2eec23c9d5fe6666d6c71384388e6ba2d42ad6d7537eb31",
+    "stem-slip-kernel.js": "0c27e8506c9ed4874bcb36614fea2d2c0238ea22bb6a1be52d509fcc21fbe09a",
+    "stem-slip-worklet.js": "d75b2bff3010f6481965acedf95d94ec8afc557be1a1617456ca88ff20d69f4b",
+    "keylock.js": "62adbfdd77df20deb1328302d4a8daf3d7bdc29870af453d39acfd2a02bf060b",
+    "keylock-dsp.js": "f4cb1881fedb018f395a6711d263aa142feb8dfe93638a3d1f97fc432c15ac3d",
+    "keylock-worker.js": "5cb72a1bc74e1808c32b430d72d5769427c7056edee11410eb6f8b3c7751fcec",
+    "stem-slip-censor-harness.js": "c06f785f2a4a0ec813db3460a42371057f1e2d2d67a17c92698df22b3c4dbdc3"
+  },
+  "recordStart": 0.023219954648526078,
+  "recording": {
+    "bytes": 27955,
+    "format": "audio/webm;codecs=opus",
+    "sha256": "98174812223bba76308ccba492356bea3595abf4f7c57ee7d75df9df94363eb5"
+  },
+  "decoded": {
+    "duration": 1.8,
+    "frames": 79380,
+    "sampleRate": 44100,
+    "channels": 2
+  },
+  "sourceAfter": {
+    "app.js": "e01bcfb7e0b468aa9ed2b455f0dc34360d3210e3cbc2dd1c9e83f4ac2439cb1e",
+    "engine.js": "8661e3431d3ba7202fd43f406eabe6ac2bae65990da20b48223817ebd56e0bdf",
+    "censor.js": "4f0909f5562e1dd28e4b9f406015dd3963e96f706c32e863242494c0c2ccc794",
+    "stem-slip-ui.js": "9b9bc5eceddbe5a3906277f84c56401195bdacef3b0b35c6c3af96af3095908b",
+    "stem-slip.js": "36b92c90a8327eb1e2eec23c9d5fe6666d6c71384388e6ba2d42ad6d7537eb31",
+    "stem-slip-kernel.js": "0c27e8506c9ed4874bcb36614fea2d2c0238ea22bb6a1be52d509fcc21fbe09a",
+    "stem-slip-worklet.js": "d75b2bff3010f6481965acedf95d94ec8afc557be1a1617456ca88ff20d69f4b",
+    "keylock.js": "62adbfdd77df20deb1328302d4a8daf3d7bdc29870af453d39acfd2a02bf060b",
+    "keylock-dsp.js": "f4cb1881fedb018f395a6711d263aa142feb8dfe93638a3d1f97fc432c15ac3d",
+    "keylock-worker.js": "5cb72a1bc74e1808c32b430d72d5769427c7056edee11410eb6f8b3c7751fcec",
+    "stem-slip-censor-harness.js": "c06f785f2a4a0ec813db3460a42371057f1e2d2d67a17c92698df22b3c4dbdc3"
+  },
+  "sourceStable": true,
+  "finishedAt": "2026-10-18T03:20:33.135Z"
+}

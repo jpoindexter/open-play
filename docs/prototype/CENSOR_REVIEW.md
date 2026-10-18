@@ -1,3 +1,5 @@
+Current source follow-up (plan115): [selected-stem Censor review](STEM_SLIP_CENSOR_REVIEW.md) adds recorded reverse/rejoin and lifecycle checks. Local desktop testing is approved; frozen0.1.16 does not include this new path. Historical results/policies below retain their original scope.
+
 Current source follow-up (plan114): [warped-loop Censor review](WARPED_LOOP_CENSOR_REVIEW.md) adds the loop composition. The historical scope/results below remain tied to their original candidate. Frozen native0.1.16 is unchanged.
 
 # Censor — held reverse and forward-clock restoration

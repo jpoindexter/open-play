@@ -17,3 +17,5 @@ Previous 0.1.15 is preserved: **Start Open Play Playback Test 0.1.15.command** a
 [Native observations](desktop-0.1.16-playback-observation.json) · [Scoped review](DESKTOP_0.1.16_REVIEW.md) · [Package receipt](desktop-0.1.16-playback-package.json) · [Full plan](../../FULL_BUILD_PLAN.md) · [Claude handoff](../../handoffs/current.md).
 
 Browser-source plan114 adds [warped-loop Censor](WARPED_LOOP_CENSOR_REVIEW.md); this is not in the frozen0.1.16 desktop candidate. Keep that candidate for the physical core playback test.
+
+Browser-source plan115 adds [selected-stem Censor](STEM_SLIP_CENSOR_REVIEW.md) under the existing independent Stem Slip policy. This is not in the frozen0.1.16 candidate; its physical-test sequence stays unchanged.
