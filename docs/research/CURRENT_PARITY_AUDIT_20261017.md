@@ -1,3 +1,5 @@
+> Plan129: [core playback milestone](../prototype/CORE_PLAYBACK_MILESTONE.md) takes priority over more FX refinement. Current native21 isolated GUI-handler/syntheticMIDI Sync/Play produces six aligned pulse pairs each; main272mappings/quadroute preserved. Physical controls/sound and full parity remain open.
+
 > Plan128: [LPF slope review](../prototype/LPF_SLOPE_REVIEW.md): eight distinct production offline-audio slopes and four update contracts executed; normal6dB save/reopen executed. Paused reference6/48endpoints observed. Exact response/live engine/native/physical parity open;21unchanged.
 
 > Plan127: [browser waveform seek/accessible feedback](../prototype/WAVEFORM_SEEK_REVIEW.md) executed in one22-observation workflow. Home/End and shared needle guard added; clocks/ranges/playheads align. Browser-only: native21/physical/fullreference acceptance unchanged.

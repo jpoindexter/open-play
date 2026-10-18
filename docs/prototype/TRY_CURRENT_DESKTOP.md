@@ -17,3 +17,5 @@ Previous build: **Start Open Play Playback Test 0.1.19.command**, with its [hist
 [Status review](OUTPUT_SELECTION_STATUS_REVIEW.md) · [Native observations](desktop-0.1.21-playback-observation.json) · [Full plan](../../FULL_BUILD_PLAN.md) · [Claude handoff](../../handoffs/current.md)
 
 Browser-source plan127 adds [waveform position/keyboard feedback](WAVEFORM_SEEK_REVIEW.md). It is not packaged in0.1.21; that prepared desktop and its physical-test sequence remain unchanged.
+
+Plan129: the existing isolated native21RapidSync/Play check now executed through the normal Checks menu. GUI-handler/syntheticMIDI cases reached BeatSync with six recorded pulse pairs each (worst1.474/.522ms,10ms criterion); queuedPlay cancellation passed. This does not verify physicalcontrols/manualbeatmatch/music/fileimport. The main272mappings/quadroute were preserved. [Core milestone and limits](CORE_PLAYBACK_MILESTONE.md). Further FX refinement is deferred behind the hands-on controller milestone.

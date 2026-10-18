@@ -1,0 +1,297 @@
+{
+  "startedAt": "2026-10-18T06:44:34.815Z",
+  "completed": true,
+  "criteria": {
+    "maximumPulsePhaseSeconds": 0.01,
+    "minimumPairs": 5,
+    "pausedMaximumRMS": 0.0001
+  },
+  "scope": "Actual GUI and MIDI-editor rapid Smart Sync/Play plus queued double-Play cancellation, existing keylocked secondary. No artificial engine delay; no native/physical/music/full Sync acceptance.",
+  "cases": [
+    {
+      "kind": "gui",
+      "requestedAt": 0,
+      "playsBefore": 0,
+      "immediateQueued": {
+        "state": true,
+        "aria": "true"
+      },
+      "started": {
+        "at": 0.5050340136054423,
+        "sync": true,
+        "state": "beat",
+        "rate": 1.2,
+        "position": 0.7667346938775503,
+        "playQueued": false,
+        "plays": 1
+      },
+      "from": 0.8550340136054423,
+      "to": 3.8550340136054424,
+      "pairs": [
+        {
+          "time": 1.0190249433106575,
+          "errorSeconds": 0.00013605442176878313
+        },
+        {
+          "time": 1.5190249433106575,
+          "errorSeconds": 0.0009523809523808158
+        },
+        {
+          "time": 2.0190249433106575,
+          "errorSeconds": 0
+        },
+        {
+          "time": 2.5190249433106575,
+          "errorSeconds": 0.0014739229024942624
+        },
+        {
+          "time": 3.0190249433106575,
+          "errorSeconds": 0.001247165532880068
+        },
+        {
+          "time": 3.5190249433106575,
+          "errorSeconds": 9.070294784585542e-05
+        }
+      ],
+      "statePassed": true,
+      "phasePassed": true,
+      "onePlayRecorded": true
+    },
+    {
+      "kind": "midi",
+      "requestedAt": 3.9648072562358276,
+      "playsBefore": 1,
+      "immediateQueued": {
+        "state": true,
+        "aria": "true"
+      },
+      "started": {
+        "at": 4.301496598639458,
+        "sync": true,
+        "state": "beat",
+        "rate": 1.2,
+        "position": 0.5224897959183693,
+        "playQueued": false,
+        "plays": 2
+      },
+      "from": 4.651496598639458,
+      "to": 7.651496598639458,
+      "pairs": [
+        {
+          "time": 5.019024943310658,
+          "errorSeconds": 0.000294784580498586
+        },
+        {
+          "time": 5.519024943310658,
+          "errorSeconds": 0.0002947845804994742
+        },
+        {
+          "time": 6.019024943310658,
+          "errorSeconds": 0.00031746031746049397
+        },
+        {
+          "time": 6.519024943310658,
+          "errorSeconds": 0.00047619047619029686
+        },
+        {
+          "time": 7.019024943310658,
+          "errorSeconds": 0.0005215419501141128
+        },
+        {
+          "time": 7.519024943310658,
+          "errorSeconds": 0.0004081632653054612
+        }
+      ],
+      "statePassed": true,
+      "phasePassed": true,
+      "onePlayRecorded": true
+    }
+  ],
+  "errors": [],
+  "checks": [
+    "GUI and MIDI rapid Sync/Play reach Beat Sync and one counted playback with aligned audible pulses",
+    "Second Play cancels waiting playback without later audio/history"
+  ],
+  "sourceBefore": {
+    "app.js": "d05039e2ad62b06f167d03e2a8d901e39419cb979178325d341218d5299c07aa",
+    "smart-sync.js": "b57c0016cc9467b2f7fe178f7acd1522c2c4d1611c3b6ff6288c97fefcd1e3f1",
+    "engine.js": "a4ec10d9401a3e7fd6d7184e331ae59adf6213a87df5152969c8a3edb8fab9f8",
+    "deck-midi.js": "e945f45e6c5198e8d8103a9bc10b4073c00aefc213ed32344592fe20a2988b1e",
+    "panels.js": "ef07673498e04983a88227e767c2088c284b2824387fe425a9a7df1384a49ae7",
+    "rapid-sync-play-harness.js": "1565c956105b11433540eced9b19a0bbf3a7912496cba9a5fef44a05f20b49d5"
+  },
+  "recordStart": 12.033741496598639,
+  "cancel": {
+    "at": 7.755464852607711,
+    "playsBefore": 2,
+    "after": {
+      "playing": false,
+      "processing": false,
+      "queued": false,
+      "plays": 2
+    },
+    "from": 8.10546485260771,
+    "to": 8.305464852607711,
+    "rightRMS": 2.1820990174412472e-08,
+    "passed": true
+  },
+  "recording": {
+    "bytes": 134867,
+    "format": "audio/webm;codecs=opus",
+    "sha256": "c0c41d815ee7a7011fee1f32e2ce7a4d3039be116b982549b90b5c37f19ec8fe",
+    "base64": "Retained only in ignored original; complete recording hash verified"
+  },
+  "decoded": {
+    "duration": 8.339977324263039,
+    "frames": 367793,
+    "sampleRate": 44100,
+    "channels": 2
+  },
+  "audio": {
+    "pulseMethod": "Two highpass biquads at2000Hz/Q.707; amplitude.01 threshold and100ms refractory. No temporal fitting.",
+    "pulseTimes": [
+      [
+        0.007210884353741497,
+        0.5190249433106576,
+        1.0190249433106575,
+        1.5190249433106575,
+        2.0190249433106575,
+        2.5190249433106575,
+        3.0190249433106575,
+        3.5190249433106575,
+        4.019024943310658,
+        4.519024943310658,
+        5.019024943310658,
+        5.519024943310658,
+        6.019024943310658,
+        6.519024943310658,
+        7.019024943310658,
+        7.519024943310658,
+        8.019024943310658
+      ],
+      [
+        0.5180498866213152,
+        1.0191609977324263,
+        1.5180725623582767,
+        2.0190249433106575,
+        2.5175510204081633,
+        3.0202721088435376,
+        3.5189342403628117,
+        3.9699546485260773,
+        4.5173696145124715,
+        5.0193197278911565,
+        5.5187301587301585,
+        6.0187074829931975,
+        6.519501133786848,
+        7.018503401360544,
+        7.519433106575963,
+        7.766417233560091
+      ]
+    ]
+  },
+  "sourceAfter": {
+    "app.js": "d05039e2ad62b06f167d03e2a8d901e39419cb979178325d341218d5299c07aa",
+    "smart-sync.js": "b57c0016cc9467b2f7fe178f7acd1522c2c4d1611c3b6ff6288c97fefcd1e3f1",
+    "engine.js": "a4ec10d9401a3e7fd6d7184e331ae59adf6213a87df5152969c8a3edb8fab9f8",
+    "deck-midi.js": "e945f45e6c5198e8d8103a9bc10b4073c00aefc213ed32344592fe20a2988b1e",
+    "panels.js": "ef07673498e04983a88227e767c2088c284b2824387fe425a9a7df1384a49ae7",
+    "rapid-sync-play-harness.js": "1565c956105b11433540eced9b19a0bbf3a7912496cba9a5fef44a05f20b49d5"
+  },
+  "sourceStable": true,
+  "finishedAt": "2026-10-18T06:44:43.350Z",
+  "nativeEvidence": {
+    "version": "0.1.21",
+    "runtime": "Electron44.9.0 macOS arm64",
+    "entry": "Normal Checks menu \u2192 Rapid Sync and Play \u2192 Run \u2192 native Save dialog",
+    "sourceCommit": "ca5da7d7190aead7a605efcc77a70091cb0a1b30",
+    "asarSHA256": "9e1aa183fd2959e69eb7eb3fb1c08acf1a3aead3ad98785f47cf7246133d238b",
+    "originalBytes": 185754,
+    "originalSHA256": "eb404c0c1129b5d081abe380c634d58795cc9a823784989835caa0f7f882cabe",
+    "originalPath": "local-evidence/core-milestone-129/native-sync-original.json",
+    "genericScopePreserved": true,
+    "testSession": "Volatile isolated window, all device permissions denied; test code mutes physical output before playback",
+    "physicalHardwareAccepted": false,
+    "musicOrLoadingAccepted": false,
+    "servedAssets": [
+      {
+        "path": "prototype/app.js",
+        "sha256": "d05039e2ad62b06f167d03e2a8d901e39419cb979178325d341218d5299c07aa",
+        "matchesReportAndPackage": true,
+        "cacheControl": "no-store"
+      },
+      {
+        "path": "prototype/smart-sync.js",
+        "sha256": "b57c0016cc9467b2f7fe178f7acd1522c2c4d1611c3b6ff6288c97fefcd1e3f1",
+        "matchesReportAndPackage": true,
+        "cacheControl": "no-store"
+      },
+      {
+        "path": "prototype/engine.js",
+        "sha256": "a4ec10d9401a3e7fd6d7184e331ae59adf6213a87df5152969c8a3edb8fab9f8",
+        "matchesReportAndPackage": true,
+        "cacheControl": "no-store"
+      },
+      {
+        "path": "prototype/deck-midi.js",
+        "sha256": "e945f45e6c5198e8d8103a9bc10b4073c00aefc213ed32344592fe20a2988b1e",
+        "matchesReportAndPackage": true,
+        "cacheControl": "no-store"
+      },
+      {
+        "path": "prototype/panels.js",
+        "sha256": "ef07673498e04983a88227e767c2088c284b2824387fe425a9a7df1384a49ae7",
+        "matchesReportAndPackage": true,
+        "cacheControl": "no-store"
+      },
+      {
+        "path": "prototype/rapid-sync-play-harness.js",
+        "sha256": "1565c956105b11433540eced9b19a0bbf3a7912496cba9a5fef44a05f20b49d5",
+        "matchesReportAndPackage": true,
+        "cacheControl": "no-store"
+      }
+    ],
+    "mappingAfter": {
+      "path": "local-evidence/desktop-0.1.21-native/open-play-mapping-after-core-129.json",
+      "bytes": 64916,
+      "entries": 272,
+      "sha256": "37b61c1dbf16d43a1f14d7d932c88dc3a4d2ba1a062ae23e5175c91d58953864",
+      "matchesPreparedMainSession": true
+    },
+    "independentDecode": {
+      "decoder": "ffmpeg",
+      "output": "Float32 little-endian stereo44100Hz",
+      "frames": 367794,
+      "allFinite": true,
+      "maximumAbsoluteSample": 0.3036404550075531,
+      "rightCancellationRMS": 2.1821770759756232e-08,
+      "cancellationTolerance": 0.0001,
+      "pcmSHA256": "dc9127365674bd3c1aaa9ab03d2dac1315a63f541de64d07b2e7dafb15801daf",
+      "scope": "One independent complete decode plus fixed cancellation window; pulse timings remain browser measurement, no refitted phase or acoustic claim"
+    },
+    "postCheckMainSession": {
+      "windowTitle": "Open Play Playback Test0.1.21 \u2014 controller mixing test",
+      "playingDecks": 0,
+      "clockStrings": [
+        "00:00.0",
+        "00:00.0"
+      ],
+      "masterDB": -12,
+      "output": "DJControl Inpulse300Mk2",
+      "layout": "four-channel",
+      "masterChannels": [
+        1,
+        2
+      ],
+      "cueChannels": [
+        3,
+        4
+      ],
+      "cueMix": 0,
+      "cueVolume": 10,
+      "muteStatusVisible": false,
+      "checkWindowClosed": true,
+      "mappingExportMatches": true,
+      "scope": "Read-only native AX; output label reports commanded route, no acoustic measurement"
+    }
+  }
+}
