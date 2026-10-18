@@ -1,0 +1,201 @@
+{
+  "startedAt": "2026-10-18T02:41:15.653Z",
+  "completed": true,
+  "criteria": {
+    "maximumPulsePhaseSeconds": 0.01,
+    "minimumPairs": 5,
+    "pausedMaximumRMS": 0.0001
+  },
+  "scope": "Actual GUI and MIDI-editor rapid Smart Sync/Play plus queued double-Play cancellation, existing keylocked secondary. No artificial engine delay; no native/physical/music/full Sync acceptance.",
+  "cases": [
+    {
+      "kind": "gui",
+      "requestedAt": 0,
+      "playsBefore": 0,
+      "immediateQueued": {
+        "state": true,
+        "aria": "true"
+      },
+      "started": {
+        "at": 0.3250793650793651,
+        "sync": true,
+        "state": "beat",
+        "rate": 1.2,
+        "position": 0.5298911564625851,
+        "playQueued": false,
+        "plays": 1
+      },
+      "from": 0.6750793650793651,
+      "to": 3.675079365079365,
+      "pairs": [
+        {
+          "time": 1.0351473922902494,
+          "errorSeconds": 0.000770975056689327
+        },
+        {
+          "time": 1.5351473922902494,
+          "errorSeconds": 0.0003401360544217358
+        },
+        {
+          "time": 2.0351473922902494,
+          "errorSeconds": 0.0012698412698410877
+        },
+        {
+          "time": 2.5351473922902494,
+          "errorSeconds": 0.0002040816326531747
+        },
+        {
+          "time": 3.0351473922902494,
+          "errorSeconds": 0.0010204081632654294
+        },
+        {
+          "time": 3.5351473922902494,
+          "errorSeconds": 0.0008163265306122547
+        }
+      ],
+      "statePassed": true,
+      "phasePassed": true,
+      "onePlayRecorded": true
+    },
+    {
+      "kind": "midi",
+      "requestedAt": 3.7906575963718816,
+      "playsBefore": 1,
+      "immediateQueued": {
+        "state": true,
+        "aria": "true"
+      },
+      "started": {
+        "at": 4.115736961451248,
+        "sync": true,
+        "state": "beat",
+        "rate": 1.2,
+        "position": 0.2786802721088443,
+        "playQueued": false,
+        "plays": 2
+      },
+      "from": 4.465736961451247,
+      "to": 7.465736961451247,
+      "pairs": [
+        {
+          "time": 4.535147392290249,
+          "errorSeconds": 0.00013605442176878313
+        },
+        {
+          "time": 5.035147392290249,
+          "errorSeconds": 0.00043083900226736915
+        },
+        {
+          "time": 5.535147392290249,
+          "errorSeconds": 0.0007482993197278631
+        },
+        {
+          "time": 6.035147392290249,
+          "errorSeconds": 0.00013605442176878313
+        },
+        {
+          "time": 6.535147392290249,
+          "errorSeconds": 0.0013378684807259233
+        },
+        {
+          "time": 7.035147392290249,
+          "errorSeconds": 0.00011337868480687519
+        }
+      ],
+      "statePassed": true,
+      "phasePassed": true,
+      "onePlayRecorded": true
+    }
+  ],
+  "errors": [],
+  "checks": [
+    "GUI and MIDI rapid Sync/Play reach Beat Sync and one counted playback with aligned audible pulses",
+    "Second Play cancels waiting playback without later audio/history"
+  ],
+  "sourceBefore": {
+    "app.js": "e01bcfb7e0b468aa9ed2b455f0dc34360d3210e3cbc2dd1c9e83f4ac2439cb1e",
+    "smart-sync.js": "b57c0016cc9467b2f7fe178f7acd1522c2c4d1611c3b6ff6288c97fefcd1e3f1",
+    "engine.js": "852699a8eaa0704ffd4ade7351e2325dbaafd4f6257a04bdbee65d41d397e25f",
+    "deck-midi.js": "f1983f7a6d2b7ccf054f2fe981d86f8e161876d8e59fb38e2f26569b54d662b8",
+    "panels.js": "3106430667e9e83e95bf310a1c6ea6d58fb1e439dfdecca4cb1d8bd733b40dcc",
+    "rapid-sync-play-harness.js": "1565c956105b11433540eced9b19a0bbf3a7912496cba9a5fef44a05f20b49d5"
+  },
+  "recordStart": 0.592108843537415,
+  "cancel": {
+    "at": 7.569705215419501,
+    "playsBefore": 2,
+    "after": {
+      "playing": false,
+      "processing": false,
+      "queued": false,
+      "plays": 2
+    },
+    "from": 7.9197052154195005,
+    "to": 8.1197052154195,
+    "rightRMS": 1.9821424936264935e-08,
+    "passed": true
+  },
+  "recording": {
+    "bytes": 131969,
+    "format": "audio/webm;codecs=opus",
+    "sha256": "32a967086f734517a234da5854f5924588f8ddfef3690bd87e6f5cd17772d4c6",
+    "original_local_path": "local-evidence/rapid-sync-play/final/master.webm"
+  },
+  "decoded": {
+    "duration": 8.15997732426304,
+    "frames": 359855,
+    "sampleRate": 44100,
+    "channels": 2
+  },
+  "audio": {
+    "pulseMethod": "Two highpass biquads at2000Hz/Q.707; amplitude.01 threshold and100ms refractory. No temporal fitting.",
+    "pulseTimes": [
+      [
+        0.035147392290249435,
+        0.5351473922902494,
+        1.0351473922902494,
+        1.5351473922902494,
+        2.0351473922902494,
+        2.5351473922902494,
+        3.0351473922902494,
+        3.5351473922902494,
+        4.03498866213152,
+        4.535147392290249,
+        5.035147392290249,
+        5.535147392290249,
+        6.035147392290249,
+        6.535147392290249,
+        7.035147392290249,
+        7.535147392290249,
+        8.035147392290249
+      ],
+      [
+        0.5342630385487528,
+        1.0359183673469388,
+        1.5348072562358277,
+        2.0364172335600905,
+        2.5353514739229026,
+        3.036167800453515,
+        3.5359637188208617,
+        4.535283446712018,
+        5.034716553287982,
+        5.535895691609977,
+        6.035011337868481,
+        6.536485260770975,
+        7.035260770975056,
+        7.536916099773243
+      ]
+    ]
+  },
+  "sourceAfter": {
+    "app.js": "e01bcfb7e0b468aa9ed2b455f0dc34360d3210e3cbc2dd1c9e83f4ac2439cb1e",
+    "smart-sync.js": "b57c0016cc9467b2f7fe178f7acd1522c2c4d1611c3b6ff6288c97fefcd1e3f1",
+    "engine.js": "852699a8eaa0704ffd4ade7351e2325dbaafd4f6257a04bdbee65d41d397e25f",
+    "deck-midi.js": "f1983f7a6d2b7ccf054f2fe981d86f8e161876d8e59fb38e2f26569b54d662b8",
+    "panels.js": "3106430667e9e83e95bf310a1c6ea6d58fb1e439dfdecca4cb1d8bd733b40dcc",
+    "rapid-sync-play-harness.js": "1565c956105b11433540eced9b19a0bbf3a7912496cba9a5fef44a05f20b49d5"
+  },
+  "sourceStable": true,
+  "finishedAt": "2026-10-18T02:41:24.465Z",
+  "all_declared_served_hashes_match_disk": true
+}

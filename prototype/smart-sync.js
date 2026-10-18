@@ -37,6 +37,7 @@ export function alignedBarPosition(track,position,primaryTrack,primaryPosition,l
 }
 export function createSmartSync({engine, state}) {
   const revisions = new WeakMap();
+  const pendingPresses = new WeakMap();
   let syncBPM=null;
   const enabled = () => state.settings['Sync Mode'] === 'Smart Sync';
   const engaged = deck => !!deck.sync && engagedStates.has(deck.syncState);
@@ -71,12 +72,12 @@ export function createSmartSync({engine, state}) {
 
     }
   }
-  async function align(deck, primary) {
+  async function align(deck, primary, isCurrent=()=>true) {
     validateTransport(deck,primary);
     const ownTrack=deck.track, primaryTrack=primary.track, revision=revise(deck),ownLoop=loopBounds(deck),ownTransport=transportSignature(deck),primaryTransport=transportSignature(primary),barLock=barCompatible(deck)&&barCompatible(primary);
     const primaryRate=engine.audibleRate(primary), rate=rateFor(deck,primary);
     const priorClock=engine.voiceClock(deck,engine.voices.get(deck.index));
-    const valid=() => enabled() && revisions.get(deck)===revision && deck.track===ownTrack && primary.track===primaryTrack && engaged(primary) && primary.playing && transportSignature(deck)===ownTransport && transportSignature(primary)===primaryTransport;
+    const valid=() => isCurrent() && enabled() && revisions.get(deck)===revision && deck.track===ownTrack && primary.track===primaryTrack && engaged(primary) && primary.playing && transportSignature(deck)===ownTransport && transportSignature(primary)===primaryTransport;
     const result=await engine.synchronize(deck,{rate,priorClock,positionAt:when => {
       if (!valid() || Math.abs(engine.voiceRateAt(primary,engine.voices.get(primary.index),when)-primaryRate)>1e-7) throw cancelled();
       return barLock?alignedBarPosition(ownTrack,priorClock(when),primaryTrack,engine.voiceClock(primary,engine.voices.get(primary.index))(when),ownLoop):priorClock(when);
@@ -86,7 +87,7 @@ export function createSmartSync({engine, state}) {
     if(!barLock)reconcile();
     return result;
   }
-  async function press(deck) {
+  async function performPress(deck) {
     if (!enabled()) return;
     requireGrid(deck.track);const primary=leader(deck);
     if (!primary) {
@@ -103,14 +104,28 @@ export function createSmartSync({engine, state}) {
     if (!enabled() || revisions.get(deck)!==revision || deck.track!==track) throw cancelled();
     deck.sync=true;deck.syncRole ||= 'secondary';deck.syncState=deck.playing?'tempo':'armed';
   }
-  async function start(deck) {
+  function press(deck) {
+    const request={track:deck.track,promise:null};pendingPresses.set(deck,request);
+    request.promise=performPress(deck).finally(()=>{if(pendingPresses.get(deck)===request)pendingPresses.delete(deck);});
+    return request.promise;
+  }
+  async function start(deck,{isCurrent=()=>true}={}) {
+    const track=deck.track,token=engine.startTokens?.get(deck.index);
+    const pending=pendingPresses.get(deck);
+    if(pending){
+      await pending.promise;
+      // A cue/load/stop while waiting owns the next transport, even if Sync
+      // itself finishes arming successfully. Never resurrect the queued Play.
+      if(deck.track!==track||engine.startTokens?.get(deck.index)!==token)throw cancelled();
+    }
+    if(!isCurrent()||deck.track!==track)throw cancelled();
     if (!enabled() || !engaged(deck)) return false;
     requireGrid(deck.track);
     if(deck.track.gridWarpMarkers?.length)validateTransport(deck,deck);
     if(deck.position>=deck.track.duration)deck.position=0;
     if (deck.syncState==='armed') {
       const primary=leader(deck);
-      if (primary?.playing) {await align(deck,primary);return true;}
+      if (primary?.playing) {await align(deck,primary,isCurrent);return true;}
     }
     return false;
   }

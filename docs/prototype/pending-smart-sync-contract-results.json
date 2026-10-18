@@ -1,0 +1,17 @@
+{
+  "executed": true,
+  "command": "node scripts/test_pending_smart_sync_start.mjs",
+  "passed": true,
+  "scope": "Controlled rate/synchronize/owner policy; actual GUI/MIDI/phase/cancellation checked in separate browser workflow",
+  "source_sha256": {
+    "prototype/smart-sync.js": "b57c0016cc9467b2f7fe178f7acd1522c2c4d1611c3b6ff6288c97fefcd1e3f1",
+    "scripts/test_pending_smart_sync_start.mjs": "f8215b4fb3ff54e40fadaaa36be454945023d0829796d9712bf23202c6ef5053"
+  },
+  "checks": [
+    "Start waits for pending Sync and aligns once",
+    "Current-owner cancellation leaves Sync armed and playback stopped",
+    "Track replacement cancels pending start",
+    "External transport token cancels queued start",
+    "Sync failure propagates without unsynced fallback"
+  ]
+}
