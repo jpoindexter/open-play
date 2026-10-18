@@ -1,0 +1,37 @@
+{
+  "date": "2026-10-18",
+  "scope": "Production preset/router policy with engine collaborators; not new browser/native/physical acceptance",
+  "observedPhysicalRightDirection": "user-confirmed in frozen23 after one profile edit",
+  "sourcePreset": "hercules-inpulse-300-mk2-playback-v10",
+  "sourceChanges": [
+    "Both deck tempo and Shift-tempo-ignore defaults inverted",
+    "Reverse signed pitch coordinate so exact14bit centre8192 stayszero",
+    "Existing manual native-profile correction remains separate"
+  ],
+  "executedCommands": [
+    {
+      "command": "node scripts/test_hercules_tempo_direction.mjs",
+      "passed": true,
+      "checks": "two-deck14bit centre/endpoints/Shift-ignore and pickup;272maps"
+    },
+    {
+      "command": "node scripts/test_playback_midi.mjs",
+      "passed": true,
+      "checks": 5
+    },
+    {
+      "command": "node scripts/test_midi_relative_tempo.mjs",
+      "passed": true,
+      "checks": 10
+    }
+  ],
+  "sourceHashes": {
+    "prototype/deck-midi.js": "c82715d2f81f6493cbe46103e68938fa630ebf0ac7b39818cafd245f72c98a86",
+    "scripts/test_hercules_tempo_direction.mjs": "423578d42306a46316f74bd90343b9b07943d16d1a8017082ee96e669f436f93",
+    "scripts/test_playback_midi.mjs": "dc66d4e12cb5bb950002040c80d1bd36a71c9eaa032a805ba94d9c8dc8b908f9",
+    "scripts/test_midi_relative_tempo.mjs": "b8b0b2f0896cab006c1c7295f8c27ae90e0212a5064d3c2b56f2877ffdc76b9c"
+  },
+  "nativePackageChanged": false,
+  "leftPhysicalDirectionVerified": false,
+  "fullParityAccepted": false
+}

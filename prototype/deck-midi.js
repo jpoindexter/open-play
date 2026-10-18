@@ -145,7 +145,8 @@ export function createDeckMIDIRouter({state,engine,actions,applyFX=()=>{},onChan
   }
   if(message.type==='Note'&&!message.pressed)return true;
   const relative=mapping.encoding.startsWith('Relative');
-  let value=mappedValue(message,mapping.encoding,pairs);
+  const rawValue=mappedValue(message,mapping.encoding,pairs);
+  let value=rawValue;
   if(mapping.invert)value=relative?-value:1-value;
   if(!Number.isFinite(value))throw new RangeError('MIDI control needs a finite value.');
   const center=mapping.encoding==='14-bit absolute'||message.type==='Pitch bend'?8192/16383:64/127;
@@ -153,11 +154,14 @@ export function createDeckMIDIRouter({state,engine,actions,applyFX=()=>{},onChan
   if(action==='track gain'){if(d.track)actions.trackGain.set(d.track,relative?trackGainDB(d.track)+value*.1:bipolar(value)*24);return true;}
   if(action==='tempo'||action==='tempo ignore'){
    const range=Number(d.pitchRange)||8;
-   let requested=relative?d.rate+value*.0001:1+bipolar(value)*range/100;
+   // Reverse the signed pitch coordinate, preserving the exact MIDI centre.
+   // Inverting0..1 first shifts asymmetric14-bit centre8192 to8191.
+   const pitchPosition=relative?0:bipolar(rawValue)*(mapping.invert?-1:1);
+   let requested=relative?d.rate+value*.0001:1+pitchPosition*range/100;
    const id=key(mapping.encoding==='14-bit absolute'&&message.type==='CC'?{...message,number:message.number%32}:message),physical=requested;
    const syncMode=state.settings?.['Sync Mode'];
    const relativePitch=!relative&&((syncMode==='Simple Sync'&&d.sync)||(syncMode==='Smart Sync'&&(d.sync||d.syncState==='relative')));
-   if(!relative)physicalTempo.set(d.index,{position:bipolar(value),deviceId:message.deviceId||''});
+   if(!relative)physicalTempo.set(d.index,{position:pitchPosition,deviceId:message.deviceId||''});
    if(action==='tempo ignore'){ignoredTempo.set(d.index,{deviceId:message.deviceId||'',track:d.track,physical,caught:false,applied:d.rate,relativePitch,offset:d.rate-physical});onStatus(`Deck ${d.index+1} tempo motion ignored; ${relativePitch?'relative baseline moved':'pickup armed'}.`);return true;}
    let previous=pickup.get(id);if(previous?.track!==d.track)previous=undefined;
    const ignored=ignoredTempo.get(d.index);
@@ -232,13 +236,13 @@ export function createDeckMIDIRouter({state,engine,actions,applyFX=()=>{},onChan
 
 export function herculesPlaybackMappings(deviceId){
  if(!deviceId)throw Error('Connect the named Hercules input before installing its controls.');
- const maps=[],add=(target,type,channel,number,encoding='7-bit absolute',extra={})=>maps.push({target,type,channel,number,encoding,deviceId,preset:'hercules-inpulse-300-mk2-playback-v9',...extra});
+ const maps=[],add=(target,type,channel,number,encoding='7-bit absolute',extra={})=>maps.push({target,type,channel,number,encoding,deviceId,preset:'hercules-inpulse-300-mk2-playback-v10',mappingSource:'Alternative mapping — Open Play Hercules preset',...extra});
  add('Library browse','CC',1,1,'Relative two’s complement');add('Library fast browse','CC',4,1,'Relative two’s complement');add('Library focus','Note',1,0);add('Prepare add','Note',1,3);add('Prepare open','Note',4,3);add('Crossfader','CC',1,0);
  for(let deck=1;deck<=2;deck++){
   const ch=deck+1,t=s=>`Deck ${deck} ${s}`;
   for(const [name,n]of [['level',0],['filter',1],['low',2],['mid',3],['high',4],['trim',5]])add(t(name),'CC',ch,n);
-  add(t('tempo'),'CC',ch,8,'14-bit absolute',{pickup:true});
-  add(t('tempo ignore'),'CC',ch+3,8,'14-bit absolute');add(t('fader start'),'CC',ch+3,0);add(t('tap tempo'),'Note',ch+3,12);
+  add(t('tempo'),'CC',ch,8,'14-bit absolute',{pickup:true,invert:true});
+  add(t('tempo ignore'),'CC',ch+3,8,'14-bit absolute',{invert:true});add(t('fader start'),'CC',ch+3,0);add(t('tap tempo'),'Note',ch+3,12);
   add(`FX unit ${deck} depth`,'CC',ch,6);add(`FX unit ${deck} beat`,'CC',ch,7);add(`FX unit ${deck} enable`,'Note',ch,0);add(`FX unit ${deck} next`,'Note',ch+3,0);add(`FX unit ${deck} select`,'CC',ch+3,6);
   add(t('jog bend'),'CC',ch,9,'Relative two’s complement');
   add(t('jog surface'),'CC',ch,10,'Relative two’s complement');

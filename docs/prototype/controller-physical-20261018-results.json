@@ -107,14 +107,32 @@
       "rawAX": "local-evidence/controller-physical-20261018/right-volume-return-ax.txt",
       "screenshot": "local-evidence/controller-physical-20261018/fader-return-screen.png",
       "limits": "AX range value remained0 despite visually moved thumb and audible sound return. Treat AX value as stale here; no exact volume or transfer-curve acceptance."
+    },
+    {
+      "control": "Right physical tempo direction",
+      "humanAction": "Move long rightTEMPO slider up/down, then repeat after direction correction through centre",
+      "humanReportedBefore": "BPM and speed change, but up/negative speeds up and down/positive slows down",
+      "resultBefore": "direction_reversed_user_reported",
+      "nativeObservedMIDI": "CCch3/8 paired40; existing map had no inversion",
+      "correction": "Normal native MIDI editor reassigned only mapping146 Deck2tempo to invert=true; same14bitCCch3/8 and device binding. All271other mappings unchanged. Manual reassign removes old preset/pickup annotations from this one entry. Existing runtime still uses default pickup.",
+      "humanReportedAfter": "Correct now: up slower, down faster",
+      "result": "right_tempo_direction_user_confirmed_after_native_profile_correction",
+      "rawAX": "local-evidence/controller-physical-20261018/right-tempo-reversed-ax.txt",
+      "correctedMappingExportSHA256": "501316918408b3c08d85ce27d284ad9b1f4dc3280fbf86a3583e71e9d7b8d5ba",
+      "limits": "No physical left-tempo or shifted-tempo test. Browser source v10 correction is newer than frozen native23 and distinct from this saved-profile edit."
     }
   ],
-  "pending": "Move long RIGHT TEMPO slider clearly away from centre; ask BPM126 and audible speed response",
+  "pending": "Jason away; no physical capture/readiness question. Bulk Serato/controller map inventory and conversion requested; next human re-entry after preparing candidate: physical Sync/beatmatch and remaining controls.",
   "fullParityAccepted": false,
   "mappingBackup": {
     "path": "local-evidence/controller-physical-20261018/mapping-before-fader-diagnosis.json",
     "entries": 272,
     "sha256": "37b61c1dbf16d43a1f14d7d932c88dc3a4d2ba1a062ae23e5175c91d58953864",
     "changed": false
+  },
+  "awayState": {
+    "playingDecks": 0,
+    "rawAX": "local-evidence/controller-physical-20261018/away-stopped-ax.txt",
+    "action": "Already stopped when observed; no extra Stop sent"
   }
 }

@@ -1,0 +1,40 @@
+const $=s=>document.querySelector(s),sleep=ms=>new Promise(resolve=>setTimeout(resolve,ms));
+const assert=(ok,message)=>{if(!ok)throw Error(message);};
+async function until(fn,label){const end=performance.now()+10000;while(!fn()){assert(performance.now()<end,label+' timed out');await sleep(10);}}
+const click=s=>{assert($(s),'Missing '+s);$(s).click();};
+const field=(s,v)=>{$(s).value=String(v);$(s).dispatchEvent(new Event('change',{bubbles:true}));};
+const fakeInput={id:'catalog-check-input',name:'Synthetic catalog input',state:'connected',type:'input',onmidimessage:null};
+Object.defineProperty(navigator,'requestMIDIAccess',{configurable:true,value:async()=>({inputs:new Map([[fakeInput.id,fakeInput]]),onstatechange:null})});
+const input=(note,value=127)=>fakeInput.onmidimessage?.({data:new Uint8Array([0x90,note,value]),timeStamp:performance.now()});
+const profile={id:'a'.repeat(64),sourceSHA256:'a'.repeat(64),name:'Synthetic alternative <profile>',controls:[{tag:'control',attributes:{control:'60'}},{tag:'condition',children:[{tag:'unsupported'}]}],mappings:[{target:'Deck 1 play',type:'Note',channel:1,number:60,encoding:'7-bit absolute',invert:false},{target:'Deck 1 load',type:'Note',channel:1,number:61,encoding:'7-bit absolute',invert:false}],issues:[{reason:'Conditional control retained; not activated <script>'}],provenance:{kind:'official',name:'Untrusted factory claim'},physicalCompatibilityVerified:true};
+const text=JSON.stringify({format:'open-play-controller-catalog-v1',profiles:[profile]});
+async function importFile(content=text){const dt=new DataTransfer();dt.items.add(new File([content],'synthetic-catalog.json',{type:'application/json'}));$('#catalog-file').files=dt.files;$('#catalog-file').dispatchEvent(new Event('change',{bubbles:true}));await until(()=>/Imported|Already retained|not imported/.test($('#catalog-status').textContent),'Catalog import result');}
+let app;
+async function run(){
+ $('#catalog-run').disabled=true;const report={startedAt:new Date().toISOString(),scope:'Actual browser app; synthetic catalog/input; no vendor map, hardware or native acceptance',checks:[],errors:[],phase:sessionStorage.getItem('catalog-check-phase')||'import'};
+ const {state,engine}=app;
+ try{
+  await engine.resume();engine.audioMonitor.mutePhysical(true);await until(()=>engine.audioMonitor.snapshot().physicalMuted,'Physical mute');await until(()=>!state.analysis,'Initial analysis');
+  click('[data-panel="midi"]');await until(()=>!$('#catalog-status').textContent.startsWith('Reading'),'Catalog ready');
+  if(report.phase==='import'){
+   assert(state.mappings.length===0,'Use fresh isolated origin');field('#midi-target','Deck 2 play');field('#midi-type','Note');field('#midi-channel',1);field('#midi-number',61);click('#midi-add');await until(()=>$('#catalog-file'),'Mapper redraw');
+   const before=JSON.stringify(state.mappings);field('#catalog-source-kind','alternative');field('#catalog-source-name','Synthetic author');await importFile();assert(JSON.stringify(state.mappings)===before,'Import installed controls before device selection');
+   await until(()=>$('#catalog-profile-detail').textContent.includes('Alternative mapping — Synthetic author'),'Alternative source label');assert(!$('#catalog-profile-detail').querySelector('script'),'Source content became HTML');assert($('#catalog-apply').disabled,'Unbound profile can be applied');
+   report.checks.push('Import retained profile/unknown condition without changing live assignments or trusting official/physical claims');
+   await importFile();assert($('#catalog-status').textContent.includes('Already retained'),'Duplicate bytes not deduplicated');assert($('#catalog-profile').options.length===2,'Duplicate profile visible');report.checks.push('Duplicate catalog import retained one profile');
+   sessionStorage.setItem('catalog-check-phase','restored');sessionStorage.setItem('catalog-check-import',JSON.stringify(report));report.awaitingReload=true;
+  }else{
+   await until(()=>$('#catalog-profile').options.length===2,'Restored profile');field('#catalog-profile',profile.id);assert($('#catalog-profile-detail').textContent.includes('Alternative mapping — Synthetic author'),'Reload lost provenance');assert(state.mappings.length===1&&state.mappings[0].target==='Deck 2 play','Reload lost original assignment');report.checks.push('Actual page reload restored private catalog, provenance and original assignments');
+   click('#midi-connect');await until(()=>$('#midi-test-device').options.length===2,'Synthetic input enumeration');
+   // Connecting redraws the editor; select from the current controls.
+   await until(()=>$('#catalog-profile').options.length===2,'Connected editor catalog');field('#catalog-profile',profile.id);field('#catalog-device',fakeInput.id);assert(!$('#catalog-apply').disabled,'Bound profile remains disabled');click('#catalog-apply');
+   await until(()=>state.mappings.length===2,'Apply supported profile');assert(state.mappings[0].target==='Deck 2 play'&&state.mappings[1].target==='Deck 1 play'&&state.mappings[1].deviceId===fakeInput.id,'Conflict preservation/device binding failed');assert(state.mappings[1].mappingSource==='Alternative mapping — Synthetic author','Applied source label lost');assert(JSON.parse(localStorage.getItem('openplay-review-v1')).mappings.length===2,'Applied controls not persisted');report.checks.push('Apply kept conflicting original assignment and persisted only device-scoped supported control');
+   const d=state.decks[0];Object.assign(d,{keylock:false,keyShift:0,level:.8,rate:1,loop:false,reverse:false,position:0});engine.mix(0,'level',.8);const buf=engine.ctx.createBuffer(2,engine.ctx.sampleRate*3,engine.ctx.sampleRate);for(let c=0;c<2;c++){const data=buf.getChannelData(c);for(let i=0;i<data.length;i++)data[i]=.1*Math.sin(2*Math.PI*330*i/buf.sampleRate);}engine.buffers.set(d.track.id,buf);await engine.recordStart();input(60);await until(()=>d.playing,'Imported Play');input(60,0);const start=engine.position(d);await sleep(350);assert(engine.position(d)>start+.1,'Imported Play did not move actual transport');input(60);await until(()=>!d.playing,'Imported pause');input(60,0);const recorded=await engine.recordStop(),decoded=await engine.ctx.decodeAudioData(await recorded.arrayBuffer());report.audio={frames:decoded.length,sampleRate:decoded.sampleRate,channels:decoded.numberOfChannels,rms:[]};for(let c=0;c<decoded.numberOfChannels;c++){const data=decoded.getChannelData(c);let sum=0;for(const v of data){assert(Number.isFinite(v),'Nonfinite recorded audio');sum+=v*v;}report.audio.rms.push(Math.sqrt(sum/data.length));}assert(report.audio.rms.length===2&&report.audio.rms.every(v=>v>.005),'Imported mapping produced no stereo master audio');report.checks.push('Imported mapping routed synthetic device press/release to actual Play/pause, moving transport and recorded stereo audio');
+   report.priorImport=JSON.parse(sessionStorage.getItem('catalog-check-import'));report.completed=true;
+  }
+ }catch(error){report.errors.push({message:error.message,stack:error.stack});}
+ finally{for(const d of state.decks)engine.pause(d);report.finishedAt=new Date().toISOString();$('#catalog-results').textContent=JSON.stringify(report,null,2);$('#catalog-check-status').textContent=report.errors.length?'Failed: '+report.errors.map(e=>e.message).join('; '):report.awaitingReload?'Import retained. Reload this page, then run the restored workflow.':'Scoped catalog workflow passed; playback stopped';}
+}
+$('#catalog-run').onclick=run;
+async function boot(){const parsed=new DOMParser().parseFromString(await(await fetch('index.html')).text(),'text/html');for(const n of [...parsed.body.children])if(n.tagName!=='SCRIPT')document.body.append(n);await import('./app.js');await until(()=>window.openPlay?.state.decks[1].track,'Actual app');app=window.openPlay;$('#catalog-run').disabled=false;$('#catalog-run').textContent=sessionStorage.getItem('catalog-check-phase')?'Run restored catalog workflow':'Run catalog import workflow';}
+boot().catch(error=>$('#catalog-check-status').textContent=error.message);

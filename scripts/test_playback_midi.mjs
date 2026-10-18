@@ -13,7 +13,7 @@ await send([0x91,7,127]);await send([0x91,7,127]);await send([0x81,7,32]);await 
 await send([0x91,6,127]);assert.equal(holds.size,1);router.resetInput('hercules');assert.equal(holds.size,0);
 await send([0xb1,8,64]);await send([0xb1,40,0]);assert.equal(decks[0].rate,1);
 decks[0].rate=1.04;await send([0xb1,40,1]);assert.equal(decks[0].rate,1.04,'stale physical fader must not overwrite Sync');
-await send([0xb1,8,100]);assert.ok(decks[0].rate>1.04,'crossing the new tempo picks up');
+await send([0xb1,8,28]);assert.ok(decks[0].rate>1.04,'crossing the new tempo in the calibrated direction picks up');
 await send([0xb2,9,1]);await send([0xb2,9,127]);assert.equal(decks[1].position,10);
 await send([0xb1,6,127]);await send([0xb2,7,127]);await send([0x92,0,127]);assert.equal(state.fx[0][0].depth,100);assert.equal(state.fx[1][0].beat,'8');assert.equal(state.fx[1][0].on,true);
 const foreign={...decodeMIDI([0xb1,0,127]),deviceId:'other'};assert.equal(maps.some(x=>matchesMIDIMap(foreign,x)),false);

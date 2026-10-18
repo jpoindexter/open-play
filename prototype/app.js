@@ -230,6 +230,7 @@ function trackMetadata(t) {
   return Object.fromEntries(metadataFields.map((k) => [k, t[k]]));
 }
 function persist() {
+  state.sessionSaved = false;
   for (const t of state.tracks)
     if (t.contentHash) state.localTags[t.contentHash] = trackMetadata(t);
   try {
@@ -253,10 +254,12 @@ function persist() {
       }),
     );
     state.sessionSaved = true;
+    return true;
   } catch {
     notify(
       "Browser storage unavailable. Export a library backup to preserve changes.",
     );
+    return false;
   }
 }
 function dialog(title, html, setup) {

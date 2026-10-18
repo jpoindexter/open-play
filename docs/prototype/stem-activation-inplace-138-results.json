@@ -1,0 +1,49 @@
+{
+  "scope": "Actual unchanged WASM, serial128-frame clock, fixed10-channel geometry. At0.9s replace only8silent Stem input arrays with actual cached separation. Mutation uses serial reference semantics; browser replacement API NOT implemented. No app/native/controller/listening acceptance.",
+  "originalSHA256": "a0b258c47635ebefa58de602e28df4a192ac1ed443b7dd1cb4b37a34e868a976",
+  "sampleRate": 44100,
+  "moduleSHA256": "1f470f846a993cc750ee2e111817adb08879493025c7322eadc8cf98323e4ef8",
+  "attachTime": 0.9026757369614512,
+  "fixedGeometryChannels": 10,
+  "allRetainedChannelsHashCheckedAndFinite": true,
+  "channels": [
+    {
+      "channel": 0,
+      "beforeAttachByteIdentical": true,
+      "originalOutputByteIdenticalForWholeCapture": false,
+      "maximumOriginalDifference": 0.00275818957015872,
+      "minimum10msRMSRatio": 0.974604785994693,
+      "maximumAdjacentJump": 0.005689044715836644,
+      "longestNearZeroRunSeconds": 0.0,
+      "postAttachPhaseVsControlDegrees": -0.8274317877564604,
+      "postAttachStemSumRelativeRMSError": 0.00010593085283756412,
+      "boundedSerialContinuityPassed": true
+    },
+    {
+      "channel": 1,
+      "beforeAttachByteIdentical": true,
+      "originalOutputByteIdenticalForWholeCapture": false,
+      "maximumOriginalDifference": 0.00016815215349197388,
+      "minimum10msRMSRatio": 0.9997207411696782,
+      "maximumAdjacentJump": 0.009419957175850868,
+      "longestNearZeroRunSeconds": 0.0,
+      "postAttachPhaseVsControlDegrees": -0.004133060174666751,
+      "postAttachStemSumRelativeRMSError": 8.357725139016585e-05,
+      "boundedSerialContinuityPassed": true
+    }
+  ],
+  "stemOutputRMSAfterAttach": [
+    8.127695459147254e-05,
+    7.91740405640304e-05,
+    0.08480026634747162,
+    0.08482777570645772,
+    0.0001004478392879889,
+    9.50588159944013e-05,
+    0.00010801081087738815,
+    9.509198456102513e-05
+  ],
+  "finding": "Keeping one10-channel processor and replacing only silent Stem inputs avoids the large cold-instance phase jump in this bounded serial tone experiment. Original output is not byte-identical after the new channel content arrives. Browser replacement API and actual engine/pad/transport integration are not implemented.",
+  "prototypeFixAccepted": false,
+  "nativeAccepted": false,
+  "fullParityAccepted": false
+}
