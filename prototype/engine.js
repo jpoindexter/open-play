@@ -1155,8 +1155,43 @@ export class AudioEngine {
       buffers.some((b) => Math.abs(b.duration - track.duration) > 0.1)
     )
       throw new Error("Stem duration does not match original audio.");
+    const previous = this.stemBuffers.get(track.id);
+    const loaded = decks.filter(d => d.track === track);
+    // Preparation must not pause the audible source while its replacement is
+    // built. Reuse the existing future-time barriers for ordinary forward
+    // playback (including loops and live pitch); gesture paths remain separate.
+    const continuous = loaded.filter(d => {
+      const voice = this.voices.get(d.index);
+      return d.playing && !d.processing && !d.reverse &&
+        voice && !voice.deckScratchTransport && !voice.stemSlipTransport;
+    }).map(deck => ({deck, clock: this.voiceClock(deck, this.voices.get(deck.index))}));
     this.stemBuffers.set(track.id, buffers);
-    for (const d of decks.filter((d) => d.track === track)) {
+    const handoff = continuous.length ? createSyncTempoHandoff(this.ctx, continuous.map(x => x.deck.index)) : null;
+    try {
+      const results = await Promise.allSettled(continuous.map(async ({deck, clock}) => {
+        try {
+          this.clearDeckScratchCache(deck.index);
+          await this.start(deck, {priorClock: clock, positionAt: clock, handoff});
+        }
+        catch (error) { handoff.fail(error); throw error; }
+      }));
+      const failed = results.find(result => result.status === 'rejected');
+      if (failed) throw failed.reason;
+      handoff?.finish();
+    } catch (error) {
+      handoff?.fail(error);
+      if (this.stemBuffers.get(track.id) === buffers) {
+        if (previous) this.stemBuffers.set(track.id, previous);
+        else this.stemBuffers.delete(track.id);
+      }
+      for (const {deck} of continuous) if (handoff.owns(deck.index)) {
+        deck.processing = false;
+        if (this.transforms.get(deck.index) === handoff.controller(deck.index)) this.transforms.delete(deck.index);
+        this.onProcessing(deck);
+      }
+      throw error;
+    } finally { handoff?.dispose(); }
+    for (const d of loaded.filter(d => !continuous.some(x => x.deck === d))) {
       if (this.voices.get(d.index)?.stemSlipTransport) {
         await this.refreshStemSlipBuffers(d);
         continue;

@@ -23,3 +23,5 @@ Full Serato parity remains unaccepted; the full independent Claude audit remains
 Browser-only plan135 replaces the LPF history-reset path with a stateful processor and measured live cutoff/depth/slope behavior. [Review](LPF_LIVE_REVIEW.md). This is not packaged in23; the prepared core controller test remains unchanged.
 
 Browser-only plan136 rejects invalid LPF advanced edits without changing saved or live settings; valid corrections and Cancel/readback were exercised with captured audio. [Review](LPF_VALUE_VALIDATION_REVIEW.md). Prepared23 remains unchanged and ready for the physical core test.
+
+Browser-only plan137 removes the measured ordinary-loop10ms gap when prepared Stems attach. Keylocked activation still fails a level-dip guard; see [review and retained failure](STEM_ACTIVATION_REVIEW.md). This patch is not packaged in23; the prepared controller test remains unchanged.
