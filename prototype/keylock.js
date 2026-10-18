@@ -71,10 +71,11 @@ export class KeylockRenderer {
       onProgress(1);
       return cached;
     }
-    // Reject requests whose input+output alone exceeds 512 MiB. The worker
-    // additionally owns a WASM heap; this is a prototype memory boundary.
-    const bytes = buffer.length * buffer.numberOfChannels * 4;
-    if (bytes * (1 + 1 / tempo) > 512 * 1024 * 1024)
+    // Bound worker input, optional resampled source and output PCM before
+    // cloning. The WASM heap and caller-owned original are additional memory.
+    const preparedFrames=semitones===0?0:Math.ceil(buffer.length/(2**(semitones/12)));
+    const outputFrames=Math.max(1,Math.round(buffer.length/tempo));
+    if ((buffer.length+preparedFrames+outputFrames)*buffer.numberOfChannels*4 > 512 * 1024 * 1024)
       throw new Error(
         "This track exceeds the browser pitch-render memory limit. Use a shorter file.",
       );

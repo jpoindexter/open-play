@@ -1,0 +1,169 @@
+{
+  "planPath": "docs/prototype/keylock-resampled-pitch-plan.json",
+  "planSHA256": "c8ab2df2947c55f3657d5c95576436545336a4d678f1f69e18e7c24250bc46fe",
+  "host": "Actual WASM in serial Node clock/port host. Not browser/native/live transport, transient, source-cursor, listening or full keylock acceptance. Default120/30ms profile unchanged. Results do not authorize automatic backend promotion.",
+  "sourceHashes": {
+    "prototype/keylock-shadow-live.js": "4a5625d3d7ace212fbbd0dc140a30a351a11cf4bfeafd07be406a26dd0004a63",
+    "prototype/vendor/signalsmith-stretch/SignalsmithStretch-open-play-history.mjs": "1f470f846a993cc750ee2e111817adb08879493025c7322eadc8cf98323e4ef8",
+    "scripts/experiment_resampled_pitch.mjs": "a52719187fff1df727d04e79cd1a2ddeba0ad97a4128125921e63bfa00e94127"
+  },
+  "sources": [
+    {
+      "id": "retained-shifted",
+      "tonesHz": [
+        330,
+        550
+      ],
+      "path": "local-evidence/keylock-resampled-pitch-initial/retained-shifted-source.f32",
+      "bytes": 4939200,
+      "sha256": "99cb94772a2fa87975fc4ed15291e491d44097b85811c1f2a24768876705d502",
+      "sampleRate": 44100,
+      "channels": 2,
+      "frames": 617400
+    },
+    {
+      "id": "retained-bass-counterexample",
+      "tonesHz": [
+        97,
+        173
+      ],
+      "path": "local-evidence/keylock-resampled-pitch-initial/retained-bass-counterexample-source.f32",
+      "bytes": 4939200,
+      "sha256": "7c518e879e563110bfc7ef5c60b524496a1687dbd92b6f1c3ec2e3f379ae38aa",
+      "sampleRate": 44100,
+      "channels": 2,
+      "frames": 617400
+    }
+  ],
+  "results": [
+    {
+      "id": "retained-shifted-history-spectral",
+      "caseID": "retained-shifted",
+      "variant": "history-spectral",
+      "tonesHz": [
+        330,
+        550
+      ],
+      "requestedRate": 1.08,
+      "requestedSemitones": 2,
+      "q": 1.122462048309373,
+      "command": {
+        "active": true,
+        "input": 0,
+        "output": 0.25,
+        "rate": 1.08,
+        "semitones": 2
+      },
+      "latencySeconds": 0.12,
+      "blockSamples": 5292,
+      "intervalSamples": 1323,
+      "seekHistoryFrames": 6615,
+      "preparedSourceFrames": 617400,
+      "nonfinite": 0,
+      "serialWallMs": 274.153666,
+      "path": "local-evidence/keylock-resampled-pitch-initial/retained-shifted-history-spectral.f32",
+      "bytes": 3528704,
+      "sha256": "6cbc1a08245e8a394563edd666e1507b7c31c718cd0c1498bdb911c8b40d0de3",
+      "sampleRate": 44100,
+      "channels": 2,
+      "frames": 441088
+    },
+    {
+      "id": "retained-shifted-resample-then-neutral",
+      "caseID": "retained-shifted",
+      "variant": "resample-then-neutral",
+      "tonesHz": [
+        330,
+        550
+      ],
+      "requestedRate": 1.08,
+      "requestedSemitones": 2,
+      "q": 1.122462048309373,
+      "command": {
+        "active": true,
+        "input": 0,
+        "output": 0.25,
+        "rate": 0.9621706155915665,
+        "semitones": 0
+      },
+      "latencySeconds": 0.12,
+      "blockSamples": 5292,
+      "intervalSamples": 1323,
+      "seekHistoryFrames": 6615,
+      "preparedSourceFrames": 550041,
+      "nonfinite": 0,
+      "serialWallMs": 318.613,
+      "path": "local-evidence/keylock-resampled-pitch-initial/retained-shifted-resample-then-neutral.f32",
+      "bytes": 3528704,
+      "sha256": "82702474eb3c79f8184ca5e67ec0756293a36b15af816852bb2ee9945a8e8225",
+      "sampleRate": 44100,
+      "channels": 2,
+      "frames": 441088
+    },
+    {
+      "id": "retained-bass-counterexample-history-spectral",
+      "caseID": "retained-bass-counterexample",
+      "variant": "history-spectral",
+      "tonesHz": [
+        97,
+        173
+      ],
+      "requestedRate": 0.75,
+      "requestedSemitones": -12,
+      "q": 0.5,
+      "command": {
+        "active": true,
+        "input": 0,
+        "output": 0.25,
+        "rate": 0.75,
+        "semitones": -12
+      },
+      "latencySeconds": 0.12,
+      "blockSamples": 5292,
+      "intervalSamples": 1323,
+      "seekHistoryFrames": 6615,
+      "preparedSourceFrames": 617400,
+      "nonfinite": 0,
+      "serialWallMs": 144.509541,
+      "path": "local-evidence/keylock-resampled-pitch-initial/retained-bass-counterexample-history-spectral.f32",
+      "bytes": 3528704,
+      "sha256": "57fe5daebff32e88d83c954846ee9cb1a4317333d9c6cedd57124f2992c8fce1",
+      "sampleRate": 44100,
+      "channels": 2,
+      "frames": 441088
+    },
+    {
+      "id": "retained-bass-counterexample-resample-then-neutral",
+      "caseID": "retained-bass-counterexample",
+      "variant": "resample-then-neutral",
+      "tonesHz": [
+        97,
+        173
+      ],
+      "requestedRate": 0.75,
+      "requestedSemitones": -12,
+      "q": 0.5,
+      "command": {
+        "active": true,
+        "input": 0,
+        "output": 0.25,
+        "rate": 1.5,
+        "semitones": 0
+      },
+      "latencySeconds": 0.12,
+      "blockSamples": 5292,
+      "intervalSamples": 1323,
+      "seekHistoryFrames": 6615,
+      "preparedSourceFrames": 1234800,
+      "nonfinite": 0,
+      "serialWallMs": 443.4804589999999,
+      "path": "local-evidence/keylock-resampled-pitch-initial/retained-bass-counterexample-resample-then-neutral.f32",
+      "bytes": 3528704,
+      "sha256": "fe296545139c9db471ecef952f815ce1f744e6d3c734bbbaccb2a4f820cbaebd",
+      "sampleRate": 44100,
+      "channels": 2,
+      "frames": 441088
+    }
+  ],
+  "fullKeylockAccepted": false
+}

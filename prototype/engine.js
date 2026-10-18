@@ -1081,6 +1081,15 @@ export class AudioEngine {
       if (this.voices.get(d.index)?.liveKeylock === live && !ack.superseded) {d.keylock = keylock; d.keyShift = semitones;}
       return;
     }
+    if(d.playing&&d.loop&&!d.reverse){
+      const track=d.track,previous={keylock:d.keylock,keyShift:d.keyShift},clock=this.voiceClock(d,this.voices.get(d.index));
+      const handoff=createSyncTempoHandoff(this.ctx,[d.index]);
+      d.keylock=keylock;d.keyShift=semitones;
+      try{await this.start(d,{priorClock:clock,positionAt:clock,handoff});handoff.finish();}
+      catch(error){handoff.fail(error);if(d.track===track&&handoff.owns(d.index)&&d.keylock===keylock&&d.keyShift===semitones)Object.assign(d,previous);throw error;}
+      finally{handoff.dispose();}
+      return;
+    }
     const was = d.playing || d.processing;
     this.pause(d, { preserveStemExit: true });
     d.keylock = keylock;

@@ -1,0 +1,15 @@
+{
+  "declaredBeforeExecution": "2026-10-18",
+  "purpose": "Compare current history-corrected spectral pitch mapping against generic source resampling by q=2^(shift/12), followed by neutral stretching at rate/q. Isolate the shifted pitch error without changing FFT resolution, vendor WASM, output gain or acceptance limits.",
+  "cases": [
+    {"id": "retained-shifted", "sampleRate": 44100, "tonesHz": [330, 550], "rate": 1.08, "semitones": 2},
+    {"id": "retained-bass-counterexample", "sampleRate": 44100, "tonesHz": [97, 173], "rate": 0.75, "semitones": -12}
+  ],
+  "variants": ["history-spectral", "resample-then-neutral"],
+  "source": "Owned analytic float32 stereo sines, amplitude0.12,14seconds, zero phase; all original source and complete10second128-aligned output PCM retained.",
+  "resampler": "Existing independent copyKeylockChunk32-tap/1024-phase windowed-sinc helper; no tone detection, fitted pitch correction or new package.",
+  "measurementSeconds": [5, 7],
+  "maximumFrequencyErrorHz": 1,
+  "minimumRMS": 0.001,
+  "scope": "Actual WASM in serial Node clock/port host. Not browser/native/live transport, transient, source-cursor, listening or full keylock acceptance. Default120/30ms profile unchanged. Results do not authorize automatic backend promotion."
+}

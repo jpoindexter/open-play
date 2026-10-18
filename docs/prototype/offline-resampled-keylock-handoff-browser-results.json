@@ -1,0 +1,167 @@
+{
+  "startedAt": "2026-10-18T00:25:03.761Z",
+  "workflowCompleted": true,
+  "checks": [
+    "Normal Loop8/Key lock/tempo/Play select actual offline Worker output with original-time loop bounds",
+    "Normal Key+ twice prepares and plays shifted offline loop; full preparation interval stays in the recording",
+    "Original eight-beat loop bounds remain after worker/pitch changes"
+  ],
+  "errors": [],
+  "scope": "Actual app Loop8/Key lock/tempo+8%/Play/Key+/Key+/Pause controls and real offline Worker/DSP output. Owned330/550Hz stereo tones, whole master recording. Not live-forward/native/physical/music/loop-boundary-quality/reference acceptance.",
+  "criteria": {
+    "neutralMaximumErrorHz": 0.01,
+    "shiftedMaximumErrorHz": 1,
+    "measurementSecondsAfterSettledState": [
+      5,
+      7
+    ]
+  },
+  "fixture": {
+    "sampleRate": 44100,
+    "duration": 30,
+    "tonesHz": [
+      330,
+      550
+    ],
+    "amplitude": 0.12
+  },
+  "states": [
+    {
+      "name": "neutral loop1.08",
+      "audioTime": 0.6733786848072563,
+      "playing": true,
+      "rate": 1.08,
+      "keylock": true,
+      "keyShift": 0,
+      "position": 0.0017387755102040892,
+      "loop": {
+        "start": 0,
+        "end": 4
+      },
+      "live": false,
+      "renderedFrames": 1225000,
+      "renderedSampleRate": 44100,
+      "loopStart": 0,
+      "loopEnd": 3.7037037037037033
+    },
+    {
+      "name": "shifted loop1.08+2",
+      "audioTime": 11.27328798185941,
+      "playing": true,
+      "rate": 1.08,
+      "keylock": true,
+      "keyShift": 2,
+      "position": 3.449640816326531,
+      "loop": {
+        "start": 0,
+        "end": 4
+      },
+      "live": false,
+      "renderedFrames": 1225000,
+      "renderedSampleRate": 44100,
+      "loopStart": 0,
+      "loopEnd": 3.7037037037037033
+    }
+  ],
+  "pitchActions": [
+    {
+      "semitones": 1,
+      "callAudioTime": 8.672653061224489,
+      "callAt": 33798.89999985695,
+      "settledAudioTime": 9.996190476190476,
+      "preparationMs": 1318.1000001430511
+    },
+    {
+      "semitones": 2,
+      "callAudioTime": 9.996190476190476,
+      "callAt": 35117,
+      "settledAudioTime": 11.27328798185941,
+      "preparationMs": 1281.2999999523163
+    }
+  ],
+  "sourceBefore": {
+    "app.js": "266c98f7be3fc6c543b0ae86f2f070b2015afa73a108206bb498db8dd003f588",
+    "engine.js": "4f9bdd7c978b7911de756b5f7d6410ff6371cb9c3db70247d0770a669f960eff",
+    "sync-tempo-handoff.js": "5842f9209035e24ff867004d3fef5f0a1fe7f7f4976440546b8238a225b82f9b",
+    "keylock-shadow-live.js": "c1245e31060826fb9425f800e4c7e068004e52cecf91ca906a3571be84ead175",
+    "keylock.js": "62adbfdd77df20deb1328302d4a8daf3d7bdc29870af453d39acfd2a02bf060b",
+    "keylock-dsp.js": "f4cb1881fedb018f395a6711d263aa142feb8dfe93638a3d1f97fc432c15ac3d",
+    "keylock-worker.js": "5cb72a1bc74e1808c32b430d72d5769427c7056edee11410eb6f8b3c7751fcec",
+    "pcm-resample.js": "b5240e76961a44a0a8416e61453aa422ef6ccf16f5b06396b8dc4f7d6826ca5d",
+    "panels.js": "4a4b4c544f07140758cfd8f45b00f774dea588f881d6ed0f24c0e19bc1ff02fb",
+    "offline-keylock-harness.js": "393215f818893b19e873dcfe3bc58bfe150678f6ae2c2ac8bbb7d894722633ff",
+    "vendor/signalsmith-stretch/SignalsmithStretch-open-play-history.mjs": "1f470f846a993cc750ee2e111817adb08879493025c7322eadc8cf98323e4ef8"
+  },
+  "physicalOutputMuted": true,
+  "startPreparationMs": 612.4000000953674,
+  "recordStartAudioTime": 0.6733786848072563,
+  "neutral": {
+    "name": "neutral loop1.08",
+    "audioTime": 0.6733786848072563,
+    "playing": true,
+    "rate": 1.08,
+    "keylock": true,
+    "keyShift": 0,
+    "position": 0.0017387755102040892,
+    "loop": {
+      "start": 0,
+      "end": 4
+    },
+    "live": false,
+    "renderedFrames": 1225000,
+    "renderedSampleRate": 44100,
+    "loopStart": 0,
+    "loopEnd": 3.7037037037037033
+  },
+  "shifted": {
+    "name": "shifted loop1.08+2",
+    "audioTime": 11.27328798185941,
+    "playing": true,
+    "rate": 1.08,
+    "keylock": true,
+    "keyShift": 2,
+    "position": 3.449640816326531,
+    "loop": {
+      "start": 0,
+      "end": 4
+    },
+    "live": false,
+    "renderedFrames": 1225000,
+    "renderedSampleRate": 44100,
+    "loopStart": 0,
+    "loopEnd": 3.7037037037037033
+  },
+  "recording": {
+    "bytes": 300597,
+    "format": "audio/webm;codecs=opus",
+    "sha256": "0ec290540fb7b109b16d824b7f6c9182e7a3f0774f2da2abe8fbd3f00e608520"
+  },
+  "decoded": {
+    "frames": 820259,
+    "sampleRate": 44100,
+    "channels": 2,
+    "duration": 18.599977324263037
+  },
+  "finalPlayingDecks": 0,
+  "sourceAfter": {
+    "app.js": "266c98f7be3fc6c543b0ae86f2f070b2015afa73a108206bb498db8dd003f588",
+    "engine.js": "4f9bdd7c978b7911de756b5f7d6410ff6371cb9c3db70247d0770a669f960eff",
+    "sync-tempo-handoff.js": "5842f9209035e24ff867004d3fef5f0a1fe7f7f4976440546b8238a225b82f9b",
+    "keylock-shadow-live.js": "c1245e31060826fb9425f800e4c7e068004e52cecf91ca906a3571be84ead175",
+    "keylock.js": "62adbfdd77df20deb1328302d4a8daf3d7bdc29870af453d39acfd2a02bf060b",
+    "keylock-dsp.js": "f4cb1881fedb018f395a6711d263aa142feb8dfe93638a3d1f97fc432c15ac3d",
+    "keylock-worker.js": "5cb72a1bc74e1808c32b430d72d5769427c7056edee11410eb6f8b3c7751fcec",
+    "pcm-resample.js": "b5240e76961a44a0a8416e61453aa422ef6ccf16f5b06396b8dc4f7d6826ca5d",
+    "panels.js": "4a4b4c544f07140758cfd8f45b00f774dea588f881d6ed0f24c0e19bc1ff02fb",
+    "offline-keylock-harness.js": "393215f818893b19e873dcfe3bc58bfe150678f6ae2c2ac8bbb7d894722633ff",
+    "vendor/signalsmith-stretch/SignalsmithStretch-open-play-history.mjs": "1f470f846a993cc750ee2e111817adb08879493025c7322eadc8cf98323e4ef8"
+  },
+  "sourceStable": true,
+  "finishedAt": "2026-10-18T00:25:23.103Z",
+  "rawReport": {
+    "path": "local-evidence/offline-resampled-keylock-handoff/original.json",
+    "sha256": "d53b837dbcaebeed16314105f1f2ae551c9818dc3058e185966f1314353ce870",
+    "bytes": 406471
+  },
+  "originalAudioPath": "local-evidence/offline-resampled-keylock-handoff/master.webm"
+}

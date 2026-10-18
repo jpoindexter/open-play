@@ -1,6 +1,7 @@
-// Offline host for the unmodified Signalsmith 1.3.2 AudioWorklet processor.
+// Offline host for Signalsmith1.3.2 with the separate seek-history wrapper.
 // Runs only in a dedicated Worker (or the serial Node signal-test process).
 // Emulates the documented 128-frame AudioWorklet clock/port, not the DSP.
+import {copyPCMChunk} from './pcm-resample.js';
 let Processor;
 let registering;
 
@@ -15,7 +16,7 @@ async function loadProcessor() {
       globalThis.registerProcessor = (name, constructor) => {
         Processor = constructor;
       };
-      await import("./vendor/signalsmith-stretch/SignalsmithStretch.mjs");
+      await import("./vendor/signalsmith-stretch/SignalsmithStretch-open-play-history.mjs");
     })();
   await registering;
 }
@@ -43,6 +44,14 @@ export async function transformChannels(
   { tempo = 1, semitones = 0, onProgress = () => {} } = {},
 ) {
   validateTransform(channels, sampleRate, tempo, semitones);
+  // Move pitch to the independent sample-rate converter and ask the spectral
+  // processor only for neutral-pitch time stretching. Original-time output
+  // coordinates and requested duration remain unchanged for every caller.
+  const pitchFactor=2**(semitones/12),frames=Math.max(1,Math.round(channels[0].length/tempo));
+  const preparedFrames=Math.ceil(channels[0].length/pitchFactor);
+  if(channels.length*(channels[0].length+(semitones===0?0:preparedFrames)+frames)*4>512*1024*1024)
+    throw new RangeError('Pitch render exceeds the512MiB prototype PCM budget.');
+  const source=semitones===0?channels:await copyPCMChunk(channels,sampleRate,sampleRate/pitchFactor,0,preparedFrames);
   await loadProcessor();
   globalThis.sampleRate = sampleRate;
   globalThis.currentTime = 0;
@@ -65,15 +74,14 @@ export async function transformChannels(
   let message = 0;
   const send = (method, ...args) =>
     processor.port.onmessage({ data: [message++, method, ...args] });
-  send("addBuffers", channels);
+  send("addBuffers", source);
   send("schedule", {
     active: true,
     input: 0,
     output: 0,
-    rate: tempo,
-    semitones,
+    rate: tempo/pitchFactor,
+    semitones: 0,
   });
-  const frames = Math.max(1, Math.round(channels[0].length / tempo));
   const output = channels.map(() => new Float32Array(frames));
   const block = channels.map(() => new Float32Array(128));
   for (let offset = 0; offset < frames; offset += 128) {
@@ -87,6 +95,7 @@ export async function transformChannels(
       await new Promise((resolve) => setTimeout(resolve, 0));
     }
   }
+  send('dispose');
   onProgress(1);
   return output;
 }

@@ -1,0 +1,126 @@
+{
+  "scope": "Actual WASM in serial Node clock/port host. Not browser/native/live transport, transient, source-cursor, listening or full keylock acceptance. Default120/30ms profile unchanged. Results do not authorize automatic backend promotion.",
+  "method": "Whole raw PCM hash/geometry/finite checks; independent global20\u201320000Hz Hann16x/log-parabolic maximum in fixed5\u20137s. No expected-frequency mask, tuning or aligned/trimmed capture.",
+  "renderSHA256": "ea4e1cceddc0af35fe452ae21535fbd9bcb6f1d62ee1214796b3907e80664426",
+  "criteria": {
+    "maximumFrequencyErrorHz": 1,
+    "minimumRMS": 0.001
+  },
+  "sources": [
+    {
+      "id": "retained-shifted",
+      "sha256": "99cb94772a2fa87975fc4ed15291e491d44097b85811c1f2a24768876705d502",
+      "measuredHz": [
+        329.9999999389435,
+        549.9999998984817
+      ]
+    },
+    {
+      "id": "retained-bass-counterexample",
+      "sha256": "7c518e879e563110bfc7ef5c60b524496a1687dbd92b6f1c3ec2e3f379ae38aa",
+      "measuredHz": [
+        96.99999958868362,
+        172.99999982223144
+      ]
+    }
+  ],
+  "results": [
+    {
+      "id": "retained-shifted-history-spectral",
+      "variant": "history-spectral",
+      "frames": 441088,
+      "wholeFinite": true,
+      "rawSHA256": "6cbc1a08245e8a394563edd666e1507b7c31c718cd0c1498bdb911c8b40d0de3",
+      "expectedHz": [
+        370.4124759420931,
+        617.3541265701551
+      ],
+      "measuredHz": [
+        371.4502305606234,
+        617.8243970292377
+      ],
+      "errorHz": [
+        1.0377546185303004,
+        0.4702704590825988
+      ],
+      "rms": [
+        0.08295302786503018,
+        0.08300637093934311
+      ],
+      "criterionPassed": false
+    },
+    {
+      "id": "retained-shifted-resample-then-neutral",
+      "variant": "resample-then-neutral",
+      "frames": 441088,
+      "wholeFinite": true,
+      "rawSHA256": "82702474eb3c79f8184ca5e67ec0756293a36b15af816852bb2ee9945a8e8225",
+      "expectedHz": [
+        370.4124759420931,
+        617.3541265701551
+      ],
+      "measuredHz": [
+        370.4124746366581,
+        617.3541261023629
+      ],
+      "errorHz": [
+        -1.3054350347374566e-06,
+        -4.6779223339399323e-07
+      ],
+      "rms": [
+        0.08485832835135614,
+        0.08485671826122795
+      ],
+      "criterionPassed": true
+    },
+    {
+      "id": "retained-bass-counterexample-history-spectral",
+      "variant": "history-spectral",
+      "frames": 441088,
+      "wholeFinite": true,
+      "rawSHA256": "57fe5daebff32e88d83c954846ee9cb1a4317333d9c6cedd57124f2992c8fce1",
+      "expectedHz": [
+        48.5,
+        86.5
+      ],
+      "measuredHz": [
+        47.071287112805855,
+        86.77535612199172
+      ],
+      "errorHz": [
+        -1.4287128871941448,
+        0.2753561219917202
+      ],
+      "rms": [
+        0.08332700574874102,
+        0.08955091713463131
+      ],
+      "criterionPassed": false
+    },
+    {
+      "id": "retained-bass-counterexample-resample-then-neutral",
+      "variant": "resample-then-neutral",
+      "frames": 441088,
+      "wholeFinite": true,
+      "rawSHA256": "fe296545139c9db471ecef952f815ce1f744e6d3c734bbbaccb2a4f820cbaebd",
+      "expectedHz": [
+        48.5,
+        86.5
+      ],
+      "measuredHz": [
+        48.500015169621584,
+        86.49999830938731
+      ],
+      "errorHz": [
+        1.5169621583766002e-05,
+        -1.6906126916182984e-06
+      ],
+      "rms": [
+        0.08485083642869348,
+        0.08484664980135533
+      ],
+      "criterionPassed": true
+    }
+  ],
+  "fullKeylockAccepted": false
+}

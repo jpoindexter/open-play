@@ -1,0 +1,74 @@
+{
+  "scope": "Production transformChannels with actual WASM and shared resampler in serial host; two pitch checks plus two policy-extreme output geometry/finite checks. No live adapter/native/browser/music/cursor/latency acceptance.",
+  "method": "Whole finite/hash/geometry check. Two fixed5\u20137s global20\u201320000Hz Hann16x/log-parabolic pitch checks,1Hz limit. Internal-rate extremes are NOT pitch or musical acceptance.",
+  "renderSHA256": "fbd816a85303d1cbbb18b314ac94e34325f67ee4b284d945de695bcfda5c7a2a",
+  "rows": [
+    {
+      "id": "retained-shifted",
+      "frames": 571667,
+      "wholeFinite": true,
+      "sourceUnchanged": true,
+      "rawSHA256": "1e7208c6ec3e6ce3a08342cabc0566a2abf2c474bf039bde9e3b93aeabbfc999",
+      "pitchGraded": true,
+      "expectedHz": [
+        370.4124759420931,
+        617.3541265701551
+      ],
+      "measuredHz": [
+        370.4124748198605,
+        617.3541256934717
+      ],
+      "errorHz": [
+        -1.1222326179449738e-06,
+        -8.766834298512549e-07
+      ],
+      "rms": [
+        0.08484377488084117,
+        0.08485636820820973
+      ],
+      "pitchCriterionPassed": true
+    },
+    {
+      "id": "retained-bass",
+      "frames": 823200,
+      "wholeFinite": true,
+      "sourceUnchanged": true,
+      "rawSHA256": "b1f55c7298cf638180d104c9b20e6438b7ca3621b64e85dfad287240d4158a0f",
+      "pitchGraded": true,
+      "expectedHz": [
+        48.5,
+        86.5
+      ],
+      "measuredHz": [
+        48.49999361348706,
+        86.49999857709295
+      ],
+      "errorHz": [
+        -6.38651294337933e-06,
+        -1.4229070472993044e-06
+      ],
+      "rms": [
+        0.08485058130227041,
+        0.0848478997028129
+      ],
+      "pitchCriterionPassed": true
+    },
+    {
+      "id": "minimum-internal-rate",
+      "frames": 176400,
+      "wholeFinite": true,
+      "sourceUnchanged": true,
+      "rawSHA256": "159e5ddd83f3cf1323e578a992eddf5b296dbd722eccca069e973265c74f276c",
+      "pitchGraded": false
+    },
+    {
+      "id": "maximum-internal-rate",
+      "frames": 11025,
+      "wholeFinite": true,
+      "sourceUnchanged": true,
+      "rawSHA256": "f8537e9751e2457d2b97a5f596ee4ae82db24f68b13efe13abc9c0207c971204",
+      "pitchGraded": false
+    }
+  ],
+  "fullKeylockAccepted": false
+}

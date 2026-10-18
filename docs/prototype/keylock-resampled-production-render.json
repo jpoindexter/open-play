@@ -1,0 +1,91 @@
+{
+  "scope": "Production transformChannels with actual WASM and shared resampler in serial host; two pitch checks plus two policy-extreme output geometry/finite checks. No live adapter/native/browser/music/cursor/latency acceptance.",
+  "sourceHashes": {
+    "prototype/keylock-dsp.js": "83d50797a61298bb9b1691b27cac78ad991f5c1f321f59e7a0b663bd75d4968e",
+    "prototype/pcm-resample.js": "b5240e76961a44a0a8416e61453aa422ef6ccf16f5b06396b8dc4f7d6826ca5d",
+    "prototype/vendor/signalsmith-stretch/SignalsmithStretch-open-play-history.mjs": "1f470f846a993cc750ee2e111817adb08879493025c7322eadc8cf98323e4ef8"
+  },
+  "rows": [
+    {
+      "id": "retained-shifted",
+      "sr": 44100,
+      "tones": [
+        330,
+        550
+      ],
+      "seconds": 14,
+      "tempo": 1.08,
+      "semitones": 2,
+      "gradePitch": true,
+      "frames": 571667,
+      "channels": 2,
+      "wholeFinite": true,
+      "inputUnchanged": true,
+      "rawPath": "local-evidence/keylock-resampled-production/retained-shifted.f32",
+      "bytes": 4573336,
+      "sha256": "1e7208c6ec3e6ce3a08342cabc0566a2abf2c474bf039bde9e3b93aeabbfc999",
+      "serialWallMs": 375.330125
+    },
+    {
+      "id": "retained-bass",
+      "sr": 44100,
+      "tones": [
+        97,
+        173
+      ],
+      "seconds": 14,
+      "tempo": 0.75,
+      "semitones": -12,
+      "gradePitch": true,
+      "frames": 823200,
+      "channels": 2,
+      "wholeFinite": true,
+      "inputUnchanged": true,
+      "rawPath": "local-evidence/keylock-resampled-production/retained-bass.f32",
+      "bytes": 6585600,
+      "sha256": "b1f55c7298cf638180d104c9b20e6438b7ca3621b64e85dfad287240d4158a0f",
+      "serialWallMs": 625.604708
+    },
+    {
+      "id": "minimum-internal-rate",
+      "sr": 44100,
+      "tones": [
+        330,
+        550
+      ],
+      "seconds": 1,
+      "tempo": 0.25,
+      "semitones": 24,
+      "gradePitch": false,
+      "frames": 176400,
+      "channels": 2,
+      "wholeFinite": true,
+      "inputUnchanged": true,
+      "rawPath": "local-evidence/keylock-resampled-production/minimum-internal-rate.f32",
+      "bytes": 1411200,
+      "sha256": "159e5ddd83f3cf1323e578a992eddf5b296dbd722eccca069e973265c74f276c",
+      "serialWallMs": 77.62329100000011
+    },
+    {
+      "id": "maximum-internal-rate",
+      "sr": 44100,
+      "tones": [
+        330,
+        550
+      ],
+      "seconds": 1,
+      "tempo": 4,
+      "semitones": -24,
+      "gradePitch": false,
+      "frames": 11025,
+      "channels": 2,
+      "wholeFinite": true,
+      "inputUnchanged": true,
+      "rawPath": "local-evidence/keylock-resampled-production/maximum-internal-rate.f32",
+      "bytes": 88200,
+      "sha256": "f8537e9751e2457d2b97a5f596ee4ae82db24f68b13efe13abc9c0207c971204",
+      "serialWallMs": 63.774167000000034
+    }
+  ],
+  "fullKeylockAccepted": false
+}
