@@ -1,3 +1,13 @@
+# Core checkpoint188 — real local MP3 playback; tempo/grid blocker next
+
+19 October2026: actual0.1.23 normal chooser imported two different real MP3s and loaded one per deck. Both played independently and together; normal channel/crossfader isolation/restoration observed in the master meter. Files reports2saved/0session-only. Private master capture745418B decodes78.96s/stereo48k/finite/positive; no music or PCM published. This is a core playback/mixer subset, not a manual/synced musical mix or physical/headphone acceptance.
+
+The disconnected Hercules route left Play preparing; canceled it and executed Devices Refresh→Use selected output, recovering system-default stereo. Current app is stopped with the real tracks loaded and crossfader centered; controller is unplugged. Both tracks have unknown BPM/grid. Independent first180s PCM reproduces low-confidence rejection despite strong periodic candidates; embedded TBPM metadata is not applied. Next: fix the real import/tempo/grid path, then actual two-track Sync/manual transition. Preserve manual/reference distinctions; do not weaken confidence merely to pass this pair. Jason's waveform-quality report is tracked as open core ANA-001; actual before screenshot retained privately. Do not work on extras.
+
+Read docs/delivery/CORE_DJ_FIRST.md, docs/prototype/CORE_DJ_188_OBSERVATION.json and handoffs/core-dj-first.md. No implementation/visual/BPM fix or core acceptance claimed by this checkpoint. Earlier next-task text below remains historical.
+
+---
+
 # Handoff: core DJ experience only
 
 Date: 19 October 2026. Project: /Users/jasonpoindexter/Documents/GitHub/Open Play. From: Codex. To: next Codex/Claude session; no agent launched.

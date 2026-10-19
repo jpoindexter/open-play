@@ -1,0 +1,57 @@
+{
+  "date": "2026-10-19",
+  "candidate": "Open Play Playback Test 0.1.23",
+  "sourceCommit": "2a334132ca1a423029fceb8aa3e39953655df525",
+  "scope": "Normal native file chooser imported two different real local MP3s, loaded one per deck, independently played/paused and played simultaneously. Channel-fader-zero and crossfader endpoint checks observed through the actual master meter. No physical listening acceptance.",
+  "importedFiles": 2,
+  "fileBytes": [
+    14070894,
+    14481458
+  ],
+  "originalMusicUnchangedAfterChecks": true,
+  "recording": {
+    "bytes": 745418,
+    "sha256": "48046705aa8a8d44c888cb0c443bcbef48609d6faf058cedc9f774137eaa28ad",
+    "codec": "Opus",
+    "decodedSampleRate": 48000,
+    "channels": 2,
+    "frames": 3790080,
+    "durationSeconds": 78.96,
+    "nonFiniteSamples": 0,
+    "peak": [
+      0.22869785130023956,
+      0.20477144420146942
+    ],
+    "rms": [
+      0.026688223095606936,
+      0.0253218637705508
+    ],
+    "privateOnly": true
+  },
+  "observedCoreGaps": [
+    {
+      "id": "CORE-ROUTE-001",
+      "detail": "Hercules is physically disconnected, but prior named four-channel route remained selected. Play stayed preparing. Canceled pending Play; Devices Refresh + Use selected output changed to system-default stereo, after which real MP3 playback started. Manual recovery executed; automatic hot-unplug recovery unverified."
+    },
+    {
+      "id": "CORE-TEMPO-001",
+      "detail": "Both imported real songs return unknown tempo, despite strong periodic candidates. Independent first180s PCM reproduction returns null at confidence0.2146 and0.1937. Embedded TBPM metadata exists but current import does not apply it. No detector fix or grid/Sync acceptance yet."
+    },
+    {
+      "id": "ANA-001",
+      "detail": "Jason reports poor waveform visual quality. Native two-real-track screenshot retained privately. Open core fix saved to ANA-001 and CORE_DJ_FIRST.md; no visual fix claimed."
+    }
+  ],
+  "humanHeadphoneMasterAcceptance": false,
+  "manualBeatmatchAccepted": false,
+  "syncMusicalAccepted": false,
+  "controllerCoreAccepted": false,
+  "coreMilestoneAccepted": false,
+  "fullParityAccepted": false,
+  "localStorageReadback": {
+    "savedTracks": 2,
+    "sessionOnlyTracks": 0,
+    "scope": "Actual normal native Files panel; no quit/reopen performed"
+  },
+  "actualNativeArchiveSHA256": "fa4b2c4629a0f313cefc619878bb333f8ae60cbb4d8ac1e5eebcef1bfa58825e"
+}

@@ -39,6 +39,14 @@ Owner: Codex prepares and fixes the software; Jason provides musical listening/m
 
 These are acceptance observations in one useful session, not a request for a fresh exhaustive matrix. Where a focused technical check is needed for a changed audio/routing/transport boundary, run that check and resume the user workflow. Do not retest advanced stems/FX while this is pending. Record failures plainly; do not infer sound, beat stability or physical behavior from labels.
 
+## Open core fix — waveform visual quality
+
+19 October: Jason reports that the waveforms look very bad. Track on [ANA-001](https://trello.com/c/IBU50NY2), already in Core DJ — Now. Improve the actual two-real-track view for accurate waveform detail/transients, useful zoom, contrast/deck distinction and readable beatgrid/playhead/phase alignment. Preserve seek/timing/audio behavior. Actual rendered inspection and Jason's visual confirmation are required; this report is not an implemented or accepted fix. Keep playback/BPM blockers moving; no unrelated redesign.
+
+## Current executed core checkpoint188
+
+Actual desktop0.1.23 imported two real MP3s, loaded separate decks and played/paused both independently and simultaneously. Fader/crossfader master isolation/restoration observed; normal capture decodes finite stereo. Files reports2saved/0session-only. Both songs currently have unknown BPM/grid; fix that core path next. Disconnected-Hercules pending Play recovered through normal default-output selection. Both decks are stopped; manual/Sync musical transition and current physical/headphone acceptance remain open. Read [observation](../prototype/CORE_DJ_188_OBSERVATION.json).
+
 ## Starting point and evidence boundaries
 
 The known baseline is the versioned 0.1.23 desktop test bundle; its source snapshot is 2a334132ca1a423029fceb8aa3e39953655df525. Later browser Sync fixes are not automatically in that package. Refresh the currently running version/profile/device and file-import state before playback or packaging decisions.
