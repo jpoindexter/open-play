@@ -1,19 +1,20 @@
 <!doctype html>
-<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Open Play — Serato / Traktor / Hybrid layout preview</title><link rel="stylesheet" href="styles.css"><link rel="stylesheet" href="performance-tokens.css"><link rel="stylesheet" href="performance-theme.css"><link rel="stylesheet" href="layout-preview.css"></head>
-<body data-workspace="hybrid">
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Open Play — Four workspace layouts</title><link rel="stylesheet" href="styles.css"><link rel="stylesheet" href="performance-tokens.css"><link rel="stylesheet" href="performance-theme.css"><link rel="stylesheet" href="layout-preview.css"></head>
+<body data-workspace="rekordbox">
 <div class="workspace-bar">
  <a class="workspace-brand" href="layout-preview.html">open<span>play</span><small>WORKSPACE PREVIEW</small></a>
  <div class="workspace-switch" role="group" aria-label="Workspace layout">
   <button data-workspace-choice="serato" aria-pressed="false" disabled>Serato style</button>
   <button data-workspace-choice="traktor" aria-pressed="false" disabled>Traktor style</button>
-   <button data-workspace-choice="hybrid" aria-pressed="true" disabled>Hybrid</button>
+   <button data-workspace-choice="hybrid" aria-pressed="false" disabled>Hybrid</button>
+   <button data-workspace-choice="rekordbox" aria-pressed="true" disabled>rekordbox style</button>
  </div>
- <span class="workspace-caption" id="workspace-caption" role="status">Compare the beats. Mix in the middle.</span>
+ <span class="workspace-caption" id="workspace-caption" role="status">Performance layout · rekordbox reference</span>
  <div class="preview-zoom"><span>WAVEFORM</span><button id="preview-zoom-out" aria-label="Zoom detailed waveforms out" disabled>−</button><output id="preview-zoom-scale">4s</output><button id="preview-zoom-in" aria-label="Zoom detailed waveforms in" disabled>+</button></div>
 </div>
-<div class="hybrid-controls" aria-label="Hybrid display settings">
- <label for="preview-orientation">Waveforms <select id="preview-orientation"><option value="horizontal">Horizontal</option><option value="vertical" selected>Vertical</option></select></label>
- <label for="preview-density">Decks <select id="preview-density"><option value="expanded">Expanded</option><option value="compact">Compact</option></select></label>
+<div class="hybrid-controls" aria-label="Workspace display settings">
+ <label for="preview-orientation">Waveforms <select id="preview-orientation"><option value="horizontal" selected>Horizontal</option><option value="vertical">Vertical</option></select></label>
+ <label for="preview-density">Decks <select id="preview-density"><option value="expanded" selected>Full</option><option value="compact">Compact</option></select></label>
  <label for="preview-wave-size">Wave size <select id="preview-wave-size"><option value="small">Small</option><option value="medium" selected>Medium</option><option value="large">Large</option></select></label>
  <button id="preview-library-focus" aria-pressed="false">Library focus</button>
  <span class="display-hint">Pads opens cues &amp; performance modes</span>

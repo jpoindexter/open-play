@@ -6,9 +6,11 @@ const $=selector=>document.querySelector(selector);
 const choices=[...document.querySelectorAll('[data-workspace-choice]')];
 const letters=['A','B','C','D'];
 const layout=$('#layout');
-const display={orientation:'vertical',density:'expanded',size:'medium',library:false,crates:true,panels:new Map(),tools:new Map()};
+const display={orientation:'horizontal',density:'expanded',size:'medium',library:false,crates:true,panels:new Map()};
 layout.hidden=true;
-function vertical(){return document.body.dataset.workspace==='hybrid'&&display.orientation==='vertical';}
+const workspaceDisplays=new Map([['hybrid',{orientation:'vertical',density:'compact'}],['rekordbox',{orientation:'horizontal',density:'expanded'}]]);
+function refined(){return ['hybrid','rekordbox'].includes(document.body.dataset.workspace);}
+function vertical(){return refined()&&display.orientation==='vertical';}
 function applyDisplay(){
   document.body.dataset.orientation=vertical()?'vertical':'horizontal';
   document.body.dataset.density=display.density;
@@ -28,7 +30,7 @@ function updatePanels(deck,index){
   const panel=deck.querySelector('.deck-body>div:first-child');
   if(!panel)return;
   panel.id=`preview-controls-${index}`;
-  const open=document.body.dataset.workspace!=='hybrid'||(!display.library&&(display.panels.get(index)??display.density==='expanded'));
+  const open=!refined()||(!display.library&&(display.panels.get(index)??display.density==='expanded'));
   panel.hidden=!open;
   deck.dataset.controlsOpen=String(open);
   let button=deck.querySelector('.deck-disclosure');
@@ -75,7 +77,7 @@ function decorate(){
   refineMixer();
 }
 function refineDeck(deck,index){
-  if(document.body.dataset.workspace!=='hybrid')return;
+  if(!refined())return;
   let loops=deck.querySelector('.preview-loop-strip');
   if(!loops){
     loops=document.createElement('div');loops.className='preview-loop-strip';loops.setAttribute('role','group');loops.setAttribute('aria-label',`Deck ${index+1} loops and beat jumps`);
@@ -96,26 +98,34 @@ function refineDeck(deck,index){
     const button=deck.querySelector(`[data-action="${action}"]`);
     if(button&&button.parentNode!==row)row.append(button);
   }
-  let tools=deck.querySelector('.preview-deck-tools');
-  if(!tools){
-    tools=document.createElement('details');tools.className='preview-deck-tools';
-    const summary=document.createElement('summary');summary.textContent='Deck tools';tools.append(summary);deck.append(tools);
-    tools.open=display.tools.get(index)||false;
-    tools.addEventListener('toggle',()=>display.tools.set(index,tools.open));
-    const contents=document.createElement('div');tools.append(contents);
-    for(const node of [deck.querySelector('.track-gain-control'),...['reverse','repeat','censor','double'].map(action=>deck.querySelector(`[data-action="${action}"]`))])if(node)contents.append(node);
+  let utilities=deck.querySelector('.preview-deck-utilities');
+  if(!utilities){
+    utilities=document.createElement('div');utilities.className='preview-deck-utilities';
+    utilities.setAttribute('role','group');utilities.setAttribute('aria-label',`Deck ${index+1} gain and utilities`);deck.append(utilities);
+    for(const node of [deck.querySelector('.track-gain-control'),...['reverse','repeat','censor','double'].map(action=>deck.querySelector(`[data-action="${action}"]`))])if(node)utilities.append(node);
   }
   const beat=deck.querySelector('.beat-position');if(beat&&beat.parentNode!==deck.querySelector('.deck-foot'))deck.querySelector('.deck-foot').append(beat);
   const scratch=deck.querySelector('.scratch-status');if(scratch&&scratch.parentNode!==deck.querySelector('.deck-foot'))deck.querySelector('.deck-foot').append(scratch);
+  if(document.body.dataset.workspace==='rekordbox'){
+    let clock=deck.querySelector('.preview-deck-time');
+    if(!clock){clock=document.createElement('div');clock.className='preview-deck-time';clock.setAttribute('aria-label',`Deck ${index+1} elapsed and remaining time`);deck.querySelector('.deck-head').insertBefore(clock,load);}
+    for(const node of [deck.querySelector('time'),deck.querySelector(`[id="remain-${index}"]`)])if(node&&node.parentNode!==clock)clock.append(node);
+  }
   const title=deck.querySelector('.deck-title strong');if(title)title.title=title.textContent;
 }
 function refineMixer(){
   document.querySelectorAll('.knob-group').forEach(updateDial);
+  document.querySelectorAll('.fader-group').forEach(updateFader);
   document.querySelectorAll('.channel-strip>strong').forEach((label,index)=>label.textContent=letters[index]);
   if(!$('#mixer .preview-headphones')){
     const button=document.createElement('button');button.className='preview-headphones';button.dataset.panel='hardware';button.textContent='Headphones & routing';$('#mixer').append(button);
   }
+  if(refined()&&!$('#mixer .preview-mixer-footer')){
+    const footer=document.createElement('div');footer.className='preview-mixer-footer';
+    footer.append($('#crossfader').closest('label'),$('#mixer .preview-headphones'));$('#mixer').append(footer);
+  }
 }
+function updateFader(label){const input=label.querySelector('input');if(input)label.style.setProperty('--preview-level',input.value);}
 function updateDial(label){
   const input=label.querySelector('input');if(!input)return;
   const value=Number(input.value),min=Number(input.min),max=Number(input.max);
@@ -124,10 +134,14 @@ function updateDial(label){
 }
 function choose(workspace){
   const previous=document.body.dataset.workspace;
+  if(previous!==workspace){
+    if(['hybrid','rekordbox'].includes(previous))workspaceDisplays.set(previous,{orientation:display.orientation,density:display.density});
+    Object.assign(display,workspaceDisplays.get(workspace)||{});display.panels.clear();display.library=false;
+  }
   document.body.dataset.workspace=workspace;
-  if(previous!==workspace&&layout.value==='Horizontal')layout.dispatchEvent(new Event('change',{bubbles:true}));
+  if(previous!==workspace)layout.dispatchEvent(new Event('change',{bubbles:true}));
   for(const button of choices)button.setAttribute('aria-pressed',String(button.dataset.workspaceChoice===workspace));
-  $('#workspace-caption').textContent=workspace==='traktor'?'Two decks. Mixer in the middle.':workspace==='hybrid'?'Compare the beats. Mix in the middle.':'Stacked waveforms. Familiar deck displays.';
+  $('#workspace-caption').textContent=workspace==='traktor'?'Two decks. Mixer in the middle.':workspace==='rekordbox'?'Performance layout · rekordbox reference':workspace==='hybrid'?'Compare the beats. Mix in the middle.':'Stacked waveforms. Familiar deck displays.';
   applyDisplay();
 }
 for(const button of choices){button.disabled=false;button.onclick=()=>choose(button.dataset.workspaceChoice);}
@@ -137,13 +151,13 @@ for(const [id,direction]of [['preview-zoom-out','out'],['preview-zoom-in','in']]
 }
 new MutationObserver(decorate).observe($('#decks'),{childList:true});
 new MutationObserver(refineMixer).observe($('#mixer'),{childList:true});
-document.addEventListener('input',event=>{const label=event.target.closest?.('.knob-group');if(label)updateDial(label);});
+document.addEventListener('input',event=>{const label=event.target.closest?.('.knob-group');if(label)updateDial(label);const fader=event.target.closest?.('.fader-group');if(fader)updateFader(fader);});
 $('#preview-orientation').onchange=event=>{display.orientation=event.target.value;applyDisplay();};
 $('#preview-density').onchange=event=>{display.density=event.target.value;display.panels.clear();display.library=false;applyDisplay();};
 $('#preview-wave-size').onchange=event=>{display.size=event.target.value;applyDisplay();};
 $('#preview-library-focus').onclick=()=>{display.library=!display.library;applyDisplay();};
 $('#preview-crates').onclick=()=>{display.crates=!display.crates;applyDisplay();};
-$('#preview-reset').onclick=()=>{Object.assign(display,{orientation:'vertical',density:'expanded',size:'medium',library:false,crates:true});display.panels.clear();display.tools.clear();document.querySelectorAll('.preview-deck-tools').forEach(tools=>tools.open=false);applyDisplay();};
+$('#preview-reset').onclick=()=>{Object.assign(display,{orientation:document.body.dataset.workspace==='rekordbox'?'horizontal':'vertical',density:document.body.dataset.workspace==='rekordbox'?'expanded':'compact',size:'medium',library:false,crates:true});display.panels.clear();applyDisplay();};
 
 // Restore secondary panels without replacing their original controls/handlers.
 const more=document.createElement('details');more.className='preview-more';
@@ -156,7 +170,7 @@ more.addEventListener('keydown',event=>{if(event.key==='Escape'){event.preventDe
 document.addEventListener('click',event=>{if(more.open&&(!more.contains(event.target)||event.target.closest('button')))more.open=false;});
 // Disk import must survive hiding the crates sidebar.
 const importButton=$('#import');importButton.textContent='＋ Import';importButton.setAttribute('aria-label','Import audio from disk');$('#preview-crates').after(importButton);
-choose('hybrid');
+choose('rekordbox');
 
 // Read-only visual projection of our existing renderer. No second analysis or
 // transport. Crop its horizontal rows into Traktor deck views, retaining
