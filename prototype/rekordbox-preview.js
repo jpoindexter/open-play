@@ -20,12 +20,13 @@ export function refineRekordboxDeck(deck,index){
   const panel=deck.querySelector('.deck-body>div:first-child');
   if(panel){
     const tools=group(deck,'rb-pad-tools',panel);let select=tools.querySelector('select');
-    if(!select){select=document.createElement('select');select.setAttribute('aria-label',`Deck ${index+1} performance mode`);for(const [value,label]of modes){const option=document.createElement('option');option.value=value;option.textContent=label;select.append(option);}select.onchange=()=>deck.querySelector(`.deck-tabs [data-tab="${select.value}"]`)?.click();tools.append(select);}
+    if(!select){select=document.createElement('select');select.setAttribute('aria-label',`Deck ${index+1} performance mode`);for(const [value,label]of modes){const option=document.createElement('option');option.value=value;option.textContent=label;select.append(option);}select.onchange=()=>{const chosen=select.value;if(document.body.dataset.density==='compact'&&chosen!=='Cues'){const density=document.querySelector('#preview-density');density.value='expanded';density.dispatchEvent(new Event('change',{bubbles:true}));}deck.querySelector(`.deck-tabs [data-tab="${chosen}"]`)?.click();};tools.append(select);}
     const mode=panel.querySelector('.deck-tabs .active')?.dataset.tab||'Cues';select.value=mode;deck.dataset.rbPadMode=mode;
     panel.querySelectorAll('.pad').forEach((pad,i)=>{pad.dataset.cueLetter='ABCDEFGH'[i]||String(i+1);if(mode==='Cues'){pad.setAttribute('aria-label',`Deck ${index+1} hot cue ${pad.dataset.cueLetter}${pad.classList.contains('set')?'':' — empty'}`);if(!pad.querySelector('.rb-cue-name')){const span=document.createElement('span');span.className='rb-cue-name';for(const text of [...pad.childNodes].filter(n=>n.nodeType===Node.TEXT_NODE))span.append(text);pad.prepend(span);}}});
   }
-  // This remains reachable when Compact hides its optional pad bank.
-  const foot=deck.querySelector('.deck-foot');move(deck.querySelector('.deck-disclosure'),foot);
+  // Keep the native-style narrow loop block; its existing Save control stays
+  // available in the utility footer instead of stretching the loop block.
+  const foot=deck.querySelector('.deck-foot');move(deck.querySelector('[data-action="loopSave"]'),foot);move(deck.querySelector('.deck-disclosure'),foot);
 }
 export function refineRekordboxMixer(footer,monitorAPI){
   footer.classList.add('rb-mixer-band');

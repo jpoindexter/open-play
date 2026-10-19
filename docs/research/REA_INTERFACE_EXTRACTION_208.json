@@ -1,0 +1,162 @@
+{
+  "scope": "Installed rekordbox interface extraction; HTML prototype reference only",
+  "date": "2026-10-19",
+  "rea_version": "6.5.0 plus local one-line native UI size patch",
+  "target": "/Applications/rekordbox 7/rekordbox.app/Contents/MacOS/rekordbox",
+  "patch": {
+    "package": "rea-agents",
+    "version": "6.5.0",
+    "file": "/Users/jasonpoindexter/.npm/_npx/ad9a3fdbcad992c6/node_modules/rea-agents/bridge/native/ReaNativeUI.swift",
+    "before_sha256": "4413715438ea35edf9a872dd1cd2d4d7669ec8398fe3dc904fd0efad633a4615",
+    "after_sha256": "a58c18a50e713501b55afed751da90fb7543a34d78207f822fe51f6bb3cac88d",
+    "old_limit_bytes": 268435456,
+    "new_limit_bytes": 536870912,
+    "authorization": "User explicitly requested expansion of REA executable limit",
+    "other_guards_unchanged": true
+  },
+  "snapshots": [
+    {
+      "layout": "two-vertical",
+      "evidence_id": "ev_43b8506c7b2bd575041a58922934a46e0b9557e9b9f007728bb6e7aaa3888d7a",
+      "confidence": "observed",
+      "authority": "shipped-artifact",
+      "target_sha256": "07dcecbaf304f777e435539c83c7dcc02e41de1eaf2e0a75e8a9852e4411a244",
+      "node_count": 294,
+      "roles": {
+        "AXWindow": 1,
+        "AXGroup": 92,
+        "AXButton": 79,
+        "AXSlider": 14,
+        "AXPopUpButton": 2,
+        "AXStaticText": 101,
+        "AXImage": 2,
+        "AXScrollBar": 2,
+        "AXTextArea": 1
+      },
+      "truncated": false,
+      "gaps": [],
+      "window": {
+        "pid": 43674,
+        "window_id": 156167,
+        "executable": "/Applications/rekordbox 7/rekordbox.app/Contents/MacOS/rekordbox",
+        "launch_time": 1792423948.603652,
+        "title": "rekordbox"
+      },
+      "screenshot": {
+        "mime_type": "image/png",
+        "sha256": "4b2bfa586ec45087c05cc69e486575becde4777f65080f36423d935c5e532c0d",
+        "width": 1512,
+        "height": 949
+      },
+      "limitations": [
+        "Only the explicitly selected already-running process/window is admitted. REA starts no target process and does not change permissions, foreground applications, or restore application data.",
+        "Click uses AXPress; scroll uses AXIncrement/AXDecrement; key-entry sets the selected element's AXValue. Unsupported elements fail without global event fallback.",
+        "Each completed action is followed immediately by capture; delayed UI changes require explicit wait steps. A failed after-capture can follow a completed action, so failure does not prove absence of application effects.",
+        "Scenarios can change app data, cause app network activity and persist changes. The caller explicitly chooses leave-as-is; automatic restoration is unsupported.",
+        "Window matching uses exact PID and window ID for screenshots and unique accessibility geometry. Accessibility paths can change as the UI changes; stale or ambiguous paths fail. Screenshots are scaled to at most 2048 pixels; scenario output is budgeted at 64 MiB and execution is cancelled after 180 seconds."
+      ]
+    },
+    {
+      "layout": "four-vertical",
+      "evidence_id": "ev_032573d76263fa154b5920e46c2154e01a9d8ac934f0b87433a131d689d7f930",
+      "confidence": "observed",
+      "authority": "shipped-artifact",
+      "target_sha256": "07dcecbaf304f777e435539c83c7dcc02e41de1eaf2e0a75e8a9852e4411a244",
+      "node_count": 500,
+      "roles": {
+        "AXWindow": 1,
+        "AXGroup": 154,
+        "AXButton": 129,
+        "AXSlider": 24,
+        "AXPopUpButton": 2,
+        "AXStaticText": 181,
+        "AXImage": 4,
+        "AXScrollBar": 4,
+        "AXTextArea": 1
+      },
+      "truncated": false,
+      "gaps": [],
+      "window": {
+        "pid": 43674,
+        "window_id": 156167,
+        "executable": "/Applications/rekordbox 7/rekordbox.app/Contents/MacOS/rekordbox",
+        "launch_time": 1792423948.603652,
+        "title": "rekordbox"
+      },
+      "screenshot": {
+        "mime_type": "image/png",
+        "sha256": "ec0cac1e5674ff349083762b64b6117a7b1e09eec367d6300bcee5e085e2b6cf",
+        "width": 1512,
+        "height": 949
+      },
+      "limitations": [
+        "Only the explicitly selected already-running process/window is admitted. REA starts no target process and does not change permissions, foreground applications, or restore application data.",
+        "Click uses AXPress; scroll uses AXIncrement/AXDecrement; key-entry sets the selected element's AXValue. Unsupported elements fail without global event fallback.",
+        "Each completed action is followed immediately by capture; delayed UI changes require explicit wait steps. A failed after-capture can follow a completed action, so failure does not prove absence of application effects.",
+        "Scenarios can change app data, cause app network activity and persist changes. The caller explicitly chooses leave-as-is; automatic restoration is unsupported.",
+        "Window matching uses exact PID and window ID for screenshots and unique accessibility geometry. Accessibility paths can change as the UI changes; stale or ambiguous paths fail. Screenshots are scaled to at most 2048 pixels; scenario output is budgeted at 64 MiB and execution is cancelled after 180 seconds."
+      ]
+    }
+  ],
+  "artifact_inventory": {
+    "evidence_id": "ev_02df07e80ca093aba1dd2814a63e817904ded695a14b751b12441738d14cc466",
+    "unique_content_nodes": 10266,
+    "occurrences": 12369,
+    "coverage": {
+      "scope": "container-entries",
+      "status": "complete"
+    },
+    "status": "complete",
+    "skin_occurrences": 2460
+  },
+  "interface_builder": {
+    "evidence_id": "ev_5e85fe2ee14cf8d0d442eca3055549c4d383079e58d5fcbbb8a094054468243f",
+    "documents": [
+      {
+        "relative_path": "Contents/MacOS/rekordboxAgent.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Resources/MainMenu.nib/keyedobjects-101300.nib",
+        "archive_sha256": "28da529ac6e42cb5bd8cb7733c4ff86df081f461fc60e03bfde11212b4e455aa",
+        "document_kind": "nib",
+        "object_count": 13,
+        "connection_count": 1,
+        "hierarchy_complete": true
+      },
+      {
+        "relative_path": "Contents/MacOS/rekordboxAgent.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Resources/MainMenu.nib/keyedobjects.nib",
+        "archive_sha256": "6472633e33918e207b3b00b0836e51f92ee1bb10cc70c56153d76dada1458b33",
+        "document_kind": "nib",
+        "object_count": 26,
+        "connection_count": 1,
+        "hierarchy_complete": false
+      },
+      {
+        "relative_path": "Contents/Resources/RecentFilesMenuTemplate.nib",
+        "archive_sha256": "718eb4c5a3a5564dd832ae9a36cf649f3ef257ce896dd921693eeb6101bd008a",
+        "document_kind": "nib",
+        "object_count": 29,
+        "connection_count": 0,
+        "hierarchy_complete": false
+      }
+    ],
+    "graph_nodes": 75,
+    "graph_edges": 7,
+    "limitations": [
+      "The graph reflects recognized Interface Builder archive fields and connections; omitted private or unrecognized archive fields remain unknown.",
+      "A target-action selector is an Interface Builder observation and does not prove that the binary contains a matching implementation.",
+      "Decoded constraints, runtime visibility, dynamic UI creation, and pixel geometry are not inferred from these archives.",
+      "Compiled Interface Builder archives are private serialized object graphs. The decoder reports only recognized keyed-archive objects and connections; unrecognized object classes and fields remain unknown."
+    ]
+  },
+  "mcp_cleanup": {
+    "status": "unresolved existing connection; standalone fresh REA process verified",
+    "retained_runtime": "/tmp/rea-wWEcrQ",
+    "old_process_pid": 67308,
+    "old_process_observed_exited": true,
+    "action": "Reconnect REA MCP before claiming persistent connection recovered; do not bypass shutdown acknowledgement or delete retained analysis data"
+  },
+  "native_app_build": "unchanged; no build",
+  "known_limits": [
+    "REA native node schema does not expose AXHelp, descriptions or per-control bounds; CUA AX and visual capture supplement these fields and are separately labeled",
+    "Captured screens are not whole-product parity or implementation proof",
+    "Full/Loops then Compact prototype branch remains unexecuted; no all-mode state coverage claim"
+  ]
+}

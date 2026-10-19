@@ -1,3 +1,15 @@
+# REA interface extraction208 — local size guard repaired, actual captures saved
+
+19 October2026: User authorized local REA limit expansion. Patched only Swift native capture identity budget256→512MiB with backup/diff/hashes; same previously failing rekordbox command now succeeds:2V294nodes,4V500nodes, no reported gaps/truncation, selected-window screenshots. REA static inventory10,266nodes/12,369occurrences;3NIBs75nodes/7edges cover menus/helper, not main decks. Read docs/research/REA_INTERFACE_EXTRACTION_208.md/.json, visual token confidence map and tools/patches/REA_LOCAL_PATCH.md. Existing MCP's old Hopper cleanup state remains unresolved; oldPID exited, fresh standalone REA works, do not claim persistent transport repaired. Reconnect it without deleting analysis or weakening shutdown acknowledgement. Native0.1.27 unchanged; HTML207 retained, no native build. Full/Loops→Compact branch remains unexecuted. Core DJ priority and approval gate stay in force.
+
+---
+
+# HTML207 — visible cue banks replace rejected empty Compact loop area
+
+19 October2026: Jason's9:21PM native screenshot supersedes206's height-only correction. Compact now shows actual A–H cue rows in two columns beside64px loop block, stacked mode/CUE/Play,80px jog and options; mirrored right decks. Existing loop Save moves to footer; default deck heights unchanged.2/4H/V Compact:8cue rows/deck visible, core selected controls within bounds; Full core bounds checked for moved Save. Hot cueA set/Shift-clear executed, Compact cue hide/reopen stays Compact, selecting Loops expandsFull preserving Loops (caught/fixed selection ordering), then restoredCues/Compact. Read docs/prototype/COMPACT_CUE_LAYOUT_207.md/.json. UI-RB-06 https://trello.com/c/miElcJk0 tracks correction; prior206 marked superseded. HTML preview JS/CSS only, original app/engine/MIDI/waveform JS/native0.1.27 unchanged. User visual approval and exact native/full parity remain open. No native integration before approval; core DJ and original prompt retained.
+
+---
+
 # HTML206 — content-sized Compact decks, actual app references
 
 19 October2026: observed installed rekordbox4V, Traktor Essential plus actual Micro/Small header sizing, and Serato's disconnected2deck screen; saved native references and documented limitations. Compact deck rows decoupled from mixer height; transport/loops reorganized without new core-control hiding. Default1440px/Medium wave results:2H268→224px,2V292→240px,4H/4V268→224px; four-deck library gains88px.72/144 selected core nodes visible/contained; mixer targets and centered crossfader retained; mixer hide/show, Pads→Full→Compact, Small/Large wave-size paths executed. Read docs/prototype/COMPACT_DECKS_206.md/.json and docs/research/COMPACT_LAYOUT_REFERENCES_206.md. UI-RB-06 https://trello.com/c/miElcJk0 tracks correction; UI-RB-04 linked. Only CSS changes; native0.1.27 hash/JS/audio/MIDI unchanged. User visual approval, connected Serato modes, rekordbox PAD collapse and broad viewport/accessibility/full parity remain unverified. HTML only until native integration approval; core DJ priority and original prompt preserved.

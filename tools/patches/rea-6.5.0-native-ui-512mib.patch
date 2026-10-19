@@ -1,0 +1,11 @@
+--- a/bridge/native/ReaNativeUI.swift
++++ b/bridge/native/ReaNativeUI.swift
+@@ -57,7 +57,7 @@
+   }
+   if let expected = request.launch_time, expected != launch { try fail("process-replaced", "Selected process was replaced") }
+   let executableSize = (try FileManager.default.attributesOfItem(atPath: url.path)[.size] as? NSNumber)?.int64Value ?? -1
+-  guard executableSize >= 0 && executableSize <= 256 * 1024 * 1024 else { try fail("target-limit", "Running executable exceeds the 256 MiB identity-check budget") }
++  guard executableSize >= 0 && executableSize <= 512 * 1024 * 1024 else { try fail("target-limit", "Running executable exceeds the 512 MiB identity-check budget") }
+   let executableBytes = try Data(contentsOf: url, options: .mappedIfSafe)
+   guard SHA256.hash(data: executableBytes).map({ String(format: "%02x", $0) }).joined() == request.sha256 else {
+     try fail("target-mismatch", "Running executable bytes differ from the active target digest")
