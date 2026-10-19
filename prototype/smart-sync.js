@@ -78,15 +78,25 @@ export function createSmartSync({engine, state, externalLeader=()=>null}) {
     const ownTrack=deck.track, primaryTrack=primary.track, revision=revise(deck),ownLoop=loopBounds(deck),ownTransport=transportSignature(deck),primaryTransport=transportSignature(primary),barLock=barCompatible(deck)&&barCompatible(primary);
     const primaryRate=engine.audibleRate(primary), rate=rateFor(deck,primary);
     const priorClock=engine.voiceClock(deck,engine.voices.get(deck.index));
-    const valid=() => isCurrent() && enabled() && revisions.get(deck)===revision && deck.track===ownTrack && primary.track===primaryTrack && engaged(primary) && primary.playing && transportSignature(deck)===ownTransport && transportSignature(primary)===primaryTransport;
-    const result=await engine.synchronize(deck,{rate,priorClock,positionAt:when => {
-      if (!valid() || Math.abs(engine.voiceRateAt(primary,engine.voices.get(primary.index),when)-primaryRate)>1e-7) throw cancelled();
-      return barLock?alignedBarPosition(ownTrack,priorClock(when),primaryTrack,engine.voiceClock(primary,engine.voices.get(primary.index))(when),ownLoop):priorClock(when);
-    }});
-    if (!valid()) throw cancelled();
-    deck.sync=true;deck.syncState=barLock?'beat':'tempo';deck.syncRole ||= 'secondary';
-    if(!barLock)reconcile();
-    return result;
+    let token;
+    const owned=()=>isCurrent()&&enabled()&&revisions.get(deck)===revision&&deck.track===ownTrack&&transportSignature(deck)===ownTransport&&(token===undefined||engine.startTokens?.get(deck.index)===token);
+    const valid=()=>owned()&&primary.track===primaryTrack&&engaged(primary)&&primary.playing&&transportSignature(primary)===primaryTransport;
+    // A playing, unsynced warp needs the target clock while preparing its
+    // replacement backend, before the public Sync state can be committed.
+    const timeline={track:ownTrack,bpm:rate*ownTrack.bpm,valid:owned};
+    alignmentTimelines.set(deck,timeline);
+    try{
+      const pending=engine.synchronize(deck,{rate,priorClock,positionAt:when => {
+        if (!valid() || Math.abs(engine.voiceRateAt(primary,engine.voices.get(primary.index),when)-primaryRate)>1e-7) throw cancelled();
+        return barLock?alignedBarPosition(ownTrack,priorClock(when),primaryTrack,engine.voiceClock(primary,engine.voices.get(primary.index))(when),ownLoop):priorClock(when);
+      }});
+      token=engine.startTokens?.get(deck.index);
+      const result=await pending;
+      if (!valid()) throw cancelled();
+      deck.sync=true;deck.syncState=barLock?'beat':'tempo';deck.syncRole ||= 'secondary';
+      if(!barLock)reconcile();
+      return result;
+    }finally{if(alignmentTimelines.get(deck)===timeline)alignmentTimelines.delete(deck);}
   }
   function externalRate(deck,source){
     const rate=source.bpm/deck.track.bpm;

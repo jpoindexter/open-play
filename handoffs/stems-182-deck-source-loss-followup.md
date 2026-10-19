@@ -1,0 +1,17 @@
+# Handoff: actual deck-primary source-loss during warped Sync
+
+Date:19October2026. Project:/Users/jasonpoindexter/Documents/GitHub/Open Play. From Codex to next execution/Claude review. Full objective active; independent full Claude audit unlaunched.
+
+Read supplied AGENTS, FULL_BUILD_PLAN.md, docs/delivery/ACTIVE_EXECUTION.md, docs/prototype/DECK_PLAYING_182_PLAN.md/REVIEW.md, before/after/ownership results/manifest, current smart-sync.js/engine.js and full original-prompt Claude packet. Preserve all earlier originals and accepted scopes.
+
+Plan182: actual playing deck-to-deck raw/keyed warped joins now prepare at target126BPM; baseline299.6/319.5ms drift, after Beat phase rounding-level/10ms and secondary whole source/rendered transport PCM<=2.535e-8/1e-4. Short-loop Tempo preserves position.3cases/24whole native48kchannels; real Stop/load/cleanup3cases/20channels pass(settled500ms, immediate transient ungraded). Only smart-sync production changed;3affected collaborator commands pass.18cachefiles/bytes/hash/mtime unchanged/no inference. Source-loss/mixed/quality/vendor/native/hardware/full110/522/9/26/55 acceptance open. See docs/prototype/DECK_PLAYING_182_REVIEW.md and handoffs/stems-182-deck-source-loss-followup.md.
+
+## Next exact task / Done criterion
+
+Actual ordinary native-deck-primary source loss while a playing keyed warped secondary joins it. Reuse182flat generated Glass Transit126primary and imported manual120→150@1→90@1.8four-beat loop. Observe real renderWarpLoop request and real synchronize resolution without delaying/replacing original promises/results. Queue normal primary Play/Pause action during preparation versus after resolved scheduling. Own joining-deck Stop/load remains authoritative (182actual settled regression accepted). Current ordinary align() still validates primary.playing after successful synchronize, whereas external source loss180preserves a still-current committed Play with correct promoted feedback. Treat this as source concern until actual baseline, not a proven182failure. Require actual audible/current secondary state matches feedback/ownership and source clock/tempo after loss; no silent unsynced fallback. Keep before raw/capsule before smallest justified fix; evaluate real whole audio windows and defined immediate/settled scope. A source-only Pause must never revive a joining deck cancelled by its own Stop/load/new owner.
+
+Then revisit warped primary local rate crossing during preparation and mixed sampler/keylock/Stems/gestures/larger groups. Do not substitute this focused Sync work for remaining55FX/full110groups/522requirements/9beta/26release or declare pitch/perceptual/native/hardware/vendor acceptance.
+
+## Preserve / return
+
+Controller unplugged/physical muted; frozen0.1.23/profile/272Alternative/launchers/user8768/18775/18768 untouched. No native package/rewrite/restart/public release. Private music/PCM/proprietary/weights/credentials stay ignored. Preserve18cachebytes/hashes/mtimes/no unnecessary inference. No fitted lag/gain/phase, repaired/dropped/stitched PCM or relaxed gates. Maintain affected cards/fullplan/full original-prompt handoff preserving formal statuses/criteria/models/effort/history. DEK-008/DEK-018 existing routing remains Codex gpt-6-astra/high and Claude Code claude-opus-5/high; do not auto-launch Claude or change model assignments. Return patch, exact runtime proof and boundaries, failures and next action. Full goal active until full criterion-by-criterion evidence.
