@@ -1,3 +1,9 @@
+# HTML203 — mixer corrected from Jason's native screenshots
+
+19 October2026: latest user correction supersedes201's added FILTER row. Rekordbox HTML mixer now has TRIM/HIGH/MID/LOW, CUE and fader;22–24px knobs, larger labels,34px four-deck rows (32Compact), explicit border-box sizing prevents borders overlapping labels, and wider center column. Two-deck Vertical uses the actual mirrored trim/CUE/fader beside EQ arrangement. Five affected UI views inspected: four visible rotaries/channel, no knob/label overlap or channel escape; EQ hide/show preservation and fader/CUE input changes executed/restored. Library previews retained. Read docs/prototype/REKORDBOX_MIXER_203.md/.json. UI-RB-04 and UI-RB-01 track correction; prior filter direction superseded. HTML only: no native rebuild, engine/MIDI/renderer changes or full-parity claim. User visual approval pending; core DJ priority and original prompt retained.
+
+---
+
 # HTML202 — library waveform previews
 
 19 October2026: added decoded-source full-track RGB previews to the rekordbox library column. Sequential visible-row preparation, local PNG caching, unavailable/retry state, and persisted Preview waveform checkbox in existing Columns dialog. Actual ten-row/two-real-MP3 browser checks: loaded/different images, stable track association after sort/search, aligned cells, visibility/reload preference and local-cache reload; paused deck titles/clocks preserved. No native rebuild or engine/MIDI/source renderer changes. No preview audition/seek or full-product parity claim; error/storage-failure and large-library endurance branches remain unexecuted. Read docs/prototype/LIBRARY_WAVEFORMS_202.md/.json. Existing LIB-RB-01 Trello card tracks this unit; original prompt suffix preserved. User visual approval pending; core DJ focus retained.

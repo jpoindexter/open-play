@@ -39,11 +39,16 @@ export function refineRekordboxMixer(footer){
     if(text)text.textContent='ABCDEFGH'[index]+' → ';
     move(label,cross);
   }
-  // Keep the actual filter bound to its channel, below LOW and above CUE.
+  // Screenshot203 supersedes the extra filter row: the native reference uses
+  // TRIM/HIGH/MID/LOW. Keep the original filter/value for other layouts.
   document.querySelectorAll('#mixer .channel-strip').forEach((strip,index)=>{
     strip.dataset.rbChannel=String(index);
     const filter=document.querySelector(`input[data-mix="${index}:filter"]`)?.closest('.knob-group');
     move(filter,strip);
+    const trim=strip.querySelector('input[data-mix$=":trim"]')?.closest('label');
+    const text=trim&&[...trim.childNodes].find(node=>node.nodeType===Node.TEXT_NODE);
+    if(text)text.textContent='TRIM';
+    const cue=strip.querySelector('[data-action="pfl"]');if(cue)cue.textContent='CUE';
   });
   move(footer,document.querySelector('main'));
 }
