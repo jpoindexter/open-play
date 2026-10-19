@@ -1,3 +1,7 @@
+# Checkpoint186 — actual mixed Sampler group and full tempo handoff
+
+Plan186: actual raw/keylocked Sampler members join warped126BPMdeck and share127.2BPMtempo change. Initial/full6spreparation+10mscrossfade/final3stages,24whole native48kchannels pass; worst relativeRMS6.759e-8/1e-4, common commit spread/source continuity0, musical phase rounding-level/10ms, playhead readback<=2.667ms. Real raw/keyed/combined bus references and owners; no production audio fix or broad retest needed.18cachebytes/hash/mtime unchanged/no inference. Stems/gestures/larger groups/quality/vendor/native/hardware/full110/522/9/26/55 open. See docs/prototype/MIXED_SAMPLER_186_REVIEW.md and handoffs/stems-186-stems-group-followup.md.
+
 # Checkpoint185 — warped-primary marker crossing joins correctly
 
 Plan185: actual warped-primary150→90marker no longer falsely cancels a keyed deck join at constant126BPM. Baseline rejected/332.6msphase; after stable/crossing2cases/16whole native48kchannels pass, max waveform2.532e-8/1e-4, phase rounding-level/10ms, nominal error0. Guard now checks nominal source/shared tempo. Nominal/common-change/Pause/owner policy plus pending/loop collaborators pass(controlled). Slider setup/reference22050-vs48000unit errors and failed originals retained; no fitted alignment/gate change.18cachefiles unchanged/no inference. Mixed Sampler/Stems/gesture/transient/quality/vendor/native/hardware/full110/522/9/26/55 parity open. See docs/prototype/PRIMARY_CROSSING_185_REVIEW.md and handoffs/stems-185-mixed-sampler-followup.md.
