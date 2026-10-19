@@ -1,8 +1,10 @@
 // Independent persistent sampler membership and audio-time phase planning.
-import {createBeatgrid,gridBPM} from './beatgrid.js';
+import {createBeatgrid} from './beatgrid.js';
 import {alignedBarPosition,hasBeatgrid} from './smart-sync.js';
 import {sampleVoiceClock} from './sample-sync-transport.js';
 const modulo=(n,d)=>((n%d)+d)%d;
+// Time-only legacy annotations do not define an accurate phase grid.
+const hasSamplerGrid=track=>hasBeatgrid(track)&&!(track.gridMarkers?.length&&!track.gridWarpMarkers?.length);
 export function createSamplerSync({state,engine,trackById,optionsFor,render=()=>{},requestTempo}){
  let mode=state.settings['Sync Mode'];
  const slot=key=>state.samples[Math.floor(key/8)]?.[key%8];
@@ -11,8 +13,10 @@ export function createSamplerSync({state,engine,trackById,optionsFor,render=()=>
  function leader(exclude){
   const decks=state.decks.filter(d=>d.track&&d.sync&&d.playing);
   const d=decks.find(d=>d.syncRole==='primary')||decks[0];
-  if(d)return{key:'deck:'+d.index,track:d.track,bpm:gridBPM(d.track,engine.position(d))*engine.audibleRate(d),clock:engine.voiceClock(d,engine.voices.get(d.index)),phase:!d.reverse&&hasBeatgrid(d.track)};
-  for(const x of members())if(x.key!==exclude){const v=engine.samples?.get(x.key);if(v)return{key:'sample:'+x.key,track:x.track,bpm:v.gridTimeline?.bpm||x.track.bpm*v.settings.rate,clock:sampleVoiceClock(v),phase:hasBeatgrid(x.track)&&v.syncMode==='beat'};}
+  // Joining samples use the shared nominal tempo, not Float32 AudioParam
+  // rounding. Source position still comes from the actual audible clock.
+  if(d)return{key:'deck:'+d.index,track:d.track,bpm:d.track.bpm*d.rate,clock:engine.voiceClock(d,engine.voices.get(d.index)),phase:!d.reverse&&hasSamplerGrid(d.track)};
+  for(const x of members())if(x.key!==exclude){const v=engine.samples?.get(x.key);if(v)return{key:'sample:'+x.key,track:x.track,bpm:v.gridTimeline?.bpm||x.track.bpm*v.settings.rate,clock:sampleVoiceClock(v),phase:hasSamplerGrid(x.track)&&v.syncMode==='beat'};}
   return null;
  }
  function plan(track,key,options){
@@ -20,11 +24,11 @@ export function createSamplerSync({state,engine,trackById,optionsFor,render=()=>
   if(!Number.isFinite(track.bpm)||track.bpm<=0)throw Error('Analyze a BPM before enabling Sampler Sync.');
   const primary=leader(key),override=options.syncOverride||{},bpm=override.bpm||primary?.bpm||s.syncBPM||track.bpm*(Number(options.rate)||1);
   if(!Number.isFinite(bpm)||bpm<=0||bpm/track.bpm<.5||bpm/track.bpm>2)throw Error('The shared tempo exceeds this Sampler track rate range.');
-  const gridTrack=hasBeatgrid(track)?track:{...track,grid:0,gridWarpMarkers:[],gridMarkers:[]};
+  const gridTrack=hasSamplerGrid(track)?track:{...track,grid:0,gridWarpMarkers:[],gridMarkers:[]};
   const grid=createBeatgrid(gridTrack),loop=options.repeat&&options.loopEnd>options.loopStart?{start:options.loopStart,end:options.loopEnd}:null;
   const beats=loop?grid.beatAt(loop.end)-grid.beatAt(loop.start):null;
   const wholeBar=!loop||(beats>=4&&Math.abs(beats/4-Math.round(beats/4))<1e-6);
-  const beat=hasBeatgrid(track)&&wholeBar&&(!primary||primary.phase);
+  const beat=hasSamplerGrid(track)&&wholeBar&&(!primary||primary.phase);
   return{bpm,track:gridTrack,mode:beat?'beat':'tempo',valid:()=>enabled()&&slot(key)===s&&s.sync&&s.track===track.id,
    positionAt:(when,{start,loop,priorClock})=>{
     if(override.preserve&&priorClock)return priorClock(when);
