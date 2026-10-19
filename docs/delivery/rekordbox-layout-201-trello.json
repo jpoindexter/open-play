@@ -1,0 +1,68 @@
+[
+  {
+    "id": "ari:cloud:trello::card/workspace/6a8f03e71844a6c1103692dc/6ad64516e4f648e6bae4ae37",
+    "name": "UI-RB-01 — Four-deck mixer: four aligned channels",
+    "url": "https://trello.com/c/Nsnb1JhR/115-ui-rb-01-four-deck-mixer-four-aligned-channels",
+    "list": {
+      "id": "ari:cloud:trello::list/workspace/6a8f03e71844a6c1103692dc/6ad1fea01f199751fbe47088",
+      "name": "Core DJ — Now"
+    },
+    "complete": false,
+    "desc": "User screenshot 19 Oct: mixer incorrectly stacks A/B above C/D; library pushed out of view. Native rekordbox 7.2.19 Performance observed in both 4 Deck Horizontal and 4 Deck Vertical: four mixer strips in one row; horizontal labels 3 / 1 / 2 / 4. HTML-only correction in progress. Acceptance: all four real channel trim/EQ/CUE/fader controls aligned, no overlap/clipping, correct deck identity, usable library, 2↔4 preserves loaded tracks and parameter state. Check Horizontal and Vertical; Compact must retain core controls. Do not rebuild/package native app. Parent UI-001. Evidence docs/prototype/REKORDBOX_NATIVE_LAYOUT_200.md and follow-up201. Models: Codex gpt-6.1-sol, high; Claude Code Sonnet 5, medium (existing project recommendations; verify availability when running)."
+  },
+  {
+    "id": "ari:cloud:trello::card/workspace/6a8f03e71844a6c1103692dc/6ad64518ee599e33c43cbfe6",
+    "name": "UI-RB-02 — Show/hide mixer without changing audio state",
+    "url": "https://trello.com/c/WQ378lGK/116-ui-rb-02-show-hide-mixer-without-changing-audio-state",
+    "list": {
+      "id": "ari:cloud:trello::list/workspace/6a8f03e71844a6c1103692dc/6ad1fea01f199751fbe47088",
+      "name": "Core DJ — Now"
+    },
+    "complete": false,
+    "desc": "User explicitly requests native-style mixer visibility. Native rekordbox Show/Hide Mixer panel is observed working. HTML-only acceptance: visible pressed-state Mixer toggle for two/four decks and Horizontal/Vertical; hides strips and crossfader/headphones/filter band; reclaims space; preserves fader/EQ/filter/cue/crossfader and playback state. Switching back restores original controls, no duplicate IDs/footer. Test only affected UI transitions. Parent UI-001. Models: Codex gpt-6.1-sol high; Claude Code Sonnet 5 medium; verify runtime availability."
+  },
+  {
+    "id": "ari:cloud:trello::card/workspace/6a8f03e71844a6c1103692dc/6ad6451a61879edf48e752d3",
+    "name": "LIB-RB-01 — Per-track waveform previews in library",
+    "url": "https://trello.com/c/NL9aSgOB/117-lib-rb-01-per-track-waveform-previews-in-library",
+    "list": {
+      "id": "ari:cloud:trello::list/workspace/6a8f03e71844a6c1103692dc/6ad5ecab6aa7a1718e787eda",
+      "name": "Next — quick-win candidates"
+    },
+    "complete": false,
+    "desc": "Missing feature explicitly raised by Jason. Native rekordbox collection Preview column contains waveform thumbnails. Not implemented/accepted in HTML yet. Acceptance: previews derived from each actual local track's analyzed audio (not repeated decorative fixtures), loading/unanalyzed/unavailable states, stable row alignment and performance while scrolling/sorting; column visibility supported. Seeking/audition behavior must be separately observed in native app before copying assumptions. Link ANA-001 and LIB-003. HTML first, no native rebuild. Models: Codex gpt-6.1-sol high; Claude Code Sonnet 5 medium; verify availability. Tests: two different real local tracks visibly differ, metadata sorting retains correct preview association; no unnecessary full audio matrix."
+  },
+  {
+    "id": "ari:cloud:trello::card/workspace/6a8f03e71844a6c1103692dc/6ad6451c4e8bac727a977d33",
+    "name": "REF-RB-01 — Installed rekordbox screen and feature inventory via REA",
+    "url": "https://trello.com/c/qKTqELoB/118-ref-rb-01-installed-rekordbox-screen-and-feature-inventory-via-rea",
+    "list": {
+      "id": "ari:cloud:trello::list/workspace/6a8f03e71844a6c1103692dc/6ad5ecab6aa7a1718e787eda",
+      "name": "Next — quick-win candidates"
+    },
+    "complete": false,
+    "desc": "User requests actual installed rekordbox and REA evidence, all missing features tracked individually. Target /Applications/rekordbox 7/rekordbox.app, 7.2.19.0342. Inventory Performance 2/4 Horizontal/Vertical, pad/platter/mixer/FX/sampler/record panel visibility, deck metadata/key/time, library Preview/artwork/rating/columns, browser split and related/tag panels. Record observed, file-proven, inferred, unimplemented and unknown separately; each actionable missing feature gets linked card rather than blanket parity checkmark. Current REA blocker: opening target fails cleanup_incomplete from pre-existing Hopper session; authenticated shutdown acknowledgment missing, retained /tmp/rea-wWEcrQ. close_binary retry also failed. Do not delete/kill user analysis documents to work around it. Native Cocoa View menu and screenshots provide direct current layout evidence meanwhile. Preserve vendor assets privately; independent HTML implementation only, no native app rebuild. Models: Codex gpt-6.1-sol high; Claude Code Sonnet 5 high for independent evidence audit; verify availability."
+  },
+  {
+    "id": "ari:cloud:trello::card/workspace/6a8f03e71844a6c1103692dc/6ad646b8c4108fe293b9a069",
+    "name": "UI-RB-03 — Center crossfader and align mixer footer",
+    "url": "https://trello.com/c/EULEpME9/119-ui-rb-03-center-crossfader-and-align-mixer-footer",
+    "list": {
+      "id": "ari:cloud:trello::list/workspace/6a8f03e71844a6c1103692dc/6ad1fea01f199751fbe47088",
+      "name": "Core DJ — Now"
+    },
+    "complete": false,
+    "desc": "Jason screenshot 19 Oct 18:33: crossfader itself must be centered under mixer, not offset by the combined headphone/filter group. Acceptance: crossfader midpoint equals viewport center in both orientations and two/four decks; assignment controls flanking it with visible channel identities; headphones left, filters right; no overlap; preserve existing bound controls and values. HTML only, no native rebuild. Parent UI-001; links UI-RB-01/02. Models: Codex gpt-6.1-sol high; Claude Code Sonnet 5 medium; verify availability. In progress; verify real rendered alignment, not only CSS."
+  },
+  {
+    "id": "ari:cloud:trello::card/workspace/6a8f03e71844a6c1103692dc/6ad647245e9918991e234824",
+    "name": "UI-RB-04 — Keep each filter in its own mixer channel",
+    "url": "https://trello.com/c/Rx4NWhjG/120-ui-rb-04-keep-each-filter-in-its-own-mixer-channel",
+    "list": {
+      "id": "ari:cloud:trello::list/workspace/6a8f03e71844a6c1103692dc/6ad1fea01f199751fbe47088",
+      "name": "Core DJ — Now"
+    },
+    "complete": false,
+    "desc": "Jason correction: filter belongs in its channel mixer, not detached in the footer. Implement below LOW, above CUE and channel fader. Acceptance: A/B/C/D each retain original correctly indexed filter input, same bound behavior/keyboard access; no overlap with EQ/CUE/fader; available in Full and Compact, both orientations; hides with Mixer and returns with saved value. Shared footer retains headphones, crossfader assignments, centered crossfader. HTML only, native unchanged. Parent UI-001. Models: Codex gpt-6.1-sol high; Claude Code Sonnet 5 medium; verify availability. Implementation in progress, not yet user accepted."
+  }
+]

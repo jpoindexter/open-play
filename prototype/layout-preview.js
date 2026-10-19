@@ -1,12 +1,13 @@
 // Separate review entry point. Production app/engine/mapping files stay unchanged.
 // Both workspaces share the same existing DOM controls and one AudioEngine.
 await import('./app.js');
+const {refineRekordboxDeck,refineRekordboxMixer}=await import('./rekordbox-preview.js');
 
 const $=selector=>document.querySelector(selector);
 const choices=[...document.querySelectorAll('[data-workspace-choice]')];
 const letters=['A','B','C','D'];
 const layout=$('#layout');
-const display={orientation:'horizontal',density:'expanded',size:'medium',library:false,crates:true,panels:new Map()};
+const display={orientation:'horizontal',density:'expanded',size:'medium',library:false,crates:true,mixer:true,panels:new Map()};
 layout.hidden=true;
 const workspaceDisplays=new Map([['hybrid',{orientation:'vertical',density:'compact'}],['rekordbox',{orientation:'horizontal',density:'expanded'}]]);
 function refined(){return ['hybrid','rekordbox'].includes(document.body.dataset.workspace);}
@@ -17,6 +18,8 @@ function applyDisplay(){
   document.body.dataset.waveSize=display.size;
   document.body.dataset.libraryFocus=String(display.library);
   document.body.dataset.crates=String(display.crates);
+  document.body.dataset.rbMixer=String(display.mixer);
+  $('#preview-mixer-toggle')?.setAttribute('aria-pressed',String(display.mixer));
   $('#preview-orientation').value=display.orientation;
   $('#preview-density').value=display.density;
   $('#preview-wave-size').value=display.size;
@@ -37,7 +40,7 @@ function updatePanels(deck,index){
   if(!button){
     button=document.createElement('button');button.className='deck-disclosure';
     button.type='button';button.setAttribute('aria-controls',panel.id);
-    button.onclick=()=>{const next=panel.hidden;if(display.library){display.library=false;document.body.dataset.libraryFocus='false';$('#preview-library-focus').setAttribute('aria-pressed','false');}display.panels.set(index,next);decorate();};
+    button.onclick=()=>{const next=panel.hidden;if(next&&document.body.dataset.workspace==='rekordbox'&&display.density==='compact'){display.density='expanded';document.body.dataset.density='expanded';$('#preview-density').value='expanded';}if(display.library){display.library=false;document.body.dataset.libraryFocus='false';$('#preview-library-focus').setAttribute('aria-pressed','false');}display.panels.set(index,next);decorate();};
     deck.querySelector('.deck-head').append(button);
   }
   const mode=panel.querySelector('.deck-tabs .active')?.textContent||'Cues';
@@ -112,18 +115,24 @@ function refineDeck(deck,index){
     for(const node of [deck.querySelector('time'),deck.querySelector(`[id="remain-${index}"]`)])if(node&&node.parentNode!==clock)clock.append(node);
   }
   const title=deck.querySelector('.deck-title strong');if(title)title.title=title.textContent;
+  if(document.body.dataset.workspace==='rekordbox')refineRekordboxDeck(deck,index);
 }
 function refineMixer(){
+  // A player rerender creates a new real crossfader. Retire its old moved footer.
+  let footer=$('.preview-mixer-footer');
+  const fresh=$('#mixer #crossfader');
+  if(fresh&&footer&&!footer.contains(fresh)){footer.remove();footer=null;}
   document.querySelectorAll('.knob-group').forEach(updateDial);
   document.querySelectorAll('.fader-group').forEach(updateFader);
   document.querySelectorAll('.channel-strip>strong').forEach((label,index)=>label.textContent=letters[index]);
-  if(!$('#mixer .preview-headphones')){
+  if(!$('.preview-headphones')){
     const button=document.createElement('button');button.className='preview-headphones';button.dataset.panel='hardware';button.textContent='Headphones & routing';$('#mixer').append(button);
   }
-  if(refined()&&!$('#mixer .preview-mixer-footer')){
-    const footer=document.createElement('div');footer.className='preview-mixer-footer';
-    footer.append($('#crossfader').closest('label'),$('#mixer .preview-headphones'));$('#mixer').append(footer);
+  if(refined()&&!footer){
+    footer=document.createElement('div');footer.className='preview-mixer-footer';
+    footer.append($('#crossfader').closest('label'),$('.preview-headphones'));$('#mixer').append(footer);
   }
+  if(document.body.dataset.workspace==='rekordbox'&&footer)refineRekordboxMixer(footer);
 }
 function updateFader(label){const input=label.querySelector('input');if(input)label.style.setProperty('--preview-level',input.value);}
 function updateDial(label){
@@ -139,9 +148,9 @@ function choose(workspace){
     Object.assign(display,workspaceDisplays.get(workspace)||{});display.panels.clear();display.library=false;
   }
   document.body.dataset.workspace=workspace;
-  if(previous!==workspace)layout.dispatchEvent(new Event('change',{bubbles:true}));
+  if(previous!==workspace){const footer=$('.preview-mixer-footer');if(footer&&footer.parentNode!==$('#mixer'))footer.remove();layout.dispatchEvent(new Event('change',{bubbles:true}));}
   for(const button of choices)button.setAttribute('aria-pressed',String(button.dataset.workspaceChoice===workspace));
-  $('#workspace-caption').textContent=workspace==='traktor'?'Two decks. Mixer in the middle.':workspace==='rekordbox'?'Performance layout · rekordbox reference':workspace==='hybrid'?'Compare the beats. Mix in the middle.':'Stacked waveforms. Familiar deck displays.';
+  $('#workspace-caption').textContent=workspace==='traktor'?'Two decks. Mixer in the middle.':workspace==='rekordbox'?'rekordbox 7 · Performance layout reference':workspace==='hybrid'?'Compare the beats. Mix in the middle.':'Stacked waveforms. Familiar deck displays.';
   applyDisplay();
 }
 for(const button of choices){button.disabled=false;button.onclick=()=>choose(button.dataset.workspaceChoice);}
@@ -157,7 +166,7 @@ $('#preview-density').onchange=event=>{display.density=event.target.value;displa
 $('#preview-wave-size').onchange=event=>{display.size=event.target.value;applyDisplay();};
 $('#preview-library-focus').onclick=()=>{display.library=!display.library;applyDisplay();};
 $('#preview-crates').onclick=()=>{display.crates=!display.crates;applyDisplay();};
-$('#preview-reset').onclick=()=>{Object.assign(display,{orientation:document.body.dataset.workspace==='rekordbox'?'horizontal':'vertical',density:document.body.dataset.workspace==='rekordbox'?'expanded':'compact',size:'medium',library:false,crates:true});display.panels.clear();applyDisplay();};
+$('#preview-reset').onclick=()=>{Object.assign(display,{orientation:document.body.dataset.workspace==='rekordbox'?'horizontal':'vertical',density:document.body.dataset.workspace==='rekordbox'?'expanded':'compact',size:'medium',library:false,crates:true,mixer:true});display.panels.clear();applyDisplay();};
 
 // Restore secondary panels without replacing their original controls/handlers.
 const more=document.createElement('details');more.className='preview-more';
@@ -170,6 +179,7 @@ more.addEventListener('keydown',event=>{if(event.key==='Escape'){event.preventDe
 document.addEventListener('click',event=>{if(more.open&&(!more.contains(event.target)||event.target.closest('button')))more.open=false;});
 // Disk import must survive hiding the crates sidebar.
 const importButton=$('#import');importButton.textContent='＋ Import';importButton.setAttribute('aria-label','Import audio from disk');$('#preview-crates').after(importButton);
+const mixerToggle=document.createElement('button');mixerToggle.id='preview-mixer-toggle';mixerToggle.className='rb-only';mixerToggle.textContent='Mixer';mixerToggle.setAttribute('aria-label','Show or hide mixer');mixerToggle.setAttribute('aria-pressed','true');mixerToggle.onclick=()=>{display.mixer=!display.mixer;applyDisplay();};$('#preview-library-focus').before(mixerToggle);
 choose('rekordbox');
 
 // Read-only visual projection of our existing renderer. No second analysis or

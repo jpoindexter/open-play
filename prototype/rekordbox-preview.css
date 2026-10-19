@@ -1,0 +1,221 @@
+/* Installed rekordbox 7.2.19: Performance / 2Deck Horizontal, mixer on.
+   Layout only. Original Open Play controls, audio and RGB renderer are retained. */
+body[data-workspace=rekordbox][data-orientation] main{grid-template-columns:minmax(0,1fr) 112px minmax(0,1fr);grid-template-rows:132px auto 44px minmax(220px,1fr);gap:3px;padding:3px}
+body[data-workspace=rekordbox][data-orientation] .detail-horizontal{height:132px!important;grid-row:1!important;grid-column:1/-1!important;border:0}
+body[data-workspace=rekordbox][data-orientation] .deck{display:grid;grid-template-columns:minmax(0,1fr) 64px 40px 108px 30px;grid-template-rows:52px 36px minmax(126px,auto) 26px 25px;gap:2px 3px;border:0;border-inline-end:1px solid #303030;background:#1c1c1c;border-radius:0;align-content:start;align-self:start}
+body[data-workspace=rekordbox][data-orientation] .deck:nth-of-type(1){grid-column:1;grid-row:2}
+body[data-workspace=rekordbox][data-orientation] .deck:nth-of-type(even){grid-column:3;grid-row:2;grid-template-columns:40px 108px 30px 64px minmax(0,1fr)}
+body[data-workspace=rekordbox][data-orientation] .deck-head{grid-column:1/-1;grid-row:1;position:relative;display:grid;grid-template-columns:34px minmax(0,1fr) 76px 96px 54px;grid-template-rows:1fr;gap:6px;padding:4px 6px 4px 12px;height:52px;background:#1c1c1c;border:0}
+body[data-workspace=rekordbox][data-orientation] .deck-number{position:absolute;left:2px;top:4px;min-width:0;font:9px Arial,sans-serif;color:#ddd}
+body[data-workspace=rekordbox][data-orientation] .deck-number::after{display:none}
+body[data-workspace=rekordbox][data-orientation] .rb-artwork{grid-column:1;width:32px;height:32px;align-self:center;background:#101010;position:relative}
+body[data-workspace=rekordbox][data-orientation] .rb-artwork::after{content:'';position:absolute;inset:6px;border:7px solid #222;border-radius:50%;background:#111}
+body[data-workspace=rekordbox][data-orientation] .deck-title{grid-column:2;align-self:center;min-width:0}
+body[data-workspace=rekordbox][data-orientation] .deck-title strong{font-size:14px;line-height:18px}
+body[data-workspace=rekordbox][data-orientation] .deck-title small{font-size:10px;margin-top:2px;color:#999}
+body[data-workspace=rekordbox][data-orientation] .preview-deck-time{grid-column:3;grid-row:1;align-self:end;padding-bottom:4px;min-width:0;display:flex;flex-direction:column;gap:3px}
+body[data-workspace=rekordbox][data-orientation] .preview-deck-time time{font-size:11px;color:#ccc}
+body[data-workspace=rekordbox][data-orientation] .preview-deck-time small{font-size:11px;color:#929292}
+body[data-workspace=rekordbox][data-orientation] .deck-head .preview-key-row{grid-column:4;grid-row:1;display:grid;grid-template-columns:20px minmax(0,1fr) 20px;grid-template-rows:21px 21px;margin:0;padding:0;gap:1px;background:transparent;border:0}
+body[data-workspace=rekordbox][data-orientation] .preview-key-caption{display:none}
+body[data-workspace=rekordbox][data-orientation] .preview-key-row .deck-key{grid-column:2;grid-row:2;min-width:0;margin:0;align-self:center;text-align:center;font-size:10px;font-weight:400;color:#ddd;white-space:nowrap}
+body[data-workspace=rekordbox][data-orientation] .preview-key-row [data-action=keySync]{grid-column:1/-1;grid-row:1;font-size:9px;min-height:19px;height:19px;min-width:0;padding:1px}
+body[data-workspace=rekordbox][data-orientation] .preview-key-row [data-action=keyDown]{grid-column:1;grid-row:2;min-width:0;height:20px;min-height:20px;padding:0;background:transparent}
+body[data-workspace=rekordbox][data-orientation] .preview-key-row [data-action=keyUp]{grid-column:3;grid-row:2;min-width:0;height:20px;min-height:20px;padding:0;background:transparent}
+body[data-workspace=rekordbox][data-orientation] .rb-sync-controls{grid-column:5;grid-row:1;display:grid;grid-template-rows:28px 16px;gap:2px}
+body[data-workspace=rekordbox][data-orientation] .rb-sync-controls button{display:block!important;min-height:0;padding:1px 3px;font-size:9px;line-height:10px;white-space:normal;background:#282828;border:0;border-radius:0}
+body[data-workspace=rekordbox][data-orientation] .rb-sync-controls [data-action=syncOff]{font-size:8px;border:1px solid #4b4b4b;background:transparent}
+body[data-workspace=rekordbox][data-orientation] .rb-sync-controls button.active{background:#1f70d6;color:white}
+body[data-workspace=rekordbox][data-orientation] .wave-wrap{grid-row:2;grid-column:1/-1;height:36px;margin:0;background:#050505;border:0;border-radius:0}
+body[data-workspace=rekordbox][data-orientation] .wave-label{font-size:7px;bottom:1px;right:2px;background:#08080899}
+body[data-workspace=rekordbox][data-orientation] .deck-body>div:first-child{grid-row:3;grid-column:1;padding:4px 2px 0 6px;align-self:start;min-width:0}
+body[data-workspace=rekordbox][data-orientation] .deck:nth-of-type(even) .deck-body>div:first-child{grid-column:5;padding:4px 6px 0 2px}
+body[data-workspace=rekordbox][data-orientation] .deck-tabs{display:none!important}
+body[data-workspace=rekordbox][data-orientation] .pads{display:grid;grid-auto-flow:column;grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:repeat(4,22px);gap:2px}
+body[data-workspace=rekordbox][data-orientation][data-rb-pad-mode] .pad{min-width:0}
+body[data-workspace=rekordbox][data-orientation] .pad{height:22px;min-height:22px;border:0;border-radius:0;background:#101010;justify-content:flex-start;flex-direction:row;gap:4px;padding:2px 5px;font-size:9px;text-align:left;box-shadow:none}
+body[data-workspace=rekordbox][data-orientation] .deck[data-rb-pad-mode=Cues] .pad::before{content:attr(data-cue-letter);font-size:10px;color:#888}
+body[data-workspace=rekordbox][data-orientation] .deck[data-rb-pad-mode=Cues] .pad:not(.set) :is(.rb-cue-name,small){display:none}
+body[data-workspace=rekordbox][data-orientation] .deck[data-rb-pad-mode=Cues] .pad.set{border-inline-start:2px solid var(--pad);background:#161616}
+body[data-workspace=rekordbox][data-orientation] .pad small{margin-left:auto;font-size:8px}
+body[data-workspace=rekordbox][data-orientation] .rb-pad-tools{display:flex;gap:4px;margin-top:4px;border-top:2px solid #393939;padding-top:3px}
+body[data-workspace=rekordbox][data-orientation] .rb-pad-tools select{min-height:21px;height:21px;background:#292929;color:#ddd;border:0;border-radius:0;font-size:9px;padding:2px 4px;max-width:120px}
+body[data-workspace=rekordbox][data-orientation] .deck:nth-of-type(even) .rb-pad-tools{justify-content:flex-end}
+body[data-workspace=rekordbox][data-orientation] .preview-loop-strip{grid-row:3;grid-column:2;margin:4px 0 0;align-self:start;display:block}
+body[data-workspace=rekordbox][data-orientation] .deck:nth-of-type(even) .preview-loop-strip{grid-column:4}
+body[data-workspace=rekordbox][data-orientation] .preview-loop-strip .loop-line{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin:0}
+body[data-workspace=rekordbox][data-orientation] .preview-loop-strip button{font-size:9px;height:22px;min-height:22px;padding:0;background:#292929;border:0}
+body[data-workspace=rekordbox][data-orientation] .preview-loop-strip [data-action=loop]{grid-column:1/-1;grid-row:1;height:30px;font-size:14px;font-weight:600}
+body[data-workspace=rekordbox][data-orientation] .preview-loop-strip [data-action=loopHalf]{grid-row:2;grid-column:1}
+body[data-workspace=rekordbox][data-orientation] .preview-loop-strip [data-action=loopDouble]{grid-row:2;grid-column:2}
+body[data-workspace=rekordbox][data-orientation] .preview-loop-strip [data-action=loopSave]{grid-column:1/-1}
+body[data-workspace=rekordbox][data-orientation] .transport{grid-row:3;grid-column:3;display:flex;flex-direction:column;justify-content:flex-start;align-items:center;padding:3px 0;gap:5px}
+body[data-workspace=rekordbox][data-orientation] .deck:nth-of-type(even) .transport{grid-column:1}
+body[data-workspace=rekordbox][data-orientation] .transport select{order:0;min-height:21px;height:21px;width:40px;font-size:8px;padding:1px;background:#292929;border:0;color:#ddd}
+body[data-workspace=rekordbox][data-orientation] .transport [data-action=cue]{order:1}
+body[data-workspace=rekordbox][data-orientation] .transport [data-action=play]{order:2}
+body[data-workspace=rekordbox][data-orientation] .transport :is([data-action=cue],[data-action=play]){width:34px;height:34px;min-width:34px;min-height:34px;flex:none;border-radius:50%;background:#1c1c1c;border:1px solid #a98e42;color:#d7c991;padding:0;font-size:11px}
+body[data-workspace=rekordbox][data-orientation] .transport [data-action=play]{border-color:#427d4a;color:#a8c6ac}
+body[data-workspace=rekordbox][data-orientation] .transport [data-action=cue]::after{font-size:9px}
+body[data-workspace=rekordbox][data-orientation] .deck .platter{grid-row:3;grid-column:4;width:104px!important;height:104px!important;align-self:center;justify-self:center;padding:0;margin:0;border:2px solid #2b73d0;border-radius:50%;background:#070707;box-shadow:0 0 0 5px #1c1c1c,0 0 0 7px #b7b7b7;display:flex;flex-direction:column;justify-content:center;gap:4px}
+body[data-workspace=rekordbox][data-orientation] .deck:nth-of-type(even) .platter{grid-column:2}
+body[data-workspace=rekordbox][data-orientation] .platter strong{font-size:22px;letter-spacing:-.5px}
+body[data-workspace=rekordbox][data-orientation] .platter small:first-of-type{font-size:8px}
+body[data-workspace=rekordbox][data-orientation] .rb-deck-options{grid-column:5;grid-row:3;display:flex;flex-direction:column;justify-content:space-between;align-items:center;padding:4px 0 8px;gap:5px}
+body[data-workspace=rekordbox][data-orientation] .deck:nth-of-type(even) .rb-deck-options{grid-column:3}
+body[data-workspace=rekordbox][data-orientation] .rb-deck-options button{min-width:28px;min-height:22px;padding:2px;font-size:8px;background:#292929;border:0}
+body[data-workspace=rekordbox][data-orientation] .rb-deck-options button.active{background:#2479e2;color:#fff}
+body[data-workspace=rekordbox][data-orientation] .preview-deck-utilities{grid-column:1/-1;grid-row:4;display:flex;flex-wrap:nowrap;align-items:center;justify-content:flex-start;gap:3px;padding:2px 4px;margin:0;border-top:1px solid #343434;min-width:0}
+body[data-workspace=rekordbox][data-orientation] .preview-deck-utilities button{font-size:8px;min-height:20px;height:20px;padding:2px 4px;white-space:nowrap}
+body[data-workspace=rekordbox][data-orientation] .track-gain-control{margin-right:0!important;gap:2px!important;font-size:7px!important;flex:none}
+body[data-workspace=rekordbox][data-orientation] .track-gain-control input{width:34px!important;max-width:34px!important}
+body[data-workspace=rekordbox][data-orientation] .preview-deck-utilities .tempo-control{display:flex;flex-direction:row;align-items:center;gap:2px;position:static;min-height:0;height:20px;width:92px;flex:none;margin:0;font-size:7px;grid-row:auto;grid-column:auto}
+body[data-workspace=rekordbox][data-orientation] .tempo-control input{writing-mode:horizontal-tb;direction:ltr;width:61px;height:15px;min-height:0;margin:0}
+body[data-workspace=rekordbox][data-orientation] .deck-foot{grid-column:1/-1;grid-row:5;display:flex;align-items:center;flex-wrap:nowrap;gap:4px;margin:0;padding:1px 4px 2px;min-width:0;overflow:visible}
+body[data-workspace=rekordbox][data-orientation] .deck-foot .loop-line{display:flex;gap:2px;margin:0;order:-1;flex:none}
+body[data-workspace=rekordbox][data-orientation] .deck-foot button{min-height:20px;height:20px;padding:1px 4px;font-size:8px;white-space:nowrap}
+body[data-workspace=rekordbox][data-orientation] .deck-foot .muted,body[data-workspace=rekordbox][data-orientation] .scratch-status{display:inline-block!important;font-size:7px;min-width:0;margin:0;padding:0;flex-basis:auto;white-space:nowrap;color:#999}
+body[data-workspace=rekordbox][data-orientation] .deck-foot .beat-position{margin-left:auto!important;min-height:0;font-size:7px}
+body[data-workspace=rekordbox][data-orientation] .deck-foot .deck-disclosure{display:block;min-width:39px;min-height:20px;flex:none;font-size:8px;margin-left:auto}
+body[data-workspace=rekordbox][data-orientation] #mixer{grid-column:2;grid-row:2;grid-template-columns:1fr 1fr;gap:2px;padding:3px 2px;background:#1c1c1c;border:0;align-self:stretch;align-content:start}
+body[data-workspace=rekordbox][data-orientation] .channel-strip{display:grid;grid-template-columns:1fr;grid-template-rows:10px repeat(4,31px) 24px 67px;justify-items:center;gap:1px;padding:0!important;border:0!important}
+body[data-workspace=rekordbox][data-orientation] .channel-strip>strong{grid-column:1;grid-row:1;font-size:8px;line-height:10px;display:block;border:0;padding:0;margin:0}
+body[data-workspace=rekordbox][data-orientation] .channel-strip .knob-group{grid-column:1;width:42px;height:31px;min-height:31px;padding-top:0;font-size:7px;line-height:9px;display:flex;align-items:center;justify-content:flex-end;flex-direction:column}
+body[data-workspace=rekordbox][data-orientation] .knob-group:has(input[data-mix$=':trim']){grid-row:2}
+body[data-workspace=rekordbox][data-orientation] .knob-group:has(input[data-mix$=':high']){grid-row:3}
+body[data-workspace=rekordbox][data-orientation] .knob-group:has(input[data-mix$=':mid']){grid-row:4}
+body[data-workspace=rekordbox][data-orientation] .knob-group:has(input[data-mix$=':low']){grid-row:5}
+body[data-workspace=rekordbox][data-orientation] .knob-group::before{top:1px;left:12px;width:18px;height:18px;border:2px solid #333;background:#1d1d1d;box-shadow:none}
+body[data-workspace=rekordbox][data-orientation] .knob-group::after{top:1px;left:20px;height:7px;transform-origin:1px 10px;width:2px;background:#ddd}
+body[data-workspace=rekordbox][data-orientation] .knob-group input{top:0;left:0;width:42px;height:23px}
+body[data-workspace=rekordbox][data-orientation] .channel-strip>button{grid-column:1;grid-row:6;width:42px;height:21px;min-height:21px;padding:1px;font-size:8px;margin:0;background:#292929;border:0}
+body[data-workspace=rekordbox][data-orientation] .channel-strip .fader-group{grid-column:1;grid-row:7;position:relative;height:67px;width:30px;margin:0;font-size:0}
+body[data-workspace=rekordbox][data-orientation] .fader-group::before{top:3px;bottom:3px;left:14px;width:2px;background:#2276e4;border:0;box-shadow:-10px 0 0 -0.5px #444,10px 0 0 -0.5px #444}
+body[data-workspace=rekordbox][data-orientation] .fader-group::after{top:calc(3px + (1 - var(--preview-level,.8))*51px);left:3px;width:26px;height:8px;background:#999;border:0;box-shadow:none}
+body[data-workspace=rekordbox][data-orientation] .fader-group input{position:absolute;inset:0;width:30px;height:64px;min-height:64px;opacity:.01;margin:0}
+body[data-workspace=rekordbox][data-orientation] .library{grid-row:4;margin:0;border:0;grid-template-columns:180px minmax(0,1fr)}
+body[data-workspace=rekordbox][data-orientation] .library-tools{min-height:30px;height:30px;padding:3px 5px}
+body[data-workspace=rekordbox][data-orientation] th{height:25px;font-size:10px;font-weight:400;background:#151515}
+body[data-workspace=rekordbox][data-orientation] td{padding:4px 8px;font-size:12px}
+/* Compact preserves transport, looping, tempo and mixer; only the optional pad
+   bank is collapsed. Layout sizing changes never reset the player's state. */
+body[data-workspace=rekordbox][data-orientation][data-density=compact] .deck{grid-template-columns:minmax(0,1fr) 40px 84px 30px;grid-template-rows:52px 36px 100px 26px 25px}
+body[data-workspace=rekordbox][data-orientation][data-density=compact] .deck:nth-of-type(even){grid-template-columns:40px 84px 30px minmax(0,1fr)}
+body[data-workspace=rekordbox][data-orientation][data-density=compact] .preview-loop-strip{grid-column:1;grid-row:3;align-self:start;padding:0 4px}
+body[data-workspace=rekordbox][data-orientation][data-density=compact] .preview-loop-strip .loop-line{grid-template-columns:repeat(3,minmax(0,1fr));gap:3px}
+body[data-workspace=rekordbox][data-orientation][data-density=compact] .preview-loop-strip [data-action=loop]{grid-column:1/-1}
+body[data-workspace=rekordbox][data-orientation][data-density=compact] .preview-loop-strip [data-action=loopSave]{grid-column:3;grid-row:2}
+body[data-workspace=rekordbox][data-orientation][data-density=compact] .preview-loop-strip [data-action=loopDouble]{grid-column:2}
+body[data-workspace=rekordbox][data-orientation][data-density=compact] .transport{grid-column:2;grid-row:3;gap:3px}
+body[data-workspace=rekordbox][data-orientation][data-density=compact] .deck .platter{grid-column:3;grid-row:3;width:76px!important;height:76px!important;box-shadow:0 0 0 3px #1c1c1c,0 0 0 4px #999}
+body[data-workspace=rekordbox][data-orientation][data-density=compact] .rb-deck-options{grid-column:4;grid-row:3;padding-bottom:3px}
+body[data-workspace=rekordbox][data-orientation][data-density=compact] .deck:nth-of-type(even) .preview-loop-strip{grid-column:4}
+body[data-workspace=rekordbox][data-orientation][data-density=compact] .deck:nth-of-type(even) .transport{grid-column:1}
+body[data-workspace=rekordbox][data-orientation][data-density=compact] .deck:nth-of-type(even) .platter{grid-column:2}
+body[data-workspace=rekordbox][data-orientation][data-density=compact] .deck:nth-of-type(even) .rb-deck-options{grid-column:3}
+body[data-workspace=rekordbox][data-orientation][data-density=compact] .preview-deck-utilities{grid-row:4}
+body[data-workspace=rekordbox][data-orientation][data-density=compact] .deck-foot{grid-row:5}
+body[data-workspace=rekordbox][data-orientation][data-density=compact] .channel-strip .knob-group{height:31px;min-height:31px}
+body[data-workspace=rekordbox][data-orientation][data-density=compact] .channel-strip .fader-group{height:53px}
+body[data-workspace=rekordbox][data-orientation][data-density=compact] .fader-group input{height:50px;min-height:50px}
+body[data-workspace=rekordbox][data-orientation][data-density=compact] .fader-group::after{top:calc(3px + (1 - var(--preview-level,.8))*38px)}
+/* Shared monitor/crossfader strip. The crossfader itself is centered. */
+.rb-only{display:none}body[data-workspace=rekordbox] .rb-only{display:block}
+body[data-workspace=rekordbox][data-orientation] .rb-mixer-band{grid-column:1/-1;grid-row:3;display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;gap:12px;height:44px;padding:3px 8px;border:0;background:#1c1c1c;margin:0}
+body[data-workspace=rekordbox] .rb-cross-controls{grid-column:2;grid-row:1;display:grid;grid-template-columns:54px 160px 54px;align-items:center;gap:2px 6px}
+body[data-workspace=rekordbox][data-orientation] .rb-cross-controls .crossfader{grid-column:2;grid-row:1/3;font-size:7px;min-width:0;margin:0;padding:0;border:0;align-self:center}
+body[data-workspace=rekordbox][data-orientation] .rb-mixer-band .preview-headphones{grid-column:1;grid-row:1;justify-self:end;width:140px;background:#262626;border:0;min-height:26px;height:26px;font-size:9px;white-space:normal}
+body[data-workspace=rekordbox][data-orientation] .rb-cross-controls .cross-assign{grid-row:1;grid-column:1;display:flex;flex-direction:row;align-items:center;font-size:8px;line-height:10px;white-space:nowrap;gap:2px;margin:0;width:54px}
+body[data-workspace=rekordbox][data-orientation] .rb-cross-controls select{width:37px;min-height:16px;height:16px;padding:0;font-size:8px;background:#292929;color:#ddd;border:0}
+body[data-workspace=rekordbox][data-orientation] .rb-cross-controls [data-rb-assign='2']{grid-column:1;grid-row:2}
+body[data-workspace=rekordbox][data-orientation] .rb-cross-controls [data-rb-assign='1']{grid-column:3;grid-row:1}
+body[data-workspace=rekordbox][data-orientation] .rb-cross-controls [data-rb-assign='3']{grid-column:3;grid-row:2}
+/* Five real rotary controls per channel, then headphone CUE and level. */
+body[data-workspace=rekordbox][data-orientation] .channel-strip{grid-template-rows:10px repeat(5,29px) 24px minmax(48px,1fr);min-height:0}
+body[data-workspace=rekordbox][data-orientation] .channel-strip .knob-group{grid-column:1;height:29px;min-height:29px;padding:0;font-size:7px}
+body[data-workspace=rekordbox][data-orientation] .channel-strip .knob-group:has(input[data-mix$=':filter']){grid-row:6}
+body[data-workspace=rekordbox][data-orientation] .channel-strip>button{grid-column:1;grid-row:7;width:42px;align-self:center}
+body[data-workspace=rekordbox][data-orientation] .channel-strip .fader-group{grid-column:1;grid-row:8;min-height:0;height:100%;max-height:none}
+body[data-workspace=rekordbox][data-orientation] .fader-group input{height:100%;min-height:0}
+body[data-workspace=rekordbox][data-orientation] .fader-group::after{top:calc(3px + (1 - var(--preview-level,.8))*(100% - 14px))}
+body[data-workspace=rekordbox][data-orientation] .channel-strip .knob-group::before{width:18px;height:18px;left:12px;top:1px;border:2px solid #333}
+body[data-workspace=rekordbox][data-orientation] .channel-strip .knob-group::after{top:1px;left:20px;height:7px;transform-origin:1px 10px}
+body[data-workspace=rekordbox] .transport [data-action=cue]::after{content:none}
+/* Vertical pairs above the mixer; decks remain mirrored either side. */
+body[data-workspace=rekordbox]{--rb-wave-height:132px;--rb-pair-height:150px;--rb-four-height:239px}
+body[data-workspace=rekordbox][data-wave-size=small]{--rb-wave-height:88px;--rb-pair-height:120px}
+body[data-workspace=rekordbox][data-wave-size=large]{--rb-wave-height:180px;--rb-pair-height:200px}
+body[data-workspace=rekordbox][data-orientation=horizontal] main{height:calc(100dvh - 122px);min-height:0;grid-template-rows:var(--rb-wave-height) auto 44px minmax(180px,1fr)}
+body[data-workspace=rekordbox][data-orientation=horizontal] .detail-horizontal{height:var(--rb-wave-height)!important}
+body[data-workspace=rekordbox][data-orientation=vertical] main{height:calc(100dvh - 122px);min-height:0;grid-template-columns:minmax(0,1fr) 240px minmax(0,1fr);grid-template-rows:var(--rb-pair-height) 260px 44px minmax(180px,1fr)}
+body[data-workspace=rekordbox][data-orientation=vertical] .deck:nth-of-type(odd){grid-column:1;grid-row:1/3}
+body[data-workspace=rekordbox][data-orientation=vertical] .deck:nth-of-type(even){grid-column:3;grid-row:1/3}
+body[data-workspace=rekordbox][data-orientation=vertical] .detail-waves{grid-column:2!important;grid-row:1!important;height:var(--rb-pair-height)!important;border:0;border-radius:0}
+body[data-workspace=rekordbox][data-orientation=vertical] #mixer{grid-column:2;grid-row:2;grid-template-columns:repeat(2,minmax(0,1fr))}
+body[data-workspace=rekordbox][data-orientation=vertical] .library{grid-row:4}
+/* Four channels use the native horizontal order 3 / 1 / 2 / 4. Grid columns
+   change presentation only; every input retains its original deck identity. */
+body[data-workspace=rekordbox].four-decks{--rb-wave-height:100px}
+body[data-workspace=rekordbox].four-decks[data-wave-size=small]{--rb-wave-height:76px}
+body[data-workspace=rekordbox].four-decks[data-wave-size=large]{--rb-wave-height:132px}
+body[data-workspace=rekordbox].four-decks[data-density=compact]{--rb-four-height:217px}
+body[data-workspace=rekordbox].four-decks[data-orientation] main{grid-template-columns:minmax(0,1fr) 224px minmax(0,1fr);grid-template-rows:var(--rb-wave-height) var(--rb-four-height) var(--rb-four-height) 44px minmax(180px,1fr)}
+body[data-workspace=rekordbox].four-decks[data-orientation] .deck:nth-of-type(1){grid-column:1;grid-row:2}
+body[data-workspace=rekordbox].four-decks[data-orientation] .deck:nth-of-type(2){grid-column:3;grid-row:2}
+body[data-workspace=rekordbox].four-decks[data-orientation] .deck:nth-of-type(3){grid-column:1;grid-row:3}
+body[data-workspace=rekordbox].four-decks[data-orientation] .deck:nth-of-type(4){grid-column:3;grid-row:3}
+body[data-workspace=rekordbox].four-decks[data-orientation] .deck{grid-template-rows:44px 28px 112px 24px 23px}
+body[data-workspace=rekordbox].four-decks[data-density=compact] .deck{grid-template-rows:44px 28px 90px 24px 23px}
+body[data-workspace=rekordbox].four-decks .deck-head{height:44px;padding-block:1px}
+body[data-workspace=rekordbox].four-decks .wave-wrap{height:28px}
+body[data-workspace=rekordbox].four-decks .pads{grid-template-rows:repeat(4,19px)}
+body[data-workspace=rekordbox].four-decks .pad{height:19px;min-height:19px}
+body[data-workspace=rekordbox].four-decks .deck .platter{width:94px!important;height:94px!important}
+body[data-workspace=rekordbox].four-decks[data-density=compact] .deck .platter{width:70px!important;height:70px!important}
+body[data-workspace=rekordbox].four-decks[data-orientation] #mixer{grid-column:2;grid-row:2/4;grid-template-columns:repeat(4,minmax(0,1fr));grid-template-rows:1fr;align-content:start;align-items:stretch}
+body[data-workspace=rekordbox].four-decks .channel-strip{grid-row:1;grid-template-columns:1fr;height:100%}
+body[data-workspace=rekordbox].four-decks .channel-strip[data-rb-channel='2']{grid-column:1}
+body[data-workspace=rekordbox].four-decks .channel-strip[data-rb-channel='0']{grid-column:2}
+body[data-workspace=rekordbox].four-decks .channel-strip[data-rb-channel='1']{grid-column:3}
+body[data-workspace=rekordbox].four-decks .channel-strip[data-rb-channel='3']{grid-column:4}
+body[data-workspace=rekordbox].four-decks .rb-mixer-band{grid-row:4}
+body[data-workspace=rekordbox].four-decks .library{grid-row:5;min-height:180px}
+body[data-workspace=rekordbox].four-decks[data-orientation=vertical] main{grid-template-columns:minmax(0,1fr) 240px minmax(0,1fr);grid-template-rows:var(--rb-four-height) var(--rb-four-height) 44px minmax(180px,1fr)}
+body[data-workspace=rekordbox].four-decks[data-orientation=vertical] .deck:nth-of-type(1),body[data-workspace=rekordbox].four-decks[data-orientation=vertical] .deck:nth-of-type(2){grid-row:1}
+body[data-workspace=rekordbox].four-decks[data-orientation=vertical] .deck:nth-of-type(3),body[data-workspace=rekordbox].four-decks[data-orientation=vertical] .deck:nth-of-type(4){grid-row:2}
+body[data-workspace=rekordbox].four-decks[data-orientation=vertical] .detail-waves{height:var(--rb-four-height)!important}
+body[data-workspace=rekordbox].four-decks[data-orientation=vertical] #mixer{grid-row:2}
+body[data-workspace=rekordbox].four-decks[data-orientation=vertical] .channel-strip{grid-template-rows:10px repeat(5,24px) 22px minmax(38px,1fr)}
+body[data-workspace=rekordbox].four-decks[data-orientation=vertical] .channel-strip .knob-group{height:24px;min-height:24px;font-size:6px}
+body[data-workspace=rekordbox].four-decks[data-orientation=vertical] .channel-strip .knob-group::before{height:15px;width:15px;left:13px;top:0}
+body[data-workspace=rekordbox].four-decks[data-orientation=vertical] .channel-strip .knob-group::after{top:0;left:20px;height:6px;transform-origin:1px 8px}
+body[data-workspace=rekordbox].four-decks[data-orientation=vertical] .rb-mixer-band{grid-row:3}
+body[data-workspace=rekordbox].four-decks[data-orientation=vertical] .library{grid-row:4}
+/* Visibility never mutes/resets a channel. Removing panels reclaims the grid. */
+body[data-workspace=rekordbox][data-rb-mixer=false] :is(#mixer,.rb-mixer-band){display:none!important}
+body[data-workspace=rekordbox][data-rb-mixer=false][data-orientation=horizontal] main{grid-template-columns:1fr 1fr;grid-template-rows:var(--rb-wave-height) auto minmax(180px,1fr)}
+body[data-workspace=rekordbox][data-rb-mixer=false][data-orientation=horizontal] .deck:nth-of-type(even){grid-column:2}
+body[data-workspace=rekordbox][data-rb-mixer=false][data-orientation=horizontal] .library{grid-row:3}
+body[data-workspace=rekordbox][data-rb-mixer=false][data-orientation=vertical] main{grid-template-rows:var(--rb-pair-height) 125px minmax(180px,1fr)}
+body[data-workspace=rekordbox][data-rb-mixer=false][data-orientation=vertical] .library{grid-row:3}
+body[data-workspace=rekordbox][data-rb-mixer=false].four-decks[data-orientation=horizontal] main{grid-template-rows:var(--rb-wave-height) var(--rb-four-height) var(--rb-four-height) minmax(180px,1fr)}
+body[data-workspace=rekordbox][data-rb-mixer=false].four-decks[data-orientation=horizontal] .library{grid-row:4}
+body[data-workspace=rekordbox][data-rb-mixer=false].four-decks[data-orientation=vertical] main{grid-template-columns:minmax(0,1fr) 180px minmax(0,1fr);grid-template-rows:var(--rb-four-height) var(--rb-four-height) minmax(180px,1fr)}
+body[data-workspace=rekordbox][data-rb-mixer=false].four-decks[data-orientation=vertical] .detail-waves{grid-row:1/3!important;height:100%!important}
+/* Library focus keeps transport and mixing controls accessible. */
+body[data-workspace=rekordbox][data-library-focus=true][data-orientation] main{grid-template-rows:auto 44px minmax(180px,1fr)}
+body[data-workspace=rekordbox][data-library-focus=true][data-orientation] .deck:nth-of-type(n),body[data-workspace=rekordbox][data-library-focus=true][data-orientation] #mixer{grid-row:1}
+body[data-workspace=rekordbox][data-library-focus=true][data-orientation] .rb-mixer-band{grid-row:2}
+body[data-workspace=rekordbox][data-library-focus=true][data-orientation] .library{grid-row:3}
+body[data-workspace=rekordbox][data-library-focus=true].four-decks[data-orientation] main{grid-template-rows:var(--rb-four-height) var(--rb-four-height) 44px minmax(180px,1fr)}
+body[data-workspace=rekordbox][data-library-focus=true].four-decks[data-orientation] .deck:nth-of-type(3),body[data-workspace=rekordbox][data-library-focus=true].four-decks[data-orientation] .deck:nth-of-type(4){grid-row:2}
+body[data-workspace=rekordbox][data-library-focus=true].four-decks[data-orientation] #mixer{grid-row:1/3}
+body[data-workspace=rekordbox][data-library-focus=true].four-decks[data-orientation] .rb-mixer-band{grid-row:3}
+body[data-workspace=rekordbox][data-library-focus=true].four-decks[data-orientation] .library{grid-row:4}
+body[data-workspace=rekordbox][data-library-focus=true][data-rb-mixer=false][data-orientation] main{grid-template-rows:auto minmax(180px,1fr)}
+body[data-workspace=rekordbox][data-library-focus=true][data-rb-mixer=false][data-orientation] .library{grid-row:2}
+body[data-workspace=rekordbox][data-library-focus=true][data-rb-mixer=false].four-decks[data-orientation] main{grid-template-rows:var(--rb-four-height) var(--rb-four-height) minmax(180px,1fr)}
+body[data-workspace=rekordbox][data-library-focus=true][data-rb-mixer=false].four-decks[data-orientation] .library{grid-row:3}
+body[data-workspace=rekordbox][data-orientation] .channel-strip .knob-group:has(input[data-mix]){grid-column:1}
+body[data-workspace=rekordbox].four-decks[data-orientation=vertical] .channel-strip .knob-group{font-size:7px}
+body[data-workspace=rekordbox][data-orientation] .rb-cross-controls .crossfader input{width:100%;margin-inline:0;box-sizing:border-box}
