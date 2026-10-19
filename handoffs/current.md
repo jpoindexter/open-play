@@ -1,3 +1,17 @@
+# Active goal override — CORE DJ ONLY, 19 October 2026
+
+Jason explicitly narrowed the active goal to the core DJ experience. Load two different real local MP3s, one per deck; play/cue/mix, manual beatmatch and Sync, gain/faders/crossfader/master, headphone cue/mix, EQ/filter/cutoff and Hercules core controls. CORE-001: https://trello.com/c/LGGdtSa3. Read docs/delivery/CORE_DJ_FIRST.md and handoffs/core-dj-first.md first.
+
+Before each action, require a direct connection to enabling or verifying that two-track workflow. If work drifts to stems, sampler combinations, advanced FX, video, broad parity research or quick wins, STOP THAT ACTIVITY IMMEDIATELY and return to the next core blocker. The full parity inventory and quick-win candidates are saved for later; neither is an active goal. Preserve the existing implementation and previous builds. Test pragmatically at changed/failing core paths; a practical audible session is the finish line. Existing local desktop-test approval persists; no public release is authorized.
+
+Earlier next-task instructions below, including keyed Stems after checkpoint187, are superseded. Prior evidence and original prompt remain historical records. Do not launch the full Claude parity audit ahead of the core workflow.
+
+---
+
+# Checkpoint187 — real cached Stems in the running mixed group
+
+Plan187: real cached SCNet Stems activate/select/tempo/mute/restore while warped deck+raw/keyed samples keep playing.5cases/40whole native48kchannels pass; original/decoded-part/rendered references, full activation and selected-parts tempo handoffs, worstRMS5.869e-8/1e-4, commit/continuity0, clock readback<=5.334ms/10ms. Muted deck peak0; samples continue. Existing48kjob/4real parts reused;18cachefiles and18job directories unchanged/no new inference. No production audio fix. Keylocked Stems deck/FX/gestures/quality/vendor/native/hardware/full110/522/9/26/55 open. See docs/prototype/STEMS_GROUP_187_REVIEW.md and handoffs/stems-187-keyed-stems-group-followup.md.
+
 # Checkpoint186 — actual mixed Sampler group and full tempo handoff
 
 Plan186: actual raw/keylocked Sampler members join warped126BPMdeck and share127.2BPMtempo change. Initial/full6spreparation+10mscrossfade/final3stages,24whole native48kchannels pass; worst relativeRMS6.759e-8/1e-4, common commit spread/source continuity0, musical phase rounding-level/10ms, playhead readback<=2.667ms. Real raw/keyed/combined bus references and owners; no production audio fix or broad retest needed.18cachebytes/hash/mtime unchanged/no inference. Stems/gestures/larger groups/quality/vendor/native/hardware/full110/522/9/26/55 open. See docs/prototype/MIXED_SAMPLER_186_REVIEW.md and handoffs/stems-186-stems-group-followup.md.

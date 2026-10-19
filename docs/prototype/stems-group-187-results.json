@@ -1,0 +1,1209 @@
+{
+  "checkpoint": 187,
+  "originalBytes": 48805454,
+  "originalSHA256": "bf796f3ecbd2b6bbed94a77842a3263a87fed6459d46a688d52d3c331532926f",
+  "sourceHashes": {
+    "app.js": "12bfc81b7a978d7ad946a1203c53e23f3674c75aa3d97aafd9b080d161c71c76",
+    "engine.js": "6a80d6d04ca6135c0563edac97c0a3b3f67fc122b9373433699e8999697869a6",
+    "panels.js": "d45a9d232d230625bfe6e85681c3b8641f9bcedab66f57edc94fa04fce07b41c",
+    "styles.css": "491769fb9a39793e1684ce1cd1cb6c66ad4ffe426b905036f79a0a342b85ec32",
+    "fixtures/sampler-playing-181-warped-metadata.json": "741624e7af6a8537bbba52426fb0feb08302b394f47c8aebe22e0a6fc6cd1a1f",
+    "manual-loops.js": "a2215ea2414788a0a0b73a1e9b99efdc24399be8003fc18c7c7de00377976304",
+    "beatgrid.js": "af239aef231c9d089bf2352b8f548a5f71f734d6cf753986f17f57b3999477b9",
+    "smart-sync.js": "8c299d0960f1b9aa692513d65700ce073b05e459d8e7585d2d9a3ed12162fa57",
+    "sync-tempo-handoff.js": "5842f9209035e24ff867004d3fef5f0a1fe7f7f4976440546b8238a225b82f9b",
+    "sampler-sync.js": "22ce10adc45038adc52cc2e20563de7bd864b7986b706729e3fafc68582b4ee0",
+    "sample-sync-transport.js": "4dafd2bcf9a70b588d87a41d872a7956986e8af74bec171c6cde874f2a9bf10c",
+    "warp-loop.js": "1429a67a75b893af6ed6cb7b067dae377bdacedd71f2ff955ef3fe64907d5ae8",
+    "warp-loop-kernel.js": "7f0c18c4868818f8b77a3d4f71e72ea821516e902516d749f58cac6add2bfac2",
+    "warp-loop-worklet.js": "2f2eb1109dca29ad99928af069c257f2da06cd6f79e7add2b1431da9cb12ea9b",
+    "stems.js": "5fb06aba4f6a97e4150d1bcfeef394574b0c9e9ed6ee099b78b89482b08ea4b7",
+    "keylock.js": "62adbfdd77df20deb1328302d4a8daf3d7bdc29870af453d39acfd2a02bf060b",
+    "keylock-worker.js": "5cb72a1bc74e1808c32b430d72d5769427c7056edee11410eb6f8b3c7751fcec",
+    "keylock-dsp.js": "f4cb1881fedb018f395a6711d263aa142feb8dfe93638a3d1f97fc432c15ac3d",
+    "track-gain.js": "f390adbddd4e317444294a92d9e5a82b89d6abaa591578a158a00308628d5bfa",
+    "stems-group-187-harness.js": "299fd270d3921b26f96e956b243bff4ca604d1f43a79f9e8c2c67a7efe33cf0e",
+    "stem-activation-capture-145.js": "730b9c3de31e9c3546ec1ab86f8fd85ce2a1ccfe6f78fc25d8f483f8b9d75331",
+    "stem-history-worklet.js": "d1e4f452044235a110a874fad2921390878c5731f3a769896ca5bfb2faf08daa",
+    "vendor/signalsmith-stretch/SignalsmithStretch-open-play-reference-dsp.mjs": "0512cae2a33873956026e64cb47854c1c677baf1beb1bc0242edfb9557987f21"
+  },
+  "workflowCompleted": true,
+  "errors": [],
+  "uiErrors": [],
+  "passed": true,
+  "observations": [
+    {
+      "name": "stems-activation",
+      "stateAccepted": true,
+      "nominalBPM": 126,
+      "maximumNominalBPMError": 0,
+      "maximumBarPhaseSeconds": 1.691768418476429e-15,
+      "maximumClockReadbackSeconds": 0.005333333333332746,
+      "commonCommitSpreadSeconds": 0.0,
+      "sourceContinuitySeconds": [
+        0.0
+      ],
+      "packets": [
+        {
+          "label": "bus",
+          "channel": 0,
+          "frames": 288000,
+          "quanta": 2250,
+          "sha256": "440ca3b56352332103f2acabcf65bf1dacd9ed7483ae34eed3c50a8392c3e350",
+          "continuous": true,
+          "captureErrorCount": 0,
+          "windows": {
+            "whole": {
+              "frames": 288000,
+              "referenceRMS": 0.09214924751964555,
+              "relativeRMSError": 4.461707849728492e-08,
+              "accepted": true
+            },
+            "preparation": {
+              "frames": 10688,
+              "referenceRMS": 0.09963049154481969,
+              "relativeRMSError": 4.348861603313041e-08,
+              "accepted": true
+            },
+            "crossfade": {
+              "frames": 480,
+              "referenceRMS": 0.09479149774604963,
+              "relativeRMSError": 4.2903877646493095e-08,
+              "accepted": true
+            },
+            "after": {
+              "frames": 262240,
+              "referenceRMS": 0.09251260822878112,
+              "relativeRMSError": 4.466243842761391e-08,
+              "accepted": true
+            }
+          },
+          "accepted": true
+        },
+        {
+          "label": "bus",
+          "channel": 1,
+          "frames": 288000,
+          "quanta": 2250,
+          "sha256": "853087d535b25a84916159bc2c7aa398cd3a87b877c2a98a5a6fad605a88279d",
+          "continuous": true,
+          "captureErrorCount": 0,
+          "windows": {
+            "whole": {
+              "frames": 288000,
+              "referenceRMS": 0.0912138411058241,
+              "relativeRMSError": 4.436910691455854e-08,
+              "accepted": true
+            },
+            "preparation": {
+              "frames": 10688,
+              "referenceRMS": 0.09466610547488656,
+              "relativeRMSError": 4.3357513645404567e-08,
+              "accepted": true
+            },
+            "crossfade": {
+              "frames": 480,
+              "referenceRMS": 0.0789657534519969,
+              "relativeRMSError": 4.7580040340967885e-08,
+              "accepted": true
+            },
+            "after": {
+              "frames": 262240,
+              "referenceRMS": 0.09138166926425095,
+              "relativeRMSError": 4.440809786702906e-08,
+              "accepted": true
+            }
+          },
+          "accepted": true
+        },
+        {
+          "label": "sample0",
+          "channel": 0,
+          "frames": 288000,
+          "quanta": 2250,
+          "sha256": "aa320c31e1adcc4c961d6fe1834e02b9dddf28a46e58ec318529b134b738be3a",
+          "continuous": true,
+          "captureErrorCount": 0,
+          "windows": {
+            "whole": {
+              "frames": 288000,
+              "referenceRMS": 0.0679382363239717,
+              "relativeRMSError": 3.4467089648186793e-08,
+              "accepted": true
+            },
+            "preparation": {
+              "frames": 10688,
+              "referenceRMS": 0.07146255472396379,
+              "relativeRMSError": 3.379364553593783e-08,
+              "accepted": true
+            },
+            "crossfade": {
+              "frames": 480,
+              "referenceRMS": 0.07399722140144252,
+              "relativeRMSError": 3.206706102860335e-08,
+              "accepted": true
+            },
+            "after": {
+              "frames": 262240,
+              "referenceRMS": 0.06823824575080474,
+              "relativeRMSError": 3.451802901960527e-08,
+              "accepted": true
+            }
+          },
+          "accepted": true
+        },
+        {
+          "label": "sample0",
+          "channel": 1,
+          "frames": 288000,
+          "quanta": 2250,
+          "sha256": "f9644bff09549c1a9ecc7e8a41d651905302cca356fe9bf1d53ac6991c9f91e1",
+          "continuous": true,
+          "captureErrorCount": 0,
+          "windows": {
+            "whole": {
+              "frames": 288000,
+              "referenceRMS": 0.06701887633581233,
+              "relativeRMSError": 3.437635367708417e-08,
+              "accepted": true
+            },
+            "preparation": {
+              "frames": 10688,
+              "referenceRMS": 0.06927769988637586,
+              "relativeRMSError": 3.3240292256840704e-08,
+              "accepted": true
+            },
+            "crossfade": {
+              "frames": 480,
+              "referenceRMS": 0.05880417781911893,
+              "relativeRMSError": 3.1302630342722024e-08,
+              "accepted": true
+            },
+            "after": {
+              "frames": 262240,
+              "referenceRMS": 0.06708975779891081,
+              "relativeRMSError": 3.442851993322504e-08,
+              "accepted": true
+            }
+          },
+          "accepted": true
+        },
+        {
+          "label": "sample1",
+          "channel": 0,
+          "frames": 288000,
+          "quanta": 2250,
+          "sha256": "d834a03e519ab21ab767eaab1451cb2551bcacc0d952c0758b8ff7da81eda536",
+          "continuous": true,
+          "captureErrorCount": 0,
+          "windows": {
+            "whole": {
+              "frames": 288000,
+              "referenceRMS": 0.06411798847033566,
+              "relativeRMSError": 3.560490833006174e-08,
+              "accepted": true
+            },
+            "preparation": {
+              "frames": 10688,
+              "referenceRMS": 0.06503988700715026,
+              "relativeRMSError": 3.610005016420093e-08,
+              "accepted": true
+            },
+            "crossfade": {
+              "frames": 480,
+              "referenceRMS": 0.06397849841576156,
+              "relativeRMSError": 3.6007303305033796e-08,
+              "accepted": true
+            },
+            "after": {
+              "frames": 262240,
+              "referenceRMS": 0.06453734159977167,
+              "relativeRMSError": 3.5572443289833176e-08,
+              "accepted": true
+            }
+          },
+          "accepted": true
+        },
+        {
+          "label": "sample1",
+          "channel": 1,
+          "frames": 288000,
+          "quanta": 2250,
+          "sha256": "6265bf9cf627dd5b5459c46d36273025617df1525bb46fb147718422316410d0",
+          "continuous": true,
+          "captureErrorCount": 0,
+          "windows": {
+            "whole": {
+              "frames": 288000,
+              "referenceRMS": 0.06319729769817857,
+              "relativeRMSError": 3.557194437574586e-08,
+              "accepted": true
+            },
+            "preparation": {
+              "frames": 10688,
+              "referenceRMS": 0.06292037828964948,
+              "relativeRMSError": 3.537889154890682e-08,
+              "accepted": true
+            },
+            "crossfade": {
+              "frames": 480,
+              "referenceRMS": 0.06119872449008536,
+              "relativeRMSError": 3.716951683359616e-08,
+              "accepted": true
+            },
+            "after": {
+              "frames": 262240,
+              "referenceRMS": 0.06335461908703463,
+              "relativeRMSError": 3.558952817493821e-08,
+              "accepted": true
+            }
+          },
+          "accepted": true
+        },
+        {
+          "label": "deck",
+          "channel": 0,
+          "frames": 288000,
+          "quanta": 2250,
+          "sha256": "2eb19cb9a25cd7336744d34ff1502b7dde54fb81bc9f29f67be293d16c25f21a",
+          "continuous": true,
+          "captureErrorCount": 0,
+          "windows": {
+            "whole": {
+              "frames": 288000,
+              "referenceRMS": 0.1698455882790103,
+              "relativeRMSError": 2.3470134374791453e-08,
+              "accepted": true
+            },
+            "preparation": {
+              "frames": 10688,
+              "referenceRMS": 0.1786563841477151,
+              "relativeRMSError": 2.1981588850269767e-08,
+              "accepted": true
+            },
+            "crossfade": {
+              "frames": 480,
+              "referenceRMS": 0.1849930507469281,
+              "relativeRMSError": 3.225589475416625e-08,
+              "accepted": true
+            },
+            "after": {
+              "frames": 262240,
+              "referenceRMS": 0.1705956118349159,
+              "relativeRMSError": 2.352327808987523e-08,
+              "accepted": true
+            }
+          },
+          "accepted": true
+        },
+        {
+          "label": "deck",
+          "channel": 1,
+          "frames": 288000,
+          "quanta": 2250,
+          "sha256": "62ac19609776daba22637e5cfc9b82436db322dd2bfa8486883c840a7a6f40cb",
+          "continuous": true,
+          "captureErrorCount": 0,
+          "windows": {
+            "whole": {
+              "frames": 288000,
+              "referenceRMS": 0.16754718834285084,
+              "relativeRMSError": 2.3453083380396192e-08,
+              "accepted": true
+            },
+            "preparation": {
+              "frames": 10688,
+              "referenceRMS": 0.1731942471351268,
+              "relativeRMSError": 2.2001843422466798e-08,
+              "accepted": true
+            },
+            "crossfade": {
+              "frames": 480,
+              "referenceRMS": 0.14701044235708566,
+              "relativeRMSError": 3.592321791860127e-08,
+              "accepted": true
+            },
+            "after": {
+              "frames": 262240,
+              "referenceRMS": 0.1677243919979546,
+              "relativeRMSError": 2.3500489170885055e-08,
+              "accepted": true
+            }
+          },
+          "accepted": true
+        }
+      ],
+      "accepted": true
+    },
+    {
+      "name": "vocals-only",
+      "stateAccepted": true,
+      "nominalBPM": 126,
+      "maximumNominalBPMError": 0,
+      "maximumBarPhaseSeconds": 1.691768418476429e-15,
+      "maximumClockReadbackSeconds": 0,
+      "commonCommitSpreadSeconds": null,
+      "sourceContinuitySeconds": [],
+      "packets": [
+        {
+          "label": "bus",
+          "channel": 0,
+          "frames": 24000,
+          "quanta": 188,
+          "sha256": "3ce17ea8b761d0836b9a997b83d74a7e4d2c881986a0709996eb7a1420c9dd86",
+          "continuous": true,
+          "captureErrorCount": 0,
+          "windows": {
+            "whole": {
+              "frames": 24000,
+              "referenceRMS": 0.09755136246519222,
+              "relativeRMSError": 4.392415905425149e-08,
+              "accepted": true
+            }
+          },
+          "accepted": true
+        },
+        {
+          "label": "bus",
+          "channel": 1,
+          "frames": 24000,
+          "quanta": 188,
+          "sha256": "1d74551e4fe062051cec2f9cdff58c4cb2129fcef74e2a3d5e4b559254463ed4",
+          "continuous": true,
+          "captureErrorCount": 0,
+          "windows": {
+            "whole": {
+              "frames": 24000,
+              "referenceRMS": 0.0950340761533502,
+              "relativeRMSError": 4.3873651190360554e-08,
+              "accepted": true
+            }
+          },
+          "accepted": true
+        },
+        {
+          "label": "sample0",
+          "channel": 0,
+          "frames": 24000,
+          "quanta": 188,
+          "sha256": "7b0fd513b0653446d9d7834fe42bb1a64225ea71da0021cb3caa13a68b93af8d",
+          "continuous": true,
+          "captureErrorCount": 0,
+          "windows": {
+            "whole": {
+              "frames": 24000,
+              "referenceRMS": 0.0713033740918752,
+              "relativeRMSError": 3.337834060342688e-08,
+              "accepted": true
+            }
+          },
+          "accepted": true
+        },
+        {
+          "label": "sample0",
+          "channel": 1,
+          "frames": 24000,
+          "quanta": 188,
+          "sha256": "096081caf5afd5ccd05ab6b9467ff21932ecc438bf1f4dd89aa75d2cae0868fd",
+          "continuous": true,
+          "captureErrorCount": 0,
+          "windows": {
+            "whole": {
+              "frames": 24000,
+              "referenceRMS": 0.06883342918087379,
+              "relativeRMSError": 3.415877015391747e-08,
+              "accepted": true
+            }
+          },
+          "accepted": true
+        },
+        {
+          "label": "sample1",
+          "channel": 0,
+          "frames": 24000,
+          "quanta": 188,
+          "sha256": "612cc3fc070da5565975be1b8fba6882d483060dfd43606dcc05218f3413b3e8",
+          "continuous": true,
+          "captureErrorCount": 0,
+          "windows": {
+            "whole": {
+              "frames": 24000,
+              "referenceRMS": 0.06628786709660205,
+              "relativeRMSError": 3.5919436651110645e-08,
+              "accepted": true
+            }
+          },
+          "accepted": true
+        },
+        {
+          "label": "sample1",
+          "channel": 1,
+          "frames": 24000,
+          "quanta": 188,
+          "sha256": "8c4a374bb72b05f64c6e1c8f42a0edc98122463bd2eda1510b3b1896881c30da",
+          "continuous": true,
+          "captureErrorCount": 0,
+          "windows": {
+            "whole": {
+              "frames": 24000,
+              "referenceRMS": 0.0630303427752278,
+              "relativeRMSError": 3.6015325995260037e-08,
+              "accepted": true
+            }
+          },
+          "accepted": true
+        },
+        {
+          "label": "deck",
+          "channel": 0,
+          "frames": 24000,
+          "quanta": 188,
+          "sha256": "4941617327c8386407cab6b5246317d414e61ef98f9d7811236abedf6137fb43",
+          "continuous": true,
+          "captureErrorCount": 0,
+          "windows": {
+            "whole": {
+              "frames": 24000,
+              "referenceRMS": 0.09703743872629575,
+              "relativeRMSError": 2.249820058057256e-08,
+              "accepted": true
+            }
+          },
+          "accepted": true
+        },
+        {
+          "label": "deck",
+          "channel": 1,
+          "frames": 24000,
+          "quanta": 188,
+          "sha256": "1f79ec531b8e77d7b166828ec30add888250f394f6f637091b7ebf934a2c4704",
+          "continuous": true,
+          "captureErrorCount": 0,
+          "windows": {
+            "whole": {
+              "frames": 24000,
+              "referenceRMS": 0.08045745271107696,
+              "relativeRMSError": 2.2642935632231452e-08,
+              "accepted": true
+            }
+          },
+          "accepted": true
+        }
+      ],
+      "accepted": true
+    },
+    {
+      "name": "selected-stems-tempo-transition",
+      "stateAccepted": true,
+      "nominalBPM": 127.2,
+      "maximumNominalBPMError": 0,
+      "maximumBarPhaseSeconds": 3.383536836952858e-15,
+      "maximumClockReadbackSeconds": 0.0053333333333412045,
+      "commonCommitSpreadSeconds": 0.0,
+      "sourceContinuitySeconds": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "packets": [
+        {
+          "label": "bus",
+          "channel": 0,
+          "frames": 288000,
+          "quanta": 2250,
+          "sha256": "8b25c6f2024be447bd3c3c52daafc9471d07d4aa08f7905f33a2e563451ca615",
+          "continuous": true,
+          "captureErrorCount": 0,
+          "windows": {
+            "whole": {
+              "frames": 288000,
+              "referenceRMS": 0.093114838254893,
+              "relativeRMSError": 4.489407843237778e-08,
+              "accepted": true
+            },
+            "preparation": {
+              "frames": 23744,
+              "referenceRMS": 0.09275012208924734,
+              "relativeRMSError": 4.570157156576084e-08,
+              "accepted": true
+            },
+            "crossfade": {
+              "frames": 480,
+              "referenceRMS": 0.07033782380669433,
+              "relativeRMSError": 5.868810670927993e-08,
+              "accepted": true
+            },
+            "after": {
+              "frames": 248928,
+              "referenceRMS": 0.09402368674157761,
+              "relativeRMSError": 4.474722624411668e-08,
+              "accepted": true
+            }
+          },
+          "accepted": true
+        },
+        {
+          "label": "bus",
+          "channel": 1,
+          "frames": 288000,
+          "quanta": 2250,
+          "sha256": "3f6279bba03db05cb7481148781f298fa859598bb42023ec3d929173cace21dc",
+          "continuous": true,
+          "captureErrorCount": 0,
+          "windows": {
+            "whole": {
+              "frames": 288000,
+              "referenceRMS": 0.09144340951135868,
+              "relativeRMSError": 4.475385997142488e-08,
+              "accepted": true
+            },
+            "preparation": {
+              "frames": 23744,
+              "referenceRMS": 0.09566358809263381,
+              "relativeRMSError": 4.5400168164802175e-08,
+              "accepted": true
+            },
+            "crossfade": {
+              "frames": 480,
+              "referenceRMS": 0.08531611643395232,
+              "relativeRMSError": 5.492034669140249e-08,
+              "accepted": true
+            },
+            "after": {
+              "frames": 248928,
+              "referenceRMS": 0.09187037982101409,
+              "relativeRMSError": 4.464231699938325e-08,
+              "accepted": true
+            }
+          },
+          "accepted": true
+        },
+        {
+          "label": "sample0",
+          "channel": 0,
+          "frames": 288000,
+          "quanta": 2250,
+          "sha256": "702be11be19744d0cb2b03168759ea1332bb7a8b276c8c8b14a602663e232e34",
+          "continuous": true,
+          "captureErrorCount": 0,
+          "windows": {
+            "whole": {
+              "frames": 288000,
+              "referenceRMS": 0.0679348879802691,
+              "relativeRMSError": 3.554740824152251e-08,
+              "accepted": true
+            },
+            "preparation": {
+              "frames": 23744,
+              "referenceRMS": 0.06947463035084284,
+              "relativeRMSError": 3.469984252360657e-08,
+              "accepted": true
+            },
+            "crossfade": {
+              "frames": 480,
+              "referenceRMS": 0.04890834139633971,
+              "relativeRMSError": 5.422004034157884e-08,
+              "accepted": true
+            },
+            "after": {
+              "frames": 248928,
+              "referenceRMS": 0.06826675664850765,
+              "relativeRMSError": 3.56148269996741e-08,
+              "accepted": true
+            }
+          },
+          "accepted": true
+        },
+        {
+          "label": "sample0",
+          "channel": 1,
+          "frames": 288000,
+          "quanta": 2250,
+          "sha256": "e6729bf891455323450df81d05be81fc3a2fbcb42710548c3fcf31c6c13cb7a5",
+          "continuous": true,
+          "captureErrorCount": 0,
+          "windows": {
+            "whole": {
+              "frames": 288000,
+              "referenceRMS": 0.06665551563518572,
+              "relativeRMSError": 3.568121094804909e-08,
+              "accepted": true
+            },
+            "preparation": {
+              "frames": 23744,
+              "referenceRMS": 0.07067004152975652,
+              "relativeRMSError": 3.522956682741884e-08,
+              "accepted": true
+            },
+            "crossfade": {
+              "frames": 480,
+              "referenceRMS": 0.06195420210602838,
+              "relativeRMSError": 4.874082512300331e-08,
+              "accepted": true
+            },
+            "after": {
+              "frames": 248928,
+              "referenceRMS": 0.06676382714011797,
+              "relativeRMSError": 3.571871320275024e-08,
+              "accepted": true
+            }
+          },
+          "accepted": true
+        },
+        {
+          "label": "sample1",
+          "channel": 0,
+          "frames": 288000,
+          "quanta": 2250,
+          "sha256": "428e224ca2867ef6ee0be5ea3edd27ebe15e157d3e1863567faf983162594f8c",
+          "continuous": true,
+          "captureErrorCount": 0,
+          "windows": {
+            "whole": {
+              "frames": 288000,
+              "referenceRMS": 0.06412348658822786,
+              "relativeRMSError": 3.580336450224946e-08,
+              "accepted": true
+            },
+            "preparation": {
+              "frames": 23744,
+              "referenceRMS": 0.06714080754823415,
+              "relativeRMSError": 3.591799883884081e-08,
+              "accepted": true
+            },
+            "crossfade": {
+              "frames": 480,
+              "referenceRMS": 0.050226542443596825,
+              "relativeRMSError": 4.6028953002855814e-08,
+              "accepted": true
+            },
+            "after": {
+              "frames": 248928,
+              "referenceRMS": 0.06418430145500656,
+              "relativeRMSError": 3.579940944695262e-08,
+              "accepted": true
+            }
+          },
+          "accepted": true
+        },
+        {
+          "label": "sample1",
+          "channel": 1,
+          "frames": 288000,
+          "quanta": 2250,
+          "sha256": "226cb9c08b9d5f09cbd0f51d3bd12e0b045038e2ae7934cf694cb6e9cfc71739",
+          "continuous": true,
+          "captureErrorCount": 0,
+          "windows": {
+            "whole": {
+              "frames": 288000,
+              "referenceRMS": 0.06284959725931216,
+              "relativeRMSError": 3.57440042793051e-08,
+              "accepted": true
+            },
+            "preparation": {
+              "frames": 23744,
+              "referenceRMS": 0.068375329339314,
+              "relativeRMSError": 3.53768175557032e-08,
+              "accepted": true
+            },
+            "crossfade": {
+              "frames": 480,
+              "referenceRMS": 0.07106314980393438,
+              "relativeRMSError": 4.741910378685345e-08,
+              "accepted": true
+            },
+            "after": {
+              "frames": 248928,
+              "referenceRMS": 0.06266943564871351,
+              "relativeRMSError": 3.575701467786493e-08,
+              "accepted": true
+            }
+          },
+          "accepted": true
+        },
+        {
+          "label": "deck",
+          "channel": 0,
+          "frames": 288000,
+          "quanta": 2250,
+          "sha256": "6fc0d7df0ae19f2f09e4a61476e3f7c0b9fd93c2b19d76a80db55dc2360468f4",
+          "continuous": true,
+          "captureErrorCount": 0,
+          "windows": {
+            "whole": {
+              "frames": 288000,
+              "referenceRMS": 0.13052319575438218,
+              "relativeRMSError": 4.2067816843662574e-08,
+              "accepted": true
+            },
+            "preparation": {
+              "frames": 23744,
+              "referenceRMS": 0.13802690089622752,
+              "relativeRMSError": 4.2268371799598805e-08,
+              "accepted": true
+            },
+            "crossfade": {
+              "frames": 480,
+              "referenceRMS": 0.09249662606293943,
+              "relativeRMSError": 5.3511699932204866e-08,
+              "accepted": true
+            },
+            "after": {
+              "frames": 248928,
+              "referenceRMS": 0.13073309841641179,
+              "relativeRMSError": 4.207007838911838e-08,
+              "accepted": true
+            }
+          },
+          "accepted": true
+        },
+        {
+          "label": "deck",
+          "channel": 1,
+          "frames": 288000,
+          "quanta": 2250,
+          "sha256": "48dca0041d8cb1514f90b303f63d306601e4995eb684ade6b487b132b4003309",
+          "continuous": true,
+          "captureErrorCount": 0,
+          "windows": {
+            "whole": {
+              "frames": 288000,
+              "referenceRMS": 0.13754370692574985,
+              "relativeRMSError": 4.234025786935228e-08,
+              "accepted": true
+            },
+            "preparation": {
+              "frames": 23744,
+              "referenceRMS": 0.15074558452288445,
+              "relativeRMSError": 4.246881853209312e-08,
+              "accepted": true
+            },
+            "crossfade": {
+              "frames": 480,
+              "referenceRMS": 0.12356147719724299,
+              "relativeRMSError": 5.1367240813252026e-08,
+              "accepted": true
+            },
+            "after": {
+              "frames": 248928,
+              "referenceRMS": 0.13742643670054908,
+              "relativeRMSError": 4.2278510278577066e-08,
+              "accepted": true
+            }
+          },
+          "accepted": true
+        }
+      ],
+      "accepted": true
+    },
+    {
+      "name": "all-stems-muted",
+      "stateAccepted": true,
+      "nominalBPM": 127.2,
+      "maximumNominalBPMError": 0,
+      "maximumBarPhaseSeconds": 3.35161667811368e-15,
+      "maximumClockReadbackSeconds": 0.00266666666667073,
+      "commonCommitSpreadSeconds": null,
+      "sourceContinuitySeconds": [],
+      "packets": [
+        {
+          "label": "bus",
+          "channel": 0,
+          "frames": 14400,
+          "quanta": 113,
+          "sha256": "71d5e7e1514f4106e6a609a2745092a8699aae4f0b3500b2c66426194afb9edb",
+          "continuous": true,
+          "captureErrorCount": 0,
+          "windows": {
+            "whole": {
+              "frames": 14400,
+              "referenceRMS": 0.08615026491351604,
+              "relativeRMSError": 4.511607168283312e-08,
+              "accepted": true
+            }
+          },
+          "accepted": true
+        },
+        {
+          "label": "bus",
+          "channel": 1,
+          "frames": 14400,
+          "quanta": 113,
+          "sha256": "e6172b0091f2131908c3637e05984ea3dcfddd9ea6d8a1fac46644baff181684",
+          "continuous": true,
+          "captureErrorCount": 0,
+          "windows": {
+            "whole": {
+              "frames": 14400,
+              "referenceRMS": 0.09331599683495281,
+              "relativeRMSError": 4.465873033292824e-08,
+              "accepted": true
+            }
+          },
+          "accepted": true
+        },
+        {
+          "label": "sample0",
+          "channel": 0,
+          "frames": 14400,
+          "quanta": 113,
+          "sha256": "d6e3ec3082c0a1403bf6026f4443d856a9d1f791911a71c35f17097abe999de7",
+          "continuous": true,
+          "captureErrorCount": 0,
+          "windows": {
+            "whole": {
+              "frames": 14400,
+              "referenceRMS": 0.06297490215921571,
+              "relativeRMSError": 3.535916355597664e-08,
+              "accepted": true
+            }
+          },
+          "accepted": true
+        },
+        {
+          "label": "sample0",
+          "channel": 1,
+          "frames": 14400,
+          "quanta": 113,
+          "sha256": "1d426995be3447f74bf28b2cba5f145d1a800c8894f0bb0b66410fab8d2ea7b4",
+          "continuous": true,
+          "captureErrorCount": 0,
+          "windows": {
+            "whole": {
+              "frames": 14400,
+              "referenceRMS": 0.0670277937561443,
+              "relativeRMSError": 3.539217241276552e-08,
+              "accepted": true
+            }
+          },
+          "accepted": true
+        },
+        {
+          "label": "sample1",
+          "channel": 0,
+          "frames": 14400,
+          "quanta": 113,
+          "sha256": "302ae495959924bf60011822427f919fa46897457d3e715ae19a1c0152961a66",
+          "continuous": true,
+          "captureErrorCount": 0,
+          "windows": {
+            "whole": {
+              "frames": 14400,
+              "referenceRMS": 0.05892575015576115,
+              "relativeRMSError": 3.5777484802583284e-08,
+              "accepted": true
+            }
+          },
+          "accepted": true
+        },
+        {
+          "label": "sample1",
+          "channel": 1,
+          "frames": 14400,
+          "quanta": 113,
+          "sha256": "1076ae7bcfc414b99c6110280d5c4887883b782356b8438bf1be67532577117d",
+          "continuous": true,
+          "captureErrorCount": 0,
+          "windows": {
+            "whole": {
+              "frames": 14400,
+              "referenceRMS": 0.06381658535766198,
+              "relativeRMSError": 3.616928578320191e-08,
+              "accepted": true
+            }
+          },
+          "accepted": true
+        },
+        {
+          "label": "deck",
+          "channel": 0,
+          "frames": 14400,
+          "quanta": 113,
+          "sha256": "cecac15ebbf62d2e104250ce5e7ae67f9858dfb5dfbc01e3e21e4e9001f7a04a",
+          "continuous": true,
+          "captureErrorCount": 0,
+          "windows": {
+            "whole": {
+              "frames": 14400,
+              "referenceRMS": 0.0,
+              "relativeRMSError": null,
+              "accepted": true
+            }
+          },
+          "accepted": true
+        },
+        {
+          "label": "deck",
+          "channel": 1,
+          "frames": 14400,
+          "quanta": 113,
+          "sha256": "643544562cd2e0631a411f3de5d7a5afe9f63ade015b15f30e15a134f0c5c033",
+          "continuous": true,
+          "captureErrorCount": 0,
+          "windows": {
+            "whole": {
+              "frames": 14400,
+              "referenceRMS": 0.0,
+              "relativeRMSError": null,
+              "accepted": true
+            }
+          },
+          "accepted": true
+        }
+      ],
+      "accepted": true
+    },
+    {
+      "name": "restore-original",
+      "stateAccepted": true,
+      "nominalBPM": 127.2,
+      "maximumNominalBPMError": 0,
+      "maximumBarPhaseSeconds": 3.35161667811368e-15,
+      "maximumClockReadbackSeconds": 0,
+      "commonCommitSpreadSeconds": null,
+      "sourceContinuitySeconds": [],
+      "packets": [
+        {
+          "label": "bus",
+          "channel": 0,
+          "frames": 14400,
+          "quanta": 113,
+          "sha256": "7be01abc13f0764b2cc19939b36f685ff85ba644be418866e7657b041f39d6a1",
+          "continuous": true,
+          "captureErrorCount": 0,
+          "windows": {
+            "whole": {
+              "frames": 14400,
+              "referenceRMS": 0.09891703588015147,
+              "relativeRMSError": 4.5030034392284845e-08,
+              "accepted": true
+            }
+          },
+          "accepted": true
+        },
+        {
+          "label": "bus",
+          "channel": 1,
+          "frames": 14400,
+          "quanta": 113,
+          "sha256": "ba40846fa08303688c8ac1984e23082d8a4e783d4c53265c03a84f1a5d7de640",
+          "continuous": true,
+          "captureErrorCount": 0,
+          "windows": {
+            "whole": {
+              "frames": 14400,
+              "referenceRMS": 0.09156378776640936,
+              "relativeRMSError": 4.501198204911404e-08,
+              "accepted": true
+            }
+          },
+          "accepted": true
+        },
+        {
+          "label": "sample0",
+          "channel": 0,
+          "frames": 14400,
+          "quanta": 113,
+          "sha256": "c8b96849c55489c0c26a5e7cb2f3cb50987e4046a007201404602835d75b7e36",
+          "continuous": true,
+          "captureErrorCount": 0,
+          "windows": {
+            "whole": {
+              "frames": 14400,
+              "referenceRMS": 0.07203865502127015,
+              "relativeRMSError": 3.572286790146185e-08,
+              "accepted": true
+            }
+          },
+          "accepted": true
+        },
+        {
+          "label": "sample0",
+          "channel": 1,
+          "frames": 14400,
+          "quanta": 113,
+          "sha256": "b15c744f6c51198ae777bac7ddad80cce5c28ac5340ae476568d5e05b63c8454",
+          "continuous": true,
+          "captureErrorCount": 0,
+          "windows": {
+            "whole": {
+              "frames": 14400,
+              "referenceRMS": 0.06655433150640618,
+              "relativeRMSError": 3.609774413765224e-08,
+              "accepted": true
+            }
+          },
+          "accepted": true
+        },
+        {
+          "label": "sample1",
+          "channel": 0,
+          "frames": 14400,
+          "quanta": 113,
+          "sha256": "8525264170f15a7cb1874cdc2d492b5d3e07e77c8aacd676aad2d1dd827bf0d3",
+          "continuous": true,
+          "captureErrorCount": 0,
+          "windows": {
+            "whole": {
+              "frames": 14400,
+              "referenceRMS": 0.06717706385590853,
+              "relativeRMSError": 3.605828417726257e-08,
+              "accepted": true
+            }
+          },
+          "accepted": true
+        },
+        {
+          "label": "sample1",
+          "channel": 1,
+          "frames": 14400,
+          "quanta": 113,
+          "sha256": "431c198d479989c610745c0493ef64a28932d5ac5e147a1a4a42d2b8714c6d54",
+          "continuous": true,
+          "captureErrorCount": 0,
+          "windows": {
+            "whole": {
+              "frames": 14400,
+              "referenceRMS": 0.060826256279245004,
+              "relativeRMSError": 3.644940037498529e-08,
+              "accepted": true
+            }
+          },
+          "accepted": true
+        },
+        {
+          "label": "deck",
+          "channel": 0,
+          "frames": 14400,
+          "quanta": 113,
+          "sha256": "31fc1caa81217b097dfe76fc550200eeefaac105c2af74657d4a5c60610f9133",
+          "continuous": true,
+          "captureErrorCount": 0,
+          "windows": {
+            "whole": {
+              "frames": 14400,
+              "referenceRMS": 0.18009663486954983,
+              "relativeRMSError": 2.5360015097406018e-08,
+              "accepted": true
+            }
+          },
+          "accepted": true
+        },
+        {
+          "label": "deck",
+          "channel": 1,
+          "frames": 14400,
+          "quanta": 113,
+          "sha256": "418b5ecbba5427c6c72ccde61895da6577e7fb7adc938190c937715081b56a8a",
+          "continuous": true,
+          "captureErrorCount": 0,
+          "windows": {
+            "whole": {
+              "frames": 14400,
+              "referenceRMS": 0.16638582628670162,
+              "relativeRMSError": 2.5518520735369574e-08,
+              "accepted": true
+            }
+          },
+          "accepted": true
+        }
+      ],
+      "accepted": true
+    }
+  ],
+  "model": {
+    "job": "539aeee35cbe4518a7800f4ebbb004c5",
+    "name": "SCNet-large official",
+    "weightSHA256": "719e5abb8ed920305dad546ac3cd6fb0b1e9c3092d14ce21827bfc0423af3070",
+    "revision": "5d95bf96b19c3eede63248d171efeca8e3abb948",
+    "historicalRuntime": {
+      "torch": "2.5.1",
+      "scnet_commit": "5d95bf96b19c3eede63248d171efeca8e3abb948"
+    },
+    "historicalTiming": {
+      "model_load_seconds": 1.3501352090388536,
+      "inference_seconds": 7.207185290986672,
+      "total_seconds": 8.7138695421163,
+      "realtime_factor": 1.0598801898509813
+    },
+    "historicalManifestCached": false,
+    "manifestCacheKey": "840cff788f9abaa8ddc333af0d956f09afb87d24430ea816892931921aa421a4",
+    "serviceFingerprint": "6dfc30970b59674f501adf2abc72dda34643934eb97b4947101d40066dc40645",
+    "currentCacheHitByExistingJob": true,
+    "workerOutputs": [
+      {
+        "name": "drums",
+        "sha256": "16311538283e63336ce1750b163b8a6dc04d353ed1b52e48f4f3c4ba215c1b78",
+        "frames": 299880,
+        "sampleRate": 44100
+      },
+      {
+        "name": "bass",
+        "sha256": "2964c15e0b44553a7c44182736bbc5b81214b7b893def2181de227451606b9b0",
+        "frames": 299880,
+        "sampleRate": 44100
+      },
+      {
+        "name": "other",
+        "sha256": "820d01b1b71a887f15b771c52357df720f302d6749fc1ffb14780a6bbb2b4130",
+        "frames": 299880,
+        "sampleRate": 44100
+      },
+      {
+        "name": "vocals",
+        "sha256": "56f9c6301b4a4cd928ca1474e74d55b3072543f2195ec48463588b7d973a06f2",
+        "frames": 299880,
+        "sampleRate": 44100
+      }
+    ]
+  },
+  "decodedOutputs": [
+    {
+      "name": "vocals",
+      "frames": 326400,
+      "sampleRate": 48000,
+      "channelSHA256": [
+        "b96530adddf22f04b85553f8b050594b2cdf39dadbaf514ef5e9012762dbe3be",
+        "7bccbf639eb6cf9a8419a9a43ae69e636a48162da1dbfd4310453c8f9f595202"
+      ]
+    },
+    {
+      "name": "other",
+      "frames": 326400,
+      "sampleRate": 48000,
+      "channelSHA256": [
+        "e33f3a7c8f6fb6fd5a7f1ca9b669e40445d87593808564dc4efa12a972ee6853",
+        "c39491699c26def0e1702babd13aab9a9a8485b5746e240382a81cdd55554548"
+      ]
+    },
+    {
+      "name": "bass",
+      "frames": 326400,
+      "sampleRate": 48000,
+      "channelSHA256": [
+        "1fbe9e9d3c6ca81411c6b657c6011885d0a18782d35c18e83c48ac05457b8ea7",
+        "df453fb6a9ef4176a7b1befb1790512c86f733468fe1de74efbcd39c525f12ad"
+      ]
+    },
+    {
+      "name": "drums",
+      "frames": 326400,
+      "sampleRate": 48000,
+      "channelSHA256": [
+        "bd54a663511cf28f504b22d8e79f76419e686208ed76f5a034be6961565e3230",
+        "a26624a999389bdee8bfa78324ee7bba7c1a42546801ea6677cc74f326813c1d"
+      ]
+    }
+  ],
+  "scope": "Actual cached Stems activation/vocal-only/selected-sum tempo/mute/restore with running raw/keyed samples; whole native original/decoded-part/rendered PCM and scoped handoffs, no fitted alignment",
+  "scopedStemsMixedGroupAccepted": true,
+  "pitchQualityAccepted": false,
+  "separationQualityAccepted": false,
+  "sourceAttributionAccepted": false,
+  "fullSamplerSyncAcceptance": false,
+  "exactVendorSemanticsAccepted": false,
+  "nativeAcceptance": false,
+  "hardwareAcceptance": false,
+  "fullParityAcceptance": false
+}

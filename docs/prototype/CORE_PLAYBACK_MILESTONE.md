@@ -1,3 +1,13 @@
+# Active goal override — CORE DJ ONLY, 19 October 2026
+
+Jason explicitly narrowed the active goal to the core DJ experience. Load two different real local MP3s, one per deck; play/cue/mix, manual beatmatch and Sync, gain/faders/crossfader/master, headphone cue/mix, EQ/filter/cutoff and Hercules core controls. CORE-001: https://trello.com/c/LGGdtSa3. Read docs/delivery/CORE_DJ_FIRST.md and handoffs/core-dj-first.md first.
+
+Before each action, require a direct connection to enabling or verifying that two-track workflow. If work drifts to stems, sampler combinations, advanced FX, video, broad parity research or quick wins, STOP THAT ACTIVITY IMMEDIATELY and return to the next core blocker. The full parity inventory and quick-win candidates are saved for later; neither is an active goal. Preserve the existing implementation and previous builds. Test pragmatically at changed/failing core paths; a practical audible session is the finish line. Existing local desktop-test approval persists; no public release is authorized.
+
+Earlier next-task instructions below, including keyed Stems after checkpoint187, are superseded. Prior evidence and original prompt remain historical records. Do not launch the full Claude parity audit ahead of the core workflow.
+
+---
+
 # Core playback milestone — current desktop0.1.21
 
 18October2026. Jason asked whether work was staying on track. The full independent Serato parity goal remains, but recent LPF refinement had drifted ahead of his immediate milestone: usable two-deck playback, manual beatmatching/Sync and the Hercules controls. **First hands-on acceptance is still pending.** More FX research is deferred behind that milestone.
