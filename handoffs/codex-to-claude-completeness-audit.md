@@ -1,3 +1,11 @@
+# Desktop0.1.27 — core waveform positioning195
+
+19October2026: native27/source a20059d/ASAR a4d7135432916a3fb0467d008cd6c97ffb293b4ec63aeeba2e36bff50b60afcb adds detailed-waveform scrub to the corrected RGB rendering. Actual paused real-track drag: Vertical deck1 20.000→20.658; Horizontal deck2 20.000→20.559→20.000, other deck unchanged. The short-drag preparation gap observed in26 is addressed with a final-position request that is cancelable/supersedable. Controlled UI27/27; separate archive/host5/5. Native waveform keyboard audition/release while deck2 plays observed; interrupted/confounded pointer-while-playing inputs are not a pass.
+
+Current session: both real tracks paused20s, Horizontal; both Sync on at121BPM, deck1pitch+4.7%, deck1low−24dB, master−12dB, crossfader center. Sync/EQ changed during live checks and are preserved; do not claim neutral settings or attribute them to a completed automated sequence.25/26and profile backups remain; maps/music not changed. Read docs/prototype/CORE_WAVEFORM_SCRUB_195_REVIEW.md and desktop-0.1.27-playback-observation.json. Pointer-while-playing, native Shift fine adjustment, user visual/musical/headphone/hardware acceptance and Extended-view size toggle remain open. Core only; no extras or repeated solved audio matrix. Historical statuses below remain scoped; original prompt suffix retained.
+
+---
+
 # Desktop0.1.25 — RGB waveform194 native candidate
 
 19October2026: actual native25/source4af70e7/ASAR5b2d0944d623e28cfa7bf6022670febe6b5c099b84a77f1757cb0ae06223ac2d is running with corrected frequency-driven RGB waveforms. Both saved real MP3s loaded and rendered in Horizontal; normal Play/Sync/positive meter, pitch-scaled visual grid, native+/−zoom and Pause observed. Both tracks now paused20s, pitch0, Sync off, Master−12dB, crossfader centered, recorder stopped. Closed-profile198files/36822452B copy hashes match;24and versioned launchers retained. Current/playback launchers target25. Read docs/prototype/TRY_PLAYBACK_DESKTOP_0.1.25.md and desktop-0.1.25-playback-observation.json.

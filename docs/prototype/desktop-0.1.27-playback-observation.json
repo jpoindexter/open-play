@@ -1,0 +1,119 @@
+{
+  "date": "2026-10-19",
+  "checkpoint": "core195",
+  "version": "0.1.27",
+  "sourceCommit": "a20059d5d3b2c3041e80900428e2995d28da3d08",
+  "asarSHA256": "a4d7135432916a3fb0467d008cd6c97ffb293b4ec63aeeba2e36bff50b60afcb",
+  "scope": "Actual native real-track waveform gesture/control observations. No full parity or musical/hardware acceptance.",
+  "controlledUI": {
+    "passed": 27,
+    "scope": "Controlled DOM/clock/engine ACK fixture, including 23 retained platter cases and 4 waveform cases; not native capture or PCM."
+  },
+  "packageInspection": {
+    "passed": 5,
+    "scope": "Actual ASAR source identity and controlled host isolation, separate from runtime."
+  },
+  "nativeObservations": {
+    "verticalPausedForward": {
+      "positions": [
+        20.658,
+        20.0
+      ],
+      "decksPlaying": 0,
+      "masterMeterAXValue": "-60",
+      "privateEvidenceFile": "native27-vertical-forward.txt"
+    },
+    "horizontalPausedForward": {
+      "positions": [
+        20.658,
+        20.559
+      ],
+      "decksPlaying": 0,
+      "masterMeterAXValue": "-60",
+      "privateEvidenceFile": "native27-horizontal-forward.txt"
+    },
+    "horizontalPausedBackward": {
+      "positions": [
+        20.658,
+        20.0
+      ],
+      "decksPlaying": 0,
+      "masterMeterAXValue": "-60",
+      "privateEvidenceFile": "native27-horizontal-backward.txt"
+    },
+    "playingKeyboardRelease": {
+      "positions": [
+        20.658,
+        135.058
+      ],
+      "decksPlaying": 1,
+      "masterMeterAXValue": "-22.97985",
+      "privateEvidenceFile": "native27-playing-keyboard-release.txt"
+    },
+    "finalStopped": {
+      "positions": [
+        20.0,
+        20.0
+      ],
+      "decksPlaying": 0,
+      "masterMeterAXValue": "-60",
+      "privateEvidenceFile": "native27-ready.txt"
+    }
+  },
+  "retainedFailures": [
+    {
+      "candidate": "0.1.26",
+      "result": "Initial paused upward drag moved deck1; subsequent short drags left position unchanged. Timing seam before preparation ACK corrected in27; historical files retained."
+    },
+    {
+      "candidate": "0.1.27",
+      "result": "A reverse Vertical input and first playing pointer drag were interrupted by computer-control state changes. Further playing pointer attempt returned no release status. Not counted as accepted pointer-while-playing evidence."
+    }
+  ],
+  "readyState": {
+    "layout": "Horizontal",
+    "positions": [
+      20,
+      20
+    ],
+    "bothPaused": true,
+    "sync": [
+      true,
+      true
+    ],
+    "deck1LowDB": -24,
+    "deck1NominalPitchPercent": 4.7,
+    "deck2NominalPitchPercent": 0,
+    "masterDB": -12,
+    "crossfader": 0,
+    "recorderStopped": true,
+    "note": "Sync/EQ changed during live checks; not attributed to accepted gesture sequence. These actual controls are preserved, not reset to a claimed neutral state."
+  },
+  "profileBackups": {
+    "before26": {
+      "files": 198,
+      "bytes": 36823648,
+      "allBeforeAfterCopyContentHashesEqual": true,
+      "scope": "Closed25 profile preserved before26. Fresh25 was paused but pitch, EQ and positions had changed since194; not attributed to this automation."
+    },
+    "before27": {
+      "files": 201,
+      "bytes": 36723065,
+      "allBeforeAfterCopyContentHashesEqual": true
+    }
+  },
+  "originalMusicIdentityUnchanged": true,
+  "readyScreenshot": {
+    "path": "local-evidence/core-waveform-scrub-195/native27-ready.png",
+    "sha256": "1be51186c6b652a9039779d7ccdb286260a50c8fdaa754734ac697de3c5d612c"
+  },
+  "open": [
+    "Pointer drag while playing needs an uninterrupted native observation; keyboard release is not its proxy.",
+    "Fine Shift-drag is controlled-fixture verified, not a native pointer-modifier acceptance.",
+    "User visual match and actual audible manual/Sync mixing/headphone/hardware acceptance pending.",
+    "The reference Extended-view Shift-click small/large size behavior is inventoried but not implemented in this core change.",
+    "Spectrum/display policy is independent; proprietary vendor algorithms and 1:1 appearance are not established."
+  ],
+  "coreGoalComplete": false,
+  "fullParityVerified": false
+}
