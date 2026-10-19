@@ -1,0 +1,674 @@
+{
+  "checkpoint": 180,
+  "originalBytes": 5153729,
+  "originalSHA256": "498ef0253d313f3c33ea180b6e6d5dbe23fb3705a242bffb40d3cc7ddcdfc211",
+  "sourceHashes": {
+    "app.js": "12bfc81b7a978d7ad946a1203c53e23f3674c75aa3d97aafd9b080d161c71c76",
+    "engine.js": "6a80d6d04ca6135c0563edac97c0a3b3f67fc122b9373433699e8999697869a6",
+    "panels.js": "d45a9d232d230625bfe6e85681c3b8641f9bcedab66f57edc94fa04fce07b41c",
+    "styles.css": "491769fb9a39793e1684ce1cd1cb6c66ad4ffe426b905036f79a0a342b85ec32",
+    "fixtures/sampler-fallback-178-short-loop.json": "3715958359863d10cde61de921aaf2728b5c39ff756ad32cbdda756f766fc40d",
+    "manual-loops.js": "a2215ea2414788a0a0b73a1e9b99efdc24399be8003fc18c7c7de00377976304",
+    "beatgrid.js": "af239aef231c9d089bf2352b8f548a5f71f734d6cf753986f17f57b3999477b9",
+    "smart-sync.js": "8dff74b494e0eee063b20a0810b8f4e0f7de0e30829413f828dfb67bd080fa49",
+    "sync-tempo-handoff.js": "5842f9209035e24ff867004d3fef5f0a1fe7f7f4976440546b8238a225b82f9b",
+    "sampler-sync.js": "22ce10adc45038adc52cc2e20563de7bd864b7986b706729e3fafc68582b4ee0",
+    "sample-sync-transport.js": "4dafd2bcf9a70b588d87a41d872a7956986e8af74bec171c6cde874f2a9bf10c",
+    "warp-loop.js": "1429a67a75b893af6ed6cb7b067dae377bdacedd71f2ff955ef3fe64907d5ae8",
+    "warp-loop-kernel.js": "7f0c18c4868818f8b77a3d4f71e72ea821516e902516d749f58cac6add2bfac2",
+    "warp-loop-worklet.js": "2f2eb1109dca29ad99928af069c257f2da06cd6f79e7add2b1431da9cb12ea9b",
+    "stems.js": "5fb06aba4f6a97e4150d1bcfeef394574b0c9e9ed6ee099b78b89482b08ea4b7",
+    "keylock.js": "62adbfdd77df20deb1328302d4a8daf3d7bdc29870af453d39acfd2a02bf060b",
+    "keylock-worker.js": "5cb72a1bc74e1808c32b430d72d5769427c7056edee11410eb6f8b3c7751fcec",
+    "keylock-dsp.js": "f4cb1881fedb018f395a6711d263aa142feb8dfe93638a3d1f97fc432c15ac3d",
+    "track-gain.js": "f390adbddd4e317444294a92d9e5a82b89d6abaa591578a158a00308628d5bfa",
+    "sampler-ownership-180-harness.js": "c0cfd380f529af53df748f443f300171c8aa3af098c8ae0d103aa5549ba0f16f",
+    "stem-activation-capture-145.js": "730b9c3de31e9c3546ec1ab86f8fd85ce2a1ccfe6f78fc25d8f483f8b9d75331",
+    "vendor/signalsmith-stretch/SignalsmithStretch-open-play-reference-dsp.mjs": "0512cae2a33873956026e64cb47854c1c677baf1beb1bc0242edfb9557987f21"
+  },
+  "workflowCompleted": true,
+  "errors": [],
+  "uiErrors": [],
+  "passed": false,
+  "observations": [
+    {
+      "name": "preparation-own-stop",
+      "deckStateAccepted": true,
+      "sourceAndBystanderAccepted": true,
+      "actionAt": 11.626666666666667,
+      "scheduledWhen": null,
+      "after": {
+        "at": 12.138666666666667,
+        "deck": {
+          "track": "local-cb2e756d1fa4ce264767a4f6adbaf9e3f69a040db7889d830abdb429cc1a5ac3",
+          "playing": false,
+          "processing": false,
+          "queued": false,
+          "sync": true,
+          "state": "armed",
+          "role": "secondary",
+          "keylock": true,
+          "position": 0,
+          "voiceID": null,
+          "token": 6,
+          "hasTransform": false
+        },
+        "samples": [
+          {
+            "key": 0,
+            "voiceID": 2,
+            "request": true,
+            "slot": {
+              "track": "local-cb2e756d1fa4ce264767a4f6adbaf9e3f69a040db7889d830abdb429cc1a5ac3",
+              "mode": "Trigger",
+              "gain": 80,
+              "playing": true,
+              "sync": true,
+              "syncState": "beat",
+              "processing": false,
+              "from": "loop:1",
+              "volume": 80,
+              "pitch": 0,
+              "keylock": false,
+              "muted": false,
+              "repeat": true,
+              "syncBPM": 120
+            }
+          },
+          {
+            "key": 1,
+            "voiceID": 1,
+            "request": true,
+            "slot": {
+              "track": "local-cb2e756d1fa4ce264767a4f6adbaf9e3f69a040db7889d830abdb429cc1a5ac3",
+              "mode": "Trigger",
+              "gain": 80,
+              "playing": true,
+              "sync": false,
+              "syncState": "off",
+              "processing": false,
+              "from": "loop:1",
+              "volume": 80,
+              "pitch": 0,
+              "keylock": false,
+              "muted": false,
+              "repeat": true
+            }
+          }
+        ]
+      },
+      "packets": [
+        {
+          "label": "bus",
+          "channel": 0,
+          "frames": 14400,
+          "quanta": 113,
+          "sha256": "694e8e2c0f10dad5509ca000fb27ec0cae1ca0051182226216dc904f4e280e0c",
+          "rms": 0.09323841177515663,
+          "peak": 0.38355177640914917,
+          "expected": "active",
+          "accepted": true
+        },
+        {
+          "label": "bus",
+          "channel": 1,
+          "frames": 14400,
+          "quanta": 113,
+          "sha256": "b09ca4923c75d4a7c431552e66644609bcdcab76d4f18a53f99d477ef7cab5ff",
+          "rms": 0.09859669697745199,
+          "peak": 0.4403883218765259,
+          "expected": "active",
+          "accepted": true
+        },
+        {
+          "label": "sample0",
+          "channel": 0,
+          "frames": 14400,
+          "quanta": 113,
+          "sha256": "cbd82154f92f0c86fb2932ffd608872bc51cfa1bc1f1a4cdbaed3d356704482a",
+          "rms": 0.0708771550069297,
+          "peak": 0.2951386570930481,
+          "expected": "active",
+          "accepted": true
+        },
+        {
+          "label": "sample0",
+          "channel": 1,
+          "frames": 14400,
+          "quanta": 113,
+          "sha256": "6a21c3aa98049dc925a1e090714a801d0e8e14fe4c3e11165ec84f7d6da7a8d2",
+          "rms": 0.07333239799934436,
+          "peak": 0.2897091507911682,
+          "expected": "active",
+          "accepted": true
+        },
+        {
+          "label": "sample1",
+          "channel": 0,
+          "frames": 14400,
+          "quanta": 113,
+          "sha256": "81b2315e8696d35356078407e0d587e2acd7bc1821f0875cc0a3211db160e512",
+          "rms": 0.05864161032708927,
+          "peak": 0.23909397423267365,
+          "expected": "active",
+          "accepted": true
+        },
+        {
+          "label": "sample1",
+          "channel": 1,
+          "frames": 14400,
+          "quanta": 113,
+          "sha256": "01106f7b8943b342a811e861f37979ff91ef58415f4179a0dbb23874cb1ab3ad",
+          "rms": 0.06461327636000228,
+          "peak": 0.28206655383110046,
+          "expected": "active",
+          "accepted": true
+        },
+        {
+          "label": "deck",
+          "channel": 0,
+          "frames": 14400,
+          "quanta": 113,
+          "sha256": "c72274a22cba2dcef62e0f62834446ee39b0cd95ad0faa27a89b3b49f48aa390",
+          "rms": 0.0,
+          "peak": 0.0,
+          "expected": "silent",
+          "accepted": true
+        },
+        {
+          "label": "deck",
+          "channel": 1,
+          "frames": 14400,
+          "quanta": 113,
+          "sha256": "c72274a22cba2dcef62e0f62834446ee39b0cd95ad0faa27a89b3b49f48aa390",
+          "rms": 0.0,
+          "peak": 0.0,
+          "expected": "silent",
+          "accepted": true
+        }
+      ],
+      "accepted": true
+    },
+    {
+      "name": "preparation-load",
+      "deckStateAccepted": true,
+      "sourceAndBystanderAccepted": true,
+      "actionAt": 12.602666666666666,
+      "scheduledWhen": null,
+      "after": {
+        "at": 13.12,
+        "deck": {
+          "track": "demo-0",
+          "playing": false,
+          "processing": false,
+          "queued": false,
+          "sync": false,
+          "state": "off",
+          "role": null,
+          "keylock": true,
+          "position": 0,
+          "voiceID": null,
+          "token": 10,
+          "hasTransform": false
+        },
+        "samples": [
+          {
+            "key": 0,
+            "voiceID": 3,
+            "request": true,
+            "slot": {
+              "track": "local-cb2e756d1fa4ce264767a4f6adbaf9e3f69a040db7889d830abdb429cc1a5ac3",
+              "mode": "Trigger",
+              "gain": 80,
+              "playing": true,
+              "sync": true,
+              "syncState": "beat",
+              "processing": false,
+              "from": "loop:1",
+              "volume": 80,
+              "pitch": 0,
+              "keylock": false,
+              "muted": false,
+              "repeat": true,
+              "syncBPM": 120
+            }
+          },
+          {
+            "key": 1,
+            "voiceID": 1,
+            "request": true,
+            "slot": {
+              "track": "local-cb2e756d1fa4ce264767a4f6adbaf9e3f69a040db7889d830abdb429cc1a5ac3",
+              "mode": "Trigger",
+              "gain": 80,
+              "playing": true,
+              "sync": false,
+              "syncState": "off",
+              "processing": false,
+              "from": "loop:1",
+              "volume": 80,
+              "pitch": 0,
+              "keylock": false,
+              "muted": false,
+              "repeat": true
+            }
+          }
+        ]
+      },
+      "packets": [
+        {
+          "label": "bus",
+          "channel": 0,
+          "frames": 14400,
+          "quanta": 113,
+          "sha256": "6c5042cb60b8875f18ede99c3b968f8cc24115b9e3b661ca01c9b60744f62272",
+          "rms": 0.09891388484252964,
+          "peak": 0.3595631420612335,
+          "expected": "active",
+          "accepted": true
+        },
+        {
+          "label": "bus",
+          "channel": 1,
+          "frames": 14400,
+          "quanta": 113,
+          "sha256": "48e3691033209da6aad7c43e9b81f4cb02a9a8f3fe3a523d5fdb24a13ff66173",
+          "rms": 0.09896322015347164,
+          "peak": 0.46259617805480957,
+          "expected": "active",
+          "accepted": true
+        },
+        {
+          "label": "sample0",
+          "channel": 0,
+          "frames": 14400,
+          "quanta": 113,
+          "sha256": "6b91c080ad2256e462e5c32131dcb89108412f481c7a9057cc1b2d0a1b8c9c9e",
+          "rms": 0.07012148175411669,
+          "peak": 0.2951386570930481,
+          "expected": "active",
+          "accepted": true
+        },
+        {
+          "label": "sample0",
+          "channel": 1,
+          "frames": 14400,
+          "quanta": 113,
+          "sha256": "1d78ad7a7fc154fa0dfff6bbbb1a05c591cd3b195bdbef54d0422ef7d1d63df0",
+          "rms": 0.07275130740833595,
+          "peak": 0.2897091507911682,
+          "expected": "active",
+          "accepted": true
+        },
+        {
+          "label": "sample1",
+          "channel": 0,
+          "frames": 14400,
+          "quanta": 113,
+          "sha256": "a1d2b2ec8fe8992b2ec888f967214e514ab7e659f1fde4d40b1f34f5fec69eeb",
+          "rms": 0.06818861755136069,
+          "peak": 0.28222712874412537,
+          "expected": "active",
+          "accepted": true
+        },
+        {
+          "label": "sample1",
+          "channel": 1,
+          "frames": 14400,
+          "quanta": 113,
+          "sha256": "8df90bd37de6e22573da7698dd7c0c304b2f83a456e3c7c7173b9c6f5a4e38d9",
+          "rms": 0.06232704588225195,
+          "peak": 0.2705889344215393,
+          "expected": "active",
+          "accepted": true
+        },
+        {
+          "label": "deck",
+          "channel": 0,
+          "frames": 14400,
+          "quanta": 113,
+          "sha256": "c72274a22cba2dcef62e0f62834446ee39b0cd95ad0faa27a89b3b49f48aa390",
+          "rms": 0.0,
+          "peak": 0.0,
+          "expected": "silent",
+          "accepted": true
+        },
+        {
+          "label": "deck",
+          "channel": 1,
+          "frames": 14400,
+          "quanta": 113,
+          "sha256": "c72274a22cba2dcef62e0f62834446ee39b0cd95ad0faa27a89b3b49f48aa390",
+          "rms": 0.0,
+          "peak": 0.0,
+          "expected": "silent",
+          "accepted": true
+        }
+      ],
+      "accepted": true
+    },
+    {
+      "name": "scheduled-own-stop",
+      "deckStateAccepted": true,
+      "sourceAndBystanderAccepted": true,
+      "actionAt": 13.610666666666667,
+      "scheduledWhen": 13.775333333333334,
+      "after": {
+        "at": 14.122666666666667,
+        "deck": {
+          "track": "local-cb2e756d1fa4ce264767a4f6adbaf9e3f69a040db7889d830abdb429cc1a5ac3",
+          "playing": false,
+          "processing": false,
+          "queued": false,
+          "sync": true,
+          "state": "armed",
+          "role": "secondary",
+          "keylock": true,
+          "position": 0,
+          "voiceID": null,
+          "token": 14,
+          "hasTransform": false
+        },
+        "samples": [
+          {
+            "key": 0,
+            "voiceID": 4,
+            "request": true,
+            "slot": {
+              "track": "local-cb2e756d1fa4ce264767a4f6adbaf9e3f69a040db7889d830abdb429cc1a5ac3",
+              "mode": "Trigger",
+              "gain": 80,
+              "playing": true,
+              "sync": true,
+              "syncState": "beat",
+              "processing": false,
+              "from": "loop:1",
+              "volume": 80,
+              "pitch": 0,
+              "keylock": false,
+              "muted": false,
+              "repeat": true,
+              "syncBPM": 120
+            }
+          },
+          {
+            "key": 1,
+            "voiceID": 1,
+            "request": true,
+            "slot": {
+              "track": "local-cb2e756d1fa4ce264767a4f6adbaf9e3f69a040db7889d830abdb429cc1a5ac3",
+              "mode": "Trigger",
+              "gain": 80,
+              "playing": true,
+              "sync": false,
+              "syncState": "off",
+              "processing": false,
+              "from": "loop:1",
+              "volume": 80,
+              "pitch": 0,
+              "keylock": false,
+              "muted": false,
+              "repeat": true
+            }
+          }
+        ]
+      },
+      "packets": [
+        {
+          "label": "bus",
+          "channel": 0,
+          "frames": 14400,
+          "quanta": 113,
+          "sha256": "5089e26714688d216990b4a7caae5fbe6dad8052c4b34b90062b70f684366654",
+          "rms": 0.0911768840202868,
+          "peak": 0.35942313075065613,
+          "expected": "active",
+          "accepted": true
+        },
+        {
+          "label": "bus",
+          "channel": 1,
+          "frames": 14400,
+          "quanta": 113,
+          "sha256": "16c19b71ee4de39cb85ae2704b46bd8a3b929a8fac9f135e1aca6779b7ca4971",
+          "rms": 0.09917479932620293,
+          "peak": 0.38637417554855347,
+          "expected": "active",
+          "accepted": true
+        },
+        {
+          "label": "sample0",
+          "channel": 0,
+          "frames": 14400,
+          "quanta": 113,
+          "sha256": "e4b2fc78cc4d18cc63784828bb5b4dcaf262517d98a420ff76b232d0b93d4112",
+          "rms": 0.06562646494923183,
+          "peak": 0.26674190163612366,
+          "expected": "active",
+          "accepted": true
+        },
+        {
+          "label": "sample0",
+          "channel": 1,
+          "frames": 14400,
+          "quanta": 113,
+          "sha256": "c566f47705afd87c85f2f04b871419af2343db21c54304c3ce51059b930ecfe7",
+          "rms": 0.070846243901685,
+          "peak": 0.2897091507911682,
+          "expected": "active",
+          "accepted": true
+        },
+        {
+          "label": "sample1",
+          "channel": 0,
+          "frames": 14400,
+          "quanta": 113,
+          "sha256": "6bab9e09de7d05da47db363515a8d7a61b6ffd0d4d3419eef5403dd4fef8b3c1",
+          "rms": 0.058642173287595425,
+          "peak": 0.23909397423267365,
+          "expected": "active",
+          "accepted": true
+        },
+        {
+          "label": "sample1",
+          "channel": 1,
+          "frames": 14400,
+          "quanta": 113,
+          "sha256": "46171ac280a5cde3db902a567777dfcf0abaaa59f6fafc3b1beee6058dde01db",
+          "rms": 0.06423676402294001,
+          "peak": 0.28206655383110046,
+          "expected": "active",
+          "accepted": true
+        },
+        {
+          "label": "deck",
+          "channel": 0,
+          "frames": 14400,
+          "quanta": 113,
+          "sha256": "c72274a22cba2dcef62e0f62834446ee39b0cd95ad0faa27a89b3b49f48aa390",
+          "rms": 0.0,
+          "peak": 0.0,
+          "expected": "silent",
+          "accepted": true
+        },
+        {
+          "label": "deck",
+          "channel": 1,
+          "frames": 14400,
+          "quanta": 113,
+          "sha256": "c72274a22cba2dcef62e0f62834446ee39b0cd95ad0faa27a89b3b49f48aa390",
+          "rms": 0.0,
+          "peak": 0.0,
+          "expected": "silent",
+          "accepted": true
+        }
+      ],
+      "accepted": true
+    },
+    {
+      "name": "scheduled-source-stop",
+      "deckStateAccepted": false,
+      "sourceAndBystanderAccepted": true,
+      "actionAt": 14.597333333333333,
+      "scheduledWhen": 14.767333333333333,
+      "after": {
+        "at": 15.114666666666666,
+        "deck": {
+          "track": "local-cb2e756d1fa4ce264767a4f6adbaf9e3f69a040db7889d830abdb429cc1a5ac3",
+          "playing": true,
+          "processing": false,
+          "queued": false,
+          "sync": true,
+          "state": "armed",
+          "role": "primary",
+          "keylock": true,
+          "position": 1.6006666666666656,
+          "voiceID": 7,
+          "token": 17,
+          "hasTransform": false
+        },
+        "samples": [
+          {
+            "key": 0,
+            "voiceID": null,
+            "request": false,
+            "slot": {
+              "track": "local-cb2e756d1fa4ce264767a4f6adbaf9e3f69a040db7889d830abdb429cc1a5ac3",
+              "mode": "Trigger",
+              "gain": 80,
+              "playing": false,
+              "sync": true,
+              "syncState": "armed",
+              "processing": false,
+              "from": "loop:1",
+              "volume": 80,
+              "pitch": 0,
+              "keylock": false,
+              "muted": false,
+              "repeat": true,
+              "syncBPM": 120
+            }
+          },
+          {
+            "key": 1,
+            "voiceID": 1,
+            "request": true,
+            "slot": {
+              "track": "local-cb2e756d1fa4ce264767a4f6adbaf9e3f69a040db7889d830abdb429cc1a5ac3",
+              "mode": "Trigger",
+              "gain": 80,
+              "playing": true,
+              "sync": false,
+              "syncState": "off",
+              "processing": false,
+              "from": "loop:1",
+              "volume": 80,
+              "pitch": 0,
+              "keylock": false,
+              "muted": false,
+              "repeat": true
+            }
+          }
+        ]
+      },
+      "packets": [
+        {
+          "label": "bus",
+          "channel": 0,
+          "frames": 72000,
+          "quanta": 563,
+          "sha256": "8c34e6e31edcbfa25f43d424bb2fe122f890c3327b5cbd5b995b02ce58a02fa4",
+          "rms": 0.06755478689204844,
+          "peak": 0.3205350637435913,
+          "expected": "active",
+          "accepted": true
+        },
+        {
+          "label": "bus",
+          "channel": 1,
+          "frames": 72000,
+          "quanta": 563,
+          "sha256": "6d84bd52e993b1e16576ea4b7157c499a6039bf2ab90bd09e2aec2ef37098800",
+          "rms": 0.06756665746852164,
+          "peak": 0.2897091507911682,
+          "expected": "active",
+          "accepted": true
+        },
+        {
+          "label": "sample0",
+          "channel": 0,
+          "frames": 72000,
+          "quanta": 563,
+          "sha256": "0e89e5d755de20a0a96681c385ffcd1c64e8ae3b7d56d1c7c0c351a81cc46513",
+          "rms": 0.0,
+          "peak": 0.0,
+          "expected": "silent",
+          "accepted": true
+        },
+        {
+          "label": "sample0",
+          "channel": 1,
+          "frames": 72000,
+          "quanta": 563,
+          "sha256": "0e89e5d755de20a0a96681c385ffcd1c64e8ae3b7d56d1c7c0c351a81cc46513",
+          "rms": 0.0,
+          "peak": 0.0,
+          "expected": "silent",
+          "accepted": true
+        },
+        {
+          "label": "sample1",
+          "channel": 0,
+          "frames": 72000,
+          "quanta": 563,
+          "sha256": "8c34e6e31edcbfa25f43d424bb2fe122f890c3327b5cbd5b995b02ce58a02fa4",
+          "rms": 0.06755478689204844,
+          "peak": 0.3205350637435913,
+          "expected": "active",
+          "accepted": true
+        },
+        {
+          "label": "sample1",
+          "channel": 1,
+          "frames": 72000,
+          "quanta": 563,
+          "sha256": "6d84bd52e993b1e16576ea4b7157c499a6039bf2ab90bd09e2aec2ef37098800",
+          "rms": 0.06756665746852164,
+          "peak": 0.2897091507911682,
+          "expected": "active",
+          "accepted": true
+        },
+        {
+          "label": "deck",
+          "channel": 0,
+          "frames": 72000,
+          "quanta": 563,
+          "sha256": "89e96d56dd91bc814a44cfeb54d06cd0ddd13bbbd3711f68bacfb0a778396a89",
+          "rms": 0.17608907851343233,
+          "peak": 0.7851443886756897,
+          "expected": "active",
+          "accepted": true
+        },
+        {
+          "label": "deck",
+          "channel": 1,
+          "frames": 72000,
+          "quanta": 563,
+          "sha256": "d159b293bba355a7aa6236043ddad5e50feccd57be7e0d7c40d9b46e200b485e",
+          "rms": 0.17215103386774996,
+          "peak": 0.8892125487327576,
+          "expected": "active",
+          "accepted": true
+        }
+      ],
+      "accepted": false
+    }
+  ],
+  "scope": "actual own Stop/load cancellation and source loss after logical scheduling commit; active/silent audio and owner/feedback, exact vendor race semantics/PCM/quality unverified",
+  "exactVendorRaceSemanticsAccepted": false,
+  "pitchQualityAccepted": false,
+  "fullSamplerSyncAcceptance": false,
+  "nativeAcceptance": false,
+  "hardwareAcceptance": false,
+  "fullParityAcceptance": false
+}

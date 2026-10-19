@@ -96,13 +96,17 @@ export function createSmartSync({engine, state, externalLeader=()=>null}) {
     validateTransport(deck,deck);
     const track=deck.track,revision=revise(deck),signature=transportSignature(deck),loop=loopBounds(deck),barLock=barCompatible(deck)&&source.phase;
     const priorClock=engine.voiceClock(deck,engine.voices.get(deck.index));
-    const valid=()=>isCurrent()&&enabled()&&revisions.get(deck)===revision&&deck.track===track&&transportSignature(deck)===signature&&source.valid();
+    const owned=()=>isCurrent()&&enabled()&&revisions.get(deck)===revision&&deck.track===track&&transportSignature(deck)===signature;
+    const valid=()=>owned()&&source.valid();
     const result=await engine.synchronize(deck,{rate:externalRate(deck,source),priorClock,positionAt:when=>{
       if(!valid())throw cancelled();
       return barLock?alignedBarPosition(track,priorClock(when),source.track,source.clock(when),loop):priorClock(when);
     }});
-    if(!valid())throw cancelled();
-    syncBPM=source.bpm;deck.sync=true;deck.syncState=barLock?'beat':'tempo';deck.syncRole='secondary';
+    // The future start is committed now. Losing its sample source does not
+    // revoke a still-current Play; deck Stop/load still revokes ownership.
+    if(!owned())throw cancelled();
+    const following=source.valid();
+    syncBPM=source.bpm;deck.sync=true;deck.syncState=(following?barLock:barCompatible(deck))?'beat':'tempo';deck.syncRole=following?'secondary':'primary';
     return result;
   }
   async function performPress(deck) {
