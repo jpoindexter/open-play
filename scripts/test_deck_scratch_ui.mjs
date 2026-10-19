@@ -164,10 +164,22 @@ await test('Shift waveform drag snapshots fine sensitivity, zoom and pitch; Esca
   f.time+=100;f.move(0,{clientX:50,clientY:100,shiftKey:false});await flush();near(f.updates.at(-1).position,20.1);
   f.key('Escape',{shiftKey:true});assert.equal(f.calls.at(-1).cancel,true);assert.equal(element.captures.size,0);assert.equal(f.controls.diagnostics().active.length,0);await f.controls.dispose();
 });
-await test('Waveform pending release emits no late movement; invalid geometry and other modifiers cannot start',async()=>{
+await test('Short waveform drag commits its final requested position after preparation, then releases',async()=>{
   const f=fixture(),element=waveform(f,0);f.down(0,0,{clientX:100,clientY:100});f.time+=50;f.move(0,{clientX:50});
-  f.root.emit('pointerup',{target:element,pointerId:1,clientX:50,clientY:100});await f.ready();assert.equal(f.updates.length,0);assert.equal(element.captures.size,0);
+  f.root.emit('pointerup',{target:element,pointerId:1,clientX:50,clientY:100});assert.equal(element.captures.size,0);assert.equal(f.updates.length,0);assert.equal(element.attrs['aria-busy'],'true');
+  await f.ready();assert.equal(f.updates.length,1);near(f.updates[0].position,21);assert.equal(f.calls.at(-1).kind,'end');assert.equal(f.calls.at(-1).cancel,false);assert.equal(f.controls.diagnostics().active.length,0);await f.controls.dispose();
+});
+await test('Canceled or superseded pending waveform release cannot replay; invalid geometry/modifiers cannot start',async()=>{
+  for(const cancel of ['escape','replacement']){
+    const f=fixture(),element=waveform(f,0);f.down(0,0,{clientX:100,clientY:100});f.time+=50;
+    f.root.emit('pointerup',{target:element,pointerId:1,clientX:50,clientY:100});
+    if(cancel==='escape')f.key('Escape');else f.down(0,0,{clientX:100,clientY:100});
+    await f.ready(0);assert.equal(f.updates.length,0);
+    if(cancel==='replacement'){await f.ready(1);assert.equal(f.updates.length,1);near(f.updates[0].position,20);}
+    await f.controls.dispose();
+  }
+  const f=fixture(),element=waveform(f,0);
   for(const extra of [{ctrlKey:true},{altKey:true},{metaKey:true},{isComposing:true}])assert.equal(f.down(0,0,extra).prevented,0);
-  element.dataset.waveformSpan='NaN';assert.equal(f.down().prevented,0);assert.equal(f.begins.length,1);await f.controls.dispose();
+  element.dataset.waveformSpan='NaN';assert.equal(f.down().prevented,0);assert.equal(f.begins.length,0);await f.controls.dispose();
 });
 console.log(`${passed}/${passed} controlled platter/waveform UI checks passed; actual browser/AudioEngine/PCM acceptance remains separate.`);

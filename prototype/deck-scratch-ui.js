@@ -74,6 +74,11 @@ export function createDeckScratchControls({engine,state,root=globalThis.document
     observe('owner.phase',{deck:index,phase},null,g);
   }
   function listen(target,type,handler,capture=false){target.addEventListener(type,handler,capture);listeners.push(()=>target.removeEventListener(type,handler,capture));}
+  function releasePointer(g){
+    if(g.pointerId===undefined)return;
+    pointers.delete(g.pointerId);
+    try{if(g.element.hasPointerCapture?.(g.pointerId)){g.element.releasePointerCapture(g.pointerId);observe('capture.released',{pointerId:g.pointerId},null,g);}}catch{observe('capture.release-failed',{pointerId:g.pointerId},null,g);}
+  }
   function end(g,cancel=false,message='Scratch released.') {
     if(active.get(g.deck.index)!==g)return Promise.resolve();
     // An ACK may still be in flight. Post the final coalesced ready-owner
@@ -90,10 +95,9 @@ export function createDeckScratchControls({engine,state,root=globalThis.document
           if(!active.has(g.deck.index)&&g.deck.track===g.track)notify(error.message);
         });}catch(error){observe('engine.update.error',{errorName:error?.name},null,g);notify(error.message);}
     }
-    active.delete(g.deck.index);if(g.pointerId!==undefined)pointers.delete(g.pointerId);
+    active.delete(g.deck.index);releasePointer(g);
     if(frame!==null&&![...active.values()].some(item=>item.mode==='keyboard')){cancelFrame(frame);frame=null;}
     status(g.element,g.deck.index,'idle',message,g);
-    if(g.pointerId!==undefined){try{if(g.element.hasPointerCapture?.(g.pointerId)){g.element.releasePointerCapture(g.pointerId);observe('capture.released',{pointerId:g.pointerId},null,g);}}catch{observe('capture.release-failed',{pointerId:g.pointerId},null,g);}}
     // Deliberately do NOT wait for async begin: this retires pending ownership
     // now, and the late begin completion is checked again below.
     observe('engine.end.sent',{cancel},null,g);
@@ -143,7 +147,7 @@ export function createDeckScratchControls({engine,state,root=globalThis.document
     let preparation;
     observe('engine.begin.sent',{},null,g);
     try{preparation=engine.beginDeckScratch(deck,g.owner);}catch(error){fail(g,error);return g;}
-    Promise.resolve(preparation).then(result=>{
+    Promise.resolve(preparation).then(async result=>{
       observe('engine.begin.result',{...resultFields(result),current:current(g)},null,g);
       if(!current(g)){
         // Idempotent retirement closes the seam even if preparation resolves
@@ -155,7 +159,8 @@ export function createDeckScratchControls({engine,state,root=globalThis.document
       }
       if(result===false||result===null){void end(g,true,'Scratch canceled.');return;}
       g.ready=true;status(element,deck.index,'active',mode==='waveform'?'Waveform scrub active.':mode==='keyboard'?'Keyboard scratch active.':'Platter scratch active.');
-      void pump(g);
+      await pump(g);
+      if(g.releaseWhenReady&&current(g))await end(g,false,'Waveform scrub released.');
     }).catch(error=>fail(g,error));
     return g;
   }
@@ -198,6 +203,8 @@ export function createDeckScratchControls({engine,state,root=globalThis.document
     const waveform=element.dataset.waveformScrub!==undefined;
     if(modified(event)&&!(waveform&&event.shiftKey&&!event.altKey&&!event.ctrlKey&&!event.metaKey&&!event.isComposing))return refused('modifier-or-composition');
     const deck=deckFor(element);if(!deck)return refused('missing-deck-or-track');
+    const previous=active.get(deck.index);
+    if(previous?.releaseWhenReady)void end(previous,true,'Waveform scrub superseded.');
     if(active.has(deck.index))return observe('pointerdown.refused',{reason:'deck-owned'},event,active.get(deck.index));
     if(event.target?.closest?.('input,select,textarea,button,a,[contenteditable="true"]'))return refused('interactive-child');
     let first=null,geometry=null;
@@ -215,7 +222,20 @@ export function createDeckScratchControls({engine,state,root=globalThis.document
     try{const g=start(element,deck,waveform?'waveform':'pointer',{pointerId:event.pointerId,angle:first,...geometry});observe('pointerdown.accepted',{accepted:!!g&&current(g)},event,g);}catch(error){observe('pointerdown.refused',{reason:'start-error',errorName:error?.name},event);try{element.releasePointerCapture(event.pointerId);}catch{}notify(error.message);}
   });
   listen(root,'pointermove',event=>{const g=pointers.get(event.pointerId);observe('pointermove.received',{},event,g);if(!g){observe('pointermove.ignored',{reason:'no-pointer-owner'},event);return;}consume(event);pointerMove(event,g);});
-  listen(root,'pointerup',event=>{const g=pointers.get(event.pointerId);observe('pointerup.received',{},event,g);if(!g){observe('pointerup.ignored',{reason:'no-pointer-owner'},event);return;}consume(event);pointerMove(event,g);void end(g,false);});
+  listen(root,'pointerup',event=>{
+    const g=pointers.get(event.pointerId);observe('pointerup.received',{},event,g);
+    if(!g){observe('pointerup.ignored',{reason:'no-pointer-owner'},event);return;}
+    consume(event);pointerMove(event,g);
+    // A short linear drag is still an explicit positioning request. Retain only
+    // its final movement until preparation acknowledges, then release through
+    // the same transport. New gestures, source/view changes and cancellation
+    // retire this owner normally; late preparation cannot revive a stale one.
+    if(current(g)&&g.mode==='waveform'&&!g.ready&&g.position!==g.anchorPosition){
+      g.releaseWhenReady=true;releasePointer(g);
+      status(g.element,g.deck.index,'preparing','Finishing waveform scrub…',g);return;
+    }
+    void end(g,false);
+  });
   listen(root,'gotpointercapture',event=>observe('capture.gained',{},event,pointers.get(event.pointerId)));
   for(const type of ['pointercancel','lostpointercapture'])listen(root,type,event=>{const g=pointers.get(event.pointerId);observe(type==='pointercancel'?'pointercancel.received':'capture.lost',{},event,g);if(g)void end(g,true,'Scratch canceled.');});
   function frameStep(){
