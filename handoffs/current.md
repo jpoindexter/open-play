@@ -1,3 +1,11 @@
+# Core checkpoint192 — actual software jog audio speed and release
+
+19October2026: one normal native0.1.24 master capture of real trackA verifies neutral1.000× → forwardY1.040× → release → backwardT0.960× → neutral1.000× using independent original-source waveform matching.156windows retained, none unclassified; candidate/source-position slope results and limits in docs/prototype/CORE_JOG_192_RESULTS.json and CORE_JOG_192_REVIEW.md. Nominal pitch stays0. No app patch/new build/mapping change, hardware or advanced-feature test. Both real tracks are restored paused at20s, recorder stopped, master meter silent, EQ/filter0 retained. Earlier191 statement that keyboard jog rate magnitude is unverified is superseded only for this normal real-track native path; hardware/other modes/quality/manual musical acceptance remain open.
+
+Jason requested preparation without Hercules. Core still requires his audible manual+Sync two-track session and current physical/headphone/master cue/mix confirmation. Do not turn that missing user/device evidence into more repeats of solved software checks or extra features. Existing0.1.24 remains current; original prompt suffix and prior evidence retained.
+
+---
+
 # Core checkpoint191 — native cue/EQ/filter audio; hardware deferred
 
 19October2026: Jason asked to continue without Hercules. Actual running0.1.24 normal temporary-cue hold/release produces captured audio and returns to20.243s/stopped. Independent stereo48k decode confirms finite isolated audition signal. Same real phrase clean EQ low/mid/high cuts and low/high-pass filter auditions show the expected broad spectral reductions. An AX setter reset failure contaminated initial mid/high setups; retained/excluded those and repeated affected cases with verified ordinary-key resets. No app code change or new build. Software forward/back jog keys execute with no error and unchanged released nominal pitch, but actual bend magnitude/manual musical alignment is not established. Read docs/prototype/CORE_CONTROLS_191_REVIEW.md and CORE_CONTROLS_191_RESULTS.json.

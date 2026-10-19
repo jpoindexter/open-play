@@ -28,3 +28,5 @@ Launch with **Start Open Play Current Test.command**, **Start Open Play Playback
 Click a loaded track title first so keyboard focus is outside a text field or slider. Current Playback Keys Use Shift is off. W/S toggle deck1/2 Play; I/K set or hold temporary cue; T/Y slow/speed deck1 temporarily, G/H do the same for deck2. Pitch sliders set nominal speed; jog bend is temporary. The visible channel CUE buttons select headphone monitoring and differ from transport temporary cue. Monitor blend/level live in Setup → Mixer. Hardware output routing lives in Devices.
 
 Core191 adds actual native temporary-cue and deck1EQ/filter capture evidence; see [review](CORE_CONTROLS_191_REVIEW.md). It does not replace listening, manual beatmatch or physical acceptance. No further hardware test is scheduled while Jason is away.
+
+Core192 additionally measures the actual normal keyboard jog audio response: neutral1.000×, forward1.040×, backward0.960×, then neutral1.000×. See [source-matched capture review](CORE_JOG_192_REVIEW.md). This does not establish physical jog response or an audible manual mix. Current candidate and saved mappings are unchanged.

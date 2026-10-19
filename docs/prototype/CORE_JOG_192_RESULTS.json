@@ -1,0 +1,75 @@
+{
+  "candidate": "0.1.24",
+  "scope": "Independent real-source matching of actual native keyboard jog master capture; no acoustic/manual musical or hardware acceptance",
+  "sourceSHA256": "be20a102d0d260abfc21d689b2fb9ffdd7383ac28cee33af791edffcf0cfe102",
+  "captureSHA256": "9bde1a3bbc40f29bd76d73e4dca6ff0768f557adeb820fdf6ced36e4b3d59b2c",
+  "captureBytes": 643340,
+  "sampleRate": 48000,
+  "channels": 2,
+  "frames": 2010240,
+  "durationSeconds": 41.88,
+  "finite": true,
+  "peak": 0.14080293476581573,
+  "activeStartSeconds": 1.29,
+  "activeEndSeconds": 40.77,
+  "method": "Every250ms, match200ms left-channel capture against same original MP3 decoded48k, +/-1.5s position search; polyphase speed candidates0.96/1/1.04; normalized FFT cross-correlation; classify>=0.8; source-position slope fit only runs>=4windows. All windows retained. Correlation is speed evidence, not fidelity/distortion/continuity acceptance.",
+  "groups": [
+    {
+      "rate": 1.0,
+      "windows": 70,
+      "captureStartSeconds": 1.54,
+      "captureEndSeconds": 18.79,
+      "minCorrelation": 0.9886340231125004,
+      "measuredSourceSecondsPerCaptureSecond": 0.9999999999999997,
+      "maxSourceFitResidualSeconds": 7.105427357601002e-15
+    },
+    {
+      "rate": 1.04,
+      "windows": 9,
+      "captureStartSeconds": 19.04,
+      "captureEndSeconds": 21.04,
+      "minCorrelation": 0.8164500779552648,
+      "measuredSourceSecondsPerCaptureSecond": 1.0399999999999991,
+      "maxSourceFitResidualSeconds": 1.4210854715202004e-14
+    },
+    {
+      "rate": 1.0,
+      "windows": 3,
+      "captureStartSeconds": 21.29,
+      "captureEndSeconds": 21.79,
+      "minCorrelation": 0.9030515678840776
+    },
+    {
+      "rate": 0.96,
+      "windows": 9,
+      "captureStartSeconds": 22.04,
+      "captureEndSeconds": 24.04,
+      "minCorrelation": 0.9492547450162588,
+      "measuredSourceSecondsPerCaptureSecond": 0.9599999999999996,
+      "maxSourceFitResidualSeconds": 1.4210854715202004e-14
+    },
+    {
+      "rate": 1.0,
+      "windows": 65,
+      "captureStartSeconds": 24.29,
+      "captureEndSeconds": 40.29,
+      "minCorrelation": 0.9522689861927028,
+      "measuredSourceSecondsPerCaptureSecond": 0.9999999999999996,
+      "maxSourceFitResidualSeconds": 2.842170943040401e-14
+    }
+  ],
+  "checkpoint": 192,
+  "sourceCommit": "2b0c785e567f9dec6b5a1efae70c427ff8be8984",
+  "allWindows": 156,
+  "unclassifiedWindows": 0,
+  "nominalPitchAfterReleasePercent": 0,
+  "scopeLimitations": [
+    "Actual native keyboard jog speed evidence on real trackA, not physical jog hardware",
+    "No claim of transition click/phase continuity or perceptual quality",
+    "No audible manual/synced two-track session or headphone/master acceptance",
+    "No keylock/reverse/warped/loop/Stems variants retested"
+  ],
+  "readyState": "Both real tracks paused at20s; nominal pitch0, Sync off; recorder stopped and meter silent; existing EQ/filter0 retained",
+  "coreGoalComplete": false,
+  "fullParityVerified": false
+}
