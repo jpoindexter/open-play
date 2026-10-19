@@ -164,7 +164,8 @@ async function restoreLocalAudio(){
 }
 try{await restoreLocalAudio();}catch(error){state.localAudio.restoreError=error.message;localAudioWarning();}
 
-const smartSync = createSmartSync({engine,state});
+let sampleSyncLeader=()=>null;
+const smartSync = createSmartSync({engine,state,externalLeader:()=>sampleSyncLeader()});
 let stemCrate;
 const stemPreparation = createStemPreparation(engine, state.decks, {onChange:t=>{persist();stemCrate?.changed(t);}});
 const stemSlipControls = createStemSlipControls({engine,state,prepare:ensurePreparedStems,render:renderDecks,notify});
@@ -1415,6 +1416,7 @@ const pitchPlay = createPitchPlay({engine,render:renderDecks,persist,notify,quan
 api.pitchPlay=pitchPlay;
 engine.onPrepareSampleGain=track=>trackGain.refresh(track);
 const panels = createPanels(api);
+sampleSyncLeader=()=>panels.samplerSync.externalLeader();
 setMasterOutput(normalizedMasterDB(state.settings["Master Output Level"]),{save:false});
 const initialMasterVolume=Number(state.settings['Master Volume']??100);
 setMasterVolume(Number.isFinite(initialMasterVolume)?Math.max(0,Math.min(100,initialMasterVolume))/100:1,{save:false});

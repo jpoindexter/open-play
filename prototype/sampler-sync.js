@@ -19,6 +19,17 @@ export function createSamplerSync({state,engine,trackById,optionsFor,render=()=>
   for(const x of members())if(x.key!==exclude){const v=engine.samples?.get(x.key);if(v)return{key:'sample:'+x.key,track:x.track,bpm:v.gridTimeline?.bpm||x.track.bpm*v.settings.rate,clock:sampleVoiceClock(v),phase:hasSamplerGrid(x.track)&&v.syncMode==='beat'};}
   return null;
  }
+ function externalLeader(){
+  if(!enabled())return null;
+  for(const x of members()){
+   const voice=engine.samples?.get(x.key),nodes=voice?.gridTimeline?.grid;
+   if(!nodes?.length||voice.controller.signal.aborted||engine.ctx.currentTime<voice.anchorTime)continue;
+   const track={bpm:nodes[0].bpm,grid:nodes[0].time,duration:voice.track.duration,gridWarpMarkers:nodes.slice(1).map(n=>({time:n.time,bpm:n.bpm}))};
+   return{id:'sample:'+x.key,track,bpm:voice.gridTimeline.bpm,clock:sampleVoiceClock(voice),phase:voice.syncMode==='beat',
+    valid:()=>enabled()&&slot(x.key)===x.slot&&x.slot.sync&&x.slot.track===voice.track.id&&engine.samples?.get(x.key)===voice&&!voice.controller.signal.aborted};
+  }
+  return null;
+ }
  function plan(track,key,options){
   const s=slot(key);if(!enabled()||!s?.sync||s.track!==track.id)return null;
   if(!Number.isFinite(track.bpm)||track.bpm<=0)throw Error('Analyze a BPM before enabling Sampler Sync.');
@@ -63,5 +74,5 @@ export function createSamplerSync({state,engine,trackById,optionsFor,render=()=>
  }
  function tick(){settingsChanged();for(const x of members())stateFor(x.key);if(state.panel==='sampler'||document.querySelector('#sample-sync-toggle'))render();}
  function rememberTempo(bpm){for(const x of members())if(!engine.samples?.has(x.key)){x.slot.syncBPM=bpm;x.slot.pitch=(bpm/x.track.bpm-1)*100;}render();}
- return{enable,off,plan,participants,settingsChanged,stateFor,tick,members,rememberTempo,tempo:(key,rate)=>{const s=slot(key),track=s&&trackById(s.track);if(!s?.sync||!track?.bpm)return Promise.resolve();return requestTempo(track.bpm*rate);}};
+ return{enable,off,plan,participants,settingsChanged,stateFor,tick,members,externalLeader,rememberTempo,tempo:(key,rate)=>{const s=slot(key),track=s&&trackById(s.track);if(!s?.sync||!track?.bpm)return Promise.resolve();return requestTempo(track.bpm*rate);}};
 }

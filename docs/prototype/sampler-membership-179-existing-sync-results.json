@@ -1,0 +1,83 @@
+{
+  "checkpoint": 179,
+  "scope": "Existing affected deck-only pending-start/loop/nominal-basis collaborators; browser acceptance separate",
+  "firstAfterFailures": [
+    {
+      "name": "test_pending_smart_sync_start",
+      "exitCode": 1,
+      "output": "file:///Users/jasonpoindexter/Documents/GitHub/Open%20Play/local-evidence/sampler-membership-179/first-after-source-capsule/scripts/test_pending_smart_sync_start.mjs:7\n return{smart,deck,engine,calls,resolve:()=>resolveRate(),reject:error=>rejectRate(error)};\n                                            ^\n\nTypeError: resolveRate is not a function\n    at Object.resolve (file:///Users/jasonpoindexter/Documents/GitHub/Open%20Play/local-evidence/sampler-membership-179/first-after-source-capsule/scripts/test_pending_smart_sync_start.mjs:7:45)\n    at file:///Users/jasonpoindexter/Documents/GitHub/Open%20Play/local-evidence/sampler-membership-179/first-after-source-capsule/scripts/test_pending_smart_sync_start.mjs:9:143\n    at ModuleJob.run (node:internal/modules/esm/module_job:343:25)\n    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:681:26)\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5)\n\nNode.js v22.23.2\n"
+    },
+    {
+      "name": "test_smart_sync_loops",
+      "exitCode": 1,
+      "output": "file:///Users/jasonpoindexter/Documents/GitHub/Open%20Play/local-evidence/sampler-membership-179/first-after-source-capsule/prototype/smart-sync.js:112\n    if(source?.valid()){\n               ^\n\nTypeError: source?.valid is not a function\n    at performPress (file:///Users/jasonpoindexter/Documents/GitHub/Open%20Play/local-evidence/sampler-membership-179/first-after-source-capsule/prototype/smart-sync.js:112:16)\n    at Object.press (file:///Users/jasonpoindexter/Documents/GitHub/Open%20Play/local-evidence/sampler-membership-179/first-after-source-capsule/prototype/smart-sync.js:142:21)\n    at file:///Users/jasonpoindexter/Documents/GitHub/Open%20Play/local-evidence/sampler-membership-179/first-after-source-capsule/scripts/test_smart_sync_loops.mjs:7:132\n\nNode.js v22.23.2\n"
+    },
+    {
+      "name": "test_smart_sync_tempo_basis",
+      "exitCode": 1,
+      "output": "{\n  \"passed\": false,\n  \"scope\": \"Smart Sync/GUI coordinate integration with controlled engine collaborators; actual browser musical workflow required separately.\",\n  \"tests\": [\n    {\n      \"name\": \"First paused primary Sync at90BPM establishes nominal90/120 before relative slider movement\",\n      \"passed\": true\n    },\n    {\n      \"name\": \"Repeated primary Sync after a paused seek to150BPM retains the shared90BPM basis\",\n      \"passed\": true\n    },\n    {\n      \"name\": \"First running primary Sync derives common tempo from local BPM and audible source rate\",\n      \"passed\": true\n    },\n    {\n      \"name\": \"Secondary arming uses the coherent shared tempo and its own base BPM\",\n      \"passed\": false,\n      \"error\": \"source?.valid is not a function\"\n    },\n    {\n      \"name\": \"Invalid nominal transport range rejects before publishing Sync state\",\n      \"passed\": true\n    }\n  ]\n}\n"
+    }
+  ],
+  "final": [
+    {
+      "name": "test_pending_smart_sync_start",
+      "exitCode": 0,
+      "result": {
+        "passed": true,
+        "scope": "Smart Sync pending-start policy with controlled rate/synchronize collaborators; real GUI/MIDI/phase/cancel behavior checked separately",
+        "checks": [
+          "Play waits for pending Sync and aligns once",
+          "Current-owner cancellation leaves Sync armed and playback stopped",
+          "Track replacement cancels pending Sync/start",
+          "External transport token cancels queued start",
+          "Sync failure propagates without an unsynced fallback"
+        ]
+      }
+    },
+    {
+      "name": "test_smart_sync_loops",
+      "exitCode": 0,
+      "result": {
+        "passed": true,
+        "scope": "Smart Sync loop geometry/state with engine collaborators; no acoustic/native/hardware proof",
+        "checks": [
+          "bar alignment inside active loop",
+          "different-BPM whole-bar loops engage Beat Sync",
+          "short loop degrades bar lock to Tempo Sync without seek",
+          "restore whole bar allows explicit re-Sync",
+          "warped loop clock is passed to backend and keylock may use loop backend while reverse bar alignment still refuses early; existing reverse loop keeps Tempo Sync clock and Play, non-loop reverse clock allowed while bar alignment still refuses"
+        ]
+      }
+    },
+    {
+      "name": "test_smart_sync_tempo_basis",
+      "exitCode": 0,
+      "result": {
+        "passed": true,
+        "scope": "Smart Sync/GUI coordinate integration with controlled engine collaborators; actual browser musical workflow required separately.",
+        "tests": [
+          {
+            "name": "First paused primary Sync at90BPM establishes nominal90/120 before relative slider movement",
+            "passed": true
+          },
+          {
+            "name": "Repeated primary Sync after a paused seek to150BPM retains the shared90BPM basis",
+            "passed": true
+          },
+          {
+            "name": "First running primary Sync derives common tempo from local BPM and audible source rate",
+            "passed": true
+          },
+          {
+            "name": "Secondary arming uses the coherent shared tempo and its own base BPM",
+            "passed": true
+          },
+          {
+            "name": "Invalid nominal transport range rejects before publishing Sync state",
+            "passed": true
+          }
+        ]
+      }
+    }
+  ]
+}

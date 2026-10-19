@@ -951,7 +951,7 @@ export function createPanels(a) {
   }
   function samplerSyncMarkup(key,advanced=false){
     const v=samplerSync.stateFor(key);
-    return `<div class="panel-controls"><button ${advanced?'id="sample-sync-toggle"':''} data-sample-sync="${key}" data-sync-action="on" aria-label="Sync sample ${key%8+1}" aria-pressed="${v.active}" ${v.available?'':'disabled'} title="${esc(v.reason||'Synchronize this sample with the active Sync tracks')}">Sync</button><button ${advanced?'id="sample-sync-off"':''} data-sample-sync="${key}" data-sync-action="off" aria-label="Sync off sample ${key%8+1}" ${v.active?'':'disabled'}>Off</button><span class="muted" data-sample-sync-status="${key}" role="status">${esc(v.label)}</span></div>`;
+    return `<div class="panel-controls"><button ${advanced?'id="sample-sync-toggle"':''} data-sample-sync="${key}" data-sync-action="on" aria-label="Sync sample ${key%8+1}" aria-pressed="${v.active}" ${v.available?'':'disabled'} title="${esc(v.reason||'Synchronize this sample with the active Sync tracks')}">Sync</button><button ${advanced?'id="sample-sync-off"':''} data-sample-sync="${key}" data-sync-action="off" aria-label="Sync off sample ${key%8+1}" ${v.active?'':'disabled'}>Off</button><span class="muted" data-sample-sync-status="${key}" data-state="${v.status}" role="status">${esc(v.label)}</span></div>`;
   }
   function sampler() {
     const slots = s.samples[s.bank];

@@ -35,7 +35,7 @@ export function alignedBarPosition(track,position,primaryTrack,primaryPosition,l
   if(!candidates.length)throw new Error('No bar position can be aligned within this track or active loop.');
   return candidates[0];
 }
-export function createSmartSync({engine, state}) {
+export function createSmartSync({engine, state, externalLeader=()=>null}) {
   const revisions = new WeakMap();
   const pendingPresses = new WeakMap();
   let syncBPM=null;
@@ -50,7 +50,7 @@ export function createSmartSync({engine, state}) {
     // A non-whole-bar cycle cannot preserve a four-beat bar position on each
     // wrap. Keep common tempo without reporting a bar lock that does not exist.
     if(members.some(d=>!barCompatible(d)))for(const d of members)if(d.syncState==='beat')d.syncState='tempo';
-    if (members.length && !members.some(d => d.syncRole === 'primary'))
+    if (members.length && !members.some(d => d.syncRole === 'primary') && !externalLeader()?.valid())
       (members.find(d => d.playing) || members[0]).syncRole = 'primary';
   }
   function leader(deck) {
@@ -87,9 +87,37 @@ export function createSmartSync({engine, state}) {
     if(!barLock)reconcile();
     return result;
   }
+  function externalRate(deck,source){
+    const rate=source.bpm/deck.track.bpm;
+    if(!Number.isFinite(rate)||rate<.25||rate>4)throw new Error('The matched tempo is outside the current transport range.');
+    return rate;
+  }
+  async function alignExternal(deck,source,isCurrent=()=>true){
+    validateTransport(deck,deck);
+    const track=deck.track,revision=revise(deck),signature=transportSignature(deck),loop=loopBounds(deck),barLock=barCompatible(deck)&&source.phase;
+    const priorClock=engine.voiceClock(deck,engine.voices.get(deck.index));
+    const valid=()=>isCurrent()&&enabled()&&revisions.get(deck)===revision&&deck.track===track&&transportSignature(deck)===signature&&source.valid();
+    const result=await engine.synchronize(deck,{rate:externalRate(deck,source),priorClock,positionAt:when=>{
+      if(!valid())throw cancelled();
+      return barLock?alignedBarPosition(track,priorClock(when),source.track,source.clock(when),loop):priorClock(when);
+    }});
+    if(!valid())throw cancelled();
+    syncBPM=source.bpm;deck.sync=true;deck.syncState=barLock?'beat':'tempo';deck.syncRole='secondary';
+    return result;
+  }
   async function performPress(deck) {
     if (!enabled()) return;
     requireGrid(deck.track);const primary=leader(deck);
+    const source=primary?null:externalLeader();
+    if(source?.valid()){
+      validateTransport(deck,deck);
+      if(deck.playing)return alignExternal(deck,source);
+      const revision=revise(deck),track=deck.track;
+      await engine.setRate(deck,externalRate(deck,source),{syncInternal:true});
+      if(!enabled()||revisions.get(deck)!==revision||deck.track!==track||!source.valid())throw cancelled();
+      syncBPM=source.bpm;deck.sync=true;deck.syncRole='secondary';deck.syncState='armed';
+      return;
+    }
     if (!primary) {
       validateTransport(deck,deck);
       // An engaged primary already has a common tempo. In particular a paused
@@ -133,6 +161,8 @@ export function createSmartSync({engine, state}) {
     if (deck.syncState==='armed') {
       const primary=leader(deck);
       if (primary?.playing) {await align(deck,primary,isCurrent);return true;}
+      const source=primary?null:externalLeader();
+      if(source?.valid()){await alignExternal(deck,source,isCurrent);return true;}
     }
     return false;
   }

@@ -1,0 +1,642 @@
+{
+  "checkpoint": 179,
+  "originalBytes": 31603969,
+  "originalSHA256": "501737b3e1e94de074915dbc391063f913e63a4287af8c69340f75993a102416",
+  "sourceHashes": {
+    "app.js": "1fc0a87a0a29139b976b3f1aa1fd23822c63f255d6f793dc35d8fd23b93bb6d0",
+    "engine.js": "6a80d6d04ca6135c0563edac97c0a3b3f67fc122b9373433699e8999697869a6",
+    "panels.js": "a27d9fa75ee383f90691bd5d865ebcb73592b3aee24e72a63e41e19333495176",
+    "styles.css": "d7338cd0ef00eb1defe447e76dc340549dfb747aba586efd8eeb2976939c4a4e",
+    "fixtures/sampler-fallback-178-short-loop.json": "3715958359863d10cde61de921aaf2728b5c39ff756ad32cbdda756f766fc40d",
+    "manual-loops.js": "a2215ea2414788a0a0b73a1e9b99efdc24399be8003fc18c7c7de00377976304",
+    "beatgrid.js": "af239aef231c9d089bf2352b8f548a5f71f734d6cf753986f17f57b3999477b9",
+    "smart-sync.js": "98d34b559882d16e3b3e8c715d6a3c35a6197cb8d6a984fe5470b80592ca934e",
+    "sync-tempo-handoff.js": "5842f9209035e24ff867004d3fef5f0a1fe7f7f4976440546b8238a225b82f9b",
+    "sampler-sync.js": "53d248db3def1d1ddd2ad022789b19a65c038bf4e714207f874f42e246e6d667",
+    "sample-sync-transport.js": "4dafd2bcf9a70b588d87a41d872a7956986e8af74bec171c6cde874f2a9bf10c",
+    "warp-loop.js": "1429a67a75b893af6ed6cb7b067dae377bdacedd71f2ff955ef3fe64907d5ae8",
+    "warp-loop-kernel.js": "7f0c18c4868818f8b77a3d4f71e72ea821516e902516d749f58cac6add2bfac2",
+    "warp-loop-worklet.js": "2f2eb1109dca29ad99928af069c257f2da06cd6f79e7add2b1431da9cb12ea9b",
+    "stems.js": "5fb06aba4f6a97e4150d1bcfeef394574b0c9e9ed6ee099b78b89482b08ea4b7",
+    "keylock.js": "62adbfdd77df20deb1328302d4a8daf3d7bdc29870af453d39acfd2a02bf060b",
+    "keylock-worker.js": "5cb72a1bc74e1808c32b430d72d5769427c7056edee11410eb6f8b3c7751fcec",
+    "keylock-dsp.js": "f4cb1881fedb018f395a6711d263aa142feb8dfe93638a3d1f97fc432c15ac3d",
+    "track-gain.js": "f390adbddd4e317444294a92d9e5a82b89d6abaa591578a158a00308628d5bfa",
+    "sampler-membership-179-harness.js": "ac69de0d01a644f7f9bbaba0878772979886f7c2f08dc356ad4a539580b61beb",
+    "stem-activation-capture-145.js": "730b9c3de31e9c3546ec1ab86f8fd85ce2a1ccfe6f78fc25d8f483f8b9d75331",
+    "vendor/signalsmith-stretch/SignalsmithStretch-open-play-reference-dsp.mjs": "0512cae2a33873956026e64cb47854c1c677baf1beb1bc0242edfb9557987f21"
+  },
+  "errors": [],
+  "uiErrors": [],
+  "workflowCompleted": true,
+  "passed": false,
+  "observations": [
+    {
+      "name": "sample-led-pair",
+      "stateAccepted": true,
+      "maximumSourceClockPhaseSeconds": 0.005333333333332746,
+      "maximumNominalBPMError": 0,
+      "phaseAccepted": true,
+      "tempoAccepted": true,
+      "indicatorAccepted": true,
+      "packets": [
+        {
+          "label": "bus",
+          "channel": 0,
+          "frames": 144000,
+          "quanta": 1125,
+          "sha256": "733e1b7bbfce38515225e25358be0dd2931d2bd3d934e8f8b56ac3b1ef383d86",
+          "rms": 0.13596737182101967,
+          "peak": 0.6410701274871826,
+          "relativeRMSError": 3.048536409957739e-08,
+          "accepted": true
+        },
+        {
+          "label": "bus",
+          "channel": 1,
+          "frames": 144000,
+          "quanta": 1125,
+          "sha256": "6a6e992bc98012ca4cb533393174811a9e6ea5b6a4015f9257ea5846765f5e95",
+          "rms": 0.13579145330866413,
+          "peak": 0.5794183015823364,
+          "relativeRMSError": 3.0716721790914086e-08,
+          "accepted": true
+        },
+        {
+          "label": "sample0",
+          "channel": 0,
+          "frames": 144000,
+          "quanta": 1125,
+          "sha256": "8b42d9e7d447452f97f6534ae3b013485b53d218d3d33decd3a378ff8df0dc12",
+          "rms": 0.06798368591050984,
+          "peak": 0.3205350637435913,
+          "relativeRMSError": 3.048536409957739e-08,
+          "accepted": true
+        },
+        {
+          "label": "sample0",
+          "channel": 1,
+          "frames": 144000,
+          "quanta": 1125,
+          "sha256": "eeaa43da1b7356367436e2efbe612f3da653d569c28e9dc9185465ba7363d8e5",
+          "rms": 0.06789572665433206,
+          "peak": 0.2897091507911682,
+          "relativeRMSError": 3.0716721790914086e-08,
+          "accepted": true
+        },
+        {
+          "label": "sample1",
+          "channel": 0,
+          "frames": 144000,
+          "quanta": 1125,
+          "sha256": "8b42d9e7d447452f97f6534ae3b013485b53d218d3d33decd3a378ff8df0dc12",
+          "rms": 0.06798368591050984,
+          "peak": 0.3205350637435913,
+          "relativeRMSError": 3.048536409957739e-08,
+          "accepted": true
+        },
+        {
+          "label": "sample1",
+          "channel": 1,
+          "frames": 144000,
+          "quanta": 1125,
+          "sha256": "eeaa43da1b7356367436e2efbe612f3da653d569c28e9dc9185465ba7363d8e5",
+          "rms": 0.06789572665433206,
+          "peak": 0.2897091507911682,
+          "relativeRMSError": 3.0716721790914086e-08,
+          "accepted": true
+        },
+        {
+          "label": "deck",
+          "channel": 0,
+          "frames": 144000,
+          "quanta": 1125,
+          "sha256": "30fafbdc0facf210a26498db982f7ff8ad1e0b9a805816731c72e356a768c162",
+          "rms": 0.0,
+          "peak": 0.0,
+          "relativeRMSError": null,
+          "accepted": true
+        },
+        {
+          "label": "deck",
+          "channel": 1,
+          "frames": 144000,
+          "quanta": 1125,
+          "sha256": "30fafbdc0facf210a26498db982f7ff8ad1e0b9a805816731c72e356a768c162",
+          "rms": 0.0,
+          "peak": 0.0,
+          "relativeRMSError": null,
+          "accepted": true
+        }
+      ],
+      "accepted": true
+    },
+    {
+      "name": "sample-led-deck-join",
+      "stateAccepted": false,
+      "maximumSourceClockPhaseSeconds": 0.2966888888888915,
+      "maximumNominalBPMError": 4,
+      "phaseAccepted": false,
+      "tempoAccepted": false,
+      "indicatorAccepted": true,
+      "packets": [
+        {
+          "label": "bus",
+          "channel": 0,
+          "frames": 144000,
+          "quanta": 1125,
+          "sha256": "f037d0cacdc5360c34900ffa6ab402591e006556502c745554bd660088833d33",
+          "rms": 0.13767819402198073,
+          "peak": 0.6410701274871826,
+          "relativeRMSError": 3.054096946346607e-08,
+          "accepted": true
+        },
+        {
+          "label": "bus",
+          "channel": 1,
+          "frames": 144000,
+          "quanta": 1125,
+          "sha256": "65070f5f611ecd52fe8407a72401f87197723792046c5326fdd6b1eda218b464",
+          "rms": 0.13418167046166404,
+          "peak": 0.5794183015823364,
+          "relativeRMSError": 3.06895624334552e-08,
+          "accepted": true
+        },
+        {
+          "label": "sample0",
+          "channel": 0,
+          "frames": 144000,
+          "quanta": 1125,
+          "sha256": "c8a2dcb82f14acf7dea677c164d723b4374c58cc216d1abf2f24f60d4106a9df",
+          "rms": 0.06883909701099034,
+          "peak": 0.3205350637435913,
+          "relativeRMSError": 3.0540977935540966e-08,
+          "accepted": true
+        },
+        {
+          "label": "sample0",
+          "channel": 1,
+          "frames": 144000,
+          "quanta": 1125,
+          "sha256": "8dcda853a465967574ecf8095d4a153cb423ec5b418c455beed10e5479fc6b9e",
+          "rms": 0.06709083523083201,
+          "peak": 0.2897091507911682,
+          "relativeRMSError": 3.0689601082495544e-08,
+          "accepted": true
+        },
+        {
+          "label": "sample1",
+          "channel": 0,
+          "frames": 144000,
+          "quanta": 1125,
+          "sha256": "961e4a085104fa8ea64d539c90e72bee8632a3c3c38562c1727082061e9af0e5",
+          "rms": 0.06883909701099036,
+          "peak": 0.3205350637435913,
+          "relativeRMSError": 3.054096228541228e-08,
+          "accepted": true
+        },
+        {
+          "label": "sample1",
+          "channel": 1,
+          "frames": 144000,
+          "quanta": 1125,
+          "sha256": "d1841deabda421cc9d3a4d0ab34c726fc88e1ae977157861f5f4a75e82b8840f",
+          "rms": 0.06709083523083202,
+          "peak": 0.2897091507911682,
+          "relativeRMSError": 3.0689525705818324e-08,
+          "accepted": true
+        },
+        {
+          "label": "deck",
+          "channel": 0,
+          "frames": 144000,
+          "quanta": 1125,
+          "sha256": "5d11445f01e25359816e17771dea2c7a7922f217dbc9378c61852b1a21f554cf",
+          "rms": 0.06562753493819723,
+          "peak": 0.32704398036003113,
+          "relativeRMSError": null,
+          "accepted": true
+        },
+        {
+          "label": "deck",
+          "channel": 1,
+          "frames": 144000,
+          "quanta": 1125,
+          "sha256": "226dcd89aaa0aad206f9ec0d9850934f56cc1f3eeb8d82e3be2e7361ac6ac2b4",
+          "rms": 0.06559762601693687,
+          "peak": 0.32843348383903503,
+          "relativeRMSError": null,
+          "accepted": true
+        }
+      ],
+      "accepted": false
+    },
+    {
+      "name": "shared-sample-pitch",
+      "stateAccepted": true,
+      "maximumSourceClockPhaseSeconds": 0.1800000478552779,
+      "maximumNominalBPMError": 0,
+      "phaseAccepted": false,
+      "tempoAccepted": true,
+      "indicatorAccepted": true,
+      "packets": [
+        {
+          "label": "bus",
+          "channel": 0,
+          "frames": 144000,
+          "quanta": 1125,
+          "sha256": "1c98604eb8f9f317812b890039378dc50717398c704b85106d4d21a9b51f1776",
+          "rms": 0.1363206756710393,
+          "peak": 0.6398581862449646,
+          "relativeRMSError": 3.9136538398673494e-08,
+          "accepted": true
+        },
+        {
+          "label": "bus",
+          "channel": 1,
+          "frames": 144000,
+          "quanta": 1125,
+          "sha256": "e77798a1edd706db0bc4149c2d93309800a1bb76eb6b7199a3e7fc5fb31d8917",
+          "rms": 0.13359866231068293,
+          "peak": 0.5789564251899719,
+          "relativeRMSError": 3.929069607574127e-08,
+          "accepted": true
+        },
+        {
+          "label": "sample0",
+          "channel": 0,
+          "frames": 144000,
+          "quanta": 1125,
+          "sha256": "4a3eb2c04a0d5f4da768ef66e2baece25f1bf555d65214766461461ce55587f2",
+          "rms": 0.06816033783601325,
+          "peak": 0.3199290931224823,
+          "relativeRMSError": 3.9262434848881865e-08,
+          "accepted": true
+        },
+        {
+          "label": "sample0",
+          "channel": 1,
+          "frames": 144000,
+          "quanta": 1125,
+          "sha256": "2d098dc52c21b46e9ddcca555926099ac0af12769065e43910833d123b42ebe2",
+          "rms": 0.06679933115342153,
+          "peak": 0.28947821259498596,
+          "relativeRMSError": 3.9397372600369824e-08,
+          "accepted": true
+        },
+        {
+          "label": "sample1",
+          "channel": 0,
+          "frames": 144000,
+          "quanta": 1125,
+          "sha256": "7f1a7af58372570859cbd0df1f3025c7e3f1d1acdabb7161a8268e47df0fb773",
+          "rms": 0.06816033783567735,
+          "peak": 0.3199290931224823,
+          "relativeRMSError": 3.928686332511874e-08,
+          "accepted": true
+        },
+        {
+          "label": "sample1",
+          "channel": 1,
+          "frames": 144000,
+          "quanta": 1125,
+          "sha256": "e6f6b9f5194d92412584e91a42e5121db8c9fe5ee7d06478b113801c17931085",
+          "rms": 0.06679933115806717,
+          "peak": 0.28947821259498596,
+          "relativeRMSError": 3.9439567231821124e-08,
+          "accepted": true
+        },
+        {
+          "label": "deck",
+          "channel": 0,
+          "frames": 144000,
+          "quanta": 1125,
+          "sha256": "042253f15098bf387b02481a0f78bbfc710cbbd8328c2ad492b89e60dfbbb616",
+          "rms": 0.06665259798742505,
+          "peak": 0.34364885091781616,
+          "relativeRMSError": null,
+          "accepted": true
+        },
+        {
+          "label": "deck",
+          "channel": 1,
+          "frames": 144000,
+          "quanta": 1125,
+          "sha256": "2a796f8f728dbcb10861e569684854aeffa217f2e2f78639585b4f552298aee3",
+          "rms": 0.06662898170403819,
+          "peak": 0.3372419774532318,
+          "relativeRMSError": null,
+          "accepted": true
+        }
+      ],
+      "accepted": false
+    },
+    {
+      "name": "stop-first-retains-second",
+      "stateAccepted": true,
+      "maximumSourceClockPhaseSeconds": 0.18000009504449718,
+      "maximumNominalBPMError": 0,
+      "phaseAccepted": false,
+      "tempoAccepted": true,
+      "indicatorAccepted": true,
+      "packets": [
+        {
+          "label": "bus",
+          "channel": 0,
+          "frames": 144000,
+          "quanta": 1125,
+          "sha256": "9a407d40a8d1b6c64da509391f91f05f2db3ae776dce39094a4cd15b8a46d214",
+          "rms": 0.06704440372382321,
+          "peak": 0.3205350637435913,
+          "relativeRMSError": 3.9449176701019715e-08,
+          "accepted": true
+        },
+        {
+          "label": "bus",
+          "channel": 1,
+          "frames": 144000,
+          "quanta": 1125,
+          "sha256": "ecf0c8a4bdd555605226d1806a8ed4d38692ae0868ad7453eba97bca3bf82715",
+          "rms": 0.06663254733299256,
+          "peak": 0.2897091507911682,
+          "relativeRMSError": 3.9184599466324994e-08,
+          "accepted": true
+        },
+        {
+          "label": "sample0",
+          "channel": 0,
+          "frames": 144000,
+          "quanta": 1125,
+          "sha256": "30fafbdc0facf210a26498db982f7ff8ad1e0b9a805816731c72e356a768c162",
+          "rms": 0.0,
+          "peak": 0.0,
+          "relativeRMSError": null,
+          "accepted": true
+        },
+        {
+          "label": "sample0",
+          "channel": 1,
+          "frames": 144000,
+          "quanta": 1125,
+          "sha256": "30fafbdc0facf210a26498db982f7ff8ad1e0b9a805816731c72e356a768c162",
+          "rms": 0.0,
+          "peak": 0.0,
+          "relativeRMSError": null,
+          "accepted": true
+        },
+        {
+          "label": "sample1",
+          "channel": 0,
+          "frames": 144000,
+          "quanta": 1125,
+          "sha256": "9a407d40a8d1b6c64da509391f91f05f2db3ae776dce39094a4cd15b8a46d214",
+          "rms": 0.06704440372382321,
+          "peak": 0.3205350637435913,
+          "relativeRMSError": 3.9449176701019715e-08,
+          "accepted": true
+        },
+        {
+          "label": "sample1",
+          "channel": 1,
+          "frames": 144000,
+          "quanta": 1125,
+          "sha256": "ecf0c8a4bdd555605226d1806a8ed4d38692ae0868ad7453eba97bca3bf82715",
+          "rms": 0.06663254733299256,
+          "peak": 0.2897091507911682,
+          "relativeRMSError": 3.9184599466324994e-08,
+          "accepted": true
+        },
+        {
+          "label": "deck",
+          "channel": 0,
+          "frames": 144000,
+          "quanta": 1125,
+          "sha256": "29baf0dbcc21b692835564fe270b33b616e8287d56a1fff414ddc518983db673",
+          "rms": 0.06290369669790884,
+          "peak": 0.3065338730812073,
+          "relativeRMSError": null,
+          "accepted": true
+        },
+        {
+          "label": "deck",
+          "channel": 1,
+          "frames": 144000,
+          "quanta": 1125,
+          "sha256": "1778057e1611dd65255f4082b23c29fc67e4c556ff078ee71b3c57c73d4b1a51",
+          "rms": 0.06293599360213262,
+          "peak": 0.30683717131614685,
+          "relativeRMSError": null,
+          "accepted": true
+        }
+      ],
+      "accepted": false
+    },
+    {
+      "name": "departing-bank-stops-pair",
+      "stateAccepted": true,
+      "maximumSourceClockPhaseSeconds": 0,
+      "maximumNominalBPMError": 0,
+      "phaseAccepted": true,
+      "tempoAccepted": true,
+      "indicatorAccepted": true,
+      "packets": [
+        {
+          "label": "bus",
+          "channel": 0,
+          "frames": 14400,
+          "quanta": 113,
+          "sha256": "c72274a22cba2dcef62e0f62834446ee39b0cd95ad0faa27a89b3b49f48aa390",
+          "rms": 0.0,
+          "peak": 0.0,
+          "relativeRMSError": null,
+          "accepted": true
+        },
+        {
+          "label": "bus",
+          "channel": 1,
+          "frames": 14400,
+          "quanta": 113,
+          "sha256": "c72274a22cba2dcef62e0f62834446ee39b0cd95ad0faa27a89b3b49f48aa390",
+          "rms": 0.0,
+          "peak": 0.0,
+          "relativeRMSError": null,
+          "accepted": true
+        },
+        {
+          "label": "sample0",
+          "channel": 0,
+          "frames": 14400,
+          "quanta": 113,
+          "sha256": "c72274a22cba2dcef62e0f62834446ee39b0cd95ad0faa27a89b3b49f48aa390",
+          "rms": 0.0,
+          "peak": 0.0,
+          "relativeRMSError": null,
+          "accepted": true
+        },
+        {
+          "label": "sample0",
+          "channel": 1,
+          "frames": 14400,
+          "quanta": 113,
+          "sha256": "c72274a22cba2dcef62e0f62834446ee39b0cd95ad0faa27a89b3b49f48aa390",
+          "rms": 0.0,
+          "peak": 0.0,
+          "relativeRMSError": null,
+          "accepted": true
+        },
+        {
+          "label": "sample1",
+          "channel": 0,
+          "frames": 14400,
+          "quanta": 113,
+          "sha256": "c72274a22cba2dcef62e0f62834446ee39b0cd95ad0faa27a89b3b49f48aa390",
+          "rms": 0.0,
+          "peak": 0.0,
+          "relativeRMSError": null,
+          "accepted": true
+        },
+        {
+          "label": "sample1",
+          "channel": 1,
+          "frames": 14400,
+          "quanta": 113,
+          "sha256": "c72274a22cba2dcef62e0f62834446ee39b0cd95ad0faa27a89b3b49f48aa390",
+          "rms": 0.0,
+          "peak": 0.0,
+          "relativeRMSError": null,
+          "accepted": true
+        },
+        {
+          "label": "deck",
+          "channel": 0,
+          "frames": 14400,
+          "quanta": 113,
+          "sha256": "656eaa73a5a1e5d13ec5537117f12f5221cc7908ca9f26c9b53bd6a1354904db",
+          "rms": 0.04813405968563593,
+          "peak": 0.1388927400112152,
+          "relativeRMSError": null,
+          "accepted": true
+        },
+        {
+          "label": "deck",
+          "channel": 1,
+          "frames": 14400,
+          "quanta": 113,
+          "sha256": "b01617c99c73fade939745787de063c9522ef79576e38ec2ad603051e8fcb9bd",
+          "rms": 0.04813772522223227,
+          "peak": 0.13765080273151398,
+          "relativeRMSError": null,
+          "accepted": true
+        }
+      ],
+      "accepted": true
+    },
+    {
+      "name": "tempo-indicator",
+      "stateAccepted": true,
+      "maximumSourceClockPhaseSeconds": 0,
+      "maximumNominalBPMError": 0,
+      "phaseAccepted": true,
+      "tempoAccepted": true,
+      "indicatorAccepted": false,
+      "packets": [
+        {
+          "label": "bus",
+          "channel": 0,
+          "frames": 14400,
+          "quanta": 113,
+          "sha256": "07f9ced22a74ab7b519248bb853fdc4d19d3e8fabc725045c84b9d6b67fa017c",
+          "rms": 0.0660472517260312,
+          "peak": 0.24016760289669037,
+          "relativeRMSError": 4.004287644531808e-08,
+          "accepted": true
+        },
+        {
+          "label": "bus",
+          "channel": 1,
+          "frames": 14400,
+          "quanta": 113,
+          "sha256": "c4b2cd48b1f7e5218e1ce7d92783f740014bf7cae4519d5c286e64f3aa87a330",
+          "rms": 0.06420363575642607,
+          "peak": 0.26240068674087524,
+          "relativeRMSError": 3.9456939665024385e-08,
+          "accepted": true
+        },
+        {
+          "label": "sample0",
+          "channel": 0,
+          "frames": 14400,
+          "quanta": 113,
+          "sha256": "c72274a22cba2dcef62e0f62834446ee39b0cd95ad0faa27a89b3b49f48aa390",
+          "rms": 0.0,
+          "peak": 0.0,
+          "relativeRMSError": null,
+          "accepted": true
+        },
+        {
+          "label": "sample0",
+          "channel": 1,
+          "frames": 14400,
+          "quanta": 113,
+          "sha256": "c72274a22cba2dcef62e0f62834446ee39b0cd95ad0faa27a89b3b49f48aa390",
+          "rms": 0.0,
+          "peak": 0.0,
+          "relativeRMSError": null,
+          "accepted": true
+        },
+        {
+          "label": "sample1",
+          "channel": 0,
+          "frames": 14400,
+          "quanta": 113,
+          "sha256": "07f9ced22a74ab7b519248bb853fdc4d19d3e8fabc725045c84b9d6b67fa017c",
+          "rms": 0.0660472517260312,
+          "peak": 0.24016760289669037,
+          "relativeRMSError": 4.004287644531808e-08,
+          "accepted": true
+        },
+        {
+          "label": "sample1",
+          "channel": 1,
+          "frames": 14400,
+          "quanta": 113,
+          "sha256": "c4b2cd48b1f7e5218e1ce7d92783f740014bf7cae4519d5c286e64f3aa87a330",
+          "rms": 0.06420363575642607,
+          "peak": 0.26240068674087524,
+          "relativeRMSError": 3.9456939665024385e-08,
+          "accepted": true
+        },
+        {
+          "label": "deck",
+          "channel": 0,
+          "frames": 14400,
+          "quanta": 113,
+          "sha256": "51fd3b1177e8f0e74ce515a6c2041d83223d46572ef6b452ea0d06fd5c75ff33",
+          "rms": 0.044606657514924555,
+          "peak": 0.2473469227552414,
+          "relativeRMSError": null,
+          "accepted": true
+        },
+        {
+          "label": "deck",
+          "channel": 1,
+          "frames": 14400,
+          "quanta": 113,
+          "sha256": "149f78a699a8c4cd0cf881868ab8bceb2908501928212ba51982257d63c44218",
+          "rms": 0.0445217169962748,
+          "peak": 0.2468818575143814,
+          "relativeRMSError": null,
+          "accepted": true
+        }
+      ],
+      "accepted": false
+    }
+  ],
+  "scope": "whole known-source individual/summed sample PCM and actual group source clocks paired with nonzero deck PCM; deck PCM identity/perceptual quality/complete modes/races separate",
+  "exactDeckPCMMatchAccepted": false,
+  "pitchQualityAccepted": false,
+  "fullSamplerSyncAcceptance": false,
+  "nativeAcceptance": false,
+  "hardwareAcceptance": false,
+  "fullParityAcceptance": false
+}
