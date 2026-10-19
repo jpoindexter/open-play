@@ -292,3 +292,37 @@ body[data-workspace=hybrid][data-density=compact] .fader-group input{height:94px
 body[data-workspace=hybrid] .deck-tabs [data-tab]{display:block;min-width:0;flex:1;padding-inline:3px;font-size:10px}
 body[data-workspace=hybrid][data-orientation=vertical] main:has(#panel:not([hidden])) #panel{grid-column:1/-1;grid-row:3}
 body[data-workspace=hybrid][data-orientation=vertical] main:has(#panel:not([hidden])) .library{grid-row:4}
+
+/* Compact198: conceal optional pads, never the core loop/beat-jump controls. */
+.preview-loop-strip{display:none}
+body[data-workspace=hybrid] .deck{grid-template-rows:var(--preview-head-height) var(--preview-readout-height) 32px 38px auto auto 34px auto auto}
+body[data-workspace=hybrid][data-density=compact] .deck{grid-template-rows:40px 46px 32px 30px auto auto 32px auto auto}
+body[data-workspace=hybrid] .preview-loop-strip{display:block;grid-row:5;grid-column:1;margin:0 7px}
+body[data-workspace=hybrid] .preview-loop-strip .loop-line{display:flex;gap:4px;margin:0 0 4px}
+body[data-workspace=hybrid] .preview-loop-strip button{min-height:26px;flex:1;font-size:10px;background:#1c282f;border:1px solid #485a66;border-radius:2px;padding:3px}
+body[data-workspace=hybrid] .preview-loop-strip button.active{background:#17664d;border-color:#76c4a5;color:#fff}
+body[data-workspace=hybrid] .deck-body>div:first-child{grid-row:6}
+body[data-workspace=hybrid] .transport{grid-row:7}
+body[data-workspace=hybrid] .deck-foot{grid-row:8}
+body[data-workspace=hybrid] .preview-deck-tools{grid-row:9}
+body[data-workspace=hybrid] .tempo-control{grid-row:2/9}
+body[data-workspace=hybrid] .deck-disclosure{min-width:58px;font-size:10px;padding:3px 5px;white-space:nowrap}
+body[data-workspace=hybrid] .deck-foot .muted{display:inline-block;font-size:8px;color:#aabac6}
+body[data-workspace=hybrid] .scratch-status{display:block;font-size:9px;color:#aabac6;flex-basis:100%;text-align:left;padding-top:2px}
+body[data-workspace=hybrid] .deck-foot{row-gap:3px}
+/* More panels contains the existing controls, with their existing handlers. */
+.preview-more{position:relative;display:block;z-index:20;flex-shrink:0}
+body[data-workspace=hybrid] .preview-more{display:block}
+.preview-more summary{cursor:pointer;list-style:none;min-height:26px;padding:5px 8px;background:#26333c;border:1px solid #4c5e6a;border-radius:2px;font-size:10px;white-space:nowrap}
+.preview-more summary::after{content:' ▾'}.preview-more summary::-webkit-details-marker{display:none}
+.preview-more>div{position:absolute;top:calc(100% + 6px);left:0;min-width:170px;padding:5px;background:#202d36;border:1px solid #667986;box-shadow:0 5px 12px #0008;display:grid;gap:4px}
+.preview-more button[data-panel],.preview-more #library-tools{display:block;min-height:29px;text-align:left;padding:5px 8px;font-size:11px;background:#18232b}
+body[data-workspace=hybrid] .preview-more summary:focus-visible{outline:2px solid #8ed8ef;outline-offset:2px}
+body[data-workspace=hybrid] .toolbar{overflow:visible}
+body[data-workspace=hybrid] .library-tools #import{min-height:27px;font-size:10px;white-space:nowrap;background:#264756;border-color:#54869d}
+body[data-workspace=hybrid] .library-tools{gap:4px}
+body[data-workspace=hybrid] .library-tools #search{min-width:100px}
+body[data-workspace=hybrid][data-density=compact][data-wave-size=medium]{--preview-pair-height:128px}
+body[data-workspace=hybrid][data-density=compact][data-wave-size=small]{--preview-pair-height:96px}
+body[data-workspace=hybrid][data-density=compact][data-wave-size=large]{--preview-pair-height:192px}
+body[data-workspace=hybrid] .scratch-status{margin-inline-start:6px}

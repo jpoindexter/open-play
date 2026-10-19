@@ -6,7 +6,7 @@ const $=selector=>document.querySelector(selector);
 const choices=[...document.querySelectorAll('[data-workspace-choice]')];
 const letters=['A','B','C','D'];
 const layout=$('#layout');
-const display={orientation:'vertical',density:'expanded',size:'medium',library:false,crates:true,panels:new Map()};
+const display={orientation:'vertical',density:'expanded',size:'medium',library:false,crates:true,panels:new Map(),tools:new Map()};
 layout.hidden=true;
 function vertical(){return document.body.dataset.workspace==='hybrid'&&display.orientation==='vertical';}
 function applyDisplay(){
@@ -38,9 +38,10 @@ function updatePanels(deck,index){
     button.onclick=()=>{const next=panel.hidden;if(display.library){display.library=false;document.body.dataset.libraryFocus='false';$('#preview-library-focus').setAttribute('aria-pressed','false');}display.panels.set(index,next);decorate();};
     deck.querySelector('.deck-head').append(button);
   }
-  button.textContent=open?'▾':'▸';button.setAttribute('aria-expanded',String(open));
-  button.setAttribute('aria-label',`Cue and loop controls for deck ${index+1}`);
-  button.title=open?'Collapse cues & loops':'Expand cues & loops';
+  const mode=panel.querySelector('.deck-tabs .active')?.textContent||'Cues';
+  button.textContent=`${open?'▾':'▸'} ${mode==='Cues'?'Pads':mode}`;button.setAttribute('aria-expanded',String(open));
+  button.setAttribute('aria-label',`Deck ${index+1} pads and performance modes`);
+  button.title=open?'Collapse performance pads':'Open cues, loops and performance modes';
 }
 
 function decorate(){
@@ -75,6 +76,13 @@ function decorate(){
 }
 function refineDeck(deck,index){
   if(document.body.dataset.workspace!=='hybrid')return;
+  let loops=deck.querySelector('.preview-loop-strip');
+  if(!loops){
+    loops=document.createElement('div');loops.className='preview-loop-strip';loops.setAttribute('role','group');loops.setAttribute('aria-label',`Deck ${index+1} loops and beat jumps`);
+    for(const action of ['loopHalf','jumpBack']){const line=deck.querySelector(`[data-action="${action}"]`)?.closest('.loop-line');if(line)loops.append(line);}
+    deck.append(loops);
+  }
+  const load=deck.querySelector('[data-action="load"]');if(load)load.setAttribute('aria-label',`Load selected track into deck ${index+1}`);
   const key=deck.querySelector('.deck-key');
   let row=deck.querySelector('.preview-key-row');
   if(!row){row=document.createElement('div');row.className='preview-key-row';const caption=document.createElement('span');caption.textContent='Key';caption.className='preview-key-caption';row.append(caption);deck.append(row);}
@@ -92,10 +100,13 @@ function refineDeck(deck,index){
   if(!tools){
     tools=document.createElement('details');tools.className='preview-deck-tools';
     const summary=document.createElement('summary');summary.textContent='Deck tools';tools.append(summary);deck.append(tools);
+    tools.open=display.tools.get(index)||false;
+    tools.addEventListener('toggle',()=>display.tools.set(index,tools.open));
     const contents=document.createElement('div');tools.append(contents);
     for(const node of [deck.querySelector('.track-gain-control'),...['reverse','repeat','censor','double'].map(action=>deck.querySelector(`[data-action="${action}"]`))])if(node)contents.append(node);
   }
   const beat=deck.querySelector('.beat-position');if(beat&&beat.parentNode!==deck.querySelector('.deck-foot'))deck.querySelector('.deck-foot').append(beat);
+  const scratch=deck.querySelector('.scratch-status');if(scratch&&scratch.parentNode!==deck.querySelector('.deck-foot'))deck.querySelector('.deck-foot').append(scratch);
   const title=deck.querySelector('.deck-title strong');if(title)title.title=title.textContent;
 }
 function refineMixer(){
@@ -132,7 +143,19 @@ $('#preview-density').onchange=event=>{display.density=event.target.value;displa
 $('#preview-wave-size').onchange=event=>{display.size=event.target.value;applyDisplay();};
 $('#preview-library-focus').onclick=()=>{display.library=!display.library;applyDisplay();};
 $('#preview-crates').onclick=()=>{display.crates=!display.crates;applyDisplay();};
-$('#preview-reset').onclick=()=>{Object.assign(display,{orientation:'vertical',density:'expanded',size:'medium',library:false,crates:true});display.panels.clear();applyDisplay();};
+$('#preview-reset').onclick=()=>{Object.assign(display,{orientation:'vertical',density:'expanded',size:'medium',library:false,crates:true});display.panels.clear();display.tools.clear();document.querySelectorAll('.preview-deck-tools').forEach(tools=>tools.open=false);applyDisplay();};
+
+// Restore secondary panels without replacing their original controls/handlers.
+const more=document.createElement('details');more.className='preview-more';
+const moreSummary=document.createElement('summary');moreSummary.textContent='More panels';more.append(moreSummary);
+const moreContents=document.createElement('div');moreContents.setAttribute('role','group');moreContents.setAttribute('aria-label','Additional panels');more.append(moreContents);
+for(const name of ['sampler','scratch','flip','video','coverage']){const button=document.querySelector(`[data-panel="${name}"]`);if(button)moreContents.append(button);}
+const libraryTools=$('#library-tools');if(libraryTools)moreContents.append(libraryTools);
+document.querySelector('.toolbar-separator').before(more);
+more.addEventListener('keydown',event=>{if(event.key==='Escape'){event.preventDefault();more.open=false;moreSummary.focus();}});
+document.addEventListener('click',event=>{if(more.open&&(!more.contains(event.target)||event.target.closest('button')))more.open=false;});
+// Disk import must survive hiding the crates sidebar.
+const importButton=$('#import');importButton.textContent='＋ Import';importButton.setAttribute('aria-label','Import audio from disk');$('#preview-crates').after(importButton);
 choose('hybrid');
 
 // Read-only visual projection of our existing renderer. No second analysis or
