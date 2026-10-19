@@ -92,9 +92,11 @@ export function createSmartSync({engine, state, externalLeader=()=>null}) {
       }});
       token=engine.startTokens?.get(deck.index);
       const result=await pending;
-      if (!valid()) throw cancelled();
+      // The source was validated at scheduling. Its later Pause/Sync Off
+      // must not misreport a still-owned, committed replacement as unsynced.
+      if (!owned()) throw cancelled();
       deck.sync=true;deck.syncState=barLock?'beat':'tempo';deck.syncRole ||= 'secondary';
-      if(!barLock)reconcile();
+      reconcile();
       return result;
     }finally{if(alignmentTimelines.get(deck)===timeline)alignmentTimelines.delete(deck);}
   }
