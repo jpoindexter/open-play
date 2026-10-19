@@ -112,3 +112,14 @@ body:not(.day) tbody tr.selected {background:var(--dj-component-library-selectio
   .deck.focused,.pad.set {outline:1px solid Highlight;}
   .platter {border-color:CanvasText;}
 }
+
+/* Horizontal detail uses the same source-time/RGB data as the vertical lanes. */
+.layout-Horizontal .detail-horizontal {grid-column:1 / -1;grid-row:1;height:144px;}
+.layout-Horizontal .wave-wrap {height:42px;}
+.layout-Vertical:not(.four-decks) .platter {width:var(--platter-size);height:var(--platter-size);}
+@media (max-width:1150px) {
+  .platter strong {font-size:23px;}
+  .platter time {font-size:17px;}
+  .platter #remain-0,.platter #remain-1 {font-size:12px;}
+  .platter::after {height:14px;}
+}

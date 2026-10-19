@@ -495,16 +495,13 @@ function renderDecks() {
         )}<button data-action="censor" data-deck="${d.index}" aria-pressed="${!!d.censor}" class="${d.censor ? "active" : ""}" ${d.mode === "ABS" || !t || !d.playing ? "disabled" : ""} title="Hold for reverse; release resumes the forward timeline">Censor</button><button data-action="keyDown" data-deck="${d.index}" title="Shift key down one semitone; prototype limit±24">Key −</button><button data-action="keyUp" data-deck="${d.index}" title="Shift key up one semitone; prototype limit±24">Key +</button><button data-action="keySync" data-deck="${d.index}" class="${d.keySync ? "active" : ""}">Key Sync</button><button data-action="keyReset" data-deck="${d.index}">Reset key</button><button data-action="range" data-deck="${d.index}">±${d.pitchRange}</button><button data-action="double" data-deck="${d.index}">Double</button><span class="spacer"></span><small class="muted">${d.playQueued ? "PREPARING PLAYBACK" : d.processing ? "PROCESSING PITCH…" : d.mode === "INT" ? "LOCAL AUDIO" : "DEVICE SIMULATION"}</small></div><div class="wave-wrap" data-seek="${d.index}" tabindex="0" role="slider" aria-label="Deck ${d.index + 1} play position" aria-valuemin="0" aria-valuemax="${t?.duration || 0}" aria-valuenow="${engine.position(d)}" aria-valuetext="${time(engine.position(d))} of ${time(t?.duration || 0)}" aria-disabled="${!t}" title="Left/Right: 1 second. Home/End: start/end. Shift-click or Shift+Home/End overrides needle protection."><canvas id="wave-${d.index}" width="900" height="100"></canvas><span class="playhead" id="head-${d.index}"></span><span class="wave-label" data-wave-scope="${d.index}" aria-live="polite">${t?.analyzed ? "Decoded waveform" : "Generated overview fixture"} · ${t?.bpm || "—"} BPM</span></div></article>`;
     })
     .join("");
-  if (state.layout === "Vertical")
+  if (["Vertical","Horizontal"].includes(state.layout))
     $("#decks").insertAdjacentHTML(
       "beforeend",
-      `<section class="detail-waves" aria-label="Scrolling waveforms"><div class="detail-wave-tools"><button data-wave-zoom="out" aria-label="Zoom waveforms out">−</button><output id="detail-wave-scale">${detailWaveSpan}s</output><button data-wave-zoom="in" aria-label="Zoom waveforms in">+</button></div><canvas id="detail-wave" width="320" height="330"></canvas><span data-detail-wave-label>SOURCE · ±${detailWaveSpan/2}s · PRE-FX</span></section>`,
+      `<section class="detail-waves ${state.layout==='Horizontal'?'detail-horizontal':''}" aria-label="Scrolling waveforms"><div class="detail-wave-tools"><button data-wave-zoom="out" aria-label="Zoom waveforms out">−</button><output id="detail-wave-scale">${detailWaveSpan}s</output><button data-wave-zoom="in" aria-label="Zoom waveforms in">+</button></div><canvas id="detail-wave" width="320" height="330"></canvas><span data-detail-wave-label>SOURCE · ±${detailWaveSpan/2}s · PRE-FX</span></section>`,
     );
   document.querySelectorAll('[data-wave-zoom]').forEach(button=>button.onclick=()=>{
-    detailWaveSpan=Math.min(16,Math.max(1,detailWaveSpan*(button.dataset.waveZoom==='in'?.5:2)));
-    $('#detail-wave-scale').textContent=detailWaveSpan+'s';
-    $('[data-detail-wave-label]').textContent=`SOURCE · ±${detailWaveSpan/2}s · PRE-FX`;
-    drawDetailWave();
+    changeDetailWaveZoom(button.dataset.waveZoom==='in'?.5:2);
   });
   drawWaves();
   renderMixer();
@@ -520,6 +517,19 @@ function waveformView(d) {
     exitActive:stemState?.track === d.track && (stemState.modes.some(Boolean) || stemState.effects.some(Boolean)),
   });
 }
+function changeDetailWaveZoom(factor){
+  if(!$('#detail-wave'))return;
+  detailWaveSpan=Math.min(16,Math.max(1,detailWaveSpan*factor));
+  $('#detail-wave-scale').textContent=detailWaveSpan+'s';
+  $('[data-detail-wave-label]').textContent=`SOURCE · ±${detailWaveSpan/2}s · PRE-FX`;
+  drawDetailWave();
+}
+document.addEventListener('keydown',event=>{
+  if(event.ctrlKey||event.metaKey||event.altKey||event.target.closest('input,select,textarea,[contenteditable="true"]'))return;
+  if(['+','=','-','_'].includes(event.key)&&$('#detail-wave')){
+    event.preventDefault();changeDetailWaveZoom(['+','='].includes(event.key)?.5:2);
+  }
+});
 function prepareWaveCanvas(canvas){
   const rect=canvas.getBoundingClientRect(),scale=window.devicePixelRatio||1;
   const width=Math.max(1,rect.width),height=Math.max(1,rect.height);
@@ -538,6 +548,10 @@ function drawWaves() {
     const view = waveformView(d);
     overviewWaveViews[d.index] = view;
     if (!d.track) continue;
+    for(let minute=1;minute*60<d.track.duration;minute++){
+      ctx.fillStyle=minute%5===0?'#88888860':'#88888830';
+      ctx.fillRect(minute*60/d.track.duration*w,0,minute%5===0?2:1,h);
+    }
     const scope = $(`[data-wave-scope="${d.index}"]`);
     const buf = engine.buffers.get(d.track.id);
     const label=!buf&&!d.track.demo?'Loading decoded source waveform…':view.label;
@@ -559,13 +573,6 @@ function drawWaves() {
       ctx.fillStyle=x%15<6?colors[d.index]:"#408498";
       ctx.fillRect(x,h/2-amp*h/2,2,amp*h);
     }
-    const grid = createBeatgrid(d.track);
-    let previousTick=-8;
-    for (const line of grid?.lines(0,d.track.duration) || []) {
-      const x = line.time / d.track.duration * w;
-      if(!line.downbeat||x-previousTick<8)continue;
-      ctx.fillStyle=performanceColors.textMuted;ctx.fillRect(x,h-6,1,6);previousTick=x;
-    }
     for(const marker of d.track.gridWarpMarkers || []) {ctx.fillStyle="#ef795d";ctx.fillRect(marker.time/d.track.duration*w,0,2,h);}
     for (let i = 0; i < d.track.cues.length; i++) {
       const q = d.track.cues[i];
@@ -586,47 +593,41 @@ function drawWaves() {
   }
 }
 function drawDetailWave() {
-  const canvas = $("#detail-wave");
-  if (!canvas) return;
+  const canvas = $("#detail-wave");if(!canvas)return;
   const {context:c,width:w,height:h}=prepareWaveCanvas(canvas);
-  const n = state.deckCount,
-    col = w / n;
-  c.clearRect(0, 0, w, h);
-  for (const d of state.decks.slice(0, n)) {
-    const x0 = d.index * col,
-      mid = x0 + col / 2,
-      p = engine.position(d),
-      t = d.track,
-      buf = t && engine.buffers.get(t.id);
-    c.fillStyle = performanceColors.waveBackground;
-    c.fillRect(x0, 0, col - 1, h);
-    if (!t) continue;
-    const grid = createBeatgrid(t);
-    const view = waveformView(d);
-    if (view.kind === 'stems') {
-      paintStemDetail(c, view.profile, {x:x0,width:col,height:h,position:p,span:detailWaveSpan,color:colors[d.index]});
-    } else if (view.kind !== 'pending' && buf) {
-      paintSourceDetail(c,buf,{x:x0,width:col,height:h,position:p,span:detailWaveSpan});
+  const n=state.deckCount,horizontal=state.layout==='Horizontal';
+  c.clearRect(0,0,w,h);
+  for(const d of state.decks.slice(0,n)){
+    const x0=horizontal?0:d.index*w/n,y0=horizontal?d.index*h/n:0;
+    const width=horizontal?w:w/n,height=horizontal?h/n:h;
+    const p=engine.position(d),t=d.track,buf=t&&engine.buffers.get(t.id);
+    const sourceSpan=detailWaveSpan*Math.max(.25,Math.min(4,d.rate||1));
+    c.fillStyle=performanceColors.waveBackground;c.fillRect(x0,y0,width-1,height-1);
+    if(!t)continue;
+    const grid=createBeatgrid(t),view=waveformView(d);
+    if(view.kind==='stems'&&!horizontal){
+      paintStemDetail(c,view.profile,{x:x0,width,height,position:p,span:sourceSpan,color:colors[d.index]});
+    }else if(view.kind!=='pending'&&buf){
+      paintSourceDetail(c,buf,{x:x0,y:y0,width,height,position:p,span:sourceSpan,vertical:!horizontal});
     }
-    for (const line of grid?.lines(p-detailWaveSpan/2,p+detailWaveSpan/2) || []) {
-      const y=((line.time-p)/detailWaveSpan+.5)*h;
-      c.fillStyle=line.downbeat?"#ffffff70":"#ffffff20";c.fillRect(x0,y,col,1);
-      if(line.downbeat){c.fillStyle="#aeb5ba";c.font="9px Arial";c.fillText(String(line.bar),x0+3,y-3);}
+    const along=time=>((time-p)/sourceSpan+.5)*(horizontal?width:height);
+    const line=(time,color,thickness=1)=>{
+      const at=along(time);if(at<0||at>(horizontal?width:height))return;
+      c.fillStyle=color;
+      if(horizontal)c.fillRect(x0+at,y0,thickness,height);else c.fillRect(x0,y0+at,width,thickness);
+    };
+    for(const beat of grid?.lines(p-sourceSpan/2,p+sourceSpan/2)||[]){
+      line(beat.time,beat.downbeat?'#ffffff60':'#ffffff18');
+      if(beat.downbeat){c.fillStyle='#aeb5ba';c.font='9px Arial';c.fillText(String(beat.bar),horizontal?x0+along(beat.time)+3:x0+3,horizontal?y0+11:y0+along(beat.time)-3);}
     }
-    for(const marker of t.gridWarpMarkers || []) {const y=((marker.time-p)/detailWaveSpan+.5)*h;if(y>=0&&y<h){c.fillStyle="#ef795d";c.fillRect(x0,y,col,2);}}
-    for (const [i, q] of t.cues.entries()) {
-      if (!q) continue;
-      const y = ((q.position - p) / detailWaveSpan + 0.5) * h;
-      if (y >= 0 && y < h) {
-        c.fillStyle = colors[i % 8];
-        c.fillRect(x0, y, col, 2);
-        c.fillText(String(i + 1), x0 + col - 12, y - 3);
-      }
-    }
+    for(const marker of t.gridWarpMarkers||[])line(marker.time,'#ef795d',2);
+    for(const [i,q]of t.cues.entries())if(q){line(q.position,colors[i%8],2);const at=along(q.position);if(at>=0&&at<=(horizontal?width:height)){c.fillStyle=colors[i%8];c.fillText(String(i+1),horizontal?x0+at+3:x0+width-12,horizontal?y0+23:y0+at-3);}}
+    c.fillStyle='#a9a9a9';c.font='9px Arial';c.fillText(String(d.index+1),x0+4,y0+22);
   }
-  c.fillStyle = "#fff";
-  c.fillRect(0, h / 2, w, 1);
+  c.fillStyle=performanceColors.needle;
+  if(horizontal)c.fillRect(w/2,0,1,h);else c.fillRect(0,h/2,w,1);
 }
+
 function renderMixer() {
   $("#mixer").innerHTML =
     state.decks

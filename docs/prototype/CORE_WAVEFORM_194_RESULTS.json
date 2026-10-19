@@ -1,0 +1,32 @@
+{
+  "checkpoint": 194,
+  "date": "2026-10-19",
+  "userCorrection": "Rejected190/0.1.24 waveform appearance: all salmon, unlike Serato/Traktor. Latest supplied screenshot and official docs govern waveform work.",
+  "references": [
+    "https://support.serato.com/hc/en-us/articles/360000067635-Main-Screen-Overview",
+    "https://support.serato.com/hc/en-us/articles/224969307-Main-Waveform-Display"
+  ],
+  "suppliedImageSHA256": "68676a2fa2585ff32d260a7c5daf12b0a8c5d48971db1aee0705827bbaee3837",
+  "implemented": [
+    "Remove nested fixed salmon/green/blue filled shapes",
+    "Per-time-slice additive RGB from actual bass/mid/treble energy",
+    "Second-order display-only Butterworth band analysis250/2500Hz; fixed mid2/treble3 perceptual display compensation and1.3ratio exponent",
+    "Signed min/max peak plus RMS body with thin Retina strips;128frame cached blocks",
+    "Shared horizontal two-lane detail panel as well as existing vertical lanes",
+    "Source span equals shared playback span times nominal pitch rate, including grid/cue/warp overlays",
+    "Minute/five-minute overview markers; +/-zoom keys"
+  ],
+  "executed": [
+    "Existing missed-transient/stereo/source-integrity profile check passes",
+    "Actual renderer changes red\u2192blue inside one known changing-frequency source and green for a midrange source",
+    "Source preview normal library Load on two real MP3s; waveform/color differences rendered and inspected in Horizontal and Vertical"
+  ],
+  "pending": [
+    "Native25 packaging/runtime verification",
+    "Jason visual acceptance; no exact Serato proprietary algorithm equivalence",
+    "Detailed waveform drag/scrub is still open; this change implements color/shape/time scaling/zoom",
+    "Practical audible manual+Sync mix and hardware/headphone acceptance"
+  ],
+  "fullParityVerified": false,
+  "coreGoalComplete": false
+}

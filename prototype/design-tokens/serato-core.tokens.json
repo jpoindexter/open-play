@@ -27,7 +27,8 @@
       },
       "observed": "Flat palette, selected/disabled/empty states and loaded Vertical anatomy.",
       "inferred": "Semantic roles, exact font/weights, normalized spacing, hover/focus, responsive behavior.",
-      "missing": "Exact source token names, unseen states and other source themes."
+      "missing": "Exact source token names, unseen states and other source themes.",
+      "waveformReference": "https://support.serato.com/hc/en-us/articles/224969307-Main-Waveform-Display"
     }
   },
   "primitive": {
@@ -750,30 +751,33 @@
     },
     "waveLow": {
       "$type": "color",
-      "$value": "{primitive.orange}",
+      "$value": "#ff0000",
       "$extensions": {
         "org.openplay": {
-          "confidence": "inferred"
+          "confidence": "documented"
         }
-      }
+      },
+      "$description": "Documented RGB frequency encoding; additive display-only spectral basis."
     },
     "waveMid": {
       "$type": "color",
-      "$value": "{primitive.mint}",
+      "$value": "#00ff00",
       "$extensions": {
         "org.openplay": {
-          "confidence": "inferred"
+          "confidence": "documented"
         }
-      }
+      },
+      "$description": "Documented RGB frequency encoding; additive display-only spectral basis."
     },
     "waveHigh": {
       "$type": "color",
-      "$value": "{primitive.cyan}",
+      "$value": "#0000ff",
       "$extensions": {
         "org.openplay": {
-          "confidence": "inferred"
+          "confidence": "documented"
         }
-      }
+      },
+      "$description": "Documented RGB frequency encoding; additive display-only spectral basis."
     },
     "wavePeak": {
       "$type": "color",

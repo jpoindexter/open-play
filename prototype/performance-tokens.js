@@ -16,9 +16,9 @@ export const performanceColors = Object.freeze({
   "platter": "#ffffff",
   "platterText": "#000000",
   "needle": "#da2428",
-  "waveLow": "#ec684a",
-  "waveMid": "#7bd1a2",
-  "waveHigh": "#52b9e0",
+  "waveLow": "#ff0000",
+  "waveMid": "#00ff00",
+  "waveHigh": "#0000ff",
   "wavePeak": "#91b8cf",
   "waveBackground": "#000000"
 });

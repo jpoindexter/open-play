@@ -1,3 +1,11 @@
+# Core waveform194 — salmon appearance rejected; RGB source implementation
+
+19October2026: Jason rejected0.1.24's waveform visuals and supplied official Serato spectrum docs/image. Replaced nested salmon areas with actual per-slice RGB bass/mid/treble color, signed peak/RMS transient strips and128frame async profiles. Horizontal gains stacked detail lanes; both orientations use nominal-pitch-scaled time/grid/cue geometry and1–16s+/−zoom. Actual-render bass/mid/treble regression and two-real-track source-preview inspection passed. Native25 is being packaged; user visual acceptance remains open. Read docs/prototype/CORE_WAVEFORM_194_REVIEW.md and CORE_WAVEFORM_194_RESULTS.json. No audio DSP/mapping/profile rewrite or extra feature work.
+
+193mix exercise was interrupted for this correction; no accepted manual/Sync transition is claimed. Both24decks/recorder are stopped and the partial recording is retained privately. Hardware remains unavailable per Jason. Core musical/physical/headphone acceptance stays open. Original prompt suffix and historical evidence retained.
+
+---
+
 # Core checkpoint192 — actual software jog audio speed and release
 
 19October2026: one normal native0.1.24 master capture of real trackA verifies neutral1.000× → forwardY1.040× → release → backwardT0.960× → neutral1.000× using independent original-source waveform matching.156windows retained, none unclassified; candidate/source-position slope results and limits in docs/prototype/CORE_JOG_192_RESULTS.json and CORE_JOG_192_REVIEW.md. Nominal pitch stays0. No app patch/new build/mapping change, hardware or advanced-feature test. Both real tracks are restored paused at20s, recorder stopped, master meter silent, EQ/filter0 retained. Earlier191 statement that keyboard jog rate magnitude is unverified is superseded only for this normal real-track native path; hardware/other modes/quality/manual musical acceptance remain open.
