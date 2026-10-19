@@ -225,18 +225,18 @@ body[data-workspace=rekordbox] .library-wave-preview button{min-height:22px;heig
 /* Screenshot203: four aligned rotary rows; no FILTER row in this view. */
 body[data-workspace=rekordbox][data-orientation] .channel-strip .knob-group:has(input[data-mix$=':filter']){display:none!important}
 /* The two-deck vertical reference has EQ beside trim/CUE/fader, mirrored. */
-body[data-workspace=rekordbox][data-orientation=vertical]:not(.four-decks) #mixer{padding:var(--grid-2);gap:var(--grid-3);min-height:var(--rb-two-mixer-height)}
-body[data-workspace=rekordbox][data-orientation=vertical]:not(.four-decks) .channel-strip{grid-template-columns:var(--grid-13) var(--grid-13);grid-template-rows:var(--grid-3) repeat(4,var(--rb-knob-row));gap:var(--grid-1);justify-content:center}
-body[data-workspace=rekordbox][data-orientation=vertical]:not(.four-decks) .channel-strip>strong{grid-column:1/-1}
-body[data-workspace=rekordbox][data-orientation=vertical]:not(.four-decks) .channel-strip .knob-group:has(input[data-mix$=':trim']){grid-column:1;grid-row:2}
-body[data-workspace=rekordbox][data-orientation=vertical]:not(.four-decks) .channel-strip .knob-group:has(input[data-mix$=':high']){grid-column:2;grid-row:2}
-body[data-workspace=rekordbox][data-orientation=vertical]:not(.four-decks) .channel-strip .knob-group:has(input[data-mix$=':mid']){grid-column:2;grid-row:3}
-body[data-workspace=rekordbox][data-orientation=vertical]:not(.four-decks) .channel-strip .knob-group:has(input[data-mix$=':low']){grid-column:2;grid-row:4}
-body[data-workspace=rekordbox][data-orientation=vertical]:not(.four-decks) .channel-strip>button{grid-column:1;grid-row:3}
-body[data-workspace=rekordbox][data-orientation=vertical]:not(.four-decks) .channel-strip .fader-group{grid-column:1;grid-row:4/6}
-body[data-workspace=rekordbox][data-orientation=vertical]:not(.four-decks) .channel-strip:nth-child(2) .knob-group:has(input[data-mix$=':trim']){grid-column:2}
-body[data-workspace=rekordbox][data-orientation=vertical]:not(.four-decks) .channel-strip:nth-child(2) .knob-group:has(input[data-mix$=':high']),body[data-workspace=rekordbox][data-orientation=vertical]:not(.four-decks) .channel-strip:nth-child(2) .knob-group:has(input[data-mix$=':mid']),body[data-workspace=rekordbox][data-orientation=vertical]:not(.four-decks) .channel-strip:nth-child(2) .knob-group:has(input[data-mix$=':low']){grid-column:1}
-body[data-workspace=rekordbox][data-orientation=vertical]:not(.four-decks) .channel-strip:nth-child(2)>button,body[data-workspace=rekordbox][data-orientation=vertical]:not(.four-decks) .channel-strip:nth-child(2) .fader-group{grid-column:2}
+body[data-workspace=rekordbox][data-orientation]:not(.four-decks):is([data-orientation=vertical],[data-density=compact]) #mixer{padding:var(--grid-2);gap:var(--grid-3);min-height:var(--rb-two-mixer-height)}
+body[data-workspace=rekordbox][data-orientation]:not(.four-decks):is([data-orientation=vertical],[data-density=compact]) .channel-strip{grid-template-columns:var(--grid-13) var(--grid-13);grid-template-rows:var(--grid-3) repeat(4,var(--rb-knob-row));gap:var(--grid-1);justify-content:center}
+body[data-workspace=rekordbox][data-orientation]:not(.four-decks):is([data-orientation=vertical],[data-density=compact]) .channel-strip>strong{grid-column:1/-1}
+body[data-workspace=rekordbox][data-orientation]:not(.four-decks):is([data-orientation=vertical],[data-density=compact]) .channel-strip .knob-group:has(input[data-mix$=':trim']){grid-column:1;grid-row:2}
+body[data-workspace=rekordbox][data-orientation]:not(.four-decks):is([data-orientation=vertical],[data-density=compact]) .channel-strip .knob-group:has(input[data-mix$=':high']){grid-column:2;grid-row:2}
+body[data-workspace=rekordbox][data-orientation]:not(.four-decks):is([data-orientation=vertical],[data-density=compact]) .channel-strip .knob-group:has(input[data-mix$=':mid']){grid-column:2;grid-row:3}
+body[data-workspace=rekordbox][data-orientation]:not(.four-decks):is([data-orientation=vertical],[data-density=compact]) .channel-strip .knob-group:has(input[data-mix$=':low']){grid-column:2;grid-row:4}
+body[data-workspace=rekordbox][data-orientation]:not(.four-decks):is([data-orientation=vertical],[data-density=compact]) .channel-strip>button{grid-column:1;grid-row:3}
+body[data-workspace=rekordbox][data-orientation]:not(.four-decks):is([data-orientation=vertical],[data-density=compact]) .channel-strip .fader-group{grid-column:1;grid-row:4/6}
+body[data-workspace=rekordbox][data-orientation]:not(.four-decks):is([data-orientation=vertical],[data-density=compact]) .channel-strip:nth-child(2) .knob-group:has(input[data-mix$=':trim']){grid-column:2}
+body[data-workspace=rekordbox][data-orientation]:not(.four-decks):is([data-orientation=vertical],[data-density=compact]) .channel-strip:nth-child(2) .knob-group:has(input[data-mix$=':high']),body[data-workspace=rekordbox][data-orientation]:not(.four-decks):is([data-orientation=vertical],[data-density=compact]) .channel-strip:nth-child(2) .knob-group:has(input[data-mix$=':mid']),body[data-workspace=rekordbox][data-orientation]:not(.four-decks):is([data-orientation=vertical],[data-density=compact]) .channel-strip:nth-child(2) .knob-group:has(input[data-mix$=':low']){grid-column:1}
+body[data-workspace=rekordbox][data-orientation]:not(.four-decks):is([data-orientation=vertical],[data-density=compact]) .channel-strip:nth-child(2)>button,body[data-workspace=rekordbox][data-orientation]:not(.four-decks):is([data-orientation=vertical],[data-density=compact]) .channel-strip:nth-child(2) .fader-group{grid-column:2}
 /* Native-style monitor knobs beside the centered crossfader. */
 body[data-workspace=rekordbox] .rb-monitor-controls svg{width:20px;height:20px;fill:none;stroke:#ddd;stroke-width:2;stroke-linejoin:round}
 body[data-workspace=rekordbox] .rb-monitor-knob{position:relative;display:grid;grid-template-columns:var(--grid-8) auto;align-items:center;gap:var(--grid-1);height:var(--grid-8);padding:var(--grid-0);min-width:var(--grid-16);color:#bbb;font:10px/12px Arial,sans-serif;user-select:none}
@@ -253,3 +253,50 @@ body[data-workspace=rekordbox].four-decks[data-orientation=horizontal] .channel-
  align-content:center;
 }
 body[data-workspace=rekordbox][data-orientation] .channel-strip .fader-group:focus-within{outline:2px solid #70b5ff;outline-offset:2px}
+/* HTML206 Compact: content-sized decks, independent of the center mixer.
+   Reference: native rekordbox4V short consoles; Traktor Small transport rail.
+   Full layout and every original bound control remain available. */
+body[data-workspace=rekordbox][data-density=compact]{
+ --rb-four-height:calc(var(--grid-16)*3 + var(--grid-8));
+ --rb-two-mixer-height:calc(var(--grid-16)*2 + var(--grid-9));
+ --rb-compact-wave-height:calc(var(--grid-16)*2 + var(--grid-12));
+}
+body[data-workspace=rekordbox].four-decks[data-density=compact]{--rb-four-height:calc(var(--grid-16)*3 + var(--grid-8))}
+body[data-workspace=rekordbox][data-density=compact][data-wave-size=small]{--rb-pair-height:calc(var(--grid-16) - var(--grid-2));--rb-compact-wave-height:calc(var(--grid-16)*2 + var(--grid-2))}
+body[data-workspace=rekordbox][data-density=compact][data-wave-size=large]{--rb-pair-height:calc(var(--grid-16) + var(--grid-9));--rb-compact-wave-height:calc(var(--grid-16)*3 + var(--grid-6))}
+body[data-workspace=rekordbox].four-decks[data-density=compact][data-orientation=vertical][data-wave-size=large]{--rb-four-height:calc(var(--grid-16)*4 - var(--grid-3))}
+body[data-workspace=rekordbox][data-density=compact][data-wave-size=medium]{--rb-pair-height:calc(var(--grid-16) + var(--grid-2))}
+body[data-workspace=rekordbox][data-orientation][data-density=compact] .deck{
+ grid-template-columns:minmax(0,1fr) calc(var(--grid-10)*2) calc(var(--grid-16) + var(--grid-5)) var(--grid-8);
+ grid-template-rows:var(--grid-11) var(--grid-6) minmax(calc(var(--grid-11)*2),1fr) var(--grid-7) var(--grid-6);
+}
+body[data-workspace=rekordbox][data-orientation][data-density=compact] .deck:nth-of-type(even){grid-template-columns:calc(var(--grid-10)*2) calc(var(--grid-16) + var(--grid-5)) var(--grid-8) minmax(0,1fr)}
+body[data-workspace=rekordbox][data-orientation][data-density=compact] .deck-head{height:var(--grid-11);padding-block:var(--grid-0)}
+body[data-workspace=rekordbox][data-orientation][data-density=compact] .wave-wrap{height:var(--grid-6)}
+body[data-workspace=rekordbox][data-orientation][data-density=compact] .preview-loop-strip{margin:var(--grid-0);padding:var(--grid-0) var(--grid-1)}
+body[data-workspace=rekordbox][data-orientation][data-density=compact] .transport{
+ display:grid;grid-template-columns:repeat(2,var(--grid-9));grid-template-rows:var(--grid-6) var(--grid-9);
+ gap:var(--grid-1);padding:var(--grid-0);justify-content:center;align-content:start;
+}
+body[data-workspace=rekordbox][data-orientation][data-density=compact] .transport select{grid-column:1/-1;grid-row:1;width:100%}
+body[data-workspace=rekordbox][data-orientation][data-density=compact] .transport [data-action=cue]{grid-column:1;grid-row:2}
+body[data-workspace=rekordbox][data-orientation][data-density=compact] .transport [data-action=play]{grid-column:2;grid-row:2}
+body[data-workspace=rekordbox][data-orientation][data-density=compact] .rb-deck-options{padding:var(--grid-0);gap:var(--grid-1)}
+/* A three-row EQ column beside trim/CUE/fader is sufficient in Compact. */
+body[data-workspace=rekordbox][data-orientation][data-density=compact]:not(.four-decks) #mixer{min-height:var(--rb-two-mixer-height)}
+body[data-workspace=rekordbox][data-orientation][data-density=compact]:not(.four-decks) .channel-strip{
+ grid-template-rows:var(--grid-3) repeat(3,var(--rb-knob-row)) var(--grid-3);align-content:center;
+}
+/*4V shares its middle column across both shorter deck rows; the mixer no
+  longer forces each deck to be as tall as all four EQ rows plus a fader. */
+body[data-workspace=rekordbox].four-decks[data-orientation=vertical][data-density=compact][data-rb-mixer=true][data-library-focus=false] main{
+ grid-template-rows:var(--rb-compact-wave-height) calc(var(--rb-four-height) - var(--rb-compact-wave-height) - var(--grid-1)) var(--rb-four-height) var(--grid-12) minmax(calc(var(--grid-16)*2 + var(--grid-13)),1fr);
+}
+body[data-workspace=rekordbox].four-decks[data-orientation=vertical][data-density=compact][data-rb-mixer=true][data-library-focus=false] .deck:nth-of-type(-n+2){grid-row:1/3}
+body[data-workspace=rekordbox].four-decks[data-orientation=vertical][data-density=compact][data-rb-mixer=true][data-library-focus=false] .deck:nth-of-type(n+3){grid-row:3}
+body[data-workspace=rekordbox].four-decks[data-orientation=vertical][data-density=compact][data-rb-mixer=true][data-library-focus=false] .detail-waves{height:var(--rb-compact-wave-height)!important}
+body[data-workspace=rekordbox].four-decks[data-orientation=vertical][data-density=compact][data-rb-mixer=true][data-library-focus=false] #mixer{grid-row:2/4}
+body[data-workspace=rekordbox].four-decks[data-orientation=vertical][data-density=compact][data-rb-mixer=true][data-library-focus=false] .rb-mixer-band{grid-row:4}
+body[data-workspace=rekordbox].four-decks[data-orientation=vertical][data-density=compact][data-rb-mixer=true][data-library-focus=false] .library{grid-row:5}
+
+body[data-workspace=rekordbox][data-orientation=horizontal][data-density=compact]:not(.four-decks)[data-rb-mixer=true] main{grid-template-columns:minmax(0,1fr) calc(var(--grid-16)*4 + var(--grid-6)) minmax(0,1fr)}
