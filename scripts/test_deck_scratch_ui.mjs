@@ -141,4 +141,33 @@ await test('Throwing/rejecting observers cannot veto motion, pending cancellatio
     const pending=fixture({onEvent});pending.down();await pending.controls.dispose();await pending.ready();assert.equal(pending.updates.length,0);
   }await new Promise(resolve=>setImmediate(resolve));assert.equal(failures.length,0);}finally{process.removeListener('unhandledRejection',listener);}
 });
-console.log(`${passed}/${passed} controlled platter UI checks passed; actual browser/AudioEngine/PCM acceptance remains separate.`);
+function waveform(f,index,axis='x',span=4){
+  const element=f.elements[index];element.dataset.waveformScrub=axis;element.dataset.waveformSpan=String(span);
+  element.closest=query=>query==='[data-waveform-scrub][data-deck-scratch]'?element:null;
+  return element;
+}
+await test('Waveform drag follows horizontal/vertical source-time geometry on its own deck and releases final position',async()=>{
+  for(const [index,axis]of [[0,'x'],[1,'y']]){
+    const f=fixture(),element=waveform(f,index,axis);f.state.decks[index].rate=1.25;
+    f.down(index,0,{clientX:100,clientY:100});await f.ready();
+    f.time+=100;f.root.emit('pointermove',{target:element,pointerId:index+1,clientX:axis==='x'?60:100,clientY:axis==='y'?60:100});await flush();
+    near(f.updates.at(-1).position,20+index*10+1);near(f.updates.at(-1).velocity,10);assert.equal(f.updates.at(-1).deck,index);
+    f.time+=100;f.root.emit('pointerup',{target:element,pointerId:index+1,clientX:axis==='x'?140:100,clientY:axis==='y'?140:100});await flush();
+    near(f.updates.at(-1).position,20+index*10-1);assert.equal(f.calls.at(-1).kind,'end');assert.equal(f.calls.at(-1).cancel,false);
+    assert.equal(f.controls.diagnostics().active.length,0);assert.equal(element.captures.size,0);await f.controls.dispose();
+  }
+});
+await test('Shift waveform drag snapshots fine sensitivity, zoom and pitch; Escape cancels with Shift still held',async()=>{
+  const f=fixture(),element=waveform(f,0,'x',8);f.state.decks[0].rate=.5;
+  f.down(0,0,{clientX:100,clientY:100,shiftKey:true});await f.ready();
+  element.dataset.waveformSpan='1';f.state.decks[0].rate=2;
+  f.time+=100;f.move(0,{clientX:50,clientY:100,shiftKey:false});await flush();near(f.updates.at(-1).position,20.1);
+  f.key('Escape',{shiftKey:true});assert.equal(f.calls.at(-1).cancel,true);assert.equal(element.captures.size,0);assert.equal(f.controls.diagnostics().active.length,0);await f.controls.dispose();
+});
+await test('Waveform pending release emits no late movement; invalid geometry and other modifiers cannot start',async()=>{
+  const f=fixture(),element=waveform(f,0);f.down(0,0,{clientX:100,clientY:100});f.time+=50;f.move(0,{clientX:50});
+  f.root.emit('pointerup',{target:element,pointerId:1,clientX:50,clientY:100});await f.ready();assert.equal(f.updates.length,0);assert.equal(element.captures.size,0);
+  for(const extra of [{ctrlKey:true},{altKey:true},{metaKey:true},{isComposing:true}])assert.equal(f.down(0,0,extra).prevented,0);
+  element.dataset.waveformSpan='NaN';assert.equal(f.down().prevented,0);assert.equal(f.begins.length,1);await f.controls.dispose();
+});
+console.log(`${passed}/${passed} controlled platter/waveform UI checks passed; actual browser/AudioEngine/PCM acceptance remains separate.`);

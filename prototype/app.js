@@ -498,7 +498,7 @@ function renderDecks() {
   if (["Vertical","Horizontal"].includes(state.layout))
     $("#decks").insertAdjacentHTML(
       "beforeend",
-      `<section class="detail-waves ${state.layout==='Horizontal'?'detail-horizontal':''}" aria-label="Scrolling waveforms"><div class="detail-wave-tools"><button data-wave-zoom="out" aria-label="Zoom waveforms out">−</button><output id="detail-wave-scale">${detailWaveSpan}s</output><button data-wave-zoom="in" aria-label="Zoom waveforms in">+</button></div><canvas id="detail-wave" width="320" height="330"></canvas><span data-detail-wave-label>SOURCE · ±${detailWaveSpan/2}s · PRE-FX</span></section>`,
+      `<section class="detail-waves ${state.layout==='Horizontal'?'detail-horizontal':''}" aria-label="Scrolling waveforms"><div class="detail-wave-tools"><button data-wave-zoom="out" aria-label="Zoom waveforms out">−</button><output id="detail-wave-scale">${detailWaveSpan}s</output><button data-wave-zoom="in" aria-label="Zoom waveforms in">+</button></div><canvas id="detail-wave" width="320" height="330"></canvas><div class="waveform-scrub-lanes" style="grid-template-${state.layout==='Horizontal'?'rows':'columns'}:repeat(${state.deckCount},minmax(0,1fr))">${state.decks.slice(0,state.deckCount).map(d=>`<div class="waveform-scrub-lane" data-deck-scratch="${d.index}" data-waveform-scrub="${state.layout==='Horizontal'?'x':'y'}" data-waveform-span="${detailWaveSpan}" role="button" tabindex="0" aria-label="Scrub deck ${d.index+1} waveform" aria-describedby="waveform-scrub-help" aria-busy="false" title="Drag waveform to scrub. Shift-drag: fine adjustment. Escape: cancel."></div><output class="sr-only" data-waveform-scrub-status="${d.index}" role="status" aria-live="polite"></output>`).join('')}</div><p class="sr-only" id="waveform-scrub-help">Drag left or up to advance, right or down to rewind. Hold Shift when starting a drag for ten times finer movement. Focus a waveform and hold Left or Right to audition; release to restore prior play state. Escape cancels.</p><span data-detail-wave-label>SOURCE · ±${detailWaveSpan/2}s · PRE-FX</span></section>`,
     );
   document.querySelectorAll('[data-wave-zoom]').forEach(button=>button.onclick=()=>{
     changeDetailWaveZoom(button.dataset.waveZoom==='in'?.5:2);
@@ -521,6 +521,7 @@ function changeDetailWaveZoom(factor){
   if(!$('#detail-wave'))return;
   detailWaveSpan=Math.min(16,Math.max(1,detailWaveSpan*factor));
   $('#detail-wave-scale').textContent=detailWaveSpan+'s';
+  document.querySelectorAll('[data-waveform-span]').forEach(lane=>lane.dataset.waveformSpan=String(detailWaveSpan));
   $('[data-detail-wave-label]').textContent=`SOURCE · ±${detailWaveSpan/2}s · PRE-FX`;
   drawDetailWave();
 }

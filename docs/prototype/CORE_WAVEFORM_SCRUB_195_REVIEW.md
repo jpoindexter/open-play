@@ -1,0 +1,11 @@
+# Core195 — detailed waveform positioning
+
+Follow-up to Jason's supplied [Main Waveform Display documentation](https://support.serato.com/hc/en-us/articles/224969307-Main-Waveform-Display). Core194/desktop25 corrected frequency color, source detail, pitch-scaled timing and zoom. This change adds direct positioning from that same detailed waveform, which the reference documents as click/hold scrub.
+
+Horizontal rows and Vertical columns get transparent, deck-specific focusable gesture surfaces. Left/up advances source position; right/down rewinds, using the displayed playback-window span multiplied by nominal pitch. Shift held at the start gives ten times finer movement; zoom/pitch/geometry are snapshotted for the gesture. Focused Left/Right auditions original time; release restores the previous playing/paused mode. Escape, capture/window loss and track/view changes retire the owner. Escape stops the gesture; it does not promise undo of movement already auditioned. Zoom controls remain above the gesture surfaces.
+
+The existing delegated platter controller and AudioEngine begin/update/end scratch transport own preparation, source positions, audio routing and release. No repeated seek, source restart, AudioEngine, waveform spectrum algorithm or MIDI-map change. Preparation is marked busy with a live status; focus has a visible ring. No decorative animation.
+
+Focused controlled controller checks:26/26, including the original23 platter/ownership cases and3 new waveform cases. The new cases cover both axes/decks, pitch-scaled source seconds, final release, Shift sensitivity snapshot, Escape and pending cancellation/invalid input. This is controlled DOM/clock/ACK evidence, not native pointer, AudioEngine or PCM proof. Native26 is the next verification path; it has not been accepted merely because packaging succeeded.
+
+Done for this scoped gesture means actual native waveform drag moves only its intended real track, both layouts use the corresponding axis, and release leaves paused playback paused or ongoing playback advancing. Core musical/manual/Sync/headphone/physical and visual acceptance remain open. Existing audio evidence191/192 remains scoped to24; no advanced feature or repeated DSP matrix is planned.

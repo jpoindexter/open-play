@@ -123,3 +123,9 @@ body:not(.day) tbody tr.selected {background:var(--dj-component-library-selectio
   .platter #remain-0,.platter #remain-1 {font-size:12px;}
   .platter::after {height:14px;}
 }
+
+.waveform-scrub-lanes {position:absolute;inset:0;display:grid;z-index:1;}
+.waveform-scrub-lane {min-width:0;min-height:0;touch-action:none;user-select:none;cursor:grab;}
+.waveform-scrub-lane[data-scratch-phase="active"] {cursor:grabbing;}
+.waveform-scrub-lane:focus-visible {outline:2px solid var(--blue);outline-offset:-2px;}
+.waveform-scrub-lanes > output {position:absolute;}

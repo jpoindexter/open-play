@@ -1,4 +1,4 @@
-// Delegated ordinary whole-deck platter gestures. No seek/load/source creation.
+// Delegated whole-deck platter and detailed-waveform gestures. No seek/load/source creation.
 // The engine owns track/load generations, audio routing and release semantics.
 import {deckScratchPolicy} from './deck-scratch-kernel.js';
 
@@ -8,6 +8,7 @@ export const deckScratchUIPolicy=Object.freeze({
   keyboard:'Focused platter only: hold Left/Right for -1/+1 original seconds per second; Space/Enter hold still; Escape cancels. Keyup releases; focus/window loss cancels.',
   rpm:'Exact Virtual Deck Speed 33 RPM or 45 RPM setting, snapshotted per gesture; missing/invalid uses existing 45 RPM default.',
   motion:'No decorative animation. Pointer angle is unwrapped to the shortest signed arc between events; unobserved full turns cannot be reconstructed.',
+  waveform:'Drag horizontally/vertically with the displayed pitch-scaled source-time span. Left/up advances, right/down rewinds; Shift at pointerdown snapshots ten-times-finer movement. The existing whole-deck transport owns audition and release.',
   limits:'Independent browser gesture policy; no hardware, DVS, musical quality or Serato response claim.',
 });
 const selector='.platter[data-deck-scratch]';
@@ -54,7 +55,7 @@ export function createDeckScratchControls({engine,state,root=globalThis.document
       resultPlaying:typeof resultPlaying==='boolean'?resultPlaying:undefined};
   }
   const consume=event=>{event.preventDefault();event.stopPropagation();};
-  const closest=target=>target?.closest?.(selector)||null;
+  const closest=target=>target?.closest?.(selector)||target?.closest?.('[data-waveform-scrub][data-deck-scratch]')||null;
   const deckFor=element=>{
     const raw=element?.dataset?.deckScratch;
     if(typeof raw!=='string'||!/^\d+$/.test(raw))return null;
@@ -68,7 +69,7 @@ export function createDeckScratchControls({engine,state,root=globalThis.document
     const busy=phase==='preparing'?'true':'false';
     if(element.getAttribute?.('aria-busy')!==busy)element.setAttribute('aria-busy',busy);
     if(element.dataset.scratchPhase!==phase)element.dataset.scratchPhase=phase;
-    const output=root.querySelector?.(`[data-deck-scratch-status="${index}"]`);
+    const output=root.querySelector?.(element.dataset.waveformScrub!==undefined?`[data-waveform-scrub-status="${index}"]`:`[data-deck-scratch-status="${index}"]`);
     if(output&&output.textContent!==text)output.textContent=text;
     observe('owner.phase',{deck:index,phase},null,g);
   }
@@ -153,7 +154,7 @@ export function createDeckScratchControls({engine,state,root=globalThis.document
         }).catch(error=>observe('engine.end.error',{errorName:error?.name},null,g));
       }
       if(result===false||result===null){void end(g,true,'Scratch canceled.');return;}
-      g.ready=true;status(element,deck.index,'active',mode==='keyboard'?'Keyboard scratch active.':'Platter scratch active.');
+      g.ready=true;status(element,deck.index,'active',mode==='waveform'?'Waveform scrub active.':mode==='keyboard'?'Keyboard scratch active.':'Platter scratch active.');
       void pump(g);
     }).catch(error=>fail(g,error));
     return g;
@@ -170,6 +171,14 @@ export function createDeckScratchControls({engine,state,root=globalThis.document
   function pointerMove(event,g) {
     if(!current(g)){observe('pointermove.ignored',{reason:'stale-owner'},event,g);void end(g,true,'Scratch canceled.');return;}
     const time=now();if(!finite(time)||time<g.time){observe('pointermove.ignored',{reason:'clock-interruption'},event,g);void end(g,true,'Scratch canceled after clock interruption.');return;}
+    if(g.mode==='waveform'){
+      const coordinate=g.axis==='x'?event.clientX:event.clientY;
+      if(!finite(coordinate)){void end(g,true,'Waveform scrub canceled.');return;}
+      const nextPosition=position(g,g.anchorPosition-(coordinate-g.anchorCoordinate)*g.secondsPerPixel);
+      const interval=Math.max(deckScratchUIPolicy.minimumVelocityIntervalSeconds,(time-g.time)/1000);
+      desired(g,nextPosition,(nextPosition-g.position)/interval);g.time=time;
+      observe('pointermove.applied',{velocity:g.desired.velocity},event,g);return;
+    }
     const next=angle(g.element,event.clientX,event.clientY);
     if(next===null){g.angle=null;g.time=time;desired(g,g.position,0);observe('pointermove.held',{reason:'center-or-invalid-geometry'},event,g);return;}
     if(g.angle===null){g.angle=next;g.time=time;desired(g,g.position,0);observe('pointermove.held',{reason:'reanchored'},event,g);return;}
@@ -183,17 +192,27 @@ export function createDeckScratchControls({engine,state,root=globalThis.document
     observe('pointerdown.received',{},event);
     const refused=reason=>observe('pointerdown.refused',{reason},event);
     if(disposed)return refused('disposed');if(event.defaultPrevented)return refused('already-prevented');
-    if(event.button!==0)return refused('nonprimary-button');if(modified(event))return refused('modifier-or-composition');
+    if(event.button!==0)return refused('nonprimary-button');
     if(!Number.isInteger(event.pointerId)||event.pointerId<0)return refused('invalid-pointer-id');
-    const element=closest(event.target);if(!element)return refused('not-platter');
+    const element=closest(event.target);if(!element){if(modified(event))return refused('modifier-or-composition');return refused('not-platter');}
+    const waveform=element.dataset.waveformScrub!==undefined;
+    if(modified(event)&&!(waveform&&event.shiftKey&&!event.altKey&&!event.ctrlKey&&!event.metaKey&&!event.isComposing))return refused('modifier-or-composition');
     const deck=deckFor(element);if(!deck)return refused('missing-deck-or-track');
     if(active.has(deck.index))return observe('pointerdown.refused',{reason:'deck-owned'},event,active.get(deck.index));
     if(event.target?.closest?.('input,select,textarea,button,a,[contenteditable="true"]'))return refused('interactive-child');
-    const first=angle(element,event.clientX,event.clientY);if(first===null)return refused('center-or-invalid-geometry');
+    let first=null,geometry=null;
+    if(waveform){
+      const box=element.getBoundingClientRect(),axis=element.dataset.waveformScrub;
+      const pixels=axis==='x'?box.width:axis==='y'?box.height:NaN;
+      const span=Number(element.dataset.waveformSpan),coordinate=axis==='x'?event.clientX:event.clientY;
+      if(!finite(pixels)||pixels<=0||!finite(span)||span<1||span>16||!finite(coordinate))return refused('invalid-waveform-geometry');
+      const rate=finite(deck.rate)?clamp(deck.rate,.25,4):1;
+      geometry={axis,anchorCoordinate:coordinate,anchorPosition:engine.position(deck),secondsPerPixel:span*rate/pixels*(event.shiftKey ? .1 : 1)};
+    }else{first=angle(element,event.clientX,event.clientY);if(first===null)return refused('center-or-invalid-geometry');}
     consume(event);
     try{element.setPointerCapture(event.pointerId);observe('capture.acquired',{deck:deck.index},event);}catch{observe('capture.failed',{deck:deck.index},event);notify('Pointer capture is unavailable; scratch did not start.');return;}
     element.focus?.({preventScroll:true});
-    try{const g=start(element,deck,'pointer',{pointerId:event.pointerId,angle:first});observe('pointerdown.accepted',{accepted:!!g&&current(g)},event,g);}catch(error){observe('pointerdown.refused',{reason:'start-error',errorName:error?.name},event);try{element.releasePointerCapture(event.pointerId);}catch{}notify(error.message);}
+    try{const g=start(element,deck,waveform?'waveform':'pointer',{pointerId:event.pointerId,angle:first,...geometry});observe('pointerdown.accepted',{accepted:!!g&&current(g)},event,g);}catch(error){observe('pointerdown.refused',{reason:'start-error',errorName:error?.name},event);try{element.releasePointerCapture(event.pointerId);}catch{}notify(error.message);}
   });
   listen(root,'pointermove',event=>{const g=pointers.get(event.pointerId);observe('pointermove.received',{},event,g);if(!g){observe('pointermove.ignored',{reason:'no-pointer-owner'},event);return;}consume(event);pointerMove(event,g);});
   listen(root,'pointerup',event=>{const g=pointers.get(event.pointerId);observe('pointerup.received',{},event,g);if(!g){observe('pointerup.ignored',{reason:'no-pointer-owner'},event);return;}consume(event);pointerMove(event,g);void end(g,false);});
@@ -211,7 +230,7 @@ export function createDeckScratchControls({engine,state,root=globalThis.document
   }
   function scheduleFrame(){if(frame===null&&[...active.values()].some(g=>g.mode==='keyboard'))frame=requestFrame(frameStep);}
   listen(root,'keydown',event=>{
-    if(disposed||event.defaultPrevented||modified(event))return;
+    if(disposed||event.defaultPrevented||(modified(event)&&!(event.key==='Escape'&&event.target?.dataset?.waveformScrub!==undefined)))return;
     const element=closest(event.target);if(!element||element.isContentEditable||event.target!==element||root.activeElement!==element)return;
     const deck=deckFor(element);if(!deck)return;
     if(event.key==='Escape'){const g=active.get(deck.index);if(g){consume(event);void end(g,true,'Scratch canceled.');}return;}
