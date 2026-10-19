@@ -1,3 +1,9 @@
+# Core checkpoint190 — Serato-derived core visual implementation
+
+19 October2026: reference-derived tokens now style the core decks, transport/platters, mixer and library. Ordinary source waveforms are continuous decoded-PCM peak/three-band energy shapes, asynchronously cached, Retina-sized and zoomable1–16s with matching grid/cue coordinates. Existing audio/control bindings remain. Focused transient regression and actual browser two-real-track Play/Sync/OFF/manual/Pause plus zoom passed. Exact proprietary spectral rendering/font/unseen states and Jason's visual/musical/physical acceptance remain open. Read docs/prototype/CORE_DESIGN_190_REVIEW.md and CORE_DESIGN_190_RESULTS.json. Next: local0.1.24 combines tempo189 and visuals190; native0.1.23 is still the previous installed code. Core-only goal persists; no extras.
+
+---
+
 # Core checkpoint189 — real-song tempo/Sync UI; Serato core design next
 
 19 October2026: prototype/analysis.js now finds the two real songs' BPM/grid in the actual browser worker (115.5357/121.0097BPM at48k). Both actual imported songs play with Sync engaged at115.5BPM; OFF plus tempo movement returns independent control. This is browser/UI behavior, not perceptual beat alignment or native/physical acceptance. Constructed accented rhythms recover knownBPM with~2.51msphase; existing PCM checks65/65 pass. Failed earlier tempo/phase attempts retained; no full feature tests. Read docs/prototype/CORE_TEMPO_189_REVIEW.md and CORE_TEMPO_189_RESULTS.json. Native0.1.23 stays unchanged/stopped with its two real tracks.

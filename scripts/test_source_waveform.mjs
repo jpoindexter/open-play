@@ -1,0 +1,23 @@
+import assert from 'node:assert/strict';
+import {createSourceWaveformProfile} from '../prototype/source-waveform.js';
+import {paintOriginalOverview} from '../prototype/stem-waveform.js';
+
+const left=new Float32Array(1024);left[23]=1;
+const right=Float32Array.from(left,x=>-x);
+const buffer={length:left.length,sampleRate:48000,numberOfChannels:2,getChannelData:c=>[left,right][c]};
+const originalLeft=left.slice(),originalRight=right.slice();
+let legacyHeight=0,yields=0;
+paintOriginalOverview({fillRect:(x,y,w,h)=>legacyHeight=Math.max(legacyHeight,h)},buffer,{width:1,height:100});
+const profile=await createSourceWaveformProfile(buffer,{blockFrames:32,chunkFrames:128,yieldTask:async()=>{yields++;}});
+assert.equal(legacyHeight,0,'Baseline sampled overview misses an actual transient between sample strides');
+assert.equal(profile.maximum,1);
+assert.equal(profile.interval(0,buffer.length/buffer.sampleRate).peak,1,'Retain the actual transient across opposite-polarity stereo');
+assert.equal(profile.interval(.01,.02).peak,0,'Do not spread a transient into unrelated source time');
+assert.equal(profile.interval(-1,0).peak,0);
+assert.equal(profile.interval(1,2).peak,0);
+assert(profile.interval(0,.002).bands.every(Number.isFinite));
+assert(yields>0,'Longer profile work yields instead of blocking a whole track render');
+assert.deepEqual(left,originalLeft);assert.deepEqual(right,originalRight);
+const bad={...buffer,getChannelData:()=>Float32Array.from(left,(x,i)=>i===20?NaN:x)};
+await assert.rejects(()=>createSourceWaveformProfile(bad),/Non-finite/);
+console.log(JSON.stringify({scope:'Decoded-source profile and transient preservation; no sonic or visual-parity acceptance',legacyTransientVisible:false,newTransientPeak:profile.maximum,stereoCancellationAvoided:true,sourceUnchanged:true,yielded:true,invalidPCMRejected:true}));

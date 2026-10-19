@@ -1,0 +1,29 @@
+{
+  "checkpoint": 190,
+  "date": "2026-10-19",
+  "scope": "Core DJ screen visual implementation and focused browser behavior, not full parity or musical acceptance",
+  "referenceVersion": "Serato DJ Pro 4.0.10.213",
+  "tokens": 77,
+  "implemented": [
+    "Three-tier reference-derived color/type/spacing tokens, generated CSS and canvas colors",
+    "Compact deck headers, cue/loop pads, white BPM/time platters and short red position marker",
+    "Dense library rows and blue selected state; visible toolbar",
+    "Continuous decoded-source peak/three-band energy waveforms; asynchronous profiles",
+    "Retina backing resolution and 1\u201316 second detail zoom; common grid/cue coordinates"
+  ],
+  "checks": {
+    "regression": "A transient missed by the previous stride sampler is retained; opposite-polarity stereo does not cancel; original PCM unchanged; finite guards and asynchronous yielding pass",
+    "actualBrowser": "Two real local MP3s play concurrently; master meter positive; both Sync states engaged at115.5BPM; OFF+tempo changes only deck2 to115.7BPM; both paused; zoom2s to4s",
+    "retina": "Observed DPR2; overview508x40CSS to1016x80 backing, detail222x319CSS to444x638 backing",
+    "layout": "Library Analyze/search controls visible after fixing intrinsic grid overflow"
+  },
+  "limits": [
+    "Exact Serato font/source token names, unseen states, other themes and proprietary frequency-color algorithm remain unknown",
+    "Source waveform shows pre-FX decoded audio, not post-EQ/filter/limiter output",
+    "Profile buckets256frames, approx5.3ms at48k; no sample-accurate visualization claim",
+    "No native24/hardware/acoustic/visual-user acceptance in this source checkpoint",
+    "Core manual/synced musical session and current physical/headphone acceptance remain open"
+  ],
+  "fullParityVerified": false,
+  "coreAccepted": false
+}

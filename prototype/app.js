@@ -16,7 +16,11 @@ import {createTempoSlider} from './tempo-slider.js';
 import {createLocalAudioLibrary} from "./local-audio-library.js";
 import { createStemPreparation } from "./stems.js";
 import {createStemCrate,normalizeStemCrateTrack} from "./stem-crate.js";
-import { createStemWaveformModel, paintStemOverview, paintStemDetail, paintOriginalOverview, paintOriginalDetail } from "./stem-waveform.js";
+import { createStemWaveformModel, paintStemOverview, paintStemDetail } from "./stem-waveform.js";
+import {paintSourceOverview,paintSourceDetail} from "./source-waveform.js";
+import {performanceColors} from "./performance-tokens.js";
+const sourceWaveLoads=new WeakSet();
+let detailWaveSpan=4;
 import { normalizeFXTempoSettings } from "./fx-tempo.js";
 import { createStemSlipControls } from "./stem-slip-ui.js";
 import {createDeckScratchControls, deckScratchUIPolicy} from "./deck-scratch-ui.js";
@@ -494,8 +498,14 @@ function renderDecks() {
   if (state.layout === "Vertical")
     $("#decks").insertAdjacentHTML(
       "beforeend",
-      `<section class="detail-waves" aria-label="Scrolling waveforms"><canvas id="detail-wave" width="320" height="330"></canvas><span>SOURCE WAVEFORMS · ±2s · pre-FX</span></section>`,
+      `<section class="detail-waves" aria-label="Scrolling waveforms"><div class="detail-wave-tools"><button data-wave-zoom="out" aria-label="Zoom waveforms out">−</button><output id="detail-wave-scale">${detailWaveSpan}s</output><button data-wave-zoom="in" aria-label="Zoom waveforms in">+</button></div><canvas id="detail-wave" width="320" height="330"></canvas><span data-detail-wave-label>SOURCE · ±${detailWaveSpan/2}s · PRE-FX</span></section>`,
     );
+  document.querySelectorAll('[data-wave-zoom]').forEach(button=>button.onclick=()=>{
+    detailWaveSpan=Math.min(16,Math.max(1,detailWaveSpan*(button.dataset.waveZoom==='in'?.5:2)));
+    $('#detail-wave-scale').textContent=detailWaveSpan+'s';
+    $('[data-detail-wave-label]').textContent=`SOURCE · ±${detailWaveSpan/2}s · PRE-FX`;
+    drawDetailWave();
+  });
   drawWaves();
   renderMixer();
   stemSlipControls.restoreFocus();
@@ -510,36 +520,51 @@ function waveformView(d) {
     exitActive:stemState?.track === d.track && (stemState.modes.some(Boolean) || stemState.effects.some(Boolean)),
   });
 }
+function prepareWaveCanvas(canvas){
+  const rect=canvas.getBoundingClientRect(),scale=window.devicePixelRatio||1;
+  const width=Math.max(1,rect.width),height=Math.max(1,rect.height);
+  const pixelsWide=Math.round(width*scale),pixelsHigh=Math.round(height*scale);
+  if(canvas.width!==pixelsWide)canvas.width=pixelsWide;
+  if(canvas.height!==pixelsHigh)canvas.height=pixelsHigh;
+  const context=canvas.getContext('2d');context.setTransform(scale,0,0,scale,0,0);
+  return {context,width,height};
+}
 function drawWaves() {
   for (const d of state.decks.slice(0, state.deckCount)) {
     const c = $(`#wave-${d.index}`);
     if (!c) continue;
-    const ctx = c.getContext("2d"),
-      w = c.width,
-      h = c.height;
+    const {context:ctx,width:w,height:h}=prepareWaveCanvas(c);
     ctx.clearRect(0, 0, w, h);
     const view = waveformView(d);
     overviewWaveViews[d.index] = view;
     if (!d.track) continue;
     const scope = $(`[data-wave-scope="${d.index}"]`);
-    if (scope) scope.textContent = `${view.label} · ${d.track.bpm || "—"} BPM`;
-    c.setAttribute('aria-label', `Deck ${d.index+1}: ${view.label}`);
-    c.title = view.label;
     const buf = engine.buffers.get(d.track.id);
+    const label=!buf&&!d.track.demo?'Loading decoded source waveform…':view.label;
+    if(scope)scope.textContent=`${label} · ${d.track.bpm?Number(d.track.bpm).toFixed(1):'—'} BPM`;
+    c.setAttribute('aria-label',`Deck ${d.index+1}: ${label}`);c.title=label;
     if (view.kind === 'stems') {
       paintStemOverview(ctx, view.profile, {width:w,height:h,color:colors[d.index]});
     } else if (view.kind !== 'pending' && buf) {
-      paintOriginalOverview(ctx, buf, {width:w,height:h,color:colors[d.index]});
-    } else if (view.kind !== 'pending') for (let x=0;x<w;x+=3) {
+      const ready=paintSourceOverview(ctx,buf,{width:w,height:h});
+      if(ready){
+        if(scope)scope.textContent='Preparing decoded source waveform…';
+        if(!sourceWaveLoads.has(buf)){
+          sourceWaveLoads.add(buf);
+          ready.then(()=>drawWaves()).catch(error=>notify('Waveform unavailable: '+error.message));
+        }
+      }
+    } else if (view.kind !== 'pending' && d.track.demo) for (let x=0;x<w;x+=3) {
       const amp=.1+.6*Math.abs(Math.sin(x*.19+d.index)*Math.sin(x*.034));
       ctx.fillStyle=x%15<6?colors[d.index]:"#408498";
       ctx.fillRect(x,h/2-amp*h/2,2,amp*h);
     }
     const grid = createBeatgrid(d.track);
+    let previousTick=-8;
     for (const line of grid?.lines(0,d.track.duration) || []) {
       const x = line.time / d.track.duration * w;
-      ctx.fillStyle = line.downbeat ? "#ffffff70" : "#ffffff35";
-      ctx.fillRect(x, 0, 1, h);
+      if(!line.downbeat||x-previousTick<8)continue;
+      ctx.fillStyle=performanceColors.textMuted;ctx.fillRect(x,h-6,1,6);previousTick=x;
     }
     for(const marker of d.track.gridWarpMarkers || []) {ctx.fillStyle="#ef795d";ctx.fillRect(marker.time/d.track.duration*w,0,2,h);}
     for (let i = 0; i < d.track.cues.length; i++) {
@@ -563,10 +588,8 @@ function drawWaves() {
 function drawDetailWave() {
   const canvas = $("#detail-wave");
   if (!canvas) return;
-  const c = canvas.getContext("2d"),
-    w = canvas.width,
-    h = canvas.height,
-    n = state.deckCount,
+  const {context:c,width:w,height:h}=prepareWaveCanvas(canvas);
+  const n = state.deckCount,
     col = w / n;
   c.clearRect(0, 0, w, h);
   for (const d of state.decks.slice(0, n)) {
@@ -575,25 +598,25 @@ function drawDetailWave() {
       p = engine.position(d),
       t = d.track,
       buf = t && engine.buffers.get(t.id);
-    c.fillStyle = "#070a0c";
+    c.fillStyle = performanceColors.waveBackground;
     c.fillRect(x0, 0, col - 1, h);
     if (!t) continue;
     const grid = createBeatgrid(t);
     const view = waveformView(d);
     if (view.kind === 'stems') {
-      paintStemDetail(c, view.profile, {x:x0,width:col,height:h,position:p,color:colors[d.index]});
+      paintStemDetail(c, view.profile, {x:x0,width:col,height:h,position:p,span:detailWaveSpan,color:colors[d.index]});
     } else if (view.kind !== 'pending' && buf) {
-      paintOriginalDetail(c,buf,{x:x0,width:col,height:h,position:p,color:colors[d.index]});
+      paintSourceDetail(c,buf,{x:x0,width:col,height:h,position:p,span:detailWaveSpan});
     }
-    for (const line of grid?.lines(p-2,p+2) || []) {
-      const y=((line.time-p)/4+.5)*h;
+    for (const line of grid?.lines(p-detailWaveSpan/2,p+detailWaveSpan/2) || []) {
+      const y=((line.time-p)/detailWaveSpan+.5)*h;
       c.fillStyle=line.downbeat?"#ffffff70":"#ffffff20";c.fillRect(x0,y,col,1);
       if(line.downbeat){c.fillStyle="#aeb5ba";c.font="9px Arial";c.fillText(String(line.bar),x0+3,y-3);}
     }
-    for(const marker of t.gridWarpMarkers || []) {const y=((marker.time-p)/4+.5)*h;if(y>=0&&y<h){c.fillStyle="#ef795d";c.fillRect(x0,y,col,2);}}
+    for(const marker of t.gridWarpMarkers || []) {const y=((marker.time-p)/detailWaveSpan+.5)*h;if(y>=0&&y<h){c.fillStyle="#ef795d";c.fillRect(x0,y,col,2);}}
     for (const [i, q] of t.cues.entries()) {
       if (!q) continue;
-      const y = ((q.position - p) / 4 + 0.5) * h;
+      const y = ((q.position - p) / detailWaveSpan + 0.5) * h;
       if (y >= 0 && y < h) {
         c.fillStyle = colors[i % 8];
         c.fillRect(x0, y, col, 2);

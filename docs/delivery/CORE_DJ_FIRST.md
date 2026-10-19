@@ -41,11 +41,11 @@ These are acceptance observations in one useful session, not a request for a fre
 
 ## Open core fix — waveform visual quality
 
-19 October: Jason reports that the waveforms look very bad. Track on [ANA-001](https://trello.com/c/IBU50NY2), already in Core DJ — Now. Improve the actual two-real-track view for accurate waveform detail/transients, useful zoom, contrast/deck distinction and readable beatgrid/playhead/phase alignment. Preserve seek/timing/audio behavior. Actual rendered inspection and Jason's visual confirmation are required; this report is not an implemented or accepted fix. Keep playback/BPM blockers moving; no unrelated redesign.
+19 October: Jason reports that the waveforms look very bad. Track on [ANA-001](https://trello.com/c/IBU50NY2), already in Core DJ — Now. Improve the actual two-real-track view for accurate waveform detail/transients, useful zoom, contrast/deck distinction and readable beatgrid/playhead/phase alignment. Preserve seek/timing/audio behavior. Actual rendered inspection and Jason's visual confirmation are required; checkpoint190 implements the source-waveform change and has focused browser evidence; Jason's visual acceptance is still open. Keep playback/BPM blockers moving; no unrelated redesign.
 
-## Current checkpoint189 and visual direction
+## Current checkpoint190 and visual direction
 
-The browser tempo/grid correction now analyzes both real songs and permits actual two-deck Sync/play and OFF/manual return. It is not packaged into native0.1.23 and does not establish perceptual musical alignment. Read [review](../prototype/CORE_TEMPO_189_REVIEW.md). Latest requested work: extract and implement Serato’s visual system for the core screen, including readable source waveforms. Preserve behavior/bindings rather than the old appearance; no reskinning or unrelated feature expansion. A practical local desktop candidate should combine these changes before the next human session.
+The browser tempo/grid correction now analyzes both real songs and permits actual two-deck Sync/play and OFF/manual return. It is not packaged into native0.1.23 and does not establish perceptual musical alignment. Read [review](../prototype/CORE_TEMPO_189_REVIEW.md). Latest requested work: extract and implement Serato’s visual system for the core screen, including readable source waveforms. Preserve behavior/bindings rather than the old appearance; no reskinning or unrelated feature expansion. Checkpoint190 now implements77 reference-derived tokens, core styling, continuous decoded-source waveforms and zoom. Read [visual review](../prototype/CORE_DESIGN_190_REVIEW.md). A practical local desktop candidate should combine these changes before the next human session.
 
 ## Previous executed core checkpoint188
 

@@ -130,10 +130,10 @@ export function paintStemOverview(ctx, profile, {width, height, color='#fff', al
     ctx.fillStyle=x%15<6?color:alternate;ctx.fillRect(x,height/2-amp*height/2,2,amp*height);
   }
 }
-export function paintStemDetail(ctx, profile, {x=0,width,height,position,color='#fff',alternate='#3486a8'} = {}) {
+export function paintStemDetail(ctx, profile, {x=0,width,height,position,span=4,color='#fff',alternate='#3486a8'} = {}) {
   const mid=x+width/2;
   for(let y=0;y<height;y+=2) {
-    const from=position+(y/height-.5)*4,to=position+((y+2)/height-.5)*4;
+    const from=position+(y/height-.5)*span,to=position+((y+2)/height-.5)*span;
     const amp=Math.min(1,profile.peak(from,to)*2);
     ctx.fillStyle=y%12<4?color:alternate;ctx.fillRect(mid-amp*(width-28)/2,y,amp*(width-28),1.6);
   }
