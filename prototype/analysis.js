@@ -13,11 +13,6 @@ const NOTES = ["C", "C#", "D", "Eb", "E", "F", "F#", "G", "Ab", "A", "Bb", "B"];
 const clamp = (x, low = 0, high = 1) => Math.min(high, Math.max(low, x));
 const mean = (a) => a.reduce((sum, x) => sum + x, 0) / a.length;
 const db = (x) => (x > 0 ? 20 * Math.log10(x) : null);
-function median(a) {
-  const b = [...a].sort((x, y) => x - y);
-  return b[Math.floor(b.length / 2)] || 0;
-}
-
 function fftMagnitude(input, real, imag, magnitude) {
   real.set(input);
   imag.fill(0);
@@ -118,136 +113,83 @@ function keyFromChroma(chroma, flatness, duration) {
     spectralFlatness: flatness,
   };
 }
-function tempoFromOnsets(envelope, frameRate, duration, minBpm, maxBpm) {
-  const average = mean(envelope),
-    peak = envelope.reduce((maximum, value) => Math.max(maximum, value), 0);
-  const centered = Array.from(envelope, (x) => x - average);
-  const minLag = Math.max(2, Math.floor((frameRate * 60) / maxBpm)),
-    maxLag = Math.min(
-      envelope.length - 1,
-      Math.ceil((frameRate * 60) / minBpm),
-    );
-  const ac = new Float64Array(maxLag + 2);
-  for (let lag = minLag - 1; lag <= maxLag + 1; lag++) {
-    let sum = 0,
-      aa = 0,
-      bb = 0;
-    for (let i = lag; i < centered.length; i++) {
-      const a = centered[i],
-        b = centered[i - lag];
-      sum += a * b;
-      aa += a * a;
-      bb += b * b;
+function tempoFromOnsets(envelope, frameRate, duration, minBpm, maxBpm, pulseEnvelope=envelope) {
+  const average=mean(envelope), peak=envelope.reduce((a,b)=>Math.max(a,b),0);
+  const centered=Array.from(envelope,x=>x-average);
+  const minLag=Math.max(2,Math.floor(frameRate*60/maxBpm));
+  const maxLag=Math.min(envelope.length-1,Math.ceil(frameRate*60/minBpm));
+  const ac=new Float64Array(maxLag+2);
+  for(let lag=minLag-1;lag<=maxLag+1;lag++){
+    let sum=0,aa=0,bb=0;
+    for(let i=lag;i<centered.length;i++){const a=centered[i],b=centered[i-lag];sum+=a*b;aa+=a*a;bb+=b*b;}
+    ac[lag]=sum/Math.sqrt(aa*bb||1);
+  }
+  const candidates=[];
+  for(let lag=minLag;lag<=maxLag;lag++)if(ac[lag]>=ac[lag-1]&&ac[lag]>=ac[lag+1]){
+    const denominator=ac[lag-1]-2*ac[lag]+ac[lag+1];
+    const delta=denominator?clamp(.5*(ac[lag-1]-ac[lag+1])/denominator,-.5,.5):0;
+    const bpm=frameRate*60/(lag+delta);
+    if(bpm>=minBpm&&bpm<=maxBpm)candidates.push({bpm,score:ac[lag]});
+  }
+  candidates.sort((a,b)=>b.score-a.score);
+  // Bass transients distinguish the beat from brighter off-beat percussion.
+  // Keep full-spectrum autocorrelation for tempo candidate generation.
+  const pulseAverage=mean(pulseEnvelope),pulsePeak=pulseEnvelope.reduce((a,b)=>Math.max(a,b),0);
+  const phaseSource=pulsePeak>1e-8?pulseEnvelope:envelope;
+  const onsets=[],threshold=Math.max((pulsePeak>1e-8?pulseAverage:average)*1.5,(pulsePeak>1e-8?pulsePeak:peak)*.12);
+  for(let i=1;i<phaseSource.length-1;i++)if(phaseSource[i]>threshold&&phaseSource[i]>=phaseSource[i-1]&&phaseSource[i]>phaseSource[i+1]){
+    if(!onsets.length||i/frameRate-onsets.at(-1).time>.12)onsets.push({time:i/frameRate,strength:phaseSource[i]});
+  }
+  const unknown=(reason,confidence=0)=>({value:null,confidence,reason,method:'periodic-onset-grid-v2',candidates:candidates.slice(0,3),grid:null});
+  if(duration<6||peak<1e-8||onsets.length<5||!candidates.length||candidates[0].score<.45)return unknown('insufficient_periodic_onsets');
+  const fits=[];
+  for(const candidate of candidates.filter(c=>c.score>=.45)){
+    let period=60/candidate.bpm,phase=0,bestScore=-1;
+    // Find the repeatedly supported phase; the first transient can be off-beat.
+    for(let bin=0;bin<128;bin++){
+      const p=bin/128*period;
+      let score=0;
+      for(const o of onsets){const residual=Math.abs((o.time-p)/period-Math.round((o.time-p)/period));if(residual<.12)score+=o.strength*(1-residual/.12);}
+      if(score>bestScore){bestScore=score;phase=p;}
     }
-    ac[lag] = sum / Math.sqrt(aa * bb || 1);
-  }
-  const candidates = [];
-  for (let lag = minLag; lag <= maxLag; lag++)
-    if (ac[lag] >= ac[lag - 1] && ac[lag] >= ac[lag + 1]) {
-      const denom = ac[lag - 1] - 2 * ac[lag] + ac[lag + 1];
-      const delta = denom
-        ? clamp((0.5 * (ac[lag - 1] - ac[lag + 1])) / denom, -0.5, 0.5)
-        : 0;
-      const bpm = (frameRate * 60) / (lag + delta);
-      if (bpm >= minBpm && bpm <= maxBpm)
-        candidates.push({ bpm, score: ac[lag] });
+    let selected=[];
+    for(let pass=0;pass<3;pass++){
+      const beats=new Map();
+      for(const o of onsets){
+        const beat=Math.round((o.time-phase)/period);
+        if(Math.abs(o.time-phase-beat*period)>period*.12)continue;
+        const prev=beats.get(beat);if(!prev||o.strength>prev.strength)beats.set(beat,{...o,beat});
+      }
+      selected=[...beats.values()];if(selected.length<5)break;
+      const weight=selected.reduce((s,o)=>s+o.strength,0);
+      const mx=selected.reduce((s,o)=>s+o.beat*o.strength,0)/weight,my=selected.reduce((s,o)=>s+o.time*o.strength,0)/weight;
+      let numerator=0,denominator=0;
+      for(const o of selected){numerator+=o.strength*(o.beat-mx)*(o.time-my);denominator+=o.strength*(o.beat-mx)**2;}
+      const next=numerator/(denominator||1);
+      if(!Number.isFinite(next)||Math.abs(next/(60/candidate.bpm)-1)>.02)break;
+      period=next;phase=my-mx*period;
     }
-  candidates.sort((a, b) => b.score - a.score);
-  const onsets = [];
-  const threshold = Math.max(average * 1.5, peak * 0.12);
-  for (let i = 1; i < envelope.length - 1; i++) {
-    if (
-      envelope[i] > threshold &&
-      envelope[i] >= envelope[i - 1] &&
-      envelope[i] > envelope[i + 1]
-    ) {
-      if (!onsets.length || i / frameRate - onsets.at(-1).time > 0.12)
-        onsets.push({ time: i / frameRate, strength: envelope[i] });
-    }
+    if(selected.length<5)continue;
+    const possible=Math.max(1,Math.floor((onsets.at(-1).time-phase)/period)-Math.ceil((onsets[0].time-phase)/period)+1);
+    // Off-beat percussion is not evidence against a steady beat. Require
+    // both autocorrelation and coverage of distinct beats instead of the
+    // fraction of *all* transients aligned to the first transient.
+    const coverage=clamp(selected.length/possible),confidence=Math.min(clamp(candidate.score),coverage)*clamp(selected.length/12);
+    fits.push({candidate,period,phase,coverage,confidence,selected:selected.length});
   }
-  if (
-    duration < 6 ||
-    peak < 1e-8 ||
-    onsets.length < 5 ||
-    !candidates.length ||
-    candidates[0].score < 0.45
-  ) {
-    return {
-      value: null,
-      confidence: 0,
-      reason: "insufficient_periodic_onsets",
-      candidates: candidates.slice(0, 3),
-      grid: null,
-    };
-  }
-  // Prefer the shortest strongly supported pulse period, exposing slower octave alternatives.
-  const best = candidates
-    .filter((c) => c.score >= candidates[0].score * 0.88)
-    .sort((a, b) => b.bpm - a.bpm)[0];
-  let period = 60 / best.bpm;
-  const intervals = [];
-  for (let i = 1; i < onsets.length; i++) {
-    const interval = onsets[i].time - onsets[i - 1].time,
-      multiples = Math.round(interval / period);
-    if (
-      multiples >= 1 &&
-      multiples <= 4 &&
-      Math.abs(interval / multiples - period) < period * 0.1
-    )
-      intervals.push(interval / multiples);
-  }
-  if (intervals.length >= 4) period = median(intervals);
-  // Regress time against integer beat index to reduce frame-quantization error.
-  const reference = onsets[0].time;
-  const aligned = onsets
-    .map((o) => ({ ...o, beat: Math.round((o.time - reference) / period) }))
-    .filter(
-      (o) => Math.abs(o.time - reference - o.beat * period) < period * 0.15,
-    );
-  if (aligned.length >= 5) {
-    const mx = mean(aligned.map((o) => o.beat)),
-      my = mean(aligned.map((o) => o.time));
-    let numerator = 0,
-      denominator = 0;
-    for (const o of aligned) {
-      numerator += (o.beat - mx) * (o.time - my);
-      denominator += (o.beat - mx) ** 2;
-    }
-    if (denominator) period = numerator / denominator;
-  }
-  const residuals = onsets.map((o) => {
-    const p = ((o.time - reference) / period) % 1;
-    return Math.min(Math.abs(p), Math.abs(1 - p));
-  });
-  const alignedRatio = residuals.filter((x) => x < 0.15).length / onsets.length;
-  const confidence =
-    clamp(best.score) * alignedRatio * clamp(onsets.length / 12);
-  if (confidence < 0.45)
-    return {
-      value: null,
-      confidence,
-      reason: "unstable_or_ambiguous_rhythm",
-      candidates: candidates.slice(0, 3),
-      grid: null,
-    };
-  const phase = ((reference % period) + period) % period;
-  const beats = [];
-  for (let time = phase; time < duration; time += period) beats.push(time);
-  return {
-    value: 60 / period,
-    confidence,
-    reason: "estimated_constant_pulse",
-    candidates: candidates.slice(0, 3),
-    grid: {
-      type: "constant",
-      bpm: 60 / period,
-      firstBeat: phase,
-      beats,
-      downbeat: null,
-      downbeatVerified: false,
-    },
-  };
+  // Confidence is a heuristic conjunction, not a calibrated probability.
+  // Require independent periodicity and beat coverage; retain the .45
+  // periodicity gate and reject a grid missing more than half its beats.
+  // Prefer a supported double-time octave over an accent-driven half-time
+  // result, without promoting unrelated faster autocorrelation candidates.
+  const valid=fits.filter(f=>f.confidence>=.45&&f.coverage>=.5).sort((a,b)=>b.confidence-a.confidence||a.period-b.period);
+  if(!valid.length)return unknown('unstable_or_ambiguous_rhythm',Math.max(0,...fits.map(f=>f.confidence)));
+  const strong=valid.filter(f=>f.candidate.score>=candidates[0].score*.88).sort((a,b)=>a.period-b.period);
+  const leader=strong[0]||valid[0],fit=valid.find(f=>Math.abs(leader.period/f.period-2)<.04)||leader,phase=((fit.phase%fit.period)+fit.period)%fit.period,beats=[];
+  for(let time=phase;time<duration;time+=fit.period)beats.push(time);
+  return {value:60/fit.period,confidence:fit.confidence,reason:'estimated_constant_pulse',method:'periodic-onset-grid-v2',beatCoverage:fit.coverage,periodicity:fit.candidate.score,candidates:candidates.slice(0,3),grid:{type:'constant',bpm:60/fit.period,firstBeat:phase,beats,downbeat:null,downbeatVerified:false}};
 }
+
 
 export function analyzePCM(channels, sampleRate, options = {}) {
   if (
@@ -350,8 +292,22 @@ export function analyzePCM(channels, sampleRate, options = {}) {
       total += channels[chosen][i * factor + j] || 0;
     mono[i] = total / factor;
   }
+  // A short, causal bass-energy envelope timestamps kick attacks directly.
+  // The centered 2048-sample tonal FFT sees bass attacks early (a large
+  // fraction of its window), so it is unsuitable as a beat-phase clock.
+  const bass = new Float32Array(mono.length);
+  const highAlpha = Math.exp(-2 * Math.PI * 35 / rate);
+  const lowAlpha = 1 - Math.exp(-2 * Math.PI * 250 / rate);
+  let high = 0, low = 0, previousSample = 0;
+  for (let i = 0; i < mono.length; i++) {
+    high = highAlpha * (high + mono[i] - previousSample);
+    previousSample = mono[i];
+    low += lowAlpha * (high - low);
+    bass[i] = low;
+  }
   const frames = Math.ceil(mono.length / HOP),
     envelope = new Float64Array(frames),
+    pulseEnvelope = new Float64Array(frames),
     chroma = new Float64Array(12);
   const real = new Float64Array(N),
     imag = new Float64Array(N),
@@ -362,6 +318,7 @@ export function analyzePCM(channels, sampleRate, options = {}) {
     { length: N },
     (_, i) => 0.5 - 0.5 * Math.cos((2 * Math.PI * i) / (N - 1)),
   );
+  let priorBassEnergy = 0;
   let flatnessTotal = 0,
     tonalFrames = 0;
   for (let frame = 0; frame < frames; frame++) {
@@ -374,7 +331,8 @@ export function analyzePCM(channels, sampleRate, options = {}) {
       count = 0;
     for (let k = 2; k < N / 2; k++) {
       const value = Math.log1p(magnitude[k] * 10);
-      flux += Math.max(0, value - previous[k]);
+      const increase = Math.max(0, value - previous[k]);
+      flux += increase;
       previous[k] = value;
       if ((k * rate) / N >= 70 && (k * rate) / N <= 3500) {
         arithmetic += magnitude[k];
@@ -383,6 +341,11 @@ export function analyzePCM(channels, sampleRate, options = {}) {
       }
     }
     envelope[frame] = flux;
+    let bassEnergy = 0;
+    for (let j = frame * HOP; j < Math.min(bass.length, (frame + 1) * HOP); j++) bassEnergy += bass[j] * bass[j];
+    bassEnergy = Math.sqrt(bassEnergy / HOP);
+    pulseEnvelope[frame] = Math.max(0, bassEnergy - priorBassEnergy);
+    priorBassEnergy = bassEnergy;
     if (frame % 4 === 0 && arithmetic > 1e-6) {
       flatnessTotal += Math.exp(logarithmic / count) / (arithmetic / count);
       tonalFrames++;
@@ -414,6 +377,7 @@ export function analyzePCM(channels, sampleRate, options = {}) {
     analyzedDuration,
     minBpm,
     maxBpm,
+    pulseEnvelope,
   );
   result.keyEstimate = options.analyzeKey === false ? {value:null, confidence:0, reason:"key_analysis_disabled", candidates:[]} : keyFromChroma(
     chroma,

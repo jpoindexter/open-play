@@ -1,0 +1,95 @@
+{
+  "date": "2026-10-19",
+  "scope": "Core tempo/grid refinement and actual browser two-real-track workflow; no new native or physical acceptance",
+  "sourceBefore": "8594658",
+  "analysisSHA256": "2f51712ed403c81a994dfa2cb92e797f2b8a428da696f255608d225b7283cd08",
+  "changedProductionFiles": [
+    "prototype/analysis.js"
+  ],
+  "constructedRhythms": {
+    "scope": "Constructed accented/syncopated PCM, not musical/native/hardware acceptance",
+    "results": [
+      {
+        "expectedBpm": 115.54,
+        "observedBpm": 115.54011149060163,
+        "phaseErrorSeconds": 0.0025102668522219984,
+        "confidence": 0.8559903044834489,
+        "reason": "estimated_constant_pulse"
+      },
+      {
+        "expectedBpm": 121,
+        "observedBpm": 120.99976670012676,
+        "phaseErrorSeconds": 0.0025058749650977985,
+        "confidence": 0.8562063495008573,
+        "reason": "estimated_constant_pulse"
+      }
+    ]
+  },
+  "existingAnalysis": {
+    "passed": 65,
+    "total": 65,
+    "scope": "Existing PCM-module checks including pulse tempos, phase, tone/noise/silence, gain/key and selective flags"
+  },
+  "realPCMFirst180Seconds": [
+    {
+      "alias": "track-1",
+      "bpm": 115.5296673135788,
+      "confidence": 0.7043090675599396,
+      "method": "periodic-onset-grid-v2",
+      "beatCoverage": 0.9408284023668639,
+      "periodicity": 0.7043090675599396,
+      "firstBeat": 0.5035346129111844,
+      "reason": "estimated_constant_pulse"
+    },
+    {
+      "alias": "track-2",
+      "bpm": 121.0072064181313,
+      "confidence": 0.4920802186614358,
+      "method": "periodic-onset-grid-v2",
+      "beatCoverage": 0.8646408839779005,
+      "periodicity": 0.4920802186614358,
+      "firstBeat": 0.3467067395099548,
+      "reason": "estimated_constant_pulse"
+    }
+  ],
+  "actualBrowser": {
+    "contextSampleRate": 48000,
+    "importedFiles": 2,
+    "workerEstimatesBPM": [
+      115.53569811798516,
+      121.00969676968822
+    ],
+    "workerConfidencePercent": [
+      72,
+      52
+    ],
+    "bothDecksPlayingObserved": true,
+    "masterMeterPositiveObserved": true,
+    "syncEngagedReadback": {
+      "deck1": "Pitch +0.0 percent; relative adjustment +0.0 percent; 115.5 BPM",
+      "deck2": "Pitch -4.5 percent; relative adjustment +0.0 percent; 115.5 BPM",
+      "sync1": "true",
+      "sync2": "true"
+    },
+    "syncOffIndependentTempo": {
+      "at": "2026-10-19T10:43:31.648Z",
+      "deck1": "Pitch +0.0 percent; relative adjustment +0.0 percent; 115.5 BPM",
+      "deck2": "Pitch -4.4 percent; 115.7 BPM",
+      "sync2": "false"
+    },
+    "endedWithDecksStopped": true
+  },
+  "failureHistoryRetainedPrivately": [
+    "constructed-baseline.log",
+    "constructed-after.log",
+    "existing-analysis-after.log",
+    "constructed-bass-phase.log",
+    "existing-bass-phase.log"
+  ],
+  "nativePackaged": false,
+  "musicalBeatAlignmentAccepted": false,
+  "manualMixAccepted": false,
+  "physicalControllerAccepted": false,
+  "waveformVisualFixAccepted": false,
+  "coreAccepted": false
+}

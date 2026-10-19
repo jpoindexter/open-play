@@ -1,3 +1,11 @@
+# Core checkpoint189 — real-song tempo/Sync UI; Serato core design next
+
+19 October2026: prototype/analysis.js now finds the two real songs' BPM/grid in the actual browser worker (115.5357/121.0097BPM at48k). Both actual imported songs play with Sync engaged at115.5BPM; OFF plus tempo movement returns independent control. This is browser/UI behavior, not perceptual beat alignment or native/physical acceptance. Constructed accented rhythms recover knownBPM with~2.51msphase; existing PCM checks65/65 pass. Failed earlier tempo/phase attempts retained; no full feature tests. Read docs/prototype/CORE_TEMPO_189_REVIEW.md and CORE_TEMPO_189_RESULTS.json. Native0.1.23 stays unchanged/stopped with its two real tracks.
+
+Latest user correction: extract Serato's design system and implement it in Open Play's core screen (decks, waveforms, mixer and library). Visual restyling/reflow is now explicitly authorized; preserve behavior/bindings/profile/maps, not the old janky appearance. Reskinning later. Next: measured reference tokens + real core visual/waveform implementation, then one local desktop candidate with tempo and visual changes. Old references below to the tempo blocker as unaddressed or to preserving the old visual shell are historical. Core-only drift rule remains; no extras.
+
+---
+
 # Core checkpoint188 — real local MP3 playback; tempo/grid blocker next
 
 19 October2026: actual0.1.23 normal chooser imported two different real MP3s and loaded one per deck. Both played independently and together; normal channel/crossfader isolation/restoration observed in the master meter. Files reports2saved/0session-only. Private master capture745418B decodes78.96s/stereo48k/finite/positive; no music or PCM published. This is a core playback/mixer subset, not a manual/synced musical mix or physical/headphone acceptance.

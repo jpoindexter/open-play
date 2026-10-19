@@ -9,7 +9,7 @@ This supersedes older instructions to continue keyed Stems, sampler compositions
 ## Constraint ledger
 
 - Outcome: load two different music files from Jason's hard drive onto separate decks and complete manual and synced transitions with audible master/headphone separation.
-- Target: existing Open Play interface, production audio/transport and approved local desktop test path. Preserve code and working behavior; fix measured blockers rather than rewrite.
+- Target: existing production audio/transport and approved local desktop test path. Apply Serato’s visual system to the core screen per Jason’s latest instruction; preserve interaction bindings/code and working behavior while restyling/reflowing the decks, waveforms, mixer and library. Fix measured blockers rather than rewrite.
 - Must: local import/load, independent Play/Pause/seek and cue, channel gain/faders, crossfader, master/meters, headphone cue/mix/level, pitch/range/direction, jog/nudge, Sync/manual return, EQ/filter/cutoff, basic waveforms/BPM/grids and Hercules core controls.
 - Must not: let stems, sampler combinations, 55-FX completeness, video, broad device catalogs or full parity research delay this usable milestone; replace music with generated demos and claim this session passed; change original music; repeat solved matrices without a relevant change.
 - Authority: Jason's 19 October core-first correction and Trello reorganization request; earlier explicit local desktop-test approval persists. This is not public release approval.
@@ -19,9 +19,9 @@ This supersedes older instructions to continue keyed Stems, sampler compositions
 
 | Horizon | Outcome | Work / checkpoint |
 | --- | --- | --- |
-| Now | A useful two-deck DJ session | CORE-001 and its 21 existing linked dependency cards. Import/load/play first, then mixer/PFL, manual beatmatch, Sync, EQ/filter and controller coverage. Fix any concrete failure immediately. |
+| Now | A useful two-deck DJ session | CORE-001 and its 22 existing linked dependency cards. Import/load/play first, then mixer/PFL, manual beatmatch, Sync, EQ/filter and controller coverage. Fix any concrete failure immediately. |
 | Next | Reduce everyday library friction | Three provisional quick-win candidates: LIB-003 search/sort, LIB-004 simple crates, SYS-002 session persistence. Check current behavior first; if already sufficient, no change. Pick a small actual gap after core acceptance. Effort unestimated. |
-| Later | Complete independent parity incrementally | Remaining 86 feature cards, including stems, advanced FX, sampler, video, four decks, DVS/HID/CDJs, provider integrations and broader compatibility. Existing criteria, evidence and model/effort recommendations stay intact. |
+| Later | Complete independent parity incrementally | Remaining 85 feature cards, including stems, advanced FX, sampler, video, four decks, DVS/HID/CDJs, provider integrations and broader compatibility. Existing criteria, evidence and model/effort recommendations stay intact. |
 
 Owner: Codex prepares and fixes the software; Jason provides musical listening/manual-mix and physical-control confirmation when available. One active workstream. Review the sequence after a real two-track mix, or immediately when a core blocker appears. Quick wins do not outrank the core even if easy.
 
@@ -43,7 +43,11 @@ These are acceptance observations in one useful session, not a request for a fre
 
 19 October: Jason reports that the waveforms look very bad. Track on [ANA-001](https://trello.com/c/IBU50NY2), already in Core DJ — Now. Improve the actual two-real-track view for accurate waveform detail/transients, useful zoom, contrast/deck distinction and readable beatgrid/playhead/phase alignment. Preserve seek/timing/audio behavior. Actual rendered inspection and Jason's visual confirmation are required; this report is not an implemented or accepted fix. Keep playback/BPM blockers moving; no unrelated redesign.
 
-## Current executed core checkpoint188
+## Current checkpoint189 and visual direction
+
+The browser tempo/grid correction now analyzes both real songs and permits actual two-deck Sync/play and OFF/manual return. It is not packaged into native0.1.23 and does not establish perceptual musical alignment. Read [review](../prototype/CORE_TEMPO_189_REVIEW.md). Latest requested work: extract and implement Serato’s visual system for the core screen, including readable source waveforms. Preserve behavior/bindings rather than the old appearance; no reskinning or unrelated feature expansion. A practical local desktop candidate should combine these changes before the next human session.
+
+## Previous executed core checkpoint188
 
 Actual desktop0.1.23 imported two real MP3s, loaded separate decks and played/paused both independently and simultaneously. Fader/crossfader master isolation/restoration observed; normal capture decodes finite stereo. Files reports2saved/0session-only. Both songs currently have unknown BPM/grid; fix that core path next. Disconnected-Hercules pending Play recovered through normal default-output selection. Both decks are stopped; manual/Sync musical transition and current physical/headphone acceptance remain open. Read [observation](../prototype/CORE_DJ_188_OBSERVATION.json).
 
@@ -59,9 +63,9 @@ Software preparation can continue with the controller unplugged. Use headphones/
 
 Board: [Open Play — Serato parity](https://trello.com/b/OqMGEjpe/open-play-serato-parity).
 
-1. Core DJ — Now: CORE-001 plus 21 existing feature cards, ordered by the practical workflow.
+1. Core DJ — Now: CORE-001 plus 22 existing feature cards, ordered by the practical workflow.
 2. Next — quick-win candidates: 3 existing cards; no promise that unmeasured work is easy.
-3. Later — full parity & advanced features: 86 existing cards.
+3. Later — full parity & advanced features: 85 existing cards.
 4. Approvals & release boundaries: historical parity and current desktop/release authority.
 5. Verified evidence: retained scoped research/hardware record.
 6. Blocked / unknown: reserved for actual blockers; no invented blockers.
