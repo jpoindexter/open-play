@@ -1,0 +1,10 @@
+{
+  "passed": false,
+  "scope": "Controlled collaborator preflight only, not a product runtime failure",
+  "command": "node scripts/test_smart_sync_primary_tempo.mjs",
+  "exitCode": 1,
+  "error": "Missing expected rejection (AbortError) in current-owner token cancellation case",
+  "sourceSHA256": "6fd5dc3f04f9fbf0cbacf88bf9dd38b6b93e8ee1f90150fe57d21a1b5d359d10",
+  "cause": "Fake synchronize changed the external token synchronously before align could capture its reservation; actual engine reserves synchronously then yields before later owner actions.",
+  "correction": "Yield fake preparation after reservation before applying the test action. No production change."
+}

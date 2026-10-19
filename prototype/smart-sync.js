@@ -76,7 +76,7 @@ export function createSmartSync({engine, state, externalLeader=()=>null}) {
   async function align(deck, primary, isCurrent=()=>true) {
     validateTransport(deck,primary);
     const ownTrack=deck.track, primaryTrack=primary.track, revision=revise(deck),ownLoop=loopBounds(deck),ownTransport=transportSignature(deck),primaryTransport=transportSignature(primary),barLock=barCompatible(deck)&&barCompatible(primary);
-    const primaryRate=engine.audibleRate(primary), rate=rateFor(deck,primary);
+    const primaryRate=primary.rate, rate=rateFor(deck,primary);
     const priorClock=engine.voiceClock(deck,engine.voices.get(deck.index));
     let token;
     const owned=()=>isCurrent()&&enabled()&&revisions.get(deck)===revision&&deck.track===ownTrack&&transportSignature(deck)===ownTransport&&(token===undefined||engine.startTokens?.get(deck.index)===token);
@@ -87,7 +87,9 @@ export function createSmartSync({engine, state, externalLeader=()=>null}) {
     alignmentTimelines.set(deck,timeline);
     try{
       const pending=engine.synchronize(deck,{rate,priorClock,positionAt:when => {
-        if (!valid() || Math.abs(engine.voiceRateAt(primary,engine.voices.get(primary.index),when)-primaryRate)>1e-7) throw cancelled();
+        // Natural warp progression changes the local source rate, while the
+        // nominal control rate and shared musical tempo remain unchanged.
+        if (!valid() || Math.abs(primary.rate-primaryRate)>1e-7 || (syncBPM!==null&&Math.abs(syncBPM-timeline.bpm)>1e-7)) throw cancelled();
         return barLock?alignedBarPosition(ownTrack,priorClock(when),primaryTrack,engine.voiceClock(primary,engine.voices.get(primary.index))(when),ownLoop):priorClock(when);
       }});
       token=engine.startTokens?.get(deck.index);
