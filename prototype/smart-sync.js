@@ -38,6 +38,7 @@ export function alignedBarPosition(track,position,primaryTrack,primaryPosition,l
 export function createSmartSync({engine, state, externalLeader=()=>null}) {
   const revisions = new WeakMap();
   const pendingPresses = new WeakMap();
+  const alignmentTimelines = new WeakMap();
   let syncBPM=null;
   const enabled = () => state.settings['Sync Mode'] === 'Smart Sync';
   const engaged = deck => !!deck.sync && engagedStates.has(deck.syncState);
@@ -96,18 +97,26 @@ export function createSmartSync({engine, state, externalLeader=()=>null}) {
     validateTransport(deck,deck);
     const track=deck.track,revision=revise(deck),signature=transportSignature(deck),loop=loopBounds(deck),barLock=barCompatible(deck)&&source.phase;
     const priorClock=engine.voiceClock(deck,engine.voices.get(deck.index));
-    const owned=()=>isCurrent()&&enabled()&&revisions.get(deck)===revision&&deck.track===track&&transportSignature(deck)===signature;
+    let token;
+    const owned=()=>isCurrent()&&enabled()&&revisions.get(deck)===revision&&deck.track===track&&transportSignature(deck)===signature&&(token===undefined||engine.startTokens?.get(deck.index)===token);
     const valid=()=>owned()&&source.valid();
-    const result=await engine.synchronize(deck,{rate:externalRate(deck,source),priorClock,positionAt:when=>{
-      if(!valid())throw cancelled();
-      return barLock?alignedBarPosition(track,priorClock(when),source.track,source.clock(when),loop):priorClock(when);
-    }});
-    // The future start is committed now. Losing its sample source does not
-    // revoke a still-current Play; deck Stop/load still revokes ownership.
-    if(!owned())throw cancelled();
-    const following=source.valid();
-    syncBPM=source.bpm;deck.sync=true;deck.syncState=(following?barLock:barCompatible(deck))?'beat':'tempo';deck.syncRole=following?'secondary':'primary';
-    return result;
+    // Preparation needs its target musical clock before public Sync state is
+    // committed. Keep that intent scoped to this owned start, not the old voice.
+    const timeline={track,bpm:source.bpm,valid:owned};
+    alignmentTimelines.set(deck,timeline);
+    try{
+      const pending=engine.synchronize(deck,{rate:externalRate(deck,source),priorClock,positionAt:when=>{
+        if(!valid())throw cancelled();
+        return barLock?alignedBarPosition(track,priorClock(when),source.track,source.clock(when),loop):priorClock(when);
+      }});
+      token=engine.startTokens?.get(deck.index);
+      const result=await pending;
+      // Source loss after scheduling does not revoke a current committed Play.
+      if(!owned())throw cancelled();
+      const following=source.valid();
+      syncBPM=source.bpm;deck.sync=true;deck.syncState=(following?barLock:barCompatible(deck))?'beat':'tempo';deck.syncRole=following?'secondary':'primary';
+      return result;
+    }finally{if(alignmentTimelines.get(deck)===timeline)alignmentTimelines.delete(deck);}
   }
   async function performPress(deck) {
     if (!enabled()) return;
@@ -198,9 +207,10 @@ export function createSmartSync({engine, state, externalLeader=()=>null}) {
     if(enabled()&&engaged(deck)&&deck.track?.gridWarpMarkers?.length){const candidate={...deck,...changes};validateTransport(candidate,candidate,true);}
   }
   function timeline(deck,options){
-    if(!enabled()||!engaged(deck)||!deck.track?.gridWarpMarkers?.length)return;
+    const pending=alignmentTimelines.get(deck),preparing=!!pending&&pending.track===deck.track&&pending.valid();
+    if(!enabled()||(!engaged(deck)&&!preparing)||!deck.track?.gridWarpMarkers?.length)return;
     validateTransport(deck,deck,true);
-    return createBeatgrid(deck.track).timeline({...options,bpm:syncBPM,loop:loopBounds(deck)});
+    return createBeatgrid(deck.track).timeline({...options,bpm:preparing?pending.bpm:syncBPM,loop:loopBounds(deck)});
   }
   function tempo(deck,rate){
     const bpm=deck.track.bpm*rate;
