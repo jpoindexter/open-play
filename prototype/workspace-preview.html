@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Open Play — Serato / Traktor / Hybrid layout preview</title><link rel="stylesheet" href="styles.css"><link rel="stylesheet" href="performance-tokens.css"><link rel="stylesheet" href="performance-theme.css"><link rel="stylesheet" href="layout-preview.css"></head>
+<body data-workspace="hybrid">
+<div class="workspace-bar">
+ <a class="workspace-brand" href="layout-preview.html">open<span>play</span><small>WORKSPACE PREVIEW</small></a>
+ <div class="workspace-switch" role="group" aria-label="Workspace layout">
+  <button data-workspace-choice="serato" aria-pressed="false" disabled>Serato style</button>
+  <button data-workspace-choice="traktor" aria-pressed="false" disabled>Traktor style</button>
+   <button data-workspace-choice="hybrid" aria-pressed="true" disabled>Hybrid</button>
+ </div>
+ <span class="workspace-caption" id="workspace-caption" role="status">Compare the beats. Mix in the middle.</span>
+ <div class="preview-zoom"><span>WAVEFORM</span><button id="preview-zoom-out" aria-label="Zoom detailed waveforms out" disabled>−</button><output id="preview-zoom-scale">4s</output><button id="preview-zoom-in" aria-label="Zoom detailed waveforms in" disabled>+</button></div>
+</div>
+<header class="toolbar" data-startup-inert inert>
+ <button id="day" title="Switch day / night appearance" aria-label="Switch day mode">☼</button>
+ <label class="sr" for="layout">Display layout</label><select id="layout"><option>Vertical</option><option>Horizontal</option><option>Extended</option><option>Stack</option><option>Library</option></select>
+ <label class="sr" for="deck-count">Number of decks</label><select id="deck-count"><option value="2">2 decks</option><option value="4">4 decks</option></select>
+ <button data-panel="link">Link</button><button data-panel="midi">MIDI</button><button id="quantize" aria-pressed="true" title="Quantize cue and loop actions">Q</button>
+ <span class="toolbar-separator"></span><button data-panel="recording">REC</button><button data-panel="fx">FX</button><button data-panel="sampler">Sampler</button><button data-panel="scratch">Scratch</button><button data-panel="flip">Flip</button><button data-panel="video">Video</button>
+ <strong class="brand">open<span>play</span><small>DJ</small></strong><div class="master-label"><label for="master-level">Master</label><input id="master-level" aria-label="Master output level in decibels" title="Master −12 to +12dB · Control-click:0dB · Alt-click:+3dB" type="range" min="-12" max="12" step="any" value="0"><output id="master-level-value" for="master-level">0.0dB</output><meter id="master-meter" aria-label="Master stereo sample peak relative to nominal level" min="-60" max="9" low="0" high="3" optimum="-6" value="-60"></meter><output id="master-peak-value">−∞</output><span id="master-limit" aria-label="Master limiter idle" title="Stereo sample-peak limiter ·3dB headroom">—</span></div>
+ <button data-panel="hardware">Devices</button><button data-panel="help">Help</button><button data-panel="settings" aria-label="Open Setup">⚙</button>
+</header>
+<div class="review-bar" data-startup-inert inert><span><i></i> LAYOUT PREVIEW · Existing Open Play player · Desktop app unchanged</span><button data-panel="coverage">Coverage & evidence</button><span id="audio-status">Loading controls…</span></div>
+<main data-startup-inert inert>
+ <section id="performance" aria-label="Decks and waveforms"><div id="decks"></div></section>
+ <section id="mixer" aria-label="Mixer"></section>
+ <section id="panel" aria-label="Performance panel" hidden></section>
+ <section class="library" aria-label="Music library">
+  <aside><div class="crate-tools"><button id="new-crate" title="New crate">＋ Crate</button><button id="new-smart" title="New smart crate">＋ Smart</button></div><label class="sr" for="crate-search">Search crates</label><input id="crate-search" placeholder="Find crates"><nav id="crates" aria-label="Crates and providers"></nav><div class="side-bottom"><button id="import">＋ Import audio</button><button id="library-tools">Library tools</button><input id="audio-files" type="file" accept="audio/*" multiple hidden></div></aside>
+  <div class="library-main"><div class="library-tools"><button id="analyze">Analyze</button><button data-panel="analysis" aria-label="Analysis settings">⚙</button><select id="analysis-scope" aria-label="Analysis scope"><option>Selected track</option><option>Current crate</option><option>All tracks</option></select><button id="art-grid" aria-pressed="false">▦</button><span class="spacer"></span><button data-panel="files">Files</button><button data-panel="prepare">Prepare</button><button data-panel="history">History</button><label for="search" class="sr">Search tracks</label><input id="search" type="search" placeholder="Search library"><button id="columns">Columns</button></div><div id="tracks" tabindex="0" aria-label="Track results"></div><footer class="library-footer"><button id="autoplay" aria-pressed="false">Autoplay</button><span id="library-summary"></span><span class="spacer"></span><span>Demo audio generated locally • no uploads</span></footer></div>
+ </section>
+</main>
+<div id="notice" role="status" aria-live="polite"></div>
+<dialog id="modal"><div class="dialog-title"><h2 id="modal-title"></h2><button id="modal-close" aria-label="Close dialog">×</button></div><div id="modal-body"></div></dialog>
+<script>window.addEventListener('error',function(e){var n=document.getElementById('notice');n.textContent='Prototype error: '+e.message+' ('+e.filename+':'+e.lineno+':'+e.colno+')';n.classList.add('visible');});</script>
+<script type="module" src="layout-preview.js"></script>
+</body></html>

@@ -1,0 +1,159 @@
+/* Preview only. Scoped workspace composition layered over existing production UI.
+   Reference: installed Traktor Pro3 Mixer layout, observed19Oct2026. Original CSS,
+   controls, renderer and audio modules are reused; no proprietary assets. */
+.workspace-bar{height:54px;display:flex;align-items:center;gap:22px;padding:0 16px;background:#111315;border-bottom:1px solid #45494d;font:12px Arial,Helvetica,sans-serif}
+.workspace-brand{font-size:25px;letter-spacing:-1px;font-weight:700;text-decoration:none;color:#f0f0f0;white-space:nowrap}
+.workspace-brand>span{font-weight:400}.workspace-brand small{font-size:8px;letter-spacing:1.2px;font-weight:400;color:#9da6ad;display:block;margin-top:2px}
+.workspace-switch{display:flex;padding:3px;background:#24282b;border:1px solid #41474c;border-radius:5px;gap:3px}
+.workspace-switch button{min-height:30px;padding:4px 15px;border:1px solid transparent;background:transparent;color:#b9c0c5;font-size:12px;border-radius:3px}
+.workspace-switch button[aria-pressed="true"]{background:#495159;color:#fff;border-color:#67737e}
+.workspace-caption{font-size:11px;color:#a7afb5}.preview-zoom{margin-left:auto;display:flex;align-items:center;gap:6px;color:#a7afb5;font-size:9px;letter-spacing:.6px}
+.preview-zoom button{min-width:25px;min-height:25px;padding:0;font-size:16px}.preview-zoom output{min-width:23px;text-align:center}
+.toolbar{height:42px}.toolbar .brand{display:none}.toolbar .master-label{margin-left:auto}
+.toolbar [data-panel="sampler"],.toolbar [data-panel="scratch"],.toolbar [data-panel="flip"],.toolbar [data-panel="video"],.toolbar [data-panel="coverage"]{display:none}
+.review-bar{height:23px}.review-bar>button{display:none}.review-bar>span:first-child{font-size:9px}
+main{height:calc(100dvh - 119px);min-height:650px}.preview-deck-wave{display:none}
+body[data-workspace="serato"] .preview-zoom{visibility:hidden}
+body[data-workspace="serato"] #decks{padding:4px;gap:4px}
+body[data-workspace="serato"] .detail-horizontal{height:160px}
+/* Keep the same control nodes. The central mixer becomes a grid sibling of the
+   decks via display:contents; no cloning, secondary state or handler rebinding. */
+body:is([data-workspace="traktor"],[data-workspace="hybrid"]){--surface:#292b2d;--sunken:#121415;--raised:#373a3d;--line:#414548;--text:#e5e8ea;--muted:#a9b1b6;--blue:#16b8d7}
+body:is([data-workspace="traktor"],[data-workspace="hybrid"]) main{display:grid;grid-template-columns:minmax(0,1fr) 232px minmax(0,1fr);grid-template-rows:auto minmax(225px,1fr);gap:4px;padding:4px;background:#0b0d0e;min-height:700px}
+body:is([data-workspace="traktor"],[data-workspace="hybrid"]) #performance,body:is([data-workspace="traktor"],[data-workspace="hybrid"]) #decks{display:contents}
+body:is([data-workspace="traktor"],[data-workspace="hybrid"]) .deck{display:grid;grid-template-columns:minmax(0,1fr) 32px;grid-template-rows:48px 52px 116px 34px auto 30px auto;gap:4px;align-content:start;border:1px solid #42474b;background:#25282a;position:relative;min-width:0}
+body:is([data-workspace="traktor"],[data-workspace="hybrid"]) .deck:nth-of-type(1){grid-column:1;grid-row:1}
+body:is([data-workspace="traktor"],[data-workspace="hybrid"]) .deck:nth-of-type(2){grid-column:3;grid-row:1}
+body:is([data-workspace="traktor"],[data-workspace="hybrid"]) .deck:nth-of-type(3){grid-column:1;grid-row:2}
+body:is([data-workspace="traktor"],[data-workspace="hybrid"]) .deck:nth-of-type(4){grid-column:3;grid-row:2}
+body:is([data-workspace="traktor"],[data-workspace="hybrid"]) .deck.focused{border-color:#747e85}
+body:is([data-workspace="traktor"],[data-workspace="hybrid"]) .deck-head{grid-row:1;grid-column:1/-1;height:48px;background:#323639;border-bottom:1px solid #0c0e0f;padding:7px 9px;gap:8px}
+body:is([data-workspace="traktor"],[data-workspace="hybrid"]) .deck-number{font-size:0;min-width:22px}
+body:is([data-workspace="traktor"],[data-workspace="hybrid"]) .deck-number::after{content:attr(data-letter);font-size:24px}
+body:is([data-workspace="traktor"],[data-workspace="hybrid"]) .deck[data-preview-letter="A"] .deck-number::after{content:'A';color:#ffad3d}
+body:is([data-workspace="traktor"],[data-workspace="hybrid"]) .deck[data-preview-letter="B"] .deck-number::after{content:'B';color:#61c5ed}
+body:is([data-workspace="traktor"],[data-workspace="hybrid"]) .deck[data-preview-letter="C"] .deck-number::after{content:'C';color:#ffad3d}
+body:is([data-workspace="traktor"],[data-workspace="hybrid"]) .deck[data-preview-letter="D"] .deck-number::after{content:'D';color:#61c5ed}
+body:is([data-workspace="traktor"],[data-workspace="hybrid"]) .deck-title strong{font-size:13px;font-weight:600}
+body:is([data-workspace="traktor"],[data-workspace="hybrid"]) .deck-title small{font-size:10px;margin-top:3px}
+body:is([data-workspace="traktor"],[data-workspace="hybrid"]) .track-gain-control{display:none}
+body:is([data-workspace="traktor"],[data-workspace="hybrid"]) .deck-key{font-size:14px;color:#b8d7c0}
+body:is([data-workspace="traktor"],[data-workspace="hybrid"]) .deck-head button{min-height:25px;background:#1a1d1f}
+body:is([data-workspace="traktor"],[data-workspace="hybrid"]) .deck-body,body:is([data-workspace="traktor"],[data-workspace="hybrid"]) .deck-disc{display:contents}
+body:is([data-workspace="traktor"],[data-workspace="hybrid"]) .deck-body>div:first-child{grid-column:1;grid-row:5;padding:0 5px}
+body:is([data-workspace="traktor"],[data-workspace="hybrid"]) .deck-tabs{margin:0 0 4px;gap:2px}
+body:is([data-workspace="traktor"],[data-workspace="hybrid"]) .deck-tabs button{min-height:22px;background:#34383b;font-size:9px;border-bottom:1px solid #4f575d;color:#b8c0c5}
+body:is([data-workspace="traktor"],[data-workspace="hybrid"]) .deck-tabs button.active{border-color:#16b8d7;color:#f4f6f7;background:#424a50}
+body:is([data-workspace="traktor"],[data-workspace="hybrid"]) .pads{gap:3px}
+body:is([data-workspace="traktor"],[data-workspace="hybrid"]) .pad{height:22px;min-height:22px;padding:1px 3px;font-size:10px;border:1px solid #4a5055;background:#303639;display:flex;align-items:center;justify-content:center;gap:4px}
+body:is([data-workspace="traktor"],[data-workspace="hybrid"]) .pad small{font-size:9px}
+body:is([data-workspace="traktor"],[data-workspace="hybrid"]) .loop-line{gap:3px;margin-top:4px}
+body:is([data-workspace="traktor"],[data-workspace="hybrid"]) .loop-line>*{min-height:22px;padding:2px;font-size:9px}
+body:is([data-workspace="traktor"],[data-workspace="hybrid"]) .platter{grid-column:1;grid-row:2;width:auto!important;height:52px!important;border:0;border-radius:0;margin:0 5px;padding:0 9px;box-shadow:none;background:#16191b;color:#e4e9ec;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;align-items:center;justify-items:start;cursor:grab}
+body:is([data-workspace="traktor"],[data-workspace="hybrid"]) .platter::after{display:none}
+body:is([data-workspace="traktor"],[data-workspace="hybrid"]) .platter strong{font-size:23px;grid-column:2;grid-row:1;justify-self:end;line-height:1}
+body:is([data-workspace="traktor"],[data-workspace="hybrid"]) .platter small:first-of-type{grid-column:2;grid-row:2;justify-self:end;font-size:10px;color:#afb8be}
+body:is([data-workspace="traktor"],[data-workspace="hybrid"]) .platter time{grid-column:1;grid-row:1;margin:0;font-size:21px;font-variant-numeric:tabular-nums}
+body:is([data-workspace="traktor"],[data-workspace="hybrid"]) .platter small:last-of-type{grid-column:1;grid-row:2;font-size:11px;color:#aeb9c0}
+body:is([data-workspace="traktor"],[data-workspace="hybrid"]) .scratch-status,body:is([data-workspace="traktor"],[data-workspace="hybrid"]) .beat-position{display:none}
+body:is([data-workspace="traktor"],[data-workspace="hybrid"]) .preview-deck-wave{display:block;grid-column:1;grid-row:3;position:relative;min-width:0;background:#0a0d0f;margin:0 5px;border:1px solid #42484c;overflow:hidden}
+.preview-deck-wave canvas{width:100%;height:100%;position:absolute;inset:0;pointer-events:none}
+.preview-deck-wave .waveform-scrub-lane{position:absolute;inset:0;z-index:1}
+.preview-deck-wave output{position:absolute}
+body:is([data-workspace="traktor"],[data-workspace="hybrid"]) .wave-wrap{grid-column:1;grid-row:4;margin:0 5px;height:34px;border-color:#42484c}
+body:is([data-workspace="traktor"],[data-workspace="hybrid"]) .transport{grid-column:1;grid-row:6;gap:4px;padding:0 5px}
+body:is([data-workspace="traktor"],[data-workspace="hybrid"]) .transport button{font-size:10px;min-height:29px;background:#383e43;border:1px solid #555f67}
+body:is([data-workspace="traktor"],[data-workspace="hybrid"]) .transport [data-action="play"]{order:-2;min-width:60px;color:#b9e7cf}
+body:is([data-workspace="traktor"],[data-workspace="hybrid"]) .transport [data-action="cue"]{order:-1;min-width:54px}
+body:is([data-workspace="traktor"],[data-workspace="hybrid"]) .transport button.active{background:#126a42;border-color:#60ac7f;color:#fff}
+body:is([data-workspace="traktor"],[data-workspace="hybrid"]) .transport [data-action="sync"].active{background:#075a73;border-color:#36b2d5}
+body:is([data-workspace="traktor"],[data-workspace="hybrid"]) .tempo-control{grid-column:2;grid-row:2/8;margin:2px 4px 8px 0;min-height:220px;font-size:10px;align-self:stretch}
+body:is([data-workspace="traktor"],[data-workspace="hybrid"]) .tempo-control input{accent-color:#b6bec3}
+body:is([data-workspace="traktor"],[data-workspace="hybrid"]) .deck-foot{grid-column:1;grid-row:7;padding:0 5px 5px;gap:3px;align-self:start}
+body:is([data-workspace="traktor"],[data-workspace="hybrid"]) .deck-foot button,body:is([data-workspace="traktor"],[data-workspace="hybrid"]) .deck-foot select{min-height:22px;font-size:9px;padding:2px 4px;background:#2b3034}
+/* The original, unchanged renderer remains full-sized but offscreen. */
+body:is([data-workspace="traktor"],[data-workspace="hybrid"]) .detail-horizontal{position:fixed!important;top:-1000px;left:0;width:calc(100vw - 20px);height:240px!important;opacity:0;pointer-events:none;grid-area:unset!important}
+body:is([data-workspace="traktor"],[data-workspace="hybrid"]) #mixer{grid-column:2;grid-row:1;display:grid;grid-template-columns:1fr 1fr;align-content:start;align-items:start;padding:10px 12px 8px;gap:10px 12px;background:#303539;border:1px solid #535b61;min-height:0}
+body:is([data-workspace="traktor"],[data-workspace="hybrid"]) .channel-strip{display:flex;flex-direction:column;gap:5px;min-width:0;width:100%;padding:0 5px}
+body:is([data-workspace="traktor"],[data-workspace="hybrid"]) .channel-strip:first-child{border-right:1px solid #1d2124;padding-right:13px}
+body:is([data-workspace="traktor"],[data-workspace="hybrid"]) .channel-strip>strong{font-size:17px;color:#c6d0d7;margin-bottom:3px}
+body:is([data-workspace="traktor"],[data-workspace="hybrid"]) .knob-group{display:flex;flex-direction:column;align-items:center;position:relative;height:43px;width:66px;min-height:43px;padding-top:31px;font-size:8px;letter-spacing:.5px;color:#c0c8ce}
+body:is([data-workspace="traktor"],[data-workspace="hybrid"]) .knob-group::before{content:'';position:absolute;top:0;left:18px;width:30px;height:30px;border:3px solid #0b1013;border-radius:50%;background:linear-gradient(130deg,#50585e,#2d3439);box-shadow:0 0 0 1px #525e67}
+body:is([data-workspace="traktor"],[data-workspace="hybrid"]) .knob-group::after{content:'';position:absolute;top:3px;left:31px;width:3px;height:10px;background:#f5a33c;transform-origin:1px 12px;transform:rotate(var(--dial-angle,0deg));pointer-events:none}
+body:is([data-workspace="traktor"],[data-workspace="hybrid"]) .knob-group input{position:absolute;top:0;left:14px;width:38px;height:30px;opacity:.01;cursor:ew-resize;z-index:1}
+body:is([data-workspace="traktor"],[data-workspace="hybrid"]) .knob-group:focus-within::before{outline:2px solid #83d6f0;outline-offset:2px}
+body:is([data-workspace="traktor"],[data-workspace="hybrid"]) .fader-group{display:flex;flex-direction:column;align-items:center;gap:5px;width:38px;font-size:8px;letter-spacing:.4px;color:#c0c8ce;margin-top:3px}
+body:is([data-workspace="traktor"],[data-workspace="hybrid"]) .fader-group input{writing-mode:vertical-lr;direction:rtl;width:22px;height:91px;min-height:91px;accent-color:#bdc9d0}
+body:is([data-workspace="traktor"],[data-workspace="hybrid"]) .cross-assign{display:none}
+body:is([data-workspace="traktor"],[data-workspace="hybrid"]) .channel-strip>button{min-height:25px;font-size:9px;width:65px;margin-top:3px;background:#23292d}
+body:is([data-workspace="traktor"],[data-workspace="hybrid"]) .channel-strip>button.active{background:#07657e;border-color:#51c7e7;color:#fff}
+body:is([data-workspace="traktor"],[data-workspace="hybrid"]) .crossfader{grid-column:1/-1;width:100%;font-size:8px;letter-spacing:.4px;border-top:1px solid #50595f;padding-top:8px;color:#c0c8ce}
+body:is([data-workspace="traktor"],[data-workspace="hybrid"]) .crossfader input{accent-color:#b5c6d1;margin-top:5px}
+body:is([data-workspace="traktor"],[data-workspace="hybrid"]) .library{grid-column:1/-1;grid-row:2;min-height:225px;border:1px solid #434b50;margin-top:2px;grid-template-columns:195px minmax(0,1fr)}
+body:is([data-workspace="traktor"],[data-workspace="hybrid"]) .library-tools{background:#30373c;border-bottom:1px solid #586269}
+body:is([data-workspace="traktor"],[data-workspace="hybrid"]) table{font-size:12px}
+body:is([data-workspace="traktor"],[data-workspace="hybrid"]) th{background:#30373c;color:#bac5cc;font-size:9px}
+body:is([data-workspace="traktor"],[data-workspace="hybrid"]) td{padding:6px 8px}
+body:is([data-workspace="traktor"],[data-workspace="hybrid"]) tbody tr.selected{background:#07546b!important}
+body:is([data-workspace="traktor"],[data-workspace="hybrid"]) #panel:not([hidden]){grid-column:1/-1;grid-row:2}
+body:is([data-workspace="traktor"],[data-workspace="hybrid"]) main:has(#panel:not([hidden])) .library{grid-row:3}
+body:is([data-workspace="traktor"],[data-workspace="hybrid"]).four-decks main{height:auto;min-height:calc(100dvh - 119px);grid-template-rows:auto auto minmax(260px,1fr)}
+body:is([data-workspace="traktor"],[data-workspace="hybrid"]).four-decks #mixer{grid-row:1/3;grid-template-columns:1fr 1fr;align-content:start}
+body:is([data-workspace="traktor"],[data-workspace="hybrid"]).four-decks .library{grid-row:3}
+body:is([data-workspace="traktor"],[data-workspace="hybrid"]).four-decks .deck-disc{display:contents}
+body:is([data-workspace="traktor"],[data-workspace="hybrid"]).four-decks .deck-foot{display:flex}
+body:is([data-workspace="traktor"],[data-workspace="hybrid"]).four-decks .deck-tabs{display:flex}
+@media(max-width:1100px){.workspace-bar{gap:12px}.workspace-caption{display:none}body:is([data-workspace="traktor"],[data-workspace="hybrid"]) main{grid-template-columns:minmax(0,1fr) 188px minmax(0,1fr)}body:is([data-workspace="traktor"],[data-workspace="hybrid"]) #mixer{padding:10px 4px;gap:10px 4px}body:is([data-workspace="traktor"],[data-workspace="hybrid"]) .deck-title strong{font-size:11px}body:is([data-workspace="traktor"],[data-workspace="hybrid"]) .deck-foot button{font-size:8px;padding:2px}body:is([data-workspace="traktor"],[data-workspace="hybrid"]) .deck-head{gap:4px;padding:6px}.toolbar{overflow-x:auto}.toolbar .master-label{min-width:290px}}
+@media(max-width:800px){.workspace-bar{height:auto;min-height:65px;padding:8px;gap:10px;flex-wrap:wrap}.workspace-brand{font-size:21px}.workspace-switch button{padding:4px 9px}.preview-zoom{display:none}body:is([data-workspace="traktor"],[data-workspace="hybrid"]) main{height:auto;grid-template-columns:minmax(0,1fr);grid-template-rows:auto;min-height:0}body:is([data-workspace="traktor"],[data-workspace="hybrid"]) .deck:nth-of-type(n){grid-column:1;grid-row:auto}body:is([data-workspace="traktor"],[data-workspace="hybrid"]) #mixer{grid-column:1;grid-row:3;grid-template-columns:1fr 1fr}body:is([data-workspace="traktor"],[data-workspace="hybrid"]) .channel-strip{display:grid;grid-template-columns:repeat(3,1fr);justify-items:center}body:is([data-workspace="traktor"],[data-workspace="hybrid"]) .channel-strip>strong{grid-column:1/-1}body:is([data-workspace="traktor"],[data-workspace="hybrid"]) .fader-group{grid-column:3;grid-row:2/4}body:is([data-workspace="traktor"],[data-workspace="hybrid"]) .library{grid-column:1;grid-row:4;min-height:300px;grid-template-columns:145px minmax(0,1fr)}body[data-workspace="serato"] main{height:auto}body[data-workspace="serato"] .library{height:350px}.review-bar>span:first-child{display:none}}
+
+/* Fauconnier/Turner blending: retain Serato's shared beat-comparison timeline,
+   combine it with Traktor's physical deck–mixer–deck relationship. One timeline,
+   one set of controls, no duplicate transport state. */
+body[data-workspace="hybrid"] main{grid-template-rows:156px auto minmax(225px,1fr)}
+body[data-workspace="hybrid"] .detail-horizontal{position:relative!important;top:auto;left:auto;width:auto;height:156px!important;opacity:1;pointer-events:auto;grid-column:1/-1!important;grid-row:1!important;border:1px solid #455159}
+body[data-workspace="hybrid"] .detail-wave-tools{display:none}
+body[data-workspace="hybrid"] .deck:nth-of-type(1),body[data-workspace="hybrid"] .deck:nth-of-type(2){grid-row:2}
+body[data-workspace="hybrid"] .deck{grid-template-rows:48px 52px 0 34px auto 30px auto}
+body[data-workspace="hybrid"] .preview-deck-wave{display:none}
+body[data-workspace="hybrid"] #mixer{grid-row:2}
+body[data-workspace="hybrid"] .knob-group{height:36px;min-height:36px;padding-top:27px}
+body[data-workspace="hybrid"] .knob-group::before{width:26px;height:26px;left:20px}
+body[data-workspace="hybrid"] .knob-group::after{top:3px;height:8px;transform-origin:1px 10px}
+body[data-workspace="hybrid"] .fader-group input{height:65px;min-height:65px}
+body[data-workspace="hybrid"] .library{grid-row:3}
+body[data-workspace="hybrid"] .deck-tabs [data-tab="Stems"],body[data-workspace="hybrid"] .deck-tabs [data-tab="Pitch"],body[data-workspace="hybrid"] .deck-tabs [data-tab="Slicer"]{display:none}
+body[data-workspace="hybrid"] .deck-tabs button{font-size:10px;letter-spacing:.4px;min-height:25px}
+body[data-workspace="hybrid"] .pad{height:27px;min-height:27px}
+body[data-workspace="hybrid"] .deck-foot [data-action="censor"],body[data-workspace="hybrid"] .deck-foot [data-action="repeat"],body[data-workspace="hybrid"] .deck-foot [data-action="keyDown"],body[data-workspace="hybrid"] .deck-foot [data-action="keyUp"],body[data-workspace="hybrid"] .deck-foot [data-action="keySync"],body[data-workspace="hybrid"] .deck-foot [data-action="keyReset"],body[data-workspace="hybrid"] .deck-foot [data-action="double"]{display:none}
+body[data-workspace="hybrid"] .deck-foot button,body[data-workspace="hybrid"] .deck-foot select{font-size:10px;min-height:24px;padding:3px 6px}
+body[data-workspace="hybrid"] .deck-foot .muted{display:none}
+body[data-workspace="hybrid"] .transport [data-action="cue"]{font-size:0}
+body[data-workspace="hybrid"] .transport [data-action="cue"]::after{content:'CUE';font-size:11px}
+body[data-workspace="hybrid"] .transport button{font-size:11px}
+body[data-workspace="hybrid"] .deck{background:#222629}
+body[data-workspace="hybrid"] .deck-head{background:#2e353a}
+/* Outer gain/filter and inner three-band EQ mirror the reference's physical
+   channel grouping. Labels sit above the dials instead of under their edges. */
+body:is([data-workspace="traktor"],[data-workspace="hybrid"]) #mixer{padding:10px 6px 8px;gap:10px 8px}
+body:is([data-workspace="traktor"],[data-workspace="hybrid"]) .channel-strip{display:grid;grid-template-columns:1fr 1fr;gap:7px 2px;justify-items:center;padding:0;align-items:start}
+body:is([data-workspace="traktor"],[data-workspace="hybrid"]) .channel-strip:first-child{padding-right:4px}
+body:is([data-workspace="traktor"],[data-workspace="hybrid"]) .channel-strip>strong{grid-column:1/-1;margin-bottom:2px}
+body:is([data-workspace="traktor"],[data-workspace="hybrid"]) .knob-group{height:47px;min-height:47px;width:46px;padding-top:0;font-size:9px;line-height:12px}
+body:is([data-workspace="traktor"],[data-workspace="hybrid"]) .knob-group::before{top:15px;left:9px;width:28px;height:28px}
+body:is([data-workspace="traktor"],[data-workspace="hybrid"]) .knob-group::after{top:18px;left:22px;height:9px;transform-origin:1px 10px}
+body:is([data-workspace="traktor"],[data-workspace="hybrid"]) .knob-group input{top:14px;left:5px}
+body:is([data-workspace="traktor"],[data-workspace="hybrid"]) .knob-group:has(input[data-mix$=":trim"]){grid-column:1;grid-row:2}
+body:is([data-workspace="traktor"],[data-workspace="hybrid"]) .knob-group:has(input[data-mix$=":high"]){grid-column:2;grid-row:2}
+body:is([data-workspace="traktor"],[data-workspace="hybrid"]) .knob-group:has(input[data-mix$=":mid"]){grid-column:2;grid-row:3}
+body:is([data-workspace="traktor"],[data-workspace="hybrid"]) .knob-group:has(input[data-mix$=":low"]){grid-column:2;grid-row:4}
+body:is([data-workspace="traktor"],[data-workspace="hybrid"]) .knob-group:has(input[data-mix$=":filter"]){grid-column:1;grid-row:3}
+body:is([data-workspace="traktor"],[data-workspace="hybrid"]) .fader-group{grid-column:1;grid-row:4/7;margin:0;gap:6px}
+body:is([data-workspace="traktor"],[data-workspace="hybrid"]) .fader-group input{height:150px;min-height:150px}
+body:is([data-workspace="traktor"],[data-workspace="hybrid"]) .channel-strip>button{grid-column:2;grid-row:5;width:43px;font-size:9px;margin-top:5px}
+body[data-workspace="hybrid"] .fader-group input{height:117px;min-height:117px}
+body[data-workspace="hybrid"] main:has(#panel:not([hidden])) #panel{grid-row:3}
+body[data-workspace="hybrid"] main:has(#panel:not([hidden])) .library{grid-row:4}
+body[data-workspace="hybrid"].four-decks .deck:nth-of-type(3),body[data-workspace="hybrid"].four-decks .deck:nth-of-type(4){grid-row:3}
+body[data-workspace="hybrid"].four-decks #mixer{grid-row:2/4}
+body[data-workspace="hybrid"].four-decks .library{grid-row:4}
+@media(max-width:800px){body[data-workspace="hybrid"] main{grid-template-rows:156px auto auto auto minmax(300px,1fr)}body[data-workspace="hybrid"] .deck:nth-of-type(1){grid-row:2}body[data-workspace="hybrid"] .deck:nth-of-type(2){grid-row:3}body[data-workspace="hybrid"] #mixer{grid-row:4}body[data-workspace="hybrid"] .library{grid-row:5}}

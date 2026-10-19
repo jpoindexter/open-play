@@ -1,0 +1,302 @@
+{
+  "checkpoint": "workspace-layout196",
+  "date": "2026-10-19",
+  "entry": "prototype/layout-preview.html",
+  "player": "prototype/workspace-preview.html",
+  "url": "http://127.0.0.1:8848/prototype/layout-preview.html",
+  "scope": "Separate HTML review only. Current native27 and all existing production UI/audio/MIDI files unchanged.",
+  "reference": {
+    "app": "/Applications/Native Instruments/Traktor Pro 3/Traktor.app",
+    "installedVersion": "3.11.1 17",
+    "visualObservation": "Mixer layout: decks at left/right, central vertical gain/EQ/filter/faders/cue, crossfader below, library below.",
+    "rea": "open_binary attempted; previous Hopper provider cleanup incomplete. Did not close or replace that analysis. Native visible interface used as fallback; no binary behavior claim."
+  },
+  "method": {
+    "name": "Analogy and Blending",
+    "origin": "Fauconnier and Turner",
+    "mapping": "Shared beat-comparison timeline from Serato plus physical deck-mixer-deck organization from Traktor. Compact metrics and core controls, one shared source of state."
+  },
+  "executed": [
+    {
+      "claim": "Real-track session survives all three layout changes",
+      "evidence": [
+        {
+          "activeChoice": [
+            "Serato style"
+          ],
+          "audioStatus": "1 decks playing \u00b7 44100 Hz audio engine \u00b7 outputs in Devices",
+          "crossfaders": 1,
+          "filter": "0.01",
+          "level": "0",
+          "playButtons": 2,
+          "positions": [
+            20.495,
+            20
+          ],
+          "titles": [
+            "Trax Records | Classics - 040 - Mr. Fingers - Can You Feel It (Instrumental Mix)",
+            "Trax Records | Classics - 022 - Mr. Fingers - Moonglow"
+          ],
+          "workspace": "serato"
+        },
+        {
+          "activeChoice": [
+            "Traktor style"
+          ],
+          "audioStatus": "1 decks playing \u00b7 44100 Hz audio engine \u00b7 outputs in Devices",
+          "crossfaders": 1,
+          "filter": "0.01",
+          "level": "0",
+          "playButtons": 2,
+          "positions": [
+            20.797,
+            20
+          ],
+          "titles": [
+            "Trax Records | Classics - 040 - Mr. Fingers - Can You Feel It (Instrumental Mix)",
+            "Trax Records | Classics - 022 - Mr. Fingers - Moonglow"
+          ],
+          "workspace": "traktor"
+        },
+        {
+          "activeChoice": [
+            "Hybrid"
+          ],
+          "audioStatus": "1 decks playing \u00b7 44100 Hz audio engine \u00b7 outputs in Devices",
+          "crossfaders": 1,
+          "filter": "0.01",
+          "level": "0",
+          "playButtons": 2,
+          "positions": [
+            21.105,
+            20
+          ],
+          "titles": [
+            "Trax Records | Classics - 040 - Mr. Fingers - Can You Feel It (Instrumental Mix)",
+            "Trax Records | Classics - 022 - Mr. Fingers - Moonglow"
+          ],
+          "workspace": "hybrid"
+        }
+      ],
+      "limitation": "Deck1 fader zero intentionally muted this check. This proves browser transport/UI persistence, not sound quality, native acceptance or hardware."
+    },
+    {
+      "claim": "Rendered desktop layouts are distinct and contain deck/mixer/library regions with no page horizontal overflow",
+      "evidence": [
+        {
+          "playing": "0 decks playing \u00b7 44100 Hz audio engine \u00b7 outputs in Devices",
+          "positions": [
+            "20.000",
+            "20.000"
+          ],
+          "rectangles": [
+            {
+              "bottom": 593,
+              "left": 4,
+              "right": 718,
+              "top": 287,
+              "type": "deck focused"
+            },
+            {
+              "bottom": 593,
+              "left": 722,
+              "right": 1436,
+              "top": 287,
+              "type": "deck "
+            },
+            {
+              "bottom": 641,
+              "left": 0,
+              "right": 1440,
+              "top": 597,
+              "type": "mixer"
+            },
+            {
+              "bottom": 972,
+              "left": 0,
+              "right": 1440,
+              "top": 641,
+              "type": "library"
+            }
+          ],
+          "scrollWidth": 1440,
+          "scrubLanes": [
+            {
+              "deck": "0",
+              "height": 79,
+              "parent": "waveform-scrub-lanes",
+              "width": 1430
+            },
+            {
+              "deck": "1",
+              "height": 79,
+              "parent": "waveform-scrub-lanes",
+              "width": 1430
+            }
+          ],
+          "width": 1440,
+          "workspace": "serato"
+        },
+        {
+          "playing": "0 decks playing \u00b7 44100 Hz audio engine \u00b7 outputs in Devices",
+          "positions": [
+            "20.000",
+            "20.000"
+          ],
+          "rectangles": [
+            {
+              "bottom": 597,
+              "left": 4,
+              "right": 600,
+              "top": 123,
+              "type": "deck focused"
+            },
+            {
+              "bottom": 597,
+              "left": 840,
+              "right": 1436,
+              "top": 123,
+              "type": "deck "
+            },
+            {
+              "bottom": 597,
+              "left": 604,
+              "right": 836,
+              "top": 123,
+              "type": "mixer"
+            },
+            {
+              "bottom": 968,
+              "left": 4,
+              "right": 1436,
+              "top": 603,
+              "type": "library"
+            }
+          ],
+          "scrollWidth": 1440,
+          "scrubLanes": [
+            {
+              "deck": "0",
+              "height": 114,
+              "parent": "preview-deck-wave",
+              "width": 546
+            },
+            {
+              "deck": "1",
+              "height": 114,
+              "parent": "preview-deck-wave",
+              "width": 546
+            }
+          ],
+          "width": 1440,
+          "workspace": "traktor"
+        },
+        {
+          "playing": "0 decks playing \u00b7 44100 Hz audio engine \u00b7 outputs in Devices",
+          "positions": [
+            "20.000",
+            "20.000"
+          ],
+          "rectangles": [
+            {
+              "bottom": 640,
+              "left": 4,
+              "right": 600,
+              "top": 283,
+              "type": "deck focused"
+            },
+            {
+              "bottom": 640,
+              "left": 840,
+              "right": 1436,
+              "top": 283,
+              "type": "deck "
+            },
+            {
+              "bottom": 640,
+              "left": 604,
+              "right": 836,
+              "top": 283,
+              "type": "mixer"
+            },
+            {
+              "bottom": 968,
+              "left": 4,
+              "right": 1436,
+              "top": 646,
+              "type": "library"
+            }
+          ],
+          "scrollWidth": 1440,
+          "scrubLanes": [
+            {
+              "deck": "0",
+              "height": 77,
+              "parent": "waveform-scrub-lanes",
+              "width": 1430
+            },
+            {
+              "deck": "1",
+              "height": 77,
+              "parent": "waveform-scrub-lanes",
+              "width": 1430
+            }
+          ],
+          "width": 1440,
+          "workspace": "hybrid"
+        }
+      ],
+      "limitation": "1440px desktop test and fitted normal-width preview; not an exhaustive viewport/a11y test."
+    },
+    {
+      "claim": "Fresh player initializes and keyboard selects all three layouts",
+      "evidence": {
+        "freshPlayerReady": true,
+        "keyboardChoicesObserved": [
+          "serato",
+          "traktor",
+          "hybrid"
+        ],
+        "browserConsoleErrors": [
+          {
+            "level": "error",
+            "message": "Uncaught TypeError: Failed to execute 'observe' on 'MutationObserver': parameter 1 is not of type 'Node'.",
+            "timestamp": "2026-10-19T14:32:52.484Z"
+          }
+        ],
+        "note": "Frame locator click initially returned no node location; actual Enter activation then selected all three layouts. Observer console error retained; not a clean-console claim."
+      },
+      "limitation": "A frame observer console error and an initial locator click failure are retained. Keyboard activation selected all3; no clean-console claim."
+    }
+  ],
+  "screenshots": [
+    {
+      "layout": "serato",
+      "path": "local-evidence/workspace-layout-preview-196/serato-desktop.png",
+      "sha256": "d900cb4a85f2b6f942056dd81b04dea001c2047f4e8277a38fd495ace3c2a4c0"
+    },
+    {
+      "layout": "traktor",
+      "path": "local-evidence/workspace-layout-preview-196/traktor-desktop.png",
+      "sha256": "74979f864a534d5190efd2a4ee13ff95a3f567352051ba0f3f5312183a08b18b"
+    },
+    {
+      "layout": "hybrid",
+      "path": "local-evidence/workspace-layout-preview-196/hybrid-desktop.png",
+      "sha256": "03bc180a422a42cb2ee7d04d5ea2a766c1971e73e740c890a8fce8fc39ce3f33"
+    }
+  ],
+  "sourceFilesUnchanged": [
+    "prototype/index.html",
+    "prototype/app.js",
+    "prototype/engine.js",
+    "prototype/midi.js",
+    "prototype/styles.css",
+    "prototype/performance-theme.css"
+  ],
+  "nativeAsarUnchanged": "a4d7135432916a3fb0467d008cd6c97ffb293b4ec63aeeba2e36bff50b60afcb",
+  "nativeRebuilt": false,
+  "userLayoutAcceptance": false,
+  "coreGoalComplete": false,
+  "fullParityVerified": false
+}

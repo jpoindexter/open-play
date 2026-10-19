@@ -1,3 +1,11 @@
+# Layout review196 — three HTML options; desktop unchanged
+
+19October2026: Jason requested a quick switchable Serato/Traktor preview, then a third Hybrid combining shared RGB timing lanes with a centered physical mixer. Separate prototype/layout-preview.html opens the review; workspace-preview.html imports the existing player. Real-track live switching preserves titles, advancing deck1position, stationary deck2position and mixer values. All3desktop compositions inspected; details/limits in docs/prototype/WORKSPACE_LAYOUT_PREVIEW_196.md and .json. Native27ASAR and production UI/audio/MIDI source unchanged; no app rebuilt. A fresh frame observer console error is retained; keyboard choices and player readiness observed, not a clean-console claim.
+
+Hybrid is selected with both real tracks paused20s in the browser preview. Layout selection is pending Jason's review. Do not apply alternate layouts to the production entry or rebuild/package the desktop app until he approves a direction. This explicit design review supplements the same core-DJ goal; no advanced-feature work or full parity claim. Historical native27/core195status below remains valid and separately scoped.
+
+---
+
 # Desktop0.1.27 — core waveform positioning195
 
 19October2026: native27/source a20059d/ASAR a4d7135432916a3fb0467d008cd6c97ffb293b4ec63aeeba2e36bff50b60afcb adds detailed-waveform scrub to the corrected RGB rendering. Actual paused real-track drag: Vertical deck1 20.000→20.658; Horizontal deck2 20.000→20.559→20.000, other deck unchanged. The short-drag preparation gap observed in26 is addressed with a final-position request that is cancelable/supersedable. Controlled UI27/27; separate archive/host5/5. Native waveform keyboard audition/release while deck2 plays observed; interrupted/confounded pointer-while-playing inputs are not a pass.
