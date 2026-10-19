@@ -1,0 +1,30 @@
+{
+  "revision": 204,
+  "scope": "HTML rekordbox preview only",
+  "date": "2026-10-19",
+  "preview": "http://127.0.0.1:8848/prototype/layout-preview.html",
+  "executed": [
+    "Both headphone knobs: vertical pointer drag changes the displayed engine-backed setting (MIX50 to66.2%; LEVEL10 to26.2%).",
+    "Both keyboard ArrowRight inputs increment0.1 percentage points; Setup displays matching settings.",
+    "Setup Cue Mix0/Cue Volume1 change reflected in inline controls.",
+    "Inline MIX0.1%/LEVEL1.1% persisted after normal page reload.",
+    "Double-click resets MIX50% and LEVEL10% unity.",
+    "Two-deck Horizontal Full and four-deck Vertical Compact show exactly two inline controls without old button; mixer hide/show hides/restores them.",
+    "Crossfader center offset0px in observed layouts; library previews remain visible.",
+    "Starting Cue Mix50%/Cue Volume50% restored through Setup; all decks paused.",
+    "Syntax checks and git diff --check pass; installed0.1.27 ASAR hash unchanged."
+  ],
+  "code_path_only": [
+    "Partial engine.setMonitorSettings updates existing monitor bus without resetting Master Cue/Split Cue/Mono.",
+    "External monitor changes including existing controller path reflected via engine settings reference.",
+    "Shift-drag fine adjustment and pointer-cancel persistence implemented; not separately exercised."
+  ],
+  "not_established": [
+    "Fresh physical MIDI or headphone/speaker acoustic acceptance",
+    "Whole-product or exact proprietary parity",
+    "User visual acceptance"
+  ],
+  "native_asar_sha256": "a4d7135432916a3fb0467d008cd6c97ffb293b4ec63aeeba2e36bff50b60afcb",
+  "trello": "https://trello.com/c/lor8EHEW",
+  "private_evidence": "local-evidence/headphone-controls-204/"
+}

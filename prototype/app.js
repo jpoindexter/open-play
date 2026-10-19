@@ -235,7 +235,7 @@ const metadataFields = [
 function trackMetadata(t) {
   return Object.fromEntries(metadataFields.map((k) => [k, t[k]]));
 }
-function persist() {
+export function persist() {
   state.sessionSaved = false;
   for (const t of state.tracks)
     if (t.contentHash) state.localTags[t.contentHash] = trackMetadata(t);

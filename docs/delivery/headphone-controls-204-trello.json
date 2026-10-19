@@ -1,0 +1,22 @@
+{
+  "revision": 204,
+  "card": {
+    "id": "ari:cloud:trello::card/workspace/6a8f03e71844a6c1103692dc/6ad65ac39be0b88a5f710681",
+    "url": "https://trello.com/c/lor8EHEW/121-ui-rb-05-inline-headphone-mix-and-level-knobs",
+    "name": "UI-RB-05 — Inline headphone MIX and LEVEL knobs",
+    "complete": false,
+    "description": "HTML204 — 19 October2026. Jason requests actual headphone MIX and LEVEL knobs in the shared bottom bar, replacing the Setup shortcut button, like his native rekordbox screenshot. Implemented in rekordbox HTML preview only. Original headphone icon, MIX, blue LEVEL ring; crossfader stays centered and assignments stay beside it. Existing monitor settings/audio graph reused; no alternate audio bus or routing logic. Native0.1.27 not rebuilt.\n\nExecuted actual browser UI: both knobs drag vertically; keyboard arrows; double-click MIX50%/LEVEL10% unity reset; knob→Setup and Setup→knob synchronization; changed0.1% mix/1.1% level survive reload; mixer hide/show and2H Full↔4V Compact recreate exactly two controls without old button; crossfader center offset0px. Restored starting Cue Mix50% / Cue Volume50%, all decks paused. Existing library waveform previews retained. This verifies UI/state/persistence; no fresh acoustic/physical-controller acceptance or full-parity claim.\n\nImplementation: prototype/headphone-preview.js plus preview adapter/CSS; app.js only exports its unchanged existing persist() function. Existing gain curve preserved:10% unity, above it up to+12dB. Partial monitor updates preserve Master Cue/Split Cue/Mono. Existing Setup/controller monitor setting changes are reflected; no fresh physical MIDI test. User visual approval pending. Do not mark full feature parity or native implementation complete.\n\nEvidence: docs/prototype/HEADPHONE_CONTROLS_204.md/.json; private screenshots and layout geometry local-evidence/headphone-controls-204/. Related UI-RB-03, UI-001 and MIX-004. HTML only until explicit native approval.\n\nModels: existing recommendation Codex gpt-6.1-sol/high; Claude Code Sonnet5/medium, verify availability before invoking. Rationale: focused UI/input/persistence integration. Escalate only a reproducible lost setting, channel association or audio regression. Reviewer: compare bottom bar against Jason's screenshot and exercise normal controls."
+  },
+  "parentComment": {
+    "id": "ari:cloud:trello::action/6ad65ad832faf3d4fa93dcdf",
+    "text": "HTML204 supersedes the old headphone access button: actual inline headphone MIX and LEVEL controls now sit left of the centered crossfader, like Jason's rekordbox screenshot. Tracked separately in UI-RB-05 https://trello.com/c/lor8EHEW. Both vertical drags/keyboard/reset, two-way Setup sync, reload persistence, mixer hide/show and2H Full↔4V Compact UI executed. Center offset0px. Existing monitor audio graph/settings reused; no fresh acoustic/MIDI or full-parity claim. Native0.1.27 unchanged. Evidence docs/prototype/HEADPHONE_CONTROLS_204.md/.json; visual acceptance remains open.",
+    "createdAt": "2026-10-19T18:00:56.231Z",
+    "lastEditedAt": null,
+    "creator": {
+      "id": "ari:cloud:trello::user/6a8f03e72f1758f6e32bc5a6",
+      "fullName": "Jason",
+      "avatarUrl": "https://trello-members.s3.amazonaws.com/6a8f03e72f1758f6e32bc5a6/9f12f068dba982d637bcb31f0324a632"
+    },
+    "cardId": "ari:cloud:trello::card/workspace/6a8f03e71844a6c1103692dc/6ad646b8c4108fe293b9a069"
+  }
+}

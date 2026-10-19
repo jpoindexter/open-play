@@ -1,7 +1,9 @@
-// Separate review entry point. Production app/engine/mapping files stay unchanged.
+// Separate review entry point. Reuses app persistence; engine/mapping logic unchanged.
 // Both workspaces share the same existing DOM controls and one AudioEngine.
-await import('./app.js');
+const {persist}=await import('./app.js');
 const {refineRekordboxDeck,refineRekordboxMixer}=await import('./rekordbox-preview.js');
+const {syncHeadphoneControls}=await import('./headphone-preview.js');
+const monitorAPI={...window.openPlay,persist};
 const {installLibraryWaveforms}=await import('./library-waveform-preview.js');
 installLibraryWaveforms(window.openPlay);
 
@@ -134,7 +136,7 @@ function refineMixer(){
     footer=document.createElement('div');footer.className='preview-mixer-footer';
     footer.append($('#crossfader').closest('label'),$('.preview-headphones'));$('#mixer').append(footer);
   }
-  if(document.body.dataset.workspace==='rekordbox'&&footer)refineRekordboxMixer(footer);
+  if(document.body.dataset.workspace==='rekordbox'&&footer)refineRekordboxMixer(footer,monitorAPI);
 }
 function updateFader(label){const input=label.querySelector('input');if(input)label.style.setProperty('--preview-level',input.value);}
 function updateDial(label){
@@ -188,6 +190,7 @@ choose('rekordbox');
 // transport. Crop its horizontal rows into Traktor deck views, retaining
 // the original focusable scrub surfaces and their delegated engine handlers.
 function paint(){
+  syncHeadphoneControls(monitorAPI);
   const source=$('#detail-wave');
   const decks=[...document.querySelectorAll('.deck')];
   if(source&&document.body.dataset.workspace==='traktor'&&source.width&&source.height){

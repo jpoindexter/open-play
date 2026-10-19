@@ -1,3 +1,9 @@
+# HTML204 — inline headphone MIX and LEVEL
+
+19 October2026: replaced the rekordbox footer headphone button with actual MIX and LEVEL rotary controls using existing monitor settings/audio and persistence. Original icon, blue level ring, centered crossfader retained. Executed both pointer drags/keyboard/reset, two-way Setup synchronization, reload persistence, mixer hide/show and2H Full↔4V Compact controls; crossfader center offset0px. Starting Mix50%/Level50% restored; decks paused. Existing203 mixer/202 library previews retained. Read docs/prototype/HEADPHONE_CONTROLS_204.md/.json; Trello UI-RB-05 https://trello.com/c/lor8EHEW. app.js only exports its existing unchanged persist function; native0.1.27 ASAR unchanged. No fresh acoustic/controller/full-parity claim. Shift fine drag/cancel branches unexecuted. User visual approval pending; HTML only until native integration approval. Core DJ priority and original prompt retained.
+
+---
+
 # HTML203 — mixer corrected from Jason's native screenshots
 
 19 October2026: latest user correction supersedes201's added FILTER row. Rekordbox HTML mixer now has TRIM/HIGH/MID/LOW, CUE and fader;22–24px knobs, larger labels,34px four-deck rows (32Compact), explicit border-box sizing prevents borders overlapping labels, and wider center column. Two-deck Vertical uses the actual mirrored trim/CUE/fader beside EQ arrangement. Five affected UI views inspected: four visible rotaries/channel, no knob/label overlap or channel escape; EQ hide/show preservation and fader/CUE input changes executed/restored. Library previews retained. Read docs/prototype/REKORDBOX_MIXER_203.md/.json. UI-RB-04 and UI-RB-01 track correction; prior filter direction superseded. HTML only: no native rebuild, engine/MIDI/renderer changes or full-parity claim. User visual approval pending; core DJ priority and original prompt retained.

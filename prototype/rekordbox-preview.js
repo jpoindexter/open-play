@@ -1,5 +1,6 @@
 // Layout adapter for the installed rekordbox 7 Performance reference.
 // Move the player's original nodes; never create another transport or mixer.
+import {refineHeadphoneControls} from './headphone-preview.js';
 const group=(root,name,parent=root)=>{let node=root.querySelector('.'+name);if(!node){node=document.createElement('div');node.className=name;parent.append(node);}return node;};
 const move=(node,parent)=>{if(node&&node.parentNode!==parent)parent.append(node);};
 const modes=[['Cues','HOT CUE'],['Loops','LOOPS'],['Stems','STEMS'],['Pitch','PITCH PLAY'],['Slicer','SLICER']];
@@ -26,10 +27,9 @@ export function refineRekordboxDeck(deck,index){
   // This remains reachable when Compact hides its optional pad bank.
   const foot=deck.querySelector('.deck-foot');move(deck.querySelector('.deck-disclosure'),foot);
 }
-export function refineRekordboxMixer(footer){
+export function refineRekordboxMixer(footer,monitorAPI){
   footer.classList.add('rb-mixer-band');
-  const headphones=footer.querySelector('.preview-headphones');
-  if(headphones){delete headphones.dataset.panel;headphones.textContent='Headphones · Mix / Level';headphones.onclick=()=>{document.querySelector('[data-panel="settings"]')?.click();document.querySelector('[data-settings-tab="Mixer"]')?.click();};}
+  refineHeadphoneControls(footer,monitorAPI);
   const cross=group(footer,'rb-cross-controls');
   move(footer.querySelector('.crossfader'),cross);
   for(const label of document.querySelectorAll('#mixer .cross-assign, .rb-mixer-band .cross-assign')){
