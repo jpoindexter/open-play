@@ -1,3 +1,11 @@
+# Desktop0.1.24 ready — core190 native checkpoint
+
+19October2026: local0.1.24 is built and running from source2b0c785, ASAR02d963932ec8b02dc8096ec281bbded68d6091d02bed25d26cecb5e1c0ace635. Actual native selected-track Analyze recovers115.54/121.01BPM on the two saved real MP3s. Both Play/Sync advance with positive master meter and115.5BPM; OFF/manual pitch returns independent deck2 control; both Pause stop the meter. Both real tracks now sit paused at20s with2s decoded-source scrolling waveforms, pitch0 and Sync off. Actual desktop screenshot inspected.272mapping export is byte-identical, including right pitch inversion. Closed-profile188files/36703429B backup verified. Prior0.1.23 retained; agent-launched Serato closed.
+
+Read docs/prototype/TRY_PLAYBACK_DESKTOP_0.1.24.md and desktop-0.1.24-playback-observation.json. Native behavior is a focused core subset, not acoustic/perceptual/manual-mix/physical/visual-user acceptance or full parity. Next is Jason's practical two-track session, then Hercules/headphone confirmation when available; no extras. Deck selection/position resets to defaults on restart, while real imports/mappings persist; reload them normally if restarted. Current/playback launchers now target24 and the versioned23 launcher remains. Earlier packaged/unpackaged statuses below are historical. Original project prompt suffix preserved.
+
+---
+
 # Core checkpoint188 — real local MP3 playback; tempo/grid blocker next
 
 19 October2026: actual0.1.23 normal chooser imported two different real MP3s and loaded one per deck. Both played independently and together; normal channel/crossfader isolation/restoration observed in the master meter. Files reports2saved/0session-only. Private master capture745418B decodes78.96s/stereo48k/finite/positive; no music or PCM published. This is a core playback/mixer subset, not a manual/synced musical mix or physical/headphone acceptance.
