@@ -2052,6 +2052,7 @@ export class AudioEngine {
       );
       this.samples ??= new Map();
       this.samples.set(slot, {
+        request,
         source,
         gain,
         trackGain,

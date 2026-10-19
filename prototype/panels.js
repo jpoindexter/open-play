@@ -963,7 +963,14 @@ export function createPanels(a) {
     $$("[data-sample-bank]").forEach(
       (b) =>
         (b.onclick = () => {
-          s.bank = Number(b.dataset.sampleBank);
+          const next=Number(b.dataset.sampleBank);
+          if(next===s.bank)return;
+          if(next!==s.bank){
+            const departing=s.bank;
+            for(let i=0;i<8;i++)engine.stopSample(departing*8+i);
+            for(const held of [pointerSamples,keyboardSamples])for(const [i,owner] of held)if(Math.floor(owner.key/8)===departing)held.delete(i);
+            s.bank=next;
+          }
           refresh();
         }),
     );
@@ -978,8 +985,9 @@ export function createPanels(a) {
         b.onpointerdown = (e) => {
           if (slots[i].sync || slots[i].mode !== "Hold" || e.altKey) return;
           e.preventDefault();
-          pointerSamples.set(Number(i), s.bank * 8 + Number(i));
           sampleAction(Number(i), "play", "pointer");
+          const key=s.bank*8+Number(i);
+          pointerSamples.set(Number(i),{key,token:engine.sampleTokens.get(key)});
         };
         b.onkeydown = (e) => {
           if (
@@ -1060,10 +1068,10 @@ export function createPanels(a) {
   }
   function releaseSampleHolds(index = null, source = "pointer") {
     const held = source === "keyboard" ? keyboardSamples : pointerSamples;
-    for (const [i, key] of held) {
+    for (const [i, owner] of held) {
       if (index !== null && i !== index) continue;
-      engine.stopSample(key);
-      s.samples[Math.floor(key / 8)][key % 8].playing = false;
+      const {key,token}=owner;
+      if(engine.sampleTokens.get(key)===token){engine.stopSample(key);s.samples[Math.floor(key/8)][key%8].playing=false;}
       held.delete(i);
     }
     sampleVisuals();
@@ -1093,14 +1101,14 @@ export function createPanels(a) {
         engine.stopSample(key);
         slot.playing = false;
       } else {
-        if (slot.mode === "Hold" && source === "keyboard")
-          keyboardSamples.set(i, key);
         try {
-          await engine.sample(
+          const pending=engine.sample(
             trackById(slot.track),
             key,
             sampleOptions(slot),
           );
+          if(!slot.sync&&slot.mode==='Hold'&&source==='keyboard')keyboardSamples.set(i,{key,token:engine.sampleTokens.get(key)});
+          await pending;
         } catch (e) {
           notify(e.message);
         }
