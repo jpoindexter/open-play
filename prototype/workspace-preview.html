@@ -11,6 +11,14 @@
  <span class="workspace-caption" id="workspace-caption" role="status">Compare the beats. Mix in the middle.</span>
  <div class="preview-zoom"><span>WAVEFORM</span><button id="preview-zoom-out" aria-label="Zoom detailed waveforms out" disabled>−</button><output id="preview-zoom-scale">4s</output><button id="preview-zoom-in" aria-label="Zoom detailed waveforms in" disabled>+</button></div>
 </div>
+<div class="hybrid-controls" aria-label="Hybrid display settings">
+ <label for="preview-orientation">Waveforms <select id="preview-orientation"><option value="horizontal">Horizontal</option><option value="vertical" selected>Vertical</option></select></label>
+ <label for="preview-density">Decks <select id="preview-density"><option value="expanded">Expanded</option><option value="compact">Compact</option></select></label>
+ <label for="preview-wave-size">Wave size <select id="preview-wave-size"><option value="small">Small</option><option value="medium" selected>Medium</option><option value="large">Large</option></select></label>
+ <button id="preview-library-focus" aria-pressed="false">Library focus</button>
+ <span class="display-hint">Deck ▾ opens cues &amp; loops</span>
+ <button id="preview-reset">Reset layout</button>
+</div>
 <header class="toolbar" data-startup-inert inert>
  <button id="day" title="Switch day / night appearance" aria-label="Switch day mode">☼</button>
  <label class="sr" for="layout">Display layout</label><select id="layout"><option>Vertical</option><option>Horizontal</option><option>Extended</option><option>Stack</option><option>Library</option></select>
@@ -27,7 +35,7 @@
  <section id="panel" aria-label="Performance panel" hidden></section>
  <section class="library" aria-label="Music library">
   <aside><div class="crate-tools"><button id="new-crate" title="New crate">＋ Crate</button><button id="new-smart" title="New smart crate">＋ Smart</button></div><label class="sr" for="crate-search">Search crates</label><input id="crate-search" placeholder="Find crates"><nav id="crates" aria-label="Crates and providers"></nav><div class="side-bottom"><button id="import">＋ Import audio</button><button id="library-tools">Library tools</button><input id="audio-files" type="file" accept="audio/*" multiple hidden></div></aside>
-  <div class="library-main"><div class="library-tools"><button id="analyze">Analyze</button><button data-panel="analysis" aria-label="Analysis settings">⚙</button><select id="analysis-scope" aria-label="Analysis scope"><option>Selected track</option><option>Current crate</option><option>All tracks</option></select><button id="art-grid" aria-pressed="false">▦</button><span class="spacer"></span><button data-panel="files">Files</button><button data-panel="prepare">Prepare</button><button data-panel="history">History</button><label for="search" class="sr">Search tracks</label><input id="search" type="search" placeholder="Search library"><button id="columns">Columns</button></div><div id="tracks" tabindex="0" aria-label="Track results"></div><footer class="library-footer"><button id="autoplay" aria-pressed="false">Autoplay</button><span id="library-summary"></span><span class="spacer"></span><span>Demo audio generated locally • no uploads</span></footer></div>
+  <div class="library-main"><div class="library-tools"><button id="preview-crates" aria-pressed="true" aria-label="Show crate sidebar">Crates</button><button id="analyze">Analyze</button><button data-panel="analysis" aria-label="Analysis settings">⚙</button><select id="analysis-scope" aria-label="Analysis scope"><option>Selected track</option><option>Current crate</option><option>All tracks</option></select><button id="art-grid" aria-pressed="false">▦</button><span class="spacer"></span><button data-panel="files">Files</button><button data-panel="prepare">Prepare</button><button data-panel="history">History</button><label for="search" class="sr">Search tracks</label><input id="search" type="search" placeholder="Search library"><button id="columns">Columns</button></div><div id="tracks" tabindex="0" aria-label="Track results"></div><footer class="library-footer"><button id="autoplay" aria-pressed="false">Autoplay</button><span id="library-summary"></span><span class="spacer"></span><span>Demo audio generated locally • no uploads</span></footer></div>
  </section>
 </main>
 <div id="notice" role="status" aria-live="polite"></div>

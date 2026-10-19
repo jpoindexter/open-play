@@ -1,3 +1,9 @@
+# HTML Hybrid refinement197 — paired A/B, visible key and compact controls
+
+19 October2026: Jason's preferred Hybrid is refined in the separate HTML preview only. Vertical A/B now sit adjacent in a shared comparison region directly above the mixer (supersedes separated vertical experiment). Visible Expanded/Compact, wave size, orientation, per-deck controls disclosure, Library focus, Crates and Reset. Labeled key row restores existing key shift/sync/reset; known fixtures Am/Em, real tracks honestly Unknown. Existing performance tabs reachable; Deck tools restores gain/secondary controls; crossfader assignment and headphone-routing access visible. Actual browser real-track muted playback preserves titles/timer/mixer state across compact/focus/reset; paired geometry and screenshots inspected. Native27 ASAR unchanged; no rebuild/integration. Read docs/prototype/HYBRID_LAYOUT_REFINEMENT_197.md/.json for exact executed/open evidence. User approval, key analysis accuracy and core musical/physical/headphone acceptance remain open. Full parity remains unproven. Original prompt suffix retained.
+
+---
+
 # Layout review196 — three HTML options; desktop unchanged
 
 19October2026: Jason requested a quick switchable Serato/Traktor preview, then a third Hybrid combining shared RGB timing lanes with a centered physical mixer. Separate prototype/layout-preview.html opens the review; workspace-preview.html imports the existing player. Real-track live switching preserves titles, advancing deck1position, stationary deck2position and mixer values. All3desktop compositions inspected; details/limits in docs/prototype/WORKSPACE_LAYOUT_PREVIEW_196.md and .json. Native27ASAR and production UI/audio/MIDI source unchanged; no app rebuilt. A fresh frame observer console error is retained; keyboard choices and player readiness observed, not a clean-console claim.
