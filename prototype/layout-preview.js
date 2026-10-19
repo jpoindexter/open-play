@@ -2,6 +2,8 @@
 // Both workspaces share the same existing DOM controls and one AudioEngine.
 await import('./app.js');
 const {refineRekordboxDeck,refineRekordboxMixer}=await import('./rekordbox-preview.js');
+const {installLibraryWaveforms}=await import('./library-waveform-preview.js');
+installLibraryWaveforms(window.openPlay);
 
 const $=selector=>document.querySelector(selector);
 const choices=[...document.querySelectorAll('[data-workspace-choice]')];

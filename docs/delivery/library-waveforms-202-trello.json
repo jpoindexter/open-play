@@ -1,0 +1,12 @@
+{
+  "card": "ari:cloud:trello::card/workspace/6a8f03e71844a6c1103692dc/6ad6451a61879edf48e752d3",
+  "name": "LIB-RB-01 — Per-track waveform previews in library",
+  "url": "https://trello.com/c/NL9aSgOB/117-lib-rb-01-per-track-waveform-previews-in-library",
+  "list": {
+    "id": "ari:cloud:trello::list/workspace/6a8f03e71844a6c1103692dc/6ad1fea01f199751fbe47088",
+    "name": "Core DJ — Now"
+  },
+  "complete": false,
+  "description": "HTML202 implemented; user visual approval pending. Preview column contains each track's actual full-track decoded-source RGB waveform; no repeated decorative fixtures. Queued/preparing/unavailable-retry states, sequential visible-row jobs, local PNG cache, content-based local-track identity, and persisted show/hide in existing Columns dialog. Other layout variants preserve their existing columns. No native build or production engine/MIDI/source renderer change.\n\nExecuted normal HTML UI: ten rendered row previews including two original local MP3s; two different visible waveforms with loaded320px image data; sort reverses order while preserving trackID→same image; search retains correct association; header/row cell counts match; hide/show; hidden preference survives reload; thumbnails reload from local-cache; paused deck titles/timers unchanged during these actions; four-deck switch preserves thumbnails and Hybrid hides this new column. These establish thumbnail behavior, not playback quality or full rekordbox parity.\n\nUnexecuted: corrupt/missing-file retry, blocked-storage fallback, large-library endurance. Preview audition/seek is outside this static-thumbnail unit and requires separate native behavior evidence. Docs: docs/prototype/LIBRARY_WAVEFORMS_202.md/.json; private screenshot/DOM receipts in local-evidence/library-waveforms-202/. Related ANA-001, LIB-003 and UI-001. Native approval gate remains.\n\nModels: Codex gpt-6.1-sol high; Claude Code Sonnet5 medium, verify live availability. Escalate reasoning for reproducible stale association, audio mutation or unbounded preparation bugs; reviewer exercises actual UI above. No agents launched.",
+  "readbackMatches": true
+}

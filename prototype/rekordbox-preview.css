@@ -219,3 +219,10 @@ body[data-workspace=rekordbox][data-library-focus=true][data-rb-mixer=false].fou
 body[data-workspace=rekordbox][data-orientation] .channel-strip .knob-group:has(input[data-mix]){grid-column:1}
 body[data-workspace=rekordbox].four-decks[data-orientation=vertical] .channel-strip .knob-group{font-size:7px}
 body[data-workspace=rekordbox][data-orientation] .rb-cross-controls .crossfader input{width:100%;margin-inline:0;box-sizing:border-box}
+/* Full-track source thumbnails belong to each library row, not a deck. */
+.library-wave-preview{display:none}
+body[data-workspace=rekordbox][data-library-waveforms=true] .library-wave-preview{display:table-cell;width:160px;min-width:160px;max-width:160px;padding:0 5px;vertical-align:middle}
+body[data-workspace=rekordbox] th.library-wave-preview{font-size:10px}
+body[data-workspace=rekordbox] .library-wave-preview img{display:block;width:150px;height:22px;object-fit:fill;background:#050505}
+body[data-workspace=rekordbox] .library-wave-preview span{font-size:10px;color:#aaa;white-space:nowrap}
+body[data-workspace=rekordbox] .library-wave-preview button{min-height:22px;height:22px;padding:1px 5px;font-size:10px;margin-left:3px}
