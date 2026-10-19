@@ -1,3 +1,11 @@
+# Core checkpoint191 — native cue/EQ/filter audio; hardware deferred
+
+19October2026: Jason asked to continue without Hercules. Actual running0.1.24 normal temporary-cue hold/release produces captured audio and returns to20.243s/stopped. Independent stereo48k decode confirms finite isolated audition signal. Same real phrase clean EQ low/mid/high cuts and low/high-pass filter auditions show the expected broad spectral reductions. An AX setter reset failure contaminated initial mid/high setups; retained/excluded those and repeated affected cases with verified ordinary-key resets. No app code change or new build. Software forward/back jog keys execute with no error and unchanged released nominal pitch, but actual bend magnitude/manual musical alignment is not established. Read docs/prototype/CORE_CONTROLS_191_REVIEW.md and CORE_CONTROLS_191_RESULTS.json.
+
+Both real decks are paused at20s, EQ/filter0 and meter silent; recorder stopped. Original MP3 size/mtime/SHA unchanged. User physical/headphone/listening acceptance remains deferred; core goal not complete. Continue only core software preparation; no extras or repeated solved matrices. Existing0.1.24 remains current.
+
+---
+
 # Desktop0.1.24 ready — core190 native checkpoint
 
 19October2026: local0.1.24 is built and running from source2b0c785, ASAR02d963932ec8b02dc8096ec281bbded68d6091d02bed25d26cecb5e1c0ace635. Actual native selected-track Analyze recovers115.54/121.01BPM on the two saved real MP3s. Both Play/Sync advance with positive master meter and115.5BPM; OFF/manual pitch returns independent deck2 control; both Pause stop the meter. Both real tracks now sit paused at20s with2s decoded-source scrolling waveforms, pitch0 and Sync off. Actual desktop screenshot inspected.272mapping export is byte-identical, including right pitch inversion. Closed-profile188files/36703429B backup verified. Prior0.1.23 retained; agent-launched Serato closed.

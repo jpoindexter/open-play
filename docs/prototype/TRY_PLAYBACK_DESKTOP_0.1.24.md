@@ -22,3 +22,9 @@ Shared playback-test profile was copied while0.1.23 was closed:188files/36703429
 Launch with **Start Open Play Current Test.command**, **Start Open Play Playback Test.command**, or **Start Open Play Playback Test 0.1.24.command**. The versioned0.1.23launcher and bundle remain.
 
 [Observation](desktop-0.1.24-playback-observation.json) · [Package inspection](desktop-0.1.24-playback-core-design.json) · [Visual extraction](CORE_DESIGN_190_REVIEW.md) · [Core plan](../delivery/CORE_DJ_FIRST.md)
+
+## Software-only core controls
+
+Click a loaded track title first so keyboard focus is outside a text field or slider. Current Playback Keys Use Shift is off. W/S toggle deck1/2 Play; I/K set or hold temporary cue; T/Y slow/speed deck1 temporarily, G/H do the same for deck2. Pitch sliders set nominal speed; jog bend is temporary. The visible channel CUE buttons select headphone monitoring and differ from transport temporary cue. Monitor blend/level live in Setup → Mixer. Hardware output routing lives in Devices.
+
+Core191 adds actual native temporary-cue and deck1EQ/filter capture evidence; see [review](CORE_CONTROLS_191_REVIEW.md). It does not replace listening, manual beatmatch or physical acceptance. No further hardware test is scheduled while Jason is away.

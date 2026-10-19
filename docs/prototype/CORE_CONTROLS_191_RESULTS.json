@@ -1,0 +1,166 @@
+{
+  "checkpoint": 191,
+  "date": "2026-10-19",
+  "candidate": "Open Play Playback Test0.1.24",
+  "sourceCommit": "2b0c785e567f9dec6b5a1efae70c427ff8be8984",
+  "scope": "Focused actual native software core-control observations and independent audio decoding; no hardware session",
+  "temporaryCue": {
+    "sha256": "bcff48a1fecbf63f7b4d30b514ddc8e61fbf44c2b8303e0e2f0b323b257f8165",
+    "bytes": 40344,
+    "sampleRate": 48000,
+    "channels": 2,
+    "frames": 564480,
+    "durationSeconds": 11.76,
+    "finite": true,
+    "peak": 0.12296487390995026,
+    "activeWindows100ms": 20,
+    "firstActiveSeconds": 0.6,
+    "lastActiveSeconds": 2.5
+  },
+  "cueBehavior": "Normal i first set a quantized cue at20.243s; subsequent native hold/release produced an isolated audio burst while both decks otherwise paused, then returned to20.243s and silence. Queued AX observation could not observe the held interval; captured audio provides that evidence.",
+  "eqFilter": {
+    "captureSHA256": "39648a6c151165c55852103b9eefb189b932ed83a475e510d4ee4c3463240353",
+    "captureBytes": 395711,
+    "durationSeconds": 137.94,
+    "finite": true,
+    "method": "10ms RMS>1e-6 activity islands with <=200ms gap merging; complete identified bursts;4096 Hann FFT/2048 hop, averaged across windows/channels;30\u2013250/250\u20134000/4000\u201318000Hz power; no fitted time alignment",
+    "auditions": [
+      {
+        "name": "neutral",
+        "peak": 0.12404685467481613,
+        "rms": 0.022673009403852376,
+        "bandDBVersusCleanNeutral": {
+          "low": 0.038064912820969445,
+          "mid": -0.011139396673546182,
+          "high": -0.0025369472963766224
+        },
+        "validIsolatedSetup": true
+      },
+      {
+        "name": "low-cut",
+        "peak": 0.09149031341075897,
+        "rms": 0.008854383348766034,
+        "bandDBVersusCleanNeutral": {
+          "low": -20.47197844160204,
+          "mid": -2.9268640816707636,
+          "high": 0.1001381840986871
+        },
+        "validIsolatedSetup": true
+      },
+      {
+        "name": "mid-cut",
+        "peak": 0.04883566498756409,
+        "rms": 0.007909467630842538,
+        "bandDBVersusCleanNeutral": {
+          "low": -9.089991241115968,
+          "mid": -11.70412171067932,
+          "high": -1.0611266053873585
+        },
+        "validIsolatedSetup": false
+      },
+      {
+        "name": "high-cut",
+        "peak": 0.05604834482073784,
+        "rms": 0.009881123743972157,
+        "bandDBVersusCleanNeutral": {
+          "low": -8.031152714461378,
+          "mid": -5.142218243466318,
+          "high": -21.136544724431946
+        },
+        "validIsolatedSetup": false
+      },
+      {
+        "name": "neutral-clean",
+        "peak": 0.12295600771903992,
+        "rms": 0.022638354810386733,
+        "bandDBVersusCleanNeutral": {
+          "low": 0.0,
+          "mid": 0.0,
+          "high": 0.0
+        },
+        "validIsolatedSetup": true
+      },
+      {
+        "name": "low-cut-clean",
+        "peak": 0.09722530841827393,
+        "rms": 0.008875279276058943,
+        "bandDBVersusCleanNeutral": {
+          "low": -20.562452904708426,
+          "mid": -2.9134434350320038,
+          "high": 0.08792873182558114
+        },
+        "validIsolatedSetup": true
+      },
+      {
+        "name": "mid-cut-clean",
+        "peak": 0.09261608123779297,
+        "rms": 0.017814810777495693,
+        "bandDBVersusCleanNeutral": {
+          "low": -1.0555053002231831,
+          "mid": -9.687987467913873,
+          "high": -1.1239511594333824
+        },
+        "validIsolatedSetup": true
+      },
+      {
+        "name": "high-cut-clean",
+        "peak": 0.11864222586154938,
+        "rms": 0.022462947415078243,
+        "bandDBVersusCleanNeutral": {
+          "low": 0.07978804697783623,
+          "mid": -0.0730985775306778,
+          "high": -21.09064084972176
+        },
+        "validIsolatedSetup": true
+      },
+      {
+        "name": "lowpass",
+        "peak": 0.14322899281978607,
+        "rms": 0.02286265221546203,
+        "bandDBVersusCleanNeutral": {
+          "low": 0.034352713402452724,
+          "mid": 0.8137224275845395,
+          "high": -32.30399209404682
+        },
+        "validIsolatedSetup": true
+      },
+      {
+        "name": "highpass",
+        "peak": 0.11290311068296432,
+        "rms": 0.010116392728720478,
+        "bandDBVersusCleanNeutral": {
+          "low": -26.75140206618105,
+          "mid": -1.37073187253945,
+          "high": 0.08914627566086075
+        },
+        "validIsolatedSetup": true
+      }
+    ],
+    "initialSetupFailure": "Accessibility value resets left -8.630408dB rather than0. Initial mid/high cases excluded; all three EQ values verified0 with ordinary keys before clean cases. Failed original capture retained.",
+    "reference": "Same actual MP3 phrase from the same temporary cue; clean native settings retained privately",
+    "limits": "Broad recorded frequency response differences; no exact vendor curve/sonic-quality/physical knob or right-channel audio acceptance"
+  },
+  "jogKeys": {
+    "executed": "Normal real-track Play, forward y and backward t holds, Pause",
+    "observed": "Real source-position advances, nonzero master meter, nominal pitch0/115.5BPM unchanged after release; no jog-unavailable error in UI",
+    "notEstablished": "Transient bend-rate magnitude, waveform continuity, sustained audible manual beatmatch or physical jog response"
+  },
+  "monitorReadback": {
+    "cueMixPercent": 0,
+    "cueVolumePercent": 10,
+    "masterCue": false,
+    "splitCue": false,
+    "outputMode": "Stereo",
+    "authority": "Actual native Setup Mixer readback; no headphone hardware acceptance"
+  },
+  "inputIntegrity": "Both original music inputs have unchanged bytes, mtime_ns and SHA256 compared with the retained188 identities",
+  "readyState": "Both real tracks paused at20s; EQ and filter0 on both decks; Sync off, pitch0 and Master-12dB retained; recorder stopped; Hercules absent",
+  "remaining": [
+    "Jason audible manual and synced two-track transition",
+    "Current physical Hercules core-control and headphone/master confirmation",
+    "Current cue/master blend and monitor-level listening",
+    "Visual-user acceptance; full parity remains separate/false"
+  ],
+  "coreGoalComplete": false,
+  "hardwareTestingDeferredByUser": true
+}
