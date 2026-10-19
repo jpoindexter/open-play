@@ -1,3 +1,11 @@
+# Desktop0.1.25 — RGB waveform194 native candidate
+
+19October2026: actual native25/source4af70e7/ASAR5b2d0944d623e28cfa7bf6022670febe6b5c099b84a77f1757cb0ae06223ac2d is running with corrected frequency-driven RGB waveforms. Both saved real MP3s loaded and rendered in Horizontal; normal Play/Sync/positive meter, pitch-scaled visual grid, native+/−zoom and Pause observed. Both tracks now paused20s, pitch0, Sync off, Master−12dB, crossfader centered, recorder stopped. Closed-profile198files/36822452B copy hashes match;24and versioned launchers retained. Current/playback launchers target25. Read docs/prototype/TRY_PLAYBACK_DESKTOP_0.1.25.md and desktop-0.1.25-playback-observation.json.
+
+Jason rejected24salmon rendering;25visual-user acceptance remains open. Exact vendor rendering, main-detail drag/scrub, perceptual manual/Sync mix and physical/headphone acceptance remain open. Core191/192audio results remain scoped to24. No extras or repeated audio matrix; this is the same core goal. Earlier packaged/unpackaged statuses below are historical. Original full prompt suffix retained.
+
+---
+
 # Desktop0.1.24 ready — core190 native checkpoint
 
 19October2026: local0.1.24 is built and running from source2b0c785, ASAR02d963932ec8b02dc8096ec281bbded68d6091d02bed25d26cecb5e1c0ace635. Actual native selected-track Analyze recovers115.54/121.01BPM on the two saved real MP3s. Both Play/Sync advance with positive master meter and115.5BPM; OFF/manual pitch returns independent deck2 control; both Pause stop the meter. Both real tracks now sit paused at20s with2s decoded-source scrolling waveforms, pitch0 and Sync off. Actual desktop screenshot inspected.272mapping export is byte-identical, including right pitch inversion. Closed-profile188files/36703429B backup verified. Prior0.1.23 retained; agent-launched Serato closed.

@@ -41,9 +41,9 @@ These are acceptance observations in one useful session, not a request for a fre
 
 ## Open core fix — waveform visual quality
 
-19 October: Jason reports that the waveforms look very bad. Track on [ANA-001](https://trello.com/c/IBU50NY2), already in Core DJ — Now. Improve the actual two-real-track view for accurate waveform detail/transients, useful zoom, contrast/deck distinction and readable beatgrid/playhead/phase alignment. Preserve seek/timing/audio behavior. Actual rendered inspection and Jason's visual confirmation are required; Jason rejected190/0.1.24 as visually unlike the reference and mostly salmon. Core194 replaces that rendering using the supplied Serato docs/image; native25 and visual-user acceptance remain open. Keep playback/BPM blockers moving; no unrelated redesign.
+19 October: Jason reports that the waveforms look very bad. Track on [ANA-001](https://trello.com/c/IBU50NY2), already in Core DJ — Now. Improve the actual two-real-track view for accurate waveform detail/transients, useful zoom, contrast/deck distinction and readable beatgrid/playhead/phase alignment. Preserve seek/timing/audio behavior. Actual rendered inspection and Jason's visual confirmation are required; Jason rejected190/0.1.24 as visually unlike the reference and mostly salmon. Core194 replaces that rendering using the supplied Serato docs/image; native25 rendering/control observations are recorded, with visual-user acceptance still open. Keep playback/BPM blockers moving; no unrelated redesign.
 
-## Current waveform194 correction / desktop25 preparation
+## Current waveform194 correction / desktop0.1.25
 
 The browser tempo/grid correction now analyzes both real songs and permits actual two-deck Sync/play and OFF/manual return. It is not packaged into native0.1.23 and does not establish perceptual musical alignment. Read [review](../prototype/CORE_TEMPO_189_REVIEW.md). Latest requested work: extract and implement Serato’s visual system for the core screen, including readable source waveforms. Preserve behavior/bindings rather than the old appearance; no reskinning or unrelated feature expansion. Checkpoint190 now implements77 reference-derived tokens, core styling, continuous decoded-source waveforms and zoom. Read [visual review](../prototype/CORE_DESIGN_190_REVIEW.md). Desktop0.1.24 now combines and executes these changes: real-song selected analysis, both Play/Sync/OFF/manual/Pause, source seek and zoom. Both real tracks are paused at20s, ready for Jason. [Current guide](../prototype/TRY_PLAYBACK_DESKTOP_0.1.24.md). Perceptual mixing, current hardware/headphone and visual acceptance remain open.
 
@@ -57,7 +57,7 @@ Actual desktop0.1.23 imported two real MP3s, loaded separate decks and played/pa
 
 ## Starting point and evidence boundaries
 
-The current running candidate is0.1.24 from2b0c785e567f9dec6b5a1efae70c427ff8be8984, with tempo189 and core visual190; actual native source bytes and focused UI behavior were observed. Previous0.1.23 remains as a preserved baseline. Refresh the currently running version/profile/device and file-import state before playback or packaging decisions.
+The current running candidate is0.1.25 from4af70e7a699f46b1fad76004a69812b58f082ec7, with corrected RGB waveform194. Actual native source bytes, both real files, Play/Sync/zoom/Pause and rendered colors were observed. Previous24/23remain. Read [current guide](../prototype/TRY_PLAYBACK_DESKTOP_0.1.25.md). Refresh the currently running version/profile/device and file-import state before playback or packaging decisions.
 
 Jason previously confirmed individual 0.1.23 left/right Play/Pause, right fader and headphone cue, and corrected right tempo direction. Earlier versions also have cue/master isolation evidence. These are historical per-control observations, not a completed two-real-track musical mixing session or all-controller acceptance. Preserve the profile, 272 Alternative mappings (including pitch inversion), previous bundles and launchers. A new narrowly justified local candidate is within earlier desktop-test authority; preserve the known build and record what changes before any candidate switch.
 

@@ -1,3 +1,11 @@
+# Desktop0.1.25 — RGB waveform194 native candidate
+
+19October2026: actual native25/source4af70e7/ASAR5b2d0944d623e28cfa7bf6022670febe6b5c099b84a77f1757cb0ae06223ac2d is running with corrected frequency-driven RGB waveforms. Both saved real MP3s loaded and rendered in Horizontal; normal Play/Sync/positive meter, pitch-scaled visual grid, native+/−zoom and Pause observed. Both tracks now paused20s, pitch0, Sync off, Master−12dB, crossfader centered, recorder stopped. Closed-profile198files/36822452B copy hashes match;24and versioned launchers retained. Current/playback launchers target25. Read docs/prototype/TRY_PLAYBACK_DESKTOP_0.1.25.md and desktop-0.1.25-playback-observation.json.
+
+Jason rejected24salmon rendering;25visual-user acceptance remains open. Exact vendor rendering, main-detail drag/scrub, perceptual manual/Sync mix and physical/headphone acceptance remain open. Core191/192audio results remain scoped to24. No extras or repeated audio matrix; this is the same core goal. Earlier packaged/unpackaged statuses below are historical. Original full prompt suffix retained.
+
+---
+
 # Core waveform194 — salmon appearance rejected; RGB source implementation
 
 19October2026: Jason rejected0.1.24's waveform visuals and supplied official Serato spectrum docs/image. Replaced nested salmon areas with actual per-slice RGB bass/mid/treble color, signed peak/RMS transient strips and128frame async profiles. Horizontal gains stacked detail lanes; both orientations use nominal-pitch-scaled time/grid/cue geometry and1–16s+/−zoom. Actual-render bass/mid/treble regression and two-real-track source-preview inspection passed. Native25 is being packaged; user visual acceptance remains open. Read docs/prototype/CORE_WAVEFORM_194_REVIEW.md and CORE_WAVEFORM_194_RESULTS.json. No audio DSP/mapping/profile rewrite or extra feature work.
