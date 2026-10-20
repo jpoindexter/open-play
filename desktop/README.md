@@ -1,6 +1,6 @@
 # Open Play desktop test
 
-**Current local core test:0.1.32.** Use `Start Open Play Current Test.command` or the versioned0.1.32launcher. Jason authorized the rebuild on20October. It opens the existing rekordbox workspace with all custom controls/layouts/library previews, and contains cue/keyboard safety fixes. [Current evidence and acceptance gaps](../docs/prototype/CORE_SESSION_032.md). Earlier notes below are historical; the separate general desktop launcher is preserved.
+**Current local core test:0.1.34 / sourced0f2094.** Use `Start Open Play Current Test.command` or the versioned0.1.34launcher. Actual native grid proposal Save/readback and refusal of a worsening proposal were observed; library previews remain. [Corpus/native evidence and acceptance gaps](../docs/prototype/SYNC_CORPUS_034.md). Earlier notes are historical. Package checks do not establish listening or device quality.
 
 The default **Start Open Play Desktop.command** opens local test **0.1.6**. The separate **Start Open Play Desktop 0.1.5.command** preserves the prior persistence/keylock build; earlier0.1.3/0.1.1 launchers remain available. Quit the running test before switching versions. This is the already-approved Electron wrapper around the existing browser implementation, with no native DSP rewrite or public release.
 

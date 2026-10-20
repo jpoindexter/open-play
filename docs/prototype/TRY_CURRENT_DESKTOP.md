@@ -1,6 +1,10 @@
-# Try desktop0.1.32 — current core candidate
+# Try desktop0.1.34 — guarded core candidate
 
-Current launcher selects the existing0.1.32/sourcef11275f build. [Current session and exact remaining gates](CORE_SESSION_032.md). Close another playback-test version before launching; preserve the current recording first. Earlier candidate instructions below are historical and their transient live settings are not current.
+Open `Start Open Play Current Test.command` or `Start Open Play Playback Test 0.1.34.command`. Close another playback-test version first; the saved profile/port18775 and older bundles remain. This candidate is sourced0f2094. [Executed corpus/native evidence and remaining gates](SYNC_CORPUS_034.md).
+
+The running app currently has Anika Kunst/BX3 paused and SyncOFF with the reviewed BX3 warp marker saved. On restart the app loads demo decks; select each saved real song and use Shift+Left/Right. Library imports/previews persist. Current master gain is approximately−10dB. No audio original is changed.
+
+Fresh listening is still required. Play outgoing A, arm incoming B with Smart Sync, then Play B; confirm A retains132BPM and B enters on phase. Compare through BX3’s later corrected section after reviewing source position. Do not infer musical agreement from equal displayed BPM or grid lines. Keep the pop defect, BPM/downbeat ambiguity and physical headphone/controller gates open.
 
 ## Historical0.1.30 instructions
 

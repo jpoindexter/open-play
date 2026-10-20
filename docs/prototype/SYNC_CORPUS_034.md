@@ -46,6 +46,8 @@ Per-file compact inventory: [SYNC_CORPUS_034.csv](SYNC_CORPUS_034.csv). Full res
 
 ## Current acceptance boundary
 
-Desktop0.1.34 packages the guarded path. Packaging/current native UI results follow separately. Other-song pair Anika Kunst/BX3 is imported and paused in the native library with previews preserved. No new human listening result was received during this pass. Automatic musical alignment, metrical BPM/downbeat ambiguity, pops/clicks and waveform lag remain OPEN; no broad Sync completion is claimed.
+Desktop0.1.34/source`d0f2094`, ASAR`a8b8bb6d2729df8a4396f54d2d2211802cf776cf9783a566648e9cf5c9d53c7a`:5/5 package checks, actual native launch, fresh BX3 Check→Stage→Save/reopen (one marker at05:30.1) and refusal of DJ W!LD’s worsening Andres Remix proposal executed.13 library previews remain. Anika Kunst/BX3 are loaded and paused, SyncOFF; three native-test originals rehashed unchanged. Closed profile backup retained. [Native observation receipt](desktop-0.1.34-playback-observation.json). No new human listening result was received during this pass. Automatic musical alignment, metrical BPM/downbeat ambiguity, pops/clicks and waveform lag remain OPEN; no broad Sync completion is claimed.
+
+This collection exposed the guard and is not an unseen holdout or an annotated beat/downbeat benchmark. Further listening must use the counterexamples as well as improving cases.
 
 No raw audio, full corpus dumps or originals are added to Git. No stems, effects, layout redesign or broad cleanup is part of this pass.
