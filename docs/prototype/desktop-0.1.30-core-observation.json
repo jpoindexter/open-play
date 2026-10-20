@@ -1,0 +1,48 @@
+{
+  "version": "0.1.30",
+  "sourceCommit": "94477104b677890c811a3a8d9eebc41563e769ab",
+  "asarSHA256": "50b2ace08404218204b5ac70fcd34c1ea0f170b36f0a575374d92d77f27102b3",
+  "scope": "Actual native startup/library/UI observation plus separately scoped controlled regressions; no fresh listening or physical acceptance",
+  "executed": [
+    "Exact0.1.30bundle launched with expected title and own-origin workspace",
+    "Both saved real songs loaded through normal row selection and Shift+Left/Right",
+    "rekordbox Horizontal/Compact; both timers0paused; master meter\u2212\u221e;10library previews retained",
+    "Ten focused cue/keyboard regressions pass, including pending Cue+Play and cancelled pending latch;19existing lifecycle checks retained",
+    "Archive/runtime inspection5/5"
+  ],
+  "notExecuted": [
+    "Native combined Cue+Play: tool rejects multiple non-modifier keys before input",
+    "Human manual beatmatch/jog/EQ/Cue listening",
+    "Independent physical headphones/master/Hercules acceptance"
+  ],
+  "remainingDefects": [
+    "Intermittent Sync pop remains OPEN"
+  ],
+  "currentState": {
+    "bothPaused": true,
+    "positions": [
+      0,
+      0
+    ],
+    "pitchPercent": [
+      0,
+      0
+    ],
+    "sync": "OFF",
+    "eq": "neutral",
+    "masterDB": -12
+  },
+  "privateEvidence": "local-evidence/core-desktop-030/",
+  "fullCoreAccepted": false,
+  "fullParityVerified": false,
+  "trelloReadback": {
+    "cards": [
+      "CORE-FIX-05",
+      "DEK-015",
+      "CORE-001"
+    ],
+    "descriptionsMatch": true,
+    "commentsPresent": true,
+    "allRemainOpen": true
+  }
+}

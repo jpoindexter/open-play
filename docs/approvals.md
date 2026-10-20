@@ -1,6 +1,6 @@
 ## Core rebuild authorization — 20 October 2026
 
-Jason: “ok set a goal and start rebuilding the app and core experience we want to knock out all the trello cards and errors etc but focus on core dj experience”. This supersedes the earlier HTML-only/stop restriction for local core implementation/test builds. Preserve the existing rekordbox layout, custom controls and previews; prioritize core software and practical acceptance. It does not establish full feature acceptance or authorize a public release. Current test0.1.29and evidence: `docs/prototype/CORE_DJ_REBUILD_2026-10-20.md`.
+Jason: “ok set a goal and start rebuilding the app and core experience we want to knock out all the trello cards and errors etc but focus on core dj experience”. This supersedes the earlier HTML-only/stop restriction for local core implementation/test builds. Preserve the existing rekordbox layout, custom controls and previews; prioritize core software and practical acceptance. It does not establish full feature acceptance or authorize a public release. Current test0.1.30 and evidence: `docs/prototype/CORE_DJ_REBUILD_2026-10-20.md`.
 
 ---
 

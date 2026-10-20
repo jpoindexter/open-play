@@ -1,6 +1,6 @@
-# Try desktop0.1.29 — current core candidate
+# Try desktop0.1.30 — current core candidate
 
-Open `Start Open Play Current Test.command` or `Start Open Play Playback Test 0.1.29.command`. Close another playback-test version first; all use the existing profile and port18775. Earlier bundles/launchers remain. This version opens the chosen rekordbox workspace directly with all custom controls and library previews.
+Open `Start Open Play Current Test.command` or `Start Open Play Playback Test 0.1.30.command`. Close another playback-test version first; all use the existing profile and port18775. Earlier bundles/launchers remain. This version opens the chosen rekordbox workspace directly with all custom controls and library previews.
 
 The app initially loads demo decks; select each saved real song row and use Shift+Left/Right or its deck Load. Choose Horizontal/Compact, Sync OFF and reset both pitch controls. The last recorded master gain is−12dB; choose a comfortable listening level. Original music is unchanged.
 
