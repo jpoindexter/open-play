@@ -10,7 +10,7 @@ export function refineRekordboxDeck(deck,index){
   let art=head.querySelector('.rb-artwork');if(!art){art=document.createElement('span');art.className='rb-artwork';art.setAttribute('aria-hidden','true');head.insertBefore(art,deck.querySelector('.deck-title'));}
   const sync=group(deck,'rb-sync-controls',head);
   sync.setAttribute('role','group');sync.setAttribute('aria-label',`Deck ${index+1} Sync and master`);
-  for(const action of ['sync','syncMaster','syncOff']){const node=deck.querySelector(`[data-action="${action}"]`);move(node,sync);if(node&&action==='sync')node.textContent='BEAT SYNC';}
+  for(const action of ['sync','syncMaster','syncOff']){const node=deck.querySelector(`[data-action="${action}"]`);move(node,sync);}
   move(deck.querySelector('.preview-key-row'),head);
   for(const action of ['load','eject','range','keyReset'])move(deck.querySelector(`[data-action="${action}"]`),rail);
   if(document.body.dataset.workspace==='rekordbox'){

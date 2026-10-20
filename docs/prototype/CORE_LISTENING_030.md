@@ -41,3 +41,10 @@ Execution priority:
 3. Next list, in saved order: [UI-001 layouts](https://trello.com/c/FhNUL2TA), [UI-SET-01 Settings navigation](https://trello.com/c/pBDYCLui), [UI-TOOL-01 toolbar cleanup](https://trello.com/c/HEKvQ7iv), [UI-MIX-01 mixer spacing](https://trello.com/c/XxPtK57b), [UI-RESET-01 default resets](https://trello.com/c/0E3HXFPl).
 
 Decision rule: audible reliability and safe transport precede visual cleanup. Revisit this order if a new core failure appears; advanced features remain deferred. Owner: current Open Play implementation task, with Jason providing musical listening acceptance. Re-entry is the Sync failure audit, not another layout redesign. Source changes to move layout selection into Settings are still uncommitted and unverified in a new desktop build.
+
+
+## Follow-through to31/32
+
+Actual31source7b95948packaged/inspected5of5/launched. Native Settings→Layouts initially listed six choices and Serato selection updated the shell/selected state. Startup rekordbox displayed ten waveform previews; source32must additionally verify repeated dialog reopening because31later reproduced blank Settings controls. The user restored the rekordbox layout and both real songs during the session; subsequent native state showed both real songs at matching121BPM, then both paused. A210.42s master capture from the clean-attempt user report was saved and decoded finite stereo; see SYNC_ALIGNMENT_AUDIT_2026-10-20.md. Earlier audible failure, new lag/pops and thick-grid offset remain open. Actual mode clarification: failures happened both ways, not only paused launch.
+
+Source32corrects the reproduced Astryx new-control identity omission and removes the unconditional BEAT SYNC label override. These are controlled-regression/source changes, not proof of good musical sync. Next: actual32Settings reopen, explicitly select phase-aware Smart Sync, one practical real-track phase/quality check. No silently rewritten track grids, no broad advanced DSP matrices. Native REA reference attempt timed out; native accessibility and official primary docs were inspected separately.

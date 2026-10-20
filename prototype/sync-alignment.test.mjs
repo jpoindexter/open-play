@@ -1,5 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
+import {readFileSync} from 'node:fs';
+import vm from 'node:vm';
 import {synchronizeSimple} from './sync.js';
 import {createBeatgrid} from './beatgrid.js';
 import {createSmartSync} from './smart-sync.js';
@@ -41,4 +43,17 @@ test('Smart Sync arms a paused follower and aligns its bar on launch',async()=>{
   const difference=phase(deck)-phase(leader);
   assert(Math.abs(difference/4-Math.round(difference/4))<1e-10);
   assert.deepEqual(calls,[['rate',1],['align',1]]);
+});
+test('actual Sync controls distinguish phase-aware Beat Sync from Simple Sync',()=>{
+  const source=readFileSync(new URL('./app.js',import.meta.url),'utf8');
+  const begin=source.indexOf('function syncControls(d) {'),end=source.indexOf('\nfunction smartSyncIndicator',begin);
+  assert(begin>=0&&end>begin);
+  for(const mode of ['Simple Sync','Smart Sync']){
+    const d={index:0,track:{bpm:120,grid:0},playing:false,sync:true,syncState:'armed'};
+    const context={state:{settings:{'Sync Mode':mode}},syncMaster:{master:()=>null},hasBeatgrid:()=>true};
+    vm.runInNewContext(source.slice(begin,end)+';globalThis.markup=syncControls;',context);
+    const html=context.markup(d);
+    assert(html.includes(mode==='Smart Sync'?'>BEAT SYNC<':'>SIMPLE SYNC<'));
+    assert.match(html,mode==='Smart Sync'?/bar phase/i:/paused.*tempo only/i);
+  }
 });

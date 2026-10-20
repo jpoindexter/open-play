@@ -79,7 +79,7 @@ function refresh(){
   });
   changes.observe(node,{subtree:true,childList:true,characterData:true,attributes:true,attributeFilter:['aria-pressed','disabled','hidden','title','class','value','selected']});
  }
- const next=JSON.stringify([...records].map(([node,record])=>[record.error,node.textContent,node.value,node.checked,node.indeterminate,node.disabled,node.hidden,node.title,node.className,node.getAttribute('aria-pressed')]))+document.body.classList.contains('day');
+ const next=JSON.stringify([...records].map(([node,record])=>[record.key,record.error,node.textContent,node.value,node.checked,node.indeterminate,node.disabled,node.hidden,node.title,node.className,node.getAttribute('aria-pressed')]))+document.body.classList.contains('day');
  if(next===signature)return;signature=next;
  for(const {node,host}of records.values())host.hidden=node.hidden;
  root.render(<Theme theme={neutralTheme} mode={document.body.classList.contains('day')?'light':'dark'}><div onKeyDown={event=>event.stopPropagation()}>{[...records.values()].map(record=>createPortal(component(record),record.mount,record.key))}{createPortal(<DialogSurface/>,modal,'dialog-surface')}</div></Theme>);
