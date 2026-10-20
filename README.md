@@ -4,7 +4,7 @@ Current work is finishing the **core two-track DJ experience**, with the chosen 
 
 Independent open-source desktop DJ project, with a browser review candidate and ongoing reference investigation. The goal is familiar Serato DJ Pro design and behavior without artificial feature, account or device gates in the independent implementation.
 
-Historical local desktop approval for revision `f8b0abf` and previous test builds is retained in [approvals](docs/approvals.md). Native0.1.27 is historical; the current core source is being prepared as local test0.1.29. [Earlier desktop instructions](desktop/README.md) describe historical candidates; they do not override the current scope. Full core, vendor parity and physical routing acceptance remain open.
+Historical local desktop approval for revision `f8b0abf` and previous test builds is retained in [approvals](docs/approvals.md). Native0.1.27 is historical; local test0.1.29is built and launched from source8476d45. [Earlier desktop instructions](desktop/README.md) describe historical candidates; they do not override the current scope. Full core, vendor parity and physical routing acceptance remain open.
 
 - [Run the HTML prototype](prototype/README.md)
 - [Per-file Video FX save/recall evidence](docs/prototype/VIDEO_FILE_FX_REVIEW.md)

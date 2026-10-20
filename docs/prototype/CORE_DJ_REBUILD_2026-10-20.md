@@ -28,7 +28,7 @@ Keep CORE-FIX-01 open: intermittent Sync pop reported, latest actual retry quiet
 
 CORE-FIX-05 https://trello.com/c/x35fpHyL ; CORE-FIX-06 https://trello.com/c/7qQ76Z2V ; parent CORE-001 https://trello.com/c/LGGdtSa3 . Implementation progress recorded without closing broad criteria. Existing133 cards and model guidance remain.
 
-Next action: package current committed source as0.1.28, verify archive identity, launch the actual new app and record observed workspace/control behavior. Continue one practical listening session; stop extra polish/research when a core gap is ready to test.
+Packaging and actual native startup are recorded below. Next action: use the current0.1.29native window for the practical listening segment. Continue one practical listening session; stop extra polish/research when a core gap is ready to test.
 
 ## Native checkpoint0.1.28
 
@@ -39,3 +39,11 @@ Paused incoming Sync matched115.5→121BPM, preserved the same focused Sync butt
 Initial all-source archive inspection failed because Electron excludes `prototype/ui/package-lock.json`. Explicitly recorded that development-only omission; runtime inspection then checked520runtime files and all80declared module hashes, staged host/metadata/fixture hashes, exclusion boundaries, entry route, sandbox and device permission decisions (5/5 checks). Both original failed receipt and corrected inspection are preserved. Not a missing runtime module.
 
 A subsequent focused red test exposed already-prevented keyboard events reaching global playback. Added the one-line guard; eight focused tests pass. Final rebuild is0.1.29, retaining0.1.28and all prior bundles. The0.1.28runtime observations remain scoped to that source; observe0.1.29startup and the changed key/control path separately.
+
+## Final current candidate0.1.29
+
+Source `8476d4540e1ae2d3f37de0e903023a30cbda2610`; ASAR `f57ed6327f0512d6d37b64e15a53c59ca1e5c1a234959957409642be27aecb9b`. [Runtime/archive inspection](desktop-0.1.29-playback-core-runtime-inspection.json)5/5 and [actual native observations](desktop-0.1.29-core-observation.json) are separate. Closed the paused0.1.28normally, then launched the exact versioned0.1.29bundle through CUA and observed its title/own-origin workspace. Loaded both saved real MP3s through normal selection plus Shift+Left/Right. Ctrl+O left both Loop In controls inactive and timers at0. Both SyncOFF, pitch0; master−12dB retained from the existing profile. No reset/deletion/profile migration. Ten previews retained; current private screenshot `local-evidence/core-desktop-029/ready.png`.
+
+The only production difference from the observed0.1.28audio candidate is the already-handled-key-event guard. Real-song independent transport/meters, Sync focus and headphone accessible-state observations above remain explicitly tied to0.1.28, not silently promoted to fresh0.1.29listening evidence. New version launch and changed keyboard path were observed. The HTML review banner still says “Desktop app unchanged”; it is historical preview copy, not the native candidate identity shown in the title. Track copy cleanup under existing UI documentation work, not a core audio blocker.
+
+`Start Open Play Current Test.command` and the new versioned0.1.29launcher target this app. Earlier versioned launchers/bundles remain. Source/packaging changes committed; no public release/notarization or full parity claim. Re-entry: use this native window for one manual tempo/jog/manual transition, EQ and temporary-Cue listening session. A readiness question is pending; do not run timed captures while Jason is unavailable. Keep the goal active and the Sync-pop defect open.

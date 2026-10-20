@@ -4,17 +4,17 @@ Jason explicitly authorized rebuilding the app after the audit reconciliation. *
 
 Implemented in the current source: synchronous cue ownership revocation on replacement/eject/stop, guarded asynchronous audition and current-only latch; safe modifier/editable/modal/composition keyboard handling with physical-key Cue cleanup; Sync state refresh without replacing focused deck controls; named/pressed headphone CUE and clearer Help semantics. [Implementation and evidence](../docs/prototype/CORE_DJ_REBUILD_2026-10-20.md).
 
-Executed proof: eight focused regressions (red→green), 19 existing controlled cue lifecycle checks, eight existing GUI tempo-model checks, jog policy and Sync-master controlled checks. These are source/controller checks, not native sound or physical acceptance. Next: immutable-source0.1.29 packaging/launch, then one practical manual-tempo/jog/EQ/temporary-Cue/clean-stop session. The intermittent Sync pop stays OPEN; the latest quiet retry is not a fix. Computer audio/Hercules disconnected is the last recorded setup; independent headphone routing still needs suitable hardware.
+Executed proof: eight focused regressions (red→green), 19 existing controlled cue lifecycle checks, eight existing GUI tempo-model checks, jog policy and Sync-master controlled checks. These are source/controller checks, not native sound or physical acceptance. Current local test0.1.29 (source8476d45) is packaged, runtime-inspected5/5 and actually launched. Both real tracks loaded through normal controls, SyncOFF/pitch0; ten previews retained. Native Ctrl+O leaves Loop In inactive. Prior0.1.28independent transport/meters, Sync focus and PFL accessible-state evidence is kept separate. Next: one practical manual-tempo/jog/EQ/temporary-Cue/clean-stop listening session. The intermittent Sync pop stays OPEN; the latest quiet retry is not a fix. Computer audio/Hercules disconnected is the last recorded setup; independent headphone routing still needs suitable hardware.
 
 Trello remains133 cards (Core22 / Next17 / Later87 / hardware-blocked4 / approvals2 / evidence1). CORE-FIX-05/06 and CORE-001 have implementation progress; broad cards are not complete. Model guidance/criteria/history remain intact. No additional council audit or advanced DSP matrix is required.
 
 ---
 
-## Handoff: Codex to next Codex/Claude executor
+## Handoff: next core session
 
-Date:20 October2026. Project:Open Play. Read first:the linked audit, `docs/delivery/CORE_DJ_FIRST.md` and this current summary. Decisions:HTML-only core first, preserve all controls/previews, keep pop/hardware acceptance open. Changes in this pass:documentation and Trello only. No other agent or Claude CLI was invoked.
+Current package0.1.29/source8476d45is open with both saved real songs paused0, SyncOFF/pitch0. Use the actual native window; the browser panel is a separate session. Re-entry: answer the pending readiness question, then one short manual-tempo/jog/manual transition, LOW/MID/HIGH/reset, temporary-Cue hold/release/latch and clean-stop listening session. Preserve all controls/previews and the intermittent-pop report. Hardware last recorded disconnected; no physical claims without its test.
 
-Next exact task, only in the subsequent work block:implement CORE-FIX-05 cue ownership and CORE-FIX-06 keyboard safety with their focused regressions, then the remaining scoped presentation fixes and one consolidated listening session. Return changed files, executed tests and their scope, failures/gaps and the next exact action. No reference-asset copying, unrelated cleanup, parity declaration or native rebuild. Current executor stops after reconciliation verification.
+Cue/shortcut fixes and package provenance are in the linked evidence. The eight focused regressions and actual native Ctrl+O/startup checks passed; earlier0.1.28transport/meters/focus/PFL evidence remains separately labeled. Current launcher opens0.1.29. Do not start advanced stems/FX/video or another layout/council audit while this usable core segment awaits acceptance. No full-core/parity completion claim. Trello CORE-001/05/06headers/comments were read back after updates; all remain OPEN for their explicit practical criteria. The earlier no-native/stop directives are historical and superseded by Jason's current rebuild instruction.
 
 ---
 
