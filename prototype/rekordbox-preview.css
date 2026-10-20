@@ -357,3 +357,5 @@ body[data-workspace=rekordbox].four-decks[data-orientation] .channel-strip{grid-
 body[data-workspace=rekordbox].four-decks[data-orientation] .channel-strip .knob-group:has(input[data-mix$=':filter']){grid-row:6}
 body[data-workspace=rekordbox].four-decks[data-orientation] .channel-strip>button{grid-row:7}
 body[data-workspace=rekordbox].four-decks[data-orientation] .channel-strip .fader-group{grid-row:8}
+/* The horizontal pitch row must not inherit the original vertical writing mode. */
+body[data-workspace=rekordbox][data-orientation] .preview-deck-utilities .tempo-control{writing-mode:horizontal-tb}
