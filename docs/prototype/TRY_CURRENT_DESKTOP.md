@@ -1,4 +1,8 @@
-# Try desktop0.1.30 — current core candidate
+# Try desktop0.1.32 — current core candidate
+
+Current launcher selects the existing0.1.32/sourcef11275f build. [Current session and exact remaining gates](CORE_SESSION_032.md). Close another playback-test version before launching; preserve the current recording first. Earlier candidate instructions below are historical and their transient live settings are not current.
+
+## Historical0.1.30 instructions
 
 Open `Start Open Play Current Test.command` or `Start Open Play Playback Test 0.1.30.command`. Close another playback-test version first; all use the existing profile and port18775. Earlier bundles/launchers remain. This version opens the chosen rekordbox workspace directly with all custom controls and library previews.
 

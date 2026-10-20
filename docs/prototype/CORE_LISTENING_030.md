@@ -1,5 +1,7 @@
 # Core listening session — desktop0.1.30
 
+**Current follow-through:** [Desktop0.1.32 session](CORE_SESSION_032.md). Jason reports a small fixed audible offset despite aligned displayed grids; EQ inconclusive on laptop speakers. No full acceptance. The checkpoint history below is retained.
+
 20 October2026. Current native source9447710, ASAR50b2ace08404218204b5ac70fcd34c1ea0f170b36f0a575374d92d77f27102b3. Actual native window is Open Play Playback Test0.1.30; browser panel is a separate session. Last hardware report: computer audio, Hercules disconnected. No physical cue/master isolation acceptance.
 
 Jason replied “Yes—ready to listen” to the pending readiness question. Proceed one short step at a time; do not repeat previously accepted playback/filter/crossfader checks unless a current failure justifies it.

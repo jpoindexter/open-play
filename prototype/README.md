@@ -2,7 +2,7 @@
 
 Active core view: [rekordbox layout preview](http://127.0.0.1:8848/prototype/layout-preview.html). Keep an existing server/session running; do not restart or reload it for board administration. If a server is needed, run `python3 scripts/serve_prototype.py --port 8848` from the repository root and open `/prototype/layout-preview.html`.
 
-Core playback needs a modern browser with Web Audio and no package install or hosted service. Recording uses MediaRecorder. Optional stems/model services are outside the current core workflow. See [the audit and implementation sequence](../docs/prototype/CORE_DJ_AUDIT_2026-10-20.md) and [current status](../docs/delivery/CORE_DJ_FIRST.md). The audit reconciliation is complete. The current implementation pass repairs core cue/keyboard safety and prepares the authorized local desktop0.1.30test; source, native and listening evidence stay separate.
+Core playback needs a modern browser with Web Audio and no package install or hosted service. Recording uses MediaRecorder. Optional stems/model services are outside the current core workflow. See [the audit and implementation sequence](../docs/prototype/CORE_DJ_AUDIT_2026-10-20.md) and [current status](../docs/delivery/CORE_DJ_FIRST.md). The audit reconciliation is complete. The current implementation pass repairs core cue/keyboard safety and uses the authorized local desktop0.1.32test; source, native and listening evidence stay separate. [Current native session and remaining Sync offset](../docs/prototype/CORE_SESSION_032.md).
 
 This is an independently written HTML/CSS/JavaScript review prototype. **It does
 not establish 1:1 Serato parity.** All 110 inventoried feature groups have a

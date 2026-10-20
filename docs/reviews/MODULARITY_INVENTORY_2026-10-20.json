@@ -1,0 +1,3354 @@
+{
+  "revision": "f11275f61a0184ba841df5520903112837e35902",
+  "scope": "Tracked JS/CJS/MJS/JSX at revision; vendor/node_modules excluded. Token-backed nonblank/non-comment occupied physical LOC, including multiline strings. Runtime is path/name classification, not full package reachability. Static controller digests excluded from executable limits; video catalog kept separate because it also mutates catalog records. Fixtures include runtime defaults and remain runtime. No cyclomatic-complexity or semantic certification.",
+  "parser": {
+    "name": "@babel/parser",
+    "version": "7.29.3",
+    "source": "/Users/jasonpoindexter/node_modules/@babel/parser/lib/index.js",
+    "addedDependency": false
+  },
+  "classification": "f=>f==='prototype/controller-factory-digests.js'?'static-data':f==='prototype/video-effects-catalog.js'?'mixed-catalog':/^(scripts|experiments)\\//.test(f)?'tools-experiments':/(?:harness|probe|check|(?:[.-])tests?(?:[.-]|$))/.test(f)?'tests-harnesses':((f.startsWith('prototype/')&&f!=='prototype/ui/build.mjs')||f.startsWith('desktop/'))?'runtime':'tools-experiments'",
+  "counts": {
+    "inventoriedFiles": 577,
+    "additionalCJSFileParsedWithTopLevelReturn": true,
+    "parseErrors": 0,
+    "runtimeFiles": 149,
+    "runtimeCodeLines": 19962,
+    "runtimeOver200": 17,
+    "runtimeOver300": 8,
+    "runtimeFunctions": 3936,
+    "runtimeFunctionsOver50": 119
+  },
+  "files": [
+    {
+      "file": "prototype/panels.js",
+      "group": "runtime",
+      "physicalLines": 2288,
+      "codeLines": 2279,
+      "bytes": 142597,
+      "longestLine": 5541
+    },
+    {
+      "file": "prototype/engine.js",
+      "group": "runtime",
+      "physicalLines": 2192,
+      "codeLines": 2138,
+      "bytes": 114684,
+      "longestLine": 677
+    },
+    {
+      "file": "prototype/app.js",
+      "group": "runtime",
+      "physicalLines": 2115,
+      "codeLines": 2093,
+      "bytes": 103806,
+      "longestLine": 5614
+    },
+    {
+      "file": "prototype/extended-effects-kernel.js",
+      "group": "runtime",
+      "physicalLines": 1229,
+      "codeLines": 1215,
+      "bytes": 44871,
+      "longestLine": 176
+    },
+    {
+      "file": "prototype/video-effects-catalog.js",
+      "group": "mixed-catalog",
+      "physicalLines": 1169,
+      "codeLines": 1164,
+      "bytes": 51003,
+      "longestLine": 415
+    },
+    {
+      "file": "prototype/controller-factory-digests.js",
+      "group": "static-data",
+      "physicalLines": 988,
+      "codeLines": 987,
+      "bytes": 57645,
+      "longestLine": 80
+    },
+    {
+      "file": "prototype/video.js",
+      "group": "runtime",
+      "physicalLines": 568,
+      "codeLines": 558,
+      "bytes": 37101,
+      "longestLine": 363
+    },
+    {
+      "file": "prototype/analysis.js",
+      "group": "runtime",
+      "physicalLines": 458,
+      "codeLines": 438,
+      "bytes": 17878,
+      "longestLine": 314
+    },
+    {
+      "file": "prototype/video-controls.js",
+      "group": "runtime",
+      "physicalLines": 342,
+      "codeLines": 333,
+      "bytes": 37562,
+      "longestLine": 3350
+    },
+    {
+      "file": "prototype/fixtures.js",
+      "group": "runtime",
+      "physicalLines": 331,
+      "codeLines": 330,
+      "bytes": 10326,
+      "longestLine": 100
+    },
+    {
+      "file": "prototype/keylock-shadow-live.js",
+      "group": "runtime",
+      "physicalLines": 294,
+      "codeLines": 273,
+      "bytes": 41417,
+      "longestLine": 1317
+    },
+    {
+      "file": "prototype/smart-sync.js",
+      "group": "runtime",
+      "physicalLines": 280,
+      "codeLines": 259,
+      "bytes": 16196,
+      "longestLine": 241
+    },
+    {
+      "file": "prototype/deck-scratch-ui.js",
+      "group": "runtime",
+      "physicalLines": 273,
+      "codeLines": 258,
+      "bytes": 20303,
+      "longestLine": 363
+    },
+    {
+      "file": "prototype/deck-midi.js",
+      "group": "runtime",
+      "physicalLines": 267,
+      "codeLines": 257,
+      "bytes": 21183,
+      "longestLine": 332
+    },
+    {
+      "file": "prototype/layout-preview.js",
+      "group": "runtime",
+      "physicalLines": 266,
+      "codeLines": 249,
+      "bytes": 18580,
+      "longestLine": 380
+    },
+    {
+      "file": "prototype/effects.js",
+      "group": "runtime",
+      "physicalLines": 250,
+      "codeLines": 247,
+      "bytes": 9149,
+      "longestLine": 122
+    },
+    {
+      "file": "prototype/observed-fx-control-adapters.js",
+      "group": "runtime",
+      "physicalLines": 218,
+      "codeLines": 213,
+      "bytes": 10704,
+      "longestLine": 365
+    },
+    {
+      "file": "prototype/pitchplay.js",
+      "group": "runtime",
+      "physicalLines": 214,
+      "codeLines": 212,
+      "bytes": 6608,
+      "longestLine": 128
+    },
+    {
+      "file": "prototype/stems.js",
+      "group": "runtime",
+      "physicalLines": 211,
+      "codeLines": 207,
+      "bytes": 11430,
+      "longestLine": 264
+    },
+    {
+      "file": "prototype/video-overlays.js",
+      "group": "runtime",
+      "physicalLines": 211,
+      "codeLines": 197,
+      "bytes": 14184,
+      "longestLine": 184
+    },
+    {
+      "file": "prototype/video-effects-shaders.js",
+      "group": "runtime",
+      "physicalLines": 195,
+      "codeLines": 194,
+      "bytes": 11614,
+      "longestLine": 246
+    },
+    {
+      "file": "prototype/video-transitions.js",
+      "group": "runtime",
+      "physicalLines": 195,
+      "codeLines": 175,
+      "bytes": 15454,
+      "longestLine": 328
+    },
+    {
+      "file": "prototype/video-transitions-kernel.js",
+      "group": "runtime",
+      "physicalLines": 178,
+      "codeLines": 174,
+      "bytes": 7894,
+      "longestLine": 106
+    },
+    {
+      "file": "prototype/video-effects.js",
+      "group": "runtime",
+      "physicalLines": 191,
+      "codeLines": 170,
+      "bytes": 13542,
+      "longestLine": 348
+    },
+    {
+      "file": "prototype/keylock-scratch-shadow.js",
+      "group": "runtime",
+      "physicalLines": 174,
+      "codeLines": 164,
+      "bytes": 11066,
+      "longestLine": 163
+    },
+    {
+      "file": "prototype/stem-waveform.js",
+      "group": "runtime",
+      "physicalLines": 164,
+      "codeLines": 151,
+      "bytes": 10100,
+      "longestLine": 187
+    },
+    {
+      "file": "prototype/stem-exit-fx.js",
+      "group": "runtime",
+      "physicalLines": 159,
+      "codeLines": 148,
+      "bytes": 5295,
+      "longestLine": 85
+    },
+    {
+      "file": "prototype/flip.js",
+      "group": "runtime",
+      "physicalLines": 149,
+      "codeLines": 147,
+      "bytes": 4098,
+      "longestLine": 80
+    },
+    {
+      "file": "prototype/stem-slip-ui.js",
+      "group": "runtime",
+      "physicalLines": 150,
+      "codeLines": 147,
+      "bytes": 8321,
+      "longestLine": 1266
+    },
+    {
+      "file": "prototype/stem-slip-kernel.js",
+      "group": "runtime",
+      "physicalLines": 149,
+      "codeLines": 146,
+      "bytes": 7054,
+      "longestLine": 120
+    },
+    {
+      "file": "prototype/deck-scratch-kernel.js",
+      "group": "runtime",
+      "physicalLines": 143,
+      "codeLines": 138,
+      "bytes": 15727,
+      "longestLine": 645
+    },
+    {
+      "file": "prototype/video-media.js",
+      "group": "runtime",
+      "physicalLines": 146,
+      "codeLines": 137,
+      "bytes": 12515,
+      "longestLine": 452
+    },
+    {
+      "file": "prototype/keylock-dsp.js",
+      "group": "runtime",
+      "physicalLines": 149,
+      "codeLines": 134,
+      "bytes": 7903,
+      "longestLine": 293
+    },
+    {
+      "file": "prototype/holds.js",
+      "group": "runtime",
+      "physicalLines": 125,
+      "codeLines": 124,
+      "bytes": 3828,
+      "longestLine": 99
+    },
+    {
+      "file": "prototype/controller-catalog.js",
+      "group": "runtime",
+      "physicalLines": 131,
+      "codeLines": 123,
+      "bytes": 11374,
+      "longestLine": 456
+    },
+    {
+      "file": "prototype/keylock.js",
+      "group": "runtime",
+      "physicalLines": 128,
+      "codeLines": 121,
+      "bytes": 6425,
+      "longestLine": 199
+    },
+    {
+      "file": "prototype/video-effects-state.js",
+      "group": "runtime",
+      "physicalLines": 122,
+      "codeLines": 120,
+      "bytes": 7872,
+      "longestLine": 151
+    },
+    {
+      "file": "prototype/midi.js",
+      "group": "runtime",
+      "physicalLines": 119,
+      "codeLines": 116,
+      "bytes": 4804,
+      "longestLine": 138
+    },
+    {
+      "file": "prototype/video-fx-presets.js",
+      "group": "runtime",
+      "physicalLines": 137,
+      "codeLines": 111,
+      "bytes": 6592,
+      "longestLine": 111
+    },
+    {
+      "file": "prototype/video-karaoke.js",
+      "group": "runtime",
+      "physicalLines": 110,
+      "codeLines": 109,
+      "bytes": 9381,
+      "longestLine": 235
+    },
+    {
+      "file": "prototype/library-waveform-preview.js",
+      "group": "runtime",
+      "physicalLines": 112,
+      "codeLines": 106,
+      "bytes": 7684,
+      "longestLine": 240
+    },
+    {
+      "file": "prototype/video-state.js",
+      "group": "runtime",
+      "physicalLines": 119,
+      "codeLines": 106,
+      "bytes": 8128,
+      "longestLine": 173
+    },
+    {
+      "file": "prototype/keylock-short-block-experiment.js",
+      "group": "runtime",
+      "physicalLines": 111,
+      "codeLines": 103,
+      "bytes": 24944,
+      "longestLine": 1239
+    },
+    {
+      "file": "prototype/keylock-live-lead-experiment.js",
+      "group": "runtime",
+      "physicalLines": 109,
+      "codeLines": 101,
+      "bytes": 23639,
+      "longestLine": 1239
+    },
+    {
+      "file": "prototype/keylock-shadow-follow-experiment.js",
+      "group": "runtime",
+      "physicalLines": 111,
+      "codeLines": 101,
+      "bytes": 24061,
+      "longestLine": 1239
+    },
+    {
+      "file": "prototype/video-midi.js",
+      "group": "runtime",
+      "physicalLines": 108,
+      "codeLines": 101,
+      "bytes": 7516,
+      "longestLine": 398
+    },
+    {
+      "file": "prototype/source-waveform.js",
+      "group": "runtime",
+      "physicalLines": 111,
+      "codeLines": 100,
+      "bytes": 6743,
+      "longestLine": 183
+    },
+    {
+      "file": "prototype/cdg.js",
+      "group": "runtime",
+      "physicalLines": 112,
+      "codeLines": 99,
+      "bytes": 6824,
+      "longestLine": 157
+    },
+    {
+      "file": "prototype/keylock-live.js",
+      "group": "runtime",
+      "physicalLines": 105,
+      "codeLines": 99,
+      "bytes": 22830,
+      "longestLine": 1239
+    },
+    {
+      "file": "prototype/slicer.js",
+      "group": "runtime",
+      "physicalLines": 106,
+      "codeLines": 96,
+      "bytes": 7297,
+      "longestLine": 276
+    },
+    {
+      "file": "prototype/sync.js",
+      "group": "runtime",
+      "physicalLines": 99,
+      "codeLines": 94,
+      "bytes": 7466,
+      "longestLine": 286
+    },
+    {
+      "file": "prototype/ui/controls.jsx",
+      "group": "runtime",
+      "physicalLines": 99,
+      "codeLines": 93,
+      "bytes": 9102,
+      "longestLine": 464
+    },
+    {
+      "file": "prototype/library.js",
+      "group": "runtime",
+      "physicalLines": 91,
+      "codeLines": 90,
+      "bytes": 2706,
+      "longestLine": 78
+    },
+    {
+      "file": "prototype/video-overlay-midi.js",
+      "group": "runtime",
+      "physicalLines": 91,
+      "codeLines": 89,
+      "bytes": 6749,
+      "longestLine": 176
+    },
+    {
+      "file": "prototype/video-settings.js",
+      "group": "runtime",
+      "physicalLines": 98,
+      "codeLines": 89,
+      "bytes": 5253,
+      "longestLine": 119
+    },
+    {
+      "file": "prototype/loop-pads.js",
+      "group": "runtime",
+      "physicalLines": 91,
+      "codeLines": 84,
+      "bytes": 6223,
+      "longestLine": 249
+    },
+    {
+      "file": "prototype/controller-mixer.js",
+      "group": "runtime",
+      "physicalLines": 84,
+      "codeLines": 82,
+      "bytes": 6328,
+      "longestLine": 257
+    },
+    {
+      "file": "prototype/video-pipeline.js",
+      "group": "runtime",
+      "physicalLines": 86,
+      "codeLines": 82,
+      "bytes": 5126,
+      "longestLine": 205
+    },
+    {
+      "file": "prototype/midi-jog-touch.js",
+      "group": "runtime",
+      "physicalLines": 87,
+      "codeLines": 81,
+      "bytes": 5488,
+      "longestLine": 371
+    },
+    {
+      "file": "prototype/video-karaoke-controls.js",
+      "group": "runtime",
+      "physicalLines": 87,
+      "codeLines": 81,
+      "bytes": 8708,
+      "longestLine": 2355
+    },
+    {
+      "file": "prototype/deck-scratch.js",
+      "group": "runtime",
+      "physicalLines": 82,
+      "codeLines": 80,
+      "bytes": 10220,
+      "longestLine": 554
+    },
+    {
+      "file": "prototype/video-media-controls.js",
+      "group": "runtime",
+      "physicalLines": 83,
+      "codeLines": 80,
+      "bytes": 10089,
+      "longestLine": 2524
+    },
+    {
+      "file": "prototype/sample-sync-transport.js",
+      "group": "runtime",
+      "physicalLines": 81,
+      "codeLines": 78,
+      "bytes": 6650,
+      "longestLine": 256
+    },
+    {
+      "file": "prototype/extended-effects.js",
+      "group": "runtime",
+      "physicalLines": 78,
+      "codeLines": 76,
+      "bytes": 2412,
+      "longestLine": 102
+    },
+    {
+      "file": "prototype/rekordbox-preview.js",
+      "group": "runtime",
+      "physicalLines": 80,
+      "codeLines": 74,
+      "bytes": 7146,
+      "longestLine": 630
+    },
+    {
+      "file": "prototype/sampler-sync.js",
+      "group": "runtime",
+      "physicalLines": 78,
+      "codeLines": 74,
+      "bytes": 6448,
+      "longestLine": 260
+    },
+    {
+      "file": "prototype/video-analysis.js",
+      "group": "runtime",
+      "physicalLines": 76,
+      "codeLines": 72,
+      "bytes": 4184,
+      "longestLine": 144
+    },
+    {
+      "file": "prototype/video-audio-fx.js",
+      "group": "runtime",
+      "physicalLines": 77,
+      "codeLines": 71,
+      "bytes": 10489,
+      "longestLine": 613
+    },
+    {
+      "file": "prototype/stem-history.js",
+      "group": "runtime",
+      "physicalLines": 71,
+      "codeLines": 70,
+      "bytes": 1956,
+      "longestLine": 86
+    },
+    {
+      "file": "prototype/controller-performance.js",
+      "group": "runtime",
+      "physicalLines": 69,
+      "codeLines": 65,
+      "bytes": 5099,
+      "longestLine": 267
+    },
+    {
+      "file": "prototype/jog-bend.js",
+      "group": "runtime",
+      "physicalLines": 69,
+      "codeLines": 65,
+      "bytes": 4099,
+      "longestLine": 327
+    },
+    {
+      "file": "prototype/video-audio-fx-state.js",
+      "group": "runtime",
+      "physicalLines": 65,
+      "codeLines": 65,
+      "bytes": 7615,
+      "longestLine": 433
+    },
+    {
+      "file": "prototype/audio-monitor.js",
+      "group": "runtime",
+      "physicalLines": 69,
+      "codeLines": 64,
+      "bytes": 7154,
+      "longestLine": 470
+    },
+    {
+      "file": "prototype/stem-reverse-161-followup.js",
+      "group": "runtime",
+      "physicalLines": 64,
+      "codeLines": 64,
+      "bytes": 15235,
+      "longestLine": 1010
+    },
+    {
+      "file": "desktop/package-playback.mjs",
+      "group": "runtime",
+      "physicalLines": 70,
+      "codeLines": 62,
+      "bytes": 10839,
+      "longestLine": 1692
+    },
+    {
+      "file": "prototype/lpf-kernel.js",
+      "group": "runtime",
+      "physicalLines": 66,
+      "codeLines": 61,
+      "bytes": 2985,
+      "longestLine": 114
+    },
+    {
+      "file": "prototype/stem-slip.js",
+      "group": "runtime",
+      "physicalLines": 61,
+      "codeLines": 61,
+      "bytes": 3307,
+      "longestLine": 180
+    },
+    {
+      "file": "prototype/render-clock-capture-worklet.js",
+      "group": "runtime",
+      "physicalLines": 65,
+      "codeLines": 60,
+      "bytes": 7323,
+      "longestLine": 524
+    },
+    {
+      "file": "prototype/manual-loops.js",
+      "group": "runtime",
+      "physicalLines": 62,
+      "codeLines": 59,
+      "bytes": 3866,
+      "longestLine": 370
+    },
+    {
+      "file": "prototype/stem-history-worklet.js",
+      "group": "runtime",
+      "physicalLines": 60,
+      "codeLines": 59,
+      "bytes": 1896,
+      "longestLine": 83
+    },
+    {
+      "file": "prototype/video-file-identity.js",
+      "group": "runtime",
+      "physicalLines": 62,
+      "codeLines": 59,
+      "bytes": 3385,
+      "longestLine": 150
+    },
+    {
+      "file": "prototype/controller-catalog-ui.js",
+      "group": "runtime",
+      "physicalLines": 58,
+      "codeLines": 58,
+      "bytes": 6175,
+      "longestLine": 525
+    },
+    {
+      "file": "prototype/silent-audio-pull.js",
+      "group": "runtime",
+      "physicalLines": 60,
+      "codeLines": 58,
+      "bytes": 4500,
+      "longestLine": 279
+    },
+    {
+      "file": "desktop/package-phase.mjs",
+      "group": "runtime",
+      "physicalLines": 58,
+      "codeLines": 56,
+      "bytes": 7699,
+      "longestLine": 812
+    },
+    {
+      "file": "prototype/headphone-preview.js",
+      "group": "runtime",
+      "physicalLines": 60,
+      "codeLines": 56,
+      "bytes": 3653,
+      "longestLine": 140
+    },
+    {
+      "file": "prototype/local-audio-library.js",
+      "group": "runtime",
+      "physicalLines": 58,
+      "codeLines": 56,
+      "bytes": 5023,
+      "longestLine": 247
+    },
+    {
+      "file": "prototype/video-recording.js",
+      "group": "runtime",
+      "physicalLines": 58,
+      "codeLines": 56,
+      "bytes": 4398,
+      "longestLine": 270
+    },
+    {
+      "file": "prototype/audio-output.js",
+      "group": "runtime",
+      "physicalLines": 60,
+      "codeLines": 55,
+      "bytes": 5257,
+      "longestLine": 730
+    },
+    {
+      "file": "desktop/server.cjs",
+      "group": "runtime",
+      "physicalLines": 52,
+      "codeLines": 52,
+      "bytes": 5714,
+      "longestLine": 500
+    },
+    {
+      "file": "prototype/fader-preview.js",
+      "group": "runtime",
+      "physicalLines": 52,
+      "codeLines": 51,
+      "bytes": 3715,
+      "longestLine": 182
+    },
+    {
+      "file": "prototype/video-midi-assignment-ui.js",
+      "group": "runtime",
+      "physicalLines": 55,
+      "codeLines": 51,
+      "bytes": 5071,
+      "longestLine": 503
+    },
+    {
+      "file": "prototype/rotary-preview.js",
+      "group": "runtime",
+      "physicalLines": 53,
+      "codeLines": 50,
+      "bytes": 3985,
+      "longestLine": 259
+    },
+    {
+      "file": "prototype/video-treatment.js",
+      "group": "runtime",
+      "physicalLines": 56,
+      "codeLines": 48,
+      "bytes": 3999,
+      "longestLine": 190
+    },
+    {
+      "file": "prototype/extended-effects-worklet.js",
+      "group": "runtime",
+      "physicalLines": 47,
+      "codeLines": 46,
+      "bytes": 1891,
+      "longestLine": 150
+    },
+    {
+      "file": "desktop/package-warp.mjs",
+      "group": "runtime",
+      "physicalLines": 46,
+      "codeLines": 45,
+      "bytes": 5399,
+      "longestLine": 866
+    },
+    {
+      "file": "prototype/fx-tempo.js",
+      "group": "runtime",
+      "physicalLines": 47,
+      "codeLines": 45,
+      "bytes": 4277,
+      "longestLine": 225
+    },
+    {
+      "file": "prototype/video-file-identity-core.js",
+      "group": "runtime",
+      "physicalLines": 47,
+      "codeLines": 44,
+      "bytes": 2262,
+      "longestLine": 122
+    },
+    {
+      "file": "prototype/video-transitions-state.js",
+      "group": "runtime",
+      "physicalLines": 49,
+      "codeLines": 44,
+      "bytes": 2707,
+      "longestLine": 157
+    },
+    {
+      "file": "prototype/beatgrid.js",
+      "group": "runtime",
+      "physicalLines": 43,
+      "codeLines": 41,
+      "bytes": 3193,
+      "longestLine": 253
+    },
+    {
+      "file": "prototype/midi-assignment.js",
+      "group": "runtime",
+      "physicalLines": 43,
+      "codeLines": 41,
+      "bytes": 4014,
+      "longestLine": 322
+    },
+    {
+      "file": "prototype/stem-crate.js",
+      "group": "runtime",
+      "physicalLines": 42,
+      "codeLines": 41,
+      "bytes": 3935,
+      "longestLine": 316
+    },
+    {
+      "file": "prototype/tempo-slider.js",
+      "group": "runtime",
+      "physicalLines": 45,
+      "codeLines": 41,
+      "bytes": 2468,
+      "longestLine": 166
+    },
+    {
+      "file": "desktop/main.cjs",
+      "group": "runtime",
+      "physicalLines": 46,
+      "codeLines": 39,
+      "bytes": 5007,
+      "longestLine": 1294
+    },
+    {
+      "file": "prototype/censor-backing.js",
+      "group": "runtime",
+      "physicalLines": 41,
+      "codeLines": 39,
+      "bytes": 3688,
+      "longestLine": 256
+    },
+    {
+      "file": "prototype/keylock-cursor-capture-worklet.js",
+      "group": "runtime",
+      "physicalLines": 41,
+      "codeLines": 39,
+      "bytes": 4454,
+      "longestLine": 398
+    },
+    {
+      "file": "prototype/lpf-parameters.js",
+      "group": "runtime",
+      "physicalLines": 43,
+      "codeLines": 39,
+      "bytes": 2273,
+      "longestLine": 135
+    },
+    {
+      "file": "prototype/deck-scratch-cache.js",
+      "group": "runtime",
+      "physicalLines": 39,
+      "codeLines": 37,
+      "bytes": 3000,
+      "longestLine": 214
+    },
+    {
+      "file": "prototype/keylock-cursor-analysis.js",
+      "group": "runtime",
+      "physicalLines": 38,
+      "codeLines": 35,
+      "bytes": 3471,
+      "longestLine": 251
+    },
+    {
+      "file": "prototype/keylock-cursor32-analysis.js",
+      "group": "runtime",
+      "physicalLines": 39,
+      "codeLines": 35,
+      "bytes": 3544,
+      "longestLine": 251
+    },
+    {
+      "file": "prototype/track-gain.js",
+      "group": "runtime",
+      "physicalLines": 32,
+      "codeLines": 32,
+      "bytes": 3028,
+      "longestLine": 325
+    },
+    {
+      "file": "prototype/loudness.js",
+      "group": "runtime",
+      "physicalLines": 31,
+      "codeLines": 29,
+      "bytes": 2896,
+      "longestLine": 387
+    },
+    {
+      "file": "prototype/video-decode.js",
+      "group": "runtime",
+      "physicalLines": 31,
+      "codeLines": 29,
+      "bytes": 1875,
+      "longestLine": 135
+    },
+    {
+      "file": "prototype/stem-slip-worklet.js",
+      "group": "runtime",
+      "physicalLines": 28,
+      "codeLines": 28,
+      "bytes": 1051,
+      "longestLine": 99
+    },
+    {
+      "file": "desktop/package-r3.mjs",
+      "group": "runtime",
+      "physicalLines": 28,
+      "codeLines": 27,
+      "bytes": 5313,
+      "longestLine": 1141
+    },
+    {
+      "file": "prototype/censor.js",
+      "group": "runtime",
+      "physicalLines": 28,
+      "codeLines": 26,
+      "bytes": 2044,
+      "longestLine": 239
+    },
+    {
+      "file": "prototype/deck-scratch-report.js",
+      "group": "runtime",
+      "physicalLines": 30,
+      "codeLines": 26,
+      "bytes": 3200,
+      "longestLine": 423
+    },
+    {
+      "file": "prototype/mixer-curves.js",
+      "group": "runtime",
+      "physicalLines": 26,
+      "codeLines": 25,
+      "bytes": 2122,
+      "longestLine": 339
+    },
+    {
+      "file": "prototype/silent-audio-pull-worklet.js",
+      "group": "runtime",
+      "physicalLines": 27,
+      "codeLines": 25,
+      "bytes": 1257,
+      "longestLine": 127
+    },
+    {
+      "file": "prototype/sync-master.js",
+      "group": "runtime",
+      "physicalLines": 26,
+      "codeLines": 25,
+      "bytes": 1270,
+      "longestLine": 116
+    },
+    {
+      "file": "prototype/sync-tempo-handoff.js",
+      "group": "runtime",
+      "physicalLines": 27,
+      "codeLines": 25,
+      "bytes": 2365,
+      "longestLine": 239
+    },
+    {
+      "file": "prototype/video-crossfade.js",
+      "group": "runtime",
+      "physicalLines": 29,
+      "codeLines": 25,
+      "bytes": 1948,
+      "longestLine": 240
+    },
+    {
+      "file": "prototype/instant-double.js",
+      "group": "runtime",
+      "physicalLines": 25,
+      "codeLines": 24,
+      "bytes": 1396,
+      "longestLine": 103
+    },
+    {
+      "file": "prototype/warp-loop-kernel.js",
+      "group": "runtime",
+      "physicalLines": 26,
+      "codeLines": 24,
+      "bytes": 2259,
+      "longestLine": 524
+    },
+    {
+      "file": "prototype/deck-scratch-capture-worklet.js",
+      "group": "runtime",
+      "physicalLines": 25,
+      "codeLines": 23,
+      "bytes": 2138,
+      "longestLine": 226
+    },
+    {
+      "file": "prototype/master-output-kernel.js",
+      "group": "runtime",
+      "physicalLines": 24,
+      "codeLines": 23,
+      "bytes": 1787,
+      "longestLine": 231
+    },
+    {
+      "file": "prototype/performance-tokens.js",
+      "group": "runtime",
+      "physicalLines": 24,
+      "codeLines": 23,
+      "bytes": 636,
+      "longestLine": 56
+    },
+    {
+      "file": "prototype/pcm-resample.js",
+      "group": "runtime",
+      "physicalLines": 22,
+      "codeLines": 20,
+      "bytes": 3114,
+      "longestLine": 533
+    },
+    {
+      "file": "prototype/video-opacity.js",
+      "group": "runtime",
+      "physicalLines": 22,
+      "codeLines": 20,
+      "bytes": 1362,
+      "longestLine": 151
+    },
+    {
+      "file": "prototype/deck-scratch-worklet.js",
+      "group": "runtime",
+      "physicalLines": 21,
+      "codeLines": 19,
+      "bytes": 1103,
+      "longestLine": 129
+    },
+    {
+      "file": "prototype/deck-tap-tempo.js",
+      "group": "runtime",
+      "physicalLines": 21,
+      "codeLines": 19,
+      "bytes": 1648,
+      "longestLine": 155
+    },
+    {
+      "file": "prototype/scratch-input-debug.js",
+      "group": "runtime",
+      "physicalLines": 22,
+      "codeLines": 19,
+      "bytes": 3340,
+      "longestLine": 584
+    },
+    {
+      "file": "prototype/master-output.js",
+      "group": "runtime",
+      "physicalLines": 18,
+      "codeLines": 18,
+      "bytes": 1628,
+      "longestLine": 312
+    },
+    {
+      "file": "prototype/reverse-censor-plan.js",
+      "group": "runtime",
+      "physicalLines": 20,
+      "codeLines": 18,
+      "bytes": 1945,
+      "longestLine": 238
+    },
+    {
+      "file": "prototype/warp-loop.js",
+      "group": "runtime",
+      "physicalLines": 18,
+      "codeLines": 18,
+      "bytes": 2386,
+      "longestLine": 372
+    },
+    {
+      "file": "desktop/package.mjs",
+      "group": "runtime",
+      "physicalLines": 18,
+      "codeLines": 17,
+      "bytes": 2001,
+      "longestLine": 492
+    },
+    {
+      "file": "prototype/pitch-time-map.js",
+      "group": "runtime",
+      "physicalLines": 20,
+      "codeLines": 17,
+      "bytes": 1795,
+      "longestLine": 251
+    },
+    {
+      "file": "prototype/stem-activation-capture-145.js",
+      "group": "runtime",
+      "physicalLines": 18,
+      "codeLines": 17,
+      "bytes": 1321,
+      "longestLine": 253
+    },
+    {
+      "file": "prototype/keylock-disposal-instrumentation.js",
+      "group": "runtime",
+      "physicalLines": 17,
+      "codeLines": 16,
+      "bytes": 2029,
+      "longestLine": 537
+    },
+    {
+      "file": "prototype/keylock-worker.js",
+      "group": "runtime",
+      "physicalLines": 16,
+      "codeLines": 16,
+      "bytes": 650,
+      "longestLine": 219
+    },
+    {
+      "file": "prototype/video-file-identity-worker.js",
+      "group": "runtime",
+      "physicalLines": 15,
+      "codeLines": 15,
+      "bytes": 615,
+      "longestLine": 121
+    },
+    {
+      "file": "prototype/analysis-worker.js",
+      "group": "runtime",
+      "physicalLines": 12,
+      "codeLines": 12,
+      "bytes": 398,
+      "longestLine": 75
+    },
+    {
+      "file": "prototype/keylock-release-analysis.js",
+      "group": "runtime",
+      "physicalLines": 15,
+      "codeLines": 12,
+      "bytes": 6662,
+      "longestLine": 1254
+    },
+    {
+      "file": "prototype/traktor-flat-preview.js",
+      "group": "runtime",
+      "physicalLines": 13,
+      "codeLines": 11,
+      "bytes": 979,
+      "longestLine": 150
+    },
+    {
+      "file": "prototype/deck-tempo.js",
+      "group": "runtime",
+      "physicalLines": 11,
+      "codeLines": 8,
+      "bytes": 714,
+      "longestLine": 143
+    },
+    {
+      "file": "prototype/auto-gain.js",
+      "group": "runtime",
+      "physicalLines": 8,
+      "codeLines": 6,
+      "bytes": 1168,
+      "longestLine": 278
+    },
+    {
+      "file": "prototype/master-output-worklet.js",
+      "group": "runtime",
+      "physicalLines": 6,
+      "codeLines": 6,
+      "bytes": 604,
+      "longestLine": 265
+    },
+    {
+      "file": "prototype/warp-loop-worklet.js",
+      "group": "runtime",
+      "physicalLines": 6,
+      "codeLines": 6,
+      "bytes": 1134,
+      "longestLine": 487
+    },
+    {
+      "file": "prototype/fx-tempo-capture-worklet.js",
+      "group": "runtime",
+      "physicalLines": 6,
+      "codeLines": 5,
+      "bytes": 1062,
+      "longestLine": 536
+    },
+    {
+      "file": "prototype/inventory.js",
+      "group": "runtime",
+      "physicalLines": 4,
+      "codeLines": 3,
+      "bytes": 1074875,
+      "longestLine": 758160
+    },
+    {
+      "file": "prototype/video-reference-menu.js",
+      "group": "runtime",
+      "physicalLines": 5,
+      "codeLines": 3,
+      "bytes": 4613,
+      "longestLine": 3575
+    },
+    {
+      "file": "prototype/xone-preview.js",
+      "group": "runtime",
+      "physicalLines": 5,
+      "codeLines": 3,
+      "bytes": 265,
+      "longestLine": 83
+    }
+  ],
+  "functions": [
+    {
+      "file": "prototype/panels.js",
+      "group": "runtime",
+      "name": "createPanels",
+      "start": 30,
+      "end": 2288,
+      "physicalLines": 2259,
+      "codeLines": 2250,
+      "params": 1,
+      "type": "FunctionDeclaration"
+    },
+    {
+      "file": "prototype/video.js",
+      "group": "runtime",
+      "name": "createVideoMixer",
+      "start": 15,
+      "end": 568,
+      "physicalLines": 554,
+      "codeLines": 545,
+      "params": 1,
+      "type": "FunctionDeclaration"
+    },
+    {
+      "file": "prototype/extended-effects-kernel.js",
+      "group": "runtime",
+      "name": "frame",
+      "start": 745,
+      "end": 1228,
+      "physicalLines": 484,
+      "codeLines": 481,
+      "params": 1,
+      "type": "ClassMethod"
+    },
+    {
+      "file": "prototype/video-controls.js",
+      "group": "runtime",
+      "name": "createVideoControls",
+      "start": 36,
+      "end": 342,
+      "physicalLines": 307,
+      "codeLines": 303,
+      "params": 1,
+      "type": "FunctionDeclaration"
+    },
+    {
+      "file": "prototype/deck-scratch-ui.js",
+      "group": "runtime",
+      "name": "createDeckScratchControls",
+      "start": 20,
+      "end": 273,
+      "physicalLines": 254,
+      "codeLines": 243,
+      "params": 1,
+      "type": "FunctionDeclaration"
+    },
+    {
+      "file": "prototype/smart-sync.js",
+      "group": "runtime",
+      "name": "createSmartSync",
+      "start": 38,
+      "end": 280,
+      "physicalLines": 243,
+      "codeLines": 223,
+      "params": 1,
+      "type": "FunctionDeclaration"
+    },
+    {
+      "file": "prototype/effects.js",
+      "group": "runtime",
+      "name": "createEffect",
+      "start": 28,
+      "end": 250,
+      "physicalLines": 223,
+      "codeLines": 221,
+      "params": 3,
+      "type": "FunctionDeclaration"
+    },
+    {
+      "file": "prototype/app.js",
+      "group": "runtime",
+      "name": "deckAction",
+      "start": 874,
+      "end": 1084,
+      "physicalLines": 211,
+      "codeLines": 210,
+      "params": 4,
+      "type": "FunctionDeclaration"
+    },
+    {
+      "file": "prototype/deck-midi.js",
+      "group": "runtime",
+      "name": "createDeckMIDIRouter",
+      "start": 19,
+      "end": 235,
+      "physicalLines": 217,
+      "codeLines": 210,
+      "params": 1,
+      "type": "FunctionDeclaration"
+    },
+    {
+      "file": "prototype/analysis.js",
+      "group": "runtime",
+      "name": "analyzePCM",
+      "start": 194,
+      "end": 399,
+      "physicalLines": 206,
+      "codeLines": 202,
+      "params": 3,
+      "type": "FunctionDeclaration"
+    },
+    {
+      "file": "prototype/engine.js",
+      "group": "runtime",
+      "name": "start",
+      "start": 418,
+      "end": 596,
+      "physicalLines": 179,
+      "codeLines": 179,
+      "params": 2,
+      "type": "ClassMethod"
+    },
+    {
+      "file": "prototype/deck-midi.js",
+      "group": "runtime",
+      "name": "dispatch",
+      "start": 41,
+      "end": 224,
+      "physicalLines": 184,
+      "codeLines": 177,
+      "params": 2,
+      "type": "FunctionDeclaration"
+    },
+    {
+      "file": "prototype/panels.js",
+      "group": "runtime",
+      "name": "fx",
+      "start": 753,
+      "end": 919,
+      "physicalLines": 167,
+      "codeLines": 167,
+      "params": 0,
+      "type": "FunctionDeclaration"
+    },
+    {
+      "file": "prototype/stems.js",
+      "group": "runtime",
+      "name": "createStemPreparation",
+      "start": 45,
+      "end": 211,
+      "physicalLines": 167,
+      "codeLines": 164,
+      "params": 3,
+      "type": "FunctionDeclaration"
+    },
+    {
+      "file": "prototype/video-effects.js",
+      "group": "runtime",
+      "name": "createVideoEffects",
+      "start": 29,
+      "end": 191,
+      "physicalLines": 163,
+      "codeLines": 162,
+      "params": 1,
+      "type": "FunctionDeclaration"
+    },
+    {
+      "file": "prototype/app.js",
+      "group": "runtime",
+      "name": "arguments",
+      "start": 1772,
+      "end": 1922,
+      "physicalLines": 151,
+      "codeLines": 151,
+      "params": 1,
+      "type": "ArrowFunctionExpression"
+    },
+    {
+      "file": "prototype/flip.js",
+      "group": "runtime",
+      "name": "createFlipAutomation",
+      "start": 3,
+      "end": 149,
+      "physicalLines": 147,
+      "codeLines": 147,
+      "params": 1,
+      "type": "FunctionDeclaration"
+    },
+    {
+      "file": "prototype/stem-slip-ui.js",
+      "group": "runtime",
+      "name": "createStemSlipControls",
+      "start": 3,
+      "end": 150,
+      "physicalLines": 148,
+      "codeLines": 147,
+      "params": 1,
+      "type": "FunctionDeclaration"
+    },
+    {
+      "file": "prototype/panels.js",
+      "group": "runtime",
+      "name": "crateEditor",
+      "start": 207,
+      "end": 349,
+      "physicalLines": 143,
+      "codeLines": 143,
+      "params": 2,
+      "type": "FunctionDeclaration"
+    },
+    {
+      "file": "prototype/holds.js",
+      "group": "runtime",
+      "name": "createCueHolds",
+      "start": 2,
+      "end": 125,
+      "physicalLines": 124,
+      "codeLines": 124,
+      "params": 1,
+      "type": "FunctionDeclaration"
+    },
+    {
+      "file": "prototype/video-transitions.js",
+      "group": "runtime",
+      "name": "createVideoTransitions",
+      "start": 69,
+      "end": 195,
+      "physicalLines": 127,
+      "codeLines": 122,
+      "params": 1,
+      "type": "FunctionDeclaration"
+    },
+    {
+      "file": "prototype/panels.js",
+      "group": "runtime",
+      "name": "libraryTools",
+      "start": 446,
+      "end": 564,
+      "physicalLines": 119,
+      "codeLines": 119,
+      "params": 0,
+      "type": "FunctionDeclaration"
+    },
+    {
+      "file": "prototype/panels.js",
+      "group": "runtime",
+      "name": "arguments",
+      "start": 230,
+      "end": 347,
+      "physicalLines": 118,
+      "codeLines": 118,
+      "params": 1,
+      "type": "ArrowFunctionExpression"
+    },
+    {
+      "file": "prototype/engine.js",
+      "group": "runtime",
+      "name": "startStemSlip",
+      "start": 1785,
+      "end": 1901,
+      "physicalLines": 117,
+      "codeLines": 115,
+      "params": 2,
+      "type": "ClassMethod"
+    },
+    {
+      "file": "prototype/panels.js",
+      "group": "runtime",
+      "name": "arguments",
+      "start": 450,
+      "end": 562,
+      "physicalLines": 113,
+      "codeLines": 113,
+      "params": 0,
+      "type": "ArrowFunctionExpression"
+    },
+    {
+      "file": "prototype/panels.js",
+      "group": "runtime",
+      "name": "settings",
+      "start": 605,
+      "end": 716,
+      "physicalLines": 112,
+      "codeLines": 112,
+      "params": 1,
+      "type": "FunctionDeclaration"
+    },
+    {
+      "file": "prototype/app.js",
+      "group": "runtime",
+      "name": "enqueueAnalysis",
+      "start": 1196,
+      "end": 1302,
+      "physicalLines": 107,
+      "codeLines": 104,
+      "params": 2,
+      "type": "FunctionDeclaration"
+    },
+    {
+      "file": "prototype/library-waveform-preview.js",
+      "group": "runtime",
+      "name": "installLibraryWaveforms",
+      "start": 7,
+      "end": 112,
+      "physicalLines": 106,
+      "codeLines": 103,
+      "params": 1,
+      "type": "FunctionDeclaration"
+    },
+    {
+      "file": "prototype/panels.js",
+      "group": "runtime",
+      "name": "analysis",
+      "start": 2000,
+      "end": 2102,
+      "physicalLines": 103,
+      "codeLines": 103,
+      "params": 0,
+      "type": "FunctionDeclaration"
+    },
+    {
+      "file": "prototype/panels.js",
+      "group": "runtime",
+      "name": "midi",
+      "start": 1804,
+      "end": 1906,
+      "physicalLines": 103,
+      "codeLines": 101,
+      "params": 0,
+      "type": "FunctionDeclaration"
+    },
+    {
+      "file": "prototype/pitchplay.js",
+      "group": "runtime",
+      "name": "createPitchPlay",
+      "start": 117,
+      "end": 214,
+      "physicalLines": 98,
+      "codeLines": 98,
+      "params": 1,
+      "type": "FunctionDeclaration"
+    },
+    {
+      "file": "prototype/engine.js",
+      "group": "runtime",
+      "name": "attachStems",
+      "start": 1196,
+      "end": 1300,
+      "physicalLines": 105,
+      "codeLines": 96,
+      "params": 4,
+      "type": "ClassMethod"
+    },
+    {
+      "file": "prototype/engine.js",
+      "group": "runtime",
+      "name": "sample",
+      "start": 1994,
+      "end": 2088,
+      "physicalLines": 95,
+      "codeLines": 95,
+      "params": 3,
+      "type": "ClassMethod"
+    },
+    {
+      "file": "prototype/slicer.js",
+      "group": "runtime",
+      "name": "createSlicer",
+      "start": 3,
+      "end": 106,
+      "physicalLines": 104,
+      "codeLines": 95,
+      "params": 1,
+      "type": "FunctionDeclaration"
+    },
+    {
+      "file": "prototype/panels.js",
+      "group": "runtime",
+      "name": "arguments",
+      "start": 1809,
+      "end": 1904,
+      "physicalLines": 96,
+      "codeLines": 94,
+      "params": 0,
+      "type": "ArrowFunctionExpression"
+    },
+    {
+      "file": "prototype/panels.js",
+      "group": "runtime",
+      "name": "sampleAction",
+      "start": 1088,
+      "end": 1181,
+      "physicalLines": 94,
+      "codeLines": 93,
+      "params": 3,
+      "type": "FunctionDeclaration"
+    },
+    {
+      "file": "prototype/video-karaoke.js",
+      "group": "runtime",
+      "name": "createVideoKaraoke",
+      "start": 18,
+      "end": 110,
+      "physicalLines": 93,
+      "codeLines": 93,
+      "params": 1,
+      "type": "FunctionDeclaration"
+    },
+    {
+      "file": "prototype/cdg.js",
+      "group": "runtime",
+      "name": "createCDGDecoder",
+      "start": 21,
+      "end": 112,
+      "physicalLines": 92,
+      "codeLines": 92,
+      "params": 2,
+      "type": "FunctionDeclaration"
+    },
+    {
+      "file": "prototype/engine.js",
+      "group": "runtime",
+      "name": "callee",
+      "start": 1806,
+      "end": 1899,
+      "physicalLines": 94,
+      "codeLines": 92,
+      "params": 0,
+      "type": "ArrowFunctionExpression"
+    },
+    {
+      "file": "prototype/panels.js",
+      "group": "runtime",
+      "name": "provider",
+      "start": 1907,
+      "end": 1998,
+      "physicalLines": 92,
+      "codeLines": 92,
+      "params": 1,
+      "type": "FunctionDeclaration"
+    },
+    {
+      "file": "prototype/video-controls.js",
+      "group": "runtime",
+      "name": "overlaysDialog",
+      "start": 247,
+      "end": 340,
+      "physicalLines": 94,
+      "codeLines": 92,
+      "params": 0,
+      "type": "FunctionDeclaration"
+    },
+    {
+      "file": "prototype/video-controls.js",
+      "group": "runtime",
+      "name": "arguments",
+      "start": 248,
+      "end": 339,
+      "physicalLines": 92,
+      "codeLines": 90,
+      "params": 0,
+      "type": "ArrowFunctionExpression"
+    },
+    {
+      "file": "prototype/app.js",
+      "group": "runtime",
+      "name": "load",
+      "start": 698,
+      "end": 784,
+      "physicalLines": 87,
+      "codeLines": 87,
+      "params": 3,
+      "type": "FunctionDeclaration"
+    },
+    {
+      "file": "prototype/engine.js",
+      "group": "runtime",
+      "name": "configureFX",
+      "start": 992,
+      "end": 1077,
+      "physicalLines": 86,
+      "codeLines": 86,
+      "params": 4,
+      "type": "ClassMethod"
+    },
+    {
+      "file": "prototype/extended-effects-kernel.js",
+      "group": "runtime",
+      "name": "constructor",
+      "start": 398,
+      "end": 482,
+      "physicalLines": 85,
+      "codeLines": 85,
+      "params": 3,
+      "type": "ClassMethod"
+    },
+    {
+      "file": "prototype/panels.js",
+      "group": "runtime",
+      "name": "arguments",
+      "start": 2017,
+      "end": 2100,
+      "physicalLines": 84,
+      "codeLines": 84,
+      "params": 0,
+      "type": "ArrowFunctionExpression"
+    },
+    {
+      "file": "prototype/stems.js",
+      "group": "runtime",
+      "name": "run",
+      "start": 84,
+      "end": 168,
+      "physicalLines": 85,
+      "codeLines": 84,
+      "params": 2,
+      "type": "FunctionDeclaration"
+    },
+    {
+      "file": "prototype/panels.js",
+      "group": "runtime",
+      "name": "sampler",
+      "start": 959,
+      "end": 1041,
+      "physicalLines": 83,
+      "codeLines": 83,
+      "params": 0,
+      "type": "FunctionDeclaration"
+    },
+    {
+      "file": "prototype/stem-exit-fx.js",
+      "group": "runtime",
+      "name": "renderStemExitPCM",
+      "start": 17,
+      "end": 104,
+      "physicalLines": 88,
+      "codeLines": 83,
+      "params": 1,
+      "type": "FunctionDeclaration"
+    },
+    {
+      "file": "prototype/video-overlay-midi.js",
+      "group": "runtime",
+      "name": "createVideoOverlayMIDI",
+      "start": 9,
+      "end": 91,
+      "physicalLines": 83,
+      "codeLines": 83,
+      "params": 1,
+      "type": "FunctionDeclaration"
+    },
+    {
+      "file": "prototype/engine.js",
+      "group": "runtime",
+      "name": "setRate",
+      "start": 721,
+      "end": 802,
+      "physicalLines": 82,
+      "codeLines": 82,
+      "params": 3,
+      "type": "ClassMethod"
+    },
+    {
+      "file": "prototype/engine.js",
+      "group": "runtime",
+      "name": "beginDeckScratch",
+      "start": 1571,
+      "end": 1655,
+      "physicalLines": 85,
+      "codeLines": 82,
+      "params": 3,
+      "type": "ClassMethod"
+    },
+    {
+      "file": "prototype/loop-pads.js",
+      "group": "runtime",
+      "name": "createLoopPads",
+      "start": 6,
+      "end": 91,
+      "physicalLines": 86,
+      "codeLines": 81,
+      "params": 1,
+      "type": "FunctionDeclaration"
+    },
+    {
+      "file": "prototype/app.js",
+      "group": "runtime",
+      "name": "tick",
+      "start": 1958,
+      "end": 2037,
+      "physicalLines": 80,
+      "codeLines": 79,
+      "params": 0,
+      "type": "FunctionDeclaration"
+    },
+    {
+      "file": "prototype/video-controls.js",
+      "group": "runtime",
+      "name": "bind",
+      "start": 91,
+      "end": 171,
+      "physicalLines": 81,
+      "codeLines": 79,
+      "params": 1,
+      "type": "FunctionDeclaration"
+    },
+    {
+      "file": "prototype/midi-jog-touch.js",
+      "group": "runtime",
+      "name": "createMIDIJogTouch",
+      "start": 7,
+      "end": 87,
+      "physicalLines": 81,
+      "codeLines": 77,
+      "params": 1,
+      "type": "FunctionDeclaration"
+    },
+    {
+      "file": "prototype/panels.js",
+      "group": "runtime",
+      "name": "arguments",
+      "start": 639,
+      "end": 714,
+      "physicalLines": 76,
+      "codeLines": 76,
+      "params": 1,
+      "type": "ArrowFunctionExpression"
+    },
+    {
+      "file": "prototype/stem-waveform.js",
+      "group": "runtime",
+      "name": "createStemWaveformModel",
+      "start": 6,
+      "end": 83,
+      "physicalLines": 78,
+      "codeLines": 76,
+      "params": 1,
+      "type": "FunctionDeclaration"
+    },
+    {
+      "file": "prototype/holds.js",
+      "group": "runtime",
+      "name": "press",
+      "start": 20,
+      "end": 94,
+      "physicalLines": 75,
+      "codeLines": 75,
+      "params": 4,
+      "type": "FunctionDeclaration"
+    },
+    {
+      "file": "prototype/video-midi.js",
+      "group": "runtime",
+      "name": "createVideoMIDIRouter",
+      "start": 34,
+      "end": 108,
+      "physicalLines": 75,
+      "codeLines": 75,
+      "params": 1,
+      "type": "FunctionDeclaration"
+    },
+    {
+      "file": "prototype/controller-mixer.js",
+      "group": "runtime",
+      "name": "createControllerMixer",
+      "start": 12,
+      "end": 84,
+      "physicalLines": 73,
+      "codeLines": 73,
+      "params": 1,
+      "type": "FunctionDeclaration"
+    },
+    {
+      "file": "prototype/panels.js",
+      "group": "runtime",
+      "name": "receiveMIDI",
+      "start": 1712,
+      "end": 1781,
+      "physicalLines": 70,
+      "codeLines": 70,
+      "params": 1,
+      "type": "FunctionDeclaration"
+    },
+    {
+      "file": "prototype/panels.js",
+      "group": "runtime",
+      "name": "arguments",
+      "start": 1928,
+      "end": 1996,
+      "physicalLines": 69,
+      "codeLines": 69,
+      "params": 1,
+      "type": "ArrowFunctionExpression"
+    },
+    {
+      "file": "prototype/sampler-sync.js",
+      "group": "runtime",
+      "name": "createSamplerSync",
+      "start": 8,
+      "end": 78,
+      "physicalLines": 71,
+      "codeLines": 69,
+      "params": 1,
+      "type": "FunctionDeclaration"
+    },
+    {
+      "file": "prototype/engine.js",
+      "group": "runtime",
+      "name": "init",
+      "start": 75,
+      "end": 142,
+      "physicalLines": 68,
+      "codeLines": 68,
+      "params": 0,
+      "type": "ClassMethod"
+    },
+    {
+      "file": "prototype/panels.js",
+      "group": "runtime",
+      "name": "hardware",
+      "start": 1570,
+      "end": 1637,
+      "physicalLines": 68,
+      "codeLines": 68,
+      "params": 0,
+      "type": "FunctionDeclaration"
+    },
+    {
+      "file": "prototype/video.js",
+      "group": "runtime",
+      "name": "tick",
+      "start": 414,
+      "end": 485,
+      "physicalLines": 72,
+      "codeLines": 68,
+      "params": 2,
+      "type": "FunctionDeclaration"
+    },
+    {
+      "file": "prototype/keylock.js",
+      "group": "runtime",
+      "name": "render",
+      "start": 52,
+      "end": 120,
+      "physicalLines": 69,
+      "codeLines": 67,
+      "params": 2,
+      "type": "ClassMethod"
+    },
+    {
+      "file": "prototype/panels.js",
+      "group": "runtime",
+      "name": "flip",
+      "start": 1245,
+      "end": 1311,
+      "physicalLines": 67,
+      "codeLines": 67,
+      "params": 0,
+      "type": "FunctionDeclaration"
+    },
+    {
+      "file": "prototype/video-karaoke-controls.js",
+      "group": "runtime",
+      "name": "createVideoKaraokeControls",
+      "start": 21,
+      "end": 87,
+      "physicalLines": 67,
+      "codeLines": 67,
+      "params": 1,
+      "type": "FunctionDeclaration"
+    },
+    {
+      "file": "prototype/video-media-controls.js",
+      "group": "runtime",
+      "name": "createVideoMediaControls",
+      "start": 17,
+      "end": 83,
+      "physicalLines": 67,
+      "codeLines": 67,
+      "params": 1,
+      "type": "FunctionDeclaration"
+    },
+    {
+      "file": "prototype/midi.js",
+      "group": "runtime",
+      "name": "createMIDI",
+      "start": 54,
+      "end": 119,
+      "physicalLines": 66,
+      "codeLines": 66,
+      "params": 1,
+      "type": "FunctionDeclaration"
+    },
+    {
+      "file": "prototype/panels.js",
+      "group": "runtime",
+      "name": "open",
+      "start": 108,
+      "end": 173,
+      "physicalLines": 66,
+      "codeLines": 66,
+      "params": 1,
+      "type": "FunctionDeclaration"
+    },
+    {
+      "file": "prototype/video-pipeline.js",
+      "group": "runtime",
+      "name": "createVideoPipeline",
+      "start": 21,
+      "end": 86,
+      "physicalLines": 66,
+      "codeLines": 66,
+      "params": 1,
+      "type": "FunctionDeclaration"
+    },
+    {
+      "file": "prototype/analysis.js",
+      "group": "runtime",
+      "name": "tempoFromOnsets",
+      "start": 116,
+      "end": 191,
+      "physicalLines": 76,
+      "codeLines": 65,
+      "params": 6,
+      "type": "FunctionDeclaration"
+    },
+    {
+      "file": "prototype/app.js",
+      "group": "runtime",
+      "name": "importLocalFiles",
+      "start": 1105,
+      "end": 1169,
+      "physicalLines": 65,
+      "codeLines": 65,
+      "params": 1,
+      "type": "FunctionDeclaration"
+    },
+    {
+      "file": "prototype/extended-effects-kernel.js",
+      "group": "runtime",
+      "name": "update",
+      "start": 483,
+      "end": 547,
+      "physicalLines": 65,
+      "codeLines": 65,
+      "params": 2,
+      "type": "ClassMethod"
+    },
+    {
+      "file": "prototype/jog-bend.js",
+      "group": "runtime",
+      "name": "createJogBend",
+      "start": 4,
+      "end": 69,
+      "physicalLines": 66,
+      "codeLines": 64,
+      "params": 1,
+      "type": "FunctionDeclaration"
+    },
+    {
+      "file": "prototype/panels.js",
+      "group": "runtime",
+      "name": "stems",
+      "start": 1312,
+      "end": 1375,
+      "physicalLines": 64,
+      "codeLines": 64,
+      "params": 0,
+      "type": "FunctionDeclaration"
+    },
+    {
+      "file": "prototype/video-karaoke-controls.js",
+      "group": "runtime",
+      "name": "open",
+      "start": 23,
+      "end": 85,
+      "physicalLines": 63,
+      "codeLines": 63,
+      "params": 0,
+      "type": "FunctionDeclaration"
+    },
+    {
+      "file": "prototype/video-media-controls.js",
+      "group": "runtime",
+      "name": "open",
+      "start": 19,
+      "end": 81,
+      "physicalLines": 63,
+      "codeLines": 63,
+      "params": 0,
+      "type": "FunctionDeclaration"
+    },
+    {
+      "file": "prototype/deck-scratch.js",
+      "group": "runtime",
+      "name": "createDeckScratchTransport",
+      "start": 21,
+      "end": 82,
+      "physicalLines": 62,
+      "codeLines": 62,
+      "params": 2,
+      "type": "FunctionDeclaration"
+    },
+    {
+      "file": "prototype/video-overlays.js",
+      "group": "runtime",
+      "name": "createVideoOverlays",
+      "start": 149,
+      "end": 211,
+      "physicalLines": 63,
+      "codeLines": 62,
+      "params": 1,
+      "type": "FunctionDeclaration"
+    },
+    {
+      "file": "prototype/engine.js",
+      "group": "runtime",
+      "name": "updateStems",
+      "start": 1355,
+      "end": 1416,
+      "physicalLines": 62,
+      "codeLines": 61,
+      "params": 1,
+      "type": "ClassMethod"
+    },
+    {
+      "file": "prototype/panels.js",
+      "group": "runtime",
+      "name": "arguments",
+      "start": 1575,
+      "end": 1635,
+      "physicalLines": 61,
+      "codeLines": 61,
+      "params": 0,
+      "type": "ArrowFunctionExpression"
+    },
+    {
+      "file": "prototype/video-karaoke-controls.js",
+      "group": "runtime",
+      "name": "arguments",
+      "start": 25,
+      "end": 84,
+      "physicalLines": 60,
+      "codeLines": 60,
+      "params": 1,
+      "type": "ArrowFunctionExpression"
+    },
+    {
+      "file": "prototype/video-media-controls.js",
+      "group": "runtime",
+      "name": "arguments",
+      "start": 21,
+      "end": 80,
+      "physicalLines": 60,
+      "codeLines": 60,
+      "params": 1,
+      "type": "ArrowFunctionExpression"
+    },
+    {
+      "file": "prototype/panels.js",
+      "group": "runtime",
+      "name": "right",
+      "start": 465,
+      "end": 523,
+      "physicalLines": 59,
+      "codeLines": 59,
+      "params": 1,
+      "type": "ArrowFunctionExpression"
+    },
+    {
+      "file": "prototype/panels.js",
+      "group": "runtime",
+      "name": "coverage",
+      "start": 2159,
+      "end": 2217,
+      "physicalLines": 59,
+      "codeLines": 59,
+      "params": 0,
+      "type": "FunctionDeclaration"
+    },
+    {
+      "file": "prototype/stem-history.js",
+      "group": "runtime",
+      "name": "createStemHistory",
+      "start": 12,
+      "end": 71,
+      "physicalLines": 60,
+      "codeLines": 59,
+      "params": 1,
+      "type": "FunctionDeclaration"
+    },
+    {
+      "file": "prototype/analysis.js",
+      "group": "runtime",
+      "name": "analyzeBuffer",
+      "start": 401,
+      "end": 458,
+      "physicalLines": 58,
+      "codeLines": 58,
+      "params": 2,
+      "type": "FunctionDeclaration"
+    },
+    {
+      "file": "prototype/app.js",
+      "group": "runtime",
+      "name": "renderCrates",
+      "start": 323,
+      "end": 380,
+      "physicalLines": 58,
+      "codeLines": 58,
+      "params": 0,
+      "type": "FunctionDeclaration"
+    },
+    {
+      "file": "prototype/keylock-dsp.js",
+      "group": "runtime",
+      "name": "transformChannels",
+      "start": 41,
+      "end": 101,
+      "physicalLines": 61,
+      "codeLines": 58,
+      "params": 3,
+      "type": "FunctionDeclaration"
+    },
+    {
+      "file": "prototype/video-file-identity.js",
+      "group": "runtime",
+      "name": "videoFileIdentity",
+      "start": 5,
+      "end": 62,
+      "physicalLines": 58,
+      "codeLines": 58,
+      "params": 2,
+      "type": "FunctionDeclaration"
+    },
+    {
+      "file": "prototype/panels.js",
+      "group": "runtime",
+      "name": "arguments",
+      "start": 1317,
+      "end": 1373,
+      "physicalLines": 57,
+      "codeLines": 57,
+      "params": 0,
+      "type": "ArrowFunctionExpression"
+    },
+    {
+      "file": "prototype/pitchplay.js",
+      "group": "runtime",
+      "name": "planKeySync",
+      "start": 60,
+      "end": 116,
+      "physicalLines": 57,
+      "codeLines": 57,
+      "params": 2,
+      "type": "FunctionDeclaration"
+    },
+    {
+      "file": "prototype/manual-loops.js",
+      "group": "runtime",
+      "name": "createManualLoops",
+      "start": 5,
+      "end": 62,
+      "physicalLines": 58,
+      "codeLines": 56,
+      "params": 1,
+      "type": "FunctionDeclaration"
+    },
+    {
+      "file": "prototype/panels.js",
+      "group": "runtime",
+      "name": "trackDetails",
+      "start": 350,
+      "end": 405,
+      "physicalLines": 56,
+      "codeLines": 56,
+      "params": 1,
+      "type": "FunctionDeclaration"
+    },
+    {
+      "file": "prototype/sample-sync-transport.js",
+      "group": "runtime",
+      "name": "startSyncedSample",
+      "start": 24,
+      "end": 81,
+      "physicalLines": 58,
+      "codeLines": 56,
+      "params": 5,
+      "type": "FunctionDeclaration"
+    },
+    {
+      "file": "prototype/stem-slip.js",
+      "group": "runtime",
+      "name": "createStemSlipTransport",
+      "start": 6,
+      "end": 61,
+      "physicalLines": 56,
+      "codeLines": 56,
+      "params": 2,
+      "type": "FunctionDeclaration"
+    },
+    {
+      "file": "prototype/audio-output.js",
+      "group": "runtime",
+      "name": "createAudioOutputSelection",
+      "start": 2,
+      "end": 60,
+      "physicalLines": 59,
+      "codeLines": 55,
+      "params": 2,
+      "type": "FunctionDeclaration"
+    },
+    {
+      "file": "prototype/pitchplay.js",
+      "group": "runtime",
+      "name": "press",
+      "start": 126,
+      "end": 180,
+      "physicalLines": 55,
+      "codeLines": 55,
+      "params": 4,
+      "type": "FunctionDeclaration"
+    },
+    {
+      "file": "prototype/stem-exit-fx.js",
+      "group": "runtime",
+      "name": "createStemExitFX",
+      "start": 105,
+      "end": 159,
+      "physicalLines": 55,
+      "codeLines": 55,
+      "params": 2,
+      "type": "FunctionDeclaration"
+    },
+    {
+      "file": "prototype/local-audio-library.js",
+      "group": "runtime",
+      "name": "createLocalAudioLibrary",
+      "start": 4,
+      "end": 58,
+      "physicalLines": 55,
+      "codeLines": 54,
+      "params": 1,
+      "type": "FunctionDeclaration"
+    },
+    {
+      "file": "prototype/panels.js",
+      "group": "runtime",
+      "name": "arguments",
+      "start": 834,
+      "end": 887,
+      "physicalLines": 54,
+      "codeLines": 54,
+      "params": 1,
+      "type": "ArrowFunctionExpression"
+    },
+    {
+      "file": "prototype/video-controls.js",
+      "group": "runtime",
+      "name": "effectsDialog",
+      "start": 189,
+      "end": 242,
+      "physicalLines": 54,
+      "codeLines": 54,
+      "params": 0,
+      "type": "FunctionDeclaration"
+    },
+    {
+      "file": "prototype/analysis.js",
+      "group": "runtime",
+      "name": "keyFromChroma",
+      "start": 63,
+      "end": 115,
+      "physicalLines": 53,
+      "codeLines": 53,
+      "params": 3,
+      "type": "FunctionDeclaration"
+    },
+    {
+      "file": "prototype/app.js",
+      "group": "runtime",
+      "name": "drawWaves",
+      "start": 545,
+      "end": 597,
+      "physicalLines": 53,
+      "codeLines": 53,
+      "params": 0,
+      "type": "FunctionDeclaration"
+    },
+    {
+      "file": "prototype/audio-monitor.js",
+      "group": "runtime",
+      "name": "createAudioMonitor",
+      "start": 13,
+      "end": 69,
+      "physicalLines": 57,
+      "codeLines": 53,
+      "params": 2,
+      "type": "FunctionDeclaration"
+    },
+    {
+      "file": "prototype/panels.js",
+      "group": "runtime",
+      "name": "right",
+      "start": 835,
+      "end": 887,
+      "physicalLines": 53,
+      "codeLines": 53,
+      "params": 0,
+      "type": "ArrowFunctionExpression"
+    },
+    {
+      "file": "prototype/panels.js",
+      "group": "runtime",
+      "name": "arguments",
+      "start": 2163,
+      "end": 2215,
+      "physicalLines": 53,
+      "codeLines": 53,
+      "params": 0,
+      "type": "ArrowFunctionExpression"
+    },
+    {
+      "file": "prototype/stem-reverse-161-followup.js",
+      "group": "runtime",
+      "name": "run",
+      "start": 10,
+      "end": 62,
+      "physicalLines": 53,
+      "codeLines": 53,
+      "params": 0,
+      "type": "FunctionDeclaration"
+    },
+    {
+      "file": "prototype/video-media.js",
+      "group": "runtime",
+      "name": "createVideoMediaLibrary",
+      "start": 61,
+      "end": 113,
+      "physicalLines": 53,
+      "codeLines": 53,
+      "params": 1,
+      "type": "FunctionDeclaration"
+    },
+    {
+      "file": "prototype/video.js",
+      "group": "runtime",
+      "name": "load",
+      "start": 57,
+      "end": 109,
+      "physicalLines": 53,
+      "codeLines": 53,
+      "params": 3,
+      "type": "FunctionDeclaration"
+    },
+    {
+      "file": "prototype/stem-waveform.js",
+      "group": "runtime",
+      "name": "select",
+      "start": 26,
+      "end": 79,
+      "physicalLines": 54,
+      "codeLines": 52,
+      "params": 1,
+      "type": "FunctionDeclaration"
+    },
+    {
+      "file": "prototype/video-controls.js",
+      "group": "runtime",
+      "name": "arguments",
+      "start": 190,
+      "end": 241,
+      "physicalLines": 52,
+      "codeLines": 52,
+      "params": 0,
+      "type": "ArrowFunctionExpression"
+    },
+    {
+      "file": "prototype/cdg.js",
+      "group": "runtime",
+      "name": "packet",
+      "start": 34,
+      "end": 84,
+      "physicalLines": 51,
+      "codeLines": 51,
+      "params": 1,
+      "type": "FunctionDeclaration"
+    },
+    {
+      "file": "prototype/stem-slip-kernel.js",
+      "group": "runtime",
+      "name": "command",
+      "start": 37,
+      "end": 88,
+      "physicalLines": 52,
+      "codeLines": 51,
+      "params": 2,
+      "type": "ClassMethod"
+    },
+    {
+      "file": "prototype/video-midi-assignment-ui.js",
+      "group": "runtime",
+      "name": "createVideoMIDIAssignmentUI",
+      "start": 3,
+      "end": 55,
+      "physicalLines": 53,
+      "codeLines": 51,
+      "params": 1,
+      "type": "FunctionDeclaration"
+    }
+  ],
+  "staticRelativeImports": [
+    {
+      "from": "prototype/analysis-worker.js",
+      "to": "prototype/analysis.js"
+    },
+    {
+      "from": "prototype/analysis.js",
+      "to": "prototype/loudness.js"
+    },
+    {
+      "from": "prototype/app.js",
+      "to": "prototype/auto-gain.js"
+    },
+    {
+      "from": "prototype/app.js",
+      "to": "prototype/track-gain.js"
+    },
+    {
+      "from": "prototype/app.js",
+      "to": "prototype/master-output-kernel.js"
+    },
+    {
+      "from": "prototype/app.js",
+      "to": "prototype/mixer-curves.js"
+    },
+    {
+      "from": "prototype/app.js",
+      "to": "prototype/deck-tap-tempo.js"
+    },
+    {
+      "from": "prototype/app.js",
+      "to": "prototype/instant-double.js"
+    },
+    {
+      "from": "prototype/app.js",
+      "to": "prototype/manual-loops.js"
+    },
+    {
+      "from": "prototype/app.js",
+      "to": "prototype/loop-pads.js"
+    },
+    {
+      "from": "prototype/app.js",
+      "to": "prototype/jog-bend.js"
+    },
+    {
+      "from": "prototype/app.js",
+      "to": "prototype/censor.js"
+    },
+    {
+      "from": "prototype/app.js",
+      "to": "prototype/sync.js"
+    },
+    {
+      "from": "prototype/app.js",
+      "to": "prototype/sync-master.js"
+    },
+    {
+      "from": "prototype/app.js",
+      "to": "prototype/smart-sync.js"
+    },
+    {
+      "from": "prototype/app.js",
+      "to": "prototype/beatgrid.js"
+    },
+    {
+      "from": "prototype/app.js",
+      "to": "prototype/deck-tempo.js"
+    },
+    {
+      "from": "prototype/app.js",
+      "to": "prototype/tempo-slider.js"
+    },
+    {
+      "from": "prototype/app.js",
+      "to": "prototype/local-audio-library.js"
+    },
+    {
+      "from": "prototype/app.js",
+      "to": "prototype/stems.js"
+    },
+    {
+      "from": "prototype/app.js",
+      "to": "prototype/stem-crate.js"
+    },
+    {
+      "from": "prototype/app.js",
+      "to": "prototype/stem-waveform.js"
+    },
+    {
+      "from": "prototype/app.js",
+      "to": "prototype/source-waveform.js"
+    },
+    {
+      "from": "prototype/app.js",
+      "to": "prototype/performance-tokens.js"
+    },
+    {
+      "from": "prototype/app.js",
+      "to": "prototype/fx-tempo.js"
+    },
+    {
+      "from": "prototype/app.js",
+      "to": "prototype/stem-slip-ui.js"
+    },
+    {
+      "from": "prototype/app.js",
+      "to": "prototype/deck-scratch-ui.js"
+    },
+    {
+      "from": "prototype/app.js",
+      "to": "prototype/scratch-input-debug.js"
+    },
+    {
+      "from": "prototype/app.js",
+      "to": "prototype/video-state.js"
+    },
+    {
+      "from": "prototype/app.js",
+      "to": "prototype/pitchplay.js"
+    },
+    {
+      "from": "prototype/app.js",
+      "to": "prototype/analysis.js"
+    },
+    {
+      "from": "prototype/app.js",
+      "to": "prototype/slicer.js"
+    },
+    {
+      "from": "prototype/app.js",
+      "to": "prototype/holds.js"
+    },
+    {
+      "from": "prototype/app.js",
+      "to": "prototype/flip.js"
+    },
+    {
+      "from": "prototype/app.js",
+      "to": "prototype/library.js"
+    },
+    {
+      "from": "prototype/app.js",
+      "to": "prototype/engine.js"
+    },
+    {
+      "from": "prototype/app.js",
+      "to": "prototype/fixtures.js"
+    },
+    {
+      "from": "prototype/app.js",
+      "to": "prototype/inventory.js"
+    },
+    {
+      "from": "prototype/app.js",
+      "to": "prototype/panels.js"
+    },
+    {
+      "from": "prototype/controller-catalog-ui.js",
+      "to": "prototype/controller-catalog.js"
+    },
+    {
+      "from": "prototype/controller-catalog.js",
+      "to": "prototype/controller-factory-digests.js"
+    },
+    {
+      "from": "prototype/controller-catalog.js",
+      "to": "prototype/controller-performance.js"
+    },
+    {
+      "from": "prototype/controller-catalog.js",
+      "to": "prototype/controller-mixer.js"
+    },
+    {
+      "from": "prototype/controller-mixer.js",
+      "to": "prototype/midi.js"
+    },
+    {
+      "from": "prototype/deck-midi.js",
+      "to": "prototype/track-gain.js"
+    },
+    {
+      "from": "prototype/deck-midi.js",
+      "to": "prototype/midi.js"
+    },
+    {
+      "from": "prototype/deck-midi.js",
+      "to": "prototype/jog-bend.js"
+    },
+    {
+      "from": "prototype/deck-midi.js",
+      "to": "prototype/midi-jog-touch.js"
+    },
+    {
+      "from": "prototype/deck-midi.js",
+      "to": "prototype/mixer-curves.js"
+    },
+    {
+      "from": "prototype/deck-scratch-ui.js",
+      "to": "prototype/deck-scratch-kernel.js"
+    },
+    {
+      "from": "prototype/deck-scratch-worklet.js",
+      "to": "prototype/deck-scratch-kernel.js"
+    },
+    {
+      "from": "prototype/deck-tap-tempo.js",
+      "to": "prototype/fx-tempo.js"
+    },
+    {
+      "from": "prototype/deck-tempo.js",
+      "to": "prototype/beatgrid.js"
+    },
+    {
+      "from": "prototype/effects.js",
+      "to": "prototype/observed-fx-control-adapters.js"
+    },
+    {
+      "from": "prototype/effects.js",
+      "to": "prototype/extended-effects.js"
+    },
+    {
+      "from": "prototype/engine.js",
+      "to": "prototype/effects.js"
+    },
+    {
+      "from": "prototype/engine.js",
+      "to": "prototype/extended-effects.js"
+    },
+    {
+      "from": "prototype/engine.js",
+      "to": "prototype/keylock.js"
+    },
+    {
+      "from": "prototype/engine.js",
+      "to": "prototype/deck-scratch-cache.js"
+    },
+    {
+      "from": "prototype/engine.js",
+      "to": "prototype/keylock-scratch-shadow.js"
+    },
+    {
+      "from": "prototype/engine.js",
+      "to": "prototype/silent-audio-pull.js"
+    },
+    {
+      "from": "prototype/engine.js",
+      "to": "prototype/deck-scratch-kernel.js"
+    },
+    {
+      "from": "prototype/engine.js",
+      "to": "prototype/deck-scratch.js"
+    },
+    {
+      "from": "prototype/engine.js",
+      "to": "prototype/stem-history.js"
+    },
+    {
+      "from": "prototype/engine.js",
+      "to": "prototype/stem-exit-fx.js"
+    },
+    {
+      "from": "prototype/engine.js",
+      "to": "prototype/stem-slip.js"
+    },
+    {
+      "from": "prototype/engine.js",
+      "to": "prototype/video-analysis.js"
+    },
+    {
+      "from": "prototype/engine.js",
+      "to": "prototype/video-audio-fx-state.js"
+    },
+    {
+      "from": "prototype/engine.js",
+      "to": "prototype/fx-tempo.js"
+    },
+    {
+      "from": "prototype/engine.js",
+      "to": "prototype/audio-monitor.js"
+    },
+    {
+      "from": "prototype/engine.js",
+      "to": "prototype/warp-loop.js"
+    },
+    {
+      "from": "prototype/engine.js",
+      "to": "prototype/sync-tempo-handoff.js"
+    },
+    {
+      "from": "prototype/engine.js",
+      "to": "prototype/sample-sync-transport.js"
+    },
+    {
+      "from": "prototype/engine.js",
+      "to": "prototype/reverse-censor-plan.js"
+    },
+    {
+      "from": "prototype/engine.js",
+      "to": "prototype/censor-backing.js"
+    },
+    {
+      "from": "prototype/engine.js",
+      "to": "prototype/beatgrid.js"
+    },
+    {
+      "from": "prototype/engine.js",
+      "to": "prototype/mixer-curves.js"
+    },
+    {
+      "from": "prototype/engine.js",
+      "to": "prototype/master-output.js"
+    },
+    {
+      "from": "prototype/engine.js",
+      "to": "prototype/master-output-kernel.js"
+    },
+    {
+      "from": "prototype/engine.js",
+      "to": "prototype/track-gain.js"
+    },
+    {
+      "from": "prototype/extended-effects-kernel.js",
+      "to": "prototype/observed-fx-control-adapters.js"
+    },
+    {
+      "from": "prototype/extended-effects-worklet.js",
+      "to": "prototype/extended-effects-kernel.js"
+    },
+    {
+      "from": "prototype/extended-effects-worklet.js",
+      "to": "prototype/lpf-kernel.js"
+    },
+    {
+      "from": "prototype/extended-effects.js",
+      "to": "prototype/extended-effects-kernel.js"
+    },
+    {
+      "from": "prototype/extended-effects.js",
+      "to": "prototype/extended-effects-kernel.js"
+    },
+    {
+      "from": "prototype/keylock-dsp.js",
+      "to": "prototype/pcm-resample.js"
+    },
+    {
+      "from": "prototype/keylock-live-lead-experiment.js",
+      "to": "prototype/vendor/signalsmith-stretch/SignalsmithStretch-open-play-disposable.mjs"
+    },
+    {
+      "from": "prototype/keylock-live.js",
+      "to": "prototype/vendor/signalsmith-stretch/SignalsmithStretch-open-play-disposable.mjs"
+    },
+    {
+      "from": "prototype/keylock-shadow-follow-experiment.js",
+      "to": "prototype/vendor/signalsmith-stretch/SignalsmithStretch-open-play-disposable.mjs"
+    },
+    {
+      "from": "prototype/keylock-shadow-live.js",
+      "to": "prototype/pcm-resample.js"
+    },
+    {
+      "from": "prototype/keylock-shadow-live.js",
+      "to": "prototype/pitch-time-map.js"
+    },
+    {
+      "from": "prototype/keylock-shadow-live.js",
+      "to": "prototype/vendor/signalsmith-stretch/SignalsmithStretch-open-play-replace.mjs"
+    },
+    {
+      "from": "prototype/keylock-short-block-experiment.js",
+      "to": "prototype/vendor/signalsmith-stretch/SignalsmithStretch-open-play-disposable.mjs"
+    },
+    {
+      "from": "prototype/keylock-worker.js",
+      "to": "prototype/keylock-dsp.js"
+    },
+    {
+      "from": "prototype/keylock.js",
+      "to": "prototype/keylock-dsp.js"
+    },
+    {
+      "from": "prototype/keylock.js",
+      "to": "prototype/beatgrid.js"
+    },
+    {
+      "from": "prototype/library-waveform-preview.js",
+      "to": "prototype/source-waveform.js"
+    },
+    {
+      "from": "prototype/loop-pads.js",
+      "to": "prototype/beatgrid.js"
+    },
+    {
+      "from": "prototype/loop-pads.js",
+      "to": "prototype/deck-scratch-kernel.js"
+    },
+    {
+      "from": "prototype/manual-loops.js",
+      "to": "prototype/beatgrid.js"
+    },
+    {
+      "from": "prototype/master-output-worklet.js",
+      "to": "prototype/master-output-kernel.js"
+    },
+    {
+      "from": "prototype/master-output.js",
+      "to": "prototype/master-output-kernel.js"
+    },
+    {
+      "from": "prototype/panels.js",
+      "to": "prototype/track-gain.js"
+    },
+    {
+      "from": "prototype/panels.js",
+      "to": "prototype/deck-midi.js"
+    },
+    {
+      "from": "prototype/panels.js",
+      "to": "prototype/beatgrid.js"
+    },
+    {
+      "from": "prototype/panels.js",
+      "to": "prototype/sampler-sync.js"
+    },
+    {
+      "from": "prototype/panels.js",
+      "to": "prototype/video.js"
+    },
+    {
+      "from": "prototype/panels.js",
+      "to": "prototype/video-controls.js"
+    },
+    {
+      "from": "prototype/panels.js",
+      "to": "prototype/video-midi.js"
+    },
+    {
+      "from": "prototype/panels.js",
+      "to": "prototype/video-overlay-midi.js"
+    },
+    {
+      "from": "prototype/panels.js",
+      "to": "prototype/midi-assignment.js"
+    },
+    {
+      "from": "prototype/panels.js",
+      "to": "prototype/video-midi-assignment-ui.js"
+    },
+    {
+      "from": "prototype/panels.js",
+      "to": "prototype/midi.js"
+    },
+    {
+      "from": "prototype/panels.js",
+      "to": "prototype/extended-effects.js"
+    },
+    {
+      "from": "prototype/panels.js",
+      "to": "prototype/effects.js"
+    },
+    {
+      "from": "prototype/panels.js",
+      "to": "prototype/lpf-parameters.js"
+    },
+    {
+      "from": "prototype/panels.js",
+      "to": "prototype/fx-tempo.js"
+    },
+    {
+      "from": "prototype/panels.js",
+      "to": "prototype/video-settings.js"
+    },
+    {
+      "from": "prototype/panels.js",
+      "to": "prototype/audio-output.js"
+    },
+    {
+      "from": "prototype/panels.js",
+      "to": "prototype/controller-catalog.js"
+    },
+    {
+      "from": "prototype/panels.js",
+      "to": "prototype/controller-performance.js"
+    },
+    {
+      "from": "prototype/panels.js",
+      "to": "prototype/controller-mixer.js"
+    },
+    {
+      "from": "prototype/panels.js",
+      "to": "prototype/controller-catalog-ui.js"
+    },
+    {
+      "from": "prototype/panels.js",
+      "to": "prototype/mixer-curves.js"
+    },
+    {
+      "from": "prototype/panels.js",
+      "to": "prototype/library.js"
+    },
+    {
+      "from": "prototype/panels.js",
+      "to": "prototype/fixtures.js"
+    },
+    {
+      "from": "prototype/rekordbox-preview.js",
+      "to": "prototype/headphone-preview.js"
+    },
+    {
+      "from": "prototype/render-clock-capture-worklet.js",
+      "to": "prototype/keylock-cursor-capture-worklet.js"
+    },
+    {
+      "from": "prototype/reverse-censor-plan.js",
+      "to": "prototype/beatgrid.js"
+    },
+    {
+      "from": "prototype/sample-sync-transport.js",
+      "to": "prototype/beatgrid.js"
+    },
+    {
+      "from": "prototype/sample-sync-transport.js",
+      "to": "prototype/warp-loop.js"
+    },
+    {
+      "from": "prototype/sample-sync-transport.js",
+      "to": "prototype/track-gain.js"
+    },
+    {
+      "from": "prototype/sampler-sync.js",
+      "to": "prototype/beatgrid.js"
+    },
+    {
+      "from": "prototype/sampler-sync.js",
+      "to": "prototype/smart-sync.js"
+    },
+    {
+      "from": "prototype/sampler-sync.js",
+      "to": "prototype/sample-sync-transport.js"
+    },
+    {
+      "from": "prototype/slicer.js",
+      "to": "prototype/beatgrid.js"
+    },
+    {
+      "from": "prototype/smart-sync.js",
+      "to": "prototype/beatgrid.js"
+    },
+    {
+      "from": "prototype/stem-slip-worklet.js",
+      "to": "prototype/stem-slip-kernel.js"
+    },
+    {
+      "from": "prototype/track-gain.js",
+      "to": "prototype/auto-gain.js"
+    },
+    {
+      "from": "prototype/video-audio-fx-state.js",
+      "to": "prototype/observed-fx-control-adapters.js"
+    },
+    {
+      "from": "prototype/video-audio-fx-state.js",
+      "to": "prototype/fx-tempo.js"
+    },
+    {
+      "from": "prototype/video-audio-fx.js",
+      "to": "prototype/video-audio-fx-state.js"
+    },
+    {
+      "from": "prototype/video-audio-fx.js",
+      "to": "prototype/video-audio-fx-state.js"
+    },
+    {
+      "from": "prototype/video-controls.js",
+      "to": "prototype/video-settings.js"
+    },
+    {
+      "from": "prototype/video-controls.js",
+      "to": "prototype/video-overlay-midi.js"
+    },
+    {
+      "from": "prototype/video-controls.js",
+      "to": "prototype/video-crossfade.js"
+    },
+    {
+      "from": "prototype/video-controls.js",
+      "to": "prototype/video-opacity.js"
+    },
+    {
+      "from": "prototype/video-controls.js",
+      "to": "prototype/video-recording.js"
+    },
+    {
+      "from": "prototype/video-controls.js",
+      "to": "prototype/video-treatment.js"
+    },
+    {
+      "from": "prototype/video-controls.js",
+      "to": "prototype/video-media-controls.js"
+    },
+    {
+      "from": "prototype/video-controls.js",
+      "to": "prototype/video-karaoke-controls.js"
+    },
+    {
+      "from": "prototype/video-controls.js",
+      "to": "prototype/video-effects-catalog.js"
+    },
+    {
+      "from": "prototype/video-controls.js",
+      "to": "prototype/video-transitions.js"
+    },
+    {
+      "from": "prototype/video-controls.js",
+      "to": "prototype/video-overlays.js"
+    },
+    {
+      "from": "prototype/video-effects-state.js",
+      "to": "prototype/video-effects-catalog.js"
+    },
+    {
+      "from": "prototype/video-effects-state.js",
+      "to": "prototype/video-analysis.js"
+    },
+    {
+      "from": "prototype/video-effects.js",
+      "to": "prototype/video-effects-catalog.js"
+    },
+    {
+      "from": "prototype/video-effects.js",
+      "to": "prototype/video-effects-shaders.js"
+    },
+    {
+      "from": "prototype/video-effects.js",
+      "to": "prototype/video-effects-state.js"
+    },
+    {
+      "from": "prototype/video-effects.js",
+      "to": "prototype/video-effects-catalog.js"
+    },
+    {
+      "from": "prototype/video-file-identity-core.js",
+      "to": "prototype/vendor/noble-hashes/sha2.js"
+    },
+    {
+      "from": "prototype/video-file-identity-worker.js",
+      "to": "prototype/video-file-identity-core.js"
+    },
+    {
+      "from": "prototype/video-file-identity.js",
+      "to": "prototype/video-file-identity-core.js"
+    },
+    {
+      "from": "prototype/video-karaoke.js",
+      "to": "prototype/cdg.js"
+    },
+    {
+      "from": "prototype/video-midi.js",
+      "to": "prototype/midi.js"
+    },
+    {
+      "from": "prototype/video-midi.js",
+      "to": "prototype/video-effects-catalog.js"
+    },
+    {
+      "from": "prototype/video-midi.js",
+      "to": "prototype/video-transitions.js"
+    },
+    {
+      "from": "prototype/video-midi.js",
+      "to": "prototype/video-settings.js"
+    },
+    {
+      "from": "prototype/video-midi.js",
+      "to": "prototype/video-overlay-midi.js"
+    },
+    {
+      "from": "prototype/video-overlay-midi.js",
+      "to": "prototype/video-overlays.js"
+    },
+    {
+      "from": "prototype/video-pipeline.js",
+      "to": "prototype/video-effects.js"
+    },
+    {
+      "from": "prototype/video-pipeline.js",
+      "to": "prototype/video-transitions.js"
+    },
+    {
+      "from": "prototype/video-pipeline.js",
+      "to": "prototype/video-overlays.js"
+    },
+    {
+      "from": "prototype/video-pipeline.js",
+      "to": "prototype/video-audio-fx.js"
+    },
+    {
+      "from": "prototype/video-settings.js",
+      "to": "prototype/video-recording.js"
+    },
+    {
+      "from": "prototype/video-settings.js",
+      "to": "prototype/video-treatment.js"
+    },
+    {
+      "from": "prototype/video-settings.js",
+      "to": "prototype/video-crossfade.js"
+    },
+    {
+      "from": "prototype/video-state.js",
+      "to": "prototype/video-recording.js"
+    },
+    {
+      "from": "prototype/video-state.js",
+      "to": "prototype/video-opacity.js"
+    },
+    {
+      "from": "prototype/video-state.js",
+      "to": "prototype/video-fx-presets.js"
+    },
+    {
+      "from": "prototype/video-state.js",
+      "to": "prototype/video-treatment.js"
+    },
+    {
+      "from": "prototype/video-state.js",
+      "to": "prototype/video-effects-catalog.js"
+    },
+    {
+      "from": "prototype/video-state.js",
+      "to": "prototype/video-transitions.js"
+    },
+    {
+      "from": "prototype/video-state.js",
+      "to": "prototype/video-overlays.js"
+    },
+    {
+      "from": "prototype/video-transitions.js",
+      "to": "prototype/video-reference-menu.js"
+    },
+    {
+      "from": "prototype/video-transitions.js",
+      "to": "prototype/video-transitions-kernel.js"
+    },
+    {
+      "from": "prototype/video-transitions.js",
+      "to": "prototype/video-transitions-state.js"
+    },
+    {
+      "from": "prototype/video.js",
+      "to": "prototype/video-settings.js"
+    },
+    {
+      "from": "prototype/video.js",
+      "to": "prototype/video-pipeline.js"
+    },
+    {
+      "from": "prototype/video.js",
+      "to": "prototype/video-karaoke.js"
+    },
+    {
+      "from": "prototype/video.js",
+      "to": "prototype/video-media.js"
+    },
+    {
+      "from": "prototype/video.js",
+      "to": "prototype/video-transitions.js"
+    },
+    {
+      "from": "prototype/video.js",
+      "to": "prototype/video-recording.js"
+    },
+    {
+      "from": "prototype/video.js",
+      "to": "prototype/video-crossfade.js"
+    },
+    {
+      "from": "prototype/video.js",
+      "to": "prototype/video-opacity.js"
+    },
+    {
+      "from": "prototype/video.js",
+      "to": "prototype/video-state.js"
+    },
+    {
+      "from": "prototype/video.js",
+      "to": "prototype/video-fx-presets.js"
+    },
+    {
+      "from": "prototype/video.js",
+      "to": "prototype/video-file-identity.js"
+    },
+    {
+      "from": "prototype/video.js",
+      "to": "prototype/video-treatment.js"
+    },
+    {
+      "from": "prototype/video.js",
+      "to": "prototype/video-decode.js"
+    },
+    {
+      "from": "prototype/warp-loop-kernel.js",
+      "to": "prototype/beatgrid.js"
+    },
+    {
+      "from": "prototype/warp-loop-worklet.js",
+      "to": "prototype/warp-loop-kernel.js"
+    }
+  ],
+  "parseErrors": []
+}

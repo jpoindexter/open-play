@@ -1,5 +1,7 @@
 # Core DJ implementation and local rebuild — 20 October 2026
 
+**Current follow-through:** [Desktop0.1.32 session](CORE_SESSION_032.md). Jason reports a small fixed audible offset despite aligned displayed grids; EQ inconclusive on laptop speakers. No full acceptance. The checkpoint history below is retained.
+
 ## Scope and goal
 
 Jason authorized rebuilding the app after the audit/reconciliation. Finish the two-real-track core: load, independent Play, manual tempo/jog, EQ/filter, temporary Cue/latch, mix, Sync/manual return and clean stop. Preserve the existing rekordbox interface, all variants/custom controls and library waveform previews. No new framework, backend, native DSP engine or advanced parity expansion.

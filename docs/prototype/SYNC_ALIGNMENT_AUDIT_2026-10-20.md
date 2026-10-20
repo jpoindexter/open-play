@@ -1,5 +1,7 @@
 # Beatmatching and Sync alignment audit — 20 October 2026
 
+**Current follow-through:** [Desktop0.1.32 session](CORE_SESSION_032.md). Jason reports a small fixed audible offset despite aligned displayed grids; EQ inconclusive on laptop speakers. No full acceptance. The checkpoint history below is retained.
+
 **OPEN: the real-track musical failure is not resolved.** Jason reports an audible trainwreck after an on-beat manual start/release and supplies misaligned beat/bar-line screenshots. This outweighs historical smooth-transition acceptance for the current session. [CORE-FIX-07](https://trello.com/c/QGW47XIJ) tracks this separately from the intermittent [Sync pop](https://trello.com/c/6cK0v0iy).
 
 ## Captured environment
