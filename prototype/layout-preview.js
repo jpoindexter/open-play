@@ -3,6 +3,7 @@
 const {persist}=await import('./app.js');
 const {refineRekordboxDeck,refineRekordboxMixer}=await import('./rekordbox-preview.js');
 const {syncHeadphoneControls}=await import('./headphone-preview.js');
+const {refineRotaryControls,syncRotaryControls}=await import('./rotary-preview.js');
 const monitorAPI={...window.openPlay,persist};
 const {installLibraryWaveforms}=await import('./library-waveform-preview.js');
 installLibraryWaveforms(window.openPlay);
@@ -83,7 +84,20 @@ function decorate(){
     refineDeck(deck,index);
   });
   refineMixer();
+  refineRotaryControls();
+  refinePanelLayout();
 }
+
+function refinePanelLayout(){
+  if(document.body.dataset.workspace!=='rekordbox')return;
+  const four=document.querySelectorAll('.deck').length===4;
+  const row=display.library?(four?(display.mixer?4:3):(display.mixer?3:2))
+    :four?(display.orientation==='horizontal'?(display.mixer?5:4):(display.mixer?(display.density==='compact'?5:4):3))
+    :(display.mixer?4:3);
+  document.body.style.setProperty('--rb-panel-row',row);
+  document.body.style.setProperty('--rb-library-open-row',row+1);
+}
+
 function refineDeck(deck,index){
   if(!refined())return;
   let loops=deck.querySelector('.preview-loop-strip');
@@ -165,6 +179,7 @@ for(const [id,direction]of [['preview-zoom-out','out'],['preview-zoom-in','in']]
 }
 new MutationObserver(decorate).observe($('#decks'),{childList:true});
 new MutationObserver(refineMixer).observe($('#mixer'),{childList:true});
+new MutationObserver(refineRotaryControls).observe($('#panel'),{childList:true,subtree:true});
 document.addEventListener('input',event=>{const label=event.target.closest?.('.knob-group');if(label)updateDial(label);const fader=event.target.closest?.('.fader-group');if(fader)updateFader(fader);});
 $('#preview-orientation').onchange=event=>{display.orientation=event.target.value;applyDisplay();};
 $('#preview-density').onchange=event=>{
@@ -196,6 +211,7 @@ choose('rekordbox');
 // the original focusable scrub surfaces and their delegated engine handlers.
 function paint(){
   syncHeadphoneControls(monitorAPI);
+  syncRotaryControls();
   const source=$('#detail-wave');
   const decks=[...document.querySelectorAll('.deck')];
   if(source&&document.body.dataset.workspace==='traktor'&&source.width&&source.height){
