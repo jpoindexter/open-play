@@ -5,6 +5,7 @@ const {refineRekordboxDeck,refineRekordboxMixer}=await import('./rekordbox-previ
 const {refineTraktorFlatDeck}=await import('./traktor-flat-preview.js');
 const {syncHeadphoneControls}=await import('./headphone-preview.js');
 const {refineRotaryControls,syncRotaryControls}=await import('./rotary-preview.js');
+const {refineFaders,syncFaders}=await import('./fader-preview.js');
 const monitorAPI={...window.openPlay,persist};
 const {installLibraryWaveforms}=await import('./library-waveform-preview.js');
 installLibraryWaveforms(window.openPlay);
@@ -158,6 +159,7 @@ function refineMixer(){
     footer.append($('#crossfader').closest('label'),$('.preview-headphones'));$('#mixer').append(footer);
   }
   if(flat()&&footer)refineRekordboxMixer(footer,monitorAPI);
+  refineFaders();
 }
 function updateFader(label){const input=label.querySelector('input');if(input)label.style.setProperty('--preview-level',input.value);}
 function updateDial(label){
@@ -219,6 +221,7 @@ choose('traktor-flat');
 function paint(){
   syncHeadphoneControls(monitorAPI);
   syncRotaryControls();
+  syncFaders();
   const source=$('#detail-wave');
   const decks=[...document.querySelectorAll('.deck')];
   const sourcePanel=source?.closest('.detail-waves');

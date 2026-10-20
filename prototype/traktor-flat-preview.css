@@ -1,5 +1,6 @@
+.preview-fader-ticks{display:none}
 /* The preview root scopes composition exceptions above legacy layout rules.
-   HTML216. Native Traktor screenshot supplies the arrangement; flat shared
+   HTML217. Native Traktor screenshot supplies the arrangement; flat shared
    Open Play surfaces supply the visual treatment. Core nodes are never cloned. */
 #workspace-preview[data-workspace=traktor-flat]{
  --tf-bg:#0b0c0d;--tf-surface:#181a1c;--tf-control:#24272a;--tf-line:#343a3e;
@@ -192,7 +193,7 @@
 &[data-density=compact][data-orientation] .deck:nth-of-type(n)>.tempo-control{writing-mode:horizontal-tb}
 &[data-density=compact][data-orientation] .deck:nth-of-type(n)>.tempo-control input{width:28px!important;min-width:28px;max-width:28px!important}
 &.four-decks[data-density=compact][data-orientation=vertical]{--tf-deck-height:256px}
-&[data-density=compact][data-orientation=vertical][data-library-focus=false] .deck:nth-of-type(n)>.tempo-control{grid-row:2/5}
+&[data-orientation=vertical][data-density][data-library-focus=false] .deck:nth-of-type(n)>.tempo-control{grid-row:2/5}
 &.four-decks[data-density=compact][data-orientation=vertical] .deck:nth-of-type(n){grid-template-rows:52px 28px 24px minmax(var(--tf-pads),1fr) 28px 28px 28px}
 &.four-decks[data-density=compact]:has(.deck[data-rb-pad-mode=Loops]){--tf-pads:80px;--tf-deck-height:calc(284px + var(--tf-wave))}
 &.four-decks[data-density=compact][data-orientation=vertical]:has(.deck[data-rb-pad-mode=Loops]){--tf-deck-height:284px}
@@ -243,7 +244,6 @@
 &[data-wave-size=large]{--tf-vertical-wave:128px}
 &.four-decks[data-wave-size=small]{--tf-vertical-wave:80px}
 &.four-decks[data-wave-size=large]{--tf-vertical-wave:144px}
-&:not(.four-decks)[data-density=compact][data-orientation=vertical][data-wave-size=large][data-library-focus=false]{--tf-deck-height:392px}
 /* Deck hierarchy and waveform framing preserve the original controls/canvases. */
 &[data-density=compact] .deck{--tf-deck-accent:#8bbce8}
 &[data-density=compact] .deck:nth-of-type(even){--tf-deck-accent:#81c9cd}
@@ -272,5 +272,48 @@
 &[data-density=compact][data-orientation] .deck:nth-of-type(n) [data-action=play]{color:#9bdac0}
 &[data-density=compact][data-orientation] .deck:nth-of-type(n) button[data-action=play].active{background:#205c4b;color:#c1f2dc}
 &[data-density=compact][data-orientation] .deck:nth-of-type(n) [data-action=cue]{color:#ecd391}
+
+/* Full-height vertical comparison: useful timing distance without taller decks.
+   The original source canvas and scrub lanes still share one exact rectangle. */
+&[data-orientation=vertical][data-density][data-library-focus=false][data-rb-mixer=true]{--tf-vertical-width:96px;--tf-center:calc(236px + var(--tf-vertical-width))}
+&.four-decks[data-orientation=vertical][data-density][data-library-focus=false][data-rb-mixer=true]{--tf-vertical-width:128px;--tf-center:calc(292px + var(--tf-vertical-width))}
+&[data-orientation=vertical][data-wave-size=small]{--tf-vertical-width:80px!important}
+&[data-orientation=vertical][data-wave-size=large]{--tf-vertical-width:112px!important}
+&.four-decks[data-orientation=vertical][data-wave-size=small]{--tf-vertical-width:112px!important}
+&.four-decks[data-orientation=vertical][data-wave-size=large]{--tf-vertical-width:160px!important}
+&[data-orientation=vertical][data-density][data-library-focus=false][data-rb-mixer=true] .detail-waves{grid-row:1/3!important;width:var(--tf-vertical-width)!important;height:100%!important}
+&.four-decks[data-orientation=vertical][data-density][data-library-focus=false][data-rb-mixer=true] .detail-waves{grid-row:1/4!important}
+&[data-orientation=vertical][data-density][data-library-focus=false][data-rb-mixer=true] #mixer{grid-row:1/3;margin-left:calc(var(--tf-vertical-width) + 4px);width:calc(100% - var(--tf-vertical-width) - 4px);min-width:0}
+&.four-decks[data-orientation=vertical][data-density][data-library-focus=false][data-rb-mixer=true] #mixer{grid-row:1/4}
+&[data-orientation=vertical] .detail-waves .preview-wave-head{height:24px;background:#1c262d;border-bottom:1px solid #35424a}
+&[data-orientation=vertical] .preview-wave-head>span{line-height:23px;border-inline-start:1px solid #35424a}
+&[data-orientation=vertical] .preview-wave-head>span:first-child{border-inline-start:0}
+&[data-orientation=vertical] .detail-waves canvas{top:24px;height:calc(100% - 44px)}
+&[data-orientation=vertical] .detail-waves .waveform-scrub-lanes{top:24px;bottom:20px}
+&[data-orientation=vertical] .detail-waves .waveform-scrub-lane{border-inline-end:1px solid #35424a55}
+&[data-orientation=vertical] .detail-waves::after{content:'';position:absolute;left:0;right:0;top:calc(50% + 2px);height:1px;background:#c4d7e2;opacity:.8;pointer-events:none}
+&[data-orientation=vertical] .detail-waves>span{inset:auto 0 0;padding:3px 0;height:20px;box-sizing:border-box;font-size:8px;line-height:14px;text-align:center;background:#151c21;color:#aab7c0;white-space:nowrap;overflow:hidden}
+/* Fader travel has nine fixed marks; only meaningful neutral/endpoints detent. */
+& .preview-fader-ticks{display:block;position:absolute;pointer-events:none;inset:8px 0;z-index:0}
+& .preview-fader-ticks i{position:absolute;left:3px;right:3px;top:calc(var(--tick)*100%);height:1px;background:#65727b}
+& .preview-fader-ticks i.major{background:#b0bdc6}
+& .fader-group::before{top:8px;bottom:8px;box-shadow:none}
+& #mixer .fader-group::after{top:calc(4px + (1 - var(--preview-level,.8))*(100% - 16px));height:8px;border:1px solid #15212a;box-sizing:border-box;z-index:1}
+& #mixer .fader-group[data-fader-detent=true]::after{background:#a5d7f6}
+& .tempo-control{position:relative!important}
+& .tempo-control .preview-fader-ticks{top:19px;bottom:8px}
+& .tempo-control input{position:relative;z-index:1;appearance:none;background:transparent;padding-block:4px;box-sizing:border-box;direction:ltr!important;touch-action:none}
+& .tempo-control input::-webkit-slider-runnable-track{width:2px;background:#507084;border:0}
+& .tempo-control input::-webkit-slider-thumb{appearance:none;width:24px;height:8px;margin-left:-11px;background:#c3cbd0;border:1px solid #15212a;border-radius:0}
+& .tempo-control[data-fader-detent=true] input::-webkit-slider-thumb{background:#a5d7f6}
+& .crossfader{position:relative}
+& .crossfader .preview-fader-ticks{inset:15px 12px 3px}
+& .crossfader .preview-fader-ticks i{top:0;bottom:0;left:calc(var(--tick)*100%);right:auto;width:1px;height:auto;background:#65727b}
+& .crossfader .preview-fader-ticks i.major{background:#b0bdc6}
+& .crossfader input{position:relative;z-index:1;appearance:none;background:transparent;touch-action:none}
+& .crossfader input::-webkit-slider-runnable-track{height:2px;background:#507084;border:0}
+& .crossfader input::-webkit-slider-thumb{appearance:none;width:24px;height:12px;margin-top:-5px;background:#c3cbd0;border:1px solid #15212a;border-radius:0}
+& .crossfader[data-fader-detent=true] input::-webkit-slider-thumb{background:#a5d7f6}
+& :is(.tempo-control,.crossfader):focus-within{outline:2px solid #9ed2ff;outline-offset:-2px}
 
 }
