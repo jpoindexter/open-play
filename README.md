@@ -1,10 +1,10 @@
 # Open Play
 
-Current work is the **rekordbox HTML core DJ prototype**: [open the layout preview](http://127.0.0.1:8848/prototype/layout-preview.html), [read the audit and next steps](docs/prototype/CORE_DJ_AUDIT_2026-10-20.md), or [read the current core status](docs/delivery/CORE_DJ_FIRST.md). This pass is documentation/Trello reconciliation, then stop; code safety fixes and the listening session are queued. Preserve all controls and library waveform previews. **No desktop rebuild.**
+Current work is finishing the **core two-track DJ experience**, with the chosen rekordbox layout, all controls and library waveform previews preserved. Jason authorized a new local desktop test build on20October. [Current implementation/evidence](docs/prototype/CORE_DJ_REBUILD_2026-10-20.md), [core plan](docs/delivery/CORE_DJ_FIRST.md), [HTML preview](http://127.0.0.1:8848/prototype/layout-preview.html).
 
 Independent open-source desktop DJ project, with a browser review candidate and ongoing reference investigation. The goal is familiar Serato DJ Pro design and behavior without artificial feature, account or device gates in the independent implementation.
 
-Historical local desktop approval for revision `f8b0abf` and previous test builds is retained in [approvals](docs/approvals.md). The latest recorded frozen native candidate is0.1.27; it is not rebuilt or launched for this HTML-only work. [Earlier desktop instructions](desktop/README.md) describe historical candidates; they do not override the current scope. Full core, vendor parity and physical routing acceptance remain open.
+Historical local desktop approval for revision `f8b0abf` and previous test builds is retained in [approvals](docs/approvals.md). Native0.1.27 is historical; the current core source is being prepared as local test0.1.28. [Earlier desktop instructions](desktop/README.md) describe historical candidates; they do not override the current scope. Full core, vendor parity and physical routing acceptance remain open.
 
 - [Run the HTML prototype](prototype/README.md)
 - [Per-file Video FX save/recall evidence](docs/prototype/VIDEO_FILE_FX_REVIEW.md)

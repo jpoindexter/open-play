@@ -20,7 +20,7 @@ try{
   const helperModule={exports:{}};vm.runInNewContext(extractFile(archive,'playback-check-window.cjs').toString(),{module:helperModule,process,URL,console});
   const stubs={electron:{app,BrowserWindow:Window,Menu:{buildFromTemplate:v=>v,setApplicationMenu:m=>menus.push(m)},dialog:{showErrorBox(){throw Error('Unexpected host error');},showMessageBox(...args){dialogs.push(args.at(-1));}}},'node:path':path,'./server.cjs':{createAssetServer:async options=>{assert.equal(options.port,18775);return{origin,server:{close(){}}};}},'./playback-check-window.cjs':helperModule.exports};
   vm.runInNewContext(extractFile(archive,'main.cjs').toString(),{require:name=>{assert(name in stubs,name);return stubs[name];},process,URL,__dirname:'/controlled'});await new Promise(resolve=>setImmediate(resolve));
-  assert.equal(windows.length,1);const main=windows[0];assert.equal(paths.userData,'/controlled/Application Support/Open Play Playback Test');assert.equal(main.options.webPreferences.partition,'persist:open-play-playback-test');assert.equal(main.url,origin+'/prototype/');
+  assert.equal(windows.length,1);const main=windows[0];assert.equal(paths.userData,'/controlled/Application Support/Open Play Playback Test');assert.equal(main.options.webPreferences.partition,'persist:open-play-playback-test');assert.equal(main.url,origin+(Number(version.split('.').at(-1))>=28?'/prototype/workspace-preview.html':'/prototype/'));
   assert.equal(main.webContents.session.check(main.webContents,'midi',origin,{isMainFrame:true}),true);assert.equal(main.webContents.session.check(main.webContents,'microphone',origin,{isMainFrame:true}),false);
   if(Number(version.split('.').at(-1))>=18){
    const session=main.webContents.session;

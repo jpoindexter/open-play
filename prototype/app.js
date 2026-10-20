@@ -637,7 +637,7 @@ function renderMixer() {
       .slice(0, state.deckCount)
       .map(
         (d) =>
-          `<div class="channel-strip" style="--accent:${colors[d.index]}"><strong>${d.index + 1}</strong>${["trim", "high", "mid", "low", "filter"].map((k) => `<label class="knob-group">${k === "trim" ? "GAIN" : k.toUpperCase()}<input aria-label="Deck ${d.index + 1} ${k}" type="range" data-mix="${d.index}:${k}" min="${k === "trim" ? 0 : k === "filter" ? -1 : -24}" max="${k === "trim" ? 2 : k === "filter" ? 1 : engine.eqBoost}" step="${["trim", "filter"].includes(k) ? ".01" : "any"}" value="${d[k] ?? (k === "trim" ? 1 : 0)}"></label>`).join("")}<label class="fader-group">LEVEL<input type="range" min="0" max="1" step=".01" value="${d.level ?? 0.8}" data-mix="${d.index}:level" aria-label="Deck ${d.index + 1} level"></label><label class="cross-assign">XF ASSIGN<select data-cross-assign="${d.index}" aria-label="Deck ${d.index+1} crossfader assignment">${["A","Thru","B"].map(side=>`<option ${side===engine.mixerSettings.assignments[d.index]?"selected":""}>${side}</option>`).join("")}</select></label><button data-action="pfl" data-deck="${d.index}" class="${d.pfl ? "active" : ""}" title="Select deck for headphone cue">CUE ◇</button></div>`,
+          `<div class="channel-strip" style="--accent:${colors[d.index]}"><strong>${d.index + 1}</strong>${["trim", "high", "mid", "low", "filter"].map((k) => `<label class="knob-group">${k === "trim" ? "GAIN" : k.toUpperCase()}<input aria-label="Deck ${d.index + 1} ${k}" type="range" data-mix="${d.index}:${k}" min="${k === "trim" ? 0 : k === "filter" ? -1 : -24}" max="${k === "trim" ? 2 : k === "filter" ? 1 : engine.eqBoost}" step="${["trim", "filter"].includes(k) ? ".01" : "any"}" value="${d[k] ?? (k === "trim" ? 1 : 0)}"></label>`).join("")}<label class="fader-group">LEVEL<input type="range" min="0" max="1" step=".01" value="${d.level ?? 0.8}" data-mix="${d.index}:level" aria-label="Deck ${d.index + 1} level"></label><label class="cross-assign">XF ASSIGN<select data-cross-assign="${d.index}" aria-label="Deck ${d.index+1} crossfader assignment">${["A","Thru","B"].map(side=>`<option ${side===engine.mixerSettings.assignments[d.index]?"selected":""}>${side}</option>`).join("")}</select></label><button data-action="pfl" data-deck="${d.index}" class="${d.pfl ? "active" : ""}" aria-label="Headphone cue deck ${d.index + 1}" aria-pressed="${!!d.pfl}" title="Headphone monitor selection; separate from temporary deck Cue">CUE ◇</button></div>`,
       )
       .join("") +
     `<label class="crossfader">A — CROSSFADER — B<input id="crossfader" type="range" min="-1" max="1" step=".01" value="${engine.cross}" aria-label="Crossfader"></label>`;
@@ -661,6 +661,7 @@ const faderStarts=new Map();
 async function faderStart(d,value,previous,deviceId=''){
   if(!d.track)return;
   if(value===0){
+    cueHolds.cancelDeck(d);
     const active=faderStarts.get(d.index);
     if(active)active.wanted=false;
     if(!d.playing&&!d.processing&&!active){d.cue=engine.position(d);renderDecks();return;}
@@ -706,6 +707,7 @@ async function load(index, id = state.selected, options = {}) {
     return notify("Playing deck locked. Pause it before replacement.");
   const syncBefore = {engaged:!!d.sync, relative:d.syncState==='relative', role:d.syncRole, bpm:(d.track?.bpm || 0)*d.rate};
   cancelPendingPlay(d);
+  cueHolds.cancelDeck(d);
   const request = (deckLoadRequests.get(d) || 0) + 1;
   deckLoadRequests.set(d, request);
   faderStarts.delete(d.index);
@@ -888,6 +890,7 @@ async function deckAction(action, index, el, event = {}) {
   if(action==='roll')return; // Momentary pointer/keyboard lifecycle owns this button.
   if (action === "eject") {
     cancelPendingPlay(d);
+    cueHolds.cancelDeck(d);
     const request = (deckLoadRequests.get(d) || 0) + 1;
     deckLoadRequests.set(d, request);
     faderStarts.delete(d.index);
@@ -1035,6 +1038,7 @@ async function deckAction(action, index, el, event = {}) {
       notify(`Deck ${follower.index+1} ${result.kind==='tempo'?'tempo':'tempo and beats'} matched to MASTER deck ${leader.index+1}.`);
     }
   }
+  if (action === "sync" || action === "syncOff") { persist(); return; }
   if (action === "reverse") {
     const reverse = !d.reverse;
     if (reverse) engine.beginSlip(d, "reverse");
@@ -1320,6 +1324,7 @@ function download(name, content, type = "application/json") {
 let resetting = false;
 function reset() {
   resetting = true;
+  state.decks.forEach(d=>cueHolds.cancelDeck(d));
   engine.silence();
   localStorage.removeItem("openplay-review-v1");
   location.reload();
@@ -1738,7 +1743,7 @@ $("#deck-count").onchange = (e) => {
   state.deckCount = Number(e.target.value);
   state.focus = Math.min(state.focus, state.deckCount - 1);
   if (state.deckCount === 2)
-    state.decks.slice(2).forEach((d) => {engine.pause(d);engine.clearDeckScratchCache(d.index);});
+    state.decks.slice(2).forEach((d) => {cancelPendingPlay(d);cueHolds.cancelDeck(d);engine.pause(d);engine.clearDeckScratchCache(d.index);});
   renderDecks();
 };
 $("#day").onclick = () => document.body.classList.toggle("day");
@@ -1765,6 +1770,12 @@ $("#columns").onclick = () => panels.columns();
 $("#library-tools").onclick = () => panels.libraryTools();
 document.addEventListener("keydown", async (e) => {
   const tag = e.target.tagName;
+  if (e.isComposing || e.target.isContentEditable || ["INPUT", "TEXTAREA", "SELECT"].includes(tag) || $("#modal").open) return;
+  const mod = e.metaKey || e.ctrlKey;
+  const k = mod && e.shiftKey && /^Digit[0-9]$/.test(e.code || "") ? e.code.slice(-1) : e.key.toLowerCase();
+  const cueDelete = mod && e.shiftKey && /^[0-9]$/.test(k);
+  const command = mod && !e.shiftKey && ["f", "p", "z", "backspace", "delete"].includes(k);
+  if ((mod && !command && !cueDelete) || (e.altKey && (mod || !"zxcvbnm,".includes(k) || k.length !== 1))) return;
   if([' ','Enter'].includes(e.key)&&e.target.dataset.action==='censor'){
     e.preventDefault();if(!e.repeat)void censorHolds.press(`button:${e.code||e.key}`,state.decks[Number(e.target.dataset.deck)]);return;
   }
@@ -1802,22 +1813,19 @@ document.addEventListener("keydown", async (e) => {
     e.preventDefault();
     if (!e.repeat)
       void cueHolds.press(
-        "button:" + e.key,
+        "button:" + (e.code || e.key),
         state.decks[Number(e.target.dataset.deck)],
         e.target.dataset.action === "pad" ? Number(e.target.dataset.pad) : null,
         e.shiftKey,
       );
     return;
   }
-  if (["INPUT", "TEXTAREA", "SELECT"].includes(tag) || $("#modal").open) return;
   if (e.key === "\\") {
     e.preventDefault();
     flipAutomation.arm();
     if (state.panel === "flip") panels.refresh();
     return;
   }
-  const k = e.key.toLowerCase(),
-    mod = e.metaKey || e.ctrlKey;
   if(mod&&!e.shiftKey&&['Backspace','Delete'].includes(e.key)&&state.crate==='stems'&&e.target.closest('#tracks')){
     e.preventDefault();if(!e.repeat){const track=trackById(state.selected);if(stemCrate.member(track))void stemCrate.remove(track).then(()=>notify(track.stemState)).catch(error=>notify(error.message));}return;
   }
@@ -1840,7 +1848,7 @@ document.addEventListener("keydown", async (e) => {
       load(d.index, d.previous.id, { position: d.previous.position });
     return;
   }
-  if (e.shiftKey && ["ArrowLeft", "ArrowRight"].includes(e.key)) {
+  if (!mod && e.shiftKey && ["ArrowLeft", "ArrowRight"].includes(e.key)) {
     e.preventDefault();
     return load(e.key === "ArrowLeft" ? 0 : 1);
   }
@@ -1894,14 +1902,16 @@ document.addEventListener("keydown", async (e) => {
       d = state.decks[n < 5 ? 0 : 1];
     d.tab = "Cues";
     e.preventDefault();
-    if (!e.repeat) await cueHolds.press("key:" + k, d, n % 5, e.shiftKey);
+    if (!e.repeat) await cueHolds.press("key:" + (e.code || k), d, n % 5, e.shiftKey);
   }
   if ((k === "i" || k === "k") && !e.repeat) {
     e.preventDefault();
-    await cueHolds.press("key:" + k, state.decks[k === "i" ? 0 : 1]);
+    await cueHolds.press("key:" + (e.code || k), state.decks[k === "i" ? 0 : 1]);
   }
-  if (k === "o" || k === "p")
-    await deckAction(k === "o" ? "loopIn" : "loopOut", 0, {}, e);
+  if (!mod && !e.altKey && (k === "o" || k === "p")) {
+    e.preventDefault();
+    if (!e.repeat) await deckAction(k === "o" ? "loopIn" : "loopOut", 0, {}, e);
+  }
   const n = "zxcvbnm,".indexOf(k);
   if (n >= 0 && k.length === 1 && !mod) {
     e.preventDefault();
@@ -1915,8 +1925,8 @@ document.addEventListener("keyup", (e) => {
   void jogBend.releaseHold(`keyboard:${e.code||e.key.toLowerCase()}`).catch(error=>notify(error.message));
   loopOperation(loopPads.release("button:"+e.key));
   void pitchPlay.release("button:" + e.key);
-  void cueHolds.release("key:" + e.key.toLowerCase());
-  void cueHolds.release("button:" + e.key);
+  void cueHolds.release("key:" + (e.code || e.key.toLowerCase()));
+  void cueHolds.release("button:" + (e.code || e.key));
   void slicer.release("button:" + e.key);
   const n = "zxcvbnm,".indexOf(e.key.toLowerCase());
   if (e.key.length === 1 && n >= 0) panels.releaseSampleHolds(n, "keyboard");
@@ -1962,8 +1972,18 @@ function tick() {
       const phase = beatPosition(d.track,engine.position(d)), beat = phase === null ? -1 : Math.floor(phase);
       beatIndicator.setAttribute('aria-label',`Deck ${d.index+1}: ${status}${beat>=0 ? ", beat "+(beat+1)+" of 4" : ""}`);
       beatIndicator.querySelectorAll('[data-beat]').forEach(dot => dot.classList.toggle('lit',Number(dot.dataset.beat)===beat));
-      if (syncButton) {syncButton.dataset.syncState=status;syncButton.classList.toggle('active',!!d.sync);syncButton.setAttribute('aria-pressed',String(!!d.sync));}
     }
+    const smart = state.settings["Sync Mode"] === "Smart Sync";
+    const syncStatus = smart ? d.syncState || "off" : d.sync ? "beat" : "off";
+    if (syncButton) {
+      syncButton.dataset.syncState=syncStatus;
+      syncButton.classList.toggle('active',!!d.sync);
+      syncButton.setAttribute('aria-pressed',String(!!d.sync));
+      syncButton.disabled=smart && !hasBeatgrid(d.track);
+      syncButton.title=syncButton.disabled ? "Add or analyze a beatgrid first" : (d.sync ? d.syncRole === "primary" ? "Primary" : "Secondary" : "Not synced") + "; press again to re-sync";
+    }
+    const syncOffButton=document.querySelector(`[data-action="syncOff"][data-deck="${d.index}"]`);
+    if(syncOffButton)syncOffButton.disabled=!(d.sync || syncStatus === "relative");
     updateTempoSlider(d);
     const bpmText = document.querySelector(`#platter-${d.index} strong`);
     const tempoText = document.querySelector(`#platter-${d.index} small`);
@@ -2024,6 +2044,7 @@ requestAnimationFrame(tick);
 window.addEventListener("beforeunload", () => {
   if (!resetting) persist();
   deckScratchControls.dispose();
+  state.decks.forEach(d=>cueHolds.cancelDeck(d));
   engine.silence();
   stemWaveforms.forEach(model => model.dispose());
   localAudio.close();
