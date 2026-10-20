@@ -1,0 +1,1 @@
+Generated from prototype/ui with npm ci && npm run build. Astryx Core/Neutral 0.7.1, React 19.3.1. Prototype only. Keep license files and controls.js.LEGAL.txt. No CLI initializer or desktop build is used.

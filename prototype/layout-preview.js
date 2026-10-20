@@ -6,6 +6,7 @@ const {refineTraktorFlatDeck}=await import('./traktor-flat-preview.js');
 const {syncHeadphoneControls}=await import('./headphone-preview.js');
 const {refineRotaryControls,syncRotaryControls}=await import('./rotary-preview.js');
 const {refineFaders,syncFaders}=await import('./fader-preview.js');
+const {refineXoneScales}=await import('./xone-preview.js');
 const monitorAPI={...window.openPlay,persist};
 const {installLibraryWaveforms}=await import('./library-waveform-preview.js');
 installLibraryWaveforms(window.openPlay);
@@ -89,6 +90,7 @@ function decorate(){
   });
   refineMixer();
   refineRotaryControls();
+  refineXoneScales();
   refinePanelLayout();
 }
 
@@ -160,6 +162,7 @@ function refineMixer(){
   }
   if(flat()&&footer)refineRekordboxMixer(footer,monitorAPI);
   refineFaders();
+  refineXoneScales();
 }
 function updateFader(label){const input=label.querySelector('input');if(input)label.style.setProperty('--preview-level',input.value);}
 function updateDial(label){
@@ -188,7 +191,7 @@ for(const [id,direction]of [['preview-zoom-out','out'],['preview-zoom-in','in']]
 }
 new MutationObserver(decorate).observe($('#decks'),{childList:true});
 new MutationObserver(refineMixer).observe($('#mixer'),{childList:true});
-new MutationObserver(refineRotaryControls).observe($('#panel'),{childList:true,subtree:true});
+new MutationObserver(()=>{refineRotaryControls();refineXoneScales();}).observe($('#panel'),{childList:true,subtree:true});
 document.addEventListener('input',event=>{const label=event.target.closest?.('.knob-group');if(label)updateDial(label);const fader=event.target.closest?.('.fader-group');if(fader)updateFader(fader);});
 $('#preview-orientation').onchange=event=>{display.orientation=event.target.value;applyDisplay();};
 $('#preview-density').onchange=event=>{
@@ -252,3 +255,7 @@ function paint(){
   requestAnimationFrame(paint);
 }
 requestAnimationFrame(paint);
+
+// Standard UI only; the original DJ surfaces and audio state stay in place.
+const {installAstryxControls}=await import('./vendor/astryx/controls.js');
+installAstryxControls();
