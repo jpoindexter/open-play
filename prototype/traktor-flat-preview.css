@@ -1,5 +1,5 @@
 /* The preview root scopes composition exceptions above legacy layout rules.
-   HTML213. Native Traktor screenshot supplies the arrangement; flat shared
+   HTML214. Native Traktor screenshot supplies the arrangement; flat shared
    Open Play surfaces supply the visual treatment. Core nodes are never cloned. */
 #workspace-preview[data-workspace=traktor-flat]{
  --tf-bg:#0b0c0d;--tf-surface:#181a1c;--tf-control:#24272a;--tf-line:#343a3e;
@@ -145,25 +145,54 @@
 &[data-library-focus=true].four-decks[data-orientation][data-density] .rb-mixer-band{grid-row:3}
 &[data-library-focus=true][data-orientation][data-density] .library{grid-row:3}
 &[data-library-focus=true].four-decks[data-orientation][data-density] .library{grid-row:4}
-/* Four-deck Compact is genuinely denser: two 18px cue rows per horizontal
-   deck / four per vertical deck. Same controls, not a hidden-control preset. */
-&.four-decks[data-density=compact]{--tf-wave:40px;--tf-pads:40px;--tf-deck-height:calc(228px + var(--tf-wave))}
+/* Compact retains every control: usable targets, tighter row gutters. */
+&.four-decks[data-density=compact]{--tf-wave:40px;--tf-pads:52px;--tf-deck-height:calc(256px + var(--tf-wave))}
 &.four-decks[data-density=compact][data-wave-size=small]{--tf-wave:32px}
 &.four-decks[data-density=compact][data-wave-size=large]{--tf-wave:72px}
-&.four-decks[data-density=compact][data-orientation=horizontal] .deck:nth-of-type(n){grid-template-rows:44px 24px var(--tf-wave) 20px var(--tf-pads) 26px 20px 20px}
-&.four-decks[data-density=compact] .deck:nth-of-type(n) .platter{height:24px!important}
-&.four-decks[data-density=compact] .deck:nth-of-type(n) .pads{grid-template-rows:repeat(2,18px)}
-&.four-decks[data-density=compact] .deck:nth-of-type(n) .pad{height:18px;min-height:18px;font-size:9px}
-&.four-decks[data-density=compact] .deck:nth-of-type(n) .wave-wrap{height:20px}
-&.four-decks[data-density=compact] .deck:nth-of-type(n) :is(.preview-deck-utilities,.deck-foot) button{min-height:20px;height:20px;font-size:8px}
-&.four-decks[data-density=compact][data-orientation=vertical]{--tf-deck-height:268px}
-&.four-decks[data-density=compact][data-orientation=vertical] .deck:nth-of-type(n){grid-template-rows:44px 24px 20px minmax(84px,1fr) 26px 20px 20px}
-&.four-decks[data-density=compact][data-orientation=vertical] .deck:nth-of-type(n) .pads{grid-template-rows:repeat(4,18px)}
-&.four-decks[data-density=compact]:has(.deck[data-rb-pad-mode=Loops]){--tf-pads:76px;--tf-deck-height:304px}
+&.four-decks[data-density=compact][data-orientation] .deck:nth-of-type(n){gap:2px}
+&.four-decks[data-density=compact][data-orientation=horizontal] .deck:nth-of-type(n){grid-template-rows:52px 28px var(--tf-wave) 24px var(--tf-pads) 28px 28px 28px}
+&.four-decks[data-density=compact][data-orientation] .deck:nth-of-type(n) .deck-head{height:52px;padding-block:1px;grid-template-columns:28px minmax(0,1fr) 68px 96px 52px}
+&.four-decks[data-density=compact] .deck .deck-head .preview-key-row{grid-template-columns:24px minmax(0,1fr) 24px;grid-template-rows:24px 24px;gap:2px}
+&.four-decks[data-density=compact] .deck .rb-sync-controls{grid-template-rows:24px 24px;gap:2px}
+&.four-decks[data-density=compact][data-orientation] .deck:nth-of-type(n) :is(button,select){min-width:28px;min-height:28px;height:28px;font-size:11px}
+&.four-decks[data-density=compact][data-orientation] .deck:nth-of-type(n) .deck-head button{min-width:24px;min-height:24px;height:24px;font-size:11px;line-height:11px}
+&.four-decks[data-density=compact][data-orientation] .deck:nth-of-type(n) .deck-head .preview-key-row :is([data-action=keyDown],[data-action=keyUp]){font-size:0}
+&.four-decks[data-density=compact] .deck .preview-key-row :is([data-action=keyDown],[data-action=keyUp])::after{font-size:16px}
+&.four-decks[data-density=compact] .deck .platter{height:28px!important}
+&.four-decks[data-density=compact][data-orientation] .deck:nth-of-type(n) .pads{grid-template-columns:repeat(4,minmax(0,1fr));grid-template-rows:repeat(2,24px);gap:4px}
+&.four-decks[data-density=compact][data-orientation] .deck:nth-of-type(n) .pad{height:24px;min-height:24px;font-size:11px}
+&.four-decks[data-density=compact] .deck .pad::before{font-size:11px;color:#b4bec6}
+&.four-decks[data-density=compact] .deck .pad small{font-size:10px}
+&.four-decks[data-density=compact] .deck .wave-wrap{height:24px}
+&.four-decks[data-density=compact][data-orientation] .deck:nth-of-type(n) .deck-foot .loop-line{width:auto;flex:none}
+&.four-decks[data-density=compact] .deck .deck-foot .loop-line button{flex:none;padding-inline:5px}
+&.four-decks[data-density=compact] .deck .rb-track-gain-knob{height:28px;min-height:28px;padding-left:32px;flex:0 0 100px;max-width:100px;font-size:10px!important}
+&.four-decks[data-density=compact] .deck .rb-track-gain-knob>span{display:flex;flex-direction:column;line-height:11px}
+&.four-decks[data-density=compact][data-orientation] .deck:nth-of-type(n) .rb-track-gain-knob input{width:28px!important;max-width:28px!important;height:28px}
+&.four-decks[data-density=compact] .deck .rb-track-gain-knob::before{width:24px;height:24px;top:2px;left:2px}
+&.four-decks[data-density=compact] .deck .rb-track-gain-knob::after{left:13px;top:5px;height:8px;transform-origin:1px 9px}
+&.four-decks[data-density=compact][data-orientation] .deck:nth-of-type(n)>.tempo-control{writing-mode:horizontal-tb}
+&.four-decks[data-density=compact][data-orientation] .deck:nth-of-type(n)>.tempo-control input{width:28px!important;min-width:28px;max-width:28px!important}
+&.four-decks[data-density=compact][data-orientation=vertical]{--tf-deck-height:256px}
+&.four-decks[data-density=compact][data-orientation=vertical][data-library-focus=false] .deck:nth-of-type(n)>.tempo-control{grid-row:2/5}
+&.four-decks[data-density=compact][data-orientation=vertical] .deck:nth-of-type(n){grid-template-rows:52px 28px 24px minmax(var(--tf-pads),1fr) 28px 28px 28px}
+&.four-decks[data-density=compact]:has(.deck[data-rb-pad-mode=Loops]){--tf-pads:80px;--tf-deck-height:calc(284px + var(--tf-wave))}
+&.four-decks[data-density=compact][data-orientation=vertical]:has(.deck[data-rb-pad-mode=Loops]){--tf-deck-height:284px}
+&.four-decks[data-density=compact][data-orientation] .deck[data-rb-pad-mode=Loops] .deck-body>div:first-child>nav.loop-line button{height:24px;min-height:24px;font-size:11px;padding-inline:4px}
+/* One row of assignments buys larger targets inside the same monitor bar. */
+&.four-decks[data-density=compact] .rb-cross-controls{grid-template-columns:64px 64px 160px 64px 64px;grid-template-rows:auto;gap:8px}
+&.four-decks[data-density=compact][data-orientation] .rb-cross-controls .crossfader{grid-column:3;grid-row:1;display:flex;flex-direction:column;height:38px;font-size:9px;line-height:10px;gap:0}
+&.four-decks[data-density=compact][data-orientation] .rb-cross-controls .crossfader input{height:28px;min-height:28px;margin:0}
+&.four-decks[data-density=compact][data-orientation] .rb-cross-controls select{height:28px;min-height:28px;font-size:11px}
+&.four-decks[data-density=compact][data-orientation] .rb-cross-controls .cross-assign{grid-row:1;font-size:11px}
+&.four-decks[data-density=compact][data-orientation] .rb-cross-controls [data-rb-assign='0']{grid-column:1}
+&.four-decks[data-density=compact][data-orientation] .rb-cross-controls [data-rb-assign='2']{grid-column:2}
+&.four-decks[data-density=compact][data-orientation] .rb-cross-controls [data-rb-assign='1']{grid-column:4}
+&.four-decks[data-density=compact][data-orientation] .rb-cross-controls [data-rb-assign='3']{grid-column:5}
 /* No hidden source panel can steal the FX/library grid tracks. */
 &[data-orientation][data-density] main:has(#panel:not([hidden])){height:auto;min-height:calc(100dvh - 122px)}
-&.four-decks[data-library-focus=true][data-density=compact]{--tf-wave:0px;--tf-pads:0px;--tf-deck-height:200px}
-&.four-decks[data-library-focus=true][data-density=compact][data-orientation] .deck:nth-of-type(n){grid-template-rows:44px 24px 0px 20px 0px 26px 20px 20px}
+&.four-decks[data-library-focus=true][data-density=compact]{--tf-wave:0px;--tf-pads:0px;--tf-deck-height:204px}
+&.four-decks[data-library-focus=true][data-density=compact][data-orientation] .deck:nth-of-type(n){grid-template-rows:52px 28px 0px 24px 0px 28px 28px 28px}
 &.four-decks[data-library-focus=true][data-density=compact][data-orientation] .deck:nth-of-type(n) .wave-wrap{grid-row:4}
 &.four-decks[data-library-focus=true][data-density=compact][data-orientation] .deck:nth-of-type(n) .transport{grid-row:6}
 &.four-decks[data-library-focus=true][data-density=compact][data-orientation] .deck:nth-of-type(n) .preview-deck-utilities{grid-row:7}
