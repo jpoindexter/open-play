@@ -1,5 +1,5 @@
 /* The preview root scopes composition exceptions above legacy layout rules.
-   HTML215. Native Traktor screenshot supplies the arrangement; flat shared
+   HTML216. Native Traktor screenshot supplies the arrangement; flat shared
    Open Play surfaces supply the visual treatment. Core nodes are never cloned. */
 #workspace-preview[data-workspace=traktor-flat]{
  --tf-bg:#0b0c0d;--tf-surface:#181a1c;--tf-control:#24272a;--tf-line:#343a3e;
@@ -156,36 +156,43 @@
 &[data-library-focus=true].four-decks[data-orientation][data-density] .rb-mixer-band{grid-row:3}
 &[data-library-focus=true][data-orientation][data-density] .library{grid-row:3}
 &[data-library-focus=true].four-decks[data-orientation][data-density] .library{grid-row:4}
-/* Compact retains every control: usable targets, tighter row gutters. */
+/* Compact uses one header/control grid; four decks retain their smaller waves. */
+&:not(.four-decks)[data-density=compact]{--tf-pads:52px;--tf-deck-height:calc(256px + var(--tf-wave))}
+&:not(.four-decks)[data-density=compact][data-orientation=vertical]{--tf-deck-height:344px}
+&:not(.four-decks)[data-density=compact][data-orientation=vertical] .deck:nth-of-type(n){grid-template-rows:52px 28px 24px minmax(140px,1fr) 28px 28px 28px}
+&:not(.four-decks)[data-density=compact][data-orientation=horizontal] .deck:nth-of-type(n) .pads{grid-template-rows:repeat(2,24px)}
+&:not(.four-decks)[data-density=compact][data-orientation=vertical] .deck:nth-of-type(n) .pad{height:32px;min-height:32px}
+&:not(.four-decks)[data-library-focus=true][data-density=compact]{--tf-deck-height:252px}
+&:not(.four-decks)[data-library-focus=true][data-density=compact][data-orientation] .deck:nth-of-type(n){grid-template-rows:52px 28px 0px 24px 0px 28px 28px 28px}
 &.four-decks[data-density=compact]{--tf-wave:40px;--tf-pads:52px;--tf-deck-height:calc(256px + var(--tf-wave))}
 &.four-decks[data-density=compact][data-wave-size=small]{--tf-wave:32px}
 &.four-decks[data-density=compact][data-wave-size=large]{--tf-wave:72px}
-&.four-decks[data-density=compact][data-orientation] .deck:nth-of-type(n){gap:2px}
-&.four-decks[data-density=compact][data-orientation=horizontal] .deck:nth-of-type(n){grid-template-rows:52px 28px var(--tf-wave) 24px var(--tf-pads) 28px 28px 28px}
-&.four-decks[data-density=compact][data-orientation] .deck:nth-of-type(n) .deck-head{height:52px;padding-block:1px;grid-template-columns:28px minmax(0,1fr) 68px 96px 52px}
-&.four-decks[data-density=compact] .deck .deck-head .preview-key-row{grid-template-columns:24px minmax(0,1fr) 24px;grid-template-rows:24px 24px;gap:2px}
-&.four-decks[data-density=compact] .deck .rb-sync-controls{grid-template-rows:24px 24px;gap:2px}
-&.four-decks[data-density=compact][data-orientation] .deck:nth-of-type(n) :is(button,select){min-width:28px;min-height:28px;height:28px;font-size:11px}
-&.four-decks[data-density=compact][data-orientation] .deck:nth-of-type(n) .deck-head button{min-width:24px;min-height:24px;height:24px;font-size:11px;line-height:11px}
-&.four-decks[data-density=compact][data-orientation] .deck:nth-of-type(n) .deck-head .preview-key-row :is([data-action=keyDown],[data-action=keyUp]){font-size:0}
-&.four-decks[data-density=compact] .deck .preview-key-row :is([data-action=keyDown],[data-action=keyUp])::after{font-size:16px}
-&.four-decks[data-density=compact] .deck .platter{height:28px!important}
+&[data-density=compact][data-orientation] .deck:nth-of-type(n){gap:2px}
+&[data-density=compact][data-orientation=horizontal] .deck:nth-of-type(n){grid-template-rows:52px 28px var(--tf-wave) 24px var(--tf-pads) 28px 28px 28px}
+&[data-density=compact][data-orientation] .deck:nth-of-type(n) .deck-head{height:52px;padding-block:1px;grid-template-columns:28px minmax(0,1fr) 68px 104px 52px}
+&[data-density=compact] .deck .deck-head .preview-key-row{grid-template-columns:24px minmax(0,1fr) 24px;grid-template-rows:24px 24px;gap:2px}
+&[data-density=compact] .deck .rb-sync-controls{grid-template-rows:24px 24px;gap:2px}
+&[data-density=compact][data-orientation] .deck:nth-of-type(n) :is(button,select){min-width:28px;min-height:28px;height:28px;font-size:11px}
+&[data-density=compact][data-orientation] .deck:nth-of-type(n) .deck-head button{min-width:24px;min-height:24px;height:24px;font-size:11px;line-height:11px}
+&[data-density=compact][data-orientation] .deck:nth-of-type(n) .deck-head .preview-key-row :is([data-action=keyDown],[data-action=keyUp]){font-size:0}
+&[data-density=compact] .deck .preview-key-row :is([data-action=keyDown],[data-action=keyUp])::after{font-size:16px}
+&[data-density=compact] .deck .platter{height:28px!important}
 &.four-decks[data-density=compact][data-orientation] .deck:nth-of-type(n) .pads{grid-template-columns:repeat(4,minmax(0,1fr));grid-template-rows:repeat(2,24px);gap:4px}
-&.four-decks[data-density=compact][data-orientation] .deck:nth-of-type(n) .pad{height:24px;min-height:24px;font-size:11px}
-&.four-decks[data-density=compact] .deck .pad::before{font-size:11px;color:#b4bec6}
-&.four-decks[data-density=compact] .deck .pad small{font-size:10px}
-&.four-decks[data-density=compact] .deck .wave-wrap{height:24px}
-&.four-decks[data-density=compact][data-orientation] .deck:nth-of-type(n) .deck-foot .loop-line{width:auto;flex:none}
-&.four-decks[data-density=compact] .deck .deck-foot .loop-line button{flex:none;padding-inline:5px}
-&.four-decks[data-density=compact] .deck .rb-track-gain-knob{height:28px;min-height:28px;padding-left:32px;flex:0 0 100px;max-width:100px;font-size:10px!important}
-&.four-decks[data-density=compact] .deck .rb-track-gain-knob>span{display:flex;flex-direction:column;line-height:11px}
-&.four-decks[data-density=compact][data-orientation] .deck:nth-of-type(n) .rb-track-gain-knob input{width:28px!important;max-width:28px!important;height:28px}
-&.four-decks[data-density=compact] .deck .rb-track-gain-knob::before{width:24px;height:24px;top:2px;left:2px}
-&.four-decks[data-density=compact] .deck .rb-track-gain-knob::after{left:13px;top:5px;height:8px;transform-origin:1px 9px}
-&.four-decks[data-density=compact][data-orientation] .deck:nth-of-type(n)>.tempo-control{writing-mode:horizontal-tb}
-&.four-decks[data-density=compact][data-orientation] .deck:nth-of-type(n)>.tempo-control input{width:28px!important;min-width:28px;max-width:28px!important}
+&[data-density=compact][data-orientation] .deck:nth-of-type(n) .pad{height:24px;min-height:24px;font-size:11px}
+&[data-density=compact] .deck .pad::before{font-size:11px;color:#b4bec6}
+&[data-density=compact] .deck .pad small{font-size:10px}
+&[data-density=compact] .deck .wave-wrap{height:24px}
+&[data-density=compact][data-orientation] .deck:nth-of-type(n) .deck-foot .loop-line{width:auto;flex:none}
+&[data-density=compact] .deck .deck-foot .loop-line button{flex:none;padding-inline:5px}
+&[data-density=compact] .deck .rb-track-gain-knob{height:28px;min-height:28px;padding-left:32px;flex:0 0 100px;max-width:100px;font-size:10px!important}
+&[data-density=compact] .deck .rb-track-gain-knob>span{display:flex;flex-direction:column;line-height:11px}
+&[data-density=compact][data-orientation] .deck:nth-of-type(n) .rb-track-gain-knob input{width:28px!important;max-width:28px!important;height:28px}
+&[data-density=compact] .deck .rb-track-gain-knob::before{width:24px;height:24px;top:2px;left:2px}
+&[data-density=compact] .deck .rb-track-gain-knob::after{left:13px;top:5px;height:8px;transform-origin:1px 9px}
+&[data-density=compact][data-orientation] .deck:nth-of-type(n)>.tempo-control{writing-mode:horizontal-tb}
+&[data-density=compact][data-orientation] .deck:nth-of-type(n)>.tempo-control input{width:28px!important;min-width:28px;max-width:28px!important}
 &.four-decks[data-density=compact][data-orientation=vertical]{--tf-deck-height:256px}
-&.four-decks[data-density=compact][data-orientation=vertical][data-library-focus=false] .deck:nth-of-type(n)>.tempo-control{grid-row:2/5}
+&[data-density=compact][data-orientation=vertical][data-library-focus=false] .deck:nth-of-type(n)>.tempo-control{grid-row:2/5}
 &.four-decks[data-density=compact][data-orientation=vertical] .deck:nth-of-type(n){grid-template-rows:52px 28px 24px minmax(var(--tf-pads),1fr) 28px 28px 28px}
 &.four-decks[data-density=compact]:has(.deck[data-rb-pad-mode=Loops]){--tf-pads:80px;--tf-deck-height:calc(284px + var(--tf-wave))}
 &.four-decks[data-density=compact][data-orientation=vertical]:has(.deck[data-rb-pad-mode=Loops]){--tf-deck-height:284px}
@@ -236,5 +243,34 @@
 &[data-wave-size=large]{--tf-vertical-wave:128px}
 &.four-decks[data-wave-size=small]{--tf-vertical-wave:80px}
 &.four-decks[data-wave-size=large]{--tf-vertical-wave:144px}
-&:not(.four-decks)[data-density=compact][data-orientation=vertical][data-wave-size=large]{--tf-deck-height:388px}
+&:not(.four-decks)[data-density=compact][data-orientation=vertical][data-wave-size=large][data-library-focus=false]{--tf-deck-height:392px}
+/* Deck hierarchy and waveform framing preserve the original controls/canvases. */
+&[data-density=compact] .deck{--tf-deck-accent:#8bbce8}
+&[data-density=compact] .deck:nth-of-type(even){--tf-deck-accent:#81c9cd}
+&[data-density=compact][data-orientation] .deck:nth-of-type(n){grid-template-columns:136px minmax(0,1fr) 36px}
+&[data-density=compact] .deck:is(.focused,:focus-within){box-shadow:inset 0 0 0 1px var(--tf-deck-accent)}
+&[data-density=compact] .deck .rb-artwork{grid-row:1}
+&[data-density=compact] .deck .deck-number{position:relative;inset:auto;grid-column:1;grid-row:1;align-self:center;display:grid;place-items:center;z-index:1;width:28px;height:28px;background:#26333e;border:1px solid #415668;color:var(--tf-deck-accent);font:600 14px/1 Arial,sans-serif}
+&[data-density=compact] .deck .deck-title strong{font-size:14px!important;line-height:18px}
+&[data-density=compact] .deck .deck-title small{font-size:10px!important;line-height:12px;color:#a5afb7}
+&[data-density=compact] .deck .preview-deck-time{align-self:center;padding:0;gap:2px;font-variant-numeric:tabular-nums}
+&[data-density=compact] .deck .preview-deck-time time{font-size:12px;color:#e1e7eb}
+&[data-density=compact] .deck .preview-deck-time small{font-size:10px;color:#a5afb7}
+&[data-density=compact] .deck .preview-key-row .deck-key{font-size:11px;font-weight:600;color:#c2dbc9}
+&[data-density=compact][data-orientation] .deck:nth-of-type(n) .platter{width:128px!important;background:#11171b;font-variant-numeric:tabular-nums}
+&[data-density=compact][data-orientation] .deck:nth-of-type(n) .platter strong{font-size:20px;letter-spacing:0}
+&[data-density=compact][data-orientation] .deck:nth-of-type(n) .platter small{font-size:10px}
+&[data-density=compact] .deck :is(.preview-deck-wave,.wave-wrap){outline:1px solid #35424a;outline-offset:-1px}
+&[data-density=compact][data-orientation=horizontal] .preview-deck-wave::before{content:'';position:absolute;left:50%;top:0;bottom:0;width:1px;background:#c4d7e2;opacity:.7;pointer-events:none;z-index:2}
+&[data-density=compact][data-orientation=horizontal] .preview-deck-wave::after{content:'';position:absolute;left:50%;top:0;transform:translateX(-50%);border-inline:4px solid transparent;border-top:5px solid var(--tf-deck-accent);pointer-events:none;z-index:2}
+&[data-density=compact][data-orientation=vertical] .detail-waves{outline:1px solid #35424a;outline-offset:-1px}
+&[data-density=compact] .preview-wave-head>span{font-size:11px;font-weight:600;color:#c8d8e5}
+&[data-density=compact] .deck .wave-label{font-size:9px;line-height:11px;color:#aab7c0;right:3px;bottom:2px;background:#080a0be6}
+&[data-density=compact][data-orientation] .deck:nth-of-type(n) button:not(:disabled):hover{background:#35434e}
+&[data-density=compact][data-orientation] .deck:nth-of-type(n) :is(button,select):focus-visible{outline:2px solid #9ed2ff;outline-offset:-2px}
+&[data-density=compact][data-orientation] .deck:nth-of-type(n) button.active:not(:disabled){background:#205c8c;color:#edf7ff}
+&[data-density=compact][data-orientation] .deck:nth-of-type(n) [data-action=play]{color:#9bdac0}
+&[data-density=compact][data-orientation] .deck:nth-of-type(n) button[data-action=play].active{background:#205c4b;color:#c1f2dc}
+&[data-density=compact][data-orientation] .deck:nth-of-type(n) [data-action=cue]{color:#ecd391}
+
 }

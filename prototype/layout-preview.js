@@ -221,6 +221,19 @@ function paint(){
   syncRotaryControls();
   const source=$('#detail-wave');
   const decks=[...document.querySelectorAll('.deck')];
+  const sourcePanel=source?.closest('.detail-waves');
+  // Render at the destination size so beat labels are not compressed with audio.
+  if(sourcePanel&&document.body.dataset.workspace==='traktor-flat'&&deckWaveforms()){
+    const view=decks[0]?.querySelector('.preview-deck-wave');
+    if(view?.clientWidth&&view.clientHeight){
+      for(const [property,value]of [['width',view.clientWidth+'px'],['height',view.clientHeight*decks.length+'px']]){
+        if(sourcePanel.style.getPropertyValue(property)!==value)sourcePanel.style.setProperty(property,value,'important');
+      }
+      sourcePanel.dataset.previewSourceSizing='true';
+    }
+  }else if(sourcePanel?.dataset.previewSourceSizing){
+    sourcePanel.style.removeProperty('width');sourcePanel.style.removeProperty('height');delete sourcePanel.dataset.previewSourceSizing;
+  }
   if(source&&deckWaveforms()&&source.width&&source.height){
     const ratio=Math.min(2,window.devicePixelRatio||1);
     for(const [index,deck]of decks.entries()){
