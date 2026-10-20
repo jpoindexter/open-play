@@ -6,6 +6,8 @@ Current session, capture receipt and exact re-entry: [CORE_SESSION_032](../docs/
 
 Board readback140open cards: Core23 / Next23 / Later87 / Blocked4 / Approvals2 / Evidence1. CORE-FIX-07 remains first. DOC-001 https://trello.com/c/WXG0t092 tracks the requested documentation site/full manual. MOD-001 https://trello.com/c/c99UaWaj tracks the modularity audit and, **after core acceptance but before broad refactoring**, a documented global reusable skill with its own GitHub repo. Neither site nor skill/repo is implemented by this reporting pass. No advanced parity expansion or structural rewrite now.
 
+Active external review: Claude Code session **Open Play Sync diagnosis**, actual **Fable5.1/High**, started at Jason's request. [Exact packet](codex-to-claude-sync-2026-10-20-2201.md); expected return `handoffs/claude-to-codex-sync-2026-10-20.md`. Review/diagnosis only; Codex owns source integration and the native app. Verify result before acting; no concurrent audio-engine edits.
+
 ---
 
 # Handoff: next core session
