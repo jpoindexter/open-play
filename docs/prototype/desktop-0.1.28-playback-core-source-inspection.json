@@ -1,0 +1,20 @@
+{
+  "version": "0.1.28",
+  "archiveSHA256": "880bb08d74bbbc7635a893fe78c4eb117190709e31bfac22fb54907530643cab",
+  "sourceCommit": "b0d607c98cb3c17cafabf2f8b7a595bf32f55067",
+  "checks": [
+    {
+      "name": "Archive and all declared prototype module bytes match immutable source",
+      "passed": false
+    }
+  ],
+  "scope": "Actual ASAR bytes and controlled packaged host/check-window callbacks, not native UI/audio/device acceptance.",
+  "fullParityVerified": false,
+  "error": {
+    "message": "\"assets/prototype/ui/package-lock.json\" was not found in this archive",
+    "stack": "Error: \"assets/prototype/ui/package-lock.json\" was not found in this archive\n    at Filesystem.getFile (file:///Users/jasonpoindexter/Documents/GitHub/Open%20Play/desktop/node_modules/@electron/asar/lib/filesystem.js:237:19)\n    at extractFile (file:///Users/jasonpoindexter/Documents/GitHub/Open%20Play/desktop/node_modules/@electron/asar/lib/asar.js:226:33)\n    at file:///Users/jasonpoindexter/Documents/GitHub/Open%20Play/scripts/inspect_playback_package.mjs:12:348\n    at check (file:///Users/jasonpoindexter/Documents/GitHub/Open%20Play/scripts/inspect_playback_package.mjs:10:98)\n    at file:///Users/jasonpoindexter/Documents/GitHub/Open%20Play/scripts/inspect_playback_package.mjs:12:8"
+  },
+  "passed": 0,
+  "failed": 1,
+  "completed": false
+}

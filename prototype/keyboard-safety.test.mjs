@@ -21,7 +21,7 @@ test('unintended Command/Ctrl/Alt combinations cannot change playback',async()=>
   }
 });
 test('typing, editable content, composition and modal focus do not trigger deck actions',async()=>{
-  for(const extra of [{isComposing:true},{target:{tagName:'DIV',isContentEditable:true,dataset:{},closest:()=>null}},{target:{tagName:'INPUT',dataset:{},closest:()=>null}}]){
+  for(const extra of [{defaultPrevented:true},{isComposing:true},{target:{tagName:'DIV',isContentEditable:true,dataset:{},closest:()=>null}},{target:{tagName:'INPUT',dataset:{},closest:()=>null}}]){
     const {handlers,calls,event}=fixture();await handlers.keydown(event(extra));assert.deepEqual(calls,[]);
   }
   const {handlers,calls,event}=fixture({modal:true});await handlers.keydown(event({key:'Enter',target:{tagName:'BUTTON',dataset:{action:'cue',deck:'0'},closest:()=>null}}));assert.deepEqual(calls,[]);

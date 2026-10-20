@@ -7,10 +7,10 @@ Jason authorized rebuilding the app after the audit/reconciliation. Finish the t
 ## Changes
 
 - Cue ownership: each deck's current audition owns its track/gesture. Revoke synchronously before replacement, eject, explicit stop, fader-start stop, deck-count reduction and shutdown. Recheck after asynchronous seek/start/gesture boundaries. A stale hold cannot latch the replacement track's Play.
-- Shortcut safety: guard typing/editable content, composing input and modal state before playback. Only intended Command/Ctrl combinations pass; retain cue deletion, search/Prepare/undo, Option sampler stop. Cue release uses physical key identity despite later focus/modifier/character changes. Full shortcut inventory remains UI-002.
+- Shortcut safety: guard typing/editable content, composing input and modal and already-handled event state before playback. Only intended Command/Ctrl combinations pass; retain cue deletion, search/Prepare/undo, Option sampler stop. Cue release uses physical key identity despite later focus/modifier/character changes. Full shortcut inventory remains UI-002.
 - Sync actions persist and return without deck/mixer replacement. The existing clock refreshes Sync/OFF/MASTER/tempo state in place for both Simple and Smart modes. This is a focus correction, not an established fix for the pop.
 - Headphone CUE has a deck-specific accessible label and `aria-pressed`. Help distinguishes temporary deck Cue audition/latch from monitor-bus selection.
-- Local desktop0.1.28 packaging uses immutable current source and opens `workspace-preview.html` directly in the existing sandboxed main frame. Existing playback profile/port and permission policy retained; previous bundles untouched. Assert workspace inline bootstrap matches existing CSP hashes rather than relaxing CSP or adding iframe permissions.
+- Local desktop0.1.29 packaging uses immutable current source and opens `workspace-preview.html` directly in the existing sandboxed main frame. Existing playback profile/port and permission policy retained; previous bundles untouched. Assert workspace inline bootstrap matches existing CSP hashes rather than relaxing CSP or adding iframe permissions.
 
 ## Executed focused checks
 
@@ -29,3 +29,13 @@ Keep CORE-FIX-01 open: intermittent Sync pop reported, latest actual retry quiet
 CORE-FIX-05 https://trello.com/c/x35fpHyL ; CORE-FIX-06 https://trello.com/c/7qQ76Z2V ; parent CORE-001 https://trello.com/c/LGGdtSa3 . Implementation progress recorded without closing broad criteria. Existing133 cards and model guidance remain.
 
 Next action: package current committed source as0.1.28, verify archive identity, launch the actual new app and record observed workspace/control behavior. Continue one practical listening session; stop extra polish/research when a core gap is ready to test.
+
+## Native checkpoint0.1.28
+
+Source `b0d607c`, ASAR `880bb08d74bbbc7635a893fe78c4eb117190709e31bfac22fb54907530643cab` launched through CUA as the actual new Electron app. Both saved real MP3s loaded using normal row selection and Shift+Left/Right. Native UI showed independent timer advancement and non-silent master meters for each track, paused counterpart, then both stopped with the meter at −∞. No human listening result is inferred.
+
+Paused incoming Sync matched115.5→121BPM, preserved the same focused Sync button and updated OFF state. Command+I left decks paused. Temporary Cue key press/release returned deck1paused at0; sustained audible audition/latch remains pending. Headphone Cue1selected and deselected exposed the correct deck-specific state; physical routing not tested. All ten library previews were rendered. Private screenshot/AX: `local-evidence/core-desktop-028/`.
+
+Initial all-source archive inspection failed because Electron excludes `prototype/ui/package-lock.json`. Explicitly recorded that development-only omission; runtime inspection then checked520runtime files and all80declared module hashes, staged host/metadata/fixture hashes, exclusion boundaries, entry route, sandbox and device permission decisions (5/5 checks). Both original failed receipt and corrected inspection are preserved. Not a missing runtime module.
+
+A subsequent focused red test exposed already-prevented keyboard events reaching global playback. Added the one-line guard; eight focused tests pass. Final rebuild is0.1.29, retaining0.1.28and all prior bundles. The0.1.28runtime observations remain scoped to that source; observe0.1.29startup and the changed key/control path separately.

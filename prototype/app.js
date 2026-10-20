@@ -1770,7 +1770,7 @@ $("#columns").onclick = () => panels.columns();
 $("#library-tools").onclick = () => panels.libraryTools();
 document.addEventListener("keydown", async (e) => {
   const tag = e.target.tagName;
-  if (e.isComposing || e.target.isContentEditable || ["INPUT", "TEXTAREA", "SELECT"].includes(tag) || $("#modal").open) return;
+  if (e.defaultPrevented || e.isComposing || e.target.isContentEditable || ["INPUT", "TEXTAREA", "SELECT"].includes(tag) || $("#modal").open) return;
   const mod = e.metaKey || e.ctrlKey;
   const k = mod && e.shiftKey && /^Digit[0-9]$/.test(e.code || "") ? e.code.slice(-1) : e.key.toLowerCase();
   const cueDelete = mod && e.shiftKey && /^[0-9]$/.test(k);

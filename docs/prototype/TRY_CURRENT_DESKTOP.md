@@ -1,3 +1,17 @@
+# Try desktop0.1.29 — current core candidate
+
+Open `Start Open Play Current Test.command` or `Start Open Play Playback Test 0.1.29.command`. Close another playback-test version first; all use the existing profile and port18775. Earlier bundles/launchers remain. This version opens the chosen rekordbox workspace directly with all custom controls and library previews.
+
+The app initially loads demo decks; select each saved real song row and use Shift+Left/Right or its deck Load. Choose Horizontal/Compact, Sync OFF and reset both pitch controls. The last recorded master gain is−12dB; choose a comfortable listening level. Original music is unchanged.
+
+Core session: manual incoming tempo, T/Y left or G/H right momentary jog, one manual transition, each channel LOW/MID/HIGH/reset, temporary Cue set/hold/release then Cue+Play latch, final pause/silence. Keep full keyboard inventory and intermittent Sync pop OPEN; suitable connected hardware is required for independent headphone routing and controller acceptance. Capture the next actual pop instead of repeating clean matrices.
+
+See [current implementation/native evidence](CORE_DJ_REBUILD_2026-10-20.md). Packaging is not listening acceptance or full parity.
+
+---
+
+## Historical0.1.27 guide
+
 # Try desktop0.1.27 — core DJ workflow
 
 Current local candidate adds drag-to-scrub on the detailed RGB waveforms. [Observed results](desktop-0.1.27-playback-observation.json), [focused review](CORE_WAVEFORM_SCRUB_195_REVIEW.md).
