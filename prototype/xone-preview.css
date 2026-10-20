@@ -42,3 +42,19 @@
  & #mixer .fader-group::after{top:calc(1px + (1 - var(--preview-level,.8))*(100% - 16px));left:calc(50% - 9px);width:28px;height:14px;z-index:3;pointer-events:none;border:1px solid #69757d;background:linear-gradient(#252b30 0 40%,#f0f5f8 40% 55%,#252b30 55%);border-radius:1px}
  & #mixer .fader-group[data-fader-detent=true]::after{border-color:#9edbff;background:linear-gradient(#263b48 0 40%,#c5eaff 40% 55%,#263b48 55%)}
 }
+
+/* Crossfader uses the same cap material as the channel faders. Its centre
+   stripe runs vertically so the position reads along the horizontal rail. */
+#workspace-preview:is([data-workspace=rekordbox],[data-workspace=traktor-flat]){
+ & .rb-cross-controls .crossfader{position:relative;display:flex;flex-direction:column;height:38px;line-height:10px;gap:0}
+ & .rb-cross-controls .crossfader input{appearance:none;position:relative;z-index:1;display:block;height:28px;min-height:28px;margin:0;padding:0;border:0;background:transparent;touch-action:none;direction:ltr}
+ & .crossfader input::-webkit-slider-runnable-track{height:4px;border:1px solid #4b5963;border-radius:0;background:#06090b}
+ & .crossfader input::-webkit-slider-thumb{appearance:none;width:24px;height:22px;margin-top:-10px;border:1px solid #69757d;border-radius:1px;background:linear-gradient(to right,#252b30 0 43%,#f0f5f8 43% 57%,#252b30 57%);box-shadow:none}
+ & .crossfader input::-moz-range-track{height:2px;border:1px solid #4b5963;border-radius:0;background:#06090b}
+ & .crossfader input::-moz-range-thumb{width:22px;height:20px;border:1px solid #69757d;border-radius:1px;background:linear-gradient(to right,#252b30 0 43%,#f0f5f8 43% 57%,#252b30 57%);box-shadow:none}
+ & .crossfader .preview-fader-ticks{display:block;position:absolute;inset:auto 12px 6px;height:16px;pointer-events:none;z-index:0}
+ & .crossfader .preview-fader-ticks i{position:absolute;left:calc(var(--tick)*100%);right:auto;top:4px;bottom:auto;width:1px;height:8px;background:#aab6be}
+ & .crossfader .preview-fader-ticks i.major{top:1px;height:14px;background:#e1e8ed}
+ & .crossfader[data-fader-detent=true] input::-webkit-slider-thumb{border-color:#9edbff;background:linear-gradient(to right,#263b48 0 43%,#c5eaff 43% 57%,#263b48 57%)}
+ & .crossfader:focus-within{outline:2px solid #9ed2ff;outline-offset:1px}
+}

@@ -1,6 +1,7 @@
-## Current checkpoint — awaiting real-track listening
+## Current checkpoint — independent playback and right-channel mixing heard
 
-The goal is blocked on external acceptance input, not complete. The visible browser panel was revalidated: rekordbox/Compact, both distinct saved real MP3s loaded at0/paused, ten library previews. A fresh real-track LEFT-Play/listening confirmation remains unanswered; earlier audible reports were demos. Hercules is disconnected/computer audio. No new core failure was reproduced in this audit and no unrelated work is justified. Resume from the existing LEFT-Play question, then complete right-deck, manual/Sync transition and clean stop. Hardware/headphone separation requires suitable connected outputs later. HTML-only/no-native boundary remains. Do not restart the project, repeat solved matrices or count geometry/meters as musical acceptance.
+Jason confirmed both distinct real MP3s play independently, channel B LEVEL mutes at the bottom and restores sound when raised, and the crossfader silences the right track at the left end/restores it at the right while transport continues. These are user-confirmed audible checks, not full mixing/beatmatch acceptance. HTML222 adds a matching rectangular crossfader cap and centered ticks on the existing native range; pointer movement/center snap, keyboard fine adjustment/endpoints and actual two/four-deck Compact fit were observed. Returned to two decks and reloaded the same real tracks paused at0 after the stylesheet refresh. Library previews retained. Next: practical EQ/filter and manual pitch/jog/Sync transitions. Hercules disconnected/computer audio; physical controls and headphone/master separation remain unverified. No desktop rebuild or extras.
+
 
 ---
 

@@ -37,3 +37,18 @@ Control was moved to the user-facing tab212. That paused tab was refreshed to th
 With control correctly attached to the user-facing panel, actual DOM inspection showed the horizontal pitch input height was2px. Root cause: its label inherited the original vertical writing mode, while its children/row had been laid out horizontally; flex sizing compressed the input inside the20px row. The scoped rekordbox label now explicitly uses horizontal-tb. Actual reload shows both inputs61×15CSSpx. No deck-height redesign or audio-engine change was made.
 
 On real trackA while both decks were paused, an actual pointer click to the right produced+4.8% /126.8BPM; center returned0% /121.0BPM. ArrowRight then produced+0.1% /121.1BPM; ArrowLeft restored0. These establish the affected direction/center/fine UI paths, not audible pitch quality or full manual beatmatching. Both real tracks were restored at0/paused and the existing fresh real-track LEFT-Play question remains pending. Screenshot: private local-evidence/rekordbox-core-221/visible-panel.png. Do not count earlier audible generated demos as real-MP3 acceptance.
+
+
+## Fresh real-track listening continuation
+
+Jason answered the explicit visible-panel LEFT “Moonglow” question: “Yes—real track plays and timer moves.” A subsequent read of the same tab212 shows the correct real titles, LEFT paused00:06.9 and RIGHT paused00:12.1. Count LEFT audible playback as user-confirmed; transport positions are observed. Do not infer audible RIGHT independence from its nonzero timer. A new single-action RIGHT Play/listening question is pending. Current output is computer audio, Hercules disconnected. Mixing/manual/Sync and clean-stop acceptance remain open; no source/UI/native changes in this continuation.
+
+
+RIGHT listening follow-up: Jason confirmed “Yes—right plays; left stays paused” on the two identified real MP3s. Subsequent same-panel DOM: LEFT remains00:06.9/paused; RIGHT00:15.3/paused (previously00:12.1). Independent playback is user-confirmed; no simultaneous-mix acceptance inferred. RIGHT channel level reads0.8. Next single practical check is RIGHT channel LEVEL down/up with its transport running. No code/native changes.
+
+
+## HTML222 — matching crossfader cap; listening progress
+
+Jason confirms channel B LEVEL is silent at bottom/restores sound when raised, then crossfader LEFT silences the right track/RIGHT restores it while its timer continues. DOM subsequently shows LEFT unchanged00:06.9/paused and RIGHT00:38.9/paused; crossfader−0.08, EQ/filter neutral. These are current real-track user listening results, not an accepted complete transition.
+
+Requested presentation fix: `prototype/xone-preview.css` gives rekordbox/Traktor-flat crossfaders the channel-cap material, larger rectangular grip with vertical position stripe, centered scale marks and keyboard focus outline. Original native input, values, handlers, assignments and center detent retained. Actual visible panel checked with pointer travel, center0, keyboard+0.01, Home−1/End+1; two/four-deck Compact render observed. No audio/MIDI/desktop code changes. Refresh required loading the same two real tracks again through normal library/Load; restored two decks, both paused0 and crossfader0. Ten library waveform previews remain. Next core step: EQ/filter listening, then manual/Sync transition and stop; physical cue separation deferred until suitable outputs available. Screenshot: private `local-evidence/rekordbox-core-222/crossfader-cap.png`.
