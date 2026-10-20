@@ -15,9 +15,9 @@
 &[data-orientation][data-density] main{
  display:grid;grid-template-columns:minmax(0,1fr) var(--tf-center) minmax(0,1fr);
  grid-template-rows:var(--tf-deck-height) 44px var(--rb-library-tracks,minmax(200px,1fr));
- gap:4px;padding:4px;background:var(--tf-bg);height:calc(100dvh - 122px);min-height:0;
+ gap:4px;padding:4px;background:var(--tf-bg);height:calc(100dvh - var(--workspace-chrome-height,122px));min-height:0;
 }
-&.four-decks[data-orientation][data-density] main{grid-template-rows:var(--tf-deck-height) var(--tf-deck-height) 44px var(--rb-library-tracks,minmax(180px,1fr));height:auto;min-height:calc(100dvh - 122px)}
+&.four-decks[data-orientation][data-density] main{grid-template-rows:var(--tf-deck-height) var(--tf-deck-height) 44px var(--rb-library-tracks,minmax(180px,1fr));height:auto;min-height:calc(100dvh - var(--workspace-chrome-height,122px))}
 &[data-orientation][data-density] .deck:nth-of-type(n){
  display:grid;grid-template-columns:120px minmax(0,1fr) 36px;
  grid-template-rows:44px 28px var(--tf-wave) 24px var(--tf-pads) 28px 24px 24px;
@@ -214,7 +214,7 @@
 &[data-orientation][data-density] .rb-mixer-band .rb-monitor-controls{gap:12px}
 & .rb-monitor-knob{font-size:11px}
 /* No hidden source panel can steal the FX/library grid tracks. */
-&[data-orientation][data-density] main:has(#panel:not([hidden])){height:auto;min-height:calc(100dvh - 122px)}
+&[data-orientation][data-density] main:has(#panel:not([hidden])){height:auto;min-height:calc(100dvh - var(--workspace-chrome-height,122px))}
 &.four-decks[data-library-focus=true][data-density=compact]{--tf-wave:0px;--tf-pads:0px;--tf-deck-height:204px}
 &.four-decks[data-library-focus=true][data-density=compact][data-orientation] .deck:nth-of-type(n){grid-template-rows:52px 28px 0px 24px 0px 28px 28px 28px}
 &.four-decks[data-library-focus=true][data-density=compact][data-orientation] .deck:nth-of-type(n) .wave-wrap{grid-row:4}

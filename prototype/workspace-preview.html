@@ -1,19 +1,14 @@
 <!doctype html>
 <html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Open Play — Workspace layouts</title><link rel="stylesheet" href="vendor/astryx/controls.css"><link rel="stylesheet" href="styles.css"><link rel="stylesheet" href="performance-tokens.css"><link rel="stylesheet" href="performance-theme.css"><link rel="stylesheet" href="layout-preview.css"><link rel="stylesheet" href="rekordbox-preview.css"><link rel="stylesheet" href="serato-hybrid-preview.css"><link rel="stylesheet" href="traktor-flat-preview.css"><link rel="stylesheet" href="astryx-preview.css"><link rel="stylesheet" href="xone-preview.css"></head>
 <body id="workspace-preview" data-workspace="rekordbox" data-preview-shell="flat">
-<div class="workspace-bar">
- <a class="workspace-brand" href="layout-preview.html">open<span>play</span><small>WORKSPACE PREVIEW</small></a>
- <div class="workspace-switch" role="group" aria-label="Workspace layout">
-  <button data-workspace-choice="serato" aria-pressed="false" disabled>Serato style</button>
-  <button data-workspace-choice="traktor" aria-pressed="false" disabled>Traktor style</button>
-   <button data-workspace-choice="hybrid" aria-pressed="false" disabled>Original hybrid</button>
-   <button data-workspace-choice="traktor-flat" aria-pressed="false" disabled>Traktor flat</button>
-   <button data-workspace-choice="serato-hybrid" aria-pressed="false" disabled>Serato hybrid</button>
-   <button data-workspace-choice="rekordbox" aria-pressed="true" disabled>rekordbox style</button>
- </div>
- <span class="workspace-caption" id="workspace-caption" role="status">Performance layout · rekordbox reference</span>
- <div class="preview-zoom"><span>WAVEFORM</span><button id="preview-zoom-out" aria-label="Zoom detailed waveforms out" disabled>−</button><output id="preview-zoom-scale">4s</output><button id="preview-zoom-in" aria-label="Zoom detailed waveforms in" disabled>+</button></div>
-</div>
+<template id="workspace-layout-options"><div class="workspace-layout-options"><h3>Workspace layout</h3><div class="workspace-switch" role="group" aria-label="Workspace layout">
+  <button data-workspace-choice="serato" aria-pressed="false">Serato style</button>
+  <button data-workspace-choice="traktor" aria-pressed="false">Traktor style</button>
+   <button data-workspace-choice="hybrid" aria-pressed="false">Original hybrid</button>
+   <button data-workspace-choice="traktor-flat" aria-pressed="false">Traktor flat</button>
+   <button data-workspace-choice="serato-hybrid" aria-pressed="false">Serato hybrid</button>
+   <button data-workspace-choice="rekordbox" aria-pressed="true">rekordbox style</button>
+ </div></div></template>
 <div class="hybrid-controls" aria-label="Workspace display settings">
  <label for="preview-orientation">Waveforms <select id="preview-orientation"><option value="horizontal" selected>Horizontal</option><option value="vertical">Vertical</option></select></label>
  <label for="preview-density">Decks <select id="preview-density"><option value="expanded" selected>Full</option><option value="compact">Compact</option></select></label>
@@ -21,6 +16,7 @@
  <button id="preview-library-focus" aria-pressed="false">Library focus</button>
  <span class="display-hint">Pads opens cues &amp; performance modes</span>
  <button id="preview-reset">Reset layout</button>
+ <div class="preview-zoom"><span>WAVEFORM</span><button id="preview-zoom-out" aria-label="Zoom detailed waveforms out" disabled>−</button><output id="preview-zoom-scale">4s</output><button id="preview-zoom-in" aria-label="Zoom detailed waveforms in" disabled>+</button></div>
 </div>
 <header class="toolbar" data-startup-inert inert>
  <button id="day" title="Switch day / night appearance" aria-label="Switch day mode">☼</button>
@@ -31,7 +27,7 @@
  <strong class="brand">open<span>play</span><small>DJ</small></strong><div class="master-label"><label for="master-level">Master</label><input id="master-level" aria-label="Master output level in decibels" title="Master −12 to +12dB · Control-click:0dB · Alt-click:+3dB" type="range" min="-12" max="12" step="any" value="0"><output id="master-level-value" for="master-level">0.0dB</output><meter id="master-meter" aria-label="Master stereo sample peak relative to nominal level" min="-60" max="9" low="0" high="3" optimum="-6" value="-60"></meter><output id="master-peak-value">−∞</output><span id="master-limit" aria-label="Master limiter idle" title="Stereo sample-peak limiter ·3dB headroom">—</span></div>
  <button data-panel="hardware">Devices</button><button data-panel="help">Help</button><button data-panel="settings" aria-label="Open Setup">⚙</button>
 </header>
-<div class="review-bar" data-startup-inert inert><span><i></i> LAYOUT PREVIEW · Existing Open Play player · Desktop app unchanged</span><button data-panel="coverage">Coverage & evidence</button><span id="audio-status">Loading controls…</span></div>
+<div class="review-bar" data-startup-inert inert><span><i></i> WORKSPACE · Existing Open Play player</span><button data-panel="coverage">Coverage & evidence</button><span id="audio-status">Loading controls…</span></div>
 <main data-startup-inert inert>
  <section id="performance" aria-label="Decks and waveforms"><div id="decks"></div></section>
  <section id="mixer" aria-label="Mixer"></section>

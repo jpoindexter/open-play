@@ -127,9 +127,9 @@ body[data-preview-shell=flat] .transport [data-action=cue]::after{content:none}
 body[data-preview-shell=flat]{--rb-wave-height:132px;--rb-pair-height:150px;--rb-four-height:calc(var(--grid-16)*4 + var(--grid-9))}
 body[data-preview-shell=flat][data-wave-size=small]{--rb-wave-height:88px;--rb-pair-height:120px}
 body[data-preview-shell=flat][data-wave-size=large]{--rb-wave-height:180px;--rb-pair-height:200px}
-body[data-preview-shell=flat][data-orientation=horizontal] main{height:calc(100dvh - 122px);min-height:0;grid-template-rows:var(--rb-wave-height) auto var(--grid-12) var(--rb-library-tracks,minmax(180px,1fr))}
+body[data-preview-shell=flat][data-orientation=horizontal] main{height:calc(100dvh - var(--workspace-chrome-height,122px));min-height:0;grid-template-rows:var(--rb-wave-height) auto var(--grid-12) var(--rb-library-tracks,minmax(180px,1fr))}
 body[data-preview-shell=flat][data-orientation=horizontal] .detail-horizontal{height:var(--rb-wave-height)!important}
-body[data-preview-shell=flat][data-orientation=vertical] main{height:calc(100dvh - 122px);min-height:0;grid-template-columns:minmax(0,1fr) 280px minmax(0,1fr);grid-template-rows:var(--rb-pair-height) var(--rb-two-mixer-height) var(--grid-12) var(--rb-library-tracks,minmax(180px,1fr))}
+body[data-preview-shell=flat][data-orientation=vertical] main{height:calc(100dvh - var(--workspace-chrome-height,122px));min-height:0;grid-template-columns:minmax(0,1fr) 280px minmax(0,1fr);grid-template-rows:var(--rb-pair-height) var(--rb-two-mixer-height) var(--grid-12) var(--rb-library-tracks,minmax(180px,1fr))}
 body[data-preview-shell=flat][data-orientation=vertical] .deck:nth-of-type(odd){grid-column:1;grid-row:1/3}
 body[data-preview-shell=flat][data-orientation=vertical] .deck:nth-of-type(even){grid-column:3;grid-row:1/3}
 body[data-preview-shell=flat][data-orientation=vertical] .detail-waves{grid-column:2!important;grid-row:1!important;height:var(--rb-pair-height)!important;border:0;border-radius:0}
@@ -340,7 +340,7 @@ body[data-preview-shell=flat] .rb-fx-depth-knob:focus-within{outline:2px solid #
    They must never share the deck or mixer rows. Row follows the active layout. */
 body[data-preview-shell=flat][data-orientation] main:has(#panel:not([hidden])){
  --rb-library-tracks:minmax(220px,max-content) minmax(180px,1fr);
- height:auto;min-height:calc(100dvh - 122px);
+ height:auto;min-height:calc(100dvh - var(--workspace-chrome-height,122px));
 }
 body[data-preview-shell=flat][data-orientation] main:has(#panel:not([hidden])) #panel:not([hidden]){grid-column:1/-1;grid-row:var(--rb-panel-row);position:relative;min-width:0;min-height:220px;align-self:stretch;background:#202020;isolation:isolate}
 body[data-preview-shell=flat][data-orientation] main:has(#panel:not([hidden])) .library{grid-row:var(--rb-library-open-row)}

@@ -12,7 +12,7 @@ const {installLibraryWaveforms}=await import('./library-waveform-preview.js');
 installLibraryWaveforms(window.openPlay);
 
 const $=selector=>document.querySelector(selector);
-const choices=[...document.querySelectorAll('[data-workspace-choice]')];
+const choices=[...$('#workspace-layout-options').content.querySelectorAll('[data-workspace-choice]')];
 const letters=['A','B','C','D'];
 const layout=$('#layout');
 const display={orientation:'horizontal',density:'compact',size:'medium',library:false,crates:true,mixer:true,panels:new Map()};
@@ -172,6 +172,7 @@ function updateDial(label){
   label.style.setProperty('--dial-angle',`${-135+ratio*270}deg`);
 }
 function choose(workspace){
+  if(!choices.some(button=>button.dataset.workspaceChoice===workspace))return;
   const previous=document.body.dataset.workspace;
   if(previous!==workspace){
     if(['hybrid','rekordbox','serato-hybrid','traktor-flat'].includes(previous))workspaceDisplays.set(previous,{orientation:display.orientation,density:display.density});
@@ -180,11 +181,14 @@ function choose(workspace){
   document.body.dataset.workspace=workspace;
   document.body.dataset.previewShell=['rekordbox','serato-hybrid','traktor-flat'].includes(workspace)?'flat':'legacy';
   if(previous!==workspace){const footer=$('.preview-mixer-footer');if(footer&&footer.parentNode!==$('#mixer'))footer.remove();layout.dispatchEvent(new Event('change',{bubbles:true}));}
-  for(const button of choices)button.setAttribute('aria-pressed',String(button.dataset.workspaceChoice===workspace));
-  $('#workspace-caption').textContent=workspace==='traktor-flat'?'Traktor layout · flat surfaces · existing player':workspace==='serato-hybrid'?'Serato-led decks · rekordbox mixer & library':workspace==='traktor'?'Two decks. Mixer in the middle.':workspace==='rekordbox'?'rekordbox 7 · Performance layout reference':workspace==='hybrid'?'Compare the beats. Mix in the middle.':'Stacked waveforms. Familiar deck displays.';
+  for(const button of document.querySelectorAll('[data-workspace-choice]'))button.setAttribute('aria-pressed',String(button.dataset.workspaceChoice===workspace));
   applyDisplay();
+  window.openPlay.state.settings['Workspace Layout']=workspace;persist();
 }
-for(const button of choices){button.disabled=false;button.onclick=()=>choose(button.dataset.workspaceChoice);}
+document.addEventListener('click',event=>{const button=event.target.closest?.('[data-workspace-choice]');if(button)choose(button.dataset.workspaceChoice);});
+const chrome=[...document.querySelectorAll('.hybrid-controls,.toolbar,.review-bar')];
+const chromeSize=new ResizeObserver(()=>document.body.style.setProperty('--workspace-chrome-height',chrome.reduce((height,node)=>height+node.getBoundingClientRect().height,0)+'px'));
+for(const region of chrome)chromeSize.observe(region);
 for(const [id,direction]of [['preview-zoom-out','out'],['preview-zoom-in','in']]){
   const button=$('#'+id);button.disabled=false;
   button.onclick=()=>document.querySelector(`[data-wave-zoom="${direction}"]`)?.click();
@@ -216,7 +220,8 @@ document.addEventListener('click',event=>{if(more.open&&(!more.contains(event.ta
 // Disk import must survive hiding the crates sidebar.
 const importButton=$('#import');importButton.textContent='＋ Import';importButton.setAttribute('aria-label','Import audio from disk');$('#preview-crates').after(importButton);
 const mixerToggle=document.createElement('button');mixerToggle.id='preview-mixer-toggle';mixerToggle.className='rb-only';mixerToggle.textContent='Mixer';mixerToggle.setAttribute('aria-label','Show or hide mixer');mixerToggle.setAttribute('aria-pressed','true');mixerToggle.onclick=()=>{display.mixer=!display.mixer;applyDisplay();};$('#preview-library-focus').before(mixerToggle);
-choose('rekordbox');
+const savedLayout=window.openPlay.state.settings['Workspace Layout'];
+choose(choices.some(button=>button.dataset.workspaceChoice===savedLayout)?savedLayout:'rekordbox');
 
 // Read-only visual projection of our existing renderer. No second analysis or
 // transport. Crop its horizontal rows into Traktor deck views, retaining

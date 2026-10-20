@@ -1,5 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
+import {readFileSync} from 'node:fs';
+import vm from 'node:vm';
 import {createCueHolds} from './holds.js';
 function fixture() {
   const d={index:0,track:{id:'a',cues:[]},cue:2,position:2,playing:false};
@@ -45,4 +47,25 @@ test('cancelling a pending Cue plus Play still prevents a queued restart',async(
   holds.latch(d);await holds.release('i');holds.cancelDeck(d);
   pending.shift()();await press;
   assert.deepEqual(starts,[]);assert.equal(d.playing,false);
+});
+test('actual Play stop revokes released Cue ownership before pending seek completes',async()=>{
+  const {d,holds,starts,pending}=fixture();
+  const source=readFileSync(new URL('./app.js',import.meta.url),'utf8');
+  const begin=source.indexOf('async function play(d) {');
+  const end=source.indexOf('\nfunction deckQuantize',begin);
+  assert(begin>=0&&end>begin);
+  const playRequests=new WeakMap();
+  const context={cueHolds:holds,pitchPlay:{latch:()=>false},playRequests,
+    cancelPendingPlay:d=>{playRequests.delete(d);d.playQueued=false;},
+    slicer:{cancelDeck(){}},stemSlipControls:{cancelDeck(){}},
+    engine:{pause:d=>{d.playing=false;d.processing=false;}},smartSync:{paused(){}},
+    persist(){},renderDecks(){},renderTracks(){}};
+  vm.runInNewContext(source.slice(begin,end)+';globalThis.realPlay=play;',context);
+  const press=holds.press('i',d);
+  holds.latch(d);await holds.release('i');
+  d.processing=true;
+  await context.realPlay(d);
+  pending.shift()();await press;
+  assert.deepEqual(starts,[],'stopped transport must not restart from the old Cue request');
+  assert.equal(d.playing,false);
 });

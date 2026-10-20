@@ -12,8 +12,7 @@
 .toolbar{height:42px}.toolbar .brand{display:none}.toolbar .master-label{margin-left:auto}
 .toolbar [data-panel="sampler"],.toolbar [data-panel="scratch"],.toolbar [data-panel="flip"],.toolbar [data-panel="video"],.toolbar [data-panel="coverage"]{display:none}
 .review-bar{height:23px}.review-bar>button{display:none}.review-bar>span:first-child{font-size:9px}
-main{height:calc(100dvh - 119px);min-height:650px}.preview-deck-wave{display:none}
-body[data-workspace="serato"] .preview-zoom{visibility:hidden}
+main{height:calc(100dvh - var(--workspace-chrome-height,119px));min-height:650px}.preview-deck-wave{display:none}
 body[data-workspace="serato"] #decks{padding:4px;gap:4px}
 body[data-workspace="serato"] .detail-horizontal{height:160px}
 /* Keep the same control nodes. The central mixer becomes a grid sibling of the
@@ -97,7 +96,7 @@ body:is([data-workspace="traktor"],:is([data-workspace="hybrid"],[data-preview-s
 body:is([data-workspace="traktor"],:is([data-workspace="hybrid"],[data-preview-shell="flat"])) tbody tr.selected{background:#07546b!important}
 body:is([data-workspace="traktor"],:is([data-workspace="hybrid"],[data-preview-shell="flat"])) #panel:not([hidden]){grid-column:1/-1;grid-row:2}
 body:is([data-workspace="traktor"],:is([data-workspace="hybrid"],[data-preview-shell="flat"])) main:has(#panel:not([hidden])) .library{grid-row:3}
-body:is([data-workspace="traktor"],:is([data-workspace="hybrid"],[data-preview-shell="flat"])).four-decks main{height:auto;min-height:calc(100dvh - 119px);grid-template-rows:auto auto minmax(260px,1fr)}
+body:is([data-workspace="traktor"],:is([data-workspace="hybrid"],[data-preview-shell="flat"])).four-decks main{height:auto;min-height:calc(100dvh - var(--workspace-chrome-height,119px));grid-template-rows:auto auto minmax(260px,1fr)}
 body:is([data-workspace="traktor"],:is([data-workspace="hybrid"],[data-preview-shell="flat"])).four-decks #mixer{grid-row:1/3;grid-template-columns:1fr 1fr;align-content:start}
 body:is([data-workspace="traktor"],:is([data-workspace="hybrid"],[data-preview-shell="flat"])).four-decks .library{grid-row:3}
 body:is([data-workspace="traktor"],:is([data-workspace="hybrid"],[data-preview-shell="flat"])).four-decks .deck-disc{display:contents}
@@ -482,4 +481,4 @@ body[data-preview-shell=flat] .hybrid-controls :is(button,select){min-height:24p
 body[data-preview-shell=flat] .toolbar{height:32px;padding-block:3px}
 body[data-preview-shell=flat] .toolbar :is(button,select){min-height:24px;height:24px;font-size:10px}
 body[data-preview-shell=flat] .review-bar{height:16px;font-size:8px}
-body[data-preview-shell=flat] main{height:calc(100dvh - 122px)}
+body[data-preview-shell=flat] main{height:calc(100dvh - var(--workspace-chrome-height,122px))}

@@ -1,16 +1,14 @@
-## Current status — core DJ test0.1.30 (20 October 2026)
+## Current status — core DJ continuation, 20 October 2026
 
-Active goal remains the practical two-real-track DJ workflow. Jason authorized local rebuilding; older HTML-only/stop instructions below are historical. **Current native candidate0.1.30/source9447710is built, archive/runtime-inspected5/5 and actually open** in rekordbox Horizontal/Compact with both real songs paused0, SyncOFF, pitch0, EQneutral and ten library previews. Current/versioned launchers target0.1.30; prior bundles remain.
+Current installed test remains desktop **0.1.30 / source9447710**. Jason confirmed independent right tempo/reset and G/H audible jog/release in that actual app. He subsequently reported an **audible beatmatching/Sync failure**; the core mix is not accepted. EQ/Cue/latch/manual transition/final clean-stop listening remain open. Intermittent Sync pop is a separate open defect. Current mode observed: Simple Sync / Snap to Beatgrid on; computer audio, no current physical headphone/controller acceptance.
 
-Cue/keyboard ownership fixes are in place. This continuation reproduced an early Cue+Play latch failure: releasing Cue before pending preparation finished discarded the explicit Play intent. One-line correction honors only a current latch; cancellation still prevents restart. Ten focused cue/keyboard regressions and19existing lifecycle checks pass. Source and controlled checks are not fresh listening acceptance.
+Source work for the next local0.1.31 candidate: six existing layout choices moved from the top style bar into Settings → Layouts, with saved selection and measured chrome height; wave zoom retained. A new actual-Play-handler regression reproduced stale released Cue ownership restarting after explicit stop. The missing cancellation call is corrected;11focused Cue/keyboard checks pass. Three controlled Simple/Smart phase-policy checks pass, not real-track musical acceptance. No speculative Sync DSP patch or mode change. Candidate packaging and native Settings acceptance still pending.
 
-Earlier native0.1.29software checks: independent right tempo+0.1%/reset with left unchanged; all six EQ controls cut−24/reset0; right G/Hholds/releases leave nominal tempo unchanged and no visible error. These establish control behavior, not audible bands or transient jog rate. Earlier0.1.28transport/meters, Sync focus and PFL accessible-state evidence remains tied to that source. [Full evidence and gates](../docs/prototype/CORE_DJ_REBUILD_2026-10-20.md).
-
-Next is one hands-on manual beatmatch/jog/EQ/temporary-Cue/latch/clean-stop listening session. The automation tool rejects simultaneous non-modifier keys, so do not treat native Cue+Play as executed. Readiness question remains pending. Intermittent Sync pop stays OPEN; suitable hardware is needed for physical cue/master separation and Hercules acceptance. No stems/advanced FX/video/layout expansion or full-core/parity claim. Trello criteria/history/model guidance stay intact; current Cue defect is tracked on CORE-FIX-05/DEK-015, not a new card.
+[Sync audit](../docs/prototype/SYNC_ALIGNMENT_AUDIT_2026-10-20.md) separates tempo, beat phase, downbeat and rendering; no equal-bar-number assumption. Board readback138cards: Core23 / Next21 / Later87 / Blocked4 / Approvals2 / Evidence1. CORE-FIX-07 first; remaining core safety/listening next; then existing layouts UI-001, Settings Back UI-SET-01, toolbar split UI-TOOL-01, mixer spacing UI-MIX-01 and resets UI-RESET-01. Requested controls/previews/variants remain required. Advanced parity deferred; no full-core completion claim.
 
 ---
 
-## Handoff: next core session
+# Handoff: next core session
 
 Use actual native0.1.30/source9447710with both real songs paused0. Pending user readiness/listening is the next gate: independent manual tempo and jog, one manual transition, per-channel EQ/reset, temporary Cue hold/release then Cue+Play latch, clean stop. Computer audio/Hercules disconnected is the last reported setup; no physical claims without hardware. The browser panel is separate. The combined Cue+Play automation attempt was rejected before input; do not claim native latch acceptance from controlled tests. No extra broad matrices or cosmetic work while this musical gate awaits the user.
 

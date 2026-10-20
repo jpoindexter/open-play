@@ -819,6 +819,7 @@ async function play(d) {
   if(pending&&pending.track!==d.track)cancelPendingPlay(d);
   if (d.playing || d.processing || playRequests.has(d)) {
     cancelPendingPlay(d);
+    cueHolds.cancelDeck(d);
     slicer.cancelDeck(d);
     stemSlipControls.cancelDeck(d);
     engine.pause(d);
