@@ -4,7 +4,7 @@ import {mkdir,copyFile,writeFile} from 'node:fs/promises';
 await mkdir('../vendor/astryx',{recursive:true});
 const result=await build({metafile:true,entryPoints:['controls.jsx'],bundle:true,format:'esm',target:'es2022',minify:true,legalComments:'linked',outfile:'../vendor/astryx/controls.js',define:{'process.env.NODE_ENV':'"production"'}});
 const inputs=Object.keys(result.metafile.inputs);
-for(const name of ['Button','ToggleButton','Selector','TextInput'])assert(inputs.some(path=>path.endsWith(`/dist/${name}/${name}.js`)),`Missing actual Astryx ${name}`);
+for(const name of ['Button','ToggleButton','Selector','TextInput','CheckboxInput','NumberInput','Slider','TextArea','Dialog'])assert(inputs.some(path=>path.endsWith(`/dist/${name}/${name}.js`)),`Missing actual Astryx ${name}`);
 assert(!inputs.some(path=>/(^|\/)(app|engine|midi)\.js$/.test(path)),'UI bundle must not own the DJ engine');
 for(const [from,to]of [['@astryxdesign/theme-neutral/LICENSE','astryx-LICENSE'],['react/LICENSE','react-LICENSE'],['react-dom/LICENSE','react-dom-LICENSE'],['lucide-react/LICENSE','lucide-LICENSE']])await copyFile('node_modules/'+from,'../vendor/astryx/'+to);
 await copyFile('StyleX-LICENSE','../vendor/astryx/StyleX-LICENSE');

@@ -19,10 +19,12 @@
  & .rb-monitor-knob .xone-scale{left:0;top:0}
  &[data-orientation][data-density] .rb-monitor-knob::before{left:6px;top:6px;width:20px;height:20px;border:1px solid var(--xone-edge);background:var(--xone-face);box-shadow:inset 0 0 0 2px #262b2f}
  &[data-orientation][data-density] .rb-monitor-knob::after{left:15px;top:7px;height:9px;transform-origin:1px 9px;background:var(--xone-pointer)}
- & .fader-group::before{left:calc(50% - 2px);width:4px;background:#06090b;border-inline:1px solid #4b5963}
- & .preview-fader-ticks i{left:1px;right:1px;background:linear-gradient(to right,var(--xone-tick) 0 23%,transparent 23% 77%,var(--xone-tick) 77%)}
- & .preview-fader-ticks i.major{background:#b8c6cf}
- & #mixer .fader-group::after{top:calc(3px + (1 - var(--preview-level,.8))*(100% - 16px));left:2px;width:28px;height:10px;border:1px solid #69757d;background:linear-gradient(#252b30 0 40%,#f0f5f8 40% 55%,#252b30 55%);border-radius:1px}
+ & .fader-group::before{left:calc(50% + 2px);width:4px;background:#06090b;border-inline:1px solid #4b5963}
+ & .fader-group .preview-fader-ticks{inset:8px 0;z-index:2}
+ & .fader-group .preview-fader-ticks i{left:0;right:auto;width:7px;height:1px;background:#aab6be}
+ & .fader-group .preview-fader-ticks i.major{width:10px;height:2px;background:#e1e8ed}
+ & .tempo-control .preview-fader-ticks i{background:linear-gradient(to right,#aab6be 0 24%,transparent 24% 76%,#aab6be 76%)}
+ & #mixer .fader-group::after{top:calc(3px + (1 - var(--preview-level,.8))*(100% - 16px));left:11px;width:21px;height:10px;border:1px solid #69757d;background:linear-gradient(#252b30 0 40%,#f0f5f8 40% 55%,#252b30 55%);border-radius:1px}
  & #mixer .fader-group[data-fader-detent=true]::after{border-color:#9edbff;background:linear-gradient(#263b48 0 40%,#c5eaff 40% 55%,#263b48 55%)}
  & .tempo-control input::-webkit-slider-thumb{background:linear-gradient(#252b30 0 40%,#eef4f7 40% 60%,#252b30 60%);border-color:#7a8993}
  & .crossfader .preview-fader-ticks i{background:var(--xone-tick)}
