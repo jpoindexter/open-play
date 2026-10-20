@@ -21,13 +21,24 @@
  &[data-orientation][data-density] .rb-monitor-knob::after{left:15px;top:7px;height:9px;transform-origin:1px 9px;background:var(--xone-pointer)}
  & .fader-group::before{left:calc(50% + 2px);width:4px;background:#06090b;border-inline:1px solid #4b5963}
  & .fader-group .preview-fader-ticks{inset:8px 0;z-index:2}
- & .fader-group .preview-fader-ticks i{left:0;right:auto;width:7px;height:1px;background:#aab6be}
- & .fader-group .preview-fader-ticks i.major{width:10px;height:2px;background:#e1e8ed}
+ & .fader-group .preview-fader-ticks i{left:calc(50% + 5px);right:auto;transform:translateX(-50%);width:20px;height:1px;background:linear-gradient(to right,#aab6be 0 35%,transparent 35% 65%,#aab6be 65%)}
+ & .fader-group .preview-fader-ticks i.major{width:24px;height:2px;background:linear-gradient(to right,#e1e8ed 0 37.5%,transparent 37.5% 62.5%,#e1e8ed 62.5%)}
  & .tempo-control .preview-fader-ticks i{background:linear-gradient(to right,#aab6be 0 24%,transparent 24% 76%,#aab6be 76%)}
- & #mixer .fader-group::after{top:calc(3px + (1 - var(--preview-level,.8))*(100% - 16px));left:11px;width:21px;height:10px;border:1px solid #69757d;background:linear-gradient(#252b30 0 40%,#f0f5f8 40% 55%,#252b30 55%);border-radius:1px}
+ & #mixer .fader-group::after{top:calc(1px + (1 - var(--preview-level,.8))*(100% - 16px));left:calc(50% - 9px);width:28px;height:14px;z-index:3;pointer-events:none;border:1px solid #69757d;background:linear-gradient(#252b30 0 40%,#f0f5f8 40% 55%,#252b30 55%);border-radius:1px}
  & #mixer .fader-group[data-fader-detent=true]::after{border-color:#9edbff;background:linear-gradient(#263b48 0 40%,#c5eaff 40% 55%,#263b48 55%)}
  & .tempo-control input::-webkit-slider-thumb{background:linear-gradient(#252b30 0 40%,#eef4f7 40% 60%,#252b30 60%);border-color:#7a8993}
  & .crossfader .preview-fader-ticks i{background:var(--xone-tick)}
  & .crossfader .preview-fader-ticks i.major{background:#b8c6cf}
  & .crossfader input::-webkit-slider-thumb{background:linear-gradient(to right,#252b30 0 45%,#eef4f7 45% 55%,#252b30 55%);border-color:#7a8993}
+}
+
+/* Preserve custom channel caps/ticks in the selected rekordbox layout. */
+#workspace-preview[data-workspace=rekordbox]{
+ & .fader-group::before{left:calc(50% + 2px);width:4px;background:#06090b;border-inline:1px solid #4b5963}
+ & .fader-group .preview-fader-ticks{display:block;position:absolute;pointer-events:none;inset:8px 0;z-index:2}
+ & .fader-group .preview-fader-ticks i{position:absolute;top:calc(var(--tick)*100%);left:calc(50% + 5px);right:auto;transform:translateX(-50%);width:20px;height:1px;background:linear-gradient(to right,#aab6be 0 35%,transparent 35% 65%,#aab6be 65%)}
+ & .fader-group .preview-fader-ticks i.major{width:24px;height:2px;background:linear-gradient(to right,#e1e8ed 0 37.5%,transparent 37.5% 62.5%,#e1e8ed 62.5%)}
+ & .tempo-control .preview-fader-ticks i{background:linear-gradient(to right,#aab6be 0 24%,transparent 24% 76%,#aab6be 76%)}
+ & #mixer .fader-group::after{top:calc(1px + (1 - var(--preview-level,.8))*(100% - 16px));left:calc(50% - 9px);width:28px;height:14px;z-index:3;pointer-events:none;border:1px solid #69757d;background:linear-gradient(#252b30 0 40%,#f0f5f8 40% 55%,#252b30 55%);border-radius:1px}
+ & #mixer .fader-group[data-fader-detent=true]::after{border-color:#9edbff;background:linear-gradient(#263b48 0 40%,#c5eaff 40% 55%,#263b48 55%)}
 }

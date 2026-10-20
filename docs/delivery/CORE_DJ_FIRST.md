@@ -6,14 +6,20 @@
 
 This supersedes older instructions to continue keyed Stems, sampler compositions or advanced FX next. Jason's current priority is a usable two-deck DJ workflow, with quick wins and the full independent Serato parity backlog afterward. His two Technics 1200s and a mixer analogy defines the everyday mixing workflow; actual timecode/DVS support remains in its separate later cards.
 
+## Current direction — 20 October 2026
+
+Jason selected the **rekordbox layout** and explicitly requested one active goal: finish the core DJ loop, HTML only. This supersedes prior layout recommendations and earlier desktop-test authority for new work: **do not rebuild or integrate the desktop app**. Preserve the other HTML variants, every existing core control/custom interaction and decoded library waveform preview. No further comparative layout/cosmetic work, stems, advanced FX, video, DVS or broad mapping catalog work while this goal is open.
+
+Default entry is rekordbox / 2 decks / Horizontal / Compact / mixer visible. The selected view had actually hidden both channel filter knobs; HTML220 restores those original controls. Recent custom centered fader ticks and 28×14 caps are preserved. Core listening is underway on two existing saved real local MP3s: Jason reported left-deck timer advances and music is audible; later DOM read found both HTML decks paused at0, so target-window/timing corroboration is pending. Right-deck independent playback, actual routing/headphone blend, manual and synced transitions, core controller checks and final stop remain pending. Do not mark the whole workflow accepted from this first observation.
+
 ## Constraint ledger
 
 - Outcome: load two different music files from Jason's hard drive onto separate decks and complete manual and synced transitions with audible master/headphone separation.
-- Target: existing production audio/transport and approved local desktop test path. Apply Serato’s visual system to the core screen per Jason’s latest instruction; preserve interaction bindings/code and working behavior while restyling/reflowing the decks, waveforms, mixer and library. Fix measured blockers rather than rewrite.
+- Target: existing production audio/transport in the rekordbox HTML prototype. Preserve the original engine, control bindings and other variants; change presentation only to remove a concrete core-workflow obstruction. No desktop build/integration.
 - Must: local import/load, independent Play/Pause/seek and cue, channel gain/faders, crossfader, master/meters, headphone cue/mix/level, pitch/range/direction, jog/nudge, Sync/manual return, EQ/filter/cutoff, basic waveforms/BPM/grids and Hercules core controls.
 - Must not: let stems, sampler combinations, 55-FX completeness, video, broad device catalogs or full parity research delay this usable milestone; replace music with generated demos and claim this session passed; change original music; repeat solved matrices without a relevant change.
-- Authority: Jason's 19 October core-first correction and Trello reorganization request; earlier explicit local desktop-test approval persists. This is not public release approval.
-- Done evidence: exact app candidate and two real files, actual normal UI workflow, concise audio/control observations and Jason's physical/headphone/manual-mix confirmation. Historical scoped checks are reusable evidence, not acceptance of the entire session.
+- Authority: Jason's 20 October selection of rekordbox, explicit goal request and HTML-only/no-desktop-rebuild boundary. Earlier instructions do not override this latest scope. No public release approval.
+- Done evidence: exact HTML candidate and two real files, actual normal UI workflow, concise audio/control observations and Jason's physical/headphone/manual-mix confirmation. Historical scoped checks are reusable evidence, not acceptance of the entire session.
 
 ## Now, Next, Later
 

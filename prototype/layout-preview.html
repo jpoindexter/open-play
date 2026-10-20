@@ -1,7 +1,7 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Open Play — Traktor flat workspace preview</title>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Open Play — rekordbox core DJ preview</title>
 <style>*{box-sizing:border-box}html,body{margin:0;background:#0b0d0f;color:#b9c2c8;font:11px Arial,sans-serif}#stage{position:relative;width:100%;overflow:hidden}iframe{position:absolute;top:0;left:0;border:0;transform-origin:top left;background:#151718}footer{height:28px;padding:0 12px;display:flex;align-items:center;gap:14px;border-top:1px solid #30383e}footer a{color:#a7d5eb;margin-left:auto}footer strong{font-weight:400;color:#f2f3f4}</style></head>
-<body><div id="stage"><iframe id="player" src="workspace-preview.html" title="Open Play workspace comparison" allow="autoplay; midi; speaker-selection"></iframe></div><footer><strong>Traktor flat · Serato hybrid · rekordbox</strong><span>Interactive HTML preview · desktop app unchanged</span><a href="workspace-preview.html" target="_blank" rel="noopener">Open full size ↗</a></footer>
+<body><div id="stage"><iframe id="player" src="workspace-preview.html" title="Open Play workspace comparison" allow="autoplay; midi; speaker-selection"></iframe></div><footer><strong>rekordbox layout · core DJ workflow</strong><span>Interactive HTML preview · desktop app unchanged</span><a href="workspace-preview.html" target="_blank" rel="noopener">Open full size ↗</a></footer>
 <script>
 const stage=document.querySelector('#stage'),frame=document.querySelector('#player');
 function fit(){const w=Math.max(1,document.documentElement.clientWidth),scale=Math.min(1,w/1440),h=Math.max(900,(window.innerHeight-28)/scale);frame.style.width=(w/scale)+'px';frame.style.height=h+'px';frame.style.transform='scale('+scale+')';stage.style.height=(h*scale)+'px';}

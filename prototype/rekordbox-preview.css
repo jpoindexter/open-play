@@ -347,3 +347,13 @@ body[data-preview-shell=flat][data-orientation] main:has(#panel:not([hidden])) .
 
 .rb-rotary-value{display:none}
 body[data-preview-shell=flat] .rb-rotary-value{display:inline}
+
+/* Core DJ: retain the original per-channel filter in the selected workspace. */
+body[data-workspace=rekordbox][data-orientation] .channel-strip .knob-group:has(input[data-mix$=':filter']){display:flex!important}
+body[data-workspace=rekordbox][data-orientation]:not(.four-decks):is([data-orientation=vertical],[data-density=compact]) .channel-strip{grid-template-rows:12px repeat(4,var(--rb-knob-row))}
+body[data-workspace=rekordbox][data-orientation]:not(.four-decks):is([data-orientation=vertical],[data-density=compact]) .channel-strip .knob-group:has(input[data-mix$=':filter']){grid-column:2;grid-row:5}
+body[data-workspace=rekordbox][data-orientation]:not(.four-decks):is([data-orientation=vertical],[data-density=compact]) .channel-strip:nth-child(2) .knob-group:has(input[data-mix$=':filter']){grid-column:1}
+body[data-workspace=rekordbox].four-decks[data-orientation] .channel-strip{grid-template-rows:12px repeat(5,var(--rb-knob-row)) 24px minmax(48px,1fr)}
+body[data-workspace=rekordbox].four-decks[data-orientation] .channel-strip .knob-group:has(input[data-mix$=':filter']){grid-row:6}
+body[data-workspace=rekordbox].four-decks[data-orientation] .channel-strip>button{grid-row:7}
+body[data-workspace=rekordbox].four-decks[data-orientation] .channel-strip .fader-group{grid-row:8}

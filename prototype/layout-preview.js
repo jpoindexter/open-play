@@ -17,7 +17,7 @@ const letters=['A','B','C','D'];
 const layout=$('#layout');
 const display={orientation:'horizontal',density:'compact',size:'medium',library:false,crates:true,mixer:true,panels:new Map()};
 layout.hidden=true;
-const workspaceDisplays=new Map([['traktor-flat',{orientation:'horizontal',density:'compact'}],['serato-hybrid',{orientation:'horizontal',density:'compact'}],['hybrid',{orientation:'vertical',density:'compact'}],['rekordbox',{orientation:'horizontal',density:'expanded'}]]);
+const workspaceDisplays=new Map([['traktor-flat',{orientation:'horizontal',density:'compact'}],['serato-hybrid',{orientation:'horizontal',density:'compact'}],['hybrid',{orientation:'vertical',density:'compact'}],['rekordbox',{orientation:'horizontal',density:'compact'}]]);
 function flat(){return document.body.dataset.previewShell==='flat';}
 function refined(){return flat()||document.body.dataset.workspace==='hybrid';}
 function vertical(){return refined()&&display.orientation==='vertical';}
@@ -202,7 +202,7 @@ $('#preview-density').onchange=event=>{
 $('#preview-wave-size').onchange=event=>{display.size=event.target.value;applyDisplay();};
 $('#preview-library-focus').onclick=()=>{display.library=!display.library;applyDisplay();};
 $('#preview-crates').onclick=()=>{display.crates=!display.crates;applyDisplay();};
-$('#preview-reset').onclick=()=>{Object.assign(display,{orientation:flat()?'horizontal':'vertical',density:document.body.dataset.workspace==='rekordbox'?'expanded':'compact',size:'medium',library:false,crates:true,mixer:true});display.panels.clear();applyDisplay();};
+$('#preview-reset').onclick=()=>{Object.assign(display,{orientation:flat()?'horizontal':'vertical',density:'compact',size:'medium',library:false,crates:true,mixer:true});display.panels.clear();applyDisplay();};
 
 // Restore secondary panels without replacing their original controls/handlers.
 const more=document.createElement('details');more.className='preview-more';
@@ -216,7 +216,7 @@ document.addEventListener('click',event=>{if(more.open&&(!more.contains(event.ta
 // Disk import must survive hiding the crates sidebar.
 const importButton=$('#import');importButton.textContent='＋ Import';importButton.setAttribute('aria-label','Import audio from disk');$('#preview-crates').after(importButton);
 const mixerToggle=document.createElement('button');mixerToggle.id='preview-mixer-toggle';mixerToggle.className='rb-only';mixerToggle.textContent='Mixer';mixerToggle.setAttribute('aria-label','Show or hide mixer');mixerToggle.setAttribute('aria-pressed','true');mixerToggle.onclick=()=>{display.mixer=!display.mixer;applyDisplay();};$('#preview-library-focus').before(mixerToggle);
-choose('traktor-flat');
+choose('rekordbox');
 
 // Read-only visual projection of our existing renderer. No second analysis or
 // transport. Crop its horizontal rows into Traktor deck views, retaining

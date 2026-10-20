@@ -1,7 +1,7 @@
 // Preview-only affordances on original ranges; their app/audio handlers own values.
 const selector='.fader-group input, .tempo-control input, #crossfader';
 const bound=new WeakSet(),shown=new WeakMap(),titles=new WeakMap();
-const active=()=>document.body.dataset.workspace==='traktor-flat';
+const active=()=>['traktor-flat','rekordbox'].includes(document.body.dataset.workspace);
 const kindOf=input=>input.id==='crossfader'?'cross':input.dataset.tempo!==undefined?'tempo':'level';
 export function snapFaderValue(value,{min,max,kind},bypass=false){
   const bounded=Math.max(min,Math.min(max,value));
@@ -28,7 +28,7 @@ function bind(input){
   let pointer;
   const apply=(value,bypass)=>{input.value=String(snapFaderValue(value,{min:Number(input.min),max:Number(input.max),kind},bypass));emit(input,'input');show(input);};
   const position=event=>{
-    const rect=input.getBoundingClientRect(),horizontal=kind==='cross',inset=horizontal?12:8;
+    const rect=input.getBoundingClientRect(),horizontal=kind==='cross'||rect.width>rect.height,inset=horizontal?12:8;
     let ratio=horizontal?(event.clientX-rect.left-inset)/(rect.width-2*inset):(event.clientY-rect.top-inset)/(rect.height-2*inset);
     if(kind==='level')ratio=1-ratio;
     return Number(input.min)+ratio*(Number(input.max)-Number(input.min));
