@@ -1,7 +1,7 @@
 // Presentation adapter: preserve each original range and its delegated handlers.
 // Native range semantics/keyboard support stay available to assistive technology.
 const bound=new WeakSet(),shown=new WeakMap(),titles=new WeakMap();
-const active=()=>document.body.dataset.workspace==='rekordbox';
+const active=()=>['rekordbox','serato-hybrid'].includes(document.body.dataset.workspace);
 function emit(input,type){input.dispatchEvent(new Event(type,{bubbles:true}));}
 function show(input){
   const value=Number(input.value),min=Number(input.min),max=Number(input.max);

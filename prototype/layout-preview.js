@@ -12,10 +12,10 @@ const $=selector=>document.querySelector(selector);
 const choices=[...document.querySelectorAll('[data-workspace-choice]')];
 const letters=['A','B','C','D'];
 const layout=$('#layout');
-const display={orientation:'horizontal',density:'expanded',size:'medium',library:false,crates:true,mixer:true,panels:new Map()};
+const display={orientation:'horizontal',density:'compact',size:'medium',library:false,crates:true,mixer:true,panels:new Map()};
 layout.hidden=true;
-const workspaceDisplays=new Map([['hybrid',{orientation:'vertical',density:'compact'}],['rekordbox',{orientation:'horizontal',density:'expanded'}]]);
-function refined(){return ['hybrid','rekordbox'].includes(document.body.dataset.workspace);}
+const workspaceDisplays=new Map([['serato-hybrid',{orientation:'horizontal',density:'compact'}],['hybrid',{orientation:'vertical',density:'compact'}],['rekordbox',{orientation:'horizontal',density:'expanded'}]]);
+function refined(){return ['hybrid','rekordbox','serato-hybrid'].includes(document.body.dataset.workspace);}
 function vertical(){return refined()&&display.orientation==='vertical';}
 function applyDisplay(){
   document.body.dataset.orientation=vertical()?'vertical':'horizontal';
@@ -27,7 +27,7 @@ function applyDisplay(){
   $('#preview-mixer-toggle')?.setAttribute('aria-pressed',String(display.mixer));
   $('#preview-orientation').value=display.orientation;
   $('#preview-density').value=display.density;
-  $('#preview-density').title=document.body.dataset.workspace==='rekordbox'?'Compact keeps Hot Cue and Loop controls visible. Other performance modes use Full.':'Choose a compact or full deck layout';
+  $('#preview-density').title=['rekordbox','serato-hybrid'].includes(document.body.dataset.workspace)?'Compact keeps Hot Cue and Loop controls visible. Other performance modes use Full.':'Choose a compact or full deck layout';
   $('#preview-wave-size').value=display.size;
   $('#preview-library-focus').setAttribute('aria-pressed',String(display.library));
   $('#preview-crates').setAttribute('aria-pressed',String(display.crates));
@@ -39,7 +39,7 @@ function updatePanels(deck,index){
   const panel=deck.querySelector('.deck-body>div:first-child');
   if(!panel)return;
   panel.id=`preview-controls-${index}`;
-  const open=!refined()||(!display.library&&(display.panels.get(index)??(document.body.dataset.workspace==='rekordbox'||display.density==='expanded')));
+  const open=!refined()||(!display.library&&(display.panels.get(index)??(['rekordbox','serato-hybrid'].includes(document.body.dataset.workspace)||display.density==='expanded')));
   panel.hidden=!open;
   deck.dataset.controlsOpen=String(open);
   let button=deck.querySelector('.deck-disclosure');
@@ -89,10 +89,10 @@ function decorate(){
 }
 
 function refinePanelLayout(){
-  if(document.body.dataset.workspace!=='rekordbox')return;
+  if(!['rekordbox','serato-hybrid'].includes(document.body.dataset.workspace))return;
   const four=document.querySelectorAll('.deck').length===4;
   const row=display.library?(four?(display.mixer?4:3):(display.mixer?3:2))
-    :four?(display.orientation==='horizontal'?(display.mixer?5:4):(display.mixer?(display.density==='compact'?5:4):3))
+    :four?(display.orientation==='horizontal'?(display.mixer?5:4):(display.mixer?(display.density==='compact'||document.body.dataset.workspace==='serato-hybrid'?5:4):3))
     :(display.mixer?4:3);
   document.body.style.setProperty('--rb-panel-row',row);
   document.body.style.setProperty('--rb-library-open-row',row+1);
@@ -128,13 +128,13 @@ function refineDeck(deck,index){
   }
   const beat=deck.querySelector('.beat-position');if(beat&&beat.parentNode!==deck.querySelector('.deck-foot'))deck.querySelector('.deck-foot').append(beat);
   const scratch=deck.querySelector('.scratch-status');if(scratch&&scratch.parentNode!==deck.querySelector('.deck-foot'))deck.querySelector('.deck-foot').append(scratch);
-  if(document.body.dataset.workspace==='rekordbox'){
+  if(['rekordbox','serato-hybrid'].includes(document.body.dataset.workspace)){
     let clock=deck.querySelector('.preview-deck-time');
     if(!clock){clock=document.createElement('div');clock.className='preview-deck-time';clock.setAttribute('aria-label',`Deck ${index+1} elapsed and remaining time`);deck.querySelector('.deck-head').insertBefore(clock,load);}
     for(const node of [deck.querySelector('time'),deck.querySelector(`[id="remain-${index}"]`)])if(node&&node.parentNode!==clock)clock.append(node);
   }
   const title=deck.querySelector('.deck-title strong');if(title)title.title=title.textContent;
-  if(document.body.dataset.workspace==='rekordbox')refineRekordboxDeck(deck,index);
+  if(['rekordbox','serato-hybrid'].includes(document.body.dataset.workspace))refineRekordboxDeck(deck,index);
 }
 function refineMixer(){
   // A player rerender creates a new real crossfader. Retire its old moved footer.
@@ -151,7 +151,7 @@ function refineMixer(){
     footer=document.createElement('div');footer.className='preview-mixer-footer';
     footer.append($('#crossfader').closest('label'),$('.preview-headphones'));$('#mixer').append(footer);
   }
-  if(document.body.dataset.workspace==='rekordbox'&&footer)refineRekordboxMixer(footer,monitorAPI);
+  if(['rekordbox','serato-hybrid'].includes(document.body.dataset.workspace)&&footer)refineRekordboxMixer(footer,monitorAPI);
 }
 function updateFader(label){const input=label.querySelector('input');if(input)label.style.setProperty('--preview-level',input.value);}
 function updateDial(label){
@@ -163,13 +163,13 @@ function updateDial(label){
 function choose(workspace){
   const previous=document.body.dataset.workspace;
   if(previous!==workspace){
-    if(['hybrid','rekordbox'].includes(previous))workspaceDisplays.set(previous,{orientation:display.orientation,density:display.density});
+    if(['hybrid','rekordbox','serato-hybrid'].includes(previous))workspaceDisplays.set(previous,{orientation:display.orientation,density:display.density});
     Object.assign(display,workspaceDisplays.get(workspace)||{});display.panels.clear();display.library=false;
   }
   document.body.dataset.workspace=workspace;
   if(previous!==workspace){const footer=$('.preview-mixer-footer');if(footer&&footer.parentNode!==$('#mixer'))footer.remove();layout.dispatchEvent(new Event('change',{bubbles:true}));}
   for(const button of choices)button.setAttribute('aria-pressed',String(button.dataset.workspaceChoice===workspace));
-  $('#workspace-caption').textContent=workspace==='traktor'?'Two decks. Mixer in the middle.':workspace==='rekordbox'?'rekordbox 7 · Performance layout reference':workspace==='hybrid'?'Compare the beats. Mix in the middle.':'Stacked waveforms. Familiar deck displays.';
+  $('#workspace-caption').textContent=workspace==='serato-hybrid'?'Serato-led decks · rekordbox mixer & library':workspace==='traktor'?'Two decks. Mixer in the middle.':workspace==='rekordbox'?'rekordbox 7 · Performance layout reference':workspace==='hybrid'?'Compare the beats. Mix in the middle.':'Stacked waveforms. Familiar deck displays.';
   applyDisplay();
 }
 for(const button of choices){button.disabled=false;button.onclick=()=>choose(button.dataset.workspaceChoice);}
@@ -183,14 +183,14 @@ new MutationObserver(refineRotaryControls).observe($('#panel'),{childList:true,s
 document.addEventListener('input',event=>{const label=event.target.closest?.('.knob-group');if(label)updateDial(label);const fader=event.target.closest?.('.fader-group');if(fader)updateFader(fader);});
 $('#preview-orientation').onchange=event=>{display.orientation=event.target.value;applyDisplay();};
 $('#preview-density').onchange=event=>{
-  const needsFull=document.body.dataset.workspace==='rekordbox'&&[...document.querySelectorAll('.deck')].some(deck=>!['Cues','Loops'].includes(deck.dataset.rbPadMode||'Cues'));
+  const needsFull=['rekordbox','serato-hybrid'].includes(document.body.dataset.workspace)&&[...document.querySelectorAll('.deck')].some(deck=>!['Cues','Loops'].includes(deck.dataset.rbPadMode||'Cues'));
   display.density=event.target.value==='compact'&&needsFull?'expanded':event.target.value;
   display.panels.clear();display.library=false;applyDisplay();
 };
 $('#preview-wave-size').onchange=event=>{display.size=event.target.value;applyDisplay();};
 $('#preview-library-focus').onclick=()=>{display.library=!display.library;applyDisplay();};
 $('#preview-crates').onclick=()=>{display.crates=!display.crates;applyDisplay();};
-$('#preview-reset').onclick=()=>{Object.assign(display,{orientation:document.body.dataset.workspace==='rekordbox'?'horizontal':'vertical',density:document.body.dataset.workspace==='rekordbox'?'expanded':'compact',size:'medium',library:false,crates:true,mixer:true});display.panels.clear();applyDisplay();};
+$('#preview-reset').onclick=()=>{Object.assign(display,{orientation:['rekordbox','serato-hybrid'].includes(document.body.dataset.workspace)?'horizontal':'vertical',density:['rekordbox','serato-hybrid'].includes(document.body.dataset.workspace)?'expanded':'compact',size:'medium',library:false,crates:true,mixer:true});display.panels.clear();applyDisplay();};
 
 // Restore secondary panels without replacing their original controls/handlers.
 const more=document.createElement('details');more.className='preview-more';
@@ -204,7 +204,7 @@ document.addEventListener('click',event=>{if(more.open&&(!more.contains(event.ta
 // Disk import must survive hiding the crates sidebar.
 const importButton=$('#import');importButton.textContent='＋ Import';importButton.setAttribute('aria-label','Import audio from disk');$('#preview-crates').after(importButton);
 const mixerToggle=document.createElement('button');mixerToggle.id='preview-mixer-toggle';mixerToggle.className='rb-only';mixerToggle.textContent='Mixer';mixerToggle.setAttribute('aria-label','Show or hide mixer');mixerToggle.setAttribute('aria-pressed','true');mixerToggle.onclick=()=>{display.mixer=!display.mixer;applyDisplay();};$('#preview-library-focus').before(mixerToggle);
-choose('rekordbox');
+choose('serato-hybrid');
 
 // Read-only visual projection of our existing renderer. No second analysis or
 // transport. Crop its horizontal rows into Traktor deck views, retaining
