@@ -1,0 +1,198 @@
+/* The preview root scopes composition exceptions above legacy layout rules.
+   HTML212. Native Traktor screenshot supplies the arrangement; flat shared
+   Open Play surfaces supply the visual treatment. Core nodes are never cloned. */
+#workspace-preview[data-workspace=traktor-flat]{
+ --tf-bg:#0b0c0d;--tf-surface:#181a1c;--tf-control:#24272a;--tf-line:#343a3e;
+ --tf-text:#e5e8eb;--tf-muted:#a2adb5;--tf-accent:#2585e6;
+ --tf-wave:88px;--tf-vertical-wave:112px;--tf-pads:48px;--tf-deck-height:340px;--tf-center:clamp(248px,19vw,288px);
+ --rb-knob-size:24px;--rb-knob-row:40px;--rb-channel-min:0px;
+}
+#workspace-preview[data-workspace=traktor-flat].four-decks{--tf-wave:56px;--tf-deck-height:308px}
+#workspace-preview[data-workspace=traktor-flat][data-wave-size=small]{--tf-wave:56px;--tf-deck-height:308px}
+#workspace-preview[data-workspace=traktor-flat][data-wave-size=large]{--tf-wave:120px;--tf-deck-height:372px}
+#workspace-preview[data-workspace=traktor-flat][data-density=expanded]{--tf-wave:120px;--tf-pads:80px;--tf-deck-height:404px}
+#workspace-preview[data-workspace=traktor-flat][data-density]:has(.deck[data-rb-pad-mode=Loops]){--tf-pads:84px;--tf-deck-height:calc(252px + var(--tf-wave) + 36px)}
+#workspace-preview[data-workspace=traktor-flat][data-orientation][data-density] main{
+ display:grid;grid-template-columns:minmax(0,1fr) var(--tf-center) minmax(0,1fr);
+ grid-template-rows:var(--tf-deck-height) 44px var(--rb-library-tracks,minmax(200px,1fr));
+ gap:4px;padding:4px;background:var(--tf-bg);height:calc(100dvh - 122px);min-height:0;
+}
+#workspace-preview[data-workspace=traktor-flat].four-decks[data-orientation][data-density] main{grid-template-rows:var(--tf-deck-height) var(--tf-deck-height) 44px var(--rb-library-tracks,minmax(180px,1fr));height:auto;min-height:calc(100dvh - 122px)}
+#workspace-preview[data-workspace=traktor-flat][data-orientation][data-density] .deck:nth-of-type(n){
+ display:grid;grid-template-columns:120px minmax(0,1fr) 36px;
+ grid-template-rows:44px 28px var(--tf-wave) 24px var(--tf-pads) 28px 24px 24px;
+ gap:4px;align-content:start;min-width:0;height:100%;background:var(--tf-surface);
+ border:0;border-top:2px solid #5986ac;color:var(--tf-text);border-radius:0;
+}
+#workspace-preview[data-workspace=traktor-flat][data-orientation][data-density] .deck:nth-of-type(even){border-top-color:#58aabd}
+#workspace-preview[data-workspace=traktor-flat][data-orientation][data-density] .deck:nth-of-type(1){grid-column:1;grid-row:1}
+#workspace-preview[data-workspace=traktor-flat][data-orientation][data-density] .deck:nth-of-type(2){grid-column:3;grid-row:1}
+#workspace-preview[data-workspace=traktor-flat][data-orientation][data-density] .deck:nth-of-type(3){grid-column:1;grid-row:2}
+#workspace-preview[data-workspace=traktor-flat][data-orientation][data-density] .deck:nth-of-type(4){grid-column:3;grid-row:2}
+#workspace-preview[data-workspace=traktor-flat][data-orientation][data-density] .deck:nth-of-type(n) .deck-head{grid-column:1/-1;grid-row:1;height:44px;background:var(--tf-surface);padding:2px 6px 2px 12px;grid-template-columns:28px minmax(0,1fr) 68px 76px 48px;gap:4px}
+#workspace-preview[data-workspace=traktor-flat] .rb-artwork{width:24px!important;height:24px!important}
+#workspace-preview[data-workspace=traktor-flat] .deck-title strong{font-size:13px!important}
+#workspace-preview[data-workspace=traktor-flat] .deck-title small{font-size:9px!important}
+#workspace-preview[data-workspace=traktor-flat][data-orientation][data-density] .deck:nth-of-type(n) .preview-key-caption{display:none}
+#workspace-preview[data-workspace=traktor-flat][data-orientation][data-density] .deck:nth-of-type(n) .platter{grid-column:1;grid-row:2;width:116px!important;height:28px!important;display:flex;flex-direction:row;align-items:center;justify-content:center;gap:6px;box-shadow:none;border:0;border-radius:0;background:#101214;margin:0 0 0 4px;padding:0;color:var(--tf-text)}
+#workspace-preview[data-workspace=traktor-flat][data-orientation][data-density] .deck:nth-of-type(n) .platter strong{font-size:19px;line-height:24px;letter-spacing:-.5px}
+#workspace-preview[data-workspace=traktor-flat][data-orientation][data-density] .deck:nth-of-type(n) .platter small{font-size:8px;line-height:10px;color:var(--tf-muted)}
+#workspace-preview[data-workspace=traktor-flat][data-orientation][data-density] .deck:nth-of-type(n) .rb-deck-options{grid-column:2;grid-row:2;display:flex;flex-direction:row;justify-content:flex-end;gap:4px;align-items:center;padding:0}
+#workspace-preview[data-workspace=traktor-flat][data-orientation][data-density] .rb-deck-options button{height:24px;min-height:24px;width:auto;min-width:28px;padding:0 6px;font-size:9px}
+#workspace-preview[data-workspace=traktor-flat][data-orientation][data-density] .deck:nth-of-type(n)>.tempo-control{grid-column:3;grid-row:2/6;display:flex;flex-direction:column;align-items:center;align-self:stretch;position:static;gap:2px;width:32px;height:auto;min-height:0;margin:0 2px 0 0;font-size:8px}
+#workspace-preview[data-workspace=traktor-flat][data-orientation][data-density] .deck:nth-of-type(n)>.tempo-control input{writing-mode:vertical-lr;direction:rtl;width:28px;height:100%;min-height:0;flex:1;margin:0;accent-color:#aab9c2}
+/* Copy the existing renderer's row, never its audio/analysis state. Keep source
+   canvas measurable offscreen so playback and zoom continue at native scale. */
+#workspace-preview[data-workspace=traktor-flat][data-orientation=horizontal] .detail-waves{position:fixed!important;top:-1200px!important;left:0!important;width:calc(100vw - 8px)!important;height:480px!important;opacity:0;pointer-events:none;grid-area:unset!important}
+#workspace-preview[data-workspace=traktor-flat][data-orientation=horizontal] .deck:nth-of-type(n) .preview-deck-wave{display:block;grid-column:1/3;grid-row:3;position:relative;min-width:0;background:#060708;margin:0 4px;border:0;border-radius:0;overflow:hidden}
+#workspace-preview[data-workspace=traktor-flat] .preview-deck-wave .waveform-scrub-lane{position:absolute;inset:0;z-index:1}
+#workspace-preview[data-workspace=traktor-flat] .preview-deck-wave output{position:absolute;inset:auto 4px 2px auto;font-size:8px}
+#workspace-preview[data-workspace=traktor-flat][data-orientation][data-density] .deck:nth-of-type(n) .wave-wrap{grid-column:1/3;grid-row:4;height:24px;margin:0 4px;background:#080a0b;border:0}
+#workspace-preview[data-workspace=traktor-flat][data-orientation][data-density] .deck:nth-of-type(n) .deck-body>div:first-child{grid-column:1/3;grid-row:5;padding:0 4px;align-self:stretch;min-width:0}
+#workspace-preview[data-workspace=traktor-flat][data-orientation][data-density] .deck:nth-of-type(n) .pads{grid-auto-flow:row;grid-template-columns:repeat(4,minmax(0,1fr));grid-template-rows:repeat(2,22px);gap:4px}
+#workspace-preview[data-workspace=traktor-flat][data-orientation][data-density] .deck:nth-of-type(n) .pad{height:22px;min-height:22px;border:0;border-bottom:2px solid var(--pad);border-radius:0;background:#101315;justify-content:flex-start;padding:0 6px;font-size:10px;gap:4px}
+#workspace-preview[data-workspace=traktor-flat][data-density=expanded] .deck:nth-of-type(n) .pads{grid-template-rows:repeat(2,38px)}
+#workspace-preview[data-workspace=traktor-flat][data-density=expanded] .deck:nth-of-type(n) .pad{height:38px;min-height:38px}
+/* One anchored transport/loop strip, mirroring the reference's bottom edge. */
+#workspace-preview[data-workspace=traktor-flat][data-orientation][data-density] .deck:nth-of-type(n) .transport{grid-column:1/-1;grid-row:6;display:flex;flex-direction:row;align-items:center;justify-content:flex-start;align-self:stretch;gap:4px;padding:0 4px;margin:0;border-block:1px solid var(--tf-line)}
+#workspace-preview[data-workspace=traktor-flat][data-orientation][data-density] .transport :is([data-action=play],[data-action=cue]){order:0;flex:none;width:44px;min-width:44px;height:26px;min-height:26px;border:0;border-radius:0;background:var(--tf-control);font-size:10px}
+#workspace-preview[data-workspace=traktor-flat][data-orientation][data-density] .transport select[data-mode]{order:1;width:40px;min-height:24px;height:24px;font-size:9px;flex:none}
+#workspace-preview[data-workspace=traktor-flat][data-orientation][data-density] .deck:nth-of-type(n) .rb-pad-tools{order:2;display:flex;flex:none;margin:0;padding:0;border:0;height:24px}
+#workspace-preview[data-workspace=traktor-flat][data-orientation][data-density] .rb-pad-tools select{height:24px;min-height:24px;width:80px;font-size:9px;background:var(--tf-control)}
+#workspace-preview[data-workspace=traktor-flat][data-orientation][data-density] .deck:nth-of-type(n) .preview-loop-strip{order:3;display:flex;flex:1;min-width:0;margin:0;padding:0;align-self:center}
+#workspace-preview[data-workspace=traktor-flat][data-orientation][data-density] .preview-loop-strip .loop-line{display:flex;gap:2px;flex:1;min-width:0;margin:0}
+#workspace-preview[data-workspace=traktor-flat][data-orientation][data-density] .preview-loop-strip button{height:24px;min-height:24px;min-width:24px;flex:1;padding:0 3px;font-size:9px;border:0;border-radius:0;background:var(--tf-control)}
+#workspace-preview[data-workspace=traktor-flat][data-orientation][data-density] .preview-loop-strip [data-action=loop]{height:24px;min-width:50px;font-size:10px;flex:2}
+#workspace-preview[data-workspace=traktor-flat][data-orientation][data-density] .deck:nth-of-type(n) .preview-deck-utilities{grid-column:1/-1;grid-row:7;display:flex;gap:4px;align-items:center;flex-wrap:nowrap;min-width:0;padding:0 4px;border:0;background:transparent}
+#workspace-preview[data-workspace=traktor-flat][data-orientation][data-density] .deck:nth-of-type(n) .deck-foot{grid-column:1/-1;grid-row:8;display:flex;gap:4px;align-items:center;min-width:0;padding:0 4px;border:0}
+#workspace-preview[data-workspace=traktor-flat][data-orientation][data-density] .deck:nth-of-type(n) :is(.preview-deck-utilities,.deck-foot) button{min-height:24px;height:24px;padding:0 5px;font-size:9px;border:0;border-radius:0;background:var(--tf-control)}
+/* Full-height center mixer, two mirrored channel groups / four straight strips. */
+#workspace-preview[data-workspace=traktor-flat][data-orientation][data-density] #mixer{display:grid;grid-column:2;grid-row:1;grid-template-columns:1fr 1fr;grid-template-rows:1fr;padding:4px 8px;gap:12px;align-self:stretch;align-content:stretch;min-height:0;background:var(--tf-surface);border:0}
+#workspace-preview[data-workspace=traktor-flat].four-decks[data-orientation][data-density] #mixer{grid-row:1/3;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px}
+#workspace-preview[data-workspace=traktor-flat][data-orientation][data-density] .channel-strip{height:100%;display:grid;grid-template-columns:1fr;grid-template-rows:12px repeat(5,40px) 24px minmax(64px,1fr);gap:4px;align-content:stretch;align-items:start}
+#workspace-preview[data-workspace=traktor-flat][data-orientation][data-density] #mixer .knob-group{width:48px;height:40px;min-height:40px;font:10px/12px Arial,sans-serif;align-self:start}
+#workspace-preview[data-workspace=traktor-flat][data-orientation][data-density] #mixer .knob-group:has(input[data-mix$=':filter']){display:flex!important;grid-column:1;grid-row:6}
+#workspace-preview[data-workspace=traktor-flat][data-orientation][data-density] .channel-strip>button{grid-column:1;grid-row:7;min-height:24px;height:24px;width:40px;align-self:start}
+#workspace-preview[data-workspace=traktor-flat][data-orientation][data-density] .channel-strip .fader-group{grid-column:1;grid-row:8;width:32px;height:100%;min-height:0;align-self:stretch}
+#workspace-preview[data-workspace=traktor-flat]:not(.four-decks)[data-orientation][data-density] .channel-strip{grid-template-columns:48px 48px;grid-template-rows:12px repeat(3,48px) minmax(64px,1fr);justify-content:center;gap:4px}
+#workspace-preview[data-workspace=traktor-flat]:not(.four-decks) #mixer .knob-group:has(input[data-mix$=':trim']){grid-column:1;grid-row:2}
+#workspace-preview[data-workspace=traktor-flat]:not(.four-decks) #mixer .knob-group:has(input[data-mix$=':high']){grid-column:2;grid-row:2}
+#workspace-preview[data-workspace=traktor-flat]:not(.four-decks) #mixer .knob-group:has(input[data-mix$=':mid']){grid-column:2;grid-row:3}
+#workspace-preview[data-workspace=traktor-flat]:not(.four-decks) #mixer .knob-group:has(input[data-mix$=':low']){grid-column:2;grid-row:4}
+#workspace-preview[data-workspace=traktor-flat]:not(.four-decks)[data-orientation][data-density] #mixer .knob-group:has(input[data-mix$=':filter']){grid-column:1;grid-row:3}
+#workspace-preview[data-workspace=traktor-flat]:not(.four-decks)[data-orientation][data-density] .channel-strip>button{grid-column:1;grid-row:5;align-self:end}
+#workspace-preview[data-workspace=traktor-flat]:not(.four-decks)[data-orientation][data-density] .channel-strip .fader-group{grid-column:2;grid-row:5;min-height:40px}
+#workspace-preview[data-workspace=traktor-flat]:not(.four-decks) #mixer .channel-strip:nth-child(2) .knob-group:has(input[data-mix$=':trim']){grid-column:2}
+#workspace-preview[data-workspace=traktor-flat]:not(.four-decks) #mixer .channel-strip:nth-child(2) .knob-group:has(:is(input[data-mix$=':high'],input[data-mix$=':mid'],input[data-mix$=':low'])){grid-column:1}
+#workspace-preview[data-workspace=traktor-flat]:not(.four-decks)[data-orientation][data-density] #mixer .channel-strip:nth-child(2) .knob-group:has(input[data-mix$=':filter']){grid-column:2}
+#workspace-preview[data-workspace=traktor-flat]:not(.four-decks)[data-orientation][data-density] .channel-strip:nth-child(2)>button{grid-column:2}
+#workspace-preview[data-workspace=traktor-flat]:not(.four-decks)[data-orientation][data-density] .channel-strip:nth-child(2) .fader-group{grid-column:1}
+#workspace-preview[data-workspace=traktor-flat][data-orientation][data-density] .rb-mixer-band{grid-row:2;height:44px;background:var(--tf-surface);border:0}
+#workspace-preview[data-workspace=traktor-flat].four-decks[data-orientation][data-density] .rb-mixer-band{grid-row:3}
+#workspace-preview[data-workspace=traktor-flat][data-orientation][data-density] .library{grid-row:3;border:0;background:#0f1112}
+#workspace-preview[data-workspace=traktor-flat].four-decks[data-orientation][data-density] .library{grid-row:4}
+#workspace-preview[data-workspace=traktor-flat] .library-tools,#workspace-preview[data-workspace=traktor-flat] th{background:#1c2023!important}
+#workspace-preview[data-workspace=traktor-flat] .workspace-bar{gap:12px}
+#workspace-preview[data-workspace=traktor-flat] .workspace-switch button{padding-inline:9px}
+/* Vertical option keeps comparison waveforms directly above the mixer. */
+#workspace-preview[data-workspace=traktor-flat][data-orientation=vertical][data-density] main{grid-template-rows:var(--tf-vertical-wave) calc(var(--tf-deck-height) - var(--tf-vertical-wave) - 4px) 44px var(--rb-library-tracks,minmax(200px,1fr))}
+#workspace-preview[data-workspace=traktor-flat][data-orientation=vertical][data-density] .detail-waves{position:relative!important;top:auto!important;left:auto!important;grid-column:2!important;grid-row:1!important;width:100%!important;height:var(--tf-vertical-wave)!important;opacity:1;pointer-events:auto}
+#workspace-preview[data-workspace=traktor-flat][data-orientation=vertical][data-density] .deck:nth-of-type(-n+2){grid-row:1/3}
+#workspace-preview[data-workspace=traktor-flat][data-orientation=vertical][data-density] #mixer{grid-row:2}
+#workspace-preview[data-workspace=traktor-flat][data-orientation=vertical][data-density] .rb-mixer-band{grid-row:3}
+#workspace-preview[data-workspace=traktor-flat][data-orientation=vertical][data-density] .library{grid-row:4}
+#workspace-preview[data-workspace=traktor-flat].four-decks[data-orientation=vertical][data-density] main{grid-template-rows:var(--tf-vertical-wave) calc(var(--tf-deck-height) - var(--tf-vertical-wave) - 4px) var(--tf-deck-height) 44px var(--rb-library-tracks,minmax(180px,1fr))}
+#workspace-preview[data-workspace=traktor-flat].four-decks[data-orientation=vertical][data-density] .deck:nth-of-type(n+3){grid-row:3}
+#workspace-preview[data-workspace=traktor-flat].four-decks[data-orientation=vertical][data-density] #mixer{grid-row:2/4}
+#workspace-preview[data-workspace=traktor-flat].four-decks[data-orientation=vertical][data-density] .rb-mixer-band{grid-row:4}
+#workspace-preview[data-workspace=traktor-flat].four-decks[data-orientation=vertical][data-density] .library{grid-row:5}
+#workspace-preview[data-workspace=traktor-flat][data-orientation=vertical][data-density] .deck:nth-of-type(n){grid-template-rows:44px 28px 24px minmax(140px,1fr) 28px 24px 24px}
+#workspace-preview[data-workspace=traktor-flat][data-orientation=vertical][data-density] .deck:nth-of-type(n) .wave-wrap{grid-row:3}
+#workspace-preview[data-workspace=traktor-flat][data-orientation=vertical][data-density] .deck:nth-of-type(n) .deck-body>div:first-child{grid-row:4}
+#workspace-preview[data-workspace=traktor-flat][data-orientation=vertical][data-density] .deck:nth-of-type(n) .pads{grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:repeat(4,32px)}
+#workspace-preview[data-workspace=traktor-flat][data-orientation=vertical][data-density] .deck:nth-of-type(n) .pad{height:32px;min-height:32px}
+#workspace-preview[data-workspace=traktor-flat][data-orientation=vertical][data-density] .deck:nth-of-type(n) .transport{grid-row:5}
+#workspace-preview[data-workspace=traktor-flat][data-orientation=vertical][data-density] .deck:nth-of-type(n) .preview-deck-utilities{grid-row:6}
+#workspace-preview[data-workspace=traktor-flat][data-orientation=vertical][data-density] .deck:nth-of-type(n) .deck-foot{grid-row:7}
+/* Explicit view toggles reclaim space, while keeping transport/loop/key/tempo. */
+#workspace-preview[data-workspace=traktor-flat][data-rb-mixer=false][data-orientation=horizontal][data-density] main{grid-template-columns:1fr 1fr;grid-template-rows:var(--tf-deck-height) var(--rb-library-tracks,minmax(200px,1fr))}
+#workspace-preview[data-workspace=traktor-flat].four-decks[data-rb-mixer=false][data-orientation=horizontal][data-density] main{grid-template-rows:var(--tf-deck-height) var(--tf-deck-height) var(--rb-library-tracks,minmax(180px,1fr))}
+#workspace-preview[data-workspace=traktor-flat][data-rb-mixer=false][data-orientation=horizontal][data-density] .deck:nth-of-type(even){grid-column:2}
+#workspace-preview[data-workspace=traktor-flat][data-rb-mixer=false][data-orientation=horizontal][data-density] .library{grid-row:2}
+#workspace-preview[data-workspace=traktor-flat].four-decks[data-rb-mixer=false][data-orientation=horizontal][data-density] .library{grid-row:3}
+/* Panel row numbers are supplied by the layout adapter; separate grid tracks
+   prevent the previous overlay of FX controls over deck/mixer surfaces. */
+#workspace-preview[data-workspace=traktor-flat][data-orientation][data-density] main:has(#panel:not([hidden])) #panel:not([hidden]){grid-row:var(--rb-panel-row)}
+#workspace-preview[data-workspace=traktor-flat][data-orientation][data-density] main:has(#panel:not([hidden])) .library{grid-row:var(--rb-library-open-row)}
+
+#workspace-preview[data-workspace=traktor-flat][data-density]{--rb-knob-size:24px;--rb-knob-row:40px}
+#workspace-preview[data-workspace=traktor-flat][data-orientation=vertical][data-density=compact]{--tf-deck-height:340px}
+/* Library Focus is explicit disclosure; transport, modes and mixer remain.
+   A mode's Pads control restores the bank without changing the layout. */
+#workspace-preview[data-workspace=traktor-flat][data-library-focus=true][data-density]{--tf-wave:0px;--tf-pads:0px;--tf-deck-height:204px}
+#workspace-preview[data-workspace=traktor-flat][data-library-focus=true][data-orientation][data-density] main{grid-template-rows:var(--tf-deck-height) 44px var(--rb-library-tracks,minmax(200px,1fr))}
+#workspace-preview[data-workspace=traktor-flat][data-library-focus=true].four-decks[data-orientation][data-density] main{grid-template-rows:var(--tf-deck-height) var(--tf-deck-height) 44px var(--rb-library-tracks,minmax(180px,1fr))}
+#workspace-preview[data-workspace=traktor-flat][data-library-focus=true][data-orientation][data-density] .deck:nth-of-type(-n+2){grid-row:1}
+#workspace-preview[data-workspace=traktor-flat][data-library-focus=true][data-orientation][data-density] .deck:nth-of-type(n+3){grid-row:2}
+#workspace-preview[data-workspace=traktor-flat][data-library-focus=true][data-orientation][data-density] :is(.detail-waves,.preview-deck-wave){display:none!important}
+#workspace-preview[data-workspace=traktor-flat][data-library-focus=true][data-orientation][data-density] #mixer{grid-row:1}
+#workspace-preview[data-workspace=traktor-flat][data-library-focus=true].four-decks[data-orientation][data-density] #mixer{grid-row:1/3}
+#workspace-preview[data-workspace=traktor-flat][data-library-focus=true][data-orientation][data-density] .deck:nth-of-type(n){grid-template-rows:44px 28px 0px 24px 0px 28px 24px 24px}
+#workspace-preview[data-workspace=traktor-flat][data-library-focus=true][data-orientation][data-density] .deck:nth-of-type(n) .wave-wrap{grid-row:4}
+#workspace-preview[data-workspace=traktor-flat][data-library-focus=true][data-orientation][data-density] .deck:nth-of-type(n) .transport{grid-row:6}
+#workspace-preview[data-workspace=traktor-flat][data-library-focus=true][data-orientation][data-density] .deck:nth-of-type(n) .preview-deck-utilities{grid-row:7}
+#workspace-preview[data-workspace=traktor-flat][data-library-focus=true][data-orientation][data-density] .deck:nth-of-type(n) .deck-foot{grid-row:8}
+#workspace-preview[data-workspace=traktor-flat][data-library-focus=true][data-orientation][data-density] .rb-mixer-band{grid-row:2}
+#workspace-preview[data-workspace=traktor-flat][data-library-focus=true].four-decks[data-orientation][data-density] .rb-mixer-band{grid-row:3}
+#workspace-preview[data-workspace=traktor-flat][data-library-focus=true][data-orientation][data-density] .library{grid-row:3}
+#workspace-preview[data-workspace=traktor-flat][data-library-focus=true].four-decks[data-orientation][data-density] .library{grid-row:4}
+#workspace-preview[data-workspace=traktor-flat]:not(.four-decks)[data-orientation=vertical][data-density][data-library-focus=false] main{grid-template-rows:var(--tf-vertical-wave) calc(var(--tf-deck-height) - var(--tf-vertical-wave) - 4px) 44px var(--rb-library-tracks,minmax(200px,1fr))}
+#workspace-preview[data-workspace=traktor-flat]:not(.four-decks)[data-orientation=vertical][data-density] .detail-waves{height:var(--tf-vertical-wave)!important}
+#workspace-preview[data-workspace=traktor-flat][data-library-focus=true][data-density]{--tf-deck-height:252px}
+/* Four-deck Compact is genuinely denser: two 18px cue rows per horizontal
+   deck / four per vertical deck. Same controls, not a hidden-control preset. */
+#workspace-preview[data-workspace=traktor-flat].four-decks[data-density=compact]{--tf-wave:40px;--tf-pads:40px;--tf-deck-height:calc(228px + var(--tf-wave))}
+#workspace-preview[data-workspace=traktor-flat].four-decks[data-density=compact][data-wave-size=small]{--tf-wave:32px}
+#workspace-preview[data-workspace=traktor-flat].four-decks[data-density=compact][data-wave-size=large]{--tf-wave:72px}
+#workspace-preview[data-workspace=traktor-flat].four-decks[data-density=compact][data-orientation=horizontal] .deck:nth-of-type(n){grid-template-rows:44px 24px var(--tf-wave) 20px var(--tf-pads) 26px 20px 20px}
+#workspace-preview[data-workspace=traktor-flat].four-decks[data-density=compact] .deck:nth-of-type(n) .platter{height:24px!important}
+#workspace-preview[data-workspace=traktor-flat].four-decks[data-density=compact] .deck:nth-of-type(n) .pads{grid-template-rows:repeat(2,18px)}
+#workspace-preview[data-workspace=traktor-flat].four-decks[data-density=compact] .deck:nth-of-type(n) .pad{height:18px;min-height:18px;font-size:9px}
+#workspace-preview[data-workspace=traktor-flat].four-decks[data-density=compact] .deck:nth-of-type(n) .wave-wrap{height:20px}
+#workspace-preview[data-workspace=traktor-flat].four-decks[data-density=compact] .deck:nth-of-type(n) :is(.preview-deck-utilities,.deck-foot) button{min-height:20px;height:20px;font-size:8px}
+#workspace-preview[data-workspace=traktor-flat].four-decks[data-density=compact][data-orientation=vertical]{--tf-deck-height:268px}
+#workspace-preview[data-workspace=traktor-flat].four-decks[data-density=compact][data-orientation=vertical] .deck:nth-of-type(n){grid-template-rows:44px 24px 20px minmax(84px,1fr) 26px 20px 20px}
+#workspace-preview[data-workspace=traktor-flat].four-decks[data-density=compact][data-orientation=vertical] .deck:nth-of-type(n) .pads{grid-template-rows:repeat(4,18px)}
+#workspace-preview[data-workspace=traktor-flat].four-decks[data-density=compact]:has(.deck[data-rb-pad-mode=Loops]){--tf-pads:76px;--tf-deck-height:304px}
+/* No hidden source panel can steal the FX/library grid tracks. */
+#workspace-preview[data-workspace=traktor-flat][data-orientation][data-density] main:has(#panel:not([hidden])){height:auto;min-height:calc(100dvh - 122px)}
+#workspace-preview[data-workspace=traktor-flat].four-decks[data-library-focus=true][data-density=compact]{--tf-wave:0px;--tf-pads:0px;--tf-deck-height:200px}
+#workspace-preview[data-workspace=traktor-flat].four-decks[data-library-focus=true][data-density=compact][data-orientation] .deck:nth-of-type(n){grid-template-rows:44px 24px 0px 20px 0px 26px 20px 20px}
+#workspace-preview[data-workspace=traktor-flat].four-decks[data-library-focus=true][data-density=compact][data-orientation] .deck:nth-of-type(n) .wave-wrap{grid-row:4}
+#workspace-preview[data-workspace=traktor-flat].four-decks[data-library-focus=true][data-density=compact][data-orientation] .deck:nth-of-type(n) .transport{grid-row:6}
+#workspace-preview[data-workspace=traktor-flat].four-decks[data-library-focus=true][data-density=compact][data-orientation] .deck:nth-of-type(n) .preview-deck-utilities{grid-row:7}
+#workspace-preview[data-workspace=traktor-flat].four-decks[data-library-focus=true][data-density=compact][data-orientation] .deck:nth-of-type(n) .deck-foot{grid-row:8}
+/* Hiding the mixer also reclaims its vertical column; comparison stays. */
+#workspace-preview[data-workspace=traktor-flat][data-rb-mixer=false][data-orientation=vertical][data-density][data-library-focus=false] main{grid-template-columns:minmax(0,1fr) 160px minmax(0,1fr);grid-template-rows:var(--tf-deck-height) var(--rb-library-tracks,minmax(200px,1fr))}
+#workspace-preview[data-workspace=traktor-flat].four-decks[data-rb-mixer=false][data-orientation=vertical][data-density][data-library-focus=false] main{grid-template-rows:var(--tf-deck-height) var(--tf-deck-height) var(--rb-library-tracks,minmax(180px,1fr))}
+#workspace-preview[data-workspace=traktor-flat][data-rb-mixer=false][data-orientation=vertical][data-density][data-library-focus=false] .deck:nth-of-type(-n+2){grid-row:1}
+#workspace-preview[data-workspace=traktor-flat][data-rb-mixer=false][data-orientation=vertical][data-density][data-library-focus=false] .deck:nth-of-type(n+3){grid-row:2}
+#workspace-preview[data-workspace=traktor-flat][data-rb-mixer=false][data-orientation=vertical][data-density][data-library-focus=false] .detail-waves{grid-row:1!important;height:100%!important}
+#workspace-preview[data-workspace=traktor-flat].four-decks[data-rb-mixer=false][data-orientation=vertical][data-density][data-library-focus=false] .detail-waves{grid-row:1/3!important}
+#workspace-preview[data-workspace=traktor-flat][data-rb-mixer=false][data-orientation=vertical][data-density][data-library-focus=false] .library{grid-row:2}
+#workspace-preview[data-workspace=traktor-flat].four-decks[data-rb-mixer=false][data-orientation=vertical][data-density][data-library-focus=false] .library{grid-row:3}
+/* Keep the existing advanced pages available through Full; their extra fields
+   get room instead of being clipped by the Compact cue-bank geometry. */
+#workspace-preview[data-workspace=traktor-flat][data-density=expanded]:has(.deck[data-rb-pad-mode]:not([data-rb-pad-mode=Cues]):not([data-rb-pad-mode=Loops])){--tf-pads:208px;--tf-deck-height:532px}
+#workspace-preview[data-workspace=traktor-flat][data-density=expanded] .deck:not([data-rb-pad-mode=Cues]):not([data-rb-pad-mode=Loops]) .deck-body>div:first-child{overflow:auto;min-height:0;max-height:100%}
+#workspace-preview[data-workspace=traktor-flat][data-density=expanded]:has(.deck[data-rb-pad-mode=Loops]){--tf-pads:120px;--tf-deck-height:444px}
+
+/* Wave-size preferences remain meaningful in Full and Vertical as well. */
+#workspace-preview[data-workspace=traktor-flat][data-density=expanded][data-wave-size=small]{--tf-wave:56px;--tf-deck-height:340px}
+#workspace-preview[data-workspace=traktor-flat][data-density=expanded][data-wave-size=large]{--tf-wave:160px;--tf-deck-height:444px}
+#workspace-preview[data-workspace=traktor-flat]:not(.four-decks){--tf-vertical-wave:80px}
+#workspace-preview[data-workspace=traktor-flat][data-wave-size=small]{--tf-vertical-wave:64px}
+#workspace-preview[data-workspace=traktor-flat][data-wave-size=large]{--tf-vertical-wave:128px}
+#workspace-preview[data-workspace=traktor-flat].four-decks[data-wave-size=small]{--tf-vertical-wave:80px}
+#workspace-preview[data-workspace=traktor-flat].four-decks[data-wave-size=large]{--tf-vertical-wave:144px}
+#workspace-preview[data-workspace=traktor-flat]:not(.four-decks)[data-density=compact][data-orientation=vertical][data-wave-size=large]{--tf-deck-height:388px}

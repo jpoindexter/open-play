@@ -9,7 +9,7 @@ export function installLibraryWaveforms({state,engine}){
   const records=new Map(),observed=new WeakSet();
   let enabled=true,busy=false,scheduled=false,decoder;
   try{enabled=localStorage.getItem(preference)!=='hidden';}catch{}
-  const active=()=>enabled&&['rekordbox','serato-hybrid'].includes(document.body.dataset.workspace)&&!document.hidden;
+  const active=()=>enabled&&['rekordbox','serato-hybrid','traktor-flat'].includes(document.body.dataset.workspace)&&!document.hidden;
   const keyFor=track=>track.contentHash||`${track.id}:${track.seed}:${track.bpm}:${track.freq}`;
   const requestFor=key=>new Request(new URL('/__openplay-waveform-cache/'+encodeURIComponent(key),location.origin));
   const cache=globalThis.caches?.open(cacheName).catch(()=>null)||Promise.resolve(null);
@@ -100,7 +100,7 @@ export function installLibraryWaveforms({state,engine}){
   const tree=new MutationObserver(schedule);tree.observe(root,{childList:true,subtree:true});
   const workspace=new MutationObserver(schedule);workspace.observe(document.body,{attributes:true,attributeFilter:['data-workspace']});
   const dialogs=new MutationObserver(()=>{
-    if(!['rekordbox','serato-hybrid'].includes(document.body.dataset.workspace)||document.querySelector('#modal-title').textContent!=='Library columns'||modal.querySelector('[data-preview-column]'))return;
+    if(!['rekordbox','serato-hybrid','traktor-flat'].includes(document.body.dataset.workspace)||document.querySelector('#modal-title').textContent!=='Library columns'||modal.querySelector('[data-preview-column]'))return;
     const settings=modal.querySelector('.settings-grid');if(!settings)return;
     const label=document.createElement('label');label.className='setting';label.textContent='Preview waveform';
     const input=document.createElement('input');input.type='checkbox';input.dataset.previewColumn='';input.checked=enabled;
