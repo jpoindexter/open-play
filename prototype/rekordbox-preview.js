@@ -6,12 +6,37 @@ const move=(node,parent)=>{if(node&&node.parentNode!==parent)parent.append(node)
 const modes=[['Cues','HOT CUE'],['Loops','LOOPS'],['Stems','STEMS'],['Pitch','PITCH PLAY'],['Slicer','SLICER']];
 export function refineRekordboxDeck(deck,index){
   const head=deck.querySelector('.deck-head'),rail=deck.querySelector('.preview-deck-utilities');
+  if(rail)rail.dataset.deckTools=`${'ABCD'[index]} TOOLS`;
   let art=head.querySelector('.rb-artwork');if(!art){art=document.createElement('span');art.className='rb-artwork';art.setAttribute('aria-hidden','true');head.insertBefore(art,deck.querySelector('.deck-title'));}
   const sync=group(deck,'rb-sync-controls',head);
-  for(const action of ['sync','syncOff']){const node=deck.querySelector(`[data-action="${action}"]`);move(node,sync);if(node&&action==='sync')node.textContent='BEAT SYNC';}
+  sync.setAttribute('role','group');sync.setAttribute('aria-label',`Deck ${index+1} Sync and master`);
+  for(const action of ['sync','syncMaster','syncOff']){const node=deck.querySelector(`[data-action="${action}"]`);move(node,sync);if(node&&action==='sync')node.textContent='BEAT SYNC';}
   move(deck.querySelector('.preview-key-row'),head);
   for(const action of ['load','eject','range','keyReset'])move(deck.querySelector(`[data-action="${action}"]`),rail);
-  if(document.body.dataset.workspace!=='traktor-flat')move(deck.querySelector('.tempo-control'),rail);
+  if(document.body.dataset.workspace==='rekordbox'){
+    const tempo=deck.querySelector('.tempo-control');
+    if(tempo){
+      const pitch=group(deck,'rb-tempo-rail');move(tempo,pitch);
+      let caption=pitch.querySelector('.rb-tempo-caption');
+      if(!caption){caption=document.createElement('span');caption.className='rb-tempo-caption';pitch.prepend(caption);}
+      caption.textContent=`${'ABCD'[index]} TEMPO`;
+      const range=deck.querySelector('[data-action="range"]');move(range,pitch);
+      if(range){range.setAttribute('aria-label',`Deck ${index+1} pitch range`);range.title='Change the tempo fader range';}
+      let reset=pitch.querySelector('[data-action="tempoReset"]');
+      if(!reset){reset=document.createElement('button');reset.type='button';reset.dataset.action='tempoReset';reset.dataset.deck=index;reset.textContent='0%';reset.setAttribute('aria-label',`Reset deck ${index+1} tempo to original speed`);pitch.append(reset);}
+      reset.disabled=tempo.querySelector('input').disabled;
+    }
+    const fine=group(deck,'rb-tempo-fine');fine.setAttribute('role','group');fine.setAttribute('aria-label',`Deck ${index+1} BPM fine adjustment`);
+    for(const [action,text,verb]of [['tempoDown','−','Decrease'],['tempoUp','+','Increase']]){
+      let button=fine.querySelector(`[data-action="${action}"]`);
+      if(!button){button=document.createElement('button');button.type='button';button.dataset.action=action;button.dataset.deck=index;button.textContent=text;button.setAttribute('aria-label',`${verb} deck ${index+1} tempo by 0.1 percent`);button.title=`${verb} tempo by 0.1%`;fine.append(button);}
+      button.disabled=!deck.querySelector('.tempo-control input')||deck.querySelector('.tempo-control input').disabled;
+    }
+  }else{
+    deck.querySelector('.tempo-control')?.classList.remove('rb-tempo-rail');
+    deck.querySelector('.rb-tempo-fine')?.remove();
+    if(document.body.dataset.workspace!=='traktor-flat')move(deck.querySelector('.tempo-control'),rail);
+  }
   const transport=deck.querySelector('.transport');move(deck.querySelector('select[data-mode]'),transport);
   const cue=transport.querySelector('[data-action=cue]');if(cue)cue.textContent='CUE';
   const options=group(deck,'rb-deck-options');

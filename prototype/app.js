@@ -9,6 +9,7 @@ import {createLoopPads} from './loop-pads.js';
 import {createJogBend} from './jog-bend.js';
 import {createCensorHolds} from './censor.js';
 import { synchronizeSimple } from './sync.js';
+import { createSyncMaster } from './sync-master.js';
 import { createSmartSync, hasBeatgrid, beatPosition } from './smart-sync.js';
 import {createBeatgrid} from './beatgrid.js';
 import {currentDeckBPM} from './deck-tempo.js';
@@ -170,6 +171,7 @@ try{await restoreLocalAudio();}catch(error){state.localAudio.restoreError=error.
 
 let sampleSyncLeader=()=>null;
 const smartSync = createSmartSync({engine,state,externalLeader:()=>sampleSyncLeader()});
+const syncMaster = createSyncMaster({decks:()=>state.decks.slice(0,state.deckCount)});
 let stemCrate;
 const stemPreparation = createStemPreparation(engine, state.decks, {onChange:t=>{persist();stemCrate?.changed(t);}});
 const stemSlipControls = createStemSlipControls({engine,state,prepare:ensurePreparedStems,render:renderDecks,notify});
@@ -443,7 +445,7 @@ function syncControls(d) {
   if (mode === "Off") return "";
   const smart = mode === "Smart Sync", status = smart ? d.syncState || "off" : d.sync ? "beat" : "off";
   const role = d.sync ? (d.syncRole === "primary" ? "Primary" : "Secondary") : "Not synced";
-  return `<button data-action="syncOff" data-deck="${d.index}" aria-label="Disengage sync on deck ${d.index + 1}" title="${smart?"First OFF: keep relative tempo; second OFF: restore controller pitch":"Disengage sync and restore the last received controller pitch when available"}" ${d.sync || status === "relative" ? "" : "disabled"}>OFF</button><button data-action="sync" data-deck="${d.index}" data-sync-state="${status}" aria-label="Sync deck ${d.index + 1}" aria-pressed="${!!d.sync}" title="${smart && !hasBeatgrid(d.track) ? "Add or analyze a beatgrid first" : role + "; press again to re-sync"}" ${smart && !hasBeatgrid(d.track) ? "disabled" : ""} class="${d.sync ? "active" : ""}">SYNC</button>`;
+  return `<button data-action="syncMaster" data-deck="${d.index}" aria-label="Choose deck ${d.index+1} as Sync master" aria-pressed="${syncMaster.master()===d}" title="${syncMaster.master()===d?(syncMaster.manual()?'Selected master':'Automatic master: first playing deck'):'Match incoming tracks to this deck'} · Shift-click: automatic master" class="${syncMaster.master()===d?'master-active':''}" ${d.track?'':'disabled'}>MASTER</button><button data-action="syncOff" data-deck="${d.index}" aria-label="Disengage sync on deck ${d.index + 1}" title="${smart?"First OFF: keep relative tempo; second OFF: restore controller pitch":"Disengage sync and restore the last received controller pitch when available"}" ${d.sync || status === "relative" ? "" : "disabled"}>OFF</button><button data-action="sync" data-deck="${d.index}" data-sync-state="${status}" aria-label="Sync deck ${d.index + 1}" aria-pressed="${!!d.sync}" title="${smart && !hasBeatgrid(d.track) ? "Add or analyze a beatgrid first" : role + "; press again to re-sync"}" ${smart && !hasBeatgrid(d.track) ? "disabled" : ""} class="${d.sync ? "active" : ""}">SYNC</button>`;
 }
 function smartSyncIndicator(d) {
   if (state.settings["Sync Mode"] !== "Smart Sync") return "";
@@ -807,6 +809,7 @@ async function setDeckKeyShift(index, semitones) {
 }
 async function play(d) {
   if (pitchPlay.latch(d) || cueHolds.latch(d)) {
+    syncMaster.started(d);
     renderDecks();
     return;
   }
@@ -828,6 +831,7 @@ async function play(d) {
       if(!started)await engine.start(d);
       if(!current()||!d.playing)return;
       smartSync.played(d);
+      syncMaster.started(d);
       d.track.plays++;
       state.history.push({
         id: d.track.id,
@@ -1010,18 +1014,25 @@ async function deckAction(action, index, el, event = {}) {
       const wasSynced=d.sync;d.sync=false;d.syncRole=null;d.syncState='off';
       if(wasSynced&&state.settings["Sync Mode"]==='Simple Sync')await panels.resetTempoAbsolute(d);
     }
+  } else if (action === "syncMaster") {
+    syncMaster.select(event.shiftKey?null:d);
+    return; // The clock updates indicators without replacing the focused button.
+  } else if (["tempoDown","tempoUp","tempoReset"].includes(action)) {
+    if(action==='tempoReset')await tempoSliders.reset(d);
+    else await tempoSliders.set(d,tempoSliders.view(d).position+(action==='tempoDown'?-.1:.1));
+    updateTempoSlider(d);persist();return;
   } else if (action === "sync") {
     if (state.settings["Sync Mode"] === "Off") return;
+    const {leader,follower}=syncMaster.plan(d);
     if (state.settings["Sync Mode"] === "Smart Sync") {
-      await smartSync.press(d);
+      if(smartSync.setMaster(leader))await smartSync.press(follower);
+      else await smartSync.press(d);
     } else {
-      const paired = state.decks[index ^ 1];
-      const other = paired?.track ? paired : state.decks.find(o => o !== d && o.track);
-      if (!other) return notify("Load a track on the opposite deck first.");
-      const result = await synchronizeSimple({engine, deck: d, leader: other, snapToGrid: !!state.settings["Snap to Beatgrid"]});
-      d.sync = true; d.syncRole = "secondary";
-      other.sync = true; other.syncRole = "primary";
-      notify(result.kind === "tempo" ? `Tempo matched to deck ${other.index + 1}.` : `Tempo and ${result.kind === "grid" ? "beatgrid" : "transients"} matched to deck ${other.index + 1}.`);
+      const result = await synchronizeSimple({engine, deck:follower, leader, snapToGrid: !!state.settings["Snap to Beatgrid"]});
+      for(const other of state.decks)if(other!==leader&&other.syncRole==='primary')other.syncRole='secondary';
+      follower.sync = true; follower.syncRole = "secondary";
+      leader.sync = true; leader.syncRole = "primary";
+      notify(`Deck ${follower.index+1} ${result.kind==='tempo'?'tempo':'tempo and beats'} matched to MASTER deck ${leader.index+1}.`);
     }
   }
   if (action === "reverse") {
@@ -1958,6 +1969,8 @@ function tick() {
     const tempoText = document.querySelector(`#platter-${d.index} small`);
     const shownBPM = shownDeckBPM(d);
     if (bpmText && bpmText.textContent !== shownBPM) bpmText.textContent = shownBPM;
+    const masterButton=document.querySelector(`[data-action="syncMaster"][data-deck="${d.index}"]`);
+    if(masterButton){const selected=syncMaster.master()===d;masterButton.classList.toggle('master-active',selected);masterButton.setAttribute('aria-pressed',String(selected));masterButton.title=`${selected?(syncMaster.manual()?'Selected master':'Automatic master: first playing deck'):'Match incoming tracks to this deck'} · Shift-click: automatic master`;}
     const shownPercent = `BPM · ${((d.rate - 1) * 100).toFixed(1)}%${state.settings["Sync Mode"] === "Smart Sync" && d.syncState === "relative" ? " · REL" : ""}`;
     if (tempoText && tempoText.textContent !== shownPercent) tempoText.textContent = shownPercent;
     const p = engine.position(d),

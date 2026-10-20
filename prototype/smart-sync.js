@@ -169,6 +169,17 @@ export function createSmartSync({engine, state, externalLeader=()=>null}) {
     request.promise=performPress(deck).finally(()=>{if(pendingPresses.get(deck)===request)pendingPresses.delete(deck);});
     return request.promise;
   }
+  function setMaster(deck) {
+    if (!enabled() || externalLeader()?.valid()) return false;
+    requireGrid(deck.track);
+    const bpm=engaged(deck)&&syncBPM?syncBPM:gridBPM(deck.track,engine.position(deck))*engine.audibleRate(deck);
+    if(!Number.isFinite(bpm)||bpm<=0)throw new Error('Set a valid master BPM before using Sync.');
+    syncBPM=bpm;
+    for(const other of state.decks)if(other!==deck&&other.syncRole==='primary')other.syncRole='secondary';
+    deck.sync=true;deck.syncRole='primary';
+    deck.syncState=deck.playing?(barCompatible(deck)?'beat':'tempo'):'armed';
+    return true;
+  }
   async function start(deck,{isCurrent=()=>true}={}) {
     const track=deck.track,token=engine.startTokens?.get(deck.index);
     const pending=pendingPresses.get(deck);
@@ -263,7 +274,7 @@ export function createSmartSync({engine, state, externalLeader=()=>null}) {
       }
     }
   }
-  return {press,start,played,paused,manipulated,disengage,loaded,reconcile,engaged,timeline,tempo,captureGrid,edited,validate,
+  return {press,setMaster,start,played,paused,manipulated,disengage,loaded,reconcile,engaged,timeline,tempo,captureGrid,edited,validate,
     captureTempo:()=>syncBPM,restoreTempo:bpm=>{syncBPM=bpm;},
     reset:() => {state.decks.forEach(clear);syncBPM=null;}};
 }
