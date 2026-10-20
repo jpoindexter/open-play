@@ -1,3 +1,7 @@
+## Current checkpoint — awaiting real-track listening
+
+The goal is blocked on external acceptance input, not complete. The visible browser panel was revalidated: rekordbox/Compact, both distinct saved real MP3s loaded at0/paused, ten library previews. A fresh real-track LEFT-Play/listening confirmation remains unanswered; earlier audible reports were demos. Hercules is disconnected/computer audio. No new core failure was reproduced in this audit and no unrelated work is justified. Resume from the existing LEFT-Play question, then complete right-deck, manual/Sync transition and clean stop. Hardware/headphone separation requires suitable connected outputs later. HTML-only/no-native boundary remains. Do not restart the project, repeat solved matrices or count geometry/meters as musical acceptance.
+
 # Core DJ first — 19 October 2026
 
 **Sole active goal: core DJ experience.** Stop any off-goal activity immediately and return to the next core blocker. Quick wins and full parity are parked until this goal is achieved or Jason explicitly changes scope.

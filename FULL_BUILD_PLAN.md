@@ -1,3 +1,9 @@
+## Current checkpoint — awaiting real-track listening
+
+The goal is blocked on external acceptance input, not complete. The visible browser panel was revalidated: rekordbox/Compact, both distinct saved real MP3s loaded at0/paused, ten library previews. A fresh real-track LEFT-Play/listening confirmation remains unanswered; earlier audible reports were demos. Hercules is disconnected/computer audio. No new core failure was reproduced in this audit and no unrelated work is justified. Resume from the existing LEFT-Play question, then complete right-deck, manual/Sync transition and clean stop. Hardware/headphone separation requires suitable connected outputs later. HTML-only/no-native boundary remains. Do not restart the project, repeat solved matrices or count geometry/meters as musical acceptance.
+
+---
+
 # Core continuation221 — visible listening panel and usable pitch slider
 
 20 October 2026: resolved the mismatched browser test window. The user's actual panel had older code/generated demos, so earlier audible left/right reports establish demo playback only. The visible panel was refreshed to current rekordbox/Compact and loaded through normal library controls with the two saved real MP3s. Hercules is disconnected; user uses computer audio. Fresh real-track listening confirmation remains pending. Future sessions must identify the actual visible browser tab, rather than assuming the separately controlled review tab is the human's view.
