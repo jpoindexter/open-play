@@ -1,4 +1,5 @@
 import {integratedLoudness} from './loudness.js';
+import {measureTempoDrift} from './tempo-drift.js';
 // Independently implemented local PCM analysis. Estimates, not reference-product parity.
 // Scientific methods and measured limits: docs/research/AUDIO_ANALYSIS_EVALUATION.md.
 const N = 2048,
@@ -387,6 +388,10 @@ export function analyzePCM(channels, sampleRate, options = {}) {
   result.bpm = result.tempo.value;
   result.key = result.keyEstimate.value;
   result.grid = result.tempo.grid;
+  if(result.grid){
+    result.grid.drift=measureTempoDrift(channels[chosen],sampleRate,{bpm:result.bpm,firstBeat:result.grid.firstBeat,fitDuration:analyzedDuration});
+    if(result.grid.drift.detected)result.warnings.push('tempo_drift_detected');
+  }
   if (result.partial)
     result.warnings.push(
       "tempo_and_key_analyzed_first_" + maxSeconds + "_seconds",

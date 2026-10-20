@@ -1,6 +1,7 @@
 import {trackGainDB} from './track-gain.js';
 import {createDeckMIDIRouter,deckMIDITargets,libraryMIDITargets,fxMIDITargets,samplerMIDITargets,herculesPlaybackMappings} from './deck-midi.js';
 import {createBeatgrid,gridBPM} from './beatgrid.js';
+import {mountGridDrift} from './grid-drift-controls.js';
 import {createSamplerSync} from './sampler-sync.js';
 import { createVideoMixer } from "./video.js";
 import { createVideoControls } from "./video-controls.js";
@@ -567,7 +568,7 @@ export function createPanels(a) {
     const t=d.track, draft=(t.gridWarpMarkers||[]).map(m=>({...m}));
     let clearLegacy=false;
     dialog(`Beatgrid · ${t.title}`,
-      `<p>Set the downbeat and base tempo. Each red Beat Warp Marker changes the grid tempo from its source position. Forward Smart Sync uses this map for playback, including browser keylock.</p><div class="form-grid"><label>BPM<input id="grid-bpm" type="number" min="1" max="999" step=".01" value="${t.bpm||120}" ${t.locked?'disabled':''}></label><label>Downbeat offset (seconds)<input id="grid-offset" type="number" step=".001" value="${t.grid??0}" ${t.locked?'disabled':''}></label><label>Marker source time (seconds)<input id="grid-warp-time" type="number" min="0" step=".001" value="${engine.position(d).toFixed(3)}" ${t.locked?'disabled':''}></label><label>Tempo after marker (BPM)<input id="grid-warp-bpm" type="number" min="1" max="999" step=".01" value="${gridBPM(t,engine.position(d))}" ${t.locked?'disabled':''}></label></div><div class="panel-controls"><button id="grid-half">½ BPM</button><button id="grid-double">×2 BPM</button><button id="grid-playhead">Use playhead</button><button id="grid-marker">Set warp marker</button><button id="grid-clear">Clear markers</button><button id="grid-save">Save grid</button></div><div id="grid-markers"></div><p id="grid-status" role="status" aria-live="polite"></p>`,
+      `<p>Set the downbeat and base tempo. Each red Beat Warp Marker changes the grid tempo from its source position. Forward Smart Sync uses this map for playback, including browser keylock.</p><div class="form-grid"><label>BPM<input id="grid-bpm" type="number" min="1" max="999" step="any" value="${t.bpm||120}" ${t.locked?'disabled':''}></label><label>Downbeat offset (seconds)<input id="grid-offset" type="number" step=".001" value="${t.grid??0}" ${t.locked?'disabled':''}></label><label>Marker source time (seconds)<input id="grid-warp-time" type="number" min="0" step=".001" value="${engine.position(d).toFixed(3)}" ${t.locked?'disabled':''}></label><label>Tempo after marker (BPM)<input id="grid-warp-bpm" type="number" min="1" max="999" step="any" value="${gridBPM(t,engine.position(d))}" ${t.locked?'disabled':''}></label></div><div class="panel-controls"><button id="grid-half">½ BPM</button><button id="grid-double">×2 BPM</button><button id="grid-playhead">Use playhead</button><button id="grid-marker">Set warp marker</button><button id="grid-clear">Clear markers</button><button id="grid-save">Save grid</button></div><div id="grid-markers"></div><section aria-label="Whole-track tempo drift"><div class="panel-controls"><button id="grid-drift-check">Check whole-track drift</button><button id="grid-drift-stage" disabled>Stage correction</button></div><p id="grid-drift-status" role="status" aria-live="polite"></p><p>Pulse estimates may differ from musical kicks. Staging replaces this dialog’s draft only; Save grid applies it. Close to cancel.</p></section><p id="grid-status" role="status" aria-live="polite"></p>`,
       body=>{
         const candidate=()=>({...t,bpm:Number($('#grid-bpm').value),grid:Number($('#grid-offset').value),gridWarpMarkers:draft});
         function validate(){const track=candidate();if(!Number.isFinite(track.bpm)||track.bpm<1||track.bpm>999||!Number.isFinite(track.grid))throw new Error('Enter a valid BPM and downbeat offset.');return createBeatgrid(track);}
@@ -599,6 +600,11 @@ export function createPanels(a) {
             renderDecks();renderTracks();$('#modal').close();
           }catch(e){error(e);}
         };
+        mountGridDrift({body,deck:d,engine,apply:next=>{
+          $('#grid-bpm').value=next.bpm;$('#grid-offset').value=next.firstBeat;
+          draft.splice(0,draft.length,...next.markers);validate();render();
+          $('#grid-status').textContent='Drift correction staged; Save grid applies it.';
+        }});
         render();
       });
   }
