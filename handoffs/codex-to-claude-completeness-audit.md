@@ -1,3 +1,9 @@
+# HTML209 — REA-derived Compact decks and mixer
+
+20 October 2026: Applied extracted rekordbox proportions to HTML only. Four-deck rows224→208px, Two-deck Vertical240→224px, Two-deck Horizontal212px; center280→~242px at1440px. Four-channel Vertical order A/B/C/D, Horizontal C/A/B/D; aligned32px rotary rows,18px rings, mirrored two-channel mixer and44px monitor/crossfader bar. Original controls/bindings retained. Loops now stays Compact with240px rows; Full→Compact preserves selected Loops; other modes retain Full without silent mode reset. Selected72/144 core bounds clear in2/4H/V; EQ/fader/CUE/loop-size changes executed/restored, mixer hide/show, Small/Large wave sizes and Full/Pitch guard checked. Read docs/prototype/REKORDBOX_COMPACT_209.md/.json. UI-RB-06 and UI-RB-04 updated. Native0.1.27 ASAR unchanged. All decks paused; visual approval and broader/native/audio parity remain open. Core DJ only; no native build before approval.
+
+---
+
 # REA interface extraction208 — local size guard repaired, actual captures saved
 
 19 October2026: User authorized local REA limit expansion. Patched only Swift native capture identity budget256→512MiB with backup/diff/hashes; same previously failing rekordbox command now succeeds:2V294nodes,4V500nodes, no reported gaps/truncation, selected-window screenshots. REA static inventory10,266nodes/12,369occurrences;3NIBs75nodes/7edges cover menus/helper, not main decks. Read docs/research/REA_INTERFACE_EXTRACTION_208.md/.json, visual token confidence map and tools/patches/REA_LOCAL_PATCH.md. Existing MCP's old Hopper cleanup state remains unresolved; oldPID exited, fresh standalone REA works, do not claim persistent transport repaired. Reconnect it without deleting analysis or weakening shutdown acknowledgement. Native0.1.27 unchanged; HTML207 retained, no native build. Full/Loops→Compact branch remains unexecuted. Core DJ priority and approval gate stay in force.

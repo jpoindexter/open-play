@@ -26,6 +26,7 @@ function applyDisplay(){
   $('#preview-mixer-toggle')?.setAttribute('aria-pressed',String(display.mixer));
   $('#preview-orientation').value=display.orientation;
   $('#preview-density').value=display.density;
+  $('#preview-density').title=document.body.dataset.workspace==='rekordbox'?'Compact keeps Hot Cue and Loop controls visible. Other performance modes use Full.':'Choose a compact or full deck layout';
   $('#preview-wave-size').value=display.size;
   $('#preview-library-focus').setAttribute('aria-pressed',String(display.library));
   $('#preview-crates').setAttribute('aria-pressed',String(display.crates));
@@ -166,7 +167,11 @@ new MutationObserver(decorate).observe($('#decks'),{childList:true});
 new MutationObserver(refineMixer).observe($('#mixer'),{childList:true});
 document.addEventListener('input',event=>{const label=event.target.closest?.('.knob-group');if(label)updateDial(label);const fader=event.target.closest?.('.fader-group');if(fader)updateFader(fader);});
 $('#preview-orientation').onchange=event=>{display.orientation=event.target.value;applyDisplay();};
-$('#preview-density').onchange=event=>{display.density=event.target.value;display.panels.clear();display.library=false;applyDisplay();};
+$('#preview-density').onchange=event=>{
+  const needsFull=document.body.dataset.workspace==='rekordbox'&&[...document.querySelectorAll('.deck')].some(deck=>!['Cues','Loops'].includes(deck.dataset.rbPadMode||'Cues'));
+  display.density=event.target.value==='compact'&&needsFull?'expanded':event.target.value;
+  display.panels.clear();display.library=false;applyDisplay();
+};
 $('#preview-wave-size').onchange=event=>{display.size=event.target.value;applyDisplay();};
 $('#preview-library-focus').onclick=()=>{display.library=!display.library;applyDisplay();};
 $('#preview-crates').onclick=()=>{display.crates=!display.crates;applyDisplay();};

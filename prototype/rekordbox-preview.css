@@ -111,24 +111,6 @@ body[data-workspace=rekordbox][data-orientation] .library{grid-row:4;margin:0;bo
 body[data-workspace=rekordbox][data-orientation] .library-tools{min-height:30px;height:30px;padding:3px 5px}
 body[data-workspace=rekordbox][data-orientation] th{height:25px;font-size:10px;font-weight:400;background:#151515}
 body[data-workspace=rekordbox][data-orientation] td{padding:4px 8px;font-size:12px}
-/* Compact preserves transport, looping, tempo and mixer; only the optional pad
-   bank is collapsed. Layout sizing changes never reset the player's state. */
-body[data-workspace=rekordbox][data-orientation][data-density=compact] .deck{grid-template-columns:minmax(0,1fr) 40px 84px 30px;grid-template-rows:var(--grid-13) var(--grid-9) minmax(calc(var(--grid-13)*2),1fr) var(--grid-7) var(--grid-6)}
-body[data-workspace=rekordbox][data-orientation][data-density=compact] .deck:nth-of-type(even){grid-template-columns:40px 84px 30px minmax(0,1fr)}
-body[data-workspace=rekordbox][data-orientation][data-density=compact] .preview-loop-strip{grid-column:1;grid-row:3;align-self:start;padding:0 4px}
-body[data-workspace=rekordbox][data-orientation][data-density=compact] .preview-loop-strip .loop-line{grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--grid-1)}
-body[data-workspace=rekordbox][data-orientation][data-density=compact] .preview-loop-strip [data-action=loop]{grid-column:1/-1}
-body[data-workspace=rekordbox][data-orientation][data-density=compact] .preview-loop-strip [data-action=loopSave]{grid-column:3;grid-row:2}
-body[data-workspace=rekordbox][data-orientation][data-density=compact] .preview-loop-strip [data-action=loopDouble]{grid-column:2}
-body[data-workspace=rekordbox][data-orientation][data-density=compact] .transport{grid-column:2;grid-row:3;gap:var(--grid-1)}
-body[data-workspace=rekordbox][data-orientation][data-density=compact] .deck .platter{grid-column:3;grid-row:3;width:76px!important;height:76px!important;box-shadow:0 0 0 3px #1c1c1c,0 0 0 4px #999}
-body[data-workspace=rekordbox][data-orientation][data-density=compact] .rb-deck-options{grid-column:4;grid-row:3;padding-bottom:3px}
-body[data-workspace=rekordbox][data-orientation][data-density=compact] .deck:nth-of-type(even) .preview-loop-strip{grid-column:4}
-body[data-workspace=rekordbox][data-orientation][data-density=compact] .deck:nth-of-type(even) .transport{grid-column:1}
-body[data-workspace=rekordbox][data-orientation][data-density=compact] .deck:nth-of-type(even) .platter{grid-column:2}
-body[data-workspace=rekordbox][data-orientation][data-density=compact] .deck:nth-of-type(even) .rb-deck-options{grid-column:3}
-body[data-workspace=rekordbox][data-orientation][data-density=compact] .preview-deck-utilities{grid-row:4}
-body[data-workspace=rekordbox][data-orientation][data-density=compact] .deck-foot{grid-row:5}
 /* Shared monitor/crossfader strip. The crossfader itself is centered. */
 .rb-only{display:none}body[data-workspace=rekordbox] .rb-only{display:block}
 body[data-workspace=rekordbox][data-orientation] .rb-mixer-band{grid-column:1/-1;grid-row:3;display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;gap:var(--grid-3);height:var(--grid-12);padding:var(--grid-1) var(--grid-2);border:0;background:#1c1c1c;margin:var(--grid-0)}
@@ -253,87 +235,76 @@ body[data-workspace=rekordbox].four-decks[data-orientation=horizontal] .channel-
  align-content:center;
 }
 body[data-workspace=rekordbox][data-orientation] .channel-strip .fader-group:focus-within{outline:2px solid #70b5ff;outline-offset:2px}
-/* HTML206 Compact: content-sized decks, independent of the center mixer.
-   Reference: native rekordbox4V short consoles; Traktor Small transport rail.
-   Full layout and every original bound control remain available. */
+/* HTML209 — proportions measured from REA captures208.
+   Four-deck rows ~208px; center ~16.8% of the reference window. Original
+   controls remain bound; only Compact geometry is changed here. */
 body[data-workspace=rekordbox][data-density=compact]{
- --rb-four-height:calc(var(--grid-16)*3 + var(--grid-8));
- --rb-two-mixer-height:calc(var(--grid-16)*2 + var(--grid-9));
- --rb-compact-wave-height:calc(var(--grid-16)*2 + var(--grid-12));
+ --rb-four-height:208px;--rb-center-width:clamp(240px,16.8vw,280px);
+ --rb-knob-size:18px;--rb-knob-row:32px;--rb-channel-min:240px;
+ --rb-two-mixer-height:148px;--rb-pair-height:72px;--rb-compact-wave-height:176px;
 }
-body[data-workspace=rekordbox].four-decks[data-density=compact]{--rb-four-height:calc(var(--grid-16)*3 + var(--grid-8))}
-body[data-workspace=rekordbox][data-density=compact][data-wave-size=small]{--rb-pair-height:calc(var(--grid-16) - var(--grid-2));--rb-compact-wave-height:calc(var(--grid-16)*2 + var(--grid-2))}
-body[data-workspace=rekordbox][data-density=compact][data-wave-size=large]{--rb-pair-height:calc(var(--grid-16) + var(--grid-9));--rb-compact-wave-height:calc(var(--grid-16)*3 + var(--grid-6))}
-body[data-workspace=rekordbox].four-decks[data-density=compact][data-orientation=vertical][data-wave-size=large]{--rb-four-height:calc(var(--grid-16)*4 - var(--grid-3))}
-body[data-workspace=rekordbox][data-density=compact][data-wave-size=medium]{--rb-pair-height:calc(var(--grid-16) + var(--grid-2))}
+body[data-workspace=rekordbox].four-decks[data-density=compact]{--rb-four-height:208px}
+body[data-workspace=rekordbox][data-density=compact][data-wave-size=medium]{--rb-pair-height:72px}
+body[data-workspace=rekordbox][data-density=compact][data-wave-size=small]{--rb-pair-height:56px;--rb-compact-wave-height:136px}
+body[data-workspace=rekordbox][data-density=compact][data-wave-size=large]{--rb-pair-height:100px;--rb-compact-wave-height:216px}
+body[data-workspace=rekordbox].four-decks[data-density=compact][data-orientation=vertical][data-wave-size=large]{--rb-four-height:248px}
+body[data-workspace=rekordbox][data-orientation][data-density=compact] main{grid-template-columns:minmax(0,1fr) var(--rb-center-width) minmax(0,1fr)}
 body[data-workspace=rekordbox][data-orientation][data-density=compact] .deck{
- grid-template-columns:minmax(0,1fr) calc(var(--grid-10)*2) calc(var(--grid-16) + var(--grid-5)) var(--grid-8);
- grid-template-rows:var(--grid-11) var(--grid-6) minmax(calc(var(--grid-11)*2),1fr) var(--grid-7) var(--grid-6);
+ grid-template-columns:minmax(0,1fr) 64px 40px 88px 32px;
+ grid-template-rows:44px 28px minmax(88px,1fr) 20px 20px;gap:2px;
 }
-body[data-workspace=rekordbox][data-orientation][data-density=compact] .deck:nth-of-type(even){grid-template-columns:calc(var(--grid-10)*2) calc(var(--grid-16) + var(--grid-5)) var(--grid-8) minmax(0,1fr)}
-body[data-workspace=rekordbox][data-orientation][data-density=compact] .deck-head{height:var(--grid-11);padding-block:var(--grid-0)}
-body[data-workspace=rekordbox][data-orientation][data-density=compact] .wave-wrap{height:var(--grid-6)}
-body[data-workspace=rekordbox][data-orientation][data-density=compact] .preview-loop-strip{margin:var(--grid-0);padding:var(--grid-0) var(--grid-1)}
-body[data-workspace=rekordbox][data-orientation][data-density=compact] .transport{
- display:grid;grid-template-columns:repeat(2,var(--grid-9));grid-template-rows:var(--grid-6) var(--grid-9);
- gap:var(--grid-1);padding:var(--grid-0);justify-content:center;align-content:start;
-}
-body[data-workspace=rekordbox][data-orientation][data-density=compact] .transport select{grid-column:1/-1;grid-row:1;width:100%}
-body[data-workspace=rekordbox][data-orientation][data-density=compact] .transport [data-action=cue]{grid-column:1;grid-row:2}
-body[data-workspace=rekordbox][data-orientation][data-density=compact] .transport [data-action=play]{grid-column:2;grid-row:2}
-body[data-workspace=rekordbox][data-orientation][data-density=compact] .rb-deck-options{padding:var(--grid-0);gap:var(--grid-1)}
-/* A three-row EQ column beside trim/CUE/fader is sufficient in Compact. */
-body[data-workspace=rekordbox][data-orientation][data-density=compact]:not(.four-decks) #mixer{min-height:var(--rb-two-mixer-height)}
-body[data-workspace=rekordbox][data-orientation][data-density=compact]:not(.four-decks) .channel-strip{
- grid-template-rows:var(--grid-3) repeat(3,var(--rb-knob-row)) var(--grid-3);align-content:center;
-}
-/*4V shares its middle column across both shorter deck rows; the mixer no
-  longer forces each deck to be as tall as all four EQ rows plus a fader. */
-body[data-workspace=rekordbox].four-decks[data-orientation=vertical][data-density=compact][data-rb-mixer=true][data-library-focus=false] main{
- grid-template-rows:var(--rb-compact-wave-height) calc(var(--rb-four-height) - var(--rb-compact-wave-height) - var(--grid-1)) var(--rb-four-height) var(--grid-12) minmax(calc(var(--grid-16)*2 + var(--grid-13)),1fr);
-}
+body[data-workspace=rekordbox][data-orientation][data-density=compact] .deck:nth-of-type(even){grid-template-columns:40px 88px 32px 64px minmax(0,1fr)}
+body[data-workspace=rekordbox][data-orientation][data-density=compact] .deck-head{height:44px;padding-block:0}
+body[data-workspace=rekordbox][data-orientation][data-density=compact] .wave-wrap{height:28px}
+body[data-workspace=rekordbox][data-orientation][data-density=compact] .deck-body>div:first-child{grid-column:1;grid-row:3;align-self:center;padding:0 4px;min-width:0}
+body[data-workspace=rekordbox][data-orientation][data-density=compact] .deck:nth-of-type(even) .deck-body>div:first-child{grid-column:5}
+body[data-workspace=rekordbox][data-orientation][data-density=compact] .pads{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:repeat(4,16px);gap:2px}
+body[data-workspace=rekordbox][data-orientation][data-density=compact] .pad{height:16px;min-height:16px;padding:0 4px;font:9px/12px Arial,sans-serif;gap:4px}
+body[data-workspace=rekordbox][data-orientation][data-density=compact] .rb-pad-tools{margin-top:2px;padding-top:0;border:0;gap:4px}
+body[data-workspace=rekordbox][data-orientation][data-density=compact] .rb-pad-tools select{height:16px;min-height:16px;padding:0 4px;font:9px/12px Arial,sans-serif}
+body[data-workspace=rekordbox][data-orientation][data-density=compact] .preview-loop-strip{grid-column:2;grid-row:3;align-self:center;padding:0;margin:0}
+body[data-workspace=rekordbox][data-orientation][data-density=compact] .deck:nth-of-type(even) .preview-loop-strip{grid-column:4}
+body[data-workspace=rekordbox][data-orientation][data-density=compact] .preview-loop-strip .loop-line{grid-template-columns:repeat(2,minmax(0,1fr));gap:4px}
+body[data-workspace=rekordbox][data-orientation][data-density=compact] .preview-loop-strip [data-action=loop]{height:28px}
+body[data-workspace=rekordbox][data-orientation][data-density=compact] .transport{grid-column:3;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:4px;padding:0;align-self:center}
+body[data-workspace=rekordbox][data-orientation][data-density=compact] .deck:nth-of-type(even) .transport{grid-column:1}
+body[data-workspace=rekordbox][data-orientation][data-density=compact] .transport select{height:20px;min-height:20px;width:40px}
+body[data-workspace=rekordbox][data-orientation][data-density=compact] .transport :is([data-action=cue],[data-action=play]){width:28px;min-width:28px;height:28px;min-height:28px;font-size:9px}
+body[data-workspace=rekordbox][data-orientation][data-density=compact] .deck .platter{grid-column:4;width:80px!important;height:80px!important;box-shadow:0 0 0 3px #1c1c1c,0 0 0 4px #999}
+body[data-workspace=rekordbox][data-orientation][data-density=compact] .deck:nth-of-type(even) .platter{grid-column:2}
+body[data-workspace=rekordbox][data-orientation][data-density=compact] .rb-deck-options{grid-column:5;padding:0;gap:4px}
+body[data-workspace=rekordbox][data-orientation][data-density=compact] .deck:nth-of-type(even) .rb-deck-options{grid-column:3}
+body[data-workspace=rekordbox][data-orientation][data-density=compact] :is(.preview-deck-utilities,.deck-foot){gap:4px}
+body[data-workspace=rekordbox][data-orientation][data-density=compact] :is(.preview-deck-utilities,.deck-foot) button,
+body[data-workspace=rekordbox][data-orientation][data-density=compact] .deck-foot .deck-disclosure{height:20px;min-height:20px;padding-block:0}
+body[data-workspace=rekordbox][data-orientation][data-density=compact] .deck-foot .loop-line{gap:2px}
+body[data-workspace=rekordbox][data-orientation][data-density=compact] #mixer{padding:4px 8px;gap:4px}
+body[data-workspace=rekordbox][data-orientation][data-density=compact] .channel-strip{grid-template-rows:12px repeat(4,32px) 20px minmax(48px,1fr);gap:4px;align-content:stretch}
+body[data-workspace=rekordbox][data-orientation][data-density=compact] .channel-strip .knob-group{font:9px/10px Arial,sans-serif}
+body[data-workspace=rekordbox][data-orientation][data-density=compact] .channel-strip>button{height:20px;min-height:20px;width:40px;font-size:9px}
+body[data-workspace=rekordbox][data-orientation][data-density=compact]:not(.four-decks) #mixer{min-height:var(--rb-two-mixer-height);gap:12px;padding:4px 8px}
+body[data-workspace=rekordbox][data-orientation][data-density=compact]:not(.four-decks) .channel-strip{grid-template-columns:44px 44px;grid-template-rows:12px repeat(3,32px) 12px;align-content:center}
+body[data-workspace=rekordbox][data-orientation][data-density=compact]:not(.four-decks) .channel-strip .knob-group{width:44px}
+/*4V: waveform over one row of four channels; row boundaries stay shared. */
+body[data-workspace=rekordbox].four-decks[data-orientation=vertical][data-density=compact][data-rb-mixer=true][data-library-focus=false] main{grid-template-rows:var(--rb-compact-wave-height) calc(var(--rb-four-height) - var(--rb-compact-wave-height) - 4px) var(--rb-four-height) 44px minmax(180px,1fr)}
 body[data-workspace=rekordbox].four-decks[data-orientation=vertical][data-density=compact][data-rb-mixer=true][data-library-focus=false] .deck:nth-of-type(-n+2){grid-row:1/3}
 body[data-workspace=rekordbox].four-decks[data-orientation=vertical][data-density=compact][data-rb-mixer=true][data-library-focus=false] .deck:nth-of-type(n+3){grid-row:3}
 body[data-workspace=rekordbox].four-decks[data-orientation=vertical][data-density=compact][data-rb-mixer=true][data-library-focus=false] .detail-waves{height:var(--rb-compact-wave-height)!important}
 body[data-workspace=rekordbox].four-decks[data-orientation=vertical][data-density=compact][data-rb-mixer=true][data-library-focus=false] #mixer{grid-row:2/4}
 body[data-workspace=rekordbox].four-decks[data-orientation=vertical][data-density=compact][data-rb-mixer=true][data-library-focus=false] .rb-mixer-band{grid-row:4}
 body[data-workspace=rekordbox].four-decks[data-orientation=vertical][data-density=compact][data-rb-mixer=true][data-library-focus=false] .library{grid-row:5}
+body[data-workspace=rekordbox].four-decks[data-orientation=vertical][data-density=compact] .channel-strip[data-rb-channel='0']{grid-column:1}
+body[data-workspace=rekordbox].four-decks[data-orientation=vertical][data-density=compact] .channel-strip[data-rb-channel='1']{grid-column:2}
+body[data-workspace=rekordbox].four-decks[data-orientation=vertical][data-density=compact] .channel-strip[data-rb-channel='2']{grid-column:3}
+body[data-workspace=rekordbox][data-orientation][data-density=compact] .rb-mixer-band{height:44px}
+/* Mixer-off reclaims its column; the shared waveform stays usable in4V. */
+body[data-workspace=rekordbox][data-orientation=horizontal][data-density=compact][data-rb-mixer=false] main{grid-template-columns:1fr 1fr}
+body[data-workspace=rekordbox][data-orientation=vertical][data-density=compact][data-rb-mixer=false].four-decks main{grid-template-columns:minmax(0,1fr) 180px minmax(0,1fr)}
 
-body[data-workspace=rekordbox][data-orientation=horizontal][data-density=compact]:not(.four-decks)[data-rb-mixer=true] main{grid-template-columns:minmax(0,1fr) calc(var(--grid-16)*4 + var(--grid-6)) minmax(0,1fr)}
-/* HTML207: Jason's supplied4V screenshot has visible A–H cue rows beside a
-   narrow loop column, stacked mode/CUE/Play, jog and options. Compact keeps
-   this arrangement instead of replacing the cue bank with stretched loops. */
-body[data-workspace=rekordbox][data-orientation][data-density=compact] .deck{
- grid-template-columns:minmax(0,1fr) var(--grid-16) var(--grid-10) calc(var(--grid-11)*2) var(--grid-8);
-}
-body[data-workspace=rekordbox][data-orientation][data-density=compact] .deck:nth-of-type(even){
- grid-template-columns:var(--grid-10) calc(var(--grid-11)*2) var(--grid-8) var(--grid-16) minmax(0,1fr);
-}
-body[data-workspace=rekordbox][data-orientation][data-density=compact] .deck-body>div:first-child{
- grid-column:1;grid-row:3;align-self:center;padding:var(--grid-0) var(--grid-1);min-width:0;
-}
-body[data-workspace=rekordbox][data-orientation][data-density=compact] .deck:nth-of-type(even) .deck-body>div:first-child{grid-column:5}
-body[data-workspace=rekordbox][data-orientation][data-density=compact] .pads{
- display:grid;grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:repeat(4,var(--grid-4));gap:calc(var(--grid-1)/2);
-}
-body[data-workspace=rekordbox][data-orientation][data-density=compact] .pad{
- height:var(--grid-4);min-height:var(--grid-4);padding:var(--grid-0) var(--grid-1);font:9px/12px Arial,sans-serif;gap:var(--grid-1);
-}
-body[data-workspace=rekordbox][data-orientation][data-density=compact] .rb-pad-tools{
- margin-top:calc(var(--grid-1)/2);padding-top:var(--grid-0);border:0;gap:var(--grid-1);
-}
-body[data-workspace=rekordbox][data-orientation][data-density=compact] .rb-pad-tools select{height:var(--grid-4);min-height:var(--grid-4);padding:var(--grid-0) var(--grid-1);font:9px/12px Arial,sans-serif}
-body[data-workspace=rekordbox][data-orientation][data-density=compact] .preview-loop-strip{grid-column:2;grid-row:3;align-self:center;padding:var(--grid-0);margin:var(--grid-0)}
-body[data-workspace=rekordbox][data-orientation][data-density=compact] .deck:nth-of-type(even) .preview-loop-strip{grid-column:4}
-body[data-workspace=rekordbox][data-orientation][data-density=compact] .preview-loop-strip .loop-line{grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--grid-1)}
-body[data-workspace=rekordbox][data-orientation][data-density=compact] .preview-loop-strip [data-action=loop]{height:var(--grid-7)}
-body[data-workspace=rekordbox][data-orientation][data-density=compact] .transport{
- grid-column:3;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:var(--grid-1);padding:var(--grid-0);align-self:center;
-}
-body[data-workspace=rekordbox][data-orientation][data-density=compact] .deck:nth-of-type(even) .transport{grid-column:1}
-body[data-workspace=rekordbox][data-orientation][data-density=compact] .transport select{height:var(--grid-5);min-height:var(--grid-5);width:var(--grid-10)}
-body[data-workspace=rekordbox][data-orientation][data-density=compact] .transport :is([data-action=cue],[data-action=play]){width:var(--grid-7);min-width:var(--grid-7);height:var(--grid-7);min-height:var(--grid-7);font-size:9px}
-body[data-workspace=rekordbox][data-orientation][data-density=compact] .deck .platter{grid-column:4;width:calc(var(--grid-10)*2)!important;height:calc(var(--grid-10)*2)!important}
-body[data-workspace=rekordbox][data-orientation][data-density=compact] .deck:nth-of-type(even) .platter{grid-column:2}
-body[data-workspace=rekordbox][data-orientation][data-density=compact] .rb-deck-options{grid-column:5}
-body[data-workspace=rekordbox][data-orientation][data-density=compact] .deck:nth-of-type(even) .rb-deck-options{grid-column:3}
+/* Saved/auto/roll mode selectors stay visible in Compact without changing
+   the selected pad mode. Grow the shared deck row by one control line. */
+body[data-workspace=rekordbox][data-density=compact]:has(.deck[data-rb-pad-mode=Loops]){--rb-four-height:240px;--rb-two-mixer-height:164px}
+body[data-workspace=rekordbox][data-orientation][data-density=compact]:has(.deck[data-rb-pad-mode=Loops]) .deck{grid-template-rows:44px 28px minmax(120px,1fr) 20px 20px}
+body[data-workspace=rekordbox][data-orientation][data-density=compact] .deck[data-rb-pad-mode=Loops] .deck-body>div:first-child>nav.loop-line{margin:0 0 4px;gap:2px;flex-wrap:wrap}
+body[data-workspace=rekordbox][data-orientation][data-density=compact] .deck[data-rb-pad-mode=Loops] .deck-body>div:first-child>nav.loop-line button{min-height:20px;height:20px;padding:0 2px;font-size:8px}
+body[data-workspace=rekordbox][data-orientation=vertical][data-density=compact][data-wave-size=large]:has(.deck[data-rb-pad-mode=Loops]){--rb-four-height:248px}
