@@ -1,5 +1,7 @@
 # Open Play desktop test
 
+**Historical native notes.** Current work is the rekordbox HTML core prototype; no desktop build or launch is part of the20October audit reconciliation. The latest recorded frozen native candidate is0.1.27; older version/default claims below describe their historical checkpoint. Start with [current core status](../docs/delivery/CORE_DJ_FIRST.md) and [audit](../docs/prototype/CORE_DJ_AUDIT_2026-10-20.md).
+
 The default **Start Open Play Desktop.command** opens local test **0.1.6**. The separate **Start Open Play Desktop 0.1.5.command** preserves the prior persistence/keylock build; earlier0.1.3/0.1.1 launchers remain available. Quit the running test before switching versions. This is the already-approved Electron wrapper around the existing browser implementation, with no native DSP rewrite or public release.
 
 Version0.1.6 packages immutable source `dd068e4dc9338d1f4f131e0c64c9195073fbebed`; approved baseline `f8b0abf` remains separate. Actual ASAR `f9e85d9ef3150fd37c15f5b3d72a4e3f6a06a42a59bf29617a43bdf566cdba6e`:222/222 prototype files match. Host changes are title/About metadata; sandbox, permissions, fixed loopback origin and storage partition remain unchanged. The cleanly closed0.1.5 local profile was backed up before launch; older bundles are unchanged.

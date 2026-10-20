@@ -1,10 +1,10 @@
 # Open Play
 
-Current local desktop test: **0.1.23**, open/stopped with the Hercules master1/2 and cue3/4 selected. Use `Start Open Play Current Test.command`; see [current instructions](docs/prototype/TRY_CURRENT_DESKTOP.md) and [scoped native evidence](docs/prototype/DESKTOP_0.1.23_REVIEW.md). Physical firstPlay/full parity remain pending;22and its profile backup remain available.
+Current work is the **rekordbox HTML core DJ prototype**: [open the layout preview](http://127.0.0.1:8848/prototype/layout-preview.html), [read the audit and next steps](docs/prototype/CORE_DJ_AUDIT_2026-10-20.md), or [read the current core status](docs/delivery/CORE_DJ_FIRST.md). This pass is documentation/Trello reconciliation, then stop; code safety fixes and the listening session are queued. Preserve all controls and library waveform previews. **No desktop rebuild.**
 
 Independent open-source desktop DJ project, with a browser review candidate and ongoing reference investigation. The goal is familiar Serato DJ Pro design and behavior without artificial feature, account or device gates in the independent implementation.
 
-**Jason approved HTML revision f8b0abf for a local desktop test.** Build0.1.1 is available through `Start Open Play Desktop.command`; see [desktop test instructions](desktop/README.md). Existing UI/audio code is preserved. Full1:1 and physical headphone/master routing remain unverified.
+Historical local desktop approval for revision `f8b0abf` and previous test builds is retained in [approvals](docs/approvals.md). The latest recorded frozen native candidate is0.1.27; it is not rebuilt or launched for this HTML-only work. [Earlier desktop instructions](desktop/README.md) describe historical candidates; they do not override the current scope. Full core, vendor parity and physical routing acceptance remain open.
 
 - [Run the HTML prototype](prototype/README.md)
 - [Per-file Video FX save/recall evidence](docs/prototype/VIDEO_FILE_FX_REVIEW.md)
@@ -30,7 +30,7 @@ Independent open-source desktop DJ project, with a browser review candidate and 
 - [Approval record](docs/approvals.md)
 - [Private Trello board](https://trello.com/b/OqMGEjpe/open-play-serato-parity)
 
-Reference: installed Serato DJ Pro 4.0.10.213, with Desktop installers 4.0.9 and 4.0.10. Connected test device: Hercules DJControl Inpulse 300 MK2. Ghidra is the selected deep-analysis tool; Hopper is a demo.
+Reference: installed Serato DJ Pro 4.0.10.213, with Desktop installers 4.0.9 and 4.0.10. Hardware reference: Hercules DJControl Inpulse 300 MK2. The latest recorded session used computer audio with that controller disconnected; no live device claim is made here. Ghidra is the selected deep-analysis tool; Hopper is a demo.
 
 Findings distinguish observed behavior, file evidence, official documentation, inference, proposals and unknowns. Device enumeration and source inspection are not complete hardware compatibility. The original 74 proposed feature groups have expanded to 110; that count is not an assertion that the reference has exactly 110 features or that parity is verified.
 

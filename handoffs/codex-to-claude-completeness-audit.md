@@ -1,10 +1,26 @@
-## Current checkpoint — Sync pop remains intermittent and open
+## Current status — core audit reconciliation (20 October 2026)
+
+Active target: **rekordbox HTML / Horizontal / Compact**, audited source `2bd8164`. [Full audit and next implementation plan](../docs/prototype/CORE_DJ_AUDIT_2026-10-20.md). Current pass updates documentation and Trello, verifies the result, then **stops**. **No desktop rebuild.** No production code fixes, listening session, native build or broad cleanup in this pass. Existing native0.1.27 remains historical/frozen evidence, not the target.
+
+Confirmed controlled defects are queued as [CORE-FIX-05 cue ownership](https://trello.com/c/x35fpHyL) and [CORE-FIX-06 shortcut safety](https://trello.com/c/7qQ76Z2V). Also queue in-place Sync focus updates and deck-specific headphone-CUE names/state. Next implementation block: cue revocation before replacement/eject/stop and safe modifier/focus/composition guards, followed by one real-track manual-tempo/jog/EQ/temporary-Cue/clean-stop session. Preserve all custom controls, layouts and library waveform previews; do not start this block automatically.
+
+[CORE-FIX-01](https://trello.com/c/6cK0v0iy) remains OPEN: master matching works in scoped evidence, but an intermittent pop was reported even with incoming paused. Latest real-track retry was quiet; that is not a fix. No speculative audio patch or repeated clean-case matrix. Computer audio is the last recorded setup; physical cue/multichannel/Hercules acceptance awaits suitable hardware. Runtime state must be refreshed rather than inferred from historical paused positions. The prior585545-byte recording was retained in the browser panel, but its filesystem download was not verified; preserve it before reload if still needed.
+
+Carry forward scoped user evidence for independent real-MP3 playback, channel-B fader silence/return, crossfader isolation/one smooth synced transition, filter directions/reset and incoming tempo matching. Current manual beatmatch/jog, per-channel EQ, temporary-Cue/latch and final clean-stop session remain pending; no full core/parity acceptance.
+
+Trello target after reconciliation:133 retained/new cards, Core22 / Next17 / Later87 / hardware-blocked4 / approvals2 / evidence1. Two new defects only; no broad card marked complete. Readback and description/model preservation are recorded in `docs/delivery/core-dj-reconciliation-20261020.json`. Existing formal criteria/history/models remain. Malformed restore is tracked on LIB-011, cache growth AUD-006, scaling UI-006 and cue semantics UI-004/MIX-004; full shortcuts remain UI-002 with core subset linked to06.
+
+Execution verification for this pass: document links, exact original-prompt suffix, unchanged production/native source, and remote Trello identities/counts/dispositions; no playback/native acceptance test. Audit tests from the preceding read-only pass are reported in the audit with their narrower scope.
+
+---
+
+## Historical checkpoint — Sync pop remains intermittent and open
 
 20 October: HTML224 incoming tempo matching is confirmed by Jason, but he reports a glitch/pop on BEAT SYNC even with the incoming deck paused. A subsequent actual real-track retry in visible tab212 (LEFT Moonglow playing121BPM, RIGHT paused, RIGHT Sync) had **no pop per Jason**; LEFT stayed121 and RIGHT matched121 without starting. This is not a verified fix. Two-second base/full-preview and six-second trusted-pointer postmaster tone captures stayed continuous and retained the outgoing voice/rate. These do not rule out intermittent device-output dropouts or prove musical quality. No production audio change was made on this evidence. CORE-FIX-01 https://trello.com/c/6cK0v0iy remains OPEN and updated. Detailed evidence and exact next reproduction: docs/prototype/SYNC_POP_INVESTIGATION.md. Current visible real tracks are paused, both matched121/Sync engaged; final recording585545bytes remains available in the Recording panel, but its filesystem download was not verified. HTML only; native0.1.27 unchanged. Preserve previews/all controls; no stems/FX expansion. Direct mouse-pitch feel, manual beatmatch/jog, EQ/cue, suitable hardware routing and full shortcuts remain open. Avoid repeating clean tone checks without new evidence; capture the next actual pop.
 
 ---
 
-## Current checkpoint — HTML224 deck controls and stable Sync master
+## Historical checkpoint — HTML224 deck controls and stable Sync master
 
 Jason's new screenshots/report supersede the previously optimistic manual-return checkpoint: later state had RIGHT still synced, and Sync could slow the outgoing playing deck. Four separate Core Now fixes are implemented/tracked: master ownership6cK0v0iy, deck-owned vertical tempo railsK8UGCT2P, BPMfine−/+902sYCVG and deck groupingdHVXccVC (trello.com/c/<id>). Existing native0.1.27 unchanged. Actual real-track UI checks preserve outgoingLEFT130.7 while incomingRIGHT matches130.7, and reversed outgoingRIGHT124.8 while incomingLEFT matches124.8. MASTER explicit/AUTO and BPM+0.1%/0%reset execute. Original input/transport/loop/utility nodes and ten library previews retained. Compact2/4decks H/V containment observed after correcting vertical intrinsic sizing and inherited right-side grid columns. Fresh user listening, direct mouse-rail feel and broader Smart/warp configurations remain unaccepted; no full-core/parity claim. Current visible tab212 is2DeckHorizontal/Compact, both real tracks paused0, SyncOFF/pitch0. Next re-run Jason's incoming-track listening scenario with the visibleMASTER indication, then continue manual beatmatch/jog/EQ/cue/hardware as available. Full keyboard shortcuts stay OPEN on UI-002. Review/evidence: docs/prototype/CORE_DECK_SYNC_224.md. No desktop rebuild or extras.
 
@@ -2169,7 +2185,7 @@ Independent reviews are complete: whole-recording review reproduces all 91 windo
 
 ## Prior checkpoint — historical
 
-## Current checkpoint — native0.1.5 persistence subset executed
+## Historical checkpoint — native0.1.5 persistence subset executed
 Independent whole-recording review corroborates both native captures without promoting UI/PID observations to reviewer execution. Read docs/research/DESKTOP_PERSISTENCE_AUDIO_REVIEW.md and docs/prototype/desktop-0.1.5-audio-independent-results.json. All 11 related Trello descriptions were updated and read back exactly, open/incomplete, with model/effort routing preserved (docs/delivery/trello-desktop-0.1.5-sync.json). Full parity remains unverified.
 
 
