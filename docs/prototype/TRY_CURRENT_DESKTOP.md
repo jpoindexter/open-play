@@ -2,9 +2,9 @@
 
 Open `Start Open Play Current Test.command` or `Start Open Play Playback Test 0.1.34.command`. Close another playback-test version first; the saved profile/port18775 and older bundles remain. This candidate is sourced0f2094. [Executed corpus/native evidence and remaining gates](SYNC_CORPUS_034.md).
 
-The running app currently has Anika Kunst/BX3 paused and SyncOFF with the reviewed BX3 warp marker saved. On restart the app loads demo decks; select each saved real song and use Shift+Left/Right. Library imports/previews persist. Current master gain is approximately−10dB. No audio original is changed.
+The running app currently has Anika Kunst/BX3 stopped after listening (A02:45.7/B09:14.8), Sync still engaged, with the reviewed BX3 marker saved. On restart the app loads demo decks; select each saved real song and use Shift+Left/Right. Library imports/previews persist. Current master gain is approximately−10dB. No audio original is changed.
 
-Fresh listening is still required. Play outgoing A, arm incoming B with Smart Sync, then Play B; confirm A retains132BPM and B enters on phase. Compare through BX3’s later corrected section after reviewing source position. Do not infer musical agreement from equal displayed BPM or grid lines. Keep the pop defect, BPM/downbeat ambiguity and physical headphone/controller gates open.
+Initial other-song launch was confirmed aligned/clean; late BX3 was reported on point, with difficult visual tracking/no headphones limiting precision. Exact timing and hardware acceptance remain open. For a fresh check, reset source positions while stopped. Play outgoing A, arm incoming B with Smart Sync, then Play B; confirm A retains132BPM and B enters on phase. Compare through BX3’s later corrected section after reviewing source position. Do not infer musical agreement from equal displayed BPM or grid lines. Keep the pop defect, BPM/downbeat ambiguity and physical headphone/controller gates open.
 
 ## Historical0.1.30 instructions
 
