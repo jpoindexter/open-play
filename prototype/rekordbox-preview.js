@@ -10,8 +10,8 @@ export function refineRekordboxDeck(deck,index){
   const sync=group(deck,'rb-sync-controls',head);
   for(const action of ['sync','syncOff']){const node=deck.querySelector(`[data-action="${action}"]`);move(node,sync);if(node&&action==='sync')node.textContent='BEAT SYNC';}
   move(deck.querySelector('.preview-key-row'),head);
-  for(const action of ['keyReset','load','eject','range'])move(deck.querySelector(`[data-action="${action}"]`),rail);
-  move(deck.querySelector('.tempo-control'),rail);
+  for(const action of ['load','eject','range','keyReset'])move(deck.querySelector(`[data-action="${action}"]`),rail);
+  if(document.body.dataset.workspace!=='traktor-flat')move(deck.querySelector('.tempo-control'),rail);
   const transport=deck.querySelector('.transport');move(deck.querySelector('select[data-mode]'),transport);
   const cue=transport.querySelector('[data-action=cue]');if(cue)cue.textContent='CUE';
   const options=group(deck,'rb-deck-options');

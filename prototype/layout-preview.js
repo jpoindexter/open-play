@@ -16,7 +16,8 @@ const layout=$('#layout');
 const display={orientation:'horizontal',density:'compact',size:'medium',library:false,crates:true,mixer:true,panels:new Map()};
 layout.hidden=true;
 const workspaceDisplays=new Map([['traktor-flat',{orientation:'horizontal',density:'compact'}],['serato-hybrid',{orientation:'horizontal',density:'compact'}],['hybrid',{orientation:'vertical',density:'compact'}],['rekordbox',{orientation:'horizontal',density:'expanded'}]]);
-function refined(){return ['hybrid','rekordbox','serato-hybrid','traktor-flat'].includes(document.body.dataset.workspace);}
+function flat(){return document.body.dataset.previewShell==='flat';}
+function refined(){return flat()||document.body.dataset.workspace==='hybrid';}
 function vertical(){return refined()&&display.orientation==='vertical';}
 function deckWaveforms(){return document.body.dataset.workspace==='traktor'||(document.body.dataset.workspace==='traktor-flat'&&!vertical());}
 function applyDisplay(){
@@ -29,7 +30,7 @@ function applyDisplay(){
   $('#preview-mixer-toggle')?.setAttribute('aria-pressed',String(display.mixer));
   $('#preview-orientation').value=display.orientation;
   $('#preview-density').value=display.density;
-  $('#preview-density').title=['rekordbox','serato-hybrid','traktor-flat'].includes(document.body.dataset.workspace)?'Compact keeps Hot Cue and Loop controls visible. Other performance modes use Full.':'Choose a compact or full deck layout';
+  $('#preview-density').title=flat()?'Compact keeps Hot Cue and Loop controls visible. Other performance modes use Full.':'Choose a compact or full deck layout';
   $('#preview-wave-size').value=display.size;
   $('#preview-library-focus').setAttribute('aria-pressed',String(display.library));
   $('#preview-crates').setAttribute('aria-pressed',String(display.crates));
@@ -41,7 +42,7 @@ function updatePanels(deck,index){
   const panel=deck.querySelector('.deck-body>div:first-child');
   if(!panel)return;
   panel.id=`preview-controls-${index}`;
-  const open=!refined()||(!display.library&&(display.panels.get(index)??(['rekordbox','serato-hybrid','traktor-flat'].includes(document.body.dataset.workspace)||display.density==='expanded')));
+  const open=!refined()||(!display.library&&(display.panels.get(index)??(flat()||display.density==='expanded')));
   panel.hidden=!open;
   deck.dataset.controlsOpen=String(open);
   let button=deck.querySelector('.deck-disclosure');
@@ -91,7 +92,7 @@ function decorate(){
 }
 
 function refinePanelLayout(){
-  if(!['rekordbox','serato-hybrid','traktor-flat'].includes(document.body.dataset.workspace))return;
+  if(!flat())return;
   const four=document.querySelectorAll('.deck').length===4;
   const row=display.library?(four?(display.mixer?4:3):(display.mixer?3:2))
     :four?(display.orientation==='horizontal'?(display.mixer?5:4):(display.mixer?(display.density==='compact'||document.body.dataset.workspace==='serato-hybrid'?5:4):3))
@@ -120,7 +121,7 @@ function refineDeck(deck,index){
     key.setAttribute('aria-label',`Deck ${index+1} track key: ${key.textContent}`);
     key.title=key.textContent==='Unknown'?'No confident key is available. Analyze or enter a track key in library metadata.':'Track key, including the current semitone shift';
   }
-  for(const action of ['keyDown','keyUp','keySync','keyReset']){
+  for(const action of ['keyDown','keyUp','keySync',...(!flat()?['keyReset']:[])]){
     const button=deck.querySelector(`[data-action="${action}"]`);
     if(button&&button.parentNode!==row)row.append(button);
   }
@@ -132,13 +133,13 @@ function refineDeck(deck,index){
   }
   const beat=deck.querySelector('.beat-position');if(beat&&beat.parentNode!==deck.querySelector('.deck-foot'))deck.querySelector('.deck-foot').append(beat);
   const scratch=deck.querySelector('.scratch-status');if(scratch&&scratch.parentNode!==deck.querySelector('.deck-foot'))deck.querySelector('.deck-foot').append(scratch);
-  if(['rekordbox','serato-hybrid','traktor-flat'].includes(document.body.dataset.workspace)){
+  if(flat()){
     let clock=deck.querySelector('.preview-deck-time');
     if(!clock){clock=document.createElement('div');clock.className='preview-deck-time';clock.setAttribute('aria-label',`Deck ${index+1} elapsed and remaining time`);deck.querySelector('.deck-head').insertBefore(clock,load);}
     for(const node of [deck.querySelector('time'),deck.querySelector(`[id="remain-${index}"]`)])if(node&&node.parentNode!==clock)clock.append(node);
   }
   const title=deck.querySelector('.deck-title strong');if(title)title.title=title.textContent;
-  if(['rekordbox','serato-hybrid','traktor-flat'].includes(document.body.dataset.workspace))refineRekordboxDeck(deck,index);
+  if(flat())refineRekordboxDeck(deck,index);
   if(document.body.dataset.workspace==='traktor-flat')refineTraktorFlatDeck(deck,index);
 }
 function refineMixer(){
@@ -156,7 +157,7 @@ function refineMixer(){
     footer=document.createElement('div');footer.className='preview-mixer-footer';
     footer.append($('#crossfader').closest('label'),$('.preview-headphones'));$('#mixer').append(footer);
   }
-  if(['rekordbox','serato-hybrid','traktor-flat'].includes(document.body.dataset.workspace)&&footer)refineRekordboxMixer(footer,monitorAPI);
+  if(flat()&&footer)refineRekordboxMixer(footer,monitorAPI);
 }
 function updateFader(label){const input=label.querySelector('input');if(input)label.style.setProperty('--preview-level',input.value);}
 function updateDial(label){
@@ -189,14 +190,14 @@ new MutationObserver(refineRotaryControls).observe($('#panel'),{childList:true,s
 document.addEventListener('input',event=>{const label=event.target.closest?.('.knob-group');if(label)updateDial(label);const fader=event.target.closest?.('.fader-group');if(fader)updateFader(fader);});
 $('#preview-orientation').onchange=event=>{display.orientation=event.target.value;applyDisplay();};
 $('#preview-density').onchange=event=>{
-  const needsFull=['rekordbox','serato-hybrid','traktor-flat'].includes(document.body.dataset.workspace)&&[...document.querySelectorAll('.deck')].some(deck=>!['Cues','Loops'].includes(deck.dataset.rbPadMode||'Cues'));
+  const needsFull=flat()&&[...document.querySelectorAll('.deck')].some(deck=>!['Cues','Loops'].includes(deck.dataset.rbPadMode||'Cues'));
   display.density=event.target.value==='compact'&&needsFull?'expanded':event.target.value;
   display.panels.clear();display.library=false;applyDisplay();
 };
 $('#preview-wave-size').onchange=event=>{display.size=event.target.value;applyDisplay();};
 $('#preview-library-focus').onclick=()=>{display.library=!display.library;applyDisplay();};
 $('#preview-crates').onclick=()=>{display.crates=!display.crates;applyDisplay();};
-$('#preview-reset').onclick=()=>{Object.assign(display,{orientation:['rekordbox','serato-hybrid','traktor-flat'].includes(document.body.dataset.workspace)?'horizontal':'vertical',density:document.body.dataset.workspace==='rekordbox'?'expanded':'compact',size:'medium',library:false,crates:true,mixer:true});display.panels.clear();applyDisplay();};
+$('#preview-reset').onclick=()=>{Object.assign(display,{orientation:flat()?'horizontal':'vertical',density:document.body.dataset.workspace==='rekordbox'?'expanded':'compact',size:'medium',library:false,crates:true,mixer:true});display.panels.clear();applyDisplay();};
 
 // Restore secondary panels without replacing their original controls/handlers.
 const more=document.createElement('details');more.className='preview-more';
