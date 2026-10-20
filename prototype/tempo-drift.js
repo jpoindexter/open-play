@@ -1,3 +1,4 @@
+import {checkGridProposal} from './grid-proposal-check.js';
 // Full-track bass-pulse check; proposals stay separate from the saved grid.
 const median=values=>{const a=[...values].sort((a,b)=>a-b),m=a.length>>1;return a.length%2?a[m]:(a[m-1]+a[m])/2;};
 function pulseEnvelope(pcm,sampleRate){
@@ -59,10 +60,14 @@ export function measureTempoDrift(pcm,sampleRate,{bpm,firstBeat,fitDuration=180}
   }
   const base=windows.filter(w=>w.to<=Math.min(fitDuration,duration));
   const baseline=base.length?median(base.map(w=>w.residualSeconds)):0;
-  const supported=windows.length>=3&&base.length>=2;
+  const supportedFraction=windows.length/Math.max(1,Math.ceil(duration/20));
+  const supported=windows.length>=3&&base.length>=2&&supportedFraction>=.75;
   const maximum=supported?Math.max(...windows.map(w=>Math.abs(w.residualSeconds-baseline))):0;
   const detected=supported&&windows.some((w,i)=>i>0&&w.from===windows[i-1].to&&Math.abs(w.residualSeconds-baseline)>.010&&Math.abs(windows[i-1].residualSeconds-baseline)>.010);
-  return {method:'windowed-bass-pulse-drift-v1',checkedDuration:duration,detected,maximumResidualSeconds:maximum,
-    supported,windows,baselineSeconds:baseline,suggestion:detected?propose(windows,{bpm,firstBeat,duration,baseline}):null,
+  let suggestion=detected?propose(windows,{bpm,firstBeat,duration,baseline}):null;
+  const proposalCheck=suggestion?checkGridProposal(pcm,sampleRate,{bpm,firstBeat},suggestion):null;
+  if(proposalCheck?.status!=='improved')suggestion=null;
+  return {method:'windowed-bass-pulse-drift-v3',checkedDuration:duration,detected,maximumResidualSeconds:maximum,
+    supported,supportedFraction,windows,baselineSeconds:baseline,proposalCheck,suggestion,
     limitation:'Estimated pulse timing, not verified kicks or downbeats. Review the proposal and Save explicitly; existing grids are never replaced automatically.'};
 }

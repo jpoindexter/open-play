@@ -27,7 +27,7 @@ An older `scripts/test_analysis_controller.mjs` could not execute because its VM
 
 ## Native/listening gate
 
-Next candidate is desktop0.1.33; source/ASAR receipt and actual UI results follow after packaging. Native acceptance requires: check a real track, stage/cancel without saved changes, reopen/check/stage/save, verify saved markers and unchanged original bytes, then one Smart Sync mix through the formerly drifting section with outgoing master unchanged. Record listening outcome and pop/lag disposition. No broad effects/stems matrix.
+Actual desktop0.1.33 was packaged and passed5/5 runtime checks. Native Check→Stage→Close preserved the saved grid; fresh Check→Stage→Save persisted five reviewed CYFI markers and reopened correctly. Original bytes were unchanged. The separate corrected musical listening gate remains pending. Broader testing subsequently exposed unsafe proposal cases; guarded follow-through and225-file evidence: [SYNC_CORPUS_034.md](SYNC_CORPUS_034.md). Native acceptance requires: check a real track, stage/cancel without saved changes, reopen/check/stage/save, verify saved markers and unchanged original bytes, then one Smart Sync mix through the formerly drifting section with outgoing master unchanged. Record listening outcome and pop/lag disposition. No broad effects/stems matrix.
 
 CORE-FIX-07 and ANA-002 track this change; full Sync musical acceptance remains open until the actual corrected session. CORE-FIX-01 remains open independently. Hardware/headphone gates are separate.
 

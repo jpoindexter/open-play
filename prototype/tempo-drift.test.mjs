@@ -51,3 +51,10 @@ test('production analysis checks beyond maxSeconds without installing the sugges
   assert(r.warnings.includes('tempo_drift_detected'));
   assert.equal(r.grid.type,'constant','a proposal must not silently become the active grid');
 });
+test('a long unsupported breakdown cannot be bridged by an automatic whole-track proposal',()=>{
+  const {pcm}=rhythm([{time:240,bpm:115.66}]);
+  pcm.fill(0,sampleRate*100,sampleRate*220);
+  const r=measureTempoDrift(pcm,sampleRate,{bpm,firstBeat,fitDuration:180});
+  assert.equal(r.supported,false);
+  assert.equal(r.suggestion,null);
+});
