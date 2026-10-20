@@ -33,3 +33,16 @@ test('audition release returns paused, while Cue plus Play latches',async()=>{
     assert.equal(d.playing,latch);assert.equal(d.position,2);
   }
 });
+test('Cue plus Play during pending preparation continues after Cue release',async()=>{
+  const {d,holds,starts,pending}=fixture(),press=holds.press('i',d);
+  assert.equal(holds.latch(d),true);
+  await holds.release('i');
+  pending.shift()();await press;
+  assert.deepEqual(starts,['a']);assert.equal(d.playing,true);
+});
+test('cancelling a pending Cue plus Play still prevents a queued restart',async()=>{
+  const {d,holds,starts,pending}=fixture(),press=holds.press('i',d);
+  holds.latch(d);await holds.release('i');holds.cancelDeck(d);
+  pending.shift()();await press;
+  assert.deepEqual(starts,[]);assert.equal(d.playing,false);
+});

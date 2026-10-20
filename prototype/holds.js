@@ -81,7 +81,7 @@ export function createCueHolds({
     try {
       await engine.seek(d, target);
       if (!current(h)) return;
-      if (!h.released && !d.playing) await engine.start(d);
+      if ((!h.released || h.latched) && !d.playing) await engine.start(d);
       if (!current(h)) return;
       if (h.released && !h.wasPlaying && !h.latched) {
         engine.pause(d);
