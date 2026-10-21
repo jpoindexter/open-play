@@ -4,9 +4,9 @@ Open `Start Open Play Current Test.command` or `Start Open Play Playback Test 0.
 
 Current native window: Jewel Kid “In The Dance” LEFT and Anika Kunst “Prism” RIGHT, stopped A02:20.4/B02:10.2, Smart Sync engaged at131BPM. Master approximately−10dB, crossfader centered. On restart demo decks load; select the saved song rows and Shift+Left/Right to load.15 library previews persist. Original music is unchanged.
 
-White NOW is the shared play position; short ticks are beats, long numbered ticks are bars. A/B labels show each track's local bar.beat; absolute bar numbers can differ while phase is aligned. Use Waveforms Horizontal/Vertical and size/zoom to follow the musical section. Grid estimates and visually agreeing lines do not prove audible Sync. This pair's native paused and playing Sync states/meter were observed and recorded; new listening acceptance is pending.
+White NOW is the shared play position; short ticks are beats, long numbered ticks are bars. A/B labels show each track's local bar.beat; absolute bar numbers can differ while phase is aligned. Use Waveforms Horizontal/Vertical and size/zoom to follow the musical section. Grid estimates and visually agreeing lines do not prove audible Sync. This pair's native paused and playing Sync states/meter were observed and recorded; Jason confirmed “Aligned and clean; easier to follow” for this pair/session.
 
-Next listening: both Play, incoming RIGHT Sync, confirm outgoing LEFT remains131 and hear whether the beats stay together with no pops. Then pause. Do not repeat clean cases to clear intermittent defects. For manual mixing, disengage Sync on both and reset pitch, then manual incoming tempo/jog, transition, EQ and temporary Cue. Physical headphone/master isolation and controller acceptance require suitable hardware.
+The new-pair Sync/readability check is accepted; both decks were paused afterward. Do not repeat clean cases to clear intermittent defects. For manual mixing, disengage Sync on both and reset pitch, then manual incoming tempo/jog, transition, EQ and temporary Cue. Physical headphone/master isolation and controller acceptance require suitable hardware.
 
 ## Historical0.1.30 instructions
 
