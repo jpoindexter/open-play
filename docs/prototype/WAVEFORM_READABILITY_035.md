@@ -1,4 +1,4 @@
-# Core waveform followability — 0.1.35/0.1.36
+# Core waveform followability — 0.1.35–0.1.37
 
 21October2026. Scope: make the real source waveforms/beatgrids easier to follow, preserve all controls/layouts/library previews, and check another song pair. No audio scheduling, grid metadata, Sync algorithm or analysis thresholds changed by this rendering pass.
 
@@ -20,7 +20,7 @@ Actual0.1.35 launch and2/4Horizontal Compact were inspected; core controls and l
 
 ## Remaining execution
 
-Package and inspect the immutable0.1.36 source. Verify actual2/4deck Horizontal/Vertical Compact, core controls and library previews; retain screenshots. Use different real songs for a current native Sync check and distinguish displayed grid agreement from human listening. Reuse the225-file corpus evidence; do not rerun unchanged analysis simply to produce another green count.
+Actual0.1.36 confirmed the4V faders contained, but2V retained only72px of waveform height. The final0.1.37 uses the existing vertical wave-size scale (136/176/216px) for2V too. Package and inspect that immutable source. Verify actual2/4deck Horizontal/Vertical Compact, core controls and library previews; retain screenshots. Use different real songs for a current native Sync check and distinguish displayed grid agreement from human listening. Reuse the225-file corpus evidence; do not rerun unchanged analysis simply to produce another green count.
 
 CORE-FIX-07 and ANA-001 stay open for scoped current evidence. BPM ambiguities, unsupported grids, intermittent pop/lag and physical headphone/controller routing remain separate. No claim of complete vendor parity.
 
