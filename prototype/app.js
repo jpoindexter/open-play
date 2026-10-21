@@ -17,9 +17,9 @@ import {createTempoSlider} from './tempo-slider.js';
 import {createLocalAudioLibrary} from "./local-audio-library.js";
 import { createStemPreparation } from "./stems.js";
 import {createStemCrate,normalizeStemCrateTrack} from "./stem-crate.js";
-import { createStemWaveformModel, paintStemOverview, paintStemDetail } from "./stem-waveform.js";
-import {paintSourceOverview,paintSourceDetail} from "./source-waveform.js";
-import {performanceColors} from "./performance-tokens.js";
+import { createStemWaveformModel, paintStemOverview } from "./stem-waveform.js";
+import {paintSourceOverview} from "./source-waveform.js";
+import {paintDetailWaveforms} from "./detail-waveform.js";
 const sourceWaveLoads=new WeakSet();
 let detailWaveSpan=4;
 import { normalizeFXTempoSettings } from "./fx-tempo.js";
@@ -500,7 +500,7 @@ function renderDecks() {
   if (["Vertical","Horizontal"].includes(state.layout))
     $("#decks").insertAdjacentHTML(
       "beforeend",
-      `<section class="detail-waves ${state.layout==='Horizontal'?'detail-horizontal':''}" aria-label="Scrolling waveforms"><div class="detail-wave-tools"><button data-wave-zoom="out" aria-label="Zoom waveforms out">−</button><output id="detail-wave-scale">${detailWaveSpan}s</output><button data-wave-zoom="in" aria-label="Zoom waveforms in">+</button></div><canvas id="detail-wave" width="320" height="330"></canvas><div class="waveform-scrub-lanes" style="grid-template-${state.layout==='Horizontal'?'rows':'columns'}:repeat(${state.deckCount},minmax(0,1fr))">${state.decks.slice(0,state.deckCount).map(d=>`<div class="waveform-scrub-lane" data-deck-scratch="${d.index}" data-waveform-scrub="${state.layout==='Horizontal'?'x':'y'}" data-waveform-span="${detailWaveSpan}" role="button" tabindex="0" aria-label="Scrub deck ${d.index+1} waveform" aria-describedby="waveform-scrub-help" aria-busy="false" title="Drag waveform to scrub. Shift-drag: fine adjustment. Escape: cancel."></div><output class="sr-only" data-waveform-scrub-status="${d.index}" role="status" aria-live="polite"></output>`).join('')}</div><p class="sr-only" id="waveform-scrub-help">Drag left or up to advance, right or down to rewind. Hold Shift when starting a drag for ten times finer movement. Focus a waveform and hold Left or Right to audition; release to restore prior play state. Escape cancels.</p><span data-detail-wave-label>SOURCE · ±${detailWaveSpan/2}s · PRE-FX</span></section>`,
+      `<section class="detail-waves ${state.layout==='Horizontal'?'detail-horizontal':''}" aria-label="Scrolling waveforms"><div class="detail-wave-tools"><button data-wave-zoom="out" aria-label="Zoom waveforms out">−</button><output id="detail-wave-scale">${detailWaveSpan}s</output><button data-wave-zoom="in" aria-label="Zoom waveforms in">+</button></div><canvas id="detail-wave" width="320" height="330"></canvas><div class="waveform-scrub-lanes" style="grid-template-${state.layout==='Horizontal'?'rows':'columns'}:repeat(${state.deckCount},minmax(0,1fr))">${state.decks.slice(0,state.deckCount).map(d=>`<div class="waveform-scrub-lane" data-deck-scratch="${d.index}" data-waveform-scrub="${state.layout==='Horizontal'?'x':'y'}" data-waveform-span="${detailWaveSpan}" role="button" tabindex="0" aria-label="Scrub deck ${d.index+1} waveform" aria-describedby="waveform-scrub-help waveform-grid-help" aria-busy="false" title="Drag waveform to scrub. Shift-drag: fine adjustment. Escape: cancel."></div><output class="sr-only" data-waveform-scrub-status="${d.index}" role="status" aria-live="polite"></output>`).join('')}</div><p class="sr-only" id="waveform-scrub-help">Drag left or up to advance, right or down to rewind. Hold Shift when starting a drag for ten times finer movement. Focus a waveform and hold Left or Right to audition; release to restore prior play state. Escape cancels.</p><p class="sr-only" id="waveform-grid-help">The white NOW line is the shared playback position. Short ruler ticks are beats; long numbered ticks are bars. A through D identify decks; each lane shows its local bar and beat. Different absolute bar numbers can still be aligned. These are source-grid estimates, not proof of audible Sync.</p><span data-detail-wave-label>SOURCE · ±${detailWaveSpan/2}s · PRE-FX</span></section>`,
     );
   document.querySelectorAll('[data-wave-zoom]').forEach(button=>button.onclick=()=>{
     changeDetailWaveZoom(button.dataset.waveZoom==='in'?.5:2);
@@ -596,39 +596,10 @@ function drawWaves() {
   }
 }
 function drawDetailWave() {
-  const canvas = $("#detail-wave");if(!canvas)return;
-  const {context:c,width:w,height:h}=prepareWaveCanvas(canvas);
-  const n=state.deckCount,horizontal=state.layout==='Horizontal';
-  c.clearRect(0,0,w,h);
-  for(const d of state.decks.slice(0,n)){
-    const x0=horizontal?0:d.index*w/n,y0=horizontal?d.index*h/n:0;
-    const width=horizontal?w:w/n,height=horizontal?h/n:h;
-    const p=engine.position(d),t=d.track,buf=t&&engine.buffers.get(t.id);
-    const sourceSpan=detailWaveSpan*Math.max(.25,Math.min(4,d.rate||1));
-    c.fillStyle=performanceColors.waveBackground;c.fillRect(x0,y0,width-1,height-1);
-    if(!t)continue;
-    const grid=createBeatgrid(t),view=waveformView(d);
-    if(view.kind==='stems'&&!horizontal){
-      paintStemDetail(c,view.profile,{x:x0,width,height,position:p,span:sourceSpan,color:colors[d.index]});
-    }else if(view.kind!=='pending'&&buf){
-      paintSourceDetail(c,buf,{x:x0,y:y0,width,height,position:p,span:sourceSpan,vertical:!horizontal});
-    }
-    const along=time=>((time-p)/sourceSpan+.5)*(horizontal?width:height);
-    const line=(time,color,thickness=1)=>{
-      const at=along(time);if(at<0||at>(horizontal?width:height))return;
-      c.fillStyle=color;
-      if(horizontal)c.fillRect(x0+at,y0,thickness,height);else c.fillRect(x0,y0+at,width,thickness);
-    };
-    for(const beat of grid?.lines(p-sourceSpan/2,p+sourceSpan/2)||[]){
-      line(beat.time,beat.downbeat?'#ffffff60':'#ffffff18');
-      if(beat.downbeat){c.fillStyle='#aeb5ba';c.font='9px Arial';c.fillText(String(beat.bar),horizontal?x0+along(beat.time)+3:x0+3,horizontal?y0+11:y0+along(beat.time)-3);}
-    }
-    for(const marker of t.gridWarpMarkers||[])line(marker.time,'#ef795d',2);
-    for(const [i,q]of t.cues.entries())if(q){line(q.position,colors[i%8],2);const at=along(q.position);if(at>=0&&at<=(horizontal?width:height)){c.fillStyle=colors[i%8];c.fillText(String(i+1),horizontal?x0+at+3:x0+width-12,horizontal?y0+23:y0+at-3);}}
-    c.fillStyle='#a9a9a9';c.font='9px Arial';c.fillText(String(d.index+1),x0+4,y0+22);
-  }
-  c.fillStyle=performanceColors.needle;
-  if(horizontal)c.fillRect(w/2,0,1,h);else c.fillRect(0,h/2,w,1);
+  const canvas=$("#detail-wave");if(!canvas)return;
+  const {context,width,height}=prepareWaveCanvas(canvas);
+  paintDetailWaveforms(context,{width,height,horizontal:state.layout==='Horizontal',decks:state.decks.slice(0,state.deckCount),span:detailWaveSpan,
+    position:d=>engine.position(d),buffer:d=>d.track&&engine.buffers.get(d.track.id),view:waveformView,colors});
 }
 
 function renderMixer() {

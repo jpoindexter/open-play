@@ -20,5 +20,13 @@ export const performanceColors = Object.freeze({
   "waveMid": "#00ff00",
   "waveHigh": "#0000ff",
   "wavePeak": "#91b8cf",
-  "waveBackground": "#000000"
+  "waveBackground": "#000000",
+  "waveBeat": "#a9a9a9",
+  "waveBeatGuide": "#ffffff24",
+  "waveDownbeat": "#ffffff88",
+  "waveRuler": "#111111",
+  "waveText": "#dddddd",
+  "wavePlayhead": "#ffffff",
+  "wavePast": "#00000033",
+  "waveLaneDivider": "#444444"
 });
