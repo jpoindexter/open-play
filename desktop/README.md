@@ -1,6 +1,8 @@
 # Open Play desktop test
 
-**Current local core test:0.1.37 / sourcece5c124.** Use `Start Open Play Current Test.command` or the versioned0.1.37launcher. Actual2/4H/V Compact waveform rulers, real-track Sync states and retained controls/previews were observed; listening remains pending. [Corpus/native evidence and acceptance gaps](../docs/prototype/WAVEFORM_READABILITY_035.md). Earlier notes are historical. Package checks do not establish listening or device quality.
+[Current core audit and execution order](../docs/prototype/CORE_DJ_AUDIT_2026-10-21.md). Current playback packaging uses `desktop/package-playback.mjs` and immutable versioned output; generic `npm start` / `npm run package` below target the older host. Do not overwrite an existing candidate or substitute a historical build for current acceptance. No new package was built in this audit.
+
+**Current local core test:0.1.37 / sourcece5c124.** Use `Start Open Play Current Test.command` or the versioned0.1.37launcher. Actual2/4H/V Compact waveform rulers, real-track Sync states and retained controls/previews were observed; Jason accepted the latest pair as aligned/clean and easier to follow; remaining manual/EQ/Cue and reliability gates stay open. [Corpus/native evidence and acceptance gaps](../docs/prototype/WAVEFORM_READABILITY_035.md). Earlier notes are historical. Package checks do not establish listening or device quality.
 
 The default **Start Open Play Desktop.command** opens local test **0.1.6**. The separate **Start Open Play Desktop 0.1.5.command** preserves the prior persistence/keylock build; earlier0.1.3/0.1.1 launchers remain available. Quit the running test before switching versions. This is the already-approved Electron wrapper around the existing browser implementation, with no native DSP rewrite or public release.
 
@@ -26,6 +28,6 @@ Renderer Node integration stays disabled, sandbox/context isolation/web security
 
 Optional stems require the separately documented local Python/model service on127.0.0.1:8768. Models/Python are not bundled. The host forwards only bounded stem API routes; missing service gives503 while ordinary playback remains available. Music is not uploaded externally.
 
-Reproduce on this Mac with existing exact dependencies: npm ci --prefix desktop, then npm run package --prefix desktop. Node22.12+ and macOS required; Electron44.9.0/packager20.3.0 unchanged. Existing-version output is never overwritten; use a new test version for a changed package. Local/ad-hoc build is not notarized.
+**Historical 0.1.6 build instructions (not the current playback candidate):** Reproduce on this Mac with existing exact dependencies: npm ci --prefix desktop, then npm run package --prefix desktop. Node22.12+ and macOS required; Electron44.9.0/packager20.3.0 unchanged. Existing-version output is never overwritten; use a new test version for a changed package. Local/ad-hoc build is not notarized.
 
 Read docs/prototype/DESKTOP_PERSISTENCE_REVIEW.md, desktop-0.1.5-runtime-observation.json, package inspection, audio inspection and docs/research/DESKTOP_PERSISTENCE_HOST_REVIEW.md. Source, ASAR, actual native runtime/internal capture and user-confirmed physical sound remain distinct proof layers.

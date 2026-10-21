@@ -1,0 +1,1373 @@
+{
+  "date": "2026-10-21",
+  "auditedSource": "d2aa4e4",
+  "native": {
+    "version": "0.1.37",
+    "source": "ce5c124",
+    "rebuild": false
+  },
+  "scope": "Core workflow audit and Trello reconciliation only; no live audio/profile changes or new listening",
+  "before": {
+    "Core DJ — Now": 23,
+    "Next — quick-win candidates": 23,
+    "Later — full parity & advanced features": 87,
+    "Approvals & release boundaries": 2,
+    "Verified evidence": 1,
+    "Blocked / unknown": 4
+  },
+  "after": {
+    "Core DJ — Now": 26,
+    "Next — quick-win candidates": 22,
+    "Later — full parity & advanced features": 85,
+    "Approvals & release boundaries": 2,
+    "Verified evidence": 1,
+    "Blocked / unknown": 4
+  },
+  "checks": {
+    "same140CardIdentities": true,
+    "allDescriptionsMatch": true,
+    "noCardsClosed": true,
+    "paginationComplete": true,
+    "additionalCommentsReadBack": 9
+  },
+  "descriptionUpdates": 49,
+  "historicalStatusComments": 22,
+  "additionalAuditComments": 9,
+  "moves": [
+    {
+      "key": "AUD-006",
+      "id": "ari:cloud:trello::card/workspace/6a8f03e71844a6c1103692dc/6ad203ca708db6d5e4dac241",
+      "from": "Later — full parity & advanced features",
+      "to": "Core DJ — Now",
+      "ok": true
+    },
+    {
+      "key": "SYS-002",
+      "id": "ari:cloud:trello::card/workspace/6a8f03e71844a6c1103692dc/6ad204ace412e16bdf25c17f",
+      "from": "Next — quick-win candidates",
+      "to": "Core DJ — Now",
+      "ok": true
+    },
+    {
+      "key": "LIB-011",
+      "id": "ari:cloud:trello::card/workspace/6a8f03e71844a6c1103692dc/6ad2026ce97a013cd37491e8",
+      "from": "Later — full parity & advanced features",
+      "to": "Core DJ — Now",
+      "ok": true
+    }
+  ],
+  "corePriorityOrder": [
+    "CORE-001",
+    "LIB-011",
+    "SYS-002",
+    "CORE-FIX-05",
+    "DEK-015",
+    "MIX-003",
+    "DEK-006",
+    "DEK-009",
+    "CORE-FIX-07",
+    "CORE-FIX-01",
+    "AUD-006",
+    "CORE-FIX-06",
+    "LIB-001",
+    "DEK-001",
+    "DEK-002",
+    "DEK-003",
+    "MIX-001",
+    "MIX-002",
+    "AUD-001",
+    "MIX-005",
+    "DEK-008",
+    "ANA-001",
+    "ANA-002",
+    "ANA-003",
+    "CORE-FIX-03",
+    "CORE-FIX-02"
+  ],
+  "council": {
+    "advisors": 5,
+    "freshReviewers": 5,
+    "sameModel": true,
+    "reviewContent": "anonymized condensed responses",
+    "independentRuntimeVerificationByAdvisors": false,
+    "verdict": "Narrow state safety first; practical acceptance next; resource gate before wider practice. Short protected listening need not wait for cache work."
+  },
+  "executed": {
+    "nodeTests": "35/35",
+    "otherScripts": [
+      "test_gui_tempo_slider.mjs (8 checks)",
+      "test_jog_bend_policy.mjs",
+      "test_keyboard_bend_policy.mjs",
+      "test_pending_smart_sync_start.mjs"
+    ],
+    "controlledReproductions": [
+      "restore mutates and persists malformed fields",
+      "save failure returns false with transient notice",
+      "actual buffer method retains50 tiny decodes",
+      "saved crates object incompatible with filter"
+    ],
+    "limits": "Controlled collaborators, not native corrupted-profile test, real memory exhaustion, storage quota fill, acoustic or hardware proof"
+  },
+  "cards": [
+    {
+      "key": "CORE-001",
+      "title": "CORE-001 — Load two local MP3s, cue, mix and beatmatch",
+      "url": "https://trello.com/c/LGGdtSa3/114-core-001-load-two-local-mp3s-cue-mix-and-beatmatch",
+      "before": "Core DJ — Now",
+      "after": "Core DJ — Now",
+      "descriptionUpdated": true,
+      "disposition": "Retain scoped evidence; outstanding core acceptance stays open"
+    },
+    {
+      "key": "LIB-011",
+      "title": "LIB-011 — Metadata backup and migrations",
+      "url": "https://trello.com/c/0kALgacl/11-lib-011-metadata-backup-and-migrations",
+      "before": "Later — full parity & advanced features",
+      "after": "Core DJ — Now",
+      "descriptionUpdated": true,
+      "disposition": "Narrow safety subset promoted; broader parity deferred"
+    },
+    {
+      "key": "SYS-002",
+      "title": "SYS-002 — Session persistence and recovery",
+      "url": "https://trello.com/c/jrimQjEN/68-sys-002-session-persistence-and-recovery",
+      "before": "Next — quick-win candidates",
+      "after": "Core DJ — Now",
+      "descriptionUpdated": true,
+      "disposition": "Narrow safety subset promoted; broader parity deferred"
+    },
+    {
+      "key": "CORE-FIX-05",
+      "title": "CORE-FIX-05 — Cue ownership across replacement and stop",
+      "url": "https://trello.com/c/x35fpHyL/132-core-fix-05-cue-ownership-across-replacement-and-stop",
+      "before": "Core DJ — Now",
+      "after": "Core DJ — Now",
+      "descriptionUpdated": true,
+      "disposition": "Retain scoped evidence; outstanding core acceptance stays open"
+    },
+    {
+      "key": "DEK-015",
+      "title": "DEK-015 — Temporary cue hold/release and continued playback",
+      "url": "https://trello.com/c/8q2nbiSy/84-dek-015-temporary-cue-hold-release-and-continued-playback",
+      "before": "Core DJ — Now",
+      "after": "Core DJ — Now",
+      "descriptionUpdated": true,
+      "disposition": "Retain scoped evidence; outstanding core acceptance stays open"
+    },
+    {
+      "key": "MIX-003",
+      "title": "MIX-003 — EQ and filters",
+      "url": "https://trello.com/c/CdQl3SUF/32-mix-003-eq-and-filters",
+      "before": "Core DJ — Now",
+      "after": "Core DJ — Now",
+      "descriptionUpdated": true,
+      "disposition": "Retain scoped evidence; outstanding core acceptance stays open"
+    },
+    {
+      "key": "DEK-006",
+      "title": "DEK-006 — Tempo fader and pitch ranges",
+      "url": "https://trello.com/c/Kf7NCZ4b/23-dek-006-tempo-fader-and-pitch-ranges",
+      "before": "Core DJ — Now",
+      "after": "Core DJ — Now",
+      "descriptionUpdated": true,
+      "disposition": "Retain scoped evidence; outstanding core acceptance stays open"
+    },
+    {
+      "key": "DEK-009",
+      "title": "DEK-009 — Jog, nudge and scratching",
+      "url": "https://trello.com/c/5lPxtsMD/26-dek-009-jog-nudge-and-scratching",
+      "before": "Core DJ — Now",
+      "after": "Core DJ — Now",
+      "descriptionUpdated": true,
+      "disposition": "Retain scoped evidence; outstanding core acceptance stays open"
+    },
+    {
+      "key": "CORE-FIX-07",
+      "title": "CORE-FIX-07 — Audible beatmatch/Sync and waveform beat-line alignment audit",
+      "url": "https://trello.com/c/QGW47XIJ/134-core-fix-07-audible-beatmatch-sync-and-waveform-beat-line-alignment-audit",
+      "before": "Core DJ — Now",
+      "after": "Core DJ — Now",
+      "descriptionUpdated": true,
+      "disposition": "Retain scoped evidence; outstanding core acceptance stays open"
+    },
+    {
+      "key": "CORE-FIX-01",
+      "title": "CORE-FIX-01 — Sync master ownership and intermittent pop",
+      "url": "https://trello.com/c/6cK0v0iy/130-core-fix-01-sync-master-ownership-and-intermittent-pop",
+      "before": "Core DJ — Now",
+      "after": "Core DJ — Now",
+      "descriptionUpdated": true,
+      "disposition": "Retain scoped evidence; outstanding core acceptance stays open"
+    },
+    {
+      "key": "AUD-006",
+      "title": "AUD-006 — Long-session resource stability",
+      "url": "https://trello.com/c/ecsrLX3N/50-aud-006-long-session-resource-stability",
+      "before": "Later — full parity & advanced features",
+      "after": "Core DJ — Now",
+      "descriptionUpdated": true,
+      "disposition": "Narrow safety subset promoted; broader parity deferred"
+    },
+    {
+      "key": "CORE-FIX-06",
+      "title": "CORE-FIX-06 — Safe core keyboard shortcuts",
+      "url": "https://trello.com/c/7qQ76Z2V/133-core-fix-06-safe-core-keyboard-shortcuts",
+      "before": "Core DJ — Now",
+      "after": "Core DJ — Now",
+      "descriptionUpdated": true,
+      "disposition": "Retain scoped evidence; outstanding core acceptance stays open"
+    },
+    {
+      "key": "LIB-001",
+      "title": "LIB-001 — Local import and supported formats",
+      "url": "https://trello.com/c/Y1jKWaxY/1-lib-001-local-import-and-supported-formats",
+      "before": "Core DJ — Now",
+      "after": "Core DJ — Now",
+      "descriptionUpdated": true,
+      "disposition": "Retain scoped evidence; outstanding core acceptance stays open"
+    },
+    {
+      "key": "DEK-001",
+      "title": "DEK-001 — Load, unload and deck focus",
+      "url": "https://trello.com/c/7insex76/18-dek-001-load-unload-and-deck-focus",
+      "before": "Core DJ — Now",
+      "after": "Core DJ — Now",
+      "descriptionUpdated": true,
+      "disposition": "Retain scoped evidence; outstanding core acceptance stays open"
+    },
+    {
+      "key": "DEK-002",
+      "title": "DEK-002 — Play, pause, seek and end-of-track",
+      "url": "https://trello.com/c/5Ae8kveX/19-dek-002-play-pause-seek-and-end-of-track",
+      "before": "Core DJ — Now",
+      "after": "Core DJ — Now",
+      "descriptionUpdated": true,
+      "disposition": "Retain scoped evidence; outstanding core acceptance stays open"
+    },
+    {
+      "key": "DEK-003",
+      "title": "DEK-003 — Cue and hot cues",
+      "url": "https://trello.com/c/hE7WrJKw/20-dek-003-cue-and-hot-cues",
+      "before": "Core DJ — Now",
+      "after": "Core DJ — Now",
+      "descriptionUpdated": true,
+      "disposition": "Retain scoped evidence; outstanding core acceptance stays open"
+    },
+    {
+      "key": "MIX-001",
+      "title": "MIX-001 — Channel gain, faders and mute",
+      "url": "https://trello.com/c/BZPECMlw/30-mix-001-channel-gain-faders-and-mute",
+      "before": "Core DJ — Now",
+      "after": "Core DJ — Now",
+      "descriptionUpdated": true,
+      "disposition": "Retain scoped evidence; outstanding core acceptance stays open"
+    },
+    {
+      "key": "MIX-002",
+      "title": "MIX-002 — Crossfader curves and assignment",
+      "url": "https://trello.com/c/oUEco2Ay/31-mix-002-crossfader-curves-and-assignment",
+      "before": "Core DJ — Now",
+      "after": "Core DJ — Now",
+      "descriptionUpdated": true,
+      "disposition": "Retain scoped evidence; outstanding core acceptance stays open"
+    },
+    {
+      "key": "AUD-001",
+      "title": "AUD-001 — Output/input device selection",
+      "url": "https://trello.com/c/PMHEtX5z/45-aud-001-output-input-device-selection",
+      "before": "Core DJ — Now",
+      "after": "Core DJ — Now",
+      "descriptionUpdated": true,
+      "disposition": "Retain scoped evidence; outstanding core acceptance stays open"
+    },
+    {
+      "key": "MIX-005",
+      "title": "MIX-005 — Master meters, headroom and clipping",
+      "url": "https://trello.com/c/NqLW7RhE/34-mix-005-master-meters-headroom-and-clipping",
+      "before": "Core DJ — Now",
+      "after": "Core DJ — Now",
+      "descriptionUpdated": true,
+      "disposition": "Retain scoped evidence; outstanding core acceptance stays open"
+    },
+    {
+      "key": "DEK-008",
+      "title": "DEK-008 — Sync, master and phase",
+      "url": "https://trello.com/c/HQmy6Xrp/25-dek-008-sync-master-and-phase",
+      "before": "Core DJ — Now",
+      "after": "Core DJ — Now",
+      "descriptionUpdated": true,
+      "disposition": "Retain scoped evidence; outstanding core acceptance stays open"
+    },
+    {
+      "key": "ANA-001",
+      "title": "ANA-001 — Waveform generation and caches",
+      "url": "https://trello.com/c/IBU50NY2/12-ana-001-waveform-generation-and-caches",
+      "before": "Core DJ — Now",
+      "after": "Core DJ — Now",
+      "descriptionUpdated": true,
+      "disposition": "Retain scoped evidence; outstanding core acceptance stays open"
+    },
+    {
+      "key": "ANA-002",
+      "title": "ANA-002 — BPM estimation",
+      "url": "https://trello.com/c/FDXrDsno/13-ana-002-bpm-estimation",
+      "before": "Core DJ — Now",
+      "after": "Core DJ — Now",
+      "descriptionUpdated": true,
+      "disposition": "Retain scoped evidence; outstanding core acceptance stays open"
+    },
+    {
+      "key": "ANA-003",
+      "title": "ANA-003 — Beat grids and editing",
+      "url": "https://trello.com/c/xa2CyXub/14-ana-003-beat-grids-and-editing",
+      "before": "Core DJ — Now",
+      "after": "Core DJ — Now",
+      "descriptionUpdated": true,
+      "disposition": "Retain scoped evidence; outstanding core acceptance stays open"
+    },
+    {
+      "key": "CORE-FIX-03",
+      "title": "CORE-FIX-03 — Discoverable BPM fine-adjust controls",
+      "url": "https://trello.com/c/902sYCVG/129-core-fix-03-discoverable-bpm-fine-adjust-controls",
+      "before": "Core DJ — Now",
+      "after": "Core DJ — Now",
+      "descriptionUpdated": true,
+      "disposition": "Retain scoped evidence; outstanding core acceptance stays open"
+    },
+    {
+      "key": "CORE-FIX-02",
+      "title": "CORE-FIX-02 — Deck-owned vertical tempo faders and matching caps",
+      "url": "https://trello.com/c/K8UGCT2P/131-core-fix-02-deck-owned-vertical-tempo-faders-and-matching-caps",
+      "before": "Core DJ — Now",
+      "after": "Core DJ — Now",
+      "descriptionUpdated": true,
+      "disposition": "Retain scoped evidence; outstanding core acceptance stays open"
+    },
+    {
+      "key": "UI-001",
+      "title": "UI-001 — Reference shell and layouts",
+      "url": "https://trello.com/c/FhNUL2TA/61-ui-001-reference-shell-and-layouts",
+      "before": "Next — quick-win candidates",
+      "after": "Next — quick-win candidates",
+      "descriptionUpdated": true,
+      "disposition": "Preserve capabilities; defer refinement until core gates"
+    },
+    {
+      "key": "UI-SET-01",
+      "title": "UI-SET-01 — Persistent Settings navigation and Back from subpages",
+      "url": "https://trello.com/c/pBDYCLui/137-ui-set-01-persistent-settings-navigation-and-back-from-subpages",
+      "before": "Next — quick-win candidates",
+      "after": "Next — quick-win candidates",
+      "descriptionUpdated": true,
+      "disposition": "Preserve capabilities; defer refinement until core gates"
+    },
+    {
+      "key": "UI-TOOL-01",
+      "title": "UI-TOOL-01 — Separate real performance controls from testing toolbar",
+      "url": "https://trello.com/c/HEKvQ7iv/138-ui-tool-01-separate-real-performance-controls-from-testing-toolbar",
+      "before": "Next — quick-win candidates",
+      "after": "Next — quick-win candidates",
+      "descriptionUpdated": true,
+      "disposition": "Preserve capabilities; defer refinement until core gates"
+    },
+    {
+      "key": "UI-MIX-01",
+      "title": "UI-MIX-01 — Use mixer height and improve control spacing",
+      "url": "https://trello.com/c/XxPtK57b/136-ui-mix-01-use-mixer-height-and-improve-control-spacing",
+      "before": "Next — quick-win candidates",
+      "after": "Next — quick-win candidates",
+      "descriptionUpdated": true,
+      "disposition": "Preserve capabilities; defer refinement until core gates"
+    },
+    {
+      "key": "UI-RESET-01",
+      "title": "UI-RESET-01 — Double-click every resettable control to its default",
+      "url": "https://trello.com/c/0E3HXFPl/135-ui-reset-01-double-click-every-resettable-control-to-its-default",
+      "before": "Next — quick-win candidates",
+      "after": "Next — quick-win candidates",
+      "descriptionUpdated": true,
+      "disposition": "Preserve capabilities; defer refinement until core gates"
+    },
+    {
+      "key": "LIB-003",
+      "title": "LIB-003 — Search, filter, sorting and columns",
+      "url": "https://trello.com/c/x7KvPDcw/3-lib-003-search-filter-sorting-and-columns",
+      "before": "Next — quick-win candidates",
+      "after": "Next — quick-win candidates",
+      "descriptionUpdated": true,
+      "disposition": "Preserve capabilities; defer refinement until core gates"
+    },
+    {
+      "key": "LIB-004",
+      "title": "LIB-004 — Crates and playlists",
+      "url": "https://trello.com/c/a9v6GJtQ/4-lib-004-crates-and-playlists",
+      "before": "Next — quick-win candidates",
+      "after": "Next — quick-win candidates",
+      "descriptionUpdated": true,
+      "disposition": "Preserve capabilities; defer refinement until core gates"
+    },
+    {
+      "key": "REF-RB-01",
+      "title": "REF-RB-01 — Installed rekordbox screen and feature inventory via REA",
+      "url": "https://trello.com/c/qKTqELoB/118-ref-rb-01-installed-rekordbox-screen-and-feature-inventory-via-rea",
+      "before": "Next — quick-win candidates",
+      "after": "Next — quick-win candidates",
+      "descriptionUpdated": true,
+      "disposition": "Preserve capabilities; defer refinement until core gates"
+    },
+    {
+      "key": "UI-RB-01",
+      "title": "UI-RB-01 — Four-deck mixer: four aligned channels",
+      "url": "https://trello.com/c/Nsnb1JhR/115-ui-rb-01-four-deck-mixer-four-aligned-channels",
+      "before": "Next — quick-win candidates",
+      "after": "Next — quick-win candidates",
+      "descriptionUpdated": true,
+      "disposition": "Preserve capabilities; defer refinement until core gates"
+    },
+    {
+      "key": "UI-RB-02",
+      "title": "UI-RB-02 — Show/hide mixer without changing audio state",
+      "url": "https://trello.com/c/WQ378lGK/116-ui-rb-02-show-hide-mixer-without-changing-audio-state",
+      "before": "Next — quick-win candidates",
+      "after": "Next — quick-win candidates",
+      "descriptionUpdated": true,
+      "disposition": "Preserve capabilities; defer refinement until core gates"
+    },
+    {
+      "key": "UI-RB-03",
+      "title": "UI-RB-03 — Center crossfader and align mixer footer",
+      "url": "https://trello.com/c/EULEpME9/119-ui-rb-03-center-crossfader-and-align-mixer-footer",
+      "before": "Next — quick-win candidates",
+      "after": "Next — quick-win candidates",
+      "descriptionUpdated": true,
+      "disposition": "Preserve capabilities; defer refinement until core gates"
+    },
+    {
+      "key": "UI-RB-04",
+      "title": "UI-RB-04 — Match rekordbox mixer controls and spacing",
+      "url": "https://trello.com/c/Rx4NWhjG/120-ui-rb-04-match-rekordbox-mixer-controls-and-spacing",
+      "before": "Next — quick-win candidates",
+      "after": "Next — quick-win candidates",
+      "descriptionUpdated": true,
+      "disposition": "Preserve capabilities; defer refinement until core gates"
+    },
+    {
+      "key": "LIB-RB-01",
+      "title": "LIB-RB-01 — Per-track waveform previews in library",
+      "url": "https://trello.com/c/NL9aSgOB/117-lib-rb-01-per-track-waveform-previews-in-library",
+      "before": "Next — quick-win candidates",
+      "after": "Next — quick-win candidates",
+      "descriptionUpdated": true,
+      "disposition": "Preserve capabilities; defer refinement until core gates"
+    },
+    {
+      "key": "UI-RB-05",
+      "title": "UI-RB-05 — Inline headphone MIX and LEVEL knobs",
+      "url": "https://trello.com/c/lor8EHEW/121-ui-rb-05-inline-headphone-mix-and-level-knobs",
+      "before": "Next — quick-win candidates",
+      "after": "Next — quick-win candidates",
+      "descriptionUpdated": true,
+      "disposition": "Preserve capabilities; defer refinement until core gates"
+    },
+    {
+      "key": "UI-RB-06",
+      "title": "UI-RB-06 — Compact cue-bank layout matching rekordbox reference",
+      "url": "https://trello.com/c/miElcJk0/122-ui-rb-06-compact-cue-bank-layout-matching-rekordbox-reference",
+      "before": "Next — quick-win candidates",
+      "after": "Next — quick-win candidates",
+      "descriptionUpdated": true,
+      "disposition": "Preserve capabilities; defer refinement until core gates"
+    },
+    {
+      "key": "UI-RB-07",
+      "title": "UI-RB-07 — Correct rotary controls across the performance interface",
+      "url": "https://trello.com/c/f6Tuij0u/123-ui-rb-07-correct-rotary-controls-across-the-performance-interface",
+      "before": "Next — quick-win candidates",
+      "after": "Next — quick-win candidates",
+      "descriptionUpdated": true,
+      "disposition": "Preserve capabilities; defer refinement until core gates"
+    },
+    {
+      "key": "UI-RB-08",
+      "title": "UI-RB-08 — Keep performance panels clear of decks and mixer",
+      "url": "https://trello.com/c/5Exp15Xq/124-ui-rb-08-keep-performance-panels-clear-of-decks-and-mixer",
+      "before": "Next — quick-win candidates",
+      "after": "Next — quick-win candidates",
+      "descriptionUpdated": true,
+      "disposition": "Preserve capabilities; defer refinement until core gates"
+    },
+    {
+      "key": "UI-AS-01",
+      "title": "UI-AS-01 — Astryx standard controls in the HTML prototype",
+      "url": "https://trello.com/c/KOTUJWqC/126-ui-as-01-astryx-standard-controls-in-the-html-prototype",
+      "before": "Next — quick-win candidates",
+      "after": "Next — quick-win candidates",
+      "descriptionUpdated": true,
+      "disposition": "Preserve capabilities; defer refinement until core gates"
+    },
+    {
+      "key": "UI-XN-01",
+      "title": "UI-XN-01 — Clear fader ticks and simple rotary pointers",
+      "url": "https://trello.com/c/OYHKI6Q4/127-ui-xn-01-clear-fader-ticks-and-simple-rotary-pointers",
+      "before": "Next — quick-win candidates",
+      "after": "Next — quick-win candidates",
+      "descriptionUpdated": true,
+      "disposition": "Preserve capabilities; defer refinement until core gates"
+    },
+    {
+      "key": "CORE-FIX-04",
+      "title": "CORE-FIX-04 — Group deck buttons by transport, tempo and utilities",
+      "url": "https://trello.com/c/dHVXccVC/128-core-fix-04-group-deck-buttons-by-transport-tempo-and-utilities",
+      "before": "Next — quick-win candidates",
+      "after": "Next — quick-win candidates",
+      "descriptionUpdated": true,
+      "disposition": "Preserve capabilities; defer refinement until core gates"
+    },
+    {
+      "key": "DOC-001",
+      "title": "DOC-001 — Documentation site, full user manual and how-to guides",
+      "url": "https://trello.com/c/WXG0t092/139-doc-001-documentation-site-full-user-manual-and-how-to-guides",
+      "before": "Next — quick-win candidates",
+      "after": "Next — quick-win candidates",
+      "descriptionUpdated": true,
+      "disposition": "Preserve capabilities; defer refinement until core gates"
+    },
+    {
+      "key": "MOD-001",
+      "title": "MOD-001 — Modularity audit, global reusable skill/repo, then incremental refactoring",
+      "url": "https://trello.com/c/c99UaWaj/140-mod-001-modularity-audit-global-reusable-skill-repo-then-incremental-refactoring",
+      "before": "Next — quick-win candidates",
+      "after": "Next — quick-win candidates",
+      "descriptionUpdated": true,
+      "disposition": "Preserve capabilities; defer refinement until core gates"
+    },
+    {
+      "key": "LIB-002",
+      "title": "LIB-002 — Metadata and artwork",
+      "url": "https://trello.com/c/yeToZypO/2-lib-002-metadata-and-artwork",
+      "before": "Later — full parity & advanced features",
+      "after": "Later — full parity & advanced features",
+      "descriptionUpdated": false,
+      "disposition": "Full parity/advanced scope deferred"
+    },
+    {
+      "key": "LIB-005",
+      "title": "LIB-005 — Smart crates",
+      "url": "https://trello.com/c/rm5hdCAS/5-lib-005-smart-crates",
+      "before": "Later — full parity & advanced features",
+      "after": "Later — full parity & advanced features",
+      "descriptionUpdated": false,
+      "disposition": "Full parity/advanced scope deferred"
+    },
+    {
+      "key": "LIB-006",
+      "title": "LIB-006 — Missing files and external volumes",
+      "url": "https://trello.com/c/c8rO46xR/6-lib-006-missing-files-and-external-volumes",
+      "before": "Later — full parity & advanced features",
+      "after": "Later — full parity & advanced features",
+      "descriptionUpdated": false,
+      "disposition": "Full parity/advanced scope deferred"
+    },
+    {
+      "key": "LIB-007",
+      "title": "LIB-007 — Duplicates and content identity",
+      "url": "https://trello.com/c/K9tmRvMI/7-lib-007-duplicates-and-content-identity",
+      "before": "Later — full parity & advanced features",
+      "after": "Later — full parity & advanced features",
+      "descriptionUpdated": false,
+      "disposition": "Full parity/advanced scope deferred"
+    },
+    {
+      "key": "LIB-008",
+      "title": "LIB-008 — History and session preparation",
+      "url": "https://trello.com/c/BIMps96V/8-lib-008-history-and-session-preparation",
+      "before": "Later — full parity & advanced features",
+      "after": "Later — full parity & advanced features",
+      "descriptionUpdated": false,
+      "disposition": "Full parity/advanced scope deferred"
+    },
+    {
+      "key": "LIB-009",
+      "title": "LIB-009 — Library import/export interoperability",
+      "url": "https://trello.com/c/estUoAx8/9-lib-009-library-import-export-interoperability",
+      "before": "Later — full parity & advanced features",
+      "after": "Later — full parity & advanced features",
+      "descriptionUpdated": false,
+      "disposition": "Full parity/advanced scope deferred"
+    },
+    {
+      "key": "LIB-010",
+      "title": "LIB-010 — Large library virtualization",
+      "url": "https://trello.com/c/Ze0ZEzOY/10-lib-010-large-library-virtualization",
+      "before": "Later — full parity & advanced features",
+      "after": "Later — full parity & advanced features",
+      "descriptionUpdated": false,
+      "disposition": "Full parity/advanced scope deferred"
+    },
+    {
+      "key": "ANA-004",
+      "title": "ANA-004 — Musical key analysis",
+      "url": "https://trello.com/c/hFi94aYW/15-ana-004-musical-key-analysis",
+      "before": "Later — full parity & advanced features",
+      "after": "Later — full parity & advanced features",
+      "descriptionUpdated": false,
+      "disposition": "Full parity/advanced scope deferred"
+    },
+    {
+      "key": "ANA-005",
+      "title": "ANA-005 — Gain/loudness analysis",
+      "url": "https://trello.com/c/VjWxDCRP/16-ana-005-gain-loudness-analysis",
+      "before": "Later — full parity & advanced features",
+      "after": "Later — full parity & advanced features",
+      "descriptionUpdated": false,
+      "disposition": "Full parity/advanced scope deferred"
+    },
+    {
+      "key": "ANA-006",
+      "title": "ANA-006 — Analysis queues and cancellation",
+      "url": "https://trello.com/c/DwEMKRSv/17-ana-006-analysis-queues-and-cancellation",
+      "before": "Later — full parity & advanced features",
+      "after": "Later — full parity & advanced features",
+      "descriptionUpdated": false,
+      "disposition": "Full parity/advanced scope deferred"
+    },
+    {
+      "key": "DEK-004",
+      "title": "DEK-004 — Manual, automatic and saved loops",
+      "url": "https://trello.com/c/WOMYk1cw/21-dek-004-manual-automatic-and-saved-loops",
+      "before": "Later — full parity & advanced features",
+      "after": "Later — full parity & advanced features",
+      "descriptionUpdated": false,
+      "disposition": "Full parity/advanced scope deferred"
+    },
+    {
+      "key": "DEK-005",
+      "title": "DEK-005 — Beat jump",
+      "url": "https://trello.com/c/Wyeht7E2/22-dek-005-beat-jump",
+      "before": "Later — full parity & advanced features",
+      "after": "Later — full parity & advanced features",
+      "descriptionUpdated": false,
+      "disposition": "Full parity/advanced scope deferred"
+    },
+    {
+      "key": "DEK-007",
+      "title": "DEK-007 — Key lock and independent key shift",
+      "url": "https://trello.com/c/HwM8mEac/24-dek-007-key-lock-and-independent-key-shift",
+      "before": "Later — full parity & advanced features",
+      "after": "Later — full parity & advanced features",
+      "descriptionUpdated": false,
+      "disposition": "Full parity/advanced scope deferred"
+    },
+    {
+      "key": "DEK-010",
+      "title": "DEK-010 — Slip and reverse modes",
+      "url": "https://trello.com/c/5ewzEGAW/27-dek-010-slip-and-reverse-modes",
+      "before": "Later — full parity & advanced features",
+      "after": "Later — full parity & advanced features",
+      "descriptionUpdated": false,
+      "disposition": "Full parity/advanced scope deferred"
+    },
+    {
+      "key": "DEK-011",
+      "title": "DEK-011 — Two/four and extensible decks",
+      "url": "https://trello.com/c/k15IXsFH/28-dek-011-two-four-and-extensible-decks",
+      "before": "Later — full parity & advanced features",
+      "after": "Later — full parity & advanced features",
+      "descriptionUpdated": false,
+      "disposition": "Full parity/advanced scope deferred"
+    },
+    {
+      "key": "DEK-012",
+      "title": "DEK-012 — Quantization and musical timing",
+      "url": "https://trello.com/c/OB2JRY59/29-dek-012-quantization-and-musical-timing",
+      "before": "Later — full parity & advanced features",
+      "after": "Later — full parity & advanced features",
+      "descriptionUpdated": false,
+      "disposition": "Full parity/advanced scope deferred"
+    },
+    {
+      "key": "MIX-006",
+      "title": "MIX-006 — Internal/external mixing modes",
+      "url": "https://trello.com/c/TQpN8n4b/35-mix-006-internal-external-mixing-modes",
+      "before": "Later — full parity & advanced features",
+      "after": "Later — full parity & advanced features",
+      "descriptionUpdated": false,
+      "disposition": "Full parity/advanced scope deferred"
+    },
+    {
+      "key": "FX-001",
+      "title": "FX-001 — Effects chains and assignment",
+      "url": "https://trello.com/c/Sf9oSzos/36-fx-001-effects-chains-and-assignment",
+      "before": "Later — full parity & advanced features",
+      "after": "Later — full parity & advanced features",
+      "descriptionUpdated": false,
+      "disposition": "Full parity/advanced scope deferred"
+    },
+    {
+      "key": "FX-002",
+      "title": "FX-002 — Tempo-synced effect timing",
+      "url": "https://trello.com/c/dUG3R0TN/37-fx-002-tempo-synced-effect-timing",
+      "before": "Later — full parity & advanced features",
+      "after": "Later — full parity & advanced features",
+      "descriptionUpdated": false,
+      "disposition": "Full parity/advanced scope deferred"
+    },
+    {
+      "key": "SMP-001",
+      "title": "SMP-001 — Sampler slots and banks",
+      "url": "https://trello.com/c/J3LeuI2U/38-smp-001-sampler-slots-and-banks",
+      "before": "Later — full parity & advanced features",
+      "after": "Later — full parity & advanced features",
+      "descriptionUpdated": false,
+      "disposition": "Full parity/advanced scope deferred"
+    },
+    {
+      "key": "SMP-002",
+      "title": "SMP-002 — Sampler audio modes and routing",
+      "url": "https://trello.com/c/kGKnYaMU/39-smp-002-sampler-audio-modes-and-routing",
+      "before": "Later — full parity & advanced features",
+      "after": "Later — full parity & advanced features",
+      "descriptionUpdated": false,
+      "disposition": "Full parity/advanced scope deferred"
+    },
+    {
+      "key": "STM-001",
+      "title": "STM-001 — Local stem separation",
+      "url": "https://trello.com/c/QRfHyiP5/40-stm-001-local-stem-separation",
+      "before": "Later — full parity & advanced features",
+      "after": "Later — full parity & advanced features",
+      "descriptionUpdated": false,
+      "disposition": "Full parity/advanced scope deferred"
+    },
+    {
+      "key": "STM-002",
+      "title": "STM-002 — Stem mute/solo/mix controls",
+      "url": "https://trello.com/c/kx3B2m6L/41-stm-002-stem-mute-solo-mix-controls",
+      "before": "Later — full parity & advanced features",
+      "after": "Later — full parity & advanced features",
+      "descriptionUpdated": false,
+      "disposition": "Full parity/advanced scope deferred"
+    },
+    {
+      "key": "STM-003",
+      "title": "STM-003 — Stem cache/cancel/fallback",
+      "url": "https://trello.com/c/PBdLYuy2/42-stm-003-stem-cache-cancel-fallback",
+      "before": "Later — full parity & advanced features",
+      "after": "Later — full parity & advanced features",
+      "descriptionUpdated": false,
+      "disposition": "Full parity/advanced scope deferred"
+    },
+    {
+      "key": "REC-001",
+      "title": "REC-001 — Record the actual master mix",
+      "url": "https://trello.com/c/KsSkPM66/43-rec-001-record-the-actual-master-mix",
+      "before": "Later — full parity & advanced features",
+      "after": "Later — full parity & advanced features",
+      "descriptionUpdated": false,
+      "disposition": "Full parity/advanced scope deferred"
+    },
+    {
+      "key": "REC-002",
+      "title": "REC-002 — Recording limits and recovery",
+      "url": "https://trello.com/c/KoKlla3r/44-rec-002-recording-limits-and-recovery",
+      "before": "Later — full parity & advanced features",
+      "after": "Later — full parity & advanced features",
+      "descriptionUpdated": false,
+      "disposition": "Full parity/advanced scope deferred"
+    },
+    {
+      "key": "AUD-002",
+      "title": "AUD-002 — Sample rate and buffer controls",
+      "url": "https://trello.com/c/9Ah23i6e/46-aud-002-sample-rate-and-buffer-controls",
+      "before": "Later — full parity & advanced features",
+      "after": "Later — full parity & advanced features",
+      "descriptionUpdated": false,
+      "disposition": "Full parity/advanced scope deferred"
+    },
+    {
+      "key": "AUD-004",
+      "title": "AUD-004 — Hot plug and route recovery",
+      "url": "https://trello.com/c/JMG0hke2/48-aud-004-hot-plug-and-route-recovery",
+      "before": "Later — full parity & advanced features",
+      "after": "Later — full parity & advanced features",
+      "descriptionUpdated": false,
+      "disposition": "Full parity/advanced scope deferred"
+    },
+    {
+      "key": "AUD-005",
+      "title": "AUD-005 — Clock drift and multiple devices",
+      "url": "https://trello.com/c/LvTzJ5Mf/49-aud-005-clock-drift-and-multiple-devices",
+      "before": "Later — full parity & advanced features",
+      "after": "Later — full parity & advanced features",
+      "descriptionUpdated": false,
+      "disposition": "Full parity/advanced scope deferred"
+    },
+    {
+      "key": "HW-001",
+      "title": "HW-001 — Device inventory and capabilities",
+      "url": "https://trello.com/c/x4BiPQlI/51-hw-001-device-inventory-and-capabilities",
+      "before": "Later — full parity & advanced features",
+      "after": "Later — full parity & advanced features",
+      "descriptionUpdated": false,
+      "disposition": "Full parity/advanced scope deferred"
+    },
+    {
+      "key": "HW-002",
+      "title": "HW-002 — MIDI learn and mapping editor",
+      "url": "https://trello.com/c/3R57ZH2s/52-hw-002-midi-learn-and-mapping-editor",
+      "before": "Later — full parity & advanced features",
+      "after": "Later — full parity & advanced features",
+      "descriptionUpdated": false,
+      "disposition": "Full parity/advanced scope deferred"
+    },
+    {
+      "key": "HW-004",
+      "title": "HW-004 — LED and display feedback",
+      "url": "https://trello.com/c/TggjAU1N/54-hw-004-led-and-display-feedback",
+      "before": "Later — full parity & advanced features",
+      "after": "Later — full parity & advanced features",
+      "descriptionUpdated": false,
+      "disposition": "Full parity/advanced scope deferred"
+    },
+    {
+      "key": "HW-005",
+      "title": "HW-005 — HID/controller integration",
+      "url": "https://trello.com/c/HtEQU1AF/55-hw-005-hid-controller-integration",
+      "before": "Later — full parity & advanced features",
+      "after": "Later — full parity & advanced features",
+      "descriptionUpdated": false,
+      "disposition": "Full parity/advanced scope deferred"
+    },
+    {
+      "key": "HW-006",
+      "title": "HW-006 — CDJ/media-player integration",
+      "url": "https://trello.com/c/g0i8iS9O/56-hw-006-cdj-media-player-integration",
+      "before": "Later — full parity & advanced features",
+      "after": "Later — full parity & advanced features",
+      "descriptionUpdated": false,
+      "disposition": "Full parity/advanced scope deferred"
+    },
+    {
+      "key": "HW-007",
+      "title": "HW-007 — DVS signal and calibration",
+      "url": "https://trello.com/c/OSEibQfV/57-hw-007-dvs-signal-and-calibration",
+      "before": "Later — full parity & advanced features",
+      "after": "Later — full parity & advanced features",
+      "descriptionUpdated": false,
+      "disposition": "Full parity/advanced scope deferred"
+    },
+    {
+      "key": "HW-008",
+      "title": "HW-008 — DVS operating modes and dropout",
+      "url": "https://trello.com/c/kIwDPV57/58-hw-008-dvs-operating-modes-and-dropout",
+      "before": "Later — full parity & advanced features",
+      "after": "Later — full parity & advanced features",
+      "descriptionUpdated": false,
+      "disposition": "Full parity/advanced scope deferred"
+    },
+    {
+      "key": "HW-009",
+      "title": "HW-009 — USB storage behavior",
+      "url": "https://trello.com/c/jaYMssp3/59-hw-009-usb-storage-behavior",
+      "before": "Later — full parity & advanced features",
+      "after": "Later — full parity & advanced features",
+      "descriptionUpdated": false,
+      "disposition": "Full parity/advanced scope deferred"
+    },
+    {
+      "key": "HW-010",
+      "title": "HW-010 — Conflicts and multiple controllers",
+      "url": "https://trello.com/c/R8kIw1V7/60-hw-010-conflicts-and-multiple-controllers",
+      "before": "Later — full parity & advanced features",
+      "after": "Later — full parity & advanced features",
+      "descriptionUpdated": false,
+      "disposition": "Full parity/advanced scope deferred"
+    },
+    {
+      "key": "UI-002",
+      "title": "UI-002 — Menus, shortcuts and drag/drop",
+      "url": "https://trello.com/c/jRUbfpKM/62-ui-002-menus-shortcuts-and-drag-drop",
+      "before": "Later — full parity & advanced features",
+      "after": "Later — full parity & advanced features",
+      "descriptionUpdated": false,
+      "disposition": "Full parity/advanced scope deferred"
+    },
+    {
+      "key": "UI-003",
+      "title": "UI-003 — Preferences and reset",
+      "url": "https://trello.com/c/RULsSNKX/63-ui-003-preferences-and-reset",
+      "before": "Later — full parity & advanced features",
+      "after": "Later — full parity & advanced features",
+      "descriptionUpdated": false,
+      "disposition": "Full parity/advanced scope deferred"
+    },
+    {
+      "key": "UI-004",
+      "title": "UI-004 — Accessibility and reduced motion",
+      "url": "https://trello.com/c/sKOtYTUx/64-ui-004-accessibility-and-reduced-motion",
+      "before": "Later — full parity & advanced features",
+      "after": "Later — full parity & advanced features",
+      "descriptionUpdated": false,
+      "disposition": "Full parity/advanced scope deferred"
+    },
+    {
+      "key": "UI-005",
+      "title": "UI-005 — Empty/progress/error/recovery states",
+      "url": "https://trello.com/c/mpcWh89M/65-ui-005-empty-progress-error-recovery-states",
+      "before": "Later — full parity & advanced features",
+      "after": "Later — full parity & advanced features",
+      "descriptionUpdated": false,
+      "disposition": "Full parity/advanced scope deferred"
+    },
+    {
+      "key": "UI-006",
+      "title": "UI-006 — Long labels, Unicode and scaling",
+      "url": "https://trello.com/c/l6Tf09DZ/66-ui-006-long-labels-unicode-and-scaling",
+      "before": "Later — full parity & advanced features",
+      "after": "Later — full parity & advanced features",
+      "descriptionUpdated": false,
+      "disposition": "Full parity/advanced scope deferred"
+    },
+    {
+      "key": "SYS-001",
+      "title": "SYS-001 — Offline account-free operation",
+      "url": "https://trello.com/c/UcWj2bOF/67-sys-001-offline-account-free-operation",
+      "before": "Later — full parity & advanced features",
+      "after": "Later — full parity & advanced features",
+      "descriptionUpdated": false,
+      "disposition": "Full parity/advanced scope deferred"
+    },
+    {
+      "key": "SYS-003",
+      "title": "SYS-003 — Optional provider integrations",
+      "url": "https://trello.com/c/N89wrWDb/69-sys-003-optional-provider-integrations",
+      "before": "Later — full parity & advanced features",
+      "after": "Later — full parity & advanced features",
+      "descriptionUpdated": false,
+      "disposition": "Full parity/advanced scope deferred"
+    },
+    {
+      "key": "SYS-004",
+      "title": "SYS-004 — Installer, permissions and updates",
+      "url": "https://trello.com/c/pMZa2uuH/70-sys-004-installer-permissions-and-updates",
+      "before": "Later — full parity & advanced features",
+      "after": "Later — full parity & advanced features",
+      "descriptionUpdated": false,
+      "disposition": "Full parity/advanced scope deferred"
+    },
+    {
+      "key": "SYS-005",
+      "title": "SYS-005 — Diagnostics and opt-in reporting",
+      "url": "https://trello.com/c/jAdPwf4S/71-sys-005-diagnostics-and-opt-in-reporting",
+      "before": "Later — full parity & advanced features",
+      "after": "Later — full parity & advanced features",
+      "descriptionUpdated": false,
+      "disposition": "Full parity/advanced scope deferred"
+    },
+    {
+      "key": "SYS-006",
+      "title": "SYS-006 — Open-source build and provenance",
+      "url": "https://trello.com/c/rchtibYg/72-sys-006-open-source-build-and-provenance",
+      "before": "Later — full parity & advanced features",
+      "after": "Later — full parity & advanced features",
+      "descriptionUpdated": false,
+      "disposition": "Full parity/advanced scope deferred"
+    },
+    {
+      "key": "SYS-007",
+      "title": "SYS-007 — Mappings/extensions compatibility",
+      "url": "https://trello.com/c/P9DOCLMd/73-sys-007-mappings-extensions-compatibility",
+      "before": "Later — full parity & advanced features",
+      "after": "Later — full parity & advanced features",
+      "descriptionUpdated": false,
+      "disposition": "Full parity/advanced scope deferred"
+    },
+    {
+      "key": "SYS-008",
+      "title": "SYS-008 — No artificial feature gates",
+      "url": "https://trello.com/c/YlDusx05/74-sys-008-no-artificial-feature-gates",
+      "before": "Later — full parity & advanced features",
+      "after": "Later — full parity & advanced features",
+      "descriptionUpdated": false,
+      "disposition": "Full parity/advanced scope deferred"
+    },
+    {
+      "key": "LIB-012",
+      "title": "LIB-012 — Favorite crates, crate search, colors and sort modes",
+      "url": "https://trello.com/c/Lj1bUWs3/75-lib-012-favorite-crates-crate-search-colors-and-sort-modes",
+      "before": "Later — full parity & advanced features",
+      "after": "Later — full parity & advanced features",
+      "descriptionUpdated": false,
+      "disposition": "Full parity/advanced scope deferred"
+    },
+    {
+      "key": "LIB-013",
+      "title": "LIB-013 — Ratings, emoji ratings and iTunes rating import",
+      "url": "https://trello.com/c/Ut4tX9uk/76-lib-013-ratings-emoji-ratings-and-itunes-rating-import",
+      "before": "Later — full parity & advanced features",
+      "after": "Later — full parity & advanced features",
+      "descriptionUpdated": false,
+      "disposition": "Full parity/advanced scope deferred"
+    },
+    {
+      "key": "LIB-014",
+      "title": "LIB-014 — Track lock versus beatgrid lock",
+      "url": "https://trello.com/c/DkiP13uv/77-lib-014-track-lock-versus-beatgrid-lock",
+      "before": "Later — full parity & advanced features",
+      "after": "Later — full parity & advanced features",
+      "descriptionUpdated": false,
+      "disposition": "Full parity/advanced scope deferred"
+    },
+    {
+      "key": "LIB-015",
+      "title": "LIB-015 — Files panel copy, move, rescan and volume portability",
+      "url": "https://trello.com/c/WjWqZMUi/78-lib-015-files-panel-copy-move-rescan-and-volume-portability",
+      "before": "Later — full parity & advanced features",
+      "after": "Later — full parity & advanced features",
+      "descriptionUpdated": false,
+      "disposition": "Full parity/advanced scope deferred"
+    },
+    {
+      "key": "LIB-016",
+      "title": "LIB-016 — History session editing, inserted tracks and exports",
+      "url": "https://trello.com/c/u9QFbmbx/79-lib-016-history-session-editing-inserted-tracks-and-exports",
+      "before": "Later — full parity & advanced features",
+      "after": "Later — full parity & advanced features",
+      "descriptionUpdated": false,
+      "disposition": "Full parity/advanced scope deferred"
+    },
+    {
+      "key": "LIB-017",
+      "title": "LIB-017 — Live playlists and optional sharing",
+      "url": "https://trello.com/c/8uv2M8Wc/80-lib-017-live-playlists-and-optional-sharing",
+      "before": "Later — full parity & advanced features",
+      "after": "Later — full parity & advanced features",
+      "descriptionUpdated": false,
+      "disposition": "Full parity/advanced scope deferred"
+    },
+    {
+      "key": "ANA-007",
+      "title": "ANA-007 — Analyze-on-import, ranges and selective reanalysis",
+      "url": "https://trello.com/c/2hSf2mGW/81-ana-007-analyze-on-import-ranges-and-selective-reanalysis",
+      "before": "Later — full parity & advanced features",
+      "after": "Later — full parity & advanced features",
+      "descriptionUpdated": false,
+      "disposition": "Full parity/advanced scope deferred"
+    },
+    {
+      "key": "DEK-013",
+      "title": "DEK-013 — Instant doubles across decks and sampler",
+      "url": "https://trello.com/c/1e9Bj5Hq/82-dek-013-instant-doubles-across-decks-and-sampler",
+      "before": "Later — full parity & advanced features",
+      "after": "Later — full parity & advanced features",
+      "descriptionUpdated": false,
+      "disposition": "Full parity/advanced scope deferred"
+    },
+    {
+      "key": "DEK-014",
+      "title": "DEK-014 — Autoplay, repeat, offline player and practice layouts",
+      "url": "https://trello.com/c/OAuvSRcH/83-dek-014-autoplay-repeat-offline-player-and-practice-layouts",
+      "before": "Later — full parity & advanced features",
+      "after": "Later — full parity & advanced features",
+      "descriptionUpdated": false,
+      "disposition": "Full parity/advanced scope deferred"
+    },
+    {
+      "key": "DEK-016",
+      "title": "DEK-016 — Cue/loop names, colors, order and chronological preference",
+      "url": "https://trello.com/c/Ex9rOhHf/85-dek-016-cue-loop-names-colors-order-and-chronological-preference",
+      "before": "Later — full parity & advanced features",
+      "after": "Later — full parity & advanced features",
+      "descriptionUpdated": false,
+      "disposition": "Full parity/advanced scope deferred"
+    },
+    {
+      "key": "DEK-017",
+      "title": "DEK-017 — Loop roll and underlying timeline",
+      "url": "https://trello.com/c/qqNDhnrc/86-dek-017-loop-roll-and-underlying-timeline",
+      "before": "Later — full parity & advanced features",
+      "after": "Later — full parity & advanced features",
+      "descriptionUpdated": false,
+      "disposition": "Full parity/advanced scope deferred"
+    },
+    {
+      "key": "DEK-019",
+      "title": "DEK-019 — Pitch Play and key sync",
+      "url": "https://trello.com/c/k5WXFE3b/88-dek-019-pitch-play-and-key-sync",
+      "before": "Later — full parity & advanced features",
+      "after": "Later — full parity & advanced features",
+      "descriptionUpdated": false,
+      "disposition": "Full parity/advanced scope deferred"
+    },
+    {
+      "key": "DEK-020",
+      "title": "DEK-020 — Slicer and slicer loop",
+      "url": "https://trello.com/c/WmCvPg4e/89-dek-020-slicer-and-slicer-loop",
+      "before": "Later — full parity & advanced features",
+      "after": "Later — full parity & advanced features",
+      "descriptionUpdated": false,
+      "disposition": "Full parity/advanced scope deferred"
+    },
+    {
+      "key": "FX-003",
+      "title": "FX-003 — Advanced FX parameters, favorites and named presets",
+      "url": "https://trello.com/c/AoupIB1F/90-fx-003-advanced-fx-parameters-favorites-and-named-presets",
+      "before": "Later — full parity & advanced features",
+      "after": "Later — full parity & advanced features",
+      "descriptionUpdated": false,
+      "disposition": "Full parity/advanced scope deferred"
+    },
+    {
+      "key": "FX-004",
+      "title": "FX-004 — Channel FX and hardware filter-knob assignment",
+      "url": "https://trello.com/c/NzQ2FTPf/91-fx-004-channel-fx-and-hardware-filter-knob-assignment",
+      "before": "Later — full parity & advanced features",
+      "after": "Later — full parity & advanced features",
+      "descriptionUpdated": false,
+      "disposition": "Full parity/advanced scope deferred"
+    },
+    {
+      "key": "SMP-003",
+      "title": "SMP-003 — Sampler advanced pitch, sync, cue/loop start and gain",
+      "url": "https://trello.com/c/h53H6vYY/92-smp-003-sampler-advanced-pitch-sync-cue-loop-start-and-gain",
+      "before": "Later — full parity & advanced features",
+      "after": "Later — full parity & advanced features",
+      "descriptionUpdated": false,
+      "disposition": "Full parity/advanced scope deferred"
+    },
+    {
+      "key": "SCR-001",
+      "title": "SCR-001 — Scratch Banks, per-slot load settings and previous-track return",
+      "url": "https://trello.com/c/gFNT40Cs/93-scr-001-scratch-banks-per-slot-load-settings-and-previous-track-return",
+      "before": "Later — full parity & advanced features",
+      "after": "Later — full parity & advanced features",
+      "descriptionUpdated": false,
+      "disposition": "Full parity/advanced scope deferred"
+    },
+    {
+      "key": "FLP-001",
+      "title": "FLP-001 — Flip recording, playback, loop, save and edit",
+      "url": "https://trello.com/c/JRmeHj9c/94-flp-001-flip-recording-playback-loop-save-and-edit",
+      "before": "Later — full parity & advanced features",
+      "after": "Later — full parity & advanced features",
+      "descriptionUpdated": false,
+      "disposition": "Full parity/advanced scope deferred"
+    },
+    {
+      "key": "VID-001",
+      "title": "VID-001 — Video decks, linked AV playback and external display",
+      "url": "https://trello.com/c/mp2SNRgx/95-vid-001-video-decks-linked-av-playback-and-external-display",
+      "before": "Later — full parity & advanced features",
+      "after": "Later — full parity & advanced features",
+      "descriptionUpdated": false,
+      "disposition": "Full parity/advanced scope deferred"
+    },
+    {
+      "key": "VID-002",
+      "title": "VID-002 — Video transitions, effects, text and image overlays",
+      "url": "https://trello.com/c/yxTgDvzt/96-vid-002-video-transitions-effects-text-and-image-overlays",
+      "before": "Later — full parity & advanced features",
+      "after": "Later — full parity & advanced features",
+      "descriptionUpdated": false,
+      "disposition": "Full parity/advanced scope deferred"
+    },
+    {
+      "key": "LNK-001",
+      "title": "LNK-001 — Ableton Link session, tempo and phase integration",
+      "url": "https://trello.com/c/ImmkMkaS/97-lnk-001-ableton-link-session-tempo-and-phase-integration",
+      "before": "Later — full parity & advanced features",
+      "after": "Later — full parity & advanced features",
+      "descriptionUpdated": false,
+      "disposition": "Full parity/advanced scope deferred"
+    },
+    {
+      "key": "STM-004",
+      "title": "STM-004 — Stem effects, waveform response and hardware pad replacement",
+      "url": "https://trello.com/c/9hYe8U8V/98-stm-004-stem-effects-waveform-response-and-hardware-pad-replacement",
+      "before": "Later — full parity & advanced features",
+      "after": "Later — full parity & advanced features",
+      "descriptionUpdated": false,
+      "disposition": "Full parity/advanced scope deferred"
+    },
+    {
+      "key": "STM-005",
+      "title": "STM-005 — Stem Slip introduced in 4.0.10",
+      "url": "https://trello.com/c/1awiXYSa/99-stm-005-stem-slip-introduced-in-4010",
+      "before": "Later — full parity & advanced features",
+      "after": "Later — full parity & advanced features",
+      "descriptionUpdated": false,
+      "disposition": "Full parity/advanced scope deferred"
+    },
+    {
+      "key": "HW-012",
+      "title": "HW-012 — MIDI many-to-one, one-to-many and data encodings",
+      "url": "https://trello.com/c/7dMwzxsm/101-hw-012-midi-many-to-one-one-to-many-and-data-encodings",
+      "before": "Later — full parity & advanced features",
+      "after": "Later — full parity & advanced features",
+      "descriptionUpdated": false,
+      "disposition": "Full parity/advanced scope deferred"
+    },
+    {
+      "key": "HW-013",
+      "title": "HW-013 — DVS THRU, changeover and emergency internal mode",
+      "url": "https://trello.com/c/BUZHG8Y3/102-hw-013-dvs-thru-changeover-and-emergency-internal-mode",
+      "before": "Later — full parity & advanced features",
+      "after": "Later — full parity & advanced features",
+      "descriptionUpdated": false,
+      "disposition": "Full parity/advanced scope deferred"
+    },
+    {
+      "key": "AUD-007",
+      "title": "AUD-007 — Microphone/auxiliary routes and virtual audio output",
+      "url": "https://trello.com/c/iy7JARIa/103-aud-007-microphone-auxiliary-routes-and-virtual-audio-output",
+      "before": "Later — full parity & advanced features",
+      "after": "Later — full parity & advanced features",
+      "descriptionUpdated": false,
+      "disposition": "Full parity/advanced scope deferred"
+    },
+    {
+      "key": "REC-003",
+      "title": "REC-003 — Pre-master recording tap, input selection and split files",
+      "url": "https://trello.com/c/tU4GdV3L/104-rec-003-pre-master-recording-tap-input-selection-and-split-files",
+      "before": "Later — full parity & advanced features",
+      "after": "Later — full parity & advanced features",
+      "descriptionUpdated": false,
+      "disposition": "Full parity/advanced scope deferred"
+    },
+    {
+      "key": "UI-007",
+      "title": "UI-007 — Vertical, horizontal, extended, stack and library modes",
+      "url": "https://trello.com/c/MYvvhLtR/105-ui-007-vertical-horizontal-extended-stack-and-library-modes",
+      "before": "Later — full parity & advanced features",
+      "after": "Later — full parity & advanced features",
+      "descriptionUpdated": false,
+      "disposition": "Full parity/advanced scope deferred"
+    },
+    {
+      "key": "UI-008",
+      "title": "UI-008 — Day mode, library-only mode and display preferences",
+      "url": "https://trello.com/c/3ektNlpC/106-ui-008-day-mode-library-only-mode-and-display-preferences",
+      "before": "Later — full parity & advanced features",
+      "after": "Later — full parity & advanced features",
+      "descriptionUpdated": false,
+      "disposition": "Full parity/advanced scope deferred"
+    },
+    {
+      "key": "UI-009",
+      "title": "UI-009 — Help, shortcut overlay, tooltips and diagnostics status",
+      "url": "https://trello.com/c/9C58NayW/107-ui-009-help-shortcut-overlay-tooltips-and-diagnostics-status",
+      "before": "Later — full parity & advanced features",
+      "after": "Later — full parity & advanced features",
+      "descriptionUpdated": false,
+      "disposition": "Full parity/advanced scope deferred"
+    },
+    {
+      "key": "UI-010",
+      "title": "UI-010 — Complete setup tabs and hardware-dependent controls",
+      "url": "https://trello.com/c/4rAJnUMp/108-ui-010-complete-setup-tabs-and-hardware-dependent-controls",
+      "before": "Later — full parity & advanced features",
+      "after": "Later — full parity & advanced features",
+      "descriptionUpdated": false,
+      "disposition": "Full parity/advanced scope deferred"
+    },
+    {
+      "key": "SYS-009",
+      "title": "SYS-009 — Streaming provider-specific capabilities and failures",
+      "url": "https://trello.com/c/5yMh3YPR/109-sys-009-streaming-provider-specific-capabilities-and-failures",
+      "before": "Later — full parity & advanced features",
+      "after": "Later — full parity & advanced features",
+      "descriptionUpdated": false,
+      "disposition": "Full parity/advanced scope deferred"
+    },
+    {
+      "key": "SYS-010",
+      "title": "SYS-010 — Version comparison and historical removed/gated features",
+      "url": "https://trello.com/c/3LjqNcGE/110-sys-010-version-comparison-and-historical-removed-gated-features",
+      "before": "Later — full parity & advanced features",
+      "after": "Later — full parity & advanced features",
+      "descriptionUpdated": false,
+      "disposition": "Full parity/advanced scope deferred"
+    },
+    {
+      "key": "DEK-018",
+      "title": "DEK-018 — Smart sync state machine and relative-pitch takeover",
+      "url": "https://trello.com/c/eaM8UlBD/87-dek-018-smart-sync-state-machine-and-relative-pitch-takeover",
+      "before": "Later — full parity & advanced features",
+      "after": "Later — full parity & advanced features",
+      "descriptionUpdated": false,
+      "disposition": "Full parity/advanced scope deferred"
+    },
+    {
+      "key": "UI-HY-01",
+      "title": "UI-HY-01 — Traktor flat layout with preserved DJ controls and previews",
+      "url": "https://trello.com/c/FkrLm4fa/125-ui-hy-01-traktor-flat-layout-with-preserved-dj-controls-and-previews",
+      "before": "Later — full parity & advanced features",
+      "after": "Later — full parity & advanced features",
+      "descriptionUpdated": false,
+      "disposition": "Full parity/advanced scope deferred"
+    },
+    {
+      "key": "GATE-P",
+      "title": "GATE-P — Full parity remains open; core mixing first",
+      "url": "https://trello.com/c/xaWcQP5m/111-gate-p-full-parity-remains-open-core-mixing-first",
+      "before": "Approvals & release boundaries",
+      "after": "Approvals & release boundaries",
+      "descriptionUpdated": false,
+      "disposition": "Local desktop testing authorized; full core/release/parity acceptance open"
+    },
+    {
+      "key": "GATE-N",
+      "title": "GATE-N — Local desktop testing approved; release acceptance open",
+      "url": "https://trello.com/c/JS0BdzQr/112-gate-n-local-desktop-testing-approved-release-acceptance-open",
+      "before": "Approvals & release boundaries",
+      "after": "Approvals & release boundaries",
+      "descriptionUpdated": true,
+      "disposition": "Local desktop testing authorized; full core/release/parity acceptance open"
+    },
+    {
+      "key": "Evidence",
+      "title": "Evidence — Ghidra pass, CoreMIDI call sites and Hercules enumeration",
+      "url": "https://trello.com/c/V7mKWv4q/113-evidence-ghidra-pass-coremidi-call-sites-and-hercules-enumeration",
+      "before": "Verified evidence",
+      "after": "Verified evidence",
+      "descriptionUpdated": false,
+      "disposition": "Preserve historical evidence; not full feature acceptance"
+    },
+    {
+      "key": "MIX-004",
+      "title": "MIX-004 — Headphone cue and cue/master blend",
+      "url": "https://trello.com/c/8L9H2jRn/33-mix-004-headphone-cue-and-cue-master-blend",
+      "before": "Blocked / unknown",
+      "after": "Blocked / unknown",
+      "descriptionUpdated": false,
+      "disposition": "Suitable hardware acceptance unavailable"
+    },
+    {
+      "key": "AUD-003",
+      "title": "AUD-003 — Multichannel routing",
+      "url": "https://trello.com/c/Tvv42BCc/47-aud-003-multichannel-routing",
+      "before": "Blocked / unknown",
+      "after": "Blocked / unknown",
+      "descriptionUpdated": false,
+      "disposition": "Suitable hardware acceptance unavailable"
+    },
+    {
+      "key": "HW-011",
+      "title": "HW-011 — Hercules Inpulse 300 MK2 full default mapping",
+      "url": "https://trello.com/c/pF8w5hz3/100-hw-011-hercules-inpulse-300-mk2-full-default-mapping",
+      "before": "Blocked / unknown",
+      "after": "Blocked / unknown",
+      "descriptionUpdated": false,
+      "disposition": "Suitable hardware acceptance unavailable"
+    },
+    {
+      "key": "HW-003",
+      "title": "HW-003 — MIDI timing and control semantics",
+      "url": "https://trello.com/c/TH7KTuZ1/53-hw-003-midi-timing-and-control-semantics",
+      "before": "Blocked / unknown",
+      "after": "Blocked / unknown",
+      "descriptionUpdated": false,
+      "disposition": "Suitable hardware acceptance unavailable"
+    }
+  ]
+}

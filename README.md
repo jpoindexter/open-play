@@ -1,5 +1,7 @@
 # Open Play
 
+[Current core audit and remaining work — 21 October](docs/prototype/CORE_DJ_AUDIT_2026-10-21.md) · [Trello reconciliation](docs/delivery/CORE_DJ_RECONCILIATION_2026-10-21.json).
+
 Current work is finishing the **core two-track DJ experience**, with the chosen rekordbox layout, all controls and library waveform previews preserved. Jason authorized a new local desktop test build on20October. [Current waveform/native evidence and open acceptance](docs/prototype/WAVEFORM_READABILITY_035.md), [core plan](docs/delivery/CORE_DJ_FIRST.md), [HTML preview](http://127.0.0.1:8848/prototype/layout-preview.html).
 
 Independent open-source desktop DJ project, with a browser review candidate and ongoing reference investigation. The goal is familiar Serato DJ Pro design and behavior without artificial feature, account or device gates in the independent implementation.

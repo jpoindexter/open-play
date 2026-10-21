@@ -1,5 +1,11 @@
 # Sync pop investigation — 20 October 2026
 
+## Current disposition — 21 October 2026
+
+OPEN on current desktop0.1.37 despite scoped clean user acceptance on additional songs. The older setup/recording-location and HTML-only statements below are historical. Current saved captures and listening evidence: [waveform/native report](WAVEFORM_READABILITY_035.md); current priorities: [core audit](CORE_DJ_AUDIT_2026-10-21.md). Ordinary30ms scheduling is an unconfirmed hypothesis. Capture the next actual pop with transport/event context; no repeated clean-case matrix or speculative audio patch.
+
+## Historical investigation
+
 Status: **intermittent user-reported defect; not reproduced in the scoped captured attempts; not fixed**. Production revision100ee9f / HTML224. No native rebuild or production audio change. Core-only outcome remains two real local tracks, cue, mix and beatmatch.
 
 ## Observed sequence
