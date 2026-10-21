@@ -1,6 +1,6 @@
 # Open Play desktop test
 
-**Current local core test:0.1.34 / sourced0f2094.** Use `Start Open Play Current Test.command` or the versioned0.1.34launcher. Actual native grid proposal Save/readback and refusal of a worsening proposal were observed; library previews remain. [Corpus/native evidence and acceptance gaps](../docs/prototype/SYNC_CORPUS_034.md). Earlier notes are historical. Package checks do not establish listening or device quality.
+**Current local core test:0.1.37 / sourcece5c124.** Use `Start Open Play Current Test.command` or the versioned0.1.37launcher. Actual2/4H/V Compact waveform rulers, real-track Sync states and retained controls/previews were observed; listening remains pending. [Corpus/native evidence and acceptance gaps](../docs/prototype/WAVEFORM_READABILITY_035.md). Earlier notes are historical. Package checks do not establish listening or device quality.
 
 The default **Start Open Play Desktop.command** opens local test **0.1.6**. The separate **Start Open Play Desktop 0.1.5.command** preserves the prior persistence/keylock build; earlier0.1.3/0.1.1 launchers remain available. Quit the running test before switching versions. This is the already-approved Electron wrapper around the existing browser implementation, with no native DSP rewrite or public release.
 

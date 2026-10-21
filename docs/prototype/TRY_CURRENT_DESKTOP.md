@@ -1,10 +1,12 @@
-# Try desktop0.1.34 — guarded core candidate
+# Try desktop0.1.37 — core waveform candidate
 
-Open `Start Open Play Current Test.command` or `Start Open Play Playback Test 0.1.34.command`. Close another playback-test version first; the saved profile/port18775 and older bundles remain. This candidate is sourced0f2094. [Executed corpus/native evidence and remaining gates](SYNC_CORPUS_034.md).
+Open `Start Open Play Current Test.command` or `Start Open Play Playback Test 0.1.37.command`. Close another playback-test version first; saved profile/port18775 and all older bundles remain. Sourcece5c124. [Executed native evidence and limits](WAVEFORM_READABILITY_035.md).
 
-The running app currently has Anika Kunst/BX3 stopped after listening (A02:45.7/B09:14.8), Sync still engaged, with the reviewed BX3 marker saved. On restart the app loads demo decks; select each saved real song and use Shift+Left/Right. Library imports/previews persist. Current master gain is approximately−10dB. No audio original is changed.
+Current native window: Jewel Kid “In The Dance” LEFT and Anika Kunst “Prism” RIGHT, stopped A02:20.4/B02:10.2, Smart Sync engaged at131BPM. Master approximately−10dB, crossfader centered. On restart demo decks load; select the saved song rows and Shift+Left/Right to load.15 library previews persist. Original music is unchanged.
 
-Initial other-song launch was confirmed aligned/clean; late BX3 was reported on point, with difficult visual tracking/no headphones limiting precision. Exact timing and hardware acceptance remain open. For a fresh check, reset source positions while stopped. Play outgoing A, arm incoming B with Smart Sync, then Play B; confirm A retains132BPM and B enters on phase. Compare through BX3’s later corrected section after reviewing source position. Do not infer musical agreement from equal displayed BPM or grid lines. Keep the pop defect, BPM/downbeat ambiguity and physical headphone/controller gates open.
+White NOW is the shared play position; short ticks are beats, long numbered ticks are bars. A/B labels show each track's local bar.beat; absolute bar numbers can differ while phase is aligned. Use Waveforms Horizontal/Vertical and size/zoom to follow the musical section. Grid estimates and visually agreeing lines do not prove audible Sync. This pair's native paused and playing Sync states/meter were observed and recorded; new listening acceptance is pending.
+
+Next listening: both Play, incoming RIGHT Sync, confirm outgoing LEFT remains131 and hear whether the beats stay together with no pops. Then pause. Do not repeat clean cases to clear intermittent defects. For manual mixing, disengage Sync on both and reset pitch, then manual incoming tempo/jog, transition, EQ and temporary Cue. Physical headphone/master isolation and controller acceptance require suitable hardware.
 
 ## Historical0.1.30 instructions
 

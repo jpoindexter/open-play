@@ -18,10 +18,26 @@ Four focused drawing checks execute the real renderer with real beatgrids: match
 
 Actual0.1.35 launch and2/4Horizontal Compact were inspected; core controls and library previews remain visible.4Vertical exposed clipped empty-lane text and mixer faders overlapping the bottom bar. Empty narrow lanes now use a dash, the shared vertical NOW label is shown once, and medium4V receives20px more per deck row so all five existing knob rows/Cue/fader fit. Small/Large and the existing Loop-specific height remain unchanged. This correction is packaged separately as0.1.36; earlier immutable builds are retained.
 
-## Remaining execution
+## Final native execution — 0.1.37
 
-Actual0.1.36 confirmed the4V faders contained, but2V retained only72px of waveform height. The final0.1.37 uses the existing vertical wave-size scale (136/176/216px) for2V too. Package and inspect that immutable source. Verify actual2/4deck Horizontal/Vertical Compact, core controls and library previews; retain screenshots. Use different real songs for a current native Sync check and distinguish displayed grid agreement from human listening. Reuse the225-file corpus evidence; do not rerun unchanged analysis simply to produce another green count.
+Built immutable source `ce5c12420b3bbf0dda388e44bfc758126cd20972`; ASAR `4f3fcdb6340dafa8030b2ecd061bdd970a6e036b4df64bb053f3ed8ed93c8a7a`. Package/source checks5/5. Actual native2/4Horizontal and Vertical Compact Medium inspected with Jewel Kid “In The Dance” and Anika Kunst “Prism”; original core controls and15 library previews remain.4V faders sit above the bottom bar;2V uses176px of detail height instead of72. Its taller center stack also increases the adjacent deck height; further deck packing remains a UI refinement, not hidden completion. No Small/Large, every layout variant, frame-time/CPU or VoiceOver runtime certification is implied.
 
-CORE-FIX-07 and ANA-001 stay open for scoped current evidence. BPM ambiguities, unsupported grids, intermittent pop/lag and physical headphone/controller routing remain separate. No claim of complete vendor parity.
+Both imports ran production analysis through the native Import workflow:131 and129.99BPM respectively. Original hashes match the earlier read-only corpus. Jewel Kid had supported full-track pulse coverage in that corpus; Prism did not. Prism is therefore a useful additional uncertain case, not an established accurate-grid control. No correction marker or source metadata edit was added. The225-file corpus was not rerun.
+
+Actual paused-incoming sequence: A played131BPM, B Sync entered ARMED at131, B Play entered BEAT while A remained primary131. Both native beat states agreed; distinct local bar numbers and bar-line positions were visible in2V/4V/4H/2H. One playing-incoming re-Sync also observed. Both stopped at A140.436s/B130.256s and master meter returned to−∞. These UI/meter observations do not establish sample-accurate audio alignment or clean acoustic output. No new user listening answer yet. The master capture includes the paused Sync, launch, playing re-Sync and layout changes; no exact event timestamps or independent waveform-correlation analysis were executed.
+
+Private evidence: `local-evidence/waveform-readability-037/` contains the actual native screenshots, AX states, source hashes and observation receipt. The capture `jewel-prism-master-037.webm` is1,317,184bytes, SHA256 `12137d7746f064cea6f7c6a58a3a7f6fe436e0d36c4d6aae5cc7bc6bb11a18b3`. The macOS Save dialog converted an absolute filename into a colon-separated Downloads filename; that exact newly generated file was moved to the intended private evidence folder and hashed. Original audio files were not moved or changed.
+
+Source/drawing evidence:4/4 focused renderer tests and existing source-waveform checks pass. A duplicate packaging invocation exited because immutable0.1.36 already existed; its completed original receipt was read and inspected instead of overwritten. Some background-window screenshots during0.1.35 were stale despite AX changes; final0.1.37 captures were taken after raising the actual native window. Do not use the stale0352V image as evidence.
+
+## Trello readback
+
+Updated existing ANA-001 and CORE-FIX-07 descriptions with0.1.37 current evidence and limits. Both read back with the new header, retained model guidance and open state. ANA-001 prior current checkpoint was preserved in a linked card comment; existing criteria/history remain. No card was created, closed or moved.
+
+## Current boundary and re-entry
+
+Current launcher targets0.1.37. Both new songs remain loaded/paused, Horizontal/Compact/Medium, Sync engaged, master about−10dB, crossfader centered. On restart demo decks load; saved imports/previews persist. For manual beatmatching explicitly disengage Sync and reset pitch first. Prior native/listening evidence stays scoped to its version.
+
+ANA-001 and CORE-FIX-07 remain open. Next user listening: this new pair at131BPM, check actual beat agreement and readability, report pop/click if heard; preserve this capture. Then resume the remaining manual transition, per-channel EQ and temporary Cue session. Independent headphone/controller routing needs suitable hardware. Unsupported grids, BPM/downbeat ambiguity, intermittent pops/lag and broad parity are not cleared by a visual pass.
 
 Principles applied: position on a common scale; Gestalt continuity/figure-ground; cognitive-load reduction; redundant text/thickness rather than frequency-color-only timing cues. Skills: use, debug, design, dec (data-visualization, color-and-elevation, accessibility, cognitive-load, Gestalt, quality-testing). The generic frontend-testing skill was inspected and discarded because its Dify/Vitest conventions do not apply to this plain-JavaScript project.

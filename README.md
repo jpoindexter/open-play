@@ -1,10 +1,10 @@
 # Open Play
 
-Current work is finishing the **core two-track DJ experience**, with the chosen rekordbox layout, all controls and library waveform previews preserved. Jason authorized a new local desktop test build on20October. [Current Sync corpus/native evidence and open acceptance](docs/prototype/SYNC_CORPUS_034.md), [core plan](docs/delivery/CORE_DJ_FIRST.md), [HTML preview](http://127.0.0.1:8848/prototype/layout-preview.html).
+Current work is finishing the **core two-track DJ experience**, with the chosen rekordbox layout, all controls and library waveform previews preserved. Jason authorized a new local desktop test build on20October. [Current waveform/native evidence and open acceptance](docs/prototype/WAVEFORM_READABILITY_035.md), [core plan](docs/delivery/CORE_DJ_FIRST.md), [HTML preview](http://127.0.0.1:8848/prototype/layout-preview.html).
 
 Independent open-source desktop DJ project, with a browser review candidate and ongoing reference investigation. The goal is familiar Serato DJ Pro design and behavior without artificial feature, account or device gates in the independent implementation.
 
-Historical local desktop approval for revision `f8b0abf` and previous test builds is retained in [approvals](docs/approvals.md). Native0.1.27 is historical; local test0.1.34 is built and launched from sourced0f2094. [Earlier desktop instructions](desktop/README.md) describe historical candidates; they do not override the current scope. Full core, vendor parity and physical routing acceptance remain open.
+Historical local desktop approval for revision `f8b0abf` and previous test builds is retained in [approvals](docs/approvals.md). Native0.1.27 is historical; local test0.1.37 is built and launched from sourcece5c124. [Earlier desktop instructions](desktop/README.md) describe historical candidates; they do not override the current scope. Full core, vendor parity and physical routing acceptance remain open.
 
 - [Run the HTML prototype](prototype/README.md)
 - [Per-file Video FX save/recall evidence](docs/prototype/VIDEO_FILE_FX_REVIEW.md)
