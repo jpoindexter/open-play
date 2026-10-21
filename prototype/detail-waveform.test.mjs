@@ -30,7 +30,7 @@ test('four compact vertical lanes retain distinct clipped rulers and the same NO
   const r=render(decks,{horizontal:false,width:280,height:136});
   assert.deepEqual(r.clips,[[0,0,70,136],[70,0,70,136],[140,0,70,136],[210,0,70,136]]);
   assert.equal(r.rects.filter(r=>r.ink===ink.wavePlayhead&&r.rect[1]===67&&r.rect[2]===70&&r.rect[3]===2).length,4);
-  assert(r.texts.some(t=>t.text==='C · NO GRID'));
+  assert(r.texts.some(t=>t.text==='C · —'));
   assert(r.texts.every(t=>/\b1[01]px/.test(t.font)));
 });
 test('ruler text and beat marks have measurable contrast without relying on frequency color',()=>{

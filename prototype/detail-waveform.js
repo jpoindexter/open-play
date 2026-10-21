@@ -58,7 +58,7 @@ export function paintDetailWaveforms(c,{width:w,height:h,horizontal,decks,span,p
       lastLabel=at;
     }
     const phase=grid?.beatAt(p),beat=Number.isFinite(phase)&&phase>=0?Math.floor(phase):null;
-    const status=beat===null?(grid?'LEAD-IN':'NO GRID'):`${Math.floor(beat/4)+1}.${beat%4+1}`;
+    const status=beat===null?(grid?'LEAD-IN':width<110?'—':'NO GRID'):`${Math.floor(beat/4)+1}.${beat%4+1}`;
     const label=`${'ABCD'[d.index]} · ${status}`;
     c.font='bold 11px Arial';c.fillStyle=ink.waveRuler;c.fillRect(x,y,Math.min(width,96),horizontal?ruler:18);
     c.fillStyle=ink.waveText;c.fillText(label,x+4,y+12);
@@ -71,7 +71,7 @@ export function paintDetailWaveforms(c,{width:w,height:h,horizontal,decks,span,p
     if(horizontal)c.fillRect(w/2-1,y,2,height);else c.fillRect(x,h/2-1,width,2);
     c.font='bold 10px Arial';
     const labelX=horizontal?w/2+5:x+Math.min(24,width*.32),labelY=horizontal?y+11:h/2-5;
-    c.fillStyle=ink.waveBackground;c.fillRect(labelX-2,labelY-10,26,12);c.fillStyle=ink.wavePlayhead;c.fillText('NOW',labelX,labelY);
+    if(horizontal||index===0){c.fillStyle=ink.waveBackground;c.fillRect(labelX-2,labelY-10,26,12);c.fillStyle=ink.wavePlayhead;c.fillText('NOW',labelX,labelY);}
     c.restore();
   }
 }

@@ -285,6 +285,8 @@ body[data-preview-shell=flat][data-orientation][data-density=compact] .channel-s
 body[data-preview-shell=flat][data-orientation][data-density=compact]:not(.four-decks) #mixer{min-height:var(--rb-two-mixer-height);gap:12px;padding:4px 8px}
 body[data-preview-shell=flat][data-orientation][data-density=compact]:not(.four-decks) .channel-strip{grid-template-columns:44px 44px;grid-template-rows:12px repeat(3,32px) 12px;align-content:center}
 body[data-preview-shell=flat][data-orientation][data-density=compact]:not(.four-decks) .channel-strip .knob-group{width:44px}
+/* Five knob rows, cue and fader require272px inside the medium4V mixer. */
+body[data-preview-shell=flat].four-decks[data-orientation=vertical][data-density=compact][data-wave-size=medium]:not(:has(.deck[data-rb-pad-mode=Loops])){--rb-four-height:228px}
 /*4V: waveform over one row of four channels; row boundaries stay shared. */
 body[data-preview-shell=flat].four-decks[data-orientation=vertical][data-density=compact][data-rb-mixer=true][data-library-focus=false] main{grid-template-rows:var(--rb-compact-wave-height) calc(var(--rb-four-height) - var(--rb-compact-wave-height) - 4px) var(--rb-four-height) 44px var(--rb-library-tracks,minmax(180px,1fr))}
 body[data-preview-shell=flat].four-decks[data-orientation=vertical][data-density=compact][data-rb-mixer=true][data-library-focus=false] .deck:nth-of-type(-n+2){grid-row:1/3}
