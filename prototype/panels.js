@@ -632,7 +632,7 @@ export function createPanels(a) {
                 return;
               }
               s.settings[input.dataset.setting] =
-                input.type === "checkbox" ? input.checked : input.value;
+                input.type === "checkbox" ? input.checked : ["range","number"].includes(input.type) ? input.valueAsNumber : input.value;
               if(monitorFields.has(input.dataset.setting))engine.setMonitorSettings(monitorState());
               if(input.dataset.setting==='Master Volume')a.setMasterVolume(percent('Master Volume',1));
               if(input.dataset.setting==='EQ Boost'){applyEQBoost();renderMixer();}

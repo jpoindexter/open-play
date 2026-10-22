@@ -24,3 +24,11 @@ test('positions and warp timing respect known source duration',()=>{
 test('saved demo metadata cannot extend beyond its known source duration',()=>{
  assert.throws(()=>validateSavedState({tags:{'demo-0':{cues:[{position:51}]}}}),/Invalid/);
 });
+test('existing settings form numeric strings and unanalyzed imported metadata remain compatible',()=>{
+ const input={settings:{'Cue Mix':'50','Cue Volume':'10','Delay Compensation (ms)':'0'},localTags:{hash:{grid:null,bpm:0,key:'—',cues:[],savedLoops:[],color:'#abcdef'}}};
+ const output=validateSavedState(input);
+ assert.deepEqual(output.settings,{'Cue Mix':50,'Cue Volume':10,'Delay Compensation (ms)':0});
+ assert.equal(output.localTags.hash.grid,null);
+ assert.equal(validateMetadata({grid:null,bpm:0},{duration:120}).grid,null);
+ for(const invalid of ['', ' ', 'NaN', '101', {}, null])assert.throws(()=>validateSavedState({settings:{'Cue Mix':invalid}}),/Invalid/);
+});

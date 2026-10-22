@@ -23,9 +23,9 @@ document.querySelector('#run').onclick=async()=>{
    const message=await restore({format:'open-play-prototype-1',crates:[],settings:{},tags:[{id:'demo-0',...change}]});
    assert(/Invalid/.test(message),'Validation message');assert(metadata()===before,'Invalid restore changed metadata');assert(localStorage.getItem(sessionKey)===stored,'Invalid restore changed saved data');click('#modal-close');
   }record('Actual restore rejects four malformed payloads without mutation or persistence');
-  const valid={format:'open-play-prototype-1',crates:[{id:'audit',name:'Safety session',tracks:['demo-0']}],settings:{'Quantize Value':'1/2 Beat'},tags:[{id:'demo-0',title:'Round trip',cues:[{position:2,name:'First'}],savedLoops:[{start:4,end:8,name:'Loop'}],color:'#abcdef'}]};
+  const valid={format:'open-play-prototype-1',crates:[{id:'audit',name:'Safety session',tracks:['demo-0']}],settings:{'Quantize Value':'1/2 Beat','Cue Mix':'50'},tags:[{id:'demo-0',title:'Round trip',cues:[{position:2,name:'First'}],savedLoops:[{start:4,end:8,name:'Loop'}],color:'#abcdef'}]};
   assert(/restored and saved/.test(await restore(valid)),'Valid restore saved');click('#modal-close');await boot();
-  assert(state().tracks[0].title==='Round trip'&&state().tracks[0].cues[0].position===2&&state().settings['Quantize Value']==='1/2 Beat','Round trip metadata');assert(state().decks.every(d=>!d.playing&&!d.playQueued),'Unexpected restart');record('Valid backup survives actual workspace reload with stopped decks');
+  assert(state().tracks[0].title==='Round trip'&&state().tracks[0].cues[0].position===2&&state().settings['Quantize Value']==='1/2 Beat'&&state().settings['Cue Mix']===50,'Round trip metadata');assert(state().decks.every(d=>!d.playing&&!d.playQueued),'Unexpected restart');record('Valid backup survives actual workspace reload with stopped decks');
   const w=frame.contentWindow,write=w.Storage.prototype.setItem;
   w.Storage.prototype.setItem=function(key,value){if(key===sessionKey)throw new w.DOMException('Controlled full storage','QuotaExceededError');return write.call(this,key,value);};
   valid.tags[0].title='Unsaved edit';assert(/session only/.test(await restore(valid)),'Failed save misreported success');click('#modal-close');

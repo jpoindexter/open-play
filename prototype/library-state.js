@@ -41,7 +41,7 @@ function analysis(value){
   return true;
 }
 export function validateMetadata(input,track={}){
-  fields(input,{title:string,artist:string,album:string,key:string,comment:string,color,bpm:range(0,999),rating:range(0,5),grid:number,locked:bool,inStemCrate:bool,
+  fields(input,{title:string,artist:string,album:string,key:string,comment:string,color,bpm:range(0,999),rating:range(0,5),grid:nullable(number),locked:bool,inStemCrate:bool,
     cues:list(nullable(object)),savedLoops:list(nullable(object)),gridMarkers:list(number),gridWarpMarkers:list(object),flips:list(nullable(object)),
     sampleGain:range(-24,24),trackGainDb:range(-24,24),autoGainSchema:x=>x===1,autoGainOffsetDb:range(-48,48),autoGainPendingDb:range(-24,24),analysisGainDb:nullable(number),metadataRevision:nonnegative,
     analysisResult:analysis,metadataSources:object,stemJob:nullable(string),stemModel:nullable(string),stemBackend:nullable(string)},'track');
@@ -62,7 +62,8 @@ export function validateSettings(input){
   check(object(input),'settings');const output={};
   for(const [name,type] of Object.values(settingsSchema).flat()){
     if(type==='section'||!Object.hasOwn(input,name))continue;
-    const value=input[name];check(Array.isArray(type)?type.includes(value):type==='check'?bool(value):type==='range'?range(0,100)(value):number(value),`settings.${name}`);output[name]=value;
+    // Existing Setup inputs saved numeric values as strings before validation existed.
+    const raw=input[name],value=['range','number'].includes(type)&&string(raw)&&raw.trim()!==''?Number(raw):raw;check(Array.isArray(type)?type.includes(value):type==='check'?bool(value):type==='range'?range(0,100)(value):number(value),`settings.${name}`);output[name]=value;
   }
   if(Object.hasOwn(input,'Master Output Level')){check(range(-12,12)(input['Master Output Level']),'master level');output['Master Output Level']=input['Master Output Level'];}
   return output;
