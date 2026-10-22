@@ -1,3 +1,13 @@
+## Current status — core safety slice, 22 October 2026
+
+Current local desktop test is **0.1.39 / source91bfe92**, opened with the existing16-track library, stopped decks, controls and waveform previews. LIB-011/SYS-002 restore validation, saved-state recovery, color escaping and persistent save-failure feedback have executed source/browser evidence.50/50 Node tests, six actual-workspace browser groups, package checks5/5.0.1.38 failed existing-profile compatibility and is superseded;0.1.39 preserves legacy numeric settings and null grids. [Evidence](../docs/prototype/CORE_STATE_SAFETY_2026-10-22.md).
+
+Next: manual transition with Sync OFF, per-channel EQ, temporary Cue/release/latch and clean stop; then measure/bound inactive decoded buffers before broad imports. Sync-pop/lag remains open; no new listening or hardware claim. Preserve the chosen rekordbox layout, all controls/layout variants and library previews. No stems/video expansion or broad refactor.
+
+Trello update is blocked, not completed: connector transport failures and browser account lacks private-board access. [Pending updates](../docs/delivery/CORE_STATE_SAFETY_TRELLO_PENDING_2026-10-22.md) include the unknown-outcome LIB-011 comment; read back before retrying. Broad cards stay open.
+
+---
+
 # Desktop0.1.27 — core waveform positioning195
 
 19October2026: native27/source a20059d/ASAR a4d7135432916a3fb0467d008cd6c97ffb293b4ec63aeeba2e36bff50b60afcb adds detailed-waveform scrub to the corrected RGB rendering. Actual paused real-track drag: Vertical deck1 20.000→20.658; Horizontal deck2 20.000→20.559→20.000, other deck unchanged. The short-drag preparation gap observed in26 is addressed with a final-position request that is cancelable/supersedable. Controlled UI27/27; separate archive/host5/5. Native waveform keyboard audition/release while deck2 plays observed; interrupted/confounded pointer-while-playing inputs are not a pass.

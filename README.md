@@ -1,12 +1,12 @@
 # Open Play
 
-[Current core audit and remaining work — 21 October](docs/prototype/CORE_DJ_AUDIT_2026-10-21.md) · [Trello reconciliation](docs/delivery/CORE_DJ_RECONCILIATION_2026-10-21.json).
+[Core audit and remaining work — 21 October](docs/prototype/CORE_DJ_AUDIT_2026-10-21.md) · [Trello reconciliation](docs/delivery/CORE_DJ_RECONCILIATION_2026-10-21.json).
 
 Current work is finishing the **core two-track DJ experience**, with the chosen rekordbox layout, all controls and library waveform previews preserved. Jason authorized a new local desktop test build on20October. [Current waveform/native evidence and open acceptance](docs/prototype/WAVEFORM_READABILITY_035.md), [core plan](docs/delivery/CORE_DJ_FIRST.md), [HTML preview](http://127.0.0.1:8848/prototype/layout-preview.html).
 
 Independent open-source desktop DJ project, with a browser review candidate and ongoing reference investigation. The goal is familiar Serato DJ Pro design and behavior without artificial feature, account or device gates in the independent implementation.
 
-Historical local desktop approval for revision `f8b0abf` and previous test builds is retained in [approvals](docs/approvals.md). Native0.1.27 is historical; local test0.1.37 is built and launched from sourcece5c124. [Earlier desktop instructions](desktop/README.md) describe historical candidates; they do not override the current scope. Full core, vendor parity and physical routing acceptance remain open.
+Historical local desktop approval for revision `f8b0abf` and previous test builds is retained in [approvals](docs/approvals.md). Native0.1.27/0.1.37 are historical; current local test0.1.39 (source91bfe92) passed existing-profile startup with16tracks. [State-safety fixes and verification](docs/prototype/CORE_STATE_SAFETY_2026-10-22.md); [pending Trello updates](docs/delivery/CORE_STATE_SAFETY_TRELLO_PENDING_2026-10-22.md). [Earlier desktop instructions](desktop/README.md) describe historical candidates; they do not override the current scope. Full core, vendor parity and physical routing acceptance remain open.
 
 - [Run the HTML prototype](prototype/README.md)
 - [Per-file Video FX save/recall evidence](docs/prototype/VIDEO_FILE_FX_REVIEW.md)
