@@ -1362,3 +1362,8 @@ kbd {
 .track-gain-control input.auto-gain{accent-color:#a8adb3}
 
 .track-gain-control [data-track-gain-mode]{display:inline}
+
+/* Persistent only while saving/recovery needs attention; no healthy-layout space. */
+#session-save-status:not([hidden]) { position:fixed; z-index:100; left:12px; right:12px; bottom:12px; padding:12px; border:1px solid var(--line); background:var(--surface); color:var(--text); box-shadow:0 2px 12px #0009; display:flex; flex-wrap:wrap; gap:8px; }
+#session-save-status p { flex-basis:100%; margin:0; }
+#session-save-status button { min-height:32px; }

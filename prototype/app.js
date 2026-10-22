@@ -1,3 +1,6 @@
+import {trackMetadata,validateMetadata} from './library-state.js';
+import {createSessionStorage} from './session-storage.js';
+import {installSessionStatus} from './session-status.js';
 import {autoGainMode} from './auto-gain.js';
 import {createTrackGain,trackGainDB} from './track-gain.js';
 import {normalizedMasterDB} from './master-output-kernel.js';
@@ -54,10 +57,9 @@ export const esc = (x) =>
       ],
   );
 const clone = (x) => JSON.parse(JSON.stringify(x));
-let saved = {};
-try {
-  saved = JSON.parse(localStorage.getItem("openplay-review-v1") || "{}");
-} catch {}
+const sessionStorage=createSessionStorage({getItem:key=>localStorage.getItem(key),setItem:(key,value)=>localStorage.setItem(key,value)});
+const saved=sessionStorage.load();
+let updateSessionStatus=()=>{};
 const engine = new AudioEngine();
 const tempoSliders = createTempoSlider({setRate:(deck,rate)=>engine.setRate(deck,rate)});
 const stemWaveforms = Array.from({length:4}, () => createStemWaveformModel());
@@ -161,7 +163,11 @@ async function restoreLocalAudio(){
   for(const record of records){
     if(!/^local-[a-f0-9]{64}$/.test(record.id||'')||record.contentHash!==record.id.slice(6)||typeof record.filename!=='string'||!Number.isFinite(record.duration)||record.duration<=0){invalid=true;continue;}
     if(trackById(record.id))continue;
-    const track=normalizeStemCrateTrack({...record,...state.localTags[record.contentHash],id:record.id,contentHash:record.contentHash,file:null,storage:'saved',readFile:()=>localAudio.file(record.id)});
+    try{validateMetadata(record,record);}catch{invalid=true;continue;}
+    let metadata={};
+    try{metadata=validateMetadata(state.localTags[record.contentHash]||{},record);}
+    catch(error){sessionStorage.reject(error);}
+    const track=normalizeStemCrateTrack({...record,...metadata,id:record.id,contentHash:record.contentHash,file:null,storage:'saved',readFile:()=>localAudio.file(record.id)});
     state.tracks.push(track);added++;
   }
   state.localAudio.restoreError=invalid?'Some saved entries are invalid. Re-import their original files; stored audio has not been deleted.':null;
@@ -204,72 +210,22 @@ function notify(message) {
     3500,
   );
 }
-const metadataFields = [
-  "title",
-  "artist",
-  "album",
-  "bpm",
-  "key",
-  "rating",
-  "comment",
-  "color",
-  "cues",
-  "savedLoops",
-  "grid",
-  "gridMarkers",
-  "gridWarpMarkers",
-  "locked",
-  "flips",
-  "sampleGain",
-  "trackGainDb",
-  "autoGainSchema",
-  "autoGainOffsetDb",
-  "autoGainPendingDb",
-  "analysisResult",
-  "metadataSources",
-  "analysisGainDb",
-  "metadataRevision",
-  "stemJob",
-  "stemModel",
-  "stemBackend",
-  "inStemCrate",
-];
-function trackMetadata(t) {
-  return Object.fromEntries(metadataFields.map((k) => [k, t[k]]));
+function sessionSnapshot(){
+  for(const track of state.tracks)if(track.contentHash)state.localTags[track.contentHash]=trackMetadata(track);
+  return {
+    analysisSettings:state.analysisSettings,video:snapshotVideoState(state.video),
+    fxTempo:normalizeFXTempoSettings(state.fxTempo,2),fxBeatMultipliers:state.fxBeatMultipliers,
+    localTags:state.localTags,mappings:state.mappings,settings:state.settings,crates:state.crates,
+    prepare:state.prepare,history:state.history,
+    tags:Object.fromEntries(state.tracks.filter(t=>t.demo).map(t=>[t.id,trackMetadata(t)])),
+  };
 }
 export function persist() {
-  state.sessionSaved = false;
-  for (const t of state.tracks)
-    if (t.contentHash) state.localTags[t.contentHash] = trackMetadata(t);
-  try {
-    localStorage.setItem(
-      "openplay-review-v1",
-      JSON.stringify({
-        analysisSettings: state.analysisSettings,
-        video: snapshotVideoState(state.video),
-        fxTempo: normalizeFXTempoSettings(state.fxTempo, 2),
-        fxBeatMultipliers: state.fxBeatMultipliers,
-        localTags: state.localTags,
-        mappings: state.mappings,
-        settings: state.settings,
-        crates: state.crates,
-        prepare: state.prepare,
-        history: state.history,
-        tags: Object.fromEntries(
-          state.tracks
-            .filter((t) => t.demo)
-            .map((t) => [t.id, trackMetadata(t)]),
-        ),
-      }),
-    );
-    state.sessionSaved = true;
-    return true;
-  } catch {
-    notify(
-      "Browser storage unavailable. Export a library backup to preserve changes.",
-    );
-    return false;
-  }
+  const hadError=!!sessionStorage.status().error;
+  state.sessionSaved=sessionStorage.save(sessionSnapshot());
+  updateSessionStatus();
+  if(hadError&&state.sessionSaved)notify("Library changes saved.");
+  return state.sessionSaved;
 }
 function dialog(title, html, setup) {
   $("#modal-title").textContent = title;
@@ -392,7 +348,7 @@ function focusSelectedTrack(){($(`[data-track="${CSS.escape(state.selected)}"]`)
 function renderTracks() {
   const a = filtered();
   $("#tracks").innerHTML = state.grid
-    ? `<div class="art-grid">${a.map((t) => `<button class="art-card ${state.selected === t.id ? "active" : ""}" data-track="${t.id}" draggable="true"><div class="art-cover" style="--art:${t.color}">◉</div><strong>${esc(t.title)}</strong>${stemStatusMarkup(t)}<small>${esc(t.artist)} · ${t.bpm || "—"} BPM</small></button>`).join("")}</div>`
+    ? `<div class="art-grid">${a.map((t) => `<button class="art-card ${state.selected === t.id ? "active" : ""}" data-track="${t.id}" draggable="true"><div class="art-cover" style="--art:${esc(t.color)}">◉</div><strong>${esc(t.title)}</strong>${stemStatusMarkup(t)}<small>${esc(t.artist)} · ${t.bpm || "—"} BPM</small></button>`).join("")}</div>`
     : `<table><thead><tr><th style="width:50px"><button title="File status">◉</button></th>${state.columns.map((c) => `<th><button data-sort="${c}">${{ duration: "LENGTH", title: "SONG" }[c] || c.toUpperCase()} ${state.sort === c ? (state.sortDir === 1 ? "▴" : "▾") : ""}</button></th>`).join("")}</tr></thead><tbody>${a.map((t) => `<tr tabindex="0" draggable="true" data-track="${t.id}" class="${t.id === state.selected ? "selected" : ""}" aria-selected="${t.id === state.selected}"><td class="${t.missing ? "problem" : ""}" title="${t.missing ? "Missing file" : t.locked ? "Beatgrid locked" : "Local audio"}">${t.missing ? "⚠" : t.locked ? "▣" : "♫"}${stemStatusMarkup(t)}</td>${state.columns.map((c) => `<td title="${esc(analysisFieldHint(t, c))}" class="${c === "key" ? "key" : ""}">${esc(c === "duration" ? time(t.duration) : c === "rating" ? "★".repeat(t.rating) : c === "bpm" ? t.bpm || "—" : (t[c] ?? "—"))}</td>`).join("")}</tr>`).join("")}</tbody></table>`;
   if (!a.length)
     $("#tracks").innerHTML =
@@ -1115,7 +1071,8 @@ async function importLocalFiles(files) {
         n++;
         continue;
       }
-      Object.assign(track, state.localTags[track.contentHash] || {});
+      try{Object.assign(track,validateMetadata(state.localTags[track.contentHash]||{},track));}
+      catch(error){sessionStorage.reject(error);updateSessionStatus();}
       normalizeStemCrateTrack(track);
       await engine.buffer(track);
       track.analyzed = true;
@@ -1429,6 +1386,10 @@ const pitchPlay = createPitchPlay({engine,render:renderDecks,persist,notify,quan
 api.pitchPlay=pitchPlay;
 engine.onPrepareSampleGain=track=>trackGain.refresh(track);
 const panels = createPanels(api);
+updateSessionStatus=installSessionStatus({storage:sessionStorage,save:persist,download,
+  backup:()=>({format:'open-play-prototype-1',crates:state.crates,settings:state.settings,tags:state.tracks.map(t=>({id:t.id,...trackMetadata(t)}))}),
+  recover:()=>{state.sessionSaved=sessionStorage.recover(sessionSnapshot());updateSessionStatus();if(state.sessionSaved)notify('Recovery session saved. Original data retained locally.');},
+});
 sampleSyncLeader=()=>panels.samplerSync.externalLeader();
 setMasterOutput(normalizedMasterDB(state.settings["Master Output Level"]),{save:false});
 const initialMasterVolume=Number(state.settings['Master Volume']??100);

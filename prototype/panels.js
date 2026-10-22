@@ -1,3 +1,4 @@
+import {validateBackup,trackMetadata} from './library-state.js';
 import {trackGainDB} from './track-gain.js';
 import {createDeckMIDIRouter,deckMIDITargets,libraryMIDITargets,fxMIDITargets,samplerMIDITargets,herculesPlaybackMappings} from './deck-midi.js';
 import {createBeatgrid,gridBPM} from './beatgrid.js';
@@ -366,7 +367,7 @@ export function createPanels(a) {
         )
         .join(
           "",
-        )}<label>Rating<select name="rating">${[0, 1, 2, 3, 4, 5].map((n) => `<option value="${n}" ${t.rating === n ? "selected" : ""}>${n ? "★".repeat(n) : "Unrated"}</option>`).join("")}</select></label><label>Color<input type="color" name="color" value="${t.color}"></label><label><span>Protect beatgrid</span><input type="checkbox" name="locked" ${t.locked ? "checked" : ""}></label></div><p class="muted">Edits apply to prototype state. Original audio tags are never rewritten. Demo annotations are not measured key/BPM analysis.</p><div class="form-actions"><button type="button" id="mark-missing">${t.missing ? "Clear missing simulation" : "Simulate missing file"}</button><button type="button" id="add-prepare">Add to Prepare</button><button type="submit">Save details</button></div></form>`,
+        )}<label>Rating<select name="rating">${[0, 1, 2, 3, 4, 5].map((n) => `<option value="${n}" ${t.rating === n ? "selected" : ""}>${n ? "★".repeat(n) : "Unrated"}</option>`).join("")}</select></label><label>Color<input type="color" name="color" value="${esc(t.color)}"></label><label><span>Protect beatgrid</span><input type="checkbox" name="locked" ${t.locked ? "checked" : ""}></label></div><p class="muted">Edits apply to prototype state. Original audio tags are never rewritten. Demo annotations are not measured key/BPM analysis.</p><div class="form-actions"><button type="button" id="mark-missing">${t.missing ? "Clear missing simulation" : "Simulate missing file"}</button><button type="button" id="add-prepare">Add to Prepare</button><button type="submit">Save details</button></div></form>`,
       (body) => {
         body.querySelector("form").onsubmit = (e) => {
           e.preventDefault();
@@ -457,7 +458,7 @@ export function createPanels(a) {
                 format: "open-play-prototype-1",
                 crates: s.crates,
                 settings: s.settings,
-                tags: s.tracks.map(({ file, ...t }) => t),
+                tags: s.tracks.map(t => ({id:t.id,...trackMetadata(t)})),
               },
               null,
               2,
@@ -465,59 +466,24 @@ export function createPanels(a) {
           );
         $("#restore-library").onchange = async (e) => {
           try {
-            const data = JSON.parse(await e.target.files[0].text());
-            if (
-              data.format !== "open-play-prototype-1" ||
-              !Array.isArray(data.crates) ||
-              !data.crates.every(
-                (c) =>
-                  typeof c.id === "string" &&
-                  typeof c.name === "string" &&
-                  Array.isArray(c.tracks),
-              )
-            )
-              throw new Error("Invalid prototype backup.");
-            s.crates = data.crates;
-            if (data.settings && typeof data.settings === "object") {
-              for (const name of Object.keys(s.settings))
-                if (name in data.settings)
-                  s.settings[name] = data.settings[name];
-            }
-            for (const tag of data.tags || []) {
-              const t = trackById(tag.id);
-              if (t)
-                Object.assign(
-                  t,
-                  Object.fromEntries(
-                    [
-                      "title",
-                      "artist",
-                      "album",
-                      "bpm",
-                      "key",
-                      "cues",
-                      "savedLoops",
-                      "rating",
-                      "comment",
-                      "color",
-                      "sampleGain",
-                      "trackGainDb",
-                      "autoGainSchema",
-                      "autoGainOffsetDb",
-                      "autoGainPendingDb",
-                    ]
-                      .filter((k) => k in tag)
-                      .map((k) => [k, tag[k]]),
-                  ),
-                );
-            }
+            const file=e.target.files?.[0];if(!file)return;
+            const data=validateBackup(JSON.parse(await file.text()),s.tracks);
+            if(s.decks.some(d=>d.playing||d.playQueued)||s.samples?.some(bank=>bank.some(slot=>slot.playing)))
+              throw new Error("Pause decks and samples before restoring a library backup. Nothing was restored.");
+            s.crates=data.crates;
+            Object.assign(s.settings,data.settings);
+            for(const {id,...metadata} of data.tags){const track=trackById(id);if(track)Object.assign(track,metadata);}
             for(const track of s.tracks)a.trackGain.refresh(track);
-            persist();
+            engine.setMonitorSettings(monitorState());
+            engine.setMixerSettings(mixerSettingsFromPreferences(s.settings));
+            applyEQBoost();
+            const saved=persist();
             renderCrates();
             renderTracks();
             renderDecks();
-            $("#library-tool-result").textContent =
-              "Prototype metadata restored. Audio bytes are not stored in backups.";
+            $("#library-tool-result").textContent = saved
+              ? "Metadata restored and saved. Backups contain no audio bytes; unmatched tracks must be imported separately."
+              : "Metadata restored in this session only. Saving failed; export a backup before closing.";
           } catch (err) {
             $("#library-tool-result").textContent = err.message;
           }
