@@ -1,12 +1,12 @@
-# Try desktop0.1.48 — cold-analysis and preview-scheduling candidate
+# Try desktop0.1.49 — active controls and Sync ownership candidate
 
-Package5/5; source79b0c5b. Native AX startup observed48title,16saved tracks/14previews, Horizontal/Compact,2stopped decks and−10dB. No normal-profile playback. Preview preference off0/on14restored in fresh AX; compositor snapshot remained old modal, so visual confirmation is pending. [Delivery](desktop-0.1.48-playback-delivery.json), [report](CORE_FOUR_DECK_COLD_ANALYSIS_2026-10-23.md).
+Package5/5; sourcebab8042. **Native49 startup is pending.** Existing48AX reports16saved tracks/14previews/0playing/−10dB; REC input did not respond and coordinate input returned noWindowsAvailable.48was not quit or relaunched; no recording/profile data was changed. [Delivery](desktop-0.1.49-playback-delivery.json), [report](CORE_FOUR_DECK_ACTIVE_ANALYSIS_2026-10-24.md).
 
-48is open. On return verify the visible main window and Columns → Preview waveform remains on. Current/versioned48launchers pass syntax checks but were not executed; the app was opened through exact package path. Preserve REC/work before any later restart. Previous apps/profile/port18775 remain.
+On return inspect/preserve REC in48, quit normally, then open `Start Open Play Current Test.command` or `Start Open Play Playback Test 0.1.49.command`. Both49launchers pass syntax checks but were not executed. Verify49title, saved tracks/previews and stopped decks. Previous apps/profile/port18775 remain.
 
-Analysis preserves unrelated owners; cold generated audio yields; custom controls/previews retained. Target analyzed deck still replaces its article and needs held-gesture scrutiny. Broader stalls/pops remain open.
+Analysis refresh retains controls and overview metadata, staged copies yield safely and stale Sync cannot overwrite newer request state. All custom controls/layouts/previews remain.128Node/65analysis,8different-song final software session passes; broad audible pops/stalls and physical/native moving-frame acceptance remain open.
 
-When listening is possible: Sync OFF/pitch reset, independent incoming tempo and T/Y left or G/H right nudge; one manual transition; LOW/MID/HIGH cut/reset; paused Cue hold/release then Cue+Play latch; pause both and hear silence. Capture an actual pop with event/REC context if it returns. Physical headphone/master/controller checks need suitable hardware.
+When listening is possible: Sync OFF/pitch reset, incoming manual tempo and T/Y left or G/H right nudge, one manual transition; LOW/MID/HIGH cut/reset; paused Cue hold/release then Cue+Play latch; pause both and hear silence. Capture an actual pop with REC/event context if it returns. Headphone/master/controller checks need suitable hardware.
 
 ---
 

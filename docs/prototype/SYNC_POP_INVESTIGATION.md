@@ -1,10 +1,12 @@
 # Sync pop investigation — 20 October 2026
 
-## Current disposition — 23 October 2026
+## Current disposition — 24 October 2026
 
-**OPEN for the broader intermittent report.**0.1.48/source79b0c5b scopes analysis redraw to current visible owners and yields generated demo preparation. Existing scheduled-start/ownership guards remain; no Sync clock, DSP, real-file decoder or analyzer-algorithm change. Three physically-muted8additional-song/15rotation sessions include actual8worker jobs and paused-incoming DJ W!LD/Open Mind plus playing-incoming DJ W!LD/End Of My Summer against Tiger Stripes/All Night Long. Outgoing master voice/rate retained;33whole finite PCM windows/204s, no post-startup exact-zero telemetry and final sampled source-grid≤2.750µs do not establish pop-free output or musical downbeats.
+**OPEN for the broader intermittent audible report.** Sourcebab8042/desktop0.1.49 repairs reproduced concurrent request rollback, not a proven pop cause. Same-target double/triple requests and Sync→Reverse could leave source1.05×/nominal1.0×; current owner/start-token guard preserves newer state.6ownership+22deadline/primary regressions pass. Actual raw double and keylock triple Sync now accept newest and keep outgoing master/actual-control rates. No clock/fade/DSP rewrite.
 
-110Node/package5; nativeAX48 starts16tracks/14previews stopped. Preview off/on restored14AX; compositor visual confirmation remains pending. Frame timing mixed at intermediate233.4ms, final75.5ms versus100.1ms baseline; differing lazy preview work limits general attribution. Separate matched demo-preparation probe81–88→1.4–2.4ms. Next target analyzed-deck held gestures, structural/unattributed stalls and capture the next actual pop before speculative DSP changes. [Report](CORE_FOUR_DECK_COLD_ANALYSIS_2026-10-23.md), [comparison](four-deck-cold-analysis-results.json), [PCM](four-deck-cold-analysis-pcm-inspection.json), [delivery](desktop-0.1.48-playback-delivery.json).
+Final8different songs/15rotations/8fresh workers/H-V/2→4keylocks, paused/playing incoming captures.28whole windows/184s across retained REDs/probes/final finite; source-grid≤3.8874µs and no poststartup exact-zero telemetry are not pop-free acoustics/downbeats. Controls/focus/library previews retained.128Node/65analysis/package5. Native49 startup pending;48session left untouched because native input could not inspect REC. [Report](CORE_FOUR_DECK_ACTIVE_ANALYSIS_2026-10-24.md), [results](active-analysis-results.json), [PCM](active-analysis-pcm-inspection.json), [delivery](desktop-0.1.49-playback-delivery.json).
+
+Residual stalls: bounded PCM copy initial return0.2–1.3ms/maxcopy2.1ms; allocation/GC, decode continuation18–19ms and unattributed frames remain. Diagnostic export50.9ms is harness overhead. Capture the next actual failed/pop event before changing audio. Physical/listening/manual/native moving-frame gates stay open.
 
 ## Historical investigation
 

@@ -8,13 +8,13 @@ Outcome: mix four real tracks while background analysis keeps the controls in us
 
 Done for each software defect means an observed failing reproduction, the same actual path after repair, meaningful regressions, retained controls/previews/source integrity and Trello readback. Source-grid/PCM telemetry does not establish musical tightness, absence of audible pops or physical hardware acceptance. Full core completion remains gated by listening and hardware work.
 
-## Reproductions and repairs in progress
+## Reproductions and targeted repairs
 
 ### Analyzed controls replaced during use
 
 A native-worker browser run on0.1.48/source79b0c5b failed `Analysis replaced or changed the focused measured tempo control` after its first loaded result, then stopped safely. The old completion called `renderDecks(index)` and replaced the target article. This is already tracked under DEK-008 and CORE-FIX-07; no duplicate card was created.
 
-The repair updates existing key/title/ARIA and key-Sync state through a21-line helper, preserves Smart Sync reconciliation, and reuses existing frame/gain refreshes. It does not replace control nodes or write active input values. A scoped repaint of the completed track's existing overview keeps BPM/scope/warp overlays current while later jobs continue; a queued-job regression failed before that repaint. Focused tests cover current/duplicate/hidden/replaced identity, manual shifts, unknown keys and active-control identity. The matched three-rotation probe preserves all255retained nodes through each of three actual Worker jobs, including two focused loaded-deck tempo values. The final current-source15rotation run passes8actual jobs with all255retained nodes attached,3loaded focused tempo values retained and5unloaded results. A retained-pointer unit fixture is controlled evidence; actual physical held-pointer release is not claimed.
+The repair updates existing key/title/ARIA and key-Sync state through a21-line helper, preserves Smart Sync reconciliation, and reuses existing frame/gain refreshes. It does not replace control nodes or write active input values. A scoped repaint of the completed track's existing overview keeps BPM/scope/warp overlays current while later jobs continue; a queued-job regression failed before that repaint. Focused tests cover current/duplicate/hidden/replaced identity, manual shifts, unknown keys and active-control identity. The matched three-rotation probe preserves all256retained nodes through each of three actual Worker jobs, including two focused loaded-deck tempo values. The final current-source15rotation run passes8actual jobs with all256retained nodes attached,3loaded focused tempo values retained and5unloaded results. A retained-pointer unit fixture is controlled evidence; actual physical held-pointer release is not claimed.
 
 ### Overlapping Sync cancellation corrupts the newer rate
 
@@ -28,7 +28,7 @@ Retained0.1.48 data nominates nine decode-attributed long-frame scripts: three u
 
 ## Queue and acceptance
 
-Live initial board inventory:140cards, Core26/Next22/Later85/Blocked4/Approvals2/Evidence1. Three distinct new defects are CORE-FIX-08, ANA-FIX-01 and ANA-FIX-02. Current live inventory is143cards/Core29, other counts unchanged; final summary reconciliation/readback is still pending. Existing criteria/history/model guidance must stay intact. The analyzed-deck ownership issue and generic stalls already have cards. Only distinct reproduced defects justify additional cards.
+Live initial board inventory:140cards, Core26/Next22/Later85/Blocked4/Approvals2/Evidence1. Three distinct new defects are CORE-FIX-08, ANA-FIX-01 and ANA-FIX-02. Current live inventory is143cards/Core29, other counts unchanged; all9current summaries and parent comment now read back exactly. Original140dispositions are unchanged; no moves/completions. Existing criteria/history/model guidance must stay intact. The analyzed-deck ownership issue and generic stalls already have cards. Only distinct reproduced defects justify additional cards.
 
 Human re-entry: one Sync-OFF manual transition, EQ judgment, temporary Cue hold/release/latch and clean stop; verify fresh visible native preview state. Hardware gates remain MIX-004, AUD-003, HW-003 and HW-011. These cannot be passed by muted computer-audio captures.
 
@@ -52,10 +52,16 @@ Human re-entry remains one manual Sync-OFF transition, EQ judgment, temporary Cu
 
 The current-source run completes320.208s stopped/no queued restart/no reported error. Eight additional real songs,15rotations,8fresh native workers (3loaded/5unloaded), H/V and2→4keylocks. Raw double-Sync and keylock triple-Sync both accept the newest request, keep actual/displayed rates equal and preserve the outgoing master. These use diagnostic DOM clicks, not a human pointer; existing audio deadlines/fades/DSP remain unchanged.
 
-All8analysis checks preserve255existing nodes and current loaded focus/value; active Auto Gain is deferred. Whole-session removals remain39deck articles,6shared canvases and24mixer strips from deliberate replacement/structural layout or keylock transitions; rows/previews0. The eight analysis-specific identity checks preserve all255retained nodes, so those remaining structural redraws are not analysis-completion losses.43Load/20Play and24stopped layout combinations preserve core access across all6choices,2/4decks and requestedH/VCompact. These are feature/node preservation checks, not exhaustive visual/advanced-mode certification. Final library has6lazy previews; differing5/6probe counts remain explicit.
+All8analysis checks preserve256existing nodes and current loaded focus/value; active Auto Gain is deferred. Whole-session removals remain39deck articles,6shared canvases and24mixer strips from deliberate replacement/structural layout or keylock transitions; rows/previews0. The eight analysis-specific identity checks preserve all256retained nodes, so those remaining structural redraws are not analysis-completion losses.43Load/20Play and24stopped layout combinations preserve core access across all6choices,2/4decks and requestedH/VCompact. These are feature/node preservation checks, not exhaustive visual/advanced-mode certification. Final library has6lazy previews; differing5/6probe counts remain explicit.
 
 Final callbackp95 is0.8–1.0ms; max frame interval58.1ms;4Long Animation Frames, worst52.9ms;7.1ms summed script-forced layout. Compare the separately instrumented short probes honestly (worst53.2→81.7ms; max interval58→75ms). Distinct workloads/background thumbnail activity prevent a global before/after performance claim.
 
 Independent inspector checks28whole Float32 windows/184s across retained REDs, matched probes and final run, all finite/non-silent. All9targeted worker-ready events fall inside their12s windows. Final sampled source-grid error≤3.8874µs and no post-startup exactly-zero telemetry are software observations, not audible tightness or absence of clicks.16original audio hashes/sizes/mtimes unchanged; isolated original session storage unchanged. Raw music stays private.
 
 Receipts: [run results](active-analysis-results.json), [whole PCM/source inspection](active-analysis-pcm-inspection.json), [matched staging measurements](analysis-staging-probe-results.json), [controlled Sync ownership](sync-request-ownership-results.json). Package/native/Trello delivery follows separately below.
+
+## Delivery and Trello
+
+Candidate0.1.49/sourcebab804202e7803a2651838b1c597ce5cb31c5719 passes5/5archive/host checks, ASAR `ba4023f2e42848e9c1afc216c39375e6b8485e0bf62640e556169148535fb89c`. Native49startup remains pending: old48AX reports16tracks/14previews/0playing, but REC accessibility click had no effect and coordinate input returned noWindowsAvailable. Its recording state was not inspected; no quit/relaunch/profile edit/unlock bypass was attempted. Current/versioned49launchers syntax checked, not executed. [Delivery/re-entry](desktop-0.1.49-playback-delivery.json).
+
+Live143cards/Core29, other lists unchanged;3distinct new defect cards,9current summaries and parent comment exact readback. Original140list/completion/closed states and all retained criteria/history/model guidance preserved. A transient Trello transport failure was recovered by read-before-retry. [Reconciliation](../delivery/CORE_FOUR_DECK_ACTIVE_ANALYSIS_RECONCILIATION_2026-10-24.json). The software repairs are verified within the stated controls/PCM criteria; broader stalls/pops/listening/hardware and physical held-pointer/native moving frames remain open.
