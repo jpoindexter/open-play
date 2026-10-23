@@ -1,0 +1,99 @@
+{
+  "date": "2026-10-24",
+  "scope": "Isolated three-second installed-Electron capability calibration; no imported music, Play, normal profile or desktop0.1.51 startup acceptance. Not an actual stall/pop or GC-cause trace.",
+  "status": "capability-calibration-candidate",
+  "runtime": {
+    "electron": "44.9.0",
+    "chrome": "152.0.7977.167",
+    "node": "24.22.0"
+  },
+  "hostSourceSHA256": "4d38ce592142043b80d66e7f0532062c6081065e42aed64c39f97d2faa9746f8",
+  "selectedCategories": [
+    "toplevel",
+    "devtools.timeline",
+    "blink.user_timing",
+    "renderer.scheduler",
+    "v8.execute",
+    "disabled-by-default-v8.gc",
+    "audio",
+    "webaudio",
+    "disabled-by-default-audio.latency"
+  ],
+  "unavailableCategories": [],
+  "smokeWaitMs": 3000,
+  "trace": {
+    "bytes": 23141717,
+    "sha256": "1f6d1e8aacaadd37980e77e12dddceea3e042e2431cb2d9a326dc9af85d6bbba",
+    "events": 102060,
+    "gcNamedEvents": 25057
+  },
+  "traceBufferUsage": {
+    "percentage": 0.4432692229747772,
+    "value": 0
+  },
+  "usageGate": {
+    "field": "percentage",
+    "observed": 0.4432692229747772,
+    "thresholdExclusive": 0.8,
+    "semantics": "Provisional numeric gate only; installed declarations do not establish units or prove no dropped events.",
+    "passed": true
+  },
+  "qualityGates": {
+    "usageBelowPointEight": true,
+    "marksOrdered": true,
+    "onlyOwnedProcessIDs": true
+  },
+  "rendererMarks": {
+    "start": {
+      "ts": 68799059742,
+      "cat": "blink.user_timing",
+      "ph": "I"
+    },
+    "end": {
+      "ts": 68802063985,
+      "cat": "blink.user_timing",
+      "ph": "I"
+    }
+  },
+  "unknownProcessIDs": [],
+  "physicallyMutedByHost": true,
+  "visibleNoPlayReady": {
+    "status": "Ready for local files",
+    "errors": [],
+    "visibility": "visible",
+    "fileInputEnabled": true,
+    "runDisabled": true,
+    "activePlayButtons": 0
+  },
+  "isolation": {
+    "nodeIntegration": false,
+    "contextIsolation": true,
+    "sandbox": true,
+    "webSecurity": true,
+    "permissionCheck": "deny",
+    "permissionRequest": "deny",
+    "popups": "deny",
+    "foreignNavigation": "deny"
+  },
+  "ownedHostExited": true,
+  "normalPlayback48ProcessStillPresent": true,
+  "normalPlaybackUIRefreshed": false,
+  "usableForLongMeasuredSession": false,
+  "priorBroadSmoke": {
+    "traceSHA256": "ba4ff4c2162a96d1b34ac2b21f6173178a9b2f52cefa105d70f0d534c204d7c7",
+    "bytes": 59854754,
+    "traceBufferUsage": {
+      "percentage": 0.9925480484962463,
+      "value": 0
+    },
+    "appMarksPresent": false,
+    "causalEvidence": false
+  },
+  "privateTraceAndMachineMetadataPublished": false,
+  "notEstablished": [
+    "Long-session trace retention or dropped-event completeness",
+    "Timing correlation with an actual residual stall",
+    "Native0.1.51 normal startup or interaction",
+    "Audio-pop cause, musical tightness, listening or hardware acceptance"
+  ]
+}

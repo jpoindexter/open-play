@@ -1,12 +1,10 @@
-# Try desktop 0.1.50 — scoped overview and four-deck reliability candidate
+# Try desktop0.1.51 — profile-ready redraw candidate
 
-Package checks 5/5; immutable source 3fed6dc. **Native startup is pending.** Existing app/profile/recording untouched; no new native attempt. Earlier48 input could not inspect REC, and those observations are historical. [Delivery](desktop-0.1.50-playback-delivery.json), [report](CORE_LOAD_CONTINUATION_TRACE_2026-10-24.md).
+Desktop0.1.51/source f5e23cd packaged; archive/host5/5. Normal native startup pending; existing app/profile/REC untouched and earlier48 UI observations historical. Profile-ready callbacks now refresh only current buffer owners, preserving controls/focus/previews and aliases/late consumers. Full Node142; matched four→one visits,7.2/6.3/7.6→1.8/1.6/3.2ms. Full320.183s/15rotations/8workers/24layouts and27wholePCMwindows/164s pass software contracts; same8songs reused, not new breadth. Two long frames remain,worst62ms; earlier140.7ms cause unproved. Isolated3s native calibration is not native51/real-track/pop/GC-cause proof. Trello146cards, one new defect/five summaries/comment exact; no moves/completions. Audible pops/native moving frames/held gestures/listening/hardware remain open.
 
-Inspect and preserve any REC work in the existing app, quit normally, then open `Start Open Play Current Test.command` or `Start Open Play Playback Test 0.1.50.command`. Both launchers are syntax checked, not executed. Verify title50, saved tracks/previews, stopped decks and no save warning. Previous bundles/profile/port18775 remain.
+[Delivery](desktop-0.1.51-playback-delivery.json), [report and limits](CORE_PROFILE_READY_REDRAW_2026-10-24.md). Inspect/preserve REC in existing app, quit normally, then open Start Open Play Current Test.command or Start Open Play Playback Test 0.1.51.command. Both syntax checked, not executed. Verify title51, saved tracks/previews, stopped transport and no save warning. Earlier bundles/profile/port18775 remain.
 
-All custom controls/layouts/library previews and analyzed focus retained. 136 Node checks, eight additional songs / 15 rotations / eight workers / 24 layouts pass software contracts. Measured load continuation 8.8–9.5 → 2.6–3.7 ms. Seven final long frames, worst 140.7 ms, broad audible pops and physical/native moving-frame acceptance remain open.
-
-When listening is possible: Sync OFF/pitch reset; incoming manual tempo and T/Y left or G/H right nudge; one manual transition; LOW/MID/HIGH cut/reset; paused Cue hold/release then Cue+Play latch; pause both and hear silence. Capture the actual next pop with REC/event context if it returns. Headphone/master/controller checks need suitable hardware.
+When available: Sync OFF/pitch reset, incoming manual tempo and T/Y left or G/H right nudge, one manual transition; LOW/MID/HIGH cut/reset; paused Cue hold/release, then Cue+Play latch; pause both and hear silence. Capture actual next pop with REC/event context. Physical headphone/master/controller acceptance needs suitable hardware.
 
 ---
 
