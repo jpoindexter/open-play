@@ -30,9 +30,12 @@ function checkpoint(){
  report.windows.push({section,elapsedSeconds:(performance.now()-started)/1000,tick:summary(ticks),interval:summary(intervals),rectangles,longTasks,physicalMuted:engine.audioMonitor.snapshot().physicalMuted,master:{ready:engine.masterSnapshot().ready,invalid:engine.masterSnapshot().invalid},decoded:engine.decodedBufferUsage(),raster:sourceWaveformRasterUsage(),heap:performance.memory?{used:performance.memory.usedJSHeapSize,total:performance.memory.totalJSHeapSize}:null,controls:controlCounts(),playing:state.decks.filter(d=>d.playing).length,phases:gridPhases(),contextState:engine.ctx.state,visibility:document.visibilityState});ticks=[];intervals=[];rectangles=0;longTasks=[];show();
 }
 async function load(index,track){
+ const contract=new URL(location.href).searchParams.has('loadContract');
+ const retained=contract?[...document.querySelectorAll(`.deck:not([data-focus="${index}"]),#detail-wave,.channel-strip,#crossfader,[data-waveform-scrub],[data-waveform-scrub-status],#tracks tbody tr,#tracks .library-wave-preview img`)]:[];
  trace?.note('load-start',{deck:index,track:track.title});
  click(`tr[data-track="${track.id}"]`);click(`[data-action="load"][data-deck="${index}"]`);
  await until(()=>app.state.decks[index].track===track&&app.engine.buffers.has(track.id)&&!app.state.decks[index].processing,'load deck '+index);await sourceWaveformState(app.engine.buffers.get(track.id)).ready;trace?.note('load-profile-ready',{deck:index});
+ if(contract){assert(retained.every(node=>node.isConnected),'Load replaced a sibling, mixer, shared waveform or scrub control');(report.loadPreservationChecks??=[]).push({deck:index,track:track.title,retained:retained.length,controls:controlCounts()});}
 }
 async function sync(index){
  const d=app.state.decks[index];click(`[data-action="sync"][data-deck="${index}"]`);await until(()=>!d.processing&&!d.playQueued,'Sync deck '+index);await sleep(100);
@@ -40,7 +43,8 @@ async function sync(index){
 }
 async function play(index){
  const contract=new URL(location.href).searchParams.has('transportContract'),button=$(`[data-action="play"][data-deck="${index}"]`);
- const nodes=contract?[...document.querySelectorAll('.deck,#detail-wave,.channel-strip,#crossfader')]:[];if(contract)button.focus();
+ const libraryContract=new URL(location.href).searchParams.has('libraryContract');
+ const nodes=contract?[...document.querySelectorAll('.deck,#detail-wave,.channel-strip,#crossfader'+(libraryContract?',#tracks tbody tr,#tracks .library-wave-preview img':''))]:[];if(contract)button.focus();
  button.click();await until(()=>app.state.decks[index].playing&&!app.state.decks[index].processing&&!app.state.decks[index].playQueued,'Play deck '+index);
  if(contract){
   assert(nodes.every(node=>node.isConnected),'Play replaced a deck, mixer or waveform node');assert(document.activeElement===button,'Play lost keyboard focus');
@@ -63,7 +67,7 @@ async function boot(){
  const parsed=new DOMParser().parseFromString(await(await fetch('workspace-preview.html')).text(),'text/html');for(const a of parsed.body.attributes)document.body.setAttribute(a.name,a.value);for(const link of parsed.querySelectorAll('link[rel=stylesheet]'))document.head.append(link);for(const n of [...parsed.body.children])if(n.tagName!=='SCRIPT')document.body.append(n);
  await import('./layout-preview.js');await until(()=>window.openPlay?.state.decks[1].track&&!window.openPlay.state.analysis,'workspace');app=window.openPlay;
  select('#deck-count','4');select('#preview-density','compact');app.engine.audioMonitor.mutePhysical(true);assert(app.engine.audioMonitor.snapshot().physicalMuted,'Physical mute');
- report.sourceHashes=Object.fromEntries(await Promise.all(['app.js','engine.js','smart-sync.js','source-waveform.js','detail-waveform.js','four-deck-soak-harness.js','four-deck-soak-worklet.js','four-deck-trace.js','library-waveform-preview.js','transport-presentation.js'].map(async f=>[f,[...new Uint8Array(await crypto.subtle.digest('SHA-256',await(await fetch(f,{cache:'no-store'})).arrayBuffer()))].map(n=>n.toString(16).padStart(2,'0')).join('')])));report.phaseHandoffLoaded=app.engine.setPitch.toString().includes('if(d.playing&&!d.reverse)');
+ report.sourceHashes=Object.fromEntries(await Promise.all(['app.js','engine.js','smart-sync.js','source-waveform.js','detail-waveform.js','four-deck-soak-harness.js','four-deck-soak-worklet.js','four-deck-trace.js','library-waveform-preview.js','transport-presentation.js','library-rows.js'].map(async f=>[f,[...new Uint8Array(await crypto.subtle.digest('SHA-256',await(await fetch(f,{cache:'no-store'})).arrayBuffer()))].map(n=>n.toString(16).padStart(2,'0')).join('')])));report.phaseHandoffLoaded=app.engine.setPitch.toString().includes('if(d.playing&&!d.reverse)');
  $('#soak-files').disabled=false;$('#soak-run').textContent='Choose eight tracks first';report.status='Ready for local files';show();
 }
 $('#soak-files').onchange=async e=>{
@@ -115,6 +119,24 @@ $('#soak-run').onclick=async()=>{
  }
 };
 boot().catch(error=>{report.errors.push(error.stack);show();});
+
+if(new URL(location.href).searchParams.has('layoutContract')){
+ const button=document.createElement('button');button.textContent='Check preserved layouts';$('#soak').prepend(button);
+ button.onclick=async()=>{try{
+  assert(report.stopped&&tracks.length===8,'Run only after stopped real-track session');button.disabled=true;report.layoutChecks=[];
+  for(const workspace of ['serato','traktor','hybrid','traktor-flat','serato-hybrid','rekordbox']){
+   click('[data-panel="settings"]');click('[data-settings-tab="Layouts"]');click(`#modal [data-workspace-choice="${workspace}"]`);click('#modal-close');
+   for(const count of ['2','4'])for(const orientation of ['horizontal','vertical']){
+    select('#deck-count',count);select('#preview-orientation',orientation);select('#preview-density','compact');await sleep(100);
+    await load(Number(count)-1,tracks[Number(count)-1]);await sleep(100);
+    assert(document.querySelectorAll('.deck').length===Number(count),'Deck count changed during load');
+    const controls=controlCounts();assert(['play','tempo','eq','scrub'].every(key=>controls[key]===Number(count)),'Layout lost a core control');
+    report.layoutChecks.push({workspace,count:Number(count),orientation,controls});show();
+   }
+  }
+  event('layout-contract-passed',{checks:report.layoutChecks.length});
+ }catch(error){report.errors.push(error.stack);show();}};
+}
 
 // The owned native trace host can load its eight verified loopback-only copies.
 if(new URL(location.href).searchParams.has('nativeInputs')){

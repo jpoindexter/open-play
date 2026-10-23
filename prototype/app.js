@@ -17,6 +17,7 @@ import { createSmartSync, hasBeatgrid, beatPosition } from './smart-sync.js';
 import {createBeatgrid} from './beatgrid.js';
 import {currentDeckBPM} from './deck-tempo.js';
 import {refreshTransportControls} from './transport-presentation.js';
+import {renderLibraryRows} from './library-rows.js';
 import {createTempoSlider} from './tempo-slider.js';
 import {createLocalAudioLibrary} from "./local-audio-library.js";
 import { createStemPreparation } from "./stems.js";
@@ -349,9 +350,8 @@ function updateStemStatus(track){
 function focusSelectedTrack(){($(`[data-track="${CSS.escape(state.selected)}"]`)||$('#tracks')).focus({preventScroll:true});}
 function renderTracks() {
   const a = filtered();
-  $("#tracks").innerHTML = state.grid
-    ? `<div class="art-grid">${a.map((t) => `<button class="art-card ${state.selected === t.id ? "active" : ""}" data-track="${t.id}" draggable="true"><div class="art-cover" style="--art:${esc(t.color)}">◉</div><strong>${esc(t.title)}</strong>${stemStatusMarkup(t)}<small>${esc(t.artist)} · ${t.bpm || "—"} BPM</small></button>`).join("")}</div>`
-    : `<table><thead><tr><th style="width:50px"><button title="File status">◉</button></th>${state.columns.map((c) => `<th><button data-sort="${c}">${{ duration: "LENGTH", title: "SONG" }[c] || c.toUpperCase()} ${state.sort === c ? (state.sortDir === 1 ? "▴" : "▾") : ""}</button></th>`).join("")}</tr></thead><tbody>${a.map((t) => `<tr tabindex="0" draggable="true" data-track="${t.id}" class="${t.id === state.selected ? "selected" : ""}" aria-selected="${t.id === state.selected}"><td class="${t.missing ? "problem" : ""}" title="${t.missing ? "Missing file" : t.locked ? "Beatgrid locked" : "Local audio"}">${t.missing ? "⚠" : t.locked ? "▣" : "♫"}${stemStatusMarkup(t)}</td>${state.columns.map((c) => `<td title="${esc(analysisFieldHint(t, c))}" class="${c === "key" ? "key" : ""}">${esc(c === "duration" ? time(t.duration) : c === "rating" ? "★".repeat(t.rating) : c === "bpm" ? t.bpm || "—" : (t[c] ?? "—"))}</td>`).join("")}</tr>`).join("")}</tbody></table>`;
+  if(state.grid) $("#tracks").innerHTML = `<div class="art-grid">${a.map((t) => `<button class="art-card ${state.selected === t.id ? "active" : ""}" data-track="${t.id}" draggable="true"><div class="art-cover" style="--art:${esc(t.color)}">◉</div><strong>${esc(t.title)}</strong>${stemStatusMarkup(t)}<small>${esc(t.artist)} · ${t.bpm || "—"} BPM</small></button>`).join("")}</div>`;
+  else renderLibraryRows($("#tracks"), `<th style="width:50px"><button title="File status">◉</button></th>${state.columns.map((c) => `<th><button data-sort="${c}">${{ duration: "LENGTH", title: "SONG" }[c] || c.toUpperCase()} ${state.sort === c ? (state.sortDir === 1 ? "▴" : "▾") : ""}</button></th>`).join("")}`, state.columns.join(","), a.map((t) => `<tr tabindex="0" draggable="true" data-track="${t.id}" class="${t.id === state.selected ? "selected" : ""}" aria-selected="${t.id === state.selected}"><td class="${t.missing ? "problem" : ""}" title="${t.missing ? "Missing file" : t.locked ? "Beatgrid locked" : "Local audio"}">${t.missing ? "⚠" : t.locked ? "▣" : "♫"}${stemStatusMarkup(t)}</td>${state.columns.map((c) => `<td title="${esc(analysisFieldHint(t, c))}" class="${c === "key" ? "key" : ""}">${esc(c === "duration" ? time(t.duration) : c === "rating" ? "★".repeat(t.rating) : c === "bpm" ? t.bpm || "—" : (t[c] ?? "—"))}</td>`).join("")}</tr>`));
   if (!a.length)
     $("#tracks").innerHTML =
       '<div class="empty">No tracks here.<br><br>Import local audio, add tracks to this crate, or clear the search.</div>';
@@ -398,6 +398,7 @@ function padMarkup(d) {
     .join("");
 }
 let renderedSyncMode = state.settings["Sync Mode"];
+let renderedDeckShape;
 function syncControls(d) {
   const mode = state.settings["Sync Mode"];
   if (mode === "Off") return "";
@@ -422,19 +423,23 @@ function updateTempoSlider(d) {
   input.disabled=!d.track;
   if(label&&label.textContent!==v.label)label.textContent=v.label;
 }
-function renderDecks() {
+function renderDecks(index = null) {
   const quantizeStates=state.decks.slice(0,state.deckCount).map(deckQuantize);
   $('#quantize').setAttribute('aria-pressed',quantizeStates.every(Boolean)?'true':quantizeStates.every(x=>!x)?'false':'mixed');
   const syncMode = state.settings["Sync Mode"];
+  const shape = `${state.layout}/${state.deckCount}/${syncMode}`;
+  const target = Number.isInteger(index) && shape === renderedDeckShape
+    ? document.querySelector(`.deck[data-focus="${index}"]`) : null;
   if (syncMode !== renderedSyncMode) {
     smartSync.reset();
     renderedSyncMode = syncMode;
   }
 
   smartSync.reconcile();
-  document.body.className = `${document.body.classList.contains("day") ? "day " : ""}layout-${state.layout}${state.deckCount === 4 ? " four-decks" : ""}`;
-  $("#decks").innerHTML = state.decks
+  if (!target) document.body.className = `${document.body.classList.contains("day") ? "day " : ""}layout-${state.layout}${state.deckCount === 4 ? " four-decks" : ""}`;
+  const markup = state.decks
     .slice(0, state.deckCount)
+    .filter(d => !target || d.index === index)
     .map((d) => {
       const t = d.track;
       if (d.keySync && d.keySyncTag !== t?.key) d.keySync = false;
@@ -455,7 +460,17 @@ function renderDecks() {
         )}<button data-action="censor" data-deck="${d.index}" aria-pressed="${!!d.censor}" class="${d.censor ? "active" : ""}" ${d.mode === "ABS" || !t || !d.playing ? "disabled" : ""} title="Hold for reverse; release resumes the forward timeline">Censor</button><button data-action="keyDown" data-deck="${d.index}" title="Shift key down one semitone; prototype limit±24">Key −</button><button data-action="keyUp" data-deck="${d.index}" title="Shift key up one semitone; prototype limit±24">Key +</button><button data-action="keySync" data-deck="${d.index}" class="${d.keySync ? "active" : ""}">Key Sync</button><button data-action="keyReset" data-deck="${d.index}">Reset key</button><button data-action="range" data-deck="${d.index}">±${d.pitchRange}</button><button data-action="double" data-deck="${d.index}">Double</button><span class="spacer"></span><small class="muted">${d.playQueued ? "PREPARING PLAYBACK" : d.processing ? "PROCESSING PITCH…" : d.mode === "INT" ? "LOCAL AUDIO" : "DEVICE SIMULATION"}</small></div><div class="wave-wrap" data-seek="${d.index}" tabindex="0" role="slider" aria-label="Deck ${d.index + 1} play position" aria-valuemin="0" aria-valuemax="${t?.duration || 0}" aria-valuenow="${engine.position(d)}" aria-valuetext="${time(engine.position(d))} of ${time(t?.duration || 0)}" aria-disabled="${!t}" title="Left/Right: 1 second. Home/End: start/end. Shift-click or Shift+Home/End overrides needle protection."><canvas id="wave-${d.index}" width="900" height="100"></canvas><span class="playhead" id="head-${d.index}"></span><span class="wave-label" data-wave-scope="${d.index}" aria-live="polite">${t?.analyzed ? "Decoded waveform" : "Generated overview fixture"} · ${t?.bpm || "—"} BPM</span></div></article>`;
     })
     .join("");
-  if (["Vertical","Horizontal"].includes(state.layout))
+  if (target) {
+    // Projected layouts move these original controls inside the deck article.
+    const lanes = $('.waveform-scrub-lanes');
+    if (lanes) for (const node of target.querySelectorAll('[data-waveform-scrub],[data-waveform-scrub-status]')) lanes.append(node);
+    target.outerHTML = markup;
+    refreshTransportControls(state);
+  } else {
+    $("#decks").innerHTML = markup;
+    renderedDeckShape = shape;
+  }
+  if (!target && ["Vertical","Horizontal"].includes(state.layout))
     $("#decks").insertAdjacentHTML(
       "beforeend",
       `<section class="detail-waves ${state.layout==='Horizontal'?'detail-horizontal':''}" aria-label="Scrolling waveforms"><div class="detail-wave-tools"><button data-wave-zoom="out" aria-label="Zoom waveforms out">−</button><output id="detail-wave-scale">${detailWaveSpan}s</output><button data-wave-zoom="in" aria-label="Zoom waveforms in">+</button></div><canvas id="detail-wave" width="320" height="330"></canvas><div class="waveform-scrub-lanes" style="grid-template-${state.layout==='Horizontal'?'rows':'columns'}:repeat(${state.deckCount},minmax(0,1fr))">${state.decks.slice(0,state.deckCount).map(d=>`<div class="waveform-scrub-lane" data-deck-scratch="${d.index}" data-waveform-scrub="${state.layout==='Horizontal'?'x':'y'}" data-waveform-span="${detailWaveSpan}" role="button" tabindex="0" aria-label="Scrub deck ${d.index+1} waveform" aria-describedby="waveform-scrub-help waveform-grid-help" aria-busy="false" title="Drag waveform to scrub. Shift-drag: fine adjustment. Escape: cancel."></div><output class="sr-only" data-waveform-scrub-status="${d.index}" role="status" aria-live="polite"></output>`).join('')}</div><p class="sr-only" id="waveform-scrub-help">Drag left or up to advance, right or down to rewind. Hold Shift when starting a drag for ten times finer movement. Focus a waveform and hold Left or Right to audition; release to restore prior play state. Escape cancels.</p><p class="sr-only" id="waveform-grid-help">The white NOW line is the shared playback position. Short ruler ticks are beats; long numbered ticks are bars. A through D identify decks; each lane shows its local bar and beat. Different absolute bar numbers can still be aligned. These are source-grid estimates, not proof of audible Sync.</p><span data-detail-wave-label>SOURCE · ±${detailWaveSpan/2}s · PRE-FX</span></section>`,
@@ -464,7 +479,7 @@ function renderDecks() {
     changeDetailWaveZoom(button.dataset.waveZoom==='in'?.5:2);
   });
   drawWaves();
-  renderMixer();
+  if (!target) renderMixer();
   stemSlipControls.restoreFocus();
 }
 function waveformView(d) {
@@ -694,7 +709,7 @@ async function load(index, id = state.selected, options = {}) {
     state.fxTempo,
   );
   state.focus = index;
-  renderDecks();
+  renderDecks(index);
   let decoded=false;
   try {
     await engine.buffer(t);

@@ -18,7 +18,13 @@ export function installLibraryWaveforms({state,engine}){
     cell.replaceChildren();const label=document.createElement('span');label.textContent=text;cell.append(label);
   };
   function paintCell(cell,track,record){
-    if(cell.dataset.previewState===(record?.phase||'waiting')&&cell.dataset.previewKey===keyFor(track))return;
+    if(cell.dataset.previewState===(record?.phase||'waiting')&&cell.dataset.previewKey===keyFor(track)){
+      const image=cell.querySelector('img'),alt=`Full-track waveform: ${track.title}`;
+      if(image&&image.alt!==alt)image.alt=alt;
+      const retry=cell.querySelector('button'),label=`Retry waveform preview for ${track.title}`;
+      if(retry&&retry.getAttribute('aria-label')!==label)retry.setAttribute('aria-label',label);
+      return;
+    }
     cell.dataset.previewKey=keyFor(track);
     if(record?.phase==='ready'){
       const image=document.createElement('img');image.src=record.src;
