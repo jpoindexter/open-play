@@ -372,6 +372,7 @@ export class AudioEngine {
       const ack=await transport.start({track:reversePlan?.track||{bpm:d.track.bpm,grid:d.track.grid,duration:d.track.duration,gridWarpMarkers:d.track.gridWarpMarkers},loop:reversePlan?reversePlan.loop(loop):timeline.loop,bpm:timeline.bpm,position:reversePlan?reversePlan.duration-position:position,when,renderedLoop:transformed});
       if(handoff)await handoff.arm(d.index);
       if(!current())return;
+      if(this.ctx.currentTime>=ack.when-.005)throw Error('Sync start missed its lead; previous audio retained. Try Sync again.');
       const voice={sources:[],warpLoopTransport:transport,liveOwnerController:controller,gridTimeline:timeline,stemGains:[],handoffBefore:old&&playing?{until:when,owner:old,clock:oldClock,rate:at=>this.voiceRateAt(d,old,at)}:null};
       this.routeOrdinaryVoice(d,voice,transport.outputs,buffers.length===5,{when,reuseVoice:old});committed=true;this.retireVoiceAt(d.index,old,when);
       d.position=reversePlan?reversePlan.duration-ack.position:ack.position;d.anchorPosition=d.position;d.anchorTime=when;d.playing=true;
@@ -825,19 +826,27 @@ export class AudioEngine {
   }
   async setLoop(d, on, start, end, {positionAt=null,priorClock=null,playing=d.playing}={}) {
     this.onValidateTransport?.(d,{loop:on,loopIn:start,loopOut:end});
+    const track=d.track,voice=this.voices.get(d.index),previous={loop:d.loop,loopIn:d.loopIn,loopOut:d.loopOut};
+    const restart=async options=>{
+      const pending=this.start(d,options),token=this.startTokens.get(d.index);
+      try{await pending;}catch(error){
+        if(d.track===track&&this.voices.get(d.index)===voice&&this.startTokens.get(d.index)===token)Object.assign(d,previous);
+        throw error;
+      }
+    };
     if(positionAt){
       const position=positionAt(this.ctx.currentTime),prior=priorClock||this.voiceClock(d,this.voices.get(d.index));
       if(!Number.isFinite(position)||position<0||position>d.track.duration)throw new RangeError('Invalid loop transition position.');
       d.position=this.position(d);d.loop=on;d.loopIn=start;d.loopOut=end;
       // One owned preparation selects source position at its actual future
       // output time, without a second render/seek after preparing the loop.
-      if(playing)await this.start(d,{priorClock:prior,positionAt});
+      if(playing)await restart({priorClock:prior,positionAt});
       else{this.pause(d,{preserveStemExit:true});d.position=position;}
       return;
     }
     if(this.voices.get(d.index)?.gridTimeline){
       const prior=this.voiceClock(d,this.voices.get(d.index)),was=d.playing;d.position=this.position(d);d.loop=on;d.loopIn=start;d.loopOut=end;
-      if(was)await this.start(d,{priorClock:prior,positionAt:at=>{const p=prior(at);return on&&p>=end?start+((p-start)%(end-start)+(end-start))%(end-start):p;}});
+      if(was)await restart({priorClock:prior,positionAt:at=>{const p=prior(at);return on&&p>=end?start+((p-start)%(end-start)+(end-start))%(end-start):p;}});
       return;
     }
     if (this.voices.get(d.index)?.deckScratchTransport || this.voices.get(d.index)?.liveKeylock || this.deckScratchRequests.has(d.index)) {

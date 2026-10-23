@@ -152,9 +152,17 @@ export function createSmartSync({engine, state, externalLeader=()=>null}) {
       const bpm=engaged(deck)&&syncBPM?syncBPM:gridBPM(deck.track,engine.position(deck))*engine.audibleRate(deck);
       const rate=bpm/deck.track.bpm;
       if(!Number.isFinite(rate)||rate<.25||rate>4)throw new Error('The matched tempo is outside the current transport range.');
+      const previous={rate:deck.rate,sync:deck.sync,syncRole:deck.syncRole,syncState:deck.syncState},previousBPM=syncBPM,track=deck.track,voice=engine.voices?.get(deck.index),revision=revise(deck);
       syncBPM=bpm;deck.rate=rate;
-      revise(deck);deck.sync=true;deck.syncRole='primary';deck.syncState=deck.playing?(barCompatible(deck)?'beat':'tempo'):'armed';
-      if(deck.playing && deck.track.gridWarpMarkers?.length){deck.position=engine.position(deck);await engine.start(deck);}
+      deck.sync=true;deck.syncRole='primary';deck.syncState=deck.playing?(barCompatible(deck)?'beat':'tempo'):'armed';
+      if(deck.playing && deck.track.gridWarpMarkers?.length){
+        deck.position=engine.position(deck);let token;
+        try{const pending=engine.start(deck);token=engine.startTokens?.get(deck.index);await pending;}
+        catch(error){
+          if(enabled()&&revisions.get(deck)===revision&&deck.track===track&&engine.startTokens?.get(deck.index)===token&&engine.voices?.get(deck.index)===voice&&deck.rate===rate&&deck.syncRole==='primary'&&syncBPM===bpm){Object.assign(deck,previous);syncBPM=previousBPM;}
+          throw error;
+        }
+      }
       return;
     }
     validateTransport(deck,primary);
@@ -174,6 +182,7 @@ export function createSmartSync({engine, state, externalLeader=()=>null}) {
     requireGrid(deck.track);
     const bpm=engaged(deck)&&syncBPM?syncBPM:gridBPM(deck.track,engine.position(deck))*engine.audibleRate(deck);
     if(!Number.isFinite(bpm)||bpm<=0)throw new Error('Set a valid master BPM before using Sync.');
+    revise(deck);
     syncBPM=bpm;
     for(const other of state.decks)if(other!==deck&&other.syncRole==='primary')other.syncRole='secondary';
     deck.sync=true;deck.syncRole='primary';

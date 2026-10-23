@@ -1,0 +1,1814 @@
+{
+  "scope": "Native owned Electron44.9.0 four-deck renderer trace, physically muted. Continuous64MiB ring buffer reached99.8%; retained event range only, not a complete90-second record. CPU profiler startup itself takes105ms. Different runtime and instrumentation from IAB.",
+  "traceSHA256": "68e426bea3199ce596f62ef9c139997a73f8171484edfe2a38f3d3372ba22f23",
+  "metadata": {
+    "began": "2026-10-23T13:01:28.056Z",
+    "ended": "2026-10-23T13:03:12.328Z",
+    "file": "/Users/jasonpoindexter/Documents/GitHub/Open Play/local-evidence/four-deck-trace-2026-10-23/native-renderer-trace.json",
+    "categories": [
+      "toplevel",
+      "devtools.timeline",
+      "v8",
+      "blink.user_timing",
+      "renderer.scheduler",
+      "cc",
+      "gpu",
+      "viz",
+      "disabled-by-default-v8.gc",
+      "disabled-by-default-v8.cpu_profiler"
+    ],
+    "usage": {
+      "percentage": 0.9981153011322021,
+      "value": 0
+    },
+    "electron": "44.9.0",
+    "profile": "/Users/jasonpoindexter/Documents/GitHub/Open Play/local-evidence/four-deck-trace-2026-10-23/native-profile",
+    "partition": "persist:open-play-owned-trace",
+    "sandbox": true,
+    "nodeIntegration": false,
+    "contextIsolation": true,
+    "scope": "Owned Electron renderer/content trace; profiling overhead and runtime differ from IAB, no physical audio or system-wide trace."
+  },
+  "eventCount": 1298887,
+  "rendererRetainedSeconds": 19.245365,
+  "maxMainThreadGCDurationMs": 6.707,
+  "maxGCE": [
+    {
+      "args": {},
+      "cat": "disabled-by-default-v8.gc",
+      "dur": 6707,
+      "name": "V8.GCHandleGCRequest",
+      "ph": "X",
+      "pid": 64463,
+      "tdur": 4808,
+      "tid": 1307437,
+      "ts": 33782039397,
+      "tts": 60295884
+    },
+    {
+      "args": {
+        "type": "finalize incremental marking via stack guard",
+        "usedHeapSizeAfter": 12025472,
+        "usedHeapSizeBefore": 38884248
+      },
+      "cat": "devtools.timeline,v8",
+      "dur": 6589,
+      "name": "MajorGC",
+      "ph": "X",
+      "pid": 64463,
+      "tdur": 4698,
+      "tid": 1307437,
+      "ts": 33782039508,
+      "tts": 60295989
+    },
+    {
+      "args": {},
+      "cat": "v8",
+      "dur": 6486,
+      "name": "V8.GCFinalizeMC",
+      "ph": "X",
+      "pid": 64463,
+      "tdur": 4600,
+      "tid": 1307437,
+      "ts": 33782039514,
+      "tts": 60295994
+    }
+  ],
+  "longOperations": [
+    {
+      "name": "TimerFire",
+      "timestamp": 33779139337,
+      "durationMs": 171.186,
+      "args": {
+        "data": {
+          "frame": "8C66E71F61DD9A5E00FD570B22AB99E1",
+          "timerId": 5578
+        }
+      },
+      "children": [
+        {
+          "name": "v8.callFunction",
+          "durationMs": 171.171,
+          "args": {}
+        },
+        {
+          "name": "EventDispatch",
+          "durationMs": 74.303,
+          "args": {
+            "data": {
+              "type": "click"
+            }
+          }
+        },
+        {
+          "name": "v8.callFunction",
+          "durationMs": 74.133,
+          "args": {}
+        },
+        {
+          "name": "FunctionCall",
+          "durationMs": 74.128,
+          "args": {
+            "data": {
+              "columnNumber": 36,
+              "frame": "8C66E71F61DD9A5E00FD570B22AB99E1",
+              "functionName": "",
+              "isolate": "8513122488287937065",
+              "lineNumber": 1402,
+              "sampleTraceId": 8613303067895411,
+              "scriptId": "15",
+              "url": "http://127.0.0.1:18844/prototype/app.js"
+            }
+          }
+        },
+        {
+          "name": "UpdateLayoutTree",
+          "durationMs": 24.569,
+          "args": {
+            "beginData": {
+              "frame": "8C66E71F61DD9A5E00FD570B22AB99E1"
+            },
+            "elementCount": 1402
+          }
+        },
+        {
+          "name": "RunPendingMicrotask",
+          "durationMs": 22.013,
+          "args": {}
+        },
+        {
+          "name": "v8.callFunction",
+          "durationMs": 22.007,
+          "args": {}
+        },
+        {
+          "name": "FunctionCall",
+          "durationMs": 22.005,
+          "args": {
+            "data": {
+              "columnNumber": 19,
+              "frame": "8C66E71F61DD9A5E00FD570B22AB99E1",
+              "functionName": "refresh",
+              "isolate": "8513122488287937065",
+              "lineNumber": 41,
+              "sampleTraceId": 8613303067896244,
+              "scriptId": "132",
+              "url": "http://127.0.0.1:18844/prototype/library-waveform-preview.js"
+            }
+          }
+        },
+        {
+          "name": "UpdateLayoutTree",
+          "durationMs": 18.089,
+          "args": {
+            "beginData": {
+              "frame": "8C66E71F61DD9A5E00FD570B22AB99E1"
+            },
+            "elementCount": 1402
+          }
+        },
+        {
+          "name": "UpdateLayoutTree",
+          "durationMs": 16.151,
+          "args": {
+            "beginData": {
+              "frame": "8C66E71F61DD9A5E00FD570B22AB99E1"
+            },
+            "elementCount": 1711
+          }
+        }
+      ],
+      "nearbyMarkers": [
+        {
+          "name": "openplay:load-profile-ready",
+          "deltaMs": -139.337
+        },
+        {
+          "name": "openplay:sync",
+          "deltaMs": 0.175
+        },
+        {
+          "name": "openplay:start-start",
+          "deltaMs": 79.155
+        },
+        {
+          "name": "openplay:buffer-start",
+          "deltaMs": 87.243
+        },
+        {
+          "name": "openplay:buffer-end",
+          "deltaMs": 87.33
+        },
+        {
+          "name": "openplay:start-end",
+          "deltaMs": 87.64
+        },
+        {
+          "name": "openplay:rotation",
+          "deltaMs": 465.49
+        }
+      ]
+    },
+    {
+      "name": "ProxyMain::BeginMainFrame",
+      "timestamp": 33765475512,
+      "durationMs": 110.292,
+      "args": {
+        "begin_frame_id": 13428,
+        "main_frame_pipeline": {
+          "main_frame_id": 17563644650558264925,
+          "step": "BEGIN_MAIN_FRAME"
+        }
+      },
+      "children": [
+        {
+          "name": "UpdateLayoutTree",
+          "durationMs": 46.271,
+          "args": {
+            "beginData": {
+              "frame": "8C66E71F61DD9A5E00FD570B22AB99E1"
+            },
+            "elementCount": 1711
+          }
+        },
+        {
+          "name": "LayerTreeHost::DoUpdateLayers",
+          "durationMs": 7.981,
+          "args": {
+            "source_frame_number": 11813
+          }
+        },
+        {
+          "name": "FireAnimationFrame",
+          "durationMs": 4.489,
+          "args": {
+            "data": {
+              "frame": "8C66E71F61DD9A5E00FD570B22AB99E1",
+              "id": 24346
+            }
+          }
+        },
+        {
+          "name": "v8.callFunction",
+          "durationMs": 4.472,
+          "args": {}
+        },
+        {
+          "name": "FunctionCall",
+          "durationMs": 4.469,
+          "args": {
+            "data": {
+              "columnNumber": 44,
+              "frame": "8C66E71F61DD9A5E00FD570B22AB99E1",
+              "functionName": "",
+              "isolate": "8513122488287937065",
+              "lineNumber": 10,
+              "sampleTraceId": 8613303068071497,
+              "scriptId": "6",
+              "url": "http://127.0.0.1:18844/prototype/four-deck-soak-harness.js"
+            }
+          }
+        },
+        {
+          "name": "Paint",
+          "durationMs": 1.703,
+          "args": {
+            "data": {
+              "clip": [
+                0,
+                0,
+                2880,
+                0,
+                2880,
+                1836,
+                0,
+                1836
+              ],
+              "frame": "8C66E71F61DD9A5E00FD570B22AB99E1",
+              "layerId": 0,
+              "nodeId": 1,
+              "nodeName": "#document"
+            }
+          }
+        },
+        {
+          "name": "Paint",
+          "durationMs": 1.63,
+          "args": {
+            "data": {
+              "clip": [
+                0,
+                0,
+                2880,
+                0,
+                2880,
+                1836,
+                0,
+                1836
+              ],
+              "frame": "8C66E71F61DD9A5E00FD570B22AB99E1",
+              "layerId": 0,
+              "nodeId": 56,
+              "nodeName": "HTML"
+            }
+          }
+        },
+        {
+          "name": "Layerize",
+          "durationMs": 1.594,
+          "args": {
+            "data": {
+              "frame": "8C66E71F61DD9A5E00FD570B22AB99E1",
+              "isMainFrame": true,
+              "isOutermostMainFrame": true,
+              "page": "8C66E71F61DD9A5E00FD570B22AB99E1"
+            }
+          }
+        },
+        {
+          "name": "RasterImplementation::RasterCHROMIUM",
+          "durationMs": 1.228,
+          "args": {
+            "raster_chromium_id": 163
+          }
+        },
+        {
+          "name": "PrePaint",
+          "durationMs": 1.062,
+          "args": {
+            "data": {
+              "frame": "8C66E71F61DD9A5E00FD570B22AB99E1",
+              "isMainFrame": true,
+              "isOutermostMainFrame": true,
+              "page": "8C66E71F61DD9A5E00FD570B22AB99E1"
+            }
+          }
+        }
+      ],
+      "nearbyMarkers": []
+    },
+    {
+      "name": "TimerFire",
+      "timestamp": 33771521389,
+      "durationMs": 97.978,
+      "args": {
+        "data": {
+          "frame": "8C66E71F61DD9A5E00FD570B22AB99E1",
+          "timerId": 4988
+        }
+      },
+      "children": [
+        {
+          "name": "v8.callFunction",
+          "durationMs": 97.959,
+          "args": {}
+        },
+        {
+          "name": "EventDispatch",
+          "durationMs": 31.304,
+          "args": {
+            "data": {
+              "type": "click"
+            }
+          }
+        },
+        {
+          "name": "v8.callFunction",
+          "durationMs": 31.163,
+          "args": {}
+        },
+        {
+          "name": "FunctionCall",
+          "durationMs": 31.162,
+          "args": {
+            "data": {
+              "columnNumber": 36,
+              "frame": "8C66E71F61DD9A5E00FD570B22AB99E1",
+              "functionName": "",
+              "isolate": "8513122488287937065",
+              "lineNumber": 1402,
+              "sampleTraceId": 8613303067974538,
+              "scriptId": "15",
+              "url": "http://127.0.0.1:18844/prototype/app.js"
+            }
+          }
+        },
+        {
+          "name": "EventDispatch",
+          "durationMs": 23.494,
+          "args": {
+            "data": {
+              "type": "click"
+            }
+          }
+        },
+        {
+          "name": "v8.callFunction",
+          "durationMs": 23.421,
+          "args": {}
+        },
+        {
+          "name": "FunctionCall",
+          "durationMs": 23.42,
+          "args": {
+            "data": {
+              "columnNumber": 36,
+              "frame": "8C66E71F61DD9A5E00FD570B22AB99E1",
+              "functionName": "",
+              "isolate": "8513122488287937065",
+              "lineNumber": 1402,
+              "sampleTraceId": 8613303067974353,
+              "scriptId": "15",
+              "url": "http://127.0.0.1:18844/prototype/app.js"
+            }
+          }
+        },
+        {
+          "name": "EventDispatch",
+          "durationMs": 12.994,
+          "args": {
+            "data": {
+              "type": "click"
+            }
+          }
+        },
+        {
+          "name": "v8.callFunction",
+          "durationMs": 12.891,
+          "args": {}
+        },
+        {
+          "name": "FunctionCall",
+          "durationMs": 12.889,
+          "args": {
+            "data": {
+              "columnNumber": 36,
+              "frame": "8C66E71F61DD9A5E00FD570B22AB99E1",
+              "functionName": "",
+              "isolate": "8513122488287937065",
+              "lineNumber": 1402,
+              "sampleTraceId": 8613303067974144,
+              "scriptId": "15",
+              "url": "http://127.0.0.1:18844/prototype/app.js"
+            }
+          }
+        }
+      ],
+      "nearbyMarkers": [
+        {
+          "name": "openplay:load-start",
+          "deltaMs": 35.317
+        },
+        {
+          "name": "openplay:buffer-start",
+          "deltaMs": 71.735
+        },
+        {
+          "name": "openplay:buffer-end",
+          "deltaMs": 644.753
+        },
+        {
+          "name": "openplay:buffer-start",
+          "deltaMs": 644.811
+        },
+        {
+          "name": "openplay:buffer-end",
+          "deltaMs": 687.74
+        }
+      ]
+    },
+    {
+      "name": "ProxyMain::BeginMainFrame",
+      "timestamp": 33779006216,
+      "durationMs": 95.475,
+      "args": {
+        "begin_frame_id": 15050,
+        "main_frame_pipeline": {
+          "main_frame_id": 17563644650558087706,
+          "step": "BEGIN_MAIN_FRAME"
+        }
+      },
+      "children": [
+        {
+          "name": "FireAnimationFrame",
+          "durationMs": 40.924,
+          "args": {
+            "data": {
+              "frame": "8C66E71F61DD9A5E00FD570B22AB99E1",
+              "id": 26269
+            }
+          }
+        },
+        {
+          "name": "v8.callFunction",
+          "durationMs": 40.906,
+          "args": {}
+        },
+        {
+          "name": "FunctionCall",
+          "durationMs": 40.903,
+          "args": {
+            "data": {
+              "columnNumber": 44,
+              "frame": "8C66E71F61DD9A5E00FD570B22AB99E1",
+              "functionName": "",
+              "isolate": "8513122488287937065",
+              "lineNumber": 10,
+              "sampleTraceId": 8613303067894418,
+              "scriptId": "6",
+              "url": "http://127.0.0.1:18844/prototype/four-deck-soak-harness.js"
+            }
+          }
+        },
+        {
+          "name": "UpdateLayoutTree",
+          "durationMs": 29.068,
+          "args": {
+            "beginData": {
+              "frame": "8C66E71F61DD9A5E00FD570B22AB99E1"
+            },
+            "elementCount": 1711
+          }
+        },
+        {
+          "name": "UpdateLayoutTree",
+          "durationMs": 20.0,
+          "args": {
+            "beginData": {
+              "frame": "8C66E71F61DD9A5E00FD570B22AB99E1"
+            },
+            "elementCount": 1711
+          }
+        },
+        {
+          "name": "V8.GCHandleGCRequest",
+          "durationMs": 4.612,
+          "args": {}
+        },
+        {
+          "name": "MajorGC",
+          "durationMs": 4.405,
+          "args": {
+            "type": "finalize incremental marking via stack guard",
+            "usedHeapSizeAfter": 11936392,
+            "usedHeapSizeBefore": 32972224
+          }
+        },
+        {
+          "name": "V8.GCFinalizeMC",
+          "durationMs": 4.289,
+          "args": {}
+        },
+        {
+          "name": "V8.GC_MARK_COMPACTOR",
+          "durationMs": 4.276,
+          "args": {
+            "epoch": 24850
+          }
+        },
+        {
+          "name": "LayerTreeHost::DoUpdateLayers",
+          "durationMs": 2.41,
+          "args": {
+            "source_frame_number": 12774
+          }
+        }
+      ],
+      "nearbyMarkers": [
+        {
+          "name": "openplay:load-profile-ready",
+          "deltaMs": -6.216
+        },
+        {
+          "name": "openplay:sync",
+          "deltaMs": 133.296
+        },
+        {
+          "name": "openplay:start-start",
+          "deltaMs": 212.276
+        },
+        {
+          "name": "openplay:buffer-start",
+          "deltaMs": 220.364
+        },
+        {
+          "name": "openplay:buffer-end",
+          "deltaMs": 220.451
+        },
+        {
+          "name": "openplay:start-end",
+          "deltaMs": 220.761
+        },
+        {
+          "name": "openplay:rotation",
+          "deltaMs": 598.611
+        }
+      ]
+    },
+    {
+      "name": "EventDispatch",
+      "timestamp": 33779144641,
+      "durationMs": 74.303,
+      "args": {
+        "data": {
+          "type": "click"
+        }
+      },
+      "children": [
+        {
+          "name": "v8.callFunction",
+          "durationMs": 74.133,
+          "args": {}
+        },
+        {
+          "name": "FunctionCall",
+          "durationMs": 74.128,
+          "args": {
+            "data": {
+              "columnNumber": 36,
+              "frame": "8C66E71F61DD9A5E00FD570B22AB99E1",
+              "functionName": "",
+              "isolate": "8513122488287937065",
+              "lineNumber": 1402,
+              "sampleTraceId": 8613303067895411,
+              "scriptId": "15",
+              "url": "http://127.0.0.1:18844/prototype/app.js"
+            }
+          }
+        },
+        {
+          "name": "UpdateLayoutTree",
+          "durationMs": 24.569,
+          "args": {
+            "beginData": {
+              "frame": "8C66E71F61DD9A5E00FD570B22AB99E1"
+            },
+            "elementCount": 1402
+          }
+        },
+        {
+          "name": "Layout",
+          "durationMs": 5.556,
+          "args": {
+            "beginData": {
+              "dirtyObjects": 587,
+              "frame": "8C66E71F61DD9A5E00FD570B22AB99E1",
+              "partialLayout": false,
+              "totalObjects": 1690
+            },
+            "endData": {
+              "layoutRoots": [
+                {
+                  "depth": 1,
+                  "nodeId": 1,
+                  "nodeName": "#document",
+                  "quads": [
+                    [
+                      0,
+                      0,
+                      2880,
+                      0,
+                      2880,
+                      1834,
+                      0,
+                      1834
+                    ]
+                  ]
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "ParseHTML",
+          "durationMs": 2.466,
+          "args": {
+            "beginData": {
+              "frame": "8C66E71F61DD9A5E00FD570B22AB99E1",
+              "startLine": 0,
+              "url": "http://127.0.0.1:18844/prototype/four-deck-soak-harness.html?trace&nativeInputs"
+            },
+            "endData": {
+              "endLine": 0
+            }
+          }
+        },
+        {
+          "name": "ParseHTML",
+          "durationMs": 1.512,
+          "args": {
+            "beginData": {
+              "frame": "8C66E71F61DD9A5E00FD570B22AB99E1",
+              "startLine": 0,
+              "url": "http://127.0.0.1:18844/prototype/four-deck-soak-harness.html?trace&nativeInputs"
+            },
+            "endData": {
+              "endLine": 0
+            }
+          }
+        },
+        {
+          "name": "ParseHTML",
+          "durationMs": 0.245,
+          "args": {
+            "beginData": {
+              "frame": "8C66E71F61DD9A5E00FD570B22AB99E1",
+              "startLine": 0,
+              "url": "http://127.0.0.1:18844/prototype/four-deck-soak-harness.html?trace&nativeInputs"
+            },
+            "endData": {
+              "endLine": 0
+            }
+          }
+        },
+        {
+          "name": "ParseHTML",
+          "durationMs": 0.048,
+          "args": {
+            "beginData": {
+              "frame": "8C66E71F61DD9A5E00FD570B22AB99E1",
+              "startLine": 0,
+              "url": "http://127.0.0.1:18844/prototype/four-deck-soak-harness.html?trace&nativeInputs"
+            },
+            "endData": {
+              "endLine": 0
+            }
+          }
+        },
+        {
+          "name": "v8.callFunction",
+          "durationMs": 0.028,
+          "args": {}
+        },
+        {
+          "name": "FunctionCall",
+          "durationMs": 0.025,
+          "args": {
+            "data": {
+              "columnNumber": 35,
+              "frame": "8C66E71F61DD9A5E00FD570B22AB99E1",
+              "functionName": "",
+              "isolate": "8513122488287937065",
+              "lineNumber": 16,
+              "sampleTraceId": 8613303067895368,
+              "scriptId": "6",
+              "url": "http://127.0.0.1:18844/prototype/four-deck-soak-harness.js"
+            }
+          }
+        }
+      ],
+      "nearbyMarkers": [
+        {
+          "name": "openplay:load-profile-ready",
+          "deltaMs": -144.641
+        },
+        {
+          "name": "openplay:sync",
+          "deltaMs": -5.129
+        },
+        {
+          "name": "openplay:start-start",
+          "deltaMs": 73.851
+        },
+        {
+          "name": "openplay:buffer-start",
+          "deltaMs": 81.939
+        },
+        {
+          "name": "openplay:buffer-end",
+          "deltaMs": 82.026
+        },
+        {
+          "name": "openplay:start-end",
+          "deltaMs": 82.336
+        },
+        {
+          "name": "openplay:rotation",
+          "deltaMs": 460.186
+        }
+      ]
+    },
+    {
+      "name": "ProxyMain::BeginMainFrame",
+      "timestamp": 33765989598,
+      "durationMs": 70.182,
+      "args": {
+        "begin_frame_id": 13490,
+        "main_frame_pipeline": {
+          "main_frame_id": 17563644650558260300,
+          "step": "BEGIN_MAIN_FRAME"
+        }
+      },
+      "children": [
+        {
+          "name": "UpdateLayoutTree",
+          "durationMs": 28.314,
+          "args": {
+            "beginData": {
+              "frame": "8C66E71F61DD9A5E00FD570B22AB99E1"
+            },
+            "elementCount": 1711
+          }
+        },
+        {
+          "name": "Layerize",
+          "durationMs": 7.585,
+          "args": {
+            "data": {
+              "frame": "8C66E71F61DD9A5E00FD570B22AB99E1",
+              "isMainFrame": true,
+              "isOutermostMainFrame": true,
+              "page": "8C66E71F61DD9A5E00FD570B22AB99E1"
+            }
+          }
+        },
+        {
+          "name": "Paint",
+          "durationMs": 3.457,
+          "args": {
+            "data": {
+              "clip": [
+                0,
+                0,
+                2880,
+                0,
+                2880,
+                1836,
+                0,
+                1836
+              ],
+              "frame": "8C66E71F61DD9A5E00FD570B22AB99E1",
+              "layerId": 0,
+              "nodeId": 1,
+              "nodeName": "#document"
+            }
+          }
+        },
+        {
+          "name": "Paint",
+          "durationMs": 3.432,
+          "args": {
+            "data": {
+              "clip": [
+                0,
+                0,
+                2880,
+                0,
+                2880,
+                1836,
+                0,
+                1836
+              ],
+              "frame": "8C66E71F61DD9A5E00FD570B22AB99E1",
+              "layerId": 0,
+              "nodeId": 56,
+              "nodeName": "HTML"
+            }
+          }
+        },
+        {
+          "name": "FireAnimationFrame",
+          "durationMs": 2.376,
+          "args": {
+            "data": {
+              "frame": "8C66E71F61DD9A5E00FD570B22AB99E1",
+              "id": 24366
+            }
+          }
+        },
+        {
+          "name": "v8.callFunction",
+          "durationMs": 2.36,
+          "args": {}
+        },
+        {
+          "name": "FunctionCall",
+          "durationMs": 2.357,
+          "args": {
+            "data": {
+              "columnNumber": 44,
+              "frame": "8C66E71F61DD9A5E00FD570B22AB99E1",
+              "functionName": "",
+              "isolate": "8513122488287937065",
+              "lineNumber": 10,
+              "sampleTraceId": 8613303068066923,
+              "scriptId": "6",
+              "url": "http://127.0.0.1:18844/prototype/four-deck-soak-harness.js"
+            }
+          }
+        },
+        {
+          "name": "LayerTreeHost::DoUpdateLayers",
+          "durationMs": 2.314,
+          "args": {
+            "source_frame_number": 11823
+          }
+        },
+        {
+          "name": "PrePaint",
+          "durationMs": 1.596,
+          "args": {
+            "data": {
+              "frame": "8C66E71F61DD9A5E00FD570B22AB99E1",
+              "isMainFrame": true,
+              "isOutermostMainFrame": true,
+              "page": "8C66E71F61DD9A5E00FD570B22AB99E1"
+            }
+          }
+        },
+        {
+          "name": "Layout",
+          "durationMs": 0.747,
+          "args": {
+            "beginData": {
+              "dirtyObjects": 26,
+              "frame": "8C66E71F61DD9A5E00FD570B22AB99E1",
+              "partialLayout": false,
+              "totalObjects": 1898
+            },
+            "endData": {
+              "layoutRoots": [
+                {
+                  "depth": 1,
+                  "nodeId": 1,
+                  "nodeName": "#document",
+                  "quads": [
+                    [
+                      0,
+                      0,
+                      2880,
+                      0,
+                      2880,
+                      1834,
+                      0,
+                      1834
+                    ]
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "nearbyMarkers": []
+    },
+    {
+      "name": "ProxyMain::BeginMainFrame",
+      "timestamp": 33765796450,
+      "durationMs": 68.631,
+      "args": {
+        "begin_frame_id": 13464,
+        "main_frame_pipeline": {
+          "main_frame_id": 17563644650558266888,
+          "step": "BEGIN_MAIN_FRAME"
+        }
+      },
+      "children": [
+        {
+          "name": "UpdateLayoutTree",
+          "durationMs": 42.066,
+          "args": {
+            "beginData": {
+              "frame": "8C66E71F61DD9A5E00FD570B22AB99E1"
+            },
+            "elementCount": 1711
+          }
+        },
+        {
+          "name": "Layout",
+          "durationMs": 7.956,
+          "args": {
+            "beginData": {
+              "dirtyObjects": 25,
+              "frame": "8C66E71F61DD9A5E00FD570B22AB99E1",
+              "partialLayout": false,
+              "totalObjects": 1898
+            },
+            "endData": {
+              "layoutRoots": [
+                {
+                  "depth": 1,
+                  "nodeId": 1,
+                  "nodeName": "#document",
+                  "quads": [
+                    [
+                      0,
+                      0,
+                      2880,
+                      0,
+                      2880,
+                      1834,
+                      0,
+                      1834
+                    ]
+                  ]
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Paint",
+          "durationMs": 7.573,
+          "args": {
+            "data": {
+              "clip": [
+                0,
+                0,
+                2880,
+                0,
+                2880,
+                1836,
+                0,
+                1836
+              ],
+              "frame": "8C66E71F61DD9A5E00FD570B22AB99E1",
+              "layerId": 0,
+              "nodeId": 1,
+              "nodeName": "#document"
+            }
+          }
+        },
+        {
+          "name": "Paint",
+          "durationMs": 7.552,
+          "args": {
+            "data": {
+              "clip": [
+                0,
+                0,
+                2880,
+                0,
+                2880,
+                1836,
+                0,
+                1836
+              ],
+              "frame": "8C66E71F61DD9A5E00FD570B22AB99E1",
+              "layerId": 0,
+              "nodeId": 56,
+              "nodeName": "HTML"
+            }
+          }
+        },
+        {
+          "name": "FireAnimationFrame",
+          "durationMs": 4.932,
+          "args": {
+            "data": {
+              "frame": "8C66E71F61DD9A5E00FD570B22AB99E1",
+              "id": 24358
+            }
+          }
+        },
+        {
+          "name": "v8.callFunction",
+          "durationMs": 4.917,
+          "args": {}
+        },
+        {
+          "name": "FunctionCall",
+          "durationMs": 4.916,
+          "args": {
+            "data": {
+              "columnNumber": 44,
+              "frame": "8C66E71F61DD9A5E00FD570B22AB99E1",
+              "functionName": "",
+              "isolate": "8513122488287937065",
+              "lineNumber": 10,
+              "sampleTraceId": 8613303068073702,
+              "scriptId": "6",
+              "url": "http://127.0.0.1:18844/prototype/four-deck-soak-harness.js"
+            }
+          }
+        },
+        {
+          "name": "Layerize",
+          "durationMs": 3.33,
+          "args": {
+            "data": {
+              "frame": "8C66E71F61DD9A5E00FD570B22AB99E1",
+              "isMainFrame": true,
+              "isOutermostMainFrame": true,
+              "page": "8C66E71F61DD9A5E00FD570B22AB99E1"
+            }
+          }
+        },
+        {
+          "name": "LayerTreeHost::DoUpdateLayers",
+          "durationMs": 1.168,
+          "args": {
+            "source_frame_number": 11819
+          }
+        },
+        {
+          "name": "FireAnimationFrame",
+          "durationMs": 0.676,
+          "args": {
+            "data": {
+              "frame": "8C66E71F61DD9A5E00FD570B22AB99E1",
+              "id": 24359
+            }
+          }
+        }
+      ],
+      "nearbyMarkers": []
+    },
+    {
+      "name": "ProxyMain::BeginMainFrame",
+      "timestamp": 33765689928,
+      "durationMs": 55.558,
+      "args": {
+        "begin_frame_id": 13454,
+        "main_frame_pipeline": {
+          "main_frame_id": 17563644650558266772,
+          "step": "BEGIN_MAIN_FRAME"
+        }
+      },
+      "children": [
+        {
+          "name": "UpdateLayoutTree",
+          "durationMs": 45.188,
+          "args": {
+            "beginData": {
+              "frame": "8C66E71F61DD9A5E00FD570B22AB99E1"
+            },
+            "elementCount": 1711
+          }
+        },
+        {
+          "name": "FireAnimationFrame",
+          "durationMs": 4.044,
+          "args": {
+            "data": {
+              "frame": "8C66E71F61DD9A5E00FD570B22AB99E1",
+              "id": 24354
+            }
+          }
+        },
+        {
+          "name": "v8.callFunction",
+          "durationMs": 4.028,
+          "args": {}
+        },
+        {
+          "name": "FunctionCall",
+          "durationMs": 4.024,
+          "args": {
+            "data": {
+              "columnNumber": 44,
+              "frame": "8C66E71F61DD9A5E00FD570B22AB99E1",
+              "functionName": "",
+              "isolate": "8513122488287937065",
+              "lineNumber": 10,
+              "sampleTraceId": 8613303068073356,
+              "scriptId": "6",
+              "url": "http://127.0.0.1:18844/prototype/four-deck-soak-harness.js"
+            }
+          }
+        },
+        {
+          "name": "LayerTreeHost::DoUpdateLayers",
+          "durationMs": 2.231,
+          "args": {
+            "source_frame_number": 11817
+          }
+        },
+        {
+          "name": "Layerize",
+          "durationMs": 1.237,
+          "args": {
+            "data": {
+              "frame": "8C66E71F61DD9A5E00FD570B22AB99E1",
+              "isMainFrame": true,
+              "isOutermostMainFrame": true,
+              "page": "8C66E71F61DD9A5E00FD570B22AB99E1"
+            }
+          }
+        },
+        {
+          "name": "Paint",
+          "durationMs": 0.841,
+          "args": {
+            "data": {
+              "clip": [
+                0,
+                0,
+                2880,
+                0,
+                2880,
+                1836,
+                0,
+                1836
+              ],
+              "frame": "8C66E71F61DD9A5E00FD570B22AB99E1",
+              "layerId": 0,
+              "nodeId": 1,
+              "nodeName": "#document"
+            }
+          }
+        },
+        {
+          "name": "Paint",
+          "durationMs": 0.823,
+          "args": {
+            "data": {
+              "clip": [
+                0,
+                0,
+                2880,
+                0,
+                2880,
+                1836,
+                0,
+                1836
+              ],
+              "frame": "8C66E71F61DD9A5E00FD570B22AB99E1",
+              "layerId": 0,
+              "nodeId": 56,
+              "nodeName": "HTML"
+            }
+          }
+        },
+        {
+          "name": "FireAnimationFrame",
+          "durationMs": 0.592,
+          "args": {
+            "data": {
+              "frame": "8C66E71F61DD9A5E00FD570B22AB99E1",
+              "id": 24355
+            }
+          }
+        },
+        {
+          "name": "v8.callFunction",
+          "durationMs": 0.561,
+          "args": {}
+        }
+      ],
+      "nearbyMarkers": []
+    },
+    {
+      "name": "BlinkScheduler_PerformMicrotaskCheckpoint",
+      "timestamp": 33772166021,
+      "durationMs": 55.285,
+      "args": {},
+      "children": [
+        {
+          "name": "UpdateLayoutTree",
+          "durationMs": 12.941,
+          "args": {
+            "beginData": {
+              "frame": "8C66E71F61DD9A5E00FD570B22AB99E1"
+            },
+            "elementCount": 1711
+          }
+        },
+        {
+          "name": "RunPendingMicrotask",
+          "durationMs": 10.413,
+          "args": {}
+        },
+        {
+          "name": "v8.callFunction",
+          "durationMs": 10.411,
+          "args": {}
+        },
+        {
+          "name": "FunctionCall",
+          "durationMs": 10.409,
+          "args": {
+            "data": {
+              "columnNumber": 19,
+              "frame": "8C66E71F61DD9A5E00FD570B22AB99E1",
+              "functionName": "refresh",
+              "isolate": "8513122488287937065",
+              "lineNumber": 41,
+              "sampleTraceId": 8613303067999300,
+              "scriptId": "132",
+              "url": "http://127.0.0.1:18844/prototype/library-waveform-preview.js"
+            }
+          }
+        },
+        {
+          "name": "UpdateLayoutTree",
+          "durationMs": 8.863,
+          "args": {
+            "beginData": {
+              "frame": "8C66E71F61DD9A5E00FD570B22AB99E1"
+            },
+            "elementCount": 1711
+          }
+        },
+        {
+          "name": "V8.GCHandleGCRequest",
+          "durationMs": 4.377,
+          "args": {}
+        },
+        {
+          "name": "MajorGC",
+          "durationMs": 4.275,
+          "args": {
+            "type": "finalize incremental marking via stack guard",
+            "usedHeapSizeAfter": 11769048,
+            "usedHeapSizeBefore": 37322316
+          }
+        },
+        {
+          "name": "V8.GCFinalizeMC",
+          "durationMs": 4.173,
+          "args": {}
+        },
+        {
+          "name": "V8.GC_MARK_COMPACTOR",
+          "durationMs": 4.146,
+          "args": {
+            "epoch": 24826
+          }
+        },
+        {
+          "name": "V8.GC_MC_EVACUATE",
+          "durationMs": 1.239,
+          "args": {}
+        }
+      ],
+      "nearbyMarkers": [
+        {
+          "name": "openplay:load-start",
+          "deltaMs": -609.315
+        },
+        {
+          "name": "openplay:buffer-start",
+          "deltaMs": -572.897
+        },
+        {
+          "name": "openplay:buffer-end",
+          "deltaMs": 0.121
+        },
+        {
+          "name": "openplay:buffer-start",
+          "deltaMs": 0.179
+        },
+        {
+          "name": "openplay:buffer-end",
+          "deltaMs": 43.108
+        }
+      ]
+    },
+    {
+      "name": "ProxyMain::BeginMainFrame",
+      "timestamp": 33781396299,
+      "durationMs": 54.364,
+      "args": {
+        "begin_frame_id": 15342,
+        "main_frame_pipeline": {
+          "main_frame_id": 17563644650558579952,
+          "step": "BEGIN_MAIN_FRAME"
+        }
+      },
+      "children": [
+        {
+          "name": "UpdateLayoutTree",
+          "durationMs": 21.079,
+          "args": {
+            "beginData": {
+              "frame": "8C66E71F61DD9A5E00FD570B22AB99E1"
+            },
+            "elementCount": 1711
+          }
+        },
+        {
+          "name": "FireAnimationFrame",
+          "durationMs": 2.596,
+          "args": {
+            "data": {
+              "frame": "8C66E71F61DD9A5E00FD570B22AB99E1",
+              "id": 26523
+            }
+          }
+        },
+        {
+          "name": "Layerize",
+          "durationMs": 2.591,
+          "args": {
+            "data": {
+              "frame": "8C66E71F61DD9A5E00FD570B22AB99E1",
+              "isMainFrame": true,
+              "isOutermostMainFrame": true,
+              "page": "8C66E71F61DD9A5E00FD570B22AB99E1"
+            }
+          }
+        },
+        {
+          "name": "v8.callFunction",
+          "durationMs": 2.585,
+          "args": {}
+        },
+        {
+          "name": "FunctionCall",
+          "durationMs": 2.584,
+          "args": {
+            "data": {
+              "columnNumber": 44,
+              "frame": "8C66E71F61DD9A5E00FD570B22AB99E1",
+              "functionName": "",
+              "isolate": "8513122488287937065",
+              "lineNumber": 10,
+              "sampleTraceId": 8613303068386540,
+              "scriptId": "6",
+              "url": "http://127.0.0.1:18844/prototype/four-deck-soak-harness.js"
+            }
+          }
+        },
+        {
+          "name": "LayerTreeHost::DoUpdateLayers",
+          "durationMs": 2.388,
+          "args": {
+            "source_frame_number": 12900
+          }
+        },
+        {
+          "name": "Paint",
+          "durationMs": 2.144,
+          "args": {
+            "data": {
+              "clip": [
+                0,
+                0,
+                2880,
+                0,
+                2880,
+                1836,
+                0,
+                1836
+              ],
+              "frame": "8C66E71F61DD9A5E00FD570B22AB99E1",
+              "layerId": 0,
+              "nodeId": 1,
+              "nodeName": "#document"
+            }
+          }
+        },
+        {
+          "name": "Paint",
+          "durationMs": 2.096,
+          "args": {
+            "data": {
+              "clip": [
+                0,
+                0,
+                2880,
+                0,
+                2880,
+                1836,
+                0,
+                1836
+              ],
+              "frame": "8C66E71F61DD9A5E00FD570B22AB99E1",
+              "layerId": 0,
+              "nodeId": 56,
+              "nodeName": "HTML"
+            }
+          }
+        },
+        {
+          "name": "Layout",
+          "durationMs": 0.598,
+          "args": {
+            "beginData": {
+              "dirtyObjects": 29,
+              "frame": "8C66E71F61DD9A5E00FD570B22AB99E1",
+              "partialLayout": false,
+              "totalObjects": 1898
+            },
+            "endData": {
+              "layoutRoots": [
+                {
+                  "depth": 1,
+                  "nodeId": 1,
+                  "nodeName": "#document",
+                  "quads": [
+                    [
+                      0,
+                      0,
+                      2880,
+                      0,
+                      2880,
+                      1834,
+                      0,
+                      1834
+                    ]
+                  ]
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "FireAnimationFrame",
+          "durationMs": 0.528,
+          "args": {
+            "data": {
+              "frame": "8C66E71F61DD9A5E00FD570B22AB99E1",
+              "id": 26524
+            }
+          }
+        }
+      ],
+      "nearbyMarkers": []
+    },
+    {
+      "name": "ProxyMain::BeginMainFrame",
+      "timestamp": 33766416350,
+      "durationMs": 51.497,
+      "args": {
+        "begin_frame_id": 13542,
+        "main_frame_pipeline": {
+          "main_frame_id": 17563644650558289286,
+          "step": "BEGIN_MAIN_FRAME"
+        }
+      },
+      "children": [
+        {
+          "name": "UpdateLayoutTree",
+          "durationMs": 22.256,
+          "args": {
+            "beginData": {
+              "frame": "8C66E71F61DD9A5E00FD570B22AB99E1"
+            },
+            "elementCount": 1711
+          }
+        },
+        {
+          "name": "FireAnimationFrame",
+          "durationMs": 2.756,
+          "args": {
+            "data": {
+              "frame": "8C66E71F61DD9A5E00FD570B22AB99E1",
+              "id": 24392
+            }
+          }
+        },
+        {
+          "name": "v8.callFunction",
+          "durationMs": 2.739,
+          "args": {}
+        },
+        {
+          "name": "FunctionCall",
+          "durationMs": 2.738,
+          "args": {
+            "data": {
+              "columnNumber": 44,
+              "frame": "8C66E71F61DD9A5E00FD570B22AB99E1",
+              "functionName": "",
+              "isolate": "8513122488287937065",
+              "lineNumber": 10,
+              "sampleTraceId": 8613303068095922,
+              "scriptId": "6",
+              "url": "http://127.0.0.1:18844/prototype/four-deck-soak-harness.js"
+            }
+          }
+        },
+        {
+          "name": "Layerize",
+          "durationMs": 2.303,
+          "args": {
+            "data": {
+              "frame": "8C66E71F61DD9A5E00FD570B22AB99E1",
+              "isMainFrame": true,
+              "isOutermostMainFrame": true,
+              "page": "8C66E71F61DD9A5E00FD570B22AB99E1"
+            }
+          }
+        },
+        {
+          "name": "Paint",
+          "durationMs": 2.24,
+          "args": {
+            "data": {
+              "clip": [
+                0,
+                0,
+                2880,
+                0,
+                2880,
+                1836,
+                0,
+                1836
+              ],
+              "frame": "8C66E71F61DD9A5E00FD570B22AB99E1",
+              "layerId": 0,
+              "nodeId": 1,
+              "nodeName": "#document"
+            }
+          }
+        },
+        {
+          "name": "Paint",
+          "durationMs": 2.216,
+          "args": {
+            "data": {
+              "clip": [
+                0,
+                0,
+                2880,
+                0,
+                2880,
+                1836,
+                0,
+                1836
+              ],
+              "frame": "8C66E71F61DD9A5E00FD570B22AB99E1",
+              "layerId": 0,
+              "nodeId": 56,
+              "nodeName": "HTML"
+            }
+          }
+        },
+        {
+          "name": "FireAnimationFrame",
+          "durationMs": 1.406,
+          "args": {
+            "data": {
+              "frame": "8C66E71F61DD9A5E00FD570B22AB99E1",
+              "id": 24393
+            }
+          }
+        },
+        {
+          "name": "LayerTreeHost::DoUpdateLayers",
+          "durationMs": 1.394,
+          "args": {
+            "source_frame_number": 11836
+          }
+        },
+        {
+          "name": "v8.callFunction",
+          "durationMs": 1.324,
+          "args": {}
+        }
+      ],
+      "nearbyMarkers": []
+    },
+    {
+      "name": "ProxyMain::BeginMainFrame",
+      "timestamp": 33765745905,
+      "durationMs": 47.46,
+      "args": {
+        "begin_frame_id": 13461,
+        "main_frame_pipeline": {
+          "main_frame_id": 17563644650558267237,
+          "step": "BEGIN_MAIN_FRAME"
+        }
+      },
+      "children": [
+        {
+          "name": "UpdateLayoutTree",
+          "durationMs": 21.03,
+          "args": {
+            "beginData": {
+              "frame": "8C66E71F61DD9A5E00FD570B22AB99E1"
+            },
+            "elementCount": 1711
+          }
+        },
+        {
+          "name": "FireAnimationFrame",
+          "durationMs": 2.894,
+          "args": {
+            "data": {
+              "frame": "8C66E71F61DD9A5E00FD570B22AB99E1",
+              "id": 24356
+            }
+          }
+        },
+        {
+          "name": "v8.callFunction",
+          "durationMs": 2.863,
+          "args": {}
+        },
+        {
+          "name": "FunctionCall",
+          "durationMs": 2.86,
+          "args": {
+            "data": {
+              "columnNumber": 44,
+              "frame": "8C66E71F61DD9A5E00FD570B22AB99E1",
+              "functionName": "",
+              "isolate": "8513122488287937065",
+              "lineNumber": 10,
+              "sampleTraceId": 8613303068073759,
+              "scriptId": "6",
+              "url": "http://127.0.0.1:18844/prototype/four-deck-soak-harness.js"
+            }
+          }
+        },
+        {
+          "name": "LayerTreeHost::DoUpdateLayers",
+          "durationMs": 1.576,
+          "args": {
+            "source_frame_number": 11818
+          }
+        },
+        {
+          "name": "Layerize",
+          "durationMs": 1.114,
+          "args": {
+            "data": {
+              "frame": "8C66E71F61DD9A5E00FD570B22AB99E1",
+              "isMainFrame": true,
+              "isOutermostMainFrame": true,
+              "page": "8C66E71F61DD9A5E00FD570B22AB99E1"
+            }
+          }
+        },
+        {
+          "name": "Paint",
+          "durationMs": 0.801,
+          "args": {
+            "data": {
+              "clip": [
+                0,
+                0,
+                2880,
+                0,
+                2880,
+                1836,
+                0,
+                1836
+              ],
+              "frame": "8C66E71F61DD9A5E00FD570B22AB99E1",
+              "layerId": 0,
+              "nodeId": 1,
+              "nodeName": "#document"
+            }
+          }
+        },
+        {
+          "name": "Paint",
+          "durationMs": 0.784,
+          "args": {
+            "data": {
+              "clip": [
+                0,
+                0,
+                2880,
+                0,
+                2880,
+                1836,
+                0,
+                1836
+              ],
+              "frame": "8C66E71F61DD9A5E00FD570B22AB99E1",
+              "layerId": 0,
+              "nodeId": 56,
+              "nodeName": "HTML"
+            }
+          }
+        },
+        {
+          "name": "Layout",
+          "durationMs": 0.486,
+          "args": {
+            "beginData": {
+              "dirtyObjects": 31,
+              "frame": "8C66E71F61DD9A5E00FD570B22AB99E1",
+              "partialLayout": false,
+              "totalObjects": 1898
+            },
+            "endData": {
+              "layoutRoots": [
+                {
+                  "depth": 1,
+                  "nodeId": 1,
+                  "nodeName": "#document",
+                  "quads": [
+                    [
+                      0,
+                      0,
+                      2880,
+                      0,
+                      2880,
+                      1834,
+                      0,
+                      1834
+                    ]
+                  ]
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "RasterImplementation::RasterCHROMIUM",
+          "durationMs": 0.454,
+          "args": {
+            "raster_chromium_id": 188
+          }
+        }
+      ],
+      "nearbyMarkers": []
+    }
+  ]
+}

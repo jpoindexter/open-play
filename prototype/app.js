@@ -490,8 +490,8 @@ document.addEventListener('keydown',event=>{
     event.preventDefault();changeDetailWaveZoom(['+','='].includes(event.key)?.5:2);
   }
 });
-function prepareWaveCanvas(canvas){
-  const rect=canvas.getBoundingClientRect(),scale=window.devicePixelRatio||1;
+function prepareWaveCanvas(canvas,rect=canvas.getBoundingClientRect()){
+  const scale=window.devicePixelRatio||1;
   const width=Math.max(1,rect.width),height=Math.max(1,rect.height);
   const pixelsWide=Math.round(width*scale),pixelsHigh=Math.round(height*scale);
   if(canvas.width!==pixelsWide)canvas.width=pixelsWide;
@@ -500,10 +500,10 @@ function prepareWaveCanvas(canvas){
   return {context,width,height};
 }
 function drawWaves() {
-  for (const d of state.decks.slice(0, state.deckCount)) {
-    const c = $(`#wave-${d.index}`);
-    if (!c) continue;
-    const {context:ctx,width:w,height:h}=prepareWaveCanvas(c);
+  const surfaces=state.decks.slice(0,state.deckCount).map(d=>({d,canvas:$(`#wave-${d.index}`)})).filter(surface=>surface.canvas);
+  const bounds=surfaces.map(({canvas})=>canvas.getBoundingClientRect());
+  for (const [index,{d,canvas:c}] of surfaces.entries()) {
+    const {context:ctx,width:w,height:h}=prepareWaveCanvas(c,bounds[index]);
     ctx.clearRect(0, 0, w, h);
     const view = waveformView(d);
     overviewWaveViews[d.index] = view;
@@ -1890,6 +1890,8 @@ engine.onEnd = async (d) => {
   renderDecks();
 };
 function tick() {
+  // Measure before presentation writes invalidate layout.
+  drawDetailWave();
   for (const d of state.decks.slice(0, state.deckCount)) {
     if (d.keySync && d.keySyncTag !== d.track?.key) {
       d.keySync = false;
@@ -1965,7 +1967,6 @@ function tick() {
   engine.updateFXBPMs(state.decks.map(deck => deckBPM(deck)??120));
   // Selection checks are O(4); only selection/async completion redraws overviews.
   if (state.decks.slice(0,state.deckCount).some(d => waveformView(d) !== overviewWaveViews[d.index])) drawWaves();
-  drawDetailWave();
   flipAutomation.tick();
   panels.tick();
   stemSlipControls.tick();

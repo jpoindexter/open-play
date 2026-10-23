@@ -1,18 +1,20 @@
 import {sessionKey} from './session-storage.js';
 import {sourceWaveformState,sourceWaveformRasterUsage} from './source-waveform.js';
 import {createBeatgrid} from './beatgrid.js';
+import {installFourDeckTrace} from './four-deck-trace.js';
+const traceMode=new URL(location.href).searchParams.has('trace'),trace=traceMode?installFourDeckTrace():null;
 const $=s=>document.querySelector(s),sleep=ms=>new Promise(r=>setTimeout(r,ms)),assert=(ok,text)=>{if(!ok)throw Error(text);};
-const report={scope:'Unattended real-track four-deck GUI session; physically muted. Declared grid phase and finite/gap telemetry do not establish musical tightness or pop-free acoustics.',events:[],windows:[],audio:[],errors:[]};
+const report={trace:trace?.report,scope:'Unattended real-track four-deck GUI session; physically muted. Declared grid phase and finite/gap telemetry do not establish musical tightness or pop-free acoustics.',events:[],windows:[],audio:[],errors:[]};
 let app,tracks=[],stopping=false,measuring=false,ticks=[],intervals=[],lastFrame,rectangles=0,section='setup',started,longTasks=[];
 const raf=window.requestAnimationFrame.bind(window),fill=CanvasRenderingContext2D.prototype.fillRect;
-window.requestAnimationFrame=callback=>raf(at=>{const begin=performance.now();try{callback(at);}finally{if(measuring&&callback.name==='tick'){ticks.push(performance.now()-begin);if(lastFrame)intervals.push(at-lastFrame);lastFrame=at;}}});
+window.requestAnimationFrame=callback=>raf(at=>{const begin=performance.now();try{callback(at);}finally{if(measuring&&callback.name==='tick'){const end=performance.now();ticks.push(end-begin);trace?.frame(callback.name,at,begin,end);if(lastFrame)intervals.push(at-lastFrame);lastFrame=at;}}});
 CanvasRenderingContext2D.prototype.fillRect=function(...args){if(measuring)rectangles++;return fill.apply(this,args);};
 const summary=a=>{a.sort((a,b)=>a-b);return{count:a.length,mean:a.reduce((n,x)=>n+x,0)/(a.length||1),p95:a[Math.floor(a.length*.95)]||0,max:a.at(-1)||0};};
 const show=()=>{$('#soak-original').textContent=JSON.stringify(report);$('#soak-result').textContent=JSON.stringify({status:report.status,elapsedSeconds:started?(performance.now()-started)/1000:0,tracks:tracks.map(t=>t.title),events:report.events.slice(-3),latest:report.windows.at(-1),audioSeconds:report.audio.length,errors:report.errors},null,2);};
 if(PerformanceObserver.supportedEntryTypes?.includes('longtask'))new PerformanceObserver(list=>{if(measuring)longTasks.push(...list.getEntries().map(e=>({start:e.startTime,duration:e.duration})));}).observe({type:'longtask'});
 window.addEventListener('unhandledrejection',e=>{report.errors.push(String(e.reason?.stack||e.reason));show();});
 document.addEventListener('click',e=>{const button=e.target.closest?.('[data-action=sync]');if(button&&app)report.events.push({type:'sync-input',deck:Number(button.dataset.deck),trusted:e.isTrusted,wall:performance.now(),audio:app.engine.ctx.currentTime});},true);
-const event=(type,data={})=>{report.events.push({type,wall:performance.now(),audio:app?.engine.ctx?.currentTime,...data});show();};
+const event=(type,data={})=>{trace?.note(type,data);report.events.push({type,wall:performance.now(),audio:app?.engine.ctx?.currentTime,...data});show();};
 async function until(test,label,seconds=120){const end=performance.now()+seconds*1000;while(!test()){assert(!stopping,'Stopped by operator');assert(performance.now()<end,'Timed out: '+label);await sleep(50);}}
 function click(selector){assert($(selector),selector);$(selector).click();}
 function select(selector,value){const el=$(selector);el.value=value;el.dispatchEvent(new Event('change',{bubbles:true}));}
@@ -28,8 +30,9 @@ function checkpoint(){
  report.windows.push({section,elapsedSeconds:(performance.now()-started)/1000,tick:summary(ticks),interval:summary(intervals),rectangles,longTasks,physicalMuted:engine.audioMonitor.snapshot().physicalMuted,master:{ready:engine.masterSnapshot().ready,invalid:engine.masterSnapshot().invalid},decoded:engine.decodedBufferUsage(),raster:sourceWaveformRasterUsage(),heap:performance.memory?{used:performance.memory.usedJSHeapSize,total:performance.memory.totalJSHeapSize}:null,controls:controlCounts(),playing:state.decks.filter(d=>d.playing).length,phases:gridPhases(),contextState:engine.ctx.state,visibility:document.visibilityState});ticks=[];intervals=[];rectangles=0;longTasks=[];show();
 }
 async function load(index,track){
+ trace?.note('load-start',{deck:index,track:track.title});
  click(`tr[data-track="${track.id}"]`);click(`[data-action="load"][data-deck="${index}"]`);
- await until(()=>app.state.decks[index].track===track&&app.engine.buffers.has(track.id)&&!app.state.decks[index].processing,'load deck '+index);await sourceWaveformState(app.engine.buffers.get(track.id)).ready;
+ await until(()=>app.state.decks[index].track===track&&app.engine.buffers.has(track.id)&&!app.state.decks[index].processing,'load deck '+index);await sourceWaveformState(app.engine.buffers.get(track.id)).ready;trace?.note('load-profile-ready',{deck:index});
 }
 async function sync(index){
  const d=app.state.decks[index];click(`[data-action="sync"][data-deck="${index}"]`);await until(()=>!d.processing&&!d.playQueued,'Sync deck '+index);await sleep(100);
@@ -48,7 +51,7 @@ async function boot(){
  const parsed=new DOMParser().parseFromString(await(await fetch('workspace-preview.html')).text(),'text/html');for(const a of parsed.body.attributes)document.body.setAttribute(a.name,a.value);for(const link of parsed.querySelectorAll('link[rel=stylesheet]'))document.head.append(link);for(const n of [...parsed.body.children])if(n.tagName!=='SCRIPT')document.body.append(n);
  await import('./layout-preview.js');await until(()=>window.openPlay?.state.decks[1].track&&!window.openPlay.state.analysis,'workspace');app=window.openPlay;
  select('#deck-count','4');select('#preview-density','compact');app.engine.audioMonitor.mutePhysical(true);assert(app.engine.audioMonitor.snapshot().physicalMuted,'Physical mute');
- report.sourceHashes=Object.fromEntries(await Promise.all(['app.js','engine.js','smart-sync.js','source-waveform.js','detail-waveform.js','four-deck-soak-harness.js','four-deck-soak-worklet.js'].map(async f=>[f,[...new Uint8Array(await crypto.subtle.digest('SHA-256',await(await fetch(f,{cache:'no-store'})).arrayBuffer()))].map(n=>n.toString(16).padStart(2,'0')).join('')])));report.phaseHandoffLoaded=app.engine.setPitch.toString().includes('if(d.playing&&!d.reverse)');
+ report.sourceHashes=Object.fromEntries(await Promise.all(['app.js','engine.js','smart-sync.js','source-waveform.js','detail-waveform.js','four-deck-soak-harness.js','four-deck-soak-worklet.js','four-deck-trace.js','library-waveform-preview.js'].map(async f=>[f,[...new Uint8Array(await crypto.subtle.digest('SHA-256',await(await fetch(f,{cache:'no-store'})).arrayBuffer()))].map(n=>n.toString(16).padStart(2,'0')).join('')])));report.phaseHandoffLoaded=app.engine.setPitch.toString().includes('if(d.playing&&!d.reverse)');
  $('#soak-files').disabled=false;$('#soak-run').textContent='Choose eight tracks first';report.status='Ready for local files';show();
 }
 $('#soak-files').onchange=async e=>{
@@ -56,7 +59,7 @@ $('#soak-files').onchange=async e=>{
   const files=[...e.target.files];assert(files.length===8,'Choose exactly eight tracks');$('#soak-files').disabled=true;app.state.analysisSettings.onImport=true;
   const input=$('#audio-files'),data=new DataTransfer();files.forEach(file=>data.items.add(file));input.files=data.files;await input.onchange({target:input});
   await until(()=>!app.state.analysis,'native analysis',600);tracks=files.map(file=>app.state.tracks.find(t=>t.filename===file.name||t.file?.name===file.name));assert(tracks.every(t=>t?.bpm>0&&Number.isFinite(t.grid)),'Native analysis requires valid tempo/grid');report.tracks=tracks.map(t=>({id:t.id,title:t.title,duration:t.duration,bpm:t.bpm,grid:t.grid,analysisMethod:t.analysisResult?.tempo?.reason,warpMarkers:t.gridWarpMarkers||[]}));
-  for(let i=0;i<4;i++)await load(i,tracks[i]);$('#soak-run').disabled=false;$('#soak-run').textContent='Run20-minute four-deck session';report.status='Ready';show();
+  for(let i=0;i<4;i++)await load(i,tracks[i]);$('#soak-run').disabled=false;$('#soak-run').textContent=traceMode?'Run five-minute trace':'Run20-minute four-deck session';report.status='Ready';show();
  }catch(error){report.errors.push(error.stack);report.status='Setup failed';show();}
 };
 $('#soak-stop').onclick=()=>{stopping=true;app?.engine.silence();report.status='Stopped';show();};
@@ -65,12 +68,12 @@ $('#soak-run').onclick=async()=>{
  try{
   $('#soak-run').disabled=true;const {engine,state}=app;await engine.resume();assert(tracks.length===8,'No real tracks');assert(engine.audioMonitor.snapshot().physicalMuted,'Physical mute');
   await engine.ctx.audioWorklet.addModule(new URL('./four-deck-soak-worklet.js',import.meta.url));await engine.ctx.audioWorklet.addModule(new URL('./fx-tempo-capture-worklet.js',import.meta.url));
-  meter=new AudioWorkletNode(engine.ctx,'open-play-soak-meter',{numberOfInputs:1,numberOfOutputs:1,outputChannelCount:[1]});engine.masterOutput.output.connect(meter);meter.connect(engine.ctx.destination);meter.port.onmessage=({data})=>report.audio.push(data);
+  meter=new AudioWorkletNode(engine.ctx,'open-play-soak-meter',{numberOfInputs:1,numberOfOutputs:1,outputChannelCount:[1]});engine.masterOutput.output.connect(meter);meter.connect(engine.ctx.destination);meter.port.onmessage=({data})=>report.audio.push({...data,receivedAt:performance.now(),audioTime:engine.ctx.currentTime});
   engine.setMasterDB(-12);for(const d of state.decks){engine.mix(d.index,'level',.35);d.position=12;d.repeat=true;}
   await play(0);await sync(0);for(let i=1;i<4;i++){await sync(i);await play(i);}await until(()=>state.decks.every(d=>d.playing),'all four playing');
-  started=performance.now();measuring=true;section='four horizontal raw';report.status='Running';timer=setInterval(checkpoint,30000);event('session-start',{controls:controlCounts()});void capture('initial');
+  trace?.start();if(trace)for(const name of ['buffer','start','setPitch'])await trace.wrap(engine,name);started=performance.now();measuring=true;section='four horizontal raw';report.status='Running';timer=setInterval(checkpoint,30000);event('session-start',{controls:controlCounts()});void capture('initial');
   for(let turn=0;turn<15;turn++){
-   const target=started+(turn+1)*80000;while(performance.now()<target&&!stopping)await sleep(Math.min(1000,target-performance.now()));assert(!stopping,'Stopped by operator');
+   const target=started+(turn+1)*(traceMode?20000:80000);while(performance.now()<target&&!stopping)await sleep(Math.min(1000,target-performance.now()));assert(!stopping,'Stopped by operator');
    if(turn===4){for(const index of [1,3]){click(`[data-action="keylock"][data-deck="${index}"]`);await until(()=>!state.decks[index].processing,'key lock');}section='four horizontal two keylocks';event('keylocks-two',{phases:gridPhases()});await capture('keylocks-two');assert(gridPhases().every(p=>p.errorSeconds<.005),'Keylock enable lost declared-grid phase');}
    if(turn===7){select('#preview-orientation','vertical');section='four vertical two keylocks';event('vertical');}
    if(turn===10){for(const index of [0,2]){click(`[data-action="keylock"][data-deck="${index}"]`);await until(()=>!state.decks[index].processing,'key lock');}select('#preview-orientation','horizontal');section='four horizontal four keylocks';event('keylocks-four',{phases:gridPhases()});await capture('keylocks-four');assert(gridPhases().every(p=>p.errorSeconds<.005),'Four keylock enable lost declared-grid phase');}
@@ -82,7 +85,22 @@ $('#soak-run').onclick=async()=>{
   checkpoint();assert(report.audio.every(x=>x.nonfinite===0),'Non-finite master samples');assert(!report.errors.length,'Unhandled errors during session');report.complete=true;report.status='Complete';
  }catch(error){report.errors.push(error.stack);report.status='Failed';}
  finally{
-  measuring=false;clearInterval(timer);app.engine.silence();if(meter){app.engine.masterOutput.output.disconnect(meter);meter.disconnect();meter.port.close();}report.elapsedSeconds=started?(performance.now()-started)/1000:0;report.sessionUnchanged=report.sessionUnchanged();report.finalControls=controlCounts();report.finalCache=app.engine.decodedBufferUsage();report.finalRaster=sourceWaveformRasterUsage();report.stopped=app.state.decks.every(d=>!d.playing&&!d.playQueued);show();
+  measuring=false;trace?.stop();clearInterval(timer);app.engine.silence();if(meter){app.engine.masterOutput.output.disconnect(meter);meter.disconnect();meter.port.close();}report.elapsedSeconds=started?(performance.now()-started)/1000:0;report.sessionUnchanged=report.sessionUnchanged();report.finalControls=controlCounts();report.finalCache=app.engine.decodedBufferUsage();report.finalRaster=sourceWaveformRasterUsage();report.stopped=app.state.decks.every(d=>!d.playing&&!d.playQueued);show();
  }
 };
 boot().catch(error=>{report.errors.push(error.stack);show();});
+
+// The owned native trace host can load its eight verified loopback-only copies.
+if(new URL(location.href).searchParams.has('nativeInputs')){
+ const button=document.createElement('button');button.textContent='Load eight verified diagnostic tracks';$('#soak').prepend(button);
+ button.onclick=async()=>{
+  try{
+   await until(()=>!$('#soak-files').disabled,'native fixture input');button.disabled=true;
+   const manifest=await(await fetch('/__trace-inputs/manifest')).json();assert(manifest.length===8,'Eight allowlisted diagnostic inputs required');
+   const transfer=new DataTransfer();for(const [i,file]of manifest.entries()){
+    const bytes=await(await fetch('/__trace-inputs/'+i)).arrayBuffer(),hash=[...new Uint8Array(await crypto.subtle.digest('SHA-256',bytes))].map(n=>n.toString(16).padStart(2,'0')).join('');assert(hash===file.sha256,'Native diagnostic source hash mismatch');transfer.items.add(new File([bytes],file.name,{type:'audio/mpeg'}));
+   }
+   $('#soak-files').files=transfer.files;await $('#soak-files').onchange({target:$('#soak-files')});
+  }catch(error){report.errors.push(error.stack);report.status='Native input failed';show();}
+ };
+}
