@@ -17,6 +17,7 @@ import { createSmartSync, hasBeatgrid, beatPosition } from './smart-sync.js';
 import {createBeatgrid} from './beatgrid.js';
 import {currentDeckBPM} from './deck-tempo.js';
 import {refreshTransportControls} from './transport-presentation.js';
+import {refreshAnalysisControls} from './analysis-presentation.js';
 import {renderLibraryRows} from './library-rows.js';
 import {createTempoSlider} from './tempo-slider.js';
 import {createLocalAudioLibrary} from "./local-audio-library.js";
@@ -515,8 +516,8 @@ function prepareWaveCanvas(canvas,rect=canvas.getBoundingClientRect()){
   const context=canvas.getContext('2d');context.setTransform(scale,0,0,scale,0,0);
   return {context,width,height};
 }
-function drawWaves() {
-  const surfaces=state.decks.slice(0,state.deckCount).map(d=>({d,canvas:$(`#wave-${d.index}`)})).filter(surface=>surface.canvas);
+function drawWaves(track = null) {
+  const surfaces=state.decks.slice(0,state.deckCount).filter(d=>!track||d.track===track).map(d=>({d,canvas:$(`#wave-${d.index}`)})).filter(surface=>surface.canvas);
   const bounds=surfaces.map(({canvas})=>canvas.getBoundingClientRect());
   for (const [index,{d,canvas:c}] of surfaces.entries()) {
     const {context:ctx,width:w,height:h}=prepareWaveCanvas(c,bounds[index]);
@@ -1226,8 +1227,9 @@ async function enqueueAnalysis(tracks, replacements = {}) {
       completed++;
       persist();
       renderTracks();
-      for (const d of state.decks.slice(0, state.deckCount))
-        if (d.track === t) renderDecks(d.index);
+      smartSync.reconcile();
+      refreshAnalysisControls(state,t);
+      drawWaves(t);
       updateAnalysisStatus(
         `${t.title}: BPM ${result.bpm ? result.bpm.toFixed(2) : "unknown"}, key ${result.key || "unknown"}`,
       );

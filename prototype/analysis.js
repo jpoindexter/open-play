@@ -1,5 +1,6 @@
 import {integratedLoudness} from './loudness.js';
 import {measureTempoDrift} from './tempo-drift.js';
+import {copyAnalysisInput} from './analysis-input.js';
 // Independently implemented local PCM analysis. Estimates, not reference-product parity.
 // Scientific methods and measured limits: docs/research/AUDIO_ANALYSIS_EVALUATION.md.
 const N = 2048,
@@ -403,7 +404,7 @@ export function analyzePCM(channels, sampleRate, options = {}) {
   return result;
 }
 
-export function analyzeBuffer(buffer, options = {}) {
+export async function analyzeBuffer(buffer, options = {}) {
   if (options.signal?.aborted)
     return Promise.reject(new DOMException("Analysis cancelled", "AbortError"));
   if (typeof Worker === "undefined")
@@ -416,8 +417,10 @@ export function analyzeBuffer(buffer, options = {}) {
         options,
       ),
     );
+  const {signal,minBpm,maxBpm,maxSeconds,analyzeTempo,analyzeKey}=options;
+  const channels=await copyAnalysisInput(buffer,signal);
   return new Promise((resolve, reject) => {
-    if (options.signal?.aborted) {
+    if (signal?.aborted) {
       reject(new DOMException("Analysis cancelled", "AbortError"));
       return;
     }
@@ -427,13 +430,13 @@ export function analyzeBuffer(buffer, options = {}) {
     );
     const finish = () => {
       worker.terminate();
-      options.signal?.removeEventListener("abort", abort);
+      signal?.removeEventListener("abort", abort);
     };
     const abort = () => {
       finish();
       reject(new DOMException("Analysis cancelled", "AbortError"));
     };
-    options.signal?.addEventListener("abort", abort, { once: true });
+    signal?.addEventListener("abort", abort, { once: true });
     worker.onerror = (event) => {
       finish();
       reject(new Error(event.message || "Analysis worker failed"));
@@ -447,17 +450,13 @@ export function analyzeBuffer(buffer, options = {}) {
           : resolve(data.result);
       }
     };
-    const channels = Array.from({ length: buffer.numberOfChannels }, (_, i) =>
-      buffer.getChannelData(i).slice(),
-    );
-    const { minBpm, maxBpm, maxSeconds, analyzeTempo, analyzeKey } = options;
-    worker.postMessage(
+    try { worker.postMessage(
       {
         channels,
         sampleRate: buffer.sampleRate,
         options: { minBpm, maxBpm, maxSeconds, analyzeTempo, analyzeKey },
       },
       channels.map((c) => c.buffer),
-    );
+    ); } catch(error) {finish();reject(error);}
   });
 }

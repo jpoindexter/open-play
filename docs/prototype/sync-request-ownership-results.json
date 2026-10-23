@@ -1,0 +1,147 @@
+{
+  "scope": "Actual SmartSync/AudioEngine entry paths with controlled clock/source endpoints. Source and nominal rate agreement is request-ownership evidence, not PCM listening or audible-pop causation. Separate real-control browser receipts retained.",
+  "cases": [
+    {
+      "case": "same-target-double",
+      "before": {
+        "scope": "Actual createSmartSync.press through AudioEngine concurrent ownership using controlled clock/source collaborators; no PCM, browser input or listening claim.",
+        "results": [
+          {
+            "status": "rejected",
+            "error": "AbortError",
+            "message": "Sync preparation superseded."
+          },
+          {
+            "status": "rejected",
+            "error": "AbortError",
+            "message": "Sync preparation superseded."
+          }
+        ],
+        "deck": {
+          "sync": false,
+          "rate": 1,
+          "playing": true,
+          "processing": false,
+          "anchorTime": 1.03
+        },
+        "committedSourceRate": 1.05,
+        "starts": [
+          {
+            "when": 1.03,
+            "offset": 3.1815,
+            "rate": 1.05
+          }
+        ],
+        "oldRetired": true,
+        "replacementCommitted": true
+      },
+      "after": {
+        "scope": "Actual createSmartSync.press through AudioEngine concurrent ownership using controlled clock/source collaborators; no PCM, browser input or listening claim.",
+        "results": [
+          {
+            "status": "rejected",
+            "error": "AbortError",
+            "message": "Sync preparation superseded."
+          },
+          {
+            "status": "fulfilled"
+          }
+        ],
+        "deck": {
+          "sync": true,
+          "rate": 1.05,
+          "playing": true,
+          "processing": false,
+          "anchorTime": 1.03
+        },
+        "committedSourceRate": 1.05,
+        "starts": [
+          {
+            "when": 1.03,
+            "offset": 3.1815,
+            "rate": 1.05
+          }
+        ],
+        "oldRetired": true,
+        "replacementCommitted": true
+      },
+      "privateReceipts": {
+        "smart-double-sync.json": "e9398b35affeb50a3522ccf94858e37c68e7fefdbc6902157567a07d0e3843d8",
+        "smart-double-sync-green.json": "e8ecf3a3e644a1853e013e07f59143b769b210d6eccf3b764278d3391e7e007a"
+      }
+    },
+    {
+      "case": "sync-then-reverse",
+      "before": {
+        "scope": "Actual Sync then setReverse ownership using controlled clock/source collaborators; no PCM, browser input or listening claim.",
+        "results": [
+          {
+            "status": "rejected",
+            "error": "AbortError",
+            "message": "Sync preparation superseded."
+          },
+          {
+            "status": "fulfilled"
+          }
+        ],
+        "deck": {
+          "sync": false,
+          "rate": 1,
+          "playing": true,
+          "processing": false,
+          "anchorTime": 1.01
+        },
+        "committedSourceRate": 1.05,
+        "starts": [
+          {
+            "when": 1.01,
+            "offset": 27,
+            "rate": 1.05
+          }
+        ],
+        "oldRetired": false,
+        "replacementCommitted": true
+      },
+      "after": {
+        "scope": "Actual Sync then setReverse ownership using controlled clock/source collaborators; no PCM, browser input or listening claim.",
+        "results": [
+          {
+            "status": "rejected",
+            "error": "AbortError",
+            "message": "Sync preparation superseded."
+          },
+          {
+            "status": "fulfilled"
+          }
+        ],
+        "deck": {
+          "sync": false,
+          "rate": 1.05,
+          "playing": true,
+          "processing": false,
+          "anchorTime": 1.01
+        },
+        "committedSourceRate": 1.05,
+        "starts": [
+          {
+            "when": 1.01,
+            "offset": 27,
+            "rate": 1.05
+          }
+        ],
+        "oldRetired": false,
+        "replacementCommitted": true
+      },
+      "privateReceipts": {
+        "sync-reverse-current.json": "9cf3ebb3ed2fef6dd8db536367738bd9e6e159270ca9a30bf12c51e9d50b07db",
+        "sync-reverse-green.json": "bb1e36009b0f2d019225dc471a7e1f8e4e41118c769306dbe290ebe6f8dc24e5"
+      }
+    }
+  ],
+  "nodeChecks": {
+    "suite": 128,
+    "ownership": 6,
+    "ownershipDeadlinePrimary": 28,
+    "passed": true
+  }
+}

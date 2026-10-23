@@ -1,0 +1,251 @@
+{
+  "scope": "Private diagnostic module copies preserve algorithm/scheduling except timing hooks. BEFORE whole-channel contiguous copy; AFTER initial-return CPU and aggregate total/max1MiBcopy+allocationCPU. Aggregate CPU excludes yielded waits and is not a single task. Do not sum nested profile/initial-return timings. Timing hook overhead and full-session frame variation are retained; no universal lag or pop-free claim.",
+  "matchedAnalysisGeometry": true,
+  "runs": [
+    {
+      "label": "prep-before",
+      "manifest": {
+        "analysis.js": {
+          "sourceSHA256": "87d7d0d82636fb6e74a8a3d554078dd27d4b035a0cceb1ece0f0e5c5834820f8",
+          "probeSHA256": "f94bb0e3091e80eae759a8f586fc088387d1e66e13be432402a63d44217d6996",
+          "markCount": 1
+        },
+        "source-waveform.js": {
+          "sourceSHA256": "2c21bf9bf88b1f9c629a9f0c332a57c1624d62412124e076c1728288bfc7e033",
+          "probeSHA256": "8369e849037ebada1f3d6e0162da04ac15c91692998f5d1f1a1eaafcf1edeebc",
+          "markCount": 2
+        }
+      },
+      "marks": [
+        {
+          "type": "prep-probe",
+          "at": 113986.39999999851,
+          "end": 61234.39999999851,
+          "kind": "profile-first-chunk",
+          "duration": 2.2999999970197678,
+          "frames": 65536,
+          "channels": 2
+        },
+        {
+          "type": "prep-probe",
+          "at": 113986.39999999851,
+          "end": 61234.60000000149,
+          "kind": "profile-initial-return",
+          "duration": 2.8000000044703484,
+          "frames": 22668288,
+          "channels": 2
+        },
+        {
+          "type": "prep-probe",
+          "at": 113986.39999999851,
+          "end": 64621.19999999553,
+          "kind": "analysis-full-channel-copy",
+          "duration": 11.599999994039536,
+          "frames": 22668288,
+          "channels": 2
+        },
+        {
+          "type": "prep-probe",
+          "at": 113986.39999999851,
+          "end": 81270.10000000149,
+          "kind": "profile-first-chunk",
+          "duration": 2.3000000044703484,
+          "frames": 65536,
+          "channels": 2
+        },
+        {
+          "type": "prep-probe",
+          "at": 113986.39999999851,
+          "end": 81270.29999999702,
+          "kind": "profile-initial-return",
+          "duration": 2.899999998509884,
+          "frames": 23736971,
+          "channels": 2
+        },
+        {
+          "type": "prep-probe",
+          "at": 113986.39999999851,
+          "end": 85779.5,
+          "kind": "analysis-full-channel-copy",
+          "duration": 17.30000000447035,
+          "frames": 20057268,
+          "channels": 2
+        },
+        {
+          "type": "prep-probe",
+          "at": 113986.39999999851,
+          "end": 100883.79999999702,
+          "kind": "profile-first-chunk",
+          "duration": 6.799999997019768,
+          "frames": 65536,
+          "channels": 2
+        },
+        {
+          "type": "prep-probe",
+          "at": 113986.39999999851,
+          "end": 100883.89999999851,
+          "kind": "profile-initial-return",
+          "duration": 7.399999998509884,
+          "frames": 20569536,
+          "channels": 2
+        },
+        {
+          "type": "prep-probe",
+          "at": 113986.39999999851,
+          "end": 104264.29999999702,
+          "kind": "analysis-full-channel-copy",
+          "duration": 12.199999995529652,
+          "frames": 23736971,
+          "channels": 2
+        }
+      ],
+      "maxFrameIntervalMs": 58
+    },
+    {
+      "label": "prep-after",
+      "manifest": {
+        "analysis.js": {
+          "sourceSHA256": "8cc165de4c77f70ce55bb4146b80f6ad6cc5671815b8fc2beb45d23fe18718ad",
+          "probeSHA256": "1c6b4d1ab10591525da8f6be813b571762bc3c497c85fffa935711df6f64e857",
+          "markCount": 1
+        },
+        "analysis-input.js": {
+          "sourceSHA256": "0e88089e891c3ab57c261eac27ce981de3c11999e00ea38416be7e560fd7f4e3",
+          "probeSHA256": "bb20b982a3f5ccb6a577aa9d64d3179c5bdbfbc546878707291c8a457c950e80",
+          "markCount": 1
+        },
+        "source-waveform.js": {
+          "sourceSHA256": "2c21bf9bf88b1f9c629a9f0c332a57c1624d62412124e076c1728288bfc7e033",
+          "probeSHA256": "8369e849037ebada1f3d6e0162da04ac15c91692998f5d1f1a1eaafcf1edeebc",
+          "markCount": 2
+        }
+      },
+      "marks": [
+        {
+          "type": "prep-probe",
+          "at": 146981,
+          "end": 92849.89999999851,
+          "kind": "profile-first-chunk",
+          "duration": 2.7999999970197678,
+          "frames": 65536,
+          "channels": 2
+        },
+        {
+          "type": "prep-probe",
+          "at": 146981,
+          "end": 92850.30000000447,
+          "kind": "profile-initial-return",
+          "duration": 3.600000001490116,
+          "frames": 22668288,
+          "channels": 2
+        },
+        {
+          "type": "prep-probe",
+          "at": 146981,
+          "end": 96557.10000000149,
+          "kind": "analysis-input-initial-return",
+          "duration": 1.2999999970197678,
+          "frames": 22668288,
+          "channels": 2
+        },
+        {
+          "type": "prep-probe",
+          "at": 146981,
+          "end": 97827.80000000447,
+          "kind": "analysis-input-chunks",
+          "duration": 16.099999971687794,
+          "frames": 22668288,
+          "channels": 2,
+          "chunkCount": 174,
+          "totalCopyCPU": 16.099999971687794,
+          "maxCopyCPU": 0.29999999701976776,
+          "allocCPU": 0.5999999940395355,
+          "maxAllocCPU": 0.5999999940395355
+        },
+        {
+          "type": "prep-probe",
+          "at": 146981,
+          "end": 112669.5,
+          "kind": "profile-first-chunk",
+          "duration": 2.100000001490116,
+          "frames": 65536,
+          "channels": 2
+        },
+        {
+          "type": "prep-probe",
+          "at": 146981,
+          "end": 112669.5,
+          "kind": "profile-initial-return",
+          "duration": 2.6999999955296516,
+          "frames": 23736971,
+          "channels": 2
+        },
+        {
+          "type": "prep-probe",
+          "at": 146981,
+          "end": 117797.39999999851,
+          "kind": "analysis-input-initial-return",
+          "duration": 0.19999999552965164,
+          "frames": 20057268,
+          "channels": 2
+        },
+        {
+          "type": "prep-probe",
+          "at": 146981,
+          "end": 119581,
+          "kind": "analysis-input-chunks",
+          "duration": 32.49999999254942,
+          "frames": 20057268,
+          "channels": 2,
+          "chunkCount": 154,
+          "totalCopyCPU": 32.49999999254942,
+          "maxCopyCPU": 2.100000001490116,
+          "allocCPU": 0.20000000298023224,
+          "maxAllocCPU": 0.10000000149011612
+        },
+        {
+          "type": "prep-probe",
+          "at": 146981,
+          "end": 132226.3999999985,
+          "kind": "profile-first-chunk",
+          "duration": 1.8999999985098839,
+          "frames": 65536,
+          "channels": 2
+        },
+        {
+          "type": "prep-probe",
+          "at": 146981,
+          "end": 132226.3999999985,
+          "kind": "profile-initial-return",
+          "duration": 2.899999998509884,
+          "frames": 20569536,
+          "channels": 2
+        },
+        {
+          "type": "prep-probe",
+          "at": 146981,
+          "end": 135845.5,
+          "kind": "analysis-input-initial-return",
+          "duration": 0.7999999970197678,
+          "frames": 23736971,
+          "channels": 2
+        },
+        {
+          "type": "prep-probe",
+          "at": 146981,
+          "end": 137251.30000000447,
+          "kind": "analysis-input-chunks",
+          "duration": 16.89999993145466,
+          "frames": 23736971,
+          "channels": 2,
+          "chunkCount": 182,
+          "totalCopyCPU": 16.89999993145466,
+          "maxCopyCPU": 0.29999999701976776,
+          "allocCPU": 0.5,
+          "maxAllocCPU": 0.3999999985098839
+        }
+      ],
+      "maxFrameIntervalMs": 75
+    }
+  ]
+}

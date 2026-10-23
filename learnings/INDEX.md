@@ -1,5 +1,9 @@
 # Learnings
 
+- [2026-10-24 retain-analysis-control-identity](2026-10-24-retain-analysis-control-identity.md) — Refresh metadata without replacing the active target control, including queued overview freshness.
+- [2026-10-24 guard-sync-request-ownership](2026-10-24-guard-sync-request-ownership.md) — Equal requested rates need request identity and start-token guards.
+- [2026-10-24 yield-analysis-pcm-staging](2026-10-24-yield-analysis-pcm-staging.md) — Bound source copies without retaining detachable channel views and preserve cancellation/Worker cleanup.
+
 - [2026-10-23 bound-synchronous-async-preparation](2026-10-23-bound-synchronous-async-preparation.md) — Measure synchronous work before a preparation function returns its promise and yield proven CPU loops without changing their sample sequence.
 
 - [2026-10-23 scope-async-metadata-refresh](2026-10-23-scope-async-metadata-refresh.md) — Resolve current visible owners after asynchronous metadata work and refresh only those owners.

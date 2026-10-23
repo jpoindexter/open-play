@@ -619,18 +619,19 @@ export class AudioEngine {
   }
 
   async synchronize(d, {rate, positionAt, priorClock}) {
-    const track = d.track, previousRate = d.rate, previousPosition = d.position;
-    this.rateOwners.set(d, {});
+    const track = d.track, previousRate = d.rate, previousPosition = d.position, owner = {};
+    this.rateOwners.set(d, owner);
     let scheduled = false, token;
     d.rate = rate;
     try {
       const starting=this.start(d, {priorClock, positionAt: when => {const position = positionAt(when); scheduled = true; return position;}});
       token=this.startTokens.get(d.index);await starting;
-      if (!scheduled || d.track !== track || d.rate !== rate || !d.playing)
+      if (!scheduled || d.track !== track || d.rate !== rate || !d.playing || this.rateOwners.get(d) !== owner || this.startTokens.get(d.index) !== token)
         throw new DOMException("Sync preparation superseded.", "AbortError");
       return {when: d.anchorTime, position: d.anchorPosition, rate};
     } catch (error) {
-      if (d.track === track && d.rate === rate) {
+      if (d.track === track && d.rate === rate && this.rateOwners.get(d) === owner &&
+        (this.startTokens.get(d.index) === token || (!d.playing && !d.processing && !this.voices.has(d.index)))) {
         d.rate = previousRate;
         if(!d.playing&&this.startTokens.get(d.index)===token)d.position=previousPosition;
       }
