@@ -542,7 +542,10 @@ function drawWaves(track = null) {
         if(scope)scope.textContent='Preparing decoded source waveform…';
         if(!sourceWaveLoads.has(buf)){
           sourceWaveLoads.add(buf);
-          ready.then(()=>drawWaves()).catch(error=>notify('Waveform unavailable: '+error.message));
+          ready.then(()=>{
+            const tracks=new Set(state.decks.slice(0,state.deckCount).map(deck=>deck.track));
+            for(const track of tracks)if(track&&engine.buffers.get(track.id)===buf)drawWaves(track);
+          }).catch(error=>notify('Waveform unavailable: '+error.message));
         }
       }
     } else if (view.kind !== 'pending' && d.track.demo) for (let x=0;x<w;x+=3) {
