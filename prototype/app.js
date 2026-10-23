@@ -720,7 +720,7 @@ async function load(index, id = state.selected, options = {}) {
     if ((!t.analyzed||(state.settings["Use Auto Gain"]&&t.analysisResult?.loudness?.version!=="bs1770-integrated-v1")) && !t.provider && !t.missing) void enqueueAnalysis([t]);
     if (state.settings["Analyze Stems"] && !t.provider && !t.missing)
       void ensurePreparedStems(t).catch(error => notify(error.message));
-    drawWaves();
+    drawWaves(t);
   } catch (e) {
     notify(e.message);
   }

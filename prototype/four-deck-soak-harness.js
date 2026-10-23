@@ -58,7 +58,15 @@ async function play(index){
 async function capture(label,seconds=4){
  const {engine}=app,node=new AudioWorkletNode(engine.ctx,'open-play-fx-tempo-capture-test',{numberOfInputs:1,numberOfOutputs:1,outputChannelCount:[1]});engine.masterOutput.output.connect(node);node.connect(engine.ctx.destination);
  const result=await new Promise((resolve,reject)=>{const timer=setTimeout(()=>reject(Error('Capture timeout')),Math.max(15000,(seconds+5)*1000));node.port.onmessage=({data})=>{if(data.type==='done'){clearTimeout(timer);resolve(data);}};node.port.postMessage({type:'capture',id:label,frames:engine.ctx.sampleRate*seconds});});
- engine.masterOutput.output.disconnect(node);node.disconnect();node.port.close();const bytes=new Uint8Array(result.data.buffer);let binary='';for(let i=0;i<bytes.length;i+=16384)binary+=String.fromCharCode(...bytes.subarray(i,i+16384));const value=JSON.stringify({label,startFrame:result.startFrame,sampleRate:engine.ctx.sampleRate,pcm:btoa(binary)});$('#soak-capture').textContent=value;const archive=document.createElement('pre');archive.hidden=true;archive.dataset.soakCapture=label;archive.textContent=value;$('#soak').append(archive);event('capture',{label,frames:result.data.length});
+ engine.masterOutput.output.disconnect(node);node.disconnect();node.port.close();const bytes=new Uint8Array(result.data.buffer),parts=[];
+ // Nonfinal chunks are divisible by3 so joined base64 has no internal padding.
+ for(let offset=0;offset<bytes.length;offset+=49152){
+  let binary='';
+  for(let i=offset;i<Math.min(bytes.length,offset+49152);i+=16384)binary+=String.fromCharCode(...bytes.subarray(i,Math.min(bytes.length,i+16384)));
+  parts.push(btoa(binary));
+  if(offset+49152<bytes.length)await sleep(0);
+ }
+ const value=JSON.stringify({label,startFrame:result.startFrame,sampleRate:engine.ctx.sampleRate,pcm:parts.join('')});$('#soak-capture').textContent=value;const archive=document.createElement('pre');archive.hidden=true;archive.dataset.soakCapture=label;archive.textContent=value;$('#soak').append(archive);event('capture',{label,frames:result.data.length});
 }
 async function boot(){
  const run=new URL(location.href).searchParams.get('run')||'';assert(/^[a-z0-9-]{0,60}$/.test(run),'Invalid owned run label');

@@ -1,5 +1,7 @@
 # Learnings
 
+- [2026-10-24 separate-capture-export-work](2026-10-24-separate-capture-export-work.md) — Preserve acquisition timestamps and yield export work in encoding-aligned chunks before interpreting playback timing traces.
+
 - [2026-10-24 retain-analysis-control-identity](2026-10-24-retain-analysis-control-identity.md) — Refresh metadata without replacing the active target control, including queued overview freshness.
 - [2026-10-24 guard-sync-request-ownership](2026-10-24-guard-sync-request-ownership.md) — Equal requested rates need request identity and start-token guards.
 - [2026-10-24 yield-analysis-pcm-staging](2026-10-24-yield-analysis-pcm-staging.md) — Bound source copies without retaining detachable channel views and preserve cancellation/Worker cleanup.

@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {AudioEngine} from './engine.js';
 import {createSmartSync} from './smart-sync.js';
+import {createCueHolds} from './holds.js';
 
 // Real Sync/start ownership with a controlled clock and graph endpoints, not PCM.
 function fixture(stall=0){
@@ -63,4 +64,35 @@ test('a newer Reverse start retains its rate when the older Sync is canceled',as
  assert.equal(results[0].status,'rejected');assert.equal(results[0].reason.name,'AbortError');
  assert.equal(results[1].status,'fulfilled');assert.equal(deck.reverse,true);assert.equal(deck.playing,true);
  assert.equal(starts.length,1);assert.equal(deck.rate,starts[0].rate,'A canceled Sync must not alter the newer voice rate');
+});
+
+test('manual Seek supersedes pending Sync without restoring an old position or rate',async()=>{
+ const {engine,deck,smart,starts}=fixture();let resume;
+ const ready=new Promise(resolve=>{resume=resolve;});engine.resume=()=>ready;
+ engine.ctx.createGain=()=>({gain:{value:1},connect(){}});engine.setCross=()=>{};
+ const pending=smart.press(deck),seek=engine.seek(deck,9);resume();
+ const results=await Promise.allSettled([pending,seek]);
+ assert.equal(results[0].status,'rejected');assert.equal(results[0].reason.name,'AbortError');assert.equal(results[1].status,'fulfilled');
+ assert.equal(deck.playing,true);assert.equal(deck.position,9);assert.equal(deck.anchorPosition,9);assert.equal(!!deck.sync,false);
+ assert.equal(starts.length,1);assert.equal(starts[0].offset,9);assert.equal(deck.rate,starts[0].rate);assert.equal(deck.processing,false);
+});
+
+test('replacement ownership cancels pending Sync without touching the new track',async()=>{
+ const {engine,deck,smart,starts}=fixture();let resume;
+ engine.resume=()=>new Promise(resolve=>{resume=resolve;});
+ const pending=smart.press(deck);engine.pause(deck);
+ const replacement={id:'replacement',bpm:128,grid:.1,duration:50};Object.assign(deck,{track:replacement,position:7,rate:.9});smart.loaded(deck,{engaged:false});resume();
+ await assert.rejects(pending,{name:'AbortError'});
+ assert.equal(deck.track,replacement);assert.equal(deck.position,7);assert.equal(deck.rate,.9);assert.equal(deck.playing,false);assert.equal(deck.sync,false);
+ assert.equal(engine.voices.size,0);assert.equal(engine.transforms.size,0);assert.deepEqual(starts,[]);
+});
+
+test('temporary Cue cancels pending Sync and retains its paused cue position',async()=>{
+ const {engine,deck,smart,starts}=fixture();let resume;deck.cue=1.5;
+ engine.resume=()=>new Promise(resolve=>{resume=resolve;});
+ const cue=createCueHolds({engine,render(){}}),pending=smart.press(deck),audition=cue.press('cue',deck);resume();
+ const results=await Promise.allSettled([pending,audition]);
+ assert.equal(results[0].status,'rejected');assert.equal(results[0].reason.name,'AbortError');assert.equal(results[1].status,'fulfilled');
+ assert.equal(deck.playing,false);assert.equal(deck.position,1.5);assert.equal(deck.rate,1);assert.equal(deck.processing,false);
+ assert.equal(engine.voices.size,0);assert.equal(engine.transforms.size,0);assert.deepEqual(starts,[]);
 });
