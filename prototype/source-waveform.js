@@ -3,6 +3,8 @@
 // cancellation. Three independent display filter bands provide measured frequency contrast;
 // they do not claim Serato's proprietary waveform algorithm.
 const profiles=new WeakMap();
+const rasterIDs=new WeakMap(),rasters=new Map(),tilePixels=64,maxRasterBytes=32*1024*1024;
+let nextRasterID=0,rasterBytes=0;
 const defer=()=>new Promise(resolve=>setTimeout(resolve,0));
 
 export async function createSourceWaveformProfile(buffer,{blockFrames=128,chunkFrames=65536,yieldTask=defer}={}){
@@ -101,11 +103,44 @@ function paint(ctx,profile,{x=0,y=0,width,height,from,to,vertical=false}){
   ctx.restore();
 }
 
+// Immutable source pixels share an audio-time lattice; only new edge tiles are painted while scrolling.
+function paintRaster(ctx,profile,{x,y,width,height,position,span,vertical}){
+  const Canvas=globalThis.OffscreenCanvas,document=ctx.canvas?.ownerDocument;
+  if(!ctx.drawImage||(!Canvas&&!document))return false;
+  const resolution=Math.min(3,Math.max(1,Math.abs(ctx.getTransform?.().a||1)));
+  const along=vertical?height:width,cross=vertical?width:height,count=Math.max(2,Math.ceil(along*resolution));
+  const from=position-span/2,perSecond=count/span,pixelSize=along/count,crossPixels=Math.ceil(cross*resolution);
+  const first=Math.floor(from*perSecond/tilePixels),last=Math.ceil((position+span/2)*perSecond/tilePixels)-1,bytes=tilePixels*crossPixels*4;
+  if((last-first+1)*bytes>maxRasterBytes)return false;
+  if(!rasterIDs.has(profile))rasterIDs.set(profile,++nextRasterID);
+  const prefix=[rasterIDs.get(profile),perSecond,cross,resolution,vertical].join('/');
+  ctx.save();ctx.beginPath();ctx.rect(x,y,width,height);ctx.clip();
+  for(let tile=first;tile<=last;tile++){
+    const begin=tile*tilePixels/perSecond,end=(tile+1)*tilePixels/perSecond;
+    if(end<=0||begin>=profile.duration)continue;
+    const key=prefix+'/'+tile;let record=rasters.get(key);
+    if(record)rasters.delete(key);
+    else{
+      const canvas=Canvas?new Canvas(vertical?crossPixels:tilePixels,vertical?tilePixels:crossPixels):document.createElement('canvas');
+      canvas.width=vertical?crossPixels:tilePixels;canvas.height=vertical?tilePixels:crossPixels;
+      const context=canvas.getContext('2d');context.setTransform(resolution,0,0,resolution,0,0);
+      paint(context,profile,{width:vertical?cross:tilePixels/resolution,height:vertical?tilePixels/resolution:cross,from:begin,to:end,vertical});
+      while(rasterBytes+bytes>maxRasterBytes){const oldest=rasters.keys().next().value;rasterBytes-=rasters.get(oldest).bytes;rasters.delete(oldest);}
+      record={canvas,bytes};rasterBytes+=bytes;
+    }
+    rasters.set(key,record);
+    const offset=(tile*tilePixels-from*perSecond)*pixelSize;
+    ctx.drawImage(record.canvas,vertical?x:x+offset,vertical?y+offset:y,vertical?crossPixels/resolution:tilePixels*pixelSize,vertical?tilePixels*pixelSize:crossPixels/resolution);
+  }
+  ctx.restore();return true;
+}
+
 export function paintSourceOverview(ctx,buffer,{width,height}){
   const state=sourceWaveformState(buffer);if(!state.profile)return state.error?null:state.ready;
   paint(ctx,state.profile,{width,height,from:0,to:state.profile.duration});return null;
 }
 export function paintSourceDetail(ctx,buffer,{x=0,y=0,width,height,position,span=4,vertical=true}){
   const state=sourceWaveformState(buffer);if(!state.profile)return state.error?null:state.ready;
-  paint(ctx,state.profile,{x,y,width,height,vertical,from:position-span/2,to:position+span/2});return null;
+  if(!paintRaster(ctx,state.profile,{x,y,width,height,position,span,vertical}))paint(ctx,state.profile,{x,y,width,height,vertical,from:position-span/2,to:position+span/2});return null;
 }
+export function sourceWaveformRasterUsage(){return {bytes:rasterBytes,maxBytes:maxRasterBytes,tiles:rasters.size};}

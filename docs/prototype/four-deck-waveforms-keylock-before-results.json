@@ -1,0 +1,54 @@
+{
+  "frames": [],
+  "errors": [
+    "Error: Late Sync must preserve both audible voices and prior tempo without a discontinuity\n    at assert (http://127.0.0.1:18843/prototype/sync-lag-harness.js:4:113)\n    at $.onclick (http://127.0.0.1:18843/prototype/sync-lag-harness.js:88:3)"
+  ],
+  "testMode": "late keylock acknowledgment",
+  "scope": "Actual GUI keylocked Sync under an injected post-acknowledgment stall extending80ms past the scheduled boundary. Owned physically muted tones; no human/physical/pop identity claim.",
+  "persistentSessionUnchanged": true,
+  "detailCacheLoaded": true,
+  "rasterLoaded": false,
+  "startGuardLoaded": true,
+  "starts": [],
+  "keylockGuardLoaded": false,
+  "pressAt": 1.3583673469387756,
+  "stall": {
+    "before": 1.3931972789115645,
+    "after": 1.6428117913832199,
+    "when": 1.5631972789115645
+  },
+  "deadline": {
+    "injected": true,
+    "voiceRetained": false,
+    "leaderRetained": true,
+    "rateRetained": false,
+    "playing": true,
+    "processing": false,
+    "sync": true,
+    "notice": "Finished: 2 measured, 0 failed. Existing/manual metadata and locked grids preserved unless replacement was requested."
+  },
+  "pcm": {
+    "sampleRate": 44100,
+    "frames": 132300,
+    "startFrame": 48896,
+    "maxCurvature": 0.0019720644922928297,
+    "zeroFrames": 0,
+    "peak": 0.05677459016442299
+  },
+  "deadlinePassed": false,
+  "controls": {
+    "play": 2,
+    "eq": 2,
+    "libraryPreviews": 6
+  },
+  "sourceHashes": {
+    "app.js": "10698cb5b3b003fb5d2cbeaa8ea0d8ed55a80d69f9bb566e2c56c944ff72950c",
+    "engine.js": "842d1e6b434bc91c5f782e03a50394ea7511f818bf63eb6e6c77e3b11af61065",
+    "layout-preview.js": "434eb277fd74eac6387cbb5f8dac0a1b18da31cfcf14c3120707b0640e5b59db",
+    "detail-waveform.js": "ac3b40e8fc1f51281f6dc53c465482e9cf88487a39b104d08ad1afb64245a8f5",
+    "source-waveform.js": "c521c147adaa450ed664d20775c9ef9cad27e4e1ef2128f9bb667fa0787cd8b2",
+    "sync-lag-harness.js": "0c9b15aeaa5dc7225a57ba80ca7fd87473f2a93bac8f5fa8596553d045b11710"
+  },
+  "stoppedReadoutsPassed": true,
+  "complete": false
+}

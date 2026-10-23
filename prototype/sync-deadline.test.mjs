@@ -39,3 +39,9 @@ test('rollback cannot overwrite a newer paused Cue position',async()=>{
  await assert.rejects(engine.synchronize(deck,{rate:1.05,priorClock:()=>3,positionAt:()=>4}),{name:'AbortError'});
  assert.equal(deck.position,9);assert.equal(deck.playing,false);
 });
+test('a late live keylock acknowledgment cannot replace still-playing old audio',async()=>{
+ const f=fixture(),{engine,deck,old}=f;deck.keylock=true;let disposed=false;
+ engine.createForwardKeylock=async()=>({snapshot:()=>({groups:[{latency:.02}]}),outputs:[],async start({position,when}){engine.ctx.currentTime=when+.02;return {position,when,playing:true};},async dispose(){disposed=true;}});
+ await assert.rejects(engine.synchronize(deck,{rate:1.05,priorClock:t=>3+t-1,positionAt:()=>4}),/missed its lead/);
+ assert.equal(engine.voices.get(0),old);assert.equal(deck.rate,1);assert.equal(deck.playing,true);assert.deepEqual(f.retired,[]);assert.equal(disposed,true);
+});

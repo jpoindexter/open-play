@@ -1,8 +1,10 @@
 import {sessionKey} from './session-storage.js';
-import {sourceWaveformState} from './source-waveform.js';
+import {sourceWaveformState,paintSourceDetail} from './source-waveform.js';
 import {paintDetailWaveforms} from './detail-waveform.js';
 const $=s=>document.querySelector(s),sleep=ms=>new Promise(r=>setTimeout(r,ms)),assert=(ok,text)=>{if(!ok)throw Error(text);};
-const report={scope:'Actual workspace rAF callbacks and ordinary GUI Sync under an injected80ms post-alignment preparation stall. Owned muted tones; no human/physical/pop identity claim.',frames:[],errors:[]};
+const report={frames:[],errors:[]};
+const keylockMode=new URL(location.href).searchParams.has('keylock');report.testMode=keylockMode?'late keylock acknowledgment':'four-deck waveform and ordinary deadline';
+report.scope=keylockMode?'Actual GUI keylocked Sync under an injected post-acknowledgment stall extending80ms past the scheduled boundary. Owned physically muted tones; no human/physical/pop identity claim.':'Actual workspace rAF callbacks and ordinary GUI Sync under80ms post-alignment stall. Owned physically muted tones; no human/physical/pop identity claim.';
 let app,section=null,callbackTimes={},rectangles=0,detailPaints=0,readoutMutations=0;
 const raf=window.requestAnimationFrame.bind(window),fill=CanvasRenderingContext2D.prototype.fillRect,clear=CanvasRenderingContext2D.prototype.clearRect;
 window.requestAnimationFrame=callback=>raf(at=>{const start=performance.now();try{callback(at);}finally{if(section)(callbackTimes[callback.name||'anonymous']??=[]).push(performance.now()-start);}});
@@ -34,11 +36,13 @@ async function boot(){
  $('#probe-run').disabled=false;$('#probe-run').textContent='Run Sync deadline and frame checks';
 }
 $('#probe-run').onclick=async()=>{
- $('#probe-run').disabled=true;const {engine,state}=app;let witness,create,timeline;
+ $('#probe-run').disabled=true;const {engine,state}=app;let witness,create,timeline,factory;
  try{
   await engine.resume();engine.audioMonitor.mutePhysical(true);assert(engine.audioMonitor.snapshot().physicalMuted,'Physical mute');
   await Promise.all(state.decks.slice(0,2).map(d=>sourceWaveformState(engine.buffers.get(d.track.id)).ready));await sleep(500);
   report.detailCacheLoaded=paintDetailWaveforms.toString().includes('lastFrames');
+  report.rasterLoaded=paintSourceDetail.toString().includes('paintRaster');
+  if(!keylockMode){
   await measure('2-deck compact horizontal stopped');
   for(const d of state.decks.slice(0,2))click(`[data-action="play"][data-deck="${d.index}"]`);
   await until(()=>state.decks.slice(0,2).every(d=>d.playing&&!d.processing),'both playing');await measure('2-deck compact horizontal playing');
@@ -56,6 +60,7 @@ $('#probe-run').onclick=async()=>{
    }
   }
   select('#deck-count','2');select('#preview-orientation','horizontal');await sleep(100);
+  }
   const [left,right]=state.decks;
   for(const [index,d]of [left,right].entries()){
    const b=engine.ctx.createBuffer(2,engine.ctx.sampleRate*12,engine.ctx.sampleRate);
@@ -63,14 +68,16 @@ $('#probe-run').onclick=async()=>{
    d.track={...d.track,id:'sync-deadline-'+index,bpm:index?115.5:121,grid:0,duration:12,gridWarpMarkers:[],gridMarkers:[],cues:Array(8).fill(null)};
    Object.assign(d,{position:1,rate:1,keylock:false,keyShift:0,sync:false,syncRole:null,syncState:'off',loop:false,reverse:false});engine.buffers.set(d.track.id,b);
   }
+  if(keylockMode){click('[data-action="keylock"][data-deck="1"]');await until(()=>right.keylock,'key lock enabled');}
   engine.setCross(1);click('[data-action="play"][data-deck="0"]');await until(()=>left.playing&&!left.processing,'leader');click('[data-action="play"][data-deck="1"]');await until(()=>right.playing&&!right.processing,'follower');await sleep(300);
   await engine.ctx.audioWorklet.addModule(new URL('./fx-tempo-capture-worklet.js',import.meta.url));
   witness=new AudioWorkletNode(engine.ctx,'open-play-fx-tempo-capture-test',{numberOfInputs:1,numberOfOutputs:1,outputChannelCount:[1]});engine.masterOutput.output.connect(witness);witness.connect(engine.ctx.destination);
-  const captured=new Promise(resolve=>witness.port.onmessage=({data})=>{if(data.type==='done')resolve(data);});witness.port.postMessage({type:'capture',id:1,frames:engine.ctx.sampleRate*2});await sleep(250);
+  const captured=new Promise(resolve=>witness.port.onmessage=({data})=>{if(data.type==='done')resolve(data);});witness.port.postMessage({type:'capture',id:1,frames:engine.ctx.sampleRate*(keylockMode?3:2)});await sleep(250);
   const voice=engine.voices.get(1),leader=engine.voices.get(0),rate=right.rate;let injected=false;
   report.startGuardLoaded=engine.start.toString().includes('requireLead');report.starts=[];
   create=engine.ctx.createBufferSource.bind(engine.ctx);engine.ctx.createBufferSource=()=>{const source=create(),start=source.start.bind(source);source.start=(when,offset)=>{report.starts.push({when,actual:engine.ctx.currentTime,offset});return start(when,offset);};return source;};
   timeline=engine.onGridTimeline;engine.onGridTimeline=(d,options)=>{const value=timeline?.(d,options);if(d===right&&!injected&&options.when>engine.ctx.currentTime+.02){injected=true;const before=engine.ctx.currentTime,end=performance.now()+80;while(performance.now()<end){}report.stall={before,after:engine.ctx.currentTime,when:options.when};}return value;};
+  if(keylockMode){engine.onGridTimeline=timeline;factory=engine.createForwardKeylock.bind(engine);engine.createForwardKeylock=async options=>{const adapter=await factory(options),start=adapter.start.bind(adapter);adapter.start=async options=>{const ack=await start(options);if(!injected){injected=true;const before=engine.ctx.currentTime,end=performance.now()+Math.max(150,(ack.when-before)*1000+80);while(performance.now()<end){}report.stall={before,after:engine.ctx.currentTime,when:ack.when};}return ack;};return adapter;};report.keylockGuardLoaded=engine.startForwardKeylock.toString().includes('ack.when-.005');}
   report.pressAt=engine.ctx.currentTime;click('[data-action="sync"][data-deck="1"]');await until(()=>injected&&!right.processing,'Sync completion');engine.ctx.createBufferSource=create;
   report.deadline={injected,voiceRetained:engine.voices.get(1)===voice,leaderRetained:engine.voices.get(0)===leader,rateRetained:right.rate===rate,playing:right.playing,processing:right.processing,sync:right.sync,notice:$('#notice')?.textContent||''};
   const pcm=await captured,a=pcm.data;let maxCurvature=0,zeroFrames=0,peak=0;
@@ -86,13 +93,13 @@ $('#probe-run').onclick=async()=>{
   report.armedLaunch={playing:right.playing,leaderRetained:engine.voices.get(0)===leader,syncState:right.syncState};assert(report.armedLaunch.leaderRetained&&right.syncState==='beat','Armed launch failed');
  }catch(error){report.errors.push(error.stack);}
  finally{
-  if(create)engine.ctx.createBufferSource=create;if(timeline)engine.onGridTimeline=timeline;engine.silence();witness?.disconnect();if(witness)try{engine.masterOutput.output.disconnect(witness);}catch{}
+  if(create)engine.ctx.createBufferSource=create;if(timeline)engine.onGridTimeline=timeline;if(factory)engine.createForwardKeylock=factory;engine.silence();witness?.disconnect();if(witness)try{engine.masterOutput.output.disconnect(witness);}catch{}
   report.controls={play:document.querySelectorAll('[data-action="play"]').length,eq:document.querySelectorAll('[data-mix$=":low"]').length,libraryPreviews:document.querySelectorAll('.library-wave-preview img').length};
   report.sourceHashes=Object.fromEntries(await Promise.all(['app.js','engine.js','layout-preview.js','detail-waveform.js','source-waveform.js','sync-lag-harness.js'].map(async file=>[file,[...new Uint8Array(await crypto.subtle.digest('SHA-256',await(await fetch(file,{cache:'no-store'})).arrayBuffer()))].map(n=>n.toString(16).padStart(2,'0')).join('')])));
   report.persistentSessionUnchanged=report.persistentSessionUnchanged();
   report.stoppedReadoutsPassed=report.frames.filter(f=>f.name.endsWith('stopped')).every(f=>f.readoutMutations===0);
   if(!report.stoppedReadoutsPassed)report.errors.push('Stopped readouts repeatedly replace unchanged text nodes');
-  report.complete=report.deadlinePassed&&!report.errors.length;$('#probe-result').textContent=JSON.stringify(report,null,2);$('#probe-original').textContent=JSON.stringify(report);$('#probe-run').disabled=false;
+  report.complete=report.deadlinePassed&&!report.errors.length;$('#probe-result').textContent=JSON.stringify(report,null,2);$('#probe-original').textContent=JSON.stringify(report);$('#probe-run').textContent='Checks finished; reload to run again';
  }
 };
 boot().catch(error=>$('#probe-result').textContent=error.stack);

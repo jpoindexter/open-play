@@ -421,6 +421,7 @@ export class AudioEngine {
       const ack = gridTimeline ? await adapter.startTimeline({position:playbackPosition(position),when,events:gridTimeline.events}) : await adapter.start({position, when});
       if(handoff)await handoff.arm(d.index);
       if (!current()) return;
+      if(this.ctx.currentTime>=ack.when-.005)throw Error('Sync start missed its lead; previous audio retained. Try Sync again.');
       const voice = {sources: [], liveKeylock: adapter, liveOwnerController: controller, gridTimeline, reservedStems:adapter.reservedStems, stemsReady:buffers.length===5, stemGains: [],
         handoffBefore: old && initiallyPlaying ? {until: ack.when, owner:old, clock: oldClock, rate: at => this.voiceRateAt(d, old, at)} : null};
       this.routeOrdinaryVoice(d, voice, adapter.outputs, buffers.length === 5 || adapter.reservedStems, {when: ack.when, reuseVoice: old});
