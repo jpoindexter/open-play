@@ -66,6 +66,12 @@ Independent inspection now covers **33whole PCM windows totaling204s** across al
 
 Broader stalls and intermittent Sync pops remain OPEN. The measured track's own deck still replaces its article; target-deck held pointer gestures need separate scrutiny. Explicit structural/schema/Instant Double paths remain. A worker result, source-grid phase or finite PCM does not prove musical downbeats or absence of audible pops.
 
-Human re-entry remains one Sync-OFF manual transition, EQ judgment, temporary Cue hold/release/latch and clean stop. Physical headphone/master/controller output and native long-session performance are separate gates. Native startup will be recorded as executed or pending, not inferred from packaging.
+Human re-entry remains one Sync-OFF manual transition, EQ judgment, temporary Cue hold/release/latch and clean stop. Physical headphone/master/controller output and native long-session performance are separate gates. Native startup accessibility evidence and its unresolved compositor limitation are recorded separately below.
 
 The recurring-job [candidate playbook](../../.agents/skills/open-play-core-reliability/SKILL.md) reuses the existing harness/trace/inspector. It is saved for owner review, not adopted as a standing/global procedure; tests and runtime evidence are not owner sign-off. A separate read-only agent reviewed both product repairs and their tests, finding no actionable regression. It performed no runtime checks; its source review does not replace the executed evidence.
+
+## Delivery and Trello
+
+Candidate **0.1.48/source79b0c5b2bcd393dda20de99e9342ed5246180ea1**, ASAR `4e3643f1e338b984cb5ff3482b286d9b2df75ca08eccdf6941dd8167c8ead812`;5/5package checks pass. Native AX observed48startup,16saved tracks/14previews,2stopped decks/−10dB and no save/recovery warning. Old46recording panel had no active or downloadable capture before native quit. No normal-profile playback. Preview toggle0then14restored is verified in fresh AX, while the compositor screenshot remains an earlier unchecked modal; fresh visible confirmation is pending. No unlock bypass or live profile-file editing. Current/versioned48launchers syntax-checked, not executed; native launch used exact package path. [Delivery/re-entry](desktop-0.1.48-playback-delivery.json).
+
+Five existing Trello current prefixes and parent comment read back exactly.140cards/dispositions unchanged; criteria/history/model guidance retained byte-exact. [Reconciliation](../delivery/CORE_FOUR_DECK_COLD_ANALYSIS_RECONCILIATION_2026-10-23.json). The software slice is delivered; broader pops/stalls and human/hardware gates remain open.

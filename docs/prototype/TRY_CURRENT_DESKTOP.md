@@ -1,3 +1,17 @@
+# Try desktop0.1.48 — cold-analysis and preview-scheduling candidate
+
+Package5/5; source79b0c5b. Native AX startup observed48title,16saved tracks/14previews, Horizontal/Compact,2stopped decks and−10dB. No normal-profile playback. Preview preference off0/on14restored in fresh AX; compositor snapshot remained old modal, so visual confirmation is pending. [Delivery](desktop-0.1.48-playback-delivery.json), [report](CORE_FOUR_DECK_COLD_ANALYSIS_2026-10-23.md).
+
+48is open. On return verify the visible main window and Columns → Preview waveform remains on. Current/versioned48launchers pass syntax checks but were not executed; the app was opened through exact package path. Preserve REC/work before any later restart. Previous apps/profile/port18775 remain.
+
+Analysis preserves unrelated owners; cold generated audio yields; custom controls/previews retained. Target analyzed deck still replaces its article and needs held-gesture scrutiny. Broader stalls/pops remain open.
+
+When listening is possible: Sync OFF/pitch reset, independent incoming tempo and T/Y left or G/H right nudge; one manual transition; LOW/MID/HIGH cut/reset; paused Cue hold/release then Cue+Play latch; pause both and hear silence. Capture an actual pop with event/REC context if it returns. Physical headphone/master/controller checks need suitable hardware.
+
+---
+
+## Historical0.1.47 guide
+
 # Try desktop0.1.47 — load/library-row candidate
 
 **Packaged, native startup not yet checked: the Mac locked.** Source30f5661; package5/5. Last observed native app remains0.1.46,16tracks/14previews and0playing decks. No new normal-profile playback. [Delivery receipt](desktop-0.1.47-playback-delivery.json), [browser evidence and limits](CORE_FOUR_DECK_LOAD_ROWS_2026-10-23.md).
