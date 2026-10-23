@@ -2,9 +2,9 @@
 
 ## Current disposition — 23 October 2026
 
-**OPEN for the broader intermittent report.** Current desktop0.1.42/source5f8bd0b contains a reproduced ordinary late-start repair. An80ms post-alignment stall on frozen0.1.41 started a replacement51ms late and produced a captured discontinuity. Current code rejects the late replacement before touching old audio, preserves tempo/paused position ownership, and offers retry. Normal retry and paused armed launch execute with the outgoing master retained. Controlled postmaster PCM,66Node tests, frame measurements and native startup/package evidence: [current report](CORE_SYNC_LAG_2026-10-23.md).
+**OPEN for the broader intermittent report.** Current desktop0.1.43/source4cc4877 retains the ordinary late-start guard and now rejects late live key-lock acknowledgments before retiring old audio. An actual frozen0.1.42 GUI test handled acknowledgment79.6ms late, replaced the follower and exceeded the controlled-tone discontinuity limit. Current code retains both voices/tempo; whole3s capture has132300finite frames, zero exactly-silent samples and maximum second difference0.000026<0.001. Normal retry and paused armed launch preserve the outgoing master.69Node tests, package5/5 and native existing-profile startup: [current report](CORE_FOUR_DECK_WAVEFORMS_2026-10-23.md). [Prior ordinary-start repair](CORE_SYNC_LAG_2026-10-23.md) remains scoped evidence.
 
-The30ms deadline is now an executed failure mechanism, not merely a source hypothesis. It is not established as the cause of every historical event, especially the report with an incoming deck paused. Keep actual-user-event capture, listening and physical output gates open; no repeated clean-case matrix or unqualified pop-free claim. Redundant waveform/readout work was also reduced without hiding controls/previews;4Horizontal and real-load timing remain open.
+These are executed software failure mechanisms, not established causes of every historical event, especially paused-incoming or physical-output reports. Keep actual-user-event capture, listening and hardware gates open; do not repeat clean matrices or claim pop-free completion. Four-deck waveform source pixels are reused with original clocks/resolution/previews; short callback improvements do not establish native/real-load/long-session lag acceptance.
 
 ## Historical investigation
 

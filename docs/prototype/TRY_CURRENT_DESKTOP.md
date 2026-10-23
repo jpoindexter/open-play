@@ -1,3 +1,17 @@
+# Try desktop0.1.43 — core waveform/Sync candidate
+
+Open `Start Open Play Current Test.command` or `Start Open Play Playback Test 0.1.43.command`. Close another playback-test version first; existing profile/port18775 and older bundles remain. Source4cc4877. [Executed evidence and limits](CORE_FOUR_DECK_WAVEFORMS_2026-10-23.md).
+
+Last observed startup:16saved tracks, demo decks stopped at zero, Horizontal/Compact, Master−10dB. Four-deck stopped controls were checked and restored to two decks. Restart loads demo decks; select saved real-song rows and use Shift+Left/Right or each deck Load. Original songs unchanged. No normal-profile music was played during this pass.
+
+Moving source pixels are reused without changing grid/play clocks or waveform resolution. All controls and library previews remain. A missed ordinary/key-lock Sync deadline preserves previous audio/tempo and shows a retry notice; retry after load settles. The broader intermittent-pop and real-load lag reports remain OPEN.
+
+When ready: choose two real songs, disengage Sync and reset pitch, adjust incoming tempo plus T/Y left or G/H right nudge, then one manual transition. Audition/reset LOW/MID/HIGH separately; set paused Cue, hold/release, then Cue+Play latch; pause both and confirm silence. Preserve the current REC capture/event context if a pop returns. Physical headphone/master isolation and controller acceptance require suitable hardware. These are remaining human checks, not requests to rerun already accepted software cases.
+
+---
+
+## Historical0.1.37 guide
+
 # Try desktop0.1.37 — core waveform candidate
 
 Open `Start Open Play Current Test.command` or `Start Open Play Playback Test 0.1.37.command`. Close another playback-test version first; saved profile/port18775 and all older bundles remain. Sourcece5c124. [Executed native evidence and limits](WAVEFORM_READABILITY_035.md).

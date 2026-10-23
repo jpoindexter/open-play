@@ -49,4 +49,8 @@ This does not establish acoustic quality, every user-heard or paused-incoming po
 
 Next: with Jason present, use the current desktop and two real tracks for the missing manual/EQ/Cue/stop acceptance. Preserve the exact event/transport context and current recording if a pop or lag recurs. Do not broaden into effects, stems, video or a repository-wide refactor.
 
-Desktop build/startup and Trello receipts are appended after their execution.
+## Desktop and Trello readback
+
+Desktop0.1.43 archives source4cc4877245443ddf2198802203eea65e50cb2b61. ASAR SHA256 d02d81c41e0f9a1debc377999c63c31d20c840c0657042c7d36fabf89cb4a2ec; all5package checks pass. Actual native startup retains16tracks/55:45.6,14AX library preview images, stopped decks, controls and Horizontal/Compact. Stopped4deck layout displays all4Play/tempo surfaces (C/D tempo correctly disabled while empty); restored2decks. Astryx deck-count AX value lagged its visual selection after keyboard input; screenshot/deck tree verified4then2. That existing accessible-label issue is recorded, not repaired or confused with playback timing. No normal-profile playback initiated. Prior bundles retained. [Native observation](desktop-0.1.43-playback-observation.json), [package](desktop-0.1.43-playback-package.json), [checks](desktop-0.1.43-playback-safety.json).
+
+CORE-001, CORE-FIX-01, DEK-008 and ANA-001 summaries and parent detail comment applied/read back; historical criteria/model guidance preserved byte-for-byte. All140open cards remain: Core26/Next22/Later85/Blocked4/Approvals2/Evidence1. No new/moved/completed cards. [Receipt](../delivery/CORE_FOUR_DECK_WAVEFORMS_RECONCILIATION_2026-10-23.json). Current launcher targets0.1.43; older bundles and versioned launchers remain.
