@@ -1,12 +1,12 @@
-# Try desktop0.1.49 — active controls and Sync ownership candidate
+# Try desktop 0.1.50 — scoped overview and four-deck reliability candidate
 
-Package5/5; sourcebab8042. **Native49 startup is pending.** Existing48AX reports16saved tracks/14previews/0playing/−10dB; REC input did not respond and coordinate input returned noWindowsAvailable.48was not quit or relaunched; no recording/profile data was changed. [Delivery](desktop-0.1.49-playback-delivery.json), [report](CORE_FOUR_DECK_ACTIVE_ANALYSIS_2026-10-24.md).
+Package checks 5/5; immutable source 3fed6dc. **Native startup is pending.** Existing app/profile/recording untouched; no new native attempt. Earlier48 input could not inspect REC, and those observations are historical. [Delivery](desktop-0.1.50-playback-delivery.json), [report](CORE_LOAD_CONTINUATION_TRACE_2026-10-24.md).
 
-On return inspect/preserve REC in48, quit normally, then open `Start Open Play Current Test.command` or `Start Open Play Playback Test 0.1.49.command`. Both49launchers pass syntax checks but were not executed. Verify49title, saved tracks/previews and stopped decks. Previous apps/profile/port18775 remain.
+Inspect and preserve any REC work in the existing app, quit normally, then open `Start Open Play Current Test.command` or `Start Open Play Playback Test 0.1.50.command`. Both launchers are syntax checked, not executed. Verify title50, saved tracks/previews, stopped decks and no save warning. Previous bundles/profile/port18775 remain.
 
-Analysis refresh retains controls and overview metadata, staged copies yield safely and stale Sync cannot overwrite newer request state. All custom controls/layouts/previews remain.128Node/65analysis,8different-song final software session passes; broad audible pops/stalls and physical/native moving-frame acceptance remain open.
+All custom controls/layouts/library previews and analyzed focus retained. 136 Node checks, eight additional songs / 15 rotations / eight workers / 24 layouts pass software contracts. Measured load continuation 8.8–9.5 → 2.6–3.7 ms. Seven final long frames, worst 140.7 ms, broad audible pops and physical/native moving-frame acceptance remain open.
 
-When listening is possible: Sync OFF/pitch reset, incoming manual tempo and T/Y left or G/H right nudge, one manual transition; LOW/MID/HIGH cut/reset; paused Cue hold/release then Cue+Play latch; pause both and hear silence. Capture an actual pop with REC/event context if it returns. Headphone/master/controller checks need suitable hardware.
+When listening is possible: Sync OFF/pitch reset; incoming manual tempo and T/Y left or G/H right nudge; one manual transition; LOW/MID/HIGH cut/reset; paused Cue hold/release then Cue+Play latch; pause both and hear silence. Capture the actual next pop with REC/event context if it returns. Headphone/master/controller checks need suitable hardware.
 
 ---
 

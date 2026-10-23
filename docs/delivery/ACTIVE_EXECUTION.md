@@ -1,4 +1,12 @@
-# Desktop0.1.27 — core waveform positioning195
+# Current execution — core four-deck reliability, 24 October 2026
+
+Desktop0.1.50/source3fed6dc is packaged and archive/host checks pass5/5. Native startup remains pending; the existing app/profile/recording is untouched. Prior native observations below are historical. Read [current delivery and re-entry](../prototype/desktop-0.1.50-playback-delivery.json), [executed source/browser evidence and remaining stalls](../prototype/CORE_LOAD_CONTINUATION_TRACE_2026-10-24.md), and [live Trello reconciliation](CORE_LOAD_CONTINUATION_RECONCILIATION_2026-10-24.json).
+
+Next unattended unit: measure asynchronous profile-ready overview callback ownership and duration, then residual decoder/structural/unattributed frames. Preserve all controls/layouts/library previews; no speculative DSP changes. Broader audible Sync pops, native moving-frame/held gestures, human manual transition/EQ/Cue/clean stop and hardware routing remain open. Current/versioned50 launchers are syntax checked, not executed; preserve REC before any normal native handoff.
+
+---
+
+# Historical desktop0.1.27 — core waveform positioning195
 
 19October2026: native27/source a20059d/ASAR a4d7135432916a3fb0467d008cd6c97ffb293b4ec63aeeba2e36bff50b60afcb adds detailed-waveform scrub to the corrected RGB rendering. Actual paused real-track drag: Vertical deck1 20.000→20.658; Horizontal deck2 20.000→20.559→20.000, other deck unchanged. The short-drag preparation gap observed in26 is addressed with a final-position request that is cancelable/supersedable. Controlled UI27/27; separate archive/host5/5. Native waveform keyboard audition/release while deck2 plays observed; interrupted/confounded pointer-while-playing inputs are not a pass.
 
