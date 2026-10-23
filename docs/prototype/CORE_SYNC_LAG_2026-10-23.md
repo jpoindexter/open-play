@@ -25,7 +25,7 @@ Five engine regressions cover late playing replacement, normal future start, del
 
 CORE-FIX-01 remains OPEN. Capture the next actual user-heard pop with transport and event context; do not infer that this guard solves paused-incoming, device underrun, all pitch/warp backends or every transient. Four-deck Horizontal moving waveforms remain the heaviest observed mode and can exceed a16.7ms frame budget. Human manual transition, listening/EQ judgment, current hardware/headphone routing, broader resource soak and the unestablished overnight blank-window recurrence remain separate gates. No stems/video expansion, redesign or repository-wide refactor.
 
-Final source/build, measurements, native observation and Trello readback are recorded below when executed.
+Final source/build, measurements, native observation and Trello readback follow below.
 
 ## Executed browser and source checks
 
@@ -45,3 +45,11 @@ Each segment is2.5s on this Mac, with instrumentation and normal background load
 The isolated library retains8metadata tracks,7generated previews in the observed viewport, and2/4Play, EQ, tempo and scrub surfaces. Pixel stability and zoom invalidation passed. Saved persistent session checked unchanged. Full Node suite66/66; pre-fix runs failed both renderer additions and three deadline cases; the on-time and newer-Cue positive controls also pass (fixtures refined where necessary). [Frozen baseline](sync-lag-before-results.json), [final browser results](sync-lag-after-results.json), [independent PCM inspection](sync-lag-pcm-inspection.json).
 
 Private originals, PCM, preliminary/final runs and screenshots remain under ignored `local-evidence/sync-lag-2026-10-23/`. Two preliminary cached runs fetched new source bytes while still executing an old module; their discrepancy was detected with runtime markers. They are not the source-pinned baseline or final evidence. The final harness uses memory-only settings and a separate database because existing saved records were present on candidate test origins; it never clears/replaces those originals.
+
+## Desktop and board receipts
+
+Desktop0.1.42 archives committed source `5f8bd0ba0e48c95e7e63bd2723caa44349babb85` (application change24923ec; subsequent report clarification5f8bd0b). ASAR SHA256 `d3874a23b16195184826c1fc16aeca38d7133b1ea38e6a2ec04d8d1e8c42295c`; inspection5/5. Native existing-profile startup:16tracks/55:45.6,0playing,14visible preview images, two core Play/tempo controls, restored rekordbox Horizontal/Compact and no recovery/save warning. Previous0.1.41 and earlier bundles preserved. No normal-profile playback initiated. [Observation](desktop-0.1.42-playback-observation.json), [package](desktop-0.1.42-playback-package.json), [checks](desktop-0.1.42-playback-safety.json).
+
+Trello CORE-001, CORE-FIX-01, DEK-008 and ANA-001 current summaries plus parent detail comment applied/read back. All140cards retained, no new/moved/completed cards; criteria/history/model guidance preserved. [Reconciliation](../delivery/CORE_SYNC_LAG_RECONCILIATION_2026-10-23.json). Current launcher opens0.1.42.
+
+Re-entry: when Jason is present, use the actual current desktop with two real songs for the outstanding manual/EQ/Cue/stop session. If a pop returns, preserve the existing REC output and exact click/transport context. A deadline-retry notice means the previous audio was retained; retry once after load settles. Keep the broader report open until actual musical/output evidence supports closing it.

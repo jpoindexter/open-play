@@ -1,8 +1,10 @@
 # Sync pop investigation — 20 October 2026
 
-## Current disposition — 21 October 2026
+## Current disposition — 23 October 2026
 
-OPEN on current desktop0.1.37 despite scoped clean user acceptance on additional songs. The older setup/recording-location and HTML-only statements below are historical. Current saved captures and listening evidence: [waveform/native report](WAVEFORM_READABILITY_035.md); current priorities: [core audit](CORE_DJ_AUDIT_2026-10-21.md). Ordinary30ms scheduling is an unconfirmed hypothesis. Capture the next actual pop with transport/event context; no repeated clean-case matrix or speculative audio patch.
+**OPEN for the broader intermittent report.** Current desktop0.1.42/source5f8bd0b contains a reproduced ordinary late-start repair. An80ms post-alignment stall on frozen0.1.41 started a replacement51ms late and produced a captured discontinuity. Current code rejects the late replacement before touching old audio, preserves tempo/paused position ownership, and offers retry. Normal retry and paused armed launch execute with the outgoing master retained. Controlled postmaster PCM,66Node tests, frame measurements and native startup/package evidence: [current report](CORE_SYNC_LAG_2026-10-23.md).
+
+The30ms deadline is now an executed failure mechanism, not merely a source hypothesis. It is not established as the cause of every historical event, especially the report with an incoming deck paused. Keep actual-user-event capture, listening and physical output gates open; no repeated clean-case matrix or unqualified pop-free claim. Redundant waveform/readout work was also reduced without hiding controls/previews;4Horizontal and real-load timing remain open.
 
 ## Historical investigation
 
