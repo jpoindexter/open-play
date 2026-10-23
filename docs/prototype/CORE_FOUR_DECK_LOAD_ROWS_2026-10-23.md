@@ -42,3 +42,9 @@ Private trace/PCM evidence: `local-evidence/four-deck-load-rows-2026-10-23/`. No
 Broader stalls and intermittent Sync pops remain OPEN. Cold analysis completion still invokes full deck rendering, including for tracks not currently on a deck; benchmark that path separately before changing it. Instant Double and structural performance-mode redraws also remain. Explicit sort/schema changes rebuild the table. No blanket no-stall or pop-free claim is made from finite PCM/source-grid telemetry.
 
 Human re-entry remains one Sync-OFF manual transition, EQ judgment, temporary Cue hold/release/latch and clean stop. Independent headphone/master/controller acceptance requires suitable hardware. Native startup is separate from the moving four-deck browser evidence; no new packaged-native long-session claim.
+
+## Packaged delivery and Trello
+
+Candidate **0.1.47/source30f566100d56805fa7cb666d5b793dd944add133**, ASAR `66ac0ccbb1e4f792468bc59c648bb829ff141463d7ec1c00f5a2eb56974bc659`. All5package checks pass, including immutable module-byte matching and sandbox/profile checks. Native47 startup and preview preference round trip **did not execute because the Mac locked**. Last observed normal app remains46,16tracks/14previews and0playing decks; no app quit/relaunch or normal-profile playback after lock. Current/versioned47launchers pass syntax checks but were not executed. [Delivery/re-entry receipt](desktop-0.1.47-playback-delivery.json).
+
+Five existing Trello current-status prefixes and one parent comment read back exactly.140cards and list/completion dispositions unchanged; retained history/criteria/model guidance byte-exact. [Reconciliation](../delivery/CORE_FOUR_DECK_LOAD_ROWS_RECONCILIATION_2026-10-23.json). Next priorities and human/hardware gates stay open.

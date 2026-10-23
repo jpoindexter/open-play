@@ -1,3 +1,17 @@
+# Try desktop0.1.47 — load/library-row candidate
+
+**Packaged, native startup not yet checked: the Mac locked.** Source30f5661; package5/5. Last observed native app remains0.1.46,16tracks/14previews and0playing decks. No new normal-profile playback. [Delivery receipt](desktop-0.1.47-playback-delivery.json), [browser evidence and limits](CORE_FOUR_DECK_LOAD_ROWS_2026-10-23.md).
+
+After unlocking: preserve any REC/work, quit0.1.46, then run `Start Open Play Current Test.command` or `Start Open Play Playback Test 0.1.47.command`. Both launchers target the verified47bundle and pass syntax checks; neither was executed. Check47title, saved library/previews, stopped timers and no recovery/save warning. Older bundles/profile/port18775 remain.
+
+Load preserves unaffected decks/mixer/shared waveform; routine row refresh retains previews. Explicit structural/schema changes still rebuild. Broader stalls/pops remain open. Next automated trace: cold-analysis/Auto-Gain completion.
+
+Listening re-entry when available: Sync OFF/pitch reset, manual incoming tempo and T/Y left or G/H right nudge, one manual transition; audition/reset LOW/MID/HIGH; paused Cue hold/release then Cue+Play latch; pause both and confirm silence. Preserve event/REC context if a pop returns. Physical headphone/master/controller acceptance needs suitable hardware.
+
+---
+
+## Historical0.1.46 guide
+
 # Try desktop0.1.46 — transport/preview performance candidate
 
 Open `Start Open Play Current Test.command` or `Start Open Play Playback Test 0.1.46.command`. Existing profile/port18775 and older bundles remain. Immutable source57bc6c4. [Executed report and limits](CORE_FOUR_DECK_REFRESH_2026-10-23.md).
