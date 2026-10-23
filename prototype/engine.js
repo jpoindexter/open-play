@@ -175,12 +175,15 @@ export class AudioEngine {
       throw new Error("Audio file unavailable. Re-import this local file.");
     const sr = 22050,
       seconds = 48,
+      chunkFrames = 32768,
       b = this.ctx.createBuffer(2, sr * seconds, sr),
       beat = 60 / track.bpm;
     for (let c = 0; c < 2; c++) {
       const a = b.getChannelData(c);
       let seed = track.seed + c * 97;
       for (let i = 0; i < a.length; i++) {
+        // Cold library previews must not synthesize a whole fixture in one UI task.
+        if (i && i % chunkFrames === 0) await new Promise(resolve => setTimeout(resolve, 0));
         const t = i / sr,
           p = t % beat;
         seed = (seed * 1664525 + 1013904223) >>> 0;

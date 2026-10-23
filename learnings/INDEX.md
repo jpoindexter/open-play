@@ -1,5 +1,9 @@
 # Learnings
 
+- [2026-10-23 bound-synchronous-async-preparation](2026-10-23-bound-synchronous-async-preparation.md) — Measure synchronous work before a preparation function returns its promise and yield proven CPU loops without changing their sample sequence.
+
+- [2026-10-23 scope-async-metadata-refresh](2026-10-23-scope-async-metadata-refresh.md) — Resolve current visible owners after asynchronous metadata work and refresh only those owners.
+
 - [2026-10-23 preserve-adapter-owned-nodes](2026-10-23-preserve-adapter-owned-nodes.md) — Before replacing a container, identify controls projected into it by adapters and preserve their original nodes.
 - [2026-10-23 retain-library-preview-cells](2026-10-23-retain-library-preview-cells.md) — Update metadata cells by stable identity while preserving adapter-owned previews and refreshing their accessible names when metadata changes.
 

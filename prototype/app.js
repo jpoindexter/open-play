@@ -1226,7 +1226,8 @@ async function enqueueAnalysis(tracks, replacements = {}) {
       completed++;
       persist();
       renderTracks();
-      renderDecks();
+      for (const d of state.decks.slice(0, state.deckCount))
+        if (d.track === t) renderDecks(d.index);
       updateAnalysisStatus(
         `${t.title}: BPM ${result.bpm ? result.bpm.toFixed(2) : "unknown"}, key ${result.key || "unknown"}`,
       );

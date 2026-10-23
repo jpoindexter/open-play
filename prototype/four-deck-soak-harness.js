@@ -2,6 +2,7 @@ import {sessionKey} from './session-storage.js';
 import {sourceWaveformState,sourceWaveformRasterUsage} from './source-waveform.js';
 import {createBeatgrid} from './beatgrid.js';
 import {installFourDeckTrace} from './four-deck-trace.js';
+import {checkAnalysis} from './four-deck-analysis-check.js';
 const traceMode=new URL(location.href).searchParams.has('trace'),trace=traceMode?installFourDeckTrace():null;
 const $=s=>document.querySelector(s),sleep=ms=>new Promise(r=>setTimeout(r,ms)),assert=(ok,text)=>{if(!ok)throw Error(text);};
 const report={trace:trace?.report,scope:'Unattended real-track four-deck GUI session; physically muted. Declared grid phase and finite/gap telemetry do not establish musical tightness or pop-free acoustics.',events:[],windows:[],audio:[],errors:[]};
@@ -53,9 +54,9 @@ async function play(index){
   (report.transportPreservationChecks??=[]).push({deck:index,nodes:nodes.length,focus:true,busy:false,censor:true});
  }
 }
-async function capture(label){
+async function capture(label,seconds=4){
  const {engine}=app,node=new AudioWorkletNode(engine.ctx,'open-play-fx-tempo-capture-test',{numberOfInputs:1,numberOfOutputs:1,outputChannelCount:[1]});engine.masterOutput.output.connect(node);node.connect(engine.ctx.destination);
- const result=await new Promise((resolve,reject)=>{const timer=setTimeout(()=>reject(Error('Capture timeout')),15000);node.port.onmessage=({data})=>{if(data.type==='done'){clearTimeout(timer);resolve(data);}};node.port.postMessage({type:'capture',id:label,frames:engine.ctx.sampleRate*4});});
+ const result=await new Promise((resolve,reject)=>{const timer=setTimeout(()=>reject(Error('Capture timeout')),Math.max(15000,(seconds+5)*1000));node.port.onmessage=({data})=>{if(data.type==='done'){clearTimeout(timer);resolve(data);}};node.port.postMessage({type:'capture',id:label,frames:engine.ctx.sampleRate*seconds});});
  engine.masterOutput.output.disconnect(node);node.disconnect();node.port.close();const bytes=new Uint8Array(result.data.buffer);let binary='';for(let i=0;i<bytes.length;i+=16384)binary+=String.fromCharCode(...bytes.subarray(i,i+16384));const value=JSON.stringify({label,startFrame:result.startFrame,sampleRate:engine.ctx.sampleRate,pcm:btoa(binary)});$('#soak-capture').textContent=value;const archive=document.createElement('pre');archive.hidden=true;archive.dataset.soakCapture=label;archive.textContent=value;$('#soak').append(archive);event('capture',{label,frames:result.data.length});
 }
 async function boot(){
@@ -67,7 +68,7 @@ async function boot(){
  const parsed=new DOMParser().parseFromString(await(await fetch('workspace-preview.html')).text(),'text/html');for(const a of parsed.body.attributes)document.body.setAttribute(a.name,a.value);for(const link of parsed.querySelectorAll('link[rel=stylesheet]'))document.head.append(link);for(const n of [...parsed.body.children])if(n.tagName!=='SCRIPT')document.body.append(n);
  await import('./layout-preview.js');await until(()=>window.openPlay?.state.decks[1].track&&!window.openPlay.state.analysis,'workspace');app=window.openPlay;
  select('#deck-count','4');select('#preview-density','compact');app.engine.audioMonitor.mutePhysical(true);assert(app.engine.audioMonitor.snapshot().physicalMuted,'Physical mute');
- report.sourceHashes=Object.fromEntries(await Promise.all(['app.js','engine.js','smart-sync.js','source-waveform.js','detail-waveform.js','four-deck-soak-harness.js','four-deck-soak-worklet.js','four-deck-trace.js','library-waveform-preview.js','transport-presentation.js','library-rows.js'].map(async f=>[f,[...new Uint8Array(await crypto.subtle.digest('SHA-256',await(await fetch(f,{cache:'no-store'})).arrayBuffer()))].map(n=>n.toString(16).padStart(2,'0')).join('')])));report.phaseHandoffLoaded=app.engine.setPitch.toString().includes('if(d.playing&&!d.reverse)');
+ report.sourceHashes=Object.fromEntries(await Promise.all(['app.js','engine.js','smart-sync.js','source-waveform.js','detail-waveform.js','four-deck-soak-harness.js','four-deck-soak-worklet.js','four-deck-trace.js','library-waveform-preview.js','transport-presentation.js','library-rows.js','four-deck-analysis-check.js','analysis.js','analysis-worker.js','track-gain.js'].map(async f=>[f,[...new Uint8Array(await crypto.subtle.digest('SHA-256',await(await fetch(f,{cache:'no-store'})).arrayBuffer()))].map(n=>n.toString(16).padStart(2,'0')).join('')])));report.phaseHandoffLoaded=app.engine.setPitch.toString().includes('if(d.playing&&!d.reverse)');
  $('#soak-files').disabled=false;$('#soak-run').textContent='Choose eight tracks first';report.status='Ready for local files';show();
 }
 $('#soak-files').onchange=async e=>{
@@ -85,6 +86,7 @@ $('#soak-run').onclick=async()=>{
   $('#soak-run').disabled=true;const {engine,state}=app;await engine.resume();assert(tracks.length===8,'No real tracks');assert(engine.audioMonitor.snapshot().physicalMuted,'Physical mute');
   await engine.ctx.audioWorklet.addModule(new URL('./four-deck-soak-worklet.js',import.meta.url));await engine.ctx.audioWorklet.addModule(new URL('./fx-tempo-capture-worklet.js',import.meta.url));
   meter=new AudioWorkletNode(engine.ctx,'open-play-soak-meter',{numberOfInputs:1,numberOfOutputs:1,outputChannelCount:[1]});engine.masterOutput.output.connect(meter);meter.connect(engine.ctx.destination);meter.port.onmessage=({data})=>report.audio.push({...data,receivedAt:performance.now(),audioTime:engine.ctx.currentTime});
+  if(new URL(location.href).searchParams.has('coldAnalysis'))state.settings['Use Auto Gain']=true;
   engine.setMasterDB(-12);for(const d of state.decks){engine.mix(d.index,'level',.35);d.position=12;d.repeat=true;}
   await play(0);await sync(0);for(let i=1;i<4;i++){await sync(i);await play(i);}await until(()=>state.decks.every(d=>d.playing),'all four playing');
   trace?.start();if(trace)for(const name of ['buffer','start','setPitch'])await trace.wrap(engine,name);started=performance.now();measuring=true;section='four horizontal raw';report.status='Running';timer=setInterval(checkpoint,30000);event('session-start',{controls:controlCounts()});void capture('initial');
@@ -96,6 +98,7 @@ $('#soak-run').onclick=async()=>{
    const index=(turn+1)%4,d=state.decks[index];if(d.syncRole==='primary'){const next=state.decks[(index+1)%4];click(`[data-action="syncMaster"][data-deck="${next.index}"]`);await sleep(100);}
    click(`[data-action="play"][data-deck="${index}"]`);await until(()=>!d.playing,'pause replacement');const next=tracks[(turn+4)%tracks.length];await load(index,next);d.position=12;await sync(index);await play(index);await sleep(250);
    assert(state.decks.every(d=>d.playing&&!d.processing),'A deck stopped');assert(engine.audioMonitor.snapshot().physicalMuted,'Physical mute lost');const phases=gridPhases();assert(phases.every(p=>p.errorSeconds<.005),'Declared-grid phase exceeded5ms');assert(sourceWaveformRasterUsage().bytes<=32*1024*1024,'Raster budget');assert(Object.values(controlCounts()).every(v=>v>=4),'Core controls or previews missing');event('rotation',{turn,index,track:next.title,phases});if(turn%3===1){await sync((index+1)%4);assert(gridPhases().every(p=>p.errorSeconds<.005),'Playing Sync lost declared-grid phase');}
+   if(new URL(location.href).searchParams.has('coldAnalysis')&&turn<8)await checkAnalysis({app,track:tracks[[4,1,5,3,0,2,6,7][turn]],turn,until,click,capture,event,report,controls:controlCounts});
    if([4,9,14].includes(turn))await capture('rotation-'+turn);
   }
   if(new URL(location.href).searchParams.has('captureSync')){
