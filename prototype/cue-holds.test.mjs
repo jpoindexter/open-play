@@ -55,11 +55,11 @@ test('actual Play stop revokes released Cue ownership before pending seek comple
   const end=source.indexOf('\nfunction deckQuantize',begin);
   assert(begin>=0&&end>begin);
   const playRequests=new WeakMap();
-  const context={cueHolds:holds,pitchPlay:{latch:()=>false},playRequests,
+  const context={cueHolds:holds,pitchPlay:{latch:()=>false},playRequests,state:{},
     cancelPendingPlay:d=>{playRequests.delete(d);d.playQueued=false;},
     slicer:{cancelDeck(){}},stemSlipControls:{cancelDeck(){}},
-    engine:{pause:d=>{d.playing=false;d.processing=false;}},smartSync:{paused(){}},
-    persist(){},renderDecks(){},renderTracks(){}};
+    engine:{pause:d=>{d.playing=false;d.processing=false;}},smartSync:{paused(){},reconcile(){}},
+    persist(){},renderDecks(){},renderTracks(){},refreshTransportControls(){}};
   vm.runInNewContext(source.slice(begin,end)+';globalThis.realPlay=play;',context);
   const press=holds.press('i',d);
   holds.latch(d);await holds.release('i');

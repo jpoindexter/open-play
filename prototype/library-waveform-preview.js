@@ -39,7 +39,8 @@ export function installLibraryWaveforms({state,engine}){
     return r.width>0&&r.bottom>p.top&&r.top<p.bottom;
   }
   function refresh(){
-    scheduled=false;document.body.dataset.libraryWaveforms=String(enabled);
+    scheduled=false;
+    if(document.body.dataset.libraryWaveforms!==String(enabled))document.body.dataset.libraryWaveforms=String(enabled);
     const table=root.querySelector('table');if(!table)return;
     const head=table.querySelector('thead tr');
     if(!head.querySelector('.library-wave-preview')){

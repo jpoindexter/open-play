@@ -16,6 +16,7 @@ import { createSyncMaster } from './sync-master.js';
 import { createSmartSync, hasBeatgrid, beatPosition } from './smart-sync.js';
 import {createBeatgrid} from './beatgrid.js';
 import {currentDeckBPM} from './deck-tempo.js';
+import {refreshTransportControls} from './transport-presentation.js';
 import {createTempoSlider} from './tempo-slider.js';
 import {createLocalAudioLibrary} from "./local-audio-library.js";
 import { createStemPreparation } from "./stems.js";
@@ -740,21 +741,24 @@ async function setDeckKeyShift(index, semitones) {
 async function play(d) {
   if (pitchPlay.latch(d) || cueHolds.latch(d)) {
     syncMaster.started(d);
-    renderDecks();
+    smartSync.reconcile();refreshTransportControls(state);
     return;
   }
+  let structuralRefresh=false;
   const pending=playRequests.get(d);
   if(pending&&pending.track!==d.track)cancelPendingPlay(d);
   if (d.playing || d.processing || playRequests.has(d)) {
     cancelPendingPlay(d);
     cueHolds.cancelDeck(d);
+    const heldSlice=d.slice!==null&&d.slice!==undefined;
     slicer.cancelDeck(d);
+    structuralRefresh=(heldSlice&&d.slice==null)||!!d.stemSlipPending;
     stemSlipControls.cancelDeck(d);
     engine.pause(d);
     smartSync.paused(d);
   }
   else {
-    const request={track:d.track};playRequests.set(d,request);d.playQueued=true;renderDecks();
+    const request={track:d.track};playRequests.set(d,request);d.playQueued=true;smartSync.reconcile();refreshTransportControls(state);
     const current=()=>playRequests.get(d)===request&&d.track===request.track&&state.decks[d.index]===d;
     try {
       const started=await smartSync.start(d,{isCurrent:current});
@@ -779,7 +783,8 @@ async function play(d) {
     }
   }
   persist();
-  renderDecks();
+  if(structuralRefresh)renderDecks();
+  else{smartSync.reconcile();refreshTransportControls(state);}
   renderTracks();
 }
 function deckQuantize(d){return typeof d.quantize==='boolean'?d.quantize:state.quantize;}
@@ -1892,13 +1897,12 @@ engine.onEnd = async (d) => {
 function tick() {
   // Measure before presentation writes invalidate layout.
   drawDetailWave();
+  refreshTransportControls(state);
   for (const d of state.decks.slice(0, state.deckCount)) {
     if (d.keySync && d.keySyncTag !== d.track?.key) {
       d.keySync = false;
       document.querySelector(`[data-action="keySync"][data-deck="${d.index}"]`)?.classList.remove("active");
     }
-    const playButton = document.querySelector(`[data-action="play"][data-deck="${d.index}"]`);
-    if (playButton) {playButton.classList.toggle('active', !!d.playing); const label = d.playing ? '❚❚' : '▶'; if (playButton.textContent !== label) playButton.textContent = label;}
     const syncButton = document.querySelector(`[data-action="sync"][data-deck="${d.index}"]`);
     const beatIndicator = document.querySelector(`[data-beat-position="${d.index}"]`);
     if (beatIndicator) {
@@ -2006,13 +2010,7 @@ window.openPlay = {
   }),
 };
 
-engine.onProcessing = (d) => {
-  const status = document.querySelector(
-    `[data-drop-deck="${d.index}"] .deck-foot small`,
-  );
-  if (status)
-    status.textContent = d.processing ? "PROCESSING PITCH…" : "LOCAL AUDIO";
-};
+engine.onProcessing = () => refreshTransportControls(state);
 
 let syncTempoQueue=null;
 engine.onRateRequest = async (deck,rate) => {

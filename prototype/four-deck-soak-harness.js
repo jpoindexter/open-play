@@ -38,20 +38,32 @@ async function sync(index){
  const d=app.state.decks[index];click(`[data-action="sync"][data-deck="${index}"]`);await until(()=>!d.processing&&!d.playQueued,'Sync deck '+index);await sleep(100);
  assert(d.sync,'Sync refused: '+$('#notice')?.textContent);event('sync',{deck:index,playing:d.playing,state:d.syncState,phases:gridPhases()});
 }
-async function play(index){click(`[data-action="play"][data-deck="${index}"]`);await until(()=>app.state.decks[index].playing&&!app.state.decks[index].processing,'Play deck '+index);}
+async function play(index){
+ const contract=new URL(location.href).searchParams.has('transportContract'),button=$(`[data-action="play"][data-deck="${index}"]`);
+ const nodes=contract?[...document.querySelectorAll('.deck,#detail-wave,.channel-strip,#crossfader')]:[];if(contract)button.focus();
+ button.click();await until(()=>app.state.decks[index].playing&&!app.state.decks[index].processing&&!app.state.decks[index].playQueued,'Play deck '+index);
+ if(contract){
+  assert(nodes.every(node=>node.isConnected),'Play replaced a deck, mixer or waveform node');assert(document.activeElement===button,'Play lost keyboard focus');
+  assert(button.getAttribute('aria-busy')==='false'&&button.classList.contains('active'),'Play busy/active presentation stale');
+  assert(!$(`[data-action="censor"][data-deck="${index}"]`).disabled,'Playing deck lost Censor');
+  (report.transportPreservationChecks??=[]).push({deck:index,nodes:nodes.length,focus:true,busy:false,censor:true});
+ }
+}
 async function capture(label){
  const {engine}=app,node=new AudioWorkletNode(engine.ctx,'open-play-fx-tempo-capture-test',{numberOfInputs:1,numberOfOutputs:1,outputChannelCount:[1]});engine.masterOutput.output.connect(node);node.connect(engine.ctx.destination);
  const result=await new Promise((resolve,reject)=>{const timer=setTimeout(()=>reject(Error('Capture timeout')),15000);node.port.onmessage=({data})=>{if(data.type==='done'){clearTimeout(timer);resolve(data);}};node.port.postMessage({type:'capture',id:label,frames:engine.ctx.sampleRate*4});});
  engine.masterOutput.output.disconnect(node);node.disconnect();node.port.close();const bytes=new Uint8Array(result.data.buffer);let binary='';for(let i=0;i<bytes.length;i+=16384)binary+=String.fromCharCode(...bytes.subarray(i,i+16384));const value=JSON.stringify({label,startFrame:result.startFrame,sampleRate:engine.ctx.sampleRate,pcm:btoa(binary)});$('#soak-capture').textContent=value;const archive=document.createElement('pre');archive.hidden=true;archive.dataset.soakCapture=label;archive.textContent=value;$('#soak').append(archive);event('capture',{label,frames:result.data.length});
 }
 async function boot(){
+ const run=new URL(location.href).searchParams.get('run')||'';assert(/^[a-z0-9-]{0,60}$/.test(run),'Invalid owned run label');
+ if(run&&globalThis.caches){const open=caches.open.bind(caches);caches.open=name=>open('openplay-four-deck-'+run+'-'+name);}
  assert(location.port==='18844','Dedicated port18844 required');const original=localStorage,before=original.getItem(sessionKey),values=new Map(),open=indexedDB.open.bind(indexedDB);
- Object.defineProperty(window,'localStorage',{value:{getItem:k=>values.get(k)??null,setItem:(k,v)=>values.set(k,String(v)),removeItem:k=>values.delete(k)}});indexedDB.open=(name,version)=>open('openplay-four-deck-soak-owned-'+name,version);report.sessionUnchanged=()=>original.getItem(sessionKey)===before;
+ Object.defineProperty(window,'localStorage',{value:{getItem:k=>values.get(k)??null,setItem:(k,v)=>values.set(k,String(v)),removeItem:k=>values.delete(k)}});indexedDB.open=(name,version)=>open('openplay-four-deck-soak-owned-'+run+'-'+name,version);report.sessionUnchanged=()=>original.getItem(sessionKey)===before;
  localStorage.setItem(sessionKey,JSON.stringify({settings:{'Use Auto Gain':false,'Analyze Stems':false,'Workspace Layout':'rekordbox','Sync Mode':'Smart Sync'}}));
  const parsed=new DOMParser().parseFromString(await(await fetch('workspace-preview.html')).text(),'text/html');for(const a of parsed.body.attributes)document.body.setAttribute(a.name,a.value);for(const link of parsed.querySelectorAll('link[rel=stylesheet]'))document.head.append(link);for(const n of [...parsed.body.children])if(n.tagName!=='SCRIPT')document.body.append(n);
  await import('./layout-preview.js');await until(()=>window.openPlay?.state.decks[1].track&&!window.openPlay.state.analysis,'workspace');app=window.openPlay;
  select('#deck-count','4');select('#preview-density','compact');app.engine.audioMonitor.mutePhysical(true);assert(app.engine.audioMonitor.snapshot().physicalMuted,'Physical mute');
- report.sourceHashes=Object.fromEntries(await Promise.all(['app.js','engine.js','smart-sync.js','source-waveform.js','detail-waveform.js','four-deck-soak-harness.js','four-deck-soak-worklet.js','four-deck-trace.js','library-waveform-preview.js'].map(async f=>[f,[...new Uint8Array(await crypto.subtle.digest('SHA-256',await(await fetch(f,{cache:'no-store'})).arrayBuffer()))].map(n=>n.toString(16).padStart(2,'0')).join('')])));report.phaseHandoffLoaded=app.engine.setPitch.toString().includes('if(d.playing&&!d.reverse)');
+ report.sourceHashes=Object.fromEntries(await Promise.all(['app.js','engine.js','smart-sync.js','source-waveform.js','detail-waveform.js','four-deck-soak-harness.js','four-deck-soak-worklet.js','four-deck-trace.js','library-waveform-preview.js','transport-presentation.js'].map(async f=>[f,[...new Uint8Array(await crypto.subtle.digest('SHA-256',await(await fetch(f,{cache:'no-store'})).arrayBuffer()))].map(n=>n.toString(16).padStart(2,'0')).join('')])));report.phaseHandoffLoaded=app.engine.setPitch.toString().includes('if(d.playing&&!d.reverse)');
  $('#soak-files').disabled=false;$('#soak-run').textContent='Choose eight tracks first';report.status='Ready for local files';show();
 }
 $('#soak-files').onchange=async e=>{
@@ -81,6 +93,20 @@ $('#soak-run').onclick=async()=>{
    click(`[data-action="play"][data-deck="${index}"]`);await until(()=>!d.playing,'pause replacement');const next=tracks[(turn+4)%tracks.length];await load(index,next);d.position=12;await sync(index);await play(index);await sleep(250);
    assert(state.decks.every(d=>d.playing&&!d.processing),'A deck stopped');assert(engine.audioMonitor.snapshot().physicalMuted,'Physical mute lost');const phases=gridPhases();assert(phases.every(p=>p.errorSeconds<.005),'Declared-grid phase exceeded5ms');assert(sourceWaveformRasterUsage().bytes<=32*1024*1024,'Raster budget');assert(Object.values(controlCounts()).every(v=>v>=4),'Core controls or previews missing');event('rotation',{turn,index,track:next.title,phases});if(turn%3===1){await sync((index+1)%4);assert(gridPhases().every(p=>p.errorSeconds<.005),'Playing Sync lost declared-grid phase');}
    if([4,9,14].includes(turn))await capture('rotation-'+turn);
+  }
+  if(new URL(location.href).searchParams.has('captureSync')){
+   const incoming=state.decks.filter(d=>d.syncRole!=='primary').slice(0,2);
+   for(const [i,d]of incoming.entries()){
+    const mode=i?'playing':'paused',primary=state.decks.find(d=>d.syncRole==='primary');
+    if(!i){click(`[data-action="play"][data-deck="${d.index}"]`);await until(()=>!d.playing,'pause Sync capture incoming');}
+    const voice=engine.voices.get(primary.index),rate=primary.rate;
+    section='four '+mode+' incoming Sync capture';event('sync-capture-before',{mode,deck:d.index,track:d.track.title,position:engine.position(d),playing:d.playing,rate:d.rate,master:primary.index,masterTrack:primary.track.title,masterRate:rate});
+    const recording=capture('sync-'+mode);await sleep(200);await sync(d.index);
+    assert(primary.playing&&primary.rate===rate&&engine.voices.get(primary.index)===voice,'Sync changed outgoing master');
+    if(!i)await play(d.index);await recording;
+    event('sync-capture-after',{mode,deck:d.index,track:d.track.title,position:engine.position(d),playing:d.playing,rate:d.rate,phases:gridPhases()});
+    assert(gridPhases().every(p=>p.errorSeconds<.005),'Captured Sync lost declared-grid phase');
+   }
   }
   checkpoint();assert(report.audio.every(x=>x.nonfinite===0),'Non-finite master samples');assert(!report.errors.length,'Unhandled errors during session');report.complete=true;report.status='Complete';
  }catch(error){report.errors.push(error.stack);report.status='Failed';}

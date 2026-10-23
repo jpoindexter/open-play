@@ -1,6 +1,6 @@
 // Test-only event-aligned browser trace. Async elapsed time is not CPU duration.
 export function installFourDeckTrace(){
- const report={supported:PerformanceObserver.supportedEntryTypes,frames:[],geometry:[],geometryTotals:{},timers:[],longFrames:[],tasks:[],operations:[],visibility:[],dropped:0};
+ const report={supported:PerformanceObserver.supportedEntryTypes,frames:[],geometry:[],geometryTotals:{},previewAttributes:{total:0,redundant:0},deckRebuilds:0,timers:[],longFrames:[],tasks:[],operations:[],visibility:[],dropped:0};
  let active=false,lastFrame;
  const retain=(array,value)=>{if(array.length<10000)array.push(value);else report.dropped++;};
  const note=(type,data={})=>{if(active){performance.mark('openplay:'+type,{detail:data});retain(report.operations,{type,at:performance.now(),...data});}};
@@ -8,6 +8,9 @@ export function installFourDeckTrace(){
   if(!active)return;
   for(const e of list.getEntries())retain(type==='longtask'?report.tasks:report.longFrames,e.toJSON());
  }).observe({type});
+ const attributes=new MutationObserver(entries=>{if(active)for(const entry of entries){report.previewAttributes.total++;if(entry.oldValue===document.body.dataset.libraryWaveforms)report.previewAttributes.redundant++;}});
+ attributes.observe(document.body,{attributes:true,attributeOldValue:true,attributeFilter:['data-library-waveforms']});
+ const decks=new MutationObserver(entries=>{if(active)report.deckRebuilds+=entries.filter(e=>e.removedNodes.length).length;});
  const rect=Element.prototype.getBoundingClientRect;
  Element.prototype.getBoundingClientRect=function(...args){
   const start=performance.now(),result=rect.apply(this,args),duration=performance.now()-start;
@@ -24,7 +27,7 @@ export function installFourDeckTrace(){
   }},delay,...args);
  };
  document.addEventListener('visibilitychange',()=>{if(active)report.visibility.push({at:performance.now(),state:document.visibilityState});});
- return {report,note,start(){active=true;note('trace-start');},stop(){note('trace-stop');active=false;window.setTimeout=timeout;Element.prototype.getBoundingClientRect=rect;},
+ return {report,note,start(){active=true;decks.observe(document.querySelector('#decks'),{childList:true});note('trace-start');},stop(){note('trace-stop');active=false;attributes.disconnect();decks.disconnect();window.setTimeout=timeout;Element.prototype.getBoundingClientRect=rect;},
   frame(name,at,start,end){if(!active||name!=='tick')return;if(lastFrame&&(at-lastFrame>20||end-start>12))retain(report.frames,{at,start,duration:end-start,interval:at-lastFrame});lastFrame=at;},
   async wrap(object,name){const original=object[name];object[name]=async function(...args){const at=performance.now();note(name+'-start',{deck:args[0]?.index});try{return await original.apply(this,args);}finally{note(name+'-end',{elapsed:performance.now()-at});}};}
  };

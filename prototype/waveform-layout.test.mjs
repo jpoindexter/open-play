@@ -24,6 +24,6 @@ test('detail canvas preparation still measures its own geometry at the current D
 test('detailed waveform geometry is read before transport and meter presentation writes',()=>{
  const order=[],element={classList:{toggle(){}},setAttribute(){order.push('write');},get textContent(){return '—';},set textContent(value){order.push('write');},set value(value){order.push('write');}};
  const tick=source.slice(source.indexOf('function tick() {'),source.indexOf('\nrenderCrates();',source.indexOf('function tick() {')));
- const scope={state:{decks:[],deckCount:0},engine:{masterSnapshot:()=>({displayDB:-120}),updateFXBPMs(){}},$:()=>element,drawDetailWave(){order.push('read');},drawWaves(){},flipAutomation:{tick(){}},panels:{tick(){}},stemSlipControls:{tick(){}},deckScratchControls:{tick(){}},requestAnimationFrame(){}};
+ const scope={state:{decks:[],deckCount:0},engine:{masterSnapshot:()=>({displayDB:-120}),updateFXBPMs(){}},$:()=>element,drawDetailWave(){order.push('read');},refreshTransportControls(){order.push('write');},drawWaves(){},flipAutomation:{tick(){}},panels:{tick(){}},stemSlipControls:{tick(){}},deckScratchControls:{tick(){}},requestAnimationFrame(){}};
  vm.createContext(scope);vm.runInContext(tick,scope);scope.tick();assert.equal(order[0],'read','Presentation writes must not force layout before the detailed waveform measurement');
 });
