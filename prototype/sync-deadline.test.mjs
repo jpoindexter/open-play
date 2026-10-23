@@ -45,3 +45,16 @@ test('a late live keylock acknowledgment cannot replace still-playing old audio'
  await assert.rejects(engine.synchronize(deck,{rate:1.05,priorClock:t=>3+t-1,positionAt:()=>4}),/missed its lead/);
  assert.equal(engine.voices.get(0),old);assert.equal(deck.rate,1);assert.equal(deck.playing,true);assert.deepEqual(f.retired,[]);assert.equal(disposed,true);
 });
+test('enabling keylock on a playing ordinary deck preserves its advancing source clock',async()=>{
+ const f=fixture(),{engine,deck,old}=f;deck.keylock=false;deck.keyShift=0;const clock=engine.voiceClock(deck,old);let retained;
+ engine.createForwardKeylock=async()=>{retained=deck.playing&&engine.voices.get(0)===old;engine.ctx.currentTime+=.2;return{snapshot:()=>({groups:[{latency:.02}]}),outputs:[],async start({position,when}){return{position,when,playing:true};},async dispose(){}};};
+ await engine.setPitch(deck,{keylock:true});
+ assert.equal(retained,true,'Old audio must keep advancing during keylock preparation');
+ assert(Math.abs(deck.anchorPosition-clock(deck.anchorTime))<1e-9,'The new owner must start at the old clock at its future boundary');
+ assert.equal(deck.keylock,true);assert.equal(deck.playing,true);assert.deepEqual(f.retired,[old]);
+});
+test('enabling keylock on a paused deck does not queue playback',async()=>{
+ const {engine,deck}=fixture();engine.voices.delete(0);deck.playing=false;deck.keylock=false;deck.keyShift=0;
+ engine.createForwardKeylock=async()=>{throw Error('A paused keylock change must not prepare playback');};
+ await engine.setPitch(deck,{keylock:true});assert.equal(deck.playing,false);assert.equal(deck.position,3);assert.equal(deck.keylock,true);assert.equal(engine.voices.size,0);
+});

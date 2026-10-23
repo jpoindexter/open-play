@@ -3,8 +3,10 @@ import {sourceWaveformState,paintSourceDetail} from './source-waveform.js';
 import {paintDetailWaveforms} from './detail-waveform.js';
 const $=s=>document.querySelector(s),sleep=ms=>new Promise(r=>setTimeout(r,ms)),assert=(ok,text)=>{if(!ok)throw Error(text);};
 const report={frames:[],errors:[]};
+const pitchMode=new URL(location.href).searchParams.has('pitch');
 const keylockMode=new URL(location.href).searchParams.has('keylock');report.testMode=keylockMode?'late keylock acknowledgment':'four-deck waveform and ordinary deadline';
 report.scope=keylockMode?'Actual GUI keylocked Sync under an injected post-acknowledgment stall extending80ms past the scheduled boundary. Owned physically muted tones; no human/physical/pop identity claim.':'Actual workspace rAF callbacks and ordinary GUI Sync under80ms post-alignment stall. Owned physically muted tones; no human/physical/pop identity claim.';
+if(pitchMode){report.testMode='playing keylock transition';report.scope='Actual GUI keylock enable on a playing ordinary deck, real adapter, owned physically muted tones. No acoustic/full-core acceptance.';}
 let app,section=null,callbackTimes={},rectangles=0,detailPaints=0,readoutMutations=0;
 const raf=window.requestAnimationFrame.bind(window),fill=CanvasRenderingContext2D.prototype.fillRect,clear=CanvasRenderingContext2D.prototype.clearRect;
 window.requestAnimationFrame=callback=>raf(at=>{const start=performance.now();try{callback(at);}finally{if(section)(callbackTimes[callback.name||'anonymous']??=[]).push(performance.now()-start);}});
@@ -42,7 +44,7 @@ $('#probe-run').onclick=async()=>{
   await Promise.all(state.decks.slice(0,2).map(d=>sourceWaveformState(engine.buffers.get(d.track.id)).ready));await sleep(500);
   report.detailCacheLoaded=paintDetailWaveforms.toString().includes('lastFrames');
   report.rasterLoaded=paintSourceDetail.toString().includes('paintRaster');
-  if(!keylockMode){
+  if(!keylockMode&&!pitchMode){
   await measure('2-deck compact horizontal stopped');
   for(const d of state.decks.slice(0,2))click(`[data-action="play"][data-deck="${d.index}"]`);
   await until(()=>state.decks.slice(0,2).every(d=>d.playing&&!d.processing),'both playing');await measure('2-deck compact horizontal playing');
@@ -72,8 +74,16 @@ $('#probe-run').onclick=async()=>{
   engine.setCross(1);click('[data-action="play"][data-deck="0"]');await until(()=>left.playing&&!left.processing,'leader');click('[data-action="play"][data-deck="1"]');await until(()=>right.playing&&!right.processing,'follower');await sleep(300);
   await engine.ctx.audioWorklet.addModule(new URL('./fx-tempo-capture-worklet.js',import.meta.url));
   witness=new AudioWorkletNode(engine.ctx,'open-play-fx-tempo-capture-test',{numberOfInputs:1,numberOfOutputs:1,outputChannelCount:[1]});engine.masterOutput.output.connect(witness);witness.connect(engine.ctx.destination);
-  const captured=new Promise(resolve=>witness.port.onmessage=({data})=>{if(data.type==='done')resolve(data);});witness.port.postMessage({type:'capture',id:1,frames:engine.ctx.sampleRate*(keylockMode?3:2)});await sleep(250);
+  const captured=new Promise(resolve=>witness.port.onmessage=({data})=>{if(data.type==='done')resolve(data);});witness.port.postMessage({type:'capture',id:1,frames:engine.ctx.sampleRate*(keylockMode||pitchMode?3:2)});await sleep(250);
   const voice=engine.voices.get(1),leader=engine.voices.get(0),rate=right.rate;let injected=false;
+  if(pitchMode){
+   const oldClock=engine.voiceClock(right,voice);factory=engine.createForwardKeylock.bind(engine);engine.createForwardKeylock=async options=>{report.oldAudioDuringPreparation=right.playing&&engine.voices.get(1)===voice;return factory(options);};
+   report.pressAt=engine.ctx.currentTime;click('[data-action="keylock"][data-deck="1"]');await until(()=>right.keylock&&!right.processing,'playing keylock transition');await sleep(250);
+   const at=engine.ctx.currentTime;report.pitch={phaseErrorSeconds:Math.abs(engine.voiceClock(right,engine.voices.get(1))(at)-oldClock(at)),leaderRetained:engine.voices.get(0)===leader,playing:right.playing,anchorTime:right.anchorTime,anchorPosition:right.anchorPosition};
+   const pcm=await captured,a=pcm.data;let zeros=0,longestZero=0,peak=0,maxCurvature=0;for(let n=2;n<a.length;n++){zeros=a[n]===0?zeros+1:0;longestZero=Math.max(longestZero,zeros);peak=Math.max(peak,Math.abs(a[n]));maxCurvature=Math.max(maxCurvature,Math.abs(a[n]-2*a[n-1]+a[n-2]));}
+   report.pcm={frames:a.length,sampleRate:engine.ctx.sampleRate,startFrame:pcm.startFrame,longestZero,peak,maxCurvature};const bytes=new Uint8Array(a.buffer);let binary='';for(let i=0;i<bytes.length;i+=16384)binary+=String.fromCharCode(...bytes.subarray(i,i+16384));$('#probe-pcm').textContent=btoa(binary);
+   report.deadlinePassed=report.oldAudioDuringPreparation&&report.pitch.phaseErrorSeconds<1/engine.ctx.sampleRate&&report.pitch.leaderRetained&&right.playing&&longestZero<engine.ctx.sampleRate*.001;assert(report.deadlinePassed,'Playing keylock must preserve the old advancing clock and avoid a silent preparation gap');
+  }else{
   report.startGuardLoaded=engine.start.toString().includes('requireLead');report.starts=[];
   create=engine.ctx.createBufferSource.bind(engine.ctx);engine.ctx.createBufferSource=()=>{const source=create(),start=source.start.bind(source);source.start=(when,offset)=>{report.starts.push({when,actual:engine.ctx.currentTime,offset});return start(when,offset);};return source;};
   timeline=engine.onGridTimeline;engine.onGridTimeline=(d,options)=>{const value=timeline?.(d,options);if(d===right&&!injected&&options.when>engine.ctx.currentTime+.02){injected=true;const before=engine.ctx.currentTime,end=performance.now()+80;while(performance.now()<end){}report.stall={before,after:engine.ctx.currentTime,when:options.when};}return value;};
@@ -91,6 +101,7 @@ $('#probe-run').onclick=async()=>{
   report.retry={leaderRetained:engine.voices.get(0)===leader,rate:right.rate,phaseErrorBeats:Math.min(Math.abs(ownBeat-primaryBeat(when)),4-Math.abs(ownBeat-primaryBeat(when)))};assert(report.retry.leaderRetained&&Math.abs(right.rate-121/115.5)<1e-9&&report.retry.phaseErrorBeats<.001,'On-time Sync retry failed');
   click('[data-action="play"][data-deck="1"]');await until(()=>!right.playing,'pause follower');click('[data-action="sync"][data-deck="1"]');await until(()=>right.syncState==='armed','paused arming');click('[data-action="play"][data-deck="1"]');await until(()=>right.playing&&!right.processing,'armed launch');
   report.armedLaunch={playing:right.playing,leaderRetained:engine.voices.get(0)===leader,syncState:right.syncState};assert(report.armedLaunch.leaderRetained&&right.syncState==='beat','Armed launch failed');
+  }
  }catch(error){report.errors.push(error.stack);}
  finally{
   if(create)engine.ctx.createBufferSource=create;if(timeline)engine.onGridTimeline=timeline;if(factory)engine.createForwardKeylock=factory;engine.silence();witness?.disconnect();if(witness)try{engine.masterOutput.output.disconnect(witness);}catch{}
