@@ -37,8 +37,14 @@ Paused-incoming and playing-incoming Sync each retained the outgoing master voic
 
 [Comparison and loaded sources](four-deck-refresh-results.json) · [Independent PCM/original inspection](four-deck-refresh-pcm-inspection.json). Raw receipts, fourteen complete PCM windows and the source snapshots stay in ignored `local-evidence/four-deck-refresh-2026-10-23/`. The two focused RED/GREEN suites are retained there and under `local-evidence/four-deck-preview-refresh-2026-10-23/`. No original music is committed.
 
-The visible Astryx Columns proxy did not open its dialog through IAB automation; native preference-toggle acceptance is pending separately. The preview generation/viewport assertions above executed; they must not be reported as a full dialog/UI pass.
+The IAB Astryx Columns proxy did not open its dialog through that automation route. The actual native Columns dialog executed in0.1.45 and0.1.46: preview checkbox values1→0→1, close dialog,14library preview images restored. Thus the native preference round trip is executed separately from the inconclusive browser proxy activation; no proxy repair was invented.
 
 ## Limits and next acceptance
 
 No new listening or physical headphone/master/controller acceptance is claimed. Declared-grid agreement is not proof of kick alignment. Finite/nonzero master output cannot rule out all clicks, device underruns or musical artifacts. Keep broader Sync-pop, waveform-lag and human manual/EQ/Cue acceptance open; preserve actual occurrence recording/event context.
+
+## Delivered desktop and board
+
+Desktop0.1.46/source57bc6c4, ASARbaf4b2aefd7baff3386984d5f448d14f782b1f22efc044973e8344c7e765b7bf. Package5/5; actual current launcher opens16saved tracks,14previews, Horizontal/Compact and2stopped decks with no recovery/save warning. No normal-profile playback. [Native observation](desktop-0.1.46-playback-observation.json). The moving four-deck sessions were browser runs; this is not a new native long-session performance claim.
+
+Five existing Trello descriptions/comment read back exactly;140cards unchanged and criteria/history/model recommendations retained. [Reconciliation receipt](../delivery/CORE_FOUR_DECK_REFRESH_RECONCILIATION_2026-10-23.json). Broad lag/pops/human/hardware cards remain open.

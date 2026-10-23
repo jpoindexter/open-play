@@ -1,3 +1,17 @@
+# Try desktop0.1.46 — transport/preview performance candidate
+
+Open `Start Open Play Current Test.command` or `Start Open Play Playback Test 0.1.46.command`. Existing profile/port18775 and older bundles remain. Immutable source57bc6c4. [Executed report and limits](CORE_FOUR_DECK_REFRESH_2026-10-23.md).
+
+Observed native startup/current launcher:16saved tracks,14AX previews, two stopped demo decks, Horizontal/Compact, Master−10dB, no recovery/save warning. Native preview checkbox off/on restores previews. Select saved real-song rows and deck Load or Shift+Left/Right. Diagnostic8-track sessions use separate state and thumbnail stores; no normal-profile music was played.
+
+Ordinary Play/Pause/queued start/latch preserves control/canvas nodes and focus. Actual load and temporary-state restoration still render; remaining stalls/pops are OPEN. No audio clock/analyzer changes. Existing late-start guard may request a retry while retaining prior audio; let loading settle.
+
+When ready: Sync OFF/pitch reset, incoming manual tempo and T/Y left or G/H right nudge, one manual transition; audition/reset LOW/MID/HIGH; paused Cue hold/release then Cue+Play latch; pause both and confirm silence. Preserve REC/event context if a pop returns. Physical headphone/master/controller acceptance needs suitable hardware. Do not rerun already accepted checks.
+
+---
+
+## Historical0.1.45 guide
+
 # Try desktop0.1.45 — core waveform/Sync trace candidate
 
 Open `Start Open Play Current Test.command` or `Start Open Play Playback Test 0.1.45.command`. Existing profile/port18775 and older bundles remain. Immutable source d82617c. [Executed evidence and remaining limits](CORE_FOUR_DECK_TRACE_2026-10-23.md).
