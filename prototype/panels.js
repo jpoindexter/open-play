@@ -2051,9 +2051,9 @@ export function createPanels(a) {
         };
         $("#analysis-stems").onclick = stems;
         $("#analysis-clear").onclick = () => {
-          engine.buffers.clear();
+          engine.pruneDecodedBuffers({allInactive:true});
           notify(
-            "Decoded waveform cache cleared; measurements and playing sources are preserved.",
+            "Inactive decoded audio cleared; loaded decks, measurements and previews are preserved.",
           );
         };
         if (analysisRefresh)

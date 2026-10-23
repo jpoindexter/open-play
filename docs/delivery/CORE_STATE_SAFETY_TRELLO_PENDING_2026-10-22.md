@@ -1,3 +1,9 @@
+# Resolved — 23 October 2026
+
+The three pending card summaries were applied and read back, preserving history/model guidance and keeping broad cards open. Receipt: [CORE_STATE_SAFETY_RECONCILIATION_2026-10-23.json](CORE_STATE_SAFETY_RECONCILIATION_2026-10-23.json). The failed22October LIB-011 comment was absent; no duplicate was added. Original pending record retained below.
+
+---
+
 # Pending Trello reconciliation — core safety, 22 October 2026
 
 Status: NOT VERIFIED ON BOARD. Repeated connector Transport closed errors; logged-in browser reports private-board access denied. One LIB-011 comment may have reached Trello before the error. Read latest comments before any retry; avoid duplicates. Do not request access, switch accounts, delete history or mark broad cards complete automatically.

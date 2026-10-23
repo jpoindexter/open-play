@@ -1,0 +1,43 @@
+{
+  "date": "2026-10-23",
+  "status": "Applied and read back",
+  "totalOpenCards": 140,
+  "listCounts": {
+    "Core DJ — Now": 26,
+    "Next — quick-win candidates": 22,
+    "Later — full parity & advanced features": 85,
+    "Approvals & release boundaries": 2,
+    "Verified evidence": 1,
+    "Blocked / unknown": 4
+  },
+  "cards": [
+    {
+      "id": "ari:cloud:trello::card/workspace/6a8f03e71844a6c1103692dc/6ad2026ce97a013cd37491e8",
+      "name": "LIB-011 — Metadata backup and migrations",
+      "url": "https://trello.com/c/0kALgacl/11-lib-011-metadata-backup-and-migrations",
+      "currentSummary": "## Current core status — 23 October 2026\nBackup restore now validates the complete temporary candidate before changing live/saved metadata. Invalid cues, settings, colors, loops and warp grids are rejected; color attributes are escaped. Legacy numeric Setup values and unanalyzed null grids remain compatible. Executed: 50/50 Node tests, six actual-workspace browser groups including invalid no-mutation, valid restore/reload and quota/recovery. Desktop 0.1.39/source91bfe92 restored the existing 16-track library without warning on22October. Full migrations, interrupted-write rollback and media recovery remain OPEN.\nEvidence: https://github.com/jpoindexter/open-play/blob/main/docs/prototype/CORE_STATE_SAFETY_2026-10-22.md\nPrior audit: https://github.com/jpoindexter/open-play/blob/main/docs/prototype/CORE_DJ_AUDIT_2026-10-21.md",
+      "historyAndModelsPreserved": true,
+      "complete": false,
+      "closed": false
+    },
+    {
+      "id": "ari:cloud:trello::card/workspace/6a8f03e71844a6c1103692dc/6ad204ace412e16bdf25c17f",
+      "name": "SYS-002 — Session persistence and recovery",
+      "url": "https://trello.com/c/jrimQjEN/68-sys-002-session-persistence-and-recovery",
+      "currentSummary": "## Current core status — 23 October 2026\nSaved-state validation and persistent save/recovery feedback implemented. Rejected originals remain untouched; autosave pauses; explicit recovery copies the original before replacing the main record. Save failure retains export/retry. Injected quota failure/retry, invalid boot and recovery/reload executed in isolated browser. Desktop0.1.39/source91bfe92 existing16-track startup observed22October. Analysis payload deduplication, exhaustive legacy/crash recovery and broader feature acceptance remain OPEN. Preserve analysis grid.beats reader.\nEvidence: https://github.com/jpoindexter/open-play/blob/main/docs/prototype/CORE_STATE_SAFETY_2026-10-22.md\nPrior audit: https://github.com/jpoindexter/open-play/blob/main/docs/prototype/CORE_DJ_AUDIT_2026-10-21.md",
+      "historyAndModelsPreserved": true,
+      "complete": false,
+      "closed": false
+    },
+    {
+      "id": "ari:cloud:trello::card/workspace/6a8f03e71844a6c1103692dc/6ad5ecd7fef5ea31f0ce38c0",
+      "name": "CORE-001 — Load two local MP3s, cue, mix and beatmatch",
+      "url": "https://trello.com/c/LGGdtSa3/114-core-001-load-two-local-mp3s-cue-mix-and-beatmatch",
+      "currentSummary": "## Current core status — 23 October 2026\n0.1.39/source91bfe92: restore/boot/save safety verified. Manual transition/EQ/Cue/stop, pop/lag and hardware OPEN. Jason unavailable today; AUD-006 next. Controls/previews retained. See latest comment for scoped evidence.",
+      "historyAndModelsPreserved": true,
+      "complete": false,
+      "closed": false,
+      "currentCommentVerified": true
+    }
+  ]
+}

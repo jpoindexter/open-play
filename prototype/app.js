@@ -155,6 +155,7 @@ const state = {
   sessionSaved: false,
 };
 
+engine.loadedBufferTracks=()=>state.decks.map(deck=>deck.track);
 const localAudio=createLocalAudioLibrary();
 state.localAudio={error:null,restoreError:null,saveError:null,restored:0};
 function localAudioWarning(){state.localAudio.error=state.localAudio.restoreError||state.localAudio.saveError;return state.localAudio.error;}
@@ -835,6 +836,7 @@ async function deckAction(action, index, el, event = {}) {
     if (state.decks[index] !== d || deckLoadRequests.get(d) !== request) return;
     d.previous = d.track ? { id: d.track.id, position: d.position } : null;
     d.track = null;
+    engine.pruneDecodedBuffers();
     smartSync.reconcile();
     d.position = 0;
     return renderDecks();

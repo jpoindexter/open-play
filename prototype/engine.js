@@ -23,11 +23,15 @@ import {normalizeMixerSettings,crossfaderGain,upfaderGain,eqBands,normalizeEQBoo
 import {createMasterOutput} from './master-output.js';
 import {normalizedMasterDB} from './master-output-kernel.js';
 import {trackGainDB,boundedTrackGain} from './track-gain.js';
+import {decodedBufferUsage,pruneDecodedBuffers} from './decoded-cache.js';
 export class AudioEngine {
-  constructor() {
+  constructor({maxDecodedBytes=256*1024*1024}={}) {
     this.ctx = null;
     this.voices = new Map();
     this.nodes = [];
+    if(!Number.isFinite(maxDecodedBytes)||maxDecodedBytes<0)throw new RangeError('Invalid decoded-audio cache budget.');
+    this.maxDecodedBytes=maxDecodedBytes;
+    this.bufferLoads=new Map();
     this.buffers = new Map();
     this.recording = false;
     this.chunks = [];
@@ -146,9 +150,19 @@ export class AudioEngine {
     await this.effectsReady;
     await this.masterOutput.ready;
   }
+  decodedBufferUsage(){return decodedBufferUsage(this);}
+  pruneDecodedBuffers(options){return pruneDecodedBuffers(this,options);}
   async buffer(track) {
     this.init();
-    if (this.buffers.has(track.id)) return this.buffers.get(track.id);
+    if(this.buffers.has(track.id)){
+      const buffer=this.buffers.get(track.id);this.buffers.delete(track.id);this.buffers.set(track.id,buffer);track.duration=buffer.duration;return buffer;
+    }
+    if(this.bufferLoads.has(track.id)){const buffer=await this.bufferLoads.get(track.id);track.duration=buffer.duration;return buffer;}
+    const pending=this.decodeBuffer(track);this.bufferLoads.set(track.id,pending);
+    try{return await pending;}
+    finally{this.bufferLoads.delete(track.id);this.pruneDecodedBuffers();}
+  }
+  async decodeBuffer(track) {
     if (track.file || track.readFile) {
       const file=track.file||await track.readFile();
       const b = await this.ctx.decodeAudioData(await file.arrayBuffer());
