@@ -256,7 +256,7 @@ function paint(){
       ctx.drawImage(source,0,index*source.height/decks.length,source.width,source.height/decks.length,0,0,width,height);
     }
   }
-  const scale=$('#detail-wave-scale')?.textContent;if(scale)$('#preview-zoom-scale').textContent=scale;
+  const scale=$('#detail-wave-scale')?.textContent;if(scale&&$('#preview-zoom-scale').textContent!==scale)$('#preview-zoom-scale').textContent=scale;
   requestAnimationFrame(paint);
 }
 requestAnimationFrame(paint);

@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {paintDetailWaveforms} from './detail-waveform.js';
 import {performanceColors as ink} from './performance-tokens.js';
+import {sourceWaveformState} from './source-waveform.js';
 const track=bpm=>({bpm,grid:0,duration:1000,cues:[],gridWarpMarkers:[]});
 const pair=()=>[{index:0,rate:132/120,position:60,track:track(120)},{index:1,rate:132/125,position:96,track:track(125)}];
 function render(decks,{horizontal=true,width=800,height=132,span=4}={}){
@@ -39,4 +40,19 @@ test('ruler text and beat marks have measurable contrast without relying on freq
   assert(contrast(ink.waveText,ink.waveRuler)>=4.5);
   assert(contrast(ink.waveBeat,ink.waveRuler)>=3);
   assert(contrast(ink.wavePlayhead,ink.waveBackground)>=3);
+});
+function cachedRenderer(buffer=null){
+ let clears=0,scale=1;const c={save(){},restore(){},beginPath(){},clip(){},rect(){},clearRect(){clears++;},fillRect(){},fillText(){},getTransform:()=>({a:scale})};
+ const decks=pair(),wave={kind:'original'},options={width:800,height:132,horizontal:true,decks,span:4,position:d=>d.position,buffer:()=>buffer,view:()=>wave,colors:['red','blue']};
+ return {draw:()=>paintDetailWaveforms(c,options),clears:()=>clears,options,decks,scale:value=>scale=value};
+}
+test('unchanged detail frames reuse pixels while seek, grid, cue, zoom and geometry edits repaint',()=>{
+ const r=cachedRenderer();r.draw();for(let i=0;i<60;i++)r.draw();assert.equal(r.clears(),1,'unchanged stopped waveforms must not redraw every animation frame');
+ const edits=[()=>r.decks[0].position+=.1,()=>r.decks[0].rate=1.2,()=>r.decks[0].track.grid=.04,()=>r.decks[0].track.bpm=121,()=>r.decks[0].track.cues.push({position:60}),()=>r.decks[0].track.cues[0].position=61,()=>r.decks[0].track.gridWarpMarkers.push({time:90,bpm:122}),()=>r.options.span=8,()=>r.options.width=900,()=>r.options.horizontal=false,()=>r.scale(2),()=>r.options.colors[0]='green',()=>r.decks.pop()];
+ for(const edit of edits){const before=r.clears();edit();r.draw();assert.equal(r.clears(),before+1);r.draw();assert.equal(r.clears(),before+1);}
+});
+test('a completed source profile repaints a stopped pending waveform',async()=>{
+ const data=new Float32Array(1000).fill(.1),buffer={length:data.length,sampleRate:1000,numberOfChannels:1,getChannelData:()=>data};
+ const r=cachedRenderer(buffer);r.draw();r.draw();assert.equal(r.clears(),1);
+ await sourceWaveformState(buffer).ready;r.draw();assert.equal(r.clears(),2);r.draw();assert.equal(r.clears(),2);
 });

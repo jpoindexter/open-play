@@ -536,11 +536,15 @@ export class AudioEngine {
           (d.reverse ? track.duration - d.loopIn : d.loopOut) / scale;
         return source;
       });
-      if(handoff||old){
+      if(handoff||positionAt){
         const voice={sources,timelineScale:scale,gridTimeline,stemGains:[],handoffBefore:old?{until:when,owner:old,clock:priorClock||this.voiceClock(d,old),rate:at=>this.voiceRateAt(d,old,at)}:null};let committed=false;
         try{
+          // Never replace audible audio with a source whose aligned start is already late.
+          const requireLead=()=>{if(this.ctx.currentTime>=when-.005)throw Error('Sync start missed its lead; previous audio retained. Try Sync again.');};
+          requireLead();
           sources.forEach(source=>source.start(when,Math.max(0,Math.min(source.buffer.duration-1/source.buffer.sampleRate,(d.reverse?track.duration-d.position:d.position)/scale))));
           await handoff?.arm(d.index);if(!current())return;
+          requireLead();
           this.routeOrdinaryVoice(d,voice,sources,!!stems,{when,reuseVoice:old});committed=true;this.retireVoiceAt(d.index,old,when);
           d.anchorPosition=d.position;d.anchorTime=when;d.playing=true;
           sources[0].onended=()=>{if(this.voices.get(d.index)!==voice)return;this.stopSource(d.index,{preserveStemExit:true});d.position=d.reverse?0:track.duration;d.playing=false;this.onEnd(d);};
@@ -610,17 +614,21 @@ export class AudioEngine {
   }
 
   async synchronize(d, {rate, positionAt, priorClock}) {
-    const track = d.track, previousRate = d.rate;
+    const track = d.track, previousRate = d.rate, previousPosition = d.position;
     this.rateOwners.set(d, {});
-    let scheduled = false;
+    let scheduled = false, token;
     d.rate = rate;
     try {
-      await this.start(d, {priorClock, positionAt: when => {const position = positionAt(when); scheduled = true; return position;}});
+      const starting=this.start(d, {priorClock, positionAt: when => {const position = positionAt(when); scheduled = true; return position;}});
+      token=this.startTokens.get(d.index);await starting;
       if (!scheduled || d.track !== track || d.rate !== rate || !d.playing)
         throw new DOMException("Sync preparation superseded.", "AbortError");
       return {when: d.anchorTime, position: d.anchorPosition, rate};
     } catch (error) {
-      if (d.track === track && d.rate === rate) d.rate = previousRate;
+      if (d.track === track && d.rate === rate) {
+        d.rate = previousRate;
+        if(!d.playing&&this.startTokens.get(d.index)===token)d.position=previousPosition;
+      }
       throw error;
     }
   }

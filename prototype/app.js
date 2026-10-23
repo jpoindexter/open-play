@@ -1930,9 +1930,10 @@ function tick() {
     if (tempoText && tempoText.textContent !== shownPercent) tempoText.textContent = shownPercent;
     const p = engine.position(d),
       t = $(`#time-${d.index}`);
-    if (t) t.textContent = time(p);
+    if (t && t.textContent !== time(p)) t.textContent = time(p);
     const rem = $(`#remain-${d.index}`);
-    if (rem) rem.textContent = "−" + time((d.track?.duration || 0) - p);
+    const remaining = "−" + time((d.track?.duration || 0) - p);
+    if (rem && rem.textContent !== remaining) rem.textContent = remaining;
     const head = $(`#head-${d.index}`);
     if (head) head.style.left = `${(p / (d.track?.duration || 48)) * 100}%`;
     const overview = document.querySelector(`[data-seek="${d.index}"]`);
@@ -1955,10 +1956,12 @@ function tick() {
   const peakText=master.displayDB<=-100?"−∞":`${master.displayDB.toFixed(1)}dB`;
   if(peak.textContent!==peakText)peak.textContent=peakText;
   meter.setAttribute("aria-valuetext",`${peakText} relative to nominal; stereo sample peak`);
-  limit.textContent=master.limiting?"LIMIT":"—";limit.classList.toggle("limiting",master.limiting);
+  const limitText=master.limiting?"LIMIT":"—";
+  if(limit.textContent!==limitText)limit.textContent=limitText;
+  limit.classList.toggle("limiting",master.limiting);
   limit.setAttribute("aria-label",master.limiting?"Master limiter active":"Master limiter idle");
-  $("#audio-status").textContent =
-    `${state.decks.filter((d) => d.playing).length} decks playing · ${engine.ctx?.sampleRate || "—"} Hz audio engine · outputs in Devices`;
+  const audioStatus=`${state.decks.filter((d) => d.playing).length} decks playing · ${engine.ctx?.sampleRate || "—"} Hz audio engine · outputs in Devices`;
+  if($("#audio-status").textContent!==audioStatus)$("#audio-status").textContent=audioStatus;
   engine.updateFXBPMs(state.decks.map(deck => deckBPM(deck)??120));
   // Selection checks are O(4); only selection/async completion redraws overviews.
   if (state.decks.slice(0,state.deckCount).some(d => waveformView(d) !== overviewWaveViews[d.index])) drawWaves();

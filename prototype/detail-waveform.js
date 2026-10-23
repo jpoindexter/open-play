@@ -1,19 +1,28 @@
 import {createBeatgrid} from './beatgrid.js';
-import {paintSourceDetail} from './source-waveform.js';
+import {paintSourceDetail,sourceWaveformState} from './source-waveform.js';
 import {paintStemDetail} from './stem-waveform.js';
 import {performanceColors as ink} from './performance-tokens.js';
+const lastFrames=new WeakMap();
 
 // Drawing only: positions/rates come from the engine, never from other lanes.
 export function paintDetailWaveforms(c,{width:w,height:h,horizontal,decks,span,position,buffer,view,colors}){
+  const lanes=decks.map(d=>({d,t:d.track,p:d.track?position(d):0,buf:d.track?buffer(d):null,wave:d.track?view(d):null}));
+  const frame=[w,h,horizontal,span,c.getTransform?.().a,...colors,...lanes.flatMap(({d,t,p,buf,wave})=>[
+    d.index,t,p,d.rate,buf,wave,wave?.profile,
+    buf&&wave?.kind!=='pending'&&!(wave?.kind==='stems'&&!horizontal)?sourceWaveformState(buf).profile:null,
+    t?.bpm,t?.grid,t?.duration,JSON.stringify([t?.cues?.map(q=>q?.position),t?.gridWarpMarkers]),
+  ])];
+  const previous=lastFrames.get(c);
+  if(previous?.length===frame.length&&frame.every((value,i)=>Object.is(value,previous[i])))return false;
   c.clearRect(0,0,w,h);
   const count=decks.length;
-  for(const [index,d]of decks.entries()){
+  for(const [index,{d,t,p,buf,wave}]of lanes.entries()){
     const x=horizontal?0:index*w/count,y=horizontal?index*h/count:0;
     const width=horizontal?w:w/count,height=horizontal?h/count:h;
     const ruler=horizontal?(height<40?14:18):Math.min(22,width*.3);
     const plot=horizontal?{x,y:y+ruler,width,height:Math.max(1,height-ruler)}:{x:x+ruler,y,width:Math.max(1,width-ruler),height};
     c.save();c.beginPath();c.rect(x,y,width,height);c.clip();
-    const t=d.track,p=t?position(d):0,buf=t?buffer(d):null,wave=t?view(d):null,sourceSpan=span*Math.max(.25,Math.min(4,d.rate||1));
+    const sourceSpan=span*Math.max(.25,Math.min(4,d.rate||1));
     c.fillStyle=ink.waveBackground;c.fillRect(x,y,width,height);
     const along=time=>((time-p)/sourceSpan+.5)*(horizontal?width:height);
     const length=horizontal?width:height;
@@ -74,4 +83,6 @@ export function paintDetailWaveforms(c,{width:w,height:h,horizontal,decks,span,p
     if(horizontal||index===0){c.fillStyle=ink.waveBackground;c.fillRect(labelX-2,labelY-10,26,12);c.fillStyle=ink.wavePlayhead;c.fillText('NOW',labelX,labelY);}
     c.restore();
   }
+  lastFrames.set(c,frame);
+  return true;
 }
