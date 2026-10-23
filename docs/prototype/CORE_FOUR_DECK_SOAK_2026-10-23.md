@@ -49,6 +49,8 @@ The existing24actual Canvas orientation/DPR/subpixel/color/stereo-transient case
 
 ## Delivery checkpoint
 
-Desktop0.1.44 packaging, existing-profile stopped startup and five-card Trello readback are the remaining delivery checks for this slice. Broader musical/physical pops, unsupported/ambiguous grids, rare frame stalls and full vendor parity remain OPEN. No effects/stems/video expansion, redesign or broad refactor.
+Desktop **0.1.44 / source a6600e0aa350bb798d502adf65d45650eb66796b** packaged from immutable Git source; ASAR SHA256 `ce79e543d8c4281e50761114ade81b0275f7853631c320007b6359004cbce9cb`. Actual archive/host checks5/5. Current launcher executed; CUA native existing-profile startup shows16tracks,14AX preview images,2Play/tempo controls,Horizontal/Compact,0playing decks and no save/recovery warning. No normal-profile playback initiated. [Native observation](desktop-0.1.44-playback-observation.json), [package inspection](desktop-0.1.44-playback-safety.json).
+
+Five existing Trello current summaries and parent detail comment updated/read back exactly. Criteria/history/model guidance retained;140cards unchanged (Core26/Next22/Later85/Blocked4/Approvals2/Evidence1),none created/moved/completed. [Board receipt](../delivery/CORE_FOUR_DECK_SOAK_RECONCILIATION_2026-10-23.json). Broader musical/physical pops, unsupported/ambiguous grids, rare frame stalls and full vendor parity remain OPEN. No effects/stems/video expansion, redesign or broad refactor.
 
 Private protocol, hashes, original failures, raw PCM and screenshots: ignored local-evidence/four-deck-soak-2026-10-23/. Public receipts contain measurements/metadata only, no user audio or proprietary extracted assets.

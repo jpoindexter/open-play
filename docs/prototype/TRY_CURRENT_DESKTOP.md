@@ -1,3 +1,17 @@
+# Try desktop 0.1.44 — core Sync/session candidate
+
+Open `Start Open Play Current Test.command` or `Start Open Play Playback Test 0.1.44.command`. Close another playback-test version first; existing profile/port18775 and older bundles remain. Immutable source a6600e0. [Executed evidence and limits](CORE_FOUR_DECK_SOAK_2026-10-23.md).
+
+Observed native startup: 16 saved tracks, two demo decks stopped at zero, rekordbox Horizontal / Compact, Master −10 dB, 14 AX waveform-preview images, no save/recovery warning. On restart demo decks load; select saved real-song rows and use Shift+Left/Right or deck Load. Diagnostic eight-track soak imports are isolated from this normal profile. No normal-profile music was played during this pass.
+
+Playing key-lock preparation now retains old audio and advances the source clock through the existing scheduled handoff. The repaired 20-minute browser session completes 15 replacements and four key locks with controls/previews retained. **Broader intermittent pops and rare waveform frame stalls remain open.** Declared-grid agreement does not prove audible tightness.
+
+When ready: two real songs, Sync OFF and pitch reset; independent incoming tempo and T/Y left or G/H right nudge, then one manual transition. Audition/reset LOW/MID/HIGH separately; paused Cue hold/release and Cue+Play latch, then pause both and confirm silence. Preserve REC/event context if a pop returns. Independent headphone/master isolation and physical controller acceptance require suitable hardware. These are the remaining human checks, not a request to repeat already accepted cases.
+
+---
+
+## Historical 0.1.43 guide
+
 # Try desktop0.1.43 — core waveform/Sync candidate
 
 Open `Start Open Play Current Test.command` or `Start Open Play Playback Test 0.1.43.command`. Close another playback-test version first; existing profile/port18775 and older bundles remain. Source4cc4877. [Executed evidence and limits](CORE_FOUR_DECK_WAVEFORMS_2026-10-23.md).
