@@ -1,0 +1,392 @@
+{
+  "checks": [
+    "GUI LOW/MID/HIGH cuts on each deck, reset and stop exercised",
+    "Both decks: Cue set, recorded hold, release paused, Cue+Play latch, explicit stop and blur cleanup",
+    "Natural end: failed load stops, Autoplay-off during decode cancels start, valid next track starts once, final stop stays stopped"
+  ],
+  "events": [
+    {
+      "name": "EQ baseline",
+      "playing": [
+        true,
+        true
+      ],
+      "from": 0.15,
+      "to": 0.4,
+      "measuredRMS": [
+        0.02451247924980259,
+        0.02416917808289446
+      ]
+    },
+    {
+      "name": "EQ 0:low",
+      "playing": [
+        true,
+        true
+      ],
+      "from": 0.6782539682539684,
+      "to": 0.9282539682539684,
+      "cut": {
+        "index": 0,
+        "bandIndex": 0
+      },
+      "measuredRMS": [
+        0.019978720786262106,
+        0.024224501190051075
+      ],
+      "measuredDB": [
+        [
+          -17.880855848904634,
+          -0.13909060698835835,
+          -0.05396931699753045
+        ],
+        [
+          -0.006729803119634882,
+          0.013224462956257616,
+          0.05364814157899815
+        ]
+      ]
+    },
+    {
+      "name": "EQ 0:mid",
+      "playing": [
+        true,
+        true
+      ],
+      "from": 1.345827664399093,
+      "to": 1.595827664399093,
+      "cut": {
+        "index": 0,
+        "bandIndex": 1
+      },
+      "measuredRMS": [
+        0.019184804977331472,
+        0.024349169498443086
+      ],
+      "measuredDB": [
+        [
+          -0.24621504533168023,
+          -18.00597212014479,
+          -0.6343105984353258
+        ],
+        [
+          -0.018787713452843923,
+          0.05696574544343611,
+          0.15538173003282307
+        ]
+      ]
+    },
+    {
+      "name": "EQ 0:high",
+      "playing": [
+        true,
+        true
+      ],
+      "from": 1.9930839002267575,
+      "to": 2.2430839002267575,
+      "cut": {
+        "index": 0,
+        "bandIndex": 2
+      },
+      "measuredRMS": [
+        0.01975324364481141,
+        0.024057995789079207
+      ],
+      "measuredDB": [
+        [
+          -0.023113431777122485,
+          -0.118404836427736,
+          -17.620290922322344
+        ],
+        [
+          0.0015127515237140907,
+          -0.019465185022328347,
+          -0.10531363159501042
+        ]
+      ]
+    },
+    {
+      "name": "EQ 1:low",
+      "playing": [
+        true,
+        true
+      ],
+      "from": 2.6461451247165533,
+      "to": 2.8961451247165533,
+      "cut": {
+        "index": 1,
+        "bandIndex": 0
+      },
+      "measuredRMS": [
+        0.02448207304310548,
+        0.01977521700695929
+      ],
+      "measuredDB": [
+        [
+          -0.01861127650144415,
+          0.015394062641595097,
+          -0.02840953011538712
+        ],
+        [
+          -17.650266677693402,
+          -0.059489814689542175,
+          0.0593927473952384
+        ]
+      ]
+    },
+    {
+      "name": "EQ 1:mid",
+      "playing": [
+        true,
+        true
+      ],
+      "from": 3.3021088435374146,
+      "to": 3.5521088435374146,
+      "cut": {
+        "index": 1,
+        "bandIndex": 1
+      },
+      "measuredRMS": [
+        0.02433453609839631,
+        0.019404371034021154
+      ],
+      "measuredDB": [
+        [
+          -0.002359919051517023,
+          0.0018812072115343187,
+          -0.1865110594143726
+        ],
+        [
+          -0.4229269688856594,
+          -12.421495339491358,
+          -0.14982275910088044
+        ]
+      ]
+    },
+    {
+      "name": "EQ 1:high",
+      "playing": [
+        true,
+        true
+      ],
+      "from": 3.952267573696145,
+      "to": 4.202267573696145,
+      "cut": {
+        "index": 1,
+        "bandIndex": 2
+      },
+      "measuredRMS": [
+        0.024410705988607617,
+        0.019277833368060333
+      ],
+      "measuredDB": [
+        [
+          0.005737226330566561,
+          -0.004117698870063311,
+          -0.10711173724488333
+        ],
+        [
+          0.005332281014248509,
+          -0.5278671585183919,
+          -17.772585674813403
+        ]
+      ]
+    },
+    {
+      "name": "EQ reset and stopped",
+      "playing": [
+        false,
+        false
+      ],
+      "from": 4.631451247165533,
+      "to": 4.881451247165533,
+      "measuredRMS": [
+        1.0770378368295605e-05,
+        1.0422226236653797e-05
+      ]
+    },
+    {
+      "name": "Cue hold 0",
+      "playing": [
+        true,
+        false
+      ],
+      "from": 5.211950113378686,
+      "to": 5.461950113378686,
+      "measuredRMS": [
+        0.024492377511122203,
+        1.795238118605289e-10
+      ]
+    },
+    {
+      "name": "Cue release 0",
+      "playing": [
+        false,
+        false
+      ],
+      "from": 5.757619047619048,
+      "to": 6.007619047619048,
+      "measuredRMS": [
+        1.22123789127053e-05,
+        5.730674913646516e-15
+      ]
+    },
+    {
+      "name": "Cue latched 0",
+      "playing": [
+        true,
+        false
+      ],
+      "from": 6.343922902494333,
+      "to": 6.593922902494333,
+      "measuredRMS": [
+        0.024524620397778783,
+        1.617641152526707e-15
+      ]
+    },
+    {
+      "name": "Cue blur 0",
+      "playing": [
+        false,
+        false
+      ],
+      "from": 6.953446712018142,
+      "to": 7.203446712018142,
+      "measuredRMS": [
+        5.911600441594769e-06,
+        2.455968953260299e-16
+      ]
+    },
+    {
+      "name": "Cue hold 1",
+      "playing": [
+        false,
+        true
+      ],
+      "from": 7.545555555555557,
+      "to": 7.795555555555557,
+      "measuredRMS": [
+        8.136835509556977e-11,
+        0.02424656979921864
+      ]
+    },
+    {
+      "name": "Cue release 1",
+      "playing": [
+        false,
+        false
+      ],
+      "from": 8.073809523809524,
+      "to": 8.323809523809524,
+      "measuredRMS": [
+        3.7489008714575346e-15,
+        6.893539411559806e-07
+      ]
+    },
+    {
+      "name": "Cue latched 1",
+      "playing": [
+        false,
+        true
+      ],
+      "from": 8.660113378684809,
+      "to": 8.910113378684809,
+      "measuredRMS": [
+        1.1016426749261498e-15,
+        0.0241590343457835
+      ]
+    },
+    {
+      "name": "Cue blur 1",
+      "playing": [
+        false,
+        false
+      ],
+      "from": 9.28124716553288,
+      "to": 9.53124716553288,
+      "measuredRMS": [
+        2.081802548512957e-16,
+        4.0083740565306165e-07
+      ]
+    },
+    {
+      "name": "Autoplay load failed",
+      "playing": [
+        false,
+        false
+      ],
+      "from": 10.024285714285716,
+      "to": 10.274285714285716,
+      "measuredRMS": [
+        5.680243872012597e-06,
+        3.1422669952216156e-13
+      ]
+    },
+    {
+      "name": "Autoplay disabled during load",
+      "playing": [
+        false,
+        false
+      ],
+      "from": 10.895034013605443,
+      "to": 11.145034013605443,
+      "measuredRMS": [
+        4.5408331958765285e-07,
+        2.1047043615072554e-16
+      ]
+    },
+    {
+      "name": "Final stop",
+      "playing": [
+        false,
+        false
+      ],
+      "from": 11.707732426303856,
+      "to": 11.957732426303856,
+      "measuredRMS": [
+        1.7359572294834883e-06,
+        2.716088361531972e-06
+      ]
+    }
+  ],
+  "scope": "Actual file input, GUI EQ/Play/Autoplay, synthetic Cue key lifecycle and whole master. Owned fixtures; no acoustic/manual/hardware acceptance.",
+  "criteria": {
+    "cutMaximumDB": -6,
+    "otherChannelMaximumChangeDB": 1,
+    "minimumSignalRMS": 0.003,
+    "maximumSilentRMS": 0.0001,
+    "settleSeconds": 0.15,
+    "windowSeconds": 0.25
+  },
+  "sourceHashes": {
+    "app.js": "4ea5f4937215f6192506716df1a39841195450353d68f37e447dfe67ea6c6375",
+    "engine.js": "13c7caf4653953a785d269eff06377905669321289dfb739c680e3a730cf2cc1",
+    "holds.js": "9258b2f3c66ada7f908175442096ec858f842f4515fbc9c30c57674f4be2dfbb",
+    "mixer-curves.js": "0503355174e50203d61fec7180a58e0a87b715108d5dd66d7fd731e2babecb2b",
+    "core-controls-harness.js": "f34ca4d5b72f9f42c3a7016a31b54848f6e41030a5b0e5caf32289602e3ad87d"
+  },
+  "failedLoad": {
+    "decodeAttempts": 1,
+    "playing": false
+  },
+  "successfulAutoplay": true,
+  "recording": {
+    "format": "audio/webm;codecs=opus",
+    "bytes": 177992,
+    "sha256": "18d8c162b41a0d97bdee1d4d0203f2dc88feb917d46ea37482a3b31edfff6919",
+    "privateOriginal": "local-evidence/core-transport-2026-10-23/core-master.webm"
+  },
+  "decoded": {
+    "sampleRate": 44100,
+    "frames": 553014,
+    "channels": 2
+  },
+  "audioPassed": true,
+  "metadataTracks": 10,
+  "previewImages": 2,
+  "controls": {
+    "play": 2,
+    "eq": 2
+  },
+  "complete": true
+}

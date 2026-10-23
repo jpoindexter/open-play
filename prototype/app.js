@@ -1883,8 +1883,8 @@ engine.onEnd = async (d) => {
     const a = filtered(),
       i = a.findIndex((t) => t.id === d.track.id);
     if (a[i + 1]) {
-      await load(d.index, a[i + 1].id);
-      await play(d);
+      const loaded=await load(d.index, a[i + 1].id);
+      if(loaded&&state.autoplay)await play(d);
     }
   }
   renderDecks();
