@@ -19,6 +19,9 @@ try{
   if(position===2){canvas.title=`${vertical?'Vertical':'Horizontal'} / DPR${dpr}`;document.querySelector('#canvases').append(canvas);}
  }
  for(let c=0;c<2;c++)assert(channels[c].every((v,i)=>v===original[c][i]),'Source PCM changed');
+ const offline=new OfflineAudioContext(2,128,48000),pending=offline.createBuffer(2,196608,48000);for(let c=0;c<2;c++)pending.getChannelData(c).fill(.1);
+ const pendingState=sourceWaveformState(pending),source=offline.createBufferSource();source.buffer=pending;source.connect(offline.destination);source.start();await offline.startRendering();await pendingState.ready;
+ assert(pendingState.profile.maximum>.09,'Playback acquisition invalidated an in-flight source profile');report.pendingPlaybackProfileIntact=true;
  report.profileBlockFrames=profile.blockFrames;report.raster=sourceWaveformRasterUsage();report.complete=true;
 }catch(error){report.errors.push(error.stack);report.complete=false;}
 document.querySelector('#result').textContent=JSON.stringify(report,null,2);
