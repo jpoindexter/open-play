@@ -1,3 +1,17 @@
+# Try desktop0.1.45 — core waveform/Sync trace candidate
+
+Open `Start Open Play Current Test.command` or `Start Open Play Playback Test 0.1.45.command`. Existing profile/port18775 and older bundles remain. Immutable source d82617c. [Executed evidence and remaining limits](CORE_FOUR_DECK_TRACE_2026-10-23.md).
+
+Observed current-launcher startup:16saved tracks,14AX waveform-preview images, two demo decks stopped0, rekordbox Horizontal/Compact, Master−10dB, no recovery/save warning. Select saved real tracks and use each deck Load or Shift+Left/Right. Diagnostic eight-track imports/native trace use isolated profiles; no normal-profile music was played.
+
+Waveform geometry now avoids repeated forced layout. Late warped-loop starts retain old audio/rate and show the existing retry notice; settle load and retry. Owned loop/primary metadata follows the retained voice. Callback p95 improves substantially, but rare stalls and broader pops remain OPEN.
+
+When ready: Sync OFF/pitch reset, manual incoming tempo plus T/Y left or G/H right nudge, one manual transition; audition/reset LOW/MID/HIGH, paused Cue hold/release and Cue+Play latch, then pause both and confirm silence. Preserve REC/event context if a pop returns. Physical headphone/master isolation and controller acceptance need suitable hardware. Do not repeat already accepted cases or treat displayed grid alignment as musical acceptance.
+
+---
+
+## Historical0.1.44 guide
+
 # Try desktop 0.1.44 — core Sync/session candidate
 
 Open `Start Open Play Current Test.command` or `Start Open Play Playback Test 0.1.44.command`. Close another playback-test version first; existing profile/port18775 and older bundles remain. Immutable source a6600e0. [Executed evidence and limits](CORE_FOUR_DECK_SOAK_2026-10-23.md).
