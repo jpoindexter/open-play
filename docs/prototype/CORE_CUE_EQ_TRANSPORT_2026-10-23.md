@@ -27,3 +27,13 @@ Final Node suite59/59, including three end-of-track regressions. Source hashes a
 Listening/manual transition, actual mouse/keyboard feel, current physical controller/headphone routing and full source/format/advanced transport parity remain open. The intermittent Sync pop/lag remains OPEN. Software recording does not replace Jason's practical session. This pass also does not resolve the previously tracked overnight blank-window condition or wider RSS/GC/large-file soak.
 
 Next: one human manual transition with Sync OFF, EQ judgment, Cue/latch and clean stop when available. Continue only reproduced core blockers while waiting; no layout redesign, stems/video expansion or repository-wide refactor.
+
+## Final receipts and re-entry
+
+Committed application/harness source: `97b4deb54b971335f81ff7d207dd4496b16a3629`. Desktop0.1.41 ASAR SHA256 `a3af8e93dbbd0caf9ee51e1f8d42873ccff420d94c3875c3351ed23d299e6f52`; package checks5/5. Native existing-profile startup:16tracks/55:45.6,0playing,14visible preview images and two offscreen waiting, rekordbox Horizontal/Compact, no recovery/save warning. No normal-profile playback initiated. [Native observation](desktop-0.1.41-playback-observation.json), [archive](desktop-0.1.41-playback-package.json), [package checks](desktop-0.1.41-playback-safety.json).
+
+Final owned recording177,992bytes; decoded553,014stereo frames at44,100Hz, finite throughout. All19 declared windows pass. Exact own-band EQ attenuation−18.006 to−12.422dB; max other-channel change0.187dB. Independent ffmpeg full decode and Python DFT found all three bands in four post-reset Cue windows within1dB of baseline (max0.1232dB). This establishes software channel response/reset and signal gating, not musical judgment or absence of every transient. [Browser results](core-controls-browser-results.json), [independent neutral check](core-controls-neutral-results.json). Private originals/events/screenshots remain in ignored `local-evidence/core-transport-2026-10-23/`.
+
+Trello CORE-001, CORE-FIX-05, DEK-015, MIX-003 and DEK-002 summaries plus parent detail comment applied and read back; all retained histories/model guidance unchanged.140open cards, no new/moved/completed cards. [Receipt](../delivery/CORE_CONTROLS_RECONCILIATION_2026-10-23.json).
+
+Re-entry: use `Start Open Play Current Test.command` (0.1.41), import/load the chosen real tracks, Sync OFF and pitch reset, then one manual transition/EQ/Cue/stop session with Jason. Retain any actual Sync-pop event and timing rather than repeating clean cases. Physical headphone/master/controller acceptance is separate. Do not equate this software pass with complete core acceptance.

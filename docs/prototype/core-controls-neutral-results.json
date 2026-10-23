@@ -1,0 +1,40 @@
+{
+  "decoder": "ffmpeg independent full-recording decode",
+  "passed": true,
+  "maximumAllowedDB": 1,
+  "checks": [
+    {
+      "name": "Cue hold 0",
+      "neutralBandChangesDB": [
+        0.028990736170410127,
+        -0.0065954651544455935,
+        -0.03981149974193612
+      ]
+    },
+    {
+      "name": "Cue latched 0",
+      "neutralBandChangesDB": [
+        -0.008677565873500982,
+        -0.003436968726673131,
+        0.027345249265100773
+      ]
+    },
+    {
+      "name": "Cue hold 1",
+      "neutralBandChangesDB": [
+        -0.0095914831839129,
+        0.05753055734048926,
+        0.015983222055894353
+      ]
+    },
+    {
+      "name": "Cue latched 1",
+      "neutralBandChangesDB": [
+        -0.004568172165813386,
+        0.11477510676692651,
+        -0.12314202138675671
+      ]
+    }
+  ],
+  "scope": "Return to neutral in active Cue hold/latch windows after all EQ resets; not acoustic quality"
+}
