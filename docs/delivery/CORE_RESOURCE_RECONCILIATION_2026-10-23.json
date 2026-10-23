@@ -1,0 +1,45 @@
+{
+  "date": "2026-10-23",
+  "sourceCommit": "6fdaef969fe6735d19c93beb43e3e0c20bdd634f",
+  "desktop": "0.1.40",
+  "status": "Applied and read back",
+  "scope": "AUD-006 resource slice and CORE-001 current summary/comment; SYS-002 blank-window recurrence follow-up. Earlier LIB-011/SYS-002 safety reconciliation recorded separately.",
+  "boardCounts": {
+    "Core DJ — Now": 26,
+    "Next — quick-win candidates": 22,
+    "Later — full parity & advanced features": 85,
+    "Approvals & release boundaries": 2,
+    "Verified evidence": 1,
+    "Blocked / unknown": 4
+  },
+  "totalOpenCards": 140,
+  "cards": [
+    {
+      "id": "ari:cloud:trello::card/workspace/6a8f03e71844a6c1103692dc/6ad203ca708db6d5e4dac241",
+      "name": "AUD-006 — Long-session resource stability",
+      "url": "https://trello.com/c/ecsrLX3N/50-aud-006-long-session-resource-stability",
+      "currentSummary": "## Current core status — 23 October 2026\nScoped decoded-original cache fix implemented in source6fdaef9/current desktop0.1.40. Shared in-flight decodes;256MiB inactive LRU budget, loaded paused/playing decks and current preparation/sample owners protected. Budget is NOT a total-process RAM ceiling; protected buffers and other owners may exceed it. Originals, metadata and waveform previews retained.\nExecuted:56/56 Node tests, scratch owner suite12/12, actual workspace12×24s WAV imports/reimports under two playing decks,12s internal master capture finite/no silent100ms windows; eight120s stereo WAV imports exercise the default budget (228,614,400B<268,435,456B). Two loaded original identities retained;evicted original re-decodes;28fixture tracks and2/4compact H/V controls/previews retained. Native40 startup restores existing16-track profile stopped; package5/5. Broader soak, total RSS/GC/transients, large-file decode pressure, stems/worklet copies, acoustic/hardware quality and Sync pop/lag remain OPEN.\nEvidence: https://github.com/jpoindexter/open-play/blob/main/docs/prototype/CORE_DECODED_CACHE_2026-10-23.md",
+      "complete": false,
+      "closed": false
+    },
+    {
+      "id": "ari:cloud:trello::card/workspace/6a8f03e71844a6c1103692dc/6ad5ecd7fef5ea31f0ce38c0",
+      "name": "CORE-001 — Load two local MP3s, cue, mix and beatmatch",
+      "url": "https://trello.com/c/LGGdtSa3/114-core-001-load-two-local-mp3s-cue-mix-and-beatmatch",
+      "currentSummary": "## Current core status — 23 October 2026\n0.1.40/source6fdaef9: state safety and bounded decoded cache verified. Controls/previews retained. Manual transition/EQ/Cue/stop, pop/lag and hardware OPEN; Jason unavailable. Details in latest comment.",
+      "complete": false,
+      "closed": false
+    },
+    {
+      "id": "ari:cloud:trello::card/workspace/6a8f03e71844a6c1103692dc/6ad204ace412e16bdf25c17f",
+      "name": "SYS-002 — Session persistence and recovery",
+      "url": "https://trello.com/c/jrimQjEN/68-sys-002-session-persistence-and-recovery",
+      "currentSummary": "## Current core status — 23 October 2026\nSaved-state validation and persistent save/recovery feedback implemented. Rejected originals remain untouched; autosave pauses; explicit recovery copies the original before replacing the main record. Save failure retains export/retry. Injected quota failure/retry, invalid boot and recovery/reload executed in isolated browser. Desktop0.1.39/source91bfe92 existing16-track startup observed22October. Analysis payload deduplication, exhaustive legacy/crash recovery and broader feature acceptance remain OPEN. Preserve analysis grid.beats reader.\nEvidence: https://github.com/jpoindexter/open-play/blob/main/docs/prototype/CORE_STATE_SAFETY_2026-10-22.md\nPrior audit: https://github.com/jpoindexter/open-play/blob/main/docs/prototype/CORE_DJ_AUDIT_2026-10-21.md",
+      "complete": false,
+      "closed": false
+    }
+  ],
+  "manualAcceptance": "Jason unavailable; no fresh audible/manual or hardware result",
+  "syncPop": "Open",
+  "allCriteriaAndModelGuidanceRetained": true
+}

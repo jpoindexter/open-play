@@ -1,10 +1,12 @@
-## Current status — core safety slice, 22 October 2026
+## Current status — core resource slice, 23 October 2026
 
-Current local desktop test is **0.1.39 / source91bfe92**, opened with the existing16-track library, stopped decks, controls and waveform previews. LIB-011/SYS-002 restore validation, saved-state recovery, color escaping and persistent save-failure feedback have executed source/browser evidence.50/50 Node tests, six actual-workspace browser groups, package checks5/5.0.1.38 failed existing-profile compatibility and is superseded;0.1.39 preserves legacy numeric settings and null grids. [Evidence](../prototype/CORE_STATE_SAFETY_2026-10-22.md).
+Current local desktop test is **0.1.40 / source 6fdaef9**, opened with the existing 16-track library, stopped decks, controls and waveform previews. After the state-safety slice, inactive original PCM now has a 256 MiB cache budget with loaded/pending owners protected and concurrent decodes shared. This is not a total-process RAM cap. [Resource evidence](../prototype/CORE_DECODED_CACHE_2026-10-23.md), [prior state safety](../prototype/CORE_STATE_SAFETY_2026-10-22.md).
 
-Next: manual transition with Sync OFF, per-channel EQ, temporary Cue/release/latch and clean stop; then measure/bound inactive decoded buffers before broad imports. Sync-pop/lag remains open; no new listening or hardware claim. Preserve the chosen rekordbox layout, all controls/layout variants and library previews. No stems/video expansion or broad refactor.
+Executed: 56/56 Node, scratch owner checks 12/12, focused tempo/pending-Sync/keyboard checks, four actual-workspace resource groups and package checks 5/5. Generated WAV imports under two playing decks preserve source identity and produce a finite 12-second internal master with no silent 100 ms windows; eight 120-second WAV imports keep originals cache 228.6 MB within 268.4 MB. 28 fixture metadata tracks, library previews and2/4compact H/V controls retained. This does not prove acoustic quality, long-session RSS/GC behavior or hardware routing.
 
-Trello update is blocked, not completed: connector transport failures and browser account lacks private-board access. [Pending updates](CORE_STATE_SAFETY_TRELLO_PENDING_2026-10-22.md) include the unknown-outcome LIB-011 comment; read back before retrying. Broad cards stay open.
+Jason is unavailable for listening. Next: one manual transition with Sync OFF, per-channel EQ, temporary Cue/release/latch and clean stop. Sync-pop/lag remains open; broader AUD-006 soak/CPU/transient/large-file work and independent headphone/controller acceptance remain open. No stems/video expansion, layout redesign or broad refactor.
+
+Trello access recovered: pending LIB-011/SYS-002/CORE-001 safety summaries and AUD-006 resource evidence applied/read back. 140 cards retained: Core 26 / Next 22 / Later 85 / Blocked 4 / Approvals 2 / Evidence 1; no broad card completed. [Safety receipt](CORE_STATE_SAFETY_RECONCILIATION_2026-10-23.json), [resource receipt](CORE_RESOURCE_RECONCILIATION_2026-10-23.json). SYS-002 also records an unestablished overnight blank-window condition recovered by cold restart; no claim it is fixed.
 
 ---
 
