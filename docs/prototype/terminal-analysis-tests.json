@@ -1,0 +1,101 @@
+{
+  "date": "2026-10-24",
+  "node": {
+    "command": "node --test prototype/*.test.mjs",
+    "tests": 148,
+    "passed": 148,
+    "failed": 0,
+    "outputSHA256": "92a76fa252f16a753290251713140d1ebc0e6b5d7ff767013694c772e23874d2"
+  },
+  "terminalRegression": {
+    "cases": 6,
+    "baselinePassed": 0,
+    "baselineFailed": 6,
+    "currentPassed": 6,
+    "actualFunctions": [
+      "cancelAnalysis",
+      "enqueueAnalysis",
+      "waveformView",
+      "drawWaves",
+      "tick",
+      "createStemWaveformModel"
+    ],
+    "controlledEndpoints": [
+      "DOM/canvas painting",
+      "decode/analysis collaborators",
+      "unrelated transport/meter/panel endpoints"
+    ],
+    "physicalHeldGestureVerified": false
+  },
+  "analysisController": {
+    "command": "node scripts/test_analysis_controller.mjs",
+    "baselineFailure": "TypeError: context.analyze is not a function before first behavior check",
+    "failurePredatesTerminalRepair": true,
+    "baselineAppSHA256": "f6237c87585945e03f0960106299d719a2e78e7260fefd02b2be71605574b047",
+    "originalBehaviorStatementsByteIdentical": true,
+    "tests": 14,
+    "passed": 14,
+    "results": [
+      {
+        "name": "Actual controller writes measured numeric tempo and initial grid",
+        "passed": true
+      },
+      {
+        "name": "Measured level and unknown key remain honest",
+        "passed": true
+      },
+      {
+        "name": "Ordinary reanalysis preserves manual BPM/key/grid",
+        "passed": true
+      },
+      {
+        "name": "Explicit replace still preserves protected grid and unknown-result key",
+        "passed": true
+      },
+      {
+        "name": "Locked file key survives explicit replacement with a known measured key",
+        "passed": true
+      },
+      {
+        "name": "Explicit unlocked replacement updates tempo and phase",
+        "passed": true
+      },
+      {
+        "name": "Edit during asynchronous decode wins over queued replacement",
+        "passed": true
+      },
+      {
+        "name": "Cancel during decode prevents publishing a replacement result",
+        "passed": true
+      },
+      {
+        "name": "Post-cancel enqueue drains without another user action",
+        "passed": true
+      },
+      {
+        "name": "Post-cancel enqueue does not revive cancelled pending jobs",
+        "passed": true
+      },
+      {
+        "name": "File import generates content-derived stable identity and obeys analysis disabled",
+        "passed": true
+      },
+      {
+        "name": "Repeated identical file import does not duplicate library row",
+        "passed": true
+      },
+      {
+        "name": "Same bytes restore persisted manual metadata on re-import",
+        "passed": true
+      },
+      {
+        "name": "Actual persistence saves analysis settings and imported metadata without file bytes",
+        "passed": true
+      }
+    ],
+    "scope": "Actual app controller/import/persistence functions, real analyzePCM and library/storage/gain modules; controlled DOM/decode and session-only import fallback. Does not prove IndexedDB persistence, browser decoding, Worker or visible controls.",
+    "scriptSHA256": "6870581302e5ad4cee83805a591dff402ef6223fd0aa764f708f3a16fa82ff21"
+  },
+  "appSHA256": "bd938219a7015651e5ce55bf9bba85f55c7a6ab60bf38db74f715c4facb9239d",
+  "scope": "Executed controlled source/regression/PCM-module checks, not real-browser timing, Worker/IndexedDB/native listening or physical routing. Real-runtime receipts recorded separately."
+}

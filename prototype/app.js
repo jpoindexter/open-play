@@ -1253,7 +1253,6 @@ async function enqueueAnalysis(tracks, replacements = {}) {
   updateAnalysisStatus(
     `${cancelled ? "Cancelled" : "Finished"}: ${completed} measured, ${failed} failed. Existing/manual metadata and locked grids preserved unless replacement was requested.`,
   );
-  drawWaves();
   notify(state.analysisStatus);
 }
 function analyze(replacements = {}) {
