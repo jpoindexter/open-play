@@ -1,0 +1,227 @@
+{
+  "date": "2026-10-24",
+  "scope": "Executed isolated, physically muted installed-Electron diagnostic using immutable baseline52 product/committed harness. This is not normal packaged moving-frame, candidate-grid-repair or audio-pop acceptance.",
+  "baselineSourceCommit": "df48b502f0c85cd66b55dfa20041bb929a3e9362",
+  "hostSourceSHA256": "efc7b8d3af0e79825b6ef83a2f6bd28748cf6d616d8dd2d2ff46951f6337b6ea",
+  "runtime": {
+    "electron": "44.9.0",
+    "chrome": "152.0.7977.167",
+    "node": "24.22.0"
+  },
+  "sourceSHA256": {
+    "app.js": "bd938219a7015651e5ce55bf9bba85f55c7a6ab60bf38db74f715c4facb9239d",
+    "engine.js": "28daba2587f8d4f958901036928c52abcdf61f62db75f5aaa062d214534ca875",
+    "smart-sync.js": "2e3aa855b5112d2a5ec80b4126818aceeaa1f9264178fccc7fdf3ae1ba88f4c9",
+    "source-waveform.js": "2c21bf9bf88b1f9c629a9f0c332a57c1624d62412124e076c1728288bfc7e033",
+    "detail-waveform.js": "ac3b40e8fc1f51281f6dc53c465482e9cf88487a39b104d08ad1afb64245a8f5",
+    "four-deck-soak-harness.js": "f360e05b247063598a78f3228076b936b53e34cb8ddf1015b2388ea0a9b9a720",
+    "four-deck-soak-worklet.js": "13d043b3c76fbe87e5a4f51cca92b050b235bb5036ef442746bdcefd3425e202",
+    "four-deck-trace.js": "f654c2bd9d886ae96d3a0474aade36d1597733a4f2fbfcd20e704dbb3fea3d6b",
+    "library-waveform-preview.js": "2f1275e17edb9f9f76f027ac742c74ddc4e76c12bf881ea72f70bf09e850ac62",
+    "transport-presentation.js": "de8edb79c5430daf7e50ae75bbd3418452e3a0fa543479be13ad466388285d61",
+    "library-rows.js": "423ee7addf78d09c68b29ae899f163dda6a46d47114c326a78166712804b2847",
+    "four-deck-analysis-check.js": "8698797e77cfcef2104c21855766ba9ba5eaf611961184680d9d3f4fc5a9e3a3",
+    "analysis.js": "8cc165de4c77f70ce55bb4146b80f6ad6cc5671815b8fc2beb45d23fe18718ad",
+    "analysis-worker.js": "18043ae5c789285252ffae7e2bad6213367af7bcbec0e44e101b91637a3ef514",
+    "track-gain.js": "f390adbddd4e317444294a92d9e5a82b89d6abaa591578a158a00308628d5bfa",
+    "analysis-presentation.js": "f075f342343738ca753d830b9b89a071e51f90e74c203a1a015bfcf174107bca",
+    "analysis-input.js": "0e88089e891c3ab57c261eac27ce981de3c11999e00ea38416be7e560fd7f4e3",
+    "four-deck-overlap-check.js": "fb988d6c04134525d1af09995f76f719d9b5b1acc369662a6bffa564834d90e0"
+  },
+  "traceModeFailure": {
+    "observedNaturalFrameMs": 217.29999999701977,
+    "accepted": false,
+    "reason": "Requested recording_mode was ignored by the forwarded Chromium config dictionary; default until-full retained early data and discarded target-time chunks.",
+    "discardedChunks": 373116,
+    "overwrittenBytes": 0,
+    "oldNaturalTraceSHA256": "e9d7382f3e959955f72c92b4b95ed3398e1a57453e781e500b6854c24ffdb5c2",
+    "exactSources": [
+      "https://raw.githubusercontent.com/electron/electron/v44.9.0/shell/browser/api/electron_api_content_tracing.cc",
+      "https://raw.githubusercontent.com/chromium/chromium/152.0.7977.167/base/trace_event/trace_config.cc"
+    ],
+    "correction": "Use effective record_mode and require actual overwrite/target retention rather than requested settings."
+  },
+  "correctedCalibration": {
+    "synthetic": true,
+    "realTracksImported": 0,
+    "accepted": true,
+    "frameMs": 137.20000000298023,
+    "nativeKnownIntervalMs": 119.891,
+    "bufferKiB": 8192,
+    "rollover": {
+      "bytesOverwritten": 31469568,
+      "chunksOverwritten": 7683,
+      "chunksDiscarded": 0,
+      "observed": true,
+      "scope": "Actual buffer overwrite counters; not a complete/loss-free event guarantee"
+    },
+    "preRollMs": 806.3999999910593,
+    "postRollMs": 809.7999999970198,
+    "qualityGates": {
+      "measuredEventVisible": true,
+      "firstQualifyingEvent": true,
+      "retainedPrePostAnchors": true,
+      "observerPrompt": true,
+      "rendererSnapshotPrompt": true,
+      "onlyOwnedProcesses": true,
+      "controlsRetained": true,
+      "hostMuted": true,
+      "effectiveContinuousRollover": true,
+      "syntheticMeasureRetainedInsideEvent": true
+    },
+    "traceSHA256": "d7c49aedb430f0a15e5e8a1300086d8c508e8857d865a79892dbb67e9aa88cd5",
+    "independentCorrelationSHA256": "bacb14ccacb41154e05e36b9bf8792892a9c8c008d68895b3f45c57f419e9957"
+  },
+  "naturalIncident": {
+    "synthetic": false,
+    "accepted": true,
+    "realTracksImported": 8,
+    "secondsAfterSessionStart": 220.65060000000895,
+    "frameMs": 100.29999999701977,
+    "beforeRenderingMs": 51.5,
+    "blockingDurationMs": 49.4,
+    "scripts": [
+      {
+        "invoker": "TimerHandler:setTimeout",
+        "durationMs": 50.70000000298023,
+        "forcedStyleAndLayoutMs": 13.8,
+        "source": "prototype/four-deck-trace.js"
+      },
+      {
+        "invoker": "FrameRequestCallback",
+        "durationMs": 37.79999999701977,
+        "forcedStyleAndLayoutMs": 14.8,
+        "source": "prototype/four-deck-soak-harness.js"
+      }
+    ],
+    "preRollMs": 741.6000000089407,
+    "postRollMs": 879.5999999940395,
+    "mappingToleranceUs": 1000,
+    "observerParseAndFilterMs": 0.5999999940395355,
+    "qualityGates": {
+      "measuredEventVisible": true,
+      "firstQualifyingEvent": true,
+      "retainedPrePostAnchors": true,
+      "observerPrompt": true,
+      "rendererSnapshotPrompt": true,
+      "onlyOwnedProcesses": true,
+      "controlsRetained": true,
+      "hostMuted": true
+    },
+    "controlsAfter": {
+      "play": 4,
+      "tempo": 4,
+      "eq": 4,
+      "scrub": 4,
+      "previews": 9
+    },
+    "activePlayButtonsAfter": 3,
+    "partialSession": true,
+    "partialStatusAfter": "Running",
+    "hostMuted": true,
+    "rollover": {
+      "bytesOverwritten": 2188005376,
+      "chunksOverwritten": 534181,
+      "chunksDiscarded": 0,
+      "observed": true,
+      "scope": "Actual buffer overwrite counters; not a complete/loss-free event guarantee"
+    },
+    "traceBytes": 190008361,
+    "traceEvents": 718400,
+    "traceSHA256": "73c54a8c1fc22434fe9c296b768cba3695dd126b2dc9045af0c634f5cdd1bd3c",
+    "independentCorrelationSHA256": "518fd8f4e539a140d18c770fa0c54fccbd1cdea383a4661a514bf5dee9935604",
+    "source18BeforeAfterMatch": true,
+    "onlyOwnedProcesses": true,
+    "playbackTimeAccessibilitySnapshotsPerformed": false
+  },
+  "nativeAttribution": {
+    "trigger": "Harness turn10 vertical-to-horizontal layout selection during four-deck playback",
+    "mainTaskDurationsMs": [
+      50.576,
+      51.937
+    ],
+    "mechanism": {
+      "observed": "The timer task contains layout-preview.js orientation onchange and app renderDecks/renderMixer invalidation stacks. Native data-orientation and layout-Horizontal/layout-Vertical invalidations identify the actual change; the following renderer frame runs tick through the harness wrapper and forces further layout.",
+      "harnessTrigger": "Immutable harness turn10 enables two more keylocks then selects horizontal at line106; actual keylocks-four mark falls inside the timer at performance321343.3ms. This is a scripted vertical-to-horizontal live layout change at run+220.6506s.",
+      "productWork": "layout-preview applyDisplay dispatches #layout change; app handler renderDecks replaces all deck markup and renderMixer; adapters move/recreate layout groups. The invalidating work is product DOM work triggered by the test, not proof that the wrapper implementation caused the stall.",
+      "readVsWrite": "1,668 invalidation records carry getBoundingClientRect wrapper stacks at style/layout flush. These identify synchronous flush sites, not the original mutating write; direct earlier write stacks are recorded separately.",
+      "hasSelector": "1,155 invalidations say Affected by :has(); this indicates broad invalidation involvement, not measured CPU cost per selector.",
+      "nextNarrowHypothesis": "An orientation-only path can retain existing deck/mixer controls and update waveform orientation/layout without rebuilding both trees; verify a focused control survives and repeat the same live transition before any performance claim."
+    },
+    "sourceLocationPins": {
+      "layout-preview.js": {
+        "sha256": "434eb277fd74eac6387cbb5f8dac0a1b18da31cfcf14c3120707b0640e5b59db",
+        "lines": [
+          25,
+          26,
+          40,
+          41,
+          63,
+          200
+        ]
+      },
+      "app.js": {
+        "sha256": "bd938219a7015651e5ce55bf9bba85f55c7a6ab60bf38db74f715c4facb9239d",
+        "lines": [
+          431,
+          440,
+          471,
+          477,
+          483,
+          583,
+          1698,
+          1700
+        ]
+      },
+      "four-deck-soak-harness.js": {
+        "sha256": "f360e05b247063598a78f3228076b936b53e34cb8ddf1015b2388ea0a9b9a720",
+        "lines": [
+          12,
+          22,
+          103,
+          106
+        ]
+      },
+      "rekordbox-preview.js": {
+        "sha256": "9e79185883295425f64b1edc0225bd89a3d1d5347da3f59fb736958927073e48",
+        "lines": [
+          5,
+          7,
+          50
+        ]
+      }
+    },
+    "sourcePinLimit": "18 served-module hashes were captured before/after. Adapter line references were independently checked against immutable source52 Git, package52 and current disk; those adapter bytes are not separately included in this capture18 set.",
+    "invalidationEventInventory": {
+      "exactFrame": 6025,
+      "deckMarkupReplacementStack": 819,
+      "mixerMarkupReplacementStack": 353,
+      "rekordboxReparentStack": 789,
+      "affectedByHas": 1155,
+      "notDisjointOrUniqueNodeCounts": true
+    },
+    "completeMainGCNamedEventsInExactFrame": 0,
+    "limits": [
+      "Timer and RAF wrapper URLs identify attribution context, not the original mutating code",
+      "getBoundingClientRect is a flush site; earlier invalidating writes are separately identified",
+      "Thread CPU calibration slightly exceeds wall time; no exact off-CPU subtraction or CPU share claimed",
+      "Native invalidation counts are event inventories, not unique nodes or measured per-selector CPU cost"
+    ]
+  },
+  "newCards": {
+    "syncGridOwnership": "https://trello.com/c/ixqGkEo6",
+    "diagnosticRollover": "https://trello.com/c/hifyvb1y",
+    "orientationRebuild": "https://trello.com/c/UiNY8ER3"
+  },
+  "notEstablished": [
+    "Cause or resolution of earlier217.3/242.5ms unattributed frames",
+    "Intermittent audible Sync-pop cause or pop-free audio",
+    "Current grid-save candidate real-track/native integration",
+    "Long-term native playback/session stability",
+    "Physical headphone/master/controller routing",
+    "Late-track musical grids and complete vendor parity"
+  ],
+  "rawTraceAudioProfileMachineMetadataPublished": false,
+  "instrumentationOverheadUnquantified": true,
+  "noAccessibilitySnapshotsDuringPlaybackProvenance": "Parent action log; not inferred from the trace."
+}
