@@ -6,7 +6,8 @@ const bus=()=>({connections:[],gain:{value:1,cancelScheduledValues(){},setValueA
 function fixture({at=10,duration=100,realRetirement=false}={}){
  const e=new AudioEngine(),d={index:0,track:{id:'same',duration,bpm:120},position:at,anchorPosition:0,anchorTime:0,rate:1,keylock:true,keyShift:0,reverse:false,loop:false,playing:true,stems:[true,true,true,true],stemFX:[false,false,false,false]},adapters=[],effects=[];
  e.ctx={currentTime:at,sampleRate:48000,createGain:bus,createBufferSource(){return{playbackRate:{value:1},connect(){},disconnect(){},start(){},stop(){}};}};
- e.nodes=Array.from({length:4},()=>({input:bus(),gain:bus(),level:1,trim:1}));e.resume=async()=>{};e.buffer=async()=>({duration,sampleRate:48000,length:duration*48000});e.applyChannelFX=async i=>effects.push({at:e.ctx.currentTime,bpm:e.nodes[i].channelBpm});e.onError=()=>{};
+ // Controlled graph alias only: production init creates a distinct deckInput gain node.
+ e.nodes=Array.from({length:4},()=>({input:bus(),get deckInput(){return this.input;},gain:bus(),level:1,trim:1}));e.resume=async()=>{};e.buffer=async()=>({duration,sampleRate:48000,length:duration*48000});e.applyChannelFX=async i=>effects.push({at:e.ctx.currentTime,bpm:e.nodes[i].channelBpm});e.onError=()=>{};
  if(!realRetirement)e.retireVoiceAt=(i,v,when)=>e.retired={i,v,when};
  function adapter(options){
   let clock=[{when:options.playing?0:e.ctx.currentTime,position:options.position,playing:!!options.playing,rate:options.rate,keylock:options.keylock,semitones:options.semitones}];
