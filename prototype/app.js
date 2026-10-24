@@ -1695,7 +1695,24 @@ $("#search").oninput = (e) => {
   renderTracks();
 };
 $("#crate-search").oninput = renderCrates;
+function refreshWaveformOrientation(next) {
+  const previous=state.layout, modes=['Horizontal','Vertical'];
+  const detail=$('.detail-waves'), lanes=$('.waveform-scrub-lanes');
+  if(previous===next||!modes.includes(previous)||!modes.includes(next)||
+    renderedDeckShape!==`${previous}/${state.deckCount}/${state.settings['Sync Mode']}`||
+    document.querySelectorAll('.deck').length!==state.deckCount||!detail||!lanes||!$('#detail-wave'))return false;
+  state.layout=next;
+  document.body.classList.remove(`layout-${previous}`);document.body.classList.add(`layout-${next}`);
+  const horizontal=next==='Horizontal';detail.classList.toggle('detail-horizontal',horizontal);
+  lanes.style.removeProperty(`grid-template-${horizontal?'columns':'rows'}`);
+  lanes.style.setProperty(`grid-template-${horizontal?'rows':'columns'}`,`repeat(${state.deckCount},minmax(0,1fr))`);
+  document.querySelectorAll('[data-waveform-scrub]').forEach(node=>node.dataset.waveformScrub=horizontal?'x':'y');
+  renderedDeckShape=`${next}/${state.deckCount}/${state.settings['Sync Mode']}`;
+  requestAnimationFrame(()=>drawWaves());
+  return true;
+}
 $("#layout").onchange = (e) => {
+  if(refreshWaveformOrientation(e.target.value))return;
   state.layout = e.target.value;
   renderDecks();
 };
