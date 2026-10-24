@@ -1,5 +1,7 @@
 # Learnings
 
+- [2026-10-24 refresh-fx-from-audible-owner](2026-10-24-refresh-fx-from-audible-owner.md) — Keep requested future tempo separate from audible local-grid tempo and preserve newer FX owners across asynchronous work.
+
 - [2026-10-24 resolve-shared-resource-consumers](2026-10-24-resolve-shared-resource-consumers.md) — Resolve current consumers by resource identity when a shared asynchronous subscription completes.
 
 - [2026-10-24 separate-capture-export-work](2026-10-24-separate-capture-export-work.md) — Preserve acquisition timestamps and yield export work in encoding-aligned chunks before interpreting playback timing traces.

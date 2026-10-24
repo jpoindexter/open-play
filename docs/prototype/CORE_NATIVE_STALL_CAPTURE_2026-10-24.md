@@ -1,5 +1,9 @@
 # Native four-deck stall investigation — 24 October 2026
 
+## Subsequent source work
+
+[Sync FX ownership source6980024](CORE_SYNC_FX_BOUNDARY_2026-10-24.md) adds7focused/168Node checks, with separate9a8451a QA fixture9/9. No new live checks were run; this report's native incident still belongs to baseline52, not the later repairs.
+
 ## Current status
 
 An actual **100.3 ms orientation-change stall is now retained and inspected in native data**. The narrow acquisition work on [QA-FIX-02](https://trello.com/c/hifyvb1y) is complete for acquisition and retention only; this does not close waveform lag, Sync pops or the core DJ workflow. [CORE-FIX-09 — grid-save ownership](https://trello.com/c/ixqGkEo6) and [CORE-FIX-10 — orientation rebuild](https://trello.com/c/UiNY8ER3) remain open pending their real-path checks.
