@@ -19,6 +19,7 @@ import {startSyncedSample,sampleVoiceClock,disposeSampleVoice} from './sample-sy
 import {createReverseCensorPlan} from './reverse-censor-plan.js';
 import {CensorBacking} from './censor-backing.js';
 import {createBeatgrid} from './beatgrid.js';
+import {currentDeckBPM} from './deck-tempo.js';
 import {normalizeMixerSettings,crossfaderGain,upfaderGain,eqBands,normalizeEQBoost,boundedEQGain,rescaleEQGain} from './mixer-curves.js';
 import {createMasterOutput} from './master-output.js';
 import {normalizedMasterDB} from './master-output-kernel.js';
@@ -478,7 +479,8 @@ export class AudioEngine {
     handoff?.watch(d.index,controller,()=>this.startTokens.get(d.index)===token&&d.track===track);
     try {
       await this.resume();
-      this.nodes[d.index].channelBpm = (track.bpm || 120) * this.audibleRate(d);
+      if(!current())return;
+      this.nodes[d.index].channelBpm = currentDeckBPM(d,this,{smartSync:true}) || 120;
       await this.applyChannelFX(d.index);
       const original = await this.buffer(track);
       const stems = preparedStems===undefined?this.stemBuffers.get(track.id):preparedStems;
@@ -733,8 +735,10 @@ export class AudioEngine {
       });
       jobs.push(...participants.map(x=>x.start(group).catch(error=>{group?.fail(error);throw error;})));
       const results=await Promise.allSettled(jobs);const failed=results.find(r=>r.status==='rejected');if(failed){group?.fail(failed.reason);throw failed.reason;}group?.finish();
-      for(const x of saved)if(this.nodes[x.deck.index]){this.nodes[x.deck.index].channelBpm=x.track.bpm*x.rate;try{await this.applyChannelFX(x.deck.index);}catch(error){this.onError?.(error);}}
-      if(this.fxState){for(const x of saved)this.fxState[2][x.deck.index]=x.track.bpm*x.rate;try{this.configureFX(...this.fxState);}catch(error){this.onError?.(error);}}
+      const bpms=this.nodes.map(node=>node.channelBpm||120);
+      for(const x of saved)if(this.nodes[x.deck.index]&&x.deck.track===x.track&&x.deck.rate===x.rate&&this.rateOwners.get(x.deck)===x.owner&&(!x.playing||group?.owns(x.deck.index)))
+        bpms[x.deck.index]=currentDeckBPM(x.deck,this,{smartSync:true})||120;
+      try{this.updateFXBPMs(bpms);}catch(error){this.onError?.(error);}
     }catch(error){
       group?.fail(error);
       // Stop revokes a voice token, but must still roll back this uncommitted
@@ -796,9 +800,9 @@ export class AudioEngine {
       let ack; try {ack = await live.update({rate});} catch (error) {if (error.name === 'AbortError') return; if (d.rate === rate) d.rate = previous; throw error;}
       if (this.voices.get(d.index)?.liveKeylock !== live || ack.superseded) return;
       d.position = ack.position; d.anchorPosition = ack.position; d.anchorTime = ack.when;
-      if (this.nodes[d.index]) {this.nodes[d.index].channelBpm = (d.track.bpm || 120) * this.audibleRate(d); await this.applyChannelFX(d.index);}
+      if (this.nodes[d.index]) {this.nodes[d.index].channelBpm = currentDeckBPM(d,this,{smartSync:true}) || 120; await this.applyChannelFX(d.index);}
       if (this.voices.get(d.index)?.liveKeylock !== live) return;
-      if (this.fxState) {this.fxState[2][d.index] = (d.track.bpm || 120) * this.audibleRate(d); this.configureFX(...this.fxState);}
+      if (this.fxState) {this.fxState[2][d.index] = currentDeckBPM(d,this,{smartSync:true}) || 120; this.configureFX(...this.fxState);}
       return;
     }
     const p = this.position(d);
@@ -820,11 +824,11 @@ export class AudioEngine {
       for (const source of s.sources || [s]) source.playbackRate.value = rate;
     if (was && restart) await this.start(d);
     if (this.nodes[d.index]) {
-      this.nodes[d.index].channelBpm = (d.track?.bpm || 120) * rate;
+      this.nodes[d.index].channelBpm = currentDeckBPM(d,this,{smartSync:true}) || 120;
       await this.applyChannelFX(d.index);
     }
     if (this.fxState) {
-      this.fxState[2][d.index] = (d.track?.bpm || 120) * rate;
+      this.fxState[2][d.index] = currentDeckBPM(d,this,{smartSync:true}) || 120;
       this.configureFX(...this.fxState);
     }
   }
