@@ -253,6 +253,11 @@ export function createSmartSync({engine, state, externalLeader=()=>null}) {
   }
   function captureGrid(track){
     if(!enabled())return [];
+    // Pending Sync and armed Play must relinquish the old grid before saving its replacement.
+    for(const deck of state.decks)if(deck.track===track&&(pendingPresses.has(deck)||alignmentTimelines.has(deck))){
+      if(alignmentTimelines.get(deck)?.valid())engine.transforms?.get(deck.index)?.abort();
+      revise(deck);
+    }
     return state.decks.filter(d=>d.track===track&&engaged(d)).map(deck=>({
       deck,track,grid:createBeatgrid(track),clock:engine.voiceClock(deck,engine.voices.get(deck.index)),
       status:deck.syncState,role:deck.syncRole,playing:deck.playing

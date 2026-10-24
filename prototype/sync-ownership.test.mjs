@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import {AudioEngine} from './engine.js';
 import {createSmartSync} from './smart-sync.js';
 import {createCueHolds} from './holds.js';
+import {createBeatgrid} from './beatgrid.js';
 
 // Real Sync/start ownership with a controlled clock and graph endpoints, not PCM.
 function fixture(stall=0){
@@ -54,6 +55,51 @@ test('explicit Stop cancels pending Sync while its own uncommitted rate rolls ba
  await assert.rejects(pending,{name:'AbortError'});
  assert.equal(deck.rate,1);assert.equal(deck.playing,false);assert.equal(deck.processing,false);
  assert.equal(engine.voices.size,0);assert.equal(engine.transforms.size,0);assert.deepEqual(starts,[]);
+});
+
+test('saving a grid cancels initially unsynced playing preparation and a fresh Sync uses the new grid',async()=>{
+ const {engine,deck,leader,smart,old,starts,retired}=fixture(),before={...leader};let resume;
+ engine.onGridWillChange=track=>smart.captureGrid(track);
+ engine.onGridChanged=(track,saved)=>smart.edited(track,saved);
+ engine.resume=()=>new Promise(resolve=>{resume=resolve;});
+ const pending=smart.press(deck),rejected=assert.rejects(pending,{name:'AbortError'});
+ assert.equal(!!deck.sync,false);assert.equal(deck.processing,true);assert.equal(typeof resume,'function');
+ // Actual Save grid callback order, while the original track object is retained.
+ const track=deck.track,saved=engine.onGridWillChange(track);
+ Object.assign(track,{bpm:100,grid:.1,gridWarpMarkers:[],metadataRevision:(track.metadataRevision||0)+1});
+ await engine.onGridChanged(track,saved);resume();await rejected;
+ assert.equal(deck.rate,1);assert.equal(deck.playing,true);assert.equal(!!deck.sync,false);assert.equal(deck.processing,false);
+ assert.equal(engine.voices.get(deck.index),old);assert.deepEqual(starts,[]);assert.deepEqual(retired,[]);
+ assert.equal(engine.transforms.size,0);assert.deepEqual(leader,before,'Grid editing must not change the outgoing master');
+ engine.resume=async()=>{};await smart.press(deck);
+ assert.equal(deck.rate,1.26);assert.equal(deck.syncState,'beat');assert.equal(starts.length,1);assert.equal(starts[0].rate,1.26);
+ assert.deepEqual(retired,[old]);assert.deepEqual(leader,before);
+ engine.ctx.currentTime=deck.anchorTime+1;
+ const own=createBeatgrid(track).beatAt(engine.position(deck)),primary=createBeatgrid(leader.track).beatAt(engine.position(leader));
+ assert.ok(Math.abs(((own-primary+2)%4+4)%4-2)<1e-9,'The fresh Sync must retain current-grid phase after the handoff');
+ assert.equal(track.bpm*engine.audibleRate(deck),126);
+});
+
+test('saving a grid during paused unsynced tempo preparation cannot arm the stale request',async()=>{
+ const {engine,deck,leader,smart,starts,retired}=fixture(),before={...leader};let release;
+ deck.playing=false;engine.voices.delete(deck.index);
+ engine.onGridWillChange=track=>smart.captureGrid(track);
+ engine.onGridChanged=(track,saved)=>smart.edited(track,saved);
+ engine.applyChannelFX=()=>new Promise(resolve=>{release=resolve;});
+ const pending=smart.press(deck),rejected=assert.rejects(pending,{name:'AbortError'});
+ assert.equal(typeof release,'function');assert.equal(!!deck.sync,false);
+ const track=deck.track,saved=engine.onGridWillChange(track);
+ Object.assign(track,{bpm:100,grid:.1,gridWarpMarkers:[],metadataRevision:(track.metadataRevision||0)+1});
+ await engine.onGridChanged(track,saved);release();await rejected;
+ assert.equal(deck.playing,false);assert.equal(!!deck.sync,false);assert.notEqual(deck.syncState,'armed');
+ assert.equal(engine.voices.size,0);assert.deepEqual(starts,[]);assert.deepEqual(retired,[]);assert.deepEqual(leader,before);
+ engine.applyChannelFX=async()=>{};await smart.press(deck);
+ assert.equal(deck.rate,1.26);assert.equal(deck.syncState,'armed');assert.equal(deck.playing,false);assert.deepEqual(starts,[]);
+ await smart.start(deck);assert.equal(deck.playing,true);assert.equal(deck.syncState,'beat');assert.equal(starts.length,1);
+ engine.ctx.currentTime=deck.anchorTime+1;
+ const own=createBeatgrid(track).beatAt(engine.position(deck)),primary=createBeatgrid(leader.track).beatAt(engine.position(leader));
+ assert.ok(Math.abs(((own-primary+2)%4+4)%4-2)<1e-9,'The fresh armed launch must use the saved grid');
+ assert.equal(track.bpm*engine.audibleRate(deck),126);assert.deepEqual(leader,before);
 });
 
 test('a newer Reverse start retains its rate when the older Sync is canceled',async()=>{
