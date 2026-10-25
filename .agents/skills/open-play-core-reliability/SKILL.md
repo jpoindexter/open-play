@@ -23,7 +23,7 @@ Reduce one reproduced core mixing failure without redesigning layouts, hiding co
 2. Find existing harnesses and evidence before adding a diagnostic helper. Pin the unmodified product baseline and use separate labeled session, audio-library and thumbnail namespaces.
 3. Reproduce the actual failing path and save its failure before changing product code. Keep unattended physical outputs muted and assert that mute remains active.
 4. Enumerate callers and state/DOM ownership. Make one bounded repair, preserving cancellation, error handling, focus/accessibility and structural fallbacks.
-5. Run focused regressions and the existing Node suite. Compare matched real-track sessions through the actual HTML controls/worker, retaining event timing, controls/previews, master ownership, PCM and source hashes.
+5. Per Jason’s 25 October 2026 correction, run one focused check for the reproduced defect. Use the full Node suite only at a release checkpoint or for a concrete regression risk; do not add matrices or repeat clean cases. Prefer practical mixing through the existing interface, preserving controls/previews, master ownership and the next actual failure’s context.
 6. Inspect complete captured windows independently. Source-grid phase and finite/gap telemetry do not prove musical alignment or absence of audible pops.
 7. If desktop packaging is authorized, package an immutable commit and inspect the ASAR. Observe native startup separately; if locked, leave it pending and do not bypass the lock or disturb an unobserved session.
 8. Update existing Trello summaries before adding cards. Preserve history/criteria/model guidance; read back exact changes and board dispositions. Update current handoffs while retaining historical tails.
@@ -61,7 +61,7 @@ The user's current request controls scope. Preserve original music, normal profi
 ## Proof of Done
 
 - Save an actual failing reproduction, then execute that same path after repair and observe the required result.
-- Run `node --test prototype/*.test.mjs` and affected actual-workspace checks; retain hashes and explicit limits.
+- Run the affected actual-workspace path and its focused regression; state the evidence’s limits. Reserve `node --test prototype/*.test.mjs` for a release checkpoint or a named regression risk, not every pass.
 - Verify originals and normal session unchanged; assert mute and stopped/no-queued-restart cleanup.
 - If packaged, run the versioned package inspector; label native UI and listening checks executed or pending separately.
 - Read back Trello descriptions/comments and list/completion counts. Verify pushed source/draft PR and historical prompt/handoff preservation.
