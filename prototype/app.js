@@ -1,5 +1,6 @@
 import {trackMetadata,validateMetadata} from './library-state.js';
 import {createSessionStorage} from './session-storage.js';
+import {snapshotDeckSession,restoreDeckSession} from './deck-session.js';
 import {installSessionStatus} from './session-status.js';
 import {autoGainMode} from './auto-gain.js';
 import {createTrackGain,trackGainDB} from './track-gain.js';
@@ -195,6 +196,8 @@ document.addEventListener('pointerdown',resumePreparedAudio,{capture:true});
 document.addEventListener('keydown',resumePreparedAudio,{capture:true});
 if (saved.tags)
   for (const t of state.tracks) Object.assign(t, saved.tags[t.id] || {});
+const restoredDeckSession=restoreDeckSession(saved.deckSession,state);
+$("#deck-count").value=String(state.deckCount);
 stemCrate=createStemCrate({state,preparation:stemPreparation,persist,onMembership:()=>{const libraryFocus=!!document.activeElement.closest('#tracks');renderTracks();if(libraryFocus)focusSelectedTrack();},onStatus:updateStemStatus});
 const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
 const time = (v) => {
@@ -222,6 +225,7 @@ function sessionSnapshot(){
     fxTempo:normalizeFXTempoSettings(state.fxTempo,2),fxBeatMultipliers:state.fxBeatMultipliers,
     localTags:state.localTags,mappings:state.mappings,settings:state.settings,crates:state.crates,
     prepare:state.prepare,history:state.history,historySessions:state.historySessions,
+    deckSession:snapshotDeckSession(state,deck=>engine.position(deck)),
     tags:Object.fromEntries(state.tracks.filter(t=>t.demo).map(t=>[t.id,trackMetadata(t)])),
   };
 }
@@ -682,8 +686,9 @@ async function load(index, id = state.selected, options = {}) {
   if (state.decks[index] !== d || deckLoadRequests.get(d) !== request) return;
   if (d.playing && state.settings["Lock Playing Deck"])
     return notify("Playing deck locked. Pause it before replacement.");
-  d.previous = old;
+  d.previous = options.restore ? null : old;
   d.track = t;
+  d.sessionMissing = null;
   trackGain.refresh(t);
   d.videoLoadGeneration = (d.videoLoadGeneration || 0) + 1;
   if (state.flip.deck === index) flipAutomation.stop();
@@ -722,7 +727,7 @@ async function load(index, id = state.selected, options = {}) {
     state.decks.map((deck) => (deck.track?.bpm || 120) * deck.rate),
     state.fxTempo,
   );
-  state.focus = index;
+  if(!options.restore)state.focus = index;
   renderDecks(index);
   let decoded=false;
   try {
@@ -882,6 +887,7 @@ async function deckAction(action, index, el, event = {}) {
     if (state.decks[index] !== d || deckLoadRequests.get(d) !== request) return;
     d.previous = d.track ? { id: d.track.id, position: d.position } : null;
     d.track = null;
+    d.sessionMissing = null;
     engine.pruneDecodedBuffers();
     smartSync.reconcile();
     d.position = 0;
@@ -2046,8 +2052,7 @@ function tick() {
 renderCrates();
 renderTracks();
 renderDecks();
-load(0, "demo-0");
-load(1, "demo-1");
+for(const plan of restoredDeckSession.plans)if(plan.index<state.deckCount)void load(plan.index,plan.id,{position:plan.position,skipDouble:true,restore:true});
 void stemCrate.refreshAll();
 requestAnimationFrame(tick);
 window.addEventListener("beforeunload", () => {
@@ -2115,3 +2120,5 @@ document.querySelectorAll("[data-startup-inert]").forEach(element => {
 });
 document.body.dataset.ready = "true";
 if(state.localAudio.error)notify(state.localAudio.error);
+else if(restoredDeckSession.missing.length)notify(`${restoredDeckSession.missing.length} previously loaded track(s) are unavailable. Import their original files to load them again.`);
+else if(saved.deckSession)notify("Loaded tracks restored paused. Tempo and Sync start reset.");

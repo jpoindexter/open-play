@@ -1,5 +1,6 @@
 import {settingsSchema,demoTracks} from './fixtures.js';
 import {createBeatgrid} from './beatgrid.js';
+import {validateDeckSession} from './deck-session.js';
 import {ruleFields,ruleOperators} from './library.js';
 
 const object=x=>x!==null&&typeof x==='object'&&!Array.isArray(x);
@@ -94,6 +95,7 @@ function historyEvents(events){
 }
 export function validateSavedState(data){
   safeJSON(data);check(object(data),'saved session');const result={...data};
+  if(data.deckSession!==undefined)validateDeckSession(data.deckSession);
   if(data.crates!==undefined)result.crates=crates(data.crates);
   if(data.settings!==undefined)result.settings=validateSettings(data.settings);
   for(const key of ['tags','localTags'])if(data[key]!==undefined){check(object(data[key]),key);result[key]=Object.fromEntries(Object.entries(data[key]).map(([id,tag])=>[id,validateMetadata(tag,key==='tags'?demoTracks.find(t=>t.id===id):undefined)]));}
