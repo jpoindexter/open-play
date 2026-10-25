@@ -1,5 +1,7 @@
 # Learnings
 
+- [2026-10-25 guard-before-sync-handoff](2026-10-25-guard-before-sync-handoff.md) — Protect asynchronous preparation before claiming the transport; retain reverse audio and local Quantize control identity.
+
 - [2026-10-25 keep-preparation-transactional](2026-10-25-keep-preparation-transactional.md) — Revoke obsolete work before decoding, retain audio until fallible rate preparation succeeds, and update coordinate controls in place.
 
 - [2026-10-24 refresh-fx-from-audible-owner](2026-10-24-refresh-fx-from-audible-owner.md) — Keep requested future tempo separate from audible local-grid tempo and preserve newer FX owners across asynchronous work.
