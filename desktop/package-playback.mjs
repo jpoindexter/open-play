@@ -11,7 +11,7 @@ const git=args=>execFileSync('git',args,{cwd:root,maxBuffer:150*1024*1024});
 const sha=bytes=>createHash('sha256').update(bytes).digest('hex');
 const sourceCommit=git(['rev-parse','HEAD']).toString().trim();
 const get=file=>git(['show',`${sourceCommit}:${file}`]);
-const version='0.1.54',name='Open Play Playback Test',port=18775,bundle='org.openplay.dj.playback.localtest';
+const version='0.1.55',name='Open Play Playback Test',port=18775,bundle='org.openplay.dj.playback.localtest';
 const profile='Open Play Playback Test',partition='persist:open-play-playback-test';
 const stage=await mkdtemp(path.join(tmpdir(),'open-play-playback-'));
 await mkdir(path.join(stage,'assets'));
@@ -54,9 +54,9 @@ await put('assets/docs/prototype/TRY_CURRENT_DESKTOP.md',`# Core desktop test ${
 
 Built from immutable source ${sourceCommit}. Opens the existing rekordbox workspace directly in the sandboxed main frame, retaining layouts, core controls, headphone knobs and library waveform previews. No framework or native audio rewrite.
 
-Channel LEVEL faders now reset to their factory80% and the crossfader to centre with a double-click or Control/Command+Home. They use the existing mixer handlers; ordinary Home/End and tempo reset behavior remain. Full default-reset coverage is still tracked separately on UI-RESET-01.
+Play counts now survive saved-session reload and metadata backup/restore through the shared validated metadata whitelist. Existing entries without a count stay compatible. Channel LEVEL/crossfader default resets from54 remain; full reset coverage stays open.
 
-Use saved library songs, load one per deck, and use Horizontal / Compact. The next session is practical mixing: observe four-deck waveforms during a replacement/analysis, then try incoming Sync and cancel with OFF. Controls, focus and library previews should remain available. This package includes the accumulated refresh and transport-ownership repairs; their native behavior is still pending. Remaining manual transition, EQ and temporary Cue listening checks can follow when convenient. Computer stereo does not prove independent headphone routing.
+Use saved library songs and Horizontal / Compact. Prior0.1.53 listening accepted four-deck Sync/crossfade, manual tempo/jog transition, A/B EQ, temporary Cue and clean stop; do not repeat clean cases automatically. Current work continues hardware-independent core defects with one focused check each. Preserve controls, focus and library previews. Rare pops/stalls remain open for concrete events; computer stereo does not prove independent headphone routing.
 
 The intermittent Sync pop remains open. Capture the next actual occurrence; do not repeat clean matrices or declare full-core completion from packaging. Source safety changes and limits are documented in CORE_SYNC_ROLLBACK_2026-10-25.md and CORE_NATIVE_STALL_CAPTURE_2026-10-24.md. Use one focused check per reproduced bug; reserve a full suite for a release checkpoint or a concrete regression risk. Native sound, physical MIDI/headphone isolation and full parity remain separate gates.
 

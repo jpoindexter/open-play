@@ -27,7 +27,7 @@ function safeJSON(value,path='library',depth=0){
     safeJSON(entry,`${path}.${key}`,depth+1);
   }
 }
-export const metadataFields=['title','artist','album','bpm','key','rating','comment','color','cues','savedLoops','grid','gridMarkers','gridWarpMarkers','locked','flips','sampleGain','trackGainDb','autoGainSchema','autoGainOffsetDb','autoGainPendingDb','analysisResult','metadataSources','analysisGainDb','metadataRevision','stemJob','stemModel','stemBackend','inStemCrate'];
+export const metadataFields=['title','artist','album','bpm','key','plays','rating','comment','color','cues','savedLoops','grid','gridMarkers','gridWarpMarkers','locked','flips','sampleGain','trackGainDb','autoGainSchema','autoGainOffsetDb','autoGainPendingDb','analysisResult','metadataSources','analysisGainDb','metadataRevision','stemJob','stemModel','stemBackend','inStemCrate'];
 export function trackMetadata(track){return Object.fromEntries(metadataFields.filter(key=>track[key]!==undefined).map(key=>[key,track[key]]));}
 function analysis(value){
   if(value===null)return true;
@@ -41,7 +41,7 @@ function analysis(value){
   return true;
 }
 export function validateMetadata(input,track={}){
-  fields(input,{title:string,artist:string,album:string,key:string,comment:string,color,bpm:range(0,999),rating:range(0,5),grid:nullable(number),locked:bool,inStemCrate:bool,
+  fields(input,{title:string,artist:string,album:string,key:string,comment:string,color,bpm:range(0,999),rating:range(0,5),plays:x=>Number.isSafeInteger(x)&&x>=0,grid:nullable(number),locked:bool,inStemCrate:bool,
     cues:list(nullable(object)),savedLoops:list(nullable(object)),gridMarkers:list(number),gridWarpMarkers:list(object),flips:list(nullable(object)),
     sampleGain:range(-24,24),trackGainDb:range(-24,24),autoGainSchema:x=>x===1,autoGainOffsetDb:range(-48,48),autoGainPendingDb:range(-24,24),analysisGainDb:nullable(number),metadataRevision:nonnegative,
     analysisResult:analysis,metadataSources:object,stemJob:nullable(string),stemModel:nullable(string),stemBackend:nullable(string)},'track');
