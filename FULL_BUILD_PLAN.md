@@ -10,6 +10,8 @@ New source/browser slice: one40px performance header, actual Astryx icon control
 
 Current reference work: [rekordbox interface catalog](docs/design-system/catalog/README.md),97entries with58screen/state captures,7private captures,6AX-only menus and26unvisited routes. Fresh REA covers all four Performance layouts and the main panel states. Native evidence covers Preferences and library/View states. Per-view dimensions replace guessing; source sizing is not visually accepted yet. Shared mixer/typography ownership is checkpointed separately from complete all-style migration. Core/audio/native/beta gates above remain open.
 
+New bounded core evidence: [one current-HTML real-track Sync→Shift-Sync cancellation](docs/prototype/CORE_SYNC_CANCEL_BROWSER_2026-10-25.md). Four retained playing voices; incoming1×→requested1.0262×→OFF1×, pending transform observed;233controls/preview nodes retained, cleanup stopped/muted. Only diagnostic modules changed, no product DSP fix or broad suite. Native/held-ACK/other-owner/PCM/pop/stall gates remain open; CORE-FIX-08/15 updated separately.
+
 ---
 
 ## Historical status — core four-deck reliability, 25 October 2026

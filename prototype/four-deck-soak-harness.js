@@ -3,7 +3,7 @@ import {sourceWaveformState,sourceWaveformRasterUsage} from './source-waveform.j
 import {createBeatgrid} from './beatgrid.js';
 import {installFourDeckTrace} from './four-deck-trace.js';
 import {checkAnalysis} from './four-deck-analysis-check.js';
-import {checkSyncOverlap} from './four-deck-overlap-check.js';
+import {checkSyncOverlap,checkSyncCancellation} from './four-deck-overlap-check.js';
 const traceMode=new URL(location.href).searchParams.has('trace'),trace=traceMode?installFourDeckTrace():null;
 const $=s=>document.querySelector(s),sleep=ms=>new Promise(r=>setTimeout(r,ms)),assert=(ok,text)=>{if(!ok)throw Error(text);};
 const report={trace:trace?.report,scope:'Unattended real-track four-deck GUI session; physically muted. Declared grid phase and finite/gap telemetry do not establish musical tightness or pop-free acoustics.',events:[],windows:[],audio:[],errors:[]};
@@ -71,7 +71,7 @@ async function capture(label,seconds=4){
 async function boot(){
  const run=new URL(location.href).searchParams.get('run')||'';assert(/^[a-z0-9-]{0,60}$/.test(run),'Invalid owned run label');
  if(run&&globalThis.caches){const open=caches.open.bind(caches);caches.open=name=>open('openplay-four-deck-'+run+'-'+name);}
- assert(location.port==='18844','Dedicated port18844 required');const original=localStorage,before=original.getItem(sessionKey),values=new Map(),open=indexedDB.open.bind(indexedDB);
+ assert(['18844','18847'].includes(location.port),'Dedicated diagnostic port18844 or18847 required');const original=localStorage,before=original.getItem(sessionKey),values=new Map(),open=indexedDB.open.bind(indexedDB);
  Object.defineProperty(window,'localStorage',{value:{getItem:k=>values.get(k)??null,setItem:(k,v)=>values.set(k,String(v)),removeItem:k=>values.delete(k)}});indexedDB.open=(name,version)=>open('openplay-four-deck-soak-owned-'+run+'-'+name,version);report.sessionUnchanged=()=>original.getItem(sessionKey)===before;
  localStorage.setItem(sessionKey,JSON.stringify({settings:{'Use Auto Gain':false,'Analyze Stems':false,'Workspace Layout':'rekordbox','Sync Mode':'Smart Sync'}}));
  const parsed=new DOMParser().parseFromString(await(await fetch('workspace-preview.html')).text(),'text/html');for(const a of parsed.body.attributes)document.body.setAttribute(a.name,a.value);for(const link of parsed.querySelectorAll('link[rel=stylesheet]'))document.head.append(link);for(const n of [...parsed.body.children])if(n.tagName!=='SCRIPT')document.body.append(n);
@@ -85,10 +85,19 @@ $('#soak-files').onchange=async e=>{
   const files=[...e.target.files];assert(files.length===8,'Choose exactly eight tracks');$('#soak-files').disabled=true;app.state.analysisSettings.onImport=true;
   const input=$('#audio-files'),data=new DataTransfer();files.forEach(file=>data.items.add(file));input.files=data.files;await input.onchange({target:input});
   await until(()=>!app.state.analysis,'native analysis',600);tracks=files.map(file=>app.state.tracks.find(t=>t.filename===file.name||t.file?.name===file.name));assert(tracks.every(t=>t?.bpm>0&&Number.isFinite(t.grid)),'Native analysis requires valid tempo/grid');report.tracks=tracks.map(t=>({id:t.id,title:t.title,duration:t.duration,bpm:t.bpm,grid:t.grid,analysisMethod:t.analysisResult?.tempo?.reason,warpMarkers:t.gridWarpMarkers||[]}));
-  for(let i=0;i<4;i++)await load(i,tracks[i]);$('#soak-run').disabled=false;$('#soak-run').textContent=traceMode?'Run five-minute trace':'Run20-minute four-deck session';report.status='Ready';show();
+  for(let i=0;i<4;i++)await load(i,tracks[i]);$('#soak-run').disabled=false;if($('#soak-cancel'))$('#soak-cancel').disabled=false;$('#soak-run').textContent=traceMode?'Run five-minute trace':'Run20-minute four-deck session';report.status='Ready';show();
  }catch(error){report.errors.push(error.stack);report.status='Setup failed';show();}
 };
 $('#soak-stop').onclick=()=>{stopping=true;app?.engine.silence();report.status='Stopped';show();};
+if(new URL(location.href).searchParams.has('syncCancelOnly')){
+ const button=document.createElement('button');button.id='soak-cancel';button.disabled=true;button.textContent='Check rapid Sync then OFF once';$('#soak').prepend(button);
+ button.onclick=async()=>{
+  try{assert(tracks.length===8,'Import the eight tracks first');button.disabled=true;report.status='Checking one cancellation window';
+   await checkSyncCancellation({app,click,until,event,report,play,sync});report.status='Cancellation checked; stopped';
+  }catch(error){report.errors.push(error.stack);report.status='Cancellation failed or inconclusive';}
+  finally{report.cancellation??={};report.cancellation.sessionUnchanged=report.sessionUnchanged();show();}
+ };
+}
 $('#soak-run').onclick=async()=>{
  let meter,timer;
  try{

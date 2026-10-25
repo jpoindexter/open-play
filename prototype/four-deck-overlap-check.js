@@ -15,3 +15,46 @@ export async function checkSyncOverlap({app,count,label,click,until,capture,even
  (report.overlapChecks??=[]).push({label,count,deck:deck.index,track:deck.track.title,before,rate:deck.rate,audible,expected,masterRetained:true});
  event('overlap-after',report.overlapChecks.at(-1));
 }
+
+// One real-workspace cancellation window; no held ACKs or injected preparation delay.
+export async function checkSyncCancellation({app,click,until,event,report,play,sync}){
+ const {state,engine}=app,assert=(ok,message)=>{if(!ok)throw Error(message);};
+ const incoming=state.decks[1],outgoing=state.decks[0];
+ const sample=d=>({playing:d.playing,processing:!!d.processing,queued:!!d.playQueued,sync:!!d.sync,rate:d.rate,audible:engine.audibleRate(d)});
+ assert(engine.audioMonitor.snapshot().physicalMuted,'Physical output must remain muted');
+ assert(state.decks.every(d=>d.track?.bpm>0&&!d.playing),'Four analyzed, paused tracks required');
+ try{
+  await engine.resume();
+  for(const d of state.decks)await play(d.index);
+  await sync(0);
+  click('[data-action="syncOff"][data-deck="1"]');
+  click('[data-action="tempoReset"][data-deck="1"]');
+  await until(()=>!incoming.processing&&!incoming.sync&&Math.abs(incoming.rate-1)<1e-8,'independent incoming tempo',15);
+  click('[data-action="keylock"][data-deck="1"]');
+  await until(()=>incoming.keylock&&!incoming.processing,'incoming key lock',15);
+  const voices=state.decks.map(d=>engine.voices.get(d.index)),rates=state.decks.map(d=>d.rate);
+  const target=outgoing.track.bpm*outgoing.rate/incoming.track.bpm;
+  assert(Math.abs(target-incoming.rate)>.001,'Incoming baseline must differ from the requested Sync tempo');
+  const retained=[...document.querySelectorAll('.deck,.deck button,.deck input,.deck select,#mixer,#mixer input,#detail-wave,.library-wave-preview img')];
+  report.cancellation={before:state.decks.map(sample),target,tracks:state.decks.map(d=>d.track.title)};
+  click('[data-action="sync"][data-deck="1"]');click('[data-action="sync"][data-deck="1"]');
+  // Shift-Sync shares the production OFF handler and stays available during preparation.
+  assert(incoming.processing,'No pending Sync window observed; this run is inconclusive');
+  report.cancellation.pending={state:sample(incoming),transforms:engine.transforms.size,startToken:engine.startTokens.get(1)};
+  event('cancel-pending',{deck:1,...report.cancellation.pending});
+  document.querySelector('[data-action="sync"][data-deck="1"]').dispatchEvent(new MouseEvent('click',{bubbles:true,shiftKey:true}));
+  await until(()=>!incoming.processing&&!incoming.playQueued&&!engine.transforms.size,'canceled preparation settles',15);
+  await new Promise(resolve=>setTimeout(resolve,250));
+  const after=state.decks.map(sample);
+  assert(state.decks.every((d,i)=>d.playing&&engine.voices.get(i)===voices[i]&&d.rate===rates[i]),'Cancellation changed a retained playing voice or nominal rate');
+  assert(!incoming.sync&&Math.abs(engine.audibleRate(incoming)-rates[1])<1e-6,'Canceled incoming Sync left state/audio rate disagreement');
+  assert(engine.voices.get(0)===voices[0]&&outgoing.rate===rates[0],'Outgoing master changed');
+  assert(retained.every(node=>node.isConnected),'Cancellation replaced controls or library previews');
+  assert(engine.audioMonitor.snapshot().physicalMuted,'Physical mute changed');
+  Object.assign(report.cancellation,{after,pendingObserved:true,retained:retained.length,passed:true,physicalMuted:true});
+ }finally{
+  engine.silence();
+  report.cancellation??={};report.cancellation.stopped=state.decks.every(d=>!d.playing&&!d.playQueued);
+  report.cancellation.physicalMuted=engine.audioMonitor.snapshot().physicalMuted;
+ }
+}
