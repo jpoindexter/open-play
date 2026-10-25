@@ -367,7 +367,7 @@ export function createPanels(a) {
       ]
         .map(
           ([k, l]) =>
-            `<label>${l}<input name="${k}" value="${k === "bpm" && !t[k] ? "" : esc(t[k])}" ${k === "bpm" ? 'type="number" min="1" max="999" step=".01"' : ""}></label>`,
+            `<label>${l}<input name="${k}" value="${k === "bpm" && !t[k] ? "" : esc(t[k])}" ${k === "bpm" ? 'type="number" min="1" max="999" step="any"' : ""}></label>`,
         )
         .join(
           "",
