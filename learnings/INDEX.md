@@ -1,5 +1,7 @@
 # Learnings
 
+- [2026-10-25 keep-preparation-transactional](2026-10-25-keep-preparation-transactional.md) — Revoke obsolete work before decoding, retain audio until fallible rate preparation succeeds, and update coordinate controls in place.
+
 - [2026-10-24 refresh-fx-from-audible-owner](2026-10-24-refresh-fx-from-audible-owner.md) — Keep requested future tempo separate from audible local-grid tempo and preserve newer FX owners across asynchronous work.
 
 - [2026-10-24 resolve-shared-resource-consumers](2026-10-24-resolve-shared-resource-consumers.md) — Resolve current consumers by resource identity when a shared asynchronous subscription completes.
