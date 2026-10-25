@@ -6,7 +6,7 @@
 
 [Delivery/re-entry](../docs/prototype/desktop-0.1.52-playback-delivery.json), [executed report/limits](../docs/prototype/CORE_TERMINAL_ANALYSIS_REFRESH_2026-10-24.md), [runtime/source](../docs/prototype/terminal-analysis-results.json), [PCM](../docs/prototype/terminal-analysis-pcm-inspection.json), [native window](../docs/prototype/terminal-analysis-native-window.json), [Trello reconciliation](../docs/delivery/CORE_TERMINAL_ANALYSIS_RECONCILIATION_2026-10-24.json).
 
-Now: ANA-FIX-01/04/05 are closed against retained executed staging/redraw criteria and current identical repair paths;157cards/9complete, no reruns or new cards. See docs/delivery/CORE_NARROW_STALL_CLOSURES_2026-10-25.json. Parent pop/stall/overlap/lifecycle cards remain open. Next distinct integration is one live real-track four-deck orientation transition/event window, avoiding the broad soak/matrix. Preserve prior53listening,54fader,55count and56session evidence; hardware remains deferred.
+Now: native56 four-real-track Compact H→V→H control-state usability is observed, with stopped cleanup; see desktop-0.1.56-live-orientation.json. This is not frame-time/DOM-identity/held-pointer or musical proof. VisibleHorizontal/AXVertical disagreement is on UI-004, cause unverified. Next scope the existing private native observer to one manual timing/retained-node orientation event instead of a full soak; pending Sync→OFF remains separate. ANA-FIX-01/04/05 narrow repairs complete;157cards/9complete, parent reliability cards open. Preserve prior53listening/54fader/55count/56session evidence; hardware deferred.
 
 ---
 
