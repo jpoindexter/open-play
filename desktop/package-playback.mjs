@@ -11,7 +11,7 @@ const git=args=>execFileSync('git',args,{cwd:root,maxBuffer:150*1024*1024});
 const sha=bytes=>createHash('sha256').update(bytes).digest('hex');
 const sourceCommit=git(['rev-parse','HEAD']).toString().trim();
 const get=file=>git(['show',`${sourceCommit}:${file}`]);
-const version='0.1.56',name='Open Play Playback Test',port=18775,bundle='org.openplay.dj.playback.localtest';
+const version='0.1.57',name='Open Play Playback Test',port=18775,bundle='org.openplay.dj.playback.localtest';
 const profile='Open Play Playback Test',partition='persist:open-play-playback-test';
 const stage=await mkdtemp(path.join(tmpdir(),'open-play-playback-'));
 await mkdir(path.join(stage,'assets'));
@@ -54,7 +54,7 @@ await put('assets/docs/prototype/TRY_CURRENT_DESKTOP.md',`# Core desktop test ${
 
 Built from immutable source ${sourceCommit}. Opens the existing rekordbox workspace directly in the sandboxed main frame, retaining layouts, core controls, headphone knobs and library waveform previews. No framework or native audio rewrite.
 
-Prepare and manual History edits now save through the existing session owner. New session archives the prior list, with a selector to read/export it; history display uses local time while CSV retains ISO timestamps. Existing legacy history, play counts, fader resets, DJ controls and waveform previews remain.
+Cached library waveform previews now skip redundant geometry reads during viewport changes. The actual-pump regression and two owned four-real-track native captures retain controls, focus and previews; the full transition remained slow, so broader waveform stalls stay open. Prepare and manual History edits still save through the existing session owner. New session archives the prior list, with a selector to read/export it; history display uses local time while CSV retains ISO timestamps. Existing legacy history, play counts, fader resets, DJ controls and waveform previews remain.
 
 Use saved library songs and Horizontal / Compact. Prior0.1.53 listening accepted four-deck Sync/crossfade, manual tempo/jog transition, A/B EQ, temporary Cue and clean stop; do not repeat clean cases automatically. Current work continues hardware-independent core defects with one focused check each. Preserve controls, focus and library previews. Rare pops/stalls remain open for concrete events; computer stereo does not prove independent headphone routing.
 

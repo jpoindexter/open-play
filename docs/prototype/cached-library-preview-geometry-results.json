@@ -1,0 +1,134 @@
+{
+  "date": "2026-10-25",
+  "defect": "ANA-FIX-07",
+  "sourceCommit": "f061853285064b2f287c6d3aa59e34246bb4daa7",
+  "normalDesktop": "0.1.56/source3667d6f remains unchanged/stopped; source repair not yet packaged into a new desktop candidate.",
+  "rootCause": "Library preview pump measured row geometry before checking its cache, including already cached rows.",
+  "change": "One predicate guard reordered; no cache policy, DSP, audio clock, component/layout or control removal.",
+  "focusedCheck": {
+    "command": "node --test prototype/library-preview-refresh.test.mjs",
+    "red": "One new actual-pump case fails with12cached geometry reads on original source.",
+    "green": "Affected file3/3passes; cached reads0, visible uncached row loads, hidden miss loads when revealed, retained records unchanged.",
+    "fullSuiteRun": false
+  },
+  "nativeBefore": {
+    "scope": "Full saved trace/hash/owned PID/main thread/actual marker inspection. Complete X scopes only; overlapping style/layout wall intervals unioned. Library callbacks observed through500ms after secondRAF, not assumed to occur inside event. No PCM/music/presentation proof.",
+    "sourceCommit": "3667d6fcfe47b82a671606e1ed914432b452c693",
+    "traceSHA256": "e2d27caf7b18f574e065a44e541aa48c69c289cb3f179e828645e29460e77e5c",
+    "eventCount": 903741,
+    "nativeEventMs": 70.901,
+    "dispatchMs": 3.005,
+    "firstRAFMs": 34.295,
+    "styleLayoutEventUnionMs": 29.039,
+    "GCEventUnionMs": 0.0,
+    "largestOverlappingMainTask": {
+      "wallMs": 54.052,
+      "threadCPUMs": 49.903,
+      "startFromEventMs": 4.02
+    },
+    "libraryIntersectionCallbacks": [
+      {
+        "startFromEventMs": 60.071,
+        "wallMs": 6.111,
+        "threadCPUMs": 5.305,
+        "styleLayoutWholeUnionMs": 6.021,
+        "layoutScopes": 2
+      }
+    ],
+    "controls": {
+      "play": 4,
+      "tempo": 4,
+      "eq": 4,
+      "scrub": 4,
+      "previews": 12
+    },
+    "originalNodeCount": 270,
+    "replacementCount": 0,
+    "changedValues": 0,
+    "publicPlayingStates": 4,
+    "preRollMs": 679.4000000059605,
+    "postRollMs": 801.4000000059605,
+    "hostMuted": true,
+    "originalIdentitiesUnchanged": true,
+    "all32SourcePinsRetained": true,
+    "unknownProcessIDs": [],
+    "cleanup": {
+      "ownedWindowDestroyed": true,
+      "normalProfileTouched": false
+    }
+  },
+  "nativeAfter": {
+    "scope": "Full saved trace/hash/owned PID/main thread/actual marker inspection. Complete X scopes only; overlapping style/layout wall intervals unioned. Library callbacks observed through500ms after secondRAF, not assumed to occur inside event. No PCM/music/presentation proof.",
+    "sourceCommit": "f061853285064b2f287c6d3aa59e34246bb4daa7",
+    "traceSHA256": "c3af513f13a10a40fc1fec475f3e99b3d1e3519ec9e3e08674b7fb40aa760b80",
+    "eventCount": 926241,
+    "nativeEventMs": 80.907,
+    "dispatchMs": 2.857,
+    "firstRAFMs": 34.38,
+    "styleLayoutEventUnionMs": 28.237,
+    "GCEventUnionMs": 1.276,
+    "largestOverlappingMainTask": {
+      "wallMs": 64.235,
+      "threadCPUMs": 60.436,
+      "startFromEventMs": 3.604
+    },
+    "libraryIntersectionCallbacks": [
+      {
+        "startFromEventMs": 89.854,
+        "wallMs": 0.07,
+        "threadCPUMs": 0.068,
+        "styleLayoutWholeUnionMs": 0.0,
+        "layoutScopes": 0
+      }
+    ],
+    "controls": {
+      "play": 4,
+      "tempo": 4,
+      "eq": 4,
+      "scrub": 4,
+      "previews": 12
+    },
+    "originalNodeCount": 270,
+    "replacementCount": 0,
+    "changedValues": 0,
+    "publicPlayingStates": 4,
+    "preRollMs": 591.6999999880791,
+    "postRollMs": 804.0999999940395,
+    "hostMuted": true,
+    "originalIdentitiesUnchanged": true,
+    "all32SourcePinsRetained": true,
+    "unknownProcessIDs": [],
+    "cleanup": {
+      "ownedWindowDestroyed": true,
+      "normalProfileTouched": false
+    }
+  },
+  "comparisonLimits": [
+    "Same four-song cohort, Compact V-to-H, host dimensions and observation policies; different playback positions and scheduling.",
+    "The after preview callback occurs89.854ms after start, after the80.907ms secondRAF boundary; before callback occurs60.071ms into70.901ms interval. Compare whole callback cost separately, not as identically scheduled frame savings.",
+    "Observed callback6.111ms\u21920.070ms and callback style/layout union6.021ms\u21920; controlled source check separately proves skipped geometry.",
+    "Whole transition70.901ms\u219280.907ms and largest main task54.052ms\u219264.235ms: no whole-view latency improvement or universal smoothness claim.",
+    "Native input used the Astryx proxy; backing change event.isTrusted=false is expected. No injected engine/transport commands; all native selections/import/load/play actions used CUA.",
+    "No PCM/heard-pop/held-pointer/audio-voice or hardware proof. Broader stalls/Sync pop remain open."
+  ],
+  "preservation": {
+    "actualOriginals": 4,
+    "originalCriterion": "Actual Music/New music SHA256,size,mtime rechecked against first preflight after both captures.",
+    "normalSession": "Read-only normal56 shows0playing,16tracks and positions~104.65s on its original four loaded songs.",
+    "diagnostics": "Both captured hosts destroyed their owned windows; owned18847server stopped.",
+    "sourcePins": 32,
+    "observedNodesEach": 270,
+    "libraryPreviewImagesEach": 12
+  },
+  "diagnosticHistory": {
+    "earlierFailures": "Prior generic/unique binding failures, registered-launch timeout and first armed-window timeout retained privately and in the earlier attempt receipt. They are not product REDs.",
+    "operatorCorrection": "First armed capture timed out while main-console output was unavailable. Two phase notifications now also save progress.json; next baseline and post-fix captures executed.",
+    "lockCorrection": "Root IOConsoleLocked is not the session lock flag. A17:02:56UTC lock was confirmed by CUA/IOResources; later native availability returned. This does not explain earlier failures retroactively."
+  },
+  "trello": {
+    "card": "https://trello.com/c/oH2p2xOE",
+    "state": "Narrow card marked complete and exact description read back; parent CORE-FIX-07/10 and existing CORE-001 comment refreshed;158cards/10complete; prior157dispositions and header request preserved.",
+    "receipt": "docs/delivery/CACHED_PREVIEW_RECONCILIATION_2026-10-25.json"
+  },
+  "next": "Deliver the source repair and current evidence; package it separately when resuming desktop delivery. Keep pending Sync cancellation/native audio windows and residual layout/tick stalls separate."
+}

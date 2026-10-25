@@ -31,6 +31,7 @@ Reduce one reproduced core mixing failure without redesigning layouts, hiding co
 
 ## Decisions and edge cases
 
+- Before native input, read `ioreg -r -n IOResources -d1` and inspect the session `CGSSessionScreenIsLocked` flag. Root `IOConsoleLocked = No` is not an unlocked-screen check. Missing/unknown status requires a fresh read-only native-availability observation, not an unlocked assumption; a CUA locked-screen report stops native input until manual unlock. A later lock does not explain an earlier failed capture retroactively.
 - Analyze completion uses current deck ownership, not the track's deck when work began. Cover duplicate, hidden and replaced tracks.
 - Distinguish row/node removal counts from mutation records. Keep explicit layout/schema changes separate from avoidable refresh work.
 - Do not change audio clocks/DSP against an unreproduced pop. Save the next actual event before attributing a cause.

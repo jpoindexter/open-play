@@ -6,7 +6,8 @@ Open `Start Open Play Current Test.command` or `Start Open Play Playback Test 0.
 
 Native56 H→V→H with four muted real transports observed controls/state/usability, including Dfilter.01→.02 after transition; cleanup restored. This is not timing, DOM identity, held-pointer, PCM/listening or pop-free proof. The visible Horizontal selector versus stale AXVertical disagreement is on UI-004, cause unverified. Prior53listening/focus,54fader,55count and56session/isolated archives retain their scope. Use56 for archives; older builds omit their field on save. No broad clean-case/matrix rerun.
 
-Software-only capture was attempted after a read-only OS check reported unlocked. Native diagnostic input did not reach a qualifying event; no timing/identity/pop result is accepted. Normal56 remains stopped with the four loaded tracks and16library previews. Owned diagnostic windows/servers stopped; full details and failed attempts: NATIVE_ORIENTATION_CAPTURE_ATTEMPT_2026-10-25.json. Fix native target/input binding before another trace. Hardware remains deferred; no broad soak or clean-case repeat.
+Sourcef061853 now skips redundant geometry for cached library previews. Two owned four-real-track native Compact V→H captures retain270original control nodes and12preview images; callback layout6.021ms→0, but full transition70.901→80.907ms. This is a narrow cached-preview repair, not a complete lag/pop fix. [Executed report](CACHED_LIBRARY_PREVIEW_GEOMETRY_2026-10-25.md). Earlier failed captures remain historical. Normal56/session was preserved stopped; this source repair is not yet installed. A private57package is being prepared; no clean listening/matrix repeat or hardware gate is implied.
+
 ---
 
 ## Historical0.1.47 guide
