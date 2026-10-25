@@ -1,0 +1,73 @@
+{
+  "date": "2026-10-25",
+  "candidate": "Open Play Playback Test 0.1.54",
+  "sourceCommit": "d3f1191187645122dd3ffe903ab535627d7989d0",
+  "scope": "UI-RESET-01 partial: shared channel LEVEL and crossfader default-reset affordances; no audio/DSP or layout rewrite.",
+  "before": {
+    "candidate": "0.1.53",
+    "native": "Deck D level at 40%; double-click actual cap left it at 40%. Restored to 80% before switching."
+  },
+  "implementation": {
+    "module": "prototype/fader-preview.js",
+    "lines": 59,
+    "owner": "Existing bubbling input/change handlers; channel default .8, crossfader default 0. Disabled controls ignored; tempo retains its separate owner.",
+    "tooltip": "Double-click or Control/Command+Home shows the correct default."
+  },
+  "verification": {
+    "focusedRegression": "node --test prototype/fader-preview.test.mjs; RED .4 != .8 before repair; GREEN 1/1 after. Controlled existing-owner callbacks, bind-once, other controls, disabled and tempo/native-Home preservation.",
+    "package": "Existing inspect_playback_package.mjs 0.1.54 inspection: 5 passed, 0 failed.",
+    "native": {
+      "method": "Trusted native pointer/key actions and fresh accessibility observations in exact bundle; one stopped four-deck Compact workflow.",
+      "channelDoubleClick": {
+        "deck": "D",
+        "from": 0.4,
+        "to": 0.8
+      },
+      "channelCommandHome": {
+        "deck": "D",
+        "from": 0,
+        "to": 0.8
+      },
+      "crossDoubleClick": {
+        "from": 0.5,
+        "to": 0
+      },
+      "crossCommandHome": {
+        "from": 1,
+        "to": 0
+      },
+      "cleanup": {
+        "playingDecks": 0,
+        "levels": [
+          0.8,
+          0.8,
+          0.8,
+          0.8
+        ],
+        "crossfader": 0
+      },
+      "retained": "16 saved library tracks; waveform preview images and original custom controls observed. Restart starts demo A/B decks, C/D empty."
+    }
+  },
+  "preservation": {
+    "previousCapture": "Existing 0.1.53 private capture verified before switch; REC inactive; no new recording or playback.",
+    "closedProfileBackup": "local-evidence/desktop-builds/0.1.54/profile-before-native",
+    "previousVersion": "0.1.53 bundle/versioned launcher retained",
+    "defaultLauncher": "Start Open Play Current Test.command now targets 0.1.54; syntax check only."
+  },
+  "packageReceipt": "docs/prototype/desktop-0.1.54-playback-package.json",
+  "packageInspection": "docs/prototype/desktop-0.1.54-playback-inspection.json",
+  "trello": {
+    "card": "https://trello.com/c/0E3HXFPl",
+    "complete": false,
+    "newCards": 0,
+    "remaining": "Full resettable-control inventory, active Sync/MIDI/pending ownership policy, relevant dialogs and remaining defaults.",
+    "readback": "Existing UI-RESET-01 description and existing core progress comment matched exactly; card remains incomplete, historical criteria/model guidance preserved."
+  },
+  "limits": [
+    "Stopped UI reset-state proof, not new audible mixing/pop or physical hardware acceptance.",
+    "No full layout/mode matrix or broad Node suite repeated.",
+    "Other resettable controls remain on existing open UI-RESET-01; no all-controls completion claim."
+  ],
+  "next": "Continue software core-control inventory; hardware deferred, rare pops/stalls remain open for a concrete event."
+}
