@@ -4,7 +4,7 @@
 
 Open `Start Open Play Current Test.command` or the version-specific 0.1.53 launcher. The exact 0.1.53 bundle was opened through native app control; launchers were not executed in this pass. Before switching, 0.1.52 showed zero playing decks and REC00:00 with Download disabled; its closed profile was copied to ignored versioned evidence. Four-deck Compact was observed after startup, with controls and visible library previews present. No music was started.
 
-Software listening is now accepted: current four-deck Sync/crossfade, manual Sync-off transition/jog, A/B EQ and temporary Cue/latch/final silence. Do not repeat these clean cases automatically. Independent routing/Hercules acceptance is deferred; capture a future actual pop/stall. One focused native analysis-refresh check remains; no broad matrix.
+Software listening and one native analysis keyboard-focus check are now accepted. See desktop-0.1.53-listening.json and desktop-0.1.53-analysis-refresh.json. Do not repeat these clean cases automatically. Independent routing/Hercules is deferred. Rare stalls/pops remain open for a concrete event; this focus check does not establish frame performance or held-pointer capture.
 
 ---
 

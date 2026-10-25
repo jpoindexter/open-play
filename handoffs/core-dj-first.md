@@ -6,7 +6,7 @@
 
 [Delivery/re-entry](../docs/prototype/desktop-0.1.52-playback-delivery.json), [executed report/limits](../docs/prototype/CORE_TERMINAL_ANALYSIS_REFRESH_2026-10-24.md), [runtime/source](../docs/prototype/terminal-analysis-results.json), [PCM](../docs/prototype/terminal-analysis-pcm-inspection.json), [native window](../docs/prototype/terminal-analysis-native-window.json), [Trello reconciliation](../docs/delivery/CORE_TERMINAL_ANALYSIS_RECONCILIATION_2026-10-24.json).
 
-Now: software listening gates are accepted in0.1.53. Run only the original focused four-deck analysis-refresh case with physical audio silent, preserving active controls/previews. Next: repair a reproduced failure or retain the next actual pop/stall before attributing a cause. Hardware is deferred at Jason’s request. Keep new logic in cohesive reusable modules; broad refactoring/global-skill work remains on MOD-001 after the core gate. Preserve all existing criteria/history and close cards only against their complete scope. No broad suite/new matrix or repetition of accepted listening cases.
+Now: software listening gates and ONE native analyzed-deck keyboard-focus check are accepted in0.1.53. SelectedBX3 analysis completed1measured/0failed while its Dfilter retained focus/value and accepted the next key; previews/manual metadata remained. See desktop-0.1.53-analysis-refresh.json for scope. This does not prove pointer capture, DOM identity, native frame performance or absence of pops. Do not repeat clean cases or expand matrices. Capture a concrete remaining stall/pop before patching its cause. Hardware is deferred; MOD-001 keeps broad refactoring/global-skill sequencing.
 
 ---
 

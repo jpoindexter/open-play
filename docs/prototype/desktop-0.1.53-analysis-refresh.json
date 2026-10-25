@@ -1,0 +1,68 @@
+{
+  "observedAt": "2026-10-25T13:41:11.832491+00:00",
+  "candidate": "Open Play Playback Test0.1.53",
+  "sourceCommit": "f2895174f493d2a4468533488f98342fa92599a2",
+  "method": "Actual native cua keyboard/pointer controls and accessibility observations; one requested analysis job, no new harness or test matrix.",
+  "setup": {
+    "decks": {
+      "A": "Constant Change",
+      "B": "Prism",
+      "C": "In The Dance",
+      "D": "BX3"
+    },
+    "playingBeforeJob": 4,
+    "channelLevelsDuringJob": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "masterMeter": "−infinity",
+    "scope": "Selected track BX3",
+    "replaceExistingKey": false,
+    "replaceExistingBPMGrid": false
+  },
+  "observedSequence": [
+    {
+      "job": "Decoding BX3 ·0queued",
+      "focusedControl": "Deck4filter",
+      "nativeAXIndex": 506,
+      "value": 0.01,
+      "valueText": "1%high-pass"
+    },
+    {
+      "job": "Finished:1measured,0failed",
+      "focusedControl": "Deck4filter",
+      "nativeAXIndex": 506,
+      "value": 0.02,
+      "valueText": "2%high-pass",
+      "action": "Trusted Right key applied to the still-focused control"
+    }
+  ],
+  "preserved": {
+    "ownership": "Header4BX3 and Deck4keyG observed directly",
+    "manualBPM": 124.98471158160582,
+    "key": "G",
+    "libraryPreview": "BX3 full-track preview and other library preview images present after completion"
+  },
+  "cleanup": {
+    "playingDecks": 0,
+    "filterD": 0,
+    "channelLevels": [
+      0.8,
+      0.8,
+      0.8,
+      0.8
+    ],
+    "crossfader": 0,
+    "masterDB": -10.0
+  },
+  "result": "Narrow native keyboard-focus/usability-through-analysis check passed on the analyzed deck.",
+  "limits": [
+    "AX index reuse is not DOM-object identity proof.",
+    "No held-pointer capture checked.",
+    "Already loaded/decoded real tracks; no independent cold-Worker lifecycle proof.",
+    "No frame trace, CPU/GC timing, PCM inspection or audible pop acceptance in this muted case.",
+    "Broad waveform/cache/parity and intermittent stall/pop cards stay open."
+  ]
+}
