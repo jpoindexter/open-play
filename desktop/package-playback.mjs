@@ -11,7 +11,7 @@ const git=args=>execFileSync('git',args,{cwd:root,maxBuffer:150*1024*1024});
 const sha=bytes=>createHash('sha256').update(bytes).digest('hex');
 const sourceCommit=git(['rev-parse','HEAD']).toString().trim();
 const get=file=>git(['show',`${sourceCommit}:${file}`]);
-const version='0.1.53',name='Open Play Playback Test',port=18775,bundle='org.openplay.dj.playback.localtest';
+const version='0.1.54',name='Open Play Playback Test',port=18775,bundle='org.openplay.dj.playback.localtest';
 const profile='Open Play Playback Test',partition='persist:open-play-playback-test';
 const stage=await mkdtemp(path.join(tmpdir(),'open-play-playback-'));
 await mkdir(path.join(stage,'assets'));
@@ -53,6 +53,8 @@ await put('assets/docs/prototype/auto-gain-fixture-reference.json',JSON.stringif
 await put('assets/docs/prototype/TRY_CURRENT_DESKTOP.md',`# Core desktop test ${version}
 
 Built from immutable source ${sourceCommit}. Opens the existing rekordbox workspace directly in the sandboxed main frame, retaining layouts, core controls, headphone knobs and library waveform previews. No framework or native audio rewrite.
+
+Channel LEVEL faders now reset to their factory80% and the crossfader to centre with a double-click or Control/Command+Home. They use the existing mixer handlers; ordinary Home/End and tempo reset behavior remain. Full default-reset coverage is still tracked separately on UI-RESET-01.
 
 Use saved library songs, load one per deck, and use Horizontal / Compact. The next session is practical mixing: observe four-deck waveforms during a replacement/analysis, then try incoming Sync and cancel with OFF. Controls, focus and library previews should remain available. This package includes the accumulated refresh and transport-ownership repairs; their native behavior is still pending. Remaining manual transition, EQ and temporary Cue listening checks can follow when convenient. Computer stereo does not prove independent headphone routing.
 

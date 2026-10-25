@@ -40,12 +40,19 @@ function bind(input){
   input.addEventListener('pointermove',event=>{if(pointer===event.pointerId)apply(position(event),event.shiftKey);});
   const release=()=>{if(pointer===undefined)return;const id=pointer;pointer=undefined;if(input.hasPointerCapture(id))input.releasePointerCapture(id);emit(input,'change');};
   for(const type of ['pointerup','pointercancel','lostpointercapture'])input.addEventListener(type,release);
+  const reset=event=>{
+    if(kind==='tempo'||input.disabled)return;
+    event.preventDefault();apply(kind==='level'?.8:0,true);emit(input,'change');
+  };
+  input.addEventListener('dblclick',reset);
+  input.addEventListener('keydown',event=>{if(event.key==='Home'&&(event.ctrlKey||event.metaKey))reset(event);});
   input.addEventListener('input',()=>show(input));
 }
 export function refineFaders(){
   for(const input of document.querySelectorAll(selector)){
     bind(input);
-    input.title=titles.get(input)+(active()?` · ${kindOf(input)==='level'?'Endpoint snaps: mute / unity':'Center snap'} · Shift-drag: bypass snaps · Arrow keys: fine adjustment`:'');
+    const kind=kindOf(input);
+    input.title=titles.get(input)+(active()?` · ${kind==='level'?'Endpoint snaps: mute / unity':'Center snap'} · Shift-drag: bypass snaps · Arrow keys: fine adjustment`:'')+(kind==='tempo'?'':` · Double-click or Control/Command+Home: ${kind==='level'?'80% default':'center'}`);
     show(input);
   }
 }
