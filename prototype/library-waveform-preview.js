@@ -90,7 +90,7 @@ export function installLibraryWaveforms({state,engine}){
     if(busy||!active())return;busy=true;
     try{
       while(active()){
-        const row=rows().find(row=>{const t=state.tracks.find(t=>t.id===row.dataset.track);return t&&onScreen(row)&&!records.has(keyFor(t));});
+        const row=rows().find(row=>{const t=state.tracks.find(t=>t.id===row.dataset.track);return t&&!records.has(keyFor(t))&&onScreen(row);});
         if(!row)break;
         const track=state.tracks.find(t=>t.id===row.dataset.track),key=keyFor(track);
         records.set(key,{phase:'loading'});refresh();
