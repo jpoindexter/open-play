@@ -1,55 +1,55 @@
 /* Actual Astryx React controls, scoped to the HTML review entry point. */
 #workspace-preview{
- --op-ui-surface:#242a2e;--op-ui-line:#46535d;--op-ui-text:#dde5eb;--op-ui-selected:#255c83;
- --op-ui-control:28px;--op-ui-gap:4px;
+ --op-ui-surface:var(--dj-semantic-panel);--op-ui-line:var(--dj-semantic-border-strong);--op-ui-text:var(--dj-semantic-text);--op-ui-selected:var(--dj-semantic-selected);
+ --op-ui-control:var(--dj-semantic-standard-control-height);--op-ui-gap:var(--dj-semantic-gap);
 }
 #workspace-preview [data-astryx-backing]{display:none!important}
 #workspace-preview .astryx-host,#workspace-preview .astryx-mount{display:contents}
 #workspace-preview .astryx-host[hidden]{display:none}
 #astryx-react-root{display:contents}
-#workspace-preview :is(.op-standard,.op-standard-field button,.op-standard-field input){box-sizing:border-box;font-family:Arial,sans-serif;font-size:11px;line-height:14px;border-radius:2px;letter-spacing:0;color:var(--op-ui-text);margin:0}
-#workspace-preview .op-standard{height:var(--op-ui-control);min-height:var(--op-ui-control);min-width:28px;padding:0 8px;background:var(--op-ui-surface);border:1px solid var(--op-ui-line);box-shadow:none}
-#workspace-preview .op-standard[aria-pressed=true]{background:var(--op-ui-selected);border-color:#73a9cf;color:#edf7ff}
-#workspace-preview .op-standard[aria-pressed=mixed]{background:#374e60;border-style:dashed}
-#workspace-preview .op-standard:not(:disabled):hover{background:#35434c}
-#workspace-preview .op-standard[aria-pressed=true]:hover{background:#306e97}
-#workspace-preview .op-standard:focus-visible{outline:2px solid #b1dcfa;outline-offset:-2px}
+#workspace-preview :is(.op-standard,.op-standard-field button,.op-standard-field input){box-sizing:border-box;font-family:var(--dj-semantic-font);font-size:var(--dj-semantic-caption-size);line-height:var(--dj-semantic-text-line-height);border-radius:var(--dj-semantic-control-radius);letter-spacing:0;color:var(--op-ui-text);margin:0}
+#workspace-preview .op-standard{height:var(--op-ui-control);min-height:var(--op-ui-control);min-width:var(--dj-semantic-standard-control-height);padding:0 var(--dj-semantic-inset);background:var(--op-ui-surface);border:var(--dj-semantic-hairline) solid var(--op-ui-line);box-shadow:none}
+#workspace-preview .op-standard[aria-pressed=true]{background:var(--op-ui-selected);border-color:var(--dj-semantic-focus);color:var(--dj-semantic-text-on-selected)}
+#workspace-preview .op-standard[aria-pressed=mixed]{background:var(--dj-semantic-raised);border-style:dashed}
+#workspace-preview .op-standard:not(:disabled):hover{background:var(--dj-semantic-raised)}
+#workspace-preview .op-standard[aria-pressed=true]:hover{background:var(--dj-semantic-selected)}
+#workspace-preview .op-standard:focus-visible{outline:var(--dj-semantic-focus-width) solid var(--dj-semantic-focus);outline-offset:calc(-1 * var(--dj-semantic-focus-width))}
 #workspace-preview .op-standard-field{display:inline-flex;min-width:0;margin:0}
-#workspace-preview .op-standard-field button{min-height:var(--op-ui-control);height:var(--op-ui-control);padding:0 8px;background:var(--op-ui-surface);border:1px solid var(--op-ui-line);min-width:72px}
-#workspace-preview .op-standard-field input{height:26px;min-height:26px;padding:0 6px;background:transparent;border:0;box-shadow:none;width:100%}
-#workspace-preview .op-standard-field [data-astryx-pressable]{border-radius:2px}
-#workspace-preview .astryx-host[data-control-type=input] .op-standard-field{width:180px;height:28px;min-width:100px}
+#workspace-preview .op-standard-field button{min-height:var(--op-ui-control);height:var(--op-ui-control);padding:0 var(--dj-semantic-inset);background:var(--op-ui-surface);border:var(--dj-semantic-hairline) solid var(--op-ui-line);min-width:var(--dj-semantic-select-width)}
+#workspace-preview .op-standard-field input{height:var(--dj-semantic-standard-control-height);min-height:var(--dj-semantic-standard-control-height);padding:0 var(--dj-semantic-inset);background:transparent;border:0;box-shadow:none;width:100%}
+#workspace-preview .op-standard-field [data-astryx-pressable]{border-radius:var(--dj-semantic-control-radius)}
+#workspace-preview .astryx-host[data-control-type=input] .op-standard-field{width:var(--dj-semantic-field-width);height:var(--dj-semantic-standard-control-height);min-width:var(--dj-semantic-select-width)}
 #workspace-preview .astryx-host[data-astryx-for=crate-search] .op-standard-field{width:100%}
 #workspace-preview .workspace-switch{gap:var(--op-ui-gap)}
-#workspace-preview .workspace-switch .op-standard{font-size:10px;padding-inline:7px}
-#workspace-preview .workspace-bar{min-height:42px}
-#workspace-preview .hybrid-controls{min-height:34px;gap:8px}
-#workspace-preview .hybrid-controls label{display:flex;align-items:center;gap:6px}
-#workspace-preview .toolbar{min-height:36px;gap:4px}
-#workspace-preview .library-tools{gap:4px;min-height:36px}
-#workspace-preview .crate-tools{gap:4px}
-#workspace-preview .preview-zoom .op-standard{width:28px;padding:0}
-#workspace-preview.day{--op-ui-surface:#e2e8ed;--op-ui-line:#778c9a;--op-ui-text:#17252d;--op-ui-selected:#b8d9ee}
+#workspace-preview .workspace-switch .op-standard{font-size:var(--dj-semantic-label-size);padding-inline:var(--dj-semantic-inset)}
+#workspace-preview .workspace-bar{min-height:var(--dj-semantic-toolbar-height)}
+#workspace-preview .hybrid-controls{min-height:var(--dj-semantic-toolbar-height);gap:var(--dj-semantic-inset)}
+#workspace-preview .hybrid-controls label{display:flex;align-items:center;gap:var(--dj-semantic-inset)}
+#workspace-preview .toolbar{min-height:var(--dj-semantic-toolbar-height);gap:var(--dj-semantic-gap)}
+#workspace-preview .library-tools{gap:var(--dj-semantic-gap);min-height:var(--dj-semantic-toolbar-height)}
+#workspace-preview .crate-tools{gap:var(--dj-semantic-gap)}
+#workspace-preview .preview-zoom .op-standard{width:var(--dj-semantic-standard-control-height);padding:0}
+
 /* Portaled selectors use Astryx's listbox/keyboard model and local theme CSS. */
-html[data-astryx-theme=neutral] :is([role=listbox],[role=option]){font-family:Arial,sans-serif;font-size:12px}
+html[data-astryx-theme=neutral] :is([role=listbox],[role=option]){font-family:var(--dj-semantic-font);font-size:var(--dj-semantic-body-size)}
 /* Native modal keeps its existing lifecycle/focus trap; Astryx owns its
    preview surface and standard form fields. DJ performance ranges stay custom. */
-#workspace-preview #modal{padding:0;border:1px solid var(--op-ui-line);border-radius:4px;background:#181f24;color:var(--op-ui-text);max-width:calc(100vw - 48px)}
+#workspace-preview #modal{padding:0;border:var(--dj-semantic-hairline) solid var(--op-ui-line);border-radius:var(--dj-semantic-gap);background:var(--dj-semantic-background);color:var(--op-ui-text);max-width:calc(100vw - var(--dj-semantic-header-height))}
 #workspace-preview .op-dialog-surface{width:100%;padding:0;background:transparent;box-shadow:none;border:0;border-radius:0}
-#workspace-preview #modal .dialog-title{padding:12px 16px;background:#242d34;border-bottom:1px solid var(--op-ui-line)}
-#workspace-preview #modal #modal-body{padding:16px;overflow:auto;max-height:70vh}
-#workspace-preview #modal .settings-grid{gap:12px 16px}
+#workspace-preview #modal .dialog-title{padding:var(--dj-semantic-section-inset) var(--dj-semantic-section-gap);background:var(--dj-semantic-panel);border-bottom:var(--dj-semantic-hairline) solid var(--op-ui-line)}
+#workspace-preview #modal #modal-body{padding:var(--dj-semantic-section-gap);overflow:auto;max-height:70vh}
+#workspace-preview #modal .settings-grid{gap:var(--dj-semantic-section-inset) var(--dj-semantic-section-gap)}
 #workspace-preview #modal .astryx-form-host{display:block;min-width:0}
-#workspace-preview #modal .astryx-form-host:not([data-astryx-for=modal-close]):has(>.astryx-mount>.op-standard){display:contents}
-#workspace-preview #modal .op-dialog-field{display:flex;width:100%;min-width:100px;height:auto;flex-direction:column;gap:4px}
+#workspace-preview #modal .astryx-form-host:not([hidden]):not([data-astryx-for=modal-close]):has(>.astryx-mount>.op-standard){display:contents}
+#workspace-preview #modal .op-dialog-field{display:flex;width:100%;min-width:var(--dj-semantic-select-width);height:auto;flex-direction:column;gap:var(--dj-semantic-gap)}
 #workspace-preview #modal .op-dialog-field input{min-width:0;width:100%;box-sizing:border-box}
-#workspace-preview #modal .op-dialog-field button{min-width:28px}
-#workspace-preview #modal .op-dialog-check{min-height:28px;margin:0}
-#workspace-preview #modal :is(.op-dialog-field,.op-dialog-check){font-size:12px;line-height:18px;font-family:Arial,sans-serif}
-#workspace-preview #modal textarea{min-height:96px;font-family:monospace;font-size:12px}
-#workspace-preview #modal :is(input,textarea,button,[role=slider]):focus-visible{outline:2px solid #b1dcfa;outline-offset:2px}
-#workspace-preview #modal .op-standard{margin:2px}
+#workspace-preview #modal .op-dialog-field button{min-width:var(--dj-semantic-standard-control-height)}
+#workspace-preview #modal .op-dialog-check{min-height:var(--dj-semantic-standard-control-height);margin:0}
+#workspace-preview #modal :is(.op-dialog-field,.op-dialog-check){font-size:var(--dj-semantic-body-size);line-height:var(--dj-semantic-text-line-height);font-family:var(--dj-semantic-font)}
+#workspace-preview #modal textarea{min-height:var(--dj-semantic-text-area-height);font-family:monospace;font-size:var(--dj-semantic-body-size)}
+#workspace-preview #modal :is(input,textarea,button,[role=slider]):focus-visible{outline:var(--dj-semantic-focus-width) solid var(--dj-semantic-focus);outline-offset:var(--dj-semantic-focus-width)}
+#workspace-preview #modal .op-standard{margin:var(--dj-semantic-control-radius)}
 #workspace-preview #modal .astryx-host[data-astryx-for=modal-close]{display:block;margin-left:auto}
 
 #workspace-preview #modal .settings-tabs{position:sticky;top:0;z-index:2;background:var(--op-ui-surface);padding-block:var(--op-ui-gap)}
-#workspace-preview #modal .workspace-layout-options .workspace-switch{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;padding:8px;border-radius:2px}
+#workspace-preview #modal .workspace-layout-options .workspace-switch{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--dj-semantic-inset);padding:var(--dj-semantic-inset);border-radius:var(--dj-semantic-control-radius)}

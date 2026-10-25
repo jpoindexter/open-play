@@ -1,4 +1,10 @@
-# Try desktop 0.1.56 — current native candidate
+# Try desktop0.1.57 — current observed candidate
+
+Current launcher targets0.1.57/source9c964e6. Actual startup observed with4realtracks,16library previews,32hotcues,0playing. Normal profile/library retained; prior deck positions were not restored. [Executed native receipt](desktop-0.1.57-native-startup.json). New shared header/Settings changes are source/browser-only and need a new package before native review. [Public beta target and gates](../delivery/PUBLIC_BETA_PLAN.md).
+
+---
+
+# Historical desktop0.1.56 guide
 
 **New private0.1.57package ready, not launched:** [delivery receipt](desktop-0.1.57-playback-delivery.json). Use `Start Open Play Playback Test 0.1.57.command` after preserving your current work and closing the other playback-test version. Package inspection5/5; actual57native startup remains pending. The Current launcher and open four-track session remain0.1.56. The preview repair is narrow; broader lag/Sync-pop work remains open.
 

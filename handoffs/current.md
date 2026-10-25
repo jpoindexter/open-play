@@ -1,4 +1,14 @@
-## Current status — core audit and priorities, 21 October 2026
+## Current target — public beta, 25 October 2026
+
+Public beta ASAP is the delivery target. [Release scope and gates](../docs/delivery/PUBLIC_BETA_PLAN.md): reliable local-audio mixing, recoverable data, usable shared UI, exact-package/native review and basic installation/help/known issues. Full competitor parity and the entire backlog are not launch prerequisites. Publication is still pending a concrete beta artifact and owner approval.
+
+Native **0.1.57 / source9c964e6** startup is executed: four real tracks,16library previews,32hotcues,0playing. Restart loads demo decks; prior live positions were not restored. [Native evidence](../docs/prototype/desktop-0.1.57-native-startup.json). Prior0.1.53 practical mixing/EQ/Cue/stop acceptance retains its scope; hardware is deferred and intermittent pop/stall reports remain open.
+
+New source/browser slice: one40px performance header, actual Astryx icon controls, original display/configuration controls in Settings, nested Back/focus return and token-based standard UI. [Design system and migration limits](../docs/design-system/README.md). This header is not installed in57. Legacy style migration and beta gates remain open. Push every completed slice; no broad clean-case test repeats.
+
+---
+
+## Historical status — core audit and priorities, 21 October 2026
 
 Current desktop test remains **0.1.37 / source ce5c124**. Jason accepted Jewel Kid/Prism as “Aligned and clean; easier to follow.” Preserve the chosen rekordbox layout, all controls/layout variants and library waveform previews. Existing accepted playback, fader, filter, tempo and jog evidence is retained; no new runtime/listening claim is made by this audit.
 

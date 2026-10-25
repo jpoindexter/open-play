@@ -1,4 +1,14 @@
-## Current status — core four-deck reliability, 25 October 2026
+## Current target — public beta, 25 October 2026
+
+Public beta ASAP is the delivery target. [Release scope and gates](docs/delivery/PUBLIC_BETA_PLAN.md): reliable local-audio mixing, recoverable data, usable shared UI, exact-package/native review and basic installation/help/known issues. Full competitor parity and the entire backlog are not launch prerequisites. Publication is still pending a concrete beta artifact and owner approval.
+
+Native **0.1.57 / source9c964e6** startup is executed: four real tracks,16library previews,32hotcues,0playing. Restart loads demo decks; prior live positions were not restored. [Native evidence](docs/prototype/desktop-0.1.57-native-startup.json). Prior0.1.53 practical mixing/EQ/Cue/stop acceptance retains its scope; hardware is deferred and intermittent pop/stall reports remain open.
+
+New source/browser slice: one40px performance header, actual Astryx icon controls, original display/configuration controls in Settings, nested Back/focus return and token-based standard UI. [Design system and migration limits](docs/design-system/README.md). This header is not installed in57. Legacy style migration and beta gates remain open. Push every completed slice; no broad clean-case test repeats.
+
+---
+
+## Historical status — core four-deck reliability, 25 October 2026
 
 **Current source candidates — core reliability:** Desktop0.1.56/source3667d6f saves Prepare/manual History edits in a focused39-line session-panels module. Actual native insertion and Prepare add survived quit/process exit/reopen; original96history entries retained plus inserted97,16tracks/previews/controls present,0playing. [Evidence and limits](docs/prototype/desktop-0.1.56-session-panels.json). New session archive/read/export passes isolated handler/storage checks; native archive interaction remains open. Prior53listening/focus,54fader resets and55play-count evidence retain scope. Hardware deferred; software continues. Rare Sync pops/stalls and broad feature criteria remain open; no clean-case repeats or broad matrices.
 

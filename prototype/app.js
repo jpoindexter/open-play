@@ -233,6 +233,7 @@ export function persist() {
   return state.sessionSaved;
 }
 function dialog(title, html, setup) {
+  window.openPlay?.workspaceSettings?.beforeDialog(title);
   $("#modal-title").textContent = title;
   $("#modal-body").innerHTML = html;
   if (!$("#modal").open) $("#modal").showModal();

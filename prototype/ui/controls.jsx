@@ -4,6 +4,8 @@ import React, {useLayoutEffect, useRef} from 'react';
 import {createRoot} from 'react-dom/client';
 import {createPortal} from 'react-dom';
 import {Button} from '@astryxdesign/core/Button';
+import {IconButton} from '@astryxdesign/core/IconButton';
+import {SlidersHorizontal,LibraryBig,Columns2,Circle,AudioLines,Headphones,CircleHelp,Settings2,ArrowLeft} from 'lucide-react';
 import {ToggleButton} from '@astryxdesign/core/ToggleButton';
 import {Selector} from '@astryxdesign/core/Selector';
 import {TextInput} from '@astryxdesign/core/TextInput';
@@ -17,6 +19,7 @@ import {neutralTheme} from '@astryxdesign/theme-neutral/built';
 import '@astryxdesign/core/astryx.css';
 import '@astryxdesign/theme-neutral/theme.css';
 
+const icons={mixer:SlidersHorizontal,library:LibraryBig,layout:Columns2,record:Circle,effects:AudioLines,audio:Headphones,help:CircleHelp,settings:Settings2,back:ArrowLeft};
 const scope='.workspace-bar,.hybrid-controls,.toolbar,.review-bar,.library-tools,.crate-tools,.library-footer';
 const records=new Map();let root,changes,scheduled=false,signature='',serial=0,invalidFocus=false;
 let modal,dialogContent;
@@ -43,7 +46,7 @@ function activate(node,event){
  schedule();
 }
 function component({node,name,form,error}){
- const common={label:name,size:'sm',isDisabled:node.disabled,status:error?{type:'error',message:error}:undefined,'aria-describedby':node.getAttribute('aria-describedby')||undefined};
+ const common={label:name,size:'sm',isDisabled:node.disabled,status:error?{type:'error',message:error}:undefined,'aria-describedby':node.getAttribute('aria-describedby')||undefined,'aria-current':node.getAttribute('aria-current')||undefined};
  const field={...common,isLabelHidden:!form,isReadOnly:node.readOnly,isRequired:node.required};
  if(node.type==='checkbox')return <CheckboxInput {...common} value={node.indeterminate?'indeterminate':node.checked} className="op-dialog-check" onChange={value=>update(node,value)}/>;
  if(node.type==='number')return <NumberInput {...field} value={node.value===''?null:Number(node.value)} min={node.min===''?undefined:Number(node.min)} max={node.max===''?undefined:Number(node.max)} step={node.step==='any'?null:node.step===''?1:Number(node.step)} hasNumberSteppers containerClassName="op-dialog-field" onChange={value=>update(node,value)}/>;
@@ -51,8 +54,9 @@ function component({node,name,form,error}){
  if(node.tagName==='TEXTAREA')return <TextArea {...field} value={node.value} containerClassName="op-dialog-field" onChange={value=>update(node,value)}/>;
  if(node.tagName==='SELECT')return <Selector {...common} isLabelHidden={!form} variant="secondary" presentation="popover" value={node.value} options={[...node.options].map(o=>({value:o.value,label:o.textContent,disabled:o.disabled}))} width="auto" className={form?"op-standard-field op-dialog-field":"op-standard-field"} onChange={value=>update(node,value)}/>;
  if(node.tagName==='INPUT')return <TextInput {...field} type={node.type} autoComplete={node.autocomplete} maxLength={node.maxLength>0?node.maxLength:undefined} minLength={node.minLength>0?node.minLength:undefined} pattern={node.pattern||undefined} value={node.value} placeholder={node.placeholder} hasClear containerClassName={form?"op-standard-field op-dialog-field":"op-standard-field"} controlClassName="op-standard-text" onChange={value=>update(node,value)}/>;
- const props={...common,className:'op-standard '+node.className,title:node.title,'aria-pressed':node.getAttribute('aria-pressed')||undefined,children:node.textContent.trim()};
- return node.hasAttribute('aria-pressed')?<ToggleButton {...props} isPressed={node.getAttribute('aria-pressed')==='true'} onPressedChange={(_,event)=>activate(node,event)}/>:<Button {...props} variant="secondary" onClick={event=>activate(node,event)}/>;
+ const Icon=icons[node.dataset.icon],iconOnly=node.dataset.iconOnly==='true';
+ const props={...common,className:'op-standard '+node.className,title:node.title,tooltip:node.title,icon:Icon?<Icon size="1em" aria-hidden="true"/>:undefined,isIconOnly:iconOnly,'aria-pressed':node.getAttribute('aria-pressed')||undefined,children:iconOnly?undefined:node.textContent.trim()};
+ return node.hasAttribute('aria-pressed')?<ToggleButton {...props} isPressed={node.getAttribute('aria-pressed')==='true'} onPressedChange={(_,event)=>activate(node,event)}/>:iconOnly?<IconButton {...props} variant="secondary" onClick={event=>activate(node,event)}/>:<Button {...props} variant="secondary" onClick={event=>activate(node,event)}/>;
 }
 function refresh(){
  scheduled=false;
@@ -77,9 +81,9 @@ function refresh(){
    event.preventDefault();records.get(node).error=node.validationMessage;schedule();
    if(!invalidFocus){invalidFocus=true;requestAnimationFrame(()=>{invalidFocus=false;mount.querySelector('input,textarea,button,[role=slider]')?.focus();});}
   });
-  changes.observe(node,{subtree:true,childList:true,characterData:true,attributes:true,attributeFilter:['aria-pressed','disabled','hidden','title','class','value','selected']});
+  changes.observe(node,{subtree:true,childList:true,characterData:true,attributes:true,attributeFilter:['aria-current','aria-pressed','disabled','hidden','title','class','value','selected']});
  }
- const next=JSON.stringify([...records].map(([node,record])=>[record.key,record.error,node.textContent,node.value,node.checked,node.indeterminate,node.disabled,node.hidden,node.title,node.className,node.getAttribute('aria-pressed')]))+document.body.classList.contains('day');
+ const next=JSON.stringify([...records].map(([node,record])=>[record.key,record.error,node.textContent,node.value,node.checked,node.indeterminate,node.disabled,node.hidden,node.title,node.className,node.getAttribute('aria-pressed'),node.getAttribute('aria-current')]))+document.body.classList.contains('day');
  if(next===signature)return;signature=next;
  for(const {node,host}of records.values())host.hidden=node.hidden;
  root.render(<Theme theme={neutralTheme} mode={document.body.classList.contains('day')?'light':'dark'}><div onKeyDown={event=>event.stopPropagation()}>{[...records.values()].map(record=>createPortal(component(record),record.mount,record.key))}{createPortal(<DialogSurface/>,modal,'dialog-surface')}</div></Theme>);

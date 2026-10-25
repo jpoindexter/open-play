@@ -1,5 +1,5 @@
 {
-  "$description": "Open Play core-performance visual tokens derived from installed Serato screenshots. v0.1.0; night-mode reference only. No copied branding, raster controls or font assets.",
+  "$description": "Open Play visual system: shared product tokens for standard Astryx and custom DJ controls. Historical filename and reference provenance retained.",
   "$extensions": {
     "org.openplay": {
       "version": "0.1.0",
@@ -28,7 +28,17 @@
       "observed": "Flat palette, selected/disabled/empty states and loaded Vertical anatomy.",
       "inferred": "Semantic roles, exact font/weights, normalized spacing, hover/focus, responsive behavior.",
       "missing": "Exact source token names, unseen states and other source themes.",
-      "waveformReference": "https://support.serato.com/hc/en-us/articles/224969307-Main-Waveform-Display"
+      "waveformReference": "https://support.serato.com/hc/en-us/articles/224969307-Main-Waveform-Display",
+      "dayMode": {
+        "background": "{primitive.dayBackground}",
+        "panel": "{primitive.dayPanel}",
+        "borderStrong": "{primitive.dayBorder}",
+        "text": "{primitive.dayText}",
+        "textMuted": "{primitive.dayMuted}",
+        "selected": "{primitive.daySelected}",
+        "textOnSelected": "{primitive.dayText}",
+        "recessed": "{primitive.white}"
+      }
     }
   },
   "primitive": {
@@ -311,6 +321,34 @@
             "confidence": "inferred"
           }
         }
+      },
+      "64": {
+        "$type": "dimension",
+        "$value": {
+          "value": 64,
+          "unit": "px"
+        }
+      },
+      "72": {
+        "$type": "dimension",
+        "$value": {
+          "value": 72,
+          "unit": "px"
+        }
+      },
+      "96": {
+        "$type": "dimension",
+        "$value": {
+          "value": 96,
+          "unit": "px"
+        }
+      },
+      "180": {
+        "$type": "dimension",
+        "$value": {
+          "value": 180,
+          "unit": "px"
+        }
       }
     },
     "type": {
@@ -446,6 +484,30 @@
           "confidence": "inferred"
         }
       }
+    },
+    "dayBackground": {
+      "$type": "color",
+      "$value": "#d2d4d7"
+    },
+    "dayPanel": {
+      "$type": "color",
+      "$value": "#eeeeee"
+    },
+    "dayBorder": {
+      "$type": "color",
+      "$value": "#a1a6ad"
+    },
+    "dayText": {
+      "$type": "color",
+      "$value": "#16191c"
+    },
+    "dayMuted": {
+      "$type": "color",
+      "$value": "#48505a"
+    },
+    "daySelected": {
+      "$type": "color",
+      "$value": "#b8d9ee"
     }
   },
   "semantic": {
@@ -836,6 +898,54 @@
       "$type": "color",
       "$value": "{primitive.raised}",
       "$description": "Independent waveform readability role; not a claim of a reference-app token."
+    },
+    "standardControlHeight": {
+      "$type": "dimension",
+      "$value": "{primitive.space.32}"
+    },
+    "iconSize": {
+      "$type": "dimension",
+      "$value": "{primitive.space.16}"
+    },
+    "sectionGap": {
+      "$type": "dimension",
+      "$value": "{primitive.space.16}"
+    },
+    "controlRadius": {
+      "$type": "dimension",
+      "$value": "{primitive.space.2}"
+    },
+    "focusWidth": {
+      "$type": "dimension",
+      "$value": "{primitive.space.2}"
+    },
+    "fieldWidth": {
+      "$type": "dimension",
+      "$value": "{primitive.space.180}"
+    },
+    "selectWidth": {
+      "$type": "dimension",
+      "$value": "{primitive.space.72}"
+    },
+    "textAreaHeight": {
+      "$type": "dimension",
+      "$value": "{primitive.space.96}"
+    },
+    "meterWidth": {
+      "$type": "dimension",
+      "$value": "{primitive.space.64}"
+    },
+    "captionSize": {
+      "$type": "dimension",
+      "$value": "{primitive.type.11}"
+    },
+    "textLineHeight": {
+      "$type": "dimension",
+      "$value": "{primitive.space.16}"
+    },
+    "sectionInset": {
+      "$type": "dimension",
+      "$value": "{primitive.space.12}"
     }
   },
   "component": {

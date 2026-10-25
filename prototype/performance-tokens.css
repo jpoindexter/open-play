@@ -22,7 +22,11 @@
   --dj-primitive-space-32: 32px;
   --dj-primitive-space-40: 40px;
   --dj-primitive-space-48: 48px;
+  --dj-primitive-space-64: 64px;
+  --dj-primitive-space-72: 72px;
+  --dj-primitive-space-96: 96px;
   --dj-primitive-space-128: 128px;
+  --dj-primitive-space-180: 180px;
   --dj-primitive-space-224: 224px;
   --dj-primitive-type-10: 10px;
   --dj-primitive-type-11: 11px;
@@ -35,6 +39,12 @@
   --dj-primitive-mint: #7bd1a2;
   --dj-primitive-cyan: #52b9e0;
   --dj-primitive-mist: #91b8cf;
+  --dj-primitive-day-background: #d2d4d7;
+  --dj-primitive-day-panel: #eeeeee;
+  --dj-primitive-day-border: #a1a6ad;
+  --dj-primitive-day-text: #16191c;
+  --dj-primitive-day-muted: #48505a;
+  --dj-primitive-day-selected: #b8d9ee;
   --dj-semantic-background: var(--dj-primitive-surface);
   --dj-semantic-panel: var(--dj-primitive-surface);
   --dj-semantic-recessed: var(--dj-primitive-black);
@@ -78,6 +88,18 @@
   --dj-semantic-wave-playhead: var(--dj-primitive-white);
   --dj-semantic-wave-past: #00000033;
   --dj-semantic-wave-lane-divider: var(--dj-primitive-raised);
+  --dj-semantic-standard-control-height: var(--dj-primitive-space-32);
+  --dj-semantic-icon-size: var(--dj-primitive-space-16);
+  --dj-semantic-section-gap: var(--dj-primitive-space-16);
+  --dj-semantic-control-radius: var(--dj-primitive-space-2);
+  --dj-semantic-focus-width: var(--dj-primitive-space-2);
+  --dj-semantic-field-width: var(--dj-primitive-space-180);
+  --dj-semantic-select-width: var(--dj-primitive-space-72);
+  --dj-semantic-text-area-height: var(--dj-primitive-space-96);
+  --dj-semantic-meter-width: var(--dj-primitive-space-64);
+  --dj-semantic-caption-size: var(--dj-primitive-type-11);
+  --dj-semantic-text-line-height: var(--dj-primitive-space-16);
+  --dj-semantic-section-inset: var(--dj-primitive-space-12);
   --dj-component-button-background: var(--dj-semantic-recessed);
   --dj-component-button-height: var(--dj-semantic-control-height);
   --dj-component-button-radius: var(--dj-semantic-radius);
@@ -85,4 +107,14 @@
   --dj-component-deck-height: var(--dj-semantic-header-height);
   --dj-component-library-selection: var(--dj-semantic-selected);
   --dj-component-library-row: var(--dj-semantic-row);
+}
+body.day {
+  --dj-semantic-background: var(--dj-primitive-day-background);
+  --dj-semantic-panel: var(--dj-primitive-day-panel);
+  --dj-semantic-border-strong: var(--dj-primitive-day-border);
+  --dj-semantic-text: var(--dj-primitive-day-text);
+  --dj-semantic-text-muted: var(--dj-primitive-day-muted);
+  --dj-semantic-selected: var(--dj-primitive-day-selected);
+  --dj-semantic-text-on-selected: var(--dj-primitive-day-text);
+  --dj-semantic-recessed: var(--dj-primitive-white);
 }

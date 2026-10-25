@@ -114,6 +114,7 @@ export function createPanels(a) {
     if (
       [
         "settings",
+        "layouts",
         "audio",
         "hardware",
         "midi",
@@ -129,6 +130,7 @@ export function createPanels(a) {
       ].includes(name)
     ) {
       if (name === "settings") return settings();
+      if (name === "layouts") return settings("Layouts");
       if (name === "audio") return settings("Audio");
       if (name === "hardware") return hardware();
       if (name === "midi") return midi();
@@ -580,7 +582,7 @@ export function createPanels(a) {
     activeSettings = tab;
     const layoutOptions=$('#workspace-layout-options');
     const rows=settingsSchema[tab]||[];
-    const tabs=[...Object.keys(settingsSchema),...(layoutOptions?['Layouts']:[])];
+    const tabs=[...Object.keys(settingsSchema),...(layoutOptions?['Layouts','Advanced']:[])];
     const sharedVideo=rows.some(([name])=>videoSetupField(name));
     dialog(
       "Setup",
@@ -591,7 +593,7 @@ export function createPanels(a) {
         )
         .join(
           "",
-        )}</nav><p class="muted">Preferences persist in this browser. Hardware, DSP, provider and native-format controls are simulated unless the review report says otherwise. No account or paid unlock is required.</p>${tab==='Layouts'?layoutOptions.innerHTML:''}<div class="settings-grid">${rows
+        )}</nav><p class="muted">Preferences persist in this browser. Hardware, DSP, provider and native-format controls are simulated unless the review report says otherwise. No account or paid unlock is required.</p>${tab==='Layouts'?layoutOptions.innerHTML+'<div data-workspace-display></div>':tab==='Advanced'?'<h3>Troubleshooting</h3><div data-workspace-diagnostics></div>':''}<div class="settings-grid">${rows
         .map(([name, type, value]) => {
           if(name==='Output Device')return `<label class="setting"><span>Output Device</span><button id="choose-real-output">Output selection & channels</button></label>`;
           const field=videoSetupField(name);
@@ -609,7 +611,7 @@ export function createPanels(a) {
         })
         .join(
           "",
-        )}</div>${tab==='DJ Preferences'?'<p class="muted">Auto Gain uses measured integrated K-weighted loudness. Independent reference mapping:89→−18LUFS,92→−15LUFS. Exact Serato calibration remains unmeasured. New analysis during playback waits for the next load/trigger; reference/mode changes apply immediately. Control-click gain sets0; Alt-click restores its computed value.</p>':''}${tab==='Mixer'?'<p class="muted">EQ Boost changes the live positive EQ range to6dB or12dB for GUI and MIDI. Changing range preserves positive knob position; neutral and cuts stay unchanged. Cue Mix, Cue Volume, Master Cue, Split Cue and Mono output control real audio buses. Crossfader type, curve amount (0 slow · 100 fast), reverse, disable, A/B/Thru assignment and upfader curve also affect live audio. The midpoint Linear/upfader defaults preserve the previous mix. Curve equations are independent approximations of documented behavior; exact vendor curves are unmeasured. Cue volume10% is unity; higher values add up to12dB. Four-channel routing is applied separately in Devices. Physical headphone/master sockets and exact reference curves remain unverified.</p>':''}${sharedVideo?'<p class="muted">Recording resolution, media treatment and fade speed share the live Video controls. Fade speed runs from Slow (10s) to Fast (0.25s), using the existing independent linear duration. Match live output preserves the existing capture default. Other Video output preferences on this tab remain stored simulations.</p><p id="video-setup-status" role="status" aria-live="polite"></p>':''}<div class="form-actions">${tab === "MIDI" ? '<button id="open-mapping">Mapping editor</button>' : ""}${tab === "CD/Vinyl" ? '<button id="open-calibration">Calibration simulation</button>' : ""}${tab === "Library + Display" ? '<button id="open-providers">Provider settings</button>' : ""}${tab === "Audio" ? '<button id="open-devices">Audio output routing</button><button id="song-info">Livestream song info</button>' : ""}${tab === "FX" ? '<button id="open-fx">FX catalog & presets</button>' : ""}<button id="reset-settings">Reset this tab</button><button id="save-settings">Close</button></div>`,
+        )}</div>${tab==='DJ Preferences'?'<p class="muted">Auto Gain uses measured integrated K-weighted loudness. Independent reference mapping:89→−18LUFS,92→−15LUFS. Exact Serato calibration remains unmeasured. New analysis during playback waits for the next load/trigger; reference/mode changes apply immediately. Control-click gain sets0; Alt-click restores its computed value.</p>':''}${tab==='Mixer'?'<p class="muted">EQ Boost changes the live positive EQ range to6dB or12dB for GUI and MIDI. Changing range preserves positive knob position; neutral and cuts stay unchanged. Cue Mix, Cue Volume, Master Cue, Split Cue and Mono output control real audio buses. Crossfader type, curve amount (0 slow · 100 fast), reverse, disable, A/B/Thru assignment and upfader curve also affect live audio. The midpoint Linear/upfader defaults preserve the previous mix. Curve equations are independent approximations of documented behavior; exact vendor curves are unmeasured. Cue volume10% is unity; higher values add up to12dB. Four-channel routing is applied separately in Devices. Physical headphone/master sockets and exact reference curves remain unverified.</p>':''}${sharedVideo?'<p class="muted">Recording resolution, media treatment and fade speed share the live Video controls. Fade speed runs from Slow (10s) to Fast (0.25s), using the existing independent linear duration. Match live output preserves the existing capture default. Other Video output preferences on this tab remain stored simulations.</p><p id="video-setup-status" role="status" aria-live="polite"></p>':''}<div class="form-actions">${tab === "MIDI" ? '<button id="open-mapping">Mapping editor</button>' : ""}${tab === "CD/Vinyl" ? '<button id="open-calibration">Calibration simulation</button>' : ""}${tab === "Library + Display" ? '<button id="open-providers">Provider settings</button>' : ""}${tab === "Audio" ? '<button id="open-devices">Audio output routing</button><button id="song-info">Livestream song info</button>' : ""}${tab === "FX" ? '<button id="open-fx">FX catalog & presets</button>' : ""}${tab!=='Advanced'?'<button id="reset-settings">Reset this tab</button>':''}<button id="save-settings">Close</button></div>`,
       (body) => {
         body.querySelectorAll('[data-workspace-choice]').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.workspaceChoice===document.body.dataset.workspace)));
         body
@@ -652,7 +654,8 @@ export function createPanels(a) {
             }),
         );
         $("#save-settings").onclick = () => $("#modal").close();
-        $("#reset-settings").onclick = () => {
+        const resetTab=$("#reset-settings");
+        if(resetTab)resetTab.onclick = () => {
           if(tab==='Layouts'){body.querySelector('[data-workspace-choice="rekordbox"]')?.click();return;}
           try {
             if(sharedVideo)resetVideoSetupSettings(s.video,{setRecordingQuality:value=>videoMixer.setRecordingQuality(value)});
@@ -668,6 +671,7 @@ export function createPanels(a) {
           settings(tab);
           if(sharedVideo&&s.panel==='video')refresh();
         };
+        window.openPlay?.workspaceSettings?.mount(body,tab);
         if ($("#open-mapping")) $("#open-mapping").onclick = midi;
         if ($("#open-calibration")) $("#open-calibration").onclick = hardware;
         if ($("#open-providers"))

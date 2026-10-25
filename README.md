@@ -1,5 +1,15 @@
 # Open Play
 
+## Current target — public beta, 25 October 2026
+
+Public beta ASAP is the delivery target. [Release scope and gates](docs/delivery/PUBLIC_BETA_PLAN.md): reliable local-audio mixing, recoverable data, usable shared UI, exact-package/native review and basic installation/help/known issues. Full competitor parity and the entire backlog are not launch prerequisites. Publication is still pending a concrete beta artifact and owner approval.
+
+Native **0.1.57 / source9c964e6** startup is executed: four real tracks,16library previews,32hotcues,0playing. Restart loads demo decks; prior live positions were not restored. [Native evidence](docs/prototype/desktop-0.1.57-native-startup.json). Prior0.1.53 practical mixing/EQ/Cue/stop acceptance retains its scope; hardware is deferred and intermittent pop/stall reports remain open.
+
+New source/browser slice: one40px performance header, actual Astryx icon controls, original display/configuration controls in Settings, nested Back/focus return and token-based standard UI. [Design system and migration limits](docs/design-system/README.md). This header is not installed in57. Legacy style migration and beta gates remain open. Push every completed slice; no broad clean-case test repeats.
+
+---
+
 [Core audit and remaining work — 21 October](docs/prototype/CORE_DJ_AUDIT_2026-10-21.md) · [Trello reconciliation](docs/delivery/CORE_DJ_RECONCILIATION_2026-10-21.json).
 
 Current work is finishing the **core two-track DJ experience**, with the chosen rekordbox layout, all controls and library waveform previews preserved. Jason authorized a new local desktop test build on20October. [Current waveform/native evidence and open acceptance](docs/prototype/WAVEFORM_READABILITY_035.md), [core plan](docs/delivery/CORE_DJ_FIRST.md), [HTML preview](http://127.0.0.1:8848/prototype/layout-preview.html).
