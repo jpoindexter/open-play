@@ -93,7 +93,6 @@ body:is([data-workspace="traktor"],:is([data-workspace="hybrid"],[data-preview-s
 body:is([data-workspace="traktor"],:is([data-workspace="hybrid"],[data-preview-shell="flat"])) table{font-size:12px}
 body:is([data-workspace="traktor"],:is([data-workspace="hybrid"],[data-preview-shell="flat"])) th{background:#30373c;color:#bac5cc;font-size:9px}
 body:is([data-workspace="traktor"],:is([data-workspace="hybrid"],[data-preview-shell="flat"])) td{padding:6px 8px}
-body:is([data-workspace="traktor"],:is([data-workspace="hybrid"],[data-preview-shell="flat"])) tbody tr.selected{background:#07546b!important}
 body:is([data-workspace="traktor"],:is([data-workspace="hybrid"],[data-preview-shell="flat"])) #panel:not([hidden]){grid-column:1/-1;grid-row:2}
 body:is([data-workspace="traktor"],:is([data-workspace="hybrid"],[data-preview-shell="flat"])) main:has(#panel:not([hidden])) .library{grid-row:3}
 body:is([data-workspace="traktor"],:is([data-workspace="hybrid"],[data-preview-shell="flat"])).four-decks main{height:auto;min-height:calc(100dvh - var(--workspace-chrome-height,119px));grid-template-rows:auto auto minmax(260px,1fr)}
@@ -394,7 +393,6 @@ body[data-preview-shell=flat] .preview-mixer-footer{grid-template-columns:1fr;pa
 body[data-preview-shell=flat] .preview-mixer-footer .preview-headphones{min-height:24px}
 body[data-preview-shell=flat] .library{border-color:#33383f;grid-template-columns:180px minmax(0,1fr)}
 body[data-preview-shell=flat] .library-tools,body[data-preview-shell=flat] th{background:#1e2126;border-color:#3c414a}
-body[data-preview-shell=flat] tbody tr.selected{background:#214b77!important}
 body[data-preview-shell=flat] td{padding:5px 8px}
 body[data-preview-shell=flat][data-density=compact] .deck{grid-template-rows:44px 28px 30px 104px 30px auto auto}
 body[data-preview-shell=flat][data-density=compact] .preview-loop-strip{grid-column:1;grid-row:4;align-self:center}
@@ -467,9 +465,6 @@ body[data-preview-shell=flat] .transport [data-action=play]{border:0;color:#91bf
 body[data-preview-shell=flat] .transport [data-action=cue]{border:0;color:#d8be67}
 body[data-preview-shell=flat] .transport button.active,body[data-preview-shell=flat] .deck-foot button.active,body[data-preview-shell=flat] .preview-loop-strip button.active{background:#1a69cf;color:#fff}
 body[data-preview-shell=flat] .library,body[data-preview-shell=flat] .library-tools,body[data-preview-shell=flat] th{background:#1c1c1c;border-color:#303030}
-body[data-preview-shell=flat] tbody tr:nth-child(odd){background:#101010}
-body[data-preview-shell=flat] tbody tr:nth-child(even){background:#1c1c1c}
-body[data-preview-shell=flat] tbody tr.selected{background:#294f70!important}
 body[data-preview-shell=flat] .library-tools button,body[data-preview-shell=flat] .crate-tools button,body[data-preview-shell=flat] .preview-more summary{background:#242424;border:0}
 body[data-preview-shell=flat] .fader-group::after{background:#202020;border-top:5px solid #aaa;border-bottom:5px solid #aaa;box-sizing:border-box}
 body[data-preview-shell=flat] .workspace-bar{height:42px;gap:16px;padding-inline:12px}

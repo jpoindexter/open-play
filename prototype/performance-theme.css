@@ -1,4 +1,4 @@
-/* Core performance system: measured Serato neutrals, compact controls and hierarchy.
+/* Core performance system: reference-derived Open Play neutrals, compact controls and hierarchy.
    Behavior stays in the existing controls; no reference raster/font assets are used. */
 body:not(.day) {
   --bg: var(--dj-semantic-background);
@@ -16,7 +16,7 @@ button,select {min-height:var(--dj-component-button-height);}
 button {padding:var(--dj-semantic-gap) var(--dj-semantic-inset);}
 body:not(.day) button:hover {border-color:var(--dj-semantic-border-strong);}
 body:not(.day) button.active,body:not(.day) button[aria-pressed="true"] {
-  background:var(--dj-semantic-selected);color:var(--dj-semantic-text-on-selected);
+  background:var(--dj-semantic-active);color:var(--dj-semantic-text-on-selected);
 }
 .toolbar {height:var(--dj-semantic-toolbar-height);padding:var(--dj-semantic-gap) var(--dj-semantic-inset);gap:var(--dj-semantic-gap);}
 .toolbar button,.toolbar select {font-size:11px;}
@@ -97,7 +97,7 @@ th button {min-height:24px;padding:var(--dj-semantic-gap) var(--dj-semantic-inse
 td {padding:var(--dj-semantic-gap) var(--dj-semantic-inset);line-height:16px;}
 body:not(.day) tbody tr {background:var(--dj-semantic-row);}
 body:not(.day) tbody tr:nth-child(even) {background:var(--dj-semantic-row-alternate);}
-body:not(.day) tbody tr.selected {background:var(--dj-component-library-selection);color:var(--dj-semantic-text-on-selected);}
+body:not(.day) tbody tr.selected,body.day tbody tr.selected {background:var(--dj-component-library-selection);color:var(--dj-semantic-text-on-selected);}
 @media (min-width:1151px) {
   .layout-Vertical:not(.four-decks) #decks {grid-template-columns:minmax(0,1fr) 224px minmax(0,1fr);}
   .layout-Vertical:not(.four-decks) .deck-body {grid-template-columns:minmax(0,1fr) 128px 22px;gap:var(--dj-semantic-gap);}

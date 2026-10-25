@@ -1,17 +1,17 @@
 // Generated from design-tokens/serato-core.tokens.json.
 export const performanceColors = Object.freeze({
-  "background": "#222222",
-  "panel": "#222222",
+  "background": "#0f0f0f",
+  "panel": "#1e1e1e",
   "recessed": "#000000",
-  "row": "#111111",
-  "rowAlternate": "#1d1d1d",
-  "raised": "#444444",
+  "row": "#0f0f0f",
+  "rowAlternate": "#1e1e1e",
+  "raised": "#353535",
   "border": "#111111",
   "borderStrong": "#444444",
   "text": "#dddddd",
   "textMuted": "#a9a9a9",
   "textOnSelected": "#ffffff",
-  "selected": "#1f4b78",
+  "selected": "#314b67",
   "focus": "#38a9e0",
   "platter": "#ffffff",
   "platterText": "#000000",
@@ -28,5 +28,8 @@ export const performanceColors = Object.freeze({
   "waveText": "#dddddd",
   "wavePlayhead": "#ffffff",
   "wavePast": "#00000033",
-  "waveLaneDivider": "#444444"
+  "waveLaneDivider": "#444444",
+  "control": "#282828",
+  "active": "#2465c7",
+  "chrome": "#0f0f0f"
 });

@@ -1,6 +1,6 @@
 /* Actual Astryx React controls, scoped to the HTML review entry point. */
 #workspace-preview{
- --op-ui-surface:var(--dj-semantic-panel);--op-ui-line:var(--dj-semantic-border-strong);--op-ui-text:var(--dj-semantic-text);--op-ui-selected:var(--dj-semantic-selected);
+ --op-ui-surface:var(--dj-semantic-panel);--op-ui-line:var(--dj-semantic-border-strong);--op-ui-text:var(--dj-semantic-text);--op-ui-selected:var(--dj-semantic-active);
  --op-ui-control:var(--dj-semantic-standard-control-height);--op-ui-gap:var(--dj-semantic-gap);
 }
 #workspace-preview [data-astryx-backing]{display:none!important}
@@ -12,7 +12,7 @@
 #workspace-preview .op-standard[aria-pressed=true]{background:var(--op-ui-selected);border-color:transparent;color:var(--dj-semantic-text-on-selected)}
 #workspace-preview .op-standard[aria-pressed=mixed]{background:var(--dj-semantic-raised);border-style:dashed}
 #workspace-preview .op-standard:not(:disabled):hover{background:var(--dj-semantic-raised)}
-#workspace-preview .op-standard[aria-pressed=true]:hover{background:var(--dj-semantic-selected)}
+#workspace-preview .op-standard[aria-pressed=true]:hover{background:var(--op-ui-selected)}
 #workspace-preview .op-standard:focus-visible{outline:var(--dj-semantic-focus-width) solid var(--dj-semantic-focus);outline-offset:calc(-1 * var(--dj-semantic-focus-width))}
 #workspace-preview .op-standard-field{display:inline-flex;min-width:0;margin:0}
 #workspace-preview .op-standard-field button{min-height:var(--op-ui-control);height:var(--op-ui-control);padding:0 var(--dj-semantic-inset);background:var(--op-ui-surface);border:0;min-width:var(--dj-semantic-select-width)}

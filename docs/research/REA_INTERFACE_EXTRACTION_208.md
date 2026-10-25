@@ -1,5 +1,7 @@
 # rekordbox interface extraction 208
 
+**25 October update:** The current MCP connection now opens the same installed binary and successfully captures 2Deck Horizontal (279 nodes). The historical Hopper/MCP blockage below does not describe today's connection. Fresh design-system extraction, limits and application: [rekordbox reference](../design-system/REKORDBOX_REFERENCE_2026-10-25.md). The saved Vertical evidence below remains historical evidence for the same executable, not fresh operation.
+
 19 October 2026. Installed rekordbox 7.2.19.0342, Performance mode. This is an interface reference for the existing HTML prototype. No Open Play native build, DSP, controller mapping or vendor app modification.
 
 ## REA now captures the running app

@@ -2,8 +2,8 @@
   "$description": "Open Play visual system: shared product tokens for standard Astryx and custom DJ controls. Historical filename and reference provenance retained.",
   "$extensions": {
     "org.openplay": {
-      "version": "0.1.0",
-      "date": "2026-10-19",
+      "version": "0.2.0",
+      "date": "2026-10-25",
       "references": [
         {
           "path": "local-evidence/core-design-190/serato-practice-empty.png",
@@ -14,6 +14,13 @@
           "path": "local-evidence/desktop-0.1.23-native/serato-before-quit.png",
           "sha256": "ed91a0ea71db09d9ec7bbba35984c305b59a471512d25a02314f3d06bd58427f",
           "authority": "historical installed loaded Vertical capture"
+        },
+        {
+          "path": "local-evidence/rekordbox-design-system-2026-10-25.rea.json",
+          "authority": "REA fresh installed 7.2.19.0342 2Deck Horizontal; saved same-binary 2/4Deck Vertical captures supplement geometry",
+          "evidenceId": "ev_a845746a8ff8ee3bb086dd0fc3b18542677c35576fe0927987dd986fa6043c37",
+          "targetSha256": "07dcecbaf304f777e435539c83c7dcc02e41de1eaf2e0a75e8a9852e4411a244",
+          "note": "Observed raster palette and UI anatomy, not original vendor tokens. Exact type and spacing remain inferred. See docs/design-system/REKORDBOX_REFERENCE_2026-10-25.md."
         }
       ],
       "scale": {
@@ -356,6 +363,46 @@
           "value": 264,
           "unit": "px"
         }
+      },
+      "20": {
+        "$type": "dimension",
+        "$value": {
+          "value": 20,
+          "unit": "px"
+        },
+        "$description": "Open Play four-pixel layout rhythm; inferred, not measured vendor spacing token."
+      },
+      "28": {
+        "$type": "dimension",
+        "$value": {
+          "value": 28,
+          "unit": "px"
+        },
+        "$description": "Open Play four-pixel layout rhythm; inferred, not measured vendor spacing token."
+      },
+      "36": {
+        "$type": "dimension",
+        "$value": {
+          "value": 36,
+          "unit": "px"
+        },
+        "$description": "Open Play four-pixel layout rhythm; inferred, not measured vendor spacing token."
+      },
+      "44": {
+        "$type": "dimension",
+        "$value": {
+          "value": 44,
+          "unit": "px"
+        },
+        "$description": "Open Play four-pixel layout rhythm; inferred, not measured vendor spacing token."
+      },
+      "52": {
+        "$type": "dimension",
+        "$value": {
+          "value": 52,
+          "unit": "px"
+        },
+        "$description": "Open Play four-pixel layout rhythm; inferred, not measured vendor spacing token."
       }
     },
     "type": {
@@ -515,28 +562,80 @@
     "daySelected": {
       "$type": "color",
       "$value": "#b8d9ee"
+    },
+    "neutral": {
+      "canvas": {
+        "$type": "color",
+        "$value": "#0f0f0f",
+        "$description": "Flat-fill RGB sample from REA rekordbox reference; display sampling, not vendor source token.",
+        "$extensions": {
+          "org.openplay": {
+            "confidence": "observed"
+          }
+        }
+      },
+      "panel": {
+        "$type": "color",
+        "$value": "#1e1e1e",
+        "$description": "Flat-fill RGB sample from REA rekordbox reference; display sampling, not vendor source token.",
+        "$extensions": {
+          "org.openplay": {
+            "confidence": "observed"
+          }
+        }
+      },
+      "control": {
+        "$type": "color",
+        "$value": "#282828",
+        "$description": "Flat-fill RGB sample from REA rekordbox reference; display sampling, not vendor source token.",
+        "$extensions": {
+          "org.openplay": {
+            "confidence": "observed"
+          }
+        }
+      },
+      "hover": {
+        "$type": "color",
+        "$value": "#353535",
+        "$description": "Flat-fill RGB sample from REA rekordbox reference; display sampling, not vendor source token.",
+        "$extensions": {
+          "org.openplay": {
+            "confidence": "observed"
+          }
+        }
+      },
+      "selection": {
+        "$type": "color",
+        "$value": "#314b67",
+        "$description": "Flat-fill RGB sample from REA rekordbox reference; display sampling, not vendor source token.",
+        "$extensions": {
+          "org.openplay": {
+            "confidence": "observed"
+          }
+        }
+      },
+      "active": {
+        "$type": "color",
+        "$value": "#2465c7",
+        "$description": "Open Play adaptation for readable active text.",
+        "$extensions": {
+          "org.openplay": {
+            "confidence": "inferred"
+          }
+        }
+      }
     }
   },
   "semantic": {
     "background": {
       "$type": "color",
-      "$value": "{primitive.surface}",
-      "$description": "",
-      "$extensions": {
-        "org.openplay": {
-          "confidence": "inferred"
-        }
-      }
+      "$value": "{primitive.neutral.canvas}",
+      "$description": "Shared Open Play background role; reference-derived with minimal styling."
     },
     "panel": {
       "$type": "color",
-      "$value": "{primitive.surface}",
-      "$description": "",
-      "$extensions": {
-        "org.openplay": {
-          "confidence": "inferred"
-        }
-      }
+      "$value": "{primitive.neutral.panel}",
+      "$description": "Shared Open Play panel role; reference-derived with minimal styling."
     },
     "recessed": {
       "$type": "color",
@@ -550,33 +649,18 @@
     },
     "row": {
       "$type": "color",
-      "$value": "{primitive.canvas}",
-      "$description": "",
-      "$extensions": {
-        "org.openplay": {
-          "confidence": "inferred"
-        }
-      }
+      "$value": "{primitive.neutral.canvas}",
+      "$description": "Shared Open Play row role; reference-derived with minimal styling."
     },
     "rowAlternate": {
       "$type": "color",
-      "$value": "{primitive.row}",
-      "$description": "",
-      "$extensions": {
-        "org.openplay": {
-          "confidence": "inferred"
-        }
-      }
+      "$value": "{primitive.neutral.panel}",
+      "$description": "Shared Open Play rowAlternate role; reference-derived with minimal styling."
     },
     "raised": {
       "$type": "color",
-      "$value": "{primitive.raised}",
-      "$description": "",
-      "$extensions": {
-        "org.openplay": {
-          "confidence": "inferred"
-        }
-      }
+      "$value": "{primitive.neutral.hover}",
+      "$description": "Shared Open Play raised role; reference-derived with minimal styling."
     },
     "border": {
       "$type": "color",
@@ -630,13 +714,8 @@
     },
     "selected": {
       "$type": "color",
-      "$value": "{primitive.selected}",
-      "$description": "",
-      "$extensions": {
-        "org.openplay": {
-          "confidence": "inferred"
-        }
-      }
+      "$value": "{primitive.neutral.selection}",
+      "$description": "Shared Open Play selected role; reference-derived with minimal styling."
     },
     "focus": {
       "$type": "color",
@@ -957,6 +1036,83 @@
     "narrowDeckHeight": {
       "$type": "dimension",
       "$value": "{primitive.space.264}"
+    },
+    "control": {
+      "$type": "color",
+      "$value": "{primitive.neutral.control}",
+      "$description": "Shared Open Play control role; reference-derived with minimal styling."
+    },
+    "active": {
+      "$type": "color",
+      "$value": "{primitive.neutral.active}",
+      "$description": "Shared Open Play active role; reference-derived with minimal styling."
+    },
+    "chrome": {
+      "$type": "color",
+      "$value": "{primitive.neutral.canvas}",
+      "$description": "Shared Open Play chrome role; reference-derived with minimal styling."
+    },
+    "space": {
+      "0": {
+        "$type": "dimension",
+        "$value": "{primitive.space.0}"
+      },
+      "4": {
+        "$type": "dimension",
+        "$value": "{primitive.space.4}"
+      },
+      "8": {
+        "$type": "dimension",
+        "$value": "{primitive.space.8}"
+      },
+      "12": {
+        "$type": "dimension",
+        "$value": "{primitive.space.12}"
+      },
+      "16": {
+        "$type": "dimension",
+        "$value": "{primitive.space.16}"
+      },
+      "20": {
+        "$type": "dimension",
+        "$value": "{primitive.space.20}"
+      },
+      "24": {
+        "$type": "dimension",
+        "$value": "{primitive.space.24}"
+      },
+      "28": {
+        "$type": "dimension",
+        "$value": "{primitive.space.28}"
+      },
+      "32": {
+        "$type": "dimension",
+        "$value": "{primitive.space.32}"
+      },
+      "36": {
+        "$type": "dimension",
+        "$value": "{primitive.space.36}"
+      },
+      "40": {
+        "$type": "dimension",
+        "$value": "{primitive.space.40}"
+      },
+      "44": {
+        "$type": "dimension",
+        "$value": "{primitive.space.44}"
+      },
+      "48": {
+        "$type": "dimension",
+        "$value": "{primitive.space.48}"
+      },
+      "52": {
+        "$type": "dimension",
+        "$value": "{primitive.space.52}"
+      },
+      "64": {
+        "$type": "dimension",
+        "$value": "{primitive.space.64}"
+      }
     }
   },
   "component": {
