@@ -6,8 +6,7 @@
 
 [Delivery/re-entry](../prototype/desktop-0.1.52-playback-delivery.json), [executed report/limits](../prototype/CORE_TERMINAL_ANALYSIS_REFRESH_2026-10-24.md), [runtime/source](../prototype/terminal-analysis-results.json), [PCM](../prototype/terminal-analysis-pcm-inspection.json), [native window](../prototype/terminal-analysis-native-window.json), [Trello reconciliation](CORE_TERMINAL_ANALYSIS_RECONCILIATION_2026-10-24.json).
 
-Now: one-action native orientation capture is PREPARED/static checked at local-evidence/core-manual-orientation-2026-10-25; production workspace/current56,32source pins,4allowlisted originals, isolated host-mute/identity/native-retention policies. No server/Electron/UI/audio/trace launched. Read-only OS screen-lock propertyTRUE. See NATIVE_ORIENTATION_CAPTURE_PREPARATION_2026-10-25.json; execute once after manual unlock without the broad soak/turn10. Prior56liveH/V usability is not timing/DOM/music proof; pendingSyncOFF and actualpop remain separate.157cards/9complete; core goal active, hardware deferred.
-
+Now: one-action native capture ATTEMPTED, target event NOT executed. First setup timed out with2demo decks/0playing; generic and uniquely named diagnostic hosts could show pixels but not reliably route native input. Existing Trace app used an older bootstrap; stopped without music. Alias/identity hypotheses unproven. No timing/DOM/PCM/pop acceptance or product patch. Normal56 re-observed stopped4real decks/16previews; originals4hashes/size/mtime retained. Owned diagnostics/18847servers stopped; hardware deferred. See NATIVE_ORIENTATION_CAPTURE_ATTEMPT_2026-10-25.json. Repair native input binding before another capture; no blind retries or broad soak.157cards/9complete retained; goal active.
 ---
 
 ## Historical status — core audit and priorities, 21 October 2026

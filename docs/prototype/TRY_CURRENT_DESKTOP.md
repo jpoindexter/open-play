@@ -6,8 +6,7 @@ Open `Start Open Play Current Test.command` or `Start Open Play Playback Test 0.
 
 Native56 H→V→H with four muted real transports observed controls/state/usability, including Dfilter.01→.02 after transition; cleanup restored. This is not timing, DOM identity, held-pointer, PCM/listening or pop-free proof. The visible Horizontal selector versus stale AXVertical disagreement is on UI-004, cause unverified. Prior53listening/focus,54fader,55count and56session/isolated archives retain their scope. Use56 for archives; older builds omit their field on save. No broad clean-case/matrix rerun.
 
-Mac locked after verified stopped cleanup; a read-only IOResources check still reports locked. Unlock manually before further native actions. The one-action private timing/identity capture is now prepared/static checked: see NATIVE_ORIENTATION_CAPTURE_PREPARATION_2026-10-25.json and local-evidence/core-manual-orientation-2026-10-25/RUN.md. It uses a separate muted profile; normal56 remains untouched. No server/Electron/trace launched, bypass or extra History check. Do not restart the broad soak.
-
+Software-only capture was attempted after a read-only OS check reported unlocked. Native diagnostic input did not reach a qualifying event; no timing/identity/pop result is accepted. Normal56 remains stopped with the four loaded tracks and16library previews. Owned diagnostic windows/servers stopped; full details and failed attempts: NATIVE_ORIENTATION_CAPTURE_ATTEMPT_2026-10-25.json. Fix native target/input binding before another trace. Hardware remains deferred; no broad soak or clean-case repeat.
 ---
 
 ## Historical0.1.47 guide
