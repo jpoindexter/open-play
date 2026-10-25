@@ -432,7 +432,7 @@ function updateTempoSlider(d) {
 }
 function renderDecks(index = null) {
   const quantizeStates=state.decks.slice(0,state.deckCount).map(deckQuantize);
-  $('#quantize').setAttribute('aria-pressed',quantizeStates.every(Boolean)?'true':quantizeStates.every(x=>!x)?'false':'mixed');
+  $('#quantize')?.setAttribute('aria-pressed',quantizeStates.every(Boolean)?'true':quantizeStates.every(x=>!x)?'false':'mixed');
   const syncMode = state.settings["Sync Mode"];
   const shape = `${state.layout}/${state.deckCount}/${syncMode}`;
   const target = Number.isInteger(index) && shape === renderedDeckShape
@@ -813,6 +813,18 @@ async function play(d) {
   renderTracks();
 }
 function deckQuantize(d){return typeof d.quantize==='boolean'?d.quantize:state.quantize;}
+function refreshQuantizeControls(){
+  const decks=state.decks.slice(0,state.deckCount),header=$('#quantize');
+  const buttons=decks.map(d=>document.querySelector(`[data-action="quantize"][data-deck="${d.index}"]`));
+  if(renderedDeckShape!==`${state.layout}/${state.deckCount}/${state.settings['Sync Mode']}`||!header||buttons.some(button=>!button))return renderDecks();
+  const enabled=decks.map(deckQuantize);
+  buttons.forEach((button,index)=>{
+    button.classList.toggle('active',enabled[index]);
+    button.setAttribute('aria-pressed',String(!!enabled[index]));
+  });
+  header.setAttribute('aria-pressed',enabled.every(Boolean)?'true':enabled.every(value=>!value)?'false':'mixed');
+  refreshTransportControls(state);
+}
 function autoLoopEnd(d, start) {
   const grid = createBeatgrid(d.track);
   return Math.min(d.track.duration, grid
@@ -837,7 +849,7 @@ async function deckAction(action, index, el, event = {}) {
     if(!d.previous)return notify('No previous track on this deck.');
     const previous={...d.previous};return load(index,previous.id,{position:previous.position});
   }
-  if(action==='quantize'){d.quantize=!deckQuantize(d);return renderDecks();}
+  if(action==='quantize'){d.quantize=!deckQuantize(d);return refreshQuantizeControls();}
   if (action === "tab") {
     if(d.tab==='Slicer'&&el.dataset.tab!=='Slicer')await slicer.releaseDeck(d);
     d.tab = el.dataset.tab;
@@ -1737,7 +1749,7 @@ $("#day").onclick = () => document.body.classList.toggle("day");
 $("#quantize").onclick = (e) => {
   state.quantize=!state.decks.slice(0,state.deckCount).every(deckQuantize);
   for(const d of state.decks)d.quantize=state.quantize;
-  renderDecks();
+  refreshQuantizeControls();
 };
 $("#autoplay").onclick = (e) => {
   state.autoplay = !state.autoplay;

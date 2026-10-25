@@ -1224,7 +1224,7 @@ export class AudioEngine {
       if (this.voices.get(d.index)?.liveKeylock === live && !ack.superseded) {d.keylock = keylock; d.keyShift = semitones;}
       return;
     }
-    if(d.playing&&!d.reverse){
+    if(d.playing&&(!d.reverse||(!this.voices.get(d.index)?.deckScratchTransport&&!this.voices.get(d.index)?.censorReverse))){
       const track=d.track,previous={keylock:d.keylock,keyShift:d.keyShift},clock=this.voiceClock(d,this.voices.get(d.index));
       const handoff=createSyncTempoHandoff(this.ctx,[d.index]);
       d.keylock=keylock;d.keyShift=semitones;
