@@ -1,4 +1,14 @@
+## Active continuation — rekordbox design reference, 25 October 2026
+
+User requests REA extraction of installed rekordbox design rules and application to Open Play's own system, retaining the minimal button treatment and all core controls/previews. Next: inspect existing REA captures and refresh installed-app evidence; map observed/inferred rules into canonical tokens/components. Do not copy proprietary code/assets or imply exact source-token access. Native input last blocked by confirmed screen lock; static evidence/repo work can continue.
+
+Recovery slice preserved: source2ba58bb/private0.1.58 package inspection5/5, actual4real-track clean browser reload at2/3/4/5s with0Play; full native restart/crash/Sync gates remain open. Current launcher remains57; named58launcher syntax checked, unexecuted. SYS-002/UI-TOOL-01/GATE-N exact readback159cards/10complete. Re-entry: after unlock preserve REC/work and run one protected58startup/clean-restart check; do not repeat accepted broad listening/soak cases. Original prompt/history below retained.
+
+---
+
 ## Current target — public beta, 25 October 2026
+
+Latest private0.1.58/source2ba58bb package passes archive/host5/5. New paused loaded-deck recovery passes actual4real-track browser reload at2/3/4/5s without Play. Native58startup/restart is pending; Current launcher remains57. See [delivery receipt](../docs/prototype/desktop-0.1.58-playback-delivery.json).
 
 Public beta ASAP is the delivery target. [Release scope and gates](../docs/delivery/PUBLIC_BETA_PLAN.md): reliable local-audio mixing, recoverable data, usable shared UI, exact-package/native review and basic installation/help/known issues. Full competitor parity and the entire backlog are not launch prerequisites. Publication is still pending a concrete beta artifact and owner approval.
 

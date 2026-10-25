@@ -1,5 +1,7 @@
 ## Current target — public beta, 25 October 2026
 
+Latest private0.1.58/source2ba58bb package passes archive/host5/5. New paused loaded-deck recovery passes actual4real-track browser reload at2/3/4/5s without Play. Native58startup/restart is pending; Current launcher remains57. See [delivery receipt](docs/prototype/desktop-0.1.58-playback-delivery.json).
+
 Public beta ASAP is the delivery target. [Release scope and gates](docs/delivery/PUBLIC_BETA_PLAN.md): reliable local-audio mixing, recoverable data, usable shared UI, exact-package/native review and basic installation/help/known issues. Full competitor parity and the entire backlog are not launch prerequisites. Publication is still pending a concrete beta artifact and owner approval.
 
 Native **0.1.57 / source9c964e6** startup is executed: four real tracks,16library previews,32hotcues,0playing. Restart loads demo decks; prior live positions were not restored. [Native evidence](docs/prototype/desktop-0.1.57-native-startup.json). Prior0.1.53 practical mixing/EQ/Cue/stop acceptance retains its scope; hardware is deferred and intermittent pop/stall reports remain open.

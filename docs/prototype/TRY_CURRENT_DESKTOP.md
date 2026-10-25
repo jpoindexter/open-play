@@ -1,3 +1,11 @@
+# Private desktop0.1.58 package ready — native review pending
+
+Use `Start Open Play Playback Test 0.1.58.command` after unlocking, preserving any recording/work and closing another playback-test version. Exact source2ba58bb; archive/host5/5. The58launcher is syntax checked, not executed. Current launcher remains57. [Delivery receipt](desktop-0.1.58-playback-delivery.json).
+
+58includes quiet header/Settings and paused loaded-track/count/position recovery. Actual browser4real-track clean reload retained2/3/4/5s positions and controls/previews,0Play; native58startup/quit/reopen remains pending. Tempo/Sync/loops/temporaryCue start reset. No abrupt-crash/physical routing/Sync-pop claim. Use58for the new saved-deck field; older versions can omit it on save. Preserve the normal profile and prior apps. No public beta published.
+
+---
+
 # Try desktop0.1.57 — current observed candidate
 
 Current launcher targets0.1.57/source9c964e6. Actual startup observed with4realtracks,16library previews,32hotcues,0playing. Normal profile/library retained; prior deck positions were not restored. [Executed native receipt](desktop-0.1.57-native-startup.json). New shared header/Settings changes are source/browser-only and need a new package before native review. [Public beta target and gates](../delivery/PUBLIC_BETA_PLAN.md).
