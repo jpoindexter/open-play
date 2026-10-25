@@ -23,7 +23,7 @@ function cssValue(token){
   const v=token.$value;
   if(typeof v==='string')return v.replace(/\{([^}]+)\}/g,(_,path)=>`var(${cssName(path)})`);
   if(token.$type==='dimension')return String(v.value)+v.unit;
-  if(token.$type==='fontFamily')return v.map(x=>x==='sans-serif'?x:JSON.stringify(x)).join(', ');
+  if(token.$type==='fontFamily')return v.map(x=>['sans-serif','monospace','system-ui','ui-monospace'].includes(x)?x:JSON.stringify(x)).join(', ');
   return String(v);
 }
 const lines=[];
@@ -35,6 +35,9 @@ function resolve(path){
 }
 const colors=Object.fromEntries([...tokens].filter(([path,token])=>path.startsWith('semantic.')&&token.$type==='color').map(([path])=>[path.slice(9),resolve(path)]));
 await writeFile(new URL('../prototype/performance-tokens.js',import.meta.url),'// Generated from design-tokens/serato-core.tokens.json.\nexport const performanceColors = Object.freeze('+JSON.stringify(colors,null,2)+');\n');
+const family=cssValue({$type:'fontFamily',$value:resolve('semantic.font')});
+const typography=Object.fromEntries(['captionSize','microSize'].map(role=>[role,cssValue({$type:'dimension',$value:resolve('semantic.'+role)})+' '+family]));
+await writeFile(new URL('../prototype/performance-tokens.js',import.meta.url),'export const performanceTypography=Object.freeze('+JSON.stringify(typography)+');\n',{flag:'a'});
 console.log(`Exported ${tokens.size} core-performance tokens; aliases and cycles checked.`);
 
 function modeCSS(){

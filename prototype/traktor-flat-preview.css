@@ -31,55 +31,55 @@
 &[data-orientation][data-density] .deck:nth-of-type(4){grid-column:3;grid-row:2}
 &[data-orientation][data-density] .deck:nth-of-type(n) .deck-head{grid-column:1/-1;grid-row:1;height:44px;background:var(--tf-surface);padding:2px 6px 2px 12px;grid-template-columns:28px minmax(0,1fr) 68px 76px 48px;gap:4px}
 & .rb-artwork{width:24px!important;height:24px!important}
-& .deck-title strong{font-size:13px!important}
-& .deck-title small{font-size:9px!important}
+& .deck-title strong{}
+& .deck-title small{}
 &[data-orientation][data-density] .deck:nth-of-type(n) .preview-key-caption{display:none}
 &[data-orientation][data-density] .deck:nth-of-type(n) .platter{grid-column:1;grid-row:2;width:116px!important;height:28px!important;display:flex;flex-direction:row;align-items:center;justify-content:center;gap:6px;box-shadow:none;border:0;border-radius:0;background:#101214;margin:0 0 0 4px;padding:0;color:var(--tf-text)}
-&[data-orientation][data-density] .deck:nth-of-type(n) .platter strong{font-size:19px;line-height:24px;letter-spacing:-.5px}
-&[data-orientation][data-density] .deck:nth-of-type(n) .platter small{font-size:8px;line-height:10px;color:var(--tf-muted)}
+&[data-orientation][data-density] .deck:nth-of-type(n) .platter strong{}
+&[data-orientation][data-density] .deck:nth-of-type(n) .platter small{color:var(--tf-muted)}
 &[data-orientation][data-density] .deck:nth-of-type(n) .rb-deck-options{grid-column:2;grid-row:2;display:flex;flex-direction:row;justify-content:flex-end;gap:4px;align-items:center;padding:0}
-&[data-orientation][data-density] .rb-deck-options button{height:24px;min-height:24px;width:auto;min-width:28px;padding:0 6px;font-size:9px}
-&[data-orientation][data-density] .deck:nth-of-type(n)>.tempo-control{grid-column:3;grid-row:2/6;display:flex;flex-direction:column;align-items:center;align-self:stretch;position:static;gap:2px;width:32px;height:auto;min-height:0;margin:0 2px 0 0;font-size:8px}
+&[data-orientation][data-density] .rb-deck-options button{height:24px;min-height:24px;width:auto;min-width:28px;padding:0 6px;}
+&[data-orientation][data-density] .deck:nth-of-type(n)>.tempo-control{grid-column:3;grid-row:2/6;display:flex;flex-direction:column;align-items:center;align-self:stretch;position:static;gap:2px;width:32px;height:auto;min-height:0;margin:0 2px 0 0;}
 &[data-orientation][data-density] .deck:nth-of-type(n)>.tempo-control input{writing-mode:vertical-lr;direction:rtl;width:28px;height:100%;min-height:0;flex:1;margin:0;accent-color:#aab9c2}
 /* Copy the existing renderer's row, never its audio/analysis state. Keep source
    canvas measurable offscreen so playback and zoom continue at native scale. */
 &[data-orientation=horizontal] .detail-waves{position:fixed!important;top:-1200px!important;left:0!important;width:calc(100vw - 8px)!important;height:480px!important;opacity:0;pointer-events:none;grid-area:unset!important}
 &[data-orientation=horizontal] .deck:nth-of-type(n) .preview-deck-wave{display:block;grid-column:1/3;grid-row:3;position:relative;min-width:0;background:#060708;margin:0 4px;border:0;border-radius:0;overflow:hidden}
 & .preview-deck-wave .waveform-scrub-lane{position:absolute;inset:0;z-index:1}
-& .preview-deck-wave output{position:absolute;inset:auto 4px 2px auto;font-size:8px}
+& .preview-deck-wave output{position:absolute;inset:auto 4px 2px auto;}
 &[data-orientation][data-density] .deck:nth-of-type(n) .wave-wrap{grid-column:1/3;grid-row:4;height:24px;margin:0 4px;background:#080a0b;border:0}
 &[data-orientation][data-density] .deck:nth-of-type(n) .deck-body>div:first-child{grid-column:1/3;grid-row:5;padding:0 4px;align-self:stretch;min-width:0}
 &[data-orientation][data-density] .deck:nth-of-type(n) .pads{grid-auto-flow:row;grid-template-columns:repeat(4,minmax(0,1fr));grid-template-rows:repeat(2,22px);gap:4px}
-&[data-orientation][data-density] .deck:nth-of-type(n) .pad{height:22px;min-height:22px;border:0;border-bottom:2px solid var(--pad);border-radius:0;background:#101315;justify-content:flex-start;padding:0 6px;font-size:10px;gap:4px}
+&[data-orientation][data-density] .deck:nth-of-type(n) .pad{height:22px;min-height:22px;border:0;border-bottom:2px solid var(--pad);border-radius:0;background:#101315;justify-content:flex-start;padding:0 6px;gap:4px}
 &[data-density=expanded] .deck:nth-of-type(n) .pads{grid-template-rows:repeat(2,38px)}
 &[data-density=expanded] .deck:nth-of-type(n) .pad{height:38px;min-height:38px}
 /* One anchored transport/loop strip, mirroring the reference's bottom edge. */
 &[data-orientation][data-density] .deck:nth-of-type(n) .transport{grid-column:1/-1;grid-row:6;display:flex;flex-direction:row;align-items:center;justify-content:flex-start;align-self:stretch;gap:4px;padding:0 4px;margin:0;border-block:1px solid var(--tf-line)}
-&[data-orientation][data-density] .transport :is([data-action=play],[data-action=cue]){order:0;flex:none;width:44px;min-width:44px;height:26px;min-height:26px;border:0;border-radius:0;background:var(--tf-control);font-size:10px}
-&[data-orientation][data-density] .transport select[data-mode]{order:1;width:40px;min-height:24px;height:24px;font-size:9px;flex:none}
+&[data-orientation][data-density] .transport :is([data-action=play],[data-action=cue]){order:0;flex:none;width:44px;min-width:44px;height:26px;min-height:26px;border:0;border-radius:0;background:var(--tf-control);}
+&[data-orientation][data-density] .transport select[data-mode]{order:1;width:40px;min-height:24px;height:24px;flex:none}
 &[data-orientation][data-density] .deck:nth-of-type(n) .rb-pad-tools{order:2;display:flex;flex:none;margin:0;padding:0;border:0;height:24px}
-&[data-orientation][data-density] .rb-pad-tools select{height:24px;min-height:24px;width:80px;font-size:9px;background:var(--tf-control)}
+&[data-orientation][data-density] .rb-pad-tools select{height:24px;min-height:24px;width:80px;background:var(--tf-control)}
 &[data-orientation][data-density] .deck:nth-of-type(n) .preview-loop-strip{order:3;display:flex;flex:1;min-width:0;margin:0;padding:0;align-self:center}
 &[data-orientation][data-density] .preview-loop-strip .loop-line{display:flex;gap:2px;flex:1;min-width:0;margin:0}
-&[data-orientation][data-density] .preview-loop-strip button{height:24px;min-height:24px;min-width:24px;flex:1;padding:0 3px;font-size:9px;border:0;border-radius:0;background:var(--tf-control)}
-&[data-orientation][data-density] .preview-loop-strip [data-action=loop]{height:24px;min-width:50px;font-size:10px;flex:2}
+&[data-orientation][data-density] .preview-loop-strip button{height:24px;min-height:24px;min-width:24px;flex:1;padding:0 3px;border:0;border-radius:0;background:var(--tf-control)}
+&[data-orientation][data-density] .preview-loop-strip [data-action=loop]{height:24px;min-width:50px;flex:2}
 &[data-orientation][data-density] .deck:nth-of-type(n) .preview-deck-utilities{grid-column:1/-1;grid-row:7;display:flex;gap:4px;align-items:center;flex-wrap:nowrap;min-width:0;padding:0 4px;border:0;background:transparent}
 &[data-orientation][data-density] .deck:nth-of-type(n) .deck-foot{grid-column:1/-1;grid-row:8;display:flex;gap:4px;align-items:center;min-width:0;padding:0 4px;border:0}
-&[data-orientation][data-density] .deck:nth-of-type(n) :is(.preview-deck-utilities,.deck-foot) button{min-height:24px;height:24px;padding:0 5px;font-size:9px;border:0;border-radius:0;background:var(--tf-control)}
+&[data-orientation][data-density] .deck:nth-of-type(n) :is(.preview-deck-utilities,.deck-foot) button{min-height:24px;height:24px;padding:0 5px;border:0;border-radius:0;background:var(--tf-control)}
 /* One knob rhythm; mirrored two-channel rails / four straight channel strips. */
 &:not(.four-decks)[data-density]{--tf-center:232px;--rb-knob-row:40px}
 &[data-orientation][data-density] #mixer{display:grid;grid-column:2;grid-row:1;grid-template-columns:1fr 1fr;grid-template-rows:1fr;padding:3px 8px;gap:8px;align-self:stretch;align-content:stretch;min-height:0;background:var(--tf-surface);border:0}
 &.four-decks[data-orientation][data-density] #mixer{grid-row:1/3;grid-template-columns:repeat(4,minmax(0,1fr))}
 &[data-orientation][data-density] .channel-strip{height:100%;display:grid;grid-template-columns:1fr;grid-template-rows:12px repeat(5,var(--rb-knob-row)) 28px minmax(64px,1fr);gap:4px;align-content:stretch;align-items:start}
-&[data-orientation][data-density] .channel-strip>strong{font-size:11px;color:#c8d8e5}
-&[data-orientation][data-density] #mixer .knob-group{width:48px;height:40px;min-height:40px;font:10px/12px Arial,sans-serif;align-self:center}
+&[data-orientation][data-density] .channel-strip>strong{color:#c8d8e5}
+&[data-orientation][data-density] #mixer .knob-group{width:48px;height:40px;min-height:40px;align-self:center}
 & #mixer .knob-group:has(input[data-mix$=':trim']){grid-row:2}
 & #mixer .knob-group:has(input[data-mix$=':high']){grid-row:3}
 & #mixer .knob-group:has(input[data-mix$=':mid']){grid-row:4}
 & #mixer .knob-group:has(input[data-mix$=':low']){grid-row:5}
 &[data-orientation][data-density] #mixer .knob-group:has(input[data-mix$=':filter']){display:flex!important;grid-column:1;grid-row:6}
 & #mixer .knob-group::before{background:var(--tf-surface);border-color:#586168;border-bottom-color:transparent}
-&[data-orientation][data-density] .channel-strip>button{grid-column:1;grid-row:7;min-height:28px;height:28px;width:44px;font-size:11px;align-self:center}
+&[data-orientation][data-density] .channel-strip>button{grid-column:1;grid-row:7;min-height:28px;height:28px;width:44px;align-self:center}
 &[data-orientation][data-density] .channel-strip .fader-group{grid-column:1;grid-row:8;width:32px;height:100%;min-height:0;align-self:stretch}
 & #mixer .fader-group::after{background:#c3cbd0}
 &:not(.four-decks)[data-orientation][data-density] .channel-strip{grid-template-columns:64px 32px;grid-template-rows:repeat(5,minmax(var(--rb-knob-row),1fr)) 28px;justify-content:center;gap:4px}
@@ -173,20 +173,20 @@
 &[data-density=compact][data-orientation] .deck:nth-of-type(n) .deck-head{height:52px;padding-block:1px;grid-template-columns:28px minmax(0,1fr) 68px 104px 52px}
 &[data-density=compact] .deck .deck-head .preview-key-row{grid-template-columns:24px minmax(0,1fr) 24px;grid-template-rows:24px 24px;gap:2px}
 &[data-density=compact] .deck .rb-sync-controls{grid-template-rows:24px 24px;gap:2px}
-&[data-density=compact][data-orientation] .deck:nth-of-type(n) :is(button,select){min-width:28px;min-height:28px;height:28px;font-size:11px}
-&[data-density=compact][data-orientation] .deck:nth-of-type(n) .deck-head button{min-width:24px;min-height:24px;height:24px;font-size:11px;line-height:11px}
-&[data-density=compact][data-orientation] .deck:nth-of-type(n) .deck-head .preview-key-row :is([data-action=keyDown],[data-action=keyUp]){font-size:0}
-&[data-density=compact] .deck .preview-key-row :is([data-action=keyDown],[data-action=keyUp])::after{font-size:16px}
+&[data-density=compact][data-orientation] .deck:nth-of-type(n) :is(button,select){min-width:28px;min-height:28px;height:28px;}
+&[data-density=compact][data-orientation] .deck:nth-of-type(n) .deck-head button{min-width:24px;min-height:24px;height:24px;}
+&[data-density=compact][data-orientation] .deck:nth-of-type(n) .deck-head .preview-key-row :is([data-action=keyDown],[data-action=keyUp]){}
+&[data-density=compact] .deck .preview-key-row :is([data-action=keyDown],[data-action=keyUp])::after{}
 &[data-density=compact] .deck .platter{height:28px!important}
 &.four-decks[data-density=compact][data-orientation] .deck:nth-of-type(n) .pads{grid-template-columns:repeat(4,minmax(0,1fr));grid-template-rows:repeat(2,24px);gap:4px}
-&[data-density=compact][data-orientation] .deck:nth-of-type(n) .pad{height:24px;min-height:24px;font-size:11px}
-&[data-density=compact] .deck .pad::before{font-size:11px;color:#b4bec6}
-&[data-density=compact] .deck .pad small{font-size:10px}
+&[data-density=compact][data-orientation] .deck:nth-of-type(n) .pad{height:24px;min-height:24px;}
+&[data-density=compact] .deck .pad::before{color:#b4bec6}
+&[data-density=compact] .deck .pad small{}
 &[data-density=compact] .deck .wave-wrap{height:24px}
 &[data-density=compact][data-orientation] .deck:nth-of-type(n) .deck-foot .loop-line{width:auto;flex:none}
 &[data-density=compact] .deck .deck-foot .loop-line button{flex:none;padding-inline:5px}
-&[data-density=compact] .deck .rb-track-gain-knob{height:28px;min-height:28px;padding-left:32px;flex:0 0 100px;max-width:100px;font-size:10px!important}
-&[data-density=compact] .deck .rb-track-gain-knob>span{display:flex;flex-direction:column;line-height:11px}
+&[data-density=compact] .deck .rb-track-gain-knob{height:28px;min-height:28px;padding-left:32px;flex:0 0 100px;max-width:100px;}
+&[data-density=compact] .deck .rb-track-gain-knob>span{display:flex;flex-direction:column;}
 &[data-density=compact][data-orientation] .deck:nth-of-type(n) .rb-track-gain-knob input{width:28px!important;max-width:28px!important;height:28px}
 &[data-density=compact] .deck .rb-track-gain-knob::before{width:24px;height:24px;top:2px;left:2px}
 &[data-density=compact] .deck .rb-track-gain-knob::after{left:13px;top:5px;height:8px;transform-origin:1px 9px}
@@ -197,22 +197,22 @@
 &.four-decks[data-density=compact][data-orientation=vertical] .deck:nth-of-type(n){grid-template-rows:52px 28px 24px minmax(var(--tf-pads),1fr) 28px 28px 28px}
 &.four-decks[data-density=compact]:has(.deck[data-rb-pad-mode=Loops]){--tf-pads:80px;--tf-deck-height:calc(284px + var(--tf-wave))}
 &.four-decks[data-density=compact][data-orientation=vertical]:has(.deck[data-rb-pad-mode=Loops]){--tf-deck-height:284px}
-&.four-decks[data-density=compact][data-orientation] .deck[data-rb-pad-mode=Loops] .deck-body>div:first-child>nav.loop-line button{height:24px;min-height:24px;font-size:11px;padding-inline:4px}
+&.four-decks[data-density=compact][data-orientation] .deck[data-rb-pad-mode=Loops] .deck-body>div:first-child>nav.loop-line button{height:24px;min-height:24px;padding-inline:4px}
 /* Monitor sizes and crossfader centering stay consistent across deck counts. */
 & .rb-cross-controls{grid-template-columns:64px 184px 64px;grid-template-rows:auto;gap:8px}
 &.four-decks .rb-cross-controls{grid-template-columns:64px 64px 184px 64px 64px}
-&[data-orientation][data-density] .rb-cross-controls .crossfader{grid-column:2;grid-row:1;display:flex;flex-direction:column;height:38px;font-size:9px;line-height:10px;gap:0}
+&[data-orientation][data-density] .rb-cross-controls .crossfader{grid-column:2;grid-row:1;display:flex;flex-direction:column;height:38px;gap:0}
 &.four-decks[data-orientation][data-density] .rb-cross-controls .crossfader{grid-column:3}
 &[data-orientation][data-density] .rb-cross-controls .crossfader input{height:28px;min-height:28px;margin:0}
-&[data-orientation][data-density] .rb-cross-controls select{height:28px;min-height:28px;font-size:11px}
-&[data-orientation][data-density] .rb-cross-controls .cross-assign{grid-row:1;font-size:11px}
+&[data-orientation][data-density] .rb-cross-controls select{height:28px;min-height:28px;}
+&[data-orientation][data-density] .rb-cross-controls .cross-assign{grid-row:1;}
 &[data-orientation][data-density] .rb-cross-controls [data-rb-assign='0']{grid-column:1}
 &[data-orientation][data-density] .rb-cross-controls [data-rb-assign='1']{grid-column:3}
 &.four-decks[data-orientation][data-density] .rb-cross-controls [data-rb-assign='2']{grid-column:2}
 &.four-decks[data-orientation][data-density] .rb-cross-controls [data-rb-assign='1']{grid-column:4}
 &.four-decks[data-orientation][data-density] .rb-cross-controls [data-rb-assign='3']{grid-column:5}
 &[data-orientation][data-density] .rb-mixer-band .rb-monitor-controls{gap:12px}
-& .rb-monitor-knob{font-size:11px}
+& .rb-monitor-knob{}
 /* No hidden source panel can steal the FX/library grid tracks. */
 &[data-orientation][data-density] main:has(#panel:not([hidden])){height:auto;min-height:calc(100dvh - var(--workspace-chrome-height,122px))}
 &.four-decks[data-library-focus=true][data-density=compact]{--tf-wave:0px;--tf-pads:0px;--tf-deck-height:204px}
@@ -250,22 +250,22 @@
 &[data-density=compact][data-orientation] .deck:nth-of-type(n){grid-template-columns:136px minmax(0,1fr) 36px}
 &[data-density=compact] .deck:is(.focused,:focus-within){box-shadow:inset 0 0 0 1px var(--tf-deck-accent)}
 &[data-density=compact] .deck .rb-artwork{grid-row:1}
-&[data-density=compact] .deck .deck-number{position:relative;inset:auto;grid-column:1;grid-row:1;align-self:center;display:grid;place-items:center;z-index:1;width:28px;height:28px;background:#26333e;border:1px solid #415668;color:var(--tf-deck-accent);font:600 14px/1 Arial,sans-serif}
-&[data-density=compact] .deck .deck-title strong{font-size:14px!important;line-height:18px}
-&[data-density=compact] .deck .deck-title small{font-size:10px!important;line-height:12px;color:#a5afb7}
+&[data-density=compact] .deck .deck-number{position:relative;inset:auto;grid-column:1;grid-row:1;align-self:center;display:grid;place-items:center;z-index:1;width:28px;height:28px;background:#26333e;border:1px solid #415668;color:var(--tf-deck-accent);}
+&[data-density=compact] .deck .deck-title strong{}
+&[data-density=compact] .deck .deck-title small{color:#a5afb7}
 &[data-density=compact] .deck .preview-deck-time{align-self:center;padding:0;gap:2px;font-variant-numeric:tabular-nums}
-&[data-density=compact] .deck .preview-deck-time time{font-size:12px;color:#e1e7eb}
-&[data-density=compact] .deck .preview-deck-time small{font-size:10px;color:#a5afb7}
-&[data-density=compact] .deck .preview-key-row .deck-key{font-size:11px;font-weight:600;color:#c2dbc9}
+&[data-density=compact] .deck .preview-deck-time time{color:#e1e7eb}
+&[data-density=compact] .deck .preview-deck-time small{color:#a5afb7}
+&[data-density=compact] .deck .preview-key-row .deck-key{color:#c2dbc9}
 &[data-density=compact][data-orientation] .deck:nth-of-type(n) .platter{width:128px!important;background:#11171b;font-variant-numeric:tabular-nums}
-&[data-density=compact][data-orientation] .deck:nth-of-type(n) .platter strong{font-size:20px;letter-spacing:0}
-&[data-density=compact][data-orientation] .deck:nth-of-type(n) .platter small{font-size:10px}
+&[data-density=compact][data-orientation] .deck:nth-of-type(n) .platter strong{}
+&[data-density=compact][data-orientation] .deck:nth-of-type(n) .platter small{}
 &[data-density=compact] .deck :is(.preview-deck-wave,.wave-wrap){outline:1px solid #35424a;outline-offset:-1px}
 &[data-density=compact][data-orientation=horizontal] .preview-deck-wave::before{content:'';position:absolute;left:50%;top:0;bottom:0;width:1px;background:#c4d7e2;opacity:.7;pointer-events:none;z-index:2}
 &[data-density=compact][data-orientation=horizontal] .preview-deck-wave::after{content:'';position:absolute;left:50%;top:0;transform:translateX(-50%);border-inline:4px solid transparent;border-top:5px solid var(--tf-deck-accent);pointer-events:none;z-index:2}
 &[data-density=compact][data-orientation=vertical] .detail-waves{outline:1px solid #35424a;outline-offset:-1px}
-&[data-density=compact] .preview-wave-head>span{font-size:11px;font-weight:600;color:#c8d8e5}
-&[data-density=compact] .deck .wave-label{font-size:9px;line-height:11px;color:#aab7c0;right:3px;bottom:2px;background:#080a0be6}
+&[data-density=compact] .preview-wave-head>span{color:#c8d8e5}
+&[data-density=compact] .deck .wave-label{color:#aab7c0;right:3px;bottom:2px;background:#080a0be6}
 &[data-density=compact][data-orientation] .deck:nth-of-type(n) button:not(:disabled):hover{background:#35434e}
 &[data-density=compact][data-orientation] .deck:nth-of-type(n) :is(button,select):focus-visible{outline:2px solid #9ed2ff;outline-offset:-2px}
 &[data-density=compact][data-orientation] .deck:nth-of-type(n) button.active:not(:disabled){background:#205c8c;color:#edf7ff}
@@ -286,13 +286,13 @@
 &[data-orientation=vertical][data-density][data-library-focus=false][data-rb-mixer=true] #mixer{grid-row:1/3;margin-left:calc(var(--tf-vertical-width) + 4px);width:calc(100% - var(--tf-vertical-width) - 4px);min-width:0}
 &.four-decks[data-orientation=vertical][data-density][data-library-focus=false][data-rb-mixer=true] #mixer{grid-row:1/4}
 &[data-orientation=vertical] .detail-waves .preview-wave-head{height:24px;background:#1c262d;border-bottom:1px solid #35424a}
-&[data-orientation=vertical] .preview-wave-head>span{line-height:23px;border-inline-start:1px solid #35424a}
+&[data-orientation=vertical] .preview-wave-head>span{border-inline-start:1px solid #35424a}
 &[data-orientation=vertical] .preview-wave-head>span:first-child{border-inline-start:0}
 &[data-orientation=vertical] .detail-waves canvas{top:24px;height:calc(100% - 44px)}
 &[data-orientation=vertical] .detail-waves .waveform-scrub-lanes{top:24px;bottom:20px}
 &[data-orientation=vertical] .detail-waves .waveform-scrub-lane{border-inline-end:1px solid #35424a55}
 &[data-orientation=vertical] .detail-waves::after{content:'';position:absolute;left:0;right:0;top:calc(50% + 2px);height:1px;background:#c4d7e2;opacity:.8;pointer-events:none}
-&[data-orientation=vertical] .detail-waves>span{inset:auto 0 0;padding:3px 0;height:20px;box-sizing:border-box;font-size:8px;line-height:14px;text-align:center;background:#151c21;color:#aab7c0;white-space:nowrap;overflow:hidden}
+&[data-orientation=vertical] .detail-waves>span{inset:auto 0 0;padding:3px 0;height:20px;box-sizing:border-box;text-align:center;background:#151c21;color:#aab7c0;white-space:nowrap;overflow:hidden}
 /* Fader travel has nine fixed marks; only meaningful neutral/endpoints detent. */
 & .preview-fader-ticks{display:block;position:absolute;pointer-events:none;inset:8px 0;z-index:0}
 & .preview-fader-ticks i{position:absolute;left:3px;right:3px;top:calc(var(--tick)*100%);height:1px;background:#65727b}

@@ -13,14 +13,14 @@ body[data-workspace=serato-hybrid][data-orientation][data-density] .deck:nth-of-
 body[data-workspace=serato-hybrid][data-orientation][data-density] .deck:nth-of-type(n) .deck-head{height:44px;background:#151515}
 body[data-workspace=serato-hybrid][data-orientation][data-density] .deck:nth-of-type(n) .deck-body>div:first-child{grid-column:1;grid-row:4;padding:0 4px;align-self:center}
 body[data-workspace=serato-hybrid][data-orientation][data-density] .deck:nth-of-type(n) .pads{grid-auto-flow:row;grid-template-columns:repeat(4,minmax(0,1fr));grid-template-rows:repeat(2,24px);gap:4px}
-body[data-workspace=serato-hybrid][data-orientation][data-density] .deck:nth-of-type(n) .pad{height:24px;min-height:24px;border-bottom:2px solid var(--pad);font-size:10px;justify-content:center;padding:0 3px}
+body[data-workspace=serato-hybrid][data-orientation][data-density] .deck:nth-of-type(n) .pad{height:24px;min-height:24px;border-bottom:2px solid var(--pad);justify-content:center;padding:0 3px}
 body[data-workspace=serato-hybrid][data-orientation][data-density] .deck:nth-of-type(n) .preview-loop-strip{grid-column:2;grid-row:4;align-self:center}
 body[data-workspace=serato-hybrid][data-orientation][data-density] .deck:nth-of-type(n) .transport{grid-column:1/-1;grid-row:3;flex-direction:row;justify-content:flex-start;align-self:stretch;padding:0 4px;gap:4px;border-bottom:1px solid #333}
 body[data-workspace=serato-hybrid][data-orientation][data-density] .deck:nth-of-type(n) .transport select{width:52px;height:24px;min-height:24px}
-body[data-workspace=serato-hybrid][data-orientation][data-density] .deck:nth-of-type(n) .transport :is([data-action=play],[data-action=cue]){width:68px;min-width:68px;height:24px;min-height:24px;border-radius:2px;font-size:11px}
+body[data-workspace=serato-hybrid][data-orientation][data-density] .deck:nth-of-type(n) .transport :is([data-action=play],[data-action=cue]){width:68px;min-width:68px;height:24px;min-height:24px;border-radius:2px;}
 body[data-workspace=serato-hybrid][data-orientation][data-density] .deck:nth-of-type(n) .platter{grid-column:3;grid-row:4;width:96px!important;height:72px!important;border-radius:2px;border:1px solid #3d4852;background:#0b0b0b;box-shadow:none;gap:6px}
-body[data-workspace=serato-hybrid][data-orientation][data-density] .deck:nth-of-type(n) .platter strong{font-size:25px;letter-spacing:-1px}
-body[data-workspace=serato-hybrid][data-orientation][data-density] .deck:nth-of-type(n) .platter small:first-of-type{font-size:10px}
+body[data-workspace=serato-hybrid][data-orientation][data-density] .deck:nth-of-type(n) .platter strong{}
+body[data-workspace=serato-hybrid][data-orientation][data-density] .deck:nth-of-type(n) .platter small:first-of-type{}
 body[data-workspace=serato-hybrid][data-orientation][data-density] .deck:nth-of-type(n) .rb-deck-options{grid-column:4;grid-row:4;padding:0;gap:4px}
 body[data-workspace=serato-hybrid][data-orientation][data-density] .deck:nth-of-type(n) .preview-deck-utilities{grid-row:5;gap:4px}
 body[data-workspace=serato-hybrid][data-orientation][data-density] .deck:nth-of-type(n) .deck-foot{grid-row:6;gap:4px}
@@ -57,7 +57,7 @@ body[data-workspace=serato-hybrid][data-density=expanded][data-orientation=horiz
 body[data-workspace=serato-hybrid][data-orientation=vertical]:not(.four-decks)[data-rb-mixer=true][data-library-focus=false] main{grid-template-rows:72px 176px 44px var(--rb-library-tracks,minmax(180px,1fr))}
 body[data-workspace=serato-hybrid][data-density=expanded][data-orientation=vertical]:not(.four-decks)[data-rb-mixer=true][data-library-focus=false] main{grid-template-rows:108px 176px 44px var(--rb-library-tracks,minmax(180px,1fr))}
 
-body[data-workspace=serato-hybrid][data-orientation][data-density] .channel-strip .knob-group{font:9px/10px Arial,sans-serif}
+body[data-workspace=serato-hybrid][data-orientation][data-density] .channel-strip .knob-group{}
 body[data-workspace=serato-hybrid][data-orientation][data-density]:has(.deck[data-rb-pad-mode=Loops]){--rb-four-height:288px;--hy-deck-height:288px}
 body[data-workspace=serato-hybrid][data-orientation][data-density]:has(.deck[data-rb-pad-mode=Loops]) .deck{grid-template-rows:44px 28px 28px minmax(112px,1fr) 24px 24px}
 body[data-workspace=serato-hybrid][data-orientation=horizontal]:not(.four-decks)[data-rb-mixer=true][data-library-focus=false] main{grid-template-rows:var(--rb-wave-height) var(--hy-deck-height,252px) 44px var(--rb-library-tracks,minmax(180px,1fr))}

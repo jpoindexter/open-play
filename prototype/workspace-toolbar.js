@@ -1,4 +1,5 @@
 // Rehome the existing controls; the player keeps their handlers and state.
+import {uiIcons} from './vendor/astryx/icons.js';
 export function installWorkspaceToolbar(){
  const $=selector=>document.querySelector(selector),toolbar=$('.toolbar'),modal=$('#modal');
  const display=$('.hybrid-controls'),parking=document.createElement('div');
@@ -24,7 +25,13 @@ export function installWorkspaceToolbar(){
  icon($('.toolbar [data-panel="help"]'),'help','Help');
  icon(settings,'settings','Settings');
  const more=$('.preview-more'),summary=more.querySelector('summary');
- summary.textContent='⋯';summary.title='Performance panels';summary.setAttribute('aria-label','Performance panels');
+ summary.innerHTML=uiIcons.more;summary.title='Performance panels';summary.setAttribute('aria-label','Performance panels');
+ for(const [selector,name,label,only]of [
+  ['#new-crate','folder','New crate',false],['#new-smart','smart','New smart crate',false],
+  ['#import','import','Import audio from disk',false],['#art-grid','grid','Artwork grid',true],
+  ['.library-tools [data-panel=analysis]','settings','Analysis settings',true],['#modal-close','close','Close dialog',true],
+  ['#preview-zoom-in','plus','Zoom detailed waveforms in',true],['#preview-zoom-out','minus','Zoom detailed waveforms out',true]
+ ]){const node=$(selector);icon(node,name,label,only);if(!only)node.textContent=node.textContent.replace(/^[＋+]\s*/,'');}
  more.addEventListener('toggle',()=>summary.setAttribute('aria-expanded',String(more.open)));
  const day=$('#day');day.textContent='Day / night';day.setAttribute('aria-label','Switch day or night theme');
  const reset=$('#preview-reset');reset.textContent='Reset display';

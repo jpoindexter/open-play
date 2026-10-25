@@ -1,7 +1,7 @@
 import {createBeatgrid} from './beatgrid.js';
 import {paintSourceDetail,sourceWaveformState} from './source-waveform.js';
 import {paintStemDetail} from './stem-waveform.js';
-import {performanceColors as ink} from './performance-tokens.js';
+import {performanceColors as ink,performanceTypography as type} from './performance-tokens.js';
 const lastFrames=new WeakMap();
 
 // Drawing only: positions/rates come from the engine, never from other lanes.
@@ -43,7 +43,7 @@ export function paintDetailWaveforms(c,{width:w,height:h,horizontal,decks,span,p
         line(beat.time,beat.downbeat?ink.waveDownbeat:ink.waveBeatGuide,beat.downbeat?1.5:1,beat.downbeat);
       }
       for(const marker of t.gridWarpMarkers||[])line(marker.time,colors[0],2,true);
-      c.font='bold 11px Arial';
+      c.font='bold '+type.captionSize;
       for(const [i,q]of t.cues.entries())if(q){
         line(q.position,colors[i%8],2,true);const at=along(q.position);
         if(at>=0&&at<=length){c.fillStyle=ink.waveBackground;c.fillRect(horizontal?x+at+2:plot.x+plot.width-15,horizontal?plot.y+2:y+at-13,14,13);c.fillStyle=colors[i%8];c.fillText(String(i+1),horizontal?x+at+4:plot.x+plot.width-12,horizontal?plot.y+12:y+at-3);}
@@ -51,7 +51,7 @@ export function paintDetailWaveforms(c,{width:w,height:h,horizontal,decks,span,p
     }
     // The ruler is separate from frequency color; thickness/text also encode bars.
     c.fillStyle=ink.waveRuler;if(horizontal)c.fillRect(x,y,width,ruler);else c.fillRect(x,y,ruler,height);
-    c.font='11px Arial';c.textBaseline='alphabetic';
+    c.font=type.captionSize;c.textBaseline='alphabetic';
     let lastLabel=-Infinity;
     for(const beat of grid?.lines(p-sourceSpan/2,p+sourceSpan/2)||[]){
       if(beat.time<0||beat.time>t.duration)continue;
@@ -69,7 +69,7 @@ export function paintDetailWaveforms(c,{width:w,height:h,horizontal,decks,span,p
     const phase=grid?.beatAt(p),beat=Number.isFinite(phase)&&phase>=0?Math.floor(phase):null;
     const status=beat===null?(grid?'LEAD-IN':width<110?'—':'NO GRID'):`${Math.floor(beat/4)+1}.${beat%4+1}`;
     const label=`${'ABCD'[d.index]} · ${status}`;
-    c.font='bold 11px Arial';c.fillStyle=ink.waveRuler;c.fillRect(x,y,Math.min(width,96),horizontal?ruler:18);
+    c.font='bold '+type.captionSize;c.fillStyle=ink.waveRuler;c.fillRect(x,y,Math.min(width,96),horizontal?ruler:18);
     c.fillStyle=ink.waveText;c.fillText(label,x+4,y+12);
     c.fillStyle=ink.waveLaneDivider;
     if(horizontal)c.fillRect(x,y+height-1,width,1);else c.fillRect(x+width-1,y,1,height);
@@ -78,7 +78,7 @@ export function paintDetailWaveforms(c,{width:w,height:h,horizontal,decks,span,p
     if(horizontal)c.fillRect(w/2-3,y,6,height);else c.fillRect(x,h/2-3,width,6);
     c.fillStyle=ink.wavePlayhead;
     if(horizontal)c.fillRect(w/2-1,y,2,height);else c.fillRect(x,h/2-1,width,2);
-    c.font='bold 10px Arial';
+    c.font='bold '+type.microSize;
     const labelX=horizontal?w/2+5:x+Math.min(24,width*.32),labelY=horizontal?y+11:h/2-5;
     if(horizontal||index===0){c.fillStyle=ink.waveBackground;c.fillRect(labelX-2,labelY-10,26,12);c.fillStyle=ink.wavePlayhead;c.fillText('NOW',labelX,labelY);}
     c.restore();

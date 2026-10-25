@@ -33,3 +33,4 @@ export const performanceColors = Object.freeze({
   "active": "#2465c7",
   "chrome": "#0f0f0f"
 });
+export const performanceTypography=Object.freeze({"captionSize":"0.6875rem \"Arial\", \"Helvetica Neue\", sans-serif","microSize":"0.625rem \"Arial\", \"Helvetica Neue\", sans-serif"});

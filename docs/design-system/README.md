@@ -19,6 +19,8 @@ Use actual Astryx Button, IconButton, ToggleButton, Selector, form fields and Di
 
 Standard command buttons use quiet transparent surfaces without default borders. Preserve hover, selected/current and keyboard-focus feedback.
 
+[Typography and icons](TYPOGRAPHY_ICONS_2026-10-25.md) now have one shared CSS owner: `prototype/typography.css`. Type values and canvas text come from canonical tokens; standard/navigation icons use the installed Lucide family at16px. `node scripts/check_typography.mjs` rejects new per-adapter font/leading/tracking declarations. Color and geometry ownership remain the next migration boundary in the [unification plan](UNIFICATION_PLAN_2026-10-25.md).
+
 Header: deck count, View, library/mixer visibility, Quantize, panels, REC/FX, Master/meter, audio/help/Settings, waveform zoom. Shared standard controls use a 32px target inside a 40px row; the dense DJ surface keeps its separate control contracts.
 
 Settings → Layouts: six layouts, waveform orientation, deck density, wave size, day/night and display reset. Audio/MIDI retain their original launch controls. Advanced retains useful engine/feature/diagnostic status. Nested pages return to Settings; closing returns focus to the opener. Settings tabs remain visible while scrolling.

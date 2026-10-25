@@ -5,7 +5,7 @@ import {createRoot} from 'react-dom/client';
 import {createPortal} from 'react-dom';
 import {Button} from '@astryxdesign/core/Button';
 import {IconButton} from '@astryxdesign/core/IconButton';
-import {SlidersHorizontal,LibraryBig,Columns2,Circle,AudioLines,Headphones,CircleHelp,Settings2,ArrowLeft} from 'lucide-react';
+import {SlidersHorizontal,LibraryBig,Columns2,Circle,AudioLines,Headphones,CircleHelp,Settings2,ArrowLeft,Plus,Minus,FolderPlus,ListFilter,Upload,Grid2X2,X} from 'lucide-react';
 import {ToggleButton} from '@astryxdesign/core/ToggleButton';
 import {Selector} from '@astryxdesign/core/Selector';
 import {TextInput} from '@astryxdesign/core/TextInput';
@@ -19,7 +19,7 @@ import {neutralTheme} from '@astryxdesign/theme-neutral/built';
 import '@astryxdesign/core/astryx.css';
 import '@astryxdesign/theme-neutral/theme.css';
 
-const icons={mixer:SlidersHorizontal,library:LibraryBig,layout:Columns2,record:Circle,effects:AudioLines,audio:Headphones,help:CircleHelp,settings:Settings2,back:ArrowLeft};
+const icons={mixer:SlidersHorizontal,library:LibraryBig,layout:Columns2,record:Circle,effects:AudioLines,audio:Headphones,help:CircleHelp,settings:Settings2,back:ArrowLeft,plus:Plus,minus:Minus,folder:FolderPlus,smart:ListFilter,import:Upload,grid:Grid2X2,close:X};
 const scope='.workspace-bar,.hybrid-controls,.toolbar,.review-bar,.library-tools,.crate-tools,.library-footer';
 const records=new Map();let root,changes,scheduled=false,signature='',serial=0,invalidFocus=false;
 let modal,dialogContent;

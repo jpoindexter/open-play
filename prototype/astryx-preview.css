@@ -7,7 +7,7 @@
 #workspace-preview .astryx-host,#workspace-preview .astryx-mount{display:contents}
 #workspace-preview .astryx-host[hidden]{display:none}
 #astryx-react-root{display:contents}
-#workspace-preview :is(.op-standard,.op-standard-field button,.op-standard-field input){box-sizing:border-box;font-family:var(--dj-semantic-font);font-size:var(--dj-semantic-caption-size);line-height:var(--dj-semantic-text-line-height);border-radius:var(--dj-semantic-control-radius);letter-spacing:0;color:var(--op-ui-text);margin:0}
+#workspace-preview :is(.op-standard,.op-standard-field button,.op-standard-field input){box-sizing:border-box;border-radius:var(--dj-semantic-control-radius);color:var(--op-ui-text);margin:0}
 #workspace-preview .op-standard{height:var(--op-ui-control);min-height:var(--op-ui-control);min-width:var(--dj-semantic-standard-control-height);padding:0 var(--dj-semantic-inset);background:transparent;border:0;box-shadow:none}
 #workspace-preview .op-standard[aria-pressed=true]{background:var(--op-ui-selected);border-color:transparent;color:var(--dj-semantic-text-on-selected)}
 #workspace-preview .op-standard[aria-pressed=mixed]{background:var(--dj-semantic-raised);border-style:dashed}
@@ -21,7 +21,7 @@
 #workspace-preview .astryx-host[data-control-type=input] .op-standard-field{width:var(--dj-semantic-field-width);height:var(--dj-semantic-standard-control-height);min-width:var(--dj-semantic-select-width)}
 #workspace-preview .astryx-host[data-astryx-for=crate-search] .op-standard-field{width:100%}
 #workspace-preview .workspace-switch{gap:var(--op-ui-gap)}
-#workspace-preview .workspace-switch .op-standard{font-size:var(--dj-semantic-label-size);padding-inline:var(--dj-semantic-inset)}
+#workspace-preview .workspace-switch .op-standard{padding-inline:var(--dj-semantic-inset)}
 #workspace-preview .workspace-bar{min-height:var(--dj-semantic-toolbar-height)}
 #workspace-preview .hybrid-controls{min-height:var(--dj-semantic-toolbar-height);gap:var(--dj-semantic-inset)}
 #workspace-preview .hybrid-controls label{display:flex;align-items:center;gap:var(--dj-semantic-inset)}
@@ -31,7 +31,7 @@
 #workspace-preview .preview-zoom .op-standard{width:var(--dj-semantic-standard-control-height);padding:0}
 
 /* Portaled selectors use Astryx's listbox/keyboard model and local theme CSS. */
-html[data-astryx-theme=neutral] :is([role=listbox],[role=option]){font-family:var(--dj-semantic-font);font-size:var(--dj-semantic-body-size)}
+html[data-astryx-theme=neutral] :is([role=listbox],[role=option]){}
 /* Native modal keeps its existing lifecycle/focus trap; Astryx owns its
    preview surface and standard form fields. DJ performance ranges stay custom. */
 #workspace-preview #modal{padding:0;border:var(--dj-semantic-hairline) solid var(--op-ui-line);border-radius:var(--dj-semantic-gap);background:var(--dj-semantic-background);color:var(--op-ui-text);max-width:calc(100vw - var(--dj-semantic-header-height))}
@@ -45,8 +45,8 @@ html[data-astryx-theme=neutral] :is([role=listbox],[role=option]){font-family:va
 #workspace-preview #modal .op-dialog-field input{min-width:0;width:100%;box-sizing:border-box}
 #workspace-preview #modal .op-dialog-field button{min-width:var(--dj-semantic-standard-control-height)}
 #workspace-preview #modal .op-dialog-check{min-height:var(--dj-semantic-standard-control-height);margin:0}
-#workspace-preview #modal :is(.op-dialog-field,.op-dialog-check){font-size:var(--dj-semantic-body-size);line-height:var(--dj-semantic-text-line-height);font-family:var(--dj-semantic-font)}
-#workspace-preview #modal textarea{min-height:var(--dj-semantic-text-area-height);font-family:monospace;font-size:var(--dj-semantic-body-size)}
+#workspace-preview #modal :is(.op-dialog-field,.op-dialog-check){}
+#workspace-preview #modal textarea{min-height:var(--dj-semantic-text-area-height);}
 #workspace-preview #modal :is(input,textarea,button,[role=slider]):focus-visible{outline:var(--dj-semantic-focus-width) solid var(--dj-semantic-focus);outline-offset:var(--dj-semantic-focus-width)}
 #workspace-preview #modal .op-standard{margin:var(--dj-semantic-control-radius)}
 #workspace-preview #modal .astryx-host[data-astryx-for=modal-close]{display:block;margin-left:auto}
