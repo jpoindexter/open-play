@@ -621,25 +621,43 @@ export class AudioEngine {
     }
   }
 
+  captureRateChange(d,rate){
+    const prior=this.rateOwners.get(d),track=d.track,voice=this.voices.get(d.index),token=this.startTokens.get(d.index),controller=this.transforms.get(d.index);
+    // A warped source's local playback rate is not its nominal rollback tempo.
+    const inherit=prior?.pending&&(prior.started||!prior.playing)&&prior.track===track&&prior.voice===voice&&prior.token===token&&prior.controller===controller&&prior.rate===d.rate;
+    return{track,voice,rate,playing:d.playing,token,controller,previousOwner:prior,beforeRate:d.rate,previousRate:inherit?prior.previousRate:d.rate,pending:true,attempted:false,started:false};
+  }
+  restoreRateChange(d,owner,allowed){
+    if(d.track!==owner.track||d.rate!==owner.rate||this.rateOwners.get(d)!==owner)return false;
+    if(owner.attempted&&!owner.started&&this.voices.get(d.index)===owner.voice&&this.startTokens.get(d.index)===owner.token&&this.transforms.get(d.index)===owner.controller){
+      d.rate=owner.beforeRate;
+      if(owner.previousOwner)this.rateOwners.set(d,owner.previousOwner);else this.rateOwners.delete(d);
+      return false;
+    }
+    if(!allowed)return false;
+    d.rate=owner.previousRate;return true;
+  }
   async synchronize(d, {rate, positionAt, priorClock}) {
-    const track = d.track, previousRate = d.rate, previousPosition = d.position, owner = {};
+    const owner=this.captureRateChange(d,rate),track=owner.track,previousPosition=d.position;
     this.rateOwners.set(d, owner);
     let scheduled = false, token, controller;
     d.rate = rate;
     try {
+      owner.attempted=true;
       const starting=this.start(d, {priorClock, positionAt: when => {const position = positionAt(when); scheduled = true; return position;}});
-      token=this.startTokens.get(d.index);controller=this.transforms.get(d.index);await starting;
+      token=this.startTokens.get(d.index);controller=this.transforms.get(d.index);
+      owner.started=token!==owner.token||controller!==owner.controller;
+      if(owner.started){owner.token=token;owner.controller=controller;}else owner.pending=false;
+      await starting;
       if (controller?.signal.aborted || !scheduled || d.track !== track || d.rate !== rate || !d.playing || this.rateOwners.get(d) !== owner || this.startTokens.get(d.index) !== token)
         throw new DOMException("Sync preparation superseded.", "AbortError");
       return {when: d.anchorTime, position: d.anchorPosition, rate};
     } catch (error) {
-      if (d.track === track && d.rate === rate && this.rateOwners.get(d) === owner &&
-        (this.startTokens.get(d.index) === token || (!d.playing && !d.processing && !this.voices.has(d.index)))) {
-        d.rate = previousRate;
+      if(this.restoreRateChange(d,owner,this.startTokens.get(d.index)===token||(!d.playing&&!d.processing&&!this.voices.has(d.index)))){
         if(!d.playing&&this.startTokens.get(d.index)===token)d.position=previousPosition;
       }
       throw error;
-    }
+    }finally{owner.pending=false;owner.previousOwner=null;owner.voice=null;owner.controller=null;owner.track=null;}
   }
 
   pause(d, { preserveStemExit = false } = {}) {
@@ -717,7 +735,7 @@ export class AudioEngine {
   }
   async setSyncedRates(changes,{participants=[]}={}){
     if(changes.some(({rate})=>!Number.isFinite(rate)||rate<.25||rate>4))throw new RangeError('Tempo must be between 0.25× and 4×.');
-    const saved=changes.map(({deck,rate})=>({deck,rate,owner:{},previous:deck.rate,track:deck.track,playing:deck.playing,clock:this.voiceClock(deck,this.voices.get(deck.index))}));
+    const saved=changes.map(({deck,rate})=>({deck,rate,owner:this.captureRateChange(deck,rate),track:deck.track,playing:deck.playing,clock:this.voiceClock(deck,this.voices.get(deck.index))}));
     if(saved.some(x=>x.deck.processing&&!x.playing))throw Error('Finish deck preparation before changing group tempo.');
     const active=saved.filter(x=>x.playing);
     const gesture=active.some(x=>this.voices.get(x.deck.index)?.deckScratchTransport||(x.deck.stemSlip&&x.deck.stemSlip!=='off'));
@@ -733,7 +751,13 @@ export class AudioEngine {
       const jobs=saved.map(async x=>{
         this.rateOwners.set(x.deck,x.owner);
         x.deck.rate=x.rate;
-        try{if(x.playing)await this.start(x.deck,{priorClock:x.clock,positionAt:x.clock,handoff:group});}catch(error){group?.fail(error);throw error;}
+        try{if(x.playing){
+          x.owner.attempted=true;
+          const pending=this.start(x.deck,{priorClock:x.clock,positionAt:x.clock,handoff:group}),token=this.startTokens.get(x.deck.index),controller=this.transforms.get(x.deck.index);
+          x.owner.started=token!==x.owner.token||controller!==x.owner.controller;
+          if(x.owner.started){x.owner.token=token;x.owner.controller=controller;}else x.owner.pending=false;
+          await pending;
+        }}catch(error){group?.fail(error);throw error;}
       });
       jobs.push(...participants.map(x=>x.start(group).catch(error=>{group?.fail(error);throw error;})));
       const results=await Promise.allSettled(jobs);const failed=results.find(r=>r.status==='rejected');if(failed){group?.fail(failed.reason);throw failed.reason;}group?.finish();
@@ -745,12 +769,11 @@ export class AudioEngine {
       group?.fail(error);
       // Stop revokes a voice token, but must still roll back this uncommitted
       // rate. A newer rate request, track or active voice retains authority.
-      for(const x of saved)if(x.deck.track===x.track&&x.deck.rate===x.rate&&this.rateOwners.get(x.deck)===x.owner&&
-        (!x.playing||group?.owns(x.deck.index)||(!x.deck.playing&&!x.deck.processing&&!this.voices.has(x.deck.index)))){
-        x.deck.rate=x.previous;x.deck.processing=false;const controller=group?.controller(x.deck.index);if(this.transforms.get(x.deck.index)===controller)this.transforms.delete(x.deck.index);this.onProcessing(x.deck);
+      for(const x of saved)if(this.restoreRateChange(x.deck,x.owner,!x.playing||group?.owns(x.deck.index)||(!x.deck.playing&&!x.deck.processing&&!this.voices.has(x.deck.index)))){
+        x.deck.processing=false;const controller=group?.controller(x.deck.index);if(this.transforms.get(x.deck.index)===controller)this.transforms.delete(x.deck.index);this.onProcessing(x.deck);
       }
       throw error;
-    }finally{group?.dispose();}
+    }finally{for(const x of saved){x.owner.pending=false;x.owner.previousOwner=null;x.owner.voice=null;x.owner.controller=null;x.owner.track=null;}group?.dispose();}
   }
   async setRate(d, rate, {syncInternal = false} = {}) {
     if(!Number.isFinite(rate)||rate<.25||rate>4)throw new RangeError('Tempo must be between 0.25× and 4×.');

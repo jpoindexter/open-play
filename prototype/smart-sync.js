@@ -162,14 +162,16 @@ export function createSmartSync({engine, state, externalLeader=()=>null}) {
       const bpm=engaged(deck)&&syncBPM?syncBPM:gridBPM(deck.track,engine.position(deck))*engine.audibleRate(deck);
       const rate=bpm/deck.track.bpm;
       if(!Number.isFinite(rate)||rate<.25||rate>4)throw new Error('The matched tempo is outside the current transport range.');
-      const previous={rate:deck.rate,sync:deck.sync,syncRole:deck.syncRole,syncState:deck.syncState},previousBPM=syncBPM,track=deck.track,voice=engine.voices?.get(deck.index),revision=revise(deck);
+      const prior=alignmentTimelines.get(deck),voice=engine.voices?.get(deck.index),rateOwner=engine.rateOwners?.get(deck);
+      const inherit=prior?.previous&&prior.owns()&&prior.controller===engine.transforms?.get(deck.index)&&prior.voice===voice&&prior.track===deck.track&&prior.rate===deck.rate&&prior.rateOwner===rateOwner;
+      const previous=inherit?prior.previous:{rate:deck.rate,sync:deck.sync,syncRole:deck.syncRole,syncState:deck.syncState},previousBPM=inherit?prior.previousBPM:syncBPM,track=deck.track,revision=revise(deck);
       syncBPM=bpm;deck.rate=rate;
       deck.sync=true;deck.syncRole='primary';deck.syncState=deck.playing?(barCompatible(deck)?'beat':'tempo'):'armed';
       if(deck.playing && deck.track.gridWarpMarkers?.length){
         deck.position=engine.position(deck);let token;
-        const rateOwner=engine.rateOwners?.get(deck),signature=transportSignature(deck);
+        const signature=transportSignature(deck);
         const owns=()=>revisions.get(deck)===revision&&deck.track===track&&transportSignature(deck)===signature&&(token===undefined||engine.startTokens?.get(deck.index)===token);
-        const timeline={track,bpm,owns,valid:()=>enabled()&&owns()};alignmentTimelines.set(deck,timeline);
+        const timeline={track,bpm,owns,valid:()=>enabled()&&owns(),previous,previousBPM,voice,rateOwner,rate};alignmentTimelines.set(deck,timeline);
         try{const pending=engine.start(deck);token=engine.startTokens?.get(deck.index);timeline.controller=engine.transforms?.get(deck.index);await pending;if(!enabled()||!owns()||timeline.controller?.signal.aborted)throw cancelled();}
         catch(error){
           if(enabled()&&revisions.get(deck)===revision&&deck.track===track&&engine.startTokens?.get(deck.index)===token&&engine.voices?.get(deck.index)===voice&&deck.rate===rate&&deck.syncRole==='primary'&&syncBPM===bpm){Object.assign(deck,previous);syncBPM=previousBPM;}
