@@ -11,7 +11,7 @@ const git=args=>execFileSync('git',args,{cwd:root,maxBuffer:150*1024*1024});
 const sha=bytes=>createHash('sha256').update(bytes).digest('hex');
 const sourceCommit=git(['rev-parse','HEAD']).toString().trim();
 const get=file=>git(['show',`${sourceCommit}:${file}`]);
-const version='0.1.52',name='Open Play Playback Test',port=18775,bundle='org.openplay.dj.playback.localtest';
+const version='0.1.53',name='Open Play Playback Test',port=18775,bundle='org.openplay.dj.playback.localtest';
 const profile='Open Play Playback Test',partition='persist:open-play-playback-test';
 const stage=await mkdtemp(path.join(tmpdir(),'open-play-playback-'));
 await mkdir(path.join(stage,'assets'));
@@ -54,9 +54,9 @@ await put('assets/docs/prototype/TRY_CURRENT_DESKTOP.md',`# Core desktop test ${
 
 Built from immutable source ${sourceCommit}. Opens the existing rekordbox workspace directly in the sandboxed main frame, retaining layouts, core controls, headphone knobs and library waveform previews. No framework or native audio rewrite.
 
-Import two local songs through Import, load one per deck, and use Horizontal / Compact. Start with Sync OFF and pitch reset. Test manual tempo and T/Y (left) or G/H (right) momentary jog; release must return to nominal speed. Audition LOW/MID/HIGH separately and reset each. Temporary deck Cue sets while paused, holds to audition, releases paused; Cue plus Play continues. Mixer headphone CUE selects the monitor bus separately; configure Devices for suitable multichannel hardware. Computer stereo does not prove independent headphone routing.
+Use saved library songs, load one per deck, and use Horizontal / Compact. The next session is practical mixing: observe four-deck waveforms during a replacement/analysis, then try incoming Sync and cancel with OFF. Controls, focus and library previews should remain available. This package includes the accumulated refresh and transport-ownership repairs; their native behavior is still pending. Remaining manual transition, EQ and temporary Cue listening checks can follow when convenient. Computer stereo does not prove independent headphone routing.
 
-The intermittent Sync pop remains open. Capture the next actual occurrence; do not repeat clean matrices or declare full-core completion from packaging. Source safety changes and prior evidence are documented in CORE_DJ_REBUILD_2026-10-20.md. Native sound, human manual beatmatch, physical MIDI/headphone isolation and full parity require their own evidence.
+The intermittent Sync pop remains open. Capture the next actual occurrence; do not repeat clean matrices or declare full-core completion from packaging. Source safety changes and limits are documented in CORE_SYNC_ROLLBACK_2026-10-25.md and CORE_NATIVE_STALL_CAPTURE_2026-10-24.md. Use one focused check per reproduced bug; reserve a full suite for a release checkpoint or a concrete regression risk. Native sound, physical MIDI/headphone isolation and full parity remain separate gates.
 
 Uses the existing playback-test profile and port ${port}. Close another playback-test version before launching this one. Previous bundles/default launcher remain unchanged. Private local unsigned test; no public release. Existing Checks menus remain available, with separate volatile/device-denied sessions; broad advanced checks are not prerequisites for the core listening pass.
 `);
