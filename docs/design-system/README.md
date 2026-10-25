@@ -15,6 +15,8 @@ One product system, six layout geometries. Standard controls use the installed A
 
 Use actual Astryx Button, IconButton, ToggleButton, Selector, form fields and Dialog through `prototype/ui/controls.jsx`. Original controls retain IDs, state and handlers. Moving controls moves their island host, not a duplicate copy. Accessible names, pressed/current/disabled states, tooltips and focus remain required. Build with `npm run build` in `prototype/ui`.
 
+Standard command buttons use quiet transparent surfaces without default borders. Preserve hover, selected/current and keyboard-focus feedback.
+
 Header: deck count, View, library/mixer visibility, Quantize, panels, REC/FX, Master/meter, audio/help/Settings, waveform zoom. Shared standard controls use a 32px target inside a 40px row; the dense DJ surface keeps its separate control contracts.
 
 Settings → Layouts: six layouts, waveform orientation, deck density, wave size, day/night and display reset. Audio/MIDI retain their original launch controls. Advanced retains useful engine/feature/diagnostic status. Nested pages return to Settings; closing returns focus to the opener. Settings tabs remain visible while scrolling.

@@ -22,11 +22,11 @@ body[data-preview-shell=flat][data-orientation] .deck:nth-of-type(even){grid-col
 body[data-preview-shell=flat][data-orientation] .deck-head{grid-column:1/-1;grid-row:1;position:relative;display:grid;grid-template-columns:34px minmax(0,1fr) 76px 96px 54px;grid-template-rows:1fr;gap:6px;padding:4px 6px 4px 12px;height:52px;background:#1c1c1c;border:0}
 body[data-preview-shell=flat][data-orientation] .deck-number{position:absolute;left:2px;top:4px;min-width:0;font:9px Arial,sans-serif;color:#ddd}
 body[data-preview-shell=flat][data-orientation] .deck-number::after{display:none}
-body[data-preview-shell=flat][data-orientation] .rb-artwork{grid-column:1;width:32px;height:32px;align-self:center;background:#101010;position:relative}
+body[data-preview-shell=flat][data-orientation] .rb-artwork{grid-column:1;grid-row:1;width:32px;height:32px;align-self:center;background:#101010;position:relative}
 body[data-preview-shell=flat][data-orientation] .rb-artwork::after{content:'';position:absolute;inset:6px;border:7px solid #222;border-radius:50%;background:#111}
-body[data-preview-shell=flat][data-orientation] .deck-title{grid-column:2;align-self:center;min-width:0}
+body[data-preview-shell=flat][data-orientation] .deck-title{grid-column:2;grid-row:1;align-self:center;min-width:0;overflow:hidden}
 body[data-preview-shell=flat][data-orientation] .deck-title strong{font-size:14px;line-height:18px}
-body[data-preview-shell=flat][data-orientation] .deck-title small{font-size:10px;margin-top:2px;color:#999}
+body[data-preview-shell=flat][data-orientation] .deck-title small{font-size:10px;margin-top:2px;color:#999;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 body[data-preview-shell=flat][data-orientation] .preview-deck-time{grid-column:3;grid-row:1;align-self:end;padding-bottom:4px;min-width:0;display:flex;flex-direction:column;gap:3px}
 body[data-preview-shell=flat][data-orientation] .preview-deck-time time{font-size:11px;color:#ccc}
 body[data-preview-shell=flat][data-orientation] .preview-deck-time small{font-size:11px;color:#929292}
@@ -408,4 +408,14 @@ body[data-workspace=rekordbox][data-orientation] .preview-deck-utilities .tempo-
  & .preview-deck-utilities::before{content:attr(data-deck-tools);font-size:8px;color:#a4bfd5;white-space:nowrap;margin-right:4px}
  &[data-density=compact]{--rb-disc-column:88px}
  &[data-density=compact] .rb-sync-controls{grid-template-rows:22px 18px}
+}
+/* Structural breakpoint: narrow native windows need two utility rows, not clipping. */
+@media(max-width:1100px){
+ #workspace-preview[data-workspace=rekordbox][data-density=compact]{--rb-four-height:var(--dj-component-deck-narrow-height)}
+ #workspace-preview[data-workspace=rekordbox][data-orientation][data-density=compact] .deck{
+  grid-template-rows:var(--grid-11) var(--grid-7) minmax(var(--rb-disc-column),1fr) auto auto;
+ }
+ #workspace-preview[data-workspace=rekordbox][data-orientation][data-density=compact] :is(.preview-deck-utilities,.deck-foot){
+  flex-wrap:wrap;align-content:center;height:auto;min-height:var(--dj-semantic-header-height);
+ }
 }

@@ -1,0 +1,13 @@
+# Minimal controls and narrow-window visibility
+
+Jason requested quieter standard buttons: remove repeated default borders/fills. Astryx command buttons now use transparent surfaces; hover, pressed/current and keyboard focus carry state. Header panels uses one ellipsis without a second dropdown glyph. Control hit areas, actual handlers, accessible names, custom DJ controls and previews remain.
+
+Native source7294f33 was loaded in one isolated Electron44.9.0 window using immutable archived assets and the existing asset server/CSP. Physical output muted, permissions denied, separate volatile partition/profile; normal0.1.57PID87480 was retained. Two-deck Settings/Vertical, nested Audio→Back→Close/focus and four-deck Compact controls were observed through CUA. Four Play/four tempo/32hotcue/eight preview elements remained. No music was started and no audio/Sync acceptance follows.
+
+Resizing that actual window from1280×900 to1000×700 reproduced a product defect: styles.css's old1150px rule hides Master; deck metadata wrapped above the fixed header height; utility/footer rows exceeded their deck bounds. This is tracked on existing UI-006, with cross-links to UI-TOOL-01/UI-DS-01 rather than a duplicate bug card.
+
+Repair: keep Master displayed in the shared header; keep artwork/title in their owned header row and truncate secondary metadata; allow two utility/footer rows in narrow rekordbox Compact using the canonical narrow-deck height token. The1100px structural breakpoint remains in the legacy adapter pending full migration; it is not hidden behind a meaningless token. Original controls are not removed or replaced.
+
+Focused browser verification at1000×700: header scrollWidth1000, Master display:flex, all four decks264px high, zero utility/footer buttons outside their own deck bounds. At1280px the original compact height remains. Standard buttons show no default borders. Earlier lower height left Pads below its bounds and was rejected, then corrected; do not treat that intermediate screenshot as accepted. Exact final native follow-through is pending at this source checkpoint. No broad test suite or audio/DSP rerun for CSS-only work.
+
+Evidence: minimal-controls.jpg; ignored native screenshots/host receipt under local-evidence/beta-header-native-2026-10-25. Normal session, original tracks and recordings are untouched. Full design-system migration, complete Unicode/layout coverage, pending Sync fault windows and public beta publication remain open.
