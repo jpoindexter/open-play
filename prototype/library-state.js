@@ -88,13 +88,21 @@ export function validateBackup(data,tracks=[]){
   }
   return result;
 }
+function historyEvents(events){
+  check(list(object)(events),'history');
+  for(const event of events)required(event,{id:string,title:string,time:string,deck:range(1,4)},'history event');
+}
 export function validateSavedState(data){
   safeJSON(data);check(object(data),'saved session');const result={...data};
   if(data.crates!==undefined)result.crates=crates(data.crates);
   if(data.settings!==undefined)result.settings=validateSettings(data.settings);
   for(const key of ['tags','localTags'])if(data[key]!==undefined){check(object(data[key]),key);result[key]=Object.fromEntries(Object.entries(data[key]).map(([id,tag])=>[id,validateMetadata(tag,key==='tags'?demoTracks.find(t=>t.id===id):undefined)]));}
   if(data.prepare!==undefined)check(list(string)(data.prepare),'prepare');
-  if(data.history!==undefined){check(list(object)(data.history),'history');for(const event of data.history)required(event,{id:string,title:string,time:string,deck:range(1,4)},'history event');}
+  if(data.history!==undefined)historyEvents(data.history);
+  if(data.historySessions!==undefined){
+    check(list(object)(data.historySessions),'history sessions');
+    for(const session of data.historySessions){required(session,{time:string,entries:list(object)},'history session');historyEvents(session.entries);}
+  }
   if(data.analysisSettings!==undefined){fields(data.analysisSettings,{onImport:bool,analyzeKey:bool,analyzeTempo:bool,minBpm:range(30,299),maxBpm:range(31,300),maxSeconds:range(1,86400)},'analysis settings');check((data.analysisSettings.minBpm??50)<(data.analysisSettings.maxBpm??220),'analysis BPM range');}
   if(data.mappings!==undefined){check(list(object)(data.mappings),'mappings');for(const m of data.mappings){required(m,{target:string,channel:range(1,16),number:range(0,127),encoding:string},'mapping');fields(m,{type:string,deviceId:string,conditions:list(object)},'mapping');}}
   if(data.fxBeatMultipliers!==undefined)check(list(range(Number.MIN_VALUE,64))(data.fxBeatMultipliers),'FX multipliers');

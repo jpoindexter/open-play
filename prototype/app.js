@@ -91,6 +91,7 @@ const state = {
   autoplay: false,
   prepare: saved.prepare || [],
   history: saved.history || [],
+  historySessions: saved.historySessions || [],
   layout: "Vertical",
   analysis: false,
   analysisStatus: "Ready",
@@ -220,7 +221,7 @@ function sessionSnapshot(){
     analysisSettings:state.analysisSettings,video:snapshotVideoState(state.video),
     fxTempo:normalizeFXTempoSettings(state.fxTempo,2),fxBeatMultipliers:state.fxBeatMultipliers,
     localTags:state.localTags,mappings:state.mappings,settings:state.settings,crates:state.crates,
-    prepare:state.prepare,history:state.history,
+    prepare:state.prepare,history:state.history,historySessions:state.historySessions,
     tags:Object.fromEntries(state.tracks.filter(t=>t.demo).map(t=>[t.id,trackMetadata(t)])),
   };
 }

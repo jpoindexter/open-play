@@ -1,3 +1,4 @@
+import {createSessionPanels} from './session-panels.js';
 import {validateBackup,trackMetadata} from './library-state.js';
 import {trackGainDB} from './track-gain.js';
 import {createDeckMIDIRouter,deckMIDITargets,libraryMIDITargets,fxMIDITargets,samplerMIDITargets,herculesPlaybackMappings} from './deck-midi.js';
@@ -98,6 +99,7 @@ export function createPanels(a) {
         (v) => `<option ${v === selected ? "selected" : ""}>${esc(v)}</option>`,
       )
       .join("");
+  const {prepare,history}=createSessionPanels({...a,head,badge,refresh});
   function bindPanel() {
     const close = $("#close-panel");
     if (close)
@@ -1475,59 +1477,6 @@ export function createPanels(a) {
         "SIMULATED: copying/moving a library entry must preserve media identity and use reversible conflict handling. Native file operations are not implemented.";
     };
   }
-  function prepare() {
-    $("#panel").innerHTML =
-      head("Prepare", "REAL SESSION LIST", true) +
-      `<div class="panel-controls"><button id="prepare-add">Add selected</button><button id="prepare-clear">Clear Prepare</button></div><div class="log">${s.prepare.map((id) => `<button data-prepare-load="${id}">${esc(trackById(id)?.title || id)}</button>`).join(" ") || "Prepare is empty. Add a library track before auditioning."}</div>`;
-    $("#prepare-add").onclick = () => {
-      if (!s.prepare.includes(s.selected)) s.prepare.push(s.selected);
-      refresh();
-    };
-    $("#prepare-clear").onclick = () => {
-      s.prepare = [];
-      refresh();
-    };
-    $$("[data-prepare-load]").forEach(
-      (b) => (b.onclick = () => load(s.focus, b.dataset.prepareLoad)),
-    );
-  }
-  function history() {
-    $("#panel").innerHTML =
-      head("History", "REAL BROWSER PLAY HISTORY", true) +
-      `<div class="panel-controls"><button id="history-export">Export CSV</button><button id="history-insert">Insert selected track</button><button id="history-clear">New session</button><button id="history-share">Live playlist</button></div><div class="log">${s.history.map((h, i) => `${i + 1}. ${esc(h.title)} · deck ${h.deck} · ${esc(h.time)} ${h.inserted ? "(inserted)" : ""}`).join("<br>") || "No tracks played in this prototype session."}</div>`;
-    $("#history-export").onclick = () => {
-      const cell = (v) => '"' + String(v).replaceAll('"', '""') + '"';
-      download(
-        "open-play-history.csv",
-        "title,deck,time\n" +
-          s.history
-            .map((h) => [h.title, h.deck, h.time].map(cell).join(","))
-            .join("\n"),
-        "text/csv",
-      );
-    };
-    $("#history-insert").onclick = () => {
-      const t = trackById(s.selected);
-      if (t)
-        s.history.push({
-          id: t.id,
-          title: t.title,
-          deck: s.focus + 1,
-          time: new Date().toISOString(),
-          inserted: true,
-        });
-      refresh();
-    };
-    $("#history-clear").onclick = () => {
-      s.history = [];
-      refresh();
-    };
-    $("#history-share").onclick = () =>
-      dialog(
-        "Live playlist",
-        `${badge("SHARING SIMULATION")}<p>Publishing requires an optional service and an explicit user action. This prototype has no backend and publishes nothing.</p><label>Session title <input value="Open Play session"></label><p class="muted">Native/service acceptance: explicit opt-in, connection recovery, correct currently playing metadata, privacy and export.</p>`,
-      );
-  }
   function outputRoutingMarkup(){
     engine.init();const value=audioOutputs.snapshot(),layout=value.routing?.layout||'stereo';
     return `<div class="device-card"><h3>Audio output · live routing</h3>${badge('REAL AUDIO BUSES · PHYSICAL SOCKETS UNVERIFIED',true)}<div class="form-grid"><label>Output device<select id="audio-output-device" aria-label="Audio output device"><option value="">System default</option>${value.outputs.filter(x=>x.deviceId!=='default').map(x=>`<option value="${esc(x.deviceId)}" ${x.deviceId===value.deviceId?'selected':''}>${esc(x.label)}</option>`).join('')}</select></label><label>Output layout<select id="audio-output-layout"><option value="stereo" ${layout==='stereo'?'selected':''}>Stereo master only</option><option value="four-channel" ${layout==='four-channel'?'selected':''}>Four channels · master + cue</option></select></label><label>Master channels<select id="audio-master-pair">${options(['1–2','3–4'],s.settings['Master Channels']||'1–2')}</select></label><label>Headphone channels<select id="audio-cue-pair">${options(['3–4','1–2'],s.settings['Headphone Channels']||'3–4')}</select></label></div><div class="panel-controls"><button id="audio-output-refresh">Refresh audio outputs</button><button id="audio-output-select" ${value.canSelect?'':'disabled'}>Use selected output</button><button id="audio-output-apply">Apply channels</button><button id="audio-monitor-settings">Cue mix & volume</button></div><p id="audio-output-status" class="muted" role="status" aria-live="polite"></p><p class="muted">Cue buttons feed the headphone bus before the channel level and crossfader. Stereo master mode never folds cue into speakers. Four-channel mode requires an explicitly selected output exposing at least4channels. Output selection returns to stereo master; apply channel pairs afterward. This does not verify a device’s physical sockets or hot-unplug safety.</p></div>`;
@@ -2095,7 +2044,7 @@ export function createPanels(a) {
     library:
       "Real local import, selection, search, sort, metadata fixtures, crates, multi-rule smart crates, nested membership, collapse, favorites and backups. Native tags, filesystem import and interoperability remain gaps.",
     history:
-      "Real in-session play history, Prepare and CSV export. Live publication, persistent session editing and exact reference rules remain gaps.",
+      "Saved play history, archived sessions, Prepare and CSV export. Non-file editing, TXT/M3U, live publication and exact reference rules remain gaps.",
     analysis:
       "Real local PCM BPM/key/level and initial constant-grid analysis with confidence, cancellation and protected metadata. Real-music accuracy, variable grids and reference equivalence remain gaps.",
     decks:

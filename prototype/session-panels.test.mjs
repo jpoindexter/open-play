@@ -1,0 +1,33 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {createSessionPanels} from './session-panels.js';
+import {createSessionStorage} from './session-storage.js';
+import {validateSavedState} from './library-state.js';
+
+test('Prepare and History edits persist, New session preserves readable/exportable history across reload',()=>{
+ const old={id:'old',title:'Old set',deck:1,time:'2026-10-20T20:00:00.000Z'};
+ const state={selected:'next',focus:1,crate:'prepare',panel:'prepare',prepare:[],history:[old],historySessions:[]};
+ const records=new Map(),store={getItem:key=>records.get(key)??null,setItem:(key,value)=>records.set(key,value)};
+ const storage=createSessionStorage(store);storage.load();
+ const reload=()=>createSessionStorage(store).load();
+ const nodes=new Map(),$=selector=>{if(!nodes.has(selector))nodes.set(selector,{value:'',innerHTML:''});return nodes.get(selector);};
+ let panels,rows=0,csv;
+ const persist=()=>storage.save({prepare:state.prepare,history:state.history,historySessions:state.historySessions});
+ const mount=()=>createSessionPanels({state,$,$$:()=>[],esc:String,head:()=>'',badge:()=>'',trackById:id=>id==='next'?{id,title:'Next song'}:null,load(){},download:(_name,text)=>csv=text,dialog(){},refresh:()=>panels[state.panel](),persist,renderTracks:()=>rows++});
+ panels=mount();persist();panels.prepare();$('#prepare-add').onclick();
+ assert.deepEqual(reload().prepare,['next']);assert.equal(rows,1);
+ $('#prepare-clear').onclick();assert.deepEqual(reload().prepare,[]);
+ state.panel='history';state.crate='history';panels.history();$('#history-insert').onclick();
+ assert.equal(reload().history.length,2);assert.equal(reload().history[1].inserted,true);
+ assert.equal(reload().history[1].deck,2);assert.equal(state.history[0].time,old.time);
+ $('#history-clear').onclick();
+ assert.deepEqual(reload().history,[]);assert.equal(reload().historySessions.length,1);
+ assert.deepEqual(reload().historySessions[0].entries[0],old);
+ $('#history-session').value='0';$('#history-session').onchange();
+ assert($('#panel').innerHTML.includes('Old set'));assert($('#panel').innerHTML.includes(new Date(old.time).toLocaleString()));
+ $('#history-export').onclick();assert(csv.includes('Old set'));assert(csv.includes(old.time),'CSV preserves unambiguous ISO time');
+ Object.assign(state,reload());panels=mount();panels.history();
+ $('#history-session').value='0';$('#history-session').onchange();assert($('#panel').innerHTML.includes('Next song'));
+ assert.throws(()=>validateSavedState({historySessions:[{time:old.time,entries:[{...old,deck:9}]}]}),/Invalid/);
+ assert.deepEqual(validateSavedState({history:[old]}).history,[old]);
+});
