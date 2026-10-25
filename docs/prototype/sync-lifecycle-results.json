@@ -1,0 +1,274 @@
+{
+  "date": "2026-10-25",
+  "sourceCommit": "988fd310e3ed23eb6c5a58d413d4c363fe057d44",
+  "baselineCommit": "fb9f19031bdc50a832a8675fb4e1c866235a2e4d",
+  "scope": "Actual controller/settings/render/Sync/engine methods with controlled graph,clock,buffers,DOM and held live ACKs. No UI/native/PCM/real-track/listening acceptance.",
+  "sourceSHA256": {
+    "prototype/analysis-terminal-refresh.test.mjs": "d98be72cfdbfd89b81f5dbd501c105170f1e1519b551cdba95bf88192711aa0b",
+    "prototype/app.js": "6ea97ad6a8d5840ca6932441d909d1abe822c845e5cae37f22cb50e82377ae31",
+    "prototype/layout-orientation.test.mjs": "67943edfe435baf5c4915ea4ba6d5300f5b19d1818914f3f19a2fecc26b63008",
+    "prototype/load-deck-refresh.test.mjs": "9fe0f6d8d61c2ba7fce77714351ee94306cfd881a21f8463223ca157f0aac423",
+    "prototype/simple-sync-lifecycle.test.mjs": "a9c0c82fada260250ad2d40e04f5ee6870cf8cf252de3b555e061f0be5ed911d",
+    "prototype/simple-sync-live-command.test.mjs": "795c13a4dc76e6605aa18f04ff9366892b6652b385c4f467e3ce06349fd79add",
+    "prototype/smart-sync.js": "e24fc7438b7fcae2c5a8f81bb9e0a933d60eb3eddec8ca47c37617fbecb3f14c",
+    "prototype/sync-alignment.test.mjs": "31f52e99c43755ab418ab54a19e1e8aa69b7a01b2e7f8f431fd38dc9041dc335",
+    "prototype/sync-disengage-ownership.test.mjs": "40f588445bfdfd9cc91cdce9f8e519a956ac39f3bffb8203dc6b44c5a3aa8c74",
+    "prototype/sync.js": "cf188c9738963f8f64a41a2a373427849f67a30f97f7bee38ce92fc047407025"
+  },
+  "immutableBaseline": {
+    "tests": 36,
+    "passed": 11,
+    "failed": 25,
+    "sha256": "645a8d5dcafeaf9c13010f212d16d045b66966dfcafd4676109133fbbad48179"
+  },
+  "focused": {
+    "tests": 36,
+    "passed": 36,
+    "failed": 0,
+    "sha256": "bedda41e0a981f6dada5bf80036bc029f3ba6013a693e700a0b229e38fc8c388"
+  },
+  "fullNode": {
+    "tests": 257,
+    "passed": 257,
+    "failed": 0,
+    "sha256": "2642ee61138e96463bac3161d7838d6aeda25067df2aca6877361745445bd9c0"
+  },
+  "areas": {
+    "simpleLifecycle": {
+      "cases": 11,
+      "baselineFailed": 10,
+      "baselinePassed": 1,
+      "afterPassed": 11
+    },
+    "simpleManualIntent": {
+      "cases": 8,
+      "baselineFailed": 5,
+      "baselinePassed": 3,
+      "afterPassed": 8
+    },
+    "smartDisengagement": {
+      "cases": 17,
+      "baselineFailed": 10,
+      "baselinePassed": 7,
+      "afterPassed": 17,
+      "paths": [
+        "internal",
+        "external",
+        "first warped primary",
+        "already committed",
+        "newer manual owner",
+        "Stop"
+      ]
+    }
+  },
+  "existingChecks": {
+    "live-keylock": {
+      "exitCode": 0,
+      "sha256": "226e3b8f9f75417df24e85e5c817de945873af39174e0922620d91148bf819d1",
+      "passed": 9,
+      "failed": 0,
+      "scope": "Actual current AudioEngine start/control/routing/retirement methods with controlled adapter, native graph and clock collaborators. No actual browser PCM, physical hardware, native app or integrated audio acceptance. Source may be concurrently edited by parent; hashes delimit read-only review.",
+      "cases": 9
+    },
+    "handoff": {
+      "exitCode": 0,
+      "sha256": "e3543c3d752d28484ae8dfb508726d5343a90159b10da9dea4c1426ed35bb1ae",
+      "passed": true,
+      "failed": 0,
+      "scope": "Two audio-time barrier ownership/failure policy; no actual audio/native/hardware proof",
+      "cases": 4
+    },
+    "pending-smart": {
+      "exitCode": 0,
+      "sha256": "e73603c50d305a72b2c16a5a443b4f3b539652598dea02572b1ade0cd1b890d1",
+      "passed": true,
+      "failed": 0,
+      "scope": "Smart Sync pending-start policy with controlled rate/synchronize collaborators; real GUI/MIDI/phase/cancel behavior checked separately",
+      "cases": 5
+    }
+  },
+  "independentReview": {
+    "simpleLifecycleAndRetentionPassed": 34,
+    "simpleLiveAndPreparationPassed": 20,
+    "smartWithPriorGridPrimaryDeadlinePassed": 52,
+    "finalSmartPassed": 17,
+    "separateSmartPendingUI": {
+      "passed": 17,
+      "total": 17,
+      "checks": {
+        "markupPending": true,
+        "markupUnsynced": true,
+        "markupOffEnabled": true,
+        "markupBusy": true,
+        "markupNotPressed": true,
+        "tickOffEnabled": true,
+        "tickBusy": true,
+        "tickNotPressed": true,
+        "actualOffAborts": true,
+        "actualOffRejects": true,
+        "pendingCleared": true,
+        "oldVoiceRetained": true,
+        "noRetirements": true,
+        "uncommittedAdapterDisposed": true,
+        "transportClean": true,
+        "afterOffNotEngaged": true,
+        "afterOffTickIdle": true
+      },
+      "sha256": "f625dcef758baa471ede1b1fa36c472ece15c9e5eb64a1b7a7d2336ef3e47223",
+      "scope": "Separate private inline actual controller/module/render/tick-fragment proof with controlled DOM, graph, buffer, clock and held live ACK. Not counted in public 257 tests. No UI/native/PCM/hearing acceptance."
+    }
+  },
+  "fixtureCorrections": {
+    "originalAssertionsRetained": true,
+    "newImportBindingsAddedToFourVMFixtures": true,
+    "firstFullVMFailures": {
+      "passed": 252,
+      "failed": 3,
+      "sha256": "02566202d877ef50c63adf41979ddd912c3c90cdfa7e5ca2541dc93cfc851868"
+    },
+    "finalImmutableBaselineUsesByteIdenticalNewTests": true
+  },
+  "remainingVerifiedFailure": {
+    "card": "https://trello.com/c/GWdwrMCD",
+    "case": "Two held Simple requests, older canceled, OFF cancels latest",
+    "sourceStable": true,
+    "sourceSHA256": {
+      "prototype/engine.js": "afea206989809d24a22bae3246541f767521bb5afb2bbf0377f03ec09527ed8e",
+      "prototype/sync.js": "cf188c9738963f8f64a41a2a373427849f67a30f97f7bee38ce92fc047407025",
+      "prototype/app.js": "6ea97ad6a8d5840ca6932441d909d1abe822c845e5cae37f22cb50e82377ae31",
+      "prototype/simple-sync-lifecycle.test.mjs": "a9c0c82fada260250ad2d40e04f5ee6870cf8cf252de3b555e061f0be5ed911d"
+    },
+    "final": {
+      "nominal": 1.05,
+      "audible": 1,
+      "playing": true,
+      "processing": false,
+      "sync": false,
+      "role": null,
+      "token": 2,
+      "pending": false,
+      "originalVoice": true,
+      "retired": 0,
+      "transforms": 0,
+      "acks": [
+        {
+          "aborted": true
+        },
+        {
+          "aborted": true
+        }
+      ],
+      "disposed": [
+        true,
+        true
+      ]
+    },
+    "verdict": "RED: latest OFF restores an older uncommitted optimistic Sync rate instead of original source nominal rate",
+    "rawEvidenceSHA256": "13f2579336f3fd569096994eb4f789ab96b58b0397b38755b9e9643d3464b12d",
+    "notIncludedIn257PassingTests": true,
+    "nextRequirement": "Carry original nominal rollback basis only through same-track retained-voice pending ownership; protect manual/newer/committed owners. Never infer nominal tempo only from warped source-local audibleRate."
+  },
+  "preparedIntegration": {
+    "scope": "PRIVATE CURRENT_INTEGRATION readiness only; existing eight-track Run/turn10 workload. No Electron, HTTP listener, UI, native capture, playback or music started. Not new OFF/mode, live Seek, Smart primary ACK or rollback-basis acceptance.",
+    "currentCommit": "988fd310e3ed23eb6c5a58d413d4c363fe057d44",
+    "variants": {
+      "baseline": 20,
+      "candidate": 20,
+      "current": 23
+    },
+    "currentFiles": {
+      "native-orientation-window.cjs": {
+        "sha256": "343f78e2bf872fc8440b16398124e48f36d41615769f757eb476c5626e4925c3",
+        "bytes": 30223
+      },
+      "orientation-server.py": {
+        "sha256": "63d1228cbae6faaee9422f6b9d0f247a30e4860e15933bf79dbcea9f8078fbef",
+        "bytes": 3504
+      },
+      "orientation-current-sources.json": {
+        "sha256": "d202acc2a63fca8147b92c0c56c0a7635a53d23440efd5e0dbf895d1aff059f0",
+        "bytes": 2499
+      }
+    },
+    "originalCopiesVerified": true,
+    "legacyManifestsUnchanged": true,
+    "captureObserverSecurityAndQualityGateSectionsByteUnchanged": true,
+    "serverHandlerHostOriginAndTrackRoutingSectionByteUnchanged": true,
+    "pureChecks": {
+      "hostSyntax": true,
+      "serverSyntax": true,
+      "triggerCases": 9,
+      "intervalCases": 7,
+      "injectedScriptsCompiled": 2,
+      "all3ManifestsGitHashVerified": true,
+      "eightOriginalTrackHashesVerified": true
+    },
+    "launchOnlyAfterUnlock": true,
+    "doesNotEstablish": [
+      "Matched99/ba4 orientation causality",
+      "Current native integration",
+      "New OFF/mode changes, live Seek, Smart primary ACK or rollback-basis acceptance",
+      "New FX parameter or failed-rate-request coverage",
+      "Reverse-pitch or Quantize regression acceptance",
+      "Audible Sync pops or hardware output"
+    ],
+    "preservedPriorEa70ReadinessSet": [
+      {
+        "file": "native-orientation-window.cjs",
+        "preserved": "native-orientation-window.current-ea70bc0-before-988fd31.cjs",
+        "sha256": "a98b4f4584509f2ae8af766b587ef528ca5281aed50b4e99dc79082db50c065a",
+        "bytes": 30216
+      },
+      {
+        "file": "orientation-server.py",
+        "preserved": "orientation-server.current-ea70bc0-before-988fd31.py",
+        "sha256": "16da6cbb85e8b610bedfcead34d4bb0982388e8c421abed01158a37fc10f4879",
+        "bytes": 3504
+      },
+      {
+        "file": "orientation-current-sources.json",
+        "preserved": "orientation-current-sources.current-ea70bc0-before-988fd31.json",
+        "sha256": "5c0b453cb0b2958314aa05c0fa6c4e2659e9e93e478b72f6c93103dc15bedcc3",
+        "bytes": 2492
+      },
+      {
+        "file": "orientation-current-readiness.json",
+        "preserved": "orientation-current-readiness.current-ea70bc0-before-988fd31.json",
+        "sha256": "c471486bcae2119fd5574ca12117dd19a0adda5d4da69ccea7307767590d28d3",
+        "bytes": 2651
+      }
+    ],
+    "preservedPrior5eReadinessSet": [
+      {
+        "file": "native-orientation-window.cjs",
+        "preserved": "native-orientation-window.current-5e53ef6-before-ea70bc0.cjs",
+        "sha256": "a248153fe59a3642a7c21841b9078ec508e02b083b33a7af2a52191a8a58fb9d",
+        "bytes": 30101
+      },
+      {
+        "file": "orientation-server.py",
+        "preserved": "orientation-server.current-5e53ef6-before-ea70bc0.py",
+        "sha256": "3d12ad87aeb2e6d1c014492272d798c6367eec9accf137fb6628315e8ba85618",
+        "bytes": 3494
+      },
+      {
+        "file": "orientation-current-sources.json",
+        "preserved": "orientation-current-sources.current-5e53ef6-before-ea70bc0.json",
+        "sha256": "84cfdc5f8f831c89224dc5c0aaab83ca69e96f704ccb357e46354c3f752959b6",
+        "bytes": 2351
+      },
+      {
+        "file": "orientation-current-readiness.json",
+        "preserved": "orientation-current-readiness.current-5e53ef6-before-ea70bc0.json",
+        "sha256": "121a408d36676236f79f08f784bc10cb2aaccc979d5e16ebf33669e78c237cbe",
+        "bytes": 1371
+      }
+    ]
+  },
+  "boundaries": {
+    "newUIListenerPlaybackNativeBuild": false,
+    "normal52ProfileTouched": false,
+    "allControlsLayoutsPreviewsRetained": true,
+    "audiblePopsNativeStallsManualHardwareStillOpen": true
+  }
+}
