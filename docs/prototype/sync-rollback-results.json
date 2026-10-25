@@ -1,0 +1,315 @@
+{
+  "date": "2026-10-25",
+  "sourceCommit": "5a8f45f3fb08af3bbde4031d32801084f4ced1d1",
+  "baselineCommit": "5b25836592487e060dd7a2d9ad7f338dddbbf60d",
+  "scope": "Actual controller/engine/Smart/grid/renderer-validation methods with controlled graph,clock,buffer/cache,live ACK and sampler-preparation endpoints; no real UI/native/PCM/music/listening acceptance.",
+  "sourceSHA256": {
+    "prototype/engine.js": "f4c4f9ea56e10f8cb3c9140295c9398e939971e42ed0c51b0d94addf2562fea1",
+    "prototype/smart-sync.js": "727d15fe411fca43be083ed7f0572f2d7ccb09fdba1bab0c6b3ccb5499359cdd",
+    "prototype/sync-primary-rollback.test.mjs": "2276c77dc6676febcd42f3ae89e5c07d53070b9f455763356d60e6b919181dd2",
+    "prototype/sync-rate-owner-basis.test.mjs": "1fdcab75b84e0e431707304fba8d74c84eb4122ffef0c09387d862bea395fc90",
+    "prototype/sync-rollback-basis.test.mjs": "ecf8a1c73738b34821048cabcb33b0e94eb96f13ce71c0c9c18859ce6e6f193d"
+  },
+  "immutableBaseline": {
+    "tests": 29,
+    "passed": 10,
+    "failed": 19,
+    "sha256": "2c596f4fd3eeadbc380ace0ad313e16c6e98962e993c0d56446c6a5cf623e521"
+  },
+  "focused": {
+    "tests": 29,
+    "passed": 29,
+    "failed": 0,
+    "sha256": "e6282dc57649a4b9f8900a12590f877adf5f7b91e384e52cb4517a12b821f496"
+  },
+  "fullNode": {
+    "tests": 286,
+    "passed": 286,
+    "failed": 0,
+    "sha256": "b40ee4b3dd46d7cf237b5b84db28a776f0b7b5194634542e1a9672ed579399de"
+  },
+  "areas": {
+    "simple": {
+      "cases": 12,
+      "baselineFailed": 6,
+      "baselinePassed": 6,
+      "afterPassed": 12
+    },
+    "sharedRateOwners": {
+      "cases": 9,
+      "baselineFailed": 9,
+      "baselinePassed": 0,
+      "afterPassed": 9,
+      "warpedNominal": 1,
+      "warpedLocalAudible": 0.8,
+      "includesPreflightAndPausedSamplerFailure": true
+    },
+    "warpedPrimary": {
+      "cases": 8,
+      "baselineFailed": 4,
+      "baselinePassed": 4,
+      "afterPassed": 8
+    }
+  },
+  "parentReproduction": {
+    "beforeFinal": {
+      "nominal": 1.05,
+      "audible": 1,
+      "playing": true,
+      "processing": false,
+      "sync": false,
+      "role": null,
+      "token": 2,
+      "pending": false,
+      "originalVoice": true,
+      "retired": 0,
+      "transforms": 0,
+      "acks": [
+        {
+          "aborted": true
+        },
+        {
+          "aborted": true
+        }
+      ],
+      "disposed": [
+        true,
+        true
+      ]
+    },
+    "beforeEvidenceSHA256": "13f2579336f3fd569096994eb4f789ab96b58b0397b38755b9e9643d3464b12d",
+    "afterFinal": {
+      "nominal": 1,
+      "audible": 1,
+      "playing": true,
+      "processing": false,
+      "sync": false,
+      "role": null,
+      "token": 2,
+      "pending": false,
+      "originalVoice": true,
+      "retired": 0,
+      "transforms": 0,
+      "acks": [
+        {
+          "aborted": true
+        },
+        {
+          "aborted": true
+        }
+      ],
+      "disposed": [
+        true,
+        true
+      ]
+    },
+    "afterEvidenceSHA256": "6795d110505cffe989fd29480dea344c423c68779e355d3c89e97239f956ef66",
+    "afterSourceBefore": {
+      "prototype/engine.js": "f4c4f9ea56e10f8cb3c9140295c9398e939971e42ed0c51b0d94addf2562fea1",
+      "prototype/sync.js": "cf188c9738963f8f64a41a2a373427849f67a30f97f7bee38ce92fc047407025",
+      "prototype/app.js": "6ea97ad6a8d5840ca6932441d909d1abe822c845e5cae37f22cb50e82377ae31",
+      "prototype/simple-sync-lifecycle.test.mjs": "a9c0c82fada260250ad2d40e04f5ee6870cf8cf252de3b555e061f0be5ed911d"
+    },
+    "afterSourceAfter": {
+      "prototype/engine.js": "f4c4f9ea56e10f8cb3c9140295c9398e939971e42ed0c51b0d94addf2562fea1",
+      "prototype/sync.js": "cf188c9738963f8f64a41a2a373427849f67a30f97f7bee38ce92fc047407025",
+      "prototype/app.js": "6ea97ad6a8d5840ca6932441d909d1abe822c845e5cae37f22cb50e82377ae31",
+      "prototype/simple-sync-lifecycle.test.mjs": "a9c0c82fada260250ad2d40e04f5ee6870cf8cf252de3b555e061f0be5ed911d"
+    },
+    "afterSourceStable": true,
+    "outputDestinationOnlyChanged": true
+  },
+  "existingChecks": {
+    "immutable-live-keylock": {
+      "passed": 9,
+      "failed": 0,
+      "cases": 9,
+      "sha256": "9f0c75962e2dddddbf52b29f634cc83005ca3a91421a0949bd88d0a07043dc0b",
+      "scope": "Actual current AudioEngine start/control/routing/retirement methods with controlled adapter, native graph and clock collaborators. No actual browser PCM, physical hardware, native app or integrated audio acceptance. Source may be concurrently edited by parent; hashes delimit read-only review."
+    },
+    "gui-tempo": {
+      "passed": true,
+      "failed": 0,
+      "cases": 8,
+      "sha256": "450eb2710910624a5963af76044ef3799dd42d2368d2245f6159bf62a8e52298",
+      "scope": "Controlled GUI-coordinate model with asynchronous engine collaborator; not browser input/audio, native, hardware or vendor equivalence."
+    },
+    "handoff": {
+      "passed": true,
+      "failed": 0,
+      "cases": 4,
+      "sha256": "e3543c3d752d28484ae8dfb508726d5343a90159b10da9dea4c1426ed35bb1ae",
+      "scope": "Two audio-time barrier ownership/failure policy; no actual audio/native/hardware proof"
+    },
+    "smart-primary": {
+      "passed": true,
+      "failed": 0,
+      "cases": 5,
+      "sha256": "5e8448cd416d97aa7c82e9fd1a77b9097e77a392e5a0833cc62d84dce42a05cc",
+      "scope": "Controlled Smart Sync collaborators: primary local warp progression versus nominal/shared-tempo changes, source Pause and own token cancellation. Actual browser phase/audio checked separately."
+    },
+    "fx-tempo": {
+      "passed": 8,
+      "failed": 0,
+      "cases": 8,
+      "sha256": "05292f8816b9818adb380c656a6c4d4bde19b19400230259475ccdc0026eb99c",
+      "scope": "Actual AudioEngine configureFX/setRate and semantic query with controlled existing effect slot updates; not browser DSP, measured repeat intervals, live UI, musical/reference or native acceptance."
+    }
+  },
+  "independentReview": {
+    "sharedCombinedPassed": 52,
+    "simpleSharedRateAndCleanupPassed": 34,
+    "smartOriginalPassed": 47,
+    "settledCleanupReviewed": true
+  },
+  "candidateCorrections": {
+    "pausedGroupStartedVsPreflight": {
+      "tests": 9,
+      "passed": 8,
+      "failed": 1,
+      "sha256": "5ab6eaa0c822dc5047978f82e7c52a6ab61ad12a94a4af55ed2ad5f0eb20c9bf"
+    },
+    "settledReferenceReachability": {
+      "tests": 12,
+      "passed": 11,
+      "failed": 1,
+      "sha256": "8e3981be80f8e6690c46fb13df1d808182bac93eacb8e9d251ce7f0a4c54f37c"
+    },
+    "initialSimpleHeldPromiseFixtureCanceledOnlyExcluded": true,
+    "privateCrossOwnerRedRestoredByteExactAfterOutputReuse": true,
+    "canonicalCrossOwnerRedSHA256": "1a1783b03f1f36ec3e30908e42424ca2eecc057c205c8aef39d880e9dc727d54",
+    "immutableArchiveOutputsAreAcceptanceBaseline": true
+  },
+  "preparedIntegration": {
+    "scope": "PRIVATE CURRENT_INTEGRATION readiness only; existing eight-track Run/turn10 workload. No Electron, HTTP listener, UI, native capture, playback or music started. Not new rollback-basis, preflight, paused-sampler or fault-case acceptance.",
+    "currentCommit": "5a8f45f3fb08af3bbde4031d32801084f4ced1d1",
+    "variants": {
+      "baseline": 20,
+      "candidate": 20,
+      "current": 23
+    },
+    "currentFiles": {
+      "native-orientation-window.cjs": {
+        "sha256": "3819c35970bf18b19b46e692035cfc92ce470097143721c98a22eb3e79da3bae",
+        "bytes": 30296
+      },
+      "orientation-server.py": {
+        "sha256": "756886e5a2929223a10f49737575969bdcf0e4e60f504d2c847bb64c4306da8d",
+        "bytes": 3504
+      },
+      "orientation-current-sources.json": {
+        "sha256": "622dd43c2ee95434f5a94c140716f82a4f24913f205803661014337c297b25d6",
+        "bytes": 2529
+      }
+    },
+    "originalCopiesVerified": true,
+    "legacyManifestsUnchanged": true,
+    "captureObserverSecurityAndQualityGateSectionsByteUnchanged": true,
+    "serverHandlerHostOriginAndTrackRoutingSectionByteUnchanged": true,
+    "pureChecks": {
+      "hostSyntax": true,
+      "serverSyntax": true,
+      "triggerCases": 9,
+      "intervalCases": 7,
+      "injectedScriptsCompiled": 2,
+      "all3ManifestsGitHashVerified": true,
+      "eightOriginalTrackHashesVerified": true
+    },
+    "launchOnlyAfterUnlock": true,
+    "doesNotEstablish": [
+      "Matched99/ba4 orientation causality",
+      "Current native integration",
+      "New rollback-basis, preflight, paused-sampler or fault-case acceptance",
+      "New OFF/mode changes, live Seek or Smart primary ACK acceptance",
+      "New FX parameter or failed-rate-request coverage",
+      "Reverse-pitch or Quantize regression acceptance",
+      "Audible Sync pops or hardware output"
+    ],
+    "preservedPrior988ReadinessSet": [
+      {
+        "file": "native-orientation-window.cjs",
+        "preserved": "native-orientation-window.current-988fd31-before-5a8f45f.cjs",
+        "sha256": "343f78e2bf872fc8440b16398124e48f36d41615769f757eb476c5626e4925c3",
+        "bytes": 30223
+      },
+      {
+        "file": "orientation-server.py",
+        "preserved": "orientation-server.current-988fd31-before-5a8f45f.py",
+        "sha256": "63d1228cbae6faaee9422f6b9d0f247a30e4860e15933bf79dbcea9f8078fbef",
+        "bytes": 3504
+      },
+      {
+        "file": "orientation-current-sources.json",
+        "preserved": "orientation-current-sources.current-988fd31-before-5a8f45f.json",
+        "sha256": "d202acc2a63fca8147b92c0c56c0a7635a53d23440efd5e0dbf895d1aff059f0",
+        "bytes": 2499
+      },
+      {
+        "file": "orientation-current-readiness.json",
+        "preserved": "orientation-current-readiness.current-988fd31-before-5a8f45f.json",
+        "sha256": "a912ea2f0b9b2c3d3761dda944f68398831619beb931573b96e1f0fdc76e559c",
+        "bytes": 3759
+      }
+    ],
+    "preservedPriorEa70ReadinessSet": [
+      {
+        "file": "native-orientation-window.cjs",
+        "preserved": "native-orientation-window.current-ea70bc0-before-988fd31.cjs",
+        "sha256": "a98b4f4584509f2ae8af766b587ef528ca5281aed50b4e99dc79082db50c065a",
+        "bytes": 30216
+      },
+      {
+        "file": "orientation-server.py",
+        "preserved": "orientation-server.current-ea70bc0-before-988fd31.py",
+        "sha256": "16da6cbb85e8b610bedfcead34d4bb0982388e8c421abed01158a37fc10f4879",
+        "bytes": 3504
+      },
+      {
+        "file": "orientation-current-sources.json",
+        "preserved": "orientation-current-sources.current-ea70bc0-before-988fd31.json",
+        "sha256": "5c0b453cb0b2958314aa05c0fa6c4e2659e9e93e478b72f6c93103dc15bedcc3",
+        "bytes": 2492
+      },
+      {
+        "file": "orientation-current-readiness.json",
+        "preserved": "orientation-current-readiness.current-ea70bc0-before-988fd31.json",
+        "sha256": "c471486bcae2119fd5574ca12117dd19a0adda5d4da69ccea7307767590d28d3",
+        "bytes": 2651
+      }
+    ],
+    "preservedPrior5eReadinessSet": [
+      {
+        "file": "native-orientation-window.cjs",
+        "preserved": "native-orientation-window.current-5e53ef6-before-ea70bc0.cjs",
+        "sha256": "a248153fe59a3642a7c21841b9078ec508e02b083b33a7af2a52191a8a58fb9d",
+        "bytes": 30101
+      },
+      {
+        "file": "orientation-server.py",
+        "preserved": "orientation-server.current-5e53ef6-before-ea70bc0.py",
+        "sha256": "3d12ad87aeb2e6d1c014492272d798c6367eec9accf137fb6628315e8ba85618",
+        "bytes": 3494
+      },
+      {
+        "file": "orientation-current-sources.json",
+        "preserved": "orientation-current-sources.current-5e53ef6-before-ea70bc0.json",
+        "sha256": "84cfdc5f8f831c89224dc5c0aaab83ca69e96f704ccb357e46354c3f752959b6",
+        "bytes": 2351
+      },
+      {
+        "file": "orientation-current-readiness.json",
+        "preserved": "orientation-current-readiness.current-5e53ef6-before-ea70bc0.json",
+        "sha256": "121a408d36676236f79f08f784bc10cb2aaccc979d5e16ebf33669e78c237cbe",
+        "bytes": 1371
+      }
+    ]
+  },
+  "boundaries": {
+    "newUIListenerPlaybackNativeBuild": false,
+    "normal52ProfileTouched": false,
+    "allControlsLayoutsPreviewsRetained": true,
+    "sourceOverlapFailureNowPasses": true,
+    "coreFix08And15RemainOpenForActualAcceptance": true,
+    "audiblePopsNativeStallsManualHardwareStillOpen": true
+  }
+}

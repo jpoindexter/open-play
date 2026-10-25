@@ -1,5 +1,7 @@
 # Learnings
 
+- [2026-10-25 preserve-original-nominal-basis](2026-10-25-preserve-original-nominal-basis.md) — Share original pending rollback ownership, distinguish paused/preflight paths and release settled reference chains.
+
 - [2026-10-25 revoke-the-owned-audio-candidate](2026-10-25-revoke-the-owned-audio-candidate.md) — Cancel the precise audio preparation independently of selected mode; keep pending OFF accessible and track the original rollback basis.
 
 - [2026-10-25 guard-before-sync-handoff](2026-10-25-guard-before-sync-handoff.md) — Protect asynchronous preparation before claiming the transport; retain reverse audio and local Quantize control identity.
