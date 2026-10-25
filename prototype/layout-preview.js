@@ -146,6 +146,7 @@ function refineDeck(deck,index){
   if(document.body.dataset.workspace==='traktor-flat')refineTraktorFlatDeck(deck,index);
 }
 function refineMixer(){
+  $('#mixer').dataset.channelLayout=document.body.dataset.workspace==='serato'?'inline':vertical()&&!document.body.classList.contains('four-decks')?'mirrored':'parallel';
   // A player rerender creates a new real crossfader. Retire its old moved footer.
   let footer=$('.preview-mixer-footer');
   const fresh=$('#mixer #crossfader');

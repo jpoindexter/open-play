@@ -2,8 +2,7 @@
    Reference: installed Traktor Pro3 Mixer layout, observed19Oct2026. Original CSS,
    controls, renderer and audio modules are reused; no proprietary assets. */
 .workspace-bar{height:54px;display:flex;align-items:center;gap:22px;padding:0 16px;background:#111315;border-bottom:1px solid #45494d;}
-.workspace-brand{text-decoration:none;color:#f0f0f0;white-space:nowrap}
-.workspace-brand>span{}.workspace-brand small{color:#9da6ad;display:block;margin-top:2px}
+.workspace-brand{text-decoration:none;color:#f0f0f0;white-space:nowrap}.workspace-brand small{color:#9da6ad;display:block;margin-top:2px}
 .workspace-switch{display:flex;padding:3px;background:#24282b;border:1px solid #41474c;border-radius:5px;gap:3px}
 .workspace-switch button{min-height:30px;padding:4px 15px;border:1px solid transparent;background:transparent;color:#b9c0c5;border-radius:3px}
 .workspace-switch button[aria-pressed="true"]{background:#495159;color:#fff;border-color:#67737e}
@@ -11,7 +10,7 @@
 .preview-zoom button{min-width:25px;min-height:25px;padding:0;}.preview-zoom output{min-width:23px;text-align:center}
 .toolbar{height:42px}.toolbar .brand{display:none}.toolbar .master-label{margin-left:auto}
 .toolbar [data-panel="sampler"],.toolbar [data-panel="scratch"],.toolbar [data-panel="flip"],.toolbar [data-panel="video"],.toolbar [data-panel="coverage"]{display:none}
-.review-bar{height:23px}.review-bar>button{display:none}.review-bar>span:first-child{}
+.review-bar{height:23px}.review-bar>button{display:none}
 main{height:calc(100dvh - var(--workspace-chrome-height,119px));min-height:650px}.preview-deck-wave{display:none}
 body[data-workspace="serato"] #decks{padding:4px;gap:4px}
 body[data-workspace="serato"] .detail-horizontal{height:160px}
@@ -28,7 +27,6 @@ body:is([data-workspace="traktor"],:is([data-workspace="hybrid"],[data-preview-s
 body:is([data-workspace="traktor"],:is([data-workspace="hybrid"],[data-preview-shell="flat"])) .deck.focused{border-color:#747e85}
 body:is([data-workspace="traktor"],:is([data-workspace="hybrid"],[data-preview-shell="flat"])) .deck-head{grid-row:1;grid-column:1/-1;height:48px;background:#323639;border-bottom:1px solid #0c0e0f;padding:7px 9px;gap:8px}
 body:is([data-workspace="traktor"],:is([data-workspace="hybrid"],[data-preview-shell="flat"])) .deck-number{min-width:22px}
-body:is([data-workspace="traktor"],:is([data-workspace="hybrid"],[data-preview-shell="flat"])) .deck-title strong{}
 body:is([data-workspace="traktor"],:is([data-workspace="hybrid"],[data-preview-shell="flat"])) .deck-title small{margin-top:3px}
 body:is([data-workspace="traktor"],:is([data-workspace="hybrid"],[data-preview-shell="flat"])) .track-gain-control{display:none}
 body:is([data-workspace="traktor"],:is([data-workspace="hybrid"],[data-preview-shell="flat"])) .deck-key{color:#b8d7c0}
@@ -40,10 +38,9 @@ body:is([data-workspace="traktor"],:is([data-workspace="hybrid"],[data-preview-s
 body:is([data-workspace="traktor"],:is([data-workspace="hybrid"],[data-preview-shell="flat"])) .deck-tabs button.active{border-color:#16b8d7;color:#f4f6f7;background:#424a50}
 body:is([data-workspace="traktor"],:is([data-workspace="hybrid"],[data-preview-shell="flat"])) .pads{gap:3px}
 body:is([data-workspace="traktor"],:is([data-workspace="hybrid"],[data-preview-shell="flat"])) .pad{height:22px;min-height:22px;padding:1px 3px;border:1px solid #4a5055;background:#303639;display:flex;align-items:center;justify-content:center;gap:4px}
-body:is([data-workspace="traktor"],:is([data-workspace="hybrid"],[data-preview-shell="flat"])) .pad small{}
 body:is([data-workspace="traktor"],:is([data-workspace="hybrid"],[data-preview-shell="flat"])) .loop-line{gap:3px;margin-top:4px}
 body:is([data-workspace="traktor"],:is([data-workspace="hybrid"],[data-preview-shell="flat"])) .loop-line>*{min-height:22px;padding:2px;}
-body:is([data-workspace="traktor"],:is([data-workspace="hybrid"],[data-preview-shell="flat"])) .platter{grid-column:1;grid-row:2;width:auto!important;height:52px!important;border:0;border-radius:0;margin:0 5px;padding:0 9px;box-shadow:none;background:#16191b;color:#e4e9ec;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;align-items:center;justify-items:start;cursor:grab}
+body:is([data-workspace="traktor"],:is([data-workspace="hybrid"],[data-preview-shell="flat"])) .platter{grid-column:1;grid-row:2;width:auto;height:52px;border:0;border-radius:0;margin:0 5px;padding:0 9px;box-shadow:none;background:#16191b;color:#e4e9ec;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;align-items:center;justify-items:start;cursor:grab}
 body:is([data-workspace="traktor"],:is([data-workspace="hybrid"],[data-preview-shell="flat"])) .platter::after{display:none}
 body:is([data-workspace="traktor"],:is([data-workspace="hybrid"],[data-preview-shell="flat"])) .platter strong{grid-column:2;grid-row:1;justify-self:end;}
 body:is([data-workspace="traktor"],:is([data-workspace="hybrid"],[data-preview-shell="flat"])) .platter small:first-of-type{grid-column:2;grid-row:2;justify-self:end;color:#afb8be}
@@ -66,53 +63,36 @@ body:is([data-workspace="traktor"],:is([data-workspace="hybrid"],[data-preview-s
 body:is([data-workspace="traktor"],:is([data-workspace="hybrid"],[data-preview-shell="flat"])) .deck-foot{grid-column:1;grid-row:7;padding:0 5px 5px;gap:3px;align-self:start}
 body:is([data-workspace="traktor"],:is([data-workspace="hybrid"],[data-preview-shell="flat"])) .deck-foot button,body:is([data-workspace="traktor"],:is([data-workspace="hybrid"],[data-preview-shell="flat"])) .deck-foot select{min-height:22px;padding:2px 4px;background:#2b3034}
 /* The original, unchanged renderer remains full-sized but offscreen. */
-body:is([data-workspace="traktor"],:is([data-workspace="hybrid"],[data-preview-shell="flat"])) .detail-horizontal{position:fixed!important;top:-1000px;left:0;width:calc(100vw - 20px);height:240px!important;opacity:0;pointer-events:none;grid-area:unset!important}
-body:is([data-workspace="traktor"],:is([data-workspace="hybrid"],[data-preview-shell="flat"])) #mixer{grid-column:2;grid-row:1;display:grid;grid-template-columns:1fr 1fr;align-content:start;align-items:start;padding:10px 12px 8px;gap:10px 12px;background:#303539;border:1px solid #535b61;min-height:0}
-body:is([data-workspace="traktor"],:is([data-workspace="hybrid"],[data-preview-shell="flat"])) .channel-strip{display:flex;flex-direction:column;gap:5px;min-width:0;width:100%;padding:0 5px}
-body:is([data-workspace="traktor"],:is([data-workspace="hybrid"],[data-preview-shell="flat"])) .channel-strip:first-child{border-right:1px solid #1d2124;padding-right:13px}
-body:is([data-workspace="traktor"],:is([data-workspace="hybrid"],[data-preview-shell="flat"])) .channel-strip>strong{color:#c6d0d7;margin-bottom:3px}
-body:is([data-workspace="traktor"],:is([data-workspace="hybrid"],[data-preview-shell="flat"])) .knob-group{display:flex;flex-direction:column;align-items:center;position:relative;height:43px;width:66px;min-height:43px;padding-top:31px;color:#c0c8ce}
-body:is([data-workspace="traktor"],:is([data-workspace="hybrid"],[data-preview-shell="flat"])) .knob-group::before{content:'';position:absolute;top:0;left:18px;width:30px;height:30px;border:3px solid #0b1013;border-radius:50%;background:linear-gradient(130deg,#50585e,#2d3439);box-shadow:0 0 0 1px #525e67}
-body:is([data-workspace="traktor"],:is([data-workspace="hybrid"],[data-preview-shell="flat"])) .knob-group::after{content:'';position:absolute;top:3px;left:31px;width:3px;height:10px;background:#f5a33c;transform-origin:1px 12px;transform:rotate(var(--dial-angle,0deg));pointer-events:none}
-body:is([data-workspace="traktor"],:is([data-workspace="hybrid"],[data-preview-shell="flat"])) .knob-group input{position:absolute;top:0;left:14px;width:38px;height:30px;opacity:.01;cursor:ew-resize;z-index:1}
-body:is([data-workspace="traktor"],:is([data-workspace="hybrid"],[data-preview-shell="flat"])) .knob-group:focus-within::before{outline:2px solid #83d6f0;outline-offset:2px}
-body:is([data-workspace="traktor"],:is([data-workspace="hybrid"],[data-preview-shell="flat"])) .fader-group{display:flex;flex-direction:column;align-items:center;gap:5px;width:38px;color:#c0c8ce;margin-top:3px}
-body:is([data-workspace="traktor"],:is([data-workspace="hybrid"],[data-preview-shell="flat"])) .fader-group input{writing-mode:vertical-lr;direction:rtl;width:22px;height:91px;min-height:91px;accent-color:#bdc9d0}
+body:is([data-workspace="traktor"],:is([data-workspace="hybrid"],[data-preview-shell="flat"])) .detail-horizontal{position:fixed;top:-1000px;left:0;width:calc(100vw - 20px);height:240px;opacity:0;pointer-events:none;grid-area:unset}
+body:is([data-workspace="traktor"],:is([data-workspace="hybrid"],[data-preview-shell="flat"])) #mixer{grid-column:2;grid-row:1;grid-template-columns:1fr 1fr}
 body:is([data-workspace="traktor"],:is([data-workspace="hybrid"],[data-preview-shell="flat"])) .cross-assign{display:none}
-body:is([data-workspace="traktor"],:is([data-workspace="hybrid"],[data-preview-shell="flat"])) .channel-strip>button{min-height:25px;width:65px;margin-top:3px;background:#23292d}
-body:is([data-workspace="traktor"],:is([data-workspace="hybrid"],[data-preview-shell="flat"])) .channel-strip>button.active{background:#07657e;border-color:#51c7e7;color:#fff}
 body:is([data-workspace="traktor"],:is([data-workspace="hybrid"],[data-preview-shell="flat"])) .crossfader{grid-column:1/-1;width:100%;border-top:1px solid #50595f;padding-top:8px;color:#c0c8ce}
 body:is([data-workspace="traktor"],:is([data-workspace="hybrid"],[data-preview-shell="flat"])) .crossfader input{accent-color:#b5c6d1;margin-top:5px}
 body:is([data-workspace="traktor"],:is([data-workspace="hybrid"],[data-preview-shell="flat"])) .library{grid-column:1/-1;grid-row:2;min-height:225px;border:1px solid #434b50;margin-top:2px;grid-template-columns:195px minmax(0,1fr)}
 body:is([data-workspace="traktor"],:is([data-workspace="hybrid"],[data-preview-shell="flat"])) .library-tools{background:#30373c;border-bottom:1px solid #586269}
-body:is([data-workspace="traktor"],:is([data-workspace="hybrid"],[data-preview-shell="flat"])) table{}
 body:is([data-workspace="traktor"],:is([data-workspace="hybrid"],[data-preview-shell="flat"])) th{background:#30373c;color:#bac5cc;}
 body:is([data-workspace="traktor"],:is([data-workspace="hybrid"],[data-preview-shell="flat"])) td{padding:6px 8px}
 body:is([data-workspace="traktor"],:is([data-workspace="hybrid"],[data-preview-shell="flat"])) #panel:not([hidden]){grid-column:1/-1;grid-row:2}
 body:is([data-workspace="traktor"],:is([data-workspace="hybrid"],[data-preview-shell="flat"])) main:has(#panel:not([hidden])) .library{grid-row:3}
 body:is([data-workspace="traktor"],:is([data-workspace="hybrid"],[data-preview-shell="flat"])).four-decks main{height:auto;min-height:calc(100dvh - var(--workspace-chrome-height,119px));grid-template-rows:auto auto minmax(260px,1fr)}
-body:is([data-workspace="traktor"],:is([data-workspace="hybrid"],[data-preview-shell="flat"])).four-decks #mixer{grid-row:1/3;grid-template-columns:1fr 1fr;align-content:start}
+body:is([data-workspace="traktor"],:is([data-workspace="hybrid"],[data-preview-shell="flat"])).four-decks #mixer{grid-row:1/3;grid-template-columns:1fr 1fr}
 body:is([data-workspace="traktor"],:is([data-workspace="hybrid"],[data-preview-shell="flat"])).four-decks .library{grid-row:3}
 body:is([data-workspace="traktor"],:is([data-workspace="hybrid"],[data-preview-shell="flat"])).four-decks .deck-disc{display:contents}
 body:is([data-workspace="traktor"],:is([data-workspace="hybrid"],[data-preview-shell="flat"])).four-decks .deck-foot{display:flex}
 body:is([data-workspace="traktor"],:is([data-workspace="hybrid"],[data-preview-shell="flat"])).four-decks .deck-tabs{display:flex}
-@media(max-width:1100px){.workspace-bar{gap:12px}.workspace-caption{display:none}body:is([data-workspace="traktor"],:is([data-workspace="hybrid"],[data-preview-shell="flat"])) main{grid-template-columns:minmax(0,1fr) 188px minmax(0,1fr)}body:is([data-workspace="traktor"],:is([data-workspace="hybrid"],[data-preview-shell="flat"])) #mixer{padding:10px 4px;gap:10px 4px}body:is([data-workspace="traktor"],:is([data-workspace="hybrid"],[data-preview-shell="flat"])) .deck-title strong{}body:is([data-workspace="traktor"],:is([data-workspace="hybrid"],[data-preview-shell="flat"])) .deck-foot button{padding:2px}body:is([data-workspace="traktor"],:is([data-workspace="hybrid"],[data-preview-shell="flat"])) .deck-head{gap:4px;padding:6px}.toolbar{overflow-x:auto}.toolbar .master-label{min-width:290px}}
-@media(max-width:800px){.workspace-bar{height:auto;min-height:65px;padding:8px;gap:10px;flex-wrap:wrap}.workspace-brand{}.workspace-switch button{padding:4px 9px}.preview-zoom{display:none}body:is([data-workspace="traktor"],:is([data-workspace="hybrid"],[data-preview-shell="flat"])) main{height:auto;grid-template-columns:minmax(0,1fr);grid-template-rows:auto;min-height:0}body:is([data-workspace="traktor"],:is([data-workspace="hybrid"],[data-preview-shell="flat"])) .deck:nth-of-type(n){grid-column:1;grid-row:auto}body:is([data-workspace="traktor"],:is([data-workspace="hybrid"],[data-preview-shell="flat"])) #mixer{grid-column:1;grid-row:3;grid-template-columns:1fr 1fr}body:is([data-workspace="traktor"],:is([data-workspace="hybrid"],[data-preview-shell="flat"])) .channel-strip{display:grid;grid-template-columns:repeat(3,1fr);justify-items:center}body:is([data-workspace="traktor"],:is([data-workspace="hybrid"],[data-preview-shell="flat"])) .channel-strip>strong{grid-column:1/-1}body:is([data-workspace="traktor"],:is([data-workspace="hybrid"],[data-preview-shell="flat"])) .fader-group{grid-column:3;grid-row:2/4}body:is([data-workspace="traktor"],:is([data-workspace="hybrid"],[data-preview-shell="flat"])) .library{grid-column:1;grid-row:4;min-height:300px;grid-template-columns:145px minmax(0,1fr)}body[data-workspace="serato"] main{height:auto}body[data-workspace="serato"] .library{height:350px}.review-bar>span:first-child{display:none}}
+@media(max-width:1100px){.workspace-bar{gap:12px}.workspace-caption{display:none}body:is([data-workspace="traktor"],:is([data-workspace="hybrid"],[data-preview-shell="flat"])) main{grid-template-columns:minmax(0,1fr) 188px minmax(0,1fr)}body:is([data-workspace="traktor"],:is([data-workspace="hybrid"],[data-preview-shell="flat"])) .deck-foot button{padding:2px}body:is([data-workspace="traktor"],:is([data-workspace="hybrid"],[data-preview-shell="flat"])) .deck-head{gap:4px;padding:6px}.toolbar{overflow-x:auto}.toolbar .master-label{min-width:290px}}
+@media(max-width:800px){.workspace-bar{height:auto;min-height:65px;padding:8px;gap:10px;flex-wrap:wrap}.workspace-switch button{padding:4px 9px}.preview-zoom{display:none}body:is([data-workspace="traktor"],:is([data-workspace="hybrid"],[data-preview-shell="flat"])) main{height:auto;grid-template-columns:minmax(0,1fr);grid-template-rows:auto;min-height:0}body:is([data-workspace="traktor"],:is([data-workspace="hybrid"],[data-preview-shell="flat"])) .deck:nth-of-type(n){grid-column:1;grid-row:auto}body:is([data-workspace="traktor"],:is([data-workspace="hybrid"],[data-preview-shell="flat"])) #mixer{grid-column:1;grid-row:3;grid-template-columns:1fr 1fr}body:is([data-workspace="traktor"],:is([data-workspace="hybrid"],[data-preview-shell="flat"])) .library{grid-column:1;grid-row:4;min-height:300px;grid-template-columns:145px minmax(0,1fr)}body[data-workspace="serato"] main{height:auto}body[data-workspace="serato"] .library{height:350px}.review-bar>span:first-child{display:none}}
 
 /* Fauconnier/Turner blending: retain Serato's shared beat-comparison timeline,
    combine it with Traktor's physical deck–mixer–deck relationship. One timeline,
    one set of controls, no duplicate transport state. */
 body:is([data-workspace="hybrid"],[data-preview-shell="flat"]) main{grid-template-rows:156px auto minmax(225px,1fr)}
-body:is([data-workspace="hybrid"],[data-preview-shell="flat"]) .detail-horizontal{position:relative!important;top:auto;left:auto;width:auto;height:156px!important;opacity:1;pointer-events:auto;grid-column:1/-1!important;grid-row:1!important;border:1px solid #455159}
+body:is([data-workspace="hybrid"],[data-preview-shell="flat"]) .detail-horizontal{position:relative;top:auto;left:auto;width:auto;height:156px;opacity:1;pointer-events:auto;grid-column:1/-1;grid-row:1;border:1px solid #455159}
 body:is([data-workspace="hybrid"],[data-preview-shell="flat"]) .detail-wave-tools{display:none}
 body:is([data-workspace="hybrid"],[data-preview-shell="flat"]) .deck:nth-of-type(1),body:is([data-workspace="hybrid"],[data-preview-shell="flat"]) .deck:nth-of-type(2){grid-row:2}
 body:is([data-workspace="hybrid"],[data-preview-shell="flat"]) .deck{grid-template-rows:48px 52px 0 34px auto 30px auto}
 body:is([data-workspace="hybrid"],[data-preview-shell="flat"]) .preview-deck-wave{display:none}
 body:is([data-workspace="hybrid"],[data-preview-shell="flat"]) #mixer{grid-row:2}
-body:is([data-workspace="hybrid"],[data-preview-shell="flat"]) .knob-group{height:36px;min-height:36px;padding-top:27px}
-body:is([data-workspace="hybrid"],[data-preview-shell="flat"]) .knob-group::before{width:26px;height:26px;left:20px}
-body:is([data-workspace="hybrid"],[data-preview-shell="flat"]) .knob-group::after{top:3px;height:8px;transform-origin:1px 10px}
-body:is([data-workspace="hybrid"],[data-preview-shell="flat"]) .fader-group input{height:65px;min-height:65px}
 body:is([data-workspace="hybrid"],[data-preview-shell="flat"]) .library{grid-row:3}
 body:is([data-workspace="hybrid"],[data-preview-shell="flat"]) .deck-tabs [data-tab="Stems"],body:is([data-workspace="hybrid"],[data-preview-shell="flat"]) .deck-tabs [data-tab="Pitch"],body:is([data-workspace="hybrid"],[data-preview-shell="flat"]) .deck-tabs [data-tab="Slicer"]{display:none}
 body:is([data-workspace="hybrid"],[data-preview-shell="flat"]) .deck-tabs button{min-height:25px}
@@ -120,29 +100,10 @@ body:is([data-workspace="hybrid"],[data-preview-shell="flat"]) .pad{height:27px;
 body:is([data-workspace="hybrid"],[data-preview-shell="flat"]) .deck-foot [data-action="censor"],body:is([data-workspace="hybrid"],[data-preview-shell="flat"]) .deck-foot [data-action="repeat"],body:is([data-workspace="hybrid"],[data-preview-shell="flat"]) .deck-foot [data-action="keyDown"],body:is([data-workspace="hybrid"],[data-preview-shell="flat"]) .deck-foot [data-action="keyUp"],body:is([data-workspace="hybrid"],[data-preview-shell="flat"]) .deck-foot [data-action="keySync"],body:is([data-workspace="hybrid"],[data-preview-shell="flat"]) .deck-foot [data-action="keyReset"],body:is([data-workspace="hybrid"],[data-preview-shell="flat"]) .deck-foot [data-action="double"]{display:none}
 body:is([data-workspace="hybrid"],[data-preview-shell="flat"]) .deck-foot button,body:is([data-workspace="hybrid"],[data-preview-shell="flat"]) .deck-foot select{min-height:24px;padding:3px 6px}
 body:is([data-workspace="hybrid"],[data-preview-shell="flat"]) .deck-foot .muted{display:none}
-body:is([data-workspace="hybrid"],[data-preview-shell="flat"]) .transport [data-action="cue"]{}
-body:is([data-workspace="hybrid"],[data-preview-shell="flat"]) .transport button{}
 body:is([data-workspace="hybrid"],[data-preview-shell="flat"]) .deck{background:#222629}
 body:is([data-workspace="hybrid"],[data-preview-shell="flat"]) .deck-head{background:#2e353a}
 /* Outer gain/filter and inner three-band EQ mirror the reference's physical
    channel grouping. Labels sit above the dials instead of under their edges. */
-body:is([data-workspace="traktor"],:is([data-workspace="hybrid"],[data-preview-shell="flat"])) #mixer{padding:10px 6px 8px;gap:10px 8px}
-body:is([data-workspace="traktor"],:is([data-workspace="hybrid"],[data-preview-shell="flat"])) .channel-strip{display:grid;grid-template-columns:1fr 1fr;gap:7px 2px;justify-items:center;padding:0;align-items:start}
-body:is([data-workspace="traktor"],:is([data-workspace="hybrid"],[data-preview-shell="flat"])) .channel-strip:first-child{padding-right:4px}
-body:is([data-workspace="traktor"],:is([data-workspace="hybrid"],[data-preview-shell="flat"])) .channel-strip>strong{grid-column:1/-1;margin-bottom:2px}
-body:is([data-workspace="traktor"],:is([data-workspace="hybrid"],[data-preview-shell="flat"])) .knob-group{height:47px;min-height:47px;width:46px;padding-top:0;}
-body:is([data-workspace="traktor"],:is([data-workspace="hybrid"],[data-preview-shell="flat"])) .knob-group::before{top:15px;left:9px;width:28px;height:28px}
-body:is([data-workspace="traktor"],:is([data-workspace="hybrid"],[data-preview-shell="flat"])) .knob-group::after{top:18px;left:22px;height:9px;transform-origin:1px 10px}
-body:is([data-workspace="traktor"],:is([data-workspace="hybrid"],[data-preview-shell="flat"])) .knob-group input{top:14px;left:5px}
-body:is([data-workspace="traktor"],:is([data-workspace="hybrid"],[data-preview-shell="flat"])) .knob-group:has(input[data-mix$=":trim"]){grid-column:1;grid-row:2}
-body:is([data-workspace="traktor"],:is([data-workspace="hybrid"],[data-preview-shell="flat"])) .knob-group:has(input[data-mix$=":high"]){grid-column:2;grid-row:2}
-body:is([data-workspace="traktor"],:is([data-workspace="hybrid"],[data-preview-shell="flat"])) .knob-group:has(input[data-mix$=":mid"]){grid-column:2;grid-row:3}
-body:is([data-workspace="traktor"],:is([data-workspace="hybrid"],[data-preview-shell="flat"])) .knob-group:has(input[data-mix$=":low"]){grid-column:2;grid-row:4}
-body:is([data-workspace="traktor"],:is([data-workspace="hybrid"],[data-preview-shell="flat"])) .knob-group:has(input[data-mix$=":filter"]){grid-column:1;grid-row:3}
-body:is([data-workspace="traktor"],:is([data-workspace="hybrid"],[data-preview-shell="flat"])) .fader-group{grid-column:1;grid-row:4/7;margin:0;gap:6px}
-body:is([data-workspace="traktor"],:is([data-workspace="hybrid"],[data-preview-shell="flat"])) .fader-group input{height:150px;min-height:150px}
-body:is([data-workspace="traktor"],:is([data-workspace="hybrid"],[data-preview-shell="flat"])) .channel-strip>button{grid-column:2;grid-row:5;width:43px;margin-top:5px}
-body:is([data-workspace="hybrid"],[data-preview-shell="flat"]) .fader-group input{height:117px;min-height:117px}
 body:is([data-workspace="hybrid"],[data-preview-shell="flat"]) main:has(#panel:not([hidden])) #panel{grid-row:3}
 body:is([data-workspace="hybrid"],[data-preview-shell="flat"]) main:has(#panel:not([hidden])) .library{grid-row:4}
 body:is([data-workspace="hybrid"],[data-preview-shell="flat"]).four-decks .deck:nth-of-type(3),body:is([data-workspace="hybrid"],[data-preview-shell="flat"]).four-decks .deck:nth-of-type(4){grid-row:3}
@@ -160,19 +121,16 @@ body:is([data-workspace=hybrid],[data-preview-shell=flat]){--preview-wave-height
 body:is([data-workspace=hybrid],[data-preview-shell=flat])[data-wave-size=small]{--preview-wave-height:88px;--preview-wave-width:72px}
 body:is([data-workspace=hybrid],[data-preview-shell=flat])[data-wave-size=large]{--preview-wave-height:232px;--preview-wave-width:148px}
 body:is([data-workspace=hybrid],[data-preview-shell=flat]) main{height:calc(100dvh - 157px);min-height:0;grid-template-rows:var(--preview-wave-height) auto minmax(210px,1fr);gap:6px;padding:6px}
-body:is([data-workspace=hybrid],[data-preview-shell=flat]) .detail-horizontal{height:var(--preview-wave-height)!important;border-color:#55616a}
+body:is([data-workspace=hybrid],[data-preview-shell=flat]) .detail-horizontal{height:var(--preview-wave-height);border-color:#55616a}
 body:is([data-workspace=hybrid],[data-preview-shell=flat]) .deck{grid-template-rows:var(--preview-head-height) var(--preview-readout-height) 0 38px auto 34px auto;gap:5px;border-radius:3px;border-color:#46515a;overflow:hidden}
 body:is([data-workspace=hybrid],[data-preview-shell=flat]) .deck-head{height:var(--preview-head-height);background:#303940;border-bottom-color:#47525b;padding:7px 10px}
 body:is([data-workspace=hybrid],[data-preview-shell=flat]) .deck[data-preview-letter=A] .deck-head{border-top:2px solid #ffad3d}
 body:is([data-workspace=hybrid],[data-preview-shell=flat]) .deck[data-preview-letter=B] .deck-head{border-top:2px solid #61c5ed}
 body:is([data-workspace=hybrid],[data-preview-shell=flat]) .deck-title{min-width:0;flex:1}body:is([data-workspace=hybrid],[data-preview-shell=flat]) .deck-title strong{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}body:is([data-workspace=hybrid],[data-preview-shell=flat]) .deck-title small{color:#aabac6}
 body:is([data-workspace=hybrid],[data-preview-shell=flat]) .deck-number{min-width:19px}
-body:is([data-workspace=hybrid],[data-preview-shell=flat]) .deck-key{}
 .deck-disclosure{display:none}body:is([data-workspace=hybrid],[data-preview-shell=flat]) .deck-disclosure{display:block;min-width:26px;min-height:26px;padding:2px;}
-body:is([data-workspace=hybrid],[data-preview-shell=flat]) .deck-body>div:first-child[hidden]{display:none!important}
-body:is([data-workspace=hybrid],[data-preview-shell=flat]) .platter{height:var(--preview-readout-height)!important;margin:0 7px;padding:5px 10px;background:#10171b;border:1px solid #38454e;border-radius:2px}
-body:is([data-workspace=hybrid],[data-preview-shell=flat]) .platter strong{}
-body:is([data-workspace=hybrid],[data-preview-shell=flat]) .platter time{}
+body:is([data-workspace=hybrid],[data-preview-shell=flat]) .deck-body>div:first-child[hidden]{display:none}
+body:is([data-workspace=hybrid],[data-preview-shell=flat]) .platter{height:var(--preview-readout-height);margin:0 7px;padding:5px 10px;background:#10171b;border:1px solid #38454e;border-radius:2px}
 body:is([data-workspace=hybrid],[data-preview-shell=flat]) .platter small{font-variant-numeric:tabular-nums}
 body:is([data-workspace=hybrid],[data-preview-shell=flat]) .wave-wrap{height:38px;margin:0 7px;border-radius:2px;background:#0a1014}
 body:is([data-workspace=hybrid],[data-preview-shell=flat]) .wave-label{background:#0a1014c9}
@@ -183,18 +141,10 @@ body:is([data-workspace=hybrid],[data-preview-shell=flat]) .transport [data-acti
 body:is([data-workspace=hybrid],[data-preview-shell=flat]) .transport [data-action=cue]{min-width:58px}
 body:is([data-workspace=hybrid],[data-preview-shell=flat]) .deck-foot{padding:0 7px 7px}
 body:is([data-workspace=hybrid],[data-preview-shell=flat]) .tempo-control{min-height:156px;margin-right:6px}
-body:is([data-workspace=hybrid],[data-preview-shell=flat]) #mixer{background:#29343c;border-color:#53616a;border-radius:3px;padding:10px 8px 8px;gap:8px}
-body:is([data-workspace=hybrid],[data-preview-shell=flat]) .channel-strip>strong{border-bottom:1px solid #52606b;width:100%;padding-bottom:6px;text-align:center;color:#c1ced7}
-body:is([data-workspace=hybrid],[data-preview-shell=flat]) .channel-strip:first-child>strong{color:#ffbc62}body:is([data-workspace=hybrid],[data-preview-shell=flat]) .channel-strip:nth-child(2)>strong{color:#76d0f2}
-body:is([data-workspace=hybrid],[data-preview-shell=flat]) .knob-group::after{background:#d9e6ee}
-body:is([data-workspace=hybrid],[data-preview-shell=flat]) .knob-group:has(input[data-mix$=':filter'])::after{background:#69c9dc}
-body:is([data-workspace=hybrid],[data-preview-shell=flat]) .fader-group input{height:116px;min-height:116px;appearance:none;background:repeating-linear-gradient(to bottom,transparent 0 11px,#75828b60 11px 12px,transparent 12px 13px);width:28px;border-radius:0}
-body:is([data-workspace=hybrid],[data-preview-shell=flat]) .fader-group input::-webkit-slider-runnable-track{background:#0a1014;width:5px;border:1px solid #4c5961;border-radius:0}
-body:is([data-workspace=hybrid],[data-preview-shell=flat]) .fader-group input::-webkit-slider-thumb{appearance:none;background:linear-gradient(to right,#798892,#d2dce3 45%,#26313a 48% 53%,#bdc8d0 56%,#76858f);width:27px;height:12px;border:1px solid #0c141a;border-radius:2px;margin-left:-12px;box-shadow:0 1px 3px #000}
+body:is([data-workspace=hybrid],[data-preview-shell=flat]) #mixer{border-color:#53616a;border-radius:3px}
 body:is([data-workspace=hybrid],[data-preview-shell=flat]) .crossfader input{accent-color:#b4c6d2}
-body:is([data-workspace=hybrid],[data-preview-shell=flat]) .channel-strip>button{min-height:27px;width:45px;border-radius:2px}
 body:is([data-workspace=hybrid],[data-preview-shell=flat]) .library{min-height:210px;margin-top:0;border-radius:3px}
-body:is([data-workspace=hybrid],[data-preview-shell=flat]) .library-tools{min-height:34px}.library-tools #preview-crates{}
+body:is([data-workspace=hybrid],[data-preview-shell=flat]) .library-tools{min-height:34px}
 body:is([data-workspace=hybrid],[data-preview-shell=flat])[data-crates=false] .library{grid-template-columns:minmax(0,1fr)}
 body:is([data-workspace=hybrid],[data-preview-shell=flat])[data-crates=false] .library>aside{display:none}
 /* Compact removes the optional performance panel and reduces chrome; every
@@ -202,13 +152,7 @@ body:is([data-workspace=hybrid],[data-preview-shell=flat])[data-crates=false] .l
 body:is([data-workspace=hybrid],[data-preview-shell=flat])[data-density=compact]{--preview-head-height:40px;--preview-readout-height:46px;--preview-vertical-height:282px}
 body:is([data-workspace=hybrid],[data-preview-shell=flat])[data-density=compact] .deck{grid-template-rows:40px 46px 0 30px auto 32px auto;gap:3px}
 body:is([data-workspace=hybrid],[data-preview-shell=flat])[data-density=compact] .wave-wrap{height:30px}
-body:is([data-workspace=hybrid],[data-preview-shell=flat])[data-density=compact] .platter time{}body:is([data-workspace=hybrid],[data-preview-shell=flat])[data-density=compact] .platter strong{}
-body:is([data-workspace=hybrid],[data-preview-shell=flat])[data-density=compact] .knob-group{height:40px;min-height:40px}
-body:is([data-workspace=hybrid],[data-preview-shell=flat])[data-density=compact] .knob-group::before{width:24px;height:24px;left:11px;top:13px}
-body:is([data-workspace=hybrid],[data-preview-shell=flat])[data-density=compact] .knob-group::after{top:15px;left:22px;height:8px;transform-origin:1px 10px}
-body:is([data-workspace=hybrid],[data-preview-shell=flat])[data-density=compact] .fader-group input{height:80px;min-height:80px}
-body:is([data-workspace=hybrid],[data-preview-shell=flat])[data-density=compact] .channel-strip{gap:4px 2px}
-body:is([data-workspace=hybrid],[data-preview-shell=flat])[data-density=compact] #mixer{padding-top:7px;gap:6px}
+body:is([data-workspace=hybrid],[data-preview-shell=flat])[data-density=compact] #mixer{padding-top:7px}
 body:is([data-workspace=hybrid],[data-preview-shell=flat])[data-density=compact] td{padding-block:4px}
 /* Vertical A/B share one comparison region directly ABOVE the mixer. The
    real vertical canvas and its original Y-axis scrub surfaces remain together. */
@@ -222,7 +166,7 @@ body:is([data-workspace=hybrid],[data-preview-shell=flat])[data-density=compact]
 body:is([data-workspace=hybrid],[data-preview-shell=flat]) .preview-key-row{display:flex;align-items:center;gap:5px;grid-column:1;grid-row:3;margin:0 7px;padding:3px 7px;background:#192229;border:1px solid #3c4a54;border-radius:2px;min-width:0}
 body:is([data-workspace=hybrid],[data-preview-shell=flat]) .preview-key-caption{color:#b0c1cd}
 body:is([data-workspace=hybrid],[data-preview-shell=flat]) .preview-key-row .deck-key{min-width:48px;margin-right:auto;color:#bdddbf}
-body:is([data-workspace=hybrid],[data-preview-shell=flat]) .preview-key-row button{display:block!important;min-height:24px;padding:2px 6px;background:#27343d;border:1px solid #4b5d68;border-radius:2px;}
+body:is([data-workspace=hybrid],[data-preview-shell=flat]) .preview-key-row button{display:block;min-height:24px;padding:2px 6px;background:#27343d;border:1px solid #4b5d68;border-radius:2px;}
 body:is([data-workspace=hybrid],[data-preview-shell=flat]) .preview-key-row [data-action=keyDown],body:is([data-workspace=hybrid],[data-preview-shell=flat]) .preview-key-row [data-action=keyUp]{min-width:25px}
 body:is([data-workspace=hybrid],[data-preview-shell=flat]) .cross-assign{display:flex;flex-direction:column;align-items:center;grid-column:2;grid-row:6;gap:2px;color:#b9cbd7}
 body:is([data-workspace=hybrid],[data-preview-shell=flat]) .cross-assign select{min-height:22px;min-width:48px;background:#17232b}
@@ -231,7 +175,7 @@ body:is([data-workspace=hybrid],[data-preview-shell=flat])[data-orientation=vert
 body:is([data-workspace=hybrid],[data-preview-shell=flat])[data-orientation=vertical] .deck:nth-of-type(1){grid-column:1;grid-row:1/3}
 body:is([data-workspace=hybrid],[data-preview-shell=flat])[data-orientation=vertical] .deck:nth-of-type(2){grid-column:3;grid-row:1/3}
 body:is([data-workspace=hybrid],[data-preview-shell=flat])[data-orientation=vertical] #mixer{grid-column:2;grid-row:2}
-body:is([data-workspace=hybrid],[data-preview-shell=flat])[data-orientation=vertical] .detail-waves{position:relative!important;top:auto!important;left:auto!important;width:auto!important;height:var(--preview-pair-height)!important;opacity:1;pointer-events:auto;grid-column:2!important;grid-row:1!important;border:1px solid #55616a;border-radius:3px}
+body:is([data-workspace=hybrid],[data-preview-shell=flat])[data-orientation=vertical] .detail-waves{position:relative;top:auto;left:auto;width:auto;height:var(--preview-pair-height);opacity:1;pointer-events:auto;grid-column:2;grid-row:1;border:1px solid #55616a;border-radius:3px}
 body:is([data-workspace=hybrid],[data-preview-shell=flat])[data-orientation=vertical] .preview-wave-head{display:flex;position:absolute;top:0;inset-inline:0;z-index:2;height:20px;background:#26343d;border-bottom:1px solid #53616c}
 .preview-wave-head span{flex:1;text-align:center;color:#ffbc62}.preview-wave-head span:nth-child(2){color:#76d0f2;border-left:1px solid #53616c}
 body:is([data-workspace=hybrid],[data-preview-shell=flat])[data-orientation=vertical] .detail-waves canvas{top:20px;height:calc(100% - 20px)}
@@ -243,7 +187,7 @@ body:is([data-workspace=hybrid],[data-preview-shell=flat])[data-orientation=vert
 body:is([data-workspace=hybrid],[data-preview-shell=flat])[data-orientation=vertical].four-decks .library{grid-row:4}
 /* Browser focus retains live transport, overview, EQ, filter, cue and faders. */
 body:is([data-workspace=hybrid],[data-preview-shell=flat])[data-library-focus=true] main{grid-template-rows:auto minmax(210px,1fr);grid-template-columns:minmax(0,1fr) 284px minmax(0,1fr)}
-body:is([data-workspace=hybrid],[data-preview-shell=flat])[data-library-focus=true] .detail-waves,body:is([data-workspace=hybrid],[data-preview-shell=flat])[data-library-focus=true] #decks>.preview-deck-wave{display:none!important}
+body:is([data-workspace=hybrid],[data-preview-shell=flat])[data-library-focus=true] .detail-waves,body:is([data-workspace=hybrid],[data-preview-shell=flat])[data-library-focus=true] #decks>.preview-deck-wave{display:none}
 body:is([data-workspace=hybrid],[data-preview-shell=flat])[data-library-focus=true] .deck:nth-of-type(1){grid-column:1;grid-row:1}body:is([data-workspace=hybrid],[data-preview-shell=flat])[data-library-focus=true] .deck:nth-of-type(2){grid-column:3;grid-row:1}
 body:is([data-workspace=hybrid],[data-preview-shell=flat])[data-library-focus=true] #mixer{grid-column:2;grid-row:1}body:is([data-workspace=hybrid],[data-preview-shell=flat])[data-library-focus=true] .library{grid-row:2}
 body:is([data-workspace=hybrid],[data-preview-shell=flat]) :is(button,select,input):focus-visible{outline:2px solid #8ed8ef;outline-offset:2px}
@@ -254,24 +198,11 @@ body:is([data-workspace=hybrid],[data-preview-shell=flat])[data-library-focus=tr
 body:is([data-workspace=hybrid],[data-preview-shell=flat])[data-library-focus=true].four-decks #mixer{grid-row:1/3}
 body:is([data-workspace=hybrid],[data-preview-shell=flat])[data-library-focus=true].four-decks .library{grid-row:3}
 .preview-headphones{display:none}body:is([data-workspace=hybrid],[data-preview-shell=flat]) .preview-headphones{display:block;grid-column:1/-1;min-height:26px;background:#19262f;border:1px solid #4b606f;border-radius:2px;color:#c8dce8}
-body:is([data-workspace=hybrid],[data-preview-shell=flat]) .beat-position{display:flex!important;flex-direction:row;align-items:center;gap:5px;margin-left:auto;min-height:24px}
+body:is([data-workspace=hybrid],[data-preview-shell=flat]) .beat-position{display:flex;flex-direction:row;align-items:center;gap:5px;margin-left:auto;min-height:24px}
 body:is([data-workspace=hybrid],[data-preview-shell=flat]) .beat-dots{gap:3px}body:is([data-workspace=hybrid],[data-preview-shell=flat]) .beat-dots i{width:8px}
 /* Three lanes per channel keep EQ in a vertical bank and the level fader
    beside it, so the paired waveform region does not create empty deck space. */
-body:is([data-workspace=hybrid],[data-preview-shell=flat]) .channel-strip{grid-template-columns:repeat(3,minmax(0,1fr));gap:5px 1px}
-body:is([data-workspace=hybrid],[data-preview-shell=flat]) .channel-strip>strong{grid-column:1/-1}
-body:is([data-workspace=hybrid],[data-preview-shell=flat]) .knob-group{width:38px;height:44px;min-height:44px;}
-body:is([data-workspace=hybrid],[data-preview-shell=flat]) .knob-group::before{width:26px;height:26px;left:6px;top:14px}
-body:is([data-workspace=hybrid],[data-preview-shell=flat]) .knob-group::after{left:18px;top:17px}
-body:is([data-workspace=hybrid],[data-preview-shell=flat]) .knob-group input{left:0;width:38px}
-body:is([data-workspace=hybrid],[data-preview-shell=flat]) .fader-group{grid-column:3;grid-row:2/5;width:30px;gap:5px}
-body:is([data-workspace=hybrid],[data-preview-shell=flat]) .fader-group input{height:112px;min-height:112px}
-body:is([data-workspace=hybrid],[data-preview-shell=flat]) .channel-strip>button{grid-column:1;grid-row:4;width:36px;margin-top:15px;}
 body:is([data-workspace=hybrid],[data-preview-shell=flat]) .cross-assign{grid-column:1/-1;grid-row:5;flex-direction:row;justify-content:center;gap:6px;width:100%;margin-top:3px}
-body:is([data-workspace=hybrid],[data-preview-shell=flat])[data-density=compact] .knob-group{height:38px;min-height:38px;width:38px}
-body:is([data-workspace=hybrid],[data-preview-shell=flat])[data-density=compact] .knob-group::before{width:24px;height:24px;left:7px;top:12px}
-body:is([data-workspace=hybrid],[data-preview-shell=flat])[data-density=compact] .knob-group::after{left:18px;top:14px}
-body:is([data-workspace=hybrid],[data-preview-shell=flat])[data-density=compact] .fader-group input{height:94px;min-height:94px}
 /* Keep existing performance modes reachable when the deck panel is expanded;
    density hides the panel, rather than silently removing individual features. */
 body:is([data-workspace=hybrid],[data-preview-shell=flat]) .deck-tabs [data-tab]{display:block;min-width:0;flex:1;padding-inline:3px;}
@@ -316,15 +247,12 @@ body:is([data-workspace=hybrid],[data-preview-shell=flat]) .preview-deck-utiliti
 body:is([data-workspace=hybrid],[data-preview-shell=flat]) .preview-deck-utilities button{display:block;min-height:25px;padding:3px 7px;border:1px solid #4c5d68;border-radius:2px;background:#243039}
 body:is([data-workspace=hybrid],[data-preview-shell=flat]) .preview-deck-utilities .track-gain-control{display:flex;flex-direction:row;align-items:center;gap:6px;width:auto;min-width:0;margin-right:auto;}
 body:is([data-workspace=hybrid],[data-preview-shell=flat]) .preview-deck-utilities .track-gain-control input{width:65px;max-width:65px;height:17px}
-body:is([data-workspace=hybrid],[data-preview-shell=flat]) .channel-strip>strong{grid-column:1;grid-row:1;border:0;padding:0;}
 body:is([data-workspace=hybrid],[data-preview-shell=flat]) .cross-assign{grid-column:2/4;grid-row:1;margin:0;gap:3px;width:auto;}
 body:is([data-workspace=hybrid],[data-preview-shell=flat]) .cross-assign select{min-width:48px;min-height:23px;height:23px;padding:1px 4px}
-body:is([data-workspace=hybrid],[data-preview-shell=flat]) .channel-strip{align-content:start}
 body:is([data-workspace=hybrid],[data-preview-shell=flat]) .preview-mixer-footer{display:grid;grid-template-columns:minmax(0,1fr) 100px;gap:7px;grid-column:1/-1;align-items:center;border-top:1px solid #52616c;padding-top:5px}
 body:is([data-workspace=hybrid],[data-preview-shell=flat]) .preview-mixer-footer .crossfader{grid-column:auto;grid-row:auto;border:0;padding:0;min-width:0;}
 body:is([data-workspace=hybrid],[data-preview-shell=flat]) .preview-mixer-footer .crossfader input{margin-top:3px}
 body:is([data-workspace=hybrid],[data-preview-shell=flat]) .preview-mixer-footer .preview-headphones{grid-column:auto;grid-row:auto;min-height:28px;padding:2px 4px}
-body:is([data-workspace=hybrid],[data-preview-shell=flat]) #mixer{gap:5px 8px;padding:7px 6px}
 body:is([data-workspace=hybrid],[data-preview-shell=flat]) .deck{align-self:start}
 body:is([data-workspace=hybrid],[data-preview-shell=flat])[data-density=compact] .deck{gap:2px}
 
@@ -336,9 +264,7 @@ body[data-preview-shell=flat]{--surface:#191a1c;--raised:#242629;--line:#393c41;
 body[data-preview-shell=flat] main{grid-template-columns:minmax(0,1fr) 196px minmax(0,1fr);gap:4px;padding:4px;background:#090a0c}
 body[data-preview-shell=flat] .workspace-switch button[aria-pressed=true]{background:#1458bb;border-color:#4b93ff}
 body[data-preview-shell=flat] .deck{grid-template-columns:minmax(0,1fr) 124px 28px;grid-template-rows:44px 28px 30px 112px 56px 30px auto auto;gap:3px;background:#17191c;border:1px solid #393d44;border-radius:0}
-body[data-preview-shell=flat] .deck-head{height:44px;background:#101113;padding:4px 8px;gap:6px;border-top:0!important;border-bottom:1px solid #33373e}
-body[data-preview-shell=flat] .deck-title strong{}
-body[data-preview-shell=flat] .deck-title small{}
+body[data-preview-shell=flat] .deck-head{height:44px;background:#101113;padding:4px 8px;gap:6px;border-top:0;border-bottom:1px solid #33373e}
 body[data-preview-shell=flat] .preview-deck-time{display:grid;gap:2px;min-width:74px;text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
 body[data-preview-shell=flat] .preview-deck-time time{color:#f2f3f5}
 body[data-preview-shell=flat] .preview-deck-time small{color:#9da4ad}
@@ -351,8 +277,7 @@ body[data-preview-shell=flat] .deck-tabs [data-tab]{min-height:24px;background:#
 body[data-preview-shell=flat] .deck-tabs .active{background:#1558b8;border-color:#4b92ff}
 body[data-preview-shell=flat] .pads{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px}
 body[data-preview-shell=flat] .pad{height:36px;min-height:36px;background:#13171d;border:1px solid #3f4957;border-top:2px solid var(--pad);border-radius:0;flex-direction:column;gap:2px;}
-body[data-preview-shell=flat] .platter{grid-column:2;grid-row:4;width:104px!important;height:104px!important;min-height:0;align-self:center;justify-self:center;margin:0;padding:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;border-radius:50%;border:2px solid #327fe9;background:radial-gradient(circle,#111318 55%,#272d37 56%,#0c0e12 67%,#202732 68%);box-shadow:0 0 0 4px #07090c,0 0 0 5px #3c444f}
-body[data-preview-shell=flat] .platter strong{}
+body[data-preview-shell=flat] .platter{grid-column:2;grid-row:4;width:104px;height:104px;min-height:0;align-self:center;justify-self:center;margin:0;padding:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;border-radius:50%;border:2px solid #327fe9;background:radial-gradient(circle,#111318 55%,#272d37 56%,#0c0e12 67%,#202732 68%);box-shadow:0 0 0 4px #07090c,0 0 0 5px #3c444f}
 body[data-preview-shell=flat] .platter small:first-of-type{color:#b4becd}
 body[data-preview-shell=flat] .tempo-control{grid-column:3;grid-row:2/7;min-height:130px;margin-right:2px;}
 body[data-preview-shell=flat] .preview-loop-strip{grid-column:1/3;grid-row:5;margin:0 4px}
@@ -366,21 +291,9 @@ body[data-preview-shell=flat] .deck-foot{grid-column:1/3;grid-row:7;padding:0 4p
 body[data-preview-shell=flat] .deck-foot button,body[data-preview-shell=flat] .deck-foot select{min-height:23px;height:23px;background:#202328;border-color:#3b4149;}
 body[data-preview-shell=flat] .preview-deck-utilities{grid-row:8;padding:3px 0;margin:0 4px 2px;gap:4px}
 body[data-preview-shell=flat] .preview-deck-utilities button{min-height:23px;height:23px;background:#1b1e22}
-body[data-preview-shell=flat] .preview-deck-utilities .track-gain-control{}
-body[data-preview-shell=flat] #mixer{background:#202329;border-radius:0;padding:5px 4px;gap:4px;border-color:#3c424c;align-self:stretch}
-body[data-preview-shell=flat] .channel-strip{grid-template-columns:40px 28px;gap:4px 1px}
-body[data-preview-shell=flat] .channel-strip>strong{grid-column:1;grid-row:1;color:#a9caff!important;}
+body[data-preview-shell=flat] #mixer{border-radius:0;border-color:#3c424c;align-self:stretch}
 body[data-preview-shell=flat] .cross-assign{grid-column:2;grid-row:1}
 body[data-preview-shell=flat] .cross-assign select{min-width:30px;width:34px;padding:0}
-body[data-preview-shell=flat] .knob-group:has(input[data-mix$=':trim']){grid-column:1;grid-row:2}
-body[data-preview-shell=flat] .knob-group:has(input[data-mix$=':high']){grid-column:1;grid-row:3}
-body[data-preview-shell=flat] .knob-group:has(input[data-mix$=':mid']){grid-column:1;grid-row:4}
-body[data-preview-shell=flat] .knob-group:has(input[data-mix$=':low']){grid-column:1;grid-row:5}
-body[data-preview-shell=flat] .knob-group:has(input[data-mix$=':filter']){grid-column:1;grid-row:6}
-body[data-preview-shell=flat] .knob-group{height:43px;min-height:43px}
-body[data-preview-shell=flat] .fader-group{grid-column:2;grid-row:2/7;align-self:stretch}
-body[data-preview-shell=flat] .fader-group input{height:188px;min-height:188px}
-body[data-preview-shell=flat] .channel-strip>button{grid-column:1/3;grid-row:7;width:100%;margin:0;min-height:25px}
 body[data-preview-shell=flat] .preview-mixer-footer{grid-template-columns:1fr;padding-top:4px;gap:4px;border-color:#414750}
 body[data-preview-shell=flat] .preview-mixer-footer .preview-headphones{min-height:24px}
 body[data-preview-shell=flat] .library{border-color:#33383f;grid-template-columns:180px minmax(0,1fr)}
@@ -391,36 +304,15 @@ body[data-preview-shell=flat][data-density=compact] .preview-loop-strip{grid-col
 body[data-preview-shell=flat][data-density=compact] .transport{grid-row:5}
 body[data-preview-shell=flat][data-density=compact] .deck-foot{grid-row:6}
 body[data-preview-shell=flat][data-density=compact] .preview-deck-utilities{grid-row:7}
-body[data-preview-shell=flat][data-density=compact] .knob-group{height:32px;min-height:32px;}
-body[data-preview-shell=flat][data-density=compact] .knob-group::before{top:10px;width:20px;height:20px;left:9px}
-body[data-preview-shell=flat][data-density=compact] .knob-group::after{top:12px;left:18px;height:7px;transform-origin:1px 8px}
-body[data-preview-shell=flat][data-density=compact] .fader-group input{height:144px;min-height:144px}
 body[data-preview-shell=flat][data-orientation=vertical] main{grid-template-columns:minmax(0,1fr) 240px minmax(0,1fr)}
 body[data-preview-shell=flat][data-library-focus=true] main{grid-template-columns:minmax(0,1fr) 196px minmax(0,1fr)}
 
 /* Paint the same native range's current value; keep its labeled input over the
    full track for mouse/keyboard operation, including WebKit's vertical range. */
-body[data-preview-shell=flat] .fader-group{position:relative;height:211px}
-body[data-preview-shell=flat] .fader-group::before{content:'';position:absolute;top:21px;bottom:7px;left:13px;width:4px;background:#07090c;border:1px solid #4e5968;box-shadow:-8px 0 0 -1px #343b46,8px 0 0 -1px #343b46}
-body[data-preview-shell=flat] .fader-group::after{content:'';position:absolute;left:2px;width:26px;height:12px;top:calc(21px + (1 - var(--preview-level,.8))*169px);border:1px solid #090c10;border-radius:1px;background:linear-gradient(#d5dbe2,#6e7b8e 42%,#11161e 44% 56%,#c1cad6 58%,#6c7888);box-shadow:0 1px 3px #000;pointer-events:none}
-body[data-preview-shell=flat] .fader-group input{opacity:.01;position:relative;z-index:1}
-body[data-preview-shell=flat] .fader-group:focus-within{outline:2px solid #83b9ff;outline-offset:1px}
-body[data-preview-shell=flat][data-density=compact] .fader-group{height:167px}
-body[data-preview-shell=flat][data-density=compact] .fader-group::after{top:calc(21px + (1 - var(--preview-level,.8))*125px)}
 /* With vertical waves above the mixer, use the wider central column to shorten
    channel banks, so their stack does not push an empty band below both decks. */
-body[data-preview-shell=flat][data-orientation=vertical] .channel-strip{grid-template-columns:36px 36px 28px;gap:4px 0}
 body[data-preview-shell=flat][data-orientation=vertical] .cross-assign{grid-column:2/4;grid-row:1;width:100%}
 body[data-preview-shell=flat][data-orientation=vertical] .cross-assign select{width:48px}
-body[data-preview-shell=flat][data-orientation=vertical] .knob-group:has(input[data-mix$=':trim']){grid-column:1;grid-row:2}
-body[data-preview-shell=flat][data-orientation=vertical] .knob-group:has(input[data-mix$=':high']){grid-column:2;grid-row:2}
-body[data-preview-shell=flat][data-orientation=vertical] .knob-group:has(input[data-mix$=':mid']){grid-column:2;grid-row:3}
-body[data-preview-shell=flat][data-orientation=vertical] .knob-group:has(input[data-mix$=':low']){grid-column:2;grid-row:4}
-body[data-preview-shell=flat][data-orientation=vertical] .knob-group:has(input[data-mix$=':filter']){grid-column:1;grid-row:3}
-body[data-preview-shell=flat][data-orientation=vertical] .channel-strip>button{grid-column:1;grid-row:4;width:34px;align-self:end}
-body[data-preview-shell=flat][data-orientation=vertical] .fader-group{grid-column:3;grid-row:2/5;height:118px}
-body[data-preview-shell=flat][data-orientation=vertical] .fader-group input{height:94px;min-height:94px}
-body[data-preview-shell=flat][data-orientation=vertical] .fader-group::after{top:calc(21px + (1 - var(--preview-level,.8))*76px)}
 body[data-preview-shell=flat][data-orientation=vertical] .preview-mixer-footer{grid-template-columns:minmax(0,1fr) 86px}
 /* Flat rekordbox direction: no simulated hardware bevels or raised surfaces. */
 body[data-preview-shell=flat]{--surface:#181818;--sunken:#090909;--raised:#242424;--line:#343434;--text:#ececec;--muted:#a0a0a0;--blue:#247aff}
@@ -442,14 +334,7 @@ body[data-preview-shell=flat] .pad{background:#111;border:0;border-inline-start:
 body[data-preview-shell=flat] .pad.set{background:#222}
 body[data-preview-shell=flat] .pad.active{background:#174579}
 body[data-preview-shell=flat] .platter{border:1px solid #4d83d5;border-radius:50%;background:#101010;box-shadow:none}
-body[data-preview-shell=flat] #mixer{background:#1b1b1b;border-color:#303030}
-body[data-preview-shell=flat] .knob-group::before{background:#252525;border:1px solid #676767;box-shadow:none}
-body[data-preview-shell=flat] .knob-group::after{background:#ddd;width:2px}
-body[data-preview-shell=flat] .knob-group:has(input[data-mix$=':filter'])::after{background:#ddd}
-body[data-preview-shell=flat] .channel-strip:first-child{border-color:#3a3a3a}
-body[data-preview-shell=flat] .fader-group::before{background:#080808;border:1px solid #444;box-shadow:-8px 0 0 -1px #333,8px 0 0 -1px #333}
-body[data-preview-shell=flat] .fader-group::after{background:linear-gradient(#a8a8a8 0 43%,#202020 43% 56%,#a8a8a8 56%);border:0;border-radius:0;box-shadow:none}
-body[data-preview-shell=flat] .channel-strip>button{background:#2a2a2a;border:0}
+body[data-preview-shell=flat] #mixer{border-color:#303030}
 body[data-preview-shell=flat] .preview-mixer-footer{border-color:#3a3a3a}
 body[data-preview-shell=flat] .preview-headphones{background:#262626;border:0;color:#b6b6b6}
 body[data-preview-shell=flat] .crossfader input{accent-color:#bdbdbd}
@@ -458,10 +343,7 @@ body[data-preview-shell=flat] .transport [data-action=cue]{border:0;color:#d8be6
 body[data-preview-shell=flat] .transport button.active,body[data-preview-shell=flat] .deck-foot button.active,body[data-preview-shell=flat] .preview-loop-strip button.active{background:#1a69cf;color:#fff}
 body[data-preview-shell=flat] .library,body[data-preview-shell=flat] .library-tools,body[data-preview-shell=flat] th{background:#1c1c1c;border-color:#303030}
 body[data-preview-shell=flat] .library-tools button,body[data-preview-shell=flat] .crate-tools button,body[data-preview-shell=flat] .preview-more summary{background:#242424;border:0}
-body[data-preview-shell=flat] .fader-group::after{background:#202020;border-top:5px solid #aaa;border-bottom:5px solid #aaa;box-sizing:border-box}
 body[data-preview-shell=flat] .workspace-bar{height:42px;gap:16px;padding-inline:12px}
-body[data-preview-shell=flat] .workspace-brand{}
-body[data-preview-shell=flat] .workspace-brand small{}
 body[data-preview-shell=flat] .workspace-switch button{min-height:28px;padding:4px 12px;}
 body[data-preview-shell=flat] .hybrid-controls{height:32px;padding-inline:12px;gap:12px}
 body[data-preview-shell=flat] .hybrid-controls :is(button,select){min-height:24px;height:24px;}

@@ -7,16 +7,20 @@ body[data-preview-shell=flat]{
  --grid-5:var(--dj-semantic-space-20);--grid-6:var(--dj-semantic-space-24);--grid-7:var(--dj-semantic-space-28);--grid-8:var(--dj-semantic-space-32);--grid-9:var(--dj-semantic-space-36);
  --grid-10:var(--dj-semantic-space-40);--grid-11:var(--dj-semantic-space-44);--grid-12:var(--dj-semantic-space-48);--grid-13:var(--dj-semantic-space-52);--grid-16:var(--dj-semantic-space-64);
  --rb-knob-size:var(--grid-6);--rb-knob-row:var(--grid-10);
- --rb-two-mixer-height:calc(var(--grid-12)*4 + var(--grid-3));
+
  --rb-channel-min:calc(var(--grid-16)*4 + var(--grid-7));
+ --rb-two-mixer-height:var(--dj-component-mixer-vertical-height);
 }
+body[data-preview-shell=flat].four-decks{--rb-center-width:var(--dj-component-mixer-four-width)}
+body[data-preview-shell=flat]:not(.four-decks)[data-orientation=vertical]{--rb-center-width:var(--dj-component-mixer-mirrored-width)}
+body[data-preview-shell=flat]:not(.four-decks)[data-orientation=horizontal]{--rb-center-width:var(--dj-component-mixer-horizontal-width)}
 body[data-preview-shell=flat][data-density=compact]{
  --rb-knob-size:var(--grid-5);--rb-knob-row:var(--grid-9);
- --rb-two-mixer-height:calc(var(--grid-12)*4 - var(--grid-1));
+
  --rb-channel-min:calc(var(--grid-16)*4 + var(--grid-3));
 }
 body[data-preview-shell=flat][data-orientation] main{grid-template-columns:minmax(0,1fr) 164px minmax(0,1fr);grid-template-rows:132px auto var(--grid-12) var(--rb-library-tracks,minmax(220px,1fr));gap:var(--grid-1);padding:var(--grid-1)}
-body[data-preview-shell=flat][data-orientation] .detail-horizontal{height:132px!important;grid-row:1!important;grid-column:1/-1!important;border:0}
+body[data-preview-shell=flat][data-orientation] .detail-horizontal{height:132px;grid-row:1;grid-column:1/-1;border:0}
 body[data-preview-shell=flat][data-orientation] .deck{display:grid;grid-template-columns:minmax(0,1fr) 64px 40px 108px 30px;grid-template-rows:var(--grid-13) var(--grid-9) minmax(calc(var(--grid-16)*2 + var(--grid-6)),1fr) var(--grid-7) var(--grid-6);gap:var(--grid-1);border:0;border-inline-end:1px solid var(--dj-semantic-border-strong);background:var(--dj-semantic-panel);border-radius:0;align-content:start;align-self:stretch;height:100%}
 body[data-preview-shell=flat][data-orientation] .deck:nth-of-type(1){grid-column:1;grid-row:2}
 body[data-preview-shell=flat][data-orientation] .deck:nth-of-type(even){grid-column:3;grid-row:2;grid-template-columns:40px 108px 30px 64px minmax(0,1fr)}
@@ -25,7 +29,6 @@ body[data-preview-shell=flat][data-orientation] .deck-number{position:absolute;l
 body[data-preview-shell=flat][data-orientation] .rb-artwork{grid-column:1;grid-row:1;width:32px;height:32px;align-self:center;background:var(--dj-semantic-background);position:relative}
 body[data-preview-shell=flat][data-orientation] .rb-artwork::after{content:'';position:absolute;inset:6px;border:7px solid #222;border-radius:50%;background:var(--dj-semantic-background)}
 body[data-preview-shell=flat][data-orientation] .deck-title{grid-column:2;grid-row:1;align-self:center;min-width:0;overflow:hidden}
-body[data-preview-shell=flat][data-orientation] .deck-title strong{}
 body[data-preview-shell=flat][data-orientation] .deck-title small{margin-top:2px;color:var(--dj-semantic-text-muted);display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 body[data-preview-shell=flat][data-orientation] .preview-deck-time{grid-column:3;grid-row:1;align-self:end;padding-bottom:4px;min-width:0;display:flex;flex-direction:column;gap:3px}
 body[data-preview-shell=flat][data-orientation] .preview-deck-time time{color:var(--dj-semantic-text)}
@@ -37,14 +40,14 @@ body[data-preview-shell=flat][data-orientation] .preview-key-row [data-action=ke
 body[data-preview-shell=flat][data-orientation] .preview-key-row [data-action=keyDown]{grid-column:1;grid-row:2;min-width:0;height:20px;min-height:20px;padding:0;background:transparent}
 body[data-preview-shell=flat][data-orientation] .preview-key-row [data-action=keyUp]{grid-column:3;grid-row:2;min-width:0;height:20px;min-height:20px;padding:0;background:transparent}
 body[data-preview-shell=flat][data-orientation] .rb-sync-controls{grid-column:5;grid-row:1;display:grid;grid-template-rows:28px 16px;gap:2px}
-body[data-preview-shell=flat][data-orientation] .rb-sync-controls button{display:block!important;min-height:0;padding:1px 3px;white-space:normal;background:var(--dj-semantic-control);border:0;border-radius:0}
+body[data-preview-shell=flat][data-orientation] .rb-sync-controls button{display:block;min-height:0;padding:1px 3px;white-space:normal;background:var(--dj-semantic-control);border:0;border-radius:0}
 body[data-preview-shell=flat][data-orientation] .rb-sync-controls [data-action=syncOff]{border:1px solid var(--dj-semantic-border-strong);background:transparent}
 body[data-preview-shell=flat][data-orientation] .rb-sync-controls button.active{background:var(--dj-semantic-active);color:white}
 body[data-preview-shell=flat][data-orientation] .wave-wrap{grid-row:2;grid-column:1/-1;height:36px;margin:0;background:var(--dj-semantic-recessed);border:0;border-radius:0}
 body[data-preview-shell=flat][data-orientation] .wave-label{bottom:1px;right:2px;background:#08080899}
 body[data-preview-shell=flat][data-orientation] .deck-body>div:first-child{grid-row:3;grid-column:1;padding:4px 2px 0 6px;align-self:start;min-width:0}
 body[data-preview-shell=flat][data-orientation] .deck:nth-of-type(even) .deck-body>div:first-child{grid-column:5;padding:4px 6px 0 2px}
-body[data-preview-shell=flat][data-orientation] .deck-tabs{display:none!important}
+body[data-preview-shell=flat][data-orientation] .deck-tabs{display:none}
 body[data-preview-shell=flat][data-orientation] .pads{display:grid;grid-auto-flow:column;grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:repeat(4,22px);gap:2px}
 body[data-preview-shell=flat][data-orientation][data-rb-pad-mode] .pad{min-width:0}
 body[data-preview-shell=flat][data-orientation] .pad{height:22px;min-height:22px;border:0;border-radius:0;background:var(--dj-semantic-background);justify-content:flex-start;flex-direction:row;gap:4px;padding:2px 5px;text-align:left;box-shadow:none}
@@ -70,42 +73,25 @@ body[data-preview-shell=flat][data-orientation] .transport [data-action=cue]{ord
 body[data-preview-shell=flat][data-orientation] .transport [data-action=play]{order:2}
 body[data-preview-shell=flat][data-orientation] .transport :is([data-action=cue],[data-action=play]){width:var(--grid-9);height:var(--grid-9);min-width:var(--grid-9);min-height:var(--grid-9);flex:none;border-radius:50%;background:var(--dj-semantic-panel);border:1px solid #a98e42;color:#d7c991;padding:var(--grid-0);}
 body[data-preview-shell=flat][data-orientation] .transport [data-action=play]{border-color:#427d4a;color:#a8c6ac}
-body[data-preview-shell=flat][data-orientation] .deck .platter{grid-row:3;grid-column:4;width:104px!important;height:104px!important;align-self:center;justify-self:center;padding:0;margin:0;border:2px solid #2b73d0;border-radius:50%;background:#070707;box-shadow:0 0 0 5px var(--dj-semantic-panel),0 0 0 7px #b7b7b7;display:flex;flex-direction:column;justify-content:center;gap:4px}
+body[data-preview-shell=flat][data-orientation] .deck .platter{grid-row:3;grid-column:4;width:104px;height:104px;align-self:center;justify-self:center;padding:0;margin:0;border:2px solid #2b73d0;border-radius:50%;background:#070707;box-shadow:0 0 0 5px var(--dj-semantic-panel),0 0 0 7px #b7b7b7;display:flex;flex-direction:column;justify-content:center;gap:4px}
 body[data-preview-shell=flat][data-orientation] .deck:nth-of-type(even) .platter{grid-column:2}
-body[data-preview-shell=flat][data-orientation] .platter strong{}
-body[data-preview-shell=flat][data-orientation] .platter small:first-of-type{}
 body[data-preview-shell=flat][data-orientation] .rb-deck-options{grid-column:5;grid-row:3;display:flex;flex-direction:column;justify-content:space-between;align-items:center;padding:var(--grid-1) var(--grid-0) var(--grid-2);gap:var(--grid-1)}
 body[data-preview-shell=flat][data-orientation] .deck:nth-of-type(even) .rb-deck-options{grid-column:3}
 body[data-preview-shell=flat][data-orientation] .rb-deck-options button{min-width:var(--grid-7);min-height:var(--grid-6);padding:var(--grid-0);background:var(--dj-semantic-control);border:0}
 body[data-preview-shell=flat][data-orientation] .rb-deck-options button.active{background:#2479e2;color:#fff}
 body[data-preview-shell=flat][data-orientation] .preview-deck-utilities{grid-column:1/-1;grid-row:4;display:flex;flex-wrap:nowrap;align-items:center;justify-content:flex-start;gap:var(--grid-1);padding:var(--grid-0) var(--grid-1);margin:var(--grid-0);border-top:1px solid #343434;min-width:0}
 body[data-preview-shell=flat][data-orientation] .preview-deck-utilities button{min-height:var(--grid-6);height:var(--grid-6);padding:var(--grid-0) var(--grid-1);white-space:nowrap}
-body[data-preview-shell=flat][data-orientation] .track-gain-control{margin-right:0!important;gap:2px!important;flex:none}
-body[data-preview-shell=flat][data-orientation] .track-gain-control input{width:34px!important;max-width:34px!important}
+body[data-preview-shell=flat][data-orientation] .track-gain-control{margin-right:0;gap:2px;flex:none}
+body[data-preview-shell=flat][data-orientation] .track-gain-control input{width:34px;max-width:34px}
 body[data-preview-shell=flat][data-orientation] .preview-deck-utilities .tempo-control{display:flex;flex-direction:row;align-items:center;gap:2px;position:static;min-height:0;height:20px;width:92px;flex:none;margin:0;grid-row:auto;grid-column:auto}
 body[data-preview-shell=flat][data-orientation] .tempo-control input{writing-mode:horizontal-tb;direction:ltr;width:61px;height:15px;min-height:0;margin:0}
 body[data-preview-shell=flat][data-orientation] .deck-foot{grid-column:1/-1;grid-row:5;display:flex;align-items:center;flex-wrap:nowrap;gap:var(--grid-1);margin:var(--grid-0);padding:var(--grid-0) var(--grid-1);min-width:0;overflow:visible}
 body[data-preview-shell=flat][data-orientation] .deck-foot .loop-line{display:flex;gap:2px;margin:0;order:-1;flex:none}
 body[data-preview-shell=flat][data-orientation] .deck-foot button{min-height:var(--grid-6);height:var(--grid-6);padding:var(--grid-0) var(--grid-1);white-space:nowrap}
-body[data-preview-shell=flat][data-orientation] .deck-foot .muted,body[data-preview-shell=flat][data-orientation] .scratch-status{display:inline-block!important;min-width:0;margin:0;padding:0;flex-basis:auto;white-space:nowrap;color:var(--dj-semantic-text-muted)}
-body[data-preview-shell=flat][data-orientation] .deck-foot .beat-position{margin-left:auto!important;min-height:0;}
+body[data-preview-shell=flat][data-orientation] .deck-foot .muted,body[data-preview-shell=flat][data-orientation] .scratch-status{display:inline-block;min-width:0;margin:0;padding:0;flex-basis:auto;white-space:nowrap;color:var(--dj-semantic-text-muted)}
+body[data-preview-shell=flat][data-orientation] .deck-foot .beat-position{margin-left:auto;min-height:0;}
 body[data-preview-shell=flat][data-orientation] .deck-foot .deck-disclosure{display:block;min-width:39px;min-height:var(--grid-6);flex:none;margin-left:auto}
-body[data-preview-shell=flat][data-orientation] #mixer{grid-column:2;grid-row:2;grid-template-columns:1fr 1fr;gap:var(--grid-2);padding:var(--grid-2);background:var(--dj-semantic-panel);border:0;align-self:stretch;align-content:stretch;min-height:var(--rb-channel-min)}
-body[data-preview-shell=flat][data-orientation] .channel-strip{display:grid;grid-template-columns:1fr;grid-template-rows:var(--grid-3) repeat(4,var(--rb-knob-row)) var(--grid-6) minmax(var(--grid-12),1fr);justify-items:center;gap:var(--grid-1);padding:var(--grid-0)!important;border:0!important;min-height:0;height:100%}
-body[data-preview-shell=flat][data-orientation] .channel-strip>strong{grid-column:1;grid-row:1;color:var(--dj-semantic-text-muted);display:block;border:0;padding:var(--grid-0);margin:var(--grid-0)}
-body[data-preview-shell=flat][data-orientation] .channel-strip .knob-group{grid-column:1;width:var(--grid-13);height:var(--rb-knob-row);min-height:var(--rb-knob-row);padding:var(--grid-0);margin:var(--grid-0);display:flex;align-items:center;justify-content:flex-end;flex-direction:column;color:var(--dj-semantic-text);position:relative;box-sizing:border-box}
-body[data-preview-shell=flat][data-orientation] .knob-group:has(input[data-mix$=':trim']){grid-row:2}
-body[data-preview-shell=flat][data-orientation] .knob-group:has(input[data-mix$=':high']){grid-row:3}
-body[data-preview-shell=flat][data-orientation] .knob-group:has(input[data-mix$=':mid']){grid-row:4}
-body[data-preview-shell=flat][data-orientation] .knob-group:has(input[data-mix$=':low']){grid-row:5}
-body[data-preview-shell=flat][data-orientation] .channel-strip .knob-group::before{top:var(--grid-0);left:calc(50% - var(--rb-knob-size)/2);width:var(--rb-knob-size);height:var(--rb-knob-size);box-sizing:border-box;border:3px solid var(--dj-semantic-border-strong);border-bottom-color:transparent;border-radius:50%;background:var(--dj-semantic-panel);box-shadow:none}
-body[data-preview-shell=flat][data-orientation] .channel-strip .knob-group::after{top:calc(var(--grid-1)/2);left:calc(50% - 1px);height:var(--grid-2);transform-origin:1px calc(var(--rb-knob-size)/2 - var(--grid-1)/2);width:2px;background:var(--dj-semantic-text)}
-body[data-preview-shell=flat][data-orientation] .channel-strip .knob-group input{position:absolute;inset:var(--grid-0);width:100%;height:100%;min-height:0;max-height:100%;padding:var(--grid-0);margin:var(--grid-0);border:0;box-sizing:border-box;opacity:.01}
-body[data-preview-shell=flat][data-orientation] .channel-strip>button{grid-column:1;grid-row:6;width:var(--grid-11);height:var(--grid-6);min-height:var(--grid-6);padding:var(--grid-0);margin:var(--grid-0);background:var(--dj-semantic-control);border:0;align-self:center}
-body[data-preview-shell=flat][data-orientation] .channel-strip .fader-group{grid-column:1;grid-row:7;position:relative;height:100%;min-height:0;width:var(--grid-8);padding:var(--grid-0);margin:var(--grid-0);}
-body[data-preview-shell=flat][data-orientation] .fader-group::before{top:var(--grid-1);bottom:var(--grid-1);left:calc(50% - 1px);width:2px;background:#2276e4;border:0;box-shadow:-12px 0 0 -0.5px var(--dj-semantic-border-strong),12px 0 0 -0.5px var(--dj-semantic-border-strong)}
-body[data-preview-shell=flat][data-orientation] .fader-group::after{top:calc(var(--grid-1) + (1 - var(--preview-level,.8))*(100% - var(--grid-4)));left:var(--grid-1);width:var(--grid-6);height:var(--grid-2);background:var(--dj-semantic-text-muted);border:0;box-shadow:none}
-body[data-preview-shell=flat][data-orientation] .fader-group input{position:absolute;inset:var(--grid-0);width:100%;height:100%;min-height:0;max-height:100%;padding:var(--grid-0);border:0;opacity:.01;margin:var(--grid-0);box-sizing:border-box}
+body[data-preview-shell=flat][data-orientation] #mixer{grid-column:2;grid-row:2;grid-template-columns:1fr 1fr;align-self:stretch}
 body[data-preview-shell=flat][data-orientation] .library{grid-row:4;margin:0;border:0;grid-template-columns:180px minmax(0,1fr)}
 body[data-preview-shell=flat][data-orientation] .library-tools{min-height:30px;height:30px;padding:3px 5px}
 body[data-preview-shell=flat][data-orientation] th{height:25px;background:#151515}
@@ -126,11 +112,11 @@ body[data-preview-shell=flat]{--rb-wave-height:132px;--rb-pair-height:150px;--rb
 body[data-preview-shell=flat][data-wave-size=small]{--rb-wave-height:88px;--rb-pair-height:120px}
 body[data-preview-shell=flat][data-wave-size=large]{--rb-wave-height:180px;--rb-pair-height:200px}
 body[data-preview-shell=flat][data-orientation=horizontal] main{height:calc(100dvh - var(--workspace-chrome-height,122px));min-height:0;grid-template-rows:var(--rb-wave-height) auto var(--grid-12) var(--rb-library-tracks,minmax(180px,1fr))}
-body[data-preview-shell=flat][data-orientation=horizontal] .detail-horizontal{height:var(--rb-wave-height)!important}
+body[data-preview-shell=flat][data-orientation=horizontal] .detail-horizontal{height:var(--rb-wave-height)}
 body[data-preview-shell=flat][data-orientation=vertical] main{height:calc(100dvh - var(--workspace-chrome-height,122px));min-height:0;grid-template-columns:minmax(0,1fr) 280px minmax(0,1fr);grid-template-rows:var(--rb-pair-height) var(--rb-two-mixer-height) var(--grid-12) var(--rb-library-tracks,minmax(180px,1fr))}
 body[data-preview-shell=flat][data-orientation=vertical] .deck:nth-of-type(odd){grid-column:1;grid-row:1/3}
 body[data-preview-shell=flat][data-orientation=vertical] .deck:nth-of-type(even){grid-column:3;grid-row:1/3}
-body[data-preview-shell=flat][data-orientation=vertical] .detail-waves{grid-column:2!important;grid-row:1!important;height:var(--rb-pair-height)!important;border:0;border-radius:0}
+body[data-preview-shell=flat][data-orientation=vertical] .detail-waves{grid-column:2;grid-row:1;height:var(--rb-pair-height);border:0;border-radius:0}
 body[data-preview-shell=flat][data-orientation=vertical] #mixer{grid-column:2;grid-row:2;grid-template-columns:repeat(2,minmax(0,1fr))}
 body[data-preview-shell=flat][data-orientation=vertical] .library{grid-row:4}
 body[data-preview-shell=flat][data-density=compact][data-wave-size=medium]{--rb-pair-height:calc(var(--grid-16) + var(--grid-9))}
@@ -151,25 +137,20 @@ body[data-preview-shell=flat].four-decks .deck-head{height:44px;padding-block:1p
 body[data-preview-shell=flat].four-decks .wave-wrap{height:28px}
 body[data-preview-shell=flat].four-decks .pads{grid-template-rows:repeat(4,19px)}
 body[data-preview-shell=flat].four-decks .pad{height:19px;min-height:19px}
-body[data-preview-shell=flat].four-decks .deck .platter{width:94px!important;height:94px!important}
-body[data-preview-shell=flat].four-decks[data-density=compact] .deck .platter{width:70px!important;height:70px!important}
-body[data-preview-shell=flat].four-decks[data-orientation] #mixer{grid-column:2;grid-row:2/4;grid-template-columns:repeat(4,minmax(0,1fr));grid-template-rows:1fr;align-content:start;align-items:stretch}
-body[data-preview-shell=flat].four-decks .channel-strip{grid-row:1;grid-template-columns:1fr;height:100%}
-body[data-preview-shell=flat].four-decks .channel-strip[data-rb-channel='2']{grid-column:1}
-body[data-preview-shell=flat].four-decks .channel-strip[data-rb-channel='0']{grid-column:2}
-body[data-preview-shell=flat].four-decks .channel-strip[data-rb-channel='1']{grid-column:3}
-body[data-preview-shell=flat].four-decks .channel-strip[data-rb-channel='3']{grid-column:4}
+body[data-preview-shell=flat].four-decks .deck .platter{width:94px;height:94px}
+body[data-preview-shell=flat].four-decks[data-density=compact] .deck .platter{width:70px;height:70px}
+body[data-preview-shell=flat].four-decks[data-orientation] #mixer{grid-column:2;grid-row:2/4;grid-template-columns:repeat(4,minmax(0,1fr));grid-template-rows:1fr}
 body[data-preview-shell=flat].four-decks .rb-mixer-band{grid-row:4}
 body[data-preview-shell=flat].four-decks .library{grid-row:5;min-height:180px}
 body[data-preview-shell=flat].four-decks[data-orientation=vertical] main{grid-template-columns:minmax(0,1fr) 280px minmax(0,1fr);grid-template-rows:var(--rb-four-height) var(--rb-four-height) var(--grid-12) var(--rb-library-tracks,minmax(180px,1fr))}
 body[data-preview-shell=flat].four-decks[data-orientation=vertical] .deck:nth-of-type(1),body[data-preview-shell=flat].four-decks[data-orientation=vertical] .deck:nth-of-type(2){grid-row:1}
 body[data-preview-shell=flat].four-decks[data-orientation=vertical] .deck:nth-of-type(3),body[data-preview-shell=flat].four-decks[data-orientation=vertical] .deck:nth-of-type(4){grid-row:2}
-body[data-preview-shell=flat].four-decks[data-orientation=vertical] .detail-waves{height:var(--rb-four-height)!important}
+body[data-preview-shell=flat].four-decks[data-orientation=vertical] .detail-waves{height:var(--rb-four-height)}
 body[data-preview-shell=flat].four-decks[data-orientation=vertical] #mixer{grid-row:2}
 body[data-preview-shell=flat].four-decks[data-orientation=vertical] .rb-mixer-band{grid-row:3}
 body[data-preview-shell=flat].four-decks[data-orientation=vertical] .library{grid-row:4}
 /* Visibility never mutes/resets a channel. Removing panels reclaims the grid. */
-body[data-preview-shell=flat][data-rb-mixer=false] :is(#mixer,.rb-mixer-band){display:none!important}
+body[data-preview-shell=flat][data-rb-mixer=false] :is(#mixer,.rb-mixer-band){display:none}
 body[data-preview-shell=flat][data-rb-mixer=false][data-orientation=horizontal] main{grid-template-columns:1fr 1fr;grid-template-rows:var(--rb-wave-height) auto var(--rb-library-tracks,minmax(180px,1fr))}
 body[data-preview-shell=flat][data-rb-mixer=false][data-orientation=horizontal] .deck:nth-of-type(even){grid-column:2}
 body[data-preview-shell=flat][data-rb-mixer=false][data-orientation=horizontal] .library{grid-row:3}
@@ -178,7 +159,7 @@ body[data-preview-shell=flat][data-rb-mixer=false][data-orientation=vertical] .l
 body[data-preview-shell=flat][data-rb-mixer=false].four-decks[data-orientation=horizontal] main{grid-template-rows:var(--rb-wave-height) var(--rb-four-height) var(--rb-four-height) var(--rb-library-tracks,minmax(180px,1fr))}
 body[data-preview-shell=flat][data-rb-mixer=false].four-decks[data-orientation=horizontal] .library{grid-row:4}
 body[data-preview-shell=flat][data-rb-mixer=false].four-decks[data-orientation=vertical] main{grid-template-columns:minmax(0,1fr) 180px minmax(0,1fr);grid-template-rows:var(--rb-four-height) var(--rb-four-height) var(--rb-library-tracks,minmax(180px,1fr))}
-body[data-preview-shell=flat][data-rb-mixer=false].four-decks[data-orientation=vertical] .detail-waves{grid-row:1/3!important;height:100%!important}
+body[data-preview-shell=flat][data-rb-mixer=false].four-decks[data-orientation=vertical] .detail-waves{grid-row:1/3;height:100%}
 /* Library focus keeps transport and mixing controls accessible. */
 body[data-preview-shell=flat][data-library-focus=true][data-orientation] main{grid-template-rows:auto var(--grid-12) var(--rb-library-tracks,minmax(180px,1fr))}
 body[data-preview-shell=flat][data-library-focus=true][data-orientation] .deck:nth-of-type(n),body[data-preview-shell=flat][data-library-focus=true][data-orientation] #mixer{grid-row:1}
@@ -193,30 +174,15 @@ body[data-preview-shell=flat][data-library-focus=true][data-rb-mixer=false][data
 body[data-preview-shell=flat][data-library-focus=true][data-rb-mixer=false][data-orientation] .library{grid-row:2}
 body[data-preview-shell=flat][data-library-focus=true][data-rb-mixer=false].four-decks[data-orientation] main{grid-template-rows:var(--rb-four-height) var(--rb-four-height) var(--rb-library-tracks,minmax(180px,1fr))}
 body[data-preview-shell=flat][data-library-focus=true][data-rb-mixer=false].four-decks[data-orientation] .library{grid-row:3}
-body[data-preview-shell=flat][data-orientation] .channel-strip .knob-group:has(input[data-mix]){grid-column:1}
 body[data-preview-shell=flat][data-orientation] .rb-cross-controls .crossfader input{width:100%;margin-inline:0;box-sizing:border-box}
 /* Full-track source thumbnails belong to each library row, not a deck. */
 .library-wave-preview{display:none}
 body[data-preview-shell=flat][data-library-waveforms=true] .library-wave-preview{display:table-cell;width:160px;min-width:160px;max-width:160px;padding:0 5px;vertical-align:middle}
-body[data-preview-shell=flat] th.library-wave-preview{}
 body[data-preview-shell=flat] .library-wave-preview img{display:block;width:150px;height:22px;object-fit:fill;background:var(--dj-semantic-recessed)}
 body[data-preview-shell=flat] .library-wave-preview span{color:var(--dj-semantic-text-muted);white-space:nowrap}
 body[data-preview-shell=flat] .library-wave-preview button{min-height:22px;height:22px;padding:1px 5px;margin-left:3px}
 /* Screenshot203: four aligned rotary rows; no FILTER row in this view. */
-body[data-preview-shell=flat][data-orientation] .channel-strip .knob-group:has(input[data-mix$=':filter']){display:none!important}
 /* The two-deck vertical reference has EQ beside trim/CUE/fader, mirrored. */
-body[data-preview-shell=flat][data-orientation]:not(.four-decks):is([data-orientation=vertical],[data-density=compact]) #mixer{padding:var(--grid-2);gap:var(--grid-3);min-height:var(--rb-two-mixer-height)}
-body[data-preview-shell=flat][data-orientation]:not(.four-decks):is([data-orientation=vertical],[data-density=compact]) .channel-strip{grid-template-columns:var(--grid-13) var(--grid-13);grid-template-rows:var(--grid-3) repeat(4,var(--rb-knob-row));gap:var(--grid-1);justify-content:center}
-body[data-preview-shell=flat][data-orientation]:not(.four-decks):is([data-orientation=vertical],[data-density=compact]) .channel-strip>strong{grid-column:1/-1}
-body[data-preview-shell=flat][data-orientation]:not(.four-decks):is([data-orientation=vertical],[data-density=compact]) .channel-strip .knob-group:has(input[data-mix$=':trim']){grid-column:1;grid-row:2}
-body[data-preview-shell=flat][data-orientation]:not(.four-decks):is([data-orientation=vertical],[data-density=compact]) .channel-strip .knob-group:has(input[data-mix$=':high']){grid-column:2;grid-row:2}
-body[data-preview-shell=flat][data-orientation]:not(.four-decks):is([data-orientation=vertical],[data-density=compact]) .channel-strip .knob-group:has(input[data-mix$=':mid']){grid-column:2;grid-row:3}
-body[data-preview-shell=flat][data-orientation]:not(.four-decks):is([data-orientation=vertical],[data-density=compact]) .channel-strip .knob-group:has(input[data-mix$=':low']){grid-column:2;grid-row:4}
-body[data-preview-shell=flat][data-orientation]:not(.four-decks):is([data-orientation=vertical],[data-density=compact]) .channel-strip>button{grid-column:1;grid-row:3}
-body[data-preview-shell=flat][data-orientation]:not(.four-decks):is([data-orientation=vertical],[data-density=compact]) .channel-strip .fader-group{grid-column:1;grid-row:4/6}
-body[data-preview-shell=flat][data-orientation]:not(.four-decks):is([data-orientation=vertical],[data-density=compact]) .channel-strip:nth-child(2) .knob-group:has(input[data-mix$=':trim']){grid-column:2}
-body[data-preview-shell=flat][data-orientation]:not(.four-decks):is([data-orientation=vertical],[data-density=compact]) .channel-strip:nth-child(2) .knob-group:has(input[data-mix$=':high']),body[data-preview-shell=flat][data-orientation]:not(.four-decks):is([data-orientation=vertical],[data-density=compact]) .channel-strip:nth-child(2) .knob-group:has(input[data-mix$=':mid']),body[data-preview-shell=flat][data-orientation]:not(.four-decks):is([data-orientation=vertical],[data-density=compact]) .channel-strip:nth-child(2) .knob-group:has(input[data-mix$=':low']){grid-column:1}
-body[data-preview-shell=flat][data-orientation]:not(.four-decks):is([data-orientation=vertical],[data-density=compact]) .channel-strip:nth-child(2)>button,body[data-preview-shell=flat][data-orientation]:not(.four-decks):is([data-orientation=vertical],[data-density=compact]) .channel-strip:nth-child(2) .fader-group{grid-column:2}
 /* Native-style monitor knobs beside the centered crossfader. */
 body[data-preview-shell=flat] .rb-monitor-controls svg{width:20px;height:20px;fill:none;stroke:var(--dj-semantic-text);stroke-width:2;stroke-linejoin:round}
 body[data-preview-shell=flat] .rb-monitor-knob{position:relative;display:grid;grid-template-columns:var(--grid-8) auto;align-items:center;gap:var(--grid-1);height:var(--grid-8);padding:var(--grid-0);min-width:var(--grid-16);color:#bbb;user-select:none}
@@ -228,18 +194,13 @@ body[data-preview-shell=flat] .rb-monitor-knob input{position:absolute;inset:var
 body[data-preview-shell=flat] .rb-monitor-knob:focus-within{outline:2px solid var(--dj-semantic-focus);outline-offset:2px}
 
 /* Horizontal4 spans two deck rows; keep one coherent mixer control group. */
-body[data-preview-shell=flat].four-decks[data-orientation=horizontal] .channel-strip{
- grid-template-rows:var(--grid-3) repeat(4,var(--rb-knob-row)) var(--grid-6) calc(var(--grid-16)*2);
- align-content:center;
-}
-body[data-preview-shell=flat][data-orientation] .channel-strip .fader-group:focus-within{outline:2px solid var(--dj-semantic-focus);outline-offset:2px}
 /* HTML209 — proportions measured from REA captures208.
    Four-deck rows ~208px; center ~16.8% of the reference window. Original
    controls remain bound; only Compact geometry is changed here. */
 body[data-preview-shell=flat][data-density=compact]{
- --rb-four-height:208px;--rb-center-width:clamp(240px,16.8vw,280px);
+ --rb-four-height:208px;
  --rb-knob-size:18px;--rb-knob-row:32px;--rb-channel-min:240px;
- --rb-two-mixer-height:148px;--rb-pair-height:72px;--rb-compact-wave-height:176px;
+ --rb-pair-height:72px;--rb-compact-wave-height:176px;
 }
 body[data-preview-shell=flat].four-decks[data-density=compact]{--rb-four-height:208px}
 body[data-preview-shell=flat][data-density=compact][data-wave-size=medium]{--rb-pair-height:72px}
@@ -269,7 +230,7 @@ body[data-preview-shell=flat][data-orientation][data-density=compact] .transport
 body[data-preview-shell=flat][data-orientation][data-density=compact] .deck:nth-of-type(even) .transport{grid-column:1}
 body[data-preview-shell=flat][data-orientation][data-density=compact] .transport select{height:20px;min-height:20px;width:40px}
 body[data-preview-shell=flat][data-orientation][data-density=compact] .transport :is([data-action=cue],[data-action=play]){width:28px;min-width:28px;height:28px;min-height:28px;}
-body[data-preview-shell=flat][data-orientation][data-density=compact] .deck .platter{grid-column:4;width:80px!important;height:80px!important;box-shadow:0 0 0 3px var(--dj-semantic-panel),0 0 0 4px var(--dj-semantic-text-muted)}
+body[data-preview-shell=flat][data-orientation][data-density=compact] .deck .platter{grid-column:4;width:calc(var(--rb-disc-column) - var(--dj-semantic-inset));height:calc(var(--rb-disc-column) - var(--dj-semantic-inset));box-shadow:0 0 0 3px var(--dj-semantic-panel),0 0 0 4px var(--dj-semantic-text-muted)}
 body[data-preview-shell=flat][data-orientation][data-density=compact] .deck:nth-of-type(even) .platter{grid-column:2}
 body[data-preview-shell=flat][data-orientation][data-density=compact] .rb-deck-options{grid-column:5;padding:0;gap:4px}
 body[data-preview-shell=flat][data-orientation][data-density=compact] .deck:nth-of-type(even) .rb-deck-options{grid-column:3}
@@ -277,26 +238,16 @@ body[data-preview-shell=flat][data-orientation][data-density=compact] :is(.previ
 body[data-preview-shell=flat][data-orientation][data-density=compact] :is(.preview-deck-utilities,.deck-foot) button,
 body[data-preview-shell=flat][data-orientation][data-density=compact] .deck-foot .deck-disclosure{height:20px;min-height:20px;padding-block:0}
 body[data-preview-shell=flat][data-orientation][data-density=compact] .deck-foot .loop-line{gap:2px}
-body[data-preview-shell=flat][data-orientation][data-density=compact] #mixer{padding:4px 8px;gap:4px}
-body[data-preview-shell=flat][data-orientation][data-density=compact] .channel-strip{grid-template-rows:12px repeat(4,32px) 20px minmax(48px,1fr);gap:4px;align-content:stretch}
-body[data-preview-shell=flat][data-orientation][data-density=compact] .channel-strip .knob-group{}
-body[data-preview-shell=flat][data-orientation][data-density=compact] .channel-strip>button{height:20px;min-height:20px;width:40px;}
-body[data-preview-shell=flat][data-orientation][data-density=compact]:not(.four-decks) #mixer{min-height:var(--rb-two-mixer-height);gap:12px;padding:4px 8px}
-body[data-preview-shell=flat][data-orientation][data-density=compact]:not(.four-decks) .channel-strip{grid-template-columns:44px 44px;grid-template-rows:12px repeat(3,32px) 12px;align-content:center}
-body[data-preview-shell=flat][data-orientation][data-density=compact]:not(.four-decks) .channel-strip .knob-group{width:44px}
 /* Five knob rows, cue and fader require272px inside the medium4V mixer. */
 body[data-preview-shell=flat].four-decks[data-orientation=vertical][data-density=compact][data-wave-size=medium]:not(:has(.deck[data-rb-pad-mode=Loops])){--rb-four-height:228px}
 /*4V: waveform over one row of four channels; row boundaries stay shared. */
 body[data-preview-shell=flat].four-decks[data-orientation=vertical][data-density=compact][data-rb-mixer=true][data-library-focus=false] main{grid-template-rows:var(--rb-compact-wave-height) calc(var(--rb-four-height) - var(--rb-compact-wave-height) - 4px) var(--rb-four-height) 44px var(--rb-library-tracks,minmax(180px,1fr))}
 body[data-preview-shell=flat].four-decks[data-orientation=vertical][data-density=compact][data-rb-mixer=true][data-library-focus=false] .deck:nth-of-type(-n+2){grid-row:1/3}
 body[data-preview-shell=flat].four-decks[data-orientation=vertical][data-density=compact][data-rb-mixer=true][data-library-focus=false] .deck:nth-of-type(n+3){grid-row:3}
-body[data-preview-shell=flat].four-decks[data-orientation=vertical][data-density=compact][data-rb-mixer=true][data-library-focus=false] .detail-waves{height:var(--rb-compact-wave-height)!important}
+body[data-preview-shell=flat].four-decks[data-orientation=vertical][data-density=compact][data-rb-mixer=true][data-library-focus=false] .detail-waves{height:var(--rb-compact-wave-height)}
 body[data-preview-shell=flat].four-decks[data-orientation=vertical][data-density=compact][data-rb-mixer=true][data-library-focus=false] #mixer{grid-row:2/4}
 body[data-preview-shell=flat].four-decks[data-orientation=vertical][data-density=compact][data-rb-mixer=true][data-library-focus=false] .rb-mixer-band{grid-row:4}
 body[data-preview-shell=flat].four-decks[data-orientation=vertical][data-density=compact][data-rb-mixer=true][data-library-focus=false] .library{grid-row:5}
-body[data-preview-shell=flat].four-decks[data-orientation=vertical][data-density=compact] .channel-strip[data-rb-channel='0']{grid-column:1}
-body[data-preview-shell=flat].four-decks[data-orientation=vertical][data-density=compact] .channel-strip[data-rb-channel='1']{grid-column:2}
-body[data-preview-shell=flat].four-decks[data-orientation=vertical][data-density=compact] .channel-strip[data-rb-channel='2']{grid-column:3}
 body[data-preview-shell=flat][data-orientation][data-density=compact] .rb-mixer-band{height:44px}
 /* Mixer-off reclaims its column; the shared waveform stays usable in4V. */
 body[data-preview-shell=flat][data-orientation=horizontal][data-density=compact][data-rb-mixer=false] main{grid-template-columns:1fr 1fr}
@@ -304,7 +255,7 @@ body[data-preview-shell=flat][data-orientation=vertical][data-density=compact][d
 
 /* Saved/auto/roll mode selectors stay visible in Compact without changing
    the selected pad mode. Grow the shared deck row by one control line. */
-body[data-workspace=rekordbox][data-density=compact]:has(.deck[data-rb-pad-mode=Loops]){--rb-four-height:240px;--rb-two-mixer-height:164px}
+body[data-workspace=rekordbox][data-density=compact]:has(.deck[data-rb-pad-mode=Loops]){--rb-four-height:240px;}
 body[data-workspace=rekordbox][data-orientation][data-density=compact]:has(.deck[data-rb-pad-mode=Loops]) .deck{grid-template-rows:44px 28px minmax(120px,1fr) 20px 20px}
 body[data-preview-shell=flat][data-orientation][data-density=compact] .deck[data-rb-pad-mode=Loops] .deck-body>div:first-child>nav.loop-line{margin:0 0 4px;gap:2px;flex-wrap:wrap}
 body[data-preview-shell=flat][data-orientation][data-density=compact] .deck[data-rb-pad-mode=Loops] .deck-body>div:first-child>nav.loop-line button{min-height:20px;height:20px;padding:0 2px;}
@@ -324,12 +275,10 @@ body[data-preview-shell=flat] .master-label #master-level{position:absolute;inse
 body[data-preview-shell=flat][data-orientation] .preview-deck-utilities .rb-track-gain-knob{position:relative;padding-left:24px;height:20px;min-height:20px;display:flex;align-items:center}
 body[data-preview-shell=flat] .rb-track-gain-knob::before{left:1px;top:1px;width:18px;height:18px}
 body[data-preview-shell=flat] .rb-track-gain-knob::after{left:9px;top:3px;height:6px;transform-origin:1px 7px}
-body[data-preview-shell=flat][data-orientation] .preview-deck-utilities .rb-track-gain-knob input{position:absolute;left:0;top:0;width:20px!important;max-width:20px!important;height:20px;min-height:0;margin:0;padding:0;opacity:.01;cursor:ns-resize;touch-action:none}
+body[data-preview-shell=flat][data-orientation] .preview-deck-utilities .rb-track-gain-knob input{position:absolute;left:0;top:0;width:20px;max-width:20px;height:20px;min-height:0;margin:0;padding:0;opacity:.01;cursor:ns-resize;touch-action:none}
 body[data-preview-shell=flat] .rb-track-gain-knob:has(input:disabled){opacity:.4}
 body[data-preview-shell=flat] :is(.rb-output-knob,.rb-track-gain-knob):focus-within{outline:2px solid var(--dj-semantic-focus);outline-offset:1px}
-body[data-preview-shell=flat] .knob-group input[data-preview-rotary]{cursor:ns-resize;touch-action:none}
 /* Keep the existing mixer needle synchronized with programmatic/keyboard gain. */
-body[data-preview-shell=flat] .knob-group:has(input[data-preview-rotary])::after{transform:rotate(var(--rotary-angle,var(--dial-angle,0deg)))}
 
 body[data-preview-shell=flat] .rb-fx-depth-knob{position:relative;display:flex;align-items:center;gap:6px;padding-left:32px;height:28px;min-width:64px;}
 body[data-preview-shell=flat] .rb-fx-depth-knob::before{content:'';position:absolute;left:2px;top:2px;width:24px;height:24px;border:3px solid var(--dj-semantic-border-strong);border-bottom-color:transparent;border-left-color:var(--dj-semantic-active);border-radius:50%;box-sizing:border-box;pointer-events:none}
@@ -350,14 +299,6 @@ body[data-preview-shell=flat][data-orientation] main:has(#panel:not([hidden])) .
 body[data-preview-shell=flat] .rb-rotary-value{display:inline}
 
 /* Core DJ: retain the original per-channel filter in the selected workspace. */
-body[data-workspace=rekordbox][data-orientation] .channel-strip .knob-group:has(input[data-mix$=':filter']){display:flex!important}
-body[data-workspace=rekordbox][data-orientation]:not(.four-decks):is([data-orientation=vertical],[data-density=compact]) .channel-strip{grid-template-rows:12px repeat(4,var(--rb-knob-row))}
-body[data-workspace=rekordbox][data-orientation]:not(.four-decks):is([data-orientation=vertical],[data-density=compact]) .channel-strip .knob-group:has(input[data-mix$=':filter']){grid-column:2;grid-row:5}
-body[data-workspace=rekordbox][data-orientation]:not(.four-decks):is([data-orientation=vertical],[data-density=compact]) .channel-strip:nth-child(2) .knob-group:has(input[data-mix$=':filter']){grid-column:1}
-body[data-workspace=rekordbox].four-decks[data-orientation] .channel-strip{grid-template-rows:12px repeat(5,var(--rb-knob-row)) 24px minmax(48px,1fr)}
-body[data-workspace=rekordbox].four-decks[data-orientation] .channel-strip .knob-group:has(input[data-mix$=':filter']){grid-row:6}
-body[data-workspace=rekordbox].four-decks[data-orientation] .channel-strip>button{grid-row:7}
-body[data-workspace=rekordbox].four-decks[data-orientation] .channel-strip .fader-group{grid-row:8}
 /* The horizontal pitch row must not inherit the original vertical writing mode. */
 body[data-workspace=rekordbox][data-orientation] .preview-deck-utilities .tempo-control{writing-mode:horizontal-tb}
 
@@ -404,7 +345,8 @@ body[data-workspace=rekordbox][data-orientation] .preview-deck-utilities .tempo-
  & .rb-tempo-fine button:hover{border-color:#8dbdf0;background:#354553}
  & .rb-tempo-fine button:focus-visible{outline:2px solid #9ed2ff;outline-offset:1px}
  & .preview-deck-utilities::before{content:attr(data-deck-tools);color:#a4bfd5;white-space:nowrap;margin-right:4px}
- &[data-density=compact]{--rb-disc-column:88px}
+ &[data-density=compact]:is(.four-decks,[data-orientation=vertical]){--rb-disc-column:var(--dj-component-mixer-compact-disc-column)}
+ &[data-density=compact]:not(.four-decks)[data-orientation=horizontal]{--rb-disc-column:var(--dj-component-mixer-two-deck-disc)}
  &[data-density=compact] .rb-sync-controls{grid-template-rows:22px 18px}
 }
 /* Structural breakpoint: narrow native windows need two utility rows, not clipping. */

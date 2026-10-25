@@ -10,7 +10,6 @@ body:not(.day) {
   --muted: var(--dj-semantic-text-muted);
   --blue: var(--dj-semantic-focus);
 }
-body {}
 button,select,input {border-radius:var(--dj-component-button-radius);}
 button,select {min-height:var(--dj-component-button-height);}
 button {padding:var(--dj-semantic-gap) var(--dj-semantic-inset);}
@@ -19,9 +18,6 @@ body:not(.day) button.active,body:not(.day) button[aria-pressed="true"] {
   background:var(--dj-semantic-active);color:var(--dj-semantic-text-on-selected);
 }
 .toolbar {height:var(--dj-semantic-toolbar-height);padding:var(--dj-semantic-gap) var(--dj-semantic-inset);gap:var(--dj-semantic-gap);}
-.toolbar button,.toolbar select {}
-.brand {}
-.brand small {}
 .review-bar {height:var(--dj-semantic-review-height);background:var(--surface);color:var(--muted);}
 .review-bar button {min-height:20px;background:transparent;}
 main {height:calc(100vh - var(--dj-semantic-toolbar-height) - var(--dj-semantic-review-height));min-height:540px;}
@@ -30,11 +26,9 @@ main {height:calc(100vh - var(--dj-semantic-toolbar-height) - var(--dj-semantic-
 .deck.focused {border-color:var(--dj-semantic-border-strong);}
 .deck-head {height:var(--dj-component-deck-height);padding:var(--dj-semantic-gap) var(--dj-semantic-inset);gap:var(--dj-semantic-inset);}
 .deck-number {color:var(--text);}
-.deck-title strong {}
 .deck-title small {margin-top:var(--dj-semantic-gap);}
-.deck-key {}
 .track-gain-control {max-width:84px;}
-.tempo-control input,.channel-strip input,.crossfader input,.track-gain-control input,.master-label input {accent-color:var(--muted);}
+.tempo-control input,.crossfader input,.track-gain-control input,.master-label input {accent-color:var(--muted);}
 .deck-body {gap:var(--dj-semantic-gap);padding:var(--dj-semantic-gap);}
 .deck-tabs {gap:var(--dj-semantic-hairline);margin-bottom:var(--dj-semantic-gap);}
 .deck-tabs button {border:0;border-bottom:2px solid transparent;background:var(--sunken);}
@@ -42,7 +36,6 @@ main {height:calc(100vh - var(--dj-semantic-toolbar-height) - var(--dj-semantic-
 .pads {gap:var(--dj-semantic-hairline);}
 .pad {height:40px;border:0;border-bottom:2px solid var(--pad);border-radius:0;}
 .pad:not(.set):not(.active) {border-bottom-color:var(--line);text-align:center;color:var(--muted);}
-.pad:not(.set):not(.active) small {}
 .pad.set {background:var(--sunken);border-bottom-width:10px;}
 .loop-line {gap:var(--dj-semantic-hairline);margin-top:var(--dj-semantic-gap);}
 .loop-line > * {padding:var(--dj-semantic-gap);}
@@ -63,10 +56,7 @@ main {height:calc(100vh - var(--dj-semantic-toolbar-height) - var(--dj-semantic-
   background:var(--dj-semantic-needle);
   transform-origin:center calc(var(--platter-size)/2 - var(--platter-border));
 }
-.platter strong {}
 .platter time {margin-top:var(--dj-semantic-gap);}
-.platter small {}
-.platter #remain-0,.platter #remain-1 {}
 .scratch-status {min-height:12px;}
 .deck-foot {flex-wrap:wrap;gap:2px;padding:var(--dj-semantic-gap);}
 .deck-foot button,.deck-foot select {min-height:22px;padding:2px 4px;}
@@ -79,20 +69,11 @@ main {height:calc(100vh - var(--dj-semantic-toolbar-height) - var(--dj-semantic-
 .detail-wave-tools {position:absolute;top:4px;right:4px;z-index:2;display:flex;align-items:center;gap:2px;background:var(--sunken);}
 .detail-wave-tools button {min-height:24px;min-width:24px;padding:2px 4px;}
 .detail-wave-tools output {min-width:24px;text-align:center;color:var(--muted);}
-#mixer {padding:var(--dj-semantic-gap) var(--dj-semantic-inset);gap:var(--dj-semantic-inset);min-height:44px;}
-.channel-strip {gap:var(--dj-semantic-gap);min-width:0;}
-.channel-strip strong {color:var(--text);}
-.knob-group {width:44px;flex-shrink:1;}
-.fader-group {width:64px;flex-shrink:1;}
-.channel-strip button {}
 .crossfader {width:120px;}
 .library {border-top:var(--dj-semantic-hairline) solid var(--line);grid-template-rows:minmax(0,1fr);}
 .library aside {background:var(--sunken);}
 .library-main {min-height:0;overflow:hidden;}
 .library-tools {padding:var(--dj-semantic-gap);gap:var(--dj-semantic-hairline);}
-.library-tools button,.library-tools select {}
-table {}
-th {}
 th button {min-height:24px;padding:var(--dj-semantic-gap) var(--dj-semantic-inset);}
 td {padding:var(--dj-semantic-gap) var(--dj-semantic-inset);}
 body:not(.day) tbody tr {background:var(--dj-semantic-row);}
@@ -105,7 +86,6 @@ body:not(.day) tbody tr.selected,body.day tbody tr.selected {background:var(--dj
 }
 @media (max-width:1150px) {
   .platter {--platter-size:88px;--platter-border:6px;}
-  .toolbar .brand {}
   .toolbar {gap:2px;}
 }
 @media (forced-colors:active) {
@@ -118,9 +98,6 @@ body:not(.day) tbody tr.selected,body.day tbody tr.selected {background:var(--dj
 .layout-Horizontal .wave-wrap {height:42px;}
 .layout-Vertical:not(.four-decks) .platter {width:var(--platter-size);height:var(--platter-size);}
 @media (max-width:1150px) {
-  .platter strong {}
-  .platter time {}
-  .platter #remain-0,.platter #remain-1 {}
   .platter::after {height:14px;}
 }
 

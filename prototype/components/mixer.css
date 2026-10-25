@@ -1,0 +1,62 @@
+/* One channel component; placement belongs to the workspace layout. */
+#mixer[data-channel-layout]{
+ display:flex;align-items:stretch;justify-content:center;gap:var(--dj-component-mixer-gap);
+ padding:var(--dj-component-mixer-inset);min-height:0;background:var(--dj-component-mixer-surface);
+}
+.channel-strip{display:flex;align-items:center;gap:var(--dj-component-mixer-gap);min-width:0}
+.channel-strip>strong{color:var(--dj-semantic-text-muted);text-align:center}
+.channel-strip .knob-group{
+ position:relative;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;
+ width:var(--dj-component-mixer-channel-width);height:var(--dj-component-mixer-knob-row);min-height:0;
+ margin:0;padding:0;box-sizing:border-box;color:var(--dj-semantic-text);
+}
+.channel-strip .knob-group::before{
+ content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);
+ width:var(--dj-component-mixer-knob-size);height:var(--dj-component-mixer-knob-size);
+ box-sizing:border-box;border:var(--dj-semantic-hairline) solid var(--dj-component-mixer-edge);
+ border-radius:50%;background:var(--dj-component-mixer-control);
+}
+.channel-strip .knob-group::after{
+ content:'';position:absolute;top:var(--dj-semantic-hairline);left:calc(50% - var(--dj-semantic-hairline));
+ width:var(--dj-semantic-focus-width);height:var(--dj-semantic-inset);background:var(--dj-component-mixer-pointer);
+ transform:rotate(var(--rotary-angle,var(--dial-angle,0deg)));transform-origin:50% calc(var(--dj-component-mixer-knob-size)/2 - var(--dj-semantic-hairline));
+}
+.channel-strip .knob-group input{position:absolute;inset:0;width:100%;height:100%;padding:0;margin:0;border:0;opacity:0;cursor:ns-resize;touch-action:none}
+.channel-strip .knob-group:focus-within,.channel-strip .fader-group:focus-within{outline:var(--dj-semantic-focus-width) solid var(--dj-component-mixer-focus);outline-offset:var(--dj-semantic-focus-width)}
+.channel-strip .xone-scale{display:none}
+.channel-strip>button{padding:0;min-height:var(--dj-component-mixer-cue-height);height:var(--dj-component-mixer-cue-height);width:var(--dj-component-mixer-mirrored-column-width);border:0;background:var(--dj-component-mixer-control)}
+.channel-strip>button[aria-pressed=true]{background:var(--dj-component-mixer-selected);color:var(--dj-semantic-text-on-selected)}
+.channel-strip .fader-group{position:relative;display:block;width:var(--dj-component-mixer-fader-width);height:var(--dj-component-mixer-fader-inline-height);min-height:var(--dj-component-mixer-fader-min-height);margin:0;padding:0}
+.channel-strip .fader-group::before{content:'';position:absolute;inset:var(--dj-component-mixer-track-inset) auto;left:50%;transform:translateX(-50%);width:var(--dj-component-mixer-track-width);background:var(--dj-component-mixer-track)}
+.channel-strip .fader-group::after{
+ content:'';position:absolute;top:calc((1 - var(--preview-level,.8))*(100% - var(--dj-component-mixer-cap-height)));left:50%;transform:translateX(-50%);
+ width:var(--dj-component-mixer-cap-width);height:var(--dj-component-mixer-cap-height);box-sizing:border-box;
+ border:var(--dj-semantic-hairline) solid var(--dj-component-mixer-edge);border-radius:var(--dj-semantic-radius);
+ background:linear-gradient(var(--dj-component-mixer-control) 0 43%,var(--dj-component-mixer-pointer) 43% 57%,var(--dj-component-mixer-control) 57%);pointer-events:none;z-index:2;
+}
+.channel-strip .fader-group[data-fader-detent=true]::after{border-color:var(--dj-component-mixer-focus)}
+.channel-strip .fader-group input{position:absolute;inset:0;appearance:none;writing-mode:vertical-lr;direction:ltr;display:block;width:100%;height:100%;min-height:0;max-height:none;margin:0;padding:0;border:0;opacity:0;touch-action:none;z-index:3}
+.channel-strip .preview-fader-ticks{position:absolute;display:block;inset:var(--dj-component-mixer-track-inset) 0;pointer-events:none}
+.channel-strip .preview-fader-ticks i{position:absolute;left:50%;top:calc(var(--tick)*100%);transform:translateX(-50%);width:var(--dj-component-mixer-tick-width);height:var(--dj-semantic-hairline);background:linear-gradient(to right,var(--dj-component-mixer-tick) 0 35%,transparent 35% 65%,var(--dj-component-mixer-tick) 65%)}
+.channel-strip .preview-fader-ticks i.major{width:var(--dj-component-mixer-major-tick-width);height:var(--dj-semantic-focus-width)}
+#mixer[data-channel-layout=parallel]{min-height:var(--dj-component-mixer-two-deck-height)}
+#mixer[data-channel-layout=parallel] .channel-strip{display:grid;grid-template-columns:var(--dj-component-mixer-channel-width);grid-template-rows:var(--dj-component-mixer-channel-label-height) repeat(5,var(--dj-component-mixer-knob-row)) var(--dj-component-mixer-cue-height) minmax(var(--dj-component-mixer-fader-min-height),1fr);justify-items:center;gap:var(--dj-component-mixer-gap);min-height:0;align-self:stretch}
+#mixer[data-channel-layout=parallel] .channel-strip>strong{grid-row:1}
+#mixer[data-channel-layout=parallel] .knob-group:has(input[data-mix$=':trim']){grid-row:2}
+#mixer[data-channel-layout=parallel] .knob-group:has(input[data-mix$=':high']){grid-row:3}
+#mixer[data-channel-layout=parallel] .knob-group:has(input[data-mix$=':mid']){grid-row:4}
+#mixer[data-channel-layout=parallel] .knob-group:has(input[data-mix$=':low']){grid-row:5}
+#mixer[data-channel-layout=parallel] .knob-group:has(input[data-mix$=':filter']){grid-row:6}
+#mixer[data-channel-layout=parallel] .channel-strip>button{grid-row:7}
+#mixer[data-channel-layout=parallel] .fader-group{grid-row:8;height:100%}
+#mixer[data-channel-layout=mirrored] .channel-strip{display:grid;grid-template-columns:repeat(2,var(--dj-component-mixer-mirrored-column-width));grid-template-rows:var(--dj-component-mixer-channel-label-height) repeat(4,var(--dj-component-mixer-knob-row));gap:var(--dj-component-mixer-gap);justify-items:center;align-items:center}
+#mixer[data-channel-layout=mirrored] .channel-strip>strong{grid-row:1;grid-column:1/-1}
+#mixer[data-channel-layout=mirrored] .knob-group:has(input[data-mix$=':trim']){grid-row:2;grid-column:1}
+#mixer[data-channel-layout=mirrored] .knob-group:has(input[data-mix$=':high']){grid-row:2;grid-column:2}
+#mixer[data-channel-layout=mirrored] .knob-group:has(input[data-mix$=':mid']){grid-row:3;grid-column:2}
+#mixer[data-channel-layout=mirrored] .knob-group:has(input[data-mix$=':low']){grid-row:4;grid-column:2}
+#mixer[data-channel-layout=mirrored] .knob-group:has(input[data-mix$=':filter']){grid-row:5;grid-column:2}
+#mixer[data-channel-layout=mirrored] .channel-strip>button{grid-row:3;grid-column:1}
+#mixer[data-channel-layout=mirrored] .fader-group{grid-row:4/6;grid-column:1;height:100%}
+#mixer[data-channel-layout=mirrored] .channel-strip:nth-child(even)>:not(strong){grid-column:2}
+#mixer[data-channel-layout=mirrored] .channel-strip:nth-child(even) .knob-group:not(:has(input[data-mix$=':trim'])){grid-column:1}
