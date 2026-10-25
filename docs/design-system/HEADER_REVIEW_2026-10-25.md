@@ -11,3 +11,5 @@ Focused check: existing Astryx remount regression1/1; production bundle assertio
 Not executed: current-source native package, narrow viewport review, complete six-layout visual sweep, audio listening/PCM, hardware or public beta distribution. Normal0.1.57/current tracks and original music were not changed by this preview. Full authored-style migration is OPEN on UI-DS-01; one stylesheet entry alone does not complete it.
 
 Trello readback: UI-TOOL-01, UI-DS-01 and GATE-N descriptions exact;159cards/10complete, no new completion or duplicate card in this slice. Public beta scope is in docs/delivery/PUBLIC_BETA_PLAN.md.
+
+Follow-through: sourcedabd2ed quiet standard buttons and narrow browser fixes are recorded in [minimal controls review](MINIMAL_CONTROLS_2026-10-25.md). Isolated native1280px UI observed; final1000px native view unaccepted after inconclusive resize and later confirmed screen lock. No normal-profile upgrade or listening claim.
