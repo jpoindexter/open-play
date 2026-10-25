@@ -1,12 +1,14 @@
-# Private desktop0.1.58 package ready — native review pending
+# Private desktop0.1.58 — startup observed, restart review pending
 
-Use `Start Open Play Playback Test 0.1.58.command` after unlocking, preserving any recording/work and closing another playback-test version. Exact source2ba58bb; archive/host5/5. The58launcher is syntax checked, not executed. Current launcher remains57. [Delivery receipt](desktop-0.1.58-playback-delivery.json).
+The exact versioned58bundle/source2ba58bb is open. Native startup shows the shared quiet header,16saved tracks and16library waveform previews; two demo decks remain stopped at0. No Play/Sync/REC was invoked. [Native evidence and input limits](CORE_NATIVE_058_STARTUP_2026-10-25.md), [delivery receipt](desktop-0.1.58-playback-delivery.json).
 
-58includes quiet header/Settings and paused loaded-track/count/position recovery. Actual browser4real-track clean reload retained2/3/4/5s positions and controls/previews,0Play; native58startup/quit/reopen remains pending. Tempo/Sync/loops/temporaryCue start reset. No abrupt-crash/physical routing/Sync-pop claim. Use58for the new saved-deck field; older versions can omit it on save. Preserve the normal profile and prior apps. No public beta published.
+Four-real-track/count/position native quit/reopen remains pending. AX button activation opens the selector, but slider writes/keys do not change intended state and pointer input reports noWindowsAvailable. After the owner clicks inside58, continue that single recovery path. Do not infer success from an AX setValue call or the earlier browser reload. Current launcher remains57;58versioned launcher was not executed. Avoid opening57over running58; older saves can omit the new deck-session field.
+
+58includes paused loaded-track/count/position recovery. Browser4real-track reload retained2/3/4/5s positions and controls/previews,0Play. Tempo/Sync/loops/temporaryCue start reset. Preserve the prelaunch closed profile backup. No crash/physical routing/Sync-pop or public-release claim. Later typography/mixer/catalog source changes are not in58.
 
 ---
 
-# Try desktop0.1.57 — current observed candidate
+# Historical desktop0.1.57 — previous observed candidate
 
 Current launcher targets0.1.57/source9c964e6. Actual startup observed with4realtracks,16library previews,32hotcues,0playing. Normal profile/library retained; prior deck positions were not restored. [Executed native receipt](desktop-0.1.57-native-startup.json). New shared header/Settings changes are source/browser-only and need a new package before native review. [Public beta target and gates](../delivery/PUBLIC_BETA_PLAN.md).
 
