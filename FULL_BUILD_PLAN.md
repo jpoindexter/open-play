@@ -6,7 +6,7 @@
 
 [Delivery/re-entry](docs/prototype/desktop-0.1.52-playback-delivery.json), [executed report/limits](docs/prototype/CORE_TERMINAL_ANALYSIS_REFRESH_2026-10-24.md), [runtime/source](docs/prototype/terminal-analysis-results.json), [PCM](docs/prototype/terminal-analysis-pcm-inspection.json), [native window](docs/prototype/terminal-analysis-native-window.json), [Trello reconciliation](docs/delivery/CORE_TERMINAL_ANALYSIS_RECONCILIATION_2026-10-24.json).
 
-Now: native56 four-real-track Compact H→V→H control-state usability is observed, with stopped cleanup; see desktop-0.1.56-live-orientation.json. This is not frame-time/DOM-identity/held-pointer or musical proof. VisibleHorizontal/AXVertical disagreement is on UI-004, cause unverified. Next scope the existing private native observer to one manual timing/retained-node orientation event instead of a full soak; pending Sync→OFF remains separate. ANA-FIX-01/04/05 narrow repairs complete;157cards/9complete, parent reliability cards open. Preserve prior53listening/54fader/55count/56session evidence; hardware deferred.
+Now: one-action native orientation capture is PREPARED/static checked at local-evidence/core-manual-orientation-2026-10-25; production workspace/current56,32source pins,4allowlisted originals, isolated host-mute/identity/native-retention policies. No server/Electron/UI/audio/trace launched. Read-only OS screen-lock propertyTRUE. See NATIVE_ORIENTATION_CAPTURE_PREPARATION_2026-10-25.json; execute once after manual unlock without the broad soak/turn10. Prior56liveH/V usability is not timing/DOM/music proof; pendingSyncOFF and actualpop remain separate.157cards/9complete; core goal active, hardware deferred.
 
 ---
 
