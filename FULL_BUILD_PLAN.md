@@ -8,6 +8,8 @@ Native **0.1.57 / source9c964e6** startup is executed: four real tracks,16librar
 
 New source/browser slice: one40px performance header, actual Astryx icon controls, original display/configuration controls in Settings, nested Back/focus return and token-based standard UI. [Design system and migration limits](docs/design-system/README.md). This header is not installed in57. Legacy style migration and beta gates remain open. Push every completed slice; no broad clean-case test repeats.
 
+Current reference work: [rekordbox interface catalog](docs/design-system/catalog/README.md),97entries with58screen/state captures,7private captures,6AX-only menus and26unvisited routes. Fresh REA covers all four Performance layouts and the main panel states. Native evidence covers Preferences and library/View states. Per-view dimensions replace guessing; source sizing is not visually accepted yet. Shared mixer/typography ownership is checkpointed separately from complete all-style migration. Core/audio/native/beta gates above remain open.
+
 ---
 
 ## Historical status — core four-deck reliability, 25 October 2026

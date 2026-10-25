@@ -2,6 +2,8 @@
 
 One product system, six layout geometries. Standard controls use the installed Astryx Core/Neutral 0.7.1 APIs. Knobs, faders, pads and waveform renderers remain custom DJ components.
 
+The [visual rekordbox interface catalog](catalog/README.md) inventories the whole navigation surface with explicit captured/private/AX-only/unvisited states. It includes all four main Performance layouts, settings, library panels and menus, measurement overlays and Open Play mapping. Remaining states are visible in the catalog; coverage is not yet exhaustive. Use per-view evidence before adopting dimensions.
+
 Current reference: [REA rekordbox extraction and adaptation](REKORDBOX_REFERENCE_2026-10-25.md). Fresh 7.2.19.0342 two-deck evidence supplements the same-binary saved two/four-deck captures. The canonical neutral palette, distinct active/selected roles and spacing scale now apply through shared controls and the rekordbox adapter. [Executed application review](REKORDBOX_APPLICATION_2026-10-25.md) records the bounded proof; this is not the vendor's original token source or a completed all-style migration.
 
 ## Source and ownership

@@ -6,7 +6,9 @@ User direction: remove legacy overrides and hardcoded styling, unify icon size/f
 
 ## Now
 
-Consolidate typography/icons: one CSS owner, canonical type/leading/weight/icon tokens, actual installed Lucide icons, shared canvas text roles and a style-ownership guard. Replace font-zero pseudo-label tricks with real Cue/key text and accessible hidden level labels. Keep library text-size customization functional.
+Typography/icons shipped in5d28ca0. Shared mixer ownership now replaces247legacy selector branches and removes the remaining108authored `!important` declarations, retaining explicit reduced-motion behavior. This is a source checkpoint, not accepted reference sizing.
+
+The user expanded the reference task to the whole interface. Build and reconcile the [rekordbox visual catalog](catalog/README.md) before applying more geometry. It currently has97entries with explicit evidence/gaps; four fresh REA layouts and native settings/library/menu evidence. The128px/280px two-deck proposal remains unaccepted; actual reference measurements are view-specific. Continue remaining captures when native pointer input recovers.
 
 ## Next
 
