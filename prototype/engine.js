@@ -482,6 +482,7 @@ export class AudioEngine {
       if(!current())return;
       this.nodes[d.index].channelBpm = currentDeckBPM(d,this,{smartSync:true}) || 120;
       await this.applyChannelFX(d.index);
+      if(!current())return;
       const original = await this.buffer(track);
       const stems = preparedStems===undefined?this.stemBuffers.get(track.id):preparedStems;
       let buffers = stems ? [original, ...stems] : [original];
