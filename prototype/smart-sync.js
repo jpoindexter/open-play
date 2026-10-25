@@ -43,7 +43,13 @@ export function createSmartSync({engine, state, externalLeader=()=>null}) {
   const enabled = () => state.settings['Sync Mode'] === 'Smart Sync';
   const engaged = deck => !!deck.sync && engagedStates.has(deck.syncState);
   const revise = deck => {const n=(revisions.get(deck)||0)+1; revisions.set(deck,n);return n;};
-  function clear(deck) {revise(deck);deck.sync=false;deck.syncState='off';deck.syncRole=null;}
+  function cancelAlignment(deck){
+    const pending=alignmentTimelines.get(deck),controller=engine.transforms?.get(deck.index);
+    if(controller&&controller===pending?.controller&&pending.owns()){
+      pending.cancelled=true;controller.abort();
+    }
+  }
+  function clear(deck) {cancelAlignment(deck);revise(deck);deck.sync=false;deck.syncState='off';deck.syncRole=null;}
   function reconcile() {
     if (!enabled()) return;
     for (const deck of state.decks) if (!hasBeatgrid(deck.track)) clear(deck);
@@ -79,11 +85,12 @@ export function createSmartSync({engine, state, externalLeader=()=>null}) {
     const primaryRate=primary.rate, rate=rateFor(deck,primary);
     const priorClock=engine.voiceClock(deck,engine.voices.get(deck.index));
     let token;
-    const owned=()=>isCurrent()&&enabled()&&revisions.get(deck)===revision&&deck.track===ownTrack&&transportSignature(deck)===ownTransport&&(token===undefined||engine.startTokens?.get(deck.index)===token);
+    const owns=()=>isCurrent()&&revisions.get(deck)===revision&&deck.track===ownTrack&&transportSignature(deck)===ownTransport&&(token===undefined||engine.startTokens?.get(deck.index)===token);
+    const owned=()=>enabled()&&owns();
     const valid=()=>owned()&&primary.track===primaryTrack&&engaged(primary)&&primary.playing&&transportSignature(primary)===primaryTransport;
     // A playing, unsynced warp needs the target clock while preparing its
     // replacement backend, before the public Sync state can be committed.
-    const timeline={track:ownTrack,bpm:rate*ownTrack.bpm,valid:owned};
+    const timeline={track:ownTrack,bpm:rate*ownTrack.bpm,valid:owned,owns};
     alignmentTimelines.set(deck,timeline);
     try{
       const pending=engine.synchronize(deck,{rate,priorClock,positionAt:when => {
@@ -93,6 +100,7 @@ export function createSmartSync({engine, state, externalLeader=()=>null}) {
         return barLock?alignedBarPosition(ownTrack,priorClock(when),primaryTrack,engine.voiceClock(primary,engine.voices.get(primary.index))(when),ownLoop):priorClock(when);
       }});
       token=engine.startTokens?.get(deck.index);
+      timeline.controller=engine.transforms?.get(deck.index);
       const result=await pending;
       // The source was validated at scheduling. Its later Pause/Sync Off
       // must not misreport a still-owned, committed replacement as unsynced.
@@ -112,11 +120,12 @@ export function createSmartSync({engine, state, externalLeader=()=>null}) {
     const track=deck.track,revision=revise(deck),signature=transportSignature(deck),loop=loopBounds(deck),barLock=barCompatible(deck)&&source.phase;
     const priorClock=engine.voiceClock(deck,engine.voices.get(deck.index));
     let token;
-    const owned=()=>isCurrent()&&enabled()&&revisions.get(deck)===revision&&deck.track===track&&transportSignature(deck)===signature&&(token===undefined||engine.startTokens?.get(deck.index)===token);
+    const owns=()=>isCurrent()&&revisions.get(deck)===revision&&deck.track===track&&transportSignature(deck)===signature&&(token===undefined||engine.startTokens?.get(deck.index)===token);
+    const owned=()=>enabled()&&owns();
     const valid=()=>owned()&&source.valid();
     // Preparation needs its target musical clock before public Sync state is
     // committed. Keep that intent scoped to this owned start, not the old voice.
-    const timeline={track,bpm:source.bpm,valid:owned};
+    const timeline={track,bpm:source.bpm,valid:owned,owns};
     alignmentTimelines.set(deck,timeline);
     try{
       const pending=engine.synchronize(deck,{rate:externalRate(deck,source),priorClock,positionAt:when=>{
@@ -124,6 +133,7 @@ export function createSmartSync({engine, state, externalLeader=()=>null}) {
         return barLock?alignedBarPosition(track,priorClock(when),source.track,source.clock(when),loop):priorClock(when);
       }});
       token=engine.startTokens?.get(deck.index);
+      timeline.controller=engine.transforms?.get(deck.index);
       const result=await pending;
       // Source loss after scheduling does not revoke a current committed Play.
       if(!owned())throw cancelled();
@@ -157,11 +167,15 @@ export function createSmartSync({engine, state, externalLeader=()=>null}) {
       deck.sync=true;deck.syncRole='primary';deck.syncState=deck.playing?(barCompatible(deck)?'beat':'tempo'):'armed';
       if(deck.playing && deck.track.gridWarpMarkers?.length){
         deck.position=engine.position(deck);let token;
-        try{const pending=engine.start(deck);token=engine.startTokens?.get(deck.index);await pending;}
+        const rateOwner=engine.rateOwners?.get(deck),signature=transportSignature(deck);
+        const owns=()=>revisions.get(deck)===revision&&deck.track===track&&transportSignature(deck)===signature&&(token===undefined||engine.startTokens?.get(deck.index)===token);
+        const timeline={track,bpm,owns,valid:()=>enabled()&&owns()};alignmentTimelines.set(deck,timeline);
+        try{const pending=engine.start(deck);token=engine.startTokens?.get(deck.index);timeline.controller=engine.transforms?.get(deck.index);await pending;if(!enabled()||!owns()||timeline.controller?.signal.aborted)throw cancelled();}
         catch(error){
           if(enabled()&&revisions.get(deck)===revision&&deck.track===track&&engine.startTokens?.get(deck.index)===token&&engine.voices?.get(deck.index)===voice&&deck.rate===rate&&deck.syncRole==='primary'&&syncBPM===bpm){Object.assign(deck,previous);syncBPM=previousBPM;}
+          else if(timeline.cancelled&&deck.track===track&&engine.startTokens?.get(deck.index)===token&&engine.voices?.get(deck.index)===voice&&deck.rate===rate&&engine.rateOwners?.get(deck)===rateOwner)deck.rate=previous.rate;
           throw error;
-        }
+        }finally{if(alignmentTimelines.get(deck)===timeline)alignmentTimelines.delete(deck);}
       }
       return;
     }
@@ -224,6 +238,7 @@ export function createSmartSync({engine, state, externalLeader=()=>null}) {
     if (enabled() && engaged(deck)) {revise(deck);deck.syncState='tempo';}
   }
   function disengage(deck) {
+    cancelAlignment(deck);
     revise(deck);
     const relative=engaged(deck);deck.sync=false;deck.syncRole=null;deck.syncState=relative?'relative':'off';
     reconcile();
@@ -255,7 +270,7 @@ export function createSmartSync({engine, state, externalLeader=()=>null}) {
     if(!enabled())return [];
     // Pending Sync and armed Play must relinquish the old grid before saving its replacement.
     for(const deck of state.decks)if(deck.track===track&&(pendingPresses.has(deck)||alignmentTimelines.has(deck))){
-      if(alignmentTimelines.get(deck)?.valid())engine.transforms?.get(deck.index)?.abort();
+      cancelAlignment(deck);
       revise(deck);
     }
     return state.decks.filter(d=>d.track===track&&engaged(d)).map(deck=>({
@@ -289,6 +304,7 @@ export function createSmartSync({engine, state, externalLeader=()=>null}) {
     }
   }
   return {press,setMaster,start,played,paused,manipulated,disengage,loaded,reconcile,engaged,timeline,tempo,captureGrid,edited,validate,
+    pending:deck=>pendingPresses.has(deck),
     captureTempo:()=>syncBPM,restoreTempo:bpm=>{syncBPM=bpm;},
     reset:() => {state.decks.forEach(clear);syncBPM=null;}};
 }

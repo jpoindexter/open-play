@@ -21,7 +21,7 @@ function fixture(){
  const engine={buffers:new Map(tracks.map(t=>[t.id,{id:t.id}])),stemBuffers:new Map(),stemStates:new Map(),voices:new Map(),position:()=>0,masterSnapshot:()=>({displayDB:-120,limiting:false}),updateFXBPMs(){}};
  engine.buffer=async track=>engine.buffers.get(track.id);
  let analyze=async()=>({bpm:126,key:'Cm',grid:{firstBeat:.2}});
- const scope={state,engine,document,analysisQueue:[],analysisController:null,AbortController,DOMException,sourceWaveLoads:new WeakSet(),overviewWaveViews:[],stemWaveforms:tracks.map(()=>createStemWaveformModel()),colors:['red','blue','green','orange'],
+ const scope={isSimpleSyncPending:()=>false,state,engine,document,analysisQueue:[],analysisController:null,AbortController,DOMException,sourceWaveLoads:new WeakSet(),overviewWaveViews:[],stemWaveforms:tracks.map(()=>createStemWaveformModel()),colors:['red','blue','green','orange'],
   analyzeBuffer:(buffer,options)=>{calls.analysis.push(buffer.id);return analyze(buffer,options);},trackGain:{measurementReady(){calls.gain++;}},smartSync:{reconcile(){}},
   persist(){calls.persist++;},renderTracks(){calls.library++;},refreshAnalysisControls(){},renderDecks(){assert.fail('Analysis must retain deck controls');},
   updateAnalysisStatus(message){state.analysisStatus=message;calls.status.push(message);},notify:message=>calls.notices.push(message),

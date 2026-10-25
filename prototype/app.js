@@ -11,7 +11,7 @@ import {createManualLoops} from './manual-loops.js';
 import {createLoopPads} from './loop-pads.js';
 import {createJogBend} from './jog-bend.js';
 import {createCensorHolds} from './censor.js';
-import { synchronizeSimple } from './sync.js';
+import { synchronizeSimple, cancelSimpleSync, isSimpleSyncPending } from './sync.js';
 import { createSyncMaster } from './sync-master.js';
 import { createSmartSync, hasBeatgrid, beatPosition } from './smart-sync.js';
 import {createBeatgrid} from './beatgrid.js';
@@ -405,7 +405,8 @@ function syncControls(d) {
   if (mode === "Off") return "";
   const smart = mode === "Smart Sync", status = smart ? d.syncState || "off" : d.sync ? "beat" : "off";
   const role = d.sync ? (d.syncRole === "primary" ? "Primary" : "Secondary") : "Not synced";
-  return `<button data-action="syncMaster" data-deck="${d.index}" aria-label="Choose deck ${d.index+1} as Sync master" aria-pressed="${syncMaster.master()===d}" title="${syncMaster.master()===d?(syncMaster.manual()?'Selected master':'Automatic master: first playing deck'):'Match incoming tracks to this deck'} · Shift-click: automatic master" class="${syncMaster.master()===d?'master-active':''}" ${d.track?'':'disabled'}>MASTER</button><button data-action="syncOff" data-deck="${d.index}" aria-label="Disengage sync on deck ${d.index + 1}" title="${smart?"First OFF: keep relative tempo; second OFF: restore controller pitch":"Disengage sync and restore the last received controller pitch when available"}" ${d.sync || status === "relative" ? "" : "disabled"}>OFF</button><button data-action="sync" data-deck="${d.index}" data-sync-hint="${smart?'Smart Sync: match tempo and bar phase; paused decks arm an aligned launch.':'Simple Sync: align nearest beats or transients; paused decks match tempo only, without bar lock.'}" data-sync-state="${status}" aria-label="Sync deck ${d.index + 1}" aria-pressed="${!!d.sync}" title="${smart && !hasBeatgrid(d.track) ? "Add or analyze a beatgrid first" : role + "; press again to re-sync"}" ${smart && !hasBeatgrid(d.track) ? "disabled" : ""} class="${d.sync ? "active" : ""}">${smart?"BEAT SYNC":"SIMPLE SYNC"}</button>`;
+  const pending=isSimpleSyncPending(d)||(smart&&smartSync.pending?.(d));
+  return `<button data-action="syncMaster" data-deck="${d.index}" aria-label="Choose deck ${d.index+1} as Sync master" aria-pressed="${syncMaster.master()===d}" title="${syncMaster.master()===d?(syncMaster.manual()?'Selected master':'Automatic master: first playing deck'):'Match incoming tracks to this deck'} · Shift-click: automatic master" class="${syncMaster.master()===d?'master-active':''}" ${d.track?'':'disabled'}>MASTER</button><button data-action="syncOff" data-deck="${d.index}" aria-label="Disengage sync on deck ${d.index + 1}" title="${smart?"First OFF: keep relative tempo; second OFF: restore controller pitch":"Disengage sync and restore the last received controller pitch when available"}" ${d.sync || status === "relative" || pending ? "" : "disabled"}>OFF</button><button data-action="sync" data-deck="${d.index}" data-sync-hint="${smart?'Smart Sync: match tempo and bar phase; paused decks arm an aligned launch.':'Simple Sync: align nearest beats or transients; paused decks match tempo only, without bar lock.'}" data-sync-state="${status}" aria-busy="${!!pending}" aria-label="Sync deck ${d.index + 1}" aria-pressed="${!!d.sync}" title="${smart && !hasBeatgrid(d.track) ? "Add or analyze a beatgrid first" : role + "; press again to re-sync"}" ${smart && !hasBeatgrid(d.track) ? "disabled" : ""} class="${d.sync ? "active" : ""}">${smart?"BEAT SYNC":"SIMPLE SYNC"}</button>`;
 }
 function smartSyncIndicator(d) {
   if (state.settings["Sync Mode"] !== "Smart Sync") return "";
@@ -438,6 +439,7 @@ function renderDecks(index = null) {
   const target = Number.isInteger(index) && shape === renderedDeckShape
     ? document.querySelector(`.deck[data-focus="${index}"]`) : null;
   if (syncMode !== renderedSyncMode) {
+    for(const d of state.decks)cancelSimpleSync(engine,d);
     smartSync.reset();
     renderedSyncMode = syncMode;
   }
@@ -981,6 +983,7 @@ async function deckAction(action, index, el, event = {}) {
     await engine.seek(d,grid?grid.timeAt(grid.beatAt(pos)+beats):pos+beat*beats);
   }
   if (action === "syncOff" || (action === "sync" && event.shiftKey)) {
+    for(const other of state.decks)cancelSimpleSync(engine,other,d);
     if (state.settings["Sync Mode"] === "Smart Sync") {
       const wasRelative=d.syncState==='relative';smartSync.disengage(d);
       if(wasRelative)await panels.resetTempoAbsolute(d);
@@ -1975,15 +1978,17 @@ function tick() {
     }
     const smart = state.settings["Sync Mode"] === "Smart Sync";
     const syncStatus = smart ? d.syncState || "off" : d.sync ? "beat" : "off";
+    const pending=isSimpleSyncPending(d)||(smart&&smartSync.pending?.(d));
     if (syncButton) {
       syncButton.dataset.syncState=syncStatus;
+      syncButton.setAttribute('aria-busy',String(!!pending));
       syncButton.classList.toggle('active',!!d.sync);
       syncButton.setAttribute('aria-pressed',String(!!d.sync));
       syncButton.disabled=smart && !hasBeatgrid(d.track);
       syncButton.title=syncButton.disabled ? "Add or analyze a beatgrid first" : syncButton.dataset.syncHint+" "+(d.sync ? d.syncRole === "primary" ? "Primary" : "Secondary" : "Not synced") + "; press again to re-sync";
     }
     const syncOffButton=document.querySelector(`[data-action="syncOff"][data-deck="${d.index}"]`);
-    if(syncOffButton)syncOffButton.disabled=!(d.sync || syncStatus === "relative");
+    if(syncOffButton)syncOffButton.disabled=!(d.sync || syncStatus === "relative" || pending);
     updateTempoSlider(d);
     const bpmText = document.querySelector(`#platter-${d.index} strong`);
     const tempoText = document.querySelector(`#platter-${d.index} small`);
@@ -2093,7 +2098,7 @@ engine.onRateRequest = async (deck,rate) => {
   }).finally(()=>{if(syncTempoQueue===queue)syncTempoQueue=null;});
   return queue.promise;
 };
-engine.onManualPosition = d => smartSync.manipulated(d);
+engine.onManualPosition = d => {for(const other of state.decks)cancelSimpleSync(engine,other,d);smartSync.manipulated(d);};
 engine.onGridTimeline = (d,options) => smartSync.timeline(d,options);
 engine.onValidateTransport = (d,changes) => smartSync.validate(d,changes);
 engine.onGridWillChange = track => smartSync.captureGrid(track);

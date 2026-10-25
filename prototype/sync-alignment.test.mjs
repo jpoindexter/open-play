@@ -50,7 +50,7 @@ test('actual Sync controls distinguish phase-aware Beat Sync from Simple Sync',(
   assert(begin>=0&&end>begin);
   for(const mode of ['Simple Sync','Smart Sync']){
     const d={index:0,track:{bpm:120,grid:0},playing:false,sync:true,syncState:'armed'};
-    const context={state:{settings:{'Sync Mode':mode}},syncMaster:{master:()=>null},hasBeatgrid:()=>true};
+    const context={isSimpleSyncPending:()=>false,smartSync:{pending:()=>false},state:{settings:{'Sync Mode':mode}},syncMaster:{master:()=>null},hasBeatgrid:()=>true};
     vm.runInNewContext(source.slice(begin,end)+';globalThis.markup=syncControls;',context);
     const html=context.markup(d);
     assert(html.includes(mode==='Smart Sync'?'>BEAT SYNC<':'>SIMPLE SYNC<'));

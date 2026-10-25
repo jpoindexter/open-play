@@ -37,7 +37,7 @@ function fixture(count=4,layout='Horizontal'){
  const query=s=>{const match=s.match(/^\.deck\[data-focus="(\d+)"\]$/);if(match)return nodes.get(Number(match[1]));
   return({'#decks':root,'#layout':select,'.detail-waves':detail,'#detail-wave':canvas,'.waveform-scrub-lanes':lanes})[s]||null;};
  const document={body,get activeElement(){return active;},querySelector:query,querySelectorAll:s=>s==='.deck'?[...nodes.values()]:s.includes('waveform-scrub')?[...nodes.values()].map(n=>n.lane):[]};
- const scope={state,document,$:s=>s==='#quantize'?{setAttribute(){}}:query(s),colors:['a','b','c','d'],deckQuantize:()=>true,
+ const scope={cancelSimpleSync(){},isSimpleSyncPending:()=>false,state,document,$:s=>s==='#quantize'?{setAttribute(){}}:query(s),colors:['a','b','c','d'],deckQuantize:()=>true,
   smartSync:{reset(){},reconcile(){}},syncMaster:{master:()=>null},parseMusicalKey:()=>null,keyLabel:()=>'',shiftedKey:()=>'',esc:String,time:String,
   autoGainMode:()=>'',trackGainDB:()=>0,loopModeMarkup:()=>'',padMarkup:()=>'',shownDeckBPM:()=>120,engine:{position:()=>0},
   deckScratchUIPolicy:{keyboard:''},stemSlipControls:{markup:()=>'',restoreFocus(){}},tempoSliders:{view:()=>({range:8,position:0,label:'Tempo',valueText:'0%'})},

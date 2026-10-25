@@ -2,6 +2,14 @@
 // Smart Sync's beat/bar/warp state machine remains a separate, unaccepted path.
 const transientCache = new WeakMap();
 const simpleRequests = new WeakMap();
+export const isSimpleSyncPending = deck => simpleRequests.has(deck);
+export function cancelSimpleSync(engine,deck,changedDeck=deck){
+  const request=simpleRequests.get(deck);
+  if(!request||request.engine!==engine||(changedDeck!==deck&&changedDeck!==request.leader))return;
+  simpleRequests.delete(deck);
+  if(request.controller&&deck.track===request.track&&engine.startTokens?.get(deck.index)===request.token&&engine.transforms?.get(deck.index)===request.controller)
+    request.controller.abort();
+}
 const cancelled = () => new DOMException('Sync preparation superseded.', 'AbortError');
 const tick = () => new Promise(resolve => setTimeout(resolve, 0));
 const positive = value => Number.isFinite(value) && value > 0;
@@ -76,7 +84,8 @@ export async function synchronizeSimple({engine, deck, leader, snapToGrid = fals
   if (deck.reverse || leader.reverse || (deck.stemSlip || 'off') !== 'off' || (leader.stemSlip || 'off') !== 'off') throw new Error('This Sync path currently requires forward decks without Stem Slip.');
   const ownLoop=activeLoop(deck),leaderLoop=activeLoop(leader),ownTransport=transportSignature(deck),leaderTransport=transportSignature(leader);
   const ownBPM=ownTrack.bpm,ownGrid=ownTrack.grid,ownRevision=ownTrack.metadataRevision;
-  const request={};simpleRequests.set(deck,request);
+  const request={engine,track:ownTrack,leader};simpleRequests.set(deck,request);
+  try{
   const unchanged=[deck,leader].map(d=>{
     const read=()=>[engine.startTokens?.get(d.index),engine.rateOwners?.get(d),engine.voices?.get(d.index),d.rate,d.anchorTime,d.anchorPosition,d.track?.bpm,d.track?.grid,d.track?.metadataRevision];
     const saved=read();return()=>read().every((value,index)=>Object.is(value,saved[index]));
@@ -87,7 +96,9 @@ export async function synchronizeSimple({engine, deck, leader, snapToGrid = fals
   if (!positive(rate) || rate < .25 || rate > 4) throw new Error('The matched tempo is outside the current transport range.');
   const wasPlaying = deck.playing, leaderPlaying = leader.playing;
   if (!wasPlaying || !leaderPlaying) {
-    await engine.setRate(deck, rate, {syncInternal: true});
+    const pending=engine.setRate(deck, rate, {syncInternal: true});
+    request.token=engine.startTokens?.get(deck.index);request.controller=engine.transforms?.get(deck.index);
+    await pending;
     if (!valid()) throw cancelled();
     return {kind: 'tempo', rate, leader: leader.index};
   }
@@ -98,12 +109,15 @@ export async function synchronizeSimple({engine, deck, leader, snapToGrid = fals
   if (!snapToGrid && (!ownTimes.length || !leaderTimes.length)) throw new Error('No usable transients found. Use tracks with clear beats or enable Snap to Beatgrid.');
   const priorVoice = engine.voices.get(deck.index), priorClock = engine.voiceClock(deck, priorVoice);
   let alignment;
-  const result = await engine.synchronize(deck, {rate, priorClock, positionAt: when => {
+  const pending = engine.synchronize(deck, {rate, priorClock, positionAt: when => {
     if (!valid() || !unchanged[1]() || !leader.playing || Math.abs(engine.voiceRateAt(leader, engine.voices.get(leader.index), when) - leaderRate) > 1e-7) throw cancelled();
     const leaderPosition = engine.voiceClock(leader, engine.voices.get(leader.index))(when), ownPosition = priorClock(when);
     alignment = alignedPosition({ownTimes: snapToGrid ? gridTimes(ownTrack, ownPosition) : ownTimes, leaderTimes: snapToGrid ? gridTimes(leaderTrack, leaderPosition) : leaderTimes, ownPosition, leaderPosition, ownRate: rate, leaderRate, duration: ownTrack.duration,ownLoop,leaderLoop});
     return alignment.position;
   }});
+  request.token=engine.startTokens?.get(deck.index);request.controller=engine.transforms?.get(deck.index);
+  const result=await pending;
   if(simpleRequests.get(deck)!==request)throw cancelled();
   return {...result, kind: snapToGrid ? 'grid' : 'transient', leader: leader.index, alignment};
+  }finally{if(simpleRequests.get(deck)===request)simpleRequests.delete(deck);}
 }
