@@ -716,6 +716,7 @@ export class AudioEngine {
     return {rate,nominalRate:d.rate};
   }
   async setSyncedRates(changes,{participants=[]}={}){
+    if(changes.some(({rate})=>!Number.isFinite(rate)||rate<.25||rate>4))throw new RangeError('Tempo must be between 0.25× and 4×.');
     const saved=changes.map(({deck,rate})=>({deck,rate,owner:{},previous:deck.rate,track:deck.track,playing:deck.playing,clock:this.voiceClock(deck,this.voices.get(deck.index))}));
     if(saved.some(x=>x.deck.processing&&!x.playing))throw Error('Finish deck preparation before changing group tempo.');
     const active=saved.filter(x=>x.playing);
@@ -752,7 +753,11 @@ export class AudioEngine {
     }finally{group?.dispose();}
   }
   async setRate(d, rate, {syncInternal = false} = {}) {
+    if(!Number.isFinite(rate)||rate<.25||rate>4)throw new RangeError('Tempo must be between 0.25× and 4×.');
     if (!syncInternal && this.onRateRequest) return this.onRateRequest(d, rate);
+    const voice=this.voices.get(d.index);
+    if(d.playing&&!voice?.deckScratchTransport&&!voice?.censorReverse&&(!d.stemSlip||d.stemSlip==='off')&&(voice?.gridTimeline||((d.keylock||d.keyShift)&&!voice?.liveKeylock)))
+      return this.setSyncedRates([{deck:d,rate}]);
     this.rateOwners.set(d, {});
     this.cancelDeckScratchRequest(d);
     if (this.voices.get(d.index)?.gridTimeline) {

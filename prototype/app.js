@@ -418,11 +418,17 @@ function tempoSliderMarkup(d) {
 function updateTempoSlider(d) {
   const input=document.querySelector(`[data-tempo="${d.index}"]`);if(!input)return;
   const v=tempoSliders.view(d),label=document.querySelector(`[data-tempo-label="${d.index}"]`);
+  if(input.min!==String(-v.range))input.min=String(-v.range);
+  if(input.max!==String(v.range))input.max=String(v.range);
   if(Math.abs(Number(input.value)-v.position)>.00001)input.value=String(v.position);
   const valueText=`${v.valueText}; ${shownDeckBPM(d)} BPM`;
   if(input.getAttribute('aria-valuetext')!==valueText)input.setAttribute('aria-valuetext',valueText);
   input.disabled=!d.track;
   if(label&&label.textContent!==v.label)label.textContent=v.label;
+  const range=document.querySelector(`[data-action="range"][data-deck="${d.index}"]`),text=`±${v.range}`;
+  if(range&&range.textContent!==text)range.textContent=text;
+  const control=input.closest('.tempo-control'),title=`${v.relative?'Relative adjustment around current tempo':'Tempo'}; enable key lock to preserve pitch. Control/Command-click or Control/Command+Home: reset pitch to zero.`;
+  if(control&&control.title!==title)control.title=title;
 }
 function renderDecks(index = null) {
   const quantizeStates=state.decks.slice(0,state.deckCount).map(deckQuantize);
@@ -1031,7 +1037,11 @@ async function deckAction(action, index, el, event = {}) {
     engine.setPFL(d.index,!d.pfl);d.pfl=!d.pfl;
     notify(d.pfl?'Deck selected for cue. Use Devices to route the headphone bus.':'Deck removed from cue.');
   }
-  if (action === "range") d.pitchRange = { 8: 16, 16: 50, 50: 8 }[d.pitchRange];
+  if (action === "range") {
+    d.pitchRange = { 8: 16, 16: 50, 50: 8 }[d.pitchRange];
+    if(renderedDeckShape!==`${state.layout}/${state.deckCount}/${state.settings['Sync Mode']}`||!document.querySelector(`[data-tempo="${index}"]`)||!document.querySelector(`[data-action="range"][data-deck="${index}"]`))return renderDecks();
+    updateTempoSlider(d);refreshTransportControls(state);return;
+  }
   if (action === "grid") return panels.grid(d);
   renderDecks();
 }

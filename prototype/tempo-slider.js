@@ -38,6 +38,9 @@ export function createTempoSlider({setRate}){
     if(records.get(deck)!==r||deck.track!==r.track)return;
     await setRate(deck,rate);
    }
+  }).catch(error=>{
+   if(records.get(deck)===r&&deck.track===r.track&&!r.relative)r.position=percent(deck);
+   throw error;
   }).finally(()=>{r.pending=null;r.wanted=null;if(records.get(deck)===r)read(deck);});
   return r.pending;
  }
