@@ -1,5 +1,7 @@
 ## Current target — public beta, 26 October 2026
 
+Latest core rendering repair: actual paused four-deck Compact Save grid removed234nodes before; replacing full deck/mixer rebuilds with existing track-scoped paint retains all observed performance controls/rows. One expected demo IMG regenerates. Focused success/error/invalid checks3pass; [evidence and limits](docs/prototype/GRID_SAVE_CONTROLS_2026-10-26.md), [CORE-FIX-16](https://trello.com/c/qybCEzDj). Native/playing/pending-Sync/pop acceptance remains open; no desktop rebuild or broad rerun.
+
 Current HTML repair: Track Details now accepts the precise BPM already supported by Edit grid; an unrelated title edit saves without rounding and survives actual browser reload. [Executed result and native limit](docs/prototype/PRECISE_BPM_DETAILS_2026-10-26.md); [LIB-FIX-01](https://trello.com/c/7shGOJX2). No desktop rebuild or audio retest. Continue only concrete software defects while native input/hardware acceptance is unavailable.
 
 Latest private0.1.58/source2ba58bb passes archive/host5/5 and now has actual native startup with the quiet header,16saved tracks/previews and2stopped demo decks. Four-real-track native quit/reopen recovery remains pending because pointer/keyboard input is not reaching the app reliably. Browser4track reload at2/3/4/5s retains its separate scope. Current launcher remains57. See [delivery receipt](docs/prototype/desktop-0.1.58-playback-delivery.json).

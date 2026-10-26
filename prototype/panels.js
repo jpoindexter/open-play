@@ -566,8 +566,8 @@ export function createPanels(a) {
             validate();const next=candidate(),before=engine.onGridWillChange?.(t);t.bpm=next.bpm;t.grid=next.grid;t.gridWarpMarkers=draft.map(m=>({...m}));if(clearLegacy)t.gridMarkers=[];
             t.metadataSources={...t.metadataSources,bpm:'manual',grid:'manual'};t.metadataRevision=(t.metadataRevision||0)+1;
             persist();
-            try{await engine.onGridChanged?.(t,before);}catch(e){renderDecks();renderTracks();throw new Error('Grid saved; playback realignment failed: '+e.message);}
-            renderDecks();renderTracks();$('#modal').close();
+            try{await engine.onGridChanged?.(t,before);}catch(e){a.drawWaves(t);renderTracks();throw new Error('Grid saved; playback realignment failed: '+e.message);}
+            a.drawWaves(t);renderTracks();$('#modal').close();
           }catch(e){error(e);}
         };
         mountGridDrift({body,deck:d,engine,apply:next=>{
