@@ -1,0 +1,67 @@
+{
+  "version": "0.1.61",
+  "sourceCommit": "2c1c35e68baf81bc7b24e22abfde93ae29bc27b6",
+  "asarSHA256": "9ea6310a840468f46c8c07fdbd365a9cbde9711a58e3eb269f0d86e4c02d8095",
+  "packageInspection": {
+    "passed": 5,
+    "failed": 0,
+    "completed": true,
+    "runtimePrototypeFiles": 608
+  },
+  "testedSourceLink": {
+    "version": "0.1.61",
+    "sourceCommit": "2c1c35e68baf81bc7b24e22abfde93ae29bc27b6",
+    "asarSHA256": "9ea6310a840468f46c8c07fdbd365a9cbde9711a58e3eb269f0d86e4c02d8095",
+    "latestWorkerCapture": {
+      "report": "analysis-pending-sync-2026-10-26.json",
+      "productRuntimeFilesCompared": 15,
+      "allMatch": true,
+      "diagnosticFilesExcluded": true
+    },
+    "metadataCapture": {
+      "report": "track-details-pending-sync-2026-10-26.json",
+      "unchangedRepairModules": [
+        "panels.js",
+        "track-details.js",
+        "engine.js",
+        "smart-sync.js",
+        "analysis-presentation.js"
+      ],
+      "allMatch": true,
+      "wholeRuntimeMatch": false,
+      "reason": "Not regraded. Whole-app identity with that older capture is false because later Tap and analysis repairs changed app.js. Latest actual-worker runtime and unchanged metadata repair boundary compared separately."
+    },
+    "scope": "Actual ASAR byte identity within declared scopes. Not native/audio acceptance."
+  },
+  "includedRepairs": [
+    "CORE-FIX-17 metadata BPM / stale Sync / in-place controls",
+    "CORE-FIX-18 deck Tap metadata/waveform refresh",
+    "CORE-FIX-19 reanalysis grid / stale Sync ownership"
+  ],
+  "native": {
+    "launched": false,
+    "starterExecuted": false,
+    "starterSyntaxChecked": true,
+    "currentApp": "0.1.59",
+    "currentPIDObserved": 20157,
+    "currentDefaultLaunchers": "unchanged, both0.1.59",
+    "pendingCleanup": {
+      "track": "BX 3",
+      "temporarySavedTitle": "BX 3 \u00b7 metadata check",
+      "restoreTitle": "BX 3",
+      "bpmUnchanged": 124.98471158160582,
+      "restored": false
+    },
+    "inputFailure": "noWindowsAvailable, stale IDs and AXError.invalidUIElement after fresh exact-bundle rebind; capture did not establish reliable input",
+    "profileAction": "Native temporary Title save occurred; restoration not observed. No app quit/reload, profile-file rewrite or default-launcher switch."
+  },
+  "remaining": [
+    "Restore native temporary title and confirm exact BPM",
+    "61native startup/recovery and changed metadata/Tap/analysis held-gesture paths",
+    "Current owner listening/pop/stall acceptance",
+    "Hardware remains deferred"
+  ],
+  "testPolicy": "No new broad audio tests/full Node suite/soak in packaging pass; one actual package inspector run",
+  "publicRelease": false,
+  "merged": false
+}
