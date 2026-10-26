@@ -1,6 +1,8 @@
-# Public beta delivery target — 25 October 2026
+# Public beta delivery target — 26 October 2026
 
 Ship a useful Mac local-audio DJ beta as soon as its release gates are satisfied. Full Serato/rekordbox/Traktor parity and the entire Trello backlog are not launch prerequisites. No public release has been published or approved by this document.
+
+Current private checkpoint:0.1.59/sourceb10bc82 has package inspection5/5 plus native four-real-track paused2/3/4/5s clean quit/reopen acceptance. This addresses the paused-session recovery gap; current-source listening, intermittent pops/stalls, remaining native/held controls and hardware/distribution gates remain open. [Delivery and limits](../prototype/desktop-0.1.59-playback-delivery.json).
 
 ## Now
 

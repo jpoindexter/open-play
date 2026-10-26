@@ -1,8 +1,8 @@
 # Open Play
 
-## Current target — public beta, 25 October 2026
+## Current target — public beta, 26 October 2026
 
-Latest private0.1.58/source2ba58bb passes archive/host5/5 and now has actual native startup with the quiet header,16saved tracks/previews and2stopped demo decks. Four-real-track native quit/reopen recovery remains pending because pointer/keyboard input is not reaching the app reliably. Browser4track reload at2/3/4/5s retains its separate scope. Current launcher remains57. See [delivery receipt](docs/prototype/desktop-0.1.58-playback-delivery.json).
+Latest private **0.1.59 / sourceb10bc82** passes package inspection5/5 and actual native startup plus paused four-real-track clean quit/reopen at2/3/4/5s. Four deck slots,16library tracks/core controls and viewport previews retained; Autoplay off. Both unversioned playback starters target59; shell syntax checked, scripts not executed. The exact bundle was opened through native automation. [Guide](docs/prototype/TRY_PLAYBACK_DESKTOP_0.1.59.md), [delivery](docs/prototype/desktop-0.1.59-playback-delivery.json), [native evidence and limits](docs/prototype/CORE_NATIVE_059_RECOVERY_2026-10-26.md). Current audio/Sync-pop/held-gesture/hardware acceptance remains open; prior0.1.53human mixing evidence retains scope.
 
 Public beta ASAP is the delivery target. [Release scope and gates](docs/delivery/PUBLIC_BETA_PLAN.md): reliable local-audio mixing, recoverable data, usable shared UI, exact-package/native review and basic installation/help/known issues. Full competitor parity and the entire backlog are not launch prerequisites. Publication is still pending a concrete beta artifact and owner approval.
 
