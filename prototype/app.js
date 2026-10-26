@@ -20,6 +20,7 @@ import {createBeatgrid} from './beatgrid.js';
 import {currentDeckBPM} from './deck-tempo.js';
 import {refreshTransportControls} from './transport-presentation.js';
 import {refreshAnalysisControls} from './analysis-presentation.js';
+import {refreshTrackDetails} from './track-details.js';
 import {renderLibraryRows} from './library-rows.js';
 import {createTempoSlider} from './tempo-slider.js';
 import {createLocalAudioLibrary} from "./local-audio-library.js";
@@ -1319,7 +1320,7 @@ function reset() {
   localStorage.removeItem("openplay-review-v1");
   location.reload();
 }
-const deckTapTempo=createDeckTapTempo({engine,persist,render:()=>{renderDecks();renderTracks();},notify});
+const deckTapTempo=createDeckTapTempo({engine,persist,render:track=>{refreshTrackDetails(state,track,time);renderTracks();drawWaves(track);},notify});
 const instantDouble=createInstantDouble({state,engine,load,render:renderDecks,notify});
 const jogBend=createJogBend({engine,onError:error=>notify(error.message)});
 function setMasterOutput(value,{save=true}={}){
