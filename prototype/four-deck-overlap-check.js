@@ -17,7 +17,7 @@ export async function checkSyncOverlap({app,count,label,click,until,capture,even
 }
 
 // One real-workspace cancellation window; no held ACKs or injected preparation delay.
-export async function checkSyncCancellation({app,click,until,event,report,play,sync}){
+export async function checkSyncCancellation({app,click,until,event,report,play,sync,gridSave=false}){
  const {state,engine}=app,assert=(ok,message)=>{if(!ok)throw Error(message);};
  const incoming=state.decks[1],outgoing=state.decks[0];
  const sample=d=>({playing:d.playing,processing:!!d.processing,queued:!!d.playQueued,sync:!!d.sync,rate:d.rate,audible:engine.audibleRate(d)});
@@ -36,13 +36,17 @@ export async function checkSyncCancellation({app,click,until,event,report,play,s
   const target=outgoing.track.bpm*outgoing.rate/incoming.track.bpm;
   assert(Math.abs(target-incoming.rate)>.001,'Incoming baseline must differ from the requested Sync tempo');
   const retained=[...document.querySelectorAll('.deck,.deck button,.deck input,.deck select,#mixer,#mixer input,#detail-wave,.library-wave-preview img')];
-  report.cancellation={before:state.decks.map(sample),target,tracks:state.decks.map(d=>d.track.title)};
+  report.cancellation={action:gridSave?'Save grid':'Shift-Sync/OFF',before:state.decks.map(sample),target,tracks:state.decks.map(d=>d.track.title)};
   click('[data-action="sync"][data-deck="1"]');click('[data-action="sync"][data-deck="1"]');
   // Shift-Sync shares the production OFF handler and stays available during preparation.
   assert(incoming.processing,'No pending Sync window observed; this run is inconclusive');
   report.cancellation.pending={state:sample(incoming),transforms:engine.transforms.size,startToken:engine.startTokens.get(1)};
   event('cancel-pending',{deck:1,...report.cancellation.pending});
-  document.querySelector('[data-action="sync"][data-deck="1"]').dispatchEvent(new MouseEvent('click',{bubbles:true,shiftKey:true}));
+  if(gridSave){
+   click('[data-action="grid"][data-deck="1"]');
+   const bpm=incoming.track.bpm*1.01;document.querySelector('#grid-bpm').value=bpm;
+   report.cancellation.grid={before:incoming.track.bpm,saved:bpm};click('#grid-save');
+  }else document.querySelector('[data-action="sync"][data-deck="1"]').dispatchEvent(new MouseEvent('click',{bubbles:true,shiftKey:true}));
   await until(()=>!incoming.processing&&!incoming.playQueued&&!engine.transforms.size,'canceled preparation settles',15);
   await new Promise(resolve=>setTimeout(resolve,250));
   const after=state.decks.map(sample);
@@ -51,7 +55,19 @@ export async function checkSyncCancellation({app,click,until,event,report,play,s
   assert(engine.voices.get(0)===voices[0]&&outgoing.rate===rates[0],'Outgoing master changed');
   assert(retained.every(node=>node.isConnected),'Cancellation replaced controls or library previews');
   assert(engine.audioMonitor.snapshot().physicalMuted,'Physical mute changed');
-  Object.assign(report.cancellation,{after,pendingObserved:true,retained:retained.length,passed:true,physicalMuted:true});
+  Object.assign(report.cancellation,{after,pendingObserved:true,retained:retained.length,physicalMuted:true});
+  if(gridSave){
+   await until(()=>!document.querySelector('#modal').open,'grid save completes',15);
+   await sync(1);const expected=outgoing.track.bpm*outgoing.rate/incoming.track.bpm;
+   const untilAudio=engine.voices.get(1)?.handoffBefore?.until||engine.ctx.currentTime;
+   report.cancellation.freshSync={scheduled:sample(incoming),audioTime:engine.ctx.currentTime,untilAudio,bpm:incoming.track.bpm,expected};
+   await until(()=>engine.ctx.currentTime>=untilAudio,'fresh Sync audible handoff',15);
+   report.cancellation.freshSync.state=sample(incoming);
+   assert(Math.abs(incoming.rate-expected)<1e-6&&Math.abs(engine.audibleRate(incoming)-expected)<1e-6,'Fresh Sync did not use the saved grid');
+   assert(engine.voices.get(0)===voices[0]&&outgoing.rate===rates[0],'Fresh Sync changed outgoing master');
+   report.cancellation.freshSync.masterRetained=true;
+  }
+  report.cancellation.passed=true;
  }finally{
   engine.silence();
   report.cancellation??={};report.cancellation.stopped=state.decks.every(d=>!d.playing&&!d.playQueued);

@@ -77,7 +77,7 @@ async function boot(){
  const parsed=new DOMParser().parseFromString(await(await fetch('workspace-preview.html')).text(),'text/html');for(const a of parsed.body.attributes)document.body.setAttribute(a.name,a.value);for(const link of parsed.querySelectorAll('link[rel=stylesheet]'))document.head.append(link);for(const n of [...parsed.body.children])if(n.tagName!=='SCRIPT')document.body.append(n);
  await import('./layout-preview.js');await until(()=>window.openPlay?.state.decks[1].track&&!window.openPlay.state.analysis,'workspace');app=window.openPlay;
  select('#deck-count','4');select('#preview-density','compact');app.engine.audioMonitor.mutePhysical(true);assert(app.engine.audioMonitor.snapshot().physicalMuted,'Physical mute');
- report.sourceHashes=Object.fromEntries(await Promise.all(['app.js','engine.js','smart-sync.js','source-waveform.js','detail-waveform.js','four-deck-soak-harness.js','four-deck-soak-worklet.js','four-deck-trace.js','library-waveform-preview.js','transport-presentation.js','library-rows.js','four-deck-analysis-check.js','analysis.js','analysis-worker.js','track-gain.js','analysis-presentation.js','analysis-input.js','four-deck-overlap-check.js'].map(async f=>[f,[...new Uint8Array(await crypto.subtle.digest('SHA-256',await(await fetch(f,{cache:'no-store'})).arrayBuffer()))].map(n=>n.toString(16).padStart(2,'0')).join('')])));report.phaseHandoffLoaded=app.engine.setPitch.toString().includes('if(d.playing&&!d.reverse)');
+ report.sourceHashes=Object.fromEntries(await Promise.all(['app.js','panels.js','engine.js','smart-sync.js','source-waveform.js','detail-waveform.js','four-deck-soak-harness.js','four-deck-soak-worklet.js','four-deck-trace.js','library-waveform-preview.js','transport-presentation.js','library-rows.js','four-deck-analysis-check.js','analysis.js','analysis-worker.js','track-gain.js','analysis-presentation.js','analysis-input.js','four-deck-overlap-check.js'].map(async f=>[f,[...new Uint8Array(await crypto.subtle.digest('SHA-256',await(await fetch(f,{cache:'no-store'})).arrayBuffer()))].map(n=>n.toString(16).padStart(2,'0')).join('')])));report.phaseHandoffLoaded=app.engine.setPitch.toString().includes('if(d.playing&&!d.reverse)');
  $('#soak-files').disabled=false;$('#soak-run').textContent='Choose eight tracks first';report.status='Ready for local files';show();
 }
 $('#soak-files').onchange=async e=>{
@@ -90,10 +90,11 @@ $('#soak-files').onchange=async e=>{
 };
 $('#soak-stop').onclick=()=>{stopping=true;app?.engine.silence();report.status='Stopped';show();};
 if(new URL(location.href).searchParams.has('syncCancelOnly')){
- const button=document.createElement('button');button.id='soak-cancel';button.disabled=true;button.textContent='Check rapid Sync then OFF once';$('#soak').prepend(button);
+ const gridSave=new URL(location.href).searchParams.has('gridSave');
+ const button=document.createElement('button');button.id='soak-cancel';button.disabled=true;button.textContent=gridSave?'Check pending Sync then Save grid once':'Check rapid Sync then OFF once';$('#soak').prepend(button);
  button.onclick=async()=>{
   try{assert(tracks.length===8,'Import the eight tracks first');button.disabled=true;report.status='Checking one cancellation window';
-   await checkSyncCancellation({app,click,until,event,report,play,sync});report.status='Cancellation checked; stopped';
+   await checkSyncCancellation({app,click,until,event,report,play,sync,gridSave});report.status='Cancellation checked; stopped';
   }catch(error){report.errors.push(error.stack);report.status='Cancellation failed or inconclusive';}
   finally{report.cancellation??={};report.cancellation.sessionUnchanged=report.sessionUnchanged();show();}
  };
