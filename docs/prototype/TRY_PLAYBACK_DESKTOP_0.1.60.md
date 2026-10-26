@@ -1,5 +1,7 @@
 # Private playback test0.1.60 — staged, not launched
 
+**Newer source fixes replacement analysis during pending Sync (CORE-FIX-19). This immutable package predates that repair; do not use60 to accept replacement analysis during a mix.** Keep the next package/check scoped to that changed path. [Executed source evidence](ANALYSIS_PENDING_SYNC_2026-10-26.md).
+
 Built from immutable source8bd3d86b4d9a1ffb84ad9ab61c601c19fe353256. The actual archive and controlled packaged-host inspection passed5/5. This does not prove native startup or audio acceptance. The current0.1.59 app/profile and both unversioned launchers are retained.
 
 Includes the real-track-verified Track Details BPM/pending-Sync repair and the controlled-callback-verified deck Tap scoped refresh. All existing layouts, DJ controls and library waveform preview source remain archived without adapter substitution. No new audio algorithm or framework.

@@ -90,8 +90,8 @@ $('#soak-files').onchange=async e=>{
 };
 $('#soak-stop').onclick=()=>{stopping=true;app?.engine.silence();report.status='Stopped';show();};
 if(new URL(location.href).searchParams.has('syncCancelOnly')){
- const gridSave=new URL(location.href).searchParams.has('metadataSave')?'metadata':new URL(location.href).searchParams.has('gridSave');
- const button=document.createElement('button');button.id='soak-cancel';button.disabled=true;button.textContent=gridSave==='metadata'?'Check pending Sync then Save details once':gridSave?'Check pending Sync then Save grid once':'Check rapid Sync then OFF once';$('#soak').prepend(button);
+ const gridSave=new URL(location.href).searchParams.has('analysisSave')?'analysis':new URL(location.href).searchParams.has('metadataSave')?'metadata':new URL(location.href).searchParams.has('gridSave');
+ const button=document.createElement('button');button.id='soak-cancel';button.disabled=true;button.textContent=gridSave==='analysis'?'Check reanalysis at pending Sync once':gridSave==='metadata'?'Check pending Sync then Save details once':gridSave?'Check pending Sync then Save grid once':'Check rapid Sync then OFF once';$('#soak').prepend(button);
  button.onclick=async()=>{
   try{assert(tracks.length===8,'Import the eight tracks first');button.disabled=true;report.status='Checking one cancellation window';
    await checkSyncCancellation({app,click,until,event,report,play,sync,gridSave});report.status='Cancellation checked; stopped';

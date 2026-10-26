@@ -24,6 +24,10 @@ export async function checkSyncCancellation({app,click,until,event,report,play,s
  assert(engine.audioMonitor.snapshot().physicalMuted,'Physical output must remain muted');
  assert(state.decks.every(d=>d.track?.bpm>0&&!d.playing),'Four analyzed, paused tracks required');
  try{
+  if(gridSave==='analysis'){
+   saveBPM(incoming.track,incoming.track.bpm*1.01);
+   await until(()=>!document.querySelector('#modal').open,'independent pre-analysis BPM edit',15);
+  }
   await engine.resume();
   for(const d of state.decks)await play(d.index);
   await sync(0);
@@ -36,19 +40,41 @@ export async function checkSyncCancellation({app,click,until,event,report,play,s
   const target=outgoing.track.bpm*outgoing.rate/incoming.track.bpm;
   assert(Math.abs(target-incoming.rate)>.001,'Incoming baseline must differ from the requested Sync tempo');
   const retained=[...document.querySelectorAll('.deck,.deck button,.deck input,.deck select,#mixer,#mixer input,#detail-wave,.library-wave-preview img')];
-  report.cancellation={action:gridSave==='metadata'?'Save details':gridSave?'Save grid':'Shift-Sync/OFF',before:state.decks.map(sample),target,tracks:state.decks.map(d=>d.track.title)};
-  click('[data-action="sync"][data-deck="1"]');click('[data-action="sync"][data-deck="1"]');
-  // Shift-Sync shares the production OFF handler and stays available during preparation.
-  assert(incoming.processing,'No pending Sync window observed; this run is inconclusive');
-  report.cancellation.pending={state:sample(incoming),transforms:engine.transforms.size,startToken:engine.startTokens.get(1)};
-  event('cancel-pending',{deck:1,...report.cancellation.pending});
-  if(gridSave){
+  report.cancellation={action:gridSave==='analysis'?'Replace analyzed grid':gridSave==='metadata'?'Save details':gridSave?'Save grid':'Shift-Sync/OFF',before:state.decks.map(sample),target,tracks:state.decks.map(d=>d.track.title)};
+  const requestSync=()=>{
+   click('[data-action="sync"][data-deck="1"]');click('[data-action="sync"][data-deck="1"]');
+   assert(incoming.processing,'No pending Sync window observed; this run is inconclusive');
+   report.cancellation.pending={state:sample(incoming),transforms:engine.transforms.size,startToken:engine.startTokens.get(1)};
+   event('cancel-pending',{deck:1,...report.cancellation.pending});
+  };
+  if(gridSave==='analysis'){
+   let triggered=false,failure;const before=incoming.track.bpm;
+   const completed=()=>{if(!triggered&&/Analyzing .* · 100% ·/.test(state.analysisStatus)){
+    triggered=true;try{requestSync();}catch(error){failure=error;}
+   }};
+   // The real worker's existing final progress event precedes its result message.
+   document.addEventListener('openplay-analysis-update',completed);
+   try{
+    click(`tr[data-track="${incoming.track.id}"]`);click('[data-panel="analysis"]');
+    document.querySelector('#analysis-replace-tempo').checked=true;click('#analysis-run');click('#modal-close');
+    await until(()=>!state.analysis,'actual replacement worker completes',180);
+   }
+   finally{document.removeEventListener('openplay-analysis-update',completed);}
+   if(failure)throw failure;
+   assert(triggered,'No worker completion overlap observed; inconclusive');
+   assert(!incoming.track.analysisError,'Actual worker analysis failed');
+   report.cancellation.grid={before,saved:incoming.track.bpm};
+   assert(before!==incoming.track.bpm,'Worker result did not replace the setup grid; inconclusive');
+  }else{
+   requestSync();
+   // Shift-Sync shares the production OFF handler and stays available during preparation.
+   if(gridSave){
    const bpm=incoming.track.bpm*1.01;report.cancellation.grid={before:incoming.track.bpm,saved:bpm};
    if(gridSave==='metadata'){
-    document.querySelector(`tr[data-track="${incoming.track.id}"]`).dispatchEvent(new MouseEvent('contextmenu',{bubbles:true,cancelable:true}));
-    const form=document.querySelector('#track-form');form.elements.bpm.value=bpm;form.requestSubmit();
+    saveBPM(incoming.track,bpm);
    }else{click('[data-action="grid"][data-deck="1"]');document.querySelector('#grid-bpm').value=bpm;click('#grid-save');}
-  }else document.querySelector('[data-action="sync"][data-deck="1"]').dispatchEvent(new MouseEvent('click',{bubbles:true,shiftKey:true}));
+   }else document.querySelector('[data-action="sync"][data-deck="1"]').dispatchEvent(new MouseEvent('click',{bubbles:true,shiftKey:true}));
+  }
   await until(()=>!incoming.processing&&!incoming.playQueued&&!engine.transforms.size,'canceled preparation settles',15);
   await new Promise(resolve=>setTimeout(resolve,250));
   const after=state.decks.map(sample);
@@ -76,4 +102,9 @@ export async function checkSyncCancellation({app,click,until,event,report,play,s
   report.cancellation??={};report.cancellation.stopped=state.decks.every(d=>!d.playing&&!d.playQueued);
   report.cancellation.physicalMuted=engine.audioMonitor.snapshot().physicalMuted;
  }
+}
+
+function saveBPM(track,bpm){
+ document.querySelector(`tr[data-track="${track.id}"]`).dispatchEvent(new MouseEvent('contextmenu',{bubbles:true,cancelable:true}));
+ const form=document.querySelector('#track-form');form.elements.bpm.value=bpm;form.requestSubmit();
 }

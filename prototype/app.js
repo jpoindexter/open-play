@@ -1233,6 +1233,7 @@ async function enqueueAnalysis(tracks, replacements = {}) {
       delete t.analysisError;
       t.analysisResult = { ...result, measuredAt: new Date().toISOString() };
       t.metadataSources ??= {};
+      let gridChanged=false,gridBefore;
       // Re-check live values after asynchronous work so edits made during a job win.
       if (
         (t.metadataRevision || 0) === snapshot.revision &&
@@ -1242,8 +1243,11 @@ async function enqueueAnalysis(tracks, replacements = {}) {
         ((!t.bpm && t.metadataSources.bpm !== "manual") || replaceTempo)
       ) {
         if (result.bpm !== null) {
-          t.bpm = Math.round(result.bpm * 100) / 100;
-          t.grid = result.grid?.firstBeat ?? null;
+          const bpm=Math.round(result.bpm*100)/100,grid=result.grid?.firstBeat??null;
+          gridChanged=t.bpm!==bpm||t.grid!==grid||!!t.gridMarkers?.length||!!t.gridWarpMarkers?.length;
+          if(gridChanged)gridBefore=engine.onGridWillChange?.(t);
+          t.bpm = bpm;
+          t.grid = grid;
           t.gridMarkers = [];
           t.gridWarpMarkers = [];
           t.metadataSources.bpm = "measured estimate";
@@ -1262,12 +1266,19 @@ async function enqueueAnalysis(tracks, replacements = {}) {
         t.metadataSources.key = "measured estimate";
       }
       trackGain.measurementReady(t);
-      completed++;
       persist();
-      renderTracks();
-      smartSync.reconcile();
-      refreshAnalysisControls(state,t);
-      drawWaves(t);
+      try{
+        if(gridChanged)await engine.onGridChanged?.(t,gridBefore);
+      }catch(error){
+        if(error.name==='AbortError')throw error;
+        throw new Error('Analysis saved; playback realignment failed: '+error.message,{cause:error});
+      }finally{
+        renderTracks();
+        smartSync.reconcile();
+        refreshAnalysisControls(state,t);
+        drawWaves(t);
+      }
+      completed++;
       updateAnalysisStatus(
         `${t.title}: BPM ${result.bpm ? result.bpm.toFixed(2) : "unknown"}, key ${result.key || "unknown"}`,
       );

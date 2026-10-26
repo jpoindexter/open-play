@@ -1,6 +1,8 @@
 ## Active core follow-through — 26 October2026
 
-Next software investigation if native input remains unavailable: enqueueAnalysis replace-tempo completion writes BPM/grid without the Edit grid callbacks (source hypothesis only). Reproduce its actual pending/engaged-Sync behavior before modifying it; do not infer a pop cause or create a confirmed defect from source alone.
+**Latest core source — 26 October2026:** replacement analysis now revokes old-grid Sync before metadata changes. Controlled failure reproduced; corrected actual worker/four-real-track overlap retains4oldvoices/master/233controls/previews, and fresh Sync uses127BPM. Affected analysis checks21/21. [Evidence](../docs/prototype/ANALYSIS_PENDING_SYNC_2026-10-26.md). CORE-FIX-19 remains open for exact desktop/held-gesture acceptance; staged60 predates this repair and is not accepted for replacement analysis while mixing. Running59/session/defaults unchanged; no new build or broad rerun.
+
+Next: group this verified repair into the next immutable candidate when native input is usable; execute only changed metadata/Tap/reanalysis/held-gesture paths. Remaining Sync-pop/long-frame causes need a concrete event/complete window; avoid another clean soak or speculative DSP. Prior manual/jog/EQ/Cue/stop acceptance retains scope; hardware deferred.
 
 **Staged private0.1.60/source8bd3d86 — 26 October2026:** actual archive/host inspection5/5; contains the metadata/Sync and Tap control-refresh repairs. Not launched/native-accepted. Current0.1.59/session and default/current launchers retained. [Staged guide](../docs/prototype/TRY_PLAYBACK_DESKTOP_0.1.60.md), [delivery limits](../docs/prototype/desktop-0.1.60-playback-delivery.json). Next: changed native metadata/Tap paths when input is available; no repeated broad listening/soak.
 
