@@ -1,5 +1,9 @@
 ## Active core follow-through — 26 October2026
 
+Next software investigation if native input remains unavailable: enqueueAnalysis replace-tempo completion writes BPM/grid without the Edit grid callbacks (source hypothesis only). Reproduce its actual pending/engaged-Sync behavior before modifying it; do not infer a pop cause or create a confirmed defect from source alone.
+
+**Staged private0.1.60/source8bd3d86 — 26 October2026:** actual archive/host inspection5/5; contains the metadata/Sync and Tap control-refresh repairs. Not launched/native-accepted. Current0.1.59/session and default/current launchers retained. [Staged guide](../docs/prototype/TRY_PLAYBACK_DESKTOP_0.1.60.md), [delivery limits](../docs/prototype/desktop-0.1.60-playback-delivery.json). Next: changed native metadata/Tap paths when input is available; no repeated broad listening/soak.
+
 **Current HTML follow-through — 26 October2026:** Track Details BPM edits now use existing grid ownership hooks and preserve active controls. Actual four-playing-real-track pending Sync→Save details RED (old Sync commits;5nodes retained)→GREEN (old Sync canceled;4voices/master and233nodes retained), then fresh Sync reaches edited BPM at its scheduled handoff. Four focused checks pass; originals/session unchanged. [Evidence](../docs/prototype/TRACK_DETAILS_PENDING_SYNC_2026-10-26.md). New CORE-FIX-17 remains open for native/held-gesture acceptance. This repair is newer than unchanged private0.1.59; no build/listening/pop-free claim.
 
 Native0.1.59/sourceb10bc82 has executed paused four-real-track quit/reopen recovery; both unversioned starters target59. Native pointer input is currently unavailable; no repeated click/unlock request. Retain native/listening/hardware limits and original historical prompt below.
