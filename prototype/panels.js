@@ -1,4 +1,5 @@
 import {createSessionPanels} from './session-panels.js';
+import {saveTrackDetails,refreshTrackDetails} from './track-details.js';
 import {validateBackup,trackMetadata} from './library-state.js';
 import {trackGainDB} from './track-gain.js';
 import {createDeckMIDIRouter,deckMIDITargets,libraryMIDITargets,fxMIDITargets,samplerMIDITargets,herculesPlaybackMappings} from './deck-midi.js';
@@ -373,29 +374,21 @@ export function createPanels(a) {
           "",
         )}<label>Rating<select name="rating">${[0, 1, 2, 3, 4, 5].map((n) => `<option value="${n}" ${t.rating === n ? "selected" : ""}>${n ? "★".repeat(n) : "Unrated"}</option>`).join("")}</select></label><label>Color<input type="color" name="color" value="${esc(t.color)}"></label><label><span>Protect beatgrid</span><input type="checkbox" name="locked" ${t.locked ? "checked" : ""}></label></div><p class="muted">Edits apply to prototype state. Original audio tags are never rewritten. Demo annotations are not measured key/BPM analysis.</p><div class="form-actions"><button type="button" id="mark-missing">${t.missing ? "Clear missing simulation" : "Simulate missing file"}</button><button type="button" id="add-prepare">Add to Prepare</button><button type="submit">Save details</button></div></form>`,
       (body) => {
-        body.querySelector("form").onsubmit = (e) => {
+        const form=body.querySelector("form"),save=form.querySelector('[type="submit"]');
+        const status=document.createElement('p');status.setAttribute('role','status');status.setAttribute('aria-live','polite');form.append(status);
+        let saving=false;
+        form.onsubmit = async (e) => {
           e.preventDefault();
-          const f = new FormData(e.target);
-          t.metadataSources ??= {};
-          if (Number(f.get("bpm")) !== t.bpm) t.metadataSources.bpm = "manual";
-          if (String(f.get("key")) !== t.key) t.metadataSources.key = "manual";
-          t.metadataRevision = (t.metadataRevision || 0) + 1;
-          for (const k of [
-            "title",
-            "artist",
-            "album",
-            "key",
-            "comment",
-            "color",
-          ])
-            t[k] = f.get(k);
-          t.bpm = Number(f.get("bpm")) || 0;
-          t.rating = Number(f.get("rating"));
-          t.locked = f.has("locked");
-          persist();
-          renderTracks();
-          renderDecks();
-          $("#modal").close();
+          if(saving)return;
+          saving=true;save.disabled=true;status.textContent='Saving details…';
+          try{
+            await saveTrackDetails(t,new FormData(form),engine,persist);
+            if(form.isConnected)$("#modal").close();
+          }catch(error){status.textContent=error.message;}
+          finally{
+            renderTracks();refreshTrackDetails(s,t,time);a.drawWaves(t);
+            saving=false;save.disabled=false;
+          }
         };
         $("#mark-missing").onclick = () => {
           t.missing = !t.missing;

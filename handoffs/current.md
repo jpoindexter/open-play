@@ -1,3 +1,11 @@
+## Active core follow-through — 26 October2026
+
+**Current HTML follow-through — 26 October2026:** Track Details BPM edits now use existing grid ownership hooks and preserve active controls. Actual four-playing-real-track pending Sync→Save details RED (old Sync commits;5nodes retained)→GREEN (old Sync canceled;4voices/master and233nodes retained), then fresh Sync reaches edited BPM at its scheduled handoff. Four focused checks pass; originals/session unchanged. [Evidence](../docs/prototype/TRACK_DETAILS_PENDING_SYNC_2026-10-26.md). New CORE-FIX-17 remains open for native/held-gesture acceptance. This repair is newer than unchanged private0.1.59; no build/listening/pop-free claim.
+
+Native0.1.59/sourceb10bc82 has executed paused four-real-track quit/reopen recovery; both unversioned starters target59. Native pointer input is currently unavailable; no repeated click/unlock request. Retain native/listening/hardware limits and original historical prompt below.
+
+--- Historical handoff below ---
+
 ## Active continuation — rekordbox design reference, 25 October 2026
 
 Fresh REA MCP extraction and bounded application are recorded in docs/design-system/REKORDBOX_REFERENCE_2026-10-25.md and REKORDBOX_APPLICATION_2026-10-25.md. Current connection is usable; the older Hopper blockage is historical. Shared139tokens and selected rekordbox presentation are applied; actual4H/2VCompact browser review retains controls/previews, positions and zeroPlay. UI-DS-01/REF-RB-01 descriptions read back exactly and remain open.

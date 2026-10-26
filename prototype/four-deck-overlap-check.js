@@ -36,20 +36,23 @@ export async function checkSyncCancellation({app,click,until,event,report,play,s
   const target=outgoing.track.bpm*outgoing.rate/incoming.track.bpm;
   assert(Math.abs(target-incoming.rate)>.001,'Incoming baseline must differ from the requested Sync tempo');
   const retained=[...document.querySelectorAll('.deck,.deck button,.deck input,.deck select,#mixer,#mixer input,#detail-wave,.library-wave-preview img')];
-  report.cancellation={action:gridSave?'Save grid':'Shift-Sync/OFF',before:state.decks.map(sample),target,tracks:state.decks.map(d=>d.track.title)};
+  report.cancellation={action:gridSave==='metadata'?'Save details':gridSave?'Save grid':'Shift-Sync/OFF',before:state.decks.map(sample),target,tracks:state.decks.map(d=>d.track.title)};
   click('[data-action="sync"][data-deck="1"]');click('[data-action="sync"][data-deck="1"]');
   // Shift-Sync shares the production OFF handler and stays available during preparation.
   assert(incoming.processing,'No pending Sync window observed; this run is inconclusive');
   report.cancellation.pending={state:sample(incoming),transforms:engine.transforms.size,startToken:engine.startTokens.get(1)};
   event('cancel-pending',{deck:1,...report.cancellation.pending});
   if(gridSave){
-   click('[data-action="grid"][data-deck="1"]');
-   const bpm=incoming.track.bpm*1.01;document.querySelector('#grid-bpm').value=bpm;
-   report.cancellation.grid={before:incoming.track.bpm,saved:bpm};click('#grid-save');
+   const bpm=incoming.track.bpm*1.01;report.cancellation.grid={before:incoming.track.bpm,saved:bpm};
+   if(gridSave==='metadata'){
+    document.querySelector(`tr[data-track="${incoming.track.id}"]`).dispatchEvent(new MouseEvent('contextmenu',{bubbles:true,cancelable:true}));
+    const form=document.querySelector('#track-form');form.elements.bpm.value=bpm;form.requestSubmit();
+   }else{click('[data-action="grid"][data-deck="1"]');document.querySelector('#grid-bpm').value=bpm;click('#grid-save');}
   }else document.querySelector('[data-action="sync"][data-deck="1"]').dispatchEvent(new MouseEvent('click',{bubbles:true,shiftKey:true}));
   await until(()=>!incoming.processing&&!incoming.playQueued&&!engine.transforms.size,'canceled preparation settles',15);
   await new Promise(resolve=>setTimeout(resolve,250));
   const after=state.decks.map(sample);
+  Object.assign(report.cancellation,{after,voicesRetained:state.decks.map((d,i)=>engine.voices.get(i)===voices[i]),nodesRetained:retained.filter(node=>node.isConnected).length});
   assert(state.decks.every((d,i)=>d.playing&&engine.voices.get(i)===voices[i]&&d.rate===rates[i]),'Cancellation changed a retained playing voice or nominal rate');
   assert(!incoming.sync&&Math.abs(engine.audibleRate(incoming)-rates[1])<1e-6,'Canceled incoming Sync left state/audio rate disagreement');
   assert(engine.voices.get(0)===voices[0]&&outgoing.rate===rates[0],'Outgoing master changed');
