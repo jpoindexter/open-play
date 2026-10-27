@@ -3,8 +3,8 @@
    HTML217. Native Traktor screenshot supplies the arrangement; flat shared
    Open Play surfaces supply the visual treatment. Core nodes are never cloned. */
 #workspace-preview[data-workspace=traktor-flat]{
- --tf-bg:#0b0c0d;--tf-surface:#181a1c;--tf-control:#24272a;--tf-line:#343a3e;
- --tf-text:#e5e8eb;--tf-muted:#a2adb5;
+ --tf-bg:var(--dj-semantic-background);--tf-surface:var(--dj-semantic-panel);--tf-control:var(--dj-semantic-control);--tf-line:var(--dj-semantic-border);
+ --tf-text:var(--dj-semantic-text);--tf-muted:var(--dj-semantic-text-muted);
  --tf-wave:88px;--tf-vertical-wave:112px;--tf-pads:48px;--tf-deck-height:340px;--tf-center:clamp(248px,19vw,288px);
  --rb-channel-min:0px;
 
@@ -32,7 +32,7 @@
 &[data-orientation][data-density] .deck:nth-of-type(n) .deck-head{grid-column:1/-1;grid-row:1;height:44px;background:var(--tf-surface);padding:2px 6px 2px 12px;grid-template-columns:28px minmax(0,1fr) 68px 76px 48px;gap:4px}
 & .rb-artwork{width:24px;height:24px}
 &[data-orientation][data-density] .deck:nth-of-type(n) .preview-key-caption{display:none}
-&[data-orientation][data-density] .deck:nth-of-type(n) .platter{grid-column:1;grid-row:2;width:116px;height:28px;display:flex;flex-direction:row;align-items:center;justify-content:center;gap:6px;box-shadow:none;border:0;border-radius:0;background:#101214;margin:0 0 0 4px;padding:0;color:var(--tf-text)}
+&[data-orientation][data-density] .deck:nth-of-type(n) .platter{grid-column:1;grid-row:2;width:116px;height:28px;display:flex;flex-direction:row;align-items:center;justify-content:center;gap:6px;box-shadow:none;border:0;border-radius:0;background:var(--dj-semantic-platter);margin:0 0 0 4px;padding:0;color:var(--tf-text)}
 &[data-orientation][data-density] .deck:nth-of-type(n) .platter small{color:var(--tf-muted)}
 &[data-orientation][data-density] .deck:nth-of-type(n) .rb-deck-options{grid-column:2;grid-row:2;display:flex;flex-direction:row;justify-content:flex-end;gap:4px;align-items:center;padding:0}
 &[data-orientation][data-density] .rb-deck-options button{height:24px;min-height:24px;width:auto;min-width:28px;padding:0 6px;}
@@ -41,13 +41,13 @@
 /* Copy the existing renderer's row, never its audio/analysis state. Keep source
    canvas measurable offscreen so playback and zoom continue at native scale. */
 &[data-orientation=horizontal] .detail-waves{position:fixed;top:-1200px;left:0;width:calc(100vw - 8px);height:480px;opacity:0;pointer-events:none;grid-area:unset}
-&[data-orientation=horizontal] .deck:nth-of-type(n) .preview-deck-wave{display:block;grid-column:1/3;grid-row:3;position:relative;min-width:0;background:#060708;margin:0 4px;border:0;border-radius:0;overflow:hidden}
+&[data-orientation=horizontal] .deck:nth-of-type(n) .preview-deck-wave{display:block;grid-column:1/3;grid-row:3;position:relative;min-width:0;background:var(--dj-semantic-background);margin:0 4px;border:0;border-radius:0;overflow:hidden}
 & .preview-deck-wave .waveform-scrub-lane{position:absolute;inset:0;z-index:1}
 & .preview-deck-wave output{position:absolute;inset:auto 4px 2px auto;}
-&[data-orientation][data-density] .deck:nth-of-type(n) .wave-wrap{grid-column:1/3;grid-row:4;height:24px;margin:0 4px;background:#080a0b;border:0}
+&[data-orientation][data-density] .deck:nth-of-type(n) .wave-wrap{grid-column:1/3;grid-row:4;height:24px;margin:0 4px;background:var(--dj-semantic-background);border:0}
 &[data-orientation][data-density] .deck:nth-of-type(n) .deck-body>div:first-child{grid-column:1/3;grid-row:5;padding:0 4px;align-self:stretch;min-width:0}
 &[data-orientation][data-density] .deck:nth-of-type(n) .pads{grid-auto-flow:row;grid-template-columns:repeat(4,minmax(0,1fr));grid-template-rows:repeat(2,22px);gap:4px}
-&[data-orientation][data-density] .deck:nth-of-type(n) .pad{height:22px;min-height:22px;border:0;border-bottom:2px solid var(--pad);border-radius:0;background:#101315;justify-content:flex-start;padding:0 6px;gap:4px}
+&[data-orientation][data-density] .deck:nth-of-type(n) .pad{height:22px;min-height:22px;border:0;border-bottom:2px solid var(--pad);border-radius:0;background:var(--dj-semantic-panel);justify-content:flex-start;padding:0 6px;gap:4px}
 &[data-density=expanded] .deck:nth-of-type(n) .pads{grid-template-rows:repeat(2,38px)}
 &[data-density=expanded] .deck:nth-of-type(n) .pad{height:38px;min-height:38px}
 /* One anchored transport/loop strip, mirroring the reference's bottom edge. */
@@ -70,9 +70,9 @@
 &:not(.four-decks)[data-library-focus=true][data-orientation][data-density] #mixer{padding-block:1px}
 &[data-orientation][data-density] .rb-mixer-band{grid-row:2;height:44px;background:var(--tf-surface);border:0}
 &.four-decks[data-orientation][data-density] .rb-mixer-band{grid-row:3}
-&[data-orientation][data-density] .library{grid-row:3;border:0;background:#0f1112}
+&[data-orientation][data-density] .library{grid-row:3;border:0;background:var(--dj-semantic-background)}
 &.four-decks[data-orientation][data-density] .library{grid-row:4}
-& .library-tools,& th{background:#1c2023}
+& .library-tools,& th{background:var(--dj-semantic-panel)}
 & .workspace-bar{gap:12px}
 & .workspace-switch button{padding-inline:9px}
 /* Vertical option keeps comparison waveforms directly above the mixer. */
@@ -222,7 +222,7 @@
 &[data-density=compact] .deck .preview-deck-time time{color:#e1e7eb}
 &[data-density=compact] .deck .preview-deck-time small{color:#a5afb7}
 &[data-density=compact] .deck .preview-key-row .deck-key{color:#c2dbc9}
-&[data-density=compact][data-orientation] .deck:nth-of-type(n) .platter{width:128px;background:#11171b;font-variant-numeric:tabular-nums}
+&[data-density=compact][data-orientation] .deck:nth-of-type(n) .platter{width:128px;background:var(--dj-semantic-platter);font-variant-numeric:tabular-nums}
 &[data-density=compact] .deck :is(.preview-deck-wave,.wave-wrap){outline:1px solid #35424a;outline-offset:-1px}
 &[data-density=compact][data-orientation=horizontal] .preview-deck-wave::before{content:'';position:absolute;left:50%;top:0;bottom:0;width:1px;background:#c4d7e2;opacity:.7;pointer-events:none;z-index:2}
 &[data-density=compact][data-orientation=horizontal] .preview-deck-wave::after{content:'';position:absolute;left:50%;top:0;transform:translateX(-50%);border-inline:4px solid transparent;border-top:5px solid var(--tf-deck-accent);pointer-events:none;z-index:2}
@@ -248,14 +248,14 @@
 &.four-decks[data-orientation=vertical][data-density][data-library-focus=false][data-rb-mixer=true] .detail-waves{grid-row:1/4}
 &[data-orientation=vertical][data-density][data-library-focus=false][data-rb-mixer=true] #mixer{grid-row:1/3;margin-left:calc(var(--tf-vertical-width) + 4px);width:calc(100% - var(--tf-vertical-width) - 4px);min-width:0}
 &.four-decks[data-orientation=vertical][data-density][data-library-focus=false][data-rb-mixer=true] #mixer{grid-row:1/4}
-&[data-orientation=vertical] .detail-waves .preview-wave-head{height:24px;background:#1c262d;border-bottom:1px solid #35424a}
+&[data-orientation=vertical] .detail-waves .preview-wave-head{height:24px;background:var(--dj-semantic-control);border-bottom:1px solid #35424a}
 &[data-orientation=vertical] .preview-wave-head>span{border-inline-start:1px solid #35424a}
 &[data-orientation=vertical] .preview-wave-head>span:first-child{border-inline-start:0}
 &[data-orientation=vertical] .detail-waves canvas{top:24px;height:calc(100% - 44px)}
 &[data-orientation=vertical] .detail-waves .waveform-scrub-lanes{top:24px;bottom:20px}
 &[data-orientation=vertical] .detail-waves .waveform-scrub-lane{border-inline-end:1px solid #35424a55}
 &[data-orientation=vertical] .detail-waves::after{content:'';position:absolute;left:0;right:0;top:calc(50% + 2px);height:1px;background:#c4d7e2;opacity:.8;pointer-events:none}
-&[data-orientation=vertical] .detail-waves>span{inset:auto 0 0;padding:3px 0;height:20px;box-sizing:border-box;text-align:center;background:#151c21;color:#aab7c0;white-space:nowrap;overflow:hidden}
+&[data-orientation=vertical] .detail-waves>span{inset:auto 0 0;padding:3px 0;height:20px;box-sizing:border-box;text-align:center;background:var(--dj-semantic-panel);color:#aab7c0;white-space:nowrap;overflow:hidden}
 /* Fader travel has nine fixed marks; only meaningful neutral/endpoints detent. */
 & .preview-fader-ticks{display:block;position:absolute;pointer-events:none;inset:8px 0;z-index:0}
 & .preview-fader-ticks i{position:absolute;left:3px;right:3px;top:calc(var(--tick)*100%);height:1px;background:#65727b}

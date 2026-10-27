@@ -3,7 +3,7 @@
   "$extensions": {
     "org.openplay": {
       "version": "0.2.0",
-      "date": "2026-10-25",
+      "date": "2026-10-27",
       "references": [
         {
           "path": "local-evidence/core-design-190/serato-practice-empty.png",
@@ -44,8 +44,14 @@
         "textMuted": "{primitive.dayMuted}",
         "selected": "{primitive.daySelected}",
         "textOnSelected": "{primitive.dayText}",
-        "recessed": "{primitive.white}"
-      }
+        "recessed": "{primitive.white}",
+        "platter": "{primitive.white}",
+        "platterText": "{primitive.black}",
+        "control": "{primitive.dayPanel}",
+        "controlEdge": "{primitive.dayMuted}",
+        "raised": "{primitive.dayBackground}"
+      },
+      "adaptation": "User-directed flat-black product surfaces with existing color accents; reference captures remain unchanged."
     }
   },
   "primitive": {
@@ -61,41 +67,45 @@
     },
     "canvas": {
       "$type": "color",
-      "$value": "#111111",
-      "$description": "Flat-color sampling from installed Serato practice screen, 19 October 2026.",
+      "$value": "#000000",
+      "$description": "Open Play flat-black surface role, adapted per user direction on 27 October 2026.",
       "$extensions": {
         "org.openplay": {
-          "confidence": "observed"
+          "confidence": "user-directed adaptation",
+          "referenceValue": "#111111"
         }
       }
     },
     "row": {
       "$type": "color",
-      "$value": "#1d1d1d",
-      "$description": "Flat-color sampling from installed Serato practice screen, 19 October 2026.",
+      "$value": "#080808",
+      "$description": "Open Play flat-black surface role, adapted per user direction on 27 October 2026.",
       "$extensions": {
         "org.openplay": {
-          "confidence": "observed"
+          "confidence": "user-directed adaptation",
+          "referenceValue": "#1d1d1d"
         }
       }
     },
     "surface": {
       "$type": "color",
-      "$value": "#222222",
-      "$description": "Flat-color sampling from installed Serato practice screen, 19 October 2026.",
+      "$value": "#080808",
+      "$description": "Open Play flat-black surface role, adapted per user direction on 27 October 2026.",
       "$extensions": {
         "org.openplay": {
-          "confidence": "observed"
+          "confidence": "user-directed adaptation",
+          "referenceValue": "#222222"
         }
       }
     },
     "raised": {
       "$type": "color",
-      "$value": "#444444",
-      "$description": "Flat-color sampling from installed Serato practice screen, 19 October 2026.",
+      "$value": "#242424",
+      "$description": "Open Play flat-black surface role, adapted per user direction on 27 October 2026.",
       "$extensions": {
         "org.openplay": {
-          "confidence": "observed"
+          "confidence": "user-directed adaptation",
+          "referenceValue": "#444444"
         }
       }
     },
@@ -616,41 +626,45 @@
     "neutral": {
       "canvas": {
         "$type": "color",
-        "$value": "#0f0f0f",
-        "$description": "Flat-fill RGB sample from REA rekordbox reference; display sampling, not vendor source token.",
+        "$value": "#000000",
+        "$description": "Open Play flat-black adaptation requested 27 October 2026; not a new vendor measurement.",
         "$extensions": {
           "org.openplay": {
-            "confidence": "observed"
+            "confidence": "user-directed adaptation",
+            "referenceValue": "#0f0f0f"
           }
         }
       },
       "panel": {
         "$type": "color",
-        "$value": "#1e1e1e",
-        "$description": "Flat-fill RGB sample from REA rekordbox reference; display sampling, not vendor source token.",
+        "$value": "#080808",
+        "$description": "Open Play flat-black adaptation requested 27 October 2026; not a new vendor measurement.",
         "$extensions": {
           "org.openplay": {
-            "confidence": "observed"
+            "confidence": "user-directed adaptation",
+            "referenceValue": "#1e1e1e"
           }
         }
       },
       "control": {
         "$type": "color",
-        "$value": "#282828",
-        "$description": "Flat-fill RGB sample from REA rekordbox reference; display sampling, not vendor source token.",
+        "$value": "#0b0b0b",
+        "$description": "Open Play flat-black adaptation requested 27 October 2026; not a new vendor measurement.",
         "$extensions": {
           "org.openplay": {
-            "confidence": "observed"
+            "confidence": "user-directed adaptation",
+            "referenceValue": "#282828"
           }
         }
       },
       "hover": {
         "$type": "color",
-        "$value": "#353535",
-        "$description": "Flat-fill RGB sample from REA rekordbox reference; display sampling, not vendor source token.",
+        "$value": "#171717",
+        "$description": "Open Play flat-black adaptation requested 27 October 2026; not a new vendor measurement.",
         "$extensions": {
           "org.openplay": {
-            "confidence": "observed"
+            "confidence": "user-directed adaptation",
+            "referenceValue": "#353535"
           }
         }
       },
@@ -673,6 +687,16 @@
             "confidence": "inferred"
           }
         }
+      },
+      "divider": {
+        "$type": "color",
+        "$value": "#161616",
+        "$description": "Quiet structural separation on black surfaces."
+      },
+      "controlEdge": {
+        "$type": "color",
+        "$value": "#777777",
+        "$description": "Visible fader/knob boundary on the black control face."
       }
     },
     "monoFont": {
@@ -756,7 +780,7 @@
     },
     "border": {
       "$type": "color",
-      "$value": "{primitive.canvas}",
+      "$value": "{primitive.neutral.divider}",
       "$description": "",
       "$extensions": {
         "org.openplay": {
@@ -821,7 +845,7 @@
     },
     "platter": {
       "$type": "color",
-      "$value": "{primitive.white}",
+      "$value": "{primitive.black}",
       "$description": "",
       "$extensions": {
         "org.openplay": {
@@ -831,7 +855,7 @@
     },
     "platterText": {
       "$type": "color",
-      "$value": "{primitive.black}",
+      "$value": "{primitive.text}",
       "$description": "",
       "$extensions": {
         "org.openplay": {
@@ -1297,6 +1321,10 @@
         "$type": "number",
         "$value": "{primitive.weight.bold}"
       }
+    },
+    "controlEdge": {
+      "$type": "color",
+      "$value": "{primitive.neutral.controlEdge}"
     }
   },
   "component": {
@@ -1493,7 +1521,7 @@
       },
       "edge": {
         "$type": "color",
-        "$value": "{semantic.borderStrong}"
+        "$value": "{semantic.controlEdge}"
       },
       "track": {
         "$type": "color",

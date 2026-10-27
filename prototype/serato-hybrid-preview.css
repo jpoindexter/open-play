@@ -7,18 +7,18 @@ body[data-workspace=serato-hybrid][data-wave-size=large]{--rb-wave-height:224px}
 body[data-workspace=serato-hybrid][data-orientation][data-density] .deck{
  grid-template-columns:minmax(0,1fr) 76px 100px 32px;
  grid-template-rows:44px 28px 28px minmax(76px,1fr) 24px 24px;
- gap:4px;background:#151515;border-top:2px solid #597caa;
+ gap:4px;background:var(--dj-semantic-panel);border-top:2px solid #597caa;
 }
 body[data-workspace=serato-hybrid][data-orientation][data-density] .deck:nth-of-type(even){grid-template-columns:minmax(0,1fr) 76px 100px 32px;border-top-color:#5ea8ba}
-body[data-workspace=serato-hybrid][data-orientation][data-density] .deck:nth-of-type(n) .deck-head{height:44px;background:#151515}
+body[data-workspace=serato-hybrid][data-orientation][data-density] .deck:nth-of-type(n) .deck-head{height:44px;background:var(--dj-semantic-panel)}
 body[data-workspace=serato-hybrid][data-orientation][data-density] .deck:nth-of-type(n) .deck-body>div:first-child{grid-column:1;grid-row:4;padding:0 4px;align-self:center}
 body[data-workspace=serato-hybrid][data-orientation][data-density] .deck:nth-of-type(n) .pads{grid-auto-flow:row;grid-template-columns:repeat(4,minmax(0,1fr));grid-template-rows:repeat(2,24px);gap:4px}
 body[data-workspace=serato-hybrid][data-orientation][data-density] .deck:nth-of-type(n) .pad{height:24px;min-height:24px;border-bottom:2px solid var(--pad);justify-content:center;padding:0 3px}
 body[data-workspace=serato-hybrid][data-orientation][data-density] .deck:nth-of-type(n) .preview-loop-strip{grid-column:2;grid-row:4;align-self:center}
-body[data-workspace=serato-hybrid][data-orientation][data-density] .deck:nth-of-type(n) .transport{grid-column:1/-1;grid-row:3;flex-direction:row;justify-content:flex-start;align-self:stretch;padding:0 4px;gap:4px;border-bottom:1px solid #333}
+body[data-workspace=serato-hybrid][data-orientation][data-density] .deck:nth-of-type(n) .transport{grid-column:1/-1;grid-row:3;flex-direction:row;justify-content:flex-start;align-self:stretch;padding:0 4px;gap:4px;border-bottom:1px solid var(--dj-semantic-border)}
 body[data-workspace=serato-hybrid][data-orientation][data-density] .deck:nth-of-type(n) .transport select{width:52px;height:24px;min-height:24px}
 body[data-workspace=serato-hybrid][data-orientation][data-density] .deck:nth-of-type(n) .transport :is([data-action=play],[data-action=cue]){width:68px;min-width:68px;height:24px;min-height:24px;border-radius:2px;}
-body[data-workspace=serato-hybrid][data-orientation][data-density] .deck:nth-of-type(n) .platter{grid-column:3;grid-row:4;width:96px;height:72px;border-radius:2px;border:1px solid #3d4852;background:#0b0b0b;box-shadow:none;gap:6px}
+body[data-workspace=serato-hybrid][data-orientation][data-density] .deck:nth-of-type(n) .platter{grid-column:3;grid-row:4;width:96px;height:72px;border-radius:2px;border:1px solid #3d4852;background:var(--dj-semantic-platter);box-shadow:none;gap:6px}
 body[data-workspace=serato-hybrid][data-orientation][data-density] .deck:nth-of-type(n) .rb-deck-options{grid-column:4;grid-row:4;padding:0;gap:4px}
 body[data-workspace=serato-hybrid][data-orientation][data-density] .deck:nth-of-type(n) .preview-deck-utilities{grid-row:5;gap:4px}
 body[data-workspace=serato-hybrid][data-orientation][data-density] .deck:nth-of-type(n) .deck-foot{grid-row:6;gap:4px}
@@ -34,7 +34,7 @@ body[data-workspace=serato-hybrid][data-density=expanded]{--rb-four-height:280px
 body[data-workspace=serato-hybrid][data-orientation][data-density=expanded] .deck{grid-template-rows:44px 28px 28px minmax(112px,1fr) 24px 24px}
 body[data-workspace=serato-hybrid][data-density=expanded] .deck:nth-of-type(n) .pads{grid-template-rows:repeat(2,36px)}
 body[data-workspace=serato-hybrid][data-density=expanded] .deck:nth-of-type(n) .pad{height:36px;min-height:36px}
-body[data-workspace=serato-hybrid][data-orientation][data-density] .deck:nth-of-type(n) .platter{align-items:center;color:#e6e8ea}
+body[data-workspace=serato-hybrid][data-orientation][data-density] .deck:nth-of-type(n) .platter{align-items:center;color:var(--dj-semantic-platter-text)}
 body[data-workspace=serato-hybrid][data-orientation][data-density] .deck:nth-of-type(n) .platter :is(strong,small){align-self:center;justify-self:center}
 body[data-workspace=serato-hybrid][data-orientation][data-density] .deck:nth-of-type(n) .preview-key-caption{display:none}
 body[data-workspace=serato-hybrid].four-decks[data-density=compact]{--rb-four-height:252px;--rb-wave-height:176px}

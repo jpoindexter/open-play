@@ -15,6 +15,9 @@
 #workspace-preview .op-standard[aria-pressed=true]:hover{background:var(--op-ui-selected)}
 #workspace-preview .op-standard:focus-visible{outline:var(--dj-semantic-focus-width) solid var(--dj-semantic-focus);outline-offset:calc(-1 * var(--dj-semantic-focus-width))}
 #workspace-preview .op-standard-field{display:inline-flex;min-width:0;margin:0}
+#workspace-preview :is(.astryx-selector,.astryx-text-input,.astryx-number-input,.astryx-textarea){background:var(--dj-semantic-control);border-color:var(--dj-semantic-border);border-radius:var(--dj-semantic-control-radius);box-shadow:none}
+#workspace-preview :is(.astryx-text-input,.astryx-number-input,.astryx-textarea){border-bottom-color:var(--dj-semantic-control-edge)}
+#workspace-preview :is(.astryx-selector,.astryx-text-input,.astryx-number-input,.astryx-textarea):focus-within{border-color:var(--dj-semantic-focus)}
 #workspace-preview .op-standard-field button{min-height:var(--op-ui-control);height:var(--op-ui-control);padding:0 var(--dj-semantic-inset);background:var(--op-ui-surface);border:0;min-width:var(--dj-semantic-select-width)}
 #workspace-preview .op-standard-field input{height:var(--dj-semantic-standard-control-height);min-height:var(--dj-semantic-standard-control-height);padding:0 var(--dj-semantic-inset);background:transparent;border:0;box-shadow:none;width:100%}
 #workspace-preview .op-standard-field [data-astryx-pressable]{border-radius:var(--dj-semantic-control-radius)}
@@ -31,7 +34,7 @@
 #workspace-preview .preview-zoom .op-standard{width:var(--dj-semantic-standard-control-height);padding:0}
 
 /* Portaled selectors use Astryx's listbox/keyboard model and local theme CSS. */
-html[data-astryx-theme=neutral] :is([role=listbox],[role=option]){}
+html[data-astryx-theme=neutral] [role=listbox]{background:var(--dj-semantic-panel);color:var(--dj-semantic-text);border-color:var(--dj-semantic-border-strong);box-shadow:none}
 /* Native modal keeps its existing lifecycle/focus trap; Astryx owns its
    preview surface and standard form fields. DJ performance ranges stay custom. */
 #workspace-preview #modal{padding:0;border:var(--dj-semantic-hairline) solid var(--op-ui-line);border-radius:var(--dj-semantic-gap);background:var(--dj-semantic-background);color:var(--op-ui-text);max-width:calc(100vw - var(--dj-semantic-header-height))}

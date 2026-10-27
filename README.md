@@ -12,6 +12,8 @@ Trello177cards/14complete: SYS-FIX-01's actual packaging gate satisfied; Setting
 
 Source ahead of76: CORE-FIX-29repairs shared Reverse/Repeat/Slip/Key Lock full-deck rebuilds. Actual four-deck Compact baseline0/225retained; repaired four actions225/225, other fader/previews retained, stopped/muted. One composed regression includes Stem Slip feedback/two-deck hidden command/structural fallback. Helpers45/159lines; no new runtime module or package. [Evidence and limits](docs/prototype/TRANSPORT_SWITCH_CONTROLS_2026-10-27.md).
 
+User-directed design slice: flat-black canvas and near-black shared surfaces, existing color accents/RGB waveforms retained. Actual two/four-deck Compact, Traktor-flat, Settings and selector review preserves controls/previews; token export213. Source preview on loopback63341 is intentionally open; native76/session unchanged, no new bundle. CORE-FIX-29 source is pushed as ff1411d. [Palette evidence and limits](docs/design-system/FLAT_BLACK_2026-10-27.md). Full style migration and native visual acceptance remain open.
+
 Next: continue software-only core/beta blockers, preserve current paused two-deck work and keep generated artifacts bounded. [CORE-LIVE-01](https://trello.com/c/yJ8r9kCD) holds the deferred controller/headphone/master/listening session. Retain the next actual pop/stall; do not repeat clean matrices.
 
 Independent open-source desktop DJ project, with a browser review candidate and ongoing reference investigation. The goal is familiar Serato DJ Pro design and behavior without artificial feature, account or device gates in the independent implementation.

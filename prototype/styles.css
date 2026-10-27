@@ -157,7 +157,7 @@ summary:focus-visible,
   display: flex;
   align-items: center;
   gap: 16px;
-  background: #19232b;
+  background:var(--dj-semantic-control);
   color: #b2c3d1;
 
 
@@ -270,7 +270,7 @@ main {
 .pad {
   height: 37px;
   text-align: left;
-  border-bottom: 2px solid var(--pad, #555);
+  border-bottom:2px solid var(--pad, var(--dj-semantic-border-strong));
 
   padding: 5px;
   overflow: hidden;
@@ -298,7 +298,7 @@ main {
 .platter {
   height: 123px;
   width: 123px;
-  border: 10px solid #070707;
+  border:10px solid var(--dj-semantic-border);
   border-radius: 100%;
   margin: 4px auto;
   background: #e7e8e9;
@@ -309,7 +309,7 @@ main {
   justify-content: center;
   align-items: center;
   font-variant-numeric: tabular-nums;
-  box-shadow: 0 0 0 1px #444;
+  box-shadow:none;
 }
 .platter::after {
   content: "";
@@ -318,7 +318,7 @@ main {
   height: 4px;
   right: 5px;
   top: 50%;
-  background: #111;
+  background:var(--dj-semantic-background);
   transform-origin: -12px center;
   transform: rotate(var(--rotation, 0deg));
 }
@@ -342,7 +342,7 @@ main {
 }
 .beat-position {display:flex;flex-direction:column;align-items:center;gap:3px;min-height:25px;text-transform:uppercase;color:var(--muted)}
 .beat-dots {display:flex;gap:4px}
-.beat-dots i {width:14px;height:3px;background:#555}
+.beat-dots i {width:14px;height:3px;background:var(--dj-semantic-control)}
 .beat-position[data-state="beat"],.beat-position[data-state="armed"],.beat-position[data-state="relative"] {color:#73cff4}
 .beat-position[data-state="tempo"] {color:#f0c65f}
 .beat-dots i.lit {background:currentColor}
@@ -385,8 +385,8 @@ main {
 .wave-wrap {
   position: relative;
   margin: 0 7px 6px;
-  background: #080a0b;
-  border: 1px solid #333;
+  background:var(--dj-semantic-background);
+  border:1px solid var(--dj-semantic-border);
   height: 46px;
   cursor: crosshair;
   overflow: hidden;
@@ -635,7 +635,7 @@ aside {
 
 }
 #crates button.active {
-  background: #3b3d3e;
+  background:var(--dj-semantic-control);
   color: white;
   border-left: 3px solid var(--orange);
   padding-left: 9px;
@@ -714,7 +714,7 @@ th button {
 }
 td {
   padding: 7px 9px;
-  border-right: 1px solid #292929;
+  border-right:1px solid var(--dj-semantic-border);
   white-space: nowrap;
   max-width: 350px;
   overflow: hidden;
@@ -795,7 +795,7 @@ dialog {
   color: var(--text);
   border: 1px solid #777;
   border-radius: 5px;
-  box-shadow: 0 20px 100px #0009;
+  box-shadow:none;
 }
 dialog::backdrop {
   background: #0009;
@@ -831,8 +831,8 @@ dialog::backdrop {
   bottom: 35px;
   left: 50%;
   transform: translateX(-50%);
-  background: #e5e8eb;
-  color: #16191d;
+  background:var(--dj-semantic-raised);
+  color:var(--dj-semantic-text);
   border-radius: 3px;
   padding: 9px 18px;
   max-width: 650px;
@@ -864,7 +864,7 @@ dialog::backdrop {
   justify-content: space-between;
   gap: 12px;
   min-height: 35px;
-  border-bottom: 1px solid #383838;
+  border-bottom:1px solid var(--dj-semantic-border);
   padding: 4px;
 
 }
@@ -971,10 +971,10 @@ dialog::backdrop {
   gap: 10px;
 }
 .scope {
-  background: #080c0a;
+  background:var(--dj-semantic-background);
   height: 125px;
   width: 100%;
-  border: 1px solid #363c39;
+  border:1px solid var(--dj-semantic-border);
 }
 .log {
 
@@ -1157,8 +1157,8 @@ kbd {
 /* Scrolling detail view is an original browser visualization, not native render parity. */
 .detail-waves {
   position: relative;
-  background: #070a0c;
-  border: 1px solid #40464b;
+  background:var(--dj-semantic-background);
+  border:1px solid var(--dj-semantic-border-strong);
   min-width: 0;
   overflow: hidden;
 }
@@ -1280,6 +1280,6 @@ kbd {
 .track-gain-control [data-track-gain-mode]{display:inline}
 
 /* Persistent only while saving/recovery needs attention; no healthy-layout space. */
-#session-save-status:not([hidden]) { position:fixed; z-index:100; left:12px; right:12px; bottom:12px; padding:12px; border:1px solid var(--line); background:var(--surface); color:var(--text); box-shadow:0 2px 12px #0009; display:flex; flex-wrap:wrap; gap:8px; }
+#session-save-status:not([hidden]) { position:fixed; z-index:100; left:12px; right:12px; bottom:12px; padding:12px; border:1px solid var(--line); background:var(--surface); color:var(--text); box-shadow:none; display:flex; flex-wrap:wrap; gap:8px; }
 #session-save-status p { flex-basis:100%; margin:0; }
 #session-save-status button { min-height:32px; }
