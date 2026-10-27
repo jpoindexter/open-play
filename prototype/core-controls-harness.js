@@ -19,6 +19,23 @@ function base64(bytes){let text='';for(let i=0;i<bytes.length;i+=16384)text+=Str
 function rms(data,from,to,sr){let power=0;const start=Math.ceil(from*sr),end=Math.floor(to*sr);assert(start>=0&&end<=data.length&&end>start,'Missing declared recording window');for(let n=start;n<end;n++)power+=data[n]**2;return Math.sqrt(power/(end-start));}
 function amplitude(data,from,to,sr,hz){let re=0,im=0;const start=Math.ceil(from*sr),end=Math.floor(to*sr);for(let n=start;n<end;n++){re+=data[n]*Math.cos(2*Math.PI*hz*n/sr);im+=data[n]*Math.sin(2*Math.PI*hz*n/sr);}return 2*Math.hypot(re,im)/(end-start);}
 const show=()=>result.textContent=JSON.stringify({...report,recording:report.recording?{...report.recording,base64:'Retained in original evidence'}:undefined},null,2);
+document.querySelector('#natural-end-run').onclick=async()=>{
+ let engine,state;const r={complete:false,scope:'One actual forward natural end in isolated four-deck GUI; generated audio/physical mute, no native/listening or Sync-pop cause proof.'};
+ try{
+  assert(location.port==='8874','Dedicated port8874 required');assert(localStorage.length===0||localStorage.getItem('openplay-core-controls-owned')==='true','Refusing unowned origin');
+  localStorage.setItem('openplay-core-controls-owned','true');localStorage.setItem(sessionKey,JSON.stringify({settings:{'Analyze Stems':false}}));
+  frame.src='workspace-preview.html?natural-end='+Date.now();await new Promise(resolve=>frame.onload=resolve);await until(()=>app()&&!app().state.analysis,'workspace');
+  ({engine,state}=app());await engine.resume();engine.audioMonitor.mutePhysical(true);assert(engine.audioMonitor.snapshot().physicalMuted,'Physical mute');input('#deck-count',4,'change');await until(()=>doc().querySelectorAll('.library-wave-preview img').length>0,'library previews');
+  const d=state.decks[0],w=frame.contentWindow;assert(!d.reverse&&!d.repeat&&!d.loop&&!state.autoplay,'Ordinary forward end setup');if(d.quantize??state.quantize)click('[data-action="quantize"][data-deck="0"]');
+  const overview=doc().querySelector('[data-seek="0"]');for(const key of ['End','ArrowLeft'])overview.dispatchEvent(new w.KeyboardEvent('keydown',{key,code:key,bubbles:true,cancelable:true}));
+  await until(()=>engine.position(d)===d.track.duration-1,'One second before end');click('[data-action="play"][data-deck="0"]');await until(()=>d.playing&&!d.processing,'Forward Play');
+  const focused=doc().querySelector('[data-mix="1:level"]');focused.focus();const value=focused.value,nodes=[...doc().querySelectorAll('.deck button,.deck input,#mixer button,#mixer input,[data-waveform-scrub],#detail-wave')];
+  await until(()=>!d.playing&&!d.processing&&!d.playQueued,'Natural end');await new Promise(resolve=>w.requestAnimationFrame(()=>w.requestAnimationFrame(resolve)));
+  Object.assign(r,{position:engine.position(d),duration:d.track.duration,voicePresent:engine.voices.has(0),observedControls:nodes.length,retainedControls:nodes.filter(n=>n.isConnected).length,unrelatedMixerFocused:doc().activeElement===focused,mixerValueRetained:focused.isConnected&&focused.value===value,playControls:doc().querySelectorAll('[data-action="play"]').length,previewImages:doc().querySelectorAll('.library-wave-preview img').length,playLabel:doc().querySelector('[data-action="play"][data-deck="0"]').textContent});
+  assert(r.position===r.duration&&!r.voicePresent&&r.playLabel==='▶','Natural-end transport state is stale');assert(r.observedControls===r.retainedControls&&r.unrelatedMixerFocused&&r.mixerValueRetained,'Natural end replaced controls or lost unrelated focus');assert(r.playControls===4&&r.previewImages>0,'Controls or library previews missing');r.complete=true;
+ }catch(error){r.error=error.message;}
+ finally{if(engine&&state){for(const d of state.decks){if(d.playing||d.processing||d.playQueued)click(`[data-action="play"][data-deck="${d.index}"]`);engine.pause(d);}await until(()=>state.decks.every(d=>!d.playing&&!d.processing&&!d.playQueued),'Stopped cleanup');r.physicalMuted=engine.audioMonitor.snapshot().physicalMuted;r.allStopped=true;}result.textContent=JSON.stringify(r,null,2);}
+};
 document.querySelector('#reverse-end-run').onclick=async()=>{
  let engine,state;const r={complete:false,scope:'One actual isolated four-deck reverse boundary Play; generated audio/physical mute, no native/listening/reversal-quality/Sync-pop proof.'};
  try{

@@ -1981,7 +1981,7 @@ engine.onEnd = async (d) => {
       if(loaded&&state.autoplay)await play(d);
     }
   }
-  renderDecks();
+  refreshTransportControls(state);
 };
 function tick() {
   // Measure before presentation writes invalidate layout.

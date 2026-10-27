@@ -1,0 +1,9 @@
+# Natural end retains deck and mixer controls — 27 October 2026
+
+CORE-FIX-27: https://trello.com/c/gV1a1ixD . On source 3c87b56, the ordinary forward end callback rebuilt all decks/mixer after stopping. In the actual isolated four-deck workspace, Play from one second before the generated track end stopped at 48s with no voice, but retained 0/225 observed controls and lost the other channel fader focus/value ownership. This extends the earlier reverse-boundary observation to ordinary forward end.
+
+One product line uses existing refreshTransportControls(state) instead of renderDecks() at the end of the shared onEnd callback. Existing Repeat/Autoplay branch bodies and load/play handling stay in place; structural track loading keeps its own renderer. No new runtime module/dependency, audio-clock/rate/DSP/Sync/grid/controller/layout change. Existing per-frame presentation updates clocks and Sync status.
+
+The same actual GUI path now retains 225/225 observed controls, other-channel fader focus/value, all four Play controls and three observed lazy library previews. End position 48s, no active voice, Play label returns to ▶; physical output mute asserted and final decks stopped/no queued restart. This diagnostic is 254 lines, not a new product abstraction. Original media/normal profile untouched. [Compact results](natural-end-2026-10-27.json); private raw snapshots in ignored local-evidence/natural-end-2026-10-27/.
+
+This does not measure frame-time improvement or prove a Sync-pop cause, native held/playing input, Repeat/Autoplay runtime, reversal quality, controller or listening behavior. No broad suite/soak or repeated accepted listening was run. Native/controller acceptance stays in the existing owner session: https://trello.com/c/yJ8r9kCD . Oversized legacy app/engine remain MOD-001 debt; no whole-app 300-line claim.
