@@ -2,15 +2,15 @@
 
 ## Current core delivery — 27 October2026
 
-**Private0.1.70/source73e319f is running paused** after actual archive/host5/5 (612prototype files/101declared modules), normal69quit and hashed closed-profile backup255files/120562539B. Same4real tracks2/3/4/5s,16library tracks/exact BX3 metadata,4Play/tempo/filter/level/12EQ, decoded detail/overviews and5viewport AX previews retained; silent master/Autoplay off. No main Play/Sync/REC or new native Worker. [Delivery and limits](docs/prototype/desktop-0.1.70-playback-delivery.json).
+**Private0.1.71/sourcee92e3d6 is running paused** after actual archive/host5/5 (613prototype files/101declared modules), normal70quit and hashed closed-profile backup254files/120546148B. Same4real tracks restored2/3/4/5s,16library tracks/exact BX3 metadata,4Play/tempo/filter/level/12EQ/decoded detail/overviews/5viewport AX previews; master silent/Autoplay off. No main Play/Sync/REC. [Delivery and limits](docs/prototype/desktop-0.1.71-playback-delivery.json).
 
-ANA-FIX-08 skips disabled tempo/key spectral work after validation/whole-input level measurements. Controlled actual-module fixture500FFTbefore→0after; one focused regression. One same-buffer real-track browser Worker1407.5→580ms, full result JSON/decoded PCM/original file intact. Single observation, not p75/native/four-deck speedup or pop proof; warm-up/environment uncontrolled. [Report](docs/prototype/ANALYSIS_LEVEL_ONLY_2026-10-27.md). Broader ANA-007/ANA-005/AUD-006/native-playing criteria remain OPEN.
+CORE-FIX-25 rejects invalid enabled loops before transport/Slip changes through one shared engine method. Two focused regressions2fail→2pass; actual corrected four-deck End→Loop48→48active baseline→loopoff/0→0error and236/236observed nodes retained. Muted valid Play succeeds; rejected invalid active request keeps voice/token/rate/finite advancing clock. Exact71native Quantize-off End337.0377→Loop displays bounds error; restored A2s/Quantizeon, B/C/D3/4/5s. Native message/position evidence is not direct bounds/DOM/pointer/acoustic proof. [Report](docs/prototype/LOOP_BOUNDS_2026-10-27.md).
 
-Eight added product lines; no new runtime module/UI/playback-DSP/routing or broad suite/soak. Defaults70; named starter syntax checked only. Prior64–69control/preparation fixes and53human ordinary listening retain scope. New handwritten modules target150–250lines/cap300; existing app/panels/analysis remain MOD-001 oversized debt, not whole-app compliance.
+Seven product lines/no new runtime module/clock/playback-DSP/routing/layout or broad suite/soak. Defaults71and named starter syntax checked only. Prior53ordinary acceptance and64–70repairs retain scope. New handwritten modules target150–250lines/cap300; existing oversized engine/app/panels/analysis remain MOD-001 debt, not whole-app compliance.
 
-Owner-dependent work stays in [CORE-LIVE-01](https://trello.com/c/yJ8r9kCD) / [one practical checklist](docs/delivery/OWNER_CORE_SESSION_2026-10-27.md). Native held/playing/fault/cold-touch, timer-only latency, rare Sync pops/stalls, physical routing/listening and release gates stay OPEN.
+Owner-dependent work remains in [CORE-LIVE-01](https://trello.com/c/yJ8r9kCD) / [one practical checklist](docs/delivery/OWNER_CORE_SESSION_2026-10-27.md). Broader valid-loop/reference, native held/playing/fault/cold-touch, timer-only latency, intermittent Sync pops/stalls, hardware/listening and release gates remain OPEN.
 
-Next: one controller/listening session when Jason returns; retain only actual outcomes and the next pop/stall. Unattended work follows reproduced core defects, not another clean matrix. [Public beta scope](docs/delivery/PUBLIC_BETA_PLAN.md).
+Next: one controller/listening session on return; do not rerun covered paused cases. Continue only reproduced unattended core defects and retain the next actual pop/stall. [Public beta scope](docs/delivery/PUBLIC_BETA_PLAN.md).
 
 Independent open-source desktop DJ project, with a browser review candidate and ongoing reference investigation. The goal is familiar Serato DJ Pro design and behavior without artificial feature, account or device gates in the independent implementation.
 
