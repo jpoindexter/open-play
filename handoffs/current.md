@@ -8,7 +8,9 @@ Current/default/named launchers target77. Validated inactive76bundle retired aft
 
 Newer source CORE-FIX-30/a0ecb7a loop/length/beat-jump/manual/Auto/Roll presentation is NOT included in77. Actual stopped/muted baseline0/225→225/225controls; Auto/Roll230/230after explicit mode changes; one composed regression RED→GREEN. New helper38lines; legacy oversized app.js remains modularization debt. [Source evidence](../docs/prototype/LOOP_CONTROLS_2026-10-27.md).
 
-Trello178cards/14complete. Current core/native/design summaries reconciled; broad cards stay open. [CORE-LIVE-01](https://trello.com/c/yJ8r9kCD) groups the deferred owner/controller/headphone/master/listening session. Next: continue reproduced software-only core/beta blockers; include CORE-FIX-30 in the next normal immutable candidate. Capture the next actual pop/stall before changing clocks/DSP. Do not repeat accepted clean matrices or infer full-core/public-beta completion.
+Newer source CORE-FIX-31revokes pending Instant Double on incoming Stop. Actual735dfe6browser baseline restarts stoppedBafter heldFXrelease; repairedBstays stopped, sourceAvoice/rate/controls/previews retained, physical mute. Existing helper31lines; one new composed regression and2affected Play/Cue files21/21. Current77predates this and CORE-FIX-30. [Ownership evidence/limits](../docs/prototype/INSTANT_DOUBLE_STOP_2026-10-27.md).
+
+Trello179cards/14complete. Current core/native/design summaries reconciled; broad cards stay open. [CORE-LIVE-01](https://trello.com/c/yJ8r9kCD) groups the deferred owner/controller/headphone/master/listening session. Next: continue reproduced software-only core/beta blockers; include CORE-FIX-30/31 in the next normal immutable candidate. Capture the next actual pop/stall before changing clocks/DSP. Do not repeat accepted clean matrices or infer full-core/public-beta completion.
 
 --- Historical handoff below ---
 

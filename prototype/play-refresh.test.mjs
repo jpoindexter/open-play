@@ -12,7 +12,7 @@ function fixture({latch=false,reject=false,slice=null}={}){
  const state={decks,deckCount:4,focus:2,settings:{'Retain Tracks in Prepare':false},history:[],prepare:['2']},d=decks[2],calls={decks:0,tracks:0,refresh:0,starts:0},playRequests=new WeakMap();
  let resolveStart,generation=0;
  const engine={pause(d){generation++;d.playing=false;d.processing=false;},async start(d){calls.starts++;const own=generation;await new Promise(resolve=>resolveStart=resolve);if(reject)throw Error('Start failed');if(own===generation)d.playing=true;}};
- const context={state,engine,playRequests,pitchPlay:{latch:()=>latch},cueHolds:{latch:()=>false,cancelDeck(){}},syncMaster:{started(){}},
+ const context={state,engine,instantDouble:{pending:()=>false},playRequests,pitchPlay:{latch:()=>latch},cueHolds:{latch:()=>false,cancelDeck(){}},syncMaster:{started(){}},
   smartSync:{reconcile(){},paused(){},async start(){return false;},played(){}},slicer:{cancelDeck(d){if(d.slice!==null){d.slice=null;d.loop=false;}}},stemSlipControls:{cancelDeck(){}},
   cancelPendingPlay:d=>{playRequests.delete(d);d.playQueued=false;},persist(){},renderDecks(){calls.decks++;},renderTracks(){calls.tracks++;},
   refreshTransportControls(){calls.refresh++;},notify(){}};

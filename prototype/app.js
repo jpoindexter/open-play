@@ -621,11 +621,12 @@ async function ensurePreparedStems(track) {
 }
 const deckLoadRequests = new WeakMap();
 const playRequests = new WeakMap();
-function cancelPendingPlay(d){playRequests.delete(d);d.playQueued=false;}
+function cancelPendingPlay(d){playRequests.delete(d);d.playQueued=false;instantDouble.cancelDeck(d);}
 const faderStarts=new Map();
 async function faderStart(d,value,previous,deviceId=''){
   if(!d.track)return;
   if(value===0){
+    instantDouble.cancelDeck(d);
     cueHolds.cancelDeck(d);
     const active=faderStarts.get(d.index);
     if(active)active.wanted=false;
@@ -782,7 +783,7 @@ async function play(d) {
   let structuralRefresh=false;
   const pending=playRequests.get(d);
   if(pending&&pending.track!==d.track)cancelPendingPlay(d);
-  if (d.playing || d.processing || playRequests.has(d)) {
+  if (d.playing || d.processing || playRequests.has(d) || instantDouble.pending(d)) {
     cancelPendingPlay(d);
     cueHolds.cancelDeck(d);
     const heldSlice=d.slice!==null&&d.slice!==undefined;
@@ -1336,7 +1337,7 @@ function download(name, content, type = "application/json") {
 let resetting = false;
 function reset() {
   resetting = true;
-  state.decks.forEach(d=>cueHolds.cancelDeck(d));
+  state.decks.forEach(d=>{cancelPendingPlay(d);cueHolds.cancelDeck(d);});
   engine.silence();
   localStorage.removeItem("openplay-review-v1");
   location.reload();
@@ -2088,7 +2089,7 @@ requestAnimationFrame(tick);
 window.addEventListener("beforeunload", () => {
   if (!resetting) persist();
   deckScratchControls.dispose();
-  state.decks.forEach(d=>cueHolds.cancelDeck(d));
+  state.decks.forEach(d=>{cancelPendingPlay(d);cueHolds.cancelDeck(d);});
   engine.silence();
   stemWaveforms.forEach(model => model.dispose());
   localAudio.close();
