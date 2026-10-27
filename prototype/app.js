@@ -1343,7 +1343,7 @@ function reset() {
   location.reload();
 }
 const deckTapTempo=createDeckTapTempo({engine,persist,render:track=>{refreshTrackDetails(state,track,time);renderTracks();drawWaves(track);},notify});
-const instantDouble=createInstantDouble({state,engine,load,render:renderDecks,notify});
+const instantDouble=createInstantDouble({state,engine,load,render:d=>{refreshAnalysisControls(state,d.track);refreshDeckSwitches(state,d.index);refreshLoopDecks(d);},notify});
 const jogBend=createJogBend({engine,onError:error=>notify(error.message)});
 function setMasterOutput(value,{save=true}={}){
   const db=engine.setMasterDB(value);state.settings["Master Output Level"]=db;

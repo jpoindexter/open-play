@@ -35,3 +35,19 @@ test('a stopped incoming deck never resumes when its older Instant Double prepar
  assert.equal(await instantDouble(1),true,'A fresh normal Double still completes after cancellation');assert.equal(d.playing,true);assert.equal(instantDouble.pending(d),false);engine.pause(d);
  f.decks[0].playing=false;assert.equal(await instantDouble(1),true,'Paused source Double remains paused');assert.equal(d.playing,false);assert.equal(engine.voices.has(1),false);
 });
+
+test('actual Double completion wiring refreshes copied controls without rebuilding decks',async()=>{
+ const track={id:'copy',key:'Am'},sourceDeck={index:0,track,position:4,rate:1,keylock:true,keyShift:2,repeat:true,playing:false};
+ const incoming={index:1,track:null,position:0},state={decks:[sourceDeck,incoming]},calls=[];
+ const engine={position:d=>d.position,async setRate(d,rate){d.rate=rate;},async seek(d,position){d.position=position;}};
+ const scope={createInstantDouble,state,engine,load:async()=>{incoming.track=track;return true;},notify:message=>assert.fail(message),
+  renderDecks:()=>assert.fail('Double completion rebuilt decks'),
+  refreshAnalysisControls:(s,t)=>{assert.equal(s,state);assert.equal(t,track);calls.push('key');},
+  refreshDeckSwitches:(s,index)=>{assert.equal(s,state);assert.equal(index,1);calls.push('switches');},
+  refreshLoopDecks:d=>{assert.equal(d,incoming);calls.push('loops');}};
+ const declaration=source.match(/^const instantDouble=createInstantDouble.*$/m)[0];
+ const double=new Function(...Object.keys(scope),declaration+';return instantDouble;')(...Object.values(scope));
+ assert.equal(await double(1),true);assert.deepEqual(calls,['key','switches','loops']);
+ assert.equal(incoming.keyShift,2);assert.equal(incoming.keylock,true);assert.equal(incoming.repeat,true);
+ assert.equal(incoming.position,4);assert.equal(incoming.playing,undefined);assert.equal(double.pending(incoming),false);
+});

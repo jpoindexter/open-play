@@ -1,3 +1,5 @@
+Unpackaged core source repair: [CORE-FIX-32](https://trello.com/c/SQZGGHZV) removes Instant Double’s completion-wide deck rebuild by reusing existing presentation helpers. Actual muted four-deck browser retention improves 114/355 → 355/355 controls, with 3/3 previews and the outgoing voice/rate retained; focused checks 2/2. Focus and native held/listening acceptance are unverified. Current native 0.1.78 remains unchanged; no new bundle or broad rerun. [Evidence](../docs/prototype/INSTANT_DOUBLE_CONTROLS_2026-10-27.md). Trello 180 cards / 14 complete; this card remains open.
+
 # Open Play HTML review candidate
 
 ## Current core delivery — 27 October 2026

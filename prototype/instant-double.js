@@ -24,7 +24,7 @@ export function createInstantDouble({state,engine,load,render=()=>{},notify=()=>
      return engine.voiceClock(source,engine.voices.get(source.index))(when);
     }});
    }else await engine.seek(deck,engine.position(source));
-   if(!valid())return false;render();return true;
+   if(!valid())return false;render(deck);return true;
   }finally{if(owners.get(index)===owner)owners.delete(index);}
  }
  return Object.assign(instantDouble,{cancelDeck:d=>owners.delete(d.index),pending:d=>owners.has(d.index)});

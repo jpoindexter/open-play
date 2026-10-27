@@ -1,3 +1,5 @@
+Unpackaged core source repair: [CORE-FIX-32](https://trello.com/c/SQZGGHZV) removes Instant Double’s completion-wide deck rebuild by reusing existing presentation helpers. Actual muted four-deck browser retention improves 114/355 → 355/355 controls, with 3/3 previews and the outgoing voice/rate retained; focused checks 2/2. Focus and native held/listening acceptance are unverified. Current native 0.1.78 remains unchanged; no new bundle or broad rerun. [Evidence](docs/prototype/INSTANT_DOUBLE_CONTROLS_2026-10-27.md). Trello 180 cards / 14 complete; this card remains open.
+
 ## Current core delivery — 27 October 2026
 
 **Private0.1.78/sourceae84a50 is inspected5/5, running/current and observed paused.** Protected77Recording preflight clear → normal quit/process absence →255-file120335676Bclosed-profile backup with before/after/copy hashes equal → exact78startup. Constant Change/Prism restore13.073/12.426s,16library tracks,2Play/tempo,6EQ and12AX library previews. PriorBLOW−24dBrestored; tempo/Sync reset normally. No main Play/Sync/REC Start. [Current native evidence](docs/prototype/DESKTOP_CORE_078_2026-10-27.md).
