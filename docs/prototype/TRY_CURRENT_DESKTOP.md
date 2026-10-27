@@ -1,3 +1,13 @@
+# Current private desktop0.1.77
+
+Open `Start Open Play Current Test.command` or `Start Open Play Playback Test 0.1.77.command` only when the current playback-test app is closed. The app is currently open and paused. Default/named launchers target77; the inactive76bundle/starter are retired. No public release.
+
+Exact source57afcc6passed package inspection5/5 and protected native startup/recovery. The same two real tracks returned at13.073/12.426seconds with16library tracks, core controls, decoded waveforms and12AX previews. OriginalBLOW−24dBrestored; tempo/Sync reset normally. No Play/Sync/REC Start. [Current native evidence](DESKTOP_NATIVE_077_2026-10-27.md).
+
+CORE-FIX-29 and flat-black styling are included. Newer CORE-FIX-30 loop-control repair is source-only and awaits the next normal candidate. Prior53ordinary mixing/listening evidence remains scoped; current held/playing gestures, intermittent pops/stalls and physical headphone/controller acceptance remain open. Keep them in CORE-LIVE-01; do not repeat clean matrices.
+
+--- Historical guides below; old launch targets and blockers are not current ---
+
 # Private desktop0.1.58 — startup observed, restart review pending
 
 The exact versioned58bundle/source2ba58bb is open. Native startup shows the shared quiet header,16saved tracks and16library waveform previews; two demo decks remain stopped at0. No Play/Sync/REC was invoked. [Native evidence and input limits](CORE_NATIVE_058_STARTUP_2026-10-25.md), [delivery receipt](desktop-0.1.58-playback-delivery.json).

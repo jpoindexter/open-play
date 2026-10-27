@@ -1,6 +1,6 @@
 {
   "version": "0.1.77",
-  "status": "staged; native not launched",
+  "status": "current private native candidate; protected startup observed",
   "sourceCommit": "57afcc6c6d6884036c8836402c18a1a000be0175",
   "asarSHA256": "a0ec1c061b8c5136dcdbc6270fd90e9568def7baa79e35902d599b82e7dbf0e7",
   "inspection": {
@@ -21,40 +21,65 @@
     "Build retention preflight and automatic staging/tar cleanup"
   ],
   "native": {
-    "launched": false,
-    "reason": "Authoritative CGSSessionScreenIsLocked=Yes; no native input or restart",
-    "runningCandidate": "0.1.76",
-    "runningSourceCommit": "0e07f246cfabfe9e956697faa54e04ff3467d899",
-    "current76AsarUnchanged": true,
-    "lastObservedSessionOnly": {
-      "tracks": 2,
-      "positionsSeconds": [
-        13.073,
-        12.426
-      ],
-      "libraryTracks": 16,
-      "playing": 0
+    "launched": true,
+    "exactBundleVersion": "0.1.77",
+    "runningSourceCommit": "57afcc6c6d6884036c8836402c18a1a000be0175",
+    "twoRealTracksRestoredPaused": true,
+    "positionsSeconds": [
+      13.073,
+      12.426
+    ],
+    "libraryTracks": 16,
+    "playControls": 2,
+    "tempoControls": 2,
+    "eqControls": 6,
+    "libraryPreviewAXImages": 12,
+    "sourceAndOverviewWaveformsVisible": true,
+    "flatBlackPaletteObserved": true,
+    "priorChannelBLowCutRestoredDB": -24,
+    "tempoAndSync": "Reset on normal restart as documented",
+    "recordingPreflight": {
+      "elapsed": "00:00.0",
+      "startAvailable": true,
+      "downloadDisabled": true
     },
-    "currentTransportStateNotReobserved": true,
     "playSyncRecStartIssued": false,
-    "defaultLaunchersChanged": false
+    "defaultLaunchersChanged": true,
+    "scope": "Actual protected native startup/recovery and paused visual state; not held/playing/listening/hardware acceptance"
   },
   "cleanup": {
-    "stageExists": false,
-    "tarExists": false,
-    "retainedBundles": [
-      "0.1.76",
+    "removedVersion": "0.1.76",
+    "allocatedBytesRemoved": 601178112,
+    "remainingBuilds": [
       "0.1.77"
     ],
+    "current77ProcessRetained": true,
+    "defaultAndNamedLaunchers": "0.1.77",
+    "profileBackupOutsideTarget": true,
+    "originalAudioRecordingsOutsideTarget": true,
+    "stageExists": false,
+    "tarExists": false,
     "newDownloadsFiles": false,
-    "newProfileCopies": false,
-    "nextBuildBlockedUntilRetirement": true
+    "backupBytes": 120336065,
+    "policy": "One current bundle; keep original audio/recordings/recovery backups; at most one future staged candidate"
   },
   "remaining": [
-    "Protected native77startup/recovery after Recording preflight and normal76quit",
-    "Native held/playing control use and visual acceptance",
+    "Native held/playing use for CORE-FIX-29",
+    "Newer CORE-FIX-30 source repair is NOT included; awaits a subsequent normal candidate",
     "Next actual Sync pop/stall event; no acoustic cause claimed",
-    "Deferred controller/headphone/master/listening session"
+    "Deferred controller/headphone/master/listening session",
+    "Full shared-style migration and public-beta release gates"
   ],
-  "release": "Private unsigned staged candidate; not public beta or full-core completion"
+  "release": "Private unsigned staged candidate; not public beta or full-core completion",
+  "initialStagingBoundary": {
+    "nativeLaunched": false,
+    "reason": "Mac session flag locked during initial staging; later resolved by fresh read-only native availability"
+  },
+  "protected76ProfileBackup": {
+    "closedProfile": true,
+    "normalQuitAndProcessAbsence": true,
+    "files": 255,
+    "bytes": 120336065,
+    "beforeAfterCopyMatch": true
+  }
 }

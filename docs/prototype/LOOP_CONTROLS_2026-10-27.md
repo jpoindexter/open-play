@@ -15,3 +15,5 @@ This proves stopped browser control retention and bounded presentation behavior.
 The owned diagnostic frame was stopped, closed before clearing its origin data, and its tab/server closed. Temporary prototype fixture files were removed after matching their ignored evidence copies. The intentional flat-black user preview remains separate. Compact evidence: [results](loop-controls-2026-10-27.json); raw reproduction/test output remains ignored under local-evidence/loop-controls-2026-10-27/.
 
 Re-entry: after unlock preserve Recording/session and execute the protected staged-candidate transition. Include this source repair in the subsequent normal immutable package once retention has room; observe relevant native controls in the existing owner session without repeating accepted ordinary mixing matrices.
+
+Later delivery: protected native0.1.77/source57afcc6startup/recovery observed; defaults now77and only77bundle remains. This loop repair is still newer than that immutable candidate. See [native77evidence](DESKTOP_NATIVE_077_2026-10-27.md).
