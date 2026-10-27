@@ -2,7 +2,7 @@
 
 Ship a useful Mac local-audio DJ beta as soon as its release gates are satisfied. Full Serato/rekordbox/Traktor parity and the entire Trello backlog are not launch prerequisites. No public release has been published or approved by this document.
 
-Current private checkpoint:0.1.67/source17bd6e1 inspected5/5 and running paused after protected66quit/hashed closed-profile backup. Same four real tracks2/3/4/5s,16library tracks/metadata/core controls/decoded deck lanes/previews retained. Hot-cue create/edit/delete preserves237/237nodes and shared pad labels in actual isolated four-deck GUI;11focused checks. Native volatile paused create/save/delete and pad focus observed, not main Compact held/playing proof. Listening/hardware, storage-fault and rare pop/stall acceptance stay open. [Delivery](../prototype/desktop-0.1.67-playback-delivery.json) · [owner checklist](OWNER_CORE_SESSION_2026-10-27.md).
+Current private checkpoint:0.1.68/source192b334 inspected5/5 and running paused after protected67quit/hashed closed-profile backup. Same4real tracks2/3/4/5s/16library tracks/metadata/core controls/decoded waveforms/previews retained. CORE-FIX-23 eliminates unrequested scratch copies on four real loads; same-buffer isolated cold gesture68.9ms native-yield vs1255.9ms timer, not native/controller or universal latency.4load/2preparation checks; no broad suite/soak. Native playing/cold-touch, held/fault, listening/hardware and rare pop/stall acceptance remain open. [Delivery](../prototype/desktop-0.1.68-playback-delivery.json) · [one owner checklist](OWNER_CORE_SESSION_2026-10-27.md).
 
 ## Now
 
@@ -13,7 +13,7 @@ Current private checkpoint:0.1.67/source17bd6e1 inspected5/5 and running paused 
 ## Next: release gates
 
 - Core: import/load two real songs; independent tempo/jog, Sync preserving the outgoing master, EQ/filter, cue/latch, crossfade and clean stop. Existing 0.1.53 human acceptance is scoped evidence, not acceptance of future changes.
-- Data: saved library/previews and metadata survive restart; backup/restore and failure messages protect existing state. State exactly whether loaded decks/positions restore (59same-version and59→61→62native paused recovery observed;64/65/66/67native startup observed, current same-version restart not executed).
+- Data: saved library/previews and metadata survive restart; backup/restore and failure messages protect existing state. State exactly whether loaded decks/positions restore (59same-version and59→61→62native paused recovery observed;64/65/66/67/68native startup observed, current same-version restart not executed).
 - UI: readable header/Settings navigation, all core controls reachable in Compact and four decks, no missing library previews. Finish the authored-style migration without hiding legacy literals behind meaningless variables.
 - Distribution: inspect the exact package, document supported macOS/architecture, installation/update/uninstall and backup/recovery. Check signing/notarization/distribution trust for the actual beta artifact; no public hosting/upload until the concrete release is ready for owner approval.
 - Support: short first-mix guide, keyboard/core controls, limitations, known issues and a reproducible bug-report route. DOC-001's full searchable manual/site may follow the usable beta guide.
@@ -25,4 +25,4 @@ Full parity, additional hardware certification, advanced DSP and polish not need
 
 ## Done and re-entry
 
-A public beta is done only when its named artifact is installable, core/data safety gates are observed, limitations/support material are available and the owner authorizes publication. Current67is a private running candidate, not a release. Software startup/paused recovery is covered; confirm current state before the owner’s single controller/listening session. Retain the next actual pop/stall rather than repeat clean cases. Remaining UI migration, native failed-save/playing/held controls, listening/hardware and distribution gates stay open.
+A public beta is done only when its named artifact is installable, core/data safety gates are observed, limitations/support material are available and the owner authorizes publication. Current68is a private running candidate, not a release. Software startup/paused recovery is covered; confirm current state before the owner’s single controller/listening session. Retain the next actual pop/stall rather than repeat clean cases. Remaining UI migration, native failed-save/playing/held controls, listening/hardware and distribution gates stay open.

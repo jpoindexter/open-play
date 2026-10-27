@@ -1,0 +1,9 @@
+# Private desktop 0.1.68 — paused
+
+Source 192b334; ASAR b14e90917f595c3ad87a35db6ff9daf431a84f67d1781f426c34fdb53f2c7db0. Actual archive/controlled-host inspection5/5;610prototype files/101selected declared modules. No public release.
+
+CORE-FIX-23 removes automatic scratch preparation on ordinary load and uses native scheduler yielding when available, retaining the timer fallback and existing PCM validation/cancellation. Four real-track ordinary loads request no scratch PCM before gesture (baseline4requests/518937024logical input bytes). Same-buffer cold native-yield gesture68.9ms vs timer1255.9ms in one isolated probe; not universal latency, matched overall waveform speedup, native/controller timing or process RSS. All4overviews/246observed nodes/4Play/9lazy library preview images retained; physical mute/all stopped.4load and2preparation checks pass; no broad suite/matrix/soak. [Report and limits](SCRATCH_LOAD_PREPARATION_2026-10-27.md).
+
+Protected67recording preflight Start/00:00.0/Download disabled, normal quit/process exit, closed255-file/120554057Bprofile backup with equal before/after/copy hashes. Actual68startup restores the same4real tracks2/3/4/5s,16library tracks/exact BX3 metadata,4Play/tempo/filter/level/12EQ, decoded detail/overviews and5viewport AX preview images in final observation. Master silent/Autoplay off. No Play/Sync/REC. Defaults68; named starter syntax checked only. Existing controls/layouts/previews/original audio retained.
+
+[CORE-LIVE-01](https://trello.com/c/yJ8r9kCD) groups later controller/headphones/master/listening. Include first cold platter touch and a modest load while mixing once; retain the next actual pop/stall rather than repeating clean cases. CORE-FIX-23 stays open for native playing/cold-touch and timer-only latency. Prior53ordinary acceptance and prior64–67fixes retain their scopes. No full-core/parity/pop-free/public-release claim.
