@@ -2,7 +2,7 @@
 
 Ship a useful Mac local-audio DJ beta as soon as its release gates are satisfied. Full Serato/rekordbox/Traktor parity and the entire Trello backlog are not launch prerequisites. No public release has been published or approved by this document.
 
-Current private checkpoint:0.1.74/sourcebf5423c inspected5/5/running paused/default after protected71quit/closed254-file120546269Bprofile backup. Same four tracks2/3/4/5s/16library tracks/metadata/core controls/decoded waveforms/previews retained. Narrow CORE-FIX-26/27/28repairs included; native playing/held/controller/headphone/master/listening acceptance remains open. Prior53ordinary manual/jog/EQ/Cue/stop retained. No main Play/Sync/REC Start, full suite/soak, new audible-pop or universal-stall result. [Delivery](../prototype/desktop-0.1.74-playback-delivery.json) · [one owner checklist](OWNER_CORE_SESSION_2026-10-27.md).
+Current private checkpoint:0.1.76/source0e07f24 inspected5/5 and running paused with current two-track session at13.073/12.426s,16library tracks/core controls/previews retained. Protected74/75closed-profile backups retained. Native FX Back→Escape repair observed immediately; sustained focus stability/other destinations/drafts/playing continuity remain open. Old74/75bundles retired; current starters76, only76bundle remains. Stage cleanup and new two-bundle build gate prevent accumulation. Prior53ordinary core listening acceptance retains its original scope; owner hardware/listening is deferred. [Delivery](../prototype/desktop-0.1.76-playback-delivery.json) · [one owner checklist](OWNER_CORE_SESSION_2026-10-27.md).
 
 ## Now
 
@@ -25,4 +25,4 @@ Full parity, additional hardware certification, advanced DSP and polish not need
 
 ## Done and re-entry
 
-A public beta is done only when its named artifact is installable, core/data safety gates are observed, limitations/support material are available and the owner authorizes publication. Current74is a private running candidate, not a release. Software startup/paused recovery is covered; confirm current state before the owner’s single controller/listening session. Retain the next actual pop/stall rather than repeat clean cases. Remaining UI migration, native failed-save/playing/held controls, listening/hardware and distribution gates stay open.
+A public beta is done only when its named artifact is installable, core/data safety gates are observed, limitations/support material are available and the owner authorizes publication. Current76is a private running candidate, not a release. Software startup/paused recovery is covered; confirm current state before the owner’s single controller/listening session. Retain the next actual pop/stall rather than repeat clean cases. Remaining UI migration, native failed-save/playing/held controls, listening/hardware and distribution gates stay open.

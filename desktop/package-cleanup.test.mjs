@@ -16,7 +16,7 @@ for(const fail of [false,true])test(`packaging ${fail?'failure':'success'} remov
  const output=path.join(root,'output'),asar=path.join(output,'Open Play Playback Test.app/Contents/Resources/app.asar'),error=Error('Controlled packaging failure');
  try{
   await mkdir(path.join(root,'docs/prototype'),{recursive:true});await mkdir(path.join(root,'desktop'));
-  for(const file of ['package-playback.mjs','playback-check-window.cjs'])await writeFile(path.join(root,'desktop',file),await readFile(path.join(repo,'desktop',file)));
+  for(const file of ['package-playback.mjs','build-retention.mjs','playback-check-window.cjs'])await writeFile(path.join(root,'desktop',file),await readFile(path.join(repo,'desktop',file)));
   const get=file=>file==='docs/prototype/auto-gain-fixture-reference.json'?Buffer.from('{"fixtures":[]}'):readFileSync(path.join(repo,file));
   const scope={root,path,tmpdir:()=>root,mkdtemp:async prefix=>(stage=await mkdtemp(prefix)),mkdir,readFile,writeFile,unlink,rm,get,git:()=>Buffer.alloc(0),execFileSync(){},sha:bytes=>createHash('sha256').update(bytes).digest('hex'),sourceCommit:'controlled-cleanup-probe',version:'probe',name:'Open Play Playback Test',port:18775,bundle:'org.openplay.cleanup.probe',profile:'probe',partition:'probe',console:{log(){}},packager:async()=>{if(fail)throw error;await mkdir(path.dirname(asar),{recursive:true});await writeFile(asar,'retained output');return[output];}};
   const run=()=>new AsyncFunction(...Object.keys(scope),body)(...Object.values(scope));

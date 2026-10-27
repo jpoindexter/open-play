@@ -19,3 +19,11 @@ The builder removed its tar archive but retained its complete mkdtemp staging di
 Two focused checks execute the actual builder body with real owned filesystem operations and controlled archive/packager/fixture endpoints. Both fail before cleanup and pass after: staging disappears, successful output remains, original packaging failure propagates, and the parent test directory remains. This is not a new real Electron build. Next ordinary packaging must observe staging cleanup; no extra build/full suite/soak was run for this cleanup.
 
 [Compact receipt](build-cleanup-2026-10-27.json). Raw inventories, original launcher copies and focused output remain ignored in local-evidence/old-build-cleanup-2026-10-27/. The current private app and existing controller/listening limits remain unchanged.
+
+## Real packaging gate observed
+
+The subsequent normal0.1.75package from source1a4633e completed; its receipt staging path and sibling tar are absent, successful output is retained and its hash matches. Exact-package inspection5/5. SYS-FIX-01 is complete for this bounded resource leak. At the first75packaging checkpoint current74was preserved;75was initially staged/unlaunched (both later retired after protected76startup) and no broader runtime/listening/release criterion is closed. See [staged evidence](../prototype/DESKTOP_075_STAGED_2026-10-27.md).
+
+## Current76and retention follow-through
+
+After protected native76startup, inactive74/75bundles and the named74starter were retired (1153150976allocated bytes). Only76remains (~573MiB); current starters point76. Profiles/original audio/recordings and hash-matched closed-profile backups remain. A15-line preflight now stops the real builder before staging when two matching bundles already exist; focused caller check fails before wiring/passes after, actual3-bundle rejection and cleaned1-bundle permission observed. The guard never deletes data and requires no additional desktop rebuild. Details: [76delivery](../prototype/DESKTOP_SETTINGS_076_2026-10-27.md).
