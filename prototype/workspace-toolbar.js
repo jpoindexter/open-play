@@ -84,5 +84,5 @@ export function installWorkspaceToolbar(){
    });
   }
  };
- modal.addEventListener('close',()=>{park();back.hidden=true;focus(opener?.isConnected?opener:settings);});
+ modal.addEventListener('close',()=>{park();back.hidden=true;focus(opener?.isConnected&&opener.getClientRects().length?opener:settings);});
 }

@@ -16,3 +16,11 @@ test('Settings Back restores selected-tab focus/scroll after mount without overr
   const f=fixture();f.back.onclick();change(f);f.drain();assert.equal(f.result().focused,null);assert.equal(f.body.scrollTop,0);
  }
 });
+test('Closing Settings does not return focus to a hidden performance-panel opener',()=>{
+ const callback=source.slice(source.indexOf(" modal.addEventListener('close'"),source.lastIndexOf('\n}'));
+ for(const visible of [false,true]){
+  let close,focused;const opener={isConnected:true,getClientRects:()=>visible?[{}]:[]},settings={};
+  new Function('modal','park','back','focus','opener','settings',callback)({addEventListener(event,fn){close=fn;}},()=>{}, {},node=>focused=node,opener,settings);
+  close();assert.equal(focused,visible?opener:settings);
+ }
+});

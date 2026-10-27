@@ -11,7 +11,7 @@ const git=args=>execFileSync('git',args,{cwd:root,maxBuffer:150*1024*1024});
 const sha=bytes=>createHash('sha256').update(bytes).digest('hex');
 const sourceCommit=git(['rev-parse','HEAD']).toString().trim();
 const get=file=>git(['show',`${sourceCommit}:${file}`]);
-const version='0.1.75',name='Open Play Playback Test',port=18775,bundle='org.openplay.dj.playback.localtest';
+const version='0.1.76',name='Open Play Playback Test',port=18775,bundle='org.openplay.dj.playback.localtest';
 const profile='Open Play Playback Test',partition='persist:open-play-playback-test';
 const stage=await mkdtemp(path.join(tmpdir(),'open-play-playback-'));
 try{
@@ -55,7 +55,7 @@ await put('assets/docs/prototype/TRY_CURRENT_DESKTOP.md',`# Core desktop test ${
 
 Built from immutable source ${sourceCommit}. Opens the existing rekordbox workspace directly in the sandboxed main frame, retaining layouts, core controls, headphone knobs and library waveform previews. No framework or native audio rewrite.
 
-Settings Back restores its selected tab, scroll and keyboard focus. FX catalog navigation also returns to the originating Settings tab, including an already-open FX panel. These are isolated stopped-browser results; native/playing acceptance remains open.
+Settings Back restores its selected tab, scroll and keyboard focus. FX catalog navigation also returns to the originating Settings tab, including an already-open FX panel. Close returns to the Settings trigger when the former opener is hidden. Native/playing acceptance remains separately scoped in the delivery receipts.
 
 The performance header now uses a single row of quiet Astryx icons. Layout/display choices and Link/MIDI/diagnostics live in Settings, with Back navigation from nested pages. Original controls and waveform previews remain. Clean restart restores the loaded track references, positions and deck count without automatic playback. Tempo/Sync and transient controls start reset; unavailable track references are retained for recovery. This does not establish abrupt-crash or native restart acceptance.
 
