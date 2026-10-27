@@ -1,6 +1,6 @@
 ## Current core delivery — 27 October 2026
 
-**Private0.1.76/source0e07f24 is inspected5/5, running paused and current.** Same two real tracks restored at13.073/12.426s,16library tracks,2Play/tempo controls,6EQ controls, decoded waveforms and12AX library previews. Existing channelBLOWcut−24dBwas restored after startup; transient tempo/Sync reset is normal restart behavior. No main Play/Sync/REC Start. [Delivery](docs/prototype/desktop-0.1.76-playback-delivery.json).
+**Private0.1.76/source0e07f24 remains the running/current candidate, inspected5/5; paused is its last native observation.** Same two real tracks restored at13.073/12.426s,16library tracks,2Play/tempo controls,6EQ controls, decoded waveforms and12AX library previews. Existing channelBLOWcut−24dBwas restored after startup; transient tempo/Sync reset is normal restart behavior. No main Play/Sync/REC Start. [Delivery](docs/prototype/desktop-0.1.76-playback-delivery.json).
 
 Native75exposed hidden-opener focus after FX Back→Escape. One-line visibility guard passed its focused failure check; the same native76path returns/focuses FX then Settings on Escape. Later idle HTML focus is unattributed; sustained focus stability, other Settings destinations/drafts and playing continuity remain open. Existing88-line toolbar and23-line shared panel navigator retained; legacy oversized files remain MOD-001debt. [Evidence and limits](docs/prototype/DESKTOP_SETTINGS_076_2026-10-27.md).
 
@@ -12,7 +12,9 @@ Source ahead of76: CORE-FIX-29repairs shared Reverse/Repeat/Slip/Key Lock full-d
 
 User-directed design slice: flat-black canvas and near-black shared surfaces, existing color accents/RGB waveforms retained. Actual two/four-deck Compact, Traktor-flat, Settings and selector review preserves controls/previews; token export213. Source preview on loopback63341 is intentionally open; native76/session unchanged, no new bundle. CORE-FIX-29 source is pushed as ff1411d. [Palette evidence and limits](docs/design-system/FLAT_BLACK_2026-10-27.md). Full style migration and native visual acceptance remain open.
 
-Next: continue software-only core/beta blockers, preserve current paused two-deck work and keep generated artifacts bounded. [CORE-LIVE-01](https://trello.com/c/yJ8r9kCD) holds the deferred controller/headphone/master/listening session. Retain the next actual pop/stall; do not repeat clean matrices.
+Staged0.1.77/source57afcc6 now packages CORE-FIX-29 and the flat-black palette; immutable archive/controlled-host inspection5/5,618runtime files/102declared modules. Native77not launched: authoritative Mac session flag locked, so no native input/restart/Play/Sync/REC Start. Defaults stay76; transport state not freshly observed. Only76+77bundles remain, stage/tar removed; next build blocked until superseded retirement. [Staged delivery and exact re-entry](docs/prototype/DESKTOP_CORE_077_2026-10-27.md).
+
+Next: after unlock, fresh Recording preflight → normal76quit/process absence → hash-matched closed-profile backup → exact77startup/recovery/controls; only then promote defaults and retire76. Continue software-only core/beta blockers, preserve current paused two-deck work and keep generated artifacts bounded. [CORE-LIVE-01](https://trello.com/c/yJ8r9kCD) holds the deferred controller/headphone/master/listening session. Retain the next actual pop/stall; do not repeat clean matrices.
 
 ## Historical status — core four-deck reliability, 25 October 2026
 
