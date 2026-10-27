@@ -12,7 +12,7 @@ const git=args=>execFileSync('git',args,{cwd:root,maxBuffer:150*1024*1024});
 const sha=bytes=>createHash('sha256').update(bytes).digest('hex');
 const sourceCommit=git(['rev-parse','HEAD']).toString().trim();
 const get=file=>git(['show',`${sourceCommit}:${file}`]);
-const version='0.1.76',name='Open Play Playback Test',port=18775,bundle='org.openplay.dj.playback.localtest';
+const version='0.1.77',name='Open Play Playback Test',port=18775,bundle='org.openplay.dj.playback.localtest';
 const profile='Open Play Playback Test',partition='persist:open-play-playback-test';
 await assertBuildRetention(path.join(root,'local-evidence/desktop-builds'),name);
 const stage=await mkdtemp(path.join(tmpdir(),'open-play-playback-'));
@@ -56,6 +56,8 @@ await put('assets/docs/prototype/auto-gain-fixture-reference.json',JSON.stringif
 await put('assets/docs/prototype/TRY_CURRENT_DESKTOP.md',`# Core desktop test ${version}
 
 Built from immutable source ${sourceCommit}. Opens the existing rekordbox workspace directly in the sandboxed main frame, retaining layouts, core controls, headphone knobs and library waveform previews. No framework or native audio rewrite.
+
+Reverse, Repeat, Slip and Key Lock refresh existing controls instead of replacing the deck/mixer tree. Ordinary Slip still refreshes Stem Slip feedback. The flat-black shared palette retains deck/status accents, RGB waveform previews, custom DJ controls and all layout choices. These source checks do not establish native playing/held-control acceptance.
 
 Settings Back restores its selected tab, scroll and keyboard focus. FX catalog navigation also returns to the originating Settings tab, including an already-open FX panel. Close returns to the Settings trigger when the former opener is hidden. Native/playing acceptance remains separately scoped in the delivery receipts.
 
