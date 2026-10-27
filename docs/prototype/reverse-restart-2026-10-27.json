@@ -1,0 +1,59 @@
+{
+  "date": "2026-10-27",
+  "baselineCommit": "8c909a4b645a10406bfeeba8ec070a3bcb91d80a",
+  "scope": "Stopped non-loop reverse Play at zero mirrors existing forward-end restart. Actual isolated generated-audio four-deck GUI, not native/acoustic/keylock-quality/Sync-pop evidence",
+  "excludedFirstSnapshot": "250ms snapshot observed processing, not a settled failed start; preserved preparation-window-excluded.json. Corrected waits for playQueued/processing to settle and uses app Play cancellation plus engine pause for stopped cleanup.",
+  "baseline": {
+    "complete": false,
+    "scope": "One actual isolated four-deck reverse boundary Play; generated audio/physical mute, no native/listening/reversal-quality/Sync-pop proof.",
+    "playing": false,
+    "processing": false,
+    "reverse": true,
+    "position": 0,
+    "anchorPosition": 0,
+    "duration": 48,
+    "voicePresent": false,
+    "observedControls": 210,
+    "retainedControls": 0,
+    "playControls": 4,
+    "previewImages": 3,
+    "error": "Reverse Play immediately ends at the beginning",
+    "physicalMuted": true,
+    "allStopped": true
+  },
+  "repaired": {
+    "complete": true,
+    "scope": "One actual isolated four-deck reverse boundary Play; generated audio/physical mute, no native/listening/reversal-quality/Sync-pop proof.",
+    "playing": true,
+    "processing": false,
+    "reverse": true,
+    "position": 47.866,
+    "anchorPosition": 48,
+    "duration": 48,
+    "voicePresent": true,
+    "observedControls": 210,
+    "retainedControls": 210,
+    "playControls": 4,
+    "previewImages": 4,
+    "physicalMuted": true,
+    "allStopped": true
+  },
+  "focusedRegression": {
+    "baselinePassed": 1,
+    "baselineFailed": 2,
+    "repairedPassed": 3,
+    "repairedFailed": 0,
+    "scope": "Actual engine with controlled raw/fallback-render graph; middle reverse/forward end/explicit phase position retained. PCM reversal not established."
+  },
+  "productLinesAdded": 2,
+  "newRuntimeModules": 0,
+  "normalProfileOrOriginalMediaTouchedByDiagnostic": false,
+  "fullSuiteOrSoak": false,
+  "privateEvidence": "local-evidence/reverse-restart-2026-10-27/",
+  "remaining": [
+    "Current private native playing restart",
+    "Controller/listening and reversal quality/reference breadth",
+    "Natural-end control redraw found separately",
+    "Intermittent Sync pops/four-deck stalls"
+  ]
+}

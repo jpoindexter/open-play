@@ -19,6 +19,20 @@ function base64(bytes){let text='';for(let i=0;i<bytes.length;i+=16384)text+=Str
 function rms(data,from,to,sr){let power=0;const start=Math.ceil(from*sr),end=Math.floor(to*sr);assert(start>=0&&end<=data.length&&end>start,'Missing declared recording window');for(let n=start;n<end;n++)power+=data[n]**2;return Math.sqrt(power/(end-start));}
 function amplitude(data,from,to,sr,hz){let re=0,im=0;const start=Math.ceil(from*sr),end=Math.floor(to*sr);for(let n=start;n<end;n++){re+=data[n]*Math.cos(2*Math.PI*hz*n/sr);im+=data[n]*Math.sin(2*Math.PI*hz*n/sr);}return 2*Math.hypot(re,im)/(end-start);}
 const show=()=>result.textContent=JSON.stringify({...report,recording:report.recording?{...report.recording,base64:'Retained in original evidence'}:undefined},null,2);
+document.querySelector('#reverse-end-run').onclick=async()=>{
+ let engine,state;const r={complete:false,scope:'One actual isolated four-deck reverse boundary Play; generated audio/physical mute, no native/listening/reversal-quality/Sync-pop proof.'};
+ try{
+  assert(location.port==='8874','Dedicated port8874 required');assert(localStorage.length===0||localStorage.getItem('openplay-core-controls-owned')==='true','Refusing unowned origin');
+  localStorage.setItem('openplay-core-controls-owned','true');localStorage.setItem(sessionKey,JSON.stringify({settings:{'Analyze Stems':false}}));
+  frame.src='workspace-preview.html?reverse-end='+Date.now();await new Promise(resolve=>frame.onload=resolve);await until(()=>app()&&!app().state.analysis,'workspace');
+  ({engine,state}=app());await engine.resume();engine.audioMonitor.mutePhysical(true);assert(engine.audioMonitor.snapshot().physicalMuted,'Physical mute');input('#deck-count',4,'change');await until(()=>doc().querySelectorAll('.library-wave-preview img').length>0,'library previews');
+  const d=state.decks[0];click('[data-action="reverse"][data-deck="0"]');await until(()=>d.reverse,'Reverse enabled');assert(engine.position(d)===0&&!d.playing&&!d.loop,'Reverse boundary setup');
+  const nodes=[...doc().querySelectorAll('.deck button,.deck input,#mixer button,#mixer input,[data-waveform-scrub],#detail-wave')];click('[data-action="play"][data-deck="0"]');await until(()=>!d.playQueued&&!d.processing,'Reverse preparation settled');await sleep(100);
+  Object.assign(r,{playing:d.playing,processing:d.processing,reverse:d.reverse,position:engine.position(d),anchorPosition:d.anchorPosition,duration:d.track.duration,voicePresent:engine.voices.has(0),observedControls:nodes.length,retainedControls:nodes.filter(n=>n.isConnected).length,playControls:doc().querySelectorAll('[data-action="play"]').length,previewImages:doc().querySelectorAll('.library-wave-preview img').length});
+  assert(d.playing&&engine.voices.has(0)&&r.position>r.duration-2&&r.position<r.duration,'Reverse Play immediately ends at the beginning');assert(r.observedControls===r.retainedControls&&r.playControls===4&&r.previewImages>0,'Restart lost controls or previews');r.complete=true;
+ }catch(error){r.error=error.message;}
+ finally{if(engine&&state){for(const d of state.decks){if(d.playing||d.processing||d.playQueued)click(`[data-action="play"][data-deck="${d.index}"]`);engine.pause(d);}await until(()=>state.decks.every(d=>!d.playing&&!d.processing&&!d.playQueued),'Stopped cleanup');r.physicalMuted=engine.audioMonitor.snapshot().physicalMuted;r.allStopped=true;}result.textContent=JSON.stringify(r,null,2);}
+};
 document.querySelector('#loop-end-run').onclick=async()=>{
  let engine,state;const r={complete:false,scope:'One actual isolated four-deck End→Loop and muted valid Play/invalid-loop rejection; generated track, no listening/native/Sync-pop proof.'};
  try{

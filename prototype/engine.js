@@ -490,6 +490,8 @@ export class AudioEngine {
       const transformed = keylock || shift !== 0;
       const scale = transformed ? tempo : 1;
       if (!current()) return;
+      // Mirror forward-end Play before either raw or pitch preparation.
+      if(d.reverse&&!d.loop&&!d.playing&&!positionAt&&d.position<=0)d.position=track.duration;
       if(d.loop&&track.gridWarpMarkers?.length&&this.onGridTimeline?.(d,{position:d.position,when:this.ctx.currentTime})){
         await this.startWarpLoop(d,buffers,controller,current,{positionAt,priorClock,keylock,semitones:shift,handoff});return;
       }
