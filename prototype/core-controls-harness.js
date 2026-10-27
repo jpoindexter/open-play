@@ -19,6 +19,25 @@ function base64(bytes){let text='';for(let i=0;i<bytes.length;i+=16384)text+=Str
 function rms(data,from,to,sr){let power=0;const start=Math.ceil(from*sr),end=Math.floor(to*sr);assert(start>=0&&end<=data.length&&end>start,'Missing declared recording window');for(let n=start;n<end;n++)power+=data[n]**2;return Math.sqrt(power/(end-start));}
 function amplitude(data,from,to,sr,hz){let re=0,im=0;const start=Math.ceil(from*sr),end=Math.floor(to*sr);for(let n=start;n<end;n++){re+=data[n]*Math.cos(2*Math.PI*hz*n/sr);im+=data[n]*Math.sin(2*Math.PI*hz*n/sr);}return 2*Math.hypot(re,im)/(end-start);}
 const show=()=>result.textContent=JSON.stringify({...report,recording:report.recording?{...report.recording,base64:'Retained in original evidence'}:undefined},null,2);
+document.querySelector('#fader-start-run').onclick=async()=>{
+ let engine,state;const r={complete:false,scope:'Actual isolated four-deck MIDI editor synthetic Fader Start; generated audio, no physical controller/native/listening or Sync-pop cause proof.',stages:[]};
+ try{
+  assert(location.port==='8874','Dedicated port8874 required');assert(localStorage.length===0||localStorage.getItem('openplay-core-controls-owned')==='true','Refusing unowned origin');
+  localStorage.setItem('openplay-core-controls-owned','true');localStorage.setItem(sessionKey,JSON.stringify({settings:{'Analyze Stems':false}}));
+  frame.src='workspace-preview.html?fader-start='+Date.now();await new Promise(resolve=>frame.onload=resolve);await until(()=>app()&&!app().state.analysis,'workspace');
+  ({engine,state}=app());await engine.resume();engine.audioMonitor.mutePhysical(true);assert(engine.audioMonitor.snapshot().physicalMuted,'Physical mute');input('#deck-count',4,'change');input('#preview-density','compact','change');r.density=doc().querySelector('#preview-density').value;assert(r.density==='compact','Compact mode');await until(()=>doc().querySelectorAll('.library-wave-preview img').length>0,'library previews');
+  const d=state.decks[0],w=frame.contentWindow;input('[data-mix="1:level"]',.37);click('[data-panel="midi"]');await until(()=>doc().querySelector('#midi-target'),'MIDI editor');input('#midi-target','Deck 1 fader start','change');input('#midi-type','CC','change');input('#midi-channel',1,'change');input('#midi-number',1,'change');click('#midi-add');
+  await until(()=>state.mappings.some(m=>m.target==='Deck 1 fader start'),'Fader Start mapping');
+  for(const [label,value] of [['idle zero',0],['start',127],['back cue',0]]){
+   const nodes=[...doc().querySelectorAll('.deck button,.deck input,#mixer button,#mixer input,[data-waveform-scrub],#detail-wave')],other=doc().querySelector('[data-mix="1:level"]');input('#midi-test-value',value,'change');await doc().querySelector('#midi-send').onclick();
+   await until(()=>!d.processing&&!d.playQueued&&d.playing===(value>0),'Fader '+label);await new Promise(resolve=>w.requestAnimationFrame(()=>w.requestAnimationFrame(resolve)));
+   r.stages.push({label,observed:nodes.length,retained:nodes.filter(n=>n.isConnected).length,otherFaderSame:other===doc().querySelector('[data-mix="1:level"]'),otherFaderValue:doc().querySelector('[data-mix="1:level"]').value,playing:d.playing,position:engine.position(d),cue:d.cue,level:d.level});
+  }
+  r.playControls=doc().querySelectorAll('[data-action="play"]').length;r.previewImages=doc().querySelectorAll('.library-wave-preview img').length;
+  assert(r.stages.every(s=>s.observed===s.retained&&s.otherFaderSame&&Number(s.otherFaderValue)===.37),'Fader Start replaced controls');assert(r.playControls===4&&r.previewImages>0&&!d.playing&&Math.abs(engine.position(d)-d.cue)<.001,'Fader transport or previews incorrect');r.complete=true;
+ }catch(error){r.error=error.message;}
+ finally{if(engine&&state){for(const d of state.decks){if(d.playing||d.processing||d.playQueued)click(`[data-action="play"][data-deck="${d.index}"]`);engine.pause(d);}await until(()=>state.decks.every(d=>!d.playing&&!d.processing&&!d.playQueued),'Stopped cleanup');r.physicalMuted=engine.audioMonitor.snapshot().physicalMuted;r.allStopped=true;}result.textContent=JSON.stringify(r,null,2);}
+};
 document.querySelector('#natural-end-run').onclick=async()=>{
  let engine,state;const r={complete:false,scope:'One actual forward natural end in isolated four-deck GUI; generated audio/physical mute, no native/listening or Sync-pop cause proof.'};
  try{

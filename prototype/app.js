@@ -628,14 +628,14 @@ async function faderStart(d,value,previous,deviceId=''){
     cueHolds.cancelDeck(d);
     const active=faderStarts.get(d.index);
     if(active)active.wanted=false;
-    if(!d.playing&&!d.processing&&!active){d.cue=engine.position(d);renderDecks();return;}
-    engine.pause(d);await engine.seek(d,d.cue);renderDecks();return;
+    if(!d.playing&&!d.processing&&!active){d.cue=engine.position(d);refreshTransportControls(state);return;}
+    engine.pause(d);await engine.seek(d,d.cue);refreshTransportControls(state);return;
   }
   if(previous>0)return;
   const owner={track:d.track,deviceId,wanted:true,token:null};faderStarts.set(d.index,owner);
   const seeking=engine.seek(d,d.cue);owner.token=engine.startTokens.get(d.index);await seeking;
   if(faderStarts.get(d.index)!==owner||!owner.wanted||d.track!==owner.track||engine.startTokens.get(d.index)!==owner.token||d.playing||d.processing)return;
-  const starting=engine.start(d);owner.token=engine.startTokens.get(d.index);await starting;renderDecks();
+  const starting=engine.start(d);owner.token=engine.startTokens.get(d.index);await starting;refreshTransportControls(state);
 }
 function resetFaderStartInput(deviceId){
   for(const [index,owner]of faderStarts)if(deviceId===undefined||owner.deviceId===deviceId){

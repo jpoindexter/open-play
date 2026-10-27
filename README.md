@@ -8,7 +8,9 @@ Two reproduced core repairs: stopped reverse Play at zero restarts from the trac
 
 Two engine lines including comment and one existing refresh substitution; no new runtime module. Diagnostic254lines/regression23lines; existing oversized engine/app/panels/analysis remain MOD-001 debt. No broad suite/soak, new listening, Sync-pop cause or measured frame-time claim. Repeat/Autoplay runtime not rerun; branch bodies unchanged. Prior53ordinary acceptance and64–71repairs retain scope.
 
-Owner-dependent work is grouped in [CORE-LIVE-01](https://trello.com/c/yJ8r9kCD) / [one practical checklist](docs/delivery/OWNER_CORE_SESSION_2026-10-27.md). Both new cards stay open for native/live criteria. Native held/playing/fault/cold-touch, hardware/headphone/master/listening, intermittent Sync pops/stalls and release gates remain open. Trello174cards/13complete; no duplicate26/27.
+Owner-dependent work is grouped in [CORE-LIVE-01](https://trello.com/c/yJ8r9kCD) / [one practical checklist](docs/delivery/OWNER_CORE_SESSION_2026-10-27.md). Both new cards stay open for native/live criteria. Native held/playing/fault/cold-touch, hardware/headphone/master/listening, intermittent Sync pops/stalls and release gates remain open. Trello175cards/13complete; no duplicate26/27/28.
+
+Source ahead of73: CORE-FIX-28 Fader Start/back-cue now uses existing transport refresh in three places. Actual isolated four-deck Compact MIDI-editor synthetic0→127→0 retains225/225controls per stage, other-channel fader identity/value and library previews; transport/return preserved. Physical mute/stopped cleanup asserted. No extra package/full suite/native attempt; physical/native acceptance stays in the owner session. [Report](docs/prototype/FADER_START_CONTROLS_2026-10-27.md).
 
 Next: preserve any new recording/work, safely launch the inspected73candidate and verify paused recovery before the one owner controller/listening session. Current defaults remain71 until startup is observed. Continue only bounded reproduced software defects; do not rerun clean matrices. [Public beta scope](docs/delivery/PUBLIC_BETA_PLAN.md).
 
