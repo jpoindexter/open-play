@@ -436,6 +436,7 @@ export class AudioEngine {
     } finally {if (!committed) await adapter?.dispose();}
   }
   async start(d, {positionAt, priorClock,handoff=null,preparedStems} = {}) {
+    if(d.track)this.validateLoop(d);
     this.onValidateTransport?.(d);
     this.cancelDeckScratchRequest(d);
     if (!d.track) throw new Error("Load a track first.");
@@ -861,7 +862,12 @@ export class AudioEngine {
       this.configureFX(...this.fxState);
     }
   }
+  validateLoop(d,on=d.loop,start=d.loopIn,end=d.loopOut){
+    if(on&&(!Number.isFinite(start)||!Number.isFinite(end)||!Number.isFinite(d.track?.duration)||start<0||end<=start||end>d.track.duration))
+      throw new RangeError('Loop Out must be after Loop In, with both inside the track.');
+  }
   async setLoop(d, on, start, end, {positionAt=null,priorClock=null,playing=d.playing}={}) {
+    this.validateLoop(d,on,start,end);
     this.onValidateTransport?.(d,{loop:on,loopIn:start,loopOut:end});
     const track=d.track,voice=this.voices.get(d.index),previous={loop:d.loop,loopIn:d.loopIn,loopOut:d.loopOut};
     const restart=async options=>{

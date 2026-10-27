@@ -960,6 +960,7 @@ async function deckAction(action, index, el, event = {}) {
     const start = quantized(d, pos),
       end = autoLoopEnd(d, start);
     const ending = d.loop;
+    engine.validateLoop(d,!ending,ending?d.loopIn:start,ending?d.loopOut:end);
     if (!ending) engine.beginSlip(d, "loop");
     await engine.setLoop(
       d,

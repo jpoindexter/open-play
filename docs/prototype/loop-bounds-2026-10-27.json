@@ -1,0 +1,77 @@
+{
+  "date": "2026-10-27",
+  "baselineCommit": "1e33d7146e382c887121dd0cf96c8a1278653246",
+  "scope": "Track-end Loop and root invalid-loop guard; actual isolated four-deck generated-audio workspace/physical mute; no PCM/listening/native/Sync-pop proof",
+  "excludedFirstSetup": "Quantize stayed on because session field is not loaded; valid47.9032258\u219248loop, not invalid-loop evidence. Preserved setup-excluded-ui.json. Corrected explicit Quantize button before baseline.",
+  "baseline": {
+    "complete": false,
+    "scope": "One actual isolated four-deck Quantize-off End\u2192Loop action; generated track, physical mute, no playback/listening/native proof.",
+    "before": {
+      "loop": false,
+      "loopIn": 0,
+      "loopOut": 0
+    },
+    "after": {
+      "loop": true,
+      "loopIn": 48,
+      "loopOut": 48
+    },
+    "position": 48,
+    "duration": 48,
+    "observedNodes": 236,
+    "retainedNodes": 11,
+    "playControls": 4,
+    "previewImages": 2,
+    "error": "Track-end Loop created invalid active bounds",
+    "physicalMuted": true,
+    "allStopped": true
+  },
+  "repaired": {
+    "complete": true,
+    "scope": "One actual isolated four-deck End\u2192Loop and muted valid Play/invalid-loop rejection; generated track, no listening/native/Sync-pop proof.",
+    "before": {
+      "loop": false,
+      "loopIn": 0,
+      "loopOut": 0
+    },
+    "after": {
+      "loop": false,
+      "loopIn": 0,
+      "loopOut": 0
+    },
+    "position": 48,
+    "duration": 48,
+    "observedNodes": 236,
+    "retainedNodes": 236,
+    "notice": "Loop Out must be after Loop In, with both inside the track.",
+    "playControls": 4,
+    "previewImages": 2,
+    "active": {
+      "rejected": "RangeError",
+      "sameVoice": true,
+      "sameStartToken": true,
+      "sameRate": true,
+      "playing": true,
+      "clockAdvanced": true,
+      "loop": false
+    },
+    "physicalMuted": true,
+    "allStopped": true
+  },
+  "focusedRegression": {
+    "baselineFailed": 2,
+    "repairedPassed": 2,
+    "repairedFailed": 0,
+    "cases": "Equal/inverted/negative/out-of-track/nonfinite bounds; invalid active start; valid on/off; UI rejects before Slip/redraw"
+  },
+  "newRuntimeModules": 0,
+  "productLinesAdded": 7,
+  "normalProfileOrOriginalMediaTouchedByDiagnostic": false,
+  "fullSuiteOrSoak": false,
+  "privateEvidence": "local-evidence/loop-bounds-2026-10-27/",
+  "remaining": [
+    "Native exact user-facing rejected-loop path",
+    "Broader loop reference/held/controller/listening acceptance",
+    "Next actual four-deck stall or Sync pop"
+  ]
+}

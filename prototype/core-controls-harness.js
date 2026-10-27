@@ -19,6 +19,27 @@ function base64(bytes){let text='';for(let i=0;i<bytes.length;i+=16384)text+=Str
 function rms(data,from,to,sr){let power=0;const start=Math.ceil(from*sr),end=Math.floor(to*sr);assert(start>=0&&end<=data.length&&end>start,'Missing declared recording window');for(let n=start;n<end;n++)power+=data[n]**2;return Math.sqrt(power/(end-start));}
 function amplitude(data,from,to,sr,hz){let re=0,im=0;const start=Math.ceil(from*sr),end=Math.floor(to*sr);for(let n=start;n<end;n++){re+=data[n]*Math.cos(2*Math.PI*hz*n/sr);im+=data[n]*Math.sin(2*Math.PI*hz*n/sr);}return 2*Math.hypot(re,im)/(end-start);}
 const show=()=>result.textContent=JSON.stringify({...report,recording:report.recording?{...report.recording,base64:'Retained in original evidence'}:undefined},null,2);
+document.querySelector('#loop-end-run').onclick=async()=>{
+ let engine,state;const r={complete:false,scope:'One actual isolated four-deck End→Loop and muted valid Play/invalid-loop rejection; generated track, no listening/native/Sync-pop proof.'};
+ try{
+  assert(location.port==='8874','Dedicated port8874 required');assert(localStorage.length===0||localStorage.getItem('openplay-core-controls-owned')==='true','Refusing unowned origin');
+  localStorage.setItem('openplay-core-controls-owned','true');localStorage.setItem(sessionKey,JSON.stringify({quantize:false,settings:{'Analyze Stems':false}}));
+  frame.src='workspace-preview.html?loop-end='+Date.now();await new Promise(resolve=>frame.onload=resolve);await until(()=>app()&&!app().state.analysis,'workspace');
+  ({engine,state}=app());await engine.resume();engine.audioMonitor.mutePhysical(true);assert(engine.audioMonitor.snapshot().physicalMuted,'Physical mute');
+  input('#deck-count',4,'change');await until(()=>doc().querySelectorAll('.library-wave-preview img').length>0,'library previews');
+  const d=state.decks[0],w=frame.contentWindow;if(d.quantize??state.quantize)click('[data-action="quantize"][data-deck="0"]');assert((d.quantize??state.quantize)===false,'Quantize must be off');const overview=doc().querySelector('[data-seek="0"]');overview.focus();overview.dispatchEvent(new w.KeyboardEvent('keydown',{key:'End',code:'End',bubbles:true,cancelable:true}));await until(()=>engine.position(d)===d.track.duration,'End seek');
+  const selector='.deck button,.deck input,#mixer button,#mixer input,[data-waveform-scrub],#detail-wave,tr[data-track],.library-wave-preview img',nodes=[...doc().querySelectorAll(selector)],before={loop:d.loop,loopIn:d.loopIn,loopOut:d.loopOut};
+  click('[data-action="loop"][data-deck="0"]');await new Promise(resolve=>w.requestAnimationFrame(()=>w.requestAnimationFrame(resolve)));
+  Object.assign(r,{before,after:{loop:d.loop,loopIn:d.loopIn,loopOut:d.loopOut},position:engine.position(d),duration:d.track.duration,observedNodes:nodes.length,retainedNodes:nodes.filter(n=>n.isConnected).length,notice:doc().querySelector('#notice')?.textContent,playControls:doc().querySelectorAll('[data-action="play"]').length,previewImages:doc().querySelectorAll('.library-wave-preview img').length});
+  assert(!d.loop&&d.loopIn===before.loopIn&&d.loopOut===before.loopOut,'Track-end Loop created invalid active bounds');assert(r.observedNodes===r.retainedNodes&&r.playControls===4&&r.previewImages>0,'Rejected loop replaced controls or previews');
+  assert(r.notice.includes('Loop Out must be after Loop In'),'Loop rejection must explain valid bounds');
+  overview.dispatchEvent(new w.KeyboardEvent('keydown',{key:'Home',code:'Home',bubbles:true,cancelable:true}));await until(()=>engine.position(d)===0,'Home seek');click('[data-action="play"][data-deck="0"]');await until(()=>d.playing&&!d.processing,'valid Play');
+  const voice=engine.voices.get(0),token=engine.startTokens.get(0),rate=d.rate,position=engine.position(d);let rejected='';try{await engine.setLoop(d,true,5,5);}catch(error){rejected=error.name;}
+  await sleep(40);r.active={rejected,sameVoice:engine.voices.get(0)===voice,sameStartToken:engine.startTokens.get(0)===token,sameRate:d.rate===rate,playing:d.playing,clockAdvanced:Number.isFinite(engine.position(d))&&engine.position(d)>position,loop:d.loop};
+  assert(rejected==='RangeError'&&r.active.sameVoice&&r.active.sameStartToken&&r.active.sameRate&&r.active.playing&&r.active.clockAdvanced&&!d.loop,'Invalid loop changed the active voice or clock');r.complete=true;
+ }catch(error){r.error=error.message;}
+ finally{if(engine&&state){for(const d of state.decks)engine.pause(d);r.physicalMuted=engine.audioMonitor.snapshot().physicalMuted;r.allStopped=state.decks.every(d=>!d.playing&&!d.processing&&!d.playQueued);}result.textContent=JSON.stringify(r,null,2);}
+};
 document.querySelector('#pfl-refresh-run').onclick=async()=>{
  let engine,state;const r={complete:false,scope:'Actual isolated four-deck headphone Cue on/off; generated tracks, physical mute, no playback or hardware/listening proof.',stages:[]};
  try{
