@@ -1,14 +1,12 @@
-# Private playback test0.1.61 — staged, not launched
+# Private playback test0.1.61 — native startup observed
 
-**Manual unlock required (27 October):** native input stopped after an explicit locked-Mac report. The correct BX3 form was opened, but restoration is unconfirmed.
-
-**First cleanup after unlock:** in the running0.1.59 library, restore `BX 3 · metadata check` to `BX 3` through Track Details. Keep BPM124.98471158160582 and all other fields. Close unrelated Glass Transit details without saving if it is still open. The prior native precision save succeeded, but restoration has not been observed; [exact result and limits](PRECISE_BPM_NATIVE_059_2026-10-26.md).
+27 October: BX3 cleanup is complete; exact61 native startup and paused 59→61 recovery executed. [Evidence and limits](CORE_NATIVE_061_RECOVERY_2026-10-27.md). Earlier staged/unlock instructions are superseded. Fresh audio/changed native paths remain unverified.
 
 61 is built from immutable2c1c35e68baf81bc7b24e22abfde93ae29bc27b6. Actual package/controlled-host inspection passed5/5, including608runtime prototype files. It includes Track Details BPM/Sync ownership, Tap scoped refresh, and replacement-analysis grid ownership repairs. All layouts, controls and library preview source remain archived; no new audio algorithm or framework.
 
 The latest real-worker capture's15product runtime modules match the actual package bytes. Five unchanged metadata repair/engine modules also match their earlier capture. The older metadata capture's whole app.js differs because later Tap/analysis repairs followed; whole-runtime identity with that older capture is not claimed. These are source/package facts, not native acceptance.
 
-After cleanup and preserving any unsaved recording/work:
+For a future launch, preserve any unsaved recording/work:
 
 1. Quit the current playback-test app normally; keep its saved library/profile. Do not run two versions together:61 uses the existing playback-test profile/port18775.
 2. Open the root `Start Open Play Playback Test 0.1.61.command`. It was syntax checked but not executed;61 has not been launched. Current/default starters still point to59.

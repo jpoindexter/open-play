@@ -6,11 +6,13 @@ body[data-preview-shell=flat]{
  --grid-0:var(--dj-semantic-space-0);--grid-1:var(--dj-semantic-space-4);--grid-2:var(--dj-semantic-space-8);--grid-3:var(--dj-semantic-space-12);--grid-4:var(--dj-semantic-space-16);
  --grid-5:var(--dj-semantic-space-20);--grid-6:var(--dj-semantic-space-24);--grid-7:var(--dj-semantic-space-28);--grid-8:var(--dj-semantic-space-32);--grid-9:var(--dj-semantic-space-36);
  --grid-10:var(--dj-semantic-space-40);--grid-11:var(--dj-semantic-space-44);--grid-12:var(--dj-semantic-space-48);--grid-13:var(--dj-semantic-space-52);--grid-16:var(--dj-semantic-space-64);
+ --rb-overview-height:var(--dj-component-deck-overview-height);
  --rb-knob-size:var(--grid-6);--rb-knob-row:var(--grid-10);
 
  --rb-channel-min:calc(var(--grid-16)*4 + var(--grid-7));
  --rb-two-mixer-height:var(--dj-component-mixer-vertical-height);
 }
+body[data-preview-shell=flat].four-decks[data-orientation=horizontal]{--rb-overview-height:var(--dj-component-deck-four-horizontal-overview-height)}
 body[data-preview-shell=flat].four-decks{--rb-center-width:var(--dj-component-mixer-four-width)}
 body[data-preview-shell=flat]:not(.four-decks)[data-orientation=vertical]{--rb-center-width:var(--dj-component-mixer-mirrored-width)}
 body[data-preview-shell=flat]:not(.four-decks)[data-orientation=horizontal]{--rb-center-width:var(--dj-component-mixer-horizontal-width)}
@@ -21,7 +23,7 @@ body[data-preview-shell=flat][data-density=compact]{
 }
 body[data-preview-shell=flat][data-orientation] main{grid-template-columns:minmax(0,1fr) 164px minmax(0,1fr);grid-template-rows:132px auto var(--grid-12) var(--rb-library-tracks,minmax(220px,1fr));gap:var(--grid-1);padding:var(--grid-1)}
 body[data-preview-shell=flat][data-orientation] .detail-horizontal{height:132px;grid-row:1;grid-column:1/-1;border:0}
-body[data-preview-shell=flat][data-orientation] .deck{display:grid;grid-template-columns:minmax(0,1fr) 64px 40px 108px 30px;grid-template-rows:var(--grid-13) var(--grid-9) minmax(calc(var(--grid-16)*2 + var(--grid-6)),1fr) var(--grid-7) var(--grid-6);gap:var(--grid-1);border:0;border-inline-end:1px solid var(--dj-semantic-border-strong);background:var(--dj-semantic-panel);border-radius:0;align-content:start;align-self:stretch;height:100%}
+body[data-preview-shell=flat][data-orientation] .deck{display:grid;grid-template-columns:minmax(0,1fr) 64px 40px 108px 30px;grid-template-rows:var(--grid-13) var(--rb-overview-height) minmax(calc(var(--grid-16)*2 + var(--grid-6)),1fr) var(--grid-7) var(--grid-6);gap:var(--grid-1);border:0;border-inline-end:1px solid var(--dj-semantic-border-strong);background:var(--dj-semantic-panel);border-radius:0;align-content:start;align-self:stretch;height:100%}
 body[data-preview-shell=flat][data-orientation] .deck:nth-of-type(1){grid-column:1;grid-row:2}
 body[data-preview-shell=flat][data-orientation] .deck:nth-of-type(even){grid-column:3;grid-row:2;grid-template-columns:40px 108px 30px 64px minmax(0,1fr)}
 body[data-preview-shell=flat][data-orientation] .deck-head{grid-column:1/-1;grid-row:1;position:relative;display:grid;grid-template-columns:34px minmax(0,1fr) 76px 96px 54px;grid-template-rows:1fr;gap:6px;padding:4px 6px 4px 12px;height:52px;background:var(--dj-semantic-panel);border:0}
@@ -43,8 +45,7 @@ body[data-preview-shell=flat][data-orientation] .rb-sync-controls{grid-column:5;
 body[data-preview-shell=flat][data-orientation] .rb-sync-controls button{display:block;min-height:0;padding:1px 3px;white-space:normal;background:var(--dj-semantic-control);border:0;border-radius:0}
 body[data-preview-shell=flat][data-orientation] .rb-sync-controls [data-action=syncOff]{border:1px solid var(--dj-semantic-border-strong);background:transparent}
 body[data-preview-shell=flat][data-orientation] .rb-sync-controls button.active{background:var(--dj-semantic-active);color:white}
-body[data-preview-shell=flat][data-orientation] .wave-wrap{grid-row:2;grid-column:1/-1;height:36px;margin:0;background:var(--dj-semantic-recessed);border:0;border-radius:0}
-body[data-preview-shell=flat][data-orientation] .wave-label{bottom:1px;right:2px;background:#08080899}
+body[data-preview-shell=flat][data-orientation] .wave-wrap{grid-row:2;grid-column:1/-1;height:var(--rb-overview-height);margin:0;background:var(--dj-semantic-recessed);border:0;border-radius:0}
 body[data-preview-shell=flat][data-orientation] .deck-body>div:first-child{grid-row:3;grid-column:1;padding:4px 2px 0 6px;align-self:start;min-width:0}
 body[data-preview-shell=flat][data-orientation] .deck:nth-of-type(even) .deck-body>div:first-child{grid-column:5;padding:4px 6px 0 2px}
 body[data-preview-shell=flat][data-orientation] .deck-tabs{display:none}
@@ -108,7 +109,7 @@ body[data-preview-shell=flat][data-orientation] .rb-cross-controls [data-rb-assi
 body[data-preview-shell=flat][data-orientation] .rb-cross-controls [data-rb-assign='1']{grid-column:3;grid-row:1}
 body[data-preview-shell=flat][data-orientation] .rb-cross-controls [data-rb-assign='3']{grid-column:3;grid-row:2}
 /* Vertical pairs above the mixer; decks remain mirrored either side. */
-body[data-preview-shell=flat]{--rb-wave-height:132px;--rb-pair-height:150px;--rb-four-height:calc(var(--grid-16)*4 + var(--grid-9))}
+body[data-preview-shell=flat]{--rb-wave-height:132px;--rb-pair-height:150px;--rb-four-height:calc(var(--grid-16)*4 + var(--grid-9) + var(--rb-overview-height) - var(--grid-7))}
 body[data-preview-shell=flat][data-wave-size=small]{--rb-wave-height:88px;--rb-pair-height:120px}
 body[data-preview-shell=flat][data-wave-size=large]{--rb-wave-height:180px;--rb-pair-height:200px}
 body[data-preview-shell=flat][data-orientation=horizontal] main{height:calc(100dvh - var(--workspace-chrome-height,122px));min-height:0;grid-template-rows:var(--rb-wave-height) auto var(--grid-12) var(--rb-library-tracks,minmax(180px,1fr))}
@@ -131,10 +132,9 @@ body[data-preview-shell=flat].four-decks[data-orientation] .deck:nth-of-type(1){
 body[data-preview-shell=flat].four-decks[data-orientation] .deck:nth-of-type(2){grid-column:3;grid-row:2}
 body[data-preview-shell=flat].four-decks[data-orientation] .deck:nth-of-type(3){grid-column:1;grid-row:3}
 body[data-preview-shell=flat].four-decks[data-orientation] .deck:nth-of-type(4){grid-column:3;grid-row:3}
-body[data-preview-shell=flat].four-decks[data-orientation] .deck{grid-template-rows:var(--grid-11) var(--grid-7) calc(var(--grid-16)*2 + var(--grid-6)) var(--grid-7) var(--grid-6)}
-body[data-preview-shell=flat].four-decks[data-density=compact] .deck{grid-template-rows:var(--grid-11) var(--grid-7) calc(var(--grid-16)*2) var(--grid-7) var(--grid-6)}
+body[data-preview-shell=flat].four-decks[data-orientation] .deck{grid-template-rows:var(--grid-11) var(--rb-overview-height) calc(var(--grid-16)*2 + var(--grid-6)) var(--grid-7) var(--grid-6)}
+body[data-preview-shell=flat].four-decks[data-density=compact] .deck{grid-template-rows:var(--grid-11) var(--rb-overview-height) calc(var(--grid-16)*2) var(--grid-7) var(--grid-6)}
 body[data-preview-shell=flat].four-decks .deck-head{height:44px;padding-block:1px}
-body[data-preview-shell=flat].four-decks .wave-wrap{height:28px}
 body[data-preview-shell=flat].four-decks .pads{grid-template-rows:repeat(4,19px)}
 body[data-preview-shell=flat].four-decks .pad{height:19px;min-height:19px}
 body[data-preview-shell=flat].four-decks .deck .platter{width:94px;height:94px}
@@ -198,24 +198,23 @@ body[data-preview-shell=flat] .rb-monitor-knob:focus-within{outline:2px solid va
    Four-deck rows ~208px; center ~16.8% of the reference window. Original
    controls remain bound; only Compact geometry is changed here. */
 body[data-preview-shell=flat][data-density=compact]{
- --rb-four-height:208px;
+ --rb-four-height:calc(var(--dj-semantic-space-208) + var(--rb-overview-height) - var(--grid-7));
  --rb-knob-size:18px;--rb-knob-row:32px;--rb-channel-min:240px;
  --rb-pair-height:72px;--rb-compact-wave-height:176px;
 }
-body[data-preview-shell=flat].four-decks[data-density=compact]{--rb-four-height:208px}
+body[data-preview-shell=flat].four-decks[data-density=compact]{--rb-four-height:calc(var(--dj-semantic-space-208) + var(--rb-overview-height) - var(--grid-7))}
 body[data-preview-shell=flat][data-density=compact][data-wave-size=medium]{--rb-pair-height:72px}
 body[data-preview-shell=flat][data-density=compact][data-wave-size=small]{--rb-pair-height:56px;--rb-compact-wave-height:136px}
 body[data-preview-shell=flat][data-density=compact][data-wave-size=large]{--rb-pair-height:100px;--rb-compact-wave-height:216px}
 body[data-preview-shell=flat]:not(.four-decks)[data-orientation=vertical][data-density=compact]{--rb-pair-height:var(--rb-compact-wave-height)}
-body[data-preview-shell=flat].four-decks[data-density=compact][data-orientation=vertical][data-wave-size=large]{--rb-four-height:248px}
+body[data-preview-shell=flat].four-decks[data-density=compact][data-orientation=vertical][data-wave-size=large]{--rb-four-height:calc(var(--grid-16)*3 + var(--grid-12) + var(--grid-2) + var(--rb-overview-height) - var(--grid-7))}
 body[data-preview-shell=flat][data-orientation][data-density=compact] main{grid-template-columns:minmax(0,1fr) var(--rb-center-width) minmax(0,1fr)}
 body[data-preview-shell=flat][data-orientation][data-density=compact] .deck{
  grid-template-columns:minmax(0,1fr) 64px 40px 88px 32px;
- grid-template-rows:44px 28px minmax(88px,1fr) 20px 20px;gap:2px;
+ grid-template-rows:44px var(--rb-overview-height) minmax(88px,1fr) 20px 20px;gap:2px;
 }
 body[data-preview-shell=flat][data-orientation][data-density=compact] .deck:nth-of-type(even){grid-template-columns:40px 88px 32px 64px minmax(0,1fr)}
 body[data-preview-shell=flat][data-orientation][data-density=compact] .deck-head{height:44px;padding-block:0}
-body[data-preview-shell=flat][data-orientation][data-density=compact] .wave-wrap{height:28px}
 body[data-preview-shell=flat][data-orientation][data-density=compact] .deck-body>div:first-child{grid-column:1;grid-row:3;align-self:center;padding:0 4px;min-width:0}
 body[data-preview-shell=flat][data-orientation][data-density=compact] .deck:nth-of-type(even) .deck-body>div:first-child{grid-column:5}
 body[data-preview-shell=flat][data-orientation][data-density=compact] .pads{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:repeat(4,16px);gap:2px}
@@ -255,11 +254,11 @@ body[data-preview-shell=flat][data-orientation=vertical][data-density=compact][d
 
 /* Saved/auto/roll mode selectors stay visible in Compact without changing
    the selected pad mode. Grow the shared deck row by one control line. */
-body[data-workspace=rekordbox][data-density=compact]:has(.deck[data-rb-pad-mode=Loops]){--rb-four-height:240px;}
-body[data-workspace=rekordbox][data-orientation][data-density=compact]:has(.deck[data-rb-pad-mode=Loops]) .deck{grid-template-rows:44px 28px minmax(120px,1fr) 20px 20px}
+body[data-workspace=rekordbox][data-density=compact]:has(.deck[data-rb-pad-mode=Loops]){--rb-four-height:calc(var(--grid-16)*3 + var(--grid-12) + var(--rb-overview-height) - var(--grid-7));}
+body[data-workspace=rekordbox][data-orientation][data-density=compact]:has(.deck[data-rb-pad-mode=Loops]) .deck{grid-template-rows:44px var(--rb-overview-height) minmax(120px,1fr) 20px 20px}
 body[data-preview-shell=flat][data-orientation][data-density=compact] .deck[data-rb-pad-mode=Loops] .deck-body>div:first-child>nav.loop-line{margin:0 0 4px;gap:2px;flex-wrap:wrap}
 body[data-preview-shell=flat][data-orientation][data-density=compact] .deck[data-rb-pad-mode=Loops] .deck-body>div:first-child>nav.loop-line button{min-height:20px;height:20px;padding:0 2px;}
-body[data-workspace=rekordbox][data-orientation=vertical][data-density=compact][data-wave-size=large]:has(.deck[data-rb-pad-mode=Loops]){--rb-four-height:248px}
+body[data-workspace=rekordbox][data-orientation=vertical][data-density=compact][data-wave-size=large]:has(.deck[data-rb-pad-mode=Loops]){--rb-four-height:calc(var(--grid-16)*3 + var(--grid-12) + var(--grid-2) + var(--rb-overview-height) - var(--grid-7))}
 
 /* HTML210: output and per-track gain are rotary, like mixer EQ/trim and
    headphone MIX/LEVEL. Tempo, channel level and crossfader remain linear. */
@@ -353,7 +352,7 @@ body[data-workspace=rekordbox][data-orientation] .preview-deck-utilities .tempo-
 @media(max-width:1100px){
  #workspace-preview[data-workspace=rekordbox][data-density=compact]{--rb-four-height:var(--dj-component-deck-narrow-height)}
  #workspace-preview[data-workspace=rekordbox][data-orientation][data-density=compact] .deck{
-  grid-template-rows:var(--grid-11) var(--grid-7) minmax(var(--rb-disc-column),1fr) auto auto;
+  grid-template-rows:var(--grid-11) var(--rb-overview-height) minmax(var(--rb-disc-column),1fr) auto auto;
  }
  #workspace-preview[data-workspace=rekordbox][data-orientation][data-density=compact] :is(.preview-deck-utilities,.deck-foot){
   flex-wrap:wrap;align-content:center;height:auto;min-height:var(--dj-semantic-header-height);

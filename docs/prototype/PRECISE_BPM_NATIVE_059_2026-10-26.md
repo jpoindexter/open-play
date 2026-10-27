@@ -1,8 +1,6 @@
-# Precise BPM native save: executed, cleanup pending
+# Precise BPM native save and title restoration — executed
 
-**Pending cleanup:** the normal0.1.59 library currently retains the temporary title `BX 3 · metadata check`. Restore its title to `BX 3` through Track Details when native input is reliable. Do not change its BPM124.98471158160582 or other metadata. No original audio tags were rewritten. This pass is not closed until restoration is observed.
-
-**27 October update:** the supported native window Raise action succeeded, and a freshly observed row opened the correct BX3 details form with the temporary title. The next restoration call reported that the Mac was locked. Restoration is unconfirmed; all further native input stopped. Manual unlock is now required. This does not retrospectively explain the earlier stale/window errors. See [blocker/re-entry record](native-input-blocker-2026-10-27.json).
+27 October: BX 3 title restoration, reopened form, exact BPM and 59→61 paused recovery are observed. [Recovery evidence and limits](CORE_NATIVE_061_RECOVERY_2026-10-27.md). The earlier pending-cleanup/input-block reports below are historical; this narrow defect is eligible for completion.
 
 ## Observed native path
 
