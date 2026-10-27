@@ -12,9 +12,10 @@ export async function saveTrackDetails(track,fields,engine,persist){
  track.bpm=bpm;
  track.rating=Number(fields.get('rating'));
  track.locked=fields.has('locked');
- persist();
+ const saved=persist();
  if(changed)try{await engine.onGridChanged?.(track,before);}
- catch(error){throw new Error('Details saved; playback realignment failed: '+error.message,{cause:error});}
+ catch(error){throw new Error((saved===false?'Details changed in this session only; saving failed':'Details saved')+'; playback realignment failed: '+error.message,{cause:error});}
+ if(saved===false)throw new Error('Details changed in this session only. Saving failed; keep this window open, export a backup or retry Save details.');
 }
 
 export function refreshTrackDetails(state,track,time,root=document){

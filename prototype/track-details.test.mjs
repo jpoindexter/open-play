@@ -23,6 +23,16 @@ test('unchanged BPM does not disturb Sync; failed realignment reports saved meta
  await assert.rejects(saveTrackDetails(f.track,f.fields,f.engine,f.persist),/Details saved; playback realignment failed: voice failed/);
  assert.equal(f.track.bpm,124);assert.equal(f.calls.at(-1)[0],'persist');
 });
+test('failed detail persistence still realigns changed BPM and keeps the save failure explicit',async()=>{
+ const f=fixture();f.fields.set('bpm','124.23');
+ await assert.rejects(saveTrackDetails(f.track,f.fields,f.engine,()=>false),/session only.*Saving failed/s);
+ assert.deepEqual(f.calls,[['before',123,'Before'],['after',124.23,'owned']]);
+ assert.equal(f.track.title,'After');
+});
+test('failed persistence plus realignment failure never claims metadata was saved',async()=>{
+ const f=fixture();f.fields.set('bpm','124.23');f.engine.onGridChanged=async()=>{throw Error('voice failed');};
+ await assert.rejects(saveTrackDetails(f.track,f.fields,f.engine,()=>false),/session only; saving failed; playback realignment failed: voice failed/);
+});
 test('metadata refresh reaches duplicate visible owners without replacing their controls',()=>{
  const track={title:'Edited',artist:'Artist',duration:300,key:'Am'},other={key:'C'};
  const nodes=[0,1,2].map(()=>({title:{},artist:{},querySelector(s){return s==='.deck-title strong'?this.title:s==='.deck-title small'?this.artist:null;}}));

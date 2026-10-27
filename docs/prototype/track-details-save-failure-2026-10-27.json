@@ -1,0 +1,41 @@
+{
+  "baseCommit": "e913d3f78f6f684f6179e00ad862cebbc80f55d4",
+  "productFilesChanged": [
+    "prototype/track-details.js"
+  ],
+  "runtimeModuleLines": 30,
+  "newRuntimeModules": 0,
+  "sourceSHA256": {
+    "prototype/track-details.js": "4705998c8f1f3c25ffed8ac2aa34f0a5f1072cda5d3ebf47b6bcdf721ca82e8d",
+    "prototype/panels.js": "a6b9ef31fd67bf4b868ce0e161c198f392a3172bbaa73798af3242ff50f9dce0",
+    "prototype/app.js": "87557f24bc20704bddd90bc3ff79108d93c6cfed9ecd54beb64ce256b33d3840",
+    "prototype/session-storage.js": "ffd64ab9c1cacea47c7cb2ad3f8b657f435922d1698e05631aefeb9c3e017053",
+    "prototype/session-safety-harness.js": "d599670e8a879e69f05bb289fa80c122c807833b11d7b22e8a2d7ea19f4ccdb2"
+  },
+  "baseline": {
+    "complete": false,
+    "scope": "Actual isolated Track Details form with injected storage quota failure; no audio or native acceptance.",
+    "modalOpenAfterFailure": false,
+    "status": "",
+    "error": "Track Details closed after saving failed"
+  },
+  "repaired": {
+    "complete": true,
+    "scope": "Actual isolated Track Details form with injected storage quota failure; no audio or native acceptance.",
+    "modalOpenAfterFailure": true,
+    "status": "Details changed in this session only. Saving failed; keep this window open, export a backup or retry Save details.",
+    "retrySurvivesReload": true
+  },
+  "moduleChecks": {
+    "file": "prototype/track-details.test.mjs",
+    "passed": 6,
+    "failed": 0
+  },
+  "limits": [
+    "Injected browser storage failure, generated audio and isolated origins only",
+    "Not native quota-failure/listening/hardware/pop-stall acceptance",
+    "Initial same-origin retry did not establish refreshed module identity; retained as ungraded",
+    "Fresh-origin attempt exposed a harness selector selecting an Astryx nested status; narrowed to direct form status and repeated the failed segment"
+  ],
+  "privateEvidence": "local-evidence/details-save-failure-2026-10-27/"
+}

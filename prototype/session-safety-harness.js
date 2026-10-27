@@ -13,6 +13,32 @@ async function restore(data){
  await input.onchange({target:input});return doc().querySelector('#library-tool-result').textContent;
 }
 const metadata=()=>JSON.stringify({crates:state().crates,settings:state().settings,tags:state().tracks.map(t=>({id:t.id,title:t.title,cues:t.cues,savedLoops:t.savedLoops,color:t.color}))});
+document.querySelector('#details-run').onclick=async()=>{
+ let w,write;const report={complete:false,scope:'Actual isolated Track Details form with injected storage quota failure; no audio or native acceptance.'};
+ output.textContent='Checking Track Details…';
+ try{
+  assert(location.port==='8872','Use dedicated port8872, never the live app origin.');
+  assert(localStorage.getItem('openplay-safety-owned')==='true'||localStorage.length===0,'Origin has existing data; refusing to overwrite it.');
+  localStorage.setItem('openplay-safety-owned','true');
+  await boot();w=frame.contentWindow;write=w.Storage.prototype.setItem;
+  const track=state().decks[0].track,stored=localStorage.getItem(sessionKey),bpm=track.bpm+1;
+  doc().querySelector(`[data-track="${track.id}"]`).dispatchEvent(new w.MouseEvent('contextmenu',{bubbles:true,cancelable:true}));
+  const form=doc().querySelector('#track-form'),save=form.querySelector('[type="submit"]');
+  form.elements.title.value='Quota details';form.elements.bpm.value=String(bpm);
+  w.Storage.prototype.setItem=function(key,value){if(key===sessionKey)throw new w.DOMException('Controlled full storage','QuotaExceededError');return write.call(this,key,value);};
+  form.requestSubmit();await wait(()=>!save.disabled,'details save completion');
+  report.modalOpenAfterFailure=doc().querySelector('#modal').open;report.status=form.querySelector(':scope > [role="status"]').textContent;
+  assert(report.modalOpenAfterFailure,'Track Details closed after saving failed');
+  assert(/session only.*Saving failed/s.test(report.status),'Details failure was not explained inside the form');
+  assert(localStorage.getItem(sessionKey)===stored,'Failed save changed the stored session');
+  assert(track.title==='Quota details'&&track.bpm===bpm,'Unsaved edits were lost');
+  w.Storage.prototype.setItem=write;form.requestSubmit();await wait(()=>!doc().querySelector('#modal').open,'details retry');
+  await boot();assert(state().decks[0].track.title==='Quota details'&&state().decks[0].track.bpm===bpm,'Retried details lost after reload');
+  assert(state().decks.every(d=>!d.playing&&!d.playQueued),'Unexpected playback');
+  report.complete=true;report.retrySurvivesReload=true;
+ }catch(error){report.error=error.message;}
+ finally{if(w&&write)w.Storage.prototype.setItem=write;output.textContent=JSON.stringify(report,null,2);}
+};
 document.querySelector('#run').onclick=async()=>{
  try{
   assert(location.port==='8872','Use dedicated port8872, never the live app origin.');
