@@ -1,6 +1,8 @@
 # Key-shift control retention — 27 October 2026
 
-[CORE-FIX-33](https://trello.com/c/6RcQagUr) remains open for packaging and native/held/listening acceptance. Current installed 0.1.79 / source `f9e7511`, normal profile and paused real-track session are unchanged.
+Delivery update: included in inspected/current private 0.1.80 / source `3818552`. Protected paused recovery and one native paused Up/Down feedback check are observed, with original zero shift/Key Lock off restored. Held/playing/physical MIDI/listening remain open. [Current delivery](DESKTOP_CORE_080_2026-10-27.md). Original source-slice evidence below retains its scope.
+
+[CORE-FIX-33](https://trello.com/c/6RcQagUr) remains open for packaging and native/held/listening acceptance. At the source-slice check, installed 0.1.79 / source `f9e7511`, normal profile and paused real-track session were unchanged.
 
 ## Reproduced failure
 
@@ -20,4 +22,4 @@ Two focused checks compose the actual app wiring and handler with the shared mod
 
 The owned diagnostic stopped/cleared its frame and isolated origin, closed its tab/server and removed its two byte-matched copied prototype files. Raw fixture/results remain ignored under `local-evidence/key-shift-controls-2026-10-27/`. No original music, normal profile, recording, desktop bundle or Downloads file changed. New module is included in the existing package manifest for the next inspected candidate.
 
-[Compact receipt](key-shift-controls-2026-10-27.json). Next: package normally and include relevant native key-control use in the existing CORE-LIVE-01 session, without repeating accepted ordinary mixing matrices. Broader DEK-007/CORE-FIX-29 and intermittent Sync-pop/stall criteria remain open.
+[Compact receipt](key-shift-controls-2026-10-27.json). The delivery above supplies the inspected package and paused feedback check. Next: include relevant native held/playing and physical MIDI key-control use in the existing CORE-LIVE-01 session, without repeating accepted ordinary mixing matrices. Broader DEK-007/CORE-FIX-29 and intermittent Sync-pop/stall criteria remain open.
