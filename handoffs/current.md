@@ -1,12 +1,14 @@
 ## Current core delivery — 27 October2026
 
-Private **0.1.61 native startup and paused 59→61 recovery are observed**. BX3’s temporary title is restored, its exact124.98471158160582BPM and other metadata retained. Recording preflight was clear;59 quit normally and the closed profile backup matches before/after/copy manifests. All four tracks recovered at2/3/4/5s with16library tracks, controls/previews and zero playback. [Executed evidence and limits](../docs/prototype/CORE_NATIVE_061_RECOVERY_2026-10-27.md). No current locked-Mac blocker remains.
+**Private0.1.63/sourcee57e34a is packaged/inspected5/5, not launched.** One30-line module repair keeps failed Track Details saves visible/retryable while retaining live edits and existing grid realignment. Actual isolated form failure→warning→retry→reload and six affected-file checks passed; no broad suite/soak. [Repair and limits](../docs/prototype/TRACK_DETAILS_SAVE_FAILURE_2026-10-27.md) · [63delivery](../docs/prototype/desktop-0.1.63-playback-delivery.json).
 
-**0.1.62/source5cc4bcc is now running** with all four real tracks paused and library previews retained. Its package inspection passed5/5. Both default launchers now target62 (syntax checked; exact bundle launch observed). No Play/Sync/REC in this delivery.
+0.1.62 remains running/default. Its prior native startup/paused session retained four real tracks2/3/4/5s,16library tracks, controls/five viewport previews and restored BX3/exact BPM. Volatile native common-module checks execute paused real-track metadata save, Tap and replacement analysis; that diagnostic bootstrap differs from the normal rekordbox layout. Normal session/original audio comparison passes. [Native scope](../docs/prototype/NATIVE_CORE_CONTROLS_2026-10-27.md). The measured overview sizing remains in62/63; custom controls/previews retained.
 
-Current source refines the deck’s full-track overview using measured REA/native reference wells:44logicalpx for2decks/4V;32px for4H, replacing Compact’s28px. Caption provenance remains accessible without covering the waveform. Canonical component tokens own sizing; deck rows budget the added height. Core controls, seek and library previews remain. [Sizing evidence](../docs/prototype/OVERVIEW_SIZING_2026-10-27.md).
+**New native lock gate:** CUA reports a locked Mac and ioreg confirms the session lock flag. Native input stopped; no63launch, normal-app quit, live-profile rewrite or default switch. Paused-state observations predate this lock. Versioned63starter syntax checked only.
 
-Next: owner visual review of overview sizing, then continue only changed native metadata/Tap/reanalysis paths. Capture the next actual pop/stall; no repeated clean soaks. Prior53manual listening retains its version scope. Fresh listening, changed native held gestures, same-version restart, hardware and public-release gates remain open. [Beta scope](../docs/delivery/PUBLIC_BETA_PLAN.md).
+Jason asked to continue unattended and collect his later controller/listening work in [CORE-LIVE-01](https://trello.com/c/yJ8r9kCD) / [one practical checklist](../docs/delivery/OWNER_CORE_SESSION_2026-10-27.md). Prior53manual/jog/EQ/Cue/stop acceptance retains scope. Playing/held native paths, Sync pops/stalls, headphone/master/controller and public-release gates remain open. New handwritten modules target150–250lines/cap300; legacy oversized files remain MOD-001.
+
+Next: continue bounded unattended software work. After unlock preserve recording/work, quit62normally, back up its closed profile, open63and use the collected controller/listening checks. Capture the next actual pop/stall; no repeated clean matrices. [Public beta scope](../docs/delivery/PUBLIC_BETA_PLAN.md).
 
 --- Historical handoff below ---
 

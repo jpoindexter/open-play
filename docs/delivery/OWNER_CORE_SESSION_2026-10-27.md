@@ -2,9 +2,9 @@
 
 Trello: https://trello.com/c/yJ8r9kCD/165-core-live-01-jason-controller-and-listening-session
 
-Jason asked to group owner-dependent work for later today; no automatic calendar/reminder or owner result is inferred. Refresh the exact latest inspected private build before starting (62 currently running;63 save-failure repair being prepared).
+Jason asked to group owner-dependent work for later today; no automatic calendar/reminder or owner result is inferred. Refresh the exact latest inspected private build before starting (63/sourcee57e34a inspected/staged;62 remains running/default).
 
-1. Preserve recording/work and paused session. Connect Hercules Inpulse300MK2, headphones and speakers; confirm exact device/outputs and safe levels, keeping the272 prior mappings.
+1. Unlock the Mac. Preserve current62recording/work and paused session; quit62normally, back up its closed profile, open exact63and check recovered tracks/positions/controls/previews without unwanted playback. Connect Hercules Inpulse300MK2, headphones and speakers; confirm exact device/outputs and safe levels, keeping the272 prior mappings.
 2. Verify private headphone cue at channel-fader zero, swap A/B, cue/master mix and headphone level, physical speaker/headphone destinations and master level. Stop if a private cue leaks to speakers unexpectedly.
 3. Perform one short controller manual mix using two different real songs. Reuse accepted53computer-audio behavior; this checks physical browse/load/transport/tempo/nudge/EQ/filter/faders/crossfader rather than every old software test.
 4. One paused-incoming and one playing-incoming Sync action, keeping the outgoing master unchanged. Listen and follow the NOW/grid line. Different bar numbers alone are not failure. Retain the next actual pop/click/stall event, action and positions; stop repeating clean cases.
