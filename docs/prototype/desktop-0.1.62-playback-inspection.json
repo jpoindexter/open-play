@@ -1,0 +1,60 @@
+{
+  "version": "0.1.62",
+  "archiveSHA256": "bbecb6e5c9417d421f49f3e8146782d5f0f3bb23879eba497b7edb77d4e8aa85",
+  "sourceCommit": "5cc4bccdc046df5729420beb4baea44a39966334",
+  "checks": [
+    {
+      "name": "Archive and all declared prototype module bytes match immutable source",
+      "passed": true,
+      "evidence": {
+        "runtimePrototypeFiles": 608,
+        "omittedDevelopmentFiles": [
+          "prototype/ui/package-lock.json"
+        ],
+        "declaredModules": 99
+      }
+    },
+    {
+      "name": "Staged host/helper bytes and sanitized package identity match receipt",
+      "passed": true,
+      "evidence": {
+        "stagedFiles": 11,
+        "version": "0.1.62"
+      }
+    },
+    {
+      "name": "Only four generated diagnostic WAVs match independently referenced hashes",
+      "passed": true,
+      "evidence": {
+        "generatedWAVs": 4,
+        "noNativeReferenceLibrary": true
+      }
+    },
+    {
+      "name": "Archive excludes raw evidence, user profiles, Git and credentials",
+      "passed": true,
+      "evidence": {
+        "files": 3213
+      }
+    },
+    {
+      "name": "Packaged main profile/permissions and isolated check session remain distinct",
+      "passed": true,
+      "evidence": {
+        "mainPartition": "persist:open-play-playback-test",
+        "diagnosticPartitionPersistent": false,
+        "uniqueDiagnosticSessions": true,
+        "devicePermissionsDenied": true,
+        "sandboxRetained": true,
+        "relativeCheckVerified": true,
+        "guiTempoCheckVerified": true,
+        "simpleControllerCheckVerified": true
+      }
+    }
+  ],
+  "scope": "Actual ASAR bytes and controlled packaged host/check-window callbacks, not native UI/audio/device acceptance.",
+  "fullParityVerified": false,
+  "passed": 5,
+  "failed": 0,
+  "completed": true
+}

@@ -2,9 +2,11 @@
 
 Private **0.1.61 native startup and paused 59→61 recovery are observed**. BX3’s temporary title is restored, its exact124.98471158160582BPM and other metadata retained. Recording preflight was clear;59 quit normally and the closed profile backup matches before/after/copy manifests. All four tracks recovered at2/3/4/5s with16library tracks, controls/previews and zero playback. [Executed evidence and limits](docs/prototype/CORE_NATIVE_061_RECOVERY_2026-10-27.md). No current locked-Mac blocker remains.
 
+**0.1.62/source5cc4bcc is now running** with all four real tracks paused and library previews retained. Its package inspection passed5/5. Both default launchers now target62 (syntax checked; exact bundle launch observed). No Play/Sync/REC in this delivery.
+
 Current source refines the deck’s full-track overview using measured REA/native reference wells:44logicalpx for2decks/4V;32px for4H, replacing Compact’s28px. Caption provenance remains accessible without covering the waveform. Canonical component tokens own sizing; deck rows budget the added height. Core controls, seek and library previews remain. [Sizing evidence](docs/prototype/OVERVIEW_SIZING_2026-10-27.md).
 
-Next: deliver the sizing slice and continue only changed native metadata/Tap/reanalysis paths. Capture the next actual pop/stall; no repeated clean soaks. Prior53manual listening retains its version scope. Fresh listening, changed native held gestures, same-version restart, hardware and public-release gates remain open. [Beta scope](docs/delivery/PUBLIC_BETA_PLAN.md).
+Next: owner visual review of overview sizing, then continue only changed native metadata/Tap/reanalysis paths. Capture the next actual pop/stall; no repeated clean soaks. Prior53manual listening retains its version scope. Fresh listening, changed native held gestures, same-version restart, hardware and public-release gates remain open. [Beta scope](docs/delivery/PUBLIC_BETA_PLAN.md).
 
 ## Historical status — core four-deck reliability, 25 October 2026
 
