@@ -103,3 +103,29 @@ document.querySelector('#cue-refresh-run').onclick=async()=>{
   result.textContent=JSON.stringify(r,null,2);
  }
 };
+
+document.querySelector('#cue-edit-run').onclick=async()=>{
+ let engine,state;const r={complete:false,scope:'One actual isolated four-deck hot-cue create/edit/delete sequence; generated audio, no playback or native/listening proof.',stages:[]};
+ try{
+  assert(location.port==='8874','Dedicated port8874 required');assert(localStorage.length===0||localStorage.getItem('openplay-core-controls-owned')==='true','Refusing unowned origin');
+  localStorage.setItem('openplay-core-controls-owned','true');localStorage.setItem(sessionKey,JSON.stringify({settings:{'Analyze Stems':false,'Instant Doubles':false}}));
+  frame.src='workspace-preview.html?cue-edit='+Date.now();await new Promise(resolve=>frame.onload=resolve);await until(()=>app()&&!app().state.analysis,'workspace');
+  ({engine,state}=app());await engine.resume();engine.audioMonitor.mutePhysical(true);assert(engine.audioMonitor.snapshot().physicalMuted,'Physical mute');
+  input('#deck-count',4,'change');await load(state.decks[0].track,1);await until(()=>doc().querySelectorAll('.library-wave-preview img').length>0,'library previews');
+  const w=frame.contentWindow,track=state.decks[0].track,pad=index=>doc().querySelector(`[data-action="pad"][data-deck="${index}"][data-pad="0"]`);
+  const settle=()=>new Promise(resolve=>w.requestAnimationFrame(()=>w.requestAnimationFrame(resolve)));
+  const selector='.deck button,.deck input,#mixer button,#mixer input,[data-waveform-scrub],#detail-wave,tr[data-track],.library-wave-preview img';
+  const begin=()=>{const p=pad(0);p.focus();return{p,nodes:[...doc().querySelectorAll(selector)]};};
+  const capture=(name,before)=>r.stages.push({name,observed:before.nodes.length,retained:before.nodes.filter(n=>n.isConnected).length,padFocused:doc().activeElement===before.p,ownerLabel:pad(0).textContent,duplicateLabel:pad(1).textContent,ownerAria:pad(0).getAttribute('aria-label'),duplicateAria:pad(1).getAttribute('aria-label')});
+  let before=begin();before.p.dispatchEvent(new w.KeyboardEvent('keydown',{key:' ',code:'Space',bubbles:true,cancelable:true}));before.p.dispatchEvent(new w.KeyboardEvent('keyup',{key:' ',code:'Space',bubbles:true,cancelable:true}));
+  await until(()=>!!track.cues[0],'cue created');await settle();capture('create',before);assert(pad(0).classList.contains('set')&&pad(1).classList.contains('set'),'Shared cue creation stale');
+  before=begin();before.p.dispatchEvent(new w.MouseEvent('contextmenu',{bubbles:true,cancelable:true}));
+  const form=doc().querySelector('#modal-body form');form.elements.name.value='Owned cue';form.elements.position.value='1.25';form.requestSubmit();await until(()=>!doc().querySelector('#modal').open,'cue edit');await settle();capture('edit',before);
+  assert(track.cues[0].name==='Owned cue'&&track.cues[0].position===1.25&&pad(0).textContent.includes('Owned cue')&&pad(1).textContent.includes('Owned cue'),'Shared cue edit stale');
+  before=begin();before.p.dispatchEvent(new w.KeyboardEvent('keydown',{key:' ',code:'Space',shiftKey:true,bubbles:true,cancelable:true}));before.p.dispatchEvent(new w.KeyboardEvent('keyup',{key:' ',code:'Space',shiftKey:true,bubbles:true,cancelable:true}));
+  await until(()=>!track.cues[0],'cue deleted');await settle();capture('delete',before);assert(!pad(0).classList.contains('set')&&!pad(1).classList.contains('set'),'Shared cue deletion stale');
+  r.previewImages=doc().querySelectorAll('.library-wave-preview img').length;r.playControls=doc().querySelectorAll('[data-action="play"]').length;
+  assert(r.stages.every(x=>x.observed===x.retained&&x.padFocused),'Hot-cue edit replaced controls or lost pad focus');assert(r.previewImages>0&&r.playControls===4,'Core controls/previews missing');r.complete=true;
+ }catch(error){r.error=error.message;}
+ finally{if(engine&&state){for(const d of state.decks)engine.pause(d);r.physicalMuted=engine.audioMonitor.snapshot().physicalMuted;r.allStopped=state.decks.every(d=>!d.playing&&!d.processing&&!d.playQueued);}result.textContent=JSON.stringify(r,null,2);}
+};

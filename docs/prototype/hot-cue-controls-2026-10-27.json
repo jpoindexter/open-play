@@ -1,0 +1,113 @@
+{
+  "date": "2026-10-27",
+  "baselineCommit": "f2129a0f67154f6eb4e5492c1f0a46c9cee05b8a",
+  "scope": "One actual isolated generated-audio/muted four-deck Compact hot-cue create/edit/delete sequence; no playback/listening/native held proof",
+  "baseline": {
+    "complete": false,
+    "scope": "One actual isolated four-deck hot-cue create/edit/delete sequence; generated audio, no playback or native/listening proof.",
+    "stages": [
+      {
+        "name": "create",
+        "observed": 237,
+        "retained": 12,
+        "padFocused": false,
+        "ownerLabel": "Cue 100:00.0",
+        "duplicateLabel": "Cue 100:00.0",
+        "ownerAria": "Deck 1 hot cue A",
+        "duplicateAria": "Deck 2 hot cue A"
+      },
+      {
+        "name": "edit",
+        "observed": 237,
+        "retained": 12,
+        "padFocused": false,
+        "ownerLabel": "Owned cue00:01.2",
+        "duplicateLabel": "Owned cue00:01.2",
+        "ownerAria": "Deck 1 hot cue A",
+        "duplicateAria": "Deck 2 hot cue A"
+      },
+      {
+        "name": "delete",
+        "observed": 237,
+        "retained": 12,
+        "padFocused": false,
+        "ownerLabel": "+1",
+        "duplicateLabel": "+1",
+        "ownerAria": "Deck 1 hot cue A \u2014 empty",
+        "duplicateAria": "Deck 2 hot cue A \u2014 empty"
+      }
+    ],
+    "previewImages": 4,
+    "playControls": 4,
+    "error": "Hot-cue edit replaced controls or lost pad focus",
+    "physicalMuted": true,
+    "allStopped": true
+  },
+  "repaired": {
+    "complete": true,
+    "scope": "One actual isolated four-deck hot-cue create/edit/delete sequence; generated audio, no playback or native/listening proof.",
+    "stages": [
+      {
+        "name": "create",
+        "observed": 237,
+        "retained": 237,
+        "padFocused": true,
+        "ownerLabel": "Cue 100:00.0",
+        "duplicateLabel": "Cue 100:00.0",
+        "ownerAria": "Deck 1 hot cue A",
+        "duplicateAria": "Deck 2 hot cue A"
+      },
+      {
+        "name": "edit",
+        "observed": 237,
+        "retained": 237,
+        "padFocused": true,
+        "ownerLabel": "Owned cue00:01.2",
+        "duplicateLabel": "Owned cue00:01.2",
+        "ownerAria": "Deck 1 hot cue A",
+        "duplicateAria": "Deck 2 hot cue A"
+      },
+      {
+        "name": "delete",
+        "observed": 237,
+        "retained": 237,
+        "padFocused": true,
+        "ownerLabel": "+1",
+        "duplicateLabel": "+1",
+        "ownerAria": "Deck 1 hot cue A \u2014 empty",
+        "duplicateAria": "Deck 2 hot cue A \u2014 empty"
+      }
+    ],
+    "previewImages": 4,
+    "playControls": 4,
+    "physicalMuted": true,
+    "allStopped": true
+  },
+  "focusedChecks": {
+    "baselinePassed": 8,
+    "baselineFailed": 2,
+    "baselinePlainLayoutCaseNotYetAdded": true,
+    "repairedPassed": 11,
+    "repairedFailed": 0
+  },
+  "changedProductFiles": [
+    "prototype/app.js",
+    "prototype/holds.js",
+    "prototype/panels.js",
+    "prototype/transport-presentation.js"
+  ],
+  "moduleLines": {
+    "transport-presentation.js": 35,
+    "holds.js": 127
+  },
+  "newRuntimeModules": 0,
+  "normalProfileOrOriginalAudioTouched": false,
+  "fullSuiteOrSoak": false,
+  "remaining": [
+    "Exact native changed-control interaction",
+    "Owner controller/headphone/master and listening",
+    "Next actual Sync pop/waveform stall"
+  ],
+  "privateEvidence": "local-evidence/hot-cue-refresh-2026-10-27/",
+  "defectCard": "https://trello.com/c/j5bIMDpo"
+}

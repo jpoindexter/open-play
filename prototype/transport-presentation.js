@@ -18,3 +18,18 @@ export function refreshTransportControls(state,root=document){
   if(status&&status.textContent!==text)status.textContent=text;
  }
 }
+
+// Cue metadata can be shared by several decks; keep their gesture owners intact.
+export function refreshCueControls(state,track,time,root=document){
+ for(const d of state.decks.slice(0,state.deckCount)){
+  if(d.track!==track||d.tab!=='Cues')continue;
+  for(const pad of root.querySelectorAll(`[data-action="pad"][data-deck="${d.index}"]`)){
+   const index=Number(pad.dataset.pad),cue=track.cues[index],label=cue?.name||'+';
+   const name=pad.querySelector('.rb-cue-name')||[...pad.childNodes].find(node=>node.nodeType===3);
+   if(name)name.textContent=label;else pad.prepend(pad.ownerDocument.createTextNode(label));
+   const detail=pad.querySelector('small');if(detail)detail.textContent=cue?time(cue.position):index+1;
+   pad.classList.toggle('set',!!cue);
+   pad.setAttribute('aria-label',`Deck ${d.index+1} hot cue ${pad.dataset.cueLetter||index+1}${cue?'':' — empty'}`);
+  }
+ }
+}

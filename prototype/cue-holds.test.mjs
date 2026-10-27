@@ -3,6 +3,7 @@ import test from 'node:test';
 import {readFileSync} from 'node:fs';
 import vm from 'node:vm';
 import {createCueHolds} from './holds.js';
+import {refreshCueControls} from './transport-presentation.js';
 function fixture(presentation={}) {
   const d={index:0,track:{id:'a',cues:[]},cue:2,position:2,playing:false};
   const starts=[],pending=[];
@@ -78,4 +79,27 @@ test('temporary Cue pause, cue-set and release use transport refresh without reb
  d.position=3;const set=holds.press('i',d);pending.shift()();await set;
  d.playing=true;const pause=holds.press('i',d);pending.shift()();await pause;
  assert.equal(rebuilds,0);assert.equal(refreshes,3);assert.equal(d.playing,false);assert.equal(d.cue,3);
+});
+
+test('hot-cue creation and deletion refresh only shared cue presentation',async()=>{
+ let rebuilds=0;const refreshed=[],f=fixture({render(){rebuilds++;},refreshCues:track=>refreshed.push(track)});
+ await f.holds.press('pad',f.d,0);assert.equal(f.d.track.cues[0].position,2);
+ await f.holds.press('pad',f.d,0,true);assert.equal(f.d.track.cues[0],null);
+ assert.equal(rebuilds,0);assert.deepEqual(refreshed,[f.d.track,f.d.track]);
+});
+test('Cue Point form save and delete refresh the shared track without rebuilding decks',()=>{
+ const source=readFileSync(new URL('./panels.js',import.meta.url),'utf8'),begin=source.indexOf('  function editPad('),end=source.indexOf('  function columns(',begin);
+ const track={cues:[{name:'Before',position:2}],duration:300},d={tab:'Cues',track},form={},fields=new Map([['name','After'],['position','3.25']]);let saves=0,rebuilds=0,closes=0;const refreshed=[];
+ const context={d,esc:String,FormData:class{get(k){return fields.get(k);}},persist:()=>saves++,renderDecks:()=>rebuilds++,a:{refreshCueControls:t=>refreshed.push(t)},dialog:(_t,_h,mount)=>mount({querySelector:()=>form}),$:s=>s==='#delete-cue'?context.remove:{close:()=>closes++},remove:{}};
+ vm.runInNewContext(source.slice(begin,end)+'\neditPad(d,0);',context);form.onsubmit({preventDefault(){},target:{}});context.remove.onclick();
+ assert.equal(saves,2);assert.equal(closes,2);assert.equal(rebuilds,0);assert.equal(track.cues[0],null);assert.deepEqual(refreshed,[track,track]);
+});
+
+test('cue pad refresh keeps plain-layout text nodes and skips unrelated modes and owners',()=>{
+ const track={cues:[{name:'Plain cue',position:2.5}]},text={nodeType:3,textContent:'+'},detail={textContent:'1'},classes=new Set();
+ const pad={dataset:{pad:'0'},childNodes:[text],querySelector:s=>s==='small'?detail:null,classList:{toggle:(name,on)=>on?classes.add(name):classes.delete(name)},setAttribute(name,value){this[name]=value;}};
+ const state={deckCount:3,decks:[{index:0,tab:'Cues',track},{index:1,tab:'Loops',track},{index:2,tab:'Cues',track:{}},{index:3,tab:'Cues',track}]};
+ let queries=0;const root={querySelectorAll(selector){queries++;assert.match(selector,/data-deck="0"/);return[pad];}};
+ refreshCueControls(state,track,String,root);assert.equal(queries,1);assert.equal(text.textContent,'Plain cue');assert.equal(detail.textContent,'2.5');assert(classes.has('set'));assert.equal(pad['aria-label'],'Deck 1 hot cue 1');
+ track.cues[0]=null;refreshCueControls(state,track,String,root);assert.equal(text.textContent,'+');assert.equal(detail.textContent,1);assert(!classes.has('set'));assert.match(pad['aria-label'],/empty/);
 });

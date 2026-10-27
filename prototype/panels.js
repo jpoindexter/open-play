@@ -416,13 +416,13 @@ export function createPanels(a) {
           c.name = f.get("name");
           c.position = Number(f.get("position"));
           persist();
-          renderDecks();
+          a.refreshCueControls(d.track);
           $("#modal").close();
         };
         $("#delete-cue").onclick = () => {
           d.track.cues[n] = null;
           persist();
-          renderDecks();
+          a.refreshCueControls(d.track);
           $("#modal").close();
         };
       },

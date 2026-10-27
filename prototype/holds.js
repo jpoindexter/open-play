@@ -7,6 +7,7 @@ export function createCueHolds({
   persist,
   render,
   refresh = render,
+  refreshCues = render,
   notify,
 }) {
   const held = new Map();
@@ -25,7 +26,7 @@ export function createCueHolds({
       if (remove) {
         d.track.cues[hot] = null;
         persist();
-        render();
+        refreshCues(d.track);
         return;
       }
       if (!d.track.cues[hot]) {
@@ -34,7 +35,7 @@ export function createCueHolds({
           name: `Cue ${hot + 1}`,
         };
         persist();
-        render();
+        refreshCues(d.track);
         return;
       }
     } else if (d.playing && !selectedStem(d)) {

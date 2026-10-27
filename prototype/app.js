@@ -18,7 +18,7 @@ import { createSyncMaster } from './sync-master.js';
 import { createSmartSync, hasBeatgrid, beatPosition } from './smart-sync.js';
 import {createBeatgrid} from './beatgrid.js';
 import {currentDeckBPM} from './deck-tempo.js';
-import {refreshTransportControls} from './transport-presentation.js';
+import {refreshTransportControls,refreshCueControls} from './transport-presentation.js';
 import {refreshAnalysisControls} from './analysis-presentation.js';
 import {refreshTrackDetails} from './track-details.js';
 import {renderLibraryRows} from './library-rows.js';
@@ -1385,6 +1385,7 @@ const api = {
   renderCrates,
   renderTracks,
   renderDecks,
+  refreshCueControls:track=>refreshCueControls(state,track,time),
   drawWaves,
   load,
   play,
@@ -1428,6 +1429,7 @@ const cueHolds = createCueHolds({
   record: flipAutomation.record,
   persist,
   render: renderDecks,
+  refreshCues:api.refreshCueControls,
   refresh:()=>{smartSync.reconcile();refreshTransportControls(state);},
   notify,
 });
