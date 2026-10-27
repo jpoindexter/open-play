@@ -1,5 +1,7 @@
 # Instant Double completion controls — 27 October 2026
 
+Delivery update: this repair is included in inspected/current private 0.1.79 / source `f9e7511`; protected paused startup/recovery is observed. Native held/playing Double and listening acceptance remains open. [Current delivery](DESKTOP_CORE_079_2026-10-27.md). The original source-slice evidence below retains its scope.
+
 [CORE-FIX-32](https://trello.com/c/SQZGGHZV) remains open for desktop/native/held/listening acceptance. Current native 0.1.78 / source `ae84a50` is unchanged; this repair is ahead of that candidate.
 
 ## Reproduction and repair
