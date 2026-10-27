@@ -18,7 +18,7 @@ import { createSyncMaster } from './sync-master.js';
 import { createSmartSync, hasBeatgrid, beatPosition } from './smart-sync.js';
 import {createBeatgrid} from './beatgrid.js';
 import {currentDeckBPM} from './deck-tempo.js';
-import {refreshTransportControls,refreshCueControls} from './transport-presentation.js';
+import {refreshTransportControls,refreshDeckSwitches,refreshCueControls} from './transport-presentation.js';
 import {refreshAnalysisControls} from './analysis-presentation.js';
 import {refreshTrackDetails} from './track-details.js';
 import {renderLibraryRows} from './library-rows.js';
@@ -1034,6 +1034,7 @@ async function deckAction(action, index, el, event = {}) {
     if (["vocal","instrumental"].includes(d.stemSlip)) await engine.setStemSlip(d,"off");
     d.slip = !d.slip;
     if (!d.slip) await engine.endSlip(d);
+    stemSlipControls.refresh(d);
   }
   if (["keyDown", "keyUp", "keyReset"].includes(action)) {
     const semitones = action === "keyReset" ? 0 : keyShiftIntent(index) + (action === "keyUp" ? 1 : -1);
@@ -1071,6 +1072,10 @@ async function deckAction(action, index, el, event = {}) {
     updateTempoSlider(d);refreshTransportControls(state);return;
   }
   if (action === "grid") return panels.grid(d);
+  if(['reverse','repeat','slip','keylock'].includes(action)){
+    if(renderedDeckShape!==`${state.layout}/${state.deckCount}/${state.settings['Sync Mode']}`||(index<state.deckCount&&!document.querySelector(`[data-action="${action}"][data-deck="${index}"]`)))return renderDecks();
+    smartSync.reconcile();refreshDeckSwitches(state,index);refreshTransportControls(state);return;
+  }
   renderDecks();
 }
 let importTail=Promise.resolve();

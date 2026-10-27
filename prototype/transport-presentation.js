@@ -19,6 +19,16 @@ export function refreshTransportControls(state,root=document){
  }
 }
 
+export function refreshDeckSwitches(state,index,root=document){
+ const deck=state.decks[index];
+ for(const action of ['reverse','repeat','slip','keylock','keySync']){
+  const button=root.querySelector(`[data-action="${action}"][data-deck="${index}"]`);if(!button)continue;
+  const active=!!deck[action],pressed=String(active);
+  if(button.classList.contains('active')!==active)button.classList.toggle('active',active);
+  if(button.getAttribute('aria-pressed')!==pressed)button.setAttribute('aria-pressed',pressed);
+ }
+}
+
 // Cue metadata can be shared by several decks; keep their gesture owners intact.
 export function refreshCueControls(state,track,time,root=document){
  for(const d of state.decks.slice(0,state.deckCount)){

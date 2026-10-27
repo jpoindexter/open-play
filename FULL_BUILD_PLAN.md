@@ -6,7 +6,9 @@ Native75exposed hidden-opener focus after FX Back→Escape. One-line visibility 
 
 Protected74/75recording preflights were clear; both quit normally before hash-matched closed-profile backups. Inactive74/75bundles and named74starter retired; only76bundle remains(~573MiB), current/default/named starters point76. Real75/76packaging removes staging/tar; a new15-line build preflight prevents a third bundle before temporary files. Original audio/recordings/profile backups remain. No additional runtime rebuild for the build-only guard.
 
-Trello176cards/14complete: SYS-FIX-01's actual packaging gate satisfied; Settings and parent provenance/release criteria remain open. Prior53manual/jog/EQ/Cue/stop acceptance retains its scope; inherited CORE-FIX-26/27/28repairs are packaged, not new playing/held/controller acceptance. No broad suite/soak or Sync-pop/stall-cause claim.
+Trello177cards/14complete: SYS-FIX-01's actual packaging gate satisfied; Settings and parent provenance/release criteria remain open. Prior53manual/jog/EQ/Cue/stop acceptance retains its scope; inherited CORE-FIX-26/27/28repairs are packaged, not new playing/held/controller acceptance. No broad suite/soak or Sync-pop/stall-cause claim.
+
+Source ahead of76: CORE-FIX-29repairs shared Reverse/Repeat/Slip/Key Lock full-deck rebuilds. Actual four-deck Compact baseline0/225retained; repaired four actions225/225, other fader/previews retained, stopped/muted. One composed regression includes Stem Slip feedback/two-deck hidden command/structural fallback. Helpers45/159lines; no new runtime module or package. [Evidence and limits](docs/prototype/TRANSPORT_SWITCH_CONTROLS_2026-10-27.md).
 
 Next: continue software-only core/beta blockers, preserve current paused two-deck work and keep generated artifacts bounded. [CORE-LIVE-01](https://trello.com/c/yJ8r9kCD) holds the deferred controller/headphone/master/listening session. Retain the next actual pop/stall; do not repeat clean matrices.
 

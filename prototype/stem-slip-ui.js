@@ -7,9 +7,18 @@ export function createStemSlipControls({engine, state, prepare, render, notify})
   const focusRequests = new Map();
   let gestureSequence = 0;
   const armed = d => ['vocal', 'instrumental'].includes(d.stemSlip);
+  const idleHint = 'Select a stem, then scratch here or hold a cue. Mode stays armed after release.';
+  function refresh(d, root=document) {
+    const mode=root.querySelector(`[data-stem-slip-mode="${d.index}"]`);
+    if(mode)mode.value=d.stemSlip||'off';
+    const scratch=root.querySelector(`[data-stem-slip-scratch="${d.index}"]`);
+    if(scratch)scratch.disabled=!armed(d);
+    const output=root.querySelector(`[data-stem-slip-live="${d.index}"]`);
+    if(output&&!armed(d))output.textContent=idleHint;
+  }
   const report = promise => Promise.resolve(promise).catch(error => notify(error.message));
   function markup(d) {
-    return `<div class="stem-slip-controls"><label>Stem Slip<select data-stem-slip-mode="${d.index}" aria-label="Deck ${d.index + 1} Stem Slip mode">${[['off','Off'],['vocal','Vocal'],['instrumental','Instrumental']].map(([value,label])=>`<option value="${value}" ${value === (d.stemSlip || 'off') ? 'selected' : ''}>${label}</option>`).join('')}</select></label><label>Slip Release<select data-stem-slip-release="${d.index}" aria-label="Deck ${d.index + 1} Stem Slip release">${[0,.5,1,2,4].map(value=>`<option value="${value}" ${value === (d.stemSlipRelease || 0) ? 'selected' : ''}>${value} ${value === 1 ? 'beat' : 'beats'}</option>`).join('')}</select></label><label class="stem-slip-scratch">Selected stem scratch<input type="range" data-stem-slip-scratch="${d.index}" aria-label="Deck ${d.index + 1} selected stem scratch position" min="0" max="${d.track?.duration || 48}" step="0.001" value="${engine.selectedPosition?.(d) ?? engine.position(d)}" ${armed(d) ? '' : 'disabled'}></label><output data-stem-slip-live="${d.index}" aria-live="off">${d.stemSlipPending ? 'Preparing Stems for Stem Slip…' : armed(d) ? `${d.stemSlip} · ${d.stemSlipPhase || 'idle'}` : 'Select a stem, then scratch here or hold a cue. Mode stays armed after release.'}</output></div>`;
+    return `<div class="stem-slip-controls"><label>Stem Slip<select data-stem-slip-mode="${d.index}" aria-label="Deck ${d.index + 1} Stem Slip mode">${[['off','Off'],['vocal','Vocal'],['instrumental','Instrumental']].map(([value,label])=>`<option value="${value}" ${value === (d.stemSlip || 'off') ? 'selected' : ''}>${label}</option>`).join('')}</select></label><label>Slip Release<select data-stem-slip-release="${d.index}" aria-label="Deck ${d.index + 1} Stem Slip release">${[0,.5,1,2,4].map(value=>`<option value="${value}" ${value === (d.stemSlipRelease || 0) ? 'selected' : ''}>${value} ${value === 1 ? 'beat' : 'beats'}</option>`).join('')}</select></label><label class="stem-slip-scratch">Selected stem scratch<input type="range" data-stem-slip-scratch="${d.index}" aria-label="Deck ${d.index + 1} selected stem scratch position" min="0" max="${d.track?.duration || 48}" step="0.001" value="${engine.selectedPosition?.(d) ?? engine.position(d)}" ${armed(d) ? '' : 'disabled'}></label><output data-stem-slip-live="${d.index}" aria-live="off">${d.stemSlipPending ? 'Preparing Stems for Stem Slip…' : armed(d) ? `${d.stemSlip} · ${d.stemSlipPhase || 'idle'}` : idleHint}</output></div>`;
   }
   async function modeChanged(el) {
     const d = state.decks[Number(el.dataset.stemSlipMode)];
@@ -146,5 +155,5 @@ export function createStemSlipControls({engine, state, prepare, render, notify})
     for(const [owner,g] of gestures) if(g.d===d) gestures.delete(owner);
     for(const [owner,g] of latestGestures) if(g.d===d) latestGestures.delete(owner);
   }
-  return {markup,tick,cancelDeck,restoreFocus};
+  return {markup,tick,cancelDeck,restoreFocus,refresh};
 }
