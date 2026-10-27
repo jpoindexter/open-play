@@ -8,16 +8,16 @@ import {saveBeatgrid} from './beatgrid-save.js';
 const source=await readFile(new URL('./panels.js',import.meta.url),'utf8');
 const start=source.indexOf('  function grid(d) {'),end=source.indexOf('  function settings(',start);
 assert(start>=0&&end>start,'Unique grid editor source boundary');
-function editor(failure,saved=true){
+function editor(failure,saved=true,waiting=null){
  const track={title:'Track',bpm:120,grid:0,duration:300,gridWarpMarkers:[]};
  const nodes=new Map(),calls=[],node=selector=>{
-  if(!nodes.has(selector))nodes.set(selector,{value:selector==='#grid-bpm'?'125':'0',close:()=>calls.push('close')});
+  if(!nodes.has(selector))nodes.set(selector,{isConnected:true,value:selector==='#grid-bpm'?'125':'0',close:()=>calls.push('close')});
   return nodes.get(selector);
  };
  const context={createBeatgrid,gridBPM,saveBeatgrid,time:String,mountGridDrift(){},notify:assert.fail,
   $:node,persist:()=>{calls.push('persist');return saved;},renderTracks:()=>calls.push('tracks'),renderDecks:()=>calls.push('rebuild'),
   a:{drawWaves:t=>{assert.equal(t,track);calls.push('waves');}},
-  engine:{position:()=>0,onGridWillChange:t=>{assert.equal(t.bpm,120);calls.push('before');return 'owned';},onGridChanged:async(t,before)=>{assert.equal(before,'owned');assert.equal(t.bpm,125);calls.push('realign');if(failure)throw Error('realignment failed');}},
+  engine:{position:()=>0,onGridWillChange:t=>{assert.equal(t.bpm,calls.length?125:120);calls.push('before');return 'owned';},onGridChanged:async(t,before)=>{assert.equal(before,'owned');assert.equal(t.bpm,125);calls.push('realign');if(waiting)await waiting;if(failure)throw Error('realignment failed');}},
   dialog:(_title,_html,mount)=>mount({querySelectorAll:()=>[]})};
  vm.runInNewContext(source.slice(start,end)+'\ngrid(deck);',{...context,deck:{track}});
  return {track,calls,nodes,node};
@@ -50,4 +50,20 @@ test('saved warp markers are cloned and legacy annotations clear only when reque
  await saveBeatgrid(track,{bpm:125,grid:.125,gridWarpMarkers:[marker]},true,{onGridChanged:async()=>calls.push('realign')},()=>true);
  assert.equal(track.gridWarpMarkers[0].time,4);marker.time=9;
  assert.equal(track.gridWarpMarkers[0].time,4);assert.deepEqual(track.gridMarkers,[]);assert.deepEqual(calls,['realign']);
+});
+test('pending grid save cannot submit twice',async()=>{
+ let finish;const e=editor(false,true,new Promise(resolve=>{finish=resolve;})),button=e.node('#grid-save');
+ const first=button.onclick(),second=button.onclick(),count=e.calls.filter(x=>x==='persist').length,disabled=button.disabled;
+ finish();await Promise.all([first,second]);
+ assert.equal(count,1);assert.equal(disabled,true);assert.equal(button.disabled,false);
+});
+test('pending grid save cannot close a replacement dialog',async()=>{
+ let finish;const e=editor(false,true,new Promise(resolve=>{finish=resolve;})),button=e.node('#grid-save');
+ const pending=button.onclick();button.isConnected=false;e.nodes.set('#modal',{close:()=>e.calls.push('replacement-close')});
+ finish();await pending;assert(!e.calls.includes('replacement-close'));
+});
+test('pending grid save error stays with its original status instead of a replacement editor',async()=>{
+ let finish;const e=editor(true,true,new Promise(resolve=>{finish=resolve;})),status=e.node('#grid-status'),replacement={textContent:'New editor'};
+ const pending=e.node('#grid-save').onclick();e.node('#grid-save').isConnected=false;e.nodes.set('#grid-status',replacement);
+ finish();await pending;assert.equal(replacement.textContent,'New editor');assert.match(status.textContent,/realignment failed/);
 });

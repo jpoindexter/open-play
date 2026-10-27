@@ -534,9 +534,10 @@ export function createPanels(a) {
     dialog(`Beatgrid · ${t.title}`,
       `<p>Set the downbeat and base tempo. Each red Beat Warp Marker changes the grid tempo from its source position. Forward Smart Sync uses this map for playback, including browser keylock.</p><div class="form-grid"><label>BPM<input id="grid-bpm" type="number" min="1" max="999" step="any" value="${t.bpm||120}" ${t.locked?'disabled':''}></label><label>Downbeat offset (seconds)<input id="grid-offset" type="number" step=".001" value="${t.grid??0}" ${t.locked?'disabled':''}></label><label>Marker source time (seconds)<input id="grid-warp-time" type="number" min="0" step=".001" value="${engine.position(d).toFixed(3)}" ${t.locked?'disabled':''}></label><label>Tempo after marker (BPM)<input id="grid-warp-bpm" type="number" min="1" max="999" step="any" value="${gridBPM(t,engine.position(d))}" ${t.locked?'disabled':''}></label></div><div class="panel-controls"><button id="grid-half">½ BPM</button><button id="grid-double">×2 BPM</button><button id="grid-playhead">Use playhead</button><button id="grid-marker">Set warp marker</button><button id="grid-clear">Clear markers</button><button id="grid-save">Save grid</button></div><div id="grid-markers"></div><section aria-label="Whole-track tempo drift"><div class="panel-controls"><button id="grid-drift-check">Check whole-track drift</button><button id="grid-drift-stage" disabled>Stage correction</button></div><p id="grid-drift-status" role="status" aria-live="polite"></p><p>Pulse estimates may differ from musical kicks. Staging replaces this dialog’s draft only; Save grid applies it. Close to cancel.</p></section><p id="grid-status" role="status" aria-live="polite"></p>`,
       body=>{
+        const save=$('#grid-save'),status=$('#grid-status');let saving=false;
         const candidate=()=>({...t,bpm:Number($('#grid-bpm').value),grid:Number($('#grid-offset').value),gridWarpMarkers:draft});
         function validate(){const track=candidate();if(!Number.isFinite(track.bpm)||track.bpm<1||track.bpm>999||!Number.isFinite(track.grid))throw new Error('Enter a valid BPM and downbeat offset.');return createBeatgrid(track);}
-        function error(e){$('#grid-status').textContent=e.message;}
+        function error(e){status.textContent=e.message;}
         function render(){
           $('#grid-markers').innerHTML=`<table><thead><tr><th>Source time</th><th>Tempo from marker</th><th></th></tr></thead><tbody>${draft.map((m,n)=>`<tr><td>${time(m.time)}</td><td>${m.bpm} BPM</td><td><button data-remove-warp="${n}" ${t.locked?'disabled':''}>Remove marker ${n+1}</button></td></tr>`).join('')||'<tr><td colspan="3">No tempo changes</td></tr>'}</tbody></table>${t.gridMarkers?.length&&!clearLegacy?'<p>Legacy time-only annotations are preserved. Add tempo markers to define changes.</p>':''}`;
           body.querySelectorAll('[data-remove-warp]').forEach(button=>button.onclick=()=>{if(!t.locked){draft.splice(Number(button.dataset.removeWarp),1);render();}});
@@ -554,13 +555,15 @@ export function createPanels(a) {
           }catch(e){draft.splice(0,draft.length,...old);error(e);}
         };
         $('#grid-clear').onclick=()=>{if(!t.locked){draft.length=0;clearLegacy=true;render();$('#grid-status').textContent='Marker removal staged. Save grid to apply.';}};
-        $('#grid-save').onclick=async()=>{
+        save.onclick=async()=>{
+          if(saving)return;
           if(t.locked)return notify('Beatgrid locked.');
           try{
-            validate();
+            validate();saving=true;save.disabled=true;status.textContent='Saving grid…';
             try{await saveBeatgrid(t,candidate(),clearLegacy,engine,persist);}catch(e){a.drawWaves(t);renderTracks();throw e;}
-            a.drawWaves(t);renderTracks();$('#modal').close();
+            a.drawWaves(t);renderTracks();if(save.isConnected)$('#modal').close();
           }catch(e){error(e);}
+          finally{saving=false;save.disabled=false;}
         };
         mountGridDrift({body,deck:d,engine,apply:next=>{
           $('#grid-bpm').value=next.bpm;$('#grid-offset').value=next.firstBeat;
