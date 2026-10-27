@@ -39,6 +39,31 @@ document.querySelector('#details-run').onclick=async()=>{
  }catch(error){report.error=error.message;}
  finally{if(w&&write)w.Storage.prototype.setItem=write;output.textContent=JSON.stringify(report,null,2);}
 };
+document.querySelector('#grid-run').onclick=async()=>{
+ let w,write;const report={complete:false,scope:'Actual isolated beatgrid editor with injected storage failure; no audio or native acceptance.'};
+ output.textContent='Checking beatgrid save…';
+ try{
+  assert(location.port==='8872','Use dedicated port8872, never the live app origin.');
+  assert(localStorage.getItem('openplay-safety-owned')==='true'||localStorage.length===0,'Origin has existing data; refusing to overwrite it.');
+  localStorage.setItem('openplay-safety-owned','true');await boot();w=frame.contentWindow;write=w.Storage.prototype.setItem;
+  const track=state().decks[0].track,stored=localStorage.getItem(sessionKey),bpm=track.bpm+1,offset=.125;
+  click('[data-deck="0"][data-action="grid"]');doc().querySelector('#grid-bpm').value=bpm;doc().querySelector('#grid-offset').value=offset;
+  doc().querySelector('#grid-warp-time').value=2;doc().querySelector('#grid-warp-bpm').value=bpm+2;click('#grid-marker');
+  w.Storage.prototype.setItem=function(key,value){if(key===sessionKey)throw new w.DOMException('Controlled full storage','QuotaExceededError');return write.call(this,key,value);};
+  click('#grid-save');await wait(()=>!doc().querySelector('#modal').open||/Saving failed/.test(doc().querySelector('#grid-status').textContent),'grid save completion');
+  report.modalOpenAfterFailure=doc().querySelector('#modal').open;report.status=doc().querySelector('#grid-status').textContent;
+  assert(report.modalOpenAfterFailure,'Beatgrid editor closed after saving failed');
+  assert(/session only.*Saving failed/s.test(report.status),'Grid save failure was not explained');
+  assert(localStorage.getItem(sessionKey)===stored,'Failed grid save changed stored session');
+  assert(track.bpm===bpm&&track.grid===offset&&track.gridWarpMarkers.some(m=>m.time===2&&m.bpm===bpm+2),'Unsaved grid edits were lost');
+  w.Storage.prototype.setItem=write;click('#grid-save');await wait(()=>!doc().querySelector('#modal').open,'grid retry');
+  await boot();const restored=state().decks[0].track;
+  assert(restored.bpm===bpm&&restored.grid===offset&&restored.gridWarpMarkers.some(m=>m.time===2&&m.bpm===bpm+2),'Retried grid lost after reload');
+  assert(state().decks.every(d=>!d.playing&&!d.playQueued),'Unexpected playback');
+  report.complete=true;report.retrySurvivesReload=true;report.viewportPreviews=doc().querySelectorAll('.library-wave-preview img').length;
+ }catch(error){report.error=error.message;}
+ finally{if(w&&write)w.Storage.prototype.setItem=write;output.textContent=JSON.stringify(report,null,2);}
+};
 document.querySelector('#run').onclick=async()=>{
  try{
   assert(location.port==='8872','Use dedicated port8872, never the live app origin.');

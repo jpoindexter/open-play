@@ -1,5 +1,6 @@
 import {createSessionPanels} from './session-panels.js';
 import {saveTrackDetails,refreshTrackDetails} from './track-details.js';
+import {saveBeatgrid} from './beatgrid-save.js';
 import {validateBackup,trackMetadata} from './library-state.js';
 import {trackGainDB} from './track-gain.js';
 import {createDeckMIDIRouter,deckMIDITargets,libraryMIDITargets,fxMIDITargets,samplerMIDITargets,herculesPlaybackMappings} from './deck-midi.js';
@@ -556,10 +557,8 @@ export function createPanels(a) {
         $('#grid-save').onclick=async()=>{
           if(t.locked)return notify('Beatgrid locked.');
           try{
-            validate();const next=candidate(),before=engine.onGridWillChange?.(t);t.bpm=next.bpm;t.grid=next.grid;t.gridWarpMarkers=draft.map(m=>({...m}));if(clearLegacy)t.gridMarkers=[];
-            t.metadataSources={...t.metadataSources,bpm:'manual',grid:'manual'};t.metadataRevision=(t.metadataRevision||0)+1;
-            persist();
-            try{await engine.onGridChanged?.(t,before);}catch(e){a.drawWaves(t);renderTracks();throw new Error('Grid saved; playback realignment failed: '+e.message);}
+            validate();
+            try{await saveBeatgrid(t,candidate(),clearLegacy,engine,persist);}catch(e){a.drawWaves(t);renderTracks();throw e;}
             a.drawWaves(t);renderTracks();$('#modal').close();
           }catch(e){error(e);}
         };
