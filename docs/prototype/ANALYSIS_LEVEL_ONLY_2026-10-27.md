@@ -11,3 +11,9 @@ One actual browser worker before/after uses the exact same retained decoded Audi
 Reused existing analysis-test page and analysis-browser-tests module with one separate button; broad Run analysis checks was NOT pressed. Diagnostic210lines; regression19lines. Existing oversized analysis.js remains legacy modularization debt, not whole-app300-line compliance. Original audio/normal profile/current paused native session untouched by this diagnostic.
 
 [Compact results](analysis-level-only-2026-10-27.json). Raw evidence stays ignored in local-evidence/analysis-level-only-2026-10-27/. This narrow worker fix does not close ANA-007 selective reanalysis, ANA-005 gain/loudness reference parity, AUD-006 total-process/native pressure or intermittent Sync/pop/four-deck stall reports. Native playing/controller/listening acceptance remains separate. No broad suite/soak or repeated clean cases.
+
+## Private delivery and narrow closure
+
+Private70/source73e319f actual archive/controlled-host5/5;612prototype files/101selected declared modules. Protected69recording preflight clear/normal quit/process exit; closed255-file/120562539Bprofile backup hashes match before/after/copy. Actual settled70startup restores4real tracks2/3/4/5s/16library tracks/exact BX3 metadata/core controls/decoded detail/overviews/5viewport AX previews; silent master/Autoplay off. No main Play/Sync/REC or new native Worker. Defaults70; named starter syntax checked only. Temporary diagnostic browser/server closed.
+
+[Delivery](desktop-0.1.70-playback-delivery.json). [ANA-FIX-08](https://trello.com/c/4ZTUoSsQ) closed for the stated narrow worker-software criteria after description readback; not native playing/performance, general analyzer quality or four-deck/Sync acceptance. Broader parent criteria and [CORE-LIVE-01](https://trello.com/c/yJ8r9kCD) remain open.
