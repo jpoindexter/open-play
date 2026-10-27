@@ -129,3 +129,51 @@ document.querySelector('#cue-edit-run').onclick=async()=>{
  }catch(error){r.error=error.message;}
  finally{if(engine&&state){for(const d of state.decks)engine.pause(d);r.physicalMuted=engine.audioMonitor.snapshot().physicalMuted;r.allStopped=state.decks.every(d=>!d.playing&&!d.processing&&!d.playQueued);}result.textContent=JSON.stringify(r,null,2);}
 };
+
+document.querySelector('#scratch-load-run').onclick=async()=>{
+ let engine,state,preload,schedulerYield;const r={complete:false,scope:'Four real-track loads, cold native-yield scratch and same-buffer timer fallback; physical output muted, no Sync/listening or long-session proof.',loads:[],warm:[]};
+ result.textContent='Preparing the isolated four-track load check…';
+ try{
+  assert(location.port==='8874','Dedicated port8874 required');assert(localStorage.length===0||localStorage.getItem('openplay-core-controls-owned')==='true','Refusing unowned origin');
+  const manifest=await(await fetch('/__trace-inputs/manifest')).json();assert(manifest.length===4,'Exactly four pinned local tracks required');
+  localStorage.setItem('openplay-core-controls-owned','true');localStorage.setItem(sessionKey,JSON.stringify({settings:{'Analyze Stems':false,'Use Auto Gain':false,'Instant Doubles':false}}));
+  frame.src='workspace-preview.html?scratch-load='+Date.now();await new Promise(resolve=>frame.onload=resolve);await until(()=>app()&&!app().state.analysis,'workspace');
+  ({engine,state}=app());const w=frame.contentWindow;await engine.resume();engine.audioMonitor.mutePhysical(true);assert(engine.audioMonitor.snapshot().physicalMuted,'Physical mute');state.analysisSettings.onImport=false;
+  const transfer=new w.DataTransfer();for(let i=0;i<4;i++){
+   const response=await fetch('/__trace-inputs/'+i),bytes=await response.arrayBuffer();assert(response.ok,'Local audio response');
+   const hash=[...new Uint8Array(await crypto.subtle.digest('SHA-256',bytes))].map(n=>n.toString(16).padStart(2,'0')).join('');assert(hash===manifest[i].sha256,'Original audio hash changed');
+   transfer.items.add(new w.File([bytes],manifest[i].name,{type:'audio/mpeg'}));
+  }
+  const files=doc().querySelector('#audio-files');files.files=transfer.files;const tracks=await files.onchange({target:files});assert(tracks.length===4,'Real track import');
+  input('#deck-count',4,'change');preload=engine.preloadDeckScratch;engine.preloadDeckScratch=function(d){r.warm.push({deck:d.index,at:performance.now(),track:d.track.id});return preload.call(this,d);};
+  const start=performance.now();for(let i=0;i<4;i++){const at=performance.now(),cached=engine.buffers.has(tracks[i].id);await load(tracks[i],i);const b=engine.buffers.get(tracks[i].id);r.loads.push({deck:i,cached,loadMilliseconds:performance.now()-at,duration:tracks[i].duration,sampleRate:b.sampleRate,channels:b.numberOfChannels,frames:b.length});}
+  const warmPromises=[...engine.scratchCache.entries.values()].map(entry=>entry.promise);await Promise.all(warmPromises);
+  r.automaticScratchRequests=r.warm.length;r.cacheEntriesBeforeGesture=engine.scratchCache.entries.size;
+  r.scratchInputPCMBytesBeforeGesture=[...engine.scratchCache.entries.values()].reduce((sum,entry)=>sum+[entry.original,...entry.stems||[]].reduce((n,b)=>n+b.length*b.numberOfChannels*4,0),0);
+  const colored=canvas=>{if(!canvas?.width||!canvas.height)return false;const pixels=canvas.getContext('2d').getImageData(0,0,canvas.width,canvas.height).data;let count=0;for(let i=0;i<pixels.length;i+=4)if(Math.max(pixels[i],pixels[i+1],pixels[i+2])-Math.min(pixels[i],pixels[i+1],pixels[i+2])>20&&++count>20)return true;return false;};
+  for(let attempt=0;attempt<240&&!state.decks.every(d=>colored(doc().querySelector('#wave-'+d.index)));attempt++)await sleep(250);
+  r.allOverviewsPainted=state.decks.every(d=>colored(doc().querySelector('#wave-'+d.index)));r.loadToObservedWaveformsMilliseconds=performance.now()-start;
+  assert(r.allOverviewsPainted,'Decoded deck overviews did not paint');
+  const selector='.deck button,.deck input,#mixer button,#mixer input,[data-waveform-scrub],#detail-wave,tr[data-track],.library-wave-preview img',nodes=[...doc().querySelectorAll(selector)],platter=doc().querySelector('[data-deck-scratch="0"]');platter.focus();
+  r.nativeYieldAvailable=typeof w.scheduler?.yield==='function';r.nativeYieldCalls=0;if(r.nativeYieldAvailable){schedulerYield=w.scheduler.yield;w.scheduler.yield=function(){r.nativeYieldCalls++;return schedulerYield.call(this);};}
+  const gestureAt=performance.now();platter.dispatchEvent(new w.KeyboardEvent('keydown',{key:' ',code:'Space',bubbles:true,cancelable:true}));
+  await until(()=>platter.dataset.scratchPhase==='active','first scratch ready');r.firstGestureReadyMilliseconds=performance.now()-gestureAt;r.firstGestureSourceCount=engine.scratchCache.peek(0)?.transport.state().sourceCount;
+  platter.dispatchEvent(new w.KeyboardEvent('keyup',{key:' ',code:'Space',bubbles:true,cancelable:true}));await until(()=>!engine.deckScratchRequests.size&&!state.decks[0].scratchPreparing,'scratch release');
+  r.observedNodes=nodes.length;r.retainedNodes=nodes.filter(n=>n.isConnected).length;r.gestureRequests=r.warm.length-r.automaticScratchRequests;
+  if(r.nativeYieldAvailable){
+   const buffer=engine.buffers.get(state.decks[0].track.id);r.comparisonGeometry={sampleRate:buffer.sampleRate,channels:buffer.numberOfChannels,frames:buffer.length};
+   engine.clearDeckScratchCache(0);w.scheduler.yield=undefined;
+   const at=performance.now();platter.dispatchEvent(new w.KeyboardEvent('keydown',{key:' ',code:'Space',bubbles:true,cancelable:true}));await until(()=>platter.dataset.scratchPhase==='active','timer fallback scratch ready');
+   r.sameBufferTimerReadyMilliseconds=performance.now()-at;r.sameBufferReferenceRetained=engine.buffers.get(state.decks[0].track.id)===buffer;
+   platter.dispatchEvent(new w.KeyboardEvent('keyup',{key:' ',code:'Space',bubbles:true,cancelable:true}));await until(()=>!engine.deckScratchRequests.size&&!state.decks[0].scratchPreparing,'timer release');
+   assert(r.sameBufferReferenceRetained&&nodes.every(n=>n.isConnected),'Comparison changed buffer/control ownership');
+  }
+  r.playControls=doc().querySelectorAll('[data-action="play"]').length;r.previewImages=doc().querySelectorAll('.library-wave-preview img').length;
+  assert(r.firstGestureSourceCount>=1&&r.retainedNodes===r.observedNodes&&r.playControls===4&&r.previewImages>0,'First scratch or controls/previews missing');
+  assert(r.automaticScratchRequests===0&&r.cacheEntriesBeforeGesture===0,'Ordinary loads still prepare unrequested scratch PCM');r.complete=true;
+ }catch(error){r.error=error.message;}
+ finally{
+  if(engine&&state){if(preload)engine.preloadDeckScratch=preload;if(schedulerYield)frame.contentWindow.scheduler.yield=schedulerYield;for(const d of state.decks){engine.pause(d);engine.clearDeckScratchCache(d.index);}r.physicalMuted=engine.audioMonitor.snapshot().physicalMuted;r.allStopped=state.decks.every(d=>!d.playing&&!d.processing&&!d.playQueued);r.scratchEntriesAfterCleanup=engine.scratchCache.entries.size;}
+  result.textContent=JSON.stringify(r,null,2);
+ }
+};

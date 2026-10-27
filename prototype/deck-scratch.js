@@ -18,7 +18,7 @@ function sourceMetadata(source){
   if(channels.some(channel=>!(channel instanceof Float32Array)||channel.length!==length))throw new TypeError('PCM requires equal-length Float32Array channels.');
   return {sampleRate,length,channels};
 }
-export function createDeckScratchTransport(ctx,{outputChannels=2,rampMilliseconds=3,watchdogMilliseconds=120,maxPending=32,rpcTimeoutMilliseconds=5000,maxPCMBytes=512*1024*1024,chunkFrames=65536,yieldTask=()=>new Promise(resolve=>setTimeout(resolve,0)),onState=()=>{},onError=()=>{}}={}){
+export function createDeckScratchTransport(ctx,{outputChannels=2,rampMilliseconds=3,watchdogMilliseconds=120,maxPending=32,rpcTimeoutMilliseconds=5000,maxPCMBytes=512*1024*1024,chunkFrames=65536,yieldTask=()=>globalThis.scheduler?.yield?.()??new Promise(resolve=>setTimeout(resolve,0)),onState=()=>{},onError=()=>{}}={}){
   ownInteger(outputChannels,'Output channels',1,8);ownInteger(maxPending,'Pending RPC limit',1,1024);ownInteger(rpcTimeoutMilliseconds,'RPC timeout',10,60000);ownInteger(maxPCMBytes,'PCM memory budget',4,0x7fffffff);ownInteger(chunkFrames,'PCM copy chunk',1024,1048576);
   if(typeof rampMilliseconds!=='number'||!Number.isFinite(rampMilliseconds)||rampMilliseconds<0||rampMilliseconds>50||typeof watchdogMilliseconds!=='number'||!Number.isFinite(watchdogMilliseconds)||watchdogMilliseconds<10||watchdogMilliseconds>1000)throw new RangeError('Scratch timing policy out of range.');
   const node=new AudioWorkletNode(ctx,'open-play-deck-scratch-v1',{numberOfInputs:0,numberOfOutputs:5,outputChannelCount:Array(5).fill(outputChannels),processorOptions:{outputChannels,rampMilliseconds,watchdogMilliseconds}});

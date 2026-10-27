@@ -735,8 +735,6 @@ async function load(index, id = state.selected, options = {}) {
   try {
     await engine.buffer(t);
     decoded=true;
-    if (d.track === t && deckLoadRequests.get(d) === request)
-      void engine.preloadDeckScratch(d).catch(error => {if (error.name !== 'AbortError' && d.track === t) notify(error.message);});
     if ((!t.analyzed||(state.settings["Use Auto Gain"]&&t.analysisResult?.loudness?.version!=="bs1770-integrated-v1")) && !t.provider && !t.missing) void enqueueAnalysis([t]);
     if (state.settings["Analyze Stems"] && !t.provider && !t.missing)
       void ensurePreparedStems(t).catch(error => notify(error.message));
