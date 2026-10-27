@@ -19,6 +19,29 @@ function base64(bytes){let text='';for(let i=0;i<bytes.length;i+=16384)text+=Str
 function rms(data,from,to,sr){let power=0;const start=Math.ceil(from*sr),end=Math.floor(to*sr);assert(start>=0&&end<=data.length&&end>start,'Missing declared recording window');for(let n=start;n<end;n++)power+=data[n]**2;return Math.sqrt(power/(end-start));}
 function amplitude(data,from,to,sr,hz){let re=0,im=0;const start=Math.ceil(from*sr),end=Math.floor(to*sr);for(let n=start;n<end;n++){re+=data[n]*Math.cos(2*Math.PI*hz*n/sr);im+=data[n]*Math.sin(2*Math.PI*hz*n/sr);}return 2*Math.hypot(re,im)/(end-start);}
 const show=()=>result.textContent=JSON.stringify({...report,recording:report.recording?{...report.recording,base64:'Retained in original evidence'}:undefined},null,2);
+document.querySelector('#pfl-refresh-run').onclick=async()=>{
+ let engine,state;const r={complete:false,scope:'Actual isolated four-deck headphone Cue on/off; generated tracks, physical mute, no playback or hardware/listening proof.',stages:[]};
+ try{
+  assert(location.port==='8874','Dedicated port8874 required');assert(localStorage.length===0||localStorage.getItem('openplay-core-controls-owned')==='true','Refusing unowned origin');
+  localStorage.setItem('openplay-core-controls-owned','true');localStorage.setItem(sessionKey,JSON.stringify({settings:{'Analyze Stems':false}}));
+  frame.src='workspace-preview.html?pfl-refresh='+Date.now();await new Promise(resolve=>frame.onload=resolve);await until(()=>app()&&!app().state.analysis,'workspace');
+  ({engine,state}=app());await engine.resume();engine.audioMonitor.mutePhysical(true);assert(engine.audioMonitor.snapshot().physicalMuted,'Physical mute');
+  input('#deck-count',4,'change');await until(()=>doc().querySelectorAll('.library-wave-preview img').length>0,'library previews');
+  const selector='.deck button,.deck input,#mixer button,#mixer input,[data-waveform-scrub],#detail-wave,tr[data-track],.library-wave-preview img',w=frame.contentWindow;
+  for(const enabled of [true,false]){
+   const nodes=[...doc().querySelectorAll(selector)],cue=doc().querySelector('[data-action="pfl"][data-deck="0"]'),other=doc().querySelector('[data-mix="1:level"]'),value=other.value;
+   other.focus();cue.click();await new Promise(resolve=>w.requestAnimationFrame(()=>w.requestAnimationFrame(resolve)));
+   const current=doc().querySelector('[data-action="pfl"][data-deck="0"]');
+   r.stages.push({enabled,observedNodes:nodes.length,retainedNodes:nodes.filter(n=>n.isConnected).length,unrelatedFocus:doc().activeElement===other,unrelatedValue:other.isConnected&&other.value===value,sameCue:current===cue,selected:state.decks[0].pfl,engineSelected:engine.nodes[0].pfl,pressed:current.getAttribute('aria-pressed'),active:current.classList.contains('active'),playControls:doc().querySelectorAll('[data-action="play"]').length,previewImages:doc().querySelectorAll('.library-wave-preview img').length});
+  }
+  assert(r.stages.every(s=>s.observedNodes===s.retainedNodes&&s.unrelatedFocus&&s.unrelatedValue&&s.sameCue),'Headphone Cue replaces controls or loses unrelated focus');
+  assert(r.stages.every(s=>s.selected===s.enabled&&s.engineSelected===s.enabled&&s.pressed===String(s.enabled)&&s.active===s.enabled&&s.playControls===4&&s.previewImages>0),'Headphone Cue presentation/routing selection or previews missing');r.complete=true;
+ }catch(error){r.error=error.message;}
+ finally{
+  if(engine&&state){engine.setPFL(0,false);state.decks[0].pfl=false;for(const d of state.decks)engine.pause(d);r.physicalMuted=engine.audioMonitor.snapshot().physicalMuted;r.allStopped=state.decks.every(d=>!d.playing&&!d.processing&&!d.playQueued);}
+  result.textContent=JSON.stringify(r,null,2);
+ }
+};
 async function stage(name,playing,extra={}){const {engine}=app(),at=engine.ctx.currentTime-engine.recordStarted;events.push({name,playing,from:at+.15,to:at+.4,...extra});await sleep(500);}
 document.querySelector('#run').onclick=async()=>{
  let originalFile;

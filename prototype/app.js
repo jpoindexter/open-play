@@ -1059,6 +1059,10 @@ async function deckAction(action, index, el, event = {}) {
   if (action === "pfl") {
     engine.setPFL(d.index,!d.pfl);d.pfl=!d.pfl;
     notify(d.pfl?'Deck selected for cue. Use Devices to route the headphone bus.':'Deck removed from cue.');
+    const button=document.querySelector(`[data-action="pfl"][data-deck="${index}"]`);
+    if(!button)return renderDecks();
+    button.classList.toggle('active',d.pfl);button.setAttribute('aria-pressed',String(d.pfl));
+    refreshTransportControls(state);return;
   }
   if (action === "range") {
     d.pitchRange = { 8: 16, 16: 50, 50: 8 }[d.pitchRange];
