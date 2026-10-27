@@ -1428,6 +1428,7 @@ const cueHolds = createCueHolds({
   record: flipAutomation.record,
   persist,
   render: renderDecks,
+  refresh:()=>{smartSync.reconcile();refreshTransportControls(state);},
   notify,
 });
 api.cueHolds = cueHolds;

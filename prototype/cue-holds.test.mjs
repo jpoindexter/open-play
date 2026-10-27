@@ -3,13 +3,13 @@ import test from 'node:test';
 import {readFileSync} from 'node:fs';
 import vm from 'node:vm';
 import {createCueHolds} from './holds.js';
-function fixture() {
+function fixture(presentation={}) {
   const d={index:0,track:{id:'a',cues:[]},cue:2,position:2,playing:false};
   const starts=[],pending=[];
   const engine={init(){},position:d=>d.position,pause(d){d.playing=false;},
     seek(d,p){d.position=p;return new Promise(resolve=>pending.push(resolve));},
     async start(d){starts.push(d.track.id);d.playing=true;},beginSlip(){},async endSlip(){}};
-  const holds=createCueHolds({engine,state:{decks:[d]},quantized:(_,p)=>p,record(){},persist(){},render(){},notify(message){throw Error(message);}});
+  const holds=createCueHolds({engine,state:{decks:[d]},quantized:(_,p)=>p,record(){},persist(){},render(){},notify(message){throw Error(message);},...presentation});
   return {d,holds,starts,pending};
 }
 test('replacement invalidates pending audition and cannot latch the next Play',async()=>{
@@ -68,4 +68,14 @@ test('actual Play stop revokes released Cue ownership before pending seek comple
   pending.shift()();await press;
   assert.deepEqual(starts,[],'stopped transport must not restart from the old Cue request');
   assert.equal(d.playing,false);
+});
+
+test('temporary Cue pause, cue-set and release use transport refresh without rebuilding controls',async()=>{
+ let rebuilds=0,refreshes=0;
+ const {d,holds,pending}=fixture({render(){rebuilds++;},refresh(){refreshes++;}});
+ const audition=holds.press('i',d);pending.shift()();await audition;
+ const released=holds.release('i');pending.shift()();await released;
+ d.position=3;const set=holds.press('i',d);pending.shift()();await set;
+ d.playing=true;const pause=holds.press('i',d);pending.shift()();await pause;
+ assert.equal(rebuilds,0);assert.equal(refreshes,3);assert.equal(d.playing,false);assert.equal(d.cue,3);
 });

@@ -71,3 +71,35 @@ document.querySelector('#run').onclick=async()=>{
   report.complete=checks.length===3&&report.audioPassed&&!report.error;document.querySelector('#original').textContent=JSON.stringify(report);show();
  }
 };
+
+document.querySelector('#cue-refresh-run').onclick=async()=>{
+ let engine,state;const r={complete:false,scope:'Actual four-deck Compact Cue key release with generated audio, physical output muted; no listening/native/pointer-capture proof.'};
+ try{
+  assert(location.port==='8874','Dedicated port8874 required');
+  assert(localStorage.length===0||localStorage.getItem('openplay-core-controls-owned')==='true','Refusing unowned origin');
+  localStorage.setItem('openplay-core-controls-owned','true');
+  localStorage.setItem(sessionKey,JSON.stringify({settings:{'Analyze Stems':false,'Playback Keys Use Shift':false}}));
+  frame.src='workspace-preview.html?cue-refresh='+Date.now();await new Promise(resolve=>frame.onload=resolve);
+  await until(()=>app()&&!app().state.analysis,'workspace');({engine,state}=app());
+  await engine.resume();engine.audioMonitor.mutePhysical(true);assert(engine.audioMonitor.snapshot().physicalMuted,'Physical mute');
+  input('#deck-count',4,'change');await until(()=>doc().querySelectorAll('[data-action="play"]').length===4,'four decks');
+  await until(()=>doc().querySelectorAll('.library-wave-preview img').length>0,'library previews');
+  const d=state.decks[0],w=frame.contentWindow,cue=doc().querySelector('[data-action="cue"][data-deck="0"]');
+  cue.focus();cue.dispatchEvent(new w.KeyboardEvent('keydown',{key:' ',code:'Space',bubbles:true,cancelable:true}));
+  await until(()=>d.playing&&!d.processing,'temporary Cue audition');
+  const selector='.deck button,.deck input,#mixer button,#mixer input,[data-waveform-scrub],#detail-wave,tr[data-track],.library-wave-preview img',nodes=[...doc().querySelectorAll(selector)];
+  const knob=doc().querySelector('[data-mix="1:level"]');knob.focus();const value=knob.value;
+  knob.dispatchEvent(new w.KeyboardEvent('keyup',{key:' ',code:'Space',bubbles:true,cancelable:true}));
+  await until(()=>!d.playing&&!d.processing,'Cue release');
+  await new Promise(resolve=>w.requestAnimationFrame(()=>w.requestAnimationFrame(resolve)));
+  r.observedNodes=nodes.length;r.retainedNodes=nodes.filter(n=>n.isConnected).length;r.unrelatedMixerFocused=doc().activeElement===knob;
+  r.mixerValueRetained=knob.isConnected&&knob.value===value;r.playControls=doc().querySelectorAll('[data-action="play"]').length;
+  r.previewImages=doc().querySelectorAll('.library-wave-preview img').length;r.cueReturnedPaused=Math.abs(engine.position(d)-d.cue)<.001;
+  assert(r.retainedNodes===r.observedNodes&&r.unrelatedMixerFocused&&r.mixerValueRetained,'Cue release replaced controls or lost unrelated mixer focus');
+  assert(r.playControls===4&&r.previewImages>0&&r.cueReturnedPaused,'Cue return or controls/previews missing');r.complete=true;
+ }catch(error){r.error=error.message;}
+ finally{
+  if(engine&&state){for(const d of state.decks)engine.pause(d);r.physicalMuted=engine.audioMonitor.snapshot().physicalMuted;r.allStopped=state.decks.every(d=>!d.playing&&!d.processing&&!d.playQueued);}
+  result.textContent=JSON.stringify(r,null,2);
+ }
+};

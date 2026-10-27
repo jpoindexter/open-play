@@ -6,6 +6,7 @@ export function createCueHolds({
   record,
   persist,
   render,
+  refresh = render,
   notify,
 }) {
   const held = new Map();
@@ -39,12 +40,12 @@ export function createCueHolds({
     } else if (d.playing && !selectedStem(d)) {
       engine.pause(d);
       await engine.seek(d, d.cue);
-      render();
+      refresh();
       return;
     } else if (!selectedStem(d) && Math.abs(position - d.cue) > 0.04) {
       d.cue = quantized(d, position);
       await engine.seek(d, d.cue);
-      render();
+      refresh();
       return;
     }
     engine.init();
@@ -107,7 +108,7 @@ export function createCueHolds({
       engine.pause(h.d);
       await engine.seek(h.d, h.target);
     } else if (h.wasPlaying) await engine.endSlip(h.d, "cue");
-    if (current(h)) render();
+    if (current(h)) refresh();
   }
   function latch(d) {
     let latched = false;
