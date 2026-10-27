@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 const source=await readFile(new URL('./workspace-toolbar.js',import.meta.url),'utf8');
-const assignment=source.slice(source.indexOf('back.onclick='),source.indexOf('window.openPlay.workspaceSettings='));
+const assignment=source.slice(source.indexOf('const restoreSettings='),source.indexOf('window.openPlay.workspaceSettings='));
 function fixture(){
  const tab={isConnected:true},body={scrollTop:0,querySelector:()=>tab},document={body:{},activeElement:null},modal={open:true},frames=[],back={contains:node=>node===back};
  document.activeElement=document.body;let clicked=0,focused=null;

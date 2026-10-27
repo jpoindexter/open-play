@@ -1,3 +1,4 @@
+import {createPerformancePanelNavigation} from './performance-panel-navigation.js';
 import {createSessionPanels} from './session-panels.js';
 import {saveTrackDetails,refreshTrackDetails} from './track-details.js';
 import {saveBeatgrid} from './beatgrid-save.js';
@@ -102,16 +103,14 @@ export function createPanels(a) {
       )
       .join("");
   const {prepare,history}=createSessionPanels({...a,head,badge,refresh});
-  function bindPanel() {
-    const close = $("#close-panel");
-    if (close)
-      close.onclick = () => {
-        $("#panel").hidden = true;
-        s.panel = null;
-        $$("[data-panel]").forEach((b) => b.classList.remove("active"));
-      };
-  }
-  function open(name) {
+  const performancePanels=createPerformancePanelNavigation({state:s,$,$$,
+    render:name=>({fx,sampler,scratch,flip,video,recording,link,files,prepare,history})[name]?.(),
+    returnToSettings:scroll=>{
+      const navigation=window.openPlay?.workspaceSettings;
+      if(navigation)navigation.restore(scroll);else settings();
+    },
+  });
+  function open(name,settingsScroll=null) {
     if(name!=='video')videoAssignmentUI?.cancel('MIDI assignment exited before changing views.');
     if (
       [
@@ -155,46 +154,9 @@ export function createPanels(a) {
         return stems();
       }
     }
-    if (s.panel === name && !$("#panel").hidden) {
-      $("#panel").hidden = true;
-      s.panel = null;
-      return;
-    }
-    s.panel = name;
-    $("#panel").hidden = false;
-    ({
-      fx,
-      sampler,
-      scratch,
-      flip,
-      video,
-      recording,
-      link,
-      files,
-      prepare,
-      history,
-    })[name]?.();
-    bindPanel();
-    $$("[data-panel]").forEach((b) =>
-      b.classList.toggle("active", b.dataset.panel === name),
-    );
+    performancePanels.open(name,settingsScroll);
   }
-  function refresh() {
-    if (s.panel)
-      ({
-        fx,
-        sampler,
-        scratch,
-        flip,
-        video,
-        recording,
-        link,
-        files,
-        prepare,
-        history,
-      })[s.panel]?.();
-    bindPanel();
-  }
+  function refresh(){performancePanels.refresh();}
   function newCrate(smart) {
     crateEditor(
       {
@@ -681,8 +643,9 @@ export function createPanels(a) {
             );
         if ($("#open-fx"))
           $("#open-fx").onclick = () => {
+            const scroll=$("#modal-body").scrollTop;
             $("#modal").close();
-            open("fx");
+            open("fx",scroll);
           };
       },
     );

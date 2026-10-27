@@ -12,6 +12,8 @@ Latest user steering: continue software work; controller/listening later. Supers
 
 Source ahead of74: Settings Back focus/scroll repaired in the existing86-line toolbar module. Actual isolated Audio→Devices→keyboard Back focuses Audio; long Library + Display returns to345pxscroll with selected-tab focus. Layouts retains six choices; Escape closes/restores Settings trigger. No preference/transport/native-session edit; one focused ownership check, no new desktop/full suite. UI-SET-01stays open for broader/native criteria. [Report](docs/prototype/SETTINGS_BACK_FOCUS_2026-10-27.md).
 
+Source continuation: reproduced Settings→FX had no return; now Back returns/focuses the originating FX tab, including an already-open panel and an FX refresh. Shared performance navigation extracted to23lines; legacy panels reduced37netlines. Two focused checks and actual isolated stopped browser path pass;2Play/eight previews remain. Running74/native profile untouched; broad UI-SET-01/live/audio criteria stay open. [FX return report](docs/prototype/SETTINGS_FX_RETURN_2026-10-27.md).
+
 Next: continue software-only core/beta blockers; verify staging cleanup on the next normal package. Controller/listening stays for later in CORE-LIVE-01. The user’s native session now differs from the earlier four-deck checkpoint; preserve current state and any new recording/work. No repeated clean matrices.
 
 ## Historical status — core four-deck reliability, 25 October 2026
