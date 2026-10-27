@@ -1,3 +1,5 @@
+Unpackaged core source repair: [CORE-FIX-33](https://trello.com/c/6RcQagUr) retains controls during key Up/Down/Reset and mapped MIDI key changes through a 25-line shared request module. Actual stopped/muted four-deck browser retention improves 114/355 → 355/355 controls, with other-fader focus/value and 3/3 previews retained; two focused checks pass. Current native 0.1.79 is unchanged; packaging/native held/playing/listening remains open. No broad suite or new bundle. [Evidence](docs/prototype/KEY_SHIFT_CONTROLS_2026-10-27.md). Trello 181 cards / 14 complete.
+
 ## Current core delivery — 27 October 2026
 
 **Private 0.1.79 / source `f9e7511` is inspected 5/5, current and observed paused.** Empty Recording preflight → normal 0.1.78 quit/process absence → closed 256-file / 120,336,037-byte hash-matched profile backup → exact 0.1.79 startup. Constant Change / Prism restored at 13.073 / 12.426 seconds, with 16 library tracks, two Play/tempo controls, six EQ controls and 12 AX library previews. Prior B LOW −24 dB restored; tempo/Sync reset normally. No main Play, Sync or REC Start. [Native evidence](docs/prototype/DESKTOP_CORE_079_2026-10-27.md).

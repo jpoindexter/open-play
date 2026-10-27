@@ -8,6 +8,7 @@ import {createTrackGain,trackGainDB} from './track-gain.js';
 import {normalizedMasterDB} from './master-output-kernel.js';
 import {mixerSettingsFromPreferences} from './mixer-curves.js';
 import {createDeckTapTempo} from './deck-tap-tempo.js';
+import {createDeckKeyShift} from './deck-key-shift.js';
 import {createInstantDouble} from './instant-double.js';
 import {refreshLoopControls} from './loop-presentation.js';
 import {createManualLoops} from './manual-loops.js';
@@ -747,33 +748,11 @@ async function load(index, id = state.selected, options = {}) {
   renderTracks();
   return decoded && d.track===t && deckLoadRequests.get(d)===request;
 }
-const deckKeyShiftRequests = new WeakMap();
-function keyShiftIntent(index) {
-  const d=state.decks[index],request=deckKeyShiftRequests.get(d);
-  return request && request.track===d.track?request.semitones:d.keyShift||0;
-}
-async function setDeckKeyShift(index, semitones) {
-  if (!Number.isInteger(semitones) || Math.abs(semitones) > 24)
-    throw new RangeError("The browser pitch renderer supports±24 semitones.");
-  const d = state.decks[index];
-  if (!d) throw new RangeError("Unknown deck.");
-  deckScratchControls.cancelDeck(d);
-  pitchPlay.cancelDeck(d);
-  loopPads.cancelDeck(d);
-  manualLoops.cancelDeck(d);
-  slicer.cancelDeck(d);
-  d.keySync = false;
-  const request={track:d.track,semitones};
-  deckKeyShiftRequests.set(d,request);
-  try {
-    await engine.setPitch(d, { keylock: true, semitones });
-    if (deckKeyShiftRequests.get(d)===request && d.track===request.track) {
-      persist();renderDecks();
-    }
-  } finally {
-    if (deckKeyShiftRequests.get(d)===request) deckKeyShiftRequests.delete(d);
-  }
-}
+const deckKeyShift=createDeckKeyShift({state,engine,persist,
+ cancel:d=>{deckScratchControls.cancelDeck(d);pitchPlay.cancelDeck(d);loopPads.cancelDeck(d);manualLoops.cancelDeck(d);slicer.cancelDeck(d);},
+ render:d=>{refreshAnalysisControls(state,d.track);refreshDeckSwitches(state,d.index);refreshLoopDecks(d);},
+});
+const {intent:keyShiftIntent,set:setDeckKeyShift}=deckKeyShift;
 async function play(d) {
   if (pitchPlay.latch(d) || cueHolds.latch(d)) {
     syncMaster.started(d);
@@ -1041,7 +1020,7 @@ async function deckAction(action, index, el, event = {}) {
   if (["keyDown", "keyUp", "keyReset"].includes(action)) {
     const semitones = action === "keyReset" ? 0 : keyShiftIntent(index) + (action === "keyUp" ? 1 : -1);
     if (Math.abs(semitones) > 24) return notify("The browser pitch renderer supports±24 semitones.");
-    await setDeckKeyShift(index,semitones);
+    return setDeckKeyShift(index,semitones);
   }
   if (action === "keySync") {
     if (d.keySync) d.keySync = false;

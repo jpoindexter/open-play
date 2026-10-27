@@ -1,3 +1,5 @@
+Unpackaged core source repair: [CORE-FIX-33](https://trello.com/c/6RcQagUr) retains controls during key Up/Down/Reset and mapped MIDI key changes through a 25-line shared request module. Actual stopped/muted four-deck browser retention improves 114/355 → 355/355 controls, with other-fader focus/value and 3/3 previews retained; two focused checks pass. Current native 0.1.79 is unchanged; packaging/native held/playing/listening remains open. No broad suite or new bundle. [Evidence](docs/prototype/KEY_SHIFT_CONTROLS_2026-10-27.md). Trello 181 cards / 14 complete.
+
 # Open Play
 
 ## Current core delivery — 27 October 2026
