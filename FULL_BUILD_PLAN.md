@@ -10,6 +10,8 @@ Trello176cards/13complete, previous dispositions retained and7current descriptio
 
 Latest user steering: continue software work; controller/listening later. Superseded74builds/59launchers and35leaked package stages removed (~44.73GiB generated allocations), preserving current74/source/profile backups/audio/recordings. Packaging now cleans its staging directory on normal success/error; two focused filesystem checks pass, real-next-build cleanup pending. [Cleanup receipt and limits](docs/delivery/BUILD_CLEANUP_2026-10-27.md).
 
+Source ahead of74: Settings Back focus/scroll repaired in the existing86-line toolbar module. Actual isolated Audio→Devices→keyboard Back focuses Audio; long Library + Display returns to345pxscroll with selected-tab focus. Layouts retains six choices; Escape closes/restores Settings trigger. No preference/transport/native-session edit; one focused ownership check, no new desktop/full suite. UI-SET-01stays open for broader/native criteria. [Report](docs/prototype/SETTINGS_BACK_FOCUS_2026-10-27.md).
+
 Next: continue software-only core/beta blockers; verify staging cleanup on the next normal package. Controller/listening stays for later in CORE-LIVE-01. The user’s native session now differs from the earlier four-deck checkpoint; preserve current state and any new recording/work. No repeated clean matrices.
 
 ## Historical status — core four-deck reliability, 25 October 2026

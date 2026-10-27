@@ -50,14 +50,23 @@ export function installWorkspaceToolbar(){
  $('.review-bar')?.remove();
  toolbar.classList.add('performance-toolbar');
  document.body.dataset.performanceToolbar='unified';
- let returnToSettings=false,opener=null;
+ let returnToSettings=false,opener=null,returnScroll=0;
  const back=document.createElement('button');back.id='settings-back';back.type='button';back.hidden=true;
  back.textContent='Back';icon(back,'back','Back to Settings',false);$('.dialog-title').prepend(back);
- back.onclick=()=>settings.click();
+ back.onclick=()=>{
+  const scroll=returnScroll;settings.click();
+  const body=$('#modal-body'),tab=body.querySelector('[data-settings-tab][aria-current="page"]');
+  // Wait for the existing Astryx island to mount its visible tab button.
+  requestAnimationFrame(()=>requestAnimationFrame(()=>{
+   const active=document.activeElement;
+   if(!modal.open||!tab?.isConnected||(![document.body,modal].includes(active)&&!outer(back).contains(active)))return;
+   body.scrollTop=scroll;focus(tab);
+  }));
+ };
  window.openPlay.workspaceSettings={
   beforeDialog(title){
    if(!modal.open){returnToSettings=false;opener=document.activeElement;}
-   else if($('#modal-title').textContent==='Setup'&&title!=='Setup')returnToSettings=true;
+   else if($('#modal-title').textContent==='Setup'&&title!=='Setup'){returnToSettings=true;returnScroll=$('#modal-body').scrollTop;}
    if(title==='Setup')returnToSettings=false;
    park();back.hidden=!returnToSettings;
   },

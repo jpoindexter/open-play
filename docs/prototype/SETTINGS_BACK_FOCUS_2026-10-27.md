@@ -1,0 +1,13 @@
+# Settings Back restores focus and scroll — 27 October 2026
+
+Existing UI-SET-01: https://trello.com/c/pBDYCLui . The isolated current browser Settings→Audio→Audio output routing→keyboard Back returned to the correct Audio tab, but document.activeElement was BODY. This is a reproduced focus-context failure, not an inference from styling. Toolbar bytes at2d040c5and6b23969are identical for the baseline path.
+
+The existing Back handler now saves the prior Settings scroll position, reopens the same active Settings page, waits for the existing Astryx tab island and focuses that selected tab through the existing focus helper with preventScroll. A disconnected tab, closed dialog or genuinely newer focused control owns the result and suppresses the pending restoration. No new runtime module/framework/token/layout/audio/routing change. Toolbar86lines/regression18lines; legacy oversized app/panels remain separate debt.
+
+The first double-frame change was too strict: the actual trace still had the mounted Back button focused while open/connected/mounted were true. It rejected its own pending return. The corrected guard permits that original Back host while protecting newer input. That failed attempt/probe is retained privately; no debug logging remains in product code.
+
+Executed actual browser paths: Audio nested Back now focuses Audio with Setup still open; Library + Display at scroll345px (height504/content849)→Provider simulation→keyboard Back returns to the same tab, exact345pxscroll and selected-tab focus. Six layout choices remain available without changing selection. Escape closes the dialog and returns focus to the Settings trigger, distinct from Back. The two generated decks stay at0/0with both Play controls and five library previews present. No preference, Play, Sync or recording action was issued.
+
+One focused source-handler ownership check passes for the pending mount/restoration path and cancellation by newer focus/replaced tab/closed modal. This controlled check is not native UI or physical input. [Compact receipt](settings-back-focus-2026-10-27.json); raw AX/DOM/probe evidence in ignored local-evidence/settings-navigation-2026-10-27/.
+
+Native74was observed in a changed two-deck user session; it was not navigated, restored or rebuilt. This source improvement awaits a later normal desktop candidate. No broad suite/soak/new desktop/listening/hardware test. Broader Settings criteria, other nested destinations (including FX), pending drafts, native/playing interaction, unified design migration and core Sync-pop/stall/controller acceptance remain open. Do not mark the whole Settings card complete from this bounded browser result.
