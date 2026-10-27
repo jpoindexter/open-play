@@ -30,13 +30,13 @@ export function createLoopPads({state,engine,render=()=>{},notify=()=>{}}){
    const position=held.clock(engine.ctx.currentTime);
    await engine.setLoop(d,held.prior.on,held.prior.start,held.prior.end);
    if(!owns())return;
-   await engine.seek(d,position);render();
+   await engine.seek(d,position);render(d);
   });};
   const pending=run(d,async()=>{
    if(!owns()||(release&&held.released))return;
    if(beatJump){
     const jump=d.beatJumpLength||4;
-    if(pad===5||pad===6){d.beatJumpLength=clamp(jump*(pad===5?.5:2),1/32,128);notify(`Deck ${d.index+1} Beat Jump ${d.beatJumpLength} beats.`);render();return;}
+    if(pad===5||pad===6){d.beatJumpLength=clamp(jump*(pad===5?.5:2),1/32,128);notify(`Deck ${d.index+1} Beat Jump ${d.beatJumpLength} beats.`);render(d);return;}
     if(rolls.has(d.index))throw Error('Release Loop Roll before jumping.');
     const grid=createBeatgrid(track),position=engine.position(d),delta=jump*(pad===4?-1:1);
     if(d.loop){
@@ -46,14 +46,14 @@ export function createLoopPads({state,engine,render=()=>{},notify=()=>{}}){
      if(start<0||end>track.duration)throw Error('Beat Jump would move the loop outside the track.');
      await engine.setLoop(d,true,start,end);if(!owns())return;await engine.seek(d,shift(position));
     }else await engine.seek(d,grid?grid.timeAt(grid.beatAt(position)+delta):position+60/track.bpm*delta);
-    render();return;
+    render(d);return;
    }
    if(mode==='auto'){
     if(rolls.has(d.index))throw Error('Release Loop Roll before changing Auto Loop.');
     const ending=d.loop&&d.autoLoopBeats===beats;
     const span=ending?{start:d.loopIn,end:d.loopOut}:bounds(d,beats,d.loop?d.loopIn:engine.position(d));
     await engine.setLoop(d,!ending,span.start,span.end);if(!owns())return;
-    d.autoLoopBeats=ending?null:beats;d.loopLength=beats;notify(`Deck ${d.index+1} Auto Loop ${beats} beats ${ending?'off':'on'}.`);render();return;
+    d.autoLoopBeats=ending?null:beats;d.loopLength=beats;notify(`Deck ${d.index+1} Auto Loop ${beats} beats ${ending?'off':'on'}.`);render(d);return;
    }
    // Last pressed roll wins; older releases cannot terminate its owner. Keep
    // the initial unrolled clock across overlapping pads.
@@ -64,7 +64,7 @@ export function createLoopPads({state,engine,render=()=>{},notify=()=>{}}){
    const timeline=engine.voices.get(d.index)?.gridTimeline;
    held.clock=old?.clock||(timeline?timeline.clock:at=>playing?advanceDeckScratchPosition(position,(at-time)*rate,track.duration,priorLoop):position);
    rolls.set(d.index,held);
-   try{const span=bounds(d,beats,position);await engine.setLoop(d,true,span.start,span.end);held.token=engine.startTokens.get(d.index);if(owns())render();}
+   try{const span=bounds(d,beats,position);await engine.setLoop(d,true,span.start,span.end);held.token=engine.startTokens.get(d.index);if(owns())render(d);}
    catch(error){if(rolls.get(d.index)===held)rolls.delete(d.index);throw error;}
   });
   return{pending,release};
@@ -78,7 +78,7 @@ export function createLoopPads({state,engine,render=()=>{},notify=()=>{}}){
  function range(d,direction){
   const count=state.settings['Show Beat Jump Controls']?4:8;
   d.loopPadBase=clamp(base(d)*2**(direction<0?-1:1),1/32,128/2**(count-1));
-  render();
+  render(d);
  }
  function hold(key,d,pad,options={}){
   if(holds.has(key))return holds.get(key).pending;

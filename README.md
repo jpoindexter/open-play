@@ -16,6 +16,8 @@ User-directed design slice: flat-black canvas and near-black shared surfaces, ex
 
 Staged0.1.77/source57afcc6 now packages CORE-FIX-29 and the flat-black palette; immutable archive/controlled-host inspection5/5,618runtime files/102declared modules. Native77not launched: authoritative Mac session flag locked, so no native input/restart/Play/Sync/REC Start. Defaults stay76; transport state not freshly observed. Only76+77bundles remain, stage/tar removed; next build blocked until superseded retirement. [Staged delivery and exact re-entry](docs/prototype/DESKTOP_CORE_077_2026-10-27.md).
 
+Newer source repair CORE-FIX-30 preserves loop/length/beat-jump/manual/Auto/Roll controls. Actual baseline0/225→225/225; Auto/Roll230/230after explicit mode changes; one composed regression RED→GREEN, physical mute/stopped/previews retained. New presenter38lines, no DSP rewrite. Native76and staged77predate it; no new bundle or Downloads file. [Evidence/limits](docs/prototype/LOOP_CONTROLS_2026-10-27.md).
+
 Next: after unlock, fresh Recording preflight → normal76quit/process absence → hash-matched closed-profile backup → exact77startup/recovery/controls; only then promote defaults and retire76. Continue software-only core/beta blockers, preserve current paused two-deck work and keep generated artifacts bounded. [CORE-LIVE-01](https://trello.com/c/yJ8r9kCD) holds the deferred controller/headphone/master/listening session. Retain the next actual pop/stall; do not repeat clean matrices.
 
 Independent open-source desktop DJ project, with a browser review candidate and ongoing reference investigation. The goal is familiar Serato DJ Pro design and behavior without artificial feature, account or device gates in the independent implementation.

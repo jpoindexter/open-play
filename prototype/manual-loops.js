@@ -16,7 +16,7 @@ export function createManualLoops({state,engine,quantized=(_d,p)=>p,persist=()=>
    if(!saved)throw Error('Save a loop to this slot first.');
    d.loopSlot=slot;d.loopEdit=null;
    await bounds(d,true,saved.start,saved.end);
-   await engine.seek(d,saved.start);render();return true;
+   await engine.seek(d,saved.start);render(d);return true;
   });
  }
  function command(d,action){
@@ -24,26 +24,26 @@ export function createManualLoops({state,engine,quantized=(_d,p)=>p,persist=()=>
   if(!valid(d)){notify('Load a track first.');return Promise.resolve(false);}
   return run(d,async()=>{
    if(action==='in'||action==='out'){
-    if(d.loop&&hasLoop(d)){d.loopEdit=d.loopEdit===action?null:action;notify(`Deck ${d.index+1} Loop ${action.toUpperCase()} ${d.loopEdit?'edit; turn jog to adjust':'set'}.`);render();return true;}
+    if(d.loop&&hasLoop(d)){d.loopEdit=d.loopEdit===action?null:action;notify(`Deck ${d.index+1} Loop ${action.toUpperCase()} ${d.loopEdit?'edit; turn jog to adjust':'set'}.`);render(d);return true;}
     const position=quantized(d,engine.position(d));d.loopEdit=null;
-    if(action==='in'){d.loopIn=position;render();return true;}
+    if(action==='in'){d.loopIn=position;render(d);return true;}
     if(position<=d.loopIn)throw Error('Loop Out must be after Loop In.');
-    await bounds(d,true,d.loopIn,position);render();return true;
+    await bounds(d,true,d.loopIn,position);render(d);return true;
    }
    d.loopEdit=null;
    if(action==='previous'||action==='next'){
     d.loopSlot=clamp((d.loopSlot||0)+(action==='next'?1:-1),0,7);
     const saved=d.track.savedLoops?.[d.loopSlot];
     if(saved)await bounds(d,!!d.loop,saved.start,saved.end);
-    notify(`Deck ${d.index+1} Loop slot ${d.loopSlot+1}.`);render();return true;
+    notify(`Deck ${d.index+1} Loop slot ${d.loopSlot+1}.`);render(d);return true;
    }
    if(!hasLoop(d))throw Error('Set a valid Loop In and Out first.');
    if(action==='save'){
     const slot=d.loopSlot||0,old=d.track.savedLoops[slot];
-    d.track.savedLoops[slot]={...old,start:d.loopIn,end:d.loopOut,name:old?.name||`Loop ${slot+1}`};persist();notify(`Loop saved to slot ${slot+1}.`);render();return true;
+    d.track.savedLoops[slot]={...old,start:d.loopIn,end:d.loopOut,name:old?.name||`Loop ${slot+1}`};persist();notify(`Loop saved to slot ${slot+1}.`);render(d);return true;
    }
-   if(action==='toggle'){await bounds(d,!d.loop,d.loopIn,d.loopOut);render();return true;}
-   await bounds(d,true,d.loopIn,d.loopOut);await engine.seek(d,d.loopIn);render();return true;
+   if(action==='toggle'){await bounds(d,!d.loop,d.loopIn,d.loopOut);render(d);return true;}
+   await bounds(d,true,d.loopIn,d.loopOut);await engine.seek(d,d.loopIn);render(d);return true;
   });
  }
  function move(d,ticks){
@@ -55,7 +55,7 @@ export function createManualLoops({state,engine,quantized=(_d,p)=>p,persist=()=>
    // This is not a measured vendor jog curve.
    const start=field==='in'?clamp(d.loopIn+ticks*.001,0,d.loopOut-.001):d.loopIn;
    const end=field==='out'?clamp(d.loopOut+ticks*.001,start+.001,d.track.duration):d.loopOut;
-   await bounds(d,d.loop,start,end);render();return true;
+   await bounds(d,d.loop,start,end);render(d);return true;
   });
  }
  return{command,recall,press:(d,pad)=>command(d,actions[pad]),move,cancelDeck};

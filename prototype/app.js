@@ -9,6 +9,7 @@ import {normalizedMasterDB} from './master-output-kernel.js';
 import {mixerSettingsFromPreferences} from './mixer-curves.js';
 import {createDeckTapTempo} from './deck-tap-tempo.js';
 import {createInstantDouble} from './instant-double.js';
+import {refreshLoopControls} from './loop-presentation.js';
 import {createManualLoops} from './manual-loops.js';
 import {createLoopPads} from './loop-pads.js';
 import {createJogBend} from './jog-bend.js';
@@ -1072,6 +1073,7 @@ async function deckAction(action, index, el, event = {}) {
     updateTempoSlider(d);refreshTransportControls(state);return;
   }
   if (action === "grid") return panels.grid(d);
+  if(['loop','loopHalf','loopDouble','jumpBack','jumpForward'].includes(action))return refreshLoopDecks(d);
   if(['reverse','repeat','slip','keylock'].includes(action)){
     if(renderedDeckShape!==`${state.layout}/${state.deckCount}/${state.settings['Sync Mode']}`||(index<state.deckCount&&!document.querySelector(`[data-action="${action}"][data-deck="${index}"]`)))return renderDecks();
     smartSync.reconcile();refreshDeckSwitches(state,index);refreshTransportControls(state);return;
@@ -1447,14 +1449,18 @@ const censorHolds=createCensorHolds({engine,onChange:(d,active)=>{
 },onError:error=>notify(error.message)});
 engine.onCensorEnd=censorHolds.forget;
 api.censorHolds=censorHolds;
-const manualLoops=createManualLoops({state,engine,quantized,persist,render:renderDecks,notify});
+function refreshLoopDecks(d){
+ if(renderedDeckShape!==`${state.layout}/${state.deckCount}/${state.settings['Sync Mode']}`||!refreshLoopControls(state,loopPads))return renderDecks();
+ smartSync.reconcile();refreshTransportControls(state);drawWaves(d?.track||null);
+}
+const manualLoops=createManualLoops({state,engine,quantized,persist,render:refreshLoopDecks,notify});
 api.manualLoops=manualLoops;
 function renderLoopDecks(){
  const el=document.activeElement,focus=el?.dataset,restore=focus?.deck!==undefined&&['roll','pad'].includes(focus.action)?{deck:focus.deck,action:focus.action,pad:focus.pad}:null;
  renderDecks();
  if(restore)document.querySelector(`[data-deck="${restore.deck}"][data-action="${restore.action}"]${restore.pad===undefined?'':`[data-pad="${restore.pad}"]`}`)?.focus({preventScroll:true});
 }
-const loopPads=createLoopPads({state,engine,render:renderLoopDecks,notify});
+const loopPads=createLoopPads({state,engine,render:refreshLoopDecks,notify});
 function loopHoldTarget(el){
  if(!el||el.dataset.deck===undefined)return null;
  const d=state.decks[Number(el.dataset.deck)];
