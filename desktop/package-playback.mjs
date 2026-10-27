@@ -1,6 +1,6 @@
 // Optional current-source test. Existing app bundles, profiles and defaults stay intact.
 import {packager} from '@electron/packager';
-import {mkdtemp,mkdir,readFile,writeFile,unlink} from 'node:fs/promises';
+import {mkdtemp,mkdir,readFile,writeFile,unlink,rm} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
@@ -14,6 +14,7 @@ const get=file=>git(['show',`${sourceCommit}:${file}`]);
 const version='0.1.74',name='Open Play Playback Test',port=18775,bundle='org.openplay.dj.playback.localtest';
 const profile='Open Play Playback Test',partition='persist:open-play-playback-test';
 const stage=await mkdtemp(path.join(tmpdir(),'open-play-playback-'));
+try{
 await mkdir(path.join(stage,'assets'));
 const archive=stage+'.tar';
 try{
@@ -72,3 +73,5 @@ const asarPath=path.join(outputs[0],name+'.app','Contents','Resources','app.asar
 const receipt={...provenance,stage,outputs,asarPath,asarSHA256:sha(await readFile(asarPath))};
 await writeFile(path.join(root,`docs/prototype/desktop-${version}-playback-package.json`),JSON.stringify(receipt,null,2)+'\n',{flag:'wx'});
 console.log(JSON.stringify({outputs,asarPath,asarSHA256:receipt.asarSHA256,sourceCommit}));
+
+}finally{await rm(stage,{recursive:true,force:true});}
