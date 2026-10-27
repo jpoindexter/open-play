@@ -2,6 +2,8 @@
 
 **Pending cleanup:** the normal0.1.59 library currently retains the temporary title `BX 3 · metadata check`. Restore its title to `BX 3` through Track Details when native input is reliable. Do not change its BPM124.98471158160582 or other metadata. No original audio tags were rewritten. This pass is not closed until restoration is observed.
 
+**27 October update:** the supported native window Raise action succeeded, and a freshly observed row opened the correct BX3 details form with the temporary title. The next restoration call reported that the Mac was locked. Restoration is unconfirmed; all further native input stopped. Manual unlock is now required. This does not retrospectively explain the earlier stale/window errors. See [blocker/re-entry record](native-input-blocker-2026-10-27.json).
+
 ## Observed native path
 
 Exact running native0.1.59/sourceb10bc82 had BX3 Track Details open with124.98471158160582BPM. A temporary Title edit was made through the accessibility value setter. Screenshot confirmed the edited title and full precise BPM. Save details was invoked once through the observed native button.
@@ -10,7 +12,7 @@ Native observations initially remained stale, so an early commentary incorrectly
 
 ## Automation failure and restoration limit
 
-The attempted immediate restore value-set occurred after the details form disappeared and did not restore the saved library title. Subsequent row actions encountered stale IDs; one stale row target opened the unrelated Glass Transit details form. Its observed fields remained original; no save was requested for that form. Screenshot-coordinate input returned noWindowsAvailable. Rebinding the exact59bundle and trying a freshly read Close control still returned AXError.invalidUIElement. Native input attempts stopped; there is no screen-lock claim because the session flag was absent and capture alone does not prove input availability.
+The attempted immediate restore value-set occurred after the details form disappeared and did not restore the saved library title. Subsequent row actions encountered stale IDs; one stale row target opened the unrelated Glass Transit details form. Its observed fields remained original; no save was requested for that form. Screenshot-coordinate input returned noWindowsAvailable. Rebinding the exact59bundle and trying a freshly read Close control still returned AXError.invalidUIElement. Native input attempts stopped; at that observation there was no screen-lock claim because the session flag was absent and capture alone does not prove input availability.
 
 The initial optimistic “unsaved title” description was corrected after actual saved-state evidence. Original BX3 title is known and restoration remains explicitly pending. Playback was not started; observed deck positions remained2/3/4/5s, tempo0%, SyncOFF, master meter−∞,16library tracks and controls/previews present. No independent acoustic/mute or current audio quality claim. No quit/restart, profile-file rewrite or lock bypass to force cleanup.
 
