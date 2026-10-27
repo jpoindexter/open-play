@@ -2,7 +2,7 @@
 
 Ship a useful Mac local-audio DJ beta as soon as its release gates are satisfied. Full Serato/rekordbox/Traktor parity and the entire Trello backlog are not launch prerequisites. No public release has been published or approved by this document.
 
-Current private checkpoint:0.1.71/sourcee92e3d6 inspected5/5/running paused after protected70quit/hashed closed-profile backup. Same4tracks2/3/4/5s/16library tracks/metadata/core controls/decoded waveforms/previews retained. CORE-FIX-25 shared invalid-loop guard passes two focused regressions, actual isolated End→Loop rejection/active-voice preservation and native paused real-track bounds error; A position/Quantize restored. No main Play/Sync/REC or audible-pop proof. Narrow guard criteria do not close broader loop/reference/controller/listening or four-deck/Sync gates. Prior53/64–70evidence retained. [Delivery](../prototype/desktop-0.1.71-playback-delivery.json) · [one owner checklist](OWNER_CORE_SESSION_2026-10-27.md).
+Current private checkpoint:0.1.73/sourcea91d657 packaged and inspected5/5, native launch pending. Last observed running/default71/sourcee92e3d6 remains paused and untouched by this pass. CORE-FIX-26 reverse boundary restart and CORE-FIX-27 natural-end control replacement repaired with focused actual isolated four-deck GUI evidence; native/live criteria stay open. All controls/layouts/library previews retained; no full suite/soak, new listening, frame-time or Sync-pop cause claim. Prior53/64–71evidence remains scoped. [Delivery](../prototype/desktop-0.1.73-playback-delivery.json) · [one owner checklist](OWNER_CORE_SESSION_2026-10-27.md).
 
 ## Now
 

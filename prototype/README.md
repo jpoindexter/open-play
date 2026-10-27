@@ -1,16 +1,16 @@
 # Open Play HTML review candidate
 
-## Current core delivery — 27 October2026
+## Current core delivery — 27 October 2026
 
-**Private0.1.71/sourcee92e3d6 is running paused** after actual archive/host5/5 (613prototype files/101declared modules), normal70quit and hashed closed-profile backup254files/120546148B. Same4real tracks restored2/3/4/5s,16library tracks/exact BX3 metadata,4Play/tempo/filter/level/12EQ/decoded detail/overviews/5viewport AX previews; master silent/Autoplay off. No main Play/Sync/REC. [Delivery and limits](../docs/prototype/desktop-0.1.71-playback-delivery.json).
+**Private 0.1.73/source a91d657 is packaged and inspected 5/5; native launch is pending.** Last observed running/default remains0.1.71/sourcee92e3d6, paused; this pass left that session untouched. [Delivery and limits](../docs/prototype/desktop-0.1.73-playback-delivery.json).
 
-CORE-FIX-25 rejects invalid enabled loops before transport/Slip changes through one shared engine method. Two focused regressions2fail→2pass; actual corrected four-deck End→Loop48→48active baseline→loopoff/0→0error and236/236observed nodes retained. Muted valid Play succeeds; rejected invalid active request keeps voice/token/rate/finite advancing clock. Exact71native Quantize-off End337.0377→Loop displays bounds error; restored A2s/Quantizeon, B/C/D3/4/5s. Native message/position evidence is not direct bounds/DOM/pointer/acoustic proof. [Report](../docs/prototype/LOOP_BOUNDS_2026-10-27.md).
+Two reproduced core repairs: stopped reverse Play at zero restarts from the track end (CORE-FIX-26), and ordinary natural end retains deck/mixer control ownership (CORE-FIX-27). Actual isolated four-deck GUI reverse restart retains210/210controls/backward clock; natural end changes0/225to225/225retained controls with other-channel fader focus/value, four Play controls and library previews intact. Generated audio, physical mute asserted, final stopped/no queued Play. Three focused reverse offset regressions pass. [Reverse report](../docs/prototype/REVERSE_RESTART_2026-10-27.md) · [Natural-end report](../docs/prototype/NATURAL_END_CONTROLS_2026-10-27.md).
 
-Seven product lines/no new runtime module/clock/playback-DSP/routing/layout or broad suite/soak. Defaults71and named starter syntax checked only. Prior53ordinary acceptance and64–70repairs retain scope. New handwritten modules target150–250lines/cap300; existing oversized engine/app/panels/analysis remain MOD-001 debt, not whole-app compliance.
+Two engine lines including comment and one existing refresh substitution; no new runtime module. Diagnostic254lines/regression23lines; existing oversized engine/app/panels/analysis remain MOD-001 debt. No broad suite/soak, new listening, Sync-pop cause or measured frame-time claim. Repeat/Autoplay runtime not rerun; branch bodies unchanged. Prior53ordinary acceptance and64–71repairs retain scope.
 
-Owner-dependent work remains in [CORE-LIVE-01](https://trello.com/c/yJ8r9kCD) / [one practical checklist](../docs/delivery/OWNER_CORE_SESSION_2026-10-27.md). Broader valid-loop/reference, native held/playing/fault/cold-touch, timer-only latency, intermittent Sync pops/stalls, hardware/listening and release gates remain OPEN.
+Owner-dependent work is grouped in [CORE-LIVE-01](https://trello.com/c/yJ8r9kCD) / [one practical checklist](../docs/delivery/OWNER_CORE_SESSION_2026-10-27.md). Both new cards stay open for native/live criteria. Native held/playing/fault/cold-touch, hardware/headphone/master/listening, intermittent Sync pops/stalls and release gates remain open. Trello174cards/13complete; no duplicate26/27.
 
-Next: one controller/listening session on return; do not rerun covered paused cases. Continue only reproduced unattended core defects and retain the next actual pop/stall. [Public beta scope](../docs/delivery/PUBLIC_BETA_PLAN.md).
+Next: preserve any new recording/work, safely launch the inspected73candidate and verify paused recovery before the one owner controller/listening session. Current defaults remain71 until startup is observed. Continue only bounded reproduced software defects; do not rerun clean matrices. [Public beta scope](../docs/delivery/PUBLIC_BETA_PLAN.md).
 
 For HTML review, reuse the existing server/session. If none is running, `python3 scripts/serve_prototype.py --port 8848` serves `/prototype/workspace-preview.html` from the repository root. Do not reload a live session for board administration.
 
