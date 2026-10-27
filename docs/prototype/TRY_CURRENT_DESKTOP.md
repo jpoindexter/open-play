@@ -1,10 +1,10 @@
-# Current private desktop0.1.77
+# Current private desktop0.1.78
 
-Open `Start Open Play Current Test.command` or `Start Open Play Playback Test 0.1.77.command` only when the current playback-test app is closed. The app is currently open and paused. Default/named launchers target77; the inactive76bundle/starter are retired. No public release.
+Open `Start Open Play Current Test.command` or `Start Open Play Playback Test 0.1.78.command` only when the playback-test app is closed. It is currently open and paused. Default/named launchers target78; prior77bundle/starter retired. No public release.
 
-Exact source57afcc6passed package inspection5/5 and protected native startup/recovery. The same two real tracks returned at13.073/12.426seconds with16library tracks, core controls, decoded waveforms and12AX previews. OriginalBLOW−24dBrestored; tempo/Sync reset normally. No Play/Sync/REC Start. [Current native evidence](DESKTOP_NATIVE_077_2026-10-27.md).
+Sourceae84a50passed package inspection5/5and protected native startup/recovery. Same2real tracks13.073/12.426s,16library tracks/core controls/12AX previews; priorBLOW−24dBrestored, tempo/Sync reset. No main Play/Sync/REC Start. [Current native evidence](DESKTOP_CORE_078_2026-10-27.md).
 
-CORE-FIX-29 and flat-black styling are included. Newer CORE-FIX-30 loop-control repair is source-only and awaits the next normal candidate. Prior53ordinary mixing/listening evidence remains scoped; current held/playing gestures, intermittent pops/stalls and physical headphone/controller acceptance remain open. Keep them in CORE-LIVE-01; do not repeat clean matrices.
+CORE-FIX-30loop controls and CORE-FIX-31pending Instant Double cancellation are included. Paused native loop feedback4→2→4observed; held/playing/delayed Stop/listening/hardware acceptance remains on CORE-LIVE-01. Prior53ordinary mixing evidence retains scope; do not repeat clean matrices. Capture the next actual pop/stall before changing clocks/DSP.
 
 --- Historical guides below; old launch targets and blockers are not current ---
 

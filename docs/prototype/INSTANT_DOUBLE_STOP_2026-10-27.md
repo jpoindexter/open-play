@@ -1,5 +1,7 @@
 # Stop revokes pending Instant Double — 27 October 2026
 
+Delivery update: both source repairs are now included in current private0.1.78/sourceae84a50. Protected native startup/recovery observed; paused loop feedback checked once. Relevant held/playing and delayed-Double Stop/listening criteria remain open. See [current delivery](DESKTOP_CORE_078_2026-10-27.md). Original source-slice evidence below retains its scope.
+
 [CORE-FIX-31](https://trello.com/c/T5svPOz5/179-core-fix-31-stop-must-revoke-a-pending-instant-double), open for future native acceptance.
 
 The existing Instant Double helper tracked newer Double requests and track identity, but a newer incoming Stop did not revoke its ownership. A controlled regression using the actual helper, actual engine rate/start/pause and actual app Play reproduced the stopped incoming deck starting again when older asynchronous FX preparation completed.

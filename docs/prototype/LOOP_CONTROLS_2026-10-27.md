@@ -1,5 +1,7 @@
 # Preserve controls while looping — 27 October 2026
 
+Delivery update: both source repairs are now included in current private0.1.78/sourceae84a50. Protected native startup/recovery observed; paused loop feedback checked once. Relevant held/playing and delayed-Double Stop/listening criteria remain open. See [current delivery](DESKTOP_CORE_078_2026-10-27.md). Original source-slice evidence below retains its scope.
+
 [CORE-FIX-30](https://trello.com/c/43KIYSnq), open for future desktop/native acceptance.
 
 Actual isolated four-deck Compact Loop Half on source71089e3replaced all225observed control/canvas/lane nodes and the other-channel fader, while generated tracks stayed stopped and physical output was muted. The fallback deckAction renderer and shared manual-loop/loop-pad callbacks rebuilt all decks for nonstructural feedback changes.
