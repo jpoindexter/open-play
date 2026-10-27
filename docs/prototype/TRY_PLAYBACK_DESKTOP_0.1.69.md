@@ -1,0 +1,9 @@
+# Private desktop0.1.69 — paused
+
+Sourcebaed140; ASARf70d852db94d468c161e7e1b0e32f4849a55c8dde9c1d83583f0e315924100bc. Actual archive/controlled-host5/5,611prototype files/101selected declared modules. No public release.
+
+CORE-FIX-24 adds4lines to the shared deck-action handler to update headphone Cue state/aria in place. No new runtime module/DSP/routing/layout change. Actual isolated four-deck on/off retains236/236and237/237nodes, unrelated B level focus/value, Cue identity,4Play and library previews; baseline11/236and12/237. One focused handler regression fails before/passes after, including controller/no-element and structural fallback; no broad suite/soak. [Report](HEADPHONE_CUE_CONTROLS_2026-10-27.md).
+
+Protected68recording Start/00:00.0/Download disabled; normal quit/process exit; closed254-file/120545906Bprofile backup hashes equal before/after/copy. Actual69settled startup restores same4real tracks2/3/4/5s,16library tracks/exact BX3 metadata,4Play/tempo/filter/level/12EQ, decoded deck lanes/overviews and5final viewport AX preview images. Master silent/Autoplay off. Native actual A headphone Cue click→selected1with focus observed, Space→selected0; stopped positions and controls/previews retained. AX element IDs are not DOM/pointer identity proof; off-focus retention not established. No Play/Sync/REC. Defaults69; named starter syntax checked only.
+
+[CORE-LIVE-01](https://trello.com/c/yJ8r9kCD) groups later controller/headphones/master/listening. CORE-FIX-24 remains open for held/playing/controller use, and MIX-004 for actual physical routing. Do not repeat the covered paused native case. Previous68cold-preparation fix and all other control/previews remain; first native cold touch/load while mixing and rare Sync pop/stall stay open. No full-core/parity/pop-free/release claim.
