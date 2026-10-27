@@ -6,7 +6,7 @@ What this change does: This report inventories Open Play's application modules a
 
 ## Project policy reaffirmed — 27 October 2026
 
-New handwritten modules target150–250 lines with a300-line cap, split by cohesive responsibility. Generated token exports, catalogs and evidence are distinct from handwritten product modules. No minification or arbitrary splitting to game the count. Current measured examples: track-details.js30, components/mixer.css62, source-waveform.js146. Legacy app.js2137 and rekordbox-preview.css360 remain above cap; whole-app compliance is not claimed. The overview sizing repair reused existing renderer/tokens and added no new handwritten module. MOD-001 retains the global reusable skill/repository prerequisite and incremental legacy-extraction sequence. Existing inventory below remains dated20October, not a fresh all-repo count.
+New handwritten modules target150–250 lines with a300-line cap, split by cohesive responsibility. Generated token exports, catalogs and evidence are distinct from handwritten product modules. No minification or arbitrary splitting to game the count. Current measured examples: track-details.js30, components/mixer.css62, source-waveform.js146; new beatgrid-save.js13. Legacy app.js2137 and rekordbox-preview.css360 remain above cap; whole-app compliance is not claimed. The overview sizing repair reused existing renderer/tokens and added no new handwritten module. MOD-001 retains the global reusable skill/repository prerequisite and incremental legacy-extraction sequence. Existing inventory below remains dated20October, not a fresh all-repo count.
 
 ## Executed inventory
 
