@@ -1,4 +1,27 @@
 import { analyzeBuffer } from "./analysis.js";
+let levelBuffer,levelName,levelHashes;const levelRuns=[];
+document.querySelector('#level-only-run').onclick=async()=>{
+ const output=document.querySelector('#report'),button=document.querySelector('#level-only-run');button.disabled=true;
+ const digest=async bytes=>[...new Uint8Array(await crypto.subtle.digest('SHA-256',bytes))].map(x=>x.toString(16).padStart(2,'0')).join('');
+ try{
+  if(location.port!=='8874')throw Error('Dedicated port8874 required');
+  if(!levelBuffer){
+   output.textContent='Decoding one pinned real track; no playback…';
+   const manifest=await(await fetch('/__trace-inputs/manifest')).json();levelName=manifest.tracks[0].name;
+   levelBuffer=await new OfflineAudioContext(2,1,24000).decodeAudioData(await(await fetch('/__trace-inputs/0')).arrayBuffer());
+   levelHashes=[];for(let c=0;c<levelBuffer.numberOfChannels;c++)levelHashes.push(await digest(levelBuffer.getChannelData(c).buffer));
+  }
+  output.textContent='Running one actual level-only analysis worker; no playback…';
+  const progress=[],sourceSHA256=await digest(await(await fetch('analysis.js')).arrayBuffer()),started=performance.now();
+  const value=await analyzeBuffer(levelBuffer,{analyzeTempo:false,analyzeKey:false,onProgress:x=>progress.push(x)}),elapsedMilliseconds=performance.now()-started;
+  const hashes=[];for(let c=0;c<levelBuffer.numberOfChannels;c++)hashes.push(await digest(levelBuffer.getChannelData(c).buffer));
+  const prior=levelRuns.at(-1),unchanged=JSON.stringify(hashes)===JSON.stringify(levelHashes);
+  const item={sourceSHA256,elapsedMilliseconds,geometry:{sampleRate:levelBuffer.sampleRate,channels:levelBuffer.numberOfChannels,frames:levelBuffer.length},originalPCMUnchanged:unchanged,progress,result:value,sameBufferRetained:!!prior,exactResultMatchesPrevious:prior?JSON.stringify(value)===JSON.stringify(prior.result):null};
+  levelRuns.push(item);if(!unchanged||progress.at(-1)!==1)throw Error('Original PCM changed or progress incomplete');
+  output.textContent=JSON.stringify({track:levelName,scope:'One real-track actual worker, no playback or native/four-deck/listening proof; same decoded AudioBuffer retained across source change',runs:levelRuns},null,2);
+ }catch(error){output.textContent=JSON.stringify({error:error.message,runs:levelRuns},null,2);}
+ finally{button.disabled=false;}
+};
 const run = document.querySelector("#run"),
   report = document.querySelector("#report");
 run.onclick = async () => {

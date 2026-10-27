@@ -282,6 +282,14 @@ export function analyzePCM(channels, sampleRate, options = {}) {
     result.warnings.push(rms < 1e-6 ? "silent_audio" : "audio_too_short");
     return result;
   }
+  if (options.analyzeTempo === false && options.analyzeKey === false) {
+    result.tempo = {value:null, confidence:0, reason:"tempo_analysis_disabled", grid:null};
+    result.keyEstimate = {value:null, confidence:0, reason:"key_analysis_disabled", candidates:[]};
+    if (result.partial) result.warnings.push("tempo_and_key_analyzed_first_" + maxSeconds + "_seconds");
+    result.warnings.push(result.tempo.reason, result.keyEstimate.reason, "constant_grid_requires_downbeat_review");
+    options.onProgress?.(1);
+    return result;
+  }
   // Use highest-energy channel to avoid cancellation with out-of-phase stereo material.
   const factor = Math.max(1, Math.floor(sampleRate / 11025)),
     rate = sampleRate / factor;
