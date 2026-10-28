@@ -840,9 +840,9 @@ export class AudioEngine {
     }
     const live = this.voices.get(d.index)?.liveKeylock;
     if (live) {
-      const previous = d.rate; d.rate = rate;
+      const previous = d.rate, track=d.track; d.rate = rate;
       if (d.processing) return this.start(d); // Supersede prepared settings while old audio continues.
-      let ack; try {ack = await live.update({rate});} catch (error) {if (error.name === 'AbortError') return; if (d.rate === rate) d.rate = previous; throw error;}
+      let ack; try {ack = await live.update({rate});} catch (error) {if (error.name === 'AbortError') return; if (d.track===track && this.voices.get(d.index)?.liveKeylock===live && d.rate === rate) d.rate = previous; throw error;}
       if (this.voices.get(d.index)?.liveKeylock !== live || ack.superseded) return;
       d.position = ack.position; d.anchorPosition = ack.position; d.anchorTime = ack.when;
       if (this.nodes[d.index]) {this.nodes[d.index].channelBpm = currentDeckBPM(d,this,{smartSync:true}) || 120; await this.applyChannelFX(d.index);}
@@ -1262,9 +1262,9 @@ export class AudioEngine {
     }
     const live = this.voices.get(d.index)?.liveKeylock;
     if (live) {
-      const previous = {keylock:d.keylock,keyShift:d.keyShift}; d.keylock = keylock; d.keyShift = semitones;
+      const previous = {keylock:d.keylock,keyShift:d.keyShift}, track=d.track; d.keylock = keylock; d.keyShift = semitones;
       if (d.processing) return this.start(d);
-      let ack; try {ack = await live.update({keylock: !!keylock, semitones});} catch (error) {if (error.name === 'AbortError') return; if (d.keylock === keylock && d.keyShift === semitones) Object.assign(d,previous); throw error;}
+      let ack; try {ack = await live.update({keylock: !!keylock, semitones});} catch (error) {if (error.name === 'AbortError') return; if (d.track===track && this.voices.get(d.index)?.liveKeylock===live && d.keylock === keylock && d.keyShift === semitones) Object.assign(d,previous); throw error;}
       if (this.voices.get(d.index)?.liveKeylock === live && !ack.superseded) {d.keylock = keylock; d.keyShift = semitones;}
       return;
     }

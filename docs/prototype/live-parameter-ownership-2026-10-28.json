@@ -1,0 +1,63 @@
+{
+  "date": "2026-10-28",
+  "baselineCommit": "6423047e951afbe7405041d06c64e3490087b070",
+  "repairedEngineSHA256": "74cd6c04bd36f32e5346e18ac2b750c40f036032636a10cd7fbaa5b01932abba",
+  "reproduction": "Actual four-deck Compact controls and live keylock adapter; generated source; held update deliberately rejected after normal GUI replacement and new key Up. Error is controlled, not naturally reproduced worklet failure.",
+  "baseline": {
+    "controlledFailure": true,
+    "physicalMuted": true,
+    "before": {
+      "track": "demo-2",
+      "keylock": true,
+      "keyShift": 1
+    },
+    "after": {
+      "track": "demo-2",
+      "keylock": true,
+      "keyShift": 0
+    },
+    "playing": false,
+    "processing": false,
+    "playQueued": false,
+    "controls": 352,
+    "controlsRetained": 352,
+    "playControls": 4,
+    "previews": 1,
+    "notice": "Controlled old live pitch failure"
+  },
+  "repaired": {
+    "controlledFailure": true,
+    "physicalMuted": true,
+    "before": {
+      "track": "demo-2",
+      "keylock": true,
+      "keyShift": 1
+    },
+    "after": {
+      "track": "demo-2",
+      "keylock": true,
+      "keyShift": 1
+    },
+    "playing": false,
+    "processing": false,
+    "playQueued": false,
+    "controls": 354,
+    "controlsRetained": 354,
+    "playControls": 4,
+    "previews": 3,
+    "notice": "Controlled old live pitch failure"
+  },
+  "focusedChecks": {
+    "before": {
+      "pass": 2,
+      "fail": 2
+    },
+    "after": {
+      "pass": 4,
+      "fail": 0
+    },
+    "file": "prototype/live-parameter-ownership.test.mjs"
+  },
+  "scope": "Pitch replacement UI path executed. Rate replacement and current-owner rejection rollback executed in actual engine with controlled adapter. No DSP, audible pop, native moving playback, long-session or hardware proof.",
+  "cleanup": "Owned frame/session/storage cleared, tab closed, server stopped; temporary source removed after exact retained-copy comparison. Main native85 left paused; no original real audio used."
+}
