@@ -6,6 +6,8 @@ CORE-FIX-37 repairs a reproduced ordinary pitch-loop failure: a1.95s keyed loop 
 
 Launchers target84; only84app remains after retiring inactive83. Packaging/owned fixture sources/media/tab/server are cleaned up. Original audio, sessions, recordings, all controls/layouts and library previews remain. [Older lossless evidence archive index](docs/delivery/EVIDENCE_ARCHIVE_CLEANUP_2026-10-28.md).
 
+Focused four-deck follow-through: one muted session on four different real songs executes keyed-loop Play, half/double, Loop Off to live pitch and Sync afterward. Other three voices/rates,241tracked controls/rows/previews and fader focus retained; full6s first-master-channel PCM is finite/nonzero. Maximum observed tick8.6ms/frame interval34.2ms, no Long Tasks in that short window. Not audible-pop, phase, stereo, native or long-session acceptance. No product edit/new build/broad rerun. [Executed scope and raw-capture limits](docs/prototype/FOUR_DECK_LOOP_TRANSITIONS_2026-10-28.md).
+
 Trello185cards/15complete; CORE-FIX-37 and broader key-lock/native/listening criteria remain OPEN, prior184card dispositions unchanged. Intermittent Sync pops, broader four-deck stalls, very long required ranges and full-track reverse rendering remain open. [CORE-LIVE-01](https://trello.com/c/yJ8r9kCD) holds deferred owner/controller/headphone checks. Prior53manual/jog/EQ/Cue/stop evidence retains scope. Continue reproduced core blockers with focused checks; no broad replay or full-core/public-beta/parity claim.
 
 ## Historical status — core four-deck reliability, 25 October 2026

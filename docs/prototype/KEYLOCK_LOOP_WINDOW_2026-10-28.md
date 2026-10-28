@@ -15,3 +15,7 @@ One 35-line actual-engine/renderer test has a failing whole-song-memory baseline
 The real browser pass precedes the final out-of-window guard. Ordinary Play does not enter it; the new guard's ownership path is covered by its executed composed regression. Listening, exact loop-seam quality, native playback, physical MIDI/headphone routing and Sync-pop resolution remain unverified. CORE-LIVE-01 retains deferred owner acceptance.
 
 Owned Stop/close/clear returned “Stopped; frame closed; owned origin cleared.” The diagnostic tab and staged source/media were removed; input hash and mtime remain unchanged. Normal desktop session and original music were outside the fixture. Private raw evidence: local-evidence/keylock-loop-start-2026-10-28. [Compact receipt](keylock-loop-window-2026-10-28.json).
+
+## Four-deck transition follow-through
+
+A later single muted browser pass on four different real songs executes Loop half/double, Loop Off to live keylock and Sync afterward, retaining the other voices/rates, tracked controls/previews and focus. Complete six-second first-master-channel PCM is finite/nonzero; owner listening and native acceptance remain open. No product edit, new app build or suite replay. [Executed report and limits](FOUR_DECK_LOOP_TRANSITIONS_2026-10-28.md).
