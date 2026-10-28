@@ -1,16 +1,16 @@
-# Current private desktop0.1.102
+# Current installed102; staged103 awaiting unlock
 
-Use `Start Open Play Current Test.command` or `Start Open Play Playback Test.command`. Both target inspected0.1.102/source4adc34d, now open with Constant Change/DJ W!LD paused50.716/62.715s. Avoid a second instance/profile.
+Use `Start Open Play Current Test.command` or `Start Open Play Playback Test.command` for installed102. Do not launch the staged103 over that running profile. Source743353b/private103 is packaged, inspected and privately sealed, but not opened because the Mac is locked. Existing defaults/session remain102.
 
-New Open Play app icon and matching macOS menu-bar template are packaged. The menu provides Show Open Play, Settings…, Audio Devices…, Help and normal Quit, reusing existing screens. Source/helper and controlled packaged-host checks passed; actual status-popup click/panel opening remains pending because native automation could not reach it. Existing close behavior remains. [Icon assets/prompts](../../desktop/assets/README.md).
+103 repairs three controlled failures: committed pitch survives overlapping rejected key changes; global silence cancels waiting tempo intentions; recovery preserves the latest durable record. [Results/limits](core-batch-103-2026-10-28.json) · [Staged delivery](desktop-0.1.103-staged.json). Controlled source checks do not establish native failure handling or music quality.
 
-Two core repairs: overlapping rejected Reverse restores the committed direction of the retained voice; backup metadata for missing audio survives export/reload and later import with cues/loops. Controlled engine/source checks plus actual isolated browser generated-WAV recovery executed. [Evidence and limits](core-batch-102-2026-10-28.json) · [Native delivery](desktop-0.1.102-core-native.json).
+Both builds include the generated Open Play app icon and macOS menu-bar shortcut module: Show Open Play, Settings…, Audio Devices…, Help and normal Quit. Exact package/controlled-host checks ran; actual native menu/panel clicks and owner visual review remain pending. [Assets/prompts](../../desktop/assets/README.md).
 
-Protected101empty Recording/normal quit/process absence and matching256-file120421175-byte closed-profile backup preceded102launch.16tracks/12materialized previews/core controls and positions retained; filters Off, headphone MIX0%/LEVEL10%, master−10.04344dB/silent UI. Tempo/Sync reset intentionally. Only102bundle remains after inactive101verification/retirement. No main Play/Sync/Cue/REC Start during delivery.
+102 last observed paused Constant Change/DJ W!LD50.716/62.715s,16tracks/12materialized previews,2Play/tempo/6EQ; filtersOff,headphoneMIX0%/LEVEL10%,master−10.04344dB/silent UI. No current main-session playback/recording action. Keep only current102 and pending103 until protected promotion allows inactive102 cleanup.
 
-**Optional filters:** Settings → Mixer → Channel Filters. Off hides and bypasses the knobs while retaining amounts; On restores them. Controls/layouts and library waveform previews remain.
+**Optional filters:** Settings → Mixer → Channel Filters. Off hides and bypasses knobs while retaining stored amounts; On restores them. All controls, layouts and library previews remain.
 
-Listening/controller work is deferred until tomorrow. Reuse prior accepted ordinary manual mix/EQ/Cue evidence; check relevant changed Sync/load/Reverse and headphone CUE/trim/MIX/LEVEL actions in one session. Generic Sync pops/stalls, native musical quality and physical routing remain open. [Help & manual](https://open-play-help.vercel.app) · [Known issues](../beta/KNOWN_ISSUES.md) · [Beta distribution](../beta/DISTRIBUTION_READINESS.md). Private candidate; public signing/notarization/installation and hardware acceptance remain OPEN.
+After unlock: verify stopped/empty Recording, quit normally, back up closed profile, open exact103 once, verify restored session before updating launchers/retiring102. Listening/controller work remains deferred until tomorrow; reuse accepted ordinary mix/EQ/Cue evidence. Generic Sync pops/stalls, changed-path native listening, headphone routing and public signing/distribution remain OPEN. [Help](https://open-play-help.vercel.app) · [Known issues](../beta/KNOWN_ISSUES.md).
 
 --- Historical guides below; old launch targets and blockers are not current ---
 
