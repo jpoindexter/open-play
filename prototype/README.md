@@ -2,7 +2,7 @@
 
 ## Current core status — 28 October 2026
 
-**Staged 0.1.93, not launched/default:** source1d862f6 contains CORE-FIX-44 queued-master ownership. Archive/source/controlled-host5/5 passed; actual source/browser failure-path and3targeted regressions retain scope. Current92 and owner session/launchers untouched; only92+93bundles retained. Native startup/failure/playing/listening acceptance remains OPEN. [Staged delivery](../docs/prototype/DESKTOP_CORE_093_2026-10-28.md).
+**Staged 0.1.94, not launched/default:** sourceaa07a04 contains both CORE-FIX-44shared and outer same-fader queue guards. Actual paused/muted GUI endpoints2→1/final127.7→124.0with C MASTER and423controls/4Play/1preview retained;3focused regressions and archive/source/controlled-host5/5 pass. Never-launched93was hash/process verified and retired; only current92+staged94retained. Session lock observed; native92/default/session untouched. Native94startup/failure/playing/listening remains OPEN. [Staged delivery](../docs/prototype/DESKTOP_CORE_094_2026-10-28.md).
 
 **Current 0.1.92 is running/default**, source e775aae: readable energy envelopes for deck strips and playlist thumbnails, generated thumbnail cachev2; large scrolling detail pixels match baseline. Exact archive/host5/5 and protected native paused startup preserve13.229/12.426seconds and16tracks. Later owner track/position changes are left intact;16materialized previews observed. Prior91same-fader CORE-FIX-43companion included. [Delivery](../docs/prototype/DESKTOP_CORE_092_2026-10-28.md).
 

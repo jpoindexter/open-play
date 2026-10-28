@@ -20,6 +20,6 @@ No DSP/clock/fade/layout/dependency change. Physical output stayed muted; own co
 
 ## Delivery and limits
 
-Private93 lacks this companion and must not be promoted as the complete44candidate. Replace that never-launched staged build with a single94candidate after immutable packaging; keep current92/default/session intact. Relevant native failure/playing/listening and broad pop/stall/hardware gates remain open. This is not established audible-pop causation. Prior53manual/jog/EQ/Cue/stop acceptance retains scope. Goal remains active.
+Private93 lacked this companion and was hash/version/process verified, then retired without launch. Immutable private94/sourceaa07a04 now contains both layers; archive/source/controlled-host5/5, native launch/promotion pending. Current92/default/session intact. Relevant native failure/playing/listening and broad pop/stall/hardware gates remain open. This is not established audible-pop causation. Prior53manual/jog/EQ/Cue/stop acceptance retains scope. Goal remains active. [Staged delivery](DESKTOP_CORE_094_2026-10-28.md).
 
 [Compact observations](TEMPO_SLIDER_MASTER_QUEUE_2026-10-28.json). Private original reproduction and captures: `local-evidence/tempo-slider-master-2026-10-28/`.
