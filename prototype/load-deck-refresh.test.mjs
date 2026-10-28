@@ -15,7 +15,7 @@ function fixture(){
  const scope={cancelSimpleSync(){},isSimpleSyncPending:()=>false,state,document,$:selector=>selector==='#decks'?root:selector==='.waveform-scrub-lanes'?lanes:{setAttribute(){}},colors:['a','b','c','d'],
   deckQuantize:()=>true,smartSync:{reset(){},reconcile(){calls.reconcile++;}},syncMaster:{master:()=>null},parseMusicalKey:()=>null,keyLabel:()=>'',shiftedKey:()=>'',esc:String,time:String,
   autoGainMode:()=>'',trackGainDB:()=>0,loopModeMarkup:()=>'',padMarkup:()=>'',shownDeckBPM:()=>120,engine:{position:()=>0},deckScratchUIPolicy:{keyboard:''},stemSlipControls:{markup:()=>'',restoreFocus(){calls.restore++;}},
-  tempoSliders:{view:()=>({range:8,position:0,label:'Tempo',valueText:'0%'})},detailWaveSpan:4,changeDetailWaveZoom(){},drawWaves(){calls.draw++;},renderMixer(){calls.mixer++;},refreshTransportControls(){calls.focus++;}};
+  tempoSliders:{cancel(){},view:()=>({range:8,position:0,label:'Tempo',valueText:'0%'})},detailWaveSpan:4,changeDetailWaveZoom(){},drawWaves(){calls.draw++;},renderMixer(){calls.mixer++;},refreshTransportControls(){calls.focus++;}};
  vm.createContext(scope);vm.runInContext(rendering,scope);scope.renderDecks();return{scope,state,nodes,calls,lanes,root};
 }
 test('load deck refresh preserves siblings, mixer and shared waveform while replacing target controls',()=>{

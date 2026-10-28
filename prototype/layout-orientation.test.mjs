@@ -40,7 +40,7 @@ function fixture(count=4,layout='Horizontal'){
  const scope={cancelSimpleSync(){},isSimpleSyncPending:()=>false,state,document,$:s=>s==='#quantize'?{setAttribute(){}}:query(s),colors:['a','b','c','d'],deckQuantize:()=>true,
   smartSync:{reset(){},reconcile(){}},syncMaster:{master:()=>null},parseMusicalKey:()=>null,keyLabel:()=>'',shiftedKey:()=>'',esc:String,time:String,
   autoGainMode:()=>'',trackGainDB:()=>0,loopModeMarkup:()=>'',padMarkup:()=>'',shownDeckBPM:()=>120,engine:{position:()=>0},
-  deckScratchUIPolicy:{keyboard:''},stemSlipControls:{markup:()=>'',restoreFocus(){}},tempoSliders:{view:()=>({range:8,position:0,label:'Tempo',valueText:'0%'})},
+  deckScratchUIPolicy:{keyboard:''},stemSlipControls:{markup:()=>'',restoreFocus(){}},tempoSliders:{cancel(){},view:()=>({range:8,position:0,label:'Tempo',valueText:'0%'})},
   detailWaveSpan:4,changeDetailWaveZoom(){},drawWaves(track=null){if(!track||state.decks.some(d=>d.track===track))calls.overview++;},drawDetailWave(){calls.detail++;},refreshTransportControls(){},
   renderMixer(){calls.mixer++;footer={kind:'new-footer'};mixerControls={kind:'new-mixer'};},requestAnimationFrame(fn){frames.push(fn);return frames.length;}};
  vm.createContext(scope);vm.runInContext(rendering,scope);scope.renderDecks();vm.runInContext(orientation,scope);

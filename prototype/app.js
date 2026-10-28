@@ -451,6 +451,7 @@ function renderDecks(index = null) {
   const target = Number.isInteger(index) && shape === renderedDeckShape
     ? document.querySelector(`.deck[data-focus="${index}"]`) : null;
   if (syncMode !== renderedSyncMode) {
+    state.decks.forEach(tempoSliders.cancel);
     for(const d of state.decks)cancelSimpleSync(engine,d);
     smartSync.reset();
     renderedSyncMode = syncMode;
@@ -975,6 +976,7 @@ async function deckAction(action, index, el, event = {}) {
     const grid=createBeatgrid(d.track), beats=d.loopLength*(action==="jumpBack"?-1:1);
     await engine.seek(d,grid?grid.timeAt(grid.beatAt(pos)+beats):pos+beat*beats);
   }
+  if (["sync","syncOff","syncMaster"].includes(action))state.decks.forEach(tempoSliders.cancel);
   if (action === "syncOff" || (action === "sync" && event.shiftKey)) {
     for(const other of state.decks)cancelSimpleSync(engine,other,d);
     if (state.settings["Sync Mode"] === "Smart Sync") {

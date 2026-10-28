@@ -19,5 +19,6 @@ test('a failed tempo gesture must not discard newer movement on the same fader',
   assert.equal(calls.length,2);
   assert.ok(Math.abs(deck.rate-(sync?1.23:1.03))<1e-9);
   assert.ok(Math.abs(slider.view(deck).position-3)<1e-9);
+  slider.cancel(deck);assert.ok(Math.abs(slider.view(deck).position-3)<1e-9,'idle fader coordinates remain intact');
  }
 });

@@ -52,5 +52,10 @@ export function createTempoSlider({setRate}){
   });
   return promise;
  }
- return{view,set:(deck,position)=>request(deck,position),reset:deck=>request(deck,0,{reset:true})};
+ function cancel(deck){
+  const r=records.get(deck);if(!r?.pending)return;
+  const wanted=r.wanted;r.wanted=null;records.delete(deck);
+  wanted?.waiters.forEach(({reject})=>reject(new DOMException('Tempo gesture superseded by a newer Sync choice.','AbortError')));
+ }
+ return{view,cancel,set:(deck,position)=>request(deck,position),reset:deck=>request(deck,0,{reset:true})};
 }

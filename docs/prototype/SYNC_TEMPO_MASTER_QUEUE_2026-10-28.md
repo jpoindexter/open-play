@@ -1,5 +1,7 @@
 # Queued tempo yields to a newer MASTER or Sync choice
 
+Later companion: the outer GUI same-fader queue can submit older input after the new MASTER selection, bypassing this shared-queue guard. [Reproduced case and repair](TEMPO_SLIDER_MASTER_QUEUE_2026-10-28.md). Private93contains only the original shared guard; it is superseded before promotion.
+
 28 October 2026. CORE-FIX-44: https://trello.com/c/ACAfgdKX . Source/browser repair only; current native0.1.92 does not contain this change. Its owner session was left untouched.
 
 ## Reproduced failure

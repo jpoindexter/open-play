@@ -12,7 +12,7 @@ const git=args=>execFileSync('git',args,{cwd:root,maxBuffer:150*1024*1024});
 const sha=bytes=>createHash('sha256').update(bytes).digest('hex');
 const sourceCommit=git(['rev-parse','HEAD']).toString().trim();
 const get=file=>git(['show',`${sourceCommit}:${file}`]);
-const version='0.1.93',name='Open Play Playback Test',port=18775,bundle='org.openplay.dj.playback.localtest';
+const version='0.1.94',name='Open Play Playback Test',port=18775,bundle='org.openplay.dj.playback.localtest';
 const profile='Open Play Playback Test',partition='persist:open-play-playback-test';
 await assertBuildRetention(path.join(root,'local-evidence/desktop-builds'),name);
 const stage=await mkdtemp(path.join(tmpdir(),'open-play-playback-'));
@@ -56,6 +56,8 @@ await put('assets/docs/prototype/auto-gain-fixture-reference.json',JSON.stringif
 await put('assets/docs/prototype/TRY_CURRENT_DESKTOP.md',`# Core desktop test ${version}
 
 Current source includes CORE-FIX-44: queued tempo inputs yield to a newer selected MASTER, Sync mode or Smart Sync tempo owner. Queue-owned changes preserve valid later input; stale input never reaches transport. Actual paused/muted four-deck failure-path and three focused regression results are recorded. Native failure/playing/listening acceptance remains separate. The blue Oxide study remains a separate preview and is not applied to this workspace.
+
+The outer GUI same-fader queue also discards its older waiting movement before an explicit Sync, OFF, MASTER or mode choice. Idle fader coordinates and valid fresh movement remain. This closes the source/browser companion that was still present in the never-launched93candidate; native failed-request/playing/listening remains separate.
 
 Current source also carries CORE-FIX-43 through the per-deck GUI tempo controller: a newer same-fader gesture survives rejection of the older in-flight gesture, retaining absolute/relative coordinates and coalescing. Actual paused/muted four-deck source controls reach127.7instead of reverting124.0; native failure/playing/listening remains separate.
 
