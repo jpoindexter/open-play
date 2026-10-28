@@ -14,6 +14,7 @@ import { describeAudioVideoLinks } from "./video-audio-fx-state.js";
 import { effectiveFXBPM, normalizeFXTempoSettings } from "./fx-tempo.js";
 import {createAudioMonitor,monitorSettings as normalizeMonitorSettings} from './audio-monitor.js';
 import {createWarpLoopTransport} from './warp-loop.js';
+import {setDeckReverse} from './deck-reverse.js';
 import {createSyncTempoHandoff} from './sync-tempo-handoff.js';
 import {startSyncedSample,sampleVoiceClock,disposeSampleVoice} from './sample-sync-transport.js';
 import {createReverseCensorPlan} from './reverse-censor-plan.js';
@@ -233,14 +234,15 @@ export class AudioEngine {
     if (pending && pending.track === d.track && !pending.controller.signal.aborted)
       return this.stemSlipClockPosition(pending.clock, d.track.duration, this.ctx?.currentTime || 0);
     if (!d.playing || !this.ctx) return d.position;
+    const reverse=gridVoice?.reverse??d.reverse;
     let p =
       d.anchorPosition +
       Math.max(0, this.ctx.currentTime - d.anchorTime) *
         this.voiceRateAt(d,gridVoice,this.ctx.currentTime) *
-        (d.reverse ? -1 : 1);
+        (reverse ? -1 : 1);
     if (d.loop && d.loopOut > d.loopIn) {
       const n = d.loopOut - d.loopIn;
-      if (p >= d.loopOut || (d.reverse && p < d.loopIn))
+      if (p >= d.loopOut || (reverse && p < d.loopIn))
         p = d.loopIn + ((((p - d.loopIn) % n) + n) % n);
     }
     return Math.max(0, Math.min(d.track?.duration || 48, p));
@@ -321,7 +323,7 @@ export class AudioEngine {
       return value.phase === 'idle' && value.playing ? advanceDeckScratchPosition(value.audiblePosition,
         Math.max(0, at - value.audioTime) * value.rate * (value.reverse ? -1 : 1), value.duration, value.loop) : value.audiblePosition;
     };
-    const start = d.anchorPosition, time = d.anchorTime, rate = this.voiceRateAt(d,voice,this.ctx?.currentTime||0) * (d.reverse ? -1 : 1), playing = d.playing,
+    const start = d.anchorPosition, time = d.anchorTime, rate = this.voiceRateAt(d,voice,this.ctx?.currentTime||0) * ((voice?.reverse??d.reverse) ? -1 : 1), playing = d.playing,
       position = d.position, duration = d.track.duration, loop = d.loop ? {start:d.loopIn,end:d.loopOut} : null;
     return at => playing ? advanceDeckScratchPosition(start, Math.max(0,at-time)*rate, duration,loop) : position;
   }
@@ -557,7 +559,7 @@ export class AudioEngine {
         return source;
       });
       if(handoff||positionAt){
-        const voice={sources,timelineScale:scale,renderWindow,gridTimeline,stemGains:[],handoffBefore:old?{until:when,owner:old,clock:priorClock||this.voiceClock(d,old),rate:at=>this.voiceRateAt(d,old,at)}:null};let committed=false;
+        const voice={sources,reverse:!!d.reverse,timelineScale:scale,renderWindow,gridTimeline,stemGains:[],handoffBefore:old?{until:when,owner:old,clock:priorClock||this.voiceClock(d,old),rate:at=>this.voiceRateAt(d,old,at)}:null};let committed=false;
         try{
           // Never replace audible audio with a source whose aligned start is already late.
           const requireLead=()=>{if(this.ctx.currentTime>=when-.005)throw Error('Sync start missed its lead; previous audio retained. Try Sync again.');};
@@ -574,6 +576,7 @@ export class AudioEngine {
       const voice = sources[0];
       voice.sources = sources;
       voice.sourceGates=sources.map(()=>this.ctx.createGain());
+      voice.reverse = !!d.reverse;
       voice.timelineScale = scale;
       voice.renderWindow = renderWindow;
       voice.gridTimeline = gridTimeline;
@@ -1502,20 +1505,7 @@ export class AudioEngine {
     if (voice) voice.stemInitialized = true;
   }
   async setReverse(d, reverse) {
-    this.onValidateTransport?.(d,{reverse});
-    if(reverse!==d.reverse)this.onManualPosition?.(d);
-    if (d.stemSlip && d.stemSlip !== "off") {
-      d.reverse = reverse;
-      if (reverse) {
-        await this.beginStemSlipGesture(d, "transport:reverse");
-        await this.voices.get(d.index)?.stemSlipTransport.command("reverse", {owner: "transport:reverse", reverse});
-      } else await this.endStemSlipGesture(d, "transport:reverse");
-      return;
-    }
-    const playing = d.playing || d.processing;
-    this.pause(d, { preserveStemExit: true });
-    d.reverse = reverse;
-    if (playing) await this.start(d);
+    return setDeckReverse(this,d,reverse);
   }
   // Whole-deck scratch uses original PCM, independently of the pitch renderer.
   // Ownership is invalidated synchronously before asynchronous preparation can commit.

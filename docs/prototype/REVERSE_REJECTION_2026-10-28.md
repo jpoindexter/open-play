@@ -1,0 +1,17 @@
+# Reverse preparation rejection — 28 October 2026
+
+An advancing real song at KeyLockON/KeyShift-12 stopped after Reverse requested a whole-track pitch render that exceeded the existing512MiB PCM limit. The existing voice disappeared, Reverse remained enabled, and the error was shown. A separate playing generated deck kept its voice/rate. The root safety defect is setReverse pausing the old transport before a fallible replacement is prepared; the full-track reverse-render limit is separate and remains unresolved.
+
+The complete Reverse transition is now in the focused24-line deck-reverse.js module, reached through the unchanged engine.setReverse API. Ordinary playing transitions use the existing two-barrier prepare/arm handoff. Rejection restores direction only while this request still owns the same track/voice/generation; early preflight failure is covered before handoff registration. Stop and newer replacement remain authoritative. StemSlip, paused/pending start, active scratch/censor and pending scratch retain their prior branches. The builder declares the new module; no dependency, DSP, layout or format change.
+
+Ordinary voices now retain their own reverse flag. The source clock uses that flag while a new direction is preparing, then the existing future handoff bridge switches clocks. Changing the requested deck flag no longer makes a still-forward voice's displayed/source clock run backward. Loops keep existing source-time bounds and render-window mapping; no Sync phase or fade rewrite.
+
+## Executed scope
+
+The same real-song advancing path now keeps the original playing voice, restores Reverse=false/aria-pressed=false, and advances source position0.155333→0.187333s while showing the same honest renderer error. The other voice/rate remains unchanged. Four Play controls and three currently materialized library previews remain. This is interface→actual engine→actual renderer rejection; no successful long-file reverse or audible continuity claim.
+
+Five actual-engine composed checks first report4fail/1pass, then5pass. They cover render/preflight rejection, old forward clock during held preparation, future successful reverse handoff, Stop, newer replacement and preserved scratch/censor dispatch. The early preflight direction rollback has a separate RED/GREEN witness. Cached renderer and graph/reversal endpoints are controlled; they do not establish DSP/PCM quality. One affected newer-Reverse/older-Sync check and three existing reverse-start/end cases also pass: nine targeted named checks, no broad suite or soak.
+
+The first real attempt rejected before the newly armed source clock advanced and is retained separately; it does not prove interruption of an advancing source. The graded baseline/repaired runs explicitly wait beyond0.15source seconds. Physical output was muted before import and remained muted; all owned decks stop with no processing/queued start at cleanup. The original input hash and mtime match; temporary sources/staged media/tab/server are removed. Normal desktop session, original music and recordings are outside the diagnostic.
+
+The proposed defect card stays open for exact desktop delivery and relevant native/owner listening acceptance. Broader DEK-007/DEK-010, full-track reverse memory, intermittent Sync pops/stalls and physical routing remain open. Prior0.1.53manual/jog/EQ/Cue/clean-stop evidence retains scope. [Compact receipt](reverse-rejection-2026-10-28.json). Raw fixtures/results/screenshots and focused outputs stay ignored in local-evidence/reverse-rejection-2026-10-28.
