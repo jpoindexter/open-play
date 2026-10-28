@@ -2,7 +2,7 @@
 
 ## Current disposition — 28 October 2026
 
-**OPEN for the intermittent owner-reported Sync pop and broader four-deck stalls.** Native86/source9ef47e3 is inspected5/5 and observed paused after protected85quit/backup/recovery. CORE-FIX-39 guards stale pitch/rate error rollback after replacement; actual controlled-error GUI and four focused checks executed. It is not established Sync-pop causation or native playing/listening acceptance. [Delivery](DESKTOP_CORE_086_2026-10-28.md), [Source/UI evidence](LIVE_PARAMETER_OWNERSHIP_2026-10-28.md).
+**OPEN for the intermittent owner-reported Sync pop and broader four-deck stalls.** Current86/source9ef47e3 remains running; staged87/sourcece1560a is inspected5/5 but unlaunched because the Mac now explicitly reports locked. No native input/quit/profile change was attempted. CORE-FIX-40 removes3360unchanged Sync attribute writes/one idle second in the actual four-deck workspace; repaired0writes, controls/previews retained. This is not established historical-stall or audible-pop causation. [Staging](DESKTOP_087_STAGED_2026-10-28.md), [Source/UI evidence](IDLE_SYNC_PRESENTATION_2026-10-28.md).
 
 The latest reproduced defect is Reverse preparation rejection stopping an advancing real-song voice. CORE-FIX-38's source/browser repair now retains that voice, actual clock and direction; the existing pitch-memory error is honest. This is not established Sync-pop causation. It does not change the Sync clock/fade or resolve full-track reverse pitch memory. [Executed scope](REVERSE_REJECTION_2026-10-28.md).
 

@@ -1,10 +1,10 @@
-# Current private desktop 0.1.86
+# Current86;87staged and unlaunched
 
-Use `Start Open Play Current Test.command` or `Start Open Play Playback Test.command`. Both target inspected0.1.86/source9ef47e3, now open with the saved two-track session paused. Do not launch a second profile instance.
+Current/default/named playback starters target **0.1.86**, which remains running. Private **0.1.87/sourcece1560a** is packaged/inspected5/5 with CORE-FIX-40's28-line Sync presentation module. The Mac now explicitly reports screen-locked; no native87startup or main Recording/quit/backup was attempted. [Protected re-entry](DESKTOP_087_STAGED_2026-10-28.md).
 
-Protected delivery: empty85Recording → normal quit/process absence →247-file/120233144-byte matching closed-profile backup → exact86native startup. Constant Change/Prism13.073/12.426s,16library tracks, core controls and visible waveform previews retained; BLOW−24dB restored. Old85bundle retired; only86remains. [Receipt and limits](DESKTOP_CORE_086_2026-10-28.md).
+Do not launch87over86's running profile. After manual unlock, preserve Recording, quit normally, verify process absence, hash-back up the closed profile, then verify exact87native startup before changing launchers/retiring86. Only current86and staged87are retained; no temporary package stage/tar or owned diagnostic source/server remains.
 
-86includes CORE-FIX-39's stale live pitch/rate failure guard. Actual controlled-error GUI now retains replacement settings; four focused engine checks pass. This is not native failure/listening or Sync-pop proof. Relevant Reverse/keyed-loop listening, intermittent Sync pops, broader four-deck stalls and hardware remain OPEN. Prior ordinary mixing acceptance retains scope; no clean matrices repeated.
+Actual four-deck Compact source/UI capture:3360unchanged Sync attribute writes/one idle second →0; controls/previews retained, actual Simple Sync/OFF/MASTER changes still update. Two focused presentation checks pass; no broad suite/soak. This is not native performance/listening or Sync-pop resolution. Prior ordinary mixing acceptance retains scope. [Executed evidence](IDLE_SYNC_PRESENTATION_2026-10-28.md).
 
 [Evidence archive restore index](../delivery/EVIDENCE_ARCHIVE_CLEANUP_2026-10-28.md). Music, recordings, sessions, controls, layouts and previews preserved.
 

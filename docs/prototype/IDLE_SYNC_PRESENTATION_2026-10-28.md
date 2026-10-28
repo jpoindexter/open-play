@@ -11,3 +11,7 @@ Actual GUI Simple Sync on B changes its selected state and enables OFF; OFF clea
 This proves removal of this specific idle mutation churn and preservation of these state changes. It does not prove lower total CPU, zero moving-waveform stalls, native frame timing, musical alignment, absence of pops, long-session stability or physical-controller behavior. Those parent criteria remain open. Owned frame/storage/tab/server are stopped/cleared; temporary fixture sources are retained privately and removed from the product tree.
 
 [Structured evidence](idle-sync-presentation-2026-10-28.json). Raw results/screenshots, fixture copies and the two-check log remain private under `local-evidence/idle-sync-presentation-2026-10-28/`.
+
+## Staged native package
+
+Private87/sourcece1560a passes exact archive/controlled-host5/5 and declares the helper. Native startup remains pending: current86is preserved because a fresh console-session observation explicitly reports locked. No native input/quit/profile change was attempted. [Staging and re-entry](DESKTOP_087_STAGED_2026-10-28.md).
