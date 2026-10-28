@@ -31,18 +31,26 @@ export function createTempoSlider({setRate}){
   // Pending gestures accumulate against the latest requested tempo, not stale
   // asynchronous audio state. External changes rebase read() when idle.
   const target=clamp(reset?1:r.relative?r.target+(next-r.position)/100:1+next/100,.25,4);
-  r.position=reset?0:next;r.target=target;r.wanted=target;
-  if(r.pending)return r.pending;
+  r.position=reset?0:next;r.target=target;
+  const waiters=r.wanted?.waiters||[];
+  const promise=new Promise((resolve,reject)=>waiters.push({resolve,reject}));
+  r.wanted={rate:target,waiters};
+  if(r.pending)return promise;
   r.pending=Promise.resolve().then(async()=>{
-   while(r.wanted!==null){const rate=r.wanted;r.wanted=null;
-    if(records.get(deck)!==r||deck.track!==r.track)return;
-    await setRate(deck,rate);
-   }
-  }).catch(error=>{
-   if(records.get(deck)===r&&deck.track===r.track&&!r.relative)r.position=percent(deck);
-   throw error;
-  }).finally(()=>{r.pending=null;r.wanted=null;if(records.get(deck)===r)read(deck);});
-  return r.pending;
+   try{
+    while(r.wanted){
+     const wanted=r.wanted;r.wanted=null;
+     try{
+      if(records.get(deck)===r&&deck.track===r.track)await setRate(deck,wanted.rate);
+      wanted.waiters.forEach(({resolve})=>resolve());
+     }catch(error){
+      if(records.get(deck)===r&&deck.track===r.track&&!r.relative&&!r.wanted)r.position=percent(deck);
+      wanted.waiters.forEach(({reject})=>reject(error));
+     }
+    }
+   }finally{r.pending=null;if(records.get(deck)===r)read(deck);}
+  });
+  return promise;
  }
  return{view,set:(deck,position)=>request(deck,position),reset:deck=>request(deck,0,{reset:true})};
 }
