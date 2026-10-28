@@ -2,9 +2,11 @@
 
 ## Current core status — 28 October 2026
 
+**Current acceptance/re-entry:** closed92profile256files/120945306bytes hash+mtime verified before/after/copy; no native input or restore. Screen locked;94native startup/playing/listening and physical gates remain open. Reuse53manual/EQ/Cue/stop acceptance. [Full requirement audit and ordered next session](../docs/prototype/CORE_DJ_REENTRY_2026-10-28.md).
+
 **Staged 0.1.94, not launched/default:** sourceaa07a04 contains both CORE-FIX-44shared and outer same-fader queue guards. Actual paused/muted GUI endpoints2→1/final127.7→124.0with C MASTER and423controls/4Play/1preview retained;3focused regressions and archive/source/controlled-host5/5 pass. Never-launched93was hash/process verified and retired; only current92+staged94retained. Session lock observed; native92/default/session untouched. Native94startup/failure/playing/listening remains OPEN. [Staged delivery](../docs/prototype/DESKTOP_CORE_094_2026-10-28.md).
 
-**Current 0.1.92 is running/default**, source e775aae: readable energy envelopes for deck strips and playlist thumbnails, generated thumbnail cachev2; large scrolling detail pixels match baseline. Exact archive/host5/5 and protected native paused startup preserve13.229/12.426seconds and16tracks. Later owner track/position changes are left intact;16materialized previews observed. Prior91same-fader CORE-FIX-43companion included. [Delivery](../docs/prototype/DESKTOP_CORE_092_2026-10-28.md).
+**Default remains0.1.92; desktop process/listener absent at this audit.** Historical92/sourcee775aae: readable energy envelopes for deck strips and playlist thumbnails, generated thumbnail cachev2; large scrolling detail pixels match baseline. Exact archive/host5/5 and protected native paused startup preserve13.229/12.426seconds and16tracks. Later owner track/position changes are left intact;16materialized previews observed. Prior91same-fader CORE-FIX-43companion included. [Delivery](../docs/prototype/DESKTOP_CORE_092_2026-10-28.md).
 
 **Focused evidence and limits:** same-fader queue124→127.7after old failure; overview medians36→24/32→22pixels on two original tracks,3focused checks. Prior90native tone/Stop subset retains its scope; native failed-request/listening/pops/stalls remain open. Earlier13.073→13.229position observation remains unattributed; window-only negative probe retained exact13.229/12.426. Listening/controller deferred.
 

@@ -1,18 +1,14 @@
 # Sync pop investigation
 
-28 October delivery: CORE-FIX-42owned shared-tempo rollback is included in current private89/source4d507de, with protected native paused recovery observed. Its controlled-error source/browser proof is **not established pop causation** or native playing/failure acceptance. No new recording/listening. [Delivery and limits](DESKTOP_CORE_089_2026-10-28.md).
-
 ## Current disposition — 28 October 2026
 
-**OPEN for the intermittent owner-reported Sync pop and broader four-deck stalls.** Current88/source1fecc28 is inspected5/5 and observed paused after protected86quit/backup/recovery. CORE-FIX-40removes measured idle Sync DOM churn;41prevents invalid warped-BPM saves. Neither is proven audible-pop or historical-stall causation. Fresh availability/empty Recording allowed promotion after the earlier lock cleared; no main Play/Sync/REC Start. [Delivery and limits](PARALLEL_CORE_BETA_088_2026-10-28.md).
+**OPEN: intermittent audible pop, broader Sync alignment and four-deck stalls.** Default92/sourcee775aae; fresh process/port checks find no desktop instance/listener. Private94/sourceaa07a04 is staged/inspected5/5, unlaunched. Screen locked; no native input/launch/restore. A matching256-file closed92profile copy preserves current disk state; why the app exited and clean shutdown are not established.
 
-An earlier reproduced defect is Reverse preparation rejection stopping an advancing real-song voice. CORE-FIX-38's source/browser repair now retains that voice, actual clock and direction; the existing pitch-memory error is honest. This is not established Sync-pop causation. It does not change the Sync clock/fade or resolve full-track reverse pitch memory. [Executed scope](REVERSE_REJECTION_2026-10-28.md).
+CORE-FIX-44now covers both shared and outer same-fader queued-tempo ownership. Actual paused/muted four-deck failures are repaired in source/browser, with controls/previews and valid fresh movement retained; relevant94native failure/playing/listening remains open. Neither44nor earlier presentation/Reverse/parameter repairs is established pop causation. No speculative DSP/clock/fade change.
 
-Prior84's short four-real-track keyed-loop resize/exit/Sync session retains its bounded evidence: tracked controls/previews/focus and other voices/rates retained; full6s first-master-channel PCM finite/nonzero; observed maximum tick8.6ms/frame interval34.2ms, no Long Tasks. No listening, stereo, native moving-frame or long-session conclusion follows. [Report](FOUR_DECK_LOOP_TRANSITIONS_2026-10-28.md).
+Historical23long frames, worst242.5ms, remain unattributed. Prior clean tone/music captures and53manual/EQ/Cue/stop acceptance retain their original scope. Capture the next actual pop/stall with original recording, exact version, tracks, positions, rates, transport states, clicked deck/action and event time. Stop repeating clean cases; more green automated runs do not satisfy owner/device gates.
 
-Historical23unattributed long frames (worst242.5ms) remain unexplained. No GC/CSS/DSP cause is proved. Raw traces may be losslessly compressed; [restore index](../delivery/EVIDENCE_ARCHIVE_CLEANUP_2026-10-28.md) precedes historical inspectors. Capture the next actual pop/stall with original recording, revision, clicked deck, transport states, rates, positions and event time before attributing cause. No repeat clean cases or broad matrices.
-
-CORE-LIVE-01 retains current88relevant native playing, keyed-loop/Reverse listening and existing native held/MIDI/headphone/master gates. Prior53manual beatmatch/jog/EQ/Cue/clean-stop acceptance retains scope. Preserve normal session/originals/controls/layouts/previews; no full-core or public-beta completion claim.
+[Current ordered re-entry and full requirement audit](CORE_DJ_REENTRY_2026-10-28.md), [staged94identity](DESKTOP_CORE_094_2026-10-28.md), [closed-profile evidence](CLOSED_092_RECOVERY_2026-10-28.json), [same-fader case](TEMPO_SLIDER_MASTER_QUEUE_2026-10-28.md). Existing owner cardCORE-LIVE-01and defect cards01/07remain open; hardware/listening deferred. Earlier28October86–89checkpoint text remains in [immutable history](https://github.com/jpoindexter/open-play/blob/d15370ae15ece7841a120a0045187ad6b28e1a2a/docs/prototype/SYNC_POP_INVESTIGATION.md); it is not a current launch instruction.
 
 ## Historical investigation
 
