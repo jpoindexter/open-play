@@ -17,7 +17,7 @@ function environment() {
  const pair={...original,id:'pair'},newer={...original,id:'newer'};
  const deck={index:0,track:original,stemSlip:'vocal',playing:false,position:0,rate:1,videoLoadGeneration:0};
  const state={decks:[deck],settings:{},flip:{deck:-1}},notifications=[],calls={graphics:0,persist:0,buffers:[]};
- const runtime={stemSlipRateTokens:new Map(),voices:new Map(),stemSlipTracks:new Map(),cross:0,
+ const runtime={rateOwners:new WeakMap(),stemSlipRateTokens:new Map(),voices:new Map(),stemSlipTracks:new Map(),cross:0,
   position:d=>d.position,pause:d=>{d.playing=false;},setCross(){},configureFX(){},buffer:async t=>{calls.buffers.push(t.id);}};
  // Real off branch sets mode synchronously but still returns an async Promise.
  runtime.setStemSlip=new Function('return ({'+offSource+'}).setStemSlip;')();

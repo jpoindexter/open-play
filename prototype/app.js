@@ -25,7 +25,7 @@ import {refreshTransportControls,refreshDeckSwitches,refreshCueControls} from '.
 import {refreshSyncPresentation} from './sync-presentation.js';
 import {refreshAnalysisControls} from './analysis-presentation.js';
 import {refreshTrackDetails} from './track-details.js';
-import {renderLibraryRows} from './library-rows.js';
+import {renderLibraryRows,renderArtworkCards} from './library-rows.js';
 import {createTempoSlider} from './tempo-slider.js';
 import {createLocalAudioLibrary} from "./local-audio-library.js";
 import { createStemPreparation } from "./stems.js";
@@ -363,7 +363,7 @@ function updateStemStatus(track){
 function focusSelectedTrack(){($(`[data-track="${CSS.escape(state.selected)}"]`)||$('#tracks')).focus({preventScroll:true});}
 function renderTracks() {
   const a = filtered();
-  if(state.grid) $("#tracks").innerHTML = `<div class="art-grid">${a.map((t) => `<button class="art-card ${state.selected === t.id ? "active" : ""}" data-track="${t.id}" draggable="true"><div class="art-cover" style="--art:${esc(t.color)}">◉</div><strong>${esc(t.title)}</strong>${stemStatusMarkup(t)}<small>${esc(t.artist)} · ${t.bpm || "—"} BPM</small></button>`).join("")}</div>`;
+  if(state.grid) renderArtworkCards($("#tracks"),a.map((t) => `<button class="art-card ${state.selected === t.id ? "active" : ""}" data-track="${t.id}" draggable="true"><div class="art-cover" style="--art:${esc(t.color)}">◉</div><strong>${esc(t.title)}</strong>${stemStatusMarkup(t)}<small>${esc(t.artist)} · ${t.bpm || "—"} BPM</small></button>`));
   else renderLibraryRows($("#tracks"), `<th style="width:50px"><button title="File status" aria-label="File status">${uiIcons.file}</button></th>${state.columns.map((c) => `<th><button data-sort="${c}">${{ duration: "LENGTH", title: "SONG" }[c] || c.toUpperCase()} ${state.sort === c ? (state.sortDir === 1 ? uiIcons.up : uiIcons.down) : ""}</button></th>`).join("")}`, state.columns.join(","), a.map((t) => `<tr tabindex="0" draggable="true" data-track="${t.id}" class="${t.id === state.selected ? "selected" : ""}" aria-selected="${t.id === state.selected}"><td class="${t.missing ? "problem" : ""}" title="${t.missing ? "Missing file" : t.locked ? "Beatgrid locked" : "Local audio"}">${t.missing ? uiIcons.warning : t.locked ? uiIcons.locked : uiIcons.music}${stemStatusMarkup(t)}</td>${state.columns.map((c) => `<td title="${esc(analysisFieldHint(t, c))}" class="${c === "key" ? "key" : ""}">${esc(c === "duration" ? time(t.duration) : c === "rating" ? "★".repeat(t.rating) : c === "bpm" ? t.bpm || "—" : (t[c] ?? "—"))}</td>`).join("")}</tr>`));
   if (!a.length)
     $("#tracks").innerHTML =
@@ -690,6 +690,7 @@ async function load(index, id = state.selected, options = {}) {
   slicer.cancelDeck(d);
   stemSlipControls.cancelDeck(d);
   engine.pause(d);
+  engine.rateOwners.delete(d);
   engine.clearDeckScratchCache(d.index);
   if (["vocal","instrumental"].includes(d.stemSlip)) await engine.setStemSlip(d,"off");
   if (state.decks[index] !== d || deckLoadRequests.get(d) !== request) return;

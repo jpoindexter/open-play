@@ -1,5 +1,35 @@
 // Keep preview cells and focused rows attached during routine metadata refreshes.
 const views=new WeakMap();
+const artworkViews=new WeakMap();
+export function renderArtworkCards(root,rows){
+ let view=artworkViews.get(root);
+ if(!view||view.grid.parentElement!==root){
+  root.innerHTML='<div class="art-grid"></div>';
+  view={grid:root.firstElementChild,rows:new Map(),markup:new Map()};artworkViews.set(root,view);
+ }
+ const focused=root.contains(document.activeElement)?document.activeElement:null,keep=new Set();
+ for(const [index,html]of rows.entries()){
+  let entry=view.markup.get(html);
+  if(!entry){
+   const template=document.createElement('template');template.innerHTML=html;
+   const next=template.content.firstElementChild,id=next.dataset.track,children=[...next.children],parts=children.map(node=>node.outerHTML);
+   entry=view.rows.get(id);
+   if(entry){
+    view.markup.delete(entry.html);
+    children.forEach((child,i)=>{if(entry.parts[i]!==parts[i]){const old=entry.node.children[i];if(old)old.replaceWith(child);else entry.node.append(child);}});
+    while(entry.node.children.length>children.length)entry.node.lastElementChild.remove();
+    Object.assign(entry,{html,parts,selected:next.classList.contains('active')});
+   }else entry={node:next,html,parts,selected:next.classList.contains('active')};
+   view.rows.set(id,entry);view.markup.set(html,entry);
+  }
+  for(const name of ['active','selected'])entry.node.classList.toggle(name,entry.selected);
+  entry.node.setAttribute('aria-selected',String(entry.selected));
+  keep.add(entry.node.dataset.track);
+  if(view.grid.children[index]!==entry.node)view.grid.insertBefore(entry.node,view.grid.children[index]||null);
+ }
+ for(const [id,entry]of view.rows)if(!keep.has(id)){entry.node.remove();view.rows.delete(id);view.markup.delete(entry.html);}
+ if(focused?.isConnected&&document.activeElement!==focused)focused.focus({preventScroll:true});
+}
 export function renderLibraryRows(root, header, columns, rows) {
  let view=views.get(root);
  if(!view||view.table.parentElement!==root||view.columns!==columns||view.header!==header){

@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import vm from 'node:vm';
 const source=readFileSync(new URL('./app.js',import.meta.url),'utf8');
-const load=source.slice(source.indexOf('async function load('),source.indexOf('\nconst deckKeyShiftRequests'));
+const load=source.slice(source.indexOf('async function load('),source.indexOf('\nconst deckKeyShift='));
 const waves=source.slice(source.indexOf('function drawWaves('),source.indexOf('\nfunction drawDetailWave('));
 function fixture({owners=[],count=4,buffer=async()=>({})}={}){
  const track={id:'arriving',title:'Arriving',analyzed:true,duration:30,bpm:126,cues:[]},painted=[],calls={library:0,scratch:0};
@@ -11,7 +11,7 @@ function fixture({owners=[],count=4,buffer=async()=>({})}={}){
  const canvases=decks.map(d=>({index:d.index,getBoundingClientRect:()=>({width:400,height:60}),setAttribute(){}})),scopes=decks.map(()=>({textContent:''}));
  const cancel={cancelDeck(){}};
  const scope={state:{decks,deckCount:count,settings:{},fx:[[],[]],flip:{},focus:0},trackById:id=>id===track.id?track:null,deckLoadRequests:new WeakMap(),faderStarts:new Map(),cancelPendingPlay(){},cueHolds:cancel,deckScratchControls:cancel,pitchPlay:cancel,loopPads:cancel,manualLoops:cancel,slicer:cancel,stemSlipControls:cancel,
-  trackGain:{refresh(){}},smartSync:{loaded(){}},engine:{buffers:new Map(decks.map(d=>[d.track.id,{}]).concat([[track.id,{}]])),position:d=>d.position||0,pause:d=>{d.playing=false;},clearDeckScratchCache(){},configureFX(){},buffer:async t=>{assert.equal(t,track);return buffer();},preloadDeckScratch:async()=>{calls.scratch++;return false;}},
+  trackGain:{refresh(){}},smartSync:{loaded(){}},engine:{rateOwners:new WeakMap(),buffers:new Map(decks.map(d=>[d.track.id,{}]).concat([[track.id,{}]])),position:d=>d.position||0,pause:d=>{d.playing=false;},clearDeckScratchCache(){},configureFX(){},buffer:async t=>{assert.equal(t,track);return buffer();},preloadDeckScratch:async()=>{calls.scratch++;return false;}},
   renderDecks(){},renderTracks(){calls.library++;},notify:message=>assert.fail(message),overviewWaveViews:[],colors:['red','blue','green','orange'],sourceWaveLoads:new WeakSet(),
   waveformView:()=>({kind:'ordinary',label:'Decoded waveform'}),paintSourceOverview:(ctx)=>{painted.push(ctx.index);return null;},
   prepareWaveCanvas:canvas=>({width:400,height:60,context:{index:canvas.index,clearRect(){},fillRect(){}}}),

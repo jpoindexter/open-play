@@ -22,6 +22,7 @@ import {CensorBacking} from './censor-backing.js';
 import {createBeatgrid} from './beatgrid.js';
 import {currentDeckBPM} from './deck-tempo.js';
 import {normalizeMixerSettings,crossfaderGain,upfaderGain,eqBands,normalizeEQBoost,boundedEQGain,rescaleEQGain} from './mixer-curves.js';
+import {applyChannelFilterRouting,disposeChannelFilterRouting} from './channel-filter-routing.js';
 import {createMasterOutput} from './master-output.js';
 import {normalizedMasterDB} from './master-output-kernel.js';
 import {trackGainDB,boundedTrackGain} from './track-gain.js';
@@ -1022,51 +1023,16 @@ export class AudioEngine {
     await Promise.all(this.nodes.map((_, i) => this.applyChannelFX(i)));
   }
   async applyChannelFX(i) {
+    const n=this.nodes[i],epoch=n.channelFXEpoch;
     if(this.mixerSettings.filtersEnabled)await this.effectsReady;
-    const n=this.nodes[i];
+    if(this.nodes[i]!==n||n.channelFXEpoch!==epoch)return;
     for(const strip of [n,n.stemMonitor].filter(Boolean)){
       if(strip!==n){strip.channelValue=n.channelValue;strip.channelBpm=n.channelBpm;}
       this.applyChannelFXStrip(strip);
     }
   }
   applyChannelFXStrip(n) {
-    const value = this.mixerSettings.filtersEnabled ? n.channelValue || 0 : 0,
-      name = this.mixerSettings.filtersEnabled ? this.channelFXType : 'Filter';
-    if (name === "Filter") {
-      n.channelEffect?.dispose();
-      n.channelEffect = null;
-      n.high.disconnect();
-      n.filter.disconnect();
-      if (value === 0) {
-        n.high.connect(n.monitorTap||n.gain);
-        return;
-      }
-      n.high.connect(n.filter);
-      n.filter.connect(n.monitorTap||n.gain);
-      n.filter.type = value < 0 ? "lowpass" : "highpass";
-      n.filter.frequency.setTargetAtTime(
-        value < 0
-          ? 20000 * Math.pow(0.003, -value)
-          : 20 * Math.pow(1000, value),
-        this.ctx.currentTime,
-        0.015,
-      );
-      return;
-    }
-    const spec = {
-      name: `Channel ${name}`,
-      on: value !== 0,
-      depth: Math.abs(value) * 100,
-      beat: "1/2",
-      params: {},
-    };
-    if (n.channelEffect?.update?.(spec, n.channelBpm || 120) === true) return;
-    n.channelEffect?.dispose();
-    n.high.disconnect();
-    n.filter.disconnect();
-    n.channelEffect = createEffect(this.ctx, spec, n.channelBpm || 120);
-    n.high.connect(n.channelEffect.input);
-    n.channelEffect.output.connect(n.monitorTap||n.gain);
+    applyChannelFilterRouting(this.ctx,n,{enabled:this.mixerSettings.filtersEnabled,name:this.channelFXType,value:n.channelValue||0,bpm:n.channelBpm||120,onError:error=>this.onError?.(error)});
   }
 
   updateFXBPMs(bpms) {
@@ -2249,9 +2215,9 @@ export class AudioEngine {
       state.histories.forEach((history) => history.clear());
     this.stopAllSamples();
     for (const channel of this.nodes) {
+      channel.channelFXEpoch=(channel.channelFXEpoch||0)+1;
       for (const n of [channel,channel.stemMonitor].filter(Boolean)) {
-      n.channelEffect?.dispose();
-      n.channelEffect = null;
+      disposeChannelFilterRouting(n);
       n.channelValue = 0;
       n.high.disconnect();
       n.filter.disconnect();
