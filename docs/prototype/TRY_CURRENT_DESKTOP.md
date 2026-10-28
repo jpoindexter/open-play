@@ -1,14 +1,16 @@
-# Current private desktop0.1.101
+# Current private desktop0.1.102
 
-Use `Start Open Play Current Test.command` or `Start Open Play Playback Test.command`. Both target inspected0.1.101/source761371c, now open with Constant Change/DJ W!LD paused50.716/62.715s. Avoid a second instance/profile.
+Use `Start Open Play Current Test.command` or `Start Open Play Playback Test.command`. Both target inspected0.1.102/source4adc34d, now open with Constant Change/DJ W!LD paused50.716/62.715s. Avoid a second instance/profile.
 
-Headphone CUE selection and channel-trim updates now use the existing10ms gain ramp. Paired offline signal/control evidence removes an added gain step; emergency physical mute remains immediate. Prior queued-Load/MIX repairs remain. [Signal evidence and limits](headphone-cue-transition-2026-10-28.json) · [Native delivery](desktop-0.1.101-core-native.json).
+New Open Play app icon and matching macOS menu-bar template are packaged. The menu provides Show Open Play, Settings…, Audio Devices…, Help and normal Quit, reusing existing screens. Source/helper and controlled packaged-host checks passed; actual status-popup click/panel opening remains pending because native automation could not reach it. Existing close behavior remains. [Icon assets/prompts](../../desktop/assets/README.md).
 
-Protected100 empty Recording/normal quit/process absence and matching256-file120421604-byte closed-profile backup preceded101 launch.16 tracks/12 materialized previews/core controls and positions retained; filters Off, headphone MIX0%/LEVEL10%, master−10.04344dB/silent UI. Tempo/Sync reset intentionally. Only101 bundle remains after inactive100 verification/retirement. No main Play/Sync/Cue/REC Start in delivery.
+Two core repairs: overlapping rejected Reverse restores the committed direction of the retained voice; backup metadata for missing audio survives export/reload and later import with cues/loops. Controlled engine/source checks plus actual isolated browser generated-WAV recovery executed. [Evidence and limits](core-batch-102-2026-10-28.json) · [Native delivery](desktop-0.1.102-core-native.json).
 
-**Optional filters:** Settings → Mixer → Channel Filters. Off hides and bypasses the knobs while retaining their amounts; On restores them. All controls/layouts and library waveform previews remain.
+Protected101empty Recording/normal quit/process absence and matching256-file120421175-byte closed-profile backup preceded102launch.16tracks/12materialized previews/core controls and positions retained; filters Off, headphone MIX0%/LEVEL10%, master−10.04344dB/silent UI. Tempo/Sync reset intentionally. Only102bundle remains after inactive101verification/retirement. No main Play/Sync/Cue/REC Start during delivery.
 
-Next owner session checks changed headphone CUE/trim/MIX/LEVEL transitions plus relevant Sync/load actions, using prior accepted ordinary manual mix/EQ/Cue evidence. Generic Sync pops/stalls, native musical quality and physical routing remain open. [Help & manual](https://open-play-help.vercel.app) · [Known issues](../beta/KNOWN_ISSUES.md) · [Beta distribution](../beta/DISTRIBUTION_READINESS.md). Private candidate; public signing/notarization/installation and hardware acceptance remain OPEN. Preserve any needed recording before further upgrade.
+**Optional filters:** Settings → Mixer → Channel Filters. Off hides and bypasses the knobs while retaining amounts; On restores them. Controls/layouts and library waveform previews remain.
+
+Listening/controller work is deferred until tomorrow. Reuse prior accepted ordinary manual mix/EQ/Cue evidence; check relevant changed Sync/load/Reverse and headphone CUE/trim/MIX/LEVEL actions in one session. Generic Sync pops/stalls, native musical quality and physical routing remain open. [Help & manual](https://open-play-help.vercel.app) · [Known issues](../beta/KNOWN_ISSUES.md) · [Beta distribution](../beta/DISTRIBUTION_READINESS.md). Private candidate; public signing/notarization/installation and hardware acceptance remain OPEN.
 
 --- Historical guides below; old launch targets and blockers are not current ---
 
