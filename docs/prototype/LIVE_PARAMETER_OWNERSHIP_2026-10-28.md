@@ -13,3 +13,7 @@ Four focused engine checks give2pass/2fail before and4pass after: current-owner 
 The late error is injected at the adapter boundary. This proves stale rollback behavior, not a naturally occurring worker error or a cause of the intermittent Sync pop. Native/playback/listening/controller acceptance remains separate. The normal0.1.85session remains paused and no original audio is used. Owned frame, storage, tab and server are stopped/cleared; temporary fixture sources were removed after exact-copy retention.
 
 [Structured result](live-parameter-ownership-2026-10-28.json). Raw results, before/after screenshots, four-check RED/GREEN logs and fixture copies are private under `local-evidence/live-parameter-ownership-2026-10-28/`.
+
+## Native delivery
+
+Private86/source9ef47e3 passes exact archive/controlled-host5/5 and protected native paused startup/recovery. Current starters target86;85bundle retired. This does not execute the injected late-error branch in native playback or replace relevant owner listening. [Delivery](DESKTOP_CORE_086_2026-10-28.md).

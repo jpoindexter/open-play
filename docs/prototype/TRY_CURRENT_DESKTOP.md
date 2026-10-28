@@ -1,10 +1,10 @@
-# Current private desktop 0.1.85
+# Current private desktop 0.1.86
 
-Use `Start Open Play Current Test.command` or `Start Open Play Playback Test.command`. Both target the inspected 0.1.85/sourcefe1acc9 candidate, now open with the saved two-track session paused. Do not launch a second profile instance.
+Use `Start Open Play Current Test.command` or `Start Open Play Playback Test.command`. Both target inspected0.1.86/source9ef47e3, now open with the saved two-track session paused. Do not launch a second profile instance.
 
-Protected delivery executed: empty84Recording → normal quit/process absence → hash-matching closed-profile backup → exact85native startup. Constant Change/Prism13.073/12.426s,16library tracks, core controls and visible library waveform previews retained; BLOW−24dB restored. Old84bundle retired; only85 remains. [Receipt and limits](DESKTOP_CORE_085_2026-10-28.md).
+Protected delivery: empty85Recording → normal quit/process absence →247-file/120233144-byte matching closed-profile backup → exact86native startup. Constant Change/Prism13.073/12.426s,16library tracks, core controls and visible waveform previews retained; BLOW−24dB restored. Old85bundle retired; only86remains. [Receipt and limits](DESKTOP_CORE_086_2026-10-28.md).
 
-85includes CORE-FIX-38's source/browser Reverse rejection safety repair. Full-track reverse pitch memory, relevant Reverse/keyed-loop listening, intermittent Sync pops, broad four-deck stalls and hardware remain open. No fresh playback/Sync/REC was issued during promotion. Prior ordinary mixing acceptance retains scope; do not repeat clean matrices.
+86includes CORE-FIX-39's stale live pitch/rate failure guard. Actual controlled-error GUI now retains replacement settings; four focused engine checks pass. This is not native failure/listening or Sync-pop proof. Relevant Reverse/keyed-loop listening, intermittent Sync pops, broader four-deck stalls and hardware remain OPEN. Prior ordinary mixing acceptance retains scope; no clean matrices repeated.
 
 [Evidence archive restore index](../delivery/EVIDENCE_ARCHIVE_CLEANUP_2026-10-28.md). Music, recordings, sessions, controls, layouts and previews preserved.
 
