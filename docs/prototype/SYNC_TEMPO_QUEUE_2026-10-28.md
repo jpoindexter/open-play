@@ -1,3 +1,5 @@
+> Later delivery: private90/source4e01e3a now contains43and runs after protected paused recovery. [Current delivery](DESKTOP_CORE_090_2026-10-28.md). Source/browser evidence below retains its original scope.
+
 # Preserve a newer tempo adjustment after a Sync request fails
 
 28 October2026. Source/browser repair after private0.1.89. Current89does not contain this change; native failure/playing/listening acceptance remains pending.
