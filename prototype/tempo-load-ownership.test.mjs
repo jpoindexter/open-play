@@ -48,3 +48,38 @@ test('accepted same-track Load settles old group before rearm, retires queued in
   }finally{resume.resolve();for(const deck of state.decks)engine.pause(deck);}
  }
 });
+
+test('global silence retires queued GUI and shared tempo inputs before fresh ownership',async()=>{
+ for(const direct of [false,true]){
+  const f=fixture('Smart Sync'),{d,leader,engine,smartSync,tempoSliders,entered,resume}=f;
+  const bus=()=>({connect(){},disconnect(){}});
+  for(const node of engine.nodes)Object.assign(node,{high:bus(),filter:bus()});engine.setCross=()=>{};
+  try{
+   const first=outcome(tempoSliders.set(d,1));await entered.promise;
+   const queued=outcome(direct?engine.onRateRequest(d,1.07):tempoSliders.set(d,2));
+   engine.silence();
+   assert.deepEqual(await Promise.all([first,queued]),[{ok:false,name:'AbortError'},{ok:false,name:'AbortError'}]);
+   assert.equal(smartSync.captureTempo(),126);assert.equal(d.rate,1.05);assert.equal(leader.rate,1);
+   assert.equal(d.playing,false);assert.equal(d.processing,false);assert.equal(engine.voices.size,0);
+   await tempoSliders.set(d,1);assert.equal(d.rate,1.06);assert.equal(smartSync.captureTempo(),127.2);
+   smartSync.reset();smartSync.tempo(leader,90/126);
+   resume.resolve();await new Promise(resolve=>setImmediate(resolve));
+   assert.equal(smartSync.captureTempo(),90);assert.equal(d.rate,1.06);assert.equal(engine.voices.size,0);assert.equal(d.playing,false);
+  }finally{resume.resolve();engine.silence();}
+ }
+});
+
+test('global silence rollback cannot overwrite a newer reset tempo',async()=>{
+ const f=fixture('Smart Sync'),{d,leader,engine,smartSync,entered,resume}=f;
+ const bus=()=>({connect(){},disconnect(){}});
+ for(const node of engine.nodes)Object.assign(node,{high:bus(),filter:bus()});engine.setCross=()=>{};
+ try{
+  const first=outcome(engine.onRateRequest(d,1.06));await entered.promise;
+  const queued=outcome(engine.onRateRequest(d,1.07));
+  engine.silence();smartSync.reset();smartSync.tempo(leader,90/126);
+  assert.deepEqual(await Promise.all([first,queued]),[{ok:false,name:'AbortError'},{ok:false,name:'AbortError'}]);
+  assert.equal(smartSync.captureTempo(),90);
+  resume.resolve();await new Promise(resolve=>setImmediate(resolve));
+  assert.equal(smartSync.captureTempo(),90);assert.equal(d.playing,false);assert.equal(d.processing,false);assert.equal(engine.voices.size,0);
+ }finally{resume.resolve();engine.silence();}
+});

@@ -1,0 +1,60 @@
+{
+  "date": "2026-10-28",
+  "candidate": "0.1.103",
+  "baseline": "81582204982b09c533e8c2c810a45b3a14969e19",
+  "scope": "Three reproduced core safety defects; preserve controls, waveform previews, all layouts and original media. No broad suite or new musical/hardware acceptance.",
+  "pitch": {
+    "path": "Actual createDeckKeyShift \u2192 AudioEngine.setPitch/start",
+    "before": "Committed Off/+12 voice retained; after overlapping +13 held and +14 rejection, deck erroneously On/+13",
+    "after": "Off/+12 retained; same voice/clock/rate/loop, one start, no stops/retirement, stopped cleanup",
+    "check": "Original RED\u2192GREEN and direct pitch file9/9",
+    "review": "Independent source review, no actionable issue",
+    "evidence": "local-evidence/pitch-overlap-2026-10-28/",
+    "card": "https://trello.com/c/8yjwqq3m",
+    "disposition": "Open for native/owner changed-path acceptance"
+  },
+  "globalSilence": {
+    "path": "Actual GUI/shared queue \u2192 Smart Sync \u2192 AudioEngine; first preparation held, second queued, silence",
+    "before": "Second request resolved and changed stopped tempo126\u2192128.4; no audio restart",
+    "after": "Both stale requests AbortError; saved tempo126/rates1.05 and1 remain, voices0/stopped; fresh input succeeds and late old completion cannot overwrite reset tempo",
+    "repair": "Reuse cancelLoad/loadOwners/tempoOwner; one silence hook, synchronous owned nominal rollback and detached canceled queue",
+    "check": "Original RED\u2192GREEN; focused queue/Load files6/6",
+    "review": "Parent source review",
+    "evidence": "local-evidence/global-silence-2026-10-28/",
+    "card": "https://trello.com/c/kael9szM",
+    "disposition": "Close bounded controlled-software criterion only"
+  },
+  "sessionRecovery": {
+    "path": "Startup A \u2192 real restore/persist B \u2192 controlled decoded duration rejects imported cue \u2192 actual snapshot/recover C",
+    "before": "Quarantine/export only startup A; B lost",
+    "after": "Exact latest durable B quarantined before C; raw ownership advances only after successful write; external change/deletion requires Reopen",
+    "check": "Original same path RED\u2192GREEN; session-storage7/7",
+    "review": "Independent source review, no blocking issue",
+    "evidence": "local-evidence/core-recovery-103/",
+    "card": "https://trello.com/c/Xsyzox5k",
+    "disposition": "Close bounded controlled-software criterion only"
+  },
+  "adjacentCheck": {
+    "passed": 23,
+    "failed": 1,
+    "failure": "Existing older-fallback-rate rejection test expects renderer error; same path on baseline8158220 returns AbortError",
+    "baselineEvidence": "local-evidence/global-silence-2026-10-28/baseline-rate-expectation.json",
+    "assertionChanged": false,
+    "newProductFailure": false
+  },
+  "sourceSHA256": {
+    "prototype/engine.js": "30a07200ac370d3bef84f5f7c6d70c644aa724d76f0526e7da7eadcb6cdb804d",
+    "prototype/session-storage.js": "30ad6bb502dcb07736ef3ceaefb870d5857b676d6188436e5cc847f67030f91b",
+    "prototype/sync-tempo-requests.js": "cc495aecbeec91fbd66c81edce687b430fcda40d47570ecd7ca478b1dc32e875"
+  },
+  "boundaries": [
+    "Controlled renderer/storage/graph collaborators; no PCM/native failure path/listening proof",
+    "Actual browser reset/unload and native backup restore not executed",
+    "No controls/layouts/library previews removed",
+    "No main profile or original media actions during reproductions",
+    "Core Sync-pop and waveform-stall gates remain open",
+    "Native menu popup/panel clicks and owner icon review remain open",
+    "Legacy engine/app size remains MOD-001 debt; shared helpers retained at focused scope",
+    "No external accounts/dependencies or distribution permissions added"
+  ]
+}

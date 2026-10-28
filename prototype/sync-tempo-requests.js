@@ -1,7 +1,7 @@
 export function createSyncTempoRequests({engine,state,smartSync,slicer,participants,master=()=>null,cancelGUI=()=>{}}){
  let queue=null;const loadOwners=new WeakMap();
  const involves=(request,deck)=>request?.members.some(member=>member.deck===deck);
- const cancelled=()=>new DOMException('Tempo input superseded by track load.','AbortError');
+ const cancelled=()=>new DOMException('Tempo input superseded by track load or global silence.','AbortError');
  const setRate=async(deck,rate)=>{
   if(!['Simple Sync','Smart Sync'].includes(state.settings['Sync Mode'])||!deck.sync)return slicer.changeRates([{deck,rate}],()=>engine.setRate(deck,rate,{syncInternal:true}));
   const waiters=queue?.wanted?.waiters||[];
@@ -18,6 +18,7 @@ export function createSyncTempoRequests({engine,state,smartSync,slicer,participa
      const next=current.wanted;current.wanted=null;
      let settled;const active={request:next,done:new Promise(resolve=>settled=resolve)};current.active=active;
      let priorTempo,tempoOwner;
+     active.rollback=()=>{if(tempoOwner&&smartSync.restoreTempo(priorTempo,tempoOwner))advanceOwner(tempoOwner);};
      try{
       const leader=master();
       if(next.members.some(member=>member.deck.track!==member.track||loadOwners.get(member.deck)!==member.owner))throw cancelled();
@@ -35,7 +36,7 @@ export function createSyncTempoRequests({engine,state,smartSync,slicer,participa
       next.waiters.forEach(({resolve})=>resolve());
      }catch(error){
       // Only this queue's own writes/rollback may advance waiting ownership.
-      if(tempoOwner&&smartSync.restoreTempo(priorTempo,tempoOwner))advanceOwner(tempoOwner);
+      active.rollback();
       next.waiters.forEach(({reject})=>reject(error));
      }finally{
       if(current.active===active)current.active=null;
@@ -54,6 +55,12 @@ export function createSyncTempoRequests({engine,state,smartSync,slicer,participa
   if(wanted){queue.wanted=null;wanted.waiters.forEach(({reject})=>reject(cancelled()));}
   const pending=engine.cancelSyncedRates(deck);
   return active?.done||pending;
+ };
+ setRate.cancelAll=()=>{
+  const current=queue;
+  for(const deck of state.decks)setRate.cancelLoad(deck);
+  current?.active?.rollback();
+  if(queue===current)queue=null;
  };
  return setRate;
 }

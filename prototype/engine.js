@@ -381,7 +381,7 @@ export class AudioEngine {
       if(handoff)await handoff.arm(d.index);
       if(!current())return;
       if(this.ctx.currentTime>=ack.when-.005)throw Error('Sync start missed its lead; previous audio retained. Try Sync again.');
-      const voice={sources:[],warpLoopTransport:transport,liveOwnerController:controller,gridTimeline:timeline,stemGains:[],handoffBefore:old&&playing?{until:when,owner:old,clock:oldClock,rate:at=>this.voiceRateAt(d,old,at)}:null};
+      const voice={sources:[],pitchSettings:{keylock,keyShift:semitones},warpLoopTransport:transport,liveOwnerController:controller,gridTimeline:timeline,stemGains:[],handoffBefore:old&&playing?{until:when,owner:old,clock:oldClock,rate:at=>this.voiceRateAt(d,old,at)}:null};
       this.routeOrdinaryVoice(d,voice,transport.outputs,buffers.length===5,{when,reuseVoice:old});committed=true;this.retireVoiceAt(d.index,old,when);
       d.position=reversePlan?reversePlan.duration-ack.position:ack.position;d.anchorPosition=d.position;d.anchorTime=when;d.playing=true;
     }finally{if(!committed)transport?.dispose();}
@@ -431,7 +431,7 @@ export class AudioEngine {
       if(handoff)await handoff.arm(d.index);
       if (!current()) return;
       if(this.ctx.currentTime>=ack.when-.005)throw Error('Sync start missed its lead; previous audio retained. Try Sync again.');
-      const voice = {sources: [], liveKeylock: adapter, liveOwnerController: controller, gridTimeline, reservedStems:adapter.reservedStems, stemsReady:buffers.length===5, stemGains: [],
+      const voice = {sources: [], pitchSettings:{keylock:d.keylock,keyShift:d.keyShift||0}, liveKeylock: adapter, liveOwnerController: controller, gridTimeline, reservedStems:adapter.reservedStems, stemsReady:buffers.length===5, stemGains: [],
         handoffBefore: old && initiallyPlaying ? {until: ack.when, owner:old, clock: oldClock, rate: at => this.voiceRateAt(d, old, at)} : null};
       this.routeOrdinaryVoice(d, voice, adapter.outputs, buffers.length === 5 || adapter.reservedStems, {when: ack.when, reuseVoice: old});
       committed = true;
@@ -561,7 +561,7 @@ export class AudioEngine {
         return source;
       });
       if(handoff||positionAt){
-        const voice={sources,reverse:!!d.reverse,timelineScale:scale,renderWindow,gridTimeline,stemGains:[],handoffBefore:old?{until:when,owner:old,clock:priorClock||this.voiceClock(d,old),rate:at=>this.voiceRateAt(d,old,at)}:null};let committed=false;
+        const voice={sources,pitchSettings:{keylock,keyShift:shift},reverse:!!d.reverse,timelineScale:scale,renderWindow,gridTimeline,stemGains:[],handoffBefore:old?{until:when,owner:old,clock:priorClock||this.voiceClock(d,old),rate:at=>this.voiceRateAt(d,old,at)}:null};let committed=false;
         try{
           // Never replace audible audio with a source whose aligned start is already late.
           const requireLead=()=>{if(this.ctx.currentTime>=when-.005)throw Error('Sync start missed its lead; previous audio retained. Try Sync again.');};
@@ -579,6 +579,7 @@ export class AudioEngine {
       voice.sources = sources;
       voice.sourceGates=sources.map(()=>this.ctx.createGain());
       voice.reverse = !!d.reverse;
+      voice.pitchSettings = {keylock,keyShift:shift};
       voice.timelineScale = scale;
       voice.renderWindow = renderWindow;
       voice.gridTimeline = gridTimeline;
@@ -1217,11 +1218,14 @@ export class AudioEngine {
   async setPitch(d, { keylock = d.keylock, semitones = d.keyShift || 0 } = {}) {
     this.onValidateTransport?.(d,{keylock,keyShift:semitones});
     this.cancelDeckScratchRequest(d);
+    const voice=this.voices.get(d.index),track=d.track;
+    // Pending deck settings are not the retained transport's rollback basis.
+    const previous=voice?.pitchSettings||{keylock:d.keylock,keyShift:d.keyShift};
     if(this.voices.get(d.index)?.gridTimeline){
-      const track=d.track,previous={keylock:d.keylock,keyShift:d.keyShift},clock=this.voiceClock(d,this.voices.get(d.index)),was=d.playing||d.processing;
+      const clock=this.voiceClock(d,voice),was=d.playing||d.processing;let token=this.startTokens.get(d.index);
       d.position=this.position(d);d.keylock=keylock;d.keyShift=semitones;
-      try{if(was)await this.start(d,{priorClock:clock,positionAt:clock});}
-      catch(error){if(d.track===track&&d.keylock===keylock&&d.keyShift===semitones)Object.assign(d,previous);throw error;}
+      try{if(was){const pending=this.start(d,{priorClock:clock,positionAt:clock});token=this.startTokens.get(d.index);await pending;}}
+      catch(error){if(d.track===track&&this.voices.get(d.index)===voice&&this.startTokens.get(d.index)===token&&d.keylock===keylock&&d.keyShift===semitones)Object.assign(d,previous);throw error;}
       return;
     }
     if (d.stemSlip && d.stemSlip !== "off") {
@@ -1240,18 +1244,20 @@ export class AudioEngine {
     }
     const live = this.voices.get(d.index)?.liveKeylock;
     if (live) {
-      const previous = {keylock:d.keylock,keyShift:d.keyShift}, track=d.track; d.keylock = keylock; d.keyShift = semitones;
-      if (d.processing) return this.start(d);
-      let ack; try {ack = await live.update({keylock: !!keylock, semitones});} catch (error) {if (error.name === 'AbortError') return; if (d.track===track && this.voices.get(d.index)?.liveKeylock===live && d.keylock === keylock && d.keyShift === semitones) Object.assign(d,previous); throw error;}
-      if (this.voices.get(d.index)?.liveKeylock === live && !ack.superseded) {d.keylock = keylock; d.keyShift = semitones;}
+      d.keylock = keylock; d.keyShift = semitones;let token=this.startTokens.get(d.index);
+      let ack; try {
+        if(d.processing){const pending=this.start(d);token=this.startTokens.get(d.index);await pending;return;}
+        ack = await live.update({keylock: !!keylock, semitones});
+      } catch (error) {if (error.name === 'AbortError') return; if (d.track===track && this.voices.get(d.index)===voice && this.startTokens.get(d.index)===token && d.keylock === keylock && d.keyShift === semitones) Object.assign(d,previous); throw error;}
+      if (this.voices.get(d.index)?.liveKeylock === live && !ack.superseded) {d.keylock = keylock; d.keyShift = semitones;voice.pitchSettings={keylock,keyShift:semitones};}
       return;
     }
     if(d.playing&&(!d.reverse||(!this.voices.get(d.index)?.deckScratchTransport&&!this.voices.get(d.index)?.censorReverse))){
-      const track=d.track,previous={keylock:d.keylock,keyShift:d.keyShift},clock=this.voiceClock(d,this.voices.get(d.index));
+      const clock=this.voiceClock(d,voice);
       const handoff=createSyncTempoHandoff(this.ctx,[d.index]);
       d.keylock=keylock;d.keyShift=semitones;
       try{await this.start(d,{priorClock:clock,positionAt:clock,handoff});handoff.finish();}
-      catch(error){handoff.fail(error);if(d.track===track&&handoff.owns(d.index)&&d.keylock===keylock&&d.keyShift===semitones)Object.assign(d,previous);throw error;}
+      catch(error){handoff.fail(error);if(d.track===track&&this.voices.get(d.index)===voice&&handoff.owns(d.index)&&d.keylock===keylock&&d.keyShift===semitones)Object.assign(d,previous);throw error;}
       finally{handoff.dispose();}
       return;
     }
@@ -2212,6 +2218,7 @@ export class AudioEngine {
       this.stopSample(slot);
   }
   silence() {
+    this.onRateRequest?.cancelAll?.();
     for(const lease of this.deckScratchShadows.values())lease.dispose();
     this.scratchCache.clearAll();
     for (const d of this.deckStates.values()) {
