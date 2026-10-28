@@ -1,0 +1,66 @@
+{
+  "date": "2026-10-28",
+  "baselineCommit": "8b05aa1b99893d695625834ccba26479361c2ee6",
+  "moduleSHA256": "3debd3358648bbd77b4a6acd91e2820683acd8b7c31310ef8faa9ffa2ae5ef66",
+  "baseline": {
+    "fourDecks": true,
+    "compact": true,
+    "physicalMuted": true,
+    "elapsedMs": 1001.0999999940395,
+    "frames": 120,
+    "attributeWrites": 3360,
+    "unchangedAttributeWrites": 3360,
+    "counts": {
+      "sync:data-sync-state": 480,
+      "sync:aria-busy": 480,
+      "sync:aria-pressed": 480,
+      "sync:title": 480,
+      "syncOff:disabled": 480,
+      "syncMaster:aria-pressed": 480,
+      "syncMaster:title": 480
+    },
+    "syncControls": 12,
+    "controls": 354,
+    "controlsRetained": 354,
+    "playControls": 4,
+    "previews": 3
+  },
+  "repaired": {
+    "fourDecks": true,
+    "compact": true,
+    "physicalMuted": true,
+    "elapsedMs": 1000.5999999940395,
+    "frames": 121,
+    "attributeWrites": 0,
+    "unchangedAttributeWrites": 0,
+    "counts": {},
+    "syncControls": 12,
+    "controls": 354,
+    "controlsRetained": 354,
+    "playControls": 4,
+    "previews": 3
+  },
+  "guiStateChanges": {
+    "sync": [
+      "\t\t\t\t\t\t\t\t\t138 checkbox Description: Sync deck 2, Value: 1, Help: Simple Sync: align nearest beats or transients; paused decks match tempo only, without bar lock. Secondary; press again to re-sync",
+      "\t\t\t\t\t\t\t\t\t140 button Description: Disengage sync on deck 2, Help: Disengage sync and restore the last received controller pitch when available",
+      "The focused UI element is 138 checkbox Description: Sync deck 2, Value: 1, Help: Simple Sync: align nearest beats or transients; paused decks match tempo only, without bar lock. Secondary; press again to re-sync"
+    ],
+    "off": [
+      "\t\t\t\t\t\t\t\t\t138 checkbox Description: Sync deck 2, Value: 0, Help: Simple Sync: align nearest beats or transients; paused decks match tempo only, without bar lock. Not synced; press again to re-sync",
+      "\t\t\t\t\t\t\t\t\t140 button (disabled) Description: Disengage sync on deck 2, Help: Disengage sync and restore the last received controller pitch when available"
+    ],
+    "master": [
+      "\t\t\t\t\t\t\t\t\t47 checkbox Description: Choose deck 1 as Sync master, Help: Match incoming tracks to this deck \u00b7 Shift-click: automatic master, Value: 0",
+      "\t\t\t\t\t\t\t\t\t139 checkbox Description: Choose deck 2 as Sync master, Help: Selected master \u00b7 Shift-click: automatic master, Value: 1",
+      "The focused UI element is 139 checkbox Description: Choose deck 2 as Sync master, Help: Selected master \u00b7 Shift-click: automatic master, Value: 1"
+    ]
+  },
+  "focusedChecks": {
+    "passed": 2,
+    "file": "prototype/sync-presentation.test.mjs",
+    "scope": "Controlled DOM endpoints for unchanged refresh and pending/master/phase/relative/missing-grid/Simple state updates."
+  },
+  "scope": "Actual four-deck Compact idle capture, generated source audio, physical output muted. Actual Simple Sync/OFF/manual master controls update via original handlers. Not total CPU, moving waveform, native frame count, musical alignment, audible-pop or long-session acceptance.",
+  "cleanup": "Owned frame/session/storage stopped and cleared; tab closed; server exited0; temporary source retained byte-identically then removed. No media copied; normal native86 remained paused."
+}
