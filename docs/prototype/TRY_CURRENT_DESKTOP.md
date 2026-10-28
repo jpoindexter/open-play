@@ -1,10 +1,10 @@
-# Current private desktop 0.1.83
+# Current private desktop 0.1.84
 
-Use `Start Open Play Current Test.command` or `Start Open Play Playback Test 0.1.83.command` when the app is closed. The exact 83 bundle was observed open and stopped; only 83 is retained. [Delivery and limits](DESKTOP_CORE_083_2026-10-28.md).
+Use `Start Open Play Current Test.command` or `Start Open Play Playback Test 0.1.84.command` only when the app is closed. Exact84is observed open/stopped with the same real tracks and positions, controls and library previews; only84bundle remains. [Delivery and package-recovery limits](DESKTOP_CORE_084_2026-10-28.md).
 
-Source `e84ba2f` bounds quantized Cue/loop times to the track. Actual browser edge behavior and focused source regression passed; native edge playback and listening remain separate. Protected native startup retained two real tracks, positions, 16 library tracks, controls and 12 viewport AX waveform previews without starting playback. Intermittent Sync pops and deferred controller/listening gates remain open.
+Source `a69166e` includes the ordinary keyed-loop range repair: actual muted browser/worker Play starts a short loop on a long song without whole-file pitch-memory rejection. Native keyed-loop entry/seam/exit listening remains on CORE-LIVE-01; Sync pops, broader stalls, full-track reverse and hardware remain open. Prior ordinary mixing acceptance retains scope; no repeat clean matrices. [Source evidence](KEYLOCK_LOOP_WINDOW_2026-10-28.md).
 
-[Cleanup archive index and restore instructions](../delivery/EVIDENCE_ARCHIVE_CLEANUP_2026-10-28.md). The current app, latest recovery backup, original music and recordings are preserved.
+[Lossless evidence archives and restore instructions](../delivery/EVIDENCE_ARCHIVE_CLEANUP_2026-10-28.md). Current app, latest recovery, original music and recordings preserved.
 
 --- Historical guides below; old launch targets and blockers are not current ---
 
