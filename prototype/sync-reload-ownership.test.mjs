@@ -19,7 +19,7 @@ test('accepted same-track reload retires old Sync rollback; rejected locked load
  engine.buffer=async()=>({duration:30,sampleRate:44100});engine.applyChannelFX=async()=>{};engine.configureFX=()=>{};
  engine.cancelDeckScratchRequest=()=>{};engine.setDeckTrackGain=()=>{};engine.voices.set(1,{sources:[]});
  const smartSync=createSmartSync({engine,state});smartSync.setMaster(leader);
- const cancel={cancelDeck(){}},scope={state,engine,smartSync,trackById:id=>id===track.id?track:null,autoplayRequests:new WeakMap(),playRequests:new WeakMap(),deckLoadRequests:new WeakMap(),faderStarts:new Map(),
+ const cancel={cancelDeck(){}},scope={state,engine,smartSync,tempoSliders:{cancel(){}},trackById:id=>id===track.id?track:null,autoplayRequests:new WeakMap(),playRequests:new WeakMap(),deckLoadRequests:new WeakMap(),faderStarts:new Map(),
   instantDouble:cancel,cueHolds:cancel,deckScratchControls:cancel,pitchPlay:cancel,loopPads:cancel,manualLoops:cancel,slicer:cancel,stemSlipControls:cancel,trackGain:{refresh(){}},
   notify:message=>{notices.push(message);},renderDecks(){},renderTracks(){},drawWaves(){}};
  const load=source.slice(source.indexOf('async function load(index,'),source.indexOf('\nconst deckKeyShift='));

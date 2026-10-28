@@ -22,7 +22,7 @@ function environment() {
  // Real off branch sets mode synchronously but still returns an async Promise.
  runtime.setStemSlip=new Function('return ({'+offSource+'}).setStemSlip;')();
  const noop=()=>{},cancel={cancelDeck:noop},scope={state,trackById:id=>[original,pair,newer].find(t=>t.id===id),
-  notify:text=>notifications.push(text),engine:runtime,pitchPlay:cancel,stemSlipControls:cancel,
+  notify:text=>notifications.push(text),engine:runtime,tempoSliders:{cancel:noop},pitchPlay:cancel,stemSlipControls:cancel,
   flipAutomation:{stop:noop},renderDecks:noop,drawWaves:noop,renderTracks:noop,enqueueAnalysis:noop,ensurePreparedStems:noop};
  const {load,deckAction}=new Function(...Object.keys(scope),requestSource+loadSource+ejectSource+';return {load,deckAction};')(...Object.values(scope));
  const importKaraoke=new Function('s','a','karaokeImportTokens','load','videoMixer','renderTracks','persist',pairSource+';return importKaraoke;')(

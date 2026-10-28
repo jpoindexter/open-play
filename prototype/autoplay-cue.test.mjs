@@ -19,7 +19,7 @@ function fixture(t){
  engine.ctx={currentTime:1,sampleRate:48000,decodeAudioData:async()=>({duration:48,sampleRate:48000}),createGain:bus,createBufferSource:()=>({playbackRate:{value:1},connect(){},disconnect(){},start(){},stop(){}})};
  engine.nodes=Array.from({length:4},()=>({deckInput:bus(),gain:bus(),high:bus(),filter:bus(),level:1,trim:1}));
  engine.resume=async()=>{};engine.applyChannelFX=async()=>{};engine.configureFX=()=>{};
- const cancel={cancelDeck(){}},scope={engine,state,createCueHolds,autoplayRequests:new WeakMap(),playRequests:new WeakMap(),deckLoadRequests:new WeakMap(),faderStarts:new Map(),
+ const cancel={cancelDeck(){}},scope={engine,state,createCueHolds,tempoSliders:{cancel(){}},autoplayRequests:new WeakMap(),playRequests:new WeakMap(),deckLoadRequests:new WeakMap(),faderStarts:new Map(),
   instantDouble:{cancelDeck(){},pending:()=>false},pitchPlay:{...cancel,latch:()=>false},deckScratchControls:cancel,loopPads:cancel,manualLoops:cancel,slicer:cancel,stemSlipControls:cancel,
   smartSync:createSmartSync({engine,state}),syncMaster:{started(){}},filtered:()=>[old,next],trackById:id=>[old,next].find(t=>t.id===id),trackGain:{refresh(){}},
   quantized:(_,p)=>p,flipAutomation:{record(){},stop(){}},api:{refreshCueControls(){}},persist(){},renderDecks(){},renderTracks(){},refreshTransportControls(){},drawWaves(){},notify:message=>assert.fail(message)};

@@ -62,6 +62,7 @@ export class AudioEngine {
     this.samplerRoute = "Master";
     this.startTokens = new Map();
     this.rateOwners = new WeakMap();
+    this.syncedRateRequests = new WeakMap();
     this.fxChains = [];
     this.fxState = null;
     this.channelFXType = "Filter";
@@ -750,6 +751,12 @@ export class AudioEngine {
     }
     return {rate,nominalRate:d.rate};
   }
+  cancelSyncedRates(d){
+    const pending=this.syncedRateRequests.get(d);
+    if(!pending)return null;
+    pending.group.fail(new DOMException('Synced tempo superseded by track load.','AbortError'));
+    return pending.settled;
+  }
   async setSyncedRates(changes,{participants=[]}={}){
     if(changes.some(({rate})=>!Number.isFinite(rate)||rate<.25||rate>4))throw new RangeError('Tempo must be between 0.25× and 4×.');
     const saved=changes.map(({deck,rate})=>({deck,rate,owner:this.captureRateChange(deck,rate),track:deck.track,playing:deck.playing,clock:this.voiceClock(deck,this.voices.get(deck.index))}));
@@ -764,6 +771,8 @@ export class AudioEngine {
     if(gesture||(!requiresPreparation&&!participants.length))return Promise.all(saved.map(x=>this.setRate(x.deck,x.rate,{syncInternal:true})));
     const ids=[...active.map(x=>x.deck.index),...participants.map(x=>x.id)];
     const group=ids.length?createSyncTempoHandoff(this.ctx,ids):null;
+    let settle;const request={group,settled:new Promise(resolve=>settle=resolve)};
+    for(const x of saved)this.syncedRateRequests.set(x.deck,request);
     try{
       const jobs=saved.map(async x=>{
         this.rateOwners.set(x.deck,x.owner);
@@ -777,7 +786,7 @@ export class AudioEngine {
         }}catch(error){group?.fail(error);throw error;}
       });
       jobs.push(...participants.map(x=>x.start(group).catch(error=>{group?.fail(error);throw error;})));
-      const results=await Promise.allSettled(jobs);const failed=results.find(r=>r.status==='rejected');if(failed){group?.fail(failed.reason);throw failed.reason;}group?.finish();
+      const jobsSettled=Promise.allSettled(jobs),results=await(group?Promise.race([jobsSettled,group.failure]):jobsSettled);const failed=results.find(r=>r.status==='rejected');if(failed){group?.fail(failed.reason);throw failed.reason;}group?.finish();
       const bpms=this.nodes.map(node=>node.channelBpm||120);
       for(const x of saved)if(this.nodes[x.deck.index]&&x.deck.track===x.track&&x.deck.rate===x.rate&&this.rateOwners.get(x.deck)===x.owner&&(!x.playing||group?.owns(x.deck.index)))
         bpms[x.deck.index]=currentDeckBPM(x.deck,this,{smartSync:true})||120;
@@ -790,7 +799,7 @@ export class AudioEngine {
         x.deck.processing=false;const controller=group?.controller(x.deck.index);if(this.transforms.get(x.deck.index)===controller)this.transforms.delete(x.deck.index);this.onProcessing(x.deck);
       }
       throw error;
-    }finally{for(const x of saved){x.owner.pending=false;x.owner.previousOwner=null;x.owner.voice=null;x.owner.controller=null;x.owner.track=null;}group?.dispose();}
+    }finally{for(const x of saved){if(this.syncedRateRequests.get(x.deck)===request)this.syncedRateRequests.delete(x.deck);x.owner.pending=false;x.owner.previousOwner=null;x.owner.voice=null;x.owner.controller=null;x.owner.track=null;}group?.dispose();settle();}
   }
   async setRate(d, rate, {syncInternal = false} = {}) {
     if(!Number.isFinite(rate)||rate<.25||rate>4)throw new RangeError('Tempo must be between 0.25× and 4×.');

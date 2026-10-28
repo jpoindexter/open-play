@@ -676,7 +676,6 @@ async function load(index, id = state.selected, options = {}) {
   }
   if (d.playing && state.settings["Lock Playing Deck"])
     return notify("Playing deck locked. Pause it before replacement.");
-  const syncBefore = {engaged:!!d.sync, relative:d.syncState==='relative', role:d.syncRole, bpm:(d.track?.bpm || 0)*d.rate};
   cancelPendingPlay(d);
   cueHolds.cancelDeck(d);
   const request = (deckLoadRequests.get(d) || 0) + 1;
@@ -689,7 +688,12 @@ async function load(index, id = state.selected, options = {}) {
   manualLoops.cancelDeck(d);
   slicer.cancelDeck(d);
   stemSlipControls.cancelDeck(d);
+  tempoSliders.cancel(d);
+  const syncSettlement=engine.onRateRequest?.cancelLoad?.(d);
   engine.pause(d);
+  if(syncSettlement)await syncSettlement;
+  if(state.decks[index]!==d||deckLoadRequests.get(d)!==request)return;
+  const syncBefore = {engaged:!!d.sync, relative:d.syncState==='relative', role:d.syncRole, bpm:(d.track?.bpm || 0)*d.rate};
   engine.rateOwners.delete(d);
   engine.clearDeckScratchCache(d.index);
   if (["vocal","instrumental"].includes(d.stemSlip)) await engine.setStemSlip(d,"off");
@@ -2086,7 +2090,7 @@ window.openPlay = {
 
 engine.onProcessing = () => refreshTransportControls(state);
 
-engine.onRateRequest=createSyncTempoRequests({engine,state,smartSync,slicer,master:()=>syncMaster.master(),participants:bpm=>panels.samplerSync.participants(bpm)});
+engine.onRateRequest=createSyncTempoRequests({engine,state,smartSync,slicer,master:()=>syncMaster.master(),participants:bpm=>panels.samplerSync.participants(bpm),cancelGUI:d=>tempoSliders.cancel(d)});
 engine.onManualPosition = d => {for(const other of state.decks)cancelSimpleSync(engine,other,d);smartSync.manipulated(d);};
 engine.onGridTimeline = (d,options) => smartSync.timeline(d,options);
 engine.onValidateTransport = (d,changes) => smartSync.validate(d,changes);
