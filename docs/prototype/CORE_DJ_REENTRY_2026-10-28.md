@@ -1,5 +1,11 @@
 # Current core DJ acceptance and re-entry
 
+28 October2026. Installed/default102 remains preserved;104/source3b8a0f6 is inspected/private-sealed and staged, not launched while Mac locked.103 was never launched and has been retired. [Current desktop guide](TRY_CURRENT_DESKTOP.md) and [current handoff](../../handoffs/current.md) govern build identity, controls, Trello and exact re-entry. [Import/restore repair](core-import-restore-104-2026-10-28.json); [103 source safety evidence retained](core-batch-103-2026-10-28.json).
+
+No new listening/controller request tonight. After unlock, protect/quit102, match a closed-profile backup, open104 once, observe restored session, then update launchers and remove inactive102. Relevant native failure/playing, musical Sync/stalls, independent headphone/controller and public distribution criteria remain open. Prior53ordinary manual mix/jog/EQ/Cue/stop acceptance remains scoped. No repeated clean test matrix.
+
+## Historical0.1.94 audit — scoped evidence retained, not current identity
+
 28 October2026. **Goal incomplete; native94is now current/default.** Exact sourceaa07a04/archive5/5 and actual settled native startup observed: Constant Change/DJ W!LD paused50.716/62.715s,16library tracks,2Play/tempo,6EQ and12materialized previews, master−10.04344/silent UI meter. No main Play/Sync/REC Start or profile restore. [Native delivery](DESKTOP_CORE_094_2026-10-28.md).
 
 Before launch, the256-file120945306-byte closed92profile and recovery copy were revalidated hash/mtime-identical with no playback-test process. The copy is a recovery option, not permission to overwrite later owner changes. Only94bundle remains; verified inactive92and its named starter were retired. The Mac locked again after the settled capture; final native read was blocked. No further native input. Paused startup does not prove relevant native failure/playing/listening or physical acceptance.
