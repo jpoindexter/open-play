@@ -5,6 +5,8 @@ import vm from 'node:vm';
 import {AudioEngine} from './engine.js';
 import * as simple from './sync.js';
 import {createSmartSync,hasBeatgrid,beatPosition} from './smart-sync.js';
+import {refreshSyncPresentation} from './sync-presentation.js';
+import {uiIcons} from './vendor/astryx/icons.js';
 
 // Actual controller, settings/render, Simple Sync and engine. Controlled DOM,
 // buffer/graph/clock/live ACK endpoints; no PCM, native, UI or hearing proof.
@@ -18,10 +20,10 @@ const modeChange=cut(panels,'s.settings[input.dataset.setting] =','if (input.dat
 const hook=cut(source,'engine.onManualPosition =','\nengine.onGridTimeline =');
 const audioTest=read('./simple-sync-preparation.test.mjs'),layoutTest=read('./layout-orientation.test.mjs');
 const cancelSimpleSync=simple.cancelSimpleSync||(()=>{}),isSimpleSyncPending=simple.isSimpleSyncPending||(()=>false);
-const env=vm.createContext({vm,source,rendering,orientation,AudioEngine,synchronizeSimple:simple.synchronizeSimple,isSimpleSyncPending});
+const env=vm.createContext({vm,source,rendering,orientation,AudioEngine,synchronizeSimple:simple.synchronizeSimple,isSimpleSyncPending,uiIcons});
 vm.runInContext(cut(audioTest,'function fixture(','\nconst saved=').replace('function fixture(','function audioFixture(')+'\n'+
  cut(layoutTest,'function fixture(','\nfor(const count').replace('function fixture(','function domFixture(')
- .replace('const scope={state,','const scope={isSimpleSyncPending,state,'),env);
+ .replace('const scope={','const scope={uiIcons,'),env);
 function fixture(){
  const a=env.audioFixture(),f=env.domFixture(2,'Horizontal'),notices=[];
  f.state.decks=[a.leader,a.deck];f.state.settings={'Sync Mode':'Simple Sync','Snap to Beatgrid':true};
@@ -90,8 +92,10 @@ test('pending unsynced Simple request keeps actual OFF markup and tick control a
  const f=fixture();f.deck.sync=false;f.deck.syncRole=null;const pending=settle(f.press()),during=isSimpleSyncPending(f.deck);
  const markup=f.scope.syncControls(f.deck),off=markup.match(/<button[^>]*data-action="syncOff"[^>]*>/)?.[0];
  const tick=source.indexOf('function tick()'),begin=source.indexOf('    const smart =',tick),end=source.indexOf('    updateTempoSlider(d);',begin);
- const button={disabled:true},scope=vm.createContext({d:f.deck,state:f.state,syncButton:null,isSimpleSyncPending,
-  hasBeatgrid:()=>true,document:{querySelector:()=>button}});vm.runInContext(source.slice(begin,end),scope);
+ const button={disabled:true},document={querySelector:s=>s.includes('data-action="syncOff"')?button:null};
+ const scope=vm.createContext({d:f.deck,state:f.state,isSimpleSyncPending,hasBeatgrid,engine:f.engine,
+  smartSync:f.scope.smartSync,syncMaster:f.scope.syncMaster,
+  refreshSyncPresentation:(deck,options)=>refreshSyncPresentation(deck,options,document)});vm.runInContext(source.slice(begin,end),scope);
  const disabled=button.disabled;f.release();const result=await pending;
  assert.equal(result.error,undefined);assert.equal(during,true);assert.ok(off);assert.doesNotMatch(off,/\sdisabled(?:[\s>])/);
  assert.equal(disabled,false);assert.equal(isSimpleSyncPending(f.deck),false);

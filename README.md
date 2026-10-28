@@ -1,5 +1,7 @@
 # Open Play
 
+[First-mix guide](docs/beta/QUICK_START.md) · [Known issues](docs/beta/KNOWN_ISSUES.md) · [Beta plan](docs/delivery/PUBLIC_BETA_PLAN.md)
+
 ## Current core status — 28 October 2026
 
 **0.1.86/source `9ef47e3` remains current;0.1.87/source `ce1560a` is staged and unlaunched.** Exact87archive/source/controlled-host inspection5/5 declares the28-line Sync presentation module. The Mac now explicitly reports screen-locked; no native input, Recording preflight, quit/profile backup or87startup was attempted afterward. Current86main remains running; playback launchers remain86. Only current86and staged87bundles retained; package stage/tar and owned diagnostic source/tab/server removed. [Re-entry](docs/prototype/DESKTOP_087_STAGED_2026-10-28.md).

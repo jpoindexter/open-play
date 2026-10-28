@@ -1,7 +1,9 @@
 import {refreshAnalysisControls} from './analysis-presentation.js';
+import {validateMetadata} from './library-state.js';
 
 export async function saveTrackDetails(track,fields,engine,persist){
  const bpm=Number(fields.get('bpm'))||0,changed=bpm!==track.bpm;
+ validateMetadata({bpm},track);
  // Revoke old-grid work before changing the shared track object.
  const before=changed?engine.onGridWillChange?.(track):undefined;
  track.metadataSources??={};
