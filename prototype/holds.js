@@ -8,6 +8,7 @@ export function createCueHolds({
   render,
   refresh = render,
   refreshCues = render,
+  cancelPendingPlay = () => {},
   notify,
 }) {
   const held = new Map();
@@ -22,6 +23,7 @@ export function createCueHolds({
   async function press(key, d, hot = null, remove = false) {
     if (!d.track || held.has(key)) return;
     const position = selectedStem(d) ? engine.selectedPosition(d) : engine.position(d);
+    if (hot === null || (!remove && d.track.cues[hot])) cancelPendingPlay(d);
     if (hot !== null) {
       if (remove) {
         d.track.cues[hot] = null;

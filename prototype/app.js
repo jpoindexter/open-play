@@ -1422,6 +1422,7 @@ api.flipAutomation = flipAutomation;
 const cueHolds = createCueHolds({
   engine,
   state,
+  cancelPendingPlay,
   quantized,
   record: flipAutomation.record,
   persist,

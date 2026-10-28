@@ -17,4 +17,5 @@ function openAutoGainCheck(options){return openIsolatedCheck({...options,route:'
 function openRelativeTempoCheck(options){return openIsolatedCheck({...options,route:'/prototype/relative-tempo-harness.html',label:'relative controller tempo check'});}
 function openGUITempoCheck(options){return openIsolatedCheck({...options,route:'/prototype/gui-tempo-harness.html',label:'GUI tempo check'});}
 function openSimpleControllerCheck(options){return openIsolatedCheck({...options,route:'/prototype/simple-sync-controller-harness.html',label:'Simple Sync controller check'});}
-module.exports={openPlaybackCheck,openAutoGainCheck,openRelativeTempoCheck,openGUITempoCheck,openSimpleControllerCheck};
+function openCoreOwnershipCheck(options){return openIsolatedCheck({...options,route:'/prototype/core-ownership-check.html',label:'isolated core ownership check'});}
+module.exports={openPlaybackCheck,openAutoGainCheck,openRelativeTempoCheck,openGUITempoCheck,openSimpleControllerCheck,openCoreOwnershipCheck};
