@@ -2,9 +2,9 @@
 
 ## Current disposition — 28 October 2026
 
-**OPEN: intermittent audible pop, broader Sync alignment and four-deck stalls.** Default92/sourcee775aae; fresh process/port checks find no desktop instance/listener. Private94/sourceaa07a04 is staged/inspected5/5, unlaunched. Screen locked; no native input/launch/restore. A matching256-file closed92profile copy preserves current disk state; why the app exited and clean shutdown are not established.
+**OPEN: intermittent audible pop, broader Sync alignment and four-deck stalls.** Current/default94/sourceaa07a04 now has exact archive/host5/5 and actual native paused startup: Constant Change/DJ W!LD50.716/62.715s,16tracks/12materialized previews. Closed92profile256files/120945306bytes revalidated before launch; no main Play/Sync/REC Start or restore. Mac locked again after settled capture, preventing final native reread; no later native input.
 
-CORE-FIX-44now covers both shared and outer same-fader queued-tempo ownership. Actual paused/muted four-deck failures are repaired in source/browser, with controls/previews and valid fresh movement retained; relevant94native failure/playing/listening remains open. Neither44nor earlier presentation/Reverse/parameter repairs is established pop causation. No speculative DSP/clock/fade change.
+CORE-FIX-44covers shared and outer same-fader queued-tempo ownership. Actual paused/muted four-deck failures repaired in source/browser, controls/previews and valid fresh movement retained. Relevant94native failure/playing/listening remains open. Neither44nor earlier presentation/Reverse/parameter repairs is established pop causation. No speculative DSP/clock/fade change. Only94bundle remains; default starters94syntax checked, verified inactive92retired.
 
 Historical23long frames, worst242.5ms, remain unattributed. Prior clean tone/music captures and53manual/EQ/Cue/stop acceptance retain their original scope. Capture the next actual pop/stall with original recording, exact version, tracks, positions, rates, transport states, clicked deck/action and event time. Stop repeating clean cases; more green automated runs do not satisfy owner/device gates.
 
