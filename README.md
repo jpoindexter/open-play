@@ -1,6 +1,6 @@
 # Open Play
 
-[First-mix guide](docs/beta/QUICK_START.md) · [Known issues](docs/beta/KNOWN_ISSUES.md) · [Beta plan](docs/delivery/PUBLIC_BETA_PLAN.md)
+[Help & manual](https://open-play-help.vercel.app) · [First-mix guide](docs/beta/QUICK_START.md) · [Known issues](docs/beta/KNOWN_ISSUES.md) · [Beta plan](docs/delivery/PUBLIC_BETA_PLAN.md)
 
 ## Current core status — 28 October 2026
 

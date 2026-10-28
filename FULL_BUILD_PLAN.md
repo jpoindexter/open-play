@@ -8,6 +8,8 @@ Prior84four-real-track loop resize/exit/Sync follow-through retains its bounded 
 
 Trello189cards/17complete after scoped40/41criteria readback. Broader core/Sync-pop/stall/listening/hardware/release cards remain OPEN; original criteria/history/model guidance retained. Prior53manual/jog/EQ/Cue/stop scope retained. Limited public beta accelerated target3–5working days, safer budget5–10, conditional on current listening/data/install and signing/distribution gates. No public release/full-core/parity claim.
 
+Help microsite published at https://open-play-help.vercel.app:20Markdown articles, source-generated shortcut table, search and responsive navigation; actual public/browser/404 checks executed. DOC-001 remains open for release screenshots, current owner walk-through, in-app Help and remaining advanced/install coverage. No app rebuild or playback changes. Owner requested listening later. [Delivery](docs/delivery/HELP_MICROSITE_2026-10-28.md).
+
 ## Historical status — core four-deck reliability, 25 October 2026
 
 **Current source candidates — core reliability:** Desktop0.1.56/source3667d6f saves Prepare/manual History edits in a focused39-line session-panels module. Actual native insertion and Prepare add survived quit/process exit/reopen; original96history entries retained plus inserted97,16tracks/previews/controls present,0playing. [Evidence and limits](docs/prototype/desktop-0.1.56-session-panels.json). New session archive/read/export passes isolated handler/storage checks; native archive interaction remains open. Prior53listening/focus,54fader resets and55play-count evidence retain scope. Hardware deferred; software continues. Rare Sync pops/stalls and broad feature criteria remain open; no clean-case repeats or broad matrices.
