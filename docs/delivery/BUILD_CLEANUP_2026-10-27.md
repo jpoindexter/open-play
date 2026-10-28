@@ -1,3 +1,5 @@
+> Current cleanup: [28 October diagnostic removal](DIAGNOSTIC_CLEANUP_2026-10-28.md). Only 0.1.80 is retained; versions below describe historical checkpoints.
+
 # Superseded app builds and staging cleanup — 27 October 2026
 
 Jason authorized removing all old versions and continuing software work while controller/listening checks wait. Only the running/current0.1.74 bundle and its three working launchers remain. Earlier binary retention instructions are superseded by this explicit cleanup; historical receipts, source commits and evidence remain available. Old builds must be rebuilt from their recorded source if needed later.

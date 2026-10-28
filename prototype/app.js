@@ -883,7 +883,7 @@ async function deckAction(action, index, el, event = {}) {
     const track=d.track,wasPlaying=d.playing;
     const seeking=engine.seek(d,d.cue),token=engine.startTokens.get(index);await seeking;
     if(!wasPlaying&&d.track===track&&!d.playing&&!d.processing&&engine.startTokens.get(index)===token)await play(d);
-    return renderDecks();
+    return refreshTransportControls(state);
   }
   if (action === "stemPrepare") {
     state.selected = d.track.id;

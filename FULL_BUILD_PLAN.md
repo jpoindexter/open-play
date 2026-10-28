@@ -1,3 +1,9 @@
+## Cleanup checkpoint — 28 October 2026
+
+User-directed cleanup removed 78 obsolete diagnostic paths / 510,152,704 allocated bytes. Current 0.1.80 ASAR and all 241 normal-profile files are hash-unchanged; music, recordings, recovery profiles and required runtimes retained. App was not running at this observation; the paused delivery below is historical. No rebuild or listening tests. [Cleanup and exact core re-entry](docs/delivery/DIAGNOSTIC_CLEANUP_2026-10-28.md).
+
+Pending stutter source is preserved as a **draft, not delivered**: transport-only refresh plus a 25-line regression. Baseline control loss is reproduced; repaired browser comparison did not reach the action. Resume by confirming the isolated fixture clock advances, then run that one comparison. Owner/controller/listening gates remain deferred; do not claim full core completion.
+
 ## Current core delivery — 27 October 2026
 
 **Private 0.1.80 / source `3818552` is inspected 5/5, current and observed paused.** Empty Recording preflight → normal 0.1.79 quit/process absence → closed 256-file / 120,336,158-byte hash-matched profile backup → exact 0.1.80 startup. Constant Change / Prism restored at 13.073 / 12.426 seconds, with 16 library entries, two Play/tempo controls, six EQ controls and 12 AX library previews. Prior B LOW −24 dB restored; tempo/Sync reset normally. No main Play, Sync, Double or REC Start. [Native evidence](docs/prototype/DESKTOP_CORE_080_2026-10-27.md).
