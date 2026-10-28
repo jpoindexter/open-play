@@ -1,10 +1,10 @@
-# Current private desktop 0.1.81
+# Current private desktop 0.1.82
 
-Open `Start Open Play Current Test.command` or `Start Open Play Playback Test 0.1.81.command` only when the playback-test app is closed. Exact0.1.81 is currently observed open and stopped; defaults/named launchers target81 and only81bundle is retained. No public release.
+Open `Start Open Play Current Test.command` or `Start Open Play Playback Test 0.1.82.command` only when the playback-test app is closed. Exact 0.1.82 is observed open and stopped; launchers target 82 and only its app bundle is retained. No public release.
 
-Source2127c7b passed immutable package/source/controlled-host inspection5/5 and protected native startup. Same2realtracks13.073/12.426s,16library tracks/corecontrols/12AXpreviews; priorBLOW−24dBrestored. No main Play/Sync/stutter/REC Start. [Current native evidence](DESKTOP_CORE_081_2026-10-28.md).
+Source `d22922c` passed immutable package/source/controlled-host inspection 5/5 and protected native startup. Same two real tracks at 13.073 / 12.426 seconds, 16 library tracks, core controls and 12 viewport AX previews; prior B LOW −24 dB restored. No main Play, Sync, pad trigger, stutter or REC Start. [Current evidence](DESKTOP_CORE_082_2026-10-28.md).
 
-Stutter uses the existing transport presentation refresh: muted browser playing/paused-start retains355/355controls, other-fader focus/value and8/8previews. Native stutter/held/playing/controller/listening remains with CORE-LIVE-01. Prior53ordinary mixing acceptance retains its scope; do not repeat clean matrices. Capture the next actual pop/stall before clock/DSP changes. Original music, recordings and recovery profiles remain preserved.
+Performance-tab and loop-bank changes now redraw only their own deck. The actual muted four-deck browser sequence retains 316/316 outside-deck nodes and 8/8 previews; native stopped Hot Cue/Loops/bank selection and restoration are observed separately. Inherited stutter/key/Double/loop/switch repairs remain. Native held/playing/MIDI/listening remain with CORE-LIVE-01. Prior 53 ordinary mixing acceptance retains its scope; do not repeat clean matrices. Capture the next actual pop/stall before clock/DSP changes. Music, recordings and recovery profiles remain protected.
 
 --- Historical guides below; old launch targets and blockers are not current ---
 

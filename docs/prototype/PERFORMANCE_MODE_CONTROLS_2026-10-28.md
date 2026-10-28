@@ -8,6 +8,6 @@ The same actual repaired UI sequence retains316/316observed original outside-dec
 
 One19-line composed regression executes the existing action handler with controlled collaborators. Old tab rendering fails because it lacks a target deck; repaired tab and loop-bank branches pass with owner index, original release/state and intentional focus behavior. No broad suite or clean-song listening rerun.
 
-Native0.1.81was untouched by the diagnostic; source repair needs the next exact package. Native held/playing/controller/listening and broader Sync-pop/stall criteria remain open. No claim of faster frames or silence at hardware outputs beyond the fixture's physical-mute assertion.
+The isolated diagnostic left native0.1.81untouched. Repair is now included in inspected/current0.1.82; stopped native mode/bank feedback and restoration are observed separately in [delivery](DESKTOP_CORE_082_2026-10-28.md). Native held/playing/controller/listening and broader Sync-pop/stall criteria remain open. No claim of faster frames or silence at hardware outputs beyond the fixture's physical-mute assertion.
 
 [Receipt](performance-mode-controls-2026-10-28.json). Raw fixture/baseline/repaired/screenshot/regression evidence stays ignored in `local-evidence/performance-mode-controls-2026-10-28/`. Owned test stop/clear and source/tab/server cleanup recorded before delivery.
