@@ -1,10 +1,10 @@
-# Current private desktop 0.1.82
+# Current private desktop 0.1.83
 
-Open `Start Open Play Current Test.command` or `Start Open Play Playback Test 0.1.82.command` only when the playback-test app is closed. Exact 0.1.82 is observed open and stopped; launchers target 82 and only its app bundle is retained. No public release.
+Use `Start Open Play Current Test.command` or `Start Open Play Playback Test 0.1.83.command` when the app is closed. The exact 83 bundle was observed open and stopped; only 83 is retained. [Delivery and limits](DESKTOP_CORE_083_2026-10-28.md).
 
-Source `d22922c` passed immutable package/source/controlled-host inspection 5/5 and protected native startup. Same two real tracks at 13.073 / 12.426 seconds, 16 library tracks, core controls and 12 viewport AX previews; prior B LOW −24 dB restored. No main Play, Sync, pad trigger, stutter or REC Start. [Current evidence](DESKTOP_CORE_082_2026-10-28.md).
+Source `e84ba2f` bounds quantized Cue/loop times to the track. Actual browser edge behavior and focused source regression passed; native edge playback and listening remain separate. Protected native startup retained two real tracks, positions, 16 library tracks, controls and 12 viewport AX waveform previews without starting playback. Intermittent Sync pops and deferred controller/listening gates remain open.
 
-Performance-tab and loop-bank changes now redraw only their own deck. The actual muted four-deck browser sequence retains 316/316 outside-deck nodes and 8/8 previews; native stopped Hot Cue/Loops/bank selection and restoration are observed separately. Inherited stutter/key/Double/loop/switch repairs remain. Native held/playing/MIDI/listening remain with CORE-LIVE-01. Prior 53 ordinary mixing acceptance retains its scope; do not repeat clean matrices. Capture the next actual pop/stall before clock/DSP changes. Music, recordings and recovery profiles remain protected.
+[Cleanup archive index and restore instructions](../delivery/EVIDENCE_ARCHIVE_CLEANUP_2026-10-28.md). The current app, latest recovery backup, original music and recordings are preserved.
 
 --- Historical guides below; old launch targets and blockers are not current ---
 
