@@ -12,7 +12,7 @@ const git=args=>execFileSync('git',args,{cwd:root,maxBuffer:150*1024*1024});
 const sha=bytes=>createHash('sha256').update(bytes).digest('hex');
 const sourceCommit=git(['rev-parse','HEAD']).toString().trim();
 const get=file=>git(['show',`${sourceCommit}:${file}`]);
-const version='0.1.89',name='Open Play Playback Test',port=18775,bundle='org.openplay.dj.playback.localtest';
+const version='0.1.90',name='Open Play Playback Test',port=18775,bundle='org.openplay.dj.playback.localtest';
 const profile='Open Play Playback Test',partition='persist:open-play-playback-test';
 await assertBuildRetention(path.join(root,'local-evidence/desktop-builds'),name);
 const stage=await mkdtemp(path.join(tmpdir(),'open-play-playback-'));
@@ -54,6 +54,8 @@ await put('assets/docs/prototype/auto-gain-fixture-reference.json',JSON.stringif
 // The archived workspace guide describes the previous installed candidate. Generate
 // only this package's identity/instructions; keep prototype source byte-for-byte.
 await put('assets/docs/prototype/TRY_CURRENT_DESKTOP.md',`# Core desktop test ${version}
+
+Current source includes CORE-FIX-43 per-operation Sync-tempo queue outcomes: a rejected in-flight request no longer discards a newer queued deck adjustment; latest waiting inputs still coalesce and the original error remains visible. Actual paused/muted four-deck controls retain their nodes and reach the new requested tempo after a controlled old failure. Native playing/listening acceptance remains separate.
 
 Current source includes CORE-FIX-42 ownership of shared Smart Sync tempo rollback: an older failed request cannot replace a newer MASTER/Sync tempo, including equal-BPM newer writes. The focused request module preserves existing routing, sampler/Slicer coordination and errors. Actual paused four-deck Compact controlled-rejection evidence is recorded; native playing/listening acceptance remains separate. CORE-FIX-41 validates warped-track BPM before metadata save; CORE-FIX-40 avoids redundant Sync presentation writes. None is established audible-pop or long-session-stall causation.
 

@@ -1,5 +1,7 @@
 ## Current core status — 28 October 2026
 
+**New source repair — CORE-FIX-43:** A rejected shared Sync-tempo preparation no longer drops a newer queued deck adjustment. Actual paused/muted four-deck controls: original124.0after failure → repaired127.8,423controls/4Play/1materialized preview retained; original error remains visible. One new composed regression and the existing42ownership check pass. Current native89does not contain this source change; package/native/playing/listening remain pending. [Evidence](../docs/prototype/SYNC_TEMPO_QUEUE_2026-10-28.md).
+
 **Current source and native delivery:** Private0.1.89/source4d507de includes CORE-FIX-42owned shared Sync-tempo rollback. Actual paused four-deck controlled-error source GUI retains the newer122BPM master instead of reverting124;423original controls/4Play/1materialized preview. Exact89package/source/host5/5 and protected paused native recovery are observed. Native failed-request/playing/listening acceptance and broader pops/stalls remain open. [Delivery](../docs/prototype/DESKTOP_CORE_089_2026-10-28.md).
 
 **0.1.89 is running/default.** Actual empty88Recording→normal quit/process absence→matching248-file120233626-byte closed-profile backup→89paused recovery. Constant Change/Prism13.073/12.426s,16tracks,2Play/tempo,6EQ/16materialized previews; prior BLOW−24dB restored, master−10.0dB/silent. No main Play/Sync/REC Start. Launchers89; only89bundle retained; inactive88hash/process verified before removal. No package stage/tar; closed88recovery copy retained.
@@ -10,7 +12,7 @@ Prior84four-real-track loop resize/exit/Sync follow-through retains its bounded 
 
 Trello190cards/17complete after scoped40/41criteria readback. Broader core/Sync-pop/stall/listening/hardware/release cards remain OPEN; original criteria/history/model guidance retained. Prior53manual/jog/EQ/Cue/stop scope retained. Limited public beta accelerated target3–5working days, safer budget5–10, conditional on current listening/data/install and signing/distribution gates. No public release/full-core/parity claim.
 
-Help microsite published at https://open-play-help.vercel.app:20Markdown articles, source-generated shortcut table, search and responsive navigation; actual public/browser/404 checks executed. DOC-001 remains open for release screenshots, current owner walk-through, in-app Help and remaining advanced/install coverage. No app rebuild or playback changes. Owner requested listening later. [Delivery](../docs/delivery/HELP_MICROSITE_2026-10-28.md).
+Help microsite published at https://open-play-help.vercel.app:20Markdown articles, source-generated shortcut table, search and responsive navigation; actual public/browser/404 checks executed. Ten actual-interface screenshots now illustrate15Help articles; DOC-001 remains open for current owner walk-through, in-app Help and remaining advanced/install coverage. No app rebuild or playback changes. Owner requested listening later. [Delivery](../docs/delivery/HELP_MICROSITE_2026-10-28.md).
 
 --- Historical handoff below ---
 
