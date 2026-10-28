@@ -2,7 +2,7 @@ import {createPerformancePanelNavigation} from './performance-panel-navigation.j
 import {createSessionPanels} from './session-panels.js';
 import {saveTrackDetails,refreshTrackDetails} from './track-details.js';
 import {saveBeatgrid} from './beatgrid-save.js';
-import {validateBackup,trackMetadata} from './library-state.js';
+import {validateBackup,createLibraryBackup} from './library-state.js';
 import {trackGainDB} from './track-gain.js';
 import {createDeckMIDIRouter,deckMIDITargets,libraryMIDITargets,fxMIDITargets,samplerMIDITargets,herculesPlaybackMappings} from './deck-midi.js';
 import {createBeatgrid,gridBPM} from './beatgrid.js';
@@ -416,12 +416,7 @@ export function createPanels(a) {
           download(
             "open-play-library.json",
             JSON.stringify(
-              {
-                format: "open-play-prototype-1",
-                crates: s.crates,
-                settings: s.settings,
-                tags: s.tracks.map(t => ({id:t.id,...trackMetadata(t)})),
-              },
+              createLibraryBackup(s),
               null,
               2,
             ),
@@ -434,7 +429,11 @@ export function createPanels(a) {
               throw new Error("Pause decks and samples before restoring a library backup. Nothing was restored.");
             s.crates=data.crates;
             Object.assign(s.settings,data.settings);
-            for(const {id,...metadata} of data.tags){const track=trackById(id);if(track)Object.assign(track,metadata);}
+            for(const {id,...metadata} of data.tags){
+              const track=trackById(id);
+              if(track)Object.assign(track,metadata);
+              else if(/^local-[a-f0-9]{64}$/.test(id))s.localTags[id.slice(6)]=metadata;
+            }
             for(const track of s.tracks)a.trackGain.refresh(track);
             engine.setMonitorSettings(monitorState());
             engine.setMixerSettings(mixerSettingsFromPreferences(s.settings));

@@ -25,6 +25,23 @@ test('held Reverse keeps the audible forward clock until a future reverse handof
  const voice=engine.voices.get(0),when=deck.anchorTime;assert.equal(voice.handoffBefore.owner,old);assert.equal(voice.reverse,true);assert.ok(Math.abs(deck.anchorPosition-clock(when))<1e-12);assert.deepEqual(f.retired,[old]);
  engine.ctx.currentTime=when+.01;assert.ok(Math.abs(engine.position(deck)-(deck.anchorPosition-.01))<1e-12);
 });
+test('overlapping rejected Reverse restores the retained committed direction',async()=>{
+ for(const committedReverse of [false,true]){
+ const f=await ready(),{engine,deck}=f;
+ if(committedReverse)await engine.setReverse(deck,true);
+ const voice=engine.voices.get(0),clock=engine.voiceClock(deck,voice),started=f.starts.length,stopped=f.stops.length,retired=f.retired.length,held=deferred(),render=engine.keylockRenderer.render.bind(engine.keylockRenderer);let calls=0;
+ engine.keylockRenderer.render=async(...args)=>{if(++calls===1){await held.promise;return render(...args);}throw Error('controlled newer Reverse rejection');};
+ const older=engine.setReverse(deck,!committedReverse),aborted=assert.rejects(older,{name:'AbortError'});
+ try{
+  await waitFor(()=>calls===1);
+  await assert.rejects(engine.setReverse(deck,committedReverse),/newer Reverse rejection/);
+ }finally{held.resolve();await aborted;}
+ assert.equal(deck.reverse,committedReverse);assert.equal(engine.voices.get(0),voice);assert.equal(deck.playing,true);assert.equal(deck.processing,false);assert.equal(engine.transforms.size,0);
+ engine.ctx.currentTime+=.2;assert.ok(Math.abs(engine.position(deck)-clock(engine.ctx.currentTime))<1e-12);
+ assert.equal(f.starts.length,started);assert.equal(f.stops.length,stopped);assert.equal(f.retired.length,retired);
+ engine.pause(deck);assert.equal(deck.playing,false);assert.equal(engine.voices.size,0);
+ }
+});
 for(const replacement of [false,true])test(`${replacement?'replacement':'Stop'} revokes an older Reverse preparation`,async()=>{
  const f=await ready(),{engine,deck}=f,held=deferred(),render=engine.keylockRenderer.render.bind(engine.keylockRenderer);let waiting=false;
  engine.keylockRenderer.render=async(...args)=>{waiting=true;await held.promise;return render(...args);};

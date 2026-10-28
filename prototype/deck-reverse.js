@@ -11,7 +11,8 @@ export async function setDeckReverse(engine,d,reverse){
  }
  const voice=engine.voices.get(d.index);
  if(d.playing&&!voice?.deckScratchTransport&&!voice?.censorReverse&&!engine.deckScratchRequests.has(d.index)){
-  const track=d.track,previous=d.reverse,token=engine.startTokens.get(d.index),clock=engine.voiceClock(d,voice),handoff=createSyncTempoHandoff(engine.ctx,[d.index]);
+  // Restore committed transport direction, not an older pending request.
+  const track=d.track,previous=voice?!!(voice.reverse??voice.gridTimeline?.reverse):d.reverse,token=engine.startTokens.get(d.index),clock=engine.voiceClock(d,voice),handoff=createSyncTempoHandoff(engine.ctx,[d.index]);
   d.reverse=reverse;
   try{await engine.start(d,{priorClock:clock,positionAt:clock,handoff});handoff.finish();}
   catch(error){handoff.fail(error);const owns=handoff.owns(d.index)||(engine.startTokens.get(d.index)===token&&engine.voices.get(d.index)===voice);if(d.track===track&&owns&&d.reverse===reverse)d.reverse=previous;throw error;}

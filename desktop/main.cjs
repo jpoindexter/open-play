@@ -1,9 +1,10 @@
 'use strict';
-const {app,BrowserWindow,Menu,dialog}=require('electron');
+const {app,BrowserWindow,Menu,Tray,nativeImage,dialog}=require('electron');
 const path=require('node:path');
 const {createAssetServer}=require('./server.cjs');
+const {createMenuBar}=require('./menu-bar.cjs');
 app.setName('Open Play Test');
-let host,window;
+let host,window,menuBar;
 const testTitle=`Open Play Test ${app.getVersion()} — MIDI controls test`;
 if(!app.requestSingleInstanceLock())app.quit();
 else{
@@ -39,8 +40,10 @@ else{
    window.loadURL(host.origin+'/prototype/');
   };
   Menu.setApplicationMenu(Menu.buildFromTemplate([{label:app.name,submenu:[{label:'About this test build',click:()=>dialog.showMessageBox({type:'info',title:'Open Play Test',message:testTitle,detail:`Electron ${process.versions.electron}; Chromium ${process.versions.chrome}. Existing interface and browser audio engine; current browser controls source dd068e4, approved baseline f8b0abf; prior0.1.5 retained. Imported bytes are saved locally when storage succeeds; Files reports session-only failures. Prior browser Key Shift/Video MIDI and imported-audio evidence does not establish this main-app mapping/reload/audio path. Historical0.1.3 Hercules headphone/master isolation and0.1.1 knob navigation were user-confirmed; full mapping, hot-plug, latency and quality remain incomplete. Optional stems use the existing local model service. No public release or notarization.\n\nProject: ${assets}`})},{type:'separator'},{role:'quit'}]},{label:'Edit',submenu:[{role:'undo'},{role:'redo'},{type:'separator'},{role:'cut'},{role:'copy'},{role:'paste'},{role:'selectAll'}]},{label:'View',submenu:[{role:'reload'},{role:'resetZoom'},{role:'zoomIn'},{role:'zoomOut'},{role:'togglefullscreen'},{type:'separator'},{role:'toggleDevTools'}]},{label:'Window',submenu:[{role:'minimize'},{role:'front'}]}]));
-  createWindow();app.on('activate',()=>{if(!BrowserWindow.getAllWindows().length)createWindow();});
+  createWindow();
+  if(process.platform==='darwin')menuBar=createMenuBar({Tray,Menu,nativeImage,getWindow:()=>window,origin:host.origin,iconPath:path.join(__dirname,'assets','menuTemplate.png'),quit:()=>app.quit()});
+  app.on('activate',()=>{if(!BrowserWindow.getAllWindows().length)createWindow();});
  }).catch(error=>{dialog.showErrorBox('Open Play could not start',error.message);app.quit();});
  app.on('window-all-closed',()=>app.quit());
- app.on('will-quit',()=>host?.server.close());
+ app.on('will-quit',()=>{menuBar?.destroy();host?.server.close();});
 }

@@ -12,7 +12,7 @@ const git=args=>execFileSync('git',args,{cwd:root,maxBuffer:150*1024*1024});
 const sha=bytes=>createHash('sha256').update(bytes).digest('hex');
 const sourceCommit=git(['rev-parse','HEAD']).toString().trim();
 const get=file=>git(['show',`${sourceCommit}:${file}`]);
-const version='0.1.101',name='Open Play Playback Test',port=18775,bundle='org.openplay.dj.playback.localtest';
+const version='0.1.102',name='Open Play Playback Test',port=18775,bundle='org.openplay.dj.playback.localtest';
 const profile='Open Play Playback Test',partition='persist:open-play-playback-test';
 await assertBuildRetention(path.join(root,'local-evidence/desktop-builds'),name);
 const stage=await mkdtemp(path.join(tmpdir(),'open-play-playback-'));
@@ -38,6 +38,8 @@ main=change(main,'current browser controls source dd068e4, approved baseline f8b
 main=change(main,"const {createAssetServer}=require('./server.cjs');","const {createAssetServer}=require('./server.cjs');\nconst {openPlaybackCheck,openAutoGainCheck,openRelativeTempoCheck,openGUITempoCheck,openSimpleControllerCheck,openCoreOwnershipCheck}=require('./playback-check-window.cjs');");
 main=change(main,"{label:'Window',submenu:","{label:'Checks',submenu:[{label:'Rapid Sync and Play',click:()=>openPlaybackCheck({BrowserWindow,origin:host.origin,title:testTitle})},{label:'Measured Auto Gain',click:()=>openAutoGainCheck({BrowserWindow,origin:host.origin,title:testTitle})},{label:'Relative Controller Tempo',click:()=>openRelativeTempoCheck({BrowserWindow,origin:host.origin,title:testTitle})},{label:'GUI Tempo after Sync',click:()=>openGUITempoCheck({BrowserWindow,origin:host.origin,title:testTitle})},{label:'Simple Sync Controller',click:()=>openSimpleControllerCheck({BrowserWindow,origin:host.origin,title:testTitle})},{label:'Core transport ownership',click:()=>openCoreOwnershipCheck({BrowserWindow,origin:host.origin,title:testTitle})},{label:'Device permission decisions',click:()=>dialog.showMessageBox(window,{type:'info',title:'Local permission decisions',message:'Last80 device permission decisions',detail:JSON.stringify(permissionDecisions,null,2)})}]},{label:'Window',submenu:");
 await put('main.cjs',main);await put('server.cjs',get('desktop/server.cjs'));await put('playback-check-window.cjs',get('desktop/playback-check-window.cjs'));
+await put('menu-bar.cjs',get('desktop/menu-bar.cjs'));
+for(const file of ['menuTemplate.png','menuTemplate@2x.png','open-play.icns'])await put('assets/'+file,get('desktop/assets/'+file));
 const manifest=JSON.parse(get('desktop/package.json'));
 Object.assign(manifest,{name:'open-play-playback-local-test',productName:name,version,description:'Optional current-source desktop test; full parity unverified'});delete manifest.scripts;
 await put('package.json',JSON.stringify(manifest,null,2)+'\n');
@@ -54,6 +56,8 @@ await put('assets/docs/prototype/auto-gain-fixture-reference.json',JSON.stringif
 // The archived workspace guide describes the previous installed candidate. Generate
 // only this package's identity/instructions; keep prototype source byte-for-byte.
 await put('assets/docs/prototype/TRY_CURRENT_DESKTOP.md',`# Core desktop test ${version}
+
+The Open Play app icon and macOS menu-bar shortcut menu are included. Show Open Play, Settings, Audio Devices and Help reuse the existing window/panels; Quit retains normal app behavior. Reverse failure rollback uses the committed voice direction; absent-audio backup metadata survives export, reload and later import. Listening/hardware acceptance remains separate.
 
 Accepted Load now cancels old queued tempo intentions and promptly settles the owned aborted group before rearming Sync; old initialization can finish later without overwriting new input. Headphone MIX uses the existing10ms per-gain transition policy. Current musical/headphone acceptance remains separate.
 
@@ -103,7 +107,7 @@ const modules=['core-ownership-check.js','core-ownership-check.html','jog-focus-
 const provenance={builtAt:new Date().toISOString(),approvedPrototype:'f8b0abf33c8e8468c7bec27eabc5be2930ed0086',sourceCommit,version,name,bundle,port,profile,partition,entry:'/prototype/workspace-preview.html',electronVersion:'44.9.0',prototypeFiles:modules.map(file=>({file:'prototype/'+file,sha256:sha(get('prototype/'+file))})),packagingSources:await Promise.all(['desktop/package-playback.mjs','desktop/build-retention.mjs','desktop/playback-check-window.cjs'].map(async file=>({file,sha256:sha(await readFile(path.join(root,file)))}))),stagedWrites:writes,diagnosticFixtures:fixtureManifest.fixtures.map(f=>({name:f.name,url:f.url,sha256:f.wavSHA256,reference:f.reference})),scope:'Optional private local test. Complete prototype archived from the declared commit; no adapter substitution or native R3 helper. Main app uses a separate persistent playback-test profile and own-origin MIDI/speaker permissions; microphone and camera remain denied. Package identity does not prove runtime, physical hardware, music quality or full parity. Prior apps/defaults untouched.'};
 await put('BUILD_PROVENANCE.json',JSON.stringify(provenance,null,2)+'\n');
 // Private builds seal resources without discovering certificates or provisioning profiles.
-const outputs=await packager({dir:stage,out:path.join(root,'local-evidence/desktop-builds',version),name,platform:'darwin',arch:process.arch,electronVersion:'44.9.0',appBundleId:bundle,appVersion:version,asar:true,overwrite:false,prune:true,osxSign:{identity:'-',identityValidation:false,preAutoEntitlements:false,preEmbedProvisioningProfile:false,continueOnError:false,optionsForFile:()=>({hardenedRuntime:false,timestamp:'none'})}});
+const outputs=await packager({dir:stage,out:path.join(root,'local-evidence/desktop-builds',version),name,platform:'darwin',arch:process.arch,electronVersion:'44.9.0',appBundleId:bundle,appVersion:version,icon:path.join(stage,'assets','open-play.icns'),asar:true,overwrite:false,prune:true,osxSign:{identity:'-',identityValidation:false,preAutoEntitlements:false,preEmbedProvisioningProfile:false,continueOnError:false,optionsForFile:()=>({hardenedRuntime:false,timestamp:'none'})}});
 const asarPath=path.join(outputs[0],name+'.app','Contents','Resources','app.asar');
 const receipt={...provenance,stage,outputs,asarPath,asarSHA256:sha(await readFile(asarPath))};
 await writeFile(path.join(root,`docs/prototype/desktop-${version}-playback-package.json`),JSON.stringify(receipt,null,2)+'\n',{flag:'wx'});

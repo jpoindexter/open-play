@@ -30,6 +30,14 @@ function safeJSON(value,path='library',depth=0){
 }
 export const metadataFields=['title','artist','album','bpm','key','plays','rating','comment','color','cues','savedLoops','grid','gridMarkers','gridWarpMarkers','locked','flips','sampleGain','trackGainDb','autoGainSchema','autoGainOffsetDb','autoGainPendingDb','analysisResult','metadataSources','analysisGainDb','metadataRevision','stemJob','stemModel','stemBackend','inStemCrate'];
 export function trackMetadata(track){return Object.fromEntries(metadataFields.filter(key=>track[key]!==undefined).map(key=>[key,track[key]]));}
+export function createLibraryBackup({tracks,localTags={},crates,settings}){
+  const tags=new Map();
+  for(const [hash,metadata] of Object.entries(localTags))if(/^[a-f0-9]{64}$/.test(hash)){
+    const id='local-'+hash;tags.set(id,{id,...trackMetadata(metadata)});
+  }
+  for(const track of tracks)tags.set(track.id,{id:track.id,...trackMetadata(track)});
+  return {format:'open-play-prototype-1',crates,settings,tags:[...tags.values()]};
+}
 function analysis(value){
   if(value===null)return true;
   required(value,{duration:nonnegative,analyzedDuration:nonnegative,gain:object,warnings:list(string)},'analysis');

@@ -1,5 +1,5 @@
 import {uiIcons} from './vendor/astryx/icons.js';
-import {trackMetadata,validateMetadata} from './library-state.js';
+import {trackMetadata,validateMetadata,createLibraryBackup} from './library-state.js';
 import {createSessionStorage} from './session-storage.js';
 import {snapshotDeckSession,restoreDeckSession} from './deck-session.js';
 import {installSessionStatus} from './session-status.js';
@@ -1134,10 +1134,10 @@ async function importLocalFiles(files) {
         n++;
         continue;
       }
+      await engine.buffer(track);
       try{Object.assign(track,validateMetadata(state.localTags[track.contentHash]||{},track));}
       catch(error){sessionStorage.reject(error);updateSessionStatus();}
       normalizeStemCrateTrack(track);
-      await engine.buffer(track);
       track.analyzed = true;
       if(await saveLocalAudio(track,file,bytes))savedCount++;
       state.tracks.push(track);
@@ -1470,7 +1470,7 @@ api.pitchPlay=pitchPlay;
 engine.onPrepareSampleGain=track=>trackGain.refresh(track);
 const panels = createPanels(api);
 updateSessionStatus=installSessionStatus({storage:sessionStorage,save:persist,download,
-  backup:()=>({format:'open-play-prototype-1',crates:state.crates,settings:state.settings,tags:state.tracks.map(t=>({id:t.id,...trackMetadata(t)}))}),
+  backup:()=>createLibraryBackup(state),
   recover:()=>{state.sessionSaved=sessionStorage.recover(sessionSnapshot());updateSessionStatus();if(state.sessionSaved)notify('Recovery session saved. Original data retained locally.');},
 });
 sampleSyncLeader=()=>panels.samplerSync.externalLeader();
