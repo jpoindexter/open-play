@@ -1,8 +1,10 @@
-# Owner controller and listening session — 27 October 2026
+# Owner controller and listening session — current re-entry28October2026
 
 Trello: https://trello.com/c/yJ8r9kCD/165-core-live-01-jason-controller-and-listening-session
 
-Jason asked to group owner-dependent work for later today; no automatic calendar/reminder or owner result is inferred. Refresh the exact latest inspected private build before starting (**0.1.80 / source `3818552`**, inspected 5/5, current/default and observed paused; two tracks at 13.073 / 12.426 seconds).
+Current:86/source9ef47e3 remains running;87/sourcece1560a is staged/inspected5/5 and unlaunched because the Mac explicitly reports locked. **After manual unlock, promote87through Recording preservation, normal86quit/process absence, a hash-matched closed-profile backup and exact87recovery. Hardware is not needed for promotion.** Only then update starters/retire86. [Authoritative current requirements/checklist](../prototype/CORE_DJ_REENTRY_2026-10-28.md).
+
+The dated80session recipe below is retained as history; its exact-version/current-runtime statements are superseded by the current re-entry above. Its physical/listening criteria remain valid and grouped for Jason’s later availability; no automatic reminder or owner result is inferred.
 
 1. Confirm exact current 0.1.80 / source `3818552` and preserve any NEW recording/work. Protected normal quit, hash-matched closed-profile backup and native paused recovery are already executed; the same two tracks/positions, 16 library entries, core controls and previews remain. Prior channel B LOW cut was restored; tempo/Sync reset normally on restart. Do not repeat startup without changed state/source. Connect Hercules Inpulse 300 MK2, headphones and speakers; confirm exact outputs/safe levels while retaining existing tested mappings.
 2. CORE-FIX-24 https://trello.com/c/3dkC5glV: isolated four-deck control ownership and69native paused click-on/Space-off are already covered; exercise the relevant physical held/playing use while verifying routing, not another paused rerun. Verify private headphone cue at channel-fader zero, swap A/B, cue/master mix and headphone level, physical speaker/headphone destinations and master level. Stop if a private cue leaks to speakers unexpectedly.
