@@ -10,7 +10,7 @@ Outcome: reliable real-track core mixing in the current desktop, retaining every
 
 Now: preserve current/default94, the closed-profile recovery copy and all original recordings/music. No broad suite/soak, repeated clean listening, speculative DSP change, new theme rollout or rebuild is needed for this handoff.
 
-Next, after manual unlock: inspect actual current94transport/Recording/session state and preserve needed captures. Continue the relevant changed native/playing and later owner/device checks below. Do not repeat startup alone, re-import songs, overwrite owner positions from a historical checkpoint or rebuild just to accumulate another clean result.
+Next: native availability was observed again after the earlier lock. The isolated controlled-failure setup was blocked by DevTools paste protection before execution; it was not bypassed. That check was stopped/closed and the main paused session preserved. Native queue acceptance needs a supported isolated fault-control route; no ordinary successful tempo rerun substitutes for it. Owner listening and device work remain deferred. Do not re-import songs, overwrite owner positions or rebuild just to accumulate another clean result.
 
 Done requires relevant current native playing/error ownership, one scoped listening result and suitable physical routing/controller acceptance, with pop/stall disposition recorded honestly. Existing prior53manual/jog/EQ/Cue/stop acceptance remains accepted at its stated scope. Packaging or another clean case cannot close an intermittent defect.
 
