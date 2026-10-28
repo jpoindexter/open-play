@@ -39,7 +39,8 @@ export function createSmartSync({engine, state, externalLeader=()=>null}) {
   const revisions = new WeakMap();
   const pendingPresses = new WeakMap();
   const alignmentTimelines = new WeakMap();
-  let syncBPM=null;
+  let syncBPM=null,tempoOwner={};
+  const setTempo=bpm=>{syncBPM=bpm;tempoOwner={};};
   const enabled = () => state.settings['Sync Mode'] === 'Smart Sync';
   const engaged = deck => !!deck.sync && engagedStates.has(deck.syncState);
   const revise = deck => {const n=(revisions.get(deck)||0)+1; revisions.set(deck,n);return n;};
@@ -138,7 +139,7 @@ export function createSmartSync({engine, state, externalLeader=()=>null}) {
       // Source loss after scheduling does not revoke a current committed Play.
       if(!owned())throw cancelled();
       const following=source.valid();
-      syncBPM=source.bpm;deck.sync=true;deck.syncState=(following?barLock:barCompatible(deck))?'beat':'tempo';deck.syncRole=following?'secondary':'primary';
+      setTempo(source.bpm);deck.sync=true;deck.syncState=(following?barLock:barCompatible(deck))?'beat':'tempo';deck.syncRole=following?'secondary':'primary';
       return result;
     }finally{if(alignmentTimelines.get(deck)===timeline)alignmentTimelines.delete(deck);}
   }
@@ -152,7 +153,7 @@ export function createSmartSync({engine, state, externalLeader=()=>null}) {
       const revision=revise(deck),track=deck.track;
       await engine.setRate(deck,externalRate(deck,source),{syncInternal:true});
       if(!enabled()||revisions.get(deck)!==revision||deck.track!==track||!source.valid())throw cancelled();
-      syncBPM=source.bpm;deck.sync=true;deck.syncRole='secondary';deck.syncState='armed';
+      setTempo(source.bpm);deck.sync=true;deck.syncRole='secondary';deck.syncState='armed';
       return;
     }
     if (!primary) {
@@ -165,7 +166,7 @@ export function createSmartSync({engine, state, externalLeader=()=>null}) {
       const prior=alignmentTimelines.get(deck),voice=engine.voices?.get(deck.index),rateOwner=engine.rateOwners?.get(deck);
       const inherit=prior?.previous&&prior.owns()&&prior.controller===engine.transforms?.get(deck.index)&&prior.voice===voice&&prior.track===deck.track&&prior.rate===deck.rate&&prior.rateOwner===rateOwner;
       const previous=inherit?prior.previous:{rate:deck.rate,sync:deck.sync,syncRole:deck.syncRole,syncState:deck.syncState},previousBPM=inherit?prior.previousBPM:syncBPM,track=deck.track,revision=revise(deck);
-      syncBPM=bpm;deck.rate=rate;
+      setTempo(bpm);deck.rate=rate;
       deck.sync=true;deck.syncRole='primary';deck.syncState=deck.playing?(barCompatible(deck)?'beat':'tempo'):'armed';
       if(deck.playing && deck.track.gridWarpMarkers?.length){
         deck.position=engine.position(deck);let token;
@@ -174,7 +175,7 @@ export function createSmartSync({engine, state, externalLeader=()=>null}) {
         const timeline={track,bpm,owns,valid:()=>enabled()&&owns(),previous,previousBPM,voice,rateOwner,rate};alignmentTimelines.set(deck,timeline);
         try{const pending=engine.start(deck);token=engine.startTokens?.get(deck.index);timeline.controller=engine.transforms?.get(deck.index);await pending;if(!enabled()||!owns()||timeline.controller?.signal.aborted)throw cancelled();}
         catch(error){
-          if(enabled()&&revisions.get(deck)===revision&&deck.track===track&&engine.startTokens?.get(deck.index)===token&&engine.voices?.get(deck.index)===voice&&deck.rate===rate&&deck.syncRole==='primary'&&syncBPM===bpm){Object.assign(deck,previous);syncBPM=previousBPM;}
+          if(enabled()&&revisions.get(deck)===revision&&deck.track===track&&engine.startTokens?.get(deck.index)===token&&engine.voices?.get(deck.index)===voice&&deck.rate===rate&&deck.syncRole==='primary'&&syncBPM===bpm){Object.assign(deck,previous);setTempo(previousBPM);}
           else if(timeline.cancelled&&deck.track===track&&engine.startTokens?.get(deck.index)===token&&engine.voices?.get(deck.index)===voice&&deck.rate===rate&&engine.rateOwners?.get(deck)===rateOwner)deck.rate=previous.rate;
           throw error;
         }finally{if(alignmentTimelines.get(deck)===timeline)alignmentTimelines.delete(deck);}
@@ -199,7 +200,7 @@ export function createSmartSync({engine, state, externalLeader=()=>null}) {
     const bpm=engaged(deck)&&syncBPM?syncBPM:gridBPM(deck.track,engine.position(deck))*engine.audibleRate(deck);
     if(!Number.isFinite(bpm)||bpm<=0)throw new Error('Set a valid master BPM before using Sync.');
     revise(deck);
-    syncBPM=bpm;
+    setTempo(bpm);
     for(const other of state.decks)if(other!==deck&&other.syncRole==='primary')other.syncRole='secondary';
     deck.sync=true;deck.syncRole='primary';
     deck.syncState=deck.playing?(barCompatible(deck)?'beat':'tempo'):'armed';
@@ -266,7 +267,7 @@ export function createSmartSync({engine, state, externalLeader=()=>null}) {
   function tempo(deck,rate){
     const bpm=deck.track.bpm*rate;
     for(const d of state.decks.filter(engaged))createBeatgrid(d.track).timeline({position:engine.position(d),when:engine.ctx?.currentTime||0,bpm});
-    syncBPM=bpm;return bpm;
+    setTempo(bpm);return bpm;
   }
   function captureGrid(track){
     if(!enabled())return [];
@@ -307,6 +308,7 @@ export function createSmartSync({engine, state, externalLeader=()=>null}) {
   }
   return {press,setMaster,start,played,paused,manipulated,disengage,loaded,reconcile,engaged,timeline,tempo,captureGrid,edited,validate,
     pending:deck=>pendingPresses.has(deck),
-    captureTempo:()=>syncBPM,restoreTempo:bpm=>{syncBPM=bpm;},
-    reset:() => {state.decks.forEach(clear);syncBPM=null;}};
+    captureTempo:()=>syncBPM,captureTempoOwner:()=>tempoOwner,
+    restoreTempo:(bpm,owner)=>{if(owner!==undefined&&owner!==tempoOwner)return false;setTempo(bpm);return true;},
+    reset:() => {state.decks.forEach(clear);setTempo(null);}};
 }

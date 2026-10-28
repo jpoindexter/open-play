@@ -1,0 +1,33 @@
+{
+  "date": "2026-10-28",
+  "baselineSource": "95833b321fd224710963c2faca93443c43ebbecd",
+  "currentNative": {"version": "0.1.88", "source": "1fecc28", "containsRepair": false, "unchanged": true},
+  "reproduction": {
+    "kind": "Actual request closure/Smart Sync and actual four-deck Compact workspace; held controlled group rejection",
+    "node": {"requested": 132, "newMaster": 90, "afterOldFailure": 120},
+    "browser": {"initial": 124, "pending": 125.2, "newMaster": 122, "baselineAfterFailure": 124, "repairedAfterFailure": 122},
+    "controlsRetained": [423, 423],
+    "playControls": 4,
+    "materializedPreviewImagesRetained": [1, 1],
+    "allDecksPaused": true,
+    "masterVolume": 0,
+    "media": "Generated demo audio only; no user originals or normal profile"
+  },
+  "implementation": {
+    "newModule": "prototype/sync-tempo-requests.js",
+    "moduleLines": 25,
+    "testLines": 23,
+    "sharedTempoOwner": "Every write revokes the prior owner, including equal numeric BPM",
+    "packageModuleDeclared": true,
+    "audioDSPClockFadeLayoutChanges": false
+  },
+  "verification": {
+    "newFocusedTests": 1,
+    "casesInFocusedTest": ["current owner rollback", "newer different-BPM master", "newer same-BPM master"],
+    "existingNamedTests": ["failed uncommitted primary start restores prior controls and shared tempo"],
+    "actualBrowserBeforeAfter": true,
+    "fullSuiteOrSoak": false,
+    "cleanup": "Stopped; frame closed; owned origin cleared; server stopped"
+  },
+  "pending": ["Next immutable desktop package and protected native promotion", "Relevant native ownership/playing/listening acceptance", "Intermittent audible pops and long-session waveform stalls", "Physical controller/headphone/master session"]
+}

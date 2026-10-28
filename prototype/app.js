@@ -18,6 +18,7 @@ import {createCensorHolds} from './censor.js';
 import { synchronizeSimple, cancelSimpleSync, isSimpleSyncPending } from './sync.js';
 import { createSyncMaster } from './sync-master.js';
 import { createSmartSync, hasBeatgrid } from './smart-sync.js';
+import {createSyncTempoRequests} from './sync-tempo-requests.js';
 import {createBeatgrid} from './beatgrid.js';
 import {currentDeckBPM} from './deck-tempo.js';
 import {refreshTransportControls,refreshDeckSwitches,refreshCueControls} from './transport-presentation.js';
@@ -2072,28 +2073,7 @@ window.openPlay = {
 
 engine.onProcessing = () => refreshTransportControls(state);
 
-let syncTempoQueue=null;
-engine.onRateRequest = async (deck,rate) => {
-  if(!['Simple Sync','Smart Sync'].includes(state.settings['Sync Mode'])||!deck.sync)return slicer.changeRates([{deck,rate}],()=>engine.setRate(deck,rate,{syncInternal:true}));
-  const request={deck,track:deck.track,rate};
-  if(syncTempoQueue){syncTempoQueue.wanted=request;return syncTempoQueue.promise;}
-  const queue={wanted:request,promise:null};syncTempoQueue=queue;
-  queue.promise=Promise.resolve().then(async()=>{
-    while(queue.wanted){
-      const next=queue.wanted;queue.wanted=null;
-      if(next.deck.track!==next.track||!next.deck.sync)continue;
-      const priorTempo=smartSync.captureTempo(),smart=state.settings['Sync Mode']==='Smart Sync';
-      try{
-        const bpm=smart?smartSync.tempo(next.deck,next.rate):next.track.bpm*next.rate;
-        if(!Number.isFinite(bpm)||bpm<=0)throw Error('Set a valid BPM before changing synced tempo.');
-        const changes=state.decks.filter(d=>d.sync&&d.track).map(d=>({deck:d,rate:bpm/d.track.bpm}));
-        if(changes.some(x=>!Number.isFinite(x.rate)||x.rate<.25||x.rate>4))throw Error('Matched tempo is outside a synced deck transport range.');
-        await slicer.changeRates(changes,()=>engine.setSyncedRates(changes,{participants:panels.samplerSync.participants(bpm)}));
-      }catch(error){if(smart)smartSync.restoreTempo(priorTempo);throw error;}
-    }
-  }).finally(()=>{if(syncTempoQueue===queue)syncTempoQueue=null;});
-  return queue.promise;
-};
+engine.onRateRequest=createSyncTempoRequests({engine,state,smartSync,slicer,participants:bpm=>panels.samplerSync.participants(bpm)});
 engine.onManualPosition = d => {for(const other of state.decks)cancelSimpleSync(engine,other,d);smartSync.manipulated(d);};
 engine.onGridTimeline = (d,options) => smartSync.timeline(d,options);
 engine.onValidateTransport = (d,changes) => smartSync.validate(d,changes);

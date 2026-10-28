@@ -1,5 +1,7 @@
 # Sync pop investigation
 
+28 October source follow-up: CORE-FIX-42 repairs a verified older-tempo-failure rollback overwriting newer MASTER/Sync state. Actual paused four-deck GUI/source proof; **not established pop causation**. Current native88does not contain42; no new recording/listening was performed. [Scope and pending delivery](SYNC_TEMPO_ROLLBACK_2026-10-28.md).
+
 ## Current disposition — 28 October 2026
 
 **OPEN for the intermittent owner-reported Sync pop and broader four-deck stalls.** Current88/source1fecc28 is inspected5/5 and observed paused after protected86quit/backup/recovery. CORE-FIX-40removes measured idle Sync DOM churn;41prevents invalid warped-BPM saves. Neither is proven audible-pop or historical-stall causation. Fresh availability/empty Recording allowed promotion after the earlier lock cleared; no main Play/Sync/REC Start. [Delivery and limits](PARALLEL_CORE_BETA_088_2026-10-28.md).
