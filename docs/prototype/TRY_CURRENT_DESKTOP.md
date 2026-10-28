@@ -1,12 +1,14 @@
-# Current private desktop0.1.89
+# Current private desktop0.1.100
 
-Use `Start Open Play Current Test.command` or `Start Open Play Playback Test.command`. Both target inspected0.1.89/source4d507de, open with Constant Change/Prism paused13.073/12.426s. Avoid a second instance/profile.
+Use `Start Open Play Current Test.command` or `Start Open Play Playback Test.command`. Both now target inspected0.1.100/source188ccd9. The exact candidate is open with Constant Change/DJ W!LD paused at50.716/62.715s. Avoid a second instance/profile.
 
-Protected88Recording/quit/process absence and a matching248-file120233626-byte closed-profile backup precede observed89native recovery.16tracks/core controls/16materialized previews retained; prior BLOW−24dB restored. Master−10.0dB/silent; tempo/Sync reset intentionally. Only89bundle remains; no main Play/Sync/REC Start. [Delivery](DESKTOP_CORE_089_2026-10-28.md).
+Accepted Load now retires older queued tempo intentions before Sync rearm; headphone MIX uses10ms gain ramps. These have scoped composed/browser and offline generated-signal evidence. Actual native startup retained16 library tracks/12 materialized previews and core controls; no new musical/headphone/controller acceptance. [Repair report](CORE_BATCH_100_2026-10-28.md) · [Native delivery](desktop-0.1.100-core-native.json).
 
-CORE-FIX-42's declared25-line module now ships: failed older shared-tempo changes cannot roll back a newer MASTER/Sync write. Controlled-error source/browser and focused regressions are separate from the native paused-startup proof. Relevant native failed-request/playing/listening remains pending; intermittent pops/stalls stay OPEN.
+Protected99 empty Recording/normal quit/process absence and a matching255-file120781202-byte closed-profile backup preceded100 launch. Same two tracks and positions retained; master−10.04344dB/silent UI, headphone MIX0%/LEVEL10%, filters Off. Tempo/Sync reset intentionally. Only100 bundle remains after verified inactive99 retirement. No main Play/Sync/Cue/REC Start during delivery.
 
-[Help & manual](https://open-play-help.vercel.app) · [Known issues](../beta/KNOWN_ISSUES.md) · [Beta distribution](../beta/DISTRIBUTION_READINESS.md). This is a private app; signing/notarization/public installation and hardware gates remain OPEN. Preserve any needed recording before further upgrade.
+**Optional filters:** Settings → Mixer → Channel Filters. Off hides and bypasses the knobs while retaining their amounts; On restores them. Core controls/layouts and library waveform previews remain.
+
+Generic Sync pops/stalls and changed-path native musical quality remain open; reuse prior accepted ordinary manual mix/EQ/Cue checks. [Help & manual](https://open-play-help.vercel.app) · [Known issues](../beta/KNOWN_ISSUES.md) · [Beta distribution](../beta/DISTRIBUTION_READINESS.md). This is a private app; public signing/notarization/installation and hardware gates remain OPEN. Preserve any needed recording before another upgrade.
 
 --- Historical guides below; old launch targets and blockers are not current ---
 
