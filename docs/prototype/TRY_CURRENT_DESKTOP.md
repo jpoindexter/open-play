@@ -1,14 +1,14 @@
-# Current private desktop0.1.100
+# Current private desktop0.1.101
 
-Use `Start Open Play Current Test.command` or `Start Open Play Playback Test.command`. Both now target inspected0.1.100/source188ccd9. The exact candidate is open with Constant Change/DJ W!LD paused at50.716/62.715s. Avoid a second instance/profile.
+Use `Start Open Play Current Test.command` or `Start Open Play Playback Test.command`. Both target inspected0.1.101/source761371c, now open with Constant Change/DJ W!LD paused50.716/62.715s. Avoid a second instance/profile.
 
-Accepted Load now retires older queued tempo intentions before Sync rearm; headphone MIX uses10ms gain ramps. These have scoped composed/browser and offline generated-signal evidence. Actual native startup retained16 library tracks/12 materialized previews and core controls; no new musical/headphone/controller acceptance. [Repair report](CORE_BATCH_100_2026-10-28.md) · [Native delivery](desktop-0.1.100-core-native.json).
+Headphone CUE selection and channel-trim updates now use the existing10ms gain ramp. Paired offline signal/control evidence removes an added gain step; emergency physical mute remains immediate. Prior queued-Load/MIX repairs remain. [Signal evidence and limits](headphone-cue-transition-2026-10-28.json) · [Native delivery](desktop-0.1.101-core-native.json).
 
-Protected99 empty Recording/normal quit/process absence and a matching255-file120781202-byte closed-profile backup preceded100 launch. Same two tracks and positions retained; master−10.04344dB/silent UI, headphone MIX0%/LEVEL10%, filters Off. Tempo/Sync reset intentionally. Only100 bundle remains after verified inactive99 retirement. No main Play/Sync/Cue/REC Start during delivery.
+Protected100 empty Recording/normal quit/process absence and matching256-file120421604-byte closed-profile backup preceded101 launch.16 tracks/12 materialized previews/core controls and positions retained; filters Off, headphone MIX0%/LEVEL10%, master−10.04344dB/silent UI. Tempo/Sync reset intentionally. Only101 bundle remains after inactive100 verification/retirement. No main Play/Sync/Cue/REC Start in delivery.
 
-**Optional filters:** Settings → Mixer → Channel Filters. Off hides and bypasses the knobs while retaining their amounts; On restores them. Core controls/layouts and library waveform previews remain.
+**Optional filters:** Settings → Mixer → Channel Filters. Off hides and bypasses the knobs while retaining their amounts; On restores them. All controls/layouts and library waveform previews remain.
 
-Generic Sync pops/stalls and changed-path native musical quality remain open; reuse prior accepted ordinary manual mix/EQ/Cue checks. [Help & manual](https://open-play-help.vercel.app) · [Known issues](../beta/KNOWN_ISSUES.md) · [Beta distribution](../beta/DISTRIBUTION_READINESS.md). This is a private app; public signing/notarization/installation and hardware gates remain OPEN. Preserve any needed recording before another upgrade.
+Next owner session checks changed headphone CUE/trim/MIX/LEVEL transitions plus relevant Sync/load actions, using prior accepted ordinary manual mix/EQ/Cue evidence. Generic Sync pops/stalls, native musical quality and physical routing remain open. [Help & manual](https://open-play-help.vercel.app) · [Known issues](../beta/KNOWN_ISSUES.md) · [Beta distribution](../beta/DISTRIBUTION_READINESS.md). Private candidate; public signing/notarization/installation and hardware acceptance remain OPEN. Preserve any needed recording before further upgrade.
 
 --- Historical guides below; old launch targets and blockers are not current ---
 
