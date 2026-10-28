@@ -1,5 +1,7 @@
 ## Current core status — 28 October2026
 
+**Analysis backlog captured, not implemented:** [rekordbox song-analysis inventory](docs/research/REKORDBOX_SONG_ANALYSIS_2026-10-28.md) and Trello ANA-RB-01 link existing BPM/grid/key/gain/queue work plus new phrase, vocal-region, cue-analysis and similarity cards. Keep core reliability first; no new advanced-feature beta blockers. Full Hopper Python environment repaired and executed; Open Play runtime/candidate unchanged. Board 199 cards / 17 complete, no unsupported closures.
+
 **Latest native availability:** main 0.1.94 accessible again, paused positions and 16 previews retained. One isolated queue-failure setup was blocked by DevTools paste protection before execution; protection untouched, owned diagnostic stopped/closed, native failure criterion still open. See the muted-check report below.
 
 **Latest one-window muted 0.1.94 check:** grouped GUI rates 1/1.2→1.001/1.2012 and exact captured Stop silence; intended rejection was NOT reached. Shifted +24 loop misses inherited 0.3 Hz frequency criterion (FFT errors +5.54/−1.41 Hz), tracked under DEK-007; no quality/pop-resolution claim. Main 169 accessible controls/16 previews and 50.716/62.715 s positions retained. User chose muted-only; no new suite/build or main-session transport. [Report/limits](docs/prototype/NATIVE_CORE_094_MUTED_2026-10-28.md).
