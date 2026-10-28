@@ -625,7 +625,8 @@ async function ensurePreparedStems(track) {
 }
 const deckLoadRequests = new WeakMap();
 const playRequests = new WeakMap();
-function cancelPendingPlay(d){playRequests.delete(d);d.playQueued=false;instantDouble.cancelDeck(d);}
+const autoplayRequests = new WeakMap();
+function cancelPendingPlay(d){autoplayRequests.delete(d);playRequests.delete(d);d.playQueued=false;instantDouble.cancelDeck(d);}
 const faderStarts=new Map();
 async function faderStart(d,value,previous,deviceId=''){
   if(!d.track)return;
@@ -757,6 +758,7 @@ const deckKeyShift=createDeckKeyShift({state,engine,persist,
 });
 const {intent:keyShiftIntent,set:setDeckKeyShift}=deckKeyShift;
 async function play(d) {
+  autoplayRequests.delete(d);
   if (pitchPlay.latch(d) || cueHolds.latch(d)) {
     syncMaster.started(d);
     smartSync.reconcile();refreshTransportControls(state);
@@ -1973,8 +1975,14 @@ engine.onEnd = async (d) => {
     const a = filtered(),
       i = a.findIndex((t) => t.id === d.track.id);
     if (a[i + 1]) {
-      const loaded=await load(d.index, a[i + 1].id);
-      if(loaded&&state.autoplay)await play(d);
+      const loading=load(d.index, a[i + 1].id),request={};
+      autoplayRequests.set(d,request);
+      try {
+        const loaded=await loading;
+        if(loaded&&state.autoplay&&autoplayRequests.get(d)===request)await play(d);
+      } finally {
+        if(autoplayRequests.get(d)===request)autoplayRequests.delete(d);
+      }
     }
   }
   refreshTransportControls(state);
