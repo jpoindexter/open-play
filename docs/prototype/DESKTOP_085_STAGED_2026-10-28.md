@@ -1,3 +1,5 @@
+> Resolved later on28October: protected native85startup and promotion executed. [Current delivery](DESKTOP_CORE_085_2026-10-28.md). The staging observations below retain their historical scope.
+
 # Private85 staged; current84 preserved — 28 October 2026
 
 **Private0.1.85/source `fe1acc9a8eb072749ead19cd99291e22aaa7fe60` is staged and unlaunched.** ASAR `8c7d05b0b25a97c300c1004fbc5637ddce9d2ae89b382f3b2cbf9110e5d118f3`; exact immutable-source/archive/controlled-host inspection5/5. The new24-line deck-reverse.js is declared in the package. [Repair and scoped evidence](REVERSE_REJECTION_2026-10-28.md).

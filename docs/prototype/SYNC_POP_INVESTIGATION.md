@@ -2,7 +2,7 @@
 
 ## Current disposition — 28 October 2026
 
-**OPEN for the intermittent owner-reported Sync pop and broader four-deck stalls.** Current native84/sourcea69166e remains running; candidate85/sourcefe1acc9is staged/unlaunched and inspected5/5. Native Recording input does not reach84, so safe quit/backup/promotion is pending. [Staging boundary](DESKTOP_085_STAGED_2026-10-28.md). No lock, audible or native85acceptance is inferred.
+**OPEN for the intermittent owner-reported Sync pop and broader four-deck stalls.** Current native85/sourcefe1acc9 is inspected5/5 and observed paused after protected normal84quit, closed-profile backup and track/position/library recovery. The earlier native promotion barrier has cleared. [Native delivery](DESKTOP_CORE_085_2026-10-28.md). No Sync-pop, audible, native Reverse or moving-waveform acceptance is inferred.
 
 The latest reproduced defect is Reverse preparation rejection stopping an advancing real-song voice. CORE-FIX-38's source/browser repair now retains that voice, actual clock and direction; the existing pitch-memory error is honest. This is not established Sync-pop causation. It does not change the Sync clock/fade or resolve full-track reverse pitch memory. [Executed scope](REVERSE_REJECTION_2026-10-28.md).
 
