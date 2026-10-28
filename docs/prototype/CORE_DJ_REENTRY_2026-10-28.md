@@ -14,6 +14,8 @@ Next, after manual unlock: inspect actual current94transport/Recording/session s
 
 Done requires relevant current native playing/error ownership, one scoped listening result and suitable physical routing/controller acceptance, with pop/stall disposition recorded honestly. Existing prior53manual/jog/EQ/Cue/stop acceptance remains accepted at its stated scope. Packaging or another clean case cannot close an intermittent defect.
 
+Latest muted 0.1.94 subset: [one native grouped-tempo/Stop observation](NATIVE_CORE_094_MUTED_2026-10-28.md). The intended rejection was not reached; native failure criteria remain open. Shifted +24 loop frequency criterion misses are retained under DEK-007. Main controls/previews/positions verified unchanged; owner listening remains deferred.
+
 ## Requirement-by-requirement audit
 
 | Explicit requirement | Evidence inspected | Current gap / decision |

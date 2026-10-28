@@ -1,5 +1,7 @@
 ## Current core status — 28 October2026
 
+**Latest one-window muted 0.1.94 check:** grouped GUI rates 1/1.2→1.001/1.2012 and exact captured Stop silence; intended rejection was NOT reached. Shifted +24 loop misses inherited 0.3 Hz frequency criterion (FFT errors +5.54/−1.41 Hz), tracked under DEK-007; no quality/pop-resolution claim. Main 169 accessible controls/16 previews and 50.716/62.715 s positions retained. User chose muted-only; no new suite/build or main-session transport. [Report/limits](docs/prototype/NATIVE_CORE_094_MUTED_2026-10-28.md).
+
 **Current/default0.1.94**, sourceaa07a04: both CORE-FIX-44queue layers included, archive/source/controlled-host5/5. Actual native settled startup restores Constant Change/DJ W!LD paused50.716/62.715s,16tracks,2Play/tempo,6EQ and12materialized library previews; master−10.04344/silent UI meter.256-file120945306Bclosed92profile hash/mtime revalidated before launch. No main Play/Sync/REC Start or profile restore. [Native delivery and limits](docs/prototype/DESKTOP_CORE_094_2026-10-28.md).
 
 Current/playback/named starters94syntax checked; exact bundle launch observed separately. Inactive92hash/version/process verified and retired with its versioned starter; only94bundle retained. Mac locked again after the settled capture; final native read blocked. Keep current native failure/playing/listening/pop/stall/physical gates OPEN. Reuse prior53manual/jog/EQ/Cue/stop evidence. [Ordered requirement audit](docs/prototype/CORE_DJ_REENTRY_2026-10-28.md).
