@@ -1,14 +1,14 @@
 # Open Play HTML review candidate
 
-## Current core delivery — 27 October 2026
+## Current core delivery — 28 October 2026
 
-**Private 0.1.80 / source `3818552` is inspected 5/5, current and observed paused.** Empty Recording preflight → normal 0.1.79 quit/process absence → closed 256-file / 120,336,158-byte hash-matched profile backup → exact 0.1.80 startup. Constant Change / Prism restored at 13.073 / 12.426 seconds, with 16 library entries, two Play/tempo controls, six EQ controls and 12 AX library previews. Prior B LOW −24 dB restored; tempo/Sync reset normally. No main Play, Sync, Double or REC Start. [Native evidence](../docs/prototype/DESKTOP_CORE_080_2026-10-27.md).
+**Private 0.1.81 / source `2127c7b` is inspected 5/5, current and observed stopped.** Closed241-file/114,395,136-byte profile backup hashes match; exact native startup restores Constant Change / Prism13.073/12.426s,16library tracks,2Play/tempo,6EQ and12AXwaveform previews. PriorBLOW−24dB restored; tempo/Sync reset normally. No main Play/Sync/stutter/Double/REC Start. [Native evidence](../docs/prototype/DESKTOP_CORE_081_2026-10-28.md).
 
-CORE-FIX-33 key-shift control retention is included with inherited Double/loop/switch/analysis/load/Sync repairs and flat-black palette. One paused native A key Up/Down feedback check restores shift zero and original Key Lock off; positions/controls/previews remain present. This does not prove native DOM identity, held/playing, physical MIDI or listening acceptance. The shared request module is 25 lines; legacy app.js shrinks but remains debt.
+CORE-FIX-34 stutter completion now reuses the existing transport-only refresh. Actual muted four-deck Compact playing/paused-start actions retain355/355controls, other-fader focus/value, outgoing voice/rate and8/8previews; baseline114/355and lost focus. One composed regression passes; no repeated broad suite/soak/listening. Source/browser repair is verified; native stutter/held/playing/controller/listening remains open. Prior key/Double/loop/switch repairs and flat-black styling remain; legacy app.js is still oversized debt.
 
-Launchers target 0.1.80; verified inactive 0.1.79 was removed, freeing 601,354,240 allocated bytes. Only 0.1.80 remains; build stage/tar are absent. Original audio, recordings and recovery backups are preserved. No Downloads clutter or broad test/soak/listening rerun.
+Launchers target81; inactive80removed552,280,064allocated bytes. Only81bundle remains; package stage/tar and owned source fixtures/tab/server are absent. Music, recordings and recovery profiles preserved. [Diagnostic cleanup](../docs/delivery/DIAGNOSTIC_CLEANUP_2026-10-28.md) removed another510,152,704allocated bytes earlier; historical receipts retain their original scope.
 
-Trello 181 cards / 14 complete. CORE-FIX-33 and broader criteria remain open. Prior 0.1.53 ordinary manual/jog/EQ/Cue/stop listening retains its scope. [CORE-LIVE-01](https://trello.com/c/yJ8r9kCD) holds deferred owner/controller/headphone/master/held/listening checks. Continue reproduced software-only core blockers; capture the next actual pop/stall before changing clocks/DSP. No public-beta/full-parity completion claim.
+Trello182cards/14complete. CORE-FIX-34and broader criteria remain open. Prior0.1.53manual beatmatch/jog/EQ/Cue/clean-stop listening retains its scope. [CORE-LIVE-01](https://trello.com/c/yJ8r9kCD) holds deferred owner/controller/headphone/master/held/listening acceptance. Next: continue concrete core blockers with one focused reproduction; capture the next actual pop/stall before clock/DSP changes. No full-core/public-beta/full-parity completion claim.
 
 For HTML review, reuse the existing server/session. If none is running, `python3 scripts/serve_prototype.py --port 8848` serves `/prototype/workspace-preview.html` from the repository root. Do not reload a live session for board administration.
 

@@ -1,10 +1,10 @@
-# Current private desktop0.1.78
+# Current private desktop 0.1.81
 
-Open `Start Open Play Current Test.command` or `Start Open Play Playback Test 0.1.78.command` only when the playback-test app is closed. It is currently open and paused. Default/named launchers target78; prior77bundle/starter retired. No public release.
+Open `Start Open Play Current Test.command` or `Start Open Play Playback Test 0.1.81.command` only when the playback-test app is closed. Exact0.1.81 is currently observed open and stopped; defaults/named launchers target81 and only81bundle is retained. No public release.
 
-Sourceae84a50passed package inspection5/5and protected native startup/recovery. Same2real tracks13.073/12.426s,16library tracks/core controls/12AX previews; priorBLOW−24dBrestored, tempo/Sync reset. No main Play/Sync/REC Start. [Current native evidence](DESKTOP_CORE_078_2026-10-27.md).
+Source2127c7b passed immutable package/source/controlled-host inspection5/5 and protected native startup. Same2realtracks13.073/12.426s,16library tracks/corecontrols/12AXpreviews; priorBLOW−24dBrestored. No main Play/Sync/stutter/REC Start. [Current native evidence](DESKTOP_CORE_081_2026-10-28.md).
 
-CORE-FIX-30loop controls and CORE-FIX-31pending Instant Double cancellation are included. Paused native loop feedback4→2→4observed; held/playing/delayed Stop/listening/hardware acceptance remains on CORE-LIVE-01. Prior53ordinary mixing evidence retains scope; do not repeat clean matrices. Capture the next actual pop/stall before changing clocks/DSP.
+Stutter uses the existing transport presentation refresh: muted browser playing/paused-start retains355/355controls, other-fader focus/value and8/8previews. Native stutter/held/playing/controller/listening remains with CORE-LIVE-01. Prior53ordinary mixing acceptance retains its scope; do not repeat clean matrices. Capture the next actual pop/stall before clock/DSP changes. Original music, recordings and recovery profiles remain preserved.
 
 --- Historical guides below; old launch targets and blockers are not current ---
 
