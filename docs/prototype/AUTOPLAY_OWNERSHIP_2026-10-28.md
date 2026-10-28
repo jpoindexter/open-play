@@ -28,7 +28,13 @@ A per-deck request identity now owns pending Autoplay. Manual Play and existing 
 
 The browser's default configured test executable was absent; switched to installed official Google Chrome in a fresh headless muted profile. No dependency download, sandbox bypass or desktop-input workaround.
 
-This does **not** establish natural-end timing, music/listening, packaged-native behavior, full layout/control breadth, headphone/controller acceptance or Sync-pop/stall resolution. Current desktop0.1.94 is unchanged. [CORE-FIX-45](https://trello.com/c/wIgeBekE) stays open for relevant desktop/live acceptance. Parents DEK-002/014 retain their broad criteria.
+This does **not** establish natural-end timing, music/listening, packaged-native behavior, full layout/control breadth, headphone/controller acceptance or Sync-pop/stall resolution. At that source/browser checkpoint, desktop0.1.94 was unchanged; desktop95follow-through is recorded below. [CORE-FIX-45](https://trello.com/c/wIgeBekE) stays open for relevant desktop/live acceptance. Parents DEK-002/014 retain their broad criteria.
 
-Next: integrate this verified source slice into the next justified immutable desktop candidate; use the deferred practical session for affected current-native transport and Sync outcomes. Do not repeat unrelated EQ/Cue/manual-mix checks already accepted in0.1.53.
+## Desktop follow-through and backlog reconciliation
+
+Private0.1.95/source4ecf035 is now current/default. Immutable package inspection5/5; actual paused startup preserves Constant Change/DJ W!LD50.716/62.715seconds,16tracks,12materialized waveform previews,2Play/tempo and6EQ controls. Master−10.04344/silent meter; no main Play/Sync/REC Start or profile restore. Recording was inactive with no downloadable unsaved capture before normal Quit. Closed profile256files/120544887bytes copied and hash/mtime-verified before launch. Inactive94archive/hash verified, then removed after95startup, freeing602083328allocated bytes; only95bundle retained. Original recordings/audio/profile backup remain. [Native receipt](desktop-0.1.95-playback-native.json), [package](desktop-0.1.95-playback-package.json), [inspection](desktop-0.1.95-playback-inspection.json).
+
+All206cards indexed into their existing660interaction requirements and card-specific criteria, without creating hundreds of duplicate cards. [Slice index](../delivery/CORE_BACKLOG_SLICES_2026-10-28.jsonl). Requirements remain reference criteria, not fresh acceptance. CORE-001's old software checklist reconciled to9/11using explicit0.1.53manual/EQ/Cue/stop evidence; original focus-loss criterion retained as a separate pending item and current race/hardware gates stay open. [Checklist readback](../delivery/CORE_CHECKLIST_RECONCILIATION_2026-10-28.json).
+
+Next: use the deferred practical session for affected current-native transport and Sync outcomes. Do not repeat unrelated EQ/Cue/manual-mix checks already accepted in0.1.53. No full-core/public-beta claim or closure of CORE-FIX-45 from paused startup.
 
