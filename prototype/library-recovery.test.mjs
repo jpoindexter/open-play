@@ -54,3 +54,19 @@ test('restored positions outside decoded duration still block saving and preserv
  assert.equal(run.owner.status().blocked,true);assert.match(run.owner.status().error,/cue.position/);
  assert.equal(run.records.get(sessionKey),original);
 });
+
+test('backup restore during pending import survives a session-only storage failure',async()=>{
+ const run=recovery();let release,entered;
+ const held=new Promise((_resolve,reject)=>{release=()=>reject(Error('controlled storage quota'));});
+ const saving=new Promise(resolve=>{entered=resolve;});
+ run.s.localAudio={saveError:null};run.ctx.localAudio={save:()=>{entered();return held;}};
+ vm.runInContext(section(app,'function localAudioWarning(){','async function restoreLocalAudio(){'),run.ctx);
+ vm.runInContext(section(app,'async function saveLocalAudio(track,file,bytes){','async function retryLocalAudio(){'),run.ctx);
+ const pending=run.ctx.importLocalFiles([file]);await saving;
+ await run.restore();assert.match(run.nodes['#library-tool-result'].textContent,/restored and saved/);
+ release();const [track]=await pending;
+ assert.equal(track.storage,'session');assert.match(track.storageError,/quota/);
+ assert.equal(track.title,metadata.title);assert.deepEqual(JSON.parse(JSON.stringify(track.cues)),metadata.cues);
+ assert.deepEqual(JSON.parse(JSON.stringify(track.savedLoops)),metadata.savedLoops);
+ assert.equal(run.s.tracks.length,1);assert.deepEqual(run.owner.load().localTags[hash].cues,metadata.cues);
+});

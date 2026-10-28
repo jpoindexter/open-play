@@ -1139,8 +1139,8 @@ async function importLocalFiles(files) {
       catch(error){sessionStorage.reject(error);updateSessionStatus();}
       normalizeStemCrateTrack(track);
       track.analyzed = true;
-      if(await saveLocalAudio(track,file,bytes))savedCount++;
       state.tracks.push(track);
+      if(await saveLocalAudio(track,file,bytes))savedCount++;
       imported.push(track);
       state.selected = track.id;
       n++;
