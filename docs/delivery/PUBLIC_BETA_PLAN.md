@@ -2,7 +2,7 @@
 
 Ship a useful Mac local-audio DJ beta as soon as its release gates are satisfied. Full Serato/rekordbox/Traktor parity and the entire Trello backlog are not launch prerequisites. No public release has been published or approved by this document.
 
-Current private checkpoint: **0.1.90/source4e01e3a is inspected5/5 and running paused after protected recovery**. Empty89Recording, normal native Quit/process absence, matching249-file120233989-byte closed-profile backup, same track positions,16library tracks/core controls/12materialized previews and restored prior BLOW−24dB. Launchers90; only90bundle retained. CORE-FIX-43queued-tempo loss repair ships; native failure/playing and owner listening remain pending. Broader Sync/stall gates stay OPEN. [Current delivery](../prototype/DESKTOP_CORE_090_2026-10-28.md).
+Current private checkpoint: **0.1.92 / source e775aae is inspected 5/5 and running**. Protected closed-profile backup and native paused recovery retain 13.229/12.426 seconds and 16 tracks; later owner track/position changes remain intact. Both CORE-FIX-43 queue repairs and readable deck/library energy previews are included. Large scrolling waveforms are unchanged. Native failure/listening and broader Sync/stall gates remain OPEN. The requested Oxide/filter/compact experiment is a separate preview and is not packaged into the current app. [Current delivery](../prototype/DESKTOP_CORE_092_2026-10-28.md).
 
 ## Conditional planning estimate — 28 October 2026
 
