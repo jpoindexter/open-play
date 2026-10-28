@@ -43,4 +43,8 @@ The local project link remains under ignored `.vercel/project.json`. Updating co
 3. Build/check and inspect the affected reading/search/navigation path.
 4. Publish the exact reviewed output, record its URL/revision and update the existing DOC-001 card.
 
-No full parameter-parity, screen-reader, current listening or physical compatibility certification is implied. Release-candidate screenshots, a current owner walk-through and public installation procedures remain documented gaps.
+No full parameter-parity, screen-reader, current listening or physical compatibility certification is implied. Ten unedited screenshots from the current candidate’s actual browser interface illustrate fifteen articles. Generated demo tracks keep private library data out of the site; they do not establish native/device or listening acceptance. A current owner walk-through and public installation procedures remain documented gaps.
+
+## Screenshots
+
+`screenshots.json` records capture provenance, source revision, dimensions, byte sizes and hashes. Only privacy-reviewed captures of generated demo tracks belong in `assets/screenshots/`. The Markdown image alt text describes the controls; its title becomes the visible caption. The build preserves aspect ratio and adds full-size links. Keep images on their own Markdown paragraph. Run the image checks and inspect the actual published page after replacing a capture.

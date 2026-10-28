@@ -1,3 +1,5 @@
+![Help and keyboard controls dialog listing current A and B keyboard bindings](/assets/screenshots/keyboard-help.jpg "The in-app Help dialog lists current bindings. The searchable text table below is the accessible reference; browser and native shortcuts can differ.")
+
 ## Current bindings
 
 This table is generated from the app’s current Help bindings. It covers the implemented A/B shortcuts, not complete four-deck/vendor shortcut parity.

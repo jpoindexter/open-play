@@ -1,3 +1,5 @@
+![Two compact decks, horizontal waveforms, a central mixer and library Preview column in Open Play](/assets/screenshots/workspace-two-decks.jpg "The Open Play workspace with generated demo tracks. Decks are paused and master output is muted.")
+
 ## Start mixing
 
 Open Play mixes music stored on your Mac. Begin with two songs and computer audio; add independent headphone routing when you have suitable hardware.
@@ -27,6 +29,8 @@ This manual documents the private candidate, including advanced surfaces that ar
 
 ## About this guide
 
-The reference baseline is **Open Play 0.1.88**. Your app’s window title identifies your version. Later fixes may change behavior; earlier builds can contain issues described here as repaired.
+The reference baseline is **Open Play 0.1.89**. Your app’s window title identifies your version. Later fixes may change behavior; earlier builds can contain issues described here as repaired.
+
+Screenshots show the actual current interface with generated demo tracks, captured in a separate browser session. They contain no private music library or physical hardware photos. Select an image or **Open full size** to read small control labels.
 
 Use the contents to browse by task or search for a control name. Each article has direct links to its sections. On a phone, use **Contents**. Your browser’s Print command provides a printable article.

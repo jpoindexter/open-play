@@ -1,3 +1,5 @@
+![Deck A and B transport, tempo faders, channel EQ and bottom crossfader](/assets/screenshots/workspace-two-decks.jpg "Two-deck Compact view. Locate each deck’s Play, CUE and TEMPO controls, then the mixer and crossfader between them.")
+
 ## Prepare two songs
 
 1. Open your supplied private build and lower the computer output volume.

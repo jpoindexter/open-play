@@ -1,3 +1,5 @@
+![A and B decks with vertical tempo faders, Play, Cue, loops and performance pad controls](/assets/screenshots/workspace-two-decks.jpg "Each deck owns its transport, vertical TEMPO fader, loop controls and Pads. Generated demo tracks are paused.")
+
 ## Load and transport
 
 Select a library song and press the intended deck’s **Load**. Wait for preparation before playback. Loading a replacement cancels pending temporary-Cue ownership; never depend on a held key to continue across a track replacement.

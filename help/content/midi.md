@@ -1,3 +1,5 @@
+![Devices dialog with audio routing and a clearly labeled simulated external control section](/assets/screenshots/audio-routing.jpg "Audio routing and external control fixtures share this dialog. The simulated controller section does not establish a connected device or physical compatibility.")
+
 ## Start with a real input
 
 Open **Settings → MIDI → Mapping editor**. Select the intended MIDI input and output where available. Grant device access only for the controller you mean to use.

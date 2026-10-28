@@ -1,3 +1,5 @@
+![Deck CUE and Play buttons, Loop 4 controls and eight hot cue slots beside the mixer](/assets/screenshots/workspace-two-decks.jpg "Temporary deck CUE is beside Play; headphone CUE is in the mixer. HOT CUE and Pads belong to the individual deck.")
+
 ## Temporary Cue
 
 While the deck is paused, press its **CUE** to set a temporary cue at the current position. Hold CUE to audition. Release to return to that cue **paused**.

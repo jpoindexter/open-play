@@ -1,3 +1,5 @@
+![Beatgrid editor with BPM, downbeat offset and a staged 12-second warp marker](/assets/screenshots/beatgrid-editor.jpg "Edit grid on a generated demo track. The 12-second / 124.5 BPM marker is a staged example, not a saved musical correction.")
+
 ## Three waveform scales
 
 | Display | Scope | Use |

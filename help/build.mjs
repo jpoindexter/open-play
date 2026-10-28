@@ -2,15 +2,27 @@ import {readFile, writeFile, mkdir, rm, copyFile, cp} from 'node:fs/promises';
 import {fileURLToPath} from 'node:url';
 import {Marked} from 'marked';
 import {pages, href} from './pages.mjs';
-import {template} from './template.mjs';
+import {template, escape} from './template.mjs';
 const root = fileURLToPath(new URL('.', import.meta.url));
 const out = `${root}dist`;
 await rm(out, {recursive:true, force:true});
 await mkdir(`${out}/assets`, {recursive:true});
 const index = [];
+const captures = JSON.parse(await readFile(`${root}screenshots.json`, 'utf8'));
+await cp(`${root}assets/screenshots`, `${out}/assets/screenshots`, {recursive:true});
 for (const page of pages) {
   const headings = [], used = new Map();
   const parser = new Marked({renderer:{
+    paragraph({tokens}) {
+      const imageOnly = tokens.length === 1 && tokens[0].type === 'image';
+      const tag = imageOnly ? 'figure' : 'p';
+      return `<${tag}>${this.parser.parseInline(tokens)}</${tag}>\n`;
+    },
+    image({href, text, title}) {
+      const capture = captures.images[href.replace('/assets/screenshots/', '')];
+      if (!href.startsWith('/assets/screenshots/') || !capture || !text || !title) throw new Error(`${page.slug}: undocumented screenshot`);
+      return `<a class="screenshot" href="${escape(href)}" target="_blank" rel="noopener"><img src="${escape(href)}" alt="${escape(text)}" width="${capture.width}" height="${capture.height}" decoding="async"></a><figcaption>${escape(title)} <a href="${escape(href)}" target="_blank" rel="noopener">Open full size<span class="visually-hidden">: ${escape(text)}</span></a>.</figcaption>`;
+    },
     heading({tokens, depth}) {
       if (depth === 1) throw new Error(`${page.slug}: H1 belongs to the page template`);
       const text = this.parser.parseInline(tokens).replace(/<[^>]+>/g, '');

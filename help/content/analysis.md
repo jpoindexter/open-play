@@ -1,3 +1,5 @@
+![Track details form with title, artist, BPM, key, rating, color and Protect beatgrid](/assets/screenshots/track-details.jpg "Right-click a track to open Track details. Demo BPM/key labels are generation annotations, not evidence of measured musical accuracy.")
+
 ## Analyze a track
 
 Select the intended track and use **Analyze**. **Analysis settings** controls available analysis options. Let preparation complete and read warnings before replacing manual edits.

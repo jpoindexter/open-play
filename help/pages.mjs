@@ -1,4 +1,4 @@
-export const version = '0.1.88';
+export const version = '0.1.89';
 export const updated = '28 October 2026';
 export const groups = [
   ['Start here', [

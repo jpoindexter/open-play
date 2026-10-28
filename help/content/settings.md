@@ -1,3 +1,5 @@
+![Settings Layouts tab with six styles, waveform orientation, deck density and wave size](/assets/screenshots/settings-layouts.jpg "Settings → Layouts keeps display preferences together. This example selects rekordbox style, Horizontal, Compact and Medium.")
+
 ## Open and navigate Settings
 
 Use the header’s **Settings** control. Tabs remain available while scrolling. Nested pages opened from Setup have **Back to Settings**; closing the dialog returns to the workspace.

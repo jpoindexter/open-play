@@ -1,5 +1,7 @@
 # Open Play help microsite — 28 October 2026
 
+> Current update: the manual now targets private0.1.89 and includes10actual-interface screenshots across15articles. See [illustrated Help delivery](HELP_SCREENSHOTS_2026-10-28.md). The first-edition record below is retained as historical evidence.
+
 **Published:** https://open-play-help.vercel.app
 
 The user requested a full help/manual microsite on Vercel. The first edition has20source-controlled Markdown articles and task-based navigation covering first mix, install/update, workspace/layouts, decks, Sync/master/manual beatmatching, waveforms/grids, mixer/headphones, cues/loops, recording, library/previews, analysis, backup/recovery, Settings, shortcuts, MIDI, advanced features, troubleshooting, limitations and glossary.

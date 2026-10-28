@@ -1,3 +1,5 @@
+![Library tools dialog with Export prototype backup and Restore backup controls](/assets/screenshots/library-tools.jpg "Performance panels → Library tools. Metadata backup is separate from original audio and downloaded mix recordings.")
+
 ## Keep three kinds of data separate
 
 | Data | How to keep it |

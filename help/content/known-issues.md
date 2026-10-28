@@ -1,6 +1,6 @@
 ## Current release status
 
-This manual’s baseline is the **0.1.88 private Mac candidate**. No approved public beta installer is linked here. Signing/notarization, public distribution and clean-machine install/update acceptance remain unfinished.
+This manual’s baseline is the **0.1.89 private Mac candidate**. No approved public beta installer is linked here. Signing/notarization, public distribution and clean-machine install/update acceptance remain unfinished.
 
 Earlier computer-audio sessions accepted specific manual mixing, EQ, Cue and Sync paths. They do not establish every current mode, song, device or long session. Package startup is separate from audible acceptance.
 

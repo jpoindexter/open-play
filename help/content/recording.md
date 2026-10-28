@@ -1,3 +1,5 @@
+![Recording panel with Start recording, capture name, Master mix source and inactive Download capture](/assets/screenshots/recording.jpg "REC opens this panel. No capture is running in this example; Download capture remains disabled until a recording is available.")
+
 ## Capture the master mix
 
 1. Open **REC / Recording**.

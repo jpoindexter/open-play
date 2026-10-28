@@ -1,3 +1,5 @@
+![Audio routing dialog showing output device, stereo layout and master and headphone channel pairs](/assets/screenshots/audio-routing.jpg "Audio devices and routing with System default / Stereo master only. Separate physical headphone outputs remain unverified.")
+
 ## Follow the channel labels
 
 Each mixer strip belongs to its labelled deck. Keep track of that label in four-deck mode; a visually nearby control can belong to another channel. Showing/hiding the mixer changes the view, not the audio state.

@@ -1,3 +1,5 @@
+![Library focus view with eight generated demo tracks and full-track waveform thumbnails in the Preview column](/assets/screenshots/library-previews.jpg "Library focus makes room for browsing. Preview thumbnails show the full song before loading; these examples use generated demo audio.")
+
 ## Import local music
 
 Use **Import** to select audio from disk. Retain the original files separately. A successful import for the current session does not prove durable storage; check the **Files** panel for saved/session-only status.

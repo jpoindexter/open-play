@@ -1,3 +1,5 @@
+![Four compact decks surrounding vertical waveforms and a four-channel mixer](/assets/screenshots/workspace-four-vertical.jpg "Four-deck Vertical / Compact view. Each channel retains its own tempo, transport and mixer controls; library previews remain below.")
+
 ## The four main areas
 
 | Area | Purpose |

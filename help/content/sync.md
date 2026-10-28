@@ -1,3 +1,5 @@
+![Horizontal beatgrid lanes with a shared white NOW line and per-deck Sync and MASTER controls](/assets/screenshots/workspace-two-decks.jpg "Read each lane at the white NOW line. This paused example shows the controls, not proof of audible or phase alignment.")
+
 ## Match tempo and phase
 
 Beatmatching has two parts: **tempo** is how fast beats repeat; **phase** is where those beats land relative to the other song. Equal BPM can still sound like doubled or flamming kicks.

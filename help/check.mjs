@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import {createHash} from 'node:crypto';
 import {readFile, stat, readdir} from 'node:fs/promises';
 import {fileURLToPath} from 'node:url';
 import {pages} from './pages.mjs';
@@ -29,6 +30,20 @@ for (const [path, html] of pagesByURL) {
     if (url.hash) assert.ok(target.includes(`id="${url.hash.slice(1)}"`), `${path}: missing heading ${raw}`);
   }
 }
+const captures = JSON.parse(await readFile(`${root}screenshots.json`, 'utf8'));
+const illustrated = [...pagesByURL.values()].filter(html => html.includes('<figure>'));
+for (const [name, capture] of Object.entries(captures.images)) {
+  const bytes = await readFile(`${out}/assets/screenshots/${name}`);
+  assert.equal(bytes.subarray(0, 3).toString('hex'), 'ffd8ff');
+  assert.equal(bytes.length, capture.bytes);
+  assert.equal(createHash('sha256').update(bytes).digest('hex'), capture.sha256);
+  assert.ok(illustrated.some(html => html.includes(`/assets/screenshots/${name}`)), `${name}: unused capture`);
+}
+for (const html of illustrated) for (const [, image] of html.matchAll(/<img ([^>]+)>/g)) {
+  assert.match(image, /alt="[^"]{20,}"/);
+  assert.match(image, /width="1280" height="720"/);
+  assert.ok(html.includes('<figcaption>') && html.includes('Open full size'));
+}
 const search = JSON.parse(await readFile(`${out}/search.json`, 'utf8'));
 assert.equal(search.length, pages.length);
 assert.equal(new Set(search.map(p => p.href)).size, pages.length);
@@ -41,4 +56,4 @@ async function size(path) {
   if (!value.isDirectory()) return value.size;
   return (await Promise.all((await readdir(path)).map(name => size(`${path}/${name}`)))).reduce((a,b) => a+b, 0);
 }
-console.log(`Checked ${pages.length} articles: internal links/fragments, assets, source coverage, generated search, private-content guard and 404 route. Static bytes: ${await size(out)}.`);
+console.log(`Checked ${pages.length} articles, ${Object.keys(captures.images).length} screenshot hashes/dimensions and ${illustrated.length} illustrated articles: internal links/fragments, assets, source coverage, generated search, private-content guard and 404 route. Static bytes: ${await size(out)}.`);
