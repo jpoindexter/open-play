@@ -40,4 +40,8 @@ Latest muted 0.1.94 subset: [one native grouped-tempo/Stop observation](NATIVE_C
 
 The original detailed hardware/held-control criteria remain on [CORE-LIVE-01](https://trello.com/c/yJ8r9kCD); this ordered handoff does not erase them. [Structured audit](core-dj-reentry-2026-10-28.json), [current staged identity](DESKTOP_CORE_094_2026-10-28.md), [known issues](../beta/KNOWN_ISSUES.md). Prior86/87checkpoint remains in [immutable Git history](https://github.com/jpoindexter/open-play/blob/d15370ae15ece7841a120a0045187ad6b28e1a2a/docs/prototype/CORE_DJ_REENTRY_2026-10-28.md).
 
-No full-core, public-beta, zero-pop, hardware or vendor-parity completion claim. More automated green checks do not satisfy the remaining native/owner/device gates.
+## Scoped board evidence reconciliation
+
+CORE-FIX-05 and CORE-FIX-06 now distinguish checked controlled-source/HTML and prior native 0.1.53 evidence from unchecked current-native race/inventory criteria. Their original descriptions, criteria and model guidance remain intact below the scoped checklist. Both remain open. Readback: 194 cards, 17 complete; no new, moved or closed cards. The adjacent structured audit retains its original timestamped snapshot and adds this later reconciliation separately.
+
+No new reproduced software failure was established in this board pass. Remaining native fault-control access, listening and physical gates cannot be satisfied by more ordinary clean tests. No full-core, public-beta, zero-pop, hardware or vendor-parity completion claim.
