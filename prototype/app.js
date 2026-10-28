@@ -829,7 +829,8 @@ function quantized(d, p) {
     : value;
   const beat = (60 / d.track.bpm) * interval;
   const grid=createBeatgrid(d.track);
-  return grid ? grid.timeAt(Math.round(grid.beatAt(p)/interval)*interval) : Math.round(p/beat)*beat;
+  const snapped=grid ? grid.timeAt(Math.round(grid.beatAt(p)/interval)*interval) : Math.round(p/beat)*beat;
+  return clamp(snapped,0,d.track.duration);
 }
 async function deckAction(action, index, el, event = {}) {
   const d = state.decks[index];
