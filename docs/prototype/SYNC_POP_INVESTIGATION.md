@@ -2,13 +2,15 @@
 
 ## Current disposition — 28 October 2026
 
-**OPEN: intermittent owner-reported Sync pop and broader four-deck stalls.** Current private0.1.84/sourcea69166e passed exact-package/controlled-host5/5 and protected stopped native startup. This does not establish current native audio, musical alignment, pop-free playback or long-session frame behavior.
+**OPEN for the intermittent owner-reported Sync pop and broader four-deck stalls.** Current native84/sourcea69166e remains running; candidate85/sourcefe1acc9is staged/unlaunched and inspected5/5. Native Recording input does not reach84, so safe quit/backup/promotion is pending. [Staging boundary](DESKTOP_085_STAGED_2026-10-28.md). No lock, audible or native85acceptance is inferred.
 
-The latest real failure was a1.95s keyed loop on a448s real song rejected by whole-track pitch-memory budgeting. CORE-FIX-37 now renders the required range plus context and the same actual muted browser worker starts; the other playing voice/rate remains unchanged. It is not established pop causation and is not a Sync clock/fade fix. [Executed scope and remaining limits](KEYLOCK_LOOP_WINDOW_2026-10-28.md).
+The latest reproduced defect is Reverse preparation rejection stopping an advancing real-song voice. CORE-FIX-38's source/browser repair now retains that voice, actual clock and direction; the existing pitch-memory error is honest. This is not established Sync-pop causation. It does not change the Sync clock/fade or resolve full-track reverse pitch memory. [Executed scope](REVERSE_REJECTION_2026-10-28.md).
 
-Retain the historical23unattributed long frames (worst242.5ms); no GC/CSS/DSP cause is proved. Large raw traces may now be losslessly compressed; [restore index](../delivery/EVIDENCE_ARCHIVE_CLEANUP_2026-10-28.md) precedes historical inspectors. Do not repeat clean Sync cases or broad matrices. Capture the next actual pop/stall with its original recording, exact revision, clicked deck, transport states, rates, positions and event time before attributing a cause.
+Prior84's short four-real-track keyed-loop resize/exit/Sync session retains its bounded evidence: tracked controls/previews/focus and other voices/rates retained; full6s first-master-channel PCM finite/nonzero; observed maximum tick8.6ms/frame interval34.2ms, no Long Tasks. No listening, stereo, native moving-frame or long-session conclusion follows. [Report](FOUR_DECK_LOOP_TRANSITIONS_2026-10-28.md).
 
-Next owner gate: keyed-loop entry/repeated seam/exit and the existing native held/MIDI/headphone/master session on CORE-LIVE-01. Prior0.1.53manual beatmatch/jog/EQ/Cue/clean-stop acceptance retains scope. Unattended software work can continue reproduced long-range/full-track reverse or ownership defects; neither package inspection nor silent telemetry closes listening/hardware gates. Preserve the normal session, controls, layouts, waveform previews and original audio. No full-core or public-beta completion claim.
+Historical23unattributed long frames (worst242.5ms) remain unexplained. No GC/CSS/DSP cause is proved. Raw traces may be losslessly compressed; [restore index](../delivery/EVIDENCE_ARCHIVE_CLEANUP_2026-10-28.md) precedes historical inspectors. Capture the next actual pop/stall with original recording, revision, clicked deck, transport states, rates, positions and event time before attributing cause. No repeat clean cases or broad matrices.
+
+CORE-LIVE-01 retains protected85promotion, keyed-loop/Reverse listening and existing native held/MIDI/headphone/master gates. Prior53manual beatmatch/jog/EQ/Cue/clean-stop acceptance retains scope. Preserve normal session/originals/controls/layouts/previews; no full-core or public-beta completion claim.
 
 ## Historical investigation
 

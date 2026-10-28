@@ -1,10 +1,12 @@
-# Current private desktop 0.1.84
+# Current84;85staged and unlaunched
 
-Use `Start Open Play Current Test.command` or `Start Open Play Playback Test 0.1.84.command` only when the app is closed. Exact84is observed open/stopped with the same real tracks and positions, controls and library previews; only84bundle remains. [Delivery and package-recovery limits](DESKTOP_CORE_084_2026-10-28.md).
+Current/default/named starters still target **0.1.84**, which remains running. Private **0.1.85/sourcefe1acc9** is packaged and inspected5/5, but native Recording input is ineffective in84; no empty-recording preflight, quit, profile backup or85startup was inferred. [Exact protected-promotion steps](DESKTOP_085_STAGED_2026-10-28.md).
 
-Source `a69166e` includes the ordinary keyed-loop range repair: actual muted browser/worker Play starts a short loop on a long song without whole-file pitch-memory rejection. Native keyed-loop entry/seam/exit listening remains on CORE-LIVE-01; Sync pops, broader stalls, full-track reverse and hardware remain open. Prior ordinary mixing acceptance retains scope; no repeat clean matrices. [Source evidence](KEYLOCK_LOOP_WINDOW_2026-10-28.md).
+Do not launch85over84's running profile. Once native input is available, preserve Recording, quit normally, verify process absence, back up the closed profile and verify the exact85startup; only then promote launchers/retire84. Current84and staged85are the only retained apps; no temporary packaging stage/tar or owned diagnostic media remains.
 
-[Lossless evidence archives and restore instructions](../delivery/EVIDENCE_ARCHIVE_CLEANUP_2026-10-28.md). Current app, latest recovery, original music and recordings preserved.
+85contains CORE-FIX-38's source/browser Reverse rejection safety repair. Actual muted real-track rejection retains the existing playing voice and direction. Successful long-file reverse pitch memory, native/listening, Sync pops/stalls and hardware remain open. [Evidence](REVERSE_REJECTION_2026-10-28.md). Prior53ordinary mixing acceptance retains scope; no repeat clean matrices.
+
+[Lossless evidence archive restore index](../delivery/EVIDENCE_ARCHIVE_CLEANUP_2026-10-28.md). Music, recordings, controls, layouts and previews preserved.
 
 --- Historical guides below; old launch targets and blockers are not current ---
 
