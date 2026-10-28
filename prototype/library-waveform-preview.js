@@ -1,7 +1,7 @@
 // HTML review only. Render source-audio thumbnails without touching deck state.
 import {paintSourceOverview,sourceWaveformState} from './source-waveform.js';
 
-const width=320,height=44,cacheName='openplay-library-waveforms-rgb-v1';
+const width=320,height=44,cacheName='openplay-library-waveforms-rgb-v2';
 const preference='openplay-preview-waveform-column';
 
 export function installLibraryWaveforms({state,engine}){
@@ -12,7 +12,7 @@ export function installLibraryWaveforms({state,engine}){
   const active=()=>enabled&&['rekordbox','serato-hybrid','traktor-flat'].includes(document.body.dataset.workspace)&&!document.hidden;
   const keyFor=track=>track.contentHash||`${track.id}:${track.seed}:${track.bpm}:${track.freq}`;
   const requestFor=key=>new Request(new URL('/__openplay-waveform-cache/'+encodeURIComponent(key),location.origin));
-  const cache=globalThis.caches?.open(cacheName).catch(()=>null)||Promise.resolve(null);
+  const cache=globalThis.caches?.open(cacheName).then(async value=>{await caches.delete('openplay-library-waveforms-rgb-v1');return value;}).catch(()=>null)||Promise.resolve(null);
   const status=(cell,phase,text)=>{
     cell.dataset.previewState=phase;cell.setAttribute('aria-busy',String(phase==='loading'));
     cell.replaceChildren();const label=document.createElement('span');label.textContent=text;cell.append(label);
