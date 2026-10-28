@@ -1,12 +1,12 @@
-# Current86;87staged and unlaunched
+# Current private desktop0.1.88
 
-Current/default/named playback starters target **0.1.86**, which remains running. Private **0.1.87/sourcece1560a** is packaged/inspected5/5 with CORE-FIX-40's28-line Sync presentation module. The Mac now explicitly reports screen-locked; no native87startup or main Recording/quit/backup was attempted. [Protected re-entry](DESKTOP_087_STAGED_2026-10-28.md).
+Use `Start Open Play Current Test.command` or `Start Open Play Playback Test.command`. Both target inspected0.1.88/source1fecc28, now open with Constant Change/Prism paused13.073/12.426s. Do not start a second instance/profile.
 
-Do not launch87over86's running profile. After manual unlock, preserve Recording, quit normally, verify process absence, hash-back up the closed profile, then verify exact87native startup before changing launchers/retiring86. Only current86and staged87are retained; no temporary package stage/tar or owned diagnostic source/server remains.
+Recording preservation/normal86quit/process absence, a247-file120233265-byte matching profile backup and exact88recovery are executed.16tracks/core controls/9materialized previews retained; BLOW−24dB restored. Only88bundle remains; no main Play/Sync/REC Start was issued. [Native delivery](PARALLEL_CORE_BETA_088_2026-10-28.md).
 
-Actual four-deck Compact source/UI capture:3360unchanged Sync attribute writes/one idle second →0; controls/previews retained, actual Simple Sync/OFF/MASTER changes still update. Two focused presentation checks pass; no broad suite/soak. This is not native performance/listening or Sync-pop resolution. Prior ordinary mixing acceptance retains scope. [Executed evidence](IDLE_SYNC_PRESENTATION_2026-10-28.md).
+The save guard prevents blank BPM from invalidating warped-track saved metadata; actual isolated form/reload and1focused regression executed. Sync presentation idle writes and actual Sync/OFF/master states retain prior proof; one affected fixture is repaired. No broad suite/soak or pop-resolution claim.
 
-[Evidence archive restore index](../delivery/EVIDENCE_ARCHIVE_CLEANUP_2026-10-28.md). Music, recordings, sessions, controls, layouts and previews preserved.
+[First-mix guide](../beta/QUICK_START.md) · [Known issues](../beta/KNOWN_ISSUES.md) · [Beta distribution](../beta/DISTRIBUTION_READINESS.md). This is a private app; public signing/notarization/install/current-listening and hardware gates remain OPEN. Preserve any needed recording before further work.
 
 --- Historical guides below; old launch targets and blockers are not current ---
 

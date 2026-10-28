@@ -1,3 +1,5 @@
+> Superseded checkpoint: protected88startup now executed; current app88/source1fecc28. [Latest delivery](PARALLEL_CORE_BETA_088_2026-10-28.md). Dated evidence/criteria below retain their original scope.
+
 # Private87 staged; current86 preserved — 28 October 2026
 
 **Private0.1.87/source `ce1560a78a5d2b9c25ccb66e7f5ce6ad4ae51272` is staged and unlaunched.** ASAR `32a2b516954cd4c6137a69abdb4c25f36580e04f00e65ffa60411b844c356c86`; exact immutable-source/archive/controlled-host inspection5/5. New28-line `sync-presentation.js` is declared in the package.

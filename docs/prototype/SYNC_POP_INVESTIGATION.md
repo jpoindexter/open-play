@@ -2,7 +2,7 @@
 
 ## Current disposition — 28 October 2026
 
-**OPEN for the intermittent owner-reported Sync pop and broader four-deck stalls.** Current86/source9ef47e3 remains running; staged87/sourcece1560a is inspected5/5 but unlaunched because the Mac now explicitly reports locked. No native input/quit/profile change was attempted. CORE-FIX-40 removes3360unchanged Sync attribute writes/one idle second in the actual four-deck workspace; repaired0writes, controls/previews retained. This is not established historical-stall or audible-pop causation. [Staging](DESKTOP_087_STAGED_2026-10-28.md), [Source/UI evidence](IDLE_SYNC_PRESENTATION_2026-10-28.md).
+**OPEN for the intermittent owner-reported Sync pop and broader four-deck stalls.** Current88/source1fecc28 is inspected5/5 and observed paused after protected86quit/backup/recovery. CORE-FIX-40removes measured idle Sync DOM churn;41prevents invalid warped-BPM saves. Neither is proven audible-pop or historical-stall causation. Fresh availability/empty Recording allowed promotion after the earlier lock cleared; no main Play/Sync/REC Start. [Delivery and limits](PARALLEL_CORE_BETA_088_2026-10-28.md).
 
 An earlier reproduced defect is Reverse preparation rejection stopping an advancing real-song voice. CORE-FIX-38's source/browser repair now retains that voice, actual clock and direction; the existing pitch-memory error is honest. This is not established Sync-pop causation. It does not change the Sync clock/fade or resolve full-track reverse pitch memory. [Executed scope](REVERSE_REJECTION_2026-10-28.md).
 
@@ -10,7 +10,7 @@ Prior84's short four-real-track keyed-loop resize/exit/Sync session retains its 
 
 Historical23unattributed long frames (worst242.5ms) remain unexplained. No GC/CSS/DSP cause is proved. Raw traces may be losslessly compressed; [restore index](../delivery/EVIDENCE_ARCHIVE_CLEANUP_2026-10-28.md) precedes historical inspectors. Capture the next actual pop/stall with original recording, revision, clicked deck, transport states, rates, positions and event time before attributing cause. No repeat clean cases or broad matrices.
 
-CORE-LIVE-01 retains protected87promotion, keyed-loop/Reverse listening and existing native held/MIDI/headphone/master gates. Prior53manual beatmatch/jog/EQ/Cue/clean-stop acceptance retains scope. Preserve normal session/originals/controls/layouts/previews; no full-core or public-beta completion claim.
+CORE-LIVE-01 retains current88relevant native playing, keyed-loop/Reverse listening and existing native held/MIDI/headphone/master gates. Prior53manual beatmatch/jog/EQ/Cue/clean-stop acceptance retains scope. Preserve normal session/originals/controls/layouts/previews; no full-core or public-beta completion claim.
 
 ## Historical investigation
 

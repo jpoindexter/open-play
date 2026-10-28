@@ -1,3 +1,5 @@
+> Superseded checkpoint: protected88startup now executed; current app88/source1fecc28. [Latest delivery](../prototype/PARALLEL_CORE_BETA_088_2026-10-28.md). Dated evidence/criteria below retain their original scope.
+
 # Owner controller and listening session — current re-entry28October2026
 
 Trello: https://trello.com/c/yJ8r9kCD/165-core-live-01-jason-controller-and-listening-session

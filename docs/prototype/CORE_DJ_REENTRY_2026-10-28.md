@@ -1,3 +1,5 @@
+> Superseded checkpoint: protected88startup now executed; current app88/source1fecc28. [Latest delivery](PARALLEL_CORE_BETA_088_2026-10-28.md). Dated evidence/criteria below retain their original scope.
+
 # Core DJ re-entry — 28 October 2026
 
 The core goal is **not complete**. Current0.1.86/source9ef47e3 remains running; staged0.1.87/sourcece1560a is inspected5/5 and unlaunched. The console session explicitly reports locked. No native input, Recording action, quit or profile change was attempted during this reconciliation. No new test, playback run or package was created.
