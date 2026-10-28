@@ -12,7 +12,7 @@ const git=args=>execFileSync('git',args,{cwd:root,maxBuffer:150*1024*1024});
 const sha=bytes=>createHash('sha256').update(bytes).digest('hex');
 const sourceCommit=git(['rev-parse','HEAD']).toString().trim();
 const get=file=>git(['show',`${sourceCommit}:${file}`]);
-const version='0.1.94',name='Open Play Playback Test',port=18775,bundle='org.openplay.dj.playback.localtest';
+const version='0.1.95',name='Open Play Playback Test',port=18775,bundle='org.openplay.dj.playback.localtest';
 const profile='Open Play Playback Test',partition='persist:open-play-playback-test';
 await assertBuildRetention(path.join(root,'local-evidence/desktop-builds'),name);
 const stage=await mkdtemp(path.join(tmpdir(),'open-play-playback-'));
@@ -54,6 +54,8 @@ await put('assets/docs/prototype/auto-gain-fixture-reference.json',JSON.stringif
 // The archived workspace guide describes the previous installed candidate. Generate
 // only this package's identity/instructions; keep prototype source byte-for-byte.
 await put('assets/docs/prototype/TRY_CURRENT_DESKTOP.md',`# Core desktop test ${version}
+
+Current source includes CORE-FIX-45: pending Autoplay yields to newer manual Play, Stop or replacement instead of canceling playback or restarting unexpectedly. Actual isolated four-deck Compact buttons/engine with a controlled buffer boundary preserve transport and controls/previews. Relevant native/listening acceptance remains separate; no Sync-pop resolution is claimed.
 
 Current source includes CORE-FIX-44: queued tempo inputs yield to a newer selected MASTER, Sync mode or Smart Sync tempo owner. Queue-owned changes preserve valid later input; stale input never reaches transport. Actual paused/muted four-deck failure-path and three focused regression results are recorded. Native failure/playing/listening acceptance remains separate. The blue Oxide study remains a separate preview and is not applied to this workspace.
 
