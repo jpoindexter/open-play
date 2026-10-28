@@ -2073,7 +2073,7 @@ window.openPlay = {
 
 engine.onProcessing = () => refreshTransportControls(state);
 
-engine.onRateRequest=createSyncTempoRequests({engine,state,smartSync,slicer,participants:bpm=>panels.samplerSync.participants(bpm)});
+engine.onRateRequest=createSyncTempoRequests({engine,state,smartSync,slicer,master:()=>syncMaster.master(),participants:bpm=>panels.samplerSync.participants(bpm)});
 engine.onManualPosition = d => {for(const other of state.decks)cancelSimpleSync(engine,other,d);smartSync.manipulated(d);};
 engine.onGridTimeline = (d,options) => smartSync.timeline(d,options);
 engine.onValidateTransport = (d,changes) => smartSync.validate(d,changes);

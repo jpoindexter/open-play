@@ -2,6 +2,8 @@
 
 ## Current core status — 28 October 2026
 
+**Pending next native candidate:** CORE-FIX-44 rejects an older queued tempo input after a newer MASTER/Sync choice. Actual four-deck Compact before/after: stale second endpoint2→1, wrong127.8→restored124.0BPM, C MASTER retained,423controls/4Play/1materialized preview retained;3targeted regressions pass. Source/browser only; native92and owner session unchanged. [Report](../docs/prototype/SYNC_TEMPO_MASTER_QUEUE_2026-10-28.md).
+
 **Current 0.1.92 is running/default**, source e775aae: readable energy envelopes for deck strips and playlist thumbnails, generated thumbnail cachev2; large scrolling detail pixels match baseline. Exact archive/host5/5 and protected native paused startup preserve13.229/12.426seconds and16tracks. Later owner track/position changes are left intact;16materialized previews observed. Prior91same-fader CORE-FIX-43companion included. [Delivery](../docs/prototype/DESKTOP_CORE_092_2026-10-28.md).
 
 **Focused evidence and limits:** same-fader queue124→127.7after old failure; overview medians36→24/32→22pixels on two original tracks,3focused checks. Prior90native tone/Stop subset retains its scope; native failed-request/listening/pops/stalls remain open. Earlier13.073→13.229position observation remains unattributed; window-only negative probe retained exact13.229/12.426. Listening/controller deferred.
@@ -10,7 +12,7 @@ CORE-FIX-41: actual blank-BPM save with tempo markers wrote0and blocked reload. 
 
 Prior84four-real-track loop resize/exit/Sync follow-through retains its bounded source/runtime scope: other three voices/rates,241tracked controls/rows/previews and focus retained, whole6s first-master-channel PCM finite/nonzero, observed maximum tick8.6ms/frame interval34.2ms. No audible, stereo, native or long-session acceptance. [Evidence](../docs/prototype/FOUR_DECK_LOOP_TRANSITIONS_2026-10-28.md).
 
-Trello193cards/17complete after43, ANA-FIX-09 and planned UI-COLOR-01and existing parent/current-summary readback. Broader core/Sync-pop/stall/listening/hardware/release cards remain OPEN; original criteria/history/model guidance retained. Prior53manual/jog/EQ/Cue/stop scope retained. Limited public beta accelerated target3–5working days, safer budget5–10, conditional on current listening/data/install and signing/distribution gates. No public release/full-core/parity claim.
+Trello194cards/17complete after44, ANA-FIX-09 and planned UI-COLOR-01and existing parent/current-summary readback. Broader core/Sync-pop/stall/listening/hardware/release cards remain OPEN; original criteria/history/model guidance retained. Prior53manual/jog/EQ/Cue/stop scope retained. Limited public beta accelerated target3–5working days, safer budget5–10, conditional on current listening/data/install and signing/distribution gates. No public release/full-core/parity claim.
 
 For HTML review, reuse the existing server/session. If none is running, `python3 scripts/serve_prototype.py --port 8848` serves `/prototype/workspace-preview.html` from the repository root. Do not reload a live session for board administration.
 
