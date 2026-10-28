@@ -1,0 +1,39 @@
+{
+  "date": "2026-10-28",
+  "candidate": "0.1.99",
+  "request": "Hide mixer filter knobs and provide an On/Off preference",
+  "implementation": "Existing shared Channel Filters setting; no new product code or rebuild required.",
+  "nativeExecuted": {
+    "setting": "Settings → Mixer → Channel Filters",
+    "sequence": [
+      "Off",
+      "On",
+      "Off"
+    ],
+    "visibleFilterSliders": [
+      0,
+      2,
+      0
+    ],
+    "finalFiltersEnabled": false,
+    "playControls": 2,
+    "libraryWaveformPreviews": 16,
+    "positionsSeconds": [
+      50.716,
+      62.715
+    ],
+    "masterDB": -10.04344,
+    "transportTouched": false,
+    "settingsClosed": true
+  },
+  "trello": {
+    "url": "https://trello.com/c/CdQl3SUF/32-mix-003-eq-and-filters",
+    "descriptionReadbackMatched": true,
+    "broaderCardClosed": false
+  },
+  "limits": [
+    "No fresh listening, controller or physical routing check",
+    "Fresh native check verifies visibility/settings state; existing engine/routing evidence retains its own scope"
+  ],
+  "pendingIndependentDelivery": "0.1.100 build receipts remain separate; 0.1.99 remains running."
+}
