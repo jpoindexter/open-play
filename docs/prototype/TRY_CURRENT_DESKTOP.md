@@ -1,12 +1,12 @@
-# Current private desktop0.1.88
+# Current private desktop0.1.89
 
-Use `Start Open Play Current Test.command` or `Start Open Play Playback Test.command`. Both target inspected0.1.88/source1fecc28, now open with Constant Change/Prism paused13.073/12.426s. Do not start a second instance/profile.
+Use `Start Open Play Current Test.command` or `Start Open Play Playback Test.command`. Both target inspected0.1.89/source4d507de, open with Constant Change/Prism paused13.073/12.426s. Avoid a second instance/profile.
 
-Recording preservation/normal86quit/process absence, a247-file120233265-byte matching profile backup and exact88recovery are executed.16tracks/core controls/9materialized previews retained; BLOW−24dB restored. Only88bundle remains; no main Play/Sync/REC Start was issued. [Native delivery](PARALLEL_CORE_BETA_088_2026-10-28.md).
+Protected88Recording/quit/process absence and a matching248-file120233626-byte closed-profile backup precede observed89native recovery.16tracks/core controls/16materialized previews retained; prior BLOW−24dB restored. Master−10.0dB/silent; tempo/Sync reset intentionally. Only89bundle remains; no main Play/Sync/REC Start. [Delivery](DESKTOP_CORE_089_2026-10-28.md).
 
-The save guard prevents blank BPM from invalidating warped-track saved metadata; actual isolated form/reload and1focused regression executed. Sync presentation idle writes and actual Sync/OFF/master states retain prior proof; one affected fixture is repaired. No broad suite/soak or pop-resolution claim.
+CORE-FIX-42's declared25-line module now ships: failed older shared-tempo changes cannot roll back a newer MASTER/Sync write. Controlled-error source/browser and focused regressions are separate from the native paused-startup proof. Relevant native failed-request/playing/listening remains pending; intermittent pops/stalls stay OPEN.
 
-[First-mix guide](../beta/QUICK_START.md) · [Known issues](../beta/KNOWN_ISSUES.md) · [Beta distribution](../beta/DISTRIBUTION_READINESS.md). This is a private app; public signing/notarization/install/current-listening and hardware gates remain OPEN. Preserve any needed recording before further work.
+[Help & manual](https://open-play-help.vercel.app) · [Known issues](../beta/KNOWN_ISSUES.md) · [Beta distribution](../beta/DISTRIBUTION_READINESS.md). This is a private app; signing/notarization/public installation and hardware gates remain OPEN. Preserve any needed recording before further upgrade.
 
 --- Historical guides below; old launch targets and blockers are not current ---
 

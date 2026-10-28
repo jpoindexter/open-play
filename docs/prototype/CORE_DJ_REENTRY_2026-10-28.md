@@ -1,4 +1,4 @@
-> Superseded checkpoint: protected88startup now executed; current app88/source1fecc28. [Latest delivery](PARALLEL_CORE_BETA_088_2026-10-28.md). Dated evidence/criteria below retain their original scope.
+> Superseded checkpoint: private89/source4d507de now contains42and is running after protected paused recovery. [Current delivery](DESKTOP_CORE_089_2026-10-28.md). Dated evidence/criteria below retain their original scope.
 
 # Core DJ re-entry — 28 October 2026
 

@@ -1,3 +1,5 @@
+> Later delivery: private89/source4d507de now contains42and is running after protected paused recovery. [Current delivery](DESKTOP_CORE_089_2026-10-28.md). Dated source/runtime evidence below retains its original scope.
+
 # Parallel core/beta preparation and private88 — 28 October 2026
 
 **Current private candidate0.1.88/source `1fecc28f8bb583e19238920db8b8754b92716d87`.** Three parallel workers returned five scoped work units; parent independently exercised the actual metadata form/save/reload and reviewed integration. No public release was published or approved.

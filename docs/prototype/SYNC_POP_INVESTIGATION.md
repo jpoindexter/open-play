@@ -1,6 +1,6 @@
 # Sync pop investigation
 
-28 October source follow-up: CORE-FIX-42 repairs a verified older-tempo-failure rollback overwriting newer MASTER/Sync state. Actual paused four-deck GUI/source proof; **not established pop causation**. Current native88does not contain42; no new recording/listening was performed. [Scope and pending delivery](SYNC_TEMPO_ROLLBACK_2026-10-28.md).
+28 October delivery: CORE-FIX-42owned shared-tempo rollback is included in current private89/source4d507de, with protected native paused recovery observed. Its controlled-error source/browser proof is **not established pop causation** or native playing/failure acceptance. No new recording/listening. [Delivery and limits](DESKTOP_CORE_089_2026-10-28.md).
 
 ## Current disposition — 28 October 2026
 

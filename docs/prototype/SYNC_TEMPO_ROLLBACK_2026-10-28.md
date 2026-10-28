@@ -1,3 +1,5 @@
+> Later delivery: private89/source4d507de now contains42and is running after protected paused recovery. [Current delivery](DESKTOP_CORE_089_2026-10-28.md). Dated source/runtime evidence below retains its original scope.
+
 # Synced tempo failure overwrites a newer master — 28 October 2026
 
 An older failed synced-tempo request unconditionally restored its captured Smart Sync tempo, even after a newer explicit MASTER/Sync action had established another tempo. The newer master indicator stayed selected while the shared planned BPM reverted. This is a reproduced state-ownership defect, not established audible-pop or waveform-stall causation.
