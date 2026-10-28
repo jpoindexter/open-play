@@ -8,7 +8,7 @@ import {createTempoSlider} from './tempo-slider.js';
 const deferred=()=>{let resolve;const promise=new Promise(r=>resolve=r);return{promise,resolve};};
 const bus=()=>({gain:{value:1,cancelScheduledValues(){},setValueAtTime(){},linearRampToValueAtTime(){},setTargetAtTime(){}},connect(){},disconnect(){}});
 function fixture({reverse=false,loop=true,shift=24}={}){
- const engine=new AudioEngine(),starts=[],stops=[],retired=[],pcm=new Float32Array(512);
+ const engine=new AudioEngine(),starts=[],stops=[],retired=[],pcm=new Float32Array(1323000);
  const buffer={duration:30,sampleRate:44100,numberOfChannels:1,length:1323000,getChannelData:()=>pcm};
  const deck={index:0,track:{id:'fallback',bpm:120,grid:0,duration:30},position:3,anchorPosition:3,anchorTime:1,rate:1,
   playing:false,keylock:false,keyShift:shift,loop,loopIn:2,loopOut:6,reverse,pitchRange:8};
@@ -21,7 +21,8 @@ function fixture({reverse=false,loop=true,shift=24}={}){
  engine.reverseBuffer=(id,value)=>value; // Original-time ownership, not PCM reversal.
  engine.keylockRenderer.ids.set(buffer,1);engine.keylockRenderer.nextId=2;
  const cache=(rate,semitones=shift+(deck.keylock?0:12*Math.log2(rate)))=>{
-  engine.keylockRenderer.cache.set(`1:${rate}:${semitones}`,{...buffer,duration:30/rate});
+  const window=deck.loop&&(rate!==1||deck.keyShift!==0)?`:${Math.max(0,Math.floor((Math.min(deck.position,deck.loopIn)-2)*buffer.sampleRate))}:${Math.min(buffer.length,Math.ceil((Math.max(deck.position,deck.loopOut)+2)*buffer.sampleRate))}`:'';
+  engine.keylockRenderer.cache.set(`1:${rate}:${semitones}${window}`,{...buffer,duration:30/rate});
  };
  cache(1);return{engine,deck,starts,stops,retired,cache};
 }

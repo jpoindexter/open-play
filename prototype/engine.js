@@ -489,6 +489,12 @@ export class AudioEngine {
       let buffers = stems ? [original, ...stems] : [original];
       const transformed = keylock || shift !== 0;
       const scale = transformed ? tempo : 1;
+      // Keep pre-loop audio and 2s DSP context; only the render copy changes origin.
+      const renderWindow=transformed&&d.loop&&(tempo!==1||shift!==0)?{
+        start:Math.max(0,Math.floor((Math.min(d.position,d.loopIn)-2)*original.sampleRate))/original.sampleRate,
+        end:Math.min(original.length,Math.ceil((Math.max(d.position,d.loopOut)+2)*original.sampleRate))/original.sampleRate,
+      }:null;
+      const sourceTime=position=>(d.reverse?(renderWindow?.end??track.duration)-position:position-(renderWindow?.start??0))/scale;
       if (!current()) return;
       // Mirror forward-end Play before either raw or pitch preparation.
       if(d.reverse&&!d.loop&&!d.playing&&!positionAt&&d.position<=0)d.position=track.duration;
@@ -509,6 +515,7 @@ export class AudioEngine {
               tempo,
               semitones: shift + (keylock ? 0 : 12 * Math.log2(tempo)),
               signal: controller.signal,
+              window: renderWindow,
             }),
           );
           if (!current()) return;
@@ -523,6 +530,8 @@ export class AudioEngine {
         syncWhen = handoff?await handoff.prepared(d.index,this.ctx.currentTime+.03):this.ctx.currentTime+.03;
         const aligned = positionAt(syncWhen);
         if (!Number.isFinite(aligned) || aligned < 0 || aligned >= track.duration) throw new RangeError("Invalid synchronized source position.");
+        if(renderWindow&&(aligned<renderWindow.start||aligned>renderWindow.end))
+          throw new RangeError('Synchronized position is outside the prepared render window; previous audio retained.');
         d.position = aligned;
       }
       if (!d.reverse && d.position >= track.duration) d.position = 0;
@@ -542,18 +551,18 @@ export class AudioEngine {
         for (const event of gridTimeline?.events || []) source.playbackRate.setValueAtTime(event.rate,event.when);
         source.loop = d.loop;
         source.loopStart =
-          (d.reverse ? track.duration - d.loopOut : d.loopIn) / scale;
+          sourceTime(d.reverse ? d.loopOut : d.loopIn);
         source.loopEnd =
-          (d.reverse ? track.duration - d.loopIn : d.loopOut) / scale;
+          sourceTime(d.reverse ? d.loopIn : d.loopOut);
         return source;
       });
       if(handoff||positionAt){
-        const voice={sources,timelineScale:scale,gridTimeline,stemGains:[],handoffBefore:old?{until:when,owner:old,clock:priorClock||this.voiceClock(d,old),rate:at=>this.voiceRateAt(d,old,at)}:null};let committed=false;
+        const voice={sources,timelineScale:scale,renderWindow,gridTimeline,stemGains:[],handoffBefore:old?{until:when,owner:old,clock:priorClock||this.voiceClock(d,old),rate:at=>this.voiceRateAt(d,old,at)}:null};let committed=false;
         try{
           // Never replace audible audio with a source whose aligned start is already late.
           const requireLead=()=>{if(this.ctx.currentTime>=when-.005)throw Error('Sync start missed its lead; previous audio retained. Try Sync again.');};
           requireLead();
-          sources.forEach(source=>source.start(when,Math.max(0,Math.min(source.buffer.duration-1/source.buffer.sampleRate,(d.reverse?track.duration-d.position:d.position)/scale))));
+          sources.forEach(source=>source.start(when,Math.max(0,Math.min(source.buffer.duration-1/source.buffer.sampleRate,sourceTime(d.position)))));
           await handoff?.arm(d.index);if(!current())return;
           requireLead();
           this.routeOrdinaryVoice(d,voice,sources,!!stems,{when,reuseVoice:old});committed=true;this.retireVoiceAt(d.index,old,when);
@@ -566,6 +575,7 @@ export class AudioEngine {
       voice.sources = sources;
       voice.sourceGates=sources.map(()=>this.ctx.createGain());
       voice.timelineScale = scale;
+      voice.renderWindow = renderWindow;
       voice.gridTimeline = gridTimeline;
       const stemState = stems ? this.ensureStemState(d) : null;
       voice.stemHistoryState = stemState;
@@ -607,7 +617,7 @@ export class AudioEngine {
             0,
             Math.min(
               source.buffer.duration - 1 / source.buffer.sampleRate,
-              (d.reverse ? track.duration - d.position : d.position) / scale,
+              sourceTime(d.position),
             ),
           ),
         ),
@@ -889,7 +899,7 @@ export class AudioEngine {
       else{this.pause(d,{preserveStemExit:true});d.position=position;}
       return;
     }
-    if(this.voices.get(d.index)?.gridTimeline){
+    if(voice?.gridTimeline||voice?.renderWindow){
       const prior=this.voiceClock(d,this.voices.get(d.index)),was=d.playing;d.position=this.position(d);d.loop=on;d.loopIn=start;d.loopOut=end;
       if(was)await restart({priorClock:prior,positionAt:at=>{const p=prior(at);return on&&p>=end?start+((p-start)%(end-start)+(end-start))%(end-start):p;}});
       return;
