@@ -12,7 +12,7 @@ const git=args=>execFileSync('git',args,{cwd:root,maxBuffer:150*1024*1024});
 const sha=bytes=>createHash('sha256').update(bytes).digest('hex');
 const sourceCommit=git(['rev-parse','HEAD']).toString().trim();
 const get=file=>git(['show',`${sourceCommit}:${file}`]);
-const version='0.1.81',name='Open Play Playback Test',port=18775,bundle='org.openplay.dj.playback.localtest';
+const version='0.1.82',name='Open Play Playback Test',port=18775,bundle='org.openplay.dj.playback.localtest';
 const profile='Open Play Playback Test',partition='persist:open-play-playback-test';
 await assertBuildRetention(path.join(root,'local-evidence/desktop-builds'),name);
 const stage=await mkdtemp(path.join(tmpdir(),'open-play-playback-'));
@@ -55,7 +55,7 @@ await put('assets/docs/prototype/auto-gain-fixture-reference.json',JSON.stringif
 // only this package's identity/instructions; keep prototype source byte-for-byte.
 await put('assets/docs/prototype/TRY_CURRENT_DESKTOP.md',`# Core desktop test ${version}
 
-Current source includes CORE-FIX-34 stutter completion control retention with existing transport-only presentation, plus prior CORE-FIX-32 Double and CORE-FIX-33 key-shift/reset repairs. Key buttons and mapped MIDI use the same focused request module; feedback updates existing controls. Controlled stopped/muted four-deck browser retention is recorded; native held/playing, physical MIDI and listening acceptance remain separate.
+Current source includes CORE-FIX-35 deck-owned performance-mode rendering and CORE-FIX-34 stutter completion control retention with existing transport-only presentation, plus prior CORE-FIX-32 Double and CORE-FIX-33 key-shift/reset repairs. Key buttons and mapped MIDI use the same focused request module; feedback updates existing controls. Controlled stopped/muted four-deck browser retention is recorded; native held/playing, physical MIDI and listening acceptance remain separate.
 
 Built from immutable source ${sourceCommit}. Opens the existing rekordbox workspace directly in the sandboxed main frame, retaining layouts, core controls, headphone knobs and library waveform previews. No framework or native audio rewrite.
 
