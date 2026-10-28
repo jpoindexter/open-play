@@ -12,7 +12,7 @@ const git=args=>execFileSync('git',args,{cwd:root,maxBuffer:150*1024*1024});
 const sha=bytes=>createHash('sha256').update(bytes).digest('hex');
 const sourceCommit=git(['rev-parse','HEAD']).toString().trim();
 const get=file=>git(['show',`${sourceCommit}:${file}`]);
-const version='0.1.98',name='Open Play Playback Test',port=18775,bundle='org.openplay.dj.playback.localtest';
+const version='0.1.99',name='Open Play Playback Test',port=18775,bundle='org.openplay.dj.playback.localtest';
 const profile='Open Play Playback Test',partition='persist:open-play-playback-test';
 await assertBuildRetention(path.join(root,'local-evidence/desktop-builds'),name);
 const stage=await mkdtemp(path.join(tmpdir(),'open-play-playback-'));
@@ -54,6 +54,8 @@ await put('assets/docs/prototype/auto-gain-fixture-reference.json',JSON.stringif
 // The archived workspace guide describes the previous installed candidate. Generate
 // only this package's identity/instructions; keep prototype source byte-for-byte.
 await put('assets/docs/prototype/TRY_CURRENT_DESKTOP.md',`# Core desktop test ${version}
+
+Current source also cancels pending manual Play when temporary Cue sets a new cue, smooths headphone LEVEL over10ms, and commits continuous GUI master/track-gain edits once at release. MIDI/keyboard/explicit gain setters retain immediate persistence. Musical/controller acceptance remains separate.
 
 Current core fixes retire pending Sync rate ownership on accepted same-track Load and retain focused artwork cards during routine refresh. Shared channel filter routing crossfades bypass changes; generated-signal continuity checks are separate from owner listening.
 

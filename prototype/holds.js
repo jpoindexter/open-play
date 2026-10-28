@@ -47,6 +47,7 @@ export function createCueHolds({
       return;
     } else if (!selectedStem(d) && Math.abs(position - d.cue) > 0.04) {
       d.cue = quantized(d, position);
+      engine.pause(d);
       await engine.seek(d, d.cue);
       refresh();
       return;

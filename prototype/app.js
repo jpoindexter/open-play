@@ -1566,10 +1566,11 @@ document.addEventListener("input", (e) => {
     engine.mix(Number(i), k, e.target.value);
   }
   if (e.target.id === "crossfader") engine.setCross(Number(e.target.value));
-  if(e.target.id==="master-level")setMasterOutput(Number(e.target.value));
-  if(e.target.dataset.trackGain!==undefined){const d=state.decks[Number(e.target.dataset.trackGain)];if(d?.track)trackGain.set(d.track,e.target.value);}
+  if(e.target.id==="master-level")setMasterOutput(Number(e.target.value),{save:false});
+  if(e.target.dataset.trackGain!==undefined){const d=state.decks[Number(e.target.dataset.trackGain)];if(d?.track)trackGain.set(d.track,e.target.value,{save:false});}
 });
 document.addEventListener("change", (e) => {
+  if(e.target.id==="master-level"||e.target.dataset.trackGain!==undefined)persist();
   if(e.target.dataset.crossAssign!==undefined){
     const index=Number(e.target.dataset.crossAssign);
     if(Number.isInteger(index)&&index>=0&&index<4&&["A","B","Thru"].includes(e.target.value)){

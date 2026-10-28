@@ -29,12 +29,21 @@ export function createAudioMonitor(context,{master,deckTaps=[],destination=conte
   const masterOutputSplit=node(context.createChannelSplitter(2));masterOutput.connect(masterOutputSplit);
   const outputGate=gain();outputGate.channelInterpretation='discrete';outputGate.gain.value=1;
   const assertLive=()=>{if(disposed)throw Object.assign(Error('Monitor disposed.'),{name:'InvalidStateError'});};
+  let levelRamp=null;
+  function updateLevel(value){
+    const now=context.currentTime,previous=levelRamp;
+    if(!previous){at(context,level,value);levelRamp={at:now,from:value,to:value};return;}
+    if(previous.to===value)return;
+    const held=previous.from+(previous.to-previous.from)*Math.min(1,Math.max(0,(now-previous.at)/.01));
+    at(context,level,held);level.gain.linearRampToValueAtTime(value,now+.01);
+    levelRamp={at:now,from:held,to:value};
+  }
   function update(next={}){
     assertLive();settings=monitorSettings({...settings,...next});
     const cue=settings.masterCue?0:1-settings.mix,main=settings.masterCue?1:settings.mix,split=settings.splitCue&&!settings.masterCue;
     at(context,cueNormal,split?0:cue);at(context,masterNormal,split?0:main);
     at(context,cueSplitGain,split?cue:0);at(context,masterSplitGain,split?main:0);
-    at(context,level,cueVolumeGain(settings.volume));at(context,masterStereo,settings.mono?0:1);at(context,masterMonoOut,settings.mono?1:0);
+    updateLevel(cueVolumeGain(settings.volume));at(context,masterStereo,settings.mono?0:1);at(context,masterMonoOut,settings.mono?1:0);
     return {...settings};
   }
   function connectPhysical(next='stereo',{masterStart=0,cueStart=2}={}){
