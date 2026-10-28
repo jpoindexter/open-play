@@ -940,8 +940,11 @@ export class AudioEngine {
     }
   }
   setMixerSettings(value) {
+    const filtersEnabled=this.mixerSettings.filtersEnabled;
     this.mixerSettings=normalizeMixerSettings(value);
     this.setCross(this.cross);
+    if(filtersEnabled!==this.mixerSettings.filtersEnabled)
+      Promise.all(this.nodes.map((_,i)=>this.applyChannelFX(i))).catch(error=>this.onError?.(error));
     return structuredClone(this.mixerSettings);
   }
   setDeckTrackGain(index,value){
@@ -1019,7 +1022,7 @@ export class AudioEngine {
     await Promise.all(this.nodes.map((_, i) => this.applyChannelFX(i)));
   }
   async applyChannelFX(i) {
-    await this.effectsReady;
+    if(this.mixerSettings.filtersEnabled)await this.effectsReady;
     const n=this.nodes[i];
     for(const strip of [n,n.stemMonitor].filter(Boolean)){
       if(strip!==n){strip.channelValue=n.channelValue;strip.channelBpm=n.channelBpm;}
@@ -1027,8 +1030,8 @@ export class AudioEngine {
     }
   }
   applyChannelFXStrip(n) {
-    const value = n.channelValue || 0,
-      name = this.channelFXType;
+    const value = this.mixerSettings.filtersEnabled ? n.channelValue || 0 : 0,
+      name = this.mixerSettings.filtersEnabled ? this.channelFXType : 'Filter';
     if (name === "Filter") {
       n.channelEffect?.dispose();
       n.channelEffect = null;

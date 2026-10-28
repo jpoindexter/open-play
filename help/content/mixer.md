@@ -4,6 +4,8 @@
 
 Each mixer strip belongs to its labelled deck. Keep track of that label in four-deck mode; a visually nearby control can belong to another channel. Showing/hiding the mixer changes the view, not the audio state.
 
+Channel filters default to **Off**. Open **Settings → Mixer → Channel Filters** to show and enable their knobs. Turning this setting off bypasses filters and assigned Channel FX while keeping the knob positions for when you turn it on again. EQ controls remain available.
+
 | Control | Purpose |
 |---|---|
 | TRIM / GAIN | Adjusts that channel’s input level before mixing. |

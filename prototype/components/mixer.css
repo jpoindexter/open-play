@@ -1,8 +1,10 @@
 /* One channel component; placement belongs to the workspace layout. */
 #mixer[data-channel-layout]{
+ --channel-filter-row-size:0;
  display:flex;align-items:stretch;justify-content:center;gap:var(--dj-component-mixer-gap);
  padding:var(--dj-component-mixer-inset);min-height:0;background:var(--dj-component-mixer-surface);
 }
+:root[data-channel-filters=true] #mixer[data-channel-layout]{--channel-filter-row-size:var(--dj-component-mixer-knob-row)}
 .channel-strip{display:flex;align-items:center;gap:var(--dj-component-mixer-gap);min-width:0}
 .channel-strip>strong{color:var(--dj-semantic-text-muted);text-align:center}
 .channel-strip .knob-group{
@@ -40,7 +42,7 @@
 .channel-strip .preview-fader-ticks i{position:absolute;left:50%;top:calc(var(--tick)*100%);transform:translateX(-50%);width:var(--dj-component-mixer-tick-width);height:var(--dj-semantic-hairline);background:linear-gradient(to right,var(--dj-component-mixer-tick) 0 35%,transparent 35% 65%,var(--dj-component-mixer-tick) 65%)}
 .channel-strip .preview-fader-ticks i.major{width:var(--dj-component-mixer-major-tick-width);height:var(--dj-semantic-focus-width)}
 #mixer[data-channel-layout=parallel]{min-height:var(--dj-component-mixer-two-deck-height)}
-#mixer[data-channel-layout=parallel] .channel-strip{display:grid;grid-template-columns:var(--dj-component-mixer-channel-width);grid-template-rows:var(--dj-component-mixer-channel-label-height) repeat(5,var(--dj-component-mixer-knob-row)) var(--dj-component-mixer-cue-height) minmax(var(--dj-component-mixer-fader-min-height),1fr);justify-items:center;gap:var(--dj-component-mixer-gap);min-height:0;align-self:stretch}
+#mixer[data-channel-layout=parallel] .channel-strip{display:grid;grid-template-columns:var(--dj-component-mixer-channel-width);grid-template-rows:var(--dj-component-mixer-channel-label-height) repeat(4,var(--dj-component-mixer-knob-row)) var(--channel-filter-row-size) var(--dj-component-mixer-cue-height) minmax(var(--dj-component-mixer-fader-min-height),1fr);justify-items:center;gap:var(--dj-component-mixer-gap);min-height:0;align-self:stretch}
 #mixer[data-channel-layout=parallel] .channel-strip>strong{grid-row:1}
 #mixer[data-channel-layout=parallel] .knob-group:has(input[data-mix$=':trim']){grid-row:2}
 #mixer[data-channel-layout=parallel] .knob-group:has(input[data-mix$=':high']){grid-row:3}
@@ -49,7 +51,7 @@
 #mixer[data-channel-layout=parallel] .knob-group:has(input[data-mix$=':filter']){grid-row:6}
 #mixer[data-channel-layout=parallel] .channel-strip>button{grid-row:7}
 #mixer[data-channel-layout=parallel] .fader-group{grid-row:8;height:100%}
-#mixer[data-channel-layout=mirrored] .channel-strip{display:grid;grid-template-columns:repeat(2,var(--dj-component-mixer-mirrored-column-width));grid-template-rows:var(--dj-component-mixer-channel-label-height) repeat(4,var(--dj-component-mixer-knob-row));gap:var(--dj-component-mixer-gap);justify-items:center;align-items:center}
+#mixer[data-channel-layout=mirrored] .channel-strip{display:grid;grid-template-columns:repeat(2,var(--dj-component-mixer-mirrored-column-width));grid-template-rows:var(--dj-component-mixer-channel-label-height) repeat(3,var(--dj-component-mixer-knob-row)) var(--channel-filter-row-size);gap:var(--dj-component-mixer-gap);justify-items:center;align-items:center}
 #mixer[data-channel-layout=mirrored] .channel-strip>strong{grid-row:1;grid-column:1/-1}
 #mixer[data-channel-layout=mirrored] .knob-group:has(input[data-mix$=':trim']){grid-row:2;grid-column:1}
 #mixer[data-channel-layout=mirrored] .knob-group:has(input[data-mix$=':high']){grid-row:2;grid-column:2}

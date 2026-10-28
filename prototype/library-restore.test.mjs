@@ -12,7 +12,7 @@ async function restore(data) {
   const s={tracks:[track],crates:[{id:'old',name:'Original',tracks:['one']}],settings:{'Quantize Value':'1 Beat'},decks:[],samples:[]};
   const before=JSON.stringify(s),nodes={},calls=[];
   let validation={};try{validation=await import('./library-state.js');}catch(error){if(error.code!=='ERR_MODULE_NOT_FOUND')throw error;}
-  const ctx={...validation,s,trackById:()=>track,$:id=>nodes[id]??={},a:{trackGain:{refresh(){}}},persist(){calls.push('save');return true;},renderCrates(){},renderTracks(){},renderDecks(){},notify(){},engine:{setMonitorSettings(){},setMixerSettings(){}},monitorState(){},mixerSettingsFromPreferences(){},applyEQBoost(){}};
+  const ctx={...validation,s,trackById:()=>track,$:id=>nodes[id]??={},a:{trackGain:{refresh(){}}},persist(){calls.push('save');return true;},renderCrates(){},renderTracks(){},renderDecks(){},notify(){},engine:{setMonitorSettings(){},setMixerSettings(){}},monitorState(){},mixerSettingsFromPreferences(){},refreshChannelFilters(){},applyEQBoost(){}};
   vm.runInNewContext(source.slice(begin,end),ctx);
   await nodes['#restore-library'].onchange({target:{files:[{text:async()=>JSON.stringify(data)}]}});
   return {before,after:JSON.stringify(s),calls,message:nodes['#library-tool-result']?.textContent};

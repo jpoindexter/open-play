@@ -75,6 +75,8 @@ export function createPanels(a) {
   const monitorState=()=>({mix:percent('Cue Mix',.5),volume:percent('Cue Volume',.1),masterCue:s.settings['Master Cue']===true,splitCue:s.settings['Split Cue']===true,mono:s.settings['Output Mode']==='Mono'});
   engine.setMonitorSettings(monitorState());
   engine.setMixerSettings(mixerSettingsFromPreferences(s.settings));
+  function refreshChannelFilters(){document.documentElement.dataset.channelFilters=String(s.settings['Channel Filters']===true);}
+  refreshChannelFilters();
   function applyEQBoost(){
     const previous=engine.eqBoost,next=normalizeEQBoost(s.settings['EQ Boost']);
     for(const deck of s.decks)for(const band of eqBands)deck[band]=rescaleEQGain(deck[band],previous,next);
@@ -436,6 +438,7 @@ export function createPanels(a) {
             for(const track of s.tracks)a.trackGain.refresh(track);
             engine.setMonitorSettings(monitorState());
             engine.setMixerSettings(mixerSettingsFromPreferences(s.settings));
+            refreshChannelFilters();
             applyEQBoost();
             const saved=persist();
             renderCrates();
@@ -568,7 +571,7 @@ export function createPanels(a) {
         })
         .join(
           "",
-        )}</div>${tab==='DJ Preferences'?'<p class="muted">Auto Gain uses measured integrated K-weighted loudness. Independent reference mapping:89→−18LUFS,92→−15LUFS. Exact Serato calibration remains unmeasured. New analysis during playback waits for the next load/trigger; reference/mode changes apply immediately. Control-click gain sets0; Alt-click restores its computed value.</p>':''}${tab==='Mixer'?'<p class="muted">EQ Boost changes the live positive EQ range to6dB or12dB for GUI and MIDI. Changing range preserves positive knob position; neutral and cuts stay unchanged. Cue Mix, Cue Volume, Master Cue, Split Cue and Mono output control real audio buses. Crossfader type, curve amount (0 slow · 100 fast), reverse, disable, A/B/Thru assignment and upfader curve also affect live audio. The midpoint Linear/upfader defaults preserve the previous mix. Curve equations are independent approximations of documented behavior; exact vendor curves are unmeasured. Cue volume10% is unity; higher values add up to12dB. Four-channel routing is applied separately in Devices. Physical headphone/master sockets and exact reference curves remain unverified.</p>':''}${sharedVideo?'<p class="muted">Recording resolution, media treatment and fade speed share the live Video controls. Fade speed runs from Slow (10s) to Fast (0.25s), using the existing independent linear duration. Match live output preserves the existing capture default. Other Video output preferences on this tab remain stored simulations.</p><p id="video-setup-status" role="status" aria-live="polite"></p>':''}<div class="form-actions">${tab === "MIDI" ? '<button id="open-mapping">Mapping editor</button>' : ""}${tab === "CD/Vinyl" ? '<button id="open-calibration">Calibration simulation</button>' : ""}${tab === "Library + Display" ? '<button id="open-providers">Provider settings</button>' : ""}${tab === "Audio" ? '<button id="open-devices">Audio output routing</button><button id="song-info">Livestream song info</button>' : ""}${tab === "FX" ? '<button id="open-fx">FX catalog & presets</button>' : ""}${tab!=='Advanced'?'<button id="reset-settings">Reset this tab</button>':''}<button id="save-settings">Close</button></div>`,
+        )}</div>${tab==='DJ Preferences'?'<p class="muted">Auto Gain uses measured integrated K-weighted loudness. Independent reference mapping:89→−18LUFS,92→−15LUFS. Exact Serato calibration remains unmeasured. New analysis during playback waits for the next load/trigger; reference/mode changes apply immediately. Control-click gain sets0; Alt-click restores its computed value.</p>':''}${tab==='Mixer'?'<p class="muted">Channel Filters shows and enables the channel-effect knobs. Turning it off hides and bypasses them while keeping their positions. EQ Boost changes the live positive EQ range to6dB or12dB for GUI and MIDI. Changing range preserves positive knob position; neutral and cuts stay unchanged. Cue Mix, Cue Volume, Master Cue, Split Cue and Mono output control real audio buses. Crossfader type, curve amount (0 slow · 100 fast), reverse, disable, A/B/Thru assignment and upfader curve also affect live audio. The midpoint Linear/upfader defaults preserve the previous mix. Curve equations are independent approximations of documented behavior; exact vendor curves are unmeasured. Cue volume10% is unity; higher values add up to12dB. Four-channel routing is applied separately in Devices. Physical headphone/master sockets and exact reference curves remain unverified.</p>':''}${sharedVideo?'<p class="muted">Recording resolution, media treatment and fade speed share the live Video controls. Fade speed runs from Slow (10s) to Fast (0.25s), using the existing independent linear duration. Match live output preserves the existing capture default. Other Video output preferences on this tab remain stored simulations.</p><p id="video-setup-status" role="status" aria-live="polite"></p>':''}<div class="form-actions">${tab === "MIDI" ? '<button id="open-mapping">Mapping editor</button>' : ""}${tab === "CD/Vinyl" ? '<button id="open-calibration">Calibration simulation</button>' : ""}${tab === "Library + Display" ? '<button id="open-providers">Provider settings</button>' : ""}${tab === "Audio" ? '<button id="open-devices">Audio output routing</button><button id="song-info">Livestream song info</button>' : ""}${tab === "FX" ? '<button id="open-fx">FX catalog & presets</button>' : ""}${tab!=='Advanced'?'<button id="reset-settings">Reset this tab</button>':''}<button id="save-settings">Close</button></div>`,
       (body) => {
         body.querySelectorAll('[data-workspace-choice]').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.workspaceChoice===document.body.dataset.workspace)));
         body
@@ -598,7 +601,10 @@ export function createPanels(a) {
               if(input.dataset.setting==='Master Volume')a.setMasterVolume(percent('Master Volume',1));
               if(input.dataset.setting==='EQ Boost'){applyEQBoost();renderMixer();}
               if(['Use Auto Gain','Auto Gain Reference'].includes(input.dataset.setting)){a.trackGain.refreshAll();renderDecks();}
-              if(mixerFields.has(input.dataset.setting)){engine.setMixerSettings(mixerSettingsFromPreferences(s.settings));renderMixer();}
+              if(mixerFields.has(input.dataset.setting)){
+                engine.setMixerSettings(mixerSettingsFromPreferences(s.settings));
+                if(input.dataset.setting==='Channel Filters')refreshChannelFilters();else renderMixer();
+              }
               persist();
               if (input.dataset.setting === "Sync Mode") {samplerSync.settingsChanged();renderDecks();}
               if (input.dataset.setting === "Library Text Size")
@@ -623,7 +629,7 @@ export function createPanels(a) {
           for (const [name, type, v] of settingsSchema[tab])
             if (type !== "section"&&!videoSetupField(name)) s.settings[name] = v;
           if(tab==='DJ Preferences'){a.trackGain.refreshAll();renderDecks();}
-          if(tab==='Mixer'){a.setMasterVolume(percent('Master Volume',1));engine.setMonitorSettings(monitorState());engine.setMixerSettings(mixerSettingsFromPreferences(s.settings));applyEQBoost();renderMixer();}
+          if(tab==='Mixer'){a.setMasterVolume(percent('Master Volume',1));engine.setMonitorSettings(monitorState());engine.setMixerSettings(mixerSettingsFromPreferences(s.settings));refreshChannelFilters();applyEQBoost();renderMixer();}
           persist();
           settings(tab);
           if(sharedVideo&&s.panel==='video')refresh();

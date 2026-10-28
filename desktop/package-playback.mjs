@@ -12,7 +12,7 @@ const git=args=>execFileSync('git',args,{cwd:root,maxBuffer:150*1024*1024});
 const sha=bytes=>createHash('sha256').update(bytes).digest('hex');
 const sourceCommit=git(['rev-parse','HEAD']).toString().trim();
 const get=file=>git(['show',`${sourceCommit}:${file}`]);
-const version='0.1.96',name='Open Play Playback Test',port=18775,bundle='org.openplay.dj.playback.localtest';
+const version='0.1.97',name='Open Play Playback Test',port=18775,bundle='org.openplay.dj.playback.localtest';
 const profile='Open Play Playback Test',partition='persist:open-play-playback-test';
 await assertBuildRetention(path.join(root,'local-evidence/desktop-builds'),name);
 const stage=await mkdtemp(path.join(tmpdir(),'open-play-playback-'));
@@ -54,6 +54,8 @@ await put('assets/docs/prototype/auto-gain-fixture-reference.json',JSON.stringif
 // The archived workspace guide describes the previous installed candidate. Generate
 // only this package's identity/instructions; keep prototype source byte-for-byte.
 await put('assets/docs/prototype/TRY_CURRENT_DESKTOP.md',`# Core desktop test ${version}
+
+Mixer filter knobs now default Off/hidden. Settings→Mixer→Channel Filters enables/shows them. Off bypasses assigned channel effects while retaining stored amounts; On restores them. All original controls/layouts/library previews remain; musical bypass-transition acceptance is separate.
 
 Current source also cancels pending Autoplay when a newer temporary Cue or existing hot cue is triggered, preserving release-to-pause and explicit Cue+Play latch. Empty cue creation/deletion keeps its metadata-only behavior. Private packaging now seals nested code/resources ad-hoc without a certificate/account; this is not Developer ID/notarization or public-distribution acceptance. The isolated Core transport ownership check uses a volatile device-denied session and generated audio only.
 
