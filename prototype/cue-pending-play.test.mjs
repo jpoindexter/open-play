@@ -17,11 +17,11 @@ test('temporary Cue sets paused position during pending Play; matched Cue still 
  engine.ctx={currentTime:1,sampleRate:48000,decodeAudioData:async()=>({duration:48,sampleRate:48000}),createGain:bus,createBufferSource:()=>({playbackRate:{value:1},connect(){},disconnect(){},start(){},stop(){}})};
  engine.nodes=Array.from({length:4},()=>({deckInput:bus(),gain:bus(),high:bus(),filter:bus(),level:1,trim:1}));
  engine.resume=async()=>{};engine.applyChannelFX=async()=>{};engine.configureFX=()=>{};
- const cancel={cancelDeck(){}},scope={engine,state,createCueHolds,autoplayRequests:new WeakMap(),playRequests:new WeakMap(),
+ const cancel={cancelDeck(){}},scope={engine,state,createCueHolds,playbackIntents:{record(){}},autoplayRequests:new WeakMap(),playRequests:new WeakMap(),
   instantDouble:{cancelDeck(){},pending:()=>false},pitchPlay:{...cancel,latch:()=>false},slicer:cancel,stemSlipControls:cancel,
   smartSync:createSmartSync({engine,state}),syncMaster:{started(){}},quantized:(_,p)=>p,
   flipAutomation:{record(){}},api:{refreshCueControls(){}},persist(){},renderDecks(){},renderTracks(){},refreshTransportControls(){},notify:m=>assert.fail(m)};
- vm.runInNewContext(source.match(/^function cancelPendingPlay.*$/m)[0]+'\n'+part('async function play(d)','\nfunction deckQuantize(')+'\n'+part('const cueHolds = createCueHolds({','\napi.cueHolds =')+'\nglobalThis.holds=cueHolds;globalThis.pressPlay=play;',scope);
+ vm.runInNewContext(source.match(/^function cancelPendingPlay.*$/m)[0]+'\n'+part('async function play(','\nfunction deckQuantize(')+'\n'+part('const cueHolds = createCueHolds({','\napi.cueHolds =')+'\nglobalThis.holds=cueHolds;globalThis.pressPlay=play;',scope);
  t.after(()=>{read.resolve();engine.pause(d);});
  const playing=scope.pressPlay(d);await entered.promise;
  assert.equal(d.processing,true);assert.equal(d.playing,false);

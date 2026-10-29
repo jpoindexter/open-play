@@ -10,6 +10,7 @@ import {mixerSettingsFromPreferences} from './mixer-curves.js';
 import {createDeckTapTempo} from './deck-tap-tempo.js';
 import {createDeckKeyShift} from './deck-key-shift.js';
 import {createInstantDouble} from './instant-double.js';
+import {createPlaybackIntents} from './playback-intents.js';
 import {refreshLoopControls} from './loop-presentation.js';
 import {createManualLoops} from './manual-loops.js';
 import {createLoopPads} from './loop-pads.js';
@@ -71,6 +72,7 @@ const sessionStorage=createSessionStorage({getItem:key=>localStorage.getItem(key
 const saved=sessionStorage.load();
 let updateSessionStatus=()=>{};
 const engine = new AudioEngine();
+const playbackIntents = createPlaybackIntents();
 const tempoSliders = createTempoSlider({setRate:(deck,rate)=>engine.setRate(deck,rate)});
 const stemWaveforms = Array.from({length:4}, () => createStemWaveformModel());
 const overviewWaveViews = [];
@@ -637,12 +639,14 @@ async function faderStart(d,value,previous,deviceId=''){
     const active=faderStarts.get(d.index);
     if(active)active.wanted=false;
     if(!d.playing&&!d.processing&&!active){d.cue=engine.position(d);refreshTransportControls(state);return;}
+    playbackIntents.record(d,{origin:'fader-start',intent:'stop',ready:globalThis.document?.body?.dataset?.ready==='true',visibility:globalThis.document?.visibilityState});
     engine.pause(d);await engine.seek(d,d.cue);refreshTransportControls(state);return;
   }
   if(previous>0)return;
   const owner={track:d.track,deviceId,wanted:true,token:null};faderStarts.set(d.index,owner);
   const seeking=engine.seek(d,d.cue);owner.token=engine.startTokens.get(d.index);await seeking;
   if(faderStarts.get(d.index)!==owner||!owner.wanted||d.track!==owner.track||engine.startTokens.get(d.index)!==owner.token||d.playing||d.processing)return;
+  playbackIntents.record(d,{origin:'fader-start',intent:'start',ready:globalThis.document?.body?.dataset?.ready==='true',visibility:globalThis.document?.visibilityState});
   const starting=engine.start(d);owner.token=engine.startTokens.get(d.index);await starting;refreshTransportControls(state);
 }
 function resetFaderStartInput(deviceId){
@@ -763,7 +767,8 @@ const deckKeyShift=createDeckKeyShift({state,engine,persist,
  render:d=>{refreshAnalysisControls(state,d.track);refreshDeckSwitches(state,d.index);refreshLoopDecks(d);},
 });
 const {intent:keyShiftIntent,set:setDeckKeyShift}=deckKeyShift;
-async function play(d) {
+async function play(d, input = {}) {
+  playbackIntents.record(d,{...input,intent:'toggle',ready:globalThis.document?.body?.dataset?.ready==='true',visibility:globalThis.document?.visibilityState});
   autoplayRequests.delete(d);
   if (pitchPlay.latch(d) || cueHolds.latch(d)) {
     syncMaster.started(d);
@@ -890,11 +895,11 @@ async function deckAction(action, index, el, event = {}) {
   if (!d.track) return notify("Load a track first.");
   const pos = engine.position(d),
     beat = 60 / (d.track.bpm || 120);
-  if (action === "play") return play(d);
+  if (action === "play") return play(d,{origin:event.playbackOrigin==='midi'?'midi':event.type==='keydown'?'keyboard':event.type==='click'?'gui':'unknown',event});
   if(action==='stutter'){
     const track=d.track,wasPlaying=d.playing;
     const seeking=engine.seek(d,d.cue),token=engine.startTokens.get(index);await seeking;
-    if(!wasPlaying&&d.track===track&&!d.playing&&!d.processing&&engine.startTokens.get(index)===token)await play(d);
+    if(!wasPlaying&&d.track===track&&!d.playing&&!d.processing&&engine.startTokens.get(index)===token)await play(d,{origin:'stutter',event});
     return refreshTransportControls(state);
   }
   if (action === "stemPrepare") {
@@ -1987,7 +1992,7 @@ engine.onEnd = async (d) => {
       autoplayRequests.set(d,request);
       try {
         const loaded=await loading;
-        if(loaded&&state.autoplay&&autoplayRequests.get(d)===request)await play(d);
+        if(loaded&&state.autoplay&&autoplayRequests.get(d)===request)await play(d,{origin:'autoplay'});
       } finally {
         if(autoplayRequests.get(d)===request)autoplayRequests.delete(d);
       }
@@ -2084,6 +2089,7 @@ window.openPlay = {
       playing: d.playing,
       position: engine.position(d),
     })),
+    playbackIntents: playbackIntents.snapshot(),
     audioState: engine.ctx?.state,
     native: false,
   }),

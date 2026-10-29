@@ -19,11 +19,11 @@ function fixture(t){
  engine.ctx={currentTime:1,sampleRate:48000,decodeAudioData:async()=>({duration:48,sampleRate:48000}),createGain:bus,createBufferSource:()=>({playbackRate:{value:1},connect(){},disconnect(){},start(){},stop(){}})};
  engine.nodes=Array.from({length:4},()=>({deckInput:bus(),gain:bus(),high:bus(),filter:bus(),level:1,trim:1}));
  engine.resume=async()=>{};engine.applyChannelFX=async()=>{};engine.configureFX=()=>{};
- const cancel={cancelDeck(){}},scope={engine,state,createCueHolds,tempoSliders:{cancel(){}},autoplayRequests:new WeakMap(),playRequests:new WeakMap(),deckLoadRequests:new WeakMap(),faderStarts:new Map(),
+ const cancel={cancelDeck(){}},scope={engine,state,createCueHolds,playbackIntents:{record(){}},tempoSliders:{cancel(){}},autoplayRequests:new WeakMap(),playRequests:new WeakMap(),deckLoadRequests:new WeakMap(),faderStarts:new Map(),
   instantDouble:{cancelDeck(){},pending:()=>false},pitchPlay:{...cancel,latch:()=>false},deckScratchControls:cancel,loopPads:cancel,manualLoops:cancel,slicer:cancel,stemSlipControls:cancel,
   smartSync:createSmartSync({engine,state}),syncMaster:{started(){}},filtered:()=>[old,next],trackById:id=>[old,next].find(t=>t.id===id),trackGain:{refresh(){}},
   quantized:(_,p)=>p,flipAutomation:{record(){},stop(){}},api:{refreshCueControls(){}},persist(){},renderDecks(){},renderTracks(){},refreshTransportControls(){},drawWaves(){},notify:message=>assert.fail(message)};
- const code=source.match(/^function cancelPendingPlay.*$/m)[0]+'\n'+part('async function load(index,','\nconst deckKeyShift=')+'\n'+part('async function play(d)','\nfunction deckQuantize(')+'\n'+part('const cueHolds = createCueHolds({','\napi.cueHolds =')+'\n'+part('engine.onEnd = async (d) => {','\nfunction tick()')+'\nglobalThis.holds=cueHolds;globalThis.pressPlay=play;';
+ const code=source.match(/^function cancelPendingPlay.*$/m)[0]+'\n'+part('async function load(index,','\nconst deckKeyShift=')+'\n'+part('async function play(','\nfunction deckQuantize(')+'\n'+part('const cueHolds = createCueHolds({','\napi.cueHolds =')+'\n'+part('engine.onEnd = async (d) => {','\nfunction tick()')+'\nglobalThis.holds=cueHolds;globalThis.pressPlay=play;';
  vm.runInNewContext(code,scope);
  t.after(()=>{read.resolve();engine.pause(d);});
  return{d,engine,scope,read,entered,end:()=>engine.onEnd(d)};

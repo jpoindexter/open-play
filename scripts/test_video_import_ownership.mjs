@@ -8,7 +8,7 @@ const panels=await readFile(new URL('../prototype/panels.js',import.meta.url),'u
 const engine=await readFile(new URL('../prototype/engine.js',import.meta.url),'utf8');
 function extract(source,start,end){const a=source.indexOf(start),b=source.indexOf(end,a);assert(a>=0&&b>a);return source.slice(a,b);}
 const requestSource=extract(app,'const deckLoadRequests =','async function load(index,');
-const loadSource=extract(app,'async function load(index,','\nasync function play(d)');
+const loadSource=extract(app,'async function load(index,','\nasync function play(');
 const ejectSource=extract(app,'async function deckAction(','\n  if (!d.track)')+'\n}';
 const pairSource=extract(panels,'  async function importKaraoke(','\n  function video()');
 const offSource=extract(engine,'  async setStemSlip(d, mode) {','\n  async stemSlipBuffers(');

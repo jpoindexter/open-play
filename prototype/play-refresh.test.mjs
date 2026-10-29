@@ -4,21 +4,31 @@ import {readFileSync} from 'node:fs';
 import vm from 'node:vm';
 import {refreshTransportControls} from './transport-presentation.js';
 import {createStemSlipControls} from './stem-slip-ui.js';
+import {createPlaybackIntents} from './playback-intents.js';
 const source=readFileSync(new URL('./app.js',import.meta.url),'utf8');
-const playSource=source.slice(source.indexOf('async function play(d) {'),source.indexOf('\nfunction deckQuantize'));
+const playSource=source.slice(source.indexOf('async function play('),source.indexOf('\nfunction deckQuantize'));
 const prepared=()=>new Promise(resolve=>setImmediate(resolve));
 function fixture({latch=false,reject=false,slice=null}={}){
  const decks=Array.from({length:4},(_,index)=>({index,track:{id:String(index),plays:0},playing:false,processing:false,mode:'INT',slice,loop:!!slice,loopIn:2,loopOut:6}));
  const state={decks,deckCount:4,focus:2,settings:{'Retain Tracks in Prepare':false},history:[],prepare:['2']},d=decks[2],calls={decks:0,tracks:0,refresh:0,starts:0},playRequests=new WeakMap();
  let resolveStart,generation=0;
  const engine={pause(d){generation++;d.playing=false;d.processing=false;},async start(d){calls.starts++;const own=generation;await new Promise(resolve=>resolveStart=resolve);if(reject)throw Error('Start failed');if(own===generation)d.playing=true;}};
- const context={state,engine,autoplayRequests:new WeakMap(),instantDouble:{pending:()=>false},playRequests,pitchPlay:{latch:()=>latch},cueHolds:{latch:()=>false,cancelDeck(){}},syncMaster:{started(){}},
+ const playbackIntents=createPlaybackIntents({now:()=>42});
+ const context={state,engine,playbackIntents,autoplayRequests:new WeakMap(),instantDouble:{pending:()=>false},playRequests,pitchPlay:{latch:()=>latch},cueHolds:{latch:()=>false,cancelDeck(){}},syncMaster:{started(){}},
   smartSync:{reconcile(){},paused(){},async start(){return false;},played(){}},slicer:{cancelDeck(d){if(d.slice!==null){d.slice=null;d.loop=false;}}},stemSlipControls:{cancelDeck(){}},
   cancelPendingPlay:d=>{playRequests.delete(d);d.playQueued=false;},persist(){},renderDecks(){calls.decks++;},renderTracks(){calls.tracks++;},
   refreshTransportControls(){calls.refresh++;},notify(){}};
  vm.runInNewContext(playSource+';globalThis.realPlay=play;',context);
- return{d,state,calls,playRequests,context,play:()=>context.realPlay(d),finish:()=>resolveStart?.()};
+ return{d,state,calls,playRequests,playbackIntents,context,play:()=>context.realPlay(d),finish:()=>resolveStart?.()};
 }
+test('actual Play entry records explicit command input before latch using the bounded logger',async()=>{
+ const f=fixture({latch:true});f.context.document={body:{dataset:{ready:'false'}},visibilityState:'visible'};
+ await f.context.realPlay(f.d,{origin:'keyboard',event:{type:'keydown',code:'KeyS',isTrusted:false,key:'PRIVATE TEXT',target:{tagName:'BODY'}},intent:'start'});
+ const [entry]=f.playbackIntents.snapshot();
+ assert.equal(entry.origin,'keyboard');assert.equal(entry.eventType,'keydown');assert.equal(entry.code,'KeyS');assert.equal(entry.trusted,false);
+ assert.equal(entry.ready,false);assert.equal(entry.visibility,'visible');assert.equal(entry.intent,'toggle');assert.equal(entry.playing,false);assert.equal(entry.deck,3);
+ assert.equal(f.calls.starts,0);assert(!JSON.stringify(entry).includes('PRIVATE'));
+});
 test('queued Play and successful completion preserve deck/mixer nodes instead of rebuilding',async()=>{
  const f=fixture(),pending=f.play();assert.equal(f.d.playQueued,true);
  await prepared();assert.equal(f.calls.starts,1);f.finish();await pending;

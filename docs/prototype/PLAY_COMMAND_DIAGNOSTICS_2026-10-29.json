@@ -1,0 +1,42 @@
+{
+  "date": "2026-10-29",
+  "card": "https://trello.com/c/Y2hYnQnS",
+  "status": "Source instrumentation prepared; unexpected startup playback unresolved",
+  "moduleLines": 36,
+  "scope": {
+    "commands": [
+      "main Play toggle",
+      "stutter start",
+      "Autoplay start",
+      "MIDI Play",
+      "accepted fader start/stop"
+    ],
+    "limit": 32,
+    "persistence": false,
+    "network": false,
+    "generalTyping": false,
+    "audioBehaviorChanged": false,
+    "exposure": "Existing System diagnostics display/export"
+  },
+  "executed": {
+    "focusedCommand": "node --test prototype/play-refresh.test.mjs prototype/playback-intents.test.mjs",
+    "passed": 11,
+    "syntax": [
+      "prototype/app.js",
+      "prototype/panels.js"
+    ],
+    "diffCheck": true,
+    "trelloDescriptionReadback": true
+  },
+  "limits": [
+    "Extracted actual Play function plus real logger, not native UI execution",
+    "Seven other edited extraction fixtures not rerun",
+    "Primary MIDI origin marker has no message-event context",
+    "Trusted input flags alone do not identify the actor",
+    "Requests are recorded before dispatch, not evidence that playback started",
+    "36-line module is not included in running 0.1.106",
+    "No cold launch, new package, listening or hardware check in this pass"
+  ],
+  "preserved": "Running106 last observed stopped A114.836/B112.561;105default/rollback and prelaunch profile backup retained. No main session or media mutation in this pass.",
+  "next": "Package immutable instrumented candidate with protected physically muted cold-start capture; inspect the recorded command before changing startup or DSP behavior."
+}

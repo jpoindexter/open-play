@@ -24,14 +24,14 @@ function manualFixture(){
  let finishLoad,finishStart;
  const loading=new Promise(resolve=>finishLoad=resolve),starting=new Promise(resolve=>finishStart=resolve);
  const old={id:'old'},next={id:'next',plays:0},d={index:0,track:old,playing:false},voices=new Set();
- const scope={state:{autoplay:true,decks:[d],settings:{},history:[],prepare:[]},
+ const scope={playbackIntents:{record(){}},state:{autoplay:true,decks:[d],settings:{},history:[],prepare:[]},
   autoplayRequests:new WeakMap(),playRequests:new WeakMap(),instantDouble:{pending:()=>false,cancelDeck(){}},
   pitchPlay:{latch:()=>false},cueHolds:{latch:()=>false,cancelDeck(){}},slicer:{cancelDeck(){}},stemSlipControls:{cancelDeck(){}},
   smartSync:{paused(){},async start(){return false;},played(){},reconcile(){}},syncMaster:{started(){}},
   engine:{pause(){d.playing=false;d.processing=false;voices.delete(d);},async start(){await starting;d.playing=true;voices.add(d);}},
   filtered:()=>[old,next],load:async()=>{scope.cancelPendingPlay(d);d.track=next;await loading;return true;},
   refreshTransportControls(){},persist(){},renderDecks(){},renderTracks(){},notify:message=>assert.fail(message)};
- const play=source.slice(source.indexOf('async function play(d)'),source.indexOf('\nfunction deckQuantize('));
+ const play=source.slice(source.indexOf('async function play('),source.indexOf('\nfunction deckQuantize('));
  vm.runInNewContext(source.match(/^function cancelPendingPlay.*$/m)[0]+'\n'+play+'\n'+handler+'\nglobalThis.pressPlay=play;',scope);
  return{d,scope,voices,finishLoad,finishStart,end:()=>scope.engine.onEnd(d)};
 }

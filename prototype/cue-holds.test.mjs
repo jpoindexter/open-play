@@ -52,11 +52,11 @@ test('cancelling a pending Cue plus Play still prevents a queued restart',async(
 test('actual Play stop revokes released Cue ownership before pending seek completes',async()=>{
   const {d,holds,starts,pending}=fixture();
   const source=readFileSync(new URL('./app.js',import.meta.url),'utf8');
-  const begin=source.indexOf('async function play(d) {');
+  const begin=source.indexOf('async function play(');
   const end=source.indexOf('\nfunction deckQuantize',begin);
   assert(begin>=0&&end>begin);
   const playRequests=new WeakMap();
-  const context={autoplayRequests:new WeakMap(),instantDouble:{pending:()=>false},cueHolds:holds,pitchPlay:{latch:()=>false},playRequests,state:{},
+  const context={playbackIntents:{record(){}},autoplayRequests:new WeakMap(),instantDouble:{pending:()=>false},cueHolds:holds,pitchPlay:{latch:()=>false},playRequests,state:{},
     cancelPendingPlay:d=>{playRequests.delete(d);d.playQueued=false;},
     slicer:{cancelDeck(){}},stemSlipControls:{cancelDeck(){}},
     engine:{pause:d=>{d.playing=false;d.processing=false;}},smartSync:{paused(){},reconcile(){}},

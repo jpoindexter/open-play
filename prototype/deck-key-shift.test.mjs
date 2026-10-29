@@ -5,7 +5,7 @@ import vm from 'node:vm';
 import {createDeckKeyShift} from './deck-key-shift.js';
 const source=readFileSync(new URL('./app.js',import.meta.url),'utf8');
 const handler=source.slice(source.indexOf('async function deckAction('),source.indexOf('\nlet importTail='));
-const wiring=source.slice(source.indexOf('const deckKeyShift=createDeckKeyShift('),source.indexOf('async function play(d) {'));
+const wiring=source.slice(source.indexOf('const deckKeyShift=createDeckKeyShift('),source.indexOf('async function play('));
 const deferred=()=>{let resolve;const promise=new Promise(r=>resolve=r);return{promise,resolve};};
 function fixture(){
  const state={decks:[{index:0,track:{id:'original',bpm:120},keyShift:0,keySync:true}],focus:0},calls={saved:0,feedback:0,cancelled:0};
