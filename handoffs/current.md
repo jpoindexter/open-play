@@ -1,8 +1,10 @@
-## Active core repair —29 October2026 /CORE-FIX-64,113queued
+## Current core delivery —29 October2026 /0.1.113
 
-112is still current/default and stopped30.097/34.086 with original16tracks/previews. A new actual manual-loop/engine/appLoad witness reproduced stale saved recall seeking replacement0→1/token3→4 and overwriting loopLength. Shared78-line manual-loops owner guard now rechecks after awaits and prevents queued pre-Stop input adopting the Stop token; benign no-op/normal queued commands still work.3focused integration checks +1existingloop-feedback check pass; original RED/intermediate GREEN and scope retained in MANUAL_LOOP_OWNERSHIP_2026-10-29.json. New76-line isolated native Load checker being finished;113notpackaged/launched.
+Current/default113/source74ed9f6 repairs CORE-FIX-64: stale saved-loop work cannot seek replacement audio after Load or adopt a newer Stop token. Shared manual-loop module78lines; focused regression85, native helper83. Final3source cases plus1existingloop-feedback check pass; no broadsuite. Source RED/partial-fix queued-Stop counterexample retained. One actual native muted four-deck raw-source saved-pad→normalLoad→heldresume completion PASSES: replacement0/length8/token5 retained,166outgoing/mixer controls stay connected,7/7readypreview sources retained/8after. All stopped/muted, methodrestored and4sourcehashesstable. [Native receipt](../docs/prototype/MANUAL_LOOP_113_NATIVE_2026-10-29.json).
 
-Next: commit/push owned repair+checker, package/inspect113, execute ONLYnewmutedLoadboundary, verify main session unchanged, update/readback existingCORE-FIX-64and parents, retire112after healthy successor. No broadtest/cleanSync rerun. Genericpop/stall/startup/hardware gates remainOPEN. Preserve unrelatedmonochromedraft and all music/recordings/recovery profiles.
+Main113unchanged/stopped30.097/34.086,16tracks/12materializedpreviews,2Play/tempo/6EQ; no mainPlay/Sync/RECstart. Closed112profile259files/120230231B APFS-copy/hash+mtime equal. Exact113app executed; current/playback/named113launchers syntax checked but not separately invoked. Hash-verified inactive112and own packaging download cache retired; only113bundle. Music, recordings, recovery profiles and unrelatedmonochromedraft preserved.
+
+CORE-FIX-64 bounded software criterion recorded; originalrenderedWorker/nativequeuedStop/PCM/listening/allmodes/physical breadth NOT claimed. CORE-001, DEK-004/017, genericpop/stall/startup60 and controller gates stayOPEN. Prior112liveOFF,109ownerpausedseektransition,110syntheticfader and53manual/jog/EQ/Cue/stop retain stated scopes. Next: one distinct reproduced core defect or actual event capture; no repeated clean cases. Push every owned slice.
 
 ## Current core delivery —29 October2026 /0.1.112
 

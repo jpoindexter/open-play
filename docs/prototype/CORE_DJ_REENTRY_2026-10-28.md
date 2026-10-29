@@ -1,8 +1,8 @@
-# Current private desktop —0.1.112
+# Current private desktop —0.1.113
 
-Current/default112/source d61acce includes75c1aaf Sync OFF cancellation repair. One muted native next-factory cancellation retains old live Bvoice/adapter/nominal1× and paused master;113controls/previews retained at six stages, all stopped/disposed/PCM0.3focused cases and controlled actual-WASM RED/GREEN retained. No broad suite or generic-pop closure. [Executed result/limits](SMART_LIVE_OFF_112_NATIVE_2026-10-29.json).
+113/source74ed9f6 repairs stale saved-loop continuation after Load/Stop in the shared78-line module.3focused regressions +1existingfeedback check pass. One muted native four-deck saved-pad/normalLoad raw-resume boundary retains replacement0/length8/token5,166outgoing/mixer controls,7/7readypreviews; final8images/allstopped/muted/sourcehashesstable. [Executed result and limits](MANUAL_LOOP_113_NATIVE_2026-10-29.json). No original-renderedWorker/nativequeuedStop/PCM/listening/physical/fullmode claim.
 
-Main112remains paused30.097/34.086,16tracks/12materialized previews and all core controls. Closed111profile259files/120230612B copied/hash+mtime equal. Current/playback/named112starters syntax checked; exact app executed separately. Only112bundle remains; inactive110/111and owned packaging cache removed. Music, recordings, recovery profiles and unrelated drafts preserved. Prior109owner transition and110syntheticfader evidence retain scope; physical/listening and broad pops/stalls/startup gates remainOPEN. Next: distinct evidenced core issue; no repeated clean matrix.
+Main113remains paused30.097/34.086,16tracks/12materializedpreviews/corecontrols. Closed112profile259files/120230231Bcopied/hash+mtime equal. Current/playback/named113starters syntax checked; exactbundle executed separately. Only113app remains; verifiedinactive112and owned packaging cache removed. Music, recordings, recovery profiles and unrelated drafts retained. Prior109ownertransition and112live-OFF evidence retain scopes. Generic pops/stalls/startup and hardware remainOPEN; no broad suite. Next: distinct evidenced core issue or actual event, not repeated clean tests.
 
 --- Historical checkpoints below; old current/default references are superseded ---
 
