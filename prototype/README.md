@@ -2,7 +2,7 @@
 
 ## Current core status —29 October2026
 
-Private desktop **0.1.121** is current/default, sourcea1fabe0. Three reproduced software defects repaired: hidden C/D Pitch holds no longer consume the next Play; held-Slicer Pause reuses existing feedback controls; obsolete Simple tempo-only completion cannot falsely engage Sync after newer Play/tempo input. Three focused RED→GREEN checks pass. Archive inspection5/5/private seal and actual paused recovery observed:30.097/34.086s,16tracks/12visible previews/core controls. Changed-path native held/delayed scenarios and listening remain pending. Goal stays active, audio muted. Genericpop/stall/startup60 and hardware gates remain OPEN. [Delivery and limits](../docs/prototype/CORE_HOLD_SIMPLE_121_NATIVE_2026-10-29.json). No full-core/public-beta claim.
+Private desktop **0.1.122** is current/default, source9bdb81d. Two reproduced cancellation defects repaired: hiding held Slicer C/D restores prior loop fields before pause; choosing a new MASTER cancels old pending Simple alignment. Two focused RED→GREEN checks pass, including a fresh deferred match to the new master. Package5/5/private seal and paused native recovery observed:30.097/34.086s,16tracks/12visible previews/core controls. Relevant changed native held/delayed and listening scenarios remain pending. Goal active, audio muted. Genericpop/stall/startup60 and hardware gates remain OPEN. [Delivery and limits](../docs/prototype/CORE_HIDDEN_MASTER_122_NATIVE_2026-10-29.json). No full-core/public-beta claim.
 
 ## Historical0.1.94 checkpoint
 

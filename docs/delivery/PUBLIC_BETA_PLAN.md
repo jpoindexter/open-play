@@ -2,7 +2,7 @@
 
 Ship a useful Mac local-audio DJ beta as soon as its release gates are satisfied. Full Serato/rekordbox/Traktor parity and the entire Trello backlog are not launch prerequisites. No public release has been published or approved by this document.
 
-Current private checkpoint: **0.1.121**, sourcea1fabe0. Three narrow Pitch/Slicer/Simple Sync ownership/presentation repairs have focused source regressions; package5/5/seal and paused session recovery observed. Changed-path native/listening gates, broader Sync/stalls, data/install and public distribution remain open. Goal active; audio muted. [Delivery and limits](../prototype/CORE_HOLD_SIMPLE_121_NATIVE_2026-10-29.json). No public-beta completion claim.
+Current private checkpoint: **0.1.122**, source9bdb81d. Hidden-Slicer restoration and pending Simple new-MASTER cancellation have focused source regressions; package5/5/seal and paused recovery observed. Relevant changed native/listening gates, broader Sync/stalls, data/install and public distribution remain open. Goal active, audio muted. [Delivery and limits](../prototype/CORE_HIDDEN_MASTER_122_NATIVE_2026-10-29.json). No public-beta completion claim.
 
 ## Conditional planning estimate — 28 October 2026
 
