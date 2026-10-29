@@ -1,8 +1,10 @@
+import {cancelSimpleSync} from './sync.js';
 export function createSyncTempoRequests({engine,state,smartSync,slicer,participants,master=()=>null,cancelGUI=()=>{}}){
  let queue=null;const loadOwners=new WeakMap();
  const involves=(request,deck)=>request?.members.some(member=>member.deck===deck);
  const cancelled=()=>new DOMException('Tempo input superseded by track load or global silence.','AbortError');
  const setRate=async(deck,rate)=>{
+  for(const other of state.decks)cancelSimpleSync(engine,other,deck);
   if(!['Simple Sync','Smart Sync'].includes(state.settings['Sync Mode'])||!deck.sync)return slicer.changeRates([{deck,rate}],()=>engine.setRate(deck,rate,{syncInternal:true}));
   const waiters=queue?.wanted?.waiters||[];
   const promise=new Promise((resolve,reject)=>waiters.push({resolve,reject}));

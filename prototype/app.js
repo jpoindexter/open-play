@@ -760,15 +760,17 @@ async function play(d, input = {}) {
     smartSync.reconcile();refreshTransportControls(state);
     return;
   }
-  let structuralRefresh=false,sliceRefresh=false;
+  let structuralRefresh=false,loopFeedbackRefresh=false;
   const pending=playRequests.get(d);
   if(pending&&pending.track!==d.track)cancelPendingPlay(d);
   if (d.playing || d.processing || playRequests.has(d) || instantDouble.pending(d)) {
     cancelPendingPlay(d);
     cueHolds.cancelDeck(d);
     const heldSlice=d.slice!==null&&d.slice!==undefined;
+    const heldRoll=loopPads.rolling(d);
+    loopPads.cancelDeck(d,{restoreLoop:true});
     slicer.cancelDeck(d);
-    sliceRefresh=heldSlice&&d.slice==null;structuralRefresh=!!d.stemSlipPending;
+    loopFeedbackRefresh=heldRoll||(heldSlice&&d.slice==null);structuralRefresh=!!d.stemSlipPending;
     stemSlipControls.cancelDeck(d);
     engine.pause(d);
     smartSync.paused(d);
@@ -800,7 +802,7 @@ async function play(d, input = {}) {
   }
   persist();
   if(structuralRefresh)renderDecks();
-  else if(sliceRefresh)renderLoopDecks(d);
+  else if(loopFeedbackRefresh)renderLoopDecks(d);
   else{smartSync.reconcile();refreshTransportControls(state);}
   renderTracks();
 }
@@ -1411,7 +1413,7 @@ const flipAutomation = createFlipAutomation({
   engine,
   notify,
   persist,
-  renderDecks,
+  renderDecks:d=>{refreshDeckSwitches(state,d.index);refreshLoopDecks(d);},
 });
 api.flipAutomation = flipAutomation;
 const cueHolds = createCueHolds({
@@ -1773,7 +1775,7 @@ $("#deck-count").onchange = (e) => {
   state.deckCount = Number(e.target.value);
   state.focus = Math.min(state.focus, state.deckCount - 1);
   if (state.deckCount === 2)
-    state.decks.slice(2).forEach((d) => {cancelPendingPlay(d);cueHolds.cancelDeck(d);pitchPlay.cancelDeck(d);slicer.cancelDeck(d);engine.pause(d);engine.clearDeckScratchCache(d.index);});
+    state.decks.slice(2).forEach((d) => {cancelPendingPlay(d);cueHolds.cancelDeck(d);pitchPlay.cancelDeck(d);loopPads.cancelDeck(d,{restoreLoop:true});slicer.cancelDeck(d);engine.pause(d);engine.clearDeckScratchCache(d.index);});
   renderDecks();
 };
 $("#day").onclick = () => document.body.classList.toggle("day");

@@ -26,7 +26,7 @@ function manualFixture(){
  const old={id:'old'},next={id:'next',plays:0},d={index:0,track:old,playing:false},voices=new Set();
  const scope={playbackIntents:{record(){}},state:{autoplay:true,decks:[d],settings:{},history:[],prepare:[]},
   autoplayRequests:new WeakMap(),playRequests:new WeakMap(),instantDouble:{pending:()=>false,cancelDeck(){}},
-  pitchPlay:{latch:()=>false},cueHolds:{latch:()=>false,cancelDeck(){}},slicer:{cancelDeck(){}},stemSlipControls:{cancelDeck(){}},
+  pitchPlay:{latch:()=>false},cueHolds:{latch:()=>false,cancelDeck(){}},slicer:{cancelDeck(){}},stemSlipControls:{cancelDeck(){}},loopPads:{rolling:()=>false,cancelDeck(){}},
   smartSync:{paused(){},async start(){return false;},played(){},reconcile(){}},syncMaster:{started(){}},
   engine:{pause(){d.playing=false;d.processing=false;voices.delete(d);},async start(){await starting;d.playing=true;voices.add(d);}},
   filtered:()=>[old,next],load:async()=>{scope.cancelPendingPlay(d);d.track=next;await loading;return true;},

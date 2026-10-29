@@ -56,7 +56,7 @@ test('deck-count reduction retires held Pitch Play before the next normal Play',
  const pitchPlay=createPitchPlay({engine}),playRequests=new WeakMap(),autoplayRequests=new WeakMap();
  const scope={state,engine,pitchPlay,playRequests,autoplayRequests,$:()=>selector,
   cancelPendingPlay:d=>{playRequests.delete(d);autoplayRequests.delete(d);d.playQueued=false;},
-  cueHolds:{cancelDeck(){},latch:()=>false},instantDouble:{pending:()=>false},slicer:{cancelDeck(){}},stemSlipControls:{cancelDeck(){}},
+  cueHolds:{cancelDeck(){},latch:()=>false},instantDouble:{pending:()=>false},slicer:{cancelDeck(){}},stemSlipControls:{cancelDeck(){}},loopPads:{rolling:()=>false,cancelDeck(){}},
   playbackIntents:{record(){}},syncMaster:{started(){}},smartSync:{reconcile(){},async start(){return false;},played(){},paused(){}},
   renderDecks(){},renderTracks(){},refreshTransportControls(){},persist(){},notify:m=>assert.fail(m),
  };

@@ -92,7 +92,7 @@ test('obsolete tempo-only Simple completion cannot engage a newer unmatched Play
  const smartSync=createSmartSync({engine,state}),slicer=createSlicer({engine}),notices=[];
  const scope={state,engine,synchronizeSimple,smartSync,syncMaster,slicer,tempoSliders:{cancel(){}},
   playbackIntents:{record(){}},autoplayRequests:new WeakMap(),playRequests:new WeakMap(),pitchPlay:{latch:()=>false},
-  cueHolds:{latch:()=>false,cancelDeck(){}},instantDouble:{pending:()=>false,cancelDeck(){}},stemSlipControls:{cancelDeck(){}},
+  cueHolds:{latch:()=>false,cancelDeck(){}},instantDouble:{pending:()=>false,cancelDeck(){}},stemSlipControls:{cancelDeck(){}},loopPads:{rolling:()=>false,cancelDeck(){}},
   renderTracks(){},refreshTransportControls(){},persist(){},notify:message=>notices.push(message)};
  const source=readFileSync(new URL('./app.js',import.meta.url),'utf8');
  const cut=(from,to)=>source.slice(source.indexOf(from),source.indexOf(to,source.indexOf(from)));

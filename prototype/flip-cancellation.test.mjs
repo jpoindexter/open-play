@@ -4,6 +4,8 @@ import {readFileSync} from 'node:fs';
 import vm from 'node:vm';
 import {AudioEngine} from './engine.js';
 import {createFlipAutomation} from './flip.js';
+import {refreshDeckSwitches,refreshTransportControls} from './transport-presentation.js';
+import {refreshLoopControls} from './loop-presentation.js';
 
 // Actual Flip/AudioEngine/app Load; controlled pitch Worker and suspended-context
 // resume are async boundaries. Generated graph only, no DSP/native/listening proof.
@@ -91,4 +93,30 @@ test('main Pause at a Flip loop wrap stays stopped until explicit resume',async(
   await f.engine.start(f.deck);f.engine.ctx.currentTime=1.82;f.flip.tick();await new Promise(resolve=>setImmediate(resolve));
   assert.equal(f.deck.playing,true);assert.equal(f.deck.position,1,'Explicit resume continues the wrapped first cue');
  }finally{f.cleanup();}
+});
+
+test('actual Flip completion refreshes existing controls through the app callback',async()=>{
+ const app=readFileSync(new URL('./app.js',import.meta.url),'utf8');
+ const track={id:'saved-flip',savedLoops:[],flips:[{trackId:'saved-flip',events:[{kind:'cue',position:4,offset:0}],duration:8}]};
+ const decks=Array.from({length:4},(_,index)=>({index,track:index===0?track:{id:'other-'+index},position:0,rate:1,playing:index!==0,mode:'INT',tab:'Cues',loopLength:4,reverse:index===0}));
+ const state={decks,deckCount:4,focus:0,settings:{'Sync Mode':'Smart Sync'},layout:'Horizontal',flip:{events:[],on:false}},nodes=new Map();
+ const node=()=>{const attrs=new Map(),classes=new Set();return{isConnected:true,textContent:'',title:'',disabled:false,classList:{contains:k=>classes.has(k),toggle(k,on){on?classes.add(k):classes.delete(k);}},getAttribute:k=>attrs.get(k),setAttribute:(k,v)=>attrs.set(k,v)};};
+ const root={activeElement:node(),querySelector(s){if(!nodes.has(s))nodes.set(s,node());return nodes.get(s);},querySelectorAll:()=>[]};
+ const owner=root.activeElement,mixer=root.querySelector('[data-mix="level"][data-deck="3"]'),preview=root.querySelector('.library-wave-preview img');
+ const engine={ctx:{currentTime:1},startTokens:new Map([[0,0]]),async resume(){},async seek(d,p){d.position=p;this.startTokens.set(d.index,this.startTokens.get(d.index)+1);},async start(d){d.playing=true;}};
+ let rebuilds=0;const drawn=[];
+ const scope={createFlipAutomation,state,engine,structuredClone,document:root,renderedDeckShape:'Horizontal/4/Smart Sync',persist(){},notify:message=>assert.fail(message),loopPads:{},
+  refreshDeckSwitches:(s,i)=>refreshDeckSwitches(s,i,root),refreshTransportControls:s=>refreshTransportControls(s,root),refreshLoopControls:(s,p)=>refreshLoopControls(s,p,root),
+  smartSync:{reconcile(){}},drawWaves:t=>drawn.push(t),renderDecks(){rebuilds++;for(const n of nodes.values())n.isConnected=false;root.activeElement=null;}};
+ const feedback=app.slice(app.indexOf('function refreshLoopDecks('),app.indexOf('\nconst manualLoops='));
+ const wiring=app.slice(app.indexOf('const flipAutomation = createFlipAutomation('),app.indexOf('\napi.flipAutomation ='));
+ vm.runInNewContext(feedback+'\n'+wiring+'\nglobalThis.flip=flipAutomation;',scope);
+ scope.flip.select(decks[0],0);await scope.flip.start(decks[0]);
+ assert.equal(rebuilds,0,'Flip completion must not globally replace decks/mixer');
+ assert.equal(decks[0].position,4);assert.equal(decks[0].playing,true);assert.equal(state.flip.on,true);
+ assert.equal(root.querySelector('[data-action="reverse"][data-deck="0"]').getAttribute('aria-pressed'),'true');
+ assert.equal(root.querySelector('[data-action="play"][data-deck="0"]').textContent,'❚❚');
+ assert.equal(root.querySelector('[data-action="loop"][data-deck="0"]').textContent,'Loop 4');
+ assert(mixer.isConnected&&preview.isConnected,'Controlled unrelated-node model survives');assert.equal(root.activeElement,owner);assert.deepEqual(drawn,[track]);
+ assert(decks.slice(1).every(d=>d.position===0&&d.playing));
 });

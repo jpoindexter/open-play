@@ -13,7 +13,12 @@ export function createLoopPads({state,engine,render=()=>{},notify=()=>{}}){
   if(start<0||end>d.track.duration||end-start<.001)throw Error('The selected loop extends outside the track.');
   return{start,end};
  }
- function cancelDeck(d){for(const [key,h] of holds)if(h.deck===d)holds.delete(key);rolls.delete(d.index);epochs.set(d.index,(epochs.get(d.index)||0)+1);}
+ function cancelDeck(d,{restoreLoop=false}={}){
+  const h=rolls.get(d.index);
+  if(restoreLoop&&h&&h.track===d.track&&state.decks[d.index]===d&&engine.startTokens.get(d.index)===h.token&&d.loop&&d.loopIn===h.span?.start&&d.loopOut===h.span?.end)
+   Object.assign(d,{loop:h.prior.on,loopIn:h.prior.start,loopOut:h.prior.end});
+  for(const [key,h] of holds)if(h.deck===d)holds.delete(key);rolls.delete(d.index);epochs.set(d.index,(epochs.get(d.index)||0)+1);
+ }
  const base=d=>clamp(d.loopPadBase||.125,1/32,state.settings['Show Beat Jump Controls']?16:1);
  function press(d,mode,pad,{length=null,ignoreBeatJump=false}={}){
   if(!['auto','roll'].includes(mode)||!Number.isInteger(pad)||pad<0||pad>7)throw Error('Unknown loop pad.');
@@ -22,7 +27,7 @@ export function createLoopPads({state,engine,render=()=>{},notify=()=>{}}){
   // Capture mode/length when pressed; changing settings while held cannot
   // reinterpret its Note Off as another action.
   const beats=clamp(length??base(d)*2**pad,1/32,128);
-  const held={released:false,beats};let release=null;
+  const held={released:false,beats,track};let release=null;
   if(mode==='roll'&&!beatJump)release=()=>{held.released=true;return run(d,async()=>{
    if(rolls.get(d.index)!==held)return;
    rolls.delete(d.index);
@@ -64,7 +69,7 @@ export function createLoopPads({state,engine,render=()=>{},notify=()=>{}}){
    const timeline=engine.voices.get(d.index)?.gridTimeline;
    held.clock=old?.clock||(timeline?timeline.clock:at=>playing?advanceDeckScratchPosition(position,(at-time)*rate,track.duration,priorLoop):position);
    rolls.set(d.index,held);
-   try{const span=bounds(d,beats,position);await engine.setLoop(d,true,span.start,span.end);held.token=engine.startTokens.get(d.index);if(owns())render(d);}
+   try{held.span=bounds(d,beats,position);const pending=engine.setLoop(d,true,held.span.start,held.span.end);held.token=engine.startTokens.get(d.index);await pending;if(owns())render(d);}
    catch(error){if(rolls.get(d.index)===held)rolls.delete(d.index);throw error;}
   });
   return{pending,release};

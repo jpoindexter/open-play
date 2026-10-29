@@ -51,7 +51,7 @@ test('hidden held Slicer restores prior loop before pause and old release stays 
   pause(d){d.playing=false;tokens.set(d.index,(tokens.get(d.index)||0)+1);},clearDeckScratchCache(){},
   async setLoop(d,on,start,end,options={}){loopCalls.push({index:d.index,on,start,end});Object.assign(d,{loop:on,loopIn:start,loopOut:end});if(options.positionAt)d.position=options.positionAt(0);if(options.playing!==undefined)d.playing=options.playing;tokens.set(d.index,(tokens.get(d.index)||0)+1);},
  };
- const slicer=createSlicer({engine,notify:m=>assert.fail(m)}),scope={state,engine,slicer,$:()=>selector,cancelPendingPlay(){},cueHolds:{cancelDeck(){}},pitchPlay:{cancelDeck(){}},renderDecks(){}};
+ const slicer=createSlicer({engine,notify:m=>assert.fail(m)}),scope={state,engine,slicer,$:()=>selector,cancelPendingPlay(){},cueHolds:{cancelDeck(){}},pitchPlay:{cancelDeck(){}},loopPads:{cancelDeck(){}},renderDecks(){}};
  const count=source.slice(source.indexOf('$("#deck-count").onchange'),source.indexOf('$("#day").onclick'));
  vm.runInNewContext(count,scope);
  const d=decks[3];

@@ -58,7 +58,7 @@ test('actual Play stop revokes released Cue ownership before pending seek comple
   const playRequests=new WeakMap();
   const context={playbackIntents:{record(){}},autoplayRequests:new WeakMap(),instantDouble:{pending:()=>false},cueHolds:holds,pitchPlay:{latch:()=>false},playRequests,state:{},
     cancelPendingPlay:d=>{playRequests.delete(d);d.playQueued=false;},
-    slicer:{cancelDeck(){}},stemSlipControls:{cancelDeck(){}},
+    slicer:{cancelDeck(){}},stemSlipControls:{cancelDeck(){}},loopPads:{rolling:()=>false,cancelDeck(){}},
     engine:{pause:d=>{d.playing=false;d.processing=false;}},smartSync:{paused(){},reconcile(){}},
     persist(){},renderDecks(){},renderTracks(){},refreshTransportControls(){}};
   vm.runInNewContext(source.slice(begin,end)+';globalThis.realPlay=play;',context);

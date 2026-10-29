@@ -8,6 +8,9 @@ import {createSmartSync,hasBeatgrid,beatPosition} from './smart-sync.js';
 import {refreshSyncPresentation} from './sync-presentation.js';
 import {uiIcons} from './vendor/astryx/icons.js';
 import {createSyncMaster} from './sync-master.js';
+import {createSyncTempoRequests} from './sync-tempo-requests.js';
+import {createTempoSlider} from './tempo-slider.js';
+import {createSlicer} from './slicer.js';
 
 // Actual controller, settings/render, Simple Sync and engine. Controlled DOM,
 // buffer/graph/clock/live ACK endpoints; no PCM, native, UI or hearing proof.
@@ -132,4 +135,32 @@ test('explicit new MASTER cancels an owned Simple ACK before stale audio or role
  assert.equal(syncMaster.master(),state.decks[2]);assert.equal(deck.rate,140/120);assert.equal(deck.sync,true);assert.equal(deck.syncRole,'secondary');
  assert.equal(state.decks[2].sync,true);assert.equal(state.decks[2].syncRole,'primary');assert.equal(leader.sync,false);assert.equal(leader.syncRole,null);
  assert.equal(notices.length,1);assert.match(notices[0],/MASTER deck 3/);assert.equal(engine.voices.get(1).liveKeylock,adapters[1]);
+});
+
+test('new leader tempo cancels owned Simple alignment and unrelated tempo leaves a fresh match intact',async t=>{
+ const f=env.audioFixture(),{engine,deck,leader}=f,old=engine.voices.get(1),outgoing=engine.voices.get(0),notices=[];
+ const extra=index=>({index,track:{id:String(index),bpm:140,grid:0,duration:60},position:0,anchorPosition:0,anchorTime:1,rate:1,playing:false});
+ const state={decks:[leader,deck,extra(2),extra(3)],deckCount:4,focus:1,settings:{'Sync Mode':'Simple Sync','Snap to Beatgrid':true}};
+ state.decks.forEach(d=>Object.assign(d,{sync:false,syncRole:null}));
+ const syncMaster=createSyncMaster({decks:()=>state.decks}),smartSync=createSmartSync({engine,state}),slicer=createSlicer({engine}),{acks,adapters}=held(f);
+ const tempoSliders=createTempoSlider({setRate:(d,rate)=>engine.setRate(d,rate)});
+ engine.onRateRequest=createSyncTempoRequests({engine,state,smartSync,slicer,participants:()=>[],master:syncMaster.master});
+ const scope={state,engine,synchronizeSimple:simple.synchronizeSimple,cancelSimpleSync,syncMaster,smartSync,tempoSliders,updateTempoSlider(){},persist(){},notify:message=>notices.push(message)};
+ vm.createContext(scope);vm.runInContext(controller,scope);
+ t.after(async()=>{acks.forEach(ack=>ack.release());state.decks.forEach(d=>engine.pause(d));for(const adapter of adapters)await adapter.dispose();assert.equal(engine.voices.size,0);assert.equal(engine.transforms.size,0);});
+ await scope.deckAction('syncMaster',0,{},{});
+ const pending=settle(scope.deckAction('sync',1,{},{}));f.release();await until(()=>acks[0]);
+ await scope.deckAction('tempoUp',0,{},{});
+ assert.equal(leader.rate,1.001);assert.equal(engine.voices.get(0),outgoing);
+ assert.equal(acks[0].signal.aborted,true,'Leader tempo intent must revoke the old alignment before its held ACK commits');
+ acks[0].release();const result=await pending;
+ assert.equal(result.error?.name,'AbortError');assert.equal(engine.voices.get(1),old);assert.equal(deck.rate,1);assert.equal(deck.playing,true);
+ assert.equal(deck.sync,false);assert.equal(leader.sync,false);assert.equal(notices.length,0);assert.equal(adapters[0].disposed,true);
+ const fresh=scope.deckAction('sync',1,{},{});await until(()=>acks[1]);
+ await scope.deckAction('tempoUp',2,{},{});
+ assert.equal(state.decks[2].rate,1.001);assert.equal(acks[1].signal.aborted,false,'Unrelated deck tempo must not cancel A/B preparation');
+ acks[1].release();await fresh;
+ assert.equal(deck.sync,true);assert.equal(leader.sync,true);assert.equal(state.decks[2].sync,false);assert.equal(notices.length,1);
+ assert.ok(Math.abs(deck.track.bpm*deck.rate-leader.track.bpm*leader.rate)<1e-9);
+ assert.equal(engine.voices.get(1).liveKeylock,adapters[1]);assert.equal(engine.voices.get(0),outgoing);assert.equal(leader.rate,1.001);
 });

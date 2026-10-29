@@ -94,7 +94,7 @@ export function createFlipAutomation({
     await apply(run, run.events[0]);
     if (!current(run)) return;
     run.cursor = 1;
-    renderDecks();
+    renderDecks(deck);
   }
   function tick() {
     const run = active;
