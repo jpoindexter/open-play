@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import vm from 'node:vm';
 import {planKeySync} from './pitchplay.js';
+import {createDeckKeyShift} from './deck-key-shift.js';
 import {refreshAnalysisControls} from './analysis-presentation.js';
 import {refreshDeckSwitches,refreshTransportControls} from './transport-presentation.js';
 import {refreshLoopControls} from './loop-presentation.js';
@@ -24,7 +25,7 @@ test('actual Key Sync actions retain four-deck controls and refresh feedback, wi
  }};
  let rebuilds=0,preparations=0,painted=[];
  const cancel={cancelDeck(){}},loopPads={...cancel};
- const scope={state,document:root,renderedDeckShape:'Horizontal/4/Smart Sync',planKeySync,
+ const scope={state,document:root,renderedDeckShape:'Horizontal/4/Smart Sync',planKeySync,createDeckKeyShift,persist(){},
   engine:{position:()=>0,async setPitch(d,{keylock,semitones}){preparations++;Object.assign(d,{keylock,keyShift:semitones});}},
   deckScratchControls:cancel,pitchPlay:cancel,manualLoops:cancel,slicer:cancel,loopPads,
   refreshAnalysisControls:(s,t)=>refreshAnalysisControls(s,t,root),refreshDeckSwitches:(s,i)=>refreshDeckSwitches(s,i,root),
@@ -32,7 +33,8 @@ test('actual Key Sync actions retain four-deck controls and refresh feedback, wi
   drawWaves:t=>painted.push(t),smartSync:{reconcile(){}},notify(){},
   renderDecks(){rebuilds++;for(const n of nodes.values())n.isConnected=false;},
  };
- vm.runInNewContext(source.slice(source.indexOf('async function deckAction('),source.indexOf('\nlet importTail='))+'\n'+source.slice(source.indexOf('function refreshLoopDecks('),source.indexOf('\nconst manualLoops='))+'\nglobalThis.press=deckAction;',scope);
+ const wiring=source.slice(source.indexOf('const deckKeyShift=createDeckKeyShift('),source.indexOf('async function play('));
+ vm.runInNewContext(wiring+'\n'+source.slice(source.indexOf('async function deckAction('),source.indexOf('\nlet importTail='))+'\n'+source.slice(source.indexOf('function refreshLoopDecks('),source.indexOf('\nconst manualLoops='))+'\nglobalThis.press=deckAction;',scope);
  const witness=root.querySelector('[data-action="keylock"][data-deck="3"]');
  const preview=root.querySelector('.library-wave-preview img');
  const sync=root.querySelector('[data-action="keySync"][data-deck="0"]');

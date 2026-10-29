@@ -13,6 +13,7 @@ import {createDeckKeyShift} from './deck-key-shift.js';
 import {createInstantDouble} from './instant-double.js';
 import {createPlaybackIntents} from './playback-intents.js';
 import {refreshLoopControls} from './loop-presentation.js';
+import {refreshSlicerControls} from './slicer-presentation.js';
 import {createManualLoops} from './manual-loops.js';
 import {createLoopPads} from './loop-pads.js';
 import {createJogBend} from './jog-bend.js';
@@ -1028,14 +1029,9 @@ async function deckAction(action, index, el, event = {}) {
     else {
       const match = planKeySync(d,state.decks.slice(0,state.deckCount));
       if (!match.ok) return notify(match.reason);
-      deckScratchControls.cancelDeck(d);
-      pitchPlay.cancelDeck(d);
-  loopPads.cancelDeck(d);
-  manualLoops.cancelDeck(d);
-  slicer.cancelDeck(d);
-      await engine.setPitch(d,{keylock:true,semitones:match.semitones});
-      d.keySync = true; d.keySyncTag = d.track.key;
+      if(!await setDeckKeyShift(index,match.semitones,{keySync:true}))return;
       notify(`Key Sync: ${match.key} · ${match.semitones >= 0 ? "+" : ""}${match.semitones} semitones · compatible with deck${match.targets.length > 1 ? "s" : ""} ${match.targets.map(i=>i+1).join(", ")}.`);
+      return;
     }
     refreshAnalysisControls(state,d.track);refreshDeckSwitches(state,index);
     return refreshLoopDecks(d);
@@ -1439,10 +1435,10 @@ function refreshLoopDecks(d){
 }
 const manualLoops=createManualLoops({state,engine,quantized,persist,render:refreshLoopDecks,notify});
 api.manualLoops=manualLoops;
-function renderLoopDecks(){
- const el=document.activeElement,focus=el?.dataset,restore=focus?.deck!==undefined&&['roll','pad'].includes(focus.action)?{deck:focus.deck,action:focus.action,pad:focus.pad}:null;
- renderDecks();
- if(restore)document.querySelector(`[data-deck="${restore.deck}"][data-action="${restore.action}"]${restore.pad===undefined?'':`[data-pad="${restore.pad}"]`}`)?.focus({preventScroll:true});
+function renderLoopDecks(d){
+ if(!d||state.decks[d.index]!==d)return;
+ if(!refreshSlicerControls(state,d))return renderDecks();
+ refreshLoopDecks(d);
 }
 const loopPads=createLoopPads({state,engine,render:refreshLoopDecks,notify});
 function loopHoldTarget(el){

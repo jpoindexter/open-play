@@ -1,5 +1,7 @@
 # Current private desktop —0.1.115
 
+**Source follow-through (not yet in115):** Slicer callbacks now preserve control nodes, and Key Sync completion uses shared request/track/token/settings ownership. [Focused evidence and next delivery](CORE_SLICER_KEY_OWNERSHIP_2026-10-29.json). Current115session remains unchanged; no listening claim.
+
 Current/default115, source10a758a, includes Key Sync in-place feedback and Flip Stop/Load/loop-wrap repairs. Eight focused source checks were already recorded; not rerun for delivery. Immutable archive/source/controlled-host inspection5/5. Actual settled native startup restores Constant Change/DJ W!LD paused30.097/34.086,16tracks/12materialized previews,2Play/tempo/6EQ and silent master meter. No main Play/Sync/RECstart or profile restore. [Delivery and limits](CORE_CONTROL_115_NATIVE_2026-10-29.json).
 
 Paused native Key Sync ON/OFF now observed in the existing isolated muted GUI window: accessible pressed state, compatible-key feedback and Key Lock update correctly; generated positions stay still. This does not prove held four-deck DOM identity or audio quality. Same linked delivery receipt includes the scope.

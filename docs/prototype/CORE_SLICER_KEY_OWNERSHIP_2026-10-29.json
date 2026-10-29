@@ -1,0 +1,91 @@
+{
+  "date": "2026-10-29",
+  "trello": {"slicer": "https://trello.com/c/YVVSNRt7", "keyOwnership": "https://trello.com/c/g9W4yTft", "keyPresentation": "https://trello.com/c/6RcQagUr"},
+  "baseline": "c8ec667ce4938410c47a2d3644c41db314602c22",
+  "delivery": "Source-only; current/default desktop0.1.115 and normal saved session untouched. No new package/native/listening evidence.",
+  "slicer": {
+    "failure": "Actual Slicer press called global renderLoopDecks, replacing all deck/mixer controls despite a local pad gesture.",
+    "repair": "Pass current deck through six Slicer render callbacks. New17line helper preflights shape, refreshes only that deck pads/loop/domain/quant, and reuses loop/transport/source-overview feedback with structural fallback.",
+    "executed": "Actual Slicer module + extracted current app callback + real loop presentation helper, with controlled DOM/transport. One RED\u2192GREEN checks press/release/domain, shared-track isolation, end-of-track replacement to Cues and missing-control/layout fallback. Two affected adjacent loop/key presentation cases passed; final key presentation rerun after shared-owner guard.",
+    "nativeOrLatencyProof": false,
+    "privateEvidence": "local-evidence/slicer-presentation-2026-10-29",
+    "artifactSHA256": {
+      "before.txt": "f328dc2695a611c829c5ea36d659ed4b54517e1bd993d35cb74a2aa0532dfcb2",
+      "after.txt": "4454d2c0719c5c2e4c18431a2557bc639435c974c8b75a956ee6cd4b18cba9d5",
+      "adjacent.txt": "367693f4fd585b8e101eaf9ade33525a3f37a84ebb9f9b4d883d0e2f9d042470"
+    }
+  },
+  "keySync": {
+    "baseline": "c8ec667ce4938410c47a2d3644c41db314602c22",
+    "reproduced": "Canceled actual Key Sync live-update completion publishes stale synchronized state/key tag/success on a normally loaded replacement.",
+    "scope": "Actual app handler and normal Load + AudioEngine + reused Signalsmith WASM host. Generated PCM/control clock/ports, one pre-program fill gate; no native, device, music or audible claims.",
+    "red": {
+      "artifact": "actual-live-output.txt",
+      "parsedCopy": "actual-live-red-from-stdout.json",
+      "stalePublication": true,
+      "replacementKeySync": true,
+      "replacementShift": 0,
+      "tag": "G",
+      "notice": "old C# +1 success on replacement"
+    },
+    "green": {
+      "artifact": "actual-live-green-result.json",
+      "stalePublication": false,
+      "replacementKeySync": false,
+      "replacementShift": 0,
+      "tag": null,
+      "notices": [],
+      "feedback": [],
+      "cleanup": {
+        "voices": 0,
+        "transforms": 0,
+        "allStopped": true,
+        "adapterDisposed": true,
+        "timerCleared": true,
+        "retainedPCMBytes": 0
+      },
+      "note": "Actual-WASM GREEN observed after shared-owner/token repair before the final additive requested-settings equality guard; no duplicate WASM rerun. Final helper guard checked by focused actual-engine tests."
+    },
+    "focused": {
+      "baseline": "red-focused.txt: Load/mainStop/newerKey 3 stale-state assertion failures; ordinary case passes",
+      "final": "green-focused.txt: 5 ownership/ordinary checks + 2 existing key helper checks =7 passed; includes newer KeyLockOff. No broad suite.",
+      "fixture": "Controlled live ACK aborts on actual AudioEngine voice disposal or superseding update; source tests do not execute WASM or DSP."
+    },
+    "ungradedAttempt": "red.txt/ungraded-rendered-boundary-test.mjs: original rendered-loop trials rejected with actual handoff AbortError before stale-state assertions; NOT bug proof. Retained, no product changes were based on those failures.",
+    "files": {
+      "actual-live-output.txt": "37b6304c918712df8cbde35361a586134c50f63fe9e181926daa14de5eb073bc",
+      "actual-live-red-from-stdout.json": "818f5ccc071ec5eeb54f0545df440aea48758f7b37fb21513d34569b67d7a1db",
+      "actual-live-green-result.json": "79b24a3f1516b61e27dedb7abccd5f3841cb002c90d4a045a78ef2149b9e54db",
+      "red-focused.txt": "580636aef35cbf5e487dd28a5ce5a769142c38a78ee9d8103a375846f648404f",
+      "green-focused.txt": "289d40151c2d7c0667ccedf7fc1b98312b802280113e46e343a4cc40265aabb6"
+    }
+  },
+  "verification": {
+    "focusedUniquePassingCases": 10,
+    "broadSuite": false,
+    "newBuild": false,
+    "sourceReview": "Independent scoped Slicer caller/presentation review found no blocker; KeySync actual-WASM reproduction separates failed ungraded rendered attempt from valid stale-publication proof.",
+    "syntax": [
+      "prototype/app.js",
+      "prototype/slicer.js",
+      "prototype/slicer-presentation.js",
+      "prototype/deck-key-shift.js"
+    ],
+    "sourceSHA256": {
+      "prototype/app.js": "210edbbc9b8c95027a45ade74481a02e17eff7f97978b84056c8558a45c1c102",
+      "prototype/slicer.js": "c2f44196ce03613ef829072c9cc582ae66357c40ed3a660346dd91bafb619718",
+      "prototype/slicer-presentation.js": "3858f238705ee37a9b5433a962c5c37b442b3018ec8343782112e1602c4dbc9f",
+      "prototype/deck-key-shift.js": "c60a2a4f07e977c4ddcc66cb9c24ae3c177ba0c7cc1218626c770f4e26cfdb66",
+      "prototype/slicer-presentation.test.mjs": "5481e6d0f605a3f7e129530895d6d5abab884cdbd594445f53fb7244de7cd9f1",
+      "prototype/key-sync-ownership.test.mjs": "de4922f1941da4ca97ad6da801dd758068fa3d7dce921dbf1d165ff6a974fa22",
+      "prototype/key-sync-presentation.test.mjs": "7b5d60832b942495a7a9a8100ab3e95023641f5ef9b325a07836b07fb7d827fe"
+    }
+  },
+  "limits": [
+    "Controlled source/DOM/engine/WASM results are not native gesture retention, measured frame stalls, music, pop-free or physical output acceptance.",
+    "Actual-WASM GREEN preceded additive requested-settings equality guard; final guard has focused actual-engine coverage, no redundant WASM rerun.",
+    "No attribution to original unexpected106startup or intermittent Sync pop.",
+    "Existing manual/jog/EQ/Cue/stop/listening boundaries retained; owner chose muted work only."
+  ],
+  "next": "Package this owned batch once, inspect archive and protected paused recovery; retain relevant changed-path native/listening gates without broad clean matrices."
+}
