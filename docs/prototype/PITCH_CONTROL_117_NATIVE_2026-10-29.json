@@ -63,11 +63,68 @@
     "launcherScriptsExecuted": false
   },
   "limits": [
-    "Native paused recovery observed; changed Pitch Play held/playing controls and deck-local selector DOM retention have source evidence only.",
+    "Native paused recovery and two-deck Pitch/range/release UI observed. Actual held/playing node/focus retention, main Compact/four-deck behavior and latch/listening remain open.",
     "Three unique source cases in this batch; already recorded, not rerun for packaging. No broad suite/new diagnostic.",
     "No music, human listening, Sync-pop-free, waveform latency, controller or physical socket acceptance.",
     "Prior53 manual/jog/A-B EQ/Cue/stop and109 restart/transition retain scope;115 paused Key Sync UI and116 paused Slicer UI retain their versioned scopes.",
     "Original unexpected106 startup and generic intermittent pops/stalls remain open."
   ],
-  "next": "Relevant changed native held/playing acceptance through existing isolated tools where feasible; listening/focus and Hercules deferred. Investigate actual incidents, not broad clean-case repetitions."
+  "next": "Relevant changed native held/playing acceptance through existing isolated tools where feasible; listening/focus and Hercules deferred. Investigate actual incidents, not broad clean-case repetitions.",
+  "pitchNativeUI": {
+    "executed": true,
+    "route": "Existing installed volatile GUI Tempo checker; setup asserts physical mute, then Stop and export before Pitch actions. No full diagnostic suite or main music playback.",
+    "actions": [
+      "Deck A Pitch mode",
+      "Shift-click third pad to create/select cue3",
+      "Pitch Play range Middle to Down",
+      "Second pad held1400ms then released"
+    ],
+    "observed": {
+      "allEightPadsShowCue3": true,
+      "downRangeNotes": [
+        -3,
+        -2,
+        -1,
+        0,
+        -7,
+        -6,
+        -5,
+        -4
+      ],
+      "keyAfterGesture": "Gm (-2)",
+      "keyLockAfterGesture": true,
+      "pausedPositionBefore": 24.087,
+      "pausedPositionAfter": 24,
+      "cueReturnWasQuantized": true,
+      "otherDeckPausedPosition": 28.904,
+      "finalPlayingDeckCount": 0,
+      "physicalRouteReportedMutedBeforeAndAfter": true
+    },
+    "cleanup": {
+      "ownedCheckerClosed": true,
+      "mainPausedPositionsSeconds": [
+        30.097,
+        34.086
+      ],
+      "mainLibraryTracks": 16,
+      "mainVisiblePreviews": 12,
+      "mainPlaySyncRECStartInvoked": false
+    },
+    "evidenceSHA256": {
+      "mute-before.txt": "f792c15a9fc949fb377f6d8ea541cb18757e3dd6d6436138996db72214f17224",
+      "cue-select.txt": "2a3f540d25f5d3ecd6e3c36a68e517b2580e96c8b8ee90df8795fe608c5401ef",
+      "range-down.txt": "6ce39bdb275696ebf4dc8fe6675424aeff6d8462d7bc926f5cf77ffd31c59241",
+      "after-hold-release.txt": "f3864456d3507aa6358a55bd6fff84ccf266f7f2fd13ae86a79205cdc64423b2",
+      "mute-after.txt": "f792c15a9fc949fb377f6d8ea541cb18757e3dd6d6436138996db72214f17224",
+      "cleanup-stopped.txt": "bcaf0d409296d618a519b17a48cbba7159360ce149cb3b48126f0dd0b5b1b0e7",
+      "main-after.txt": "955e058d07e1e4f6b5de1050df724603fc7b221f2871f351bc161e5c82135620",
+      "cleanup-stopped.png": "7b002410a9e8d686fc10600dce9fcb00cec21ba219d55149533f276c81b43559"
+    },
+    "limits": [
+      "Actual native two-deck original-checker UI, not main Compact/four-deck geometry or retained DOM-node/focus identity.",
+      "Held native pointer action invoked; during-hold playing state/audio not independently captured. Release state is observed; no audition-quality/latch acceptance.",
+      "No real music, new listening, pop-free/stall-free, physical MIDI or socket proof.",
+      "Native range dropdown Down selection observed; simulated transport mode selector not exercised."
+    ]
+  }
 }
