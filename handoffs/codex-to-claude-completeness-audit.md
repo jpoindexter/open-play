@@ -1,3 +1,11 @@
+## Current core delivery —29 October2026 /0.1.116
+
+Current/default116, sourceea54bad, includes Slicer in-place feedback and shared Key Sync completion ownership. Ten focused source cases and controlled-WASM RED/GREEN were already recorded; not rerun for delivery. Archive/source/controlled-host inspection5/5 and private ad-hoc seal verified. Actual settled native startup restores Constant Change/DJ W!LD paused30.097/34.086,16tracks/12materialized previews,2Play/tempo/6EQ and silent master meter. No mainPlay/Sync/RECstart or profile restore. [Delivery and limits](../docs/prototype/CORE_SLICER_KEY_116_NATIVE_2026-10-29.json).
+
+Closed115profile259files/120230651B APFS-copy/hash+mtime equal. Current/playback/named116starters syntax checked; exact app executed separately. Verified inactive115and own packaging cache removed; only116bundle. Music, recordings, recovery profiles and unrelated draft retained. Relevant native Slicer/KeySync cancellation/held checks, owner listening/focus and Hercules remainOPEN. Prior accepted ordinary workflows retain their scopes; genericpop/stall/startup60 unresolved.
+
+--- Historical handoff and original prompt preserved below ---
+
 ## Current core delivery —29 October2026 /0.1.115
 
 Current/default115, source10a758a, includes Key Sync in-place feedback and Flip Stop/Load/loop-wrap repairs. Eight focused source checks were already recorded; not rerun for delivery. Immutable archive/source/controlled-host inspection5/5. Actual settled native startup restores Constant Change/DJ W!LD paused30.097/34.086,16tracks/12materialized previews,2Play/tempo/6EQ and silent master meter. No main Play/Sync/RECstart or profile restore. [Delivery and limits](../docs/prototype/CORE_CONTROL_115_NATIVE_2026-10-29.json).
