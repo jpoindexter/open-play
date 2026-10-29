@@ -82,16 +82,16 @@ for(const prepared of [false,true])test(`invalid group rates reject before any $
  assert.equal(deck.processing,false);assert.equal(other.processing,false);
 });
 
-for(const relative of [false,true])test(`${relative?'relative GUI tempo retains its consumed coordinate':'absolute GUI tempo restores its actual coordinate'} after the rate owner rejects`,async()=>{
+for(const relative of [false,true])test(`${relative?'synced':'ordinary'} GUI tempo restores its actual coordinate after the rate owner rejects`,async()=>{
  // Transport rollback is covered above; this actual GUI-model case isolates
  // an unsuccessful rate request that leaves its previous owner unchanged.
  const deck={track:{id:'stable-owner'},rate:relative?1.05:1,pitchRange:8,sync:relative,syncState:relative?'armed':'off'},targets=[];
  const slider=createTempoSlider({setRate:async(d,rate)=>{targets.push(rate);if(targets.length===1)throw Error('controlled rate rejection');d.rate=rate;}});
- await assert.rejects(slider.set(deck,.1),/controlled rate rejection/);
- const rejectedView=slider.view(deck);await slider.set(deck,1);
- assert.ok(Math.abs(targets[1]-(relative?1.059:1.01))<1e-12,'The next gesture must start from the retained actual tempo');
- assert.equal(rejectedView.position,relative?.1:0,'Absolute coordinates restore actual pitch; relative coordinates consume the attempted movement');
- assert.equal(rejectedView.relative,relative);assert.ok(Math.abs(slider.view(deck).position-1)<1e-9);
+ const base=relative?5:0;
+ await assert.rejects(slider.set(deck,base+.1),/controlled rate rejection/);
+ const rejectedView=slider.view(deck);await slider.set(deck,base+1);
+ assert.ok(Math.abs(targets[1]-(relative?1.06:1.01))<1e-12,'The next gesture must start from the retained actual tempo');
+ assert.ok(Math.abs(rejectedView.position-base)<1e-9);assert.ok(Math.abs(slider.view(deck).position-(base+1))<1e-9);
 });
 
 test('Stop and global silence revoke a held fallback-rate render without a queued restart',async()=>{

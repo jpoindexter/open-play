@@ -16,7 +16,18 @@ export function installWorkspaceToolbar(){
  const mixer=$('#preview-mixer-toggle'),library=$('#preview-library-focus'),zoom=$('.preview-zoom');
  icon(mixer,'mixer','Show or hide mixer');icon(library,'library','Focus music library');
  const decks=$('#deck-count');
- outer(decks).after(view,outer(mixer),outer(library));
+ const orientation=$('#preview-orientation'),waveforms=icon(document.createElement('button'),'layout','Vertical waveforms');
+ waveforms.id='preview-orientation-toggle';waveforms.type='button';waveforms.className='waveform-orientation';waveforms.textContent='Waveforms';
+ const syncOrientation=()=>{
+  const vertical=document.body.dataset.orientation==='vertical',available=document.body.dataset.previewShell==='flat'||document.body.dataset.workspace==='hybrid';
+  waveforms.setAttribute('aria-pressed',String(vertical));waveforms.disabled=!available;
+  waveforms.title=available?`${vertical?'Vertical':'Horizontal'} waveforms; switch to ${vertical?'horizontal':'vertical'}`:'Waveform orientation is fixed in this workspace. Change workspace in Layout settings to switch.';
+ };
+ waveforms.onclick=()=>{if(waveforms.disabled)return;orientation.value=document.body.dataset.orientation==='vertical'?'horizontal':'vertical';orientation.dispatchEvent(new Event('change',{bubbles:true}));syncOrientation();};
+ orientation.addEventListener('change',syncOrientation);
+ new MutationObserver(syncOrientation).observe(document.body,{attributes:true,attributeFilter:['data-orientation','data-workspace','data-preview-shell']});
+ syncOrientation();
+ outer(decks).after(waveforms,view,outer(mixer),outer(library));
  // Keep one shared zoom control instead of a separate waveform toolbar row.
  toolbar.append(zoom);
  icon($('.toolbar [data-panel="recording"]'),'record','Recording',false);

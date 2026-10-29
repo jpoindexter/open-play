@@ -4,6 +4,7 @@ import {readFileSync} from 'node:fs';
 import vm from 'node:vm';
 import {createTempoSlider} from './tempo-slider.js';
 import {refreshTransportControls} from './transport-presentation.js';
+import {uiIcons} from './vendor/astryx/icons.js';
 
 const source=readFileSync(new URL('./app.js',import.meta.url),'utf8');
 const rendering=source.slice(source.indexOf('let renderedSyncMode'),source.indexOf('\nfunction waveformView('));
@@ -12,13 +13,13 @@ const orientation=source.slice(helperAt,source.indexOf('\n$("#deck-count").oncha
 const controller=source.slice(source.indexOf('async function deckAction('),source.indexOf('\nlet importTail='));
 const tempo=source.slice(source.indexOf('function tempoSliderMarkup('),source.indexOf('\nfunction renderDecks('));
 const existing=readFileSync(new URL('./layout-orientation.test.mjs',import.meta.url),'utf8');
-const fixtureSource=existing.slice(existing.indexOf('function fixture('),existing.indexOf('\nfor(const count'));
+const fixtureSource=existing.slice(existing.indexOf('function fixture('),existing.indexOf('\nfor(const count')).replace('const scope={','const scope={uiIcons,');
 
 // Executes actual controller/render/tempo code with the existing controlled DOM
 // endpoints. Node identity and semantic values are checked; no CSS/native timing,
 // actual audio/controller routing or physical gesture acceptance is established.
 function fixture({count=4,relative=false,pending=false}={}){
- const outer=vm.createContext({vm,source,rendering,orientation});vm.runInContext(fixtureSource,outer);
+ const outer=vm.createContext({vm,source,rendering,orientation,uiIcons});vm.runInContext(fixtureSource,outer);
  const f=outer.fixture(count,'Horizontal'),rates=[],labels=new Map(),ranges=new Map(),missing=new Set();
  let resolveRate;const gate=new Promise(resolve=>{resolveRate=resolve;});
  f.scope.tempoSliders=createTempoSlider({setRate:async(d,rate)=>{rates.push(rate);if(pending)await gate;d.rate=rate;}});
@@ -56,11 +57,11 @@ function retained(f,focused=f.original.nodes[0].control){
 }
 function viewMatches(f,range){
  const d=f.state.decks[0],input=f.nodes.get(0).control,view=f.view();
- assert.equal(d.pitchRange,range);assert.equal(Number(input.min),-range);assert.equal(Number(input.max),range);
+ assert.equal(d.pitchRange,range);assert.equal(Number(input.min),-view.range);assert.equal(Number(input.max),view.range);assert.equal(view.selectedRange,range);
  assert(Math.abs(Number(input.value)-view.position)<1e-9,'Displayed slider coordinate must match its view within floating-point precision');assert.equal(f.labels.get(0).textContent,view.label);
  assert.equal(f.ranges.get(0).textContent,`±${range}`);
  assert.equal(input.getAttribute('aria-valuetext'),`${view.valueText}; ${f.scope.shownDeckBPM(d)} BPM`);
- assert.match(input.closest('.tempo-control').title,view.relative?/relative adjustment around current tempo/i:/^Tempo;/);
+ assert.equal(input.closest('.tempo-control').title,view.title);assert.equal(f.ranges.get(0).title,view.rangeTitle);
 }
 
 for(const count of [2,4])test(`${count} deck tempo range cycles8/16/50/8 locally without replacing controls, focus or previews`,async()=>{
@@ -68,9 +69,9 @@ for(const count of [2,4])test(`${count} deck tempo range cycles8/16/50/8 locally
  for(const range of [16,50,8]){await f.range();retained(f);viewMatches(f,range);assert.equal(d.rate,1.04);}
  assert.equal(rate,1);assert.deepEqual(f.rates,[],'Range is a coordinate change, not an audio-rate request');
 });
-test('synced relative tempo retains nominal speed and current relative coordinates',async()=>{
+test('synced tempo displays actual pitch with an auto-expanded GUI range',async()=>{
  const f=fixture({relative:true}),d=f.state.decks[0];
- for(const range of [16,50,8]){await f.range();retained(f);viewMatches(f,range);assert.equal(d.rate,1.26);assert.equal(d.sync,true);assert.equal(d.syncState,'relative');assert.match(f.view().label,/REL/);}
+ for(const range of [16,50,8]){await f.range();retained(f);viewMatches(f,range);assert.equal(d.rate,1.26);assert.equal(d.sync,true);assert.equal(d.syncState,'relative');assert.ok(Math.abs(f.view().position-26)<1e-9);assert.equal(f.view().label.includes('AUTO'),f.view().range>range);}
  assert.deepEqual(f.rates,[]);
 });
 test('range changes preserve a pending tempo request rather than replacing its owner',async()=>{

@@ -426,7 +426,7 @@ function smartSyncIndicator(d) {
 }
 function tempoSliderMarkup(d) {
   const v=tempoSliders.view(d);
-  return `<label class="tempo-control" title="${v.relative?'Relative adjustment around current tempo':'Tempo'}; enable key lock to preserve pitch. Control/Command-click or Control/Command+Home: reset pitch to zero."><span data-tempo-label="${d.index}">${v.label}</span><input type="range" min="${-v.range}" max="${v.range}" step=".1" value="${v.position}" data-tempo="${d.index}" aria-label="Deck ${d.index+1} tempo" aria-valuetext="${v.valueText}; ${shownDeckBPM(d)} BPM" ${d.track?'':'disabled'}></label>`;
+  return `<label class="tempo-control" title="${v.title}"><span data-tempo-label="${d.index}">${v.label}</span><input type="range" min="${-v.range}" max="${v.range}" step=".1" value="${v.position}" data-tempo="${d.index}" aria-label="Deck ${d.index+1} tempo" aria-valuetext="${v.valueText}; ${shownDeckBPM(d)} BPM" ${d.track?'':'disabled'}></label>`;
 }
 function updateTempoSlider(d) {
   const input=document.querySelector(`[data-tempo="${d.index}"]`);if(!input)return;
@@ -438,10 +438,11 @@ function updateTempoSlider(d) {
   if(input.getAttribute('aria-valuetext')!==valueText)input.setAttribute('aria-valuetext',valueText);
   input.disabled=!d.track;
   if(label&&label.textContent!==v.label)label.textContent=v.label;
-  const range=document.querySelector(`[data-action="range"][data-deck="${d.index}"]`),text=`±${v.range}`;
+  const range=document.querySelector(`[data-action="range"][data-deck="${d.index}"]`),text=`±${v.selectedRange}`;
   if(range&&range.textContent!==text)range.textContent=text;
-  const control=input.closest('.tempo-control'),title=`${v.relative?'Relative adjustment around current tempo':'Tempo'}; enable key lock to preserve pitch. Control/Command-click or Control/Command+Home: reset pitch to zero.`;
-  if(control&&control.title!==title)control.title=title;
+  if(range&&range.title!==v.rangeTitle)range.title=v.rangeTitle;
+  const control=input.closest('.tempo-control');
+  if(control&&control.title!==v.title)control.title=v.title;
 }
 function renderDecks(index = null) {
   const quantizeStates=state.decks.slice(0,state.deckCount).map(deckQuantize);

@@ -31,8 +31,8 @@ test('accepted same-track Load settles old group before rearm, retires queued in
  for(const [mode,direct]of [['Smart Sync',false],['Smart Sync',true],['Simple Sync',true]]){
   const f=fixture(mode),{d,track,state,leader,engine,smartSync,tempoSliders,entered,resume,scope}=f,smart=mode==='Smart Sync';
   try{
-   const first=outcome(tempoSliders.set(d,1));await entered.promise;
-   const queued=outcome(direct?engine.onRateRequest(d,1.07):tempoSliders.set(d,2));
+   const first=outcome(tempoSliders.set(d,6));await entered.promise;
+   const queued=outcome(direct?engine.onRateRequest(d,1.07):tempoSliders.set(d,7));
    state.settings['Lock Playing Deck']=true;assert.equal(await scope.actualLoad(1,track.id,{skipDouble:true}),undefined);
    assert.equal(d.playing,true);assert.equal(engine.transforms.get(1).signal.aborted,false);assert.match(f.notices[0],/Playing deck locked/);
    state.settings['Lock Playing Deck']=false;
@@ -42,7 +42,7 @@ test('accepted same-track Load settles old group before rearm, retires queued in
    assert.equal(loaded,true);if(smart)assert.equal(smartSync.captureTempo(),126);assert.equal(leader.rate,1);assert.equal(d.rate,1.05);
    assert.equal(d.playing,false);assert.equal(d.processing,false);assert.equal(d.sync,true);assert.equal(d.syncState,smart?'armed':'beat');assert.equal(d.position,0);
    assert.deepEqual(await Promise.all([first,queued]),[{ok:false,name:'AbortError'},{ok:false,name:'AbortError'}]);
-   await tempoSliders.set(d,1);assert.equal(d.rate,1.06);assert.ok(Math.abs(leader.rate*126-127.2)<1e-9);if(smart)assert.equal(smartSync.captureTempo(),127.2);
+   await tempoSliders.set(d,6);assert.equal(d.rate,1.06);assert.ok(Math.abs(leader.rate*126-127.2)<1e-9);if(smart)assert.equal(smartSync.captureTempo(),127.2);
    resume.resolve();await new Promise(r=>setImmediate(r));assert.equal(d.rate,1.06);if(smart)assert.equal(smartSync.captureTempo(),127.2);
    assert.equal(d.playing,false);assert.equal(engine.voices.size,0);
   }finally{resume.resolve();for(const deck of state.decks)engine.pause(deck);}
@@ -55,13 +55,13 @@ test('global silence retires queued GUI and shared tempo inputs before fresh own
   const bus=()=>({connect(){},disconnect(){}});
   for(const node of engine.nodes)Object.assign(node,{high:bus(),filter:bus()});engine.setCross=()=>{};
   try{
-   const first=outcome(tempoSliders.set(d,1));await entered.promise;
-   const queued=outcome(direct?engine.onRateRequest(d,1.07):tempoSliders.set(d,2));
+   const first=outcome(tempoSliders.set(d,6));await entered.promise;
+   const queued=outcome(direct?engine.onRateRequest(d,1.07):tempoSliders.set(d,7));
    engine.silence();
    assert.deepEqual(await Promise.all([first,queued]),[{ok:false,name:'AbortError'},{ok:false,name:'AbortError'}]);
    assert.equal(smartSync.captureTempo(),126);assert.equal(d.rate,1.05);assert.equal(leader.rate,1);
    assert.equal(d.playing,false);assert.equal(d.processing,false);assert.equal(engine.voices.size,0);
-   await tempoSliders.set(d,1);assert.equal(d.rate,1.06);assert.equal(smartSync.captureTempo(),127.2);
+   await tempoSliders.set(d,6);assert.equal(d.rate,1.06);assert.equal(smartSync.captureTempo(),127.2);
    smartSync.reset();smartSync.tempo(leader,90/126);
    resume.resolve();await new Promise(resolve=>setImmediate(resolve));
    assert.equal(smartSync.captureTempo(),90);assert.equal(d.rate,1.06);assert.equal(engine.voices.size,0);assert.equal(d.playing,false);

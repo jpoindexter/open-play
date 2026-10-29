@@ -12,7 +12,7 @@ const git=args=>execFileSync('git',args,{cwd:root,maxBuffer:150*1024*1024});
 const sha=bytes=>createHash('sha256').update(bytes).digest('hex');
 const sourceCommit=git(['rev-parse','HEAD']).toString().trim();
 const get=file=>git(['show',`${sourceCommit}:${file}`]);
-const version='0.1.104',name='Open Play Playback Test',port=18775,bundle='org.openplay.dj.playback.localtest';
+const version='0.1.105',name='Open Play Playback Test',port=18775,bundle='org.openplay.dj.playback.localtest';
 const profile='Open Play Playback Test',partition='persist:open-play-playback-test';
 await assertBuildRetention(path.join(root,'local-evidence/desktop-builds'),name);
 const stage=await mkdtemp(path.join(tmpdir(),'open-play-playback-'));
@@ -57,7 +57,7 @@ await put('assets/docs/prototype/auto-gain-fixture-reference.json',JSON.stringif
 // only this package's identity/instructions; keep prototype source byte-for-byte.
 await put('assets/docs/prototype/TRY_CURRENT_DESKTOP.md',`# Core desktop test ${version}
 
-Current core repairs retain committed pitch settings after overlapping key-change rejection, cancel queued tempo intentions at global silence, and preserve the latest durable session during recovery. Backup restore during pending import storage also retains newer metadata by publishing the ready track before the storage await. These have focused controlled source/engine checks; native changed-path and listening acceptance remain separate.\n\nThe Open Play app icon and macOS menu-bar shortcut menu are included. Show Open Play, Settings, Audio Devices and Help reuse the existing window/panels; Quit retains normal app behavior. Reverse failure rollback uses the committed voice direction; absent-audio backup metadata survives export, reload and later import. Listening/hardware acceptance remains separate.
+GUI tempo now displays actual pitch after Sync:120→132BPM moves to+10%, with automatic GUI bounds while physical MIDI range/pickup stays unchanged. The header has a direct Horizontal/Vertical waveform shortcut beside deck count; Layout Settings remains available. Focused source checks are separate from native UI/listening acceptance. No audio-clock/DSP change. Previous core ownership repairs remain included.\n\nThe Open Play app icon and macOS menu-bar shortcut menu are included. Show Open Play, Settings, Audio Devices and Help reuse the existing window/panels; Quit retains normal app behavior. Reverse failure rollback uses the committed voice direction; absent-audio backup metadata survives export, reload and later import. Listening/hardware acceptance remains separate.
 
 Accepted Load now cancels old queued tempo intentions and promptly settles the owned aborted group before rearming Sync; old initialization can finish later without overwriting new input. Headphone MIX uses the existing10ms per-gain transition policy. Current musical/headphone acceptance remains separate.
 

@@ -1,8 +1,10 @@
-# Current core DJ acceptance and re-entry
+## Current core slice — 29 October 2026
 
-29 October2026. Current/default104/source3b8a0f6 is inspected/private-sealed and now open after protected paused handoff. Exact positions50.716/62.715s,16tracks/12settled viewport previews/core controls retained; closed102profile hash/mtime copy matched. Only104bundle/launchers104. [Native delivery](desktop-0.1.104-core-native.json), [current guide](TRY_CURRENT_DESKTOP.md), [handoff](../../handoffs/current.md).
+Owner accepted the repeated native104 paused-incoming Sync action: no pops/clicks, outgoing132BPM unchanged. Original master capture preserved privately; generic intermittent pops/stalls, both-playing transition and hardware remain open. Current paused positions114.836/62.715s. Hercules explicitly deferred.
 
-No main Play/Sync/Cue/REC Start was invoked. Owner chose muted-only today. One existing native isolated RapidSync/Play checker met its generated-pulse and settled right-channel cancellation criteria; [original scope/limits](NATIVE_RAPID_SYNC_104_2026-10-29.json). Main16tracks/controls/12previews and prior position baseline retained. Keep main stopped; no additional listening prompt today. Native changed-failure, audible Sync/stalls, independent headphone/controller and public distribution criteria remain open. Prior53ordinary manual beatmatch/jog/EQ/Cue/stop remains scoped. No broad suite/clean matrix or speculative DSP changes. Original criteria below are preserved as historical evidence.
+105candidate source fixes actual GUI pitch feedback (+10% moves cap instead of centredREL), auto display bounds without changing physical MIDI scaling, and adds direct H/V shortcut beside deck count. Focused RED→GREEN and affected queue/range checks recorded; no broad suite. Native105delivery remains pending until observed. Preserve all controls/layouts/library previews. [Listening/fader evidence](../prototype/GUI_TEMPO_FEEDBACK_2026-10-29.json).
+
+Existing97-entry rekordbox catalog extended with current nativeAX control map; persistentREA connection blocked by Hopper cleanup. Streamline secondary deck Tools next; optional phase meter is a proposal, not implemented. [Control map](../design-system/REKORDBOX_CONTROL_MAP_2026-10-29.md). Trello CORE-FIX-58, UI-TOOL-01, REF-RB-01 and UI-SYNC-01 track scope. Re-entry: protect stopped session/recording, deliver105 and verify actual fader/toggle once; no clean-case reruns or speculative DSP patch.
 
 ## Historical0.1.94 audit — scoped evidence retained, not current identity
 
