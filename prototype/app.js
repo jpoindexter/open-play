@@ -874,7 +874,7 @@ async function deckAction(action, index, el, event = {}) {
     engine.pruneDecodedBuffers();
     smartSync.reconcile();
     d.position = 0;
-    return renderDecks();
+    return renderDecks(index);
   }
   if (action === "double") return instantDouble(index);
   if (!d.track) return notify("Load a track first.");

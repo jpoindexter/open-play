@@ -302,7 +302,8 @@ export function createSmartSync({engine, state, externalLeader=()=>null}) {
       if(d.track!==track||!engaged(d))continue;
       if(!hasBeatgrid(track)){clear(d);continue;}
       const revision=revise(d),rate=(syncBPM||track.bpm*d.rate)/track.bpm;
-      const valid=()=>enabled()&&d.track===track&&engaged(d)&&revisions.get(d)===revision&&d.syncState===saved.status;
+      let token;
+      const valid=()=>enabled()&&d.track===track&&engaged(d)&&revisions.get(d)===revision&&d.syncState===saved.status&&(token===undefined||engine.startTokens?.get(d.index)===token);
       const positionAt=when=>{
         if(!valid())throw cancelled();
         // Preserve the previous musical beat, including a Tempo Sync offset,
@@ -310,7 +311,7 @@ export function createSmartSync({engine, state, externalLeader=()=>null}) {
         return next.timeAt(saved.grid.beatAt(saved.clock(when)));
       };
       try{
-        if(saved.playing&&d.playing)await engine.synchronize(d,{rate,priorClock:saved.clock,positionAt});
+        if(saved.playing&&d.playing){const pending=engine.synchronize(d,{rate,priorClock:saved.clock,positionAt});token=engine.startTokens?.get(d.index);await pending;}
         else {const position=positionAt(engine.ctx?.currentTime||0);if(position<0||position>=track.duration)throw new RangeError('Edited grid places the saved beat outside this track.');d.position=position;d.rate=rate;}
         if(valid()){d.syncState=saved.status;d.syncRole=saved.role;}
       }catch(error){

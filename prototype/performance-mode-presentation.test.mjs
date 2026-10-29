@@ -34,3 +34,18 @@ test('deck-local Pitch Play range and simulated mode changes scope structural re
  for(const d of decks.filter(d=>d.index!==1)){assert.equal(d.mode,'INT');assert.equal(d.pitchRangeMode,'Middle');}
  assert.deepEqual(calls,[1,1]);assert.equal(notices.length,1);assert.match(notices[0],/Device modes are simulated/);
 });
+test('eject revokes deck work and redraws only the emptied deck',async()=>{
+ const track={id:'outgoing'},d={index:1,track,position:17,playing:true,keySync:true},state={decks:[{},d,{},{}],focus:0};
+ const calls=[],requests=new WeakMap(),starts=new Map([[1,{}]]),cancel=name=>({cancelDeck:deck=>{assert.equal(deck,d);calls.push(name);}});
+ const scope={state,deckLoadRequests:requests,faderStarts:starts,cancelPendingPlay:deck=>{assert.equal(deck,d);calls.push('play');},
+  cueHolds:cancel('cue'),deckScratchControls:cancel('scratch'),pitchPlay:cancel('pitch'),loopPads:cancel('loopPads'),manualLoops:cancel('manualLoops'),slicer:cancel('slicer'),stemSlipControls:cancel('stemSlip'),
+  engine:{pause(deck){assert.equal(deck,d);deck.playing=false;calls.push('pause');},clearDeckScratchCache:index=>assert.equal(index,1),pruneDecodedBuffers(){calls.push('prune');}},
+  smartSync:{reconcile(){assert.equal(d.track,null);calls.push('sync');}},
+  renderDecks:index=>{assert.equal(index,1,'Eject must retain the other decks and mixer controls');calls.push('render');},
+ };
+ vm.runInNewContext(handler+'\nglobalThis.press=deckAction;',scope);
+ await scope.press('eject',1,{});
+ assert.equal(d.track,null);assert.equal(d.position,0);assert.equal(d.playing,false);assert.equal(d.keySync,false);
+ assert.deepEqual({...d.previous},{id:'outgoing',position:17});assert.equal(requests.get(d),1);assert.equal(starts.has(1),false);
+ assert.deepEqual(calls,['play','cue','scratch','pitch','loopPads','manualLoops','slicer','stemSlip','pause','prune','sync','render']);
+});

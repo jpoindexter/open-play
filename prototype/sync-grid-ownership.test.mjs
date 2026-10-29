@@ -95,3 +95,27 @@ test('grid capture cannot abort a newer unrelated manual start while an older Sy
  engine.ctx.currentTime=deck.anchorTime+.1;assert.equal(engine.audibleRate(deck),.9);
  assert.deepEqual(leader,before);
 });
+
+test('canceled grid realignment must not stop a newer Tempo Sync Play',async t=>{
+ const f=fixture(),{engine,deck,leader,smart,acks,adapters}=f,before={...leader};
+ t.after(async()=>{for(const ack of acks)ack.release();engine.pause(deck);for(const adapter of adapters)await adapter.dispose();assert.equal(engine.voices.size,0);assert.equal(engine.transforms.size,0);});
+ const initial=smart.press(deck);await until(()=>acks[0]);acks[0].release();await initial;
+ smart.manipulated(deck);assert.equal(deck.syncState,'tempo');
+ const saved=engine.onGridWillChange(deck.track);
+ Object.assign(deck.track,{bpm:100,grid:.1});
+ const changing=engine.onGridChanged(deck.track,saved),rejected=assert.rejects(changing,{name:'AbortError'});
+ await until(()=>acks[1]);
+ engine.pause(deck);smart.paused(deck);
+ const restarting=engine.start(deck);await until(()=>acks[2]);acks[2].release();await restarting;smart.played(deck);
+ const current=engine.voices.get(deck.index),token=engine.startTokens.get(deck.index),rate=deck.rate;
+ assert.equal(deck.playing,true);assert.equal(deck.syncState,'tempo');assert.equal(acks[1].signal.aborted,true);
+ acks[1].release();await rejected;
+ assert.equal(engine.voices.get(deck.index),current,'An obsolete grid failure must retain the newer playing voice');
+ assert.equal(engine.startTokens.get(deck.index),token);assert.equal(deck.playing,true);assert.equal(deck.processing,false);
+ assert.equal(deck.rate,rate);assert.equal(deck.sync,true);assert.equal(deck.syncState,'tempo');assert.deepEqual(leader,before);
+ // A current failure still takes the existing explicit stop/Sync-off safety path.
+ const currentSaved=engine.onGridWillChange(deck.track);deck.track.grid=.2;
+ engine.createForwardKeylock=async()=>{throw Error('controlled current grid preparation failure');};
+ await assert.rejects(engine.onGridChanged(deck.track,currentSaved),/controlled current grid preparation failure/);
+ assert.equal(deck.playing,false);assert.equal(deck.sync,false);assert.equal(engine.voices.size,0);
+});
