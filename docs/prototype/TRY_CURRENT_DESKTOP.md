@@ -1,8 +1,10 @@
-# Current private desktop —0.1.110 only
+# Current private desktop —0.1.112
 
-110/source64c0554 is open and stopped30.097/34.086,16tracks/12materialized previews, master−∞. It includes the owned Fader Start→Smart Sync repair in a34-line module;4focused router/engine checks pass. Native startup/control restoration executed; physical fader/listening remains pending. Prior109GUI paused-seek/transition was owneraccepted and its source path is unchanged. [Delivery/limits](FADER_START_110_NATIVE_2026-10-29.json).
+Current/default112/source d61acce includes75c1aaf Sync OFF cancellation repair. One muted native next-factory cancellation retains old live Bvoice/adapter/nominal1× and paused master;113controls/previews retained at six stages, all stopped/disposed/PCM0.3focused cases and controlled actual-WASM RED/GREEN retained. No broad suite or generic-pop closure. [Executed result/limits](SMART_LIVE_OFF_112_NATIVE_2026-10-29.json).
 
-Current/playback/named110launchers syntax checked; exact app observed. Only110app retained after closed-profile recovery copy and verifiedinactive109/cache retirement. Original music, recordings and recovery profiles preserved. Generic pops/stalls/startup60 and hardware remainOPEN; no broad testing.
+Main112remains paused30.097/34.086,16tracks/12materialized previews and all core controls. Closed111profile259files/120230612B copied/hash+mtime equal. Current/playback/named112starters syntax checked; exact app executed separately. Only112bundle remains; inactive110/111and owned packaging cache removed. Music, recordings, recovery profiles and unrelated drafts preserved. Prior109owner transition and110syntheticfader evidence retain scope; physical/listening and broad pops/stalls/startup gates remainOPEN. Next: distinct evidenced core issue; no repeated clean matrix.
+
+--- Historical checkpoints below; old current/default references are superseded ---
 
 # Prior109 paused-seek listening acceptance
 

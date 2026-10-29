@@ -1,0 +1,190 @@
+{
+  "date": "2026-10-29",
+  "version": "0.1.112",
+  "sourceCommit": "d61accee8cfc2867d8b50afac8e4c6132d362b1f",
+  "productRepairCommit": "75c1aaf69ad2e9030b48fbe9ca413c0d1f1a309f",
+  "asarSHA256": "28d9399e5fcc81ec6e59deab3808c135430a610b57d22d2aa0590a6df3fc57c5",
+  "executedNativeCheck": {
+    "startedAt": "2026-10-29T16:54:07.879Z",
+    "completed": true,
+    "scope": "Actual packaged app Sync/OFF handlers, AudioEngine and generated-buffer live WASM adapter. One controlled next-factory gate before delegation; not the original adapter-fill gate, PCM, music, listening, OS mute/focus, device or natural failure proof.",
+    "sourceBefore": {
+      "app.js": "b3d74e1e8474fab8703a4d9e7fc45def5a1bf5d99d858c90d92a3480eaed341c",
+      "engine.js": "036f084a42177cb58eeaf926b3fd3d5ea6f0ef7b2fe9aefcb1974711ee89261b",
+      "smart-sync.js": "3f92e91425a351d59718d45daa030b71a692657ad7bf7f29afefda4873883625",
+      "tempo-only-off-check.js": "d82e5330128f9a2fc1a95a8a33befd467506224814f09a804f994d4e03da5290"
+    },
+    "structuralSetup": {
+      "before": 106,
+      "settled": 113,
+      "crossfadersBefore": 2,
+      "crossfadersAfter": 1,
+      "retired": [
+        {
+          "tag": "INPUT",
+          "id": "crossfader"
+        }
+      ]
+    },
+    "controlStages": [
+      {
+        "stage": "settled structural setup",
+        "total": 113,
+        "connected": 113,
+        "missing": []
+      },
+      {
+        "stage": "initial live voice committed",
+        "total": 113,
+        "connected": 113,
+        "missing": []
+      },
+      {
+        "stage": "paused master selected",
+        "total": 113,
+        "connected": 113,
+        "missing": []
+      },
+      {
+        "stage": "Sync held at factory gate",
+        "total": 113,
+        "connected": 113,
+        "missing": []
+      },
+      {
+        "stage": "OFF before factory release",
+        "total": 113,
+        "connected": 113,
+        "missing": []
+      },
+      {
+        "stage": "canceled preparation settled",
+        "total": 113,
+        "connected": 113,
+        "missing": []
+      }
+    ],
+    "initial": {
+      "flatLiveKeylock": true,
+      "keylock": true,
+      "adapterRate": 1,
+      "adapterPlaying": true
+    },
+    "beforeOff": {
+      "oldVoice": true,
+      "adapterRate": 1,
+      "nominalRate": 1.05,
+      "processing": true,
+      "tokenBefore": 2,
+      "tokenPending": 3,
+      "newController": true,
+      "factoryCalls": 1,
+      "delegated": 0
+    },
+    "off": {
+      "at": 11.19201814058957,
+      "controllerAborted": true,
+      "delegated": 0
+    },
+    "factoryOutcome": {
+      "status": "rejected",
+      "name": "AbortError",
+      "message": "Live keylock operation superseded or disposed"
+    },
+    "afterOff": {
+      "sameVoice": true,
+      "sameAdapter": true,
+      "adapterRate": 1,
+      "nominalRate": 1,
+      "sync": false,
+      "syncState": "off",
+      "playing": true,
+      "processing": false,
+      "masterPaused": true,
+      "masterRate": 1,
+      "factoryCalls": 1,
+      "delegated": 1
+    },
+    "retainedControlsAndPreviews": 113,
+    "adapterCleanup": [
+      {
+        "disposed": true,
+        "timerCleared": true,
+        "retainedPCMBytes": 0
+      }
+    ],
+    "cleanup": {
+      "allStopped": true,
+      "physicalMuted": true,
+      "factoryRestored": true,
+      "adapterDisposed": true,
+      "timerCleared": true,
+      "retainedPCMBytes": 0
+    },
+    "sourceAfter": {
+      "app.js": "b3d74e1e8474fab8703a4d9e7fc45def5a1bf5d99d858c90d92a3480eaed341c",
+      "engine.js": "036f084a42177cb58eeaf926b3fd3d5ea6f0ef7b2fe9aefcb1974711ee89261b",
+      "smart-sync.js": "3f92e91425a351d59718d45daa030b71a692657ad7bf7f29afefda4873883625",
+      "tempo-only-off-check.js": "d82e5330128f9a2fc1a95a8a33befd467506224814f09a804f994d4e03da5290"
+    },
+    "sourceStable": true,
+    "finishedAt": "2026-10-29T16:54:08.298Z"
+  },
+  "originalResultSHA256": "f59ab52c90858c405ba68d96e42939d5b4e6adec66686c23b9f8e9707cf69d21",
+  "packageInspection": {
+    "passed": 5,
+    "failed": 0,
+    "scope": "Archive source identity, fixtures and controlled host callbacks; separate from native execution"
+  },
+  "normalSession": {
+    "observedBeforeAndAfter": true,
+    "mainPlaySyncRecordStartInvoked": false,
+    "positions": [
+      30.097,
+      34.086
+    ],
+    "tracks": 16,
+    "materializedLibraryPreviews": 12,
+    "playControls": 2,
+    "tempoControls": 2,
+    "eqControls": 6,
+    "meter": "minus infinity",
+    "checkerClosed": true
+  },
+  "profileCopy": {
+    "at": "2026-10-29T16:53:23.159483+00:00",
+    "method": "closed-profile APFS copy-on-write cp -cRp",
+    "files": 259,
+    "logicalBytes": 120230612,
+    "byteHashMtimeEqual": true,
+    "manifestSHA256": "81059e8b118fa1a6805def8590db38de0449953b643a599713ab0bc180463a96"
+  },
+  "cleanup": {
+    "at": "2026-10-29T16:54:43.211979+00:00",
+    "retiredVersion": "0.1.111",
+    "sha256Verified": true,
+    "inactiveVerified": true,
+    "logicalBytes": 808261088,
+    "ownPackagingCacheBytes": 130738603,
+    "retainedCurrent": "0.1.112",
+    "protected": "Original music, recordings, all profile recovery copies and unrelated drafts retained"
+  },
+  "launchers": {
+    "currentPlaybackNamed": "0.1.112",
+    "syntaxChecked": true,
+    "exactBundleExecuted": true,
+    "launcherCommandsSeparatelyExecuted": false
+  },
+  "priorFailure": {
+    "version": "0.1.111",
+    "overallPassed": false,
+    "receipt": "SMART_LIVE_OFF_111_NATIVE_2026-10-29.json",
+    "explanation": "Corrected native run observes structural setup retiring the old crossfader: two before, one after settlement. All six strict post-setup identity stages retain113nodes. Original111missing-node identity was not recorded."
+  },
+  "remaining": [
+    "No native accepted-retry/held-real-worklet-ACK, every cancellation interleaving or natural renderer failure proof.",
+    "No PCM recording, music listening, long-session, physical controller/headphone acceptance or generic Sync-pop resolution.",
+    "Prepared replacement changes allocation/timing relative to in-place update; sustained-session cost unmeasured.",
+    "CORE-FIX-15, generic pop/stall and startup60 parent criteria stay open."
+  ]
+}

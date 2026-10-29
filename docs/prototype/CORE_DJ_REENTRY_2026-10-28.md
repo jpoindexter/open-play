@@ -1,6 +1,10 @@
-## Current110 re-entry —29 October2026
+# Current private desktop —0.1.112
 
-Current/default110/source64c0554, stopped30.097/34.086,16tracks/12loaded previews. New34-line Fader Start ownership module makes armed controller launches use Smart Sync;4focused actual-router/engine checks, package5/5and stopped native startup executed. Physical fader/listening later onCORE-LIVE-01/CORE-FIX-63.109paused-GUI-seek sequentialPlay/bassswap/crossfade owneraccepted; no re-Sync required. Reuse prior53manual/jog/A-BEQ/Cue/stop evidence. Generic pops/stalls/startup60/real-ACK failure and hardware remainOPEN. Next: a distinct reproduced software failure, not a repeated clean matrix. [110receipt](FADER_START_110_NATIVE_2026-10-29.json).
+Current/default112/source d61acce includes75c1aaf Sync OFF cancellation repair. One muted native next-factory cancellation retains old live Bvoice/adapter/nominal1× and paused master;113controls/previews retained at six stages, all stopped/disposed/PCM0.3focused cases and controlled actual-WASM RED/GREEN retained. No broad suite or generic-pop closure. [Executed result/limits](SMART_LIVE_OFF_112_NATIVE_2026-10-29.json).
+
+Main112remains paused30.097/34.086,16tracks/12materialized previews and all core controls. Closed111profile259files/120230612B copied/hash+mtime equal. Current/playback/named112starters syntax checked; exact app executed separately. Only112bundle remains; inactive110/111and owned packaging cache removed. Music, recordings, recovery profiles and unrelated drafts preserved. Prior109owner transition and110syntheticfader evidence retain scope; physical/listening and broad pops/stalls/startup gates remainOPEN. Next: distinct evidenced core issue; no repeated clean matrix.
+
+--- Historical checkpoints below; old current/default references are superseded ---
 
 ## Prior108 delivery —29 October2026
 
