@@ -7,8 +7,10 @@ export function createFlipAutomation({
   persist,
   renderDecks,
 }) {
-  let active = null;
+  let active = null, generation = 0;
   const f = state.flip;
+  const current = run => active === run && !run.cancelled &&
+    state.decks[run.deck.index] === run.deck && run.deck.track === run.track;
   function finish() {
     if (f.recordStarted !== undefined) {
       const d = state.decks[f.deck],
@@ -49,16 +51,19 @@ export function createFlipAutomation({
     });
   }
   function stop() {
+    generation++;
     if (active) active.cancelled = true;
     active = null;
     f.on = false;
   }
   async function apply(run, event) {
-    if (run.cancelled) return;
+    if (!current(run)) return;
     if (event.kind === "reverse")
       await engine.setReverse(run.deck, event.reverse);
     else {
-      await engine.seek(run.deck, event.position);
+      const seeking = engine.seek(run.deck, event.position), token = engine.startTokens.get(run.deck.index);
+      await seeking;
+      if (!current(run) || engine.startTokens.get(run.deck.index) !== token) return;
       if (!run.deck.playing) await engine.start(run.deck);
     }
   }
@@ -69,9 +74,12 @@ export function createFlipAutomation({
     if (spec.trackId && deck.track?.id !== spec.trackId)
       return notify("Load the track that owns this Flip first.");
     stop();
+    const request = generation, track = deck.track, token = engine.startTokens.get(deck.index);
     await engine.resume();
+    if (generation !== request || state.decks[deck.index] !== deck || deck.track !== track || engine.startTokens.get(deck.index) !== token) return;
     const run = {
       deck,
+      track,
       trackId: deck.track.id,
       events: structuredClone(spec.events),
       duration: Math.max(0.05, spec.duration || 1),
@@ -84,19 +92,22 @@ export function createFlipAutomation({
     f.on = true;
     f.deck = deck.index;
     await apply(run, run.events[0]);
+    if (!current(run)) return;
     run.cursor = 1;
     renderDecks();
   }
   function tick() {
     const run = active;
     if (!run) return;
-    if (run.deck.track?.id !== run.trackId) {
+    if (!current(run)) {
       stop();
       return;
     }
     const now = engine.ctx.currentTime;
-    if (run.deck.playing) run.elapsed += (now - run.last) * run.deck.rate;
+    const elapsed = now - run.last;
     run.last = now;
+    if (!run.deck.playing) return;
+    run.elapsed += elapsed * run.deck.rate;
     while (
       run.cursor < run.events.length &&
       run.events[run.cursor].offset <= run.elapsed

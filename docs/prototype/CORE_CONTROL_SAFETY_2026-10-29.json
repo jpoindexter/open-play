@@ -1,0 +1,93 @@
+{
+  "date": "2026-10-29",
+  "baselineCommit": "bb2e2b00fed9661d172127c4e9a203da54fc8835",
+  "delivery": "Source-only repairs; installed/default desktop0.1.114 unchanged. No native/listening/hardware acceptance.",
+  "keySync": {
+    "card": "CORE-FIX-33",
+    "failure": "Installed deckAction keySync fell through to renderDecks(), replacing every deck/mixer control even on Key Sync OFF.",
+    "repair": "Two-line in-place key/switch/loop/transport refresh through existing presentation helpers, preserving structural fallback.",
+    "executed": "Actual extracted deckAction and actual presentation helpers with controlled DOM/engine collaborators;1RED\u21921GREEN. Existing adjacent key-shift tests2/2. No browser/native node-identity or latency measurement.",
+    "privateEvidence": "local-evidence/key-sync-presentation-2026-10-29/"
+  },
+  "flip": {
+    "baselineCommit": "bb2e2b00fed9661d172127c4e9a203da54fc8835",
+    "scope": "Actual Flip and AudioEngine plus extracted current normal app Load; generated controlled graph, pitch Worker and suspended context resume. No UI, native, audible output or original startup-cause attribution.",
+    "red": {
+      "command": "node --test prototype/flip-cancellation.test.mjs",
+      "cases": 3,
+      "passed": 0,
+      "failed": 3,
+      "sourceCount": {
+        "expected": 1,
+        "actual": 2
+      },
+      "output": "red.txt",
+      "flipSHA256": "93d0a0f78409566b936997cdcabfd431eb5d301f5648a72ffed44a86beec6c65"
+    },
+    "green": {
+      "command": "node --test prototype/flip-cancellation.test.mjs",
+      "cases": 5,
+      "passed": 5,
+      "failed": 0,
+      "output": "green.txt",
+      "casesCovered": [
+        "main Stop during pending rendered cue seek",
+        "normal app Load replacement during pending rendered cue seek",
+        "Flip Stop during pending actual AudioContext resume",
+        "ordinary timed cues, loop wrap and six saved slots",
+        "main Pause at loop wrap retains stopped transport; explicit resume continues selected automation"
+      ]
+    },
+    "sourceSHA256": {
+      "prototype/flip.js": "4d2f97832da16977b0c6cbd4224a583ac9ed6991a85cb365acc679ddeb6127ba",
+      "prototype/engine.js": "036f084a42177cb58eeaf926b3fd3d5ea6f0ef7b2fe9aefcb1974711ee89261b",
+      "prototype/app.js": "a04e2a2b4f44d163b46607fc6a5c230f7971248a5cffdce092c5ddb6c409766c",
+      "prototype/flip-cancellation.test.mjs": "97eb66508543910209b6562631f95be2a8055ec16438712bd0eb0642032ea7be"
+    },
+    "ownedFiles": [
+      "prototype/flip.js",
+      "prototype/flip-cancellation.test.mjs"
+    ],
+    "syntax": [
+      "node --check prototype/flip.js",
+      "node --check prototype/flip-cancellation.test.mjs"
+    ],
+    "diffCheck": "git diff --check",
+    "limits": [
+      "Controlled Worker returns input data; DSP quality is not measured.",
+      "No source audio, normal profile, UI session or physical device touched.",
+      "No claim that this caused original unexpected native106startup.",
+      "No tests beyond the focused Flip cases.",
+      "Explicit Flip Off during an already-issued pending seek is not established to cancel the seek internal engine.start; it is distinct from main Pause or Load token revocation."
+    ],
+    "pauseWrapRed": {
+      "command": "node --test --test-name-pattern='main Pause at a Flip loop wrap' prototype/flip-cancellation.test.mjs",
+      "cases": 1,
+      "failed": 1,
+      "output": "pause-wrap-red.txt",
+      "flipSHA256": "13cd989f122e6c7b06692353551f7d099b7a8895175332c2cb20f61bd613f268",
+      "failure": "wrapped offset-zero cue restarted a paused deck: true !== false"
+    }
+  },
+  "scopeDecisions": [
+    "Explicit Flip Off does not mean deck Pause: already-issued internal seek transport may finish. That semantic boundary was not changed or graded.",
+    "Original unexpected0.1.106launch cause remains unknown; this Flip repair is not attribution.",
+    "Slicer global-render path remains outside this bounded Key Sync repair; no full control-retention claim."
+  ],
+  "verification": {
+    "focusedPassingCases": 8,
+    "broadSuite": false,
+    "newBuild": false,
+    "nativeSessionTouched": false,
+    "originalAudioTouched": false,
+    "syntax": "node --check prototype/app.js; node --check prototype/flip.js",
+    "diff": "git diff --check"
+  },
+  "sourceSHA256": {
+    "prototype/app.js": "a04e2a2b4f44d163b46607fc6a5c230f7971248a5cffdce092c5ddb6c409766c",
+    "prototype/flip.js": "4d2f97832da16977b0c6cbd4224a583ac9ed6991a85cb365acc679ddeb6127ba",
+    "prototype/key-sync-presentation.test.mjs": "9bb8e6aba093bfe824f6a76051fac10e7308a9003a4e08a7da0e4ee3f5fc9549",
+    "prototype/flip-cancellation.test.mjs": "97eb66508543910209b6562631f95be2a8055ec16438712bd0eb0642032ea7be"
+  },
+  "next": "Package these owned source repairs once, inspect immutable archive, and observe paused native recovery. Owner listening/focus and Hercules remain deferred; no ordinary clean matrices."
+}

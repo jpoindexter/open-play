@@ -1,5 +1,7 @@
 # Current private desktop —0.1.114
 
+**Source follow-through (not installed in114):** Key Sync in-place feedback and Flip Stop/Load/loop-wrap ownership repairs have focused RED/GREEN evidence. [Scope and next delivery](CORE_CONTROL_SAFETY_2026-10-29.json). Current114session remains paused; no new build or listening claim.
+
 114/source2f5b9e1 preserves113product audio/control/layout source. One first native controlledoldlive-key failure after actualLoad/Play/newkeyUp retains replacementvoice/key+1/adaptersemitone1/token4playing,213controls and8/8preview sources. Bothadaptersdisposed/timerscleared/PCM0, allstopped/muted/sourcehashesstable. [Executed result and limits](LIVE_KEY_114_NATIVE_2026-10-29.json). No suite/clean-case rerun or newproductpatch; originalnaturalworklet/rate/otherbackend/music/physical claims remainOPEN.
 
 Main114paused30.097/34.086,16tracks/12materializedpreviews/corecontrols. Closed113profile259files/120230371B copied/hash+mtime equal. Exactbundleexecuted; current/playback/named114launchers syntaxchecked separately. Only114bundle; inactive113/cache removed. All originalmedia/captures/recoveryprofiles/unrelateddrafts retained. Manualmix/jog/A-BEQ/Cue/cleanStop and109restarttransition are alreadyaccepted at their scopes. One ownerchanged-path listening question is pending; no answer inferred. Herculeslater. Generic pops/stalls/startup60 remainOPEN; no full-core/public-beta claim.

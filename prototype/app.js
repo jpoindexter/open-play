@@ -1037,6 +1037,8 @@ async function deckAction(action, index, el, event = {}) {
       d.keySync = true; d.keySyncTag = d.track.key;
       notify(`Key Sync: ${match.key} · ${match.semitones >= 0 ? "+" : ""}${match.semitones} semitones · compatible with deck${match.targets.length > 1 ? "s" : ""} ${match.targets.map(i=>i+1).join(", ")}.`);
     }
+    refreshAnalysisControls(state,d.track);refreshDeckSwitches(state,index);
+    return refreshLoopDecks(d);
   }
   if (action === "keylock") { d.keySync = false; await engine.setPitch(d, { keylock: !d.keylock }); }
   if (action === "repeat") d.repeat = !d.repeat;
