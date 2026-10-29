@@ -5,6 +5,7 @@ import vm from 'node:vm';
 import {synchronizeSimple} from './sync.js';
 import {createBeatgrid} from './beatgrid.js';
 import {createSmartSync} from './smart-sync.js';
+import {syncButtonLabel} from './sync-presentation.js';
 
 function fixture(){
   const leader={index:0,track:{bpm:120,grid:0,duration:60},position:10.125,rate:1,playing:true};
@@ -50,10 +51,10 @@ test('actual Sync controls distinguish phase-aware Beat Sync from Simple Sync',(
   assert(begin>=0&&end>begin);
   for(const mode of ['Simple Sync','Smart Sync']){
     const d={index:0,track:{bpm:120,grid:0},playing:false,sync:true,syncState:'armed'};
-    const context={isSimpleSyncPending:()=>false,smartSync:{pending:()=>false},state:{settings:{'Sync Mode':mode}},syncMaster:{master:()=>null},hasBeatgrid:()=>true};
+    const context={syncButtonLabel,isSimpleSyncPending:()=>false,smartSync:{pending:()=>false},state:{settings:{'Sync Mode':mode}},syncMaster:{master:()=>null},hasBeatgrid:()=>true};
     vm.runInNewContext(source.slice(begin,end)+';globalThis.markup=syncControls;',context);
     const html=context.markup(d);
-    assert(html.includes(mode==='Smart Sync'?'>BEAT SYNC<':'>SIMPLE SYNC<'));
+    assert(html.includes(mode==='Smart Sync'?'>SYNC ARMED<':'>SIMPLE SYNC<'));
     assert.match(html,mode==='Smart Sync'?/bar phase/i:/paused.*tempo only/i);
   }
 });

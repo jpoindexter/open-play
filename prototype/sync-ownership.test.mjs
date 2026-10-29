@@ -4,6 +4,8 @@ import {AudioEngine} from './engine.js';
 import {createSmartSync} from './smart-sync.js';
 import {createCueHolds} from './holds.js';
 import {createBeatgrid} from './beatgrid.js';
+import {readFileSync} from 'node:fs';
+import vm from 'node:vm';
 
 // Real Sync/start ownership with a controlled clock and graph endpoints, not PCM.
 function fixture(stall=0){
@@ -141,4 +143,37 @@ test('temporary Cue cancels pending Sync and retains its paused cue position',as
  assert.equal(results[0].status,'rejected');assert.equal(results[0].reason.name,'AbortError');assert.equal(results[1].status,'fulfilled');
  assert.equal(deck.playing,false);assert.equal(deck.position,1.5);assert.equal(deck.rate,1);assert.equal(deck.processing,false);
  assert.equal(engine.voices.size,0);assert.equal(engine.transforms.size,0);assert.deepEqual(starts,[]);
+});
+
+
+test('paused seek keeps Smart Sync armed through sequential Play without a second Sync press',async()=>{
+ const {engine,deck,leader,smart,starts}=fixture();
+ const app=readFileSync(new URL('./app.js',import.meta.url),'utf8');
+ const hook=app.slice(app.indexOf('engine.onManualPosition ='),app.indexOf('\nengine.onGridTimeline ='));
+ vm.runInNewContext(hook,{engine,smartSync:smart,state:{decks:[leader,deck]},cancelSimpleSync(){}});
+ engine.ctx.createGain=()=>({gain:{value:1},connect(){}});engine.nodes[0]={};engine.setCross=()=>{};
+ try{
+  engine.pause(leader);engine.pause(deck);smart.paused(leader);await smart.press(deck);
+  await engine.seek(leader,0);await engine.seek(deck,0);
+  assert.equal(leader.syncState,'armed');assert.equal(deck.syncState,'armed');
+  assert.equal(await smart.start(leader),false);await engine.start(leader);smart.played(leader);
+  engine.ctx.currentTime+=.237;const outgoing={...leader},voice=engine.voices.get(0);
+  assert.equal(await smart.start(deck),true,'Play must schedule alignment without another Sync press');
+  const scheduled=starts.at(-1),phase=createBeatgrid(deck.track).beatAt(scheduled.offset),
+   masterPhase=createBeatgrid(leader.track).beatAt(engine.voiceClock(leader,voice)(scheduled.when));
+  assert.ok(Math.abs((phase-masterPhase)/4-Math.round((phase-masterPhase)/4))<1e-9);
+  assert.equal(deck.syncState,'beat');assert.equal(deck.rate,1.05);
+  assert.deepEqual(leader,outgoing);assert.equal(engine.voices.get(0),voice);
+  await engine.seek(deck,5);assert.equal(deck.syncState,'tempo','A playing seek remains a deliberate phase offset');
+ }finally{engine.pause(leader);engine.pause(deck);assert.equal(engine.voices.size,0);assert.equal(engine.transforms.size,0);}
+});
+
+test('seek arming leaves manual gestures and unsupported launch transports tempo-only',()=>{
+ for(const changes of [{},{processing:true},{reverse:true},{stemSlip:'vocals'},{playing:true}]){
+  const {smart,deck,engine,leader}=fixture();Object.assign(deck,{playing:false,sync:true,syncState:'beat'},changes);
+  smart.manipulated(deck,{seek:true});
+  assert.equal(deck.syncState,Object.keys(changes).length?'tempo':'armed');
+  deck.playing=false;smart.manipulated(deck);assert.equal(deck.syncState,'tempo','Scratch/jog notifications must not arm launch');
+  engine.pause(deck);engine.pause(leader);
+ }
 });

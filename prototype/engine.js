@@ -703,7 +703,7 @@ export class AudioEngine {
     this.stopSource(d.index, { preserveStemExit });
   }
   async seek(d, p) {
-    this.onManualPosition?.(d);
+    this.onManualPosition?.(d,{seek:true});
     if(this.voices.get(d.index)?.gridTimeline){
       const was=d.playing||d.processing;this.pause(d,{preserveStemExit:true});
       d.position=Math.max(0,Math.min(d.track.duration,p));

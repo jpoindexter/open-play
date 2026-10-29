@@ -1,4 +1,8 @@
-## Current core work —29 October2026
+## Current Sync repair —29 October2026
+
+Owner108listening found incoming restart misalignment despite blue BEAT SYNC; a second Sync aligned it. No pops heard; first stop accepted. Actual paused Home seeks downgrade armed→tempo and Play bypasses alignment. Source repair rearms eligible paused forward seeks and labels armed/tempo/beat accurately. Same actual-engine/app-hook reproduction RED→GREEN;20affected checks, no broad suite.109packaging queued; current108stopped297.05/298.051, recording saved privately, EQneutral/crosscentre. Broader alignment/pop/stall/startup/hardware gates stay OPEN. See docs/prototype/SYNC_PAUSED_SEEK_2026-10-29.json (../docs from handoffs). Preserve original prompt and history below.
+
+## Prior108 delivery before current listening —29 October2026
 
 **Current/default private test:0.1.108**, source1370e3f/ASAR42edf78f…17559dd. It contains three bounded core repairs: fresh raw-jog future anchors, scoped partial-Load overview painting and tempo-only Smart Sync firstOFF ownership. Source checks5+8+13and package/source/controlled-host5/5passed; strict deep private ad-hoc seal verified. No broad suite or clean-case soak repeated.
 

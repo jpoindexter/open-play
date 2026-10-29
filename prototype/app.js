@@ -23,7 +23,7 @@ import {createSyncTempoRequests} from './sync-tempo-requests.js';
 import {createBeatgrid} from './beatgrid.js';
 import {currentDeckBPM} from './deck-tempo.js';
 import {refreshTransportControls,refreshDeckSwitches,refreshCueControls} from './transport-presentation.js';
-import {refreshSyncPresentation} from './sync-presentation.js';
+import {refreshSyncPresentation,syncButtonLabel} from './sync-presentation.js';
 import {refreshAnalysisControls} from './analysis-presentation.js';
 import {refreshTrackDetails} from './track-details.js';
 import {renderLibraryRows,renderArtworkCards} from './library-rows.js';
@@ -420,7 +420,7 @@ function syncControls(d) {
   const smart = mode === "Smart Sync", status = smart ? d.syncState || "off" : d.sync ? "beat" : "off";
   const role = d.sync ? (d.syncRole === "primary" ? "Primary" : "Secondary") : "Not synced";
   const pending=isSimpleSyncPending(d)||(smart&&smartSync.pending?.(d));
-  return `<button data-action="syncMaster" data-deck="${d.index}" aria-label="Choose deck ${d.index+1} as Sync master" aria-pressed="${syncMaster.master()===d}" title="${syncMaster.master()===d?(syncMaster.manual()?'Selected master':'Automatic master: first playing deck'):'Match incoming tracks to this deck'} · Shift-click: automatic master" class="${syncMaster.master()===d?'master-active':''}" ${d.track?'':'disabled'}>MASTER</button><button data-action="syncOff" data-deck="${d.index}" aria-label="Disengage sync on deck ${d.index + 1}" title="${smart?"First OFF: keep relative tempo; second OFF: restore controller pitch":"Disengage sync and restore the last received controller pitch when available"}" ${d.sync || status === "relative" || pending ? "" : "disabled"}>OFF</button><button data-action="sync" data-deck="${d.index}" data-sync-hint="${smart?'Smart Sync: match tempo and bar phase; paused decks arm an aligned launch.':'Simple Sync: align nearest beats or transients; paused decks match tempo only, without bar lock.'}" data-sync-state="${status}" aria-busy="${!!pending}" aria-label="Sync deck ${d.index + 1}" aria-pressed="${!!d.sync}" title="${smart && !hasBeatgrid(d.track) ? "Add or analyze a beatgrid first" : role + "; press again to re-sync"}" ${smart && !hasBeatgrid(d.track) ? "disabled" : ""} class="${d.sync ? "active" : ""}">${smart?"BEAT SYNC":"SIMPLE SYNC"}</button>`;
+  return `<button data-action="syncMaster" data-deck="${d.index}" aria-label="Choose deck ${d.index+1} as Sync master" aria-pressed="${syncMaster.master()===d}" title="${syncMaster.master()===d?(syncMaster.manual()?'Selected master':'Automatic master: first playing deck'):'Match incoming tracks to this deck'} · Shift-click: automatic master" class="${syncMaster.master()===d?'master-active':''}" ${d.track?'':'disabled'}>MASTER</button><button data-action="syncOff" data-deck="${d.index}" aria-label="Disengage sync on deck ${d.index + 1}" title="${smart?"First OFF: keep relative tempo; second OFF: restore controller pitch":"Disengage sync and restore the last received controller pitch when available"}" ${d.sync || status === "relative" || pending ? "" : "disabled"}>OFF</button><button data-action="sync" data-deck="${d.index}" data-sync-hint="${smart?'Smart Sync: match tempo and bar phase; paused decks arm an aligned launch.':'Simple Sync: align nearest beats or transients; paused decks match tempo only, without bar lock.'}" data-sync-state="${status}" aria-busy="${!!pending}" aria-label="Sync deck ${d.index + 1}" aria-pressed="${!!d.sync}" title="${smart && !hasBeatgrid(d.track) ? "Add or analyze a beatgrid first" : role + "; press again to re-sync"}" ${smart && !hasBeatgrid(d.track) ? "disabled" : ""} class="${d.sync ? "active" : ""}">${syncButtonLabel(smart,status)}</button>`;
 }
 function smartSyncIndicator(d) {
   if (state.settings["Sync Mode"] !== "Smart Sync") return "";
@@ -2098,7 +2098,7 @@ window.openPlay = {
 engine.onProcessing = () => refreshTransportControls(state);
 
 engine.onRateRequest=createSyncTempoRequests({engine,state,smartSync,slicer,master:()=>syncMaster.master(),participants:bpm=>panels.samplerSync.participants(bpm),cancelGUI:d=>tempoSliders.cancel(d)});
-engine.onManualPosition = d => {for(const other of state.decks)cancelSimpleSync(engine,other,d);smartSync.manipulated(d);};
+engine.onManualPosition = (d,operation) => {for(const other of state.decks)cancelSimpleSync(engine,other,d);smartSync.manipulated(d,operation);};
 engine.onGridTimeline = (d,options) => smartSync.timeline(d,options);
 engine.onValidateTransport = (d,changes) => smartSync.validate(d,changes);
 engine.onGridWillChange = track => smartSync.captureGrid(track);

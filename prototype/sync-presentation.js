@@ -1,4 +1,5 @@
 import {beatPosition} from './smart-sync.js';
+export const syncButtonLabel=(smart,status)=>!smart?'SIMPLE SYNC':status==='tempo'?'TEMPO SYNC':status==='armed'?'SYNC ARMED':'BEAT SYNC';
 const attribute=(node,name,value)=>{if(node.getAttribute(name)!==value)node.setAttribute(name,value);};
 
 // Frame refreshes preserve controls and avoid notifying observers for unchanged state.
@@ -13,6 +14,7 @@ export function refreshSyncPresentation(d,{smart,hasGrid,position,pending,master
  }
  const status=smart?d.syncState||'off':d.sync?'beat':'off',sync=root.querySelector(`[data-action="sync"][data-deck="${d.index}"]`);
  if(sync){
+  const text=syncButtonLabel(smart,status);if(sync.textContent!==text)sync.textContent=text;
   attribute(sync,'data-sync-state',status);attribute(sync,'aria-busy',String(!!pending));
   sync.classList.toggle('active',!!d.sync);attribute(sync,'aria-pressed',String(!!d.sync));
   const disabled=smart&&!hasGrid;if(sync.disabled!==disabled)sync.disabled=disabled;

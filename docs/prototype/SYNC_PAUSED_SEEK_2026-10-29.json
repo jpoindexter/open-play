@@ -1,0 +1,57 @@
+{
+  "date": "2026-10-29",
+  "nativeVersion": "0.1.108",
+  "nativeSource": "1370e3f0654f9c51e30ccb3cba79df692ef84f7a",
+  "ownerReports": {
+    "bothPlayingSync": "Small audible offset; no pops/clicks. First overlap did not include the requested crossfade or bass swap.",
+    "cleanStop": "Owner confirmed everything stopped when paused.",
+    "restart": "Both showed Beat Sync; incoming was not aligned until owner pressed Sync again."
+  },
+  "sequence": [
+    "Both engaged and paused",
+    "Home seek to0 on both decks",
+    "Sequential A Play then B Play without another Sync press",
+    "Owner re-pressed B Sync and reported alignment"
+  ],
+  "cause": "Paused engine.seek notified the generic manual-position hook, changing armed to tempo. Smart start only aligns armed. The button still said BEAT SYNC.",
+  "repair": [
+    "Seek-specific metadata through existing hook",
+    "Paused forward nonprocessing non-Stem-Slip seek rearms the next Play",
+    "Playing jog/seek and unsupported launch transports retain tempo-only",
+    "Initial and refreshed Sync labels reflect armed/tempo/beat without replacing controls"
+  ],
+  "focusedEvidence": {
+    "before": "Actual engine plus actual app hook: paused seek returned tempo instead of armed.",
+    "after": "Same sequential Play schedules source offset at matching bar phase; outgoing deck object and voice retained.",
+    "affectedChecks": "20/20 in three affected files; syntax and diff checks. No broad suite/soak."
+  },
+  "privateRecordings": [
+    {
+      "file": "both-playing-sync-offset-reported.webm",
+      "bytes": 2436938,
+      "sha256": "0542d177e5c274fe4d2f2e1bca00c2f9719a63ffdded20fca2cdbd41945b30b4"
+    },
+    {
+      "file": "restart-requires-resync-transition-incomplete.webm",
+      "bytes": 4923210,
+      "sha256": "1312b790b802706d10261106e046abc6f052b4e353cbf9a856fbf4adcb0a66e8"
+    }
+  ],
+  "finalObserved108": {
+    "positions": [
+      297.05,
+      298.051
+    ],
+    "stopped": true,
+    "masterMeter": "negative infinity",
+    "recordingStoppedAndSaved": true,
+    "eqNeutral": true,
+    "crossfader": 0
+  },
+  "limits": [
+    "Source scheduling/grid phase does not prove audible alignment",
+    "109 desktop native replay and owner listening pending",
+    "No claim to resolve generic pops, grid accuracy, other songs or hardware"
+  ],
+  "fullCoreComplete": false
+}

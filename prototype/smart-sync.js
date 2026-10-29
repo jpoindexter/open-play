@@ -244,8 +244,12 @@ export function createSmartSync({engine, state, externalLeader=()=>null}) {
   function paused(deck) {
     if (enabled() && engaged(deck) && deck.syncState==='beat') {revise(deck);deck.syncState='armed';}
   }
-  function manipulated(deck) {
-    if (enabled() && engaged(deck)) {revise(deck);deck.syncState='tempo';}
+  function manipulated(deck,{seek=false}={}) {
+    if (enabled() && engaged(deck)) {
+      revise(deck);
+      // Paused needle moves retain an aligned next Play; live nudges keep their offset.
+      deck.syncState=seek&&!deck.playing&&!deck.processing&&!deck.reverse&&(deck.stemSlip||'off')==='off'?'armed':'tempo';
+    }
   }
   function disengage(deck) {
     cancelAlignment(deck);

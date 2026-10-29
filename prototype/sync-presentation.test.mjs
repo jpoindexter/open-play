@@ -20,3 +20,11 @@ test('pending, master, phase, relative, missing-grid and Simple states still ref
  Object.assign(f.state,{hasGrid:false});f.deck.track=null;f.refresh();assert.equal(f.sync.disabled,true);assert.equal(f.label.textContent,'No beatgrid');
  Object.assign(f.state,{smart:false});Object.assign(f.deck,{sync:true});f.refresh();assert.equal(f.sync.disabled,false);assert.equal(f.sync.getAttribute('data-sync-state'),'beat');
 });
+
+test('Sync button exposes armed, tempo-only and beat states without replacing the control',()=>{
+ const f=fixture();Object.assign(f.deck,{sync:true,syncState:'armed'});f.refresh();
+ assert.equal(f.sync.textContent,'SYNC ARMED');
+ f.deck.syncState='tempo';f.refresh();assert.equal(f.sync.textContent,'TEMPO SYNC');
+ f.deck.syncState='beat';f.refresh();assert.equal(f.sync.textContent,'BEAT SYNC');
+ f.state.smart=false;f.refresh();assert.equal(f.sync.textContent,'SIMPLE SYNC');
+});

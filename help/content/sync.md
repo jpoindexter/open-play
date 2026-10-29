@@ -20,7 +20,7 @@ Explicit MASTER selection lets you choose the reference. If the reference looks 
 
 ## Smart Sync
 
-Smart Sync uses the track’s beatgrid and can arm a paused incoming deck for aligned launch. Forward playback can follow tempo changes defined by Beat Warp Markers.
+Smart Sync uses the track’s beatgrid and can arm a paused incoming deck for aligned launch. **SYNC ARMED** means the next Play will align to a playing master. Moving a paused, forward deck’s play position keeps that launch armed. **BEAT SYNC** means grid phase is aligned; **TEMPO SYNC** keeps speed matched while allowing a phase offset after a playing seek or jog. Press Sync again to realign. Forward playback can follow tempo changes defined by Beat Warp Markers.
 
 An inaccurate grid produces inaccurate musical alignment even when grid clocks agree. Correct the downbeat and tempo map in [Edit grid](/waveforms/#edit-a-beatgrid); do not compensate for a bad grid by repeatedly syncing.
 
