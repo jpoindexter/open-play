@@ -1,7 +1,11 @@
 {
   "date": "2026-10-29",
   "version": "0.1.115",
-  "adHocSeal": {"command": "codesign --verify --deep --strict <exact115bundle>", "exitCode": 0, "scope": "Private ad-hoc resource seal only; not Developer ID, notarization or public distribution acceptance."},
+  "adHocSeal": {
+    "command": "codesign --verify --deep --strict <exact115bundle>",
+    "exitCode": 0,
+    "scope": "Private ad-hoc resource seal only; not Developer ID, notarization or public distribution acceptance."
+  },
   "sourceCommit": "10a758ac4fecbcfb68d4407953f8122ce4df201e",
   "asarSHA256": "355fda593fc7e8235c265a9deb382e5882751e568205159c2c7fa0cf36758242",
   "packageInspection": "desktop-0.1.115-playback-control-safety.json",
@@ -51,11 +55,48 @@
     "launcherScriptsExecuted": false
   },
   "limits": [
-    "Native paused startup is not execution of changed Key Sync/Flip cancellation paths.",
+    "Native paused Key Sync ON/OFF UI observed; held/playing/failure/four-deck identity and Flip cancellation paths remain unexecuted in native.",
     "No new source suite, music, listening, Sync-pop, waveform latency, physical output or controller acceptance.",
     "Original unexpected106startup remains unresolved despite this paused launch.",
     "Explicit Flip Off semantics for an already-issued internal seek remain ungraded; main Pause/Load source failures are separately repaired.",
     "Prior53manual/jog/A-BEQ/Cue/stop and109restart transition acceptance retain their scopes."
   ],
-  "next": "Use existing isolated native interface for relevant changed-path checks without extra diagnostics; owner listening/focus and hardware remain deferred. Preserve next actual pop/stall context; no broad clean matrices."
+  "next": "Use existing isolated native interface for relevant changed-path checks without extra diagnostics; owner listening/focus and hardware remain deferred. Preserve next actual pop/stall context; no broad clean matrices.",
+  "pausedKeySyncNative": {
+    "executed": true,
+    "route": "Existing installed GUI Tempo after Sync checker; separate volatile device-denied session and generated demo tracks. Existing prepare used to initialize asserted physical mute; generated decks explicitly stopped before Key Sync. No full diagnostic routine or source suite.",
+    "actions": [
+      "Deck B Key Sync ON",
+      "Deck B Key Sync OFF"
+    ],
+    "observed": {
+      "onAccessiblePressed": true,
+      "onKeyLock": true,
+      "onFeedback": "Key Sync: Em \u00b7 +0 semitones \u00b7 compatible with deck 1.",
+      "offAccessiblePressed": false,
+      "offRetainsKeyLock": true,
+      "stoppedPositionsSeconds": [
+        18.351,
+        22.021
+      ],
+      "unchangedAfterBothActions": true,
+      "physicalRouteReportedMutedBeforeAndAfter": true
+    },
+    "cleanup": "Owned checker closed; normal main115stillpaused30.097/34.086,16tracks,12materialized previews and existing controls; master meter minusinfinity. No mainPlay/Sync/RECStart.",
+    "privateEvidence": "local-evidence/key-sync-native-115-2026-10-29",
+    "evidenceSHA256": {
+      "before.txt": "c9db0fe08f5c3b72c35101232121f5c7840f2cc05009e4352776a162c62512f5",
+      "on.txt": "f95cbdbb4b576188fb8d46809ab45d50c510b9c6b1ed46898ba24772f5412719",
+      "off.txt": "0107919f5f5d7cf409ac95bfe172ca4e075a7380c7862f01b447ceaf534c0bfd",
+      "mute-before.txt": "2feba9295d6c9584ceb23ed7229515387b129bdc6e71e4702ab4de371e210bb6",
+      "mute-after.txt": "c896e610c5d643ab713f8a55a8b5fb1e22cbd70f39f5281fdd70b87cc1a984a4",
+      "main-after.txt": "3156cc5ae7242a991e644fcaade78225debb786d2f5814bc00ac77227346f935"
+    },
+    "limits": [
+      "Two-deck paused native UI only, using generated recognized keys and zero-semitone compatible match.",
+      "Native AX focus/index stability is not DOM identity, held four-deck gesture, pointer capture or measured latency proof.",
+      "No music, audible key quality, physical output, Sync-pop, waveform-stall or Flip-cancellation result inferred.",
+      "Setup stop created an internal diagnostic sample report; PCM was not exported or graded in this UI check."
+    ]
+  }
 }
