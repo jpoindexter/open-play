@@ -1,3 +1,11 @@
+## Current core delivery —29 October2026 /0.1.120
+
+Current/default120/source550ff95 has unchanged118product playback code and includes the101-line diagnostic correction. Archive inspection5/5/seal and actual paused recovery observed. One corrected native generated4deck Horizontal/Compact GridSave→Close→Pause→newPlay→oldresume completion PASSES: same real live-WASM voice/adapter/token6/rate1.26/TEMPO/outgoing transport,225/225controls,7/7unrelated previews and edited targetdecoded/ready under120→100BPMkey. Exact handled cancellation; all stopped/muted, adapters/timers/PCM0/method/settings/meta/buffers/history/prepare/storage restored, source hashes stable. Captured normalization mismatch fields were deck0/1syncState/syncRole; final remaining mismatches0. Original119overallFAIL remains unchanged. [Result and limits](../docs/prototype/GRID_CANCEL_120_NATIVE_2026-10-29.json).
+
+Main paused30.097/34.086,16tracks/12visiblepreviews/core controls retained; no mainPlay/Sync/RECstart. Closed119profile261files/120231690B APFS-copy/hash+mtime equal. Three120starters syntax checked; exact app executed separately. Inactive119and own cache retired (~939MB logical); only120bundle. Originalmedia/recordings/recoveryprofiles/unrelateddraft preserved. Stop repeating this scoped successful check. Prior53/109mixing acceptance remains scoped; owner listening/focus/Hercules and genericpop/stall/startup60 OPEN. No full-core/public-beta claim.
+
+--- Historical handoff and original prompt preserved below ---
+
 ## Current core delivery —29 October2026 /0.1.119
 
 Current/default119/sourcebea1be5 retains118product playback implementation. Added93-line isolated diagnostic and one existing-tool button; archive inspection5/5/seal, actual paused recovery30.097/34.086,16tracks/12previews/core controls. One native generated4deck Compact GridSave→Close→Pause→newPlay→oldresume completion retained new live WASM voice/adapter/token6/rate1.26/TEMPO, outgoing identity and225/225controls, with exact handled cancellation. **Overall diagnostic FAIL:**7/8preview sources matched, settingsAndMetadataRestoredfalse. All stopped/muted; adapters disposed/timers/PCM0/method/buffers/history/prepare/storage restored/source stable. Do not regrade overall failure from these passing subsets. [Full result and limits](../docs/prototype/GRID_CANCEL_119_NATIVE_2026-10-29.json).

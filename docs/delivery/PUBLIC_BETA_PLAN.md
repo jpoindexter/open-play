@@ -2,7 +2,7 @@
 
 Ship a useful Mac local-audio DJ beta as soon as its release gates are satisfied. Full Serato/rekordbox/Traktor parity and the entire Trello backlog are not launch prerequisites. No public release has been published or approved by this document.
 
-Current private checkpoint: **0.1.119**. Product audio code is unchanged from118; native grid-cancellation transport/control subset observed, but its overall diagnostic failed on preview/restoration assertions. Diagnostic corrections are source-only pending packaged execution. Main session/controls/previews retained; listening, broader Sync/stalls, data/install and public distribution gates remain open. [Current result and limits](../prototype/GRID_CANCEL_119_NATIVE_2026-10-29.json). No public-beta completion claim.
+Current private checkpoint: **0.1.120**. Product audio code unchanged from118; corrected native generated4deck Compact grid-cancellation/control/preview/restoration check passed. Prior119failed result retained. Main session/controls/previews preserved. Listening, broader Sync/stalls, data/install and public distribution gates remain open. [Current scoped result](../prototype/GRID_CANCEL_120_NATIVE_2026-10-29.json). No public-beta completion claim.
 
 ## Conditional planning estimate — 28 October 2026
 

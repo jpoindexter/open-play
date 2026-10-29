@@ -2,7 +2,7 @@
 
 ## Current core status —29 October2026
 
-Private desktop **0.1.119** is current/default, with product playback code unchanged from118. One native generated4deck Compact grid-cancellation replay retained the new voice/token/rate/TEMPO, outgoing voice and225/225controls. **Overall diagnostic FAIL remains recorded:**7/8preview sources matched and exact restoration assertion failed. Diagnostic-only source corrections are pending next packaged execution; no playback/DSP change. Main session paused30.097/34.086,16tracks/12previews retained. Listening, genericpop/stall/startup60 and hardware gates remain OPEN. [Observed subsets and failed check](../docs/prototype/GRID_CANCEL_119_NATIVE_2026-10-29.json). No full-core/public-beta claim.
+Private desktop **0.1.120** is current/default; playback code is unchanged from118. The corrected native generated4deck Compact grid-cancellation check passed: newer live voice/token/rate/TEMPO and outgoing transport retained,225/225controls connected,7/7unrelated previews retained and edited preview decoded/ready. Exact state/storage restoration and stopped/muted adapter cleanup passed. Prior119overallFAIL stays recorded. Main paused30.097/34.086,16tracks/12previews retained. Listening, genericpop/stall/startup60 and hardware gates remain OPEN. [Scoped native result and limits](../docs/prototype/GRID_CANCEL_120_NATIVE_2026-10-29.json). No full-core/public-beta claim.
 
 ## Historical0.1.94 checkpoint
 
