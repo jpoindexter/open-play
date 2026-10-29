@@ -1,3 +1,9 @@
+## Active core follow-through —29 October2026 /CORE-FIX-39,114queued
+
+Current/default113and normal saved session remain unchanged/stopped30.097/34.086,16tracks/12previews. The original stale-live-key repair is already in product source; this slice adds ONE generated-only isolated native failure check to close its unexecuted native-playing automation gap. New82-line helper holds only oldadapter.update as a controlled nondelegated rejection; actual Load/Play/newkeyUp must first commit real newWASM semitone1, then oldfailure must retain newvoice/key/token and controls/preview sources. Allstopped/mute/disposal/descriptor/source checks required. Six separate checkerbuttons mutuallydisabled. No product audio/loop/layout/style change and no test suite rerun.
+
+Next: commit/push helper+config, package/inspect114, runONLYnewmutedstale-keycheck, preserve main113/114session and backups, reconcile CORE-FIX-39without claiming naturalworkletfailure/music/physical/popfree proof, retire113after healthy successor. A single owner-listening question is pending; Hercules remainsdeferred. No repeated accepted manual/EQ/Cue/stop checks.
+
 ## Current core delivery —29 October2026 /0.1.113
 
 Current/default113/source74ed9f6 repairs CORE-FIX-64: stale saved-loop work cannot seek replacement audio after Load or adopt a newer Stop token. Shared manual-loop module78lines; focused regression85, native helper83. Final3source cases plus1existingloop-feedback check pass; no broadsuite. Source RED/partial-fix queued-Stop counterexample retained. One actual native muted four-deck raw-source saved-pad→normalLoad→heldresume completion PASSES: replacement0/length8/token5 retained,166outgoing/mixer controls stay connected,7/7readypreview sources retained/8after. All stopped/muted, methodrestored and4sourcehashesstable. [Native receipt](../docs/prototype/MANUAL_LOOP_113_NATIVE_2026-10-29.json).
