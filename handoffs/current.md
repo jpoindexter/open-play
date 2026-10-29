@@ -1,3 +1,9 @@
+## Active core repair —29 October2026 /CORE-FIX-64,113queued
+
+112is still current/default and stopped30.097/34.086 with original16tracks/previews. A new actual manual-loop/engine/appLoad witness reproduced stale saved recall seeking replacement0→1/token3→4 and overwriting loopLength. Shared78-line manual-loops owner guard now rechecks after awaits and prevents queued pre-Stop input adopting the Stop token; benign no-op/normal queued commands still work.3focused integration checks +1existingloop-feedback check pass; original RED/intermediate GREEN and scope retained in MANUAL_LOOP_OWNERSHIP_2026-10-29.json. New76-line isolated native Load checker being finished;113notpackaged/launched.
+
+Next: commit/push owned repair+checker, package/inspect113, execute ONLYnewmutedLoadboundary, verify main session unchanged, update/readback existingCORE-FIX-64and parents, retire112after healthy successor. No broadtest/cleanSync rerun. Genericpop/stall/startup/hardware gates remainOPEN. Preserve unrelatedmonochromedraft and all music/recordings/recovery profiles.
+
 ## Current core delivery —29 October2026 /0.1.112
 
 Current/default112/source d61acce includes the shared Sync OFF repair75c1aaf: committed live tempo-only requests use existing owned preparation with the incoming clock. One actual native muted next-factory check now PASSES: OFF aborts before delegation; same old voice/adapter and nominal1× retained, paused master unchanged.113control/preview nodes retained through six stages; all audio stopped, adapters disposed/timers cleared/PCM0, four source hashes stable. Three focused regressions and controlled actual-WASM RED/GREEN retained; no broad suite. [Native receipt](../docs/prototype/SMART_LIVE_OFF_112_NATIVE_2026-10-29.json).
