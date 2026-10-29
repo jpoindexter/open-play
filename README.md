@@ -4,7 +4,7 @@
 
 ## Current core status —29 October2026
 
-Private desktop **0.1.118** is current/default (source594d223), delivering stale grid-realignment ownership and deck-local Eject refresh repairs. Two focused source RED/GREEN cases; archive inspection5/5, ad-hoc seal and actual native paused recovery observed:16tracks/12visible previews/core controls. Isolated stopped four-deck Eject shows only target emptied; held/playing node identity and delayed native race remain open. Listening, intermittent pop/stall, startup60 and hardware gates remain open. [Delivery and limits](docs/prototype/CORE_EJECT_GRID_118_NATIVE_2026-10-29.json). No full-core/public-beta claim.
+Private desktop **0.1.119** is current/default, with product playback code unchanged from118. One native generated4deck Compact grid-cancellation replay retained the new voice/token/rate/TEMPO, outgoing voice and225/225controls. **Overall diagnostic FAIL remains recorded:**7/8preview sources matched and exact restoration assertion failed. Diagnostic-only source corrections are pending next packaged execution; no playback/DSP change. Main session paused30.097/34.086,16tracks/12previews retained. Listening, genericpop/stall/startup60 and hardware gates remain OPEN. [Observed subsets and failed check](docs/prototype/GRID_CANCEL_119_NATIVE_2026-10-29.json). No full-core/public-beta claim.
 
 ## Historical0.1.94 checkpoint
 
