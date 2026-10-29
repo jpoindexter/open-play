@@ -1,3 +1,4 @@
+import {createFaderStart} from './fader-start.js';
 import {uiIcons} from './vendor/astryx/icons.js';
 import {trackMetadata,validateMetadata,createLibraryBackup} from './library-state.js';
 import {createSessionStorage} from './session-storage.js';
@@ -631,30 +632,12 @@ const playRequests = new WeakMap();
 const autoplayRequests = new WeakMap();
 function cancelPendingPlay(d){autoplayRequests.delete(d);playRequests.delete(d);d.playQueued=false;instantDouble.cancelDeck(d);}
 const faderStarts=new Map();
-async function faderStart(d,value,previous,deviceId=''){
-  if(!d.track)return;
-  if(value===0){
-    instantDouble.cancelDeck(d);
-    cueHolds.cancelDeck(d);
-    const active=faderStarts.get(d.index);
-    if(active)active.wanted=false;
-    if(!d.playing&&!d.processing&&!active){d.cue=engine.position(d);refreshTransportControls(state);return;}
-    playbackIntents.record(d,{origin:'fader-start',intent:'stop',ready:globalThis.document?.body?.dataset?.ready==='true',visibility:globalThis.document?.visibilityState});
-    engine.pause(d);await engine.seek(d,d.cue);refreshTransportControls(state);return;
-  }
-  if(previous>0)return;
-  const owner={track:d.track,deviceId,wanted:true,token:null};faderStarts.set(d.index,owner);
-  const seeking=engine.seek(d,d.cue);owner.token=engine.startTokens.get(d.index);await seeking;
-  if(faderStarts.get(d.index)!==owner||!owner.wanted||d.track!==owner.track||engine.startTokens.get(d.index)!==owner.token||d.playing||d.processing)return;
-  playbackIntents.record(d,{origin:'fader-start',intent:'start',ready:globalThis.document?.body?.dataset?.ready==='true',visibility:globalThis.document?.visibilityState});
-  const starting=engine.start(d);owner.token=engine.startTokens.get(d.index);await starting;refreshTransportControls(state);
-}
-function resetFaderStartInput(deviceId){
-  for(const [index,owner]of faderStarts)if(deviceId===undefined||owner.deviceId===deviceId){
-    faderStarts.delete(index);owner.wanted=false;const d=state.decks[index];
-    if(d.track===owner.track&&d.processing&&engine.startTokens.get(index)===owner.token)engine.pause(d);
-  }
-}
+const {start:faderStart,resetInput:resetFaderStartInput}=createFaderStart({
+  engine,smartSync,state,owners:faderStarts,
+  cancel:d=>{instantDouble.cancelDeck(d);cueHolds.cancelDeck(d);},
+  record:(d,intent)=>playbackIntents.record(d,{origin:'fader-start',intent,ready:globalThis.document?.body?.dataset?.ready==='true',visibility:globalThis.document?.visibilityState}),
+  refresh:()=>refreshTransportControls(state),
+});
 
 async function stemPad(d, pad) {
   if (!Number.isInteger(pad) || pad < 0 || pad > 7) throw new RangeError("Unknown Stem pad.");

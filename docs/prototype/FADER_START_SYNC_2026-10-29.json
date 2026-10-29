@@ -1,0 +1,51 @@
+{
+  "date": "2026-10-29",
+  "baseline": "f1bddf397fac8061ab49f2815de1db0109b460f2",
+  "defect": "Mapped Fader Start bypasses Smart Sync armed launch",
+  "before": {
+    "rate": 1.05,
+    "sync": true,
+    "state": "armed",
+    "playing": true,
+    "scheduled": {
+      "when": 1.01,
+      "offset": 0,
+      "rate": 1.05
+    },
+    "phaseErrorBeats": 1.6790000000000003,
+    "phaseErrorSeconds": 0.7995238095238096,
+    "outgoingUnchanged": true,
+    "outgoingVoiceRetained": true
+  },
+  "repair": {
+    "module": "prototype/fader-start.js",
+    "lines": 34,
+    "callers": [
+      "app API\u2192panels DeckMIDIRouter",
+      "controller absolute fader-start and shifted level",
+      "resetInput/disconnect",
+      "shared owners map load/eject"
+    ]
+  },
+  "verification": {
+    "route": "Actual DeckMIDIRouter CC\u2192module\u2192actual engine/Smart Sync + app manual-seek hook; controlled graph/clock",
+    "phaseErrorBeats": "<1e-9",
+    "outgoingDeckAndVoiceRetained": true,
+    "checks": [
+      "Armed MIDI full launch and back-cue",
+      "Fader-zero cancels pending aligned launch",
+      "Input disconnect cancels pending aligned launch",
+      "Sync-off ordinary cue launch/back-cue"
+    ],
+    "passed": 4,
+    "broadSuite": false,
+    "native": "110queued;109 unchanged",
+    "hardware": "deferred"
+  },
+  "limits": [
+    "No new PCM/native/physical controller or audible acceptance",
+    "Generic Sync pop/stall/startup60 still open",
+    "Existing109paused-GUI restart acceptance remains separate"
+  ],
+  "unrelatedDraftPreserved": "docs/design-system/monochrome-tools-2026-10-29/"
+}
