@@ -1,8 +1,8 @@
 # Current core DJ acceptance and re-entry
 
-28 October2026. Installed/default102 remains preserved;104/source3b8a0f6 is inspected/private-sealed and staged, not launched while Mac locked.103 was never launched and has been retired. [Current desktop guide](TRY_CURRENT_DESKTOP.md) and [current handoff](../../handoffs/current.md) govern build identity, controls, Trello and exact re-entry. [Import/restore repair](core-import-restore-104-2026-10-28.json); [103 source safety evidence retained](core-batch-103-2026-10-28.json).
+29 October2026. Current/default104/source3b8a0f6 is inspected/private-sealed and now open after protected paused handoff. Exact positions50.716/62.715s,16tracks/12settled viewport previews/core controls retained; closed102profile hash/mtime copy matched. Only104bundle/launchers104. [Native delivery](desktop-0.1.104-core-native.json), [current guide](TRY_CURRENT_DESKTOP.md), [handoff](../../handoffs/current.md).
 
-No new listening/controller request tonight. After unlock, protect/quit102, match a closed-profile backup, open104 once, observe restored session, then update launchers and remove inactive102. Relevant native failure/playing, musical Sync/stalls, independent headphone/controller and public distribution criteria remain open. Prior53ordinary manual mix/jog/EQ/Cue/stop acceptance remains scoped. No repeated clean test matrix.
+No main Play/Sync/Cue/REC Start was invoked. Availability asked once today; keep stopped until owner ready for one relevant session. Native changed-failure, audible Sync/stalls, independent headphone/controller and public distribution criteria remain open. Prior53ordinary manual beatmatch/jog/EQ/Cue/stop remains scoped. No broad suite/clean matrix or speculative DSP changes. Original criteria below are preserved as historical evidence.
 
 ## Historical0.1.94 audit — scoped evidence retained, not current identity
 
