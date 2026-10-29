@@ -1,10 +1,8 @@
-# Current private desktop —0.1.120
+# Current private desktop —0.1.121
 
-Current/default120/source550ff95 has unchanged118product playback code and includes the101-line diagnostic correction. Archive inspection5/5/seal and actual paused recovery observed. One corrected native generated4deck Horizontal/Compact GridSave→Close→Pause→newPlay→oldresume completion PASSES: same real live-WASM voice/adapter/token6/rate1.26/TEMPO/outgoing transport,225/225controls,7/7unrelated previews and edited targetdecoded/ready under120→100BPMkey. Exact handled cancellation; all stopped/muted, adapters/timers/PCM0/method/settings/meta/buffers/history/prepare/storage restored, source hashes stable. Captured normalization mismatch fields were deck0/1syncState/syncRole; final remaining mismatches0. Original119overallFAIL remains unchanged. [Result and limits](GRID_CANCEL_120_NATIVE_2026-10-29.json).
+Private desktop **0.1.121** is current/default, sourcea1fabe0. Three reproduced software defects repaired: hidden C/D Pitch holds no longer consume the next Play; held-Slicer Pause reuses existing feedback controls; obsolete Simple tempo-only completion cannot falsely engage Sync after newer Play/tempo input. Three focused RED→GREEN checks pass. Archive inspection5/5/private seal and actual paused recovery observed:30.097/34.086s,16tracks/12visible previews/core controls. Changed-path native held/delayed scenarios and listening remain pending. Goal stays active, audio muted. Genericpop/stall/startup60 and hardware gates remain OPEN. [Delivery and limits](CORE_HOLD_SIMPLE_121_NATIVE_2026-10-29.json).
 
-Main paused30.097/34.086,16tracks/12visiblepreviews/core controls retained; no mainPlay/Sync/RECstart. Closed119profile261files/120231690B APFS-copy/hash+mtime equal. Three120starters syntax checked; exact app executed separately. Inactive119and own cache retired (~939MB logical); only120bundle. Originalmedia/recordings/recoveryprofiles/unrelateddraft preserved. Stop repeating this scoped successful check. Prior53/109mixing acceptance remains scoped; owner listening/focus/Hercules and genericpop/stall/startup60 OPEN. No full-core/public-beta claim.
-
---- Historical checkpoints below; old current/default references are superseded ---
+Closed120profile261files/120231830B copied with equal hashes/sizes/mtimes. Three121launchers syntax checked; exact bundle separately executed. Inactive120and own packaging ZIP retired (~736MB logical); only121bundle. Original media/recordings/recovery copies/unrelated draft retained. No broad suites/new diagnostic helper/main playback. Re-entry: continue reproduced software defects muted; listening/controller later.
 
 # Prior private desktop —0.1.115
 

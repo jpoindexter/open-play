@@ -1,3 +1,11 @@
+## Current core delivery —29 October2026 /0.1.121
+
+Private desktop **0.1.121** is current/default, sourcea1fabe0. Three reproduced software defects repaired: hidden C/D Pitch holds no longer consume the next Play; held-Slicer Pause reuses existing feedback controls; obsolete Simple tempo-only completion cannot falsely engage Sync after newer Play/tempo input. Three focused RED→GREEN checks pass. Archive inspection5/5/private seal and actual paused recovery observed:30.097/34.086s,16tracks/12visible previews/core controls. Changed-path native held/delayed scenarios and listening remain pending. Goal stays active, audio muted. Genericpop/stall/startup60 and hardware gates remain OPEN.
+
+Closed120profile261files/120231830B copied with equal hashes/sizes/mtimes. Three121launchers syntax checked; exact bundle separately executed. Inactive120and own packaging ZIP retired (~736MB logical); only121bundle. Original media/recordings/recovery copies/unrelated draft retained. No broad suites/new diagnostic helper/main playback. Re-entry: continue reproduced software defects muted; listening/controller later.
+
+Evidence: `docs/prototype/CORE_HOLD_SIMPLE_2026-10-29.json` and `CORE_HOLD_SIMPLE_121_NATIVE_2026-10-29.json`. Original119FAIL and corrected120PASS retained; do not rerun120scoped check. Trello69/70new defects and66companion kept open for pending native scope.
+
 ## Current core delivery —29 October2026 /0.1.120
 
 Current/default120/source550ff95 has unchanged118product playback code and includes the101-line diagnostic correction. Archive inspection5/5/seal and actual paused recovery observed. One corrected native generated4deck Horizontal/Compact GridSave→Close→Pause→newPlay→oldresume completion PASSES: same real live-WASM voice/adapter/token6/rate1.26/TEMPO/outgoing transport,225/225controls,7/7unrelated previews and edited targetdecoded/ready under120→100BPMkey. Exact handled cancellation; all stopped/muted, adapters/timers/PCM0/method/settings/meta/buffers/history/prepare/storage restored, source hashes stable. Captured normalization mismatch fields were deck0/1syncState/syncRole; final remaining mismatches0. Original119overallFAIL remains unchanged. [Result and limits](../docs/prototype/GRID_CANCEL_120_NATIVE_2026-10-29.json).
