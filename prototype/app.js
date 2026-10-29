@@ -2093,7 +2093,11 @@ engine.onRateRequest=createSyncTempoRequests({engine,state,smartSync,slicer,mast
 engine.onManualPosition = (d,operation) => {for(const other of state.decks)cancelSimpleSync(engine,other,d);smartSync.manipulated(d,operation);};
 engine.onGridTimeline = (d,options) => smartSync.timeline(d,options);
 engine.onValidateTransport = (d,changes) => smartSync.validate(d,changes);
-engine.onGridWillChange = track => smartSync.captureGrid(track);
+engine.onGridWillChange = track => {
+  for(const changed of state.decks)if(changed.track===track)
+    for(const other of state.decks)cancelSimpleSync(engine,other,changed);
+  return smartSync.captureGrid(track);
+};
 engine.onGridChanged = (track,before) => smartSync.edited(track,before);
 engine.onError = (error) => notify(error.message);
 

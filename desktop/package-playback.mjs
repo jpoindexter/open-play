@@ -12,7 +12,7 @@ const git=args=>execFileSync('git',args,{cwd:root,maxBuffer:150*1024*1024});
 const sha=bytes=>createHash('sha256').update(bytes).digest('hex');
 const sourceCommit=git(['rev-parse','HEAD']).toString().trim();
 const get=file=>git(['show',`${sourceCommit}:${file}`]);
-const version='0.1.123',name='Open Play Playback Test',port=18775,bundle='org.openplay.dj.playback.localtest';
+const version='0.1.124',name='Open Play Playback Test',port=18775,bundle='org.openplay.dj.playback.localtest';
 const profile='Open Play Playback Test',partition='persist:open-play-playback-test';
 await assertBuildRetention(path.join(root,'local-evidence/desktop-builds'),name);
 const stage=await mkdtemp(path.join(tmpdir(),'open-play-playback-'));
@@ -57,7 +57,7 @@ await put('assets/docs/prototype/auto-gain-fixture-reference.json',JSON.stringif
 // only this package's identity/instructions; keep prototype source byte-for-byte.
 await put('assets/docs/prototype/TRY_CURRENT_DESKTOP.md',`# Core desktop test ${version}
 
-Current core batch restores current Loop Roll fields on explicit Stop, cancels related pending Simple alignment when public tempo changes, and refreshes Flip Start controls in place. Three focused source regressions plus one affected loop-feedback check are recorded. All existing controls/layouts/library previews and previous repairs remain included. Relevant changed native and listening acceptance remain separate; goal active, audio muted.
+Current core batch revokes Simple alignment before public grid publication and prevents a delayed Loop Roll release from seeking over a newer saved-loop recall. Two focused source regressions are recorded. All controls/layouts/library previews and previous repairs remain included. The123muted native Flip recording/start attempt was not reached and remains pending; no extra helper or broad suite. Relevant changed native/listening acceptance remains separate; goal active, audio muted.
 
 CORE-FIX-60: bounded, memory-only recent Play-command diagnostics are available in Settings → Advanced → System diagnostics and its existing export. This is instrumentation, not a startup repair; preserve the next actual event context before attributing a cause.
 

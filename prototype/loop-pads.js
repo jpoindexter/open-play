@@ -33,8 +33,9 @@ export function createLoopPads({state,engine,render=()=>{},notify=()=>{}}){
    rolls.delete(d.index);
    if(!owns()||engine.startTokens.get(d.index)!==held.token)return;
    const position=held.clock(engine.ctx.currentTime);
-   await engine.setLoop(d,held.prior.on,held.prior.start,held.prior.end);
-   if(!owns())return;
+   const pending=engine.setLoop(d,held.prior.on,held.prior.start,held.prior.end),token=engine.startTokens.get(d.index);
+   await pending;
+   if(!owns()||engine.startTokens.get(d.index)!==token)return;
    await engine.seek(d,position);render(d);
   });};
   const pending=run(d,async()=>{

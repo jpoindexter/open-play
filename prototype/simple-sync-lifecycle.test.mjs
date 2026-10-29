@@ -11,6 +11,8 @@ import {createSyncMaster} from './sync-master.js';
 import {createSyncTempoRequests} from './sync-tempo-requests.js';
 import {createTempoSlider} from './tempo-slider.js';
 import {createSlicer} from './slicer.js';
+import {saveBeatgrid} from './beatgrid-save.js';
+import {createBeatgrid} from './beatgrid.js';
 
 // Actual controller, settings/render, Simple Sync and engine. Controlled DOM,
 // buffer/graph/clock/live ACK endpoints; no PCM, native, UI or hearing proof.
@@ -163,4 +165,35 @@ test('new leader tempo cancels owned Simple alignment and unrelated tempo leaves
  assert.equal(deck.sync,true);assert.equal(leader.sync,true);assert.equal(state.decks[2].sync,false);assert.equal(notices.length,1);
  assert.ok(Math.abs(deck.track.bpm*deck.rate-leader.track.bpm*leader.rate)<1e-9);
  assert.equal(engine.voices.get(1).liveKeylock,adapters[1]);assert.equal(engine.voices.get(0),outgoing);assert.equal(leader.rate,1.001);
+});
+
+test('public grid publication revokes owned Simple ACKs for incoming and shared leader tracks',async t=>{
+ const f=env.audioFixture(),{engine,deck,leader}=f,voice=engine.voices.get(1),outgoing=engine.voices.get(0),notices=[];
+ const shared={...leader,index:2},spare={...leader,index:3,track:{...leader.track,id:'spare'}};
+ const state={decks:[leader,deck,shared,spare],deckCount:4,focus:1,settings:{'Sync Mode':'Simple Sync','Snap to Beatgrid':true}};
+ state.decks.forEach(d=>Object.assign(d,{sync:false,syncRole:null}));
+ const smartSync=createSmartSync({engine,state}),syncMaster=createSyncMaster({decks:()=>state.decks}),{acks,adapters}=held(f);
+ const scope={state,engine,synchronizeSimple:simple.synchronizeSimple,cancelSimpleSync,smartSync,syncMaster,tempoSliders:{cancel(){}},persist(){},notify:message=>notices.push(message)};
+ vm.createContext(scope);vm.runInContext(controller+'\n'+cut(source,'engine.onGridWillChange =','\nengine.onError ='),scope);
+ const original=engine.onGridWillChange,publications=[];let persists=0;
+ engine.onGridWillChange=track=>{const saved=original(track);publications.push({track,bpm:track.bpm,grid:track.grid,aborted:acks.at(-1).signal.aborted});return saved;};
+ t.after(async()=>{acks.forEach(ack=>ack.release());state.decks.forEach(d=>engine.pause(d));for(const adapter of adapters)await adapter.dispose();assert.equal(engine.voices.size,0);assert.equal(engine.transforms.size,0);});
+ await scope.deckAction('syncMaster',0,{},{});
+ const pending=settle(scope.deckAction('sync',1,{},{}));f.release();await until(()=>acks[0]);
+ await saveBeatgrid(deck.track,{bpm:100,grid:.1,gridWarpMarkers:[]},true,engine,()=>{persists++;return true;});
+ assert.equal(publications[0].aborted,true,'Actual grid hook must abort the old incoming alignment before publishing its new BPM/grid');
+ assert.equal(publications[0].bpm,120);assert.equal(publications[0].grid,0);assert.equal(deck.track.bpm,100);assert.equal(deck.track.grid,.1);
+ acks[0].release();assert.equal((await pending).error?.name,'AbortError');
+ assert.equal(engine.voices.get(1),voice);assert.equal(deck.rate,1);assert.equal(deck.sync,false);assert.equal(leader.sync,false);assert.equal(notices.length,0);
+ const retry=settle(scope.deckAction('sync',1,{},{}));await until(()=>acks[1]);
+ await saveBeatgrid(shared.track,{bpm:130,grid:.2,gridWarpMarkers:[]},true,engine,()=>{persists++;return true;});
+ assert.equal(publications[1].aborted,true,'Editing a track shared by the current leader must revoke the related incoming ACK');
+ assert.equal(publications[1].bpm,126);assert.equal(publications[1].grid,0);assert.equal(leader.track,shared.track);assert.equal(leader.track.bpm,130);
+ acks[1].release();assert.equal((await retry).error?.name,'AbortError');
+ assert.equal(engine.voices.get(1),voice);assert.equal(deck.rate,1);assert.equal(deck.sync,false);assert.equal(leader.sync,false);assert.equal(notices.length,0);
+ const fresh=scope.deckAction('sync',1,{},{});await until(()=>acks[2]);acks[2].release();await fresh;engine.ctx.currentTime=deck.anchorTime+.1;
+ assert.equal(deck.rate,1.3);assert.equal(deck.sync,true);assert.equal(leader.sync,true);assert.equal(notices.length,1);assert.equal(persists,2);
+ assert.equal(engine.voices.get(1).liveKeylock,adapters[2]);assert.equal(engine.voices.get(0),outgoing);assert(adapters.slice(0,2).every(adapter=>adapter.disposed));
+ const phase=createBeatgrid(deck.track).beatAt(engine.position(deck))-createBeatgrid(leader.track).beatAt(engine.position(leader));
+ assert.ok(Math.abs(phase-Math.round(phase))<1e-9,'Fresh alignment must use both published grids');
 });

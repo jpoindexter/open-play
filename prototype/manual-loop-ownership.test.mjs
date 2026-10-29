@@ -5,6 +5,7 @@ import vm from 'node:vm';
 import {AudioEngine} from './engine.js';
 import {createSmartSync} from './smart-sync.js';
 import {createManualLoops} from './manual-loops.js';
+import {createLoopPads} from './loop-pads.js';
 
 // Actual ManualLoops, AudioEngine and app Load; generated AudioBuffer with the
 // existing keylock-loop-window controlled Worker/graph. No DSP/native/UI/audio
@@ -82,4 +83,24 @@ test('successful queued recalls carry their own real engine token advances',asyn
   assert.equal(deck.position,11);assert.equal(deck.loopIn,11);assert.equal(deck.loopOut,12);
   assert.equal(deck.loopLength,2);assert.equal(deck.playing,true);
  }finally{f.cleanup();}
+});
+
+test('pending Loop Roll release yields to a newer saved-loop recall without its old seek',async()=>{
+ const f=await fixture(),{engine,deck,jobs}=f,state={decks:[deck],deckCount:1,focus:0,settings:{}},loopPads=createLoopPads({state,engine}),seeks=[];
+ const until=async check=>{const end=Date.now()+3000;while(!check()){assert(Date.now()<end,'Actual loop preparation not reached');await new Promise(resolve=>setImmediate(resolve));}};
+ const seek=engine.seek.bind(engine);engine.seek=(d,p)=>{seeks.push(p);return seek(d,p);};
+ try{
+  deck.tab='Loops';deck.loopPadMode='saved';deck.track.savedLoops[1]={start:11,end:12};
+  const hold=loopPads.hold('roll',deck,0,{length:4,ignoreBeatJump:true});await until(()=>jobs.length===2);
+  jobs[1].worker.onmessage({data:{channels:jobs[1].data.channels}});await hold;
+  // A cold prior-loop render gives release a real pending Worker boundary.
+  engine.keylockRenderer.clear();const release=loopPads.release('roll');await until(()=>jobs.length>=3);
+  const app=readFileSync(new URL('./app.js',import.meta.url),'utf8'),scope={state,engine,manualLoops:f.manual,loopPads,notify:m=>assert.fail(m),refreshLoopDecks(){}};
+  vm.runInNewContext(app.slice(app.indexOf('async function deckAction('),app.indexOf('\nlet importTail='))+'\nglobalThis.savedPad=deckAction;',scope);
+  const newer=scope.savedPad('pad',0,{dataset:{pad:'1'}});await until(()=>jobs.length>=4);
+  f.releaseRenders();assert.equal(await newer,true,'Old roll release canceled the newer saved-loop recall');
+  const voice=engine.voices.get(0),token=engine.startTokens.get(0);await release;
+  assert.deepEqual(seeks,[11],'Older release must not seek its background clock');assert.equal(deck.position,11);assert.equal(deck.loopIn,11);assert.equal(deck.loopOut,12);
+  assert.equal(engine.voices.get(0),voice);assert.equal(engine.startTokens.get(0),token);assert.equal(deck.playing,true);
+ }finally{f.releaseRenders();f.cleanup();}
 });
