@@ -98,8 +98,9 @@ export async function synchronizeSimple({engine, deck, leader, snapToGrid = fals
   if (!wasPlaying || !leaderPlaying) {
     const pending=engine.setRate(deck, rate, {syncInternal: true});
     request.token=engine.startTokens?.get(deck.index);request.controller=engine.transforms?.get(deck.index);
+    const owner=engine.rateOwners?.get(deck);
     await pending;
-    if (!valid()) throw cancelled();
+    if (!valid()||!unchanged[1]()||engine.startTokens?.get(deck.index)!==request.token||engine.rateOwners?.get(deck)!==owner||deck.rate!==rate) throw cancelled();
     return {kind: 'tempo', rate, leader: leader.index};
   }
   const [ownBuffer, leaderBuffer] = await Promise.all([engine.buffer(ownTrack), engine.buffer(leaderTrack)]);

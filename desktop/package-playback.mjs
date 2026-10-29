@@ -12,7 +12,7 @@ const git=args=>execFileSync('git',args,{cwd:root,maxBuffer:150*1024*1024});
 const sha=bytes=>createHash('sha256').update(bytes).digest('hex');
 const sourceCommit=git(['rev-parse','HEAD']).toString().trim();
 const get=file=>git(['show',`${sourceCommit}:${file}`]);
-const version='0.1.120',name='Open Play Playback Test',port=18775,bundle='org.openplay.dj.playback.localtest';
+const version='0.1.121',name='Open Play Playback Test',port=18775,bundle='org.openplay.dj.playback.localtest';
 const profile='Open Play Playback Test',partition='persist:open-play-playback-test';
 await assertBuildRetention(path.join(root,'local-evidence/desktop-builds'),name);
 const stage=await mkdtemp(path.join(tmpdir(),'open-play-playback-'));
@@ -57,7 +57,7 @@ await put('assets/docs/prototype/auto-gain-fixture-reference.json',JSON.stringif
 // only this package's identity/instructions; keep prototype source byte-for-byte.
 await put('assets/docs/prototype/TRY_CURRENT_DESKTOP.md',`# Core desktop test ${version}
 
-Current core batch keeps Pitch Play callbacks in place and scopes Pitch Play range/simulated deck-mode schema changes to the affected deck. Three focused source cases are recorded; native/audio/listening acceptance is separate. Prior Slicer/Key Sync/Flip/jog/Load repairs and all controls/layouts/library previews remain included.
+Current core batch retires hidden C/D Pitch holds before normal Play, refreshes held-Slicer Pause feedback in place, and rejects obsolete Simple tempo-only completion after newer playback/tempo changes. Three focused RED/GREEN source checks are recorded; relevant native/audio/listening acceptance remains separate. All controls/layouts/library previews and prior repairs remain included. Goal active; audio muted; controller/listening deferred.
 
 CORE-FIX-60: bounded, memory-only recent Play-command diagnostics are available in Settings → Advanced → System diagnostics and its existing export. This is instrumentation, not a startup repair; preserve the next actual event context before attributing a cause.
 

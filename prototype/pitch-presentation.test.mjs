@@ -48,3 +48,29 @@ test('actual Pitch Play callbacks retain controls through cue selection, hold, r
  state.deckCount=4;scope.renderedDeckShape='Horizontal/4/Smart Sync';d.tab='Pitch';missing=true;update(d);assert.equal(rebuilds,2,'Missing Pitch structure requires fallback');missing=false;
  state.layout='Vertical';update(d);assert.equal(rebuilds,3,'Layout change requires fallback');
 });
+
+test('deck-count reduction retires held Pitch Play before the next normal Play',async()=>{
+ const decks=Array.from({length:4},(_,index)=>({index,track:{id:`demo-${index}`,cues:[{position:2}],plays:0},playing:index<2,processing:false,position:index,rate:1,tab:'Pitch'}));
+ const state={decks,deckCount:4,focus:3,settings:{},history:[],prepare:[]},selector={},starts=[],tokens=new Map();
+ const engine={pause(d){d.playing=false;d.processing=false;tokens.set(d.index,(tokens.get(d.index)||0)+1);},async start(d){starts.push(d.index);tokens.set(d.index,(tokens.get(d.index)||0)+1);d.playing=true;},clearDeckScratchCache(){},beginSlip(){},async endSlip(){}};
+ const pitchPlay=createPitchPlay({engine}),playRequests=new WeakMap(),autoplayRequests=new WeakMap();
+ const scope={state,engine,pitchPlay,playRequests,autoplayRequests,$:()=>selector,
+  cancelPendingPlay:d=>{playRequests.delete(d);autoplayRequests.delete(d);d.playQueued=false;},
+  cueHolds:{cancelDeck(){},latch:()=>false},instantDouble:{pending:()=>false},slicer:{cancelDeck(){}},stemSlipControls:{cancelDeck(){}},
+  playbackIntents:{record(){}},syncMaster:{started(){}},smartSync:{reconcile(){},async start(){return false;},played(){},paused(){}},
+  renderDecks(){},renderTracks(){},refreshTransportControls(){},persist(){},notify:m=>assert.fail(m),
+ };
+ const count=source.slice(source.indexOf('$("#deck-count").onchange'),source.indexOf('$("#day").onclick'));
+ const play=source.slice(source.indexOf('async function play('),source.indexOf('\nfunction deckQuantize('));
+ vm.runInNewContext(count+'\n'+play+'\nglobalThis.manualPlay=play;',scope);
+ const d=decks[3];
+ try{
+  assert.equal(await pitchPlay.press('held-D-pad',d,1),true);assert.equal(d.playing,true);assert.deepEqual(starts,[3]);
+  const token=tokens.get(3);selector.onchange({target:{value:'2'}});
+  assert.equal(d.playing,false);assert(tokens.get(3)>token,'Actual pause generation changed');assert(decks.slice(0,2).every(d=>d.playing));
+  selector.onchange({target:{value:'4'}});await scope.manualPlay(d,{origin:'button'});
+  assert.equal(d.playing,true,'Old hidden Pitch owner consumed normal Play');assert.deepEqual(starts,[3,3]);
+  await pitchPlay.release('held-D-pad');assert.equal(d.playing,true,'Old pad release must not stop the new normal playback');
+  assert(decks.slice(0,2).every(d=>d.playing));
+ }finally{await pitchPlay.release('held-D-pad');decks.forEach(d=>engine.pause(d));}
+});

@@ -5,6 +5,8 @@ import vm from 'node:vm';
 import {refreshTransportControls} from './transport-presentation.js';
 import {createStemSlipControls} from './stem-slip-ui.js';
 import {createPlaybackIntents} from './playback-intents.js';
+import {createSlicer} from './slicer.js';
+import {refreshSlicerControls} from './slicer-presentation.js';
 const source=readFileSync(new URL('./app.js',import.meta.url),'utf8');
 const playSource=source.slice(source.indexOf('async function play('),source.indexOf('\nfunction deckQuantize'));
 const prepared=()=>new Promise(resolve=>setImmediate(resolve));
@@ -51,9 +53,31 @@ test('failed playback clears queued presentation while preserving stopped contro
 test('Cue/Pitch Play latch refreshes existing controls without starting or rebuilding',async()=>{
  const f=fixture({latch:true});await f.play();assert.equal(f.calls.starts,0);assert.equal(f.calls.decks,0);assert.equal(f.calls.refresh,1);
 });
-test('stopping a held Slicer slice retains structural refresh for restored loop/pad state',async()=>{
- const f=fixture({slice:3});f.d.playing=true;await f.play();
- assert.equal(f.d.slice,null);assert.equal(f.d.loop,false);assert.equal(f.calls.decks,1);
+test('stopping an actual held Slicer refreshes its feedback without replacing unrelated controls',async()=>{
+ const f=fixture(),d=f.d,engine=f.context.engine,ui=controls(f.state),witness={isConnected:true},nodes=new Map();
+ Object.assign(d,{tab:'Slicer',position:4,rate:1,playing:true,loop:false,loopIn:2,loopOut:6});
+ Object.assign(d.track,{bpm:120,grid:0,duration:48,savedLoops:[]});
+ const element=()=>{const attributes=new Map(),classes=new Set();return{value:'',classList:{toggle(k,on){on?classes.add(k):classes.delete(k);}},setAttribute:(k,v)=>attributes.set(k,v),getAttribute:k=>attributes.get(k)};};
+ const pads=Array.from({length:8},(_,index)=>Object.assign(element(),{dataset:{pad:String(index)}}));
+ const root={querySelectorAll:()=>pads,querySelector(selector){if(!nodes.has(selector))nodes.set(selector,element());return nodes.get(selector);}};
+ let transitions=0,feedback=0;
+ Object.assign(engine,{ctx:{currentTime:0},startTokens:new Map([[d.index,1]]),voices:new Map(),init(){},position:deck=>deck.position,voiceClock:deck=>()=>deck.position,
+  async setLoop(deck,on,start,end,options={}){transitions++;engine.startTokens.set(deck.index,engine.startTokens.get(deck.index)+1);Object.assign(deck,{loop:on,loopIn:start,loopOut:end,position:options.positionAt(0),playing:options.playing});},
+  pause(deck){engine.startTokens.set(deck.index,engine.startTokens.get(deck.index)+1);deck.playing=false;deck.processing=false;}});
+ const refresh=deck=>{assert.equal(deck,d);feedback++;assert(refreshSlicerControls(f.state,deck,root));};
+ f.context.slicer=createSlicer({engine,render:refresh,notify:message=>assert.fail(message)});
+ f.context.renderLoopDecks=refresh;
+ f.context.renderDecks=()=>{f.calls.decks++;witness.isConnected=false;ui.root.activeElement=null;};
+ assert.equal(await f.context.slicer.press('held',d,3),true);
+ assert.equal(d.slice,3);assert.equal(pads[3].getAttribute('aria-pressed'),'true');
+ const previousFeedback=feedback,previousNodes=[...ui.nodes.values()],focus=ui.root.activeElement;
+ await f.play();
+ assert.equal(d.playing,false);assert.equal(d.slice,null);assert.equal(d.loop,false);assert.equal(d.loopIn,2);assert.equal(d.loopOut,6);
+ assert.equal(f.calls.decks,0,'Pause must not replace other decks or mixer');assert.equal(feedback,previousFeedback+1);
+ assert.equal(pads[3].getAttribute('aria-pressed'),'false');
+ assert(witness.isConnected,'Controlled unrelated-node model survives');assert.equal(ui.root.activeElement,focus);assert.deepEqual([...ui.nodes.values()],previousNodes);
+ const stoppedTransitions=transitions;assert.equal(await f.context.slicer.release('held'),false);
+ assert.equal(transitions,stoppedTransitions);assert.equal(d.playing,false);assert.equal(feedback,previousFeedback+1);
 });
 test('stopping pending Stem Slip preparation clears its stale preparing controls once',async()=>{
  const f=fixture(),listeners=new Map(),previous={document:globalThis.document,window:globalThis.window};

@@ -2,6 +2,12 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {AudioEngine} from './engine.js';
 import {synchronizeSimple} from './sync.js';
+import {readFileSync} from 'node:fs';
+import vm from 'node:vm';
+import {createSmartSync} from './smart-sync.js';
+import {createSyncMaster} from './sync-master.js';
+import {createSyncTempoRequests} from './sync-tempo-requests.js';
+import {createSlicer} from './slicer.js';
 
 // Actual Simple Sync, Seek/rate/start ownership and transient analysis, with
 // controlled buffer/graph/clock endpoints. No native/PCM/listening acceptance.
@@ -75,4 +81,37 @@ test('grid metadata edited inside the owned engine start cannot commit old Simpl
  Object.assign(f.deck.track,{bpm:100,grid:.2,metadataRevision:1});releaseResume();await rejected;
  assert.equal(f.engine.voices.get(1),old);assert.equal(f.deck.rate,1);assert.equal(f.starts.length,0);
  assert.equal(f.deck.playing,true);assert.equal(f.deck.processing,false);assert.equal(f.engine.transforms.size,0);
+});
+
+test('obsolete tempo-only Simple completion cannot engage a newer unmatched Play',async t=>{
+ const f=fixture(),{engine,deck,leader}=f;
+ const state={decks:[leader,deck],focus:1,settings:{'Sync Mode':'Simple Sync','Snap to Beatgrid':true},history:[],prepare:[]};
+ Object.assign(deck,{sync:false,syncRole:null,syncState:'off'});deck.track.plays=0;
+ Object.assign(leader,{playing:false,sync:false,syncRole:null,syncState:'off'});engine.voices.delete(0);
+ const syncMaster=createSyncMaster({decks:()=>state.decks});syncMaster.select(leader);
+ const smartSync=createSmartSync({engine,state}),slicer=createSlicer({engine}),notices=[];
+ const scope={state,engine,synchronizeSimple,smartSync,syncMaster,slicer,tempoSliders:{cancel(){}},
+  playbackIntents:{record(){}},autoplayRequests:new WeakMap(),playRequests:new WeakMap(),pitchPlay:{latch:()=>false},
+  cueHolds:{latch:()=>false,cancelDeck(){}},instantDouble:{pending:()=>false,cancelDeck(){}},stemSlipControls:{cancelDeck(){}},
+  renderTracks(){},refreshTransportControls(){},persist(){},notify:message=>notices.push(message)};
+ const source=readFileSync(new URL('./app.js',import.meta.url),'utf8');
+ const cut=(from,to)=>source.slice(source.indexOf(from),source.indexOf(to,source.indexOf(from)));
+ vm.createContext(scope);vm.runInContext(cut('function cancelPendingPlay(','\nconst faderStarts=')+'\n'+
+  cut('async function play(','\nfunction deckQuantize')+'\n'+cut('async function deckAction(','\nlet importTail='),scope);
+ engine.onRateRequest=createSyncTempoRequests({engine,state,smartSync,slicer,participants:()=>[],master:syncMaster.master});
+ f.release();let release,calls=0;engine.applyChannelFX=()=>++calls===1?new Promise(resolve=>release=resolve):Promise.resolve();
+ t.after(()=>{release?.();engine.pause(deck);engine.pause(leader);assert.equal(engine.voices.size,0);assert.equal(engine.transforms.size,0);});
+ const pending=scope.deckAction('sync',1,{},{}).then(value=>({value}),error=>({error}));
+ assert.equal(typeof release,'function');assert.equal(deck.rate,1.05);
+ await scope.deckAction('play',1,{},{});await scope.deckAction('play',1,{},{});await engine.setRate(deck,1.1);
+ const voice=engine.voices.get(1),token=engine.startTokens.get(1);assert.equal(deck.playing,true);assert.equal(deck.sync,false);
+ release();const result=await pending;
+ assert.equal(result.error?.name,'AbortError','An obsolete126BPM match must not mark newer132BPM playback synced');
+ assert.equal(deck.sync,false);assert.equal(deck.syncRole,null);assert.equal(leader.sync,false);assert.equal(notices.length,0);
+ assert.equal(engine.voices.get(1),voice);assert.equal(engine.startTokens.get(1),token);assert.equal(deck.playing,true);assert.equal(deck.rate,1.1);
+ // A current tempo-only request still commits its own rate-owner transition.
+ await scope.deckAction('sync',1,{},{});
+ assert.equal(deck.rate,1.05);assert.equal(deck.sync,true);assert.equal(deck.syncRole,'secondary');
+ assert.equal(leader.sync,true);assert.equal(leader.syncRole,'primary');assert.equal(notices.length,1);
+ assert.equal(engine.voices.get(1),voice);assert.equal(engine.startTokens.get(1),token);
 });

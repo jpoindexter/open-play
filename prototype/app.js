@@ -760,7 +760,7 @@ async function play(d, input = {}) {
     smartSync.reconcile();refreshTransportControls(state);
     return;
   }
-  let structuralRefresh=false;
+  let structuralRefresh=false,sliceRefresh=false;
   const pending=playRequests.get(d);
   if(pending&&pending.track!==d.track)cancelPendingPlay(d);
   if (d.playing || d.processing || playRequests.has(d) || instantDouble.pending(d)) {
@@ -768,7 +768,7 @@ async function play(d, input = {}) {
     cueHolds.cancelDeck(d);
     const heldSlice=d.slice!==null&&d.slice!==undefined;
     slicer.cancelDeck(d);
-    structuralRefresh=(heldSlice&&d.slice==null)||!!d.stemSlipPending;
+    sliceRefresh=heldSlice&&d.slice==null;structuralRefresh=!!d.stemSlipPending;
     stemSlipControls.cancelDeck(d);
     engine.pause(d);
     smartSync.paused(d);
@@ -800,6 +800,7 @@ async function play(d, input = {}) {
   }
   persist();
   if(structuralRefresh)renderDecks();
+  else if(sliceRefresh)renderLoopDecks(d);
   else{smartSync.reconcile();refreshTransportControls(state);}
   renderTracks();
 }
@@ -1771,7 +1772,7 @@ $("#deck-count").onchange = (e) => {
   state.deckCount = Number(e.target.value);
   state.focus = Math.min(state.focus, state.deckCount - 1);
   if (state.deckCount === 2)
-    state.decks.slice(2).forEach((d) => {cancelPendingPlay(d);cueHolds.cancelDeck(d);engine.pause(d);engine.clearDeckScratchCache(d.index);});
+    state.decks.slice(2).forEach((d) => {cancelPendingPlay(d);cueHolds.cancelDeck(d);pitchPlay.cancelDeck(d);engine.pause(d);engine.clearDeckScratchCache(d.index);});
   renderDecks();
 };
 $("#day").onclick = () => document.body.classList.toggle("day");
