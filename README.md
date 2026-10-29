@@ -2,7 +2,11 @@
 
 [Help & manual](https://open-play-help.vercel.app) · [First-mix guide](docs/beta/QUICK_START.md) · [Known issues](docs/beta/KNOWN_ISSUES.md) · [Beta plan](docs/delivery/PUBLIC_BETA_PLAN.md)
 
-## Current core status — 28 October2026
+## Current core status —29 October2026
+
+Private desktop **0.1.115** is current/default, with Key Sync feedback and Flip playback-safety source repairs. Archive inspection5/5 and actual native paused-session recovery observed;16tracks and waveform previews retained. Changed-path native behavior, listening, intermittent pop/stall and hardware gates remain open. [Current delivery and limits](docs/prototype/CORE_CONTROL_115_NATIVE_2026-10-29.json). No full-core/public-beta claim.
+
+## Historical0.1.94 checkpoint
 
 **Current/default0.1.94**, sourceaa07a04: both CORE-FIX-44queue layers included, archive/source/controlled-host5/5. Actual native settled startup restores Constant Change/DJ W!LD paused50.716/62.715s,16tracks,2Play/tempo,6EQ and12materialized library previews; master−10.04344/silent UI meter.256-file120945306Bclosed92profile hash/mtime revalidated before launch. No main Play/Sync/REC Start or profile restore. [Native delivery and limits](docs/prototype/DESKTOP_CORE_094_2026-10-28.md).
 

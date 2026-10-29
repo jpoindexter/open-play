@@ -1,4 +1,10 @@
-## Current core follow-through —29 October2026 /0.1.114
+## Current core follow-through —29 October2026 /0.1.115
+
+Current/default115, source10a758a, includes Key Sync in-place feedback and Flip Stop/Load/loop-wrap repairs. Eight focused source checks were already recorded; not rerun for delivery. Immutable archive/source/controlled-host inspection5/5. Actual settled native startup restores Constant Change/DJ W!LD paused30.097/34.086,16tracks/12materialized previews,2Play/tempo/6EQ and silent master meter. No main Play/Sync/RECstart or profile restore. [Delivery and limits](docs/prototype/CORE_CONTROL_115_NATIVE_2026-10-29.json).
+
+Closed114profile259files/120230511B copied/hash+mtime equal. Current/playback/named115starters syntax checked; exact app executed separately. Verified inactive114and own packaging cache removed; only115bundle retained. Music, recordings, recovery profiles and unrelated draft preserved. Key Sync/Flip native changed-path acceptance, owner listening/focus and Hercules stay OPEN. Owner explicitly chose muted work only. Prior manual/jog/EQ/Cue/stop and109restart acceptance retained; genericpop/stall/startup60 not closed.
+
+## Prior114 core follow-through —29 October2026
 
 Current/default114/source2f5b9e1 has unchanged product audio/transport/layout logic from113. ONE newly executed native failure case advances existingCORE-FIX-39: old live-keyUp held as controlled no-delegate rejection; actual row/Load/Play and real newlive keyUp first commit+1, then handledoldError leaves newtrack/voice/key+1/actualadaptersemitone1/token4playing.213postLoadcontrols retained,8/8preview sources match; allstopped/muted, bothadaptersdisposed/timerscleared/PCM0/methodrestored and4sourcehashesstable. New82-line diagnostic only; no testsuite/ordinaryclean rerun. [Native receipt](docs/prototype/LIVE_KEY_114_NATIVE_2026-10-29.json).
 

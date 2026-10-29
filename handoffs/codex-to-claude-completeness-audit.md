@@ -1,3 +1,11 @@
+## Current core delivery —29 October2026 /0.1.115
+
+Current/default115, source10a758a, includes Key Sync in-place feedback and Flip Stop/Load/loop-wrap repairs. Eight focused source checks were already recorded; not rerun for delivery. Immutable archive/source/controlled-host inspection5/5. Actual settled native startup restores Constant Change/DJ W!LD paused30.097/34.086,16tracks/12materialized previews,2Play/tempo/6EQ and silent master meter. No main Play/Sync/RECstart or profile restore. [Delivery and limits](../docs/prototype/CORE_CONTROL_115_NATIVE_2026-10-29.json).
+
+Closed114profile259files/120230511B copied/hash+mtime equal. Current/playback/named115starters syntax checked; exact app executed separately. Verified inactive114and own packaging cache removed; only115bundle retained. Music, recordings, recovery profiles and unrelated draft preserved. Key Sync/Flip native changed-path acceptance, owner listening/focus and Hercules stay OPEN. Owner explicitly chose muted work only. Prior manual/jog/EQ/Cue/stop and109restart acceptance retained; genericpop/stall/startup60 not closed.
+
+--- Historical handoff and original prompt preserved below ---
+
 ## Current status — core audit and priorities, 21 October 2026
 
 Current desktop test remains **0.1.37 / source ce5c124**. Jason accepted Jewel Kid/Prism as “Aligned and clean; easier to follow.” Preserve the chosen rekordbox layout, all controls/layout variants and library waveform previews. Existing accepted playback, fader, filter, tempo and jog evidence is retained; no new runtime/listening claim is made by this audit.
