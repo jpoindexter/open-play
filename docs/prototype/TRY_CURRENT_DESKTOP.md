@@ -4,7 +4,7 @@
 
 Main114paused30.097/34.086,16tracks/12materializedpreviews/corecontrols. Closed113profile259files/120230371B copied/hash+mtime equal. Exactbundleexecuted; current/playback/named114launchers syntaxchecked separately. Only114bundle; inactive113/cache removed. All originalmedia/captures/recoveryprofiles/unrelateddrafts retained. Manualmix/jog/A-BEQ/Cue/cleanStop and109restarttransition are alreadyaccepted at their scopes. One ownerchanged-path listening question is pending; no answer inferred. Herculeslater. Generic pops/stalls/startup60 remainOPEN; no full-core/public-beta claim.
 
-Native jog/focus attempt: H bend captured, but the required Window-menu focus transition was rejected as offscreen. Focus-loss acceptance remains **unchecked**; no product defect or patch inferred. Checker stopped/exported/closed, physical route reported muted, main session unchanged. [Attempt and exact PCM limits](JOG_FOCUS_114_ATTEMPT_2026-10-29.json). No new build or suite rerun.
+Native jog/focus attempts: the Window-menu action was offscreen; a separate existing Settings-window click returned only after the H hold ended. Neither establishes focus loss during a held jog. This single check now awaits an owner-assisted window switch and remains **unchecked**. No product defect or patch inferred. Checker stopped/exported/closed, final physical route reported muted, main session unchanged. [Attempts and exact PCM limits](JOG_FOCUS_114_ATTEMPT_2026-10-29.json). No new build or suite rerun.
 
 --- Historical checkpoints below; old current/default references are superseded ---
 
