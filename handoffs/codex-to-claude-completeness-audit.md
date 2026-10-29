@@ -1,3 +1,11 @@
+## Current core delivery —29 October2026 /0.1.117
+
+Current/default117, source868284a, includes Pitch Play in-place control feedback and deck-local Pitch range/transport-mode redraws. Three focused source cases were already recorded; not rerun for delivery. Archive inspection5/5 and private ad-hoc seal verified. Actual settled native startup restores Constant Change/DJ W!LD paused30.097/34.086,16tracks/12materialized previews,2Play/tempo/6EQ and silent master meter. No mainPlay/Sync/RECstart or profile restore. [Delivery and limits](../docs/prototype/PITCH_CONTROL_117_NATIVE_2026-10-29.json).
+
+Closed116profile261files/120231270B APFS-copy/hash+mtime equal. Current/playback/named117starters syntax checked; exact app executed separately. Verified inactive116and own packaging cache removed (~939MB logical bytes); only117bundle. Music, recordings, recovery profiles and unrelated draft retained. Native held/playing control-retention, owner listening/focus and Hercules remainOPEN. Prior53/109 workflows,115pausedKeySyncUI and116pausedSlicerUI retain their scopes; genericpop/stall/startup60 unresolved.
+
+--- Historical handoff and original prompt preserved below ---
+
 ## Current core delivery —29 October2026 /0.1.116
 
 Current/default116, sourceea54bad, includes Slicer in-place feedback and shared Key Sync completion ownership. Ten focused source cases and controlled-WASM RED/GREEN were already recorded; not rerun for delivery. Archive/source/controlled-host inspection5/5 and private ad-hoc seal verified. Actual settled native startup restores Constant Change/DJ W!LD paused30.097/34.086,16tracks/12materialized previews,2Play/tempo/6EQ and silent master meter. No mainPlay/Sync/RECstart or profile restore. [Delivery and limits](../docs/prototype/CORE_SLICER_KEY_116_NATIVE_2026-10-29.json).

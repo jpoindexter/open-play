@@ -1,0 +1,73 @@
+{
+  "date": "2026-10-29",
+  "version": "0.1.117",
+  "sourceCommit": "868284a795fbb1496f95dbb3cda85e1bd3d231d1",
+  "asarSHA256": "d9bfbcf1193fd84ddd6099acf2c6c0efdc320452fbcd4c63b335ef67fa2e1e4f",
+  "sourceRepairEvidence": [
+    "PITCH_CONTROL_RETENTION_2026-10-29.json",
+    "DECK_SELECTOR_SCOPE_2026-10-29.json"
+  ],
+  "packageInspection": "desktop-0.1.117-playback-pitch-controls.json",
+  "adHocSeal": {
+    "command": "codesign --verify --deep --strict <exact117bundle>",
+    "exitCode": 0,
+    "scope": "Private ad-hoc resource seal, not Developer ID/notarization/public distribution proof."
+  },
+  "nativeStartup": {
+    "executed": true,
+    "route": "Exact versioned bundle through CUA; persistent playback-test session",
+    "pausedPositionsSeconds": [
+      30.097,
+      34.086
+    ],
+    "tracks": 16,
+    "materializedPreviewImages": 12,
+    "playButtons": 2,
+    "tempoFaders": 2,
+    "eqControls": 6,
+    "masterUI": "-10dB setting, minus-infinity meter",
+    "mainPlaySyncRECStartInvoked": false,
+    "profileRestoredOverNewerState": false,
+    "evidenceSHA256": {
+      "main117-settled.txt": "955e058d07e1e4f6b5de1050df724603fc7b221f2871f351bc161e5c82135620",
+      "main117.png": "29f7473095869fe1a6c219d0a295f3163b87a44ff10a769db8581a157b498b04"
+    }
+  },
+  "closedProfileRecovery": {
+    "closedProcessVerified": true,
+    "files": 261,
+    "bytes": 120231270,
+    "hashAndMtimeEqual": true,
+    "manifestSHA256": "94e862989cc493babcecf9698a1f93fd16aefd1ad47213aa5eaa87b7f408e8b8",
+    "recoveryCopy": "local-evidence/core-native-117-2026-10-29/profile-116-before-117",
+    "method": "APFS copy-on-write cp -cR; originals retained"
+  },
+  "cleanup": {
+    "at": "2026-10-29T20:07:25.266202+00:00",
+    "retiredVersion": "0.1.116",
+    "sha256Verified": true,
+    "inactiveVerified": true,
+    "logicalBytes": 808528987,
+    "ownPackagingCacheBytes": 130738603,
+    "cacheStatus": "removed own packaging download",
+    "retainedCurrent": "0.1.117",
+    "onlyOneBundle": true,
+    "protected": "Original music, recordings, recovery profiles and unrelated drafts retained",
+    "launcherSyntaxChecked": 3,
+    "launchersExecuted": false
+  },
+  "launchers": {
+    "currentDefault": "0.1.117",
+    "syntaxChecked": 3,
+    "exactAppExecuted": true,
+    "launcherScriptsExecuted": false
+  },
+  "limits": [
+    "Native paused recovery observed; changed Pitch Play held/playing controls and deck-local selector DOM retention have source evidence only.",
+    "Three unique source cases in this batch; already recorded, not rerun for packaging. No broad suite/new diagnostic.",
+    "No music, human listening, Sync-pop-free, waveform latency, controller or physical socket acceptance.",
+    "Prior53 manual/jog/A-B EQ/Cue/stop and109 restart/transition retain scope;115 paused Key Sync UI and116 paused Slicer UI retain their versioned scopes.",
+    "Original unexpected106 startup and generic intermittent pops/stalls remain open."
+  ],
+  "next": "Relevant changed native held/playing acceptance through existing isolated tools where feasible; listening/focus and Hercules deferred. Investigate actual incidents, not broad clean-case repetitions."
+}

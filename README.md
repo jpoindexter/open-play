@@ -4,7 +4,7 @@
 
 ## Current core status —29 October2026
 
-Private desktop **0.1.116** is current/default, including Slicer feedback and Key Sync ownership repairs. Archive inspection5/5, ad-hoc seal and actual native paused-session recovery observed;16tracks and waveform previews retained. Relevant native changed-path behavior, listening, intermittent pop/stall and hardware gates remain open. [Current delivery and limits](docs/prototype/CORE_SLICER_KEY_116_NATIVE_2026-10-29.json). No full-core/public-beta claim.
+Private desktop **0.1.117** is current/default (source868284a), delivering Pitch Play control-retention and deck-local range/mode selector repairs. Three focused source cases were recorded; no broad rerun. Archive inspection5/5, ad-hoc seal and actual native paused recovery observed:16tracks,12visible library previews,2Play/tempo and6EQ controls. Relevant held/playing native acceptance, listening, intermittent pop/stall and hardware gates remain open. [Delivery and limits](docs/prototype/PITCH_CONTROL_117_NATIVE_2026-10-29.json). No full-core/public-beta claim.
 
 ## Historical0.1.94 checkpoint
 
