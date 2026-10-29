@@ -1,5 +1,7 @@
 # Current private desktop —0.1.116
 
+**Source-only follow-through:** Pitch Play callbacks now refresh existing controls/shared cue feedback instead of rebuilding all decks/mixer. [Focused evidence](PITCH_CONTROL_RETENTION_2026-10-29.json). Not yet installed in116. Paused native116Slicer domain-loop ON/OFF feedback is now recorded in the delivery receipt; held/four-deck/latency claims remain open.
+
 Current/default116, sourceea54bad, includes Slicer in-place feedback and shared Key Sync completion ownership. Ten focused source cases and controlled-WASM RED/GREEN were already recorded; not rerun for delivery. Archive/source/controlled-host inspection5/5 and private ad-hoc seal verified. Actual settled native startup restores Constant Change/DJ W!LD paused30.097/34.086,16tracks/12materialized previews,2Play/tempo/6EQ and silent master meter. No mainPlay/Sync/RECstart or profile restore. [Delivery and limits](CORE_SLICER_KEY_116_NATIVE_2026-10-29.json).
 
 Closed115profile259files/120230651B APFS-copy/hash+mtime equal. Current/playback/named116starters syntax checked; exact app executed separately. Verified inactive115and own packaging cache removed; only116bundle. Music, recordings, recovery profiles and unrelated draft retained. Relevant native Slicer/KeySync cancellation/held checks, owner listening/focus and Hercules remainOPEN. Prior accepted ordinary workflows retain their scopes; genericpop/stall/startup60 unresolved.

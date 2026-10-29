@@ -1,0 +1,29 @@
+{
+  "trello": "https://trello.com/c/PpxsBTOV",
+  "baseline": "92a0e04",
+  "red": "red.txt",
+  "redAssertion": "Pitch cue selection globally replaces controls:1!==0",
+  "green": "green.txt",
+  "greenTests": {
+    "pass": 1,
+    "fail": 0
+  },
+  "sourceAfter": {
+    "prototype/app.js": "b81d231c7e78bdb6981357496fb14745ca6a43479fc910df8120c777724cd001",
+    "prototype/pitchplay.js": "881bab6da5c5664f007a84d2a836a71bb0f95da7fd4aff2d6472ce327f95c6c7",
+    "prototype/pitch-presentation.js": "b0ac90653576ad6ad80ee6aa6928f7b3132796a20d43543dc0f063fff32c3e3f",
+    "prototype/pitch-presentation.test.mjs": "465db8893aa5ed63c5a9db3909b438071b977e2b3a8bf747f692d8f272bb33c5"
+  },
+  "limits": [
+    "Actual createPitchPlay and extracted current app callback plus real feedback helpers, with controlled DOM/transport.",
+    "No browser/native/control pointer geometry, actual audio, PCM, DSP, music, listening, hardware, stall duration or pop causation proof."
+  ],
+  "scope": "Three render arguments, app import/callback wiring,10line feedback helper,one50line focused regression. No cancellation/error/transport logic changed. No broad suite or unmuted integration.",
+  "delivery": "Source-only; current desktop116/profile/session unchanged. New pitch-presentation.js must be added to next package explicit module declarations.",
+  "artifactSHA256": {
+    "red.txt": "ac91b1a0306144449739b622c8653270f1f70954eb500a744ce2b6345b1db74e",
+    "green.txt": "b565d4bdcac34c6840c8dd2768694dde36818771576a3ce20a20856d2e7aeef8",
+    "source-before.sha256": "bafc83b63eed92f63dc726411e891cdd7b0ea716360f63fe85569975171a1322"
+  },
+  "next": "Package with the next bounded repair batch; native changed-path and relevant listening remain open. No new build for this single source slice."
+}

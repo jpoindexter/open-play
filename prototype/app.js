@@ -14,6 +14,7 @@ import {createInstantDouble} from './instant-double.js';
 import {createPlaybackIntents} from './playback-intents.js';
 import {refreshLoopControls} from './loop-presentation.js';
 import {refreshSlicerControls} from './slicer-presentation.js';
+import {refreshPitchControls} from './pitch-presentation.js';
 import {createManualLoops} from './manual-loops.js';
 import {createLoopPads} from './loop-pads.js';
 import {createJogBend} from './jog-bend.js';
@@ -1452,7 +1453,13 @@ function loopHoldTarget(el){
 const loopOperation=p=>void p.catch(error=>notify(error.message));
 api.loopPads=loopPads;
 const slicer = createSlicer({ engine, render: renderLoopDecks, notify });
-const pitchPlay = createPitchPlay({engine,render:renderDecks,persist,notify,quantized});
+function refreshPitchDecks(d){
+ if(!d||state.decks[d.index]!==d)return;
+ if(renderedDeckShape!==`${state.layout}/${state.deckCount}/${state.settings['Sync Mode']}`||!refreshPitchControls(state,d))return renderDecks();
+ if(d.track){refreshAnalysisControls(state,d.track);refreshCueControls(state,d.track,time);}
+ refreshDeckSwitches(state,d.index);refreshLoopDecks(d);
+}
+const pitchPlay = createPitchPlay({engine,render:refreshPitchDecks,persist,notify,quantized});
 api.pitchPlay=pitchPlay;
 engine.onPrepareSampleGain=track=>trackGain.refresh(track);
 const panels = createPanels(api);
