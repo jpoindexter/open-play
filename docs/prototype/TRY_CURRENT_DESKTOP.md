@@ -1,10 +1,12 @@
-# Current private desktop0.1.105
+# Desktop status —106 running, startup investigation open
 
-Current/playback/named105launchers target source80a38ea. Exact app open, stopped HorizontalCompact with Constant Change114.836s and DJ W!LD62.715s; both armed132BPM. Bpitch+10%now moves capdown and actual reset0was observed; direct headerH/Vshortcut toggles both ways. NoPlay/RECstart in105.16librarytracks and12startup→15materialized previews retained.
+106/source e89a60f is open and stopped at A114.836/B112.561. Its bounded jog/Sync repair passed one isolated generated-audio/muted native graph workflow; old load/Cue cases were not rerun. [Native result and limits](JOG_SYNC_RELEASE_NATIVE_106_2026-10-29.json).
 
-[Native delivery](desktop-0.1.105-core-native.json) · [Package inspection](desktop-0.1.105-playback-gui-pitch.json). Closed104profile259files/120964483Bcopy hash/mtime matched;105startupverified beforeinactive104bundlecleanup. Only105bundle remains. Original104listeningcapture preserved privately; do not overwrite later profile edits.
+Do not treat this as clean startup acceptance. B unexpectedly started during106 launch; the agent had not requested Play, and the owner denied pressing Play. Its earlier 62.715 checkpoint remains in the verified closed105profile copy. MIDI log was empty; input origin remains unknown. [Incident](STARTUP_PLAYBACK_INCIDENT_106_2026-10-29.json). Next: bounded Play-intent trace before another cold launch; no speculative audio patch or broad tests.
 
-CORE-FIX-58 boundedGUIcriterion satisfied. Prior104ownerpaused-incomingSync no-pop feedback and53ordinarymanual/jog/EQ/Cue/stop acceptance retain their scope. Genericpops/stalls,both-playingtransition,changednativefailure,physicalHercules/headphones and public-release gates remainopen. No fullcore/parityclaim or broadretests.
+Current/default launchers still name105 as rollback while106investigation is open. Do not launch duplicate processes or overwrite later user edits; the app has a shared-profile single-instance lock. Both105 and 106 bundles are intentionally retained, no other desktop bundles. Original recording and private recovery copies are preserved.
+
+All normal controls/layouts/library previews remain. Generic pops/stalls, current musical/renderer-failure acceptance, Hercules/headphones and public-release gates remain open. Earlier 105fader/H-V and53 ordinary mixing acceptance retain their scope.
 
 --- Historical guides below; old launch targets and blockers are not current ---
 

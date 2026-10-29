@@ -1,0 +1,98 @@
+{
+  "date": "2026-10-29",
+  "version": "0.1.106",
+  "sourceCommit": "e89a60fa1c78136b74d66ec0b92dce1acbdc3194",
+  "asarSHA256": "6f0340b1f33edf060e6e3cd454896e9b92f1c551ad89802f21bc45f513495953",
+  "status": "CORE-FIX-59 bounded native graph criterion passed; separate CORE-FIX-60 startup incident remains unresolved",
+  "execution": "Checks \u2192 Core transport ownership \u2192 Run muted jog/Sync release check; once only, with synthetic H events through the installed handler; old load/Cue workflow not run. Volatile permission-denied window closed afterward.",
+  "report": {
+    "startedAt": "2026-10-29T13:40:43.280Z",
+    "completed": true,
+    "cases": [
+      {
+        "outcome": "failure",
+        "heldBendRate": 1.2480000257492065,
+        "released": {
+          "position": 1.0655680022239624,
+          "time": 24.72533333333333,
+          "rate": 1.2000000476837158
+        },
+        "participantCalls": 1,
+        "result": {
+          "ok": false,
+          "error": {
+            "name": "Error",
+            "message": "Controlled diagnostic participant rejection"
+          }
+        },
+        "physicalMuted": true,
+        "retainedOldVoiceAndSources": true,
+        "nominalRate": 1.2,
+        "sourceRate": 1.2000000476837158
+      },
+      {
+        "outcome": "success",
+        "heldBendRate": 1.2480000257492065,
+        "released": {
+          "position": 1.0653120023409506,
+          "time": 24.805333333333333,
+          "rate": 1.2000000476837158
+        },
+        "participantCalls": 1,
+        "result": {
+          "ok": true
+        },
+        "physicalMuted": true,
+        "scheduledWhen": 24.921333333333333,
+        "scheduledPosition": 1.2045120078722613,
+        "expectedPosition": 1.2045120078722613,
+        "preBoundary": {
+          "observed": true,
+          "before": 24.826666666666668,
+          "after": 24.826666666666668,
+          "position": 1.0909120033582047,
+          "expectedBefore": 1.0909120033582047,
+          "expectedAfter": 1.0909120033582047
+        }
+      }
+    ],
+    "scope": "Actual packaged native workspace/AudioContext graph via engine.start, actual keyboard H and installed renderer blur cleanup; generated AudioBuffer only. Gated diagnostic Sync participant controls failure/readiness; no real renderer failure, PCM, music, OS focus, physical output or controller proof.",
+    "sourceBefore": {
+      "engine.js": "d129f0293938543410daaf7239895fcc2eb284dcdb2f5c9ef1a8fe8f118120ed",
+      "jog-bend.js": "d4afec10d14ee78ddc93f03e0fe88847ed3584e20a8c05e3a2a45f65cdbdc858",
+      "app.js": "20f756cd4a180386ba328d64ef26db6fb1b4409cbab2d8c8fe75f81a9b2291f9",
+      "jog-sync-release-check.js": "70092eb6402d50bffe6e98ff7cd88d91614dab90a7b6396f24c48330e71b697f"
+    },
+    "allStopped": true,
+    "physicalMuted": true,
+    "sourceAfter": {
+      "engine.js": "d129f0293938543410daaf7239895fcc2eb284dcdb2f5c9ef1a8fe8f118120ed",
+      "jog-bend.js": "d4afec10d14ee78ddc93f03e0fe88847ed3584e20a8c05e3a2a45f65cdbdc858",
+      "app.js": "20f756cd4a180386ba328d64ef26db6fb1b4409cbab2d8c8fe75f81a9b2291f9",
+      "jog-sync-release-check.js": "70092eb6402d50bffe6e98ff7cd88d91614dab90a7b6396f24c48330e71b697f"
+    },
+    "sourceStable": true,
+    "finishedAt": "2026-10-29T13:40:43.608Z"
+  },
+  "rawEvidence": "local-evidence/core-native-106-2026-10-29/",
+  "rawSHA256": "1cc6381edf5089a7fddc38b0a6c127a03fde68d7940d2d286e3cd796098aef92",
+  "axSHA256": "17808607ef48a831c1567f623ee2ca4fd9f5aff16675356fce360d76b4bc9db5",
+  "sourceHashesMatchImmutableCommit": true,
+  "mainAfterCheck": {
+    "pausedPositions": [
+      114.836,
+      112.561
+    ],
+    "masterMeter": "\u2212\u221e UI",
+    "tracks": 16,
+    "unchangedDuringIsolatedCheck": true,
+    "qualification": "B had advanced unexpectedly during earlier startup, then agent paused it; do not claim prelaunch B62.715 was retained."
+  },
+  "scopeLimits": [
+    "Controlled participant rejection, not actual keylock-renderer failure",
+    "Synthetic renderer H/blur, not OS focus or physical controller",
+    "Source parameters and source-time prediction, not PCM continuity/music/listening",
+    "Not clean startup or generic Sync-pop/stall closure"
+  ],
+  "independentEvidenceReview": "Original AX JSON and four module hashes match immutable package/source. Native graph, old-source retention, independent anchor oracle and stopped/muted cleanup checked; main positions match prior confirmed stop. No new UI/test actions during review."
+}

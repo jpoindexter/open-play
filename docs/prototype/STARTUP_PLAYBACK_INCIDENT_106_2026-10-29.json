@@ -1,0 +1,49 @@
+{
+  "date": "2026-10-29",
+  "card": "https://trello.com/c/Y2hYnQnS",
+  "version": "0.1.106",
+  "sourceCommit": "e89a60fa1c78136b74d66ec0b92dce1acbdc3194",
+  "status": "Observed; Play request origin unknown",
+  "beforeLaunch": {
+    "pausedPositions": [
+      114.836,
+      62.715
+    ],
+    "recordingIdle": true,
+    "profileBackup": {
+      "closedAppConfirmed": true,
+      "files": 260,
+      "bytes": 120604299,
+      "originalHashMtimeUnchanged": true,
+      "copyMatches": true,
+      "backup": "local-evidence/core-native-106-2026-10-29/profile-105-before-106",
+      "canonicalManifestSHA256": "98d92352125fcf91174f4deaeef3bb0f51a26827ae8d2dd398cad43749b1d3bb",
+      "hashConvention": "SHA256 UTF8 json.dumps(records,sort_keys=True) Python default separators"
+    }
+  },
+  "observed": [
+    "Initial CUA getApp tree showed deckBPreparingPlayback (tool transcript, not a separately saved AX file)",
+    "Saved settled startup AX: B80.028/master\u221223.114dB",
+    "No agent Play action before that observation; owner explicitly denied pressing Play",
+    "Agent pausedB112.561; confirmed stopped AX/master\u2212\u221e/screenshot",
+    "MIDIeditor: No inputs connected; No messages received; no connection/permissions changed"
+  ],
+  "sourceReview": "Restore resets playing/queue and loads references/positions only; freshrequestmaps/Autoplayoff. Decode/contextresume/newjogcode do not independently request Play. Onlynormalapp.playsetsplayQueued; actualinputorigin notknown. No reachablepre-readyeventyieldproved.",
+  "notProven": [
+    "Self-starting restoration",
+    "Tool activation vs keyboard/pointer origin",
+    "Relation to new jog repair or prior pops"
+  ],
+  "currentState": "106 running stopped A114.836/B112.561.105default/rollback retained; no clean-startup promotion or old105cleanup. OriginalB62.715checkpoint remains in closedprofilecopy, not overwritten.",
+  "next": "Add bounded Play-request origin diagnostics, preserve event context, then one protected cold launch; do not guess an audio/DSP change.",
+  "evidenceHashes": {
+    "before-ax.txt": "b3ca9d7a43e71a1756ea7ade3e0c5e39e8e29bf417008ca5bfa00a7fc03f9c49",
+    "startup-ax.txt": "7dd01e2d6116d7bdff5b3e8bac23873f16c10725db9ff8814e0d0f2a5b62500d",
+    "unexpected-start-stopped-ax.txt": "d6f36cfda87d014fe755fa2656bfd13429dbb9f6b9e8ff93aa06b32ad3916ab2",
+    "confirmed-stopped-ax.txt": "553550471d08203648a1f8cdc228cc9569f96cd0cbea25377fa4df5e50e0bde0",
+    "unexpected-start-after-stop.png": "311b5616f0a934a2b115a9ee6244d3f7ab849351af8cafd9fca9daac4b2aa913",
+    "startup-midi-ax.txt": "954022cb827aec233a280a95b7eaf9ec3e9c2fac9c58bcf2db39c4823cac2f5b",
+    "startup-source-review.md": "dc7ec1eeb48b421bebcaaadd0a6ed47969244c99579f706e26dfc4dd7543260a",
+    "main-after-check-ax.txt": "eb1f91be4e25e649b8f5588483435fe8abf2badaa738e299ee8b131de03eb215"
+  }
+}

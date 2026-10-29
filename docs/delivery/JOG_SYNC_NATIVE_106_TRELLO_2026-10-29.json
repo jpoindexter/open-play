@@ -1,0 +1,44 @@
+{
+  "date": "2026-10-29",
+  "sourceCommit": "e89a60fa1c78136b74d66ec0b92dce1acbdc3194",
+  "cards": 228,
+  "complete": 34,
+  "closed": "CORE-FIX-59 (bounded rate/clock repair)",
+  "newOpen": "CORE-FIX-60 (observed startup incident, cause unknown)",
+  "currentNative": "106 running stopped;105 rollback/default retained",
+  "evidence": [
+    "docs/prototype/JOG_SYNC_RELEASE_NATIVE_106_2026-10-29.json",
+    "docs/prototype/STARTUP_PLAYBACK_INCIDENT_106_2026-10-29.json"
+  ],
+  "readback": [
+    {
+      "id": "ari:cloud:trello::card/workspace/6a8f03e71844a6c1103692dc/6ae34c9ada5154076dedd368",
+      "name": "CORE-FIX-60 — Investigate unexpected playback during 0.1.106 launch",
+      "url": "https://trello.com/c/Y2hYnQnS/228-core-fix-60-investigate-unexpected-playback-during-01106-launch",
+      "complete": false,
+      "current": "## Unexpected startup playback; cause unresolved — 29 October 2026\nBefore launch:105 was stopped at A114.836/B62.715, Recording idle. A closed-profile copy matched260files/120,604,299bytes. Agent launched exact106/e89a60f via CUA getApp; its initial tree already showed B preparing playback. Settled B80.028/master−23.114dB confirmed audio activity. Agent had not requested Play. Owner confirmed: “No—I didn’t press Play.” Agent paused B112.561; later AX/screenshot showed −∞ and stationary timers. B play count rose2→3.\n\nCurrent MIDI editor: no inputs connected and no messages received. No Connect/permission setting changed. Source review: restore saves only track IDs/positions, resets playing/queued flags, creates fresh request maps and starts Autoplay off. Decode/context resume/jog-clock repair do not independently invoke Play. Only normal app.play sets playQueued. A real pre-ready keyboard event window was not found; do not fabricate one with a directly invoked extracted handler.\n\nInput origin—pointer, keyboard, application or tool activation—remains UNKNOWN. Do not label this a confirmed self-starting-restore defect or clean106startup.\n\nAcceptance:\n- [x] Preserve pre-launch, startup and stopped AX; screenshot, profile copy and owner denial.\n- [x] Read live MIDI log and bound source/caller review.\n- [ ] Capture actual Play-request origin on the next occurrence using bounded command diagnostics, not general key logging; reproduce and repair the confirmed cause.\n- [ ] One protected cold start observed stopped with event context.\n\n106 is running stopped at A114.836/B112.561. Its main session stayed stopped during a separate muted generated-audio jog/Sync check.105 bundle/default retained; no original audio or profile overwritten. The earlier B62.715 checkpoint remains in the private backup; do not claim it was retained through this incident.\n\nPrivate evidence: local-evidence/core-native-106-2026-10-29/ (before/startup/stopped/MIDI AX, stop PNG, startup-source-review.md). Public receipt: docs/prototype/STARTUP_PLAYBACK_INCIDENT_106_2026-10-29.json. Related CORE-001 and SYS-002. Separate from completed CORE-FIX-59 and generic Sync-pop causality.\nCodex recommendation gpt-6.1-sol/high; existing Claude alternative subject to availability."
+    },
+    {
+      "id": "ari:cloud:trello::card/workspace/6a8f03e71844a6c1103692dc/6ae343ff02db3645b95ffcfb",
+      "name": "CORE-FIX-59 — Jog release must retain tempo during pending Sync",
+      "url": "https://trello.com/c/T04RKxyX/227-core-fix-59-jog-release-must-retain-tempo-during-pending-sync",
+      "complete": true,
+      "current": "## Executed bounded jog/Sync repair — 29 October 2026\nSource e89a60f, private desktop 0.1.106. The retained audio now returns to its committed tempo when jog release overlaps pending grouped Sync. Captured raw clocks follow the release into a delayed handoff; the clock cell detaches on neutral release so later rate/loop captures stay fresh. Voice/track guards protect replacements and retired snapshots.\n\nOriginal controlled failure: source1.2 → held jog1.248 → pending nominal1.32; release wrongly wrote1.32 to retained audio; rejected preparation restored metadata1.2 but left source1.32. Rate-only repair still had27.36ms successful-handoff error. Complete repair removes both mismatches in the focused source check.\n\nAcceptance:\n- [x] Original failure saved before product edit.\n- [x] Four regression cases plus two affected jog checks pass; no broad suite.\n- [x] Independent source review covers ownership, replacement and clock-cell lifecycle.\n- [x] One native106 isolated workflow executed both controlled participant failure and success on actual AudioContext/source graph, using a synthetic H key event through the installed handler and renderer blur.\n- [x] Failure retains old voice/source, nominal1.2 and AudioParam1.2000000477. Success scheduled/expected position1.2045120079 and pre-boundary1.0909120034 match. Four source hashes match immutable commit before/after; physical output muted; all generated audio stopped and owned checker closed.\n\nCOMPLETE only for this bounded rate/clock ownership defect. Native diagnostic controls group readiness/rejection through a participant; it does NOT prove real keylock-renderer failure recovery, PCM continuity, music, OS focus or physical controller behavior. Keep generic pop/stall and broader listening gates open.\n\nSeparate startup incident CORE-FIX-60 https://trello.com/c/Y2hYnQnS remains unresolved:106 is running stopped but not promoted as clean-startup/default evidence;105 rollback/default retained. That incident is not attributed to this repair.\n\nEvidence: docs/prototype/JOG_SYNC_RELEASE_2026-10-29.json and docs/prototype/JOG_SYNC_RELEASE_NATIVE_106_2026-10-29.json. Raw traces/JSON stay in ignored local-evidence. All normal controls/layouts/library previews retained; no original media overwritten.\nRelated: DEK-009 https://trello.com/c/5lPxtsMD; CORE-FIX-42 https://trello.com/c/361w5oKo. Codex recommendation gpt-6.1-sol/high; existing Claude alternative subject to availability."
+    },
+    {
+      "id": "ari:cloud:trello::card/workspace/6a8f03e71844a6c1103692dc/6ad5ecd7fef5ea31f0ce38c0",
+      "name": "CORE-001 — Load two local MP3s, cue, mix and beatmatch",
+      "url": "https://trello.com/c/LGGdtSa3/114-core-001-load-two-local-mp3s-cue-mix-and-beatmatch",
+      "complete": false,
+      "current": "## Running106; startup gate open — 29 October2026\nCORE-FIX-59 jog/Sync rate-and-clock defect passed focused source and one muted isolated native graph workflow. Separate CORE-FIX-60 observed unexpected B playback during launch; owner denied Play, MIDI log empty, input origin unknown. Main now stopped at A114.836/B112.561; earlier checkpoint retained in protected profile copy. Do not call106clean paused-startup acceptance.105default/rollback retained.\nNext: bounded Play-request origin trace and confirmed-cause repair. Generic pops/stalls, listening/real-renderer and deferred hardware gates remain open. docs/prototype/JOG_SYNC_RELEASE_NATIVE_106_2026-10-29.json ; docs/prototype/STARTUP_PLAYBACK_INCIDENT_106_2026-10-29.json .\n"
+    },
+    {
+      "id": "ari:cloud:trello::card/workspace/6a8f03e71844a6c1103692dc/6ae0670c273810c81238cc14",
+      "name": "CORE-LIVE-01 — Jason: controller and listening session",
+      "url": "https://trello.com/c/yJ8r9kCD/165-core-live-01-jason-controller-and-listening-session",
+      "complete": false,
+      "current": "## Running106; startup gate open — 29 October2026\n59 passed bounded native jog/Sync graph check.60 tracks unexpected startup playback; owner denied Play, MIDI log empty. Main stopped114.836/112.561.105rollback retained. See STARTUP_PLAYBACK_INCIDENT_106_2026-10-29.json. Generic pops/stalls, listening and hardware remain OPEN.\n"
+    }
+  ],
+  "limits": "No generic pop/stall, real-keylock-failure, PCM/music, physical or clean-startup closure."
+}
