@@ -1,3 +1,9 @@
+## Pending core repair — 29 October 2026
+
+Native105 remains current and stopped. Source now repairs CORE-FIX-59: jog release during pending grouped Sync used provisional tempo and a frozen raw clock. Original controlled rejection retained source1.32 while nominal rolled back1.2; the successful-path counterexample showed27.36ms source-position error after a rate-only correction. The complete repair restores the owned nominal rate and carries the released raw clock into pending handoffs; the independent expected/scheduled positions now match. Four regressions plus two affected jog checks pass; no broad suite.
+
+[Repair evidence](../docs/prototype/JOG_SYNC_RELEASE_2026-10-29.json).106 includes one separate generated-audio/muted failure-and-success check in the existing isolated ownership window. It does not rerun old load/Cue checks. Exact package, native graph and musical/controller acceptance are separate; no claim this caused the owner's intermittent pops. Preserve controls, previews and stopped session; push owned changes only. Separate monochrome-tools draft is unrelated and untouched.
+
 ## Current core slice — native 0.1.105, 29 October 2026
 
 Current/default 105 (source80a38ea) is running, stopped in Horizontal / Compact. A closed104 profile copy matched all259 files (120,964,483bytes) before launch. The two tracks and exact paused positions114.836/62.715seconds were retained. Native paused Sync120→132BPM now shows+10% with the cap below centre; subsequent adjustment and reset were executed, then132BPM restored. The header H/V shortcut switched the actual layout both ways. All2Play/2tempo/6EQ controls,16library tracks and12startup→15materialized previews remained. No Play or Recording was started. Only105 remains after verified inactive104 cleanup; the recording and profile backup are preserved.

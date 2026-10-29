@@ -315,7 +315,11 @@ export class AudioEngine {
     job.timer = setTimeout(poll, Math.max(10, (end - this.ctx.currentTime) * 1000));
   }
   voiceClock(d, voice) {
-    if(voice?.handoffBefore&&!voice.gridTimeline&&!voice.liveKeylock){const bridge=voice.handoffBefore,after=this.voiceClock(d,{...voice,handoffBefore:null});return at=>at<bridge.until?bridge.clock(at):after(at);}
+    if(voice?.handoffBefore&&!voice.gridTimeline&&!voice.liveKeylock){
+      const bridge=voice.handoffBefore;
+      if(voice.jogClock&&this.voices.get(d.index)===voice)voice.jogClock.clock=this.voiceClock(d,{...voice,jogClock:null,handoffBefore:null});
+      const after=this.voiceClock(d,{...voice,handoffBefore:null});return at=>at<bridge.until?bridge.clock(at):after(at);
+    }
 
     if(voice?.censorReverse){const duration=d.track.duration;return at=>voice.handoffBefore&&at<voice.handoffBefore.until?voice.handoffBefore.clock(at):duration-voice.censorReverse.position(at);}
     if (voice?.gridTimeline) return at => voice.handoffBefore && at < voice.handoffBefore.until ? voice.handoffBefore.clock(at) : voice.gridTimeline.clock(at);
@@ -327,7 +331,12 @@ export class AudioEngine {
     };
     const start = d.anchorPosition, time = d.anchorTime, rate = this.voiceRateAt(d,voice,this.ctx?.currentTime||0) * ((voice?.reverse??d.reverse) ? -1 : 1), playing = d.playing,
       position = d.position, duration = d.track.duration, loop = d.loop ? {start:d.loopIn,end:d.loopOut} : null;
-    return at => playing ? advanceDeckScratchPosition(start, Math.max(0,at-time)*rate, duration,loop) : position;
+    const clock=at=>playing?advanceDeckScratchPosition(start,Math.max(0,at-time)*rate,duration,loop):position;
+    if(!voice?.jogClock)return clock;
+    const cell=voice.jogClock;
+    // Current captures refresh active jogs; retired clones keep their own anchors.
+    if(this.voices.get(d.index)===voice)cell.clock=clock;
+    return at=>cell.clock(at);
   }
   audibleRate(d) {
     const voice = this.voices.get(d.index);
@@ -734,7 +743,9 @@ export class AudioEngine {
       throw Error('Jog bend is not available during preparation, warped Sync, scratch or Stem Slip.');
     if(factor!==1&&!voice.liveKeylock&&(d.keylock||d.keyShift))
       throw Error('This rendered loop/reverse pitch path cannot bend while preserving key.');
-    const rate=Math.max(.25,Math.min(4,d.rate*factor));
+    const owner=this.rateOwners.get(d);
+    const nominalRate=factor===1&&owner?.pending&&owner.voice===voice&&owner.track===d.track?owner.previousRate:d.rate;
+    const rate=Math.max(.25,Math.min(4,nominalRate*factor));
     if(factor!==1)this.onManualPosition?.(d);
     if(voice.deckScratchTransport){
       const transport=voice.deckScratchTransport;
@@ -749,8 +760,11 @@ export class AudioEngine {
       const position=this.position(d),when=this.ctx.currentTime;
       for(const source of voice.sources)source.playbackRate.value=rate/(voice.timelineScale||1);
       d.position=position;d.anchorPosition=position;d.anchorTime=when;
+      const cell=voice.jogClock||(voice.jogClock={});
+      cell.clock=this.voiceClock(d,{...voice,jogClock:null,handoffBefore:null});
+      if(factor===1)delete voice.jogClock;
     }
-    return {rate,nominalRate:d.rate};
+    return {rate,nominalRate};
   }
   cancelSyncedRates(d){
     const pending=this.syncedRateRequests.get(d);
