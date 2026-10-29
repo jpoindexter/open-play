@@ -1,12 +1,8 @@
-# Current private desktop —0.1.108 only
+# Current private desktop —0.1.109 only
 
-108/source1370e3f is open and stopped114.836/112.561. Three bounded core repairs are included: fresh-jog future clock, scoped partial Load overview painting, Smart Sync tempo-only firstOFF cancellation. One generated native fresh-jog path and native four-deck CLoad are executed; the OFF branch's native/real-ACK/listening remains open. [Delivery and limits](CORE_BATCH_108_NATIVE_2026-10-29.json).
+109/source377dc16 is open, stopped30.097/34.086, master−∞, neutralEQ/center crossfader. Owner accepted the repaired paused-seek→sequentialPlay transition: “Yes—aligned without re-pressing Sync.” SYNC ARMED / TEMPO SYNC / BEAT SYNC now distinguish launch arming, speed matching and phase state. [Native replay and limits](SYNC_PAUSED_SEEK_109_NATIVE_2026-10-29.json).
 
-Normal16tracks/12materialized previews and controls retained. Closed107profile copied using APFS copy-on-write and hash/mtime matched before launch. The owned generated checker stopped and closed; main playback was never started. Internal graph mute was asserted; sustained OS mute is unproved.
-
-Current/playback/named108launchers syntax checked; exact bundle observed. Only108app remains; inactive107and download cache retired. Music, recordings, current/recovery profiles and runtime models retained. Build-only Emscripten4.0.18 remains removed, so future local DSP compilation needs reinstall; app/WASM unaffected.
-
-Unexpected106startup cause, generic pops/stalls, current owner listening and hardware gates remain open. Preserve the next actual event and export its in-memory Play trace before reload. No broad test reruns or public-release claim.
+Default/playback/named109launchers syntax checked; exact app observed separately. Only109app remains. Closed108profile copied and hash/mtime matched; captures, original music and recovery profiles retained.16saved tracks and waveform previews/core controls remain. Broad pop/stall/grid/startup/hardware gates remain OPEN. No broad suite or clean-case repetition.
 
 --- Historical guides below; old launch targets and blockers are not current ---
 

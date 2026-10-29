@@ -1,6 +1,9 @@
-## Current Sync repair —29 October2026
+## Current core work —29 October2026 / private109
 
-Owner108listening found incoming restart misalignment despite blue BEAT SYNC; a second Sync aligned it. No pops heard; first stop accepted. Actual paused Home seeks downgrade armed→tempo and Play bypasses alignment. Source repair rearms eligible paused forward seeks and labels armed/tempo/beat accurately. Same actual-engine/app-hook reproduction RED→GREEN;20affected checks, no broad suite.109packaging queued; current108stopped297.05/298.051, recording saved privately, EQneutral/crosscentre. Broader alignment/pop/stall/startup/hardware gates stay OPEN. See docs/prototype/SYNC_PAUSED_SEEK_2026-10-29.json (../docs from handoffs). Preserve original prompt and history below.
+The paused-seek Smart Sync restart failure is repaired in109/source377dc16. Actual108 Home→tempo failure reproduced through engine/app hook; same path now retains armed launch and initial/live buttons distinguish SYNC ARMED / TEMPO SYNC / BEAT SYNC.20affected checks passed; no broad suite/soak. Native109 Home0/0 retained ARMED; APlay thenBPlay enteredBEAT132without anotherSync. Actual crossfader−1→0→1, incomingLOW−24 then bassswap. Jason: “Yes—aligned without re-pressing Sync.” This one restart/transition is accepted; no all-song/grid/pop/hardware certification.
+
+109is stopped30.097/34.086, master−∞, EQneutral/crosscentre; recording stopped/saved privately527403B.16tracks/all controls/previews retained. Closed108profile APFS-copy259files/120845601Bhash/mtime matched. Default/versioned109launchers syntax checked; exact app startup/replay observed. Only109bundle retained; inactive108and packaging cache removed. Original music, captures/recovery profiles and unrelated monochrome draft preserved. [Native receipt](docs/prototype/SYNC_PAUSED_SEEK_109_NATIVE_2026-10-29.json). ExistingCORE-FIX-07/DEK-008/CORE-LIVE-01remain open for their broader criteria. Startup60, intermittent pops/stalls and physical routing remain open; no repeated clean tests.
+
 
 ## Prior108 delivery before current listening —29 October2026
 
