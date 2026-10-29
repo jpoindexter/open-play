@@ -1,12 +1,10 @@
-# Current private desktop test —0.1.107
+# Current private desktop —0.1.107 only
 
-107/source27e916a is open and stopped at A114.836/B112.561. One protected, physically muted cold launch stayed paused and recorded no Play commands. Existing isolated demo Play/Pause captured two GUI command records; the demo stopped/closed and the main session did not move. System output mute restored afterward. [Native delivery and limits](PLAY_COMMAND_DIAGNOSTICS_NATIVE_107_2026-10-29.json).
+107/source27e916a remains open and stopped at114.836/112.561s. Current/playback/named107launchers are valid. Its single protected muted startup and isolated command trace evidence retain their scope; unexpected106startup remains unresolved.
 
-CORE-FIX-60 remains open:106unexpected startup playback has no established cause. Recent32Play commands are now kept in memory only and available in Settings→Advanced→Diagnostics and storage. Export before reload if the event recurs; do not infer the actor from trusted flags alone. No audio behavior change or pop-resolution claim.
+The staged108package was discarded at Jason's urgent space request before inspection/native execution. Its three core source repairs are committed, but are NOT in running107: fresh-jog future clock, partial Load overview scope, Smart Sync tempo-only firstOFF cancellation. [Source report](CORE_BATCH_108_SOURCE_2026-10-29.json). Rebuild only when needed; no new native/listening acceptance.
 
-Current/playback/versioned107launchers point at the observed exact bundle and passed shell syntax checks; they were not executed separately.105rollback bundle retained; inactive hash-verified106generated bundle retired. Closed106and earlier105profile copies, original media and recording remain protected. Do not overwrite later profile changes or open competing versions.
-
-All normal controls/layouts/library waveform previews remain. Broader Sync/pop/stall, listening, hardware and public-release gates remain open. Prior scoped acceptance retains its limits.
+[Cleanup](../delivery/PACKAGE_CLEANUP_2026-10-29.json) removed4.17GBlogical of disposable packages/installers/build binaries/cache. Only107app bundle remains. Music, recordings, live/recovery profiles and runtime models retained. Build-only Emscripten4.0.18 must be reinstalled for future local DSP compilation; current app/WASM unaffected.
 
 --- Historical guides below; old launch targets and blockers are not current ---
 
