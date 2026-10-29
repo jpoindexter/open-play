@@ -1,4 +1,10 @@
-# Current private desktop —0.1.109 only
+# Current private desktop —0.1.110 only
+
+110/source64c0554 is open and stopped30.097/34.086,16tracks/12materialized previews, master−∞. It includes the owned Fader Start→Smart Sync repair in a34-line module;4focused router/engine checks pass. Native startup/control restoration executed; physical fader/listening remains pending. Prior109GUI paused-seek/transition was owneraccepted and its source path is unchanged. [Delivery/limits](FADER_START_110_NATIVE_2026-10-29.json).
+
+Current/playback/named110launchers syntax checked; exact app observed. Only110app retained after closed-profile recovery copy and verifiedinactive109/cache retirement. Original music, recordings and recovery profiles preserved. Generic pops/stalls/startup60 and hardware remainOPEN; no broad testing.
+
+# Prior109 paused-seek listening acceptance
 
 109/source377dc16 is open, stopped30.097/34.086, master−∞, neutralEQ/center crossfader. Owner accepted the repaired paused-seek→sequentialPlay transition: “Yes—aligned without re-pressing Sync.” SYNC ARMED / TEMPO SYNC / BEAT SYNC now distinguish launch arming, speed matching and phase state. [Native replay and limits](SYNC_PAUSED_SEEK_109_NATIVE_2026-10-29.json).
 

@@ -1,4 +1,8 @@
-## Current core work —29 October2026
+## Current110 re-entry —29 October2026
+
+Current/default110/source64c0554, stopped30.097/34.086,16tracks/12loaded previews. New34-line Fader Start ownership module makes armed controller launches use Smart Sync;4focused actual-router/engine checks, package5/5and stopped native startup executed. Physical fader/listening later onCORE-LIVE-01/CORE-FIX-63.109paused-GUI-seek sequentialPlay/bassswap/crossfade owneraccepted; no re-Sync required. Reuse prior53manual/jog/A-BEQ/Cue/stop evidence. Generic pops/stalls/startup60/real-ACK failure and hardware remainOPEN. Next: a distinct reproduced software failure, not a repeated clean matrix. [110receipt](FADER_START_110_NATIVE_2026-10-29.json).
+
+## Prior108 delivery —29 October2026
 
 **Current/default private test:0.1.108**, source1370e3f/ASAR42edf78f…17559dd. It contains three bounded core repairs: fresh raw-jog future anchors, scoped partial-Load overview painting and tempo-only Smart Sync firstOFF ownership. Source checks5+8+13and package/source/controlled-host5/5passed; strict deep private ad-hoc seal verified. No broad suite or clean-case soak repeated.
 

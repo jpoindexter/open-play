@@ -1,4 +1,10 @@
-## Current core work —29 October2026 / private109
+## Current core work —29 October2026 / private110
+
+Current/default110/source64c0554 includes the separate Fader Start Sync repair(CORE-FIX-63). Actual armed mapped start had799.524ms declared bar-phase error while remainingARMED; new34-line module routes the full launch through Smart Sync with request/track/token cancellation, preserving ordinary/back-cue and direct Cue audition.4focused checks include actual MIDI router→engine phase/outgoing authority and pending zero/disconnect cancellation. No broad suite/soak. Physical/native fader execution and listening remain pending;109GUI restart/transition owner acceptance is retained below.
+
+Exact110stopped startup restores30.097/34.086s,16tracks,12materialized previews,2Play/tempo/6EQ. Main Play/Sync/REC untouched. Package/source5/5; closed109profile APFS-copy261files/121094938Bhash/mtime matched. Default/named launchers syntax checked; exact app observed separately. Only110app retained; inactive109and packaging cache removed. Original music/captures/profiles and unrelated draft preserved. [Native receipt](docs/prototype/FADER_START_110_NATIVE_2026-10-29.json). Keep broader cards and63physical acceptance open; startup60/pop/stall causes unresolved. Next useful work: one distinct reproduced software failure or scheduled physical check; no clean-case repetition.
+
+## Prior109 paused-seek acceptance —29 October2026
 
 The paused-seek Smart Sync restart failure is repaired in109/source377dc16. Actual108 Home→tempo failure reproduced through engine/app hook; same path now retains armed launch and initial/live buttons distinguish SYNC ARMED / TEMPO SYNC / BEAT SYNC.20affected checks passed; no broad suite/soak. Native109 Home0/0 retained ARMED; APlay thenBPlay enteredBEAT132without anotherSync. Actual crossfader−1→0→1, incomingLOW−24 then bassswap. Jason: “Yes—aligned without re-pressing Sync.” This one restart/transition is accepted; no all-song/grid/pop/hardware certification.
 

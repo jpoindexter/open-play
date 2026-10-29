@@ -1,14 +1,14 @@
 # Sync pop investigation
 
-## Current disposition — 28 October 2026
+## Current disposition —29 October2026
 
-**OPEN: intermittent audible pop, broader Sync alignment and four-deck stalls.** Current/default94/sourceaa07a04 now has exact archive/host5/5 and actual native paused startup: Constant Change/DJ W!LD50.716/62.715s,16tracks/12materialized previews. Closed92profile256files/120945306bytes revalidated before launch; no main Play/Sync/REC Start or restore. Mac locked again after settled capture, preventing final native reread; no later native input.
+OPEN for intermittent pops, broader musical/grid alignment and four-deck stalls; recent scoped successes do not erase prior reports. Current/default110/source64c0554 has5/5archive/host inspection and stopped native startup30.097/34.086,16tracks/12previews. No main audio run in110.
 
-CORE-FIX-44covers shared and outer same-fader queued-tempo ownership. Actual paused/muted four-deck failures repaired in source/browser, controls/previews and valid fresh movement retained. Relevant94native failure/playing/listening remains open. Neither44nor earlier presentation/Reverse/parameter repairs is established pop causation. No speculative DSP/clock/fade change. Only94bundle remains; default starters94syntax checked, verified inactive92retired.
+109/source377dc16 repaired a demonstrated paused Home seek→tempo-only→Play phase bypass and misleading BEAT SYNC text. Actual native sequentialPlay retained armed launch and Jason accepted alignment through bassswap/crossfade without anotherSync press. Original108failed and109accepted captures are retained privately. This is one specific launch acceptance, not a generic pop fix.
 
-Historical23long frames, worst242.5ms, remain unattributed. Prior clean tone/music captures and53manual/EQ/Cue/stop acceptance retain their original scope. Capture the next actual pop/stall with original recording, exact version, tracks, positions, rates, transport states, clicked deck/action and event time. Stop repeating clean cases; more green automated runs do not satisfy owner/device gates.
+Separate Fader Start bypass reproduced799.524ms declared bar-phase error in actual handler/engine.110includes34-line shared launch module and4focused MIDI-router/engine checks with cancellation/back-cue; physical/native changed-path listening remainspending. Current source does not alter DSP or grids against an unreproduced pop. [Latest receipt](FADER_START_110_NATIVE_2026-10-29.json).
 
-[Current ordered re-entry and full requirement audit](CORE_DJ_REENTRY_2026-10-28.md), [staged94identity](DESKTOP_CORE_094_2026-10-28.md), [closed-profile evidence](CLOSED_092_RECOVERY_2026-10-28.json), [same-fader case](TEMPO_SLIDER_MASTER_QUEUE_2026-10-28.md). Existing owner cardCORE-LIVE-01and defect cards01/07remain open; hardware/listening deferred. Earlier28October86–89checkpoint text remains in [immutable history](https://github.com/jpoindexter/open-play/blob/d15370ae15ece7841a120a0045187ad6b28e1a2a/docs/prototype/SYNC_POP_INVESTIGATION.md); it is not a current launch instruction.
+Preserve next actual pop/stall with track/rate/position/master/action timing and in-memory Play-command export before reload. Source timeline/finite samples are not listening proof. Physical Hercules/headphones remain deferred; reuse prior53ordinarymanual/EQ/Cue/stop scope. No broad clean-case repeats.
 
 ## Historical investigation
 
