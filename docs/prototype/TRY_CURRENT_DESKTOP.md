@@ -1,10 +1,12 @@
-# Current private desktop —0.1.107 only
+# Current private desktop —0.1.108 only
 
-107/source27e916a remains open and stopped at114.836/112.561s. Current/playback/named107launchers are valid. Its single protected muted startup and isolated command trace evidence retain their scope; unexpected106startup remains unresolved.
+108/source1370e3f is open and stopped114.836/112.561. Three bounded core repairs are included: fresh-jog future clock, scoped partial Load overview painting, Smart Sync tempo-only firstOFF cancellation. One generated native fresh-jog path and native four-deck CLoad are executed; the OFF branch's native/real-ACK/listening remains open. [Delivery and limits](CORE_BATCH_108_NATIVE_2026-10-29.json).
 
-The staged108package was discarded at Jason's urgent space request before inspection/native execution. Its three core source repairs are committed, but are NOT in running107: fresh-jog future clock, partial Load overview scope, Smart Sync tempo-only firstOFF cancellation. [Source report](CORE_BATCH_108_SOURCE_2026-10-29.json). Rebuild only when needed; no new native/listening acceptance.
+Normal16tracks/12materialized previews and controls retained. Closed107profile copied using APFS copy-on-write and hash/mtime matched before launch. The owned generated checker stopped and closed; main playback was never started. Internal graph mute was asserted; sustained OS mute is unproved.
 
-[Cleanup](../delivery/PACKAGE_CLEANUP_2026-10-29.json) removed4.17GBlogical of disposable packages/installers/build binaries/cache. Only107app bundle remains. Music, recordings, live/recovery profiles and runtime models retained. Build-only Emscripten4.0.18 must be reinstalled for future local DSP compilation; current app/WASM unaffected.
+Current/playback/named108launchers syntax checked; exact bundle observed. Only108app remains; inactive107and download cache retired. Music, recordings, current/recovery profiles and runtime models retained. Build-only Emscripten4.0.18 remains removed, so future local DSP compilation needs reinstall; app/WASM unaffected.
+
+Unexpected106startup cause, generic pops/stalls, current owner listening and hardware gates remain open. Preserve the next actual event and export its in-memory Play trace before reload. No broad test reruns or public-release claim.
 
 --- Historical guides below; old launch targets and blockers are not current ---
 
