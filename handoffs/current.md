@@ -1,6 +1,8 @@
-## Active core repair —29 October2026 /111queued, installed110unchanged
+## Active core repair —29 October2026 /112 checker correction queued
 
-CORE-FIX-15live-adapter branch: actualWASM pre-program OFF newly committed1.05afterOFF despiteAbortError. Two-line shared Smart Sync repair reuses owned synchronize with the same incoming clock; controlledWASM GREEN retainsoldvoice/nominal/adapter/audible1,0newschedulecommands,stopped/disposed/PCM0.3focused regressions pass, no broadsuite. Agent is adding one generated-only isolated pre-program native check to existing CoreOwnership panel;111notyetpackaged/launched. Main110remainsstopped30.097/34.086,originalsession/music/previews preserved. Next: reviewhelper, commit/pushsource, package/inspect111, runONLYnewowned nativeOFFcheck, cleanupandreadbackTrello. No genericpop/stall or physicalacceptance claim.
+Current/default111/source75c1aaf includes the shared Sync OFF live-tempo preparation repair. Native cancellation assertions executed: old voice/adapter and nominal1× retained, owned controller aborted before delegate, paused master unchanged; all stopped/disposed/PCM0. Overall diagnostic FAILED its final control-identity assertion. Source supports a structural setup/queued-footer-retirement race; exact native lost node not captured. New95-line checker settles setup, then records strict identity witnesses at six stages. No product repair changed.112queued to rerun ONLY this failed segment; no broad suite. [111receipt](../docs/prototype/SMART_LIVE_OFF_111_NATIVE_2026-10-29.json).
+
+Main111session remains stopped30.097/34.086,16tracks/12loaded previews/corecontrols. Closed110profile259files/120230638B copied/hash+mtime equal. Inactive hash-verified110retired after healthy111startup; only111bundle currently. Original music/captures/recovery profiles and unrelated monochrome draft preserved. Next: commit/push checker correction, package112, execute one native check, reconcile Trello/launchers and retire111after healthy successor. Generic pops/stalls/startup60/physical gates remainOPEN.
 
 ## Prior110 native fader evidence —29 October2026
 

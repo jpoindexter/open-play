@@ -1,0 +1,80 @@
+{
+  "version": "0.1.111",
+  "sourceCommit": "75c1aaf69ad2e9030b48fbe9ca413c0d1f1a309f",
+  "asarSHA256": "0d46bc127fb190bdcd59e2e87c09a2331639081ad3086986af346547a8378778",
+  "overallCheckPassed": false,
+  "originalResultSHA256": "225c14a27adf7aee02bf6472f12d32a8fd6c3411d881361f4f7e83a942c39d3d",
+  "scope": "Actual packaged app Sync/OFF handlers, AudioEngine and generated-buffer live WASM adapter. One controlled next-factory gate before delegation; not the original adapter-fill gate, PCM, music, listening, OS mute/focus, device or natural failure proof.",
+  "beforeOff": {
+    "oldVoice": true,
+    "adapterRate": 1,
+    "nominalRate": 1.05,
+    "processing": true,
+    "tokenBefore": 2,
+    "tokenPending": 3,
+    "newController": true,
+    "factoryCalls": 1,
+    "delegated": 0
+  },
+  "afterOff": {
+    "sameVoice": true,
+    "sameAdapter": true,
+    "adapterRate": 1,
+    "nominalRate": 1,
+    "sync": false,
+    "syncState": "off",
+    "playing": true,
+    "processing": false,
+    "masterPaused": true,
+    "masterRate": 1,
+    "factoryCalls": 1,
+    "delegated": 1
+  },
+  "off": {
+    "at": 11.80734693877551,
+    "controllerAborted": true,
+    "delegated": 0
+  },
+  "factoryOutcome": {
+    "status": "rejected",
+    "name": "AbortError",
+    "message": "Live keylock operation superseded or disposed"
+  },
+  "cleanup": {
+    "allStopped": true,
+    "physicalMuted": true,
+    "factoryRestored": true,
+    "adapterDisposed": true,
+    "timerCleared": true,
+    "retainedPCMBytes": 0
+  },
+  "sourceStable": true,
+  "failure": "Diagnostic replaced controls/previews",
+  "disposition": "Cancellation assertions observed in native app; final control-identity assertion failed. Source supports structural-layout setup retiring an old moved footer; original native receipt lacks missing-node identities, so exact cause is not established. Corrected checker drains structural setup and records strict per-stage node identities;112 queued, product source unchanged. No acoustic/pop-free/physical claim.",
+  "normalSession": {
+    "stopped": true,
+    "positions": [
+      30.097,
+      34.086
+    ],
+    "tracks": 16,
+    "materializedLibraryPreviews": 12
+  },
+  "profileCopy": {
+    "at": "2026-10-29T16:49:06.692953+00:00",
+    "method": "closed-profile APFS copy-on-write cp -cRp",
+    "files": 259,
+    "logicalBytes": 120230638,
+    "byteHashMtimeEqual": true,
+    "manifestSHA256": "e71afc271fcdd7ca433fcb50d5e8744c2587f85bb334a2010f45e4fdcb825000"
+  },
+  "cleanup110": {
+    "at": "2026-10-29T16:52:07.541659+00:00",
+    "retiredVersion": "0.1.110",
+    "sha256Verified": true,
+    "inactiveVerified": true,
+    "logicalBytes": 808209796,
+    "retainedCurrent": "0.1.111",
+    "protected": "Original music, recordings, profile recovery copies and unrelated drafts retained"
+  }
+}
