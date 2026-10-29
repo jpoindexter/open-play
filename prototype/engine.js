@@ -757,7 +757,8 @@ export class AudioEngine {
       if(!current()||ack.superseded)return false;
       d.position=ack.position;d.anchorPosition=ack.position;d.anchorTime=ack.when;
     }else{
-      const position=this.position(d),when=this.ctx.currentTime;
+      const now=this.ctx.currentTime,when=Math.max(now,voice.handoffBefore?.until||now);
+      const position=when>now?this.voiceClock(d,voice)(when):this.position(d);
       for(const source of voice.sources)source.playbackRate.value=rate/(voice.timelineScale||1);
       d.position=position;d.anchorPosition=position;d.anchorTime=when;
       const cell=voice.jogClock||(voice.jogClock={});

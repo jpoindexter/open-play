@@ -503,7 +503,7 @@ function renderDecks(index = null) {
   document.querySelectorAll('[data-wave-zoom]').forEach(button=>button.onclick=()=>{
     changeDetailWaveZoom(button.dataset.waveZoom==='in'?.5:2);
   });
-  drawWaves();
+  drawWaves(null,target?index:null);
   if (!target) renderMixer();
   stemSlipControls.restoreFocus();
 }
@@ -540,8 +540,8 @@ function prepareWaveCanvas(canvas,rect=canvas.getBoundingClientRect()){
   const context=canvas.getContext('2d');context.setTransform(scale,0,0,scale,0,0);
   return {context,width,height};
 }
-function drawWaves(track = null) {
-  const surfaces=state.decks.slice(0,state.deckCount).filter(d=>!track||d.track===track).map(d=>({d,canvas:$(`#wave-${d.index}`)})).filter(surface=>surface.canvas);
+function drawWaves(track = null, deckIndex = null) {
+  const surfaces=state.decks.slice(0,state.deckCount).filter(d=>(deckIndex===null||d.index===deckIndex)&&(!track||d.track===track)).map(d=>({d,canvas:$(`#wave-${d.index}`)})).filter(surface=>surface.canvas);
   const bounds=surfaces.map(({canvas})=>canvas.getBoundingClientRect());
   for (const [index,{d,canvas:c}] of surfaces.entries()) {
     const {context:ctx,width:w,height:h}=prepareWaveCanvas(c,bounds[index]);

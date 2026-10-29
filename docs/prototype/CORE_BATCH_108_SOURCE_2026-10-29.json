@@ -1,0 +1,90 @@
+{
+  "date": "2026-10-29",
+  "baselineCommit": "904d88bdff52b1e5c1be2801677066128006fdbf",
+  "status": "Three reproduced core repairs; current native107 lacks these pending source changes",
+  "repairs": [
+    {
+      "card": "https://trello.com/c/iFF464VO",
+      "root": "Fresh raw jog before a committed future Sync start rebased the future voice to old bridge current position/time",
+      "change": "Preserve future handoff time/voice-clock position when changing that already scheduled raw source rate",
+      "redPostBoundarySourceMs": 29.376,
+      "greenPreBoundarySourceMs": 0,
+      "greenPostBoundarySourceMs": 0,
+      "focusedFile": "prototype/jog-sync-release.test.mjs",
+      "passed": 5,
+      "cleanup": {
+        "allStopped": true,
+        "voices": 0,
+        "transforms": 0,
+        "jogActors": 0
+      },
+      "native": "pending"
+    },
+    {
+      "card": "https://trello.com/c/nuVjjVmf",
+      "root": "renderDecks(index) replaced one deck then globally repainted all overview canvases",
+      "change": "Existing drawWaves receives only actual partial target index; full/track-owner fallbacks unchanged",
+      "redPaintedAndMeasured": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "greenPartialPaintedAndMeasured": [
+        2
+      ],
+      "fullFallbackPaintedAndMeasured": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "sharedTrackSiblingArticlesRetained": true,
+      "focusedFiles": [
+        "prototype/load-deck-refresh.test.mjs",
+        "prototype/load-overview.test.mjs"
+      ],
+      "passed": 8,
+      "native": "pending; no native timing claim"
+    },
+    {
+      "card": "https://trello.com/c/Ytr7kf52",
+      "root": "Smart Sync tempo-only pending replacement had no cancellation owner for first OFF while selected master was paused",
+      "change": "Attach owned rate-preparation controller to existing pending press; OFF aborts only matching request/revision/track/voice/rateOwner/token",
+      "redAfterOFF": "new voice committed at1.05 despite AbortError and SyncOFF",
+      "greenAfterOFF": {
+        "audibleRate": 1,
+        "rate": 1,
+        "retainedVoice": true,
+        "sync": false
+      },
+      "focusedFiles": [
+        "prototype/smart-tempo-off.test.mjs",
+        "prototype/sync-ownership.test.mjs"
+      ],
+      "passed": 13,
+      "cleanup": {
+        "voices": 0,
+        "transforms": 0,
+        "retiringVoices": 0,
+        "syncedRequestsCleared": true,
+        "pending": false,
+        "allAdaptersDisposed": true,
+        "oldDisposed": true,
+        "playing": false,
+        "proven": true
+      },
+      "limits": "In-place live update ACK cancellation unchanged; native/PCM/listening pending"
+    }
+  ],
+  "verification": "Only directly affected focused checks and same RED witnesses. No broad suite or repeat soak. Controlled graph/DOM/canvas/adapter boundaries remain explicit.",
+  "preserved": "Current107 and normal profile not operated in this source repair pass. All controls, layouts, previews, media and recordings preserved.",
+  "notProven": [
+    "Generic Sync-pop causality",
+    "Natural real-renderer failures",
+    "Current native changed paths",
+    "Musical/headphone/controller acceptance",
+    "Long-session frame/GC/RSS improvement",
+    "Unexpected106startup cause resolved"
+  ]
+}

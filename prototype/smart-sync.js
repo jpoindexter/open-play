@@ -45,8 +45,9 @@ export function createSmartSync({engine, state, externalLeader=()=>null}) {
   const engaged = deck => !!deck.sync && engagedStates.has(deck.syncState);
   const revise = deck => {const n=(revisions.get(deck)||0)+1; revisions.set(deck,n);return n;};
   function cancelAlignment(deck){
-    const pending=alignmentTimelines.get(deck),controller=engine.transforms?.get(deck.index);
-    if(controller&&controller===pending?.controller&&pending.owns()){
+    const controller=engine.transforms?.get(deck.index);
+    const pending=[alignmentTimelines.get(deck),pendingPresses.get(deck)?.tempoPreparation].find(owner=>controller&&controller===owner?.controller&&owner.owns());
+    if(pending){
       pending.cancelled=true;controller.abort();
     }
   }
@@ -143,7 +144,7 @@ export function createSmartSync({engine, state, externalLeader=()=>null}) {
       return result;
     }finally{if(alignmentTimelines.get(deck)===timeline)alignmentTimelines.delete(deck);}
   }
-  async function performPress(deck) {
+  async function performPress(deck,request) {
     if (!enabled()) return;
     requireGrid(deck.track);const primary=leader(deck);
     const source=primary?null:externalLeader();
@@ -184,14 +185,20 @@ export function createSmartSync({engine, state, externalLeader=()=>null}) {
     }
     validateTransport(deck,primary);
     if (deck.playing && primary.playing) return align(deck,primary);
-    const revision=revise(deck), track=deck.track;
-    await engine.setRate(deck,rateFor(deck,primary),{syncInternal:true});
+    const revision=revise(deck), track=deck.track,voice=engine.voices?.get(deck.index),previousController=engine.transforms?.get(deck.index);
+    const pending=engine.setRate(deck,rateFor(deck,primary),{syncInternal:true});
+    const owner=engine.rateOwners?.get(deck),controller=engine.transforms?.get(deck.index);
+    // Tempo-only Sync may prepare a replacement while its master is paused.
+    // Own cancellation without publishing an alignment/warp timeline.
+    if(owner?.pending&&owner.started&&owner.track===track&&owner.voice===voice&&owner.controller===controller&&controller!==previousController)
+      request.tempoPreparation={controller,owns:()=>pendingPresses.get(deck)===request&&revisions.get(deck)===revision&&deck.track===track&&engine.voices?.get(deck.index)===voice&&engine.rateOwners?.get(deck)===owner&&engine.startTokens?.get(deck.index)===owner.token};
+    await pending;
     if (!enabled() || revisions.get(deck)!==revision || deck.track!==track) throw cancelled();
     deck.sync=true;deck.syncRole ||= 'secondary';deck.syncState=deck.playing?'tempo':'armed';
   }
   function press(deck) {
     const request={track:deck.track,promise:null};pendingPresses.set(deck,request);
-    request.promise=performPress(deck).finally(()=>{if(pendingPresses.get(deck)===request)pendingPresses.delete(deck);});
+    request.promise=performPress(deck,request).finally(()=>{if(pendingPresses.get(deck)===request)pendingPresses.delete(deck);});
     return request.promise;
   }
   function setMaster(deck) {

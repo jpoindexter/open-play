@@ -68,3 +68,33 @@ test('a delayed successful group follows the retained raw clock after blur relea
  assert.ok(Math.abs(deck.anchorPosition-expected(deck.anchorTime))<1e-10,'Scheduled position must use the same retained source clock');
  engine.ctx.currentTime=deck.anchorTime;assert.ok(Math.abs(engine.position(deck)-expected(deck.anchorTime))<1e-10);
 });
+
+test('fresh jog and release preserve an already scheduled raw handoff source clock',async()=>{
+ for(const releaseBefore of [true,false]){
+  const f=fixture(),{engine,decks,smart}=f,deck=decks[1],old=engine.voices.get(1),jog=createJogBend({engine}),starts=[];
+  const prior={position:deck.anchorPosition,time:deck.anchorTime,rate:old.sources[0].playbackRate.value},create=engine.ctx.createBufferSource;
+  engine.ctx.createBufferSource=()=>{const source=create();source.start=(when,offset)=>starts.push({source,when,offset});return source;};
+  engine.onManualPosition=d=>smart.manipulated(d);
+  try{
+   await f.run();const voice=engine.voices.get(1),source=voice.sources[0],scheduled=starts.find(row=>row.source===source);
+   assert.notEqual(voice,old);assert.equal(deck.processing,false);assert(engine.ctx.currentTime<scheduled.when);
+   await jog.hold(deck,'keyboard:fresh',1);const bentRate=source.playbackRate.value;
+   assert.equal(bentRate,1.32*1.04);assert.equal(deck.anchorPosition,scheduled.offset);assert.equal(deck.anchorTime,scheduled.when);
+   assert.equal(old.sources[0].playbackRate.value,prior.rate,'Fresh jog must not change the retained audible source');
+   engine.ctx.currentTime=(engine.ctx.currentTime+scheduled.when)/2;
+   assert.ok(Math.abs(engine.position(deck)-(prior.position+(engine.ctx.currentTime-prior.time)*prior.rate))<1e-10);
+   if(releaseBefore){
+    await jog.releaseHolds();assert.equal(source.playbackRate.value,1.32);assert.equal(deck.anchorPosition,scheduled.offset);assert.equal(deck.anchorTime,scheduled.when);
+   }
+   engine.ctx.currentTime=scheduled.when+.01;
+   const position=scheduled.offset+.01*(releaseBefore?1.32:bentRate);
+   assert.ok(Math.abs(engine.position(deck)-position)<1e-10,'Post-boundary position must follow the actual source.start offset');
+   if(!releaseBefore){
+    await jog.releaseHolds();assert.equal(source.playbackRate.value,1.32);
+    engine.ctx.currentTime=scheduled.when+.11;
+    assert.ok(Math.abs(engine.position(deck)-(position+.1*1.32))<1e-10,'Release after the boundary must preserve accrued bent-source travel');
+   }
+   assert.equal(deck.rate,1.32);assert.deepEqual(jog.diagnostics(),[]);
+  }finally{for(const d of decks)engine.pause(d);await jog.resetDeck(deck.index);}
+ }
+});
