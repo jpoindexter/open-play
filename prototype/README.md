@@ -2,7 +2,7 @@
 
 ## Current core status —30 October2026
 
-Private desktop **0.1.123** is current/default, source5b25277. Current Loop Roll Stop restores prior fields under track/token/bounds ownership; related public tempo changes revoke pending Simple alignment; Flip Start updates existing controls. Three new focused source regressions and one affected loop-feedback check passed. Package5/5/private seal and paused native recovery observed:30.097/34.086s,16tracks/12visible previews/core controls. Relevant changed native held/delayed, PCM and listening scenarios remain pending. Goal active, audio muted. Genericpop/stall/startup60 and hardware gates remain OPEN. [Delivery and limits](../docs/prototype/CORE_ROLL_FLIP_TEMPO_123_NATIVE_2026-10-30.json). No full-core/public-beta claim.
+Private desktop **0.1.124** is current/default, source1306423. Public grid publication revokes related pending Simple alignment before metadata changes; delayed Loop Roll release checks its own transport token before follow-up Seek so a newer saved-loop recall wins. Two focused source RED→GREEN checks pass. Package5/5/private seal and paused native recovery observed:30.097/34.086s,16tracks/12visible previews/core controls. Relevant changed native races, PCM and listening remain pending. Goal active, audio muted. Genericpop/stall/startup60 and hardware gates remain OPEN. [Delivery and limits](../docs/prototype/CORE_GRID_ROLL_RELEASE_124_NATIVE_2026-10-30.json). No full-core/public-beta claim.
 
 ## Historical0.1.94 checkpoint
 

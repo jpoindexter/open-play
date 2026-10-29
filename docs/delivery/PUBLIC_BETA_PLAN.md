@@ -2,7 +2,7 @@
 
 Ship a useful Mac local-audio DJ beta as soon as its release gates are satisfied. Full Serato/rekordbox/Traktor parity and the entire Trello backlog are not launch prerequisites. No public release has been published or approved by this document.
 
-Current private checkpoint: **0.1.123**, source5b25277. Three bounded Roll/Flip/Simple-tempo source repairs have focused regressions; package5/5/seal and paused recovery observed. Relevant changed native/listening gates, broader Sync/stalls, data/install and public distribution remain open. Goal active, audio muted. [Delivery and limits](../prototype/CORE_ROLL_FLIP_TEMPO_123_NATIVE_2026-10-30.json). No public-beta completion claim.
+Current private checkpoint: **0.1.124**, source1306423. Grid/Simple and Roll-release ownership repairs have focused source regressions; package5/5/seal and paused recovery observed. Native123Flip attempt did not reach the changed callback and stays pending. Relevant changed native/listening gates, broader Sync/stalls, data/install and public distribution remain open. Goal active, audio muted. [Delivery and limits](../prototype/CORE_GRID_ROLL_RELEASE_124_NATIVE_2026-10-30.json). No public-beta completion claim.
 
 ## Conditional planning estimate — 28 October 2026
 

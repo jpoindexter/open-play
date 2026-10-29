@@ -1,3 +1,11 @@
+## Current core delivery —30 October2026 /0.1.124
+
+Private desktop **0.1.124** is current/default, source1306423. Public grid publication revokes related pending Simple alignment before metadata changes; delayed Loop Roll release checks its own transport token before follow-up Seek so a newer saved-loop recall wins. Two focused source RED→GREEN checks pass. Package5/5/private seal and paused native recovery observed:30.097/34.086s,16tracks/12visible previews/core controls. Relevant changed native races, PCM and listening remain pending. Goal active, audio muted. Genericpop/stall/startup60 and hardware gates remain OPEN.
+
+Closed123profile261files/120232212B copied with equal hashes/sizes/mtimes. Three124launchers syntax checked; exact bundle separately executed. Inactive123and own packaging ZIP retired (736304755logical bytes); only124bundle. Original media/recordings/recovery copies/unrelated draft retained. Existing123isolatedGUIchecker prepared with asserted physical mute and stopped0, but Flip panel/start callback was NOT REACHED after bounded activation attempts; owned window closed/main retained. No Flip native acceptance or app-defect attribution. No broad suite/new diagnostic helper/main playback. Re-entry: continue concrete muted core defects; listening/controller later.
+
+Evidence: `docs/prototype/CORE_GRID_ROLL_RELEASE_2026-10-30.json` and `CORE_GRID_ROLL_RELEASE_124_NATIVE_2026-10-30.json`. Existing30/70repairs,09link,65failed-to-reachattempt and liveentry reconciled; no new cards or broad closure. Keep original prompt/history and prior accepted evidence scoped.
+
 ## Current core delivery —30 October2026 /0.1.123
 
 Private desktop **0.1.123** is current/default, source5b25277. Current Loop Roll Stop restores prior fields under track/token/bounds ownership; related public tempo changes revoke pending Simple alignment; Flip Start updates existing controls. Three new focused source regressions and one affected loop-feedback check passed. Package5/5/private seal and paused native recovery observed:30.097/34.086s,16tracks/12visible previews/core controls. Relevant changed native held/delayed, PCM and listening scenarios remain pending. Goal active, audio muted. Genericpop/stall/startup60 and hardware gates remain OPEN.
