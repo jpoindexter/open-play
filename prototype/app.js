@@ -1579,7 +1579,7 @@ document.addEventListener("change", (e) => {
   if (e.target.dataset.pitchRange !== undefined) {
     const d = state.decks[Number(e.target.dataset.pitchRange)];
     if (pitchRanges[e.target.value]) d.pitchRangeMode = e.target.value;
-    renderDecks();
+    renderDecks(d.index);
   }
   if (e.target.dataset.sliceDomain !== undefined) {
     const d = state.decks[Number(e.target.dataset.sliceDomain)];
@@ -1596,7 +1596,7 @@ document.addEventListener("change", (e) => {
     notify(
       "Device modes are simulated. Browser audio remains in internal playback.",
     );
-    renderDecks();
+    renderDecks(d.index);
   }
 });
 async function seekOverview(deck, position, event) {
