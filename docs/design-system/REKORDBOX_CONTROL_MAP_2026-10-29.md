@@ -6,7 +6,7 @@ Goal: reduce visual overhead while preserving core controls and waveform preview
 
 - **Historical REA:** four Performance layouts, mixer/panel states and catalog routes recorded25October.58screen/state captures,7private,6AX-only menus,26unvisited routes; the latter remain unknown.
 - **Current native accessibility:** installed rekordbox PID17021, main window32477;2Deck Horizontal. Layout pop-up, panel toggles, master volume, deck Sync/key/transport/loop/pads, mixer EQ/Cue/faders, headphone/crossfader controls observed. Recording panel visible and stopped. No vendor playback/settings/data changes made.
-- **Fresh REA unavailable:** observe returned no open target; opening resource target and one cleanup attempt returned unconfirmed Hopper document `/private/tmp/rea-6KmsVc`. Evidence export contained0records. No fresh REA extraction claimed; no Hopper document or security setting forced closed.
+- **Fresh REA unavailable:** observe returned no open target; opening resource target and one cleanup attempt returned unconfirmed Hopper document `/private/tmp/rea-6KmsVc`. Evidence export contained0records. Standalone read-only route also rejected the running executable at its256MiB identity-check budget. No fresh REA extraction claimed; no Hopper document, binary budget or security setting forced changed.
 - AX/screenshot retained privately under `local-evidence/core-listening-104-2026-10-29/rekordbox-reference-current-*`. No vendor images/code committed.
 
 ## Mapping and proposed placement

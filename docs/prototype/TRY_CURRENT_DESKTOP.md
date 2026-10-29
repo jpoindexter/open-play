@@ -1,16 +1,14 @@
-# Current private desktop0.1.104
+# Current private desktop0.1.104;105ready, native handoff pending
 
-Use `Start Open Play Current Test.command` or `Start Open Play Playback Test.command`; both point to104/source3b8a0f6. The exact app is open, paused with Constant Change/DJ W!LD50.716/62.715s. Avoid another instance/profile. [Native handoff](desktop-0.1.104-core-native.json).
+Current/playback launchers still target104/source3b8a0f6. Last observed main session paused Constant Change114.836s / DJ W!LD62.715s after owner accepted repeated paused-incoming Sync without pops/clicks. Original master capture saved privately. No both-playing acceptance or generic pop closure.
 
-Protected102empty Recording and normal quit preceded a hash/mtime-matching256-file120421296Bclosed-profile copy.104settled startup retains16tracks/12materialized viewport previews,2Play/tempo/6EQ,master−10.04344dB/silent UI and headphoneMIX0%/LEVEL10%. No main Play/Sync/Cue/REC Start or parameter gesture. Only104bundle remains after inactive102verification/cleanup; recovery copy preserved.
+Candidate105/source80a38ea repairs GUI actual-pitch feedback and adds the header H/Vshortcut beside deck count. Archive/source/controlledhost inspection5/5 and private ad-hoc strict/deep seal verified. Native105has not launched: Mac locked before new preflight, so no quit/profile copy/default switch or104cleanup. Keep only104current+105pending until protected startup succeeds.
 
-104includes committed-pitch rollback, global-silence queued-tempo cancellation and latest-durable-record recovery, plus a one-line import/restore ownership repair preserving newer title/cue/loop while storage is pending. [Controlled source results](core-batch-103-2026-10-28.json) · [Import/restore repair](core-import-restore-104-2026-10-28.json). Native failed-request timing, real quota, crash/migration and music quality remain separately open.
+Re-entry after manual unlock: observe stopped transport and Recording, preserve saved capture, normally quit104, make matching closed-profile recovery copy, launch exact105, check +10% cap below centre and H/Vshortcut once. Preserve tracks/control/layout/library previews; then native delivery can be recorded and104retired. Do not open two instances on this profile or overwrite later user edits.
 
-The generated Open Play app icon and macOS menu-bar module offer Show Open Play, Settings…, Audio Devices…, Help and normal Quit. Controlled host/helper proof is recorded; actual tray popup/panel clicks and owner visual preference remain pending. [Assets](../../desktop/assets/README.md).
+[Listening/fader result](GUI_TEMPO_FEEDBACK_2026-10-29.json) · [105package inspection](desktop-0.1.105-playback-gui-pitch.json) · [Control map](../design-system/REKORDBOX_CONTROL_MAP_2026-10-29.md).
 
-**Optional filters:** Settings → Mixer → Channel Filters. Off hides/bypasses while retaining amounts; On restores them. No filter knobs are visible in current startup; this delivery did not open Settings to inspect the preference. All controls/layouts and library previews remain.
-
-Owner chose **muted checks only** today. One isolated generated-audio RapidSync/Play workflow met its declared phase/cancellation criteria; its checker is closed and main real tracks remain at the prior paused baseline. [Muted subset](NATIVE_RAPID_SYNC_104_2026-10-29.json). Keep main playback stopped until owner is ready; no further listening prompt today. Reuse accepted ordinary manual mix/jog/EQ/Cue/stop; no repeated clean matrices. Generic Sync pops/stalls, native changed failure-paths, independent headphone/controller routing and public signing/distribution remain OPEN. [Help](https://open-play-help.vercel.app) · [Known issues](../beta/KNOWN_ISSUES.md).
+Hercules/headphones/speakers deferred. Prior53manual/jog/EQ/Cue/clean-stop acceptance retains scope. Generic pops/stalls, changed failure recovery and public-release gates remain open. No broad suite or speculative DSP patch.
 
 --- Historical guides below; old launch targets and blockers are not current ---
 
