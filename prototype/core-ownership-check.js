@@ -1,6 +1,7 @@
 import {runJogFocusCheck} from './jog-focus-check.js';
 import {runJogSyncReleaseCheck} from './jog-sync-release-check.js';
 import {runFreshJogHandoffCheck} from './fresh-jog-handoff-check.js';
+import {runTempoOnlyOffCheck} from './tempo-only-off-check.js';
 const $=selector=>document.querySelector(selector),sleep=ms=>new Promise(resolve=>setTimeout(resolve,ms));
 const assert=(value,message)=>{if(!value)throw Error(message);};
 async function until(check,label){const end=performance.now()+15000;while(!check()){assert(performance.now()<end,label+' timed out');await sleep(10);}}
@@ -14,7 +15,7 @@ function generatedWAV(){
 const key=(type,k,code)=>document.body.dispatchEvent(new KeyboardEvent(type,{key:k,code,bubbles:true,cancelable:true}));
 const click=selector=>{assert($(selector),'Missing '+selector);$(selector).click();};
 async function run(){
- $('#ownership-run').disabled=true;$('#jog-sync-run').disabled=true;$('#fresh-jog-run').disabled=true;const app=window.openPlay,{state,engine}=app;
+ $('#ownership-run').disabled=true;$('#jog-sync-run').disabled=true;$('#fresh-jog-run').disabled=true;$('#tempo-off-run').disabled=true;const app=window.openPlay,{state,engine}=app;
  const report={startedAt:new Date().toISOString(),completed:false,scope:'Actual packaged workspace/engine and natural End; generated WAV with controlled shared file-read completion. Renderer blur dispatched, not OS focus/physical/listening proof.',cases:[]};
  let release;
  try{
@@ -61,7 +62,7 @@ async function run(){
  }
 }
 async function runJogSync(){
- $('#ownership-run').disabled=true;$('#jog-sync-run').disabled=true;$('#fresh-jog-run').disabled=true;
+ $('#ownership-run').disabled=true;$('#jog-sync-run').disabled=true;$('#fresh-jog-run').disabled=true;$('#tempo-off-run').disabled=true;
  $('#ownership-status').textContent='Running muted jog/Sync release check…';
  try{
   const report=await runJogSyncReleaseCheck(window.openPlay);
@@ -70,13 +71,22 @@ async function runJogSync(){
  }catch(error){$('#ownership-result').value=JSON.stringify({completed:false,error:{message:error.message,stack:error.stack}});$('#ownership-status').textContent='Jog/Sync diagnostic failed: '+error.message;}
 }
 async function runFreshJog(){
- $('#ownership-run').disabled=true;$('#jog-sync-run').disabled=true;$('#fresh-jog-run').disabled=true;
+ $('#ownership-run').disabled=true;$('#jog-sync-run').disabled=true;$('#fresh-jog-run').disabled=true;$('#tempo-off-run').disabled=true;
  $('#ownership-status').textContent='Running muted fresh-jog handoff check…';
  try{
   const report=await runFreshJogHandoffCheck(window.openPlay);
   $('#ownership-result').value=JSON.stringify(report);
   $('#ownership-status').textContent=report.completed?'Fresh-jog handoff check passed; all audio stopped':'Fresh-jog handoff '+report.observation+': '+(report.error?.message||report.sourceError||'cleanup or source identity');
  }catch(error){$('#ownership-result').value=JSON.stringify({completed:false,error:{message:error.message,stack:error.stack}});$('#ownership-status').textContent='Fresh-jog diagnostic failed: '+error.message;}
+}
+async function runTempoOff(){
+ $('#ownership-run').disabled=true;$('#jog-sync-run').disabled=true;$('#fresh-jog-run').disabled=true;$('#tempo-off-run').disabled=true;
+ $('#ownership-status').textContent='Running muted tempo-only Sync OFF check…';
+ try{
+  const report=await runTempoOnlyOffCheck(window.openPlay);
+  $('#ownership-result').value=JSON.stringify(report);
+  $('#ownership-status').textContent=report.completed?'Tempo-only Sync OFF check passed; all audio stopped':'Tempo-only Sync OFF check failed: '+(report.error?.message||report.sourceError||'cleanup or source identity');
+ }catch(error){$('#ownership-result').value=JSON.stringify({completed:false,error:{message:error.message,stack:error.stack}});$('#ownership-status').textContent='Tempo-only Sync OFF diagnostic failed: '+error.message;}
 }
 async function boot(){
  const parsed=new DOMParser().parseFromString(await(await fetch('workspace-preview.html')).text(),'text/html');
@@ -85,5 +95,6 @@ async function boot(){
  $('#ownership-run').onclick=run;$('#ownership-run').disabled=false;$('#ownership-run').textContent='Run one muted core ownership check';$('#ownership-status').textContent='Ready';
  $('#jog-sync-run').onclick=runJogSync;$('#jog-sync-run').disabled=false;
  $('#fresh-jog-run').onclick=runFreshJog;$('#fresh-jog-run').disabled=false;
+ $('#tempo-off-run').onclick=runTempoOff;$('#tempo-off-run').disabled=false;
 }
 boot().catch(error=>$('#ownership-status').textContent='Startup failed: '+error.message);

@@ -186,7 +186,9 @@ export function createSmartSync({engine, state, externalLeader=()=>null}) {
     validateTransport(deck,primary);
     if (deck.playing && primary.playing) return align(deck,primary);
     const revision=revise(deck), track=deck.track,voice=engine.voices?.get(deck.index),previousController=engine.transforms?.get(deck.index);
-    const pending=engine.setRate(deck,rateFor(deck,primary),{syncInternal:true});
+    const rate=rateFor(deck,primary),clock=deck.playing&&voice?.liveKeylock&&!voice.gridTimeline?engine.voiceClock(deck,voice):null;
+    // An in-place live update cannot revoke unprogrammed work on Sync OFF.
+    const pending=clock?engine.synchronize(deck,{rate,priorClock:clock,positionAt:clock}):engine.setRate(deck,rate,{syncInternal:true});
     const owner=engine.rateOwners?.get(deck),controller=engine.transforms?.get(deck.index);
     // Tempo-only Sync may prepare a replacement while its master is paused.
     // Own cancellation without publishing an alignment/warp timeline.

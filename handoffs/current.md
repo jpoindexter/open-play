@@ -1,4 +1,8 @@
-## Current core work —29 October2026 / private110
+## Active core repair —29 October2026 /111queued, installed110unchanged
+
+CORE-FIX-15live-adapter branch: actualWASM pre-program OFF newly committed1.05afterOFF despiteAbortError. Two-line shared Smart Sync repair reuses owned synchronize with the same incoming clock; controlledWASM GREEN retainsoldvoice/nominal/adapter/audible1,0newschedulecommands,stopped/disposed/PCM0.3focused regressions pass, no broadsuite. Agent is adding one generated-only isolated pre-program native check to existing CoreOwnership panel;111notyetpackaged/launched. Main110remainsstopped30.097/34.086,originalsession/music/previews preserved. Next: reviewhelper, commit/pushsource, package/inspect111, runONLYnewowned nativeOFFcheck, cleanupandreadbackTrello. No genericpop/stall or physicalacceptance claim.
+
+## Prior110 native fader evidence —29 October2026
 
 Current/default110/source64c0554 includes the34-line Fader Start→Smart Sync repair. A single actual native volatile/device-denied check now exercises MIDI panelCC0→64→0: paused Barmed launchesBEAT120without Play/Sync, Aretains120; Bzero stops/back-cues29.322whileAcontinues. Independent full13230-frame/channel captures confirm330/660Hz then exact silence; sampled source-grid phase error5.353e−6beats. Not music/transient, long-session, physical controller or listening proof. Initial/final internal mute observed; checker stopped/exported/closed.
 
