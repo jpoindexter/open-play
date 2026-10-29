@@ -1,8 +1,8 @@
-# Current private desktop —0.1.113
+# Current private desktop —0.1.114
 
-113/source74ed9f6 repairs stale saved-loop continuation after Load/Stop in the shared78-line module.3focused regressions +1existingfeedback check pass. One muted native four-deck saved-pad/normalLoad raw-resume boundary retains replacement0/length8/token5,166outgoing/mixer controls,7/7readypreviews; final8images/allstopped/muted/sourcehashesstable. [Executed result and limits](MANUAL_LOOP_113_NATIVE_2026-10-29.json). No original-renderedWorker/nativequeuedStop/PCM/listening/physical/fullmode claim.
+114/source2f5b9e1 preserves113product audio/control/layout source. One first native controlledoldlive-key failure after actualLoad/Play/newkeyUp retains replacementvoice/key+1/adaptersemitone1/token4playing,213controls and8/8preview sources. Bothadaptersdisposed/timerscleared/PCM0, allstopped/muted/sourcehashesstable. [Executed result and limits](LIVE_KEY_114_NATIVE_2026-10-29.json). No suite/clean-case rerun or newproductpatch; originalnaturalworklet/rate/otherbackend/music/physical claims remainOPEN.
 
-Main113remains paused30.097/34.086,16tracks/12materializedpreviews/corecontrols. Closed112profile259files/120230231Bcopied/hash+mtime equal. Current/playback/named113starters syntax checked; exactbundle executed separately. Only113app remains; verifiedinactive112and owned packaging cache removed. Music, recordings, recovery profiles and unrelated drafts retained. Prior109ownertransition and112live-OFF evidence retain scopes. Generic pops/stalls/startup and hardware remainOPEN; no broad suite. Next: distinct evidenced core issue or actual event, not repeated clean tests.
+Main114paused30.097/34.086,16tracks/12materializedpreviews/corecontrols. Closed113profile259files/120230371B copied/hash+mtime equal. Exactbundleexecuted; current/playback/named114launchers syntaxchecked separately. Only114bundle; inactive113/cache removed. All originalmedia/captures/recoveryprofiles/unrelateddrafts retained. Manualmix/jog/A-BEQ/Cue/cleanStop and109restarttransition are alreadyaccepted at their scopes. One ownerchanged-path listening question is pending; no answer inferred. Herculeslater. Generic pops/stalls/startup60 remainOPEN; no full-core/public-beta claim.
 
 --- Historical checkpoints below; old current/default references are superseded ---
 
