@@ -1,8 +1,8 @@
-# Current private desktop —0.1.117
+# Current private desktop —0.1.118
 
-Current/default117, source868284a, includes Pitch Play in-place control feedback and deck-local Pitch range/transport-mode redraws. Three focused source cases were already recorded; not rerun for delivery. Archive inspection5/5 and private ad-hoc seal verified. Actual settled native startup restores Constant Change/DJ W!LD paused30.097/34.086,16tracks/12materialized previews,2Play/tempo/6EQ and silent master meter. No mainPlay/Sync/RECstart or profile restore. [Delivery and limits](PITCH_CONTROL_117_NATIVE_2026-10-29.json).
+Current/default118/source594d223 repairs an obsolete grid-realignment failure stopping newer same-track Play, and scopes ordinary Eject redraw to the emptied deck. Two focused source RED/GREEN cases only; no broad suite/new diagnostic/DSP patch. Archive inspection5/5 and private ad-hoc seal verified. Actual native startup restores Constant Change/DJ W!LD paused30.097/34.086,16tracks/12visible previews,2Play/tempo/6EQ; master silent. One volatile native stopped four-deck Eject empties B while A remains; no Prepare/Play/Sync/RECstart. Native held/playing DOM/focus and delayed grid-race acceptance remain OPEN. [Delivery and limits](CORE_EJECT_GRID_118_NATIVE_2026-10-29.json).
 
-Closed116profile261files/120231270B APFS-copy/hash+mtime equal. Current/playback/named117starters syntax checked; exact app executed separately. Verified inactive116and own packaging cache removed (~939MB logical bytes); only117bundle. Music, recordings, recovery profiles and unrelated draft retained. Native held/playing control-retention, owner listening/focus and Hercules remainOPEN. Prior53/109 workflows,115pausedKeySyncUI and116pausedSlicerUI retain their scopes; genericpop/stall/startup60 unresolved.
+Closed117profile262files/120239682B APFS-copy/hash+mtime equal. Three118starters syntax checked; exact app executed separately. Verified inactive117and own packaging cache retired (~939MB logical); only118bundle. Original music, recordings, recovery profiles and unrelated draft retained. Prior53/109mixing,115KeySyncUI/116SlicerUI/117PitchUI retain scope. Owner listening/focus/Hercules deferred; genericpop/stall/startup60 unresolved.
 
 --- Historical checkpoints below; old current/default references are superseded ---
 

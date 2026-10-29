@@ -1,0 +1,79 @@
+{
+  "date": "2026-10-29",
+  "version": "0.1.118",
+  "sourceCommit": "594d22388c6be67b30c637f5fb91ffbaa4e973c9",
+  "asarSHA256": "a8bdf9cbf3d07e4a81820b5186be41ed96047911c18cfa000f3a5aff11d44a0d",
+  "sourceRepairEvidence": "CORE_EJECT_GRID_2026-10-29.json",
+  "packageInspection": "desktop-0.1.118-playback-eject-grid.json",
+  "adHocSeal": {
+    "command": "codesign --verify --deep --strict <exact118bundle>",
+    "exitCode": 0,
+    "scope": "Private ad-hoc seal only; not Developer ID/notarization/public distribution proof."
+  },
+  "nativeStartup": {
+    "executed": true,
+    "pausedPositionsSeconds": [
+      30.097,
+      34.086
+    ],
+    "libraryTracks": 16,
+    "materializedPreviewImages": 12,
+    "playButtons": 2,
+    "tempoFaders": 2,
+    "eqControls": 6,
+    "masterUI": "-10dB setting and minus-infinity meter",
+    "mainPlaySyncRECStartInvoked": false,
+    "profileRestoredOverNewerState": false
+  },
+  "nativeEject": {
+    "executed": true,
+    "route": "Existing volatile GUI checker,4deck original view; no Prepare/Play/Sync/RECStart or diagnostic suite invoked",
+    "action": "Eject deck2 with all decks stopped",
+    "observed": "Deck2 empty, position0/duration0/tempo disabled; deck1 AfterHours intact; four deck tempo/position controls remain;0decks playing",
+    "cleanup": "Owned checker closed; main paused30.097/34.086,16tracks/12visible previews retained",
+    "limits": "No native node/focus identity, held/playing retention, Compact geometry, measured stall-duration, audio or physical proof."
+  },
+  "closedProfileRecovery": {
+    "closedProcessVerified": true,
+    "files": 262,
+    "bytes": 120239682,
+    "hashAndMtimeEqual": true,
+    "manifestSHA256": "0e3bce472ad3fc65acf8ba30f6e4f407c6cf5734b86a634e088518319bb7811f",
+    "recoveryCopy": "local-evidence/core-native-118-2026-10-29/profile-117-before-118",
+    "method": "APFS copy-on-write cp -cR; originals retained"
+  },
+  "cleanup": {
+    "at": "2026-10-29T20:25:27.422171+00:00",
+    "retiredVersion": "0.1.117",
+    "sha256Verified": true,
+    "inactiveVerified": true,
+    "logicalBytes": 808577787,
+    "ownPackagingCacheBytes": 130738603,
+    "retainedCurrent": "0.1.118",
+    "onlyOneBundle": true,
+    "protected": "Original music, recordings, recovery profiles and unrelated drafts retained",
+    "launcherSyntaxChecked": 3,
+    "launchersExecuted": false
+  },
+  "launchers": {
+    "currentDefault": "0.1.118",
+    "syntaxChecked": 3,
+    "exactAppExecuted": true,
+    "launcherScriptsExecuted": false
+  },
+  "evidenceSHA256": {
+    "main118-settled.txt": "3f59823724cb14dce9946878068b1079cfd011c83d3e0a1e5b26ae8e9b15d87c",
+    "main118.png": "acd6fb19a16d85378334fe7cade39f185bbb108bedd8f56cead1dddcaf3a4c45",
+    "eject-before.txt": "f53a94c7a62849ffe3602d4809cf4a4e29533e058e2a9f7bd82a73ad5522c788",
+    "eject-after.txt": "b85c0eaac5c93f296a12b84c92c5213c194cc2c98e1c7f4bfbbdd4473260ccf6",
+    "eject-after.png": "b0b735851befacacfb0257df66192110ba4302234859f2bbe58b05f215b8227e",
+    "main-after-check.txt": "3f59823724cb14dce9946878068b1079cfd011c83d3e0a1e5b26ae8e9b15d87c"
+  },
+  "limits": [
+    "Two focused source RED/GREEN cases in existing regressions, no broad suite/new diagnostic/DSP change.",
+    "Delayed grid-cancellation safety is actual engine/SmartSync with controlled ACKs; native delayed race/listening remains open.",
+    "Generic intermittent Sync pops/stalls and unexpected106startup remain open; these repairs do not establish their cause.",
+    "Prior53manual/jog/A-BEQ/Cue/stop and109restart retain scope; no new acoustic/controller/socket/full-core acceptance."
+  ],
+  "next": "Changed delayed grid-cancellation native acceptance where existing supported tools permit; owner listening/focus/controller deferred. Retain next actual incident, no broad clean matrices."
+}

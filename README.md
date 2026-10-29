@@ -4,7 +4,7 @@
 
 ## Current core status —29 October2026
 
-Private desktop **0.1.117** is current/default (source868284a), delivering Pitch Play control-retention and deck-local range/mode selector repairs. Three focused source cases were recorded; no broad rerun. Archive inspection5/5, ad-hoc seal and actual native paused recovery observed:16tracks,12visible library previews,2Play/tempo and6EQ controls. Relevant held/playing native acceptance, listening, intermittent pop/stall and hardware gates remain open. [Delivery and limits](docs/prototype/PITCH_CONTROL_117_NATIVE_2026-10-29.json). No full-core/public-beta claim.
+Private desktop **0.1.118** is current/default (source594d223), delivering stale grid-realignment ownership and deck-local Eject refresh repairs. Two focused source RED/GREEN cases; archive inspection5/5, ad-hoc seal and actual native paused recovery observed:16tracks/12visible previews/core controls. Isolated stopped four-deck Eject shows only target emptied; held/playing node identity and delayed native race remain open. Listening, intermittent pop/stall, startup60 and hardware gates remain open. [Delivery and limits](docs/prototype/CORE_EJECT_GRID_118_NATIVE_2026-10-29.json). No full-core/public-beta claim.
 
 ## Historical0.1.94 checkpoint
 
