@@ -2,9 +2,9 @@
 
 [Help & manual](https://open-play-help.vercel.app) · [First-mix guide](docs/beta/QUICK_START.md) · [Known issues](docs/beta/KNOWN_ISSUES.md) · [Beta plan](docs/delivery/PUBLIC_BETA_PLAN.md)
 
-## Current core status —29 October2026
+## Current core status —30 October2026
 
-Private desktop **0.1.122** is current/default, source9bdb81d. Two reproduced cancellation defects repaired: hiding held Slicer C/D restores prior loop fields before pause; choosing a new MASTER cancels old pending Simple alignment. Two focused RED→GREEN checks pass, including a fresh deferred match to the new master. Package5/5/private seal and paused native recovery observed:30.097/34.086s,16tracks/12visible previews/core controls. Relevant changed native held/delayed and listening scenarios remain pending. Goal active, audio muted. Genericpop/stall/startup60 and hardware gates remain OPEN. [Delivery and limits](docs/prototype/CORE_HIDDEN_MASTER_122_NATIVE_2026-10-29.json). No full-core/public-beta claim.
+Private desktop **0.1.123** is current/default, source5b25277. Current Loop Roll Stop restores prior fields under track/token/bounds ownership; related public tempo changes revoke pending Simple alignment; Flip Start updates existing controls. Three new focused source regressions and one affected loop-feedback check passed. Package5/5/private seal and paused native recovery observed:30.097/34.086s,16tracks/12visible previews/core controls. Relevant changed native held/delayed, PCM and listening scenarios remain pending. Goal active, audio muted. Genericpop/stall/startup60 and hardware gates remain OPEN. [Delivery and limits](docs/prototype/CORE_ROLL_FLIP_TEMPO_123_NATIVE_2026-10-30.json). No full-core/public-beta claim.
 
 ## Historical0.1.94 checkpoint
 

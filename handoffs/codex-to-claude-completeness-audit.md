@@ -1,3 +1,11 @@
+## Current core delivery —30 October2026 /0.1.123
+
+Private desktop **0.1.123** is current/default, source5b25277. Current Loop Roll Stop restores prior fields under track/token/bounds ownership; related public tempo changes revoke pending Simple alignment; Flip Start updates existing controls. Three new focused source regressions and one affected loop-feedback check passed. Package5/5/private seal and paused native recovery observed:30.097/34.086s,16tracks/12visible previews/core controls. Relevant changed native held/delayed, PCM and listening scenarios remain pending. Goal active, audio muted. Genericpop/stall/startup60 and hardware gates remain OPEN.
+
+Closed122profile261files/120232072B copied with equal hashes/sizes/mtimes. Three123launchers syntax checked; exact bundle separately executed. Inactive122and own packaging ZIP retired (736254581logical bytes); only123bundle. Original media/recordings/recovery copies/unrelated draft retained. No broad suite/new diagnostic helper/main playback. Count-reduction Roll behavior is source-wired only; newer raw identical-bounds/same-token loop intent remains a documented guard limit. Re-entry: continue concrete muted core defects; listening/controller later.
+
+Evidence: `docs/prototype/CORE_ROLL_FLIP_TEMPO_2026-10-29.json` and `CORE_ROLL_FLIP_TEMPO_123_NATIVE_2026-10-30.json`. Existing30/65/70cards extended; no new cards or broad closure. Preserve prior scoped accepted evidence and originalprompt.
+
 ## Current core delivery —29 October2026 /0.1.122
 
 Private desktop **0.1.122** is current/default, source9bdb81d. Two reproduced cancellation defects repaired: hiding held Slicer C/D restores prior loop fields before pause; choosing a new MASTER cancels old pending Simple alignment. Two focused RED→GREEN checks pass, including a fresh deferred match to the new master. Package5/5/private seal and paused native recovery observed:30.097/34.086s,16tracks/12visible previews/core controls. Relevant changed native held/delayed and listening scenarios remain pending. Goal active, audio muted. Genericpop/stall/startup60 and hardware gates remain OPEN.
