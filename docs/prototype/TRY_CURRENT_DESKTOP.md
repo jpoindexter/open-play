@@ -1,12 +1,12 @@
-# Desktop status —106 running, startup investigation open
+# Current private desktop test —0.1.107
 
-106/source e89a60f is open and stopped at A114.836/B112.561. Its bounded jog/Sync repair passed one isolated generated-audio/muted native graph workflow; old load/Cue cases were not rerun. [Native result and limits](JOG_SYNC_RELEASE_NATIVE_106_2026-10-29.json).
+107/source27e916a is open and stopped at A114.836/B112.561. One protected, physically muted cold launch stayed paused and recorded no Play commands. Existing isolated demo Play/Pause captured two GUI command records; the demo stopped/closed and the main session did not move. System output mute restored afterward. [Native delivery and limits](PLAY_COMMAND_DIAGNOSTICS_NATIVE_107_2026-10-29.json).
 
-Do not treat this as clean startup acceptance. B unexpectedly started during106 launch; the agent had not requested Play, and the owner denied pressing Play. Its earlier 62.715 checkpoint remains in the verified closed105profile copy. MIDI log was empty; input origin remains unknown. [Incident](STARTUP_PLAYBACK_INCIDENT_106_2026-10-29.json). Next: bounded Play-intent trace before another cold launch; no speculative audio patch or broad tests.
+CORE-FIX-60 remains open:106unexpected startup playback has no established cause. Recent32Play commands are now kept in memory only and available in Settings→Advanced→Diagnostics and storage. Export before reload if the event recurs; do not infer the actor from trusted flags alone. No audio behavior change or pop-resolution claim.
 
-Current/default launchers still name105 as rollback while106investigation is open. Do not launch duplicate processes or overwrite later user edits; the app has a shared-profile single-instance lock. Both105 and 106 bundles are intentionally retained, no other desktop bundles. Original recording and private recovery copies are preserved.
+Current/playback/versioned107launchers point at the observed exact bundle and passed shell syntax checks; they were not executed separately.105rollback bundle retained; inactive hash-verified106generated bundle retired. Closed106and earlier105profile copies, original media and recording remain protected. Do not overwrite later profile changes or open competing versions.
 
-All normal controls/layouts/library previews remain. Generic pops/stalls, current musical/renderer-failure acceptance, Hercules/headphones and public-release gates remain open. Earlier 105fader/H-V and53 ordinary mixing acceptance retain their scope.
+All normal controls/layouts/library waveform previews remain. Broader Sync/pop/stall, listening, hardware and public-release gates remain open. Prior scoped acceptance retains its limits.
 
 --- Historical guides below; old launch targets and blockers are not current ---
 

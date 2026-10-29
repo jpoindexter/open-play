@@ -1,4 +1,4 @@
 #!/bin/zsh
 set -eu
 OPEN_PLAY_PLAYBACK_ROOT=${0:A:h}
-open -a "$OPEN_PLAY_PLAYBACK_ROOT/local-evidence/desktop-builds/0.1.105/Open Play Playback Test-darwin-arm64/Open Play Playback Test.app"
+open -a "$OPEN_PLAY_PLAYBACK_ROOT/local-evidence/desktop-builds/0.1.107/Open Play Playback Test-darwin-arm64/Open Play Playback Test.app"
