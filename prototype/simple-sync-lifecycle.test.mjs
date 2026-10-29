@@ -7,6 +7,7 @@ import * as simple from './sync.js';
 import {createSmartSync,hasBeatgrid,beatPosition} from './smart-sync.js';
 import {refreshSyncPresentation} from './sync-presentation.js';
 import {uiIcons} from './vendor/astryx/icons.js';
+import {createSyncMaster} from './sync-master.js';
 
 // Actual controller, settings/render, Simple Sync and engine. Controlled DOM,
 // buffer/graph/clock/live ACK endpoints; no PCM, native, UI or hearing proof.
@@ -105,4 +106,30 @@ for(const changed of ['incoming','primary'])test(`actual manual-position hook ca
  f.engine.onManualPosition(changed==='incoming'?f.deck:f.leader);const aborted=acks[0].signal.aborted;
  acks[0].release();const result=await pending;assert.equal(aborted,true);assert.equal(result.error?.name,'AbortError');
  assert.equal(f.engine.voices.get(1),voice);assert.equal(f.retired.length,0);assert.equal(f.notices.length,0);
+});
+
+test('explicit new MASTER cancels an owned Simple ACK before stale audio or roles commit',async t=>{
+ const f=env.audioFixture(),{engine,deck,leader}=f,voice=engine.voices.get(1),notices=[];
+ const extra=index=>({index,track:{id:index===2?'new-master':'spare',bpm:index===2?140:128,grid:0,duration:60},position:5,anchorPosition:5,anchorTime:1,rate:1,playing:false});
+ const state={decks:[leader,deck,extra(2),extra(3)],deckCount:4,focus:1,settings:{'Sync Mode':'Simple Sync','Snap to Beatgrid':true}};
+ state.decks.forEach(d=>Object.assign(d,{sync:false,syncRole:null}));
+ const syncMaster=createSyncMaster({decks:()=>state.decks}),{acks,adapters}=held(f);
+ const scope={state,engine,synchronizeSimple:simple.synchronizeSimple,cancelSimpleSync,syncMaster,
+  smartSync:createSmartSync({engine,state}),tempoSliders:{cancel(){}},persist(){},notify:message=>notices.push(message)};
+ vm.createContext(scope);vm.runInContext(controller,scope);
+ t.after(async()=>{acks.forEach(ack=>ack.release());state.decks.forEach(d=>engine.pause(d));for(const adapter of adapters)await adapter.dispose();assert.equal(engine.voices.size,0);assert.equal(engine.transforms.size,0);});
+ await scope.deckAction('syncMaster',0,{},{});
+ const pending=settle(scope.deckAction('sync',1,{},{}));f.release();await until(()=>acks[0]);
+ assert.equal(isSimpleSyncPending(deck),true);assert.equal(engine.voices.get(1),voice);
+ await scope.deckAction('syncMaster',2,{},{});
+ assert.equal(syncMaster.master(),state.decks[2]);assert.equal(syncMaster.manual(),true);
+ assert.equal(acks[0].signal.aborted,true,'New MASTER must abort the old target alignment before its held ACK commits');
+ acks[0].release();const result=await pending;
+ assert.equal(result.error?.name,'AbortError');assert.equal(isSimpleSyncPending(deck),false);
+ assert.equal(engine.voices.get(1),voice);assert.equal(deck.rate,1);assert.equal(deck.playing,true);assert.equal(adapters[0].disposed,true);
+ assert.equal(deck.sync,false);assert.equal(deck.syncRole,null);assert.equal(leader.sync,false);assert.equal(leader.syncRole,null);assert.equal(notices.length,0);
+ const fresh=scope.deckAction('sync',1,{},{});await until(()=>acks[1]);acks[1].release();await fresh;
+ assert.equal(syncMaster.master(),state.decks[2]);assert.equal(deck.rate,140/120);assert.equal(deck.sync,true);assert.equal(deck.syncRole,'secondary');
+ assert.equal(state.decks[2].sync,true);assert.equal(state.decks[2].syncRole,'primary');assert.equal(leader.sync,false);assert.equal(leader.syncRole,null);
+ assert.equal(notices.length,1);assert.match(notices[0],/MASTER deck 3/);assert.equal(engine.voices.get(1).liveKeylock,adapters[1]);
 });

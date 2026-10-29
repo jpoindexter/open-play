@@ -41,3 +41,27 @@ test('actual Slicer callbacks retain four-deck controls and deck-local feedback 
  d.tab='Slicer';missing=true;scope.actions.refresh(d);assert.equal(rebuilds,1,'Missing structure needs existing fallback');missing=false;
  state.layout='Vertical';scope.actions.refresh(d);assert.equal(rebuilds,2,'Layout changes need existing fallback');
 });
+
+test('hidden held Slicer restores prior loop before pause and old release stays inert',async()=>{
+ const track={id:'held-slice',bpm:120,grid:0,duration:48};
+ const decks=Array.from({length:4},(_,index)=>({index,track,playing:true,processing:false,position:4,rate:1,loop:false,loopIn:0,loopOut:0,slice:null}));
+ const state={decks,deckCount:4,focus:3},selector={},tokens=new Map(),loopCalls=[];
+ const engine={ctx:{currentTime:0},startTokens:tokens,voices:new Map(),init(){},position:d=>d.position,
+  voiceClock:d=>{const start=d.position;return at=>start+at;},
+  pause(d){d.playing=false;tokens.set(d.index,(tokens.get(d.index)||0)+1);},clearDeckScratchCache(){},
+  async setLoop(d,on,start,end,options={}){loopCalls.push({index:d.index,on,start,end});Object.assign(d,{loop:on,loopIn:start,loopOut:end});if(options.positionAt)d.position=options.positionAt(0);if(options.playing!==undefined)d.playing=options.playing;tokens.set(d.index,(tokens.get(d.index)||0)+1);},
+ };
+ const slicer=createSlicer({engine,notify:m=>assert.fail(m)}),scope={state,engine,slicer,$:()=>selector,cancelPendingPlay(){},cueHolds:{cancelDeck(){}},pitchPlay:{cancelDeck(){}},renderDecks(){}};
+ const count=source.slice(source.indexOf('$("#deck-count").onchange'),source.indexOf('$("#day").onclick'));
+ vm.runInNewContext(count,scope);
+ const d=decks[3];
+ try{
+  assert.equal(await slicer.press('held-D-slice',d,2),true);assert.equal(d.slice,2);assert.equal(d.loop,true);assert.equal(loopCalls.length,1);
+  const token=tokens.get(3);selector.onchange({target:{value:'2'}});
+  assert.equal(d.playing,false);assert(tokens.get(3)>token);assert(decks.slice(0,2).every(d=>d.playing));
+  assert.equal(d.loop,false,'Hidden Slicer retained its temporary loop');assert.equal(d.loopIn,0);assert.equal(d.loopOut,0);assert.equal(d.slice,null);
+  await slicer.release('held-D-slice');assert.equal(loopCalls.length,1,'Old release must not schedule another loop');
+  selector.onchange({target:{value:'4'}});assert.equal(d.playing,false);assert.equal(d.loop,false);assert.equal(d.loopIn,0);assert.equal(d.loopOut,0);assert.equal(d.slice,null);
+  assert(decks.slice(0,2).every(d=>d.playing&&d.position===4&&!d.loop));
+ }finally{slicer.cancelDeck(d);decks.forEach(d=>engine.pause(d));}
+});

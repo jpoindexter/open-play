@@ -987,6 +987,7 @@ async function deckAction(action, index, el, event = {}) {
       if(wasSynced&&state.settings["Sync Mode"]==='Simple Sync')await panels.resetTempoAbsolute(d);
     }
   } else if (action === "syncMaster") {
+    for(const other of state.decks)cancelSimpleSync(engine,other);
     syncMaster.select(event.shiftKey?null:d);
     return; // The clock updates indicators without replacing the focused button.
   } else if (["tempoDown","tempoUp","tempoReset"].includes(action)) {
@@ -1772,7 +1773,7 @@ $("#deck-count").onchange = (e) => {
   state.deckCount = Number(e.target.value);
   state.focus = Math.min(state.focus, state.deckCount - 1);
   if (state.deckCount === 2)
-    state.decks.slice(2).forEach((d) => {cancelPendingPlay(d);cueHolds.cancelDeck(d);pitchPlay.cancelDeck(d);engine.pause(d);engine.clearDeckScratchCache(d.index);});
+    state.decks.slice(2).forEach((d) => {cancelPendingPlay(d);cueHolds.cancelDeck(d);pitchPlay.cancelDeck(d);slicer.cancelDeck(d);engine.pause(d);engine.clearDeckScratchCache(d.index);});
   renderDecks();
 };
 $("#day").onclick = () => document.body.classList.toggle("day");
