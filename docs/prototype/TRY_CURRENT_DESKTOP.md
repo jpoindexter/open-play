@@ -10,7 +10,7 @@ The generated Open Play app icon and macOS menu-bar module offer Show Open Play,
 
 **Optional filters:** Settings → Mixer → Channel Filters. Off hides/bypasses while retaining amounts; On restores them. No filter knobs are visible in current startup; this delivery did not open Settings to inspect the preference. All controls/layouts and library previews remain.
 
-Availability for one relevant listening session was requested once today. Keep playback stopped until ready. Reuse accepted ordinary manual mix/jog/EQ/Cue/stop; no repeated clean matrices. Generic Sync pops/stalls, native changed failure-paths, independent headphone/controller routing and public signing/distribution remain OPEN. [Help](https://open-play-help.vercel.app) · [Known issues](../beta/KNOWN_ISSUES.md).
+Owner chose **muted checks only** today. One isolated generated-audio RapidSync/Play workflow met its declared phase/cancellation criteria; its checker is closed and main real tracks remain at the prior paused baseline. [Muted subset](NATIVE_RAPID_SYNC_104_2026-10-29.json). Keep main playback stopped until owner is ready; no further listening prompt today. Reuse accepted ordinary manual mix/jog/EQ/Cue/stop; no repeated clean matrices. Generic Sync pops/stalls, native changed failure-paths, independent headphone/controller routing and public signing/distribution remain OPEN. [Help](https://open-play-help.vercel.app) · [Known issues](../beta/KNOWN_ISSUES.md).
 
 --- Historical guides below; old launch targets and blockers are not current ---
 

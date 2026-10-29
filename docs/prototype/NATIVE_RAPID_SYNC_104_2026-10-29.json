@@ -1,0 +1,120 @@
+{
+  "date": "2026-10-29",
+  "version": "0.1.104",
+  "sourceCommit": "3b8a0f67b8701096ca64807d7ccfd48c20f47e6b",
+  "ownerMode": "Continue with muted checks only; no listening/controller acceptance requested again",
+  "execution": "One existing Rapid Sync and Play checker launched through the native Checks menu in a volatile device-denied window. Production app/engine scripted DOM controls and synthetic MIDI-editor commands; generated tones/pulses, keylocked incoming deck. Not physical pointer/controller execution of the individual Sync commands.",
+  "route": "/prototype/rapid-sync-play-harness.html",
+  "noApplicationSourceChange": true,
+  "noBuildOrBroadSuite": true,
+  "sourceIdentity": {
+    "servedFilesMatchImmutablePackage": 6,
+    "beforeEqualsAfter": true,
+    "sourceHashes": {
+      "app.js": "9c7716fff456e02b3ccadd95004a74b03169c848bbf44c332964f49c03b6e585",
+      "smart-sync.js": "286ee5d3df82d2c99a557930cc370d50c947fe0502c3349e734b3dc1569f3403",
+      "engine.js": "30a07200ac370d3bef84f5f7c6d70c644aa724d76f0526e7da7eadcb6cdb804d",
+      "deck-midi.js": "36d2ef0a2de161c5352d1f7411b459e695ce9e2429d9461c8fa41f18600942ef",
+      "panels.js": "ca54938ceb7d46a110f82c2ab40509929878692838aedf836f68033f0ece4ab8",
+      "rapid-sync-play-harness.js": "1565c956105b11433540eced9b19a0bbf3a7912496cba9a5fef44a05f20b49d5"
+    }
+  },
+  "physicalMute": "Existing monitor mute commanded/asserted before source starts. Source review: later monitor-setting changes do not reset outputGate; checker never calls unmute. No acoustic observation or independent end-of-run mute snapshot.",
+  "checks": {
+    "completed": true,
+    "errors": [],
+    "criteria": {
+      "maximumPulsePhaseSeconds": 0.01,
+      "minimumPairs": 5,
+      "pausedMaximumRMS": 0.0001
+    },
+    "cases": [
+      {
+        "kind": "gui",
+        "input": "scripted GUI .click",
+        "pulsePairs": 6,
+        "windowSeconds": [
+          0.7389342403628077,
+          3.738934240362808
+        ],
+        "maximumRelativePulseOffsetSeconds": 0.001995464852607487,
+        "phasePassed": true,
+        "statePassed": true,
+        "oneCountedPlay": true,
+        "immediateQueued": {
+          "state": true,
+          "aria": "true"
+        }
+      },
+      {
+        "kind": "midi",
+        "input": "synthetic MIDI editor Note events",
+        "pulsePairs": 6,
+        "windowSeconds": [
+          4.523786848072559,
+          7.523786848072559
+        ],
+        "maximumRelativePulseOffsetSeconds": 0.00061224489795908,
+        "phasePassed": true,
+        "statePassed": true,
+        "oneCountedPlay": true,
+        "immediateQueued": {
+          "state": false,
+          "aria": "false"
+        }
+      }
+    ]
+  },
+  "cancellation": {
+    "at": 7.633560090702943,
+    "playsBefore": 2,
+    "after": {
+      "playing": false,
+      "processing": false,
+      "queued": false,
+      "plays": 2
+    },
+    "from": 7.983560090702943,
+    "to": 8.183560090702944,
+    "rightRMS": 1.2645087141855416e-07,
+    "passed": true
+  },
+  "cancellationScope": "Right-channel200ms window starting350ms after incoming double-Play cancellation; not immediate or whole-master silence. Outgoing track continues until checker cleanup.",
+  "recording": {
+    "bytes": 132935,
+    "format": "audio/webm;codecs=opus",
+    "sha256": "7902b8c5e9fc47cf735317068559402adb0c665c784decb315a789d7086e1c66",
+    "originalBase64BytesAndHashVerified": true,
+    "decoded": {
+      "duration": 8.219977324263038,
+      "frames": 362501,
+      "sampleRate": 44100,
+      "channels": 2
+    },
+    "wholeFiniteValidation": "Executed by original checker over both decoded channels; no separate PCM recomputation"
+  },
+  "cleanup": {
+    "diagnosticUI": "0decks playing and silent UI after completion; owned diagnostic closed using native close button",
+    "mainApp": "104workspace returned,16tracks/12settled viewport previews/2Play/2tempo/6EQ; no main transport action",
+    "positions": [
+      50.716,
+      62.715
+    ],
+    "positionScope": "Immediate before capture has rounded50.7/62.7; after exact values agree with earlier104settled exact baseline",
+    "originalMediaActions": "None",
+    "DownloadsFileCreated": false,
+    "reportSavedDirectlyToPrivateEvidence": true
+  },
+  "automationNote": "Save dialog paste did not change the path; no Save issued there. AXsetValue plus verified folder/filename saved original report safely. CmdW did not close diagnostic; native close button did. ExistingUI-002 tracks missing host close accelerator.",
+  "independentReview": "Original/summary/pairs/counts/cancellation window/source hashes and main AX scope checked read-only; no replay, tests or PCM recomputation.",
+  "privateEvidence": "local-evidence/native-rapid-sync-104-2026-10-29",
+  "reportSHA256": "18cc258f2794a679a15ef33c727741773bf38277b73f647bf4e2ddc7184e46d1",
+  "resultAXSHA256": "5a4a4ee7098f8905d7efdcf7280a1e7a883a11dfe21d75a93ea024e0e9fd0da0",
+  "resultScreenshotSHA256": "8e551cab2ac05bcaa983dcf3cd17f22e7475faab81123a1cf55bb727ff84b5c7",
+  "limits": [
+    "Generated source pulses in two declared3s windows, not real-track musical Sync or full duration phase analysis",
+    "No new rejected-render/load/failure-ownership composition",
+    "No physical MIDI, listening, headphone/master sockets or controller acceptance",
+    "No intermittent-pop resolution, four-deck frame timing/long-session-stall or public beta claim"
+  ]
+}
