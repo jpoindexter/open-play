@@ -1,14 +1,10 @@
-# Current private desktop0.1.104;105ready, native handoff pending
+# Current private desktop0.1.105
 
-Current/playback launchers still target104/source3b8a0f6. Last observed main session paused Constant Change114.836s / DJ W!LD62.715s after owner accepted repeated paused-incoming Sync without pops/clicks. Original master capture saved privately. No both-playing acceptance or generic pop closure.
+Current/playback/named105launchers target source80a38ea. Exact app open, stopped HorizontalCompact with Constant Change114.836s and DJ W!LD62.715s; both armed132BPM. Bpitch+10%now moves capdown and actual reset0was observed; direct headerH/Vshortcut toggles both ways. NoPlay/RECstart in105.16librarytracks and12startup→15materialized previews retained.
 
-Candidate105/source80a38ea repairs GUI actual-pitch feedback and adds the header H/Vshortcut beside deck count. Archive/source/controlledhost inspection5/5 and private ad-hoc strict/deep seal verified. Native105has not launched: Mac locked before new preflight, so no quit/profile copy/default switch or104cleanup. Keep only104current+105pending until protected startup succeeds.
+[Native delivery](desktop-0.1.105-core-native.json) · [Package inspection](desktop-0.1.105-playback-gui-pitch.json). Closed104profile259files/120964483Bcopy hash/mtime matched;105startupverified beforeinactive104bundlecleanup. Only105bundle remains. Original104listeningcapture preserved privately; do not overwrite later profile edits.
 
-Re-entry after manual unlock: observe stopped transport and Recording, preserve saved capture, normally quit104, make matching closed-profile recovery copy, launch exact105, check +10% cap below centre and H/Vshortcut once. Preserve tracks/control/layout/library previews; then native delivery can be recorded and104retired. Do not open two instances on this profile or overwrite later user edits.
-
-[Listening/fader result](GUI_TEMPO_FEEDBACK_2026-10-29.json) · [105package inspection](desktop-0.1.105-playback-gui-pitch.json) · [Control map](../design-system/REKORDBOX_CONTROL_MAP_2026-10-29.md).
-
-Hercules/headphones/speakers deferred. Prior53manual/jog/EQ/Cue/clean-stop acceptance retains scope. Generic pops/stalls, changed failure recovery and public-release gates remain open. No broad suite or speculative DSP patch.
+CORE-FIX-58 boundedGUIcriterion satisfied. Prior104ownerpaused-incomingSync no-pop feedback and53ordinarymanual/jog/EQ/Cue/stop acceptance retain their scope. Genericpops/stalls,both-playingtransition,changednativefailure,physicalHercules/headphones and public-release gates remainopen. No fullcore/parityclaim or broadretests.
 
 --- Historical guides below; old launch targets and blockers are not current ---
 
