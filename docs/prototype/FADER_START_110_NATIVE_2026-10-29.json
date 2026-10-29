@@ -21,8 +21,8 @@
       "eq": 6
     },
     "mainPlaySyncAndRecordingStarted": false,
-    "faderStartNativeExecution": false,
-    "scope": "Stopped startup/restore and controls; no physical MIDI or changed-path audible acceptance"
+    "faderStartNativeExecution": true,
+    "scope": "Stopped startup plus isolated synthetic-MIDI Fader Start/back-cue workflow. Normal session unchanged; physical device/listening deferred."
   },
   "closedProfileBackup": {
     "closed109": true,
@@ -48,8 +48,141 @@
   },
   "acceptance": {
     "prior109PausedSeekTransition": "Owner accepted; unchanged shared path retained",
-    "newFaderStartSoftware": "4focused actual-module/router checks passed",
+    "newFaderStartSoftware": "4focused source checks plus native synthetic-MIDI launch/back-cue/capture workflow executed",
     "newFaderStartHardwareListening": "deferred",
     "genericPopsStallsStartup60": "open"
+  },
+  "nativeFaderCheck": {
+    "scope": "Actual native110 UI: existing volatile/device-denied GUI-tempo preparation reused for one synthetic MIDI Fader Start/zero workflow; generated tones only. Not physical MIDI or listening.",
+    "mapping": {
+      "target": "Deck 2 fader start",
+      "encoding": "7-bit absolute",
+      "message": "CC ch1 number1",
+      "values": [
+        0,
+        64,
+        0
+      ],
+      "connectedPhysicalInputs": false
+    },
+    "before": {
+      "states": [
+        "armed",
+        "armed"
+      ],
+      "positions": [
+        24.336,
+        29.322
+      ],
+      "incomingLevel": 0
+    },
+    "launch": {
+      "extraPlayOrSyncOnB": false,
+      "states": [
+        "beat",
+        "beat"
+      ],
+      "displayedBPM": [
+        120,
+        120
+      ],
+      "incomingLevel": 0.5,
+      "sampledSourceGridPhaseErrorBeats": 5.35283950853227e-06
+    },
+    "backCue": {
+      "incomingStopped": true,
+      "incomingPosition": 29.322,
+      "incomingLevel": 0,
+      "masterContinuedPlaying": true
+    },
+    "capturedWindows": [
+      {
+        "playing": [
+          true,
+          true
+        ],
+        "states": [
+          "beat",
+          "beat"
+        ],
+        "rates": [
+          1,
+          1.2
+        ],
+        "positions": [
+          102.3045351473923,
+          110.76544538857446
+        ],
+        "channels": [
+          {
+            "frames": 13230,
+            "allFinite": true,
+            "peak": 0.08049294352531433,
+            "hz": 330.0000014234207
+          },
+          {
+            "frames": 13230,
+            "allFinite": true,
+            "peak": 0.048788491636514664,
+            "hz": 660.000047571003
+          }
+        ]
+      },
+      {
+        "playing": [
+          false,
+          false
+        ],
+        "states": [
+          "beat",
+          "armed"
+        ],
+        "rates": [
+          1,
+          1.2
+        ],
+        "positions": [
+          146.97392290249434,
+          29.32176987028771
+        ],
+        "channels": [
+          {
+            "frames": 13230,
+            "allFinite": true,
+            "peak": 0.0,
+            "hz": null
+          },
+          {
+            "frames": 13230,
+            "allFinite": true,
+            "peak": 0.0,
+            "hz": null
+          }
+        ]
+      }
+    ],
+    "originalExport": {
+      "bytes": 287349,
+      "sha256": "598ea092bfeeae86a548b54cf44283fd615cc5be1fb925c814ae521793470b8e",
+      "private": true
+    },
+    "sourceStable": true,
+    "finalInternalPhysicalMuteObserved": true,
+    "checkerStoppedAndClosed": true,
+    "mainSessionAfter": {
+      "positions": [
+        30.097,
+        34.086
+      ],
+      "masterMeter": "negative infinity",
+      "tracks": 16,
+      "changed": false
+    },
+    "limits": [
+      "One sampled source-grid phase, not sustained transient/music alignment",
+      "Two300ms stereo captures; no long-session/pop-free claim",
+      "Pending fader-zero/disconnect remain controlled-source checks, not native held-ACK proof",
+      "Physical Hercules/calibration/listening deferred"
+    ]
   }
 }
