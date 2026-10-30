@@ -17,6 +17,6 @@ Token export validates 248 aliases/cycles; the existing typography ownership gua
 
 ## Limits and re-entry
 
-Source/browser delivery only; installed private desktop 0.1.133 remains unchanged. Below1000 px scrolling is intentional; this is not a phone layout. All-layout/day/Unicode/full migration and native-narrow acceptance remain open on UI-DS-01/UI-006. No listening, controller or Sync-pop acceptance is implied.
+Delivered in private desktop0.1.134/sourceb1997f6. Exact archive inspection5/5 and native2H startup/screenshot retain paused30.097/34.086s,16tracks/12materialized previews and silentmaster. [Native delivery](../prototype/INSTANT_DOUBLE_SEEK_134_NATIVE_2026-10-30.json). Below1000 px scrolling is intentional; this is not a phone layout. All-layout/day/Unicode/full migration and native-narrow acceptance remain open on UI-DS-01/UI-006. No listening, controller or Sync-pop acceptance is implied.
 
-The separately in-progress Instant Double ownership repair in app.js, instant-double.js and its focused test was preserved unstaged during the design redirect. Re-entry: finish its directly affected hook fixtures and bounded runtime check before including it in a native candidate. Original session/media and unrelated reference/draft directories were not modified.
+The separately reproduced Instant Double/newer-seek repair is now delivered in134 after focused source, actual browser baseline/repaired and isolated native acceptance. Its broader listening/controller/Stop/sampler criteria remain separate. Original session/media and unrelated reference/draft directories were preserved.
