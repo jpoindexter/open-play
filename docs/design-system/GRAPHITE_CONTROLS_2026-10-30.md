@@ -18,6 +18,8 @@ The existing token generator validates 240 aliases/cycles. Typography ownership 
 
 ## Limits and next step
 
-Desktop 0.1.125 packaging/native startup is recorded separately after immutable-source delivery. No new listening, physical controller, exhaustive state-matrix, day-theme certification or public-beta clearance is claimed. Browser automation did not establish double-click reset behavior; the pre-existing handler remains unchanged. Core Sync/pop/loop and hardware gates retain their earlier status.
+Desktop 0.1.126 packaging/native startup is recorded separately after immutable-source delivery. No new listening, physical controller, exhaustive state-matrix, day-theme certification or public-beta clearance is claimed. Browser automation did not establish double-click reset behavior; the pre-existing handler remains unchanged. Core Sync/pop/loop and hardware gates retain their earlier status.
 
 This is a concrete shared-component batch, not completion of the entire design-system migration. Remaining legacy layout literals and geometry ownership stay on UI-DS-01. Vendor binaries/fonts/artwork and the reference package remain private; source waveforms and library previews use the existing audio renderer, not concept-image crops.
+
+Native125 exposed old footer status text shrinking to zero inside the rail. The shared rail owner now keeps status labels at their content width;126 delivers this correction.125 is superseded, not final design acceptance.

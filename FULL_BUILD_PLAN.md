@@ -1,6 +1,6 @@
-## Current design follow-through —30 October2026 /0.1.125 candidate
+## Current design follow-through —30 October2026 /0.1.126 candidate
 
-Owner redirected from the isolated graphite preview to the current app. Shared tokens, 24px mixer knobs, 36px Compact transports, centered metallic faders and original-node deck tool rails are implemented. Optional filters and library previews remain. Stopped browser geometry/settings/rail checks and the focused typography/token checks are recorded; no broad audio suite or listening rerun. Desktop125 packaging/native startup follows immutable-source commit. Reset tag preserves1d27160; unrelated draft/preview retained. [Design scope and evidence](docs/design-system/GRAPHITE_CONTROLS_2026-10-30.md). Full design migration, owner listening, genericpop/stall/startup60 and Hercules remain OPEN.
+Owner redirected from the isolated graphite preview to the current app. Shared tokens, 24px mixer knobs, 36px Compact transports, centered metallic faders and original-node deck tool rails are implemented. Optional filters and library previews remain. Stopped browser geometry/settings/rail checks and the focused typography/token checks are recorded; no broad audio suite or listening rerun. Native125 inspection found old footer flex-shrink causing overlapping status labels in the new rail; component ownership now gives each label its own nonshrinking space. Desktop126 packages that narrow correction. Reset tag preserves1d27160; unrelated draft/preview retained. [Design scope and evidence](docs/design-system/GRAPHITE_CONTROLS_2026-10-30.md). Full design migration, owner listening, genericpop/stall/startup60 and Hercules remain OPEN.
 
 ## Current core follow-through —30 October2026 /0.1.124
 

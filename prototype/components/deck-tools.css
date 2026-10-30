@@ -27,3 +27,5 @@
 .deck-tool-scroll:focus-within{outline-offset:calc(-1 * var(--dj-semantic-hairline))}
 
 #workspace-preview[data-workspace=rekordbox] .deck-tool-scroll .track-gain-control{flex:none;min-width:max-content;max-width:none}
+/* Status text used to shrink inside a separate footer; it now owns rail space. */
+#workspace-preview[data-workspace=rekordbox][data-orientation] .deck-tool-scroll :is(.deck-foot>.muted,.scratch-status,.beat-position){flex:none;min-width:max-content;max-width:none;margin:0;padding:0;white-space:nowrap}
