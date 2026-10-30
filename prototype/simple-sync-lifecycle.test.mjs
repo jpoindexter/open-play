@@ -5,7 +5,7 @@ import vm from 'node:vm';
 import {AudioEngine} from './engine.js';
 import * as simple from './sync.js';
 import {createSmartSync,hasBeatgrid,beatPosition} from './smart-sync.js';
-import {refreshSyncPresentation} from './sync-presentation.js';
+import {refreshSyncPresentation,syncButtonLabel} from './sync-presentation.js';
 import {uiIcons} from './vendor/astryx/icons.js';
 import {createSyncMaster} from './sync-master.js';
 import {createSyncTempoRequests} from './sync-tempo-requests.js';
@@ -26,15 +26,15 @@ const modeChange=cut(panels,'s.settings[input.dataset.setting] =','if (input.dat
 const hook=cut(source,'engine.onManualPosition =','\nengine.onGridTimeline =');
 const audioTest=read('./simple-sync-preparation.test.mjs'),layoutTest=read('./layout-orientation.test.mjs');
 const cancelSimpleSync=simple.cancelSimpleSync||(()=>{}),isSimpleSyncPending=simple.isSimpleSyncPending||(()=>false);
-const env=vm.createContext({vm,source,rendering,orientation,AudioEngine,synchronizeSimple:simple.synchronizeSimple,isSimpleSyncPending,uiIcons});
+const env=vm.createContext({vm,source,rendering,orientation,AudioEngine,synchronizeSimple:simple.synchronizeSimple,isSimpleSyncPending,uiIcons,syncButtonLabel});
 vm.runInContext(cut(audioTest,'function fixture(','\nconst saved=').replace('function fixture(','function audioFixture(')+'\n'+
  cut(layoutTest,'function fixture(','\nfor(const count').replace('function fixture(','function domFixture(')
- .replace('const scope={','const scope={uiIcons,'),env);
+ .replace('const scope={','const scope={uiIcons,syncButtonLabel,'),env);
 function fixture(){
  const a=env.audioFixture(),f=env.domFixture(2,'Horizontal'),notices=[];
  f.state.decks=[a.leader,a.deck];f.state.settings={'Sync Mode':'Simple Sync','Snap to Beatgrid':true};
  Object.assign(f.scope,{engine:a.engine,synchronizeSimple:simple.synchronizeSimple,cancelSimpleSync,isSimpleSyncPending,
-  hasBeatgrid,beatPosition,smartSync:createSmartSync({engine:a.engine,state:f.state}),notify:value=>notices.push(value),persist(){},
+  hasBeatgrid,beatPosition,instantDouble:{manipulated(){}},smartSync:createSmartSync({engine:a.engine,state:f.state}),notify:value=>notices.push(value),persist(){},
   syncMaster:{plan:()=>({leader:a.leader,follower:a.deck}),master:()=>a.leader,manual:()=>false},
   panels:{resetTempoAbsolute:async()=>false},s:f.state,monitorFields:new Set(),mixerFields:new Set(),samplerSync:{settingsChanged(){}}});
  vm.runInContext(controller+'\n'+hook,f.scope);f.scope.renderDecks();

@@ -18,9 +18,9 @@ function fixture(t){
  engine.resume=async()=>{};engine.buffer=async()=>({duration:100,sampleRate:48000});
  let calls=0;engine.applyChannelFX=async()=>{if(++calls===1){entered.resolve();await fx.promise;}};
  let scope;const instantDouble=createInstantDouble({state,engine,load:async()=>{scope.cancelPendingPlay(d);engine.pause(d);return true;}});
- scope={state,engine,instantDouble,playbackIntents:{record(){}},autoplayRequests:new WeakMap(),playRequests:new WeakMap(),pitchPlay:{latch:()=>false},cueHolds:{latch:()=>false,cancelDeck(){}},slicer:{cancelDeck(){}},stemSlipControls:{cancelDeck(){}},loopPads:{rolling:()=>false,cancelDeck(){}},smartSync:{start:async()=>false,paused(){},played(){},reconcile(){}},syncMaster:{started(){}},refreshTransportControls(){},persist(){},renderDecks(){},renderTracks(){},notify(){}};
+ scope={state,engine,instantDouble,playbackIntents:{record(){}},autoplayRequests:new WeakMap(),playRequests:new WeakMap(),pitchPlay:{latch:()=>false},cueHolds:{latch:()=>false,cancelDeck(){}},slicer:{cancelDeck(){}},stemSlipControls:{cancelDeck(){}},loopPads:{rolling:()=>false,cancelDeck(){}},smartSync:{start:async()=>false,paused(){},played(){},reconcile(){},manipulated(){}},cancelSimpleSync(){},syncMaster:{started(){}},refreshTransportControls(){},persist(){},renderDecks(){},renderTracks(){},notify(){}};
  const play=source.slice(source.indexOf('async function play('),source.indexOf('\nfunction deckQuantize('));
- vm.runInNewContext(source.match(/^function cancelPendingPlay.*$/m)[0]+'\n'+play+'\nglobalThis.pressPlay=play;',scope);
+ vm.runInNewContext(source.match(/^function cancelPendingPlay.*$/m)[0]+'\n'+play+'\n'+source.match(/^engine.onManualPosition =.*$/m)[0]+'\nglobalThis.pressPlay=play;',scope);
  t.after(()=>{fx.resolve();engine.pause(d);});return{engine,d,decks,entered,fx,instantDouble,scope,voices};
 }
 test('a stopped incoming deck never resumes when its older Instant Double preparation completes',async t=>{
@@ -50,4 +50,17 @@ test('actual Double completion wiring refreshes copied controls without rebuildi
  assert.equal(await double(1),true);assert.deepEqual(calls,['key','switches','loops']);
  assert.equal(incoming.keyShift,2);assert.equal(incoming.keylock,true);assert.equal(incoming.repeat,true);
  assert.equal(incoming.position,4);assert.equal(incoming.playing,undefined);assert.equal(double.pending(incoming),false);
+});
+
+
+test('pending Instant Double never starts after a newer paused seek',async t=>{
+ const f=fixture(t),{d,engine,instantDouble}=f;
+ const pending=instantDouble(1);await f.entered.promise;
+ await engine.seek(d,20);const token=engine.startTokens.get(1);
+ assert.equal(d.playing,false);assert.equal(d.position,20);
+ f.fx.resolve();const result=await pending;
+ assert.equal(d.playing,false,'Older Double started a deck after its newer paused seek');
+ assert.equal(result,false,'Older Double adopted the newer seek');
+ assert.equal(d.position,20);assert.equal(engine.voices.has(1),false);
+ assert.equal(engine.startTokens.get(1),token);assert.equal(instantDouble.pending(d),false);
 });

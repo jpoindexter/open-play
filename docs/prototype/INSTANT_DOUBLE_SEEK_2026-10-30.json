@@ -1,0 +1,104 @@
+{
+  "baselineCommit": "8f3d7116b7002ebc485f95010a0c04815df93713",
+  "sourceRegression": {
+    "red": "Older Double started a deck after its newer paused seek",
+    "focusedUniqueCases": 9,
+    "initialFixtureFailures": 2,
+    "fixtureRepair": "Use actual existing syncButtonLabel in extracted renderer",
+    "allNineFinalPassed": true
+  },
+  "browserBaseline": {
+    "afterRelease": {
+      "controls": 223,
+      "controlsRetained": 223,
+      "playing": true,
+      "position": 0.13029478458049887,
+      "previewsRetained": true,
+      "readyPreviews": 5,
+      "sourceRate": 1,
+      "sourceVoiceRetained": true,
+      "token": 4,
+      "voice": true
+    },
+    "cleanup": {
+      "allStopped": true,
+      "methodsRestored": true,
+      "physicalMuted": true
+    },
+    "completed": false,
+    "error": {
+      "message": "Older Double started incoming audio after the newer seek",
+      "name": "Error",
+      "stack": "Error: Older Double started incoming audio after the newer seek\n    at assert (http://127.0.0.1:61045/baseline/prototype/instant-double-seek-check.js:3:49)\n    at runInstantDoubleSeekCheck (http://127.0.0.1:61045/baseline/prototype/instant-double-seek-check.js:43:3)\n    at async HTMLButtonElement.runDoubleSeek (http://127.0.0.1:61045/baseline/prototype/core-ownership-check.js:135:16)"
+    },
+    "finishedAt": "2026-10-30T11:10:55.021Z",
+    "newerSeek": {
+      "playing": false,
+      "position": 1.0190249433106575,
+      "token": 3,
+      "voice": false
+    },
+    "scope": "Actual generated-only four-deck workspace, native AudioContext/raw voice, installed Double and overview ArrowRight handlers. One incoming FX call is held before real delegation. Synthetic keyboard event; not natural race frequency, PCM, music/listening, controller or startup-pop diagnosis.",
+    "sourceAfter": {
+      "app.js": "ad4e2b47146e4342102fa64c19923eba120597c12892433b9e0a97dd24d51058",
+      "engine.js": "036f084a42177cb58eeaf926b3fd3d5ea6f0ef7b2fe9aefcb1974711ee89261b",
+      "instant-double-seek-check.js": "757c44fa4e4a37cec082e8e37529d6930a9d76e012dc67bcf5e7d95c87f7719b",
+      "instant-double.js": "1aade75e2bc53fdbd1da5978e2f22bf561a5345ba2d4ecc33e9be58a4a871ee4"
+    },
+    "sourceBefore": {
+      "app.js": "ad4e2b47146e4342102fa64c19923eba120597c12892433b9e0a97dd24d51058",
+      "engine.js": "036f084a42177cb58eeaf926b3fd3d5ea6f0ef7b2fe9aefcb1974711ee89261b",
+      "instant-double-seek-check.js": "757c44fa4e4a37cec082e8e37529d6930a9d76e012dc67bcf5e7d95c87f7719b",
+      "instant-double.js": "1aade75e2bc53fdbd1da5978e2f22bf561a5345ba2d4ecc33e9be58a4a871ee4"
+    },
+    "sourceStable": true,
+    "startedAt": "2026-10-30T11:10:54.742Z"
+  },
+  "browserRepaired": {
+    "afterRelease": {
+      "controls": 223,
+      "controlsRetained": 223,
+      "playing": false,
+      "position": 1.1425396825396823,
+      "previewsRetained": true,
+      "readyPreviews": 3,
+      "sourceRate": 1,
+      "sourceVoiceRetained": true,
+      "token": 3,
+      "voice": false
+    },
+    "cleanup": {
+      "allStopped": true,
+      "methodsRestored": true,
+      "physicalMuted": true
+    },
+    "completed": true,
+    "finishedAt": "2026-10-30T11:12:00.459Z",
+    "newerSeek": {
+      "playing": false,
+      "position": 1.1425396825396823,
+      "token": 3,
+      "voice": false
+    },
+    "scope": "Actual generated-only four-deck workspace, native AudioContext/raw voice, installed Double and overview ArrowRight handlers. One incoming FX call is held before real delegation. Synthetic keyboard event; not natural race frequency, PCM, music/listening, controller or startup-pop diagnosis.",
+    "sourceAfter": {
+      "app.js": "33b622b30b0042154bb8934afcaa57c8a39c1a6142ca854d55c7592a7e294092",
+      "engine.js": "036f084a42177cb58eeaf926b3fd3d5ea6f0ef7b2fe9aefcb1974711ee89261b",
+      "instant-double-seek-check.js": "757c44fa4e4a37cec082e8e37529d6930a9d76e012dc67bcf5e7d95c87f7719b",
+      "instant-double.js": "8e49c9e1a79d0412d97cf84376451e8e132688bc3c02cbe49a42173cc018c7ff"
+    },
+    "sourceBefore": {
+      "app.js": "33b622b30b0042154bb8934afcaa57c8a39c1a6142ca854d55c7592a7e294092",
+      "engine.js": "036f084a42177cb58eeaf926b3fd3d5ea6f0ef7b2fe9aefcb1974711ee89261b",
+      "instant-double-seek-check.js": "757c44fa4e4a37cec082e8e37529d6930a9d76e012dc67bcf5e7d95c87f7719b",
+      "instant-double.js": "8e49c9e1a79d0412d97cf84376451e8e132688bc3c02cbe49a42173cc018c7ff"
+    },
+    "sourceStable": true,
+    "startedAt": "2026-10-30T11:12:00.277Z"
+  },
+  "native": "pending",
+  "limits": [
+    "Generated audio/raw AudioBuffer voice; controlled delayed incoming FX and synthetic normal-key handler",
+    "Not natural race frequency, master PCM, music/listening, controller or cause of startup/pop reports"
+  ]
+}

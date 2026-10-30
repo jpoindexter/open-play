@@ -1,3 +1,4 @@
+import {runInstantDoubleSeekCheck} from './instant-double-seek-check.js';
 import {runJogFocusCheck} from './jog-focus-check.js';
 import {runJogSyncReleaseCheck} from './jog-sync-release-check.js';
 import {runFreshJogHandoffCheck} from './fresh-jog-handoff-check.js';
@@ -128,10 +129,18 @@ async function runLoopPadRecall(queuedAuto=false){
   $('#ownership-status').textContent=report.completed?label+' check passed; all audio stopped':label+' check failed: '+(report.error?.message||report.sourceError||'cleanup');
  }catch(error){$('#ownership-result').value=JSON.stringify({completed:false,error:{message:error.message,stack:error.stack}});$('#ownership-status').textContent='Cold Beat Jump diagnostic failed: '+error.message;}
 }
+async function runDoubleSeek(){
+ disableRuns();$('#ownership-status').textContent='Running muted Instant Double/newer seek check…';
+ try{
+  const report=await runInstantDoubleSeekCheck(window.openPlay);$('#ownership-result').value=JSON.stringify(report);
+  $('#ownership-status').textContent=report.completed?'Instant Double/newer seek check passed; all audio stopped':'Instant Double/newer seek check failed: '+(report.error?.message||report.sourceError||'cleanup');
+ }catch(error){$('#ownership-result').value=JSON.stringify({completed:false,error:{message:error.message,stack:error.stack}});$('#ownership-status').textContent='Instant Double diagnostic failed: '+error.message;}
+}
 async function boot(){
  const parsed=new DOMParser().parseFromString(await(await fetch('workspace-preview.html')).text(),'text/html');
  for(const node of [...parsed.body.children])if(node.tagName!=='SCRIPT')document.body.append(node);
  await import('./layout-preview.js');await until(()=>window.openPlay?.state.decks[1].track,'Workspace startup');
+ $('#double-seek-run').onclick=runDoubleSeek;$('#double-seek-run').disabled=false;
  $('#ownership-run').onclick=run;$('#ownership-run').disabled=false;$('#ownership-run').textContent='Run one muted core ownership check';$('#ownership-status').textContent='Ready';
  $('#jog-sync-run').onclick=runJogSync;$('#jog-sync-run').disabled=false;
  $('#fresh-jog-run').onclick=runFreshJog;$('#fresh-jog-run').disabled=false;

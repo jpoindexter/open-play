@@ -34,7 +34,7 @@ function fixture({holdStart=false}={}){
     return new Promise(resolve=>{const row={signal:options.signal,adapter,release:()=>resolve({position,when,playing:true})};prepared.push(row);if(!holdStart)row.release();});}};
   return adapter;
  };
- vm.runInNewContext(hook,{engine:f.engine,state,cancelSimpleSync:(...args)=>{calls.push({kind:'simple',owner:args[1].index,changed:(args[2]||args[1]).index});simple.cancelSimpleSync?.(...args);},smartSync:{manipulated:d=>calls.push({kind:'smart',changed:d.index})}});
+ vm.runInNewContext(hook,{engine:f.engine,state,instantDouble:{manipulated(){}},cancelSimpleSync:(...args)=>{calls.push({kind:'simple',owner:args[1].index,changed:(args[2]||args[1]).index});simple.cancelSimpleSync?.(...args);},smartSync:{manipulated:d=>calls.push({kind:'smart',changed:d.index})}});
  return{...f,state,calls,prepared,own,primary};
 }
 

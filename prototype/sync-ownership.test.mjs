@@ -150,7 +150,7 @@ test('paused seek keeps Smart Sync armed through sequential Play without a secon
  const {engine,deck,leader,smart,starts}=fixture();
  const app=readFileSync(new URL('./app.js',import.meta.url),'utf8');
  const hook=app.slice(app.indexOf('engine.onManualPosition ='),app.indexOf('\nengine.onGridTimeline ='));
- vm.runInNewContext(hook,{engine,smartSync:smart,state:{decks:[leader,deck]},cancelSimpleSync(){}});
+ vm.runInNewContext(hook,{engine,instantDouble:{manipulated(){}},smartSync:smart,state:{decks:[leader,deck]},cancelSimpleSync(){}});
  engine.ctx.createGain=()=>({gain:{value:1},connect(){}});engine.nodes[0]={};engine.setCross=()=>{};
  try{
   engine.pause(leader);engine.pause(deck);smart.paused(leader);await smart.press(deck);

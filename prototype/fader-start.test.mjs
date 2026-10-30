@@ -22,7 +22,7 @@ function fixture(){
  engine.voices.set(0,{sources:[{playbackRate:{value:1}}]});
  const smart=createSmartSync({engine,state});smart.setMaster(leader);
  const source=readFileSync(new URL('./app.js',import.meta.url),'utf8');
- vm.runInNewContext(source.slice(source.indexOf('engine.onManualPosition ='),source.indexOf('\nengine.onGridTimeline =')),{engine,state,smartSync:smart,cancelSimpleSync(){}});
+ vm.runInNewContext(source.slice(source.indexOf('engine.onManualPosition ='),source.indexOf('\nengine.onGridTimeline =')),{engine,state,instantDouble:{manipulated(){}},smartSync:smart,cancelSimpleSync(){}});
  const fader=createFaderStart({engine,state,smartSync:smart,owners,cancel(){},record:(d,intent)=>records.push(intent),refresh(){}});
  return{engine,deck,leader,smart,fader,starts,owners,records,cleanup(){fader.resetInput();for(const d of state.decks)engine.pause(d);assert.equal(engine.voices.size,0);assert.equal(engine.transforms.size,0);assert.equal(owners.size,0);}};
 }

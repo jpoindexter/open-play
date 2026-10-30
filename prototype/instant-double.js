@@ -1,6 +1,11 @@
 // Independent same-file transport copy. Mixer gains/EQ remain per channel.
 export function createInstantDouble({state,engine,load,render=()=>{},notify=()=>{}}){
- const owners=new Map();
+ const owners=new Map(),seeking=new WeakSet();
+ function seekOwn(deck,position){
+  seeking.add(deck);
+  // Exempt only synchronous admission of this seek; later input must still revoke Double.
+  try{return engine.seek(deck,position);}finally{seeking.delete(deck);}
+ }
  async function instantDouble(index,source=null){
   const deck=state.decks[index],paired=state.decks[index^1];
   source ||= paired?.track?paired:state.decks.find(d=>d!==deck&&d.track);
@@ -23,9 +28,9 @@ export function createInstantDouble({state,engine,load,render=()=>{},notify=()=>
      if(!valid()||!source.playing)throw new DOMException('Instant Double source changed.','AbortError');
      return engine.voiceClock(source,engine.voices.get(source.index))(when);
     }});
-   }else await engine.seek(deck,engine.position(source));
+   }else await seekOwn(deck,engine.position(source));
    if(!valid())return false;render(deck);return true;
   }finally{if(owners.get(index)===owner)owners.delete(index);}
  }
- return Object.assign(instantDouble,{cancelDeck:d=>owners.delete(d.index),pending:d=>owners.has(d.index)});
+ return Object.assign(instantDouble,{cancelDeck:d=>owners.delete(d.index),manipulated:d=>{if(!seeking.has(d))owners.delete(d.index);},pending:d=>owners.has(d.index)});
 }
