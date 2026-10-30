@@ -11,8 +11,10 @@ Current-source styling follow-through on the owner-approved reference. Transport
 
 Stopped isolated generated-track browser at1440×950: 2H,4H and4V Compact retain all deck widths/heights without internal overflow,13original tool buttons/deck and8library previews.4H deck height224px;4V236px with286px mixer channels. Quantize off/on, EQ keyboard+double-click neutral, crossfader keyboard+double-click center, tool paddle and Settings→Mixer→Close were exercised. No Play/Sync/Cue/REC was triggered. [Receipt](graphite-unification-2026-10-30/browser.json) · [2H screenshot](graphite-unification-2026-10-30/two-horizontal.png).
 
-Token generator validates246aliases/cycles; typography guard checks19runtime stylesheets. No DSP suite or accepted listening rerun. The native candidate and delivery are recorded separately after packaging.
+Token generator validates246aliases/cycles; typography guard checks19runtime stylesheets. No DSP suite or accepted listening rerun. Private131/source740d973 is packaged and inspected5/5. Exact native paused startup and screenshot preserve positions30.097/34.086s,16tracks/12materialized previews and silentmaster. [Native receipt](graphite-unification-2026-10-30/native.json) · [Native screenshot](graphite-unification-2026-10-30/native-131.png). Current/named launchers131; only131bundle retained after hash/process-verified129/130and owned Electron ZIP retirement. Closed130profile262files/120233316bytes has equal hashes/sizes/mtimes; originals/recordings/recovery/unrelated draft remain. Launchers syntax-checked; exact app startup executed separately.
 
 ## Limits
 
 The very narrow667px browser panel still overflows existing layout chrome/library; this pass verifies desktop geometry and does not resolve UI-006. Full all-style migration, day/all-state coverage and owner visual acceptance remain open on UI-DS-01. Audio pop/stall, queued-loop native, physical routing and listening gates remain distinct. Existing130source repair remains pushed; its native queue check was deferred when the owner redirected to design.
+
+Trello descriptions/comments were read back exactly on UI-DS-01, UI-006, CORE-LIVE-01 and CORE-FIX-72. All four remain open; the design batch is not full migration or core acceptance. [Readback](graphite-unification-2026-10-30/trello.json).
