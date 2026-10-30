@@ -1,0 +1,63 @@
+{
+  "date": "2026-10-30",
+  "native131": {
+    "completed": false,
+    "failure": "Ready library previews changed",
+    "cleanup": {
+      "allStopped": true,
+      "physicalMuted": true,
+      "methodsRestored": true
+    },
+    "sourceStable": true,
+    "render": {
+      "frames": 217471,
+      "sampleRate": 48000,
+      "finite": true,
+      "peak": 0.02027040906250477,
+      "window": {
+        "start": 4,
+        "end": 8.530645833333333
+      }
+    },
+    "scope": "Packaged generated-only four-deck workspace, real AudioContext and cold pitch-render Worker. First completed render result is held before engine continuation; queued Auto Loop or Beat Jump yields to newer saved-loop recall through normal mode/pad handlers. Not natural scheduling probability, master PCM, music/listening, controller or general pop/stall proof."
+  },
+  "browserDiagnosis": {
+    "completed": false,
+    "sameFailure": "Ready library previews changed",
+    "readyBefore": 8,
+    "readyAfter": 8,
+    "changedIDs": [
+      "demo-1"
+    ],
+    "unchangedSources": 7,
+    "fixtureTrack": {
+      "id": "demo-1",
+      "bpm": 120,
+      "seed": 1003,
+      "freq": 61.735
+    },
+    "oldPreviewKey": "demo-1:1003:126:61.735",
+    "updatedPreviewKey": "demo-1:1003:120:61.735",
+    "cleanup": {
+      "allStopped": true,
+      "physicalMuted": true,
+      "methodsRestored": true
+    }
+  },
+  "repair": "Checker setup explicitly refreshes the library using the ordinary sort handler and waits for the changed demo track\u2019s matching preview key/ready state before freezing its baseline. All preview identities remain required afterward. No product preview/transport logic changed.",
+  "native132": "pending",
+  "sourceChecks": "Checker and packager syntax/diff checked. No broad source/DSP suite rerun. The actual native checker is the focused assert-based check.",
+  "limits": [
+    "Native131 overall FAILED and is retained",
+    "Transport assertions were reached before the preview assertion; no complete native pass attributed to131",
+    "Browser tracing result is not native evidence",
+    "No master PCM, music listening, physical controller or general pop/stall resolution"
+  ],
+  "rawEvidence": {
+    "browser-preview-trace.json": "bd6e81f30563e9e6bba3c2312313ca74d8b8e5221d54a85532fab7da82a8b719",
+    "main-after.txt": "b54fb1300898f9d81d0ff5039a2724e6410f680694992b4461bdca6b2ab1ae1a",
+    "failed-native.png": "c2e46caa7e6836354e61b2290972925b1a0d6af54f9ef3e3fd497d16347cb959",
+    "failed-ax.txt": "aba19940f879d6ad375d5353a86d91d17252b4dd3cde14b8d1289e018395ad01",
+    "failed-native.json": "e15de3bbca9a1f0f7b57008b6d06ebdbc011755cb6223d023dba1f008fb81b65"
+  }
+}

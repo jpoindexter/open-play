@@ -26,7 +26,11 @@ export async function runLoopPadRecallCheck({state,engine},queuedAuto=false){
   const count=document.querySelector('#deck-count');assert(count,'Deck count missing');count.value='4';count.dispatchEvent(new Event('change',{bubbles:true}));await frames();
   assert(state.deckCount===4&&document.querySelectorAll('.deck').length===4,'Four decks missing');
   const previewMap=()=>new Map([...document.querySelectorAll('#tracks tbody tr[data-track] .library-wave-preview img')].map(node=>[node.closest('tr[data-track]').dataset.track,node.src]));
-  await until(()=>previewMap().size>0,'Ready library previews');const previews=previewMap();
+  const previewEntries=()=>[...document.querySelectorAll('#tracks tbody tr[data-track] .library-wave-preview')].map(cell=>({id:cell.closest('tr').dataset.track,key:cell.dataset.previewKey,phase:cell.dataset.previewState,src:cell.querySelector('img')?.src}));
+  // Setup changed the demo BPM; refresh its thumbnail before freezing the retention baseline.
+  click('#tracks [data-sort="title"]');const previewKey=track.contentHash||`${track.id}:${track.seed}:${track.bpm}:${track.freq}`;
+  await until(()=>previewEntries().some(cell=>cell.id===track.id&&cell.key===previewKey&&cell.phase==='ready'),'Prepared track preview');
+  const previews=previewMap();report.previewBefore=previewEntries();report.previewTrack={id:track.id,bpm:track.bpm,seed:track.seed,freq:track.freq};
   const controls=[...document.querySelectorAll('.deck:not([data-focus="1"]) button,.deck:not([data-focus="1"]) input,.deck:not([data-focus="1"]) select,.channel-strip input,#crossfader')];
   assert(controls.length>0,'Sibling controls missing');await engine.start(d);
   await until(()=>d.playing&&!d.processing&&engine.ctx.currentTime>d.anchorTime+.03,'Initial rendered-loop playback');
@@ -53,7 +57,7 @@ export async function runLoopPadRecallCheck({state,engine},queuedAuto=false){
   assert(engine.voices.get(1)===voice&&engine.startTokens.get(1)===token&&d.anchorTime===anchor&&d.anchorPosition===position,'Old jump replaced the newer transport');
   assert(seeks.length===1&&seeks[0]===11&&d.loopIn===11&&d.loopOut===12&&d.playing,'Obsolete jump sought or rewrote the newer loop');
   if(queuedAuto)assert(d.autoLoopBeats===null&&d.loopLength===2,'Obsolete Auto Loop metadata survived');
-  assert(controls.every(node=>node.isConnected),'Sibling/mixer controls replaced');const current=previewMap();assert([...previews].every(([id,src])=>current.get(id)===src),'Ready library previews changed');
+  assert(controls.every(node=>node.isConnected),'Sibling/mixer controls replaced');const current=previewMap();report.previewAfter=previewEntries();assert([...previews].every(([id,src])=>current.get(id)===src),'Ready library previews changed');
   assert(engine.audioMonitor.snapshot().physicalMuted,'Physical mute changed');
   report.after={token,position,anchor,loopIn:d.loopIn,loopOut:d.loopOut,autoLoopBeats:d.autoLoopBeats,loopLength:d.loopLength,playing:d.playing,seeks,renderCalls:calls,siblingControlsRetained:controls.length,previewSourcesRetained:previews.size,previewImagesAfter:current.size};report.completed=true;
  }catch(error){report.error={name:error.name,message:error.message,stack:error.stack};}
