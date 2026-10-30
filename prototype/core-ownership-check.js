@@ -5,8 +5,10 @@ import {runTempoOnlyOffCheck} from './tempo-only-off-check.js';
 import {runManualLoopLoadCheck} from './manual-loop-load-check.js';
 import {runLiveKeyFailureCheck} from './live-key-failure-check.js';
 import {runGridCancelPlayCheck} from './grid-cancel-play-check.js';
+import {runBeatJumpRecallCheck} from './beat-jump-recall-check.js';
 const $=selector=>document.querySelector(selector),sleep=ms=>new Promise(resolve=>setTimeout(resolve,ms));
 const assert=(value,message)=>{if(!value)throw Error(message);};
+const disableRuns=()=>document.querySelectorAll('section[aria-label="Isolated core ownership check"] button').forEach(button=>button.disabled=true);
 async function until(check,label){const end=performance.now()+15000;while(!check()){assert(performance.now()<end,label+' timed out');await sleep(10);}}
 function generatedWAV(){
  const rate=22050,frames=rate*2,bytes=new ArrayBuffer(44+frames*2),v=new DataView(bytes);
@@ -18,7 +20,7 @@ function generatedWAV(){
 const key=(type,k,code)=>document.body.dispatchEvent(new KeyboardEvent(type,{key:k,code,bubbles:true,cancelable:true}));
 const click=selector=>{assert($(selector),'Missing '+selector);$(selector).click();};
 async function run(){
- $('#ownership-run').disabled=true;$('#jog-sync-run').disabled=true;$('#fresh-jog-run').disabled=true;$('#tempo-off-run').disabled=true;$('#manual-loop-load-run').disabled=true;$('#live-key-failure-run').disabled=true;$('#grid-cancel-play-run').disabled=true;const app=window.openPlay,{state,engine}=app;
+ disableRuns();const app=window.openPlay,{state,engine}=app;
  const report={startedAt:new Date().toISOString(),completed:false,scope:'Actual packaged workspace/engine and natural End; generated WAV with controlled shared file-read completion. Renderer blur dispatched, not OS focus/physical/listening proof.',cases:[]};
  let release;
  try{
@@ -65,7 +67,7 @@ async function run(){
  }
 }
 async function runJogSync(){
- $('#ownership-run').disabled=true;$('#jog-sync-run').disabled=true;$('#fresh-jog-run').disabled=true;$('#tempo-off-run').disabled=true;$('#manual-loop-load-run').disabled=true;$('#live-key-failure-run').disabled=true;$('#grid-cancel-play-run').disabled=true;
+ disableRuns();
  $('#ownership-status').textContent='Running muted jog/Sync release check…';
  try{
   const report=await runJogSyncReleaseCheck(window.openPlay);
@@ -74,7 +76,7 @@ async function runJogSync(){
  }catch(error){$('#ownership-result').value=JSON.stringify({completed:false,error:{message:error.message,stack:error.stack}});$('#ownership-status').textContent='Jog/Sync diagnostic failed: '+error.message;}
 }
 async function runFreshJog(){
- $('#ownership-run').disabled=true;$('#jog-sync-run').disabled=true;$('#fresh-jog-run').disabled=true;$('#tempo-off-run').disabled=true;$('#manual-loop-load-run').disabled=true;$('#live-key-failure-run').disabled=true;$('#grid-cancel-play-run').disabled=true;
+ disableRuns();
  $('#ownership-status').textContent='Running muted fresh-jog handoff check…';
  try{
   const report=await runFreshJogHandoffCheck(window.openPlay);
@@ -83,7 +85,7 @@ async function runFreshJog(){
  }catch(error){$('#ownership-result').value=JSON.stringify({completed:false,error:{message:error.message,stack:error.stack}});$('#ownership-status').textContent='Fresh-jog diagnostic failed: '+error.message;}
 }
 async function runTempoOff(){
- $('#ownership-run').disabled=true;$('#jog-sync-run').disabled=true;$('#fresh-jog-run').disabled=true;$('#tempo-off-run').disabled=true;$('#manual-loop-load-run').disabled=true;$('#live-key-failure-run').disabled=true;$('#grid-cancel-play-run').disabled=true;
+ disableRuns();
  $('#ownership-status').textContent='Running muted tempo-only Sync OFF check…';
  try{
   const report=await runTempoOnlyOffCheck(window.openPlay);
@@ -92,7 +94,7 @@ async function runTempoOff(){
  }catch(error){$('#ownership-result').value=JSON.stringify({completed:false,error:{message:error.message,stack:error.stack}});$('#ownership-status').textContent='Tempo-only Sync OFF diagnostic failed: '+error.message;}
 }
 async function runManualLoopLoad(){
- $('#ownership-run').disabled=true;$('#jog-sync-run').disabled=true;$('#fresh-jog-run').disabled=true;$('#tempo-off-run').disabled=true;$('#manual-loop-load-run').disabled=true;$('#live-key-failure-run').disabled=true;$('#grid-cancel-play-run').disabled=true;
+ disableRuns();
  $('#ownership-status').textContent='Running muted saved-loop Load check…';
  try{
   const report=await runManualLoopLoadCheck(window.openPlay);
@@ -101,7 +103,7 @@ async function runManualLoopLoad(){
  }catch(error){$('#ownership-result').value=JSON.stringify({completed:false,error:{message:error.message,stack:error.stack}});$('#ownership-status').textContent='Saved-loop Load diagnostic failed: '+error.message;}
 }
 async function runLiveKeyFailure(){
- $('#ownership-run').disabled=true;$('#jog-sync-run').disabled=true;$('#fresh-jog-run').disabled=true;$('#tempo-off-run').disabled=true;$('#manual-loop-load-run').disabled=true;$('#live-key-failure-run').disabled=true;$('#grid-cancel-play-run').disabled=true;
+ disableRuns();
  $('#ownership-status').textContent='Running muted old live-key failure check…';
  try{
   const report=await runLiveKeyFailureCheck(window.openPlay);
@@ -110,13 +112,21 @@ async function runLiveKeyFailure(){
  }catch(error){$('#ownership-result').value=JSON.stringify({completed:false,error:{message:error.message,stack:error.stack}});$('#ownership-status').textContent='Old live-key failure diagnostic failed: '+error.message;}
 }
 async function runGridCancelPlay(){
- $('#ownership-run').disabled=true;$('#jog-sync-run').disabled=true;$('#fresh-jog-run').disabled=true;$('#tempo-off-run').disabled=true;$('#manual-loop-load-run').disabled=true;$('#live-key-failure-run').disabled=true;$('#grid-cancel-play-run').disabled=true;
+ disableRuns();
  $('#ownership-status').textContent='Running muted grid cancellation/new Play check…';
  try{
   const report=await runGridCancelPlayCheck(window.openPlay);
   $('#ownership-result').value=JSON.stringify(report);
   $('#ownership-status').textContent=report.completed?'Grid cancellation/new Play check passed; all audio stopped':'Grid cancellation/new Play check failed: '+(report.error?.message||report.sourceError||'cleanup or source identity');
  }catch(error){$('#ownership-result').value=JSON.stringify({completed:false,error:{message:error.message,stack:error.stack}});$('#ownership-status').textContent='Grid cancellation/new Play diagnostic failed: '+error.message;}
+}
+async function runBeatJumpRecall(){
+ disableRuns();$('#ownership-status').textContent='Running muted cold Beat Jump/newer recall check…';
+ try{
+  const report=await runBeatJumpRecallCheck(window.openPlay);
+  $('#ownership-result').value=JSON.stringify(report);
+  $('#ownership-status').textContent=report.completed?'Cold Beat Jump/newer recall check passed; all audio stopped':'Cold Beat Jump/newer recall check failed: '+(report.error?.message||report.sourceError||'cleanup');
+ }catch(error){$('#ownership-result').value=JSON.stringify({completed:false,error:{message:error.message,stack:error.stack}});$('#ownership-status').textContent='Cold Beat Jump diagnostic failed: '+error.message;}
 }
 async function boot(){
  const parsed=new DOMParser().parseFromString(await(await fetch('workspace-preview.html')).text(),'text/html');
@@ -129,5 +139,6 @@ async function boot(){
  $('#manual-loop-load-run').onclick=runManualLoopLoad;$('#manual-loop-load-run').disabled=false;
  $('#live-key-failure-run').onclick=runLiveKeyFailure;$('#live-key-failure-run').disabled=false;
  $('#grid-cancel-play-run').onclick=runGridCancelPlay;$('#grid-cancel-play-run').disabled=false;
+ $('#beat-jump-recall-run').onclick=runBeatJumpRecall;$('#beat-jump-recall-run').disabled=false;
 }
 boot().catch(error=>$('#ownership-status').textContent='Startup failed: '+error.message);
