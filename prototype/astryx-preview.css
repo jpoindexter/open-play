@@ -1,6 +1,6 @@
 /* Actual Astryx React controls, scoped to the HTML review entry point. */
 #workspace-preview{
- --op-ui-surface:var(--dj-semantic-panel);--op-ui-line:var(--dj-semantic-border-strong);--op-ui-text:var(--dj-semantic-text);--op-ui-selected:var(--dj-semantic-active);
+ --op-ui-surface:var(--dj-semantic-panel);--op-ui-line:var(--dj-semantic-border-strong);--op-ui-text:var(--dj-semantic-text);--op-ui-selected:var(--dj-semantic-control);
  --op-ui-control:var(--dj-semantic-standard-control-height);--op-ui-gap:var(--dj-semantic-gap);
 }
 #workspace-preview [data-astryx-backing]{display:none}
@@ -9,7 +9,7 @@
 #astryx-react-root{display:contents}
 #workspace-preview :is(.op-standard,.op-standard-field button,.op-standard-field input){box-sizing:border-box;border-radius:var(--dj-semantic-control-radius);color:var(--op-ui-text);margin:0}
 #workspace-preview .op-standard{height:var(--op-ui-control);min-height:var(--op-ui-control);min-width:var(--dj-semantic-standard-control-height);padding:0 var(--dj-semantic-inset);background:transparent;border:0;box-shadow:none}
-#workspace-preview .op-standard[aria-pressed=true]{background:var(--op-ui-selected);border-color:transparent;color:var(--dj-semantic-text-on-selected)}
+#workspace-preview .op-standard[aria-pressed=true]{background:var(--op-ui-selected);border-color:transparent;color:var(--dj-semantic-focus)}
 #workspace-preview .op-standard[aria-pressed=mixed]{background:var(--dj-semantic-raised);border-style:dashed}
 #workspace-preview .op-standard:not(:disabled):hover{background:var(--dj-semantic-raised)}
 #workspace-preview .op-standard[aria-pressed=true]:hover{background:var(--op-ui-selected)}

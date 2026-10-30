@@ -7,6 +7,7 @@ const {syncHeadphoneControls}=await import('./headphone-preview.js');
 const {refineRotaryControls,syncRotaryControls}=await import('./rotary-preview.js');
 const {refineFaders,syncFaders}=await import('./fader-preview.js');
 const {refineXoneScales}=await import('./xone-preview.js');
+const {refineDeckToolRails}=await import('./deck-tool-rails.js');
 const monitorAPI={...window.openPlay,persist};
 const {installLibraryWaveforms}=await import('./library-waveform-preview.js');
 installLibraryWaveforms(window.openPlay);
@@ -89,6 +90,7 @@ function decorate(){
     refineDeck(deck,index);
   });
   refineMixer();
+  refineDeckToolRails();
   refineRotaryControls();
   refineXoneScales();
   refinePanelLayout();

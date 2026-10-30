@@ -21,6 +21,10 @@
           "evidenceId": "ev_a845746a8ff8ee3bb086dd0fc3b18542677c35576fe0927987dd986fa6043c37",
           "targetSha256": "07dcecbaf304f777e435539c83c7dcc02e41de1eaf2e0a75e8a9852e4411a244",
           "note": "Observed raster palette and UI anatomy, not original vendor tokens. Exact type and spacing remain inferred. See docs/design-system/REKORDBOX_REFERENCE_2026-10-25.md."
+        },
+        {
+          "path": "local-evidence/dj-app-complete-reference-2026-10-29/open-play-approved-reference.png",
+          "authority": "Owner-approved Open Play graphite concept. Native measurements are macOS logical points, proposed component sizes CSS pixels; no vendor code/artwork bundled."
         }
       ],
       "scale": {
@@ -49,7 +53,10 @@
         "platterText": "{primitive.black}",
         "control": "{primitive.dayPanel}",
         "controlEdge": "{primitive.dayMuted}",
-        "raised": "{primitive.dayBackground}"
+        "raised": "{primitive.dayBackground}",
+        "controlHighlight": "{primitive.dayPanel}",
+        "controlShadow": "{primitive.dayBorder}",
+        "capEdge": "{primitive.dayMuted}"
       },
       "adaptation": "User-directed flat-black product surfaces with existing color accents; reference captures remain unchanged."
     }
@@ -455,6 +462,41 @@
           "value": 88,
           "unit": "px"
         }
+      },
+      "14": {
+        "$type": "dimension",
+        "$value": {
+          "value": 14,
+          "unit": "px"
+        }
+      },
+      "144": {
+        "$type": "dimension",
+        "$value": {
+          "value": 144,
+          "unit": "px"
+        }
+      },
+      "220": {
+        "$type": "dimension",
+        "$value": {
+          "value": 220,
+          "unit": "px"
+        }
+      },
+      "240": {
+        "$type": "dimension",
+        "$value": {
+          "value": 240,
+          "unit": "px"
+        }
+      },
+      "108": {
+        "$type": "dimension",
+        "$value": {
+          "value": 108,
+          "unit": "px"
+        }
       }
     },
     "type": {
@@ -637,8 +679,8 @@
       },
       "panel": {
         "$type": "color",
-        "$value": "#080808",
-        "$description": "Open Play flat-black adaptation requested 27 October 2026; not a new vendor measurement.",
+        "$value": "#121414",
+        "$description": "Open Play graphite adaptation of approved October reference; inferred visual role, not a recovered vendor token.",
         "$extensions": {
           "org.openplay": {
             "confidence": "user-directed adaptation",
@@ -648,8 +690,8 @@
       },
       "control": {
         "$type": "color",
-        "$value": "#0b0b0b",
-        "$description": "Open Play flat-black adaptation requested 27 October 2026; not a new vendor measurement.",
+        "$value": "#1a1c1c",
+        "$description": "Open Play graphite adaptation of approved October reference; inferred visual role, not a recovered vendor token.",
         "$extensions": {
           "org.openplay": {
             "confidence": "user-directed adaptation",
@@ -659,8 +701,8 @@
       },
       "hover": {
         "$type": "color",
-        "$value": "#171717",
-        "$description": "Open Play flat-black adaptation requested 27 October 2026; not a new vendor measurement.",
+        "$value": "#292d2c",
+        "$description": "Open Play graphite adaptation of approved October reference; inferred visual role, not a recovered vendor token.",
         "$extensions": {
           "org.openplay": {
             "confidence": "user-directed adaptation",
@@ -690,8 +732,8 @@
       },
       "divider": {
         "$type": "color",
-        "$value": "#161616",
-        "$description": "Quiet structural separation on black surfaces."
+        "$value": "#292c2b",
+        "$description": "Open Play graphite adaptation of approved October reference; inferred visual role, not a recovered vendor token."
       },
       "controlEdge": {
         "$type": "color",
@@ -740,6 +782,26 @@
         "$type": "number",
         "$value": 700
       }
+    },
+    "controlHighlight": {
+      "$type": "color",
+      "$value": "#353a38"
+    },
+    "controlShadow": {
+      "$type": "color",
+      "$value": "#0b0d0c"
+    },
+    "capEdge": {
+      "$type": "color",
+      "$value": "#929b95"
+    },
+    "cue": {
+      "$type": "color",
+      "$value": "#f6bd4b"
+    },
+    "playing": {
+      "$type": "color",
+      "$value": "#69e87c"
     }
   },
   "semantic": {
@@ -1264,6 +1326,26 @@
       "88": {
         "$type": "dimension",
         "$value": "{primitive.space.88}"
+      },
+      "14": {
+        "$type": "dimension",
+        "$value": "{primitive.space.14}"
+      },
+      "144": {
+        "$type": "dimension",
+        "$value": "{primitive.space.144}"
+      },
+      "220": {
+        "$type": "dimension",
+        "$value": "{primitive.space.220}"
+      },
+      "240": {
+        "$type": "dimension",
+        "$value": "{primitive.space.240}"
+      },
+      "108": {
+        "$type": "dimension",
+        "$value": "{primitive.space.108}"
       }
     },
     "microSize": {
@@ -1325,6 +1407,26 @@
     "controlEdge": {
       "$type": "color",
       "$value": "{primitive.neutral.controlEdge}"
+    },
+    "controlHighlight": {
+      "$type": "color",
+      "$value": "{primitive.controlHighlight}"
+    },
+    "controlShadow": {
+      "$type": "color",
+      "$value": "{primitive.controlShadow}"
+    },
+    "capEdge": {
+      "$type": "color",
+      "$value": "{primitive.capEdge}"
+    },
+    "cue": {
+      "$type": "color",
+      "$value": "{primitive.cue}"
+    },
+    "playing": {
+      "$type": "color",
+      "$value": "{primitive.playing}"
     }
   },
   "component": {
@@ -1394,6 +1496,34 @@
         "$type": "dimension",
         "$value": "{semantic.space.32}",
         "$description": "Four-deck horizontal full-track overview well, measured from PERF-4H at 1 px per logical point; tolerance \u00b12 px."
+      },
+      "toolsHeight": {
+        "$type": "dimension",
+        "$value": "{semantic.space.32}"
+      },
+      "toolsControlHeight": {
+        "$type": "dimension",
+        "$value": "{semantic.space.24}"
+      },
+      "compactBodyMin": {
+        "$type": "dimension",
+        "$value": "{semantic.space.108}"
+      },
+      "transportSize": {
+        "$type": "dimension",
+        "$value": "{semantic.space.36}"
+      },
+      "padHeight": {
+        "$type": "dimension",
+        "$value": "{semantic.space.20}"
+      },
+      "fourDeckBase": {
+        "$type": "dimension",
+        "$value": "{semantic.space.220}"
+      },
+      "expandedBodyMin": {
+        "$type": "dimension",
+        "$value": "{semantic.space.144}"
       }
     },
     "library": {
@@ -1421,7 +1551,7 @@
     "mixer": {
       "channelWidth": {
         "$type": "dimension",
-        "$value": "{semantic.space.48}"
+        "$value": "{semantic.space.52}"
       },
       "mirroredColumnWidth": {
         "$type": "dimension",
@@ -1429,11 +1559,11 @@
       },
       "knobSize": {
         "$type": "dimension",
-        "$value": "{semantic.space.20}"
+        "$value": "{semantic.space.24}"
       },
       "knobRow": {
         "$type": "dimension",
-        "$value": "{semantic.space.32}"
+        "$value": "{semantic.space.36}"
       },
       "faderWidth": {
         "$type": "dimension",
@@ -1449,11 +1579,11 @@
       },
       "capWidth": {
         "$type": "dimension",
-        "$value": "{semantic.space.32}"
+        "$value": "{semantic.space.28}"
       },
       "capHeight": {
         "$type": "dimension",
-        "$value": "{semantic.space.16}"
+        "$value": "{semantic.space.14}"
       },
       "tickWidth": {
         "$type": "dimension",
@@ -1473,7 +1603,7 @@
       },
       "gap": {
         "$type": "dimension",
-        "$value": "{semantic.space.2}"
+        "$value": "{semantic.space.4}"
       },
       "inset": {
         "$type": "dimension",
@@ -1489,7 +1619,7 @@
       },
       "horizontalWidth": {
         "$type": "dimension",
-        "$value": "{semantic.space.128}"
+        "$value": "{semantic.space.144}"
       },
       "twoDeckHeight": {
         "$type": "dimension",
@@ -1541,7 +1671,7 @@
       },
       "fourWidth": {
         "$type": "dimension",
-        "$value": "{semantic.space.224}"
+        "$value": "{semantic.space.240}"
       },
       "compactDiscColumn": {
         "$type": "dimension",

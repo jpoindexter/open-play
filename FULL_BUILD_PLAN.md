@@ -1,3 +1,7 @@
+## Current design follow-through —30 October2026 /0.1.125 candidate
+
+Owner redirected from the isolated graphite preview to the current app. Shared tokens, 24px mixer knobs, 36px Compact transports, centered metallic faders and original-node deck tool rails are implemented. Optional filters and library previews remain. Stopped browser geometry/settings/rail checks and the focused typography/token checks are recorded; no broad audio suite or listening rerun. Desktop125 packaging/native startup follows immutable-source commit. Reset tag preserves1d27160; unrelated draft/preview retained. [Design scope and evidence](docs/design-system/GRAPHITE_CONTROLS_2026-10-30.md). Full design migration, owner listening, genericpop/stall/startup60 and Hercules remain OPEN.
+
 ## Current core follow-through —30 October2026 /0.1.124
 
 Private desktop **0.1.124** is current/default, source1306423. Public grid publication revokes related pending Simple alignment before metadata changes; delayed Loop Roll release checks its own transport token before follow-up Seek so a newer saved-loop recall wins. Two focused source RED→GREEN checks pass. Package5/5/private seal and paused native recovery observed:30.097/34.086s,16tracks/12visible previews/core controls. Relevant changed native races, PCM and listening remain pending. Goal active, audio muted. Genericpop/stall/startup60 and hardware gates remain OPEN. [Delivery and limits](docs/prototype/CORE_GRID_ROLL_RELEASE_124_NATIVE_2026-10-30.json).

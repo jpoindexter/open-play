@@ -1,0 +1,29 @@
+/* One original-control rail per deck; fixed paddles keep every tool reachable. */
+#workspace-preview[data-workspace=rekordbox][data-orientation] .has-tool-rail .preview-deck-utilities{
+ grid-row:4/6;align-self:stretch;height:auto;min-height:var(--dj-component-deck-tools-height);
+ padding-inline:var(--dj-semantic-gap);gap:var(--dj-semantic-gap);flex-wrap:nowrap;
+}
+#workspace-preview[data-workspace=rekordbox] .preview-deck-utilities::before{color:var(--dj-semantic-text-muted)}
+#workspace-preview[data-workspace=rekordbox] .deck-tool-scroll{
+ display:flex;align-items:center;gap:var(--dj-semantic-gap);flex:1;min-width:0;overflow-x:auto;
+ scrollbar-width:none;overscroll-behavior-x:contain;
+}
+.deck-tool-scroll::-webkit-scrollbar{display:none}
+#workspace-preview[data-workspace=rekordbox] .deck-tool-scroll>*{flex-shrink:0}
+#workspace-preview[data-workspace=rekordbox][data-orientation] .deck-tool-scroll :is(.deck-foot,.deck-foot .loop-line){display:contents}
+#workspace-preview[data-workspace=rekordbox][data-orientation] .deck-tool-scroll :is(button,select){
+ min-height:var(--dj-component-deck-tools-control-height);height:var(--dj-component-deck-tools-control-height);
+ white-space:nowrap;flex-shrink:0;flex-grow:0;padding-inline:var(--dj-semantic-gap);
+}
+#workspace-preview[data-workspace=rekordbox][data-orientation] .deck-tool-scroll .spacer{display:none}
+#workspace-preview[data-workspace=rekordbox][data-orientation] .preview-deck-utilities .deck-tool-paddle{
+ display:inline-flex;align-items:center;justify-content:center;flex:none;
+ width:var(--dj-component-deck-tools-control-height);height:var(--dj-component-deck-tools-control-height);
+ min-height:var(--dj-component-deck-tools-control-height);padding:0;border:0;background:transparent;
+}
+.deck-tool-paddle[data-direction='-1'] svg{transform:rotate(180deg)}
+.deck-tool-paddle:disabled{opacity:.25}
+.deck-tool-activity{color:var(--dj-semantic-cue);white-space:nowrap}
+.deck-tool-scroll:focus-within{outline-offset:calc(-1 * var(--dj-semantic-hairline))}
+
+#workspace-preview[data-workspace=rekordbox] .deck-tool-scroll .track-gain-control{flex:none;min-width:max-content;max-width:none}

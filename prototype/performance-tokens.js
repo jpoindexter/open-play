@@ -1,12 +1,12 @@
 // Generated from design-tokens/serato-core.tokens.json.
 export const performanceColors = Object.freeze({
   "background": "#000000",
-  "panel": "#080808",
+  "panel": "#121414",
   "recessed": "#000000",
   "row": "#000000",
-  "rowAlternate": "#080808",
-  "raised": "#171717",
-  "border": "#161616",
+  "rowAlternate": "#121414",
+  "raised": "#292d2c",
+  "border": "#292c2b",
   "borderStrong": "#242424",
   "text": "#dddddd",
   "textMuted": "#a9a9a9",
@@ -29,9 +29,14 @@ export const performanceColors = Object.freeze({
   "wavePlayhead": "#ffffff",
   "wavePast": "#00000033",
   "waveLaneDivider": "#242424",
-  "control": "#0b0b0b",
+  "control": "#1a1c1c",
   "active": "#2465c7",
   "chrome": "#000000",
-  "controlEdge": "#777777"
+  "controlEdge": "#777777",
+  "controlHighlight": "#353a38",
+  "controlShadow": "#0b0d0c",
+  "capEdge": "#929b95",
+  "cue": "#f6bd4b",
+  "playing": "#69e87c"
 });
 export const performanceTypography=Object.freeze({"captionSize":"0.6875rem \"Arial\", \"Helvetica Neue\", sans-serif","microSize":"0.625rem \"Arial\", \"Helvetica Neue\", sans-serif"});
