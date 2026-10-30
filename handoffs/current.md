@@ -1,3 +1,7 @@
+## Current queue reconciliation —30 October2026
+
+Desktop128/source0e61228 is unchanged. Core DJ — Now contained105cards, including36already-complete bounded defects. Those36now sit in Verified evidence;69unfinished core cards remain in Now. Exact paginated readback preserves every prior name/description/completion flag and all106cards across the two lists (Verified evidence1→37). No new criteria marked complete, tests/playback/build or profile/media changes. Native128BeatJump closure and prior accepted manual/jog/EQ/Cue/stop evidence retain their stated scope. Genericpop/stall/startup60, remaining concrete native and owner/Hercules/headphone acceptance stayOPEN. [Disposition receipt](../docs/delivery/CORE_QUEUE_CLOSED_CARDS_2026-10-30.json).
+
 ## Current core native follow-through —30 October2026 /0.1.128
 
 Private128/source0e61228 adds one isolated70-line cold BeatJump/newer saved-loop check; product transport unchanged from127/038ce4d. Actual native four-deck run uses real pitch Worker output358530frames/48kHz, finite/nonzero, with its first completed result held before engine continuation. Normal mode/saved-pad recall supersedes it; releasing old result leaves seek11 only, newer loop11–12/voice/token6/anchor intact.172A/C/D+mixer controls and7/7ready preview sources retained,8images after. Native stopped/muted/hooksrestored and5sourcehashesstable. Bmode change intentionally rebuilds B; no Bnode-identity claim. No broad suite, accepted listening rerun or masterPCM/music/controller/natural-race-frequency proof.
