@@ -42,9 +42,8 @@ body[data-preview-shell=flat][data-orientation] .preview-key-row [data-action=ke
 body[data-preview-shell=flat][data-orientation] .preview-key-row [data-action=keyDown]{grid-column:1;grid-row:2;min-width:0;height:20px;min-height:20px;padding:0;background:transparent}
 body[data-preview-shell=flat][data-orientation] .preview-key-row [data-action=keyUp]{grid-column:3;grid-row:2;min-width:0;height:20px;min-height:20px;padding:0;background:transparent}
 body[data-preview-shell=flat][data-orientation] .rb-sync-controls{grid-column:5;grid-row:1;display:grid;grid-template-rows:28px 16px;gap:2px}
-body[data-preview-shell=flat][data-orientation] .rb-sync-controls button{display:block;min-height:0;padding:1px 3px;white-space:normal;background:var(--dj-semantic-control);border:0;border-radius:0}
+body[data-preview-shell=flat][data-orientation] .rb-sync-controls button{display:block;min-height:0;padding:1px 3px;white-space:normal;border:0;border-radius:0}
 body[data-preview-shell=flat][data-orientation] .rb-sync-controls [data-action=syncOff]{border:1px solid var(--dj-semantic-border-strong);background:transparent}
-body[data-preview-shell=flat][data-orientation] .rb-sync-controls button.active{background:var(--dj-semantic-control);color:var(--dj-semantic-focus)}
 body[data-preview-shell=flat][data-orientation] .wave-wrap{grid-row:2;grid-column:1/-1;height:var(--rb-overview-height);margin:0;background:var(--dj-semantic-recessed);border:0;border-radius:0}
 body[data-preview-shell=flat][data-orientation] .deck-body>div:first-child{grid-row:3;grid-column:1;padding:4px 2px 0 6px;align-self:start;min-width:0}
 body[data-preview-shell=flat][data-orientation] .deck:nth-of-type(even) .deck-body>div:first-child{grid-column:5;padding:4px 6px 0 2px}
@@ -62,7 +61,7 @@ body[data-preview-shell=flat][data-orientation] .deck:nth-of-type(even) .rb-pad-
 body[data-preview-shell=flat][data-orientation] .preview-loop-strip{grid-row:3;grid-column:2;margin:4px 0 0;align-self:start;display:block}
 body[data-preview-shell=flat][data-orientation] .deck:nth-of-type(even) .preview-loop-strip{grid-column:4}
 body[data-preview-shell=flat][data-orientation] .preview-loop-strip .loop-line{display:grid;grid-template-columns:1fr 1fr;gap:var(--grid-1);margin:var(--grid-0)}
-body[data-preview-shell=flat][data-orientation] .preview-loop-strip button{height:var(--grid-6);min-height:var(--grid-6);padding:var(--grid-0);background:var(--dj-semantic-control);border:0}
+body[data-preview-shell=flat][data-orientation] .preview-loop-strip button{height:var(--grid-6);min-height:var(--grid-6);padding:var(--grid-0);border:0}
 body[data-preview-shell=flat][data-orientation] .preview-loop-strip [data-action=loop]{grid-column:1/-1;grid-row:1;height:var(--grid-8);}
 body[data-preview-shell=flat][data-orientation] .preview-loop-strip [data-action=loopHalf]{grid-row:2;grid-column:1}
 body[data-preview-shell=flat][data-orientation] .preview-loop-strip [data-action=loopDouble]{grid-row:2;grid-column:2}
@@ -72,17 +71,11 @@ body[data-preview-shell=flat][data-orientation] .deck:nth-of-type(even) .transpo
 body[data-preview-shell=flat][data-orientation] .transport select{order:0;min-height:var(--grid-6);height:var(--grid-6);width:var(--grid-10);padding:var(--grid-0);background:var(--dj-semantic-control);border:0;color:var(--dj-semantic-text)}
 body[data-preview-shell=flat][data-orientation] .transport [data-action=cue]{order:1}
 body[data-preview-shell=flat][data-orientation] .transport [data-action=play]{order:2}
-body[data-preview-shell=flat][data-orientation] .transport :is([data-action=cue],[data-action=play]){width:var(--grid-9);height:var(--grid-9);min-width:var(--grid-9);min-height:var(--grid-9);flex:none;border-radius:50%;background:var(--dj-semantic-panel);border:1px solid var(--dj-semantic-control-edge);color:var(--dj-semantic-text);padding:var(--grid-0);}
-/* Transport state illuminates the original symbol; no extra status dot. */
-body[data-preview-shell=flat][data-orientation] .transport :is([data-action=cue],[data-action=play]){background:radial-gradient(circle at 40% 20%,var(--dj-semantic-control-highlight),var(--dj-semantic-control-shadow) 80%);color:var(--dj-semantic-text-muted)}
-body[data-preview-shell=flat][data-orientation] .transport [data-action=play]:is(.active,:active){color:var(--dj-semantic-playing);border-color:var(--dj-semantic-playing);background:var(--dj-semantic-control);text-shadow:0 0 var(--dj-semantic-inset) currentColor}
-body[data-preview-shell=flat][data-orientation] .transport [data-action=cue]:is(.active,:active,[aria-pressed=true]){color:var(--dj-semantic-cue);border-color:var(--dj-semantic-cue);text-shadow:0 0 var(--dj-semantic-inset) currentColor}
-body[data-preview-shell=flat][data-orientation] .deck .platter{grid-row:3;grid-column:4;width:104px;height:104px;align-self:center;justify-self:center;padding:0;margin:0;border:2px solid #2b73d0;border-radius:50%;background:var(--dj-semantic-platter);box-shadow:0 0 0 5px var(--dj-semantic-panel),0 0 0 7px #b7b7b7;display:flex;flex-direction:column;justify-content:center;gap:4px}
+body[data-preview-shell=flat][data-orientation] .deck .platter{grid-row:3;grid-column:4;width:104px;height:104px;align-self:center;justify-self:center;padding:0;margin:0;display:flex;flex-direction:column;justify-content:center;gap:4px}
 body[data-preview-shell=flat][data-orientation] .deck:nth-of-type(even) .platter{grid-column:2}
 body[data-preview-shell=flat][data-orientation] .rb-deck-options{grid-column:5;grid-row:3;display:flex;flex-direction:column;justify-content:space-between;align-items:center;padding:var(--grid-1) var(--grid-0) var(--grid-2);gap:var(--grid-1)}
 body[data-preview-shell=flat][data-orientation] .deck:nth-of-type(even) .rb-deck-options{grid-column:3}
-body[data-preview-shell=flat][data-orientation] .rb-deck-options button{min-width:var(--grid-7);min-height:var(--grid-6);padding:var(--grid-0);background:var(--dj-semantic-control);border:0}
-body[data-preview-shell=flat][data-orientation] .rb-deck-options button.active{background:#2479e2;color:#fff}
+body[data-preview-shell=flat][data-orientation] .rb-deck-options button{min-width:var(--grid-7);min-height:var(--grid-6);padding:var(--grid-0);border:0}
 body[data-preview-shell=flat][data-orientation] .preview-deck-utilities{grid-column:1/-1;grid-row:4;display:flex;flex-wrap:nowrap;align-items:center;justify-content:flex-start;gap:var(--grid-1);padding:var(--grid-0) var(--grid-1);margin:var(--grid-0);border-top:1px solid var(--dj-semantic-border);min-width:0}
 body[data-preview-shell=flat][data-orientation] .preview-deck-utilities button{min-height:var(--grid-6);height:var(--grid-6);padding:var(--grid-0) var(--grid-1);white-space:nowrap}
 body[data-preview-shell=flat][data-orientation] .track-gain-control{margin-right:0;gap:2px;flex:none}

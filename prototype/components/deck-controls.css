@@ -1,0 +1,33 @@
+/* Shared control appearance. Workspace adapters retain placement and density. */
+body[data-preview-shell=flat][data-orientation]{
+ & :is(.rb-deck-options,.preview-loop-strip,.preview-key-row,.rb-sync-controls) button{
+  background:var(--dj-semantic-control);color:var(--dj-semantic-text-muted);
+ }
+ & :is(.rb-deck-options,.preview-loop-strip,.preview-key-row,.rb-sync-controls) button:is(.active,[aria-pressed=true]){
+  background:var(--dj-semantic-control);color:var(--dj-semantic-focus);
+ }
+ & .preview-loop-strip button.active{color:var(--dj-semantic-cue)}
+ & .deck-tool-scroll button:is(.active,[aria-pressed=true]){
+  background:var(--dj-semantic-control);color:var(--dj-semantic-cue);
+ }
+ & :is(.rb-deck-options,.preview-loop-strip,.preview-key-row,.rb-sync-controls,.deck-tool-scroll) button:not(:disabled):is(:hover,:active){
+  background:var(--dj-semantic-raised);
+ }
+ & .transport :is([data-action=cue],[data-action=play]){
+  width:var(--dj-component-deck-transport-size);height:var(--dj-component-deck-transport-size);
+  min-width:var(--dj-component-deck-transport-size);min-height:var(--dj-component-deck-transport-size);
+  flex:none;aspect-ratio:1;padding:0;border-radius:50%;
+  border:var(--dj-semantic-hairline) solid var(--dj-semantic-control-edge);
+  background:var(--dj-semantic-control);color:var(--dj-semantic-text-muted);
+ }
+ & .transport [data-action=play]:is(.active,:active){color:var(--dj-semantic-playing);border-color:currentColor}
+ & .transport [data-action=cue]:is(.active,:active,[aria-pressed=true]){color:var(--dj-semantic-cue);border-color:currentColor}
+ & .deck .platter{
+  aspect-ratio:1;border:var(--dj-semantic-hairline) solid var(--dj-semantic-control-edge);
+  border-radius:50%;background:var(--dj-semantic-platter);box-shadow:none;
+ }
+ & .deck :is(button,.platter):focus-visible{
+  outline:var(--dj-semantic-focus-width) solid var(--dj-semantic-focus);
+  outline-offset:var(--dj-semantic-hairline);
+ }
+}
