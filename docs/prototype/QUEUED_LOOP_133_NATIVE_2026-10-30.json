@@ -1,0 +1,108 @@
+{
+  "date": "2026-10-30",
+  "version": "0.1.133",
+  "sourceCommit": "753cd22e01cb4f846fcb8943946c11268a98d255",
+  "archiveSHA256": "967226c590618759b9b14c7a0f071b853a4c89ca9a6b5dc57aad58549acd8fbf",
+  "native": {
+    "action": "queued Auto Loop",
+    "completed": true,
+    "scope": "Packaged generated-only four-deck workspace, real AudioContext and cold pitch-render Worker. First completed render result is held before engine continuation; queued Auto Loop or Beat Jump yields to newer saved-loop recall through normal mode/pad handlers. Not natural scheduling probability, master PCM, music/listening, controller or general pop/stall proof.",
+    "render": {
+      "frames": 217750,
+      "sampleRate": 48000,
+      "finite": true,
+      "peak": 0.02027040906250477,
+      "window": {
+        "start": 4,
+        "end": 8.536458333333334
+      }
+    },
+    "held": {
+      "token": 3,
+      "loopIn": 6,
+      "loopOut": 6.5,
+      "calls": 1
+    },
+    "after": {
+      "token": 6,
+      "position": 11,
+      "anchor": 6.563832199546485,
+      "loopIn": 11,
+      "loopOut": 12,
+      "autoLoopBeats": null,
+      "loopLength": 2,
+      "playing": true,
+      "seeks": [
+        11
+      ],
+      "renderCalls": 3,
+      "siblingControlsRetained": 172,
+      "previewSourcesRetained": 8,
+      "previewImagesAfter": 8
+    },
+    "cleanup": {
+      "allStopped": true,
+      "physicalMuted": true,
+      "methodsRestored": true
+    },
+    "sourceBefore": {
+      "app.js": "ad4e2b47146e4342102fa64c19923eba120597c12892433b9e0a97dd24d51058",
+      "engine.js": "036f084a42177cb58eeaf926b3fd3d5ea6f0ef7b2fe9aefcb1974711ee89261b",
+      "loop-pads.js": "5cc6223884590738b44402fca17e1c3e64668d62a0f94b04f28587c4091698d4",
+      "keylock.js": "63cab6070fb0a6683a7905955a33390385d6b71f61add773f7338c8c881b4a2d",
+      "loop-pad-recall-check.js": "3e5c1ccf70dd9c8b6c2730b390a94b4fb2daf48a090b0802f72a6c0aa183bb1b"
+    },
+    "sourceAfter": {
+      "app.js": "ad4e2b47146e4342102fa64c19923eba120597c12892433b9e0a97dd24d51058",
+      "engine.js": "036f084a42177cb58eeaf926b3fd3d5ea6f0ef7b2fe9aefcb1974711ee89261b",
+      "loop-pads.js": "5cc6223884590738b44402fca17e1c3e64668d62a0f94b04f28587c4091698d4",
+      "keylock.js": "63cab6070fb0a6683a7905955a33390385d6b71f61add773f7338c8c881b4a2d",
+      "loop-pad-recall-check.js": "3e5c1ccf70dd9c8b6c2730b390a94b4fb2daf48a090b0802f72a6c0aa183bb1b"
+    },
+    "sourceStable": true
+  },
+  "independentReadback": {
+    "allFiveSourceHashesMatchCheckout": true,
+    "allEightReadyIDsKeysAndSourcesRetained": true,
+    "mainPositionsBeforeAfter": [
+      30.097,
+      34.086
+    ],
+    "mainLibraryTracks": 16,
+    "mainMaterializedPreviews": 12,
+    "mainStoppedSilentMaster": true,
+    "noMainPlaySyncCueREC": true
+  },
+  "failedAttemptsRetained": {
+    "native131": "Old setup compared a stale126BPM preview after changing fixture to120BPM",
+    "native132": "Single sort refresh moved the edited row outside lazy-preparation viewport; preparation timed out before overlap",
+    "diagnosis": "Browser key trace proves only edited demo-1 key126\u2192120/source changes;7other sources retained. Double sort preserves original row order, prepared edited preview mandatory, original strict post-overlap assertion unchanged.",
+    "report": "QUEUED_LOOP_NATIVE_131_2026-10-30.json"
+  },
+  "recovery": {
+    "profileClosed": true,
+    "recovery": "/Users/jasonpoindexter/Documents/GitHub/Open Play/local-evidence/profile-recovery/pre-loop-row-order-0.1.132-2026-10-30",
+    "files": 262,
+    "bytes": 120233596,
+    "hashSizeMtimeEqual": true,
+    "retiredBuild": "0.1.131",
+    "retiredLogicalBytes": 810449105,
+    "retiredArchiveSHA256": "14e2a93467baff8cc66491e4549080784812309739461d6f08f87f612a8a9c53"
+  },
+  "cleanup": {
+    "retiredBuild": "0.1.132",
+    "retiredArchiveSHA256": "3106dc413481aaccfa25d8c6cb78f26f2e9468582841a1515186bfa159981062",
+    "retiredLogicalBytes": 811507764,
+    "ownedElectronZIPRemoved": true,
+    "onlyBundle": "0.1.133",
+    "launchers": "Current/playback/named133syntax checked, exact app executed separately"
+  },
+  "limits": [
+    "Generated-only real pitch Worker with deliberately held completed result; not natural race frequency",
+    "No master PCM/transient/music listening/controller/headphone/generalpop or stall proof",
+    "B mode change intentionally rebuilds B; retained-node assertion covers A/C/D and mixer",
+    "Prior53and109owneracceptedunchangedpathsnotrepeated",
+    "Full core, startup60 and hardware/listening gates remain open"
+  ],
+  "rawEvidence": "/Users/jasonpoindexter/Documents/GitHub/Open Play/local-evidence/queued-loop-native-131-2026-10-30"
+}
