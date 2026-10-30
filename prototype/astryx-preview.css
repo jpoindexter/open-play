@@ -29,7 +29,13 @@
 #workspace-preview .hybrid-controls{min-height:var(--dj-semantic-toolbar-height);gap:var(--dj-semantic-inset)}
 #workspace-preview .hybrid-controls label{display:flex;align-items:center;gap:var(--dj-semantic-inset)}
 #workspace-preview .toolbar{min-height:var(--dj-semantic-toolbar-height);gap:var(--dj-semantic-gap)}
-#workspace-preview .library-tools{gap:var(--dj-semantic-gap);min-height:var(--dj-semantic-toolbar-height)}
+/* One command row: preserve complete labels and let narrow libraries scroll. */
+#workspace-preview .library-tools{
+ gap:var(--dj-semantic-gap);min-height:var(--dj-semantic-toolbar-height);
+ height:auto;flex-wrap:nowrap;overflow-x:auto;overscroll-behavior-x:contain;
+}
+#workspace-preview .library-tools :is(.op-standard,.astryx-field,.astryx-selector){flex:none}
+#workspace-preview .library-tools :is(.op-standard,[role=combobox]){flex:none;white-space:nowrap;width:max-content;max-width:none}
 #workspace-preview .crate-tools{gap:var(--dj-semantic-gap)}
 #workspace-preview .preview-zoom .op-standard{width:var(--dj-semantic-standard-control-height);padding:0}
 

@@ -497,6 +497,13 @@
           "value": 108,
           "unit": "px"
         }
+      },
+      "1000": {
+        "$type": "dimension",
+        "$value": {
+          "value": 1000,
+          "unit": "px"
+        }
       }
     },
     "type": {
@@ -1427,6 +1434,11 @@
     "playing": {
       "$type": "color",
       "$value": "{primitive.playing}"
+    },
+    "performanceMinWidth": {
+      "$type": "dimension",
+      "$value": "{primitive.space.1000}",
+      "$description": "Existing desktop host minimum. Below this width preserve control geometry with horizontal scrolling; not a vendor measurement."
     }
   },
   "component": {

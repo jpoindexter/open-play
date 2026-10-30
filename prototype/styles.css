@@ -1096,7 +1096,7 @@ kbd {
   .review-bar > span:first-child {
     display: none;
   }
-  main {
+  body:not([data-preview-shell=flat]) main {
     height: auto;
     min-height: 100vh;
   }
@@ -1104,14 +1104,14 @@ kbd {
   .four-decks #decks {
     grid-template-columns: 1fr;
   }
-  .library {
+  body:not([data-preview-shell=flat]) .library {
     height: 440px;
     flex: none;
   }
   .toolbar-separator {
     display: none;
   }
-  #mixer {
+  body:not([data-preview-shell=flat]) #mixer {
     flex-wrap: wrap;
   }
   .settings-grid,
@@ -1124,7 +1124,7 @@ kbd {
   .library-tools #search {
     width: 150px;
   }
-  .layout-Stack .deck {
+  body:not([data-preview-shell=flat]) .layout-Stack .deck {
     display: block;
   }
   .coverage-row summary {
@@ -1142,7 +1142,7 @@ kbd {
   .form-grid {
     grid-template-columns: 1fr;
   }
-  .library {
+  body:not([data-preview-shell=flat]) .library {
     grid-template-columns: 135px 1fr;
   }
 }

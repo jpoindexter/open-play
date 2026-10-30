@@ -1,5 +1,7 @@
 /* Shared performance chrome; layout choices change geometry, not this contract. */
 #workspace-settings-parking{display:none}
+/* Keep the existing desktop minimum; narrow review panels scroll without scaling controls. */
+#workspace-preview[data-preview-shell=flat]{min-width:var(--dj-semantic-performance-min-width)}
 #workspace-preview .performance-toolbar{
  display:flex;align-items:center;flex-wrap:nowrap;gap:var(--dj-semantic-gap);
  height:var(--dj-semantic-toolbar-height);min-height:var(--dj-semantic-toolbar-height);
