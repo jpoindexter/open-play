@@ -1,3 +1,4 @@
+import {runSimpleGridSyncCheck} from './simple-grid-sync-check.js';
 import {runCueSeekCheck} from './cue-seek-check.js';
 import {runInstantDoubleSeekCheck} from './instant-double-seek-check.js';
 import {runJogFocusCheck} from './jog-focus-check.js';
@@ -144,10 +145,16 @@ async function runCueSeek(){
   $('#ownership-status').textContent=report.completed?'Released Cue/newer seek check passed; all audio stopped':'Released Cue/newer seek check failed: '+(report.error?.message||report.sourceError||'cleanup');
  }catch(error){$('#ownership-result').value=JSON.stringify({completed:false,error:{message:error.message,stack:error.stack}});$('#ownership-status').textContent='Cue diagnostic failed: '+error.message;}
 }
+async function runSimpleGrid(){
+ disableRuns();$('#ownership-status').textContent='Running muted Simple Sync/grid publication check…';
+ try{const report=await runSimpleGridSyncCheck(window.openPlay);$('#ownership-result').value=JSON.stringify(report);$('#ownership-status').textContent=report.completed?'Simple Sync/grid check passed; all audio stopped':'Simple Sync/grid check failed: '+(report.error?.message||report.sourceError||'cleanup');}
+ catch(error){$('#ownership-result').value=JSON.stringify({completed:false,error:{message:error.message,stack:error.stack}});$('#ownership-status').textContent='Simple Sync diagnostic failed: '+error.message;}
+}
 async function boot(){
  const parsed=new DOMParser().parseFromString(await(await fetch('workspace-preview.html')).text(),'text/html');
  for(const node of [...parsed.body.children])if(node.tagName!=='SCRIPT')document.body.append(node);
  await import('./layout-preview.js');await until(()=>window.openPlay?.state.decks[1].track,'Workspace startup');
+ $('#simple-grid-run').onclick=runSimpleGrid;$('#simple-grid-run').disabled=false;
  $('#cue-seek-run').onclick=runCueSeek;$('#cue-seek-run').disabled=false;
  $('#double-seek-run').onclick=runDoubleSeek;$('#double-seek-run').disabled=false;
  $('#ownership-run').onclick=run;$('#ownership-run').disabled=false;$('#ownership-run').textContent='Run one muted core ownership check';$('#ownership-status').textContent='Ready';
