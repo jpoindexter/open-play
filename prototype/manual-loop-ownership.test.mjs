@@ -125,3 +125,36 @@ test('pending Beat Jump yields to a newer saved-loop recall without its old seek
   assert.equal(deck.position,13);assert.equal(deck.loopIn,13);assert.equal(deck.loopOut,14);assert.equal(deck.playing,true);
  }finally{f.releaseRenders();f.cleanup();}
 });
+
+test('pending Auto Loop and its queued pad yield to a newer saved-loop recall',async()=>{
+ const f=await fixture(),{engine,deck,jobs}=f,state={decks:[deck],deckCount:1,focus:0,settings:{}},loopPads=createLoopPads({state,engine});
+ const until=async check=>{const end=Date.now()+3000;while(!check()){assert(Date.now()<end,'Actual loop preparation not reached');await new Promise(resolve=>setImmediate(resolve));}};
+ try{
+  deck.tab='Loops';deck.loopPadMode='auto';deck.autoLoopBeats=null;deck.track.savedLoops[1]={start:11,end:12};
+  const first=loopPads.press(deck,'auto',3).pending;await until(()=>jobs.length===2);
+  const queued=loopPads.press(deck,'auto',4).pending;
+  const app=readFileSync(new URL('./app.js',import.meta.url),'utf8'),scope={state,engine,manualLoops:f.manual,loopPads,notify:m=>assert.fail(m),refreshLoopDecks(){}};
+  vm.runInNewContext(app.slice(app.indexOf('async function deckAction('),app.indexOf('\nlet importTail='))+'\nglobalThis.savedPad=deckAction;',scope);
+  deck.loopPadMode='saved';const newer=scope.savedPad('pad',0,{dataset:{pad:'1'}});await until(()=>jobs.length>=3);
+  f.releaseRenders();assert.equal(await newer,true,'Older queued Auto Loop canceled the newer saved-loop recall');
+  const voice=engine.voices.get(0),token=engine.startTokens.get(0);assert.deepEqual(await Promise.all([first,queued]),[false,false]);
+  assert.equal(deck.loopIn,11);assert.equal(deck.loopOut,12);assert.equal(deck.loopLength,2);assert.equal(deck.autoLoopBeats,null);
+  assert.equal(engine.voices.get(0),voice);assert.equal(engine.startTokens.get(0),token);assert.equal(deck.playing,true);
+  const fresh=loopPads.press(deck,'auto',3).pending,next=loopPads.press(deck,'auto',4).pending;
+  assert.deepEqual(await Promise.all([fresh,next]),[true,true],'Successful owned preparations must carry legitimate queued pads');
+  assert.equal(deck.loopIn,11);assert.equal(deck.loopOut,12);assert.equal(deck.autoLoopBeats,2);assert.equal(deck.loopLength,2);
+ }finally{f.releaseRenders();f.cleanup();}
+});
+
+test('rejected queued Roll release still clears only its own held-pad state',async()=>{
+ const f=await fixture(),{engine,deck,jobs}=f,loopPads=createLoopPads({state:{decks:[deck],settings:{}},engine});
+ const until=async check=>{const end=Date.now()+3000;while(!check()){assert(Date.now()<end);await new Promise(resolve=>setImmediate(resolve));}};
+ try{
+  deck.autoLoopBeats=null;deck.track.savedLoops[1]={start:11,end:12};
+  const hold=loopPads.hold('held',deck,0,{length:4,ignoreBeatJump:true});await f.reached;
+  const release=loopPads.release('held'),newer=f.manual.recall(deck,1);await until(()=>jobs.length>=3);f.releaseRenders();
+  assert.equal(await newer,true);await Promise.all([hold,release]);assert.equal(loopPads.rolling(deck),false);
+  assert.equal(deck.loopIn,11);assert.equal(deck.loopOut,12);assert.equal(deck.playing,true);
+  assert.equal(await loopPads.press(deck,'auto',3).pending,true,'Stale held state must not block a fresh Auto Loop');
+ }finally{f.releaseRenders();f.cleanup();}
+});

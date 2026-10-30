@@ -1,15 +1,15 @@
 // Isolated diagnostic: real cold render, held result, ordinary pad handlers.
-export async function runBeatJumpRecallCheck({state,engine}){
+export async function runLoopPadRecallCheck({state,engine},queuedAuto=false){
  const sleep=ms=>new Promise(resolve=>setTimeout(resolve,ms)),assert=(value,message)=>{if(!value)throw Error(message);};
  const frames=()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)));
  async function until(check,label){const end=performance.now()+15000;while(!check()){assert(performance.now()<end,label+' timed out');await sleep(5);}}
  const click=selector=>{const node=document.querySelector(selector);assert(node&&!node.disabled,'Unavailable '+selector);node.click();};
- async function hashes(){return Object.fromEntries(await Promise.all(['app.js','engine.js','loop-pads.js','keylock.js','beat-jump-recall-check.js'].map(async file=>{
+ async function hashes(){return Object.fromEntries(await Promise.all(['app.js','engine.js','loop-pads.js','keylock.js','loop-pad-recall-check.js'].map(async file=>{
   const response=await fetch(file,{cache:'no-store'});assert(response.ok,'Cannot hash '+file);
   return[file,[...new Uint8Array(await crypto.subtle.digest('SHA-256',await response.arrayBuffer()))].map(v=>v.toString(16).padStart(2,'0')).join('')];
  })));}
  const saved=[],edit=(object,values)=>{saved.push([object,Object.fromEntries(Object.keys(values).map(key=>[key,Object.getOwnPropertyDescriptor(object,key)]))]);Object.assign(object,values);};
- const d=state.decks[1],report={startedAt:new Date().toISOString(),completed:false,scope:'Packaged generated-only four-deck workspace, real AudioContext and cold pitch-render Worker. First completed render result is held before engine continuation; newer saved-loop recall uses normal mode/pad handlers. Not natural scheduling probability, master PCM, music/listening, controller or general pop/stall proof.'};
+ const d=state.decks[1],report={action:queuedAuto?'queued Auto Loop':'Beat Jump',startedAt:new Date().toISOString(),completed:false,scope:'Packaged generated-only four-deck workspace, real AudioContext and cold pitch-render Worker. First completed render result is held before engine continuation; queued Auto Loop or Beat Jump yields to newer saved-loop recall through normal mode/pad handlers. Not natural scheduling probability, master PCM, music/listening, controller or general pop/stall proof.'};
  let track,buffer,render,renderOwn,seek,seekOwn,heldJob,release,held=false,calls=0;
  assert(state.tracks.length&&state.tracks.every(t=>t.demo),'Generated-only isolated session required');
  assert(state.decks.every(deck=>!deck.playing&&!deck.processing&&!deck.playQueued)&&!engine.recording,'All decks and recording must start stopped');
@@ -17,12 +17,12 @@ export async function runBeatJumpRecallCheck({state,engine}){
   report.sourceBefore=await hashes();engine.init();engine.audioMonitor.mutePhysical(true);await engine.resume();
   assert(engine.audioMonitor.snapshot().physicalMuted,'Physical mute failed');await until(()=>!state.analysis,'Startup analysis');
   track=d.track;assert(track?.demo,'Generated B must be loaded');await until(()=>!engine.bufferLoads.has(track.id),'Generated decode');buffer=engine.buffers.get(track.id);
-  state.autoplay=false;edit(state.settings,{'Sync Mode':'Off','Show Beat Jump Controls':true,'Use Auto Gain':false});
+  state.autoplay=false;edit(state.settings,{'Sync Mode':'Off','Show Beat Jump Controls':!queuedAuto,'Use Auto Gain':false});
   edit(track,{bpm:120,grid:0,duration:30,gridWarpMarkers:[],gridMarkers:[],analyzed:true,savedLoops:[null,{start:11,end:12,name:'Newer loop'}]});
   const generated=engine.ctx.createBuffer(1,48000*30,48000),samples=generated.getChannelData(0);
   for(let i=0;i<samples.length;i++)samples[i]=.02*Math.sin(2*Math.PI*330*i/48000);
   engine.buffers.set(track.id,generated);engine.keylockRenderer.clear();
-  Object.assign(d,{position:6.5,rate:1,keylock:true,keyShift:-12,reverse:false,stemSlip:'off',loop:true,loopIn:6,loopOut:8,loopLength:4,sync:false,syncState:'off',syncRole:null,repeat:false,tab:'Loops',loopPadMode:'roll',controllerPadMode:null});
+  Object.assign(d,{position:6.5,rate:1,keylock:true,keyShift:-12,reverse:false,stemSlip:'off',loop:true,loopIn:6,loopOut:8,loopLength:4,sync:false,syncState:'off',syncRole:null,repeat:false,tab:'Loops',loopPadMode:queuedAuto?'auto':'roll',autoLoopBeats:null,controllerPadMode:null});
   const count=document.querySelector('#deck-count');assert(count,'Deck count missing');count.value='4';count.dispatchEvent(new Event('change',{bubbles:true}));await frames();
   assert(state.deckCount===4&&document.querySelectorAll('.deck').length===4,'Four decks missing');
   const previewMap=()=>new Map([...document.querySelectorAll('#tracks tbody tr[data-track] .library-wave-preview img')].map(node=>[node.closest('tr[data-track]').dataset.track,node.src]));
@@ -40,9 +40,10 @@ export async function runBeatJumpRecallCheck({state,engine}){
    })();void heldJob.catch(()=>{});return heldJob;
   };
   const seeks=[];seek=engine.seek;seekOwn=Object.getOwnPropertyDescriptor(engine,'seek');engine.seek=function(deck,position,...args){if(deck===d)seeks.push(position);return seek.call(this,deck,position,...args);};
-  click('[data-action="pad"][data-deck="1"][data-pad="7"]');await until(()=>held&&d.processing,'Real cold render result held');
+  click(`[data-action="pad"][data-deck="1"][data-pad="${queuedAuto?3:7}"]`);await until(()=>held&&d.processing,'Real cold render result held');
   const controller=engine.transforms.get(1),oldToken=engine.startTokens.get(1);assert(controller&&!controller.signal.aborted&&engine.voices.get(1)===old,'Held jump must retain its original voice');
   report.held={token:oldToken,loopIn:d.loopIn,loopOut:d.loopOut,calls};
+  if(queuedAuto)click('[data-action="pad"][data-deck="1"][data-pad="4"]');
   click('[data-action="loopMode"][data-deck="1"][data-mode="saved"]');await frames();
   click('[data-action="pad"][data-deck="1"][data-pad="1"]');
   await until(()=>!d.processing&&d.playing&&d.loopIn===11&&d.loopOut===12&&seeks.length===1,'Newer saved-loop recall');
@@ -51,9 +52,10 @@ export async function runBeatJumpRecallCheck({state,engine}){
   release();await heldJob;await frames();await until(()=>!engine.transforms.has(1),'Old jump continuation settled');
   assert(engine.voices.get(1)===voice&&engine.startTokens.get(1)===token&&d.anchorTime===anchor&&d.anchorPosition===position,'Old jump replaced the newer transport');
   assert(seeks.length===1&&seeks[0]===11&&d.loopIn===11&&d.loopOut===12&&d.playing,'Obsolete jump sought or rewrote the newer loop');
+  if(queuedAuto)assert(d.autoLoopBeats===null&&d.loopLength===2,'Obsolete Auto Loop metadata survived');
   assert(controls.every(node=>node.isConnected),'Sibling/mixer controls replaced');const current=previewMap();assert([...previews].every(([id,src])=>current.get(id)===src),'Ready library previews changed');
   assert(engine.audioMonitor.snapshot().physicalMuted,'Physical mute changed');
-  report.after={token,position,anchor,loopIn:d.loopIn,loopOut:d.loopOut,playing:d.playing,seeks,renderCalls:calls,siblingControlsRetained:controls.length,previewSourcesRetained:previews.size,previewImagesAfter:current.size};report.completed=true;
+  report.after={token,position,anchor,loopIn:d.loopIn,loopOut:d.loopOut,autoLoopBeats:d.autoLoopBeats,loopLength:d.loopLength,playing:d.playing,seeks,renderCalls:calls,siblingControlsRetained:controls.length,previewSourcesRetained:previews.size,previewImagesAfter:current.size};report.completed=true;
  }catch(error){report.error={name:error.name,message:error.message,stack:error.stack};}
  finally{
   release?.();state.autoplay=false;state.decks.forEach(deck=>engine.pause(deck));engine.stopAllSamples();if(heldJob)try{await heldJob;}catch{}

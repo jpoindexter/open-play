@@ -5,7 +5,7 @@ import {runTempoOnlyOffCheck} from './tempo-only-off-check.js';
 import {runManualLoopLoadCheck} from './manual-loop-load-check.js';
 import {runLiveKeyFailureCheck} from './live-key-failure-check.js';
 import {runGridCancelPlayCheck} from './grid-cancel-play-check.js';
-import {runBeatJumpRecallCheck} from './beat-jump-recall-check.js';
+import {runLoopPadRecallCheck} from './loop-pad-recall-check.js';
 const $=selector=>document.querySelector(selector),sleep=ms=>new Promise(resolve=>setTimeout(resolve,ms));
 const assert=(value,message)=>{if(!value)throw Error(message);};
 const disableRuns=()=>document.querySelectorAll('section[aria-label="Isolated core ownership check"] button').forEach(button=>button.disabled=true);
@@ -120,12 +120,12 @@ async function runGridCancelPlay(){
   $('#ownership-status').textContent=report.completed?'Grid cancellation/new Play check passed; all audio stopped':'Grid cancellation/new Play check failed: '+(report.error?.message||report.sourceError||'cleanup or source identity');
  }catch(error){$('#ownership-result').value=JSON.stringify({completed:false,error:{message:error.message,stack:error.stack}});$('#ownership-status').textContent='Grid cancellation/new Play diagnostic failed: '+error.message;}
 }
-async function runBeatJumpRecall(){
- disableRuns();$('#ownership-status').textContent='Running muted cold Beat Jump/newer recall check…';
+async function runLoopPadRecall(queuedAuto=false){
+ disableRuns();const label=queuedAuto?'Queued Auto Loop/newer recall':'Cold Beat Jump/newer recall';$('#ownership-status').textContent='Running muted '+label+' check…';
  try{
-  const report=await runBeatJumpRecallCheck(window.openPlay);
+  const report=await runLoopPadRecallCheck(window.openPlay,queuedAuto);
   $('#ownership-result').value=JSON.stringify(report);
-  $('#ownership-status').textContent=report.completed?'Cold Beat Jump/newer recall check passed; all audio stopped':'Cold Beat Jump/newer recall check failed: '+(report.error?.message||report.sourceError||'cleanup');
+  $('#ownership-status').textContent=report.completed?label+' check passed; all audio stopped':label+' check failed: '+(report.error?.message||report.sourceError||'cleanup');
  }catch(error){$('#ownership-result').value=JSON.stringify({completed:false,error:{message:error.message,stack:error.stack}});$('#ownership-status').textContent='Cold Beat Jump diagnostic failed: '+error.message;}
 }
 async function boot(){
@@ -139,6 +139,7 @@ async function boot(){
  $('#manual-loop-load-run').onclick=runManualLoopLoad;$('#manual-loop-load-run').disabled=false;
  $('#live-key-failure-run').onclick=runLiveKeyFailure;$('#live-key-failure-run').disabled=false;
  $('#grid-cancel-play-run').onclick=runGridCancelPlay;$('#grid-cancel-play-run').disabled=false;
- $('#beat-jump-recall-run').onclick=runBeatJumpRecall;$('#beat-jump-recall-run').disabled=false;
+ $('#beat-jump-recall-run').onclick=()=>runLoopPadRecall();$('#beat-jump-recall-run').disabled=false;
+ $('#queued-auto-recall-run').onclick=()=>runLoopPadRecall(true);$('#queued-auto-recall-run').disabled=false;
 }
 boot().catch(error=>$('#ownership-status').textContent='Startup failed: '+error.message);
