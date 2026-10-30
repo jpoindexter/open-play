@@ -27,8 +27,8 @@ export async function runLoopPadRecallCheck({state,engine},queuedAuto=false){
   assert(state.deckCount===4&&document.querySelectorAll('.deck').length===4,'Four decks missing');
   const previewMap=()=>new Map([...document.querySelectorAll('#tracks tbody tr[data-track] .library-wave-preview img')].map(node=>[node.closest('tr[data-track]').dataset.track,node.src]));
   const previewEntries=()=>[...document.querySelectorAll('#tracks tbody tr[data-track] .library-wave-preview')].map(cell=>({id:cell.closest('tr').dataset.track,key:cell.dataset.previewKey,phase:cell.dataset.previewState,src:cell.querySelector('img')?.src}));
-  // Setup changed the demo BPM; refresh its thumbnail before freezing the retention baseline.
-  click('#tracks [data-sort="title"]');const previewKey=track.contentHash||`${track.id}:${track.seed}:${track.bpm}:${track.freq}`;
+  // Refresh the setup-modified BPM without reordering lazily prepared preview rows.
+  click('#tracks [data-sort="title"]');click('#tracks [data-sort="title"]');const previewKey=track.contentHash||`${track.id}:${track.seed}:${track.bpm}:${track.freq}`;
   await until(()=>previewEntries().some(cell=>cell.id===track.id&&cell.key===previewKey&&cell.phase==='ready'),'Prepared track preview');
   const previews=previewMap();report.previewBefore=previewEntries();report.previewTrack={id:track.id,bpm:track.bpm,seed:track.seed,freq:track.freq};
   const controls=[...document.querySelectorAll('.deck:not([data-focus="1"]) button,.deck:not([data-focus="1"]) input,.deck:not([data-focus="1"]) select,.channel-strip input,#crossfader')];
