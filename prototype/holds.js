@@ -84,10 +84,16 @@ export function createCueHolds({
       record(d, { kind: "cue", cue: hot, position: target });
     }
     try {
-      await engine.seek(d, target);
-      if (!current(h)) return;
-      if ((!h.released || h.latched) && !d.playing) await engine.start(d);
-      if (!current(h)) return;
+      const seeking = engine.seek(d, target);
+      let token = engine.startTokens.get(d.index);
+      await seeking;
+      if (!current(h) || engine.startTokens.get(d.index) !== token) return;
+      if ((!h.released || h.latched) && !d.playing) {
+        const starting = engine.start(d);
+        token = engine.startTokens.get(d.index);
+        await starting;
+      }
+      if (!current(h) || engine.startTokens.get(d.index) !== token) return;
       if (h.released && !h.wasPlaying && !h.latched) {
         engine.pause(d);
         d.position = target;

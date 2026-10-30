@@ -7,7 +7,7 @@ import {refreshCueControls} from './transport-presentation.js';
 function fixture(presentation={}) {
   const d={index:0,track:{id:'a',cues:[]},cue:2,position:2,playing:false};
   const starts=[],pending=[];
-  const engine={init(){},position:d=>d.position,pause(d){d.playing=false;},
+  const engine={startTokens:new Map(),init(){},position:d=>d.position,pause(d){d.playing=false;},
     seek(d,p){d.position=p;return new Promise(resolve=>pending.push(resolve));},
     async start(d){starts.push(d.track.id);d.playing=true;},beginSlip(){},async endSlip(){}};
   const holds=createCueHolds({engine,state:{decks:[d]},quantized:(_,p)=>p,record(){},persist(){},render(){},notify(message){throw Error(message);},...presentation});

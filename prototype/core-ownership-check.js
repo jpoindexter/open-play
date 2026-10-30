@@ -1,3 +1,4 @@
+import {runCueSeekCheck} from './cue-seek-check.js';
 import {runInstantDoubleSeekCheck} from './instant-double-seek-check.js';
 import {runJogFocusCheck} from './jog-focus-check.js';
 import {runJogSyncReleaseCheck} from './jog-sync-release-check.js';
@@ -136,10 +137,18 @@ async function runDoubleSeek(){
   $('#ownership-status').textContent=report.completed?'Instant Double/newer seek check passed; all audio stopped':'Instant Double/newer seek check failed: '+(report.error?.message||report.sourceError||'cleanup');
  }catch(error){$('#ownership-result').value=JSON.stringify({completed:false,error:{message:error.message,stack:error.stack}});$('#ownership-status').textContent='Instant Double diagnostic failed: '+error.message;}
 }
+async function runCueSeek(){
+ disableRuns();$('#ownership-status').textContent='Running muted released Cue/newer seek check…';
+ try{
+  const report=await runCueSeekCheck(window.openPlay);$('#ownership-result').value=JSON.stringify(report);
+  $('#ownership-status').textContent=report.completed?'Released Cue/newer seek check passed; all audio stopped':'Released Cue/newer seek check failed: '+(report.error?.message||report.sourceError||'cleanup');
+ }catch(error){$('#ownership-result').value=JSON.stringify({completed:false,error:{message:error.message,stack:error.stack}});$('#ownership-status').textContent='Cue diagnostic failed: '+error.message;}
+}
 async function boot(){
  const parsed=new DOMParser().parseFromString(await(await fetch('workspace-preview.html')).text(),'text/html');
  for(const node of [...parsed.body.children])if(node.tagName!=='SCRIPT')document.body.append(node);
  await import('./layout-preview.js');await until(()=>window.openPlay?.state.decks[1].track,'Workspace startup');
+ $('#cue-seek-run').onclick=runCueSeek;$('#cue-seek-run').disabled=false;
  $('#double-seek-run').onclick=runDoubleSeek;$('#double-seek-run').disabled=false;
  $('#ownership-run').onclick=run;$('#ownership-run').disabled=false;$('#ownership-run').textContent='Run one muted core ownership check';$('#ownership-status').textContent='Ready';
  $('#jog-sync-run').onclick=runJogSync;$('#jog-sync-run').disabled=false;
