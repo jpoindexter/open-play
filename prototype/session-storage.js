@@ -4,18 +4,23 @@ export function createSessionStorage(storage){
   let raw=null,error=null,blocked=false,recoveryKey=null;
   const status=()=>({error,blocked,recoveryKey,original:raw});
   function reject(cause){blocked=true;error=`Saved session could not be loaded. ${cause.message}`;}
+  // shortcut: localStorage comparisons are not atomic across renderers; use transactional storage before concurrent-edit support.
+  function ownsRecord(){
+    if(storage.getItem(sessionKey)===raw)return true;
+    blocked=true;error='Saved session changed in another window. Reopen to read the latest data before saving or recovering.';return false;
+  }
   function load(){
     try{raw=storage.getItem(sessionKey);return raw===null?{}:validateSavedState(JSON.parse(raw));}
     catch(cause){reject(cause);return {};}
   }
   function save(value){
     if(blocked)return false;
-    try{const next=JSON.stringify(value);storage.setItem(sessionKey,next);raw=next;error=null;return true;}
+    try{const next=JSON.stringify(value);if(!ownsRecord())return false;storage.setItem(sessionKey,next);raw=next;error=null;return true;}
     catch{error='Changes are not saved. Keep this window open and export a backup, or retry saving.';return false;}
   }
   function recover(value){
     try{
-      if(storage.getItem(sessionKey)!==raw){blocked=true;error='Saved session changed in another window. Reopen to read the latest data before recovering.';return false;}
+      if(!ownsRecord())return false;
       if(!blocked)return save(value);
       // Keep the rejected record before allowing any replacement or later autosave.
       if(raw!==null){

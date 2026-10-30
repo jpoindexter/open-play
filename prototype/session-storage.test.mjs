@@ -52,3 +52,19 @@ test('invalid nested startup values never reach consumers',()=>{
   const storage=memory(JSON.stringify(data)),session=createSessionStorage(storage);assert.deepEqual(session.load(),{});assert.ok(session.status().blocked);
  }
 });
+
+test('ordinary autosave refuses a newer or deleted session owned by another window',()=>{
+ for(const deleted of [false,true]){
+  const storage=memory('{"prepare":["original"]}'),first=createSessionStorage(storage),stale=createSessionStorage(storage);
+  first.load();stale.load();assert.equal(first.save({prepare:['newer']}),true);
+  if(deleted)storage.map.delete(sessionKey);const newer=storage.getItem(sessionKey);
+  assert.equal(stale.save({prepare:['stale edit']}),false,'Stale autosave replaced newer durable session data');
+  assert.equal(storage.getItem(sessionKey),newer);assert.equal(stale.status().blocked,true);assert.match(stale.status().error,/Reopen/);
+  assert.equal(stale.status().original,'{"prepare":["original"]}');assert.equal(stale.status().recoveryKey,null);
+  assert.equal(stale.save({prepare:['another stale edit']}),false);assert.equal(stale.recover({prepare:['stale recovery']}),false);
+  assert.equal(storage.getItem(sessionKey),newer,'Retry/recovery cannot overwrite the newer record');
+  const reopened=createSessionStorage(storage);assert.deepEqual(reopened.load(),deleted?{}:{prepare:['newer']});
+  assert.equal(reopened.save({prepare:['newer','fresh edit']}),true);assert.equal(reopened.status().blocked,false);
+  assert.equal(reopened.save({prepare:['newer','fresh edit','own next edit']}),true,'Own successful saves must advance ownership');
+ }
+});

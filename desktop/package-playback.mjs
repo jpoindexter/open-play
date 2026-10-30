@@ -12,7 +12,7 @@ const git=args=>execFileSync('git',args,{cwd:root,maxBuffer:150*1024*1024});
 const sha=bytes=>createHash('sha256').update(bytes).digest('hex');
 const sourceCommit=git(['rev-parse','HEAD']).toString().trim();
 const get=file=>git(['show',`${sourceCommit}:${file}`]);
-const version='0.1.128',name='Open Play Playback Test',port=18775,bundle='org.openplay.dj.playback.localtest';
+const version='0.1.129',name='Open Play Playback Test',port=18775,bundle='org.openplay.dj.playback.localtest';
 const profile='Open Play Playback Test',partition='persist:open-play-playback-test';
 await assertBuildRetention(path.join(root,'local-evidence/desktop-builds'),name);
 const stage=await mkdtemp(path.join(tmpdir(),'open-play-playback-'));
@@ -57,7 +57,7 @@ await put('assets/docs/prototype/auto-gain-fixture-reference.json',JSON.stringif
 // only this package's identity/instructions; keep prototype source byte-for-byte.
 await put('assets/docs/prototype/TRY_CURRENT_DESKTOP.md',`# Core desktop test ${version}
 
-Product transport code is unchanged from127. The isolated Core transport ownership window adds one cold Beat Jump/newer saved-loop check using the real pitch Worker with its first completed result held before engine continuation. It asserts physical mute, newer transport ownership, retained sibling controls/ready previews and stopped cleanup; no musical/hardware acceptance is implied.
+Ordinary autosave now checks that its previously read durable session is still current before writing, using the same ownership guard as explicit recovery. A stale window preserves the newer or deleted record, pauses saving and requests reopening. Source and a real two-tab crate/save/reload workflow are recorded; this is not atomic concurrent-edit support. Product audio/transport code is unchanged from127. The isolated Core transport ownership window adds one cold Beat Jump/newer saved-loop check using the real pitch Worker with its first completed result held before engine continuation. It asserts physical mute, newer transport ownership, retained sibling controls/ready previews and stopped cleanup; no musical/hardware acceptance is implied.
 
 Pending looped Beat Jump now yields to a newer saved-loop recall before its follow-up seek. One focused actual-engine/app-handler regression reproduces the old cancellation, retains the newer loop after repair and accepts a fresh Beat Jump afterward. Controlled Worker/graph evidence is not native race, DSP, music or controller acceptance. Prior graphite shared controls, independent deck tool rails, optional filters, layouts and live waveform previews remain included. No broad test rerun or public-beta clearance.
 
