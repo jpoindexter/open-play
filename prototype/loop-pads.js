@@ -50,7 +50,8 @@ export function createLoopPads({state,engine,render=()=>{},notify=()=>{}}){
      const shift=p=>grid?grid.timeAt(grid.beatAt(p)+delta):p+60/track.bpm*delta;
      const start=shift(d.loopIn),end=shift(d.loopOut);
      if(start<0||end>track.duration)throw Error('Beat Jump would move the loop outside the track.');
-     await engine.setLoop(d,true,start,end);if(!owns())return;await engine.seek(d,shift(position));
+     const pending=engine.setLoop(d,true,start,end),token=engine.startTokens.get(d.index);
+     await pending;if(!owns()||engine.startTokens.get(d.index)!==token)return;await engine.seek(d,shift(position));
     }else await engine.seek(d,grid?grid.timeAt(grid.beatAt(position)+delta):position+60/track.bpm*delta);
     render(d);return;
    }

@@ -1,0 +1,54 @@
+{
+  "date": "2026-10-30",
+  "baselineCommit": "47822f71bf1baca9b410031a43350eccbe9112ac",
+  "defect": "Looped Beat Jump completed obsolete loop preparation then sought its captured position, canceling a newer saved-loop recall.",
+  "repair": "Capture the engine token immediately after setLoop and recheck it after awaiting, before follow-up seek.",
+  "actualPath": [
+    "createLoopPads.press with lower-row forward Beat Jump",
+    "AudioEngine.setLoop and real rendered-loop request lifecycle with controlled Worker/graph",
+    "extracted ordinary app saved-loop pad handler",
+    "createManualLoops.recall and AudioEngine.seek"
+  ],
+  "focusedCommand": "node --test --test-name-pattern='pending Beat Jump yields' prototype/manual-loop-ownership.test.mjs",
+  "red": {
+    "pass": 0,
+    "fail": 1,
+    "assertion": "Old Beat Jump canceled the newer saved-loop recall: false !== true"
+  },
+  "green": {
+    "pass": 1,
+    "fail": 0,
+    "criteria": [
+      "Newer saved-loop recall returns true",
+      "No stale Beat Jump seek: only saved-loop seek11 before fresh input",
+      "New voice/token, position11 and loop11\u201312 retained",
+      "Fresh Beat Jump remains accepted: seek13 and loop13\u201314",
+      "Cleanup stops all voices/transforms/retirements, terminates all controlled Workers and restores globals"
+    ]
+  },
+  "callerReview": [
+    "app loop-mode pad dispatch",
+    "pointer/keyboard Loop Roll hold/release",
+    "deck-midi auto-loop and Loop Roll adapters",
+    "Load/Stop/eject/count-reduction cancellation; unchanged"
+  ],
+  "modules": {
+    "prototype/loop-pads.js": 98,
+    "prototype/manual-loop-ownership.test.mjs": 127
+  },
+  "sourceAfter": {
+    "prototype/loop-pads.js": "3cb0aa261b7e99c9391a23d84175453c06aec1eea3d8b59e408e90d9ac4d3ca0",
+    "prototype/manual-loop-ownership.test.mjs": "fcf3eef360d004a5607496de06f2a72610f30df8edbfdf67fd4d72be9bf7d137"
+  },
+  "rawEvidence": {
+    "red.txt": "a2c035ed12fbb645b2fabdf9b6727b1e75870779d6936e568c90311e703e5257",
+    "green.txt": "bf9b6638a1cca4714edc3fc02a489336f05ddabfe26df81a5e3e2100e88933bc"
+  },
+  "limits": [
+    "One newly failing focused source check, then same check after repair and fresh-input criterion; no broad suite",
+    "Controlled Worker replies do not execute renderer DSP; no native race/PCM/music/listening/controller acceptance",
+    "No changes to audio engine/Sync/layout/controls/waveforms; normal profile and original audio not used by source check",
+    "Generic pops/stalls/startup60 and owner/hardware gates remain open"
+  ],
+  "delivery": "Private desktop127 packaging/native delivery pending"
+}
