@@ -1,15 +1,14 @@
 .rb-tempo-rail{display:none}
 /* HTML224: each pitch rail belongs to its deck, not the shared mixer/footer. */
 #workspace-preview[data-workspace=rekordbox][data-orientation]{
- --rb-disc-column:108px;
+ --rb-disc-column:var(--dj-component-deck-compact-body-min);
  & .deck{grid-template-columns:36px minmax(0,1fr) 64px 40px var(--rb-disc-column) 32px}
  & .deck:nth-of-type(even){grid-template-columns:40px var(--rb-disc-column) 32px 64px minmax(0,1fr) 36px}
  & .deck-head{grid-template-columns:34px minmax(0,1fr) 76px 80px 84px}
  & .rb-sync-controls{grid-template-columns:1fr 30px;grid-template-rows:26px 18px;gap:2px}
  & .rb-sync-controls [data-action=sync]{grid-column:1/-1;grid-row:1}
- & .rb-sync-controls [data-action=syncMaster]{grid-column:1;grid-row:2;border:1px solid var(--dj-semantic-border-strong);background:transparent}
+ & .rb-sync-controls [data-action=syncMaster]{grid-column:1;grid-row:2}
  & .rb-sync-controls [data-action=syncOff]{grid-column:2;grid-row:2;}
- & .rb-sync-controls .master-active{color:var(--dj-semantic-focus);border-color:transparent;background:var(--dj-semantic-control)}
  & .deck:nth-of-type(odd) .deck-body>div:first-child{grid-column:2}
  & .deck:nth-of-type(odd) .preview-loop-strip{grid-column:3}
  & .deck:nth-of-type(odd) .transport{grid-column:4}
@@ -25,21 +24,20 @@
  & .rb-tempo-rail .tempo-control{grid-row:3;position:relative;display:block;writing-mode:horizontal-tb;width:32px;height:100%;min-height:48px;margin:0;padding:0}
  & .rb-tempo-rail>[data-action=range]{grid-row:2}
  & .rb-tempo-rail>[data-action=tempoReset]{grid-row:4}
- & .rb-tempo-rail>button{height:18px;min-height:18px;min-width:28px;padding:0 2px;background:var(--dj-semantic-control);border:1px solid var(--dj-semantic-border-strong);border-radius:1px}
+ & .rb-tempo-rail>button{height:var(--dj-semantic-space-18);min-height:var(--dj-semantic-space-18);min-width:var(--dj-semantic-space-28);padding:0 var(--dj-semantic-space-2)}
  & .rb-tempo-rail input{grid-row:3;position:relative;z-index:1;appearance:none;writing-mode:vertical-lr;direction:ltr;width:32px;height:100%;min-height:48px;margin:0;padding:0;border:0;background:transparent;touch-action:none}
  & .rb-tempo-rail input::-webkit-slider-runnable-track{width:var(--dj-component-fader-track-width);background:var(--dj-semantic-background);border-inline:1px solid var(--dj-semantic-border-strong)}
- & .rb-tempo-rail input::-webkit-slider-thumb{appearance:none;width:var(--dj-component-fader-cap-length);height:var(--dj-component-fader-cap-depth);margin-left:calc((var(--dj-component-fader-track-width) - var(--dj-component-fader-cap-length))/2 - var(--dj-semantic-hairline));border:1px solid var(--dj-semantic-cap-edge);border-radius:1px;background:linear-gradient(var(--dj-semantic-control) 0 40%,var(--dj-semantic-text) 40% 55%,var(--dj-semantic-control) 55%)}
+ & .rb-tempo-rail input::-webkit-slider-thumb{appearance:none;width:var(--dj-component-fader-cap-length);height:var(--dj-component-fader-cap-depth);margin-left:calc((var(--dj-component-fader-track-width) - var(--dj-component-fader-cap-length))/2 - var(--dj-semantic-hairline));border:var(--dj-semantic-hairline) solid var(--dj-semantic-cap-edge);border-radius:var(--dj-semantic-radius);background:linear-gradient(var(--fader-cap-paint))}
  & .rb-tempo-rail input::-moz-range-track{width:2px;background:var(--dj-semantic-background);border-inline:1px solid var(--dj-semantic-border-strong)}
- & .rb-tempo-rail input::-moz-range-thumb{box-sizing:border-box;width:var(--dj-component-fader-cap-length);height:var(--dj-component-fader-cap-depth);border:1px solid var(--dj-semantic-cap-edge);border-radius:1px;background:linear-gradient(var(--dj-semantic-control) 0 40%,var(--dj-semantic-text) 40% 55%,var(--dj-semantic-control) 55%)}
+ & .rb-tempo-rail input::-moz-range-thumb{box-sizing:border-box;width:var(--dj-component-fader-cap-length);height:var(--dj-component-fader-cap-depth);border:var(--dj-semantic-hairline) solid var(--dj-semantic-cap-edge);border-radius:var(--dj-semantic-radius);background:linear-gradient(var(--fader-cap-paint))}
  & .rb-tempo-rail .preview-fader-ticks{display:block;position:absolute;inset:var(--dj-component-fader-track-inset) 0;pointer-events:none;z-index:0}
  & .rb-tempo-rail .preview-fader-ticks i{position:absolute;left:50%;right:auto;top:calc(var(--tick)*100%);transform:translateX(-50%);width:var(--dj-component-fader-tick-width);height:var(--dj-semantic-hairline);background:var(--dj-semantic-text-muted)}
  & .rb-tempo-rail .preview-fader-ticks i.major{width:var(--dj-component-fader-major-tick-width);height:var(--dj-semantic-focus-width);background:var(--dj-semantic-text)}
- & .rb-tempo-rail:focus-within{outline:2px solid var(--dj-semantic-focus);outline-offset:-2px}
+ & .rb-tempo-rail:focus-within{outline:var(--dj-semantic-focus-width) solid var(--dj-semantic-focus);outline-offset:calc(-1 * var(--dj-semantic-focus-width))}
  & .rb-tempo-fine{grid-column:5;grid-row:3;display:flex;align-self:end;justify-self:center;gap:4px;margin:0 0 2px;z-index:2}
  & .deck:nth-of-type(even)>.rb-tempo-fine{grid-column:2}
- & .rb-tempo-fine button{width:24px;min-width:24px;height:20px;min-height:20px;padding:0;background:var(--dj-semantic-control);border:1px solid var(--dj-semantic-border-strong);border-radius:1px;color:var(--dj-semantic-text)}
- & .rb-tempo-fine button:hover{border-color:var(--dj-semantic-focus);background:var(--dj-semantic-raised)}
- & .rb-tempo-fine button:focus-visible{outline:2px solid var(--dj-semantic-focus);outline-offset:1px}
+ & .rb-tempo-fine button{width:var(--dj-semantic-space-24);min-width:var(--dj-semantic-space-24);height:var(--dj-semantic-space-20);min-height:var(--dj-semantic-space-20);padding:0;color:var(--dj-semantic-text)}
+ & .rb-tempo-fine button:focus-visible{outline:var(--dj-semantic-focus-width) solid var(--dj-semantic-focus);outline-offset:var(--dj-semantic-hairline)}
  & .preview-deck-utilities::before{content:attr(data-deck-tools);color:var(--dj-semantic-text-muted);white-space:nowrap;margin-right:4px}
  &[data-density=compact]:is(.four-decks,[data-orientation=vertical]){--rb-disc-column:var(--dj-component-mixer-compact-disc-column)}
  &[data-density=compact]:not(.four-decks)[data-orientation=horizontal]{--rb-disc-column:var(--dj-component-mixer-two-deck-disc)}

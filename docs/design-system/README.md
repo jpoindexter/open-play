@@ -19,7 +19,7 @@ Current reference: [REA rekordbox extraction and adaptation](REKORDBOX_REFERENCE
 
 Use actual Astryx Button, IconButton, ToggleButton, Selector, form fields and Dialog through `prototype/ui/controls.jsx`. Original controls retain IDs, state and handlers. Moving controls moves their island host, not a duplicate copy. Accessible names, pressed/current/disabled states, tooltips and focus remain required. Build with `npm run build` in `prototype/ui`.
 
-Standard command buttons use quiet transparent surfaces without default borders. Preserve hover, selected/current and keyboard-focus feedback.
+Standard command buttons use quiet transparent surfaces without default borders. Preserve hover, selected/current and keyboard-focus feedback. The shared deck-control owner also styles tempo and Sync controls. Fader caps share local semantic material in components/mixer.css, resolved at the themed control. [Current scoped follow-through](GRAPHITE_CONTROL_FOLLOWTHROUGH_2026-10-30.md).
 
 [Typography and icons](TYPOGRAPHY_ICONS_2026-10-25.md) now have one shared CSS owner: `prototype/typography.css`. Type values and canvas text come from canonical tokens; standard/navigation icons use the installed Lucide family at16px. `node scripts/check_typography.mjs` rejects new per-adapter font/leading/tracking declarations. Color and geometry ownership remain the next migration boundary in the [unification plan](UNIFICATION_PLAN_2026-10-25.md).
 

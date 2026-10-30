@@ -13,10 +13,10 @@
  &[data-orientation][data-density] .rb-monitor-knob::before{left:6px;top:6px;width:20px;height:20px;border:1px solid var(--xone-edge);background:var(--xone-face);box-shadow:none}
  &[data-orientation][data-density] .rb-monitor-knob::after{left:15px;top:7px;height:9px;transform-origin:1px 9px;background:var(--xone-pointer)}
  & .tempo-control .preview-fader-ticks i{background:linear-gradient(to right,var(--dj-semantic-text-muted) 0 24%,transparent 24% 76%,var(--dj-semantic-text-muted) 76%)}
- & .tempo-control input::-webkit-slider-thumb{background:linear-gradient(var(--dj-semantic-control) 0 40%,var(--dj-semantic-text) 40% 60%,var(--dj-semantic-control) 60%);border-color:var(--dj-semantic-control-edge)}
+ & .tempo-control input::-webkit-slider-thumb{background:linear-gradient(var(--fader-cap-paint));border-color:var(--dj-semantic-control-edge)}
  & .crossfader .preview-fader-ticks i{background:var(--xone-tick)}
  & .crossfader .preview-fader-ticks i.major{background:var(--dj-semantic-text)}
- & .crossfader input::-webkit-slider-thumb{background:linear-gradient(to right,var(--dj-semantic-control) 0 45%,var(--dj-semantic-text) 45% 55%,var(--dj-semantic-control) 55%);border-color:var(--dj-semantic-control-edge)}
+ & .crossfader input::-webkit-slider-thumb{background:linear-gradient(to right,var(--fader-cap-paint));border-color:var(--dj-semantic-control-edge)}
 }
 
 /* Preserve custom channel caps/ticks in the selected rekordbox layout. */
@@ -30,9 +30,9 @@
  & .rb-cross-controls .crossfader{position:relative;display:flex;flex-direction:column;height:38px;gap:0}
  & .rb-cross-controls .crossfader input{appearance:none;position:relative;z-index:1;display:block;height:28px;min-height:28px;margin:0;padding:0;border:0;background:transparent;touch-action:none;direction:ltr}
  & .crossfader input::-webkit-slider-runnable-track{height:var(--dj-component-fader-track-width);border:var(--dj-semantic-hairline) solid var(--dj-semantic-border-strong);border-radius:0;background:var(--dj-semantic-background)}
- & .crossfader input::-webkit-slider-thumb{appearance:none;box-sizing:border-box;width:var(--dj-component-fader-cap-depth);height:var(--dj-component-fader-cap-length);margin-top:calc((var(--dj-component-fader-track-width) - var(--dj-component-fader-cap-length))/2 - var(--dj-semantic-hairline));border:1px solid var(--dj-semantic-control-edge);border-radius:1px;background:linear-gradient(to right,var(--dj-semantic-control) 0 43%,var(--dj-semantic-text) 43% 57%,var(--dj-semantic-control) 57%);box-shadow:none}
+ & .crossfader input::-webkit-slider-thumb{appearance:none;box-sizing:border-box;width:var(--dj-component-fader-cap-depth);height:var(--dj-component-fader-cap-length);margin-top:calc((var(--dj-component-fader-track-width) - var(--dj-component-fader-cap-length))/2 - var(--dj-semantic-hairline));border:var(--dj-semantic-hairline) solid var(--dj-semantic-cap-edge);border-radius:var(--dj-semantic-radius);background:linear-gradient(to right,var(--fader-cap-paint));box-shadow:none}
  & .crossfader input::-moz-range-track{height:2px;border:1px solid var(--dj-semantic-border-strong);border-radius:0;background:var(--dj-semantic-background)}
- & .crossfader input::-moz-range-thumb{box-sizing:border-box;width:var(--dj-component-fader-cap-depth);height:var(--dj-component-fader-cap-length);border:1px solid var(--dj-semantic-control-edge);border-radius:1px;background:linear-gradient(to right,var(--dj-semantic-control) 0 43%,var(--dj-semantic-text) 43% 57%,var(--dj-semantic-control) 57%);box-shadow:none}
+ & .crossfader input::-moz-range-thumb{box-sizing:border-box;width:var(--dj-component-fader-cap-depth);height:var(--dj-component-fader-cap-length);border:var(--dj-semantic-hairline) solid var(--dj-semantic-cap-edge);border-radius:var(--dj-semantic-radius);background:linear-gradient(to right,var(--fader-cap-paint));box-shadow:none}
  & .crossfader .preview-fader-ticks{display:block;position:absolute;inset:auto calc(var(--dj-component-fader-cap-depth)/2) 6px;height:16px;pointer-events:none;z-index:0}
  & .crossfader .preview-fader-ticks i{position:absolute;left:calc(var(--tick)*100%);right:auto;top:4px;bottom:auto;width:1px;height:8px;background:var(--dj-semantic-text-muted)}
  & .crossfader .preview-fader-ticks i.major{top:1px;height:14px;background:var(--dj-semantic-text)}

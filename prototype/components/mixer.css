@@ -1,3 +1,8 @@
+/* Resolve semantic colors at the control so day mode inherits its own palette.
+   Percentages describe the shared cap anatomy, not another theme. */
+:is(.fader-group,.tempo-control,.crossfader){
+ --fader-cap-paint:var(--dj-semantic-control-highlight) 0%,var(--dj-semantic-control) 34%,var(--dj-semantic-control-shadow) 43%,var(--dj-semantic-text) 43% 57%,var(--dj-semantic-control) 57%,var(--dj-semantic-control-highlight) 100%;
+}
 /* Shared geometry is inherited by the layout and the mixer, including optional filters. */
 :root{
  --channel-filter-row-size:0px;
@@ -40,7 +45,7 @@
  content:'';position:absolute;top:calc((1 - var(--preview-level,.8))*(100% - var(--dj-component-fader-cap-depth)));left:50%;transform:translateX(-50%);
  width:var(--dj-component-fader-cap-length);height:var(--dj-component-fader-cap-depth);box-sizing:border-box;
  border:var(--dj-semantic-hairline) solid var(--dj-semantic-cap-edge);border-radius:var(--dj-semantic-radius);
- background:linear-gradient(var(--dj-semantic-control-highlight),var(--dj-component-mixer-control) 34%,var(--dj-semantic-control-shadow) 43%,var(--dj-component-mixer-pointer) 43% 57%,var(--dj-component-mixer-control) 57%,var(--dj-semantic-control-highlight));
+ background:linear-gradient(var(--fader-cap-paint));
  box-shadow:0 var(--dj-semantic-hairline) var(--dj-semantic-control-shadow);pointer-events:none;z-index:2;
 }
 .channel-strip .fader-group[data-fader-detent=true]::after{border-color:var(--dj-component-mixer-focus)}

@@ -1,16 +1,16 @@
 /* Shared control appearance. Workspace adapters retain placement and density. */
-body[data-preview-shell=flat][data-orientation]{
- & :is(.rb-deck-options,.preview-loop-strip,.preview-key-row,.rb-sync-controls) button{
-  background:var(--dj-semantic-control);color:var(--dj-semantic-text-muted);
+#workspace-preview[data-preview-shell=flat][data-orientation]{
+ & :is(.rb-deck-options,.preview-loop-strip,.preview-key-row,.rb-sync-controls,.rb-tempo-fine,.rb-tempo-rail) button{
+  border:0;border-radius:var(--dj-semantic-radius);background:var(--dj-semantic-control);color:var(--dj-semantic-text-muted);
  }
- & :is(.rb-deck-options,.preview-loop-strip,.preview-key-row,.rb-sync-controls) button:is(.active,[aria-pressed=true]){
+ & :is(.rb-deck-options,.preview-loop-strip,.preview-key-row,.rb-sync-controls,.rb-tempo-fine,.rb-tempo-rail) button:is(.active,.master-active,[aria-pressed=true]){
   background:var(--dj-semantic-control);color:var(--dj-semantic-focus);
  }
  & .preview-loop-strip button.active{color:var(--dj-semantic-cue)}
  & .deck-tool-scroll button:is(.active,[aria-pressed=true]){
   background:var(--dj-semantic-control);color:var(--dj-semantic-cue);
  }
- & :is(.rb-deck-options,.preview-loop-strip,.preview-key-row,.rb-sync-controls,.deck-tool-scroll) button:not(:disabled):is(:hover,:active){
+ & :is(.rb-deck-options,.preview-loop-strip,.preview-key-row,.rb-sync-controls,.rb-tempo-fine,.rb-tempo-rail,.deck-tool-scroll) button:not(:disabled):is(:hover,:active){
   background:var(--dj-semantic-raised);
  }
  & .transport :is([data-action=cue],[data-action=play]){
