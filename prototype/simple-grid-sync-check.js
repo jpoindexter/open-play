@@ -21,6 +21,7 @@ export async function runSimpleGridSyncCheck({state,engine}){
   Object.assign(state.settings,{'Sync Mode':'Simple Sync','Snap to Beatgrid':true,'Lock Playing Deck':false,'Use Auto Gain':false});state.autoplay=false;
   for(const [d,bpm]of [[a,126],[b,120]]){Object.assign(d.track,{bpm,grid:0,gridWarpMarkers:[],gridMarkers:[],analyzed:true,locked:false});Object.assign(d,{position:2,rate:1,keylock:d===b,keyShift:0,reverse:false,loop:false,sync:false,syncState:'off',syncRole:null,stemSlip:'off',repeat:false});}
   $('#deck-count').value='4';$('#deck-count').dispatchEvent(new Event('change',{bubbles:true}));await frames();
+  report.layout={decks:state.deckCount,density:document.body.dataset.density,orientation:document.body.dataset.orientation};assert(report.layout.decks===4&&report.layout.density==='compact','Four-deck Compact layout required');
   for(const d of [a,b]){click(`[data-action=play][data-deck="${d.index}"]`);await until(()=>d.playing&&!d.processing&&!d.playQueued,'Initial Play '+d.index);const adapter=engine.voices.get(d.index)?.liveKeylock;if(adapter)adapters.add(adapter);}
   const originalVoice=engine.voices.get(1),outgoing=engine.voices.get(0),originalRate=b.rate,outgoingToken=engine.startTokens.get(0);
   assert(originalVoice.liveKeylock,'Incoming original real live voice required');
