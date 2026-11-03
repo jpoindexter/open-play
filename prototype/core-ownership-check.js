@@ -1,5 +1,6 @@
 import {runOutputLevelCheck} from './output-level-check.js';
 import {runPlayingControlsCheck} from './playing-controls-check.js';
+import {runHiddenDeckCheck} from './hidden-deck-check.js';
 import {runLibraryRestoreCueCheck} from './library-restore-cue-check.js';
 import {runSimpleGridSyncCheck} from './simple-grid-sync-check.js';
 import {runCueSeekCheck} from './cue-seek-check.js';
@@ -162,6 +163,11 @@ async function boot(){
  const parsed=new DOMParser().parseFromString(await(await fetch('workspace-preview.html')).text(),'text/html');
  for(const node of [...parsed.body.children])if(node.tagName!=='SCRIPT')document.body.append(node);
  await import('./layout-preview.js');await until(()=>window.openPlay?.state.decks.length>=2&&$('[data-action="play"][data-deck="1"]'),'Workspace startup');
+ $('#hidden-deck-run').onclick=async()=>{
+  disableRuns();$('#ownership-status').textContent='Running muted hidden-deck holds check…';
+  try{const report=await runHiddenDeckCheck(window.openPlay);$('#ownership-result').value=JSON.stringify(report);$('#ownership-status').textContent=report.completed?'Hidden-deck holds check passed; all audio stopped':'Hidden-deck check failed: '+(report.error?.message||'cleanup');}
+  catch(error){$('#ownership-status').textContent='Hidden-deck setup failed: '+error.message;}
+ };$('#hidden-deck-run').disabled=false;
  $('#playing-controls-run').onclick=async()=>{
   disableRuns();$('#ownership-status').textContent='Running muted four-real-track control retention check…';
   try{const report=await runPlayingControlsCheck(window.openPlay);$('#ownership-result').value=JSON.stringify(report);$('#ownership-status').textContent=report.completed?'Playing controls check passed; all audio stopped':'Playing controls check failed: '+(report.error?.message||'cleanup');}
