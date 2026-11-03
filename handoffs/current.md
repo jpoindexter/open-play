@@ -1,10 +1,12 @@
-## Current source batch — 3 November 2026 / LIB-FIX-08 and09
+## Current native delivery — 3 November 2026 / 0.1.140
 
-Restore now checks the existing idle predicate before reading a backup and again after its asynchronous read/current-owner check, before parsing. Two focused failures reproduced unnecessary read/parse/validation work; current known-preparing Cue performs none, and playback starting during a read prevents parsing/validation/state/save. Sixteen affected restore/recovery checks pass. No measured latency or musical-pop cause claim, broad suite, DSP/layout/waveform/default change or new dependency.
+Immutable1f36ee0 includes LIB-FIX-09 asynchronous restore ownership and LIB-FIX-08 early idle admission. Two focused failures reproduced unnecessary read/parse/validation; repaired known-preparing Cue skips all three, playback starting during read skips parse/validation/state/save. Sixteen affected restore/recovery checks pass; no broad suite. Exact archive inspection5/5, ASAR95e098afd7beb61958a32b5788f9319c2a3f112f08fa68b58e55692ece7acd11.
 
-LIB-FIX-09's generation/dialog ownership repair is included in the same pending batch. Prior actual browser normal file-picker/lifecycle result remains scoped; controlled promise races are source evidence. Current native139/session remains paused and unchanged; next action is immutable140 packaging and one isolated native normal restore/paused recovery. Do not rerun07/53/109 accepted cases or unrelated matrices.08native held-Cue admission and06numeric input gate remain open. GoalACTIVE/audio muted; listening/reference volume/Hercules/full beta remain separate.
+Actual native isolated generated-only current file-picker restore succeeds with−6dB/50%,decks0s/master silent/8ready previews. Main25tracks/161.797/111.183s/master−10.04344/12ready previews and2Play/2tempo/6EQ/2level controls remain paused after check closes. No mainPlay/Sync/Cue/RECstart/restore. Normal139Quit/processabsence and closed280-file/221811025B APFSclone hash/size/mtime match verified; profiles/recovery/originals retained. Only140bundle after reviewed/hash/process/remote/recovery-checked inactive139+ownpackagingdownload742228257logicalbytes retired. Current/playback/named140launchers syntaxchecked, exactapp executed separately.
 
-[Admission result](../docs/prototype/LIBRARY_RESTORE_ADMISSION_2026-11-03.json) · [Ownership result](../docs/prototype/LIBRARY_RESTORE_OWNER_2026-11-03.json).
+09bounded source/browser/native-delivery criteria complete in Verified evidence;08native held-Cue overlap remains OPEN, not established by normal restore. Five existing Trello descriptions exact-read-back, no new card.06numeric input/75matched volume/70owner listening/controller/genericpop-stall-startup60/fullbeta remain open.53manual/jog/A-BEQ/Cue/stop and109restart accepted scope retained. No DSP/gain-default/layout/waveform/dependency changes. GoalACTIVE/audio muted; owner away. Next unattended action: existing08native admission criterion, without repeating accepted or unrelated checks.
+
+[Native result and limits](../docs/prototype/LIBRARY_RESTORE_140_NATIVE_2026-11-03.json) · [Trello readback](../docs/prototype/library-restore-140-trello-2026-11-03.json).
 
 ## Current native delivery — 3 November 2026 / 0.1.139
 
