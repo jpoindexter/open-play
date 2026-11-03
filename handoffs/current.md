@@ -1,3 +1,9 @@
+## Current native observation limit — 4 November 2026
+
+Desktop146 remains the delivered candidate. One stopped generated fine-tempo follow-through observed B+0.1%/126.1BPM and later four cumulative inputs at+0.4%/126.5, with A0%/124 and stopped timers. Immediate keyboard snapshots did not attribute each delta. Reset was requested but last observed value remained+0.4; minus was not attempted. Close/readback and reconnect then timed out. Process57512 was still live, which does not prove UI cleanup. No product defect, reset success, final isolated close or fresh main recovery is claimed from these observations. No product code/test/build, main Play/Sync/Cue/REC, restart/force quit or permission change.
+
+CORE-FIX-03 and CORE-LIVE-01 comments read back exactly; both remain open. Do not repeat unchanged native input attempts or change the handler against this ambiguous evidence. Owner re-entry: confirm main146 is stopped, close isolated check if still visible, then one physical+/- and reset. Prior146analysis acceptance remains valid in its original scope. Goal active; native observation and listening/controller remain gates. [Partial receipt](../docs/prototype/FINE_TEMPO_146_NATIVE_2026-11-04.json).
+
 ## Current native delivery — 3 November 2026 / 0.1.146
 
 ANA-FIX-11 is accepted for duplicate active-analysis requests. The existing queue owner now shares identical track/settings/replacement requests with its running job, and clears ownership in finally. Changed settings, replacement runs and cancelled same-track retries retain their source acceptance. One composed RED→GREEN and22 directly affected checks were run in the source pass; none rerun for delivery. No additional product DSP/default/layout/waveform change or dependency.
