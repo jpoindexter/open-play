@@ -1,3 +1,9 @@
+## Current source follow-through — 3 November 2026 / master presentation
+
+CORE-FIX-77: actual stopped four-deck workspace made360redundant master meter/value/accessibility mutations in one second. Three shared tick guards give0on the fresh-origin same path; -6dB and limiter state/accessibility still update.237/237observed controls,8ready library previews and fader focus retained; stopped/context suspended/mute asserted and snapshot method restored. One actual-tick RED→GREEN plus11directly affected checks; no broad suite. Same-origin reload kept old behavior despite a new no-store fetched hash; excluded, one fresh-origin check establishes the repaired behavior. Temporary diagnostic retained privately and removed; owned tab/servers closed, no music import/copy.
+
+Installed142/main session/launchers remain paused and unchanged; source inclusion/native observation waits for the next desktop batch. No new DSP/default/style/module/dependency, global stall/pop/CPU/listening claim. Card77 staysOPEN/CoreNow for desktop delivery; parents retain broad gates. Next: batch this small repair with the next reproduced core issue instead of rebuilding/repeating clean matrices. GoalACTIVE/audio muted; owner/controller later. [Result](docs/prototype/MASTER_PRESENTATION_2026-11-03.json).
+
 ## Current native delivery — 3 November 2026 / 0.1.142
 
 Source f011ef6 / immutable archive inspection 5/5. One shared painter guard clears empty deck overviews without measuring layout; loaded waveform rendering, controls, DSP, gain defaults and library previews remain. Actual-source failure repaired; 24 affected checks pass, no broad suite. Two pre-existing fixture failures were reproduced on the unmodified baseline and repaired with required Sync collaborators.

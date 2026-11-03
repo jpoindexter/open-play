@@ -2039,14 +2039,17 @@ function tick() {
       platter.style.setProperty("--rotation", `${p * (state.settings["Virtual Deck Speed"] === "33 RPM" ? 198 : 270)}deg`);
   }
   const master=engine.masterSnapshot(),meter=$("#master-meter"),peak=$("#master-peak-value"),limit=$("#master-limit");
-  meter.value=Math.max(-60,Math.min(9,master.displayDB));
+  const meterValue=Math.max(-60,Math.min(9,master.displayDB));
+  if(meter.value!==meterValue)meter.value=meterValue;
   const peakText=master.displayDB<=-100?"−∞":`${master.displayDB.toFixed(1)}dB`;
   if(peak.textContent!==peakText)peak.textContent=peakText;
-  meter.setAttribute("aria-valuetext",`${peakText} relative to nominal; stereo sample peak`);
+  const meterLabel=`${peakText} relative to nominal; stereo sample peak`;
+  if(meter.getAttribute("aria-valuetext")!==meterLabel)meter.setAttribute("aria-valuetext",meterLabel);
   const limitText=master.limiting?"LIMIT":"—";
   if(limit.textContent!==limitText)limit.textContent=limitText;
   limit.classList.toggle("limiting",master.limiting);
-  limit.setAttribute("aria-label",master.limiting?"Master limiter active":"Master limiter idle");
+  const limitLabel=master.limiting?"Master limiter active":"Master limiter idle";
+  if(limit.getAttribute("aria-label")!==limitLabel)limit.setAttribute("aria-label",limitLabel);
   const audioStatus=`${state.decks.filter((d) => d.playing).length} decks playing · ${engine.ctx?.sampleRate || "—"} Hz audio engine · outputs in Devices`;
   if($("#audio-status").textContent!==audioStatus)$("#audio-status").textContent=audioStatus;
   engine.updateFXBPMs(state.decks.map(deck => deckBPM(deck)??120));

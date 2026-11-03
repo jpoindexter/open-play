@@ -1,0 +1,110 @@
+{
+  "date": "2026-11-03",
+  "card": "https://trello.com/c/IO5RgouQ",
+  "baselineCommit": "fe622c5201df26f3b2fab2238d8b2431092c4621",
+  "installedDesktop": "0.1.142 (unchanged; next batch pending)",
+  "cause": "Three unconditional master meter value/accessibility writes in the shared animation tick, even when the current DOM values match.",
+  "repair": "Compare each existing value before writing; three local guards, no new production module or dependency.",
+  "scope": [
+    "Shared tick is the only frame caller; existing masterSnapshot and all audio paths unchanged.",
+    "Both HTML entry points retain the same master meter/limiter IDs; no markup/style change.",
+    "Affected tick fixtures now provide getAttribute; unrelated modules unchanged."
+  ],
+  "sourceRegression": {
+    "redWritesAcross120UnchangedTicks": 360,
+    "greenWritesAcross120UnchangedTicks": 0,
+    "affectedChecksPassed": 11,
+    "newTests": 1,
+    "fullSuiteRun": false,
+    "changedCases": [
+      "-6dB level/accessibility",
+      "upper +9dB meter clamp",
+      "limiter active and reset",
+      "silent -60dB meter and -infinity display"
+    ]
+  },
+  "browserBefore": {
+    "sourceSHA256": "267e372f7f71523df7c3f4fca17ac08ebb18b8ef9276ebb28a1240f2751eb967",
+    "completed": true,
+    "idle": {
+      "mutations": 360,
+      "redundant": 360,
+      "attributes": [
+        "master-meter:value",
+        "master-meter:aria-valuetext",
+        "master-limit:aria-label"
+      ]
+    },
+    "level": {
+      "value": -6,
+      "text": "-6.0dB",
+      "accessible": "-6.0dB relative to nominal; stereo sample peak"
+    },
+    "limit": {
+      "value": 3,
+      "text": "LIMIT",
+      "accessible": "Master limiter active",
+      "active": true
+    },
+    "retention": {
+      "controls": 237,
+      "retained": 237,
+      "readyPreviews": 8,
+      "previewsRetained": true,
+      "focus": true
+    },
+    "cleanup": {
+      "allStopped": true,
+      "contextNeverInitialized": false,
+      "methodRestored": true,
+      "peak": "\u2212\u221e"
+    }
+  },
+  "browserAfter": {
+    "sourceSHA256": "1b84ced4c37bc7b00a0c9b2fd6a9c255efa84d8032384b1ff2b91a8d4e795021",
+    "completed": true,
+    "idle": {
+      "mutations": 0,
+      "redundant": 0,
+      "attributes": []
+    },
+    "level": {
+      "value": -6,
+      "text": "-6.0dB",
+      "accessible": "-6.0dB relative to nominal; stereo sample peak"
+    },
+    "limit": {
+      "value": 3,
+      "text": "LIMIT",
+      "accessible": "Master limiter active",
+      "active": true
+    },
+    "retention": {
+      "controls": 237,
+      "retained": 237,
+      "readyPreviews": 8,
+      "previewsRetained": true,
+      "focus": true
+    },
+    "cleanup": {
+      "allStopped": true,
+      "audioContextState": "suspended",
+      "physicalMuted": true,
+      "methodRestored": true,
+      "peak": "\u2212\u221e"
+    }
+  },
+  "excludedAttempt": {
+    "file": "local-evidence/master-presentation-2026-11-03/browser-cached-attempt.json",
+    "result": "Old behavior persisted after same-origin reload while separately fetched app hash was new. Excluded, then one fresh-origin repair check.",
+    "limit": "Fetched hash alone is not proof of executed module bytes."
+  },
+  "normalSession": "Installed142/main profile, original media, recordings and launchers untouched; no native input or packaging. Browser test uses generated demos, stopped throughout, controlled meter snapshots only; no playback.",
+  "cleanup": "Temporary source copied into ignored evidence then removed; owned tab/servers closed. No real media imported or copied.",
+  "remaining": [
+    "Native inclusion/changed-path observation next desktop batch",
+    "No total CPU/RSS/GC or moving-waveform performance measurement",
+    "No acoustic, Sync-pop, long-session-stall or hardware acceptance"
+  ],
+  "privateEvidence": "local-evidence/master-presentation-2026-11-03/"
+}

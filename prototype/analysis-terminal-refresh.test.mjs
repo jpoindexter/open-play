@@ -19,7 +19,7 @@ function fixture(){
  const calls={library:0,persist:0,gain:0,analysis:[],notices:[],status:[],frames:[]},geometry=[],painted=[];
  const control={focused:true,pointer:7},document={activeElement:control,querySelector:()=>null};
  const canvases=tracks.map((_,index)=>({attrs:new Map(),getBoundingClientRect(){geometry.push(index);return{width:400,height:60};},setAttribute(k,v){this.attrs.set(k,v);}}));
- const labels=tracks.map(()=>({textContent:''})),meters=new Map(['#master-meter','#master-peak-value','#master-limit','#audio-status'].map(id=>[id,{textContent:'',setAttribute(){},classList:{toggle(){}}}]));
+ const labels=tracks.map(()=>({textContent:''})),meters=new Map(['#master-meter','#master-peak-value','#master-limit','#audio-status'].map(id=>[id,{textContent:'',getAttribute:()=>null,setAttribute(){},classList:{toggle(){}}}]));
  const engine={buffers:new Map(tracks.map(t=>[t.id,{id:t.id}])),stemBuffers:new Map(),stemStates:new Map(),voices:new Map(),position:()=>0,masterSnapshot:()=>({displayDB:-120,limiting:false}),updateFXBPMs(){}};
  engine.buffer=async track=>engine.buffers.get(track.id);
  let analyze=async()=>({bpm:126,key:'Cm',grid:{firstBeat:.2}});
