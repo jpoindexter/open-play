@@ -3,17 +3,11 @@
   "version": "0.1.146",
   "sourceCommit": "f8517671e749269ee011e964b66fa7577f57b026",
   "deliveryCommit": "ca5a1b680bc29936229614c51af8d99e3fe8f30c",
-  "status": "Partial native observations; input/observation gate remains open.",
+  "status": "Stopped native plus/minus/reset observations retained; cleanup/main recovery verified after access returned. Owner acceptance remains open.",
   "executed": [
     "Separate volatile/device-denied Core transport ownership window; generated tracks and stopped timers.",
     "Named per-deck tempo minus/plus/reset controls exposed; fresh B plus press observed0.1%/126.1BPM while A0%/124BPM.",
     "Later full tree shows cumulative B0.4%/126.5BPM after four increase inputs, same focused plus button; immediate snapshots do not attribute each key delta."
-  ],
-  "notEstablished": [
-    "Minus button execution was not attempted.",
-    "Reset request not observed applied: last view still B0.4%.",
-    "Close attempted, then native AX read and reconnect time out. Final isolated close and main-state cleanup cannot be claimed.",
-    "No listening, actual physical pointer/MIDI, trusted timing/latency, reset-product-defect or general keyboard pass."
   ],
   "preservation": {
     "noProductCodeChange": true,
@@ -33,7 +27,7 @@
     "appProcessObservedLive": 57512,
     "processLivenessIsNotUIProof": true
   },
-  "next": "At owner session verify main146 stopped; close isolated check if still open, then one physical +/- and reset. Do not repeat unchanged automated keyboard/reset attempts or manufacture a source repair.",
+  "next": "At owner session verify one physical +/- and reset. Reuse stopped native acceptance; do not repeat its clean segment.",
   "cards": [
     {
       "id": "ari:cloud:trello::card/workspace/6a8f03e71844a6c1103692dc/6ad794efa3c9b2e3b314c001",
@@ -41,11 +35,10 @@
       "url": "https://trello.com/c/902sYCVG/129-core-fix-03-discoverable-bpm-fine-adjust-controls",
       "complete": false,
       "list": {
-        "id": "ari:cloud:trello::list/workspace/6a8f03e71844a6c1103692dc/6ad1fea01f199751fbe47088",
-        "name": "Core DJ — Now"
+        "id": "ari:cloud:trello::list/workspace/6a8f03e71844a6c1103692dc/6ad1ffcabf248a126424ed39",
+        "name": "Blocked / unknown"
       },
-      "descriptionUnchanged": true,
-      "commentReadbackExact": true
+      "exactReadback": true
     },
     {
       "id": "ari:cloud:trello::card/workspace/6a8f03e71844a6c1103692dc/6ae0670c273810c81238cc14",
@@ -56,10 +49,49 @@
         "id": "ari:cloud:trello::list/workspace/6a8f03e71844a6c1103692dc/6ad1ffcabf248a126424ed39",
         "name": "Blocked / unknown"
       },
-      "descriptionUnchanged": true,
-      "commentReadbackExact": true
+      "exactReadback": true
     }
   ],
   "privateEvidence": "local-evidence/fine-tempo-native-2026-11-04/",
-  "goal": "Active; full goal not achieved. Native observation and owner listening/controller remain acceptance gates."
+  "goal": "Active; full goal not achieved. Owner listening/controller and reference-volume/Sync acceptance remain gates.",
+  "initialStatus": "Partial native observations; input/observation gate remains open.",
+  "initialNotEstablished": [
+    "Minus button execution was not attempted.",
+    "Reset request not observed applied: last view still B0.4%.",
+    "Close attempted, then native AX read and reconnect time out. Final isolated close and main-state cleanup cannot be claimed.",
+    "No listening, actual physical pointer/MIDI, trusted timing/latency, reset-product-defect or general keyboard pass."
+  ],
+  "followup": {
+    "nativeAccessRestored": true,
+    "scope": "Only previously unobserved minus/reset segment; no plus/key rerun.",
+    "rightDeck": {
+      "initialBPM": 126,
+      "decreasePercent": -0.1,
+      "decreasedBPM": 125.9,
+      "resetPercent": 0,
+      "resetBPM": 126
+    },
+    "leftDeck": {
+      "tempoPercent": 0,
+      "bpm": 124,
+      "unchanged": true
+    },
+    "bothTimersSeconds": 0,
+    "masterSelectionUnchanged": true,
+    "isolatedWindowClosed": true,
+    "mainRecovery": {
+      "tracks": 25,
+      "positionsSeconds": [
+        161.797,
+        111.183
+      ],
+      "masterDb": -10.04344,
+      "paused": true
+    },
+    "noNewSourceTestsOrPackage": true
+  },
+  "remaining": [
+    "Trusted owner mouse/keyboard/discoverability acceptance remains open; aggregate earlier key deltas are not individual key-timing proof.",
+    "No playing/outgoing-audio, physical MIDI, arbitrary viewport or listening acceptance claimed."
+  ]
 }

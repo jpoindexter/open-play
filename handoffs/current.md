@@ -1,8 +1,8 @@
-## Current native observation limit — 4 November 2026
+## Current unattended acceptance — 4 November2026 /146
 
-Desktop146 remains the delivered candidate. One stopped generated fine-tempo follow-through observed B+0.1%/126.1BPM and later four cumulative inputs at+0.4%/126.5, with A0%/124 and stopped timers. Immediate keyboard snapshots did not attribute each delta. Reset was requested but last observed value remained+0.4; minus was not attempted. Close/readback and reconnect then timed out. Process57512 was still live, which does not prove UI cleanup. No product defect, reset success, final isolated close or fresh main recovery is claimed from these observations. No product code/test/build, main Play/Sync/Cue/REC, restart/force quit or permission change.
+Native observation recovered; the prior isolated close now resolved to the normal main window. Only the unobserved minus/reset segment was executed in a fresh isolated generated session: B126→125.9/−0.1%→reset126/0%, A124/0%, original master, both timers0. Final isolated close and main25tracks/161.797-111.183s/master−10.04344/control/previews recovered paused. No product code, suite, package, main playback or restart change. Earlier timeout/reset uncertainty is historical; not proof of a source reset defect.
 
-CORE-FIX-03 and CORE-LIVE-01 comments read back exactly; both remain open. Do not repeat unchanged native input attempts or change the handler against this ambiguous evidence. Owner re-entry: confirm main146 is stopped, close isolated check if still visible, then one physical+/- and reset. Prior146analysis acceptance remains valid in its original scope. Goal active; native observation and listening/controller remain gates. [Partial receipt](../docs/prototype/FINE_TEMPO_146_NATIVE_2026-11-04.json).
+CORE-FIX-03 bounded native button behavior is recorded; its trusted owner mouse/keyboard/discoverability gate remains OPEN and is moved to Blocked/unknown. Existing comment history is retained with a follow-up; card and CORE-LIVE-01 read back exactly. Prior53manual/jog/EQ/Cue/stop and109restart evidence stays scoped. Do not repeat accepted clean segments. Goal active; owner listening/controller and matched-volume/Sync gates remain. [Updated receipt](../docs/prototype/FINE_TEMPO_146_NATIVE_2026-11-04.json).
 
 ## Current native delivery — 3 November 2026 / 0.1.146
 
