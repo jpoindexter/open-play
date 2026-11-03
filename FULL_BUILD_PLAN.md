@@ -6,6 +6,8 @@ Initial observation export truncated longPCMstrings at200000characters; failedde
 
 [PCM result and limits](docs/prototype/OUTPUT_LEVEL_PCM_2026-11-03.json).
 
+Current default/reference follow-through: source defaults are master0dB/volume100%; native minus10 is restored state. Serato screenshot shows the ordinary UI with a sign-in notice; AX exposes only that notice. One gear click returned AXError.notImplemented and left the view unchanged, so current reference gain values are unknown. No authentication blocker, playback or preference change claimed. CORE-001 header now reflects138/current volume findings; prior criteria/history/models retained.75 remains open. No new build/audio/test rerun. See docs/prototype/CORE_CURRENT_RECONCILIATION_2026-11-03.json.
+
 ## Current native Sync ownership —3November2026 /private0.1.138
 
 Immutablefef25c4/archive5of5. Two remaining native four-deck Compact real-WASM cases passed: shared leader-track Grid Save through paused C edits playingA100/.1 and freshBmatches.8333333×; public Atempo+ preserves rendered1.00100004673 and freshBmatches1.0510500490665435×. Each obsolete incomingACK aborts/disposes, originalBvoice/rate1× survives, and fresh Sync retains current leader/outgoing voices/tokens/rates.233controls each;7of7(grid)/8of8(tempo)unrelatedready previews retained; editedpreviewready. Cleanup stopped/muted/adaptersdisposed/factoryrestored;6sourcehashes/case independently match. Browser first tempo assertion was too strict against nominal1.001; observed rate equals126*Math.fround(1.001)/120 exactly. Corrected diagnostic expectation only; no product audio change, broad suite or repeated incoming-grid/newMASTER checks.
