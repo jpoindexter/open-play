@@ -6,7 +6,7 @@ Native137 delivers the shared library BPM formatter: real BX3 shows124.98 in lis
 
 Main136 before and137 final retain exact161.797/111.183s,25tracks/12ready previews/silentmaster. Main artwork toggle restored to list; no Play/Sync/Cue/REC Start or restore. Closed136profile280files/221810605B hash-size-mtime-equal recovery retained. Hash/process/remote-verified inactive135+136 and own packagingZIP retired (~1.352GB logical bytes); only137build remains. Current/playback/named launchers137syntaxchecked; exact app executed separately. Test browser/server closed; originals/recordings/profiles/unrelated draft retained. GoalACTIVE/audio muted; owner/Hercules later.53manual/jog/EQ/Cue/stop and109restart evidence retain scope. Genericpop/stall/startup60/fullbeta OPEN.
 
-[Native result and limits](docs/prototype/SIMPLE_MASTER_SYNC_137_NATIVE_2026-11-03.json). Next: one remaining concrete core criterion, not clean-case reruns or a speculative DSP rewrite.
+[Native result and limits](docs/prototype/SIMPLE_MASTER_SYNC_137_NATIVE_2026-11-03.json). Native text-input follow-up: even after a fresh window Raise, focused Select All/typeText leaves BPM124 unchanged. No Save in this retry; dialog/check window closed, main161.797/111.183/25tracks/silent retained. Third ineffective input route; stop retries and leave LIB-FIX-06 owner input in Blocked/unknown. No new defect found in the bounded cache/sequential thumbnail inspection, no product patch or tests/build. Re-entry: owner enters exact BPM in an isolated generated-only Track Details, Save/reopen; no playback needed. Changed-path listening/controller remain deferred. Goal active; no complete-core claim.
 
 ## Prior Simple Sync/grid follow-through —30 October2026 /browser only
 
