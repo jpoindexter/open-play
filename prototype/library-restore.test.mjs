@@ -13,18 +13,20 @@ async function mountRestore() {
   const end=source.indexOf('\n        };',begin)+11;
   const track={id:'one',title:'Original',cues:[],savedLoops:[],duration:200,bpm:120,grid:0};
   const s={tracks:[track],crates:[{id:'old',name:'Original',tracks:['one']}],settings:{'Quantize Value':'1 Beat','Master Output Level':-10,'Master Volume':75},decks:[],samples:[]};
-  const nodes={'#modal':{open:true},'#restore-library':{isConnected:true}},calls=[];
+  const nodes={'#modal':{open:true},'#restore-library':{isConnected:true}},calls=[],work={reads:0,parses:0,validations:0};
   let validation={};try{validation=await import('./library-state.js');}catch(error){if(error.code!=='ERR_MODULE_NOT_FOUND')throw error;}
   const engine=new AudioEngine();engine.setMasterDB(-10);engine.setMasterVolume(.75);
   Object.assign(engine,{setMonitorSettings(){},setMixerSettings(){}});
   const ctx={...validation,s,state:s,trackById:()=>track,$:id=>nodes[id]??={},a:{trackGain:{refresh(){}}},persist(){calls.push('save');return true;},renderCrates(){},renderTracks(){},renderDecks(){},notify(){},engine,monitorState(){},mixerSettingsFromPreferences(){},refreshChannelFilters(){},applyEQBoost(){},percent:(name,fallback)=>Number.isFinite(Number(s.settings[name]))?Math.max(0,Math.min(100,Number(s.settings[name])))/100:fallback};
+  ctx.JSON={stringify:JSON.stringify,parse(...args){work.parses++;return JSON.parse(...args);}};
+  ctx.validateBackup=(...args)=>{work.validations++;return validation.validateBackup(...args);};
   const app=fs.readFileSync(new URL('./app.js',import.meta.url),'utf8');
   vm.createContext(ctx);
   vm.runInContext(app.slice(app.indexOf('function setMasterOutput('),app.indexOf('\nconst trackGain=createTrackGain(')),ctx);
   Object.assign(ctx.a,{setMasterOutput:ctx.setMasterOutput,setMasterVolume:ctx.setMasterVolume});
   vm.runInContext(source.slice(begin,end),ctx);
-  return {s,engine,nodes,calls,choose:text=>nodes['#restore-library'].onchange({target:{files:[{text}]}}),
-    result:()=>({after:JSON.stringify(s),calls,message:nodes['#library-tool-result']?.textContent,masterDB:engine.masterDB,masterVolume:engine.masterVolume,readout:nodes['#master-level-value']?.textContent})};
+  return {s,engine,nodes,calls,work,choose:text=>nodes['#restore-library'].onchange({target:{files:[{text:()=>{work.reads++;return text();}}]}}),
+    result:()=>({after:JSON.stringify(s),calls,work,message:nodes['#library-tool-result']?.textContent,masterDB:engine.masterDB,masterVolume:engine.masterVolume,readout:nodes['#master-level-value']?.textContent})};
 }
 async function restore(data,prepare=async()=>{}) {
   const f=await mountRestore();await prepare(f);const before=JSON.stringify(f.s);
@@ -67,9 +69,17 @@ test('backup restore refuses temporary Cue still preparing before any playback o
   });
   assert.equal(result.after,result.before,'Preparing Cue must prevent restoration changing session state');
   assert.deepEqual(result.calls,[]);assert.match(result.message,/prepar|pause/i);
+  assert.deepEqual(result.work,{reads:0,parses:0,validations:0},'Known busy Cue must reject before reading or parsing the backup');
   assert.equal(deck.processing,true);assert.equal(engine.startTokens.get(0),token,'Rejected restore must retain the pending Cue owner');
 });
 const deferred=()=>{let resolve,reject;const promise=new Promise((a,b)=>{resolve=a;reject=b;});return{promise,resolve,reject};};
+test('playback starting during backup read rejects before parsing or validation',async()=>{
+  const f=await mountRestore(),read=deferred(),pending=f.choose(()=>read.promise);
+  f.s.decks=[{index:0,playing:true}];const before=JSON.stringify(f.s);
+  read.resolve(JSON.stringify(backup([{id:'one',title:'Busy replacement'}])));await pending;
+  assert.equal(JSON.stringify(f.s),before);assert.deepEqual(f.calls,[]);assert.match(f.result().message,/pause/i);
+  assert.deepEqual(f.work,{reads:1,parses:0,validations:0});
+});
 test('older backup read cannot replace a newer selected backup',async()=>{
   const f=await mountRestore(),read=deferred(),old=f.choose(()=>read.promise);
   await f.choose(async()=>JSON.stringify(backup([{id:'one',title:'Newer'}])));

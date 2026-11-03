@@ -426,12 +426,16 @@ export function createPanels(a) {
         restoreInput.onchange = async (e) => {
           const generation=++restoreGeneration;
           const owned=()=>generation===restoreGeneration&&restoreInput.isConnected&&$("#modal")?.open&&$("#restore-library")===restoreInput;
-          try {
-            const file=e.target.files?.[0];if(!file)return;
-            const text=await file.text();if(!owned())return;
-            const data=validateBackup(JSON.parse(text),s.tracks);
+          const requireIdle=()=>{
             if(s.decks.some(d=>d.playing||d.playQueued||d.processing)||s.samples?.some(bank=>bank.some(slot=>slot.playing)))
               throw new Error("Pause decks and samples and wait for playback preparation to finish before restoring a library backup. Nothing was restored.");
+          };
+          try {
+            const file=e.target.files?.[0];if(!file||!owned())return;
+            requireIdle();
+            const text=await file.text();if(!owned())return;
+            requireIdle();
+            const data=validateBackup(JSON.parse(text),s.tracks);
             s.crates=data.crates;
             Object.assign(s.settings,data.settings);
             a.setMasterOutput(s.settings['Master Output Level']??0,{save:false});

@@ -1,12 +1,10 @@
-## Current source follow-through — 3 November 2026 / LIB-FIX-09
+## Current source batch — 3 November 2026 / LIB-FIX-08 and09
 
-Four actual backup-handler failures reproduced: older file read replaced a newer accepted selection, restored after its dialog closed/replaced, or overwrote newer success feedback with an old error. A per-mounted-input generation and connected/current-input/open-modal ownership check now gate parse/apply and error feedback. Existing validation, processing admission, gain setters and one-save path remain. Fifteen focused restore/recovery checks pass; no broad suite or new DSP/renderer changes. Test fixtures remain92/72lines; no dependency/global state machine added.
+Restore now checks the existing idle predicate before reading a backup and again after its asynchronous read/current-owner check, before parsing. Two focused failures reproduced unnecessary read/parse/validation work; current known-preparing Cue performs none, and playback starting during a read prevents parsing/validation/state/save. Sixteen affected restore/recovery checks pass. No measured latency or musical-pop cause claim, broad suite, DSP/layout/waveform/default change or new dependency.
 
-Actual browser normal file-picker restore still applies −6dB/50%,117controls/5ready previews/stopped/master silent. Real closed modal leaves the file input connected with open=false; replacement Setup removes input with open=true. Delayed-read interleavings are controlled source tests, not actual browser/native timing. Owned browser/server closed; generated JSON only, no music copied. Current native139, owner tracks/session/gains and original media remain untouched; no package this pass.
+LIB-FIX-09's generation/dialog ownership repair is included in the same pending batch. Prior actual browser normal file-picker/lifecycle result remains scoped; controlled promise races are source evidence. Current native139/session remains paused and unchanged; next action is immutable140 packaging and one isolated native normal restore/paused recovery. Do not rerun07/53/109 accepted cases or unrelated matrices.08native held-Cue admission and06numeric input gate remain open. GoalACTIVE/audio muted; listening/reference volume/Hercules/full beta remain separate.
 
-LIB-FIX-09 stays OPEN for next desktop batch/paused recovery.07native gain restore is complete;08native held-Cue admission and06numeric-input owner gate remain open. Preview renderer already contains RMS/cachev2 fix; no new envelope change was justified, ANA-FIX-09 owner visual acceptance remains separate. GoalACTIVE/audio muted; preserve53manual/jog/EQ/Cue/stop and109restart evidence. Next: batch this source repair with the next concrete core change, then native delivery; do not rerun accepted listening or clean matrices.
-
-[Focused result](../docs/prototype/LIBRARY_RESTORE_OWNER_2026-11-03.json) · [Trello](https://trello.com/c/0vMS44Sw).
+[Admission result](../docs/prototype/LIBRARY_RESTORE_ADMISSION_2026-11-03.json) · [Ownership result](../docs/prototype/LIBRARY_RESTORE_OWNER_2026-11-03.json).
 
 ## Current native delivery — 3 November 2026 / 0.1.139
 
