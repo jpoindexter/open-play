@@ -425,8 +425,8 @@ export function createPanels(a) {
           try {
             const file=e.target.files?.[0];if(!file)return;
             const data=validateBackup(JSON.parse(await file.text()),s.tracks);
-            if(s.decks.some(d=>d.playing||d.playQueued)||s.samples?.some(bank=>bank.some(slot=>slot.playing)))
-              throw new Error("Pause decks and samples before restoring a library backup. Nothing was restored.");
+            if(s.decks.some(d=>d.playing||d.playQueued||d.processing)||s.samples?.some(bank=>bank.some(slot=>slot.playing)))
+              throw new Error("Pause decks and samples and wait for playback preparation to finish before restoring a library backup. Nothing was restored.");
             s.crates=data.crates;
             Object.assign(s.settings,data.settings);
             a.setMasterOutput(s.settings['Master Output Level']??0,{save:false});

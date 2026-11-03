@@ -1,3 +1,11 @@
+## Current restore-safety follow-through — 3 November 2026 / staged source for 0.1.139
+
+Actual temporary Cue preparation exposed a second restore defect: processing=true/playing=false/no playQueued bypassed the guard, allowing metadata/crate replacement and saving. The existing guard now includes processing and asks the user to wait. Actual Cue + AudioEngine + restore-handler RED→GREEN preserves all session data, no save, pending Cue flag/token; cleanup cancels/pauses before releasing the held resume and asserts no playing/processing/voice. Eight focused restore cases pass; only the new cleanup assertion was rechecked separately. No broad suite, real-time/PCM/listening or native claim.
+
+LIB-FIX-08 tracks admission separately from LIB-FIX-07's two-setter master-gain restore. Both are being included in one immutable desktop139 batch; running138 and saved session remain untouched. Keep the current app plus at most one staged candidate; do not switch the live profile without observing a normal stop/exit and preserving it. No control/layout/waveform renderer or original-media changes. Owner listening/Hercules and CORE-FIX-75 calibration remain separate.
+
+[Focused source result](docs/prototype/LIBRARY_RESTORE_PREPARING_2026-11-03.json) · [LIB-FIX-08](https://trello.com/c/CRxh43JQ/247-lib-fix-08-refuse-backup-restore-during-deck-preparation).
+
 ## Current unattended source repair — 3 November 2026 / LIB-FIX-07
 
 Backup restore could save new master-level and volume settings while the current engine/header kept the old values until reload. Two existing app setters now apply the validated settings before the existing single save. Actual handler/app-setter/AudioEngine regression reproduced RED and passed after repair; 10 focused restore/recovery checks and one added legacy-gain assertion passed. No broad suite.
