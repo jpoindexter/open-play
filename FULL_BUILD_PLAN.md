@@ -1,3 +1,9 @@
+## Current unattended follow-through — 3 November 2026 / LIB-FIX-08 native gate
+
+A53-line isolated check reuses the current four-deck Compact workspace, real Cue/restore handlers and AudioContext. Hold one real resume completion before Cue starts, attempt a generated backup through actual FileList/onchange, then release/cancel and restore methods. Browser passes: pending processingtrue/playingfalse, zero file reads, metadata/storage/starttoken unchanged,235controls and5ready preview sources retained. Cleanup allstopped/physicalMuted/methodsrestored; four served source hashes independently match. No new production repair, DSP/layout/waveform change or broad suite; existing140 production/source regression evidence retained.
+
+Next: include the isolated button/module in immutable141, execute this one native overlap, preserve main paused recovery and retire inactive140/ownpackagingdownload. Normal stopped restore07/09, SimpleSync70 and53/109 accepted cases do not need rerunning. Owner06input/listening/reference75/Hercules/fullbeta remain separate. GoalACTIVE/audio muted. [Scoped browser result](docs/prototype/LIBRARY_RESTORE_CUE_2026-11-03.json).
+
 ## Current native delivery — 3 November 2026 / 0.1.140
 
 Immutable1f36ee0 includes LIB-FIX-09 asynchronous restore ownership and LIB-FIX-08 early idle admission. Two focused failures reproduced unnecessary read/parse/validation; repaired known-preparing Cue skips all three, playback starting during read skips parse/validation/state/save. Sixteen affected restore/recovery checks pass; no broad suite. Exact archive inspection5/5, ASAR95e098afd7beb61958a32b5788f9319c2a3f112f08fa68b58e55692ece7acd11.
