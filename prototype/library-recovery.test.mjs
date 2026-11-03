@@ -19,7 +19,7 @@ const metadata={title:'Recovered song',cues:[{position:5,name:'Saved cue'}],save
 function recovery(tags=[{id,...metadata}]){
  const records=new Map(),owner=createSessionStorage({getItem:key=>records.get(key)??null,setItem:(key,value)=>records.set(key,value)});owner.load();
  const s={tracks:[],localTags:{},crates:[],settings:{},decks:Array.from({length:4},(_,i)=>newDeck(i)),deckCount:2,selected:'demo-0',samples:[],analysisSettings:{onImport:false},video:{},fxTempo:[],fxBeatMultipliers:[1,1],mappings:[],prepare:[],history:[],historySessions:[]};
- const nodes={},exports=[];
+ const nodes={'#modal':{open:true},'#restore-library':{isConnected:true}},exports=[];
  const ctx=vm.createContext({validateBackup,validateMetadata,trackMetadata,createLibraryBackup,snapshotDeckSession,normalizeStemCrateTrack,crypto:webcrypto,
   s,state:s,sessionStorage:owner,$:id=>nodes[id]??={},trackById:id=>s.tracks.find(t=>t.id===id),a:{trackGain:{refresh(){}},setMasterOutput(){},setMasterVolume(){}},percent:(name,fallback)=>s.settings[name]===undefined?fallback:Number(s.settings[name])/100,
   engine:{position:d=>d.position,buffer:async t=>{t.duration=20;return {duration:20};},setMonitorSettings(){},setMixerSettings(){}},

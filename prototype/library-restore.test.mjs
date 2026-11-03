@@ -6,13 +6,14 @@ import {AudioEngine} from './engine.js';
 import {createCueHolds} from './holds.js';
 
 // Execute the real file-input handler; storage/UI collaborators record side effects.
-async function restore(data,prepare=async()=>{}) {
+async function mountRestore() {
   const source=fs.readFileSync(new URL('./panels.js',import.meta.url),'utf8');
-  const begin=source.indexOf('$("#restore-library").onchange = async (e) => {');
+  const ownerBegin=source.indexOf('const restoreInput = $("#restore-library");');
+  const begin=ownerBegin<0?source.indexOf('$("#restore-library").onchange = async (e) => {'):ownerBegin;
   const end=source.indexOf('\n        };',begin)+11;
   const track={id:'one',title:'Original',cues:[],savedLoops:[],duration:200,bpm:120,grid:0};
   const s={tracks:[track],crates:[{id:'old',name:'Original',tracks:['one']}],settings:{'Quantize Value':'1 Beat','Master Output Level':-10,'Master Volume':75},decks:[],samples:[]};
-  const nodes={},calls=[];
+  const nodes={'#modal':{open:true},'#restore-library':{isConnected:true}},calls=[];
   let validation={};try{validation=await import('./library-state.js');}catch(error){if(error.code!=='ERR_MODULE_NOT_FOUND')throw error;}
   const engine=new AudioEngine();engine.setMasterDB(-10);engine.setMasterVolume(.75);
   Object.assign(engine,{setMonitorSettings(){},setMixerSettings(){}});
@@ -22,10 +23,12 @@ async function restore(data,prepare=async()=>{}) {
   vm.runInContext(app.slice(app.indexOf('function setMasterOutput('),app.indexOf('\nconst trackGain=createTrackGain(')),ctx);
   Object.assign(ctx.a,{setMasterOutput:ctx.setMasterOutput,setMasterVolume:ctx.setMasterVolume});
   vm.runInContext(source.slice(begin,end),ctx);
-  await prepare({s,engine});
-  const before=JSON.stringify(s);
-  await nodes['#restore-library'].onchange({target:{files:[{text:async()=>JSON.stringify(data)}]}});
-  return {before,after:JSON.stringify(s),calls,message:nodes['#library-tool-result']?.textContent,masterDB:engine.masterDB,masterVolume:engine.masterVolume,readout:nodes['#master-level-value']?.textContent};
+  return {s,engine,nodes,calls,choose:text=>nodes['#restore-library'].onchange({target:{files:[{text}]}}),
+    result:()=>({after:JSON.stringify(s),calls,message:nodes['#library-tool-result']?.textContent,masterDB:engine.masterDB,masterVolume:engine.masterVolume,readout:nodes['#master-level-value']?.textContent})};
+}
+async function restore(data,prepare=async()=>{}) {
+  const f=await mountRestore();await prepare(f);const before=JSON.stringify(f.s);
+  await f.choose(async()=>JSON.stringify(data));return {before,...f.result()};
 }
 const backup=tags=>({format:'open-play-prototype-1',crates:[{id:'new',name:'Replacement',tracks:[]}],settings:{'Quantize Value':'1 Beat'},tags});
 for(const [name,patch] of Object.entries({nullCues:{cues:null},badColor:{color:'" onpointerenter="bad'},badLoop:{savedLoops:[{start:5,end:2}]},badGrid:{gridWarpMarkers:[{time:4,bpm:0}]}}))test(`invalid ${name} leaves live state and persistence untouched`,async()=>{
@@ -65,4 +68,25 @@ test('backup restore refuses temporary Cue still preparing before any playback o
   assert.equal(result.after,result.before,'Preparing Cue must prevent restoration changing session state');
   assert.deepEqual(result.calls,[]);assert.match(result.message,/prepar|pause/i);
   assert.equal(deck.processing,true);assert.equal(engine.startTokens.get(0),token,'Rejected restore must retain the pending Cue owner');
+});
+const deferred=()=>{let resolve,reject;const promise=new Promise((a,b)=>{resolve=a;reject=b;});return{promise,resolve,reject};};
+test('older backup read cannot replace a newer selected backup',async()=>{
+  const f=await mountRestore(),read=deferred(),old=f.choose(()=>read.promise);
+  await f.choose(async()=>JSON.stringify(backup([{id:'one',title:'Newer'}])));
+  const committed=JSON.stringify(f.s),saves=f.calls.length;
+  read.resolve(JSON.stringify(backup([{id:'one',title:'Older'}])));await old;
+  assert.equal(JSON.stringify(f.s),committed);assert.equal(f.calls.length,saves);
+});
+for(const close of ['closed','replaced'])test(`backup read leaves state untouched after its dialog is ${close}`,async()=>{
+  const f=await mountRestore(),read=deferred(),before=JSON.stringify(f.s),pending=f.choose(()=>read.promise);
+  if(close==='closed')f.nodes['#modal'].open=false;
+  else f.nodes['#restore-library']={isConnected:true};
+  read.resolve(JSON.stringify(backup([{id:'one',title:'Abandoned'}])));await pending;
+  assert.equal(JSON.stringify(f.s),before);assert.deepEqual(f.calls,[]);
+});
+test('older backup read error cannot replace the newer restore result',async()=>{
+  const f=await mountRestore(),read=deferred(),old=f.choose(()=>read.promise);
+  await f.choose(async()=>JSON.stringify(backup([{id:'one',title:'Current'}])));const message=f.result().message;
+  read.reject(Error('Stale read failure'));await old;
+  assert.equal(f.result().message,message);assert.equal(f.s.tracks[0].title,'Current');assert.equal(f.calls.length,1);
 });

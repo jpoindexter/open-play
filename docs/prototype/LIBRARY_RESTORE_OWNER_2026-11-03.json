@@ -1,0 +1,52 @@
+{
+  "date": "2026-11-03",
+  "baseline": "82109d3a3779d0cb3aab76c1b719ca81eee0cf69",
+  "defect": "An older backup File.text completion could overwrite a newer selected backup, mutate state after closing/replacing Library tools, or replace the newer success result with a stale error.",
+  "rootCause": "No current request generation or file-input/dialog lifetime check after asynchronous read.",
+  "repair": "Per-mounted-input generation plus connected/current-input/open-modal ownership. Check before parsing/applying; write errors only for current owner. Existing validation, preparing-deck guard, gain setters and one-save path retained.",
+  "sourceRegression": {
+    "before": "4 new failures: newer-selection, closed-dialog, replaced-input and stale-read-error; one incidental legacy-positive case passed in filtered RED.",
+    "after": "15 focused restore/recovery checks pass. No broad suite. Actual installed source handler and app/engine gain methods; controlled UI/file-read/storage collaborators.",
+    "limits": "Controlled promise timing and DOM collaborators; not natural timing or native pending-read interaction."
+  },
+  "browser": {
+    "origin": "Existing owned18865 generated-only session, no original audio import",
+    "normalPicker": {
+      "controls": 117,
+      "inputConnected": true,
+      "master": "-6",
+      "modalOpen": true,
+      "peak": "\u2212\u221e relative to nominal; stereo sample peak",
+      "play": [
+        "\u25b6",
+        "\u25b6"
+      ],
+      "previews": {
+        "readyImages": 5
+      },
+      "readout": "-6.0dB \u00b7 50%",
+      "result": "Metadata restored and saved. Backups contain no audio bytes; unmatched tracks must be imported separately."
+    },
+    "closedDOM": {
+      "inputConnected": true,
+      "modalOpen": false
+    },
+    "replacementDOM": {
+      "inputPresent": false,
+      "modalOpen": true,
+      "title": "Setup"
+    },
+    "claim": "Current restore passes through the actual file picker; real DOM confirms closed input remains connected with modal.open=false, and replacement Settings removes input while modal.open=true. Delayed-read interleavings are verified by source regression, not by browser UI.",
+    "audio": "No Play/Cue/Sync/recording/resume requested; master\u2212\u221e/two stopped Play labels",
+    "controls": "117controls and5ready previews available after normal restore; restore intentionally redraws controls, no node-identity claim."
+  },
+  "sourceSHA256": {
+    "prototype/panels.js": "8355ed7b7d658d7b04bc25da305af39387d5cd3edf773d6d47e71282d38a81f2",
+    "prototype/library-restore.test.mjs": "f7f86421953b59e12bbb280436a63b503f1e999ee8b903274ef8707d791c5124",
+    "prototype/library-recovery.test.mjs": "3ed6433c6eda28f8055d94d47f02183c8a4794ae8eb0f6be921a332202be289d"
+  },
+  "preservation": "No waveform-renderer/style/audio/DSP/default/media/session changes. Installed139/main user session remains untouched.",
+  "delivery": "Source/browser only, queued for next desktop batch; no new package this pass.",
+  "cleanup": "Owned browser tab closed and server stopped; generated JSON only, no real media copies",
+  "privateEvidence": "local-evidence/restore-owner-2026-11-03"
+}

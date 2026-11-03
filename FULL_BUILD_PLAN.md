@@ -1,3 +1,13 @@
+## Current source follow-through — 3 November 2026 / LIB-FIX-09
+
+Four actual backup-handler failures reproduced: older file read replaced a newer accepted selection, restored after its dialog closed/replaced, or overwrote newer success feedback with an old error. A per-mounted-input generation and connected/current-input/open-modal ownership check now gate parse/apply and error feedback. Existing validation, processing admission, gain setters and one-save path remain. Fifteen focused restore/recovery checks pass; no broad suite or new DSP/renderer changes. Test fixtures remain92/72lines; no dependency/global state machine added.
+
+Actual browser normal file-picker restore still applies −6dB/50%,117controls/5ready previews/stopped/master silent. Real closed modal leaves the file input connected with open=false; replacement Setup removes input with open=true. Delayed-read interleavings are controlled source tests, not actual browser/native timing. Owned browser/server closed; generated JSON only, no music copied. Current native139, owner tracks/session/gains and original media remain untouched; no package this pass.
+
+LIB-FIX-09 stays OPEN for next desktop batch/paused recovery.07native gain restore is complete;08native held-Cue admission and06numeric-input owner gate remain open. Preview renderer already contains RMS/cachev2 fix; no new envelope change was justified, ANA-FIX-09 owner visual acceptance remains separate. GoalACTIVE/audio muted; preserve53manual/jog/EQ/Cue/stop and109restart evidence. Next: batch this source repair with the next concrete core change, then native delivery; do not rerun accepted listening or clean matrices.
+
+[Focused result](docs/prototype/LIBRARY_RESTORE_OWNER_2026-11-03.json) · [Trello](https://trello.com/c/0vMS44Sw).
+
 ## Current native delivery — 3 November 2026 / 0.1.139
 
 Immutable ec50014 contains both restore repairs; exact archive inspection5/5, ASAR25f44f8795cdab4976cc9efc4dbbf59f7b9f41c8406bbe9efa39420f5cc2460f. Actual native isolated, nonpersistent/device-denied core window uses normal Library tools/Restore backup file picker and owned −6dB/50% JSON. Header immediately shows −6.0dB ·50%, generated decks paused0s/master silent/8ready previews. LIB-FIX-07 source/browser/native criterion complete in Verified evidence. LIB-FIX-08 source admission guard is delivered, but native held-Cue restore overlap remains OPEN. No broad suite, music playback, PCM/listening/reference/hardware claim.

@@ -421,10 +421,15 @@ export function createPanels(a) {
               2,
             ),
           );
-        $("#restore-library").onchange = async (e) => {
+        const restoreInput = $("#restore-library");
+        let restoreGeneration = 0;
+        restoreInput.onchange = async (e) => {
+          const generation=++restoreGeneration;
+          const owned=()=>generation===restoreGeneration&&restoreInput.isConnected&&$("#modal")?.open&&$("#restore-library")===restoreInput;
           try {
             const file=e.target.files?.[0];if(!file)return;
-            const data=validateBackup(JSON.parse(await file.text()),s.tracks);
+            const text=await file.text();if(!owned())return;
+            const data=validateBackup(JSON.parse(text),s.tracks);
             if(s.decks.some(d=>d.playing||d.playQueued||d.processing)||s.samples?.some(bank=>bank.some(slot=>slot.playing)))
               throw new Error("Pause decks and samples and wait for playback preparation to finish before restoring a library backup. Nothing was restored.");
             s.crates=data.crates;
@@ -449,7 +454,7 @@ export function createPanels(a) {
               ? "Metadata restored and saved. Backups contain no audio bytes; unmatched tracks must be imported separately."
               : "Metadata restored in this session only. Saving failed; export a backup before closing.";
           } catch (err) {
-            $("#library-tool-result").textContent = err.message;
+            if(owned())$("#library-tool-result").textContent = err.message;
           }
         };
         $("#find-duplicates").onclick = () => {
