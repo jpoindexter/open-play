@@ -37,3 +37,11 @@ test('ordinary decoded deck load leaves scratch preparation to the first gesture
  const f=fixture();assert.equal(await f.scope.load(1,f.track.id),true);
  assert.equal(f.calls.scratch,0);assert.deepEqual(f.painted,[1]);assert.equal(f.calls.library,1);
 });
+
+test('loading restored measured tracks reuses analysis while missing results and gain upgrades still queue',async()=>{
+ const measured={duration:30,analyzedDuration:30,bpm:126,key:null,grid:null,gain:{recommendedDb:0},warnings:[],loudness:{version:'bs1770-integrated-v1',integratedLUFS:-15}};
+ for(const [analysisResult,autoGain,analyzed,expected]of [[measured,true,false,0],[undefined,false,false,1],[{...measured,loudness:null},true,false,1],[{...measured,loudness:null},false,false,0],[undefined,false,true,0]]){
+  const f=fixture(),jobs=[];Object.assign(f.track,{analysisResult,analyzed});f.scope.state.settings['Use Auto Gain']=autoGain;f.scope.enqueueAnalysis=tracks=>{jobs.push(...tracks);return Promise.resolve();};
+  assert.equal(await f.scope.load(1,f.track.id),true);assert.equal(jobs.length,expected,'A restored measured result must not start a duplicate job; missing analysis and requested loudness upgrades still run');
+ }
+});
