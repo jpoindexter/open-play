@@ -3,8 +3,22 @@ import assert from 'node:assert/strict';
 import {analyzePCM} from './analysis.js';
 import {demoTracks,defaultSettings} from './fixtures.js';
 import {createSessionStorage} from './session-storage.js';
-import {validateBackup,validateSavedState,validateMetadata,trackMetadata} from './library-state.js';
+import {validateBackup,validateSavedState,validateMetadata,trackMetadata,createLibraryBackup} from './library-state.js';
 const json=x=>JSON.parse(JSON.stringify(x));
+test('persisted analysis keeps pulse counts and summaries without duplicate pulse arrays',()=>{
+ const grid={firstBeat:.137,beats:Array.from({length:360},(_,i)=>.137+i*60/121.01),drift:{status:'review',markers:[{time:100,bpm:121.02}]}},analysisResult={duration:180,analyzedDuration:180,bpm:121.01,key:'Am',gain:{recommendedDb:-3},warnings:['Estimated downbeat'],grid,tempo:{confidence:.8,grid}};
+ const track={id:'local-'+'a'.repeat(64),contentHash:'a'.repeat(64),duration:180,title:'Owned pulse fixture',bpm:121.01,grid:.14,cues:[{position:2,name:'Cue'}],gridWarpMarkers:[{time:100,bpm:121.02}],analysisResult};
+ const original=json(track),metadata=trackMetadata(track),compact=metadata.analysisResult;
+ assert.equal(compact.grid.beats,undefined,'Pulse arrays must not consume library save space');assert.equal(compact.tempo.grid.beats,undefined);assert.equal(compact.grid.beatCount,360);assert.equal(compact.tempo.grid.beatCount,360);
+ assert.deepEqual(compact.grid.drift,grid.drift);assert.equal(compact.grid.firstBeat,.137);assert.deepEqual(metadata.cues,track.cues);assert.deepEqual(metadata.gridWarpMarkers,track.gridWarpMarkers);assert.equal(metadata.grid,.14);
+ assert.deepEqual(json(track),original,'Projection must not mutate the full in-memory analysis');assert.equal(track.analysisResult.grid.beats,grid.beats);
+ const saved=json({localTags:{[track.contentHash]:metadata}});assert.deepEqual(validateSavedState(saved),saved);
+ const backup=json(createLibraryBackup({tracks:[track],crates:[],settings:{}}));assert.deepEqual(validateBackup(backup,[track]).tags,backup.tags);
+ const legacy=validateMetadata({analysisResult:json(analysisResult)});assert.equal(legacy.analysisResult.grid.beatCount,360);assert.equal(legacy.analysisResult.grid.beats,undefined);
+ assert(JSON.stringify(metadata).length<JSON.stringify(original).length/4,'Persisted summaries should be substantially smaller');
+ for(const beatCount of [-1,.5,null,'360',Infinity])assert.throws(()=>validateMetadata({analysisResult:{...compact,grid:{...compact.grid,beatCount}}}),/Invalid/);
+ assert.throws(()=>validateMetadata({analysisResult:{...compact,grid:{...grid,beatCount:359}}}),/Invalid/);
+});
 test('real analysis result and all default preferences survive metadata round trip',()=>{
  const sampleRate=8000,pcm=new Float32Array(sampleRate*8);
  for(let i=0;i<pcm.length;i++)pcm[i]=.3*Math.sin(2*Math.PI*110*i/sampleRate)*Math.exp(-((i/sampleRate)%.5)*20);

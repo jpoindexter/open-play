@@ -29,7 +29,16 @@ function safeJSON(value,path='library',depth=0){
   }
 }
 export const metadataFields=['title','artist','album','bpm','key','plays','rating','comment','color','cues','savedLoops','grid','gridMarkers','gridWarpMarkers','locked','flips','sampleGain','trackGainDb','autoGainSchema','autoGainOffsetDb','autoGainPendingDb','analysisResult','metadataSources','analysisGainDb','metadataRevision','stemJob','stemModel','stemBackend','inStemCrate'];
-export function trackMetadata(track){return Object.fromEntries(metadataFields.filter(key=>track[key]!==undefined).map(key=>[key,track[key]]));}
+function storedAnalysis(result){
+  const compact=grid=>{const {beats,...summary}=grid;return {...summary,beatCount:beats.length};};
+  const grid=Array.isArray(result?.grid?.beats),tempo=Array.isArray(result?.tempo?.grid?.beats);
+  if(!grid&&!tempo)return result;
+  const summary={...result};
+  if(grid)summary.grid=compact(result.grid);
+  if(tempo)summary.tempo={...result.tempo,grid:compact(result.tempo.grid)};
+  return summary;
+}
+export function trackMetadata(track){return Object.fromEntries(metadataFields.filter(key=>track[key]!==undefined).map(key=>[key,key==='analysisResult'?storedAnalysis(track[key]):track[key]]));}
 export function createLibraryBackup({tracks,localTags={},crates,settings}){
   const tags=new Map();
   for(const [hash,metadata] of Object.entries(localTags))if(/^[a-f0-9]{64}$/.test(hash)){
@@ -44,7 +53,11 @@ function analysis(value){
   fields(value,{bpm:nullable(nonnegative),key:nullable(string),partial:bool,tempo:nullable(object),keyEstimate:nullable(object),loudness:nullable(object)},'analysis');
   required(value.gain,{recommendedDb:nullable(number)},'analysis.gain');
   fields(value.gain,{rmsDbfs:nullable(number),samplePeakDbfs:nullable(number),clippedSamples:nonnegative},'analysis.gain');
-  if(value.grid!==null&&value.grid!==undefined)required(value.grid,{firstBeat:number,beats:list(number)},'analysis.grid');
+  for(const [path,grid]of [['analysis.grid',value.grid],['analysis.tempo.grid',value.tempo?.grid]])if(grid!==null&&grid!==undefined){
+    required(grid,{firstBeat:number},path);fields(grid,{beats:list(number),beatCount:x=>Number.isSafeInteger(x)&&x>=0},path);
+    check(Object.hasOwn(grid,'beats')||Object.hasOwn(grid,'beatCount'),path+'.beatCount');
+    if(grid.beats&&grid.beatCount!==undefined)check(grid.beatCount===grid.beats.length,path+'.beatCount');
+  }
   for(const key of ['tempo','keyEstimate'])if(value[key])fields(value[key],{confidence:range(0,1)},`analysis.${key}`);
   if(value.loudness)fields(value.loudness,{integratedLUFS:nullable(number),channels:nonnegative,reason:nullable(string)},'analysis.loudness');
   return true;
