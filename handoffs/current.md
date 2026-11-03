@@ -1,3 +1,11 @@
+## Current unattended source repair — 3 November 2026 / LIB-FIX-07
+
+Backup restore could save new master-level and volume settings while the current engine/header kept the old values until reload. Two existing app setters now apply the validated settings before the existing single save. Actual handler/app-setter/AudioEngine regression reproduced RED and passed after repair; 10 focused restore/recovery checks and one added legacy-gain assertion passed. No broad suite.
+
+Normal browser file picker reproduced the mismatch (restored −6dB/50%, header still 0dB). After repair/reload, a neutral backup immediately applied 0dB/100%; 117 core-control inventory entries and five ready preview sources retained, both decks stopped and meter silent. Restore still intentionally redraws controls. No listening/PCM/native claim. Installed 0.1.138 and owner session/gains/original media remain untouched; no new package. LIB-FIX-07 stays open for next desktop delivery. CORE-FIX-75's Serato comparison remains open; this is not proven cause of the reported loudness difference.
+
+Evidence: [focused result](../docs/prototype/LIBRARY_RESTORE_MASTER_2026-11-03.json) · [Trello](https://trello.com/c/8SaPz5b3). Next: include this bounded repair in the next safe desktop batch; keep audio muted and retain deferred owner checks.
+
 ## Current output-level measurement —3November2026 /source-only checker, native138 retained
 
 CORE-FIX-75 now has actual real-track current-engine PCM evidence. Separate loopback origin18864 imported Constant Change through normal file picker/library/Load; installed Play/master/trackgain controls, raw-forward stereo source witness beforetrackgain and witness aftermaster, physical output muted. Controlled−7dBtrackgain/80%fader/trimunity/Linearcentre/100%volume/3dBheadroom gives−21.9382dB atmaster−10 and−11.9382dB atmaster0. Independent Python rechecks all8completeFloat32buffers/hashes,44100alignedframes/channel/case/finite; difference10.00000006dB. No limiter reduction or unexpected extra attenuation in this path.117controls and6ready previews retained; cleanupstopped/muted,9sourcehashes independently match. OriginalMP3hash/size/mtimeunchanged. No matchedSerato/native/physical/listening/keylock/stem/FX/globallevel claim.

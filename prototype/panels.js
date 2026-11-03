@@ -429,6 +429,8 @@ export function createPanels(a) {
               throw new Error("Pause decks and samples before restoring a library backup. Nothing was restored.");
             s.crates=data.crates;
             Object.assign(s.settings,data.settings);
+            a.setMasterOutput(s.settings['Master Output Level']??0,{save:false});
+            a.setMasterVolume(percent('Master Volume',1),{save:false});
             for(const {id,...metadata} of data.tags){
               const track=trackById(id);
               if(track)Object.assign(track,metadata);

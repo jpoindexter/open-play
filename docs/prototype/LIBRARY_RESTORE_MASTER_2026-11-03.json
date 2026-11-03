@@ -1,0 +1,79 @@
+{
+  "date": "2026-11-03",
+  "baseline": "5178d35310d25f004eb6f8454d1e5fd40f7775fa",
+  "defect": "Backup restore saved master level/volume without applying current engine/header values; reload then changed output. Not established cause of reported Serato loudness difference.",
+  "repair": "Two existing app master setters, save:false, after validated settings merge and before existing single persist. No DSP/default change/new abstraction.",
+  "node": {
+    "baseline": "New actual restore-handler + actual app setters + actual AudioEngine gain methods: master remained -10 instead of restored -6. RED retained privately.",
+    "after": "10 focused restore/recovery tests passed; one additional legacy-backup assertion confirms absent gain fields preserve current -10/.75. No broad suite.",
+    "isolation": "Graph/clock/output are not running; file-input/app setter functions extracted from actual source. Does not prove PCM/native/listening."
+  },
+  "browser": {
+    "origin": "http://127.0.0.1:18865",
+    "path": "Normal More panels \u2192 Library tools \u2192 Restore backup file picker; stopped generated tracks only",
+    "red": {
+      "master": "0",
+      "peak": "\u2212\u221e relative to nominal; stereo sample peak",
+      "readout": "0.0dB",
+      "result": "Metadata restored and saved. Backups contain no audio bytes; unmatched tracks must be imported separately."
+    },
+    "redSettings": {
+      "master": "0",
+      "readout": "0.0dB",
+      "volume": "50"
+    },
+    "reload": "Unchanged normal startup applied previously saved -6dB/50%; then restored neutral backup through same normal picker to prove a live change.",
+    "green": {
+      "result": "Metadata restored and saved. Backups contain no audio bytes; unmatched tracks must be imported separately.",
+      "master": "0",
+      "readout": "0.0dB",
+      "peak": "\u2212\u221e relative to nominal; stereo sample peak",
+      "playLabels": [
+        "\u25b6",
+        "\u25b6"
+      ]
+    },
+    "greenSettings": {
+      "master": "0",
+      "readout": "0.0dB",
+      "volume": "100"
+    },
+    "retention": {
+      "controlsBefore": 117,
+      "controlsAfter": 117,
+      "controlInventoryRetained": true,
+      "readyPreviewsBefore": 5,
+      "readyPreviewsAfter": 5,
+      "previewSourcesRetained": true
+    },
+    "notes": "Restore already intentionally redraws controls; inventory/source retention is not node identity. Five ready library previews retained. No Play/Cue/Sync/REC or AudioContext resume requested."
+  },
+  "sourceHashes": {
+    "prototype/panels.js": "a670eb6256a41db91e236f13bd193f5066d23198657a276ef9602ea69a8346b6",
+    "prototype/app.js": "abfc66ad3e47a23b3ddf2d1fc2c8f16b9d7790b35de82eaf195ac8e96200e8aa",
+    "prototype/library-restore.test.mjs": "db9c94e4c753d0af85218e3a970d541b85112a9b5ab892f05805c7b2d5f74d57",
+    "prototype/library-recovery.test.mjs": "701e840f011f031b7d9737aee103a573877936a0aaa35b103105783a45ad65e6"
+  },
+  "limits": [
+    "Source/browser repair only; installed native138 unchanged",
+    "No matched Serato/physical/PCM/listening claim",
+    "Main original audio, saved levels, sessions and unrelated owner draft untouched"
+  ],
+  "privateEvidence": "local-evidence/restore-master-2026-11-03",
+  "runtimeScreenshot": "local-evidence/restore-master-2026-11-03/fixed-restore.png",
+  "cleanup": {
+    "ownedBrowserTab": "closed",
+    "ownedServer": "stopped",
+    "native138Readback": {
+      "masterDB": -10,
+      "peak": "\u2212\u221e",
+      "positions": [
+        "02:41.7",
+        "01:51.1"
+      ],
+      "tracks": 25
+    },
+    "newPackages": 0,
+    "originalAudioImported": 0
+  }
+}

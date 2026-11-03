@@ -21,7 +21,7 @@ function recovery(tags=[{id,...metadata}]){
  const s={tracks:[],localTags:{},crates:[],settings:{},decks:Array.from({length:4},(_,i)=>newDeck(i)),deckCount:2,selected:'demo-0',samples:[],analysisSettings:{onImport:false},video:{},fxTempo:[],fxBeatMultipliers:[1,1],mappings:[],prepare:[],history:[],historySessions:[]};
  const nodes={},exports=[];
  const ctx=vm.createContext({validateBackup,validateMetadata,trackMetadata,createLibraryBackup,snapshotDeckSession,normalizeStemCrateTrack,crypto:webcrypto,
-  s,state:s,sessionStorage:owner,$:id=>nodes[id]??={},trackById:id=>s.tracks.find(t=>t.id===id),a:{trackGain:{refresh(){}}},
+  s,state:s,sessionStorage:owner,$:id=>nodes[id]??={},trackById:id=>s.tracks.find(t=>t.id===id),a:{trackGain:{refresh(){}},setMasterOutput(){},setMasterVolume(){}},percent:(name,fallback)=>s.settings[name]===undefined?fallback:Number(s.settings[name])/100,
   engine:{position:d=>d.position,buffer:async t=>{t.duration=20;return {duration:20};},setMonitorSettings(){},setMixerSettings(){}},
   snapshotVideoState:x=>x,normalizeFXTempoSettings:x=>x,updateSessionStatus(){},monitorState(){},mixerSettingsFromPreferences(){},refreshChannelFilters(){},applyEQBoost(){},renderCrates(){},renderTracks(){},renderDecks(){},notify(){},colors:['#abcdef'],saveLocalAudio:async t=>{t.storage='saved';return true;},download:(_name,value)=>exports.push(JSON.parse(value)),enqueueAnalysis(){throw Error('Unexpected analysis');}});
  vm.runInContext(section(app,'function sessionSnapshot(){','function dialog(').replace('export function persist','function persist'),ctx);
