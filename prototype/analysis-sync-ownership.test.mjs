@@ -19,7 +19,7 @@ function fixture(){
  const smart=createSmartSync({engine,state});smart.setMaster(leader);
  engine.onGridWillChange=t=>{calls.push(['before',t.bpm,t.grid]);return smart.captureGrid(t);};
  engine.onGridChanged=(t,before)=>{calls.push(['after',t.bpm,t.grid]);return smart.edited(t,before);};
- const scope={state,engine,analysisQueue:[],analysisController:null,AbortController,DOMException,
+ const scope={state,engine,analysisQueue:[],analysisController:null,analysisJob:null,AbortController,DOMException,
   analyzeBuffer:async()=>({bpm:100,key:'Am',grid:{firstBeat:.1}}),trackGain:{measurementReady(){}},
   persist:()=>calls.push(['persist',track.bpm]),renderTracks:()=>calls.push(['rows']),smartSync:smart,
   refreshAnalysisControls:()=>calls.push(['controls']),drawWaves:()=>calls.push(['waves']),updateAnalysisStatus:s=>state.analysisStatus=s,notify(){}};

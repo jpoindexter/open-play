@@ -1,3 +1,11 @@
+## Current unattended source repair — 3 November 2026 / ANA-FIX-11
+
+A repeated Load/import could queue a second analysis of the track already being measured: deduplication inspected waiting jobs only. Existing queue owner now remembers the active job and shares identical track/settings/replacement requests until completion, clearing ownership in finally. Changed settings/replacement requests and cancelled same-track retry remain eligible. One composed RED→GREEN regression plus directly affected queue/presentation/Sync ownership checks:22/22. No broad suite/soak, new production module/dependency, DSP/default/layout/waveform or saved-session change.
+
+Source repair only; desktop145/main paused session remains unchanged. Browser/native real-worker overlap acceptance stays OPEN on [ANA-FIX-11](https://trello.com/c/OLIH3H5Z); ANA006/AUD006 comments read back exactly with their descriptions/history preserved. This prevents redundant work but does not establish a general CPU/frame gain or pop/stall cause. Next: include in next safe desktop batch and execute one stopped/muted isolated normal Load overlap; preserve previews/controls and owner listening/controller gates. Avoid another build for this small change alone.
+
+[Source result](../docs/prototype/ACTIVE_ANALYSIS_2026-11-03.json) · [Board readback](../docs/prototype/active-analysis-trello-2026-11-03.json).
+
 ## Current native delivery — 3 November 2026 / 0.1.145
 
 Saved analysis is now reused on track/session load. The shared load predicate previously treated the session-only analyzed flag as missing measurements even when a valid analysisResult had been restored. Missing results and required loudness upgrades still queue; explicit Analyze is unchanged. One composed RED→GREEN regression covers those branches; all five directly affected load/overview checks passed. No broad suite, new production module, DSP, defaults, layout or waveform-renderer change.

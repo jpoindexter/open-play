@@ -45,7 +45,7 @@ test('unknown and unrecognized keys retain plain and projected presentation with
 test('analysis completion preserves the measured deck controls and active gesture',async()=>{
  const source=readFileSync(new URL('./app.js',import.meta.url),'utf8'),runner=source.slice(source.indexOf('async function enqueueAnalysis('),source.indexOf('\nfunction analyze('));
  const track={id:'measured',title:'Measured',bpm:120,key:null,grid:0,metadataSources:{}},control={focused:true,pointer:9},deck={index:0,track,control};
- const scope={state:{analysis:false,deckCount:4,analysisSettings:{},decks:[deck]},analysisQueue:[],analysisController:null,AbortController,DOMException,
+ const scope={state:{analysis:false,deckCount:4,analysisSettings:{},decks:[deck]},analysisQueue:[],analysisController:null,analysisJob:null,AbortController,DOMException,
   engine:{buffer:async()=>({})},analyzeBuffer:async()=>({bpm:120,key:'Cm',grid:{firstBeat:0}}),trackGain:{measurementReady(){}},smartSync:{reconcile(){}},
   persist(){},renderTracks(){},renderDecks(){deck.control={focused:false,pointer:null};},refreshAnalysisControls(){},updateAnalysisStatus(){},drawWaves(){},notify(){}};
  vm.createContext(scope);vm.runInContext(runner,scope);await scope.enqueueAnalysis([track]);
@@ -55,7 +55,7 @@ test('analysis completion preserves the measured deck controls and active gestur
 test('completed analysis refreshes its existing overview before the next queued job finishes',async()=>{
  const source=readFileSync(new URL('./app.js',import.meta.url),'utf8'),runner=source.slice(source.indexOf('async function enqueueAnalysis('),source.indexOf('\nfunction analyze('));
  const a={id:'a',title:'A',bpm:0,key:null,grid:null,metadataSources:{}},b={...a,id:'b',title:'B',metadataSources:{}},waves=[];
- const scope={state:{analysis:false,deckCount:4,analysisSettings:{},decks:[{index:0,track:a}]},analysisQueue:[],analysisController:null,AbortController,DOMException,engine:{buffer:async()=>({})},
+ const scope={state:{analysis:false,deckCount:4,analysisSettings:{},decks:[{index:0,track:a}]},analysisQueue:[],analysisController:null,analysisJob:null,AbortController,DOMException,engine:{buffer:async()=>({})},
   analyzeBuffer:async()=>{if(a.analyzed)assert.equal(waves[0],a,'First result must paint its overview before second analysis begins');return{bpm:126,key:'Cm',grid:{firstBeat:0}};},trackGain:{measurementReady(){}},smartSync:{reconcile(){}},refreshAnalysisControls(){},
   persist(){},renderTracks(){},renderDecks(){assert.fail('Controls cannot be rebuilt');},updateAnalysisStatus(){},drawWaves(track){waves.push(track);},notify(){}};
  vm.createContext(scope);vm.runInContext(runner,scope);await scope.enqueueAnalysis([a,b]);assert.equal(waves[0],a);assert.equal(waves[1],b);

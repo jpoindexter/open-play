@@ -1,0 +1,48 @@
+{
+  "date": "2026-11-03",
+  "status": "Source repair executed; native batch pending. Current desktop remains0.1.145.",
+  "baseCommit": "89c466fe092dd739e3a973912cba799d2df75e24",
+  "appSHA256": "7adeccd4d04c8ca21e249aa9b237eac81532fac4baa98b676ab11c35c5167838",
+  "card": "https://trello.com/c/OLIH3H5Z",
+  "rootCause": "Waiting-job deduplication ignores the active analysis after it has been shifted out of the queue. Repeated Load/import for that track queues duplicate analysis.",
+  "change": "Remember the active job in the existing queue owner; coalesce only identical track/settings/replacement options with a live non-aborted controller; clear job ownership in finally. Preserve existing waiting-job policy.",
+  "callersReviewed": [
+    "app.js load",
+    "app.js importLocalFiles",
+    "app.js analyze",
+    "panels.js Analysis selected-track handler"
+  ],
+  "verification": {
+    "red": "Actual extracted current enqueueAnalysis; pending decode plus duplicate request yields waiting [track1,track0] instead of [track1].",
+    "green": "One composed regression covers active equivalent reuse, changed replacement, changed settings and cancel-to-same-track retry. Actual queue terminal state clears ownership.",
+    "affectedChecks": 22,
+    "failed": 0,
+    "files": [
+      "analysis-terminal-refresh.test.mjs",
+      "analysis-refresh.test.mjs",
+      "analysis-sync-ownership.test.mjs",
+      "analysis-presentation.test.mjs"
+    ],
+    "scope": "Actual source queue/refresh functions with controlled buffer/analysis/DOM endpoints. Does not execute a real browser worker or physical/native input.",
+    "rawRedSHA256": "d4c6e41df0d971684effe6ed0d6a5703a2cf75f165ec71576693a0e27b572b7d",
+    "rawGreenSHA256": "33d53ed10f744fe816b92e383f82d63c522e6b96f69329dc7788b59629ffc181",
+    "broadSuiteOrSoak": false
+  },
+  "preservation": {
+    "productionModulesAdded": 0,
+    "dependenciesAdded": 0,
+    "schemaDSPDefaultsLayoutWaveformsChanged": false,
+    "desktopMainSessionTouched": false,
+    "originalMediaTouched": false,
+    "unrelatedDraftTouched": false
+  },
+  "nextAcceptance": "Next safe desktop batch: one stopped/muted isolated normal Load overlap through real worker completion, retaining controls/previews and stopped cleanup. No accepted clean-case reruns.",
+  "remaining": [
+    "Browser/native changed-path acceptance remains open.",
+    "No measured total CPU/RSS/GC/frame improvement or historical Sync-pop/stall cause established.",
+    "Owner listening/controller/calibration and full beta remain separate."
+  ],
+  "trelloReceipt": "active-analysis-trello-2026-11-03.json",
+  "privateEvidence": "local-evidence/active-analysis-2026-11-03",
+  "goal": "Active; user away, audio playback not requested."
+}

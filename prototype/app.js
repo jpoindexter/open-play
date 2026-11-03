@@ -1157,6 +1157,7 @@ async function importLocalFiles(files) {
 }
 const analysisQueue = [];
 let analysisController = null;
+let analysisJob = null;
 function analysisFieldHint(t, field) {
   const r = t.analysisResult;
   if (!["bpm", "key"].includes(field)) return "";
@@ -1183,8 +1184,15 @@ function cancelAnalysis() {
 }
 async function enqueueAnalysis(tracks, replacements = {}) {
   const settings = { ...state.analysisSettings };
+  // The waiting queue no longer contains the running job.
+  const active = analysisController?.signal.aborted ? null : analysisJob;
   for (const track of tracks)
-    if (!analysisQueue.some((job) => job.track === track))
+    if (!(active?.track === track &&
+      active.replaceKey === !!replacements.replaceKey &&
+      active.replaceTempo === !!replacements.replaceTempo &&
+      Object.keys(active.settings).length === Object.keys(settings).length &&
+      Object.keys(settings).every(key => active.settings[key] === settings[key])) &&
+      !analysisQueue.some((job) => job.track === track))
       analysisQueue.push({
         track,
         settings,
@@ -1197,12 +1205,13 @@ async function enqueueAnalysis(tracks, replacements = {}) {
     failed = 0,
     cancelled = false;
   while (analysisQueue.length) {
+    analysisJob = analysisQueue.shift();
     const {
       track: t,
       settings: opts,
       replaceKey,
       replaceTempo,
-    } = analysisQueue.shift();
+    } = analysisJob;
     const controller = new AbortController();
     analysisController = controller;
     const snapshot = {
@@ -1291,6 +1300,8 @@ async function enqueueAnalysis(tracks, replacements = {}) {
       failed++;
       t.analysisError = error.message;
       updateAnalysisStatus(`Analysis failed for ${t.title}: ${error.message}`);
+    } finally {
+      analysisJob = null;
     }
   }
   analysisController = null;

@@ -23,7 +23,7 @@ function fixture(){
  const engine={buffers:new Map(tracks.map(t=>[t.id,{id:t.id}])),stemBuffers:new Map(),stemStates:new Map(),voices:new Map(),position:()=>0,masterSnapshot:()=>({displayDB:-120,limiting:false}),updateFXBPMs(){}};
  engine.buffer=async track=>engine.buffers.get(track.id);
  let analyze=async()=>({bpm:126,key:'Cm',grid:{firstBeat:.2}});
- const scope={hasBeatgrid,syncMaster:{master:()=>null,manual:()=>false},isSimpleSyncPending:()=>false,state,engine,document,analysisQueue:[],analysisController:null,AbortController,DOMException,sourceWaveLoads:new WeakSet(),overviewWaveViews:[],stemWaveforms:tracks.map(()=>createStemWaveformModel()),colors:['red','blue','green','orange'],
+ const scope={hasBeatgrid,syncMaster:{master:()=>null,manual:()=>false},isSimpleSyncPending:()=>false,state,engine,document,analysisQueue:[],analysisController:null,analysisJob:null,AbortController,DOMException,sourceWaveLoads:new WeakSet(),overviewWaveViews:[],stemWaveforms:tracks.map(()=>createStemWaveformModel()),colors:['red','blue','green','orange'],
   analyzeBuffer:(buffer,options)=>{calls.analysis.push(buffer.id);return analyze(buffer,options);},trackGain:{measurementReady(){calls.gain++;}},smartSync:{reconcile(){}},
   persist(){calls.persist++;},renderTracks(){calls.library++;},refreshAnalysisControls(){},renderDecks(){assert.fail('Analysis must retain deck controls');},
   updateAnalysisStatus(message){state.analysisStatus=message;calls.status.push(message);},notify:message=>calls.notices.push(message),
@@ -74,4 +74,18 @@ test('buffer publication followed by abort retains actual next-frame selection r
  assert.equal(f.canvases[0],canvas);assert.equal(f.document.activeElement,f.control);assert.equal(f.calls.frames.length,1);
  assert.deepEqual(terminalGeometry,[],'An aborted queue must leave buffer selection refresh to its real next frame');expectOwners(f,[0,1,2,3]);
  f.reset();f.scope.tick();expectOwners(f,[]);assert.equal(f.calls.frames.length,2,'Stable next frame still reschedules without repaint');
+});
+test('overlapping analysis requests reuse active work but preserve changed requests and cancelled retries',async()=>{
+ for(const mode of ['duplicate','replacement','settings','cancel']){
+  const f=fixture(),[a,b]=f.tracks;let release,first=true;
+  const gate=new Promise(resolve=>{release=resolve;});
+  f.engine.buffer=async track=>{if(first){first=false;await gate;}return f.engine.buffers.get(track.id);};
+  const pending=f.scope.enqueueAnalysis([a,b]);
+  if(mode==='cancel')f.scope.cancelAnalysis();
+  if(mode==='settings')f.state.analysisSettings.analyzeKey=false;
+  await f.scope.enqueueAnalysis([a],mode==='replacement'?{replaceTempo:true}:{});
+  assert.deepEqual(Array.from(f.scope.analysisQueue,job=>job.track.id),mode==='duplicate'?[b.id]:mode==='cancel'?[a.id]:[b.id,a.id],mode);
+  release();await pending;terminal(f);assert.equal(f.scope.analysisJob,null);
+  assert.deepEqual(f.calls.analysis,mode==='duplicate'?[a.id,b.id]:mode==='cancel'?[a.id]:[a.id,b.id,a.id],mode);
+ }
 });
