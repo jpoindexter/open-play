@@ -1,8 +1,10 @@
-## Current priority — reported low playback level /3November2026
+## Current output-level measurement —3November2026 /source-only checker, native138 retained
 
-Jason reports Open Play is much quieter than Serato/other apps. Native138 confirms saved master−10dB, Atrackgain−7/B−3.2dB, faders80%, trim0, AutoGainON/reference92, MixerMasterVolume100%, Linearcrosscentre. Existing3dB outputheadroom adds attenuation. With displayed values and neutral EQ, derived single-deck reduction vsoriginal is about−21.94dBA/−18.14dBB; NOT a measured reference comparison. Fresh engine master defaults0dB, so−10 is session state. No playback, gain/preference changes, newbuild or tests. Existing masterDSP3files match prior browserPCM evidence; no whole-current-graph claim.
+CORE-FIX-75 now has actual real-track current-engine PCM evidence. Separate loopback origin18864 imported Constant Change through normal file picker/library/Load; installed Play/master/trackgain controls, raw-forward stereo source witness beforetrackgain and witness aftermaster, physical output muted. Controlled−7dBtrackgain/80%fader/trimunity/Linearcentre/100%volume/3dBheadroom gives−21.9382dB atmaster−10 and−11.9382dB atmaster0. Independent Python rechecks all8completeFloat32buffers/hashes,44100alignedframes/channel/case/finite; difference10.00000006dB. No limiter reduction or unexpected extra attenuation in this path.117controls and6ready previews retained; cleanupstopped/muted,9sourcehashes independently match. OriginalMP3hash/size/mtimeunchanged. No matchedSerato/native/physical/listening/keylock/stem/FX/globallevel claim.
 
-CORE-FIX-75 tracks the user report and fair same-track/output/mode/OS-volume calibration. Next unattended action: one muted current-engine level capture, then compare the correct reference mode; no arbitrary boost/DSP rewrite. Owner comparison/listening later. Settings tab restored/closed; main161.797/111.183s,25tracks,silent retained. [Evidence](docs/prototype/LOW_OUTPUT_LEVEL_2026-11-03.json).
+Initial observation export truncated longPCMstrings at200000characters; faileddecode retainedprivately. Checker now exports chunks; same2captures repeatedonce for complete export and independently checked. No productionDSP/gain/default change, broad suite or newpackage. Main138savedmaster−10/session remainsuntouched. RawmusicalPCM stays ignoredlocal-evidence; compactreceipt onlyinGit. Checker62lines reuses existing silent captureworklet and core-checkshell. Next appropriate step is fair same-track/reference-mode/output/OS-volume calibration and owner listening when available; do not blindly boost saved levels.
+
+[PCM result and limits](docs/prototype/OUTPUT_LEVEL_PCM_2026-11-03.json).
 
 ## Current native Sync ownership —3November2026 /private0.1.138
 
