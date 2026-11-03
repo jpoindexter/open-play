@@ -1,5 +1,6 @@
 // Diagnostic only: retain real WASM/audio and hold one completed Sync acknowledgement.
-export async function runSimpleGridSyncCheck({state,engine},chooseMaster=false){
+export async function runSimpleGridSyncCheck({state,engine},action='incoming-grid'){
+ const chooseMaster=action==='choose-master',leaderGrid=action==='leader-grid',leaderTempo=action==='leader-tempo';
  const $=s=>document.querySelector(s),sleep=ms=>new Promise(r=>setTimeout(r,ms));
  const assert=(v,m)=>{if(!v)throw Error(m);},frames=()=>new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)));
  async function until(fn,label){const end=performance.now()+15000;while(!fn()){assert(performance.now()<end,label+' timed out');await sleep(5);}}
@@ -10,26 +11,29 @@ export async function runSimpleGridSyncCheck({state,engine},chooseMaster=false){
   return[file,[...new Uint8Array(await crypto.subtle.digest('SHA-256',await response.arrayBuffer()))].map(v=>v.toString(16).padStart(2,'0')).join('')];
  })));}
  const previews=()=>new Map([...document.querySelectorAll('#tracks tr[data-track] .library-wave-preview img')].map(n=>[n.closest('tr').dataset.track,n.src]));
- const report={startedAt:new Date().toISOString(),completed:false,action:chooseMaster?'choose-master':'incoming-grid',scope:'Generated-only four-deck Compact, real AudioContext/live WASM and installed Play/Sync/Grid Save or MASTER handlers. One real completed start ACK is held before engine continuation; not natural latency, master PCM, listening, OS input or physical controller proof.'};
+ const report={startedAt:new Date().toISOString(),completed:false,action,scope:'Generated-only four-deck Compact, real AudioContext/live WASM and installed Play/Sync/Grid Save/MASTER/tempo handlers. One real completed start ACK is held before engine continuation; not natural latency, master PCM, listening, OS input or physical controller proof.'};
  const saved=Object.fromEntries(['Sync Mode','Snap to Beatgrid','Lock Playing Deck','Use Auto Gain'].map(k=>[k,Object.getOwnPropertyDescriptor(state.settings,k)]));
  const adapters=new Set(),a=state.decks[0],b=state.decks[1],leader=chooseMaster?state.decks[2]:a;let factory,factoryOwn,release,held,gateNext=true;
+ assert(['incoming-grid','choose-master','leader-grid','leader-tempo'].includes(action),'Unknown diagnostic action');
  assert(state.tracks.length&&state.tracks.every(t=>t.demo),'Generated-only isolated session required');
  assert(state.decks.every(d=>!d.playing&&!d.processing&&!d.playQueued)&&!engine.recording,'Decks and recording must start stopped');
  try{
   report.sourceBefore=await hashes();engine.init();engine.audioMonitor.mutePhysical(true);await engine.resume();
   assert(engine.audioMonitor.snapshot().physicalMuted,'Physical mute failed');await until(()=>!state.analysis,'Startup analysis');
   Object.assign(state.settings,{'Sync Mode':'Simple Sync','Snap to Beatgrid':true,'Lock Playing Deck':false,'Use Auto Gain':false});state.autoplay=false;
+  if(leaderGrid)state.decks[2].track=a.track;
   if(chooseMaster){leader.track=state.tracks.find(t=>t.demo&&t!==a.track&&t!==b.track);assert(leader.track,'Distinct generated master track required');}
   for(const [d,bpm]of (chooseMaster?[[a,126],[b,120],[leader,140]]:[[a,126],[b,120]])){Object.assign(d.track,{bpm,grid:0,gridWarpMarkers:[],gridMarkers:[],analyzed:true,locked:false});Object.assign(d,{position:2,rate:1,keylock:d===b,keyShift:0,reverse:false,loop:false,sync:false,syncState:'off',syncRole:null,stemSlip:'off',repeat:false});}
   $('#deck-count').value='4';$('#deck-count').dispatchEvent(new Event('change',{bubbles:true}));await frames();
   report.layout={decks:state.deckCount,density:document.body.dataset.density,orientation:document.body.dataset.orientation};assert(report.layout.decks===4&&report.layout.density==='compact','Four-deck Compact layout required');
   for(const d of (chooseMaster?[a,b,leader]:[a,b])){click(`[data-action=play][data-deck="${d.index}"]`);await until(()=>d.playing&&!d.processing&&!d.playQueued,'Initial Play '+d.index);const adapter=engine.voices.get(d.index)?.liveKeylock;if(adapter)adapters.add(adapter);}
-  const leaderVoice=engine.voices.get(leader.index),leaderToken=engine.startTokens.get(leader.index);
-  const originalVoice=engine.voices.get(1),outgoing=engine.voices.get(0),originalRate=b.rate,outgoingToken=engine.startTokens.get(0);
+  let leaderVoice=engine.voices.get(leader.index),leaderToken=engine.startTokens.get(leader.index),leaderRate=leader.rate;
+  const originalVoice=engine.voices.get(1),originalRate=b.rate;let outgoing=engine.voices.get(0),outgoingToken=engine.startTokens.get(0),outgoingRate=a.rate;
   assert(originalVoice.liveKeylock,'Incoming original real live voice required');
   await until(()=>originalVoice.liveKeylock.stateAt().playing,'Initial live playback clock');
   await until(()=>previews().size>0,'Ready previews');
-  const ready=previews(),unrelated=new Map([...ready].filter(([id])=>id!==b.track.id)),controls=[...document.querySelectorAll('.deck button,.deck input,.deck select,.channel-strip input,#crossfader')];
+  const editedTrack=leaderGrid?a.track:action==='incoming-grid'?b.track:null;
+  const ready=previews(),unrelated=new Map([...ready].filter(([id])=>id!==editedTrack?.id)),controls=[...document.querySelectorAll('.deck button,.deck input,.deck select,.channel-strip input,#crossfader')];
   factory=engine.createForwardKeylock;factoryOwn=Object.getOwnPropertyDescriptor(engine,'createForwardKeylock');
   const gate=new Promise(r=>release=r);
   engine.createForwardKeylock=async function(options){
@@ -44,26 +48,33 @@ export async function runSimpleGridSyncCheck({state,engine},chooseMaster=false){
    click('[data-action=syncMaster][data-deck="2"]');
    await until(()=>$('[data-action=syncMaster][data-deck="2"]').getAttribute('aria-pressed')==='true','Public MASTER choice');
    assert(engine.voices.get(2)===leaderVoice&&engine.startTokens.get(2)===leaderToken&&leader.rate===1&&leader.playing,'New master transport changed');
+  }else if(leaderTempo){
+   click('[data-action=tempoUp][data-deck="0"]');
+   await until(()=>Math.abs(a.rate-1.001)<1e-8&&!a.processing&&!engine.transforms.has(0),'Public leader tempo change');
+   leaderVoice=outgoing=engine.voices.get(0);leaderToken=outgoingToken=engine.startTokens.get(0);leaderRate=outgoingRate=a.rate;
   }else{
-   click('[data-action=grid][data-deck="1"]');assert($('#modal').open,'Grid editor did not open');
+   click(`[data-action=grid][data-deck="${leaderGrid?2:1}"]`);assert($('#modal').open,'Grid editor did not open');
    $('#grid-bpm').value='100';$('#grid-offset').value='.1';click('#grid-save');
    await until(()=>!$('#modal').open,'Public Grid Save');
-   assert(b.track.bpm===100&&b.track.grid===.1,'Grid publication failed');
+   assert(editedTrack.bpm===100&&editedTrack.grid===.1,'Grid publication failed');
+   if(leaderGrid)assert(state.decks[2].track===a.track,'Shared leader-track fixture changed');
   }
+  report.publicChange={action,leader:leader.index,leaderBPM:leader.track.bpm,leaderRate,sharedLeaderTrack:leaderGrid&&state.decks[2].track===a.track};
   assert(held.signal.aborted,'New public choice did not revoke the old request');
   release();await until(()=>!b.processing&&!engine.transforms.has(1),'Canceled Sync settlement');await frames();
   report.canceled={signalAborted:held.signal.aborted,adapterDisposed:held.adapter.disposed,sameVoice:engine.voices.get(1)===originalVoice,rate:b.rate,sync:b.sync,leaderSync:a.sync,notice:$('#notice').textContent};
   assert(report.canceled.sameVoice&&held.adapter.disposed&&b.rate===originalRate&&!b.sync&&!a.sync,'Obsolete Sync committed a voice, rate or false Sync state');
-  assert(engine.voices.get(0)===outgoing&&engine.startTokens.get(0)===outgoingToken&&a.rate===1&&a.playing,'Outgoing deck changed');
+  assert(engine.voices.get(0)===outgoing&&engine.startTokens.get(0)===outgoingToken&&a.rate===outgoingRate&&a.playing,'Outgoing deck changed');
   click('[data-action=sync][data-deck="1"]');await until(()=>b.sync&&b.playing&&!b.processing,'Fresh Sync against current master/grid');
   await until(()=>engine.ctx.currentTime>b.anchorTime+.03,'Fresh handoff clock');
-  const at=engine.ctx.currentTime,phase=(engine.voiceClock(b,engine.voices.get(1))(at)-b.track.grid)/(60/b.track.bpm)-(engine.voiceClock(leader,leaderVoice)(at)-leader.track.grid)/(60/leader.track.bpm),expectedRate=leader.track.bpm/b.track.bpm;
-  const cell=()=>$(`#tracks tr[data-track="${CSS.escape(b.track.id)}"] .library-wave-preview`);
+  // Raw AudioParam rates use Float32; compare Sync to the audible rate, not its nominal UI value.
+  const at=engine.ctx.currentTime,phase=(engine.voiceClock(b,engine.voices.get(1))(at)-b.track.grid)/(60/b.track.bpm)-(engine.voiceClock(leader,leaderVoice)(at)-leader.track.grid)/(60/leader.track.bpm),expectedRate=leader.track.bpm*engine.audibleRate(leader)/b.track.bpm;
+  const previewTrack=editedTrack||b.track,cell=()=>$(`#tracks tr[data-track="${CSS.escape(previewTrack.id)}"] .library-wave-preview`);
   await until(()=>cell()?.dataset.previewState==='ready'&&cell()?.querySelector('img')?.complete,'Edited preview');
-  const present=previews();report.fresh={rate:b.rate,phaseErrorBeats:Math.abs(phase-Math.round(phase)),live:!!engine.voices.get(1)?.liveKeylock,sync:b.sync,leader:leader.index,leaderSync:leader.sync,retainedControls:controls.filter(n=>n.isConnected).length,unrelatedPreviews:unrelated.size,unrelatedPreviewsRetained:[...unrelated].filter(([id,src])=>present.get(id)===src).length,editedPreviewReady:true};
+  const present=previews();report.fresh={rate:b.rate,expectedRate,audibleLeaderRate:engine.audibleRate(leader),phaseErrorBeats:Math.abs(phase-Math.round(phase)),live:!!engine.voices.get(1)?.liveKeylock,sync:b.sync,leader:leader.index,leaderSync:leader.sync,retainedControls:controls.filter(n=>n.isConnected).length,unrelatedPreviews:unrelated.size,unrelatedPreviewsRetained:[...unrelated].filter(([id,src])=>present.get(id)===src).length,editedPreviewReady:true};
   assert(Math.abs(b.rate-expectedRate)<1e-8&&report.fresh.phaseErrorBeats<.001&&report.fresh.live,'Fresh Sync did not use the current master/grid');
-  report.fresh.leaderVoiceRetained=engine.voices.get(leader.index)===leaderVoice&&engine.startTokens.get(leader.index)===leaderToken&&leader.rate===1;
-  report.fresh.outgoingVoiceRetained=engine.voices.get(0)===outgoing&&engine.startTokens.get(0)===outgoingToken&&a.rate===1;
+  report.fresh.leaderVoiceRetained=engine.voices.get(leader.index)===leaderVoice&&engine.startTokens.get(leader.index)===leaderToken&&leader.rate===leaderRate;
+  report.fresh.outgoingVoiceRetained=engine.voices.get(0)===outgoing&&engine.startTokens.get(0)===outgoingToken&&a.rate===outgoingRate;
   assert(report.fresh.leaderVoiceRetained&&report.fresh.outgoingVoiceRetained,'Fresh Sync changed master or outgoing transport');
   assert(report.fresh.retainedControls===controls.length&&report.fresh.unrelatedPreviewsRetained===unrelated.size,'Controls or unrelated previews were replaced');report.completed=true;
  }catch(error){report.error={name:error.name,message:error.message,stack:error.stack};}

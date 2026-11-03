@@ -145,9 +145,9 @@ async function runCueSeek(){
   $('#ownership-status').textContent=report.completed?'Released Cue/newer seek check passed; all audio stopped':'Released Cue/newer seek check failed: '+(report.error?.message||report.sourceError||'cleanup');
  }catch(error){$('#ownership-result').value=JSON.stringify({completed:false,error:{message:error.message,stack:error.stack}});$('#ownership-status').textContent='Cue diagnostic failed: '+error.message;}
 }
-async function runSimpleGrid(chooseMaster=false){
- disableRuns();const label=chooseMaster?'Simple Sync/new MASTER':'Simple Sync/grid';$('#ownership-status').textContent='Running muted '+label+' check…';
- try{const report=await runSimpleGridSyncCheck(window.openPlay,chooseMaster);$('#ownership-result').value=JSON.stringify(report);$('#ownership-status').textContent=report.completed?label+' check passed; all audio stopped':label+' check failed: '+(report.error?.message||report.sourceError||'cleanup');}
+async function runSimpleGrid(action='incoming-grid'){
+ disableRuns();const label='Simple Sync/'+action;$('#ownership-status').textContent='Running muted '+label+' check…';
+ try{const report=await runSimpleGridSyncCheck(window.openPlay,action);$('#ownership-result').value=JSON.stringify(report);$('#ownership-status').textContent=report.completed?label+' check passed; all audio stopped':label+' check failed: '+(report.error?.message||report.sourceError||'cleanup');}
  catch(error){$('#ownership-result').value=JSON.stringify({completed:false,error:{message:error.message,stack:error.stack}});$('#ownership-status').textContent='Simple Sync diagnostic failed: '+error.message;}
 }
 async function boot(){
@@ -155,7 +155,8 @@ async function boot(){
  for(const node of [...parsed.body.children])if(node.tagName!=='SCRIPT')document.body.append(node);
  await import('./layout-preview.js');await until(()=>window.openPlay?.state.decks[1].track,'Workspace startup');
  $('#simple-grid-run').onclick=()=>runSimpleGrid();$('#simple-grid-run').disabled=false;
- $('#simple-master-run').onclick=()=>runSimpleGrid(true);$('#simple-master-run').disabled=false;
+ $('#simple-master-run').onclick=()=>runSimpleGrid('choose-master');$('#simple-master-run').disabled=false;
+ for(const action of ['leader-grid','leader-tempo']){const button=$('#simple-'+action+'-run');button.onclick=()=>runSimpleGrid(action);button.disabled=false;}
  $('#cue-seek-run').onclick=runCueSeek;$('#cue-seek-run').disabled=false;
  $('#double-seek-run').onclick=runDoubleSeek;$('#double-seek-run').disabled=false;
  $('#ownership-run').onclick=run;$('#ownership-run').disabled=false;$('#ownership-run').textContent='Run one muted core ownership check';$('#ownership-status').textContent='Ready';

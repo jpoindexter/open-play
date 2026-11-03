@@ -12,7 +12,7 @@ const git=args=>execFileSync('git',args,{cwd:root,maxBuffer:150*1024*1024});
 const sha=bytes=>createHash('sha256').update(bytes).digest('hex');
 const sourceCommit=git(['rev-parse','HEAD']).toString().trim();
 const get=file=>git(['show',`${sourceCommit}:${file}`]);
-const version='0.1.137',name='Open Play Playback Test',port=18775,bundle='org.openplay.dj.playback.localtest';
+const version='0.1.138',name='Open Play Playback Test',port=18775,bundle='org.openplay.dj.playback.localtest';
 const profile='Open Play Playback Test',partition='persist:open-play-playback-test';
 await assertBuildRetention(path.join(root,'local-evidence/desktop-builds'),name);
 const stage=await mkdtemp(path.join(tmpdir(),'open-play-playback-'));
@@ -63,7 +63,7 @@ Pending Instant Double now yields to a newer manual position without starting th
 
 The shared workspace keeps readable control dimensions below its1000px desktop minimum through horizontal scrolling; library commands retain their full labels without stacking over waveform rows. Existing controls and previews remain. Prior loop-pad retention evidence remains separate.
 
-Library rows and artwork now display BPM to two decimals without changing stored precision. The isolated Core transport ownership window adds a separate Simple Sync/new MASTER check, reusing the real-worklet acknowledgement gate. Do not repeat the already accepted incoming-grid check.
+Library rows and artwork now display BPM to two decimals without changing stored precision. The isolated Core transport ownership window adds a separate Simple Sync/new MASTER check, reusing the real-worklet acknowledgement gate. The same checker now includes the two remaining leader-change actions: shared leader-track Grid Save through another deck, and public leader tempo adjustment. Both browser cases retain controls/previews and cancel obsolete acknowledgements; compare expected rates to the actual audible AudioParam value. Do not repeat the already accepted incoming-grid/new MASTER checks.
 
 The isolated Core transport ownership window includes one Simple Sync/public-grid check with the actual live WASM backend. It holds one completed incoming start acknowledgement, uses the installed Grid Save, verifies cancellation without false Sync state, then verifies a fresh match against the edited grid. Physical output stays muted; master PCM, natural failure frequency, listening and controller acceptance remain separate.
 
