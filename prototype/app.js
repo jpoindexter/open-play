@@ -545,13 +545,17 @@ function prepareWaveCanvas(canvas,rect=canvas.getBoundingClientRect()){
 }
 function drawWaves(track = null, deckIndex = null) {
   const surfaces=state.decks.slice(0,state.deckCount).filter(d=>(deckIndex===null||d.index===deckIndex)&&(!track||d.track===track)).map(d=>({d,canvas:$(`#wave-${d.index}`)})).filter(surface=>surface.canvas);
-  const bounds=surfaces.map(({canvas})=>canvas.getBoundingClientRect());
+  const bounds=surfaces.map(({d,canvas})=>d.track?canvas.getBoundingClientRect():null);
   for (const [index,{d,canvas:c}] of surfaces.entries()) {
+    if(!d.track){
+      c.width=c.width; // Clear the empty bitmap without forcing layout or changing its dimensions.
+      overviewWaveViews[d.index]=waveformView(d);
+      continue;
+    }
     const {context:ctx,width:w,height:h}=prepareWaveCanvas(c,bounds[index]);
     ctx.clearRect(0, 0, w, h);
     const view = waveformView(d);
     overviewWaveViews[d.index] = view;
-    if (!d.track) continue;
     for(let minute=1;minute*60<d.track.duration;minute++){
       ctx.fillStyle=minute%5===0?'#88888860':'#88888830';
       ctx.fillRect(minute*60/d.track.duration*w,0,minute%5===0?2:1,h);

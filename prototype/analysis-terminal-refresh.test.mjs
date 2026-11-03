@@ -3,6 +3,8 @@ import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import vm from 'node:vm';
 import {createStemWaveformModel} from './stem-waveform.js';
+import {refreshSyncPresentation} from './sync-presentation.js';
+import {hasBeatgrid} from './smart-sync.js';
 
 const source=readFileSync(new URL('./app.js',import.meta.url),'utf8');
 const queue=source.slice(source.indexOf('function cancelAnalysis('),source.indexOf('\nfunction analyze('));
@@ -21,13 +23,13 @@ function fixture(){
  const engine={buffers:new Map(tracks.map(t=>[t.id,{id:t.id}])),stemBuffers:new Map(),stemStates:new Map(),voices:new Map(),position:()=>0,masterSnapshot:()=>({displayDB:-120,limiting:false}),updateFXBPMs(){}};
  engine.buffer=async track=>engine.buffers.get(track.id);
  let analyze=async()=>({bpm:126,key:'Cm',grid:{firstBeat:.2}});
- const scope={isSimpleSyncPending:()=>false,state,engine,document,analysisQueue:[],analysisController:null,AbortController,DOMException,sourceWaveLoads:new WeakSet(),overviewWaveViews:[],stemWaveforms:tracks.map(()=>createStemWaveformModel()),colors:['red','blue','green','orange'],
+ const scope={hasBeatgrid,syncMaster:{master:()=>null,manual:()=>false},isSimpleSyncPending:()=>false,state,engine,document,analysisQueue:[],analysisController:null,AbortController,DOMException,sourceWaveLoads:new WeakSet(),overviewWaveViews:[],stemWaveforms:tracks.map(()=>createStemWaveformModel()),colors:['red','blue','green','orange'],
   analyzeBuffer:(buffer,options)=>{calls.analysis.push(buffer.id);return analyze(buffer,options);},trackGain:{measurementReady(){calls.gain++;}},smartSync:{reconcile(){}},
   persist(){calls.persist++;},renderTracks(){calls.library++;},refreshAnalysisControls(){},renderDecks(){assert.fail('Analysis must retain deck controls');},
   updateAnalysisStatus(message){state.analysisStatus=message;calls.status.push(message);},notify:message=>calls.notices.push(message),
   prepareWaveCanvas:(canvas)=>({width:400,height:60,context:{clearRect(){painted.push(canvases.indexOf(canvas));},fillRect(){}}}),paintSourceOverview:()=>null,
   $:selector=>{const wave=/^#wave-(\d)$/.exec(selector),label=/^\[data-wave-scope="(\d)"\]$/.exec(selector);return wave?canvases[+wave[1]]:label?labels[+label[1]]:meters.get(selector)||null;},
-  drawDetailWave(){},refreshTransportControls(){},updateTempoSlider(){},shownDeckBPM:()=> '—',deckBPM:()=>null,time:String,
+  drawDetailWave(){},refreshTransportControls(){},refreshSyncPresentation:(d,options)=>refreshSyncPresentation(d,options,document),updateTempoSlider(){},shownDeckBPM:()=> '—',deckBPM:()=>null,time:String,
   flipAutomation:{tick(){}},panels:{tick(){}},stemSlipControls:{tick(){}},deckScratchControls:{tick(){}},requestAnimationFrame:fn=>calls.frames.push(fn)};
  vm.createContext(scope);vm.runInContext(queue+'\n'+view+'\n'+drawing+'\n'+tick,scope);
  return{scope,state,engine,tracks,calls,geometry,painted,labels,canvases,control,document,setAnalyze:fn=>{analyze=fn;},

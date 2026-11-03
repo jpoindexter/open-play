@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import vm from 'node:vm';
+import {syncButtonLabel} from './sync-presentation.js';
 const source=readFileSync(new URL('./app.js',import.meta.url),'utf8');
 const rendering=source.slice(source.indexOf('let renderedSyncMode'),source.indexOf('\nfunction waveformView('));
 function fixture(){
@@ -12,7 +13,7 @@ function fixture(){
  const root={insertAdjacentHTML(){},set innerHTML(html){calls.full++;nodes.clear();for(const match of html.matchAll(/data-focus="(\d+)"/g))nodes.set(Number(match[1]),article(Number(match[1])));}};
  const state={layout:'Horizontal',deckCount:4,focus:0,settings:{'Sync Mode':'Off'},decks:Array.from({length:4},(_,index)=>({index,track:{title:'Track '+index,artist:'Artist',duration:60,cues:[],bpm:120},rate:1,loopLength:4,mode:'INT'}))};
  const document={body:{className:'',classList:{contains:()=>false}},querySelector(selector){const match=selector.match(/^\.deck\[data-focus="(\d+)"\]$/);return match?nodes.get(Number(match[1])):null;},querySelectorAll:()=>[]};
- const scope={cancelSimpleSync(){},isSimpleSyncPending:()=>false,state,document,$:selector=>selector==='#decks'?root:selector==='.waveform-scrub-lanes'?lanes:{setAttribute(){}},colors:['a','b','c','d'],uiIcons:{},
+ const scope={syncButtonLabel,cancelSimpleSync(){},isSimpleSyncPending:()=>false,state,document,$:selector=>selector==='#decks'?root:selector==='.waveform-scrub-lanes'?lanes:{setAttribute(){}},colors:['a','b','c','d'],uiIcons:{},
   deckQuantize:()=>true,smartSync:{reset(){},reconcile(){calls.reconcile++;}},syncMaster:{master:()=>null},parseMusicalKey:()=>null,keyLabel:()=>'',shiftedKey:()=>'',esc:String,time:String,
   autoGainMode:()=>'',trackGainDB:()=>0,loopModeMarkup:()=>'',padMarkup:()=>'',shownDeckBPM:()=>120,engine:{position:()=>0},deckScratchUIPolicy:{keyboard:''},stemSlipControls:{markup:()=>'',restoreFocus(){calls.restore++;}},
   tempoSliders:{cancel(){},view:()=>({range:8,position:0,label:'Tempo',valueText:'0%'})},detailWaveSpan:4,changeDetailWaveZoom(){},drawWaves(){calls.draw++;},renderMixer(){calls.mixer++;},refreshTransportControls(){calls.focus++;}};

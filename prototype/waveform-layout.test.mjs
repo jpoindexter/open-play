@@ -7,9 +7,9 @@ const drawing=source.slice(source.indexOf('function prepareWaveCanvas('),source.
 function fixture(count=4){
  const order=[],canvases=Array.from({length:count},(_,index)=>({
   getBoundingClientRect(){order.push('read-'+index);return{width:50,height:20};},width:10,height:10,
-  getContext(){return{setTransform(){order.push('write-'+index);},clearRect(){order.push('paint-'+index);}};},
+  getContext(){return{setTransform(){order.push('write-'+index);},clearRect(){order.push('paint-'+index);}};},setAttribute(){},
  }));
- const scope={window:{devicePixelRatio:2},state:{deckCount:count,decks:canvases.map((_,index)=>({index,track:null}))},$:id=>canvases[Number(id.replace('#wave-',''))],overviewWaveViews:[],waveformView:()=>null};
+ const scope={window:{devicePixelRatio:2},state:{deckCount:count,decks:canvases.map((_,index)=>({index,track:{id:'track-'+index,duration:30,bpm:120,cues:[]}}))},engine:{buffers:new Map()},$:id=>canvases[Number(id.replace('#wave-',''))],overviewWaveViews:[],waveformView:()=>({kind:'pending'})};
  vm.createContext(scope);vm.runInContext(drawing,scope);return{scope,order,canvases};
 }
 test('four overview geometries are read before resizing or painting any canvas',()=>{
@@ -20,6 +20,13 @@ test('four overview geometries are read before resizing or painting any canvas',
 test('detail canvas preparation still measures its own geometry at the current DPR',()=>{
  const f=fixture(1);f.scope.window.devicePixelRatio=1.5;const result=f.scope.prepareWaveCanvas(f.canvases[0]);
  assert.equal(result.width,50);assert.equal(result.height,20);assert.equal(f.canvases[0].width,75);assert.equal(f.canvases[0].height,30);
+});
+test('empty overview clears its existing bitmap without measuring or resizing geometry',()=>{
+ const f=fixture(1),canvas=f.canvases[0];f.scope.state.decks[0].track=null;let width=320,clears=0;
+ Object.defineProperty(canvas,'width',{get:()=>width,set:value=>{assert.equal(value,width);clears++;width=value;}});
+ f.scope.drawWaves(null,0);
+ assert.deepEqual(f.order,[],'An empty strip must not request geometry or paint a waveform');assert.equal(clears,1);assert.equal(canvas.width,320);assert.equal(canvas.height,10);
+ assert.deepEqual(JSON.parse(JSON.stringify(f.scope.overviewWaveViews)),[{kind:'pending'}]);
 });
 test('detailed waveform geometry is read before transport and meter presentation writes',()=>{
  const order=[],element={classList:{toggle(){}},setAttribute(){order.push('write');},get textContent(){return '—';},set textContent(value){order.push('write');},set value(value){order.push('write');}};

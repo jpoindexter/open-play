@@ -1,4 +1,5 @@
 import {runOutputLevelCheck} from './output-level-check.js';
+import {runPlayingControlsCheck} from './playing-controls-check.js';
 import {runLibraryRestoreCueCheck} from './library-restore-cue-check.js';
 import {runSimpleGridSyncCheck} from './simple-grid-sync-check.js';
 import {runCueSeekCheck} from './cue-seek-check.js';
@@ -160,7 +161,12 @@ async function runSimpleGrid(action='incoming-grid'){
 async function boot(){
  const parsed=new DOMParser().parseFromString(await(await fetch('workspace-preview.html')).text(),'text/html');
  for(const node of [...parsed.body.children])if(node.tagName!=='SCRIPT')document.body.append(node);
- await import('./layout-preview.js');await until(()=>window.openPlay?.state.decks[1].track,'Workspace startup');
+ await import('./layout-preview.js');await until(()=>window.openPlay?.state.decks.length>=2&&$('[data-action="play"][data-deck="1"]'),'Workspace startup');
+ $('#playing-controls-run').onclick=async()=>{
+  disableRuns();$('#ownership-status').textContent='Running muted four-real-track control retention check…';
+  try{const report=await runPlayingControlsCheck(window.openPlay);$('#ownership-result').value=JSON.stringify(report);$('#ownership-status').textContent=report.completed?'Playing controls check passed; all audio stopped':'Playing controls check failed: '+(report.error?.message||'cleanup');}
+  catch(error){$('#ownership-result').value=JSON.stringify({completed:false,error:error.message});$('#ownership-status').textContent='Import four real tracks and stop playback: '+error.message;}
+ };$('#playing-controls-run').disabled=false;
  $('#restore-cue-run').onclick=async()=>{
   disableRuns();$('#ownership-status').textContent='Running muted Cue/backup admission check…';
   try{const report=await runLibraryRestoreCueCheck(window.openPlay);$('#ownership-result').value=JSON.stringify(report);$('#ownership-status').textContent=report.completed?'Cue/backup admission check passed; all audio stopped':'Cue/backup admission check failed: '+(report.error?.message||'cleanup');}
