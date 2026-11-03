@@ -1,6 +1,7 @@
 // Keep preview cells and focused rows attached during routine metadata refreshes.
 const views=new WeakMap();
 const artworkViews=new WeakMap();
+export const formatLibraryBPM=bpm=>Number.isFinite(bpm)&&bpm>0?bpm.toFixed(2):'—';
 export function renderArtworkCards(root,rows){
  let view=artworkViews.get(root);
  if(!view||view.grid.parentElement!==root){

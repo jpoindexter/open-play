@@ -1,0 +1,45 @@
+{
+  "date": "2026-11-03",
+  "native136": {
+    "sourceCommit": "61fbc0a1bc33a3e938f693b1d0ab26c3053482f7",
+    "postDiagnosticReadback": "executed after observation recovered; no restart or repeated diagnostic",
+    "positions": [
+      161.797,
+      111.183
+    ],
+    "libraryTracks": 25,
+    "materializedPreviewsInitially": 12,
+    "materializedPreviewsAfterRecordingPanel": 25,
+    "masterSamplePeak": -60,
+    "recording": {
+      "idle": true,
+      "elapsed": "00:00.0",
+      "startAvailable": true,
+      "downloadDisabled": true
+    },
+    "mainPlaySyncCueRecordingStartInvoked": false,
+    "sessionRestoreInvoked": false,
+    "fallback135Retained": true,
+    "rawEvidence": "local-evidence/simple-grid-sync-2026-11-03/"
+  },
+  "libraryBPM": {
+    "failure": "Native136 playlist and prior artwork interpolation expose raw precise metadata, e.g. BX3 124.98471158160582.",
+    "rootCause": "Both library markup paths directly interpolate track.bpm without a presentation formatter.",
+    "repair": "One shared formatLibraryBPM in the existing 62-line library presentation module, reused for rows and artwork. No model, sorting, grid, analysis, playback or persistence change.",
+    "actualBrowserWorkflow": [
+      "Separate loopback origin, generated-only eight-track session; no playback action",
+      "Library row right-click \u2192 Track Details \u2192 exact 124.98471158160582 \u2192 Save",
+      "Playlist renders 124.98",
+      "Reopen Track Details retains exact 124.98471158160582",
+      "Artwork mode renders 124.98 BPM; return to list retains Preview column and five materialized images, two Play and two tempo controls; zero playing"
+    ],
+    "focusedRegression": "node --test prototype/library-bpm.test.mjs: 1/1",
+    "nativeFixDelivery": "pending; no new desktop package",
+    "screenshot": "local-evidence/simple-grid-sync-2026-11-03/library-bpm-after.png"
+  },
+  "limits": [
+    "Native136 readback is main-session/idle evidence, not fresh listening or physical controller acceptance.",
+    "Browser display workflow is not packaging/native delivery of the BPM fix.",
+    "Generic Sync pops, waveform stalls, startup60 and broader beta acceptance remain open."
+  ]
+}
