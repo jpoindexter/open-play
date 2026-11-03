@@ -154,6 +154,38 @@ async function runOutputLevel(){
  try{const report=await runOutputLevelCheck(window.openPlay);$('#ownership-result').value=JSON.stringify(report);$('#ownership-status').textContent=report.completed?'Output-level check passed; all audio stopped':'Output-level check failed: '+(report.error?.message||'cleanup');}
  catch(error){$('#ownership-status').textContent='Output-level setup failed: '+error.message;}
 }
+async function runActiveAnalysis(){
+ disableRuns();const {state,engine}=window.openPlay,OriginalWorker=window.Worker;
+ const report={completed:false,scope:'Actual stopped generated four-deck Load handlers and real analysis worker, with its first message held to force overlap; no listening or latency claim.'};let releaseWorker,workers=0;
+ try{
+  engine.init();engine.audioMonitor.mutePhysical(true);await engine.resume();await until(()=>!state.analysis,'Startup analysis');
+  assert(state.tracks.every(t=>t.demo),'Generated-only session required');assert(state.decks.every(d=>!d.playing&&!d.processing&&!d.playQueued),'Stop all playback first');
+  state.settings['Instant Doubles']=false;
+  for(const [selector,value] of [['#deck-count','4'],['#preview-density','compact']]){const node=$(selector);node.value=value;node.dispatchEvent(new Event('change',{bubbles:true}));}
+  const track=state.tracks.find(t=>!t.analysisResult&&!state.decks.some(d=>d.track===t));assert(track,'Unmeasured generated track required');state.selected=track.id;
+  window.Worker=class extends OriginalWorker{
+   constructor(url,options){super(url,options);if(new URL(url,location.href).pathname.endsWith('/analysis-worker.js')){
+    workers++;if(workers===1)this.postMessage=(...args)=>{releaseWorker=()=>OriginalWorker.prototype.postMessage.apply(this,args);};
+   }}
+  };
+  click('[data-action="load"][data-deck="0"]');await until(()=>!!releaseWorker,'First real worker message');
+  const protectedNodes=[...document.querySelectorAll('.deck:not([data-focus="1"]) button,.channel-strip input,#crossfader,.library-wave-preview img')];
+  click('[data-action="load"][data-deck="1"]');await until(()=>state.decks[1].track===track,'Second Load');await sleep(0);
+  assert(state.analysis,'Worker must still be pending during overlapping Load');releaseWorker();releaseWorker=null;await until(()=>!state.analysis,'Real analysis completion');
+  assert(workers===1,'Duplicate analysis workers: '+workers);assert(/Finished: 1 measured, 0 failed/.test(state.analysisStatus),'Unexpected analysis completion: '+state.analysisStatus);
+  assert(track.analysisResult?.measuredAt,'Real worker result missing');assert(protectedNodes.every(node=>node.isConnected),'Load/analysis replaced unrelated controls or previews');
+  report.workers=workers;report.status=state.analysisStatus;report.measuredAt=track.analysisResult.measuredAt;report.track=track.id;
+  report.protectedNodes=protectedNodes.length;report.previews=document.querySelectorAll('.library-wave-preview img').length;
+  report.controls={play:document.querySelectorAll('[data-action="play"]').length,tempo:document.querySelectorAll('[data-tempo]').length,eq:document.querySelectorAll('[data-mix$=":high"],[data-mix$=":mid"],[data-mix$=":low"]').length};
+  assert(report.controls.play===4&&report.controls.tempo===4&&report.controls.eq===12&&report.previews>0,'Core controls or previews missing');report.completed=true;
+ }catch(error){report.error={message:error.message,stack:error.stack};}
+ finally{
+  releaseWorker?.();window.Worker=OriginalWorker;state.decks.forEach(d=>engine.pause(d));engine.audioMonitor?.mutePhysical(true);
+  report.allStopped=state.decks.every(d=>!d.playing&&!d.processing&&!d.playQueued);report.physicalMuted=!!engine.audioMonitor?.snapshot().physicalMuted;report.workerConstructorRestored=window.Worker===OriginalWorker;
+  report.completed=report.completed&&report.allStopped&&report.physicalMuted&&report.workerConstructorRestored;
+  $('#ownership-result').value=JSON.stringify(report);$('#ownership-status').textContent=report.completed?'Active analysis reuse passed; all audio stopped':'Active analysis reuse failed: '+(report.error?.message||'cleanup');
+ }
+}
 async function runSimpleGrid(action='incoming-grid'){
  disableRuns();const label='Simple Sync/'+action;$('#ownership-status').textContent='Running muted '+label+' check…';
  try{const report=await runSimpleGridSyncCheck(window.openPlay,action);$('#ownership-result').value=JSON.stringify(report);$('#ownership-status').textContent=report.completed?label+' check passed; all audio stopped':label+' check failed: '+(report.error?.message||report.sourceError||'cleanup');}
@@ -179,6 +211,7 @@ async function boot(){
   catch(error){$('#ownership-status').textContent='Cue/backup setup failed: '+error.message;}
  };$('#restore-cue-run').disabled=false;
  $('#output-level-run').onclick=runOutputLevel;$('#output-level-run').disabled=false;
+ $('#active-analysis-run').onclick=runActiveAnalysis;$('#active-analysis-run').disabled=false;
  $('#simple-grid-run').onclick=()=>runSimpleGrid();$('#simple-grid-run').disabled=false;
  $('#simple-master-run').onclick=()=>runSimpleGrid('choose-master');$('#simple-master-run').disabled=false;
  for(const action of ['leader-grid','leader-tempo']){const button=$('#simple-'+action+'-run');button.onclick=()=>runSimpleGrid(action);button.disabled=false;}
