@@ -1,0 +1,99 @@
+{
+  "date": "2026-11-04",
+  "issue": "ANA-FIX-12",
+  "status": "source repair and exact package inspected; native unsafe-backup Restore not executed",
+  "sourceCommit": "bdffae52c56db1d5d2cf0ebe55582b2a11ffe1b0",
+  "version": "0.1.147",
+  "asarSHA256": "1e39f773d7782309149606217138c69d2a32d4bc8d0ac45f65917b8a93568d1d",
+  "criterion": "Accepted extreme finite grid metadata must not make beat-line enumeration or four-lane detail drawing loop forever; preserve ordinary grids, metadata, controls and waveform previews.",
+  "reproduction": {
+    "executed": true,
+    "path": "actual validateMetadata then createBeatgrid.lines in a bounded isolated Node worker",
+    "gridOffsets": [
+      1e+18,
+      -1e+18
+    ],
+    "bpm": 120,
+    "normalVisibleWindow": [
+      -2,
+      2
+    ],
+    "cause": "first and last beat become unsafe integers; first + 1 equals first, so the loop cannot advance",
+    "redResult": "Unmodified worker reached its 64 MiB heap limit; observed 153.7 ms. Not a native frame benchmark."
+  },
+  "repair": {
+    "file": "prototype/beatgrid.js",
+    "sharedCallers": "Both lines calls are in prototype/detail-waveform.js: plotted beat guides and ruler. Existing graph queried read-only, current source verified.",
+    "behavior": "Return no ruler lines for unsafe first/last beat coordinates. Keep track and its metadata unchanged. Ordinary safe grids retain existing enumeration.",
+    "unchanged": [
+      "audio clocks and transport",
+      "gain and DSP",
+      "layout and typography tokens",
+      "decoded waveform painter",
+      "library preview generation",
+      "validation ranges and stored metadata"
+    ]
+  },
+  "focusedChecks": {
+    "executed": true,
+    "newRegression": "prototype/beatgrid-lines.test.mjs: actual validator, shared grid and four-lane painter; both signs and horizontal/vertical, valid sibling ruler and track JSON preserved; controlled canvases and null buffers",
+    "distinctChecksAccepted": 7,
+    "sequence": "First affected run: 6 pass, 1 pre-existing font assertion failure. Same font failure reproduced on exact unmodified HEAD. Fixture changed to current semantic caption/micro tokens; only that failed named check rerun and passed. No full-suite rerun.",
+    "notEstablished": "Native pixels/DOM/audio, perceptual Sync, physical gestures, normal-song stall or pop resolution."
+  },
+  "package": {
+    "inspectionPassed": 5,
+    "inspectionFailed": 0,
+    "scope": "Actual ASAR bytes and controlled packaged host/check-window callbacks, not native UI/audio/device acceptance.",
+    "receipt": "desktop-0.1.147-playback-grid-lines.json"
+  },
+  "native": {
+    "executedSubset": [
+      "146 Recording idle: Start available, 00:00, Download disabled; normal Quit and process absence",
+      "Closed profile APFS clone: hash/size/mtime equality, separate inodes",
+      "Exact147 opened; settled main retains 25 tracks, A02:41.7/B01:51.1, silent master meter, 2Play/2tempo/6EQ and 12AX-visible library previews",
+      "Fresh generated-only device-denied isolated Core ownership window opened; four Play/tempo controls observed after deck-count action; Layouts reports Compact",
+      "Normal Library backup Restore file picker reached; no diagnostic Run button or Play/Sync/Cue/REC Start invoked"
+    ],
+    "notExecuted": [
+      "Unsafe generated file admitted and restored",
+      "Post-restore export/metadata equality and responsive rendered grid check",
+      "Isolated window close and final normal-main recovery observation"
+    ],
+    "blocker": "File-picker input was unreliable and then changed to an unrelated OpenPen file. All desktop input stopped at that observed conflict; no unrelated file was opened or restored by this task. Native completion remains unaccepted.",
+    "audio": "No playback commands or recording start. Stopped/silent meter observed before picker; physical mute flag not asserted.",
+    "preflight": "Last distribution trust preflight is146 only;147 has not been signed/notarized or assessed for public distribution."
+  },
+  "preservation": {
+    "source": "/Users/jasonpoindexter/Library/Application Support/Open Play Playback Test",
+    "recovery": "/Users/jasonpoindexter/Documents/GitHub/Open Play/local-evidence/profile-recovery/pre-grid-lines-0.1.146-2026-11-04",
+    "files": 281,
+    "logicalBytes": 221862721,
+    "hashSizeMtimeEqual": true,
+    "noSharedInodes": true,
+    "oldProcessAbsent": true
+  },
+  "retention": {
+    "defaultLaunchers": "Remain146 until native147 criterion completes",
+    "bundles": "Retain146 recovery and staged/running147; no bundle or runtime-cache deletion while UI work is unfinished. No additional download.",
+    "unchanged": "Original music, recordings, main restore data, recoveries, graph and unrelated owner draft. Prior18874origin cleanup incident remains disclosed in LIB-FIX-10; exact cleared contents unknown/unrecovered.",
+    "bundleLogicalBytes": {
+      "0.1.146": 611876133,
+      "0.1.147": 611935107
+    },
+    "packagingTemporaryDirectoryRemoved": true
+  },
+  "next": "When desktop input is exclusively available, inspect the frontmost picker afresh, cancel only this task-owned pending Restore if identifiable, close isolated window normally, then finish one stopped generated-only unsafe-grid Restore/export and paused-main readback. Do not rerun accepted source checks.",
+  "limits": [
+    "Not a proven cause of historical real-song Sync pops or ordinary four-deck stalls",
+    "Owner listening and matched-reference volume deferred; Hercules later",
+    "No public release or full-core/parity claim"
+  ],
+  "trello": {
+    "receipt": "grid-lines-147-trello-2026-11-04.json",
+    "cardsExactReadback": 5,
+    "closed": 0,
+    "fix": "https://trello.com/c/9vXyEZ2f",
+    "disposition": "All remain Core DJ — Now and incomplete; native Restore/export gate retained."
+  }
+}

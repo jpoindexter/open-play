@@ -1,3 +1,13 @@
+## Current staged repair — 4 November 2026 / 0.1.147
+
+ANA-FIX-12 is source-repaired in bdffae5 and pushed: an accepted extreme grid offset could produce a beat index that never advances, freezing the shared beat-line loop. A safe-integer guard omits only unrepresentable ruler ticks, preserving metadata/audio/controls/previews. One new composed regression plus six related distinct checks accepted across scoped runs; the pre-existing font fixture was confirmed on baseline and aligned to current tokens. No broad rerun. Exact147 ASAR1e39f773… / archive inspection5/5.
+
+Native147 settled startup retains the paused25-track main session, A02:41.7/B01:51.1, silent master meter,2Play/2tempo/6EQ/12AX-visible previews. Idle146 recording/normal Quit and closed281-file221862721Bhash/size/mtime-equal APFS recovery precede launch. The generated-only isolated four-deck/Compact Restore picker was reached, but inconsistent input then changed to an unrelated OpenPen file. All UI input stopped; unsafe-file Restore/export and final isolated close/main readback are NOT accepted. No Play/Sync/Cue/RECStart/diagnostic Run or main restore. Default launchers remain146; retain146recovery and staged147 until this boundary clears. No bundle cleanup or new runtime download.
+
+ANA-FIX-12 remainsOPEN, with package and native-subset evidence separated. Five Trello summaries read back exactly; none closed. Current listening, matched-volume, historical Sync-pop/stall and hardware gates stayOPEN. Re-entry: obtain exclusive native input, inspect/cancel only this task-owned pending picker, then finish the single stopped generated unsafe-grid Restore/export and final paused main recovery; do not rerun source checks. Prior18874cleanup incident remains disclosed in LIB-FIX-10; exact cleared contents unknown/unrecovered. GoalACTIVE/audio silent/useraway.
+
+[Repair, package, native subset and limits](./docs/prototype/GRID_LINES_BOUNDS_2026-11-04.json). Last distribution trust preflight remains146; no public approval.
+
 ## Current beta release preparation —4 November2026 /146
 
 Owner resumed unattended work; listening stays deferred until home, Hercules later. Read-only exact146distribution preflight confirms strict deep signature integrity passes, but current ad-hoc/no-team app is rejected by Gatekeeper(exit3) and stapled-ticket validation fails(exit65).2valid Developer ID Application identities and notarytool are available; no identity/key/credential used, no signing/upload/install/security change. arm64; declared macOS13.0floor versus observed26.7.2, broader compatibility unverified. Root project license choice/notices remain open. No runtime, control, layout, preview, profile or media change; no new package or mixing/suite rerun.
