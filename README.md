@@ -2,7 +2,13 @@
 
 [Help & manual](https://open-play-help.vercel.app) · [First-mix guide](docs/beta/QUICK_START.md) · [Known issues](docs/beta/KNOWN_ISSUES.md) · [Beta plan](docs/delivery/PUBLIC_BETA_PLAN.md)
 
-## Current core status —30 October2026
+## Current core status —4 November2026
+
+Private desktop **0.1.146** is current, immutable sourcef851767. Saved analysis is reused across reload, and identical active requests share one worker; their scoped native results preserve controls and library previews. Main25tracks/positions/gains remain paused. Owner listening for current Sync/pop and matched-reference volume remains open; Hercules is deferred. [Current handoff](handoffs/current.md) · [Native delivery](docs/prototype/ACTIVE_ANALYSIS_146_NATIVE_2026-11-03.json).
+
+Current146passes strict signature integrity verification but remains ad-hoc, is rejected by Gatekeeper and has no validated stapled notarization ticket. Clean-install/update, signing/notarization, license/notices and owner publication approval are still release gates. [Exact distribution preflight](docs/prototype/BETA_DISTRIBUTION_146_2026-11-04.json). Plan for a small private beta1–2working days after a clean listening check, or a limited public beta3–5working days under ready signing/install prerequisites; new faults or external dependencies can make it1–2weeks or longer. These are conditional estimates. No full-core/public-beta/parity claim.
+
+## Historical0.1.124 checkpoint —30 October2026
 
 Private desktop **0.1.124** is current/default, source1306423. Public grid publication revokes related pending Simple alignment before metadata changes; delayed Loop Roll release checks its own transport token before follow-up Seek so a newer saved-loop recall wins. Two focused source RED→GREEN checks pass. Package5/5/private seal and paused native recovery observed:30.097/34.086s,16tracks/12visible previews/core controls. Relevant changed native races, PCM and listening remain pending. Goal active, audio muted. Genericpop/stall/startup60 and hardware gates remain OPEN. [Delivery and limits](docs/prototype/CORE_GRID_ROLL_RELEASE_124_NATIVE_2026-10-30.json). No full-core/public-beta claim.
 
@@ -52,7 +58,7 @@ Historical desktop approvals remain in [approvals](docs/approvals.md). Desktop0.
 - [Approval record](docs/approvals.md)
 - [Private Trello board](https://trello.com/b/OqMGEjpe/open-play-serato-parity)
 
-Reference: installed Serato DJ Pro 4.0.10.213, with Desktop installers 4.0.9 and 4.0.10. Hardware reference: Hercules DJControl Inpulse 300 MK2. The latest recorded session used computer audio with that controller disconnected; no live device claim is made here. Ghidra is the selected deep-analysis tool; Hopper is a demo.
+Reference: installed Serato DJ Pro 4.0.10.213, with Desktop installers 4.0.9 and 4.0.10. Hardware reference: Hercules DJControl Inpulse 300 MK2. The latest recorded session used computer audio with that controller disconnected; no live device claim is made here. Ghidra and Hopper are reference-investigation tools; their availability is separate from application acceptance.
 
 Findings distinguish observed behavior, file evidence, official documentation, inference, proposals and unknowns. Device enumeration and source inspection are not complete hardware compatibility. The original 74 proposed feature groups have expanded to 110; that count is not an assertion that the reference has exactly 110 features or that parity is verified.
 

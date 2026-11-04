@@ -1,14 +1,25 @@
-# Public beta delivery target — 27 October 2026
+# Public beta delivery target — 4 November2026
 
-Ship a useful Mac local-audio DJ beta as soon as its release gates are satisfied. Full Serato/rekordbox/Traktor parity and the entire Trello backlog are not launch prerequisites. No public release has been published or approved by this document.
+Ship a useful Mac local-audio beta once the named release gates pass. All existing controls, six layouts and library waveform previews stay; full competitor parity, extra AI features, hardware certification and the entire Trello backlog are not prerequisites. No public publication is approved by this plan.
 
-Current private checkpoint: **0.1.124**, source1306423. Grid/Simple and Roll-release ownership repairs have focused source regressions; package5/5/seal and paused recovery observed. Native123Flip attempt did not reach the changed callback and stays pending. Relevant changed native/listening gates, broader Sync/stalls, data/install and public distribution remain open. Goal active, audio muted. [Delivery and limits](../prototype/CORE_GRID_ROLL_RELEASE_124_NATIVE_2026-10-30.json). No public-beta completion claim.
+Current private candidate: **0.1.146**, immutable sourcef851767. Native generated four-deck overlapping Load now uses one analysis worker while retaining177protected nodes and8library previews; normal main25tracks/positions/gains recover paused. Earlier scoped mixing evidence remains valid within its versions. Current owner Sync/pop/volume listening is still deferred. [Native delivery](../prototype/ACTIVE_ANALYSIS_146_NATIVE_2026-11-03.json).
 
-## Conditional planning estimate — 28 October 2026
+## Conditional time range
 
-For a limited public Mac local-audio beta, the accelerated target is **3–5 working days**, with **5–10 working days** still the safer planning budget once native access and a focused owner session are available. Best case3–4working days if current mixing is clean and distribution/signing setup is ready; allow2–3weeks if a fresh audio defect or distribution prerequisite blocks release. A small private tester build can precede public distribution in approximately2–3working days under the same clean-session assumption. These are forecasts, not a release commitment; signing/notarization setup and clean-machine acceptance are not yet verified.
+- **Best small private beta:**1–2working days after a clean focused owner listening check, assuming no new blocker and a usable tester-install path.
+- **Planning target for limited public beta:**3–5working days after that check, provided the signing identity/credentials, license decision and clean-install test environment are available.
+- **Risk range:**1–2weeks or longer if a new audio/data defect, public trust failure or external credential/test-machine dependency blocks progress.
 
-The remaining time includes the current candidate's relevant listening/held interaction, fresh-install/restart/data safety, targeted repairs from actual failures, readable core navigation, a short first-mix/known-issues/support guide, and the actual distribution/trust path. Stop adding optional features/layout refinement to this beta cut. Re-estimate after the next practical owner session; preserve full release approval and every gate below.
+These are estimates, not release promises. Time waiting for the owner or external prerequisites is additional. Re-estimate immediately after the next home listening session; do not add feature sweeps or repeat clean test matrices to fill the wait.
+
+## Actual critical path
+
+1. **Core listening:** one paused-incoming Sync, one playing-incoming Sync, a modest four-deck load while mixing, and a fair same-track/section/output/OS-volume comparison with Serato. Save any actual pop/stall once. Reuse accepted ordinary manual tempo/jog/EQ/Cue/stop where unchanged. Controller/headphone routing can stay deferred.
+2. **Data/install:** clean normal-app install/first import/restart, backup/restore/failure and update/recovery on the supported target. Existing upgrade and isolated-check evidence does not establish a fresh download/install.
+3. **Public artifact:** current146strict signature verification passes, but it is ad-hoc, Gatekeeper rejects it and no stapled ticket validates. Authorized Developer ID/notarization setup and final artifact checks remain open. Two valid identities/tool availability do not prove usable credentials or approval to use one. Confirm root project license and retained third-party notices. [Current preflight](../prototype/BETA_DISTRIBUTION_146_2026-11-04.json).
+4. **Support/publication:** use the existing first-mix guide, illustrated help, known issues and bug-report form; finish exact artifact/install instructions. Owner approves the concrete public release before upload/publication.
+
+[BETA-REL-01](https://trello.com/c/B1zPZ6e3) is the bounded release checklist. Keep software implementation and owner/external acceptance separate in Trello. CORE-LIVE-01 owns listening; SYS-004's limited-beta subset owns distribution/install; SYS-006 owns license/provenance. Do not close these broad cards from the read-only preflight or require their advanced parity tails before beta.
 
 ## Now
 
@@ -31,4 +42,18 @@ Full parity, additional hardware certification, advanced DSP and polish not need
 
 ## Done and re-entry
 
-A public beta is done only when its named artifact is installable, core/data safety gates are observed, limitations/support material are available and the owner authorizes publication. Current89is a private running candidate, not a public release. Software startup/paused recovery is covered; confirm current state before the owner’s single controller/listening session. Retain the next actual pop/stall rather than repeat clean cases. Remaining UI migration, native failed-save/playing/held controls, listening/hardware and distribution gates stay open.
+A public beta is done only when its named artifact is installable, core/data safety gates are observed, limitations/support material are available and the owner authorizes publication. Current146is a private running candidate, not a public release. Software startup/paused recovery is covered; confirm current state before the owner’s single controller/listening session. Retain the next actual pop/stall rather than repeat clean cases. Remaining UI migration, native failed-save/playing/held controls, listening/hardware and distribution gates stay open.
+
+
+## Historical27–30October forecast and checkpoint
+
+
+Ship a useful Mac local-audio DJ beta as soon as its release gates are satisfied. Full Serato/rekordbox/Traktor parity and the entire Trello backlog are not launch prerequisites. No public release has been published or approved by this document.
+
+Current private checkpoint: **0.1.124**, source1306423. Grid/Simple and Roll-release ownership repairs have focused source regressions; package5/5/seal and paused recovery observed. Native123Flip attempt did not reach the changed callback and stays pending. Relevant changed native/listening gates, broader Sync/stalls, data/install and public distribution remain open. Goal active, audio muted. [Delivery and limits](../prototype/CORE_GRID_ROLL_RELEASE_124_NATIVE_2026-10-30.json). No public-beta completion claim.
+
+## Conditional planning estimate — 28 October 2026
+
+For a limited public Mac local-audio beta, the accelerated target is **3–5 working days**, with **5–10 working days** still the safer planning budget once native access and a focused owner session are available. Best case3–4working days if current mixing is clean and distribution/signing setup is ready; allow2–3weeks if a fresh audio defect or distribution prerequisite blocks release. A small private tester build can precede public distribution in approximately2–3working days under the same clean-session assumption. These are forecasts, not a release commitment; signing/notarization setup and clean-machine acceptance are not yet verified.
+
+The remaining time includes the current candidate's relevant listening/held interaction, fresh-install/restart/data safety, targeted repairs from actual failures, readable core navigation, a short first-mix/known-issues/support guide, and the actual distribution/trust path. Stop adding optional features/layout refinement to this beta cut. Re-estimate after the next practical owner session; preserve full release approval and every gate below.

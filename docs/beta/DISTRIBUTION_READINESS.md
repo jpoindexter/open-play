@@ -1,5 +1,31 @@
 # Mac beta distribution readiness
 
+## Current exact-artifact preflight — 4 November2026 /0.1.146
+
+The current artifact remains a private test build. Read-only checks did not launch/stop it, sign it, use a private key, upload to Apple, install it or change macOS security.
+
+| Gate | Observed current146 result |
+|---|---|
+| Immutable source / ASAR | f851767;404c4debd734503790733ebe25423fbc64996a5a4daaa3e1cee13d76294d18f4 |
+| Archive/source inspection |5/5 in its delivery receipt |
+| Strict deep resource-signature verification |Passed; exit0 |
+| Signing type / team |Ad-hoc; no TeamIdentifier |
+| Gatekeeper execution assessment |Rejected; exit3 |
+| Stapled notarization ticket |Validation failed; exit65 |
+| Architecture |arm64 only |
+| macOS |Declared floor13.0; observed host26.7.2. No full compatibility-range claim. |
+| Signing tools |2valid Developer ID Application identities listed; notarytool available |
+| Identity/private-key authorization and notarization credentials |Not established; no credentials or key used |
+| Root project license |No tracked root LICENSE/LICENSE.md/LICENSE.txt/COPYING/NOTICE found; owner choice remains open |
+
+The previous86/87resource-signature failure is historical. Current146passes that integrity check but still does not pass public-distribution trust. A running local copy is not a clean quarantined-download install test. Vendor license files are present; a complete notice/redistribution review is not established.
+
+Next: choose the authorized signing identity and public license/notices, prepare the final artifact, verify signing/notarization/stapling and run a clean install/import/restart/update/recovery path. Keep the actual current listening gate open. Full automatic-updater or competitor parity is outside this limited-beta cut; owner publication approval remains required.
+
+[Current machine-readable preflight](../prototype/BETA_DISTRIBUTION_146_2026-11-04.json) · [Current native delivery](../prototype/ACTIVE_ANALYSIS_146_NATIVE_2026-11-03.json) · [Beta scope](../delivery/PUBLIC_BETA_PLAN.md).
+
+## Historical28October2026 preflight —86/87
+
 Read-only preflight:28October2026. These are private test artifacts, not a published or approved beta. The inspected snapshot was current86and staged87while the Mac was locked; later artifacts require their own receipt and trust checks. This check did not start/stop apps, sign, install, extract a bundle, access credentials/private keys, or submit to Apple.
 
 ## Inspected artifacts
