@@ -134,5 +134,29 @@
       "scope": "Coordination completed and main recovery executed; native unsafe-file admission/export still open."
     }
   },
-  "goalStatus": "active"
+  "goalStatus": "blocked",
+  "postCoordinationBlockedAudit": {
+    "date": "2026-11-04",
+    "blockedAuditTurns": 3,
+    "goalStatus": "blocked",
+    "reason": "Actual unsafe-backup native admission/export remains unexecuted after exclusive-input attempts; owner listening and matched-reference volume explicitly deferred. Initial cross-chat access conflict was resolved and main147 recovered paused. No further evidenced unattended source repair is ready in the reviewed core queue.",
+    "cards": [
+      {
+        "key": "live",
+        "id": "ari:cloud:trello::card/workspace/6a8f03e71844a6c1103692dc/6ae0670c273810c81238cc14",
+        "url": "https://trello.com/c/yJ8r9kCD/165-core-live-01-jason-controller-and-listening-session",
+        "list": "Blocked / unknown",
+        "complete": false,
+        "descriptionExact": true
+      },
+      {
+        "key": "core",
+        "id": "ari:cloud:trello::card/workspace/6a8f03e71844a6c1103692dc/6ad5ecd7fef5ea31f0ce38c0",
+        "url": "https://trello.com/c/LGGdtSa3/114-core-001-load-two-local-mp3s-cue-mix-and-beatmatch",
+        "list": "Core DJ — Now",
+        "complete": false,
+        "descriptionExact": true
+      }
+    ]
+  }
 }
