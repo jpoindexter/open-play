@@ -2,7 +2,7 @@
 
 Ship a useful Mac local-audio beta once the named release gates pass. All existing controls, six layouts and library waveform previews stay; full competitor parity, extra AI features, hardware certification and the entire Trello backlog are not prerequisites. No public publication is approved by this plan.
 
-Current private candidate: **0.1.146**, immutable sourcef851767. Native generated four-deck overlapping Load now uses one analysis worker while retaining177protected nodes and8library previews; normal main25tracks/positions/gains recover paused. Earlier scoped mixing evidence remains valid within its versions. Current owner Sync/pop/volume listening is still deferred. [Native delivery](../prototype/ACTIVE_ANALYSIS_146_NATIVE_2026-11-03.json).
+Current private candidate: **0.1.147**, immutable sourcebdffae5. One stopped generated four-deck Compact unsafe-grid Restore/export now preserves allmetadata, controls and previews; normal main25tracks/positions/gains recover paused. Earlier146analysis-reuse and scoped mixing evidence retain their versions. Owner Sync/pop/matched-volume listening remains deferred. [Native delivery](../prototype/GRID_LINES_147_NATIVE_RESUME.json).
 
 ## Conditional time range
 
@@ -42,7 +42,7 @@ Full parity, additional hardware certification, advanced DSP and polish not need
 
 ## Done and re-entry
 
-A public beta is done only when its named artifact is installable, core/data safety gates are observed, limitations/support material are available and the owner authorizes publication. Current146is a private running candidate, not a public release. Software startup/paused recovery is covered; confirm current state before the owner’s single controller/listening session. Retain the next actual pop/stall rather than repeat clean cases. Remaining UI migration, native failed-save/playing/held controls, listening/hardware and distribution gates stay open.
+A public beta is done only when its named artifact is installable, core/data safety gates are observed, limitations/support material are available and the owner authorizes publication. Current147is a private running candidate, not a public release. Software startup/paused recovery is covered; confirm current state before the owner’s single controller/listening session. Retain the next actual pop/stall rather than repeat clean cases. Remaining UI migration, native failed-save/playing/held controls, listening/hardware and distribution gates stay open.
 
 
 ## Historical27–30October forecast and checkpoint

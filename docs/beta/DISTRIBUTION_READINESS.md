@@ -2,6 +2,8 @@
 
 ## Current exact-artifact preflight — 4 November2026 /0.1.146
 
+Current/default147 has separate stopped native evidence; the exact distribution preflight below remains146. No147Gatekeeper/notarization/install result is claimed. [147native delivery](../prototype/GRID_LINES_147_NATIVE_RESUME.json).
+
 The current artifact remains a private test build. Read-only checks did not launch/stop it, sign it, use a private key, upload to Apple, install it or change macOS security.
 
 | Gate | Observed current146 result |
