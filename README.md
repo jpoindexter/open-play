@@ -2,9 +2,11 @@
 
 [Help & manual](https://open-play-help.vercel.app) · [First-mix guide](docs/beta/QUICK_START.md) · [Known issues](docs/beta/KNOWN_ISSUES.md) · [Beta plan](docs/delivery/PUBLIC_BETA_PLAN.md)
 
-## Current core status —4 November2026
+## Current core status
 
-Private desktop **0.1.147** is current/default, immutable sourcebdffae5. The unsafe-grid rendering repair now has actual stopped native four-deck Compact Restore/export acceptance: all8metadata entries equal the generated input, including grid1e18; controls/previews and paused25-track main recovery remain. Only147bundle is retained after verified inactive146cleanup. [Current handoff](handoffs/current.md) · [Native evidence and limits](docs/prototype/GRID_LINES_147_NATIVE_RESUME.json). Owner Sync/pop/matched-volume listening remains deferred; Hercules later.
+Private **0.1.147 remains running/current**. Owner heard no pops in the scoped Sync checks but could not confirm musical alignment; matched-reference volume and Hercules remain open. The saved recording and grid comparison do not establish musical downbeat accuracy. [Listening evidence](docs/prototype/LISTENING_147_SYNC_VOLUME.json).
+
+**0.1.148 is staged, not launched**, from immutable260fd8f. Its grid-proposal checker repair passes source regressions and five selected-track checks; archive inspection passes5/5. Mac is locked, so native review/save verification and closed-profile upgrade remain pending. Current/default launchers still147; only running147/staged148 bundles retained. Controls/layouts/library previews and originals are preserved. [Current handoff](handoffs/current.md) · [Staging boundary and next step](docs/prototype/DESKTOP_148_STAGED_GRID_REVIEW.json).
 
 Last inspected146passes strict signature integrity verification but remains ad-hoc, is rejected by Gatekeeper and has no validated stapled notarization ticket. Clean-install/update, signing/notarization, license/notices and owner publication approval are still release gates. [Exact distribution preflight](docs/prototype/BETA_DISTRIBUTION_146_2026-11-04.json). Plan for a small private beta1–2working days after a clean listening check, or a limited public beta3–5working days under ready signing/install prerequisites; new faults or external dependencies can make it1–2weeks or longer. These are conditional estimates. No full-core/public-beta/parity claim.
 

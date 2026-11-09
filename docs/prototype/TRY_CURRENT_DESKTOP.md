@@ -1,4 +1,12 @@
-# Current private desktop —0.1.124
+# Current147 / staged148
+
+Use the current launcher for **0.1.147**. **0.1.148** has been built and archive-inspected but has not been launched; its named starter is for the next protected native review after manual unlock. Close147normally and take a closed-profile recovery before switching. Do not run both versions against the same profile.
+
+148contains ANA-FIX-13’s proposal-checker repair, not a new musical alignment claim. Next check uses the existing isolated native workspace, stopped BX3 and explicit Check→Stage→Close/Save; main saved grids remain untouched. No new listening or controller result yet. [Exact evidence and re-entry](DESKTOP_148_STAGED_GRID_REVIEW.json) · [147listening](LISTENING_147_SYNC_VOLUME.json).
+
+--- Historical guides below; old current/default statements are superseded ---
+
+# Historical private desktop —0.1.124
 
 Private desktop **0.1.124** is current/default, source1306423. Public grid publication revokes related pending Simple alignment before metadata changes; delayed Loop Roll release checks its own transport token before follow-up Seek so a newer saved-loop recall wins. Two focused source RED→GREEN checks pass. Package5/5/private seal and paused native recovery observed:30.097/34.086s,16tracks/12visible previews/core controls. Relevant changed native races, PCM and listening remain pending. Goal active, audio muted. Genericpop/stall/startup60 and hardware gates remain OPEN. [Delivery and limits](CORE_GRID_ROLL_RELEASE_124_NATIVE_2026-10-30.json).
 

@@ -1,4 +1,12 @@
-## Current native147 delivery
+## Current staged148 / running147
+
+Private0.1.148/source260fd8f/ASARfd386985… is built and archive-inspected5of5; it is **not launched**. Includes ANA-FIX-13 nearest-reference attack checking and stale proposal invalidation. Prior16focused source checks/five selected real-track results are reused, not rerun. Musical Sync, native Check/Stage/Close/Save, matched volume and public-trust acceptance remainOPEN.
+
+Mac session reports locked. No native input, Quit/relaunch, playback/Sync, live-profile copy or current-launcher switch attempted.147/PID60278 remains the running/current target; last observed paused after the saved listening capture.148has a named starter only. Keep the running147 and staged148; temporary package staging removed, current custom ICNS verified. No old-bundle/profile/media deletion. Owner heard no pops in147 but musical alignment is uncertain; volume answer/reference comparison stillpending, Herculeslater. GoalACTIVE.
+
+[Staged package, scope and exact native re-entry](../docs/prototype/DESKTOP_148_STAGED_GRID_REVIEW.json) · [Source repair](../docs/prototype/GRID_PROPOSAL_ATTACK_REVIEW.json) · [147listening](../docs/prototype/LISTENING_147_SYNC_VOLUME.json). Next after manual unlock: protected normal147Quit/closed-profile recovery, exact148launch, isolated stopped BX3 Check→Stage→Close/Save review; preserve main session and do not install an unaccepted map there. No source/suite/clean listening reruns.
+
+## Historical native147 delivery
 
 ANA-FIX-12 now meets its bounded source/package/stopped native criterion. Existing immutablebdffae5/ASAR1e39f773…/archive5of5 reused; no new package, source change, test matrix or runtime download. Seven distinct affected source checks retain their original evidence. The shared46-line beat-grid module skips only unrepresentable ruler coordinates; stored metadata/audio/controls/previews remain.
 
