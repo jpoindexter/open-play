@@ -1,0 +1,166 @@
+{
+  "defect": "ANA-FIX-13",
+  "card": "https://trello.com/c/NGHTdH8L",
+  "status": "source repair verified; desktop and musical acceptance pending",
+  "originalSymptom": "Owner heard no pops but was unsure whether147 overlap sounded slightly out of time. Saved grids matched in sampled recording; musical attacks remain unverified.",
+  "rootCause": "Proposal checker overwrote each earlier threshold crossing with later ones, selecting a later lobe instead of the relevant nearby attack in a layered kick.",
+  "scope": {
+    "changed": [
+      "prototype/grid-proposal-check.js",
+      "prototype/tempo-drift.js",
+      "prototype/grid-drift-controls.js"
+    ],
+    "callers": "measureTempoDrift via analyzePCM/analysis worker; mountGridDrift cached proposal gate. Public signatures unchanged.",
+    "preserved": "Transport/audio DSP, saved grids, originals, settings, all layouts/controls and waveform/library previews; no app or profile operations in this slice.",
+    "policy": "Select closest strong rise to ORIGINAL reference beat; hold event/beat identity fixed before/after proposal. Existing thresholds, supported-coverage guard and manual Stage/Save unchanged.",
+    "cache": "Checker complete-energy-onsets-v2; drift windowed-bass-pulse-drift-v4. v3 cached proposals require fresh analysis before staging.",
+    "limit": "Reference-near energy rise remains an estimate; nearby unrelated transients, groove, kick timbre and unverified downbeats can remain ambiguous."
+  },
+  "failureEvidence": {
+    "actualProductBaseline": "The known two-lobe synthetic correction is classified worse rather than improved by unmodified production helper.",
+    "rejectedFirstAttempt": "First-rise-only selection made BX 3 lose its existing correction (inconclusive). Discarded, not shipped. Private first-rise-selected-track-results.json retained.",
+    "tests": "16 affected source checks pass after final nearest-rise selection, including layered lobe, earlier bass figure, invalid/worsening proposals, stale-v3 cache, lock/close ownership, steady/late-drift and no automatic grid installation. No whole suite or soak."
+  },
+  "selectedRealTracks": {
+    "scope": "Five selected real files, read-only11025Hzmono production analysis and old/new checker comparison. Named regression risks only; not a corpus rerun, native decoder or musical/listening acceptance. No saved grid installed. Decoded additional audio was memory-only.",
+    "rows": [
+      {
+        "track": "Anika Kunst - Different Approach EP - 001 - Anika Kunst - Constant Change.mp3",
+        "originalSHA256": "215cad459a2a116e9a6637dfeba44f4b9eb48454d6ff6ca65d94d0b777d544b8",
+        "originalUnchanged": true,
+        "estimatedBpm": 131.9986741088187,
+        "baselineStatus": "no drift proposal",
+        "repairedStatus": "no drift proposal",
+        "repairedCheck": null,
+        "markerCount": 0
+      },
+      {
+        "track": "DJ W!LD - When You Feel Me (Remixes Part 2) [W15] - 002 - DJ W!LD - Love Every Day (Andres Remix) [W15].mp3",
+        "originalSHA256": "270cab9197f6a963b2370e042ceda8db4451c076bce3871264a4061f6c081488",
+        "originalUnchanged": true,
+        "estimatedBpm": 119.99239560976125,
+        "baselineStatus": "worse",
+        "repairedStatus": "worse",
+        "repairedCheck": {
+          "method": "complete-energy-onsets-v2",
+          "status": "worse",
+          "events": 552,
+          "sections": 15,
+          "beforeMedianSeconds": 0.0030376874995852177,
+          "afterMedianSeconds": 0.008249250627306637,
+          "beforeP95Seconds": 0.006793619182738549,
+          "afterP95Seconds": 0.010892138097348436
+        },
+        "markerCount": 0
+      },
+      {
+        "track": "BX 3.mp3",
+        "originalSHA256": "152548477424997a7138941ef1711e72be4162cc7b29115e42d4892c9f7fbe69",
+        "originalUnchanged": true,
+        "estimatedBpm": 124.98463851659174,
+        "baselineStatus": "improved",
+        "repairedStatus": "improved",
+        "repairedCheck": {
+          "method": "complete-energy-onsets-v2",
+          "status": "improved",
+          "events": 786,
+          "sections": 23,
+          "beforeMedianSeconds": 0.002516069360261497,
+          "afterMedianSeconds": 0.0020045307889091646,
+          "beforeP95Seconds": 0.016126556444487503,
+          "afterP95Seconds": 0.00275221311195537
+        },
+        "markerCount": 1
+      },
+      {
+        "track": "Trax Records | Classics - 040 - Mr. Fingers - Can You Feel It (Instrumental Mix).mp3",
+        "originalSHA256": "be20a102d0d260abfc21d689b2fb9ffdd7383ac28cee33af791edffcf0cfe102",
+        "originalUnchanged": true,
+        "estimatedBpm": 115.53114358003694,
+        "baselineStatus": "improved",
+        "repairedStatus": "improved",
+        "repairedCheck": {
+          "method": "complete-energy-onsets-v2",
+          "status": "improved",
+          "events": 610,
+          "sections": 17,
+          "beforeMedianSeconds": 0.003905760234573563,
+          "afterMedianSeconds": 0.0030510211229284323,
+          "beforeP95Seconds": 0.04200694125428867,
+          "afterP95Seconds": 0.00743405853780814
+        },
+        "markerCount": 5
+      },
+      {
+        "track": "East West Connection - 003 - J.K. Rollin - Hype the Funk.mp3",
+        "originalSHA256": "d47185fd581759a470eb3f27e3be6f8bce7be41cf764db4df86a8810b176f440",
+        "originalUnchanged": true,
+        "estimatedBpm": 129.99622732026515,
+        "baselineStatus": "no drift proposal",
+        "repairedStatus": "no drift proposal",
+        "repairedCheck": null,
+        "markerCount": 0
+      }
+    ]
+  },
+  "attackCharacterization": {
+    "method": "Read-only original audio attack characterization near the flagged section. Zero-phase35–250Hz bandpass and independent full-band5msRMS50percent first rising-energy crossings before the local strongest peak. All candidate beats retained by deterministic edge/threshold eligibility, no grid changes. Timbre and groove affect crossing times: energy rises are not verified perceptual kick onsets/downbeats. Not a replacement for owner listening.",
+    "rows": [
+      {
+        "deck": "A",
+        "band": "35–250Hz",
+        "sourceFrom": 270,
+        "sourceTo": 300,
+        "events": 65,
+        "medianAt132Ms": 3.7781293626153456,
+        "q25At132Ms": 3.330570642447128,
+        "q75At132Ms": 4.141807790176699
+      },
+      {
+        "deck": "A",
+        "band": "full band",
+        "sourceFrom": 270,
+        "sourceTo": 300,
+        "events": 65,
+        "medianAt132Ms": -0.7917438770164154,
+        "q25At132Ms": -0.8338808689813959,
+        "q75At132Ms": -0.7188542084577421
+      },
+      {
+        "deck": "B",
+        "band": "35–250Hz",
+        "sourceFrom": 153,
+        "sourceTo": 186,
+        "events": 64,
+        "medianAt132Ms": -14.209068856835158,
+        "q25At132Ms": -15.351115979795615,
+        "q75At132Ms": -13.012497480289404
+      },
+      {
+        "deck": "B",
+        "band": "full band",
+        "sourceFrom": 153,
+        "sourceTo": 186,
+        "events": 64,
+        "medianAt132Ms": -15.91853840748384,
+        "q25At132Ms": -17.001750984882328,
+        "q75At132Ms": -13.93916607851998
+      }
+    ],
+    "limit": "First-rise B≈14–16ms before saved grid in this section; A near grid. Multiple bass lobes make last-rise/first-rise classifications disagree. Not annotated perceptual onset truth or a demonstrated Sync transport fault."
+  },
+  "delivery": {
+    "currentRunningDesktop": "0.1.147 unchanged",
+    "newBuild": false,
+    "nativeCheckStageCloseSave": "pending on next immutable candidate",
+    "ownerListening": "uncertain, remains OPEN",
+    "volumeComparison": "owner unity-audition answer and fair Serato comparison still pending",
+    "hardware": "Hercules deferred"
+  },
+  "privateEvidence": "local-evidence/listening-147 contains read-only original/capture correlation, candidate counterexample, selected-source results and attack plot. No raw audio or private backups committed.",
+  "sourceSHA256": {
+    "prototype/grid-proposal-check.js": "0c16fbfcede1d033f04ad63841af22306e9dd45879a179838135e1b89bfde787",
+    "prototype/tempo-drift.js": "917735f6eb6471f1c3615d6b9449964182a2bbbb7567ef7aed9acd5089701860",
+    "prototype/grid-drift-controls.js": "ce6a1514750cfd2f9abe995867c3a2221c8ad6887256260a1ce2a8ef63709336"
+  }
+}

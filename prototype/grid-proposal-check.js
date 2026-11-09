@@ -34,20 +34,23 @@ export function checkGridProposal(pcm,sampleRate,reference,suggestion){
       for(let i=lo;i<hi;i++){if(env[i]>env[peak])peak=i;minimum=Math.min(minimum,env[i]);}
       const maximum=env[peak],threshold=maximum*.5;
       if(maximum<1e-5||peak-lo<Math.round(.02*rate)||hi-peak<Math.round(.02*rate)||env[lo]>=threshold||maximum<2.5*minimum)continue;
-      let crossing=-1;
-      for(let i=lo;i<peak;i++)if(env[i]<threshold&&env[i+1]>=threshold)crossing=i;
-      if(crossing<0)continue;
-      const time=origin+(crossing+(threshold-env[crossing])/(env[crossing+1]-env[crossing]))/rate;
+      let time=null;
+      // Match the reference beat, not an earlier bass figure or later kick lobe.
+      for(let i=lo;i<peak;i++)if(env[i]<threshold&&env[i+1]>=threshold){
+        const rise=origin+(i+(threshold-env[i])/(env[i+1]-env[i]))/rate;
+        if(time===null||Math.abs(rise-at)<Math.abs(time-at))time=rise;
+      }
+      if(time===null)continue;
       if(time<=at-.075||time>=at+.115)continue;
       oldErrors.push(time-at);newErrors.push(time-after.timeAt(beat));events++;
     }
     if(oldErrors.length>=8)sections.push({from:start,events:oldErrors.length,before:median(oldErrors),after:median(newErrors)});
   }
-  if(sections.length<3||events<100)return {method:'complete-energy-onsets-v1',status:'insufficient',events,sections:sections.length};
+  if(sections.length<3||events<100)return {method:'complete-energy-onsets-v2',status:'insufficient',events,sections:sections.length};
   const old=sections.map(s=>Math.abs(s.before)),next=sections.map(s=>Math.abs(s.after));
   const oldMedian=median(old),newMedian=median(next),oldP95=percentile(old,.95),newP95=percentile(next,.95);
   const worse=newMedian-oldMedian>.003||newP95-oldP95>.003;
   const improved=!worse&&(oldMedian-newMedian>.003||oldP95-newP95>.005);
-  return {method:'complete-energy-onsets-v1',status:worse?'worse':improved?'improved':'inconclusive',events,sections:sections.length,
+  return {method:'complete-energy-onsets-v2',status:worse?'worse':improved?'improved':'inconclusive',events,sections:sections.length,
     beforeMedianSeconds:oldMedian,afterMedianSeconds:newMedian,beforeP95Seconds:oldP95,afterP95Seconds:newP95};
 }
