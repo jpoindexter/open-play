@@ -1,3 +1,11 @@
+## Current owner listening — 0.1.147
+
+Owner heard no pop or outgoing speed change with paused-incoming Sync, and no pops in the playing overlap. Musical alignment remains **uncertain**, not accepted: screenshot rulers align but colored attacks differ. Saved master recording compared read-only against both originals: six sampled overlap windows support saved-grid phase difference of about0.1ms (11025Hz analysis); this does not prove kicks/downbeats or whole-track musical alignment. Exact119.99BPM matters; the native10.0% pitch label is rounded. No Sync DSP or grid edit justified by this result. CORE-FIX-01/07 remainOPEN.
+
+Single-A audition at0dB master was materially louder on the meter; saved master was−10.04344dB with AUTO gain≈−7dB/channel80%. Owner volume answer and matched Serato calibration remainpending; no blind global gain change. Recording stopped/downloaded privately; BLOW reset0/crossfadercentre, both stopped. Final positions6.927/206.068s; A reached end, the attempted pause toggle briefly restarted it, then explicit pause returned silence. Master returned near saved level−10.08dB (−0.03656dB difference). Controls/previews/originals and closed-profile recovery retained; desktop reservation released. No new build, source/DSP change, suite or repeated clean session. GoalACTIVE; Herculeslater.
+
+[Scoped result and remaining gates](./docs/prototype/LISTENING_147_SYNC_VOLUME.json). Next: review musical-grid accuracy for this pair and obtain matched-reference volume acceptance; do not confuse grid-clock agreement with musical Sync acceptance.
+
 ## Current native147 delivery
 
 ANA-FIX-12 now meets its bounded source/package/stopped native criterion. Existing immutablebdffae5/ASAR1e39f773…/archive5of5 reused; no new package, source change, test matrix or runtime download. Seven distinct affected source checks retain their original evidence. The shared46-line beat-grid module skips only unrepresentable ruler coordinates; stored metadata/audio/controls/previews remain.
