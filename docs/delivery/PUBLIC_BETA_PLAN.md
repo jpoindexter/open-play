@@ -2,7 +2,7 @@
 
 Ship a useful Mac local-audio beta once the named release gates pass. All existing controls, six layouts and library waveform previews stay; full competitor parity, extra AI features, hardware certification and the entire Trello backlog are not prerequisites. No public publication is approved by this plan.
 
-Current running/default private candidate is **0.1.147**. Owner heard no pops in the scoped Sync checks but musical alignment remains uncertain; matched volume remains open. **0.1.148/source260fd8f** is staged and archive-inspected5/5 for the bounded proposal-checker repair, not launched because the Mac is locked. Native review/save and protected profile recovery remain pending; the current launcher stays147. [Staging and next action](../prototype/DESKTOP_148_STAGED_GRID_REVIEW.json) · [Listening limits](../prototype/LISTENING_147_SYNC_VOLUME.json).
+Current running/default private candidate is **0.1.148/source260fd8f**. The stopped isolated native grid-review path now preserves discard/save semantics and main session metadata; archive inspection5/5 is reused. Output remains0%/muted, no new listening run.147owner heard no pops but musical alignment remains uncertain; matched volume and Hercules remain open. [Native result and limits](../prototype/DESKTOP_148_GRID_REVIEW_NATIVE_2026-11-10.json).
 
 ## Conditional time range
 

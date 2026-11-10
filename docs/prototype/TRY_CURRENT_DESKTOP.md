@@ -1,8 +1,8 @@
-# Current147 / staged148
+# Current private desktop0.1.148
 
-Use the current launcher for **0.1.147**. **0.1.148** has been built and archive-inspected but has not been launched; its named starter is for the next protected native review after manual unlock. Close147normally and take a closed-profile recovery before switching. Do not run both versions against the same profile.
+Current/default and playback launchers target **0.1.148/source260fd8f**; actual native launch and paused session recovery are observed. System output is intentionally **0% / Mute enabled**. Raise output only when an audible session is explicitly authorized. Hercules remains deferred.
 
-148contains ANA-FIX-13’s proposal-checker repair, not a new musical alignment claim. Next check uses the existing isolated native workspace, stopped BX3 and explicit Check→Stage→Close/Save; main saved grids remain untouched. No new listening or controller result yet. [Exact evidence and re-entry](DESKTOP_148_STAGED_GRID_REVIEW.json) · [147listening](LISTENING_147_SYNC_VOLUME.json).
+The stopped isolated Check→Stage→Close/Save review is recorded; temporary markers did not alter the main library. Main25tracks/2decks/12visible previews recover paused6.927/206.068s/master−10.08dB. Previous147and the pre-upgrade closed-profile recovery remain available; do not run two versions together. Musical alignment/matched volume remainOPEN. [Native result, preservation and limits](DESKTOP_148_GRID_REVIEW_NATIVE_2026-11-10.json).
 
 --- Historical guides below; old current/default statements are superseded ---
 
