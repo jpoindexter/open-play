@@ -2,7 +2,7 @@
 
 Ship a useful Mac local-audio beta once the named release gates pass. All existing controls, six layouts and library waveform previews stay; full competitor parity, extra AI features, hardware certification and the entire Trello backlog are not prerequisites. No public publication is approved by this plan.
 
-Current running/default private candidate is **0.1.148/source260fd8f**. The stopped isolated native grid-review path now preserves discard/save semantics and main session metadata; archive inspection5/5 is reused. Output remains0%/muted, no new listening run.147owner heard no pops but musical alignment remains uncertain; matched volume and Hercules remain open. [Native result and limits](../prototype/DESKTOP_148_GRID_REVIEW_NATIVE_2026-11-10.json).
+Current running/default private candidate is **0.1.149/source205d1ff**. Whole-track independent coverage guard packaged/inspected5of5; native old-cache invalidation and44100Hz fresh Check observed. Main metadata export exactly equals prior148; controls/previews/positions/gains retained. Output0%/muted, no new listening run.147owner scoped no-pop evidence is retained but musical alignment remains uncertain; matched volume/Hercules remain open. [Native result and limits](../prototype/GRID_COVERAGE_149_NATIVE_2026-11-11.json).
 
 ## Conditional time range
 

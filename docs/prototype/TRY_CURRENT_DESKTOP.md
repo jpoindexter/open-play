@@ -1,8 +1,8 @@
-# Current private desktop0.1.148
+# Current private desktop0.1.149
 
-Current/default and playback launchers target **0.1.148/source260fd8f**; actual native launch and paused session recovery are observed. System output is intentionally **0% / Mute enabled**. Raise output only when an audible session is explicitly authorized. Hercules remains deferred.
+Current/default and playback launchers target **0.1.149/source205d1ff**. Exact native launch and paused main recovery are observed. System output is intentionally **0% / Mute enabled**. Raise output only for an explicitly authorized listening session; Hercules later.
 
-The stopped isolated Check→Stage→Close/Save review is recorded; temporary markers did not alter the main library. Main25tracks/2decks/12visible previews recover paused6.927/206.068s/master−10.08dB. Previous147and the pre-upgrade closed-profile recovery remain available; do not run two versions together. Musical alignment/matched volume remainOPEN. [Native result, preservation and limits](DESKTOP_148_GRID_REVIEW_NATIVE_2026-11-10.json).
+The packaged whole-track coverage guard and old-cache fresh-check gate retain manual grids. Native44100Hz BX3 fresh Check is observed, with79percent independent coverage/one proposal; exact48kHz low-coverage suppression remains source-executed, not replayed natively on this output. Main25tracks/2decks/12visible previews recover6.927/206.068s/master−10.08dB paused. Whole26-entry export equals prior148. Current149/rollback148 and the closed-profile recovery remain; no simultaneous versions. Musical alignment/matched volume remainOPEN. [Native receipt and limits](GRID_COVERAGE_149_NATIVE_2026-11-11.json).
 
 --- Historical guides below; old current/default statements are superseded ---
 
