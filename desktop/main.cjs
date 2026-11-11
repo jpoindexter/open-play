@@ -1,8 +1,9 @@
 'use strict';
-const {app,BrowserWindow,Menu,Tray,nativeImage,dialog}=require('electron');
+const {app,BrowserWindow,Menu,Tray,nativeImage,dialog,shell}=require('electron');
 const path=require('node:path');
 const {createAssetServer}=require('./server.cjs');
 const {createMenuBar}=require('./menu-bar.cjs');
+const {createManualLinkHandler}=require('./manual-links.cjs');
 app.setName('Open Play Test');
 let host,window,menuBar;
 const testTitle=`Open Play Test ${app.getVersion()} — MIDI controls test`;
@@ -33,7 +34,7 @@ else{
    ses.setPermissionCheckHandler((contents,permission,origin,details)=>{const allowed=contents===window?.webContents&&own(origin)&&details?.isMainFrame===true&&localDevicePermission(permission);recordPermission('check',permission,contents,origin,details,allowed);return allowed;});
    ses.setPermissionRequestHandler((contents,permission,callback,details)=>{const allowed=contents===window?.webContents&&own(contents.getURL())&&details?.isMainFrame===true&&own(details.requestingUrl)&&localDevicePermission(permission);recordPermission('request',permission,contents,details?.requestingUrl,details,allowed);callback(allowed);});
    window.on('page-title-updated',event=>event.preventDefault());
-   window.webContents.setWindowOpenHandler(()=>({action:'deny'}));
+   window.webContents.setWindowOpenHandler(createManualLinkHandler({contents:window.webContents,origin:host.origin,openExternal:url=>shell.openExternal(url),onError:()=>dialog.showErrorBox('Open Play manual could not open','Visit https://open-play-help.vercel.app in your browser. Local shortcut help remains available.')}));
    window.webContents.on('will-navigate',(event,url)=>{if(!own(url))event.preventDefault();});
    window.webContents.on('render-process-gone',(_,details)=>dialog.showErrorBox('Open Play stopped',`The renderer stopped (${details.reason}). Reopen the app; saved imports will be checked. Keep original files available.`));
    window.on('closed',()=>window=null);

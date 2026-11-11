@@ -1,3 +1,4 @@
+import {showHelp} from './help-panel.js';
 import {createPerformancePanelNavigation} from './performance-panel-navigation.js';
 import {createSessionPanels} from './session-panels.js';
 import {saveTrackDetails,refreshTrackDetails} from './track-details.js';
@@ -2001,23 +2002,9 @@ export function createPanels(a) {
   }
 
   function help() {
-    dialog(
-      "Help & keyboard controls",
-      `<div class="help-grid">${helpKeys.map(([name, key]) => `<div><span>${name}</span><kbd>${key}</kbd></div>`).join("")}</div><div class="note-box">Temporary deck Cue: while paused, press to set the cue at the current position; hold to audition, release to return paused. Hold Cue and press Play to continue after release. Mixer headphone CUE selects a deck for the separate headphone bus; configure its output in Devices. Computer stereo alone does not provide independent headphone monitoring.</div><div class="note-box">Shortcuts listed here are implemented prototype bindings. The full reference shortcut inventory includes unresolved right-deck loop-key conflicts and Play expansion differences. Browser-reserved shortcuts and Escape behavior differ from the native app.</div><div class="panel-controls"><button id="help-coverage">Coverage report</button><button id="help-stems">Stems preparation</button><button id="help-system">Diagnostics / services</button><label>Search official help <input id="help-search"></label><button id="help-go">Search</button></div><p class="muted">Control descriptions use native browser tooltips. Context menu / right-click a track for metadata and missing-file fixtures; right-click a cue to rename or edit it.</p>`,
-      () => {
-        $("#help-coverage").onclick = coverage;
-        $("#help-stems").onclick = stems;
-        $("#help-system").onclick = system;
-        $("#help-go").onclick = () =>
-          window.open(
-            "https://support.serato.com/hc/en-us/search?query=" +
-              encodeURIComponent($("#help-search").value),
-            "_blank",
-            "noopener",
-          );
-      },
-    );
+    showHelp({dialog,$,helpKeys,coverage,stems,system});
   }
+
   const routeNotes = {
     library:
       "Real local import, selection, search, sort, metadata fixtures, crates, multi-rule smart crates, nested membership, collapse, favorites and backups. Native tags, filesystem import and interoperability remain gaps.",
@@ -2051,10 +2038,11 @@ export function createPanels(a) {
       "Six provider-specific interactive access/playlist/cache/failure fixtures. No provider credentials, catalog or streaming integration.",
     settings:
       "Eight settings tabs with persisted values and conditional actions. Some settings affect prototype behavior; native processing controls are explicit fixtures. Exact layout/conditional-state parity remains open.",
-    help: "Implemented shortcut list, contextual titles, official search and diagnostics. Native accessibility/screen-reader equivalence untested.",
+    help: "Implemented shortcut list, contextual titles, Open Play manual/search and diagnostics. Native accessibility/screen-reader equivalence untested.",
     system:
       "Research, provenance and lifecycle diagnostics. Local Electron0.1.3 test build and scoped hardware evidence exist separately; this page does not attest the running package. Installer/update/rollback, long-session and full native/reference acceptance remain open.",
   };
+
   function coverage() {
     dialog(
       "Coverage & evidence",
