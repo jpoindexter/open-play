@@ -2,9 +2,9 @@
 
 [Help & manual](https://open-play-help.vercel.app) · [First-mix guide](docs/beta/QUICK_START.md) · [Known issues](docs/beta/KNOWN_ISSUES.md) · [Beta plan](docs/delivery/PUBLIC_BETA_PLAN.md)
 
-## Active goal: core DJ MVP demo
+## Active outcome: working public release, core MVP first
 
-Finish the reliable internal mix on this Mac. The board now has four active cards; first repair the reproduced stale Repeat restart. Preserve all controls/layouts/waveform previews and the saved session. Audio stays muted until Jason is ready; Hercules and public-beta/release work are later. [Current MVP plan, all257cards and evidence](docs/delivery/CORE_MVP_DEMO_PLAN_2026-11-11.md).
+Get a working release into public as quickly as possible. The core mixing demo is the first validation milestone; five cards are now active, including minimum release coordination. First deliver the stale Repeat restart repair. Preserve all controls/layouts/waveform previews and the saved session. Audio stays muted until Jason is ready; Hercules/full parity stay deferred. Minimum install/trust/license/support work remains on the public-release path. [Current MVP plan, all257cards and evidence](docs/delivery/CORE_MVP_DEMO_PLAN_2026-11-11.md).
 
 ## Current core status
 

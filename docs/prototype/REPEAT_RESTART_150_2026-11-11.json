@@ -1,0 +1,33 @@
+{
+  "date": "2026-11-11",
+  "candidate": "0.1.150",
+  "baseline": "f496e3eab2e3fdf10f227a39549befc9f616c489",
+  "card": "https://trello.com/c/YQkMoHei",
+  "criterion": "The actual End handler must not start after a newer Stop, replacement or paused seek; ordinary Repeat survives and current errors are handled.",
+  "baselineResult": {
+    "repeatChecks": 6,
+    "failed": 5,
+    "passed": 1,
+    "scope": "Actual extracted app End/cancel handlers, actual Smart Sync, controlled engine; source-only, no native incident/audio proof."
+  },
+  "repair": {
+    "module": "prototype/repeat-restart.js",
+    "lines": 22,
+    "ownership": "Existing Play request map, track/deck identity, start tokens around Sync/fallback; finally removes only its own request.",
+    "callers": "app.js End Repeat branch; other Engine onEnd callsites unchanged.",
+    "errorBehavior": "Expected AbortError quiet; current real errors notify; no unhandled restart rejection.",
+    "unchanged": "DSP, rendering, controls, layouts, previews, ordinary Autoplay branch and original audio/profile."
+  },
+  "focusedVerification": {
+    "command": "node --test prototype/repeat-end.test.mjs prototype/autoplay.test.mjs prototype/autoplay-cue.test.mjs",
+    "passed": 15,
+    "failed": 0,
+    "newRepeatCases": 6,
+    "neighboringEndAutoplayCases": 9,
+    "broadSuite": false
+  },
+  "review": "Independent source review found paused-seek token gap before implementation; final helper follows existing fader-start token policy. No concrete regression found after reading final helper; not independent execution.",
+  "delivery": "Source repair only at this checkpoint;150packaging/native/owner listening pending.",
+  "goalClarification": "Working public release ASAP is ultimate outcome; core MVP is first checkpoint. BETA-REL-01 returned Now; minimum public data/trust/license/support work, no parity/AI/controller/fullmanual gates. Current goal-tool objective still tracks the core milestone; public release is not declared complete when only that milestone is met.",
+  "privateEvidence": "local-evidence/repeat-end-owner/; original2-case RED retained; expanded6-case baseline5failed observed in tool output."
+}

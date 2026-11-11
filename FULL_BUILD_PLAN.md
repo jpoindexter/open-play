@@ -1,3 +1,9 @@
+## Ultimate outcome — working public release; core milestone first
+
+Jason clarified11November2026: get a working app into public as quickly as possible. The active core-MVP goal is the first validation checkpoint, not the project endpoint. BETA-REL-01 is back in Now:5Now/32Next; all other audited lanes unchanged. Minimum data/install/trust/license/support preparation follows or runs alongside core acceptance; fullparity/AI/Hercules/design rewrites stay deferred. Do not stop the overall release task merely because a core milestone passes; do not claim public readiness from muted/source evidence.
+
+Repeat source repair now uses a22-line module, shared Play ownership and source-token checks; expanded baseline5of6failed, then15affected Repeat/End/Autoplay checks pass. Current149 remains unchanged until150delivery. No DSP/control/layout/preview change. [Repeat repair and limits](./docs/prototype/REPEAT_RESTART_150_2026-11-11.json).
+
 ## Active goal — core DJ MVP demo,11November2026
 
 Jason reset the goal and explicitly chose the internal core DJ MVP demo. All256existing Trello cards reviewed; one new source Repeat defect,93lane moves and all257read back exactly.52complete/205open; Now has4cards: Repeat ownership repair, CORE-001mixing demo, DEK-002transport and SYS-002current-session safety. No new closure or feature removal. Public-beta distribution/signing/license/fullmanual/AI/parity and Hercules are later, not MVP gates.

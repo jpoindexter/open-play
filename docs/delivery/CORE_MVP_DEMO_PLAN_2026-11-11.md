@@ -1,3 +1,5 @@
+> Latest clarification: a working public release is the finish line. This document describes the first core validation milestone and the preceding board-audit snapshot. BETA-REL-01 has returned to Now (current5Now/32Next); minimum public install/trust/license/support work is on the release path, while advanced features/parity/Hercules remain deferred.
+
 # Core DJ MVP demo — current goal and board audit
 
 11 November 2026. Jason explicitly set **core DJ experience / MVP demo** as the target. Public beta preparation is a future lane. The new goal is active; its exact tool-readback objective is in [the goal record](CORE_MVP_GOAL_2026-11-11.json).

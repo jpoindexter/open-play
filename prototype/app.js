@@ -1,4 +1,5 @@
 import {createFaderStart} from './fader-start.js';
+import {restartRepeat} from './repeat-restart.js';
 import {uiIcons} from './vendor/astryx/icons.js';
 import {trackMetadata,validateMetadata,createLibraryBackup} from './library-state.js';
 import {createSessionStorage} from './session-storage.js';
@@ -1989,9 +1990,7 @@ engine.onSampleEnd = (key) => {
 engine.onEnd = async (d) => {
   smartSync.paused(d);
   if (d.repeat) {
-    d.position = d.reverse ? d.track.duration : 0;
-    if (!await smartSync.start(d)) await engine.start(d);
-    smartSync.played(d);
+    await restartRepeat(d,{engine,smartSync,state,requests:playRequests,notify});
   } else if (state.autoplay) {
     const a = filtered(),
       i = a.findIndex((t) => t.id === d.track.id);

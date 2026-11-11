@@ -1,4 +1,4 @@
-> Future release lane: the active11November2026 goal is the [core DJ MVP demo](CORE_MVP_DEMO_PLAN_2026-11-11.md). Signing, licensing and public-distribution gates below do not block the internal demo.
+> Active outcome: a working public release as quickly as possible. Core MVP validation is the first checkpoint; BETA-REL-01 is in Now. Keep the critical path below focused and run independent preparation in parallel.
 
 # Public beta delivery target — 4 November2026
 
