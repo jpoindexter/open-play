@@ -67,7 +67,7 @@ export function measureTempoDrift(pcm,sampleRate,{bpm,firstBeat,fitDuration=180}
   let suggestion=detected?propose(windows,{bpm,firstBeat,duration,baseline}):null;
   const proposalCheck=suggestion?checkGridProposal(pcm,sampleRate,{bpm,firstBeat},suggestion):null;
   if(proposalCheck?.status!=='improved')suggestion=null;
-  return {method:'windowed-bass-pulse-drift-v4',checkedDuration:duration,detected,maximumResidualSeconds:maximum,
+  return {method:'windowed-bass-pulse-drift-v5',checkedDuration:duration,detected,maximumResidualSeconds:maximum,
     supported,supportedFraction,windows,baselineSeconds:baseline,proposalCheck,suggestion,
     limitation:'Estimated pulse timing, not verified kicks or downbeats. Review the proposal and Save explicitly; existing grids are never replaced automatically.'};
 }

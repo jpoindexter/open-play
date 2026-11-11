@@ -1,3 +1,11 @@
+## Current source guard —11November2026 / native148 unchanged
+
+Matched48kHz stereo production analysis reproduces the native BX3 six-marker map within0.000000071s marker timing; decoder variation does not explain this file. Changing either rate on the same left channel or averaging channels changes the pulse choices. Earlier strongest-peak switches near−64ms remain an ambiguity, not established musical drift. The independent onset checker called the map improved from only10of28sections (36percent).
+
+A new regression failed before repair. The shared checker now requires the same75percent whole-track section coverage already required by the pulse estimator; methodv3/driftv5 invalidate old cached proposals until Check.17focused checks pass; the actual same-file production analyzePCM path now returns insufficient/no proposal. This is a conservative validation repair, not a musical timing correction. Manual/saved grids, custom controls, layouts and waveform previews stay intact. No main profile/native input, playback, broad suite, corpus, soak, new dependency, retained PCM or package. Current148 and prior stopped/muted evidence remain unchanged; this source guard is not in its ASAR.
+
+ANA-002/ANA-FIX-13/CORE-FIX-07 remainOPEN for broader/native/owner criteria. Next: package this bounded guard with the next warranted candidate, observe Check/Stage suppression there, then the explicitly authorized listening gate; Hercules later. Do not repeat the accepted native148 editor workflow or broad corpus. [Receipt and limits](../docs/prototype/GRID_PROPOSAL_COVERAGE_2026-11-11.json).
+
 ## Current native148 — stopped grid review,10November2026
 
 Private0.1.148/source260fd8f/ASARfd386985… is open and current/default. Reused existing archive5of5 and source checks; no new package, suite or listening run. Normal147Quit/idleRecording/process exit preceded a277-file221974486Bclosed-profile APFS recovery with equal hashes/sizes/mtimes and separate inodes.148restored main25rows/26metadata entries/A6.927/B206.068s/master−10.08dB paused.

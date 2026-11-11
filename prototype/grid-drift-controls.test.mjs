@@ -20,7 +20,7 @@ function controls(track){
   return {body,deck,applied,nodes,apply:proposal=>applied.push(proposal)};
 }
 test('actual staging handler leaves saved metadata alone and respects a later grid lock',()=>{
-  const track={bpm:120,grid:.2,duration:300,gridWarpMarkers:[],analysisResult:{grid:{drift:{method:'windowed-bass-pulse-drift-v4',supportedFraction:1,supported:true,detected:true,checkedDuration:300,maximumResidualSeconds:.03,proposalCheck:{status:'improved'},suggestion:{bpm:120,firstBeat:.2,markers:[{time:185,bpm:120.04}]}}}}};
+  const track={bpm:120,grid:.2,duration:300,gridWarpMarkers:[],analysisResult:{grid:{drift:{method:'windowed-bass-pulse-drift-v5',supportedFraction:1,supported:true,detected:true,checkedDuration:300,maximumResidualSeconds:.03,proposalCheck:{status:'improved'},suggestion:{bpm:120,firstBeat:.2,markers:[{time:185,bpm:120.04}]}}}}};
   const c=controls(track),before=structuredClone(track);mountGridDrift({...c,engine:{}});
   assert.equal(c.nodes['#grid-drift-stage'].disabled,false);
   c.nodes['#grid-drift-stage'].onclick();assert.equal(c.applied.length,1);assert.deepEqual(track,before);
@@ -34,13 +34,13 @@ test('closing a grid while decode is pending prevents a late result from reachin
   assert.equal(c.applied.length,0);
 });
 test('a persisted proposal that worsens independent onset timing cannot be staged',()=>{
-  const track={bpm:120,grid:.2,duration:300,analysisResult:{grid:{drift:{method:'windowed-bass-pulse-drift-v4',supportedFraction:1,supported:true,detected:true,checkedDuration:300,maximumResidualSeconds:.03,proposalCheck:{status:'worse'},suggestion:{bpm:120,firstBeat:.2,markers:[{time:185,bpm:120.04}]}}}}};
+  const track={bpm:120,grid:.2,duration:300,analysisResult:{grid:{drift:{method:'windowed-bass-pulse-drift-v5',supportedFraction:1,supported:true,detected:true,checkedDuration:300,maximumResidualSeconds:.03,proposalCheck:{status:'worse'},suggestion:{bpm:120,firstBeat:.2,markers:[{time:185,bpm:120.04}]}}}}};
   const c=controls(track);mountGridDrift({...c,engine:{}});
   assert.equal(c.nodes['#grid-drift-stage'].disabled,true);
   c.nodes['#grid-drift-stage'].onclick();assert.equal(c.applied.length,0);
 });
-test('cached last-rise proposals need a fresh check before staging',()=>{
-  const track={bpm:120,grid:.2,duration:300,analysisResult:{grid:{drift:{method:'windowed-bass-pulse-drift-v3',supportedFraction:1,supported:true,detected:true,checkedDuration:300,maximumResidualSeconds:.03,proposalCheck:{status:'improved'},suggestion:{bpm:120,firstBeat:.2,markers:[{time:185,bpm:120.04}]}}}}};
+test('cached proposals without whole-track onset coverage need a fresh check before staging',()=>{
+  const track={bpm:120,grid:.2,duration:300,analysisResult:{grid:{drift:{method:'windowed-bass-pulse-drift-v4',supportedFraction:1,supported:true,detected:true,checkedDuration:300,maximumResidualSeconds:.03,proposalCheck:{status:'improved'},suggestion:{bpm:120,firstBeat:.2,markers:[{time:185,bpm:120.04}]}}}}};
   const c=controls(track);mountGridDrift({...c,engine:{}});
   assert.equal(c.nodes['#grid-drift-stage'].disabled,true);
   c.nodes['#grid-drift-stage'].onclick();assert.equal(c.applied.length,0);

@@ -46,11 +46,13 @@ export function checkGridProposal(pcm,sampleRate,reference,suggestion){
     }
     if(oldErrors.length>=8)sections.push({from:start,events:oldErrors.length,before:median(oldErrors),after:median(newErrors)});
   }
-  if(sections.length<3||events<100)return {method:'complete-energy-onsets-v2',status:'insufficient',events,sections:sections.length};
+  const sectionCoverage=sections.length/Math.max(1,Math.ceil(duration/20));
+  // A dense excerpt cannot validate a correction across unchecked track sections.
+  if(sections.length<3||events<100||sectionCoverage<.75)return {method:'complete-energy-onsets-v3',status:'insufficient',events,sections:sections.length,sectionCoverage};
   const old=sections.map(s=>Math.abs(s.before)),next=sections.map(s=>Math.abs(s.after));
   const oldMedian=median(old),newMedian=median(next),oldP95=percentile(old,.95),newP95=percentile(next,.95);
   const worse=newMedian-oldMedian>.003||newP95-oldP95>.003;
   const improved=!worse&&(oldMedian-newMedian>.003||oldP95-newP95>.005);
-  return {method:'complete-energy-onsets-v2',status:worse?'worse':improved?'improved':'inconclusive',events,sections:sections.length,
+  return {method:'complete-energy-onsets-v3',status:worse?'worse':improved?'improved':'inconclusive',events,sections:sections.length,sectionCoverage,
     beforeMedianSeconds:oldMedian,afterMedianSeconds:newMedian,beforeP95Seconds:oldP95,afterP95Seconds:newP95};
 }
