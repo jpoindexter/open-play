@@ -5,7 +5,7 @@ import {showHelp} from './help-panel.js';
 test('Help opens our manual and encoded search while retaining local controls',()=>{
   const prior=globalThis.window,opened=[],local=[],nodes=new Map();
   const $=id=>{
-    if(!nodes.has(id))nodes.set(id,{value:'',click(){this.onclick();}});
+    if(!nodes.has(id))nodes.set(id,{value:'',click(){this.onclick();},addEventListener(type,handler,capture){this[type]=handler;this.capture=capture;}});
     return nodes.get(id);
   };
   let markup;
@@ -18,7 +18,8 @@ test('Help opens our manual and encoded search while retaining local controls',(
     $('#help-manual').click();
     $('#help-search').value='  cue & sync/tempo  ';
     let prevented=false;
-    $('#help-search').onkeydown({key:'Enter',preventDefault(){prevented=true;}});
+    assert.equal($('#help-search-controls').capture,true);
+    $('#help-search-controls').keydown({key:'Enter',target:{tagName:'INPUT'},preventDefault(){prevented=true;}});
     assert.equal(prevented,true);
     assert.deepEqual(opened,[
       ['https://open-play-help.vercel.app/','_blank','noopener,noreferrer'],
@@ -26,6 +27,8 @@ test('Help opens our manual and encoded search while retaining local controls',(
     ]);
     for(const id of ['#help-coverage','#help-stems','#help-system'])$(id).click();
     assert.deepEqual(local,['coverage','stems','system']);
-    $('#help-search').onkeydown({key:'Escape'});assert.equal(opened.length,2);
+    for(const extra of [{key:'Escape'},{key:'Enter',isComposing:true},{key:'Enter',ctrlKey:true},{key:'Enter',target:{tagName:'BUTTON'}}])
+      $('#help-search-controls').keydown({target:{tagName:'INPUT'},...extra});
+    assert.equal(opened.length,2);
   }finally{globalThis.window=prior;}
 });
