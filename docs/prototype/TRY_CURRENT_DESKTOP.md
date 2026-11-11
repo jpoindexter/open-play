@@ -1,8 +1,8 @@
-# Current private desktop0.1.149
+# Current private desktop 0.1.150
 
-Current/default and playback launchers target **0.1.149/source205d1ff**. Exact native launch and paused main recovery are observed. System output is intentionally **0% / Mute enabled**. Raise output only for an explicitly authorized listening session; Hercules later.
+Current/default and playback launchers target **0.1.150 / source df422ba**. Exact native launch and paused main recovery are observed. System output is intentionally **0% / Mute enabled**; unmute only for an explicitly authorized listening session. Hercules later.
 
-The packaged whole-track coverage guard and old-cache fresh-check gate retain manual grids. Native44100Hz BX3 fresh Check is observed, with79percent independent coverage/one proposal; exact48kHz low-coverage suppression remains source-executed, not replayed natively on this output. Main25tracks/2decks/12visible previews recover6.927/206.068s/master−10.08dB paused. Whole26-entry export equals prior148. Current149/rollback148 and the closed-profile recovery remain; no simultaneous versions. Musical alignment/matched volume remainOPEN. [Native receipt and limits](GRID_COVERAGE_149_NATIVE_2026-11-11.json).
+The bounded Repeat ownership repair has focused source evidence and ordinary isolated native Repeat/Stop observation. Main 25 rows, 26 metadata entries, all observed core controls and 12 visible library previews recover at 6.927/206.068 seconds, master −10.08 dB. The whole export exactly equals 149. Current 150 and rollback 149 remain, with closed-profile recovery preserved. Musical alignment, pops, matched volume and minimum public-release gates remain open. [Delivery and limits](REPEAT_150_NATIVE_2026-11-11.json).
 
 --- Historical guides below; old current/default statements are superseded ---
 

@@ -4,15 +4,13 @@
 
 ## Active outcome: working public release, core MVP first
 
-Get a working release into public as quickly as possible. The core mixing demo is the first validation milestone; five cards are now active, including minimum release coordination. First deliver the stale Repeat restart repair. Preserve all controls/layouts/waveform previews and the saved session. Audio stays muted until Jason is ready; Hercules/full parity stay deferred. Minimum install/trust/license/support work remains on the public-release path. [Current MVP plan, all257cards and evidence](docs/delivery/CORE_MVP_DEMO_PLAN_2026-11-11.md).
+Get a working Mac local-audio beta into public as quickly as possible. Core mixing is the first validation milestone; full parity, AI and Hercules stay deferred. Preserve every control, layout, waveform preview and saved session. [Current plan and full-board audit](docs/delivery/CORE_MVP_DEMO_PLAN_2026-11-11.md).
 
 ## Current core status
 
-Private **0.1.149** is running/current, immutable source205d1ff. The grid checker now withholds whole-track proposals with less than75percent independently checked sections; old cached proposals require a fresh Check. Native44100Hz BX3/checkerv3/driftv5 fresh-check and old-cache invalidation are observed; its current79percent coverage/one-marker proposal differs from the earlier48kHz input. Musical correctness is not established. [Native evidence and limits](docs/prototype/GRID_COVERAGE_149_NATIVE_2026-11-11.json).
+Private **0.1.150**, immutable source `df422ba`, is current/default and open stopped. The bounded Repeat restart repair passed focused source cancellation checks and ordinary muted native Repeat/Stop. Archive inspection passed 5/5. The main 25-track session, positions, gains, controls and previews recover; the whole 26-entry export exactly equals 149. Output stays **0% and muted**. Only current 150 and rollback 149 bundles remain. [Delivery and limits](docs/prototype/REPEAT_150_NATIVE_2026-11-11.json).
 
-The main25-track session,26metadata entries, saved grids, controls and waveform previews recover unchanged; whole metadata export equals the prior148export. Audio is deliberately **0% and muted**; no playback/listening in this pass. Matched Serato volume, musical alignment and Hercules remainOPEN/deferred. Current/default launchers149;148rollback retained, inactive147removed after review. [Current handoff](handoffs/current.md).
-
-Last inspected146passes strict signature integrity verification but remains ad-hoc, is rejected by Gatekeeper and has no validated stapled notarization ticket. Clean-install/update, signing/notarization, license/notices and owner publication approval are still release gates. [Exact distribution preflight](docs/prototype/BETA_DISTRIBUTION_146_2026-11-04.json). Plan for a small private beta1–2working days after a clean listening check, or a limited public beta3–5working days under ready signing/install prerequisites; new faults or external dependencies can make it1–2weeks or longer. These are conditional estimates. No full-core/public-beta/parity claim.
+One focused owner musical Sync/pop/volume/visual check remains. Minimum clean install/data recovery, final signing/notarization, license/notices and support/publication gates remain on the public-release path. The last trust preflight was 146: ad-hoc, rejected by Gatekeeper, no validated stapled ticket; it is not a final-artifact check. [Public beta plan](docs/delivery/PUBLIC_BETA_PLAN.md). No public-ready or full-core claim.
 
 ## Historical0.1.124 checkpoint —30 October2026
 

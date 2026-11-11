@@ -1,6 +1,6 @@
-> Latest clarification: a working public release is the finish line. This document describes the first core validation milestone and the preceding board-audit snapshot. BETA-REL-01 has returned to Now (current5Now/32Next); minimum public install/trust/license/support work is on the release path, while advanced features/parity/Hercules remain deferred.
+> Current delivery: **0.1.150 / df422ba**. Working public release is the finish line; this document preserves the preceding core milestone and board-audit snapshot. The bounded Repeat repair is complete within its stated source/native scope. Now has four cards: CORE-001, DEK-002, SYS-002 and BETA-REL-01. Minimum public install/trust/license/support work is on the critical path; full parity, AI and Hercules are deferred. [150 evidence and limitations](../prototype/REPEAT_150_NATIVE_2026-11-11.json).
 
-# Core DJ MVP demo — current goal and board audit
+# Core DJ MVP demo — historical goal and board audit
 
 11 November 2026. Jason explicitly set **core DJ experience / MVP demo** as the target. Public beta preparation is a future lane. The new goal is active; its exact tool-readback objective is in [the goal record](CORE_MVP_GOAL_2026-11-11.json).
 

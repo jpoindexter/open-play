@@ -4,7 +4,7 @@
 
 Ship a useful Mac local-audio beta once the named release gates pass. All existing controls, six layouts and library waveform previews stay; full competitor parity, extra AI features, hardware certification and the entire Trello backlog are not prerequisites. No public publication is approved by this plan.
 
-Current running/default private candidate is **0.1.149/source205d1ff**. Whole-track independent coverage guard packaged/inspected5of5; native old-cache invalidation and44100Hz fresh Check observed. Main metadata export exactly equals prior148; controls/previews/positions/gains retained. Output0%/muted, no new listening run.147owner scoped no-pop evidence is retained but musical alignment remains uncertain; matched volume/Hercules remain open. [Native result and limits](../prototype/GRID_COVERAGE_149_NATIVE_2026-11-11.json).
+Current running/default private candidate is **0.1.150 / source df422ba**. The bounded Repeat guard has focused source cancellation evidence plus ordinary muted native Repeat/Stop. Archive inspection passed 5/5; the whole main export equals 149, preserving controls, previews, positions and gains. Audio stays muted. Musical alignment, pops and matched volume still need the focused owner check; Hercules is deferred. [Delivery and limits](../prototype/REPEAT_150_NATIVE_2026-11-11.json).
 
 ## Conditional time range
 
@@ -44,7 +44,7 @@ Full parity, additional hardware certification, advanced DSP and polish not need
 
 ## Done and re-entry
 
-A public beta is done only when its named artifact is installable, core/data safety gates are observed, limitations/support material are available and the owner authorizes publication. Current149is a private running candidate, not a public release. Software startup/paused recovery is covered; confirm current state before the owner’s single controller/listening session. Retain the next actual pop/stall rather than repeat clean cases. Remaining UI migration, native failed-save/playing/held controls, listening/hardware and distribution gates stay open.
+A public beta is done only when its named artifact is installable, core/data safety gates are observed, limitations/support material are available and the owner authorizes publication. Current150is a private running candidate, not a public release. Software startup/paused recovery is covered; confirm current state before the owner’s single controller/listening session. Retain the next actual pop/stall rather than repeat clean cases. Remaining UI migration, native failed-save/playing/held controls, listening/hardware and distribution gates stay open.
 
 
 ## Historical27–30October forecast and checkpoint

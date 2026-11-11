@@ -1,18 +1,14 @@
-## Ultimate outcome — working public release; core milestone first
+## Working public release — current candidate 0.1.150
 
-Jason clarified11November2026: get a working app into public as quickly as possible. The active core-MVP goal is the first validation checkpoint, not the project endpoint. BETA-REL-01 is back in Now:5Now/32Next; all other audited lanes unchanged. Minimum data/install/trust/license/support preparation follows or runs alongside core acceptance; fullparity/AI/Hercules/design rewrites stay deferred. Do not stop the overall release task merely because a core milestone passes; do not claim public readiness from muted/source evidence.
+Get a working Mac local-audio beta into public as quickly as possible. Core DJ acceptance is the first milestone, not the project endpoint. The current four active cards are core mixing, transport, session safety and minimum public-release coordination. Full competitor parity, AI, design rewrites and Hercules remain deferred.
 
-Repeat source repair now uses a22-line module, shared Play ownership and source-token checks; expanded baseline5of6failed, then15affected Repeat/End/Autoplay checks pass. Current149 remains unchanged until150delivery. No DSP/control/layout/preview change. [Repeat repair and limits](../docs/prototype/REPEAT_RESTART_150_2026-11-11.json).
+**0.1.150 / source `df422ba`** is current/default, open stopped with output at **0% and muted**. Its 22-line Repeat helper shares normal Play ownership and token checks, preventing a stale source continuation after Stop, replacement or paused seek. Seven focused Repeat cases passed; nine unchanged neighboring End/Autoplay cases passed in the earlier affected run. Exact archive/source/host inspection passed 5/5. Ordinary isolated native Repeat and a stable final Stop were observed; this does not establish the exact pending native race, reverse Repeat, musical alignment, audible pops or volume.
 
-## Active goal — core DJ MVP demo,11November2026
+The saved main session retains 25 rows, positions 6.927/206.068 seconds, master −10.08 dB, all observed core controls and 12 visible library previews. Its whole 26-entry export exactly equals 0.1.149. Current 150 and rollback 149 are retained; inactive 148 was removed after review. Audio remains muted until Jason is ready.
 
-Jason reset the goal and explicitly chose the internal core DJ MVP demo. All256existing Trello cards reviewed; one new source Repeat defect,93lane moves and all257read back exactly.52complete/205open; Now has4cards: Repeat ownership repair, CORE-001mixing demo, DEK-002transport and SYS-002current-session safety. No new closure or feature removal. Public-beta distribution/signing/license/fullmanual/AI/parity and Hercules are later, not MVP gates.
+Next: one focused owner listening/visual check, then the minimum clean-install/import/restart/recovery, final signing/notarization/license/notices and support/publication gates. Prepare independent release work alongside core acceptance; no broad repeated suites or optional feature sweep. Historical evidence below retains its original scope. [150 delivery and limits](../docs/prototype/REPEAT_150_NATIVE_2026-11-11.json).
 
-First: repair CORE-REPEAT-01 https://trello.com/c/YQkMoHei . Actual End/cancel handlers plus actual Smart Sync with controlled engine fail2Stop/replacement cases; source proof only, no native/startup106/pop causation. Reproduction/red capture is preserved under local-evidence/repeat-end-owner/; product code unchanged by audit and deliberately failing test kept outside runtime tree. Current149/source205d1ff remains stopped with saved main session intact; no audio/native/build/suite in this audit. Keep audio muted until Jason is ready. Reuse accepted53/109ordinary manual/jog/EQ/Cue/stop/restart where unaffected.
-
-Goal active: deliver one coherent repaired candidate and a focused owner core mixing/Sync/pop/volume/visual acceptance, safe stop/session preservation, focused modular code, Trello readback/pushes. Read [MVP plan and full-card audit](../docs/delivery/CORE_MVP_DEMO_PLAN_2026-11-11.md) before continuing.
-
-## Current native149 — muted grid coverage review,11November2026
+## Historical native149 — muted grid coverage review,11November2026
 
 Private0.1.149/source205d1ff/ASARdae8f868… is current/default and open stopped. The75percent independent-onset coverage guard is packaged; archive/source/host inspection5of5. Reused17affected source checks, no broad suite/corpus/soak or playback. Actual isolated44100Hz stereo import yields22of28sections (79percent) and one proposal. Restoring knownv4metadata after import disables Stage until fresh Check; that Check completes, six existing saved markers remain, and Close applies nothing. This is not an exact native replay of the48kHz36percent map; same-file source execution rejects that weak map. Musical pulse identity remains unaccepted.
 
