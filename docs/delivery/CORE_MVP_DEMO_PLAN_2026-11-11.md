@@ -1,4 +1,4 @@
-> Current delivery: **0.1.150 / df422ba**. Working public release is the finish line; this document preserves the preceding core milestone and board-audit snapshot. The bounded Repeat repair is complete within its stated source/native scope. Now has four cards: CORE-001, DEK-002, SYS-002 and BETA-REL-01. Minimum public install/trust/license/support work is on the critical path; full parity, AI and Hercules are deferred. [150 evidence and limitations](../prototype/REPEAT_150_NATIVE_2026-11-11.json).
+> Current delivery: **0.1.151 / f0ebf35**. Working public release is the finish line; this document preserves the preceding core milestone and board-audit snapshot. The bounded Repeat repair is complete within its stated source/native scope. Now has four cards: CORE-001, DEK-002, SYS-002 and BETA-REL-01. Minimum public install/trust/license/support work is on the critical path; full parity, AI and Hercules are deferred. [151 Help delivery and limitations](../prototype/HELP_MANUAL_151_2026-11-11.json).
 
 # Core DJ MVP demo — historical goal and board audit
 

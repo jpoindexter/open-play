@@ -8,7 +8,7 @@ Get a working Mac local-audio beta into public as quickly as possible. Core mixi
 
 ## Current core status
 
-Private **0.1.150**, immutable source `df422ba`, is current/default and open stopped. The bounded Repeat restart repair passed focused source cancellation checks and ordinary muted native Repeat/Stop. Archive inspection passed 5/5. The main 25-track session, positions, gains, controls and previews recover; the whole 26-entry export exactly equals 149. Output stays **0% and muted**. Only current 150 and rollback 149 bundles remain. [Delivery and limits](docs/prototype/REPEAT_150_NATIVE_2026-11-11.json).
+Private **0.1.151**, immutable source `f0ebf35`, is current/default and open stopped. Help now opens Open Play's illustrated manual; native search + Enter reaches its results, while local shortcut help remains available. Exact package inspection passed 5/5. The main 25-track session, positions, gains, core controls and 12 visible previews recover. Output stays **0% and muted**. Current 151 and rollback 150 remain. Prior 150 Repeat/metadata evidence retains its scope; no new audio test was run. [Delivery and limits](docs/prototype/HELP_MANUAL_151_2026-11-11.json).
 
 One focused owner musical Sync/pop/volume/visual check remains. Minimum clean install/data recovery, final signing/notarization, license/notices and support/publication gates remain on the public-release path. The last trust preflight was 146: ad-hoc, rejected by Gatekeeper, no validated stapled ticket; it is not a final-artifact check. [Public beta plan](docs/delivery/PUBLIC_BETA_PLAN.md). No public-ready or full-core claim.
 

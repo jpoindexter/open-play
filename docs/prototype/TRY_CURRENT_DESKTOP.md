@@ -1,8 +1,8 @@
-# Current private desktop 0.1.150
+# Current private desktop 0.1.151
 
-Current/default and playback launchers target **0.1.150 / source df422ba**. Exact native launch and paused main recovery are observed. System output is intentionally **0% / Mute enabled**; unmute only for an explicitly authorized listening session. Hercules later.
+Current/default and playback launchers target **0.1.151 / source f0ebf35**. Native Help→Open Play manual/search + Enter is observed in the external browser. Local shortcut/Cue help and diagnostics remain. Exact package inspection passed 5/5.
 
-The bounded Repeat ownership repair has focused source evidence and ordinary isolated native Repeat/Stop observation. Main 25 rows, 26 metadata entries, all observed core controls and 12 visible library previews recover at 6.927/206.068 seconds, master −10.08 dB. The whole export exactly equals 149. Current 150 and rollback 149 remain, with closed-profile recovery preserved. Musical alignment, pops, matched volume and minimum public-release gates remain open. [Delivery and limits](REPEAT_150_NATIVE_2026-11-11.json).
+The main 25 rows, positions 6.927/206.068 seconds, master −10.08 dB, core controls and 12 visible previews recover. Current 151 and rollback 150 remain; closed-profile recovery is preserved. Output intentionally stays **0% / Mute enabled**; unmute only for an explicitly authorized listening session. Musical Sync, pops, matched volume and minimum public-release gates remain open; Hercules later. [Delivery and limits](HELP_MANUAL_151_2026-11-11.json).
 
 --- Historical guides below; old current/default statements are superseded ---
 
