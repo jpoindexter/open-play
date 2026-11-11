@@ -1,3 +1,5 @@
+> Future release lane: the active11November2026 goal is the [core DJ MVP demo](CORE_MVP_DEMO_PLAN_2026-11-11.md). Signing, licensing and public-distribution gates below do not block the internal demo.
+
 # Public beta delivery target — 4 November2026
 
 Ship a useful Mac local-audio beta once the named release gates pass. All existing controls, six layouts and library waveform previews stay; full competitor parity, extra AI features, hardware certification and the entire Trello backlog are not prerequisites. No public publication is approved by this plan.
@@ -42,7 +44,7 @@ Full parity, additional hardware certification, advanced DSP and polish not need
 
 ## Done and re-entry
 
-A public beta is done only when its named artifact is installable, core/data safety gates are observed, limitations/support material are available and the owner authorizes publication. Current147is a private running candidate, not a public release. Software startup/paused recovery is covered; confirm current state before the owner’s single controller/listening session. Retain the next actual pop/stall rather than repeat clean cases. Remaining UI migration, native failed-save/playing/held controls, listening/hardware and distribution gates stay open.
+A public beta is done only when its named artifact is installable, core/data safety gates are observed, limitations/support material are available and the owner authorizes publication. Current149is a private running candidate, not a public release. Software startup/paused recovery is covered; confirm current state before the owner’s single controller/listening session. Retain the next actual pop/stall rather than repeat clean cases. Remaining UI migration, native failed-save/playing/held controls, listening/hardware and distribution gates stay open.
 
 
 ## Historical27–30October forecast and checkpoint

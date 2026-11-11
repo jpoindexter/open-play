@@ -2,6 +2,10 @@
 
 [Help & manual](https://open-play-help.vercel.app) · [First-mix guide](docs/beta/QUICK_START.md) · [Known issues](docs/beta/KNOWN_ISSUES.md) · [Beta plan](docs/delivery/PUBLIC_BETA_PLAN.md)
 
+## Active goal: core DJ MVP demo
+
+Finish the reliable internal mix on this Mac. The board now has four active cards; first repair the reproduced stale Repeat restart. Preserve all controls/layouts/waveform previews and the saved session. Audio stays muted until Jason is ready; Hercules and public-beta/release work are later. [Current MVP plan, all257cards and evidence](docs/delivery/CORE_MVP_DEMO_PLAN_2026-11-11.md).
+
 ## Current core status
 
 Private **0.1.149** is running/current, immutable source205d1ff. The grid checker now withholds whole-track proposals with less than75percent independently checked sections; old cached proposals require a fresh Check. Native44100Hz BX3/checkerv3/driftv5 fresh-check and old-cache invalidation are observed; its current79percent coverage/one-marker proposal differs from the earlier48kHz input. Musical correctness is not established. [Native evidence and limits](docs/prototype/GRID_COVERAGE_149_NATIVE_2026-11-11.json).

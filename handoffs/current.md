@@ -1,3 +1,11 @@
+## Active goal — core DJ MVP demo,11November2026
+
+Jason reset the goal and explicitly chose the internal core DJ MVP demo. All256existing Trello cards reviewed; one new source Repeat defect,93lane moves and all257read back exactly.52complete/205open; Now has4cards: Repeat ownership repair, CORE-001mixing demo, DEK-002transport and SYS-002current-session safety. No new closure or feature removal. Public-beta distribution/signing/license/fullmanual/AI/parity and Hercules are later, not MVP gates.
+
+First: repair CORE-REPEAT-01 https://trello.com/c/YQkMoHei . Actual End/cancel handlers plus actual Smart Sync with controlled engine fail2Stop/replacement cases; source proof only, no native/startup106/pop causation. Reproduction/red capture is preserved under local-evidence/repeat-end-owner/; product code unchanged by audit and deliberately failing test kept outside runtime tree. Current149/source205d1ff remains stopped with saved main session intact; no audio/native/build/suite in this audit. Keep audio muted until Jason is ready. Reuse accepted53/109ordinary manual/jog/EQ/Cue/stop/restart where unaffected.
+
+Goal active: deliver one coherent repaired candidate and a focused owner core mixing/Sync/pop/volume/visual acceptance, safe stop/session preservation, focused modular code, Trello readback/pushes. Read [MVP plan and full-card audit](../docs/delivery/CORE_MVP_DEMO_PLAN_2026-11-11.md) before continuing.
+
 ## Current native149 — muted grid coverage review,11November2026
 
 Private0.1.149/source205d1ff/ASARdae8f868… is current/default and open stopped. The75percent independent-onset coverage guard is packaged; archive/source/host inspection5of5. Reused17affected source checks, no broad suite/corpus/soak or playback. Actual isolated44100Hz stereo import yields22of28sections (79percent) and one proposal. Restoring knownv4metadata after import disables Stage until fresh Check; that Check completes, six existing saved markers remain, and Close applies nothing. This is not an exact native replay of the48kHz36percent map; same-file source execution rejects that weak map. Musical pulse identity remains unaccepted.
