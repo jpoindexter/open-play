@@ -13,7 +13,7 @@ const sha=bytes=>createHash('sha256').update(bytes).digest('hex');
 const sourceCommit=git(['rev-parse','HEAD']).toString().trim();
 const get=file=>git(['show',`${sourceCommit}:${file}`]);
 const publicPreview=process.argv.includes('--public-preview');
-const version=publicPreview?'0.1.152':'0.1.151',name=publicPreview?'Open Play Preview':'Open Play Playback Test';
+const version=publicPreview?'0.1.152':'0.1.153',name=publicPreview?'Open Play Preview':'Open Play Playback Test';
 const port=publicPreview?18776:18775,bundle=publicPreview?'org.openplay.dj.preview':'org.openplay.dj.playback.localtest';
 const profile=publicPreview?'Open Play Preview':'Open Play Playback Test',partition=publicPreview?'persist:open-play-preview':'persist:open-play-playback-test';
 if(publicPreview){
@@ -87,6 +87,10 @@ This preview uses its own '${profile}' profile, '${partition}' session and port 
 
 Original source: MIT LICENSE. Included third-party materials retain their own terms; see LICENSE, NOTICE and prototype/vendor in this app's assets. No original user music is bundled; the four diagnostic WAVs are generated fixtures. This builder seals resources ad hoc; final release signing/notarization is a separate step.
 `:`# Core desktop test ${version}
+
+A zero Fader Start value now also cancels older queued ordinary Play/Autoplay requests before the idle return. The source regression uses the actual app callbacks, Smart Sync, engine and MIDI router with controlled readiness: the baseline starts after zero; the repair remains paused with no new voice/count/history. Physical controller and native changed-path acceptance remain separate.
+
+Master recording Start/Stop now has one per-engine owner. Rapid Start coalesces during audio resume; repeated Stop retains the same final-data completion; another Start cannot overwrite a finishing capture. The37-line module preserves API/codecs/master destination. Existing2focused source checks and actual muted browser Recording-button proof are reused; run only the isolated Recording Start/Stop button under Checks → Core transport ownership for the new desktop follow-through. Native/listening/hardware/codec/error/file-save recovery remains separately scoped. Controls/layouts/library waveform previews and the public152installer remain unchanged.
 
 Grid correction validation now selects the strong energy rise closest to the original reference beat, retaining that event before/after a proposal. Layered kick lobes and earlier bass figures have focused regressions; cached v3 proposals need a fresh check under drift v4. Stage correction still changes only the dialog draft; Save grid is explicit. Saved grids, transport, controls and waveform previews remain unchanged. This source repair does not establish musical alignment or listening acceptance.
 

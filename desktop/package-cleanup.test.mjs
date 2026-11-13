@@ -15,7 +15,7 @@ for(const [fail,publicPreview] of [[false,false],[true,false],[false,true]])test
  const root=await mkdtemp(path.join(tmpdir(),'open-play-cleanup-probe-'));let stage;
  const get=file=>file==='docs/prototype/auto-gain-fixture-reference.json'?Buffer.from('{"fixtures":[]}'):readFileSync(path.join(repo,file));
  const config=new Function('process','get',source.slice(source.indexOf('const publicPreview='),source.indexOf('await assertBuildRetention'))+';return{publicPreview,version,name,port,bundle,profile,partition};')({argv:publicPreview?['--public-preview']:[]},get);
- assert.equal(config.version,publicPreview?'0.1.152':'0.1.151');assert.equal(config.name,publicPreview?'Open Play Preview':'Open Play Playback Test');assert.equal(config.port,publicPreview?18776:18775);
+ assert.equal(config.version,publicPreview?'0.1.152':'0.1.153');assert.equal(config.name,publicPreview?'Open Play Preview':'Open Play Playback Test');assert.equal(config.port,publicPreview?18776:18775);
  const output=path.join(root,'output'),asar=path.join(output,config.name+'.app/Contents/Resources/app.asar'),error=Error('Controlled packaging failure');
  try{
   await mkdir(path.join(root,'docs/prototype'),{recursive:true});await mkdir(path.join(root,'desktop'));

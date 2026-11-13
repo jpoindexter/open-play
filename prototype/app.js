@@ -641,7 +641,7 @@ function cancelPendingPlay(d){autoplayRequests.delete(d);playRequests.delete(d);
 const faderStarts=new Map();
 const {start:faderStart,resetInput:resetFaderStartInput}=createFaderStart({
   engine,smartSync,state,owners:faderStarts,
-  cancel:d=>{instantDouble.cancelDeck(d);cueHolds.cancelDeck(d);},
+  cancel:d=>{cancelPendingPlay(d);cueHolds.cancelDeck(d);},
   record:(d,intent)=>playbackIntents.record(d,{origin:'fader-start',intent,ready:globalThis.document?.body?.dataset?.ready==='true',visibility:globalThis.document?.visibilityState}),
   refresh:()=>refreshTransportControls(state),
 });

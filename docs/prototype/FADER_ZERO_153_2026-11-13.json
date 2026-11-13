@@ -1,0 +1,68 @@
+{
+  "date": "2026-11-13",
+  "baselineCommit": "7f4db13cc1c576be0b35cdeeb8b502e1601ab4bd",
+  "defect": "Fader Start zero leaves an ordinary Play queued behind paused Smart Sync preparation; old readiness later starts the incoming track atLEVEL0.",
+  "before": {
+    "scope": "Actual AudioEngine/SmartSync/faderStart/MIDI dispatch and actual app play/cancelPendingPlay. Controlled graph/paused Sync FX readiness; no hardware/audio.",
+    "before": {
+      "playing": false,
+      "queued": true,
+      "pendingPlay": true
+    },
+    "afterFaderZero": {
+      "playing": false,
+      "queued": true,
+      "pendingPlay": true,
+      "level": 0
+    },
+    "afterOldReadiness": {
+      "playing": true,
+      "processing": false,
+      "queued": false,
+      "level": 0,
+      "voicePresent": true,
+      "sourceStarts": 1
+    },
+    "bug": true
+  },
+  "repair": "Existing fader cancellation callback now calls cancelPendingPlay(d) instead of only Instant Double cancellation; Cue cancellation retained. The shared helper revokes ordinary Play and Autoplay plus Instant Double.",
+  "actualCallers": [
+    "deck-midi.js absolute Fader Start/armed channel level",
+    "app.js createFaderStart cancellation callback",
+    "app.js ordinary play request ownership"
+  ],
+  "focusedRegression": {
+    "command": "node --test --test-name-pattern='fader zero cancels normal Play' prototype/fader-start.test.mjs",
+    "baseline": {
+      "pass": 0,
+      "fail": 1
+    },
+    "repaired": {
+      "pass": 1,
+      "fail": 0
+    },
+    "asserted": [
+      "Queued flag/Play owner cleared immediately at zero",
+      "After old readiness: incoming stopped, no voice/source start",
+      "No incoming play-count/history increment",
+      "Outgoing voice/rate unchanged",
+      "Controlled engine voice/transform cleanup"
+    ]
+  },
+  "scope": "Actual engine, Smart Sync, Fader Start, MIDI router and extracted actual app wiring/Play. Graph/clock/FX readiness controlled; no physical MIDI, PCM or native GUI claim.",
+  "changedProductFile": "prototype/app.js",
+  "sha256": "34ece65f8f99e9c707a7400330db52f240b8bd16cbabb0563d9b4cff7d779c7a",
+  "modularity": "One callback substitution under the existing MOD-001 legacy exception; existing shared cancellation reused. New regression remains in the focused fader test file under300lines.",
+  "preserved": [
+    "All controls/layouts/library waveform previews",
+    "Existing Cue/Instant Double and normal fader launch behavior",
+    "Original music/private profiles",
+    "Published public152app/installer"
+  ],
+  "delivery": "Include with recording ownership repair in private desktop153; native/main acceptance recorded separately.",
+  "remaining": [
+    "Native synthetic MIDI failure-path follow-through",
+    "Hercules/controller mapping and listening later",
+    "No generic Sync-pop or full core completion claim"
+  ]
+}

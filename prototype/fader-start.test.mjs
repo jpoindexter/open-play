@@ -24,7 +24,7 @@ function fixture(){
  const source=readFileSync(new URL('./app.js',import.meta.url),'utf8');
  vm.runInNewContext(source.slice(source.indexOf('engine.onManualPosition ='),source.indexOf('\nengine.onGridTimeline =')),{engine,state,instantDouble:{manipulated(){}},smartSync:smart,cancelSimpleSync(){}});
  const fader=createFaderStart({engine,state,smartSync:smart,owners,cancel(){},record:(d,intent)=>records.push(intent),refresh(){}});
- return{engine,deck,leader,smart,fader,starts,owners,records,cleanup(){fader.resetInput();for(const d of state.decks)engine.pause(d);assert.equal(engine.voices.size,0);assert.equal(engine.transforms.size,0);assert.equal(owners.size,0);}};
+ return{state,engine,deck,leader,smart,fader,starts,owners,records,cleanup(){fader.resetInput();for(const d of state.decks)engine.pause(d);assert.equal(engine.voices.size,0);assert.equal(engine.transforms.size,0);assert.equal(owners.size,0);}};
 }
 test('fader launch honors armed bar alignment and back-cue while preserving the outgoing voice',async()=>{
  const f=fixture(),{engine,deck,leader,smart,fader,starts}=f;
@@ -61,4 +61,34 @@ test('Sync-off fader start retains the ordinary cue launch',async()=>{
   assert.equal(deck.playing,true);assert.equal(starts.at(-1).offset,1.25);assert.equal(deck.sync,false);
   await fader.start(deck,0,.5,'input');assert.equal(deck.playing,false);assert.equal(engine.position(deck),1.25);
  }finally{f.cleanup();}
+});
+
+test('fader zero cancels normal Play queued behind paused Sync preparation',async()=>{
+ const f=fixture(),{state,engine,deck,leader,smart,starts}=f;
+ let release,entered,first=true,pendingSync,pendingPlay;
+ const ready=new Promise(resolve=>entered=resolve),held=new Promise(resolve=>release=resolve);
+ engine.applyChannelFX=async()=>{if(first){first=false;entered();await held;}};
+ engine.mix=()=>{};deck.level=.5;deck.track.plays=0;state.history=[];state.prepare=[];
+ const playRequests=new WeakMap(),autoplayRequests=new WeakMap(),noop=()=>{};
+ const instantDouble=Object.assign(noop,{cancelDeck:noop,pending:()=>false});
+ const context={state,engine,playRequests,autoplayRequests,instantDouble,createFaderStart,
+  pitchPlay:{latch:()=>false},cueHolds:{latch:()=>false,cancelDeck:noop},smartSync:smart,
+  syncMaster:{started:noop},playbackIntents:{record:noop},notify:message=>assert.fail(message),
+  refreshTransportControls:noop,persist:noop,renderDecks:noop,renderLoopDecks:noop,renderTracks:noop};
+ const app=readFileSync(new URL('./app.js',import.meta.url),'utf8');
+ vm.runInNewContext(app.slice(app.indexOf('function cancelPendingPlay('),app.indexOf('\nconst faderStarts='))+'\n'+
+  app.slice(app.indexOf('async function play('),app.indexOf('\nfunction deckQuantize('))+'\nglobalThis.play=play;',context);
+ vm.runInNewContext(app.slice(app.indexOf('const faderStarts='),app.indexOf('\nasync function stemPad('))+'\nglobalThis.fader=faderStart;',context);
+ const midi=createDeckMIDIRouter({engine,state,actions:{faderStart:context.fader}}),outgoing=engine.voices.get(0),rate=leader.rate;
+ try{
+  pendingSync=smart.press(deck);await ready;pendingPlay=context.play(deck);
+  assert.equal(deck.playQueued,true);assert.equal(playRequests.has(deck),true);
+  await midi.dispatch({type:'CC',channel:1,number:1,value:0,pressed:false,deviceId:'input'},
+   {target:'Deck 2 fader start',encoding:'7-bit absolute'});
+  assert.equal(deck.playQueued,false,'Fader zero retained the queued Play');assert.equal(playRequests.has(deck),false);
+  release();await Promise.all([pendingSync,pendingPlay]);
+  assert.equal(deck.playing,false);assert.equal(engine.voices.has(deck.index),false);assert.equal(starts.length,0);
+  assert.equal(deck.track.plays,0);assert.equal(state.history.length,0);
+  assert.equal(engine.voices.get(0),outgoing);assert.equal(leader.rate,rate);
+ }finally{release();await Promise.allSettled([pendingSync,pendingPlay]);f.cleanup();}
 });
