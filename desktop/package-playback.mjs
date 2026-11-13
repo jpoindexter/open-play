@@ -20,7 +20,7 @@ try{
 await mkdir(path.join(stage,'assets'));
 const archive=stage+'.tar';
 try{
-  git(['archive','--output',archive,sourceCommit,'--','prototype','docs','handoffs','README.md','FULL_BUILD_PLAN.md','PROJECT_PROMPT.md']);
+  git(['archive','--output',archive,sourceCommit,'--','prototype','docs','handoffs','README.md','FULL_BUILD_PLAN.md','PROJECT_PROMPT.md','LICENSE','NOTICE']);
   execFileSync('tar',['-xf',archive,'-C',path.join(stage,'assets')]);
 }finally{await unlink(archive).catch(()=>{});}
 const writes=[];
